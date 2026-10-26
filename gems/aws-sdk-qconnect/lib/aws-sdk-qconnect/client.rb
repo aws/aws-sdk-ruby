@@ -144,18 +144,18 @@ module Aws::QConnect
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -352,7 +352,8 @@ module Aws::QConnect
     #             }
     #           }
     #         ],
-    #         locale: "NonEmptyString"
+    #         locale: "NonEmptyString",
+    #         suggested_messages: ["NonEmptySensitiveString"]
     #       },
     #       self_service_ai_agent_configuration: {
     #         self_service_pre_processing_ai_prompt_id: "UuidWithQualifier",
@@ -489,6 +490,94 @@ module Aws::QConnect
     #             }
     #           }
     #         ]
+    #       },
+    #       orchestration_ai_agent_configuration: {
+    #         orchestration_ai_prompt_id: "UuidWithQualifier",
+    #         orchestration_ai_guardrail_id: "UuidWithQualifier",
+    #         tool_configurations: [
+    #           {
+    #             tool_name: "NonEmptyString", # required
+    #             tool_type: "ToolType", # required
+    #             title: "NonEmptySensitiveString",
+    #             tool_id: "NonEmptyString",
+    #             description: "NonEmptySensitiveString",
+    #             instruction: {
+    #               instruction: "String",
+    #               examples: ["String"]
+    #             },
+    #             override_input_values: [
+    #               {
+    #                 json_path: "NonEmptyString", # required
+    #                 value: { # required
+    #                   # One of:
+    #                   constant: {
+    #                     type: "ToolOverrideInputValueType", # required
+    #                     value: "NonEmptySensitiveString", # required
+    #                   }
+    #                 }
+    #               }
+    #             ],
+    #             output_filters: [
+    #               {
+    #                 json_path: "NonEmptyString", # required
+    #                 output_configuration: {
+    #                   output_variable_name_override: "NonEmptyString",
+    #                   session_data_namespace: "NonEmptyString"
+    #                 }
+    #               }
+    #             ],
+    #             input_schema: ""null"",
+    #             output_schema: ""null"",
+    #             annotations: {
+    #               title: "String",
+    #               destructive_hint: false
+    #             },
+    #             user_interaction_configuration: {
+    #               is_user_confirmation_required: false
+    #             }
+    #           }
+    #         ],
+    #         multi_agent_configurations: [{
+    #           # One of:
+    #           delegate_agent_configuration: {
+    #             agent_target: { # required
+    #               # One of:
+    #               ai_agent_id: "NonEmptyString",
+    #               application_id: "NonEmptyString"
+    #             },
+    #             instruction: {
+    #               instruction: "String",
+    #               examples: ["String"]
+    #             }
+    #           },
+    #           handoff_agent_configuration: {
+    #             agent_target: { # required
+    #               # One of:
+    #               ai_agent_id: "NonEmptyString",
+    #               application_id: "NonEmptyString"
+    #             },
+    #             instruction: {
+    #               instruction: "String",
+    #               examples: ["String"]
+    #             },
+    #             audio_streaming_enabled: false,
+    #             immediate_handoff: false
+    #           }
+    #         }],
+    #         connect_instance_arn: "GenericArn",
+    #         locale: "NonEmptyString",
+    #         input_schemas: [""null""],
+    #         output_schemas: [""null""]
+    #       },
+    #       note_taking_ai_agent_configuration: {
+    #         note_taking_ai_prompt_id: "UuidWithQualifier",
+    #         note_taking_ai_guardrail_id: "UuidWithQualifier",
+    #         locale: "NonEmptyString"
+    #       },
+    #       case_summarization_ai_agent_configuration: {
+    #         case_summarization_ai_prompt_id: "UuidWithQualifier",
+    #         case_summarization_ai_guardrail_id: "UuidWithQualifier",
+    #         locale: "NonEmptyString"
     #       }
     #     },
     #     visibility_status: "VisibilityStatus", # required
@@ -599,7 +688,8 @@ module Aws::QConnect
     #               }
     #             }
     #           ],
-    #           locale: "NonEmptyString"
+    #           locale: "NonEmptyString",
+    #           suggested_messages: ["NonEmptySensitiveString"]
     #         },
     #         self_service_ai_agent_configuration: {
     #           self_service_pre_processing_ai_prompt_id: "UuidWithQualifier",
@@ -736,6 +826,94 @@ module Aws::QConnect
     #               }
     #             }
     #           ]
+    #         },
+    #         orchestration_ai_agent_configuration: {
+    #           orchestration_ai_prompt_id: "UuidWithQualifier",
+    #           orchestration_ai_guardrail_id: "UuidWithQualifier",
+    #           tool_configurations: [
+    #             {
+    #               tool_name: "NonEmptyString", # required
+    #               tool_type: "ToolType", # required
+    #               title: "NonEmptySensitiveString",
+    #               tool_id: "NonEmptyString",
+    #               description: "NonEmptySensitiveString",
+    #               instruction: {
+    #                 instruction: "String",
+    #                 examples: ["String"]
+    #               },
+    #               override_input_values: [
+    #                 {
+    #                   json_path: "NonEmptyString", # required
+    #                   value: { # required
+    #                     # One of:
+    #                     constant: {
+    #                       type: "ToolOverrideInputValueType", # required
+    #                       value: "NonEmptySensitiveString", # required
+    #                     }
+    #                   }
+    #                 }
+    #               ],
+    #               output_filters: [
+    #                 {
+    #                   json_path: "NonEmptyString", # required
+    #                   output_configuration: {
+    #                     output_variable_name_override: "NonEmptyString",
+    #                     session_data_namespace: "NonEmptyString"
+    #                   }
+    #                 }
+    #               ],
+    #               input_schema: ""null"",
+    #               output_schema: ""null"",
+    #               annotations: {
+    #                 title: "String",
+    #                 destructive_hint: false
+    #               },
+    #               user_interaction_configuration: {
+    #                 is_user_confirmation_required: false
+    #               }
+    #             }
+    #           ],
+    #           multi_agent_configurations: [{
+    #             # One of:
+    #             delegate_agent_configuration: {
+    #               agent_target: { # required
+    #                 # One of:
+    #                 ai_agent_id: "NonEmptyString",
+    #                 application_id: "NonEmptyString"
+    #               },
+    #               instruction: {
+    #                 instruction: "String",
+    #                 examples: ["String"]
+    #               }
+    #             },
+    #             handoff_agent_configuration: {
+    #               agent_target: { # required
+    #                 # One of:
+    #                 ai_agent_id: "NonEmptyString",
+    #                 application_id: "NonEmptyString"
+    #               },
+    #               instruction: {
+    #                 instruction: "String",
+    #                 examples: ["String"]
+    #               },
+    #               audio_streaming_enabled: false,
+    #               immediate_handoff: false
+    #             }
+    #           }],
+    #           connect_instance_arn: "GenericArn",
+    #           locale: "NonEmptyString",
+    #           input_schemas: [""null""],
+    #           output_schemas: [""null""]
+    #         },
+    #         note_taking_ai_agent_configuration: {
+    #           note_taking_ai_prompt_id: "UuidWithQualifier",
+    #           note_taking_ai_guardrail_id: "UuidWithQualifier",
+    #           locale: "NonEmptyString"
+    #         },
+    #         case_summarization_ai_agent_configuration: {
+    #           case_summarization_ai_prompt_id: "UuidWithQualifier",
+    #           case_summarization_ai_guardrail_id: "UuidWithQualifier",
+    #           locale: "NonEmptyString"
     #         }
     #       },
     #       modified_time: Time.now,
@@ -873,7 +1051,8 @@ module Aws::QConnect
     #               }
     #             }
     #           ],
-    #           locale: "NonEmptyString"
+    #           locale: "NonEmptyString",
+    #           suggested_messages: ["NonEmptySensitiveString"]
     #         },
     #         self_service_ai_agent_configuration: {
     #           self_service_pre_processing_ai_prompt_id: "UuidWithQualifier",
@@ -1010,6 +1189,94 @@ module Aws::QConnect
     #               }
     #             }
     #           ]
+    #         },
+    #         orchestration_ai_agent_configuration: {
+    #           orchestration_ai_prompt_id: "UuidWithQualifier",
+    #           orchestration_ai_guardrail_id: "UuidWithQualifier",
+    #           tool_configurations: [
+    #             {
+    #               tool_name: "NonEmptyString", # required
+    #               tool_type: "ToolType", # required
+    #               title: "NonEmptySensitiveString",
+    #               tool_id: "NonEmptyString",
+    #               description: "NonEmptySensitiveString",
+    #               instruction: {
+    #                 instruction: "String",
+    #                 examples: ["String"]
+    #               },
+    #               override_input_values: [
+    #                 {
+    #                   json_path: "NonEmptyString", # required
+    #                   value: { # required
+    #                     # One of:
+    #                     constant: {
+    #                       type: "ToolOverrideInputValueType", # required
+    #                       value: "NonEmptySensitiveString", # required
+    #                     }
+    #                   }
+    #                 }
+    #               ],
+    #               output_filters: [
+    #                 {
+    #                   json_path: "NonEmptyString", # required
+    #                   output_configuration: {
+    #                     output_variable_name_override: "NonEmptyString",
+    #                     session_data_namespace: "NonEmptyString"
+    #                   }
+    #                 }
+    #               ],
+    #               input_schema: ""null"",
+    #               output_schema: ""null"",
+    #               annotations: {
+    #                 title: "String",
+    #                 destructive_hint: false
+    #               },
+    #               user_interaction_configuration: {
+    #                 is_user_confirmation_required: false
+    #               }
+    #             }
+    #           ],
+    #           multi_agent_configurations: [{
+    #             # One of:
+    #             delegate_agent_configuration: {
+    #               agent_target: { # required
+    #                 # One of:
+    #                 ai_agent_id: "NonEmptyString",
+    #                 application_id: "NonEmptyString"
+    #               },
+    #               instruction: {
+    #                 instruction: "String",
+    #                 examples: ["String"]
+    #               }
+    #             },
+    #             handoff_agent_configuration: {
+    #               agent_target: { # required
+    #                 # One of:
+    #                 ai_agent_id: "NonEmptyString",
+    #                 application_id: "NonEmptyString"
+    #               },
+    #               instruction: {
+    #                 instruction: "String",
+    #                 examples: ["String"]
+    #               },
+    #               audio_streaming_enabled: false,
+    #               immediate_handoff: false
+    #             }
+    #           }],
+    #           connect_instance_arn: "GenericArn",
+    #           locale: "NonEmptyString",
+    #           input_schemas: [""null""],
+    #           output_schemas: [""null""]
+    #         },
+    #         note_taking_ai_agent_configuration: {
+    #           note_taking_ai_prompt_id: "UuidWithQualifier",
+    #           note_taking_ai_guardrail_id: "UuidWithQualifier",
+    #           locale: "NonEmptyString"
+    #         },
+    #         case_summarization_ai_agent_configuration: {
+    #           case_summarization_ai_prompt_id: "UuidWithQualifier",
+    #           case_summarization_ai_guardrail_id: "UuidWithQualifier",
+    #           locale: "NonEmptyString"
     #         }
     #       },
     #       modified_time: Time.now,
@@ -1333,6 +1600,8 @@ module Aws::QConnect
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     # @option params [String] :description
     #   <p>The description of the AI Prompt.</p>
+    # @option params [Types::AIPromptInferenceConfiguration] :inference_configuration
+    #   <p>The inference configuration for the AI Prompt being created.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     client_token: "ClientToken",
@@ -1352,7 +1621,13 @@ module Aws::QConnect
     #     tags: {
     #       "TagKey" => "TagValue"
     #     },
-    #     description: "Description"
+    #     description: "Description",
+    #     inference_configuration: {
+    #       temperature: 1.0,
+    #       top_p: 1.0,
+    #       top_k: 1,
+    #       max_tokens_to_sample: 1
+    #     }
     #   }
     #   options = {}
     #   response = client.create_ai_prompt(params, options)
@@ -1374,6 +1649,12 @@ module Aws::QConnect
     #         text_full_ai_prompt_edit_template_configuration: {
     #           text: "TextAIPrompt", # required
     #         }
+    #       },
+    #       inference_configuration: {
+    #         temperature: 1.0,
+    #         top_p: 1.0,
+    #         top_k: 1,
+    #         max_tokens_to_sample: 1
     #       },
     #       modified_time: Time.now,
     #       description: "Description",
@@ -1428,6 +1709,12 @@ module Aws::QConnect
     #         text_full_ai_prompt_edit_template_configuration: {
     #           text: "TextAIPrompt", # required
     #         }
+    #       },
+    #       inference_configuration: {
+    #         temperature: 1.0,
+    #         top_p: 1.0,
+    #         top_k: 1,
+    #         max_tokens_to_sample: 1
     #       },
     #       modified_time: Time.now,
     #       description: "Description",
@@ -1500,8 +1787,15 @@ module Aws::QConnect
     #       ai_agent_configuration: {
     #         "AIAgentType" => {
     #           ai_agent_id: "UuidWithQualifier", # required
+    #           enabled: false
     #         }
-    #       }
+    #       },
+    #       orchestrator_configuration_list: [
+    #         {
+    #           ai_agent_id: "UuidOrArnOrEitherWithQualifier",
+    #           orchestrator_use_case: "NonEmptyString", # required
+    #         }
+    #       ]
     #     }
     #   }
     # @return [Types::CreateAssistantOutput]
@@ -1528,7 +1822,11 @@ module Aws::QConnect
     #     association_type: "AssociationType", # required
     #     association: { # required
     #       # One of:
-    #       knowledge_base_id: "Uuid"
+    #       knowledge_base_id: "Uuid",
+    #       external_bedrock_knowledge_base_config: {
+    #         bedrock_knowledge_base_arn: "BedrockKnowledgeBaseArn", # required
+    #         access_role_arn: "AccessRoleArn", # required
+    #       }
     #     },
     #     client_token: "ClientToken",
     #     tags: {
@@ -1551,6 +1849,10 @@ module Aws::QConnect
     #         knowledge_base_association: {
     #           knowledge_base_id: "Uuid",
     #           knowledge_base_arn: "Arn"
+    #         },
+    #         external_bedrock_knowledge_base_config: {
+    #           bedrock_knowledge_base_arn: "BedrockKnowledgeBaseArn", # required
+    #           access_role_arn: "AccessRoleArn", # required
     #         }
     #       },
     #       tags: {
@@ -1629,7 +1931,7 @@ module Aws::QConnect
       request.send_request(options)
     end
 
-    # <p>Creates an association between a content resource in a knowledge base and <a href="https://docs.aws.amazon.com/connect/latest/adminguide/step-by-step-guided-experiences.html">step-by-step guides</a>. Step-by-step guides offer instructions to agents for resolving common customer issues. You create a content association to integrate Amazon Q in Connect and step-by-step guides. </p> <p>After you integrate Amazon Q and step-by-step guides, when Amazon Q provides a recommendation to an agent based on the intent that it's detected, it also provides them with the option to start the step-by-step guide that you have associated with the content.</p> <p>Note the following limitations:</p> <ul> <li> <p>You can create only one content association for each content resource in a knowledge base.</p> </li> <li> <p>You can associate a step-by-step guide with multiple content resources.</p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/integrate-q-with-guides.html">Integrate Amazon Q in Connect with step-by-step guides</a> in the <i>Amazon Connect Administrator Guide</i>. </p>
+    # <p>Creates an association between a content resource in a knowledge base and <a href="https://docs.aws.amazon.com/connect/latest/adminguide/step-by-step-guided-experiences.html">step-by-step guides</a>. Step-by-step guides offer instructions to agents for resolving common customer issues. You create a content association to integrate Amazon Q in Connect and step-by-step guides. </p> <p>After you integrate Amazon Q and step-by-step guides, when Amazon Q provides a recommendation to an agent based on the intent that it's detected, it also provides them with the option to start the step-by-step guide that you have associated with the content.</p> <p>Note the following limitations:</p> <ul> <li> <p>You can create only one content association for each content resource in a knowledge base.</p> </li> <li> <p>You can associate a step-by-step guide with multiple content resources.</p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/integrate-q-with-guides.html">Integrate Amazon Q in Connect with step-by-step guides</a> in the <i>Connect Customer Administrator Guide</i>. </p>
     # @param [Hash, Types::CreateContentAssociationRequest] params
     # @option params [String] :client_token
     #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see <a href="http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.</p>
@@ -1883,6 +2185,8 @@ module Aws::QConnect
     #   <p>The channel subtype this message template applies to.</p>
     # @option params [String] :language
     #   <p>The language code value for the language in which the quick response is written. The supported language codes include <code>de_DE</code>, <code>en_US</code>, <code>es_ES</code>, <code>fr_FR</code>, <code>id_ID</code>, <code>it_IT</code>, <code>ja_JP</code>, <code>ko_KR</code>, <code>pt_BR</code>, <code>zh_CN</code>, <code>zh_TW</code> </p>
+    # @option params [Types::MessageTemplateSourceConfiguration] :source_configuration
+    #   <p>The source configuration of the message template. Only set this argument for WHATSAPP channel subtype.</p>
     # @option params [Types::MessageTemplateAttributes] :default_attributes
     #   <p>An object that specifies the default values to use for variables in the message template. This object contains different categories of key-value pairs. Each key defines a variable or placeholder in the message template. The corresponding value defines the default value for that variable.</p>
     # @option params [Types::GroupingConfiguration] :grouping_configuration
@@ -1894,8 +2198,8 @@ module Aws::QConnect
     # @example Request syntax with placeholder values
     #   params = {
     #     knowledge_base_id: "UuidOrArn", # required
-    #     name: "Name", # required
-    #     content: { # required
+    #     name: "Name",
+    #     content: {
     #       # One of:
     #       email: {
     #         subject: "NonEmptyUnlimitedString",
@@ -1923,11 +2227,90 @@ module Aws::QConnect
     #             content: "NonEmptyUnlimitedString"
     #           }
     #         }
+    #       },
+    #       whats_app: {
+    #         data: "WhatsAppMessageTemplateContentData"
+    #       },
+    #       push: {
+    #         adm: {
+    #           title: "NonEmptyUnlimitedString",
+    #           body: {
+    #             # One of:
+    #             content: "NonEmptyUnlimitedString"
+    #           },
+    #           action: "PushMessageAction",
+    #           sound: "NonEmptyUnlimitedString",
+    #           url: "NonEmptyUnlimitedString",
+    #           image_url: "NonEmptyUnlimitedString",
+    #           image_icon_url: "NonEmptyUnlimitedString",
+    #           small_image_icon_url: "NonEmptyUnlimitedString",
+    #           raw_content: {
+    #             # One of:
+    #             content: "NonEmptyUnlimitedString"
+    #           }
+    #         },
+    #         apns: {
+    #           title: "NonEmptyUnlimitedString",
+    #           body: {
+    #             # One of:
+    #             content: "NonEmptyUnlimitedString"
+    #           },
+    #           action: "PushMessageAction",
+    #           sound: "NonEmptyUnlimitedString",
+    #           url: "NonEmptyUnlimitedString",
+    #           media_url: "NonEmptyUnlimitedString",
+    #           raw_content: {
+    #             # One of:
+    #             content: "NonEmptyUnlimitedString"
+    #           }
+    #         },
+    #         fcm: {
+    #           title: "NonEmptyUnlimitedString",
+    #           body: {
+    #             # One of:
+    #             content: "NonEmptyUnlimitedString"
+    #           },
+    #           action: "PushMessageAction",
+    #           sound: "NonEmptyUnlimitedString",
+    #           url: "NonEmptyUnlimitedString",
+    #           image_url: "NonEmptyUnlimitedString",
+    #           image_icon_url: "NonEmptyUnlimitedString",
+    #           small_image_icon_url: "NonEmptyUnlimitedString",
+    #           raw_content: {
+    #             # One of:
+    #             content: "NonEmptyUnlimitedString"
+    #           }
+    #         },
+    #         baidu: {
+    #           title: "NonEmptyUnlimitedString",
+    #           body: {
+    #             # One of:
+    #             content: "NonEmptyUnlimitedString"
+    #           },
+    #           action: "PushMessageAction",
+    #           sound: "NonEmptyUnlimitedString",
+    #           url: "NonEmptyUnlimitedString",
+    #           image_url: "NonEmptyUnlimitedString",
+    #           image_icon_url: "NonEmptyUnlimitedString",
+    #           small_image_icon_url: "NonEmptyUnlimitedString",
+    #           raw_content: {
+    #             # One of:
+    #             content: "NonEmptyUnlimitedString"
+    #           }
+    #         }
     #       }
     #     },
     #     description: "Description",
     #     channel_subtype: "ChannelSubtype", # required
     #     language: "LanguageCode",
+    #     source_configuration: {
+    #       # One of:
+    #       whats_app: {
+    #         business_account_id: "WhatsAppBusinessAccountId", # required
+    #         template_id: "WhatsAppMessageTemplateId", # required
+    #         components: ["WhatsAppMessageTemplateComponent"]
+    #       }
+    #     },
     #     default_attributes: {
     #       system_attributes: {
     #         name: "MessageTemplateAttributeValue",
@@ -2028,11 +2411,12 @@ module Aws::QConnect
     #       knowledge_base_arn: "Arn", # required
     #       knowledge_base_id: "Uuid", # required
     #       name: "Name", # required
+    #       channel: "Channel",
     #       channel_subtype: "ChannelSubtype", # required
     #       created_time: Time.now, # required
     #       last_modified_time: Time.now, # required
     #       last_modified_by: "GenericArn", # required
-    #       content: { # required
+    #       content: {
     #         # One of:
     #         email: {
     #           subject: "NonEmptyUnlimitedString",
@@ -2060,10 +2444,93 @@ module Aws::QConnect
     #               content: "NonEmptyUnlimitedString"
     #             }
     #           }
+    #         },
+    #         whats_app: {
+    #           data: "WhatsAppMessageTemplateContentData"
+    #         },
+    #         push: {
+    #           adm: {
+    #             title: "NonEmptyUnlimitedString",
+    #             body: {
+    #               # One of:
+    #               content: "NonEmptyUnlimitedString"
+    #             },
+    #             action: "PushMessageAction",
+    #             sound: "NonEmptyUnlimitedString",
+    #             url: "NonEmptyUnlimitedString",
+    #             image_url: "NonEmptyUnlimitedString",
+    #             image_icon_url: "NonEmptyUnlimitedString",
+    #             small_image_icon_url: "NonEmptyUnlimitedString",
+    #             raw_content: {
+    #               # One of:
+    #               content: "NonEmptyUnlimitedString"
+    #             }
+    #           },
+    #           apns: {
+    #             title: "NonEmptyUnlimitedString",
+    #             body: {
+    #               # One of:
+    #               content: "NonEmptyUnlimitedString"
+    #             },
+    #             action: "PushMessageAction",
+    #             sound: "NonEmptyUnlimitedString",
+    #             url: "NonEmptyUnlimitedString",
+    #             media_url: "NonEmptyUnlimitedString",
+    #             raw_content: {
+    #               # One of:
+    #               content: "NonEmptyUnlimitedString"
+    #             }
+    #           },
+    #           fcm: {
+    #             title: "NonEmptyUnlimitedString",
+    #             body: {
+    #               # One of:
+    #               content: "NonEmptyUnlimitedString"
+    #             },
+    #             action: "PushMessageAction",
+    #             sound: "NonEmptyUnlimitedString",
+    #             url: "NonEmptyUnlimitedString",
+    #             image_url: "NonEmptyUnlimitedString",
+    #             image_icon_url: "NonEmptyUnlimitedString",
+    #             small_image_icon_url: "NonEmptyUnlimitedString",
+    #             raw_content: {
+    #               # One of:
+    #               content: "NonEmptyUnlimitedString"
+    #             }
+    #           },
+    #           baidu: {
+    #             title: "NonEmptyUnlimitedString",
+    #             body: {
+    #               # One of:
+    #               content: "NonEmptyUnlimitedString"
+    #             },
+    #             action: "PushMessageAction",
+    #             sound: "NonEmptyUnlimitedString",
+    #             url: "NonEmptyUnlimitedString",
+    #             image_url: "NonEmptyUnlimitedString",
+    #             image_icon_url: "NonEmptyUnlimitedString",
+    #             small_image_icon_url: "NonEmptyUnlimitedString",
+    #             raw_content: {
+    #               # One of:
+    #               content: "NonEmptyUnlimitedString"
+    #             }
+    #           }
     #         }
     #       },
     #       description: "Description",
     #       language: "LanguageCode",
+    #       source_configuration_summary: {
+    #         # One of:
+    #         whats_app: {
+    #           business_account_id: "WhatsAppBusinessAccountId", # required
+    #           template_id: "WhatsAppMessageTemplateId", # required
+    #           name: "WhatsAppMessageTemplateName",
+    #           language: "WhatsAppMessageTemplateLanguage",
+    #           components: ["WhatsAppMessageTemplateComponent"],
+    #           status: "WhatsAppSourceConfigurationStatus",
+    #           status_reason: "NonEmptyUnlimitedString"
+    #         }
+    #       },
     #       grouping_configuration: {
     #         criteria: "GroupingCriteria",
     #         values: ["GroupingValue"]
@@ -2229,11 +2696,12 @@ module Aws::QConnect
     #       knowledge_base_arn: "Arn", # required
     #       knowledge_base_id: "Uuid", # required
     #       name: "Name", # required
+    #       channel: "Channel",
     #       channel_subtype: "ChannelSubtype", # required
     #       created_time: Time.now, # required
     #       last_modified_time: Time.now, # required
     #       last_modified_by: "GenericArn", # required
-    #       content: { # required
+    #       content: {
     #         # One of:
     #         email: {
     #           subject: "NonEmptyUnlimitedString",
@@ -2261,10 +2729,93 @@ module Aws::QConnect
     #               content: "NonEmptyUnlimitedString"
     #             }
     #           }
+    #         },
+    #         whats_app: {
+    #           data: "WhatsAppMessageTemplateContentData"
+    #         },
+    #         push: {
+    #           adm: {
+    #             title: "NonEmptyUnlimitedString",
+    #             body: {
+    #               # One of:
+    #               content: "NonEmptyUnlimitedString"
+    #             },
+    #             action: "PushMessageAction",
+    #             sound: "NonEmptyUnlimitedString",
+    #             url: "NonEmptyUnlimitedString",
+    #             image_url: "NonEmptyUnlimitedString",
+    #             image_icon_url: "NonEmptyUnlimitedString",
+    #             small_image_icon_url: "NonEmptyUnlimitedString",
+    #             raw_content: {
+    #               # One of:
+    #               content: "NonEmptyUnlimitedString"
+    #             }
+    #           },
+    #           apns: {
+    #             title: "NonEmptyUnlimitedString",
+    #             body: {
+    #               # One of:
+    #               content: "NonEmptyUnlimitedString"
+    #             },
+    #             action: "PushMessageAction",
+    #             sound: "NonEmptyUnlimitedString",
+    #             url: "NonEmptyUnlimitedString",
+    #             media_url: "NonEmptyUnlimitedString",
+    #             raw_content: {
+    #               # One of:
+    #               content: "NonEmptyUnlimitedString"
+    #             }
+    #           },
+    #           fcm: {
+    #             title: "NonEmptyUnlimitedString",
+    #             body: {
+    #               # One of:
+    #               content: "NonEmptyUnlimitedString"
+    #             },
+    #             action: "PushMessageAction",
+    #             sound: "NonEmptyUnlimitedString",
+    #             url: "NonEmptyUnlimitedString",
+    #             image_url: "NonEmptyUnlimitedString",
+    #             image_icon_url: "NonEmptyUnlimitedString",
+    #             small_image_icon_url: "NonEmptyUnlimitedString",
+    #             raw_content: {
+    #               # One of:
+    #               content: "NonEmptyUnlimitedString"
+    #             }
+    #           },
+    #           baidu: {
+    #             title: "NonEmptyUnlimitedString",
+    #             body: {
+    #               # One of:
+    #               content: "NonEmptyUnlimitedString"
+    #             },
+    #             action: "PushMessageAction",
+    #             sound: "NonEmptyUnlimitedString",
+    #             url: "NonEmptyUnlimitedString",
+    #             image_url: "NonEmptyUnlimitedString",
+    #             image_icon_url: "NonEmptyUnlimitedString",
+    #             small_image_icon_url: "NonEmptyUnlimitedString",
+    #             raw_content: {
+    #               # One of:
+    #               content: "NonEmptyUnlimitedString"
+    #             }
+    #           }
     #         }
     #       },
     #       description: "Description",
     #       language: "LanguageCode",
+    #       source_configuration_summary: {
+    #         # One of:
+    #         whats_app: {
+    #           business_account_id: "WhatsAppBusinessAccountId", # required
+    #           template_id: "WhatsAppMessageTemplateId", # required
+    #           name: "WhatsAppMessageTemplateName",
+    #           language: "WhatsAppMessageTemplateLanguage",
+    #           components: ["WhatsAppMessageTemplateComponent"],
+    #           status: "WhatsAppSourceConfigurationStatus",
+    #           status_reason: "NonEmptyUnlimitedString"
+    #         }
+    #       },
     #       grouping_configuration: {
     #         criteria: "GroupingCriteria",
     #         values: ["GroupingValue"]
@@ -2393,7 +2944,7 @@ module Aws::QConnect
     # @option params [Boolean] :is_active
     #   <p>Whether the quick response is active.</p>
     # @option params [Array<String>] :channels
-    #   <p>The Amazon Connect channels this quick response applies to.</p>
+    #   <p>The Connect Customer channels this quick response applies to.</p>
     # @option params [String] :language
     #   <p>The language code value for the language in which the quick response is written. The supported language codes include <code>de_DE</code>, <code>en_US</code>, <code>es_ES</code>, <code>fr_FR</code>, <code>id_ID</code>, <code>it_IT</code>, <code>ja_JP</code>, <code>ko_KR</code>, <code>pt_BR</code>, <code>zh_CN</code>, <code>zh_TW</code> </p>
     # @option params [String] :client_token
@@ -2469,7 +3020,7 @@ module Aws::QConnect
       request.send_request(options)
     end
 
-    # <p>Creates a session. A session is a contextual container used for generating recommendations. Amazon Connect creates a new Amazon Q in Connect session for each contact on which Amazon Q in Connect is enabled.</p>
+    # <p>Creates a session. A session is a contextual container used for generating recommendations. Connect Customer creates a new Amazon Q in Connect session for each contact on which Amazon Q in Connect is enabled.</p>
     # @param [Hash, Types::CreateSessionInput] params
     # @option params [String] :client_token
     #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see <a href="http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.</p>
@@ -2486,7 +3037,11 @@ module Aws::QConnect
     # @option params [Hash<String, Types::AIAgentConfigurationData>] :ai_agent_configuration
     #   <p>The configuration of the AI Agents (mapped by AI Agent Type to AI Agent version) that should be used by Amazon Q in Connect for this Session.</p>
     # @option params [String] :contact_arn
-    #   <p>The Amazon Resource Name (ARN) of the email contact in Amazon Connect. Used to retrieve email content and establish session context for AI-powered email assistance.</p>
+    #   <p>The Amazon Resource Name (ARN) of the email contact in Connect Customer. Used to retrieve email content and establish session context for AI-powered email assistance.</p>
+    # @option params [Array<Types::OrchestratorConfigurationEntry>] :orchestrator_configuration_list
+    #   <p>The list of orchestrator configurations for the session being created.</p>
+    # @option params [Boolean] :remove_orchestrator_configuration_list
+    #   <p>The list of orchestrator configurations to remove from the session.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     client_token: "ClientToken",
@@ -2525,9 +3080,17 @@ module Aws::QConnect
     #     ai_agent_configuration: {
     #       "AIAgentType" => {
     #         ai_agent_id: "UuidWithQualifier", # required
+    #         enabled: false
     #       }
     #     },
-    #     contact_arn: "GenericArn"
+    #     contact_arn: "GenericArn",
+    #     orchestrator_configuration_list: [
+    #       {
+    #         ai_agent_id: "UuidOrArnOrEitherWithQualifier",
+    #         orchestrator_use_case: "NonEmptyString", # required
+    #       }
+    #     ],
+    #     remove_orchestrator_configuration_list: false
     #   }
     #   options = {}
     #   response = client.create_session(params, options)
@@ -2574,9 +3137,16 @@ module Aws::QConnect
     #       ai_agent_configuration: {
     #         "AIAgentType" => {
     #           ai_agent_id: "UuidWithQualifier", # required
+    #           enabled: false
     #         }
     #       },
-    #       origin: "Origin"
+    #       origin: "Origin",
+    #       orchestrator_configuration_list: [
+    #         {
+    #           ai_agent_id: "UuidOrArnOrEitherWithQualifier",
+    #           orchestrator_use_case: "NonEmptyString", # required
+    #         }
+    #       ]
     #     }
     #   }
     # @return [Types::CreateSessionOutput]
@@ -2818,7 +3388,7 @@ module Aws::QConnect
       request.send_request(options)
     end
 
-    # <p>Deletes the content association. </p> <p>For more information about content associations--what they are and when they are used--see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/integrate-q-with-guides.html">Integrate Amazon Q in Connect with step-by-step guides</a> in the <i>Amazon Connect Administrator Guide</i>. </p>
+    # <p>Deletes the content association. </p> <p>For more information about content associations--what they are and when they are used--see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/integrate-q-with-guides.html">Integrate Amazon Q in Connect with step-by-step guides</a> in the <i>Connect Customer Administrator Guide</i>. </p>
     # @param [Hash, Types::DeleteContentAssociationRequest] params
     # @option params [String] :knowledge_base_id
     #   <p>The identifier of the knowledge base.</p>
@@ -3066,7 +3636,8 @@ module Aws::QConnect
     #               }
     #             }
     #           ],
-    #           locale: "NonEmptyString"
+    #           locale: "NonEmptyString",
+    #           suggested_messages: ["NonEmptySensitiveString"]
     #         },
     #         self_service_ai_agent_configuration: {
     #           self_service_pre_processing_ai_prompt_id: "UuidWithQualifier",
@@ -3203,6 +3774,94 @@ module Aws::QConnect
     #               }
     #             }
     #           ]
+    #         },
+    #         orchestration_ai_agent_configuration: {
+    #           orchestration_ai_prompt_id: "UuidWithQualifier",
+    #           orchestration_ai_guardrail_id: "UuidWithQualifier",
+    #           tool_configurations: [
+    #             {
+    #               tool_name: "NonEmptyString", # required
+    #               tool_type: "ToolType", # required
+    #               title: "NonEmptySensitiveString",
+    #               tool_id: "NonEmptyString",
+    #               description: "NonEmptySensitiveString",
+    #               instruction: {
+    #                 instruction: "String",
+    #                 examples: ["String"]
+    #               },
+    #               override_input_values: [
+    #                 {
+    #                   json_path: "NonEmptyString", # required
+    #                   value: { # required
+    #                     # One of:
+    #                     constant: {
+    #                       type: "ToolOverrideInputValueType", # required
+    #                       value: "NonEmptySensitiveString", # required
+    #                     }
+    #                   }
+    #                 }
+    #               ],
+    #               output_filters: [
+    #                 {
+    #                   json_path: "NonEmptyString", # required
+    #                   output_configuration: {
+    #                     output_variable_name_override: "NonEmptyString",
+    #                     session_data_namespace: "NonEmptyString"
+    #                   }
+    #                 }
+    #               ],
+    #               input_schema: ""null"",
+    #               output_schema: ""null"",
+    #               annotations: {
+    #                 title: "String",
+    #                 destructive_hint: false
+    #               },
+    #               user_interaction_configuration: {
+    #                 is_user_confirmation_required: false
+    #               }
+    #             }
+    #           ],
+    #           multi_agent_configurations: [{
+    #             # One of:
+    #             delegate_agent_configuration: {
+    #               agent_target: { # required
+    #                 # One of:
+    #                 ai_agent_id: "NonEmptyString",
+    #                 application_id: "NonEmptyString"
+    #               },
+    #               instruction: {
+    #                 instruction: "String",
+    #                 examples: ["String"]
+    #               }
+    #             },
+    #             handoff_agent_configuration: {
+    #               agent_target: { # required
+    #                 # One of:
+    #                 ai_agent_id: "NonEmptyString",
+    #                 application_id: "NonEmptyString"
+    #               },
+    #               instruction: {
+    #                 instruction: "String",
+    #                 examples: ["String"]
+    #               },
+    #               audio_streaming_enabled: false,
+    #               immediate_handoff: false
+    #             }
+    #           }],
+    #           connect_instance_arn: "GenericArn",
+    #           locale: "NonEmptyString",
+    #           input_schemas: [""null""],
+    #           output_schemas: [""null""]
+    #         },
+    #         note_taking_ai_agent_configuration: {
+    #           note_taking_ai_prompt_id: "UuidWithQualifier",
+    #           note_taking_ai_guardrail_id: "UuidWithQualifier",
+    #           locale: "NonEmptyString"
+    #         },
+    #         case_summarization_ai_agent_configuration: {
+    #           case_summarization_ai_prompt_id: "UuidWithQualifier",
+    #           case_summarization_ai_guardrail_id: "UuidWithQualifier",
+    #           locale: "NonEmptyString"
     #         }
     #       },
     #       modified_time: Time.now,
@@ -3349,6 +4008,12 @@ module Aws::QConnect
     #           text: "TextAIPrompt", # required
     #         }
     #       },
+    #       inference_configuration: {
+    #         temperature: 1.0,
+    #         top_p: 1.0,
+    #         top_k: 1,
+    #         max_tokens_to_sample: 1
+    #       },
     #       modified_time: Time.now,
     #       description: "Description",
     #       visibility_status: "VisibilityStatus", # required
@@ -3401,8 +4066,15 @@ module Aws::QConnect
     #       ai_agent_configuration: {
     #         "AIAgentType" => {
     #           ai_agent_id: "UuidWithQualifier", # required
+    #           enabled: false
     #         }
-    #       }
+    #       },
+    #       orchestrator_configuration_list: [
+    #         {
+    #           ai_agent_id: "UuidOrArnOrEitherWithQualifier",
+    #           orchestrator_use_case: "NonEmptyString", # required
+    #         }
+    #       ]
     #     }
     #   }
     # @return [Types::GetAssistantOutput]
@@ -3438,6 +4110,10 @@ module Aws::QConnect
     #         knowledge_base_association: {
     #           knowledge_base_id: "Uuid",
     #           knowledge_base_arn: "Arn"
+    #         },
+    #         external_bedrock_knowledge_base_config: {
+    #           bedrock_knowledge_base_arn: "BedrockKnowledgeBaseArn", # required
+    #           access_role_arn: "AccessRoleArn", # required
     #         }
     #       },
     #       tags: {
@@ -3494,7 +4170,7 @@ module Aws::QConnect
       request.send_request(options)
     end
 
-    # <p>Returns the content association.</p> <p>For more information about content associations--what they are and when they are used--see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/integrate-q-with-guides.html">Integrate Amazon Q in Connect with step-by-step guides</a> in the <i>Amazon Connect Administrator Guide</i>.</p>
+    # <p>Returns the content association.</p> <p>For more information about content associations--what they are and when they are used--see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/integrate-q-with-guides.html">Integrate Amazon Q in Connect with step-by-step guides</a> in the <i>Connect Customer Administrator Guide</i>.</p>
     # @param [Hash, Types::GetContentAssociationRequest] params
     # @option params [String] :knowledge_base_id
     #   <p>The identifier of the knowledge base.</p>
@@ -3744,11 +4420,12 @@ module Aws::QConnect
     #       knowledge_base_arn: "Arn", # required
     #       knowledge_base_id: "Uuid", # required
     #       name: "Name", # required
+    #       channel: "Channel",
     #       channel_subtype: "ChannelSubtype", # required
     #       created_time: Time.now, # required
     #       last_modified_time: Time.now, # required
     #       last_modified_by: "GenericArn", # required
-    #       content: { # required
+    #       content: {
     #         # One of:
     #         email: {
     #           subject: "NonEmptyUnlimitedString",
@@ -3776,10 +4453,93 @@ module Aws::QConnect
     #               content: "NonEmptyUnlimitedString"
     #             }
     #           }
+    #         },
+    #         whats_app: {
+    #           data: "WhatsAppMessageTemplateContentData"
+    #         },
+    #         push: {
+    #           adm: {
+    #             title: "NonEmptyUnlimitedString",
+    #             body: {
+    #               # One of:
+    #               content: "NonEmptyUnlimitedString"
+    #             },
+    #             action: "PushMessageAction",
+    #             sound: "NonEmptyUnlimitedString",
+    #             url: "NonEmptyUnlimitedString",
+    #             image_url: "NonEmptyUnlimitedString",
+    #             image_icon_url: "NonEmptyUnlimitedString",
+    #             small_image_icon_url: "NonEmptyUnlimitedString",
+    #             raw_content: {
+    #               # One of:
+    #               content: "NonEmptyUnlimitedString"
+    #             }
+    #           },
+    #           apns: {
+    #             title: "NonEmptyUnlimitedString",
+    #             body: {
+    #               # One of:
+    #               content: "NonEmptyUnlimitedString"
+    #             },
+    #             action: "PushMessageAction",
+    #             sound: "NonEmptyUnlimitedString",
+    #             url: "NonEmptyUnlimitedString",
+    #             media_url: "NonEmptyUnlimitedString",
+    #             raw_content: {
+    #               # One of:
+    #               content: "NonEmptyUnlimitedString"
+    #             }
+    #           },
+    #           fcm: {
+    #             title: "NonEmptyUnlimitedString",
+    #             body: {
+    #               # One of:
+    #               content: "NonEmptyUnlimitedString"
+    #             },
+    #             action: "PushMessageAction",
+    #             sound: "NonEmptyUnlimitedString",
+    #             url: "NonEmptyUnlimitedString",
+    #             image_url: "NonEmptyUnlimitedString",
+    #             image_icon_url: "NonEmptyUnlimitedString",
+    #             small_image_icon_url: "NonEmptyUnlimitedString",
+    #             raw_content: {
+    #               # One of:
+    #               content: "NonEmptyUnlimitedString"
+    #             }
+    #           },
+    #           baidu: {
+    #             title: "NonEmptyUnlimitedString",
+    #             body: {
+    #               # One of:
+    #               content: "NonEmptyUnlimitedString"
+    #             },
+    #             action: "PushMessageAction",
+    #             sound: "NonEmptyUnlimitedString",
+    #             url: "NonEmptyUnlimitedString",
+    #             image_url: "NonEmptyUnlimitedString",
+    #             image_icon_url: "NonEmptyUnlimitedString",
+    #             small_image_icon_url: "NonEmptyUnlimitedString",
+    #             raw_content: {
+    #               # One of:
+    #               content: "NonEmptyUnlimitedString"
+    #             }
+    #           }
     #         }
     #       },
     #       description: "Description",
     #       language: "LanguageCode",
+    #       source_configuration_summary: {
+    #         # One of:
+    #         whats_app: {
+    #           business_account_id: "WhatsAppBusinessAccountId", # required
+    #           template_id: "WhatsAppMessageTemplateId", # required
+    #           name: "WhatsAppMessageTemplateName",
+    #           language: "WhatsAppMessageTemplateLanguage",
+    #           components: ["WhatsAppMessageTemplateComponent"],
+    #           status: "WhatsAppSourceConfigurationStatus",
+    #           status_reason: "NonEmptyUnlimitedString"
+    #         }
+    #       },
     #       grouping_configuration: {
     #         criteria: "GroupingCriteria",
     #         values: ["GroupingValue"]
@@ -3913,8 +4673,31 @@ module Aws::QConnect
     #       value: { # required
     #         # One of:
     #         text: {
-    #           value: "SensitiveString"
-    #         }
+    #           value: "SensitiveString",
+    #           citations: [
+    #             {
+    #               content_id: "Uuid",
+    #               title: "SensitiveString",
+    #               knowledge_base_id: "Uuid",
+    #               citation_span: { # required
+    #                 begin_offset_inclusive: 1,
+    #                 end_offset_exclusive: 1
+    #               },
+    #               source_url: "SensitiveString",
+    #               reference_type: "ReferenceType", # required
+    #             }
+    #           ],
+    #           ai_guardrail_assessment: {
+    #             blocked: false, # required
+    #           }
+    #         },
+    #         tool_use_result: {
+    #           tool_use_id: "NonEmptyString", # required
+    #           tool_name: "NonEmptyString", # required
+    #           tool_result: ""null"", # required
+    #           input_schema: ""null""
+    #         },
+    #         data: ""null""
     #       },
     #       message_id: "Uuid", # required
     #       participant: "Participant", # required
@@ -3934,7 +4717,8 @@ module Aws::QConnect
     #           string_value: "NonEmptySensitiveString"
     #         }
     #       }
-    #     ]
+    #     ],
+    #     chunked_response_terminated: false
     #   }
     # @return [Types::GetNextMessageResponse]
     def get_next_message(params = {}, options = {})
@@ -3999,7 +4783,7 @@ module Aws::QConnect
       request.send_request(options)
     end
 
-    # <important> <p>This API will be discontinued starting June 1, 2024. To receive generative responses after March 1, 2024, you will need to create a new Assistant in the Amazon Connect console and integrate the Amazon Q in Connect JavaScript library (amazon-q-connectjs) into your applications.</p> </important> <p>Retrieves recommendations for the specified session. To avoid retrieving the same recommendations in subsequent calls, use <a href="https://docs.aws.amazon.com/amazon-q-connect/latest/APIReference/API_NotifyRecommendationsReceived.html">NotifyRecommendationsReceived</a>. This API supports long-polling behavior with the <code>waitTimeSeconds</code> parameter. Short poll is the default behavior and only returns recommendations already available. To perform a manual query against an assistant, use <a href="https://docs.aws.amazon.com/amazon-q-connect/latest/APIReference/API_QueryAssistant.html">QueryAssistant</a>.</p>
+    # <important> <p>This API will be discontinued starting June 1, 2024. To receive generative responses after March 1, 2024, you will need to create a new Assistant in the Connect Customer console and integrate the Amazon Q in Connect JavaScript library (amazon-q-connectjs) into your applications.</p> </important> <p>Retrieves recommendations for the specified session. To avoid retrieving the same recommendations in subsequent calls, use <a href="https://docs.aws.amazon.com/amazon-q-connect/latest/APIReference/API_NotifyRecommendationsReceived.html">NotifyRecommendationsReceived</a>. This API supports long-polling behavior with the <code>waitTimeSeconds</code> parameter. Short poll is the default behavior and only returns recommendations already available. To perform a manual query against an assistant, use <a href="https://docs.aws.amazon.com/amazon-q-connect/latest/APIReference/API_QueryAssistant.html">QueryAssistant</a>.</p>
     # @param [Hash, Types::GetRecommendationsInput] params
     # @option params [String] :assistant_id
     #   <p>The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>
@@ -4011,13 +4795,16 @@ module Aws::QConnect
     #   <p>The duration (in seconds) for which the call waits for a recommendation to be made available before returning. If a recommendation is available, the call returns sooner than <code>WaitTimeSeconds</code>. If no messages are available and the wait time expires, the call returns successfully with an empty list.</p>
     # @option params [String] :next_chunk_token
     #   <p>The token for the next set of chunks. Use the value returned in the previous response in the next request to retrieve the next set of chunks.</p>
+    # @option params [String] :recommendation_type
+    #   <p>The type of recommendation being requested.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     assistant_id: "UuidOrArn", # required
     #     session_id: "UuidOrArn", # required
     #     max_results: 1,
     #     wait_time_seconds: 1,
-    #     next_chunk_token: "NextToken"
+    #     next_chunk_token: "NextToken",
+    #     recommendation_type: "RecommendationType"
     #   }
     #   options = {}
     #   response = client.get_recommendations(params, options)
@@ -4072,6 +4859,10 @@ module Aws::QConnect
     #             generative_reference: {
     #               model_id: "LlmModelId",
     #               generation_id: "Uuid"
+    #             },
+    #             suggested_message_reference: {
+    #               ai_agent_id: "Uuid", # required
+    #               ai_agent_arn: "Arn", # required
     #             }
     #           },
     #           details: { # required
@@ -4117,6 +4908,7 @@ module Aws::QConnect
     #             intent_detected_data: {
     #               intent: "SensitiveString", # required
     #               intent_id: "Uuid", # required
+    #               relevance_level: "RelevanceLevel"
     #             },
     #             source_content_data: {
     #               id: "Uuid", # required
@@ -4175,6 +4967,23 @@ module Aws::QConnect
     #                 }
     #               ],
     #               next_chunk_token: "NextToken"
+    #             },
+    #             case_summarization_chunk_data: {
+    #               completion: "NonEmptySensitiveString",
+    #               next_chunk_token: "NextToken"
+    #             },
+    #             suggested_message_data: {
+    #               message_text: "NonEmptySensitiveString", # required
+    #             },
+    #             notes_data: {
+    #               completion: "NonEmptySensitiveString"
+    #             },
+    #             notes_chunk_data: {
+    #               completion: "NonEmptySensitiveString",
+    #               next_chunk_token: "NextToken"
+    #             },
+    #             proactive_recommendation_data: {
+    #               next_message_token: "NextToken", # required
     #             }
     #           }
     #         }
@@ -4259,9 +5068,16 @@ module Aws::QConnect
     #       ai_agent_configuration: {
     #         "AIAgentType" => {
     #           ai_agent_id: "UuidWithQualifier", # required
+    #           enabled: false
     #         }
     #       },
-    #       origin: "Origin"
+    #       origin: "Origin",
+    #       orchestrator_configuration_list: [
+    #         {
+    #           ai_agent_id: "UuidOrArnOrEitherWithQualifier",
+    #           orchestrator_use_case: "NonEmptyString", # required
+    #         }
+    #       ]
     #     }
     #   }
     # @return [Types::GetSessionOutput]
@@ -4396,7 +5212,8 @@ module Aws::QConnect
     #                   }
     #                 }
     #               ],
-    #               locale: "NonEmptyString"
+    #               locale: "NonEmptyString",
+    #               suggested_messages: ["NonEmptySensitiveString"]
     #             },
     #             self_service_ai_agent_configuration: {
     #               self_service_pre_processing_ai_prompt_id: "UuidWithQualifier",
@@ -4533,6 +5350,94 @@ module Aws::QConnect
     #                   }
     #                 }
     #               ]
+    #             },
+    #             orchestration_ai_agent_configuration: {
+    #               orchestration_ai_prompt_id: "UuidWithQualifier",
+    #               orchestration_ai_guardrail_id: "UuidWithQualifier",
+    #               tool_configurations: [
+    #                 {
+    #                   tool_name: "NonEmptyString", # required
+    #                   tool_type: "ToolType", # required
+    #                   title: "NonEmptySensitiveString",
+    #                   tool_id: "NonEmptyString",
+    #                   description: "NonEmptySensitiveString",
+    #                   instruction: {
+    #                     instruction: "String",
+    #                     examples: ["String"]
+    #                   },
+    #                   override_input_values: [
+    #                     {
+    #                       json_path: "NonEmptyString", # required
+    #                       value: { # required
+    #                         # One of:
+    #                         constant: {
+    #                           type: "ToolOverrideInputValueType", # required
+    #                           value: "NonEmptySensitiveString", # required
+    #                         }
+    #                       }
+    #                     }
+    #                   ],
+    #                   output_filters: [
+    #                     {
+    #                       json_path: "NonEmptyString", # required
+    #                       output_configuration: {
+    #                         output_variable_name_override: "NonEmptyString",
+    #                         session_data_namespace: "NonEmptyString"
+    #                       }
+    #                     }
+    #                   ],
+    #                   input_schema: ""null"",
+    #                   output_schema: ""null"",
+    #                   annotations: {
+    #                     title: "String",
+    #                     destructive_hint: false
+    #                   },
+    #                   user_interaction_configuration: {
+    #                     is_user_confirmation_required: false
+    #                   }
+    #                 }
+    #               ],
+    #               multi_agent_configurations: [{
+    #                 # One of:
+    #                 delegate_agent_configuration: {
+    #                   agent_target: { # required
+    #                     # One of:
+    #                     ai_agent_id: "NonEmptyString",
+    #                     application_id: "NonEmptyString"
+    #                   },
+    #                   instruction: {
+    #                     instruction: "String",
+    #                     examples: ["String"]
+    #                   }
+    #                 },
+    #                 handoff_agent_configuration: {
+    #                   agent_target: { # required
+    #                     # One of:
+    #                     ai_agent_id: "NonEmptyString",
+    #                     application_id: "NonEmptyString"
+    #                   },
+    #                   instruction: {
+    #                     instruction: "String",
+    #                     examples: ["String"]
+    #                   },
+    #                   audio_streaming_enabled: false,
+    #                   immediate_handoff: false
+    #                 }
+    #               }],
+    #               connect_instance_arn: "GenericArn",
+    #               locale: "NonEmptyString",
+    #               input_schemas: [""null""],
+    #               output_schemas: [""null""]
+    #             },
+    #             note_taking_ai_agent_configuration: {
+    #               note_taking_ai_prompt_id: "UuidWithQualifier",
+    #               note_taking_ai_guardrail_id: "UuidWithQualifier",
+    #               locale: "NonEmptyString"
+    #             },
+    #             case_summarization_ai_agent_configuration: {
+    #               case_summarization_ai_prompt_id: "UuidWithQualifier",
+    #               case_summarization_ai_guardrail_id: "UuidWithQualifier",
+    #               locale: "NonEmptyString"
     #             }
     #           },
     #           origin: "Origin",
@@ -4675,7 +5580,8 @@ module Aws::QConnect
     #                 }
     #               }
     #             ],
-    #             locale: "NonEmptyString"
+    #             locale: "NonEmptyString",
+    #             suggested_messages: ["NonEmptySensitiveString"]
     #           },
     #           self_service_ai_agent_configuration: {
     #             self_service_pre_processing_ai_prompt_id: "UuidWithQualifier",
@@ -4812,6 +5718,94 @@ module Aws::QConnect
     #                 }
     #               }
     #             ]
+    #           },
+    #           orchestration_ai_agent_configuration: {
+    #             orchestration_ai_prompt_id: "UuidWithQualifier",
+    #             orchestration_ai_guardrail_id: "UuidWithQualifier",
+    #             tool_configurations: [
+    #               {
+    #                 tool_name: "NonEmptyString", # required
+    #                 tool_type: "ToolType", # required
+    #                 title: "NonEmptySensitiveString",
+    #                 tool_id: "NonEmptyString",
+    #                 description: "NonEmptySensitiveString",
+    #                 instruction: {
+    #                   instruction: "String",
+    #                   examples: ["String"]
+    #                 },
+    #                 override_input_values: [
+    #                   {
+    #                     json_path: "NonEmptyString", # required
+    #                     value: { # required
+    #                       # One of:
+    #                       constant: {
+    #                         type: "ToolOverrideInputValueType", # required
+    #                         value: "NonEmptySensitiveString", # required
+    #                       }
+    #                     }
+    #                   }
+    #                 ],
+    #                 output_filters: [
+    #                   {
+    #                     json_path: "NonEmptyString", # required
+    #                     output_configuration: {
+    #                       output_variable_name_override: "NonEmptyString",
+    #                       session_data_namespace: "NonEmptyString"
+    #                     }
+    #                   }
+    #                 ],
+    #                 input_schema: ""null"",
+    #                 output_schema: ""null"",
+    #                 annotations: {
+    #                   title: "String",
+    #                   destructive_hint: false
+    #                 },
+    #                 user_interaction_configuration: {
+    #                   is_user_confirmation_required: false
+    #                 }
+    #               }
+    #             ],
+    #             multi_agent_configurations: [{
+    #               # One of:
+    #               delegate_agent_configuration: {
+    #                 agent_target: { # required
+    #                   # One of:
+    #                   ai_agent_id: "NonEmptyString",
+    #                   application_id: "NonEmptyString"
+    #                 },
+    #                 instruction: {
+    #                   instruction: "String",
+    #                   examples: ["String"]
+    #                 }
+    #               },
+    #               handoff_agent_configuration: {
+    #                 agent_target: { # required
+    #                   # One of:
+    #                   ai_agent_id: "NonEmptyString",
+    #                   application_id: "NonEmptyString"
+    #                 },
+    #                 instruction: {
+    #                   instruction: "String",
+    #                   examples: ["String"]
+    #                 },
+    #                 audio_streaming_enabled: false,
+    #                 immediate_handoff: false
+    #               }
+    #             }],
+    #             connect_instance_arn: "GenericArn",
+    #             locale: "NonEmptyString",
+    #             input_schemas: [""null""],
+    #             output_schemas: [""null""]
+    #           },
+    #           note_taking_ai_agent_configuration: {
+    #             note_taking_ai_prompt_id: "UuidWithQualifier",
+    #             note_taking_ai_guardrail_id: "UuidWithQualifier",
+    #             locale: "NonEmptyString"
+    #           },
+    #           case_summarization_ai_agent_configuration: {
+    #             case_summarization_ai_prompt_id: "UuidWithQualifier",
+    #             case_summarization_ai_guardrail_id: "UuidWithQualifier",
+    #             locale: "NonEmptyString"
     #           }
     #         },
     #         origin: "Origin",
@@ -5061,6 +6055,10 @@ module Aws::QConnect
     #           knowledge_base_association: {
     #             knowledge_base_id: "Uuid",
     #             knowledge_base_arn: "Arn"
+    #           },
+    #           external_bedrock_knowledge_base_config: {
+    #             bedrock_knowledge_base_arn: "BedrockKnowledgeBaseArn", # required
+    #             access_role_arn: "AccessRoleArn", # required
     #           }
     #         },
     #         tags: {
@@ -5115,8 +6113,15 @@ module Aws::QConnect
     #         ai_agent_configuration: {
     #           "AIAgentType" => {
     #             ai_agent_id: "UuidWithQualifier", # required
+    #             enabled: false
     #           }
-    #         }
+    #         },
+    #         orchestrator_configuration_list: [
+    #           {
+    #             ai_agent_id: "UuidOrArnOrEitherWithQualifier",
+    #             orchestrator_use_case: "NonEmptyString", # required
+    #           }
+    #         ]
     #       }
     #     ],
     #     next_token: "NextToken"
@@ -5127,7 +6132,7 @@ module Aws::QConnect
       request.send_request(options)
     end
 
-    # <p>Lists the content associations.</p> <p>For more information about content associations--what they are and when they are used--see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/integrate-q-with-guides.html">Integrate Amazon Q in Connect with step-by-step guides</a> in the <i>Amazon Connect Administrator Guide</i>.</p>
+    # <p>Lists the content associations.</p> <p>For more information about content associations--what they are and when they are used--see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/integrate-q-with-guides.html">Integrate Amazon Q in Connect with step-by-step guides</a> in the <i>Connect Customer Administrator Guide</i>.</p>
     # @param [Hash, Types::ListContentAssociationsRequest] params
     # @option params [String] :next_token
     #   <p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p>
@@ -5402,6 +6407,7 @@ module Aws::QConnect
     #         knowledge_base_arn: "Arn", # required
     #         knowledge_base_id: "Uuid", # required
     #         name: "Name", # required
+    #         channel: "Channel",
     #         channel_subtype: "ChannelSubtype", # required
     #         is_active: false, # required
     #         version_number: 1, # required
@@ -5441,10 +6447,19 @@ module Aws::QConnect
     #         knowledge_base_arn: "Arn", # required
     #         knowledge_base_id: "Uuid", # required
     #         name: "Name", # required
+    #         channel: "Channel",
     #         channel_subtype: "ChannelSubtype", # required
     #         created_time: Time.now, # required
     #         last_modified_time: Time.now, # required
     #         last_modified_by: "GenericArn", # required
+    #         source_configuration: {
+    #           # One of:
+    #           whats_app: {
+    #             business_account_id: "WhatsAppBusinessAccountId", # required
+    #             template_id: "WhatsAppMessageTemplateId", # required
+    #             components: ["WhatsAppMessageTemplateComponent"]
+    #           }
+    #         },
     #         active_version_number: 1,
     #         description: "Description",
     #         tags: {
@@ -5470,12 +6485,15 @@ module Aws::QConnect
     #   <p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
+    # @option params [String] :filter
+    #   <p>The filter criteria for listing messages.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     assistant_id: "UuidOrArn", # required
     #     session_id: "UuidOrArn", # required
     #     next_token: "NextToken",
-    #     max_results: 1
+    #     max_results: 1,
+    #     filter: "MessageFilterType"
     #   }
     #   options = {}
     #   response = client.list_messages(params, options)
@@ -5487,8 +6505,31 @@ module Aws::QConnect
     #         value: { # required
     #           # One of:
     #           text: {
-    #             value: "SensitiveString"
-    #           }
+    #             value: "SensitiveString",
+    #             citations: [
+    #               {
+    #                 content_id: "Uuid",
+    #                 title: "SensitiveString",
+    #                 knowledge_base_id: "Uuid",
+    #                 citation_span: { # required
+    #                   begin_offset_inclusive: 1,
+    #                   end_offset_exclusive: 1
+    #                 },
+    #                 source_url: "SensitiveString",
+    #                 reference_type: "ReferenceType", # required
+    #               }
+    #             ],
+    #             ai_guardrail_assessment: {
+    #               blocked: false, # required
+    #             }
+    #           },
+    #           tool_use_result: {
+    #             tool_use_id: "NonEmptyString", # required
+    #             tool_name: "NonEmptyString", # required
+    #             tool_result: ""null"", # required
+    #             input_schema: ""null""
+    #           },
+    #           data: ""null""
     #         },
     #         message_id: "Uuid", # required
     #         participant: "Participant", # required
@@ -5500,6 +6541,51 @@ module Aws::QConnect
     # @return [Types::ListMessagesResponse]
     def list_messages(params = {}, options = {})
       request = build_request(:list_messages, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists the models available to an Amazon Q in Connect assistant in the assistant's Amazon Web Services Region. The available models are determined by the region of the specified assistant.</p>
+    # @param [Hash, Types::ListModelsRequest] params
+    # @option params [String] :assistant_id
+    #   <p>The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs cannot contain the ARN. The assistant's region determines which models are available.</p>
+    # @option params [String] :ai_prompt_type
+    #   <p>The type of the AI Prompt to filter models by. When specified, only models that support the given AI Prompt type are returned.</p>
+    # @option params [String] :model_lifecycle
+    #   <p>The lifecycle status of models to filter by. When specified, only models with the given lifecycle status are returned.</p>
+    # @option params [String] :next_token
+    #   <p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return per page.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     assistant_id: "UuidOrArn", # required
+    #     ai_prompt_type: "AIPromptType",
+    #     model_lifecycle: "ModelLifecycle",
+    #     next_token: "NextToken",
+    #     max_results: 1
+    #   }
+    #   options = {}
+    #   response = client.list_models(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     model_summaries: [ # required
+    #       {
+    #         model_id: "ModelId", # required
+    #         display_name: "ModelDisplayName", # required
+    #         cross_region_status: "CrossRegionStatus",
+    #         supports_prompt_caching: false,
+    #         supported_ai_prompt_types: ["AIPromptType"],
+    #         model_lifecycle: "ModelLifecycle",
+    #         legacy_timestamp: Time.now,
+    #         end_of_life_timestamp: Time.now
+    #       }
+    #     ],
+    #     next_token: "NextToken"
+    #   }
+    # @return [Types::ListModelsResponse]
+    def list_models(params = {}, options = {})
+      request = build_request(:list_models, params)
       request.send_request(options)
     end
 
@@ -5547,6 +6633,214 @@ module Aws::QConnect
     # @return [Types::ListQuickResponsesResponse]
     def list_quick_responses(params = {}, options = {})
       request = build_request(:list_quick_responses, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves AI agent execution traces for a session, providing granular visibility into agent orchestration flows, LLM interactions, and tool invocations.</p>
+    # @param [Hash, Types::ListSpansRequest] params
+    # @option params [String] :assistant_id
+    #   <p>UUID or ARN of the Connect AI Assistant resource</p>
+    # @option params [String] :session_id
+    #   <p>UUID or ARN of the Connect AI Session resource</p>
+    # @option params [String] :next_token
+    #   <p>Pagination token for retrieving the next page of results</p>
+    # @option params [Integer] :max_results
+    #   <p>Maximum number of spans to return per page</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     assistant_id: "UuidOrArn", # required
+    #     session_id: "UuidOrArn", # required
+    #     next_token: "NextToken",
+    #     max_results: 1
+    #   }
+    #   options = {}
+    #   response = client.list_spans(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     spans: [ # required
+    #       {
+    #         span_id: "Uuid", # required
+    #         assistant_id: "Uuid", # required
+    #         session_id: "Uuid", # required
+    #         parent_span_id: "Uuid",
+    #         span_name: "Name", # required
+    #         span_type: "SpanType", # required
+    #         start_timestamp: Time.now, # required
+    #         end_timestamp: Time.now, # required
+    #         status: "SpanStatus", # required
+    #         status_description: "NonEmptyString",
+    #         request_id: "Uuid", # required
+    #         origin_request_id: "NonEmptyString",
+    #         attributes: { # required
+    #           operation_name: "NonEmptyString",
+    #           provider_name: "NonEmptyString",
+    #           error_type: "NonEmptyString",
+    #           agent_id: "Uuid",
+    #           instance_arn: "GenericArn",
+    #           contact_id: "Uuid",
+    #           initial_contact_id: "Uuid",
+    #           session_name: "NonEmptyString",
+    #           ai_agent_arn: "ArnWithQualifier",
+    #           ai_agent_type: "AIAgentType",
+    #           ai_agent_name: "Name",
+    #           ai_agent_id: "Uuid",
+    #           ai_agent_version: 1,
+    #           ai_agent_invoker: "NonEmptyString",
+    #           ai_agent_orchestrator_use_case: "NonEmptyString",
+    #           interaction_mode: "InteractionMode",
+    #           target_agent_id: "NonEmptyString",
+    #           return_reason: "ReturnReason",
+    #           request_model: "NonEmptyString",
+    #           request_max_tokens: 1,
+    #           temperature: 1.0,
+    #           top_p: 1.0,
+    #           response_model: "NonEmptyString",
+    #           response_finish_reasons: ["NonEmptyString"],
+    #           usage_input_tokens: 1,
+    #           usage_output_tokens: 1,
+    #           usage_total_tokens: 1,
+    #           cache_read_input_tokens: 1,
+    #           cache_write_input_tokens: 1,
+    #           input_messages: [
+    #             {
+    #               message_id: "Uuid", # required
+    #               participant: "Participant", # required
+    #               timestamp: Time.now, # required
+    #               values: [{ # required
+    #                 # One of:
+    #                 text: {
+    #                   value: "NonEmptySensitiveString", # required
+    #                   citations: [
+    #                     {
+    #                       content_id: "Uuid",
+    #                       title: "SensitiveString",
+    #                       knowledge_base_id: "Uuid",
+    #                       knowledge_base_arn: "Arn"
+    #                     }
+    #                   ],
+    #                   ai_guardrail_assessment: {
+    #                     blocked: false, # required
+    #                   }
+    #                 },
+    #                 tool_use: {
+    #                   tool_use_id: "Uuid", # required
+    #                   name: "Name", # required
+    #                   arguments: ""null"", # required
+    #                 },
+    #                 tool_result: {
+    #                   tool_use_id: "Uuid", # required
+    #                   values: { # required
+    #                     # recursive SpanMessageValueList
+    #                   },
+    #                   error: "NonEmptyString"
+    #                 },
+    #                 reasoning: {
+    #                   value: "NonEmptySensitiveString", # required
+    #                 }
+    #               }]
+    #             }
+    #           ],
+    #           output_messages: [
+    #             {
+    #               message_id: "Uuid", # required
+    #               participant: "Participant", # required
+    #               timestamp: Time.now, # required
+    #               values: [{ # required
+    #                 # One of:
+    #                 text: {
+    #                   value: "NonEmptySensitiveString", # required
+    #                   citations: [
+    #                     {
+    #                       content_id: "Uuid",
+    #                       title: "SensitiveString",
+    #                       knowledge_base_id: "Uuid",
+    #                       knowledge_base_arn: "Arn"
+    #                     }
+    #                   ],
+    #                   ai_guardrail_assessment: {
+    #                     blocked: false, # required
+    #                   }
+    #                 },
+    #                 tool_use: {
+    #                   tool_use_id: "Uuid", # required
+    #                   name: "Name", # required
+    #                   arguments: ""null"", # required
+    #                 },
+    #                 tool_result: {
+    #                   tool_use_id: "Uuid", # required
+    #                   values: { # required
+    #                     # recursive SpanMessageValueList
+    #                   },
+    #                   error: "NonEmptyString"
+    #                 },
+    #                 reasoning: {
+    #                   value: "NonEmptySensitiveString", # required
+    #                 }
+    #               }]
+    #             }
+    #           ],
+    #           system_instructions: [{
+    #             # One of:
+    #             text: {
+    #               value: "NonEmptySensitiveString", # required
+    #               citations: [
+    #                 {
+    #                   content_id: "Uuid",
+    #                   title: "SensitiveString",
+    #                   knowledge_base_id: "Uuid",
+    #                   knowledge_base_arn: "Arn"
+    #                 }
+    #               ],
+    #               ai_guardrail_assessment: {
+    #                 blocked: false, # required
+    #               }
+    #             },
+    #             tool_use: {
+    #               tool_use_id: "Uuid", # required
+    #               name: "Name", # required
+    #               arguments: ""null"", # required
+    #             },
+    #             tool_result: {
+    #               tool_use_id: "Uuid", # required
+    #               values: { # required
+    #                 # recursive SpanMessageValueList
+    #               },
+    #               error: "NonEmptyString"
+    #             },
+    #             reasoning: {
+    #               value: "NonEmptySensitiveString", # required
+    #             }
+    #           }],
+    #           prompt_arn: "ArnWithQualifier",
+    #           prompt_id: "Uuid",
+    #           prompt_type: "AIPromptType",
+    #           prompt_name: "Name",
+    #           prompt_version: 1,
+    #           time_to_first_token_ms: 1,
+    #           guardrail_assessments: [
+    #             {
+    #               guardrail_id: "NonEmptyString", # required
+    #               guardrail_name: "NonEmptyString", # required
+    #               source: "GuardrailSource", # required
+    #               action: "GuardrailAction", # required
+    #               policies: [
+    #                 {
+    #                   policy_type: "GuardrailPolicyType", # required
+    #                   action: "GuardrailAction", # required
+    #                   details: "NonEmptyString"
+    #                 }
+    #               ]
+    #             }
+    #           ]
+    #         }
+    #       }
+    #     ],
+    #     next_token: "NextToken"
+    #   }
+    # @return [Types::ListSpansResponse]
+    def list_spans(params = {}, options = {})
+      request = build_request(:list_spans, params)
       request.send_request(options)
     end
 
@@ -5650,7 +6944,7 @@ module Aws::QConnect
       request.send_request(options)
     end
 
-    # <important> <p>This API will be discontinued starting June 1, 2024. To receive generative responses after March 1, 2024, you will need to create a new Assistant in the Amazon Connect console and integrate the Amazon Q in Connect JavaScript library (amazon-q-connectjs) into your applications.</p> </important> <p>Performs a manual search against the specified assistant. To retrieve recommendations for an assistant, use <a href="https://docs.aws.amazon.com/amazon-q-connect/latest/APIReference/API_GetRecommendations.html">GetRecommendations</a>. </p>
+    # <important> <p>This API will be discontinued starting June 1, 2024. To receive generative responses after March 1, 2024, you will need to create a new Assistant in the Connect Customer console and integrate the Amazon Q in Connect JavaScript library (amazon-q-connectjs) into your applications.</p> </important> <p>Performs a manual search against the specified assistant. To retrieve recommendations for an assistant, use <a href="https://docs.aws.amazon.com/amazon-q-connect/latest/APIReference/API_GetRecommendations.html">GetRecommendations</a>. </p>
     # @param [Hash, Types::QueryAssistantInput] params
     # @option params [String] :assistant_id
     #   <p>The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>
@@ -5690,6 +6984,9 @@ module Aws::QConnect
     #       },
     #       intent_input_data: {
     #         intent_id: "Uuid", # required
+    #       },
+    #       case_summarization_input_data: {
+    #         case_arn: "CaseArn", # required
     #       }
     #     },
     #     override_knowledge_base_search_type: "KnowledgeBaseSearchType"
@@ -5745,6 +7042,10 @@ module Aws::QConnect
     #             generative_reference: {
     #               model_id: "LlmModelId",
     #               generation_id: "Uuid"
+    #             },
+    #             suggested_message_reference: {
+    #               ai_agent_id: "Uuid", # required
+    #               ai_agent_arn: "Arn", # required
     #             }
     #           },
     #           details: { # required
@@ -5790,6 +7091,7 @@ module Aws::QConnect
     #             intent_detected_data: {
     #               intent: "SensitiveString", # required
     #               intent_id: "Uuid", # required
+    #               relevance_level: "RelevanceLevel"
     #             },
     #             source_content_data: {
     #               id: "Uuid", # required
@@ -5848,6 +7150,23 @@ module Aws::QConnect
     #                 }
     #               ],
     #               next_chunk_token: "NextToken"
+    #             },
+    #             case_summarization_chunk_data: {
+    #               completion: "NonEmptySensitiveString",
+    #               next_chunk_token: "NextToken"
+    #             },
+    #             suggested_message_data: {
+    #               message_text: "NonEmptySensitiveString", # required
+    #             },
+    #             notes_data: {
+    #               completion: "NonEmptySensitiveString"
+    #             },
+    #             notes_chunk_data: {
+    #               completion: "NonEmptySensitiveString",
+    #               next_chunk_token: "NextToken"
+    #             },
+    #             proactive_recommendation_data: {
+    #               next_message_token: "NextToken", # required
     #             }
     #           }
     #         },
@@ -5870,10 +7189,13 @@ module Aws::QConnect
     #   <p>The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>
     # @option params [String] :ai_agent_type
     #   <p>The type of the AI Agent being removed for use by default from the Amazon Q in Connect Assistant.</p>
+    # @option params [String] :orchestrator_use_case
+    #   <p>The orchestrator use case for the AI Agent being removed.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     assistant_id: "UuidOrArn", # required
     #     ai_agent_type: "AIAgentType", # required
+    #     orchestrator_use_case: "NonEmptyString"
     #   }
     #   options = {}
     #   response = client.remove_assistant_ai_agent(params, options)
@@ -6003,7 +7325,7 @@ module Aws::QConnect
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {
-    #     content: { # required
+    #     content: {
     #       # One of:
     #       email: {
     #         subject: "NonEmptyUnlimitedString",
@@ -6031,6 +7353,89 @@ module Aws::QConnect
     #             content: "NonEmptyUnlimitedString"
     #           }
     #         }
+    #       },
+    #       whats_app: {
+    #         data: "WhatsAppMessageTemplateContentData"
+    #       },
+    #       push: {
+    #         adm: {
+    #           title: "NonEmptyUnlimitedString",
+    #           body: {
+    #             # One of:
+    #             content: "NonEmptyUnlimitedString"
+    #           },
+    #           action: "PushMessageAction",
+    #           sound: "NonEmptyUnlimitedString",
+    #           url: "NonEmptyUnlimitedString",
+    #           image_url: "NonEmptyUnlimitedString",
+    #           image_icon_url: "NonEmptyUnlimitedString",
+    #           small_image_icon_url: "NonEmptyUnlimitedString",
+    #           raw_content: {
+    #             # One of:
+    #             content: "NonEmptyUnlimitedString"
+    #           }
+    #         },
+    #         apns: {
+    #           title: "NonEmptyUnlimitedString",
+    #           body: {
+    #             # One of:
+    #             content: "NonEmptyUnlimitedString"
+    #           },
+    #           action: "PushMessageAction",
+    #           sound: "NonEmptyUnlimitedString",
+    #           url: "NonEmptyUnlimitedString",
+    #           media_url: "NonEmptyUnlimitedString",
+    #           raw_content: {
+    #             # One of:
+    #             content: "NonEmptyUnlimitedString"
+    #           }
+    #         },
+    #         fcm: {
+    #           title: "NonEmptyUnlimitedString",
+    #           body: {
+    #             # One of:
+    #             content: "NonEmptyUnlimitedString"
+    #           },
+    #           action: "PushMessageAction",
+    #           sound: "NonEmptyUnlimitedString",
+    #           url: "NonEmptyUnlimitedString",
+    #           image_url: "NonEmptyUnlimitedString",
+    #           image_icon_url: "NonEmptyUnlimitedString",
+    #           small_image_icon_url: "NonEmptyUnlimitedString",
+    #           raw_content: {
+    #             # One of:
+    #             content: "NonEmptyUnlimitedString"
+    #           }
+    #         },
+    #         baidu: {
+    #           title: "NonEmptyUnlimitedString",
+    #           body: {
+    #             # One of:
+    #             content: "NonEmptyUnlimitedString"
+    #           },
+    #           action: "PushMessageAction",
+    #           sound: "NonEmptyUnlimitedString",
+    #           url: "NonEmptyUnlimitedString",
+    #           image_url: "NonEmptyUnlimitedString",
+    #           image_icon_url: "NonEmptyUnlimitedString",
+    #           small_image_icon_url: "NonEmptyUnlimitedString",
+    #           raw_content: {
+    #             # One of:
+    #             content: "NonEmptyUnlimitedString"
+    #           }
+    #         }
+    #       }
+    #     },
+    #     source_configuration_summary: {
+    #       # One of:
+    #       whats_app: {
+    #         business_account_id: "WhatsAppBusinessAccountId", # required
+    #         template_id: "WhatsAppMessageTemplateId", # required
+    #         name: "WhatsAppMessageTemplateName",
+    #         language: "WhatsAppMessageTemplateLanguage",
+    #         components: ["WhatsAppMessageTemplateComponent"],
+    #         status: "WhatsAppSourceConfigurationStatus",
+    #         status_reason: "NonEmptyUnlimitedString"
     #       }
     #     },
     #     attributes_not_interpolated: ["MessageTemplateAttributeKey"],
@@ -6048,6 +7453,107 @@ module Aws::QConnect
     # @return [Types::RenderMessageTemplateResponse]
     def render_message_template(params = {}, options = {})
       request = build_request(:render_message_template, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves content from knowledge sources based on a query.</p>
+    # @param [Hash, Types::RetrieveRequest] params
+    # @option params [String] :assistant_id
+    #   <p>The identifier of the Amazon Q in Connect assistant for content retrieval.</p>
+    # @option params [Types::RetrievalConfiguration] :retrieval_configuration
+    #   <p>The configuration for the content retrieval operation.</p>
+    # @option params [String] :retrieval_query
+    #   <p>The query for content retrieval.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     assistant_id: "UuidOrArn", # required
+    #     retrieval_configuration: { # required
+    #       knowledge_source: { # required
+    #         # One of:
+    #         assistant_association_ids: ["UuidOrArn"]
+    #       },
+    #       filter: {
+    #         # One of:
+    #         and_all: [{
+    #           # recursive RetrievalFilterConfiguration
+    #         }],
+    #         equals: {
+    #           key: "FilterAttributeKey", # required
+    #           value: ""null"", # required
+    #         },
+    #         greater_than: {
+    #           key: "FilterAttributeKey", # required
+    #           value: ""null"", # required
+    #         },
+    #         greater_than_or_equals: {
+    #           key: "FilterAttributeKey", # required
+    #           value: ""null"", # required
+    #         },
+    #         in: {
+    #           key: "FilterAttributeKey", # required
+    #           value: ""null"", # required
+    #         },
+    #         less_than: {
+    #           key: "FilterAttributeKey", # required
+    #           value: ""null"", # required
+    #         },
+    #         less_than_or_equals: {
+    #           key: "FilterAttributeKey", # required
+    #           value: ""null"", # required
+    #         },
+    #         list_contains: {
+    #           key: "FilterAttributeKey", # required
+    #           value: ""null"", # required
+    #         },
+    #         not_equals: {
+    #           key: "FilterAttributeKey", # required
+    #           value: ""null"", # required
+    #         },
+    #         not_in: {
+    #           key: "FilterAttributeKey", # required
+    #           value: ""null"", # required
+    #         },
+    #         or_all: [{
+    #           # recursive RetrievalFilterConfiguration
+    #         }],
+    #         starts_with: {
+    #           key: "FilterAttributeKey", # required
+    #           value: ""null"", # required
+    #         },
+    #         string_contains: {
+    #           key: "FilterAttributeKey", # required
+    #           value: ""null"", # required
+    #         }
+    #       },
+    #       number_of_results: 1,
+    #       override_knowledge_base_search_type: "KnowledgeBaseSearchType"
+    #     },
+    #     retrieval_query: "NonEmptySensitiveString", # required
+    #   }
+    #   options = {}
+    #   response = client.retrieve(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     results: [ # required
+    #       {
+    #         association_id: "Uuid", # required
+    #         source_id: "SensitiveString", # required
+    #         reference_type: "ReferenceType", # required
+    #         content_text: "SensitiveString", # required
+    #       }
+    #     ],
+    #     errors: [
+    #       {
+    #         association_id: "Uuid", # required
+    #         code: "RetrieveErrorCode", # required
+    #         message: "String", # required
+    #       }
+    #     ]
+    #   }
+    # @return [Types::RetrieveResponse]
+    def retrieve(params = {}, options = {})
+      request = build_request(:retrieve, params)
       request.send_request(options)
     end
 
@@ -6159,6 +7665,7 @@ module Aws::QConnect
     #         knowledge_base_arn: "Arn", # required
     #         knowledge_base_id: "Uuid", # required
     #         name: "Name", # required
+    #         channel: "Channel",
     #         channel_subtype: "ChannelSubtype", # required
     #         created_time: Time.now, # required
     #         last_modified_time: Time.now, # required
@@ -6166,6 +7673,18 @@ module Aws::QConnect
     #         is_active: false,
     #         version_number: 1,
     #         description: "Description",
+    #         source_configuration_summary: {
+    #           # One of:
+    #           whats_app: {
+    #             business_account_id: "WhatsAppBusinessAccountId", # required
+    #             template_id: "WhatsAppMessageTemplateId", # required
+    #             name: "WhatsAppMessageTemplateName",
+    #             language: "WhatsAppMessageTemplateLanguage",
+    #             components: ["WhatsAppMessageTemplateComponent"],
+    #             status: "WhatsAppSourceConfigurationStatus",
+    #             status_reason: "NonEmptyUnlimitedString"
+    #           }
+    #         },
     #         grouping_configuration: {
     #           criteria: "GroupingCriteria",
     #           values: ["GroupingValue"]
@@ -6195,7 +7714,7 @@ module Aws::QConnect
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
     # @option params [Hash<String, String>] :attributes
-    #   <p>The <a href="https://docs.aws.amazon.com/connect/latest/adminguide/connect-attrib-list.html#user-defined-attributes">user-defined Amazon Connect contact attributes</a> to be resolved when search results are returned.</p>
+    #   <p>The <a href="https://docs.aws.amazon.com/connect/latest/adminguide/connect-attrib-list.html#user-defined-attributes">user-defined Connect Customer contact attributes</a> to be resolved when search results are returned.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     knowledge_base_id: "UuidOrArn", # required
@@ -6335,12 +7854,20 @@ module Aws::QConnect
     #   <p>The message type.</p>
     # @option params [Types::MessageInput] :message
     #   <p>The message data to submit to the Amazon Q in Connect session.</p>
+    # @option params [String] :ai_agent_id
+    #   <p>The identifier of the AI Agent to use for processing the message.</p>
     # @option params [Types::ConversationContext] :conversation_context
     #   <p>The conversation context before the Amazon Q in Connect session.</p>
     # @option params [Types::MessageConfiguration] :configuration
     #   <p>The configuration of the <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_amazon-q-connect_SendMessage.html">SendMessage</a> request.</p>
     # @option params [String] :client_token
     #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the AWS SDK populates this field.For more information about idempotency, see Making retries safe with idempotent APIs.</p>
+    # @option params [String] :orchestrator_use_case
+    #   <p>The orchestrator use case for message processing.</p>
+    # @option params [Hash<String, String>] :metadata
+    #   <p>Additional metadata for the message.</p>
+    # @option params [String] :origin_request_id
+    #   <p>Request identifier from the origin system, used for end-to-end tracing across spans.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     assistant_id: "UuidOrArn", # required
@@ -6350,23 +7877,54 @@ module Aws::QConnect
     #       value: { # required
     #         # One of:
     #         text: {
-    #           value: "SensitiveString"
-    #         }
+    #           value: "SensitiveString",
+    #           citations: [
+    #             {
+    #               content_id: "Uuid",
+    #               title: "SensitiveString",
+    #               knowledge_base_id: "Uuid",
+    #               citation_span: { # required
+    #                 begin_offset_inclusive: 1,
+    #                 end_offset_exclusive: 1
+    #               },
+    #               source_url: "SensitiveString",
+    #               reference_type: "ReferenceType", # required
+    #             }
+    #           ],
+    #           ai_guardrail_assessment: {
+    #             blocked: false, # required
+    #           }
+    #         },
+    #         tool_use_result: {
+    #           tool_use_id: "NonEmptyString", # required
+    #           tool_name: "NonEmptyString", # required
+    #           tool_result: ""null"", # required
+    #           input_schema: ""null""
+    #         },
+    #         data: ""null""
     #       }
     #     },
+    #     ai_agent_id: "UuidOrArnOrEitherWithQualifier",
     #     conversation_context: {
     #       self_service_conversation_history: [ # required
     #         {
-    #           turn_number: 1, # required
+    #           turn_number: 1,
     #           input_transcript: "SensitiveString",
-    #           bot_response: "SensitiveString"
+    #           bot_response: "SensitiveString",
+    #           timestamp: Time.now
     #         }
     #       ]
     #     },
     #     configuration: {
-    #       generate_filler_message: false
+    #       generate_filler_message: false,
+    #       generate_chunked_message: false
     #     },
-    #     client_token: "ClientToken"
+    #     client_token: "ClientToken",
+    #     orchestrator_use_case: "NonEmptyString",
+    #     metadata: {
+    #       "NonEmptyString" => "NonEmptyString"
+    #     },
+    #     origin_request_id: "NonEmptyString"
     #   }
     #   options = {}
     #   response = client.send_message(params, options)
@@ -6375,7 +7933,8 @@ module Aws::QConnect
     #   {
     #     request_message_id: "Uuid", # required
     #     configuration: {
-    #       generate_filler_message: false
+    #       generate_filler_message: false,
+    #       generate_chunked_message: false
     #     },
     #     next_message_token: "NextToken", # required
     #   }
@@ -6643,7 +8202,8 @@ module Aws::QConnect
     #             }
     #           }
     #         ],
-    #         locale: "NonEmptyString"
+    #         locale: "NonEmptyString",
+    #         suggested_messages: ["NonEmptySensitiveString"]
     #       },
     #       self_service_ai_agent_configuration: {
     #         self_service_pre_processing_ai_prompt_id: "UuidWithQualifier",
@@ -6780,6 +8340,94 @@ module Aws::QConnect
     #             }
     #           }
     #         ]
+    #       },
+    #       orchestration_ai_agent_configuration: {
+    #         orchestration_ai_prompt_id: "UuidWithQualifier",
+    #         orchestration_ai_guardrail_id: "UuidWithQualifier",
+    #         tool_configurations: [
+    #           {
+    #             tool_name: "NonEmptyString", # required
+    #             tool_type: "ToolType", # required
+    #             title: "NonEmptySensitiveString",
+    #             tool_id: "NonEmptyString",
+    #             description: "NonEmptySensitiveString",
+    #             instruction: {
+    #               instruction: "String",
+    #               examples: ["String"]
+    #             },
+    #             override_input_values: [
+    #               {
+    #                 json_path: "NonEmptyString", # required
+    #                 value: { # required
+    #                   # One of:
+    #                   constant: {
+    #                     type: "ToolOverrideInputValueType", # required
+    #                     value: "NonEmptySensitiveString", # required
+    #                   }
+    #                 }
+    #               }
+    #             ],
+    #             output_filters: [
+    #               {
+    #                 json_path: "NonEmptyString", # required
+    #                 output_configuration: {
+    #                   output_variable_name_override: "NonEmptyString",
+    #                   session_data_namespace: "NonEmptyString"
+    #                 }
+    #               }
+    #             ],
+    #             input_schema: ""null"",
+    #             output_schema: ""null"",
+    #             annotations: {
+    #               title: "String",
+    #               destructive_hint: false
+    #             },
+    #             user_interaction_configuration: {
+    #               is_user_confirmation_required: false
+    #             }
+    #           }
+    #         ],
+    #         multi_agent_configurations: [{
+    #           # One of:
+    #           delegate_agent_configuration: {
+    #             agent_target: { # required
+    #               # One of:
+    #               ai_agent_id: "NonEmptyString",
+    #               application_id: "NonEmptyString"
+    #             },
+    #             instruction: {
+    #               instruction: "String",
+    #               examples: ["String"]
+    #             }
+    #           },
+    #           handoff_agent_configuration: {
+    #             agent_target: { # required
+    #               # One of:
+    #               ai_agent_id: "NonEmptyString",
+    #               application_id: "NonEmptyString"
+    #             },
+    #             instruction: {
+    #               instruction: "String",
+    #               examples: ["String"]
+    #             },
+    #             audio_streaming_enabled: false,
+    #             immediate_handoff: false
+    #           }
+    #         }],
+    #         connect_instance_arn: "GenericArn",
+    #         locale: "NonEmptyString",
+    #         input_schemas: [""null""],
+    #         output_schemas: [""null""]
+    #       },
+    #       note_taking_ai_agent_configuration: {
+    #         note_taking_ai_prompt_id: "UuidWithQualifier",
+    #         note_taking_ai_guardrail_id: "UuidWithQualifier",
+    #         locale: "NonEmptyString"
+    #       },
+    #       case_summarization_ai_agent_configuration: {
+    #         case_summarization_ai_prompt_id: "UuidWithQualifier",
+    #         case_summarization_ai_guardrail_id: "UuidWithQualifier",
+    #         locale: "NonEmptyString"
     #       }
     #     },
     #     description: "Description"
@@ -6886,7 +8534,8 @@ module Aws::QConnect
     #               }
     #             }
     #           ],
-    #           locale: "NonEmptyString"
+    #           locale: "NonEmptyString",
+    #           suggested_messages: ["NonEmptySensitiveString"]
     #         },
     #         self_service_ai_agent_configuration: {
     #           self_service_pre_processing_ai_prompt_id: "UuidWithQualifier",
@@ -7023,6 +8672,94 @@ module Aws::QConnect
     #               }
     #             }
     #           ]
+    #         },
+    #         orchestration_ai_agent_configuration: {
+    #           orchestration_ai_prompt_id: "UuidWithQualifier",
+    #           orchestration_ai_guardrail_id: "UuidWithQualifier",
+    #           tool_configurations: [
+    #             {
+    #               tool_name: "NonEmptyString", # required
+    #               tool_type: "ToolType", # required
+    #               title: "NonEmptySensitiveString",
+    #               tool_id: "NonEmptyString",
+    #               description: "NonEmptySensitiveString",
+    #               instruction: {
+    #                 instruction: "String",
+    #                 examples: ["String"]
+    #               },
+    #               override_input_values: [
+    #                 {
+    #                   json_path: "NonEmptyString", # required
+    #                   value: { # required
+    #                     # One of:
+    #                     constant: {
+    #                       type: "ToolOverrideInputValueType", # required
+    #                       value: "NonEmptySensitiveString", # required
+    #                     }
+    #                   }
+    #                 }
+    #               ],
+    #               output_filters: [
+    #                 {
+    #                   json_path: "NonEmptyString", # required
+    #                   output_configuration: {
+    #                     output_variable_name_override: "NonEmptyString",
+    #                     session_data_namespace: "NonEmptyString"
+    #                   }
+    #                 }
+    #               ],
+    #               input_schema: ""null"",
+    #               output_schema: ""null"",
+    #               annotations: {
+    #                 title: "String",
+    #                 destructive_hint: false
+    #               },
+    #               user_interaction_configuration: {
+    #                 is_user_confirmation_required: false
+    #               }
+    #             }
+    #           ],
+    #           multi_agent_configurations: [{
+    #             # One of:
+    #             delegate_agent_configuration: {
+    #               agent_target: { # required
+    #                 # One of:
+    #                 ai_agent_id: "NonEmptyString",
+    #                 application_id: "NonEmptyString"
+    #               },
+    #               instruction: {
+    #                 instruction: "String",
+    #                 examples: ["String"]
+    #               }
+    #             },
+    #             handoff_agent_configuration: {
+    #               agent_target: { # required
+    #                 # One of:
+    #                 ai_agent_id: "NonEmptyString",
+    #                 application_id: "NonEmptyString"
+    #               },
+    #               instruction: {
+    #                 instruction: "String",
+    #                 examples: ["String"]
+    #               },
+    #               audio_streaming_enabled: false,
+    #               immediate_handoff: false
+    #             }
+    #           }],
+    #           connect_instance_arn: "GenericArn",
+    #           locale: "NonEmptyString",
+    #           input_schemas: [""null""],
+    #           output_schemas: [""null""]
+    #         },
+    #         note_taking_ai_agent_configuration: {
+    #           note_taking_ai_prompt_id: "UuidWithQualifier",
+    #           note_taking_ai_guardrail_id: "UuidWithQualifier",
+    #           locale: "NonEmptyString"
+    #         },
+    #         case_summarization_ai_agent_configuration: {
+    #           case_summarization_ai_prompt_id: "UuidWithQualifier",
+    #           case_summarization_ai_guardrail_id: "UuidWithQualifier",
+    #           locale: "NonEmptyString"
     #         }
     #       },
     #       modified_time: Time.now,
@@ -7231,6 +8968,8 @@ module Aws::QConnect
     #   <p>The description of the Amazon Q in Connect AI Prompt.</p>
     # @option params [String] :model_id
     #   <p>The identifier of the model used for this AI Prompt.</p> <note> <p>For information about which models are supported in each Amazon Web Services Region, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/create-ai-prompts.html#cli-create-aiprompt">Supported models for system/custom prompts</a>.</p> </note>
+    # @option params [Types::AIPromptInferenceConfiguration] :inference_configuration
+    #   <p>The updated inference configuration for the AI Prompt.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     client_token: "ClientToken",
@@ -7244,7 +8983,13 @@ module Aws::QConnect
     #       }
     #     },
     #     description: "Description",
-    #     model_id: "AIPromptModelIdentifier"
+    #     model_id: "AIPromptModelIdentifier",
+    #     inference_configuration: {
+    #       temperature: 1.0,
+    #       top_p: 1.0,
+    #       top_k: 1,
+    #       max_tokens_to_sample: 1
+    #     }
     #   }
     #   options = {}
     #   response = client.update_ai_prompt(params, options)
@@ -7266,6 +9011,12 @@ module Aws::QConnect
     #         text_full_ai_prompt_edit_template_configuration: {
     #           text: "TextAIPrompt", # required
     #         }
+    #       },
+    #       inference_configuration: {
+    #         temperature: 1.0,
+    #         top_p: 1.0,
+    #         top_k: 1,
+    #         max_tokens_to_sample: 1
     #       },
     #       modified_time: Time.now,
     #       description: "Description",
@@ -7291,13 +9042,17 @@ module Aws::QConnect
     #   <p>The type of the AI Agent being updated for use by default on the Amazon Q in Connect Assistant.</p>
     # @option params [Types::AIAgentConfigurationData] :configuration
     #   <p>The configuration of the AI Agent being updated for use by default on the Amazon Q in Connect Assistant.</p>
+    # @option params [String] :orchestrator_use_case
+    #   <p>The orchestrator use case for the AI Agent being added.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     assistant_id: "UuidOrArn", # required
     #     ai_agent_type: "AIAgentType", # required
     #     configuration: { # required
     #       ai_agent_id: "UuidWithQualifier", # required
-    #     }
+    #       enabled: false
+    #     },
+    #     orchestrator_use_case: "NonEmptyString"
     #   }
     #   options = {}
     #   response = client.update_assistant_ai_agent(params, options)
@@ -7326,8 +9081,15 @@ module Aws::QConnect
     #       ai_agent_configuration: {
     #         "AIAgentType" => {
     #           ai_agent_id: "UuidWithQualifier", # required
+    #           enabled: false
     #         }
-    #       }
+    #       },
+    #       orchestrator_configuration_list: [
+    #         {
+    #           ai_agent_id: "UuidOrArnOrEitherWithQualifier",
+    #           orchestrator_use_case: "NonEmptyString", # required
+    #         }
+    #       ]
     #     }
     #   }
     # @return [Types::UpdateAssistantAIAgentResponse]
@@ -7508,6 +9270,8 @@ module Aws::QConnect
     #   <p>The content of the message template.</p>
     # @option params [String] :language
     #   <p>The language code value for the language in which the quick response is written. The supported language codes include <code>de_DE</code>, <code>en_US</code>, <code>es_ES</code>, <code>fr_FR</code>, <code>id_ID</code>, <code>it_IT</code>, <code>ja_JP</code>, <code>ko_KR</code>, <code>pt_BR</code>, <code>zh_CN</code>, <code>zh_TW</code> </p>
+    # @option params [Types::MessageTemplateSourceConfiguration] :source_configuration
+    #   <p>The source configuration of the message template. Only set this argument for WHATSAPP channel subtype.</p>
     # @option params [Types::MessageTemplateAttributes] :default_attributes
     #   <p>An object that specifies the default values to use for variables in the message template. This object contains different categories of key-value pairs. Each key defines a variable or placeholder in the message template. The corresponding value defines the default value for that variable.</p>
     # @example Request syntax with placeholder values
@@ -7542,9 +9306,88 @@ module Aws::QConnect
     #             content: "NonEmptyUnlimitedString"
     #           }
     #         }
+    #       },
+    #       whats_app: {
+    #         data: "WhatsAppMessageTemplateContentData"
+    #       },
+    #       push: {
+    #         adm: {
+    #           title: "NonEmptyUnlimitedString",
+    #           body: {
+    #             # One of:
+    #             content: "NonEmptyUnlimitedString"
+    #           },
+    #           action: "PushMessageAction",
+    #           sound: "NonEmptyUnlimitedString",
+    #           url: "NonEmptyUnlimitedString",
+    #           image_url: "NonEmptyUnlimitedString",
+    #           image_icon_url: "NonEmptyUnlimitedString",
+    #           small_image_icon_url: "NonEmptyUnlimitedString",
+    #           raw_content: {
+    #             # One of:
+    #             content: "NonEmptyUnlimitedString"
+    #           }
+    #         },
+    #         apns: {
+    #           title: "NonEmptyUnlimitedString",
+    #           body: {
+    #             # One of:
+    #             content: "NonEmptyUnlimitedString"
+    #           },
+    #           action: "PushMessageAction",
+    #           sound: "NonEmptyUnlimitedString",
+    #           url: "NonEmptyUnlimitedString",
+    #           media_url: "NonEmptyUnlimitedString",
+    #           raw_content: {
+    #             # One of:
+    #             content: "NonEmptyUnlimitedString"
+    #           }
+    #         },
+    #         fcm: {
+    #           title: "NonEmptyUnlimitedString",
+    #           body: {
+    #             # One of:
+    #             content: "NonEmptyUnlimitedString"
+    #           },
+    #           action: "PushMessageAction",
+    #           sound: "NonEmptyUnlimitedString",
+    #           url: "NonEmptyUnlimitedString",
+    #           image_url: "NonEmptyUnlimitedString",
+    #           image_icon_url: "NonEmptyUnlimitedString",
+    #           small_image_icon_url: "NonEmptyUnlimitedString",
+    #           raw_content: {
+    #             # One of:
+    #             content: "NonEmptyUnlimitedString"
+    #           }
+    #         },
+    #         baidu: {
+    #           title: "NonEmptyUnlimitedString",
+    #           body: {
+    #             # One of:
+    #             content: "NonEmptyUnlimitedString"
+    #           },
+    #           action: "PushMessageAction",
+    #           sound: "NonEmptyUnlimitedString",
+    #           url: "NonEmptyUnlimitedString",
+    #           image_url: "NonEmptyUnlimitedString",
+    #           image_icon_url: "NonEmptyUnlimitedString",
+    #           small_image_icon_url: "NonEmptyUnlimitedString",
+    #           raw_content: {
+    #             # One of:
+    #             content: "NonEmptyUnlimitedString"
+    #           }
+    #         }
     #       }
     #     },
     #     language: "LanguageCode",
+    #     source_configuration: {
+    #       # One of:
+    #       whats_app: {
+    #         business_account_id: "WhatsAppBusinessAccountId", # required
+    #         template_id: "WhatsAppMessageTemplateId", # required
+    #         components: ["WhatsAppMessageTemplateComponent"]
+    #       }
+    #     },
     #     default_attributes: {
     #       system_attributes: {
     #         name: "MessageTemplateAttributeValue",
@@ -7637,11 +9480,12 @@ module Aws::QConnect
     #       knowledge_base_arn: "Arn", # required
     #       knowledge_base_id: "Uuid", # required
     #       name: "Name", # required
+    #       channel: "Channel",
     #       channel_subtype: "ChannelSubtype", # required
     #       created_time: Time.now, # required
     #       last_modified_time: Time.now, # required
     #       last_modified_by: "GenericArn", # required
-    #       content: { # required
+    #       content: {
     #         # One of:
     #         email: {
     #           subject: "NonEmptyUnlimitedString",
@@ -7669,10 +9513,93 @@ module Aws::QConnect
     #               content: "NonEmptyUnlimitedString"
     #             }
     #           }
+    #         },
+    #         whats_app: {
+    #           data: "WhatsAppMessageTemplateContentData"
+    #         },
+    #         push: {
+    #           adm: {
+    #             title: "NonEmptyUnlimitedString",
+    #             body: {
+    #               # One of:
+    #               content: "NonEmptyUnlimitedString"
+    #             },
+    #             action: "PushMessageAction",
+    #             sound: "NonEmptyUnlimitedString",
+    #             url: "NonEmptyUnlimitedString",
+    #             image_url: "NonEmptyUnlimitedString",
+    #             image_icon_url: "NonEmptyUnlimitedString",
+    #             small_image_icon_url: "NonEmptyUnlimitedString",
+    #             raw_content: {
+    #               # One of:
+    #               content: "NonEmptyUnlimitedString"
+    #             }
+    #           },
+    #           apns: {
+    #             title: "NonEmptyUnlimitedString",
+    #             body: {
+    #               # One of:
+    #               content: "NonEmptyUnlimitedString"
+    #             },
+    #             action: "PushMessageAction",
+    #             sound: "NonEmptyUnlimitedString",
+    #             url: "NonEmptyUnlimitedString",
+    #             media_url: "NonEmptyUnlimitedString",
+    #             raw_content: {
+    #               # One of:
+    #               content: "NonEmptyUnlimitedString"
+    #             }
+    #           },
+    #           fcm: {
+    #             title: "NonEmptyUnlimitedString",
+    #             body: {
+    #               # One of:
+    #               content: "NonEmptyUnlimitedString"
+    #             },
+    #             action: "PushMessageAction",
+    #             sound: "NonEmptyUnlimitedString",
+    #             url: "NonEmptyUnlimitedString",
+    #             image_url: "NonEmptyUnlimitedString",
+    #             image_icon_url: "NonEmptyUnlimitedString",
+    #             small_image_icon_url: "NonEmptyUnlimitedString",
+    #             raw_content: {
+    #               # One of:
+    #               content: "NonEmptyUnlimitedString"
+    #             }
+    #           },
+    #           baidu: {
+    #             title: "NonEmptyUnlimitedString",
+    #             body: {
+    #               # One of:
+    #               content: "NonEmptyUnlimitedString"
+    #             },
+    #             action: "PushMessageAction",
+    #             sound: "NonEmptyUnlimitedString",
+    #             url: "NonEmptyUnlimitedString",
+    #             image_url: "NonEmptyUnlimitedString",
+    #             image_icon_url: "NonEmptyUnlimitedString",
+    #             small_image_icon_url: "NonEmptyUnlimitedString",
+    #             raw_content: {
+    #               # One of:
+    #               content: "NonEmptyUnlimitedString"
+    #             }
+    #           }
     #         }
     #       },
     #       description: "Description",
     #       language: "LanguageCode",
+    #       source_configuration_summary: {
+    #         # One of:
+    #         whats_app: {
+    #           business_account_id: "WhatsAppBusinessAccountId", # required
+    #           template_id: "WhatsAppMessageTemplateId", # required
+    #           name: "WhatsAppMessageTemplateName",
+    #           language: "WhatsAppMessageTemplateLanguage",
+    #           components: ["WhatsAppMessageTemplateComponent"],
+    #           status: "WhatsAppSourceConfigurationStatus",
+    #           status_reason: "NonEmptyUnlimitedString"
+    #         }
+    #       },
     #       grouping_configuration: {
     #         criteria: "GroupingCriteria",
     #         values: ["GroupingValue"]
@@ -7804,11 +9731,12 @@ module Aws::QConnect
     #       knowledge_base_arn: "Arn", # required
     #       knowledge_base_id: "Uuid", # required
     #       name: "Name", # required
+    #       channel: "Channel",
     #       channel_subtype: "ChannelSubtype", # required
     #       created_time: Time.now, # required
     #       last_modified_time: Time.now, # required
     #       last_modified_by: "GenericArn", # required
-    #       content: { # required
+    #       content: {
     #         # One of:
     #         email: {
     #           subject: "NonEmptyUnlimitedString",
@@ -7836,10 +9764,93 @@ module Aws::QConnect
     #               content: "NonEmptyUnlimitedString"
     #             }
     #           }
+    #         },
+    #         whats_app: {
+    #           data: "WhatsAppMessageTemplateContentData"
+    #         },
+    #         push: {
+    #           adm: {
+    #             title: "NonEmptyUnlimitedString",
+    #             body: {
+    #               # One of:
+    #               content: "NonEmptyUnlimitedString"
+    #             },
+    #             action: "PushMessageAction",
+    #             sound: "NonEmptyUnlimitedString",
+    #             url: "NonEmptyUnlimitedString",
+    #             image_url: "NonEmptyUnlimitedString",
+    #             image_icon_url: "NonEmptyUnlimitedString",
+    #             small_image_icon_url: "NonEmptyUnlimitedString",
+    #             raw_content: {
+    #               # One of:
+    #               content: "NonEmptyUnlimitedString"
+    #             }
+    #           },
+    #           apns: {
+    #             title: "NonEmptyUnlimitedString",
+    #             body: {
+    #               # One of:
+    #               content: "NonEmptyUnlimitedString"
+    #             },
+    #             action: "PushMessageAction",
+    #             sound: "NonEmptyUnlimitedString",
+    #             url: "NonEmptyUnlimitedString",
+    #             media_url: "NonEmptyUnlimitedString",
+    #             raw_content: {
+    #               # One of:
+    #               content: "NonEmptyUnlimitedString"
+    #             }
+    #           },
+    #           fcm: {
+    #             title: "NonEmptyUnlimitedString",
+    #             body: {
+    #               # One of:
+    #               content: "NonEmptyUnlimitedString"
+    #             },
+    #             action: "PushMessageAction",
+    #             sound: "NonEmptyUnlimitedString",
+    #             url: "NonEmptyUnlimitedString",
+    #             image_url: "NonEmptyUnlimitedString",
+    #             image_icon_url: "NonEmptyUnlimitedString",
+    #             small_image_icon_url: "NonEmptyUnlimitedString",
+    #             raw_content: {
+    #               # One of:
+    #               content: "NonEmptyUnlimitedString"
+    #             }
+    #           },
+    #           baidu: {
+    #             title: "NonEmptyUnlimitedString",
+    #             body: {
+    #               # One of:
+    #               content: "NonEmptyUnlimitedString"
+    #             },
+    #             action: "PushMessageAction",
+    #             sound: "NonEmptyUnlimitedString",
+    #             url: "NonEmptyUnlimitedString",
+    #             image_url: "NonEmptyUnlimitedString",
+    #             image_icon_url: "NonEmptyUnlimitedString",
+    #             small_image_icon_url: "NonEmptyUnlimitedString",
+    #             raw_content: {
+    #               # One of:
+    #               content: "NonEmptyUnlimitedString"
+    #             }
+    #           }
     #         }
     #       },
     #       description: "Description",
     #       language: "LanguageCode",
+    #       source_configuration_summary: {
+    #         # One of:
+    #         whats_app: {
+    #           business_account_id: "WhatsAppBusinessAccountId", # required
+    #           template_id: "WhatsAppMessageTemplateId", # required
+    #           name: "WhatsAppMessageTemplateName",
+    #           language: "WhatsAppMessageTemplateLanguage",
+    #           components: ["WhatsAppMessageTemplateComponent"],
+    #           status: "WhatsAppSourceConfigurationStatus",
+    #           status_reason: "NonEmptyUnlimitedString"
+    #         }
+    #       },
     #       grouping_configuration: {
     #         criteria: "GroupingCriteria",
     #         values: ["GroupingValue"]
@@ -7964,7 +9975,7 @@ module Aws::QConnect
     # @option params [Boolean] :is_active
     #   <p>Whether the quick response is active. </p>
     # @option params [Array<String>] :channels
-    #   <p>The Amazon Connect contact channels this quick response applies to. The supported contact channel types include <code>Chat</code>.</p>
+    #   <p>The Connect Customer contact channels this quick response applies to. The supported contact channel types include <code>Chat</code>.</p>
     # @option params [String] :language
     #   <p>The language code value for the language in which the quick response is written. The supported language codes include <code>de_DE</code>, <code>en_US</code>, <code>es_ES</code>, <code>fr_FR</code>, <code>id_ID</code>, <code>it_IT</code>, <code>ja_JP</code>, <code>ko_KR</code>, <code>pt_BR</code>, <code>zh_CN</code>, <code>zh_TW</code> </p>
     # @example Request syntax with placeholder values
@@ -8036,7 +10047,7 @@ module Aws::QConnect
       request.send_request(options)
     end
 
-    # <p>Updates a session. A session is a contextual container used for generating recommendations. Amazon Connect updates the existing Amazon Q in Connect session for each contact on which Amazon Q in Connect is enabled.</p>
+    # <p>Updates a session. A session is a contextual container used for generating recommendations. Connect Customer updates the existing Amazon Q in Connect session for each contact on which Amazon Q in Connect is enabled.</p>
     # @param [Hash, Types::UpdateSessionRequest] params
     # @option params [String] :assistant_id
     #   <p>The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>
@@ -8048,6 +10059,10 @@ module Aws::QConnect
     #   <p>An object that can be used to specify Tag conditions.</p>
     # @option params [Hash<String, Types::AIAgentConfigurationData>] :ai_agent_configuration
     #   <p>The configuration of the AI Agents (mapped by AI Agent Type to AI Agent version) that should be used by Amazon Q in Connect for this Session.</p>
+    # @option params [Array<Types::OrchestratorConfigurationEntry>] :orchestrator_configuration_list
+    #   <p>The updated list of orchestrator configurations for the session.</p>
+    # @option params [Boolean] :remove_orchestrator_configuration_list
+    #   <p>The list of orchestrator configurations to remove from the session.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     assistant_id: "UuidOrArn", # required
@@ -8082,8 +10097,16 @@ module Aws::QConnect
     #     ai_agent_configuration: {
     #       "AIAgentType" => {
     #         ai_agent_id: "UuidWithQualifier", # required
+    #         enabled: false
     #       }
-    #     }
+    #     },
+    #     orchestrator_configuration_list: [
+    #       {
+    #         ai_agent_id: "UuidOrArnOrEitherWithQualifier",
+    #         orchestrator_use_case: "NonEmptyString", # required
+    #       }
+    #     ],
+    #     remove_orchestrator_configuration_list: false
     #   }
     #   options = {}
     #   response = client.update_session(params, options)
@@ -8130,9 +10153,16 @@ module Aws::QConnect
     #       ai_agent_configuration: {
     #         "AIAgentType" => {
     #           ai_agent_id: "UuidWithQualifier", # required
+    #           enabled: false
     #         }
     #       },
-    #       origin: "Origin"
+    #       origin: "Origin",
+    #       orchestrator_configuration_list: [
+    #         {
+    #           ai_agent_id: "UuidOrArnOrEitherWithQualifier",
+    #           orchestrator_use_case: "NonEmptyString", # required
+    #         }
+    #       ]
     #     }
     #   }
     # @return [Types::UpdateSessionResponse]

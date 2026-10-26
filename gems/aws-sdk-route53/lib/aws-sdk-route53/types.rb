@@ -516,11 +516,32 @@ module Aws::Route53
     #   						</p>
     #                  </note>
     #               </dd>
+    #               <dt>API Gateway APIs</dt>
+    #               <dd>
+    #                  <p>There are no special requirements for setting
+    #   							<code>EvaluateTargetHealth</code> to <code>true</code> when the alias
+    #   						target is an API Gateway API. However, because API Gateway is highly
+    #   						available by design, <code>EvaluateTargetHealth</code> provides no
+    #   						operational benefit and <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover.html">Route 53 health
+    #   							checks</a> are recommended instead for failover scenarios.</p>
+    #               </dd>
     #               <dt>S3 buckets</dt>
     #               <dd>
     #                  <p>There are no special requirements for setting
     #   							<code>EvaluateTargetHealth</code> to <code>true</code> when the alias
-    #   						target is an S3 bucket.</p>
+    #   						target is an S3 bucket. However, because S3 buckets are highly available by
+    #   						design, <code>EvaluateTargetHealth</code> provides no operational benefit
+    #   						and <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover.html">Route 53 health
+    #   							checks</a> are recommended instead for failover scenarios.</p>
+    #               </dd>
+    #               <dt>VPC interface endpoints</dt>
+    #               <dd>
+    #                  <p>There are no special requirements for setting
+    #   							<code>EvaluateTargetHealth</code> to <code>true</code> when the alias
+    #   						target is a VPC interface endpoint. However, because VPC interface endpoints
+    #   						are highly available by design, <code>EvaluateTargetHealth</code> provides
+    #   						no operational benefit and <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover.html">Route 53 health
+    #   							checks</a> are recommended instead for failover scenarios.</p>
     #               </dd>
     #               <dt>Other records in the same hosted zone</dt>
     #               <dd>
@@ -532,6 +553,15 @@ module Aws::Route53
     #   							<i>Amazon Route 53 Developer Guide</i>.</p>
     #               </dd>
     #            </dl>
+    #            <note>
+    #               <p>While <code>EvaluateTargetHealth</code> can be set to <code>true</code> for highly
+    #   				available Amazon Web Services services (such as S3 buckets, VPC interface endpoints,
+    #   				and API Gateway), these services are designed for high availability and rarely
+    #   				experience outages that would be detected by this feature. For failover scenarios
+    #   				with these services, consider using <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover.html">Route 53 health
+    #   					checks</a> that monitor your application's ability to access the service
+    #   				instead.</p>
+    #            </note>
     #            <p>For more information and examples, see <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover.html">Amazon Route 53 Health Checks
     #   				and DNS Failover</a> in the <i>Amazon Route 53 Developer
     #   			Guide</i>.</p>
@@ -1141,8 +1171,8 @@ module Aws::Route53
     #                  <p>If you send a <code>CreateHealthCheck</code> request with the same
     #   						<code>CallerReference</code> and settings as a previous request, and if the
     #   					health check doesn't exist, Amazon Route 53 creates the health check. If the
-    #   					health check does exist, Route 53 returns the settings for the existing health
-    #   					check.</p>
+    #   					health check does exist, Route 53 returns the health check configuration in the
+    #   					response. </p>
     #               </li>
     #               <li>
     #                  <p>If you send a <code>CreateHealthCheck</code> request with the same
@@ -1160,7 +1190,7 @@ module Aws::Route53
     #   					check, Route 53 creates the health check.</p>
     #               </li>
     #            </ul>
-    #            <p> Route 53 does not store the <code>CallerReference</code> for a deleted health check indefinitely. 
+    #            <p> Route 53 does not store the <code>CallerReference</code> for a deleted health check indefinitely.
     #   			The <code>CallerReference</code> for a deleted health check will be deleted after a number of days.</p>
     #   @return [String]
     # @!attribute health_check_config
@@ -2213,10 +2243,10 @@ module Aws::Route53
     #   <p>
     #   			Specifies an Amazon Web Services Local Zone Group.
     #   		</p>
-    #            <p>A local Zone Group is usually the Local Zone code without the ending character. For example, 
+    #            <p>A local Zone Group is usually the Local Zone code without the ending character. For example,
     #   			if the Local Zone is <code>us-east-1-bue-1a</code> the Local Zone Group is <code>us-east-1-bue-1</code>.</p>
     #            <p>You can identify the Local Zones Group for a specific Local Zone by using the <a href="https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-availability-zones.html">describe-availability-zones</a> CLI command:</p>
-    #            <p>This command returns: <code>"GroupName": "us-west-2-den-1"</code>, specifying that the Local Zone <code>us-west-2-den-1a</code> 
+    #            <p>This command returns: <code>"GroupName": "us-west-2-den-1"</code>, specifying that the Local Zone <code>us-west-2-den-1a</code>
     #   			belongs to the Local Zone Group <code>us-west-2-den-1</code>.</p>
     #   @return [String]
     # @!attribute coordinates
@@ -2226,15 +2256,15 @@ module Aws::Route53
     #   <p>
     #   			The bias increases or decreases the size of the geographic region from which Route 53 routes traffic to a resource.
     #   		</p>
-    #            <p>To use <code>Bias</code> to change the size of the geographic region, specify the 
+    #            <p>To use <code>Bias</code> to change the size of the geographic region, specify the
     #   			applicable value for the bias:</p>
     #            <ul>
     #               <li>
-    #                  <p>To expand the size of the geographic region from which Route 53 routes traffic to a resource, specify a 
+    #                  <p>To expand the size of the geographic region from which Route 53 routes traffic to a resource, specify a
     #   				positive integer from 1 to 99 for the bias. Route 53 shrinks the size of adjacent regions. </p>
     #               </li>
     #               <li>
-    #                  <p>To shrink the size of the geographic region from which Route 53 routes traffic to a resource, specify a 
+    #                  <p>To shrink the size of the geographic region from which Route 53 routes traffic to a resource, specify a
     #   				negative bias of -1 to -99. Route 53 expands the size of adjacent regions. </p>
     #               </li>
     #            </ul>
@@ -3157,6 +3187,9 @@ module Aws::Route53
     #   <p>The number of seconds between the time that Amazon Route 53 gets a response from your
     #   			endpoint and the time that it sends the next health check request. Each Route 53 health
     #   			checker makes requests at this interval.</p>
+    #            <p>
+    #               <code>RequestInterval</code> is not supported when you specify a value for
+    #   			<code>Type</code> of <code>RECOVERY_CONTROL</code>.</p>
     #            <important>
     #               <p>You can't change the value of <code>RequestInterval</code> after you create a
     #   				health check.</p>
@@ -3169,7 +3202,10 @@ module Aws::Route53
     #   			Route 53 to change the current status of the endpoint from unhealthy to healthy or vice
     #   			versa. For more information, see <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-determining-health-of-endpoints.html">How Amazon Route 53 Determines Whether an Endpoint Is Healthy</a> in the
     #   				<i>Amazon Route 53 Developer Guide</i>.</p>
-    #            <p>If you don't specify a value for <code>FailureThreshold</code>, the default value is
+    #            <p>
+    #               <code>FailureThreshold</code> is not supported when you specify a value for
+    #   			<code>Type</code> of <code>RECOVERY_CONTROL</code>.</p>
+    #            <p>Otherwise, if you don't specify a value for <code>FailureThreshold</code>, the default value is
     #   			three health checks.</p>
     #   @return [Integer]
     # @!attribute measure_latency
@@ -3177,6 +3213,9 @@ module Aws::Route53
     #   			checkers in multiple Amazon Web Services regions and your endpoint, and to display
     #   			CloudWatch latency graphs on the <b>Health Checks</b> page in
     #   			the Route 53 console.</p>
+    #            <p>
+    #               <code>MeasureLatency</code> is not supported when you specify a value for
+    #   			<code>Type</code> of <code>RECOVERY_CONTROL</code>.</p>
     #            <important>
     #               <p>You can't change the value of <code>MeasureLatency</code> after you create a
     #   				health check.</p>
@@ -3407,6 +3446,9 @@ module Aws::Route53
     #   			zone. When a hosted zone is created by another service, you can't edit or delete it
     #   			using Route 53. </p>
     #   @return [Types::LinkedService]
+    # @!attribute features
+    #   <p>The features configuration for the hosted zone, including accelerated recovery settings and status information.</p>
+    #   @return [Types::HostedZoneFeatures]
     class HostedZone < Struct.new(
       nil,
       :id,
@@ -3415,6 +3457,7 @@ module Aws::Route53
       :config,
       :resource_record_set_count,
       :linked_service,
+      :features,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3455,6 +3498,34 @@ module Aws::Route53
         options[:private_zone] = false unless options.key?(:private_zone)
         super
       end
+    end
+
+    # <p>Contains information about why certain features failed to be enabled or configured for the hosted zone.</p>
+    # @!attribute accelerated_recovery
+    #   <p>The reason why accelerated recovery failed to be enabled or disabled for the hosted zone, if applicable.</p>
+    #   @return [String]
+    class HostedZoneFailureReasons < Struct.new(
+      nil,
+      :accelerated_recovery,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Represents the features configuration for a hosted zone, including the status of various features and any associated failure reasons.</p>
+    # @!attribute accelerated_recovery_status
+    #   <p>The current status of accelerated recovery for the hosted zone.</p>
+    #   @return [String]
+    # @!attribute failure_reasons
+    #   <p>Information about any failures that occurred when attempting to enable or configure features for the hosted zone.</p>
+    #   @return [Types::HostedZoneFailureReasons]
+    class HostedZoneFeatures < Struct.new(
+      nil,
+      :accelerated_recovery_status,
+      :failure_reasons,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains the type of limit that you specified in the request and
@@ -3621,8 +3692,8 @@ module Aws::Route53
     # 					resource policy to grant permissions for the KMS key.</p>
     #             </li>
     #             <li>
-    #                <p>The Key management service (KMS) key you specified is marked as 
-    # 				disabled for the log group associated with query log. Update or provide 
+    #                <p>The Key management service (KMS) key you specified is marked as
+    # 				disabled for the log group associated with query log. Update or provide
     # 				a resource policy to grant permissions for the KMS key.</p>
     #             </li>
     #          </ul>
@@ -6959,7 +7030,7 @@ module Aws::Route53
     #   			to the domain that you specify in <code>FullyQualifiedDomainName</code> at the interval
     #   			you specify in <code>RequestInterval</code>. Using an IPv4 address that is returned by
     #   			DNS, Route 53 then checks the health of the endpoint.</p>
-    #            <p>If you don't specify a value for <code>IPAddress</code>, you can’t update the health check to remove the <code>FullyQualifiedDomainName</code>; if you don’t specify a value for <code>IPAddress</code> on creation, a 
+    #            <p>If you don't specify a value for <code>IPAddress</code>, you can’t update the health check to remove the <code>FullyQualifiedDomainName</code>; if you don’t specify a value for <code>IPAddress</code> on creation, a
     #   			<code>FullyQualifiedDomainName</code> is required.</p>
     #            <note>
     #               <p>If you don't specify a value for <code>IPAddress</code>, Route 53 uses only IPv4
@@ -6998,7 +7069,7 @@ module Aws::Route53
     #   			Route 53 to change the current status of the endpoint from unhealthy to healthy or vice
     #   			versa. For more information, see <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-determining-health-of-endpoints.html">How Amazon Route 53 Determines Whether an Endpoint Is Healthy</a> in the
     #   				<i>Amazon Route 53 Developer Guide</i>.</p>
-    #            <p>If you don't specify a value for <code>FailureThreshold</code>, the default value is
+    #            <p>Otherwise, if you don't specify a value for <code>FailureThreshold</code>, the default value is
     #   			three health checks.</p>
     #   @return [Integer]
     # @!attribute inverted
@@ -7200,6 +7271,28 @@ module Aws::Route53
     class UpdateHostedZoneCommentResponse < Struct.new(
       nil,
       :hosted_zone,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute hosted_zone_id
+    #   <p>The ID of the hosted zone for which you want to update features. This is the unique identifier for your hosted zone.</p>
+    #   @return [String]
+    # @!attribute enable_accelerated_recovery
+    #   <p>Specifies whether to enable accelerated recovery for the hosted zone. Set to <code>true</code> to enable accelerated recovery, or <code>false</code> to disable it.</p>
+    #   @return [Boolean]
+    class UpdateHostedZoneFeaturesRequest < Struct.new(
+      nil,
+      :hosted_zone_id,
+      :enable_accelerated_recovery,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class UpdateHostedZoneFeaturesResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

@@ -13,6 +13,7 @@ module Aws::IoTWireless
     Accuracy = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotwireless#Accuracy", name: "Accuracy")
     AckModeRetryDurationSecs = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.iotwireless#AckModeRetryDurationSecs", name: "AckModeRetryDurationSecs", traits: {"smithy.api#range" => {"min" => 0, "max" => 604800}})
     AddGwMetadata = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.iotwireless#AddGwMetadata", name: "AddGwMetadata", traits: {"smithy.api#default" => false})
+    AdvancedConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotwireless#AdvancedConfiguration", name: "AdvancedConfiguration")
     AggregationPeriod = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotwireless#AggregationPeriod", name: "AggregationPeriod")
     AmazonId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotwireless#AmazonId", name: "AmazonId", traits: {"smithy.api#length" => {"min" => 0, "max" => 2048}})
     AmazonResourceName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotwireless#AmazonResourceName", name: "AmazonResourceName", traits: {"smithy.api#length" => {"min" => 1, "max" => 1011}})
@@ -70,6 +71,7 @@ module Aws::IoTWireless
     ClassBTimeout = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.iotwireless#ClassBTimeout", name: "ClassBTimeout", traits: {"smithy.api#range" => {"min" => 0, "max" => 1000}})
     ClassCTimeout = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.iotwireless#ClassCTimeout", name: "ClassCTimeout", traits: {"smithy.api#range" => {"min" => 0, "max" => 1000}})
     ClientRequestToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotwireless#ClientRequestToken", name: "ClientRequestToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[a-zA-Z0-9-_]+$"})
+    ConfidencePercent = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.iotwireless#ConfidencePercent", name: "ConfidencePercent", traits: {"smithy.api#range" => {"min" => 50, "max" => 99}})
     ConflictException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotwireless#ConflictException", name: "ConflictException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 409})
     ConnectionStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotwireless#ConnectionStatus", name: "ConnectionStatus")
     ConnectionStatusEventConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotwireless#ConnectionStatusEventConfiguration", name: "ConnectionStatusEventConfiguration")
@@ -102,6 +104,7 @@ module Aws::IoTWireless
     DakCertificateId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotwireless#DakCertificateId", name: "DakCertificateId", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}})
     DakCertificateMetadata = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotwireless#DakCertificateMetadata", name: "DakCertificateMetadata")
     DakCertificateMetadataList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotwireless#DakCertificateMetadataList", name: "DakCertificateMetadataList")
+    DefaultSessionParametersMulticast = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotwireless#DefaultSessionParametersMulticast", name: "DefaultSessionParametersMulticast")
     DeleteDestinationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotwireless#DeleteDestinationRequest", name: "DeleteDestinationRequest")
     DeleteDestinationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotwireless#DeleteDestinationResponse", name: "DeleteDestinationResponse")
     DeleteDeviceProfileRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotwireless#DeleteDeviceProfileRequest", name: "DeleteDeviceProfileRequest")
@@ -288,6 +291,9 @@ module Aws::IoTWireless
     GetWirelessGatewayTaskResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotwireless#GetWirelessGatewayTaskResponse", name: "GetWirelessGatewayTaskResponse")
     GlobalIdentity = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotwireless#GlobalIdentity", name: "GlobalIdentity")
     Gnss = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotwireless#Gnss", name: "Gnss")
+    GnssCapture = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotwireless#GnssCapture", name: "GnssCapture")
+    GnssCaptures = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotwireless#GnssCaptures", name: "GnssCaptures", traits: {"smithy.api#length" => {"min" => 2, "max" => 32}})
+    GnssMultiFrame = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotwireless#GnssMultiFrame", name: "GnssMultiFrame")
     GnssNav = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotwireless#GnssNav", name: "GnssNav", traits: {"smithy.api#length" => {"min" => 0, "max" => 2048}})
     GsmList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotwireless#GsmList", name: "GsmList", traits: {"smithy.api#length" => {"min" => 1, "max" => 16}})
     GsmLocalId = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotwireless#GsmLocalId", name: "GsmLocalId")
@@ -551,13 +557,16 @@ module Aws::IoTWireless
     SidewalkGetStartImportInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotwireless#SidewalkGetStartImportInfo", name: "SidewalkGetStartImportInfo")
     SidewalkId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotwireless#SidewalkId", name: "SidewalkId", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}})
     SidewalkListDevice = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotwireless#SidewalkListDevice", name: "SidewalkListDevice")
+    SidewalkListDevicesForImportInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotwireless#SidewalkListDevicesForImportInfo", name: "SidewalkListDevicesForImportInfo")
     SidewalkManufacturingSn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotwireless#SidewalkManufacturingSn", name: "SidewalkManufacturingSn", traits: {"smithy.api#length" => {"min" => 0, "max" => 64}})
+    SidewalkPositioning = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotwireless#SidewalkPositioning", name: "SidewalkPositioning")
     SidewalkResourceTypeEventConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotwireless#SidewalkResourceTypeEventConfiguration", name: "SidewalkResourceTypeEventConfiguration")
     SidewalkSendDataToDevice = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotwireless#SidewalkSendDataToDevice", name: "SidewalkSendDataToDevice")
     SidewalkSingleStartImportInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotwireless#SidewalkSingleStartImportInfo", name: "SidewalkSingleStartImportInfo")
     SidewalkStartImportInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotwireless#SidewalkStartImportInfo", name: "SidewalkStartImportInfo")
     SidewalkUpdateAccount = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotwireless#SidewalkUpdateAccount", name: "SidewalkUpdateAccount")
     SidewalkUpdateImportInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotwireless#SidewalkUpdateImportInfo", name: "SidewalkUpdateImportInfo")
+    SidewalkUpdateWirelessDevice = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotwireless#SidewalkUpdateWirelessDevice", name: "SidewalkUpdateWirelessDevice")
     SigningAlg = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotwireless#SigningAlg", name: "SigningAlg")
     StartBulkAssociateWirelessDeviceWithMulticastGroupRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotwireless#StartBulkAssociateWirelessDeviceWithMulticastGroupRequest", name: "StartBulkAssociateWirelessDeviceWithMulticastGroupRequest")
     StartBulkAssociateWirelessDeviceWithMulticastGroupResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotwireless#StartBulkAssociateWirelessDeviceWithMulticastGroupResponse", name: "StartBulkAssociateWirelessDeviceWithMulticastGroupResponse")
@@ -670,6 +679,7 @@ module Aws::IoTWireless
     WcdmaObj = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotwireless#WcdmaObj", name: "WcdmaObj")
     WiFiAccessPoint = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotwireless#WiFiAccessPoint", name: "WiFiAccessPoint")
     WiFiAccessPoints = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotwireless#WiFiAccessPoints", name: "WiFiAccessPoints")
+    WiFiCellular = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotwireless#WiFiCellular", name: "WiFiCellular")
     WirelessDeviceArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotwireless#WirelessDeviceArn", name: "WirelessDeviceArn")
     WirelessDeviceEvent = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotwireless#WirelessDeviceEvent", name: "WirelessDeviceEvent")
     WirelessDeviceEventLogOption = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotwireless#WirelessDeviceEventLogOption", name: "WirelessDeviceEventLogOption")
@@ -722,6 +732,8 @@ module Aws::IoTWireless
     Accuracy.add_member(:horizontal_accuracy, ::Smithy::Schema::Shapes::MemberShape.new(target: HorizontalAccuracy, name: "HorizontalAccuracy"))
     Accuracy.add_member(:vertical_accuracy, ::Smithy::Schema::Shapes::MemberShape.new(target: VerticalAccuracy, name: "VerticalAccuracy"))
     Accuracy.type = Types::Accuracy
+    AdvancedConfiguration.add_member(:wi_fi_cellular, ::Smithy::Schema::Shapes::MemberShape.new(target: WiFiCellular, name: "WiFiCellular"))
+    AdvancedConfiguration.type = Types::AdvancedConfiguration
     AggregationPeriod.add_member(:one_hour, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OneHour", traits: {"smithy.api#enumValue" => "OneHour"}))
     AggregationPeriod.add_member(:one_day, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OneDay", traits: {"smithy.api#enumValue" => "OneDay"}))
     AggregationPeriod.add_member(:one_week, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OneWeek", traits: {"smithy.api#enumValue" => "OneWeek"}))
@@ -922,6 +934,9 @@ module Aws::IoTWireless
     DakCertificateMetadata.add_member(:device_type_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceTypeId, name: "DeviceTypeId"))
     DakCertificateMetadata.type = Types::DakCertificateMetadata
     DakCertificateMetadataList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DakCertificateMetadata, name: "member"))
+    DefaultSessionParametersMulticast.add_member(:dl_dr, ::Smithy::Schema::Shapes::MemberShape.new(target: DlDr, name: "DlDr"))
+    DefaultSessionParametersMulticast.add_member(:dl_freq, ::Smithy::Schema::Shapes::MemberShape.new(target: DlFreq, name: "DlFreq"))
+    DefaultSessionParametersMulticast.type = Types::DefaultSessionParametersMulticast
     DeleteDestinationRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: DestinationName, name: "Name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteDestinationRequest.type = Types::DeleteDestinationRequest
     DeleteDestinationResponse.type = Types::DeleteDestinationResponse
@@ -1195,7 +1210,9 @@ module Aws::IoTWireless
     GetPositionEstimateRequest.add_member(:cell_towers, ::Smithy::Schema::Shapes::MemberShape.new(target: CellTowers, name: "CellTowers"))
     GetPositionEstimateRequest.add_member(:ip, ::Smithy::Schema::Shapes::MemberShape.new(target: Ip, name: "Ip"))
     GetPositionEstimateRequest.add_member(:gnss, ::Smithy::Schema::Shapes::MemberShape.new(target: Gnss, name: "Gnss"))
+    GetPositionEstimateRequest.add_member(:gnss_multi_frame, ::Smithy::Schema::Shapes::MemberShape.new(target: GnssMultiFrame, name: "GnssMultiFrame"))
     GetPositionEstimateRequest.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationDate, name: "Timestamp"))
+    GetPositionEstimateRequest.add_member(:advanced_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AdvancedConfiguration, name: "AdvancedConfiguration"))
     GetPositionEstimateRequest.type = Types::GetPositionEstimateRequest
     GetPositionEstimateResponse.add_member(:geo_json_payload, ::Smithy::Schema::Shapes::MemberShape.new(target: GeoJsonPayload, name: "GeoJsonPayload", traits: {"smithy.api#httpPayload" => {}}))
     GetPositionEstimateResponse[:http_payload] = :geo_json_payload
@@ -1251,6 +1268,7 @@ module Aws::IoTWireless
     GetWirelessDeviceImportTaskResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportTaskId, name: "Id"))
     GetWirelessDeviceImportTaskResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportTaskArn, name: "Arn"))
     GetWirelessDeviceImportTaskResponse.add_member(:destination_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DestinationName, name: "DestinationName"))
+    GetWirelessDeviceImportTaskResponse.add_member(:positioning, ::Smithy::Schema::Shapes::MemberShape.new(target: PositioningConfigStatus, name: "Positioning"))
     GetWirelessDeviceImportTaskResponse.add_member(:sidewalk, ::Smithy::Schema::Shapes::MemberShape.new(target: SidewalkGetStartImportInfo, name: "Sidewalk"))
     GetWirelessDeviceImportTaskResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationTime, name: "CreationTime"))
     GetWirelessDeviceImportTaskResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportTaskStatus, name: "Status"))
@@ -1333,6 +1351,16 @@ module Aws::IoTWireless
     Gnss.add_member(:assist_altitude, ::Smithy::Schema::Shapes::MemberShape.new(target: Coordinate, name: "AssistAltitude"))
     Gnss.add_member(:use2_d_solver, ::Smithy::Schema::Shapes::MemberShape.new(target: Use2DSolver, name: "Use2DSolver", traits: {"smithy.api#default" => false}))
     Gnss.type = Types::Gnss
+    GnssCapture.add_member(:payload, ::Smithy::Schema::Shapes::MemberShape.new(target: GnssNav, name: "Payload", traits: {"smithy.api#required" => {}}))
+    GnssCapture.add_member(:capture_time, ::Smithy::Schema::Shapes::MemberShape.new(target: GPST, name: "CaptureTime"))
+    GnssCapture.type = Types::GnssCapture
+    GnssCaptures.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GnssCapture, name: "member"))
+    GnssMultiFrame.add_member(:captures, ::Smithy::Schema::Shapes::MemberShape.new(target: GnssCaptures, name: "Captures", traits: {"smithy.api#required" => {}}))
+    GnssMultiFrame.add_member(:capture_time_accuracy, ::Smithy::Schema::Shapes::MemberShape.new(target: CaptureTimeAccuracy, name: "CaptureTimeAccuracy"))
+    GnssMultiFrame.add_member(:assist_position, ::Smithy::Schema::Shapes::MemberShape.new(target: AssistPosition, name: "AssistPosition"))
+    GnssMultiFrame.add_member(:assist_altitude, ::Smithy::Schema::Shapes::MemberShape.new(target: Coordinate, name: "AssistAltitude"))
+    GnssMultiFrame.add_member(:use2_d_solver, ::Smithy::Schema::Shapes::MemberShape.new(target: Use2DSolver, name: "Use2DSolver", traits: {"smithy.api#default" => false}))
+    GnssMultiFrame.type = Types::GnssMultiFrame
     GsmList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GsmObj, name: "member"))
     GsmLocalId.add_member(:bsic, ::Smithy::Schema::Shapes::MemberShape.new(target: BSIC, name: "Bsic", traits: {"smithy.api#required" => {}}))
     GsmLocalId.add_member(:bcch, ::Smithy::Schema::Shapes::MemberShape.new(target: BCCH, name: "Bcch", traits: {"smithy.api#required" => {}}))
@@ -1402,6 +1430,8 @@ module Aws::IoTWireless
     ListDevicesForWirelessDeviceImportTaskRequest.type = Types::ListDevicesForWirelessDeviceImportTaskRequest
     ListDevicesForWirelessDeviceImportTaskResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     ListDevicesForWirelessDeviceImportTaskResponse.add_member(:destination_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DestinationName, name: "DestinationName"))
+    ListDevicesForWirelessDeviceImportTaskResponse.add_member(:positioning, ::Smithy::Schema::Shapes::MemberShape.new(target: PositioningConfigStatus, name: "Positioning"))
+    ListDevicesForWirelessDeviceImportTaskResponse.add_member(:sidewalk, ::Smithy::Schema::Shapes::MemberShape.new(target: SidewalkListDevicesForImportInfo, name: "Sidewalk"))
     ListDevicesForWirelessDeviceImportTaskResponse.add_member(:imported_wireless_device_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportedWirelessDeviceList, name: "ImportedWirelessDeviceList"))
     ListDevicesForWirelessDeviceImportTaskResponse.type = Types::ListDevicesForWirelessDeviceImportTaskResponse
     ListEventConfigurationsRequest.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EventNotificationResourceType, name: "ResourceType", traits: {"smithy.api#httpQuery" => "resourceType", "smithy.api#required" => {}}))
@@ -1596,12 +1626,14 @@ module Aws::IoTWireless
     LoRaWANMulticast.add_member(:rf_region, ::Smithy::Schema::Shapes::MemberShape.new(target: SupportedRfRegion, name: "RfRegion"))
     LoRaWANMulticast.add_member(:dl_class, ::Smithy::Schema::Shapes::MemberShape.new(target: DlClass, name: "DlClass"))
     LoRaWANMulticast.add_member(:participating_gateways, ::Smithy::Schema::Shapes::MemberShape.new(target: ParticipatingGatewaysMulticast, name: "ParticipatingGateways"))
+    LoRaWANMulticast.add_member(:default_session_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: DefaultSessionParametersMulticast, name: "DefaultSessionParameters"))
     LoRaWANMulticast.type = Types::LoRaWANMulticast
     LoRaWANMulticastGet.add_member(:rf_region, ::Smithy::Schema::Shapes::MemberShape.new(target: SupportedRfRegion, name: "RfRegion"))
     LoRaWANMulticastGet.add_member(:dl_class, ::Smithy::Schema::Shapes::MemberShape.new(target: DlClass, name: "DlClass"))
     LoRaWANMulticastGet.add_member(:number_of_devices_requested, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberOfDevicesRequested, name: "NumberOfDevicesRequested"))
     LoRaWANMulticastGet.add_member(:number_of_devices_in_group, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberOfDevicesInGroup, name: "NumberOfDevicesInGroup"))
     LoRaWANMulticastGet.add_member(:participating_gateways, ::Smithy::Schema::Shapes::MemberShape.new(target: ParticipatingGatewaysMulticast, name: "ParticipatingGateways"))
+    LoRaWANMulticastGet.add_member(:default_session_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: DefaultSessionParametersMulticast, name: "DefaultSessionParameters"))
     LoRaWANMulticastGet.type = Types::LoRaWANMulticastGet
     LoRaWANMulticastMetadata.add_member(:f_port, ::Smithy::Schema::Shapes::MemberShape.new(target: FPort, name: "FPort"))
     LoRaWANMulticastMetadata.type = Types::LoRaWANMulticastMetadata
@@ -1860,6 +1892,8 @@ module Aws::IoTWireless
     SidewalkAccountList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SidewalkAccountInfoWithFingerprint, name: "member"))
     SidewalkCreateDeviceProfile.type = Types::SidewalkCreateDeviceProfile
     SidewalkCreateWirelessDevice.add_member(:device_profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceProfileId, name: "DeviceProfileId"))
+    SidewalkCreateWirelessDevice.add_member(:positioning, ::Smithy::Schema::Shapes::MemberShape.new(target: SidewalkPositioning, name: "Positioning"))
+    SidewalkCreateWirelessDevice.add_member(:sidewalk_manufacturing_sn, ::Smithy::Schema::Shapes::MemberShape.new(target: SidewalkManufacturingSn, name: "SidewalkManufacturingSn"))
     SidewalkCreateWirelessDevice.type = Types::SidewalkCreateWirelessDevice
     SidewalkDevice.add_member(:amazon_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonId, name: "AmazonId"))
     SidewalkDevice.add_member(:sidewalk_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SidewalkId, name: "SidewalkId"))
@@ -1869,6 +1903,7 @@ module Aws::IoTWireless
     SidewalkDevice.add_member(:device_profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceProfileId, name: "DeviceProfileId"))
     SidewalkDevice.add_member(:certificate_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DakCertificateId, name: "CertificateId"))
     SidewalkDevice.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: WirelessDeviceSidewalkStatus, name: "Status"))
+    SidewalkDevice.add_member(:positioning, ::Smithy::Schema::Shapes::MemberShape.new(target: SidewalkPositioning, name: "Positioning"))
     SidewalkDevice.type = Types::SidewalkDevice
     SidewalkDeviceMetadata.add_member(:rssi, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Rssi"))
     SidewalkDeviceMetadata.add_member(:battery_level, ::Smithy::Schema::Shapes::MemberShape.new(target: BatteryLevel, name: "BatteryLevel"))
@@ -1883,6 +1918,7 @@ module Aws::IoTWireless
     SidewalkGetDeviceProfile.type = Types::SidewalkGetDeviceProfile
     SidewalkGetStartImportInfo.add_member(:device_creation_file_list, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceCreationFileList, name: "DeviceCreationFileList"))
     SidewalkGetStartImportInfo.add_member(:role, ::Smithy::Schema::Shapes::MemberShape.new(target: Role, name: "Role"))
+    SidewalkGetStartImportInfo.add_member(:positioning, ::Smithy::Schema::Shapes::MemberShape.new(target: SidewalkPositioning, name: "Positioning"))
     SidewalkGetStartImportInfo.type = Types::SidewalkGetStartImportInfo
     SidewalkListDevice.add_member(:amazon_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonId, name: "AmazonId"))
     SidewalkListDevice.add_member(:sidewalk_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SidewalkId, name: "SidewalkId"))
@@ -1890,7 +1926,12 @@ module Aws::IoTWireless
     SidewalkListDevice.add_member(:device_certificates, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceCertificateList, name: "DeviceCertificates"))
     SidewalkListDevice.add_member(:device_profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceProfileId, name: "DeviceProfileId"))
     SidewalkListDevice.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: WirelessDeviceSidewalkStatus, name: "Status"))
+    SidewalkListDevice.add_member(:positioning, ::Smithy::Schema::Shapes::MemberShape.new(target: SidewalkPositioning, name: "Positioning"))
     SidewalkListDevice.type = Types::SidewalkListDevice
+    SidewalkListDevicesForImportInfo.add_member(:positioning, ::Smithy::Schema::Shapes::MemberShape.new(target: SidewalkPositioning, name: "Positioning"))
+    SidewalkListDevicesForImportInfo.type = Types::SidewalkListDevicesForImportInfo
+    SidewalkPositioning.add_member(:destination_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DestinationName, name: "DestinationName"))
+    SidewalkPositioning.type = Types::SidewalkPositioning
     SidewalkResourceTypeEventConfiguration.add_member(:wireless_device_event_topic, ::Smithy::Schema::Shapes::MemberShape.new(target: EventNotificationTopicStatus, name: "WirelessDeviceEventTopic"))
     SidewalkResourceTypeEventConfiguration.type = Types::SidewalkResourceTypeEventConfiguration
     SidewalkSendDataToDevice.add_member(:seq, ::Smithy::Schema::Shapes::MemberShape.new(target: Seq, name: "Seq"))
@@ -1898,14 +1939,18 @@ module Aws::IoTWireless
     SidewalkSendDataToDevice.add_member(:ack_mode_retry_duration_secs, ::Smithy::Schema::Shapes::MemberShape.new(target: AckModeRetryDurationSecs, name: "AckModeRetryDurationSecs"))
     SidewalkSendDataToDevice.type = Types::SidewalkSendDataToDevice
     SidewalkSingleStartImportInfo.add_member(:sidewalk_manufacturing_sn, ::Smithy::Schema::Shapes::MemberShape.new(target: SidewalkManufacturingSn, name: "SidewalkManufacturingSn"))
+    SidewalkSingleStartImportInfo.add_member(:positioning, ::Smithy::Schema::Shapes::MemberShape.new(target: SidewalkPositioning, name: "Positioning"))
     SidewalkSingleStartImportInfo.type = Types::SidewalkSingleStartImportInfo
     SidewalkStartImportInfo.add_member(:device_creation_file, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceCreationFile, name: "DeviceCreationFile"))
     SidewalkStartImportInfo.add_member(:role, ::Smithy::Schema::Shapes::MemberShape.new(target: Role, name: "Role"))
+    SidewalkStartImportInfo.add_member(:positioning, ::Smithy::Schema::Shapes::MemberShape.new(target: SidewalkPositioning, name: "Positioning"))
     SidewalkStartImportInfo.type = Types::SidewalkStartImportInfo
     SidewalkUpdateAccount.add_member(:app_server_private_key, ::Smithy::Schema::Shapes::MemberShape.new(target: AppServerPrivateKey, name: "AppServerPrivateKey"))
     SidewalkUpdateAccount.type = Types::SidewalkUpdateAccount
     SidewalkUpdateImportInfo.add_member(:device_creation_file, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceCreationFile, name: "DeviceCreationFile"))
     SidewalkUpdateImportInfo.type = Types::SidewalkUpdateImportInfo
+    SidewalkUpdateWirelessDevice.add_member(:positioning, ::Smithy::Schema::Shapes::MemberShape.new(target: SidewalkPositioning, name: "Positioning"))
+    SidewalkUpdateWirelessDevice.type = Types::SidewalkUpdateWirelessDevice
     SigningAlg.add_member(:ed25519, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Ed25519", traits: {"smithy.api#enumValue" => "Ed25519"}))
     SigningAlg.add_member(:p256r1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "P256r1", traits: {"smithy.api#enumValue" => "P256r1"}))
     StartBulkAssociateWirelessDeviceWithMulticastGroupRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: MulticastGroupId, name: "Id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -1930,6 +1975,7 @@ module Aws::IoTWireless
     StartSingleWirelessDeviceImportTaskRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
     StartSingleWirelessDeviceImportTaskRequest.add_member(:device_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceName, name: "DeviceName"))
     StartSingleWirelessDeviceImportTaskRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
+    StartSingleWirelessDeviceImportTaskRequest.add_member(:positioning, ::Smithy::Schema::Shapes::MemberShape.new(target: PositioningConfigStatus, name: "Positioning"))
     StartSingleWirelessDeviceImportTaskRequest.add_member(:sidewalk, ::Smithy::Schema::Shapes::MemberShape.new(target: SidewalkSingleStartImportInfo, name: "Sidewalk", traits: {"smithy.api#required" => {}}))
     StartSingleWirelessDeviceImportTaskRequest.type = Types::StartSingleWirelessDeviceImportTaskRequest
     StartSingleWirelessDeviceImportTaskResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportTaskId, name: "Id"))
@@ -1938,6 +1984,7 @@ module Aws::IoTWireless
     StartWirelessDeviceImportTaskRequest.add_member(:destination_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DestinationName, name: "DestinationName", traits: {"smithy.api#required" => {}}))
     StartWirelessDeviceImportTaskRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
     StartWirelessDeviceImportTaskRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
+    StartWirelessDeviceImportTaskRequest.add_member(:positioning, ::Smithy::Schema::Shapes::MemberShape.new(target: PositioningConfigStatus, name: "Positioning"))
     StartWirelessDeviceImportTaskRequest.add_member(:sidewalk, ::Smithy::Schema::Shapes::MemberShape.new(target: SidewalkStartImportInfo, name: "Sidewalk", traits: {"smithy.api#required" => {}}))
     StartWirelessDeviceImportTaskRequest.type = Types::StartWirelessDeviceImportTaskRequest
     StartWirelessDeviceImportTaskResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportTaskId, name: "Id"))
@@ -2125,6 +2172,7 @@ module Aws::IoTWireless
     UpdateWirelessDeviceRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "Description"))
     UpdateWirelessDeviceRequest.add_member(:lo_ra_wan, ::Smithy::Schema::Shapes::MemberShape.new(target: LoRaWANUpdateDevice, name: "LoRaWAN"))
     UpdateWirelessDeviceRequest.add_member(:positioning, ::Smithy::Schema::Shapes::MemberShape.new(target: PositioningConfigStatus, name: "Positioning"))
+    UpdateWirelessDeviceRequest.add_member(:sidewalk, ::Smithy::Schema::Shapes::MemberShape.new(target: SidewalkUpdateWirelessDevice, name: "Sidewalk"))
     UpdateWirelessDeviceRequest.type = Types::UpdateWirelessDeviceRequest
     UpdateWirelessDeviceResponse.type = Types::UpdateWirelessDeviceResponse
     UpdateWirelessGatewayRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: WirelessGatewayId, name: "Id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -2169,6 +2217,8 @@ module Aws::IoTWireless
     WiFiAccessPoint.add_member(:rss, ::Smithy::Schema::Shapes::MemberShape.new(target: RSS, name: "Rss", traits: {"smithy.api#required" => {}}))
     WiFiAccessPoint.type = Types::WiFiAccessPoint
     WiFiAccessPoints.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WiFiAccessPoint, name: "member"))
+    WiFiCellular.add_member(:confidence_percent, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfidencePercent, name: "ConfidencePercent", traits: {"smithy.api#default" => 68}))
+    WiFiCellular.type = Types::WiFiCellular
     WirelessDeviceEvent.add_member(:join, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Join", traits: {"smithy.api#enumValue" => "Join"}))
     WirelessDeviceEvent.add_member(:rejoin, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Rejoin", traits: {"smithy.api#enumValue" => "Rejoin"}))
     WirelessDeviceEvent.add_member(:uplink_data, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Uplink_Data", traits: {"smithy.api#enumValue" => "Uplink_Data"}))
@@ -2187,6 +2237,7 @@ module Aws::IoTWireless
     WirelessDeviceImportTask.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportTaskId, name: "Id"))
     WirelessDeviceImportTask.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportTaskArn, name: "Arn"))
     WirelessDeviceImportTask.add_member(:destination_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DestinationName, name: "DestinationName"))
+    WirelessDeviceImportTask.add_member(:positioning, ::Smithy::Schema::Shapes::MemberShape.new(target: PositioningConfigStatus, name: "Positioning"))
     WirelessDeviceImportTask.add_member(:sidewalk, ::Smithy::Schema::Shapes::MemberShape.new(target: SidewalkGetStartImportInfo, name: "Sidewalk"))
     WirelessDeviceImportTask.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationTime, name: "CreationTime"))
     WirelessDeviceImportTask.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportTaskStatus, name: "Status"))
@@ -2218,6 +2269,7 @@ module Aws::IoTWireless
     WirelessDeviceStatistics.add_member(:fuota_device_status, ::Smithy::Schema::Shapes::MemberShape.new(target: FuotaDeviceStatus, name: "FuotaDeviceStatus"))
     WirelessDeviceStatistics.add_member(:multicast_device_status, ::Smithy::Schema::Shapes::MemberShape.new(target: MulticastDeviceStatus, name: "MulticastDeviceStatus"))
     WirelessDeviceStatistics.add_member(:mc_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: McGroupId, name: "McGroupId"))
+    WirelessDeviceStatistics.add_member(:positioning, ::Smithy::Schema::Shapes::MemberShape.new(target: PositioningConfigStatus, name: "Positioning"))
     WirelessDeviceStatistics.type = Types::WirelessDeviceStatistics
     WirelessDeviceStatisticsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WirelessDeviceStatistics, name: "member"))
     WirelessDeviceType.add_member(:sidewalk, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Sidewalk", traits: {"smithy.api#enumValue" => "Sidewalk"}))
@@ -2264,7 +2316,7 @@ module Aws::IoTWireless
       service.id = "com.amazonaws.iotwireless#iotwireless"
       service.name = "Iotwireless"
       service.version = "2020-11-22"
-      service.traits = {"aws.api#service" => {"sdkId" => "IoT Wireless", "arnNamespace" => "iotwireless", "cloudFormationName" => "IoTWireless", "cloudTrailEventSource" => "iotwireless.amazonaws.com", "docId" => "iotwireless-2020-11-22", "endpointPrefix" => "api.iotwireless"}, "aws.auth#sigv4" => {"name" => "iotwireless"}, "aws.protocols#restJson1" => {}, "smithy.api#title" => "AWS IoT Wireless"}
+      service.traits = {"aws.api#service" => {"sdkId" => "IoT Wireless", "arnNamespace" => "iotwireless", "cloudFormationName" => "IoTWireless", "cloudTrailEventSource" => "iotwireless.amazonaws.com", "docId" => "iotwireless-2020-11-22", "endpointPrefix" => "api.iotwireless"}, "aws.auth#sigv4" => {"name" => "iotwireless"}, "aws.protocols#restJson1" => {}, "smithy.api#title" => "AWS IoT Wireless", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://api.iotwireless-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://api.iotwireless-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://api.iotwireless.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://api.iotwireless.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
       service.add_operation(:associate_aws_account_with_partner_account, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.iotwireless#AssociateAwsAccountWithPartnerAccount"
         operation.name = "AssociateAwsAccountWithPartnerAccount"

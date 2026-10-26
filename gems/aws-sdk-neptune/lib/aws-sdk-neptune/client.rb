@@ -146,18 +146,18 @@ module Aws::Neptune
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -398,14 +398,13 @@ module Aws::Neptune
     #                  <p>Must specify a valid DB cluster parameter group.</p>
     #               </li>
     #               <li>
-    #                  <p>If the source DB cluster parameter group is in the same Amazon Region as the copy,
-    #             specify a valid DB parameter group identifier, for example
+    #                  <p>Must specify a valid DB cluster parameter group identifier, for example
     #             <code>my-db-cluster-param-group</code>, or a valid ARN.</p>
     #               </li>
     #               <li>
-    #                  <p>If the source DB parameter group is in a different Amazon Region than the copy, specify a
-    #             valid DB cluster parameter group ARN, for example
-    #             <code>arn:aws:rds:us-east-1:123456789012:cluster-pg:custom-cluster-group1</code>.</p>
+    #                  <p>The source DB cluster parameter group must be in the same Amazon Region as the
+    #             copy. Neptune does not support cross-Region copying of parameter
+    #             groups.</p>
     #               </li>
     #            </ul>
     # @option params [String] :target_db_cluster_parameter_group_identifier
@@ -468,7 +467,7 @@ module Aws::Neptune
     # @param [Hash, Types::CopyDBClusterSnapshotMessage] params
     # @option params [String] :source_db_cluster_snapshot_identifier
     #   <p>The identifier of the DB cluster snapshot to copy. This parameter is not
-    #         case-sensitive. If the source DB cluster snapshot is in a different region or 
+    #         case-sensitive. If the source DB cluster snapshot is in a different region or
     #         owned by another account, specify the snapshot ARN.</p>
     #            <p>Constraints:</p>
     #            <ul>
@@ -499,7 +498,7 @@ module Aws::Neptune
     #            <p>Example: <code>my-cluster-snapshot2</code>
     #            </p>
     # @option params [String] :kms_key_id
-    #   <p>The Amazon Amazon KMS key ID for an encrypted DB cluster snapshot. The KMS key ID is the Amazon
+    #   <p>The Amazon KMS key ID for an encrypted DB cluster snapshot. The KMS key ID is the Amazon
     #         Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS encryption key.</p>
     #            <p>If you copy an encrypted DB cluster snapshot from your Amazon account, you can specify a
     #         value for <code>KmsKeyId</code> to encrypt the copy with a new KMS encryption key. If you
@@ -520,7 +519,7 @@ module Aws::Neptune
     # @option params [Array<Types::Tag>] :tags
     #   <p>The tags to assign to the new DB cluster snapshot copy.</p>
     # @option params [String] :source_region
-    #   <p>The source region of the snapshot. This is only needed when the shapshot is encrypted and in a different region.</p>
+    #   <p>The source region of the snapshot. This is only needed when the snapshot is encrypted and in a different region.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     source_db_cluster_snapshot_identifier: "String", # required
@@ -585,6 +584,11 @@ module Aws::Neptune
     #               <li>
     #                  <p>Must specify a valid DB parameter group identifier, for example
     #           <code>my-db-param-group</code>, or a valid ARN.</p>
+    #               </li>
+    #               <li>
+    #                  <p>The source DB parameter group must be in the same Amazon Region as the
+    #           copy. Neptune does not support cross-Region copying of parameter
+    #           groups.</p>
     #               </li>
     #            </ul>
     # @option params [String] :target_db_parameter_group_identifier
@@ -671,8 +675,7 @@ module Aws::Neptune
     #         the DB cluster that is created.</i>
     #            </p>
     # @option params [String] :database_name
-    #   <p>The name for your database of up to 64 alpha-numeric characters. If you do not provide a
-    #         name, Amazon Neptune will not create a database in the DB cluster you are creating.</p>
+    #   <p>Not supported by Neptune.</p>
     # @option params [String] :db_cluster_identifier
     #   <p>The DB cluster identifier. This parameter is stored as a lowercase string.</p>
     #            <p>Constraints:</p>
@@ -836,8 +839,28 @@ module Aws::Neptune
     #                  <p>Neptune I/O-Optimized storage is only available starting with engine release 1.3.0.0.</p>
     #               </li>
     #            </ul>
+    # @option params [String] :network_type
+    #   <p>The network type of the DB cluster.</p>
+    #            <p>Valid Values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <b>
+    #                        <code>IPV4</code>
+    #                     </b>   –  
+    #           ( <i>the default</i> ) The DB cluster uses only IPv4 addresses for communication.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <b>
+    #                        <code>DUAL</code>
+    #                     </b>   –  
+    #             The DB cluster uses both IPv4 and IPv6 addresses for communication. The DB subnet group
+    #             associated with the cluster must support IPv6.</p>
+    #               </li>
+    #            </ul>
     # @option params [String] :source_region
-    #   <p>The source region of the snapshot. This is only needed when the shapshot is encrypted and in a different region.</p>
+    #   <p>The source region of the snapshot. This is only needed when the snapshot is encrypted and in a different region.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     availability_zones: ["String"],
@@ -876,6 +899,7 @@ module Aws::Neptune
     #     },
     #     global_cluster_identifier: "GlobalClusterIdentifier",
     #     storage_type: "String",
+    #     network_type: "String",
     #     source_region: "String"
     #   }
     #   options = {}
@@ -955,7 +979,8 @@ module Aws::Neptune
     #         backup_retention_period: 1,
     #         storage_type: "String",
     #         allocated_storage: 1,
-    #         iops: 1
+    #         iops: 1,
+    #         network_type: "String"
     #       },
     #       deletion_protection: false,
     #       cross_account_clone: false,
@@ -966,7 +991,8 @@ module Aws::Neptune
     #       },
     #       global_cluster_identifier: "GlobalClusterIdentifier",
     #       io_optimized_next_allowed_modification_time: Time.now,
-    #       storage_type: "String"
+    #       storage_type: "String",
+    #       network_type: "String"
     #     }
     #   }
     # @return [Types::CreateDBClusterResult]
@@ -1312,12 +1338,12 @@ module Aws::Neptune
     #            </p>
     # @option params [Boolean] :publicly_accessible
     #   <p>Indicates whether the DB instance is publicly accessible.</p>
-    #            <p>When the DB instance is publicly accessible and you connect from outside of the DB instance's virtual private 
-    #         cloud (VPC), its Domain Name System (DNS) endpoint resolves to the public IP address. When you connect from within 
-    #         the same VPC as the DB instance, the endpoint resolves to the private IP address. Access to the DB instance is 
-    #         ultimately controlled by the security group it uses. That public access isn't permitted if the security group assigned 
+    #            <p>When the DB instance is publicly accessible and you connect from outside of the DB instance's virtual private
+    #         cloud (VPC), its Domain Name System (DNS) endpoint resolves to the public IP address. When you connect from within
+    #         the same VPC as the DB instance, the endpoint resolves to the private IP address. Access to the DB instance is
+    #         ultimately controlled by the security group it uses. That public access isn't permitted if the security group assigned
     #         to the DB cluster doesn't permit it.</p>
-    #            <p>When the DB instance isn't publicly accessible, it is an internal DB instance with a DNS name that resolves to a 
+    #            <p>When the DB instance isn't publicly accessible, it is an internal DB instance with a DNS name that resolves to a
     #         private IP address.</p>
     # @option params [Array<Types::Tag>] :tags
     #   <p>The tags to assign to the new instance.</p>
@@ -1341,7 +1367,7 @@ module Aws::Neptune
     #            <p>The KMS key identifier is the Amazon Resource Name (ARN) for the KMS encryption key. If
     #         you are creating a DB instance with the same Amazon account that owns the KMS encryption key used
     #         to encrypt the new DB instance, then you can use the KMS key alias instead of the ARN for the
-    #         KM encryption key.</p>
+    #         KMS encryption key.</p>
     #            <p>Not applicable. The KMS key identifier is managed by the DB cluster. For more information,
     #         see <a>CreateDBCluster</a>.</p>
     #            <p>If the <code>StorageEncrypted</code> parameter is true, and you do not specify a value for
@@ -1502,7 +1528,8 @@ module Aws::Neptune
     #             subnet_status: "String"
     #           }
     #         ],
-    #         db_subnet_group_arn: "String"
+    #         db_subnet_group_arn: "String",
+    #         supported_network_types: ["String"]
     #       },
     #       preferred_maintenance_window: "String",
     #       pending_modified_values: {
@@ -1577,7 +1604,8 @@ module Aws::Neptune
     #       performance_insights_enabled: false,
     #       performance_insights_kms_key_id: "String",
     #       enabled_cloudwatch_logs_exports: ["String"],
-    #       deletion_protection: false
+    #       deletion_protection: false,
+    #       network_type: "String"
     #     }
     #   }
     # @return [Types::CreateDBInstanceResult]
@@ -1708,7 +1736,8 @@ module Aws::Neptune
     #           subnet_status: "String"
     #         }
     #       ],
-    #       db_subnet_group_arn: "String"
+    #       db_subnet_group_arn: "String",
+    #       supported_network_types: ["String"]
     #     }
     #   }
     # @return [Types::CreateDBSubnetGroupResult]
@@ -1781,7 +1810,7 @@ module Aws::Neptune
     # @option params [Boolean] :enabled
     #   <p> A Boolean value; set to <b>true</b> to activate the
     #         subscription, set to <b>false</b> to create the subscription but not
-    #         active it.</p>
+    #         activate it.</p>
     # @option params [Array<Types::Tag>] :tags
     #   <p>The tags to be applied to the new event subscription.</p>
     # @example Request syntax with placeholder values
@@ -1850,6 +1879,11 @@ module Aws::Neptune
     #   <p>The deletion protection setting for the new global database.
     #         The global database can't be deleted when deletion protection is
     #         enabled.</p>
+    # @option params [String] :database_name
+    #   <p>The name for the new global database (up to 64 alpha-numeric
+    #         characters).</p>
+    # @option params [Array<Types::Tag>] :tags
+    #   <p>Tags to assign to the global cluster.</p>
     # @option params [Boolean] :storage_encrypted
     #   <p>The storage encryption setting for the new global database
     #         cluster.</p>
@@ -1860,6 +1894,13 @@ module Aws::Neptune
     #     engine: "String",
     #     engine_version: "String",
     #     deletion_protection: false,
+    #     database_name: "String",
+    #     tags: [
+    #       {
+    #         key: "String",
+    #         value: "String"
+    #       }
+    #     ],
     #     storage_encrypted: false
     #   }
     #   options = {}
@@ -1874,6 +1915,7 @@ module Aws::Neptune
     #       status: "String",
     #       engine: "String",
     #       engine_version: "String",
+    #       database_name: "String",
     #       storage_encrypted: false,
     #       deletion_protection: false,
     #       global_cluster_members: [
@@ -1888,7 +1930,13 @@ module Aws::Neptune
     #         from_db_cluster_arn: "String",
     #         to_db_cluster_arn: "String",
     #         is_data_loss_allowed: false
-    #       }
+    #       },
+    #       tag_list: [
+    #         {
+    #           key: "String",
+    #           value: "String"
+    #         }
+    #       ]
     #     }
     #   }
     # @return [Types::CreateGlobalClusterResult]
@@ -1928,7 +1976,7 @@ module Aws::Neptune
     #   <p> The DB cluster snapshot identifier of the new DB cluster snapshot created when
     #         <code>SkipFinalSnapshot</code> is set to <code>false</code>.</p>
     #            <note>
-    #               <p> Specifying this parameter and also setting the <code>SkipFinalShapshot</code> parameter
+    #               <p> Specifying this parameter and also setting the <code>SkipFinalSnapshot</code> parameter
     #           to true results in an error.</p>
     #            </note>
     #            <p>Constraints:</p>
@@ -2026,7 +2074,8 @@ module Aws::Neptune
     #         backup_retention_period: 1,
     #         storage_type: "String",
     #         allocated_storage: 1,
-    #         iops: 1
+    #         iops: 1,
+    #         network_type: "String"
     #       },
     #       deletion_protection: false,
     #       cross_account_clone: false,
@@ -2037,7 +2086,8 @@ module Aws::Neptune
     #       },
     #       global_cluster_identifier: "GlobalClusterIdentifier",
     #       io_optimized_next_allowed_modification_time: Time.now,
-    #       storage_type: "String"
+    #       storage_type: "String",
+    #       network_type: "String"
     #     }
     #   }
     # @return [Types::DeleteDBClusterResult]
@@ -2200,7 +2250,7 @@ module Aws::Neptune
     #   <p> The DBSnapshotIdentifier of the new DBSnapshot created when SkipFinalSnapshot is set to
     #         <code>false</code>.</p>
     #            <note>
-    #               <p>Specifying this parameter and also setting the SkipFinalShapshot parameter to true
+    #               <p>Specifying this parameter and also setting the SkipFinalSnapshot parameter to true
     #           results in an error.</p>
     #            </note>
     #            <p>Constraints:</p>
@@ -2278,7 +2328,8 @@ module Aws::Neptune
     #             subnet_status: "String"
     #           }
     #         ],
-    #         db_subnet_group_arn: "String"
+    #         db_subnet_group_arn: "String",
+    #         supported_network_types: ["String"]
     #       },
     #       preferred_maintenance_window: "String",
     #       pending_modified_values: {
@@ -2353,7 +2404,8 @@ module Aws::Neptune
     #       performance_insights_enabled: false,
     #       performance_insights_kms_key_id: "String",
     #       enabled_cloudwatch_logs_exports: ["String"],
-    #       deletion_protection: false
+    #       deletion_protection: false,
+    #       network_type: "String"
     #     }
     #   }
     # @return [Types::DeleteDBInstanceResult]
@@ -2476,6 +2528,7 @@ module Aws::Neptune
     #       status: "String",
     #       engine: "String",
     #       engine_version: "String",
+    #       database_name: "String",
     #       storage_encrypted: false,
     #       deletion_protection: false,
     #       global_cluster_members: [
@@ -2490,7 +2543,13 @@ module Aws::Neptune
     #         from_db_cluster_arn: "String",
     #         to_db_cluster_arn: "String",
     #         is_data_loss_allowed: false
-    #       }
+    #       },
+    #       tag_list: [
+    #         {
+    #           key: "String",
+    #           value: "String"
+    #         }
+    #       ]
     #     }
     #   }
     # @return [Types::DeleteGlobalClusterResult]
@@ -3010,7 +3069,8 @@ module Aws::Neptune
     #           backup_retention_period: 1,
     #           storage_type: "String",
     #           allocated_storage: 1,
-    #           iops: 1
+    #           iops: 1,
+    #           network_type: "String"
     #         },
     #         deletion_protection: false,
     #         cross_account_clone: false,
@@ -3021,7 +3081,8 @@ module Aws::Neptune
     #         },
     #         global_cluster_identifier: "GlobalClusterIdentifier",
     #         io_optimized_next_allowed_modification_time: Time.now,
-    #         storage_type: "String"
+    #         storage_type: "String",
+    #         network_type: "String"
     #       }
     #     ]
     #   }
@@ -3249,7 +3310,8 @@ module Aws::Neptune
     #               subnet_status: "String"
     #             }
     #           ],
-    #           db_subnet_group_arn: "String"
+    #           db_subnet_group_arn: "String",
+    #           supported_network_types: ["String"]
     #         },
     #         preferred_maintenance_window: "String",
     #         pending_modified_values: {
@@ -3324,7 +3386,8 @@ module Aws::Neptune
     #         performance_insights_enabled: false,
     #         performance_insights_kms_key_id: "String",
     #         enabled_cloudwatch_logs_exports: ["String"],
-    #         deletion_protection: false
+    #         deletion_protection: false,
+    #         network_type: "String"
     #       }
     #     ]
     #   }
@@ -3509,7 +3572,8 @@ module Aws::Neptune
     #             subnet_status: "String"
     #           }
     #         ],
-    #         db_subnet_group_arn: "String"
+    #         db_subnet_group_arn: "String",
+    #         supported_network_types: ["String"]
     #       }
     #     ]
     #   }
@@ -3878,6 +3942,7 @@ module Aws::Neptune
     #         status: "String",
     #         engine: "String",
     #         engine_version: "String",
+    #         database_name: "String",
     #         storage_encrypted: false,
     #         deletion_protection: false,
     #         global_cluster_members: [
@@ -3892,7 +3957,13 @@ module Aws::Neptune
     #           from_db_cluster_arn: "String",
     #           to_db_cluster_arn: "String",
     #           is_data_loss_allowed: false
-    #         }
+    #         },
+    #         tag_list: [
+    #           {
+    #             key: "String",
+    #             value: "String"
+    #           }
+    #         ]
     #       }
     #     ]
     #   }
@@ -3977,7 +4048,8 @@ module Aws::Neptune
     #         max_iops_per_db_instance: 1,
     #         min_iops_per_gib: 1.0,
     #         max_iops_per_gib: 1.0,
-    #         supports_global_databases: false
+    #         supports_global_databases: false,
+    #         supported_network_types: ["String"]
     #       }
     #     ],
     #     marker: "String"
@@ -4215,7 +4287,8 @@ module Aws::Neptune
     #         backup_retention_period: 1,
     #         storage_type: "String",
     #         allocated_storage: 1,
-    #         iops: 1
+    #         iops: 1,
+    #         network_type: "String"
     #       },
     #       deletion_protection: false,
     #       cross_account_clone: false,
@@ -4226,7 +4299,8 @@ module Aws::Neptune
     #       },
     #       global_cluster_identifier: "GlobalClusterIdentifier",
     #       io_optimized_next_allowed_modification_time: Time.now,
-    #       storage_type: "String"
+    #       storage_type: "String",
+    #       network_type: "String"
     #     }
     #   }
     # @return [Types::FailoverDBClusterResult]
@@ -4252,7 +4326,7 @@ module Aws::Neptune
     # @param [Hash, Types::FailoverGlobalClusterMessage] params
     # @option params [String] :global_cluster_identifier
     #   <p>Identifier of the Neptune global database that should be failed over.
-    #         The identifier is the unique key assigned by the user when the Neptune 
+    #         The identifier is the unique key assigned by the user when the Neptune
     #         global database was created. In other words, it's the name of the global
     #         database that you want to fail over.</p>
     #            <p>Constraints: Must match the identifier of an existing Neptune global
@@ -4265,10 +4339,10 @@ module Aws::Neptune
     #         Allowing data loss triggers a global failover operation.</p>
     #            <p>If you don't specify <code>AllowDataLoss</code>, the global database cluster operation
     #         defaults to a switchover.</p>
-    #            <p>Constraints:Can't be specified together with the <code>Switchover</code> parameter.</p>
+    #            <p>Constraints: Can't be specified together with the <code>Switchover</code> parameter.</p>
     # @option params [Boolean] :switchover
     #   <p>Specifies whether to switch over this global database cluster.</p>
-    #            <p>Constraints:Can't be specified together with the <code>AllowDataLoss</code> parameter.</p>
+    #            <p>Constraints: Can't be specified together with the <code>AllowDataLoss</code> parameter.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     global_cluster_identifier: "GlobalClusterIdentifier", # required
@@ -4288,6 +4362,7 @@ module Aws::Neptune
     #       status: "String",
     #       engine: "String",
     #       engine_version: "String",
+    #       database_name: "String",
     #       storage_encrypted: false,
     #       deletion_protection: false,
     #       global_cluster_members: [
@@ -4302,7 +4377,13 @@ module Aws::Neptune
     #         from_db_cluster_arn: "String",
     #         to_db_cluster_arn: "String",
     #         is_data_loss_allowed: false
-    #       }
+    #       },
+    #       tag_list: [
+    #         {
+    #           key: "String",
+    #           value: "String"
+    #         }
+    #       ]
     #     }
     #   }
     # @return [Types::FailoverGlobalClusterResult]
@@ -4519,6 +4600,26 @@ module Aws::Neptune
     #                  <p>Neptune I/O-Optimized storage is only available starting with engine release 1.3.0.0.</p>
     #               </li>
     #            </ul>
+    # @option params [String] :network_type
+    #   <p>The network type of the DB cluster.</p>
+    #            <p>Valid Values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <b>
+    #                        <code>IPV4</code>
+    #                     </b>   –  
+    #           The DB cluster uses only IPv4 addresses for communication.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <b>
+    #                        <code>DUAL</code>
+    #                     </b>   –  
+    #             The DB cluster uses both IPv4 and IPv6 addresses for communication. The DB subnet group
+    #             associated with the cluster must support IPv6.</p>
+    #               </li>
+    #            </ul>
     # @example Request syntax with placeholder values
     #   params = {
     #     db_cluster_identifier: "String", # required
@@ -4546,7 +4647,8 @@ module Aws::Neptune
     #       min_capacity: 1.0,
     #       max_capacity: 1.0
     #     },
-    #     storage_type: "String"
+    #     storage_type: "String",
+    #     network_type: "String"
     #   }
     #   options = {}
     #   response = client.modify_db_cluster(params, options)
@@ -4625,7 +4727,8 @@ module Aws::Neptune
     #         backup_retention_period: 1,
     #         storage_type: "String",
     #         allocated_storage: 1,
-    #         iops: 1
+    #         iops: 1,
+    #         network_type: "String"
     #       },
     #       deletion_protection: false,
     #       cross_account_clone: false,
@@ -4636,7 +4739,8 @@ module Aws::Neptune
     #       },
     #       global_cluster_identifier: "GlobalClusterIdentifier",
     #       io_optimized_next_allowed_modification_time: Time.now,
-    #       storage_type: "String"
+    #       storage_type: "String",
+    #       network_type: "String"
     #     }
     #   }
     # @return [Types::ModifyDBClusterResult]
@@ -4996,12 +5100,12 @@ module Aws::Neptune
     #            </p>
     # @option params [Boolean] :publicly_accessible
     #   <p>Indicates whether the DB instance is publicly accessible.</p>
-    #            <p>When the DB instance is publicly accessible and you connect from outside of the DB instance's virtual private 
-    #         cloud (VPC), its Domain Name System (DNS) endpoint resolves to the public IP address. When you connect from within 
-    #         the same VPC as the DB instance, the endpoint resolves to the private IP address. Access to the DB instance is 
-    #         ultimately controlled by the security group it uses. That public access isn't permitted if the security group assigned 
+    #            <p>When the DB instance is publicly accessible and you connect from outside of the DB instance's virtual private
+    #         cloud (VPC), its Domain Name System (DNS) endpoint resolves to the public IP address. When you connect from within
+    #         the same VPC as the DB instance, the endpoint resolves to the private IP address. Access to the DB instance is
+    #         ultimately controlled by the security group it uses. That public access isn't permitted if the security group assigned
     #         to the DB cluster doesn't permit it.</p>
-    #            <p>When the DB instance isn't publicly accessible, it is an internal DB instance with a DNS name that resolves to a 
+    #            <p>When the DB instance isn't publicly accessible, it is an internal DB instance with a DNS name that resolves to a
     #         private IP address.</p>
     # @option params [String] :monitoring_role_arn
     #   <p>The ARN for the IAM role that permits Neptune to send enhanced monitoring metrics to
@@ -5136,7 +5240,8 @@ module Aws::Neptune
     #             subnet_status: "String"
     #           }
     #         ],
-    #         db_subnet_group_arn: "String"
+    #         db_subnet_group_arn: "String",
+    #         supported_network_types: ["String"]
     #       },
     #       preferred_maintenance_window: "String",
     #       pending_modified_values: {
@@ -5211,7 +5316,8 @@ module Aws::Neptune
     #       performance_insights_enabled: false,
     #       performance_insights_kms_key_id: "String",
     #       enabled_cloudwatch_logs_exports: ["String"],
-    #       deletion_protection: false
+    #       deletion_protection: false,
+    #       network_type: "String"
     #     }
     #   }
     # @return [Types::ModifyDBInstanceResult]
@@ -5329,7 +5435,8 @@ module Aws::Neptune
     #           subnet_status: "String"
     #         }
     #       ],
-    #       db_subnet_group_arn: "String"
+    #       db_subnet_group_arn: "String",
+    #       supported_network_types: ["String"]
     #     }
     #   }
     # @return [Types::ModifyDBSubnetGroupResult]
@@ -5357,7 +5464,7 @@ module Aws::Neptune
     # @option params [Array<String>] :event_categories
     #   <p> A list of event categories for a SourceType that you want to subscribe to. You can see a
     #         list of the categories for a given SourceType
-    #         
+    #
     #         by using the <b>DescribeEventCategories</b> action.</p>
     # @option params [Boolean] :enabled
     #   <p> A Boolean value; set to <b>true</b> to activate the
@@ -5456,6 +5563,7 @@ module Aws::Neptune
     #       status: "String",
     #       engine: "String",
     #       engine_version: "String",
+    #       database_name: "String",
     #       storage_encrypted: false,
     #       deletion_protection: false,
     #       global_cluster_members: [
@@ -5470,7 +5578,13 @@ module Aws::Neptune
     #         from_db_cluster_arn: "String",
     #         to_db_cluster_arn: "String",
     #         is_data_loss_allowed: false
-    #       }
+    #       },
+    #       tag_list: [
+    #         {
+    #           key: "String",
+    #           value: "String"
+    #         }
+    #       ]
     #     }
     #   }
     # @return [Types::ModifyGlobalClusterResult]
@@ -5564,7 +5678,8 @@ module Aws::Neptune
     #         backup_retention_period: 1,
     #         storage_type: "String",
     #         allocated_storage: 1,
-    #         iops: 1
+    #         iops: 1,
+    #         network_type: "String"
     #       },
     #       deletion_protection: false,
     #       cross_account_clone: false,
@@ -5575,7 +5690,8 @@ module Aws::Neptune
     #       },
     #       global_cluster_identifier: "GlobalClusterIdentifier",
     #       io_optimized_next_allowed_modification_time: Time.now,
-    #       storage_type: "String"
+    #       storage_type: "String",
+    #       network_type: "String"
     #     }
     #   }
     # @return [Types::PromoteReadReplicaDBClusterResult]
@@ -5661,7 +5777,8 @@ module Aws::Neptune
     #             subnet_status: "String"
     #           }
     #         ],
-    #         db_subnet_group_arn: "String"
+    #         db_subnet_group_arn: "String",
+    #         supported_network_types: ["String"]
     #       },
     #       preferred_maintenance_window: "String",
     #       pending_modified_values: {
@@ -5736,7 +5853,8 @@ module Aws::Neptune
     #       performance_insights_enabled: false,
     #       performance_insights_kms_key_id: "String",
     #       enabled_cloudwatch_logs_exports: ["String"],
-    #       deletion_protection: false
+    #       deletion_protection: false,
+    #       network_type: "String"
     #     }
     #   }
     # @return [Types::RebootDBInstanceResult]
@@ -5747,7 +5865,7 @@ module Aws::Neptune
 
     # <p>Detaches a Neptune DB cluster from a Neptune global database. A secondary
     #       cluster becomes a normal standalone cluster with read-write capability
-    #       instead of being read-only, and no longer receives data from a the
+    #       instead of being read-only, and no longer receives data from the
     #       primary cluster.</p>
     # @param [Hash, Types::RemoveFromGlobalClusterMessage] params
     # @option params [String] :global_cluster_identifier
@@ -5773,6 +5891,7 @@ module Aws::Neptune
     #       status: "String",
     #       engine: "String",
     #       engine_version: "String",
+    #       database_name: "String",
     #       storage_encrypted: false,
     #       deletion_protection: false,
     #       global_cluster_members: [
@@ -5787,7 +5906,13 @@ module Aws::Neptune
     #         from_db_cluster_arn: "String",
     #         to_db_cluster_arn: "String",
     #         is_data_loss_allowed: false
-    #       }
+    #       },
+    #       tag_list: [
+    #         {
+    #           key: "String",
+    #           value: "String"
+    #         }
+    #       ]
     #     }
     #   }
     # @return [Types::RemoveFromGlobalClusterResult]
@@ -6114,6 +6239,26 @@ module Aws::Neptune
     #            </p>
     #            <p>Default: <code>standard</code>
     #            </p>
+    # @option params [String] :network_type
+    #   <p>The network type of the DB cluster.</p>
+    #            <p>Valid Values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <b>
+    #                        <code>IPV4</code>
+    #                     </b>   –  
+    #           ( <i>the default</i> ) The DB cluster uses only IPv4 addresses for communication.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <b>
+    #                        <code>DUAL</code>
+    #                     </b>   –  
+    #             The DB cluster uses both IPv4 and IPv6 addresses for communication. The DB subnet group
+    #             associated with the cluster must support IPv6.</p>
+    #               </li>
+    #            </ul>
     # @example Request syntax with placeholder values
     #   params = {
     #     availability_zones: ["String"],
@@ -6142,7 +6287,8 @@ module Aws::Neptune
     #       min_capacity: 1.0,
     #       max_capacity: 1.0
     #     },
-    #     storage_type: "String"
+    #     storage_type: "String",
+    #     network_type: "String"
     #   }
     #   options = {}
     #   response = client.restore_db_cluster_from_snapshot(params, options)
@@ -6221,7 +6367,8 @@ module Aws::Neptune
     #         backup_retention_period: 1,
     #         storage_type: "String",
     #         allocated_storage: 1,
-    #         iops: 1
+    #         iops: 1,
+    #         network_type: "String"
     #       },
     #       deletion_protection: false,
     #       cross_account_clone: false,
@@ -6232,7 +6379,8 @@ module Aws::Neptune
     #       },
     #       global_cluster_identifier: "GlobalClusterIdentifier",
     #       io_optimized_next_allowed_modification_time: Time.now,
-    #       storage_type: "String"
+    #       storage_type: "String",
+    #       network_type: "String"
     #     }
     #   }
     # @return [Types::RestoreDBClusterFromSnapshotResult]
@@ -6395,6 +6543,26 @@ module Aws::Neptune
     #            </p>
     #            <p>Default: <code>standard</code>
     #            </p>
+    # @option params [String] :network_type
+    #   <p>The network type of the DB cluster.</p>
+    #            <p>Valid Values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <b>
+    #                        <code>IPV4</code>
+    #                     </b>   –  
+    #           ( <i>the default</i> ) The DB cluster uses only IPv4 addresses for communication.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <b>
+    #                        <code>DUAL</code>
+    #                     </b>   –  
+    #             The DB cluster uses both IPv4 and IPv6 addresses for communication. The DB subnet group
+    #             associated with the cluster must support IPv6.</p>
+    #               </li>
+    #            </ul>
     # @example Request syntax with placeholder values
     #   params = {
     #     db_cluster_identifier: "String", # required
@@ -6421,7 +6589,8 @@ module Aws::Neptune
     #       min_capacity: 1.0,
     #       max_capacity: 1.0
     #     },
-    #     storage_type: "String"
+    #     storage_type: "String",
+    #     network_type: "String"
     #   }
     #   options = {}
     #   response = client.restore_db_cluster_to_point_in_time(params, options)
@@ -6500,7 +6669,8 @@ module Aws::Neptune
     #         backup_retention_period: 1,
     #         storage_type: "String",
     #         allocated_storage: 1,
-    #         iops: 1
+    #         iops: 1,
+    #         network_type: "String"
     #       },
     #       deletion_protection: false,
     #       cross_account_clone: false,
@@ -6511,7 +6681,8 @@ module Aws::Neptune
     #       },
     #       global_cluster_identifier: "GlobalClusterIdentifier",
     #       io_optimized_next_allowed_modification_time: Time.now,
-    #       storage_type: "String"
+    #       storage_type: "String",
+    #       network_type: "String"
     #     }
     #   }
     # @return [Types::RestoreDBClusterToPointInTimeResult]
@@ -6607,7 +6778,8 @@ module Aws::Neptune
     #         backup_retention_period: 1,
     #         storage_type: "String",
     #         allocated_storage: 1,
-    #         iops: 1
+    #         iops: 1,
+    #         network_type: "String"
     #       },
     #       deletion_protection: false,
     #       cross_account_clone: false,
@@ -6618,7 +6790,8 @@ module Aws::Neptune
     #       },
     #       global_cluster_identifier: "GlobalClusterIdentifier",
     #       io_optimized_next_allowed_modification_time: Time.now,
-    #       storage_type: "String"
+    #       storage_type: "String",
+    #       network_type: "String"
     #     }
     #   }
     # @return [Types::StartDBClusterResult]
@@ -6717,7 +6890,8 @@ module Aws::Neptune
     #         backup_retention_period: 1,
     #         storage_type: "String",
     #         allocated_storage: 1,
-    #         iops: 1
+    #         iops: 1,
+    #         network_type: "String"
     #       },
     #       deletion_protection: false,
     #       cross_account_clone: false,
@@ -6728,7 +6902,8 @@ module Aws::Neptune
     #       },
     #       global_cluster_identifier: "GlobalClusterIdentifier",
     #       io_optimized_next_allowed_modification_time: Time.now,
-    #       storage_type: "String"
+    #       storage_type: "String",
+    #       network_type: "String"
     #     }
     #   }
     # @return [Types::StopDBClusterResult]
@@ -6772,6 +6947,7 @@ module Aws::Neptune
     #       status: "String",
     #       engine: "String",
     #       engine_version: "String",
+    #       database_name: "String",
     #       storage_encrypted: false,
     #       deletion_protection: false,
     #       global_cluster_members: [
@@ -6786,7 +6962,13 @@ module Aws::Neptune
     #         from_db_cluster_arn: "String",
     #         to_db_cluster_arn: "String",
     #         is_data_loss_allowed: false
-    #       }
+    #       },
+    #       tag_list: [
+    #         {
+    #           key: "String",
+    #           value: "String"
+    #         }
+    #       ]
     #     }
     #   }
     # @return [Types::SwitchoverGlobalClusterResult]

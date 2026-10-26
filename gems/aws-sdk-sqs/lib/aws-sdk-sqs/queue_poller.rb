@@ -248,7 +248,7 @@ module Aws
       # poll request.
       #
       #     poller.before_request do |stats|
-      #       throw :stop_polling if stats.received_messages >= 100
+      #       throw :stop_polling if stats.received_message_count >= 100
       #     end
       #
       #     # at most 100 messages will be yielded

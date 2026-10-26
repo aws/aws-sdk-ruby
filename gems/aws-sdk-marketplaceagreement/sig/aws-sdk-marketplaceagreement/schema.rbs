@@ -3,59 +3,188 @@ module Aws::MarketplaceAgreement
     include Smithy::Schema::Shapes
 
     AWSAccountId: StringShape
+    AcceptAgreementCancellationRequestInput: StructureShape
+    AcceptAgreementCancellationRequestOutput: StructureShape
+    AcceptAgreementPaymentRequestInput: StructureShape
+    AcceptAgreementPaymentRequestOutput: StructureShape
+    AcceptAgreementRequestInput: StructureShape
+    AcceptAgreementRequestOutput: StructureShape
     AcceptedTerm: UnionShape
     AcceptedTermList: ListShape
     Acceptor: StructureShape
     AccessDeniedException: StructureShape
+    AccessDeniedExceptionReason: EnumShape
+    AgreementCancellationRequestCancellationReason: StringShape
+    AgreementCancellationRequestDescription: StringShape
+    AgreementCancellationRequestId: StringShape
+    AgreementCancellationRequestReasonCode: EnumShape
+    AgreementCancellationRequestRejectionReason: StringShape
+    AgreementCancellationRequestStatus: EnumShape
+    AgreementCancellationRequestStatusMessage: StringShape
+    AgreementCancellationRequestSummary: StructureShape
+    AgreementCancellationRequestSummaryList: ListShape
+    AgreementEntitlement: StructureShape
+    AgreementEntitlementList: ListShape
+    AgreementEntitlementStatus: EnumShape
+    AgreementEntitlementStatusReasonCode: EnumShape
+    AgreementId: StringShape
+    AgreementInvoiceLineItemGroupSummaries: ListShape
+    AgreementInvoiceLineItemGroupSummary: StructureShape
+    AgreementProposalId: StringShape
+    AgreementRequestId: StringShape
     AgreementResourceType: StringShape
     AgreementStatus: EnumShape
     AgreementType: StringShape
     AgreementViewSummary: StructureShape
     AgreementViewSummaryList: ListShape
+    AwsArn: StringShape
+    BatchCreateBillingAdjustmentError: StructureShape
+    BatchCreateBillingAdjustmentErrorList: ListShape
+    BatchCreateBillingAdjustmentItem: StructureShape
+    BatchCreateBillingAdjustmentItemList: ListShape
+    BatchCreateBillingAdjustmentRequestEntry: StructureShape
+    BatchCreateBillingAdjustmentRequestEntryList: ListShape
+    BatchCreateBillingAdjustmentRequestInput: StructureShape
+    BatchCreateBillingAdjustmentRequestOutput: StructureShape
+    BillingAdjustmentDescription: StringShape
+    BillingAdjustmentErrorCode: EnumShape
+    BillingAdjustmentReasonCode: EnumShape
+    BillingAdjustmentRequestId: StringShape
+    BillingAdjustmentStatus: EnumShape
+    BillingAdjustmentStatusMessage: StringShape
+    BillingAdjustmentSummary: StructureShape
+    BillingAdjustmentSummaryList: ListShape
     Boolean: BooleanShape
     BoundedString: StringShape
     ByolPricingTerm: StructureShape
+    CancelAgreementCancellationRequestInput: StructureShape
+    CancelAgreementCancellationRequestOutput: StructureShape
+    CancelAgreementInput: StructureShape
+    CancelAgreementOutput: StructureShape
+    CancelAgreementPaymentRequestInput: StructureShape
+    CancelAgreementPaymentRequestOutput: StructureShape
     Catalog: StringShape
+    Charge: StructureShape
+    ChargeId: StringShape
+    ChargePercentage: StringShape
+    ChargeRevision: IntegerShape
+    ChargeSummary: StructureShape
+    Charges: ListShape
+    ClientToken: StringShape
     ConfigurableUpfrontPricingTerm: StructureShape
     ConfigurableUpfrontPricingTermConfiguration: StructureShape
     ConfigurableUpfrontRateCardItem: StructureShape
     ConfigurableUpfrontRateCardList: ListShape
+    ConflictException: StructureShape
     Constraints: StructureShape
+    CreateAgreementRequestInput: StructureShape
+    CreateAgreementRequestOutput: StructureShape
     CurrencyCode: StringShape
+    DayDuration: StringShape
     DescribeAgreementInput: StructureShape
     DescribeAgreementOutput: StructureShape
     Dimension: StructureShape
     DimensionList: ListShape
     DocumentItem: StructureShape
     DocumentList: ListShape
+    EndTimeBehavior: StructureShape
+    EndTimeBehaviorReasonCode: EnumShape
+    EndTimeBehaviorType: EnumShape
+    Entitlement: StructureShape
+    EntitlementList: ListShape
+    EntitlementType: StringShape
     EstimatedCharges: StructureShape
+    EstimatedTaxes: StructureShape
     ExceptionMessage: StringShape
+    ExpectedCharge: StructureShape
+    ExpectedChargeList: ListShape
     Filter: StructureShape
     FilterList: ListShape
     FilterName: StringShape
     FilterValue: StringShape
     FilterValueList: ListShape
+    FixedPercentage: StructureShape
     FixedUpfrontPricingTerm: StructureShape
     FreeTrialPricingTerm: StructureShape
+    GetAgreementCancellationRequestInput: StructureShape
+    GetAgreementCancellationRequestOutput: StructureShape
+    GetAgreementEntitlementsInput: StructureShape
+    GetAgreementEntitlementsOutput: StructureShape
+    GetAgreementPaymentRequestInput: StructureShape
+    GetAgreementPaymentRequestOutput: StructureShape
     GetAgreementTermsInput: StructureShape
     GetAgreementTermsOutput: StructureShape
+    GetBillingAdjustmentRequestInput: StructureShape
+    GetBillingAdjustmentRequestOutput: StructureShape
     GrantItem: StructureShape
     GrantList: ListShape
+    ISO8601Duration: StringShape
+    Intent: EnumShape
     InternalServerException: StructureShape
+    InvoiceBillingPeriod: StructureShape
+    InvoiceId: StringShape
+    InvoiceType: EnumShape
+    InvoicingEntity: StructureShape
+    ItemizedCharge: StructureShape
+    ItemizedChargeList: ListShape
     LegalTerm: StructureShape
+    LineItemGroupBy: EnumShape
+    ListAgreementCancellationRequestsInput: StructureShape
+    ListAgreementCancellationRequestsOutput: StructureShape
+    ListAgreementChargesInput: StructureShape
+    ListAgreementChargesOutput: StructureShape
+    ListAgreementInvoiceLineItemsInput: StructureShape
+    ListAgreementInvoiceLineItemsOutput: StructureShape
+    ListAgreementPaymentRequestsInput: StructureShape
+    ListAgreementPaymentRequestsOutput: StructureShape
+    ListBillingAdjustmentRequestsInput: StructureShape
+    ListBillingAdjustmentRequestsOutput: StructureShape
     MaxResults: IntegerShape
+    NetPaymentTerm: StructureShape
     NextToken: StringShape
     OfferId: StringShape
+    OfferSetId: StringShape
+    OffsetDuration: StringShape
+    PartyType: StringShape
+    PaymentRequestApprovalStrategy: EnumShape
+    PaymentRequestDescription: StringShape
+    PaymentRequestId: StringShape
+    PaymentRequestName: StringShape
+    PaymentRequestRejectionReason: StringShape
+    PaymentRequestStatus: EnumShape
+    PaymentRequestStatusMessage: StringShape
+    PaymentRequestSummary: StructureShape
+    PaymentRequestSummaryList: ListShape
+    PaymentScheduleEntry: StructureShape
+    PaymentScheduleEntryList: ListShape
     PaymentScheduleTerm: StructureShape
+    PaymentScheduleTermTemplate: StructureShape
+    PercentageRange: StructureShape
+    PositiveAmountUpto8Decimals: StringShape
     PositiveIntegerWithDefaultValueOne: IntegerShape
+    PriceIncrease: UnionShape
+    PriceIncreasePercentage: StringShape
+    PricingCurrencyAmount: StructureShape
     ProposalSummary: StructureShape
     Proposer: StructureShape
+    PurchaseOrder: StructureShape
+    PurchaseOrderReference: StringShape
+    PurchaseOrders: ListShape
     RateCardItem: StructureShape
     RateCardList: ListShape
     RecurringPaymentTerm: StructureShape
+    RegistrationToken: StringShape
+    RejectAgreementCancellationRequestInput: StructureShape
+    RejectAgreementCancellationRequestOutput: StructureShape
+    RejectAgreementPaymentRequestInput: StructureShape
+    RejectAgreementPaymentRequestOutput: StructureShape
+    RenewalSummary: StructureShape
     RenewalTerm: StructureShape
     RenewalTermConfiguration: StructureShape
     RequestId: StringShape
+    RequestedTerm: StructureShape
+    RequestedTermConfiguration: UnionShape
+    RequestedTermList: ListShape
     Resource: StructureShape
     ResourceId: StringShape
     ResourceNotFoundException: StructureShape
@@ -66,13 +195,28 @@ module Aws::MarketplaceAgreement
     SearchAgreementsInput: StructureShape
     SearchAgreementsOutput: StructureShape
     Selector: StructureShape
+    SendAgreementCancellationRequestInput: StructureShape
+    SendAgreementCancellationRequestOutput: StructureShape
+    SendAgreementPaymentRequestInput: StructureShape
+    SendAgreementPaymentRequestOutput: StructureShape
+    ServiceQuotaExceededException: StructureShape
     Sort: StructureShape
     SortBy: StringShape
     SortOrder: EnumShape
     SupportTerm: StructureShape
+    TaxBreakdown: ListShape
+    TaxBreakdownItem: StructureShape
+    TaxConfiguration: StructureShape
+    TaxEstimation: EnumShape
+    TermId: StringShape
+    TermTemplate: UnionShape
+    TermTemplateList: ListShape
     ThrottlingException: StructureShape
     Timestamp: TimestampShape
+    Timing: EnumShape
     UnversionedTermType: StringShape
+    UpdatePurchaseOrdersInput: StructureShape
+    UpdatePurchaseOrdersOutput: StructureShape
     UsageBasedPricingTerm: StructureShape
     UsageBasedRateCardItem: StructureShape
     UsageBasedRateCardList: ListShape
@@ -81,6 +225,8 @@ module Aws::MarketplaceAgreement
     ValidationExceptionFieldList: ListShape
     ValidationExceptionReason: EnumShape
     ValidityTerm: StructureShape
+    VariablePaymentTerm: StructureShape
+    VariablePaymentTermConfiguration: StructureShape
     ZeroValueInteger: IntegerShape
 
     AWSMPCommerceServiceV20200301: ServiceShape

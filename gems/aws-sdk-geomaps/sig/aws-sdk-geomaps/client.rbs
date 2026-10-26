@@ -112,6 +112,13 @@ module Aws::GeoMaps
       ?style: String,
       ?color_scheme: String,
       ?political_view: String,
+      ?terrain: String,
+      ?contour_density: String,
+      ?traffic: String,
+      ?travel_modes: Array[String],
+      ?buildings: String,
+      ?poi_density: String,
+      ?poi_categories: Array[String],
       ?key: String
     ) -> _GetStyleDescriptorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetStyleDescriptorResponse
 
@@ -124,6 +131,7 @@ module Aws::GeoMaps
       def pricing_bucket: () -> String?
     end
     def get_tile: (
+      ?additional_features: Array[String],
       ?tileset: String,
       ?z: String,
       ?x: String,

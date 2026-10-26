@@ -7,8 +7,14 @@ module Aws::Polly
   module Schema
 
     Alphabet = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.polly#Alphabet", name: "Alphabet")
+    AudioChunk = ::Smithy::Schema::Shapes::BlobShape.new(id: "com.amazonaws.polly#AudioChunk", name: "AudioChunk")
+    AudioEvent = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.polly#AudioEvent", name: "AudioEvent")
     AudioStream = ::Smithy::Schema::Shapes::BlobShape.new(id: "com.amazonaws.polly#AudioStream", name: "AudioStream", traits: {"smithy.api#streaming" => {}})
+    AvailabilityErrorMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.polly#AvailabilityErrorMessage", name: "AvailabilityErrorMessage")
+    CloseStreamEvent = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.polly#CloseStreamEvent", name: "CloseStreamEvent")
     ContentType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.polly#ContentType", name: "ContentType")
+    CoralAvailabilityThrottledResource = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.polly#CoralAvailabilityThrottledResource", name: "CoralAvailabilityThrottledResource")
+    CoralAvailabilityThrottlingReason = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.polly#CoralAvailabilityThrottlingReason", name: "CoralAvailabilityThrottlingReason")
     DateTime = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.polly#DateTime", name: "DateTime")
     DeleteLexiconInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.polly#DeleteLexiconInput", name: "DeleteLexiconInput")
     DeleteLexiconOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.polly#DeleteLexiconOutput", name: "DeleteLexiconOutput")
@@ -18,6 +24,8 @@ module Aws::Polly
     EngineList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.polly#EngineList", name: "EngineList")
     EngineNotSupportedException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.polly#EngineNotSupportedException", name: "EngineNotSupportedException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     ErrorMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.polly#ErrorMessage", name: "ErrorMessage")
+    FlushStreamConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.polly#FlushStreamConfiguration", name: "FlushStreamConfiguration")
+    Force = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.polly#Force", name: "Force", traits: {"smithy.api#default" => false})
     Gender = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.polly#Gender", name: "Gender")
     GetLexiconInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.polly#GetLexiconInput", name: "GetLexiconInput")
     GetLexiconOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.polly#GetLexiconOutput", name: "GetLexiconOutput")
@@ -63,16 +71,24 @@ module Aws::Polly
     OutputUri = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.polly#OutputUri", name: "OutputUri")
     PutLexiconInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.polly#PutLexiconInput", name: "PutLexiconInput")
     PutLexiconOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.polly#PutLexiconOutput", name: "PutLexiconOutput")
+    QuotaCode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.polly#QuotaCode", name: "QuotaCode")
     RequestCharacters = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.polly#RequestCharacters", name: "RequestCharacters", traits: {"smithy.api#default" => 0})
     SampleRate = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.polly#SampleRate", name: "SampleRate")
+    ServiceCode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.polly#ServiceCode", name: "ServiceCode")
     ServiceFailureException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.polly#ServiceFailureException", name: "ServiceFailureException", traits: {"smithy.api#error" => "server", "smithy.api#httpError" => 500})
+    ServiceQuotaExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.polly#ServiceQuotaExceededException", name: "ServiceQuotaExceededException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 402})
     Size = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.polly#Size", name: "Size", traits: {"smithy.api#default" => 0})
     SnsTopicArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.polly#SnsTopicArn", name: "SnsTopicArn", traits: {"smithy.api#pattern" => "^arn:aws(-(cn|iso(-b)?|us-gov))?:sns:[a-z0-9_-]{1,50}:\\d{12}:[a-zA-Z0-9_-]{1,251}([a-zA-Z0-9_-]{0,5}|\\.fifo)$"})
     SpeechMarkType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.polly#SpeechMarkType", name: "SpeechMarkType")
     SpeechMarkTypeList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.polly#SpeechMarkTypeList", name: "SpeechMarkTypeList", traits: {"smithy.api#length" => {"min" => 0, "max" => 4}})
     SsmlMarksNotSupportedForTextTypeException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.polly#SsmlMarksNotSupportedForTextTypeException", name: "SsmlMarksNotSupportedForTextTypeException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
+    StartSpeechSynthesisStreamActionStream = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.polly#StartSpeechSynthesisStreamActionStream", name: "StartSpeechSynthesisStreamActionStream", traits: {"smithy.api#streaming" => {}})
+    StartSpeechSynthesisStreamEventStream = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.polly#StartSpeechSynthesisStreamEventStream", name: "StartSpeechSynthesisStreamEventStream", traits: {"smithy.api#streaming" => {}})
+    StartSpeechSynthesisStreamInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.polly#StartSpeechSynthesisStreamInput", name: "StartSpeechSynthesisStreamInput")
+    StartSpeechSynthesisStreamOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.polly#StartSpeechSynthesisStreamOutput", name: "StartSpeechSynthesisStreamOutput")
     StartSpeechSynthesisTaskInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.polly#StartSpeechSynthesisTaskInput", name: "StartSpeechSynthesisTaskInput")
     StartSpeechSynthesisTaskOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.polly#StartSpeechSynthesisTaskOutput", name: "StartSpeechSynthesisTaskOutput")
+    StreamClosedEvent = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.polly#StreamClosedEvent", name: "StreamClosedEvent")
     SynthesisTask = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.polly#SynthesisTask", name: "SynthesisTask")
     SynthesisTaskNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.polly#SynthesisTaskNotFoundException", name: "SynthesisTaskNotFoundException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     SynthesisTasks = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.polly#SynthesisTasks", name: "SynthesisTasks")
@@ -82,15 +98,28 @@ module Aws::Polly
     TaskStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.polly#TaskStatus", name: "TaskStatus")
     TaskStatusReason = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.polly#TaskStatusReason", name: "TaskStatusReason")
     Text = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.polly#Text", name: "Text")
+    TextEvent = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.polly#TextEvent", name: "TextEvent")
     TextLengthExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.polly#TextLengthExceededException", name: "TextLengthExceededException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     TextType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.polly#TextType", name: "TextType")
+    ThrottlingException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.polly#ThrottlingException", name: "ThrottlingException", traits: {"aws.protocols#awsQueryError" => {"code" => "Throttling", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
+    ThrottlingReason = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.polly#ThrottlingReason", name: "ThrottlingReason")
+    ThrottlingReasonList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.polly#ThrottlingReasonList", name: "ThrottlingReasonList")
     UnsupportedPlsAlphabetException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.polly#UnsupportedPlsAlphabetException", name: "UnsupportedPlsAlphabetException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     UnsupportedPlsLanguageException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.polly#UnsupportedPlsLanguageException", name: "UnsupportedPlsLanguageException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
+    ValidationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.polly#ValidationException", name: "ValidationException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
+    ValidationExceptionField = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.polly#ValidationExceptionField", name: "ValidationExceptionField")
+    ValidationExceptionFieldList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.polly#ValidationExceptionFieldList", name: "ValidationExceptionFieldList")
+    ValidationExceptionFieldMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.polly#ValidationExceptionFieldMessage", name: "ValidationExceptionFieldMessage")
+    ValidationExceptionFieldName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.polly#ValidationExceptionFieldName", name: "ValidationExceptionFieldName")
+    ValidationExceptionReason = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.polly#ValidationExceptionReason", name: "ValidationExceptionReason")
     Voice = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.polly#Voice", name: "Voice")
     VoiceId = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.polly#VoiceId", name: "VoiceId")
     VoiceList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.polly#VoiceList", name: "VoiceList")
     VoiceName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.polly#VoiceName", name: "VoiceName")
 
+    AudioEvent.add_member(:audio_chunk, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioChunk, name: "AudioChunk", traits: {"smithy.api#eventPayload" => {}}))
+    AudioEvent.type = Types::AudioEvent
+    CloseStreamEvent.type = Types::CloseStreamEvent
     DeleteLexiconInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: LexiconName, name: "Name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteLexiconInput.type = Types::DeleteLexiconInput
     DeleteLexiconOutput.type = Types::DeleteLexiconOutput
@@ -109,6 +138,8 @@ module Aws::Polly
     EngineList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Engine, name: "member"))
     EngineNotSupportedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     EngineNotSupportedException.type = Types::EngineNotSupportedException
+    FlushStreamConfiguration.add_member(:force, ::Smithy::Schema::Shapes::MemberShape.new(target: Force, name: "Force", traits: {"smithy.api#default" => false}))
+    FlushStreamConfiguration.type = Types::FlushStreamConfiguration
     Gender.add_member(:female, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Female", traits: {"smithy.api#enumValue" => "Female"}))
     Gender.add_member(:male, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Male", traits: {"smithy.api#enumValue" => "Male"}))
     GetLexiconInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: LexiconName, name: "Name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -223,12 +254,21 @@ module Aws::Polly
     OutputFormat.add_member(:ogg_opus, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OGG_OPUS", traits: {"smithy.api#enumValue" => "ogg_opus"}))
     OutputFormat.add_member(:ogg_vorbis, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OGG_VORBIS", traits: {"smithy.api#enumValue" => "ogg_vorbis"}))
     OutputFormat.add_member(:pcm, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PCM", traits: {"smithy.api#enumValue" => "pcm"}))
+    OutputFormat.add_member(:mulaw, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MULAW", traits: {"smithy.api#enumValue" => "mulaw"}))
+    OutputFormat.add_member(:alaw, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALAW", traits: {"smithy.api#enumValue" => "alaw"}))
     PutLexiconInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: LexiconName, name: "Name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     PutLexiconInput.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: LexiconContent, name: "Content", traits: {"smithy.api#required" => {}}))
     PutLexiconInput.type = Types::PutLexiconInput
     PutLexiconOutput.type = Types::PutLexiconOutput
+    QuotaCode.add_member(:input_stream_inbound_event_timeout, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INPUT_STREAM_INBOUND_EVENT_TIMEOUT", traits: {"smithy.api#enumValue" => "input-stream-inbound-event-timeout"}))
+    QuotaCode.add_member(:input_stream_timeout, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INPUT_STREAM_TIMEOUT", traits: {"smithy.api#enumValue" => "input-stream-timeout"}))
+    ServiceCode.add_member(:polly, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POLLY", traits: {"smithy.api#enumValue" => "polly"}))
     ServiceFailureException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     ServiceFailureException.type = Types::ServiceFailureException
+    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message", traits: {"smithy.api#required" => {}}))
+    ServiceQuotaExceededException.add_member(:quota_code, ::Smithy::Schema::Shapes::MemberShape.new(target: QuotaCode, name: "quotaCode", traits: {"smithy.api#required" => {}}))
+    ServiceQuotaExceededException.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceCode, name: "serviceCode", traits: {"smithy.api#required" => {}}))
+    ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
     SpeechMarkType.add_member(:sentence, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SENTENCE", traits: {"smithy.api#enumValue" => "sentence"}))
     SpeechMarkType.add_member(:ssml, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SSML", traits: {"smithy.api#enumValue" => "ssml"}))
     SpeechMarkType.add_member(:viseme, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VISEME", traits: {"smithy.api#enumValue" => "viseme"}))
@@ -236,6 +276,32 @@ module Aws::Polly
     SpeechMarkTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SpeechMarkType, name: "member"))
     SsmlMarksNotSupportedForTextTypeException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     SsmlMarksNotSupportedForTextTypeException.type = Types::SsmlMarksNotSupportedForTextTypeException
+    StartSpeechSynthesisStreamActionStream.add_member(:text_event, Types::StartSpeechSynthesisStreamActionStream::TextEvent, ::Smithy::Schema::Shapes::MemberShape.new(target: TextEvent, name: "TextEvent"))
+    StartSpeechSynthesisStreamActionStream.add_member(:close_stream_event, Types::StartSpeechSynthesisStreamActionStream::CloseStreamEvent, ::Smithy::Schema::Shapes::MemberShape.new(target: CloseStreamEvent, name: "CloseStreamEvent"))
+    StartSpeechSynthesisStreamActionStream.add_member(:unknown, Types::StartSpeechSynthesisStreamActionStream::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    StartSpeechSynthesisStreamActionStream.type = Types::StartSpeechSynthesisStreamActionStream
+    StartSpeechSynthesisStreamEventStream.add_member(:audio_event, Types::StartSpeechSynthesisStreamEventStream::AudioEvent, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioEvent, name: "AudioEvent"))
+    StartSpeechSynthesisStreamEventStream.add_member(:stream_closed_event, Types::StartSpeechSynthesisStreamEventStream::StreamClosedEvent, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamClosedEvent, name: "StreamClosedEvent"))
+    StartSpeechSynthesisStreamEventStream.add_member(:validation_exception, Types::StartSpeechSynthesisStreamEventStream::ValidationException, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationException, name: "ValidationException"))
+    StartSpeechSynthesisStreamEventStream.add_member(:service_quota_exceeded_exception, Types::StartSpeechSynthesisStreamEventStream::ServiceQuotaExceededException, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceQuotaExceededException, name: "ServiceQuotaExceededException"))
+    StartSpeechSynthesisStreamEventStream.add_member(:service_failure_exception, Types::StartSpeechSynthesisStreamEventStream::ServiceFailureException, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceFailureException, name: "ServiceFailureException"))
+    StartSpeechSynthesisStreamEventStream.add_member(:throttling_exception, Types::StartSpeechSynthesisStreamEventStream::ThrottlingException, ::Smithy::Schema::Shapes::MemberShape.new(target: ThrottlingException, name: "ThrottlingException"))
+    StartSpeechSynthesisStreamEventStream.add_member(:unknown, Types::StartSpeechSynthesisStreamEventStream::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    StartSpeechSynthesisStreamEventStream.type = Types::StartSpeechSynthesisStreamEventStream
+    StartSpeechSynthesisStreamInput.add_member(:engine, ::Smithy::Schema::Shapes::MemberShape.new(target: Engine, name: "Engine", traits: {"smithy.api#httpHeader" => "x-amzn-Engine", "smithy.api#required" => {}}))
+    StartSpeechSynthesisStreamInput.add_member(:language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCode, name: "LanguageCode", traits: {"smithy.api#httpHeader" => "x-amzn-LanguageCode"}))
+    StartSpeechSynthesisStreamInput.add_member(:lexicon_names, ::Smithy::Schema::Shapes::MemberShape.new(target: LexiconNameList, name: "LexiconNames", traits: {"smithy.api#httpHeader" => "x-amzn-LexiconNames"}))
+    StartSpeechSynthesisStreamInput.add_member(:output_format, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputFormat, name: "OutputFormat", traits: {"smithy.api#httpHeader" => "x-amzn-OutputFormat", "smithy.api#required" => {}}))
+    StartSpeechSynthesisStreamInput.add_member(:sample_rate, ::Smithy::Schema::Shapes::MemberShape.new(target: SampleRate, name: "SampleRate", traits: {"smithy.api#httpHeader" => "x-amzn-SampleRate"}))
+    StartSpeechSynthesisStreamInput.add_member(:voice_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceId, name: "VoiceId", traits: {"smithy.api#httpHeader" => "x-amzn-VoiceId", "smithy.api#required" => {}}))
+    StartSpeechSynthesisStreamInput.add_member(:action_stream, ::Smithy::Schema::Shapes::MemberShape.new(target: StartSpeechSynthesisStreamActionStream, name: "ActionStream", traits: {"smithy.api#httpPayload" => {}}))
+    StartSpeechSynthesisStreamInput[:http_payload] = :action_stream
+    StartSpeechSynthesisStreamInput[:http_payload_member] = StartSpeechSynthesisStreamInput.member(:action_stream)
+    StartSpeechSynthesisStreamInput.type = Types::StartSpeechSynthesisStreamInput
+    StartSpeechSynthesisStreamOutput.add_member(:event_stream, ::Smithy::Schema::Shapes::MemberShape.new(target: StartSpeechSynthesisStreamEventStream, name: "EventStream", traits: {"smithy.api#httpPayload" => {}}))
+    StartSpeechSynthesisStreamOutput[:http_payload] = :event_stream
+    StartSpeechSynthesisStreamOutput[:http_payload_member] = StartSpeechSynthesisStreamOutput.member(:event_stream)
+    StartSpeechSynthesisStreamOutput.type = Types::StartSpeechSynthesisStreamOutput
     StartSpeechSynthesisTaskInput.add_member(:engine, ::Smithy::Schema::Shapes::MemberShape.new(target: Engine, name: "Engine"))
     StartSpeechSynthesisTaskInput.add_member(:language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCode, name: "LanguageCode"))
     StartSpeechSynthesisTaskInput.add_member(:lexicon_names, ::Smithy::Schema::Shapes::MemberShape.new(target: LexiconNameList, name: "LexiconNames"))
@@ -251,6 +317,8 @@ module Aws::Polly
     StartSpeechSynthesisTaskInput.type = Types::StartSpeechSynthesisTaskInput
     StartSpeechSynthesisTaskOutput.add_member(:synthesis_task, ::Smithy::Schema::Shapes::MemberShape.new(target: SynthesisTask, name: "SynthesisTask"))
     StartSpeechSynthesisTaskOutput.type = Types::StartSpeechSynthesisTaskOutput
+    StreamClosedEvent.add_member(:request_characters, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestCharacters, name: "RequestCharacters", traits: {"smithy.api#default" => 0}))
+    StreamClosedEvent.type = Types::StreamClosedEvent
     SynthesisTask.add_member(:engine, ::Smithy::Schema::Shapes::MemberShape.new(target: Engine, name: "Engine"))
     SynthesisTask.add_member(:task_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskId, name: "TaskId"))
     SynthesisTask.add_member(:task_status, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskStatus, name: "TaskStatus"))
@@ -290,14 +358,37 @@ module Aws::Polly
     TaskStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "inProgress"}))
     TaskStatus.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED", traits: {"smithy.api#enumValue" => "completed"}))
     TaskStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "failed"}))
+    TextEvent.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: Text, name: "Text", traits: {"smithy.api#required" => {}}))
+    TextEvent.add_member(:text_type, ::Smithy::Schema::Shapes::MemberShape.new(target: TextType, name: "TextType"))
+    TextEvent.add_member(:flush_stream_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: FlushStreamConfiguration, name: "FlushStreamConfiguration"))
+    TextEvent.type = Types::TextEvent
     TextLengthExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     TextLengthExceededException.type = Types::TextLengthExceededException
     TextType.add_member(:ssml, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SSML", traits: {"smithy.api#enumValue" => "ssml"}))
     TextType.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TEXT", traits: {"smithy.api#enumValue" => "text"}))
+    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityErrorMessage, name: "message"))
+    ThrottlingException.add_member(:throttling_reasons, ::Smithy::Schema::Shapes::MemberShape.new(target: ThrottlingReasonList, name: "throttlingReasons"))
+    ThrottlingException.type = Types::ThrottlingException
+    ThrottlingReason.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: CoralAvailabilityThrottlingReason, name: "reason"))
+    ThrottlingReason.add_member(:resource, ::Smithy::Schema::Shapes::MemberShape.new(target: CoralAvailabilityThrottledResource, name: "resource"))
+    ThrottlingReason.type = Types::ThrottlingReason
+    ThrottlingReasonList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ThrottlingReason, name: "member"))
     UnsupportedPlsAlphabetException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     UnsupportedPlsAlphabetException.type = Types::UnsupportedPlsAlphabetException
     UnsupportedPlsLanguageException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     UnsupportedPlsLanguageException.type = Types::UnsupportedPlsLanguageException
+    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message", traits: {"smithy.api#required" => {}}))
+    ValidationException.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionReason, name: "reason", traits: {"smithy.api#required" => {}}))
+    ValidationException.add_member(:fields, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionFieldList, name: "fields"))
+    ValidationException.type = Types::ValidationException
+    ValidationExceptionField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionFieldName, name: "name", traits: {"smithy.api#required" => {}}))
+    ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionFieldMessage, name: "message", traits: {"smithy.api#required" => {}}))
+    ValidationExceptionField.type = Types::ValidationExceptionField
+    ValidationExceptionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member"))
+    ValidationExceptionReason.add_member(:unsupported_operation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNSUPPORTED_OPERATION", traits: {"smithy.api#enumValue" => "unsupportedOperation"}))
+    ValidationExceptionReason.add_member(:field_validation_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FIELD_VALIDATION_FAILED", traits: {"smithy.api#enumValue" => "fieldValidationFailed"}))
+    ValidationExceptionReason.add_member(:other, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OTHER", traits: {"smithy.api#enumValue" => "other"}))
+    ValidationExceptionReason.add_member(:invalid_inbound_event, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INVALID_INBOUND_EVENT", traits: {"smithy.api#enumValue" => "invalidInboundEvent"}))
     Voice.add_member(:gender, ::Smithy::Schema::Shapes::MemberShape.new(target: Gender, name: "Gender"))
     Voice.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceId, name: "Id"))
     Voice.add_member(:language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCode, name: "LanguageCode"))
@@ -406,13 +497,19 @@ module Aws::Polly
     VoiceId.add_member(:sabrina, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Sabrina", traits: {"smithy.api#enumValue" => "Sabrina"}))
     VoiceId.add_member(:jasmine, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Jasmine", traits: {"smithy.api#enumValue" => "Jasmine"}))
     VoiceId.add_member(:jihye, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Jihye", traits: {"smithy.api#enumValue" => "Jihye"}))
+    VoiceId.add_member(:ambre, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Ambre", traits: {"smithy.api#enumValue" => "Ambre"}))
+    VoiceId.add_member(:beatrice, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Beatrice", traits: {"smithy.api#enumValue" => "Beatrice"}))
+    VoiceId.add_member(:florian, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Florian", traits: {"smithy.api#enumValue" => "Florian"}))
+    VoiceId.add_member(:lennart, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Lennart", traits: {"smithy.api#enumValue" => "Lennart"}))
+    VoiceId.add_member(:lorenzo, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Lorenzo", traits: {"smithy.api#enumValue" => "Lorenzo"}))
+    VoiceId.add_member(:tiffany, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Tiffany", traits: {"smithy.api#enumValue" => "Tiffany"}))
     VoiceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Voice, name: "member"))
 
     ParrotV1 = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.polly#Parrot_v1"
       service.name = "ParrotV1"
       service.version = "2016-06-10"
-      service.traits = {"aws.api#service" => {"sdkId" => "Polly", "arnNamespace" => "polly", "cloudFormationName" => "Polly", "cloudTrailEventSource" => "polly.amazonaws.com", "endpointPrefix" => "polly"}, "aws.auth#sigv4" => {"name" => "polly"}, "aws.protocols#restJson1" => {}, "smithy.api#title" => "Amazon Polly", "smithy.api#xmlNamespace" => {"uri" => "http://polly.amazonaws.com/doc/v1"}}
+      service.traits = {"aws.api#service" => {"sdkId" => "Polly", "arnNamespace" => "polly", "cloudFormationName" => "Polly", "cloudTrailEventSource" => "polly.amazonaws.com", "endpointPrefix" => "polly"}, "aws.auth#sigv4" => {"name" => "polly"}, "aws.protocols#restJson1" => {"http" => ["http/1.1", "h2"], "eventStreamHttp" => ["h2"]}, "smithy.api#title" => "Amazon Polly", "smithy.api#xmlNamespace" => {"uri" => "http://polly.amazonaws.com/doc/v1"}, "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://polly-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://polly-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://polly.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://polly.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
       service.add_operation(:delete_lexicon, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.polly#DeleteLexicon"
         operation.name = "DeleteLexicon"
@@ -482,6 +579,17 @@ module Aws::Polly
         operation.errors << UnsupportedPlsAlphabetException
         operation.errors << UnsupportedPlsLanguageException
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/v1/lexicons/{Name}", "code" => 200}}
+      end)
+      service.add_operation(:start_speech_synthesis_stream, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.polly#StartSpeechSynthesisStream"
+        operation.name = "StartSpeechSynthesisStream"
+        operation.input = StartSpeechSynthesisStreamInput
+        operation.output = StartSpeechSynthesisStreamOutput
+        operation.errors << ServiceFailureException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/v1/synthesisStream", "code" => 200}}
       end)
       service.add_operation(:start_speech_synthesis_task, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.polly#StartSpeechSynthesisTask"

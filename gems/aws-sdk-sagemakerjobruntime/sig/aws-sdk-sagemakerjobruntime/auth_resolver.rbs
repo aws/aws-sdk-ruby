@@ -1,0 +1,5 @@
+module Aws::SagemakerJobRuntime
+  class AuthResolver
+    def resolve: (AuthParameters) -> Array[Smithy::Client::AuthOption]
+  end
+end

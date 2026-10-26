@@ -155,6 +155,17 @@ module Aws::ElasticLoadBalancingV2
               enabled: bool,
               duration_seconds: Integer
             }
+          },
+          jwt_validation_config: {
+            jwks_endpoint: String,
+            issuer: String,
+            additional_claims: Array[
+              {
+                format: String,
+                name: String,
+                values: Array[String]
+              }
+            ]
           }
         }
       ],
@@ -218,14 +229,17 @@ module Aws::ElasticLoadBalancingV2
           field: String,
           values: Array[String],
           host_header_config: {
-            values: untyped
+            values: untyped,
+            regex_values: untyped
           },
           path_pattern_config: {
-            values: untyped
+            values: untyped,
+            regex_values: untyped
           },
           http_header_config: {
             http_header_name: String,
-            values: untyped
+            values: untyped,
+            regex_values: untyped
           },
           query_string_config: {
             values: Array[
@@ -239,8 +253,10 @@ module Aws::ElasticLoadBalancingV2
             values: untyped
           },
           source_ip_config: {
-            values: untyped
-          }
+            values: untyped,
+            ip_address_type: String
+          },
+          regex_values: untyped
         }
       ],
       ?priority: Integer,
@@ -297,6 +313,17 @@ module Aws::ElasticLoadBalancingV2
               enabled: bool,
               duration_seconds: Integer
             }
+          },
+          jwt_validation_config: {
+            jwks_endpoint: String,
+            issuer: String,
+            additional_claims: Array[
+              {
+                format: String,
+                name: String,
+                values: Array[String]
+              }
+            ]
           }
         }
       ],
@@ -304,6 +331,22 @@ module Aws::ElasticLoadBalancingV2
         {
           key: String,
           value: String
+        }
+      ],
+      ?transforms: Array[
+        {
+          type: String,
+          host_header_rewrite_config: {
+            rewrites: Array[
+              {
+                regex: String,
+                replace: untyped
+              }
+            ]
+          },
+          url_rewrite_config: {
+            rewrites: untyped
+          }
         }
       ]
     ) -> _CreateRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRuleResponse
@@ -337,7 +380,8 @@ module Aws::ElasticLoadBalancingV2
           value: String
         }
       ],
-      ?ip_address_type: String
+      ?ip_address_type: String,
+      ?target_control_port: Integer
     ) -> _CreateTargetGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTargetGroupResponse
 
     interface _CreateTrustStoreResponse
@@ -409,7 +453,8 @@ module Aws::ElasticLoadBalancingV2
         {
           id: String,
           port: Integer,
-          availability_zone: String
+          availability_zone: String,
+          quic_server_id: String
         }
       ]
     ) -> _DeregisterTargetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeregisterTargetsResponse
@@ -549,7 +594,8 @@ module Aws::ElasticLoadBalancingV2
         {
           id: String,
           port: Integer,
-          availability_zone: String
+          availability_zone: String,
+          quic_server_id: String
         }
       ],
       ?include: Array[String]
@@ -710,6 +756,17 @@ module Aws::ElasticLoadBalancingV2
               enabled: bool,
               duration_seconds: Integer
             }
+          },
+          jwt_validation_config: {
+            jwks_endpoint: String,
+            issuer: String,
+            additional_claims: Array[
+              {
+                format: String,
+                name: String,
+                values: Array[String]
+              }
+            ]
           }
         }
       ],
@@ -762,14 +819,17 @@ module Aws::ElasticLoadBalancingV2
           field: String,
           values: Array[String],
           host_header_config: {
-            values: untyped
+            values: untyped,
+            regex_values: untyped
           },
           path_pattern_config: {
-            values: untyped
+            values: untyped,
+            regex_values: untyped
           },
           http_header_config: {
             http_header_name: String,
-            values: untyped
+            values: untyped,
+            regex_values: untyped
           },
           query_string_config: {
             values: Array[
@@ -783,8 +843,10 @@ module Aws::ElasticLoadBalancingV2
             values: untyped
           },
           source_ip_config: {
-            values: untyped
-          }
+            values: untyped,
+            ip_address_type: String
+          },
+          regex_values: untyped
         }
       ],
       ?actions: Array[
@@ -840,9 +902,37 @@ module Aws::ElasticLoadBalancingV2
               enabled: bool,
               duration_seconds: Integer
             }
+          },
+          jwt_validation_config: {
+            jwks_endpoint: String,
+            issuer: String,
+            additional_claims: Array[
+              {
+                format: String,
+                name: String,
+                values: Array[String]
+              }
+            ]
           }
         }
-      ]
+      ],
+      ?transforms: Array[
+        {
+          type: String,
+          host_header_rewrite_config: {
+            rewrites: Array[
+              {
+                regex: String,
+                replace: untyped
+              }
+            ]
+          },
+          url_rewrite_config: {
+            rewrites: untyped
+          }
+        }
+      ],
+      ?reset_transforms: bool
     ) -> _ModifyRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyRuleResponse
 
     interface _ModifyTargetGroupResponse
@@ -899,7 +989,8 @@ module Aws::ElasticLoadBalancingV2
         {
           id: String,
           port: Integer,
-          availability_zone: String
+          availability_zone: String,
+          quic_server_id: String
         }
       ]
     ) -> _RegisterTargetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterTargetsResponse

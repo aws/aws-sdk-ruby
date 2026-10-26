@@ -19,8 +19,14 @@ module Aws::DirectConnect
     AllocateTransitVirtualInterfaceRequest: StructureShape
     AllocateTransitVirtualInterfaceResult: StructureShape
     AmazonAddress: StringShape
+    AsPathList: ListShape
+    AsPathSegment: StructureShape
+    AsPathSegmentList: ListShape
+    AsPathType: EnumShape
     AssociateConnectionWithLagOutput: StructureShape
     AssociateConnectionWithLagRequest: StructureShape
+    AssociateConnectionsToResiliencyGroupRequest: StructureShape
+    AssociateConnectionsToResiliencyGroupResult: StructureShape
     AssociateHostedConnectionOutput: StructureShape
     AssociateHostedConnectionRequest: StructureShape
     AssociateMacSecKeyRequest: StructureShape
@@ -30,6 +36,8 @@ module Aws::DirectConnect
     AssociatedCoreNetwork: StructureShape
     AssociatedGateway: StructureShape
     AssociatedGatewayId: StringShape
+    AvailableBillingMode: StructureShape
+    AvailableBillingModeList: ListShape
     AvailableMacSecPortSpeeds: ListShape
     AvailablePortSpeeds: ListShape
     AwsDevice: StringShape
@@ -43,10 +51,13 @@ module Aws::DirectConnect
     BGPPeerState: EnumShape
     BGPStatus: EnumShape
     Bandwidth: StringShape
+    BillingMode: EnumShape
     BooleanFlag: BooleanShape
     CIDR: StringShape
     Cak: StringShape
     Ckn: StringShape
+    CommunityEntry: StringShape
+    CommunityList: ListShape
     ConfirmConnectionRequest: StructureShape
     ConfirmConnectionResponse: StructureShape
     ConfirmCustomerAgreementRequest: StructureShape
@@ -58,7 +69,11 @@ module Aws::DirectConnect
     ConfirmTransitVirtualInterfaceRequest: StructureShape
     ConfirmTransitVirtualInterfaceResponse: StructureShape
     Connection: StructureShape
+    ConnectionArn: StringShape
     ConnectionId: StringShape
+    ConnectionIdList: ListShape
+    ConnectionIdentifier: StringShape
+    ConnectionIdentifierList: ListShape
     ConnectionList: ListShape
     ConnectionName: StringShape
     ConnectionState: EnumShape
@@ -83,6 +98,8 @@ module Aws::DirectConnect
     CreatePrivateVirtualInterfaceRequest: StructureShape
     CreatePublicVirtualInterfaceOutput: StructureShape
     CreatePublicVirtualInterfaceRequest: StructureShape
+    CreateResiliencyGroupRequest: StructureShape
+    CreateResiliencyGroupResult: StructureShape
     CreateTransitVirtualInterfaceRequest: StructureShape
     CreateTransitVirtualInterfaceResult: StructureShape
     CustomerAddress: StringShape
@@ -101,6 +118,8 @@ module Aws::DirectConnect
     DeleteInterconnectResponse: StructureShape
     DeleteLagOutput: StructureShape
     DeleteLagRequest: StructureShape
+    DeleteResiliencyGroupRequest: StructureShape
+    DeleteResiliencyGroupResult: StructureShape
     DeleteVirtualInterfaceRequest: StructureShape
     DeleteVirtualInterfaceResponse: StructureShape
     DescribeConnectionLoaRequest: StructureShape
@@ -157,6 +176,8 @@ module Aws::DirectConnect
     DirectConnectServerException: StructureShape
     DisassociateConnectionFromLagOutput: StructureShape
     DisassociateConnectionFromLagRequest: StructureShape
+    DisassociateConnectionsFromResiliencyGroupRequest: StructureShape
+    DisassociateConnectionsFromResiliencyGroupResult: StructureShape
     DisassociateMacSecKeyRequest: StructureShape
     DisassociateMacSecKeyResponse: StructureShape
     DuplicateTagKeysException: StructureShape
@@ -168,7 +189,11 @@ module Aws::DirectConnect
     GatewayIdToAssociate: StringShape
     GatewayIdentifier: StringShape
     GatewayType: EnumShape
+    GetResiliencyGroupRequest: StructureShape
+    GetResiliencyGroupResult: StructureShape
     HasLogicalRedundancy: EnumShape
+    IdempotencyToken: StringShape
+    IncludedRegionList: ListShape
     Interconnect: StructureShape
     InterconnectId: StringShape
     InterconnectList: ListShape
@@ -180,6 +205,13 @@ module Aws::DirectConnect
     LagList: ListShape
     LagName: StringShape
     LagState: EnumShape
+    LimitExceededException: StructureShape
+    ListResiliencyGroupAssociationsRequest: StructureShape
+    ListResiliencyGroupAssociationsResult: StructureShape
+    ListResiliencyGroupsRequest: StructureShape
+    ListResiliencyGroupsResult: StructureShape
+    ListVirtualInterfaceRoutesRequest: StructureShape
+    ListVirtualInterfaceRoutesResponse: StructureShape
     ListVirtualInterfaceTestHistoryRequest: StructureShape
     ListVirtualInterfaceTestHistoryResponse: StructureShape
     Loa: StructureShape
@@ -211,16 +243,42 @@ module Aws::DirectConnect
     Platform: StringShape
     PortEncryptionStatus: StringShape
     PortSpeed: StringShape
+    PrefixPoolAllocatedCount: IntegerShape
+    PrefixPoolSize: IntegerShape
+    PrefixPoolUnallocatedCount: IntegerShape
     ProviderList: ListShape
     ProviderName: StringShape
+    RateLimit: StringShape
+    RateLimiterStatus: StructureShape
     Region: StringShape
+    RequestBillingMode: EnumShape
     RequestMACSec: BooleanShape
+    ResiliencyGroup: StructureShape
+    ResiliencyGroupArn: StringShape
+    ResiliencyGroupAssociation: StructureShape
+    ResiliencyGroupAssociationList: ListShape
+    ResiliencyGroupAssociationState: EnumShape
+    ResiliencyGroupId: StringShape
+    ResiliencyGroupName: StringShape
+    ResiliencyGroupState: EnumShape
+    ResiliencyGroupSummary: StructureShape
+    ResiliencyGroupSummaryList: ListShape
+    ResiliencyGroupType: EnumShape
+    ResiliencyModel: EnumShape
     ResourceArn: StringShape
     ResourceArnList: ListShape
     ResourceTag: StructureShape
     ResourceTagList: ListShape
+    Route: StructureShape
+    RouteCidr: StringShape
+    RouteDirection: EnumShape
+    RouteFilterCidrString: StringShape
+    RouteFilterCidrStringList: ListShape
     RouteFilterPrefix: StructureShape
     RouteFilterPrefixList: ListShape
+    RouteFilters: StructureShape
+    RouteInstalledAt: TimestampShape
+    RouteList: ListShape
     RouterConfig: StringShape
     RouterType: StructureShape
     RouterTypeIdentifier: StringShape
@@ -250,12 +308,16 @@ module Aws::DirectConnect
     UntagResourceResponse: StructureShape
     UpdateConnectionOutput: StructureShape
     UpdateConnectionRequest: StructureShape
+    UpdateConnectionsBillingModeRequest: StructureShape
+    UpdateConnectionsBillingModeResponse: StructureShape
     UpdateDirectConnectGatewayAssociationRequest: StructureShape
     UpdateDirectConnectGatewayAssociationResult: StructureShape
     UpdateDirectConnectGatewayRequest: StructureShape
     UpdateDirectConnectGatewayResponse: StructureShape
     UpdateLagOutput: StructureShape
     UpdateLagRequest: StructureShape
+    UpdateResiliencyGroupRequest: StructureShape
+    UpdateResiliencyGroupResult: StructureShape
     UpdateVirtualInterfaceAttributesOutput: StructureShape
     UpdateVirtualInterfaceAttributesRequest: StructureShape
     VLAN: IntegerShape

@@ -6,26 +6,31 @@ module Aws::ConnectCampaignsV2
   # This module contains a schema composed of shapes used by the client.
   module Schema
 
+    AbandonmentRatePacingConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#AbandonmentRatePacingConfig", name: "AbandonmentRatePacingConfig")
     AccessDeniedException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#AccessDeniedException", name: "AccessDeniedException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 403})
+    AgentAction = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcampaignsv2#AgentAction", name: "AgentAction", traits: {"smithy.api#enum" => [{"value" => "DISCARD", "name" => "DISCARD"}]})
+    AgentActions = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.connectcampaignsv2#AgentActions", name: "AgentActions", traits: {"smithy.api#uniqueItems" => {}})
     AgentlessConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#AgentlessConfig", name: "AgentlessConfig")
     AnswerMachineDetectionConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#AnswerMachineDetectionConfig", name: "AnswerMachineDetectionConfig")
     Arn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcampaignsv2#Arn", name: "Arn", traits: {"smithy.api#length" => {"min" => 20, "max" => 500}, "smithy.api#pattern" => "^arn:[a-zA-Z0-9-]+:[a-zA-Z0-9-]+:[a-z]{2}-[a-z]+-\\d{1,2}:[a-zA-Z0-9-]+:[^:]+(?:/[^:]+)*(?:/[^:]+)?(?:\\:[^:]+)?$"})
     AttributeName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcampaignsv2#AttributeName", name: "AttributeName", traits: {"smithy.api#length" => {"min" => 0, "max" => 32767}, "smithy.api#pattern" => "^[a-zA-Z0-9\\-_]+$"})
     AttributeValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcampaignsv2#AttributeValue", name: "AttributeValue", traits: {"smithy.api#length" => {"min" => 0, "max" => 32767}, "smithy.api#pattern" => "^.*$"})
     Attributes = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.connectcampaignsv2#Attributes", name: "Attributes", traits: {"smithy.api#sensitive" => {}})
-    BandwidthAllocation = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.connectcampaignsv2#BandwidthAllocation", name: "BandwidthAllocation", traits: {"smithy.api#range" => {"min" => 0, "max" => 1}})
+    BandwidthAllocation = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.connectcampaignsv2#BandwidthAllocation", name: "BandwidthAllocation", traits: {"smithy.api#range" => {"min" => 0, "max" => 2}})
+    BrowserId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcampaignsv2#BrowserId", name: "BrowserId", traits: {"smithy.api#length" => {"min" => 1, "max" => 36}})
     Campaign = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#Campaign", name: "Campaign")
     CampaignArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcampaignsv2#CampaignArn", name: "CampaignArn", traits: {"smithy.api#length" => {"min" => 20, "max" => 500}})
     CampaignDeletionPolicy = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcampaignsv2#CampaignDeletionPolicy", name: "CampaignDeletionPolicy", traits: {"smithy.api#enum" => [{"value" => "RETAIN_ALL", "name" => "RETAIN_ALL"}, {"value" => "DELETE_ALL", "name" => "DELETE_ALL"}]})
     CampaignFilters = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#CampaignFilters", name: "CampaignFilters")
-    CampaignId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcampaignsv2#CampaignId", name: "CampaignId", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#pattern" => "^[a-zA-Z0-9\\-:/]*$"})
+    CampaignId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcampaignsv2#CampaignId", name: "CampaignId", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[-:/a-zA-Z0-9]+$"})
     CampaignIdList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.connectcampaignsv2#CampaignIdList", name: "CampaignIdList")
     CampaignName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcampaignsv2#CampaignName", name: "CampaignName", traits: {"smithy.api#length" => {"min" => 1, "max" => 127}})
     CampaignState = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcampaignsv2#CampaignState", name: "CampaignState", traits: {"smithy.api#enum" => [{"value" => "Initialized", "name" => "INITIALIZED", "documentation" => "Campaign is in initialized state"}, {"value" => "Running", "name" => "RUNNING", "documentation" => "Campaign is in running state"}, {"value" => "Paused", "name" => "PAUSED", "documentation" => "Campaign is in paused state"}, {"value" => "Stopped", "name" => "STOPPED", "documentation" => "Campaign is in stopped state"}, {"value" => "Failed", "name" => "FAILED", "documentation" => "Campaign is in failed state"}, {"value" => "Completed", "name" => "COMPLETED", "documentation" => "Campaign is in completed state"}]})
     CampaignSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#CampaignSummary", name: "CampaignSummary")
     CampaignSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.connectcampaignsv2#CampaignSummaryList", name: "CampaignSummaryList")
     Capacity = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.connectcampaignsv2#Capacity", name: "Capacity", traits: {"smithy.api#range" => {"min" => 0.01, "max" => 1}})
-    ChannelSubtype = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcampaignsv2#ChannelSubtype", name: "ChannelSubtype", traits: {"smithy.api#enum" => [{"value" => "TELEPHONY", "name" => "TELEPHONY"}, {"value" => "SMS", "name" => "SMS"}, {"value" => "EMAIL", "name" => "EMAIL"}]})
+    ChannelContext = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#ChannelContext", name: "ChannelContext")
+    ChannelSubtype = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcampaignsv2#ChannelSubtype", name: "ChannelSubtype", traits: {"smithy.api#enum" => [{"value" => "TELEPHONY", "name" => "TELEPHONY"}, {"value" => "SMS", "name" => "SMS"}, {"value" => "EMAIL", "name" => "EMAIL"}, {"value" => "WHATSAPP", "name" => "WHATSAPP"}]})
     ChannelSubtypeConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#ChannelSubtypeConfig", name: "ChannelSubtypeConfig")
     ChannelSubtypeList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.connectcampaignsv2#ChannelSubtypeList", name: "ChannelSubtypeList", traits: {"smithy.api#uniqueItems" => {}})
     ChannelSubtypeParameters = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.connectcampaignsv2#ChannelSubtypeParameters", name: "ChannelSubtypeParameters")
@@ -37,8 +42,9 @@ module Aws::ConnectCampaignsV2
     CommunicationLimitsConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#CommunicationLimitsConfig", name: "CommunicationLimitsConfig")
     CommunicationLimitsConfigType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcampaignsv2#CommunicationLimitsConfigType", name: "CommunicationLimitsConfigType", traits: {"smithy.api#enum" => [{"value" => "ALL_CHANNEL_SUBTYPES", "name" => "ALL_CHANNEL_SUBTYPES"}]})
     CommunicationTimeConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#CommunicationTimeConfig", name: "CommunicationTimeConfig")
-    CommunicationTimeConfigType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcampaignsv2#CommunicationTimeConfigType", name: "CommunicationTimeConfigType", traits: {"smithy.api#enum" => [{"value" => "TELEPHONY", "name" => "TELEPHONY"}, {"value" => "SMS", "name" => "SMS"}, {"value" => "EMAIL", "name" => "EMAIL"}]})
+    CommunicationTimeConfigType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcampaignsv2#CommunicationTimeConfigType", name: "CommunicationTimeConfigType", traits: {"smithy.api#enum" => [{"value" => "TELEPHONY", "name" => "TELEPHONY"}, {"value" => "SMS", "name" => "SMS"}, {"value" => "EMAIL", "name" => "EMAIL"}, {"value" => "WHATSAPP", "name" => "WHATSAPP"}]})
     ConflictException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#ConflictException", name: "ConflictException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 409})
+    ConnectionStartPoint = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcampaignsv2#ConnectionStartPoint", name: "ConnectionStartPoint", traits: {"smithy.api#enum" => [{"value" => "CONNECTED_TO_SYSTEM", "name" => "CONNECTED_TO_SYSTEM", "documentation" => "Threshold measured from when the contact connects to the telephony system."}, {"value" => "GREETING_START", "name" => "GREETING_START", "documentation" => "Threshold measured from when the customer-side greeting begins."}, {"value" => "GREETING_END", "name" => "GREETING_END", "documentation" => "Threshold measured from when the customer-side greeting ends."}]})
     ContactFlowId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcampaignsv2#ContactFlowId", name: "ContactFlowId", traits: {"smithy.api#length" => {"max" => 500}})
     CreateCampaignRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#CreateCampaignRequest", name: "CreateCampaignRequest")
     CreateCampaignResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#CreateCampaignResponse", name: "CreateCampaignResponse")
@@ -50,6 +56,7 @@ module Aws::ConnectCampaignsV2
     DeleteCampaignChannelSubtypeConfigRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#DeleteCampaignChannelSubtypeConfigRequest", name: "DeleteCampaignChannelSubtypeConfigRequest")
     DeleteCampaignCommunicationLimitsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#DeleteCampaignCommunicationLimitsRequest", name: "DeleteCampaignCommunicationLimitsRequest")
     DeleteCampaignCommunicationTimeRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#DeleteCampaignCommunicationTimeRequest", name: "DeleteCampaignCommunicationTimeRequest")
+    DeleteCampaignEntryLimitsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#DeleteCampaignEntryLimitsRequest", name: "DeleteCampaignEntryLimitsRequest")
     DeleteCampaignRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#DeleteCampaignRequest", name: "DeleteCampaignRequest")
     DeleteConnectInstanceConfigRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#DeleteConnectInstanceConfigRequest", name: "DeleteConnectInstanceConfigRequest")
     DeleteConnectInstanceIntegrationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#DeleteConnectInstanceIntegrationRequest", name: "DeleteConnectInstanceIntegrationRequest")
@@ -57,7 +64,7 @@ module Aws::ConnectCampaignsV2
     DescribeCampaignRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#DescribeCampaignRequest", name: "DescribeCampaignRequest")
     DescribeCampaignResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#DescribeCampaignResponse", name: "DescribeCampaignResponse")
     DestinationPhoneNumber = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcampaignsv2#DestinationPhoneNumber", name: "DestinationPhoneNumber", traits: {"smithy.api#length" => {"min" => 0, "max" => 20}, "smithy.api#pattern" => "^[\\d\\-+]*$", "smithy.api#sensitive" => {}})
-    DialRequestId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcampaignsv2#DialRequestId", name: "DialRequestId", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#pattern" => "^[a-zA-Z0-9_\\-.]*$"})
+    DialRequestId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcampaignsv2#DialRequestId", name: "DialRequestId", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[-_.a-zA-Z0-9]+$"})
     EmailAddress = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcampaignsv2#EmailAddress", name: "EmailAddress", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => "[^\\s@]+@[^\\s@]+\\.[^\\s@]+", "smithy.api#sensitive" => {}})
     EmailChannelSubtypeConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#EmailChannelSubtypeConfig", name: "EmailChannelSubtypeConfig")
     EmailChannelSubtypeParameters = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#EmailChannelSubtypeParameters", name: "EmailChannelSubtypeParameters")
@@ -68,8 +75,12 @@ module Aws::ConnectCampaignsV2
     EncryptionConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#EncryptionConfig", name: "EncryptionConfig")
     EncryptionKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcampaignsv2#EncryptionKey", name: "EncryptionKey", traits: {"smithy.api#length" => {"max" => 500}})
     EncryptionType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcampaignsv2#EncryptionType", name: "EncryptionType", traits: {"smithy.api#enum" => [{"name" => "KMS", "value" => "KMS"}]})
+    EntryLimitsConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#EntryLimitsConfig", name: "EntryLimitsConfig")
+    EvaluationWindow = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcampaignsv2#EvaluationWindow", name: "EvaluationWindow", traits: {"smithy.api#length" => {"max" => 5}, "smithy.api#pattern" => "^PT([1-9]|1[0-9]|2[0-4])H$"})
     EventTrigger = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#EventTrigger", name: "EventTrigger")
-    EventType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcampaignsv2#EventType", name: "EventType", traits: {"smithy.api#enum" => [{"value" => "Campaign-Email", "name" => "CAMPAIGN_EMAIL"}, {"value" => "Campaign-SMS", "name" => "CAMPAIGN_SMS"}, {"value" => "Campaign-Telephony", "name" => "CAMPAIGN_TELEPHONY"}, {"value" => "Campaign-Orchestration", "name" => "CAMPAIGN_ORCHESTRATION"}]})
+    EventTriggerContext = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#EventTriggerContext", name: "EventTriggerContext")
+    EventType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcampaignsv2#EventType", name: "EventType", traits: {"smithy.api#enum" => [{"value" => "Campaign-Email", "name" => "CAMPAIGN_EMAIL"}, {"value" => "Campaign-SMS", "name" => "CAMPAIGN_SMS"}, {"value" => "Campaign-Telephony", "name" => "CAMPAIGN_TELEPHONY"}, {"value" => "Campaign-Orchestration", "name" => "CAMPAIGN_ORCHESTRATION"}, {"value" => "Campaign-WhatsApp", "name" => "CAMPAIGN_WHATS_APP"}, {"value" => "Campaign-WebNotification", "name" => "CAMPAIGN_WEB_NOTIFICATION"}]})
+    ExternalCampaignType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcampaignsv2#ExternalCampaignType", name: "ExternalCampaignType", traits: {"smithy.api#enum" => [{"value" => "MANAGED", "name" => "MANAGED"}, {"value" => "JOURNEY", "name" => "JOURNEY"}]})
     FailedCampaignStateResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#FailedCampaignStateResponse", name: "FailedCampaignStateResponse")
     FailedCampaignStateResponseList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.connectcampaignsv2#FailedCampaignStateResponseList", name: "FailedCampaignStateResponseList", traits: {"smithy.api#length" => {"min" => 0, "max" => 25}})
     FailedProfileOutboundRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#FailedProfileOutboundRequest", name: "FailedProfileOutboundRequest")
@@ -90,7 +101,7 @@ module Aws::ConnectCampaignsV2
     GetInstanceOnboardingJobStatusResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#GetInstanceOnboardingJobStatusResponse", name: "GetInstanceOnboardingJobStatusResponse")
     InstanceCommunicationLimitsConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#InstanceCommunicationLimitsConfig", name: "InstanceCommunicationLimitsConfig")
     InstanceConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#InstanceConfig", name: "InstanceConfig")
-    InstanceId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcampaignsv2#InstanceId", name: "InstanceId", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#pattern" => "^[a-zA-Z0-9_\\-.]*$"})
+    InstanceId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcampaignsv2#InstanceId", name: "InstanceId", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[-_.a-zA-Z0-9]+$"})
     InstanceIdFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#InstanceIdFilter", name: "InstanceIdFilter")
     InstanceIdFilterOperator = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcampaignsv2#InstanceIdFilterOperator", name: "InstanceIdFilterOperator", traits: {"smithy.api#enum" => [{"name" => "EQ", "value" => "Eq", "documentation" => "Equals operator"}]})
     InstanceLimitsHandling = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcampaignsv2#InstanceLimitsHandling", name: "InstanceLimitsHandling", traits: {"smithy.api#enum" => [{"value" => "OPT_IN", "name" => "OPT_IN"}, {"value" => "OPT_OUT", "name" => "OPT_OUT"}]})
@@ -107,6 +118,10 @@ module Aws::ConnectCampaignsV2
     Iso8601Date = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcampaignsv2#Iso8601Date", name: "Iso8601Date", traits: {"smithy.api#pattern" => "^\\d{4}-\\d{2}-\\d{2}$"})
     Iso8601Duration = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcampaignsv2#Iso8601Duration", name: "Iso8601Duration", traits: {"smithy.api#length" => {"min" => 0, "max" => 50}, "smithy.api#pattern" => "^P(?:([-+]?[0-9]+)D)?(T(?:([-+]?[0-9]+)H)?(?:([-+]?[0-9]+)M)?(?:([-+]?[0-9]+)(?:[.,]([0-9]{0,9}))?S)?)?$"})
     Iso8601Time = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcampaignsv2#Iso8601Time", name: "Iso8601Time", traits: {"smithy.api#pattern" => "^T\\d{2}:\\d{2}$"})
+    LambdaArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcampaignsv2#LambdaArn", name: "LambdaArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 140}, "smithy.api#pattern" => "^arn:aws[a-zA-Z-]*:lambda:[a-z]{2}(-gov)?-[a-z]+-\\d:\\d{12}:function:([a-zA-Z0-9-_]+)(:([a-zA-Z0-9-_]+))?$"})
+    LambdaIntegrationConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#LambdaIntegrationConfig", name: "LambdaIntegrationConfig")
+    LambdaIntegrationIdentifier = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#LambdaIntegrationIdentifier", name: "LambdaIntegrationIdentifier")
+    LambdaIntegrationSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#LambdaIntegrationSummary", name: "LambdaIntegrationSummary")
     ListCampaignsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#ListCampaignsRequest", name: "ListCampaignsRequest")
     ListCampaignsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#ListCampaignsResponse", name: "ListCampaignsResponse")
     ListConnectInstanceIntegrationsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#ListConnectInstanceIntegrationsRequest", name: "ListConnectInstanceIntegrationsRequest")
@@ -115,6 +130,7 @@ module Aws::ConnectCampaignsV2
     ListTagsForResourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#ListTagsForResourceResponse", name: "ListTagsForResourceResponse")
     LocalTimeZoneConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#LocalTimeZoneConfig", name: "LocalTimeZoneConfig")
     LocalTimeZoneDetection = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.connectcampaignsv2#LocalTimeZoneDetection", name: "LocalTimeZoneDetection", traits: {"smithy.api#uniqueItems" => {}})
+    LocalTimeZoneDetectionScope = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcampaignsv2#LocalTimeZoneDetectionScope", name: "LocalTimeZoneDetectionScope", traits: {"smithy.api#enum" => [{"value" => "PRIMARY_ONLY", "name" => "PRIMARY_ONLY"}, {"value" => "ALL_AVAILABLE", "name" => "ALL_AVAILABLE"}]})
     LocalTimeZoneDetectionType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcampaignsv2#LocalTimeZoneDetectionType", name: "LocalTimeZoneDetectionType", traits: {"smithy.api#enum" => [{"value" => "ZIP_CODE", "name" => "ZIP_CODE"}, {"value" => "AREA_CODE", "name" => "AREA_CODE"}]})
     MaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.connectcampaignsv2#MaxResults", name: "MaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 50}})
     NextToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcampaignsv2#NextToken", name: "NextToken", traits: {"smithy.api#length" => {"max" => 1000}})
@@ -123,8 +139,11 @@ module Aws::ConnectCampaignsV2
     OpenHours = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.connectcampaignsv2#OpenHours", name: "OpenHours")
     OutboundRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#OutboundRequest", name: "OutboundRequest")
     OutboundRequestList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.connectcampaignsv2#OutboundRequestList", name: "OutboundRequestList", traits: {"smithy.api#length" => {"min" => 1, "max" => 25}})
+    PacingStrategy = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.connectcampaignsv2#PacingStrategy", name: "PacingStrategy")
+    PacingStrategyList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.connectcampaignsv2#PacingStrategyList", name: "PacingStrategyList", traits: {"smithy.api#length" => {"min" => 1, "max" => 1}})
     PauseCampaignRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#PauseCampaignRequest", name: "PauseCampaignRequest")
     PredictiveConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#PredictiveConfig", name: "PredictiveConfig")
+    PreviewConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#PreviewConfig", name: "PreviewConfig")
     ProfileId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcampaignsv2#ProfileId", name: "ProfileId", traits: {"smithy.api#pattern" => "^[a-f0-9]{32}$"})
     ProfileOutboundRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#ProfileOutboundRequest", name: "ProfileOutboundRequest")
     ProfileOutboundRequestFailureCode = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcampaignsv2#ProfileOutboundRequestFailureCode", name: "ProfileOutboundRequestFailureCode", traits: {"smithy.api#enum" => [{"value" => "UnknownError", "name" => "UNKNOWN_ERROR", "documentation" => "Unexpected error during processing of request"}, {"value" => "ResourceNotFound", "name" => "RESOURCE_NOT_FOUND", "documentation" => "The specified resource was not found"}, {"value" => "Conflict", "name" => "CONFLICT", "documentation" => "The specified resource conflicts with another resource"}, {"value" => "RequestThrottled", "name" => "REQUEST_THROTTLED", "documentation" => "Request throttled due to large number of requests"}, {"value" => "InvalidInput", "name" => "INVALID_INPUT", "documentation" => "The request failed to satisfy the constraints specified by the service"}]})
@@ -147,14 +166,17 @@ module Aws::ConnectCampaignsV2
     RestrictedPeriodName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcampaignsv2#RestrictedPeriodName", name: "RestrictedPeriodName", traits: {"smithy.api#length" => {"min" => 1, "max" => 127}})
     RestrictedPeriods = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.connectcampaignsv2#RestrictedPeriods", name: "RestrictedPeriods")
     ResumeCampaignRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#ResumeCampaignRequest", name: "ResumeCampaignRequest")
+    RingTimeout = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.connectcampaignsv2#RingTimeout", name: "RingTimeout", traits: {"smithy.api#range" => {"min" => 15, "max" => 60}})
     Schedule = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#Schedule", name: "Schedule")
     ServiceLinkedRoleArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcampaignsv2#ServiceLinkedRoleArn", name: "ServiceLinkedRoleArn", traits: {"smithy.api#length" => {"max" => 256}})
     ServiceQuotaExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#ServiceQuotaExceededException", name: "ServiceQuotaExceededException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 402})
+    SessionId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcampaignsv2#SessionId", name: "SessionId", traits: {"smithy.api#length" => {"min" => 1, "max" => 36}})
     SmsChannelSubtypeConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#SmsChannelSubtypeConfig", name: "SmsChannelSubtypeConfig")
     SmsChannelSubtypeParameters = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#SmsChannelSubtypeParameters", name: "SmsChannelSubtypeParameters")
     SmsOutboundConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#SmsOutboundConfig", name: "SmsOutboundConfig")
     SmsOutboundMode = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.connectcampaignsv2#SmsOutboundMode", name: "SmsOutboundMode")
     Source = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.connectcampaignsv2#Source", name: "Source")
+    SourceEvent = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcampaignsv2#SourceEvent", name: "SourceEvent", traits: {"smithy.api#length" => {"min" => 1}})
     SourcePhoneNumber = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcampaignsv2#SourcePhoneNumber", name: "SourcePhoneNumber", traits: {"smithy.api#length" => {"max" => 100}})
     StartCampaignRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#StartCampaignRequest", name: "StartCampaignRequest")
     StartInstanceOnboardingJobRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#StartInstanceOnboardingJobRequest", name: "StartInstanceOnboardingJobRequest")
@@ -171,6 +193,7 @@ module Aws::ConnectCampaignsV2
     TagMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.connectcampaignsv2#TagMap", name: "TagMap")
     TagResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#TagResourceRequest", name: "TagResourceRequest")
     TagValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcampaignsv2#TagValue", name: "TagValue", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}})
+    TargetRate = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.connectcampaignsv2#TargetRate", name: "TargetRate", traits: {"smithy.api#range" => {"min" => 0.0, "max" => 1.0}})
     TelephonyChannelSubtypeConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#TelephonyChannelSubtypeConfig", name: "TelephonyChannelSubtypeConfig")
     TelephonyChannelSubtypeParameters = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#TelephonyChannelSubtypeParameters", name: "TelephonyChannelSubtypeParameters")
     TelephonyOutboundConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#TelephonyOutboundConfig", name: "TelephonyOutboundConfig")
@@ -181,20 +204,34 @@ module Aws::ConnectCampaignsV2
     TimeStamp = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.connectcampaignsv2#TimeStamp", name: "TimeStamp", traits: {"smithy.api#timestampFormat" => "date-time"})
     TimeWindow = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#TimeWindow", name: "TimeWindow")
     TimeZone = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcampaignsv2#TimeZone", name: "TimeZone", traits: {"smithy.api#length" => {"min" => 0, "max" => 50}, "smithy.api#pattern" => "^[a-zA-Z0-9_\\-/]*$"})
+    TimeoutConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#TimeoutConfig", name: "TimeoutConfig")
+    TimeoutDuration = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.connectcampaignsv2#TimeoutDuration", name: "TimeoutDuration", traits: {"smithy.api#range" => {"min" => 1, "max" => 300}})
     UntagResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#UntagResourceRequest", name: "UntagResourceRequest")
     UpdateCampaignChannelSubtypeConfigRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#UpdateCampaignChannelSubtypeConfigRequest", name: "UpdateCampaignChannelSubtypeConfigRequest")
     UpdateCampaignCommunicationLimitsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#UpdateCampaignCommunicationLimitsRequest", name: "UpdateCampaignCommunicationLimitsRequest")
     UpdateCampaignCommunicationTimeRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#UpdateCampaignCommunicationTimeRequest", name: "UpdateCampaignCommunicationTimeRequest")
+    UpdateCampaignEntryLimitsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#UpdateCampaignEntryLimitsRequest", name: "UpdateCampaignEntryLimitsRequest")
     UpdateCampaignFlowAssociationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#UpdateCampaignFlowAssociationRequest", name: "UpdateCampaignFlowAssociationRequest")
     UpdateCampaignNameRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#UpdateCampaignNameRequest", name: "UpdateCampaignNameRequest")
     UpdateCampaignScheduleRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#UpdateCampaignScheduleRequest", name: "UpdateCampaignScheduleRequest")
     UpdateCampaignSourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#UpdateCampaignSourceRequest", name: "UpdateCampaignSourceRequest")
     ValidationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#ValidationException", name: "ValidationException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
+    WebNotificationContext = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#WebNotificationContext", name: "WebNotificationContext")
+    WhatsAppChannelSubtypeConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#WhatsAppChannelSubtypeConfig", name: "WhatsAppChannelSubtypeConfig")
+    WhatsAppChannelSubtypeParameters = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#WhatsAppChannelSubtypeParameters", name: "WhatsAppChannelSubtypeParameters")
+    WhatsAppOutboundConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcampaignsv2#WhatsAppOutboundConfig", name: "WhatsAppOutboundConfig")
+    WhatsAppOutboundMode = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.connectcampaignsv2#WhatsAppOutboundMode", name: "WhatsAppOutboundMode")
     XAmazonErrorType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcampaignsv2#XAmazonErrorType", name: "XAmazonErrorType")
 
+    AbandonmentRatePacingConfig.add_member(:target_rate, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetRate, name: "targetRate", traits: {"smithy.api#required" => {}}))
+    AbandonmentRatePacingConfig.add_member(:connection_start_point, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionStartPoint, name: "connectionStartPoint", traits: {"smithy.api#required" => {}}))
+    AbandonmentRatePacingConfig.add_member(:connection_threshold_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "connectionThresholdSeconds", traits: {"smithy.api#range" => {"min" => 1}, "smithy.api#required" => {}}))
+    AbandonmentRatePacingConfig.add_member(:evaluation_window, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationWindow, name: "evaluationWindow", traits: {"smithy.api#required" => {}}))
+    AbandonmentRatePacingConfig.type = Types::AbandonmentRatePacingConfig
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     AccessDeniedException.add_member(:x_amz_error_type, ::Smithy::Schema::Shapes::MemberShape.new(target: XAmazonErrorType, name: "xAmzErrorType", traits: {"smithy.api#httpHeader" => "x-amzn-ErrorType"}))
     AccessDeniedException.type = Types::AccessDeniedException
+    AgentActions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentAction, name: "member"))
     AgentlessConfig.type = Types::AgentlessConfig
     AnswerMachineDetectionConfig.add_member(:enable_answer_machine_detection, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "enableAnswerMachineDetection", traits: {"smithy.api#required" => {}}))
     AnswerMachineDetectionConfig.add_member(:await_answer_machine_prompt, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "awaitAnswerMachinePrompt", traits: {"smithy.api#default" => nil}))
@@ -205,10 +242,12 @@ module Aws::ConnectCampaignsV2
     Campaign.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignArn, name: "arn", traits: {"smithy.api#required" => {}}))
     Campaign.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignName, name: "name", traits: {"smithy.api#required" => {}}))
     Campaign.add_member(:connect_instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceId, name: "connectInstanceId", traits: {"smithy.api#required" => {}}))
-    Campaign.add_member(:channel_subtype_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelSubtypeConfig, name: "channelSubtypeConfig", traits: {"smithy.api#required" => {}}))
+    Campaign.add_member(:channel_subtype_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelSubtypeConfig, name: "channelSubtypeConfig"))
+    Campaign.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalCampaignType, name: "type"))
     Campaign.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: Source, name: "source"))
     Campaign.add_member(:connect_campaign_flow_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "connectCampaignFlowArn"))
     Campaign.add_member(:schedule, ::Smithy::Schema::Shapes::MemberShape.new(target: Schedule, name: "schedule"))
+    Campaign.add_member(:entry_limits_config, ::Smithy::Schema::Shapes::MemberShape.new(target: EntryLimitsConfig, name: "entryLimitsConfig"))
     Campaign.add_member(:communication_time_config, ::Smithy::Schema::Shapes::MemberShape.new(target: CommunicationTimeConfig, name: "communicationTimeConfig"))
     Campaign.add_member(:communication_limits_override, ::Smithy::Schema::Shapes::MemberShape.new(target: CommunicationLimitsConfig, name: "communicationLimitsOverride"))
     Campaign.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
@@ -221,18 +260,24 @@ module Aws::ConnectCampaignsV2
     CampaignSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignName, name: "name", traits: {"smithy.api#required" => {}}))
     CampaignSummary.add_member(:connect_instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceId, name: "connectInstanceId", traits: {"smithy.api#required" => {}}))
     CampaignSummary.add_member(:channel_subtypes, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelSubtypeList, name: "channelSubtypes", traits: {"smithy.api#required" => {}}))
+    CampaignSummary.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalCampaignType, name: "type"))
     CampaignSummary.add_member(:schedule, ::Smithy::Schema::Shapes::MemberShape.new(target: Schedule, name: "schedule"))
+    CampaignSummary.add_member(:entry_limits_config, ::Smithy::Schema::Shapes::MemberShape.new(target: EntryLimitsConfig, name: "entryLimitsConfig"))
     CampaignSummary.add_member(:connect_campaign_flow_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "connectCampaignFlowArn"))
     CampaignSummary.type = Types::CampaignSummary
     CampaignSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignSummary, name: "member"))
+    ChannelContext.add_member(:web_notification_context, ::Smithy::Schema::Shapes::MemberShape.new(target: WebNotificationContext, name: "webNotificationContext"))
+    ChannelContext.type = Types::ChannelContext
     ChannelSubtypeConfig.add_member(:telephony, ::Smithy::Schema::Shapes::MemberShape.new(target: TelephonyChannelSubtypeConfig, name: "telephony"))
     ChannelSubtypeConfig.add_member(:sms, ::Smithy::Schema::Shapes::MemberShape.new(target: SmsChannelSubtypeConfig, name: "sms"))
     ChannelSubtypeConfig.add_member(:email, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailChannelSubtypeConfig, name: "email"))
+    ChannelSubtypeConfig.add_member(:whats_app, ::Smithy::Schema::Shapes::MemberShape.new(target: WhatsAppChannelSubtypeConfig, name: "whatsApp"))
     ChannelSubtypeConfig.type = Types::ChannelSubtypeConfig
     ChannelSubtypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelSubtype, name: "member"))
     ChannelSubtypeParameters.add_member(:telephony, Types::ChannelSubtypeParameters::Telephony, ::Smithy::Schema::Shapes::MemberShape.new(target: TelephonyChannelSubtypeParameters, name: "telephony"))
     ChannelSubtypeParameters.add_member(:sms, Types::ChannelSubtypeParameters::Sms, ::Smithy::Schema::Shapes::MemberShape.new(target: SmsChannelSubtypeParameters, name: "sms"))
     ChannelSubtypeParameters.add_member(:email, Types::ChannelSubtypeParameters::Email, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailChannelSubtypeParameters, name: "email"))
+    ChannelSubtypeParameters.add_member(:whats_app, Types::ChannelSubtypeParameters::WhatsApp, ::Smithy::Schema::Shapes::MemberShape.new(target: WhatsAppChannelSubtypeParameters, name: "whatsApp"))
     ChannelSubtypeParameters.add_member(:unknown, Types::ChannelSubtypeParameters::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     ChannelSubtypeParameters.type = Types::ChannelSubtypeParameters
     CommunicationLimit.add_member(:max_count_per_recipient, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "maxCountPerRecipient", traits: {"smithy.api#range" => {"min" => 1}, "smithy.api#required" => {}}))
@@ -250,16 +295,19 @@ module Aws::ConnectCampaignsV2
     CommunicationTimeConfig.add_member(:telephony, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeWindow, name: "telephony"))
     CommunicationTimeConfig.add_member(:sms, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeWindow, name: "sms"))
     CommunicationTimeConfig.add_member(:email, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeWindow, name: "email"))
+    CommunicationTimeConfig.add_member(:whats_app, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeWindow, name: "whatsApp"))
     CommunicationTimeConfig.type = Types::CommunicationTimeConfig
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ConflictException.add_member(:x_amz_error_type, ::Smithy::Schema::Shapes::MemberShape.new(target: XAmazonErrorType, name: "xAmzErrorType", traits: {"smithy.api#httpHeader" => "x-amzn-ErrorType"}))
     ConflictException.type = Types::ConflictException
     CreateCampaignRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignName, name: "name", traits: {"smithy.api#required" => {}}))
     CreateCampaignRequest.add_member(:connect_instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceId, name: "connectInstanceId", traits: {"smithy.api#required" => {}}))
-    CreateCampaignRequest.add_member(:channel_subtype_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelSubtypeConfig, name: "channelSubtypeConfig", traits: {"smithy.api#required" => {}}))
+    CreateCampaignRequest.add_member(:channel_subtype_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelSubtypeConfig, name: "channelSubtypeConfig"))
+    CreateCampaignRequest.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalCampaignType, name: "type"))
     CreateCampaignRequest.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: Source, name: "source"))
     CreateCampaignRequest.add_member(:connect_campaign_flow_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "connectCampaignFlowArn"))
     CreateCampaignRequest.add_member(:schedule, ::Smithy::Schema::Shapes::MemberShape.new(target: Schedule, name: "schedule"))
+    CreateCampaignRequest.add_member(:entry_limits_config, ::Smithy::Schema::Shapes::MemberShape.new(target: EntryLimitsConfig, name: "entryLimitsConfig"))
     CreateCampaignRequest.add_member(:communication_time_config, ::Smithy::Schema::Shapes::MemberShape.new(target: CommunicationTimeConfig, name: "communicationTimeConfig"))
     CreateCampaignRequest.add_member(:communication_limits_override, ::Smithy::Schema::Shapes::MemberShape.new(target: CommunicationLimitsConfig, name: "communicationLimitsOverride"))
     CreateCampaignRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
@@ -287,6 +335,8 @@ module Aws::ConnectCampaignsV2
     DeleteCampaignCommunicationTimeRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignId, name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteCampaignCommunicationTimeRequest.add_member(:config, ::Smithy::Schema::Shapes::MemberShape.new(target: CommunicationTimeConfigType, name: "config", traits: {"smithy.api#httpQuery" => "config", "smithy.api#required" => {}}))
     DeleteCampaignCommunicationTimeRequest.type = Types::DeleteCampaignCommunicationTimeRequest
+    DeleteCampaignEntryLimitsRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignId, name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteCampaignEntryLimitsRequest.type = Types::DeleteCampaignEntryLimitsRequest
     DeleteCampaignRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignId, name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteCampaignRequest.type = Types::DeleteCampaignRequest
     DeleteConnectInstanceConfigRequest.add_member(:connect_instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceId, name: "connectInstanceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -321,8 +371,14 @@ module Aws::ConnectCampaignsV2
     EncryptionConfig.add_member(:encryption_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionType, name: "encryptionType"))
     EncryptionConfig.add_member(:key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionKey, name: "keyArn"))
     EncryptionConfig.type = Types::EncryptionConfig
+    EntryLimitsConfig.add_member(:max_entry_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "maxEntryCount", traits: {"smithy.api#range" => {"min" => 0}, "smithy.api#required" => {}}))
+    EntryLimitsConfig.add_member(:min_entry_interval, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601Duration, name: "minEntryInterval", traits: {"smithy.api#required" => {}}))
+    EntryLimitsConfig.type = Types::EntryLimitsConfig
     EventTrigger.add_member(:customer_profiles_domain_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "customerProfilesDomainArn"))
     EventTrigger.type = Types::EventTrigger
+    EventTriggerContext.add_member(:source_event, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceEvent, name: "sourceEvent"))
+    EventTriggerContext.add_member(:channel_context, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelContext, name: "channelContext"))
+    EventTriggerContext.type = Types::EventTriggerContext
     FailedCampaignStateResponse.add_member(:campaign_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignId, name: "campaignId"))
     FailedCampaignStateResponse.add_member(:failure_code, ::Smithy::Schema::Shapes::MemberShape.new(target: GetCampaignStateBatchFailureCode, name: "failureCode"))
     FailedCampaignStateResponse.type = Types::FailedCampaignStateResponse
@@ -373,14 +429,17 @@ module Aws::ConnectCampaignsV2
     InstanceOnboardingJobStatus.type = Types::InstanceOnboardingJobStatus
     IntegrationConfig.add_member(:customer_profiles, Types::IntegrationConfig::CustomerProfiles, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerProfilesIntegrationConfig, name: "customerProfiles"))
     IntegrationConfig.add_member(:q_connect, Types::IntegrationConfig::QConnect, ::Smithy::Schema::Shapes::MemberShape.new(target: QConnectIntegrationConfig, name: "qConnect"))
+    IntegrationConfig.add_member(:lambda, Types::IntegrationConfig::Lambda, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaIntegrationConfig, name: "lambda"))
     IntegrationConfig.add_member(:unknown, Types::IntegrationConfig::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     IntegrationConfig.type = Types::IntegrationConfig
     IntegrationIdentifier.add_member(:customer_profiles, Types::IntegrationIdentifier::CustomerProfiles, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerProfilesIntegrationIdentifier, name: "customerProfiles"))
     IntegrationIdentifier.add_member(:q_connect, Types::IntegrationIdentifier::QConnect, ::Smithy::Schema::Shapes::MemberShape.new(target: QConnectIntegrationIdentifier, name: "qConnect"))
+    IntegrationIdentifier.add_member(:lambda, Types::IntegrationIdentifier::Lambda, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaIntegrationIdentifier, name: "lambda"))
     IntegrationIdentifier.add_member(:unknown, Types::IntegrationIdentifier::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     IntegrationIdentifier.type = Types::IntegrationIdentifier
     IntegrationSummary.add_member(:customer_profiles, Types::IntegrationSummary::CustomerProfiles, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerProfilesIntegrationSummary, name: "customerProfiles"))
     IntegrationSummary.add_member(:q_connect, Types::IntegrationSummary::QConnect, ::Smithy::Schema::Shapes::MemberShape.new(target: QConnectIntegrationSummary, name: "qConnect"))
+    IntegrationSummary.add_member(:lambda, Types::IntegrationSummary::Lambda, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaIntegrationSummary, name: "lambda"))
     IntegrationSummary.add_member(:unknown, Types::IntegrationSummary::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     IntegrationSummary.type = Types::IntegrationSummary
     IntegrationSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegrationSummary, name: "member"))
@@ -394,6 +453,12 @@ module Aws::ConnectCampaignsV2
     InvalidStateException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     InvalidStateException.add_member(:x_amz_error_type, ::Smithy::Schema::Shapes::MemberShape.new(target: XAmazonErrorType, name: "xAmzErrorType", traits: {"smithy.api#httpHeader" => "x-amzn-ErrorType"}))
     InvalidStateException.type = Types::InvalidStateException
+    LambdaIntegrationConfig.add_member(:function_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaArn, name: "functionArn", traits: {"smithy.api#required" => {}}))
+    LambdaIntegrationConfig.type = Types::LambdaIntegrationConfig
+    LambdaIntegrationIdentifier.add_member(:function_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaArn, name: "functionArn", traits: {"smithy.api#required" => {}}))
+    LambdaIntegrationIdentifier.type = Types::LambdaIntegrationIdentifier
+    LambdaIntegrationSummary.add_member(:function_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaArn, name: "functionArn", traits: {"smithy.api#required" => {}}))
+    LambdaIntegrationSummary.type = Types::LambdaIntegrationSummary
     ListCampaignsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "maxResults"))
     ListCampaignsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
     ListCampaignsRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignFilters, name: "filters"))
@@ -414,6 +479,7 @@ module Aws::ConnectCampaignsV2
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
     LocalTimeZoneConfig.add_member(:default_time_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeZone, name: "defaultTimeZone"))
     LocalTimeZoneConfig.add_member(:local_time_zone_detection, ::Smithy::Schema::Shapes::MemberShape.new(target: LocalTimeZoneDetection, name: "localTimeZoneDetection"))
+    LocalTimeZoneConfig.add_member(:local_time_zone_detection_scope, ::Smithy::Schema::Shapes::MemberShape.new(target: LocalTimeZoneDetectionScope, name: "localTimeZoneDetectionScope"))
     LocalTimeZoneConfig.type = Types::LocalTimeZoneConfig
     LocalTimeZoneDetection.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LocalTimeZoneDetectionType, name: "member"))
     ObjectTypeNamesMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: EventType, name: "key"))
@@ -426,13 +492,23 @@ module Aws::ConnectCampaignsV2
     OutboundRequest.add_member(:channel_subtype_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelSubtypeParameters, name: "channelSubtypeParameters", traits: {"smithy.api#required" => {}}))
     OutboundRequest.type = Types::OutboundRequest
     OutboundRequestList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OutboundRequest, name: "member"))
+    PacingStrategy.add_member(:abandonment_rate, Types::PacingStrategy::AbandonmentRate, ::Smithy::Schema::Shapes::MemberShape.new(target: AbandonmentRatePacingConfig, name: "abandonmentRate"))
+    PacingStrategy.add_member(:unknown, Types::PacingStrategy::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    PacingStrategy.type = Types::PacingStrategy
+    PacingStrategyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PacingStrategy, name: "member"))
     PauseCampaignRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignId, name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     PauseCampaignRequest.type = Types::PauseCampaignRequest
     PredictiveConfig.add_member(:bandwidth_allocation, ::Smithy::Schema::Shapes::MemberShape.new(target: BandwidthAllocation, name: "bandwidthAllocation", traits: {"smithy.api#required" => {}}))
+    PredictiveConfig.add_member(:pacing_strategies, ::Smithy::Schema::Shapes::MemberShape.new(target: PacingStrategyList, name: "pacingStrategies"))
     PredictiveConfig.type = Types::PredictiveConfig
+    PreviewConfig.add_member(:bandwidth_allocation, ::Smithy::Schema::Shapes::MemberShape.new(target: BandwidthAllocation, name: "bandwidthAllocation", traits: {"smithy.api#required" => {}}))
+    PreviewConfig.add_member(:timeout_config, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeoutConfig, name: "timeoutConfig", traits: {"smithy.api#required" => {}}))
+    PreviewConfig.add_member(:agent_actions, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentActions, name: "agentActions"))
+    PreviewConfig.type = Types::PreviewConfig
     ProfileOutboundRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#required" => {}}))
     ProfileOutboundRequest.add_member(:profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfileId, name: "profileId", traits: {"smithy.api#required" => {}}))
     ProfileOutboundRequest.add_member(:expiration_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeStamp, name: "expirationTime"))
+    ProfileOutboundRequest.add_member(:event_trigger_context, ::Smithy::Schema::Shapes::MemberShape.new(target: EventTriggerContext, name: "eventTriggerContext"))
     ProfileOutboundRequest.type = Types::ProfileOutboundRequest
     ProfileOutboundRequestList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfileOutboundRequest, name: "member"))
     ProgressiveConfig.add_member(:bandwidth_allocation, ::Smithy::Schema::Shapes::MemberShape.new(target: BandwidthAllocation, name: "bandwidthAllocation", traits: {"smithy.api#required" => {}}))
@@ -536,14 +612,17 @@ module Aws::ConnectCampaignsV2
     TelephonyChannelSubtypeParameters.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: Attributes, name: "attributes", traits: {"smithy.api#required" => {}}))
     TelephonyChannelSubtypeParameters.add_member(:connect_source_phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: SourcePhoneNumber, name: "connectSourcePhoneNumber"))
     TelephonyChannelSubtypeParameters.add_member(:answer_machine_detection_config, ::Smithy::Schema::Shapes::MemberShape.new(target: AnswerMachineDetectionConfig, name: "answerMachineDetectionConfig"))
+    TelephonyChannelSubtypeParameters.add_member(:ring_timeout, ::Smithy::Schema::Shapes::MemberShape.new(target: RingTimeout, name: "ringTimeout"))
     TelephonyChannelSubtypeParameters.type = Types::TelephonyChannelSubtypeParameters
     TelephonyOutboundConfig.add_member(:connect_contact_flow_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactFlowId, name: "connectContactFlowId", traits: {"smithy.api#required" => {}}))
     TelephonyOutboundConfig.add_member(:connect_source_phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: SourcePhoneNumber, name: "connectSourcePhoneNumber"))
     TelephonyOutboundConfig.add_member(:answer_machine_detection_config, ::Smithy::Schema::Shapes::MemberShape.new(target: AnswerMachineDetectionConfig, name: "answerMachineDetectionConfig"))
+    TelephonyOutboundConfig.add_member(:ring_timeout, ::Smithy::Schema::Shapes::MemberShape.new(target: RingTimeout, name: "ringTimeout"))
     TelephonyOutboundConfig.type = Types::TelephonyOutboundConfig
     TelephonyOutboundMode.add_member(:progressive, Types::TelephonyOutboundMode::Progressive, ::Smithy::Schema::Shapes::MemberShape.new(target: ProgressiveConfig, name: "progressive"))
     TelephonyOutboundMode.add_member(:predictive, Types::TelephonyOutboundMode::Predictive, ::Smithy::Schema::Shapes::MemberShape.new(target: PredictiveConfig, name: "predictive"))
     TelephonyOutboundMode.add_member(:agentless, Types::TelephonyOutboundMode::Agentless, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentlessConfig, name: "agentless"))
+    TelephonyOutboundMode.add_member(:preview, Types::TelephonyOutboundMode::Preview, ::Smithy::Schema::Shapes::MemberShape.new(target: PreviewConfig, name: "preview"))
     TelephonyOutboundMode.add_member(:unknown, Types::TelephonyOutboundMode::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     TelephonyOutboundMode.type = Types::TelephonyOutboundMode
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
@@ -556,6 +635,8 @@ module Aws::ConnectCampaignsV2
     TimeWindow.add_member(:open_hours, ::Smithy::Schema::Shapes::MemberShape.new(target: OpenHours, name: "openHours", traits: {"smithy.api#required" => {}}))
     TimeWindow.add_member(:restricted_periods, ::Smithy::Schema::Shapes::MemberShape.new(target: RestrictedPeriods, name: "restrictedPeriods"))
     TimeWindow.type = Types::TimeWindow
+    TimeoutConfig.add_member(:duration_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeoutDuration, name: "durationInSeconds", traits: {"smithy.api#required" => {}}))
+    TimeoutConfig.type = Types::TimeoutConfig
     UntagResourceRequest.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "arn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, name: "tagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
@@ -568,6 +649,9 @@ module Aws::ConnectCampaignsV2
     UpdateCampaignCommunicationTimeRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignId, name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdateCampaignCommunicationTimeRequest.add_member(:communication_time_config, ::Smithy::Schema::Shapes::MemberShape.new(target: CommunicationTimeConfig, name: "communicationTimeConfig", traits: {"smithy.api#required" => {}}))
     UpdateCampaignCommunicationTimeRequest.type = Types::UpdateCampaignCommunicationTimeRequest
+    UpdateCampaignEntryLimitsRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignId, name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateCampaignEntryLimitsRequest.add_member(:entry_limits_config, ::Smithy::Schema::Shapes::MemberShape.new(target: EntryLimitsConfig, name: "entryLimitsConfig", traits: {"smithy.api#required" => {}}))
+    UpdateCampaignEntryLimitsRequest.type = Types::UpdateCampaignEntryLimitsRequest
     UpdateCampaignFlowAssociationRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignId, name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdateCampaignFlowAssociationRequest.add_member(:connect_campaign_flow_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "connectCampaignFlowArn", traits: {"smithy.api#required" => {}}))
     UpdateCampaignFlowAssociationRequest.type = Types::UpdateCampaignFlowAssociationRequest
@@ -583,12 +667,30 @@ module Aws::ConnectCampaignsV2
     ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ValidationException.add_member(:x_amz_error_type, ::Smithy::Schema::Shapes::MemberShape.new(target: XAmazonErrorType, name: "xAmzErrorType", traits: {"smithy.api#httpHeader" => "x-amzn-ErrorType"}))
     ValidationException.type = Types::ValidationException
+    WebNotificationContext.add_member(:session_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionId, name: "sessionId"))
+    WebNotificationContext.add_member(:browser_id, ::Smithy::Schema::Shapes::MemberShape.new(target: BrowserId, name: "browserId"))
+    WebNotificationContext.type = Types::WebNotificationContext
+    WhatsAppChannelSubtypeConfig.add_member(:capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: Capacity, name: "capacity"))
+    WhatsAppChannelSubtypeConfig.add_member(:outbound_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: WhatsAppOutboundMode, name: "outboundMode", traits: {"smithy.api#required" => {}}))
+    WhatsAppChannelSubtypeConfig.add_member(:default_outbound_config, ::Smithy::Schema::Shapes::MemberShape.new(target: WhatsAppOutboundConfig, name: "defaultOutboundConfig", traits: {"smithy.api#required" => {}}))
+    WhatsAppChannelSubtypeConfig.type = Types::WhatsAppChannelSubtypeConfig
+    WhatsAppChannelSubtypeParameters.add_member(:destination_phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: DestinationPhoneNumber, name: "destinationPhoneNumber", traits: {"smithy.api#required" => {}}))
+    WhatsAppChannelSubtypeParameters.add_member(:connect_source_phone_number_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "connectSourcePhoneNumberArn"))
+    WhatsAppChannelSubtypeParameters.add_member(:template_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "templateArn"))
+    WhatsAppChannelSubtypeParameters.add_member(:template_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: Attributes, name: "templateParameters", traits: {"smithy.api#required" => {}}))
+    WhatsAppChannelSubtypeParameters.type = Types::WhatsAppChannelSubtypeParameters
+    WhatsAppOutboundConfig.add_member(:connect_source_phone_number_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "connectSourcePhoneNumberArn", traits: {"smithy.api#required" => {}}))
+    WhatsAppOutboundConfig.add_member(:wisdom_template_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "wisdomTemplateArn", traits: {"smithy.api#required" => {}}))
+    WhatsAppOutboundConfig.type = Types::WhatsAppOutboundConfig
+    WhatsAppOutboundMode.add_member(:agentless, Types::WhatsAppOutboundMode::Agentless, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentlessConfig, name: "agentless"))
+    WhatsAppOutboundMode.add_member(:unknown, Types::WhatsAppOutboundMode::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    WhatsAppOutboundMode.type = Types::WhatsAppOutboundMode
 
     AmazonConnectCampaignServiceV2 = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.connectcampaignsv2#AmazonConnectCampaignServiceV2"
       service.name = "AmazonConnectCampaignServiceV2"
       service.version = "2024-04-23"
-      service.traits = {"aws.api#service" => {"sdkId" => "ConnectCampaignsV2", "arnNamespace" => "connect-campaigns", "cloudTrailEventSource" => "connect-campaigns.amazonaws.com"}, "aws.auth#sigv4" => {"name" => "connect-campaigns"}, "aws.protocols#restJson1" => {}, "smithy.api#cors" => {"origin" => "*", "additionalAllowedHeaders" => ["*", "Authorization", "Date", "X-Amz-Date", "X-Amz-Security-Token", "X-Amz-Target", "content-type", "x-amz-content-sha256", "x-amz-user-agent", "x-amzn-platform-id", "x-amzn-trace-id"], "additionalExposedHeaders" => ["x-amzn-errortype", "x-amzn-requestid", "x-amzn-errormessage", "x-amzn-trace-id", "x-amz-apigw-id", "date"], "maxAge" => 86400}, "smithy.api#title" => "AmazonConnectCampaignServiceV2"}
+      service.traits = {"aws.api#service" => {"sdkId" => "ConnectCampaignsV2", "arnNamespace" => "connect-campaigns", "cloudTrailEventSource" => "connect-campaigns.amazonaws.com"}, "aws.auth#sigv4" => {"name" => "connect-campaigns"}, "aws.protocols#restJson1" => {}, "smithy.api#cors" => {"origin" => "*", "additionalAllowedHeaders" => ["*", "Authorization", "Date", "X-Amz-Date", "X-Amz-Security-Token", "X-Amz-Target", "content-type", "x-amz-content-sha256", "x-amz-user-agent", "x-amzn-platform-id", "x-amzn-trace-id"], "additionalExposedHeaders" => ["x-amzn-errortype", "x-amzn-requestid", "x-amzn-errormessage", "x-amzn-trace-id", "x-amz-apigw-id", "date"], "maxAge" => 86400}, "smithy.api#title" => "AmazonConnectCampaignServiceV2", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://connect-campaigns-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://connect-campaigns-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://connect-campaigns.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://connect-campaigns.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
       service.add_operation(:create_campaign, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.connectcampaignsv2#CreateCampaign"
         operation.name = "CreateCampaign"
@@ -651,6 +753,19 @@ module Aws::ConnectCampaignsV2
         operation.errors << ResourceNotFoundException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/v2/campaigns/{id}/communication-time", "method" => "DELETE"}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:delete_campaign_entry_limits, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.connectcampaignsv2#DeleteCampaignEntryLimits"
+        operation.name = "DeleteCampaignEntryLimits"
+        operation.input = DeleteCampaignEntryLimitsRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << InvalidCampaignStateException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"uri" => "/v2/campaigns/{id}/entry-limits", "method" => "DELETE"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_connect_instance_config, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.connectcampaignsv2#DeleteConnectInstanceConfig"
@@ -975,6 +1090,19 @@ module Aws::ConnectCampaignsV2
         operation.errors << ResourceNotFoundException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/v2/campaigns/{id}/communication-time", "method" => "POST"}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:update_campaign_entry_limits, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.connectcampaignsv2#UpdateCampaignEntryLimits"
+        operation.name = "UpdateCampaignEntryLimits"
+        operation.input = UpdateCampaignEntryLimitsRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << InvalidCampaignStateException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"uri" => "/v2/campaigns/{id}/entry-limits", "method" => "POST"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:update_campaign_flow_association, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.connectcampaignsv2#UpdateCampaignFlowAssociation"

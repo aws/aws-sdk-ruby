@@ -73,6 +73,194 @@ module Aws::WellArchitected
       attr_accessor content: Array[Types::ChoiceContent]?
     end
 
+    class AgentProfileSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?display_name: String,
+        ?description: String,
+        ?business_overview: String,
+        ?pillars: Array[String],
+        ?deletion_protection: bool,
+        ?execution_role_arn: String,
+        ?aggregation_configuration: Array[Types::AggregationConfiguration],
+        ?arn: String,
+        ?eligible_for_scheduled_generation: bool,
+        ?eligible_for_architecture_generation: bool,
+        ?field_errors: Hash[String, String],
+        ?tags: Array[Types::Tag],
+        ?created_by: String,
+        ?created_at: Time,
+        ?last_modified_by: String,
+        ?last_modified_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor display_name: String?
+      attr_accessor description: String?
+      attr_accessor business_overview: String?
+      attr_accessor pillars: Array[String]?
+      attr_accessor deletion_protection: bool?
+      attr_accessor execution_role_arn: String?
+      attr_accessor aggregation_configuration: Array[Types::AggregationConfiguration]?
+      attr_accessor arn: String?
+      attr_accessor eligible_for_scheduled_generation: bool?
+      attr_accessor eligible_for_architecture_generation: bool?
+      attr_accessor field_errors: Hash[String, String]?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor created_by: String?
+      attr_accessor created_at: Time?
+      attr_accessor last_modified_by: String?
+      attr_accessor last_modified_at: Time?
+    end
+
+    class AgentRecommendationGenerationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?profile_arn: String,
+        ?name: String,
+        ?status: String,
+        ?estimated_completion_time: Time,
+        ?created_by: String,
+        ?created_at: Time,
+        ?last_modified_by: String,
+        ?last_modified_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor profile_arn: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor estimated_completion_time: Time?
+      attr_accessor created_by: String?
+      attr_accessor created_at: Time?
+      attr_accessor last_modified_by: String?
+      attr_accessor last_modified_at: Time?
+    end
+
+    class AgentRecommendationItemSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?recommendation_arn: String,
+        ?type: String,
+        ?metadata: Smithy::Schema::document,
+        ?created_by: String,
+        ?created_at: Time,
+        ?last_modified_by: String,
+        ?last_modified_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor recommendation_arn: String?
+      attr_accessor type: String?
+      attr_accessor metadata: Smithy::Schema::document?
+      attr_accessor created_by: String?
+      attr_accessor created_at: Time?
+      attr_accessor last_modified_by: String?
+      attr_accessor last_modified_at: Time?
+    end
+
+    class AgentRecommendationRemediation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommendation_arn: String,
+        ?type: String,
+        ?steps: Array[Types::RemediationStep],
+        ?resource_links: Array[Types::ResourceLink],
+        ?created_by: String,
+        ?created_at: Time,
+        ?last_modified_by: String,
+        ?last_modified_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommendation_arn: String?
+      attr_accessor type: String?
+      attr_accessor steps: Array[Types::RemediationStep]?
+      attr_accessor resource_links: Array[Types::ResourceLink]?
+      attr_accessor created_by: String?
+      attr_accessor created_at: Time?
+      attr_accessor last_modified_by: String?
+      attr_accessor last_modified_at: Time?
+    end
+
+    class AgentRecommendationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommendation_arn: String,
+        ?profile_arn: String,
+        ?generation_id: String,
+        ?title: String,
+        ?description: String,
+        ?type: String,
+        ?pillar: String,
+        ?priority: String,
+        ?effort: String,
+        ?status: String,
+        ?state: String,
+        ?update_reason: String,
+        ?impact: String,
+        ?roi: Types::Roi,
+        ?number_of_resources: Integer,
+        ?aws_services: Array[String],
+        ?business_units: Array[String],
+        ?applications: Array[String],
+        ?created_by: String,
+        ?created_at: Time,
+        ?last_modified_by: String,
+        ?last_modified_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommendation_arn: String?
+      attr_accessor profile_arn: String?
+      attr_accessor generation_id: String?
+      attr_accessor title: String?
+      attr_accessor description: String?
+      attr_accessor type: String?
+      attr_accessor pillar: String?
+      attr_accessor priority: String?
+      attr_accessor effort: String?
+      attr_accessor status: String?
+      attr_accessor state: String?
+      attr_accessor update_reason: String?
+      attr_accessor impact: String?
+      attr_accessor roi: Types::Roi?
+      attr_accessor number_of_resources: Integer?
+      attr_accessor aws_services: Array[String]?
+      attr_accessor business_units: Array[String]?
+      attr_accessor applications: Array[String]?
+      attr_accessor created_by: String?
+      attr_accessor created_at: Time?
+      attr_accessor last_modified_by: String?
+      attr_accessor last_modified_at: Time?
+    end
+
+    class AggregationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?regions: Array[String],
+        ?access_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor regions: Array[String]?
+      attr_accessor access_role_arn: String?
+    end
+
     class Answer
       include Smithy::Schema::Structure
 
@@ -149,6 +337,12 @@ module Aws::WellArchitected
       attr_accessor reason: String?
       attr_accessor question_type: String?
       attr_accessor jira_configuration: Types::JiraConfiguration?
+    end
+
+    module ApplicationType
+      SAS: String
+      DESKTOP_APPLICATION: String
+      OTHER: String
     end
 
     class AssociateLensesInput
@@ -423,6 +617,217 @@ module Aws::WellArchitected
       attr_accessor updated_at: Time?
       attr_accessor lenses: Array[Types::LensMetric]?
       attr_accessor lenses_applied_count: Integer?
+    end
+
+    class ContextContent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_ids: Array[String],
+        ?regions: Array[String],
+        ?aws_services: Array[String],
+        ?resource_types: Array[String],
+        ?resource_tags: Array[Types::ContextResourceTag],
+        ?application_overview: String,
+        ?industry: String,
+        ?application_type: String,
+        ?criticality: String,
+        ?architecture_overview: String,
+        ?additional_context: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_ids: Array[String]?
+      attr_accessor regions: Array[String]?
+      attr_accessor aws_services: Array[String]?
+      attr_accessor resource_types: Array[String]?
+      attr_accessor resource_tags: Array[Types::ContextResourceTag]?
+      attr_accessor application_overview: String?
+      attr_accessor industry: String?
+      attr_accessor application_type: String?
+      attr_accessor criticality: String?
+      attr_accessor architecture_overview: String?
+      attr_accessor additional_context: String?
+    end
+
+    class ContextResourceTag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class ContextSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?profile_arn: String,
+        ?title: String,
+        ?context_type: String,
+        ?content: Types::ContextContent,
+        ?application_type: String,
+        ?criticality: String,
+        ?created_by: String,
+        ?created_at: Time,
+        ?last_modified_by: String,
+        ?last_modified_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor profile_arn: String?
+      attr_accessor title: String?
+      attr_accessor context_type: String?
+      attr_accessor content: Types::ContextContent?
+      attr_accessor application_type: String?
+      attr_accessor criticality: String?
+      attr_accessor created_by: String?
+      attr_accessor created_at: Time?
+      attr_accessor last_modified_by: String?
+      attr_accessor last_modified_at: Time?
+    end
+
+    module ContextType
+      APPLICATION: String
+    end
+
+    class CreateAgentContextRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?profile_arn: String,
+        ?title: String,
+        ?context_type: String,
+        ?content: Types::ContextContent,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor profile_arn: String?
+      attr_accessor title: String?
+      attr_accessor context_type: String?
+      attr_accessor content: Types::ContextContent?
+    end
+
+    class CreateAgentContextResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?context: Types::ContextSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor context: Types::ContextSummary?
+    end
+
+    class CreateAgentGoalRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?profile_arn: String,
+        ?pillars: Array[String],
+        ?title: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor profile_arn: String?
+      attr_accessor pillars: Array[String]?
+      attr_accessor title: String?
+      attr_accessor description: String?
+    end
+
+    class CreateAgentGoalResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?goal: Types::GoalSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor goal: Types::GoalSummary?
+    end
+
+    class CreateAgentProfileRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?display_name: String,
+        ?description: String,
+        ?business_overview: String,
+        ?pillars: Array[String],
+        ?deletion_protection: bool,
+        ?execution_role_arn: String,
+        ?aggregation_configuration: Array[Types::AggregationConfiguration],
+        ?client_token: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor display_name: String?
+      attr_accessor description: String?
+      attr_accessor business_overview: String?
+      attr_accessor pillars: Array[String]?
+      attr_accessor deletion_protection: bool?
+      attr_accessor execution_role_arn: String?
+      attr_accessor aggregation_configuration: Array[Types::AggregationConfiguration]?
+      attr_accessor client_token: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateAgentProfileResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?display_name: String,
+        ?description: String,
+        ?business_overview: String,
+        ?pillars: Array[String],
+        ?deletion_protection: bool,
+        ?execution_role_arn: String,
+        ?aggregation_configuration: Array[Types::AggregationConfiguration],
+        ?arn: String,
+        ?eligible_for_scheduled_generation: bool,
+        ?eligible_for_architecture_generation: bool,
+        ?field_errors: Hash[String, String],
+        ?tags: Array[Types::Tag],
+        ?created_by: String,
+        ?created_at: Time,
+        ?last_modified_by: String,
+        ?last_modified_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor display_name: String?
+      attr_accessor description: String?
+      attr_accessor business_overview: String?
+      attr_accessor pillars: Array[String]?
+      attr_accessor deletion_protection: bool?
+      attr_accessor execution_role_arn: String?
+      attr_accessor aggregation_configuration: Array[Types::AggregationConfiguration]?
+      attr_accessor arn: String?
+      attr_accessor eligible_for_scheduled_generation: bool?
+      attr_accessor eligible_for_architecture_generation: bool?
+      attr_accessor field_errors: Hash[String, String]?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor created_by: String?
+      attr_accessor created_at: Time?
+      attr_accessor last_modified_by: String?
+      attr_accessor last_modified_at: Time?
     end
 
     class CreateLensShareInput
@@ -721,9 +1126,97 @@ module Aws::WellArchitected
       attr_accessor share_id: String?
     end
 
+    module Criticality
+      MISSION_CRITICAL: String
+      BUSINESS_CRITICAL: String
+      NON_CRITICAL: String
+      TEST_DEVELOPMENT: String
+    end
+
+    class CrossPillarBenefit
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pillar: String,
+        ?title: String,
+        ?description: String,
+        ?impact: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pillar: String?
+      attr_accessor title: String?
+      attr_accessor description: String?
+      attr_accessor impact: String?
+    end
+
     module DefinitionType
       WORKLOAD_METADATA: String
       APP_REGISTRY: String
+    end
+
+    class DeleteAgentContextRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_arn: String,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_arn: String?
+      attr_accessor id: String?
+    end
+
+    class DeleteAgentContextResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteAgentGoalRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_arn: String,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_arn: String?
+      attr_accessor id: String?
+    end
+
+    class DeleteAgentGoalResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteAgentProfileRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_arn: String?
+    end
+
+    class DeleteAgentProfileResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
     end
 
     class DeleteLensInput
@@ -877,6 +1370,25 @@ module Aws::WellArchitected
       DISABLED: String
     end
 
+    module Effort
+      LARGE: String
+      MEDIUM: String
+      SMALL: String
+    end
+
+    class ErrorDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
     class ExportLensInput
       include Smithy::Schema::Structure
 
@@ -899,6 +1411,261 @@ module Aws::WellArchitected
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor lens_json: String?
+    end
+
+    module FeedbackCategory
+      OTHER: String
+      RECOMMENDATION_NOT_RELEVANT: String
+      RESOURCE_NOT_IMPORTANT: String
+      RESOURCE_TYPE_NOT_IMPORTANT: String
+      RECOMMENDATION_INCORRECT: String
+    end
+
+    module GenerationStatus
+      QUEUED: String
+      IN_PROGRESS: String
+      COMPLETED: String
+      ERROR: String
+    end
+
+    class GetAgentContextRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_arn: String,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_arn: String?
+      attr_accessor id: String?
+    end
+
+    class GetAgentContextResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?context: Types::ContextSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor context: Types::ContextSummary?
+    end
+
+    class GetAgentGoalRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_arn: String,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_arn: String?
+      attr_accessor id: String?
+    end
+
+    class GetAgentGoalResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?goal: Types::GoalSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor goal: Types::GoalSummary?
+    end
+
+    class GetAgentProfileRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_arn: String?
+    end
+
+    class GetAgentProfileResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?display_name: String,
+        ?description: String,
+        ?business_overview: String,
+        ?pillars: Array[String],
+        ?deletion_protection: bool,
+        ?execution_role_arn: String,
+        ?aggregation_configuration: Array[Types::AggregationConfiguration],
+        ?arn: String,
+        ?eligible_for_scheduled_generation: bool,
+        ?eligible_for_architecture_generation: bool,
+        ?field_errors: Hash[String, String],
+        ?tags: Array[Types::Tag],
+        ?created_by: String,
+        ?created_at: Time,
+        ?last_modified_by: String,
+        ?last_modified_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor display_name: String?
+      attr_accessor description: String?
+      attr_accessor business_overview: String?
+      attr_accessor pillars: Array[String]?
+      attr_accessor deletion_protection: bool?
+      attr_accessor execution_role_arn: String?
+      attr_accessor aggregation_configuration: Array[Types::AggregationConfiguration]?
+      attr_accessor arn: String?
+      attr_accessor eligible_for_scheduled_generation: bool?
+      attr_accessor eligible_for_architecture_generation: bool?
+      attr_accessor field_errors: Hash[String, String]?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor created_by: String?
+      attr_accessor created_at: Time?
+      attr_accessor last_modified_by: String?
+      attr_accessor last_modified_at: Time?
+    end
+
+    class GetAgentRecommendationGenerationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_arn: String,
+        ?generation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_arn: String?
+      attr_accessor generation_id: String?
+    end
+
+    class GetAgentRecommendationGenerationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?profile_arn: String,
+        ?name: String,
+        ?status: String,
+        ?estimated_completion_time: Time,
+        ?created_by: String,
+        ?created_at: Time,
+        ?last_modified_by: String,
+        ?last_modified_at: Time,
+        ?additional_context: Smithy::Schema::document,
+        ?scope: Types::Scope,
+        ?started_at: Time,
+        ?ended_at: Time,
+        ?progress: Types::Progress,
+        ?error_details: Types::ErrorDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor profile_arn: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor estimated_completion_time: Time?
+      attr_accessor created_by: String?
+      attr_accessor created_at: Time?
+      attr_accessor last_modified_by: String?
+      attr_accessor last_modified_at: Time?
+      attr_accessor additional_context: Smithy::Schema::document?
+      attr_accessor scope: Types::Scope?
+      attr_accessor started_at: Time?
+      attr_accessor ended_at: Time?
+      attr_accessor progress: Types::Progress?
+      attr_accessor error_details: Types::ErrorDetails?
+    end
+
+    class GetAgentRecommendationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommendation_arn: String,
+        ?remediation_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommendation_arn: String?
+      attr_accessor remediation_type: String?
+    end
+
+    class GetAgentRecommendationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommendation_arn: String,
+        ?profile_arn: String,
+        ?generation_id: String,
+        ?title: String,
+        ?description: String,
+        ?type: String,
+        ?pillar: String,
+        ?priority: String,
+        ?effort: String,
+        ?status: String,
+        ?state: String,
+        ?update_reason: String,
+        ?impact: String,
+        ?roi: Types::Roi,
+        ?number_of_resources: Integer,
+        ?aws_services: Array[String],
+        ?business_units: Array[String],
+        ?applications: Array[String],
+        ?impact_details: Array[String],
+        ?insights: Array[Types::Insight],
+        ?highlights: Array[String],
+        ?remediation_summary: Types::RemediationSummary,
+        ?cross_pillar_benefits: Array[Types::CrossPillarBenefit],
+        ?trade_offs: Array[Types::TradeOff],
+        ?sources: Array[String],
+        ?goals: Array[Types::RecommendationGoal],
+        ?tags: Array[Types::Tag],
+        ?created_by: String,
+        ?created_at: Time,
+        ?last_modified_by: String,
+        ?last_modified_at: Time,
+        ?remediations: Array[Types::AgentRecommendationRemediation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommendation_arn: String?
+      attr_accessor profile_arn: String?
+      attr_accessor generation_id: String?
+      attr_accessor title: String?
+      attr_accessor description: String?
+      attr_accessor type: String?
+      attr_accessor pillar: String?
+      attr_accessor priority: String?
+      attr_accessor effort: String?
+      attr_accessor status: String?
+      attr_accessor state: String?
+      attr_accessor update_reason: String?
+      attr_accessor impact: String?
+      attr_accessor roi: Types::Roi?
+      attr_accessor number_of_resources: Integer?
+      attr_accessor aws_services: Array[String]?
+      attr_accessor business_units: Array[String]?
+      attr_accessor applications: Array[String]?
+      attr_accessor impact_details: Array[String]?
+      attr_accessor insights: Array[Types::Insight]?
+      attr_accessor highlights: Array[String]?
+      attr_accessor remediation_summary: Types::RemediationSummary?
+      attr_accessor cross_pillar_benefits: Array[Types::CrossPillarBenefit]?
+      attr_accessor trade_offs: Array[Types::TradeOff]?
+      attr_accessor sources: Array[String]?
+      attr_accessor goals: Array[Types::RecommendationGoal]?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor created_by: String?
+      attr_accessor created_at: Time?
+      attr_accessor last_modified_by: String?
+      attr_accessor last_modified_at: Time?
+      attr_accessor remediations: Array[Types::AgentRecommendationRemediation]?
     end
 
     class GetAnswerInput
@@ -1274,6 +2041,39 @@ module Aws::WellArchitected
       attr_accessor workload: Types::Workload?
     end
 
+    class GoalSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?profile_arn: String,
+        ?pillars: Array[String],
+        ?title: String,
+        ?description: String,
+        ?created_by: String,
+        ?created_at: Time,
+        ?last_modified_by: String,
+        ?last_modified_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor profile_arn: String?
+      attr_accessor pillars: Array[String]?
+      attr_accessor title: String?
+      attr_accessor description: String?
+      attr_accessor created_by: String?
+      attr_accessor created_at: Time?
+      attr_accessor last_modified_by: String?
+      attr_accessor last_modified_at: Time?
+    end
+
+    module ImpactCategory
+      HIGH: String
+      MEDIUM: String
+      LOW: String
+    end
+
     class ImportLensInput
       include Smithy::Schema::Structure
 
@@ -1331,6 +2131,19 @@ module Aws::WellArchitected
       attr_accessor improvement_plan_url: String?
       attr_accessor improvement_plans: Array[Types::ChoiceImprovementPlan]?
       attr_accessor jira_configuration: Types::JiraConfiguration?
+    end
+
+    class Insight
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?usage_pattern: String,
+        ?signals_detected: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor usage_pattern: String?
+      attr_accessor signals_detected: String?
     end
 
     module IntegratingService
@@ -1590,6 +2403,180 @@ module Aws::WellArchitected
       attr_accessor latest_lens_version: String?
       attr_accessor resource_arn: String?
       attr_accessor resource_name: String?
+    end
+
+    class ListAgentContextsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListAgentContextsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::ContextSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::ContextSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAgentGoalsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListAgentGoalsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::GoalSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::GoalSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAgentProfilesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListAgentProfilesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::AgentProfileSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::AgentProfileSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAgentRecommendationGenerationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_arn: String,
+        ?recommendation_type: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_arn: String?
+      attr_accessor recommendation_type: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListAgentRecommendationGenerationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::AgentRecommendationGenerationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::AgentRecommendationGenerationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAgentRecommendationItemsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommendation_arn: String,
+        ?type: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommendation_arn: String?
+      attr_accessor type: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListAgentRecommendationItemsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::AgentRecommendationItemSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::AgentRecommendationItemSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAgentRecommendationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?state: String,
+        ?pillar: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor state: String?
+      attr_accessor pillar: String?
+    end
+
+    class ListAgentRecommendationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::AgentRecommendationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::AgentRecommendationSummary]?
+      attr_accessor next_token: String?
     end
 
     class ListAnswersInput
@@ -2282,6 +3269,14 @@ module Aws::WellArchitected
       CONTRIBUTOR: String
     end
 
+    module Pillar
+      COST_OPTIMIZATION: String
+      SECURITY: String
+      RESILIENCE: String
+      PERFORMANCE: String
+      OPERATIONAL_EXCELLENCE: String
+    end
+
     class PillarDifference
       include Smithy::Schema::Structure
 
@@ -2297,6 +3292,19 @@ module Aws::WellArchitected
       attr_accessor pillar_name: String?
       attr_accessor difference_status: String?
       attr_accessor question_differences: Array[Types::QuestionDifference]?
+    end
+
+    class PillarItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pillar: String,
+        ?ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pillar: String?
+      attr_accessor ids: Array[String]?
     end
 
     class PillarMetric
@@ -2331,6 +3339,12 @@ module Aws::WellArchitected
       attr_accessor notes: String?
       attr_accessor risk_counts: Hash[String, Integer]?
       attr_accessor prioritized_risk_counts: Hash[String, Integer]?
+    end
+
+    module Priority
+      HIGH: String
+      MEDIUM: String
+      LOW: String
     end
 
     class Profile
@@ -2539,6 +3553,47 @@ module Aws::WellArchitected
       attr_accessor max_selected_choices: Integer?
     end
 
+    class Progress
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?steps_completed: Integer,
+        ?total_steps: Integer,
+        ?completion_percentage: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor steps_completed: Integer?
+      attr_accessor total_steps: Integer?
+      attr_accessor completion_percentage: Float?
+    end
+
+    class PutAgentRecommendationFeedbackRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommendation_arn: String,
+        ?type: String,
+        ?feedback_category: String,
+        ?comments: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommendation_arn: String?
+      attr_accessor type: String?
+      attr_accessor feedback_category: String?
+      attr_accessor comments: String?
+    end
+
+    class PutAgentRecommendationFeedbackResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
     module Question
       UNANSWERED: String
       ANSWERED: String
@@ -2584,9 +3639,104 @@ module Aws::WellArchitected
       NON_PRIORITIZED: String
     end
 
+    module RecommendationFeedbackType
+      USEFUL: String
+      NOT_USEFUL: String
+    end
+
+    class RecommendationGoal
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?title: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor title: String?
+    end
+
+    module RecommendationItemType
+      AWS_RESOURCE: String
+      RECOMMENDATION: String
+    end
+
+    module RecommendationSource
+      TRUSTED_ADVISOR: String
+      COST_EXPLORER: String
+      CLOUDWATCH: String
+      WELL_ARCHITECTED_TOOL: String
+      WELL_ARCHITECTED_AGENT: String
+      CUSTOMER_IAC: String
+    end
+
+    module RecommendationState
+      OPEN: String
+      CLOSED: String
+    end
+
+    module RecommendationStatus
+      ACTIVE: String
+      SUPPRESSED: String
+      COMPLETED: String
+    end
+
+    module RecommendationType
+      RESOURCE: String
+      ARCHITECTURE: String
+      APPLICATION: String
+    end
+
+    class RemediationStep
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?title: String,
+        ?content: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor title: String?
+      attr_accessor content: String?
+    end
+
+    class RemediationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommendation: String,
+        ?steps: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommendation: String?
+      attr_accessor steps: Array[String]?
+    end
+
+    module RemediationType
+      AUTO_REMEDIATION: String
+      CONSOLE: String
+      CLI: String
+      SDK: String
+      IAC: String
+      MCP: String
+    end
+
     module ReportFormat
       PDF: String
       JSON: String
+    end
+
+    class ResourceLink
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?url: String,
+        ?title: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor url: String?
+      attr_accessor title: String?
     end
 
     class ResourceNotFoundException
@@ -2788,6 +3938,40 @@ module Aws::WellArchitected
       NOT_APPLICABLE: String
     end
 
+    module RiskRating
+      LOW: String
+      MEDIUM: String
+      HIGH: String
+    end
+
+    class Roi
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?estimate: String,
+        ?detail: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor estimate: String?
+      attr_accessor detail: String?
+    end
+
+    class Scope
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pillars: Array[String],
+        ?goal_ids: Array[String],
+        ?items: Array[Types::PillarItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pillars: Array[String]?
+      attr_accessor goal_ids: Array[String]?
+      attr_accessor items: Array[Types::PillarItem]?
+    end
+
     class SelectedPillar
       include Smithy::Schema::Structure
 
@@ -2901,6 +4085,65 @@ module Aws::WellArchitected
       FAILED: String
     end
 
+    class StartAgentRecommendationGenerationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_arn: String,
+        ?types: Array[String],
+        ?name: String,
+        ?additional_context: Smithy::Schema::document,
+        ?scope: Types::Scope,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_arn: String?
+      attr_accessor types: Array[String]?
+      attr_accessor name: String?
+      attr_accessor additional_context: Smithy::Schema::document?
+      attr_accessor scope: Types::Scope?
+    end
+
+    class StartAgentRecommendationGenerationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?profile_arn: String,
+        ?name: String,
+        ?status: String,
+        ?estimated_completion_time: Time,
+        ?created_by: String,
+        ?created_at: Time,
+        ?last_modified_by: String,
+        ?last_modified_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor profile_arn: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor estimated_completion_time: Time?
+      attr_accessor created_by: String?
+      attr_accessor created_at: Time?
+      attr_accessor last_modified_by: String?
+      attr_accessor last_modified_at: Time?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
     class TagResourceInput
       include Smithy::Schema::Structure
 
@@ -2955,6 +4198,27 @@ module Aws::WellArchitected
       attr_accessor service_code: String?
     end
 
+    class TradeOff
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pillar: String,
+        ?title: String,
+        ?description: String,
+        ?risk: String,
+        ?mitigation: String,
+        ?risk_explanation: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pillar: String?
+      attr_accessor title: String?
+      attr_accessor description: String?
+      attr_accessor risk: String?
+      attr_accessor mitigation: String?
+      attr_accessor risk_explanation: String?
+    end
+
     module TrustedAdvisorIntegrationStatus
       ENABLED: String
       DISABLED: String
@@ -2974,6 +4238,162 @@ module Aws::WellArchitected
     end
 
     class UntagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateAgentContextRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?profile_arn: String,
+        ?id: String,
+        ?title: String,
+        ?content: Types::ContextContent,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor profile_arn: String?
+      attr_accessor id: String?
+      attr_accessor title: String?
+      attr_accessor content: Types::ContextContent?
+    end
+
+    class UpdateAgentContextResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?context: Types::ContextSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor context: Types::ContextSummary?
+    end
+
+    class UpdateAgentGoalRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?profile_arn: String,
+        ?id: String,
+        ?pillars: Array[String],
+        ?title: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor profile_arn: String?
+      attr_accessor id: String?
+      attr_accessor pillars: Array[String]?
+      attr_accessor title: String?
+      attr_accessor description: String?
+    end
+
+    class UpdateAgentGoalResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?goal: Types::GoalSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor goal: Types::GoalSummary?
+    end
+
+    class UpdateAgentProfileRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?profile_arn: String,
+        ?display_name: String,
+        ?description: String,
+        ?execution_role_arn: String,
+        ?aggregation_configuration: Array[Types::AggregationConfiguration],
+        ?business_overview: String,
+        ?pillars: Array[String],
+        ?deletion_protection: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor profile_arn: String?
+      attr_accessor display_name: String?
+      attr_accessor description: String?
+      attr_accessor execution_role_arn: String?
+      attr_accessor aggregation_configuration: Array[Types::AggregationConfiguration]?
+      attr_accessor business_overview: String?
+      attr_accessor pillars: Array[String]?
+      attr_accessor deletion_protection: bool?
+    end
+
+    class UpdateAgentProfileResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?display_name: String,
+        ?description: String,
+        ?business_overview: String,
+        ?pillars: Array[String],
+        ?deletion_protection: bool,
+        ?execution_role_arn: String,
+        ?aggregation_configuration: Array[Types::AggregationConfiguration],
+        ?arn: String,
+        ?eligible_for_scheduled_generation: bool,
+        ?eligible_for_architecture_generation: bool,
+        ?field_errors: Hash[String, String],
+        ?tags: Array[Types::Tag],
+        ?created_by: String,
+        ?created_at: Time,
+        ?last_modified_by: String,
+        ?last_modified_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor display_name: String?
+      attr_accessor description: String?
+      attr_accessor business_overview: String?
+      attr_accessor pillars: Array[String]?
+      attr_accessor deletion_protection: bool?
+      attr_accessor execution_role_arn: String?
+      attr_accessor aggregation_configuration: Array[Types::AggregationConfiguration]?
+      attr_accessor arn: String?
+      attr_accessor eligible_for_scheduled_generation: bool?
+      attr_accessor eligible_for_architecture_generation: bool?
+      attr_accessor field_errors: Hash[String, String]?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor created_by: String?
+      attr_accessor created_at: Time?
+      attr_accessor last_modified_by: String?
+      attr_accessor last_modified_at: Time?
+    end
+
+    class UpdateAgentRecommendationStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommendation_arn: String,
+        ?status: String,
+        ?update_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommendation_arn: String?
+      attr_accessor status: String?
+      attr_accessor update_reason: String?
+    end
+
+    class UpdateAgentRecommendationStatusResponse
       include Smithy::Schema::Structure
 
       def initialize: (

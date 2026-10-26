@@ -144,18 +144,18 @@ module Aws::ACMPCA
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -228,8 +228,8 @@ module Aws::ACMPCA
     # @example Request syntax with placeholder values
     #   params = {
     #     certificate_authority_configuration: { # required
-    #       key_algorithm: "RSA_2048" # One of: ["RSA_2048", "RSA_3072", "RSA_4096", "EC_prime256v1", "EC_secp384r1", "EC_secp521r1", "SM2"], # required
-    #       signing_algorithm: "SHA256WITHECDSA" # One of: ["SHA256WITHECDSA", "SHA384WITHECDSA", "SHA512WITHECDSA", "SHA256WITHRSA", "SHA384WITHRSA", "SHA512WITHRSA", "SM3WITHSM2"], # required
+    #       key_algorithm: "RSA_2048" # One of: ["RSA_2048", "RSA_3072", "RSA_4096", "EC_prime256v1", "EC_secp384r1", "EC_secp521r1", "ML_DSA_44", "ML_DSA_65", "ML_DSA_87", "SM2"], # required
+    #       signing_algorithm: "SHA256WITHECDSA" # One of: ["SHA256WITHECDSA", "SHA384WITHECDSA", "SHA512WITHECDSA", "SHA256WITHRSA", "SHA384WITHRSA", "SHA512WITHRSA", "SHA256WITHRSA_PSS", "SHA384WITHRSA_PSS", "SHA512WITHRSA_PSS", "SM3WITHSM2", "ML_DSA_44", "ML_DSA_65", "ML_DSA_87"], # required
     #       subject: { # required
     #         country: "CountryCodeString",
     #         organization: "String64",
@@ -500,8 +500,8 @@ module Aws::ACMPCA
     #       not_after: Time.now,
     #       failure_reason: "REQUEST_TIMED_OUT" # One of: ["REQUEST_TIMED_OUT", "UNSUPPORTED_ALGORITHM", "OTHER"],
     #       certificate_authority_configuration: {
-    #         key_algorithm: "RSA_2048" # One of: ["RSA_2048", "RSA_3072", "RSA_4096", "EC_prime256v1", "EC_secp384r1", "EC_secp521r1", "SM2"], # required
-    #         signing_algorithm: "SHA256WITHECDSA" # One of: ["SHA256WITHECDSA", "SHA384WITHECDSA", "SHA512WITHECDSA", "SHA256WITHRSA", "SHA384WITHRSA", "SHA512WITHRSA", "SM3WITHSM2"], # required
+    #         key_algorithm: "RSA_2048" # One of: ["RSA_2048", "RSA_3072", "RSA_4096", "EC_prime256v1", "EC_secp384r1", "EC_secp521r1", "ML_DSA_44", "ML_DSA_65", "ML_DSA_87", "SM2"], # required
+    #         signing_algorithm: "SHA256WITHECDSA" # One of: ["SHA256WITHECDSA", "SHA384WITHECDSA", "SHA512WITHECDSA", "SHA256WITHRSA", "SHA384WITHRSA", "SHA512WITHRSA", "SHA256WITHRSA_PSS", "SHA384WITHRSA_PSS", "SHA512WITHRSA_PSS", "SM3WITHSM2", "ML_DSA_44", "ML_DSA_65", "ML_DSA_87"], # required
     #         subject: { # required
     #           country: "CountryCodeString",
     #           organization: "String64",
@@ -877,7 +877,7 @@ module Aws::ACMPCA
     #     },
     #     certificate_authority_arn: "Arn", # required
     #     csr: "data", # required
-    #     signing_algorithm: "SHA256WITHECDSA" # One of: ["SHA256WITHECDSA", "SHA384WITHECDSA", "SHA512WITHECDSA", "SHA256WITHRSA", "SHA384WITHRSA", "SHA512WITHRSA", "SM3WITHSM2"], # required
+    #     signing_algorithm: "SHA256WITHECDSA" # One of: ["SHA256WITHECDSA", "SHA384WITHECDSA", "SHA512WITHECDSA", "SHA256WITHRSA", "SHA384WITHRSA", "SHA512WITHRSA", "SHA256WITHRSA_PSS", "SHA384WITHRSA_PSS", "SHA512WITHRSA_PSS", "SM3WITHSM2", "ML_DSA_44", "ML_DSA_65", "ML_DSA_87"], # required
     #     template_arn: "Arn",
     #     validity: { # required
     #       value: 1, # required
@@ -935,8 +935,8 @@ module Aws::ACMPCA
     #         not_after: Time.now,
     #         failure_reason: "REQUEST_TIMED_OUT" # One of: ["REQUEST_TIMED_OUT", "UNSUPPORTED_ALGORITHM", "OTHER"],
     #         certificate_authority_configuration: {
-    #           key_algorithm: "RSA_2048" # One of: ["RSA_2048", "RSA_3072", "RSA_4096", "EC_prime256v1", "EC_secp384r1", "EC_secp521r1", "SM2"], # required
-    #           signing_algorithm: "SHA256WITHECDSA" # One of: ["SHA256WITHECDSA", "SHA384WITHECDSA", "SHA512WITHECDSA", "SHA256WITHRSA", "SHA384WITHRSA", "SHA512WITHRSA", "SM3WITHSM2"], # required
+    #           key_algorithm: "RSA_2048" # One of: ["RSA_2048", "RSA_3072", "RSA_4096", "EC_prime256v1", "EC_secp384r1", "EC_secp521r1", "ML_DSA_44", "ML_DSA_65", "ML_DSA_87", "SM2"], # required
+    #           signing_algorithm: "SHA256WITHECDSA" # One of: ["SHA256WITHECDSA", "SHA384WITHECDSA", "SHA512WITHECDSA", "SHA256WITHRSA", "SHA384WITHRSA", "SHA512WITHRSA", "SHA256WITHRSA_PSS", "SHA384WITHRSA_PSS", "SHA512WITHRSA_PSS", "SM3WITHSM2", "ML_DSA_44", "ML_DSA_65", "ML_DSA_87"], # required
     #           subject: { # required
     #             country: "CountryCodeString",
     #             organization: "String64",

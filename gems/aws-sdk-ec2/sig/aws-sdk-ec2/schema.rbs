@@ -18,6 +18,8 @@ module Aws::EC2
     AcceptCapacityReservationBillingOwnershipResult: StructureShape
     AcceptReservedInstancesExchangeQuoteRequest: StructureShape
     AcceptReservedInstancesExchangeQuoteResult: StructureShape
+    AcceptTransitGatewayClientVpnAttachmentRequest: StructureShape
+    AcceptTransitGatewayClientVpnAttachmentResult: StructureShape
     AcceptTransitGatewayMulticastDomainAssociationsRequest: StructureShape
     AcceptTransitGatewayMulticastDomainAssociationsResult: StructureShape
     AcceptTransitGatewayPeeringAttachmentRequest: StructureShape
@@ -41,6 +43,10 @@ module Aws::EC2
     AccountAttributeValue: StructureShape
     AccountAttributeValueList: ListShape
     AccountID: StringShape
+    AccountVpcEncryptionControl: StructureShape
+    AccountVpcEncryptionControlExclusions: StructureShape
+    AccountVpcEncryptionControlMode: EnumShape
+    AccountVpcEncryptionControlState: EnumShape
     ActiveInstance: StructureShape
     ActiveInstanceSet: ListShape
     ActiveVpnTunnelStatus: StructureShape
@@ -55,6 +61,7 @@ module Aws::EC2
     AddedPrincipalSet: ListShape
     AdditionalDetail: StructureShape
     AdditionalDetailList: ListShape
+    AdditionalFlexibleNetworkInterfaces: IntegerShape
     Address: StructureShape
     AddressAttribute: StructureShape
     AddressAttributeName: EnumShape
@@ -68,6 +75,7 @@ module Aws::EC2
     AdvertiseByoipCidrRequest: StructureShape
     AdvertiseByoipCidrResult: StructureShape
     Affinity: EnumShape
+    AggregationStatusEnum: EnumShape
     AllocateAddressRequest: StructureShape
     AllocateAddressResult: StructureShape
     AllocateHostsRequest: StructureShape
@@ -89,6 +97,7 @@ module Aws::EC2
     AllowsMultipleInstanceTypes: EnumShape
     AlternatePathHint: StructureShape
     AlternatePathHintList: ListShape
+    AmdSevSnp: EnumShape
     AmdSevSnpSpecification: EnumShape
     AnalysisAclRule: StructureShape
     AnalysisComponent: StructureShape
@@ -100,6 +109,21 @@ module Aws::EC2
     AnalysisSecurityGroupRule: StructureShape
     AnalysisStatus: EnumShape
     ApplianceModeSupportValue: EnumShape
+    ApplicationStatus: StructureShape
+    ApplicationStatusCheckAssociationObject: StructureShape
+    ApplicationStatusCheckAssociationSet: ListShape
+    ApplicationStatusCheckEnum: EnumShape
+    ApplicationStatusCheckId: StringShape
+    ApplicationStatusCheckIdList: ListShape
+    ApplicationStatusCheckResponseObject: StructureShape
+    ApplicationStatusCheckResponseSet: ListShape
+    ApplicationStatusDetail: StructureShape
+    ApplicationStatusDetailSet: ListShape
+    ApplicationStatusEnum: EnumShape
+    ApplicationStatusReason: StructureShape
+    ApplicationStatusSummary: StructureShape
+    ApplicationStatusesResponseType: StructureShape
+    ApplyCancellationCharges: EnumShape
     ApplySecurityGroupsToClientVpnTargetNetworkRequest: StructureShape
     ApplySecurityGroupsToClientVpnTargetNetworkResult: StructureShape
     ArchitectureType: EnumShape
@@ -112,6 +136,7 @@ module Aws::EC2
     AsnAssociationSet: ListShape
     AsnAssociationState: EnumShape
     AsnAuthorizationContext: StructureShape
+    AsnList: ListShape
     AsnState: EnumShape
     AssetId: StringShape
     AssetIdList: ListShape
@@ -125,6 +150,8 @@ module Aws::EC2
     AssignedPrivateIpAddressList: ListShape
     AssociateAddressRequest: StructureShape
     AssociateAddressResult: StructureShape
+    AssociateApplicationStatusCheckRequest: StructureShape
+    AssociateApplicationStatusCheckResult: StructureShape
     AssociateCapacityReservationBillingOwnerRequest: StructureShape
     AssociateCapacityReservationBillingOwnerResult: StructureShape
     AssociateClientVpnTargetNetworkRequest: StructureShape
@@ -169,10 +196,13 @@ module Aws::EC2
     AssociationIdList: ListShape
     AssociationStatus: StructureShape
     AssociationStatusCode: EnumShape
+    AssociationTypeEnum: EnumShape
     AthenaIntegration: StructureShape
     AthenaIntegrationsSet: ListShape
     AttachClassicLinkVpcRequest: StructureShape
     AttachClassicLinkVpcResult: StructureShape
+    AttachImageWatermarkRequest: StructureShape
+    AttachImageWatermarkResult: StructureShape
     AttachInternetGatewayRequest: StructureShape
     AttachNetworkInterfaceRequest: StructureShape
     AttachNetworkInterfaceResult: StructureShape
@@ -201,9 +231,17 @@ module Aws::EC2
     AutoAcceptSharedAssociationsValue: EnumShape
     AutoAcceptSharedAttachmentsValue: EnumShape
     AutoPlacement: EnumShape
+    AutoProvisionZonesState: EnumShape
     AutoRecoveryFlag: BooleanShape
+    AutoScalingIpsState: EnumShape
+    AvailabilityMode: EnumShape
     AvailabilityZone: StructureShape
+    AvailabilityZoneAddress: StructureShape
+    AvailabilityZoneAddresses: ListShape
+    AvailabilityZoneGeography: StructureShape
+    AvailabilityZoneGeographyList: ListShape
     AvailabilityZoneId: StringShape
+    AvailabilityZoneIdStringList: ListShape
     AvailabilityZoneList: ListShape
     AvailabilityZoneMessage: StructureShape
     AvailabilityZoneMessageList: ListShape
@@ -211,6 +249,8 @@ module Aws::EC2
     AvailabilityZoneOptInStatus: EnumShape
     AvailabilityZoneState: EnumShape
     AvailabilityZoneStringList: ListShape
+    AvailabilityZoneSubGeography: StructureShape
+    AvailabilityZoneSubGeographyList: ListShape
     AvailableCapacity: StructureShape
     AvailableInstanceCapacityList: ListShape
     BandwidthWeightingType: EnumShape
@@ -225,11 +265,12 @@ module Aws::EC2
     BaselinePerformanceFactors: StructureShape
     BaselinePerformanceFactorsRequest: StructureShape
     BaselineThroughputInMBps: FloatShape
+    BatchModifyIpamRoutingPolicyRegistrationsRequest: StructureShape
+    BatchModifyIpamRoutingPolicyRegistrationsResult: StructureShape
     BatchState: EnumShape
     BgpStatus: EnumShape
     BillingProductList: ListShape
     Blob: BlobShape
-    BlobAttributeValue: StructureShape
     BlockDeviceMapping: StructureShape
     BlockDeviceMappingList: ListShape
     BlockDeviceMappingRequestList: ListShape
@@ -238,9 +279,11 @@ module Aws::EC2
     BlockPublicAccessMode: EnumShape
     BlockPublicAccessStates: StructureShape
     Boolean: BooleanShape
+    BootModeOverrideValues: EnumShape
     BootModeType: EnumShape
     BootModeTypeList: ListShape
     BootModeValues: EnumShape
+    BoxedBoolean: BooleanShape
     BoxedDouble: FloatShape
     BoxedInteger: IntegerShape
     BoxedLong: IntegerShape
@@ -290,9 +333,13 @@ module Aws::EC2
     CancelSpotInstanceRequestState: EnumShape
     CancelSpotInstanceRequestsRequest: StructureShape
     CancelSpotInstanceRequestsResult: StructureShape
+    CancellationTerms: StructureShape
+    CancellationTermsSet: ListShape
     CancelledSpotInstanceRequest: StructureShape
     CancelledSpotInstanceRequestList: ListShape
     CapacityAllocation: StructureShape
+    CapacityAllocationMetadataEntry: StructureShape
+    CapacityAllocationMetadataList: ListShape
     CapacityAllocations: ListShape
     CapacityBlock: StructureShape
     CapacityBlockExtension: StructureShape
@@ -309,12 +356,34 @@ module Aws::EC2
     CapacityBlockSet: ListShape
     CapacityBlockStatus: StructureShape
     CapacityBlockStatusSet: ListShape
+    CapacityManagerCondition: StructureShape
+    CapacityManagerConditionSet: ListShape
+    CapacityManagerDataExportId: StringShape
+    CapacityManagerDataExportIdSet: ListShape
+    CapacityManagerDataExportResponse: StructureShape
+    CapacityManagerDataExportResponseSet: ListShape
+    CapacityManagerDataExportStatus: EnumShape
+    CapacityManagerDimension: StructureShape
+    CapacityManagerMonitoredTagKey: StructureShape
+    CapacityManagerMonitoredTagKeyList: ListShape
+    CapacityManagerMonitoredTagKeyStatus: EnumShape
+    CapacityManagerStatus: EnumShape
+    CapacityManagerTagDimension: StructureShape
+    CapacityManagerTagDimensionSet: ListShape
     CapacityReservation: StructureShape
+    CapacityReservationAdjustmentDetails: StructureShape
+    CapacityReservationAdjustmentStatus: EnumShape
     CapacityReservationBillingRequest: StructureShape
     CapacityReservationBillingRequestSet: ListShape
     CapacityReservationBillingRequestStatus: EnumShape
+    CapacityReservationCancellationQuote: StructureShape
+    CapacityReservationCancellationQuoteId: StringShape
+    CapacityReservationCancellationQuoteIdSet: ListShape
+    CapacityReservationCancellationQuoteResponseSet: ListShape
+    CapacityReservationCancellationQuoteState: EnumShape
     CapacityReservationCommitmentDuration: IntegerShape
     CapacityReservationCommitmentInfo: StructureShape
+    CapacityReservationConfiguration: StructureShape
     CapacityReservationDeliveryPreference: EnumShape
     CapacityReservationFleet: StructureShape
     CapacityReservationFleetCancellationState: StructureShape
@@ -329,9 +398,16 @@ module Aws::EC2
     CapacityReservationIdSet: ListShape
     CapacityReservationInfo: StructureShape
     CapacityReservationInstancePlatform: EnumShape
+    CapacityReservationLaunchStatus: EnumShape
+    CapacityReservationModificationQuote: StructureShape
+    CapacityReservationModificationQuoteId: StringShape
+    CapacityReservationModificationQuoteIdSet: ListShape
+    CapacityReservationModificationQuoteResponseSet: ListShape
+    CapacityReservationModificationQuoteState: EnumShape
     CapacityReservationOptions: StructureShape
     CapacityReservationOptionsRequest: StructureShape
     CapacityReservationPreference: EnumShape
+    CapacityReservationResourceGroupArnSet: ListShape
     CapacityReservationSet: ListShape
     CapacityReservationSpecification: StructureShape
     CapacityReservationSpecificationResponse: StructureShape
@@ -341,7 +417,10 @@ module Aws::EC2
     CapacityReservationTarget: StructureShape
     CapacityReservationTargetResponse: StructureShape
     CapacityReservationTenancy: EnumShape
+    CapacityReservationTopology: StructureShape
+    CapacityReservationTopologySet: ListShape
     CapacityReservationType: EnumShape
+    CapacityTenancy: EnumShape
     CarrierGateway: StructureShape
     CarrierGatewayId: StringShape
     CarrierGatewayIdSet: ListShape
@@ -352,6 +431,7 @@ module Aws::EC2
     CertificateAuthentication: StructureShape
     CertificateAuthenticationRequest: StructureShape
     CertificateId: StringShape
+    ChronologicalOrder: EnumShape
     CidrAuthorizationContext: StructureShape
     CidrBlock: StructureShape
     CidrBlockSet: ListShape
@@ -377,12 +457,17 @@ module Aws::EC2
     ClientVpnAuthenticationRequest: StructureShape
     ClientVpnAuthenticationRequestList: ListShape
     ClientVpnAuthenticationType: EnumShape
+    ClientVpnAuthorizationPolicyShadowMode: EnumShape
+    ClientVpnAuthorizationPolicyStatus: EnumShape
     ClientVpnAuthorizationRuleStatus: StructureShape
     ClientVpnAuthorizationRuleStatusCode: EnumShape
+    ClientVpnAvailabilityZoneIdSet: ListShape
+    ClientVpnAvailabilityZoneSet: ListShape
     ClientVpnConnection: StructureShape
     ClientVpnConnectionSet: ListShape
     ClientVpnConnectionStatus: StructureShape
     ClientVpnConnectionStatusCode: EnumShape
+    ClientVpnDeviceTrustProviderType: EnumShape
     ClientVpnEndpoint: StructureShape
     ClientVpnEndpointAttributeStatus: StructureShape
     ClientVpnEndpointAttributeStatusCode: EnumShape
@@ -395,6 +480,10 @@ module Aws::EC2
     ClientVpnRouteStatus: StructureShape
     ClientVpnRouteStatusCode: EnumShape
     ClientVpnSecurityGroupIdSet: ListShape
+    ClientVpnTrustProvider: StructureShape
+    ClientVpnTrustProviderRequest: StructureShape
+    ClientVpnTrustProviderRequestList: ListShape
+    ClientVpnTrustProviderSet: ListShape
     CloudWatchLogGroupArn: StringShape
     CloudWatchLogOptions: StructureShape
     CloudWatchLogOptionsSpecification: StructureShape
@@ -406,8 +495,11 @@ module Aws::EC2
     CoipPoolIdSet: ListShape
     CoipPoolMaxResults: IntegerShape
     CoipPoolSet: ListShape
+    Comparison: EnumShape
     ComponentAccount: StringShape
     ComponentRegion: StringShape
+    ConditionValue: StringShape
+    ConditionValueList: ListShape
     ConfirmProductInstanceRequest: StructureShape
     ConfirmProductInstanceResult: StructureShape
     ConnectionLogOptions: StructureShape
@@ -432,12 +524,15 @@ module Aws::EC2
     CoolOffPeriodResponseHours: IntegerShape
     CopyFpgaImageRequest: StructureShape
     CopyFpgaImageResult: StructureShape
+    CopyImageClientToken: StringShape
     CopyImageRequest: StructureShape
     CopyImageResult: StructureShape
     CopySnapshotRequest: StructureShape
     CopySnapshotRequestPSU: StringShape
     CopySnapshotResult: StructureShape
     CopyTagsFromSource: EnumShape
+    CopyVolumesRequest: StructureShape
+    CopyVolumesResult: StructureShape
     CoreCount: IntegerShape
     CoreCountList: ListShape
     CoreNetworkArn: StringShape
@@ -448,8 +543,16 @@ module Aws::EC2
     CpuOptionsRequest: StructureShape
     CpuPerformanceFactor: StructureShape
     CpuPerformanceFactorRequest: StructureShape
+    CreateApplicationStatusCheckRequest: StructureShape
+    CreateApplicationStatusCheckResult: StructureShape
+    CreateCapacityManagerDataExportRequest: StructureShape
+    CreateCapacityManagerDataExportResult: StructureShape
     CreateCapacityReservationBySplittingRequest: StructureShape
     CreateCapacityReservationBySplittingResult: StructureShape
+    CreateCapacityReservationCancellationQuoteRequest: StructureShape
+    CreateCapacityReservationCancellationQuoteResult: StructureShape
+    CreateCapacityReservationDateChangeQuoteRequest: StructureShape
+    CreateCapacityReservationDateChangeQuoteResult: StructureShape
     CreateCapacityReservationFleetRequest: StructureShape
     CreateCapacityReservationFleetResult: StructureShape
     CreateCapacityReservationRequest: StructureShape
@@ -488,6 +591,7 @@ module Aws::EC2
     CreateFpgaImageResult: StructureShape
     CreateImageRequest: StructureShape
     CreateImageResult: StructureShape
+    CreateImageUsageReportClientToken: StringShape
     CreateImageUsageReportRequest: StructureShape
     CreateImageUsageReportResult: StructureShape
     CreateInstanceConnectEndpointRequest: StructureShape
@@ -498,14 +602,26 @@ module Aws::EC2
     CreateInstanceExportTaskResult: StructureShape
     CreateInternetGatewayRequest: StructureShape
     CreateInternetGatewayResult: StructureShape
+    CreateInterruptibleCapacityReservationAllocationRequest: StructureShape
+    CreateInterruptibleCapacityReservationAllocationResult: StructureShape
     CreateIpamExternalResourceVerificationTokenRequest: StructureShape
     CreateIpamExternalResourceVerificationTokenResult: StructureShape
+    CreateIpamInternetRegistryAssociationRequest: StructureShape
+    CreateIpamInternetRegistryAssociationResult: StructureShape
+    CreateIpamPolicyRequest: StructureShape
+    CreateIpamPolicyResult: StructureShape
     CreateIpamPoolRequest: StructureShape
     CreateIpamPoolResult: StructureShape
+    CreateIpamPrefixListResolverRequest: StructureShape
+    CreateIpamPrefixListResolverResult: StructureShape
+    CreateIpamPrefixListResolverTargetRequest: StructureShape
+    CreateIpamPrefixListResolverTargetResult: StructureShape
     CreateIpamRequest: StructureShape
     CreateIpamResourceDiscoveryRequest: StructureShape
     CreateIpamResourceDiscoveryResult: StructureShape
     CreateIpamResult: StructureShape
+    CreateIpamRoutingPolicyRegistrationRequest: StructureShape
+    CreateIpamRoutingPolicyRegistrationResult: StructureShape
     CreateIpamScopeRequest: StructureShape
     CreateIpamScopeResult: StructureShape
     CreateKeyPairOutput: StructureShape
@@ -563,6 +679,10 @@ module Aws::EC2
     CreateRouteServerResult: StructureShape
     CreateRouteTableRequest: StructureShape
     CreateRouteTableResult: StructureShape
+    CreateSecondaryNetworkRequest: StructureShape
+    CreateSecondaryNetworkResult: StructureShape
+    CreateSecondarySubnetRequest: StructureShape
+    CreateSecondarySubnetResult: StructureShape
     CreateSecurityGroupRequest: StructureShape
     CreateSecurityGroupResult: StructureShape
     CreateSnapshotOutput: StructureShape
@@ -591,12 +711,18 @@ module Aws::EC2
     CreateTransitGatewayConnectRequest: StructureShape
     CreateTransitGatewayConnectRequestOptions: StructureShape
     CreateTransitGatewayConnectResult: StructureShape
+    CreateTransitGatewayMeteringPolicyEntryRequest: StructureShape
+    CreateTransitGatewayMeteringPolicyEntryResult: StructureShape
+    CreateTransitGatewayMeteringPolicyRequest: StructureShape
+    CreateTransitGatewayMeteringPolicyResult: StructureShape
     CreateTransitGatewayMulticastDomainRequest: StructureShape
     CreateTransitGatewayMulticastDomainRequestOptions: StructureShape
     CreateTransitGatewayMulticastDomainResult: StructureShape
     CreateTransitGatewayPeeringAttachmentRequest: StructureShape
     CreateTransitGatewayPeeringAttachmentRequestOptions: StructureShape
     CreateTransitGatewayPeeringAttachmentResult: StructureShape
+    CreateTransitGatewayPolicyTableEntryRequest: StructureShape
+    CreateTransitGatewayPolicyTableEntryResult: StructureShape
     CreateTransitGatewayPolicyTableRequest: StructureShape
     CreateTransitGatewayPolicyTableResult: StructureShape
     CreateTransitGatewayPrefixListReferenceRequest: StructureShape
@@ -637,6 +763,8 @@ module Aws::EC2
     CreateVolumeRequest: StructureShape
     CreateVpcBlockPublicAccessExclusionRequest: StructureShape
     CreateVpcBlockPublicAccessExclusionResult: StructureShape
+    CreateVpcEncryptionControlRequest: StructureShape
+    CreateVpcEncryptionControlResult: StructureShape
     CreateVpcEndpointConnectionNotificationRequest: StructureShape
     CreateVpcEndpointConnectionNotificationResult: StructureShape
     CreateVpcEndpointRequest: StructureShape
@@ -647,6 +775,8 @@ module Aws::EC2
     CreateVpcPeeringConnectionResult: StructureShape
     CreateVpcRequest: StructureShape
     CreateVpcResult: StructureShape
+    CreateVpnConcentratorRequest: StructureShape
+    CreateVpnConcentratorResult: StructureShape
     CreateVpnConnectionRequest: StructureShape
     CreateVpnConnectionResult: StructureShape
     CreateVpnConnectionRouteRequest: StructureShape
@@ -658,6 +788,10 @@ module Aws::EC2
     CreditSpecificationRequest: StructureShape
     CurrencyCodeValues: EnumShape
     CurrentGenerationFlag: BooleanShape
+    CustomKeyValuePairRequestSet: ListShape
+    CustomKeyValuePairResponseSet: ListShape
+    CustomTagKeyValueRequestPair: StructureShape
+    CustomTagKeyValueResponsePair: StructureShape
     CustomerGateway: StructureShape
     CustomerGatewayId: StringShape
     CustomerGatewayIdStringList: ListShape
@@ -677,16 +811,27 @@ module Aws::EC2
     DedicatedHostFlag: BooleanShape
     DedicatedHostId: StringShape
     DedicatedHostIdList: ListShape
+    DefaultConnectionTrackingConfiguration: StructureShape
     DefaultEnaQueueCountPerInterface: IntegerShape
+    DefaultHttpTokensEnforcedState: EnumShape
     DefaultInstanceMetadataEndpointState: EnumShape
     DefaultInstanceMetadataTagsState: EnumShape
     DefaultNetworkCardIndex: IntegerShape
     DefaultRouteTableAssociationValue: EnumShape
     DefaultRouteTablePropagationValue: EnumShape
     DefaultTargetCapacityType: EnumShape
+    DefaultTcpEstablishedTimeout: IntegerShape
+    DefaultUdpStreamTimeout: IntegerShape
+    DefaultUdpTimeout: IntegerShape
     DefaultingDhcpOptionsId: StringShape
+    DeleteApplicationStatusCheckRequest: StructureShape
+    DeleteApplicationStatusCheckResult: StructureShape
+    DeleteCapacityManagerDataExportRequest: StructureShape
+    DeleteCapacityManagerDataExportResult: StructureShape
     DeleteCarrierGatewayRequest: StructureShape
     DeleteCarrierGatewayResult: StructureShape
+    DeleteClientVpnEndpointAuthorizationPolicyRequest: StructureShape
+    DeleteClientVpnEndpointAuthorizationPolicyResult: StructureShape
     DeleteClientVpnEndpointRequest: StructureShape
     DeleteClientVpnEndpointResult: StructureShape
     DeleteClientVpnRouteRequest: StructureShape
@@ -720,12 +865,22 @@ module Aws::EC2
     DeleteInternetGatewayRequest: StructureShape
     DeleteIpamExternalResourceVerificationTokenRequest: StructureShape
     DeleteIpamExternalResourceVerificationTokenResult: StructureShape
+    DeleteIpamInternetRegistryAssociationRequest: StructureShape
+    DeleteIpamInternetRegistryAssociationResult: StructureShape
+    DeleteIpamPolicyRequest: StructureShape
+    DeleteIpamPolicyResult: StructureShape
     DeleteIpamPoolRequest: StructureShape
     DeleteIpamPoolResult: StructureShape
+    DeleteIpamPrefixListResolverRequest: StructureShape
+    DeleteIpamPrefixListResolverResult: StructureShape
+    DeleteIpamPrefixListResolverTargetRequest: StructureShape
+    DeleteIpamPrefixListResolverTargetResult: StructureShape
     DeleteIpamRequest: StructureShape
     DeleteIpamResourceDiscoveryRequest: StructureShape
     DeleteIpamResourceDiscoveryResult: StructureShape
     DeleteIpamResult: StructureShape
+    DeleteIpamRoutingPolicyRegistrationRequest: StructureShape
+    DeleteIpamRoutingPolicyRegistrationResult: StructureShape
     DeleteIpamScopeRequest: StructureShape
     DeleteIpamScopeResult: StructureShape
     DeleteKeyPairRequest: StructureShape
@@ -783,6 +938,10 @@ module Aws::EC2
     DeleteRouteServerRequest: StructureShape
     DeleteRouteServerResult: StructureShape
     DeleteRouteTableRequest: StructureShape
+    DeleteSecondaryNetworkRequest: StructureShape
+    DeleteSecondaryNetworkResult: StructureShape
+    DeleteSecondarySubnetRequest: StructureShape
+    DeleteSecondarySubnetResult: StructureShape
     DeleteSecurityGroupRequest: StructureShape
     DeleteSecurityGroupResult: StructureShape
     DeleteSnapshotRequest: StructureShape
@@ -801,14 +960,22 @@ module Aws::EC2
     DeleteTrafficMirrorSessionResult: StructureShape
     DeleteTrafficMirrorTargetRequest: StructureShape
     DeleteTrafficMirrorTargetResult: StructureShape
+    DeleteTransitGatewayClientVpnAttachmentRequest: StructureShape
+    DeleteTransitGatewayClientVpnAttachmentResult: StructureShape
     DeleteTransitGatewayConnectPeerRequest: StructureShape
     DeleteTransitGatewayConnectPeerResult: StructureShape
     DeleteTransitGatewayConnectRequest: StructureShape
     DeleteTransitGatewayConnectResult: StructureShape
+    DeleteTransitGatewayMeteringPolicyEntryRequest: StructureShape
+    DeleteTransitGatewayMeteringPolicyEntryResult: StructureShape
+    DeleteTransitGatewayMeteringPolicyRequest: StructureShape
+    DeleteTransitGatewayMeteringPolicyResult: StructureShape
     DeleteTransitGatewayMulticastDomainRequest: StructureShape
     DeleteTransitGatewayMulticastDomainResult: StructureShape
     DeleteTransitGatewayPeeringAttachmentRequest: StructureShape
     DeleteTransitGatewayPeeringAttachmentResult: StructureShape
+    DeleteTransitGatewayPolicyTableEntryRequest: StructureShape
+    DeleteTransitGatewayPolicyTableEntryResult: StructureShape
     DeleteTransitGatewayPolicyTableRequest: StructureShape
     DeleteTransitGatewayPolicyTableResult: StructureShape
     DeleteTransitGatewayPrefixListReferenceRequest: StructureShape
@@ -834,6 +1001,8 @@ module Aws::EC2
     DeleteVolumeRequest: StructureShape
     DeleteVpcBlockPublicAccessExclusionRequest: StructureShape
     DeleteVpcBlockPublicAccessExclusionResult: StructureShape
+    DeleteVpcEncryptionControlRequest: StructureShape
+    DeleteVpcEncryptionControlResult: StructureShape
     DeleteVpcEndpointConnectionNotificationsRequest: StructureShape
     DeleteVpcEndpointConnectionNotificationsResult: StructureShape
     DeleteVpcEndpointServiceConfigurationsRequest: StructureShape
@@ -843,6 +1012,8 @@ module Aws::EC2
     DeleteVpcPeeringConnectionRequest: StructureShape
     DeleteVpcPeeringConnectionResult: StructureShape
     DeleteVpcRequest: StructureShape
+    DeleteVpnConcentratorRequest: StructureShape
+    DeleteVpnConcentratorResult: StructureShape
     DeleteVpnConnectionRequest: StructureShape
     DeleteVpnConnectionRouteRequest: StructureShape
     DeleteVpnGatewayRequest: StructureShape
@@ -868,6 +1039,8 @@ module Aws::EC2
     DeregisterTransitGatewayMulticastGroupSourcesResult: StructureShape
     DescribeAccountAttributesRequest: StructureShape
     DescribeAccountAttributesResult: StructureShape
+    DescribeAccountVpcEncryptionControlRequest: StructureShape
+    DescribeAccountVpcEncryptionControlResult: StructureShape
     DescribeAddressTransfersMaxResults: IntegerShape
     DescribeAddressTransfersRequest: StructureShape
     DescribeAddressTransfersResult: StructureShape
@@ -877,6 +1050,15 @@ module Aws::EC2
     DescribeAddressesResult: StructureShape
     DescribeAggregateIdFormatRequest: StructureShape
     DescribeAggregateIdFormatResult: StructureShape
+    DescribeApplicationStatusCheckAssociationsMaxResults: IntegerShape
+    DescribeApplicationStatusCheckAssociationsRequest: StructureShape
+    DescribeApplicationStatusCheckAssociationsResult: StructureShape
+    DescribeApplicationStatusChecksMaxResults: IntegerShape
+    DescribeApplicationStatusChecksRequest: StructureShape
+    DescribeApplicationStatusChecksResult: StructureShape
+    DescribeApplicationStatusMaxResults: IntegerShape
+    DescribeApplicationStatusRequest: StructureShape
+    DescribeApplicationStatusResult: StructureShape
     DescribeAvailabilityZonesRequest: StructureShape
     DescribeAvailabilityZonesResult: StructureShape
     DescribeAwsNetworkPerformanceMetricSubscriptionsRequest: StructureShape
@@ -900,12 +1082,24 @@ module Aws::EC2
     DescribeCapacityBlocksMaxResults: IntegerShape
     DescribeCapacityBlocksRequest: StructureShape
     DescribeCapacityBlocksResult: StructureShape
+    DescribeCapacityManagerDataExportsRequest: StructureShape
+    DescribeCapacityManagerDataExportsRequestMaxResults: IntegerShape
+    DescribeCapacityManagerDataExportsResult: StructureShape
     DescribeCapacityReservationBillingRequestsRequest: StructureShape
     DescribeCapacityReservationBillingRequestsRequestMaxResults: IntegerShape
     DescribeCapacityReservationBillingRequestsResult: StructureShape
+    DescribeCapacityReservationCancellationQuotesRequest: StructureShape
+    DescribeCapacityReservationCancellationQuotesRequestMaxResults: IntegerShape
+    DescribeCapacityReservationCancellationQuotesResult: StructureShape
+    DescribeCapacityReservationDateChangeQuotesRequest: StructureShape
+    DescribeCapacityReservationDateChangeQuotesRequestMaxResults: IntegerShape
+    DescribeCapacityReservationDateChangeQuotesResult: StructureShape
     DescribeCapacityReservationFleetsMaxResults: IntegerShape
     DescribeCapacityReservationFleetsRequest: StructureShape
     DescribeCapacityReservationFleetsResult: StructureShape
+    DescribeCapacityReservationTopologyMaxResults: IntegerShape
+    DescribeCapacityReservationTopologyRequest: StructureShape
+    DescribeCapacityReservationTopologyResult: StructureShape
     DescribeCapacityReservationsMaxResults: IntegerShape
     DescribeCapacityReservationsRequest: StructureShape
     DescribeCapacityReservationsResult: StructureShape
@@ -1027,6 +1221,11 @@ module Aws::EC2
     DescribeInstanceImageMetadataMaxResults: IntegerShape
     DescribeInstanceImageMetadataRequest: StructureShape
     DescribeInstanceImageMetadataResult: StructureShape
+    DescribeInstanceSqlHaHistoryStatesRequest: StructureShape
+    DescribeInstanceSqlHaHistoryStatesResult: StructureShape
+    DescribeInstanceSqlHaStatesRequest: StructureShape
+    DescribeInstanceSqlHaStatesRequestMaxResultsInteger: IntegerShape
+    DescribeInstanceSqlHaStatesResult: StructureShape
     DescribeInstanceStatusRequest: StructureShape
     DescribeInstanceStatusResult: StructureShape
     DescribeInstanceTopologyGroupNameSet: ListShape
@@ -1048,8 +1247,19 @@ module Aws::EC2
     DescribeIpamByoasnResult: StructureShape
     DescribeIpamExternalResourceVerificationTokensRequest: StructureShape
     DescribeIpamExternalResourceVerificationTokensResult: StructureShape
+    DescribeIpamInternetRegistryAssociationsRequest: StructureShape
+    DescribeIpamInternetRegistryAssociationsResult: StructureShape
+    DescribeIpamPoliciesRequest: StructureShape
+    DescribeIpamPoliciesResult: StructureShape
+    DescribeIpamPoolAllocationsMaxResults: IntegerShape
+    DescribeIpamPoolAllocationsRequest: StructureShape
+    DescribeIpamPoolAllocationsResult: StructureShape
     DescribeIpamPoolsRequest: StructureShape
     DescribeIpamPoolsResult: StructureShape
+    DescribeIpamPrefixListResolverTargetsRequest: StructureShape
+    DescribeIpamPrefixListResolverTargetsResult: StructureShape
+    DescribeIpamPrefixListResolversRequest: StructureShape
+    DescribeIpamPrefixListResolversResult: StructureShape
     DescribeIpamResourceDiscoveriesRequest: StructureShape
     DescribeIpamResourceDiscoveriesResult: StructureShape
     DescribeIpamResourceDiscoveryAssociationsRequest: StructureShape
@@ -1153,6 +1363,15 @@ module Aws::EC2
     DescribeScheduledInstanceAvailabilityResult: StructureShape
     DescribeScheduledInstancesRequest: StructureShape
     DescribeScheduledInstancesResult: StructureShape
+    DescribeSecondaryInterfacesMaxResults: IntegerShape
+    DescribeSecondaryInterfacesRequest: StructureShape
+    DescribeSecondaryInterfacesResult: StructureShape
+    DescribeSecondaryNetworksMaxResults: IntegerShape
+    DescribeSecondaryNetworksRequest: StructureShape
+    DescribeSecondaryNetworksResult: StructureShape
+    DescribeSecondarySubnetsMaxResults: IntegerShape
+    DescribeSecondarySubnetsRequest: StructureShape
+    DescribeSecondarySubnetsResult: StructureShape
     DescribeSecurityGroupReferencesRequest: StructureShape
     DescribeSecurityGroupReferencesResult: StructureShape
     DescribeSecurityGroupRulesMaxResults: IntegerShape
@@ -1213,6 +1432,8 @@ module Aws::EC2
     DescribeTransitGatewayConnectPeersResult: StructureShape
     DescribeTransitGatewayConnectsRequest: StructureShape
     DescribeTransitGatewayConnectsResult: StructureShape
+    DescribeTransitGatewayMeteringPoliciesRequest: StructureShape
+    DescribeTransitGatewayMeteringPoliciesResult: StructureShape
     DescribeTransitGatewayMulticastDomainsRequest: StructureShape
     DescribeTransitGatewayMulticastDomainsResult: StructureShape
     DescribeTransitGatewayPeeringAttachmentsRequest: StructureShape
@@ -1266,6 +1487,9 @@ module Aws::EC2
     DescribeVpcClassicLinkDnsSupportResult: StructureShape
     DescribeVpcClassicLinkRequest: StructureShape
     DescribeVpcClassicLinkResult: StructureShape
+    DescribeVpcEncryptionControlsMaxResults: IntegerShape
+    DescribeVpcEncryptionControlsRequest: StructureShape
+    DescribeVpcEncryptionControlsResult: StructureShape
     DescribeVpcEndpointAssociationsRequest: StructureShape
     DescribeVpcEndpointAssociationsResult: StructureShape
     DescribeVpcEndpointConnectionNotificationsRequest: StructureShape
@@ -1286,6 +1510,8 @@ module Aws::EC2
     DescribeVpcsMaxResults: IntegerShape
     DescribeVpcsRequest: StructureShape
     DescribeVpcsResult: StructureShape
+    DescribeVpnConcentratorsRequest: StructureShape
+    DescribeVpnConcentratorsResult: StructureShape
     DescribeVpnConnectionsRequest: StructureShape
     DescribeVpnConnectionsResult: StructureShape
     DescribeVpnGatewaysRequest: StructureShape
@@ -1295,6 +1521,8 @@ module Aws::EC2
     DestinationOptionsResponse: StructureShape
     DetachClassicLinkVpcRequest: StructureShape
     DetachClassicLinkVpcResult: StructureShape
+    DetachImageWatermarkRequest: StructureShape
+    DetachImageWatermarkResult: StructureShape
     DetachInternetGatewayRequest: StructureShape
     DetachNetworkInterfaceRequest: StructureShape
     DetachVerifiedAccessTrustProviderRequest: StructureShape
@@ -1303,6 +1531,8 @@ module Aws::EC2
     DetachVolumeRequest: StructureShape
     DetachVpnGatewayRequest: StructureShape
     DeviceOptions: StructureShape
+    DevicePostureOptions: StructureShape
+    DevicePostureResponseOptions: StructureShape
     DeviceTrustProviderType: EnumShape
     DeviceTrustProviderTypeList: ListShape
     DeviceType: EnumShape
@@ -1313,14 +1543,19 @@ module Aws::EC2
     DhcpOptionsId: StringShape
     DhcpOptionsIdStringList: ListShape
     DhcpOptionsList: ListShape
+    DimensionCondition: StructureShape
     DirectoryServiceAuthentication: StructureShape
     DirectoryServiceAuthenticationRequest: StructureShape
     DisableAddressTransferRequest: StructureShape
     DisableAddressTransferResult: StructureShape
     DisableAllowedImagesSettingsRequest: StructureShape
     DisableAllowedImagesSettingsResult: StructureShape
+    DisableApplicationStatusCheckSuppressionRequest: StructureShape
+    DisableApplicationStatusCheckSuppressionResult: StructureShape
     DisableAwsNetworkPerformanceMetricSubscriptionRequest: StructureShape
     DisableAwsNetworkPerformanceMetricSubscriptionResult: StructureShape
+    DisableCapacityManagerRequest: StructureShape
+    DisableCapacityManagerResult: StructureShape
     DisableEbsEncryptionByDefaultRequest: StructureShape
     DisableEbsEncryptionByDefaultResult: StructureShape
     DisableFastLaunchRequest: StructureShape
@@ -1342,8 +1577,12 @@ module Aws::EC2
     DisableImageDeregistrationProtectionResult: StructureShape
     DisableImageRequest: StructureShape
     DisableImageResult: StructureShape
+    DisableInstanceSqlHaStandbyDetectionsRequest: StructureShape
+    DisableInstanceSqlHaStandbyDetectionsResult: StructureShape
     DisableIpamOrganizationAdminAccountRequest: StructureShape
     DisableIpamOrganizationAdminAccountResult: StructureShape
+    DisableIpamPolicyRequest: StructureShape
+    DisableIpamPolicyResult: StructureShape
     DisableRouteServerPropagationRequest: StructureShape
     DisableRouteServerPropagationResult: StructureShape
     DisableSerialConsoleAccessRequest: StructureShape
@@ -1358,6 +1597,8 @@ module Aws::EC2
     DisableVpcClassicLinkRequest: StructureShape
     DisableVpcClassicLinkResult: StructureShape
     DisassociateAddressRequest: StructureShape
+    DisassociateApplicationStatusCheckRequest: StructureShape
+    DisassociateApplicationStatusCheckResult: StructureShape
     DisassociateCapacityReservationBillingOwnerRequest: StructureShape
     DisassociateCapacityReservationBillingOwnerResult: StructureShape
     DisassociateClientVpnTargetNetworkRequest: StructureShape
@@ -1418,6 +1659,9 @@ module Aws::EC2
     DynamicRoutingValue: EnumShape
     EbsBlockDevice: StructureShape
     EbsBlockDeviceResponse: StructureShape
+    EbsCardIndex: IntegerShape
+    EbsCardInfo: StructureShape
+    EbsCardInfoList: ListShape
     EbsEncryptionSupport: EnumShape
     EbsInfo: StructureShape
     EbsInstanceBlockDevice: StructureShape
@@ -1471,8 +1715,12 @@ module Aws::EC2
     EnableAddressTransferResult: StructureShape
     EnableAllowedImagesSettingsRequest: StructureShape
     EnableAllowedImagesSettingsResult: StructureShape
+    EnableApplicationStatusCheckSuppressionRequest: StructureShape
+    EnableApplicationStatusCheckSuppressionResult: StructureShape
     EnableAwsNetworkPerformanceMetricSubscriptionRequest: StructureShape
     EnableAwsNetworkPerformanceMetricSubscriptionResult: StructureShape
+    EnableCapacityManagerRequest: StructureShape
+    EnableCapacityManagerResult: StructureShape
     EnableEbsEncryptionByDefaultRequest: StructureShape
     EnableEbsEncryptionByDefaultResult: StructureShape
     EnableFastLaunchRequest: StructureShape
@@ -1494,8 +1742,14 @@ module Aws::EC2
     EnableImageDeregistrationProtectionResult: StructureShape
     EnableImageRequest: StructureShape
     EnableImageResult: StructureShape
+    EnableInstanceSqlHaStandbyDetectionsRequest: StructureShape
+    EnableInstanceSqlHaStandbyDetectionsResult: StructureShape
+    EnableIpamInternetRegistryAssociationRequest: StructureShape
+    EnableIpamInternetRegistryAssociationResult: StructureShape
     EnableIpamOrganizationAdminAccountRequest: StructureShape
     EnableIpamOrganizationAdminAccountResult: StructureShape
+    EnableIpamPolicyRequest: StructureShape
+    EnableIpamPolicyResult: StructureShape
     EnableReachabilityAnalyzerOrganizationSharingRequest: StructureShape
     EnableReachabilityAnalyzerOrganizationSharingResult: StructureShape
     EnableRouteServerPropagationRequest: StructureShape
@@ -1515,6 +1769,9 @@ module Aws::EC2
     EnclaveOptions: StructureShape
     EnclaveOptionsRequest: StructureShape
     EncryptionInTransitSupported: BooleanShape
+    EncryptionStateValue: EnumShape
+    EncryptionSupport: StructureShape
+    EncryptionSupportOptionValue: EnumShape
     EndDateType: EnumShape
     EndpointIpAddressType: EnumShape
     EndpointSet: ListShape
@@ -1554,6 +1811,7 @@ module Aws::EC2
     ExportVerifiedAccessInstanceClientConfigurationRequest: StructureShape
     ExportVerifiedAccessInstanceClientConfigurationResult: StructureShape
     ExportVmTaskId: StringShape
+    ExternalAuthorityConfiguration: StructureShape
     FailedCapacityReservationFleetCancellationResult: StructureShape
     FailedCapacityReservationFleetCancellationResultSet: ListShape
     FailedQueuedPurchaseDeletion: StructureShape
@@ -1569,6 +1827,7 @@ module Aws::EC2
     FederatedAuthentication: StructureShape
     FederatedAuthenticationRequest: StructureShape
     Filter: StructureShape
+    FilterByDimension: EnumShape
     FilterList: ListShape
     FilterPortRange: StructureShape
     FindingsFound: EnumShape
@@ -1579,15 +1838,20 @@ module Aws::EC2
     FleetBlockDeviceMappingRequestList: ListShape
     FleetCapacityReservation: StructureShape
     FleetCapacityReservationSet: ListShape
+    FleetCapacityReservationTargetRequest: StructureShape
     FleetCapacityReservationTenancy: EnumShape
     FleetCapacityReservationUsageStrategy: EnumShape
     FleetData: StructureShape
     FleetEbsBlockDeviceRequest: StructureShape
     FleetEventType: EnumShape
     FleetExcessCapacityTerminationPolicy: EnumShape
+    FleetHttpTokensState: EnumShape
+    FleetIamInstanceProfileSpecificationRequest: StructureShape
     FleetId: StringShape
     FleetIdSet: ListShape
     FleetInstanceMatchCriteria: EnumShape
+    FleetInstanceMetadataEndpointState: EnumShape
+    FleetInstanceMetadataOptionsRequest: StructureShape
     FleetLaunchTemplateConfig: StructureShape
     FleetLaunchTemplateConfigList: ListShape
     FleetLaunchTemplateConfigListRequest: ListShape
@@ -1600,6 +1864,7 @@ module Aws::EC2
     FleetLaunchTemplateSpecificationRequest: StructureShape
     FleetOnDemandAllocationStrategy: EnumShape
     FleetReplacementStrategy: EnumShape
+    FleetReservationType: EnumShape
     FleetSet: ListShape
     FleetSpotCapacityRebalance: StructureShape
     FleetSpotCapacityRebalanceRequest: StructureShape
@@ -1645,9 +1910,20 @@ module Aws::EC2
     GetAssociatedIpv6PoolCidrsResult: StructureShape
     GetAwsNetworkPerformanceDataRequest: StructureShape
     GetAwsNetworkPerformanceDataResult: StructureShape
+    GetCapacityManagerAttributesRequest: StructureShape
+    GetCapacityManagerAttributesResult: StructureShape
+    GetCapacityManagerMetricDataRequest: StructureShape
+    GetCapacityManagerMetricDataResult: StructureShape
+    GetCapacityManagerMetricDimensionsRequest: StructureShape
+    GetCapacityManagerMetricDimensionsResult: StructureShape
+    GetCapacityManagerMonitoredTagKeysRequest: StructureShape
+    GetCapacityManagerMonitoredTagKeysRequestMaxResults: IntegerShape
+    GetCapacityManagerMonitoredTagKeysResult: StructureShape
     GetCapacityReservationUsageRequest: StructureShape
     GetCapacityReservationUsageRequestMaxResults: IntegerShape
     GetCapacityReservationUsageResult: StructureShape
+    GetClientVpnEndpointAuthorizationPolicyRequest: StructureShape
+    GetClientVpnEndpointAuthorizationPolicyResult: StructureShape
     GetCoipPoolUsageRequest: StructureShape
     GetCoipPoolUsageResult: StructureShape
     GetConsoleOutputRequest: StructureShape
@@ -1662,6 +1938,8 @@ module Aws::EC2
     GetEbsDefaultKmsKeyIdResult: StructureShape
     GetEbsEncryptionByDefaultRequest: StructureShape
     GetEbsEncryptionByDefaultResult: StructureShape
+    GetEnabledIpamPolicyRequest: StructureShape
+    GetEnabledIpamPolicyResult: StructureShape
     GetFlowLogsIntegrationTemplateRequest: StructureShape
     GetFlowLogsIntegrationTemplateResult: StructureShape
     GetGroupsForCapacityReservationRequest: StructureShape
@@ -1669,6 +1947,8 @@ module Aws::EC2
     GetGroupsForCapacityReservationResult: StructureShape
     GetHostReservationPurchasePreviewRequest: StructureShape
     GetHostReservationPurchasePreviewResult: StructureShape
+    GetImageAncestryRequest: StructureShape
+    GetImageAncestryResult: StructureShape
     GetImageBlockPublicAccessStateRequest: StructureShape
     GetImageBlockPublicAccessStateResult: StructureShape
     GetInstanceMetadataDefaultsRequest: StructureShape
@@ -1687,13 +1967,37 @@ module Aws::EC2
     GetIpamDiscoveredPublicAddressesResult: StructureShape
     GetIpamDiscoveredResourceCidrsRequest: StructureShape
     GetIpamDiscoveredResourceCidrsResult: StructureShape
+    GetIpamDiscoveredRoutesRequest: StructureShape
+    GetIpamDiscoveredRoutesResult: StructureShape
+    GetIpamInternetRegistryAssociationAsnsRequest: StructureShape
+    GetIpamInternetRegistryAssociationAsnsResult: StructureShape
+    GetIpamInternetRegistryAssociationCidrsRequest: StructureShape
+    GetIpamInternetRegistryAssociationCidrsResult: StructureShape
+    GetIpamPolicyAllocationRulesRequest: StructureShape
+    GetIpamPolicyAllocationRulesResult: StructureShape
+    GetIpamPolicyOrganizationTargetsRequest: StructureShape
+    GetIpamPolicyOrganizationTargetsResult: StructureShape
     GetIpamPoolAllocationsMaxResults: IntegerShape
     GetIpamPoolAllocationsRequest: StructureShape
     GetIpamPoolAllocationsResult: StructureShape
     GetIpamPoolCidrsRequest: StructureShape
     GetIpamPoolCidrsResult: StructureShape
+    GetIpamPrefixListResolverRulesRequest: StructureShape
+    GetIpamPrefixListResolverRulesResult: StructureShape
+    GetIpamPrefixListResolverVersionEntriesRequest: StructureShape
+    GetIpamPrefixListResolverVersionEntriesResult: StructureShape
+    GetIpamPrefixListResolverVersionsRequest: StructureShape
+    GetIpamPrefixListResolverVersionsResult: StructureShape
     GetIpamResourceCidrsRequest: StructureShape
     GetIpamResourceCidrsResult: StructureShape
+    GetIpamRouteOriginAuthorizationsRequest: StructureShape
+    GetIpamRouteOriginAuthorizationsResult: StructureShape
+    GetIpamRouteProtectionFindingsRequest: StructureShape
+    GetIpamRouteProtectionFindingsResult: StructureShape
+    GetIpamRoutingPolicyRegistrationDeltasRequest: StructureShape
+    GetIpamRoutingPolicyRegistrationDeltasResult: StructureShape
+    GetIpamRoutingPolicyRegistrationsRequest: StructureShape
+    GetIpamRoutingPolicyRegistrationsResult: StructureShape
     GetLaunchTemplateDataRequest: StructureShape
     GetLaunchTemplateDataResult: StructureShape
     GetManagedPrefixListAssociationsMaxResults: IntegerShape
@@ -1701,6 +2005,8 @@ module Aws::EC2
     GetManagedPrefixListAssociationsResult: StructureShape
     GetManagedPrefixListEntriesRequest: StructureShape
     GetManagedPrefixListEntriesResult: StructureShape
+    GetManagedResourceVisibilityRequest: StructureShape
+    GetManagedResourceVisibilityResult: StructureShape
     GetNetworkInsightsAccessScopeAnalysisFindingsMaxResults: IntegerShape
     GetNetworkInsightsAccessScopeAnalysisFindingsRequest: StructureShape
     GetNetworkInsightsAccessScopeAnalysisFindingsResult: StructureShape
@@ -1730,6 +2036,8 @@ module Aws::EC2
     GetSubnetCidrReservationsResult: StructureShape
     GetTransitGatewayAttachmentPropagationsRequest: StructureShape
     GetTransitGatewayAttachmentPropagationsResult: StructureShape
+    GetTransitGatewayMeteringPolicyEntriesRequest: StructureShape
+    GetTransitGatewayMeteringPolicyEntriesResult: StructureShape
     GetTransitGatewayMulticastDomainAssociationsRequest: StructureShape
     GetTransitGatewayMulticastDomainAssociationsResult: StructureShape
     GetTransitGatewayPolicyTableAssociationsRequest: StructureShape
@@ -1749,6 +2057,9 @@ module Aws::EC2
     GetVerifiedAccessEndpointTargetsResult: StructureShape
     GetVerifiedAccessGroupPolicyRequest: StructureShape
     GetVerifiedAccessGroupPolicyResult: StructureShape
+    GetVpcResourcesBlockingEncryptionEnforcementMaxResults: IntegerShape
+    GetVpcResourcesBlockingEncryptionEnforcementRequest: StructureShape
+    GetVpcResourcesBlockingEncryptionEnforcementResult: StructureShape
     GetVpnConnectionDeviceSampleConfigurationRequest: StructureShape
     GetVpnConnectionDeviceSampleConfigurationResult: StructureShape
     GetVpnConnectionDeviceTypesRequest: StructureShape
@@ -1763,12 +2074,26 @@ module Aws::EC2
     GpuDeviceMemorySize: IntegerShape
     GpuDeviceName: StringShape
     GpuInfo: StructureShape
+    GpuPartitionSize: FloatShape
+    GroupBy: EnumShape
+    GroupBySet: ListShape
     GroupIdStringList: ListShape
     GroupIdentifier: StructureShape
     GroupIdentifierList: ListShape
     GroupIdentifierSet: ListShape
     GroupIds: ListShape
     GroupNameStringList: ListShape
+    HaStatus: EnumShape
+    HealthCheckPathDestinationRequestObject: StructureShape
+    HealthCheckPathDestinationRequestSet: ListShape
+    HealthCheckPathDestinationResponseList: ListShape
+    HealthCheckPathDestinationResponseObject: StructureShape
+    HealthCheckPathRequestList: ListShape
+    HealthCheckPathRequestObject: StructureShape
+    HealthCheckPathResponseList: ListShape
+    HealthCheckPathResponseObject: StructureShape
+    HealthCheckPathSourceRequestObject: StructureShape
+    HealthCheckPathSourceResponseObject: StructureShape
     HibernationFlag: BooleanShape
     HibernationOptions: StructureShape
     HibernationOptionsRequest: StructureShape
@@ -1777,6 +2102,8 @@ module Aws::EC2
     HistoryRecordSet: ListShape
     HistoryRecords: ListShape
     Host: StructureShape
+    HostCpuOptions: StructureShape
+    HostCpuOptionsRequest: StructureShape
     HostInstance: StructureShape
     HostInstanceList: ListShape
     HostList: ListShape
@@ -1792,6 +2119,7 @@ module Aws::EC2
     HostTenancy: EnumShape
     HostnameType: EnumShape
     Hour: IntegerShape
+    HttpTokensEnforcedState: EnumShape
     HttpTokensState: EnumShape
     HypervisorType: EnumShape
     IKEVersionsList: ListShape
@@ -1809,6 +2137,8 @@ module Aws::EC2
     IdFormatList: ListShape
     Igmpv2SupportValue: EnumShape
     Image: StructureShape
+    ImageAncestryEntry: StructureShape
+    ImageAncestryEntryList: ListShape
     ImageAttributeName: EnumShape
     ImageBlockPublicAccessDisabledState: EnumShape
     ImageBlockPublicAccessEnabledState: EnumShape
@@ -1816,6 +2146,7 @@ module Aws::EC2
     ImageCriterionList: ListShape
     ImageCriterionRequest: StructureShape
     ImageCriterionRequestList: ListShape
+    ImageDescriptionRequest: StringShape
     ImageDiskContainer: StructureShape
     ImageDiskContainerList: ListShape
     ImageId: StringShape
@@ -1824,9 +2155,10 @@ module Aws::EC2
     ImageList: ListShape
     ImageMetadata: StructureShape
     ImageName: StringShape
+    ImageNameCriteriaRequest: StringShape
+    ImageNameCriteriaRequestList: ListShape
     ImageNameList: ListShape
     ImageNameRequest: StringShape
-    ImageNameRequestList: ListShape
     ImageProvider: StringShape
     ImageProviderList: ListShape
     ImageProviderRequest: StringShape
@@ -1839,6 +2171,7 @@ module Aws::EC2
     ImageReferenceResourceType: EnumShape
     ImageState: EnumShape
     ImageTypeValues: EnumShape
+    ImageUefiDataRequest: StringShape
     ImageUsageReport: StructureShape
     ImageUsageReportEntry: StructureShape
     ImageUsageReportEntryList: ListShape
@@ -1859,6 +2192,13 @@ module Aws::EC2
     ImageUsageResourceTypeOptionValuesList: ListShape
     ImageUsageResourceTypeRequest: StructureShape
     ImageUsageResourceTypeRequestList: ListShape
+    ImageWatermark: StructureShape
+    ImageWatermarkFilterRequest: StructureShape
+    ImageWatermarkFilterRequestList: ListShape
+    ImageWatermarkFilterResponse: StructureShape
+    ImageWatermarkFilterResponseList: ListShape
+    ImageWatermarkList: ListShape
+    ImageWatermarkNameRequest: StringShape
     ImdsSupportValues: EnumShape
     ImportClientVpnClientCertificateRevocationListRequest: StructureShape
     ImportClientVpnClientCertificateRevocationListResult: StructureShape
@@ -1891,6 +2231,7 @@ module Aws::EC2
     ImportVolumeRequest: StructureShape
     ImportVolumeResult: StructureShape
     ImportVolumeTaskDetails: StructureShape
+    IncludeUnsupportedInRegion: BooleanShape
     InferenceAcceleratorInfo: StructureShape
     InferenceDeviceCount: IntegerShape
     InferenceDeviceInfo: StructureShape
@@ -1899,10 +2240,14 @@ module Aws::EC2
     InferenceDeviceMemoryInfo: StructureShape
     InferenceDeviceMemorySize: IntegerShape
     InferenceDeviceName: StringShape
+    IngestionStatus: EnumShape
+    InitializationGracePeriodSeconds: IntegerShape
     InitializationStatusDetails: StructureShape
     InitializationType: EnumShape
     InsideCidrBlocksStringList: ListShape
     Instance: StructureShape
+    InstanceApplicationStatus: StructureShape
+    InstanceApplicationStatusSet: ListShape
     InstanceAttachmentEnaSrdSpecification: StructureShape
     InstanceAttachmentEnaSrdUdpSpecification: StructureShape
     InstanceAttributeName: EnumShape
@@ -1950,6 +2295,7 @@ module Aws::EC2
     InstanceIdList: ListShape
     InstanceIdSet: ListShape
     InstanceIdStringList: ListShape
+    InstanceIdUpdateStringList: ListShape
     InstanceIdWithVolumeResolver: StringShape
     InstanceIdsSet: ListShape
     InstanceImageMetadata: StructureShape
@@ -1993,6 +2339,15 @@ module Aws::EC2
     InstanceRequirements: StructureShape
     InstanceRequirementsRequest: StructureShape
     InstanceRequirementsWithMetadataRequest: StructureShape
+    InstanceSecondaryInterface: StructureShape
+    InstanceSecondaryInterfaceAttachment: StructureShape
+    InstanceSecondaryInterfaceList: ListShape
+    InstanceSecondaryInterfacePrivateIpAddress: StructureShape
+    InstanceSecondaryInterfacePrivateIpAddressList: ListShape
+    InstanceSecondaryInterfacePrivateIpAddressListRequest: ListShape
+    InstanceSecondaryInterfacePrivateIpAddressRequest: StructureShape
+    InstanceSecondaryInterfaceSpecificationListRequest: ListShape
+    InstanceSecondaryInterfaceSpecificationRequest: StructureShape
     InstanceSet: ListShape
     InstanceSpecification: StructureShape
     InstanceState: StructureShape
@@ -2018,9 +2373,13 @@ module Aws::EC2
     InstanceTypeInfoFromInstanceRequirements: StructureShape
     InstanceTypeInfoFromInstanceRequirementsSet: ListShape
     InstanceTypeInfoList: ListShape
+    InstanceTypeItem: StructureShape
+    InstanceTypeItemRequest: StringShape
     InstanceTypeList: ListShape
     InstanceTypeOffering: StructureShape
     InstanceTypeOfferingsList: ListShape
+    InstanceTypeSpecification: StructureShape
+    InstanceTypeSpecificationRequest: StructureShape
     InstanceTypes: ListShape
     InstanceTypesList: ListShape
     InstanceUsage: StructureShape
@@ -2038,6 +2397,10 @@ module Aws::EC2
     InternetGatewayId: StringShape
     InternetGatewayIdList: ListShape
     InternetGatewayList: ListShape
+    InterruptibleCapacityAllocation: StructureShape
+    InterruptibleCapacityReservationAllocationStatus: EnumShape
+    InterruptionInfo: StructureShape
+    InterruptionType: EnumShape
     IpAddress: StringShape
     IpAddressList: ListShape
     IpAddressType: EnumShape
@@ -2048,13 +2411,17 @@ module Aws::EC2
     IpRange: StructureShape
     IpRangeList: ListShape
     IpRanges: ListShape
+    IpScopeEnum: EnumShape
     IpSource: EnumShape
+    IpVersionEnum: EnumShape
     Ipam: StructureShape
     IpamAddressHistoryMaxResults: IntegerShape
     IpamAddressHistoryRecord: StructureShape
     IpamAddressHistoryRecordSet: ListShape
     IpamAddressHistoryResourceType: EnumShape
     IpamAssociatedResourceDiscoveryStatus: EnumShape
+    IpamByoipAdvertisementType: EnumShape
+    IpamByoipCidrState: EnumShape
     IpamCidrAuthorizationContext: StructureShape
     IpamComplianceStatus: EnumShape
     IpamDiscoveredAccount: StructureShape
@@ -2063,6 +2430,8 @@ module Aws::EC2
     IpamDiscoveredPublicAddressSet: ListShape
     IpamDiscoveredResourceCidr: StructureShape
     IpamDiscoveredResourceCidrSet: ListShape
+    IpamDiscoveredRoute: StructureShape
+    IpamDiscoveredRouteSet: ListShape
     IpamDiscoveryFailureCode: EnumShape
     IpamDiscoveryFailureReason: StructureShape
     IpamExternalResourceVerificationToken: StructureShape
@@ -2070,6 +2439,14 @@ module Aws::EC2
     IpamExternalResourceVerificationTokenSet: ListShape
     IpamExternalResourceVerificationTokenState: EnumShape
     IpamId: StringShape
+    IpamInternetRegistryAssociation: StructureShape
+    IpamInternetRegistryAssociationAsn: StructureShape
+    IpamInternetRegistryAssociationAsnSet: ListShape
+    IpamInternetRegistryAssociationCidr: StructureShape
+    IpamInternetRegistryAssociationCidrSet: ListShape
+    IpamInternetRegistryAssociationId: StringShape
+    IpamInternetRegistryAssociationSet: ListShape
+    IpamInternetRegistryAssociationState: EnumShape
     IpamManagementState: EnumShape
     IpamMaxResults: IntegerShape
     IpamMeteredAccount: EnumShape
@@ -2080,6 +2457,20 @@ module Aws::EC2
     IpamOrganizationalUnitExclusion: StructureShape
     IpamOrganizationalUnitExclusionSet: ListShape
     IpamOverlapStatus: EnumShape
+    IpamPolicy: StructureShape
+    IpamPolicyAllocationRule: StructureShape
+    IpamPolicyAllocationRuleList: ListShape
+    IpamPolicyAllocationRuleListRequest: ListShape
+    IpamPolicyAllocationRuleRequest: StructureShape
+    IpamPolicyDocument: StructureShape
+    IpamPolicyDocumentSet: ListShape
+    IpamPolicyId: StringShape
+    IpamPolicyManagedBy: EnumShape
+    IpamPolicyOrganizationTarget: StructureShape
+    IpamPolicyOrganizationTargetSet: ListShape
+    IpamPolicyResourceType: EnumShape
+    IpamPolicySet: ListShape
+    IpamPolicyState: EnumShape
     IpamPool: StructureShape
     IpamPoolAllocation: StructureShape
     IpamPoolAllocationAllowedCidrs: ListShape
@@ -2101,6 +2492,30 @@ module Aws::EC2
     IpamPoolSourceResourceRequest: StructureShape
     IpamPoolSourceResourceType: EnumShape
     IpamPoolState: EnumShape
+    IpamPrefixListResolver: StructureShape
+    IpamPrefixListResolverId: StringShape
+    IpamPrefixListResolverRule: StructureShape
+    IpamPrefixListResolverRuleCondition: StructureShape
+    IpamPrefixListResolverRuleConditionOperation: EnumShape
+    IpamPrefixListResolverRuleConditionRequest: StructureShape
+    IpamPrefixListResolverRuleConditionRequestSet: ListShape
+    IpamPrefixListResolverRuleConditionSet: ListShape
+    IpamPrefixListResolverRuleRequest: StructureShape
+    IpamPrefixListResolverRuleRequestSet: ListShape
+    IpamPrefixListResolverRuleSet: ListShape
+    IpamPrefixListResolverRuleType: EnumShape
+    IpamPrefixListResolverSet: ListShape
+    IpamPrefixListResolverState: EnumShape
+    IpamPrefixListResolverTarget: StructureShape
+    IpamPrefixListResolverTargetId: StringShape
+    IpamPrefixListResolverTargetSet: ListShape
+    IpamPrefixListResolverTargetState: EnumShape
+    IpamPrefixListResolverVersion: StructureShape
+    IpamPrefixListResolverVersionCreationStatus: EnumShape
+    IpamPrefixListResolverVersionEntry: StructureShape
+    IpamPrefixListResolverVersionEntrySet: ListShape
+    IpamPrefixListResolverVersionNumberSet: ListShape
+    IpamPrefixListResolverVersionSet: ListShape
     IpamPublicAddressAssociationStatus: EnumShape
     IpamPublicAddressAwsService: EnumShape
     IpamPublicAddressSecurityGroup: StructureShape
@@ -2123,7 +2538,26 @@ module Aws::EC2
     IpamResourceTag: StructureShape
     IpamResourceTagList: ListShape
     IpamResourceType: EnumShape
+    IpamRouteOriginAuthorization: StructureShape
+    IpamRouteOriginAuthorizationInfo: StructureShape
+    IpamRouteOriginAuthorizationInfoSet: ListShape
+    IpamRouteOriginAuthorizationSet: ListShape
+    IpamRouteOverlap: StructureShape
+    IpamRouteOverlapSet: ListShape
+    IpamRouteProtectionFinding: StructureShape
+    IpamRouteProtectionFindingSet: ListShape
+    IpamRoutingPolicyRegistration: StructureShape
+    IpamRoutingPolicyRegistrationDelta: StructureShape
+    IpamRoutingPolicyRegistrationDeltaSet: ListShape
+    IpamRoutingPolicyRegistrationDeltaState: EnumShape
+    IpamRoutingPolicyRegistrationMaxLength: IntegerShape
+    IpamRoutingPolicyRegistrationSet: ListShape
+    IpamRoutingPolicyRegistrationState: EnumShape
+    IpamRpkiStatus: EnumShape
+    IpamRpkiStrength: EnumShape
     IpamScope: StructureShape
+    IpamScopeExternalAuthorityConfiguration: StructureShape
+    IpamScopeExternalAuthorityType: EnumShape
     IpamScopeId: StringShape
     IpamScopeSet: ListShape
     IpamScopeState: EnumShape
@@ -2131,6 +2565,7 @@ module Aws::EC2
     IpamSet: ListShape
     IpamState: EnumShape
     IpamTier: EnumShape
+    Ipv4AddressesPerSecondaryInterface: IntegerShape
     Ipv4PoolCoipId: StringShape
     Ipv4PoolEc2Id: StringShape
     Ipv4PrefixList: ListShape
@@ -2225,6 +2660,10 @@ module Aws::EC2
     LaunchTemplateInstanceNetworkInterfaceSpecificationList: ListShape
     LaunchTemplateInstanceNetworkInterfaceSpecificationRequest: StructureShape
     LaunchTemplateInstanceNetworkInterfaceSpecificationRequestList: ListShape
+    LaunchTemplateInstanceSecondaryInterfaceSpecification: StructureShape
+    LaunchTemplateInstanceSecondaryInterfaceSpecificationList: ListShape
+    LaunchTemplateInstanceSecondaryInterfaceSpecificationRequest: StructureShape
+    LaunchTemplateInstanceSecondaryInterfaceSpecificationRequestList: ListShape
     LaunchTemplateLicenseConfiguration: StructureShape
     LaunchTemplateLicenseConfigurationRequest: StructureShape
     LaunchTemplateLicenseList: ListShape
@@ -2261,6 +2700,8 @@ module Aws::EC2
     ListSnapshotsInRecycleBinMaxResults: IntegerShape
     ListSnapshotsInRecycleBinRequest: StructureShape
     ListSnapshotsInRecycleBinResult: StructureShape
+    ListVolumesInRecycleBinRequest: StructureShape
+    ListVolumesInRecycleBinResult: StructureShape
     ListingState: EnumShape
     ListingStatus: EnumShape
     LoadBalancerArn: StringShape
@@ -2314,6 +2755,7 @@ module Aws::EC2
     LockedSnapshotsInfo: StructureShape
     LockedSnapshotsInfoList: ListShape
     LogDestinationType: EnumShape
+    LogicalGpuCount: IntegerShape
     Long: IntegerShape
     MacHost: StructureShape
     MacHostList: ListShape
@@ -2331,6 +2773,8 @@ module Aws::EC2
     ManagedBy: EnumShape
     ManagedPrefixList: StructureShape
     ManagedPrefixListSet: ListShape
+    ManagedResourceDefaultVisibility: EnumShape
+    ManagedResourceVisibilitySettings: StructureShape
     MarketType: EnumShape
     MarketplaceProductCode: StringShape
     MarketplaceProductCodeList: ListShape
@@ -2346,11 +2790,13 @@ module Aws::EC2
     MaximumDaysSinceCreatedValue: IntegerShape
     MaximumDaysSinceDeprecatedValue: IntegerShape
     MaximumEbsAttachments: IntegerShape
+    MaximumEbsCards: IntegerShape
     MaximumEfaInterfaces: IntegerShape
     MaximumEnaQueueCount: IntegerShape
     MaximumEnaQueueCountPerInterface: IntegerShape
     MaximumIops: IntegerShape
     MaximumNetworkCards: IntegerShape
+    MaximumSecondaryNetworkInterfaces: IntegerShape
     MaximumThroughputInMBps: FloatShape
     MediaAcceleratorInfo: StructureShape
     MediaDeviceCount: IntegerShape
@@ -2368,12 +2814,26 @@ module Aws::EC2
     MemoryMiBRequest: StructureShape
     MemorySize: IntegerShape
     MetadataDefaultHttpTokensState: EnumShape
+    Metric: EnumShape
+    MetricDataResult: StructureShape
+    MetricDataResultSet: ListShape
+    MetricDimensionResultSet: ListShape
     MetricPoint: StructureShape
     MetricPoints: ListShape
+    MetricSet: ListShape
     MetricType: EnumShape
+    MetricValue: StructureShape
+    MetricValueSet: ListShape
     MillisecondDateTime: TimestampShape
+    ModificationQuoteCurrentConfiguration: StructureShape
+    ModificationReservationUpdate: StructureShape
+    ModificationTerms: StructureShape
+    ModifyAccountVpcEncryptionControlRequest: StructureShape
+    ModifyAccountVpcEncryptionControlResult: StructureShape
     ModifyAddressAttributeRequest: StructureShape
     ModifyAddressAttributeResult: StructureShape
+    ModifyApplicationStatusCheckRequest: StructureShape
+    ModifyApplicationStatusCheckResult: StructureShape
     ModifyAvailabilityZoneGroupRequest: StructureShape
     ModifyAvailabilityZoneGroupResult: StructureShape
     ModifyAvailabilityZoneOptInStatus: EnumShape
@@ -2381,6 +2841,8 @@ module Aws::EC2
     ModifyCapacityReservationFleetResult: StructureShape
     ModifyCapacityReservationRequest: StructureShape
     ModifyCapacityReservationResult: StructureShape
+    ModifyClientVpnEndpointAuthorizationPolicyRequest: StructureShape
+    ModifyClientVpnEndpointAuthorizationPolicyResult: StructureShape
     ModifyClientVpnEndpointRequest: StructureShape
     ModifyClientVpnEndpointResult: StructureShape
     ModifyDefaultCreditSpecificationRequest: StructureShape
@@ -2397,6 +2859,7 @@ module Aws::EC2
     ModifyIdentityIdFormatRequest: StructureShape
     ModifyImageAttributeRequest: StructureShape
     ModifyInstanceAttributeRequest: StructureShape
+    ModifyInstanceAttributeValue: StringShape
     ModifyInstanceCapacityReservationAttributesRequest: StructureShape
     ModifyInstanceCapacityReservationAttributesResult: StructureShape
     ModifyInstanceConnectEndpointRequest: StructureShape
@@ -2419,14 +2882,24 @@ module Aws::EC2
     ModifyInstanceNetworkPerformanceResult: StructureShape
     ModifyInstancePlacementRequest: StructureShape
     ModifyInstancePlacementResult: StructureShape
+    ModifyIpamPolicyAllocationRulesRequest: StructureShape
+    ModifyIpamPolicyAllocationRulesResult: StructureShape
+    ModifyIpamPoolAllocationRequest: StructureShape
+    ModifyIpamPoolAllocationResult: StructureShape
     ModifyIpamPoolRequest: StructureShape
     ModifyIpamPoolResult: StructureShape
+    ModifyIpamPrefixListResolverRequest: StructureShape
+    ModifyIpamPrefixListResolverResult: StructureShape
+    ModifyIpamPrefixListResolverTargetRequest: StructureShape
+    ModifyIpamPrefixListResolverTargetResult: StructureShape
     ModifyIpamRequest: StructureShape
     ModifyIpamResourceCidrRequest: StructureShape
     ModifyIpamResourceCidrResult: StructureShape
     ModifyIpamResourceDiscoveryRequest: StructureShape
     ModifyIpamResourceDiscoveryResult: StructureShape
     ModifyIpamResult: StructureShape
+    ModifyIpamRoutingPolicyRegistrationRequest: StructureShape
+    ModifyIpamRoutingPolicyRegistrationResult: StructureShape
     ModifyIpamScopeRequest: StructureShape
     ModifyIpamScopeResult: StructureShape
     ModifyLaunchTemplateRequest: StructureShape
@@ -2435,6 +2908,8 @@ module Aws::EC2
     ModifyLocalGatewayRouteResult: StructureShape
     ModifyManagedPrefixListRequest: StructureShape
     ModifyManagedPrefixListResult: StructureShape
+    ModifyManagedResourceVisibilityRequest: StructureShape
+    ModifyManagedResourceVisibilityResult: StructureShape
     ModifyNetworkInterfaceAttributeRequest: StructureShape
     ModifyPrivateDnsNameOptionsRequest: StructureShape
     ModifyPrivateDnsNameOptionsResult: StructureShape
@@ -2458,7 +2933,11 @@ module Aws::EC2
     ModifyTrafficMirrorFilterRuleResult: StructureShape
     ModifyTrafficMirrorSessionRequest: StructureShape
     ModifyTrafficMirrorSessionResult: StructureShape
+    ModifyTransitGatewayMeteringPolicyRequest: StructureShape
+    ModifyTransitGatewayMeteringPolicyResult: StructureShape
     ModifyTransitGatewayOptions: StructureShape
+    ModifyTransitGatewayPolicyTableEntryRequest: StructureShape
+    ModifyTransitGatewayPolicyTableEntryResult: StructureShape
     ModifyTransitGatewayPrefixListReferenceRequest: StructureShape
     ModifyTransitGatewayPrefixListReferenceResult: StructureShape
     ModifyTransitGatewayRequest: StructureShape
@@ -2498,8 +2977,12 @@ module Aws::EC2
     ModifyVpcBlockPublicAccessExclusionResult: StructureShape
     ModifyVpcBlockPublicAccessOptionsRequest: StructureShape
     ModifyVpcBlockPublicAccessOptionsResult: StructureShape
+    ModifyVpcEncryptionControlRequest: StructureShape
+    ModifyVpcEncryptionControlResult: StructureShape
     ModifyVpcEndpointConnectionNotificationRequest: StructureShape
     ModifyVpcEndpointConnectionNotificationResult: StructureShape
+    ModifyVpcEndpointPayerResponsibilityRequest: StructureShape
+    ModifyVpcEndpointPayerResponsibilityResult: StructureShape
     ModifyVpcEndpointRequest: StructureShape
     ModifyVpcEndpointResult: StructureShape
     ModifyVpcEndpointServiceConfigurationRequest: StructureShape
@@ -2539,11 +3022,17 @@ module Aws::EC2
     NatGatewayAddress: StructureShape
     NatGatewayAddressList: ListShape
     NatGatewayAddressStatus: EnumShape
+    NatGatewayApplianceModifyState: EnumShape
+    NatGatewayApplianceState: EnumShape
+    NatGatewayApplianceType: EnumShape
+    NatGatewayAttachedAppliance: StructureShape
+    NatGatewayAttachedApplianceList: ListShape
     NatGatewayId: StringShape
     NatGatewayIdStringList: ListShape
     NatGatewayList: ListShape
     NatGatewayState: EnumShape
     NativeApplicationOidcOptions: StructureShape
+    NestedVirtualizationSpecification: EnumShape
     NetmaskLength: IntegerShape
     NetworkAcl: StructureShape
     NetworkAclAssociation: StructureShape
@@ -2559,6 +3048,8 @@ module Aws::EC2
     NetworkCardIndex: IntegerShape
     NetworkCardInfo: StructureShape
     NetworkCardInfoList: ListShape
+    NetworkCardInterfaceType: EnumShape
+    NetworkCardInterfaceTypeList: ListShape
     NetworkInfo: StructureShape
     NetworkInsightsAccessScope: StructureShape
     NetworkInsightsAccessScopeAnalysis: StructureShape
@@ -2604,8 +3095,10 @@ module Aws::EC2
     NetworkInterfacePrivateIpAddressList: ListShape
     NetworkInterfaceStatus: EnumShape
     NetworkInterfaceType: EnumShape
+    NetworkNodeSet: ListShape
     NetworkNodesList: ListShape
     NetworkPerformance: StringShape
+    NetworkProtocolEnum: EnumShape
     NeuronDeviceCoreCount: IntegerShape
     NeuronDeviceCoreInfo: StructureShape
     NeuronDeviceCoreVersion: IntegerShape
@@ -2645,6 +3138,7 @@ module Aws::EC2
     OutpostLagIdSet: ListShape
     OutpostLagMaxResults: IntegerShape
     OutpostLagSet: ListShape
+    OutputFormat: EnumShape
     OwnerStringList: ListShape
     PacketHeaderStatement: StructureShape
     PacketHeaderStatementRequest: StructureShape
@@ -2657,6 +3151,10 @@ module Aws::EC2
     PathStatement: StructureShape
     PathStatementRequest: StructureShape
     PayerResponsibility: EnumShape
+    PayerResponsibilityEntry: StructureShape
+    PayerResponsibilityScope: EnumShape
+    PayerResponsibilitySet: ListShape
+    PayerResponsibilityType: EnumShape
     PaymentOption: EnumShape
     PciId: StructureShape
     PeakBandwidthInGbps: FloatShape
@@ -2668,6 +3166,7 @@ module Aws::EC2
     PerformanceFactorReferenceRequest: StructureShape
     PerformanceFactorReferenceSet: ListShape
     PerformanceFactorReferenceSetRequest: ListShape
+    Period: IntegerShape
     PeriodType: EnumShape
     PermissionGroup: EnumShape
     Phase1DHGroupNumbersList: ListShape
@@ -2703,6 +3202,7 @@ module Aws::EC2
     PlacementGroupInfo: StructureShape
     PlacementGroupList: ListShape
     PlacementGroupName: StringShape
+    PlacementGroupNameWithResolver: StringShape
     PlacementGroupState: EnumShape
     PlacementGroupStrategy: EnumShape
     PlacementGroupStrategyList: ListShape
@@ -2714,6 +3214,7 @@ module Aws::EC2
     PoolCidrBlocksSet: ListShape
     PoolMaxResults: IntegerShape
     Port: IntegerShape
+    PortNumber: IntegerShape
     PortRange: StructureShape
     PortRangeList: ListShape
     PrefixList: StructureShape
@@ -2745,6 +3246,7 @@ module Aws::EC2
     PrivateDnsNameOptionsOnLaunch: StructureShape
     PrivateDnsNameOptionsRequest: StructureShape
     PrivateDnsNameOptionsResponse: StructureShape
+    PrivateDnsSpecifiedDomainSet: ListShape
     PrivateIpAddressConfigSet: ListShape
     PrivateIpAddressCount: IntegerShape
     PrivateIpAddressSpecification: StructureShape
@@ -2811,6 +3313,8 @@ module Aws::EC2
     RecurringChargesList: ListShape
     ReferencedSecurityGroup: StructureShape
     Region: StructureShape
+    RegionGeography: StructureShape
+    RegionGeographyList: ListShape
     RegionList: ListShape
     RegionNameStringList: ListShape
     RegionNames: ListShape
@@ -2825,8 +3329,12 @@ module Aws::EC2
     RegisterTransitGatewayMulticastGroupMembersResult: StructureShape
     RegisterTransitGatewayMulticastGroupSourcesRequest: StructureShape
     RegisterTransitGatewayMulticastGroupSourcesResult: StructureShape
+    RegisteredInstance: StructureShape
+    RegisteredInstanceList: ListShape
     RejectCapacityReservationBillingOwnershipRequest: StructureShape
     RejectCapacityReservationBillingOwnershipResult: StructureShape
+    RejectTransitGatewayClientVpnAttachmentRequest: StructureShape
+    RejectTransitGatewayClientVpnAttachmentResult: StructureShape
     RejectTransitGatewayMulticastDomainAssociationsRequest: StructureShape
     RejectTransitGatewayMulticastDomainAssociationsResult: StructureShape
     RejectTransitGatewayPeeringAttachmentRequest: StructureShape
@@ -2852,6 +3360,8 @@ module Aws::EC2
     ReplaceIamInstanceProfileAssociationResult: StructureShape
     ReplaceImageCriteriaInAllowedImagesSettingsRequest: StructureShape
     ReplaceImageCriteriaInAllowedImagesSettingsResult: StructureShape
+    ReplaceImageInstanceTypeSpecificationRequest: StructureShape
+    ReplaceImageInstanceTypeSpecificationResult: StructureShape
     ReplaceNetworkAclAssociationRequest: StructureShape
     ReplaceNetworkAclAssociationResult: StructureShape
     ReplaceNetworkAclEntryRequest: StructureShape
@@ -2888,12 +3398,23 @@ module Aws::EC2
     RequestSpotLaunchSpecificationSecurityGroupIdList: ListShape
     RequestSpotLaunchSpecificationSecurityGroupList: ListShape
     Reservation: StructureShape
+    ReservationEndDateType: EnumShape
     ReservationFleetInstanceSpecification: StructureShape
     ReservationFleetInstanceSpecificationList: ListShape
     ReservationId: StringShape
     ReservationList: ListShape
     ReservationState: EnumShape
+    ReservationType: EnumShape
+    ReservationTypeList: ListShape
+    ReservationTypeListRequest: ListShape
     ReservationValue: StructureShape
+    ReservedCapacityAllocationStrategy: EnumShape
+    ReservedCapacityFallbackMarketType: EnumShape
+    ReservedCapacityFallbackMarketTypeList: ListShape
+    ReservedCapacityFallbackOptions: StructureShape
+    ReservedCapacityFallbackOptionsRequest: StructureShape
+    ReservedCapacityOptions: StructureShape
+    ReservedCapacityOptionsRequest: StructureShape
     ReservedInstanceIdSet: ListShape
     ReservedInstanceLimitPrice: StructureShape
     ReservedInstanceReservationValue: StructureShape
@@ -2933,6 +3454,7 @@ module Aws::EC2
     ResetSnapshotAttributeRequest: StructureShape
     ResourceArn: StringShape
     ResourceConfigurationArn: StringShape
+    ResourceGroupName: StringShape
     ResourceIdList: ListShape
     ResourceList: ListShape
     ResourceStatement: StructureShape
@@ -2960,6 +3482,8 @@ module Aws::EC2
     RestoreSnapshotTierRequest: StructureShape
     RestoreSnapshotTierRequestTemporaryRestoreDays: IntegerShape
     RestoreSnapshotTierResult: StructureShape
+    RestoreVolumeFromRecycleBinRequest: StructureShape
+    RestoreVolumeFromRecycleBinResult: StructureShape
     ResultRange: IntegerShape
     RetentionPeriodRequestDays: IntegerShape
     RetentionPeriodResponseDays: IntegerShape
@@ -2971,6 +3495,7 @@ module Aws::EC2
     RevokeSecurityGroupIngressResult: StructureShape
     RevokedSecurityGroupRule: StructureShape
     RevokedSecurityGroupRuleList: ListShape
+    Rir: EnumShape
     RoleId: StringShape
     RootDeviceType: EnumShape
     RootDeviceTypeList: ListShape
@@ -3043,6 +3568,7 @@ module Aws::EC2
     S3Storage: StructureShape
     S3StorageUploadPolicySignature: StringShape
     SSEType: EnumShape
+    Schedule: EnumShape
     ScheduledInstance: StructureShape
     ScheduledInstanceAvailability: StructureShape
     ScheduledInstanceAvailabilitySet: ListShape
@@ -3070,6 +3596,42 @@ module Aws::EC2
     SearchTransitGatewayMulticastGroupsResult: StructureShape
     SearchTransitGatewayRoutesRequest: StructureShape
     SearchTransitGatewayRoutesResult: StructureShape
+    SecondaryInterface: StructureShape
+    SecondaryInterfaceAttachment: StructureShape
+    SecondaryInterfaceId: StringShape
+    SecondaryInterfaceIdList: ListShape
+    SecondaryInterfaceIpv4Address: StructureShape
+    SecondaryInterfaceIpv4AddressList: ListShape
+    SecondaryInterfaceList: ListShape
+    SecondaryInterfacePrivateIpAddressSpecification: StructureShape
+    SecondaryInterfacePrivateIpAddressSpecificationList: ListShape
+    SecondaryInterfacePrivateIpAddressSpecificationListRequest: ListShape
+    SecondaryInterfacePrivateIpAddressSpecificationRequest: StructureShape
+    SecondaryInterfaceStatus: EnumShape
+    SecondaryInterfaceType: EnumShape
+    SecondaryNetwork: StructureShape
+    SecondaryNetworkCidrAssociationId: StringShape
+    SecondaryNetworkCidrBlockAssociationState: EnumShape
+    SecondaryNetworkId: StringShape
+    SecondaryNetworkIdList: ListShape
+    SecondaryNetworkIpv4CidrBlockAssociation: StructureShape
+    SecondaryNetworkIpv4CidrBlockAssociationList: ListShape
+    SecondaryNetworkList: ListShape
+    SecondaryNetworkState: EnumShape
+    SecondaryNetworkSupportedFlag: BooleanShape
+    SecondaryNetworkType: EnumShape
+    SecondarySubnet: StructureShape
+    SecondarySubnetCidrAssociationId: StringShape
+    SecondarySubnetCidrBlockAssociationState: EnumShape
+    SecondarySubnetId: StringShape
+    SecondarySubnetIdList: ListShape
+    SecondarySubnetIpv4CidrBlockAssociation: StructureShape
+    SecondarySubnetIpv4CidrBlockAssociationList: ListShape
+    SecondarySubnetList: ListShape
+    SecondarySubnetState: EnumShape
+    SecretArn: StringShape
+    SecureBlob: BlobShape
+    SecureBlobAttributeValue: StructureShape
     SecurityGroup: StructureShape
     SecurityGroupForVpc: StructureShape
     SecurityGroupForVpcList: ListShape
@@ -3100,6 +3662,7 @@ module Aws::EC2
     SelfServicePortal: EnumShape
     SendDiagnosticInterruptRequest: StructureShape
     SensitiveMacCredentials: StringShape
+    SensitiveString: StringShape
     SensitiveUrl: StringShape
     SensitiveUserData: StringShape
     ServiceConfiguration: StructureShape
@@ -3175,6 +3738,7 @@ module Aws::EC2
     SpotPrice: StructureShape
     SpotPriceHistoryList: ListShape
     SpreadLevel: EnumShape
+    SqlServerLicenseUsage: EnumShape
     StaleIpPermission: StructureShape
     StaleIpPermissionSet: ListShape
     StaleSecurityGroup: StructureShape
@@ -3205,7 +3769,6 @@ module Aws::EC2
     StoreImageTaskResultSet: ListShape
     String: StringShape
     StringList: ListShape
-    StringType: StringShape
     Subnet: StructureShape
     SubnetAssociation: StructureShape
     SubnetAssociationList: ListShape
@@ -3229,23 +3792,37 @@ module Aws::EC2
     SubnetState: EnumShape
     Subscription: StructureShape
     SubscriptionList: ListShape
+    SuccessfulAssociationResponseObject: StructureShape
+    SuccessfulAssociationResponseSet: ListShape
     SuccessfulInstanceCreditSpecificationItem: StructureShape
     SuccessfulInstanceCreditSpecificationSet: ListShape
     SuccessfulQueuedPurchaseDeletion: StructureShape
     SuccessfulQueuedPurchaseDeletionSet: ListShape
+    SuccessfulSuppressionResponseObject: StructureShape
+    SuccessfulSuppressionResponseSet: ListShape
     SummaryStatus: EnumShape
     SupportedAdditionalProcessorFeature: EnumShape
     SupportedAdditionalProcessorFeatureList: ListShape
+    SupportedInRegion: BooleanShape
+    SupportedInstanceTypeRequestSet: ListShape
+    SupportedInstanceTypeSet: ListShape
     SupportedIpAddressTypes: ListShape
     SupportedRegionDetail: StructureShape
     SupportedRegionSet: ListShape
     Tag: StructureShape
     TagDescription: StructureShape
     TagDescriptionList: ListShape
+    TagFieldSpecificationListRequest: ListShape
+    TagFieldSpecificationListResponse: ListShape
+    TagFieldSpecificationRequest: StructureShape
+    TagFieldSpecificationResponse: StructureShape
+    TagKey: StringShape
+    TagKeyList: ListShape
     TagList: ListShape
     TagSpecification: StructureShape
     TagSpecificationList: ListShape
     TaggableResourceId: StringShape
+    TaggableResourceType: EnumShape
     TargetCapacitySpecification: StructureShape
     TargetCapacitySpecificationRequest: StructureShape
     TargetCapacityUnitType: EnumShape
@@ -3328,7 +3905,11 @@ module Aws::EC2
     TransitGatewayAttachmentPropagationList: ListShape
     TransitGatewayAttachmentResourceType: EnumShape
     TransitGatewayAttachmentState: EnumShape
+    TransitGatewayAttachmentStatusType: EnumShape
     TransitGatewayCidrBlockStringList: ListShape
+    TransitGatewayClientVpnAttachment: StructureShape
+    TransitGatewayConfigurationDescribeEndpointStructure: StructureShape
+    TransitGatewayConfigurationInputStructure: StructureShape
     TransitGatewayConnect: StructureShape
     TransitGatewayConnectList: ListShape
     TransitGatewayConnectOptions: StructureShape
@@ -3343,6 +3924,16 @@ module Aws::EC2
     TransitGatewayIdStringList: ListShape
     TransitGatewayList: ListShape
     TransitGatewayMaxResults: IntegerShape
+    TransitGatewayMeteringPayerType: EnumShape
+    TransitGatewayMeteringPolicy: StructureShape
+    TransitGatewayMeteringPolicyEntry: StructureShape
+    TransitGatewayMeteringPolicyEntryList: ListShape
+    TransitGatewayMeteringPolicyEntryState: EnumShape
+    TransitGatewayMeteringPolicyId: StringShape
+    TransitGatewayMeteringPolicyIdStringList: ListShape
+    TransitGatewayMeteringPolicyList: ListShape
+    TransitGatewayMeteringPolicyRule: StructureShape
+    TransitGatewayMeteringPolicyState: EnumShape
     TransitGatewayMulitcastDomainAssociationState: EnumShape
     TransitGatewayMulticastDeregisteredGroupMembers: StructureShape
     TransitGatewayMulticastDeregisteredGroupSources: StructureShape
@@ -3371,6 +3962,7 @@ module Aws::EC2
     TransitGatewayPolicyTableAssociationList: ListShape
     TransitGatewayPolicyTableEntry: StructureShape
     TransitGatewayPolicyTableEntryList: ListShape
+    TransitGatewayPolicyTableEntryState: EnumShape
     TransitGatewayPolicyTableId: StringShape
     TransitGatewayPolicyTableIdStringList: ListShape
     TransitGatewayPolicyTableList: ListShape
@@ -3382,6 +3974,8 @@ module Aws::EC2
     TransitGatewayPropagation: StructureShape
     TransitGatewayPropagationState: EnumShape
     TransitGatewayRequestOptions: StructureShape
+    TransitGatewayRequestPolicyRule: StructureShape
+    TransitGatewayRequestPolicyRuleMetaData: StructureShape
     TransitGatewayRoute: StructureShape
     TransitGatewayRouteAttachment: StructureShape
     TransitGatewayRouteAttachmentList: ListShape
@@ -3428,6 +4022,8 @@ module Aws::EC2
     UnlockSnapshotResult: StructureShape
     UnmonitorInstancesRequest: StructureShape
     UnmonitorInstancesResult: StructureShape
+    UnsuccessfulAssociationResponseObject: StructureShape
+    UnsuccessfulAssociationResponseSet: ListShape
     UnsuccessfulInstanceCreditSpecificationErrorCode: EnumShape
     UnsuccessfulInstanceCreditSpecificationItem: StructureShape
     UnsuccessfulInstanceCreditSpecificationItemError: StructureShape
@@ -3436,6 +4032,16 @@ module Aws::EC2
     UnsuccessfulItemError: StructureShape
     UnsuccessfulItemList: ListShape
     UnsuccessfulItemSet: ListShape
+    UnsuccessfulSuppressionResponseObject: StructureShape
+    UnsuccessfulSuppressionResponseSet: ListShape
+    UnsupportedInstanceTypeRequestSet: ListShape
+    UnsupportedInstanceTypeSet: ListShape
+    UpdateCapacityManagerMonitoredTagKeysRequest: StructureShape
+    UpdateCapacityManagerMonitoredTagKeysResult: StructureShape
+    UpdateCapacityManagerOrganizationsAccessRequest: StructureShape
+    UpdateCapacityManagerOrganizationsAccessResult: StructureShape
+    UpdateInterruptibleCapacityReservationAllocationRequest: StructureShape
+    UpdateInterruptibleCapacityReservationAllocationResult: StructureShape
     UpdateSecurityGroupRuleDescriptionsEgressRequest: StructureShape
     UpdateSecurityGroupRuleDescriptionsEgressResult: StructureShape
     UpdateSecurityGroupRuleDescriptionsIngressRequest: StructureShape
@@ -3456,6 +4062,8 @@ module Aws::EC2
     VCpuCountRange: StructureShape
     VCpuCountRangeRequest: StructureShape
     VCpuInfo: StructureShape
+    ValidateSecurityGroupQuotasForInterfaceRequest: StructureShape
+    ValidateSecurityGroupQuotasForInterfaceResult: StructureShape
     ValidationError: StructureShape
     ValidationWarning: StructureShape
     ValueStringList: ListShape
@@ -3533,6 +4141,8 @@ module Aws::EC2
     VolumeModification: StructureShape
     VolumeModificationList: ListShape
     VolumeModificationState: EnumShape
+    VolumeRecycleBinInfo: StructureShape
+    VolumeRecycleBinInfoList: ListShape
     VolumeState: EnumShape
     VolumeStatusAction: StructureShape
     VolumeStatusActionsList: ListShape
@@ -3569,12 +4179,18 @@ module Aws::EC2
     VpcClassicLinkIdList: ListShape
     VpcClassicLinkList: ListShape
     VpcEncryptionControl: StructureShape
+    VpcEncryptionControlConfiguration: StructureShape
     VpcEncryptionControlExclusion: StructureShape
     VpcEncryptionControlExclusionState: EnumShape
+    VpcEncryptionControlExclusionStateInput: EnumShape
     VpcEncryptionControlExclusions: StructureShape
     VpcEncryptionControlId: StringShape
+    VpcEncryptionControlIdList: ListShape
+    VpcEncryptionControlList: ListShape
     VpcEncryptionControlMode: EnumShape
     VpcEncryptionControlState: EnumShape
+    VpcEncryptionNonCompliantResource: StructureShape
+    VpcEncryptionNonCompliantResourceList: ListShape
     VpcEndpoint: StructureShape
     VpcEndpointAssociation: StructureShape
     VpcEndpointAssociationSet: ListShape
@@ -3606,6 +4222,11 @@ module Aws::EC2
     VpcPeeringConnectionVpcInfo: StructureShape
     VpcState: EnumShape
     VpcTenancy: EnumShape
+    VpnConcentrator: StructureShape
+    VpnConcentratorId: StringShape
+    VpnConcentratorIdStringList: ListShape
+    VpnConcentratorList: ListShape
+    VpnConcentratorType: EnumShape
     VpnConnection: StructureShape
     VpnConnectionDeviceSampleConfiguration: StringShape
     VpnConnectionDeviceType: StructureShape
@@ -3626,6 +4247,7 @@ module Aws::EC2
     VpnStaticRoute: StructureShape
     VpnStaticRouteList: ListShape
     VpnStaticRouteSource: EnumShape
+    VpnTunnelBandwidth: EnumShape
     VpnTunnelLogOptions: StructureShape
     VpnTunnelLogOptionsSpecification: StructureShape
     VpnTunnelOptionsSpecification: StructureShape
@@ -3634,6 +4256,9 @@ module Aws::EC2
     WeekDay: EnumShape
     WithdrawByoipCidrRequest: StructureShape
     WithdrawByoipCidrResult: StructureShape
+    Workload: StringShape
+    WorkloadsList: ListShape
+    ZeroSizePreference: EnumShape
     ZoneIdStringList: ListShape
     ZoneNameStringList: ListShape
     CustomerGatewayConfiguration: StringShape

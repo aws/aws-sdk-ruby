@@ -54,6 +54,16 @@ module Aws::OpenSearchServerless
       ?names: Array[String]
     ) -> _BatchGetCollectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetCollectionResponse
 
+    interface _BatchGetCollectionGroupResponse
+      include Smithy::Client::_Response[Types::BatchGetCollectionGroupResponse]
+      def collection_group_details: () -> Array[Types::CollectionGroupDetail]?
+      def collection_group_error_details: () -> Array[Types::CollectionGroupErrorDetail]?
+    end
+    def batch_get_collection_group: (
+      ?ids: Array[String],
+      ?names: Array[String]
+    ) -> _BatchGetCollectionGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetCollectionGroupResponse
+
     interface _BatchGetEffectiveLifecyclePolicyResponse
       include Smithy::Client::_Response[Types::BatchGetEffectiveLifecyclePolicyResponse]
       def effective_lifecycle_policy_details: () -> Array[Types::EffectiveLifecyclePolicyDetail]?
@@ -118,8 +128,41 @@ module Aws::OpenSearchServerless
         }
       ],
       ?standby_replicas: String,
+      ?vector_options: {
+        serverless_vector_acceleration: String
+      },
+      ?collection_group_name: String,
+      ?encryption_config: {
+        a_ws_owned_key: bool,
+        kms_key_arn: String
+      },
+      ?deletion_protection: String,
       ?client_token: String
     ) -> _CreateCollectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCollectionResponse
+
+    interface _CreateCollectionGroupResponse
+      include Smithy::Client::_Response[Types::CreateCollectionGroupResponse]
+      def create_collection_group_detail: () -> Types::CreateCollectionGroupDetail?
+    end
+    def create_collection_group: (
+      ?name: String,
+      ?standby_replicas: String,
+      ?description: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?capacity_limits: {
+        max_indexing_capacity_in_ocu: Float,
+        max_search_capacity_in_ocu: Float,
+        min_indexing_capacity_in_ocu: Float,
+        min_search_capacity_in_ocu: Float
+      },
+      ?generation: String,
+      ?client_token: String
+    ) -> _CreateCollectionGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCollectionGroupResponse
 
     interface _CreateIndexResponse
       include Smithy::Client::_Response[Types::CreateIndexResponse]
@@ -210,6 +253,14 @@ module Aws::OpenSearchServerless
       ?id: String,
       ?client_token: String
     ) -> _DeleteCollectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCollectionResponse
+
+    interface _DeleteCollectionGroupResponse
+      include Smithy::Client::_Response[Types::DeleteCollectionGroupResponse]
+    end
+    def delete_collection_group: (
+      ?id: String,
+      ?client_token: String
+    ) -> _DeleteCollectionGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCollectionGroupResponse
 
     interface _DeleteIndexResponse
       include Smithy::Client::_Response[Types::DeleteIndexResponse]
@@ -317,6 +368,16 @@ module Aws::OpenSearchServerless
       ?max_results: Integer
     ) -> _ListAccessPoliciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAccessPoliciesResponse
 
+    interface _ListCollectionGroupsResponse
+      include Smithy::Client::_Response[Types::ListCollectionGroupsResponse]
+      def collection_group_summaries: () -> Array[Types::CollectionGroupSummary]?
+      def next_token: () -> String?
+    end
+    def list_collection_groups: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListCollectionGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCollectionGroupsResponse
+
     interface _ListCollectionsResponse
       include Smithy::Client::_Response[Types::ListCollectionsOutput]
       def collection_summaries: () -> Array[Types::CollectionSummary]?
@@ -325,7 +386,8 @@ module Aws::OpenSearchServerless
     def list_collections: (
       ?collection_filters: {
         name: String,
-        status: String
+        status: String,
+        collection_group_name: String
       },
       ?next_token: String,
       ?max_results: Integer
@@ -439,8 +501,28 @@ module Aws::OpenSearchServerless
     def update_collection: (
       ?id: String,
       ?description: String,
+      ?vector_options: {
+        serverless_vector_acceleration: String
+      },
+      ?deletion_protection: String,
       ?client_token: String
     ) -> _UpdateCollectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCollectionResponse
+
+    interface _UpdateCollectionGroupResponse
+      include Smithy::Client::_Response[Types::UpdateCollectionGroupResponse]
+      def update_collection_group_detail: () -> Types::UpdateCollectionGroupDetail?
+    end
+    def update_collection_group: (
+      ?id: String,
+      ?description: String,
+      ?capacity_limits: {
+        max_indexing_capacity_in_ocu: Float,
+        max_search_capacity_in_ocu: Float,
+        min_indexing_capacity_in_ocu: Float,
+        min_search_capacity_in_ocu: Float
+      },
+      ?client_token: String
+    ) -> _UpdateCollectionGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCollectionGroupResponse
 
     interface _UpdateIndexResponse
       include Smithy::Client::_Response[Types::UpdateIndexResponse]

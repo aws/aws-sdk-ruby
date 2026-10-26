@@ -301,7 +301,8 @@ module Aws::CodeBuild
             status: untyped,
             message: untyped
           }
-        }
+        },
+        host_kernel: String
       },
       ?service_role: String,
       ?timeout_in_minutes: Integer,
@@ -876,7 +877,8 @@ module Aws::CodeBuild
       ?fleet_override: {
         fleet_arn: String
       },
-      ?auto_retry_limit_override: Integer
+      ?auto_retry_limit_override: Integer,
+      ?host_kernel_override: String
     ) -> _StartBuildResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartBuildResponse
 
     interface _StartBuildBatchResponse
@@ -1234,7 +1236,8 @@ module Aws::CodeBuild
             status: untyped,
             message: untyped
           }
-        }
+        },
+        host_kernel: String
       },
       ?service_role: String,
       ?timeout_in_minutes: Integer,

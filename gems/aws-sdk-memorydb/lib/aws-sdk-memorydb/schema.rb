@@ -78,6 +78,10 @@ module Aws::MemoryDB
     DescribeEventsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.memorydb#DescribeEventsResponse", name: "DescribeEventsResponse")
     DescribeMultiRegionClustersRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.memorydb#DescribeMultiRegionClustersRequest", name: "DescribeMultiRegionClustersRequest")
     DescribeMultiRegionClustersResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.memorydb#DescribeMultiRegionClustersResponse", name: "DescribeMultiRegionClustersResponse")
+    DescribeMultiRegionParameterGroupsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.memorydb#DescribeMultiRegionParameterGroupsRequest", name: "DescribeMultiRegionParameterGroupsRequest")
+    DescribeMultiRegionParameterGroupsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.memorydb#DescribeMultiRegionParameterGroupsResponse", name: "DescribeMultiRegionParameterGroupsResponse")
+    DescribeMultiRegionParametersRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.memorydb#DescribeMultiRegionParametersRequest", name: "DescribeMultiRegionParametersRequest")
+    DescribeMultiRegionParametersResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.memorydb#DescribeMultiRegionParametersResponse", name: "DescribeMultiRegionParametersResponse")
     DescribeParameterGroupsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.memorydb#DescribeParameterGroupsRequest", name: "DescribeParameterGroupsRequest")
     DescribeParameterGroupsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.memorydb#DescribeParameterGroupsResponse", name: "DescribeParameterGroupsResponse")
     DescribeParametersRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.memorydb#DescribeParametersRequest", name: "DescribeParametersRequest")
@@ -140,7 +144,11 @@ module Aws::MemoryDB
     MultiRegionClusterAlreadyExistsFault = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.memorydb#MultiRegionClusterAlreadyExistsFault", name: "MultiRegionClusterAlreadyExistsFault", traits: {"aws.protocols#awsQueryError" => {"code" => "MultiRegionClusterAlreadyExistsFault", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
     MultiRegionClusterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.memorydb#MultiRegionClusterList", name: "MultiRegionClusterList")
     MultiRegionClusterNotFoundFault = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.memorydb#MultiRegionClusterNotFoundFault", name: "MultiRegionClusterNotFoundFault", traits: {"aws.protocols#awsQueryError" => {"code" => "MultiRegionClusterNotFound", "httpResponseCode" => 404}, "smithy.api#error" => "client", "smithy.api#httpError" => 404})
+    MultiRegionParameter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.memorydb#MultiRegionParameter", name: "MultiRegionParameter")
+    MultiRegionParameterGroup = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.memorydb#MultiRegionParameterGroup", name: "MultiRegionParameterGroup")
+    MultiRegionParameterGroupList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.memorydb#MultiRegionParameterGroupList", name: "MultiRegionParameterGroupList")
     MultiRegionParameterGroupNotFoundFault = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.memorydb#MultiRegionParameterGroupNotFoundFault", name: "MultiRegionParameterGroupNotFoundFault", traits: {"aws.protocols#awsQueryError" => {"code" => "MultiRegionParameterGroupNotFoundFault", "httpResponseCode" => 404}, "smithy.api#error" => "client", "smithy.api#httpError" => 404})
+    MultiRegionParametersList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.memorydb#MultiRegionParametersList", name: "MultiRegionParametersList")
     NetworkType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.memorydb#NetworkType", name: "NetworkType")
     NetworkTypeList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.memorydb#NetworkTypeList", name: "NetworkTypeList")
     NoOperationFault = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.memorydb#NoOperationFault", name: "NoOperationFault", traits: {"aws.protocols#awsQueryError" => {"code" => "NoOperationFault", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
@@ -520,6 +528,21 @@ module Aws::MemoryDB
     DescribeMultiRegionClustersResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken"))
     DescribeMultiRegionClustersResponse.add_member(:multi_region_clusters, ::Smithy::Schema::Shapes::MemberShape.new(target: MultiRegionClusterList, name: "MultiRegionClusters"))
     DescribeMultiRegionClustersResponse.type = Types::DescribeMultiRegionClustersResponse
+    DescribeMultiRegionParameterGroupsRequest.add_member(:multi_region_parameter_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "MultiRegionParameterGroupName"))
+    DescribeMultiRegionParameterGroupsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "MaxResults"))
+    DescribeMultiRegionParameterGroupsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken"))
+    DescribeMultiRegionParameterGroupsRequest.type = Types::DescribeMultiRegionParameterGroupsRequest
+    DescribeMultiRegionParameterGroupsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken"))
+    DescribeMultiRegionParameterGroupsResponse.add_member(:multi_region_parameter_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: MultiRegionParameterGroupList, name: "MultiRegionParameterGroups"))
+    DescribeMultiRegionParameterGroupsResponse.type = Types::DescribeMultiRegionParameterGroupsResponse
+    DescribeMultiRegionParametersRequest.add_member(:multi_region_parameter_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "MultiRegionParameterGroupName", traits: {"smithy.api#required" => {}}))
+    DescribeMultiRegionParametersRequest.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Source"))
+    DescribeMultiRegionParametersRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "MaxResults"))
+    DescribeMultiRegionParametersRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken"))
+    DescribeMultiRegionParametersRequest.type = Types::DescribeMultiRegionParametersRequest
+    DescribeMultiRegionParametersResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken"))
+    DescribeMultiRegionParametersResponse.add_member(:multi_region_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: MultiRegionParametersList, name: "MultiRegionParameters"))
+    DescribeMultiRegionParametersResponse.type = Types::DescribeMultiRegionParametersResponse
     DescribeParameterGroupsRequest.add_member(:parameter_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ParameterGroupName"))
     DescribeParameterGroupsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "MaxResults"))
     DescribeParameterGroupsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken"))
@@ -682,8 +705,23 @@ module Aws::MemoryDB
     MultiRegionClusterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MultiRegionCluster, name: "member"))
     MultiRegionClusterNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     MultiRegionClusterNotFoundFault.type = Types::MultiRegionClusterNotFoundFault
+    MultiRegionParameter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name"))
+    MultiRegionParameter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Value"))
+    MultiRegionParameter.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Description"))
+    MultiRegionParameter.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Source"))
+    MultiRegionParameter.add_member(:data_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DataType"))
+    MultiRegionParameter.add_member(:allowed_values, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "AllowedValues"))
+    MultiRegionParameter.add_member(:minimum_engine_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "MinimumEngineVersion"))
+    MultiRegionParameter.type = Types::MultiRegionParameter
+    MultiRegionParameterGroup.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name"))
+    MultiRegionParameterGroup.add_member(:family, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Family"))
+    MultiRegionParameterGroup.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Description"))
+    MultiRegionParameterGroup.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ARN"))
+    MultiRegionParameterGroup.type = Types::MultiRegionParameterGroup
+    MultiRegionParameterGroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MultiRegionParameterGroup, name: "member", traits: {"smithy.api#xmlName" => "MultiRegionParameterGroup"}))
     MultiRegionParameterGroupNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     MultiRegionParameterGroupNotFoundFault.type = Types::MultiRegionParameterGroupNotFoundFault
+    MultiRegionParametersList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MultiRegionParameter, name: "member", traits: {"smithy.api#xmlName" => "MultiRegionParameter"}))
     NetworkType.add_member(:ipv4, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IPV4", traits: {"smithy.api#enumValue" => "ipv4"}))
     NetworkType.add_member(:ipv6, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IPV6", traits: {"smithy.api#enumValue" => "ipv6"}))
     NetworkType.add_member(:dual_stack, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DUAL_STACK", traits: {"smithy.api#enumValue" => "dual_stack"}))
@@ -991,7 +1029,7 @@ module Aws::MemoryDB
       service.id = "com.amazonaws.memorydb#AmazonMemoryDB"
       service.name = "AmazonMemoryDB"
       service.version = "2021-01-01"
-      service.traits = {"aws.api#service" => {"sdkId" => "MemoryDB", "arnNamespace" => "memorydb", "cloudFormationName" => "MemoryDB", "cloudTrailEventSource" => "memorydb.amazonaws.com", "endpointPrefix" => "memory-db"}, "aws.auth#sigv4" => {"name" => "memorydb"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "Amazon MemoryDB", "smithy.api#xmlNamespace" => {"uri" => "http://memorydb.amazonaws.com/doc/2021-01-01/"}}
+      service.traits = {"aws.api#service" => {"sdkId" => "MemoryDB", "arnNamespace" => "memorydb", "cloudFormationName" => "MemoryDB", "cloudTrailEventSource" => "memorydb.amazonaws.com", "endpointPrefix" => "memory-db"}, "aws.auth#sigv4" => {"name" => "memorydb"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "Amazon MemoryDB", "smithy.api#xmlNamespace" => {"uri" => "http://memorydb.amazonaws.com/doc/2021-01-01/"}, "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}, {"fn" => "stringEquals", "argv" => [{"ref" => "Region"}, "fips"]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://memory-db-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://memory-db-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://memory-db.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://memory-db-fips.us-west-1.amazonaws.com", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "memorydb", "signingRegion" => "us-west-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://memory-db.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 14, "nodes" => "/////wAAAAH/////AAAAAAAAAA0AAAADAAAAAQAAAAQF9eEMAAAAAgAAAAUF9eEMAAAAAwAAAAkAAAAGAAAABAAAAAgAAAAHAAAABwX14QoF9eELAAAABQX14QgF9eEJAAAABAAAAAsAAAAKAAAABgX14QYF9eEHAAAABQAAAAwF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAAOAAAABAX14QIF9eED"}}
       service.add_operation(:batch_update_cluster, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.memorydb#BatchUpdateCluster"
         operation.name = "BatchUpdateCluster"
@@ -1256,6 +1294,28 @@ module Aws::MemoryDB
         operation.errors << MultiRegionClusterNotFoundFault
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeMultiRegionClusters.new
+      end)
+      service.add_operation(:describe_multi_region_parameter_groups, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.memorydb#DescribeMultiRegionParameterGroups"
+        operation.name = "DescribeMultiRegionParameterGroups"
+        operation.input = DescribeMultiRegionParameterGroupsRequest
+        operation.output = DescribeMultiRegionParameterGroupsResponse
+        operation.errors << InvalidParameterCombinationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << MultiRegionParameterGroupNotFoundFault
+        operation.errors << ServiceLinkedRoleNotFoundFault
+        operation.traits = {}
+      end)
+      service.add_operation(:describe_multi_region_parameters, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.memorydb#DescribeMultiRegionParameters"
+        operation.name = "DescribeMultiRegionParameters"
+        operation.input = DescribeMultiRegionParametersRequest
+        operation.output = DescribeMultiRegionParametersResponse
+        operation.errors << InvalidParameterCombinationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << MultiRegionParameterGroupNotFoundFault
+        operation.errors << ServiceLinkedRoleNotFoundFault
+        operation.traits = {}
       end)
       service.add_operation(:describe_parameter_groups, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.memorydb#DescribeParameterGroups"

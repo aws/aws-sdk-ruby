@@ -107,7 +107,8 @@ module Aws::QConnect
           answer_generation_ai_prompt_id: untyped,
           answer_generation_ai_guardrail_id: untyped,
           association_configurations: untyped,
-          locale: untyped
+          locale: untyped,
+          suggested_messages: Array[String]
         },
         self_service_ai_agent_configuration: {
           self_service_pre_processing_ai_prompt_id: untyped,
@@ -130,6 +131,86 @@ module Aws::QConnect
           email_query_reformulation_ai_prompt_id: untyped,
           locale: untyped,
           association_configurations: untyped
+        },
+        orchestration_ai_agent_configuration: {
+          orchestration_ai_prompt_id: untyped,
+          orchestration_ai_guardrail_id: untyped,
+          tool_configurations: Array[
+            {
+              tool_name: untyped,
+              tool_type: String,
+              title: String,
+              tool_id: untyped,
+              description: untyped,
+              instruction: {
+                instruction: String,
+                examples: Array[String]
+              },
+              override_input_values: Array[
+                {
+                  json_path: untyped,
+                  value: {
+                    constant: {
+                      type: String,
+                      value: untyped
+                    }
+                  }
+                }
+              ],
+              output_filters: Array[
+                {
+                  json_path: untyped,
+                  output_configuration: {
+                    output_variable_name_override: untyped,
+                    session_data_namespace: untyped
+                  }
+                }
+              ],
+              input_schema: Smithy::Schema::document,
+              output_schema: untyped,
+              annotations: {
+                title: untyped,
+                destructive_hint: bool
+              },
+              user_interaction_configuration: {
+                is_user_confirmation_required: untyped
+              }
+            }
+          ],
+          multi_agent_configurations: Array[
+            {
+              delegate_agent_configuration: {
+                agent_target: {
+                  ai_agent_id: untyped,
+                  application_id: untyped
+                },
+                instruction: {
+                  instruction: untyped,
+                  examples: Array[String]
+                }
+              },
+              handoff_agent_configuration: {
+                agent_target: untyped,
+                instruction: untyped,
+                audio_streaming_enabled: untyped,
+                immediate_handoff: untyped
+              }
+            }
+          ],
+          connect_instance_arn: String,
+          locale: untyped,
+          input_schemas: Array[Smithy::Schema::document],
+          output_schemas: untyped
+        },
+        note_taking_ai_agent_configuration: {
+          note_taking_ai_prompt_id: untyped,
+          note_taking_ai_guardrail_id: untyped,
+          locale: untyped
+        },
+        case_summarization_ai_agent_configuration: {
+          case_summarization_ai_prompt_id: untyped,
+          case_summarization_ai_guardrail_id: untyped,
+          locale: untyped
         }
       },
       ?visibility_status: String,
@@ -250,7 +331,13 @@ module Aws::QConnect
       ?model_id: String,
       ?api_format: String,
       ?tags: Hash[String, String],
-      ?description: String
+      ?description: String,
+      ?inference_configuration: {
+        temperature: Float,
+        top_p: untyped,
+        top_k: Integer,
+        max_tokens_to_sample: Integer
+      }
     ) -> _CreateAIPromptResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAIPromptResponse
 
     interface _CreateAIPromptVersionResponse
@@ -288,7 +375,11 @@ module Aws::QConnect
       ?assistant_id: String,
       ?association_type: String,
       ?association: {
-        knowledge_base_id: String
+        knowledge_base_id: String,
+        external_bedrock_knowledge_base_config: {
+          bedrock_knowledge_base_arn: String,
+          access_role_arn: String
+        }
       },
       ?client_token: String,
       ?tags: Hash[String, String]
@@ -425,11 +516,65 @@ module Aws::QConnect
           body: {
             plain_text: untyped
           }
+        },
+        whats_app: {
+          data: String
+        },
+        push: {
+          adm: {
+            title: untyped,
+            body: untyped,
+            action: String,
+            sound: untyped,
+            url: untyped,
+            image_url: untyped,
+            image_icon_url: untyped,
+            small_image_icon_url: untyped,
+            raw_content: untyped
+          },
+          apns: {
+            title: untyped,
+            body: untyped,
+            action: untyped,
+            sound: untyped,
+            url: untyped,
+            media_url: untyped,
+            raw_content: untyped
+          },
+          fcm: {
+            title: untyped,
+            body: untyped,
+            action: untyped,
+            sound: untyped,
+            url: untyped,
+            image_url: untyped,
+            image_icon_url: untyped,
+            small_image_icon_url: untyped,
+            raw_content: untyped
+          },
+          baidu: {
+            title: untyped,
+            body: untyped,
+            action: untyped,
+            sound: untyped,
+            url: untyped,
+            image_url: untyped,
+            image_icon_url: untyped,
+            small_image_icon_url: untyped,
+            raw_content: untyped
+          }
         }
       },
       ?description: String,
       ?channel_subtype: String,
       ?language: String,
+      ?source_configuration: {
+        whats_app: {
+          business_account_id: String,
+          template_id: String,
+          components: Array[String]
+        }
+      },
       ?default_attributes: {
         system_attributes: {
           name: String,
@@ -589,10 +734,18 @@ module Aws::QConnect
       },
       ?ai_agent_configuration: Hash[String,
         {
-          ai_agent_id: String
+          ai_agent_id: String,
+          enabled: bool
         }
       ],
-      ?contact_arn: String
+      ?contact_arn: String,
+      ?orchestrator_configuration_list: Array[
+        {
+          ai_agent_id: String,
+          orchestrator_use_case: String
+        }
+      ],
+      ?remove_orchestrator_configuration_list: bool
     ) -> _CreateSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSessionResponse
 
     interface _DeactivateMessageTemplateResponse
@@ -839,6 +992,7 @@ module Aws::QConnect
       def conversation_state: () -> Types::ConversationState?
       def next_message_token: () -> String?
       def conversation_session_data: () -> Array[Types::RuntimeSessionData]?
+      def chunked_response_terminated: () -> bool?
     end
     def get_next_message: (
       ?assistant_id: String,
@@ -865,7 +1019,8 @@ module Aws::QConnect
       ?session_id: String,
       ?max_results: Integer,
       ?wait_time_seconds: Integer,
-      ?next_chunk_token: String
+      ?next_chunk_token: String,
+      ?recommendation_type: String
     ) -> _GetRecommendationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRecommendationsResponse
 
     interface _GetSessionResponse
@@ -1047,8 +1202,22 @@ module Aws::QConnect
       ?assistant_id: String,
       ?session_id: String,
       ?next_token: String,
-      ?max_results: Integer
+      ?max_results: Integer,
+      ?filter: String
     ) -> _ListMessagesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMessagesResponse
+
+    interface _ListModelsResponse
+      include Smithy::Client::_Response[Types::ListModelsResponse]
+      def model_summaries: () -> Array[Types::ModelSummary]?
+      def next_token: () -> String?
+    end
+    def list_models: (
+      ?assistant_id: String,
+      ?ai_prompt_type: String,
+      ?model_lifecycle: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListModelsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListModelsResponse
 
     interface _ListQuickResponsesResponse
       include Smithy::Client::_Response[Types::ListQuickResponsesResponse]
@@ -1060,6 +1229,18 @@ module Aws::QConnect
       ?max_results: Integer,
       ?knowledge_base_id: String
     ) -> _ListQuickResponsesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListQuickResponsesResponse
+
+    interface _ListSpansResponse
+      include Smithy::Client::_Response[Types::ListSpansResponse]
+      def spans: () -> Array[Types::Span]?
+      def next_token: () -> String?
+    end
+    def list_spans: (
+      ?assistant_id: String,
+      ?session_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListSpansResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSpansResponse
 
     interface _ListTagsForResourceResponse
       include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
@@ -1125,6 +1306,9 @@ module Aws::QConnect
         },
         intent_input_data: {
           intent_id: String
+        },
+        case_summarization_input_data: {
+          case_arn: String
         }
       },
       ?override_knowledge_base_search_type: String
@@ -1135,7 +1319,8 @@ module Aws::QConnect
     end
     def remove_assistant_ai_agent: (
       ?assistant_id: String,
-      ?ai_agent_type: String
+      ?ai_agent_type: String,
+      ?orchestrator_use_case: String
     ) -> _RemoveAssistantAIAgentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemoveAssistantAIAgentResponse
 
     interface _RemoveKnowledgeBaseTemplateUriResponse
@@ -1148,6 +1333,7 @@ module Aws::QConnect
     interface _RenderMessageTemplateResponse
       include Smithy::Client::_Response[Types::RenderMessageTemplateResponse]
       def content: () -> Types::MessageTemplateContentProvider?
+      def source_configuration_summary: () -> Types::MessageTemplateSourceConfigurationSummary?
       def attributes_not_interpolated: () -> Array[String]?
       def attachments: () -> Array[Types::MessageTemplateAttachment]?
     end
@@ -1229,6 +1415,57 @@ module Aws::QConnect
         custom_attributes: untyped
       }
     ) -> _RenderMessageTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RenderMessageTemplateResponse
+
+    interface _RetrieveResponse
+      include Smithy::Client::_Response[Types::RetrieveResponse]
+      def results: () -> Array[Types::RetrieveResult]?
+      def errors: () -> Array[Types::RetrieveError]?
+    end
+    def retrieve: (
+      ?assistant_id: String,
+      ?retrieval_configuration: {
+        knowledge_source: {
+          assistant_association_ids: Array[String]
+        },
+        filter: {
+          and_all: Array[
+            {
+              and_all: untyped,
+              equals: {
+                key: String,
+                value: Smithy::Schema::document
+              },
+              greater_than: untyped,
+              greater_than_or_equals: untyped,
+              in: untyped,
+              less_than: untyped,
+              less_than_or_equals: untyped,
+              list_contains: untyped,
+              not_equals: untyped,
+              not_in: untyped,
+              or_all: untyped,
+              starts_with: untyped,
+              string_contains: untyped
+            }
+          ],
+          equals: untyped,
+          greater_than: untyped,
+          greater_than_or_equals: untyped,
+          in: untyped,
+          less_than: untyped,
+          less_than_or_equals: untyped,
+          list_contains: untyped,
+          not_equals: untyped,
+          not_in: untyped,
+          or_all: untyped,
+          starts_with: untyped,
+          string_contains: untyped
+        },
+        number_of_results: Integer,
+        override_knowledge_base_search_type: String
+      },
+      ?retrieval_query: String
+    ) -> _RetrieveResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RetrieveResponse
 
     interface _SearchContentResponse
       include Smithy::Client::_Response[Types::SearchContentOutput]
@@ -1352,23 +1589,52 @@ module Aws::QConnect
       ?message: {
         value: {
           text: {
-            value: String
-          }
+            value: String,
+            citations: Array[
+              {
+                content_id: String,
+                title: untyped,
+                knowledge_base_id: untyped,
+                citation_span: {
+                  begin_offset_inclusive: Integer,
+                  end_offset_exclusive: untyped
+                },
+                source_url: untyped,
+                reference_type: String
+              }
+            ],
+            ai_guardrail_assessment: {
+              blocked: bool
+            }
+          },
+          tool_use_result: {
+            tool_use_id: String,
+            tool_name: untyped,
+            tool_result: Smithy::Schema::document,
+            input_schema: untyped
+          },
+          data: untyped
         }
       },
+      ?ai_agent_id: String,
       ?conversation_context: {
         self_service_conversation_history: Array[
           {
             turn_number: Integer,
             input_transcript: String,
-            bot_response: untyped
+            bot_response: untyped,
+            timestamp: Time
           }
         ]
       },
       ?configuration: {
-        generate_filler_message: bool
+        generate_filler_message: bool,
+        generate_chunked_message: untyped
       },
-      ?client_token: String
+      ?client_token: String,
+      ?orchestrator_use_case: String,
+      ?metadata: Hash[String, String],
+      ?origin_request_id: String
     ) -> _SendMessageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SendMessageResponse
 
     interface _StartContentUploadResponse
@@ -1471,7 +1737,8 @@ module Aws::QConnect
           answer_generation_ai_prompt_id: untyped,
           answer_generation_ai_guardrail_id: untyped,
           association_configurations: untyped,
-          locale: untyped
+          locale: untyped,
+          suggested_messages: Array[String]
         },
         self_service_ai_agent_configuration: {
           self_service_pre_processing_ai_prompt_id: untyped,
@@ -1494,6 +1761,86 @@ module Aws::QConnect
           email_query_reformulation_ai_prompt_id: untyped,
           locale: untyped,
           association_configurations: untyped
+        },
+        orchestration_ai_agent_configuration: {
+          orchestration_ai_prompt_id: untyped,
+          orchestration_ai_guardrail_id: untyped,
+          tool_configurations: Array[
+            {
+              tool_name: untyped,
+              tool_type: String,
+              title: String,
+              tool_id: untyped,
+              description: untyped,
+              instruction: {
+                instruction: String,
+                examples: Array[String]
+              },
+              override_input_values: Array[
+                {
+                  json_path: untyped,
+                  value: {
+                    constant: {
+                      type: String,
+                      value: untyped
+                    }
+                  }
+                }
+              ],
+              output_filters: Array[
+                {
+                  json_path: untyped,
+                  output_configuration: {
+                    output_variable_name_override: untyped,
+                    session_data_namespace: untyped
+                  }
+                }
+              ],
+              input_schema: Smithy::Schema::document,
+              output_schema: untyped,
+              annotations: {
+                title: untyped,
+                destructive_hint: bool
+              },
+              user_interaction_configuration: {
+                is_user_confirmation_required: untyped
+              }
+            }
+          ],
+          multi_agent_configurations: Array[
+            {
+              delegate_agent_configuration: {
+                agent_target: {
+                  ai_agent_id: untyped,
+                  application_id: untyped
+                },
+                instruction: {
+                  instruction: untyped,
+                  examples: Array[String]
+                }
+              },
+              handoff_agent_configuration: {
+                agent_target: untyped,
+                instruction: untyped,
+                audio_streaming_enabled: untyped,
+                immediate_handoff: untyped
+              }
+            }
+          ],
+          connect_instance_arn: String,
+          locale: untyped,
+          input_schemas: Array[Smithy::Schema::document],
+          output_schemas: untyped
+        },
+        note_taking_ai_agent_configuration: {
+          note_taking_ai_prompt_id: untyped,
+          note_taking_ai_guardrail_id: untyped,
+          locale: untyped
+        },
+        case_summarization_ai_agent_configuration: {
+          case_summarization_ai_prompt_id: untyped,
+          case_summarization_ai_guardrail_id: untyped,
+          locale: untyped
         }
       },
       ?description: String
@@ -1583,7 +1930,13 @@ module Aws::QConnect
         }
       },
       ?description: String,
-      ?model_id: String
+      ?model_id: String,
+      ?inference_configuration: {
+        temperature: Float,
+        top_p: untyped,
+        top_k: Integer,
+        max_tokens_to_sample: Integer
+      }
     ) -> _UpdateAIPromptResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAIPromptResponse
 
     interface _UpdateAssistantAIAgentResponse
@@ -1594,8 +1947,10 @@ module Aws::QConnect
       ?assistant_id: String,
       ?ai_agent_type: String,
       ?configuration: {
-        ai_agent_id: String
-      }
+        ai_agent_id: String,
+        enabled: bool
+      },
+      ?orchestrator_use_case: String
     ) -> _UpdateAssistantAIAgentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAssistantAIAgentResponse
 
     interface _UpdateContentResponse
@@ -1649,9 +2004,63 @@ module Aws::QConnect
           body: {
             plain_text: untyped
           }
+        },
+        whats_app: {
+          data: String
+        },
+        push: {
+          adm: {
+            title: untyped,
+            body: untyped,
+            action: String,
+            sound: untyped,
+            url: untyped,
+            image_url: untyped,
+            image_icon_url: untyped,
+            small_image_icon_url: untyped,
+            raw_content: untyped
+          },
+          apns: {
+            title: untyped,
+            body: untyped,
+            action: untyped,
+            sound: untyped,
+            url: untyped,
+            media_url: untyped,
+            raw_content: untyped
+          },
+          fcm: {
+            title: untyped,
+            body: untyped,
+            action: untyped,
+            sound: untyped,
+            url: untyped,
+            image_url: untyped,
+            image_icon_url: untyped,
+            small_image_icon_url: untyped,
+            raw_content: untyped
+          },
+          baidu: {
+            title: untyped,
+            body: untyped,
+            action: untyped,
+            sound: untyped,
+            url: untyped,
+            image_url: untyped,
+            image_icon_url: untyped,
+            small_image_icon_url: untyped,
+            raw_content: untyped
+          }
         }
       },
       ?language: String,
+      ?source_configuration: {
+        whats_app: {
+          business_account_id: String,
+          template_id: String,
+          components: Array[String]
+        }
+      },
       ?default_attributes: {
         system_attributes: {
           name: String,
@@ -1797,9 +2206,17 @@ module Aws::QConnect
       },
       ?ai_agent_configuration: Hash[String,
         {
-          ai_agent_id: String
+          ai_agent_id: String,
+          enabled: bool
         }
-      ]
+      ],
+      ?orchestrator_configuration_list: Array[
+        {
+          ai_agent_id: String,
+          orchestrator_use_case: String
+        }
+      ],
+      ?remove_orchestrator_configuration_list: bool
     ) -> _UpdateSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSessionResponse
 
     interface _UpdateSessionDataResponse

@@ -40,9 +40,11 @@ module Aws::EMR
     CancelStepsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#CancelStepsInput", name: "CancelStepsInput")
     CancelStepsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#CancelStepsOutput", name: "CancelStepsOutput")
     CancelStepsRequestStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.emr#CancelStepsRequestStatus", name: "CancelStepsRequestStatus")
+    ClientRequestToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.emr#ClientRequestToken", name: "ClientRequestToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 36}})
     CloudWatchAlarmDefinition = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#CloudWatchAlarmDefinition", name: "CloudWatchAlarmDefinition")
+    CloudWatchLogConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#CloudWatchLogConfiguration", name: "CloudWatchLogConfiguration")
     Cluster = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#Cluster", name: "Cluster")
-    ClusterId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.emr#ClusterId", name: "ClusterId")
+    ClusterId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.emr#ClusterId", name: "ClusterId", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}})
     ClusterState = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.emr#ClusterState", name: "ClusterState")
     ClusterStateChangeReason = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#ClusterStateChangeReason", name: "ClusterStateChangeReason")
     ClusterStateChangeReasonCode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.emr#ClusterStateChangeReasonCode", name: "ClusterStateChangeReasonCode")
@@ -120,6 +122,10 @@ module Aws::EMR
     GetOnClusterAppUIPresignedURLOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#GetOnClusterAppUIPresignedURLOutput", name: "GetOnClusterAppUIPresignedURLOutput")
     GetPersistentAppUIPresignedURLInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#GetPersistentAppUIPresignedURLInput", name: "GetPersistentAppUIPresignedURLInput")
     GetPersistentAppUIPresignedURLOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#GetPersistentAppUIPresignedURLOutput", name: "GetPersistentAppUIPresignedURLOutput")
+    GetSessionEndpointInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#GetSessionEndpointInput", name: "GetSessionEndpointInput")
+    GetSessionEndpointOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#GetSessionEndpointOutput", name: "GetSessionEndpointOutput")
+    GetSessionInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#GetSessionInput", name: "GetSessionInput")
+    GetSessionOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#GetSessionOutput", name: "GetSessionOutput")
     GetStudioSessionMappingInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#GetStudioSessionMappingInput", name: "GetStudioSessionMappingInput")
     GetStudioSessionMappingOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#GetStudioSessionMappingOutput", name: "GetStudioSessionMappingOutput")
     HadoopJarStepConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#HadoopJarStepConfig", name: "HadoopJarStepConfig")
@@ -132,7 +138,7 @@ module Aws::EMR
     InstanceFleet = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#InstanceFleet", name: "InstanceFleet")
     InstanceFleetConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#InstanceFleetConfig", name: "InstanceFleetConfig")
     InstanceFleetConfigList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.emr#InstanceFleetConfigList", name: "InstanceFleetConfigList")
-    InstanceFleetId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.emr#InstanceFleetId", name: "InstanceFleetId")
+    InstanceFleetId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.emr#InstanceFleetId", name: "InstanceFleetId", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}})
     InstanceFleetList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.emr#InstanceFleetList", name: "InstanceFleetList")
     InstanceFleetModifyConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#InstanceFleetModifyConfig", name: "InstanceFleetModifyConfig")
     InstanceFleetProvisioningSpecifications = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#InstanceFleetProvisioningSpecifications", name: "InstanceFleetProvisioningSpecifications")
@@ -148,7 +154,7 @@ module Aws::EMR
     InstanceGroupConfigList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.emr#InstanceGroupConfigList", name: "InstanceGroupConfigList")
     InstanceGroupDetail = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#InstanceGroupDetail", name: "InstanceGroupDetail")
     InstanceGroupDetailList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.emr#InstanceGroupDetailList", name: "InstanceGroupDetailList")
-    InstanceGroupId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.emr#InstanceGroupId", name: "InstanceGroupId")
+    InstanceGroupId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.emr#InstanceGroupId", name: "InstanceGroupId", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}})
     InstanceGroupIdsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.emr#InstanceGroupIdsList", name: "InstanceGroupIdsList")
     InstanceGroupList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.emr#InstanceGroupList", name: "InstanceGroupList")
     InstanceGroupModifyConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#InstanceGroupModifyConfig", name: "InstanceGroupModifyConfig")
@@ -205,6 +211,8 @@ module Aws::EMR
     ListReleaseLabelsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#ListReleaseLabelsOutput", name: "ListReleaseLabelsOutput")
     ListSecurityConfigurationsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#ListSecurityConfigurationsInput", name: "ListSecurityConfigurationsInput")
     ListSecurityConfigurationsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#ListSecurityConfigurationsOutput", name: "ListSecurityConfigurationsOutput")
+    ListSessionsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#ListSessionsInput", name: "ListSessionsInput")
+    ListSessionsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#ListSessionsOutput", name: "ListSessionsOutput")
     ListStepsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#ListStepsInput", name: "ListStepsInput")
     ListStepsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#ListStepsOutput", name: "ListStepsOutput")
     ListStudioSessionMappingsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#ListStudioSessionMappingsInput", name: "ListStudioSessionMappingsInput")
@@ -213,6 +221,10 @@ module Aws::EMR
     ListStudiosOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#ListStudiosOutput", name: "ListStudiosOutput")
     ListSupportedInstanceTypesInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#ListSupportedInstanceTypesInput", name: "ListSupportedInstanceTypesInput")
     ListSupportedInstanceTypesOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#ListSupportedInstanceTypesOutput", name: "ListSupportedInstanceTypesOutput")
+    LogType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.emr#LogType", name: "LogType")
+    LogTypeMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.emr#LogTypeMap", name: "LogTypeMap")
+    LogTypesMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.emr#LogTypesMap", name: "LogTypesMap")
+    LogUploadPolicyValue = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.emr#LogUploadPolicyValue", name: "LogUploadPolicyValue")
     Long = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.emr#Long", name: "Long")
     ManagedScalingPolicy = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#ManagedScalingPolicy", name: "ManagedScalingPolicy")
     Marker = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.emr#Marker", name: "Marker")
@@ -224,6 +236,7 @@ module Aws::EMR
     ModifyClusterOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#ModifyClusterOutput", name: "ModifyClusterOutput")
     ModifyInstanceFleetInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#ModifyInstanceFleetInput", name: "ModifyInstanceFleetInput")
     ModifyInstanceGroupsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#ModifyInstanceGroupsInput", name: "ModifyInstanceGroupsInput")
+    MonitoringConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#MonitoringConfiguration", name: "MonitoringConfiguration")
     NewSupportedProductsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.emr#NewSupportedProductsList", name: "NewSupportedProductsList")
     NonNegativeDouble = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.emr#NonNegativeDouble", name: "NonNegativeDouble", traits: {"smithy.api#range" => {"min" => 0.0}})
     NotebookExecution = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#NotebookExecution", name: "NotebookExecution")
@@ -278,6 +291,8 @@ module Aws::EMR
     ResourceId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.emr#ResourceId", name: "ResourceId")
     RunJobFlowInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#RunJobFlowInput", name: "RunJobFlowInput")
     RunJobFlowOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#RunJobFlowOutput", name: "RunJobFlowOutput")
+    S3LoggingConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#S3LoggingConfiguration", name: "S3LoggingConfiguration")
+    S3MonitoringConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#S3MonitoringConfiguration", name: "S3MonitoringConfiguration")
     ScaleDownBehavior = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.emr#ScaleDownBehavior", name: "ScaleDownBehavior")
     ScalingAction = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#ScalingAction", name: "ScalingAction")
     ScalingConstraints = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#ScalingConstraints", name: "ScalingConstraints")
@@ -289,9 +304,19 @@ module Aws::EMR
     SecurityConfigurationList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.emr#SecurityConfigurationList", name: "SecurityConfigurationList")
     SecurityConfigurationSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#SecurityConfigurationSummary", name: "SecurityConfigurationSummary")
     SecurityGroupsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.emr#SecurityGroupsList", name: "SecurityGroupsList")
+    SensitiveString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.emr#SensitiveString", name: "SensitiveString", traits: {"smithy.api#sensitive" => {}})
+    Session = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#Session", name: "Session")
+    SessionCloudWatchLoggingConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#SessionCloudWatchLoggingConfiguration", name: "SessionCloudWatchLoggingConfiguration")
+    SessionId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.emr#SessionId", name: "SessionId", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}})
+    SessionList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.emr#SessionList", name: "SessionList")
+    SessionManagedLoggingConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#SessionManagedLoggingConfiguration", name: "SessionManagedLoggingConfiguration")
     SessionMappingDetail = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#SessionMappingDetail", name: "SessionMappingDetail")
     SessionMappingSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#SessionMappingSummary", name: "SessionMappingSummary")
     SessionMappingSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.emr#SessionMappingSummaryList", name: "SessionMappingSummaryList")
+    SessionMonitoringConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#SessionMonitoringConfiguration", name: "SessionMonitoringConfiguration")
+    SessionS3LoggingConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#SessionS3LoggingConfiguration", name: "SessionS3LoggingConfiguration")
+    SessionState = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.emr#SessionState", name: "SessionState")
+    SessionStateList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.emr#SessionStateList", name: "SessionStateList")
     SetKeepJobFlowAliveWhenNoStepsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#SetKeepJobFlowAliveWhenNoStepsInput", name: "SetKeepJobFlowAliveWhenNoStepsInput")
     SetTerminationProtectionInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#SetTerminationProtectionInput", name: "SetTerminationProtectionInput")
     SetUnhealthyNodeReplacementInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#SetUnhealthyNodeReplacementInput", name: "SetUnhealthyNodeReplacementInput")
@@ -306,6 +331,8 @@ module Aws::EMR
     SpotResizingSpecification = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#SpotResizingSpecification", name: "SpotResizingSpecification")
     StartNotebookExecutionInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#StartNotebookExecutionInput", name: "StartNotebookExecutionInput")
     StartNotebookExecutionOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#StartNotebookExecutionOutput", name: "StartNotebookExecutionOutput")
+    StartSessionInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#StartSessionInput", name: "StartSessionInput")
+    StartSessionOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#StartSessionOutput", name: "StartSessionOutput")
     Statistic = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.emr#Statistic", name: "Statistic")
     Step = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#Step", name: "Step")
     StepCancellationOption = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.emr#StepCancellationOption", name: "StepCancellationOption")
@@ -317,6 +344,7 @@ module Aws::EMR
     StepExecutionStatusDetail = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#StepExecutionStatusDetail", name: "StepExecutionStatusDetail")
     StepId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.emr#StepId", name: "StepId")
     StepIdsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.emr#StepIdsList", name: "StepIdsList")
+    StepMonitoringConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#StepMonitoringConfiguration", name: "StepMonitoringConfiguration")
     StepState = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.emr#StepState", name: "StepState")
     StepStateChangeReason = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#StepStateChangeReason", name: "StepStateChangeReason")
     StepStateChangeReasonCode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.emr#StepStateChangeReasonCode", name: "StepStateChangeReasonCode")
@@ -340,6 +368,8 @@ module Aws::EMR
     Tag = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#Tag", name: "Tag")
     TagList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.emr#TagList", name: "TagList")
     TerminateJobFlowsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#TerminateJobFlowsInput", name: "TerminateJobFlowsInput")
+    TerminateSessionInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#TerminateSessionInput", name: "TerminateSessionInput")
+    TerminateSessionOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#TerminateSessionOutput", name: "TerminateSessionOutput")
     ThroughputVal = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.emr#ThroughputVal", name: "ThroughputVal", traits: {"smithy.api#range" => {"min" => 0}})
     Unit = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.emr#Unit", name: "Unit")
     UpdateStudioInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emr#UpdateStudioInput", name: "UpdateStudioInput")
@@ -380,6 +410,7 @@ module Aws::EMR
     AddJobFlowStepsOutput.type = Types::AddJobFlowStepsOutput
     AddTagsInput.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "ResourceId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     AddTagsInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    AddTagsInput.add_member(:cluster_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterId, name: "ClusterId"))
     AddTagsInput.type = Types::AddTagsInput
     AddTagsOutput.type = Types::AddTagsOutput
     AdjustmentType.add_member(:change_in_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CHANGE_IN_CAPACITY", traits: {"smithy.api#enumValue" => "CHANGE_IN_CAPACITY"}))
@@ -456,6 +487,12 @@ module Aws::EMR
     CloudWatchAlarmDefinition.add_member(:unit, ::Smithy::Schema::Shapes::MemberShape.new(target: Unit, name: "Unit"))
     CloudWatchAlarmDefinition.add_member(:dimensions, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricDimensionList, name: "Dimensions"))
     CloudWatchAlarmDefinition.type = Types::CloudWatchAlarmDefinition
+    CloudWatchLogConfiguration.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Enabled", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CloudWatchLogConfiguration.add_member(:log_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlString, name: "LogGroupName"))
+    CloudWatchLogConfiguration.add_member(:log_stream_name_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlString, name: "LogStreamNamePrefix"))
+    CloudWatchLogConfiguration.add_member(:encryption_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlString, name: "EncryptionKeyArn"))
+    CloudWatchLogConfiguration.add_member(:log_types, ::Smithy::Schema::Shapes::MemberShape.new(target: LogTypesMap, name: "LogTypes"))
+    CloudWatchLogConfiguration.type = Types::CloudWatchLogConfiguration
     Cluster.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterId, name: "Id"))
     Cluster.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name"))
     Cluster.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterStatus, name: "Status"))
@@ -491,6 +528,8 @@ module Aws::EMR
     Cluster.add_member(:ebs_root_volume_iops, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "EbsRootVolumeIops"))
     Cluster.add_member(:ebs_root_volume_throughput, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "EbsRootVolumeThroughput"))
     Cluster.add_member(:extended_support, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanObject, name: "ExtendedSupport"))
+    Cluster.add_member(:monitoring_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: MonitoringConfiguration, name: "MonitoringConfiguration"))
+    Cluster.add_member(:session_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanObject, name: "SessionEnabled"))
     Cluster.type = Types::Cluster
     ClusterState.add_member(:starting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STARTING", traits: {"smithy.api#enumValue" => "STARTING"}))
     ClusterState.add_member(:bootstrapping, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BOOTSTRAPPING", traits: {"smithy.api#enumValue" => "BOOTSTRAPPING"}))
@@ -734,6 +773,19 @@ module Aws::EMR
     GetPersistentAppUIPresignedURLOutput.add_member(:presigned_url_ready, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "PresignedURLReady"))
     GetPersistentAppUIPresignedURLOutput.add_member(:presigned_url, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlString, name: "PresignedURL"))
     GetPersistentAppUIPresignedURLOutput.type = Types::GetPersistentAppUIPresignedURLOutput
+    GetSessionEndpointInput.add_member(:cluster_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterId, name: "ClusterId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    GetSessionEndpointInput.add_member(:session_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionId, name: "SessionId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    GetSessionEndpointInput.type = Types::GetSessionEndpointInput
+    GetSessionEndpointOutput.add_member(:endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlString, name: "Endpoint", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    GetSessionEndpointOutput.add_member(:auth_token, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "AuthToken"))
+    GetSessionEndpointOutput.add_member(:auth_token_expiration_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "AuthTokenExpirationTime"))
+    GetSessionEndpointOutput.add_member(:credentials, ::Smithy::Schema::Shapes::MemberShape.new(target: Credentials, name: "Credentials"))
+    GetSessionEndpointOutput.type = Types::GetSessionEndpointOutput
+    GetSessionInput.add_member(:cluster_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterId, name: "ClusterId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    GetSessionInput.add_member(:session_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionId, name: "SessionId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    GetSessionInput.type = Types::GetSessionInput
+    GetSessionOutput.add_member(:session, ::Smithy::Schema::Shapes::MemberShape.new(target: Session, name: "Session", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    GetSessionOutput.type = Types::GetSessionOutput
     GetStudioSessionMappingInput.add_member(:studio_id, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen256, name: "StudioId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     GetStudioSessionMappingInput.add_member(:identity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen256, name: "IdentityId"))
     GetStudioSessionMappingInput.add_member(:identity_name, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen256, name: "IdentityName"))
@@ -811,6 +863,7 @@ module Aws::EMR
     InstanceFleetState.add_member(:bootstrapping, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BOOTSTRAPPING", traits: {"smithy.api#enumValue" => "BOOTSTRAPPING"}))
     InstanceFleetState.add_member(:running, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RUNNING", traits: {"smithy.api#enumValue" => "RUNNING"}))
     InstanceFleetState.add_member(:resizing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESIZING", traits: {"smithy.api#enumValue" => "RESIZING"}))
+    InstanceFleetState.add_member(:reconfiguring, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RECONFIGURING", traits: {"smithy.api#enumValue" => "RECONFIGURING"}))
     InstanceFleetState.add_member(:suspended, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUSPENDED", traits: {"smithy.api#enumValue" => "SUSPENDED"}))
     InstanceFleetState.add_member(:terminating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TERMINATING", traits: {"smithy.api#enumValue" => "TERMINATING"}))
     InstanceFleetState.add_member(:terminated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TERMINATED", traits: {"smithy.api#enumValue" => "TERMINATED"}))
@@ -1113,6 +1166,14 @@ module Aws::EMR
     ListSecurityConfigurationsOutput.add_member(:security_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityConfigurationList, name: "SecurityConfigurations"))
     ListSecurityConfigurationsOutput.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: Marker, name: "Marker"))
     ListSecurityConfigurationsOutput.type = Types::ListSecurityConfigurationsOutput
+    ListSessionsInput.add_member(:cluster_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterId, name: "ClusterId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ListSessionsInput.add_member(:session_states, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionStateList, name: "SessionStates"))
+    ListSessionsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken"))
+    ListSessionsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResultsNumber, name: "MaxResults"))
+    ListSessionsInput.type = Types::ListSessionsInput
+    ListSessionsOutput.add_member(:sessions, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionList, name: "Sessions"))
+    ListSessionsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken"))
+    ListSessionsOutput.type = Types::ListSessionsOutput
     ListStepsInput.add_member(:cluster_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterId, name: "ClusterId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ListStepsInput.add_member(:step_states, ::Smithy::Schema::Shapes::MemberShape.new(target: StepStateList, name: "StepStates"))
     ListStepsInput.add_member(:step_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringList, name: "StepIds"))
@@ -1139,6 +1200,16 @@ module Aws::EMR
     ListSupportedInstanceTypesOutput.add_member(:supported_instance_types, ::Smithy::Schema::Shapes::MemberShape.new(target: SupportedInstanceTypesList, name: "SupportedInstanceTypes"))
     ListSupportedInstanceTypesOutput.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Marker"))
     ListSupportedInstanceTypesOutput.type = Types::ListSupportedInstanceTypesOutput
+    LogType.add_member(:system_logs, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SYSTEM_LOGS", traits: {"smithy.api#enumValue" => "system-logs"}))
+    LogType.add_member(:application_logs, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "APPLICATION_LOGS", traits: {"smithy.api#enumValue" => "application-logs"}))
+    LogType.add_member(:persistent_ui_logs, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PERSISTENT_UI_LOGS", traits: {"smithy.api#enumValue" => "persistent-ui-logs"}))
+    LogTypeMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: LogType, name: "key"))
+    LogTypeMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: LogUploadPolicyValue, name: "value"))
+    LogTypesMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlString, name: "key"))
+    LogTypesMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringList, name: "value"))
+    LogUploadPolicyValue.add_member(:emr_managed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EMR_MANAGED", traits: {"smithy.api#enumValue" => "emr-managed"}))
+    LogUploadPolicyValue.add_member(:on_customer_s3_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ON_CUSTOMER_S3ONLY", traits: {"smithy.api#enumValue" => "on-customer-s3only"}))
+    LogUploadPolicyValue.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "disabled"}))
     ManagedScalingPolicy.add_member(:compute_limits, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputeLimits, name: "ComputeLimits"))
     ManagedScalingPolicy.add_member(:utilization_performance_index, ::Smithy::Schema::Shapes::MemberShape.new(target: UtilizationPerformanceIndexInteger, name: "UtilizationPerformanceIndex"))
     ManagedScalingPolicy.add_member(:scaling_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: ScalingStrategy, name: "ScalingStrategy"))
@@ -1162,6 +1233,9 @@ module Aws::EMR
     ModifyInstanceGroupsInput.add_member(:cluster_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterId, name: "ClusterId"))
     ModifyInstanceGroupsInput.add_member(:instance_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceGroupModifyConfigList, name: "InstanceGroups"))
     ModifyInstanceGroupsInput.type = Types::ModifyInstanceGroupsInput
+    MonitoringConfiguration.add_member(:cloud_watch_log_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudWatchLogConfiguration, name: "CloudWatchLogConfiguration"))
+    MonitoringConfiguration.add_member(:s3_logging_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: S3LoggingConfiguration, name: "S3LoggingConfiguration"))
+    MonitoringConfiguration.type = Types::MonitoringConfiguration
     NewSupportedProductsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SupportedProductConfig, name: "member"))
     NotebookExecution.add_member(:notebook_execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen256, name: "NotebookExecutionId"))
     NotebookExecution.add_member(:editor_id, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen256, name: "EditorId"))
@@ -1307,6 +1381,7 @@ module Aws::EMR
     RemoveManagedScalingPolicyOutput.type = Types::RemoveManagedScalingPolicyOutput
     RemoveTagsInput.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "ResourceId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     RemoveTagsInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "TagKeys", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    RemoveTagsInput.add_member(:cluster_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterId, name: "ClusterId"))
     RemoveTagsInput.type = Types::RemoveTagsInput
     RemoveTagsOutput.type = Types::RemoveTagsOutput
     RepoUpgradeOnBoot.add_member(:security, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SECURITY", traits: {"smithy.api#enumValue" => "SECURITY"}))
@@ -1319,6 +1394,7 @@ module Aws::EMR
     RunJobFlowInput.add_member(:release_label, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen256, name: "ReleaseLabel"))
     RunJobFlowInput.add_member(:instances, ::Smithy::Schema::Shapes::MemberShape.new(target: JobFlowInstancesConfig, name: "Instances", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     RunJobFlowInput.add_member(:steps, ::Smithy::Schema::Shapes::MemberShape.new(target: StepConfigList, name: "Steps"))
+    RunJobFlowInput.add_member(:step_execution_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, name: "StepExecutionRoleArn"))
     RunJobFlowInput.add_member(:bootstrap_actions, ::Smithy::Schema::Shapes::MemberShape.new(target: BootstrapActionConfigList, name: "BootstrapActions"))
     RunJobFlowInput.add_member(:supported_products, ::Smithy::Schema::Shapes::MemberShape.new(target: SupportedProductsList, name: "SupportedProducts"))
     RunJobFlowInput.add_member(:new_supported_products, ::Smithy::Schema::Shapes::MemberShape.new(target: NewSupportedProductsList, name: "NewSupportedProducts"))
@@ -1343,10 +1419,17 @@ module Aws::EMR
     RunJobFlowInput.add_member(:ebs_root_volume_iops, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "EbsRootVolumeIops"))
     RunJobFlowInput.add_member(:ebs_root_volume_throughput, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "EbsRootVolumeThroughput"))
     RunJobFlowInput.add_member(:extended_support, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanObject, name: "ExtendedSupport"))
+    RunJobFlowInput.add_member(:monitoring_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: MonitoringConfiguration, name: "MonitoringConfiguration"))
+    RunJobFlowInput.add_member(:session_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanObject, name: "SessionEnabled"))
     RunJobFlowInput.type = Types::RunJobFlowInput
     RunJobFlowOutput.add_member(:job_flow_id, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen256, name: "JobFlowId"))
     RunJobFlowOutput.add_member(:cluster_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, name: "ClusterArn"))
     RunJobFlowOutput.type = Types::RunJobFlowOutput
+    S3LoggingConfiguration.add_member(:log_type_upload_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: LogTypeMap, name: "LogTypeUploadPolicy"))
+    S3LoggingConfiguration.type = Types::S3LoggingConfiguration
+    S3MonitoringConfiguration.add_member(:log_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlString, name: "LogUri"))
+    S3MonitoringConfiguration.add_member(:encryption_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlString, name: "EncryptionKeyArn"))
+    S3MonitoringConfiguration.type = Types::S3MonitoringConfiguration
     ScaleDownBehavior.add_member(:terminate_at_instance_hour, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TERMINATE_AT_INSTANCE_HOUR", traits: {"smithy.api#enumValue" => "TERMINATE_AT_INSTANCE_HOUR"}))
     ScaleDownBehavior.add_member(:terminate_at_task_completion, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TERMINATE_AT_TASK_COMPLETION", traits: {"smithy.api#enumValue" => "TERMINATE_AT_TASK_COMPLETION"}))
     ScalingAction.add_member(:market, ::Smithy::Schema::Shapes::MemberShape.new(target: MarketType, name: "Market"))
@@ -1373,6 +1456,36 @@ module Aws::EMR
     SecurityConfigurationSummary.add_member(:creation_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "CreationDateTime"))
     SecurityConfigurationSummary.type = Types::SecurityConfigurationSummary
     SecurityGroupsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen256, name: "member"))
+    Session.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionId, name: "Id", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    Session.add_member(:cluster_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterId, name: "ClusterId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    Session.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen256, name: "Name"))
+    Session.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, name: "Arn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    Session.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionState, name: "State", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    Session.add_member(:state_change_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlString, name: "StateChangeReason"))
+    Session.add_member(:release_label, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen256, name: "ReleaseLabel"))
+    Session.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IAMRoleArn, name: "ExecutionRoleArn"))
+    Session.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen256, name: "AccountId"))
+    Session.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "CreatedAt"))
+    Session.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "UpdatedAt"))
+    Session.add_member(:started_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "StartedAt"))
+    Session.add_member(:ended_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "EndedAt"))
+    Session.add_member(:idle_since, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "IdleSince"))
+    Session.add_member(:engine_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationList, name: "EngineConfigurations"))
+    Session.add_member(:monitoring_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionMonitoringConfiguration, name: "MonitoringConfiguration"))
+    Session.add_member(:session_idle_timeout_in_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "SessionIdleTimeoutInMinutes"))
+    Session.add_member(:server_url, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlString, name: "ServerUrl"))
+    Session.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
+    Session.type = Types::Session
+    SessionCloudWatchLoggingConfiguration.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Enabled"))
+    SessionCloudWatchLoggingConfiguration.add_member(:log_group, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlString, name: "LogGroup"))
+    SessionCloudWatchLoggingConfiguration.add_member(:log_stream_name_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlString, name: "LogStreamNamePrefix"))
+    SessionCloudWatchLoggingConfiguration.add_member(:encryption_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlString, name: "EncryptionKeyArn"))
+    SessionCloudWatchLoggingConfiguration.add_member(:log_types, ::Smithy::Schema::Shapes::MemberShape.new(target: LogTypesMap, name: "LogTypes"))
+    SessionCloudWatchLoggingConfiguration.type = Types::SessionCloudWatchLoggingConfiguration
+    SessionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Session, name: "member"))
+    SessionManagedLoggingConfiguration.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Enabled"))
+    SessionManagedLoggingConfiguration.add_member(:encryption_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlString, name: "EncryptionKeyArn"))
+    SessionManagedLoggingConfiguration.type = Types::SessionManagedLoggingConfiguration
     SessionMappingDetail.add_member(:studio_id, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen256, name: "StudioId"))
     SessionMappingDetail.add_member(:identity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen256, name: "IdentityId"))
     SessionMappingDetail.add_member(:identity_name, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen256, name: "IdentityName"))
@@ -1389,6 +1502,24 @@ module Aws::EMR
     SessionMappingSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "CreationTime"))
     SessionMappingSummary.type = Types::SessionMappingSummary
     SessionMappingSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionMappingSummary, name: "member"))
+    SessionMonitoringConfiguration.add_member(:cloud_watch_logging_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionCloudWatchLoggingConfiguration, name: "CloudWatchLoggingConfiguration"))
+    SessionMonitoringConfiguration.add_member(:managed_logging_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionManagedLoggingConfiguration, name: "ManagedLoggingConfiguration"))
+    SessionMonitoringConfiguration.add_member(:s3_logging_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionS3LoggingConfiguration, name: "S3LoggingConfiguration"))
+    SessionMonitoringConfiguration.type = Types::SessionMonitoringConfiguration
+    SessionS3LoggingConfiguration.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Enabled"))
+    SessionS3LoggingConfiguration.add_member(:log_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlString, name: "LogUri"))
+    SessionS3LoggingConfiguration.add_member(:encryption_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlString, name: "EncryptionKeyArn"))
+    SessionS3LoggingConfiguration.add_member(:log_types, ::Smithy::Schema::Shapes::MemberShape.new(target: LogTypesMap, name: "LogTypes"))
+    SessionS3LoggingConfiguration.type = Types::SessionS3LoggingConfiguration
+    SessionState.add_member(:submitted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUBMITTED", traits: {"smithy.api#enumValue" => "SUBMITTED"}))
+    SessionState.add_member(:starting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STARTING", traits: {"smithy.api#enumValue" => "STARTING"}))
+    SessionState.add_member(:started, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STARTED", traits: {"smithy.api#enumValue" => "STARTED"}))
+    SessionState.add_member(:idle, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IDLE", traits: {"smithy.api#enumValue" => "IDLE"}))
+    SessionState.add_member(:busy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BUSY", traits: {"smithy.api#enumValue" => "BUSY"}))
+    SessionState.add_member(:terminating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TERMINATING", traits: {"smithy.api#enumValue" => "TERMINATING"}))
+    SessionState.add_member(:terminated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TERMINATED", traits: {"smithy.api#enumValue" => "TERMINATED"}))
+    SessionState.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    SessionStateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionState, name: "member"))
     SetKeepJobFlowAliveWhenNoStepsInput.add_member(:job_flow_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringList, name: "JobFlowIds", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     SetKeepJobFlowAliveWhenNoStepsInput.add_member(:keep_job_flow_alive_when_no_steps, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "KeepJobFlowAliveWhenNoSteps", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     SetKeepJobFlowAliveWhenNoStepsInput.type = Types::SetKeepJobFlowAliveWhenNoStepsInput
@@ -1442,6 +1573,21 @@ module Aws::EMR
     StartNotebookExecutionInput.type = Types::StartNotebookExecutionInput
     StartNotebookExecutionOutput.add_member(:notebook_execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen256, name: "NotebookExecutionId"))
     StartNotebookExecutionOutput.type = Types::StartNotebookExecutionOutput
+    StartSessionInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen256, name: "Name"))
+    StartSessionInput.add_member(:cluster_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterId, name: "ClusterId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    StartSessionInput.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IAMRoleArn, name: "ExecutionRoleArn"))
+    StartSessionInput.add_member(:engine_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationList, name: "EngineConfigurations"))
+    StartSessionInput.add_member(:monitoring_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionMonitoringConfiguration, name: "MonitoringConfiguration"))
+    StartSessionInput.add_member(:session_idle_timeout_in_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "SessionIdleTimeoutInMinutes"))
+    StartSessionInput.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, name: "ClientRequestToken"))
+    StartSessionInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
+    StartSessionInput.type = Types::StartSessionInput
+    StartSessionOutput.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionId, name: "Id", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    StartSessionOutput.add_member(:cluster_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterId, name: "ClusterId"))
+    StartSessionOutput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, name: "Arn"))
+    StartSessionOutput.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen256, name: "AccountId"))
+    StartSessionOutput.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionState, name: "State"))
+    StartSessionOutput.type = Types::StartSessionOutput
     Statistic.add_member(:sample_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SAMPLE_COUNT", traits: {"smithy.api#enumValue" => "SAMPLE_COUNT"}))
     Statistic.add_member(:average, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AVERAGE", traits: {"smithy.api#enumValue" => "AVERAGE"}))
     Statistic.add_member(:sum, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUM", traits: {"smithy.api#enumValue" => "SUM"}))
@@ -1453,12 +1599,15 @@ module Aws::EMR
     Step.add_member(:action_on_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionOnFailure, name: "ActionOnFailure"))
     Step.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: StepStatus, name: "Status"))
     Step.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionalArnType, name: "ExecutionRoleArn"))
+    Step.add_member(:log_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "LogUri"))
+    Step.add_member(:encryption_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "EncryptionKeyArn"))
     Step.type = Types::Step
     StepCancellationOption.add_member(:send_interrupt, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SEND_INTERRUPT", traits: {"smithy.api#enumValue" => "SEND_INTERRUPT"}))
     StepCancellationOption.add_member(:terminate_process, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TERMINATE_PROCESS", traits: {"smithy.api#enumValue" => "TERMINATE_PROCESS"}))
     StepConfig.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen256, name: "Name", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     StepConfig.add_member(:action_on_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionOnFailure, name: "ActionOnFailure"))
     StepConfig.add_member(:hadoop_jar_step, ::Smithy::Schema::Shapes::MemberShape.new(target: HadoopJarStepConfig, name: "HadoopJarStep", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    StepConfig.add_member(:step_monitoring_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: StepMonitoringConfiguration, name: "StepMonitoringConfiguration"))
     StepConfig.type = Types::StepConfig
     StepConfigList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StepConfig, name: "member"))
     StepDetail.add_member(:step_config, ::Smithy::Schema::Shapes::MemberShape.new(target: StepConfig, name: "StepConfig", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -1479,6 +1628,8 @@ module Aws::EMR
     StepExecutionStatusDetail.add_member(:last_state_change_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlString, name: "LastStateChangeReason"))
     StepExecutionStatusDetail.type = Types::StepExecutionStatusDetail
     StepIdsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen256, name: "member"))
+    StepMonitoringConfiguration.add_member(:s3_monitoring_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: S3MonitoringConfiguration, name: "S3MonitoringConfiguration"))
+    StepMonitoringConfiguration.type = Types::StepMonitoringConfiguration
     StepState.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
     StepState.add_member(:cancel_pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANCEL_PENDING", traits: {"smithy.api#enumValue" => "CANCEL_PENDING"}))
     StepState.add_member(:running, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RUNNING", traits: {"smithy.api#enumValue" => "RUNNING"}))
@@ -1501,6 +1652,8 @@ module Aws::EMR
     StepSummary.add_member(:config, ::Smithy::Schema::Shapes::MemberShape.new(target: HadoopStepConfig, name: "Config"))
     StepSummary.add_member(:action_on_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionOnFailure, name: "ActionOnFailure"))
     StepSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: StepStatus, name: "Status"))
+    StepSummary.add_member(:log_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "LogUri"))
+    StepSummary.add_member(:encryption_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "EncryptionKeyArn"))
     StepSummary.type = Types::StepSummary
     StepSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StepSummary, name: "member"))
     StepTimeline.add_member(:creation_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "CreationDateTime"))
@@ -1567,6 +1720,13 @@ module Aws::EMR
     TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TerminateJobFlowsInput.add_member(:job_flow_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringList, name: "JobFlowIds", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     TerminateJobFlowsInput.type = Types::TerminateJobFlowsInput
+    TerminateSessionInput.add_member(:cluster_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterId, name: "ClusterId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    TerminateSessionInput.add_member(:session_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionId, name: "SessionId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    TerminateSessionInput.type = Types::TerminateSessionInput
+    TerminateSessionOutput.add_member(:cluster_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterId, name: "ClusterId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    TerminateSessionOutput.add_member(:session_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionId, name: "SessionId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    TerminateSessionOutput.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionState, name: "State", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    TerminateSessionOutput.type = Types::TerminateSessionOutput
     Unit.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
     Unit.add_member(:seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SECONDS", traits: {"smithy.api#enumValue" => "SECONDS"}))
     Unit.add_member(:micro_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MICRO_SECONDS", traits: {"smithy.api#enumValue" => "MICRO_SECONDS"}))
@@ -1622,7 +1782,7 @@ module Aws::EMR
       service.id = "com.amazonaws.emr#ElasticMapReduce"
       service.name = "ElasticMapReduce"
       service.version = "2009-03-31"
-      service.traits = {"aws.api#service" => {"sdkId" => "EMR", "arnNamespace" => "elasticmapreduce", "cloudFormationName" => "EMR", "cloudTrailEventSource" => "elasticmapreduce.amazonaws.com", "docId" => "elasticmapreduce-2009-03-31", "endpointPrefix" => "elasticmapreduce"}, "aws.auth#sigv4" => {"name" => "elasticmapreduce"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "Amazon EMR", "smithy.api#xmlNamespace" => {"uri" => "http://elasticmapreduce.amazonaws.com/doc/2009-03-31"}}
+      service.traits = {"aws.api#service" => {"sdkId" => "EMR", "arnNamespace" => "elasticmapreduce", "cloudFormationName" => "EMR", "cloudTrailEventSource" => "elasticmapreduce.amazonaws.com", "docId" => "elasticmapreduce-2009-03-31", "endpointPrefix" => "elasticmapreduce"}, "aws.auth#sigv4" => {"name" => "elasticmapreduce"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "Amazon EMR", "smithy.api#xmlNamespace" => {"uri" => "http://elasticmapreduce.amazonaws.com/doc/2009-03-31"}, "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws-us-gov"]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://elasticmapreduce-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://elasticmapreduce.{Region}.amazonaws.com", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://elasticmapreduce-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://elasticmapreduce.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://elasticmapreduce.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 14, "nodes" => "/////wAAAAH/////AAAAAAAAAA0AAAADAAAAAQAAAAQF9eEMAAAAAgAAAAUF9eEMAAAAAwAAAAgAAAAGAAAABAAAAAcF9eELAAAABQX14QkF9eEKAAAABAAAAAsAAAAJAAAABgAAAAoF9eEIAAAABwX14QYF9eEHAAAABQAAAAwF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAAOAAAABAX14QIF9eED"}}
       service.add_operation(:add_instance_fleet, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.emr#AddInstanceFleet"
         operation.name = "AddInstanceFleet"
@@ -1850,6 +2010,24 @@ module Aws::EMR
         operation.errors << InvalidRequestException
         operation.traits = {}
       end)
+      service.add_operation(:get_session, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.emr#GetSession"
+        operation.name = "GetSession"
+        operation.input = GetSessionInput
+        operation.output = GetSessionOutput
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.traits = {}
+      end)
+      service.add_operation(:get_session_endpoint, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.emr#GetSessionEndpoint"
+        operation.name = "GetSessionEndpoint"
+        operation.input = GetSessionEndpointInput
+        operation.output = GetSessionEndpointOutput
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.traits = {}
+      end)
       service.add_operation(:get_studio_session_mapping, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.emr#GetStudioSessionMapping"
         operation.name = "GetStudioSessionMapping"
@@ -1938,6 +2116,16 @@ module Aws::EMR
         operation.errors << InvalidRequestException
         operation.traits = {}
         operation[:paginator] = Paginators::ListSecurityConfigurations.new
+      end)
+      service.add_operation(:list_sessions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.emr#ListSessions"
+        operation.name = "ListSessions"
+        operation.input = ListSessionsInput
+        operation.output = ListSessionsOutput
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.traits = {}
+        operation[:paginator] = Paginators::ListSessions.new
       end)
       service.add_operation(:list_steps, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.emr#ListSteps"
@@ -2114,6 +2302,15 @@ module Aws::EMR
         operation.errors << InvalidRequestException
         operation.traits = {}
       end)
+      service.add_operation(:start_session, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.emr#StartSession"
+        operation.name = "StartSession"
+        operation.input = StartSessionInput
+        operation.output = StartSessionOutput
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.traits = {}
+      end)
       service.add_operation(:stop_notebook_execution, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.emr#StopNotebookExecution"
         operation.name = "StopNotebookExecution"
@@ -2129,6 +2326,15 @@ module Aws::EMR
         operation.input = TerminateJobFlowsInput
         operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
         operation.errors << InternalServerError
+        operation.traits = {}
+      end)
+      service.add_operation(:terminate_session, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.emr#TerminateSession"
+        operation.name = "TerminateSession"
+        operation.input = TerminateSessionInput
+        operation.output = TerminateSessionOutput
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
         operation.traits = {}
       end)
       service.add_operation(:update_studio, ::Smithy::Schema::Shapes::OperationShape.new do |operation|

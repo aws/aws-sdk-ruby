@@ -129,6 +129,10 @@ module Aws::LexModelsV2
       attr_accessor allow_dtmf_input: bool?
     end
 
+    module AnalysisScope
+      BotLocale: String
+    end
+
     module AnalyticsBinByName
       ConversationStartTime: String
       UtteranceTimestamp: String
@@ -715,6 +719,11 @@ module Aws::LexModelsV2
       UtteranceTimestamp: String
     end
 
+    module AssistedNluMode
+      Primary: String
+      Fallback: String
+    end
+
     class AssociatedTranscript
       include Smithy::Schema::Structure
 
@@ -757,6 +766,35 @@ module Aws::LexModelsV2
       attr_accessor start_timeout_ms: Integer?
       attr_accessor audio_specification: Types::AudioSpecification?
       attr_accessor dtmf_specification: Types::DTMFSpecification?
+    end
+
+    class AudioFillerSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?audio_type: String,
+        ?start_delay_in_milliseconds: Integer,
+        ?minimum_play_duration_in_milliseconds: Integer,
+        ?response_delivery_delay_in_milliseconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor audio_type: String?
+      attr_accessor start_delay_in_milliseconds: Integer?
+      attr_accessor minimum_play_duration_in_milliseconds: Integer?
+      attr_accessor response_delivery_delay_in_milliseconds: Integer?
+    end
+
+    module AudioFillerType
+      MELODY_CHIPPER_CHIME: String
+      MELODY_CURIOUS_CRAWL: String
+      MELODY_RISING_RIPPLE: String
+      MELODY_PATIENT_PING: String
+      MELODY_PONDERING_PONG: String
+      TYPING_KINETIC_KEYS: String
+      TYPING_QUIET_QWERTY: String
     end
 
     class AudioLogDestination
@@ -1073,6 +1111,46 @@ module Aws::LexModelsV2
       attr_accessor locale_id: String?
     end
 
+    class BotAnalyzerHistorySummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bot_analyzer_status: String,
+        ?creation_date_time: Time,
+        ?bot_analyzer_request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bot_analyzer_status: String?
+      attr_accessor creation_date_time: Time?
+      attr_accessor bot_analyzer_request_id: String?
+    end
+
+    class BotAnalyzerRecommendation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?issue_location: Types::IssueLocation,
+        ?priority: String,
+        ?issue_description: String,
+        ?proposed_fix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor issue_location: Types::IssueLocation?
+      attr_accessor priority: String?
+      attr_accessor issue_description: String?
+      attr_accessor proposed_fix: String?
+    end
+
+    module BotAnalyzerStatus
+      Processing: String
+      Available: String
+      Failed: String
+      Stopping: String
+      Stopped: String
+    end
+
     class BotExportSpecification
       include Smithy::Schema::Structure
 
@@ -1196,6 +1274,11 @@ module Aws::LexModelsV2
         ?locale_id: String,
         ?nlu_intent_confidence_threshold: Float,
         ?voice_settings: Types::VoiceSettings,
+        ?speech_recognition_settings: Types::SpeechRecognitionSettings,
+        ?speech_detection_sensitivity: String,
+        ?unified_speech_settings: Types::UnifiedSpeechSettings,
+        ?audio_filler_settings: Types::AudioFillerSettings,
+        ?speaker_diarization_settings: Types::SpeakerDiarizationSettings,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1204,6 +1287,11 @@ module Aws::LexModelsV2
       attr_accessor locale_id: String?
       attr_accessor nlu_intent_confidence_threshold: Float?
       attr_accessor voice_settings: Types::VoiceSettings?
+      attr_accessor speech_recognition_settings: Types::SpeechRecognitionSettings?
+      attr_accessor speech_detection_sensitivity: String?
+      attr_accessor unified_speech_settings: Types::UnifiedSpeechSettings?
+      attr_accessor audio_filler_settings: Types::AudioFillerSettings?
+      attr_accessor speaker_diarization_settings: Types::SpeakerDiarizationSettings?
     end
 
     module BotLocaleSortAttribute
@@ -1913,7 +2001,12 @@ module Aws::LexModelsV2
         ?description: String,
         ?nlu_intent_confidence_threshold: Float,
         ?voice_settings: Types::VoiceSettings,
+        ?unified_speech_settings: Types::UnifiedSpeechSettings,
+        ?audio_filler_settings: Types::AudioFillerSettings,
+        ?speech_recognition_settings: Types::SpeechRecognitionSettings,
         ?generative_ai_settings: Types::GenerativeAISettings,
+        ?speech_detection_sensitivity: String,
+        ?speaker_diarization_settings: Types::SpeakerDiarizationSettings,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1923,7 +2016,12 @@ module Aws::LexModelsV2
       attr_accessor description: String?
       attr_accessor nlu_intent_confidence_threshold: Float?
       attr_accessor voice_settings: Types::VoiceSettings?
+      attr_accessor unified_speech_settings: Types::UnifiedSpeechSettings?
+      attr_accessor audio_filler_settings: Types::AudioFillerSettings?
+      attr_accessor speech_recognition_settings: Types::SpeechRecognitionSettings?
       attr_accessor generative_ai_settings: Types::GenerativeAISettings?
+      attr_accessor speech_detection_sensitivity: String?
+      attr_accessor speaker_diarization_settings: Types::SpeakerDiarizationSettings?
     end
 
     class CreateBotLocaleResponse
@@ -1937,9 +2035,14 @@ module Aws::LexModelsV2
         ?description: String,
         ?nlu_intent_confidence_threshold: Float,
         ?voice_settings: Types::VoiceSettings,
+        ?unified_speech_settings: Types::UnifiedSpeechSettings,
+        ?audio_filler_settings: Types::AudioFillerSettings,
+        ?speech_recognition_settings: Types::SpeechRecognitionSettings,
         ?bot_locale_status: String,
         ?creation_date_time: Time,
         ?generative_ai_settings: Types::GenerativeAISettings,
+        ?speech_detection_sensitivity: String,
+        ?speaker_diarization_settings: Types::SpeakerDiarizationSettings,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1950,9 +2053,14 @@ module Aws::LexModelsV2
       attr_accessor description: String?
       attr_accessor nlu_intent_confidence_threshold: Float?
       attr_accessor voice_settings: Types::VoiceSettings?
+      attr_accessor unified_speech_settings: Types::UnifiedSpeechSettings?
+      attr_accessor audio_filler_settings: Types::AudioFillerSettings?
+      attr_accessor speech_recognition_settings: Types::SpeechRecognitionSettings?
       attr_accessor bot_locale_status: String?
       attr_accessor creation_date_time: Time?
       attr_accessor generative_ai_settings: Types::GenerativeAISettings?
+      attr_accessor speech_detection_sensitivity: String?
+      attr_accessor speaker_diarization_settings: Types::SpeakerDiarizationSettings?
     end
 
     class CreateBotReplicaRequest
@@ -2126,6 +2234,7 @@ module Aws::LexModelsV2
 
       def initialize: (
         ?intent_name: String,
+        ?intent_display_name: String,
         ?description: String,
         ?parent_intent_signature: String,
         ?sample_utterances: Array[Types::SampleUtterance],
@@ -2146,6 +2255,7 @@ module Aws::LexModelsV2
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor intent_name: String?
+      attr_accessor intent_display_name: String?
       attr_accessor description: String?
       attr_accessor parent_intent_signature: String?
       attr_accessor sample_utterances: Array[Types::SampleUtterance]?
@@ -2170,6 +2280,7 @@ module Aws::LexModelsV2
       def initialize: (
         ?intent_id: String,
         ?intent_name: String,
+        ?intent_display_name: String,
         ?description: String,
         ?parent_intent_signature: String,
         ?sample_utterances: Array[Types::SampleUtterance],
@@ -2192,6 +2303,7 @@ module Aws::LexModelsV2
 
       attr_accessor intent_id: String?
       attr_accessor intent_name: String?
+      attr_accessor intent_display_name: String?
       attr_accessor description: String?
       attr_accessor parent_intent_signature: String?
       attr_accessor sample_utterances: Array[Types::SampleUtterance]?
@@ -2586,6 +2698,19 @@ module Aws::LexModelsV2
       attr_accessor end_date_time: Time?
     end
 
+    class DeepgramSpeechModelConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_token_secret_arn: String,
+        ?model_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_token_secret_arn: String?
+      attr_accessor model_id: String?
+    end
+
     class DefaultConditionalBranch
       include Smithy::Schema::Structure
 
@@ -2627,6 +2752,28 @@ module Aws::LexModelsV2
       attr_accessor bot_alias_id: String?
       attr_accessor bot_id: String?
       attr_accessor bot_alias_status: String?
+    end
+
+    class DeleteBotAnalyzerRecommendationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bot_id: String,
+        ?bot_analyzer_request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bot_id: String?
+      attr_accessor bot_analyzer_request_id: String?
+    end
+
+    class DeleteBotAnalyzerRecommendationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
     end
 
     class DeleteBotLocaleRequest
@@ -3017,6 +3164,46 @@ module Aws::LexModelsV2
       attr_accessor parent_bot_networks: Array[Types::ParentBotNetwork]?
     end
 
+    class DescribeBotAnalyzerRecommendationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bot_id: String,
+        ?bot_analyzer_request_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bot_id: String?
+      attr_accessor bot_analyzer_request_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class DescribeBotAnalyzerRecommendationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bot_id: String,
+        ?bot_version: String,
+        ?locale_id: String,
+        ?bot_analyzer_status: String,
+        ?creation_date_time: Time,
+        ?bot_analyzer_recommendation_list: Array[Types::BotAnalyzerRecommendation],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bot_id: String?
+      attr_accessor bot_version: String?
+      attr_accessor locale_id: String?
+      attr_accessor bot_analyzer_status: String?
+      attr_accessor creation_date_time: Time?
+      attr_accessor bot_analyzer_recommendation_list: Array[Types::BotAnalyzerRecommendation]?
+      attr_accessor next_token: String?
+    end
+
     class DescribeBotLocaleRequest
       include Smithy::Schema::Structure
 
@@ -3043,6 +3230,9 @@ module Aws::LexModelsV2
         ?description: String,
         ?nlu_intent_confidence_threshold: Float,
         ?voice_settings: Types::VoiceSettings,
+        ?unified_speech_settings: Types::UnifiedSpeechSettings,
+        ?audio_filler_settings: Types::AudioFillerSettings,
+        ?speech_recognition_settings: Types::SpeechRecognitionSettings,
         ?intents_count: Integer,
         ?slot_types_count: Integer,
         ?bot_locale_status: String,
@@ -3053,6 +3243,8 @@ module Aws::LexModelsV2
         ?bot_locale_history_events: Array[Types::BotLocaleHistoryEvent],
         ?recommended_actions: Array[String],
         ?generative_ai_settings: Types::GenerativeAISettings,
+        ?speech_detection_sensitivity: String,
+        ?speaker_diarization_settings: Types::SpeakerDiarizationSettings,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3063,6 +3255,9 @@ module Aws::LexModelsV2
       attr_accessor description: String?
       attr_accessor nlu_intent_confidence_threshold: Float?
       attr_accessor voice_settings: Types::VoiceSettings?
+      attr_accessor unified_speech_settings: Types::UnifiedSpeechSettings?
+      attr_accessor audio_filler_settings: Types::AudioFillerSettings?
+      attr_accessor speech_recognition_settings: Types::SpeechRecognitionSettings?
       attr_accessor intents_count: Integer?
       attr_accessor slot_types_count: Integer?
       attr_accessor bot_locale_status: String?
@@ -3073,6 +3268,8 @@ module Aws::LexModelsV2
       attr_accessor bot_locale_history_events: Array[Types::BotLocaleHistoryEvent]?
       attr_accessor recommended_actions: Array[String]?
       attr_accessor generative_ai_settings: Types::GenerativeAISettings?
+      attr_accessor speech_detection_sensitivity: String?
+      attr_accessor speaker_diarization_settings: Types::SpeakerDiarizationSettings?
     end
 
     class DescribeBotRecommendationRequest
@@ -3432,6 +3629,7 @@ module Aws::LexModelsV2
       def initialize: (
         ?intent_id: String,
         ?intent_name: String,
+        ?intent_display_name: String,
         ?description: String,
         ?parent_intent_signature: String,
         ?sample_utterances: Array[Types::SampleUtterance],
@@ -3456,6 +3654,7 @@ module Aws::LexModelsV2
 
       attr_accessor intent_id: String?
       attr_accessor intent_name: String?
+      attr_accessor intent_display_name: String?
       attr_accessor description: String?
       attr_accessor parent_intent_signature: String?
       attr_accessor sample_utterances: Array[Types::SampleUtterance]?
@@ -4503,6 +4702,21 @@ module Aws::LexModelsV2
       attr_accessor elicitation_code_hook: Types::ElicitationCodeHookInvocationSetting?
     end
 
+    class IntentDisambiguationSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?max_disambiguation_intents: Integer,
+        ?custom_disambiguation_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor max_disambiguation_intents: Integer?
+      attr_accessor custom_disambiguation_message: String?
+    end
+
     class IntentFilter
       include Smithy::Schema::Structure
 
@@ -4610,6 +4824,7 @@ module Aws::LexModelsV2
       def initialize: (
         ?intent_id: String,
         ?intent_name: String,
+        ?intent_display_name: String,
         ?description: String,
         ?parent_intent_signature: String,
         ?input_contexts: Array[Types::InputContext],
@@ -4620,6 +4835,7 @@ module Aws::LexModelsV2
 
       attr_accessor intent_id: String?
       attr_accessor intent_name: String?
+      attr_accessor intent_display_name: String?
       attr_accessor description: String?
       attr_accessor parent_intent_signature: String?
       attr_accessor input_contexts: Array[Types::InputContext]?
@@ -4647,6 +4863,21 @@ module Aws::LexModelsV2
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor intent_name: String?
+    end
+
+    class IssueLocation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bot_locale: String,
+        ?intent_id: String,
+        ?slot_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bot_locale: String?
+      attr_accessor intent_id: String?
+      attr_accessor slot_id: String?
     end
 
     class KendraConfiguration
@@ -4808,6 +5039,44 @@ module Aws::LexModelsV2
       attr_accessor bot_alias_summaries: Array[Types::BotAliasSummary]?
       attr_accessor next_token: String?
       attr_accessor bot_id: String?
+    end
+
+    class ListBotAnalyzerHistoryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bot_id: String,
+        ?locale_id: String,
+        ?bot_version: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bot_id: String?
+      attr_accessor locale_id: String?
+      attr_accessor bot_version: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListBotAnalyzerHistoryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bot_id: String,
+        ?locale_id: String,
+        ?bot_version: String,
+        ?bot_analyzer_history_list: Array[Types::BotAnalyzerHistorySummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bot_id: String?
+      attr_accessor locale_id: String?
+      attr_accessor bot_version: String?
+      attr_accessor bot_analyzer_history_list: Array[Types::BotAnalyzerHistorySummary]?
+      attr_accessor next_token: String?
     end
 
     class ListBotLocalesRequest
@@ -5894,10 +6163,14 @@ module Aws::LexModelsV2
 
       def initialize: (
         ?enabled: bool,
+        ?assisted_nlu_mode: String,
+        ?intent_disambiguation_settings: Types::IntentDisambiguationSettings,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor enabled: bool?
+      attr_accessor assisted_nlu_mode: String?
+      attr_accessor intent_disambiguation_settings: Types::IntentDisambiguationSettings?
     end
 
     class ObfuscationSetting
@@ -6089,6 +6362,12 @@ module Aws::LexModelsV2
 
       attr_accessor service: String?
       attr_accessor arn: String?
+    end
+
+    module Priority
+      High: String
+      Medium: String
+      Low: String
     end
 
     module PromptAttempt
@@ -6864,6 +7143,17 @@ module Aws::LexModelsV2
       Descending: String
     end
 
+    class SpeakerDiarizationSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+    end
+
     class Specifications
       include Smithy::Schema::Structure
 
@@ -6875,6 +7165,94 @@ module Aws::LexModelsV2
 
       attr_accessor slot_type_id: String?
       attr_accessor value_elicitation_setting: Types::SubSlotValueElicitationSetting?
+    end
+
+    module SpeechDetectionSensitivity
+      Default: String
+      HighNoiseTolerance: String
+      MaximumNoiseTolerance: String
+    end
+
+    class SpeechFoundationModel
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_arn: String,
+        ?voice_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_arn: String?
+      attr_accessor voice_id: String?
+    end
+
+    class SpeechModelConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deepgram_config: Types::DeepgramSpeechModelConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deepgram_config: Types::DeepgramSpeechModelConfig?
+    end
+
+    module SpeechModelPreference
+      Standard: String
+      Neural: String
+      Deepgram: String
+      Advanced: String
+    end
+
+    class SpeechRecognitionSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?speech_model_preference: String,
+        ?speech_model_config: Types::SpeechModelConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor speech_model_preference: String?
+      attr_accessor speech_model_config: Types::SpeechModelConfig?
+    end
+
+    class StartBotAnalyzerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bot_id: String,
+        ?analysis_scope: String,
+        ?locale_id: String,
+        ?bot_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bot_id: String?
+      attr_accessor analysis_scope: String?
+      attr_accessor locale_id: String?
+      attr_accessor bot_version: String?
+    end
+
+    class StartBotAnalyzerResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bot_id: String,
+        ?bot_version: String,
+        ?locale_id: String,
+        ?bot_analyzer_status: String,
+        ?bot_analyzer_request_id: String,
+        ?creation_date_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bot_id: String?
+      attr_accessor bot_version: String?
+      attr_accessor locale_id: String?
+      attr_accessor bot_analyzer_status: String?
+      attr_accessor bot_analyzer_request_id: String?
+      attr_accessor creation_date_time: Time?
     end
 
     class StartBotRecommendationRequest
@@ -7098,6 +7476,38 @@ module Aws::LexModelsV2
       attr_accessor frequency_in_seconds: Integer?
       attr_accessor timeout_in_seconds: Integer?
       attr_accessor allow_interrupt: bool?
+    end
+
+    class StopBotAnalyzerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bot_id: String,
+        ?bot_analyzer_request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bot_id: String?
+      attr_accessor bot_analyzer_request_id: String?
+    end
+
+    class StopBotAnalyzerResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bot_id: String,
+        ?bot_version: String,
+        ?locale_id: String,
+        ?bot_analyzer_status: String,
+        ?bot_analyzer_request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bot_id: String?
+      attr_accessor bot_version: String?
+      attr_accessor locale_id: String?
+      attr_accessor bot_analyzer_status: String?
+      attr_accessor bot_analyzer_request_id: String?
     end
 
     class StopBotRecommendationRequest
@@ -7661,6 +8071,17 @@ module Aws::LexModelsV2
       attr_accessor user_turn: Types::UserTurnSpecification?
     end
 
+    class UnifiedSpeechSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?speech_foundation_model: Types::SpeechFoundationModel,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor speech_foundation_model: Types::SpeechFoundationModel?
+    end
+
     class UntagResourceRequest
       include Smithy::Schema::Structure
 
@@ -7749,7 +8170,12 @@ module Aws::LexModelsV2
         ?description: String,
         ?nlu_intent_confidence_threshold: Float,
         ?voice_settings: Types::VoiceSettings,
+        ?unified_speech_settings: Types::UnifiedSpeechSettings,
+        ?audio_filler_settings: Types::AudioFillerSettings,
+        ?speech_recognition_settings: Types::SpeechRecognitionSettings,
         ?generative_ai_settings: Types::GenerativeAISettings,
+        ?speech_detection_sensitivity: String,
+        ?speaker_diarization_settings: Types::SpeakerDiarizationSettings,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -7759,7 +8185,12 @@ module Aws::LexModelsV2
       attr_accessor description: String?
       attr_accessor nlu_intent_confidence_threshold: Float?
       attr_accessor voice_settings: Types::VoiceSettings?
+      attr_accessor unified_speech_settings: Types::UnifiedSpeechSettings?
+      attr_accessor audio_filler_settings: Types::AudioFillerSettings?
+      attr_accessor speech_recognition_settings: Types::SpeechRecognitionSettings?
       attr_accessor generative_ai_settings: Types::GenerativeAISettings?
+      attr_accessor speech_detection_sensitivity: String?
+      attr_accessor speaker_diarization_settings: Types::SpeakerDiarizationSettings?
     end
 
     class UpdateBotLocaleResponse
@@ -7773,12 +8204,17 @@ module Aws::LexModelsV2
         ?description: String,
         ?nlu_intent_confidence_threshold: Float,
         ?voice_settings: Types::VoiceSettings,
+        ?unified_speech_settings: Types::UnifiedSpeechSettings,
+        ?audio_filler_settings: Types::AudioFillerSettings,
+        ?speech_recognition_settings: Types::SpeechRecognitionSettings,
         ?bot_locale_status: String,
         ?failure_reasons: Array[String],
         ?creation_date_time: Time,
         ?last_updated_date_time: Time,
         ?recommended_actions: Array[String],
         ?generative_ai_settings: Types::GenerativeAISettings,
+        ?speech_detection_sensitivity: String,
+        ?speaker_diarization_settings: Types::SpeakerDiarizationSettings,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -7789,12 +8225,17 @@ module Aws::LexModelsV2
       attr_accessor description: String?
       attr_accessor nlu_intent_confidence_threshold: Float?
       attr_accessor voice_settings: Types::VoiceSettings?
+      attr_accessor unified_speech_settings: Types::UnifiedSpeechSettings?
+      attr_accessor audio_filler_settings: Types::AudioFillerSettings?
+      attr_accessor speech_recognition_settings: Types::SpeechRecognitionSettings?
       attr_accessor bot_locale_status: String?
       attr_accessor failure_reasons: Array[String]?
       attr_accessor creation_date_time: Time?
       attr_accessor last_updated_date_time: Time?
       attr_accessor recommended_actions: Array[String]?
       attr_accessor generative_ai_settings: Types::GenerativeAISettings?
+      attr_accessor speech_detection_sensitivity: String?
+      attr_accessor speaker_diarization_settings: Types::SpeakerDiarizationSettings?
     end
 
     class UpdateBotRecommendationRequest
@@ -7943,6 +8384,7 @@ module Aws::LexModelsV2
       def initialize: (
         ?intent_id: String,
         ?intent_name: String,
+        ?intent_display_name: String,
         ?description: String,
         ?parent_intent_signature: String,
         ?sample_utterances: Array[Types::SampleUtterance],
@@ -7965,6 +8407,7 @@ module Aws::LexModelsV2
 
       attr_accessor intent_id: String?
       attr_accessor intent_name: String?
+      attr_accessor intent_display_name: String?
       attr_accessor description: String?
       attr_accessor parent_intent_signature: String?
       attr_accessor sample_utterances: Array[Types::SampleUtterance]?
@@ -7990,6 +8433,7 @@ module Aws::LexModelsV2
       def initialize: (
         ?intent_id: String,
         ?intent_name: String,
+        ?intent_display_name: String,
         ?description: String,
         ?parent_intent_signature: String,
         ?sample_utterances: Array[Types::SampleUtterance],
@@ -8014,6 +8458,7 @@ module Aws::LexModelsV2
 
       attr_accessor intent_id: String?
       attr_accessor intent_name: String?
+      attr_accessor intent_display_name: String?
       attr_accessor description: String?
       attr_accessor parent_intent_signature: String?
       attr_accessor sample_utterances: Array[Types::SampleUtterance]?
@@ -8512,13 +8957,13 @@ module Aws::LexModelsV2
       include Smithy::Schema::Structure
 
       def initialize: (
-        ?voice_id: String,
         ?engine: String,
+        ?voice_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
-      attr_accessor voice_id: String?
       attr_accessor engine: String?
+      attr_accessor voice_id: String?
     end
 
     class WaitAndContinueSpecification

@@ -144,18 +144,18 @@ module Aws::IVSRealTime
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -214,14 +214,9 @@ module Aws::IVSRealTime
     # @option params [String] :name
     #   <p>Optional name to identify the resource.</p>
     # @option params [Types::Video] :video
-    #   <p>Video configuration. Default: video resolution 1280x720, bitrate 2500 kbps, 30
-    #            fps.</p>
+    #   <p>Video configuration. Default: video resolution 1280x720, bitrate 2500 kbps, 30 fps.</p>
     # @option params [Hash<String, String>] :tags
-    #   <p>Tags attached to the resource. Array of maps, each of the form <code>string:string
-    #            (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a>
-    #            in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming
-    #            limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented
-    #            there.</p>
+    #   <p>Tags attached to the resource. Array of maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented there.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     name: "EncoderConfigurationName",
@@ -267,23 +262,17 @@ module Aws::IVSRealTime
     # @option params [String] :stage_arn
     #   <p>ARN of the stage with which the IngestConfiguration is associated.</p>
     # @option params [String] :user_id
-    #   <p>Customer-assigned name to help identify the participant using the IngestConfiguration; this can be used to link a participant to a user in the customer’s own systems. This can be any UTF-8 encoded text.
-    #         <i>This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information.</i>
-    #            </p>
+    #   <p>Customer-assigned name to help identify the participant using the IngestConfiguration; this can be used to link a participant to a user in the customer’s own systems. This can be any UTF-8 encoded text. <i>This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information.</i> </p>
     # @option params [Hash<String, String>] :attributes
-    #   <p>Application-provided attributes to store in the IngestConfiguration and attach to a stage. Map keys and values can contain UTF-8 encoded text. The maximum length of this field is 1 KB total.
-    #         <i>This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information.</i>
-    #            </p>
+    #   <p>Application-provided attributes to store in the IngestConfiguration and attach to a stage. Map keys and values can contain UTF-8 encoded text. The maximum length of this field is 1 KB total. <i>This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information.</i> </p>
     # @option params [String] :ingest_protocol
     #   <p>Type of ingest protocol that the user employs to broadcast. If this is set to <code>RTMP</code>, <code>insecureIngest</code> must be set to <code>true</code>.</p>
     # @option params [Boolean] :insecure_ingest
     #   <p>Whether the stage allows insecure RTMP ingest. This must be set to <code>true</code>, if <code>ingestProtocol</code> is set to <code>RTMP</code>. Default: <code>false</code>. </p>
+    # @option params [Boolean] :redundant_ingest
+    #   <p>Indicates whether redundant ingest is enabled for the ingest configuration. Default: <code>false</code>. </p>
     # @option params [Hash<String, String>] :tags
-    #   <p>Tags attached to the resource. Array of maps, each of the form <code>string:string
-    #            (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a>
-    #            in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming
-    #            limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented
-    #   	 there.</p>
+    #   <p>Tags attached to the resource. Array of maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented there.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     name: "IngestConfigurationName",
@@ -294,6 +283,7 @@ module Aws::IVSRealTime
     #     },
     #     ingest_protocol: "RTMP" # One of: ["RTMP", "RTMPS"], # required
     #     insecure_ingest: false,
+    #     redundant_ingest: false,
     #     tags: {
     #       "TagKey" => "TagValue"
     #     }
@@ -303,6 +293,13 @@ module Aws::IVSRealTime
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {
+    #     access_control_allow_origin: "String",
+    #     access_control_expose_headers: "String",
+    #     cache_control: "String",
+    #     content_security_policy: "String",
+    #     strict_transport_security: "String",
+    #     x_content_type_options: "String",
+    #     x_frame_options: "String",
     #     ingest_configuration: {
     #       name: "IngestConfigurationName",
     #       arn: "IngestConfigurationArn", # required
@@ -312,6 +309,13 @@ module Aws::IVSRealTime
     #       participant_id: "ParticipantId", # required
     #       state: "IngestConfigurationState", # required
     #       user_id: "UserId",
+    #       redundant_ingest: false,
+    #       redundant_ingest_credentials: [
+    #         {
+    #           participant_id: "ParticipantId",
+    #           stream_key: "StreamKey"
+    #         }
+    #       ],
     #       attributes: {
     #         "String" => "String"
     #       },
@@ -326,30 +330,18 @@ module Aws::IVSRealTime
       request.send_request(options)
     end
 
-    # <p>Creates an additional token for a specified stage. This can be done after stage creation
-    #          or when tokens expire. Tokens always are scoped to the stage for which they are
-    #          created.</p>
-    #          <p>Encryption keys are owned by Amazon IVS and never used directly by your
-    #          application.</p>
+    # <p>Creates an additional token for a specified stage. This can be done after stage creation or when tokens expire. Tokens always are scoped to the stage for which they are created.</p> <p>Encryption keys are owned by Amazon IVS and never used directly by your application.</p>
     # @param [Hash, Types::CreateParticipantTokenInput] params
     # @option params [String] :stage_arn
     #   <p>ARN of the stage to which this token is scoped.</p>
     # @option params [Integer] :duration
     #   <p>Duration (in minutes), after which the token expires. Default: 720 (12 hours).</p>
     # @option params [String] :user_id
-    #   <p>Name that can be specified to help identify the token. This can be any UTF-8 encoded
-    #            text. <i>This field is exposed to all stage participants and should not be used for
-    #               personally identifying, confidential, or sensitive information.</i>
-    #            </p>
+    #   <p>Name that can be specified to help identify the token. This can be any UTF-8 encoded text. <i>This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information.</i> </p>
     # @option params [Hash<String, String>] :attributes
-    #   <p>Application-provided attributes to encode into the token and attach to a stage. Map keys
-    #            and values can contain UTF-8 encoded text. The maximum length of this field is 1 KB total.
-    #               <i>This field is exposed to all stage participants and should not be used for
-    #               personally identifying, confidential, or sensitive information.</i>
-    #            </p>
+    #   <p>Application-provided attributes to encode into the token and attach to a stage. Map keys and values can contain UTF-8 encoded text. The maximum length of this field is 1 KB total. <i>This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information.</i> </p>
     # @option params [Array<String>] :capabilities
-    #   <p>Set of capabilities that the user is allowed to perform in the stage. Default:
-    #               <code>PUBLISH, SUBSCRIBE</code>.</p>
+    #   <p>Set of capabilities that the user is allowed to perform in the stage. Default: <code>PUBLISH, SUBSCRIBE</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     stage_arn: "StageArn", # required
@@ -390,11 +382,7 @@ module Aws::IVSRealTime
     # @option params [Array<Types::ParticipantTokenConfiguration>] :participant_token_configurations
     #   <p>Array of participant token configuration objects to attach to the new stage.</p>
     # @option params [Hash<String, String>] :tags
-    #   <p>Tags attached to the resource. Array of maps, each of the form <code>string:string
-    #            (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a>
-    #            in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming
-    #            limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented
-    #            there. </p>
+    #   <p>Tags attached to the resource. Array of maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented there. </p>
     # @option params [Types::AutoParticipantRecordingConfiguration] :auto_participant_recording_configuration
     #   <p>Configuration object for individual participant recording, to attach to the new stage.</p>
     # @example Request syntax with placeholder values
@@ -481,20 +469,14 @@ module Aws::IVSRealTime
       request.send_request(options)
     end
 
-    # <p>Creates a new storage configuration, used to enable recording to Amazon S3. 
-    # 	  When a StorageConfiguration is created, IVS will modify the S3 bucketPolicy of the provided bucket. 
-    # 	  This will ensure that IVS has sufficient permissions to write content to the provided bucket.</p>
+    # <p>Creates a new storage configuration, used to enable recording to Amazon S3. When a StorageConfiguration is created, IVS will modify the S3 bucketPolicy of the provided bucket. This will ensure that IVS has sufficient permissions to write content to the provided bucket.</p>
     # @param [Hash, Types::CreateStorageConfigurationRequest] params
     # @option params [String] :name
     #   <p>Storage configuration name. The value does not need to be unique.</p>
     # @option params [Types::S3StorageConfiguration] :s3
     #   <p>A complex type that contains a storage configuration for where recorded video will be stored.</p>
     # @option params [Hash<String, String>] :tags
-    #   <p>Tags attached to the resource. Array of maps, each of the form <code>string:string
-    #            (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a>
-    #   	 in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming
-    #            limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented
-    #            there.</p>
+    #   <p>Tags attached to the resource. Array of maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented there.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     name: "StorageConfigurationName",
@@ -527,8 +509,7 @@ module Aws::IVSRealTime
       request.send_request(options)
     end
 
-    # <p>Deletes an EncoderConfiguration resource. Ensures that no Compositions are using this
-    #          template; otherwise, returns an error.</p>
+    # <p>Deletes an EncoderConfiguration resource. Ensures that no Compositions are using this template; otherwise, returns an error.</p>
     # @param [Hash, Types::DeleteEncoderConfigurationRequest] params
     # @option params [String] :arn
     #   <p>ARN of the EncoderConfiguration.</p>
@@ -569,9 +550,7 @@ module Aws::IVSRealTime
       request.send_request(options)
     end
 
-    # <p>Deletes the specified public key used to sign stage participant tokens. 
-    # 	  This invalidates future participant tokens generated using the key pair’s private key.
-    # </p>
+    # <p>Deletes the specified public key used to sign stage participant tokens. This invalidates future participant tokens generated using the key pair’s private key. </p>
     # @param [Hash, Types::DeletePublicKeyRequest] params
     # @option params [String] :arn
     #   <p>ARN of the public key to be deleted.</p>
@@ -590,9 +569,7 @@ module Aws::IVSRealTime
       request.send_request(options)
     end
 
-    # <p>Shuts down and deletes the specified stage (disconnecting all participants). This operation also
-    #             removes the <code>stageArn</code> from the associated <a>IngestConfiguration</a>, if there are participants
-    # 	    using the IngestConfiguration to publish to the stage.</p>
+    # <p>Shuts down and deletes the specified stage (disconnecting all participants). This operation also removes the <code>stageArn</code> from the associated <a>IngestConfiguration</a>, if there are participants using the IngestConfiguration to publish to the stage.</p>
     # @param [Hash, Types::DeleteStageInput] params
     # @option params [String] :arn
     #   <p>ARN of the stage to be deleted.</p>
@@ -611,10 +588,7 @@ module Aws::IVSRealTime
       request.send_request(options)
     end
 
-    # <p>Deletes the storage configuration for the specified ARN.</p>
-    #          <p>If you try to delete a storage configuration that is used by a Composition, you will get an error (409 ConflictException). 
-    # 	  To avoid this, for all Compositions that reference the storage configuration, first use <a>StopComposition</a> and wait for it to complete, 
-    # 	  then use DeleteStorageConfiguration.</p>
+    # <p>Deletes the storage configuration for the specified ARN.</p> <p>If you try to delete a storage configuration that is used by a Composition, you will get an error (409 ConflictException). To avoid this, for all Compositions that reference the storage configuration, first use <a>StopComposition</a> and wait for it to complete, then use DeleteStorageConfiguration.</p>
     # @param [Hash, Types::DeleteStorageConfigurationRequest] params
     # @option params [String] :arn
     #   <p>ARN of the storage configuration to be deleted.</p>
@@ -633,16 +607,12 @@ module Aws::IVSRealTime
       request.send_request(options)
     end
 
-    # <p>Disconnects a specified participant from a specified stage. If the participant is publishing using
-    #             an <a>IngestConfiguration</a>, DisconnectParticipant also updates the <code>stageArn</code>
-    # 	    in the IngestConfiguration to be an empty string.</p>
+    # <p>Disconnects a specified participant from a specified stage. If the participant is publishing using an <a>IngestConfiguration</a>, DisconnectParticipant also updates the <code>stageArn</code> in the IngestConfiguration to be an empty string.</p>
     # @param [Hash, Types::DisconnectParticipantInput] params
     # @option params [String] :stage_arn
     #   <p>ARN of the stage to which the participant is attached.</p>
     # @option params [String] :participant_id
-    #   <p>Identifier of the participant to be disconnected. IVS assigns this; it is returned
-    #               by <a>CreateParticipantToken</a> (for streams using WebRTC ingest) or <a>CreateIngestConfiguration</a> (for
-    #   	    streams using RTMP ingest).</p>
+    #   <p>Identifier of the participant to be disconnected. IVS assigns this; it is returned by <a>CreateParticipantToken</a> (for streams using WebRTC ingest) or <a>CreateIngestConfiguration</a> (for streams using RTMP ingest).</p>
     # @option params [String] :reason
     #   <p>Description of why this participant is being disconnected.</p>
     # @example Request syntax with placeholder values
@@ -806,6 +776,13 @@ module Aws::IVSRealTime
     #       participant_id: "ParticipantId", # required
     #       state: "IngestConfigurationState", # required
     #       user_id: "UserId",
+    #       redundant_ingest: false,
+    #       redundant_ingest_credentials: [
+    #         {
+    #           participant_id: "ParticipantId",
+    #           stream_key: "StreamKey"
+    #         }
+    #       ],
     #       attributes: {
     #         "String" => "String"
     #       },
@@ -861,7 +838,9 @@ module Aws::IVSRealTime
     #       replication_type: "ReplicationType",
     #       replication_state: "ReplicationState",
     #       source_stage_arn: "StageArn",
-    #       source_session_id: "StageSessionId"
+    #       source_session_id: "StageSessionId",
+    #       redundant_ingest: false,
+    #       ingest_configuration_arn: "IngestConfigurationArn"
     #     }
     #   }
     # @return [Types::GetParticipantResponse]
@@ -1012,11 +991,7 @@ module Aws::IVSRealTime
     # @option params [String] :name
     #   <p>Name of the public key to be imported.</p>
     # @option params [Hash<String, String>] :tags
-    #   <p>Tags attached to the resource. Array of maps, each of the form <code>string:string
-    #            (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a>
-    #            in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming
-    #            limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented
-    #            there.</p>
+    #   <p>Tags attached to the resource. Array of maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented there.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     public_key_material: "PublicKeyMaterial", # required
@@ -1046,17 +1021,14 @@ module Aws::IVSRealTime
       request.send_request(options)
     end
 
-    # <p>Gets summary information about all Compositions in your account, in the AWS region
-    #          where the API request is processed. </p>
+    # <p>Gets summary information about all Compositions in your account, in the AWS region where the API request is processed. </p>
     # @param [Hash, Types::ListCompositionsRequest] params
     # @option params [String] :filter_by_stage_arn
     #   <p>Filters the Composition list to match the specified Stage ARN.</p>
     # @option params [String] :filter_by_encoder_configuration_arn
-    #   <p>Filters the Composition list to match the specified EncoderConfiguration attached to at
-    #            least one of its output.</p>
+    #   <p>Filters the Composition list to match the specified EncoderConfiguration attached to at least one of its output.</p>
     # @option params [String] :next_token
-    #   <p>The first Composition to retrieve. This is used for pagination; see the
-    #            <code>nextToken</code> response field.</p>
+    #   <p>The first Composition to retrieve. This is used for pagination; see the <code>nextToken</code> response field.</p>
     # @option params [Integer] :max_results
     #   <p>Maximum number of results to return. Default: 100.</p>
     # @example Request syntax with placeholder values
@@ -1099,12 +1071,10 @@ module Aws::IVSRealTime
       request.send_request(options)
     end
 
-    # <p>Gets summary information about all EncoderConfigurations in your account, in the AWS
-    #          region where the API request is processed.</p>
+    # <p>Gets summary information about all EncoderConfigurations in your account, in the AWS region where the API request is processed.</p>
     # @param [Hash, Types::ListEncoderConfigurationsRequest] params
     # @option params [String] :next_token
-    #   <p>The first encoder configuration to retrieve. This is used for pagination; see the
-    #               <code>nextToken</code> response field.</p>
+    #   <p>The first encoder configuration to retrieve. This is used for pagination; see the <code>nextToken</code> response field.</p>
     # @option params [Integer] :max_results
     #   <p>Maximum number of results to return. Default: 100.</p>
     # @example Request syntax with placeholder values
@@ -1164,7 +1134,8 @@ module Aws::IVSRealTime
     #         stage_arn: "IngestConfigurationStageArn", # required
     #         participant_id: "ParticipantId", # required
     #         state: "IngestConfigurationState", # required
-    #         user_id: "UserId"
+    #         user_id: "UserId",
+    #         redundant_ingest: false
     #       }
     #     ],
     #     next_token: "PaginationToken"
@@ -1175,8 +1146,7 @@ module Aws::IVSRealTime
       request.send_request(options)
     end
 
-    # <p>Lists events for a specified participant that occurred during a specified stage
-    #          session.</p>
+    # <p>Lists events for a specified participant that occurred during a specified stage session.</p>
     # @param [Hash, Types::ListParticipantEventsRequest] params
     # @option params [String] :stage_arn
     #   <p>Stage ARN.</p>
@@ -1185,8 +1155,7 @@ module Aws::IVSRealTime
     # @option params [String] :participant_id
     #   <p>Unique identifier for this participant. This is assigned by IVS and returned by <a>CreateParticipantToken</a>.</p>
     # @option params [String] :next_token
-    #   <p>The first participant event to retrieve. This is used for pagination; see the
-    #               <code>nextToken</code> response field.</p>
+    #   <p>The first participant event to retrieve. This is used for pagination; see the <code>nextToken</code> response field.</p>
     # @option params [Integer] :max_results
     #   <p>Maximum number of results to return. Default: 50.</p>
     # @example Request syntax with placeholder values
@@ -1211,7 +1180,23 @@ module Aws::IVSRealTime
     #         error_code: "INSUFFICIENT_CAPABILITIES" # One of: ["INSUFFICIENT_CAPABILITIES", "QUOTA_EXCEEDED", "PUBLISHER_NOT_FOUND", "BITRATE_EXCEEDED", "RESOLUTION_EXCEEDED", "STREAM_DURATION_EXCEEDED", "INVALID_AUDIO_CODEC", "INVALID_VIDEO_CODEC", "INVALID_PROTOCOL", "INVALID_STREAM_KEY", "REUSE_OF_STREAM_KEY", "B_FRAME_PRESENT", "INVALID_INPUT", "INTERNAL_SERVER_EXCEPTION"],
     #         destination_stage_arn: "StageArn",
     #         destination_session_id: "StageSessionId",
-    #         replica: false
+    #         replica: false,
+    #         previous_token: {
+    #           capabilities: ["ParticipantTokenCapability"],
+    #           attributes: {
+    #             "String" => "String"
+    #           },
+    #           user_id: "ParticipantTokenUserId",
+    #           expiration_time: Time.now
+    #         },
+    #         new_token: {
+    #           capabilities: ["ParticipantTokenCapability"],
+    #           attributes: {
+    #             "String" => "String"
+    #           },
+    #           user_id: "ParticipantTokenUserId",
+    #           expiration_time: Time.now
+    #         }
     #       }
     #     ],
     #     next_token: "PaginationToken"
@@ -1227,9 +1212,7 @@ module Aws::IVSRealTime
     # @option params [String] :source_stage_arn
     #   <p>ARN of the stage where the participant is publishing.</p>
     # @option params [String] :participant_id
-    #   <p>Participant ID of the publisher that has been replicated. This is assigned by IVS and returned by 
-    #   		<a>CreateParticipantToken</a> 
-    #   		or the <code>jti</code> (JWT ID) used to <a href="https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/getting-started-distribute-tokens.html#getting-started-distribute-tokens-self-signed">create a self signed token</a>.</p>
+    #   <p>Participant ID of the publisher that has been replicated. This is assigned by IVS and returned by <a>CreateParticipantToken</a> or the <code>jti</code> (JWT ID) used to <a href="https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/getting-started-distribute-tokens.html#getting-started-distribute-tokens-self-signed">create a self signed token</a>.</p>
     # @option params [String] :next_token
     #   <p>The first participant to retrieve. This is used for pagination; see the <code>nextToken</code> response field.</p>
     # @option params [Integer] :max_results
@@ -1271,29 +1254,17 @@ module Aws::IVSRealTime
     # @option params [String] :session_id
     #   <p>ID of the session within the stage.</p>
     # @option params [String] :filter_by_user_id
-    #   <p>Filters the response list to match the specified user ID. 
-    #               Only one of <code>filterByUserId</code>, <code>filterByPublished</code>, 
-    #               <code>filterByState</code>, or <code>filterByRecordingState</code> can be provided per request.
-    #   	    A <code>userId</code> is a
-    #               customer-assigned name to help identify the token; this can be used to link a participant
-    #               to a user in the customer’s own systems.</p>
+    #   <p>Filters the response list to match the specified user ID. Only one of <code>filterByUserId</code>, <code>filterByPublished</code>, <code>filterByState</code>, or <code>filterByRecordingState</code> can be provided per request. A <code>userId</code> is a customer-assigned name to help identify the token; this can be used to link a participant to a user in the customer’s own systems.</p>
     # @option params [Boolean] :filter_by_published
-    #   <p>Filters the response list to only show participants who published during the stage session.
-    #               Only one of <code>filterByUserId</code>, <code>filterByPublished</code>, 
-    #               <code>filterByState</code>, or <code>filterByRecordingState</code> can be provided per request.</p>
+    #   <p>Filters the response list to only show participants who published during the stage session. Only one of <code>filterByUserId</code>, <code>filterByPublished</code>, <code>filterByState</code>, or <code>filterByRecordingState</code> can be provided per request.</p>
     # @option params [String] :filter_by_state
-    #   <p>Filters the response list to only show participants in the specified state. 
-    #               Only one of <code>filterByUserId</code>, <code>filterByPublished</code>, 
-    #               <code>filterByState</code>, or <code>filterByRecordingState</code> can be provided per request.</p>
+    #   <p>Filters the response list to only show participants in the specified state. Only one of <code>filterByUserId</code>, <code>filterByPublished</code>, <code>filterByState</code>, or <code>filterByRecordingState</code> can be provided per request.</p>
     # @option params [String] :next_token
-    #   <p>The first participant to retrieve. This is used for pagination; see the
-    #               <code>nextToken</code> response field.</p>
+    #   <p>The first participant to retrieve. This is used for pagination; see the <code>nextToken</code> response field.</p>
     # @option params [Integer] :max_results
     #   <p>Maximum number of results to return. Default: 50.</p>
     # @option params [String] :filter_by_recording_state
-    #   <p>Filters the response list to only show participants with the specified recording state.
-    #               Only one of <code>filterByUserId</code>, <code>filterByPublished</code>, 
-    #               <code>filterByState</code>, or <code>filterByRecordingState</code> can be provided per request.</p>
+    #   <p>Filters the response list to only show participants with the specified recording state. Only one of <code>filterByUserId</code>, <code>filterByPublished</code>, <code>filterByState</code>, or <code>filterByRecordingState</code> can be provided per request.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     stage_arn: "StageArn", # required
@@ -1321,7 +1292,9 @@ module Aws::IVSRealTime
     #         replication_type: "ReplicationType",
     #         replication_state: "ReplicationState",
     #         source_stage_arn: "StageArn",
-    #         source_session_id: "StageSessionId"
+    #         source_session_id: "StageSessionId",
+    #         redundant_ingest: false,
+    #         ingest_configuration_arn: "IngestConfigurationArn"
     #       }
     #     ],
     #     next_token: "PaginationToken"
@@ -1370,8 +1343,7 @@ module Aws::IVSRealTime
     # @option params [String] :stage_arn
     #   <p>Stage ARN.</p>
     # @option params [String] :next_token
-    #   <p>The first stage session to retrieve. This is used for pagination; see the
-    #               <code>nextToken</code> response field.</p>
+    #   <p>The first stage session to retrieve. This is used for pagination; see the <code>nextToken</code> response field.</p>
     # @option params [Integer] :max_results
     #   <p>Maximum number of results to return. Default: 50.</p>
     # @example Request syntax with placeholder values
@@ -1400,12 +1372,10 @@ module Aws::IVSRealTime
       request.send_request(options)
     end
 
-    # <p>Gets summary information about all stages in your account, in the AWS region where the
-    #          API request is processed.</p>
+    # <p>Gets summary information about all stages in your account, in the AWS region where the API request is processed.</p>
     # @param [Hash, Types::ListStagesInput] params
     # @option params [String] :next_token
-    #   <p>The first stage to retrieve. This is used for pagination; see the <code>nextToken</code>
-    #            response field.</p>
+    #   <p>The first stage to retrieve. This is used for pagination; see the <code>nextToken</code> response field.</p>
     # @option params [Integer] :max_results
     #   <p>Maximum number of results to return. Default: 50.</p>
     # @example Request syntax with placeholder values
@@ -1436,15 +1406,12 @@ module Aws::IVSRealTime
       request.send_request(options)
     end
 
-    # <p>Gets summary information about all storage configurations in your account, 
-    # 	  in the AWS region where the API request is processed.</p>
+    # <p>Gets summary information about all storage configurations in your account, in the AWS region where the API request is processed.</p>
     # @param [Hash, Types::ListStorageConfigurationsRequest] params
     # @option params [String] :next_token
-    #   <p>The first storage configuration to retrieve. This is used for pagination; 
-    #   	  see the <code>nextToken</code> response field.</p>
+    #   <p>The first storage configuration to retrieve. This is used for pagination; see the <code>nextToken</code> response field.</p>
     # @option params [Integer] :max_results
-    #   <p>Maximum number of storage configurations to return. Default: your service quota or 100, 
-    #   	  whichever is smaller.</p>
+    #   <p>Maximum number of storage configurations to return. Default: your service quota or 100, whichever is smaller.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     next_token: "PaginationToken",
@@ -1498,30 +1465,7 @@ module Aws::IVSRealTime
       request.send_request(options)
     end
 
-    # <p>Starts a Composition from a stage based on the configuration provided in the
-    #          request.</p>
-    #          <p>A Composition is an ephemeral resource that exists after this operation returns
-    #          successfully. Composition stops and the resource is deleted:</p>
-    #          <ul>
-    #             <li>
-    #                <p>When <a>StopComposition</a> is called.</p>
-    #             </li>
-    #             <li>
-    #                <p>After a 1-minute timeout, when all participants are disconnected from the
-    #                stage.</p>
-    #             </li>
-    #             <li>
-    #                <p>After a 1-minute timeout, if there are no participants in the stage when
-    #                StartComposition is called.</p>
-    #             </li>
-    #             <li>
-    #                <p>When broadcasting to the IVS channel fails and all retries are exhausted.</p>
-    #             </li>
-    #             <li>
-    #                <p>When broadcasting is disconnected and all attempts to reconnect are
-    #                exhausted.</p>
-    #             </li>
-    #          </ul>
+    # <p>Starts a Composition from a stage based on the configuration provided in the request.</p> <p>A Composition is an ephemeral resource that exists after this operation returns successfully. Composition stops and the resource is deleted:</p> <ul> <li> <p>When <a>StopComposition</a> is called.</p> </li> <li> <p>After a 1-minute timeout, when all participants are disconnected from the stage.</p> </li> <li> <p>After a 1-minute timeout, if there are no participants in the stage when StartComposition is called.</p> </li> <li> <p>When broadcasting to the IVS channel fails and all retries are exhausted.</p> </li> <li> <p>When broadcasting is disconnected and all attempts to reconnect are exhausted.</p> </li> </ul>
     # @param [Hash, Types::StartCompositionRequest] params
     # @option params [String] :stage_arn
     #   <p>ARN of the stage to be used for compositing.</p>
@@ -1532,11 +1476,7 @@ module Aws::IVSRealTime
     # @option params [Array<Types::DestinationConfiguration>] :destinations
     #   <p>Array of destination configuration.</p>
     # @option params [Hash<String, String>] :tags
-    #   <p>Tags attached to the resource. Array of maps, each of the form <code>string:string
-    #            (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a>
-    #            in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming
-    #            limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented
-    #            there.</p>
+    #   <p>Tags attached to the resource. Array of maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented there.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     stage_arn: "StageArn", # required
@@ -1681,21 +1621,11 @@ module Aws::IVSRealTime
     # @option params [String] :destination_stage_arn
     #   <p>ARN of the stage to which the participant will be replicated.</p>
     # @option params [String] :participant_id
-    #   <p>Participant ID of the publisher that will be replicated. This is assigned by IVS and returned by 
-    #   		<a>CreateParticipantToken</a> 
-    #   		or the <code>jti</code> (JWT ID) used to <a href="https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/getting-started-distribute-tokens.html#getting-started-distribute-tokens-self-signed">create a self signed token</a>.
-    #   	  </p>
+    #   <p>Participant ID of the publisher that will be replicated. This is assigned by IVS and returned by <a>CreateParticipantToken</a> or the <code>jti</code> (JWT ID) used to <a href="https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/getting-started-distribute-tokens.html#getting-started-distribute-tokens-self-signed">create a self signed token</a>. </p>
     # @option params [Integer] :reconnect_window_seconds
-    #   <p>If the participant disconnects and then reconnects within the specified interval, replication will continue to be <code>ACTIVE</code>. 
-    #   	  Default: 0.</p>
+    #   <p>If the participant disconnects and then reconnects within the specified interval, replication will continue to be <code>ACTIVE</code>. Default: 0.</p>
     # @option params [Hash<String, String>] :attributes
-    #   <p>Application-provided attributes to set on the replicated participant in the destination stage. 
-    #   	  Map keys and values can contain UTF-8 encoded text. The maximum length of this field is 1 KB total. 
-    #   	  <i>This field is exposed to all stage participants and should not be used for personally identifying, 
-    #   	  confidential, or sensitive information.</i>
-    #            </p>
-    #            <p>These attributes are merged with any attributes set for this participant when creating the token. 
-    #   	  If there is overlap in keys, the values in these attributes are replaced.</p>
+    #   <p>Application-provided attributes to set on the replicated participant in the destination stage. Map keys and values can contain UTF-8 encoded text. The maximum length of this field is 1 KB total. <i>This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information.</i> </p> <p>These attributes are merged with any attributes set for this participant when creating the token. If there is overlap in keys, the values in these attributes are replaced.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     source_stage_arn: "StageArn", # required
@@ -1725,8 +1655,7 @@ module Aws::IVSRealTime
       request.send_request(options)
     end
 
-    # <p>Stops and deletes a Composition resource. Any broadcast from the Composition resource
-    #          is stopped.</p>
+    # <p>Stops and deletes a Composition resource. Any broadcast from the Composition resource is stopped.</p>
     # @param [Hash, Types::StopCompositionRequest] params
     # @option params [String] :arn
     #   <p>ARN of the Composition.</p>
@@ -1752,10 +1681,7 @@ module Aws::IVSRealTime
     # @option params [String] :destination_stage_arn
     #   <p>ARN of the stage where the participant has been replicated.</p>
     # @option params [String] :participant_id
-    #   <p>Participant ID of the publisher that has been replicated. This is assigned by IVS and returned by 
-    #   		<a>CreateParticipantToken</a> 
-    #   		or the <code>jti</code> (JWT ID) used to <a href="https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/getting-started-distribute-tokens.html#getting-started-distribute-tokens-self-signed">
-    #   				  create a self signed token</a>.</p>
+    #   <p>Participant ID of the publisher that has been replicated. This is assigned by IVS and returned by <a>CreateParticipantToken</a> or the <code>jti</code> (JWT ID) used to <a href="https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/getting-started-distribute-tokens.html#getting-started-distribute-tokens-self-signed"> create a self signed token</a>.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     source_stage_arn: "StageArn", # required
@@ -1786,11 +1712,7 @@ module Aws::IVSRealTime
     # @option params [String] :resource_arn
     #   <p>The ARN of the resource to be tagged. The ARN must be URL-encoded.</p>
     # @option params [Hash<String, String>] :tags
-    #   <p>Array of tags to be added or updated. Array of maps, each of the form
-    #            <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a>
-    #            in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming
-    #            limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented
-    #            there.</p>
+    #   <p>Array of tags to be added or updated. Array of maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented there.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     resource_arn: "ResourceArn", # required
@@ -1814,11 +1736,7 @@ module Aws::IVSRealTime
     # @option params [String] :resource_arn
     #   <p>The ARN of the resource to be untagged. The ARN must be URL-encoded.</p>
     # @option params [Array<String>] :tag_keys
-    #   <p>Array of tag keys (strings) for the tags to be removed.
-    #            See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a>
-    #            in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming
-    #            limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented
-    #            there.</p>
+    #   <p>Array of tag keys (strings) for the tags to be removed. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented there.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     resource_arn: "ResourceArn", # required
@@ -1841,16 +1759,26 @@ module Aws::IVSRealTime
     #   <p>ARN of the IngestConfiguration, for which the related stage ARN needs to be updated.</p>
     # @option params [String] :stage_arn
     #   <p>Stage ARN that needs to be updated.</p>
+    # @option params [Boolean] :redundant_ingest
+    #   <p>Indicates whether redundant ingest is enabled for the ingest configuration. Default: <code>false</code>. </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     arn: "IngestConfigurationArn", # required
-    #     stage_arn: "IngestConfigurationStageArn"
+    #     stage_arn: "IngestConfigurationStageArn",
+    #     redundant_ingest: false
     #   }
     #   options = {}
     #   response = client.update_ingest_configuration(params, options)
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {
+    #     access_control_allow_origin: "String",
+    #     access_control_expose_headers: "String",
+    #     cache_control: "String",
+    #     content_security_policy: "String",
+    #     strict_transport_security: "String",
+    #     x_content_type_options: "String",
+    #     x_frame_options: "String",
     #     ingest_configuration: {
     #       name: "IngestConfigurationName",
     #       arn: "IngestConfigurationArn", # required
@@ -1860,6 +1788,13 @@ module Aws::IVSRealTime
     #       participant_id: "ParticipantId", # required
     #       state: "IngestConfigurationState", # required
     #       user_id: "UserId",
+    #       redundant_ingest: false,
+    #       redundant_ingest_credentials: [
+    #         {
+    #           participant_id: "ParticipantId",
+    #           stream_key: "StreamKey"
+    #         }
+    #       ],
     #       attributes: {
     #         "String" => "String"
     #       },

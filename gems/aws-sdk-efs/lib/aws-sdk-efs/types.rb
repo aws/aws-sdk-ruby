@@ -9,14 +9,14 @@ module Aws::EFS
     # <p>Returned if the access point that you are trying to create already exists, with the
     #             creation token you provided in the request.</p>
     # @!attribute error_code
-    #   <p>The error code is a string that uniquely identifies an error condition. 
+    #   <p>The error code is a string that uniquely identifies an error condition.
     #           It is meant to be read and understood by programs that detect and handle errors by type. </p>
     #   @return [String]
     # @!attribute message
-    #   <p>The error message contains a generic description of the error 
-    #           condition in English. It is intended for a human audience. Simple programs display the message directly 
-    #           to the end user if they encounter an error condition they don't know how or don't care to handle. 
-    #           Sophisticated programs with more exhaustive error handling and proper internationalization are 
+    #   <p>The error message contains a generic description of the error
+    #           condition in English. It is intended for a human audience. Simple programs display the message directly
+    #           to the end user if they encounter an error condition they don't know how or don't care to handle.
+    #           Sophisticated programs with more exhaustive error handling and proper internationalization are
     #           more likely to ignore the error message.</p>
     #   @return [String]
     # @!attribute access_point_id
@@ -85,14 +85,14 @@ module Aws::EFS
     # <p>Returned if the Amazon Web Services account has already created the maximum number of access points
     #             allowed per file system. For more informaton, see <a href="https://docs.aws.amazon.com/efs/latest/ug/limits.html#limits-efs-resources-per-account-per-region">https://docs.aws.amazon.com/efs/latest/ug/limits.html#limits-efs-resources-per-account-per-region</a>.</p>
     # @!attribute error_code
-    #   <p>The error code is a string that uniquely identifies an error condition. 
+    #   <p>The error code is a string that uniquely identifies an error condition.
     #           It is meant to be read and understood by programs that detect and handle errors by type. </p>
     #   @return [String]
     # @!attribute message
-    #   <p>The error message contains a generic description of the error 
-    #           condition in English. It is intended for a human audience. Simple programs display the message directly 
-    #           to the end user if they encounter an error condition they don't know how or don't care to handle. 
-    #           Sophisticated programs with more exhaustive error handling and proper internationalization are 
+    #   <p>The error message contains a generic description of the error
+    #           condition in English. It is intended for a human audience. Simple programs display the message directly
+    #           to the end user if they encounter an error condition they don't know how or don't care to handle.
+    #           Sophisticated programs with more exhaustive error handling and proper internationalization are
     #           more likely to ignore the error message.</p>
     #   @return [String]
     class AccessPointLimitExceeded < Struct.new(
@@ -107,14 +107,14 @@ module Aws::EFS
     # <p>Returned if the specified <code>AccessPointId</code> value doesn't exist in the
     #             requester's Amazon Web Services account.</p>
     # @!attribute error_code
-    #   <p>The error code is a string that uniquely identifies an error condition. 
+    #   <p>The error code is a string that uniquely identifies an error condition.
     #           It is meant to be read and understood by programs that detect and handle errors by type. </p>
     #   @return [String]
     # @!attribute message
-    #   <p>The error message contains a generic description of the error 
-    #           condition in English. It is intended for a human audience. Simple programs display the message directly 
-    #           to the end user if they encounter an error condition they don't know how or don't care to handle. 
-    #           Sophisticated programs with more exhaustive error handling and proper internationalization are 
+    #   <p>The error message contains a generic description of the error
+    #           condition in English. It is intended for a human audience. Simple programs display the message directly
+    #           to the end user if they encounter an error condition they don't know how or don't care to handle.
+    #           Sophisticated programs with more exhaustive error handling and proper internationalization are
     #           more likely to ignore the error message.</p>
     #   @return [String]
     class AccessPointNotFound < Struct.new(
@@ -126,18 +126,18 @@ module Aws::EFS
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Returned if the Availability Zone that was specified for a mount target is 
+    # <p>Returned if the Availability Zone that was specified for a mount target is
     #             different from the Availability Zone that was specified for One Zone storage.
     #             For more information, see <a href="https://docs.aws.amazon.com/efs/latest/ug/availability-durability.html">Regional and One Zone storage redundancy</a>.</p>
     # @!attribute error_code
-    #   <p>The error code is a string that uniquely identifies an error condition. 
+    #   <p>The error code is a string that uniquely identifies an error condition.
     #           It is meant to be read and understood by programs that detect and handle errors by type. </p>
     #   @return [String]
     # @!attribute message
-    #   <p>The error message contains a generic description of the error 
-    #           condition in English. It is intended for a human audience. Simple programs display the message directly 
-    #           to the end user if they encounter an error condition they don't know how or don't care to handle. 
-    #           Sophisticated programs with more exhaustive error handling and proper internationalization are 
+    #   <p>The error message contains a generic description of the error
+    #           condition in English. It is intended for a human audience. Simple programs display the message directly
+    #           to the end user if they encounter an error condition they don't know how or don't care to handle.
+    #           Sophisticated programs with more exhaustive error handling and proper internationalization are
     #           more likely to ignore the error message.</p>
     #   @return [String]
     class AvailabilityZonesMismatch < Struct.new(
@@ -149,7 +149,7 @@ module Aws::EFS
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The backup policy for the file system used to create automatic daily backups. If status has a value of 
+    # <p>The backup policy for the file system used to create automatic daily backups. If status has a value of
     #       <code>ENABLED</code>, the file system is being automatically backed up. For more information, see <a href="https://docs.aws.amazon.com/efs/latest/ug/awsbackup.html#automatic-backups">Automatic backups</a>.</p>
     # @!attribute status
     #   <p>Describes the status of the file system's backup policy.</p>
@@ -195,14 +195,14 @@ module Aws::EFS
     # <p>Returned if the request is malformed or contains an error such as an invalid
     #             parameter value or a missing required parameter.</p>
     # @!attribute error_code
-    #   <p>The error code is a string that uniquely identifies an error condition. 
+    #   <p>The error code is a string that uniquely identifies an error condition.
     #           It is meant to be read and understood by programs that detect and handle errors by type. </p>
     #   @return [String]
     # @!attribute message
-    #   <p>The error message contains a generic description of the error 
-    #           condition in English. It is intended for a human audience. Simple programs display the message directly 
-    #           to the end user if they encounter an error condition they don't know how or don't care to handle. 
-    #           Sophisticated programs with more exhaustive error handling and proper internationalization are 
+    #   <p>The error message contains a generic description of the error
+    #           condition in English. It is intended for a human audience. Simple programs display the message directly
+    #           to the end user if they encounter an error condition they don't know how or don't care to handle.
+    #           Sophisticated programs with more exhaustive error handling and proper internationalization are
     #           more likely to ignore the error message.</p>
     #   @return [String]
     class BadRequest < Struct.new(
@@ -216,14 +216,14 @@ module Aws::EFS
 
     # <p>Returned if the source file system in a replication is encrypted but the destination file system is unencrypted.</p>
     # @!attribute error_code
-    #   <p>The error code is a string that uniquely identifies an error condition. 
+    #   <p>The error code is a string that uniquely identifies an error condition.
     #           It is meant to be read and understood by programs that detect and handle errors by type. </p>
     #   @return [String]
     # @!attribute message
-    #   <p>The error message contains a generic description of the error 
-    #           condition in English. It is intended for a human audience. Simple programs display the message directly 
-    #           to the end user if they encounter an error condition they don't know how or don't care to handle. 
-    #           Sophisticated programs with more exhaustive error handling and proper internationalization are 
+    #   <p>The error message contains a generic description of the error
+    #           condition in English. It is intended for a human audience. Simple programs display the message directly
+    #           to the end user if they encounter an error condition they don't know how or don't care to handle.
+    #           Sophisticated programs with more exhaustive error handling and proper internationalization are
     #           more likely to ignore the error message.</p>
     #   @return [String]
     class ConflictException < Struct.new(
@@ -291,7 +291,7 @@ module Aws::EFS
     #         creation.</p>
     #   @return [String]
     # @!attribute tags
-    #   <p>Creates tags associated with the access point. Each tag is a key-value pair, each key must be unique. For more 
+    #   <p>Creates tags associated with the access point. Each tag is a key-value pair, each key must be unique. For more
     #         information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services resources</a>
     #         in the <i>Amazon Web Services General Reference Guide</i>.</p>
     #   @return [Array<Types::Tag>]
@@ -309,8 +309,8 @@ module Aws::EFS
     #           <code>RootDirectory</code> > <code>Path</code> specified does not exist, Amazon EFS creates it and applies the <code>CreationInfo</code> settings when a client connects to an
     #         access point. When specifying a <code>RootDirectory</code>, you must provide the
     #           <code>Path</code>, and the <code>CreationInfo</code>.</p>
-    #            <p>Amazon EFS creates a root directory only if you have provided the  CreationInfo: OwnUid, OwnGID, and permissions for the directory. 
-    #         If  you do not provide this information, Amazon EFS does not create the root directory. If the root directory does not exist, attempts to mount 
+    #            <p>Amazon EFS creates a root directory only if you have provided the  CreationInfo: OwnUid, OwnGID, and permissions for the directory.
+    #         If  you do not provide this information, Amazon EFS does not create the root directory. If the root directory does not exist, attempts to mount
     #         using the access point will fail.</p>
     #   @return [Types::RootDirectory]
     class CreateAccessPointRequest < Struct.new(
@@ -380,8 +380,8 @@ module Aws::EFS
     #   <p>The ID of an KMS key used to protect the encrypted file system.</p>
     #   @return [String]
     # @!attribute throughput_mode
-    #   <p>Displays the file system's throughput mode. For more information, see 
-    #         <a href="https://docs.aws.amazon.com/efs/latest/ug/performance.html#throughput-modes">Throughput modes</a> 
+    #   <p>Displays the file system's throughput mode. For more information, see
+    #         <a href="https://docs.aws.amazon.com/efs/latest/ug/performance.html#throughput-modes">Throughput modes</a>
     #         in the <i>Amazon EFS User Guide</i>.
     #       </p>
     #   @return [String]
@@ -482,10 +482,10 @@ module Aws::EFS
     #               <code>arn:aws:kms:us-west-2:444455556666:alias/projectKey1</code>.</p>
     #               </li>
     #            </ul>
-    #            <p>If you use <code>KmsKeyId</code>, you must set the <a>CreateFileSystemRequest$Encrypted</a> 
+    #            <p>If you use <code>KmsKeyId</code>, you must set the <a>CreateFileSystemRequest$Encrypted</a>
     #         parameter to true.</p>
     #            <important>
-    #               <p>EFS accepts only symmetric KMS keys. You cannot use asymmetric 
+    #               <p>EFS accepts only symmetric KMS keys. You cannot use asymmetric
     #         KMS keys with Amazon EFS file systems.</p>
     #            </important>
     #   @return [String]
@@ -504,7 +504,7 @@ module Aws::EFS
     #   <p>The throughput, measured in mebibytes per second (MiBps), that you want to provision for a
     #         file system that you're creating. Required if <code>ThroughputMode</code> is set to
     #           <code>provisioned</code>. Valid values are 1-3414 MiBps, with the upper limit depending on
-    #         Region. To increase this limit, contact Amazon Web ServicesSupport. For more information, see <a href="https://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits">Amazon EFS quotas
+    #         Region. To increase this limit, contact Amazon Web Services Support. For more information, see <a href="https://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits">Amazon EFS quotas
     #           that you can increase</a> in the <i>Amazon EFS User
     #         Guide</i>.</p>
     #   @return [Float]
@@ -523,7 +523,7 @@ module Aws::EFS
     #         One Zone file system, automatic backups are enabled by default. For more
     #         information, see <a href="https://docs.aws.amazon.com/efs/latest/ug/awsbackup.html#automatic-backups">Automatic backups</a> in the
     #             <i>Amazon EFS User Guide</i>.</p>
-    #            <p>Default is <code>false</code>. However, if you specify an <code>AvailabilityZoneName</code>, 
+    #            <p>Default is <code>false</code>. However, if you specify an <code>AvailabilityZoneName</code>,
     #         the default is <code>true</code>.</p>
     #            <note>
     #               <p>Backup is not available in all Amazon Web Services Regions where Amazon EFS is available.</p>
@@ -532,7 +532,7 @@ module Aws::EFS
     # @!attribute tags
     #   <p>Use to create one or more tags associated with the file system. Each
     #           tag is a user-defined key-value pair. Name your file system on creation by including a
-    #           <code>"Key":"Name","Value":"{value}"</code> key-value pair. Each key must be unique. For more 
+    #           <code>"Key":"Name","Value":"{value}"</code> key-value pair. Each key must be unique. For more
     #           information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services resources</a>
     #           in the <i>Amazon Web Services General Reference Guide</i>.</p>
     #   @return [Array<Types::Tag>]
@@ -705,7 +705,7 @@ module Aws::EFS
     end
 
     # @!attribute source_file_system_id
-    #   <p>Specifies the Amazon EFS file system that you want to replicate. This file system cannot already be 
+    #   <p>Specifies the Amazon EFS file system that you want to replicate. This file system cannot already be
     #       a source or destination file system in another replication configuration.</p>
     #   @return [String]
     # @!attribute destinations
@@ -738,16 +738,16 @@ module Aws::EFS
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Required if the <code>RootDirectory</code> > <code>Path</code> specified does not exist. 
-    #       Specifies the POSIX IDs and permissions to apply to the access point's <code>RootDirectory</code> > <code>Path</code>. 
-    #       If the access point root directory does not exist, EFS creates it with these settings when a client connects to the access point. 
-    #       When specifying <code>CreationInfo</code>, you must include values for all properties. 
+    # <p>Required if the <code>RootDirectory</code> > <code>Path</code> specified does not exist.
+    #       Specifies the POSIX IDs and permissions to apply to the access point's <code>RootDirectory</code> > <code>Path</code>.
+    #       If the access point root directory does not exist, EFS creates it with these settings when a client connects to the access point.
+    #       When specifying <code>CreationInfo</code>, you must include values for all properties.
     #    </p>
-    #          <p>Amazon EFS creates a root directory only if you have provided the  CreationInfo: OwnUid, OwnGID, and permissions for the directory. 
-    #       If  you do not provide this information, Amazon EFS does not create the root directory. If the root directory does not exist, attempts to mount 
+    #          <p>Amazon EFS creates a root directory only if you have provided the  CreationInfo: OwnUid, OwnGID, and permissions for the directory.
+    #       If  you do not provide this information, Amazon EFS does not create the root directory. If the root directory does not exist, attempts to mount
     #       using the access point will fail.</p>
     #          <important>
-    #             <p>If you do not provide <code>CreationInfo</code> and the specified <code>RootDirectory</code> does not exist, 
+    #             <p>If you do not provide <code>CreationInfo</code> and the specified <code>RootDirectory</code> does not exist,
     #       attempts to mount the file system using the access point will fail.</p>
     #          </important>
     # @!attribute owner_uid
@@ -820,19 +820,19 @@ module Aws::EFS
     #   <p>The ID of the source file system in the replication configuration.</p>
     #   @return [String]
     # @!attribute deletion_mode
-    #   <p>When replicating across Amazon Web Services accounts or across Amazon Web Services Regions, 
-    #         Amazon EFS deletes the replication configuration from both the source 
-    #         and destination account or Region (<code>ALL_CONFIGURATIONS</code>) by default. 
-    #         If there's a configuration or permissions issue that prevents Amazon EFS from deleting the 
+    #   <p>When replicating across Amazon Web Services accounts or across Amazon Web Services Regions,
+    #         Amazon EFS deletes the replication configuration from both the source
+    #         and destination account or Region (<code>ALL_CONFIGURATIONS</code>) by default.
+    #         If there's a configuration or permissions issue that prevents Amazon EFS from deleting the
     #         replication configuration from both sides, you can use the <code>LOCAL_CONFIGURATION_ONLY</code> mode
     #         to delete the replication configuration from only the local side (the account
     #          or Region from which the delete is performed). </p>
     #            <note>
     #               <p>Only use the <code>LOCAL_CONFIGURATION_ONLY</code> mode in the case that Amazon EFS is unable
-    #          to delete the replication configuration in both the source and destination account or Region. 
-    #           Deleting the local configuration 
+    #          to delete the replication configuration in both the source and destination account or Region.
+    #           Deleting the local configuration
     #          leaves the configuration in the other account or Region unrecoverable.</p>
-    #               <p>Additionally, do not use this mode for same-account, same-region replication as doing so results in a 
+    #               <p>Additionally, do not use this mode for same-account, same-region replication as doing so results in a
     #           BadRequest exception error.</p>
     #            </note>
     #   @return [String]
@@ -864,14 +864,14 @@ module Aws::EFS
     # <p>The service timed out trying to fulfill the request, and the client should try the
     #             call again.</p>
     # @!attribute error_code
-    #   <p>The error code is a string that uniquely identifies an error condition. 
+    #   <p>The error code is a string that uniquely identifies an error condition.
     #           It is meant to be read and understood by programs that detect and handle errors by type. </p>
     #   @return [String]
     # @!attribute message
-    #   <p>The error message contains a generic description of the error 
-    #           condition in English. It is intended for a human audience. Simple programs display the message directly 
-    #           to the end user if they encounter an error condition they don't know how or don't care to handle. 
-    #           Sophisticated programs with more exhaustive error handling and proper internationalization are 
+    #   <p>The error message contains a generic description of the error
+    #           condition in English. It is intended for a human audience. Simple programs display the message directly
+    #           to the end user if they encounter an error condition they don't know how or don't care to handle.
+    #           Sophisticated programs with more exhaustive error handling and proper internationalization are
     #           more likely to ignore the error message.</p>
     #   @return [String]
     class DependencyTimeout < Struct.new(
@@ -885,12 +885,12 @@ module Aws::EFS
 
     # @!attribute max_results
     #   <p>(Optional) When retrieving all access points for a file system,
-    #         you can optionally specify the <code>MaxItems</code> parameter to limit the number of objects returned in a response.  
+    #         you can optionally specify the <code>MaxItems</code> parameter to limit the number of objects returned in a response.
     #         The default value is 100. </p>
     #   @return [Integer]
     # @!attribute next_token
     #   <p>
-    #               <code>NextToken</code> is present if the response is paginated. You can use 
+    #               <code>NextToken</code> is present if the response is paginated. You can use
     #         <code>NextMarker</code> in the subsequent request to fetch the next page of access point descriptions.</p>
     #   @return [String]
     # @!attribute access_point_id
@@ -916,7 +916,7 @@ module Aws::EFS
     #   <p>An array of access point descriptions.</p>
     #   @return [Array<Types::AccessPointDescription>]
     # @!attribute next_token
-    #   <p>Present if there are more access points than returned in the response. 
+    #   <p>Present if there are more access points than returned in the response.
     #         You can use the NextMarker in the subsequent request to fetch the additional descriptions.</p>
     #   @return [String]
     class DescribeAccessPointsResponse < Struct.new(
@@ -929,12 +929,12 @@ module Aws::EFS
     end
 
     # @!attribute next_token
-    #   <p>(Optional) You can use <code>NextToken</code> in a subsequent request to fetch the next page of 
+    #   <p>(Optional) You can use <code>NextToken</code> in a subsequent request to fetch the next page of
     #         Amazon Web Services account preferences if the response payload was paginated.</p>
     #   @return [String]
     # @!attribute max_results
     #   <p>(Optional) When retrieving account preferences,
-    #         you can optionally specify the <code>MaxItems</code> parameter to limit the number of objects returned in a response.  
+    #         you can optionally specify the <code>MaxItems</code> parameter to limit the number of objects returned in a response.
     #         The default value is 100. </p>
     #   @return [Integer]
     class DescribeAccountPreferencesRequest < Struct.new(
@@ -950,7 +950,7 @@ module Aws::EFS
     #   <p>Describes the resource ID preference setting for the Amazon Web Services account associated with the user making the request, in the current Amazon Web Services Region.</p>
     #   @return [Types::ResourceIdPreference]
     # @!attribute next_token
-    #   <p>Present if there are more records than returned in the response. 
+    #   <p>Present if there are more records than returned in the response.
     #         You can use the <code>NextToken</code> in the subsequent request to fetch the additional descriptions.</p>
     #   @return [String]
     class DescribeAccountPreferencesResponse < Struct.new(
@@ -1200,7 +1200,7 @@ module Aws::EFS
     #   <p>The collection of replication configurations that is returned.</p>
     #   @return [Array<Types::ReplicationConfigurationDescription>]
     # @!attribute next_token
-    #   <p>You can use the <code>NextToken</code> from the previous response in a subsequent 
+    #   <p>You can use the <code>NextToken</code> from the previous response in a subsequent
     #         request to fetch the additional descriptions.</p>
     #   @return [String]
     class DescribeReplicationConfigurationsResponse < Struct.new(
@@ -1262,9 +1262,9 @@ module Aws::EFS
 
     # <p>Describes the destination file system in the replication configuration.</p>
     # @!attribute status
-    #   <p>Describes the status of the replication configuration. For more information 
+    #   <p>Describes the status of the replication configuration. For more information
     #       about replication status, see <a href="https://docs.aws.amazon.com/efs/latest/ug/awsbackup.html#restoring-backup-efsmonitoring-replication-status.html">Viewing
-    #         replication details</a> in the <i>Amazon EFS User Guide</i>. 
+    #         replication details</a> in the <i>Amazon EFS User Guide</i>.
     #       </p>
     #   @return [String]
     # @!attribute file_system_id
@@ -1283,10 +1283,10 @@ module Aws::EFS
     #   <p>ID of the Amazon Web Services account in which the destination file system resides.</p>
     #   @return [String]
     # @!attribute status_message
-    #   <p>Message that provides details about the <code>PAUSED</code> or <code>ERRROR</code> state 
-    #         of the replication destination configuration. For more information 
+    #   <p>Message that provides details about the <code>PAUSED</code> or <code>ERRROR</code> state
+    #         of the replication destination configuration. For more information
     #         about replication status messages, see <a href="https://docs.aws.amazon.com/efs/latest/ug/awsbackup.html#restoring-backup-efsmonitoring-replication-status.html">Viewing
-    #           replication details</a> in the <i>Amazon EFS User Guide</i>. 
+    #           replication details</a> in the <i>Amazon EFS User Guide</i>.
     #       </p>
     #   @return [String]
     # @!attribute role_arn
@@ -1324,7 +1324,7 @@ module Aws::EFS
     #             </li>
     #             <li>
     #                <p>If you want to replicate to an existing file system that's in the same account
-    #           as the source file system, then you need to 
+    #           as the source file system, then you need to
     #           provide the ID or Amazon Resource Name (ARN) of the file system to which to replicate. The file system's replication
     #           overwrite protection must be disabled. For more information, see <a href="https://docs.aws.amazon.com/efs/latest/ug/efs-replication#replicate-existing-destination">Replicating to
     #             an existing file system</a> in the <i>Amazon EFS User
@@ -1372,9 +1372,9 @@ module Aws::EFS
     #            </ul>
     #   @return [String]
     # @!attribute file_system_id
-    #   <p>The ID or ARN of the file system to use for the destination. 
-    #         For cross-account replication, this must be an  ARN. The file system's 
-    #         replication overwrite replication must be disabled. If no ID or ARN is 
+    #   <p>The ID or ARN of the file system to use for the destination.
+    #         For cross-account replication, this must be an  ARN. The file system's
+    #         replication overwrite replication must be disabled. If no ID or ARN is
     #         specified, then a new file system is created. </p>
     #            <note>
     #               <p>When you initially configure replication to an existing file system, Amazon EFS
@@ -1403,14 +1403,14 @@ module Aws::EFS
     # <p>Returned if the file system you are trying to create already exists, with the
     #             creation token you provided.</p>
     # @!attribute error_code
-    #   <p>The error code is a string that uniquely identifies an error condition. 
+    #   <p>The error code is a string that uniquely identifies an error condition.
     #           It is meant to be read and understood by programs that detect and handle errors by type. </p>
     #   @return [String]
     # @!attribute message
-    #   <p>The error message contains a generic description of the error 
-    #           condition in English. It is intended for a human audience. Simple programs display the message directly 
-    #           to the end user if they encounter an error condition they don't know how or don't care to handle. 
-    #           Sophisticated programs with more exhaustive error handling and proper internationalization are 
+    #   <p>The error message contains a generic description of the error
+    #           condition in English. It is intended for a human audience. Simple programs display the message directly
+    #           to the end user if they encounter an error condition they don't know how or don't care to handle.
+    #           Sophisticated programs with more exhaustive error handling and proper internationalization are
     #           more likely to ignore the error message.</p>
     #   @return [String]
     # @!attribute file_system_id
@@ -1480,8 +1480,8 @@ module Aws::EFS
     #   <p>The ID of an KMS key used to protect the encrypted file system.</p>
     #   @return [String]
     # @!attribute throughput_mode
-    #   <p>Displays the file system's throughput mode. For more information, see 
-    #         <a href="https://docs.aws.amazon.com/efs/latest/ug/performance.html#throughput-modes">Throughput modes</a> 
+    #   <p>Displays the file system's throughput mode. For more information, see
+    #         <a href="https://docs.aws.amazon.com/efs/latest/ug/performance.html#throughput-modes">Throughput modes</a>
     #         in the <i>Amazon EFS User Guide</i>.
     #       </p>
     #   @return [String]
@@ -1539,14 +1539,14 @@ module Aws::EFS
 
     # <p>Returned if a file system has mount targets.</p>
     # @!attribute error_code
-    #   <p>The error code is a string that uniquely identifies an error condition. 
+    #   <p>The error code is a string that uniquely identifies an error condition.
     #           It is meant to be read and understood by programs that detect and handle errors by type. </p>
     #   @return [String]
     # @!attribute message
-    #   <p>The error message contains a generic description of the error 
-    #           condition in English. It is intended for a human audience. Simple programs display the message directly 
-    #           to the end user if they encounter an error condition they don't know how or don't care to handle. 
-    #           Sophisticated programs with more exhaustive error handling and proper internationalization are 
+    #   <p>The error message contains a generic description of the error
+    #           condition in English. It is intended for a human audience. Simple programs display the message directly
+    #           to the end user if they encounter an error condition they don't know how or don't care to handle.
+    #           Sophisticated programs with more exhaustive error handling and proper internationalization are
     #           more likely to ignore the error message.</p>
     #   @return [String]
     class FileSystemInUse < Struct.new(
@@ -1561,14 +1561,14 @@ module Aws::EFS
     # <p>Returned if the Amazon Web Services account has already created the maximum number of file systems
     #             allowed per account.</p>
     # @!attribute error_code
-    #   <p>The error code is a string that uniquely identifies an error condition. 
+    #   <p>The error code is a string that uniquely identifies an error condition.
     #           It is meant to be read and understood by programs that detect and handle errors by type. </p>
     #   @return [String]
     # @!attribute message
-    #   <p>The error message contains a generic description of the error 
-    #           condition in English. It is intended for a human audience. Simple programs display the message directly 
-    #           to the end user if they encounter an error condition they don't know how or don't care to handle. 
-    #           Sophisticated programs with more exhaustive error handling and proper internationalization are 
+    #   <p>The error message contains a generic description of the error
+    #           condition in English. It is intended for a human audience. Simple programs display the message directly
+    #           to the end user if they encounter an error condition they don't know how or don't care to handle.
+    #           Sophisticated programs with more exhaustive error handling and proper internationalization are
     #           more likely to ignore the error message.</p>
     #   @return [String]
     class FileSystemLimitExceeded < Struct.new(
@@ -1583,14 +1583,14 @@ module Aws::EFS
     # <p>Returned if the specified <code>FileSystemId</code> value doesn't exist in the
     #             requester's Amazon Web Services account.</p>
     # @!attribute error_code
-    #   <p>The error code is a string that uniquely identifies an error condition. 
+    #   <p>The error code is a string that uniquely identifies an error condition.
     #           It is meant to be read and understood by programs that detect and handle errors by type. </p>
     #   @return [String]
     # @!attribute message
-    #   <p>The error message contains a generic description of the error 
-    #           condition in English. It is intended for a human audience. Simple programs display the message directly 
-    #           to the end user if they encounter an error condition they don't know how or don't care to handle. 
-    #           Sophisticated programs with more exhaustive error handling and proper internationalization are 
+    #   <p>The error message contains a generic description of the error
+    #           condition in English. It is intended for a human audience. Simple programs display the message directly
+    #           to the end user if they encounter an error condition they don't know how or don't care to handle.
+    #           Sophisticated programs with more exhaustive error handling and proper internationalization are
     #           more likely to ignore the error message.</p>
     #   @return [String]
     class FileSystemNotFound < Struct.new(
@@ -1681,14 +1681,14 @@ module Aws::EFS
 
     # <p>Returned if the file system's lifecycle state is not "available".</p>
     # @!attribute error_code
-    #   <p>The error code is a string that uniquely identifies an error condition. 
+    #   <p>The error code is a string that uniquely identifies an error condition.
     #           It is meant to be read and understood by programs that detect and handle errors by type. </p>
     #   @return [String]
     # @!attribute message
-    #   <p>The error message contains a generic description of the error 
-    #           condition in English. It is intended for a human audience. Simple programs display the message directly 
-    #           to the end user if they encounter an error condition they don't know how or don't care to handle. 
-    #           Sophisticated programs with more exhaustive error handling and proper internationalization are 
+    #   <p>The error message contains a generic description of the error
+    #           condition in English. It is intended for a human audience. Simple programs display the message directly
+    #           to the end user if they encounter an error condition they don't know how or don't care to handle.
+    #           Sophisticated programs with more exhaustive error handling and proper internationalization are
     #           more likely to ignore the error message.</p>
     #   @return [String]
     class IncorrectFileSystemLifeCycleState < Struct.new(
@@ -1703,14 +1703,14 @@ module Aws::EFS
     # <p>Returned if the mount target is not in the correct state for the
     #             operation.</p>
     # @!attribute error_code
-    #   <p>The error code is a string that uniquely identifies an error condition. 
+    #   <p>The error code is a string that uniquely identifies an error condition.
     #           It is meant to be read and understood by programs that detect and handle errors by type. </p>
     #   @return [String]
     # @!attribute message
-    #   <p>The error message contains a generic description of the error 
-    #           condition in English. It is intended for a human audience. Simple programs display the message directly 
-    #           to the end user if they encounter an error condition they don't know how or don't care to handle. 
-    #           Sophisticated programs with more exhaustive error handling and proper internationalization are 
+    #   <p>The error message contains a generic description of the error
+    #           condition in English. It is intended for a human audience. Simple programs display the message directly
+    #           to the end user if they encounter an error condition they don't know how or don't care to handle.
+    #           Sophisticated programs with more exhaustive error handling and proper internationalization are
     #           more likely to ignore the error message.</p>
     #   @return [String]
     class IncorrectMountTargetState < Struct.new(
@@ -1728,14 +1728,14 @@ module Aws::EFS
     #             when you attempt to change an existing file system from Bursting Throughput to
     #             Provisioned Throughput mode. Try again later.</p>
     # @!attribute error_code
-    #   <p>The error code is a string that uniquely identifies an error condition. 
+    #   <p>The error code is a string that uniquely identifies an error condition.
     #           It is meant to be read and understood by programs that detect and handle errors by type. </p>
     #   @return [String]
     # @!attribute message
-    #   <p>The error message contains a generic description of the error 
-    #           condition in English. It is intended for a human audience. Simple programs display the message directly 
-    #           to the end user if they encounter an error condition they don't know how or don't care to handle. 
-    #           Sophisticated programs with more exhaustive error handling and proper internationalization are 
+    #   <p>The error message contains a generic description of the error
+    #           condition in English. It is intended for a human audience. Simple programs display the message directly
+    #           to the end user if they encounter an error condition they don't know how or don't care to handle.
+    #           Sophisticated programs with more exhaustive error handling and proper internationalization are
     #           more likely to ignore the error message.</p>
     #   @return [String]
     class InsufficientThroughputCapacity < Struct.new(
@@ -1749,14 +1749,14 @@ module Aws::EFS
 
     # <p>Returned if an error occurred on the server side.</p>
     # @!attribute error_code
-    #   <p>The error code is a string that uniquely identifies an error condition. 
+    #   <p>The error code is a string that uniquely identifies an error condition.
     #           It is meant to be read and understood by programs that detect and handle errors by type. </p>
     #   @return [String]
     # @!attribute message
-    #   <p>The error message contains a generic description of the error 
-    #           condition in English. It is intended for a human audience. Simple programs display the message directly 
-    #           to the end user if they encounter an error condition they don't know how or don't care to handle. 
-    #           Sophisticated programs with more exhaustive error handling and proper internationalization are 
+    #   <p>The error message contains a generic description of the error
+    #           condition in English. It is intended for a human audience. Simple programs display the message directly
+    #           to the end user if they encounter an error condition they don't know how or don't care to handle.
+    #           Sophisticated programs with more exhaustive error handling and proper internationalization are
     #           more likely to ignore the error message.</p>
     #   @return [String]
     class InternalServerError < Struct.new(
@@ -1772,14 +1772,14 @@ module Aws::EFS
     #             as a parameter value that is not valid or a missing required parameter. Returned in the
     #             case of a policy lockout safety check error.</p>
     # @!attribute error_code
-    #   <p>The error code is a string that uniquely identifies an error condition. 
+    #   <p>The error code is a string that uniquely identifies an error condition.
     #           It is meant to be read and understood by programs that detect and handle errors by type. </p>
     #   @return [String]
     # @!attribute message
-    #   <p>The error message contains a generic description of the error 
-    #           condition in English. It is intended for a human audience. Simple programs display the message directly 
-    #           to the end user if they encounter an error condition they don't know how or don't care to handle. 
-    #           Sophisticated programs with more exhaustive error handling and proper internationalization are 
+    #   <p>The error message contains a generic description of the error
+    #           condition in English. It is intended for a human audience. Simple programs display the message directly
+    #           to the end user if they encounter an error condition they don't know how or don't care to handle.
+    #           Sophisticated programs with more exhaustive error handling and proper internationalization are
     #           more likely to ignore the error message.</p>
     #   @return [String]
     class InvalidPolicyException < Struct.new(
@@ -1794,14 +1794,14 @@ module Aws::EFS
     # <p>Returned if the request specified an <code>IpAddress</code> that is already in use
     #             in the subnet.</p>
     # @!attribute error_code
-    #   <p>The error code is a string that uniquely identifies an error condition. 
+    #   <p>The error code is a string that uniquely identifies an error condition.
     #           It is meant to be read and understood by programs that detect and handle errors by type. </p>
     #   @return [String]
     # @!attribute message
-    #   <p>The error message contains a generic description of the error 
-    #           condition in English. It is intended for a human audience. Simple programs display the message directly 
-    #           to the end user if they encounter an error condition they don't know how or don't care to handle. 
-    #           Sophisticated programs with more exhaustive error handling and proper internationalization are 
+    #   <p>The error message contains a generic description of the error
+    #           condition in English. It is intended for a human audience. Simple programs display the message directly
+    #           to the end user if they encounter an error condition they don't know how or don't care to handle.
+    #           Sophisticated programs with more exhaustive error handling and proper internationalization are
     #           more likely to ignore the error message.</p>
     #   @return [String]
     class IpAddressInUse < Struct.new(
@@ -1906,14 +1906,14 @@ module Aws::EFS
     # <p>Returned if the mount target would violate one of the specified restrictions based
     #             on the file system's existing mount targets.</p>
     # @!attribute error_code
-    #   <p>The error code is a string that uniquely identifies an error condition. 
+    #   <p>The error code is a string that uniquely identifies an error condition.
     #           It is meant to be read and understood by programs that detect and handle errors by type. </p>
     #   @return [String]
     # @!attribute message
-    #   <p>The error message contains a generic description of the error 
-    #           condition in English. It is intended for a human audience. Simple programs display the message directly 
-    #           to the end user if they encounter an error condition they don't know how or don't care to handle. 
-    #           Sophisticated programs with more exhaustive error handling and proper internationalization are 
+    #   <p>The error message contains a generic description of the error
+    #           condition in English. It is intended for a human audience. Simple programs display the message directly
+    #           to the end user if they encounter an error condition they don't know how or don't care to handle.
+    #           Sophisticated programs with more exhaustive error handling and proper internationalization are
     #           more likely to ignore the error message.</p>
     #   @return [String]
     class MountTargetConflict < Struct.new(
@@ -1986,14 +1986,14 @@ module Aws::EFS
     # <p>Returned if there is no mount target with the specified ID found in the
     #             caller's Amazon Web Services account.</p>
     # @!attribute error_code
-    #   <p>The error code is a string that uniquely identifies an error condition. 
+    #   <p>The error code is a string that uniquely identifies an error condition.
     #           It is meant to be read and understood by programs that detect and handle errors by type. </p>
     #   @return [String]
     # @!attribute message
-    #   <p>The error message contains a generic description of the error 
-    #           condition in English. It is intended for a human audience. Simple programs display the message directly 
-    #           to the end user if they encounter an error condition they don't know how or don't care to handle. 
-    #           Sophisticated programs with more exhaustive error handling and proper internationalization are 
+    #   <p>The error message contains a generic description of the error
+    #           condition in English. It is intended for a human audience. Simple programs display the message directly
+    #           to the end user if they encounter an error condition they don't know how or don't care to handle.
+    #           Sophisticated programs with more exhaustive error handling and proper internationalization are
     #           more likely to ignore the error message.</p>
     #   @return [String]
     class MountTargetNotFound < Struct.new(
@@ -2012,14 +2012,14 @@ module Aws::EFS
     #                 interfaces per Region</b> entry in the <b>Network
     #                 interfaces</b> table). </p>
     # @!attribute error_code
-    #   <p>The error code is a string that uniquely identifies an error condition. 
+    #   <p>The error code is a string that uniquely identifies an error condition.
     #           It is meant to be read and understood by programs that detect and handle errors by type. </p>
     #   @return [String]
     # @!attribute message
-    #   <p>The error message contains a generic description of the error 
-    #           condition in English. It is intended for a human audience. Simple programs display the message directly 
-    #           to the end user if they encounter an error condition they don't know how or don't care to handle. 
-    #           Sophisticated programs with more exhaustive error handling and proper internationalization are 
+    #   <p>The error message contains a generic description of the error
+    #           condition in English. It is intended for a human audience. Simple programs display the message directly
+    #           to the end user if they encounter an error condition they don't know how or don't care to handle.
+    #           Sophisticated programs with more exhaustive error handling and proper internationalization are
     #           more likely to ignore the error message.</p>
     #   @return [String]
     class NetworkInterfaceLimitExceeded < Struct.new(
@@ -2034,14 +2034,14 @@ module Aws::EFS
     # <p>Returned if <code>IpAddress</code> was not specified in the request and there are
     #             no free IP addresses in the subnet.</p>
     # @!attribute error_code
-    #   <p>The error code is a string that uniquely identifies an error condition. 
+    #   <p>The error code is a string that uniquely identifies an error condition.
     #           It is meant to be read and understood by programs that detect and handle errors by type. </p>
     #   @return [String]
     # @!attribute message
-    #   <p>The error message contains a generic description of the error 
-    #           condition in English. It is intended for a human audience. Simple programs display the message directly 
-    #           to the end user if they encounter an error condition they don't know how or don't care to handle. 
-    #           Sophisticated programs with more exhaustive error handling and proper internationalization are 
+    #   <p>The error message contains a generic description of the error
+    #           condition in English. It is intended for a human audience. Simple programs display the message directly
+    #           to the end user if they encounter an error condition they don't know how or don't care to handle.
+    #           Sophisticated programs with more exhaustive error handling and proper internationalization are
     #           more likely to ignore the error message.</p>
     #   @return [String]
     class NoFreeAddressesInSubnet < Struct.new(
@@ -2055,14 +2055,14 @@ module Aws::EFS
 
     # <p>Returned if <code>no backup</code> is specified for a One Zone EFS file system.</p>
     # @!attribute error_code
-    #   <p>The error code is a string that uniquely identifies an error condition. 
+    #   <p>The error code is a string that uniquely identifies an error condition.
     #           It is meant to be read and understood by programs that detect and handle errors by type. </p>
     #   @return [String]
     # @!attribute message
-    #   <p>The error message contains a generic description of the error 
-    #           condition in English. It is intended for a human audience. Simple programs display the message directly 
-    #           to the end user if they encounter an error condition they don't know how or don't care to handle. 
-    #           Sophisticated programs with more exhaustive error handling and proper internationalization are 
+    #   <p>The error message contains a generic description of the error
+    #           condition in English. It is intended for a human audience. Simple programs display the message directly
+    #           to the end user if they encounter an error condition they don't know how or don't care to handle.
+    #           Sophisticated programs with more exhaustive error handling and proper internationalization are
     #           more likely to ignore the error message.</p>
     #   @return [String]
     class PolicyNotFound < Struct.new(
@@ -2177,10 +2177,10 @@ module Aws::EFS
     #         out more about the elements that make up a file system policy, see <a href="https://docs.aws.amazon.com/efs/latest/ug/security_iam_service-with-iam.html#security_iam_service-with-iam-resource-based-policies">Resource-based policies within Amazon EFS</a>. </p>
     #   @return [String]
     # @!attribute bypass_policy_lockout_safety_check
-    #   <p>(Optional) A boolean that specifies whether or not to bypass the <code>FileSystemPolicy</code> lockout safety check. The lockout safety check 
+    #   <p>(Optional) A boolean that specifies whether or not to bypass the <code>FileSystemPolicy</code> lockout safety check. The lockout safety check
     #         determines whether the policy in the request will lock out, or prevent, the IAM principal that is making the request from making future <code>PutFileSystemPolicy</code> requests on this file system.
-    #         Set <code>BypassPolicyLockoutSafetyCheck</code> to <code>True</code> only when you intend to prevent 
-    #         the IAM principal that is making the request from making subsequent <code>PutFileSystemPolicy</code> requests on this file system. 
+    #         Set <code>BypassPolicyLockoutSafetyCheck</code> to <code>True</code> only when you intend to prevent
+    #         the IAM principal that is making the request from making subsequent <code>PutFileSystemPolicy</code> requests on this file system.
     #         The default value is <code>False</code>.
     #       </p>
     #   @return [Boolean]
@@ -2219,8 +2219,8 @@ module Aws::EFS
     #                  <p>
     #                     <b>
     #                        <code>TransitionToIA</code>
-    #                     </b> – 
-    #         When to move files in the file system from primary storage (Standard storage class) into the Infrequent Access 
+    #                     </b> –
+    #         When to move files in the file system from primary storage (Standard storage class) into the Infrequent Access
     #           (IA) storage.</p>
     #               </li>
     #               <li>
@@ -2228,12 +2228,12 @@ module Aws::EFS
     #                     <b>
     #                        <code>TransitionToArchive</code>
     #                     </b> –
-    #             When to move files in the file system from their current storage class (either IA or Standard storage) into the 
+    #             When to move files in the file system from their current storage class (either IA or Standard storage) into the
     #            Archive storage.</p>
-    #                  <p>File systems cannot transition into Archive storage before transitioning into IA  storage. Therefore,  
+    #                  <p>File systems cannot transition into Archive storage before transitioning into IA  storage. Therefore,
     #           TransitionToArchive must either not be set or must be later than TransitionToIA.</p>
     #                  <note>
-    #                     <p>The Archive storage class is available only for file systems that use the Elastic throughput mode 
+    #                     <p>The Archive storage class is available only for file systems that use the Elastic throughput mode
     #   and the General Purpose performance mode. </p>
     #                  </note>
     #               </li>
@@ -2265,14 +2265,14 @@ module Aws::EFS
 
     # <p>Returned if the file system is already included in a replication configuration.></p>
     # @!attribute error_code
-    #   <p>The error code is a string that uniquely identifies an error condition. 
+    #   <p>The error code is a string that uniquely identifies an error condition.
     #           It is meant to be read and understood by programs that detect and handle errors by type. </p>
     #   @return [String]
     # @!attribute message
-    #   <p>The error message contains a generic description of the error 
-    #           condition in English. It is intended for a human audience. Simple programs display the message directly 
-    #           to the end user if they encounter an error condition they don't know how or don't care to handle. 
-    #           Sophisticated programs with more exhaustive error handling and proper internationalization are 
+    #   <p>The error message contains a generic description of the error
+    #           condition in English. It is intended for a human audience. Simple programs display the message directly
+    #           to the end user if they encounter an error condition they don't know how or don't care to handle.
+    #           Sophisticated programs with more exhaustive error handling and proper internationalization are
     #           more likely to ignore the error message.</p>
     #   @return [String]
     class ReplicationAlreadyExists < Struct.new(
@@ -2329,10 +2329,10 @@ module Aws::EFS
     #   <p>ReplicationNotFound</p>
     #   @return [String]
     # @!attribute message
-    #   <p>The error message contains a generic description of the error 
-    #           condition in English. It is intended for a human audience. Simple programs display the message directly 
-    #           to the end user if they encounter an error condition they don't know how or don't care to handle. 
-    #           Sophisticated programs with more exhaustive error handling and proper internationalization are 
+    #   <p>The error message contains a generic description of the error
+    #           condition in English. It is intended for a human audience. Simple programs display the message directly
+    #           to the end user if they encounter an error condition they don't know how or don't care to handle.
+    #           Sophisticated programs with more exhaustive error handling and proper internationalization are
     #           more likely to ignore the error message.</p>
     #   @return [String]
     class ReplicationNotFound < Struct.new(
@@ -2379,7 +2379,7 @@ module Aws::EFS
     #           <code>CreationInfo</code> settings when a client connects to an access point. When
     #         specifying the <code>CreationInfo</code>, you must provide values for all properties. </p>
     #            <important>
-    #               <p>If you do not provide <code>CreationInfo</code> and the specified <code>RootDirectory</code> > <code>Path</code> does not exist, 
+    #               <p>If you do not provide <code>CreationInfo</code> and the specified <code>RootDirectory</code> > <code>Path</code> does not exist,
     #         attempts to mount the file system using the access point will fail.</p>
     #            </important>
     #   @return [Types::CreationInfo]
@@ -2399,14 +2399,14 @@ module Aws::EFS
     #             table).
     #         </p>
     # @!attribute error_code
-    #   <p>The error code is a string that uniquely identifies an error condition. 
+    #   <p>The error code is a string that uniquely identifies an error condition.
     #           It is meant to be read and understood by programs that detect and handle errors by type. </p>
     #   @return [String]
     # @!attribute message
-    #   <p>The error message contains a generic description of the error 
-    #           condition in English. It is intended for a human audience. Simple programs display the message directly 
-    #           to the end user if they encounter an error condition they don't know how or don't care to handle. 
-    #           Sophisticated programs with more exhaustive error handling and proper internationalization are 
+    #   <p>The error message contains a generic description of the error
+    #           condition in English. It is intended for a human audience. Simple programs display the message directly
+    #           to the end user if they encounter an error condition they don't know how or don't care to handle.
+    #           Sophisticated programs with more exhaustive error handling and proper internationalization are
     #           more likely to ignore the error message.</p>
     #   @return [String]
     class SecurityGroupLimitExceeded < Struct.new(
@@ -2421,14 +2421,14 @@ module Aws::EFS
     # <p>Returned if one of the specified security groups doesn't exist in the subnet's
     #             virtual private cloud (VPC).</p>
     # @!attribute error_code
-    #   <p>The error code is a string that uniquely identifies an error condition. 
+    #   <p>The error code is a string that uniquely identifies an error condition.
     #           It is meant to be read and understood by programs that detect and handle errors by type. </p>
     #   @return [String]
     # @!attribute message
-    #   <p>The error message contains a generic description of the error 
-    #           condition in English. It is intended for a human audience. Simple programs display the message directly 
-    #           to the end user if they encounter an error condition they don't know how or don't care to handle. 
-    #           Sophisticated programs with more exhaustive error handling and proper internationalization are 
+    #   <p>The error message contains a generic description of the error
+    #           condition in English. It is intended for a human audience. Simple programs display the message directly
+    #           to the end user if they encounter an error condition they don't know how or don't care to handle.
+    #           Sophisticated programs with more exhaustive error handling and proper internationalization are
     #           more likely to ignore the error message.</p>
     #   @return [String]
     class SecurityGroupNotFound < Struct.new(
@@ -2443,14 +2443,14 @@ module Aws::EFS
     # <p>Returned if there is no subnet with ID <code>SubnetId</code> provided in the
     #             request.</p>
     # @!attribute error_code
-    #   <p>The error code is a string that uniquely identifies an error condition. 
+    #   <p>The error code is a string that uniquely identifies an error condition.
     #           It is meant to be read and understood by programs that detect and handle errors by type. </p>
     #   @return [String]
     # @!attribute message
-    #   <p>The error message contains a generic description of the error 
-    #           condition in English. It is intended for a human audience. Simple programs display the message directly 
-    #           to the end user if they encounter an error condition they don't know how or don't care to handle. 
-    #           Sophisticated programs with more exhaustive error handling and proper internationalization are 
+    #   <p>The error message contains a generic description of the error
+    #           condition in English. It is intended for a human audience. Simple programs display the message directly
+    #           to the end user if they encounter an error condition they don't know how or don't care to handle.
+    #           Sophisticated programs with more exhaustive error handling and proper internationalization are
     #           more likely to ignore the error message.</p>
     #   @return [String]
     class SubnetNotFound < Struct.new(
@@ -2495,18 +2495,18 @@ module Aws::EFS
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Returned when the <code>CreateAccessPoint</code> API action is called too quickly and 
-    #             the number of Access Points on the file system is nearing the 
+    # <p>Returned when the <code>CreateAccessPoint</code> API action is called too quickly and
+    #             the number of Access Points on the file system is nearing the
     #             <a href="https://docs.aws.amazon.com/efs/latest/ug/limits.html#limits-efs-resources-per-account-per-region">limit of 120</a>.</p>
     # @!attribute error_code
-    #   <p>The error code is a string that uniquely identifies an error condition. 
+    #   <p>The error code is a string that uniquely identifies an error condition.
     #           It is meant to be read and understood by programs that detect and handle errors by type. </p>
     #   @return [String]
     # @!attribute message
-    #   <p>The error message contains a generic description of the error 
-    #           condition in English. It is intended for a human audience. Simple programs display the message directly 
-    #           to the end user if they encounter an error condition they don't know how or don't care to handle. 
-    #           Sophisticated programs with more exhaustive error handling and proper internationalization are 
+    #   <p>The error message contains a generic description of the error
+    #           condition in English. It is intended for a human audience. Simple programs display the message directly
+    #           to the end user if they encounter an error condition they don't know how or don't care to handle.
+    #           Sophisticated programs with more exhaustive error handling and proper internationalization are
     #           more likely to ignore the error message.</p>
     #   @return [String]
     class ThrottlingException < Struct.new(
@@ -2521,14 +2521,14 @@ module Aws::EFS
     # <p>Returned if the throughput mode or amount of provisioned throughput can't be changed
     #             because the throughput limit of 1024 MiB/s has been reached.</p>
     # @!attribute error_code
-    #   <p>The error code is a string that uniquely identifies an error condition. 
+    #   <p>The error code is a string that uniquely identifies an error condition.
     #           It is meant to be read and understood by programs that detect and handle errors by type. </p>
     #   @return [String]
     # @!attribute message
-    #   <p>The error message contains a generic description of the error 
-    #           condition in English. It is intended for a human audience. Simple programs display the message directly 
-    #           to the end user if they encounter an error condition they don't know how or don't care to handle. 
-    #           Sophisticated programs with more exhaustive error handling and proper internationalization are 
+    #   <p>The error message contains a generic description of the error
+    #           condition in English. It is intended for a human audience. Simple programs display the message directly
+    #           to the end user if they encounter an error condition they don't know how or don't care to handle.
+    #           Sophisticated programs with more exhaustive error handling and proper internationalization are
     #           more likely to ignore the error message.</p>
     #   @return [String]
     class ThroughputLimitExceeded < Struct.new(
@@ -2543,14 +2543,14 @@ module Aws::EFS
     # <p>Returned if you don’t wait at least 24 hours before either changing the throughput mode, or
     #             decreasing the Provisioned Throughput value.</p>
     # @!attribute error_code
-    #   <p>The error code is a string that uniquely identifies an error condition. 
+    #   <p>The error code is a string that uniquely identifies an error condition.
     #           It is meant to be read and understood by programs that detect and handle errors by type. </p>
     #   @return [String]
     # @!attribute message
-    #   <p>The error message contains a generic description of the error 
-    #           condition in English. It is intended for a human audience. Simple programs display the message directly 
-    #           to the end user if they encounter an error condition they don't know how or don't care to handle. 
-    #           Sophisticated programs with more exhaustive error handling and proper internationalization are 
+    #   <p>The error message contains a generic description of the error
+    #           condition in English. It is intended for a human audience. Simple programs display the message directly
+    #           to the end user if they encounter an error condition they don't know how or don't care to handle.
+    #           Sophisticated programs with more exhaustive error handling and proper internationalization are
     #           more likely to ignore the error message.</p>
     #   @return [String]
     class TooManyRequests < Struct.new(
@@ -2564,14 +2564,14 @@ module Aws::EFS
 
     # <p>Returned if the requested Amazon EFS functionality is not available in the specified Availability Zone.</p>
     # @!attribute error_code
-    #   <p>The error code is a string that uniquely identifies an error condition. 
+    #   <p>The error code is a string that uniquely identifies an error condition.
     #           It is meant to be read and understood by programs that detect and handle errors by type. </p>
     #   @return [String]
     # @!attribute message
-    #   <p>The error message contains a generic description of the error 
-    #           condition in English. It is intended for a human audience. Simple programs display the message directly 
-    #           to the end user if they encounter an error condition they don't know how or don't care to handle. 
-    #           Sophisticated programs with more exhaustive error handling and proper internationalization are 
+    #   <p>The error message contains a generic description of the error
+    #           condition in English. It is intended for a human audience. Simple programs display the message directly
+    #           to the end user if they encounter an error condition they don't know how or don't care to handle.
+    #           Sophisticated programs with more exhaustive error handling and proper internationalization are
     #           more likely to ignore the error message.</p>
     #   @return [String]
     class UnsupportedAvailabilityZone < Struct.new(
@@ -2654,8 +2654,8 @@ module Aws::EFS
     #   <p>The ID of an KMS key used to protect the encrypted file system.</p>
     #   @return [String]
     # @!attribute throughput_mode
-    #   <p>Displays the file system's throughput mode. For more information, see 
-    #         <a href="https://docs.aws.amazon.com/efs/latest/ug/performance.html#throughput-modes">Throughput modes</a> 
+    #   <p>Displays the file system's throughput mode. For more information, see
+    #         <a href="https://docs.aws.amazon.com/efs/latest/ug/performance.html#throughput-modes">Throughput modes</a>
     #         in the <i>Amazon EFS User Guide</i>.
     #       </p>
     #   @return [String]
@@ -2788,14 +2788,14 @@ module Aws::EFS
     # @!attribute throughput_mode
     #   <p>(Optional) Updates the file system's throughput mode. If you're not
     #         updating your throughput mode, you don't need to provide this value in your
-    #         request. If you are changing the <code>ThroughputMode</code> to <code>provisioned</code>, 
+    #         request. If you are changing the <code>ThroughputMode</code> to <code>provisioned</code>,
     #         you must also set a value for <code>ProvisionedThroughputInMibps</code>.</p>
     #   @return [String]
     # @!attribute provisioned_throughput_in_mibps
     #   <p>(Optional) The throughput, measured in mebibytes per second (MiBps), that you want to
     #         provision for a file system that you're creating. Required if <code>ThroughputMode</code>
     #         is set to <code>provisioned</code>. Valid values are 1-3414 MiBps, with the upper limit
-    #         depending on Region. To increase this limit, contact Amazon Web ServicesSupport. For more information,
+    #         depending on Region. To increase this limit, contact Amazon Web Services Support. For more information,
     #         see <a href="https://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits">Amazon EFS
     #           quotas that you can increase</a> in the <i>Amazon EFS User
     #           Guide</i>.</p>
@@ -2812,14 +2812,14 @@ module Aws::EFS
 
     # <p>Returned if the Backup service is not available in the Amazon Web Services Region in which the request was made.</p>
     # @!attribute error_code
-    #   <p>The error code is a string that uniquely identifies an error condition. 
+    #   <p>The error code is a string that uniquely identifies an error condition.
     #           It is meant to be read and understood by programs that detect and handle errors by type. </p>
     #   @return [String]
     # @!attribute message
-    #   <p>The error message contains a generic description of the error 
-    #           condition in English. It is intended for a human audience. Simple programs display the message directly 
-    #           to the end user if they encounter an error condition they don't know how or don't care to handle. 
-    #           Sophisticated programs with more exhaustive error handling and proper internationalization are 
+    #   <p>The error message contains a generic description of the error
+    #           condition in English. It is intended for a human audience. Simple programs display the message directly
+    #           to the end user if they encounter an error condition they don't know how or don't care to handle.
+    #           Sophisticated programs with more exhaustive error handling and proper internationalization are
     #           more likely to ignore the error message.</p>
     #   @return [String]
     class ValidationException < Struct.new(

@@ -24,6 +24,7 @@ module Aws::SocialMessaging
   #
   # * {AccessDeniedByMetaException}
   # * {AccessDeniedException}
+  # * {ConflictException}
   # * {DependencyException}
   # * {InternalServiceException}
   # * {InvalidParametersException}
@@ -54,6 +55,19 @@ module Aws::SocialMessaging
     class AccessDeniedException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SocialMessaging::Types::AccessDeniedException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>Your request has conflicting operations. This can occur if you're trying to perform more than one operation on the same resource at the same time.</p>
+    class ConflictException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::SocialMessaging::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
         super
       end

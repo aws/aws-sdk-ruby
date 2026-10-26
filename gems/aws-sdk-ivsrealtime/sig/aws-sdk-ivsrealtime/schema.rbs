@@ -63,6 +63,7 @@ module Aws::IVSRealTime
     EventErrorCode: EnumShape
     EventList: ListShape
     EventName: StringShape
+    ExchangedParticipantToken: StructureShape
     Framerate: FloatShape
     GetCompositionRequest: StructureShape
     GetCompositionResponse: StructureShape
@@ -181,6 +182,9 @@ module Aws::IVSRealTime
     RecordParticipantReplicas: BooleanShape
     RecordingConfiguration: StructureShape
     RecordingConfigurationFormat: StringShape
+    RedundantIngest: BooleanShape
+    RedundantIngestCredential: StructureShape
+    RedundantIngestCredentials: ListShape
     Replica: BooleanShape
     ReplicationState: StringShape
     ReplicationType: StringShape

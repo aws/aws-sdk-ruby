@@ -5,6 +5,7 @@ module Aws::MedicalImaging
     AccessDeniedException: StructureShape
     Arn: StringShape
     AwsAccountId: StringShape
+    BadRequestException: StructureShape
     ClientToken: StringShape
     ConflictException: StructureShape
     CopiableAttributes: StringShape
@@ -51,6 +52,9 @@ module Aws::MedicalImaging
     DeleteDatastoreResponse: StructureShape
     DeleteImageSetRequest: StructureShape
     DeleteImageSetResponse: StructureShape
+    DicomJsonMetadataImportConfiguration: StructureShape
+    DicomMetadataMapping: StructureShape
+    DicomMetadataMappings: ListShape
     GetDICOMImportJobRequest: StructureShape
     GetDICOMImportJobResponse: StructureShape
     GetDatastoreRequest: StructureShape
@@ -72,6 +76,7 @@ module Aws::MedicalImaging
     ImageSetWorkflowStatus: EnumShape
     ImageSetsMetadataSummaries: ListShape
     ImageSetsMetadataSummary: StructureShape
+    ImportConfiguration: UnionShape
     InternalServerException: StructureShape
     JobId: StringShape
     JobName: StringShape
@@ -86,10 +91,13 @@ module Aws::MedicalImaging
     ListImageSetVersionsResponse: StructureShape
     ListTagsForResourceRequest: StructureShape
     ListTagsForResourceResponse: StructureShape
+    LosslessStorageFormat: EnumShape
     Message: StringShape
     MetadataCopies: StructureShape
+    MetadataFilePath: StringShape
     MetadataUpdates: UnionShape
     NextToken: StringShape
+    NotAcceptableException: StructureShape
     Operator: EnumShape
     Overrides: StructureShape
     PayloadBlob: BlobShape
@@ -109,6 +117,7 @@ module Aws::MedicalImaging
     SortOrder: EnumShape
     StartDICOMImportJobRequest: StructureShape
     StartDICOMImportJobResponse: StructureShape
+    StorageTier: EnumShape
     TagKey: StringShape
     TagKeyList: ListShape
     TagMap: MapShape

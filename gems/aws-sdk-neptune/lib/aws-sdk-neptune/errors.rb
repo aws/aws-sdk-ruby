@@ -74,6 +74,7 @@ module Aws::Neptune
   # * {InvalidSubnet}
   # * {InvalidVPCNetworkStateFault}
   # * {KMSKeyNotAccessibleFault}
+  # * {NetworkTypeNotSupportedFault}
   # * {OptionGroupNotFoundFault}
   # * {ProvisionedIopsNotAvailableInAZFault}
   # * {ResourceNotFoundFault}
@@ -837,6 +838,20 @@ module Aws::Neptune
     class KMSKeyNotAccessibleFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Neptune::Types::KMSKeyNotAccessibleFault] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      # <p>A message describing the details of the problem.</p>
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>The specified <i>NetworkType</i> is not supported for the DB cluster, DB subnet group, or orderable DB instance option.</p>
+    class NetworkTypeNotSupportedFault < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::Neptune::Types::NetworkTypeNotSupportedFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
         super
       end

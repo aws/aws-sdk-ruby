@@ -49,6 +49,7 @@ module Aws::Organizations
   # * {HandshakeNotFoundException}
   # * {InvalidHandshakeTransitionException}
   # * {InvalidInputException}
+  # * {InvalidResponsibilityTransferTransitionException}
   # * {MalformedPolicyDocumentException}
   # * {MasterCannotLeaveOrganizationException}
   # * {OrganizationNotEmptyException}
@@ -63,6 +64,8 @@ module Aws::Organizations
   # * {PolicyTypeNotAvailableForOrganizationException}
   # * {PolicyTypeNotEnabledException}
   # * {ResourcePolicyNotFoundException}
+  # * {ResponsibilityTransferAlreadyInStatusException}
+  # * {ResponsibilityTransferNotFoundException}
   # * {RootNotFoundException}
   # * {ServiceException}
   # * {SourceParentNotFoundException}
@@ -276,12 +279,20 @@ module Aws::Organizations
     #             </li>
     #             <li>
     #                <p>ACCOUNT_CREATION_RATE_LIMIT_EXCEEDED: You attempted to exceed the number of
-    #                     accounts that you can create in one day.</p>
+    #                     accounts that can be in progress at a time.</p>
     #             </li>
     #             <li>
     #                <p>ACCOUNT_CREATION_NOT_COMPLETE: Your account setup isn't complete or your
     #                     account isn't fully active. You must complete the account setup before you
     #                     create an organization.</p>
+    #             </li>
+    #             <li>
+    #                <p>ACCOUNT_NOT_ACTIVE_FOR_TRANSFER_RESPONSIBILITY: Your account setup isn't
+    #                     complete or your account isn't fully active to invite or accept a Billing
+    #                     Transfer invitation.</p>
+    #             </li>
+    #             <li>
+    #                <p>ACTIVE_RESPONSIBILITY_TRANSFER_PROCESS: You cannot delete organization due to an ongoing responsibility transfer process. For example, a pending invitation or an in-progress transfer. To delete the organization, you must resolve the current transfer process.</p>
     #             </li>
     #             <li>
     #                <p>ACCOUNT_NUMBER_LIMIT_EXCEEDED: You attempted to exceed the limit on the number
@@ -349,7 +360,7 @@ module Aws::Organizations
     #             <li>
     #                <p>EMAIL_VERIFICATION_CODE_EXPIRED: The email verification code is only valid for
     #                     a limited period of time. You must resubmit the request and generate a new
-    #                     verfication code.</p>
+    #                     verification code.</p>
     #             </li>
     #             <li>
     #                <p>HANDSHAKE_RATE_LIMIT_EXCEEDED: You attempted to exceed the number of
@@ -382,7 +393,7 @@ module Aws::Organizations
     #                <p>MASTER_ACCOUNT_NOT_GOVCLOUD_ENABLED: To complete this operation, the
     #                     management account must have an associated account in the Amazon Web Services GovCloud
     #                     (US-West) Region. For more information, see <a href="https://docs.aws.amazon.com/govcloud-us/latest/UserGuide/govcloud-organizations.html">Organizations</a>
-    #                     in the 
+    #                     in the
     #                     <i>Amazon Web Services GovCloud User Guide</i>.</p>
     #             </li>
     #             <li>
@@ -444,6 +455,22 @@ module Aws::Organizations
     #                     complete this operation, you must first disable the policy type.</p>
     #             </li>
     #             <li>
+    #                <p>RESPONSIBILITY_TRANSFER_MAX_INBOUND_QUOTA_VIOLATION: You have exceeded your inbound
+    #                     transfers limit.</p>
+    #             </li>
+    #             <li>
+    #                <p>RESPONSIBILITY_TRANSFER_MAX_LEVEL_VIOLATION: You have exceeded the maximum length of your
+    #                     transfer chain.</p>
+    #             </li>
+    #             <li>
+    #                <p>RESPONSIBILITY_TRANSFER_MAX_OUTBOUND_QUOTA_VIOLATION: You have exceeded your outbound
+    #                     transfers limit.</p>
+    #             </li>
+    #             <li>
+    #                <p>RESPONSIBILITY_TRANSFER_MAX_TRANSFERS_QUOTA_VIOLATION: You have exceeded the maximum
+    #                     number of inbound transfers allowed in a transfer chain.</p>
+    #             </li>
+    #             <li>
     #                <p>SERVICE_ACCESS_NOT_ENABLED:</p>
     #                <ul>
     #                   <li>
@@ -462,8 +489,30 @@ module Aws::Organizations
     #                     that are not compliant with the tag policy requirements for this account.</p>
     #             </li>
     #             <li>
+    #                <p>TRANSFER_RESPONSIBILITY_SOURCE_DELETION_IN_PROGRESS: The source organization cannot accept
+    #                     this transfer invitation because it is marked for deletion.</p>
+    #             </li>
+    #             <li>
+    #                <p>TRANSFER_RESPONSIBILITY_TARGET_DELETION_IN_PROGRESS: The source organization cannot accept
+    #                     this transfer invitation because target organization is marked for deletion.</p>
+    #             </li>
+    #             <li>
+    #                <p>TRANSFER_RESPONSIBILITY_UPDATE_NOT_ALLOWED: You cannot update this transfer
+    #                     because it is no longer active. Transfers that have been withdrawn, declined,
+    #                     expired, or cancelled cannot be modified.</p>
+    #             </li>
+    #             <li>
+    #                <p>UNMET_BILLING_PREREQUISITE: Your current billing configuration is unsupported.
+    #                     Contact Amazon Web Services Support for assistance.</p>
+    #             </li>
+    #             <li>
+    #                <p>UNSUPPORTED_PRICING: Ineligible for Billing Transfer. Your organization is
+    #                     subject to a pricing agreement with Amazon Web Services that Billing Transfer does not
+    #                     support.</p>
+    #             </li>
+    #             <li>
     #                <p>WAIT_PERIOD_ACTIVE: After you create an Amazon Web Services account, you must wait until at
-    #                     least seven days after the account was created. Invited accounts aren't subject
+    #                     least four days after the account was created. Invited accounts aren't subject
     #                     to this waiting period.</p>
     #             </li>
     #          </ul>
@@ -658,8 +707,16 @@ module Aws::Organizations
     #                     agreed to the change.</p>
     #             </li>
     #             <li>
+    #                <p>LEGACY_PERMISSIONS_STILL_IN_USE: Your organization must migrate to use the new IAM
+    #                     fine-grained actions for billing, cost management, and accounts.</p>
+    #             </li>
+    #             <li>
     #                <p>ORGANIZATION_ALREADY_HAS_ALL_FEATURES: The handshake request is invalid
     #                     because the organization has already enabled all features.</p>
+    #             </li>
+    #             <li>
+    #                <p>ORGANIZATION_FROM_DIFFERENT_SELLER_OF_RECORD: You can only join an
+    #                     organization that operates in the same Amazon Web Services partition as your account.</p>
     #             </li>
     #             <li>
     #                <p>ORGANIZATION_IS_ALREADY_PENDING_ALL_FEATURES_MIGRATION: The handshake request
@@ -667,18 +724,31 @@ module Aws::Organizations
     #                     all features.</p>
     #             </li>
     #             <li>
-    #                <p>ORGANIZATION_FROM_DIFFERENT_SELLER_OF_RECORD: The request failed because the
-    #                     account is from a different marketplace than the accounts in the
-    #                     organization.</p>
-    #             </li>
-    #             <li>
     #                <p>ORGANIZATION_MEMBERSHIP_CHANGE_RATE_LIMIT_EXCEEDED: You attempted to change
     #                     the membership of an account too quickly after its previous change.</p>
+    #             </li>
+    #             <li>
+    #                <p>PAST_DUE_INVOICE: Your organization has an invoice that is past due.</p>
     #             </li>
     #             <li>
     #                <p>PAYMENT_INSTRUMENT_REQUIRED: You can't complete the operation with an account
     #                     that doesn't have a payment instrument, such as a credit card, associated with
     #                     it.</p>
+    #             </li>
+    #             <li>
+    #                <p>RESPONSIBILITY_TRANSFER_ALREADY_EXISTS: You cannot perform this operation with the current
+    #                     transfer.</p>
+    #             </li>
+    #             <li>
+    #                <p>SOURCE_AND_TARGET_CANNOT_MATCH: An account can't accept a transfer invitation if it is both the sender and recipient of the invitation.</p>
+    #             </li>
+    #             <li>
+    #                <p>TARGET_ACCOUNT_VALIDATION_FAILURE: Billing transfer is not available for your
+    #                     account. Contact your billing administrator or Amazon Web Services Support for
+    #                     assistance.</p>
+    #             </li>
+    #             <li>
+    #                <p>UNUSED_PREPAYMENT_BALANCE: Your organization has an outstanding pre-payment balance.</p>
     #             </li>
     #          </ul>
     class HandshakeConstraintViolationException < Smithy::Client::ServiceError
@@ -734,8 +804,21 @@ module Aws::Organizations
     #          </note>
     #          <ul>
     #             <li>
+    #                <p>CALLER_REQUIRED_FIELD_MISSING: At least one of the required field is missing: Caller Account Id, Management Account Id or Organization Id.</p>
+    #             </li>
+    #             <li>
     #                <p>DUPLICATE_TAG_KEY: Tag keys must be unique among the tags attached to the same
     #                     entity.</p>
+    #             </li>
+    #             <li>
+    #                <p>END_DATE_NOT_END_OF_MONTH: You provided an invalid end date. The end date must be the end
+    #                     of the last day of the month (23.59.59.999).</p>
+    #             </li>
+    #             <li>
+    #                <p>END_DATE_TOO_EARLY: You provided an invalid end date. The end date is too early.</p>
+    #             </li>
+    #             <li>
+    #                <p>END_DATE_TOO_LATE: You provided an invalid end date. The end date is too late.</p>
     #             </li>
     #             <li>
     #                <p>IMMUTABLE_POLICY: You specified a policy that is managed by Amazon Web Services and can't be
@@ -747,6 +830,11 @@ module Aws::Organizations
     #             <li>
     #                <p>INVALID_EMAIL_ADDRESS_TARGET: You specified an invalid email address for the
     #                     invited account owner.</p>
+    #             </li>
+    #             <li>
+    #                <p>INVALID_END_DATE: The selected withdrawal date doesn't meet the minimum notice
+    #                     period required by your partner agreement. Visit Amazon Web Services Partner Central or contact your Amazon Web Services
+    #                     Channel Partner for help.</p>
     #             </li>
     #             <li>
     #                <p>INVALID_ENUM: You specified an invalid value.</p>
@@ -772,7 +860,9 @@ module Aws::Organizations
     #             </li>
     #             <li>
     #                <p>INVALID_PATTERN: You provided a value that doesn't match the required
-    #                     pattern.</p>
+    #                     pattern. The service also validates your free-text field values against
+    #                     common cross-site scripting (XSS) patterns and rejects requests that
+    #                     contain matching values.</p>
     #             </li>
     #             <li>
     #                <p>INVALID_PATTERN_TARGET_ID: You specified a policy target ID that doesn't match
@@ -785,6 +875,9 @@ module Aws::Organizations
     #             <li>
     #                <p>INVALID_ROLE_NAME: You provided a role name that isn't valid. A role name
     #                     can't begin with the reserved prefix <code>AWSServiceRoleFor</code>.</p>
+    #             </li>
+    #             <li>
+    #                <p>INVALID_START_DATE: The start date doesn't meet the minimum requirements.</p>
     #             </li>
     #             <li>
     #                <p>INVALID_SYNTAX_ORGANIZATION_ARN: You specified an invalid Amazon Resource Name
@@ -826,12 +919,30 @@ module Aws::Organizations
     #                <p>NON_DETACHABLE_POLICY: You can't detach this Amazon Web Services Managed Policy.</p>
     #             </li>
     #             <li>
+    #                <p>START_DATE_NOT_BEGINNING_OF_DAY: You provided an invalid start date. The start date must
+    #                     be the beginning of the day (00:00:00.000).</p>
+    #             </li>
+    #             <li>
+    #                <p>START_DATE_NOT_BEGINNING_OF_MONTH: You provided an invalid start date. The start date must
+    #                     be the first day of the month.</p>
+    #             </li>
+    #             <li>
+    #                <p>START_DATE_TOO_EARLY: You provided an invalid start date. The start date is too early.</p>
+    #             </li>
+    #             <li>
+    #                <p>START_DATE_TOO_LATE: You provided an invalid start date. The start date is too late.</p>
+    #             </li>
+    #             <li>
     #                <p>TARGET_NOT_SUPPORTED: You can't perform the specified operation on that target
     #                     entity.</p>
     #             </li>
     #             <li>
     #                <p>UNRECOGNIZED_SERVICE_PRINCIPAL: You specified a service principal that isn't
     #                     recognized.</p>
+    #             </li>
+    #             <li>
+    #                <p>UNSUPPORTED_ACTION_IN_RESPONSIBILITY_TRANSFER: You provided a value that is not supported
+    #                 by this operation.</p>
     #             </li>
     #          </ul>
     class InvalidInputException < Smithy::Client::ServiceError
@@ -847,6 +958,20 @@ module Aws::Organizations
 
       def reason
         @data[:reason]
+      end
+    end
+
+    # <p>The responsibility transfer can't transition to the requested state because it's not
+    #             in a valid state for this operation.</p>
+    class InvalidResponsibilityTransferTransitionException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::Organizations::Types::InvalidResponsibilityTransferTransitionException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
       end
     end
 
@@ -1039,6 +1164,32 @@ module Aws::Organizations
     class ResourcePolicyNotFoundException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Organizations::Types::ResourcePolicyNotFoundException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>The responsibility transfer is already in the status that you specified.</p>
+    class ResponsibilityTransferAlreadyInStatusException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::Organizations::Types::ResponsibilityTransferAlreadyInStatusException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>We can't find a transfer that you specified.</p>
+    class ResponsibilityTransferNotFoundException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::Organizations::Types::ResponsibilityTransferNotFoundException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
         super
       end

@@ -4,8 +4,10 @@ module Aws::ServiceQuotas
 
     AWSServiceAccessNotEnabledException: StructureShape
     AccessDeniedException: StructureShape
+    AdjustableAtLevelEnum: EnumShape
     AmazonResourceName: StringShape
     AppliedLevelEnum: EnumShape
+    AppliedValue: FloatShape
     AssociateServiceQuotaTemplateRequest: StructureShape
     AssociateServiceQuotaTemplateResponse: StructureShape
     AwsRegion: StringShape
@@ -13,6 +15,7 @@ module Aws::ServiceQuotas
     CreateSupportCaseResponse: StructureShape
     CustomerServiceEngagementId: StringShape
     DateTime: TimestampShape
+    DefaultValue: FloatShape
     DeleteServiceQuotaIncreaseRequestFromTemplateRequest: StructureShape
     DeleteServiceQuotaIncreaseRequestFromTemplateResponse: StructureShape
     DependencyAccessDeniedException: StructureShape
@@ -22,10 +25,19 @@ module Aws::ServiceQuotas
     ErrorMessage: StringShape
     ErrorReason: StructureShape
     ExceptionMessage: StringShape
+    ExcludedLimit: StringShape
+    ExcludedQuotaList: ListShape
+    ExcludedService: StringShape
+    ExclusionList: MapShape
+    ExclusionQuotaList: MapShape
     GetAWSDefaultServiceQuotaRequest: StructureShape
     GetAWSDefaultServiceQuotaResponse: StructureShape
     GetAssociationForServiceQuotaTemplateRequest: StructureShape
     GetAssociationForServiceQuotaTemplateResponse: StructureShape
+    GetAutoManagementConfigurationRequest: StructureShape
+    GetAutoManagementConfigurationResponse: StructureShape
+    GetQuotaUtilizationReportRequest: StructureShape
+    GetQuotaUtilizationReportResponse: StructureShape
     GetRequestedServiceQuotaChangeRequest: StructureShape
     GetRequestedServiceQuotaChangeResponse: StructureShape
     GetServiceQuotaIncreaseRequestFromTemplateRequest: StructureShape
@@ -53,6 +65,7 @@ module Aws::ServiceQuotas
     ListTagsForResourceRequest: StructureShape
     ListTagsForResourceResponse: StructureShape
     MaxResults: IntegerShape
+    MaxResultsUtilization: IntegerShape
     MetricDimensionName: StringShape
     MetricDimensionValue: StringShape
     MetricDimensionsMapDefinition: MapShape
@@ -60,6 +73,9 @@ module Aws::ServiceQuotas
     NextToken: StringShape
     NoAvailableOrganizationException: StructureShape
     NoSuchResourceException: StructureShape
+    OptInLevel: EnumShape
+    OptInStatus: EnumShape
+    OptInType: EnumShape
     OrganizationNotInAllFeaturesModeException: StructureShape
     OutputTags: ListShape
     PeriodUnit: EnumShape
@@ -75,16 +91,26 @@ module Aws::ServiceQuotas
     QuotaContextScopeType: StringShape
     QuotaDescription: StringShape
     QuotaExceededException: StructureShape
+    QuotaInfo: StructureShape
+    QuotaInfoList: ListShape
     QuotaMetricName: StringShape
     QuotaMetricNamespace: StringShape
     QuotaName: StringShape
     QuotaPeriod: StructureShape
     QuotaUnit: StringShape
+    QuotaUtilizationInfo: StructureShape
+    QuotaUtilizationInfoList: ListShape
     QuotaValue: FloatShape
+    ReportErrorCode: StringShape
+    ReportErrorMessage: StringShape
+    ReportId: StringShape
+    ReportMessage: StringShape
+    ReportStatus: EnumShape
     RequestId: StringShape
     RequestServiceQuotaIncreaseRequest: StructureShape
     RequestServiceQuotaIncreaseResponse: StructureShape
     RequestStatus: EnumShape
+    RequestType: EnumShape
     RequestedServiceQuotaChange: StructureShape
     RequestedServiceQuotaChangeHistoryListDefinition: ListShape
     Requester: StringShape
@@ -100,7 +126,13 @@ module Aws::ServiceQuotas
     ServiceQuotaListDefinition: ListShape
     ServiceQuotaTemplateAssociationStatus: EnumShape
     ServiceQuotaTemplateNotInUseException: StructureShape
+    StartAutoManagementRequest: StructureShape
+    StartAutoManagementResponse: StructureShape
+    StartQuotaUtilizationReportRequest: StructureShape
+    StartQuotaUtilizationReportResponse: StructureShape
     Statistic: StringShape
+    StopAutoManagementRequest: StructureShape
+    StopAutoManagementResponse: StructureShape
     SupportCaseAllowed: BooleanShape
     Tag: StructureShape
     TagKey: StringShape
@@ -111,8 +143,12 @@ module Aws::ServiceQuotas
     TemplatesNotAvailableInRegionException: StructureShape
     TooManyRequestsException: StructureShape
     TooManyTagsException: StructureShape
+    TotalCount: IntegerShape
     UntagResourceRequest: StructureShape
     UntagResourceResponse: StructureShape
+    UpdateAutoManagementRequest: StructureShape
+    UpdateAutoManagementResponse: StructureShape
+    UtilizationPct: FloatShape
 
     ServiceQuotasV20190624: ServiceShape
   end

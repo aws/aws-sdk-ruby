@@ -144,18 +144,18 @@ module Aws::PartnerCentralSelling
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -247,6 +247,7 @@ module Aws::PartnerCentralSelling
     #       email: "Email", # required
     #       first_name: "Name", # required
     #       last_name: "Name", # required
+    #       phone: "PhoneNumber",
     #       business_title: "JobTitle", # required
     #     }
     #   }
@@ -275,7 +276,7 @@ module Aws::PartnerCentralSelling
     #   params = {
     #     catalog: "CatalogIdentifier", # required
     #     opportunity_identifier: "OpportunityIdentifier", # required
-    #     related_entity_type: "Solutions" # One of: ["Solutions", "AwsProducts", "AwsMarketplaceOffers"], # required
+    #     related_entity_type: "Solutions" # One of: ["Solutions", "AwsProducts", "AwsMarketplaceOffers", "AwsMarketplaceOfferSets", "AwsMarketplaceSolutions", "AwsMarketplaceProducts"], # required
     #     related_entity_identifier: "String", # required
     #   }
     #   options = {}
@@ -304,12 +305,13 @@ module Aws::PartnerCentralSelling
     # @example Request syntax with placeholder values
     #   params = {
     #     catalog: "CatalogIdentifier", # required
-    #     client_token: "String", # required
-    #     title: "EngagementTitle", # required
-    #     description: "EngagementDescription", # required
+    #     client_token: "ClientToken", # required
+    #     title: "EngagementTitle",
+    #     description: "EngagementDescription",
     #     contexts: [
     #       {
-    #         type: "CustomerProject" # One of: ["CustomerProject"], # required
+    #         id: "EngagementContextIdentifier",
+    #         type: "CustomerProject" # One of: ["CustomerProject", "Lead", "ProspectingResult"], # required
     #         payload: {
     #           # One of:
     #           customer_project: {
@@ -324,6 +326,71 @@ module Aws::PartnerCentralSelling
     #               business_problem: "EngagementCustomerBusinessProblem", # required
     #               target_completion_date: "String", # required
     #             }
+    #           },
+    #           lead: {
+    #             insights: {
+    #               lead_readiness_score: "String"
+    #             },
+    #             qualification_status: "LeadQualificationStatus",
+    #             customer: { # required
+    #               industry: "LeadIndustry",
+    #               company_name: "CompanyName", # required
+    #               website_url: "LeadWebsiteUrl",
+    #               address: {
+    #                 city: "String",
+    #                 postal_code: "String",
+    #                 state_or_region: "String",
+    #                 country_code: "LeadCountryCode"
+    #               },
+    #               aws_maturity: "AwsMaturity",
+    #               market_segment: "LeadMarketSegment"
+    #             },
+    #             interactions: [ # required
+    #               {
+    #                 source_type: "LeadSourceType",
+    #                 source_id: "LeadSourceId",
+    #                 source_name: "LeadSourceName",
+    #                 usecase: "EngagementUseCase",
+    #                 interaction_date: Time.now,
+    #                 customer_action: "CustomerAction",
+    #                 business_problem: "LeadBusinessProblem",
+    #                 contact: { # required
+    #                   business_title: "LeadJobTitle", # required
+    #                   email: "LeadEmail", # required
+    #                   first_name: "Name", # required
+    #                   last_name: "Name", # required
+    #                   phone: "LeadPhoneNumber"
+    #                 }
+    #               }
+    #             ]
+    #           },
+    #           prospecting_result: {
+    #             aws: {
+    #               customer: {
+    #                 account_name: "ProspectingAccountName",
+    #                 geo: "ProspectingGeo",
+    #                 region: "ProspectingRegion",
+    #                 sub_region: "ProspectingSubRegion",
+    #                 country: "US" # One of: ["US", "AF", "AX", "AL", "DZ", "AS", "AD", "AO", "AI", "AQ", "AG", "AR", "AM", "AW", "AU", "AT", "AZ", "BS", "BH", "BD", "BB", "BY", "BE", "BZ", "BJ", "BM", "BT", "BO", "BQ", "BA", "BW", "BV", "BR", "IO", "BN", "BG", "BF", "BI", "KH", "CM", "CA", "CV", "KY", "CF", "TD", "CL", "CN", "CX", "CC", "CO", "KM", "CG", "CK", "CR", "CI", "HR", "CU", "CW", "CY", "CZ", "CD", "DK", "DJ", "DM", "DO", "EC", "EG", "SV", "GQ", "ER", "EE", "ET", "FK", "FO", "FJ", "FI", "FR", "GF", "PF", "TF", "GA", "GM", "GE", "DE", "GH", "GI", "GR", "GL", "GD", "GP", "GU", "GT", "GG", "GN", "GW", "GY", "HT", "HM", "VA", "HN", "HK", "HU", "IS", "IN", "ID", "IR", "IQ", "IE", "IM", "IL", "IT", "JM", "JP", "JE", "JO", "KZ", "KE", "KI", "KR", "KW", "KG", "LA", "LV", "LB", "LS", "LR", "LY", "LI", "LT", "LU", "MO", "MK", "MG", "MW", "MY", "MV", "ML", "MT", "MH", "MQ", "MR", "MU", "YT", "MX", "FM", "MD", "MC", "MN", "ME", "MS", "MA", "MZ", "MM", "NA", "NR", "NP", "NL", "AN", "NC", "NZ", "NI", "NE", "NG", "NU", "NF", "MP", "NO", "OM", "PK", "PW", "PS", "PA", "PG", "PY", "PE", "PH", "PN", "PL", "PT", "PR", "QA", "RE", "RO", "RU", "RW", "BL", "SH", "KN", "LC", "MF", "PM", "VC", "WS", "SM", "ST", "SA", "SN", "RS", "SC", "SL", "SG", "SX", "SK", "SI", "SB", "SO", "ZA", "GS", "SS", "ES", "LK", "SD", "SR", "SJ", "SZ", "SE", "CH", "SY", "TW", "TJ", "TZ", "TH", "TL", "TG", "TK", "TO", "TT", "TN", "TR", "TM", "TC", "TV", "UG", "UA", "AE", "GB", "UM", "UY", "UZ", "VU", "VE", "VN", "VG", "VI", "WF", "EH", "YE", "ZM", "ZW"],
+    #                 industry: "Aerospace" # One of: ["Aerospace", "Agriculture", "Automotive", "Computers and Electronics", "Consumer Goods", "Education", "Energy - Oil and Gas", "Energy - Power and Utilities", "Financial Services", "Gaming", "Government", "Healthcare", "Hospitality", "Life Sciences", "Manufacturing", "Marketing and Advertising", "Media and Entertainment", "Mining", "Non-Profit Organization", "Professional Services", "Real Estate and Construction", "Retail", "Software and Internet", "Telecommunications", "Transportation and Logistics", "Travel", "Wholesale and Distribution", "Other"],
+    #                 sub_industry: "ProspectingSubIndustry",
+    #                 segment: "ProspectingSegment",
+    #                 company_size: "ProspectingCompanySize",
+    #                 eligible_programs: ["String"],
+    #                 public_profile_summary: "ProspectingPublicProfileSummary"
+    #               },
+    #               insights: {
+    #                 marketplace_engagement_score: "EngagementScoreLevel",
+    #                 solution_score: "String",
+    #                 solution_category: "String",
+    #                 solution_sub_category: "String"
+    #               },
+    #               start_time: Time.now,
+    #               end_time: Time.now,
+    #               task_id: "ProspectingTaskIdentifier",
+    #               task_arn: "TaskArn",
+    #               task_name: "TaskName"
+    #             }
     #           }
     #         }
     #       }
@@ -335,11 +402,128 @@ module Aws::PartnerCentralSelling
     #   response.to_h #=>
     #   {
     #     id: "EngagementIdentifier",
-    #     arn: "EngagementArn"
+    #     arn: "EngagementArn",
+    #     modified_at: Time.now
     #   }
     # @return [Types::CreateEngagementResponse]
     def create_engagement(params = {}, options = {})
       request = build_request(:create_engagement, params)
+      request.send_request(options)
+    end
+
+    # <p>Creates a new context within an existing engagement. This action allows you to add contextual information such as customer projects or documents to an engagement, providing additional details that help facilitate collaboration between engagement members.</p>
+    # @param [Hash, Types::CreateEngagementContextRequest] params
+    # @option params [String] :catalog
+    #   <p>Specifies the catalog associated with the engagement context request. This field takes a string value from a predefined list: <code>AWS</code> or <code>Sandbox</code>. The catalog determines which environment the engagement context is created in. Use <code>AWS</code> to create contexts in the production environment, and <code>Sandbox</code> for testing in secure, isolated environments.</p>
+    # @option params [String] :engagement_identifier
+    #   <p>The unique identifier of the <code>Engagement</code> for which the context is being created. This parameter ensures the context is associated with the correct engagement and provides the necessary linkage between the engagement and its contextual information.</p>
+    # @option params [String] :client_token
+    #   <p>A unique, case-sensitive identifier provided by the client to ensure that the request is handled exactly once. This token helps prevent duplicate context creations and must not exceed sixty-four alphanumeric characters. Use a UUID or other unique string to ensure idempotency.</p>
+    # @option params [String] :type
+    #   <p>Specifies the type of context being created for the engagement. This field determines the structure and content of the context payload. Valid values include <code>CustomerProject</code> for customer project-related contexts. The type field ensures that the context is properly categorized and processed according to its intended purpose.</p>
+    # @option params [Types::EngagementContextPayload] :payload
+    #   <p>Represents the payload of an Engagement context. The structure of this payload varies based on the context type specified in the EngagementContextDetails. </p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     catalog: "CatalogIdentifier", # required
+    #     engagement_identifier: "EngagementArnOrIdentifier", # required
+    #     client_token: "ClientToken", # required
+    #     type: "CustomerProject" # One of: ["CustomerProject", "Lead", "ProspectingResult"], # required
+    #     payload: { # required
+    #       # One of:
+    #       customer_project: {
+    #         customer: {
+    #           industry: "Aerospace" # One of: ["Aerospace", "Agriculture", "Automotive", "Computers and Electronics", "Consumer Goods", "Education", "Energy - Oil and Gas", "Energy - Power and Utilities", "Financial Services", "Gaming", "Government", "Healthcare", "Hospitality", "Life Sciences", "Manufacturing", "Marketing and Advertising", "Media and Entertainment", "Mining", "Non-Profit Organization", "Professional Services", "Real Estate and Construction", "Retail", "Software and Internet", "Telecommunications", "Transportation and Logistics", "Travel", "Wholesale and Distribution", "Other"], # required
+    #           company_name: "CompanyName", # required
+    #           website_url: "CompanyWebsiteUrl", # required
+    #           country_code: "US" # One of: ["US", "AF", "AX", "AL", "DZ", "AS", "AD", "AO", "AI", "AQ", "AG", "AR", "AM", "AW", "AU", "AT", "AZ", "BS", "BH", "BD", "BB", "BY", "BE", "BZ", "BJ", "BM", "BT", "BO", "BQ", "BA", "BW", "BV", "BR", "IO", "BN", "BG", "BF", "BI", "KH", "CM", "CA", "CV", "KY", "CF", "TD", "CL", "CN", "CX", "CC", "CO", "KM", "CG", "CK", "CR", "CI", "HR", "CU", "CW", "CY", "CZ", "CD", "DK", "DJ", "DM", "DO", "EC", "EG", "SV", "GQ", "ER", "EE", "ET", "FK", "FO", "FJ", "FI", "FR", "GF", "PF", "TF", "GA", "GM", "GE", "DE", "GH", "GI", "GR", "GL", "GD", "GP", "GU", "GT", "GG", "GN", "GW", "GY", "HT", "HM", "VA", "HN", "HK", "HU", "IS", "IN", "ID", "IR", "IQ", "IE", "IM", "IL", "IT", "JM", "JP", "JE", "JO", "KZ", "KE", "KI", "KR", "KW", "KG", "LA", "LV", "LB", "LS", "LR", "LY", "LI", "LT", "LU", "MO", "MK", "MG", "MW", "MY", "MV", "ML", "MT", "MH", "MQ", "MR", "MU", "YT", "MX", "FM", "MD", "MC", "MN", "ME", "MS", "MA", "MZ", "MM", "NA", "NR", "NP", "NL", "AN", "NC", "NZ", "NI", "NE", "NG", "NU", "NF", "MP", "NO", "OM", "PK", "PW", "PS", "PA", "PG", "PY", "PE", "PH", "PN", "PL", "PT", "PR", "QA", "RE", "RO", "RU", "RW", "BL", "SH", "KN", "LC", "MF", "PM", "VC", "WS", "SM", "ST", "SA", "SN", "RS", "SC", "SL", "SG", "SX", "SK", "SI", "SB", "SO", "ZA", "GS", "SS", "ES", "LK", "SD", "SR", "SJ", "SZ", "SE", "CH", "SY", "TW", "TJ", "TZ", "TH", "TL", "TG", "TK", "TO", "TT", "TN", "TR", "TM", "TC", "TV", "UG", "UA", "AE", "GB", "UM", "UY", "UZ", "VU", "VE", "VN", "VG", "VI", "WF", "EH", "YE", "ZM", "ZW"], # required
+    #         },
+    #         project: {
+    #           title: "EngagementCustomerProjectTitle", # required
+    #           business_problem: "EngagementCustomerBusinessProblem", # required
+    #           target_completion_date: "String", # required
+    #         }
+    #       },
+    #       lead: {
+    #         insights: {
+    #           lead_readiness_score: "String"
+    #         },
+    #         qualification_status: "LeadQualificationStatus",
+    #         customer: { # required
+    #           industry: "LeadIndustry",
+    #           company_name: "CompanyName", # required
+    #           website_url: "LeadWebsiteUrl",
+    #           address: {
+    #             city: "String",
+    #             postal_code: "String",
+    #             state_or_region: "String",
+    #             country_code: "LeadCountryCode"
+    #           },
+    #           aws_maturity: "AwsMaturity",
+    #           market_segment: "LeadMarketSegment"
+    #         },
+    #         interactions: [ # required
+    #           {
+    #             source_type: "LeadSourceType",
+    #             source_id: "LeadSourceId",
+    #             source_name: "LeadSourceName",
+    #             usecase: "EngagementUseCase",
+    #             interaction_date: Time.now,
+    #             customer_action: "CustomerAction",
+    #             business_problem: "LeadBusinessProblem",
+    #             contact: { # required
+    #               business_title: "LeadJobTitle", # required
+    #               email: "LeadEmail", # required
+    #               first_name: "Name", # required
+    #               last_name: "Name", # required
+    #               phone: "LeadPhoneNumber"
+    #             }
+    #           }
+    #         ]
+    #       },
+    #       prospecting_result: {
+    #         aws: {
+    #           customer: {
+    #             account_name: "ProspectingAccountName",
+    #             geo: "ProspectingGeo",
+    #             region: "ProspectingRegion",
+    #             sub_region: "ProspectingSubRegion",
+    #             country: "US" # One of: ["US", "AF", "AX", "AL", "DZ", "AS", "AD", "AO", "AI", "AQ", "AG", "AR", "AM", "AW", "AU", "AT", "AZ", "BS", "BH", "BD", "BB", "BY", "BE", "BZ", "BJ", "BM", "BT", "BO", "BQ", "BA", "BW", "BV", "BR", "IO", "BN", "BG", "BF", "BI", "KH", "CM", "CA", "CV", "KY", "CF", "TD", "CL", "CN", "CX", "CC", "CO", "KM", "CG", "CK", "CR", "CI", "HR", "CU", "CW", "CY", "CZ", "CD", "DK", "DJ", "DM", "DO", "EC", "EG", "SV", "GQ", "ER", "EE", "ET", "FK", "FO", "FJ", "FI", "FR", "GF", "PF", "TF", "GA", "GM", "GE", "DE", "GH", "GI", "GR", "GL", "GD", "GP", "GU", "GT", "GG", "GN", "GW", "GY", "HT", "HM", "VA", "HN", "HK", "HU", "IS", "IN", "ID", "IR", "IQ", "IE", "IM", "IL", "IT", "JM", "JP", "JE", "JO", "KZ", "KE", "KI", "KR", "KW", "KG", "LA", "LV", "LB", "LS", "LR", "LY", "LI", "LT", "LU", "MO", "MK", "MG", "MW", "MY", "MV", "ML", "MT", "MH", "MQ", "MR", "MU", "YT", "MX", "FM", "MD", "MC", "MN", "ME", "MS", "MA", "MZ", "MM", "NA", "NR", "NP", "NL", "AN", "NC", "NZ", "NI", "NE", "NG", "NU", "NF", "MP", "NO", "OM", "PK", "PW", "PS", "PA", "PG", "PY", "PE", "PH", "PN", "PL", "PT", "PR", "QA", "RE", "RO", "RU", "RW", "BL", "SH", "KN", "LC", "MF", "PM", "VC", "WS", "SM", "ST", "SA", "SN", "RS", "SC", "SL", "SG", "SX", "SK", "SI", "SB", "SO", "ZA", "GS", "SS", "ES", "LK", "SD", "SR", "SJ", "SZ", "SE", "CH", "SY", "TW", "TJ", "TZ", "TH", "TL", "TG", "TK", "TO", "TT", "TN", "TR", "TM", "TC", "TV", "UG", "UA", "AE", "GB", "UM", "UY", "UZ", "VU", "VE", "VN", "VG", "VI", "WF", "EH", "YE", "ZM", "ZW"],
+    #             industry: "Aerospace" # One of: ["Aerospace", "Agriculture", "Automotive", "Computers and Electronics", "Consumer Goods", "Education", "Energy - Oil and Gas", "Energy - Power and Utilities", "Financial Services", "Gaming", "Government", "Healthcare", "Hospitality", "Life Sciences", "Manufacturing", "Marketing and Advertising", "Media and Entertainment", "Mining", "Non-Profit Organization", "Professional Services", "Real Estate and Construction", "Retail", "Software and Internet", "Telecommunications", "Transportation and Logistics", "Travel", "Wholesale and Distribution", "Other"],
+    #             sub_industry: "ProspectingSubIndustry",
+    #             segment: "ProspectingSegment",
+    #             company_size: "ProspectingCompanySize",
+    #             eligible_programs: ["String"],
+    #             public_profile_summary: "ProspectingPublicProfileSummary"
+    #           },
+    #           insights: {
+    #             marketplace_engagement_score: "EngagementScoreLevel",
+    #             solution_score: "String",
+    #             solution_category: "String",
+    #             solution_sub_category: "String"
+    #           },
+    #           start_time: Time.now,
+    #           end_time: Time.now,
+    #           task_id: "ProspectingTaskIdentifier",
+    #           task_arn: "TaskArn",
+    #           task_name: "TaskName"
+    #         }
+    #       }
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.create_engagement_context(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     engagement_id: "EngagementIdentifier",
+    #     engagement_arn: "EngagementArn",
+    #     engagement_last_modified_at: Time.now,
+    #     context_id: "EngagementContextIdentifier"
+    #   }
+    # @return [Types::CreateEngagementContextResponse]
+    def create_engagement_context(params = {}, options = {})
+      request = build_request(:create_engagement_context, params)
       request.send_request(options)
     end
 
@@ -352,7 +536,7 @@ module Aws::PartnerCentralSelling
     # @option params [String] :engagement_identifier
     #   <p> The unique identifier of the <code>Engagement</code> associated with the invitation. This parameter ensures the invitation is created within the correct <code>Engagement</code> context. </p>
     # @option params [Types::Invitation] :invitation
-    #   <p> The <code>Invitation</code> object all information necessary to initiate an engagement invitation to a partner. It contains a personalized message from the sender, the invitation's receiver, and a payload. The <code>Payload</code> can be the <code>OpportunityInvitation</code>, which includes detailed structures for sender contacts, partner responsibilities, customer information, and project details. </p>
+    #   <p> The <code>Invitation</code> object all information necessary to initiate an engagement invitation to a partner. It contains a personalized message from the sender, the invitation's receiver, and a payload. The <code>Payload</code> can be the <code>OpportunityInvitation</code>, which includes detailed structures for sender contacts, partner responsibilities, customer information, and project details, or <code>LeadInvitation</code>, which includes structures for customer information and interaction details. </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     catalog: "CatalogIdentifier", # required
@@ -392,13 +576,30 @@ module Aws::PartnerCentralSelling
     #             target_completion_date: "Date", # required
     #             expected_customer_spend: [ # required
     #               {
-    #                 amount: "Amount", # required
+    #                 amount: "Amount",
     #                 currency_code: "USD" # One of: ["USD", "EUR", "GBP", "AUD", "CAD", "CNY", "NZD", "INR", "JPY", "CHF", "SEK", "AED", "AFN", "ALL", "AMD", "ANG", "AOA", "ARS", "AWG", "AZN", "BAM", "BBD", "BDT", "BGN", "BHD", "BIF", "BMD", "BND", "BOB", "BOV", "BRL", "BSD", "BTN", "BWP", "BYN", "BZD", "CDF", "CHE", "CHW", "CLF", "CLP", "COP", "COU", "CRC", "CUC", "CUP", "CVE", "CZK", "DJF", "DKK", "DOP", "DZD", "EGP", "ERN", "ETB", "FJD", "FKP", "GEL", "GHS", "GIP", "GMD", "GNF", "GTQ", "GYD", "HKD", "HNL", "HRK", "HTG", "HUF", "IDR", "ILS", "IQD", "IRR", "ISK", "JMD", "JOD", "KES", "KGS", "KHR", "KMF", "KPW", "KRW", "KWD", "KYD", "KZT", "LAK", "LBP", "LKR", "LRD", "LSL", "LYD", "MAD", "MDL", "MGA", "MKD", "MMK", "MNT", "MOP", "MRU", "MUR", "MVR", "MWK", "MXN", "MXV", "MYR", "MZN", "NAD", "NGN", "NIO", "NOK", "NPR", "OMR", "PAB", "PEN", "PGK", "PHP", "PKR", "PLN", "PYG", "QAR", "RON", "RSD", "RUB", "RWF", "SAR", "SBD", "SCR", "SDG", "SGD", "SHP", "SLL", "SOS", "SRD", "SSP", "STN", "SVC", "SYP", "SZL", "THB", "TJS", "TMT", "TND", "TOP", "TRY", "TTD", "TWD", "TZS", "UAH", "UGX", "USN", "UYI", "UYU", "UZS", "VEF", "VND", "VUV", "WST", "XAF", "XCD", "XDR", "XOF", "XPF", "XSU", "XUA", "YER", "ZAR", "ZMW", "ZWL"], # required
     #                 frequency: "Monthly" # One of: ["Monthly"], # required
     #                 target_company: "String", # required
-    #                 estimation_url: "WebsiteUrl"
+    #                 estimation_url: "EstimationUrl"
     #               }
     #             ]
+    #           }
+    #         },
+    #         lead_invitation: {
+    #           customer: { # required
+    #             industry: "LeadIndustry",
+    #             company_name: "CompanyName", # required
+    #             website_url: "LeadWebsiteUrl",
+    #             country_code: "LeadCountryCode",
+    #             aws_maturity: "AwsMaturity",
+    #             market_segment: "LeadMarketSegment"
+    #           },
+    #           interaction: { # required
+    #             source_type: "LeadSourceType",
+    #             source_id: "LeadSourceId",
+    #             source_name: "LeadSourceName",
+    #             usecase: "EngagementUseCase",
+    #             contact_business_title: "JobTitle", # required
     #           }
     #         }
     #       }
@@ -484,13 +685,17 @@ module Aws::PartnerCentralSelling
     #       delivery_models: ["SaaS or PaaS" # One of: ["SaaS or PaaS", "BYOL or AMI", "Managed Services", "Professional Services", "Resell", "Other"]],
     #       expected_customer_spend: [
     #         {
-    #           amount: "Amount", # required
+    #           amount: "Amount",
     #           currency_code: "USD" # One of: ["USD", "EUR", "GBP", "AUD", "CAD", "CNY", "NZD", "INR", "JPY", "CHF", "SEK", "AED", "AFN", "ALL", "AMD", "ANG", "AOA", "ARS", "AWG", "AZN", "BAM", "BBD", "BDT", "BGN", "BHD", "BIF", "BMD", "BND", "BOB", "BOV", "BRL", "BSD", "BTN", "BWP", "BYN", "BZD", "CDF", "CHE", "CHW", "CLF", "CLP", "COP", "COU", "CRC", "CUC", "CUP", "CVE", "CZK", "DJF", "DKK", "DOP", "DZD", "EGP", "ERN", "ETB", "FJD", "FKP", "GEL", "GHS", "GIP", "GMD", "GNF", "GTQ", "GYD", "HKD", "HNL", "HRK", "HTG", "HUF", "IDR", "ILS", "IQD", "IRR", "ISK", "JMD", "JOD", "KES", "KGS", "KHR", "KMF", "KPW", "KRW", "KWD", "KYD", "KZT", "LAK", "LBP", "LKR", "LRD", "LSL", "LYD", "MAD", "MDL", "MGA", "MKD", "MMK", "MNT", "MOP", "MRU", "MUR", "MVR", "MWK", "MXN", "MXV", "MYR", "MZN", "NAD", "NGN", "NIO", "NOK", "NPR", "OMR", "PAB", "PEN", "PGK", "PHP", "PKR", "PLN", "PYG", "QAR", "RON", "RSD", "RUB", "RWF", "SAR", "SBD", "SCR", "SDG", "SGD", "SHP", "SLL", "SOS", "SRD", "SSP", "STN", "SVC", "SYP", "SZL", "THB", "TJS", "TMT", "TND", "TOP", "TRY", "TTD", "TWD", "TZS", "UAH", "UGX", "USN", "UYI", "UYU", "UZS", "VEF", "VND", "VUV", "WST", "XAF", "XCD", "XDR", "XOF", "XPF", "XSU", "XUA", "YER", "ZAR", "ZMW", "ZWL"], # required
     #           frequency: "Monthly" # One of: ["Monthly"], # required
     #           target_company: "String", # required
-    #           estimation_url: "WebsiteUrl"
+    #           estimation_url: "EstimationUrl"
     #         }
     #       ],
+    #       expected_contract_duration: {
+    #         term: "Months" # One of: ["Months"], # required
+    #         value: "String", # required
+    #       },
     #       title: "PiiString",
     #       apn_programs: ["String"],
     #       customer_business_problem: "PiiString",
@@ -500,7 +705,8 @@ module Aws::PartnerCentralSelling
     #       competitor_name: "Oracle Cloud" # One of: ["Oracle Cloud", "On-Prem", "Co-location", "Akamai", "AliCloud", "Google Cloud Platform", "IBM Softlayer", "Microsoft Azure", "Other- Cost Optimization", "No Competition", "*Other"],
     #       other_competitor_names: "String",
     #       other_solution_description: "PiiString",
-    #       additional_comments: "String"
+    #       additional_comments: "String",
+    #       aws_partition: "aws-eusc" # One of: ["aws-eusc"]
     #     },
     #     opportunity_type: "Net New Business" # One of: ["Net New Business", "Flat Renewal", "Expansion"],
     #     marketing: {
@@ -519,7 +725,7 @@ module Aws::PartnerCentralSelling
     #       effective_date: "Date",
     #       expiration_date: "Date"
     #     },
-    #     client_token: "String", # required
+    #     client_token: "ClientToken", # required
     #     life_cycle: {
     #       stage: "Prospect" # One of: ["Prospect", "Qualified", "Technical Validation", "Business Validation", "Committed", "Launched", "Closed Lost"],
     #       closed_lost_reason: "Customer Deficiency" # One of: ["Customer Deficiency", "Delay / Cancellation of Project", "Legal / Tax / Regulatory", "Lost to Competitor - Google", "Lost to Competitor - Microsoft", "Lost to Competitor - SoftLayer", "Lost to Competitor - VMWare", "Lost to Competitor - Other", "No Opportunity", "On Premises Deployment", "Partner Gap", "Price", "Security / Compliance", "Technical Limitations", "Customer Experience", "Other", "People/Relationship/Governance", "Product/Technology", "Financial/Commercial"],
@@ -685,7 +891,7 @@ module Aws::PartnerCentralSelling
     #   params = {
     #     catalog: "CatalogIdentifier", # required
     #     opportunity_identifier: "OpportunityIdentifier", # required
-    #     related_entity_type: "Solutions" # One of: ["Solutions", "AwsProducts", "AwsMarketplaceOffers"], # required
+    #     related_entity_type: "Solutions" # One of: ["Solutions", "AwsProducts", "AwsMarketplaceOffers", "AwsMarketplaceOfferSets", "AwsMarketplaceSolutions", "AwsMarketplaceProducts"], # required
     #     related_entity_identifier: "String", # required
     #   }
     #   options = {}
@@ -715,7 +921,6 @@ module Aws::PartnerCentralSelling
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {
-    #     catalog: "CatalogIdentifier", # required
     #     related_opportunity_id: "OpportunityIdentifier",
     #     origin: "AWS Referral" # One of: ["AWS Referral", "Partner Referral"],
     #     involvement_type: "For Visibility Only" # One of: ["For Visibility Only", "Co-Sell"],
@@ -737,17 +942,86 @@ module Aws::PartnerCentralSelling
     #         email: "Email",
     #         first_name: "Name",
     #         last_name: "Name",
-    #         business_title: "AWSSalesRep" # One of: ["AWSSalesRep", "AWSAccountOwner", "WWPSPDM", "PDM", "PSM", "ISVSM"]
+    #         business_title: "AWSSalesRep" # One of: ["AWSSalesRep", "AWSAccountOwner", "WWPSPDM", "PDM", "PSM", "ISVSM", "Signatory"]
     #       }
     #     ],
     #     insights: {
     #       next_best_actions: "String",
-    #       engagement_score: "High" # One of: ["High", "Medium", "Low"]
+    #       engagement_score: "High" # One of: ["High", "Medium", "Low"],
+    #       aws_products_spend_insights_by_source: {
+    #         partner: {
+    #           currency_code: "USD" # One of: ["USD", "EUR", "GBP", "AUD", "CAD", "CNY", "NZD", "INR", "JPY", "CHF", "SEK", "AED", "AFN", "ALL", "AMD", "ANG", "AOA", "ARS", "AWG", "AZN", "BAM", "BBD", "BDT", "BGN", "BHD", "BIF", "BMD", "BND", "BOB", "BOV", "BRL", "BSD", "BTN", "BWP", "BYN", "BZD", "CDF", "CHE", "CHW", "CLF", "CLP", "COP", "COU", "CRC", "CUC", "CUP", "CVE", "CZK", "DJF", "DKK", "DOP", "DZD", "EGP", "ERN", "ETB", "FJD", "FKP", "GEL", "GHS", "GIP", "GMD", "GNF", "GTQ", "GYD", "HKD", "HNL", "HRK", "HTG", "HUF", "IDR", "ILS", "IQD", "IRR", "ISK", "JMD", "JOD", "KES", "KGS", "KHR", "KMF", "KPW", "KRW", "KWD", "KYD", "KZT", "LAK", "LBP", "LKR", "LRD", "LSL", "LYD", "MAD", "MDL", "MGA", "MKD", "MMK", "MNT", "MOP", "MRU", "MUR", "MVR", "MWK", "MXN", "MXV", "MYR", "MZN", "NAD", "NGN", "NIO", "NOK", "NPR", "OMR", "PAB", "PEN", "PGK", "PHP", "PKR", "PLN", "PYG", "QAR", "RON", "RSD", "RUB", "RWF", "SAR", "SBD", "SCR", "SDG", "SGD", "SHP", "SLL", "SOS", "SRD", "SSP", "STN", "SVC", "SYP", "SZL", "THB", "TJS", "TMT", "TND", "TOP", "TRY", "TTD", "TWD", "TZS", "UAH", "UGX", "USN", "UYI", "UYU", "UZS", "VEF", "VND", "VUV", "WST", "XAF", "XCD", "XDR", "XOF", "XPF", "XSU", "XUA", "YER", "ZAR", "ZMW", "ZWL"], # required
+    #           frequency: "Monthly" # One of: ["Monthly"], # required
+    #           total_amount: "MonetaryAmount",
+    #           total_optimized_amount: "MonetaryAmount",
+    #           total_potential_savings_amount: "MonetaryAmount",
+    #           total_amount_by_category: { # required
+    #             "String" => "MonetaryAmount"
+    #           },
+    #           aws_products: [ # required
+    #             {
+    #               product_code: "String", # required
+    #               service_code: "String",
+    #               categories: ["String"], # required
+    #               amount: "MonetaryAmount",
+    #               optimized_amount: "MonetaryAmount",
+    #               potential_savings_amount: "MonetaryAmount",
+    #               optimizations: [ # required
+    #                 {
+    #                   description: "String", # required
+    #                   savings_amount: "MonetaryAmount", # required
+    #                 }
+    #               ]
+    #             }
+    #           ]
+    #         },
+    #         aws: {
+    #           currency_code: "USD" # One of: ["USD", "EUR", "GBP", "AUD", "CAD", "CNY", "NZD", "INR", "JPY", "CHF", "SEK", "AED", "AFN", "ALL", "AMD", "ANG", "AOA", "ARS", "AWG", "AZN", "BAM", "BBD", "BDT", "BGN", "BHD", "BIF", "BMD", "BND", "BOB", "BOV", "BRL", "BSD", "BTN", "BWP", "BYN", "BZD", "CDF", "CHE", "CHW", "CLF", "CLP", "COP", "COU", "CRC", "CUC", "CUP", "CVE", "CZK", "DJF", "DKK", "DOP", "DZD", "EGP", "ERN", "ETB", "FJD", "FKP", "GEL", "GHS", "GIP", "GMD", "GNF", "GTQ", "GYD", "HKD", "HNL", "HRK", "HTG", "HUF", "IDR", "ILS", "IQD", "IRR", "ISK", "JMD", "JOD", "KES", "KGS", "KHR", "KMF", "KPW", "KRW", "KWD", "KYD", "KZT", "LAK", "LBP", "LKR", "LRD", "LSL", "LYD", "MAD", "MDL", "MGA", "MKD", "MMK", "MNT", "MOP", "MRU", "MUR", "MVR", "MWK", "MXN", "MXV", "MYR", "MZN", "NAD", "NGN", "NIO", "NOK", "NPR", "OMR", "PAB", "PEN", "PGK", "PHP", "PKR", "PLN", "PYG", "QAR", "RON", "RSD", "RUB", "RWF", "SAR", "SBD", "SCR", "SDG", "SGD", "SHP", "SLL", "SOS", "SRD", "SSP", "STN", "SVC", "SYP", "SZL", "THB", "TJS", "TMT", "TND", "TOP", "TRY", "TTD", "TWD", "TZS", "UAH", "UGX", "USN", "UYI", "UYU", "UZS", "VEF", "VND", "VUV", "WST", "XAF", "XCD", "XDR", "XOF", "XPF", "XSU", "XUA", "YER", "ZAR", "ZMW", "ZWL"], # required
+    #           frequency: "Monthly" # One of: ["Monthly"], # required
+    #           total_amount: "MonetaryAmount",
+    #           total_optimized_amount: "MonetaryAmount",
+    #           total_potential_savings_amount: "MonetaryAmount",
+    #           total_amount_by_category: { # required
+    #             "String" => "MonetaryAmount"
+    #           },
+    #           aws_products: [ # required
+    #             {
+    #               product_code: "String", # required
+    #               service_code: "String",
+    #               categories: ["String"], # required
+    #               amount: "MonetaryAmount",
+    #               optimized_amount: "MonetaryAmount",
+    #               potential_savings_amount: "MonetaryAmount",
+    #               optimizations: [ # required
+    #                 {
+    #                   description: "String", # required
+    #                   savings_amount: "MonetaryAmount", # required
+    #                 }
+    #               ]
+    #             }
+    #           ]
+    #         }
+    #       },
+    #       opportunity_quality: {
+    #         score: 1,
+    #         trend: "String"
+    #       },
+    #       recommendations: [
+    #         {
+    #           type: "String", # required
+    #           details: "String", # required
+    #           attributes: {
+    #             "String" => "String"
+    #           }
+    #         }
+    #       ]
     #     },
     #     involvement_type_change_reason: "Expansion Opportunity" # One of: ["Expansion Opportunity", "Change in Deal Information", "Customer Requested", "Technical Complexity", "Risk Mitigation"],
     #     related_entity_ids: {
     #       aws_products: ["AwsProductIdentifier"],
-    #       solutions: ["SolutionIdentifier"]
+    #       solutions: ["SolutionIdentifier"],
+    #       aws_marketplace_solutions: ["AwsMarketplaceSolutionIdentifier"],
+    #       aws_marketplace_products: ["AwsMarketplaceProductArn"]
     #     },
     #     customer: {
     #       contacts: [
@@ -763,14 +1037,26 @@ module Aws::PartnerCentralSelling
     #     project: {
     #       expected_customer_spend: [
     #         {
-    #           amount: "Amount", # required
+    #           amount: "Amount",
     #           currency_code: "USD" # One of: ["USD", "EUR", "GBP", "AUD", "CAD", "CNY", "NZD", "INR", "JPY", "CHF", "SEK", "AED", "AFN", "ALL", "AMD", "ANG", "AOA", "ARS", "AWG", "AZN", "BAM", "BBD", "BDT", "BGN", "BHD", "BIF", "BMD", "BND", "BOB", "BOV", "BRL", "BSD", "BTN", "BWP", "BYN", "BZD", "CDF", "CHE", "CHW", "CLF", "CLP", "COP", "COU", "CRC", "CUC", "CUP", "CVE", "CZK", "DJF", "DKK", "DOP", "DZD", "EGP", "ERN", "ETB", "FJD", "FKP", "GEL", "GHS", "GIP", "GMD", "GNF", "GTQ", "GYD", "HKD", "HNL", "HRK", "HTG", "HUF", "IDR", "ILS", "IQD", "IRR", "ISK", "JMD", "JOD", "KES", "KGS", "KHR", "KMF", "KPW", "KRW", "KWD", "KYD", "KZT", "LAK", "LBP", "LKR", "LRD", "LSL", "LYD", "MAD", "MDL", "MGA", "MKD", "MMK", "MNT", "MOP", "MRU", "MUR", "MVR", "MWK", "MXN", "MXV", "MYR", "MZN", "NAD", "NGN", "NIO", "NOK", "NPR", "OMR", "PAB", "PEN", "PGK", "PHP", "PKR", "PLN", "PYG", "QAR", "RON", "RSD", "RUB", "RWF", "SAR", "SBD", "SCR", "SDG", "SGD", "SHP", "SLL", "SOS", "SRD", "SSP", "STN", "SVC", "SYP", "SZL", "THB", "TJS", "TMT", "TND", "TOP", "TRY", "TTD", "TWD", "TZS", "UAH", "UGX", "USN", "UYI", "UYU", "UZS", "VEF", "VND", "VUV", "WST", "XAF", "XCD", "XDR", "XOF", "XPF", "XSU", "XUA", "YER", "ZAR", "ZMW", "ZWL"], # required
     #           frequency: "Monthly" # One of: ["Monthly"], # required
     #           target_company: "String", # required
-    #           estimation_url: "WebsiteUrl"
+    #           estimation_url: "EstimationUrl"
     #         }
-    #       ]
-    #     }
+    #       ],
+    #       aws_partition: "aws-eusc" # One of: ["aws-eusc"]
+    #     },
+    #     cosell_motion: "String",
+    #     software_revenue: {
+    #       value: {
+    #         amount: "String", # required
+    #         currency_code: "USD" # One of: ["USD", "EUR", "GBP", "AUD", "CAD", "CNY", "NZD", "INR", "JPY", "CHF", "SEK", "AED", "AFN", "ALL", "AMD", "ANG", "AOA", "ARS", "AWG", "AZN", "BAM", "BBD", "BDT", "BGN", "BHD", "BIF", "BMD", "BND", "BOB", "BOV", "BRL", "BSD", "BTN", "BWP", "BYN", "BZD", "CDF", "CHE", "CHW", "CLF", "CLP", "COP", "COU", "CRC", "CUC", "CUP", "CVE", "CZK", "DJF", "DKK", "DOP", "DZD", "EGP", "ERN", "ETB", "FJD", "FKP", "GEL", "GHS", "GIP", "GMD", "GNF", "GTQ", "GYD", "HKD", "HNL", "HRK", "HTG", "HUF", "IDR", "ILS", "IQD", "IRR", "ISK", "JMD", "JOD", "KES", "KGS", "KHR", "KMF", "KPW", "KRW", "KWD", "KYD", "KZT", "LAK", "LBP", "LKR", "LRD", "LSL", "LYD", "MAD", "MDL", "MGA", "MKD", "MMK", "MNT", "MOP", "MRU", "MUR", "MVR", "MWK", "MXN", "MXV", "MYR", "MZN", "NAD", "NGN", "NIO", "NOK", "NPR", "OMR", "PAB", "PEN", "PGK", "PHP", "PKR", "PLN", "PYG", "QAR", "RON", "RSD", "RUB", "RWF", "SAR", "SBD", "SCR", "SDG", "SGD", "SHP", "SLL", "SOS", "SRD", "SSP", "STN", "SVC", "SYP", "SZL", "THB", "TJS", "TMT", "TND", "TOP", "TRY", "TTD", "TWD", "TZS", "UAH", "UGX", "USN", "UYI", "UYU", "UZS", "VEF", "VND", "VUV", "WST", "XAF", "XCD", "XDR", "XOF", "XPF", "XSU", "XUA", "YER", "ZAR", "ZMW", "ZWL"], # required
+    #       },
+    #       discount: "String",
+    #       effective_date: "String",
+    #       expiration_date: "String"
+    #     },
+    #     catalog: "CatalogIdentifier", # required
     #   }
     # @return [Types::GetAwsOpportunitySummaryResponse]
     def get_aws_opportunity_summary(params = {}, options = {})
@@ -801,9 +1087,12 @@ module Aws::PartnerCentralSelling
     #     created_at: Time.now,
     #     created_by: "AwsAccount",
     #     member_count: 1,
+    #     modified_at: Time.now,
+    #     modified_by: "AwsAccount",
     #     contexts: [
     #       {
-    #         type: "CustomerProject" # One of: ["CustomerProject"], # required
+    #         id: "EngagementContextIdentifier",
+    #         type: "CustomerProject" # One of: ["CustomerProject", "Lead", "ProspectingResult"], # required
     #         payload: {
     #           # One of:
     #           customer_project: {
@@ -817,6 +1106,71 @@ module Aws::PartnerCentralSelling
     #               title: "EngagementCustomerProjectTitle", # required
     #               business_problem: "EngagementCustomerBusinessProblem", # required
     #               target_completion_date: "String", # required
+    #             }
+    #           },
+    #           lead: {
+    #             insights: {
+    #               lead_readiness_score: "String"
+    #             },
+    #             qualification_status: "LeadQualificationStatus",
+    #             customer: { # required
+    #               industry: "LeadIndustry",
+    #               company_name: "CompanyName", # required
+    #               website_url: "LeadWebsiteUrl",
+    #               address: {
+    #                 city: "String",
+    #                 postal_code: "String",
+    #                 state_or_region: "String",
+    #                 country_code: "LeadCountryCode"
+    #               },
+    #               aws_maturity: "AwsMaturity",
+    #               market_segment: "LeadMarketSegment"
+    #             },
+    #             interactions: [ # required
+    #               {
+    #                 source_type: "LeadSourceType",
+    #                 source_id: "LeadSourceId",
+    #                 source_name: "LeadSourceName",
+    #                 usecase: "EngagementUseCase",
+    #                 interaction_date: Time.now,
+    #                 customer_action: "CustomerAction",
+    #                 business_problem: "LeadBusinessProblem",
+    #                 contact: { # required
+    #                   business_title: "LeadJobTitle", # required
+    #                   email: "LeadEmail", # required
+    #                   first_name: "Name", # required
+    #                   last_name: "Name", # required
+    #                   phone: "LeadPhoneNumber"
+    #                 }
+    #               }
+    #             ]
+    #           },
+    #           prospecting_result: {
+    #             aws: {
+    #               customer: {
+    #                 account_name: "ProspectingAccountName",
+    #                 geo: "ProspectingGeo",
+    #                 region: "ProspectingRegion",
+    #                 sub_region: "ProspectingSubRegion",
+    #                 country: "US" # One of: ["US", "AF", "AX", "AL", "DZ", "AS", "AD", "AO", "AI", "AQ", "AG", "AR", "AM", "AW", "AU", "AT", "AZ", "BS", "BH", "BD", "BB", "BY", "BE", "BZ", "BJ", "BM", "BT", "BO", "BQ", "BA", "BW", "BV", "BR", "IO", "BN", "BG", "BF", "BI", "KH", "CM", "CA", "CV", "KY", "CF", "TD", "CL", "CN", "CX", "CC", "CO", "KM", "CG", "CK", "CR", "CI", "HR", "CU", "CW", "CY", "CZ", "CD", "DK", "DJ", "DM", "DO", "EC", "EG", "SV", "GQ", "ER", "EE", "ET", "FK", "FO", "FJ", "FI", "FR", "GF", "PF", "TF", "GA", "GM", "GE", "DE", "GH", "GI", "GR", "GL", "GD", "GP", "GU", "GT", "GG", "GN", "GW", "GY", "HT", "HM", "VA", "HN", "HK", "HU", "IS", "IN", "ID", "IR", "IQ", "IE", "IM", "IL", "IT", "JM", "JP", "JE", "JO", "KZ", "KE", "KI", "KR", "KW", "KG", "LA", "LV", "LB", "LS", "LR", "LY", "LI", "LT", "LU", "MO", "MK", "MG", "MW", "MY", "MV", "ML", "MT", "MH", "MQ", "MR", "MU", "YT", "MX", "FM", "MD", "MC", "MN", "ME", "MS", "MA", "MZ", "MM", "NA", "NR", "NP", "NL", "AN", "NC", "NZ", "NI", "NE", "NG", "NU", "NF", "MP", "NO", "OM", "PK", "PW", "PS", "PA", "PG", "PY", "PE", "PH", "PN", "PL", "PT", "PR", "QA", "RE", "RO", "RU", "RW", "BL", "SH", "KN", "LC", "MF", "PM", "VC", "WS", "SM", "ST", "SA", "SN", "RS", "SC", "SL", "SG", "SX", "SK", "SI", "SB", "SO", "ZA", "GS", "SS", "ES", "LK", "SD", "SR", "SJ", "SZ", "SE", "CH", "SY", "TW", "TJ", "TZ", "TH", "TL", "TG", "TK", "TO", "TT", "TN", "TR", "TM", "TC", "TV", "UG", "UA", "AE", "GB", "UM", "UY", "UZ", "VU", "VE", "VN", "VG", "VI", "WF", "EH", "YE", "ZM", "ZW"],
+    #                 industry: "Aerospace" # One of: ["Aerospace", "Agriculture", "Automotive", "Computers and Electronics", "Consumer Goods", "Education", "Energy - Oil and Gas", "Energy - Power and Utilities", "Financial Services", "Gaming", "Government", "Healthcare", "Hospitality", "Life Sciences", "Manufacturing", "Marketing and Advertising", "Media and Entertainment", "Mining", "Non-Profit Organization", "Professional Services", "Real Estate and Construction", "Retail", "Software and Internet", "Telecommunications", "Transportation and Logistics", "Travel", "Wholesale and Distribution", "Other"],
+    #                 sub_industry: "ProspectingSubIndustry",
+    #                 segment: "ProspectingSegment",
+    #                 company_size: "ProspectingCompanySize",
+    #                 eligible_programs: ["String"],
+    #                 public_profile_summary: "ProspectingPublicProfileSummary"
+    #               },
+    #               insights: {
+    #                 marketplace_engagement_score: "EngagementScoreLevel",
+    #                 solution_score: "String",
+    #                 solution_category: "String",
+    #                 solution_sub_category: "String"
+    #               },
+    #               start_time: Time.now,
+    #               end_time: Time.now,
+    #               task_id: "ProspectingTaskIdentifier",
+    #               task_arn: "TaskArn",
+    #               task_name: "TaskName"
     #             }
     #           }
     #         }
@@ -846,7 +1200,7 @@ module Aws::PartnerCentralSelling
     #   response.to_h #=>
     #   {
     #     arn: "String",
-    #     payload_type: "OpportunityInvitation" # One of: ["OpportunityInvitation"],
+    #     payload_type: "OpportunityInvitation" # One of: ["OpportunityInvitation", "LeadInvitation"],
     #     id: "EngagementInvitationArnOrIdentifier", # required
     #     engagement_id: "EngagementIdentifier",
     #     engagement_title: "EngagementTitle",
@@ -889,13 +1243,30 @@ module Aws::PartnerCentralSelling
     #           target_completion_date: "Date", # required
     #           expected_customer_spend: [ # required
     #             {
-    #               amount: "Amount", # required
+    #               amount: "Amount",
     #               currency_code: "USD" # One of: ["USD", "EUR", "GBP", "AUD", "CAD", "CNY", "NZD", "INR", "JPY", "CHF", "SEK", "AED", "AFN", "ALL", "AMD", "ANG", "AOA", "ARS", "AWG", "AZN", "BAM", "BBD", "BDT", "BGN", "BHD", "BIF", "BMD", "BND", "BOB", "BOV", "BRL", "BSD", "BTN", "BWP", "BYN", "BZD", "CDF", "CHE", "CHW", "CLF", "CLP", "COP", "COU", "CRC", "CUC", "CUP", "CVE", "CZK", "DJF", "DKK", "DOP", "DZD", "EGP", "ERN", "ETB", "FJD", "FKP", "GEL", "GHS", "GIP", "GMD", "GNF", "GTQ", "GYD", "HKD", "HNL", "HRK", "HTG", "HUF", "IDR", "ILS", "IQD", "IRR", "ISK", "JMD", "JOD", "KES", "KGS", "KHR", "KMF", "KPW", "KRW", "KWD", "KYD", "KZT", "LAK", "LBP", "LKR", "LRD", "LSL", "LYD", "MAD", "MDL", "MGA", "MKD", "MMK", "MNT", "MOP", "MRU", "MUR", "MVR", "MWK", "MXN", "MXV", "MYR", "MZN", "NAD", "NGN", "NIO", "NOK", "NPR", "OMR", "PAB", "PEN", "PGK", "PHP", "PKR", "PLN", "PYG", "QAR", "RON", "RSD", "RUB", "RWF", "SAR", "SBD", "SCR", "SDG", "SGD", "SHP", "SLL", "SOS", "SRD", "SSP", "STN", "SVC", "SYP", "SZL", "THB", "TJS", "TMT", "TND", "TOP", "TRY", "TTD", "TWD", "TZS", "UAH", "UGX", "USN", "UYI", "UYU", "UZS", "VEF", "VND", "VUV", "WST", "XAF", "XCD", "XDR", "XOF", "XPF", "XSU", "XUA", "YER", "ZAR", "ZMW", "ZWL"], # required
     #               frequency: "Monthly" # One of: ["Monthly"], # required
     #               target_company: "String", # required
-    #               estimation_url: "WebsiteUrl"
+    #               estimation_url: "EstimationUrl"
     #             }
     #           ]
+    #         }
+    #       },
+    #       lead_invitation: {
+    #         customer: { # required
+    #           industry: "LeadIndustry",
+    #           company_name: "CompanyName", # required
+    #           website_url: "LeadWebsiteUrl",
+    #           country_code: "LeadCountryCode",
+    #           aws_maturity: "AwsMaturity",
+    #           market_segment: "LeadMarketSegment"
+    #         },
+    #         interaction: { # required
+    #           source_type: "LeadSourceType",
+    #           source_id: "LeadSourceId",
+    #           source_name: "LeadSourceName",
+    #           usecase: "EngagementUseCase",
+    #           contact_business_title: "JobTitle", # required
     #         }
     #       }
     #     },
@@ -906,7 +1277,33 @@ module Aws::PartnerCentralSelling
     #         company_name: "MemberCompanyName",
     #         website_url: "String"
     #       }
-    #     ]
+    #     ],
+    #     enrichment_context: {
+    #       prospecting_result_aws: {
+    #         customer: {
+    #           account_name: "ProspectingAccountName",
+    #           geo: "ProspectingGeo",
+    #           region: "ProspectingRegion",
+    #           sub_region: "ProspectingSubRegion",
+    #           country: "US" # One of: ["US", "AF", "AX", "AL", "DZ", "AS", "AD", "AO", "AI", "AQ", "AG", "AR", "AM", "AW", "AU", "AT", "AZ", "BS", "BH", "BD", "BB", "BY", "BE", "BZ", "BJ", "BM", "BT", "BO", "BQ", "BA", "BW", "BV", "BR", "IO", "BN", "BG", "BF", "BI", "KH", "CM", "CA", "CV", "KY", "CF", "TD", "CL", "CN", "CX", "CC", "CO", "KM", "CG", "CK", "CR", "CI", "HR", "CU", "CW", "CY", "CZ", "CD", "DK", "DJ", "DM", "DO", "EC", "EG", "SV", "GQ", "ER", "EE", "ET", "FK", "FO", "FJ", "FI", "FR", "GF", "PF", "TF", "GA", "GM", "GE", "DE", "GH", "GI", "GR", "GL", "GD", "GP", "GU", "GT", "GG", "GN", "GW", "GY", "HT", "HM", "VA", "HN", "HK", "HU", "IS", "IN", "ID", "IR", "IQ", "IE", "IM", "IL", "IT", "JM", "JP", "JE", "JO", "KZ", "KE", "KI", "KR", "KW", "KG", "LA", "LV", "LB", "LS", "LR", "LY", "LI", "LT", "LU", "MO", "MK", "MG", "MW", "MY", "MV", "ML", "MT", "MH", "MQ", "MR", "MU", "YT", "MX", "FM", "MD", "MC", "MN", "ME", "MS", "MA", "MZ", "MM", "NA", "NR", "NP", "NL", "AN", "NC", "NZ", "NI", "NE", "NG", "NU", "NF", "MP", "NO", "OM", "PK", "PW", "PS", "PA", "PG", "PY", "PE", "PH", "PN", "PL", "PT", "PR", "QA", "RE", "RO", "RU", "RW", "BL", "SH", "KN", "LC", "MF", "PM", "VC", "WS", "SM", "ST", "SA", "SN", "RS", "SC", "SL", "SG", "SX", "SK", "SI", "SB", "SO", "ZA", "GS", "SS", "ES", "LK", "SD", "SR", "SJ", "SZ", "SE", "CH", "SY", "TW", "TJ", "TZ", "TH", "TL", "TG", "TK", "TO", "TT", "TN", "TR", "TM", "TC", "TV", "UG", "UA", "AE", "GB", "UM", "UY", "UZ", "VU", "VE", "VN", "VG", "VI", "WF", "EH", "YE", "ZM", "ZW"],
+    #           industry: "Aerospace" # One of: ["Aerospace", "Agriculture", "Automotive", "Computers and Electronics", "Consumer Goods", "Education", "Energy - Oil and Gas", "Energy - Power and Utilities", "Financial Services", "Gaming", "Government", "Healthcare", "Hospitality", "Life Sciences", "Manufacturing", "Marketing and Advertising", "Media and Entertainment", "Mining", "Non-Profit Organization", "Professional Services", "Real Estate and Construction", "Retail", "Software and Internet", "Telecommunications", "Transportation and Logistics", "Travel", "Wholesale and Distribution", "Other"],
+    #           sub_industry: "ProspectingSubIndustry",
+    #           segment: "ProspectingSegment",
+    #           company_size: "ProspectingCompanySize",
+    #           eligible_programs: ["String"],
+    #           public_profile_summary: "ProspectingPublicProfileSummary"
+    #         },
+    #         insights: {
+    #           marketplace_engagement_score: "EngagementScoreLevel",
+    #           solution_score: "String",
+    #           solution_category: "String",
+    #           solution_sub_category: "String"
+    #         }
+    #       },
+    #       lead_insights: {
+    #         lead_readiness_score: "String"
+    #       }
+    #     }
     #   }
     # @return [Types::GetEngagementInvitationResponse]
     def get_engagement_invitation(params = {}, options = {})
@@ -964,13 +1361,17 @@ module Aws::PartnerCentralSelling
     #       delivery_models: ["SaaS or PaaS" # One of: ["SaaS or PaaS", "BYOL or AMI", "Managed Services", "Professional Services", "Resell", "Other"]],
     #       expected_customer_spend: [
     #         {
-    #           amount: "Amount", # required
+    #           amount: "Amount",
     #           currency_code: "USD" # One of: ["USD", "EUR", "GBP", "AUD", "CAD", "CNY", "NZD", "INR", "JPY", "CHF", "SEK", "AED", "AFN", "ALL", "AMD", "ANG", "AOA", "ARS", "AWG", "AZN", "BAM", "BBD", "BDT", "BGN", "BHD", "BIF", "BMD", "BND", "BOB", "BOV", "BRL", "BSD", "BTN", "BWP", "BYN", "BZD", "CDF", "CHE", "CHW", "CLF", "CLP", "COP", "COU", "CRC", "CUC", "CUP", "CVE", "CZK", "DJF", "DKK", "DOP", "DZD", "EGP", "ERN", "ETB", "FJD", "FKP", "GEL", "GHS", "GIP", "GMD", "GNF", "GTQ", "GYD", "HKD", "HNL", "HRK", "HTG", "HUF", "IDR", "ILS", "IQD", "IRR", "ISK", "JMD", "JOD", "KES", "KGS", "KHR", "KMF", "KPW", "KRW", "KWD", "KYD", "KZT", "LAK", "LBP", "LKR", "LRD", "LSL", "LYD", "MAD", "MDL", "MGA", "MKD", "MMK", "MNT", "MOP", "MRU", "MUR", "MVR", "MWK", "MXN", "MXV", "MYR", "MZN", "NAD", "NGN", "NIO", "NOK", "NPR", "OMR", "PAB", "PEN", "PGK", "PHP", "PKR", "PLN", "PYG", "QAR", "RON", "RSD", "RUB", "RWF", "SAR", "SBD", "SCR", "SDG", "SGD", "SHP", "SLL", "SOS", "SRD", "SSP", "STN", "SVC", "SYP", "SZL", "THB", "TJS", "TMT", "TND", "TOP", "TRY", "TTD", "TWD", "TZS", "UAH", "UGX", "USN", "UYI", "UYU", "UZS", "VEF", "VND", "VUV", "WST", "XAF", "XCD", "XDR", "XOF", "XPF", "XSU", "XUA", "YER", "ZAR", "ZMW", "ZWL"], # required
     #           frequency: "Monthly" # One of: ["Monthly"], # required
     #           target_company: "String", # required
-    #           estimation_url: "WebsiteUrl"
+    #           estimation_url: "EstimationUrl"
     #         }
     #       ],
+    #       expected_contract_duration: {
+    #         term: "Months" # One of: ["Months"], # required
+    #         value: "String", # required
+    #       },
     #       title: "PiiString",
     #       apn_programs: ["String"],
     #       customer_business_problem: "PiiString",
@@ -980,7 +1381,8 @@ module Aws::PartnerCentralSelling
     #       competitor_name: "Oracle Cloud" # One of: ["Oracle Cloud", "On-Prem", "Co-location", "Akamai", "AliCloud", "Google Cloud Platform", "IBM Softlayer", "Microsoft Azure", "Other- Cost Optimization", "No Competition", "*Other"],
     #       other_competitor_names: "String",
     #       other_solution_description: "PiiString",
-    #       additional_comments: "String"
+    #       additional_comments: "String",
+    #       aws_partition: "aws-eusc" # One of: ["aws-eusc"]
     #     },
     #     opportunity_type: "Net New Business" # One of: ["Net New Business", "Flat Renewal", "Expansion"],
     #     marketing: {
@@ -1005,8 +1407,11 @@ module Aws::PartnerCentralSelling
     #     created_date: Time.now, # required
     #     related_entity_identifiers: { # required
     #       aws_marketplace_offers: ["AwsMarketplaceOfferIdentifier"],
+    #       aws_marketplace_offer_sets: ["AwsMarketplaceOfferSetIdentifier"],
     #       solutions: ["SolutionIdentifier"],
-    #       aws_products: ["AwsProductIdentifier"]
+    #       aws_products: ["AwsProductIdentifier"],
+    #       aws_marketplace_solutions: ["AwsMarketplaceSolutionIdentifier"],
+    #       aws_marketplace_products: ["AwsMarketplaceProductArn"]
     #     },
     #     life_cycle: {
     #       stage: "Prospect" # One of: ["Prospect", "Qualified", "Technical Validation", "Business Validation", "Committed", "Launched", "Closed Lost"],
@@ -1036,6 +1441,43 @@ module Aws::PartnerCentralSelling
     # @return [Types::GetOpportunityResponse]
     def get_opportunity(params = {}, options = {})
       request = build_request(:get_opportunity, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves the details and current status of a prospecting task previously started with <code>StartProspectingFromEngagementTask</code> to enable polling for completion and access to per-engagement processing results.</p>
+    # @param [Hash, Types::GetProspectingFromEngagementTaskRequest] params
+    # @option params [String] :catalog
+    #   <p>Specifies the catalog associated with the task. Specify <code>AWS</code> for production environments and <code>Sandbox</code> for testing and development purposes. The value must match the catalog used when the task was created.</p>
+    # @option params [String] :task_identifier
+    #   <p>The unique identifier of the prospecting task to retrieve. This value is returned in the <code>TaskId</code> field of the <code>StartProspectingFromEngagementTask</code> response.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     catalog: "CatalogIdentifier", # required
+    #     task_identifier: "ProspectingTaskIdentifier", # required
+    #   }
+    #   options = {}
+    #   response = client.get_prospecting_from_engagement_task(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     task_id: "ProspectingTaskIdentifier", # required
+    #     task_arn: "ProspectingTaskArn", # required
+    #     task_name: "TaskName", # required
+    #     start_time: Time.now, # required
+    #     end_time: Time.now,
+    #     engagements: [ # required
+    #       {
+    #         engagement_identifier: "EngagementIdentifier", # required
+    #         engagement_context_id: "String",
+    #         status: "PENDING" # One of: ["PENDING", "IN_PROGRESS", "COMPLETED", "FAILED"], # required
+    #         reason_code: "String",
+    #         message: "String"
+    #       }
+    #     ]
+    #   }
+    # @return [Types::GetProspectingFromEngagementTaskResponse]
+    def get_prospecting_from_engagement_task(params = {}, options = {})
+      request = build_request(:get_prospecting_from_engagement_task, params)
       request.send_request(options)
     end
 
@@ -1126,24 +1568,169 @@ module Aws::PartnerCentralSelling
     #           delivery_models: ["SaaS or PaaS" # One of: ["SaaS or PaaS", "BYOL or AMI", "Managed Services", "Professional Services", "Resell", "Other"]],
     #           expected_customer_spend: [
     #             {
-    #               amount: "Amount", # required
+    #               amount: "Amount",
     #               currency_code: "USD" # One of: ["USD", "EUR", "GBP", "AUD", "CAD", "CNY", "NZD", "INR", "JPY", "CHF", "SEK", "AED", "AFN", "ALL", "AMD", "ANG", "AOA", "ARS", "AWG", "AZN", "BAM", "BBD", "BDT", "BGN", "BHD", "BIF", "BMD", "BND", "BOB", "BOV", "BRL", "BSD", "BTN", "BWP", "BYN", "BZD", "CDF", "CHE", "CHW", "CLF", "CLP", "COP", "COU", "CRC", "CUC", "CUP", "CVE", "CZK", "DJF", "DKK", "DOP", "DZD", "EGP", "ERN", "ETB", "FJD", "FKP", "GEL", "GHS", "GIP", "GMD", "GNF", "GTQ", "GYD", "HKD", "HNL", "HRK", "HTG", "HUF", "IDR", "ILS", "IQD", "IRR", "ISK", "JMD", "JOD", "KES", "KGS", "KHR", "KMF", "KPW", "KRW", "KWD", "KYD", "KZT", "LAK", "LBP", "LKR", "LRD", "LSL", "LYD", "MAD", "MDL", "MGA", "MKD", "MMK", "MNT", "MOP", "MRU", "MUR", "MVR", "MWK", "MXN", "MXV", "MYR", "MZN", "NAD", "NGN", "NIO", "NOK", "NPR", "OMR", "PAB", "PEN", "PGK", "PHP", "PKR", "PLN", "PYG", "QAR", "RON", "RSD", "RUB", "RWF", "SAR", "SBD", "SCR", "SDG", "SGD", "SHP", "SLL", "SOS", "SRD", "SSP", "STN", "SVC", "SYP", "SZL", "THB", "TJS", "TMT", "TND", "TOP", "TRY", "TTD", "TWD", "TZS", "UAH", "UGX", "USN", "UYI", "UYU", "UZS", "VEF", "VND", "VUV", "WST", "XAF", "XCD", "XDR", "XOF", "XPF", "XSU", "XUA", "YER", "ZAR", "ZMW", "ZWL"], # required
     #               frequency: "Monthly" # One of: ["Monthly"], # required
     #               target_company: "String", # required
-    #               estimation_url: "WebsiteUrl"
+    #               estimation_url: "EstimationUrl"
     #             }
     #           ],
+    #           expected_contract_duration: {
+    #             term: "Months" # One of: ["Months"], # required
+    #             value: "String", # required
+    #           },
     #           customer_use_case: "String",
     #           sales_activities: ["Initialized discussions with customer" # One of: ["Initialized discussions with customer", "Customer has shown interest in solution", "Conducted POC / Demo", "In evaluation / planning stage", "Agreed on solution to Business Problem", "Completed Action Plan", "Finalized Deployment Need", "SOW Signed"]],
     #           other_solution_description: "PiiString"
     #         },
     #         related_entity_identifiers: {
     #           aws_marketplace_offers: ["AwsMarketplaceOfferIdentifier"],
+    #           aws_marketplace_offer_sets: ["AwsMarketplaceOfferSetIdentifier"],
     #           solutions: ["SolutionIdentifier"],
-    #           aws_products: ["AwsProductIdentifier"]
+    #           aws_products: ["AwsProductIdentifier"],
+    #           aws_marketplace_solutions: ["AwsMarketplaceSolutionIdentifier"],
+    #           aws_marketplace_products: ["AwsMarketplaceProductArn"]
+    #         }
+    #       },
+    #       aws_opportunity_summary_full_view: {
+    #         related_opportunity_id: "OpportunityIdentifier",
+    #         origin: "AWS Referral" # One of: ["AWS Referral", "Partner Referral"],
+    #         involvement_type: "For Visibility Only" # One of: ["For Visibility Only", "Co-Sell"],
+    #         visibility: "Full" # One of: ["Full", "Limited"],
+    #         life_cycle: {
+    #           target_close_date: "Date",
+    #           closed_lost_reason: "Administrative" # One of: ["Administrative", "Business Associate Agreement", "Company Acquired/Dissolved", "Competitive Offering", "Customer Data Requirement", "Customer Deficiency", "Customer Experience", "Delay / Cancellation of Project", "Duplicate", "Duplicate Opportunity", "Executive Blocker", "Failed Vetting", "Feature Limitation", "Financial/Commercial", "Insufficient Amazon Value", "Insufficient AWS Value", "International Constraints", "Legal / Tax / Regulatory", "Legal Terms and Conditions", "Lost to Competitor", "Lost to Competitor - Google", "Lost to Competitor - Microsoft", "Lost to Competitor - Other", "Lost to Competitor - Rackspace", "Lost to Competitor - SoftLayer", "Lost to Competitor - VMWare", "No Customer Reference", "No Integration Resources", "No Opportunity", "No Perceived Value of MP", "No Response", "Not Committed to AWS", "No Update", "On Premises Deployment", "Other", "Other (Details in Description)", "Partner Gap", "Past Due", "People/Relationship/Governance", "Platform Technology Limitation", "Preference for Competitor", "Price", "Product/Technology", "Product Not on AWS", "Security / Compliance", "Self-Service", "Technical Limitations", "Term Sheet Impasse"],
+    #           stage: "Not Started" # One of: ["Not Started", "In Progress", "Prospect", "Engaged", "Identified", "Qualify", "Research", "Seller Engaged", "Evaluating", "Seller Registered", "Term Sheet Negotiation", "Contract Negotiation", "Onboarding", "Building Integration", "Qualified", "On-hold", "Technical Validation", "Business Validation", "Committed", "Launched", "Deferred to Partner", "Closed Lost", "Completed", "Closed Incomplete"],
+    #           next_steps: "PiiString",
+    #           next_steps_history: [
+    #             {
+    #               value: "String", # required
+    #               time: Time.now, # required
+    #             }
+    #           ]
+    #         },
+    #         opportunity_team: [
+    #           {
+    #             email: "Email",
+    #             first_name: "Name",
+    #             last_name: "Name",
+    #             business_title: "AWSSalesRep" # One of: ["AWSSalesRep", "AWSAccountOwner", "WWPSPDM", "PDM", "PSM", "ISVSM", "Signatory"]
+    #           }
+    #         ],
+    #         insights: {
+    #           next_best_actions: "String",
+    #           engagement_score: "High" # One of: ["High", "Medium", "Low"],
+    #           aws_products_spend_insights_by_source: {
+    #             partner: {
+    #               currency_code: "USD" # One of: ["USD", "EUR", "GBP", "AUD", "CAD", "CNY", "NZD", "INR", "JPY", "CHF", "SEK", "AED", "AFN", "ALL", "AMD", "ANG", "AOA", "ARS", "AWG", "AZN", "BAM", "BBD", "BDT", "BGN", "BHD", "BIF", "BMD", "BND", "BOB", "BOV", "BRL", "BSD", "BTN", "BWP", "BYN", "BZD", "CDF", "CHE", "CHW", "CLF", "CLP", "COP", "COU", "CRC", "CUC", "CUP", "CVE", "CZK", "DJF", "DKK", "DOP", "DZD", "EGP", "ERN", "ETB", "FJD", "FKP", "GEL", "GHS", "GIP", "GMD", "GNF", "GTQ", "GYD", "HKD", "HNL", "HRK", "HTG", "HUF", "IDR", "ILS", "IQD", "IRR", "ISK", "JMD", "JOD", "KES", "KGS", "KHR", "KMF", "KPW", "KRW", "KWD", "KYD", "KZT", "LAK", "LBP", "LKR", "LRD", "LSL", "LYD", "MAD", "MDL", "MGA", "MKD", "MMK", "MNT", "MOP", "MRU", "MUR", "MVR", "MWK", "MXN", "MXV", "MYR", "MZN", "NAD", "NGN", "NIO", "NOK", "NPR", "OMR", "PAB", "PEN", "PGK", "PHP", "PKR", "PLN", "PYG", "QAR", "RON", "RSD", "RUB", "RWF", "SAR", "SBD", "SCR", "SDG", "SGD", "SHP", "SLL", "SOS", "SRD", "SSP", "STN", "SVC", "SYP", "SZL", "THB", "TJS", "TMT", "TND", "TOP", "TRY", "TTD", "TWD", "TZS", "UAH", "UGX", "USN", "UYI", "UYU", "UZS", "VEF", "VND", "VUV", "WST", "XAF", "XCD", "XDR", "XOF", "XPF", "XSU", "XUA", "YER", "ZAR", "ZMW", "ZWL"], # required
+    #               frequency: "Monthly" # One of: ["Monthly"], # required
+    #               total_amount: "MonetaryAmount",
+    #               total_optimized_amount: "MonetaryAmount",
+    #               total_potential_savings_amount: "MonetaryAmount",
+    #               total_amount_by_category: { # required
+    #                 "String" => "MonetaryAmount"
+    #               },
+    #               aws_products: [ # required
+    #                 {
+    #                   product_code: "String", # required
+    #                   service_code: "String",
+    #                   categories: ["String"], # required
+    #                   amount: "MonetaryAmount",
+    #                   optimized_amount: "MonetaryAmount",
+    #                   potential_savings_amount: "MonetaryAmount",
+    #                   optimizations: [ # required
+    #                     {
+    #                       description: "String", # required
+    #                       savings_amount: "MonetaryAmount", # required
+    #                     }
+    #                   ]
+    #                 }
+    #               ]
+    #             },
+    #             aws: {
+    #               currency_code: "USD" # One of: ["USD", "EUR", "GBP", "AUD", "CAD", "CNY", "NZD", "INR", "JPY", "CHF", "SEK", "AED", "AFN", "ALL", "AMD", "ANG", "AOA", "ARS", "AWG", "AZN", "BAM", "BBD", "BDT", "BGN", "BHD", "BIF", "BMD", "BND", "BOB", "BOV", "BRL", "BSD", "BTN", "BWP", "BYN", "BZD", "CDF", "CHE", "CHW", "CLF", "CLP", "COP", "COU", "CRC", "CUC", "CUP", "CVE", "CZK", "DJF", "DKK", "DOP", "DZD", "EGP", "ERN", "ETB", "FJD", "FKP", "GEL", "GHS", "GIP", "GMD", "GNF", "GTQ", "GYD", "HKD", "HNL", "HRK", "HTG", "HUF", "IDR", "ILS", "IQD", "IRR", "ISK", "JMD", "JOD", "KES", "KGS", "KHR", "KMF", "KPW", "KRW", "KWD", "KYD", "KZT", "LAK", "LBP", "LKR", "LRD", "LSL", "LYD", "MAD", "MDL", "MGA", "MKD", "MMK", "MNT", "MOP", "MRU", "MUR", "MVR", "MWK", "MXN", "MXV", "MYR", "MZN", "NAD", "NGN", "NIO", "NOK", "NPR", "OMR", "PAB", "PEN", "PGK", "PHP", "PKR", "PLN", "PYG", "QAR", "RON", "RSD", "RUB", "RWF", "SAR", "SBD", "SCR", "SDG", "SGD", "SHP", "SLL", "SOS", "SRD", "SSP", "STN", "SVC", "SYP", "SZL", "THB", "TJS", "TMT", "TND", "TOP", "TRY", "TTD", "TWD", "TZS", "UAH", "UGX", "USN", "UYI", "UYU", "UZS", "VEF", "VND", "VUV", "WST", "XAF", "XCD", "XDR", "XOF", "XPF", "XSU", "XUA", "YER", "ZAR", "ZMW", "ZWL"], # required
+    #               frequency: "Monthly" # One of: ["Monthly"], # required
+    #               total_amount: "MonetaryAmount",
+    #               total_optimized_amount: "MonetaryAmount",
+    #               total_potential_savings_amount: "MonetaryAmount",
+    #               total_amount_by_category: { # required
+    #                 "String" => "MonetaryAmount"
+    #               },
+    #               aws_products: [ # required
+    #                 {
+    #                   product_code: "String", # required
+    #                   service_code: "String",
+    #                   categories: ["String"], # required
+    #                   amount: "MonetaryAmount",
+    #                   optimized_amount: "MonetaryAmount",
+    #                   potential_savings_amount: "MonetaryAmount",
+    #                   optimizations: [ # required
+    #                     {
+    #                       description: "String", # required
+    #                       savings_amount: "MonetaryAmount", # required
+    #                     }
+    #                   ]
+    #                 }
+    #               ]
+    #             }
+    #           },
+    #           opportunity_quality: {
+    #             score: 1,
+    #             trend: "String"
+    #           },
+    #           recommendations: [
+    #             {
+    #               type: "String", # required
+    #               details: "String", # required
+    #               attributes: {
+    #                 "String" => "String"
+    #               }
+    #             }
+    #           ]
+    #         },
+    #         involvement_type_change_reason: "Expansion Opportunity" # One of: ["Expansion Opportunity", "Change in Deal Information", "Customer Requested", "Technical Complexity", "Risk Mitigation"],
+    #         related_entity_ids: {
+    #           aws_products: ["AwsProductIdentifier"],
+    #           solutions: ["SolutionIdentifier"],
+    #           aws_marketplace_solutions: ["AwsMarketplaceSolutionIdentifier"],
+    #           aws_marketplace_products: ["AwsMarketplaceProductArn"]
+    #         },
+    #         customer: {
+    #           contacts: [
+    #             {
+    #               email: "Email",
+    #               first_name: "Name",
+    #               last_name: "Name",
+    #               business_title: "JobTitle",
+    #               phone: "PhoneNumber"
+    #             }
+    #           ]
+    #         },
+    #         project: {
+    #           expected_customer_spend: [
+    #             {
+    #               amount: "Amount",
+    #               currency_code: "USD" # One of: ["USD", "EUR", "GBP", "AUD", "CAD", "CNY", "NZD", "INR", "JPY", "CHF", "SEK", "AED", "AFN", "ALL", "AMD", "ANG", "AOA", "ARS", "AWG", "AZN", "BAM", "BBD", "BDT", "BGN", "BHD", "BIF", "BMD", "BND", "BOB", "BOV", "BRL", "BSD", "BTN", "BWP", "BYN", "BZD", "CDF", "CHE", "CHW", "CLF", "CLP", "COP", "COU", "CRC", "CUC", "CUP", "CVE", "CZK", "DJF", "DKK", "DOP", "DZD", "EGP", "ERN", "ETB", "FJD", "FKP", "GEL", "GHS", "GIP", "GMD", "GNF", "GTQ", "GYD", "HKD", "HNL", "HRK", "HTG", "HUF", "IDR", "ILS", "IQD", "IRR", "ISK", "JMD", "JOD", "KES", "KGS", "KHR", "KMF", "KPW", "KRW", "KWD", "KYD", "KZT", "LAK", "LBP", "LKR", "LRD", "LSL", "LYD", "MAD", "MDL", "MGA", "MKD", "MMK", "MNT", "MOP", "MRU", "MUR", "MVR", "MWK", "MXN", "MXV", "MYR", "MZN", "NAD", "NGN", "NIO", "NOK", "NPR", "OMR", "PAB", "PEN", "PGK", "PHP", "PKR", "PLN", "PYG", "QAR", "RON", "RSD", "RUB", "RWF", "SAR", "SBD", "SCR", "SDG", "SGD", "SHP", "SLL", "SOS", "SRD", "SSP", "STN", "SVC", "SYP", "SZL", "THB", "TJS", "TMT", "TND", "TOP", "TRY", "TTD", "TWD", "TZS", "UAH", "UGX", "USN", "UYI", "UYU", "UZS", "VEF", "VND", "VUV", "WST", "XAF", "XCD", "XDR", "XOF", "XPF", "XSU", "XUA", "YER", "ZAR", "ZMW", "ZWL"], # required
+    #               frequency: "Monthly" # One of: ["Monthly"], # required
+    #               target_company: "String", # required
+    #               estimation_url: "EstimationUrl"
+    #             }
+    #           ],
+    #           aws_partition: "aws-eusc" # One of: ["aws-eusc"]
+    #         },
+    #         cosell_motion: "String",
+    #         software_revenue: {
+    #           value: {
+    #             amount: "String", # required
+    #             currency_code: "USD" # One of: ["USD", "EUR", "GBP", "AUD", "CAD", "CNY", "NZD", "INR", "JPY", "CHF", "SEK", "AED", "AFN", "ALL", "AMD", "ANG", "AOA", "ARS", "AWG", "AZN", "BAM", "BBD", "BDT", "BGN", "BHD", "BIF", "BMD", "BND", "BOB", "BOV", "BRL", "BSD", "BTN", "BWP", "BYN", "BZD", "CDF", "CHE", "CHW", "CLF", "CLP", "COP", "COU", "CRC", "CUC", "CUP", "CVE", "CZK", "DJF", "DKK", "DOP", "DZD", "EGP", "ERN", "ETB", "FJD", "FKP", "GEL", "GHS", "GIP", "GMD", "GNF", "GTQ", "GYD", "HKD", "HNL", "HRK", "HTG", "HUF", "IDR", "ILS", "IQD", "IRR", "ISK", "JMD", "JOD", "KES", "KGS", "KHR", "KMF", "KPW", "KRW", "KWD", "KYD", "KZT", "LAK", "LBP", "LKR", "LRD", "LSL", "LYD", "MAD", "MDL", "MGA", "MKD", "MMK", "MNT", "MOP", "MRU", "MUR", "MVR", "MWK", "MXN", "MXV", "MYR", "MZN", "NAD", "NGN", "NIO", "NOK", "NPR", "OMR", "PAB", "PEN", "PGK", "PHP", "PKR", "PLN", "PYG", "QAR", "RON", "RSD", "RUB", "RWF", "SAR", "SBD", "SCR", "SDG", "SGD", "SHP", "SLL", "SOS", "SRD", "SSP", "STN", "SVC", "SYP", "SZL", "THB", "TJS", "TMT", "TND", "TOP", "TRY", "TTD", "TWD", "TZS", "UAH", "UGX", "USN", "UYI", "UYU", "UZS", "VEF", "VND", "VUV", "WST", "XAF", "XCD", "XDR", "XOF", "XPF", "XSU", "XUA", "YER", "ZAR", "ZMW", "ZWL"], # required
+    #           },
+    #           discount: "String",
+    #           effective_date: "String",
+    #           expiration_date: "String"
     #         }
     #       }
-    #     }
+    #     },
+    #     target_member_accounts: ["AwsAccount"]
     #   }
     # @return [Types::GetResourceSnapshotResponse]
     def get_resource_snapshot(params = {}, options = {})
@@ -1252,7 +1839,7 @@ module Aws::PartnerCentralSelling
     #         start_time: Time.now,
     #         task_status: "IN_PROGRESS" # One of: ["IN_PROGRESS", "COMPLETE", "FAILED"],
     #         message: "String",
-    #         reason_code: "InvitationAccessDenied" # One of: ["InvitationAccessDenied", "InvitationValidationFailed", "EngagementAccessDenied", "OpportunityAccessDenied", "ResourceSnapshotJobAccessDenied", "ResourceSnapshotJobValidationFailed", "ResourceSnapshotJobConflict", "EngagementValidationFailed", "EngagementConflict", "OpportunitySubmissionFailed", "EngagementInvitationConflict", "InternalError", "OpportunityValidationFailed", "OpportunityConflict", "ResourceSnapshotAccessDenied", "ResourceSnapshotValidationFailed", "ResourceSnapshotConflict", "ServiceQuotaExceeded", "RequestThrottled"],
+    #         reason_code: "InvitationAccessDenied" # One of: ["InvitationAccessDenied", "InvitationValidationFailed", "EngagementAccessDenied", "OpportunityAccessDenied", "ResourceSnapshotJobAccessDenied", "ResourceSnapshotJobValidationFailed", "ResourceSnapshotJobConflict", "EngagementValidationFailed", "EngagementConflict", "OpportunitySubmissionFailed", "EngagementInvitationConflict", "InternalError", "OpportunityValidationFailed", "OpportunityConflict", "ResourceSnapshotAccessDenied", "ResourceSnapshotValidationFailed", "ResourceSnapshotConflict", "ServiceQuotaExceeded", "RequestThrottled", "ContextNotFound", "CustomerProjectContextNotPermitted", "DisqualifiedLeadNotPermitted"],
     #         opportunity_id: "OpportunityIdentifier",
     #         resource_snapshot_job_id: "ResourceSnapshotJobIdentifier",
     #         engagement_invitation_id: "EngagementInvitationIdentifier"
@@ -1310,7 +1897,7 @@ module Aws::PartnerCentralSelling
     #         start_time: Time.now,
     #         task_status: "IN_PROGRESS" # One of: ["IN_PROGRESS", "COMPLETE", "FAILED"],
     #         message: "String",
-    #         reason_code: "InvitationAccessDenied" # One of: ["InvitationAccessDenied", "InvitationValidationFailed", "EngagementAccessDenied", "OpportunityAccessDenied", "ResourceSnapshotJobAccessDenied", "ResourceSnapshotJobValidationFailed", "ResourceSnapshotJobConflict", "EngagementValidationFailed", "EngagementConflict", "OpportunitySubmissionFailed", "EngagementInvitationConflict", "InternalError", "OpportunityValidationFailed", "OpportunityConflict", "ResourceSnapshotAccessDenied", "ResourceSnapshotValidationFailed", "ResourceSnapshotConflict", "ServiceQuotaExceeded", "RequestThrottled"],
+    #         reason_code: "InvitationAccessDenied" # One of: ["InvitationAccessDenied", "InvitationValidationFailed", "EngagementAccessDenied", "OpportunityAccessDenied", "ResourceSnapshotJobAccessDenied", "ResourceSnapshotJobValidationFailed", "ResourceSnapshotJobConflict", "EngagementValidationFailed", "EngagementConflict", "OpportunitySubmissionFailed", "EngagementInvitationConflict", "InternalError", "OpportunityValidationFailed", "OpportunityConflict", "ResourceSnapshotAccessDenied", "ResourceSnapshotValidationFailed", "ResourceSnapshotConflict", "ServiceQuotaExceeded", "RequestThrottled", "ContextNotFound", "CustomerProjectContextNotPermitted", "DisqualifiedLeadNotPermitted"],
     #         opportunity_id: "OpportunityIdentifier",
     #         resource_snapshot_job_id: "ResourceSnapshotJobIdentifier",
     #         engagement_id: "EngagementIdentifier",
@@ -1354,7 +1941,7 @@ module Aws::PartnerCentralSelling
     #       sort_order: "ASCENDING" # One of: ["ASCENDING", "DESCENDING"], # required
     #       sort_by: "InvitationDate" # One of: ["InvitationDate"], # required
     #     },
-    #     payload_type: ["OpportunityInvitation" # One of: ["OpportunityInvitation"]],
+    #     payload_type: ["OpportunityInvitation" # One of: ["OpportunityInvitation", "LeadInvitation"]],
     #     participant_type: "SENDER" # One of: ["SENDER", "RECEIVER"], # required
     #     status: ["ACCEPTED" # One of: ["ACCEPTED", "PENDING", "REJECTED", "EXPIRED"]],
     #     engagement_identifier: ["EngagementArnOrIdentifier"],
@@ -1368,7 +1955,7 @@ module Aws::PartnerCentralSelling
     #     engagement_invitation_summaries: [
     #       {
     #         arn: "String",
-    #         payload_type: "OpportunityInvitation" # One of: ["OpportunityInvitation"],
+    #         payload_type: "OpportunityInvitation" # One of: ["OpportunityInvitation", "LeadInvitation"],
     #         id: "EngagementInvitationArnOrIdentifier", # required
     #         engagement_id: "EngagementIdentifier",
     #         engagement_title: "EngagementTitle",
@@ -1489,6 +2076,10 @@ module Aws::PartnerCentralSelling
     #   <p> A list of AWS account IDs. When specified, the response includes engagements created by these accounts. This filter is useful for finding engagements created by specific team members. </p>
     # @option params [Array<String>] :exclude_created_by
     #   <p>An array of strings representing AWS Account IDs. Use this to exclude engagements created by specific users. </p>
+    # @option params [Array<String>] :context_types
+    #   <p>Filters engagements to include only those containing the specified context types, such as "CustomerProject" or "Lead". Use this to find engagements that have specific types of contextual information associated with them.</p>
+    # @option params [Array<String>] :exclude_context_types
+    #   <p>Filters engagements to exclude those containing the specified context types. Use this to find engagements that do not have certain types of contextual information, helping to narrow results based on context exclusion criteria.</p>
     # @option params [Types::EngagementSort] :sort
     #   <p>Specifies the sorting parameters for listing Engagements.</p>
     # @option params [Integer] :max_results
@@ -1502,6 +2093,8 @@ module Aws::PartnerCentralSelling
     #     catalog: "CatalogIdentifier", # required
     #     created_by: ["AwsAccount"],
     #     exclude_created_by: ["AwsAccount"],
+    #     context_types: ["CustomerProject" # One of: ["CustomerProject", "Lead", "ProspectingResult"]],
+    #     exclude_context_types: ["CustomerProject" # One of: ["CustomerProject", "Lead", "ProspectingResult"]],
     #     sort: {
     #       sort_order: "ASCENDING" # One of: ["ASCENDING", "DESCENDING"], # required
     #       sort_by: "CreatedDate" # One of: ["CreatedDate"], # required
@@ -1522,7 +2115,10 @@ module Aws::PartnerCentralSelling
     #         title: "EngagementTitle",
     #         created_at: Time.now,
     #         created_by: "AwsAccount",
-    #         member_count: 1
+    #         member_count: 1,
+    #         modified_at: Time.now,
+    #         modified_by: "AwsAccount",
+    #         context_types: ["CustomerProject" # One of: ["CustomerProject", "Lead", "ProspectingResult"]]
     #       }
     #     ],
     #     next_token: "String"
@@ -1553,6 +2149,10 @@ module Aws::PartnerCentralSelling
     #   <p>Filters the opportunities based on their current lifecycle approval status. Use this filter to retrieve opportunities with statuses such as <code>Pending Submission</code>, <code>In Review</code>, <code>Action Required</code>, or <code>Approved</code>.</p>
     # @option params [Array<String>] :customer_company_name
     #   <p>Filters the opportunities based on the customer's company name. This allows partners to search for opportunities associated with a specific customer by matching the provided company name string.</p>
+    # @option params [Types::CreatedDateFilter] :created_date
+    #   <p>Filter opportunities by creation date criteria.</p>
+    # @option params [Types::TargetCloseDateFilter] :target_close_date
+    #   <p>Filters opportunities based on their target close date. This filter helps retrieve opportunities with an expected close date before or after a specified date.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     catalog: "CatalogIdentifier", # required
@@ -1560,7 +2160,7 @@ module Aws::PartnerCentralSelling
     #     next_token: "String",
     #     sort: {
     #       sort_order: "ASCENDING" # One of: ["ASCENDING", "DESCENDING"], # required
-    #       sort_by: "LastModifiedDate" # One of: ["LastModifiedDate", "Identifier", "CustomerCompanyName"], # required
+    #       sort_by: "LastModifiedDate" # One of: ["LastModifiedDate", "Identifier", "CustomerCompanyName", "CreatedDate", "TargetCloseDate"], # required
     #     },
     #     last_modified_date: {
     #       after_last_modified_date: Time.now,
@@ -1569,7 +2169,15 @@ module Aws::PartnerCentralSelling
     #     identifier: ["OpportunityIdentifier"],
     #     life_cycle_stage: ["Prospect" # One of: ["Prospect", "Qualified", "Technical Validation", "Business Validation", "Committed", "Launched", "Closed Lost"]],
     #     life_cycle_review_status: ["Pending Submission" # One of: ["Pending Submission", "Submitted", "In review", "Approved", "Rejected", "Action Required"]],
-    #     customer_company_name: ["String"]
+    #     customer_company_name: ["String"],
+    #     created_date: {
+    #       after_created_date: Time.now,
+    #       before_created_date: Time.now
+    #     },
+    #     target_close_date: {
+    #       after_target_close_date: "Date",
+    #       before_target_close_date: "Date"
+    #     }
     #   }
     #   options = {}
     #   response = client.list_opportunities(params, options)
@@ -1612,13 +2220,17 @@ module Aws::PartnerCentralSelling
     #           delivery_models: ["SaaS or PaaS" # One of: ["SaaS or PaaS", "BYOL or AMI", "Managed Services", "Professional Services", "Resell", "Other"]],
     #           expected_customer_spend: [
     #             {
-    #               amount: "Amount", # required
+    #               amount: "Amount",
     #               currency_code: "USD" # One of: ["USD", "EUR", "GBP", "AUD", "CAD", "CNY", "NZD", "INR", "JPY", "CHF", "SEK", "AED", "AFN", "ALL", "AMD", "ANG", "AOA", "ARS", "AWG", "AZN", "BAM", "BBD", "BDT", "BGN", "BHD", "BIF", "BMD", "BND", "BOB", "BOV", "BRL", "BSD", "BTN", "BWP", "BYN", "BZD", "CDF", "CHE", "CHW", "CLF", "CLP", "COP", "COU", "CRC", "CUC", "CUP", "CVE", "CZK", "DJF", "DKK", "DOP", "DZD", "EGP", "ERN", "ETB", "FJD", "FKP", "GEL", "GHS", "GIP", "GMD", "GNF", "GTQ", "GYD", "HKD", "HNL", "HRK", "HTG", "HUF", "IDR", "ILS", "IQD", "IRR", "ISK", "JMD", "JOD", "KES", "KGS", "KHR", "KMF", "KPW", "KRW", "KWD", "KYD", "KZT", "LAK", "LBP", "LKR", "LRD", "LSL", "LYD", "MAD", "MDL", "MGA", "MKD", "MMK", "MNT", "MOP", "MRU", "MUR", "MVR", "MWK", "MXN", "MXV", "MYR", "MZN", "NAD", "NGN", "NIO", "NOK", "NPR", "OMR", "PAB", "PEN", "PGK", "PHP", "PKR", "PLN", "PYG", "QAR", "RON", "RSD", "RUB", "RWF", "SAR", "SBD", "SCR", "SDG", "SGD", "SHP", "SLL", "SOS", "SRD", "SSP", "STN", "SVC", "SYP", "SZL", "THB", "TJS", "TMT", "TND", "TOP", "TRY", "TTD", "TWD", "TZS", "UAH", "UGX", "USN", "UYI", "UYU", "UZS", "VEF", "VND", "VUV", "WST", "XAF", "XCD", "XDR", "XOF", "XPF", "XSU", "XUA", "YER", "ZAR", "ZMW", "ZWL"], # required
     #               frequency: "Monthly" # One of: ["Monthly"], # required
     #               target_company: "String", # required
-    #               estimation_url: "WebsiteUrl"
+    #               estimation_url: "EstimationUrl"
     #             }
-    #           ]
+    #           ],
+    #           expected_contract_duration: {
+    #             term: "Months" # One of: ["Months"], # required
+    #             value: "String", # required
+    #           }
     #         }
     #       }
     #     ],
@@ -1627,6 +2239,125 @@ module Aws::PartnerCentralSelling
     # @return [Types::ListOpportunitiesResponse]
     def list_opportunities(params = {}, options = {})
       request = build_request(:list_opportunities, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists all in-progress, completed, or failed opportunity creation tasks from engagements that were initiated by the caller's account.</p>
+    # @param [Hash, Types::ListOpportunityFromEngagementTasksRequest] params
+    # @option params [Integer] :max_results
+    #   <p>Specifies the maximum number of results to return in a single page of the response. Use this parameter to control the number of items returned in each request, which can be useful for performance tuning and managing large result sets.</p>
+    # @option params [String] :next_token
+    #   <p>The token for requesting the next page of results. This value is obtained from the NextToken field in the response of a previous call to this API. Use this parameter for pagination when the result set spans multiple pages.</p>
+    # @option params [Types::ListTasksSortBase] :sort
+    #   <p> Defines the sorting parameters for listing tasks. This structure allows for specifying the field to sort by and the order of sorting. </p>
+    # @option params [String] :catalog
+    #   <p>Specifies the catalog related to the request. Valid values are <code>AWS</code> for production environments and <code>Sandbox</code> for testing or development purposes. The catalog determines which environment the task data is retrieved from.</p>
+    # @option params [Array<String>] :task_status
+    #   <p>Filters the tasks based on their current status. This allows you to focus on tasks in specific states. Valid values are <code>COMPLETE</code> for tasks that have finished successfully, <code>INPROGRESS</code> for tasks that are currently running, and <code>FAILED</code> for tasks that have encountered an error and failed to complete.</p>
+    # @option params [Array<String>] :task_identifier
+    #   <p>Filters tasks by their unique identifiers. Use this when you want to retrieve information about specific tasks. Provide the task ID to get details about a particular opportunity creation task.</p>
+    # @option params [Array<String>] :opportunity_identifier
+    #   <p>Filters tasks by the identifiers of the opportunities they created or are associated with. Use this to find tasks related to specific opportunity creation processes.</p>
+    # @option params [Array<String>] :engagement_identifier
+    #   <p>Filters tasks by the identifiers of the engagements from which opportunities are being created. Use this to find all opportunity creation tasks associated with a specific engagement.</p>
+    # @option params [Array<String>] :context_identifier
+    #   <p>Filters tasks by the identifiers of the engagement contexts associated with the opportunity creation. Use this to find tasks related to specific contextual information within engagements that are being converted to opportunities.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     max_results: 1,
+    #     next_token: "String",
+    #     sort: {
+    #       sort_order: "ASCENDING" # One of: ["ASCENDING", "DESCENDING"], # required
+    #       sort_by: "StartTime" # One of: ["StartTime"], # required
+    #     },
+    #     catalog: "CatalogIdentifier", # required
+    #     task_status: ["IN_PROGRESS" # One of: ["IN_PROGRESS", "COMPLETE", "FAILED"]],
+    #     task_identifier: ["TaskArnOrIdentifier"],
+    #     opportunity_identifier: ["OpportunityIdentifier"],
+    #     engagement_identifier: ["EngagementArnOrIdentifier"],
+    #     context_identifier: ["ContextIdentifier"]
+    #   }
+    #   options = {}
+    #   response = client.list_opportunity_from_engagement_tasks(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     task_summaries: [
+    #       {
+    #         task_id: "TaskIdentifier",
+    #         task_arn: "TaskArn",
+    #         start_time: Time.now,
+    #         task_status: "IN_PROGRESS" # One of: ["IN_PROGRESS", "COMPLETE", "FAILED"],
+    #         message: "String",
+    #         reason_code: "InvitationAccessDenied" # One of: ["InvitationAccessDenied", "InvitationValidationFailed", "EngagementAccessDenied", "OpportunityAccessDenied", "ResourceSnapshotJobAccessDenied", "ResourceSnapshotJobValidationFailed", "ResourceSnapshotJobConflict", "EngagementValidationFailed", "EngagementConflict", "OpportunitySubmissionFailed", "EngagementInvitationConflict", "InternalError", "OpportunityValidationFailed", "OpportunityConflict", "ResourceSnapshotAccessDenied", "ResourceSnapshotValidationFailed", "ResourceSnapshotConflict", "ServiceQuotaExceeded", "RequestThrottled", "ContextNotFound", "CustomerProjectContextNotPermitted", "DisqualifiedLeadNotPermitted"],
+    #         opportunity_id: "OpportunityIdentifier",
+    #         resource_snapshot_job_id: "ResourceSnapshotJobIdentifier",
+    #         engagement_id: "EngagementIdentifier",
+    #         context_id: "ContextIdentifier"
+    #       }
+    #     ],
+    #     next_token: "String"
+    #   }
+    # @return [Types::ListOpportunityFromEngagementTasksResponse]
+    def list_opportunity_from_engagement_tasks(params = {}, options = {})
+      request = build_request(:list_opportunity_from_engagement_tasks, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists all prospecting tasks initiated by the caller's account. Supports optional filters by task identifier, task name, or start time range. Results can be sorted using configurable options. The response is paginated. Use the <code>NextToken</code> value from each response to retrieve subsequent pages.</p>
+    # @param [Hash, Types::ListProspectingFromEngagementTasksRequest] params
+    # @option params [String] :catalog
+    #   <p>Specifies the catalog to list tasks from. Specify <code>AWS</code> for production environments and <code>Sandbox</code> for testing and development purposes.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return in a single page. If additional results exist, the response includes a <code>NextToken</code> value for retrieving the next page. If omitted, the API uses a service-defined default page size.</p>
+    # @option params [String] :next_token
+    #   <p>The pagination token from a previous call to this API. Include this value to retrieve the next page of results. If omitted, the first page is returned.</p>
+    # @option params [Array<String>] :task_identifier
+    #   <p>Filters the results to include only the tasks with the specified identifiers. Provide up to 10 task IDs to narrow the list to specific tasks. If omitted, tasks are not filtered by identifier.</p>
+    # @option params [Array<String>] :task_name
+    #   <p>Filters the results to include only tasks with the specified names. Provide up to 10 task names to narrow the list. If omitted, tasks are not filtered by name.</p>
+    # @option params [Time] :start_after
+    #   <p>Filters tasks to include only those that started after the specified timestamp. Use this with <code>StartBefore</code> to define a start-time range for your query. The format follows ISO 8601 date-time notation.</p>
+    # @option params [Time] :start_before
+    #   <p>Filters tasks to include only those that started before the specified timestamp. Use this with <code>StartAfter</code> to define a start-time range for your query. The format follows ISO 8601 date-time notation.</p>
+    # @option params [Types::ProspectingFromEngagementTaskSort] :sort
+    #   <p>Specifies the field and order used to sort the returned tasks. If omitted, tasks are returned in the default sort order.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     catalog: "CatalogIdentifier", # required
+    #     max_results: 1,
+    #     next_token: "String",
+    #     task_identifier: ["ProspectingTaskIdentifier"],
+    #     task_name: ["TaskName"],
+    #     start_after: Time.now,
+    #     start_before: Time.now,
+    #     sort: {
+    #       sort_order: "ASCENDING" # One of: ["ASCENDING", "DESCENDING"], # required
+    #       sort_by: "StartTime" # One of: ["StartTime", "TaskName", "FailedEngagementCount"], # required
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.list_prospecting_from_engagement_tasks(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     next_token: "String",
+    #     task_summaries: [ # required
+    #       {
+    #         task_id: "ProspectingTaskIdentifier", # required
+    #         task_arn: "ProspectingTaskArn", # required
+    #         task_name: "TaskName", # required
+    #         start_time: Time.now, # required
+    #         end_time: Time.now,
+    #         total_engagement_count: 1, # required
+    #         completed_engagement_count: 1, # required
+    #         failed_engagement_count: 1, # required
+    #       }
+    #     ]
+    #   }
+    # @return [Types::ListProspectingFromEngagementTasksResponse]
+    def list_prospecting_from_engagement_tasks(params = {}, options = {})
+      request = build_request(:list_prospecting_from_engagement_tasks, params)
       request.send_request(options)
     end
 
@@ -1745,6 +2476,8 @@ module Aws::PartnerCentralSelling
     #   <p>Filters the solutions based on their unique identifier. Use this filter to retrieve specific solutions by providing the solution's identifier for accurate results.</p>
     # @option params [Array<String>] :category
     #   <p>Filters the solutions based on the category to which they belong. This allows partners to search for solutions within specific categories, such as <code>Software</code>, <code>Consulting</code>, or <code>Managed Services</code>.</p>
+    # @option params [Array<String>] :aws_marketplace_solution_arn
+    #   <p>Filters results by AWS Marketplace solution ARN. You can provide up to 10 ARNs.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     catalog: "CatalogIdentifier", # required
@@ -1756,7 +2489,8 @@ module Aws::PartnerCentralSelling
     #     },
     #     status: ["Active" # One of: ["Active", "Inactive", "Draft"]],
     #     identifier: ["SolutionIdentifier"],
-    #     category: ["String"]
+    #     category: ["String"],
+    #     aws_marketplace_solution_arn: ["AwsMarketplaceSolutionArn"]
     #   }
     #   options = {}
     #   response = client.list_solutions(params, options)
@@ -1772,6 +2506,7 @@ module Aws::PartnerCentralSelling
     #         status: "Active" # One of: ["Active", "Inactive", "Draft"], # required
     #         category: "String", # required
     #         created_date: Time.now, # required
+    #         aws_marketplace_solution_arn: "AwsMarketplaceSolutionArn"
     #       }
     #     ],
     #     next_token: "String"
@@ -1890,7 +2625,7 @@ module Aws::PartnerCentralSelling
     #     start_time: Time.now,
     #     task_status: "IN_PROGRESS" # One of: ["IN_PROGRESS", "COMPLETE", "FAILED"],
     #     message: "String",
-    #     reason_code: "InvitationAccessDenied" # One of: ["InvitationAccessDenied", "InvitationValidationFailed", "EngagementAccessDenied", "OpportunityAccessDenied", "ResourceSnapshotJobAccessDenied", "ResourceSnapshotJobValidationFailed", "ResourceSnapshotJobConflict", "EngagementValidationFailed", "EngagementConflict", "OpportunitySubmissionFailed", "EngagementInvitationConflict", "InternalError", "OpportunityValidationFailed", "OpportunityConflict", "ResourceSnapshotAccessDenied", "ResourceSnapshotValidationFailed", "ResourceSnapshotConflict", "ServiceQuotaExceeded", "RequestThrottled"],
+    #     reason_code: "InvitationAccessDenied" # One of: ["InvitationAccessDenied", "InvitationValidationFailed", "EngagementAccessDenied", "OpportunityAccessDenied", "ResourceSnapshotJobAccessDenied", "ResourceSnapshotJobValidationFailed", "ResourceSnapshotJobConflict", "EngagementValidationFailed", "EngagementConflict", "OpportunitySubmissionFailed", "EngagementInvitationConflict", "InternalError", "OpportunityValidationFailed", "OpportunityConflict", "ResourceSnapshotAccessDenied", "ResourceSnapshotValidationFailed", "ResourceSnapshotConflict", "ServiceQuotaExceeded", "RequestThrottled", "ContextNotFound", "CustomerProjectContextNotPermitted", "DisqualifiedLeadNotPermitted"],
     #     opportunity_id: "OpportunityIdentifier",
     #     resource_snapshot_job_id: "ResourceSnapshotJobIdentifier",
     #     engagement_invitation_id: "EngagementInvitationIdentifier"
@@ -1939,7 +2674,7 @@ module Aws::PartnerCentralSelling
     #     start_time: Time.now,
     #     task_status: "IN_PROGRESS" # One of: ["IN_PROGRESS", "COMPLETE", "FAILED"],
     #     message: "String",
-    #     reason_code: "InvitationAccessDenied" # One of: ["InvitationAccessDenied", "InvitationValidationFailed", "EngagementAccessDenied", "OpportunityAccessDenied", "ResourceSnapshotJobAccessDenied", "ResourceSnapshotJobValidationFailed", "ResourceSnapshotJobConflict", "EngagementValidationFailed", "EngagementConflict", "OpportunitySubmissionFailed", "EngagementInvitationConflict", "InternalError", "OpportunityValidationFailed", "OpportunityConflict", "ResourceSnapshotAccessDenied", "ResourceSnapshotValidationFailed", "ResourceSnapshotConflict", "ServiceQuotaExceeded", "RequestThrottled"],
+    #     reason_code: "InvitationAccessDenied" # One of: ["InvitationAccessDenied", "InvitationValidationFailed", "EngagementAccessDenied", "OpportunityAccessDenied", "ResourceSnapshotJobAccessDenied", "ResourceSnapshotJobValidationFailed", "ResourceSnapshotJobConflict", "EngagementValidationFailed", "EngagementConflict", "OpportunitySubmissionFailed", "EngagementInvitationConflict", "InternalError", "OpportunityValidationFailed", "OpportunityConflict", "ResourceSnapshotAccessDenied", "ResourceSnapshotValidationFailed", "ResourceSnapshotConflict", "ServiceQuotaExceeded", "RequestThrottled", "ContextNotFound", "CustomerProjectContextNotPermitted", "DisqualifiedLeadNotPermitted"],
     #     opportunity_id: "OpportunityIdentifier",
     #     resource_snapshot_job_id: "ResourceSnapshotJobIdentifier",
     #     engagement_id: "EngagementIdentifier",
@@ -1948,6 +2683,90 @@ module Aws::PartnerCentralSelling
     # @return [Types::StartEngagementFromOpportunityTaskResponse]
     def start_engagement_from_opportunity_task(params = {}, options = {})
       request = build_request(:start_engagement_from_opportunity_task, params)
+      request.send_request(options)
+    end
+
+    # <p>This action creates an opportunity from an existing engagement context. The task is asynchronous and orchestrates the process of converting engagement contextual information into a structured opportunity record within the partner's account.</p>
+    # @param [Hash, Types::StartOpportunityFromEngagementTaskRequest] params
+    # @option params [String] :catalog
+    #   <p>Specifies the catalog in which the opportunity creation task is executed. Acceptable values include <code>AWS</code> for production and <code>Sandbox</code> for testing environments.</p>
+    # @option params [String] :client_token
+    #   <p>A unique token provided by the client to help ensure the idempotency of the request. It helps prevent the same task from being performed multiple times.</p>
+    # @option params [String] :identifier
+    #   <p>The unique identifier of the engagement from which the opportunity creation task is to be initiated. This helps ensure that the task is applied to the correct engagement.</p>
+    # @option params [String] :context_identifier
+    #   <p>The unique identifier of the engagement context from which to create the opportunity. This specifies the specific contextual information within the engagement that will be used for opportunity creation.</p>
+    # @option params [Array<Types::Tag>] :tags
+    #   <p>A map of the key-value pairs of the tag or tags to assign.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     catalog: "CatalogIdentifier", # required
+    #     client_token: "ClientToken", # required
+    #     identifier: "EngagementArnOrIdentifier", # required
+    #     context_identifier: "ContextIdentifier", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       }
+    #     ]
+    #   }
+    #   options = {}
+    #   response = client.start_opportunity_from_engagement_task(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     task_id: "TaskIdentifier",
+    #     task_arn: "TaskArn",
+    #     start_time: Time.now,
+    #     task_status: "IN_PROGRESS" # One of: ["IN_PROGRESS", "COMPLETE", "FAILED"],
+    #     message: "String",
+    #     reason_code: "InvitationAccessDenied" # One of: ["InvitationAccessDenied", "InvitationValidationFailed", "EngagementAccessDenied", "OpportunityAccessDenied", "ResourceSnapshotJobAccessDenied", "ResourceSnapshotJobValidationFailed", "ResourceSnapshotJobConflict", "EngagementValidationFailed", "EngagementConflict", "OpportunitySubmissionFailed", "EngagementInvitationConflict", "InternalError", "OpportunityValidationFailed", "OpportunityConflict", "ResourceSnapshotAccessDenied", "ResourceSnapshotValidationFailed", "ResourceSnapshotConflict", "ServiceQuotaExceeded", "RequestThrottled", "ContextNotFound", "CustomerProjectContextNotPermitted", "DisqualifiedLeadNotPermitted"],
+    #     opportunity_id: "OpportunityIdentifier",
+    #     resource_snapshot_job_id: "ResourceSnapshotJobIdentifier",
+    #     engagement_id: "EngagementIdentifier",
+    #     context_id: "ContextIdentifier"
+    #   }
+    # @return [Types::StartOpportunityFromEngagementTaskResponse]
+    def start_opportunity_from_engagement_task(params = {}, options = {})
+      request = build_request(:start_opportunity_from_engagement_task, params)
+      request.send_request(options)
+    end
+
+    # <p>Starts a task to convert one or more engagement contexts into new prospecting leads. The task runs asynchronously. To poll for status, use <code>GetProspectingFromEngagementTask</code>, or use <code>ListProspectingFromEngagementTasks</code> to monitor multiple tasks.</p>
+    # @param [Hash, Types::StartProspectingFromEngagementTaskRequest] params
+    # @option params [String] :catalog
+    #   <p>Specifies the catalog in which the task is initiated. Specify <code>AWS</code> for production environments and <code>Sandbox</code> for testing and development purposes.</p>
+    # @option params [Array<String>] :identifiers
+    #   <p>The list of engagement identifiers to include in this prospecting task. Each identifier must correspond to an existing engagement in the specified catalog. Maximum of 100 identifiers per task.</p>
+    # @option params [String] :task_name
+    #   <p>A descriptive name for the task. This name helps identify the task in list and get operations. The name must contain 1 to 128 characters.</p>
+    # @option params [String] :client_token
+    #   <p>A unique, case-sensitive identifier provided by the client to ensure idempotency. Making the same request with the same <code>ClientToken</code> returns the same response without creating a duplicate task.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     catalog: "CatalogIdentifier", # required
+    #     identifiers: ["EngagementIdentifier"], # required
+    #     task_name: "TaskName", # required
+    #     client_token: "ClientToken", # required
+    #   }
+    #   options = {}
+    #   response = client.start_prospecting_from_engagement_task(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     identifiers: ["EngagementIdentifier"], # required
+    #     task_name: "TaskName", # required
+    #     message: "String",
+    #     reason_code: "String",
+    #     start_time: Time.now, # required
+    #     task_id: "ProspectingTaskIdentifier",
+    #     task_arn: "ProspectingTaskArn",
+    #     task_status: "PENDING" # One of: ["PENDING", "IN_PROGRESS", "COMPLETED", "FAILED"], # required
+    #   }
+    # @return [Types::StartProspectingFromEngagementTaskResponse]
+    def start_prospecting_from_engagement_task(params = {}, options = {})
+      request = build_request(:start_prospecting_from_engagement_task, params)
       request.send_request(options)
     end
 
@@ -2072,6 +2891,123 @@ module Aws::PartnerCentralSelling
       request.send_request(options)
     end
 
+    # <p>Updates the context information for an existing engagement with new or modified data.</p>
+    # @param [Hash, Types::UpdateEngagementContextRequest] params
+    # @option params [String] :catalog
+    #   <p>Specifies the catalog associated with the engagement context update request. This field takes a string value from a predefined list: <code>AWS</code> or <code>Sandbox</code>. The catalog determines which environment the engagement context is updated in.</p>
+    # @option params [String] :engagement_identifier
+    #   <p>The unique identifier of the <code>Engagement</code> containing the context to be updated. This parameter ensures the context update is applied to the correct engagement.</p>
+    # @option params [String] :context_identifier
+    #   <p>The unique identifier of the specific engagement context to be updated. This ensures that the correct context within the engagement is modified.</p>
+    # @option params [Time] :engagement_last_modified_at
+    #   <p>The timestamp when the engagement was last modified, used for optimistic concurrency control. This helps prevent conflicts when multiple users attempt to update the same engagement simultaneously.</p>
+    # @option params [String] :type
+    #   <p>Specifies the type of context being updated within the engagement. This field determines the structure and content of the context payload being modified.</p>
+    # @option params [Types::UpdateEngagementContextPayload] :payload
+    #   <p>Contains the updated contextual information for the engagement. The structure of this payload varies based on the context type specified in the Type field.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     catalog: "CatalogIdentifier", # required
+    #     engagement_identifier: "EngagementArnOrIdentifier", # required
+    #     context_identifier: "EngagementContextIdentifier", # required
+    #     engagement_last_modified_at: Time.now, # required
+    #     type: "CustomerProject" # One of: ["CustomerProject", "Lead", "ProspectingResult"], # required
+    #     payload: { # required
+    #       # One of:
+    #       lead: {
+    #         qualification_status: "LeadQualificationStatus",
+    #         customer: { # required
+    #           industry: "LeadIndustry",
+    #           company_name: "CompanyName", # required
+    #           website_url: "LeadWebsiteUrl",
+    #           address: {
+    #             city: "String",
+    #             postal_code: "String",
+    #             state_or_region: "String",
+    #             country_code: "LeadCountryCode"
+    #           },
+    #           aws_maturity: "AwsMaturity",
+    #           market_segment: "LeadMarketSegment"
+    #         },
+    #         interaction: {
+    #           source_type: "LeadSourceType",
+    #           source_id: "LeadSourceId",
+    #           source_name: "LeadSourceName",
+    #           usecase: "EngagementUseCase",
+    #           interaction_date: Time.now,
+    #           customer_action: "CustomerAction",
+    #           business_problem: "LeadBusinessProblem",
+    #           contact: { # required
+    #             business_title: "LeadJobTitle", # required
+    #             email: "LeadEmail", # required
+    #             first_name: "Name", # required
+    #             last_name: "Name", # required
+    #             phone: "LeadPhoneNumber"
+    #           }
+    #         },
+    #         insights: {
+    #           lead_readiness_score: "String"
+    #         }
+    #       },
+    #       customer_project: {
+    #         customer: {
+    #           industry: "Aerospace" # One of: ["Aerospace", "Agriculture", "Automotive", "Computers and Electronics", "Consumer Goods", "Education", "Energy - Oil and Gas", "Energy - Power and Utilities", "Financial Services", "Gaming", "Government", "Healthcare", "Hospitality", "Life Sciences", "Manufacturing", "Marketing and Advertising", "Media and Entertainment", "Mining", "Non-Profit Organization", "Professional Services", "Real Estate and Construction", "Retail", "Software and Internet", "Telecommunications", "Transportation and Logistics", "Travel", "Wholesale and Distribution", "Other"], # required
+    #           company_name: "CompanyName", # required
+    #           website_url: "CompanyWebsiteUrl", # required
+    #           country_code: "US" # One of: ["US", "AF", "AX", "AL", "DZ", "AS", "AD", "AO", "AI", "AQ", "AG", "AR", "AM", "AW", "AU", "AT", "AZ", "BS", "BH", "BD", "BB", "BY", "BE", "BZ", "BJ", "BM", "BT", "BO", "BQ", "BA", "BW", "BV", "BR", "IO", "BN", "BG", "BF", "BI", "KH", "CM", "CA", "CV", "KY", "CF", "TD", "CL", "CN", "CX", "CC", "CO", "KM", "CG", "CK", "CR", "CI", "HR", "CU", "CW", "CY", "CZ", "CD", "DK", "DJ", "DM", "DO", "EC", "EG", "SV", "GQ", "ER", "EE", "ET", "FK", "FO", "FJ", "FI", "FR", "GF", "PF", "TF", "GA", "GM", "GE", "DE", "GH", "GI", "GR", "GL", "GD", "GP", "GU", "GT", "GG", "GN", "GW", "GY", "HT", "HM", "VA", "HN", "HK", "HU", "IS", "IN", "ID", "IR", "IQ", "IE", "IM", "IL", "IT", "JM", "JP", "JE", "JO", "KZ", "KE", "KI", "KR", "KW", "KG", "LA", "LV", "LB", "LS", "LR", "LY", "LI", "LT", "LU", "MO", "MK", "MG", "MW", "MY", "MV", "ML", "MT", "MH", "MQ", "MR", "MU", "YT", "MX", "FM", "MD", "MC", "MN", "ME", "MS", "MA", "MZ", "MM", "NA", "NR", "NP", "NL", "AN", "NC", "NZ", "NI", "NE", "NG", "NU", "NF", "MP", "NO", "OM", "PK", "PW", "PS", "PA", "PG", "PY", "PE", "PH", "PN", "PL", "PT", "PR", "QA", "RE", "RO", "RU", "RW", "BL", "SH", "KN", "LC", "MF", "PM", "VC", "WS", "SM", "ST", "SA", "SN", "RS", "SC", "SL", "SG", "SX", "SK", "SI", "SB", "SO", "ZA", "GS", "SS", "ES", "LK", "SD", "SR", "SJ", "SZ", "SE", "CH", "SY", "TW", "TJ", "TZ", "TH", "TL", "TG", "TK", "TO", "TT", "TN", "TR", "TM", "TC", "TV", "UG", "UA", "AE", "GB", "UM", "UY", "UZ", "VU", "VE", "VN", "VG", "VI", "WF", "EH", "YE", "ZM", "ZW"], # required
+    #         },
+    #         project: {
+    #           title: "EngagementCustomerProjectTitle", # required
+    #           business_problem: "EngagementCustomerBusinessProblem", # required
+    #           target_completion_date: "String", # required
+    #         }
+    #       },
+    #       prospecting_result: {
+    #         aws: {
+    #           customer: {
+    #             account_name: "ProspectingAccountName",
+    #             geo: "ProspectingGeo",
+    #             region: "ProspectingRegion",
+    #             sub_region: "ProspectingSubRegion",
+    #             country: "US" # One of: ["US", "AF", "AX", "AL", "DZ", "AS", "AD", "AO", "AI", "AQ", "AG", "AR", "AM", "AW", "AU", "AT", "AZ", "BS", "BH", "BD", "BB", "BY", "BE", "BZ", "BJ", "BM", "BT", "BO", "BQ", "BA", "BW", "BV", "BR", "IO", "BN", "BG", "BF", "BI", "KH", "CM", "CA", "CV", "KY", "CF", "TD", "CL", "CN", "CX", "CC", "CO", "KM", "CG", "CK", "CR", "CI", "HR", "CU", "CW", "CY", "CZ", "CD", "DK", "DJ", "DM", "DO", "EC", "EG", "SV", "GQ", "ER", "EE", "ET", "FK", "FO", "FJ", "FI", "FR", "GF", "PF", "TF", "GA", "GM", "GE", "DE", "GH", "GI", "GR", "GL", "GD", "GP", "GU", "GT", "GG", "GN", "GW", "GY", "HT", "HM", "VA", "HN", "HK", "HU", "IS", "IN", "ID", "IR", "IQ", "IE", "IM", "IL", "IT", "JM", "JP", "JE", "JO", "KZ", "KE", "KI", "KR", "KW", "KG", "LA", "LV", "LB", "LS", "LR", "LY", "LI", "LT", "LU", "MO", "MK", "MG", "MW", "MY", "MV", "ML", "MT", "MH", "MQ", "MR", "MU", "YT", "MX", "FM", "MD", "MC", "MN", "ME", "MS", "MA", "MZ", "MM", "NA", "NR", "NP", "NL", "AN", "NC", "NZ", "NI", "NE", "NG", "NU", "NF", "MP", "NO", "OM", "PK", "PW", "PS", "PA", "PG", "PY", "PE", "PH", "PN", "PL", "PT", "PR", "QA", "RE", "RO", "RU", "RW", "BL", "SH", "KN", "LC", "MF", "PM", "VC", "WS", "SM", "ST", "SA", "SN", "RS", "SC", "SL", "SG", "SX", "SK", "SI", "SB", "SO", "ZA", "GS", "SS", "ES", "LK", "SD", "SR", "SJ", "SZ", "SE", "CH", "SY", "TW", "TJ", "TZ", "TH", "TL", "TG", "TK", "TO", "TT", "TN", "TR", "TM", "TC", "TV", "UG", "UA", "AE", "GB", "UM", "UY", "UZ", "VU", "VE", "VN", "VG", "VI", "WF", "EH", "YE", "ZM", "ZW"],
+    #             industry: "Aerospace" # One of: ["Aerospace", "Agriculture", "Automotive", "Computers and Electronics", "Consumer Goods", "Education", "Energy - Oil and Gas", "Energy - Power and Utilities", "Financial Services", "Gaming", "Government", "Healthcare", "Hospitality", "Life Sciences", "Manufacturing", "Marketing and Advertising", "Media and Entertainment", "Mining", "Non-Profit Organization", "Professional Services", "Real Estate and Construction", "Retail", "Software and Internet", "Telecommunications", "Transportation and Logistics", "Travel", "Wholesale and Distribution", "Other"],
+    #             sub_industry: "ProspectingSubIndustry",
+    #             segment: "ProspectingSegment",
+    #             company_size: "ProspectingCompanySize",
+    #             eligible_programs: ["String"],
+    #             public_profile_summary: "ProspectingPublicProfileSummary"
+    #           },
+    #           insights: {
+    #             marketplace_engagement_score: "EngagementScoreLevel",
+    #             solution_score: "String",
+    #             solution_category: "String",
+    #             solution_sub_category: "String"
+    #           },
+    #           start_time: Time.now,
+    #           end_time: Time.now,
+    #           task_id: "ProspectingTaskIdentifier",
+    #           task_arn: "TaskArn",
+    #           task_name: "TaskName"
+    #         }
+    #       }
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.update_engagement_context(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     engagement_id: "EngagementIdentifier", # required
+    #     engagement_arn: "EngagementArn", # required
+    #     engagement_last_modified_at: Time.now, # required
+    #     context_id: "EngagementContextIdentifier", # required
+    #   }
+    # @return [Types::UpdateEngagementContextResponse]
+    def update_engagement_context(params = {}, options = {})
+      request = build_request(:update_engagement_context, params)
+      request.send_request(options)
+    end
+
     # <p>Updates the <code>Opportunity</code> record identified by a given <code>Identifier</code>. This operation allows you to modify the details of an existing opportunity to reflect the latest information and progress. Use this action to keep the opportunity record up-to-date and accurate.</p> <p>When you perform updates, include the entire payload with each request. If any field is omitted, the API assumes that the field is set to <code>null</code>. The best practice is to always perform a <code>GetOpportunity</code> to retrieve the latest values, then send the complete payload with the updated values to be changed.</p>
     # @param [Hash, Types::UpdateOpportunityRequest] params
     # @option params [String] :catalog
@@ -2134,13 +3070,17 @@ module Aws::PartnerCentralSelling
     #       delivery_models: ["SaaS or PaaS" # One of: ["SaaS or PaaS", "BYOL or AMI", "Managed Services", "Professional Services", "Resell", "Other"]],
     #       expected_customer_spend: [
     #         {
-    #           amount: "Amount", # required
+    #           amount: "Amount",
     #           currency_code: "USD" # One of: ["USD", "EUR", "GBP", "AUD", "CAD", "CNY", "NZD", "INR", "JPY", "CHF", "SEK", "AED", "AFN", "ALL", "AMD", "ANG", "AOA", "ARS", "AWG", "AZN", "BAM", "BBD", "BDT", "BGN", "BHD", "BIF", "BMD", "BND", "BOB", "BOV", "BRL", "BSD", "BTN", "BWP", "BYN", "BZD", "CDF", "CHE", "CHW", "CLF", "CLP", "COP", "COU", "CRC", "CUC", "CUP", "CVE", "CZK", "DJF", "DKK", "DOP", "DZD", "EGP", "ERN", "ETB", "FJD", "FKP", "GEL", "GHS", "GIP", "GMD", "GNF", "GTQ", "GYD", "HKD", "HNL", "HRK", "HTG", "HUF", "IDR", "ILS", "IQD", "IRR", "ISK", "JMD", "JOD", "KES", "KGS", "KHR", "KMF", "KPW", "KRW", "KWD", "KYD", "KZT", "LAK", "LBP", "LKR", "LRD", "LSL", "LYD", "MAD", "MDL", "MGA", "MKD", "MMK", "MNT", "MOP", "MRU", "MUR", "MVR", "MWK", "MXN", "MXV", "MYR", "MZN", "NAD", "NGN", "NIO", "NOK", "NPR", "OMR", "PAB", "PEN", "PGK", "PHP", "PKR", "PLN", "PYG", "QAR", "RON", "RSD", "RUB", "RWF", "SAR", "SBD", "SCR", "SDG", "SGD", "SHP", "SLL", "SOS", "SRD", "SSP", "STN", "SVC", "SYP", "SZL", "THB", "TJS", "TMT", "TND", "TOP", "TRY", "TTD", "TWD", "TZS", "UAH", "UGX", "USN", "UYI", "UYU", "UZS", "VEF", "VND", "VUV", "WST", "XAF", "XCD", "XDR", "XOF", "XPF", "XSU", "XUA", "YER", "ZAR", "ZMW", "ZWL"], # required
     #           frequency: "Monthly" # One of: ["Monthly"], # required
     #           target_company: "String", # required
-    #           estimation_url: "WebsiteUrl"
+    #           estimation_url: "EstimationUrl"
     #         }
     #       ],
+    #       expected_contract_duration: {
+    #         term: "Months" # One of: ["Months"], # required
+    #         value: "String", # required
+    #       },
     #       title: "PiiString",
     #       apn_programs: ["String"],
     #       customer_business_problem: "PiiString",
@@ -2150,7 +3090,8 @@ module Aws::PartnerCentralSelling
     #       competitor_name: "Oracle Cloud" # One of: ["Oracle Cloud", "On-Prem", "Co-location", "Akamai", "AliCloud", "Google Cloud Platform", "IBM Softlayer", "Microsoft Azure", "Other- Cost Optimization", "No Competition", "*Other"],
     #       other_competitor_names: "String",
     #       other_solution_description: "PiiString",
-    #       additional_comments: "String"
+    #       additional_comments: "String",
+    #       aws_partition: "aws-eusc" # One of: ["aws-eusc"]
     #     },
     #     opportunity_type: "Net New Business" # One of: ["Net New Business", "Flat Renewal", "Expansion"],
     #     marketing: {

@@ -53,6 +53,17 @@ module Aws::Invoicing
       attr_accessor profiles: Array[Types::InvoiceProfile]?
     end
 
+    module BillType
+      ANNIVERSARY: String
+      PURCHASE: String
+      REFUND: String
+    end
+
+    module BillingEntity
+      AWS: String
+      AWS_MARKETPLACE: String
+    end
+
     class BillingPeriod
       include Smithy::Schema::Structure
 
@@ -66,6 +77,43 @@ module Aws::Invoicing
       attr_accessor year: Integer?
     end
 
+    module BuyerDomain
+      NetworkID: String
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    module ConnectionTestingMethod
+      PROD_ENV_DOLLAR_TEST: String
+      TEST_ENV_REPLAY_TEST: String
+    end
+
+    class Contact
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?email: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor email: String?
+    end
+
     class CreateInvoiceUnitRequest
       include Smithy::Schema::Structure
 
@@ -76,6 +124,7 @@ module Aws::Invoicing
         ?tax_inheritance_disabled: bool,
         ?rule: Types::InvoiceUnitRule,
         ?resource_tags: Array[Types::ResourceTag],
+        ?client_token: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -85,6 +134,7 @@ module Aws::Invoicing
       attr_accessor tax_inheritance_disabled: bool?
       attr_accessor rule: Types::InvoiceUnitRule?
       attr_accessor resource_tags: Array[Types::ResourceTag]?
+      attr_accessor client_token: String?
     end
 
     class CreateInvoiceUnitResponse
@@ -96,6 +146,60 @@ module Aws::Invoicing
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor invoice_unit_arn: String?
+    end
+
+    class CreateProcurementPortalPreferenceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?procurement_portal_name: String,
+        ?buyer_domain: String,
+        ?buyer_identifier: String,
+        ?supplier_domain: String,
+        ?supplier_identifier: String,
+        ?selector: Types::ProcurementPortalPreferenceSelector,
+        ?procurement_portal_shared_secret: String,
+        ?procurement_portal_instance_endpoint: String,
+        ?test_env_preference: Types::TestEnvPreferenceInput,
+        ?einvoice_delivery_enabled: bool,
+        ?einvoice_delivery_preference: Types::EinvoiceDeliveryPreference,
+        ?purchase_order_retrieval_enabled: bool,
+        ?marketplace_punch_out_enabled: bool,
+        ?marketplace_punch_out_preference: Types::MarketplacePunchOutPreference,
+        ?contacts: Array[Types::Contact],
+        ?resource_tags: Array[Types::ResourceTag],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor procurement_portal_name: String?
+      attr_accessor buyer_domain: String?
+      attr_accessor buyer_identifier: String?
+      attr_accessor supplier_domain: String?
+      attr_accessor supplier_identifier: String?
+      attr_accessor selector: Types::ProcurementPortalPreferenceSelector?
+      attr_accessor procurement_portal_shared_secret: String?
+      attr_accessor procurement_portal_instance_endpoint: String?
+      attr_accessor test_env_preference: Types::TestEnvPreferenceInput?
+      attr_accessor einvoice_delivery_enabled: bool?
+      attr_accessor einvoice_delivery_preference: Types::EinvoiceDeliveryPreference?
+      attr_accessor purchase_order_retrieval_enabled: bool?
+      attr_accessor marketplace_punch_out_enabled: bool?
+      attr_accessor marketplace_punch_out_preference: Types::MarketplacePunchOutPreference?
+      attr_accessor contacts: Array[Types::Contact]?
+      attr_accessor resource_tags: Array[Types::ResourceTag]?
+      attr_accessor client_token: String?
+    end
+
+    class CreateProcurementPortalPreferenceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?procurement_portal_preference_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor procurement_portal_preference_arn: String?
     end
 
     class CurrencyExchangeDetails
@@ -131,10 +235,12 @@ module Aws::Invoicing
 
       def initialize: (
         ?invoice_unit_arn: String,
+        ?client_token: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor invoice_unit_arn: String?
+      attr_accessor client_token: String?
     end
 
     class DeleteInvoiceUnitResponse
@@ -146,6 +252,30 @@ module Aws::Invoicing
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor invoice_unit_arn: String?
+    end
+
+    class DeleteProcurementPortalPreferenceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?procurement_portal_preference_arn: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor procurement_portal_preference_arn: String?
+      attr_accessor client_token: String?
+    end
+
+    class DeleteProcurementPortalPreferenceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?procurement_portal_preference_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor procurement_portal_preference_arn: String?
     end
 
     class DiscountsBreakdown
@@ -176,15 +306,67 @@ module Aws::Invoicing
       attr_accessor rate: String?
     end
 
+    module EinvoiceDeliveryAttachmentType
+      INVOICE_PDF: String
+      RFP_PDF: String
+    end
+
+    module EinvoiceDeliveryDocumentType
+      AWS_CLOUD_INVOICE: String
+      AWS_CLOUD_CREDIT_MEMO: String
+      AWS_MARKETPLACE_INVOICE: String
+      AWS_MARKETPLACE_CREDIT_MEMO: String
+      AWS_REQUEST_FOR_PAYMENT: String
+    end
+
+    class EinvoiceDeliveryPreference
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?einvoice_delivery_document_types: Array[String],
+        ?einvoice_delivery_attachment_types: Array[String],
+        ?protocol: String,
+        ?purchase_order_data_sources: Array[Types::PurchaseOrderDataSource],
+        ?connection_testing_method: String,
+        ?einvoice_delivery_activation_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor einvoice_delivery_document_types: Array[String]?
+      attr_accessor einvoice_delivery_attachment_types: Array[String]?
+      attr_accessor protocol: String?
+      attr_accessor purchase_order_data_sources: Array[Types::PurchaseOrderDataSource]?
+      attr_accessor connection_testing_method: String?
+      attr_accessor einvoice_delivery_activation_date: Time?
+    end
+
+    module EinvoiceDeliveryStatus
+      DELIVERED: String
+      NOT_DELIVERED: String
+    end
+
     class Entity
       include Smithy::Schema::Structure
 
       def initialize: (
         ?invoicing_entity: String,
+        ?billing_entity: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor invoicing_entity: String?
+      attr_accessor billing_entity: String?
+    end
+
+    class FeatureConfigurations
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?invoice_configuration: Types::InvoiceConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor invoice_configuration: Types::InvoiceConfiguration?
     end
 
     class FeesBreakdown
@@ -222,12 +404,36 @@ module Aws::Invoicing
         ?names: Array[String],
         ?invoice_receivers: Array[String],
         ?accounts: Array[String],
+        ?bill_source_accounts: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor names: Array[String]?
       attr_accessor invoice_receivers: Array[String]?
       attr_accessor accounts: Array[String]?
+      attr_accessor bill_source_accounts: Array[String]?
+    end
+
+    class GetInvoicePDFRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?invoice_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor invoice_id: String?
+    end
+
+    class GetInvoicePDFResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?invoice_pdf: Types::InvoicePDF,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor invoice_pdf: Types::InvoicePDF?
     end
 
     class GetInvoiceUnitRequest
@@ -266,6 +472,28 @@ module Aws::Invoicing
       attr_accessor last_modified: Time?
     end
 
+    class GetProcurementPortalPreferenceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?procurement_portal_preference_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor procurement_portal_preference_arn: String?
+    end
+
+    class GetProcurementPortalPreferenceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?procurement_portal_preference: Types::ProcurementPortalPreference,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor procurement_portal_preference: Types::ProcurementPortalPreference?
+    end
+
     class InternalServerException
       include Smithy::Schema::Structure
 
@@ -277,6 +505,19 @@ module Aws::Invoicing
 
       attr_accessor retry_after_seconds: Integer?
       attr_accessor message: String?
+    end
+
+    class InvoiceConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?document_types: Array[String],
+        ?attachment_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor document_types: Array[String]?
+      attr_accessor attachment_types: Array[String]?
     end
 
     class InvoiceCurrencyAmount
@@ -296,6 +537,28 @@ module Aws::Invoicing
       attr_accessor currency_code: String?
       attr_accessor amount_breakdown: Types::AmountBreakdown?
       attr_accessor currency_exchange_details: Types::CurrencyExchangeDetails?
+    end
+
+    module InvoiceFrequency
+      ONE_TIME: String
+      RECURRING: String
+    end
+
+    class InvoicePDF
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?invoice_id: String,
+        ?document_url: String,
+        ?document_url_expiration_date: Time,
+        ?supplemental_documents: Array[Types::SupplementalDocument],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor invoice_id: String?
+      attr_accessor document_url: String?
+      attr_accessor document_url_expiration_date: Time?
+      attr_accessor supplemental_documents: Array[Types::SupplementalDocument]?
     end
 
     class InvoiceProfile
@@ -326,12 +589,14 @@ module Aws::Invoicing
         ?time_interval: Types::DateInterval,
         ?billing_period: Types::BillingPeriod,
         ?invoicing_entity: String,
+        ?receiver_role: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor time_interval: Types::DateInterval?
       attr_accessor billing_period: Types::BillingPeriod?
       attr_accessor invoicing_entity: String?
+      attr_accessor receiver_role: String?
     end
 
     class InvoiceSummariesSelector
@@ -355,11 +620,19 @@ module Aws::Invoicing
         ?invoice_id: String,
         ?issued_date: Time,
         ?due_date: Time,
+        ?bill_source_accounts: Array[String],
+        ?bill_source_accounts_total_count: Integer,
+        ?receiver_role: String,
         ?entity: Types::Entity,
         ?billing_period: Types::BillingPeriod,
+        ?invoice_frequency: String,
+        ?bill_type: String,
         ?invoice_type: String,
+        ?commercial_invoice_id: String,
         ?original_invoice_id: String,
         ?purchase_order_number: String,
+        ?einvoice_delivery_status: String,
+        ?tax_authority_status: String,
         ?base_currency_amount: Types::InvoiceCurrencyAmount,
         ?tax_currency_amount: Types::InvoiceCurrencyAmount,
         ?payment_currency_amount: Types::InvoiceCurrencyAmount,
@@ -370,11 +643,19 @@ module Aws::Invoicing
       attr_accessor invoice_id: String?
       attr_accessor issued_date: Time?
       attr_accessor due_date: Time?
+      attr_accessor bill_source_accounts: Array[String]?
+      attr_accessor bill_source_accounts_total_count: Integer?
+      attr_accessor receiver_role: String?
       attr_accessor entity: Types::Entity?
       attr_accessor billing_period: Types::BillingPeriod?
+      attr_accessor invoice_frequency: String?
+      attr_accessor bill_type: String?
       attr_accessor invoice_type: String?
+      attr_accessor commercial_invoice_id: String?
       attr_accessor original_invoice_id: String?
       attr_accessor purchase_order_number: String?
+      attr_accessor einvoice_delivery_status: String?
+      attr_accessor tax_authority_status: String?
       attr_accessor base_currency_amount: Types::InvoiceCurrencyAmount?
       attr_accessor tax_currency_amount: Types::InvoiceCurrencyAmount?
       attr_accessor payment_currency_amount: Types::InvoiceCurrencyAmount?
@@ -383,6 +664,7 @@ module Aws::Invoicing
     module InvoiceType
       INVOICE: String
       CREDIT_MEMO: String
+      PAYMENT_RECEIPT: String
     end
 
     class InvoiceUnit
@@ -413,10 +695,12 @@ module Aws::Invoicing
 
       def initialize: (
         ?linked_accounts: Array[String],
+        ?bill_source_accounts: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor linked_accounts: Array[String]?
+      attr_accessor bill_source_accounts: Array[String]?
     end
 
     class ListInvoiceSummariesRequest
@@ -484,6 +768,86 @@ module Aws::Invoicing
       attr_accessor next_token: String?
     end
 
+    class ListProcurementPortalPreferencesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListProcurementPortalPreferencesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?procurement_portal_preferences: Array[Types::ProcurementPortalPreferenceSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor procurement_portal_preferences: Array[Types::ProcurementPortalPreferenceSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListProcurementPortalSuppliersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portal_identifier: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portal_identifier: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListProcurementPortalSuppliersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?procurement_portal_suppliers: Array[Types::ProcurementPortalSupplier],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor procurement_portal_suppliers: Array[Types::ProcurementPortalSupplier]?
+      attr_accessor next_token: String?
+    end
+
+    class ListProcurementPortalsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListProcurementPortalsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?procurement_portals: Array[Types::ProcurementPortal],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor procurement_portals: Array[Types::ProcurementPortal]?
+      attr_accessor next_token: String?
+    end
+
     class ListTagsForResourceRequest
       include Smithy::Schema::Structure
 
@@ -504,6 +868,254 @@ module Aws::Invoicing
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor resource_tags: Array[Types::ResourceTag]?
+    end
+
+    class MarketplacePunchOutPreference
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?approval_request_redirect_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor approval_request_redirect_url: String?
+    end
+
+    class ProcurementPortal
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portal_identifier: String,
+        ?portal_name: String,
+        ?portal_display_name: String,
+        ?default_feature_configurations: Types::FeatureConfigurations,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portal_identifier: String?
+      attr_accessor portal_name: String?
+      attr_accessor portal_display_name: String?
+      attr_accessor default_feature_configurations: Types::FeatureConfigurations?
+    end
+
+    module ProcurementPortalEnv
+      PROD: String
+      TEST: String
+    end
+
+    module ProcurementPortalName
+      SAP_BUSINESS_NETWORK: String
+      COUPA: String
+    end
+
+    class ProcurementPortalPreference
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?aws_account_id: String,
+        ?procurement_portal_preference_arn: String,
+        ?procurement_portal_name: String,
+        ?buyer_domain: String,
+        ?buyer_identifier: String,
+        ?supplier_domain: String,
+        ?supplier_identifier: String,
+        ?selector: Types::ProcurementPortalPreferenceSelector,
+        ?procurement_portal_shared_secret: String,
+        ?procurement_portal_instance_endpoint: String,
+        ?purchase_order_retrieval_endpoint: String,
+        ?test_env_preference: Types::TestEnvPreference,
+        ?einvoice_delivery_enabled: bool,
+        ?einvoice_delivery_preference: Types::EinvoiceDeliveryPreference,
+        ?purchase_order_retrieval_enabled: bool,
+        ?marketplace_punch_out_enabled: bool,
+        ?marketplace_punch_out_preference: Types::MarketplacePunchOutPreference,
+        ?contacts: Array[Types::Contact],
+        ?einvoice_delivery_preference_status: String,
+        ?einvoice_delivery_preference_status_reason: String,
+        ?purchase_order_retrieval_preference_status: String,
+        ?purchase_order_retrieval_preference_status_reason: String,
+        ?version: Integer,
+        ?create_date: Time,
+        ?last_update_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor aws_account_id: String?
+      attr_accessor procurement_portal_preference_arn: String?
+      attr_accessor procurement_portal_name: String?
+      attr_accessor buyer_domain: String?
+      attr_accessor buyer_identifier: String?
+      attr_accessor supplier_domain: String?
+      attr_accessor supplier_identifier: String?
+      attr_accessor selector: Types::ProcurementPortalPreferenceSelector?
+      attr_accessor procurement_portal_shared_secret: String?
+      attr_accessor procurement_portal_instance_endpoint: String?
+      attr_accessor purchase_order_retrieval_endpoint: String?
+      attr_accessor test_env_preference: Types::TestEnvPreference?
+      attr_accessor einvoice_delivery_enabled: bool?
+      attr_accessor einvoice_delivery_preference: Types::EinvoiceDeliveryPreference?
+      attr_accessor purchase_order_retrieval_enabled: bool?
+      attr_accessor marketplace_punch_out_enabled: bool?
+      attr_accessor marketplace_punch_out_preference: Types::MarketplacePunchOutPreference?
+      attr_accessor contacts: Array[Types::Contact]?
+      attr_accessor einvoice_delivery_preference_status: String?
+      attr_accessor einvoice_delivery_preference_status_reason: String?
+      attr_accessor purchase_order_retrieval_preference_status: String?
+      attr_accessor purchase_order_retrieval_preference_status_reason: String?
+      attr_accessor version: Integer?
+      attr_accessor create_date: Time?
+      attr_accessor last_update_date: Time?
+    end
+
+    class ProcurementPortalPreferenceSelector
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?invoice_unit_arns: Array[String],
+        ?seller_of_records: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor invoice_unit_arns: Array[String]?
+      attr_accessor seller_of_records: Array[String]?
+    end
+
+    module ProcurementPortalPreferenceStatus
+      PENDING_VERIFICATION: String
+      VALIDATED: String
+      TEST_INITIALIZED: String
+      TEST_INITIALIZATION_FAILED: String
+      TEST_FAILED: String
+      ACTIVE: String
+      SUSPENDED: String
+    end
+
+    class ProcurementPortalPreferenceSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?aws_account_id: String,
+        ?procurement_portal_preference_arn: String,
+        ?procurement_portal_name: String,
+        ?buyer_domain: String,
+        ?buyer_identifier: String,
+        ?supplier_domain: String,
+        ?supplier_identifier: String,
+        ?selector: Types::ProcurementPortalPreferenceSelector,
+        ?einvoice_delivery_enabled: bool,
+        ?purchase_order_retrieval_enabled: bool,
+        ?marketplace_punch_out_enabled: bool,
+        ?einvoice_delivery_preference_status: String,
+        ?einvoice_delivery_preference_status_reason: String,
+        ?purchase_order_retrieval_preference_status: String,
+        ?purchase_order_retrieval_preference_status_reason: String,
+        ?version: Integer,
+        ?create_date: Time,
+        ?last_update_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor aws_account_id: String?
+      attr_accessor procurement_portal_preference_arn: String?
+      attr_accessor procurement_portal_name: String?
+      attr_accessor buyer_domain: String?
+      attr_accessor buyer_identifier: String?
+      attr_accessor supplier_domain: String?
+      attr_accessor supplier_identifier: String?
+      attr_accessor selector: Types::ProcurementPortalPreferenceSelector?
+      attr_accessor einvoice_delivery_enabled: bool?
+      attr_accessor purchase_order_retrieval_enabled: bool?
+      attr_accessor marketplace_punch_out_enabled: bool?
+      attr_accessor einvoice_delivery_preference_status: String?
+      attr_accessor einvoice_delivery_preference_status_reason: String?
+      attr_accessor purchase_order_retrieval_preference_status: String?
+      attr_accessor purchase_order_retrieval_preference_status_reason: String?
+      attr_accessor version: Integer?
+      attr_accessor create_date: Time?
+      attr_accessor last_update_date: Time?
+    end
+
+    class ProcurementPortalSupplier
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?supplier_identifier: String,
+        ?seller_of_record: String,
+        ?country_code: String,
+        ?environment: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor supplier_identifier: String?
+      attr_accessor seller_of_record: String?
+      attr_accessor country_code: String?
+      attr_accessor environment: String?
+    end
+
+    module Protocol
+      CXML: String
+    end
+
+    class PurchaseOrderDataSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?einvoice_delivery_document_type: String,
+        ?purchase_order_data_source_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor einvoice_delivery_document_type: String?
+      attr_accessor purchase_order_data_source_type: String?
+    end
+
+    module PurchaseOrderDataSourceType
+      ASSOCIATED_PURCHASE_ORDER_REQUIRED: String
+      PURCHASE_ORDER_NOT_REQUIRED: String
+    end
+
+    class PutProcurementPortalPreferenceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?procurement_portal_preference_arn: String,
+        ?selector: Types::ProcurementPortalPreferenceSelector,
+        ?procurement_portal_shared_secret: String,
+        ?procurement_portal_instance_endpoint: String,
+        ?test_env_preference: Types::TestEnvPreferenceInput,
+        ?einvoice_delivery_enabled: bool,
+        ?einvoice_delivery_preference: Types::EinvoiceDeliveryPreference,
+        ?purchase_order_retrieval_enabled: bool,
+        ?marketplace_punch_out_enabled: bool,
+        ?marketplace_punch_out_preference: Types::MarketplacePunchOutPreference,
+        ?contacts: Array[Types::Contact],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor procurement_portal_preference_arn: String?
+      attr_accessor selector: Types::ProcurementPortalPreferenceSelector?
+      attr_accessor procurement_portal_shared_secret: String?
+      attr_accessor procurement_portal_instance_endpoint: String?
+      attr_accessor test_env_preference: Types::TestEnvPreferenceInput?
+      attr_accessor einvoice_delivery_enabled: bool?
+      attr_accessor einvoice_delivery_preference: Types::EinvoiceDeliveryPreference?
+      attr_accessor purchase_order_retrieval_enabled: bool?
+      attr_accessor marketplace_punch_out_enabled: bool?
+      attr_accessor marketplace_punch_out_preference: Types::MarketplacePunchOutPreference?
+      attr_accessor contacts: Array[Types::Contact]?
+      attr_accessor client_token: String?
+    end
+
+    class PutProcurementPortalPreferenceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?procurement_portal_preference_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor procurement_portal_preference_arn: String?
     end
 
     class ReceiverAddress
@@ -533,6 +1145,12 @@ module Aws::Invoicing
       attr_accessor postal_code: String?
     end
 
+    module ReceiverRole
+      SELLER: String
+      RESELLER: String
+      BUYER: String
+    end
+
     class ResourceNotFoundException
       include Smithy::Schema::Structure
 
@@ -559,6 +1177,30 @@ module Aws::Invoicing
       attr_accessor value: String?
     end
 
+    class SendProcurementPortalValidationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?procurement_portal_preference_arn: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor procurement_portal_preference_arn: String?
+      attr_accessor client_token: String?
+    end
+
+    class SendProcurementPortalValidationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?procurement_portal_preference_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor procurement_portal_preference_arn: String?
+    end
+
     class ServiceQuotaExceededException
       include Smithy::Schema::Structure
 
@@ -568,6 +1210,34 @@ module Aws::Invoicing
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    class SupplementalDocument
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?document_type: String,
+        ?document_id: String,
+        ?document_url: String,
+        ?document_url_expiration_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor document_type: String?
+      attr_accessor document_id: String?
+      attr_accessor document_url: String?
+      attr_accessor document_url_expiration_date: Time?
+    end
+
+    module SupplementalDocumentType
+      GOVERNMENT_INVOICE: String
+      TAX_E_INVOICE: String
+      PAYMENT_RECEIPT: String
+      SUPPLEMENT: String
+    end
+
+    module SupplierDomain
+      NetworkID: String
     end
 
     class TagResourceRequest
@@ -590,6 +1260,11 @@ module Aws::Invoicing
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+    end
+
+    module TaxAuthorityStatus
+      ISSUED: String
+      CANCELLED: String
     end
 
     class TaxesBreakdown
@@ -618,6 +1293,50 @@ module Aws::Invoicing
       attr_accessor description: String?
       attr_accessor amount: String?
       attr_accessor rate: String?
+    end
+
+    class TestEnvPreference
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?buyer_domain: String,
+        ?buyer_identifier: String,
+        ?supplier_domain: String,
+        ?supplier_identifier: String,
+        ?procurement_portal_shared_secret: String,
+        ?procurement_portal_instance_endpoint: String,
+        ?purchase_order_retrieval_endpoint: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor buyer_domain: String?
+      attr_accessor buyer_identifier: String?
+      attr_accessor supplier_domain: String?
+      attr_accessor supplier_identifier: String?
+      attr_accessor procurement_portal_shared_secret: String?
+      attr_accessor procurement_portal_instance_endpoint: String?
+      attr_accessor purchase_order_retrieval_endpoint: String?
+    end
+
+    class TestEnvPreferenceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?buyer_domain: String,
+        ?buyer_identifier: String,
+        ?supplier_domain: String,
+        ?supplier_identifier: String,
+        ?procurement_portal_shared_secret: String,
+        ?procurement_portal_instance_endpoint: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor buyer_domain: String?
+      attr_accessor buyer_identifier: String?
+      attr_accessor supplier_domain: String?
+      attr_accessor supplier_identifier: String?
+      attr_accessor procurement_portal_shared_secret: String?
+      attr_accessor procurement_portal_instance_endpoint: String?
     end
 
     class ThrottlingException
@@ -661,6 +1380,7 @@ module Aws::Invoicing
         ?description: String,
         ?tax_inheritance_disabled: bool,
         ?rule: Types::InvoiceUnitRule,
+        ?client_token: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -668,6 +1388,7 @@ module Aws::Invoicing
       attr_accessor description: String?
       attr_accessor tax_inheritance_disabled: bool?
       attr_accessor rule: Types::InvoiceUnitRule?
+      attr_accessor client_token: String?
     end
 
     class UpdateInvoiceUnitResponse
@@ -679,6 +1400,38 @@ module Aws::Invoicing
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor invoice_unit_arn: String?
+    end
+
+    class UpdateProcurementPortalPreferenceStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?procurement_portal_preference_arn: String,
+        ?einvoice_delivery_preference_status: String,
+        ?einvoice_delivery_preference_status_reason: String,
+        ?purchase_order_retrieval_preference_status: String,
+        ?purchase_order_retrieval_preference_status_reason: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor procurement_portal_preference_arn: String?
+      attr_accessor einvoice_delivery_preference_status: String?
+      attr_accessor einvoice_delivery_preference_status_reason: String?
+      attr_accessor purchase_order_retrieval_preference_status: String?
+      attr_accessor purchase_order_retrieval_preference_status_reason: String?
+      attr_accessor client_token: String?
+    end
+
+    class UpdateProcurementPortalPreferenceStatusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?procurement_portal_preference_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor procurement_portal_preference_arn: String?
     end
 
     class ValidationException
@@ -726,6 +1479,32 @@ module Aws::Invoicing
       CANNOT_PARSE: String
       UNKNOWN_OPERATION: String
       OTHER: String
+    end
+
+    class VerifyProcurementPortalValidationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?procurement_portal_preference_arn: String,
+        ?code: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor procurement_portal_preference_arn: String?
+      attr_accessor code: String?
+      attr_accessor client_token: String?
+    end
+
+    class VerifyProcurementPortalValidationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?procurement_portal_preference_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor procurement_portal_preference_arn: String?
     end
   end
 end

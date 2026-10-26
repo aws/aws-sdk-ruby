@@ -12,6 +12,17 @@ module Aws::BCMDashboards
       attr_accessor message: String?
     end
 
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
     class CostAndUsageQuery
       include Smithy::Schema::Structure
 
@@ -64,6 +75,32 @@ module Aws::BCMDashboards
     end
 
     class CreateDashboardResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class CreateScheduledReportRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scheduled_report: Types::ScheduledReportInput,
+        ?resource_tags: Array[Types::ResourceTag],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scheduled_report: Types::ScheduledReportInput?
+      attr_accessor resource_tags: Array[Types::ResourceTag]?
+      attr_accessor client_token: String?
+    end
+
+    class CreateScheduledReportResponse
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -152,6 +189,28 @@ module Aws::BCMDashboards
       attr_accessor arn: String?
     end
 
+    class DeleteScheduledReportRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class DeleteScheduledReportResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
     module Dimension
       AZ: String
       INSTANCE_TYPE: String
@@ -214,6 +273,34 @@ module Aws::BCMDashboards
       end
       class Unknown < DisplayConfig
       end
+    end
+
+    class ExecuteScheduledReportRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?client_token: String,
+        ?dry_run: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor client_token: String?
+      attr_accessor dry_run: bool?
+    end
+
+    class ExecuteScheduledReportResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?health_status: Types::HealthStatus,
+        ?execution_triggered: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor health_status: Types::HealthStatus?
+      attr_accessor execution_triggered: bool?
     end
 
     class Expression
@@ -295,6 +382,28 @@ module Aws::BCMDashboards
       attr_accessor policy_document: String?
     end
 
+    class GetScheduledReportRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class GetScheduledReportResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scheduled_report: Types::ScheduledReport,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scheduled_report: Types::ScheduledReport?
+    end
+
     module Granularity
       HOURLY: String
       DAILY: String
@@ -331,6 +440,26 @@ module Aws::BCMDashboards
       COST_CATEGORY: String
     end
 
+    class HealthStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status_code: String,
+        ?last_refreshed_at: Time,
+        ?status_reasons: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status_code: String?
+      attr_accessor last_refreshed_at: Time?
+      attr_accessor status_reasons: Array[String]?
+    end
+
+    module HealthStatusCode
+      HEALTHY: String
+      UNHEALTHY: String
+    end
+
     class InternalServerException
       include Smithy::Schema::Structure
 
@@ -365,6 +494,32 @@ module Aws::BCMDashboards
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor dashboards: Array[Types::DashboardReference]?
+      attr_accessor next_token: String?
+    end
+
+    class ListScheduledReportsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListScheduledReportsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scheduled_reports: Array[Types::ScheduledReportSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scheduled_reports: Array[Types::ScheduledReportSummary]?
       attr_accessor next_token: String?
     end
 
@@ -541,6 +696,122 @@ module Aws::BCMDashboards
       attr_accessor filter: Types::Expression?
     end
 
+    class ScheduleConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schedule_expression: String,
+        ?schedule_expression_time_zone: String,
+        ?schedule_period: Types::SchedulePeriod,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schedule_expression: String?
+      attr_accessor schedule_expression_time_zone: String?
+      attr_accessor schedule_period: Types::SchedulePeriod?
+      attr_accessor state: String?
+    end
+
+    class SchedulePeriod
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_time: Time,
+        ?end_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+    end
+
+    module ScheduleState
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class ScheduledReport
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?dashboard_arn: String,
+        ?scheduled_report_execution_role_arn: String,
+        ?schedule_config: Types::ScheduleConfig,
+        ?description: String,
+        ?widget_ids: Array[String],
+        ?widget_date_range_override: Types::DateTimeRange,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?last_execution_at: Time,
+        ?health_status: Types::HealthStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor dashboard_arn: String?
+      attr_accessor scheduled_report_execution_role_arn: String?
+      attr_accessor schedule_config: Types::ScheduleConfig?
+      attr_accessor description: String?
+      attr_accessor widget_ids: Array[String]?
+      attr_accessor widget_date_range_override: Types::DateTimeRange?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor last_execution_at: Time?
+      attr_accessor health_status: Types::HealthStatus?
+    end
+
+    class ScheduledReportInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?dashboard_arn: String,
+        ?scheduled_report_execution_role_arn: String,
+        ?schedule_config: Types::ScheduleConfig,
+        ?description: String,
+        ?widget_ids: Array[String],
+        ?widget_date_range_override: Types::DateTimeRange,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor dashboard_arn: String?
+      attr_accessor scheduled_report_execution_role_arn: String?
+      attr_accessor schedule_config: Types::ScheduleConfig?
+      attr_accessor description: String?
+      attr_accessor widget_ids: Array[String]?
+      attr_accessor widget_date_range_override: Types::DateTimeRange?
+    end
+
+    class ScheduledReportSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?dashboard_arn: String,
+        ?schedule_expression: String,
+        ?state: String,
+        ?health_status: Types::HealthStatus,
+        ?schedule_expression_time_zone: String,
+        ?widget_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor dashboard_arn: String?
+      attr_accessor schedule_expression: String?
+      attr_accessor state: String?
+      attr_accessor health_status: Types::HealthStatus?
+      attr_accessor schedule_expression_time_zone: String?
+      attr_accessor widget_ids: Array[String]?
+    end
+
     class ServiceQuotaExceededException
       include Smithy::Schema::Structure
 
@@ -550,6 +821,16 @@ module Aws::BCMDashboards
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    module StatusReason
+      DATA_SOURCE_ACCESS_DENIED: String
+      EXECUTION_ROLE_ASSUME_FAILED: String
+      EXECUTION_ROLE_INSUFFICIENT_PERMISSIONS: String
+      DASHBOARD_NOT_FOUND: String
+      DASHBOARD_ACCESS_DENIED: String
+      INTERNAL_FAILURE: String
+      WIDGET_ID_NOT_FOUND: String
     end
 
     class TableDisplayConfigStruct
@@ -659,6 +940,46 @@ module Aws::BCMDashboards
       attr_accessor arn: String?
     end
 
+    class UpdateScheduledReportRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+        ?dashboard_arn: String,
+        ?scheduled_report_execution_role_arn: String,
+        ?schedule_config: Types::ScheduleConfig,
+        ?widget_ids: Array[String],
+        ?widget_date_range_override: Types::DateTimeRange,
+        ?clear_widget_ids: bool,
+        ?clear_widget_date_range_override: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor dashboard_arn: String?
+      attr_accessor scheduled_report_execution_role_arn: String?
+      attr_accessor schedule_config: Types::ScheduleConfig?
+      attr_accessor widget_ids: Array[String]?
+      attr_accessor widget_date_range_override: Types::DateTimeRange?
+      attr_accessor clear_widget_ids: bool?
+      attr_accessor clear_widget_date_range_override: bool?
+    end
+
+    class UpdateScheduledReportResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
     class ValidationException
       include Smithy::Schema::Structure
 
@@ -680,6 +1001,7 @@ module Aws::BCMDashboards
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?id: String,
         ?title: String,
         ?description: String,
         ?width: Integer,
@@ -689,6 +1011,7 @@ module Aws::BCMDashboards
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor id: String?
       attr_accessor title: String?
       attr_accessor description: String?
       attr_accessor width: Integer?

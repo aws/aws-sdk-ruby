@@ -19,19 +19,19 @@ module Aws::RDSData
 
     # <p>Contains an array.</p>
     # @!attribute boolean_values
-    #   <p>An array of Boolean values.</p>
+    #   <p>An array of Boolean values. Can contain null values.</p>
     #   @return [Array<Boolean>]
     # @!attribute long_values
-    #   <p>An array of integers.</p>
+    #   <p>An array of integers. Can contain null values.</p>
     #   @return [Array<Integer>]
     # @!attribute double_values
-    #   <p>An array of floating-point numbers.</p>
+    #   <p>An array of floating-point numbers. Can contain null values.</p>
     #   @return [Array<Float>]
     # @!attribute string_values
-    #   <p>An array of strings.</p>
+    #   <p>An array of strings. Can contain null values.</p>
     #   @return [Array<String>]
     # @!attribute array_values
-    #   <p>An array of arrays.</p>
+    #   <p>An array of arrays. Can contain null values.</p>
     #   @return [Array<Types::ArrayValue>]
     class ArrayValue < Struct.new(
       :boolean_values,
@@ -52,7 +52,7 @@ module Aws::RDSData
       class Unknown < ArrayValue; end
     end
 
-    # <p>There is an error in the call or in a SQL statement. (This error only appears in calls from Aurora Serverless v1 databases.)</p>
+    # <p>There is an error in the call or in a SQL statement. This exception is deprecated.</p>
     # @!attribute message
     #   <p>The error message returned by this <code>BadRequestException</code> error.</p>
     #   @return [String]
@@ -64,15 +64,12 @@ module Aws::RDSData
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The request parameters represent the input of a SQL statement over an array of
-    #             data.</p>
+    # <p>The request parameters represent the input of a SQL statement over an array of data.</p>
     # @!attribute resource_arn
     #   <p>The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.</p>
     #   @return [String]
     # @!attribute secret_arn
-    #   <p>The ARN of the secret that enables access to the DB cluster. Enter the database user name and password for the credentials in
-    #               the secret.</p>
-    #            <p>For information about creating the secret, see <a href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_database_secret.html">Create a database secret</a>.</p>
+    #   <p>The ARN of the secret that enables access to the DB cluster. Enter the database user name and password for the credentials in the secret.</p> <p>For information about creating the secret, see <a href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_database_secret.html">Create a database secret</a>.</p>
     #   @return [String]
     # @!attribute sql
     #   <p>The SQL statement to run. Don't include a semicolon (;) at the end of the SQL statement.</p>
@@ -81,33 +78,13 @@ module Aws::RDSData
     #   <p>The name of the database.</p>
     #   @return [String]
     # @!attribute schema
-    #   <p>The name of the database schema.</p>
-    #            <note>
-    #               <p>Currently, the <code>schema</code> parameter isn't supported.</p>
-    #            </note>
+    #   <p>The name of the database schema.</p> <note> <p>Currently, the <code>schema</code> parameter isn't supported.</p> </note>
     #   @return [String]
     # @!attribute parameter_sets
-    #   <p>The parameter set for the batch operation.</p>
-    #            <p>The SQL statement is executed as many times as the number of parameter sets provided. 
-    #             To execute a SQL statement with no parameters, use one of the following options:</p>
-    #            <ul>
-    #               <li>
-    #                  <p>Specify one or more empty parameter sets.</p>
-    #               </li>
-    #               <li>
-    #                  <p>Use the <code>ExecuteStatement</code> operation instead of the <code>BatchExecuteStatement</code> operation.</p>
-    #               </li>
-    #            </ul>
-    #            <note>
-    #               <p>Array parameters are not supported.</p>
-    #            </note>
+    #   <p>The parameter set for the batch operation.</p> <p>The SQL statement is executed as many times as the number of parameter sets provided. To execute a SQL statement with no parameters, use one of the following options:</p> <ul> <li> <p>Specify one or more empty parameter sets.</p> </li> <li> <p>Use the <code>ExecuteStatement</code> operation instead of the <code>BatchExecuteStatement</code> operation.</p> </li> </ul> <note> <p>Array parameters are not supported.</p> </note>
     #   @return [Array<Array<Types::SqlParameter>>]
     # @!attribute transaction_id
-    #   <p>The identifier of a transaction that was started by using the
-    #                   <code>BeginTransaction</code> operation. Specify the transaction ID of the
-    #               transaction that you want to include the SQL statement in.</p>
-    #            <p>If the SQL statement is not part of a transaction, don't set this
-    #               parameter.</p>
+    #   <p>The identifier of a transaction that was started by using the <code>BeginTransaction</code> operation. Specify the transaction ID of the transaction that you want to include the SQL statement in.</p> <p>If the SQL statement is not part of a transaction, don't set this parameter.</p>
     #   @return [String]
     class BatchExecuteStatementInput < Struct.new(
       nil,
@@ -123,8 +100,7 @@ module Aws::RDSData
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The response elements represent the output of a SQL statement over an array of
-    #             data.</p>
+    # <p>The response elements represent the output of a SQL statement over an array of data.</p>
     # @!attribute update_results
     #   <p>The execution results of each batch entry.</p>
     #   @return [Array<Types::UpdateResult>]
@@ -136,8 +112,7 @@ module Aws::RDSData
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The request parameters represent the input of a request to start a SQL
-    #             transaction.</p>
+    # <p>The request parameters represent the input of a request to start a SQL transaction.</p>
     # @!attribute resource_arn
     #   <p>The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.</p>
     #   @return [String]
@@ -161,8 +136,7 @@ module Aws::RDSData
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The response elements represent the output of a request to start a SQL
-    #             transaction.</p>
+    # <p>The response elements represent the output of a request to start a SQL transaction.</p>
     # @!attribute transaction_id
     #   <p>The transaction ID of the transaction started by the call.</p>
     #   @return [String]
@@ -305,9 +279,7 @@ module Aws::RDSData
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A request was cancelled because the Aurora Serverless v2 DB instance was paused.
-    #          The Data API request automatically resumes the DB instance. Wait a few seconds and
-    #          try again.</p>
+    # <p>A request was cancelled because the Aurora Serverless DB instance was paused. The Data API request automatically resumes the DB instance. Wait a few seconds and try again.</p>
     # @!attribute message
     #   @return [String]
     class DatabaseResumingException < Struct.new(
@@ -326,21 +298,15 @@ module Aws::RDSData
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The request parameters represent the input of a request to run one or more SQL
-    #             statements.</p>
+    # <p>The request parameters represent the input of a request to run one or more SQL statements.</p>
     # @!attribute db_cluster_or_instance_arn
     #   <p>The ARN of the Aurora Serverless DB cluster.</p>
     #   @return [String]
     # @!attribute aws_secret_store_arn
-    #   <p>The Amazon Resource Name (ARN) of the secret that enables access to the DB cluster. Enter the database user name and password
-    #               for the credentials in the secret.</p>
-    #            <p>For information about creating the secret, see <a href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_database_secret.html">Create a database secret</a>.</p>
+    #   <p>The Amazon Resource Name (ARN) of the secret that enables access to the DB cluster. Enter the database user name and password for the credentials in the secret.</p> <p>For information about creating the secret, see <a href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_database_secret.html">Create a database secret</a>.</p>
     #   @return [String]
     # @!attribute sql_statements
-    #   <p>One or more SQL statements to run on the DB cluster.</p>
-    #            <p>You can separate SQL statements from each other with a semicolon (;). Any valid SQL
-    #               statement is permitted, including data definition, data manipulation, and commit
-    #               statements. </p>
+    #   <p>One or more SQL statements to run on the DB cluster.</p> <p>You can separate SQL statements from each other with a semicolon (;). Any valid SQL statement is permitted, including data definition, data manipulation, and commit statements. </p>
     #   @return [String]
     # @!attribute database
     #   <p>The name of the database.</p>
@@ -360,8 +326,7 @@ module Aws::RDSData
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The response elements represent the output of a request to run one or more SQL
-    #             statements.</p>
+    # <p>The response elements represent the output of a request to run one or more SQL statements.</p>
     # @!attribute sql_statement_results
     #   <p>The results of the SQL statement or statements.</p>
     #   @return [Array<Types::SqlStatementResult>]
@@ -373,15 +338,12 @@ module Aws::RDSData
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The request parameters represent the input of a request to run a SQL statement against
-    #             a database.</p>
+    # <p>The request parameters represent the input of a request to run a SQL statement against a database.</p>
     # @!attribute resource_arn
     #   <p>The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.</p>
     #   @return [String]
     # @!attribute secret_arn
-    #   <p>The ARN of the secret that enables access to the DB cluster. Enter the database user name and password for the credentials in
-    #               the secret.</p>
-    #            <p>For information about creating the secret, see <a href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_database_secret.html">Create a database secret</a>.</p>
+    #   <p>The ARN of the secret that enables access to the DB cluster. Enter the database user name and password for the credentials in the secret.</p> <p>For information about creating the secret, see <a href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_database_secret.html">Create a database secret</a>.</p> <note> <p>When you use the CLI on Linux to reference a secret created in the RDS console, the ARN might include special characters like <code>rds!cluster</code>. If you enclose the ARN in double quotes, the <code>!</code> character might trigger a shell expansion error, such as <code>-bash: !cluster: event not found</code>. To avoid this, escape the exclamation mark (\!) in the ARN or enclose the entire ARN in single quotes (') instead of double quotes.</p> <p>Alternatively, disable shell history expansion by running <code>set +H</code> before you execute the command.</p> </note>
     #   @return [String]
     # @!attribute sql
     #   <p>The SQL statement to run.</p>
@@ -390,47 +352,25 @@ module Aws::RDSData
     #   <p>The name of the database.</p>
     #   @return [String]
     # @!attribute schema
-    #   <p>The name of the database schema.</p>
-    #            <note>
-    #               <p>Currently, the <code>schema</code> parameter isn't supported.</p>
-    #            </note>
+    #   <p>The name of the database schema.</p> <note> <p>Currently, the <code>schema</code> parameter isn't supported.</p> </note>
     #   @return [String]
     # @!attribute parameters
-    #   <p>The parameters for the SQL statement.</p>
-    #            <note>
-    #               <p>Array parameters are not supported.</p>
-    #            </note>
+    #   <p>The parameters for the SQL statement.</p> <note> <p>Array parameters are not supported.</p> </note>
     #   @return [Array<Types::SqlParameter>]
     # @!attribute transaction_id
-    #   <p>The identifier of a transaction that was started by using the
-    #                   <code>BeginTransaction</code> operation. Specify the transaction ID of the
-    #               transaction that you want to include the SQL statement in.</p>
-    #            <p>If the SQL statement is not part of a transaction, don't set this parameter.</p>
+    #   <p>The identifier of a transaction that was started by using the <code>BeginTransaction</code> operation. Specify the transaction ID of the transaction that you want to include the SQL statement in.</p> <p>If the SQL statement is not part of a transaction, don't set this parameter.</p>
     #   @return [String]
     # @!attribute include_result_metadata
     #   <p>A value that indicates whether to include metadata in the results.</p>
     #   @return [Boolean]
     # @!attribute continue_after_timeout
-    #   <p>A value that indicates whether to continue running the statement after 
-    #               the call times out. By default, the statement stops running when the call 
-    #               times out.</p>
-    #            <note>
-    #               <p>For DDL statements, we recommend continuing to run the statement after 
-    #                  the call times out. When a DDL statement terminates before it is finished 
-    #                  running, it can result in errors and possibly corrupted data structures.</p>
-    #            </note>
+    #   <p>A value that indicates whether to continue running the statement after the call times out. By default, the statement stops running when the call times out.</p> <note> <p>For DDL statements, we recommend continuing to run the statement after the call times out. When a DDL statement terminates before it is finished running, it can result in errors and possibly corrupted data structures.</p> </note>
     #   @return [Boolean]
     # @!attribute result_set_options
     #   <p>Options that control how the result set is returned.</p>
     #   @return [Types::ResultSetOptions]
     # @!attribute format_records_as
-    #   <p>A value that indicates whether to format the result set as a single JSON string.
-    #           This parameter only applies to <code>SELECT</code> statements and is ignored for
-    #           other types of statements. Allowed values are <code>NONE</code> and <code>JSON</code>.
-    #           The default value is <code>NONE</code>. The result is returned in the <code>formattedRecords</code> field.</p>
-    #            <p>For usage information about the JSON format for result sets, see
-    #             <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html">Using the Data API</a>
-    #             in the <i>Amazon Aurora User Guide</i>.</p>
+    #   <p>A value that indicates whether to format the result set as a single JSON string. This parameter only applies to <code>SELECT</code> statements and is ignored for other types of statements. Allowed values are <code>NONE</code> and <code>JSON</code>. The default value is <code>NONE</code>. The result is returned in the <code>formattedRecords</code> field.</p> <p>For usage information about the JSON format for result sets, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html">Using the Data API</a> in the <i>Amazon Aurora User Guide</i>.</p>
     #   @return [String]
     class ExecuteStatementInput < Struct.new(
       nil,
@@ -450,34 +390,21 @@ module Aws::RDSData
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The response elements represent the output of a request to run a SQL statement against
-    #             a database.</p>
+    # <p>The response elements represent the output of a request to run a SQL statement against a database.</p>
     # @!attribute records
-    #   <p>The records returned by the SQL statement. This field is blank if the
-    #           <code>formatRecordsAs</code> parameter is set to <code>JSON</code>.</p>
+    #   <p>The records returned by the SQL statement. This field is blank if the <code>formatRecordsAs</code> parameter is set to <code>JSON</code>.</p>
     #   @return [Array<Array<Types::Field>>]
     # @!attribute column_metadata
-    #   <p>Metadata for the columns included in the results. This field is blank if the
-    #           <code>formatRecordsAs</code> parameter is set to <code>JSON</code>.</p>
+    #   <p>Metadata for the columns included in the results. This field is blank if the <code>formatRecordsAs</code> parameter is set to <code>JSON</code>.</p>
     #   @return [Array<Types::ColumnMetadata>]
     # @!attribute number_of_records_updated
     #   <p>The number of records updated by the request.</p>
     #   @return [Integer]
     # @!attribute generated_fields
-    #   <p>Values for fields generated during a DML request.</p>
-    #            <note>
-    #               <p>The <code>generatedFields</code> data isn't supported by Aurora PostgreSQL.
-    #                   To get the values of generated fields, use the <code>RETURNING</code> clause. For
-    #                   more information, see <a href="https://www.postgresql.org/docs/10/dml-returning.html">Returning Data From
-    #                       Modified Rows</a> in the PostgreSQL documentation.</p>
-    #            </note>
+    #   <p>Values for fields generated during a DML request.</p> <note> <p>The <code>generatedFields</code> data isn't supported by Aurora PostgreSQL. To get the values of generated fields, use the <code>RETURNING</code> clause. For more information, see <a href="https://www.postgresql.org/docs/10/dml-returning.html">Returning Data From Modified Rows</a> in the PostgreSQL documentation.</p> </note>
     #   @return [Array<Types::Field>]
     # @!attribute formatted_records
-    #   <p>A string value that represents the result set of a <code>SELECT</code> statement
-    #           in JSON format. This value is only present when the <code>formatRecordsAs</code>
-    #           parameter is set to <code>JSON</code>.</p>
-    #            <p>The size limit for this field is currently 10 MB. If the JSON-formatted string representing the
-    #             result set requires more than 10 MB, the call returns an error.</p>
+    #   <p>A string value that represents the result set of a <code>SELECT</code> statement in JSON format. This value is only present when the <code>formatRecordsAs</code> parameter is set to <code>JSON</code>.</p> <p>The size limit for this field is currently 10 MB. If the JSON-formatted string representing the result set requires more than 10 MB, the call returns an error.</p>
     #   @return [String]
     class ExecuteStatementOutput < Struct.new(
       nil,
@@ -606,11 +533,7 @@ module Aws::RDSData
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A record returned by a call.</p>
-    #          <note>
-    #             <p>This data structure is only used with the deprecated <code>ExecuteSql</code> operation.
-    #               Use the <code>BatchExecuteStatement</code> or <code>ExecuteStatement</code> operation instead.</p>
-    #          </note>
+    # <p>A record returned by a call.</p> <note> <p>This data structure is only used with the deprecated <code>ExecuteSql</code> operation. Use the <code>BatchExecuteStatement</code> or <code>ExecuteStatement</code> operation instead.</p> </note>
     # @!attribute values
     #   <p>The values returned in the record.</p>
     #   @return [Array<Types::Value>]
@@ -622,11 +545,7 @@ module Aws::RDSData
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The result set returned by a SQL statement.</p>
-    #          <note>
-    #             <p>This data structure is only used with the deprecated <code>ExecuteSql</code> operation.
-    #               Use the <code>BatchExecuteStatement</code> or <code>ExecuteStatement</code> operation instead.</p>
-    #          </note>
+    # <p>The result set returned by a SQL statement.</p> <note> <p>This data structure is only used with the deprecated <code>ExecuteSql</code> operation. Use the <code>BatchExecuteStatement</code> or <code>ExecuteStatement</code> operation instead.</p> </note>
     # @!attribute result_set_metadata
     #   <p>The result-set metadata in the result set.</p>
     #   @return [Types::ResultSetMetadata]
@@ -665,22 +584,10 @@ module Aws::RDSData
 
     # <p>Options that control how the result set is returned.</p>
     # @!attribute decimal_return_type
-    #   <p>A value that indicates how a field of <code>DECIMAL</code> type is represented
-    #               in the response. The value of <code>STRING</code>, the default, specifies that
-    #               it is converted to a String value. The value of <code>DOUBLE_OR_LONG</code>
-    #               specifies that it is converted to a Long value if its scale is 0, or to a Double
-    #               value otherwise.</p>
-    #            <note>
-    #               <p>Conversion to Double or Long can result in roundoff errors due to precision loss.
-    #                   We recommend converting to String, especially when working with currency values.</p>
-    #            </note>
+    #   <p>A value that indicates how a field of <code>DECIMAL</code> type is represented in the response. The value of <code>STRING</code>, the default, specifies that it is converted to a String value. The value of <code>DOUBLE_OR_LONG</code> specifies that it is converted to a Long value if its scale is 0, or to a Double value otherwise.</p> <note> <p>Conversion to Double or Long can result in roundoff errors due to precision loss. We recommend converting to String, especially when working with currency values.</p> </note>
     #   @return [String]
     # @!attribute long_return_type
-    #   <p>A value that indicates how a field of <code>LONG</code> type is represented.
-    #           Allowed values are <code>LONG</code> and <code>STRING</code>. The default
-    #           is <code>LONG</code>. Specify <code>STRING</code> if the length or
-    #           precision of numeric values might cause truncation or rounding errors.
-    #           </p>
+    #   <p>A value that indicates how a field of <code>LONG</code> type is represented. Allowed values are <code>LONG</code> and <code>STRING</code>. The default is <code>LONG</code>. Specify <code>STRING</code> if the length or precision of numeric values might cause truncation or rounding errors. </p>
     #   @return [String]
     class ResultSetOptions < Struct.new(
       nil,
@@ -691,8 +598,7 @@ module Aws::RDSData
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The request parameters represent the input of a request to perform a rollback of a
-    #             transaction.</p>
+    # <p>The request parameters represent the input of a request to perform a rollback of a transaction.</p>
     # @!attribute resource_arn
     #   <p>The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.</p>
     #   @return [String]
@@ -712,8 +618,7 @@ module Aws::RDSData
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The response elements represent the output of a request to perform a rollback of a
-    #             transaction.</p>
+    # <p>The response elements represent the output of a request to perform a rollback of a transaction.</p>
     # @!attribute transaction_status
     #   <p>The status of the rollback operation.</p>
     #   @return [String]
@@ -725,18 +630,7 @@ module Aws::RDSData
       include ::Smithy::Schema::Structure
     end
 
-    # <p>There was a problem with the Secrets Manager secret used with the request, caused by one of the following conditions:</p>
-    #          <ul>
-    #             <li>
-    #                <p>RDS Data API timed out retrieving the secret.</p>
-    #             </li>
-    #             <li>
-    #                <p>The secret provided wasn't found.</p>
-    #             </li>
-    #             <li>
-    #                <p>The secret couldn't be decrypted.</p>
-    #             </li>
-    #          </ul>
+    # <p>There was a problem with the Secrets Manager secret used with the request, caused by one of the following conditions:</p> <ul> <li> <p>RDS Data API timed out retrieving the secret.</p> </li> <li> <p>The secret provided wasn't found.</p> </li> <li> <p>The secret couldn't be decrypted.</p> </li> </ul>
     # @!attribute message
     #   @return [String]
     class SecretsErrorException < Struct.new(
@@ -747,8 +641,7 @@ module Aws::RDSData
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The service specified by the <code>resourceArn</code> parameter isn't
-    #             available.</p>
+    # <p>The service specified by the <code>resourceArn</code> parameter isn't available.</p>
     class ServiceUnavailableError < Struct.new(
       nil,
       keyword_init: true
@@ -764,41 +657,7 @@ module Aws::RDSData
     #   <p>The value of the parameter.</p>
     #   @return [Types::Field]
     # @!attribute type_hint
-    #   <p>A hint that specifies the correct object type for data type mapping. Possible values
-    #               are as follows:</p>
-    #            <ul>
-    #               <li>
-    #                  <p>
-    #                     <code>DATE</code> - The corresponding <code>String</code> parameter value is sent as an object 
-    #                 of <code>DATE</code> type to the database. The accepted format is <code>YYYY-MM-DD</code>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>DECIMAL</code> - The corresponding <code>String</code> parameter value is sent as an object 
-    #                       of <code>DECIMAL</code> type to the database.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>JSON</code> - The corresponding <code>String</code> parameter value is sent as an
-    #              object of <code>JSON</code> type to the database.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>TIME</code> - The corresponding <code>String</code> parameter value is sent as an object 
-    #                       of <code>TIME</code> type to the database. The accepted format is <code>HH:MM:SS[.FFF]</code>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>TIMESTAMP</code> - The corresponding <code>String</code> parameter value is sent as an object 
-    #                 of <code>TIMESTAMP</code> type to the database. The accepted format is <code>YYYY-MM-DD HH:MM:SS[.FFF]</code>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>UUID</code> - The corresponding <code>String</code> parameter value is sent as an object of
-    #                <code>UUID</code> type to the database.
-    #             </p>
-    #               </li>
-    #            </ul>
+    #   <p>A hint that specifies the correct object type for data type mapping. Possible values are as follows:</p> <ul> <li> <p> <code>DATE</code> - The corresponding <code>String</code> parameter value is sent as an object of <code>DATE</code> type to the database. The accepted format is <code>YYYY-MM-DD</code>.</p> </li> <li> <p> <code>DECIMAL</code> - The corresponding <code>String</code> parameter value is sent as an object of <code>DECIMAL</code> type to the database.</p> </li> <li> <p> <code>JSON</code> - The corresponding <code>String</code> parameter value is sent as an object of <code>JSON</code> type to the database.</p> </li> <li> <p> <code>TIME</code> - The corresponding <code>String</code> parameter value is sent as an object of <code>TIME</code> type to the database. The accepted format is <code>HH:MM:SS[.FFF]</code>.</p> </li> <li> <p> <code>TIMESTAMP</code> - The corresponding <code>String</code> parameter value is sent as an object of <code>TIMESTAMP</code> type to the database. The accepted format is <code>YYYY-MM-DD HH:MM:SS[.FFF]</code>.</p> </li> <li> <p> <code>UUID</code> - The corresponding <code>String</code> parameter value is sent as an object of <code>UUID</code> type to the database. </p> </li> </ul>
     #   @return [String]
     class SqlParameter < Struct.new(
       nil,
@@ -810,11 +669,7 @@ module Aws::RDSData
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The result of a SQL statement.</p>
-    #          <note>
-    #             <p>This data structure is only used with the deprecated <code>ExecuteSql</code> operation.
-    #               Use the <code>BatchExecuteStatement</code> or <code>ExecuteStatement</code> operation instead.</p>
-    #          </note>
+    # <p>The result of a SQL statement.</p> <note> <p>This data structure is only used with the deprecated <code>ExecuteSql</code> operation. Use the <code>BatchExecuteStatement</code> or <code>ExecuteStatement</code> operation instead.</p> </note>
     # @!attribute result_frame
     #   <p>The result set of the SQL statement.</p>
     #   @return [Types::ResultFrame]
@@ -856,11 +711,7 @@ module Aws::RDSData
       end
     end
 
-    # <p>A structure value returned by a call.</p>
-    #          <note>
-    #             <p>This data structure is only used with the deprecated <code>ExecuteSql</code> operation.
-    #               Use the <code>BatchExecuteStatement</code> or <code>ExecuteStatement</code> operation instead.</p>
-    #          </note>
+    # <p>A structure value returned by a call.</p> <note> <p>This data structure is only used with the deprecated <code>ExecuteSql</code> operation. Use the <code>BatchExecuteStatement</code> or <code>ExecuteStatement</code> operation instead.</p> </note>
     # @!attribute attributes
     #   <p>The attributes returned in the record.</p>
     #   @return [Array<Types::Value>]
@@ -883,18 +734,7 @@ module Aws::RDSData
       include ::Smithy::Schema::Structure
     end
 
-    # <p>There was a problem with the result because of one of the following conditions:</p>
-    #          <ul>
-    #             <li>
-    #                <p>It contained an unsupported data type.</p>
-    #             </li>
-    #             <li>
-    #                <p>It contained a multidimensional array.</p>
-    #             </li>
-    #             <li>
-    #                <p>The size was too large.</p>
-    #             </li>
-    #          </ul>
+    # <p>There was a problem with the result because of one of the following conditions:</p> <ul> <li> <p>It contained an unsupported data type.</p> </li> <li> <p>It contained a multidimensional array.</p> </li> <li> <p>The size was too large.</p> </li> </ul>
     # @!attribute message
     #   @return [String]
     class UnsupportedResultException < Struct.new(
@@ -917,11 +757,7 @@ module Aws::RDSData
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Contains the value of a column.</p>
-    #          <note>
-    #             <p>This data structure is only used with the deprecated <code>ExecuteSql</code> operation.
-    #               Use the <code>BatchExecuteStatement</code> or <code>ExecuteStatement</code> operation instead.</p>
-    #          </note>
+    # <p>Contains the value of a column.</p> <note> <p>This data structure is only used with the deprecated <code>ExecuteSql</code> operation. Use the <code>BatchExecuteStatement</code> or <code>ExecuteStatement</code> operation instead.</p> </note>
     # @!attribute is_null
     #   <p>A NULL value.</p>
     #   @return [Boolean]

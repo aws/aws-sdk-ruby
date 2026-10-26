@@ -297,6 +297,7 @@ module Aws::MediaConnect
         ?media_stream_name: String,
         ?media_stream_type: String,
         ?video_format: String,
+        ?media_stream_tags: Hash[String, String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -307,6 +308,7 @@ module Aws::MediaConnect
       attr_accessor media_stream_name: String?
       attr_accessor media_stream_type: String?
       attr_accessor video_format: String?
+      attr_accessor media_stream_tags: Hash[String, String]?
     end
 
     class AddOutputRequest
@@ -331,6 +333,11 @@ module Aws::MediaConnect
         ?output_status: String,
         ?ndi_speed_hq_quality: Integer,
         ?ndi_program_name: String,
+        ?output_tags: Hash[String, String],
+        ?router_integration_state: String,
+        ?router_integration_transit_encryption: Types::FlowTransitEncryption,
+        ?ndi_output_timecode_source: String,
+        ?ndi_audio_reference_level: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -352,6 +359,11 @@ module Aws::MediaConnect
       attr_accessor output_status: String?
       attr_accessor ndi_speed_hq_quality: Integer?
       attr_accessor ndi_program_name: String?
+      attr_accessor output_tags: Hash[String, String]?
+      attr_accessor router_integration_state: String?
+      attr_accessor router_integration_transit_encryption: Types::FlowTransitEncryption?
+      attr_accessor ndi_output_timecode_source: String?
+      attr_accessor ndi_audio_reference_level: Integer?
     end
 
     module Algorithm
@@ -371,6 +383,15 @@ module Aws::MediaConnect
       attr_accessor silent_audio: Types::SilentAudio?
     end
 
+    class AutomaticEncryptionKeyConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
     class BadRequestException
       include Smithy::Schema::Structure
 
@@ -382,7 +403,137 @@ module Aws::MediaConnect
       attr_accessor message: String?
     end
 
+    class BatchGetRouterInputError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class BatchGetRouterInputRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arns: Array[String]?
+    end
+
+    class BatchGetRouterInputResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?router_inputs: Array[Types::RouterInput],
+        ?errors: Array[Types::BatchGetRouterInputError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor router_inputs: Array[Types::RouterInput]?
+      attr_accessor errors: Array[Types::BatchGetRouterInputError]?
+    end
+
+    class BatchGetRouterNetworkInterfaceError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class BatchGetRouterNetworkInterfaceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arns: Array[String]?
+    end
+
+    class BatchGetRouterNetworkInterfaceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?router_network_interfaces: Array[Types::RouterNetworkInterface],
+        ?errors: Array[Types::BatchGetRouterNetworkInterfaceError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor router_network_interfaces: Array[Types::RouterNetworkInterface]?
+      attr_accessor errors: Array[Types::BatchGetRouterNetworkInterfaceError]?
+    end
+
+    class BatchGetRouterOutputError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class BatchGetRouterOutputRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arns: Array[String]?
+    end
+
+    class BatchGetRouterOutputResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?router_outputs: Array[Types::RouterOutput],
+        ?errors: Array[Types::BatchGetRouterOutputError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor router_outputs: Array[Types::RouterOutput]?
+      attr_accessor errors: Array[Types::BatchGetRouterOutputError]?
+    end
+
     class BlackFrames
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state: String,
+        ?threshold_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state: String?
+      attr_accessor threshold_seconds: Integer?
+    end
+
+    class BlackFramesConfiguration
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -544,6 +695,21 @@ module Aws::MediaConnect
       UPDATING: String
     end
 
+    class ColorInformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?colorimetry: String,
+        ?transfer_characteristics: String,
+        ?matrix_coefficients: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor colorimetry: String?
+      attr_accessor transfer_characteristics: String?
+      attr_accessor matrix_coefficients: String?
+    end
+
     module Colorimetry
       BT601: String
       BT709: String
@@ -568,6 +734,21 @@ module Aws::MediaConnect
     module ConnectionStatus
       CONNECTED: String
       DISCONNECTED: String
+    end
+
+    class ContentQualityAnalysisFeatureConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?black_frames: Types::BlackFramesConfiguration,
+        ?frozen_frames: Types::FrozenFramesConfiguration,
+        ?silent_audio: Types::SilentAudioConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor black_frames: Types::BlackFramesConfiguration?
+      attr_accessor frozen_frames: Types::FrozenFramesConfiguration?
+      attr_accessor silent_audio: Types::SilentAudioConfiguration?
     end
 
     module ContentQualityAnalysisState
@@ -648,6 +829,8 @@ module Aws::MediaConnect
         ?source_monitoring_config: Types::MonitoringConfig,
         ?flow_size: String,
         ?ndi_config: Types::NdiConfig,
+        ?encoding_config: Types::EncodingConfig,
+        ?flow_tags: Hash[String, String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -664,6 +847,8 @@ module Aws::MediaConnect
       attr_accessor source_monitoring_config: Types::MonitoringConfig?
       attr_accessor flow_size: String?
       attr_accessor ndi_config: Types::NdiConfig?
+      attr_accessor encoding_config: Types::EncodingConfig?
+      attr_accessor flow_tags: Hash[String, String]?
     end
 
     class CreateFlowResponse
@@ -712,6 +897,141 @@ module Aws::MediaConnect
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor gateway: Types::Gateway?
+    end
+
+    class CreateRouterInputRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?configuration: Types::RouterInputConfiguration,
+        ?maximum_bitrate: Integer,
+        ?routing_scope: String,
+        ?tier: String,
+        ?region_name: String,
+        ?availability_zone: String,
+        ?transit_encryption: Types::RouterInputTransitEncryption,
+        ?maintenance_configuration: Types::MaintenanceConfiguration,
+        ?tags: Hash[String, String],
+        ?client_token: String,
+        ?content_quality_analysis_configuration: Types::RouterContentQualityAnalysisConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor configuration: Types::RouterInputConfiguration?
+      attr_accessor maximum_bitrate: Integer?
+      attr_accessor routing_scope: String?
+      attr_accessor tier: String?
+      attr_accessor region_name: String?
+      attr_accessor availability_zone: String?
+      attr_accessor transit_encryption: Types::RouterInputTransitEncryption?
+      attr_accessor maintenance_configuration: Types::MaintenanceConfiguration?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor client_token: String?
+      attr_accessor content_quality_analysis_configuration: Types::RouterContentQualityAnalysisConfiguration?
+    end
+
+    class CreateRouterInputResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?router_input: Types::RouterInput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor router_input: Types::RouterInput?
+    end
+
+    class CreateRouterNetworkInterfaceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?configuration: Types::RouterNetworkInterfaceConfiguration,
+        ?region_name: String,
+        ?tags: Hash[String, String],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor configuration: Types::RouterNetworkInterfaceConfiguration?
+      attr_accessor region_name: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor client_token: String?
+    end
+
+    class CreateRouterNetworkInterfaceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?router_network_interface: Types::RouterNetworkInterface,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor router_network_interface: Types::RouterNetworkInterface?
+    end
+
+    class CreateRouterOutputRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?configuration: Types::RouterOutputConfiguration,
+        ?maximum_bitrate: Integer,
+        ?routing_scope: String,
+        ?tier: String,
+        ?region_name: String,
+        ?availability_zone: String,
+        ?maintenance_configuration: Types::MaintenanceConfiguration,
+        ?tags: Hash[String, String],
+        ?fabric_configuration: Types::FabricConfiguration,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor configuration: Types::RouterOutputConfiguration?
+      attr_accessor maximum_bitrate: Integer?
+      attr_accessor routing_scope: String?
+      attr_accessor tier: String?
+      attr_accessor region_name: String?
+      attr_accessor availability_zone: String?
+      attr_accessor maintenance_configuration: Types::MaintenanceConfiguration?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor fabric_configuration: Types::FabricConfiguration?
+      attr_accessor client_token: String?
+    end
+
+    class CreateRouterOutputResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?router_output: Types::RouterOutput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor router_output: Types::RouterOutput?
+    end
+
+    module Day
+      MONDAY: String
+      TUESDAY: String
+      WEDNESDAY: String
+      THURSDAY: String
+      FRIDAY: String
+      SATURDAY: String
+      SUNDAY: String
+    end
+
+    class DefaultMaintenanceConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
     end
 
     class DeleteBridgeRequest
@@ -780,6 +1100,84 @@ module Aws::MediaConnect
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor gateway_arn: String?
+    end
+
+    class DeleteRouterInputRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class DeleteRouterInputResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor state: String?
+    end
+
+    class DeleteRouterNetworkInterfaceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class DeleteRouterNetworkInterfaceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor state: String?
+    end
+
+    class DeleteRouterOutputRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class DeleteRouterOutputResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor state: String?
     end
 
     class DeregisterGatewayInstanceRequest
@@ -873,6 +1271,7 @@ module Aws::MediaConnect
         ?messages: Array[Types::MessageDetail],
         ?timestamp: Time,
         ?transport_media_info: Types::TransportMediaInfo,
+        ?ndi_info: Types::NdiSourceMetadataInfo,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -880,6 +1279,7 @@ module Aws::MediaConnect
       attr_accessor messages: Array[Types::MessageDetail]?
       attr_accessor timestamp: Time?
       attr_accessor transport_media_info: Types::TransportMediaInfo?
+      attr_accessor ndi_info: Types::NdiSourceMetadataInfo?
     end
 
     class DescribeFlowSourceThumbnailRequest
@@ -1052,6 +1452,19 @@ module Aws::MediaConnect
       high: String
     end
 
+    class EncodingConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?encoding_profile: String,
+        ?video_max_bitrate: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor encoding_profile: String?
+      attr_accessor video_max_bitrate: Integer?
+    end
+
     module EncodingName
       jxsv: String
       raw: String
@@ -1083,6 +1496,11 @@ module Aws::MediaConnect
 
       attr_accessor compression_factor: Float?
       attr_accessor encoder_profile: String?
+    end
+
+    module EncodingProfile
+      DISTRIBUTION_H264_DEFAULT: String
+      CONTRIBUTION_H264_DEFAULT: String
     end
 
     class Encryption
@@ -1140,6 +1558,22 @@ module Aws::MediaConnect
       DISABLED: String
     end
 
+    class FabricConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_latency_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_latency_mode: String?
+    end
+
+    module FabricLatencyMode
+      BALANCED: String
+      LOW_LATENCY: String
+    end
+
     class FailoverConfig
       include Smithy::Schema::Structure
 
@@ -1157,9 +1591,85 @@ module Aws::MediaConnect
       attr_accessor state: String?
     end
 
+    module FailoverInputSourcePriorityMode
+      NO_PRIORITY: String
+      PRIMARY_SECONDARY: String
+    end
+
     module FailoverMode
       MERGE: String
       FAILOVER: String
+    end
+
+    class FailoverRouterInputConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_interface_arn: String,
+        ?protocol_configurations: Array[Types::FailoverRouterInputProtocolConfiguration],
+        ?source_priority_mode: String,
+        ?primary_source_index: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_interface_arn: String?
+      attr_accessor protocol_configurations: Array[Types::FailoverRouterInputProtocolConfiguration]?
+      attr_accessor source_priority_mode: String?
+      attr_accessor primary_source_index: Integer?
+    end
+
+    class FailoverRouterInputIndexedStreamDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_index: Integer,
+        ?source_ip_address: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_index: Integer?
+      attr_accessor source_ip_address: String?
+    end
+
+    class FailoverRouterInputProtocolConfiguration
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?rist: Types::RistRouterInputConfiguration,
+        ?srt_listener: Types::SrtListenerRouterInputConfiguration,
+        ?srt_caller: Types::SrtCallerRouterInputConfiguration,
+        ?rtp: Types::RtpRouterInputConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rist: Types::RistRouterInputConfiguration?
+      attr_accessor srt_listener: Types::SrtListenerRouterInputConfiguration?
+      attr_accessor srt_caller: Types::SrtCallerRouterInputConfiguration?
+      attr_accessor rtp: Types::RtpRouterInputConfiguration?
+
+      class Rist < FailoverRouterInputProtocolConfiguration
+      end
+      class SrtListener < FailoverRouterInputProtocolConfiguration
+      end
+      class SrtCaller < FailoverRouterInputProtocolConfiguration
+      end
+      class Rtp < FailoverRouterInputProtocolConfiguration
+      end
+      class Unknown < FailoverRouterInputProtocolConfiguration
+      end
+    end
+
+    class FailoverRouterInputStreamDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_index_zero_stream_details: Types::FailoverRouterInputIndexedStreamDetails,
+        ?source_index_one_stream_details: Types::FailoverRouterInputIndexedStreamDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_index_zero_stream_details: Types::FailoverRouterInputIndexedStreamDetails?
+      attr_accessor source_index_one_stream_details: Types::FailoverRouterInputIndexedStreamDetails?
     end
 
     class Flow
@@ -1183,6 +1693,7 @@ module Aws::MediaConnect
         ?source_monitoring_config: Types::MonitoringConfig,
         ?flow_size: String,
         ?ndi_config: Types::NdiConfig,
+        ?encoding_config: Types::EncodingConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1203,11 +1714,51 @@ module Aws::MediaConnect
       attr_accessor source_monitoring_config: Types::MonitoringConfig?
       attr_accessor flow_size: String?
       attr_accessor ndi_config: Types::NdiConfig?
+      attr_accessor encoding_config: Types::EncodingConfig?
     end
 
     module FlowSize
       MEDIUM: String
       LARGE: String
+      LARGE_4X: String
+    end
+
+    class FlowTransitEncryption
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?encryption_key_type: String,
+        ?encryption_key_configuration: Types::FlowTransitEncryptionKeyConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor encryption_key_type: String?
+      attr_accessor encryption_key_configuration: Types::FlowTransitEncryptionKeyConfiguration?
+    end
+
+    class FlowTransitEncryptionKeyConfiguration
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?secrets_manager: Types::SecretsManagerEncryptionKeyConfiguration,
+        ?automatic: Types::AutomaticEncryptionKeyConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor secrets_manager: Types::SecretsManagerEncryptionKeyConfiguration?
+      attr_accessor automatic: Types::AutomaticEncryptionKeyConfiguration?
+
+      class SecretsManager < FlowTransitEncryptionKeyConfiguration
+      end
+      class Automatic < FlowTransitEncryptionKeyConfiguration
+      end
+      class Unknown < FlowTransitEncryptionKeyConfiguration
+      end
+    end
+
+    module FlowTransitEncryptionKeyType
+      SECRETS_MANAGER: String
+      AUTOMATIC: String
     end
 
     class Fmtp
@@ -1267,6 +1818,11 @@ module Aws::MediaConnect
       attr_accessor message: String?
     end
 
+    module ForwardErrorCorrectionState
+      ENABLED: String
+      DISABLED: String
+    end
+
     class FrameResolution
       include Smithy::Schema::Structure
 
@@ -1281,6 +1837,19 @@ module Aws::MediaConnect
     end
 
     class FrozenFrames
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state: String,
+        ?threshold_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state: String?
+      attr_accessor threshold_seconds: Integer?
+    end
+
+    class FrozenFramesConfiguration
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -1374,6 +1943,124 @@ module Aws::MediaConnect
       DELETED: String
     end
 
+    class GetRouterInputRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class GetRouterInputResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?router_input: Types::RouterInput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor router_input: Types::RouterInput?
+    end
+
+    class GetRouterInputSourceMetadataRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class GetRouterInputSourceMetadataResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?source_metadata_details: Types::RouterInputSourceMetadataDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor source_metadata_details: Types::RouterInputSourceMetadataDetails?
+    end
+
+    class GetRouterInputThumbnailRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class GetRouterInputThumbnailResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?thumbnail_details: Types::RouterInputThumbnailDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor thumbnail_details: Types::RouterInputThumbnailDetails?
+    end
+
+    class GetRouterNetworkInterfaceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class GetRouterNetworkInterfaceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?router_network_interface: Types::RouterNetworkInterface,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor router_network_interface: Types::RouterNetworkInterface?
+    end
+
+    class GetRouterOutputRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class GetRouterOutputResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?router_output: Types::RouterOutput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor router_output: Types::RouterOutput?
+    end
+
     class GrantEntitlementRequest
       include Smithy::Schema::Structure
 
@@ -1384,6 +2071,7 @@ module Aws::MediaConnect
         ?entitlement_status: String,
         ?name: String,
         ?subscribers: Array[String],
+        ?entitlement_tags: Hash[String, String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1393,6 +2081,7 @@ module Aws::MediaConnect
       attr_accessor entitlement_status: String?
       attr_accessor name: String?
       attr_accessor subscribers: Array[String]?
+      attr_accessor entitlement_tags: Hash[String, String]?
     end
 
     class GrantFlowEntitlements420Exception
@@ -1709,6 +2398,112 @@ module Aws::MediaConnect
       attr_accessor reservations: Array[Types::Reservation]?
     end
 
+    class ListRouterInputsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?filters: Array[Types::RouterInputFilter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor filters: Array[Types::RouterInputFilter]?
+    end
+
+    class ListRouterInputsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?router_inputs: Array[Types::ListedRouterInput],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor router_inputs: Array[Types::ListedRouterInput]?
+      attr_accessor next_token: String?
+    end
+
+    class ListRouterNetworkInterfacesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?filters: Array[Types::RouterNetworkInterfaceFilter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor filters: Array[Types::RouterNetworkInterfaceFilter]?
+    end
+
+    class ListRouterNetworkInterfacesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?router_network_interfaces: Array[Types::ListedRouterNetworkInterface],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor router_network_interfaces: Array[Types::ListedRouterNetworkInterface]?
+      attr_accessor next_token: String?
+    end
+
+    class ListRouterOutputsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?filters: Array[Types::RouterOutputFilter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor filters: Array[Types::RouterOutputFilter]?
+    end
+
+    class ListRouterOutputsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?router_outputs: Array[Types::ListedRouterOutput],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor router_outputs: Array[Types::ListedRouterOutput]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForGlobalResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForGlobalResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
     class ListTagsForResourceRequest
       include Smithy::Schema::Structure
 
@@ -1820,6 +2615,119 @@ module Aws::MediaConnect
       attr_accessor instance_state: String?
     end
 
+    class ListedRouterInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?id: String,
+        ?input_type: String,
+        ?state: String,
+        ?routed_outputs: Integer,
+        ?region_name: String,
+        ?availability_zone: String,
+        ?maximum_bitrate: Integer,
+        ?routing_scope: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?message_count: Integer,
+        ?network_interface_arn: String,
+        ?maintenance_schedule_type: String,
+        ?maintenance_schedule: Types::MaintenanceSchedule,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor input_type: String?
+      attr_accessor state: String?
+      attr_accessor routed_outputs: Integer?
+      attr_accessor region_name: String?
+      attr_accessor availability_zone: String?
+      attr_accessor maximum_bitrate: Integer?
+      attr_accessor routing_scope: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor message_count: Integer?
+      attr_accessor network_interface_arn: String?
+      attr_accessor maintenance_schedule_type: String?
+      attr_accessor maintenance_schedule: Types::MaintenanceSchedule?
+    end
+
+    class ListedRouterNetworkInterface
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?id: String,
+        ?network_interface_type: String,
+        ?associated_output_count: Integer,
+        ?associated_input_count: Integer,
+        ?state: String,
+        ?region_name: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor network_interface_type: String?
+      attr_accessor associated_output_count: Integer?
+      attr_accessor associated_input_count: Integer?
+      attr_accessor state: String?
+      attr_accessor region_name: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class ListedRouterOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?id: String,
+        ?output_type: String,
+        ?state: String,
+        ?routed_state: String,
+        ?region_name: String,
+        ?availability_zone: String,
+        ?maximum_bitrate: Integer,
+        ?routing_scope: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?message_count: Integer,
+        ?routed_input_arn: String,
+        ?network_interface_arn: String,
+        ?maintenance_schedule_type: String,
+        ?maintenance_schedule: Types::MaintenanceSchedule,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor output_type: String?
+      attr_accessor state: String?
+      attr_accessor routed_state: String?
+      attr_accessor region_name: String?
+      attr_accessor availability_zone: String?
+      attr_accessor maximum_bitrate: Integer?
+      attr_accessor routing_scope: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor message_count: Integer?
+      attr_accessor routed_input_arn: String?
+      attr_accessor network_interface_arn: String?
+      attr_accessor maintenance_schedule_type: String?
+      attr_accessor maintenance_schedule: Types::MaintenanceSchedule?
+    end
+
     class Maintenance
       include Smithy::Schema::Structure
 
@@ -1837,6 +2745,26 @@ module Aws::MediaConnect
       attr_accessor maintenance_start_hour: String?
     end
 
+    class MaintenanceConfiguration
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?preferred_day_time: Types::PreferredDayTimeMaintenanceConfiguration,
+        ?default: Types::DefaultMaintenanceConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor preferred_day_time: Types::PreferredDayTimeMaintenanceConfiguration?
+      attr_accessor default: Types::DefaultMaintenanceConfiguration?
+
+      class PreferredDayTime < MaintenanceConfiguration
+      end
+      class Default < MaintenanceConfiguration
+      end
+      class Unknown < MaintenanceConfiguration
+      end
+    end
+
     module MaintenanceDay
       Monday: String
       Tuesday: String
@@ -1845,6 +2773,177 @@ module Aws::MediaConnect
       Friday: String
       Saturday: String
       Sunday: String
+    end
+
+    class MaintenanceSchedule
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?window: Types::WindowMaintenanceSchedule,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor window: Types::WindowMaintenanceSchedule?
+
+      class Window < MaintenanceSchedule
+      end
+      class Unknown < MaintenanceSchedule
+      end
+    end
+
+    module MaintenanceScheduleType
+      WINDOW: String
+    end
+
+    module MaintenanceType
+      PREFERRED_DAY_TIME: String
+      DEFAULT: String
+    end
+
+    class MediaConnectFlowRouterInputConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow_arn: String,
+        ?flow_output_arn: String,
+        ?source_transit_decryption: Types::FlowTransitEncryption,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow_arn: String?
+      attr_accessor flow_output_arn: String?
+      attr_accessor source_transit_decryption: Types::FlowTransitEncryption?
+    end
+
+    class MediaConnectFlowRouterInputStreamDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class MediaConnectFlowRouterOutputConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow_arn: String,
+        ?flow_source_arn: String,
+        ?destination_transit_encryption: Types::FlowTransitEncryption,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow_arn: String?
+      attr_accessor flow_source_arn: String?
+      attr_accessor destination_transit_encryption: Types::FlowTransitEncryption?
+    end
+
+    class MediaConnectFlowRouterOutputStreamDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module MediaLiveChannelPipelineId
+      PIPELINE_0: String
+      PIPELINE_1: String
+    end
+
+    class MediaLiveChannelRouterInputConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?media_live_channel_arn: String,
+        ?media_live_pipeline_id: String,
+        ?media_live_channel_output_name: String,
+        ?source_transit_decryption: Types::MediaLiveTransitEncryption,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor media_live_channel_arn: String?
+      attr_accessor media_live_pipeline_id: String?
+      attr_accessor media_live_channel_output_name: String?
+      attr_accessor source_transit_decryption: Types::MediaLiveTransitEncryption?
+    end
+
+    class MediaLiveChannelRouterInputStreamDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module MediaLiveInputPipelineId
+      PIPELINE_0: String
+      PIPELINE_1: String
+    end
+
+    class MediaLiveInputRouterOutputConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?media_live_input_arn: String,
+        ?media_live_pipeline_id: String,
+        ?destination_transit_encryption: Types::MediaLiveTransitEncryption,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor media_live_input_arn: String?
+      attr_accessor media_live_pipeline_id: String?
+      attr_accessor destination_transit_encryption: Types::MediaLiveTransitEncryption?
+    end
+
+    class MediaLiveInputRouterOutputStreamDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class MediaLiveTransitEncryption
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?encryption_key_type: String,
+        ?encryption_key_configuration: Types::MediaLiveTransitEncryptionKeyConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor encryption_key_type: String?
+      attr_accessor encryption_key_configuration: Types::MediaLiveTransitEncryptionKeyConfiguration?
+    end
+
+    class MediaLiveTransitEncryptionKeyConfiguration
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?secrets_manager: Types::SecretsManagerEncryptionKeyConfiguration,
+        ?automatic: Types::AutomaticEncryptionKeyConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor secrets_manager: Types::SecretsManagerEncryptionKeyConfiguration?
+      attr_accessor automatic: Types::AutomaticEncryptionKeyConfiguration?
+
+      class SecretsManager < MediaLiveTransitEncryptionKeyConfiguration
+      end
+      class Automatic < MediaLiveTransitEncryptionKeyConfiguration
+      end
+      class Unknown < MediaLiveTransitEncryptionKeyConfiguration
+      end
+    end
+
+    module MediaLiveTransitEncryptionKeyType
+      SECRETS_MANAGER: String
+      AUTOMATIC: String
     end
 
     class MediaStream
@@ -1968,6 +3067,67 @@ module Aws::MediaConnect
       ancillary_data: String
     end
 
+    class MergeRouterInputConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_interface_arn: String,
+        ?protocol_configurations: Array[Types::MergeRouterInputProtocolConfiguration],
+        ?merge_recovery_window_milliseconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_interface_arn: String?
+      attr_accessor protocol_configurations: Array[Types::MergeRouterInputProtocolConfiguration]?
+      attr_accessor merge_recovery_window_milliseconds: Integer?
+    end
+
+    class MergeRouterInputIndexedStreamDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_index: Integer,
+        ?source_ip_address: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_index: Integer?
+      attr_accessor source_ip_address: String?
+    end
+
+    class MergeRouterInputProtocolConfiguration
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?rtp: Types::RtpRouterInputConfiguration,
+        ?rist: Types::RistRouterInputConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rtp: Types::RtpRouterInputConfiguration?
+      attr_accessor rist: Types::RistRouterInputConfiguration?
+
+      class Rtp < MergeRouterInputProtocolConfiguration
+      end
+      class Rist < MergeRouterInputProtocolConfiguration
+      end
+      class Unknown < MergeRouterInputProtocolConfiguration
+      end
+    end
+
+    class MergeRouterInputStreamDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_index_zero_stream_details: Types::MergeRouterInputIndexedStreamDetails,
+        ?source_index_one_stream_details: Types::MergeRouterInputIndexedStreamDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_index_zero_stream_details: Types::MergeRouterInputIndexedStreamDetails?
+      attr_accessor source_index_one_stream_details: Types::MergeRouterInputIndexedStreamDetails?
+    end
+
     class MessageDetail
       include Smithy::Schema::Structure
 
@@ -2052,6 +3212,90 @@ module Aws::MediaConnect
       attr_accessor vpc_interface_adapter: String?
     end
 
+    class NdiMediaInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?streams: Array[Types::NdiMediaStreamInfo],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor streams: Array[Types::NdiMediaStreamInfo]?
+    end
+
+    class NdiMediaStreamInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_type: String,
+        ?codec: String,
+        ?stream_id: Integer,
+        ?scan_mode: String,
+        ?color: Types::ColorInformation,
+        ?frame_resolution: Types::FrameResolution,
+        ?frame_rate: String,
+        ?channels: Integer,
+        ?sample_rate: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_type: String?
+      attr_accessor codec: String?
+      attr_accessor stream_id: Integer?
+      attr_accessor scan_mode: String?
+      attr_accessor color: Types::ColorInformation?
+      attr_accessor frame_resolution: Types::FrameResolution?
+      attr_accessor frame_rate: String?
+      attr_accessor channels: Integer?
+      attr_accessor sample_rate: Integer?
+    end
+
+    module NdiOutputTimecodeSource
+      EMBEDDED_TIMECODE: String
+      UTC_SYSTEM_TIME: String
+    end
+
+    class NdiSourceInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_name: String?
+    end
+
+    class NdiSourceMetadataInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?active_source: Types::NdiSourceInfo,
+        ?discovered_sources: Array[Types::NdiSourceInfo],
+        ?media_info: Types::NdiMediaInfo,
+        ?messages: Array[Types::MessageDetail],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor active_source: Types::NdiSourceInfo?
+      attr_accessor discovered_sources: Array[Types::NdiSourceInfo]?
+      attr_accessor media_info: Types::NdiMediaInfo?
+      attr_accessor messages: Array[Types::MessageDetail]?
+    end
+
+    class NdiSourceSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_name: String,
+        ?audio_reference_level: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_name: String?
+      attr_accessor audio_reference_level: Integer?
+    end
+
     module NdiState
       ENABLED: String
       DISABLED: String
@@ -2119,6 +3363,9 @@ module Aws::MediaConnect
         ?bridge_ports: Array[Integer],
         ?output_status: String,
         ?peer_ip_address: String,
+        ?router_integration_state: String,
+        ?router_integration_transit_encryption: Types::FlowTransitEncryption,
+        ?connected_router_input_arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2139,11 +3386,27 @@ module Aws::MediaConnect
       attr_accessor bridge_ports: Array[Integer]?
       attr_accessor output_status: String?
       attr_accessor peer_ip_address: String?
+      attr_accessor router_integration_state: String?
+      attr_accessor router_integration_transit_encryption: Types::FlowTransitEncryption?
+      attr_accessor connected_router_input_arn: String?
     end
 
     module OutputStatus
       ENABLED: String
       DISABLED: String
+    end
+
+    class PreferredDayTimeMaintenanceConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?day: String,
+        ?time: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor day: String?
+      attr_accessor time: String?
     end
 
     module PriceUnits
@@ -2163,6 +3426,37 @@ module Aws::MediaConnect
       fujitsu_qos: String
       udp: String
       ndi_speed_hq: String
+    end
+
+    class PublicRouterNetworkInterfaceConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?allow_rules: Array[Types::PublicRouterNetworkInterfaceRule],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor allow_rules: Array[Types::PublicRouterNetworkInterfaceRule]?
+    end
+
+    class PublicRouterNetworkInterfaceRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cidr: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cidr: String?
+    end
+
+    class PublicTlsEncryptionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
     end
 
     class PurchaseOfferingRequest
@@ -2414,6 +3708,58 @@ module Aws::MediaConnect
       Mbps_Outbound_Bandwidth: String
     end
 
+    class RestartRouterInputRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class RestartRouterInputResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor state: String?
+    end
+
+    class RestartRouterOutputRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class RestartRouterOutputResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor state: String?
+    end
+
     class RevokeFlowEntitlementRequest
       include Smithy::Schema::Structure
 
@@ -2440,10 +3786,792 @@ module Aws::MediaConnect
       attr_accessor flow_arn: String?
     end
 
+    class RistRouterInputConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?port: Integer,
+        ?recovery_latency_milliseconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor port: Integer?
+      attr_accessor recovery_latency_milliseconds: Integer?
+    end
+
+    class RistRouterOutputConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination_address: String,
+        ?destination_port: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination_address: String?
+      attr_accessor destination_port: Integer?
+    end
+
+    class RouterContentQualityAnalysisConfiguration
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?content_level: Types::ContentQualityAnalysisFeatureConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content_level: Types::ContentQualityAnalysisFeatureConfiguration?
+
+      class ContentLevel < RouterContentQualityAnalysisConfiguration
+      end
+      class Unknown < RouterContentQualityAnalysisConfiguration
+      end
+    end
+
+    module RouterContentQualityAnalysisType
+      CONTENT_LEVEL: String
+    end
+
+    class RouterInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?id: String,
+        ?state: String,
+        ?input_type: String,
+        ?configuration: Types::RouterInputConfiguration,
+        ?routed_outputs: Integer,
+        ?maximum_routed_outputs: Integer,
+        ?region_name: String,
+        ?availability_zone: String,
+        ?maximum_bitrate: Integer,
+        ?tier: String,
+        ?routing_scope: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?messages: Array[Types::RouterInputMessage],
+        ?transit_encryption: Types::RouterInputTransitEncryption,
+        ?tags: Hash[String, String],
+        ?stream_details: Types::RouterInputStreamDetails,
+        ?ip_address: String,
+        ?maintenance_type: String,
+        ?maintenance_configuration: Types::MaintenanceConfiguration,
+        ?maintenance_schedule_type: String,
+        ?maintenance_schedule: Types::MaintenanceSchedule,
+        ?content_quality_analysis_type: String,
+        ?content_quality_analysis_configuration: Types::RouterContentQualityAnalysisConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor state: String?
+      attr_accessor input_type: String?
+      attr_accessor configuration: Types::RouterInputConfiguration?
+      attr_accessor routed_outputs: Integer?
+      attr_accessor maximum_routed_outputs: Integer?
+      attr_accessor region_name: String?
+      attr_accessor availability_zone: String?
+      attr_accessor maximum_bitrate: Integer?
+      attr_accessor tier: String?
+      attr_accessor routing_scope: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor messages: Array[Types::RouterInputMessage]?
+      attr_accessor transit_encryption: Types::RouterInputTransitEncryption?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor stream_details: Types::RouterInputStreamDetails?
+      attr_accessor ip_address: String?
+      attr_accessor maintenance_type: String?
+      attr_accessor maintenance_configuration: Types::MaintenanceConfiguration?
+      attr_accessor maintenance_schedule_type: String?
+      attr_accessor maintenance_schedule: Types::MaintenanceSchedule?
+      attr_accessor content_quality_analysis_type: String?
+      attr_accessor content_quality_analysis_configuration: Types::RouterContentQualityAnalysisConfiguration?
+    end
+
+    class RouterInputConfiguration
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?standard: Types::StandardRouterInputConfiguration,
+        ?media_live_channel: Types::MediaLiveChannelRouterInputConfiguration,
+        ?failover: Types::FailoverRouterInputConfiguration,
+        ?media_connect_flow: Types::MediaConnectFlowRouterInputConfiguration,
+        ?merge: Types::MergeRouterInputConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor standard: Types::StandardRouterInputConfiguration?
+      attr_accessor media_live_channel: Types::MediaLiveChannelRouterInputConfiguration?
+      attr_accessor failover: Types::FailoverRouterInputConfiguration?
+      attr_accessor media_connect_flow: Types::MediaConnectFlowRouterInputConfiguration?
+      attr_accessor merge: Types::MergeRouterInputConfiguration?
+
+      class Standard < RouterInputConfiguration
+      end
+      class MediaLiveChannel < RouterInputConfiguration
+      end
+      class Failover < RouterInputConfiguration
+      end
+      class MediaConnectFlow < RouterInputConfiguration
+      end
+      class Merge < RouterInputConfiguration
+      end
+      class Unknown < RouterInputConfiguration
+      end
+    end
+
+    class RouterInputFilter
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?name_contains: Array[String],
+        ?region_names: Array[String],
+        ?network_interface_arns: Array[String],
+        ?routing_scopes: Array[String],
+        ?input_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name_contains: Array[String]?
+      attr_accessor region_names: Array[String]?
+      attr_accessor network_interface_arns: Array[String]?
+      attr_accessor routing_scopes: Array[String]?
+      attr_accessor input_types: Array[String]?
+
+      class NameContains < RouterInputFilter
+      end
+      class RegionNames < RouterInputFilter
+      end
+      class NetworkInterfaceArns < RouterInputFilter
+      end
+      class RoutingScopes < RouterInputFilter
+      end
+      class InputTypes < RouterInputFilter
+      end
+      class Unknown < RouterInputFilter
+      end
+    end
+
+    class RouterInputMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class RouterInputMetadata
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?transport_stream_media_info: Types::TransportMediaInfo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transport_stream_media_info: Types::TransportMediaInfo?
+
+      class TransportStreamMediaInfo < RouterInputMetadata
+      end
+      class Unknown < RouterInputMetadata
+      end
+    end
+
+    module RouterInputProtocol
+      RTP: String
+      RIST: String
+      SRT_CALLER: String
+      SRT_LISTENER: String
+    end
+
+    class RouterInputProtocolConfiguration
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?rist: Types::RistRouterInputConfiguration,
+        ?srt_listener: Types::SrtListenerRouterInputConfiguration,
+        ?srt_caller: Types::SrtCallerRouterInputConfiguration,
+        ?rtp: Types::RtpRouterInputConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rist: Types::RistRouterInputConfiguration?
+      attr_accessor srt_listener: Types::SrtListenerRouterInputConfiguration?
+      attr_accessor srt_caller: Types::SrtCallerRouterInputConfiguration?
+      attr_accessor rtp: Types::RtpRouterInputConfiguration?
+
+      class Rist < RouterInputProtocolConfiguration
+      end
+      class SrtListener < RouterInputProtocolConfiguration
+      end
+      class SrtCaller < RouterInputProtocolConfiguration
+      end
+      class Rtp < RouterInputProtocolConfiguration
+      end
+      class Unknown < RouterInputProtocolConfiguration
+      end
+    end
+
+    class RouterInputServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class RouterInputSourceMetadataDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_metadata_messages: Array[Types::RouterInputMessage],
+        ?timestamp: Time,
+        ?router_input_metadata: Types::RouterInputMetadata,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_metadata_messages: Array[Types::RouterInputMessage]?
+      attr_accessor timestamp: Time?
+      attr_accessor router_input_metadata: Types::RouterInputMetadata?
+    end
+
+    module RouterInputState
+      CREATING: String
+      STANDBY: String
+      STARTING: String
+      ACTIVE: String
+      STOPPING: String
+      DELETING: String
+      UPDATING: String
+      ERROR: String
+      RECOVERING: String
+      MIGRATING: String
+    end
+
+    class RouterInputStreamDetails
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?standard: Types::StandardRouterInputStreamDetails,
+        ?media_live_channel: Types::MediaLiveChannelRouterInputStreamDetails,
+        ?failover: Types::FailoverRouterInputStreamDetails,
+        ?media_connect_flow: Types::MediaConnectFlowRouterInputStreamDetails,
+        ?merge: Types::MergeRouterInputStreamDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor standard: Types::StandardRouterInputStreamDetails?
+      attr_accessor media_live_channel: Types::MediaLiveChannelRouterInputStreamDetails?
+      attr_accessor failover: Types::FailoverRouterInputStreamDetails?
+      attr_accessor media_connect_flow: Types::MediaConnectFlowRouterInputStreamDetails?
+      attr_accessor merge: Types::MergeRouterInputStreamDetails?
+
+      class Standard < RouterInputStreamDetails
+      end
+      class MediaLiveChannel < RouterInputStreamDetails
+      end
+      class Failover < RouterInputStreamDetails
+      end
+      class MediaConnectFlow < RouterInputStreamDetails
+      end
+      class Merge < RouterInputStreamDetails
+      end
+      class Unknown < RouterInputStreamDetails
+      end
+    end
+
+    class RouterInputThumbnailDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?thumbnail_messages: Array[Types::RouterInputMessage],
+        ?thumbnail: String,
+        ?timecode: String,
+        ?timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor thumbnail_messages: Array[Types::RouterInputMessage]?
+      attr_accessor thumbnail: String?
+      attr_accessor timecode: String?
+      attr_accessor timestamp: Time?
+    end
+
+    module RouterInputTier
+      INPUT_100: String
+      INPUT_50: String
+      INPUT_20: String
+      INPUT_500: String
+      INPUT_250: String
+    end
+
+    class RouterInputTransitEncryption
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?encryption_key_type: String,
+        ?encryption_key_configuration: Types::RouterInputTransitEncryptionKeyConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor encryption_key_type: String?
+      attr_accessor encryption_key_configuration: Types::RouterInputTransitEncryptionKeyConfiguration?
+    end
+
+    class RouterInputTransitEncryptionKeyConfiguration
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?secrets_manager: Types::SecretsManagerEncryptionKeyConfiguration,
+        ?automatic: Types::AutomaticEncryptionKeyConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor secrets_manager: Types::SecretsManagerEncryptionKeyConfiguration?
+      attr_accessor automatic: Types::AutomaticEncryptionKeyConfiguration?
+
+      class SecretsManager < RouterInputTransitEncryptionKeyConfiguration
+      end
+      class Automatic < RouterInputTransitEncryptionKeyConfiguration
+      end
+      class Unknown < RouterInputTransitEncryptionKeyConfiguration
+      end
+    end
+
+    module RouterInputTransitEncryptionKeyType
+      SECRETS_MANAGER: String
+      AUTOMATIC: String
+    end
+
+    module RouterInputType
+      STANDARD: String
+      FAILOVER: String
+      MERGE: String
+      MEDIACONNECT_FLOW: String
+      MEDIALIVE_CHANNEL: String
+    end
+
+    class RouterNetworkInterface
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?id: String,
+        ?state: String,
+        ?network_interface_type: String,
+        ?configuration: Types::RouterNetworkInterfaceConfiguration,
+        ?associated_output_count: Integer,
+        ?associated_input_count: Integer,
+        ?region_name: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor state: String?
+      attr_accessor network_interface_type: String?
+      attr_accessor configuration: Types::RouterNetworkInterfaceConfiguration?
+      attr_accessor associated_output_count: Integer?
+      attr_accessor associated_input_count: Integer?
+      attr_accessor region_name: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class RouterNetworkInterfaceConfiguration
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?public: Types::PublicRouterNetworkInterfaceConfiguration,
+        ?vpc: Types::VpcRouterNetworkInterfaceConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor public: Types::PublicRouterNetworkInterfaceConfiguration?
+      attr_accessor vpc: Types::VpcRouterNetworkInterfaceConfiguration?
+
+      class Public < RouterNetworkInterfaceConfiguration
+      end
+      class Vpc < RouterNetworkInterfaceConfiguration
+      end
+      class Unknown < RouterNetworkInterfaceConfiguration
+      end
+    end
+
+    class RouterNetworkInterfaceFilter
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?region_names: Array[String],
+        ?network_interface_types: Array[String],
+        ?name_contains: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor region_names: Array[String]?
+      attr_accessor network_interface_types: Array[String]?
+      attr_accessor name_contains: Array[String]?
+
+      class RegionNames < RouterNetworkInterfaceFilter
+      end
+      class NetworkInterfaceTypes < RouterNetworkInterfaceFilter
+      end
+      class NameContains < RouterNetworkInterfaceFilter
+      end
+      class Unknown < RouterNetworkInterfaceFilter
+      end
+    end
+
+    class RouterNetworkInterfaceServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module RouterNetworkInterfaceState
+      CREATING: String
+      ACTIVE: String
+      UPDATING: String
+      DELETING: String
+      ERROR: String
+      RECOVERING: String
+    end
+
+    module RouterNetworkInterfaceType
+      PUBLIC: String
+      VPC: String
+    end
+
+    class RouterOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?id: String,
+        ?state: String,
+        ?output_type: String,
+        ?configuration: Types::RouterOutputConfiguration,
+        ?routed_state: String,
+        ?region_name: String,
+        ?availability_zone: String,
+        ?maximum_bitrate: Integer,
+        ?routing_scope: String,
+        ?tier: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?messages: Array[Types::RouterOutputMessage],
+        ?tags: Hash[String, String],
+        ?stream_details: Types::RouterOutputStreamDetails,
+        ?ip_address: String,
+        ?routed_input_arn: String,
+        ?maintenance_type: String,
+        ?maintenance_configuration: Types::MaintenanceConfiguration,
+        ?maintenance_schedule_type: String,
+        ?maintenance_schedule: Types::MaintenanceSchedule,
+        ?fabric_configuration: Types::FabricConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor state: String?
+      attr_accessor output_type: String?
+      attr_accessor configuration: Types::RouterOutputConfiguration?
+      attr_accessor routed_state: String?
+      attr_accessor region_name: String?
+      attr_accessor availability_zone: String?
+      attr_accessor maximum_bitrate: Integer?
+      attr_accessor routing_scope: String?
+      attr_accessor tier: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor messages: Array[Types::RouterOutputMessage]?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor stream_details: Types::RouterOutputStreamDetails?
+      attr_accessor ip_address: String?
+      attr_accessor routed_input_arn: String?
+      attr_accessor maintenance_type: String?
+      attr_accessor maintenance_configuration: Types::MaintenanceConfiguration?
+      attr_accessor maintenance_schedule_type: String?
+      attr_accessor maintenance_schedule: Types::MaintenanceSchedule?
+      attr_accessor fabric_configuration: Types::FabricConfiguration?
+    end
+
+    class RouterOutputConfiguration
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?standard: Types::StandardRouterOutputConfiguration,
+        ?media_connect_flow: Types::MediaConnectFlowRouterOutputConfiguration,
+        ?media_live_input: Types::MediaLiveInputRouterOutputConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor standard: Types::StandardRouterOutputConfiguration?
+      attr_accessor media_connect_flow: Types::MediaConnectFlowRouterOutputConfiguration?
+      attr_accessor media_live_input: Types::MediaLiveInputRouterOutputConfiguration?
+
+      class Standard < RouterOutputConfiguration
+      end
+      class MediaConnectFlow < RouterOutputConfiguration
+      end
+      class MediaLiveInput < RouterOutputConfiguration
+      end
+      class Unknown < RouterOutputConfiguration
+      end
+    end
+
+    class RouterOutputFilter
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?region_names: Array[String],
+        ?network_interface_arns: Array[String],
+        ?routing_scopes: Array[String],
+        ?output_types: Array[String],
+        ?routed_input_arns: Array[String],
+        ?name_contains: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor region_names: Array[String]?
+      attr_accessor network_interface_arns: Array[String]?
+      attr_accessor routing_scopes: Array[String]?
+      attr_accessor output_types: Array[String]?
+      attr_accessor routed_input_arns: Array[String]?
+      attr_accessor name_contains: Array[String]?
+
+      class RegionNames < RouterOutputFilter
+      end
+      class NetworkInterfaceArns < RouterOutputFilter
+      end
+      class RoutingScopes < RouterOutputFilter
+      end
+      class OutputTypes < RouterOutputFilter
+      end
+      class RoutedInputArns < RouterOutputFilter
+      end
+      class NameContains < RouterOutputFilter
+      end
+      class Unknown < RouterOutputFilter
+      end
+    end
+
+    class RouterOutputMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    module RouterOutputProtocol
+      RTP: String
+      RIST: String
+      SRT_CALLER: String
+      SRT_LISTENER: String
+      RTMP_PUSH: String
+    end
+
+    class RouterOutputProtocolConfiguration
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?rist: Types::RistRouterOutputConfiguration,
+        ?srt_listener: Types::SrtListenerRouterOutputConfiguration,
+        ?rtmp_push: Types::RtmpPushRouterOutputConfiguration,
+        ?srt_caller: Types::SrtCallerRouterOutputConfiguration,
+        ?rtp: Types::RtpRouterOutputConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rist: Types::RistRouterOutputConfiguration?
+      attr_accessor srt_listener: Types::SrtListenerRouterOutputConfiguration?
+      attr_accessor rtmp_push: Types::RtmpPushRouterOutputConfiguration?
+      attr_accessor srt_caller: Types::SrtCallerRouterOutputConfiguration?
+      attr_accessor rtp: Types::RtpRouterOutputConfiguration?
+
+      class Rist < RouterOutputProtocolConfiguration
+      end
+      class SrtListener < RouterOutputProtocolConfiguration
+      end
+      class RtmpPush < RouterOutputProtocolConfiguration
+      end
+      class SrtCaller < RouterOutputProtocolConfiguration
+      end
+      class Rtp < RouterOutputProtocolConfiguration
+      end
+      class Unknown < RouterOutputProtocolConfiguration
+      end
+    end
+
+    module RouterOutputRoutedState
+      ROUTED: String
+      ROUTING: String
+      UNROUTED: String
+    end
+
+    class RouterOutputServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module RouterOutputState
+      CREATING: String
+      STANDBY: String
+      STARTING: String
+      ACTIVE: String
+      STOPPING: String
+      DELETING: String
+      UPDATING: String
+      ERROR: String
+      RECOVERING: String
+      MIGRATING: String
+    end
+
+    class RouterOutputStreamDetails
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?standard: Types::StandardRouterOutputStreamDetails,
+        ?media_connect_flow: Types::MediaConnectFlowRouterOutputStreamDetails,
+        ?media_live_input: Types::MediaLiveInputRouterOutputStreamDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor standard: Types::StandardRouterOutputStreamDetails?
+      attr_accessor media_connect_flow: Types::MediaConnectFlowRouterOutputStreamDetails?
+      attr_accessor media_live_input: Types::MediaLiveInputRouterOutputStreamDetails?
+
+      class Standard < RouterOutputStreamDetails
+      end
+      class MediaConnectFlow < RouterOutputStreamDetails
+      end
+      class MediaLiveInput < RouterOutputStreamDetails
+      end
+      class Unknown < RouterOutputStreamDetails
+      end
+    end
+
+    module RouterOutputTier
+      OUTPUT_100: String
+      OUTPUT_50: String
+      OUTPUT_20: String
+      OUTPUT_500: String
+      OUTPUT_250: String
+    end
+
+    module RouterOutputType
+      STANDARD: String
+      MEDIACONNECT_FLOW: String
+      MEDIALIVE_INPUT: String
+    end
+
+    module RoutingScope
+      REGIONAL: String
+      GLOBAL: String
+    end
+
+    class RtmpPushRouterOutputConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination_address: String,
+        ?destination_port: Integer,
+        ?application_name: String,
+        ?stream_name: String,
+        ?tls_encryption: Types::TlsEncryption,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination_address: String?
+      attr_accessor destination_port: Integer?
+      attr_accessor application_name: String?
+      attr_accessor stream_name: String?
+      attr_accessor tls_encryption: Types::TlsEncryption?
+    end
+
+    class RtpRouterInputConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?port: Integer,
+        ?forward_error_correction: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor port: Integer?
+      attr_accessor forward_error_correction: String?
+    end
+
+    class RtpRouterOutputConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination_address: String,
+        ?destination_port: Integer,
+        ?forward_error_correction: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination_address: String?
+      attr_accessor destination_port: Integer?
+      attr_accessor forward_error_correction: String?
+    end
+
     module ScanMode
       progressive: String
       interlace: String
       progressive_segmented_frame: String
+    end
+
+    class SecretsManagerEncryptionKeyConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?secret_arn: String,
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor secret_arn: String?
+      attr_accessor role_arn: String?
     end
 
     class ServiceUnavailableException
@@ -2493,6 +4621,10 @@ module Aws::MediaConnect
         ?vpc_interface_name: String,
         ?whitelist_cidr: String,
         ?gateway_bridge_source: Types::SetGatewayBridgeSourceRequest,
+        ?ndi_source_settings: Types::NdiSourceSettings,
+        ?source_tags: Hash[String, String],
+        ?router_integration_state: String,
+        ?router_integration_transit_decryption: Types::FlowTransitEncryption,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2515,9 +4647,26 @@ module Aws::MediaConnect
       attr_accessor vpc_interface_name: String?
       attr_accessor whitelist_cidr: String?
       attr_accessor gateway_bridge_source: Types::SetGatewayBridgeSourceRequest?
+      attr_accessor ndi_source_settings: Types::NdiSourceSettings?
+      attr_accessor source_tags: Hash[String, String]?
+      attr_accessor router_integration_state: String?
+      attr_accessor router_integration_transit_decryption: Types::FlowTransitEncryption?
     end
 
     class SilentAudio
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state: String,
+        ?threshold_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state: String?
+      attr_accessor threshold_seconds: Integer?
+    end
+
+    class SilentAudioConfiguration
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -2550,6 +4699,9 @@ module Aws::MediaConnect
         ?whitelist_cidr: String,
         ?gateway_bridge_source: Types::GatewayBridgeSource,
         ?peer_ip_address: String,
+        ?router_integration_state: String,
+        ?router_integration_transit_decryption: Types::FlowTransitEncryption,
+        ?connected_router_output_arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2569,6 +4721,9 @@ module Aws::MediaConnect
       attr_accessor whitelist_cidr: String?
       attr_accessor gateway_bridge_source: Types::GatewayBridgeSource?
       attr_accessor peer_ip_address: String?
+      attr_accessor router_integration_state: String?
+      attr_accessor router_integration_transit_decryption: Types::FlowTransitEncryption?
+      attr_accessor connected_router_output_arn: String?
     end
 
     class SourcePriority
@@ -2585,6 +4740,148 @@ module Aws::MediaConnect
     module SourceType
       OWNED: String
       ENTITLED: String
+    end
+
+    class SrtCallerRouterInputConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_address: String,
+        ?source_port: Integer,
+        ?minimum_latency_milliseconds: Integer,
+        ?stream_id: String,
+        ?decryption_configuration: Types::SrtDecryptionConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_address: String?
+      attr_accessor source_port: Integer?
+      attr_accessor minimum_latency_milliseconds: Integer?
+      attr_accessor stream_id: String?
+      attr_accessor decryption_configuration: Types::SrtDecryptionConfiguration?
+    end
+
+    class SrtCallerRouterOutputConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination_address: String,
+        ?destination_port: Integer,
+        ?minimum_latency_milliseconds: Integer,
+        ?stream_id: String,
+        ?encryption_configuration: Types::SrtEncryptionConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination_address: String?
+      attr_accessor destination_port: Integer?
+      attr_accessor minimum_latency_milliseconds: Integer?
+      attr_accessor stream_id: String?
+      attr_accessor encryption_configuration: Types::SrtEncryptionConfiguration?
+    end
+
+    class SrtDecryptionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?encryption_key: Types::SecretsManagerEncryptionKeyConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor encryption_key: Types::SecretsManagerEncryptionKeyConfiguration?
+    end
+
+    class SrtEncryptionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?encryption_key: Types::SecretsManagerEncryptionKeyConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor encryption_key: Types::SecretsManagerEncryptionKeyConfiguration?
+    end
+
+    class SrtListenerRouterInputConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?port: Integer,
+        ?minimum_latency_milliseconds: Integer,
+        ?decryption_configuration: Types::SrtDecryptionConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor port: Integer?
+      attr_accessor minimum_latency_milliseconds: Integer?
+      attr_accessor decryption_configuration: Types::SrtDecryptionConfiguration?
+    end
+
+    class SrtListenerRouterOutputConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?port: Integer,
+        ?minimum_latency_milliseconds: Integer,
+        ?encryption_configuration: Types::SrtEncryptionConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor port: Integer?
+      attr_accessor minimum_latency_milliseconds: Integer?
+      attr_accessor encryption_configuration: Types::SrtEncryptionConfiguration?
+    end
+
+    class StandardRouterInputConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_interface_arn: String,
+        ?protocol_configuration: Types::RouterInputProtocolConfiguration,
+        ?protocol: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_interface_arn: String?
+      attr_accessor protocol_configuration: Types::RouterInputProtocolConfiguration?
+      attr_accessor protocol: String?
+    end
+
+    class StandardRouterInputStreamDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_ip_address: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_ip_address: String?
+    end
+
+    class StandardRouterOutputConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_interface_arn: String,
+        ?protocol_configuration: Types::RouterOutputProtocolConfiguration,
+        ?protocol: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_interface_arn: String?
+      attr_accessor protocol_configuration: Types::RouterOutputProtocolConfiguration?
+      attr_accessor protocol: String?
+    end
+
+    class StandardRouterOutputStreamDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination_ip_address: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination_ip_address: String?
     end
 
     class StartFlowRequest
@@ -2609,6 +4906,66 @@ module Aws::MediaConnect
 
       attr_accessor flow_arn: String?
       attr_accessor status: String?
+    end
+
+    class StartRouterInputRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class StartRouterInputResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?state: String,
+        ?maintenance_schedule_type: String,
+        ?maintenance_schedule: Types::MaintenanceSchedule,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor state: String?
+      attr_accessor maintenance_schedule_type: String?
+      attr_accessor maintenance_schedule: Types::MaintenanceSchedule?
+    end
+
+    class StartRouterOutputRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class StartRouterOutputResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?state: String,
+        ?maintenance_schedule_type: String,
+        ?maintenance_schedule: Types::MaintenanceSchedule,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor state: String?
+      attr_accessor maintenance_schedule_type: String?
+      attr_accessor maintenance_schedule: Types::MaintenanceSchedule?
     end
 
     module State
@@ -2650,6 +5007,71 @@ module Aws::MediaConnect
       attr_accessor status: String?
     end
 
+    class StopRouterInputRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class StopRouterInputResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor state: String?
+    end
+
+    class StopRouterOutputRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class StopRouterOutputResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor state: String?
+    end
+
+    class TagGlobalResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
     class TagResourceRequest
       include Smithy::Schema::Structure
 
@@ -2661,6 +5083,38 @@ module Aws::MediaConnect
 
       attr_accessor resource_arn: String?
       attr_accessor tags: Hash[String, String]?
+    end
+
+    class TakeRouterInputRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?router_output_arn: String,
+        ?router_input_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor router_output_arn: String?
+      attr_accessor router_input_arn: String?
+    end
+
+    class TakeRouterInputResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?routed_state: String,
+        ?router_output_arn: String,
+        ?router_output_name: String,
+        ?router_input_arn: String,
+        ?router_input_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor routed_state: String?
+      attr_accessor router_output_arn: String?
+      attr_accessor router_output_name: String?
+      attr_accessor router_input_arn: String?
+      attr_accessor router_input_name: String?
     end
 
     module Tcs
@@ -2699,6 +5153,39 @@ module Aws::MediaConnect
       DISABLED: String
     end
 
+    class TlsEncryption
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?encryption_type: String,
+        ?encryption_configuration: Types::TlsEncryptionConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor encryption_type: String?
+      attr_accessor encryption_configuration: Types::TlsEncryptionConfiguration?
+    end
+
+    class TlsEncryptionConfiguration
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?public: Types::PublicTlsEncryptionConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor public: Types::PublicTlsEncryptionConfiguration?
+
+      class Public < TlsEncryptionConfiguration
+      end
+      class Unknown < TlsEncryptionConfiguration
+      end
+    end
+
+    module TlsEncryptionType
+      PUBLIC: String
+    end
+
     class TooManyRequestsException
       include Smithy::Schema::Structure
 
@@ -2729,6 +5216,9 @@ module Aws::MediaConnect
         ?stream_id: String,
         ?ndi_speed_hq_quality: Integer,
         ?ndi_program_name: String,
+        ?ndi_source_settings: Types::NdiSourceSettings,
+        ?ndi_output_timecode_source: String,
+        ?ndi_audio_reference_level: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2747,6 +5237,9 @@ module Aws::MediaConnect
       attr_accessor stream_id: String?
       attr_accessor ndi_speed_hq_quality: Integer?
       attr_accessor ndi_program_name: String?
+      attr_accessor ndi_source_settings: Types::NdiSourceSettings?
+      attr_accessor ndi_output_timecode_source: String?
+      attr_accessor ndi_audio_reference_level: Integer?
     end
 
     class TransportMediaInfo
@@ -2754,10 +5247,12 @@ module Aws::MediaConnect
 
       def initialize: (
         ?programs: Array[Types::TransportStreamProgram],
+        ?ts_id: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor programs: Array[Types::TransportStreamProgram]?
+      attr_accessor ts_id: Integer?
     end
 
     class TransportStream
@@ -2766,6 +5261,7 @@ module Aws::MediaConnect
       def initialize: (
         ?channels: Integer,
         ?codec: String,
+        ?color: Types::ColorInformation,
         ?frame_rate: String,
         ?frame_resolution: Types::FrameResolution,
         ?pid: Integer,
@@ -2777,6 +5273,7 @@ module Aws::MediaConnect
 
       attr_accessor channels: Integer?
       attr_accessor codec: String?
+      attr_accessor color: Types::ColorInformation?
       attr_accessor frame_rate: String?
       attr_accessor frame_resolution: Types::FrameResolution?
       attr_accessor pid: Integer?
@@ -2802,6 +5299,19 @@ module Aws::MediaConnect
       attr_accessor program_number: Integer?
       attr_accessor program_pid: Integer?
       attr_accessor streams: Array[Types::TransportStream]?
+    end
+
+    class UntagGlobalResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
     end
 
     class UntagResourceRequest
@@ -3129,6 +5639,10 @@ module Aws::MediaConnect
         ?output_status: String,
         ?ndi_program_name: String,
         ?ndi_speed_hq_quality: Integer,
+        ?router_integration_state: String,
+        ?router_integration_transit_encryption: Types::FlowTransitEncryption,
+        ?ndi_output_timecode_source: String,
+        ?ndi_audio_reference_level: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3152,6 +5666,10 @@ module Aws::MediaConnect
       attr_accessor output_status: String?
       attr_accessor ndi_program_name: String?
       attr_accessor ndi_speed_hq_quality: Integer?
+      attr_accessor router_integration_state: String?
+      attr_accessor router_integration_transit_encryption: Types::FlowTransitEncryption?
+      attr_accessor ndi_output_timecode_source: String?
+      attr_accessor ndi_audio_reference_level: Integer?
     end
 
     class UpdateFlowOutputResponse
@@ -3176,6 +5694,8 @@ module Aws::MediaConnect
         ?maintenance: Types::UpdateMaintenance,
         ?source_monitoring_config: Types::MonitoringConfig,
         ?ndi_config: Types::NdiConfig,
+        ?flow_size: String,
+        ?encoding_config: Types::EncodingConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3184,6 +5704,8 @@ module Aws::MediaConnect
       attr_accessor maintenance: Types::UpdateMaintenance?
       attr_accessor source_monitoring_config: Types::MonitoringConfig?
       attr_accessor ndi_config: Types::NdiConfig?
+      attr_accessor flow_size: String?
+      attr_accessor encoding_config: Types::EncodingConfig?
     end
 
     class UpdateFlowResponse
@@ -3221,6 +5743,9 @@ module Aws::MediaConnect
         ?vpc_interface_name: String,
         ?whitelist_cidr: String,
         ?gateway_bridge_source: Types::UpdateGatewayBridgeSourceRequest,
+        ?ndi_source_settings: Types::NdiSourceSettings,
+        ?router_integration_state: String,
+        ?router_integration_transit_decryption: Types::FlowTransitEncryption,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3244,6 +5769,9 @@ module Aws::MediaConnect
       attr_accessor vpc_interface_name: String?
       attr_accessor whitelist_cidr: String?
       attr_accessor gateway_bridge_source: Types::UpdateGatewayBridgeSourceRequest?
+      attr_accessor ndi_source_settings: Types::NdiSourceSettings?
+      attr_accessor router_integration_state: String?
+      attr_accessor router_integration_transit_decryption: Types::FlowTransitEncryption?
     end
 
     class UpdateFlowSourceResponse
@@ -3326,6 +5854,136 @@ module Aws::MediaConnect
       attr_accessor maintenance_start_hour: String?
     end
 
+    class UpdateRouterInputRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?configuration: Types::RouterInputConfiguration,
+        ?maximum_bitrate: Integer,
+        ?routing_scope: String,
+        ?tier: String,
+        ?transit_encryption: Types::RouterInputTransitEncryption,
+        ?maintenance_configuration: Types::MaintenanceConfiguration,
+        ?content_quality_analysis_configuration: Types::RouterContentQualityAnalysisConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor configuration: Types::RouterInputConfiguration?
+      attr_accessor maximum_bitrate: Integer?
+      attr_accessor routing_scope: String?
+      attr_accessor tier: String?
+      attr_accessor transit_encryption: Types::RouterInputTransitEncryption?
+      attr_accessor maintenance_configuration: Types::MaintenanceConfiguration?
+      attr_accessor content_quality_analysis_configuration: Types::RouterContentQualityAnalysisConfiguration?
+    end
+
+    class UpdateRouterInputResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?router_input: Types::RouterInput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor router_input: Types::RouterInput?
+    end
+
+    class UpdateRouterNetworkInterfaceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?configuration: Types::RouterNetworkInterfaceConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor configuration: Types::RouterNetworkInterfaceConfiguration?
+    end
+
+    class UpdateRouterNetworkInterfaceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?router_network_interface: Types::RouterNetworkInterface,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor router_network_interface: Types::RouterNetworkInterface?
+    end
+
+    class UpdateRouterOutputRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?configuration: Types::RouterOutputConfiguration,
+        ?maximum_bitrate: Integer,
+        ?routing_scope: String,
+        ?tier: String,
+        ?maintenance_configuration: Types::MaintenanceConfiguration,
+        ?fabric_configuration: Types::FabricConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor configuration: Types::RouterOutputConfiguration?
+      attr_accessor maximum_bitrate: Integer?
+      attr_accessor routing_scope: String?
+      attr_accessor tier: String?
+      attr_accessor maintenance_configuration: Types::MaintenanceConfiguration?
+      attr_accessor fabric_configuration: Types::FabricConfiguration?
+    end
+
+    class UpdateRouterOutputResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?router_output: Types::RouterOutput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor router_output: Types::RouterOutput?
+    end
+
+    module VideoColorimetry
+      BT709: String
+      BT470M: String
+      BT470BG: String
+      BT601: String
+      SMPTE240M: String
+      GENERIC_FILM: String
+      BT2020: String
+      SMPTE428: String
+      SMPTE431: String
+      SMPTE432: String
+    end
+
+    module VideoMatrixCoefficients
+      IDENTITY: String
+      BT709: String
+      FCC: String
+      BT470BG: String
+      BT601: String
+      SMPTE240M: String
+      YCGCO: String
+      BT2020_NCL: String
+      BT2020_CL: String
+      SMPTE2085: String
+      CHROMATICITY_DERIVED_NCL: String
+      CHROMATICITY_DERIVED_CL: String
+      BT2100_ICTCP: String
+      IPT_C2: String
+    end
+
     class VideoMonitoringSetting
       include Smithy::Schema::Structure
 
@@ -3337,6 +5995,25 @@ module Aws::MediaConnect
 
       attr_accessor black_frames: Types::BlackFrames?
       attr_accessor frozen_frames: Types::FrozenFrames?
+    end
+
+    module VideoTransferCharacteristics
+      BT709: String
+      BT470M: String
+      BT470BG: String
+      BT601: String
+      SMPTE240M: String
+      LINEAR: String
+      LOG100: String
+      LOG316: String
+      IEC61966_2_4: String
+      BT1361_ECG: String
+      IEC61966_2_1: String
+      BT2020_10: String
+      BT2020_12: String
+      BT2100_PQ: String
+      SMPTE428: String
+      BT2100_HLG: String
     end
 
     class VpcInterface
@@ -3380,6 +6057,7 @@ module Aws::MediaConnect
         ?role_arn: String,
         ?security_group_ids: Array[String],
         ?subnet_id: String,
+        ?vpc_interface_tags: Hash[String, String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3388,6 +6066,35 @@ module Aws::MediaConnect
       attr_accessor role_arn: String?
       attr_accessor security_group_ids: Array[String]?
       attr_accessor subnet_id: String?
+      attr_accessor vpc_interface_tags: Hash[String, String]?
+    end
+
+    class VpcRouterNetworkInterfaceConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?security_group_ids: Array[String],
+        ?subnet_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor security_group_ids: Array[String]?
+      attr_accessor subnet_id: String?
+    end
+
+    class WindowMaintenanceSchedule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start: Time,
+        ?end: Time,
+        ?scheduled_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start: Time?
+      attr_accessor end: Time?
+      attr_accessor scheduled_time: Time?
     end
   end
 end

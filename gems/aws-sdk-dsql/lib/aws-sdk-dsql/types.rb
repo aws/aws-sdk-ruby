@@ -53,8 +53,7 @@ module Aws::DSQL
     end
 
     # @!attribute deletion_protection_enabled
-    #   <p>If enabled, you can't delete your cluster. You must first disable this property before
-    #            you can delete your cluster.</p>
+    #   <p>If enabled, you can't delete your cluster. You must first disable this property before you can delete your cluster.</p>
     #   @return [Boolean]
     # @!attribute kms_encryption_key
     #   <p>The KMS key that encrypts and protects the data on your cluster. You can specify the ARN, ID, or alias of an existing key or have Amazon Web Services create a default key for you.</p>
@@ -63,17 +62,17 @@ module Aws::DSQL
     #   <p>A map of key and value pairs to use to tag your cluster.</p>
     #   @return [Hash<String, String>]
     # @!attribute client_token
-    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
-    #            request. Idempotency ensures that an API request completes only once. With an idempotent
-    #            request, if the original request completes successfully, the subsequent retries with the
-    #            same client token return the result from the original successful request and they have no
-    #            additional effect.</p>
-    #            <p>If you don't specify a client token, the Amazon Web Services SDK automatically generates
-    #            one.</p>
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully, the subsequent retries with the same client token return the result from the original successful request and they have no additional effect.</p> <p>If you don't specify a client token, the Amazon Web Services SDK automatically generates one.</p>
     #   @return [String]
     # @!attribute multi_region_properties
     #   <p>The configuration settings when creating a multi-Region cluster, including the witness region and linked cluster properties.</p>
     #   @return [Types::MultiRegionProperties]
+    # @!attribute policy
+    #   <p>An optional resource-based policy document in JSON format that defines access permissions for the cluster.</p>
+    #   @return [String]
+    # @!attribute bypass_policy_lockout_safety_check
+    #   <p>An optional field that controls whether to bypass the lockout prevention check. When set to true, this parameter allows you to apply a policy that might lock you out of the cluster. Use with caution.</p>
+    #   @return [Boolean]
     class CreateClusterInput < Struct.new(
       nil,
       :deletion_protection_enabled,
@@ -81,6 +80,8 @@ module Aws::DSQL
       :tags,
       :client_token,
       :multi_region_properties,
+      :policy,
+      :bypass_policy_lockout_safety_check,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -97,7 +98,7 @@ module Aws::DSQL
     #   <p>The status of the created cluster.</p>
     #   @return [String]
     # @!attribute creation_time
-    #   <p>The time of when  created the cluster.</p>
+    #   <p>The time of when created the cluster.</p>
     #   @return [Time]
     # @!attribute multi_region_properties
     #   <p>The multi-Region cluster configuration details that were set during cluster creation</p>
@@ -108,6 +109,9 @@ module Aws::DSQL
     # @!attribute deletion_protection_enabled
     #   <p>Whether deletion protection is enabled on this cluster.</p>
     #   @return [Boolean]
+    # @!attribute endpoint
+    #   <p>The connection endpoint for the created cluster.</p>
+    #   @return [String]
     class CreateClusterOutput < Struct.new(
       nil,
       :identifier,
@@ -117,6 +121,74 @@ module Aws::DSQL
       :multi_region_properties,
       :encryption_details,
       :deletion_protection_enabled,
+      :endpoint,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute cluster_identifier
+    #   <p>The ID of the cluster for which to create the stream.</p>
+    #   @return [String]
+    # @!attribute target_definition
+    #   <p>The target destination configuration for the stream. Contains Kinesis stream configuration including stream ARN and IAM role ARN.</p>
+    #   @return [Types::TargetDefinition]
+    # @!attribute ordering
+    #   <p>The ordering mode for the stream. Determines how change events are ordered when delivered to the target.</p>
+    #   @return [String]
+    # @!attribute format
+    #   <p>The format of the stream records.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>A map of key and value pairs to use to tag your stream.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully, the subsequent retries with the same client token return the result from the original successful request and they have no additional effect.</p> <p>If you don't specify a client token, the Amazon Web Services SDK automatically generates one.</p>
+    #   @return [String]
+    class CreateStreamInput < Struct.new(
+      nil,
+      :cluster_identifier,
+      :target_definition,
+      :ordering,
+      :format,
+      :tags,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The output of a created stream.</p>
+    # @!attribute cluster_identifier
+    #   <p>The ID of the cluster for the created stream.</p>
+    #   @return [String]
+    # @!attribute stream_identifier
+    #   <p>The ID of the created stream.</p>
+    #   @return [String]
+    # @!attribute arn
+    #   <p>The ARN of the created stream.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status of the created stream.</p>
+    #   @return [String]
+    # @!attribute creation_time
+    #   <p>The time when created the stream.</p>
+    #   @return [Time]
+    # @!attribute ordering
+    #   <p>The ordering mode of the created stream.</p>
+    #   @return [String]
+    # @!attribute format
+    #   <p>The format of the created stream records.</p>
+    #   @return [String]
+    class CreateStreamOutput < Struct.new(
+      nil,
+      :cluster_identifier,
+      :stream_identifier,
+      :arn,
+      :status,
+      :creation_time,
+      :ordering,
+      :format,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -126,13 +198,7 @@ module Aws::DSQL
     #   <p>The ID of the cluster to delete.</p>
     #   @return [String]
     # @!attribute client_token
-    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
-    #            request. Idempotency ensures that an API request completes only once. With an idempotent
-    #            request, if the original request completes successfully. The subsequent retries with the
-    #            same client token return the result from the original successful request and they have no
-    #            additional effect.</p>
-    #            <p>If you don't specify a client token, the Amazon Web Services SDK automatically generates
-    #            one.</p>
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully. The subsequent retries with the same client token return the result from the original successful request and they have no additional effect.</p> <p>If you don't specify a client token, the Amazon Web Services SDK automatically generates one.</p>
     #   @return [String]
     class DeleteClusterInput < Struct.new(
       nil,
@@ -159,6 +225,83 @@ module Aws::DSQL
     class DeleteClusterOutput < Struct.new(
       nil,
       :identifier,
+      :arn,
+      :status,
+      :creation_time,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute identifier
+    #   <p>The ID of the cluster.</p>
+    #   @return [String]
+    # @!attribute expected_policy_version
+    #   <p>The expected version of the policy to delete. This parameter ensures that you're deleting the correct version of the policy and helps prevent accidental deletions.</p>
+    #   @return [String]
+    # @!attribute client_token
+    #   <p>Idempotency token so a request is only processed once.</p>
+    #   @return [String]
+    class DeleteClusterPolicyInput < Struct.new(
+      nil,
+      :identifier,
+      :expected_policy_version,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute policy_version
+    #   <p>The version of the policy that was deleted.</p>
+    #   @return [String]
+    class DeleteClusterPolicyOutput < Struct.new(
+      nil,
+      :policy_version,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute cluster_identifier
+    #   <p>The ID of the cluster containing the stream to delete.</p>
+    #   @return [String]
+    # @!attribute stream_identifier
+    #   <p>The ID of the stream to delete.</p>
+    #   @return [String]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully, the subsequent retries with the same client token return the result from the original successful request and they have no additional effect.</p> <p>If you don't specify a client token, the Amazon Web Services SDK automatically generates one.</p>
+    #   @return [String]
+    class DeleteStreamInput < Struct.new(
+      nil,
+      :cluster_identifier,
+      :stream_identifier,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The output from a deleted stream.</p>
+    # @!attribute cluster_identifier
+    #   <p>The ID of the cluster for the deleted stream.</p>
+    #   @return [String]
+    # @!attribute stream_identifier
+    #   <p>The ID of the deleted stream.</p>
+    #   @return [String]
+    # @!attribute arn
+    #   <p>The ARN of the deleted stream.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status of the stream.</p>
+    #   @return [String]
+    # @!attribute creation_time
+    #   <p>The time when the stream was created.</p>
+    #   @return [Time]
+    class DeleteStreamOutput < Struct.new(
+      nil,
+      :cluster_identifier,
+      :stream_identifier,
       :arn,
       :status,
       :creation_time,
@@ -223,6 +366,9 @@ module Aws::DSQL
     # @!attribute encryption_details
     #   <p>The current encryption configuration details for the cluster.</p>
     #   @return [Types::EncryptionDetails]
+    # @!attribute endpoint
+    #   <p>The connection endpoint for the cluster.</p>
+    #   @return [String]
     class GetClusterOutput < Struct.new(
       nil,
       :identifier,
@@ -233,6 +379,96 @@ module Aws::DSQL
       :multi_region_properties,
       :tags,
       :encryption_details,
+      :endpoint,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute identifier
+    #   <p>The ID of the cluster to retrieve the policy from.</p>
+    #   @return [String]
+    class GetClusterPolicyInput < Struct.new(
+      nil,
+      :identifier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute policy
+    #   <p>The resource-based policy document attached to the cluster, returned as a JSON string.</p>
+    #   @return [String]
+    # @!attribute policy_version
+    #   <p>The version of the policy document. This version number is incremented each time the policy is updated.</p>
+    #   @return [String]
+    class GetClusterPolicyOutput < Struct.new(
+      nil,
+      :policy,
+      :policy_version,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute cluster_identifier
+    #   <p>The ID of the cluster containing the stream to retrieve.</p>
+    #   @return [String]
+    # @!attribute stream_identifier
+    #   <p>The ID of the stream to retrieve.</p>
+    #   @return [String]
+    class GetStreamInput < Struct.new(
+      nil,
+      :cluster_identifier,
+      :stream_identifier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The output of a retrieved stream.</p>
+    # @!attribute cluster_identifier
+    #   <p>The ID of the cluster for the retrieved stream.</p>
+    #   @return [String]
+    # @!attribute stream_identifier
+    #   <p>The ID of the retrieved stream.</p>
+    #   @return [String]
+    # @!attribute arn
+    #   <p>The ARN of the retrieved stream.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the retrieved stream.</p>
+    #   @return [String]
+    # @!attribute creation_time
+    #   <p>The time when the stream was created.</p>
+    #   @return [Time]
+    # @!attribute ordering
+    #   <p>The ordering mode of the stream.</p>
+    #   @return [String]
+    # @!attribute format
+    #   <p>The format of the stream records.</p>
+    #   @return [String]
+    # @!attribute target_definition
+    #   <p>The target definition for the stream destination.</p>
+    #   @return [Types::TargetDefinition]
+    # @!attribute status_reason
+    #   <p>Stream status reason with error code and timestamp (if applicable).</p>
+    #   @return [Types::StatusReason]
+    # @!attribute tags
+    #   <p>A map of tags associated with the stream.</p>
+    #   @return [Hash<String, String>]
+    class GetStreamOutput < Struct.new(
+      nil,
+      :cluster_identifier,
+      :stream_identifier,
+      :arn,
+      :status,
+      :creation_time,
+      :ordering,
+      :format,
+      :target_definition,
+      :status_reason,
+      :tags,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -252,16 +488,19 @@ module Aws::DSQL
     # @!attribute service_name
     #   <p>The VPC endpoint service name.</p>
     #   @return [String]
+    # @!attribute cluster_vpc_endpoint
+    #   <p>The VPC connection endpoint for the cluster.</p>
+    #   @return [String]
     class GetVpcEndpointServiceNameOutput < Struct.new(
       nil,
       :service_name,
+      :cluster_vpc_endpoint,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The request processing has failed because of an unknown error, exception or
-    #          failure.</p>
+    # <p>The request processing has failed because of an unknown error, exception or failure.</p>
     # @!attribute message
     #   @return [String]
     # @!attribute retry_after_seconds
@@ -276,14 +515,27 @@ module Aws::DSQL
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Kinesis stream target configuration.</p>
+    # @!attribute stream_arn
+    #   <p>The ARN of the Kinesis stream.</p>
+    #   @return [String]
+    # @!attribute role_arn
+    #   <p>The ARN of the IAM role that grants permission to write to the Kinesis stream. This can be a standard role (<code>arn:aws:iam::account-id:role/role-name</code>) or a role with a path prefix (<code>arn:aws:iam::account-id:role/service-role/role-name</code>), such as roles auto-created by the console.</p>
+    #   @return [String]
+    class KinesisTargetDefinition < Struct.new(
+      nil,
+      :stream_arn,
+      :role_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute max_results
-    #   <p>An optional parameter that specifies the maximum number of results to return. You can
-    #            use nextToken to display the next page of results.</p>
+    #   <p>An optional parameter that specifies the maximum number of results to return. You can use nextToken to display the next page of results.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>If your initial ListClusters operation returns a nextToken, you can include the returned
-    #            nextToken in following ListClusters operations, which returns results in the next
-    #            page.</p>
+    #   <p>If your initial ListClusters operation returns a nextToken, you can include the returned nextToken in following ListClusters operations, which returns results in the next page.</p>
     #   @return [String]
     class ListClustersInput < Struct.new(
       nil,
@@ -295,9 +547,7 @@ module Aws::DSQL
     end
 
     # @!attribute next_token
-    #   <p>If nextToken is returned, there are more results available. The value of nextToken is a
-    #            unique pagination token for each page. To retrieve the next page, make the call again using
-    #            the returned token.</p>
+    #   <p>If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. To retrieve the next page, make the call again using the returned token.</p>
     #   @return [String]
     # @!attribute clusters
     #   <p>An array of the returned clusters.</p>
@@ -306,6 +556,40 @@ module Aws::DSQL
       nil,
       :next_token,
       :clusters,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute cluster_identifier
+    #   <p>The ID of the cluster for which to list streams.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>An optional parameter that specifies the maximum number of results to return. You can use nextToken to display the next page of results. Default: 10.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>If your initial ListStreams operation returns a nextToken, you can include the returned nextToken in following ListStreams operations, which returns results in the next page.</p>
+    #   @return [String]
+    class ListStreamsInput < Struct.new(
+      nil,
+      :cluster_identifier,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute next_token
+    #   <p>If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. To retrieve the next page, make the call again using the returned token.</p>
+    #   @return [String]
+    # @!attribute streams
+    #   <p>An array of the returned streams.</p>
+    #   @return [Array<Types::StreamSummary>]
+    class ListStreamsOutput < Struct.new(
+      nil,
+      :next_token,
+      :streams,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -335,15 +619,53 @@ module Aws::DSQL
 
     # <p>Defines the structure for multi-Region cluster configurations, containing the witness region and linked cluster settings.</p>
     # @!attribute witness_region
-    #   <p>The  that serves as the witness region for a multi-Region cluster. The witness region helps maintain cluster consistency and quorum.</p>
+    #   <p>The Region that serves as the witness region for a multi-Region cluster. The witness Region helps maintain cluster consistency and quorum.</p>
     #   @return [String]
     # @!attribute clusters
-    #   <p>The set of linked clusters that form the multi-Region cluster configuration. Each linked cluster represents a database instance in a different  Region.</p>
+    #   <p>The set of peered clusters that form the multi-Region cluster configuration. Each peered cluster represents a database instance in a different Region.</p>
     #   @return [Array<String>]
     class MultiRegionProperties < Struct.new(
       nil,
       :witness_region,
       :clusters,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute identifier
+    #   <p>The ID of the cluster.</p>
+    #   @return [String]
+    # @!attribute policy
+    #   <p>The resource-based policy document to attach to the cluster. This should be a valid JSON policy document that defines permissions and conditions.</p>
+    #   @return [String]
+    # @!attribute bypass_policy_lockout_safety_check
+    #   <p>A flag that allows you to bypass the policy lockout safety check. When set to true, this parameter allows you to apply a policy that might lock you out of the cluster. Use with caution.</p>
+    #   @return [Boolean]
+    # @!attribute expected_policy_version
+    #   <p>The expected version of the current policy. This parameter ensures that you're updating the correct version of the policy and helps prevent concurrent modification conflicts.</p>
+    #   @return [String]
+    # @!attribute client_token
+    #   <p>Idempotency token so a request is only processed once.</p>
+    #   @return [String]
+    class PutClusterPolicyInput < Struct.new(
+      nil,
+      :identifier,
+      :policy,
+      :bypass_policy_lockout_safety_check,
+      :expected_policy_version,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute policy_version
+    #   <p>The version of the policy after it has been updated or created.</p>
+    #   @return [String]
+    class PutClusterPolicyOutput < Struct.new(
+      nil,
+      :policy_version,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -396,6 +718,50 @@ module Aws::DSQL
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Stream status reason with error and timestamp.</p>
+    # @!attribute error
+    #   <p>The error code for the stream failure.</p>
+    #   @return [String]
+    # @!attribute updated_at
+    #   <p>The timestamp when the status was updated.</p>
+    #   @return [Time]
+    class StatusReason < Struct.new(
+      nil,
+      :error,
+      :updated_at,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Summary information about a stream.</p>
+    # @!attribute cluster_identifier
+    #   <p>The ID of the cluster.</p>
+    #   @return [String]
+    # @!attribute stream_identifier
+    #   <p>The ID of the stream.</p>
+    #   @return [String]
+    # @!attribute arn
+    #   <p>The ARN of the stream.</p>
+    #   @return [String]
+    # @!attribute creation_time
+    #   <p>The timestamp when the stream was created.</p>
+    #   @return [Time]
+    # @!attribute status
+    #   <p>The current status of the stream.</p>
+    #   @return [String]
+    class StreamSummary < Struct.new(
+      nil,
+      :cluster_identifier,
+      :stream_identifier,
+      :arn,
+      :creation_time,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute resource_arn
     #   <p>The ARN of the resource that you want to tag.</p>
     #   @return [String]
@@ -409,6 +775,21 @@ module Aws::DSQL
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+    end
+
+    # <p>Target definition for stream destination.</p>
+    # @!attribute kinesis
+    #   <p>Kinesis stream target configuration.</p>
+    #   @return [Types::KinesisTargetDefinition]
+    class TargetDefinition < Struct.new(
+      :kinesis,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class Kinesis < TargetDefinition; end
+      class Unknown < TargetDefinition; end
     end
 
     # <p>The request was denied due to request throttling.</p>
@@ -457,16 +838,10 @@ module Aws::DSQL
     #   <p>Specifies whether to enable deletion protection in your cluster.</p>
     #   @return [Boolean]
     # @!attribute kms_encryption_key
-    #   <p>The KMS key that encrypts and protects the data on your cluster. You can specify the ARN, ID, or alias of an existing key or have Amazon Web Services create a default key for you.</p>
+    #   <p>The KMS key that encrypts and protects the data on your cluster. You can specify the ARN, ID, or alias of an existing key or have Amazon Web Services create a default key for you.</p> <p>To switch to the key owned by Amazon Web Services, specify the reserved value <code>AWS_OWNED_KMS_KEY</code>.</p>
     #   @return [String]
     # @!attribute client_token
-    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
-    #            request. Idempotency ensures that an API request completes only once. With an idempotent
-    #            request, if the original request completes successfully. The subsequent retries with the
-    #            same client token return the result from the original successful request and they have no
-    #            additional effect.</p>
-    #            <p>If you don't specify a client token, the Amazon Web Services SDK automatically generates
-    #            one.</p>
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully. The subsequent retries with the same client token return the result from the original successful request and they have no additional effect.</p> <p>If you don't specify a client token, the Amazon Web Services SDK automatically generates one.</p>
     #   @return [String]
     # @!attribute multi_region_properties
     #   <p>The new multi-Region cluster configuration settings to be applied during an update operation.</p>
@@ -526,8 +901,7 @@ module Aws::DSQL
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Stores information about a field passed inside a request that resulted in an validation
-    #          error.</p>
+    # <p>Stores information about a field passed inside a request that resulted in an validation error.</p>
     # @!attribute name
     #   <p>The name of the field.</p>
     #   @return [String]

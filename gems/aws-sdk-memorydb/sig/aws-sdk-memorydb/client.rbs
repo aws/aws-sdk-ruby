@@ -336,6 +336,29 @@ module Aws::MemoryDB
       ?show_cluster_details: bool
     ) -> _DescribeMultiRegionClustersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeMultiRegionClustersResponse
 
+    interface _DescribeMultiRegionParameterGroupsResponse
+      include Smithy::Client::_Response[Types::DescribeMultiRegionParameterGroupsResponse]
+      def next_token: () -> String?
+      def multi_region_parameter_groups: () -> Array[Types::MultiRegionParameterGroup]?
+    end
+    def describe_multi_region_parameter_groups: (
+      ?multi_region_parameter_group_name: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeMultiRegionParameterGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeMultiRegionParameterGroupsResponse
+
+    interface _DescribeMultiRegionParametersResponse
+      include Smithy::Client::_Response[Types::DescribeMultiRegionParametersResponse]
+      def next_token: () -> String?
+      def multi_region_parameters: () -> Array[Types::MultiRegionParameter]?
+    end
+    def describe_multi_region_parameters: (
+      ?multi_region_parameter_group_name: String,
+      ?source: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeMultiRegionParametersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeMultiRegionParametersResponse
+
     interface _DescribeParameterGroupsResponse
       include Smithy::Client::_Response[Types::DescribeParameterGroupsResponse]
       def next_token: () -> String?

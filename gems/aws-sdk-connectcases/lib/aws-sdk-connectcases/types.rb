@@ -22,7 +22,7 @@ module Aws::ConnectCases
     #   <p>Unique identifier of a case audit history event.</p>
     #   @return [String]
     # @!attribute type
-    #   <p>The Type of an audit history event.</p>
+    #   <p>The type of audit history event.</p> <p>Valid Values: <code>Case.Created</code> | <code>Case.Updated</code> | <code>RelatedItem.Created</code> | <code>RelatedItem.Updated</code> | <code>RelatedItem.Deleted</code> </p>
     #   @return [String]
     # @!attribute related_item_type
     #   <p>The Type of the related item.</p>
@@ -140,7 +140,7 @@ module Aws::ConnectCases
     #   <p>Unique identifier of a Cases domain.</p>
     #   @return [String]
     # @!attribute case_rules
-    #   <p>List of case rule identifiers.</p>
+    #   <p>A list of case rule identifiers.</p>
     #   @return [Array<Types::CaseRuleIdentifier>]
     class BatchGetCaseRuleRequest < Struct.new(
       nil,
@@ -152,15 +152,19 @@ module Aws::ConnectCases
     end
 
     # @!attribute case_rules
-    #   <p>List of detailed case rule information.</p>
+    #   <p>A list of detailed case rule information.</p>
     #   @return [Array<Types::GetCaseRuleResponse>]
     # @!attribute errors
-    #   <p>List of case rule errors.</p>
+    #   <p>A list of case rule errors.</p>
     #   @return [Array<Types::CaseRuleError>]
+    # @!attribute unprocessed_case_rules
+    #   <p>A list of unprocessed case rule identifiers.</p>
+    #   @return [Array<String>]
     class BatchGetCaseRuleResponse < Struct.new(
       nil,
       :case_rules,
       :errors,
+      :unprocessed_case_rules,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -233,9 +237,17 @@ module Aws::ConnectCases
     # @!attribute not_equal_to
     #   <p>Tests that operandOne is not equal to operandTwo.</p>
     #   @return [Types::BooleanOperands]
+    # @!attribute and_all
+    #   <p>Combines multiple conditions with AND operator. All conditions must be true for the compound condition to be true.</p>
+    #   @return [Types::CompoundCondition]
+    # @!attribute or_all
+    #   <p>Combines multiple conditions with OR operator. At least one condition must be true for the compound condition to be true.</p>
+    #   @return [Types::CompoundCondition]
     class BooleanCondition < Struct.new(
       :equal_to,
       :not_equal_to,
+      :and_all,
+      :or_all,
       :unknown,
       keyword_init: true
     )
@@ -243,6 +255,8 @@ module Aws::ConnectCases
 
       class EqualTo < BooleanCondition; end
       class NotEqualTo < BooleanCondition; end
+      class AndAll < BooleanCondition; end
+      class OrAll < BooleanCondition; end
       class Unknown < BooleanCondition; end
     end
 
@@ -285,6 +299,9 @@ module Aws::ConnectCases
     # @!attribute not
     #   <p>A filter for cases. Only one value can be provided.</p>
     #   @return [Types::CaseFilter]
+    # @!attribute tag
+    #   <p>A list of tags to filter on.</p>
+    #   @return [Types::TagFilter]
     # @!attribute and_all
     #   <p>Provides "and all" filtering.</p>
     #   @return [Array<Types::CaseFilter>]
@@ -294,6 +311,7 @@ module Aws::ConnectCases
     class CaseFilter < Struct.new(
       :field,
       :not,
+      :tag,
       :and_all,
       :or_all,
       :unknown,
@@ -303,6 +321,7 @@ module Aws::ConnectCases
 
       class Field < CaseFilter; end
       class Not < CaseFilter; end
+      class Tag < CaseFilter; end
       class AndAll < CaseFilter; end
       class OrAll < CaseFilter; end
       class Unknown < CaseFilter; end
@@ -312,14 +331,24 @@ module Aws::ConnectCases
     # @!attribute required
     #   <p>Required rule type, used to indicate whether a field is required.</p>
     #   @return [Types::RequiredCaseRule]
+    # @!attribute field_options
+    #   <p>Which options are available in a child field based on the selected value in a parent field.</p>
+    #   @return [Types::FieldOptionsCaseRule]
+    # @!attribute hidden
+    #   <p>Whether a field is visible, based on values in other fields.</p>
+    #   @return [Types::HiddenCaseRule]
     class CaseRuleDetails < Struct.new(
       :required,
+      :field_options,
+      :hidden,
       :unknown,
       keyword_init: true
     )
       include ::Smithy::Schema::Union
 
       class Required < CaseRuleDetails; end
+      class FieldOptions < CaseRuleDetails; end
+      class Hidden < CaseRuleDetails; end
       class Unknown < CaseRuleDetails; end
     end
 
@@ -418,6 +447,34 @@ module Aws::ConnectCases
     # <p>A filter for related items of type <code>Comment</code>.</p>
     class CommentFilter < Struct.new(
       nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Represents the updated content of a <code>Comment</code> related item.</p>
+    # @!attribute body
+    #   <p>Updated text in the body of a <code>Comment</code> on a case.</p>
+    #   @return [String]
+    # @!attribute content_type
+    #   <p>Type of the text in the box of a <code>Comment</code> on a case.</p>
+    #   @return [String]
+    class CommentUpdateContent < Struct.new(
+      nil,
+      :body,
+      :content_type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A compound condition that combines multiple boolean conditions using logical operators. In the Amazon Connect admin website, case rules are known as <i>case field conditions</i>. For more information about case field conditions, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html">Add case field conditions to a case template</a>.</p>
+    # @!attribute conditions
+    #   <p>The list of conditions to combine using the logical operator.</p> <note> <p>For API users: A case rule can have a maximum of 5 conditions, spread across a maximum of 2 levels of nesting.</p> </note>
+    #   @return [Array<Types::BooleanCondition>]
+    class CompoundCondition < Struct.new(
+      nil,
+      :conditions,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -533,6 +590,9 @@ module Aws::ConnectCases
     # @!attribute performed_by
     #   <p>Represents the entity that performed the action.</p>
     #   @return [Types::UserUnion]
+    # @!attribute tags
+    #   <p>A map of of key-value pairs that represent tags on a resource. Tags are used to organize, track, or control access for this resource.</p>
+    #   @return [Hash<String, String>]
     class CreateCaseInput < Struct.new(
       nil,
       :domain_id,
@@ -540,6 +600,7 @@ module Aws::ConnectCases
       :fields,
       :client_token,
       :performed_by,
+      :tags,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -640,12 +701,16 @@ module Aws::ConnectCases
     # @!attribute description
     #   <p>The description of the field.</p>
     #   @return [String]
+    # @!attribute attributes
+    #   <p>Union of field attributes.</p>
+    #   @return [Types::FieldAttributes]
     class CreateFieldInput < Struct.new(
       nil,
       :domain_id,
       :name,
       :type,
       :description,
+      :attributes,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -763,6 +828,9 @@ module Aws::ConnectCases
     # @!attribute rules
     #   <p>A list of case rules (also known as <a href="https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html">case field conditions</a>) on a template. </p>
     #   @return [Array<Types::TemplateRule>]
+    # @!attribute tag_propagation_configurations
+    #   <p>Defines tag propagation configuration for resources created within a domain. Tags specified here will be automatically applied to resources being created for the specified resource type.</p>
+    #   @return [Array<Types::TagPropagationConfiguration>]
     class CreateTemplateInput < Struct.new(
       nil,
       :domain_id,
@@ -772,6 +840,7 @@ module Aws::ConnectCases
       :required_fields,
       :status,
       :rules,
+      :tag_propagation_configurations,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -851,6 +920,18 @@ module Aws::ConnectCases
     #   <p>List of field values for the <code>Custom</code> related item.</p>
     #   @return [Array<Types::FieldValue>]
     class CustomInputContent < Struct.new(
+      nil,
+      :fields,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Represents the updated content of a <code>Custom</code> related item.</p>
+    # @!attribute fields
+    #   <p>List of updated field values for the <code>Custom</code> related item. All existing and new fields, and their associated values should be included. Fields not included as part of this request will be removed.</p>
+    #   @return [Array<Types::FieldValue>]
+    class CustomUpdateContent < Struct.new(
       nil,
       :fields,
       keyword_init: true
@@ -1080,6 +1161,21 @@ module Aws::ConnectCases
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Union of field attributes.</p>
+    # @!attribute text
+    #   <p>Field attributes for Text field type.</p>
+    #   @return [Types::TextAttributes]
+    class FieldAttributes < Struct.new(
+      :text,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class Text < FieldAttributes; end
+      class Unknown < FieldAttributes; end
+    end
+
     # <p>Object for errors on fields.</p>
     # @!attribute id
     #   <p>The field identifier that caused the error.</p>
@@ -1220,6 +1316,26 @@ module Aws::ConnectCases
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Rules that control which options are available in a child field based on the selected value in a parent field.</p>
+    # @!attribute parent_field_id
+    #   <p>The identifier of the parent field that controls options.</p>
+    #   @return [String]
+    # @!attribute child_field_id
+    #   <p>The identifier of the child field whose options are controlled.</p>
+    #   @return [String]
+    # @!attribute parent_child_field_options_mappings
+    #   <p>A mapping between a parent field option value and child field option values.</p>
+    #   @return [Array<Types::ParentChildFieldOptionsMapping>]
+    class FieldOptionsCaseRule < Struct.new(
+      nil,
+      :parent_field_id,
+      :child_field_id,
+      :parent_child_field_options_mappings,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Object for the summarized details of the field.</p>
     # @!attribute field_id
     #   <p>The unique identifier of a field.</p>
@@ -1236,6 +1352,9 @@ module Aws::ConnectCases
     # @!attribute namespace
     #   <p>The namespace of a field.</p>
     #   @return [String]
+    # @!attribute attributes
+    #   <p>Union of field attributes.</p>
+    #   @return [Types::FieldAttributes]
     class FieldSummary < Struct.new(
       nil,
       :field_id,
@@ -1243,6 +1362,7 @@ module Aws::ConnectCases
       :name,
       :type,
       :namespace,
+      :attributes,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1264,7 +1384,7 @@ module Aws::ConnectCases
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Object to store union of Field values.</p> <note> <p>The <code>Summary</code> system field accepts 3000 characters while all other fields accept 500 characters.</p> </note>
+    # <p>Object to store union of Field values.</p> <note> <p>The <code>Summary</code> system field accepts up to 3000 characters, while all other fields accept up to 4100 characters. If you use multi-byte characters, the effective character limit may be lower.</p> </note>
     # @!attribute string_value
     #   <p>String value type.</p>
     #   @return [String]
@@ -1551,6 +1671,9 @@ module Aws::ConnectCases
     # @!attribute last_modified_time
     #   <p>Timestamp at which the resource was created or last modified.</p>
     #   @return [Time]
+    # @!attribute attributes
+    #   <p>Union of field attributes.</p>
+    #   @return [Types::FieldAttributes]
     class GetFieldResponse < Struct.new(
       nil,
       :field_id,
@@ -1563,6 +1686,7 @@ module Aws::ConnectCases
       :deleted,
       :created_time,
       :last_modified_time,
+      :attributes,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1683,6 +1807,9 @@ module Aws::ConnectCases
     # @!attribute rules
     #   <p>A list of case rules (also known as <a href="https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html">case field conditions</a>) on a template. </p>
     #   @return [Array<Types::TemplateRule>]
+    # @!attribute tag_propagation_configurations
+    #   <p>Defines tag propagation configuration for resources created within a domain. Tags specified here will be automatically applied to resources being created for the specified resource type.</p>
+    #   @return [Array<Types::TagPropagationConfiguration>]
     class GetTemplateOutput < Struct.new(
       nil,
       :template_id,
@@ -1697,6 +1824,7 @@ module Aws::ConnectCases
       :created_time,
       :last_modified_time,
       :rules,
+      :tag_propagation_configurations,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1705,6 +1833,22 @@ module Aws::ConnectCases
         options[:deleted] = false unless options.key?(:deleted)
         super
       end
+    end
+
+    # <p>A rule that controls field visibility based on conditions. Fields can be shown or hidden dynamically based on values in other fields.</p>
+    # @!attribute default_value
+    #   <p>Whether the field is hidden when no conditions match.</p>
+    #   @return [Boolean]
+    # @!attribute conditions
+    #   <p>A list of conditions that determine field visibility.</p>
+    #   @return [Array<Types::BooleanCondition>]
+    class HiddenCaseRule < Struct.new(
+      nil,
+      :default_value,
+      :conditions,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
     end
 
     # <p>We couldn't process your request because of an issue with the server. Try again later.</p>
@@ -2098,6 +2242,22 @@ module Aws::ConnectCases
       class Unknown < OperandTwo; end
     end
 
+    # <p>A mapping between a parent field option value and child field option values.</p>
+    # @!attribute parent_field_option_value
+    #   <p>The value in the parent field.</p>
+    #   @return [String]
+    # @!attribute child_field_option_values
+    #   <p>A list of allowed values in the child field.</p>
+    #   @return [Array<String>]
+    class ParentChildFieldOptionsMapping < Struct.new(
+      nil,
+      :parent_field_option_value,
+      :child_field_option_values,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute domain_id
     #   <p>The unique identifier of the Cases domain. </p>
     #   @return [String]
@@ -2250,6 +2410,26 @@ module Aws::ConnectCases
       class ConnectCase < RelatedItemTypeFilter; end
       class Custom < RelatedItemTypeFilter; end
       class Unknown < RelatedItemTypeFilter; end
+    end
+
+    # <p>Represents the content of a related item to be updated. This is a union type that can contain either comment content or custom content.</p>
+    # @!attribute comment
+    #   <p>Represents the updated content of a <code>Comment</code> related item.</p>
+    #   @return [Types::CommentUpdateContent]
+    # @!attribute custom
+    #   <p>Represents the updated content of a <code>Custom</code> related item.</p>
+    #   @return [Types::CustomUpdateContent]
+    class RelatedItemUpdateContent < Struct.new(
+      :comment,
+      :custom,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class Comment < RelatedItemUpdateContent; end
+      class Custom < RelatedItemUpdateContent; end
+      class Unknown < RelatedItemUpdateContent; end
     end
 
     # <p>Required rule type, used to indicate whether a field is required. In the Amazon Connect admin website, case rules are known as <i>case field conditions</i>. For more information about case field conditions, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html">Add case field conditions to a case template</a>.</p>
@@ -2434,13 +2614,22 @@ module Aws::ConnectCases
     # @!attribute cases
     #   <p>A list of case documents where each case contains the properties <code>CaseId</code> and <code>Fields</code> where each field is a complex union structure. </p>
     #   @return [Array<Types::SearchCasesResponseItem>]
+    # @!attribute total_count
+    #   <p>The total number of cases that matched the search criteria.</p>
+    #   @return [Integer]
     class SearchCasesOutput < Struct.new(
       nil,
       :next_token,
       :cases,
+      :total_count,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:total_count] = 0 unless options.key?(:total_count)
+        super
+      end
     end
 
     # <p>A list of items that represent cases.</p>
@@ -2690,6 +2879,37 @@ module Aws::ConnectCases
       include ::Smithy::Schema::Structure
     end
 
+    # <p>A filter for tags. Only one value can be provided.</p>
+    # @!attribute equal_to
+    #   <p>Object containing tag key and value information.</p>
+    #   @return [Types::TagValue]
+    class TagFilter < Struct.new(
+      :equal_to,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class EqualTo < TagFilter; end
+      class Unknown < TagFilter; end
+    end
+
+    # <p>Defines tag propagation configuration for resources created within a domain. Tags specified here will be automatically applied to resources being created for the specified resource type.</p>
+    # @!attribute resource_type
+    #   <p>Supported resource types for tag propagation. Determines which resources will receive automatically propagated tags.</p>
+    #   @return [String]
+    # @!attribute tag_map
+    #   <p>The tags that will be applied to the created resource.</p>
+    #   @return [Hash<String, String>]
+    class TagPropagationConfiguration < Struct.new(
+      nil,
+      :resource_type,
+      :tag_map,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute arn
     #   <p>The Amazon Resource Name (ARN)</p>
     #   @return [String]
@@ -2700,6 +2920,22 @@ module Aws::ConnectCases
       nil,
       :arn,
       :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Object for case tag filter values.</p>
+    # @!attribute key
+    #   <p>The tag key in the tag filter value.</p>
+    #   @return [String]
+    # @!attribute value
+    #   <p>The tag value in the tag filter value.</p>
+    #   @return [String]
+    class TagValue < Struct.new(
+      nil,
+      :key,
+      :value,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2719,6 +2955,11 @@ module Aws::ConnectCases
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:field_id] = 'NULL' unless options.key?(:field_id)
+        super
+      end
     end
 
     # <p>Template summary information.</p>
@@ -2734,12 +2975,28 @@ module Aws::ConnectCases
     # @!attribute status
     #   <p>The status of the template.</p>
     #   @return [String]
+    # @!attribute tag_propagation_configurations
+    #   <p>Defines tag propagation configuration for resources created within a domain. Tags specified here will be automatically applied to resources being created for the specified resource type.</p>
+    #   @return [Array<Types::TagPropagationConfiguration>]
     class TemplateSummary < Struct.new(
       nil,
       :template_id,
       :template_arn,
       :name,
       :status,
+      :tag_propagation_configurations,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Field attributes for Text field type.</p>
+    # @!attribute is_multiline
+    #   <p>Attribute that defines rendering component and validation.</p>
+    #   @return [Boolean]
+    class TextAttributes < Struct.new(
+      nil,
+      :is_multiline,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2847,12 +3104,16 @@ module Aws::ConnectCases
     # @!attribute description
     #   <p>The description of a field.</p>
     #   @return [String]
+    # @!attribute attributes
+    #   <p>Union of field attributes.</p>
+    #   @return [Types::FieldAttributes]
     class UpdateFieldInput < Struct.new(
       nil,
       :domain_id,
       :field_id,
       :name,
       :description,
+      :attributes,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2898,6 +3159,72 @@ module Aws::ConnectCases
     # @!attribute domain_id
     #   <p>The unique identifier of the Cases domain. </p>
     #   @return [String]
+    # @!attribute case_id
+    #   <p>A unique identifier of the case.</p>
+    #   @return [String]
+    # @!attribute related_item_id
+    #   <p>Unique identifier of a related item.</p>
+    #   @return [String]
+    # @!attribute content
+    #   <p>The content of a related item to be updated.</p>
+    #   @return [Types::RelatedItemUpdateContent]
+    # @!attribute performed_by
+    #   <p>Represents the user who performed the update of the related item.</p>
+    #   @return [Types::UserUnion]
+    class UpdateRelatedItemRequest < Struct.new(
+      nil,
+      :domain_id,
+      :case_id,
+      :related_item_id,
+      :content,
+      :performed_by,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute related_item_id
+    #   <p>The unique identifier of the updated related item.</p>
+    #   @return [String]
+    # @!attribute related_item_arn
+    #   <p>The Amazon Resource Name (ARN) of the updated related item.</p>
+    #   @return [String]
+    # @!attribute type
+    #   <p>Type of the updated related item.</p>
+    #   @return [String]
+    # @!attribute content
+    #   <p>Represents the content of the updated related item.</p>
+    #   @return [Types::RelatedItemContent]
+    # @!attribute association_time
+    #   <p>Time at which the related item was associated with the case.</p>
+    #   @return [Time]
+    # @!attribute tags
+    #   <p>A map of of key-value pairs that represent tags on a resource. Tags are used to organize, track, or control access for this resource.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute last_updated_user
+    #   <p>Represents the last user that updated the related item.</p>
+    #   @return [Types::UserUnion]
+    # @!attribute created_by
+    #   <p>Represents the creator of the related item.</p>
+    #   @return [Types::UserUnion]
+    class UpdateRelatedItemResponse < Struct.new(
+      nil,
+      :related_item_id,
+      :related_item_arn,
+      :type,
+      :content,
+      :association_time,
+      :tags,
+      :last_updated_user,
+      :created_by,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute domain_id
+    #   <p>The unique identifier of the Cases domain. </p>
+    #   @return [String]
     # @!attribute template_id
     #   <p>A unique identifier for the template.</p>
     #   @return [String]
@@ -2919,6 +3246,9 @@ module Aws::ConnectCases
     # @!attribute rules
     #   <p>A list of case rules (also known as <a href="https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html">case field conditions</a>) on a template.</p>
     #   @return [Array<Types::TemplateRule>]
+    # @!attribute tag_propagation_configurations
+    #   <p>Defines tag propagation configuration for resources created within a domain. Tags specified here will be automatically applied to resources being created for the specified resource type.</p>
+    #   @return [Array<Types::TagPropagationConfiguration>]
     class UpdateTemplateInput < Struct.new(
       nil,
       :domain_id,
@@ -2929,6 +3259,7 @@ module Aws::ConnectCases
       :required_fields,
       :status,
       :rules,
+      :tag_propagation_configurations,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

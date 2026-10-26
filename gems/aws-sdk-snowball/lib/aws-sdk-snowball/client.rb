@@ -29,6 +29,7 @@ require 'aws-sdk-core/plugins/retry_errors'
 require 'aws-sdk-core/plugins/stub_responses'
 require 'aws-sdk-core/plugins/regional_endpoints'
 require 'aws-sdk-core/plugins/sigv4'
+require 'smithy-client/rpc_v2_cbor'
 require 'aws-sdk-core/json_rpc'
 
 Aws::Core::Plugins::GlobalConfiguration.add_identifier(:snowball)
@@ -123,7 +124,7 @@ module Aws::Snowball
     #  at ~/.aws/config and ~/.aws/credentials, respectively.  When not specified, 'default' is used.
     # @option options [Symbol, Object] :protocol
     #  The protocol used for request serialization and response deserialization. Defaults to the service default protocol. May be a Symbol naming a supported protocol, or a custom object implementing the protocol interface.
-    #  Supported protocols: +:json_rpc+ (defaults to +:json_rpc+).
+    #  Supported protocols: +:rpc_v2_cbor+, +:json_rpc+ (defaults to +:rpc_v2_cbor+).
     # @option options [Boolean] :raise_response_errors (true)
     #  When `true`, response errors are raised. When `false`, the error is placed on the
     #  output in the {Smithy::Client::Response#error error accessor}.
@@ -144,18 +145,18 @@ module Aws::Snowball
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -430,7 +431,7 @@ module Aws::Snowball
     # @option params [Integer] :initial_cluster_size
     #   <p>If provided, each job will be automatically created and associated with the new cluster. If not provided, will be treated as 0.</p>
     # @option params [Boolean] :force_create_jobs
-    #   <p>Force to create cluster when user attempts to overprovision or underprovision a cluster. A cluster is overprovisioned or underprovisioned if the initial size of the cluster is more (overprovisioned) or less (underprovisioned) than what 
+    #   <p>Force to create cluster when user attempts to overprovision or underprovision a cluster. A cluster is overprovisioned or underprovisioned if the initial size of the cluster is more (overprovisioned) or less (underprovisioned) than what
     #         needed to meet capacity requirement specified with <code>OnDeviceServiceConfiguration</code>.</p>
     # @option params [Array<String>] :long_term_pricing_ids
     #   <p>Lists long-term pricing id that will be used to associate with jobs automatically created for the new cluster.</p>
@@ -1574,11 +1575,11 @@ module Aws::Snowball
     #           <code>JID123e4567-e89b-12d3-a456-426655440000</code>.</p>
     # @example To get the manifest for a job you've created for AWS Snowball
     #   # Returns a link to an Amazon S3 presigned URL for the manifest file associated with the specified JobId value. You can access the manifest file for up to 60 minutes after this request has been made. To access the manifest file after 60 minutes have passed, you'll have to make another call to the GetJobManifest action.
-    # # 
+    # #
     # # The manifest is an encrypted file that you can download after your job enters the WithCustomer status. The manifest is decrypted by using the UnlockCode code value, when you pass both values to the Snowball through the Snowball client when the client is started for the first time.
-    # # 
+    # #
     # # As a best practice, we recommend that you don't save a copy of an UnlockCode value in the same location as the manifest file for that job. Saving these separately helps prevent unauthorized parties from gaining access to the Snowball associated with that job.
-    # # 
+    # #
     # # The credentials of a given job, including its manifest file and unlock code, expire 90 days after the job is created.
     #   params = {
     #     job_id: "JID123e4567-e89b-12d3-a456-426655440000"
@@ -1625,9 +1626,9 @@ module Aws::Snowball
     #         example <code>JID123e4567-e89b-12d3-a456-426655440000</code>.</p>
     # @example To get the unlock code for a job you've created for AWS Snowball
     #   # Returns the UnlockCode code value for the specified job. A particular UnlockCode value can be accessed for up to 90 days after the associated job has been created.
-    # # 
+    # #
     # # The UnlockCode value is a 29-character code with 25 alphanumeric characters and 4 hyphens. This code is used to decrypt the manifest file when it is passed along with the manifest to the Snowball through the Snowball client when the client is started for the first time.
-    # # 
+    # #
     # # As a best practice, we recommend that you don't save a copy of the UnlockCode in the same location as the manifest file for that job. Saving these separately helps prevent unauthorized parties from gaining access to the Snowball associated with that job.
     #   params = {
     #     job_id: "JID123e4567-e89b-12d3-a456-426655440000"
@@ -1662,7 +1663,7 @@ module Aws::Snowball
     # @param [Hash, Types::GetSnowballUsageRequest] params
     # @example To see your Snowball service limit and the number of Snowballs you have in use
     #   # Returns information about the Snowball service limit for your account, and also the number of Snowballs your account has in use.
-    # # 
+    # #
     # # The default service limit for the number of Snowballs that you can have at one time is 1. If you want to increase your service limit, contact AWS Support.
     #   params = {}
     #   options = {}
@@ -1980,7 +1981,7 @@ module Aws::Snowball
     # @option params [Integer] :max_results
     #   <p>The maximum number of <code>ListServiceVersions</code> objects to return.</p>
     # @option params [String] :next_token
-    #   <p>Because HTTP requests are stateless, this is the starting point for the next list of returned 
+    #   <p>Because HTTP requests are stateless, this is the starting point for the next list of returned
     #         <code>ListServiceVersionsRequest</code> versions.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -2444,6 +2445,7 @@ module Aws::Snowball
       # @api private
       def protocols
         {
+          rpc_v2_cbor: Smithy::Client::RpcV2Cbor,
           json_rpc: Aws::Core::JsonRpc
         }
       end

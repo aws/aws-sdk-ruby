@@ -28,11 +28,257 @@ module Aws::Kinesis
     # @!attribute stream_arn
     #   <p>The ARN of the stream.</p>
     #   @return [String]
+    # @!attribute stream_id
+    #   <p>Not Implemented. Reserved for future use.</p>
+    #   @return [String]
     class AddTagsToStreamInput < Struct.new(
       nil,
       :stream_name,
       :tags,
       :stream_arn,
+      :stream_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Describes the configuration and current status of a channel.</p>
+    # @!attribute channel_name
+    #   <p>The name of the channel.</p>
+    #   @return [String]
+    # @!attribute channel_arn
+    #   <p>The Amazon Resource Name (ARN) of the channel.</p>
+    #   @return [String]
+    # @!attribute channel_id
+    #   <p>The unique identifier of the channel.</p>
+    #   @return [String]
+    # @!attribute channel_status
+    #   <p>The current status of the channel. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>CREATING</code> - The channel is being created.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ACTIVE</code> - The channel is ready to deliver records.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>UPDATING</code> - The channel configuration is being updated.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>DELETING</code> - The channel is being deleted.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>FAILED</code> - See <code>ChannelStatusReason</code> for the failure cause.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute channel_status_reason
+    #   <p>A message describing the reason for a <code>FAILED</code> status.</p>
+    #   @return [String]
+    # @!attribute channel_creation_timestamp
+    #   <p>The time at which the channel was created.</p>
+    #   @return [Time]
+    # @!attribute service_execution_role_arn
+    #   <p>The Amazon Resource Name (ARN) of the IAM role that Amazon Kinesis Data Streams assumes to write records to the destination.</p>
+    #   @return [String]
+    # @!attribute stream_configuration_list
+    #   <p>The source stream configuration for the channel.</p>
+    #   @return [Array<Types::ChannelStreamDescription>]
+    # @!attribute s3_destination_configuration
+    #   <p>The configuration for delivery to a general purpose Amazon S3 bucket. Present only when the channel destination is a general purpose Amazon S3 bucket.</p>
+    #   @return [Types::S3DestinationDescription]
+    # @!attribute s3_tables_destination_configuration
+    #   <p>The configuration for delivery to streaming tables on Apache Iceberg in Amazon S3 Tables. Present only when the channel destination is a streaming table.</p>
+    #   @return [Types::S3TablesDestinationDescription]
+    # @!attribute encryption_configuration
+    #   <p>The Amazon Web Services KMS key configuration that Amazon Kinesis Data Streams uses to encrypt data delivered to the channel's destination.</p>
+    #   @return [Types::ChannelEncryptionConfiguration]
+    # @!attribute logging_configuration
+    #   <p>The Amazon CloudWatch Logs configuration for the channel.</p>
+    #   @return [Types::ChannelLoggingConfiguration]
+    class ChannelDescription < Struct.new(
+      nil,
+      :channel_name,
+      :channel_arn,
+      :channel_id,
+      :channel_status,
+      :channel_status_reason,
+      :channel_creation_timestamp,
+      :service_execution_role_arn,
+      :stream_configuration_list,
+      :s3_destination_configuration,
+      :s3_tables_destination_configuration,
+      :encryption_configuration,
+      :logging_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Specifies the Amazon Web Services KMS key that Amazon Kinesis Data Streams uses to encrypt data delivered to the channel's destination.</p>
+    # @!attribute encryption_type
+    #   <p>The encryption type. The only valid value is <code>KMS</code>.</p>
+    #   @return [String]
+    # @!attribute key_id
+    #   <p>The identifier of the customer managed Amazon Web Services KMS key. You cannot use the Amazon Kinesis Data Streams service key (<code>aws/kinesis</code>).</p>
+    #   @return [String]
+    class ChannelEncryptionConfiguration < Struct.new(
+      nil,
+      :encryption_type,
+      :key_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The Amazon CloudWatch Logs configuration for a channel.</p>
+    # @!attribute cloud_watch_logs
+    #   <p>The Amazon CloudWatch Logs settings for the channel.</p>
+    #   @return [Types::CloudWatchLogs]
+    class ChannelLoggingConfiguration < Struct.new(
+      nil,
+      :cloud_watch_logs,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The updated Amazon CloudWatch Logs configuration for a channel. Used in <a>UpdateChannel</a>.</p>
+    # @!attribute cloud_watch_logs
+    #   <p>The updated Amazon CloudWatch Logs settings, including whether logging is enabled and the target log group and log stream.</p>
+    #   @return [Types::CloudWatchLogsUpdateInput]
+    class ChannelLoggingUpdateInput < Struct.new(
+      nil,
+      :cloud_watch_logs,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Specifies the source stream and record configuration when creating a channel.</p>
+    # @!attribute stream_arn
+    #   <p>The Amazon Resource Name (ARN) of the source Kinesis data stream.</p>
+    #   @return [String]
+    # @!attribute record_configuration
+    #   <p>The record format configuration for the source stream.</p>
+    #   @return [Types::RecordConfiguration]
+    class ChannelStreamConfiguration < Struct.new(
+      nil,
+      :stream_arn,
+      :record_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Describes the source stream of a channel.</p>
+    # @!attribute stream_arn
+    #   <p>The Amazon Resource Name (ARN) of the source Kinesis data stream.</p>
+    #   @return [String]
+    # @!attribute stream_creation_timestamp
+    #   <p>The time at which the source stream was created.</p>
+    #   @return [Time]
+    # @!attribute record_configuration
+    #   <p>The record format configuration for the source stream.</p>
+    #   @return [Types::RecordConfiguration]
+    class ChannelStreamDescription < Struct.new(
+      nil,
+      :stream_arn,
+      :stream_creation_timestamp,
+      :record_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Identifies a source stream associated with a channel.</p>
+    # @!attribute stream_arn
+    #   <p>The Amazon Resource Name (ARN) of the source Kinesis data stream.</p>
+    #   @return [String]
+    # @!attribute stream_creation_timestamp
+    #   <p>The time at which the source stream was created.</p>
+    #   @return [Time]
+    class ChannelStreamIdentifier < Struct.new(
+      nil,
+      :stream_arn,
+      :stream_creation_timestamp,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A summary of a channel, returned by <a>ListChannels</a>.</p>
+    # @!attribute channel_name
+    #   <p>The name of the channel.</p>
+    #   @return [String]
+    # @!attribute channel_arn
+    #   <p>The Amazon Resource Name (ARN) of the channel.</p>
+    #   @return [String]
+    # @!attribute channel_id
+    #   <p>The unique identifier of the channel.</p>
+    #   @return [String]
+    # @!attribute channel_status
+    #   <p>The current status of the channel. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>CREATING</code> - The channel is being created.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ACTIVE</code> - The channel is ready to deliver records.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>UPDATING</code> - The channel configuration is being updated.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>DELETING</code> - The channel is being deleted.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>FAILED</code> - See <code>ChannelStatusReason</code> for the failure cause.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute channel_status_reason
+    #   <p>A message describing the reason for a <code>FAILED</code> status.</p>
+    #   @return [String]
+    # @!attribute channel_creation_timestamp
+    #   <p>The time at which the channel was created.</p>
+    #   @return [Time]
+    # @!attribute channel_destination_type
+    #   <p>The destination type of the channel. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>S3</code> - Delivery to a general purpose Amazon S3 bucket.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>S3_TABLES</code> - Delivery to streaming tables on Apache Iceberg.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute streams
+    #   <p>The source streams associated with the channel.</p>
+    #   @return [Array<Types::ChannelStreamIdentifier>]
+    class ChannelSummary < Struct.new(
+      nil,
+      :channel_name,
+      :channel_arn,
+      :channel_id,
+      :channel_status,
+      :channel_status_reason,
+      :channel_creation_timestamp,
+      :channel_destination_type,
+      :streams,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -55,6 +301,46 @@ module Aws::Kinesis
       :shard_id,
       :parent_shards,
       :hash_key_range,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The Amazon CloudWatch Logs settings for channel logging.</p>
+    # @!attribute enabled
+    #   <p>Specifies whether logging to Amazon CloudWatch Logs is enabled.</p>
+    #   @return [Boolean]
+    # @!attribute log_group_name
+    #   <p>The name of the Amazon CloudWatch Logs log group. Defaults to <code>/aws/kinesis/{channelName}/{channelId}</code>.</p>
+    #   @return [String]
+    # @!attribute log_stream_name
+    #   <p>The name of the Amazon CloudWatch Logs log stream. Defaults to <code>DestinationDelivery</code>.</p>
+    #   @return [String]
+    class CloudWatchLogs < Struct.new(
+      nil,
+      :enabled,
+      :log_group_name,
+      :log_stream_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The updated Amazon CloudWatch Logs settings for a channel.</p>
+    # @!attribute enabled
+    #   <p>Specifies whether logging to Amazon CloudWatch Logs is enabled.</p>
+    #   @return [Boolean]
+    # @!attribute log_group_name
+    #   <p>The name of the Amazon CloudWatch Logs log group.</p>
+    #   @return [String]
+    # @!attribute log_stream_name
+    #   <p>The name of the Amazon CloudWatch Logs log stream.</p>
+    #   @return [String]
+    class CloudWatchLogsUpdateInput < Struct.new(
+      nil,
+      :enabled,
+      :log_group_name,
+      :log_stream_name,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -126,6 +412,56 @@ module Aws::Kinesis
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute channel_name
+    #   <p>The name of the channel. The name is unique within your Amazon Web Services account and Amazon Web Services Region.</p>
+    #   @return [String]
+    # @!attribute service_execution_role_arn
+    #   <p>The Amazon Resource Name (ARN) of the IAM role that Amazon Kinesis Data Streams assumes to write records to the destination.</p>
+    #   @return [String]
+    # @!attribute stream_configuration_list
+    #   <p>The source stream configuration for the channel. Currently, one stream is supported per channel.</p>
+    #   @return [Array<Types::ChannelStreamConfiguration>]
+    # @!attribute s3_destination_configuration
+    #   <p>The configuration for delivery to a general purpose Amazon S3 bucket. Specify this parameter when <code>S3TablesDestinationConfiguration</code> is not specified.</p>
+    #   @return [Types::S3DestinationConfiguration]
+    # @!attribute s3_tables_destination_configuration
+    #   <p>The configuration for delivery to streaming tables on Apache Iceberg in Amazon S3 Tables. Specify this parameter when <code>S3DestinationConfiguration</code> is not specified.</p>
+    #   @return [Types::S3TablesDestinationConfiguration]
+    # @!attribute encryption_configuration
+    #   <p>The server-side encryption configuration that uses an Amazon Web Services KMS key to encrypt data delivered to the destination.</p>
+    #   @return [Types::ChannelEncryptionConfiguration]
+    # @!attribute tags
+    #   <p>A set of key-value pairs to assign to the channel. A tag consists of a required key and an optional value.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute logging_configuration
+    #   <p>The Amazon CloudWatch Logs configuration for the channel.</p>
+    #   @return [Types::ChannelLoggingConfiguration]
+    class CreateChannelInput < Struct.new(
+      nil,
+      :channel_name,
+      :service_execution_role_arn,
+      :stream_configuration_list,
+      :s3_destination_configuration,
+      :s3_tables_destination_configuration,
+      :encryption_configuration,
+      :tags,
+      :logging_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute channel_description
+    #   <p>The configuration and current status of the channel, including its ARN, destination configuration, and lifecycle state. Immediately after creation, the state is <code>CREATING</code>.</p>
+    #   @return [Types::ChannelDescription]
+    class CreateChannelOutput < Struct.new(
+      nil,
+      :channel_description,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Represents the input for <code>CreateStream</code>.</p>
     # @!attribute stream_name
     #   <p>A name to identify the stream. The stream name is scoped to the Amazon Web Services
@@ -147,12 +483,64 @@ module Aws::Kinesis
     # @!attribute tags
     #   <p>A set of up to 50 key-value pairs to use to create the tags. A tag consists of a required key and an optional value.</p>
     #   @return [Hash<String, String>]
+    # @!attribute warm_throughput_mi_bps
+    #   <p>The target warm throughput in MB/s that the stream should be scaled to handle. This represents the throughput capacity that will be immediately available for write operations.</p>
+    #   @return [Integer]
+    # @!attribute max_record_size_in_ki_b
+    #   <p>The maximum record size of a single record in kibibyte (KiB) that you can write to, and read from a stream.</p>
+    #   @return [Integer]
+    # @!attribute record_distribution_strategy
+    #   <p>The record distribution strategy for the stream, which determines how Amazon Kinesis
+    #               Data Streams distributes records across shards. Specify one of the following
+    #               values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>AUTO</code> – Amazon Kinesis Data Streams distributes records evenly
+    #                       across shards and ignores any partition key and <code>ExplicitHashKey</code>
+    #                       that producers supply. Use this value for stateless workloads that do not
+    #                       require partition-key ordering.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>USER_PARTITION_KEY</code> – Producers must supply a partition key, which
+    #                       Amazon Kinesis Data Streams uses to determine shard placement. This is the
+    #                       default.</p>
+    #               </li>
+    #            </ul>
+    #            <p>The record distribution strategy is only supported for streams that use the on-demand
+    #               capacity mode. If you do not specify this parameter, the stream uses
+    #               <code>USER_PARTITION_KEY</code>.</p>
+    #   @return [String]
     class CreateStreamInput < Struct.new(
       nil,
       :stream_name,
       :shard_count,
       :stream_mode_details,
       :tags,
+      :warm_throughput_mi_bps,
+      :max_record_size_in_ki_b,
+      :record_distribution_strategy,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The Amazon S3 dead-letter queue configuration for records that cannot be delivered.</p>
+    # @!attribute bucket_arn
+    #   <p>The Amazon Resource Name (ARN) of the dead-letter queue Amazon S3 bucket.</p>
+    #   @return [String]
+    # @!attribute expected_bucket_owner
+    #   <p>The Amazon Web Services account ID of the expected owner of the dead-letter queue bucket.</p>
+    #   @return [String]
+    # @!attribute error_output_prefix
+    #   <p>The Amazon S3 key prefix for error records.</p>
+    #   @return [String]
+    class DeadLetterQueueS3Configuration < Struct.new(
+      nil,
+      :bucket_arn,
+      :expected_bucket_owner,
+      :error_output_prefix,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -169,11 +557,26 @@ module Aws::Kinesis
     # @!attribute stream_arn
     #   <p>The ARN of the stream.</p>
     #   @return [String]
+    # @!attribute stream_id
+    #   <p>Not Implemented. Reserved for future use.</p>
+    #   @return [String]
     class DecreaseStreamRetentionPeriodInput < Struct.new(
       nil,
       :stream_name,
       :retention_period_hours,
       :stream_arn,
+      :stream_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute channel_arn
+    #   <p>The Amazon Resource Name (ARN) of the channel to delete.</p>
+    #   @return [String]
+    class DeleteChannelInput < Struct.new(
+      nil,
+      :channel_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -182,9 +585,13 @@ module Aws::Kinesis
     # @!attribute resource_arn
     #   <p>The Amazon Resource Name (ARN) of the data stream or consumer.</p>
     #   @return [String]
+    # @!attribute stream_id
+    #   <p>Not Implemented. Reserved for future use.</p>
+    #   @return [String]
     class DeleteResourcePolicyInput < Struct.new(
       nil,
       :resource_arn,
+      :stream_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -202,11 +609,15 @@ module Aws::Kinesis
     # @!attribute stream_arn
     #   <p>The ARN of the stream.</p>
     #   @return [String]
+    # @!attribute stream_id
+    #   <p>Not Implemented. Reserved for future use.</p>
+    #   @return [String]
     class DeleteStreamInput < Struct.new(
       nil,
       :stream_name,
       :enforce_consumer_deletion,
       :stream_arn,
+      :stream_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -227,11 +638,55 @@ module Aws::Kinesis
     #               that are currently registered with a given data stream. The description of a consumer
     #               contains its ARN.</p>
     #   @return [String]
+    # @!attribute stream_id
+    #   <p>Not Implemented. Reserved for future use.</p>
+    #   @return [String]
     class DeregisterStreamConsumerInput < Struct.new(
       nil,
       :stream_arn,
       :consumer_name,
       :consumer_arn,
+      :stream_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class DescribeAccountSettingsInput < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute minimum_throughput_billing_commitment
+    #   <p>The current configuration of the minimum throughput billing commitment for your Amazon Web Services account.</p>
+    #   @return [Types::MinimumThroughputBillingCommitmentOutput]
+    class DescribeAccountSettingsOutput < Struct.new(
+      nil,
+      :minimum_throughput_billing_commitment,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute channel_arn
+    #   <p>The Amazon Resource Name (ARN) of the channel to describe.</p>
+    #   @return [String]
+    class DescribeChannelInput < Struct.new(
+      nil,
+      :channel_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute channel_description
+    #   <p>The configuration and current status of the channel, including its ARN, source stream, destination configuration, and lifecycle state.</p>
+    #   @return [Types::ChannelDescription]
+    class DescribeChannelOutput < Struct.new(
+      nil,
+      :channel_description,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -256,12 +711,20 @@ module Aws::Kinesis
     # @!attribute on_demand_stream_count_limit
     #   <p> The maximum number of data streams with the on-demand capacity mode. </p>
     #   @return [Integer]
+    # @!attribute channel_count
+    #   <p>The number of channels in the account.</p>
+    #   @return [Integer]
+    # @!attribute channel_count_limit
+    #   <p>The maximum number of channels allowed in the account.</p>
+    #   @return [Integer]
     class DescribeLimitsOutput < Struct.new(
       nil,
       :shard_limit,
       :open_shard_count,
       :on_demand_stream_count,
       :on_demand_stream_count_limit,
+      :channel_count,
+      :channel_count_limit,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -278,11 +741,15 @@ module Aws::Kinesis
     # @!attribute consumer_arn
     #   <p>The ARN returned by Kinesis Data Streams when you registered the consumer.</p>
     #   @return [String]
+    # @!attribute stream_id
+    #   <p>Not Implemented. Reserved for future use.</p>
+    #   @return [String]
     class DescribeStreamConsumerInput < Struct.new(
       nil,
       :stream_arn,
       :consumer_name,
       :consumer_arn,
+      :stream_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -318,12 +785,16 @@ module Aws::Kinesis
     # @!attribute stream_arn
     #   <p>The ARN of the stream.</p>
     #   @return [String]
+    # @!attribute stream_id
+    #   <p>Not Implemented. Reserved for future use.</p>
+    #   @return [String]
     class DescribeStreamInput < Struct.new(
       nil,
       :stream_name,
       :limit,
       :exclusive_start_shard_id,
       :stream_arn,
+      :stream_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -349,10 +820,14 @@ module Aws::Kinesis
     # @!attribute stream_arn
     #   <p>The ARN of the stream.</p>
     #   @return [String]
+    # @!attribute stream_id
+    #   <p>Not Implemented. Reserved for future use.</p>
+    #   @return [String]
     class DescribeStreamSummaryInput < Struct.new(
       nil,
       :stream_name,
       :stream_arn,
+      :stream_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -427,11 +902,15 @@ module Aws::Kinesis
     # @!attribute stream_arn
     #   <p>The ARN of the stream.</p>
     #   @return [String]
+    # @!attribute stream_id
+    #   <p>Not Implemented. Reserved for future use.</p>
+    #   @return [String]
     class DisableEnhancedMonitoringInput < Struct.new(
       nil,
       :stream_name,
       :shard_level_metrics,
       :stream_arn,
+      :stream_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -458,6 +937,17 @@ module Aws::Kinesis
       :current_shard_level_metrics,
       :desired_shard_level_metrics,
       :stream_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The request was rejected because the DryRun parameter was specified.</p>
+    # @!attribute message
+    #   @return [String]
+    class DryRunOperationException < Struct.new(
+      nil,
+      :message,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -520,11 +1010,15 @@ module Aws::Kinesis
     # @!attribute stream_arn
     #   <p>The ARN of the stream.</p>
     #   @return [String]
+    # @!attribute stream_id
+    #   <p>Not Implemented. Reserved for future use.</p>
+    #   @return [String]
     class EnableEnhancedMonitoringInput < Struct.new(
       nil,
       :stream_name,
       :shard_level_metrics,
       :stream_arn,
+      :stream_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -652,11 +1146,20 @@ module Aws::Kinesis
     # @!attribute stream_arn
     #   <p>The ARN of the stream.</p>
     #   @return [String]
+    # @!attribute stream_id
+    #   <p>Not Implemented. Reserved for future use.</p>
+    #   @return [String]
+    # @!attribute dry_run
+    #   <p>Checks if your request will succeed. <code>DryRun</code> is an optional
+    #               parameter.</p>
+    #   @return [Boolean]
     class GetRecordsInput < Struct.new(
       nil,
       :shard_iterator,
       :limit,
       :stream_arn,
+      :stream_id,
+      :dry_run,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -695,9 +1198,13 @@ module Aws::Kinesis
     # @!attribute resource_arn
     #   <p>The Amazon Resource Name (ARN) of the data stream or consumer.</p>
     #   @return [String]
+    # @!attribute stream_id
+    #   <p>Not Implemented. Reserved for future use.</p>
+    #   @return [String]
     class GetResourcePolicyInput < Struct.new(
       nil,
       :resource_arn,
+      :stream_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -766,6 +1273,13 @@ module Aws::Kinesis
     # @!attribute stream_arn
     #   <p>The ARN of the stream.</p>
     #   @return [String]
+    # @!attribute stream_id
+    #   <p>Not Implemented. Reserved for future use.</p>
+    #   @return [String]
+    # @!attribute dry_run
+    #   <p>Checks if your request will succeed. <code>DryRun</code> is an optional
+    #               parameter.</p>
+    #   @return [Boolean]
     class GetShardIteratorInput < Struct.new(
       nil,
       :stream_name,
@@ -774,6 +1288,8 @@ module Aws::Kinesis
       :starting_sequence_number,
       :timestamp,
       :stream_arn,
+      :stream_id,
+      :dry_run,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -821,11 +1337,15 @@ module Aws::Kinesis
     # @!attribute stream_arn
     #   <p>The ARN of the stream.</p>
     #   @return [String]
+    # @!attribute stream_id
+    #   <p>Not Implemented. Reserved for future use.</p>
+    #   @return [String]
     class IncreaseStreamRetentionPeriodInput < Struct.new(
       nil,
       :stream_name,
       :retention_period_hours,
       :stream_arn,
+      :stream_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -950,6 +1470,40 @@ module Aws::Kinesis
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute stream_filter
+    #   <p>Filters the results to channels associated with the specified streams.</p>
+    #   @return [Array<Types::StreamFilter>]
+    # @!attribute max_results
+    #   <p>The maximum number of channels to return in a single call. The default value is 100. If you specify a value greater than 100, at most 100 results are returned.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The pagination token returned by a previous call. Specify this token to retrieve the next page of results.</p>
+    #   @return [String]
+    class ListChannelsInput < Struct.new(
+      nil,
+      :stream_filter,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute channel_summaries
+    #   <p>A list of channel summaries.</p>
+    #   @return [Array<Types::ChannelSummary>]
+    # @!attribute next_token
+    #   <p>The pagination token to use in a subsequent call to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
+    #   @return [String]
+    class ListChannelsOutput < Struct.new(
+      nil,
+      :channel_summaries,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute stream_name
     #   <p>The name of the data stream whose shards you want to list. </p>
     #            <p>You cannot specify this parameter if you specify the <code>NextToken</code>
@@ -1026,6 +1580,9 @@ module Aws::Kinesis
     # @!attribute stream_arn
     #   <p>The ARN of the stream.</p>
     #   @return [String]
+    # @!attribute stream_id
+    #   <p>Not Implemented. Reserved for future use.</p>
+    #   @return [String]
     class ListShardsInput < Struct.new(
       nil,
       :stream_name,
@@ -1035,6 +1592,7 @@ module Aws::Kinesis
       :stream_creation_timestamp,
       :shard_filter,
       :stream_arn,
+      :stream_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1112,12 +1670,16 @@ module Aws::Kinesis
     #               two streams you want to list the consumers for. </p>
     #            <p>You can't specify this parameter if you specify the NextToken parameter. </p>
     #   @return [Time]
+    # @!attribute stream_id
+    #   <p>Not Implemented. Reserved for future use.</p>
+    #   @return [String]
     class ListStreamConsumersInput < Struct.new(
       nil,
       :stream_arn,
       :next_token,
       :max_results,
       :stream_creation_timestamp,
+      :stream_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1201,9 +1763,13 @@ module Aws::Kinesis
     # @!attribute resource_arn
     #   <p>The Amazon Resource Name (ARN) of the Kinesis resource for which to list tags.</p>
     #   @return [String]
+    # @!attribute stream_id
+    #   <p>Not Implemented. Reserved for future use.</p>
+    #   @return [String]
     class ListTagsForResourceInput < Struct.new(
       nil,
       :resource_arn,
+      :stream_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1238,12 +1804,16 @@ module Aws::Kinesis
     # @!attribute stream_arn
     #   <p>The ARN of the stream.</p>
     #   @return [String]
+    # @!attribute stream_id
+    #   <p>Not Implemented. Reserved for future use.</p>
+    #   @return [String]
     class ListTagsForStreamInput < Struct.new(
       nil,
       :stream_name,
       :exclusive_start_tag_key,
       :limit,
       :stream_arn,
+      :stream_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1281,12 +1851,96 @@ module Aws::Kinesis
     # @!attribute stream_arn
     #   <p>The ARN of the stream.</p>
     #   @return [String]
+    # @!attribute stream_id
+    #   <p>Not Implemented. Reserved for future use.</p>
+    #   @return [String]
     class MergeShardsInput < Struct.new(
       nil,
       :stream_name,
       :shard_to_merge,
       :adjacent_shard_to_merge,
       :stream_arn,
+      :stream_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Represents the request parameters for configuring minimum throughput billing commitment.</p>
+    #          <note>
+    #             <ul>
+    #                <li>
+    #                   <p>Minimum throughput billing commitments provide cost savings on on-demand data streams in exchange for committing to a minimum level of throughput usage.</p>
+    #                </li>
+    #                <li>
+    #                   <p>Commitments have a minimum duration of 24 hours that must be honored before they can be disabled.</p>
+    #                </li>
+    #                <li>
+    #                   <p>If you attempt to disable a commitment before the minimum commitment period ends, the commitment will be scheduled for automatic disable at the earliest allowed end time.</p>
+    #                </li>
+    #                <li>
+    #                   <p>You can cancel a pending disable by enabling the commitment again before the earliest allowed end time.</p>
+    #                </li>
+    #             </ul>
+    #          </note>
+    # @!attribute status
+    #   <p>The desired status of the minimum throughput billing commitment.</p>
+    #   @return [String]
+    class MinimumThroughputBillingCommitmentInput < Struct.new(
+      nil,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Represents the current status of minimum throughput billing commitment for an account.</p>
+    # @!attribute status
+    #   <p>The current status of the minimum throughput billing commitment.</p>
+    #   @return [String]
+    # @!attribute started_at
+    #   <p>The timestamp when the commitment was started.</p>
+    #   @return [Time]
+    # @!attribute ended_at
+    #   <p>The timestamp when the commitment was ended.</p>
+    #   @return [Time]
+    # @!attribute earliest_allowed_end_at
+    #   <p>The earliest timestamp when the commitment can be ended.</p>
+    #   @return [Time]
+    class MinimumThroughputBillingCommitmentOutput < Struct.new(
+      nil,
+      :status,
+      :started_at,
+      :ended_at,
+      :earliest_allowed_end_at,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Specifies a single partition field.</p>
+    # @!attribute transform
+    #   <p>The partition transform to apply. The only valid value is <code>TIME_HOUR</code>.</p>
+    #   @return [String]
+    # @!attribute source_name
+    #   <p>The name of the source column used for partitioning. This column must be of the <code>timestamptz</code> type.</p>
+    #   @return [String]
+    class PartitionField < Struct.new(
+      nil,
+      :transform,
+      :source_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Specifies how the destination table is partitioned.</p>
+    # @!attribute partition_fields
+    #   <p>The list of partition fields.</p>
+    #   @return [Array<Types::PartitionField>]
+    class PartitionSpec < Struct.new(
+      nil,
+      :partition_fields,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1315,7 +1969,7 @@ module Aws::Kinesis
     # @!attribute data
     #   <p>The data blob to put into the record, which is base64-encoded when the blob is
     #               serialized. When the data blob (the payload before base64-encoding) is added to the
-    #               partition key size, the total size must not exceed the maximum record size (1
+    #               partition key size, the total size must not exceed the maximum record size (10
     #               MiB).</p>
     #   @return [String]
     # @!attribute partition_key
@@ -1326,6 +1980,13 @@ module Aws::Kinesis
     #               function is used to map partition keys to 128-bit integer values and to map associated
     #               data records to shards. As a result of this hashing mechanism, all data records with the
     #               same partition key map to the same shard within the stream.</p>
+    #            <p>If the stream uses the <code>USER_PARTITION_KEY</code> record distribution strategy
+    #               (the default), a partition key is required. If the stream uses the <code>AUTO</code>
+    #               record distribution strategy, the partition key is optional and any value you provide is
+    #               ignored, along with any <code>ExplicitHashKey</code> you provide. In that case, Amazon
+    #               Kinesis Data Streams distributes the record across shards using service-managed
+    #               algorithms. For more information, see
+    #               <code>UpdateStreamRecordDistributionStrategy</code>.</p>
     #   @return [String]
     # @!attribute explicit_hash_key
     #   <p>The hash value used to explicitly determine the shard the data record is assigned to
@@ -1341,6 +2002,13 @@ module Aws::Kinesis
     # @!attribute stream_arn
     #   <p>The ARN of the stream.</p>
     #   @return [String]
+    # @!attribute stream_id
+    #   <p>Not Implemented. Reserved for future use.</p>
+    #   @return [String]
+    # @!attribute dry_run
+    #   <p>Checks if your request will succeed. <code>DryRun</code> is an optional
+    #               parameter.</p>
+    #   @return [Boolean]
     class PutRecordInput < Struct.new(
       nil,
       :stream_name,
@@ -1349,6 +2017,8 @@ module Aws::Kinesis
       :explicit_hash_key,
       :sequence_number_for_ordering,
       :stream_arn,
+      :stream_id,
+      :dry_run,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1398,11 +2068,20 @@ module Aws::Kinesis
     # @!attribute stream_arn
     #   <p>The ARN of the stream.</p>
     #   @return [String]
+    # @!attribute stream_id
+    #   <p>Not Implemented. Reserved for future use.</p>
+    #   @return [String]
+    # @!attribute dry_run
+    #   <p>Checks if your request will succeed. <code>DryRun</code> is an optional
+    #               parameter.</p>
+    #   @return [Boolean]
     class PutRecordsInput < Struct.new(
       nil,
       :records,
       :stream_name,
       :stream_arn,
+      :stream_id,
+      :dry_run,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1449,7 +2128,7 @@ module Aws::Kinesis
     # @!attribute data
     #   <p>The data blob to put into the record, which is base64-encoded when the blob is
     #               serialized. When the data blob (the payload before base64-encoding) is added to the
-    #               partition key size, the total size must not exceed the maximum record size (1
+    #               partition key size, the total size must not exceed the maximum record size (10
     #               MiB).</p>
     #   @return [String]
     # @!attribute explicit_hash_key
@@ -1464,6 +2143,13 @@ module Aws::Kinesis
     #               function is used to map partition keys to 128-bit integer values and to map associated
     #               data records to shards. As a result of this hashing mechanism, all data records with the
     #               same partition key map to the same shard within the stream.</p>
+    #            <p>If the stream uses the <code>USER_PARTITION_KEY</code> record distribution strategy
+    #               (the default), a partition key is required for each record. If the stream uses the
+    #               <code>AUTO</code> record distribution strategy, the partition key is optional and any
+    #               value you provide is ignored, along with any <code>ExplicitHashKey</code> you provide.
+    #               In that case, Amazon Kinesis Data Streams distributes records across shards using
+    #               service-managed algorithms. For more information, see
+    #               <code>UpdateStreamRecordDistributionStrategy</code>.</p>
     #   @return [String]
     class PutRecordsRequestEntry < Struct.new(
       nil,
@@ -1511,12 +2197,16 @@ module Aws::Kinesis
     # @!attribute resource_arn
     #   <p>The Amazon Resource Name (ARN) of the data stream or consumer.</p>
     #   @return [String]
+    # @!attribute stream_id
+    #   <p>Not Implemented. Reserved for future use.</p>
+    #   @return [String]
     # @!attribute policy
     #   <p>Details of the resource policy. It must include the identity of the principal and the actions allowed on this resource. This is formatted as a JSON string.</p>
     #   @return [String]
     class PutResourcePolicyInput < Struct.new(
       nil,
       :resource_arn,
+      :stream_id,
       :policy,
       keyword_init: true
     )
@@ -1535,10 +2225,14 @@ module Aws::Kinesis
     #   <p>The data blob. The data in the blob is both opaque and immutable to Kinesis Data
     #               Streams, which does not inspect, interpret, or change the data in the blob in any way.
     #               When the data blob (the payload before base64-encoding) is added to the partition key
-    #               size, the total size must not exceed the maximum record size (1 MiB).</p>
+    #               size, the total size must not exceed the maximum record size (10 MiB).</p>
     #   @return [String]
     # @!attribute partition_key
     #   <p>Identifies which shard in the stream the data record is assigned to.</p>
+    #            <p>For a stream that uses the <code>AUTO</code> record distribution strategy, this value
+    #               is not returned if the producer did not provide a partition key when writing the record.
+    #               If the producer provided a partition key, the original value is returned even though it
+    #               was not used to determine shard placement.</p>
     #   @return [String]
     # @!attribute encryption_type
     #   <p>The encryption type used on the record. This parameter can be one of the following
@@ -1567,6 +2261,40 @@ module Aws::Kinesis
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Specifies the format of records read from the source stream.</p>
+    # @!attribute record_format_type
+    #   <p>The format of records on the source stream. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>GSR_JSON</code> - Supported only for streaming table (Amazon S3 Tables) destinations.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>JSON</code> - Supported for both general purpose Amazon S3 and streaming table destinations.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>STRING</code> - Supported only for general purpose Amazon S3 destinations.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>BYTE_ARRAY</code> - Supported only for general purpose Amazon S3 destinations.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute gsr_schema_arn
+    #   <p>The Amazon Resource Name (ARN) of the Amazon Web Services Glue Schema Registry schema used to validate records. Required when the channel destination is a streaming table.</p>
+    #   @return [String]
+    class RecordConfiguration < Struct.new(
+      nil,
+      :record_format_type,
+      :gsr_schema_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute stream_arn
     #   <p>The ARN of the Kinesis data stream that you want to register the consumer with. For
     #               more info, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kinesis-streams">Amazon Resource Names (ARNs) and Amazon Web Services Service
@@ -1576,6 +2304,9 @@ module Aws::Kinesis
     #   <p>For a given Kinesis data stream, each consumer must have a unique name. However,
     #               consumer names don't have to be unique across data streams.</p>
     #   @return [String]
+    # @!attribute stream_id
+    #   <p>Not Implemented. Reserved for future use.</p>
+    #   @return [String]
     # @!attribute tags
     #   <p>A set of up to 50 key-value pairs. A tag consists of a required key and an optional value.</p>
     #   @return [Hash<String, String>]
@@ -1583,6 +2314,7 @@ module Aws::Kinesis
       nil,
       :stream_arn,
       :consumer_name,
+      :stream_id,
       :tags,
       keyword_init: true
     )
@@ -1611,11 +2343,15 @@ module Aws::Kinesis
     # @!attribute stream_arn
     #   <p>The ARN of the stream.</p>
     #   @return [String]
+    # @!attribute stream_id
+    #   <p>Not Implemented. Reserved for future use.</p>
+    #   @return [String]
     class RemoveTagsFromStreamInput < Struct.new(
       nil,
       :stream_name,
       :tag_keys,
       :stream_arn,
+      :stream_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1642,6 +2378,208 @@ module Aws::Kinesis
     class ResourceNotFoundException < Struct.new(
       nil,
       :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration for delivery to a general purpose Amazon S3 bucket. Used in <a>CreateChannel</a>.</p>
+    # @!attribute data_freshness_in_seconds
+    #   <p>The maximum age, in seconds, of undelivered data before the channel delivers it to the destination. The default value is 300 seconds.</p>
+    #   @return [Integer]
+    # @!attribute dead_letter_queue_s3_configuration
+    #   <p>The dead-letter queue configuration for records that cannot be delivered. Optional for general purpose Amazon S3 destinations. If not specified, it defaults to the destination bucket with an error prefix.</p>
+    #   @return [Types::DeadLetterQueueS3Configuration]
+    # @!attribute storage_configuration
+    #   <p>The Amazon S3 storage configuration for the channel.</p>
+    #   @return [Types::S3StorageConfiguration]
+    class S3DestinationConfiguration < Struct.new(
+      nil,
+      :data_freshness_in_seconds,
+      :dead_letter_queue_s3_configuration,
+      :storage_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration for delivery to a general purpose Amazon S3 bucket. Returned in <a>ChannelDescription</a>.</p>
+    # @!attribute data_freshness_in_seconds
+    #   <p>The maximum age, in seconds, of undelivered data.</p>
+    #   @return [Integer]
+    # @!attribute dead_letter_queue_s3_configuration
+    #   <p>The dead-letter queue configuration for records that cannot be delivered.</p>
+    #   @return [Types::DeadLetterQueueS3Configuration]
+    # @!attribute storage_configuration
+    #   <p>The Amazon S3 storage configuration for the channel.</p>
+    #   @return [Types::S3StorageConfiguration]
+    class S3DestinationDescription < Struct.new(
+      nil,
+      :data_freshness_in_seconds,
+      :dead_letter_queue_s3_configuration,
+      :storage_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The updated configuration for a general purpose Amazon S3 destination. Used in <a>UpdateChannel</a>. Only <code>DataFreshnessInSeconds</code> can be updated.</p>
+    # @!attribute data_freshness_in_seconds
+    #   <p>The maximum age, in seconds, of undelivered data before the channel delivers it to the destination.</p>
+    #   @return [Integer]
+    class S3DestinationUpdateInput < Struct.new(
+      nil,
+      :data_freshness_in_seconds,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The Amazon S3 storage settings for a general purpose Amazon S3 destination.</p>
+    # @!attribute bucket_arn
+    #   <p>The Amazon Resource Name (ARN) of the destination Amazon S3 bucket.</p>
+    #   @return [String]
+    # @!attribute expected_bucket_owner
+    #   <p>The Amazon Web Services account ID of the expected owner of the destination bucket. This value helps prevent delivery to an unintended bucket if ownership changes.</p>
+    #   @return [String]
+    # @!attribute output_key_template
+    #   <p>The template used to construct the Amazon S3 object key for delivered objects. If not specified, a default template is used.</p>
+    #   @return [String]
+    # @!attribute storage_class
+    #   <p>The Amazon S3 storage class for delivered objects. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>STANDARD</code> - The default storage class, for frequently accessed data.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>INTELLIGENT_TIERING</code> - Automatically moves objects to the most cost-effective access tier based on usage patterns.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>GLACIER_IR</code> - Low-cost storage for rarely accessed data that requires millisecond retrieval.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute compression_type
+    #   <p>The compression applied to delivered objects. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>NONE</code> - No compression.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>GZIP</code> - gzip compression.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ZSTD</code> - Zstandard compression.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    class S3StorageConfiguration < Struct.new(
+      nil,
+      :bucket_arn,
+      :expected_bucket_owner,
+      :output_key_template,
+      :storage_class,
+      :compression_type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Specifies a destination streaming table on Apache Iceberg.</p>
+    # @!attribute table_bucket_arn
+    #   <p>The Amazon Resource Name (ARN) of the Amazon S3 table bucket.</p>
+    #   @return [String]
+    # @!attribute namespace
+    #   <p>The namespace (database) of the destination table.</p>
+    #   @return [String]
+    # @!attribute table_name
+    #   <p>The name of the destination table. Amazon Kinesis Data Streams creates this table in the specified table bucket.</p>
+    #   @return [String]
+    # @!attribute compression_type
+    #   <p>The compression applied to Parquet data files. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>NONE</code> - No compression.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ZSTD</code> - Zstandard compression.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>SNAPPY</code> - Snappy compression.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute partition_spec
+    #   <p>The partitioning specification for the destination table.</p>
+    #   @return [Types::PartitionSpec]
+    class S3TablesConfiguration < Struct.new(
+      nil,
+      :table_bucket_arn,
+      :namespace,
+      :table_name,
+      :compression_type,
+      :partition_spec,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration for delivery to streaming tables on Apache Iceberg. Used in <a>CreateChannel</a>.</p>
+    # @!attribute data_freshness_in_seconds
+    #   <p>The maximum age, in seconds, of undelivered data before the channel delivers it to the destination. The default value is 300 seconds.</p>
+    #   @return [Integer]
+    # @!attribute dead_letter_queue_s3_configuration
+    #   <p>The dead-letter queue configuration for records that cannot be delivered. Required for streaming table destinations.</p>
+    #   @return [Types::DeadLetterQueueS3Configuration]
+    # @!attribute s3_tables_configuration_list
+    #   <p>The list of streaming table configurations. Currently, one table is supported per channel.</p>
+    #   @return [Array<Types::S3TablesConfiguration>]
+    class S3TablesDestinationConfiguration < Struct.new(
+      nil,
+      :data_freshness_in_seconds,
+      :dead_letter_queue_s3_configuration,
+      :s3_tables_configuration_list,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration for delivery to streaming tables on Apache Iceberg. Returned in <a>ChannelDescription</a>.</p>
+    # @!attribute data_freshness_in_seconds
+    #   <p>The maximum age, in seconds, of undelivered data.</p>
+    #   @return [Integer]
+    # @!attribute dead_letter_queue_s3_configuration
+    #   <p>The dead-letter queue configuration for records that cannot be delivered.</p>
+    #   @return [Types::DeadLetterQueueS3Configuration]
+    # @!attribute s3_tables_configuration_list
+    #   <p>The list of streaming table configurations.</p>
+    #   @return [Array<Types::S3TablesConfiguration>]
+    class S3TablesDestinationDescription < Struct.new(
+      nil,
+      :data_freshness_in_seconds,
+      :dead_letter_queue_s3_configuration,
+      :s3_tables_configuration_list,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The updated configuration for a streaming table destination. Used in <a>UpdateChannel</a>. Only <code>DataFreshnessInSeconds</code> can be updated.</p>
+    # @!attribute data_freshness_in_seconds
+    #   <p>The maximum age, in seconds, of undelivered data before the channel delivers it to the destination.</p>
+    #   @return [Integer]
+    class S3TablesDestinationUpdateInput < Struct.new(
+      nil,
+      :data_freshness_in_seconds,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1778,12 +2716,16 @@ module Aws::Kinesis
     # @!attribute stream_arn
     #   <p>The ARN of the stream.</p>
     #   @return [String]
+    # @!attribute stream_id
+    #   <p>Not Implemented. Reserved for future use.</p>
+    #   @return [String]
     class SplitShardInput < Struct.new(
       nil,
       :stream_name,
       :shard_to_split,
       :new_starting_hash_key,
       :stream_arn,
+      :stream_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1831,12 +2773,16 @@ module Aws::Kinesis
     # @!attribute stream_arn
     #   <p>The ARN of the stream.</p>
     #   @return [String]
+    # @!attribute stream_id
+    #   <p>Not Implemented. Reserved for future use.</p>
+    #   @return [String]
     class StartStreamEncryptionInput < Struct.new(
       nil,
       :stream_name,
       :encryption_type,
       :key_id,
       :stream_arn,
+      :stream_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1927,12 +2873,16 @@ module Aws::Kinesis
     # @!attribute stream_arn
     #   <p>The ARN of the stream.</p>
     #   @return [String]
+    # @!attribute stream_id
+    #   <p>Not Implemented. Reserved for future use.</p>
+    #   @return [String]
     class StopStreamEncryptionInput < Struct.new(
       nil,
       :stream_name,
       :encryption_type,
       :key_id,
       :stream_arn,
+      :stream_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2069,6 +3019,9 @@ module Aws::Kinesis
     # @!attribute stream_arn
     #   <p>The Amazon Resource Name (ARN) for the stream being described.</p>
     #   @return [String]
+    # @!attribute stream_id
+    #   <p>Not Implemented. Reserved for future use.</p>
+    #   @return [String]
     # @!attribute stream_status
     #   <p>The current status of the stream being described. The stream status is one of the
     #               following states:</p>
@@ -2165,10 +3118,27 @@ module Aws::Kinesis
     # @!attribute consumer_count
     #   <p>The number of enhanced fan-out consumers registered with the stream.</p>
     #   @return [Integer]
+    # @!attribute warm_throughput
+    #   <p>The warm throughput in MB/s for the stream. This represents the throughput capacity that will be immediately available for write operations.</p>
+    #   @return [Types::WarmThroughputObject]
+    # @!attribute max_record_size_in_ki_b
+    #   <p>The maximum record size of a single record in kibibyte (KiB) that you can write to, and read from a stream.</p>
+    #   @return [Integer]
+    # @!attribute channel_count
+    #   <p>The number of channels associated with the stream.</p>
+    #   @return [Integer]
+    # @!attribute record_distribution_strategy
+    #   <p>The record distribution strategy that the stream currently uses. A value of
+    #               <code>AUTO</code> indicates that Amazon Kinesis Data Streams distributes records across
+    #               shards using service-managed algorithms. A value of <code>USER_PARTITION_KEY</code>
+    #               indicates that shard placement is determined by the partition key that producers supply.
+    #               This field is only present for streams that use the on-demand capacity mode.</p>
+    #   @return [String]
     class StreamDescriptionSummary < Struct.new(
       nil,
       :stream_name,
       :stream_arn,
+      :stream_id,
       :stream_status,
       :stream_mode_details,
       :retention_period_hours,
@@ -2178,6 +3148,26 @@ module Aws::Kinesis
       :key_id,
       :open_shard_count,
       :consumer_count,
+      :warm_throughput,
+      :max_record_size_in_ki_b,
+      :channel_count,
+      :record_distribution_strategy,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Filters <a>ListChannels</a> results by source stream.</p>
+    # @!attribute stream_arn
+    #   <p>The Amazon Resource Name (ARN) of the source stream to filter by.</p>
+    #   @return [String]
+    # @!attribute stream_creation_timestamp
+    #   <p>The creation timestamp of the source stream.</p>
+    #   @return [Time]
+    class StreamFilter < Struct.new(
+      nil,
+      :stream_arn,
+      :stream_creation_timestamp,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2335,6 +3325,9 @@ module Aws::Kinesis
     # @!attribute consumer_arn
     #   <p>For this parameter, use the value you obtained when you called <a>RegisterStreamConsumer</a>.</p>
     #   @return [String]
+    # @!attribute stream_id
+    #   <p>Not Implemented. Reserved for future use.</p>
+    #   @return [String]
     # @!attribute shard_id
     #   <p>The ID of the shard you want to subscribe to. To see a list of all the shards for a
     #               given stream, use <a>ListShards</a>.</p>
@@ -2342,11 +3335,17 @@ module Aws::Kinesis
     # @!attribute starting_position
     #   <p>The starting position in the data stream from which to start streaming.</p>
     #   @return [Types::StartingPosition]
+    # @!attribute dry_run
+    #   <p>Checks if your request will succeed. <code>DryRun</code> is an optional
+    #               parameter.</p>
+    #   @return [Boolean]
     class SubscribeToShardInput < Struct.new(
       nil,
       :consumer_arn,
+      :stream_id,
       :shard_id,
       :starting_position,
+      :dry_run,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2389,10 +3388,14 @@ module Aws::Kinesis
     # @!attribute resource_arn
     #   <p>The Amazon Resource Name (ARN) of the Kinesis resource to which to add tags.</p>
     #   @return [String]
+    # @!attribute stream_id
+    #   <p>Not Implemented. Reserved for future use.</p>
+    #   @return [String]
     class TagResourceInput < Struct.new(
       nil,
       :tags,
       :resource_arn,
+      :stream_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2404,10 +3407,89 @@ module Aws::Kinesis
     # @!attribute resource_arn
     #   <p>The Amazon Resource Name (ARN) of the Kinesis resource from which to remove tags.</p>
     #   @return [String]
+    # @!attribute stream_id
+    #   <p>Not Implemented. Reserved for future use.</p>
+    #   @return [String]
     class UntagResourceInput < Struct.new(
       nil,
       :tag_keys,
       :resource_arn,
+      :stream_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute minimum_throughput_billing_commitment
+    #   <p>Specifies the minimum throughput billing commitment configuration for your account.</p>
+    #   @return [Types::MinimumThroughputBillingCommitmentInput]
+    class UpdateAccountSettingsInput < Struct.new(
+      nil,
+      :minimum_throughput_billing_commitment,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute minimum_throughput_billing_commitment
+    #   <p>The updated configuration of the minimum throughput billing commitment for your account.</p>
+    #   @return [Types::MinimumThroughputBillingCommitmentOutput]
+    class UpdateAccountSettingsOutput < Struct.new(
+      nil,
+      :minimum_throughput_billing_commitment,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute channel_arn
+    #   <p>The Amazon Resource Name (ARN) of the channel to update.</p>
+    #   @return [String]
+    # @!attribute s3_destination_configuration
+    #   <p>The updated configuration for a general purpose Amazon S3 destination. Specify this parameter when the channel delivers to a general purpose Amazon S3 bucket. Only <code>DataFreshnessInSeconds</code> can be updated.</p>
+    #   @return [Types::S3DestinationUpdateInput]
+    # @!attribute s3_tables_destination_configuration
+    #   <p>The updated configuration for a streaming table destination. Specify this parameter when the channel delivers to streaming tables on Apache Iceberg in Amazon S3 Tables. Only <code>DataFreshnessInSeconds</code> can be updated.</p>
+    #   @return [Types::S3TablesDestinationUpdateInput]
+    # @!attribute logging_configuration
+    #   <p>The updated Amazon CloudWatch Logs configuration for the channel.</p>
+    #   @return [Types::ChannelLoggingUpdateInput]
+    class UpdateChannelInput < Struct.new(
+      nil,
+      :channel_arn,
+      :s3_destination_configuration,
+      :s3_tables_destination_configuration,
+      :logging_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute channel_description
+    #   <p>The configuration and current status of the channel after the update, including its ARN, destination configuration, and lifecycle state. Immediately after the request, the state is <code>UPDATING</code>.</p>
+    #   @return [Types::ChannelDescription]
+    class UpdateChannelOutput < Struct.new(
+      nil,
+      :channel_description,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute stream_arn
+    #   <p>The Amazon Resource Name (ARN) of the stream for the <code>MaxRecordSize</code> update.</p>
+    #   @return [String]
+    # @!attribute stream_id
+    #   <p>Not Implemented. Reserved for future use.</p>
+    #   @return [String]
+    # @!attribute max_record_size_in_ki_b
+    #   <p>The maximum record size of a single record in KiB that you can write to, and read from a stream. Specify a value between 1024 and 10240 KiB (1 to 10 MiB). If you specify a value that is out of this range, <code>UpdateMaxRecordSize</code> sends back an <code>ValidationException</code> message.</p>
+    #   @return [Integer]
+    class UpdateMaxRecordSizeInput < Struct.new(
+      nil,
+      :stream_arn,
+      :stream_id,
+      :max_record_size_in_ki_b,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2444,12 +3526,16 @@ module Aws::Kinesis
     # @!attribute stream_arn
     #   <p>The ARN of the stream.</p>
     #   @return [String]
+    # @!attribute stream_id
+    #   <p>Not Implemented. Reserved for future use.</p>
+    #   @return [String]
     class UpdateShardCountInput < Struct.new(
       nil,
       :stream_name,
       :target_shard_count,
       :scaling_type,
       :stream_arn,
+      :stream_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2481,14 +3567,98 @@ module Aws::Kinesis
     # @!attribute stream_arn
     #   <p> Specifies the ARN of the data stream whose capacity mode you want to update. </p>
     #   @return [String]
+    # @!attribute stream_id
+    #   <p>Not Implemented. Reserved for future use.</p>
+    #   @return [String]
     # @!attribute stream_mode_details
     #   <p> Specifies the capacity mode to which you want to set your data stream. Currently, in
     #               Kinesis Data Streams, you can choose between an <b>on-demand</b> capacity mode and a <b>provisioned</b> capacity mode for your data streams. </p>
     #   @return [Types::StreamModeDetails]
+    # @!attribute warm_throughput_mi_bps
+    #   <p>The target warm throughput in MB/s that the stream should be scaled to handle. This represents the throughput capacity that will be immediately available for write operations. This field is only valid when the stream mode is being updated to on-demand.</p>
+    #   @return [Integer]
     class UpdateStreamModeInput < Struct.new(
       nil,
       :stream_arn,
+      :stream_id,
       :stream_mode_details,
+      :warm_throughput_mi_bps,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute stream_arn
+    #   <p>The Amazon Resource Name (ARN) of the stream to update.</p>
+    #   @return [String]
+    # @!attribute stream_id
+    #   <p>Not Implemented. Reserved for future use.</p>
+    #   @return [String]
+    # @!attribute record_distribution_strategy
+    #   <p>The record distribution strategy to apply to the stream. Specify one of the following
+    #               values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>AUTO</code> – Amazon Kinesis Data Streams distributes records evenly
+    #                       across shards and ignores any partition key and <code>ExplicitHashKey</code>
+    #                       that producers supply.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>USER_PARTITION_KEY</code> – Producers must supply a partition key, which
+    #                       Amazon Kinesis Data Streams uses to determine shard placement. This is the
+    #                       default.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    class UpdateStreamRecordDistributionStrategyInput < Struct.new(
+      nil,
+      :stream_arn,
+      :stream_id,
+      :record_distribution_strategy,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute stream_arn
+    #   <p>The ARN of the stream to be updated.</p>
+    #   @return [String]
+    # @!attribute stream_name
+    #   <p>The name of the stream to be updated.</p>
+    #   @return [String]
+    # @!attribute stream_id
+    #   <p>Not Implemented. Reserved for future use.</p>
+    #   @return [String]
+    # @!attribute warm_throughput_mi_bps
+    #   <p>The target warm throughput in MB/s that the stream should be scaled to handle. This represents the throughput capacity that will be immediately available for write operations.</p>
+    #   @return [Integer]
+    class UpdateStreamWarmThroughputInput < Struct.new(
+      nil,
+      :stream_arn,
+      :stream_name,
+      :stream_id,
+      :warm_throughput_mi_bps,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute stream_arn
+    #   <p>The ARN of the stream that was updated.</p>
+    #   @return [String]
+    # @!attribute stream_name
+    #   <p>The name of the stream that was updated.</p>
+    #   @return [String]
+    # @!attribute warm_throughput
+    #   <p>Specifies the updated warm throughput configuration for your data stream.</p>
+    #   @return [Types::WarmThroughputObject]
+    class UpdateStreamWarmThroughputOutput < Struct.new(
+      nil,
+      :stream_arn,
+      :stream_name,
+      :warm_throughput,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2502,6 +3672,22 @@ module Aws::Kinesis
     class ValidationException < Struct.new(
       nil,
       :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Represents the warm throughput configuration on the stream. This is only present for On-Demand Kinesis Data Streams in accounts that have <code>MinimumThroughputBillingCommitment</code> enabled.</p>
+    # @!attribute target_mi_bps
+    #   <p>The target warm throughput value on the stream. This indicates that the stream is currently scaling towards this target value.</p>
+    #   @return [Integer]
+    # @!attribute current_mi_bps
+    #   <p>The current warm throughput value on the stream. This is the write throughput in MiBps that the stream is currently scaled to handle.</p>
+    #   @return [Integer]
+    class WarmThroughputObject < Struct.new(
+      nil,
+      :target_mi_bps,
+      :current_mi_bps,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

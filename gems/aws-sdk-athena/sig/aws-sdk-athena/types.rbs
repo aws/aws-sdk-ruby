@@ -303,6 +303,36 @@ module Aws::Athena
       UPDATE_PENDING: String
     end
 
+    class Classification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?properties: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor properties: Hash[String, String]?
+    end
+
+    class CloudWatchLoggingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?log_group: String,
+        ?log_stream_name_prefix: String,
+        ?log_types: Hash[String, Array[String]],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor log_group: String?
+      attr_accessor log_stream_name_prefix: String?
+      attr_accessor log_types: Hash[String, Array[String]]?
+    end
+
     class Column
       include Smithy::Schema::Structure
 
@@ -820,6 +850,7 @@ module Aws::Athena
         ?default_executor_dpu_size: Integer,
         ?additional_configs: Hash[String, String],
         ?spark_properties: Hash[String, String],
+        ?classifications: Array[Types::Classification],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -828,6 +859,7 @@ module Aws::Athena
       attr_accessor default_executor_dpu_size: Integer?
       attr_accessor additional_configs: Hash[String, String]?
       attr_accessor spark_properties: Hash[String, String]?
+      attr_accessor classifications: Array[Types::Classification]?
     end
 
     class EngineVersion
@@ -1232,6 +1264,54 @@ module Aws::Athena
       attr_accessor query_runtime_statistics: Types::QueryRuntimeStatistics?
     end
 
+    class GetResourceDashboardRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class GetResourceDashboardResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor url: String?
+    end
+
+    class GetSessionEndpointRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_id: String?
+    end
+
+    class GetSessionEndpointResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint_url: String,
+        ?auth_token: String,
+        ?auth_token_expiration_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint_url: String?
+      attr_accessor auth_token: String?
+      attr_accessor auth_token_expiration_time: Time?
+    end
+
     class GetSessionRequest
       include Smithy::Schema::Structure
 
@@ -1253,6 +1333,7 @@ module Aws::Athena
         ?engine_version: String,
         ?engine_configuration: Types::EngineConfiguration,
         ?notebook_version: String,
+        ?monitoring_configuration: Types::MonitoringConfiguration,
         ?session_configuration: Types::SessionConfiguration,
         ?status: Types::SessionStatus,
         ?statistics: Types::SessionStatistics,
@@ -1265,6 +1346,7 @@ module Aws::Athena
       attr_accessor engine_version: String?
       attr_accessor engine_configuration: Types::EngineConfiguration?
       attr_accessor notebook_version: String?
+      attr_accessor monitoring_configuration: Types::MonitoringConfiguration?
       attr_accessor session_configuration: Types::SessionConfiguration?
       attr_accessor status: Types::SessionStatus?
       attr_accessor statistics: Types::SessionStatistics?
@@ -1871,6 +1953,19 @@ module Aws::Athena
       attr_accessor next_token: String?
     end
 
+    class ManagedLoggingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?kms_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor kms_key: String?
+    end
+
     class ManagedQueryResultsConfiguration
       include Smithy::Schema::Structure
 
@@ -1919,6 +2014,21 @@ module Aws::Athena
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    class MonitoringConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cloud_watch_logging_configuration: Types::CloudWatchLoggingConfiguration,
+        ?managed_logging_configuration: Types::ManagedLoggingConfiguration,
+        ?s3_logging_configuration: Types::S3LoggingConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_watch_logging_configuration: Types::CloudWatchLoggingConfiguration?
+      attr_accessor managed_logging_configuration: Types::ManagedLoggingConfiguration?
+      attr_accessor s3_logging_configuration: Types::S3LoggingConfiguration?
     end
 
     class NamedQuery
@@ -2105,6 +2215,7 @@ module Aws::Athena
         ?query_planning_time_in_millis: Integer,
         ?service_processing_time_in_millis: Integer,
         ?result_reuse_information: Types::ResultReuseInformation,
+        ?dpu_count: Float,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2117,6 +2228,7 @@ module Aws::Athena
       attr_accessor query_planning_time_in_millis: Integer?
       attr_accessor service_processing_time_in_millis: Integer?
       attr_accessor result_reuse_information: Types::ResultReuseInformation?
+      attr_accessor dpu_count: Float?
     end
 
     class QueryExecutionStatus
@@ -2384,6 +2496,21 @@ module Aws::Athena
       BUCKET_OWNER_FULL_CONTROL: String
     end
 
+    class S3LoggingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?kms_key: String,
+        ?log_location: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor kms_key: String?
+      attr_accessor log_location: String?
+    end
+
     class SessionAlreadyExistsException
       include Smithy::Schema::Structure
 
@@ -2402,6 +2529,7 @@ module Aws::Athena
         ?execution_role: String,
         ?working_directory: String,
         ?idle_timeout_seconds: Integer,
+        ?session_idle_timeout_in_minutes: Integer,
         ?encryption_configuration: Types::EncryptionConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -2409,6 +2537,7 @@ module Aws::Athena
       attr_accessor execution_role: String?
       attr_accessor working_directory: String?
       attr_accessor idle_timeout_seconds: Integer?
+      attr_accessor session_idle_timeout_in_minutes: Integer?
       attr_accessor encryption_configuration: Types::EncryptionConfiguration?
     end
 
@@ -2517,6 +2646,7 @@ module Aws::Athena
         ?work_group: String,
         ?execution_parameters: Array[String],
         ?result_reuse_configuration: Types::ResultReuseConfiguration,
+        ?engine_configuration: Types::EngineConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2527,6 +2657,7 @@ module Aws::Athena
       attr_accessor work_group: String?
       attr_accessor execution_parameters: Array[String]?
       attr_accessor result_reuse_configuration: Types::ResultReuseConfiguration?
+      attr_accessor engine_configuration: Types::EngineConfiguration?
     end
 
     class StartQueryExecutionOutput
@@ -2547,18 +2678,26 @@ module Aws::Athena
         ?description: String,
         ?work_group: String,
         ?engine_configuration: Types::EngineConfiguration,
+        ?execution_role: String,
+        ?monitoring_configuration: Types::MonitoringConfiguration,
         ?notebook_version: String,
         ?session_idle_timeout_in_minutes: Integer,
         ?client_request_token: String,
+        ?tags: Array[Types::Tag],
+        ?copy_work_group_tags: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor description: String?
       attr_accessor work_group: String?
       attr_accessor engine_configuration: Types::EngineConfiguration?
+      attr_accessor execution_role: String?
+      attr_accessor monitoring_configuration: Types::MonitoringConfiguration?
       attr_accessor notebook_version: String?
       attr_accessor session_idle_timeout_in_minutes: Integer?
       attr_accessor client_request_token: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor copy_work_group_tags: bool?
     end
 
     class StartSessionResponse
@@ -2998,6 +3137,8 @@ module Aws::Athena
         ?engine_version: Types::EngineVersion,
         ?additional_configuration: String,
         ?execution_role: String,
+        ?monitoring_configuration: Types::MonitoringConfiguration,
+        ?engine_configuration: Types::EngineConfiguration,
         ?customer_content_encryption_configuration: Types::CustomerContentEncryptionConfiguration,
         ?enable_minimum_encryption_configuration: bool,
         ?identity_center_configuration: Types::IdentityCenterConfiguration,
@@ -3014,6 +3155,8 @@ module Aws::Athena
       attr_accessor engine_version: Types::EngineVersion?
       attr_accessor additional_configuration: String?
       attr_accessor execution_role: String?
+      attr_accessor monitoring_configuration: Types::MonitoringConfiguration?
+      attr_accessor engine_configuration: Types::EngineConfiguration?
       attr_accessor customer_content_encryption_configuration: Types::CustomerContentEncryptionConfiguration?
       attr_accessor enable_minimum_encryption_configuration: bool?
       attr_accessor identity_center_configuration: Types::IdentityCenterConfiguration?
@@ -3038,6 +3181,8 @@ module Aws::Athena
         ?customer_content_encryption_configuration: Types::CustomerContentEncryptionConfiguration,
         ?enable_minimum_encryption_configuration: bool,
         ?query_results_s3_access_grants_configuration: Types::QueryResultsS3AccessGrantsConfiguration,
+        ?monitoring_configuration: Types::MonitoringConfiguration,
+        ?engine_configuration: Types::EngineConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3055,6 +3200,8 @@ module Aws::Athena
       attr_accessor customer_content_encryption_configuration: Types::CustomerContentEncryptionConfiguration?
       attr_accessor enable_minimum_encryption_configuration: bool?
       attr_accessor query_results_s3_access_grants_configuration: Types::QueryResultsS3AccessGrantsConfiguration?
+      attr_accessor monitoring_configuration: Types::MonitoringConfiguration?
+      attr_accessor engine_configuration: Types::EngineConfiguration?
     end
 
     module WorkGroupState

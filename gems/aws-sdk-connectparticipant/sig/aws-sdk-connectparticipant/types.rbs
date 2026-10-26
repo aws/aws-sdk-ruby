@@ -386,11 +386,30 @@ module Aws::ConnectParticipant
       def initialize: (
         ?message_id: String,
         ?receipts: Array[Types::Receipt],
+        ?message_processing_status: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message_id: String?
       attr_accessor receipts: Array[Types::Receipt]?
+      attr_accessor message_processing_status: String?
+    end
+
+    class MessageProcessingMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message_processing_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message_processing_status: String?
+    end
+
+    module MessageProcessingStatus
+      PROCESSING: String
+      FAILED: String
+      REJECTED: String
     end
 
     module ParticipantRole
@@ -500,11 +519,13 @@ module Aws::ConnectParticipant
       def initialize: (
         ?id: String,
         ?absolute_time: String,
+        ?message_metadata: Types::MessageProcessingMetadata,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor id: String?
       attr_accessor absolute_time: String?
+      attr_accessor message_metadata: Types::MessageProcessingMetadata?
     end
 
     class ServiceQuotaExceededException

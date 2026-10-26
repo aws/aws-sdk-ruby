@@ -182,6 +182,8 @@ module Aws::Mgn
       def small_volume_max_size: () -> Integer?
       def small_volume_conf: () -> Types::LaunchTemplateDiskConf?
       def large_volume_conf: () -> Types::LaunchTemplateDiskConf?
+      def enable_parameters_encryption: () -> bool?
+      def parameters_encryption_key: () -> String?
     end
     def create_launch_configuration_template: (
       ?post_launch_actions: {
@@ -227,14 +229,72 @@ module Aws::Mgn
       ?small_volume_conf: {
         volume_type: String,
         iops: Integer,
-        throughput: Integer
+        throughput: Integer,
+        volume_initialization_rate: Integer,
+        delete_on_termination: bool
       },
       ?large_volume_conf: {
         volume_type: String,
         iops: Integer,
-        throughput: Integer
-      }
+        throughput: Integer,
+        volume_initialization_rate: Integer,
+        delete_on_termination: bool
+      },
+      ?enable_parameters_encryption: bool,
+      ?parameters_encryption_key: String
     ) -> _CreateLaunchConfigurationTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLaunchConfigurationTemplateResponse
+
+    interface _CreateNetworkMigrationDefinitionResponse
+      include Smithy::Client::_Response[Types::CreateNetworkMigrationDefinitionOutput]
+      def arn: () -> String?
+      def network_migration_definition_id: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def source_configurations: () -> Array[Types::SourceConfiguration]?
+      def target_s3_configuration: () -> Types::TargetS3Configuration?
+      def target_network: () -> Types::TargetNetwork?
+      def target_deployment: () -> String?
+      def vpc_provisioning_strategy: () -> String?
+      def cidr_mappings: () -> Array[Types::CidrMapping]?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def tags: () -> Hash[String, String]?
+      def scope_tags: () -> Hash[String, String]?
+    end
+    def create_network_migration_definition: (
+      ?name: String,
+      ?description: String,
+      ?source_configurations: Array[
+        {
+          source_environment: String,
+          source_s3_configuration: {
+            s3_bucket: String,
+            s3_bucket_owner: String,
+            s3_key: String
+          }
+        }
+      ],
+      ?target_s3_configuration: {
+        s3_bucket: String,
+        s3_bucket_owner: String
+      },
+      ?target_network: {
+        topology: String,
+        inbound_cidr: String,
+        outbound_cidr: untyped,
+        inspection_cidr: untyped
+      },
+      ?target_deployment: String,
+      ?vpc_provisioning_strategy: String,
+      ?cidr_mappings: Array[
+        {
+          original_cidr: String,
+          updated_cidr: untyped
+        }
+      ],
+      ?tags: Hash[String, String],
+      ?scope_tags: Hash[String, String]
+    ) -> _CreateNetworkMigrationDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateNetworkMigrationDefinitionResponse
 
     interface _CreateReplicationConfigurationTemplateResponse
       include Smithy::Client::_Response[Types::CreateReplicationConfigurationTemplateOutput]
@@ -254,6 +314,9 @@ module Aws::Mgn
       def staging_area_tags: () -> Hash[String, String]?
       def use_fips_endpoint: () -> bool?
       def tags: () -> Hash[String, String]?
+      def internet_protocol: () -> String?
+      def store_snapshot_on_local_zone: () -> bool?
+      def storage_configuration: () -> Types::StorageConfiguration?
     end
     def create_replication_configuration_template: (
       ?staging_area_subnet_id: String,
@@ -269,7 +332,16 @@ module Aws::Mgn
       ?create_public_ip: bool,
       ?staging_area_tags: Hash[String, String],
       ?use_fips_endpoint: bool,
-      ?tags: Hash[String, String]
+      ?tags: Hash[String, String],
+      ?internet_protocol: String,
+      ?store_snapshot_on_local_zone: bool,
+      ?storage_configuration: {
+        storage_type: String,
+        fsx_ontap_configuration: {
+          storage_virtual_machine_id: String,
+          credentials_secret_arn: String
+        }
+      }
     ) -> _CreateReplicationConfigurationTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateReplicationConfigurationTemplateResponse
 
     interface _CreateWaveResponse
@@ -320,6 +392,13 @@ module Aws::Mgn
     def delete_launch_configuration_template: (
       ?launch_configuration_template_id: String
     ) -> _DeleteLaunchConfigurationTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteLaunchConfigurationTemplateResponse
+
+    interface _DeleteNetworkMigrationDefinitionResponse
+      include Smithy::Client::_Response[Types::DeleteNetworkMigrationDefinitionResponse]
+    end
+    def delete_network_migration_definition: (
+      ?network_migration_definition_id: String
+    ) -> _DeleteNetworkMigrationDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteNetworkMigrationDefinitionResponse
 
     interface _DeleteReplicationConfigurationTemplateResponse
       include Smithy::Client::_Response[Types::DeleteReplicationConfigurationTemplateOutput]
@@ -511,6 +590,38 @@ module Aws::Mgn
       ?account_id: String
     ) -> _GetLaunchConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLaunchConfigurationResponse
 
+    interface _GetNetworkMigrationDefinitionResponse
+      include Smithy::Client::_Response[Types::GetNetworkMigrationDefinitionOutput]
+      def arn: () -> String?
+      def network_migration_definition_id: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def source_configurations: () -> Array[Types::SourceConfiguration]?
+      def target_s3_configuration: () -> Types::TargetS3Configuration?
+      def target_network: () -> Types::TargetNetwork?
+      def target_deployment: () -> String?
+      def vpc_provisioning_strategy: () -> String?
+      def cidr_mappings: () -> Array[Types::CidrMapping]?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def tags: () -> Hash[String, String]?
+      def scope_tags: () -> Hash[String, String]?
+    end
+    def get_network_migration_definition: (
+      ?network_migration_definition_id: String
+    ) -> _GetNetworkMigrationDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetNetworkMigrationDefinitionResponse
+
+    interface _GetNetworkMigrationMapperSegmentConstructResponse
+      include Smithy::Client::_Response[Types::GetNetworkMigrationMapperSegmentConstructResponse]
+      def construct: () -> Types::NetworkMigrationMapperSegmentConstruct?
+    end
+    def get_network_migration_mapper_segment_construct: (
+      ?network_migration_definition_id: String,
+      ?network_migration_execution_id: String,
+      ?segment_id: String,
+      ?construct_id: String
+    ) -> _GetNetworkMigrationMapperSegmentConstructResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetNetworkMigrationMapperSegmentConstructResponse
+
     interface _GetReplicationConfigurationResponse
       include Smithy::Client::_Response[Types::GetReplicationConfigurationOutput]
       def source_server_id: () -> String?
@@ -529,6 +640,9 @@ module Aws::Mgn
       def create_public_ip: () -> bool?
       def staging_area_tags: () -> Hash[String, String]?
       def use_fips_endpoint: () -> bool?
+      def internet_protocol: () -> String?
+      def store_snapshot_on_local_zone: () -> bool?
+      def storage_configuration: () -> Types::StorageConfiguration?
     end
     def get_replication_configuration: (
       ?source_server_id: String,
@@ -604,6 +718,19 @@ module Aws::Mgn
       ?next_token: String
     ) -> _ListImportErrorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListImportErrorsResponse
 
+    interface _ListImportFileEnrichmentsResponse
+      include Smithy::Client::_Response[Types::ListImportFileEnrichmentsResponse]
+      def items: () -> Array[Types::ImportFileEnrichment]?
+      def next_token: () -> String?
+    end
+    def list_import_file_enrichments: (
+      ?filters: {
+        job_i_ds: Array[String]
+      },
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListImportFileEnrichmentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListImportFileEnrichmentsResponse
+
     interface _ListImportsResponse
       include Smithy::Client::_Response[Types::ListImportsOutput]
       def items: () -> Array[Types::ImportTask]?
@@ -626,6 +753,183 @@ module Aws::Mgn
       ?max_results: Integer,
       ?next_token: String
     ) -> _ListManagedAccountsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListManagedAccountsResponse
+
+    interface _ListNetworkMigrationAnalysesResponse
+      include Smithy::Client::_Response[Types::ListNetworkMigrationAnalysesResponse]
+      def items: () -> Array[Types::NetworkMigrationAnalysisJobDetails]?
+      def next_token: () -> String?
+    end
+    def list_network_migration_analyses: (
+      ?network_migration_execution_id: String,
+      ?network_migration_definition_id: String,
+      ?filters: {
+        job_i_ds: Array[String]
+      },
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListNetworkMigrationAnalysesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListNetworkMigrationAnalysesResponse
+
+    interface _ListNetworkMigrationAnalysisResultsResponse
+      include Smithy::Client::_Response[Types::ListNetworkMigrationAnalysisResultsResponse]
+      def items: () -> Array[Types::NetworkMigrationAnalysisResult]?
+      def next_token: () -> String?
+    end
+    def list_network_migration_analysis_results: (
+      ?network_migration_execution_id: String,
+      ?network_migration_definition_id: String,
+      ?filters: {
+        vpc_i_ds: Array[String]
+      },
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListNetworkMigrationAnalysisResultsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListNetworkMigrationAnalysisResultsResponse
+
+    interface _ListNetworkMigrationCodeGenerationSegmentsResponse
+      include Smithy::Client::_Response[Types::ListNetworkMigrationCodeGenerationSegmentsResponse]
+      def items: () -> Array[Types::NetworkMigrationCodeGenerationSegment]?
+      def next_token: () -> String?
+    end
+    def list_network_migration_code_generation_segments: (
+      ?network_migration_execution_id: String,
+      ?network_migration_definition_id: String,
+      ?filters: {
+        segment_i_ds: Array[String]
+      },
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListNetworkMigrationCodeGenerationSegmentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListNetworkMigrationCodeGenerationSegmentsResponse
+
+    interface _ListNetworkMigrationCodeGenerationsResponse
+      include Smithy::Client::_Response[Types::ListNetworkMigrationCodeGenerationsResponse]
+      def items: () -> Array[Types::NetworkMigrationCodeGenerationJobDetails]?
+      def next_token: () -> String?
+    end
+    def list_network_migration_code_generations: (
+      ?network_migration_execution_id: String,
+      ?network_migration_definition_id: String,
+      ?filters: {
+        job_i_ds: Array[String]
+      },
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListNetworkMigrationCodeGenerationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListNetworkMigrationCodeGenerationsResponse
+
+    interface _ListNetworkMigrationDefinitionsResponse
+      include Smithy::Client::_Response[Types::ListNetworkMigrationDefinitionsResponse]
+      def items: () -> Array[Types::NetworkMigrationDefinitionSummary]?
+      def next_token: () -> String?
+    end
+    def list_network_migration_definitions: (
+      ?filters: {
+        network_migration_definition_i_ds: Array[String]
+      },
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListNetworkMigrationDefinitionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListNetworkMigrationDefinitionsResponse
+
+    interface _ListNetworkMigrationDeployedStacksResponse
+      include Smithy::Client::_Response[Types::ListNetworkMigrationDeployedStacksResponse]
+      def items: () -> Array[Types::NetworkMigrationDeployedStackDetails]?
+      def next_token: () -> String?
+    end
+    def list_network_migration_deployed_stacks: (
+      ?network_migration_execution_id: String,
+      ?network_migration_definition_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListNetworkMigrationDeployedStacksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListNetworkMigrationDeployedStacksResponse
+
+    interface _ListNetworkMigrationDeploymentsResponse
+      include Smithy::Client::_Response[Types::ListNetworkMigrationDeploymentsOutput]
+      def items: () -> Array[Types::NetworkMigrationDeployerJobDetails]?
+      def next_token: () -> String?
+    end
+    def list_network_migration_deployments: (
+      ?network_migration_execution_id: String,
+      ?network_migration_definition_id: String,
+      ?filters: {
+        job_i_ds: Array[String]
+      },
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListNetworkMigrationDeploymentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListNetworkMigrationDeploymentsResponse
+
+    interface _ListNetworkMigrationExecutionsResponse
+      include Smithy::Client::_Response[Types::ListNetworkMigrationExecutionsResponse]
+      def items: () -> Array[Types::NetworkMigrationExecution]?
+      def next_token: () -> String?
+    end
+    def list_network_migration_executions: (
+      ?network_migration_definition_id: String,
+      ?filters: {
+        network_migration_execution_i_ds: Array[String],
+        network_migration_execution_statuses: Array[String]
+      },
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListNetworkMigrationExecutionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListNetworkMigrationExecutionsResponse
+
+    interface _ListNetworkMigrationMapperSegmentConstructsResponse
+      include Smithy::Client::_Response[Types::ListNetworkMigrationMapperSegmentConstructsResponse]
+      def items: () -> Array[Types::NetworkMigrationMapperSegmentConstruct]?
+      def next_token: () -> String?
+    end
+    def list_network_migration_mapper_segment_constructs: (
+      ?network_migration_execution_id: String,
+      ?network_migration_definition_id: String,
+      ?segment_id: String,
+      ?filters: {
+        construct_i_ds: Array[String],
+        construct_types: Array[String]
+      },
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListNetworkMigrationMapperSegmentConstructsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListNetworkMigrationMapperSegmentConstructsResponse
+
+    interface _ListNetworkMigrationMapperSegmentsResponse
+      include Smithy::Client::_Response[Types::ListNetworkMigrationMapperSegmentsResponse]
+      def items: () -> Array[Types::NetworkMigrationMapperSegment]?
+      def next_token: () -> String?
+    end
+    def list_network_migration_mapper_segments: (
+      ?network_migration_execution_id: String,
+      ?network_migration_definition_id: String,
+      ?filters: {
+        segment_i_ds: Array[String]
+      },
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListNetworkMigrationMapperSegmentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListNetworkMigrationMapperSegmentsResponse
+
+    interface _ListNetworkMigrationMappingUpdatesResponse
+      include Smithy::Client::_Response[Types::ListNetworkMigrationMappingUpdatesResponse]
+      def items: () -> Array[Types::NetworkMigrationMappingUpdateJobDetails]?
+      def next_token: () -> String?
+    end
+    def list_network_migration_mapping_updates: (
+      ?network_migration_execution_id: String,
+      ?network_migration_definition_id: String,
+      ?filters: {
+        job_i_ds: Array[String]
+      },
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListNetworkMigrationMappingUpdatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListNetworkMigrationMappingUpdatesResponse
+
+    interface _ListNetworkMigrationMappingsResponse
+      include Smithy::Client::_Response[Types::ListNetworkMigrationMappingsResponse]
+      def items: () -> Array[Types::NetworkMigrationMappingJobDetails]?
+      def next_token: () -> String?
+    end
+    def list_network_migration_mappings: (
+      ?network_migration_execution_id: String,
+      ?network_migration_definition_id: String,
+      ?filters: {
+        job_i_ds: Array[String]
+      },
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListNetworkMigrationMappingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListNetworkMigrationMappingsResponse
 
     interface _ListSourceServerActionsResponse
       include Smithy::Client::_Response[Types::ListSourceServerActionsOutput]
@@ -888,7 +1192,8 @@ module Aws::Mgn
     def start_export: (
       ?s3_bucket: String,
       ?s3_key: String,
-      ?s3_bucket_owner: String
+      ?s3_bucket_owner: String,
+      ?tags: Hash[String, String]
     ) -> _StartExportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartExportResponse
 
     interface _StartImportResponse
@@ -901,8 +1206,113 @@ module Aws::Mgn
         s3_bucket: String,
         s3_key: String,
         s3_bucket_owner: String
-      }
+      },
+      ?tags: Hash[String, String]
     ) -> _StartImportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartImportResponse
+
+    interface _StartImportFileEnrichmentResponse
+      include Smithy::Client::_Response[Types::StartImportFileEnrichmentResponse]
+      def job_id: () -> String?
+    end
+    def start_import_file_enrichment: (
+      ?client_token: String,
+      ?s3_bucket_source: {
+        s3_bucket: String,
+        s3_bucket_owner: String,
+        s3_key: String
+      },
+      ?s3_bucket_target: {
+        s3_bucket: String,
+        s3_bucket_owner: String,
+        s3_key: String
+      },
+      ?ip_assignment_strategy: String
+    ) -> _StartImportFileEnrichmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartImportFileEnrichmentResponse
+
+    interface _StartNetworkMigrationAnalysisResponse
+      include Smithy::Client::_Response[Types::StartNetworkMigrationAnalysisResponse]
+      def job_id: () -> String?
+    end
+    def start_network_migration_analysis: (
+      ?network_migration_execution_id: String,
+      ?network_migration_definition_id: String
+    ) -> _StartNetworkMigrationAnalysisResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartNetworkMigrationAnalysisResponse
+
+    interface _StartNetworkMigrationCodeGenerationResponse
+      include Smithy::Client::_Response[Types::StartNetworkMigrationCodeGenerationResponse]
+      def job_id: () -> String?
+    end
+    def start_network_migration_code_generation: (
+      ?network_migration_execution_id: String,
+      ?network_migration_definition_id: String,
+      ?code_generation_output_format_types: Array[String]
+    ) -> _StartNetworkMigrationCodeGenerationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartNetworkMigrationCodeGenerationResponse
+
+    interface _StartNetworkMigrationDeploymentResponse
+      include Smithy::Client::_Response[Types::StartNetworkMigrationDeploymentOutput]
+      def job_id: () -> String?
+    end
+    def start_network_migration_deployment: (
+      ?network_migration_execution_id: String,
+      ?network_migration_definition_id: String
+    ) -> _StartNetworkMigrationDeploymentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartNetworkMigrationDeploymentResponse
+
+    interface _StartNetworkMigrationMappingResponse
+      include Smithy::Client::_Response[Types::StartNetworkMigrationMappingResponse]
+      def job_id: () -> String?
+    end
+    def start_network_migration_mapping: (
+      ?network_migration_execution_id: String,
+      ?network_migration_definition_id: String,
+      ?security_group_mapping_strategy: String
+    ) -> _StartNetworkMigrationMappingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartNetworkMigrationMappingResponse
+
+    interface _StartNetworkMigrationMappingUpdateResponse
+      include Smithy::Client::_Response[Types::StartNetworkMigrationMappingUpdateResponse]
+      def job_id: () -> String?
+    end
+    def start_network_migration_mapping_update: (
+      ?network_migration_execution_id: String,
+      ?network_migration_definition_id: String,
+      ?constructs: Array[
+        {
+          segment_id: String,
+          construct_id: String,
+          construct_type: String,
+          operation: {
+            merge: {
+              merge_constructs: Array[
+                {
+                  segment_id: untyped,
+                  construct_id: untyped
+                }
+              ]
+            },
+            split: {
+              split_constructs: Array[
+                {
+                  cidr_block: String
+                }
+              ]
+            },
+            delete: {
+            },
+            update: {
+              name: String,
+              excluded: bool,
+              properties: Hash[String, String]
+            }
+          }
+        }
+      ],
+      ?segments: Array[
+        {
+          segment_id: String,
+          target_account: String,
+          scope_tags: Hash[String, String]
+        }
+      ]
+    ) -> _StartNetworkMigrationMappingUpdateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartNetworkMigrationMappingUpdateResponse
 
     interface _StartReplicationResponse
       include Smithy::Client::_Response[Types::StartReplicationOutput]
@@ -1136,6 +1546,8 @@ module Aws::Mgn
       def small_volume_max_size: () -> Integer?
       def small_volume_conf: () -> Types::LaunchTemplateDiskConf?
       def large_volume_conf: () -> Types::LaunchTemplateDiskConf?
+      def enable_parameters_encryption: () -> bool?
+      def parameters_encryption_key: () -> String?
     end
     def update_launch_configuration_template: (
       ?launch_configuration_template_id: String,
@@ -1181,14 +1593,97 @@ module Aws::Mgn
       ?small_volume_conf: {
         volume_type: String,
         iops: Integer,
-        throughput: Integer
+        throughput: Integer,
+        volume_initialization_rate: Integer,
+        delete_on_termination: bool
       },
       ?large_volume_conf: {
         volume_type: String,
         iops: Integer,
-        throughput: Integer
-      }
+        throughput: Integer,
+        volume_initialization_rate: Integer,
+        delete_on_termination: bool
+      },
+      ?enable_parameters_encryption: bool,
+      ?parameters_encryption_key: String
     ) -> _UpdateLaunchConfigurationTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateLaunchConfigurationTemplateResponse
+
+    interface _UpdateNetworkMigrationDefinitionResponse
+      include Smithy::Client::_Response[Types::UpdateNetworkMigrationDefinitionOutput]
+      def arn: () -> String?
+      def network_migration_definition_id: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def source_configurations: () -> Array[Types::SourceConfiguration]?
+      def target_s3_configuration: () -> Types::TargetS3Configuration?
+      def target_network: () -> Types::TargetNetwork?
+      def target_deployment: () -> String?
+      def vpc_provisioning_strategy: () -> String?
+      def cidr_mappings: () -> Array[Types::CidrMapping]?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def tags: () -> Hash[String, String]?
+      def scope_tags: () -> Hash[String, String]?
+    end
+    def update_network_migration_definition: (
+      ?network_migration_definition_id: String,
+      ?name: String,
+      ?description: String,
+      ?source_configurations: Array[
+        {
+          source_environment: String,
+          source_s3_configuration: {
+            s3_bucket: String,
+            s3_bucket_owner: String,
+            s3_key: String
+          }
+        }
+      ],
+      ?target_s3_configuration: {
+        s3_bucket: String,
+        s3_bucket_owner: String
+      },
+      ?target_network: {
+        topology: String,
+        inbound_cidr: String,
+        outbound_cidr: untyped,
+        inspection_cidr: untyped
+      },
+      ?target_deployment: String,
+      ?vpc_provisioning_strategy: String,
+      ?cidr_mappings: Array[
+        {
+          original_cidr: String,
+          updated_cidr: untyped
+        }
+      ],
+      ?scope_tags: Hash[String, String]
+    ) -> _UpdateNetworkMigrationDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateNetworkMigrationDefinitionResponse
+
+    interface _UpdateNetworkMigrationMapperSegmentResponse
+      include Smithy::Client::_Response[Types::UpdateNetworkMigrationMapperSegmentOutput]
+      def job_id: () -> String?
+      def network_migration_execution_id: () -> String?
+      def network_migration_definition_id: () -> String?
+      def segment_id: () -> String?
+      def segment_type: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def logical_id: () -> String?
+      def checksum: () -> Types::Checksum?
+      def output_s3_configuration: () -> Types::S3Configuration?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def scope_tags: () -> Hash[String, String]?
+      def target_account: () -> String?
+      def referenced_segments: () -> Array[String]?
+    end
+    def update_network_migration_mapper_segment: (
+      ?network_migration_definition_id: String,
+      ?network_migration_execution_id: String,
+      ?segment_id: String,
+      ?scope_tags: Hash[String, String]
+    ) -> _UpdateNetworkMigrationMapperSegmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateNetworkMigrationMapperSegmentResponse
 
     interface _UpdateReplicationConfigurationResponse
       include Smithy::Client::_Response[Types::UpdateReplicationConfigurationOutput]
@@ -1208,6 +1703,9 @@ module Aws::Mgn
       def create_public_ip: () -> bool?
       def staging_area_tags: () -> Hash[String, String]?
       def use_fips_endpoint: () -> bool?
+      def internet_protocol: () -> String?
+      def store_snapshot_on_local_zone: () -> bool?
+      def storage_configuration: () -> Types::StorageConfiguration?
     end
     def update_replication_configuration: (
       ?source_server_id: String,
@@ -1234,7 +1732,16 @@ module Aws::Mgn
       ?create_public_ip: bool,
       ?staging_area_tags: Hash[String, String],
       ?use_fips_endpoint: bool,
-      ?account_id: String
+      ?account_id: String,
+      ?internet_protocol: String,
+      ?store_snapshot_on_local_zone: bool,
+      ?storage_configuration: {
+        storage_type: String,
+        fsx_ontap_configuration: {
+          storage_virtual_machine_id: String,
+          credentials_secret_arn: String
+        }
+      }
     ) -> _UpdateReplicationConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateReplicationConfigurationResponse
 
     interface _UpdateReplicationConfigurationTemplateResponse
@@ -1255,6 +1762,9 @@ module Aws::Mgn
       def staging_area_tags: () -> Hash[String, String]?
       def use_fips_endpoint: () -> bool?
       def tags: () -> Hash[String, String]?
+      def internet_protocol: () -> String?
+      def store_snapshot_on_local_zone: () -> bool?
+      def storage_configuration: () -> Types::StorageConfiguration?
     end
     def update_replication_configuration_template: (
       ?replication_configuration_template_id: String,
@@ -1271,7 +1781,16 @@ module Aws::Mgn
       ?data_plane_routing: String,
       ?create_public_ip: bool,
       ?staging_area_tags: Hash[String, String],
-      ?use_fips_endpoint: bool
+      ?use_fips_endpoint: bool,
+      ?internet_protocol: String,
+      ?store_snapshot_on_local_zone: bool,
+      ?storage_configuration: {
+        storage_type: String,
+        fsx_ontap_configuration: {
+          storage_virtual_machine_id: String,
+          credentials_secret_arn: String
+        }
+      }
     ) -> _UpdateReplicationConfigurationTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateReplicationConfigurationTemplateResponse
 
     interface _UpdateSourceServerResponse
@@ -1297,7 +1816,10 @@ module Aws::Mgn
       ?connector_action: {
         credentials_secret_arn: String,
         connector_arn: String
-      }
+      },
+      ?user_provided_id: String,
+      ?fqdn_for_action_framework: String,
+      ?platform: String
     ) -> _UpdateSourceServerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSourceServerResponse
 
     interface _UpdateSourceServerReplicationTypeResponse

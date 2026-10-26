@@ -46,6 +46,13 @@ module Aws::Ivs
 
     interface _BatchGetChannelResponse
       include Smithy::Client::_Response[Types::BatchGetChannelOutput]
+      def access_control_allow_origin: () -> String?
+      def access_control_expose_headers: () -> String?
+      def cache_control: () -> String?
+      def content_security_policy: () -> String?
+      def strict_transport_security: () -> String?
+      def x_content_type_options: () -> String?
+      def x_frame_options: () -> String?
       def channels: () -> Array[Types::Channel]?
       def errors: () -> Array[Types::BatchError]?
     end
@@ -55,6 +62,13 @@ module Aws::Ivs
 
     interface _BatchGetStreamKeyResponse
       include Smithy::Client::_Response[Types::BatchGetStreamKeyOutput]
+      def access_control_allow_origin: () -> String?
+      def access_control_expose_headers: () -> String?
+      def cache_control: () -> String?
+      def content_security_policy: () -> String?
+      def strict_transport_security: () -> String?
+      def x_content_type_options: () -> String?
+      def x_frame_options: () -> String?
       def stream_keys: () -> Array[Types::StreamKey]?
       def errors: () -> Array[Types::BatchError]?
     end
@@ -64,6 +78,13 @@ module Aws::Ivs
 
     interface _BatchStartViewerSessionRevocationResponse
       include Smithy::Client::_Response[Types::BatchStartViewerSessionRevocationOutput]
+      def access_control_allow_origin: () -> String?
+      def access_control_expose_headers: () -> String?
+      def cache_control: () -> String?
+      def content_security_policy: () -> String?
+      def strict_transport_security: () -> String?
+      def x_content_type_options: () -> String?
+      def x_frame_options: () -> String?
       def errors: () -> Array[Types::BatchStartViewerSessionRevocationError]?
     end
     def batch_start_viewer_session_revocation: (
@@ -75,6 +96,24 @@ module Aws::Ivs
         }
       ]
     ) -> _BatchStartViewerSessionRevocationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchStartViewerSessionRevocationResponse
+
+    interface _CreateAdConfigurationResponse
+      include Smithy::Client::_Response[Types::CreateAdConfigurationResponse]
+      def ad_configuration: () -> Types::AdConfiguration?
+    end
+    def create_ad_configuration: (
+      ?name: String,
+      ?media_tailor_playback_configurations: Array[
+        {
+          playback_configuration_arn: String
+        }
+      ],
+      ?post_roll_configuration: {
+        duration_seconds: Integer,
+        enabled: bool
+      },
+      ?tags: Hash[String, String]
+    ) -> _CreateAdConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAdConfigurationResponse
 
     interface _CreateChannelResponse
       include Smithy::Client::_Response[Types::CreateChannelOutput]
@@ -96,7 +135,8 @@ module Aws::Ivs
         policy: String,
         maximum_resolution: String
       },
-      ?container_format: String
+      ?container_format: String,
+      ?ad_configuration_arn: String
     ) -> _CreateChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateChannelResponse
 
     interface _CreatePlaybackRestrictionPolicyResponse
@@ -145,6 +185,13 @@ module Aws::Ivs
       ?tags: Hash[String, String]
     ) -> _CreateStreamKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateStreamKeyResponse
 
+    interface _DeleteAdConfigurationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_ad_configuration: (
+      ?arn: String
+    ) -> _DeleteAdConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAdConfigurationResponse
+
     interface _DeleteChannelResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
     end
@@ -179,6 +226,14 @@ module Aws::Ivs
     def delete_stream_key: (
       ?arn: String
     ) -> _DeleteStreamKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteStreamKeyResponse
+
+    interface _GetAdConfigurationResponse
+      include Smithy::Client::_Response[Types::GetAdConfigurationResponse]
+      def ad_configuration: () -> Types::AdConfiguration?
+    end
+    def get_ad_configuration: (
+      ?arn: String
+    ) -> _GetAdConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAdConfigurationResponse
 
     interface _GetChannelResponse
       include Smithy::Client::_Response[Types::GetChannelOutput]
@@ -247,6 +302,25 @@ module Aws::Ivs
       ?tags: Hash[String, String]
     ) -> _ImportPlaybackKeyPairResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ImportPlaybackKeyPairResponse
 
+    interface _InsertAdBreakResponse
+      include Smithy::Client::_Response[Types::InsertAdBreakResponse]
+      def ad_break_id: () -> String?
+    end
+    def insert_ad_break: (
+      ?channel_arn: String,
+      ?duration_seconds: Integer
+    ) -> _InsertAdBreakResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _InsertAdBreakResponse
+
+    interface _ListAdConfigurationsResponse
+      include Smithy::Client::_Response[Types::ListAdConfigurationsResponse]
+      def ad_configurations: () -> Array[Types::AdConfigurationSummary]?
+      def next_token: () -> String?
+    end
+    def list_ad_configurations: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAdConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAdConfigurationsResponse
+
     interface _ListChannelsResponse
       include Smithy::Client::_Response[Types::ListChannelsOutput]
       def channels: () -> Array[Types::ChannelSummary]?
@@ -256,6 +330,7 @@ module Aws::Ivs
       ?filter_by_name: String,
       ?filter_by_recording_configuration_arn: String,
       ?filter_by_playback_restriction_policy_arn: String,
+      ?filter_by_ad_configuration_arn: String,
       ?next_token: String,
       ?max_results: Integer
     ) -> _ListChannelsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListChannelsResponse
@@ -373,6 +448,24 @@ module Aws::Ivs
       ?tag_keys: Array[String]
     ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
 
+    interface _UpdateAdConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateAdConfigurationResponse]
+      def ad_configuration: () -> Types::AdConfiguration?
+    end
+    def update_ad_configuration: (
+      ?arn: String,
+      ?name: String,
+      ?media_tailor_playback_configurations: Array[
+        {
+          playback_configuration_arn: String
+        }
+      ],
+      ?post_roll_configuration: {
+        duration_seconds: Integer,
+        enabled: bool
+      }
+    ) -> _UpdateAdConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAdConfigurationResponse
+
     interface _UpdateChannelResponse
       include Smithy::Client::_Response[Types::UpdateChannelOutput]
       def channel: () -> Types::Channel?
@@ -392,7 +485,8 @@ module Aws::Ivs
         policy: String,
         maximum_resolution: String
       },
-      ?container_format: String
+      ?container_format: String,
+      ?ad_configuration_arn: String
     ) -> _UpdateChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateChannelResponse
 
     interface _UpdatePlaybackRestrictionPolicyResponse

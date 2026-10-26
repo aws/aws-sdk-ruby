@@ -1,0 +1,25 @@
+module Aws::SimpleDBv2
+  module Errors
+    class ConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidNextTokenException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidParameterCombinationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidParameterValueException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NoSuchDomainException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NoSuchExportException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NumberExportsLimitExceeded < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

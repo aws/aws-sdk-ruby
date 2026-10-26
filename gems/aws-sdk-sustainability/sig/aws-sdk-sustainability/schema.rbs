@@ -1,0 +1,51 @@
+module Aws::Sustainability
+  module Schema
+    include Smithy::Schema::Shapes
+
+    AccessDeniedException: StructureShape
+    Dimension: EnumShape
+    DimensionEntry: StructureShape
+    DimensionEntryList: ListShape
+    DimensionList: ListShape
+    DimensionListMap: MapShape
+    DimensionValue: StringShape
+    DimensionValueList: ListShape
+    DimensionsMap: MapShape
+    Emissions: StructureShape
+    EmissionsMap: MapShape
+    EmissionsType: EnumShape
+    EmissionsTypeList: ListShape
+    EmissionsUnit: EnumShape
+    EstimatedCarbonEmissions: StructureShape
+    EstimatedCarbonEmissionsList: ListShape
+    EstimatedWaterAllocation: StructureShape
+    EstimatedWaterAllocationList: ListShape
+    FilterExpression: StructureShape
+    GetEstimatedCarbonEmissionsDimensionValuesRequest: StructureShape
+    GetEstimatedCarbonEmissionsDimensionValuesResponse: StructureShape
+    GetEstimatedCarbonEmissionsRequest: StructureShape
+    GetEstimatedCarbonEmissionsResponse: StructureShape
+    GetEstimatedWaterAllocationDimensionValuesRequest: StructureShape
+    GetEstimatedWaterAllocationDimensionValuesResponse: StructureShape
+    GetEstimatedWaterAllocationRequest: StructureShape
+    GetEstimatedWaterAllocationResponse: StructureShape
+    GranularityConfiguration: StructureShape
+    InternalServerException: StructureShape
+    MaxResults: IntegerShape
+    ModelVersion: StringShape
+    Month: IntegerShape
+    NextToken: StringShape
+    ThrottlingException: StructureShape
+    TimeGranularity: EnumShape
+    TimePeriod: StructureShape
+    Timestamp: TimestampShape
+    ValidationException: StructureShape
+    WaterAllocation: StructureShape
+    WaterAllocationMap: MapShape
+    WaterAllocationType: EnumShape
+    WaterAllocationTypeList: ListShape
+    WaterAllocationUnit: EnumShape
+
+    AwsSustainabilityApiService: ServiceShape
+  end
+end

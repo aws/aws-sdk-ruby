@@ -199,8 +199,8 @@ module Aws::WorkSpaces
     #   <p>Enables or disables persistent application settings for users during their pool sessions.</p>
     #   @return [String]
     # @!attribute settings_group
-    #   <p>The path prefix for the S3 bucket where users’ persistent application settings are stored. 
-    #            You can allow the same persistent application settings to be used across multiple pools by specifying 
+    #   <p>The path prefix for the S3 bucket where users’ persistent application settings are stored.
+    #            You can allow the same persistent application settings to be used across multiple pools by specifying
     #            the same settings group for each pool.</p>
     #   @return [String]
     class ApplicationSettingsRequest < Struct.new(
@@ -220,8 +220,8 @@ module Aws::WorkSpaces
     #   <p>The path prefix for the S3 bucket where users’ persistent application settings are stored.</p>
     #   @return [String]
     # @!attribute s3_bucket_name
-    #   <p>The S3 bucket where users’ persistent application settings are stored. When persistent 
-    #            application settings are enabled for the first time for an account in an Amazon Web Services Region, 
+    #   <p>The S3 bucket where users’ persistent application settings are stored. When persistent
+    #            application settings are enabled for the first time for an account in an Amazon Web Services Region,
     #            an S3 bucket is created. The bucket is unique to the Amazon Web Services account and the Region.</p>
     #   @return [String]
     class ApplicationSettingsResponse < Struct.new(
@@ -401,12 +401,12 @@ module Aws::WorkSpaces
     #            <p>AvailableUserSessions = ActualUserSessions - ActiveUserSessions</p>
     #   @return [Integer]
     # @!attribute desired_user_sessions
-    #   <p>The total number of sessions slots that are either running or pending. This 
-    #            represents the total number of concurrent streaming sessions your pool can support 
+    #   <p>The total number of sessions slots that are either running or pending. This
+    #            represents the total number of concurrent streaming sessions your pool can support
     #            in a steady state.</p>
     #   @return [Integer]
     # @!attribute actual_user_sessions
-    #   <p>The total number of user sessions that are available for streaming or are currently 
+    #   <p>The total number of user sessions that are available for streaming or are currently
     #            streaming in your pool.</p>
     #            <p>ActualUserSessions = AvailableUserSessions + ActiveUserSessions</p>
     #   @return [Integer]
@@ -448,15 +448,22 @@ module Aws::WorkSpaces
     #            credentials. </p>
     #   @return [String]
     # @!attribute log_upload_enabled
-    #   <p>Specifies whether users can upload diagnostic log files of Amazon WorkSpaces client directly to 
-    #            WorkSpaces to troubleshoot issues when using the WorkSpaces client. 
-    #            When enabled, the log files will be sent to WorkSpaces automatically and will be applied to all 
+    #   <p>Specifies whether users can upload diagnostic log files of Amazon WorkSpaces client directly to
+    #            WorkSpaces to troubleshoot issues when using the WorkSpaces client.
+    #            When enabled, the log files will be sent to WorkSpaces automatically and will be applied to all
     #            users in the specified directory.</p>
+    #   @return [String]
+    # @!attribute client_experience_policy
+    #   <p>The client experience policy that determines which client experience the user sees.
+    #            Administrators can set this policy to control the client experience for users in a directory.
+    #            Valid values include <code>FORCE_CLASSIC</code>, <code>FORCE_UI_2026</code>,
+    #            and <code>USER_CHOICE</code>.</p>
     #   @return [String]
     class ClientProperties < Struct.new(
       nil,
       :reconnect_enabled,
       :log_upload_enabled,
+      :client_experience_policy,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -509,7 +516,7 @@ module Aws::WorkSpaces
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Describes an Amazon Connect client add-in.</p>
+    # <p>Describes an Connect Customer client add-in.</p>
     # @!attribute add_in_id
     #   <p>The client add-in identifier.</p>
     #   @return [String]
@@ -684,7 +691,7 @@ module Aws::WorkSpaces
     #   <p>The name of the client add-in.</p>
     #   @return [String]
     # @!attribute url
-    #   <p>The endpoint URL of the Amazon Connect client add-in.</p>
+    #   <p>The endpoint URL of the Connect Customer client add-in.</p>
     #   @return [String]
     class CreateConnectClientAddInRequest < Struct.new(
       nil,
@@ -887,7 +894,7 @@ module Aws::WorkSpaces
     # @!attribute tags
     #   <p>The tags associated with the bundle.</p>
     #            <note>
-    #               <p>To add tags at the same time when you're creating the bundle, you must create an IAM policy that 
+    #               <p>To add tags at the same time when you're creating the bundle, you must create an IAM policy that
     #               grants your IAM user permissions to use <code>workspaces:CreateTags</code>. </p>
     #            </note>
     #   @return [Array<Types::Tag>]
@@ -926,8 +933,8 @@ module Aws::WorkSpaces
     #   <p>The identifier of the source WorkSpace</p>
     #   @return [String]
     # @!attribute tags
-    #   <p>The tags that you want to add to the new WorkSpace image. 
-    #            To add tags when you're creating the image, you must create an IAM policy that grants 
+    #   <p>The tags that you want to add to the new WorkSpace image.
+    #            To add tags when you're creating the image, you must create an IAM policy that grants
     #            your IAM user permission to use <code>workspaces:CreateTags</code>.</p>
     #   @return [Array<Types::Tag>]
     class CreateWorkspaceImageRequest < Struct.new(
@@ -957,9 +964,9 @@ module Aws::WorkSpaces
     #   <p>The availability status of the image.</p>
     #   @return [String]
     # @!attribute required_tenancy
-    #   <p>Specifies whether the image is running on dedicated hardware. 
-    #            When Bring Your Own License (BYOL) is enabled, this value is set 
-    #            to DEDICATED. For more information, see 
+    #   <p>Specifies whether the image is running on dedicated hardware.
+    #            When Bring Your Own License (BYOL) is enabled, this value is set
+    #            to DEDICATED. For more information, see
     #            <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.htm">
     #               Bring Your Own Windows Desktop Images.</a>.</p>
     #   @return [String]
@@ -1089,7 +1096,7 @@ module Aws::WorkSpaces
     #   <p>Indicates whether data replication is enabled, and if enabled, the type of data replication.</p>
     #   @return [String]
     # @!attribute recovery_snapshot_time
-    #   <p>The date and time at which the last successful snapshot was taken of the 
+    #   <p>The date and time at which the last successful snapshot was taken of the
     #            primary WorkSpace used for replicating data.</p>
     #   @return [Time]
     class DataReplicationSettings < Struct.new(
@@ -1148,7 +1155,7 @@ module Aws::WorkSpaces
     # @!attribute login_message
     #   <p>The login message. Specified as a key value pair, in which the key is a locale and the
     #            value is the localized message for that locale. The only key supported is
-    #            <code>en_US</code>. The HTML tags supported include the following: <code>a, b, blockquote, br, cite, code, dd, dl, dt, div, em, 
+    #            <code>en_US</code>. The HTML tags supported include the following: <code>a, b, blockquote, br, cite, code, dd, dl, dt, div, em,
     #               i, li, ol, p, pre, q, small, span, strike, strong, sub, sup, u, ul</code>.</p>
     #   @return [Hash<String, String>]
     class DefaultClientBrandingAttributes < Struct.new(
@@ -1210,7 +1217,7 @@ module Aws::WorkSpaces
     # @!attribute login_message
     #   <p>The login message. Specified as a key value pair, in which the key is a locale and the
     #            value is the localized message for that locale. The only key supported is
-    #            <code>en_US</code>. The HTML tags supported include the following: <code>a, b, blockquote, br, cite, code, dd, dl, dt, div, em, 
+    #            <code>en_US</code>. The HTML tags supported include the following: <code>a, b, blockquote, br, cite, code, dd, dl, dt, div, em,
     #               i, li, ol, p, pre, q, small, span, strike, strong, sub, sup, u, ul</code>.</p>
     #   @return [Hash<String, String>]
     class DefaultImportClientBrandingAttributes < Struct.new(
@@ -1442,7 +1449,7 @@ module Aws::WorkSpaces
     #   <p>The identifier of the WorkSpace.</p>
     #   @return [String]
     # @!attribute force
-    #   <p>Indicates whether the force flag is applied for the specified WorkSpace. When the force flag is enabled, 
+    #   <p>Indicates whether the force flag is applied for the specified WorkSpace. When the force flag is enabled,
     #            it allows previously failed deployments to be retried.</p>
     #   @return [Boolean]
     class DeployWorkspaceApplicationsRequest < Struct.new(
@@ -1862,6 +1869,12 @@ module Aws::WorkSpaces
     # @!attribute state
     #   <p>The state of the WorkSpace image.</p>
     #   @return [String]
+    # @!attribute state_message
+    #   <p>The state message of the WorkSpace image import workflow.</p>
+    #   @return [String]
+    # @!attribute progress_percentage
+    #   <p>The estimated progress percentage of the WorkSpace image import workflow.</p>
+    #   @return [Integer]
     # @!attribute created
     #   <p>The timestamp when the WorkSpace image import was created.</p>
     #   @return [Time]
@@ -1883,6 +1896,8 @@ module Aws::WorkSpaces
       :image_id,
       :infrastructure_configuration_arn,
       :state,
+      :state_message,
+      :progress_percentage,
       :created,
       :last_updated_time,
       :image_source,
@@ -2010,7 +2025,7 @@ module Aws::WorkSpaces
     #   @return [Array<String>]
     # @!attribute owner
     #   <p>The owner of the bundles. You cannot combine this parameter with any other filter.</p>
-    #            <p>To describe the bundles provided by Amazon Web Services, specify <code>AMAZON</code>. 
+    #            <p>To describe the bundles provided by Amazon Web Services, specify <code>AMAZON</code>.
     #            To describe the bundles that belong to your account, don't specify a value.</p>
     #   @return [String]
     # @!attribute next_token
@@ -2030,7 +2045,7 @@ module Aws::WorkSpaces
     #   <p>Information about the bundles.</p>
     #   @return [Array<Types::WorkspaceBundle>]
     # @!attribute next_token
-    #   <p>The token to use to retrieve the next page of results. This value is null when there are no more 
+    #   <p>The token to use to retrieve the next page of results. This value is null when there are no more
     #            results to return. This token is valid for one day and must be used within that time
     #            frame.</p>
     #   @return [String]
@@ -2256,7 +2271,7 @@ module Aws::WorkSpaces
     #            is 50.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>If you received a <code>NextToken</code> from a previous call that was paginated, 
+    #   <p>If you received a <code>NextToken</code> from a previous call that was paginated,
     #            provide this token to receive the next set of results.</p>
     #   @return [String]
     class DescribeWorkspacesPoolSessionsRequest < Struct.new(
@@ -2274,7 +2289,7 @@ module Aws::WorkSpaces
     #   <p>Describes the pool sessions.</p>
     #   @return [Array<Types::WorkspacesPoolSession>]
     # @!attribute next_token
-    #   <p>If you received a <code>NextToken</code> from a previous call that was paginated, 
+    #   <p>If you received a <code>NextToken</code> from a previous call that was paginated,
     #            provide this token to receive the next set of results.</p>
     #   @return [String]
     class DescribeWorkspacesPoolSessionsResult < Struct.new(
@@ -2316,7 +2331,7 @@ module Aws::WorkSpaces
     #   <p>The maximum number of items to return.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>If you received a <code>NextToken</code> from a previous call that was paginated, 
+    #   <p>If you received a <code>NextToken</code> from a previous call that was paginated,
     #            provide this token to receive the next set of results.</p>
     #   @return [String]
     class DescribeWorkspacesPoolsRequest < Struct.new(
@@ -2334,7 +2349,7 @@ module Aws::WorkSpaces
     #   <p>Information about the WorkSpaces Pools.</p>
     #   @return [Array<Types::WorkspacesPool>]
     # @!attribute next_token
-    #   <p>If you received a <code>NextToken</code> from a previous call that was paginated, 
+    #   <p>If you received a <code>NextToken</code> from a previous call that was paginated,
     #            provide this token to receive the next set of results.</p>
     #   @return [String]
     class DescribeWorkspacesPoolsResult < Struct.new(
@@ -2473,7 +2488,7 @@ module Aws::WorkSpaces
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Describes in-depth details about the error. These details include the 
+    # <p>Describes in-depth details about the error. These details include the
     #          possible causes of the error and troubleshooting information.</p>
     # @!attribute error_code
     #   <p>Indicates the error code returned.</p>
@@ -2597,7 +2612,7 @@ module Aws::WorkSpaces
 
     # <p>Describes the Global Accelerator for WorkSpaces.</p>
     # @!attribute mode
-    #   <p>Indicates if Global Accelerator for WorkSpaces is enabled, disabled, 
+    #   <p>Indicates if Global Accelerator for WorkSpaces is enabled, disabled,
     #            or the same mode as the associated directory.</p>
     #   @return [String]
     # @!attribute preferred_protocol
@@ -2834,12 +2849,12 @@ module Aws::WorkSpaces
     #   @return [String]
     # @!attribute ingestion_process
     #   <p>The ingestion process to be used when importing the image, depending on which protocol
-    #            you want to use for your BYOL Workspace image, either PCoIP, WSP, or 
-    #            bring your own protocol (BYOP). To use DCV, specify a value that ends in 
-    #            <code>_WSP</code>. To use PCoIP, specify a value that does not end in <code>_WSP</code>. 
+    #            you want to use for your BYOL Workspace image, either PCoIP, WSP, or
+    #            bring your own protocol (BYOP). To use DCV, specify a value that ends in
+    #            <code>_WSP</code>. To use PCoIP, specify a value that does not end in <code>_WSP</code>.
     #            To use BYOP, specify a value that ends in <code>_BYOP</code>.</p>
-    #            <p>For non-GPU-enabled bundles (bundles other than Graphics or GraphicsPro), specify 
-    #            <code>BYOL_REGULAR</code>, <code>BYOL_REGULAR_WSP</code>, or <code>BYOL_REGULAR_BYOP</code>, 
+    #            <p>For non-GPU-enabled bundles (bundles other than Graphics or GraphicsPro), specify
+    #            <code>BYOL_REGULAR</code>, <code>BYOL_REGULAR_WSP</code>, or <code>BYOL_REGULAR_BYOP</code>,
     #            depending on the protocol.</p>
     #            <note>
     #               <p>The <code>BYOL_REGULAR_BYOP</code> and <code>BYOL_GRAPHICS_G4DN_BYOP</code> values
@@ -2959,14 +2974,14 @@ module Aws::WorkSpaces
     #             information.</p>
     #          </important>
     # @!attribute logo_url
-    #   <p>The logo. This is the standard-resolution display that has a 1:1 pixel density 
+    #   <p>The logo. This is the standard-resolution display that has a 1:1 pixel density
     #            (or @1x), where one pixel is equal
-    #            to one point. The only image format accepted is a binary data object that is converted from 
+    #            to one point. The only image format accepted is a binary data object that is converted from
     #            a <code>.png</code> file.</p>
     #   @return [String]
     # @!attribute logo2x_url
     #   <p>The @2x version of the logo. This is the higher resolution display that offers a scale
-    #            factor of 2.0 (or @2x). The only image format accepted is a binary data object that is 
+    #            factor of 2.0 (or @2x). The only image format accepted is a binary data object that is
     #            converted from a <code>.png</code> file.</p>
     #            <note>
     #               <p> For more information about iOS image size and resolution, see <a href="https://developer.apple.com/design/human-interface-guidelines/ios/icons-and-images/image-size-and-resolution/">Image Size and Resolution </a> in the <i>Apple Human Interface
@@ -2975,7 +2990,7 @@ module Aws::WorkSpaces
     #   @return [String]
     # @!attribute logo3x_url
     #   <p>The @3x version of the logo. This is the higher resolution display that offers a scale
-    #            factor of 3.0 (or @3x).The only image format accepted is a binary data object that is 
+    #            factor of 3.0 (or @3x).The only image format accepted is a binary data object that is
     #            converted from a <code>.png</code> file.</p>
     #            <note>
     #               <p> For more information about iOS image size and resolution, see <a href="https://developer.apple.com/design/human-interface-guidelines/ios/icons-and-images/image-size-and-resolution/">Image Size and Resolution </a> in the <i>Apple Human Interface
@@ -3020,7 +3035,7 @@ module Aws::WorkSpaces
     # @!attribute login_message
     #   <p>The login message. Specified as a key value pair, in which the key is a locale and the
     #            value is the localized message for that locale. The only key supported is
-    #            <code>en_US</code>. The HTML tags supported include the following: <code>a, b, blockquote, br, cite, code, dd, dl, dt, div, em, 
+    #            <code>en_US</code>. The HTML tags supported include the following: <code>a, b, blockquote, br, cite, code, dd, dl, dt, div, em,
     #               i, li, ol, p, pre, q, small, span, strike, strong, sub, sup, u, ul</code>.</p>
     #   @return [Hash<String, String>]
     class IosClientBrandingAttributes < Struct.new(
@@ -3046,12 +3061,12 @@ module Aws::WorkSpaces
     # @!attribute logo
     #   <p>The logo. This is the
     #            standard-resolution display that has a 1:1 pixel density (or @1x), where one pixel is equal
-    #            to one point. The only image format accepted is a binary data object that is converted 
+    #            to one point. The only image format accepted is a binary data object that is converted
     #            from a <code>.png</code> file.</p>
     #   @return [String]
     # @!attribute logo2x
     #   <p>The @2x version of the logo. This is the higher resolution display that offers a scale
-    #            factor of 2.0 (or @2x). The only image format accepted is a binary data object that is 
+    #            factor of 2.0 (or @2x). The only image format accepted is a binary data object that is
     #            converted from a <code>.png</code> file.</p>
     #            <note>
     #               <p> For more information about iOS image size and resolution, see <a href="https://developer.apple.com/design/human-interface-guidelines/ios/icons-and-images/image-size-and-resolution/">Image Size and Resolution </a> in the <i>Apple Human Interface
@@ -3060,7 +3075,7 @@ module Aws::WorkSpaces
     #   @return [String]
     # @!attribute logo3x
     #   <p>The @3x version of the logo. This is the higher resolution display that offers a scale
-    #            factor of 3.0 (or @3x). The only image format accepted is a binary data object that is 
+    #            factor of 3.0 (or @3x). The only image format accepted is a binary data object that is
     #            converted from a <code>.png</code> file.</p>
     #            <note>
     #               <p> For more information about iOS image size and resolution, see <a href="https://developer.apple.com/design/human-interface-guidelines/ios/icons-and-images/image-size-and-resolution/">Image Size and Resolution </a> in the <i>Apple Human Interface
@@ -3105,7 +3120,7 @@ module Aws::WorkSpaces
     # @!attribute login_message
     #   <p>The login message. Specified as a key value pair, in which the key is a locale and the
     #            value is the localized message for that locale. The only key supported is
-    #            <code>en_US</code>. The HTML tags supported include the following: <code>a, b, blockquote, br, cite, code, dd, dl, dt, div, em, 
+    #            <code>en_US</code>. The HTML tags supported include the following: <code>a, b, blockquote, br, cite, code, dd, dl, dt, div, em,
     #               i, li, ol, p, pre, q, small, span, strike, strong, sub, sup, u, ul</code>.</p>
     #   @return [Hash<String, String>]
     class IosImportClientBrandingAttributes < Struct.new(
@@ -3259,7 +3274,7 @@ module Aws::WorkSpaces
 
     # <p>Describes a WorkSpace modification.</p>
     # @!attribute resource
-    #   <p>The resource.</p>
+    #   <p>The WorkSpace property being modified.</p>
     #   @return [String]
     # @!attribute state
     #   <p>The modification state.</p>
@@ -3553,7 +3568,7 @@ module Aws::WorkSpaces
     #   <p>The private IP address of the elastic network interface that is attached to instances in your VPC.</p>
     #   @return [String]
     # @!attribute eni_id
-    #   <p>The resource identifier of the elastic network interface that is attached to instances in your 
+    #   <p>The resource identifier of the elastic network interface that is attached to instances in your
     #            VPC. All network interfaces have the eni-xxxxxxxx resource identifier.</p>
     #   @return [String]
     class NetworkAccessConfiguration < Struct.new(
@@ -3615,10 +3630,10 @@ module Aws::WorkSpaces
     # <p>Information about the standby WorkSpace.</p>
     # @!attribute user_name
     #   <p>Describes the standby WorkSpace that was created.</p>
-    #            <p>Because this operation is asynchronous, the identifier returned is not immediately 
-    #            available for use with other operations. For example, if you call 
+    #            <p>Because this operation is asynchronous, the identifier returned is not immediately
+    #            available for use with other operations. For example, if you call
     #            <a href="https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaces.html">
-    #               DescribeWorkspaces</a> 
+    #               DescribeWorkspaces</a>
     #            before the WorkSpace is created, the information returned can be incomplete. </p>
     #   @return [String]
     # @!attribute directory_id
@@ -3817,7 +3832,7 @@ module Aws::WorkSpaces
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Describes the related WorkSpace. The related WorkSpace could be a standby WorkSpace or 
+    # <p>Describes the related WorkSpace. The related WorkSpace could be a standby WorkSpace or
     #          primary WorkSpace related to the specified WorkSpace.</p>
     # @!attribute workspace_id
     #   <p>The identifier of the related WorkSpace.</p>
@@ -3986,7 +4001,7 @@ module Aws::WorkSpaces
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Describes the enablement status, user access URL, and relay state parameter name that 
+    # <p>Describes the enablement status, user access URL, and relay state parameter name that
     #          are used for configuring federation with an SAML 2.0 identity provider.</p>
     # @!attribute status
     #   <p>Indicates the status of SAML 2.0 authentication. These statuses include the following.</p>
@@ -3995,27 +4010,27 @@ module Aws::WorkSpaces
     #                  <p>If the setting is <code>DISABLED</code>, end users will be directed to login with their directory credentials.</p>
     #               </li>
     #               <li>
-    #                  <p>If the setting is <code>ENABLED</code>, end users will be directed to login via the user access URL. Users attempting 
-    #                  to connect to WorkSpaces from a client application that does not support SAML 2.0 authentication will not be able to 
+    #                  <p>If the setting is <code>ENABLED</code>, end users will be directed to login via the user access URL. Users attempting
+    #                  to connect to WorkSpaces from a client application that does not support SAML 2.0 authentication will not be able to
     #                  connect.</p>
     #               </li>
     #               <li>
-    #                  <p>If the setting is <code>ENABLED_WITH_DIRECTORY_LOGIN_FALLBACK</code>, end users will be directed to login via the user 
-    #                  access URL on supported client applications, but will not prevent clients that do not support SAML 2.0 authentication 
+    #                  <p>If the setting is <code>ENABLED_WITH_DIRECTORY_LOGIN_FALLBACK</code>, end users will be directed to login via the user
+    #                  access URL on supported client applications, but will not prevent clients that do not support SAML 2.0 authentication
     #                  from connecting as if SAML 2.0 authentication was disabled.</p>
     #               </li>
     #            </ul>
     #   @return [String]
     # @!attribute user_access_url
-    #   <p>The SAML 2.0 identity provider (IdP) user access URL is the URL a user would navigate to in their web browser in 
-    #            order to federate from the IdP and directly access the application, without any SAML 2.0 service provider (SP) 
+    #   <p>The SAML 2.0 identity provider (IdP) user access URL is the URL a user would navigate to in their web browser in
+    #            order to federate from the IdP and directly access the application, without any SAML 2.0 service provider (SP)
     #            bindings.</p>
     #   @return [String]
     # @!attribute relay_state_parameter_name
-    #   <p>The relay state parameter name supported by the SAML 2.0 identity provider (IdP). When the end user is redirected to 
-    #            the user access URL from the WorkSpaces client application, this relay state parameter name is appended as a query 
+    #   <p>The relay state parameter name supported by the SAML 2.0 identity provider (IdP). When the end user is redirected to
+    #            the user access URL from the WorkSpaces client application, this relay state parameter name is appended as a query
     #            parameter to the URL along with the relay state endpoint to return the user to the client application session.</p>
-    #            <p>To use SAML 2.0 authentication with WorkSpaces, the IdP must support IdP-initiated deep linking for the relay state 
+    #            <p>To use SAML 2.0 authentication with WorkSpaces, the IdP must support IdP-initiated deep linking for the relay state
     #            URL. Consult your IdP documentation for more information.</p>
     #   @return [String]
     class SamlProperties < Struct.new(
@@ -4106,7 +4121,7 @@ module Aws::WorkSpaces
     #   <p>Indicates whether data replication is enabled, and if enabled, the type of data replication.</p>
     #   @return [String]
     # @!attribute recovery_snapshot_time
-    #   <p>The date and time at which the last successful snapshot was taken of the 
+    #   <p>The date and time at which the last successful snapshot was taken of the
     #            primary WorkSpace used for replicating data.</p>
     #   @return [Time]
     class StandbyWorkspacesProperties < Struct.new(
@@ -4351,18 +4366,18 @@ module Aws::WorkSpaces
 
     # <p>Describes the timeout settings for a pool of WorkSpaces.</p>
     # @!attribute disconnect_timeout_in_seconds
-    #   <p>Specifies the amount of time, in seconds, that a streaming session remains active after users disconnect. 
-    #            If users try to reconnect to the streaming session after a disconnection or network interruption 
-    #            within the time set, they are connected to their previous session. Otherwise, they are connected 
+    #   <p>Specifies the amount of time, in seconds, that a streaming session remains active after users disconnect.
+    #            If users try to reconnect to the streaming session after a disconnection or network interruption
+    #            within the time set, they are connected to their previous session. Otherwise, they are connected
     #            to a new session with a new streaming instance.</p>
     #   @return [Integer]
     # @!attribute idle_disconnect_timeout_in_seconds
     #   <p>The amount of time in seconds a connection will stay active while idle.</p>
     #   @return [Integer]
     # @!attribute max_user_duration_in_seconds
-    #   <p>Specifies the maximum amount of time, in seconds, that a streaming session can remain active. 
-    #            If users are still connected to a streaming instance five minutes before this limit is reached, 
-    #            they are prompted to save any open documents before being disconnected. After this time elapses, 
+    #   <p>Specifies the maximum amount of time, in seconds, that a streaming session can remain active.
+    #            If users are still connected to a streaming instance five minutes before this limit is reached,
+    #            they are prompted to save any open documents before being disconnected. After this time elapses,
     #            the instance is terminated and replaced by a new instance.</p>
     #   @return [Integer]
     class TimeoutSettings < Struct.new(
@@ -4375,8 +4390,8 @@ module Aws::WorkSpaces
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The configuration of this network is not supported for this operation, or your network configuration 
-    #          conflicts with the Amazon WorkSpaces management network IP range. For more information, see 
+    # <p>The configuration of this network is not supported for this operation, or your network configuration
+    #          conflicts with the Amazon WorkSpaces management network IP range. For more information, see
     #          <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/amazon-workspaces-vpc.html">
     #             Configure a VPC for Amazon WorkSpaces</a>.</p>
     # @!attribute message
@@ -4389,8 +4404,8 @@ module Aws::WorkSpaces
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The configuration of this WorkSpace is not supported for this operation. For more information, see  
-    #          <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/required-service-components.html">Required 
+    # <p>The configuration of this WorkSpace is not supported for this operation. For more information, see
+    #          <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/required-service-components.html">Required
     #             Configuration and Service Components for WorkSpaces </a>.</p>
     # @!attribute message
     #   @return [String]
@@ -4412,7 +4427,7 @@ module Aws::WorkSpaces
     #   <p>The name of the client add-in.</p>
     #   @return [String]
     # @!attribute url
-    #   <p>The endpoint URL of the Amazon Connect client add-in.</p>
+    #   <p>The endpoint URL of the Connect Customer client add-in.</p>
     #   @return [String]
     class UpdateConnectClientAddInRequest < Struct.new(
       nil,
@@ -4633,7 +4648,7 @@ module Aws::WorkSpaces
       include ::Smithy::Schema::Structure
     end
 
-    # <p>You either haven't provided a <code>TargetAccountId</code> or 
+    # <p>You either haven't provided a <code>TargetAccountId</code> or
     #          are using the same value for <code>TargetAccountId</code> and <code>SourceAccountId</code>.</p>
     # @!attribute message
     #   @return [String]
@@ -4713,6 +4728,9 @@ module Aws::WorkSpaces
     #   @return [String]
     # @!attribute ip_address
     #   <p>The IP address of the WorkSpace.</p>
+    #   @return [String]
+    # @!attribute ipv6_address
+    #   <p>The IPv6 address of the WorkSpace.</p>
     #   @return [String]
     # @!attribute state
     #   <p>The operational state of the WorkSpace.</p>
@@ -4847,6 +4865,7 @@ module Aws::WorkSpaces
       :directory_id,
       :user_name,
       :ip_address,
+      :ipv6_address,
       :state,
       :bundle_id,
       :subnet_id,
@@ -4942,7 +4961,7 @@ module Aws::WorkSpaces
     #   <p>The size of the user volume.</p>
     #   @return [Types::UserStorage]
     # @!attribute compute_type
-    #   <p>The compute type of the bundle. For more information, see 
+    #   <p>The compute type of the bundle. For more information, see
     #            <a href="http://aws.amazon.com/workspaces/details/#Amazon_WorkSpaces_Bundles">Amazon WorkSpaces Bundles</a>.</p>
     #   @return [Types::ComputeType]
     # @!attribute last_updated_time
@@ -5074,6 +5093,9 @@ module Aws::WorkSpaces
     # @!attribute dns_ip_addresses
     #   <p>The IP addresses of the DNS servers for the directory.</p>
     #   @return [Array<String>]
+    # @!attribute dns_ipv6_addresses
+    #   <p>The IPv6 addresses of the DNS servers for the directory.</p>
+    #   @return [Array<String>]
     # @!attribute customer_user_name
     #   <p>The user name for the service account.</p>
     #   @return [String]
@@ -5113,7 +5135,7 @@ module Aws::WorkSpaces
     #   <p>The default self-service permissions for WorkSpaces in the directory.</p>
     #   @return [Types::SelfservicePermissions]
     # @!attribute saml_properties
-    #   <p>Describes the enablement status, user access URL, and relay state parameter name that are used for configuring 
+    #   <p>Describes the enablement status, user access URL, and relay state parameter name that are used for configuring
     #            federation with an SAML 2.0 identity provider.</p>
     #   @return [Types::SamlProperties]
     # @!attribute certificate_based_auth_properties
@@ -5159,6 +5181,7 @@ module Aws::WorkSpaces
       :registration_code,
       :subnet_ids,
       :dns_ip_addresses,
+      :dns_ipv6_addresses,
       :customer_user_name,
       :iam_role_id,
       :directory_type,
@@ -5225,7 +5248,7 @@ module Aws::WorkSpaces
     #   <p>The updates (if any) that are available for the specified image.</p>
     #   @return [Types::UpdateResult]
     # @!attribute error_details
-    #   <p>Additional details of the error returned for the image, including the 
+    #   <p>Additional details of the error returned for the image, including the
     #            possible causes of the errors and troubleshooting information.</p>
     #   @return [Array<Types::ErrorDetails>]
     class WorkspaceImage < Struct.new(
@@ -5279,7 +5302,7 @@ module Aws::WorkSpaces
     #            Bundles</a>.</p>
     #   @return [String]
     # @!attribute protocols
-    #   <p>The protocol. For more information, see 
+    #   <p>The protocol. For more information, see
     #            <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/amazon-workspaces-protocols.html">
     #               Protocols for Amazon WorkSpaces</a>.</p>
     #            <note>
@@ -5291,8 +5314,8 @@ module Aws::WorkSpaces
     #                     <p>The <code>Protocols</code> property is case sensitive. Ensure you use <code>PCOIP</code> or <code>DCV</code> (formerly WSP).</p>
     #                  </li>
     #                  <li>
-    #                     <p>Unavailable for Windows 7 WorkSpaces and WorkSpaces using GPU-based bundles 
-    #                  (Graphics, GraphicsPro, Graphics.g4dn, and GraphicsPro.g4dn).</p>
+    #                     <p>Unavailable for Windows 7 WorkSpaces and WorkSpaces using GPU-based bundles
+    #                  (Graphics, GraphicsPro, Graphics.g4dn, GraphicsPro.g4dn, Graphics.g6, and Graphics.g7).</p>
     #                  </li>
     #               </ul>
     #            </note>
@@ -5303,6 +5326,11 @@ module Aws::WorkSpaces
     # @!attribute global_accelerator
     #   <p>Indicates the Global Accelerator properties.</p>
     #   @return [Types::GlobalAcceleratorForWorkSpace]
+    # @!attribute nested_virtualization_enabled
+    #   <p>Specifies whether nested virtualization is enabled for the WorkSpace.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/nested-virtualization.html">Nested virtualization
+    #            for Amazon WorkSpaces</a>.</p>
+    #   @return [Boolean]
     class WorkspaceProperties < Struct.new(
       nil,
       :running_mode,
@@ -5313,6 +5341,7 @@ module Aws::WorkSpaces
       :protocols,
       :operating_system_name,
       :global_accelerator,
+      :nested_virtualization_enabled,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5356,6 +5385,9 @@ module Aws::WorkSpaces
     #               for user-assigned WorkSpaces.</p>
     #            </note>
     #   @return [String]
+    # @!attribute ipv6_address
+    #   <p>The IPv6 address for the WorkSpace.</p>
+    #   @return [String]
     class WorkspaceRequest < Struct.new(
       nil,
       :directory_id,
@@ -5367,6 +5399,7 @@ module Aws::WorkSpaces
       :workspace_properties,
       :tags,
       :workspace_name,
+      :ipv6_address,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5479,9 +5512,9 @@ module Aws::WorkSpaces
     #   <p>The persistent application settings for users of the pool.</p>
     #   @return [Types::ApplicationSettingsResponse]
     # @!attribute timeout_settings
-    #   <p>The amount of time that a pool session remains active after users disconnect. 
-    #            If they try to reconnect to the pool session after a disconnection or network interruption 
-    #            within this time interval, they are connected to their previous session. 
+    #   <p>The amount of time that a pool session remains active after users disconnect.
+    #            If they try to reconnect to the pool session after a disconnection or network interruption
+    #            within this time interval, they are connected to their previous session.
     #            Otherwise, they are connected to a new session with a new pool instance.</p>
     #   @return [Types::TimeoutSettings]
     # @!attribute running_mode
@@ -5530,7 +5563,7 @@ module Aws::WorkSpaces
 
     # <p>Describes a pool session.</p>
     # @!attribute authentication_type
-    #   <p>The authentication method. The user is authenticated using a 
+    #   <p>The authentication method. The user is authenticated using a
     #            WorkSpaces Pools URL (API) or SAML 2.0 federation (SAML).</p>
     #   @return [String]
     # @!attribute connection_state

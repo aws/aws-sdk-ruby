@@ -142,6 +142,95 @@ module Aws::EKS
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Configuration settings for an ACK (Amazon Web Services Controllers for Kubernetes) capability. This includes whether controllers can resolve cross-namespace resource references and which ACK service controllers are disabled.</p>
+    # @!attribute enable_cross_namespace
+    #   <p>Specifies whether ACK controllers resolve resource references to resources in a different Kubernetes namespace. Set this value to <code>true</code> to allow references to resolve to resources in another namespace. If you don't specify this value, or you omit the <code>ack</code> configuration entirely, the capability is created with this value set to <code>false</code> and references must remain within the same namespace.</p>
+    #   @return [Boolean]
+    # @!attribute disabled_services
+    #   <p>A list of ACK service names whose controllers are turned off for this capability, for example <code>s3</code>, <code>ec2</code>, and <code>iam</code>. Resources of a disabled service aren't reconciled until you re-enable the service. To keep all services enabled, omit this field or specify an empty list. An unrecognized service name is accepted and stored but turns nothing off, and <code>DescribeCapability</code> returns the list exactly as you supplied it. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/create-ack-capability.html#ack-configuration-options">ACK capability configuration options</a> in the <i>Amazon EKS User Guide</i>.</p>
+    #   @return [Array<String>]
+    class AckConfigRequest < Struct.new(
+      nil,
+      :enable_cross_namespace,
+      :disabled_services,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The response object containing configuration details for an ACK (Amazon Web Services Controllers for Kubernetes) capability.</p>
+    # @!attribute enable_cross_namespace
+    #   <p>Indicates whether ACK controllers resolve resource references to resources in a different Kubernetes namespace. This value reflects the setting that's in effect, and is <code>false</code> if you never specified a value. Capabilities that were using cross-namespace references before this setting became available have this value set to <code>true</code>, so their behavior is unchanged.</p>
+    #   @return [Boolean]
+    # @!attribute disabled_services
+    #   <p>The list of ACK service names whose controllers are turned off for this capability. Existing custom resource definitions remain installed, and resources of a disabled service aren't reconciled until the service is re-enabled.</p>
+    #   @return [Array<String>]
+    class AckConfigResponse < Struct.new(
+      nil,
+      :enable_cross_namespace,
+      :disabled_services,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute cluster_name
+    #   <p>The name of your cluster.</p>
+    #   @return [String]
+    # @!attribute certificate_authority_id
+    #   <p>The ID of the certificate authority to activate as the cluster's signing certificate
+    #               authority. This certificate authority must already exist on the cluster and have a
+    #                   <code>distributionStatus</code> of <code>COMPLETE</code>.</p>
+    #   @return [String]
+    # @!attribute client_request_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure
+    #   the idempotency of the request.</p>
+    #   @return [String]
+    class ActivateCertificateAuthorityRequest < Struct.new(
+      nil,
+      :cluster_name,
+      :certificate_authority_id,
+      :client_request_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute update
+    #   <p>An object representing the asynchronous update that promotes the certificate authority
+    #               to be the cluster's signer.</p>
+    #   @return [Types::Update]
+    # @!attribute certificate_authority
+    #   <p>Summary information about the certificate authority that is being activated.</p>
+    #   @return [Types::CertificateAuthoritySummary]
+    class ActivateCertificateAuthorityResponse < Struct.new(
+      nil,
+      :update,
+      :certificate_authority,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Identifies the certificate authority that is currently signing certificates for the
+    #             cluster.</p>
+    # @!attribute id
+    #   <p>The unique identifier of the certificate authority that is currently signing
+    #               certificates for the cluster.</p>
+    #   @return [String]
+    # @!attribute activated_by
+    #   <p>The entity that activated the current signing certificate authority, either
+    #                   <code>CUSTOMER</code> or <code>EKS</code>.</p>
+    #   @return [String]
+    class ActiveCertificateAuthority < Struct.new(
+      nil,
+      :id,
+      :activated_by,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>An Amazon EKS add-on. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/eks-add-ons.html">Amazon EKS add-ons</a> in the
     #             <i>Amazon EKS User Guide</i>.</p>
     # @!attribute addon_name
@@ -406,6 +495,168 @@ module Aws::EKS
       end
     end
 
+    # <p>A constraint specifying the allowed values for a parameter.</p>
+    # @!attribute allowed_values
+    #   <p>The list of allowed values.</p>
+    #   @return [Array<String>]
+    class AllowedValuesConstraint < Struct.new(
+      nil,
+      :allowed_values,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration for integrating Argo CD with IAM Identity CenterIAM; Identity Center. This allows you to use your organization's identity provider for authentication to Argo CD.</p>
+    # @!attribute idc_instance_arn
+    #   <p>The Amazon Resource Name (ARN) of the IAM Identity CenterIAM; Identity Center instance to use for authentication.</p>
+    #   @return [String]
+    # @!attribute idc_region
+    #   <p>The Region where your IAM Identity CenterIAM; Identity Center instance is located.</p>
+    #   @return [String]
+    class ArgoCdAwsIdcConfigRequest < Struct.new(
+      nil,
+      :idc_instance_arn,
+      :idc_region,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The response object containing IAM Identity CenterIAM; Identity Center configuration details for an Argo CD capability.</p>
+    # @!attribute idc_instance_arn
+    #   <p>The Amazon Resource Name (ARN) of the IAM Identity CenterIAM; Identity Center instance used for authentication.</p>
+    #   @return [String]
+    # @!attribute idc_region
+    #   <p>The Region where the IAM Identity CenterIAM; Identity Center instance is located.</p>
+    #   @return [String]
+    # @!attribute idc_managed_application_arn
+    #   <p>The Amazon Resource Name (ARN) of the managed application created in IAM Identity CenterIAM; Identity Center for this Argo CD capability. This application is automatically created and managed by Amazon EKS.</p>
+    #   @return [String]
+    class ArgoCdAwsIdcConfigResponse < Struct.new(
+      nil,
+      :idc_instance_arn,
+      :idc_region,
+      :idc_managed_application_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration settings for an Argo CD capability. This includes the Kubernetes namespace, IAM Identity CenterIAM; Identity Center integration, RBAC role mappings, and network access configuration.</p>
+    # @!attribute namespace
+    #   <p>The Kubernetes namespace where Argo CD resources will be created. If not specified, the default namespace is used.</p>
+    #   @return [String]
+    # @!attribute aws_idc
+    #   <p>Configuration for IAM Identity CenterIAM; Identity Center integration. When configured, users can authenticate to Argo CD using their IAM Identity CenterIAM; Identity Center credentials.</p>
+    #   @return [Types::ArgoCdAwsIdcConfigRequest]
+    # @!attribute rbac_role_mappings
+    #   <p>A list of role mappings that define which IAM Identity CenterIAM; Identity Center users or groups have which Argo CD roles. Each mapping associates an Argo CD role (<code>ADMIN</code>, <code>EDITOR</code>, or <code>VIEWER</code>) with one or more IAM Identity CenterIAM; Identity Center identities.</p>
+    #   @return [Array<Types::ArgoCdRoleMapping>]
+    # @!attribute network_access
+    #   <p>Configuration for network access to the Argo CD capability's managed API server endpoint. By default, the Argo CD server is accessible via a public endpoint. You can optionally specify one or more VPC endpoint IDs to enable private connectivity from your VPCs. When VPC endpoints are configured, public access is blocked and the Argo CD server is only accessible through the specified VPC endpoints.</p>
+    #   @return [Types::ArgoCdNetworkAccessConfigRequest]
+    # @!attribute endpoint_prefix
+    #   <p>An optional prefix used to construct the hostname of the Argo CD server endpoint. If not specified, Amazon EKS automatically generates the endpoint. This value can't be changed after the capability is created.</p>
+    #   @return [String]
+    class ArgoCdConfigRequest < Struct.new(
+      nil,
+      :namespace,
+      :aws_idc,
+      :rbac_role_mappings,
+      :network_access,
+      :endpoint_prefix,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The response object containing Argo CD configuration details, including the server URL that you use to access the Argo CD web interface and API.</p>
+    # @!attribute namespace
+    #   <p>The Kubernetes namespace where Argo CD resources are monitored by your Argo CD Capability.</p>
+    #   @return [String]
+    # @!attribute aws_idc
+    #   <p>The IAM Identity CenterIAM; Identity Center integration configuration.</p>
+    #   @return [Types::ArgoCdAwsIdcConfigResponse]
+    # @!attribute rbac_role_mappings
+    #   <p>The list of role mappings that define which IAM Identity CenterIAM; Identity Center users or groups have which Argo CD roles.</p>
+    #   @return [Array<Types::ArgoCdRoleMapping>]
+    # @!attribute network_access
+    #   <p>The network access configuration for the Argo CD capability's managed API server endpoint. If VPC endpoint IDs are specified, public access is blocked and the Argo CD server is only accessible through the specified VPC endpoints.</p>
+    #   @return [Types::ArgoCdNetworkAccessConfigResponse]
+    # @!attribute server_url
+    #   <p>The URL of the Argo CD server. Use this URL to access the Argo CD web interface and API.</p>
+    #   @return [String]
+    # @!attribute endpoint_prefix
+    #   <p>The prefix that was configured for the hostname of the Argo CD server endpoint when the capability was created.</p>
+    #   @return [String]
+    class ArgoCdConfigResponse < Struct.new(
+      nil,
+      :namespace,
+      :aws_idc,
+      :rbac_role_mappings,
+      :network_access,
+      :server_url,
+      :endpoint_prefix,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration for network access to the Argo CD capability's managed API server endpoint. When VPC endpoint IDs are specified, public access is blocked and the Argo CD server is only accessible through the specified VPC endpoints.</p>
+    # @!attribute vpce_ids
+    #   <p>A list of VPC endpoint IDs to associate with the managed Argo CD API server endpoint. Each VPC endpoint provides private connectivity from a specific VPC to the Argo CD server. You can specify multiple VPC endpoint IDs to enable access from multiple VPCs.</p>
+    #   @return [Array<String>]
+    class ArgoCdNetworkAccessConfigRequest < Struct.new(
+      nil,
+      :vpce_ids,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The response object containing network access configuration for the Argo CD capability's managed API server endpoint. If VPC endpoint IDs are present, public access is blocked and the Argo CD server is only accessible through the specified VPC endpoints.</p>
+    # @!attribute vpce_ids
+    #   <p>The list of VPC endpoint IDs associated with the managed Argo CD API server endpoint. Each VPC endpoint provides private connectivity from a specific VPC to the Argo CD server.</p>
+    #   @return [Array<String>]
+    class ArgoCdNetworkAccessConfigResponse < Struct.new(
+      nil,
+      :vpce_ids,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A mapping between an Argo CD role and IAM Identity CenterIAM; Identity Center identities. This defines which users or groups have specific permissions in Argo CD.</p>
+    # @!attribute role
+    #   <p>The Argo CD role to assign. Valid values are:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>ADMIN</code> – Full administrative access to Argo CD.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>EDITOR</code> – Edit access to Argo CD resources.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>VIEWER</code> – Read-only access to Argo CD resources.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute identities
+    #   <p>A list of IAM Identity CenterIAM; Identity Center identities (users or groups) that should be assigned this Argo CD role.</p>
+    #   @return [Array<Types::SsoIdentity>]
+    class ArgoCdRoleMapping < Struct.new(
+      nil,
+      :role,
+      :identities,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute cluster_name
     #   <p>The name of your cluster.</p>
     #   @return [String]
@@ -593,6 +844,273 @@ module Aws::EKS
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute name
+    #   <p>The name of the Amazon EKS cluster associated with the update.</p>
+    #   @return [String]
+    # @!attribute update_id
+    #   <p>The ID of the update to cancel.</p>
+    #   @return [String]
+    # @!attribute client_request_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure
+    #   the idempotency of the request.</p>
+    #   @return [String]
+    class CancelUpdateRequest < Struct.new(
+      nil,
+      :name,
+      :update_id,
+      :client_request_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute update
+    #   <p>The full description of the specified update.</p>
+    #   @return [Types::Update]
+    class CancelUpdateResponse < Struct.new(
+      nil,
+      :update,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains information about the latest cancellation of an update to an Amazon EKS cluster.</p>
+    # @!attribute status
+    #   <p>The current status of the cancellation. Valid values are <code>InProgress</code>,
+    #               <code>Failed</code>, and <code>Successful</code>.</p>
+    #   @return [String]
+    # @!attribute reason
+    #   <p>A message providing additional details about the cancellation, such as the reason for
+    #               the cancellation or failure details.</p>
+    #   @return [String]
+    class Cancellation < Struct.new(
+      nil,
+      :status,
+      :reason,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>An object representing a managed capability in an Amazon EKS cluster. This includes all configuration, status, and health information for the capability.</p>
+    # @!attribute capability_name
+    #   <p>The unique name of the capability within the cluster.</p>
+    #   @return [String]
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the capability.</p>
+    #   @return [String]
+    # @!attribute cluster_name
+    #   <p>The name of the Amazon EKS cluster that contains this capability.</p>
+    #   @return [String]
+    # @!attribute type
+    #   <p>The type of capability. Valid values are <code>ACK</code>, <code>ARGOCD</code>, or <code>KRO</code>.</p>
+    #   @return [String]
+    # @!attribute role_arn
+    #   <p>The Amazon Resource Name (ARN) of the IAM role that the capability uses to interact with Amazon Web Services services.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the capability. Valid values include:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>CREATING</code> – The capability is being created.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ACTIVE</code> – The capability is running and available.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>UPDATING</code> – The capability is being updated.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>DELETING</code> – The capability is being deleted.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>CREATE_FAILED</code> – The capability creation failed.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>UPDATE_FAILED</code> – The capability update failed.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>DELETE_FAILED</code> – The capability deletion failed.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute version
+    #   <p>The version of the capability software that is currently running.</p>
+    #   @return [String]
+    # @!attribute configuration
+    #   <p>The configuration settings for the capability. The structure varies depending on the capability type.</p>
+    #   @return [Types::CapabilityConfigurationResponse]
+    # @!attribute tags
+    #   <p>The metadata that you apply to a resource to help you categorize and organize them.
+    #               Each tag consists of a key and an optional value. You define them.</p>
+    #            <p>The following basic restrictions apply to tags:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>Maximum number of tags per resource – 50</p>
+    #               </li>
+    #               <li>
+    #                  <p>For each resource, each tag key must be unique, and each tag key can have only
+    #                       one value.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Maximum key length – 128 Unicode characters in UTF-8</p>
+    #               </li>
+    #               <li>
+    #                  <p>Maximum value length – 256 Unicode characters in UTF-8</p>
+    #               </li>
+    #               <li>
+    #                  <p>If your tagging schema is used across multiple services and resources,
+    #                       remember that other services may have restrictions on allowed characters.
+    #                       Generally allowed characters are: letters, numbers, and spaces representable in
+    #                       UTF-8, and the following characters: + - = . _ : / @.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Tag keys and values are case-sensitive.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Do not use <code>aws:</code>, <code>AWS:</code>, or any upper or lowercase
+    #                       combination of such as a prefix for either keys or values as it is reserved for
+    #                       Amazon Web Services use. You cannot edit or delete tag keys or values with this prefix. Tags with
+    #                       this prefix do not count against your tags per resource limit.</p>
+    #               </li>
+    #            </ul>
+    #   @return [Hash<String, String>]
+    # @!attribute health
+    #   <p>Health information for the capability, including any issues that may be affecting its operation.</p>
+    #   @return [Types::CapabilityHealth]
+    # @!attribute created_at
+    #   <p>The Unix epoch timestamp in seconds for when the capability was created.</p>
+    #   @return [Time]
+    # @!attribute modified_at
+    #   <p>The Unix epoch timestamp in seconds for when the capability was last modified.</p>
+    #   @return [Time]
+    # @!attribute delete_propagation_policy
+    #   <p>The delete propagation policy for the capability. Currently, the only supported value is <code>RETAIN</code>, which keeps all resources managed by the capability when the capability is deleted.</p>
+    #   @return [String]
+    class Capability < Struct.new(
+      nil,
+      :capability_name,
+      :arn,
+      :cluster_name,
+      :type,
+      :role_arn,
+      :status,
+      :version,
+      :configuration,
+      :tags,
+      :health,
+      :created_at,
+      :modified_at,
+      :delete_propagation_policy,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration settings for a capability. The structure of this object varies depending on the capability type.</p>
+    # @!attribute argo_cd
+    #   <p>Configuration settings specific to Argo CD capabilities. This field is only used when creating or updating an Argo CD capability.</p>
+    #   @return [Types::ArgoCdConfigRequest]
+    # @!attribute ack
+    #   <p>Configuration settings specific to ACK (Amazon Web Services Controllers for Kubernetes) capabilities. This field is only used when creating or updating an ACK capability.</p>
+    #   @return [Types::AckConfigRequest]
+    class CapabilityConfigurationRequest < Struct.new(
+      nil,
+      :argo_cd,
+      :ack,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The response object containing capability configuration details.</p>
+    # @!attribute argo_cd
+    #   <p>Configuration settings for an Argo CD capability, including the server URL and other Argo CD-specific settings.</p>
+    #   @return [Types::ArgoCdConfigResponse]
+    # @!attribute ack
+    #   <p>Configuration settings for an ACK (Amazon Web Services Controllers for Kubernetes) capability, including the cross-namespace reference setting and the list of disabled services.</p>
+    #   @return [Types::AckConfigResponse]
+    class CapabilityConfigurationResponse < Struct.new(
+      nil,
+      :argo_cd,
+      :ack,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Health information for a capability, including any issues that may be affecting its operation.</p>
+    # @!attribute issues
+    #   <p>A list of issues affecting the capability. If this list is empty, the capability is healthy.</p>
+    #   @return [Array<Types::CapabilityIssue>]
+    class CapabilityHealth < Struct.new(
+      nil,
+      :issues,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>An issue affecting a capability's health or operation.</p>
+    # @!attribute code
+    #   <p>A code identifying the type of issue. This can be used to programmatically handle specific issue types.</p>
+    #   @return [String]
+    # @!attribute message
+    #   <p>A human-readable message describing the issue and potential remediation steps.</p>
+    #   @return [String]
+    class CapabilityIssue < Struct.new(
+      nil,
+      :code,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A summary of a capability, containing basic information without the full configuration details. This is returned by the <code>ListCapabilities</code> operation.</p>
+    # @!attribute capability_name
+    #   <p>The unique name of the capability within the cluster.</p>
+    #   @return [String]
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the capability.</p>
+    #   @return [String]
+    # @!attribute type
+    #   <p>The type of capability. Valid values are <code>ACK</code>, <code>ARGOCD</code>, or <code>KRO</code>.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the capability.</p>
+    #   @return [String]
+    # @!attribute version
+    #   <p>The version of the capability software that is currently running.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The Unix epoch timestamp in seconds for when the capability was created.</p>
+    #   @return [Time]
+    # @!attribute modified_at
+    #   <p>The Unix epoch timestamp in seconds for when the capability was last modified.</p>
+    #   @return [Time]
+    class CapabilitySummary < Struct.new(
+      nil,
+      :capability_name,
+      :arn,
+      :type,
+      :status,
+      :version,
+      :created_at,
+      :modified_at,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>An object representing the <code>certificate-authority-data</code> for your
     #             cluster.</p>
     # @!attribute data
@@ -600,9 +1118,168 @@ module Aws::EKS
     #               this to the <code>certificate-authority-data</code> section of the
     #                   <code>kubeconfig</code> file for your cluster.</p>
     #   @return [String]
+    # @!attribute active
+    #   <p>An object identifying the certificate authority that is currently signing certificates
+    #               for the cluster.</p>
+    #   @return [Types::ActiveCertificateAuthority]
     class Certificate < Struct.new(
       nil,
       :data,
+      :active,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>An object representing a certificate authority (CA) for an Amazon EKS cluster.</p>
+    # @!attribute id
+    #   <p>The unique identifier of the certificate authority.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The Unix epoch timestamp in seconds for when the certificate authority was created.</p>
+    #   @return [Time]
+    # @!attribute created_by
+    #   <p>The entity that created the certificate authority. Certificate authorities that you
+    #               create are <code>CUSTOMER</code>; those that Amazon EKS provisions on your behalf, such as a
+    #               cluster's initial certificate authority, are <code>EKS</code>.</p>
+    #   @return [String]
+    # @!attribute activated_at
+    #   <p>The Unix epoch timestamp in seconds for when the certificate authority was last
+    #               activated as the cluster's signer. This value is absent if the certificate authority has
+    #               never been activated.</p>
+    #   @return [Time]
+    # @!attribute activated_by
+    #   <p>The entity that most recently activated the certificate authority. A value of
+    #                   <code>EKS</code> indicates that Amazon EKS activated it automatically; <code>CUSTOMER</code>
+    #               indicates that you activated it.</p>
+    #   @return [String]
+    # @!attribute signing_status
+    #   <p>The signing status of the certificate authority. <code>IN_USE</code> means the
+    #               certificate authority is currently signing certificates for the cluster,
+    #                   <code>ACTIVATING</code> means it's being promoted to the signer, and
+    #                   <code>NOT_USED</code> means it's trusted by the cluster (for example, a successor CA
+    #               during a rotation, or a retired outgoing CA) but isn't the signer.</p>
+    #   @return [String]
+    # @!attribute distribution_status
+    #   <p>The distribution status of the certificate authority, which tracks whether Amazon EKS has
+    #               distributed its trust to the Amazon Web Services managed components in your cluster (the control plane,
+    #               Amazon EKS Auto Mode instances, and Amazon Web Services Fargate nodes). Valid values are
+    #                   <code>IN_PROGRESS</code>, <code>COMPLETE</code>, <code>FAILED</code>, and
+    #                   <code>DELETING</code>. A successor CA can only be activated after its distribution
+    #               status is <code>COMPLETE</code>.</p>
+    #   @return [String]
+    # @!attribute validity
+    #   <p>The validity period of the certificate authority's certificate.</p>
+    #   @return [Types::CertificateAuthorityValidity]
+    # @!attribute scheduled_events
+    #   <p>The scheduled auto-activation events for the certificate authority, computed from its
+    #               validity period.</p>
+    #   @return [Types::CertificateAuthorityScheduledEvents]
+    # @!attribute rollback_available
+    #   <p>Indicates whether CA rollback is still available for this certificate authority. After
+    #               you activate a successor CA, rollback lets you revert to the outgoing CA for a limited
+    #               period while you finish updating any worker nodes or clients that were missed.</p>
+    #   @return [Boolean]
+    # @!attribute data
+    #   <p>The Base64-encoded public certificate of the certificate authority.</p>
+    #   @return [String]
+    class CertificateAuthority < Struct.new(
+      nil,
+      :id,
+      :created_at,
+      :created_by,
+      :activated_at,
+      :activated_by,
+      :signing_status,
+      :distribution_status,
+      :validity,
+      :scheduled_events,
+      :rollback_available,
+      :data,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The scheduled events during which Amazon EKS may automatically activate a certificate
+    #             authority, computed from its validity period. These events help ensure that a cluster's
+    #             signing certificate authority is rotated before its certificate expires.</p>
+    # @!attribute first_auto_activation
+    #   <p>The earliest Unix epoch timestamp in seconds at which Amazon EKS may automatically activate
+    #               this certificate authority.</p>
+    #   @return [Time]
+    # @!attribute final_auto_activation
+    #   <p>The Unix epoch timestamp in seconds by which Amazon EKS will automatically activate this
+    #               certificate authority if you haven't already activated it.</p>
+    #   @return [Time]
+    class CertificateAuthorityScheduledEvents < Struct.new(
+      nil,
+      :first_auto_activation,
+      :final_auto_activation,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Summary information about a certificate authority (CA) for an Amazon EKS cluster, returned by
+    #                 <a href="https://docs.aws.amazon.com/eks/latest/APIReference/API_ListCertificateAuthorities.html">
+    #                <code>ListCertificateAuthorities</code>
+    #             </a> and the certificate-authority write
+    #             operations.</p>
+    # @!attribute id
+    #   <p>The unique identifier of the certificate authority.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The Unix epoch timestamp in seconds for when the certificate authority was created.</p>
+    #   @return [Time]
+    # @!attribute created_by
+    #   <p>The entity that created the certificate authority, either <code>CUSTOMER</code> or
+    #                   <code>EKS</code>.</p>
+    #   @return [String]
+    # @!attribute activated_at
+    #   <p>The Unix epoch timestamp in seconds for when the certificate authority was last
+    #               activated. This value is absent if the certificate authority has never been
+    #               activated.</p>
+    #   @return [Time]
+    # @!attribute activated_by
+    #   <p>The entity that most recently activated the certificate authority, either
+    #                   <code>CUSTOMER</code> or <code>EKS</code>.</p>
+    #   @return [String]
+    # @!attribute signing_status
+    #   <p>The signing status of the certificate authority: <code>IN_USE</code>,
+    #                   <code>ACTIVATING</code>, or <code>NOT_USED</code>.</p>
+    #   @return [String]
+    # @!attribute distribution_status
+    #   <p>The distribution status of the certificate authority: <code>IN_PROGRESS</code>,
+    #                   <code>COMPLETE</code>, <code>FAILED</code>, or <code>DELETING</code>.</p>
+    #   @return [String]
+    class CertificateAuthoritySummary < Struct.new(
+      nil,
+      :id,
+      :created_at,
+      :created_by,
+      :activated_at,
+      :activated_by,
+      :signing_status,
+      :distribution_status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The validity period of a certificate authority's certificate.</p>
+    # @!attribute not_before
+    #   <p>The Unix epoch timestamp in seconds for the start of the certificate authority's
+    #               validity period.</p>
+    #   @return [Time]
+    # @!attribute not_after
+    #   <p>The Unix epoch timestamp in seconds for the end of the certificate authority's validity
+    #               period.</p>
+    #   @return [Time]
+    class CertificateAuthorityValidity < Struct.new(
+      nil,
+      :not_before,
+      :not_after,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -775,11 +1452,23 @@ module Aws::EKS
     #               <i>Amazon EKS User Guide</i>.</p>
     #   @return [Types::StorageConfigResponse]
     # @!attribute deletion_protection
-    #   <p>The current deletion protection setting for the cluster. When <code>true</code>, 
-    #               deletion protection is enabled and the cluster cannot be deleted until protection is 
-    #               disabled. When <code>false</code>, the cluster can be deleted normally. This setting 
+    #   <p>The current deletion protection setting for the cluster. When <code>true</code>,
+    #               deletion protection is enabled and the cluster cannot be deleted until protection is
+    #               disabled. When <code>false</code>, the cluster can be deleted normally. This setting
     #               only applies to clusters in an active state.</p>
     #   @return [Boolean]
+    # @!attribute control_plane_scaling_config
+    #   <p>The control plane scaling tier configuration. For more information, see EKS Provisioned Control Plane in the Amazon EKS User Guide.</p>
+    #   @return [Types::ControlPlaneScalingConfig]
+    # @!attribute kube_api_server_config
+    #   <p>The Kubernetes API server configuration for the cluster.</p>
+    #   @return [Types::KubeApiServerConfigResponse]
+    # @!attribute kube_scheduler_config
+    #   <p>The Kubernetes scheduler configuration for the cluster.</p>
+    #   @return [Types::KubeSchedulerConfigResponse]
+    # @!attribute kube_controller_manager_config
+    #   <p>The Kubernetes controller manager configuration for the cluster.</p>
+    #   @return [Types::KubeControllerManagerConfigResponse]
     class Cluster < Struct.new(
       nil,
       :name,
@@ -809,6 +1498,10 @@ module Aws::EKS
       :compute_config,
       :storage_config,
       :deletion_protection,
+      :control_plane_scaling_config,
+      :kube_api_server_config,
+      :kube_scheduler_config,
+      :kube_controller_manager_config,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -881,6 +1574,12 @@ module Aws::EKS
     # @!attribute kubernetes_patch_version
     #   <p>The patch version of Kubernetes for this cluster version.</p>
     #   @return [String]
+    # @!attribute control_plane_scaling_tiers
+    #   <p>The available provisioned control plane scaling tiers and their capabilities for this Kubernetes version.</p>
+    #   @return [Array<Types::ControlPlaneScalingTierInfo>]
+    # @!attribute control_plane_component_config
+    #   <p>The default control plane component configuration and constraints for this Kubernetes version.</p>
+    #   @return [Types::ControlPlaneConfigInfo]
     class ClusterVersionInformation < Struct.new(
       nil,
       :cluster_version,
@@ -893,6 +1592,8 @@ module Aws::EKS
       :status,
       :version_status,
       :kubernetes_patch_version,
+      :control_plane_scaling_tiers,
+      :control_plane_component_config,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1029,6 +1730,26 @@ module Aws::EKS
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The control plane component configuration defaults and constraints.</p>
+    # @!attribute kube_api_server_config
+    #   <p>The Kubernetes API server configuration defaults and constraints.</p>
+    #   @return [Types::KubeApiServerVersionConfig]
+    # @!attribute kube_scheduler_config
+    #   <p>The Kubernetes scheduler configuration defaults and constraints.</p>
+    #   @return [Types::KubeSchedulerVersionConfig]
+    # @!attribute kube_controller_manager_config
+    #   <p>The Kubernetes controller manager configuration defaults and constraints.</p>
+    #   @return [Types::KubeControllerManagerVersionConfig]
+    class ControlPlaneConfigInfo < Struct.new(
+      nil,
+      :kube_api_server_config,
+      :kube_scheduler_config,
+      :kube_controller_manager_config,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The placement configuration for all the control plane instances of your local Amazon EKS
     #             cluster on an Amazon Web Services Outpost. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html">Capacity
     #                 considerations</a> in the <i>Amazon EKS User Guide</i>.</p>
@@ -1036,9 +1757,13 @@ module Aws::EKS
     #   <p>The name of the placement group for the Kubernetes control plane instances. This setting
     #               can't be changed after cluster creation. </p>
     #   @return [String]
+    # @!attribute spread_level
+    #   <p>Optional parameter to specify the placement group spread level for control plane instances. If not provided, Amazon EKS will deploy control plane instances without a placement group.</p>
+    #   @return [String]
     class ControlPlanePlacementRequest < Struct.new(
       nil,
       :group_name,
+      :spread_level,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1049,9 +1774,53 @@ module Aws::EKS
     # @!attribute group_name
     #   <p>The name of the placement group for the Kubernetes control plane instances.</p>
     #   @return [String]
+    # @!attribute spread_level
+    #   <p>The spread level used with the placement group for control plane instances on your local Amazon EKS cluster on Amazon Web Services Outposts.</p>
+    #   @return [String]
     class ControlPlanePlacementResponse < Struct.new(
       nil,
       :group_name,
+      :spread_level,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The control plane scaling tier configuration. For more information, see EKS Provisioned Control Plane in the Amazon EKS User Guide.</p>
+    # @!attribute tier
+    #   <p>The control plane scaling tier configuration. Available options are <code>standard</code>, <code>tier-xl</code>, <code>tier-2xl</code>, <code>tier-4xl, or tier-8xl</code>. For more information, see EKS Provisioned Control Plane in the Amazon EKS User Guide.</p>
+    #   @return [String]
+    class ControlPlaneScalingConfig < Struct.new(
+      nil,
+      :tier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Information about a provisioned control plane scaling tier.</p>
+    # @!attribute tier_name
+    #   <p>The name of the scaling tier.</p>
+    #   @return [String]
+    # @!attribute api_request_concurrency
+    #   <p>The maximum API request concurrency supported by this tier.</p>
+    #   @return [Integer]
+    # @!attribute pod_scheduling_rate_per_second
+    #   <p>The maximum pod scheduling rate per second supported by this tier.</p>
+    #   @return [Integer]
+    # @!attribute cluster_database_size_gb
+    #   <p>The maximum cluster database size in GB supported by this tier.</p>
+    #   @return [Integer]
+    # @!attribute control_plane_component_config_overrides
+    #   <p>The control plane component configuration overrides specific to this scaling tier.</p>
+    #   @return [Types::ControlPlaneConfigInfo]
+    class ControlPlaneScalingTierInfo < Struct.new(
+      nil,
+      :tier_name,
+      :api_request_concurrency,
+      :pod_scheduling_rate_per_second,
+      :cluster_database_size_gb,
+      :control_plane_component_config_overrides,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1090,7 +1859,7 @@ module Aws::EKS
     #               IAM principal type. For nodes (<code>EC2</code> (for EKS Auto Mode),
     #                   <code>EC2_LINUX</code>, <code>EC2_WINDOWS</code>, <code>FARGATE_LINUX</code>, and
     #                   <code>HYBRID_LINUX</code>), the only valid ARN is IAM roles.
-    #               
+    #
     #               You can't use the STS session principal type with access entries because this is a
     #               temporary principal for each session and not a permanent identity that can be assigned
     #               permissions.</p>
@@ -1289,10 +2058,141 @@ module Aws::EKS
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute capability_name
+    #   <p>A unique name for the capability. The name must be unique within your cluster and can contain alphanumeric characters, hyphens, and underscores.</p>
+    #   @return [String]
+    # @!attribute cluster_name
+    #   <p>The name of the Amazon EKS cluster where you want to create the capability.</p>
+    #   @return [String]
+    # @!attribute client_request_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. This token is valid for 24 hours after creation. If you retry a request with the same client request token and the same parameters after the original request has completed successfully, the result of the original request is returned.</p>
+    #   @return [String]
+    # @!attribute type
+    #   <p>The type of capability to create. Valid values are:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>ACK</code> – Amazon Web Services Controllers for Kubernetes (ACK), which lets you manage resources directly from Kubernetes.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ARGOCD</code> – Argo CD for GitOps-based continuous delivery.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>KRO</code> – Kube Resource Orchestrator (KRO) for composing and managing custom Kubernetes resources.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute role_arn
+    #   <p>The Amazon Resource Name (ARN) of the IAM role that the capability uses to interact with Amazon Web Services services. This role must have a trust policy that allows the EKS service principal to assume it, and it must have the necessary permissions for the capability type you're creating.</p>
+    #            <p>For ACK capabilities, the role needs permissions to manage the resources you want to control through Kubernetes. For Argo CD capabilities, the role needs permissions to access Git repositories and Secrets Manager. For KRO capabilities, the role needs permissions based on the resources you'll be orchestrating.</p>
+    #   @return [String]
+    # @!attribute configuration
+    #   <p>The configuration settings for the capability. The structure of this object varies depending on the capability type. For Argo CD capabilities, you can configure IAM Identity CenterIAM; Identity Center integration, RBAC role mappings, and network access settings.</p>
+    #   @return [Types::CapabilityConfigurationRequest]
+    # @!attribute tags
+    #   <p>The metadata that you apply to a resource to help you categorize and organize them.
+    #               Each tag consists of a key and an optional value. You define them.</p>
+    #            <p>The following basic restrictions apply to tags:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>Maximum number of tags per resource – 50</p>
+    #               </li>
+    #               <li>
+    #                  <p>For each resource, each tag key must be unique, and each tag key can have only
+    #                       one value.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Maximum key length – 128 Unicode characters in UTF-8</p>
+    #               </li>
+    #               <li>
+    #                  <p>Maximum value length – 256 Unicode characters in UTF-8</p>
+    #               </li>
+    #               <li>
+    #                  <p>If your tagging schema is used across multiple services and resources,
+    #                       remember that other services may have restrictions on allowed characters.
+    #                       Generally allowed characters are: letters, numbers, and spaces representable in
+    #                       UTF-8, and the following characters: + - = . _ : / @.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Tag keys and values are case-sensitive.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Do not use <code>aws:</code>, <code>AWS:</code>, or any upper or lowercase
+    #                       combination of such as a prefix for either keys or values as it is reserved for
+    #                       Amazon Web Services use. You cannot edit or delete tag keys or values with this prefix. Tags with
+    #                       this prefix do not count against your tags per resource limit.</p>
+    #               </li>
+    #            </ul>
+    #   @return [Hash<String, String>]
+    # @!attribute delete_propagation_policy
+    #   <p>Specifies how Kubernetes resources managed by the capability should be handled when the capability is deleted. Currently, the only supported value is <code>RETAIN</code> which retains all Kubernetes resources managed by the capability when the capability is deleted.</p>
+    #            <p>Because resources are retained, all Kubernetes resources created by the capability should be deleted from the cluster before deleting the capability itself. After the capability is deleted, these resources become difficult to manage because the controller is no longer available.</p>
+    #   @return [String]
+    class CreateCapabilityRequest < Struct.new(
+      nil,
+      :capability_name,
+      :cluster_name,
+      :client_request_token,
+      :type,
+      :role_arn,
+      :configuration,
+      :tags,
+      :delete_propagation_policy,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute capability
+    #   <p>An object containing information about the newly created capability, including its name, ARN, status, and configuration.</p>
+    #   @return [Types::Capability]
+    class CreateCapabilityResponse < Struct.new(
+      nil,
+      :capability,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute cluster_name
+    #   <p>The name of your cluster.</p>
+    #   @return [String]
+    # @!attribute client_request_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure
+    #   the idempotency of the request.</p>
+    #   @return [String]
+    class CreateCertificateAuthorityRequest < Struct.new(
+      nil,
+      :cluster_name,
+      :client_request_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute update
+    #   <p>An object representing the asynchronous update that adds the certificate authority to
+    #               the cluster's trust bundle.</p>
+    #   @return [Types::Update]
+    # @!attribute certificate_authority
+    #   <p>Summary information about the certificate authority that was created, including its ID
+    #               and initial signing and distribution status.</p>
+    #   @return [Types::CertificateAuthoritySummary]
+    class CreateCertificateAuthorityResponse < Struct.new(
+      nil,
+      :update,
+      :certificate_authority,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute name
     #   <p>The unique name to give to your cluster. The name can contain only alphanumeric characters (case-sensitive),
     #   hyphens, and underscores. It must start with an alphanumeric character and can't be longer than
-    #   100 characters. The name must be unique within the Amazon Web Services Region and Amazon Web Services account that you're 
+    #   100 characters. The name must be unique within the Amazon Web Services Region and Amazon Web Services account that you're
     #   creating the cluster in.</p>
     #   @return [String]
     # @!attribute version
@@ -1399,10 +2299,22 @@ module Aws::EKS
     #               and delete EBS volumes in your Amazon Web Services account.</p>
     #   @return [Types::StorageConfigRequest]
     # @!attribute deletion_protection
-    #   <p>Indicates whether to enable deletion protection for the cluster. When enabled, the cluster 
-    #               cannot be deleted unless deletion protection is first disabled. This helps prevent 
+    #   <p>Indicates whether to enable deletion protection for the cluster. When enabled, the cluster
+    #               cannot be deleted unless deletion protection is first disabled. This helps prevent
     #               accidental cluster deletion. Default value is <code>false</code>.</p>
     #   @return [Boolean]
+    # @!attribute control_plane_scaling_config
+    #   <p>The control plane scaling tier configuration. For more information, see EKS Provisioned Control Plane in the Amazon EKS User Guide.</p>
+    #   @return [Types::ControlPlaneScalingConfig]
+    # @!attribute kube_api_server_config
+    #   <p>The Kubernetes API server configuration for the new cluster.</p>
+    #   @return [Types::KubeApiServerConfigRequest]
+    # @!attribute kube_scheduler_config
+    #   <p>The Kubernetes scheduler configuration for the new cluster.</p>
+    #   @return [Types::KubeSchedulerConfigRequest]
+    # @!attribute kube_controller_manager_config
+    #   <p>The Kubernetes controller manager configuration for the new cluster.</p>
+    #   @return [Types::KubeControllerManagerConfigRequest]
     class CreateClusterRequest < Struct.new(
       nil,
       :name,
@@ -1423,6 +2335,10 @@ module Aws::EKS
       :compute_config,
       :storage_config,
       :deletion_protection,
+      :control_plane_scaling_config,
+      :kube_api_server_config,
+      :kube_scheduler_config,
+      :kube_controller_manager_config,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1569,7 +2485,7 @@ module Aws::EKS
     # @!attribute disk_size
     #   <p>The root device disk size (in GiB) for your node group instances. The default disk
     #               size is 20 GiB for Linux and Bottlerocket. The default disk size is 50 GiB for Windows.
-    #               If you specify <code>launchTemplate</code>, then don't specify  <code>diskSize</code>, or the node group 
+    #               If you specify <code>launchTemplate</code>, then don't specify  <code>diskSize</code>, or the node group
     #               deployment will fail. For more information about using launch templates with Amazon EKS, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html">Customizing managed nodes with launch templates</a> in the <i>Amazon EKS User Guide</i>.</p>
     #   @return [Integer]
     # @!attribute subnets
@@ -1602,7 +2518,7 @@ module Aws::EKS
     #   @return [String]
     # @!attribute remote_access
     #   <p>The remote access configuration to use with your node group. For Linux, the protocol
-    #               is SSH. For Windows, the protocol is RDP. If you specify <code>launchTemplate</code>, then don't specify 
+    #               is SSH. For Windows, the protocol is RDP. If you specify <code>launchTemplate</code>, then don't specify
     #                   <code>remoteAccess</code>, or the node group  deployment will fail.
     #               For more information about using launch templates with Amazon EKS, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html">Customizing managed nodes with launch templates</a> in the <i>Amazon EKS User Guide</i>.</p>
     #   @return [Types::RemoteAccessConfig]
@@ -1618,7 +2534,7 @@ module Aws::EKS
     #               </i>.
     #               If you specify <code>launchTemplate</code>, then don't specify  <code>
     #                  <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_IamInstanceProfile.html">IamInstanceProfile</a>
-    #               </code> in your launch template, or the node group 
+    #               </code> in your launch template, or the node group
     #               deployment will fail. For more information about using launch templates with Amazon EKS, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html">Customizing managed nodes with launch templates</a> in the <i>Amazon EKS User Guide</i>.</p>
     #   @return [String]
     # @!attribute labels
@@ -1660,7 +2576,7 @@ module Aws::EKS
     # @!attribute version
     #   <p>The Kubernetes version to use for your managed nodes. By default, the Kubernetes version of the
     #               cluster is used, and this is the only accepted specified value. If you specify <code>launchTemplate</code>,
-    #               and your launch template uses a custom AMI, then don't specify  <code>version</code>, or the node group 
+    #               and your launch template uses a custom AMI, then don't specify  <code>version</code>, or the node group
     #               deployment will fail. For more information about using launch templates with Amazon EKS, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html">Customizing managed nodes with launch templates</a> in the <i>Amazon EKS User Guide</i>.</p>
     #   @return [String]
     # @!attribute release_version
@@ -1671,10 +2587,13 @@ module Aws::EKS
     #               groups support the November 2022 and later releases of the Windows AMIs. For information
     #               about Windows versions, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/eks-ami-versions-windows.html">Amazon EKS
     #                   optimized Windows AMI versions</a> in the <i>Amazon EKS User Guide</i>.</p>
-    #            <p>If you specify <code>launchTemplate</code>, and your launch template uses a custom AMI, then don't specify 
+    #            <p>If you specify <code>launchTemplate</code>, and your launch template uses a custom AMI, then don't specify
     #                   <code>releaseVersion</code>, or the node group  deployment will fail.
     #               For more information about using launch templates with Amazon EKS, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html">Customizing managed nodes with launch templates</a> in the <i>Amazon EKS User Guide</i>.</p>
     #   @return [String]
+    # @!attribute warm_pool_config
+    #   <p>The warm pool configuration for the node group. Warm pools maintain pre-initialized EC2 instances that can quickly join your cluster during scale-out events, improving application scaling performance and reducing costs.</p>
+    #   @return [Types::WarmPoolConfig]
     class CreateNodegroupRequest < Struct.new(
       nil,
       :cluster_name,
@@ -1696,6 +2615,7 @@ module Aws::EKS
       :capacity_type,
       :version,
       :release_version,
+      :warm_pool_config,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1799,6 +2719,31 @@ module Aws::EKS
     #               This means Role A will assume Role B, allowing your Pods to securely access resources
     #               like S3 buckets in the target account.</p>
     #   @return [String]
+    # @!attribute policy
+    #   <p>An optional IAM policy in JSON format (as an escaped string) that applies additional
+    #               restrictions to this pod identity association beyond the IAM policies attached to the
+    #               IAM role. This policy is applied as the intersection of the role's policies and this
+    #               policy, allowing you to reduce the permissions that applications in the pods can use.
+    #               Use this policy to enforce least privilege access while still leveraging a shared IAM
+    #               role across multiple applications.</p>
+    #            <p>
+    #               <b>Important considerations</b>
+    #            </p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <b>Session tags:</b> When using this policy,
+    #                       <code>disableSessionTags</code> must be set to <code>true</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <b>Target role permissions:</b> If you specify both
+    #                       a <code>TargetRoleArn</code> and a policy, the policy restrictions apply only to
+    #                       the target role's permissions, not to the initial role used for assuming the
+    #                       target role.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
     class CreatePodIdentityAssociationRequest < Struct.new(
       nil,
       :cluster_name,
@@ -1809,6 +2754,7 @@ module Aws::EKS
       :tags,
       :disable_session_tags,
       :target_role_arn,
+      :policy,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1879,6 +2825,69 @@ module Aws::EKS
     class DeleteAddonResponse < Struct.new(
       nil,
       :addon,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute cluster_name
+    #   <p>The name of the Amazon EKS cluster that contains the capability you want to delete.</p>
+    #   @return [String]
+    # @!attribute capability_name
+    #   <p>The name of the capability to delete.</p>
+    #   @return [String]
+    class DeleteCapabilityRequest < Struct.new(
+      nil,
+      :cluster_name,
+      :capability_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute capability
+    #   <p>An object containing information about the deleted capability, including its final status and configuration.</p>
+    #   @return [Types::Capability]
+    class DeleteCapabilityResponse < Struct.new(
+      nil,
+      :capability,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute cluster_name
+    #   <p>The name of your cluster.</p>
+    #   @return [String]
+    # @!attribute certificate_authority_id
+    #   <p>The ID of the certificate authority to delete. You can't delete the certificate
+    #               authority that's currently signing certificates for the cluster.</p>
+    #   @return [String]
+    # @!attribute client_request_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure
+    #   the idempotency of the request.</p>
+    #   @return [String]
+    class DeleteCertificateAuthorityRequest < Struct.new(
+      nil,
+      :cluster_name,
+      :certificate_authority_id,
+      :client_request_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute update
+    #   <p>An object representing the asynchronous update that removes the certificate authority
+    #               from the cluster's trust bundle.</p>
+    #   @return [Types::Update]
+    # @!attribute certificate_authority
+    #   <p>Summary information about the certificate authority that is being deleted.</p>
+    #   @return [Types::CertificateAuthoritySummary]
+    class DeleteCertificateAuthorityResponse < Struct.new(
+      nil,
+      :update,
+      :certificate_authority,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2235,6 +3244,58 @@ module Aws::EKS
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute cluster_name
+    #   <p>The name of the Amazon EKS cluster that contains the capability you want to describe.</p>
+    #   @return [String]
+    # @!attribute capability_name
+    #   <p>The name of the capability to describe.</p>
+    #   @return [String]
+    class DescribeCapabilityRequest < Struct.new(
+      nil,
+      :cluster_name,
+      :capability_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute capability
+    #   <p>An object containing detailed information about the capability, including its name, ARN, type, status, version, configuration, health status, and timestamps for when it was created and last modified.</p>
+    #   @return [Types::Capability]
+    class DescribeCapabilityResponse < Struct.new(
+      nil,
+      :capability,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute cluster_name
+    #   <p>The name of your cluster.</p>
+    #   @return [String]
+    # @!attribute certificate_authority_id
+    #   <p>The ID of the certificate authority to describe.</p>
+    #   @return [String]
+    class DescribeCertificateAuthorityRequest < Struct.new(
+      nil,
+      :cluster_name,
+      :certificate_authority_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute certificate_authority
+    #   <p>An object containing detailed information about the certificate authority.</p>
+    #   @return [Types::CertificateAuthority]
+    class DescribeCertificateAuthorityResponse < Struct.new(
+      nil,
+      :certificate_authority,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute name
     #   <p>The name of your cluster.</p>
     #   @return [String]
@@ -2521,12 +3582,16 @@ module Aws::EKS
     #                  <code>ListAddons</code>
     #               </a>. This parameter is required if the update is an add-on update.</p>
     #   @return [String]
+    # @!attribute capability_name
+    #   <p>The name of the capability for which you want to describe updates.</p>
+    #   @return [String]
     class DescribeUpdateRequest < Struct.new(
       nil,
       :name,
       :update_id,
       :nodegroup_name,
       :addon_name,
+      :capability_name,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2596,6 +3661,38 @@ module Aws::EKS
     class DisassociateIdentityProviderConfigResponse < Struct.new(
       nil,
       :update,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Constraints for a duration parameter.</p>
+    # @!attribute min
+    #   <p>The minimum allowed duration value.</p>
+    #   @return [String]
+    # @!attribute max
+    #   <p>The maximum allowed duration value.</p>
+    #   @return [String]
+    class DurationConstraints < Struct.new(
+      nil,
+      :min,
+      :max,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A duration parameter configuration with default value and constraints.</p>
+    # @!attribute default_value
+    #   <p>The default value for the duration parameter.</p>
+    #   @return [String]
+    # @!attribute constraints
+    #   <p>The constraints for the duration parameter.</p>
+    #   @return [Types::DurationConstraints]
+    class DurationParameterConfig < Struct.new(
+      nil,
+      :default_value,
+      :constraints,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2718,8 +3815,16 @@ module Aws::EKS
 
     # <p>The encryption configuration for the cluster.</p>
     # @!attribute resources
-    #   <p>Specifies the resources to be encrypted. The only supported value is
+    #   <important>
+    #               <p>Amazon EKS encrypts all Kubernetes API data with envelope encryption by default for
+    #                   clusters running Kubernetes version 1.28 or higher, so this field no longer affects which
+    #                   resources are encrypted.</p>
+    #            </important>
+    #            <p>Specifies the resources to be encrypted. The only supported value is
     #                   <code>secrets</code>.</p>
+    #   @deprecated
+    #     Deprecated. Amazon EKS encrypts all Kubernetes API data by default, so this value no longer determines which resources are encrypted.
+    #     Since: 2025-03-05
     #   @return [Array<String>]
     # @!attribute provider
     #   <p>Key Management Service (KMS) key. Either the ARN or the alias can be used.</p>
@@ -2786,6 +3891,34 @@ module Aws::EKS
       :error_code,
       :error_message,
       :resource_ids,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The placement configuration for the etcd instances of your local Amazon EKS
+    #             cluster on an Amazon Web Services Outpost. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html">Capacity
+    #                 considerations</a> in the <i>Amazon EKS User Guide</i>.</p>
+    # @!attribute spread_level
+    #   <p>Optional parameter to specify the placement group spread level for etcd instances. If not provided, Amazon EKS will deploy etcd instances without a placement group.</p>
+    #   @return [String]
+    class EtcdPlacementRequest < Struct.new(
+      nil,
+      :spread_level,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The placement configuration for the etcd instances of your local Amazon EKS
+    #             cluster on an Amazon Web Services Outpost. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html">Capacity
+    #                 considerations</a> in the <i>Amazon EKS User Guide</i>.</p>
+    # @!attribute spread_level
+    #   <p>The spread level used with the placement group for etcd instances on your local Amazon EKS cluster on Amazon Web Services Outposts.</p>
+    #   @return [String]
+    class EtcdPlacementResponse < Struct.new(
+      nil,
+      :spread_level,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2889,6 +4022,42 @@ module Aws::EKS
       nil,
       :namespace,
       :labels,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The horizontal pod autoscaler controller configuration for the Kubernetes controller manager.</p>
+    # @!attribute horizontal_pod_autoscaler_sync_period
+    #   <p>The interval between each sync of the horizontal pod autoscaler. Valid values are single-unit durations such as <code>15s</code> or <code>1m</code>.</p>
+    #   @return [String]
+    class HorizontalPodAutoscalerControllerConfigRequest < Struct.new(
+      nil,
+      :horizontal_pod_autoscaler_sync_period,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The horizontal pod autoscaler controller configuration for the Kubernetes controller manager.</p>
+    # @!attribute horizontal_pod_autoscaler_sync_period
+    #   <p>The interval between each sync of the horizontal pod autoscaler.</p>
+    #   @return [String]
+    class HorizontalPodAutoscalerControllerConfigResponse < Struct.new(
+      nil,
+      :horizontal_pod_autoscaler_sync_period,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The horizontal pod autoscaler controller version configuration.</p>
+    # @!attribute horizontal_pod_autoscaler_sync_period
+    #   <p>The HPA sync period configuration with default value and constraints.</p>
+    #   @return [Types::DurationParameterConfig]
+    class HorizontalPodAutoscalerControllerVersionConfig < Struct.new(
+      nil,
+      :horizontal_pod_autoscaler_sync_period,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3125,6 +4294,54 @@ module Aws::EKS
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Constraints for an integer parameter specifying allowed range.</p>
+    # @!attribute min
+    #   <p>The minimum allowed value.</p>
+    #   @return [Integer]
+    # @!attribute max
+    #   <p>The maximum allowed value.</p>
+    #   @return [Integer]
+    class IntegerConstraints < Struct.new(
+      nil,
+      :min,
+      :max,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>An integer parameter configuration with default value and constraints.</p>
+    # @!attribute default_value
+    #   <p>The default value for the integer parameter.</p>
+    #   @return [Integer]
+    # @!attribute constraints
+    #   <p>The constraints for the integer parameter.</p>
+    #   @return [Types::IntegerConstraints]
+    class IntegerParameterConfig < Struct.new(
+      nil,
+      :default_value,
+      :constraints,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>An integer range constraint specifying minimum and maximum allowed values.</p>
+    # @!attribute min
+    #   <p>The minimum allowed value.</p>
+    #   @return [Integer]
+    # @!attribute max
+    #   <p>The maximum allowed value.</p>
+    #   @return [Integer]
+    class IntegerRangeConstraint < Struct.new(
+      nil,
+      :min,
+      :max,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The specified parameter is invalid. Review the available parameters for the API
     #             request.</p>
     # @!attribute cluster_name
@@ -3330,6 +4547,138 @@ module Aws::EKS
       :code,
       :message,
       :resource_ids,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration for the Kubernetes API server on an Amazon EKS cluster.</p>
+    # @!attribute event_ttl
+    #   <p>The duration that Kubernetes events are retained. Valid values are single-unit durations such as <code>30m</code> or <code>1h</code>.</p>
+    #   @return [String]
+    # @!attribute service_node_port_range
+    #   <p>The port range for NodePort services.</p>
+    #   @return [Types::ServiceNodePortRange]
+    class KubeApiServerConfigRequest < Struct.new(
+      nil,
+      :event_ttl,
+      :service_node_port_range,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The Kubernetes API server configuration for an Amazon EKS cluster.</p>
+    # @!attribute event_ttl
+    #   <p>The duration that Kubernetes events are retained.</p>
+    #   @return [String]
+    # @!attribute service_node_port_range
+    #   <p>The port range for NodePort services.</p>
+    #   @return [Types::ServiceNodePortRange]
+    class KubeApiServerConfigResponse < Struct.new(
+      nil,
+      :event_ttl,
+      :service_node_port_range,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The Kubernetes API server version-specific configuration defaults and constraints.</p>
+    # @!attribute event_ttl
+    #   <p>The event TTL configuration with default value and constraints.</p>
+    #   @return [Types::DurationParameterConfig]
+    # @!attribute service_node_port_range
+    #   <p>The service node port range configuration with default value and constraints.</p>
+    #   @return [Types::PortRangeParameterConfig]
+    class KubeApiServerVersionConfig < Struct.new(
+      nil,
+      :event_ttl,
+      :service_node_port_range,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration for the Kubernetes controller manager on an Amazon EKS cluster.</p>
+    # @!attribute pod_gc_controller_config
+    #   <p>The pod garbage collection controller configuration.</p>
+    #   @return [Types::PodGcControllerConfigRequest]
+    # @!attribute horizontal_pod_autoscaler_controller_config
+    #   <p>The horizontal pod autoscaler controller configuration.</p>
+    #   @return [Types::HorizontalPodAutoscalerControllerConfigRequest]
+    class KubeControllerManagerConfigRequest < Struct.new(
+      nil,
+      :pod_gc_controller_config,
+      :horizontal_pod_autoscaler_controller_config,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The Kubernetes controller manager configuration for an Amazon EKS cluster.</p>
+    # @!attribute pod_gc_controller_config
+    #   <p>The pod garbage collection controller configuration.</p>
+    #   @return [Types::PodGcControllerConfigResponse]
+    # @!attribute horizontal_pod_autoscaler_controller_config
+    #   <p>The horizontal pod autoscaler controller configuration.</p>
+    #   @return [Types::HorizontalPodAutoscalerControllerConfigResponse]
+    class KubeControllerManagerConfigResponse < Struct.new(
+      nil,
+      :pod_gc_controller_config,
+      :horizontal_pod_autoscaler_controller_config,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The Kubernetes controller manager version-specific configuration defaults and constraints.</p>
+    # @!attribute pod_gc_controller_config
+    #   <p>The pod garbage collection controller configuration with default value and constraints.</p>
+    #   @return [Types::PodGcControllerVersionConfig]
+    # @!attribute horizontal_pod_autoscaler_controller_config
+    #   <p>The horizontal pod autoscaler controller configuration with default value and constraints.</p>
+    #   @return [Types::HorizontalPodAutoscalerControllerVersionConfig]
+    class KubeControllerManagerVersionConfig < Struct.new(
+      nil,
+      :pod_gc_controller_config,
+      :horizontal_pod_autoscaler_controller_config,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration for the Kubernetes scheduler on an Amazon EKS cluster.</p>
+    # @!attribute node_resources_fit
+    #   <p>The node resource fit scoring configuration for the scheduler.</p>
+    #   @return [Types::NodeResourcesFitConfig]
+    class KubeSchedulerConfigRequest < Struct.new(
+      nil,
+      :node_resources_fit,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The Kubernetes scheduler configuration for an Amazon EKS cluster.</p>
+    # @!attribute node_resources_fit
+    #   <p>The node resource fit scoring configuration for the scheduler.</p>
+    #   @return [Types::NodeResourcesFitConfig]
+    class KubeSchedulerConfigResponse < Struct.new(
+      nil,
+      :node_resources_fit,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The Kubernetes scheduler version-specific configuration defaults and constraints.</p>
+    # @!attribute node_resources_fit
+    #   <p>The NodeResourcesFit configuration with default value and constraints.</p>
+    #   @return [Types::NodeResourcesFitVersionConfig]
+    class KubeSchedulerVersionConfig < Struct.new(
+      nil,
+      :node_resources_fit,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3715,6 +5064,94 @@ module Aws::EKS
       :principal_arn,
       :next_token,
       :associated_access_policies,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute cluster_name
+    #   <p>The name of the Amazon EKS cluster for which you want to list capabilities.</p>
+    #   @return [String]
+    # @!attribute next_token
+    #   <p>The <code>nextToken</code> value returned from a previous paginated request, where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. This value is null when there are no more results to return.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value. If you don't specify a value, the default is 100 results.</p>
+    #   @return [Integer]
+    class ListCapabilitiesRequest < Struct.new(
+      nil,
+      :cluster_name,
+      :next_token,
+      :max_results,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute capabilities
+    #   <p>A list of capability summary objects, each containing basic information about a capability including its name, ARN, type, status, version, and timestamps.</p>
+    #   @return [Array<Types::CapabilitySummary>]
+    # @!attribute next_token
+    #   <p>The <code>nextToken</code> value to include in a future <code>ListCapabilities</code> request. When the results of a <code>ListCapabilities</code> request exceed <code>maxResults</code>, you can use this value to retrieve the next page of results. This value is null when there are no more results to return.</p>
+    #   @return [String]
+    class ListCapabilitiesResponse < Struct.new(
+      nil,
+      :capabilities,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute cluster_name
+    #   <p>The name of your cluster.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return in a single call. To retrieve the remaining
+    #               results, make another call with the returned <code>nextToken</code> value. If you don't
+    #               specify a value, the default is 100 results.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The <code>nextToken</code> value returned from a previous paginated request, where
+    #                   <code>maxResults</code> was used and the results exceeded the value of that
+    #               parameter. Pagination continues from the end of the previous results that returned the
+    #                   <code>nextToken</code> value. This value is null when there are no more results to
+    #               return.</p>
+    #            <note>
+    #               <p>This token should be treated as an opaque identifier that is used only to
+    #                   retrieve the next items in a list and not for other programmatic purposes.</p>
+    #            </note>
+    #   @return [String]
+    class ListCertificateAuthoritiesRequest < Struct.new(
+      nil,
+      :cluster_name,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute certificate_authorities
+    #   <p>A list of certificate authority summary objects, each containing basic information
+    #               about a certificate authority, including its ID, signing status, and distribution
+    #               status.</p>
+    #   @return [Array<Types::CertificateAuthoritySummary>]
+    # @!attribute next_token
+    #   <p>The <code>nextToken</code> value to include in a future
+    #                   <code>ListCertificateAuthorities</code> request. When the results of a
+    #                   <code>ListCertificateAuthorities</code> request exceed <code>maxResults</code>, you
+    #               can use this value to retrieve the next page of results. This value is null when there
+    #               are no more results to return.</p>
+    #            <note>
+    #               <p>This token should be treated as an opaque identifier that is used only to
+    #                   retrieve the next items in a list and not for other programmatic purposes.</p>
+    #            </note>
+    #   @return [String]
+    class ListCertificateAuthoritiesResponse < Struct.new(
+      nil,
+      :certificate_authorities,
+      :next_token,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4155,6 +5592,9 @@ module Aws::EKS
     # @!attribute addon_name
     #   <p>The names of the installed add-ons that have available updates.</p>
     #   @return [String]
+    # @!attribute capability_name
+    #   <p>The name of the capability for which you want to list updates.</p>
+    #   @return [String]
     # @!attribute next_token
     #   <p>The <code>nextToken</code> value returned from a previous paginated request, where <code>maxResults</code> was used and
     #               the results exceeded the value of that parameter. Pagination continues from the end of
@@ -4178,6 +5618,7 @@ module Aws::EKS
       :name,
       :nodegroup_name,
       :addon_name,
+      :capability_name,
       :next_token,
       :max_results,
       keyword_init: true
@@ -4259,29 +5700,29 @@ module Aws::EKS
     #               disabled by default.</p>
     #   @return [Boolean]
     # @!attribute max_unhealthy_node_threshold_count
-    #   <p>Specify a count threshold of unhealthy nodes, above which node auto 
-    #               repair actions will stop. When using this, you cannot also set 
+    #   <p>Specify a count threshold of unhealthy nodes, above which node auto
+    #               repair actions will stop. When using this, you cannot also set
     #               <code>maxUnhealthyNodeThresholdPercentage</code> at the same time.</p>
     #   @return [Integer]
     # @!attribute max_unhealthy_node_threshold_percentage
-    #   <p>Specify a percentage threshold of unhealthy nodes, above which node auto 
-    #               repair actions will stop. When using this, you cannot also set 
+    #   <p>Specify a percentage threshold of unhealthy nodes, above which node auto
+    #               repair actions will stop. When using this, you cannot also set
     #               <code>maxUnhealthyNodeThresholdCount</code> at the same time.</p>
     #   @return [Integer]
     # @!attribute max_parallel_nodes_repaired_count
-    #   <p>Specify the maximum number of nodes that can be repaired concurrently or in parallel, 
-    #               expressed as a count of unhealthy nodes. This gives you finer-grained control over the 
-    #               pace of node replacements. When using this, you cannot also set 
+    #   <p>Specify the maximum number of nodes that can be repaired concurrently or in parallel,
+    #               expressed as a count of unhealthy nodes. This gives you finer-grained control over the
+    #               pace of node replacements. When using this, you cannot also set
     #               <code>maxParallelNodesRepairedPercentage</code> at the same time.</p>
     #   @return [Integer]
     # @!attribute max_parallel_nodes_repaired_percentage
-    #   <p>Specify the maximum number of nodes that can be repaired concurrently or in parallel, 
-    #               expressed as a percentage of unhealthy nodes. This gives you finer-grained control over the 
-    #               pace of node replacements. When using this, you cannot also set 
+    #   <p>Specify the maximum number of nodes that can be repaired concurrently or in parallel,
+    #               expressed as a percentage of unhealthy nodes. This gives you finer-grained control over the
+    #               pace of node replacements. When using this, you cannot also set
     #               <code>maxParallelNodesRepairedCount</code> at the same time.</p>
     #   @return [Integer]
     # @!attribute node_repair_config_overrides
-    #   <p>Specify granular overrides for specific repair actions. These overrides control the 
+    #   <p>Specify granular overrides for specific repair actions. These overrides control the
     #               repair action and the repair delay time before a node is considered eligible for repair.
     #               If you use this, you must specify all the values.</p>
     #   @return [Array<Types::NodeRepairConfigOverrides>]
@@ -4298,7 +5739,7 @@ module Aws::EKS
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Specify granular overrides for specific repair actions. These overrides control the 
+    # <p>Specify granular overrides for specific repair actions. These overrides control the
     #             repair action and the repair delay time before a node is considered eligible for repair.
     #             If you use this, you must specify all the values.</p>
     # @!attribute node_monitoring_condition
@@ -4310,7 +5751,7 @@ module Aws::EKS
     #               override would apply to.</p>
     #   @return [String]
     # @!attribute min_repair_wait_time_mins
-    #   <p>Specify the minimum time in minutes to wait before attempting to repair a node 
+    #   <p>Specify the minimum time in minutes to wait before attempting to repair a node
     #               with this specific <code>nodeMonitoringCondition</code> and
     #               <code>nodeUnhealthyReason</code>.</p>
     #   @return [Integer]
@@ -4324,6 +5765,30 @@ module Aws::EKS
       :node_unhealthy_reason,
       :min_repair_wait_time_mins,
       :repair_action,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The NodeResourcesFit plugin configuration for the Kubernetes scheduler.</p>
+    # @!attribute scoring_strategy
+    #   <p>The scoring strategy used to rank nodes during scheduling.</p>
+    #   @return [Types::ScoringStrategy]
+    class NodeResourcesFitConfig < Struct.new(
+      nil,
+      :scoring_strategy,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The NodeResourcesFit version configuration with default value and constraints.</p>
+    # @!attribute scoring_strategy
+    #   <p>The scoring strategy configuration with default value and constraints.</p>
+    #   @return [Types::ScoringStrategyConfig]
+    class NodeResourcesFitVersionConfig < Struct.new(
+      nil,
+      :scoring_strategy,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4429,6 +5894,9 @@ module Aws::EKS
     #               Each tag consists of a key and an optional value. You define both. Tags don't
     #               propagate to any other cluster or Amazon Web Services resources.</p>
     #   @return [Hash<String, String>]
+    # @!attribute warm_pool_config
+    #   <p>The warm pool configuration attached to the node group. Amazon EKS manages warm pools throughout the node group lifecycle using the <code>AWSServiceRoleForAmazonEKSNodegroup</code> service-linked role to create, update, and delete warm pool resources.</p>
+    #   @return [Types::WarmPoolConfig]
     class Nodegroup < Struct.new(
       nil,
       :nodegroup_name,
@@ -4455,6 +5923,7 @@ module Aws::EKS
       :node_repair_config,
       :launch_template,
       :tags,
+      :warm_pool_config,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4514,7 +5983,7 @@ module Aws::EKS
     #               updated to the specified size. If this parameter is given a value that is smaller than
     #               the current number of running worker nodes, the necessary number of worker nodes are
     #               terminated to match the given value.
-    #               
+    #
     #               When using CloudFormation, no action occurs if you remove this parameter from your CFN
     #               template.</p>
     #            <p>This parameter can be different from <code>minSize</code> in some cases, such as when
@@ -4742,24 +6211,29 @@ module Aws::EKS
     #               Outposts. Only a single Outpost ARN is supported.</p>
     #   @return [Array<String>]
     # @!attribute control_plane_instance_type
-    #   <p>The Amazon EC2 instance type that you want to use for your local Amazon EKS cluster on Outposts.
-    #               Choose an instance type based on the number of nodes that your cluster will have. For
-    #               more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html">Capacity
+    #   <p>The Amazon EC2 instance type for the Kubernetes control plane instances of your local Amazon EKS cluster on Amazon Web Services Outposts. This instance type applies to all control plane instances and cannot be changed after cluster creation.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html">Capacity
     #                   considerations</a> in the <i>Amazon EKS User Guide</i>.</p>
-    #            <p>The instance type that you specify is used for all Kubernetes control plane instances. The
-    #               instance type can't be changed after cluster creation. The control plane is not
-    #               automatically scaled by Amazon EKS.</p>
     #            <p> </p>
     #   @return [String]
     # @!attribute control_plane_placement
     #   <p>An object representing the placement configuration for all the control plane instances
     #               of your local Amazon EKS cluster on an Amazon Web Services Outpost. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html">Capacity considerations</a> in the <i>Amazon EKS User Guide</i>.</p>
     #   @return [Types::ControlPlanePlacementRequest]
+    # @!attribute etcd_instance_type
+    #   <p>The Amazon EC2 instance type for etcd instances of your local Amazon EKS cluster on Amazon Web Services Outposts. This instance type applies to all etcd instances and cannot be changed after cluster creation.</p>
+    #   @return [String]
+    # @!attribute etcd_placement
+    #   <p>An object representing the placement configuration for the etcd instances of your local
+    #               Amazon EKS cluster on an Amazon Web Services Outpost. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html">Capacity considerations</a> in the <i>Amazon EKS User Guide</i>.</p>
+    #   @return [Types::EtcdPlacementRequest]
     class OutpostConfigRequest < Struct.new(
       nil,
       :outpost_arns,
       :control_plane_instance_type,
       :control_plane_placement,
+      :etcd_instance_type,
+      :etcd_placement,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4772,7 +6246,7 @@ module Aws::EKS
     #               Outposts.</p>
     #   @return [Array<String>]
     # @!attribute control_plane_instance_type
-    #   <p>The Amazon EC2 instance type used for the control plane. The instance type is the same for
+    #   <p>The Amazon EC2 instance type for the Kubernetes control plane instances of your local Amazon EKS cluster on Amazon Web Services Outposts. The instance type is the same for
     #               all control plane instances.</p>
     #   @return [String]
     # @!attribute control_plane_placement
@@ -4780,11 +6254,58 @@ module Aws::EKS
     #               of your local Amazon EKS cluster on an Amazon Web Services Outpost. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html">Capacity
     #                   considerations</a> in the <i>Amazon EKS User Guide</i>.</p>
     #   @return [Types::ControlPlanePlacementResponse]
+    # @!attribute etcd_instance_type
+    #   <p>The Amazon EC2 instance type for etcd instances of your local Amazon EKS cluster on Amazon Web Services Outposts. The instance type is the same for
+    #               all etcd instances.</p>
+    #   @return [String]
+    # @!attribute etcd_placement
+    #   <p>An object representing the placement configuration for the etcd instances of your local
+    #               Amazon EKS cluster on an Amazon Web Services Outpost. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html">Capacity
+    #                   considerations</a> in the <i>Amazon EKS User Guide</i>.</p>
+    #   @return [Types::EtcdPlacementResponse]
     class OutpostConfigResponse < Struct.new(
       nil,
       :outpost_arns,
       :control_plane_instance_type,
       :control_plane_placement,
+      :etcd_instance_type,
+      :etcd_placement,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The pod garbage collection controller configuration for the Kubernetes controller manager.</p>
+    # @!attribute terminated_pod_gc_threshold
+    #   <p>The number of terminated pods that can exist before the garbage collector starts deleting them.</p>
+    #   @return [Integer]
+    class PodGcControllerConfigRequest < Struct.new(
+      nil,
+      :terminated_pod_gc_threshold,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The pod garbage collection controller configuration for the Kubernetes controller manager.</p>
+    # @!attribute terminated_pod_gc_threshold
+    #   <p>The number of terminated pods that can exist before the garbage collector starts deleting them.</p>
+    #   @return [Integer]
+    class PodGcControllerConfigResponse < Struct.new(
+      nil,
+      :terminated_pod_gc_threshold,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The pod garbage collection controller version configuration.</p>
+    # @!attribute terminated_pod_gc_threshold
+    #   <p>The terminated pod garbage collection threshold configuration with default value and constraints.</p>
+    #   @return [Types::IntegerParameterConfig]
+    class PodGcControllerVersionConfig < Struct.new(
+      nil,
+      :terminated_pod_gc_threshold,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4885,6 +6406,14 @@ module Aws::EKS
     #               other roles, use independent statements in the trust policy to allow
     #               <code>sts:AssumeRole</code> access from each role.</p>
     #   @return [String]
+    # @!attribute policy
+    #   <p>An optional IAM policy in JSON format (as an escaped string) that applies additional
+    #               restrictions to this pod identity association beyond the IAM policies attached to the
+    #               IAM role. This policy is applied as the intersection of the role's policies and this
+    #               policy, allowing you to reduce the permissions that applications in the pods can use.
+    #               Use this policy to enforce least privilege access while still leveraging a shared IAM
+    #               role across multiple applications.</p>
+    #   @return [String]
     class PodIdentityAssociation < Struct.new(
       nil,
       :cluster_name,
@@ -4900,6 +6429,7 @@ module Aws::EKS
       :disable_session_tags,
       :target_role_arn,
       :external_id,
+      :policy,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4956,6 +6486,38 @@ module Aws::EKS
       :association_arn,
       :association_id,
       :owner_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Constraints for a port range parameter.</p>
+    # @!attribute min_port
+    #   <p>The constraints for the minimum port value.</p>
+    #   @return [Types::IntegerRangeConstraint]
+    # @!attribute max_port
+    #   <p>The constraints for the maximum port value.</p>
+    #   @return [Types::IntegerRangeConstraint]
+    class PortRangeConstraints < Struct.new(
+      nil,
+      :min_port,
+      :max_port,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A port range parameter configuration with default value and constraints.</p>
+    # @!attribute default_value
+    #   <p>The default port range value.</p>
+    #   @return [Types::ServiceNodePortRange]
+    # @!attribute constraints
+    #   <p>The constraints for the port range parameter.</p>
+    #   @return [Types::PortRangeConstraints]
+    class PortRangeParameterConfig < Struct.new(
+      nil,
+      :default_value,
+      :constraints,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5254,6 +6816,22 @@ module Aws::EKS
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Constraints for resource weight entries.</p>
+    # @!attribute name
+    #   <p>The allowed values for resource names.</p>
+    #   @return [Types::AllowedValuesConstraint]
+    # @!attribute weight
+    #   <p>The allowed range for resource weight values.</p>
+    #   @return [Types::IntegerRangeConstraint]
+    class ResourceConstraints < Struct.new(
+      nil,
+      :name,
+      :weight,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The specified resource is in use.</p>
     # @!attribute cluster_name
     #   <p>The Amazon EKS cluster associated with the exception.</p>
@@ -5351,6 +6929,85 @@ module Aws::EKS
       include ::Smithy::Schema::Structure
     end
 
+    # <p>A resource weight entry for the scheduler scoring strategy.</p>
+    # @!attribute name
+    #   <p>The name of the resource (for example, <code>cpu</code> or <code>memory</code>).</p>
+    #   @return [String]
+    # @!attribute weight
+    #   <p>The weight assigned to the resource for scoring. Must be between 1 and 100.</p>
+    #   @return [Integer]
+    class ResourceWeight < Struct.new(
+      nil,
+      :name,
+      :weight,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The rollback configuration for the cluster version rollback.</p>
+    # @!attribute timeout_minutes
+    #   <p>The length of time in minutes to wait before cancelling the update. Timeout is a
+    #               minimum-bound property, meaning the timeout occurs no sooner than the time you specify,
+    #               but can occur shortly thereafter. This value can be between 120 (2 hours) and 10080
+    #               (7 days). Default: <code>720</code> (12 hours) if not specified.</p>
+    #   @return [Integer]
+    class RollbackConfig < Struct.new(
+      nil,
+      :timeout_minutes,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The scoring strategy configuration for the NodeResourcesFit scheduler plugin.</p>
+    # @!attribute type
+    #   <p>The scoring strategy type. Valid values are <code>LeastAllocated</code> or <code>MostAllocated</code>.</p>
+    #   @return [String]
+    # @!attribute resources
+    #   <p>The resource weights used for scoring nodes.</p>
+    #   @return [Array<Types::ResourceWeight>]
+    class ScoringStrategy < Struct.new(
+      nil,
+      :type,
+      :resources,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The scoring strategy configuration with default value and constraints.</p>
+    # @!attribute default_value
+    #   <p>The default scoring strategy.</p>
+    #   @return [Types::ScoringStrategy]
+    # @!attribute constraints
+    #   <p>The constraints for the scoring strategy.</p>
+    #   @return [Types::ScoringStrategyConstraints]
+    class ScoringStrategyConfig < Struct.new(
+      nil,
+      :default_value,
+      :constraints,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Constraints for the scoring strategy configuration.</p>
+    # @!attribute scoring_strategy
+    #   <p>The allowed values for the scoring strategy type.</p>
+    #   @return [Types::AllowedValuesConstraint]
+    # @!attribute resources
+    #   <p>The constraints for resource weights.</p>
+    #   @return [Types::ResourceConstraints]
+    class ScoringStrategyConstraints < Struct.new(
+      nil,
+      :scoring_strategy,
+      :resources,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>These errors are usually caused by a server-side issue.</p>
     # @!attribute cluster_name
     #   <p>The Amazon EKS cluster associated with the exception.</p>
@@ -5379,6 +7036,28 @@ module Aws::EKS
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The port range for Kubernetes NodePort services.</p>
+    # @!attribute min_port
+    #   <p>The minimum port number in the range.</p>
+    #   @return [Integer]
+    # @!attribute max_port
+    #   <p>The maximum port number in the range.</p>
+    #   @return [Integer]
+    class ServiceNodePortRange < Struct.new(
+      nil,
+      :min_port,
+      :max_port,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:min_port] = 0 unless options.key?(:min_port)
+        options[:max_port] = 0 unless options.key?(:max_port)
+        super
+      end
+    end
+
     # <p>The service is unavailable. Back off and retry the operation.</p>
     # @!attribute message
     #   <p>The request has failed due to a temporary failure of the server.</p>
@@ -5386,6 +7065,22 @@ module Aws::EKS
     class ServiceUnavailableException < Struct.new(
       nil,
       :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>An IAM Identity CenterIAM; Identity Center identity (user or group) that can be assigned permissions in a capability.</p>
+    # @!attribute id
+    #   <p>The unique identifier of the IAM Identity CenterIAM; Identity Center user or group.</p>
+    #   @return [String]
+    # @!attribute type
+    #   <p>The type of identity. Valid values are <code>SSO_USER</code> or <code>SSO_GROUP</code>.</p>
+    #   @return [String]
+    class SsoIdentity < Struct.new(
+      nil,
+      :id,
+      :type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5577,6 +7272,10 @@ module Aws::EKS
     # @!attribute errors
     #   <p>Any errors associated with a <code>Failed</code> update.</p>
     #   @return [Array<Types::ErrorDetail>]
+    # @!attribute cancellation
+    #   <p>The latest cancellation information for the update. This field is present only if any
+    #               cancellation is attempted for the update.</p>
+    #   @return [Types::Cancellation]
     class Update < Struct.new(
       nil,
       :id,
@@ -5585,6 +7284,7 @@ module Aws::EKS
       :params,
       :created_at,
       :errors,
+      :cancellation,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5657,6 +7357,22 @@ module Aws::EKS
     class UpdateAccessEntryResponse < Struct.new(
       nil,
       :access_entry,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration updates for an ACK (Amazon Web Services Controllers for Kubernetes) capability. You only need to specify the fields that you want to update.</p>
+    # @!attribute enable_cross_namespace
+    #   <p>Specifies whether ACK controllers resolve resource references to resources in a different Kubernetes namespace. Set this value to <code>false</code> to require references to remain within the same namespace, or <code>true</code> to allow cross-namespace references. If you omit this field, the current value is unchanged.</p>
+    #   @return [Boolean]
+    # @!attribute disabled_services
+    #   <p>An updated list of ACK service names whose controllers are turned off for this capability. This list replaces the previous list instead of merging with it, so specify the complete set of services that you want turned off. If you omit this field, the previous list is unchanged. To turn all services back on, specify an empty list.</p>
+    #   @return [Array<String>]
+    class UpdateAckConfig < Struct.new(
+      nil,
+      :enable_cross_namespace,
+      :disabled_services,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5752,11 +7468,87 @@ module Aws::EKS
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Configuration updates for an Argo CD capability. You only need to specify the fields you want to update.</p>
+    # @!attribute rbac_role_mappings
+    #   <p>Updated RBAC role mappings for the Argo CD capability. You can add, update, or remove role mappings.</p>
+    #   @return [Types::UpdateRoleMappings]
+    # @!attribute network_access
+    #   <p>Updated network access configuration for the Argo CD capability's managed API server endpoint. You can add or remove VPC endpoint associations to control which VPCs have private access to the Argo CD server.</p>
+    #   @return [Types::ArgoCdNetworkAccessConfigRequest]
+    class UpdateArgoCdConfig < Struct.new(
+      nil,
+      :rbac_role_mappings,
+      :network_access,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration updates for a capability. The structure varies depending on the capability type.</p>
+    # @!attribute argo_cd
+    #   <p>Configuration updates specific to Argo CD capabilities.</p>
+    #   @return [Types::UpdateArgoCdConfig]
+    # @!attribute ack
+    #   <p>Configuration updates specific to ACK (Amazon Web Services Controllers for Kubernetes) capabilities.</p>
+    #   @return [Types::UpdateAckConfig]
+    class UpdateCapabilityConfiguration < Struct.new(
+      nil,
+      :argo_cd,
+      :ack,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute cluster_name
+    #   <p>The name of the Amazon EKS cluster that contains the capability you want to update configuration for.</p>
+    #   @return [String]
+    # @!attribute capability_name
+    #   <p>The name of the capability to update configuration for.</p>
+    #   @return [String]
+    # @!attribute role_arn
+    #   <p>The Amazon Resource Name (ARN) of the IAM role that the capability uses to interact with Amazon Web Services services. If you specify a new role ARN, the capability will start using the new role for all subsequent operations.</p>
+    #   @return [String]
+    # @!attribute configuration
+    #   <p>The updated configuration settings for the capability. You only need to specify the configuration parameters you want to change. For Argo CD capabilities, you can update RBAC role mappings and network access settings.</p>
+    #   @return [Types::UpdateCapabilityConfiguration]
+    # @!attribute client_request_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. This token is valid for 24 hours after creation.</p>
+    #   @return [String]
+    # @!attribute delete_propagation_policy
+    #   <p>The updated delete propagation policy for the capability. Currently, the only supported value is <code>RETAIN</code>.</p>
+    #   @return [String]
+    class UpdateCapabilityRequest < Struct.new(
+      nil,
+      :cluster_name,
+      :capability_name,
+      :role_arn,
+      :configuration,
+      :client_request_token,
+      :delete_propagation_policy,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute update
+    #   <p>An object representing an asynchronous update.</p>
+    #   @return [Types::Update]
+    class UpdateCapabilityResponse < Struct.new(
+      nil,
+      :update,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute name
     #   <p>The name of the Amazon EKS cluster to update.</p>
     #   @return [String]
     # @!attribute resources_vpc_config
-    #   <p>An object representing the VPC configuration to use for an Amazon EKS cluster.</p>
+    #   <p>An object representing the VPC configuration to use for the cluster update. You can
+    #               use this parameter to update the control plane egress mode, the subnets used by the
+    #               cluster, the security groups, and the endpoint access settings.</p>
     #   @return [Types::VpcConfigRequest]
     # @!attribute logging
     #   <p>Enable or disable exporting the Kubernetes control plane logs for your cluster to CloudWatch Logs .
@@ -5817,11 +7609,23 @@ module Aws::EKS
     #               configuration after the cluster is created.</p>
     #   @return [Types::RemoteNetworkConfigRequest]
     # @!attribute deletion_protection
-    #   <p>Specifies whether to enable or disable deletion protection for the cluster. When 
-    #               enabled (<code>true</code>), the cluster cannot be deleted until deletion protection is 
-    #               explicitly disabled. When disabled (<code>false</code>), the cluster can be deleted 
+    #   <p>Specifies whether to enable or disable deletion protection for the cluster. When
+    #               enabled (<code>true</code>), the cluster cannot be deleted until deletion protection is
+    #               explicitly disabled. When disabled (<code>false</code>), the cluster can be deleted
     #               normally.</p>
     #   @return [Boolean]
+    # @!attribute control_plane_scaling_config
+    #   <p>The control plane scaling tier configuration. For more information, see EKS Provisioned Control Plane in the Amazon EKS User Guide.</p>
+    #   @return [Types::ControlPlaneScalingConfig]
+    # @!attribute kube_api_server_config
+    #   <p>The Kubernetes API server configuration for the updated cluster.</p>
+    #   @return [Types::KubeApiServerConfigRequest]
+    # @!attribute kube_scheduler_config
+    #   <p>The Kubernetes scheduler configuration for the updated cluster.</p>
+    #   @return [Types::KubeSchedulerConfigRequest]
+    # @!attribute kube_controller_manager_config
+    #   <p>The Kubernetes controller manager configuration for the updated cluster.</p>
+    #   @return [Types::KubeControllerManagerConfigRequest]
     class UpdateClusterConfigRequest < Struct.new(
       nil,
       :name,
@@ -5836,6 +7640,10 @@ module Aws::EKS
       :storage_config,
       :remote_network_config,
       :deletion_protection,
+      :control_plane_scaling_config,
+      :kube_api_server_config,
+      :kube_scheduler_config,
+      :kube_controller_manager_config,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5863,15 +7671,19 @@ module Aws::EKS
     #   the idempotency of the request.</p>
     #   @return [String]
     # @!attribute force
-    #   <p>Set this value to <code>true</code> to override upgrade-blocking readiness checks when
+    #   <p>Set this value to <code>true</code> to override upgrade-blocking or rollback-blocking readiness checks when
     #               updating a cluster.</p>
     #   @return [Boolean]
+    # @!attribute rollback_config
+    #   <p>The rollback configuration for the cluster version rollback.</p>
+    #   @return [Types::RollbackConfig]
     class UpdateClusterVersionRequest < Struct.new(
       nil,
       :name,
       :version,
       :client_request_token,
       :force,
+      :rollback_config,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5959,6 +7771,9 @@ module Aws::EKS
     # @!attribute node_repair_config
     #   <p>The node auto repair configuration for the node group.</p>
     #   @return [Types::NodeRepairConfig]
+    # @!attribute warm_pool_config
+    #   <p>The warm pool configuration to apply to the node group. You can use this to add a warm pool to an existing node group or modify the settings of an existing warm pool.</p>
+    #   @return [Types::WarmPoolConfig]
     # @!attribute client_request_token
     #   <p>A unique, case-sensitive identifier that you provide to ensure
     #   the idempotency of the request.</p>
@@ -5972,6 +7787,7 @@ module Aws::EKS
       :scaling_config,
       :update_config,
       :node_repair_config,
+      :warm_pool_config,
       :client_request_token,
       keyword_init: true
     )
@@ -5996,9 +7812,10 @@ module Aws::EKS
     #   <p>The name of the managed node group to update.</p>
     #   @return [String]
     # @!attribute version
-    #   <p>The Kubernetes version to update to. If no version is specified, then the Kubernetes version of
-    #               the node group does not change. You can specify the Kubernetes version of the cluster to
-    #               update the node group to the latest AMI version of the cluster's Kubernetes version.
+    #   <p>The Kubernetes version to update to. If no version is specified, then the node group
+    #               will be updated to match the cluster's current Kubernetes version, and the latest available
+    #               AMI for that version will be used. You can also specify the Kubernetes version of the cluster
+    #               to update the node group to the latest AMI version of the cluster's Kubernetes version.
     #               If you specify <code>launchTemplate</code>, and your launch template uses a custom AMI, then don't specify  <code>version</code>,
     #               or the node group  update will fail. For more information about using launch templates with Amazon EKS, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html">Customizing managed nodes with launch templates</a> in the <i>Amazon EKS User Guide</i>.</p>
     #   @return [String]
@@ -6009,7 +7826,7 @@ module Aws::EKS
     #               <i>Amazon EKS User Guide</i>. Amazon EKS managed node groups support the November 2022 and later releases
     #               of the Windows AMIs. For information about Windows versions, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/eks-ami-versions-windows.html">Amazon EKS
     #                   optimized Windows AMI versions</a> in the <i>Amazon EKS User Guide</i>.</p>
-    #            <p>If you specify <code>launchTemplate</code>, and your launch template uses a custom AMI, then don't specify 
+    #            <p>If you specify <code>launchTemplate</code>, and your launch template uses a custom AMI, then don't specify
     #                   <code>releaseVersion</code>, or the node group  update will fail.
     #               For more information about using launch templates with Amazon EKS, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html">Customizing managed nodes with launch templates</a> in the <i>Amazon EKS User Guide</i>.</p>
     #   @return [String]
@@ -6111,6 +7928,31 @@ module Aws::EKS
     #               gets the required permissions. This means Role A will assume Role B, allowing your Pods
     #               to securely access resources like S3 buckets in the target account.</p>
     #   @return [String]
+    # @!attribute policy
+    #   <p>An optional IAM policy in JSON format (as an escaped string) that applies additional
+    #               restrictions to this pod identity association beyond the IAM policies attached to the
+    #               IAM role. This policy is applied as the intersection of the role's policies and this
+    #               policy, allowing you to reduce the permissions that applications in the pods can use.
+    #               Use this policy to enforce least privilege access while still leveraging a shared IAM
+    #               role across multiple applications.</p>
+    #            <p>
+    #               <b>Important considerations</b>
+    #            </p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <b>Session tags:</b> When using this policy,
+    #                       <code>disableSessionTags</code> must be set to <code>true</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <b>Target role permissions:</b> If you specify both
+    #                       a <code>TargetRoleArn</code> and a policy, the policy restrictions apply only to
+    #                       the target role's permissions, not to the initial role used for assuming the
+    #                       target role.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
     class UpdatePodIdentityAssociationRequest < Struct.new(
       nil,
       :cluster_name,
@@ -6119,6 +7961,7 @@ module Aws::EKS
       :client_request_token,
       :disable_session_tags,
       :target_role_arn,
+      :policy,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6130,6 +7973,22 @@ module Aws::EKS
     class UpdatePodIdentityAssociationResponse < Struct.new(
       nil,
       :association,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Updates to RBAC role mappings for an Argo CD capability. You can add, update, or remove role mappings in a single operation.</p>
+    # @!attribute add_or_update_role_mappings
+    #   <p>A list of role mappings to add or update. If a mapping for the specified role already exists, it will be updated with the new identities. If it doesn't exist, a new mapping will be created.</p>
+    #   @return [Array<Types::ArgoCdRoleMapping>]
+    # @!attribute remove_role_mappings
+    #   <p>A list of role mappings to remove from the RBAC configuration. Each mapping specifies an Argo CD role (<code>ADMIN</code>, <code>EDITOR</code>, or <code>VIEWER</code>) and the identities to remove from that role.</p>
+    #   @return [Array<Types::ArgoCdRoleMapping>]
+    class UpdateRoleMappings < Struct.new(
+      nil,
+      :add_or_update_role_mappings,
+      :remove_role_mappings,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6251,6 +8110,21 @@ module Aws::EKS
     #                   <code>IPv4</code> clusters or <code>IPv6</code> clusters that were made before
     #               October 2024.</p>
     #   @return [Array<String>]
+    # @!attribute control_plane_egress_mode
+    #   <p>Specifies the control plane egress routing mode for the cluster. If the cluster is set
+    #               to <code>AWS_MANAGED</code>, Amazon EKS manages the egress path from the control plane
+    #               and you don't need to configure NAT gateways or other routing infrastructure for control
+    #               plane traffic. If the cluster is set to <code>CUSTOMER_ROUTED</code>, you manage the
+    #               egress path from the control plane in your VPC subnets. You are responsible for ensuring
+    #               that the control plane can reach required endpoints such as webhook servers and OIDC
+    #               providers. The default value is <code>AWS_MANAGED</code>. Once set to
+    #               <code>CUSTOMER_ROUTED</code>, this setting cannot be changed back to
+    #               <code>AWS_MANAGED</code> on the same cluster.</p>
+    #            <p>
+    #               <a href="https://docs.aws.amazon.com/eks/latest/userguide/control-plane-egress.html">Learn more about control plane
+    #                   egress routing in the <i>Amazon EKS User Guide</i>.</a>
+    #            </p>
+    #   @return [String]
     class VpcConfigRequest < Struct.new(
       nil,
       :subnet_ids,
@@ -6258,6 +8132,7 @@ module Aws::EKS
       :endpoint_public_access,
       :endpoint_private_access,
       :public_access_cidrs,
+      :control_plane_egress_mode,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6308,6 +8183,16 @@ module Aws::EKS
     #               <code>IPv4</code> clusters or <code>IPv6</code> clusters that were made before
     #               October 2024.</p>
     #   @return [Array<String>]
+    # @!attribute control_plane_egress_mode
+    #   <p>The current control plane egress routing mode for the cluster. If the cluster is set
+    #               to <code>AWS_MANAGED</code>, Amazon EKS manages the egress path from the control plane.
+    #               If the cluster is set to <code>CUSTOMER_ROUTED</code>, you manage the egress path from
+    #               the control plane in your VPC subnets.</p>
+    #            <p>
+    #               <a href="https://docs.aws.amazon.com/eks/latest/userguide/control-plane-egress.html">Learn more about control plane
+    #                   egress routing in the <i>Amazon EKS User Guide</i>.</a>
+    #            </p>
+    #   @return [String]
     class VpcConfigResponse < Struct.new(
       nil,
       :subnet_ids,
@@ -6317,6 +8202,7 @@ module Aws::EKS
       :endpoint_public_access,
       :endpoint_private_access,
       :public_access_cidrs,
+      :control_plane_egress_mode,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6326,6 +8212,34 @@ module Aws::EKS
         options[:endpoint_private_access] = false unless options.key?(:endpoint_private_access)
         super
       end
+    end
+
+    # <p>The configuration for an Amazon EC2 Auto Scaling warm pool attached to an Amazon EKS managed node group. Warm pools maintain pre-initialized EC2 instances alongside your Auto Scaling group that have already completed the bootup initialization process and can be kept in a <code>Stopped</code>, <code>Running</code>, or <code>Hibernated</code> state.</p>
+    # @!attribute enabled
+    #   <p>Specifies whether to attach warm pools on the managed node group. Set to <code>true</code> to enable the warm pool, or <code>false</code> to disable and remove it. If not specified during an update, the current value is preserved.</p>
+    #   @return [Boolean]
+    # @!attribute min_size
+    #   <p>The minimum number of instances to maintain in the warm pool. Default: <code>0</code>. Size your warm pool based on scaling patterns to balance cost and availability. Start with 10-20% of expected peak capacity.</p>
+    #   @return [Integer]
+    # @!attribute max_group_prepared_capacity
+    #   <p>The maximum total number of instances across the warm pool and Auto Scaling group combined. This value controls the total prepared capacity available for your node group.</p>
+    #   @return [Integer]
+    # @!attribute pool_state
+    #   <p>The desired state for warm pool instances. Default: <code>Stopped</code>. Valid values are <code>Stopped</code> (most cost-effective with EBS storage costs only), <code>Running</code> (fastest transition time with full EC2 costs), and <code>Hibernated</code> (balance between cost and speed, only supported on specific instance types). Warm pool instances in the <code>Hibernated</code> state are not supported with Bottlerocket AMIs.</p>
+    #   @return [String]
+    # @!attribute reuse_on_scale_in
+    #   <p>Indicates whether instances should return to the warm pool during scale-in events instead of being terminated. Default: <code>false</code>. Enable this to reduce costs by reusing instances. This feature is not supported for Bottlerocket AMIs.</p>
+    #   @return [Boolean]
+    class WarmPoolConfig < Struct.new(
+      nil,
+      :enabled,
+      :min_size,
+      :max_group_prepared_capacity,
+      :pool_state,
+      :reuse_on_scale_in,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for zonal shift for the cluster.</p>

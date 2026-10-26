@@ -1,5 +1,0 @@
-  module Aws
-    module AppTest
-      VERSION: String
-    end
-  end

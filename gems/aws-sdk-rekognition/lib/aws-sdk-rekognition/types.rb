@@ -43,11 +43,11 @@ module Aws::Rekognition
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Assets are the images that you use to train and evaluate a model version. 
+    # <p>Assets are the images that you use to train and evaluate a model version.
     #          Assets can also contain validation information that you use to debug a failed model training.
     #          </p>
     # @!attribute ground_truth_manifest
-    #   <p>The S3 bucket that contains an Amazon Sagemaker Ground Truth format manifest file. 
+    #   <p>The S3 bucket that contains an Amazon Sagemaker Ground Truth format manifest file.
     #   </p>
     #   @return [Types::GroundTruthManifest]
     class Asset < Struct.new(
@@ -604,10 +604,10 @@ module Aws::Rekognition
 
     # <p>
     #             Label detection settings to use on a streaming video. Defining the settings is required in the request parameter for <a>CreateStreamProcessor</a>.
-    #             Including this setting in the <code>CreateStreamProcessor</code> request enables you to use the stream processor for label detection. 
+    #             Including this setting in the <code>CreateStreamProcessor</code> request enables you to use the stream processor for label detection.
     #             You can then select what you want the stream processor to detect, such as people or pets. When the stream processor has started, one notification
-    #             is sent for each object class specified. For example, if packages and pets are selected, one SNS notification is published the first time a package is detected 
-    #             and one SNS notification is published the first time a pet is detected, as well as an end-of-session summary. 
+    #             is sent for each object class specified. For example, if packages and pets are selected, one SNS notification is published the first time a package is detected
+    #             and one SNS notification is published the first time a pet is detected, as well as an end-of-session summary.
     #         </p>
     # @!attribute labels
     #   <p>
@@ -616,7 +616,7 @@ module Aws::Rekognition
     #   @return [Array<String>]
     # @!attribute min_confidence
     #   <p>
-    #               The minimum confidence required to label an object in the video. 
+    #               The minimum confidence required to label an object in the video.
     #           </p>
     #   @return [Float]
     class ConnectedHomeSettings < Struct.new(
@@ -629,7 +629,7 @@ module Aws::Rekognition
     end
 
     # <p>
-    #             The label detection settings you want to use in your stream processor. This includes the labels you want the stream processor to detect and the minimum confidence level allowed to label objects. 
+    #             The label detection settings you want to use in your stream processor. This includes the labels you want the stream processor to detect and the minimum confidence level allowed to label objects.
     #         </p>
     # @!attribute labels
     #   <p>
@@ -638,7 +638,7 @@ module Aws::Rekognition
     #   @return [Array<String>]
     # @!attribute min_confidence
     #   <p>
-    #               The minimum confidence required to label an object in the video. 
+    #               The minimum confidence required to label an object in the video.
     #           </p>
     #   @return [Float]
     class ConnectedHomeSettingsForUpdate < Struct.new(
@@ -671,7 +671,7 @@ module Aws::Rekognition
     #         StartTimestampMillis to EndTimestampMillis. </p>
     #   @return [Integer]
     # @!attribute content_types
-    #   <p>A list of predicted results for the type of content an image contains. For example, 
+    #   <p>A list of predicted results for the type of content an image contains. For example,
     #         the image content might be from animation, sports, or a video game.</p>
     #   @return [Array<Types::ContentType>]
     class ContentModerationDetection < Struct.new(
@@ -775,7 +775,7 @@ module Aws::Rekognition
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Information about an item of Personal Protective Equipment covering a corresponding body part. For more 
+    # <p>Information about an item of Personal Protective Equipment covering a corresponding body part. For more
     #          information, see <a>DetectProtectiveEquipment</a>.</p>
     # @!attribute confidence
     #   <p>The confidence that Amazon Rekognition has in the value of <code>Value</code>.</p>
@@ -838,12 +838,12 @@ module Aws::Rekognition
     #   The source files for the dataset. You can specify the ARN of an existing dataset or specify the Amazon S3 bucket location
     #   of an Amazon Sagemaker format manifest file. If you don't specify <code>datasetSource</code>, an empty dataset is created.
     #     To add labeled images to the dataset,  You can use the console or call <a>UpdateDatasetEntries</a>.
-    #     
+    #
     #   </p>
     #   @return [Types::DatasetSource]
     # @!attribute dataset_type
     #   <p>
-    #   The type of the dataset. Specify <code>TRAIN</code> to create a training dataset. Specify <code>TEST</code> 
+    #   The type of the dataset. Specify <code>TRAIN</code> to create a training dataset. Specify <code>TEST</code>
     #      to create a test dataset.
     #   </p>
     #   @return [String]
@@ -932,9 +932,9 @@ module Aws::Rekognition
     end
 
     # @!attribute session_id
-    #   <p>A unique 128-bit UUID identifying a Face Liveness session. 
-    #         A new sessionID must be used for every Face Liveness check. If a given sessionID is used for subsequent 
-    #         Face Liveness checks, the checks will fail. Additionally, a SessionId expires 3 minutes after it's sent, 
+    #   <p>A unique 128-bit UUID identifying a Face Liveness session.
+    #         A new sessionID must be used for every Face Liveness check. If a given sessionID is used for subsequent
+    #         Face Liveness checks, the checks will fail. Additionally, a SessionId expires 3 minutes after it's sent,
     #         making all Liveness data associated with the session (e.g., sessionID, reference image, audit images, etc.) unavailable.
     #       </p>
     #   @return [String]
@@ -972,7 +972,7 @@ module Aws::Rekognition
     end
 
     # @!attribute project_arn
-    #   <p>The Amazon Resource Name (ARN) of the new project. You can use the ARN to 
+    #   <p>The Amazon Resource Name (ARN) of the new project. You can use the ARN to
     #         configure IAM access to the project. </p>
     #   @return [String]
     class CreateProjectResponse < Struct.new(
@@ -1072,7 +1072,7 @@ module Aws::Rekognition
     #   <p>Kinesis video stream stream that provides the source streaming video. If you are using the AWS CLI, the parameter name is <code>StreamProcessorInput</code>. This is required for both face search and label detection stream processors.</p>
     #   @return [Types::StreamProcessorInput]
     # @!attribute output
-    #   <p>Kinesis data stream stream or Amazon S3 bucket location to which Amazon Rekognition Video puts the analysis results. If you are using the AWS CLI, the parameter name is <code>StreamProcessorOutput</code>. 
+    #   <p>Kinesis data stream stream or Amazon S3 bucket location to which Amazon Rekognition Video puts the analysis results. If you are using the AWS CLI, the parameter name is <code>StreamProcessorOutput</code>.
     #               This must be a <a>S3Destination</a> of an Amazon S3 bucket that you own for a label detection stream processor or a Kinesis data stream ARN for a face search stream processor.</p>
     #   @return [Types::StreamProcessorOutput]
     # @!attribute name
@@ -1085,8 +1085,8 @@ module Aws::Rekognition
     #   <p>Input parameters used in a streaming video analyzed by a stream processor. You can use <code>FaceSearch</code> to recognize faces in a streaming video, or you can use <code>ConnectedHome</code> to detect labels.</p>
     #   @return [Types::StreamProcessorSettings]
     # @!attribute role_arn
-    #   <p>The Amazon Resource Number (ARN) of the IAM role that allows access to the stream processor. 
-    #               The IAM role provides Rekognition read permissions for a Kinesis stream. 
+    #   <p>The Amazon Resource Number (ARN) of the IAM role that allows access to the stream processor.
+    #               The IAM role provides Rekognition read permissions for a Kinesis stream.
     #               It also provides write permissions to an Amazon S3 bucket and Amazon Simple Notification Service topic for a label detection stream processor. This is required for both face search and label detection stream processors.</p>
     #   @return [String]
     # @!attribute tags
@@ -1102,8 +1102,8 @@ module Aws::Rekognition
     # @!attribute kms_key_id
     #   <p>
     #               The identifier for your AWS Key Management Service key (AWS KMS key). This is an optional parameter for label detection stream processors and should not be used to create a face search stream processor.
-    #               You can supply the Amazon Resource Name (ARN) of your KMS key, the ID of your KMS key, an alias for your KMS key, or an alias ARN. 
-    #               The key is used to encrypt results and data published to your Amazon S3 bucket, which includes  image frames and hero images. Your source images are unaffected. 
+    #               You can supply the Amazon Resource Name (ARN) of your KMS key, the ID of your KMS key, an alias for your KMS key, or an alias ARN.
+    #               The key is used to encrypt results and data published to your Amazon S3 bucket, which includes  image frames and hero images. Your source images are unaffected.
     #           </p>
     #            <p>
     #               </p>
@@ -1180,11 +1180,11 @@ module Aws::Rekognition
     #   <p>The name of the custom label.</p>
     #   @return [String]
     # @!attribute confidence
-    #   <p>The confidence that the model has in the detection of the custom label. The 
+    #   <p>The confidence that the model has in the detection of the custom label. The
     #         range is 0-100. A higher value indicates a higher confidence.</p>
     #   @return [Float]
     # @!attribute geometry
-    #   <p>The location of the detected object on the image that corresponds to the custom label. 
+    #   <p>The location of the detected object on the image that corresponds to the custom label.
     #            Includes an axis aligned coarse bounding box surrounding the object and a finer grain polygon
     #            for more accurate spatial information.</p>
     #   @return [Types::Geometry]
@@ -1198,8 +1198,8 @@ module Aws::Rekognition
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Feature specific configuration for the training job. Configuration provided for the job must match 
-    #          the feature type parameter associated with project. If configuration 
+    # <p>Feature specific configuration for the training job. Configuration provided for the job must match
+    #          the feature type parameter associated with project. If configuration
     #          and feature type do not match an InvalidParameterException is returned.</p>
     # @!attribute content_moderation
     #   <p>Configuration options for Custom Moderation training.</p>
@@ -1233,10 +1233,10 @@ module Aws::Rekognition
     #   <p>A Base64-encoded binary data object
     #      containing one or JSON lines that either update the dataset or are additions to the dataset.  You change a dataset by calling <a>UpdateDatasetEntries</a>.
     #      If you are using an AWS SDK to call <code>UpdateDatasetEntries</code>, you don't need to encode <code>Changes</code> as the SDK encodes the data for you.
-    #   
+    #
     #   </p>
     #            <p>For example JSON lines,
-    #         see Image-Level labels in manifest files and 
+    #         see Image-Level labels in manifest files and
     #         and Object localization in manifest files in the <i>Amazon Rekognition Custom Labels Developer Guide</i>.
     #      </p>
     #   @return [String]
@@ -1270,12 +1270,12 @@ module Aws::Rekognition
     #   @return [String]
     # @!attribute status_message
     #   <p>
-    #      The status message for the dataset. 
+    #      The status message for the dataset.
     #   </p>
     #   @return [String]
     # @!attribute status_message_code
     #   <p>
-    #      The status message code for the dataset operation. If a service error occurs, try the 
+    #      The status message code for the dataset operation. If a service error occurs, try the
     #      API call again later. If a client error occurs, check the input parameters to the dataset
     #      API call that failed.
     #   </p>
@@ -1343,12 +1343,12 @@ module Aws::Rekognition
     end
 
     # <p>
-    #    Summary information for an Amazon Rekognition Custom Labels dataset. For more information, see 
+    #    Summary information for an Amazon Rekognition Custom Labels dataset. For more information, see
     #    <a>ProjectDescription</a>.
     # </p>
     # @!attribute creation_timestamp
     #   <p>
-    #      The Unix timestamp for the date and time that the dataset was created. 
+    #      The Unix timestamp for the date and time that the dataset was created.
     #   </p>
     #   @return [Time]
     # @!attribute dataset_type
@@ -1373,7 +1373,7 @@ module Aws::Rekognition
     #   @return [String]
     # @!attribute status_message_code
     #   <p>
-    #      The status message code for the dataset operation. If a service error occurs, try the 
+    #      The status message code for the dataset operation. If a service error occurs, try the
     #      API call again later. If a client error occurs, check the input parameters to the dataset
     #      API call that failed.
     #   </p>
@@ -1398,11 +1398,11 @@ module Aws::Rekognition
     # To create a copy of an existing dataset,  specify the Amazon Resource Name (ARN) of
     # an existing dataset in <code>DatasetArn</code>.</p>
     #          <p>You need to specify a value for <code>DatasetArn</code> or <code>GroundTruthManifest</code>, but not both.
-    #     if you supply both values, or if you don't specify any values, an InvalidParameterException exception occurs. 
+    #     if you supply both values, or if you don't specify any values, an InvalidParameterException exception occurs.
     #  </p>
     #          <p>For more information, see <a>CreateDataset</a>.</p>
     # @!attribute ground_truth_manifest
-    #   <p>The S3 bucket that contains an Amazon Sagemaker Ground Truth format manifest file. 
+    #   <p>The S3 bucket that contains an Amazon Sagemaker Ground Truth format manifest file.
     #   </p>
     #   @return [Types::GroundTruthManifest]
     # @!attribute dataset_arn
@@ -1421,7 +1421,7 @@ module Aws::Rekognition
 
     # <p>
     # Provides statistics about a dataset. For more information, see <a>DescribeDataset</a>.
-    # 
+    #
     # </p>
     # @!attribute labeled_entries
     #   <p>
@@ -1478,7 +1478,7 @@ module Aws::Rekognition
 
     # @!attribute dataset_arn
     #   <p>
-    #   The ARN of the Amazon Rekognition Custom Labels dataset that you want to delete. 
+    #   The ARN of the Amazon Rekognition Custom Labels dataset that you want to delete.
     #   </p>
     #   @return [String]
     class DeleteDatasetRequest < Struct.new(
@@ -1660,7 +1660,7 @@ module Aws::Rekognition
     #   @return [Integer]
     # @!attribute face_model_version
     #   <p>The version of the face model that's used by the collection for face detection.</p>
-    #            <p>For more information, see Model versioning in the 
+    #            <p>For more information, see Model versioning in the
     #        Amazon Rekognition Developer Guide.</p>
     #   @return [String]
     # @!attribute collection_arn
@@ -1724,11 +1724,11 @@ module Aws::Rekognition
     #   @return [Array<String>]
     # @!attribute next_token
     #   <p>If the previous response was incomplete (because there is more
-    #              results to retrieve), Amazon Rekognition returns a pagination token in the response. 
+    #              results to retrieve), Amazon Rekognition returns a pagination token in the response.
     #              You can use this pagination token to retrieve the next set of results. </p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of results to return per paginated call. 
+    #   <p>The maximum number of results to return per paginated call.
     #             The largest value you can specify is 100. If you specify a value greater than 100, a ValidationException
     #             error occurs. The default value is 100. </p>
     #   @return [Integer]
@@ -1749,7 +1749,7 @@ module Aws::Rekognition
     #   @return [Array<Types::ProjectVersionDescription>]
     # @!attribute next_token
     #   <p>If the previous response was incomplete (because there is more
-    #            results to retrieve), Amazon Rekognition returns a pagination token in the response. 
+    #            results to retrieve), Amazon Rekognition returns a pagination token in the response.
     #            You can use this pagination token to retrieve the next set of results. </p>
     #   @return [String]
     class DescribeProjectVersionsResponse < Struct.new(
@@ -1763,20 +1763,20 @@ module Aws::Rekognition
 
     # @!attribute next_token
     #   <p>If the previous response was incomplete (because there is more
-    #            results to retrieve), Rekognition returns a pagination token in the response. You can use this pagination 
+    #            results to retrieve), Rekognition returns a pagination token in the response. You can use this pagination
     #            token to retrieve the next set of results. </p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of results to return per paginated call. The largest value you can specify is 100. 
+    #   <p>The maximum number of results to return per paginated call. The largest value you can specify is 100.
     #            If you specify a value greater than 100, a ValidationException
     #            error occurs. The default value is 100. </p>
     #   @return [Integer]
     # @!attribute project_names
-    #   <p>A list of the projects that you want Rekognition to describe. If you don't specify a value, 
+    #   <p>A list of the projects that you want Rekognition to describe. If you don't specify a value,
     #         the response includes descriptions for all the projects in your AWS account.</p>
     #   @return [Array<String>]
     # @!attribute features
-    #   <p>Specifies the type of customization to filter projects by. If no value is specified, 
+    #   <p>Specifies the type of customization to filter projects by. If no value is specified,
     #            CUSTOM_LABELS is used as a default.</p>
     #   @return [Array<String>]
     class DescribeProjectsRequest < Struct.new(
@@ -1795,7 +1795,7 @@ module Aws::Rekognition
     #   @return [Array<Types::ProjectDescription>]
     # @!attribute next_token
     #   <p>If the previous response was incomplete (because there is more
-    #            results to retrieve), Amazon Rekognition returns a pagination token in the response. 
+    #            results to retrieve), Amazon Rekognition returns a pagination token in the response.
     #            You can use this pagination token to retrieve the next set of results. </p>
     #   @return [String]
     class DescribeProjectsResponse < Struct.new(
@@ -1922,15 +1922,15 @@ module Aws::Rekognition
     #         Amazon Rekognition Developer Guide. </p>
     #   @return [Types::Image]
     # @!attribute max_results
-    #   <p>Maximum number of results you want the service to return in the response. 
-    #            The service returns the specified number of highest confidence labels ranked from highest confidence 
+    #   <p>Maximum number of results you want the service to return in the response.
+    #            The service returns the specified number of highest confidence labels ranked from highest confidence
     #         to lowest.</p>
     #   @return [Integer]
     # @!attribute min_confidence
-    #   <p>Specifies the minimum confidence level for the labels to return. 
+    #   <p>Specifies the minimum confidence level for the labels to return.
     #            <code>DetectCustomLabels</code> doesn't return any labels with a confidence value that's lower than
     #            this specified value. If you specify a
-    #         value of 0, <code>DetectCustomLabels</code> returns all labels, regardless of the assumed 
+    #         value of 0, <code>DetectCustomLabels</code> returns all labels, regardless of the assumed
     #            threshold applied to each label.
     #         If you don't specify a value for <code>MinConfidence</code>,  <code>DetectCustomLabels</code>
     #            returns labels based on the assumed threshold of each label.</p>
@@ -2228,7 +2228,7 @@ module Aws::Rekognition
     #         will be sent to.</p>
     #   @return [Types::HumanLoopConfig]
     # @!attribute project_version
-    #   <p>Identifier for the custom adapter. Expects the ProjectVersionArn as a value. 
+    #   <p>Identifier for the custom adapter. Expects the ProjectVersionArn as a value.
     #            Use the CreateProject or CreateProjectVersion APIs to create a custom adapter.</p>
     #   @return [String]
     class DetectModerationLabelsRequest < Struct.new(
@@ -2243,7 +2243,7 @@ module Aws::Rekognition
     end
 
     # @!attribute moderation_labels
-    #   <p>Array of detected Moderation labels. For video operations, this includes the time, 
+    #   <p>Array of detected Moderation labels. For video operations, this includes the time,
     #         in milliseconds from the start of the video, they were detected.</p>
     #   @return [Array<Types::ModerationLabel>]
     # @!attribute moderation_model_version
@@ -2259,7 +2259,7 @@ module Aws::Rekognition
     #            indicating that a base moderation detection project version was used.</p>
     #   @return [String]
     # @!attribute content_types
-    #   <p>A list of predicted results for the type of content an image contains. For example, 
+    #   <p>A list of predicted results for the type of content an image contains. For example,
     #         the image content might be from animation, sports, or a video game.</p>
     #   @return [Array<Types::ContentType>]
     class DetectModerationLabelsResponse < Struct.new(
@@ -2275,7 +2275,7 @@ module Aws::Rekognition
     end
 
     # @!attribute image
-    #   <p>The image in which you want to detect PPE on detected persons. The image can be passed as image bytes or you can 
+    #   <p>The image in which you want to detect PPE on detected persons. The image can be passed as image bytes or you can
     #            reference an image stored in an Amazon S3 bucket. </p>
     #   @return [Types::Image]
     # @!attribute summarization_attributes
@@ -2372,11 +2372,11 @@ module Aws::Rekognition
     #         80.</p>
     #   @return [Float]
     # @!attribute min_bounding_box_height
-    #   <p>Sets the minimum height of the word bounding box. Words with bounding box heights lesser than 
+    #   <p>Sets the minimum height of the word bounding box. Words with bounding box heights lesser than
     #         this value will be excluded from the result. Value is relative to the video frame height.</p>
     #   @return [Float]
     # @!attribute min_bounding_box_width
-    #   <p>Sets the minimum width of the word bounding box. Words with bounding boxes widths lesser than 
+    #   <p>Sets the minimum width of the word bounding box. Words with bounding boxes widths lesser than
     #         this value will be excluded from the result. Value is relative to the video frame width.</p>
     #   @return [Float]
     class DetectionFilter < Struct.new(
@@ -2522,10 +2522,10 @@ module Aws::Rekognition
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The API returns a prediction of an emotion based on a person's facial expressions, along with 
-    #       the confidence level for the predicted emotion. It is not a determination of the person’s internal emotional 
-    #       state and should not be used in such a way. For example, a person pretending to have a sad face might not 
-    #       be sad emotionally. The API is not intended to be used, and you may not use it, in a manner that violates 
+    # <p>The API returns a prediction of an emotion based on a person's facial expressions, along with
+    #       the confidence level for the predicted emotion. It is not a determination of the person’s internal emotional
+    #       state and should not be used in such a way. For example, a person pretending to have a sad face might not
+    #       be sad emotionally. The API is not intended to be used, and you may not use it, in a manner that violates
     #       the EU Artificial Intelligence Act or any other applicable law.</p>
     # @!attribute type
     #   <p>Type of emotion detected.</p>
@@ -2543,7 +2543,7 @@ module Aws::Rekognition
     end
 
     # <p>Information about an item of Personal Protective Equipment (PPE) detected by
-    #          <a>DetectProtectiveEquipment</a>. For more 
+    #          <a>DetectProtectiveEquipment</a>. For more
     #          information, see <a>DetectProtectiveEquipment</a>.</p>
     # @!attribute bounding_box
     #   <p>A bounding box surrounding the item of detected PPE.</p>
@@ -2573,7 +2573,7 @@ module Aws::Rekognition
     #   <p>The F1 score for the evaluation of all labels. The F1 score metric evaluates the overall precision
     #            and recall performance of the model as a single value. A higher value indicates better precision
     #            and recall performance. A lower score indicates that precision, recall, or both are performing poorly.
-    #            
+    #
     #     </p>
     #   @return [Float]
     # @!attribute summary
@@ -2903,8 +2903,8 @@ module Aws::Rekognition
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Input face recognition parameters for an Amazon Rekognition stream processor. 
-    #             Includes the collection to use for face recognition and the face attributes to detect. 
+    # <p>Input face recognition parameters for an Amazon Rekognition stream processor.
+    #             Includes the collection to use for face recognition and the face attributes to detect.
     #             Defining the settings is required in the request parameter for <a>CreateStreamProcessor</a>.</p>
     # @!attribute collection_id
     #   <p>The ID of a collection that contains faces that you want to search for.</p>
@@ -2922,8 +2922,27 @@ module Aws::Rekognition
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Describes a condition that was detected in the Face Liveness video and that contributed to
+    #       the confidence score returned for the session.</p>
+    # @!attribute code
+    #   <p>A code identifying the condition that was detected during the Face Liveness session.</p>
+    #   @return [String]
+    # @!attribute message
+    #   <p>A human-readable description of the detected condition, suitable for displaying to an end
+    #         user before they retry a Face Liveness check. Use <code>Code</code> rather than this message
+    #         for programmatic decisions, because the message text can change.</p>
+    #   @return [String]
+    class FeedbackItem < Struct.new(
+      nil,
+      :code,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The predicted gender of a detected face.
-    #       
+    #
     #     </p>
     #          <p>Amazon Rekognition makes gender binary (male/female) predictions based on the physical
     #       appearance of a face in a particular image. This kind of prediction is not designed to
@@ -3030,7 +3049,7 @@ module Aws::Rekognition
     #         a call to <code>StartCelebrityRecognition</code>.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>Maximum number of results to return per paginated call. The largest value you can specify is 1000. 
+    #   <p>Maximum number of results to return per paginated call. The largest value you can specify is 1000.
     #         If you specify a value greater than 1000, a maximum of 1000 results is returned.
     #         The default value is 1000.</p>
     #   @return [Integer]
@@ -3102,7 +3121,7 @@ module Aws::Rekognition
     #          a subsequent call to <code>GetContentModeration</code>.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>Maximum number of results to return per paginated call. The largest value you can specify is 1000. 
+    #   <p>Maximum number of results to return per paginated call. The largest value you can specify is 1000.
     #       If you specify a value greater than 1000, a maximum of 1000 results is returned.
     #       The default value is 1000.</p>
     #   @return [Integer]
@@ -3208,7 +3227,7 @@ module Aws::Rekognition
     #   <p>Unique identifier for the face detection job. The <code>JobId</code> is returned from <code>StartFaceDetection</code>.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>Maximum number of results to return per paginated call. The largest value you can specify is 1000. 
+    #   <p>Maximum number of results to return per paginated call. The largest value you can specify is 1000.
     #          If you specify a value greater than 1000, a maximum of 1000 results is returned.
     #          The default value is 1000.</p>
     #   @return [Integer]
@@ -3310,6 +3329,15 @@ module Aws::Rekognition
     # @!attribute challenge
     #   <p>Contains information regarding the challenge type used for the Face Liveness check.</p>
     #   @return [Types::Challenge]
+    # @!attribute feedback
+    #   <p>A list of conditions that were detected in the Face Liveness video and that contributed to
+    #         the returned <code>Confidence</code> score. Each item contains a code and a human-readable
+    #         message. Feedback is returned only for sessions with a <code>Status</code> of
+    #         <code>SUCCEEDED</code>, and the list is empty when no such conditions were detected.</p>
+    #   @return [Array<Types::FeedbackItem>]
+    # @!attribute metadata
+    #   <p>Metadata about the client that streamed the video for the Face Liveness session.</p>
+    #   @return [Types::SessionMetadata]
     class GetFaceLivenessSessionResultsResponse < Struct.new(
       nil,
       :session_id,
@@ -3318,6 +3346,8 @@ module Aws::Rekognition
       :reference_image,
       :audit_images,
       :challenge,
+      :feedback,
+      :metadata,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3327,7 +3357,7 @@ module Aws::Rekognition
     #   <p>The job identifer for the search request. You get the job identifier from an initial call to <code>StartFaceSearch</code>.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>Maximum number of results to return per paginated call. The largest value you can specify is 1000. 
+    #   <p>Maximum number of results to return per paginated call. The largest value you can specify is 1000.
     #         If you specify a value greater than 1000, a maximum of 1000 results is returned.
     #         The default value is 1000.</p>
     #   @return [Integer]
@@ -3404,7 +3434,7 @@ module Aws::Rekognition
     #         an initial call to <code>StartlabelDetection</code>.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>Maximum number of results to return per paginated call. The largest value you can specify is 1000. 
+    #   <p>Maximum number of results to return per paginated call. The largest value you can specify is 1000.
     #          If you specify a value greater than 1000, a maximum of 1000 results is returned.
     #          The default value is 1000.</p>
     #   @return [Integer]
@@ -3576,7 +3606,7 @@ module Aws::Rekognition
     #           </p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>Maximum number of results to return per paginated call. The largest value you can specify is 1000. 
+    #   <p>Maximum number of results to return per paginated call. The largest value you can specify is 1000.
     #         If you specify a value greater than 1000, a maximum of 1000 results is returned.
     #         The default value is 1000.</p>
     #   @return [Integer]
@@ -3646,14 +3676,14 @@ module Aws::Rekognition
     end
 
     # @!attribute job_id
-    #   <p>Job identifier for the text detection operation for which you want results returned. 
+    #   <p>Job identifier for the text detection operation for which you want results returned.
     #         You get the job identifer from an initial call to <code>StartSegmentDetection</code>.</p>
     #   @return [String]
     # @!attribute max_results
     #   <p>Maximum number of results to return per paginated call. The largest value you can specify is 1000.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>If the response is truncated, Amazon Rekognition Video returns this token that you can use in the subsequent 
+    #   <p>If the response is truncated, Amazon Rekognition Video returns this token that you can use in the subsequent
     #         request to retrieve the next set of text.</p>
     #   @return [String]
     class GetSegmentDetectionRequest < Struct.new(
@@ -3675,25 +3705,25 @@ module Aws::Rekognition
     # @!attribute video_metadata
     #   <p>Currently, Amazon Rekognition Video returns a single   object in the
     #         <code>VideoMetadata</code> array. The object
-    #         contains information about the video stream in the input file that Amazon Rekognition Video chose to analyze.  
+    #         contains information about the video stream in the input file that Amazon Rekognition Video chose to analyze.
     #         The <code>VideoMetadata</code> object includes the video codec, video format and other information.
     #         Video metadata is returned in each page of information returned by <code>GetSegmentDetection</code>.</p>
     #   @return [Array<Types::VideoMetadata>]
     # @!attribute audio_metadata
-    #   <p>An array of 
-    #          objects. There can be multiple audio streams. 
+    #   <p>An array of
+    #          objects. There can be multiple audio streams.
     #         Each <code>AudioMetadata</code> object contains metadata for a single audio stream.
-    #         Audio information in an <code>AudioMetadata</code> objects includes 
+    #         Audio information in an <code>AudioMetadata</code> objects includes
     #         the audio codec, the number of audio channels, the duration of the audio stream,
     #         and the sample rate. Audio metadata is returned in each page of information returned
     #         by <code>GetSegmentDetection</code>.</p>
     #   @return [Array<Types::AudioMetadata>]
     # @!attribute next_token
-    #   <p>If the previous response was incomplete (because there are more labels to retrieve), Amazon Rekognition Video returns 
+    #   <p>If the previous response was incomplete (because there are more labels to retrieve), Amazon Rekognition Video returns
     #         a pagination token in the response. You can use this pagination token to retrieve the next set of text.</p>
     #   @return [String]
     # @!attribute segments
-    #   <p>An array of segments detected in a video.  The array is sorted by the segment types (TECHNICAL_CUE or SHOT) 
+    #   <p>An array of segments detected in a video.  The array is sorted by the segment types (TECHNICAL_CUE or SHOT)
     #         specified in the <code>SegmentTypes</code> input parameter of <code>StartSegmentDetection</code>. Within
     #         each segment type the array is sorted by timestamp values.</p>
     #   @return [Array<Types::SegmentDetection>]
@@ -3731,14 +3761,14 @@ module Aws::Rekognition
     end
 
     # @!attribute job_id
-    #   <p>Job identifier for the text detection operation for which you want results returned. 
+    #   <p>Job identifier for the text detection operation for which you want results returned.
     #           You get the job identifer from an initial call to <code>StartTextDetection</code>.</p>
     #   @return [String]
     # @!attribute max_results
     #   <p>Maximum number of results to return per paginated call. The largest value you can specify is 1000.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>If the previous response was incomplete (because there are more labels to retrieve), Amazon Rekognition Video returns 
+    #   <p>If the previous response was incomplete (because there are more labels to retrieve), Amazon Rekognition Video returns
     #         a pagination token in the response. You can use this pagination token to retrieve the next set of text.</p>
     #   @return [String]
     class GetTextDetectionRequest < Struct.new(
@@ -3766,7 +3796,7 @@ module Aws::Rekognition
     #         from the start of the video that the text was detected, and where it was detected on the screen.</p>
     #   @return [Array<Types::TextDetectionResult>]
     # @!attribute next_token
-    #   <p>If the response is truncated, Amazon Rekognition Video returns this token that you can use in the subsequent 
+    #   <p>If the response is truncated, Amazon Rekognition Video returns this token that you can use in the subsequent
     #           request to retrieve the next set of text.</p>
     #   @return [String]
     # @!attribute text_model_version
@@ -3800,7 +3830,7 @@ module Aws::Rekognition
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The S3 bucket that contains an Amazon Sagemaker Ground Truth format manifest file. 
+    # <p>The S3 bucket that contains an Amazon Sagemaker Ground Truth format manifest file.
     # </p>
     # @!attribute s3_object
     #   <p>Provides the S3 bucket name and object name.</p>
@@ -4044,7 +4074,7 @@ module Aws::Rekognition
     #         Filtered faces aren't indexed. If you specify <code>AUTO</code>, Amazon Rekognition chooses the quality
     #         bar. If you specify <code>LOW</code>, <code>MEDIUM</code>, or <code>HIGH</code>, filtering
     #         removes all faces that don’t meet the chosen quality bar. The default value is
-    #           <code>AUTO</code>. 
+    #           <code>AUTO</code>.
     #         The quality bar is based on a variety of common use cases. Low-quality detections can occur
     #         for a number of reasons. Some examples are an object that's misidentified as a face, a face
     #         that's too blurry, or a face with a pose that's too extreme to use. If you specify
@@ -4519,18 +4549,18 @@ module Aws::Rekognition
 
     # @!attribute dataset_arn
     #   <p>
-    #   The Amazon Resource Name (ARN) for the dataset that you want to use. 
+    #   The Amazon Resource Name (ARN) for the dataset that you want to use.
     #   </p>
     #   @return [String]
     # @!attribute contains_labels
-    #   <p>Specifies a label filter for the response. The response includes an entry only if one or more of the labels in <code>ContainsLabels</code> exist in the entry.       
+    #   <p>Specifies a label filter for the response. The response includes an entry only if one or more of the labels in <code>ContainsLabels</code> exist in the entry.
     #         </p>
     #   @return [Array<String>]
     # @!attribute labeled
     #   <p>
-    #      Specify <code>true</code> to get only the JSON Lines where the image is labeled. 
+    #      Specify <code>true</code> to get only the JSON Lines where the image is labeled.
     #      Specify <code>false</code> to get only the JSON Lines where the image isn't labeled. If you
-    #      don't specify <code>Labeled</code>, <code>ListDatasetEntries</code> returns JSON Lines for labeled and unlabeled 
+    #      don't specify <code>Labeled</code>, <code>ListDatasetEntries</code> returns JSON Lines for labeled and unlabeled
     #      images.
     #   </p>
     #   @return [Boolean]
@@ -4545,11 +4575,11 @@ module Aws::Rekognition
     #   @return [Boolean]
     # @!attribute next_token
     #   <p>If the previous response was incomplete (because there is more
-    #         results to retrieve), Amazon Rekognition Custom Labels returns a pagination token in the response. You can use this pagination 
+    #         results to retrieve), Amazon Rekognition Custom Labels returns a pagination token in the response. You can use this pagination
     #         token to retrieve the next set of results. </p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of results to return per paginated call. The largest value you can specify is 100. 
+    #   <p>The maximum number of results to return per paginated call. The largest value you can specify is 100.
     #         If you specify a value greater than 100, a ValidationException
     #         error occurs. The default value is 100. </p>
     #   @return [Integer]
@@ -4574,7 +4604,7 @@ module Aws::Rekognition
     #   @return [Array<String>]
     # @!attribute next_token
     #   <p>If the previous response was incomplete (because there is more
-    #         results to retrieve), Amazon Rekognition Custom Labels returns a pagination token in the response. You can use this pagination 
+    #         results to retrieve), Amazon Rekognition Custom Labels returns a pagination token in the response. You can use this pagination
     #         token to retrieve the next set of results. </p>
     #   @return [String]
     class ListDatasetEntriesResponse < Struct.new(
@@ -4593,11 +4623,11 @@ module Aws::Rekognition
     #   @return [String]
     # @!attribute next_token
     #   <p>If the previous response was incomplete (because there is more
-    #         results to retrieve), Amazon Rekognition Custom Labels returns a pagination token in the response. You can use this pagination 
+    #         results to retrieve), Amazon Rekognition Custom Labels returns a pagination token in the response. You can use this pagination
     #         token to retrieve the next set of results. </p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of results to return per paginated call. The largest value you can specify is 100. 
+    #   <p>The maximum number of results to return per paginated call. The largest value you can specify is 100.
     #         If you specify a value greater than 100, a ValidationException
     #         error occurs. The default value is 100. </p>
     #   @return [Integer]
@@ -4618,7 +4648,7 @@ module Aws::Rekognition
     #   @return [Array<Types::DatasetLabelDescription>]
     # @!attribute next_token
     #   <p>If the previous response was incomplete (because there is more
-    #         results to retrieve), Amazon Rekognition Custom Labels returns a pagination token in the response. You can use this pagination 
+    #         results to retrieve), Amazon Rekognition Custom Labels returns a pagination token in the response. You can use this pagination
     #         token to retrieve the next set of results. </p>
     #   @return [String]
     class ListDatasetLabelsResponse < Struct.new(
@@ -4684,7 +4714,7 @@ module Aws::Rekognition
     #   <p>Pagination token, if the previous response was incomplete.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of results to return per paginated call. The largest value user can specify is 100. 
+    #   <p>The maximum number of results to return per paginated call. The largest value user can specify is 100.
     #           If user specifies a value greater than 100, an <code>InvalidParameterException</code> error occurs. The default value is 100.</p>
     #   @return [Integer]
     class ListMediaAnalysisJobsRequest < Struct.new(
@@ -4859,7 +4889,7 @@ module Aws::Rekognition
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The format of the project policy document that you supplied to 
+    # <p>The format of the project policy document that you supplied to
     #       <code>PutProjectPolicy</code> is incorrect. </p>
     # @!attribute message
     #   @return [String]
@@ -4901,7 +4931,7 @@ module Aws::Rekognition
     #           </p>
     #   @return [Float]
     # @!attribute project_version
-    #   <p>Specifies the custom moderation model to be used during the label detection job. 
+    #   <p>Specifies the custom moderation model to be used during the label detection job.
     #           If not provided the pre-trained model is used.</p>
     #   @return [String]
     class MediaAnalysisDetectModerationLabelsConfig < Struct.new(
@@ -5411,7 +5441,7 @@ module Aws::Rekognition
     #   <p>A descriptive message for an error or warning that occurred.</p>
     #   @return [String]
     # @!attribute billable_training_time_in_seconds
-    #   <p>The duration, in seconds, that you were billed for a successful training of the model version. 
+    #   <p>The duration, in seconds, that you were billed for a successful training of the model version.
     #         This value is only returned if the model version has been successfully trained.</p>
     #   @return [Integer]
     # @!attribute training_end_timestamp
@@ -5482,7 +5512,7 @@ module Aws::Rekognition
     end
 
     # <p>Information about a body part detected by <a>DetectProtectiveEquipment</a> that contains PPE.
-    #          An array of <code>ProtectiveEquipmentBodyPart</code> objects is returned for each person detected by 
+    #          An array of <code>ProtectiveEquipmentBodyPart</code> objects is returned for each person detected by
     #          <code>DetectProtectiveEquipment</code>. </p>
     # @!attribute name
     #   <p>The detected body part.</p>
@@ -5504,7 +5534,7 @@ module Aws::Rekognition
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A person detected by a call to <a>DetectProtectiveEquipment</a>. The API returns 
+    # <p>A person detected by a call to <a>DetectProtectiveEquipment</a>. The API returns
     #          all persons detected in the input
     #          image in an array of <code>ProtectiveEquipmentPerson</code> objects.</p>
     # @!attribute body_parts
@@ -5533,24 +5563,24 @@ module Aws::Rekognition
 
     # <p>Specifies summary attributes to return from a call to <a>DetectProtectiveEquipment</a>.
     #          You can specify which types of PPE to summarize. You can also specify a minimum confidence value for detections.
-    #          Summary information is returned in the <code>Summary</code> (<a>ProtectiveEquipmentSummary</a>) field of the response from 
+    #          Summary information is returned in the <code>Summary</code> (<a>ProtectiveEquipmentSummary</a>) field of the response from
     #          <code>DetectProtectiveEquipment</code>.
     #          The summary includes which persons in an image were detected wearing the requested types of person protective equipment (PPE), which persons
-    #          were detected as not wearing PPE, and the persons in which a determination could not be made. For more information, 
+    #          were detected as not wearing PPE, and the persons in which a determination could not be made. For more information,
     #          see <a>ProtectiveEquipmentSummary</a>.</p>
     # @!attribute min_confidence
-    #   <p>The minimum confidence level for which you want summary information. 
+    #   <p>The minimum confidence level for which you want summary information.
     #            The confidence level applies to person detection, body part detection, equipment detection, and body part coverage.
     #            Amazon Rekognition doesn't return summary information with a confidence than this specified value. There isn't a
     #            default value.</p>
     #            <p>Specify a <code>MinConfidence</code> value that is between 50-100% as <code>DetectProtectiveEquipment</code>
-    #            returns predictions only where the detection confidence is between 50% - 100%.  
+    #            returns predictions only where the detection confidence is between 50% - 100%.
     #            If you specify a value that is less than 50%, the results are the same specifying a value of 50%.</p>
-    #            <p> 
+    #            <p>
     #         </p>
     #   @return [Float]
     # @!attribute required_equipment_types
-    #   <p>An array of personal protective equipment types for which you want summary information. 
+    #   <p>An array of personal protective equipment types for which you want summary information.
     #            If a person is detected wearing a required requipment type, the person's ID is added to the
     #            <code>PersonsWithRequiredEquipment</code> array field returned in <a>ProtectiveEquipmentSummary</a>
     #            by <code>DetectProtectiveEquipment</code>.  </p>
@@ -5570,14 +5600,14 @@ module Aws::Rekognition
     #          (<a>ProtectiveEquipmentSummarizationAttributes</a>) input parameter.
     #          The summary includes which persons were detected wearing the required personal protective equipment
     #          (<code>PersonsWithRequiredEquipment</code>),
-    #          which persons were detected as not wearing the required PPE (<code>PersonsWithoutRequiredEquipment</code>), 
+    #          which persons were detected as not wearing the required PPE (<code>PersonsWithoutRequiredEquipment</code>),
     #          and the persons in which a determination
     #          could not be made (<code>PersonsIndeterminate</code>).</p>
-    #          <p>To get a total for each category, use the size of the field array. For example, 
+    #          <p>To get a total for each category, use the size of the field array. For example,
     #          to find out how many people were detected as wearing the specified PPE,
-    #          use the size of the <code>PersonsWithRequiredEquipment</code> array.  
-    #          If you want to find out more about a person, such as the 
-    #          location (<a>BoundingBox</a>) of the person on the image, use the person ID in each array element. 
+    #          use the size of the <code>PersonsWithRequiredEquipment</code> array.
+    #          If you want to find out more about a person, such as the
+    #          location (<a>BoundingBox</a>) of the person on the image, use the person ID in each array element.
     #          Each person ID matches the ID field of a <a>ProtectiveEquipmentPerson</a> object returned
     #          in the <code>Persons</code> array by <code>DetectProtectiveEquipment</code>.</p>
     # @!attribute persons_with_required_equipment
@@ -5635,9 +5665,9 @@ module Aws::Rekognition
     #   @return [String]
     # @!attribute policy_document
     #   <p>A resource policy to add to the model. The policy is a JSON structure that contains
-    #            one or more statements that define the policy. 
+    #            one or more statements that define the policy.
     #            The policy must follow the IAM syntax. For
-    #            more information about the contents of a JSON policy document, see 
+    #            more information about the contents of a JSON policy document, see
     #            <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html">IAM JSON policy reference</a>. </p>
     #   @return [String]
     class PutProjectPolicyRequest < Struct.new(
@@ -5793,7 +5823,7 @@ module Aws::Rekognition
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The requested resource isn't ready. For example,  
+    # <p>The requested resource isn't ready. For example,
     #          this exception occurs when you call <code>DetectCustomLabels</code> with a
     #          model version that isn't deployed. </p>
     # @!attribute message
@@ -5815,8 +5845,8 @@ module Aws::Rekognition
 
     # <p>
     #             The Amazon S3 bucket location to which Amazon Rekognition publishes the detailed inference results of a video analysis operation.
-    #             These results include the name of the stream processor resource, the session ID of the stream processing session, 
-    #             and labeled timestamps and bounding boxes for detected labels. 
+    #             These results include the name of the stream processor resource, the session ID of the stream processing session,
+    #             and labeled timestamps and bounding boxes for detected labels.
     #         </p>
     # @!attribute bucket
     #   <p>
@@ -5825,7 +5855,7 @@ module Aws::Rekognition
     #   @return [String]
     # @!attribute key_prefix
     #   <p>
-    #               The prefix value of the location within the bucket that you want the information to be published to. 
+    #               The prefix value of the location within the bucket that you want the information to be published to.
     #               For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-prefixes.html">Using prefixes</a>.
     #           </p>
     #   @return [String]
@@ -6198,7 +6228,7 @@ module Aws::Rekognition
     #         (and <i>;fr</i> for drop frame-rates). </p>
     #   @return [String]
     # @!attribute end_timecode_smpte
-    #   <p>The frame-accurate SMPTE timecode, from the start of a video, for the end of a detected segment. 
+    #   <p>The frame-accurate SMPTE timecode, from the start of a video, for the end of a detected segment.
     #         <code>EndTimecode</code> is in <i>HH:MM:SS:fr</i> format
     #         (and <i>;fr</i> for drop frame-rates).</p>
     #   @return [String]
@@ -6288,6 +6318,24 @@ module Aws::Rekognition
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Contains metadata about the client that streamed the video for a Face Liveness
+    #       session.</p>
+    # @!attribute sdk_type
+    #   <p>The type of SDK that was used to stream the video for the Face Liveness session.</p>
+    #            <note>
+    #               <p>This value is self-reported by the client that streamed the session, and
+    #             Amazon Rekognition doesn't verify it. Don't rely on it for authentication, authorization, or any
+    #             other security decision.</p>
+    #            </note>
+    #   @return [String]
+    class SessionMetadata < Struct.new(
+      nil,
+      :sdk_type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Occurs when a given sessionId is not found.</p>
     # @!attribute message
     #   @return [String]
@@ -6306,7 +6354,7 @@ module Aws::Rekognition
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Information about a shot detection segment detected in a video. For more information, 
+    # <p>Information about a shot detection segment detected in a video. For more information,
     #       see <a>SegmentDetection</a>.</p>
     # @!attribute index
     #   <p>An Identifier for a shot detection segment detected in a video. </p>
@@ -6557,7 +6605,7 @@ module Aws::Rekognition
     #   <p>The features to return after video analysis. You can specify that GENERAL_LABELS are returned.</p>
     #   @return [Array<String>]
     # @!attribute settings
-    #   <p>The settings for a StartLabelDetection request.Contains the specified parameters for the label detection request of an asynchronous label analysis operation. 
+    #   <p>The settings for a StartLabelDetection request.Contains the specified parameters for the label detection request of an asynchronous label analysis operation.
     #         Settings can include filters for GENERAL_LABELS.</p>
     #   @return [Types::LabelDetectionSettings]
     class StartLabelDetectionRequest < Struct.new(
@@ -6605,8 +6653,8 @@ module Aws::Rekognition
     #   <p>The Amazon S3 bucket location to store the results.</p>
     #   @return [Types::MediaAnalysisOutputConfig]
     # @!attribute kms_key_id
-    #   <p>The identifier of customer managed AWS KMS key (name or ARN). The key 
-    #           is used to encrypt images copied into the service. The key is also used 
+    #   <p>The identifier of customer managed AWS KMS key (name or ARN). The key
+    #           is used to encrypt images copied into the service. The key is also used
     #           to encrypt results and manifest files written to the output Amazon S3 bucket.</p>
     #   @return [String]
     class StartMediaAnalysisJobRequest < Struct.new(
@@ -6708,7 +6756,7 @@ module Aws::Rekognition
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Filters applied to the technical cue or shot detection segments. 
+    # <p>Filters applied to the technical cue or shot detection segments.
     #       For more information, see <a>StartSegmentDetection</a>.
     #     </p>
     # @!attribute technical_cue_filter
@@ -6774,14 +6822,14 @@ module Aws::Rekognition
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Filters for the shot detection segments returned by <code>GetSegmentDetection</code>. 
+    # <p>Filters for the shot detection segments returned by <code>GetSegmentDetection</code>.
     #       For more information, see <a>StartSegmentDetectionFilters</a>.</p>
     # @!attribute min_segment_confidence
     #   <p>Specifies the minimum confidence that Amazon Rekognition Video must have in order to return a detected segment. Confidence
     #         represents how certain Amazon Rekognition is that a segment is correctly identified. 0 is the lowest confidence.
     #         100 is the highest confidence.  Amazon Rekognition Video doesn't return any segments with a confidence level
     #         lower than this specified value.</p>
-    #            <p>If you don't specify <code>MinSegmentConfidence</code>, the <code>GetSegmentDetection</code> returns 
+    #            <p>If you don't specify <code>MinSegmentConfidence</code>, the <code>GetSegmentDetection</code> returns
     #           segments with confidence values greater than or equal to 50 percent.</p>
     #   @return [Float]
     class StartShotDetectionFilter < Struct.new(
@@ -6797,16 +6845,16 @@ module Aws::Rekognition
     #   @return [String]
     # @!attribute start_selector
     #   <p>
-    #               Specifies the starting point in the Kinesis stream to start processing. 
+    #               Specifies the starting point in the Kinesis stream to start processing.
     #               You can use the producer timestamp or the fragment number. If you use the producer timestamp, you must put the time in milliseconds.
-    #               For more information about fragment numbers, see <a href="https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_reader_Fragment.html">Fragment</a>. 
+    #               For more information about fragment numbers, see <a href="https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_reader_Fragment.html">Fragment</a>.
     #           </p>
     #            <p>This is a required parameter for label detection stream processors and should not be used to start a face search stream processor.</p>
     #   @return [Types::StreamProcessingStartSelector]
     # @!attribute stop_selector
     #   <p>
-    #               Specifies when to stop processing the stream. You can specify a 
-    #               maximum amount of time to process the video. 
+    #               Specifies when to stop processing the stream. You can specify a
+    #               maximum amount of time to process the video.
     #           </p>
     #            <p>This is a required parameter for label detection stream processors and should not be used to start a face search stream processor.</p>
     #   @return [Types::StreamProcessingStopSelector]
@@ -6822,7 +6870,7 @@ module Aws::Rekognition
 
     # @!attribute session_id
     #   <p>
-    #               A unique identifier for the stream processing session. 
+    #               A unique identifier for the stream processing session.
     #           </p>
     #   @return [String]
     class StartStreamProcessorResponse < Struct.new(
@@ -6840,7 +6888,7 @@ module Aws::Rekognition
     #         represents how certain Amazon Rekognition is that a segment is correctly identified. 0 is the lowest confidence.
     #         100 is the highest confidence.  Amazon Rekognition Video doesn't return any segments with a confidence level
     #         lower than this specified value.</p>
-    #            <p>If you don't specify <code>MinSegmentConfidence</code>, <code>GetSegmentDetection</code> returns 
+    #            <p>If you don't specify <code>MinSegmentConfidence</code>, <code>GetSegmentDetection</code> returns
     #         segments with confidence values greater than or equal to 50 percent.</p>
     #   @return [Float]
     # @!attribute black_frame
@@ -6858,7 +6906,7 @@ module Aws::Rekognition
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Set of optional parameters that let you set the criteria text must meet to be included in your response. 
+    # <p>Set of optional parameters that let you set the criteria text must meet to be included in your response.
     #       <code>WordFilter</code> looks at a word's height, width and minimum confidence. <code>RegionOfInterest</code>
     #       lets you set a specific region of the screen to look for text in.</p>
     # @!attribute word_filter
@@ -6883,7 +6931,7 @@ module Aws::Rekognition
     #   @return [Types::Video]
     # @!attribute client_request_token
     #   <p>Idempotent token used to identify the start request. If you use the same token with multiple <code>StartTextDetection</code>
-    #         requests, the same <code>JobId</code> is returned. Use <code>ClientRequestToken</code> to prevent the same job 
+    #         requests, the same <code>JobId</code> is returned. Use <code>ClientRequestToken</code> to prevent the same job
     #           from being accidentaly started more than once.</p>
     #   @return [String]
     # @!attribute notification_channel
@@ -6979,7 +7027,7 @@ module Aws::Rekognition
 
     # <p>
     #             Specifies when to stop processing the stream. You can specify a maximum amount
-    #             of time to process the video. 
+    #             of time to process the video.
     #         </p>
     # @!attribute max_duration_in_seconds
     #   <p>
@@ -6996,7 +7044,7 @@ module Aws::Rekognition
 
     # <p>An object that recognizes faces or labels in a streaming video. An Amazon Rekognition stream processor is created by a call to <a>CreateStreamProcessor</a>.  The request
     #         parameters for <code>CreateStreamProcessor</code> describe the Kinesis video stream source for the streaming video, face recognition parameters, and where to stream the analysis resullts.
-    # 
+    #
     #         </p>
     # @!attribute name
     #   <p>Name of the Amazon Rekognition stream processor. </p>
@@ -7016,7 +7064,7 @@ module Aws::Rekognition
     # <p>
     #             Allows you to opt in or opt out to share data with Rekognition to improve model performance. You can choose this option at the account level or on a per-stream basis.
     #                 Note that if you opt out at the account level this setting is ignored on individual streams.
-    #             
+    #
     #         </p>
     # @!attribute opt_in
     #   <p>
@@ -7085,7 +7133,7 @@ module Aws::Rekognition
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Input parameters used in a streaming video analyzed by a Amazon Rekognition stream processor. 
+    # <p>Input parameters used in a streaming video analyzed by a Amazon Rekognition stream processor.
     #             You can use <code>FaceSearch</code> to recognize faces in a streaming video, or you can use <code>ConnectedHome</code> to detect labels. </p>
     # @!attribute face_search
     #   <p>Face search settings to use on a streaming video. </p>
@@ -7093,10 +7141,10 @@ module Aws::Rekognition
     # @!attribute connected_home
     #   <p>
     #               Label detection settings to use on a streaming video. Defining the settings is required in the request parameter for <a>CreateStreamProcessor</a>.
-    #               Including this setting in the <code>CreateStreamProcessor</code> request enables you to use the stream processor for label detection. 
+    #               Including this setting in the <code>CreateStreamProcessor</code> request enables you to use the stream processor for label detection.
     #               You can then select what you want the stream processor to detect, such as people or pets. When the stream processor has started, one notification
-    #               is sent for each object class specified. For example, if packages and pets are selected, one SNS notification is published the first time a package is detected 
-    #               and one SNS notification is published the first time a pet is detected, as well as an end-of-session summary. 
+    #               is sent for each object class specified. For example, if packages and pets are selected, one SNS notification is published the first time a package is detected
+    #               and one SNS notification is published the first time a pet is detected, as well as an end-of-session summary.
     #           </p>
     #   @return [Types::ConnectedHomeSettings]
     class StreamProcessorSettings < Struct.new(
@@ -7125,7 +7173,7 @@ module Aws::Rekognition
     end
 
     # <p>The S3 bucket that contains the training summary. The training summary includes
-    #          aggregated evaluation metrics for the entire testing dataset and metrics for each 
+    #          aggregated evaluation metrics for the entire testing dataset and metrics for each
     #          individual label.  </p>
     #          <p>You get the training summary S3 bucket location by calling <a>DescribeProjectVersions</a>.
     #          </p>
@@ -7235,7 +7283,7 @@ module Aws::Rekognition
     #   <p>The testing dataset that was supplied for training.</p>
     #   @return [Types::TestingData]
     # @!attribute output
-    #   <p>The subset of the dataset that was actually tested. Some images (assets) might not be tested due to 
+    #   <p>The subset of the dataset that was actually tested. Some images (assets) might not be tested due to
     #            file formatting and other issues. </p>
     #   @return [Types::TestingData]
     # @!attribute validation
@@ -7297,7 +7345,7 @@ module Aws::Rekognition
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Information about text detected in a video. Incudes the detected text, 
+    # <p>Information about text detected in a video. Incudes the detected text,
     #         the time in milliseconds from the start of the video that the text was detected, and where it was detected on the screen.</p>
     # @!attribute timestamp
     #   <p>The time, in milliseconds from the start of the video, that the text was detected.
@@ -7351,7 +7399,7 @@ module Aws::Rekognition
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The data 
+    # <p>The data
     #          validation manifest created for the training dataset during model training.</p>
     # @!attribute input
     #   <p>The training data that you supplied.</p>
@@ -7555,7 +7603,7 @@ module Aws::Rekognition
     #   @return [String]
     # @!attribute changes
     #   <p>
-    #      The changes that you want to make to the dataset. 
+    #      The changes that you want to make to the dataset.
     #   </p>
     #   @return [Types::DatasetChanges]
     class UpdateDatasetEntriesRequest < Struct.new(
@@ -7659,9 +7707,9 @@ module Aws::Rekognition
     #          Amazon Rekognition Custom Labels Developer Guide. </p>
     #          <p>You get the <code>ValidationData</code> object for the training dataset (<a>TrainingDataResult</a>)
     #          and the test dataset (<a>TestingDataResult</a>) by calling <a>DescribeProjectVersions</a>. </p>
-    #          <p>The assets array contains a single <a>Asset</a> object. 
+    #          <p>The assets array contains a single <a>Asset</a> object.
     #          The <a>GroundTruthManifest</a> field of the Asset object contains the S3 bucket location of
-    #          the validation data. 
+    #          the validation data.
     # </p>
     # @!attribute assets
     #   <p>The assets that comprise the validation data. </p>

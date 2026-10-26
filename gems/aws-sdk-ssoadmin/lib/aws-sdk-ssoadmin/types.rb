@@ -161,6 +161,32 @@ module Aws::SSOAdmin
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute instance_arn
+    #   <p>The Amazon Resource Name (ARN) of the IAM Identity Center instance to replicate to the target Region.</p>
+    #   @return [String]
+    # @!attribute region_name
+    #   <p>The name of the Amazon Web Services Region to add to the IAM Identity Center instance. The Region name must be 1-32 characters long and follow the pattern of Amazon Web Services Region names (for example, us-east-1).</p>
+    #   @return [String]
+    class AddRegionRequest < Struct.new(
+      nil,
+      :instance_arn,
+      :region_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute status
+    #   <p>The status of the Region after the Add operation. The status is ADDING when the asynchronous workflow is in progress and changes to ACTIVE when complete.</p>
+    #   @return [String]
+    class AddRegionResponse < Struct.new(
+      nil,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>A structure that describes an application that uses IAM Identity Center for access management.</p>
     # @!attribute application_arn
     #   <p>The ARN of the application.</p>
@@ -177,6 +203,9 @@ module Aws::SSOAdmin
     # @!attribute instance_arn
     #   <p>The ARN of the instance of IAM Identity Center that is configured with this application.</p>
     #   @return [String]
+    # @!attribute identity_store_arn
+    #   <p>The ARN of the identity store that is connected to the instance of IAM Identity Center.</p>
+    #   @return [String]
     # @!attribute status
     #   <p>The current status of the application in this instance of IAM Identity Center.</p>
     #   @return [String]
@@ -189,6 +218,9 @@ module Aws::SSOAdmin
     # @!attribute created_date
     #   <p>The date and time when the application was originally created.</p>
     #   @return [Time]
+    # @!attribute created_from
+    #   <p>The Amazon Web Services Region where the application was created in IAM Identity Center.</p>
+    #   @return [String]
     class Application < Struct.new(
       nil,
       :application_arn,
@@ -196,10 +228,12 @@ module Aws::SSOAdmin
       :name,
       :application_account,
       :instance_arn,
+      :identity_store_arn,
       :status,
       :portal_options,
       :description,
       :created_date,
+      :created_from,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -517,9 +551,17 @@ module Aws::SSOAdmin
     # @!attribute application_arn
     #   <p>Specifies the ARN of the application.</p>
     #   @return [String]
+    # @!attribute instance_arn
+    #   <p>The ARN of the instance of IAM Identity Center under which the operation will run. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>
+    #   @return [String]
+    # @!attribute identity_store_arn
+    #   <p>The ARN of the identity store that is connected to the instance of IAM Identity Center.</p>
+    #   @return [String]
     class CreateApplicationResponse < Struct.new(
       nil,
       :application_arn,
+      :instance_arn,
+      :identity_store_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1078,6 +1120,9 @@ module Aws::SSOAdmin
     # @!attribute instance_arn
     #   <p>The ARN of the IAM Identity Center application under which the operation will run. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>
     #   @return [String]
+    # @!attribute identity_store_arn
+    #   <p>The ARN of the identity store that is connected to the instance of IAM Identity Center.</p>
+    #   @return [String]
     # @!attribute status
     #   <p>Specifies whether the application is enabled or disabled.</p>
     #   @return [String]
@@ -1090,6 +1135,9 @@ module Aws::SSOAdmin
     # @!attribute created_date
     #   <p>The date the application was created.</p>
     #   @return [Time]
+    # @!attribute created_from
+    #   <p>The Amazon Web Services Region where the application was created in IAM Identity Center.</p>
+    #   @return [String]
     class DescribeApplicationResponse < Struct.new(
       nil,
       :application_arn,
@@ -1097,10 +1145,12 @@ module Aws::SSOAdmin
       :name,
       :application_account,
       :instance_arn,
+      :identity_store_arn,
       :status,
       :portal_options,
       :description,
       :created_date,
+      :created_from,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1153,6 +1203,9 @@ module Aws::SSOAdmin
     # @!attribute identity_store_id
     #   <p>The identifier of the identity store that is connected to the instance of IAM Identity Center.</p>
     #   @return [String]
+    # @!attribute identity_store_arn
+    #   <p>The ARN of the identity store that is connected to the instance of IAM Identity Center.</p>
+    #   @return [String]
     # @!attribute owner_account_id
     #   <p>The identifier of the Amazon Web Services account for which the instance was created.</p>
     #   @return [String]
@@ -1168,19 +1221,32 @@ module Aws::SSOAdmin
     # @!attribute status_reason
     #   <p>Provides additional context about the current status of the IAM Identity Center instance. This field is particularly useful when an instance is in a non-ACTIVE state, such as CREATE_FAILED. When an instance fails to create or update, this field contains information about the cause, which may include issues with KMS key configuration, permission problems with the specified KMS key, or service-related errors. </p>
     #   @return [String]
+    # @!attribute primary_region
+    #   <p>The primary Region where the IAM Identity Center instance was originally enabled. The primary Region cannot be removed.</p>
+    #   @return [String]
+    # @!attribute regions
+    #   <p>The list of Regions enabled in the IAM Identity Center instance, including Regions with ACTIVE, ADDING, or REMOVING status.</p>
+    #   @return [Array<Types::RegionMetadata>]
     # @!attribute encryption_configuration_details
     #   <p>Contains the encryption configuration for your IAM Identity Center instance, including the encryption status, KMS key type, and KMS key ARN.</p>
     #   @return [Types::EncryptionConfigurationDetails]
+    # @!attribute permission_sets_enabled
+    #   <p>Indicates whether permission sets are enabled for this Identity Center instance.</p>
+    #   @return [Boolean]
     class DescribeInstanceResponse < Struct.new(
       nil,
       :instance_arn,
       :identity_store_id,
+      :identity_store_arn,
       :owner_account_id,
       :name,
       :created_date,
       :status,
       :status_reason,
+      :primary_region,
+      :regions,
       :encryption_configuration_details,
+      :permission_sets_enabled,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1236,6 +1302,49 @@ module Aws::SSOAdmin
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute instance_arn
+    #   <p>The Amazon Resource Name (ARN) of the IAM Identity Center instance.</p>
+    #   @return [String]
+    # @!attribute region_name
+    #   <p>The name of the Amazon Web Services Region to retrieve information about. The Region name must be 1-32 characters long and follow the pattern of Amazon Web Services Region names (for example, us-east-1).</p>
+    #   @return [String]
+    class DescribeRegionRequest < Struct.new(
+      nil,
+      :instance_arn,
+      :region_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute region_name
+    #   <p>The Amazon Web Services Region name.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the Region. Valid values are ACTIVE (Region is operational), ADDING (Region replication workflow is in progress), or REMOVING (Region removal workflow is in progress).</p>
+    #   @return [String]
+    # @!attribute added_date
+    #   <p>The timestamp when the Region was added to the IAM Identity Center instance. For the primary Region, this is the IAM Identity Center instance creation time.</p>
+    #   @return [Time]
+    # @!attribute is_primary_region
+    #   <p>Indicates whether this is the primary Region where the IAM Identity Center instance was originally enabled. For more information on the difference between the primary Region and additional Regions, see <a href="https://docs.aws.amazon.com/singlesignon/latest/userguide/multi-region-iam-identity-center.html">IAM Identity Center User Guide</a> </p>
+    #   @return [Boolean]
+    class DescribeRegionResponse < Struct.new(
+      nil,
+      :region_name,
+      :status,
+      :added_date,
+      :is_primary_region,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:is_primary_region] = false unless options.key?(:is_primary_region)
+        super
+      end
     end
 
     # @!attribute trusted_token_issuer_arn
@@ -1644,6 +1753,9 @@ module Aws::SSOAdmin
     # @!attribute identity_store_id
     #   <p>The identifier of the identity store that is connected to the Identity Center instance.</p>
     #   @return [String]
+    # @!attribute identity_store_arn
+    #   <p>The ARN of the identity store that is connected to the Identity Center instance.</p>
+    #   @return [String]
     # @!attribute owner_account_id
     #   <p>The Amazon Web Services account ID number of the owner of the Identity Center instance.</p>
     #   @return [String]
@@ -1659,15 +1771,24 @@ module Aws::SSOAdmin
     # @!attribute status_reason
     #   <p>Provides additional context about the current status of the IAM Identity Center instance. This field is particularly useful when an instance is in a non-ACTIVE state, such as CREATE_FAILED. When an instance creation fails, this field contains information about the cause, which may include issues with KMS key configuration or insufficient permissions. </p>
     #   @return [String]
+    # @!attribute primary_region
+    #   <p>The primary Region where the IAM Identity Center instance was originally enabled. The primary Region cannot be removed.</p>
+    #   @return [String]
+    # @!attribute regions
+    #   <p>The list of Regions enabled in the IAM Identity Center instance, including Regions with ACTIVE, ADDING, or REMOVING status.</p>
+    #   @return [Array<Types::RegionMetadata>]
     class InstanceMetadata < Struct.new(
       nil,
       :instance_arn,
       :identity_store_id,
+      :identity_store_arn,
       :owner_account_id,
       :name,
       :created_date,
       :status,
       :status_reason,
+      :primary_region,
+      :regions,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2405,6 +2526,40 @@ module Aws::SSOAdmin
     end
 
     # @!attribute instance_arn
+    #   <p>The Amazon Resource Name (ARN) of the IAM Identity Center instance.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return in a single call. Default is 100.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The pagination token for the list API. Initially the value is null. Use the output of previous API calls to make subsequent calls.</p>
+    #   @return [String]
+    class ListRegionsRequest < Struct.new(
+      nil,
+      :instance_arn,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute regions
+    #   <p>The list of Regions enabled in the IAM Identity Center instance, including Regions with ACTIVE, ADDING, or REMOVING status.</p>
+    #   @return [Array<Types::RegionMetadata>]
+    # @!attribute next_token
+    #   <p>The pagination token to be used in subsequent calls. If the value is null, then there are no more entries.</p>
+    #   @return [String]
+    class ListRegionsResponse < Struct.new(
+      nil,
+      :regions,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute instance_arn
     #   <p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>
     #   @return [String]
     # @!attribute resource_arn
@@ -2844,6 +2999,61 @@ module Aws::SSOAdmin
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Contains information about an enabled Region of an IAM Identity Center instance, including the Region name, status, date added, and whether it is the primary Region.</p>
+    # @!attribute region_name
+    #   <p>The Amazon Web Services Region name.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the Region. Valid values are ACTIVE (Region is operational), ADDING (Region extension workflow is in progress), or REMOVING (Region removal workflow is in progress).</p>
+    #   @return [String]
+    # @!attribute added_date
+    #   <p>The timestamp when the Region was added to the IAM Identity Center instance. For the primary Region, this is the instance creation time.</p>
+    #   @return [Time]
+    # @!attribute is_primary_region
+    #   <p>Indicates whether this is the primary Region where the IAM Identity Center instance was originally enabled. The primary Region cannot be removed.</p>
+    #   @return [Boolean]
+    class RegionMetadata < Struct.new(
+      nil,
+      :region_name,
+      :status,
+      :added_date,
+      :is_primary_region,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:is_primary_region] = false unless options.key?(:is_primary_region)
+        super
+      end
+    end
+
+    # @!attribute instance_arn
+    #   <p>The Amazon Resource Name (ARN) of the IAM Identity Center instance.</p>
+    #   @return [String]
+    # @!attribute region_name
+    #   <p>The name of the Amazon Web Services Region to remove from the IAM Identity Center instance. The Region name must be 1-32 characters long and follow the pattern of Amazon Web Services Region names (for example, us-east-1). The primary Region cannot be removed.</p>
+    #   @return [String]
+    class RemoveRegionRequest < Struct.new(
+      nil,
+      :instance_arn,
+      :region_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute status
+    #   <p>The status of the Region after the remove operation. The status is REMOVING when the asynchronous workflow is in progress. The Region record is deleted when the workflow completes.</p>
+    #   @return [String]
+    class RemoveRegionResponse < Struct.new(
+      nil,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Indicates that a requested resource is not found.</p>
     # @!attribute message
     #   @return [String]
@@ -3146,13 +3356,17 @@ module Aws::SSOAdmin
     #   <p>The ARN of the instance of IAM Identity Center under which the operation will run. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>
     #   @return [String]
     # @!attribute encryption_configuration
-    #   <p>Specifies the encryption configuration for your IAM Identity Center instance. You can use this to configure customer managed KMS keys (CMK) or Amazon Web Services owned KMS keys for encrypting your instance data.</p>
+    #   <p>Specifies the encryption configuration for your IAM Identity Center instance. You can use this to configure customer managed KMS keys or Amazon Web Services owned KMS keys for encrypting your instance data.</p>
     #   @return [Types::EncryptionConfiguration]
+    # @!attribute permission_sets_enabled
+    #   <p>Enables permission sets for this Identity Center instance. The only accepted value is <code>true </code>. After permission sets are enabled, they cannot be disabled.</p> <note> <p>You can't set <code>EncryptionConfiguration</code> and <code>PermissionSetsEnabled</code> in the same request. To configure both, make two separate <code>UpdateInstance</code> calls. These calls can be made in parallel.</p> </note>
+    #   @return [Boolean]
     class UpdateInstanceRequest < Struct.new(
       nil,
       :name,
       :instance_arn,
       :encryption_configuration,
+      :permission_sets_enabled,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

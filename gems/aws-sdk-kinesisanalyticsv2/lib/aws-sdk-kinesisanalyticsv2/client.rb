@@ -144,18 +144,18 @@ module Aws::KinesisAnalyticsV2
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -259,13 +259,13 @@ module Aws::KinesisAnalyticsV2
     end
 
     # <p>
-    #       Adds a streaming source to your SQL-based Kinesis Data Analytics application. 
+    #       Adds a streaming source to your SQL-based Kinesis Data Analytics application.
     #     </p>
     #          <p>You can add a streaming source when you create an application, or you can use this
     #       operation to add a streaming source after you create an application. For more information, see
     #         <a>CreateApplication</a>.</p>
-    #          <p>Any configuration update, including adding a streaming source using this operation,  
-    #       results in a new version of the application. You can use the <a>DescribeApplication</a> operation  
+    #          <p>Any configuration update, including adding a streaming source using this operation,
+    #       results in a new version of the application. You can use the <a>DescribeApplication</a> operation
     #       to find the current application version.
     #     </p>
     # @param [Hash, Types::AddApplicationInputRequest] params
@@ -273,7 +273,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The name of your existing application to which you want to add the streaming
     #         source.</p>
     # @option params [Integer] :current_application_version_id
-    #   <p>The current version of your application. 
+    #   <p>The current version of your application.
     #           You must provide the <code>ApplicationVersionID</code> or the <code>ConditionalToken</code>.You can use the <a>DescribeApplication</a> operation to find the current application version.</p>
     # @option params [Types::Input] :input
     #   <p>The <a>Input</a> to add.</p>
@@ -384,7 +384,7 @@ module Aws::KinesisAnalyticsV2
       request.send_request(options)
     end
 
-    # <p>Adds an <a>InputProcessingConfiguration</a> to a SQL-based Kinesis Data Analytics application. An input processor pre-processes records 
+    # <p>Adds an <a>InputProcessingConfiguration</a> to a SQL-based Kinesis Data Analytics application. An input processor pre-processes records
     #       on the input stream before the
     #       application's SQL code executes. Currently, the only input processor available is <a href="https://docs.aws.amazon.com/lambda/">Amazon Lambda</a>.</p>
     # @param [Hash, Types::AddApplicationInputProcessingConfigurationRequest] params
@@ -524,15 +524,15 @@ module Aws::KinesisAnalyticsV2
     # @option params [String] :application_name
     #   <p>The name of an existing application.</p>
     # @option params [Integer] :current_application_version_id
-    #   <p>The version of the application for which you are adding the reference data source. 
+    #   <p>The version of the application for which you are adding the reference data source.
     #           You can
     #         use the <a>DescribeApplication</a> operation to get the current application
     #         version. If the version specified is not the current version, the
     #           <code>ConcurrentModificationException</code> is returned.</p>
     # @option params [Types::ReferenceDataSource] :reference_data_source
     #   <p>The reference data source can be an object in your Amazon S3 bucket. Kinesis Data Analytics reads the object and copies the data
-    #         into the in-application table that is created. You provide an S3 bucket, object key name, and the resulting 
-    #         in-application table that is 
+    #         into the in-application table that is created. You provide an S3 bucket, object key name, and the resulting
+    #         in-application table that is
     #         created. </p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -615,7 +615,7 @@ module Aws::KinesisAnalyticsV2
       request.send_request(options)
     end
 
-    # <p>Adds a Virtual Private Cloud (VPC) configuration to the application. Applications can use VPCs to store 
+    # <p>Adds a Virtual Private Cloud (VPC) configuration to the application. Applications can use VPCs to store
     #         and access resources securely.</p>
     #          <p>Note the following about VPC configurations for Managed Service for Apache Flink applications:</p>
     #          <ul>
@@ -623,7 +623,7 @@ module Aws::KinesisAnalyticsV2
     #                <p>VPC configurations are not supported for SQL applications.</p>
     #             </li>
     #             <li>
-    #                <p>When a VPC is added to a Managed Service for Apache Flink application, the application can no longer be accessed from the 
+    #                <p>When a VPC is added to a Managed Service for Apache Flink application, the application can no longer be accessed from the
     #            Internet directly. To enable Internet access to the application, add an Internet gateway to your VPC.</p>
     #             </li>
     #          </ul>
@@ -697,19 +697,19 @@ module Aws::KinesisAnalyticsV2
     #         configuration errors.
     #         </p>
     # @option params [Array<Types::Tag>] :tags
-    #   <p>A list of one or more tags to assign to the application. A tag is a key-value pair that identifies an 
-    #           application. Note that the maximum number of application tags includes system tags. The maximum number of 
+    #   <p>A list of one or more tags to assign to the application. A tag is a key-value pair that identifies an
+    #           application. Note that the maximum number of application tags includes system tags. The maximum number of
     #           user-defined application tags is 50.
-    #           For more information, see 
+    #           For more information, see
     #           <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/java/how-tagging.html">Using Tagging</a>.</p>
     # @option params [String] :application_mode
-    #   <p>Use the <code>STREAMING</code> mode to create a Managed Service for Apache Flink application. To create a Managed Service for Apache Flink Studio notebook, use the 
+    #   <p>Use the <code>STREAMING</code> mode to create a Managed Service for Apache Flink application. To create a Managed Service for Apache Flink Studio notebook, use the
     #       <code>INTERACTIVE</code> mode.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     application_name: "ApplicationName", # required
     #     application_description: "ApplicationDescription",
-    #     runtime_environment: "SQL-1_0" # One of: ["SQL-1_0", "FLINK-1_6", "FLINK-1_8", "ZEPPELIN-FLINK-1_0", "FLINK-1_11", "FLINK-1_13", "ZEPPELIN-FLINK-2_0", "FLINK-1_15", "ZEPPELIN-FLINK-3_0", "FLINK-1_18", "FLINK-1_19", "FLINK-1_20"], # required
+    #     runtime_environment: "SQL-1_0" # One of: ["SQL-1_0", "FLINK-1_6", "FLINK-1_8", "ZEPPELIN-FLINK-1_0", "FLINK-1_11", "FLINK-1_13", "ZEPPELIN-FLINK-2_0", "FLINK-1_15", "ZEPPELIN-FLINK-3_0", "FLINK-1_18", "FLINK-1_19", "FLINK-1_20", "FLINK-2_2", "FLINK-2_3"], # required
     #     service_execution_role: "RoleARN", # required
     #     application_configuration: {
     #       sql_application_configuration: {
@@ -914,7 +914,7 @@ module Aws::KinesisAnalyticsV2
     #       application_arn: "ResourceARN", # required
     #       application_description: "ApplicationDescription",
     #       application_name: "ApplicationName", # required
-    #       runtime_environment: "SQL-1_0" # One of: ["SQL-1_0", "FLINK-1_6", "FLINK-1_8", "ZEPPELIN-FLINK-1_0", "FLINK-1_11", "FLINK-1_13", "ZEPPELIN-FLINK-2_0", "FLINK-1_15", "ZEPPELIN-FLINK-3_0", "FLINK-1_18", "FLINK-1_19", "FLINK-1_20"], # required
+    #       runtime_environment: "SQL-1_0" # One of: ["SQL-1_0", "FLINK-1_6", "FLINK-1_8", "ZEPPELIN-FLINK-1_0", "FLINK-1_11", "FLINK-1_13", "ZEPPELIN-FLINK-2_0", "FLINK-1_15", "ZEPPELIN-FLINK-3_0", "FLINK-1_18", "FLINK-1_19", "FLINK-1_20", "FLINK-2_2", "FLINK-2_3"], # required
     #       service_execution_role: "RoleARN",
     #       application_status: "DELETING" # One of: ["DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING", "AUTOSCALING", "FORCE_STOPPING", "ROLLING_BACK", "MAINTENANCE", "ROLLED_BACK"], # required
     #       application_version_id: 1, # required
@@ -1154,7 +1154,7 @@ module Aws::KinesisAnalyticsV2
       request.send_request(options)
     end
 
-    # <p>Creates and returns a URL that you can use to connect to 
+    # <p>Creates and returns a URL that you can use to connect to
     #             an application's extension.</p>
     #          <p>The IAM role or user used to call this API defines the permissions to access the
     #       extension. After the presigned URL is created, no additional permission is required to access
@@ -1164,7 +1164,7 @@ module Aws::KinesisAnalyticsV2
     #         parameter. If you do not provide this parameter, the returned URL is valid for twelve hours.</p>
     #          <note>
     #             <p>The URL that you get from a call to CreateApplicationPresignedUrl must be used within 3 minutes
-    #             to be valid. 
+    #             to be valid.
     #             If you first try to use the URL after the 3-minute limit expires, the service returns an HTTP 403 Forbidden error.</p>
     #          </note>
     # @param [Hash, Types::CreateApplicationPresignedUrlRequest] params
@@ -1290,9 +1290,9 @@ module Aws::KinesisAnalyticsV2
     # @option params [String] :application_name
     #   <p>The name of the application.</p>
     # @option params [Integer] :current_application_version_id
-    #   <p>The application version. 
+    #   <p>The application version.
     #         You can use the <a>DescribeApplication</a> operation to get the current application version.
-    #         If the version specified is not the current version, the 
+    #         If the version specified is not the current version, the
     #         <code>ConcurrentModificationException</code> is returned.
     #       </p>
     # @option params [String] :input_id
@@ -1318,16 +1318,16 @@ module Aws::KinesisAnalyticsV2
       request.send_request(options)
     end
 
-    # <p>Deletes the output destination configuration from your SQL-based Kinesis Data Analytics application's configuration. 
+    # <p>Deletes the output destination configuration from your SQL-based Kinesis Data Analytics application's configuration.
     #       Kinesis Data Analytics will no longer write data from
     #       the corresponding in-application stream to the external output destination.</p>
     # @param [Hash, Types::DeleteApplicationOutputRequest] params
     # @option params [String] :application_name
     #   <p>The application name.</p>
     # @option params [Integer] :current_application_version_id
-    #   <p>The application version. 
+    #   <p>The application version.
     #         You can use the <a>DescribeApplication</a> operation to get the current application version.
-    #         If the version specified is not the current version, the 
+    #         If the version specified is not the current version, the
     #         <code>ConcurrentModificationException</code> is returned.
     #       </p>
     # @option params [String] :output_id
@@ -1363,9 +1363,9 @@ module Aws::KinesisAnalyticsV2
     # @option params [String] :application_name
     #   <p>The name of an existing application.</p>
     # @option params [Integer] :current_application_version_id
-    #   <p>The current application version.  
+    #   <p>The current application version.
     #         You can use the <a>DescribeApplication</a> operation to get the current application version.
-    #         If the version specified 
+    #         If the version specified
     #         is not the current version, the <code>ConcurrentModificationException</code> is returned.</p>
     # @option params [String] :reference_id
     #   <p>The ID of the reference data source. When you add a reference data source to your
@@ -1399,8 +1399,8 @@ module Aws::KinesisAnalyticsV2
     # @option params [String] :snapshot_name
     #   <p>The identifier for the snapshot delete.</p>
     # @option params [Time] :snapshot_creation_timestamp
-    #   <p>The creation timestamp of the application snapshot to delete. You can retrieve this value 
-    #         using 
+    #   <p>The creation timestamp of the application snapshot to delete. You can retrieve this value
+    #         using
     #         or .</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -1480,7 +1480,7 @@ module Aws::KinesisAnalyticsV2
     #       application_arn: "ResourceARN", # required
     #       application_description: "ApplicationDescription",
     #       application_name: "ApplicationName", # required
-    #       runtime_environment: "SQL-1_0" # One of: ["SQL-1_0", "FLINK-1_6", "FLINK-1_8", "ZEPPELIN-FLINK-1_0", "FLINK-1_11", "FLINK-1_13", "ZEPPELIN-FLINK-2_0", "FLINK-1_15", "ZEPPELIN-FLINK-3_0", "FLINK-1_18", "FLINK-1_19", "FLINK-1_20"], # required
+    #       runtime_environment: "SQL-1_0" # One of: ["SQL-1_0", "FLINK-1_6", "FLINK-1_8", "ZEPPELIN-FLINK-1_0", "FLINK-1_11", "FLINK-1_13", "ZEPPELIN-FLINK-2_0", "FLINK-1_15", "ZEPPELIN-FLINK-3_0", "FLINK-1_18", "FLINK-1_19", "FLINK-1_20", "FLINK-2_2", "FLINK-2_3"], # required
     #       service_execution_role: "RoleARN",
     #       application_status: "DELETING" # One of: ["DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING", "AUTOSCALING", "FORCE_STOPPING", "ROLLING_BACK", "MAINTENANCE", "ROLLED_BACK"], # required
     #       application_version_id: 1, # required
@@ -1767,7 +1767,7 @@ module Aws::KinesisAnalyticsV2
     # @option params [String] :application_name
     #   <p>The name of an existing application.</p>
     # @option params [String] :snapshot_name
-    #   <p>The identifier of an application snapshot. You can retrieve this value using 
+    #   <p>The identifier of an application snapshot. You can retrieve this value using
     #         .</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -1784,7 +1784,7 @@ module Aws::KinesisAnalyticsV2
     #       snapshot_status: "CREATING" # One of: ["CREATING", "READY", "DELETING", "FAILED"], # required
     #       application_version_id: 1, # required
     #       snapshot_creation_timestamp: Time.now,
-    #       runtime_environment: "SQL-1_0" # One of: ["SQL-1_0", "FLINK-1_6", "FLINK-1_8", "ZEPPELIN-FLINK-1_0", "FLINK-1_11", "FLINK-1_13", "ZEPPELIN-FLINK-2_0", "FLINK-1_15", "ZEPPELIN-FLINK-3_0", "FLINK-1_18", "FLINK-1_19", "FLINK-1_20"],
+    #       runtime_environment: "SQL-1_0" # One of: ["SQL-1_0", "FLINK-1_6", "FLINK-1_8", "ZEPPELIN-FLINK-1_0", "FLINK-1_11", "FLINK-1_13", "ZEPPELIN-FLINK-2_0", "FLINK-1_15", "ZEPPELIN-FLINK-3_0", "FLINK-1_18", "FLINK-1_19", "FLINK-1_20", "FLINK-2_2", "FLINK-2_3"],
     #       application_encryption_configuration_description: {
     #         key_id: "KeyId",
     #         key_type: "AWS_OWNED_KEY" # One of: ["AWS_OWNED_KEY", "CUSTOMER_MANAGED_KEY"], # required
@@ -1820,7 +1820,7 @@ module Aws::KinesisAnalyticsV2
     #       application_arn: "ResourceARN", # required
     #       application_description: "ApplicationDescription",
     #       application_name: "ApplicationName", # required
-    #       runtime_environment: "SQL-1_0" # One of: ["SQL-1_0", "FLINK-1_6", "FLINK-1_8", "ZEPPELIN-FLINK-1_0", "FLINK-1_11", "FLINK-1_13", "ZEPPELIN-FLINK-2_0", "FLINK-1_15", "ZEPPELIN-FLINK-3_0", "FLINK-1_18", "FLINK-1_19", "FLINK-1_20"], # required
+    #       runtime_environment: "SQL-1_0" # One of: ["SQL-1_0", "FLINK-1_6", "FLINK-1_8", "ZEPPELIN-FLINK-1_0", "FLINK-1_11", "FLINK-1_13", "ZEPPELIN-FLINK-2_0", "FLINK-1_15", "ZEPPELIN-FLINK-3_0", "FLINK-1_18", "FLINK-1_19", "FLINK-1_20", "FLINK-2_2", "FLINK-2_3"], # required
     #       service_execution_role: "RoleARN",
     #       application_status: "DELETING" # One of: ["DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING", "AUTOSCALING", "FORCE_STOPPING", "ROLLING_BACK", "MAINTENANCE", "ROLLED_BACK"], # required
     #       application_version_id: 1, # required
@@ -2079,7 +2079,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>Specify this parameter to discover a schema from data in an Amazon S3
     #         object.</p>
     # @option params [Types::InputProcessingConfiguration] :input_processing_configuration
-    #   <p>The <a>InputProcessingConfiguration</a> to use to preprocess the records 
+    #   <p>The <a>InputProcessingConfiguration</a> to use to preprocess the records
     #         before discovering the schema of the records.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -2191,8 +2191,8 @@ module Aws::KinesisAnalyticsV2
     # @option params [Integer] :limit
     #   <p>The maximum number of application snapshots to list.</p>
     # @option params [String] :next_token
-    #   <p>Use this parameter if you receive a <code>NextToken</code> response in a previous request that indicates that there is more 
-    #         output available. Set it to the value of the previous call's <code>NextToken</code> response to indicate where the output should 
+    #   <p>Use this parameter if you receive a <code>NextToken</code> response in a previous request that indicates that there is more
+    #         output available. Set it to the value of the previous call's <code>NextToken</code> response to indicate where the output should
     #         continue from. </p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -2211,7 +2211,7 @@ module Aws::KinesisAnalyticsV2
     #         snapshot_status: "CREATING" # One of: ["CREATING", "READY", "DELETING", "FAILED"], # required
     #         application_version_id: 1, # required
     #         snapshot_creation_timestamp: Time.now,
-    #         runtime_environment: "SQL-1_0" # One of: ["SQL-1_0", "FLINK-1_6", "FLINK-1_8", "ZEPPELIN-FLINK-1_0", "FLINK-1_11", "FLINK-1_13", "ZEPPELIN-FLINK-2_0", "FLINK-1_15", "ZEPPELIN-FLINK-3_0", "FLINK-1_18", "FLINK-1_19", "FLINK-1_20"],
+    #         runtime_environment: "SQL-1_0" # One of: ["SQL-1_0", "FLINK-1_6", "FLINK-1_8", "ZEPPELIN-FLINK-1_0", "FLINK-1_11", "FLINK-1_13", "ZEPPELIN-FLINK-2_0", "FLINK-1_15", "ZEPPELIN-FLINK-3_0", "FLINK-1_18", "FLINK-1_19", "FLINK-1_20", "FLINK-2_2", "FLINK-2_3"],
     #         application_encryption_configuration_description: {
     #           key_id: "KeyId",
     #           key_type: "AWS_OWNED_KEY" # One of: ["AWS_OWNED_KEY", "CUSTOMER_MANAGED_KEY"], # required
@@ -2226,7 +2226,7 @@ module Aws::KinesisAnalyticsV2
       request.send_request(options)
     end
 
-    # <p>Lists all the versions for the specified application, including versions that were rolled back. The response also includes a summary of the configuration 
+    # <p>Lists all the versions for the specified application, including versions that were rolled back. The response also includes a summary of the configuration
     #       associated with each version.</p>
     #          <p>To get the complete description of a specific application version, invoke the <a>DescribeApplicationVersion</a> operation.</p>
     #          <note>
@@ -2238,7 +2238,7 @@ module Aws::KinesisAnalyticsV2
     # @option params [Integer] :limit
     #   <p>The maximum number of versions to list in this invocation of the operation.</p>
     # @option params [String] :next_token
-    #   <p>If a previous invocation of this operation returned a pagination token, pass it into this value to retrieve the next set of results. For more information about pagination, see 
+    #   <p>If a previous invocation of this operation returned a pagination token, pass it into this value to retrieve the next set of results. For more information about pagination, see
     #         <a href="https://docs.aws.amazon.com/cli/latest/userguide/pagination.html">Using the Amazon Command Line Interface's Pagination Options</a>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -2268,15 +2268,15 @@ module Aws::KinesisAnalyticsV2
     # <p>Returns a list of Managed Service for Apache Flink applications in your account. For each
     #       application, the response includes the application name, Amazon Resource Name (ARN), and
     #       status. </p>
-    #          <p>If you want detailed information about a specific application, use 
+    #          <p>If you want detailed information about a specific application, use
     #       <a>DescribeApplication</a>.</p>
     # @param [Hash, Types::ListApplicationsRequest] params
     # @option params [Integer] :limit
     #   <p>The maximum number of applications to list.</p>
     # @option params [String] :next_token
-    #   <p>If a previous command returned a pagination token, 
+    #   <p>If a previous command returned a pagination token,
     #         pass it into this value to retrieve the next set of results.
-    #         For more information about pagination, see 
+    #         For more information about pagination, see
     #         <a href="https://docs.aws.amazon.com/cli/latest/userguide/pagination.html">Using the Amazon Command Line Interface's Pagination Options</a>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -2294,7 +2294,7 @@ module Aws::KinesisAnalyticsV2
     #         application_arn: "ResourceARN", # required
     #         application_status: "DELETING" # One of: ["DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING", "AUTOSCALING", "FORCE_STOPPING", "ROLLING_BACK", "MAINTENANCE", "ROLLED_BACK"], # required
     #         application_version_id: 1, # required
-    #         runtime_environment: "SQL-1_0" # One of: ["SQL-1_0", "FLINK-1_6", "FLINK-1_8", "ZEPPELIN-FLINK-1_0", "FLINK-1_11", "FLINK-1_13", "ZEPPELIN-FLINK-2_0", "FLINK-1_15", "ZEPPELIN-FLINK-3_0", "FLINK-1_18", "FLINK-1_19", "FLINK-1_20"], # required
+    #         runtime_environment: "SQL-1_0" # One of: ["SQL-1_0", "FLINK-1_6", "FLINK-1_8", "ZEPPELIN-FLINK-1_0", "FLINK-1_11", "FLINK-1_13", "ZEPPELIN-FLINK-2_0", "FLINK-1_15", "ZEPPELIN-FLINK-3_0", "FLINK-1_18", "FLINK-1_19", "FLINK-1_20", "FLINK-2_2", "FLINK-2_3"], # required
     #         application_mode: "STREAMING" # One of: ["STREAMING", "INTERACTIVE"]
     #       }
     #     ],
@@ -2306,7 +2306,7 @@ module Aws::KinesisAnalyticsV2
       request.send_request(options)
     end
 
-    # <p>Retrieves the list of key-value tags assigned to the application. For more information, see 
+    # <p>Retrieves the list of key-value tags assigned to the application. For more information, see
     #         <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/java/how-tagging.html">Using Tagging</a>.</p>
     # @param [Hash, Types::ListTagsForResourceRequest] params
     # @option params [String] :resource_arn
@@ -2343,7 +2343,7 @@ module Aws::KinesisAnalyticsV2
     # @option params [String] :application_name
     #   <p>The name of the application.</p>
     # @option params [Integer] :current_application_version_id
-    #   <p>The current application version ID. You can retrieve the application version ID using 
+    #   <p>The current application version ID. You can retrieve the application version ID using
     #               <a>DescribeApplication</a>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -2359,7 +2359,7 @@ module Aws::KinesisAnalyticsV2
     #       application_arn: "ResourceARN", # required
     #       application_description: "ApplicationDescription",
     #       application_name: "ApplicationName", # required
-    #       runtime_environment: "SQL-1_0" # One of: ["SQL-1_0", "FLINK-1_6", "FLINK-1_8", "ZEPPELIN-FLINK-1_0", "FLINK-1_11", "FLINK-1_13", "ZEPPELIN-FLINK-2_0", "FLINK-1_15", "ZEPPELIN-FLINK-3_0", "FLINK-1_18", "FLINK-1_19", "FLINK-1_20"], # required
+    #       runtime_environment: "SQL-1_0" # One of: ["SQL-1_0", "FLINK-1_6", "FLINK-1_8", "ZEPPELIN-FLINK-1_0", "FLINK-1_11", "FLINK-1_13", "ZEPPELIN-FLINK-2_0", "FLINK-1_15", "ZEPPELIN-FLINK-3_0", "FLINK-1_18", "FLINK-1_19", "FLINK-1_20", "FLINK-2_2", "FLINK-2_3"], # required
     #       service_execution_role: "RoleARN",
     #       application_status: "DELETING" # One of: ["DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING", "AUTOSCALING", "FORCE_STOPPING", "ROLLING_BACK", "MAINTENANCE", "ROLLED_BACK"], # required
     #       application_version_id: 1, # required
@@ -2600,7 +2600,7 @@ module Aws::KinesisAnalyticsV2
       request.send_request(options)
     end
 
-    # <p>Starts the specified Managed Service for Apache Flink application. After creating an application, you must exclusively call this operation to 
+    # <p>Starts the specified Managed Service for Apache Flink application. After creating an application, you must exclusively call this operation to
     #       start your application.</p>
     # @param [Hash, Types::StartApplicationRequest] params
     # @option params [String] :application_name
@@ -2642,22 +2642,22 @@ module Aws::KinesisAnalyticsV2
     end
 
     # <p>Stops the application from processing data. You can stop
-    #       an application only if it is in the running status, unless you set the <code>Force</code> 
+    #       an application only if it is in the running status, unless you set the <code>Force</code>
     #         parameter to <code>true</code>.</p>
     #          <p>You can use the <a>DescribeApplication</a> operation to find the application status.
     #        </p>
-    #          <p>Managed Service for Apache Flink takes a snapshot when the application is stopped, unless <code>Force</code> is set 
+    #          <p>Managed Service for Apache Flink takes a snapshot when the application is stopped, unless <code>Force</code> is set
     #           to <code>true</code>.</p>
     # @param [Hash, Types::StopApplicationRequest] params
     # @option params [String] :application_name
     #   <p>The name of the running application to stop.</p>
     # @option params [Boolean] :force
     #   <p>Set to <code>true</code> to force the application to stop. If you set <code>Force</code>
-    #             to <code>true</code>, Managed Service for Apache Flink stops the application without taking a snapshot. 
+    #             to <code>true</code>, Managed Service for Apache Flink stops the application without taking a snapshot.
     #         </p>
     #            <note>
     #               <p>Force-stopping your application may lead to data loss or duplication.
-    #                 To prevent data loss or duplicate processing of data during application restarts, 
+    #                 To prevent data loss or duplicate processing of data during application restarts,
     #                 we recommend you to take frequent snapshots of your application.</p>
     #            </note>
     #            <p>You can only force stop a Managed Service for Apache Flink application. You can't force stop a SQL-based Kinesis Data Analytics application.</p>
@@ -2682,7 +2682,7 @@ module Aws::KinesisAnalyticsV2
       request.send_request(options)
     end
 
-    # <p>Adds one or more key-value tags to a Managed Service for Apache Flink application. Note that the maximum number of application 
+    # <p>Adds one or more key-value tags to a Managed Service for Apache Flink application. Note that the maximum number of application
     #         tags includes system tags. The maximum number of user-defined application tags is 50.
     #       For more information, see <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/java/how-tagging.html">Using Tagging</a>.</p>
     # @param [Hash, Types::TagResourceRequest] params
@@ -2711,7 +2711,7 @@ module Aws::KinesisAnalyticsV2
       request.send_request(options)
     end
 
-    # <p>Removes one or more tags from a Managed Service for Apache Flink application. For more information, see 
+    # <p>Removes one or more tags from a Managed Service for Apache Flink application. For more information, see
     #         <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/java/how-tagging.html">Using Tagging</a>.</p>
     # @param [Hash, Types::UntagResourceRequest] params
     # @option params [String] :resource_arn
@@ -2979,7 +2979,7 @@ module Aws::KinesisAnalyticsV2
     #       }
     #     ],
     #     conditional_token: "ConditionalToken",
-    #     runtime_environment_update: "SQL-1_0" # One of: ["SQL-1_0", "FLINK-1_6", "FLINK-1_8", "ZEPPELIN-FLINK-1_0", "FLINK-1_11", "FLINK-1_13", "ZEPPELIN-FLINK-2_0", "FLINK-1_15", "ZEPPELIN-FLINK-3_0", "FLINK-1_18", "FLINK-1_19", "FLINK-1_20"]
+    #     runtime_environment_update: "SQL-1_0" # One of: ["SQL-1_0", "FLINK-1_6", "FLINK-1_8", "ZEPPELIN-FLINK-1_0", "FLINK-1_11", "FLINK-1_13", "ZEPPELIN-FLINK-2_0", "FLINK-1_15", "ZEPPELIN-FLINK-3_0", "FLINK-1_18", "FLINK-1_19", "FLINK-1_20", "FLINK-2_2", "FLINK-2_3"]
     #   }
     #   options = {}
     #   response = client.update_application(params, options)
@@ -2990,7 +2990,7 @@ module Aws::KinesisAnalyticsV2
     #       application_arn: "ResourceARN", # required
     #       application_description: "ApplicationDescription",
     #       application_name: "ApplicationName", # required
-    #       runtime_environment: "SQL-1_0" # One of: ["SQL-1_0", "FLINK-1_6", "FLINK-1_8", "ZEPPELIN-FLINK-1_0", "FLINK-1_11", "FLINK-1_13", "ZEPPELIN-FLINK-2_0", "FLINK-1_15", "ZEPPELIN-FLINK-3_0", "FLINK-1_18", "FLINK-1_19", "FLINK-1_20"], # required
+    #       runtime_environment: "SQL-1_0" # One of: ["SQL-1_0", "FLINK-1_6", "FLINK-1_8", "ZEPPELIN-FLINK-1_0", "FLINK-1_11", "FLINK-1_13", "ZEPPELIN-FLINK-2_0", "FLINK-1_15", "ZEPPELIN-FLINK-3_0", "FLINK-1_18", "FLINK-1_19", "FLINK-1_20", "FLINK-2_2", "FLINK-2_3"], # required
     #       service_execution_role: "RoleARN",
     #       application_status: "DELETING" # One of: ["DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING", "AUTOSCALING", "FORCE_STOPPING", "ROLLING_BACK", "MAINTENANCE", "ROLLED_BACK"], # required
     #       application_version_id: 1, # required

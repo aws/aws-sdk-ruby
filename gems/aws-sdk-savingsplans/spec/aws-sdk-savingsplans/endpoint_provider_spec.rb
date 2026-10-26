@@ -50,20 +50,6 @@ module Aws::Savingsplans
       end
     end
 
-    context "For region us-east-1 with FIPS disabled and DualStack enabled" do
-      let(:expected) do
-        {"endpoint" => {"url" => "https://savingsplans.us-east-1.api.aws"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: true})
-        endpoint = subject.resolve(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
     context "For region us-east-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "savingsplans", "signingRegion" => "us-east-1"}]}, "url" => "https://savingsplans.amazonaws.com"}}
@@ -287,19 +273,6 @@ module Aws::Savingsplans
       end
     end
 
-    context "For custom endpoint with fips disabled and dualstack enabled" do
-      let(:expected) do
-        {"error" => "Invalid Configuration: Dualstack and custom endpoint are not supported"}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: true, endpoint: "https://example.com"})
-        expect do
-          subject.resolve(params)
-        end.to raise_error(ArgumentError, expected['error'])
-      end
-    end
-
     context "Missing region" do
       let(:expected) do
         {"error" => "Invalid Configuration: Missing Region"}
@@ -310,6 +283,62 @@ module Aws::Savingsplans
         expect do
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "For region not set with FIPS disabled and DualStack enabled" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "savingsplans", "signingRegion" => "us-east-1"}]}, "url" => "https://savingsplans.global.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_dual_stack: true, use_fips: false})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "For region us-east-1 with FIPS disabled and DualStack enabled" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "savingsplans", "signingRegion" => "us-east-1"}]}, "url" => "https://savingsplans.global.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_dual_stack: true, use_fips: false})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "For region us-west-1 with FIPS disabled and DualStack enabled" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "savingsplans", "signingRegion" => "us-east-1"}]}, "url" => "https://savingsplans.global.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-1", use_dual_stack: true, use_fips: false})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Commercial region with custom SDK endpoint" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://custom.example.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_dual_stack: false, use_fips: false, endpoint: "https://custom.example.com"})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
     end
   end

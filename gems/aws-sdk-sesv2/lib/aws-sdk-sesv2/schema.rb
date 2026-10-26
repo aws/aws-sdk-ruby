@@ -13,8 +13,10 @@ module Aws::SESv2
     AdminEmail = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sesv2#AdminEmail", name: "AdminEmail")
     AlreadyExistsException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#AlreadyExistsException", name: "AlreadyExistsException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     AmazonResourceName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sesv2#AmazonResourceName", name: "AmazonResourceName", traits: {"smithy.api#length" => {"min" => 1}})
-    ArchiveArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sesv2#ArchiveArn", name: "ArchiveArn", traits: {"smithy.api#length" => {"min" => 20, "max" => 1011}, "smithy.api#pattern" => "^arn:(aws|aws-[a-z-]+):ses:[a-z]{2}-[a-z-]+-[0-9]:[0-9]{1,20}:mailmanager-archive/a-[a-z0-9]{24,62}$"})
+    ArchiveArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sesv2#ArchiveArn", name: "ArchiveArn", traits: {"smithy.api#length" => {"min" => 20, "max" => 1011}, "smithy.api#pattern" => "^arn:(aws|aws-[a-z-]+):ses:[a-z]{2,4}-[a-z-]+-[0-9]:[0-9]{1,20}:mailmanager-archive/a-[a-z0-9]{24,62}$"})
     ArchivingOptions = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#ArchivingOptions", name: "ArchivingOptions")
+    AssociateEmailIdentityCertificateRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#AssociateEmailIdentityCertificateRequest", name: "AssociateEmailIdentityCertificateRequest")
+    AssociateEmailIdentityCertificateResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#AssociateEmailIdentityCertificateResponse", name: "AssociateEmailIdentityCertificateResponse")
     Attachment = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#Attachment", name: "Attachment")
     AttachmentContentDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sesv2#AttachmentContentDescription", name: "AttachmentContentDescription", traits: {"smithy.api#length" => {"min" => 0, "max" => 1000}})
     AttachmentContentDisposition = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sesv2#AttachmentContentDisposition", name: "AttachmentContentDisposition")
@@ -50,6 +52,7 @@ module Aws::SESv2
     CancelExportJobRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#CancelExportJobRequest", name: "CancelExportJobRequest")
     CancelExportJobResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#CancelExportJobResponse", name: "CancelExportJobResponse")
     CaseId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sesv2#CaseId", name: "CaseId")
+    CertificateArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sesv2#CertificateArn", name: "CertificateArn", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "^arn:[\\w+=/,.@-]+:[\\w+=/,.@-]+:[\\w+=/,.@-]*:[0-9]+:certificate/[\\w+=,.@-]+$"})
     Charset = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sesv2#Charset", name: "Charset")
     CloudWatchDestination = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#CloudWatchDestination", name: "CloudWatchDestination")
     CloudWatchDimensionConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#CloudWatchDimensionConfiguration", name: "CloudWatchDimensionConfiguration")
@@ -58,6 +61,10 @@ module Aws::SESv2
     ComplaintFeedbackType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sesv2#ComplaintFeedbackType", name: "ComplaintFeedbackType")
     ComplaintSubType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sesv2#ComplaintSubType", name: "ComplaintSubType")
     ConcurrentModificationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#ConcurrentModificationException", name: "ConcurrentModificationException", traits: {"smithy.api#error" => "server", "smithy.api#httpError" => 500})
+    ConfigurationOverrides = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#ConfigurationOverrides", name: "ConfigurationOverrides")
+    ConfigurationSetFilter = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.sesv2#ConfigurationSetFilter", name: "ConfigurationSetFilter")
+    ConfigurationSetFilterKey = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sesv2#ConfigurationSetFilterKey", name: "ConfigurationSetFilterKey")
+    ConfigurationSetFilterValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sesv2#ConfigurationSetFilterValue", name: "ConfigurationSetFilterValue", traits: {"smithy.api#length" => {"min" => 1}})
     ConfigurationSetName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sesv2#ConfigurationSetName", name: "ConfigurationSetName")
     ConfigurationSetNameList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sesv2#ConfigurationSetNameList", name: "ConfigurationSetNameList")
     ConflictException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#ConflictException", name: "ConflictException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 409})
@@ -111,6 +118,7 @@ module Aws::SESv2
     DedicatedIpList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sesv2#DedicatedIpList", name: "DedicatedIpList")
     DedicatedIpPool = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#DedicatedIpPool", name: "DedicatedIpPool")
     DefaultDimensionValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sesv2#DefaultDimensionValue", name: "DefaultDimensionValue")
+    DefaultSigningScheme = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#DefaultSigningScheme", name: "DefaultSigningScheme")
     DeleteConfigurationSetEventDestinationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#DeleteConfigurationSetEventDestinationRequest", name: "DeleteConfigurationSetEventDestinationRequest")
     DeleteConfigurationSetEventDestinationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#DeleteConfigurationSetEventDestinationResponse", name: "DeleteConfigurationSetEventDestinationResponse")
     DeleteConfigurationSetRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#DeleteConfigurationSetRequest", name: "DeleteConfigurationSetRequest")
@@ -151,6 +159,8 @@ module Aws::SESv2
     DimensionName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sesv2#DimensionName", name: "DimensionName")
     DimensionValueSource = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sesv2#DimensionValueSource", name: "DimensionValueSource")
     Dimensions = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.sesv2#Dimensions", name: "Dimensions", traits: {"smithy.api#length" => {"min" => 1, "max" => 3}})
+    DisassociateEmailIdentityCertificateRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#DisassociateEmailIdentityCertificateRequest", name: "DisassociateEmailIdentityCertificateRequest")
+    DisassociateEmailIdentityCertificateResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#DisassociateEmailIdentityCertificateResponse", name: "DisassociateEmailIdentityCertificateResponse")
     DisplayName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sesv2#DisplayName", name: "DisplayName")
     DkimAttributes = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#DkimAttributes", name: "DkimAttributes")
     DkimSigningAttributes = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#DkimSigningAttributes", name: "DkimSigningAttributes")
@@ -168,6 +178,9 @@ module Aws::SESv2
     DomainIspPlacements = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sesv2#DomainIspPlacements", name: "DomainIspPlacements")
     EmailAddress = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sesv2#EmailAddress", name: "EmailAddress")
     EmailAddressFilterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sesv2#EmailAddressFilterList", name: "EmailAddressFilterList", traits: {"smithy.api#length" => {"min" => 0, "max" => 5}})
+    EmailAddressInsightsConfidenceVerdict = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sesv2#EmailAddressInsightsConfidenceVerdict", name: "EmailAddressInsightsConfidenceVerdict")
+    EmailAddressInsightsMailboxEvaluations = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#EmailAddressInsightsMailboxEvaluations", name: "EmailAddressInsightsMailboxEvaluations")
+    EmailAddressInsightsVerdict = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#EmailAddressInsightsVerdict", name: "EmailAddressInsightsVerdict")
     EmailAddressList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sesv2#EmailAddressList", name: "EmailAddressList")
     EmailContent = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#EmailContent", name: "EmailContent")
     EmailInsights = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#EmailInsights", name: "EmailInsights")
@@ -244,6 +257,8 @@ module Aws::SESv2
     GetDomainDeliverabilityCampaignResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#GetDomainDeliverabilityCampaignResponse", name: "GetDomainDeliverabilityCampaignResponse")
     GetDomainStatisticsReportRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#GetDomainStatisticsReportRequest", name: "GetDomainStatisticsReportRequest")
     GetDomainStatisticsReportResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#GetDomainStatisticsReportResponse", name: "GetDomainStatisticsReportResponse")
+    GetEmailAddressInsightsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#GetEmailAddressInsightsRequest", name: "GetEmailAddressInsightsRequest")
+    GetEmailAddressInsightsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#GetEmailAddressInsightsResponse", name: "GetEmailAddressInsightsResponse")
     GetEmailIdentityPoliciesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#GetEmailIdentityPoliciesRequest", name: "GetEmailIdentityPoliciesRequest")
     GetEmailIdentityPoliciesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#GetEmailIdentityPoliciesResponse", name: "GetEmailIdentityPoliciesResponse")
     GetEmailIdentityRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#GetEmailIdentityRequest", name: "GetEmailIdentityRequest")
@@ -266,8 +281,15 @@ module Aws::SESv2
     GetTenantResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#GetTenantResponse", name: "GetTenantResponse")
     GuardianAttributes = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#GuardianAttributes", name: "GuardianAttributes")
     GuardianOptions = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#GuardianOptions", name: "GuardianOptions")
+    HostedZone = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sesv2#HostedZone", name: "HostedZone")
     HttpsPolicy = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sesv2#HttpsPolicy", name: "HttpsPolicy")
     Identity = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sesv2#Identity", name: "Identity", traits: {"smithy.api#length" => {"min" => 1}})
+    IdentityCertificate = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#IdentityCertificate", name: "IdentityCertificate")
+    IdentityCertificateList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sesv2#IdentityCertificateList", name: "IdentityCertificateList")
+    IdentityCertificateStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sesv2#IdentityCertificateStatus", name: "IdentityCertificateStatus")
+    IdentityFilter = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.sesv2#IdentityFilter", name: "IdentityFilter")
+    IdentityFilterKey = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sesv2#IdentityFilterKey", name: "IdentityFilterKey")
+    IdentityFilterValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sesv2#IdentityFilterValue", name: "IdentityFilterValue", traits: {"smithy.api#length" => {"min" => 1}})
     IdentityInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#IdentityInfo", name: "IdentityInfo")
     IdentityInfoList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sesv2#IdentityInfoList", name: "IdentityInfoList")
     IdentityType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sesv2#IdentityType", name: "IdentityType")
@@ -315,6 +337,8 @@ module Aws::SESv2
     ListDomainDeliverabilityCampaignsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#ListDomainDeliverabilityCampaignsResponse", name: "ListDomainDeliverabilityCampaignsResponse")
     ListEmailIdentitiesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#ListEmailIdentitiesRequest", name: "ListEmailIdentitiesRequest")
     ListEmailIdentitiesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#ListEmailIdentitiesResponse", name: "ListEmailIdentitiesResponse")
+    ListEmailIdentityCertificatesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#ListEmailIdentityCertificatesRequest", name: "ListEmailIdentityCertificatesRequest")
+    ListEmailIdentityCertificatesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#ListEmailIdentityCertificatesResponse", name: "ListEmailIdentityCertificatesResponse")
     ListEmailTemplatesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#ListEmailTemplatesRequest", name: "ListEmailTemplatesRequest")
     ListEmailTemplatesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#ListEmailTemplatesResponse", name: "ListEmailTemplatesResponse")
     ListExportJobsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#ListExportJobsRequest", name: "ListExportJobsRequest")
@@ -345,6 +369,9 @@ module Aws::SESv2
     ListTenantResourcesFilterValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sesv2#ListTenantResourcesFilterValue", name: "ListTenantResourcesFilterValue", traits: {"smithy.api#length" => {"min" => 1, "max" => 512}})
     ListTenantResourcesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#ListTenantResourcesRequest", name: "ListTenantResourcesRequest")
     ListTenantResourcesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#ListTenantResourcesResponse", name: "ListTenantResourcesResponse")
+    ListTenantsFilter = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.sesv2#ListTenantsFilter", name: "ListTenantsFilter")
+    ListTenantsFilterKey = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sesv2#ListTenantsFilterKey", name: "ListTenantsFilterKey")
+    ListTenantsFilterValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sesv2#ListTenantsFilterValue", name: "ListTenantsFilterValue", traits: {"smithy.api#length" => {"min" => 1}})
     ListTenantsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#ListTenantsRequest", name: "ListTenantsRequest")
     ListTenantsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#ListTenantsResponse", name: "ListTenantsResponse")
     MailFromAttributes = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#MailFromAttributes", name: "MailFromAttributes")
@@ -352,6 +379,7 @@ module Aws::SESv2
     MailFromDomainNotVerifiedException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#MailFromDomainNotVerifiedException", name: "MailFromDomainNotVerifiedException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     MailFromDomainStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sesv2#MailFromDomainStatus", name: "MailFromDomainStatus")
     MailType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sesv2#MailType", name: "MailType")
+    MailboxValidation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#MailboxValidation", name: "MailboxValidation")
     Max24HourSend = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.sesv2#Max24HourSend", name: "Max24HourSend", traits: {"smithy.api#default" => 0})
     MaxDeliverySeconds = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sesv2#MaxDeliverySeconds", name: "MaxDeliverySeconds", traits: {"smithy.api#range" => {"min" => 300, "max" => 50400}})
     MaxItems = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sesv2#MaxItems", name: "MaxItems")
@@ -362,11 +390,12 @@ module Aws::SESv2
     MessageHeader = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#MessageHeader", name: "MessageHeader")
     MessageHeaderList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sesv2#MessageHeaderList", name: "MessageHeaderList", traits: {"smithy.api#length" => {"min" => 0, "max" => 15}})
     MessageHeaderName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sesv2#MessageHeaderName", name: "MessageHeaderName", traits: {"smithy.api#length" => {"min" => 1, "max" => 126}, "smithy.api#pattern" => "^[!-9;-@A-~]+$"})
-    MessageHeaderValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sesv2#MessageHeaderValue", name: "MessageHeaderValue", traits: {"smithy.api#length" => {"min" => 1, "max" => 870}, "smithy.api#pattern" => "^[ -~]*$"})
+    MessageHeaderValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sesv2#MessageHeaderValue", name: "MessageHeaderValue", traits: {"smithy.api#length" => {"min" => 1, "max" => 995}, "smithy.api#pattern" => "^[ -~]*$"})
     MessageInsightsDataSource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#MessageInsightsDataSource", name: "MessageInsightsDataSource")
     MessageInsightsExportMaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sesv2#MessageInsightsExportMaxResults", name: "MessageInsightsExportMaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 10000}})
     MessageInsightsFilters = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#MessageInsightsFilters", name: "MessageInsightsFilters")
     MessageRejected = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#MessageRejected", name: "MessageRejected", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
+    MessageSecurityOptions = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#MessageSecurityOptions", name: "MessageSecurityOptions")
     MessageTag = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#MessageTag", name: "MessageTag")
     MessageTagList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sesv2#MessageTagList", name: "MessageTagList")
     MessageTagName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sesv2#MessageTagName", name: "MessageTagName")
@@ -398,6 +427,8 @@ module Aws::SESv2
     PolicyMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.sesv2#PolicyMap", name: "PolicyMap")
     PolicyName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sesv2#PolicyName", name: "PolicyName", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}})
     PoolName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sesv2#PoolName", name: "PoolName")
+    PricingAttributes = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#PricingAttributes", name: "PricingAttributes")
+    PricingPlan = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sesv2#PricingPlan", name: "PricingPlan")
     PrimaryNameServer = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sesv2#PrimaryNameServer", name: "PrimaryNameServer")
     PrivateKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sesv2#PrivateKey", name: "PrivateKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 20480}, "smithy.api#pattern" => "^[a-zA-Z0-9+\\/]+={0,2}$", "smithy.api#sensitive" => {}})
     ProcessedRecordsCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sesv2#ProcessedRecordsCount", name: "ProcessedRecordsCount")
@@ -405,6 +436,8 @@ module Aws::SESv2
     PutAccountDedicatedIpWarmupAttributesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#PutAccountDedicatedIpWarmupAttributesResponse", name: "PutAccountDedicatedIpWarmupAttributesResponse")
     PutAccountDetailsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#PutAccountDetailsRequest", name: "PutAccountDetailsRequest")
     PutAccountDetailsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#PutAccountDetailsResponse", name: "PutAccountDetailsResponse")
+    PutAccountPricingAttributesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#PutAccountPricingAttributesRequest", name: "PutAccountPricingAttributesRequest")
+    PutAccountPricingAttributesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#PutAccountPricingAttributesResponse", name: "PutAccountPricingAttributesResponse")
     PutAccountSendingAttributesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#PutAccountSendingAttributesRequest", name: "PutAccountSendingAttributesRequest")
     PutAccountSendingAttributesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#PutAccountSendingAttributesResponse", name: "PutAccountSendingAttributesResponse")
     PutAccountSuppressionAttributesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#PutAccountSuppressionAttributesRequest", name: "PutAccountSuppressionAttributesRequest")
@@ -445,6 +478,8 @@ module Aws::SESv2
     PutEmailIdentityMailFromAttributesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#PutEmailIdentityMailFromAttributesResponse", name: "PutEmailIdentityMailFromAttributesResponse")
     PutSuppressedDestinationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#PutSuppressedDestinationRequest", name: "PutSuppressedDestinationRequest")
     PutSuppressedDestinationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#PutSuppressedDestinationResponse", name: "PutSuppressedDestinationResponse")
+    PutTenantSuppressionAttributesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#PutTenantSuppressionAttributesRequest", name: "PutTenantSuppressionAttributesRequest")
+    PutTenantSuppressionAttributesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#PutTenantSuppressionAttributesResponse", name: "PutTenantSuppressionAttributesResponse")
     QueryErrorCode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sesv2#QueryErrorCode", name: "QueryErrorCode")
     QueryErrorMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sesv2#QueryErrorMessage", name: "QueryErrorMessage")
     QueryIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sesv2#QueryIdentifier", name: "QueryIdentifier", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}})
@@ -499,6 +534,9 @@ module Aws::SESv2
     SendingStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sesv2#SendingStatus", name: "SendingStatus")
     SentLast24Hours = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.sesv2#SentLast24Hours", name: "SentLast24Hours", traits: {"smithy.api#default" => 0})
     SerialNumber = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sesv2#SerialNumber", name: "SerialNumber", traits: {"smithy.api#default" => 0})
+    SignatureFormat = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sesv2#SignatureFormat", name: "SignatureFormat")
+    SigningScheme = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.sesv2#SigningScheme", name: "SigningScheme")
+    SmimeSigningScheme = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#SmimeSigningScheme", name: "SmimeSigningScheme")
     SnsDestination = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#SnsDestination", name: "SnsDestination")
     Status = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sesv2#Status", name: "Status")
     StatusCause = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sesv2#StatusCause", name: "StatusCause", traits: {"smithy.api#length" => {"min" => 1, "max" => 512}})
@@ -511,11 +549,17 @@ module Aws::SESv2
     SuppressedDestinationSummaries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sesv2#SuppressedDestinationSummaries", name: "SuppressedDestinationSummaries")
     SuppressedDestinationSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#SuppressedDestinationSummary", name: "SuppressedDestinationSummary")
     SuppressionAttributes = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#SuppressionAttributes", name: "SuppressionAttributes")
+    SuppressionConditionThreshold = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#SuppressionConditionThreshold", name: "SuppressionConditionThreshold")
+    SuppressionConfidenceThreshold = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#SuppressionConfidenceThreshold", name: "SuppressionConfidenceThreshold")
+    SuppressionConfidenceVerdictThreshold = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sesv2#SuppressionConfidenceVerdictThreshold", name: "SuppressionConfidenceVerdictThreshold")
     SuppressionListDestination = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#SuppressionListDestination", name: "SuppressionListDestination")
     SuppressionListImportAction = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sesv2#SuppressionListImportAction", name: "SuppressionListImportAction")
     SuppressionListReason = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sesv2#SuppressionListReason", name: "SuppressionListReason")
     SuppressionListReasons = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sesv2#SuppressionListReasons", name: "SuppressionListReasons")
+    SuppressionListScope = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sesv2#SuppressionListScope", name: "SuppressionListScope")
     SuppressionOptions = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#SuppressionOptions", name: "SuppressionOptions")
+    SuppressionValidationAttributes = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#SuppressionValidationAttributes", name: "SuppressionValidationAttributes")
+    SuppressionValidationOptions = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#SuppressionValidationOptions", name: "SuppressionValidationOptions")
     Tag = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#Tag", name: "Tag")
     TagKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sesv2#TagKey", name: "TagKey")
     TagKeyList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sesv2#TagKeyList", name: "TagKeyList")
@@ -530,8 +574,10 @@ module Aws::SESv2
     TenantInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#TenantInfo", name: "TenantInfo")
     TenantInfoList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sesv2#TenantInfoList", name: "TenantInfoList")
     TenantName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sesv2#TenantName", name: "TenantName", traits: {"smithy.api#length" => {"min" => 1}})
+    TenantNameFilterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sesv2#TenantNameFilterList", name: "TenantNameFilterList", traits: {"smithy.api#length" => {"min" => 0, "max" => 5}})
     TenantResource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#TenantResource", name: "TenantResource")
     TenantResourceList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sesv2#TenantResourceList", name: "TenantResourceList")
+    TenantSuppressionAttributes = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#TenantSuppressionAttributes", name: "TenantSuppressionAttributes")
     TestRenderEmailTemplateRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#TestRenderEmailTemplateRequest", name: "TestRenderEmailTemplateRequest")
     TestRenderEmailTemplateResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#TestRenderEmailTemplateResponse", name: "TestRenderEmailTemplateResponse")
     Timestamp = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.sesv2#Timestamp", name: "Timestamp")
@@ -544,12 +590,15 @@ module Aws::SESv2
     TopicPreference = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#TopicPreference", name: "TopicPreference")
     TopicPreferenceList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sesv2#TopicPreferenceList", name: "TopicPreferenceList")
     Topics = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sesv2#Topics", name: "Topics")
+    TrackingConfigurationOverrides = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#TrackingConfigurationOverrides", name: "TrackingConfigurationOverrides")
     TrackingOptions = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#TrackingOptions", name: "TrackingOptions")
     UnsubscribeAll = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.sesv2#UnsubscribeAll", name: "UnsubscribeAll", traits: {"smithy.api#default" => false})
     UntagResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#UntagResourceRequest", name: "UntagResourceRequest")
     UntagResourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#UntagResourceResponse", name: "UntagResourceResponse")
     UpdateConfigurationSetEventDestinationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#UpdateConfigurationSetEventDestinationRequest", name: "UpdateConfigurationSetEventDestinationRequest")
     UpdateConfigurationSetEventDestinationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#UpdateConfigurationSetEventDestinationResponse", name: "UpdateConfigurationSetEventDestinationResponse")
+    UpdateConfigurationSetRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#UpdateConfigurationSetRequest", name: "UpdateConfigurationSetRequest")
+    UpdateConfigurationSetResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#UpdateConfigurationSetResponse", name: "UpdateConfigurationSetResponse")
     UpdateContactListRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#UpdateContactListRequest", name: "UpdateContactListRequest")
     UpdateContactListResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#UpdateContactListResponse", name: "UpdateContactListResponse")
     UpdateContactRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sesv2#UpdateContactRequest", name: "UpdateContactRequest")
@@ -590,6 +639,11 @@ module Aws::SESv2
     AlreadyExistsException.type = Types::AlreadyExistsException
     ArchivingOptions.add_member(:archive_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArchiveArn, name: "ArchiveArn"))
     ArchivingOptions.type = Types::ArchivingOptions
+    AssociateEmailIdentityCertificateRequest.add_member(:email_identity, ::Smithy::Schema::Shapes::MemberShape.new(target: Identity, name: "EmailIdentity", traits: {"smithy.api#required" => {}}))
+    AssociateEmailIdentityCertificateRequest.add_member(:from_address, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddress, name: "FromAddress"))
+    AssociateEmailIdentityCertificateRequest.add_member(:certificate_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateArn, name: "CertificateArn", traits: {"smithy.api#required" => {}}))
+    AssociateEmailIdentityCertificateRequest.type = Types::AssociateEmailIdentityCertificateRequest
+    AssociateEmailIdentityCertificateResponse.type = Types::AssociateEmailIdentityCertificateResponse
     Attachment.add_member(:raw_content, ::Smithy::Schema::Shapes::MemberShape.new(target: RawAttachmentData, name: "RawContent", traits: {"smithy.api#required" => {}}))
     Attachment.add_member(:content_disposition, ::Smithy::Schema::Shapes::MemberShape.new(target: AttachmentContentDisposition, name: "ContentDisposition"))
     Attachment.add_member(:file_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AttachmentFileName, name: "FileName", traits: {"smithy.api#required" => {}}))
@@ -681,6 +735,11 @@ module Aws::SESv2
     Complaint.type = Types::Complaint
     ConcurrentModificationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     ConcurrentModificationException.type = Types::ConcurrentModificationException
+    ConfigurationOverrides.add_member(:tracking, ::Smithy::Schema::Shapes::MemberShape.new(target: TrackingConfigurationOverrides, name: "Tracking"))
+    ConfigurationOverrides.type = Types::ConfigurationOverrides
+    ConfigurationSetFilter.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetFilterKey, name: "key"))
+    ConfigurationSetFilter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetFilterValue, name: "value"))
+    ConfigurationSetFilterKey.add_member(:configuration_set_name_contains, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONFIGURATION_SET_NAME_CONTAINS", traits: {"smithy.api#enumValue" => "CONFIGURATION_SET_NAME_CONTAINS"}))
     ConfigurationSetNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetName, name: "member"))
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     ConflictException.type = Types::ConflictException
@@ -717,6 +776,7 @@ module Aws::SESv2
     CreateConfigurationSetRequest.add_member(:suppression_options, ::Smithy::Schema::Shapes::MemberShape.new(target: SuppressionOptions, name: "SuppressionOptions"))
     CreateConfigurationSetRequest.add_member(:vdm_options, ::Smithy::Schema::Shapes::MemberShape.new(target: VdmOptions, name: "VdmOptions"))
     CreateConfigurationSetRequest.add_member(:archiving_options, ::Smithy::Schema::Shapes::MemberShape.new(target: ArchivingOptions, name: "ArchivingOptions"))
+    CreateConfigurationSetRequest.add_member(:message_security_options, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageSecurityOptions, name: "MessageSecurityOptions"))
     CreateConfigurationSetRequest.type = Types::CreateConfigurationSetRequest
     CreateConfigurationSetResponse.type = Types::CreateConfigurationSetResponse
     CreateContactListRequest.add_member(:contact_list_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactListName, name: "ContactListName", traits: {"smithy.api#required" => {}}))
@@ -736,6 +796,7 @@ module Aws::SESv2
     CreateCustomVerificationEmailTemplateRequest.add_member(:from_email_address, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddress, name: "FromEmailAddress", traits: {"smithy.api#required" => {}}))
     CreateCustomVerificationEmailTemplateRequest.add_member(:template_subject, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailTemplateSubject, name: "TemplateSubject", traits: {"smithy.api#required" => {}}))
     CreateCustomVerificationEmailTemplateRequest.add_member(:template_content, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateContent, name: "TemplateContent", traits: {"smithy.api#required" => {}}))
+    CreateCustomVerificationEmailTemplateRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     CreateCustomVerificationEmailTemplateRequest.add_member(:success_redirection_url, ::Smithy::Schema::Shapes::MemberShape.new(target: SuccessRedirectionURL, name: "SuccessRedirectionURL", traits: {"smithy.api#required" => {}}))
     CreateCustomVerificationEmailTemplateRequest.add_member(:failure_redirection_url, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureRedirectionURL, name: "FailureRedirectionURL", traits: {"smithy.api#required" => {}}))
     CreateCustomVerificationEmailTemplateRequest.type = Types::CreateCustomVerificationEmailTemplateRequest
@@ -769,6 +830,7 @@ module Aws::SESv2
     CreateEmailIdentityResponse.type = Types::CreateEmailIdentityResponse
     CreateEmailTemplateRequest.add_member(:template_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailTemplateName, name: "TemplateName", traits: {"smithy.api#required" => {}}))
     CreateEmailTemplateRequest.add_member(:template_content, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailTemplateContent, name: "TemplateContent", traits: {"smithy.api#required" => {}}))
+    CreateEmailTemplateRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     CreateEmailTemplateRequest.type = Types::CreateEmailTemplateRequest
     CreateEmailTemplateResponse.type = Types::CreateEmailTemplateResponse
     CreateExportJobRequest.add_member(:export_data_source, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportDataSource, name: "ExportDataSource", traits: {"smithy.api#required" => {}}))
@@ -790,6 +852,7 @@ module Aws::SESv2
     CreateMultiRegionEndpointResponse.type = Types::CreateMultiRegionEndpointResponse
     CreateTenantRequest.add_member(:tenant_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TenantName, name: "TenantName", traits: {"smithy.api#required" => {}}))
     CreateTenantRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
+    CreateTenantRequest.add_member(:suppression_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: TenantSuppressionAttributes, name: "SuppressionAttributes"))
     CreateTenantRequest.type = Types::CreateTenantRequest
     CreateTenantResourceAssociationRequest.add_member(:tenant_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TenantName, name: "TenantName", traits: {"smithy.api#required" => {}}))
     CreateTenantResourceAssociationRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
@@ -801,6 +864,7 @@ module Aws::SESv2
     CreateTenantResponse.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedTimestamp"))
     CreateTenantResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     CreateTenantResponse.add_member(:sending_status, ::Smithy::Schema::Shapes::MemberShape.new(target: SendingStatus, name: "SendingStatus"))
+    CreateTenantResponse.add_member(:suppression_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: TenantSuppressionAttributes, name: "SuppressionAttributes"))
     CreateTenantResponse.type = Types::CreateTenantResponse
     CustomVerificationEmailTemplateMetadata.add_member(:template_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailTemplateName, name: "TemplateName"))
     CustomVerificationEmailTemplateMetadata.add_member(:from_email_address, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddress, name: "FromEmailAddress"))
@@ -829,6 +893,7 @@ module Aws::SESv2
     DedicatedIpPool.add_member(:pool_name, ::Smithy::Schema::Shapes::MemberShape.new(target: PoolName, name: "PoolName", traits: {"smithy.api#required" => {}}))
     DedicatedIpPool.add_member(:scaling_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ScalingMode, name: "ScalingMode", traits: {"smithy.api#required" => {}}))
     DedicatedIpPool.type = Types::DedicatedIpPool
+    DefaultSigningScheme.type = Types::DefaultSigningScheme
     DeleteConfigurationSetEventDestinationRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetName, name: "ConfigurationSetName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteConfigurationSetEventDestinationRequest.add_member(:event_destination_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EventDestinationName, name: "EventDestinationName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteConfigurationSetEventDestinationRequest.type = Types::DeleteConfigurationSetEventDestinationRequest
@@ -864,6 +929,7 @@ module Aws::SESv2
     DeleteMultiRegionEndpointResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: Status, name: "Status"))
     DeleteMultiRegionEndpointResponse.type = Types::DeleteMultiRegionEndpointResponse
     DeleteSuppressedDestinationRequest.add_member(:email_address, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddress, name: "EmailAddress", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteSuppressedDestinationRequest.add_member(:tenant_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TenantName, name: "TenantName", traits: {"smithy.api#httpQuery" => "TenantName"}))
     DeleteSuppressedDestinationRequest.type = Types::DeleteSuppressedDestinationRequest
     DeleteSuppressedDestinationResponse.type = Types::DeleteSuppressedDestinationResponse
     DeleteTenantRequest.add_member(:tenant_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TenantName, name: "TenantName", traits: {"smithy.api#required" => {}}))
@@ -907,9 +973,14 @@ module Aws::SESv2
     DimensionValueSource.add_member(:link_tag, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LINK_TAG", traits: {"smithy.api#enumValue" => "LINK_TAG"}))
     Dimensions.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricDimensionName, name: "key"))
     Dimensions.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricDimensionValue, name: "value"))
+    DisassociateEmailIdentityCertificateRequest.add_member(:email_identity, ::Smithy::Schema::Shapes::MemberShape.new(target: Identity, name: "EmailIdentity", traits: {"smithy.api#required" => {}}))
+    DisassociateEmailIdentityCertificateRequest.add_member(:from_address, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddress, name: "FromAddress"))
+    DisassociateEmailIdentityCertificateRequest.type = Types::DisassociateEmailIdentityCertificateRequest
+    DisassociateEmailIdentityCertificateResponse.type = Types::DisassociateEmailIdentityCertificateResponse
     DkimAttributes.add_member(:signing_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Enabled, name: "SigningEnabled", traits: {"smithy.api#default" => false}))
     DkimAttributes.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: DkimStatus, name: "Status"))
     DkimAttributes.add_member(:tokens, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsTokenList, name: "Tokens"))
+    DkimAttributes.add_member(:signing_hosted_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: HostedZone, name: "SigningHostedZone"))
     DkimAttributes.add_member(:signing_attributes_origin, ::Smithy::Schema::Shapes::MemberShape.new(target: DkimSigningAttributesOrigin, name: "SigningAttributesOrigin"))
     DkimAttributes.add_member(:next_signing_key_length, ::Smithy::Schema::Shapes::MemberShape.new(target: DkimSigningKeyLength, name: "NextSigningKeyLength"))
     DkimAttributes.add_member(:current_signing_key_length, ::Smithy::Schema::Shapes::MemberShape.new(target: DkimSigningKeyLength, name: "CurrentSigningKeyLength"))
@@ -947,6 +1018,10 @@ module Aws::SESv2
     DkimSigningAttributesOrigin.add_member(:aws_ses_me_central_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_SES_ME_CENTRAL_1", traits: {"smithy.api#enumValue" => "AWS_SES_ME_CENTRAL_1"}))
     DkimSigningAttributesOrigin.add_member(:aws_ses_ap_south_2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_SES_AP_SOUTH_2", traits: {"smithy.api#enumValue" => "AWS_SES_AP_SOUTH_2"}))
     DkimSigningAttributesOrigin.add_member(:aws_ses_eu_central_2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_SES_EU_CENTRAL_2", traits: {"smithy.api#enumValue" => "AWS_SES_EU_CENTRAL_2"}))
+    DkimSigningAttributesOrigin.add_member(:aws_ses_ap_southeast_5, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_SES_AP_SOUTHEAST_5", traits: {"smithy.api#enumValue" => "AWS_SES_AP_SOUTHEAST_5"}))
+    DkimSigningAttributesOrigin.add_member(:aws_ses_ca_west_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_SES_CA_WEST_1", traits: {"smithy.api#enumValue" => "AWS_SES_CA_WEST_1"}))
+    DkimSigningAttributesOrigin.add_member(:aws_ses_us_gov_east_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_SES_US_GOV_EAST_1", traits: {"smithy.api#enumValue" => "AWS_SES_US_GOV_EAST_1"}))
+    DkimSigningAttributesOrigin.add_member(:aws_ses_us_gov_west_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_SES_US_GOV_WEST_1", traits: {"smithy.api#enumValue" => "AWS_SES_US_GOV_WEST_1"}))
     DkimSigningKeyLength.add_member(:rsa_1024_bit, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RSA_1024_BIT", traits: {"smithy.api#enumValue" => "RSA_1024_BIT"}))
     DkimSigningKeyLength.add_member(:rsa_2048_bit, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RSA_2048_BIT", traits: {"smithy.api#enumValue" => "RSA_2048_BIT"}))
     DkimStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
@@ -984,6 +1059,18 @@ module Aws::SESv2
     DomainIspPlacement.type = Types::DomainIspPlacement
     DomainIspPlacements.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainIspPlacement, name: "member"))
     EmailAddressFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightsEmailAddress, name: "member"))
+    EmailAddressInsightsConfidenceVerdict.add_member(:low, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOW", traits: {"smithy.api#enumValue" => "LOW"}))
+    EmailAddressInsightsConfidenceVerdict.add_member(:medium, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MEDIUM", traits: {"smithy.api#enumValue" => "MEDIUM"}))
+    EmailAddressInsightsConfidenceVerdict.add_member(:high, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HIGH", traits: {"smithy.api#enumValue" => "HIGH"}))
+    EmailAddressInsightsMailboxEvaluations.add_member(:has_valid_syntax, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddressInsightsVerdict, name: "HasValidSyntax"))
+    EmailAddressInsightsMailboxEvaluations.add_member(:has_valid_dns_records, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddressInsightsVerdict, name: "HasValidDnsRecords"))
+    EmailAddressInsightsMailboxEvaluations.add_member(:mailbox_exists, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddressInsightsVerdict, name: "MailboxExists"))
+    EmailAddressInsightsMailboxEvaluations.add_member(:is_role_address, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddressInsightsVerdict, name: "IsRoleAddress"))
+    EmailAddressInsightsMailboxEvaluations.add_member(:is_disposable, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddressInsightsVerdict, name: "IsDisposable"))
+    EmailAddressInsightsMailboxEvaluations.add_member(:is_random_input, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddressInsightsVerdict, name: "IsRandomInput"))
+    EmailAddressInsightsMailboxEvaluations.type = Types::EmailAddressInsightsMailboxEvaluations
+    EmailAddressInsightsVerdict.add_member(:confidence_verdict, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddressInsightsConfidenceVerdict, name: "ConfidenceVerdict"))
+    EmailAddressInsightsVerdict.type = Types::EmailAddressInsightsVerdict
     EmailAddressList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddress, name: "member"))
     EmailContent.add_member(:simple, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Simple"))
     EmailContent.add_member(:raw, ::Smithy::Schema::Shapes::MemberShape.new(target: RawMessage, name: "Raw"))
@@ -1079,6 +1166,7 @@ module Aws::SESv2
     GetAccountResponse.add_member(:suppression_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: SuppressionAttributes, name: "SuppressionAttributes"))
     GetAccountResponse.add_member(:details, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountDetails, name: "Details"))
     GetAccountResponse.add_member(:vdm_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: VdmAttributes, name: "VdmAttributes"))
+    GetAccountResponse.add_member(:pricing_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: PricingAttributes, name: "PricingAttributes"))
     GetAccountResponse.type = Types::GetAccountResponse
     GetBlacklistReportsRequest.add_member(:blacklist_item_names, ::Smithy::Schema::Shapes::MemberShape.new(target: BlacklistItemNames, name: "BlacklistItemNames", traits: {"smithy.api#httpQuery" => "BlacklistItemNames", "smithy.api#required" => {}}))
     GetBlacklistReportsRequest.type = Types::GetBlacklistReportsRequest
@@ -1099,6 +1187,7 @@ module Aws::SESv2
     GetConfigurationSetResponse.add_member(:suppression_options, ::Smithy::Schema::Shapes::MemberShape.new(target: SuppressionOptions, name: "SuppressionOptions"))
     GetConfigurationSetResponse.add_member(:vdm_options, ::Smithy::Schema::Shapes::MemberShape.new(target: VdmOptions, name: "VdmOptions"))
     GetConfigurationSetResponse.add_member(:archiving_options, ::Smithy::Schema::Shapes::MemberShape.new(target: ArchivingOptions, name: "ArchivingOptions"))
+    GetConfigurationSetResponse.add_member(:message_security_options, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageSecurityOptions, name: "MessageSecurityOptions"))
     GetConfigurationSetResponse.type = Types::GetConfigurationSetResponse
     GetContactListRequest.add_member(:contact_list_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactListName, name: "ContactListName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetContactListRequest.type = Types::GetContactListRequest
@@ -1127,6 +1216,7 @@ module Aws::SESv2
     GetCustomVerificationEmailTemplateResponse.add_member(:from_email_address, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddress, name: "FromEmailAddress"))
     GetCustomVerificationEmailTemplateResponse.add_member(:template_subject, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailTemplateSubject, name: "TemplateSubject"))
     GetCustomVerificationEmailTemplateResponse.add_member(:template_content, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateContent, name: "TemplateContent"))
+    GetCustomVerificationEmailTemplateResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     GetCustomVerificationEmailTemplateResponse.add_member(:success_redirection_url, ::Smithy::Schema::Shapes::MemberShape.new(target: SuccessRedirectionURL, name: "SuccessRedirectionURL"))
     GetCustomVerificationEmailTemplateResponse.add_member(:failure_redirection_url, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureRedirectionURL, name: "FailureRedirectionURL"))
     GetCustomVerificationEmailTemplateResponse.type = Types::GetCustomVerificationEmailTemplateResponse
@@ -1171,6 +1261,10 @@ module Aws::SESv2
     GetDomainStatisticsReportResponse.add_member(:overall_volume, ::Smithy::Schema::Shapes::MemberShape.new(target: OverallVolume, name: "OverallVolume", traits: {"smithy.api#required" => {}}))
     GetDomainStatisticsReportResponse.add_member(:daily_volumes, ::Smithy::Schema::Shapes::MemberShape.new(target: DailyVolumes, name: "DailyVolumes", traits: {"smithy.api#required" => {}}))
     GetDomainStatisticsReportResponse.type = Types::GetDomainStatisticsReportResponse
+    GetEmailAddressInsightsRequest.add_member(:email_address, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddress, name: "EmailAddress", traits: {"smithy.api#required" => {}}))
+    GetEmailAddressInsightsRequest.type = Types::GetEmailAddressInsightsRequest
+    GetEmailAddressInsightsResponse.add_member(:mailbox_validation, ::Smithy::Schema::Shapes::MemberShape.new(target: MailboxValidation, name: "MailboxValidation"))
+    GetEmailAddressInsightsResponse.type = Types::GetEmailAddressInsightsResponse
     GetEmailIdentityPoliciesRequest.add_member(:email_identity, ::Smithy::Schema::Shapes::MemberShape.new(target: Identity, name: "EmailIdentity", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetEmailIdentityPoliciesRequest.type = Types::GetEmailIdentityPoliciesRequest
     GetEmailIdentityPoliciesResponse.add_member(:policies, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyMap, name: "Policies"))
@@ -1192,6 +1286,7 @@ module Aws::SESv2
     GetEmailTemplateRequest.type = Types::GetEmailTemplateRequest
     GetEmailTemplateResponse.add_member(:template_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailTemplateName, name: "TemplateName", traits: {"smithy.api#required" => {}}))
     GetEmailTemplateResponse.add_member(:template_content, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailTemplateContent, name: "TemplateContent", traits: {"smithy.api#required" => {}}))
+    GetEmailTemplateResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     GetEmailTemplateResponse.type = Types::GetEmailTemplateResponse
     GetExportJobRequest.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, name: "JobId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetExportJobRequest.type = Types::GetExportJobRequest
@@ -1240,6 +1335,7 @@ module Aws::SESv2
     GetReputationEntityResponse.add_member(:reputation_entity, ::Smithy::Schema::Shapes::MemberShape.new(target: ReputationEntity, name: "ReputationEntity"))
     GetReputationEntityResponse.type = Types::GetReputationEntityResponse
     GetSuppressedDestinationRequest.add_member(:email_address, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddress, name: "EmailAddress", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetSuppressedDestinationRequest.add_member(:tenant_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TenantName, name: "TenantName", traits: {"smithy.api#httpQuery" => "TenantName"}))
     GetSuppressedDestinationRequest.type = Types::GetSuppressedDestinationRequest
     GetSuppressedDestinationResponse.add_member(:suppressed_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: SuppressedDestination, name: "SuppressedDestination", traits: {"smithy.api#required" => {}}))
     GetSuppressedDestinationResponse.type = Types::GetSuppressedDestinationResponse
@@ -1254,6 +1350,22 @@ module Aws::SESv2
     HttpsPolicy.add_member(:require, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REQUIRE", traits: {"smithy.api#enumValue" => "REQUIRE"}))
     HttpsPolicy.add_member(:require_open_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REQUIRE_OPEN_ONLY", traits: {"smithy.api#enumValue" => "REQUIRE_OPEN_ONLY"}))
     HttpsPolicy.add_member(:optional, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OPTIONAL", traits: {"smithy.api#enumValue" => "OPTIONAL"}))
+    IdentityCertificate.add_member(:from_address, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddress, name: "FromAddress"))
+    IdentityCertificate.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityCertificateStatus, name: "Status"))
+    IdentityCertificate.add_member(:certificate_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateArn, name: "CertificateArn"))
+    IdentityCertificate.add_member(:certificate_expiry_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CertificateExpiryTime"))
+    IdentityCertificate.type = Types::IdentityCertificate
+    IdentityCertificateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityCertificate, name: "member"))
+    IdentityCertificateStatus.add_member(:provisioning, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PROVISIONING", traits: {"smithy.api#enumValue" => "PROVISIONING"}))
+    IdentityCertificateStatus.add_member(:inactive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INACTIVE", traits: {"smithy.api#enumValue" => "INACTIVE"}))
+    IdentityCertificateStatus.add_member(:deprovisioning, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEPROVISIONING", traits: {"smithy.api#enumValue" => "DEPROVISIONING"}))
+    IdentityCertificateStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
+    IdentityCertificateStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    IdentityFilter.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityFilterKey, name: "key"))
+    IdentityFilter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityFilterValue, name: "value"))
+    IdentityFilterKey.add_member(:identity_name_contains, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IDENTITY_NAME_CONTAINS", traits: {"smithy.api#enumValue" => "IDENTITY_NAME_CONTAINS"}))
+    IdentityFilterKey.add_member(:identity_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IDENTITY_TYPE", traits: {"smithy.api#enumValue" => "IDENTITY_TYPE"}))
+    IdentityFilterKey.add_member(:verification_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VERIFICATION_STATUS", traits: {"smithy.api#enumValue" => "VERIFICATION_STATUS"}))
     IdentityInfo.add_member(:identity_type, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityType, name: "IdentityType"))
     IdentityInfo.add_member(:identity_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Identity, name: "IdentityName"))
     IdentityInfo.add_member(:sending_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Enabled, name: "SendingEnabled", traits: {"smithy.api#default" => false}))
@@ -1310,8 +1422,9 @@ module Aws::SESv2
     LastEngagementEventList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementEventType, name: "member"))
     LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     LimitExceededException.type = Types::LimitExceededException
-    ListConfigurationSetsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
-    ListConfigurationSetsRequest.add_member(:page_size, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxItems, name: "PageSize", traits: {"smithy.api#httpQuery" => "PageSize"}))
+    ListConfigurationSetsRequest.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetFilter, name: "Filter"))
+    ListConfigurationSetsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    ListConfigurationSetsRequest.add_member(:page_size, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxItems, name: "PageSize"))
     ListConfigurationSetsRequest.type = Types::ListConfigurationSetsRequest
     ListConfigurationSetsResponse.add_member(:configuration_sets, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetNameList, name: "ConfigurationSets"))
     ListConfigurationSetsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
@@ -1360,12 +1473,20 @@ module Aws::SESv2
     ListDomainDeliverabilityCampaignsResponse.add_member(:domain_deliverability_campaigns, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainDeliverabilityCampaignList, name: "DomainDeliverabilityCampaigns", traits: {"smithy.api#required" => {}}))
     ListDomainDeliverabilityCampaignsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     ListDomainDeliverabilityCampaignsResponse.type = Types::ListDomainDeliverabilityCampaignsResponse
-    ListEmailIdentitiesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
-    ListEmailIdentitiesRequest.add_member(:page_size, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxItems, name: "PageSize", traits: {"smithy.api#httpQuery" => "PageSize"}))
+    ListEmailIdentitiesRequest.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityFilter, name: "Filter"))
+    ListEmailIdentitiesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    ListEmailIdentitiesRequest.add_member(:page_size, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxItems, name: "PageSize"))
     ListEmailIdentitiesRequest.type = Types::ListEmailIdentitiesRequest
     ListEmailIdentitiesResponse.add_member(:email_identities, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityInfoList, name: "EmailIdentities"))
     ListEmailIdentitiesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     ListEmailIdentitiesResponse.type = Types::ListEmailIdentitiesResponse
+    ListEmailIdentityCertificatesRequest.add_member(:email_identity, ::Smithy::Schema::Shapes::MemberShape.new(target: Identity, name: "EmailIdentity", traits: {"smithy.api#required" => {}}))
+    ListEmailIdentityCertificatesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    ListEmailIdentityCertificatesRequest.add_member(:page_size, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxItems, name: "PageSize"))
+    ListEmailIdentityCertificatesRequest.type = Types::ListEmailIdentityCertificatesRequest
+    ListEmailIdentityCertificatesResponse.add_member(:certificates, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityCertificateList, name: "Certificates"))
+    ListEmailIdentityCertificatesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    ListEmailIdentityCertificatesResponse.type = Types::ListEmailIdentityCertificatesResponse
     ListEmailTemplatesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
     ListEmailTemplatesRequest.add_member(:page_size, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxItems, name: "PageSize", traits: {"smithy.api#httpQuery" => "PageSize"}))
     ListEmailTemplatesRequest.type = Types::ListEmailTemplatesRequest
@@ -1426,6 +1547,7 @@ module Aws::SESv2
     ListResourceTenantsResponse.add_member(:resource_tenants, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTenantMetadataList, name: "ResourceTenants"))
     ListResourceTenantsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     ListResourceTenantsResponse.type = Types::ListResourceTenantsResponse
+    ListSuppressedDestinationsRequest.add_member(:tenant_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TenantName, name: "TenantName", traits: {"smithy.api#httpQuery" => "TenantName"}))
     ListSuppressedDestinationsRequest.add_member(:reasons, ::Smithy::Schema::Shapes::MemberShape.new(target: SuppressionListReasons, name: "Reasons", traits: {"smithy.api#httpQuery" => "Reason"}))
     ListSuppressedDestinationsRequest.add_member(:start_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "StartDate", traits: {"smithy.api#httpQuery" => "StartDate"}))
     ListSuppressedDestinationsRequest.add_member(:end_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "EndDate", traits: {"smithy.api#httpQuery" => "EndDate"}))
@@ -1450,6 +1572,11 @@ module Aws::SESv2
     ListTenantResourcesResponse.add_member(:tenant_resources, ::Smithy::Schema::Shapes::MemberShape.new(target: TenantResourceList, name: "TenantResources"))
     ListTenantResourcesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     ListTenantResourcesResponse.type = Types::ListTenantResourcesResponse
+    ListTenantsFilter.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ListTenantsFilterKey, name: "key"))
+    ListTenantsFilter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ListTenantsFilterValue, name: "value"))
+    ListTenantsFilterKey.add_member(:tenant_name_contains, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TENANT_NAME_CONTAINS", traits: {"smithy.api#enumValue" => "TENANT_NAME_CONTAINS"}))
+    ListTenantsFilterKey.add_member(:sending_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SENDING_STATUS", traits: {"smithy.api#enumValue" => "SENDING_STATUS"}))
+    ListTenantsRequest.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: ListTenantsFilter, name: "Filter"))
     ListTenantsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     ListTenantsRequest.add_member(:page_size, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxItems, name: "PageSize"))
     ListTenantsRequest.type = Types::ListTenantsRequest
@@ -1468,6 +1595,9 @@ module Aws::SESv2
     MailFromDomainStatus.add_member(:temporary_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TEMPORARY_FAILURE", traits: {"smithy.api#enumValue" => "TEMPORARY_FAILURE"}))
     MailType.add_member(:marketing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MARKETING", traits: {"smithy.api#enumValue" => "MARKETING"}))
     MailType.add_member(:transactional, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TRANSACTIONAL", traits: {"smithy.api#enumValue" => "TRANSACTIONAL"}))
+    MailboxValidation.add_member(:is_valid, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddressInsightsVerdict, name: "IsValid"))
+    MailboxValidation.add_member(:evaluations, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddressInsightsMailboxEvaluations, name: "Evaluations"))
+    MailboxValidation.type = Types::MailboxValidation
     Message.add_member(:subject, ::Smithy::Schema::Shapes::MemberShape.new(target: Content, name: "Subject", traits: {"smithy.api#required" => {}}))
     Message.add_member(:body, ::Smithy::Schema::Shapes::MemberShape.new(target: Body, name: "Body", traits: {"smithy.api#required" => {}}))
     Message.add_member(:headers, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageHeaderList, name: "Headers"))
@@ -1487,11 +1617,14 @@ module Aws::SESv2
     MessageInsightsFilters.add_member(:destination, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddressFilterList, name: "Destination"))
     MessageInsightsFilters.add_member(:subject, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailSubjectFilterList, name: "Subject"))
     MessageInsightsFilters.add_member(:isp, ::Smithy::Schema::Shapes::MemberShape.new(target: IspFilterList, name: "Isp"))
+    MessageInsightsFilters.add_member(:tenant_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TenantNameFilterList, name: "TenantName"))
     MessageInsightsFilters.add_member(:last_delivery_event, ::Smithy::Schema::Shapes::MemberShape.new(target: LastDeliveryEventList, name: "LastDeliveryEvent"))
     MessageInsightsFilters.add_member(:last_engagement_event, ::Smithy::Schema::Shapes::MemberShape.new(target: LastEngagementEventList, name: "LastEngagementEvent"))
     MessageInsightsFilters.type = Types::MessageInsightsFilters
     MessageRejected.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     MessageRejected.type = Types::MessageRejected
+    MessageSecurityOptions.add_member(:signing_scheme, ::Smithy::Schema::Shapes::MemberShape.new(target: SigningScheme, name: "SigningScheme"))
+    MessageSecurityOptions.type = Types::MessageSecurityOptions
     MessageTag.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageTagName, name: "Name", traits: {"smithy.api#required" => {}}))
     MessageTag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageTagValue, name: "Value", traits: {"smithy.api#required" => {}}))
     MessageTag.type = Types::MessageTag
@@ -1521,6 +1654,7 @@ module Aws::SESv2
     MetricDimensionName.add_member(:email_identity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EMAIL_IDENTITY", traits: {"smithy.api#enumValue" => "EMAIL_IDENTITY"}))
     MetricDimensionName.add_member(:configuration_set, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONFIGURATION_SET", traits: {"smithy.api#enumValue" => "CONFIGURATION_SET"}))
     MetricDimensionName.add_member(:isp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ISP", traits: {"smithy.api#enumValue" => "ISP"}))
+    MetricDimensionName.add_member(:tenant_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TENANT_NAME", traits: {"smithy.api#enumValue" => "TENANT_NAME"}))
     MetricNamespace.add_member(:vdm, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VDM", traits: {"smithy.api#enumValue" => "VDM"}))
     MetricValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Counter, name: "member"))
     MetricsDataSource.add_member(:dimensions, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportDimensions, name: "Dimensions", traits: {"smithy.api#required" => {}}))
@@ -1553,6 +1687,13 @@ module Aws::SESv2
     PlacementStatistics.type = Types::PlacementStatistics
     PolicyMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyName, name: "key"))
     PolicyMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Policy, name: "value"))
+    PricingAttributes.add_member(:current_plan, ::Smithy::Schema::Shapes::MemberShape.new(target: PricingPlan, name: "CurrentPlan"))
+    PricingAttributes.add_member(:next_plan, ::Smithy::Schema::Shapes::MemberShape.new(target: PricingPlan, name: "NextPlan"))
+    PricingAttributes.type = Types::PricingAttributes
+    PricingPlan.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
+    PricingPlan.add_member(:essentials, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ESSENTIALS", traits: {"smithy.api#enumValue" => "ESSENTIALS"}))
+    PricingPlan.add_member(:pro, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRO", traits: {"smithy.api#enumValue" => "PRO"}))
+    PricingPlan.add_member(:enterprise, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENTERPRISE", traits: {"smithy.api#enumValue" => "ENTERPRISE"}))
     PutAccountDedicatedIpWarmupAttributesRequest.add_member(:auto_warmup_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Enabled, name: "AutoWarmupEnabled", traits: {"smithy.api#default" => false}))
     PutAccountDedicatedIpWarmupAttributesRequest.type = Types::PutAccountDedicatedIpWarmupAttributesRequest
     PutAccountDedicatedIpWarmupAttributesResponse.type = Types::PutAccountDedicatedIpWarmupAttributesResponse
@@ -1564,10 +1705,14 @@ module Aws::SESv2
     PutAccountDetailsRequest.add_member(:production_access_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: EnabledWrapper, name: "ProductionAccessEnabled"))
     PutAccountDetailsRequest.type = Types::PutAccountDetailsRequest
     PutAccountDetailsResponse.type = Types::PutAccountDetailsResponse
+    PutAccountPricingAttributesRequest.add_member(:plan, ::Smithy::Schema::Shapes::MemberShape.new(target: PricingPlan, name: "Plan", traits: {"smithy.api#required" => {}}))
+    PutAccountPricingAttributesRequest.type = Types::PutAccountPricingAttributesRequest
+    PutAccountPricingAttributesResponse.type = Types::PutAccountPricingAttributesResponse
     PutAccountSendingAttributesRequest.add_member(:sending_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Enabled, name: "SendingEnabled", traits: {"smithy.api#default" => false}))
     PutAccountSendingAttributesRequest.type = Types::PutAccountSendingAttributesRequest
     PutAccountSendingAttributesResponse.type = Types::PutAccountSendingAttributesResponse
     PutAccountSuppressionAttributesRequest.add_member(:suppressed_reasons, ::Smithy::Schema::Shapes::MemberShape.new(target: SuppressionListReasons, name: "SuppressedReasons"))
+    PutAccountSuppressionAttributesRequest.add_member(:validation_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: SuppressionValidationAttributes, name: "ValidationAttributes"))
     PutAccountSuppressionAttributesRequest.type = Types::PutAccountSuppressionAttributesRequest
     PutAccountSuppressionAttributesResponse.type = Types::PutAccountSuppressionAttributesResponse
     PutAccountVdmAttributesRequest.add_member(:vdm_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: VdmAttributes, name: "VdmAttributes", traits: {"smithy.api#required" => {}}))
@@ -1592,7 +1737,9 @@ module Aws::SESv2
     PutConfigurationSetSendingOptionsRequest.type = Types::PutConfigurationSetSendingOptionsRequest
     PutConfigurationSetSendingOptionsResponse.type = Types::PutConfigurationSetSendingOptionsResponse
     PutConfigurationSetSuppressionOptionsRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetName, name: "ConfigurationSetName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    PutConfigurationSetSuppressionOptionsRequest.add_member(:suppression_scope, ::Smithy::Schema::Shapes::MemberShape.new(target: SuppressionListScope, name: "SuppressionScope"))
     PutConfigurationSetSuppressionOptionsRequest.add_member(:suppressed_reasons, ::Smithy::Schema::Shapes::MemberShape.new(target: SuppressionListReasons, name: "SuppressedReasons"))
+    PutConfigurationSetSuppressionOptionsRequest.add_member(:validation_options, ::Smithy::Schema::Shapes::MemberShape.new(target: SuppressionValidationOptions, name: "ValidationOptions"))
     PutConfigurationSetSuppressionOptionsRequest.type = Types::PutConfigurationSetSuppressionOptionsRequest
     PutConfigurationSetSuppressionOptionsResponse.type = Types::PutConfigurationSetSuppressionOptionsResponse
     PutConfigurationSetTrackingOptionsRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetName, name: "ConfigurationSetName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -1634,6 +1781,7 @@ module Aws::SESv2
     PutEmailIdentityDkimSigningAttributesRequest.type = Types::PutEmailIdentityDkimSigningAttributesRequest
     PutEmailIdentityDkimSigningAttributesResponse.add_member(:dkim_status, ::Smithy::Schema::Shapes::MemberShape.new(target: DkimStatus, name: "DkimStatus"))
     PutEmailIdentityDkimSigningAttributesResponse.add_member(:dkim_tokens, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsTokenList, name: "DkimTokens"))
+    PutEmailIdentityDkimSigningAttributesResponse.add_member(:signing_hosted_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: HostedZone, name: "SigningHostedZone"))
     PutEmailIdentityDkimSigningAttributesResponse.type = Types::PutEmailIdentityDkimSigningAttributesResponse
     PutEmailIdentityFeedbackAttributesRequest.add_member(:email_identity, ::Smithy::Schema::Shapes::MemberShape.new(target: Identity, name: "EmailIdentity", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     PutEmailIdentityFeedbackAttributesRequest.add_member(:email_forwarding_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Enabled, name: "EmailForwardingEnabled", traits: {"smithy.api#default" => false}))
@@ -1646,8 +1794,14 @@ module Aws::SESv2
     PutEmailIdentityMailFromAttributesResponse.type = Types::PutEmailIdentityMailFromAttributesResponse
     PutSuppressedDestinationRequest.add_member(:email_address, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddress, name: "EmailAddress", traits: {"smithy.api#required" => {}}))
     PutSuppressedDestinationRequest.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: SuppressionListReason, name: "Reason", traits: {"smithy.api#required" => {}}))
+    PutSuppressedDestinationRequest.add_member(:tenant_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TenantName, name: "TenantName"))
     PutSuppressedDestinationRequest.type = Types::PutSuppressedDestinationRequest
     PutSuppressedDestinationResponse.type = Types::PutSuppressedDestinationResponse
+    PutTenantSuppressionAttributesRequest.add_member(:tenant_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TenantName, name: "TenantName", traits: {"smithy.api#required" => {}}))
+    PutTenantSuppressionAttributesRequest.add_member(:suppressed_reasons, ::Smithy::Schema::Shapes::MemberShape.new(target: SuppressionListReasons, name: "SuppressedReasons"))
+    PutTenantSuppressionAttributesRequest.add_member(:suppression_scope, ::Smithy::Schema::Shapes::MemberShape.new(target: SuppressionListScope, name: "SuppressionScope"))
+    PutTenantSuppressionAttributesRequest.type = Types::PutTenantSuppressionAttributesRequest
+    PutTenantSuppressionAttributesResponse.type = Types::PutTenantSuppressionAttributesResponse
     QueryErrorCode.add_member(:internal_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTERNAL_FAILURE", traits: {"smithy.api#enumValue" => "INTERNAL_FAILURE"}))
     QueryErrorCode.add_member(:access_denied, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCESS_DENIED", traits: {"smithy.api#enumValue" => "ACCESS_DENIED"}))
     RawMessage.add_member(:data, ::Smithy::Schema::Shapes::MemberShape.new(target: RawMessageData, name: "Data", traits: {"smithy.api#required" => {}}))
@@ -1736,6 +1890,7 @@ module Aws::SESv2
     SendBulkEmailRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetName, name: "ConfigurationSetName"))
     SendBulkEmailRequest.add_member(:endpoint_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointId, name: "EndpointId", traits: {"smithy.rules#contextParam" => {"name" => "EndpointId"}}))
     SendBulkEmailRequest.add_member(:tenant_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TenantName, name: "TenantName"))
+    SendBulkEmailRequest.add_member(:configuration_overrides, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationOverrides, name: "ConfigurationOverrides"))
     SendBulkEmailRequest.type = Types::SendBulkEmailRequest
     SendBulkEmailResponse.add_member(:bulk_email_entry_results, ::Smithy::Schema::Shapes::MemberShape.new(target: BulkEmailEntryResultList, name: "BulkEmailEntryResults", traits: {"smithy.api#required" => {}}))
     SendBulkEmailResponse.type = Types::SendBulkEmailResponse
@@ -1757,6 +1912,7 @@ module Aws::SESv2
     SendEmailRequest.add_member(:endpoint_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointId, name: "EndpointId", traits: {"smithy.rules#contextParam" => {"name" => "EndpointId"}}))
     SendEmailRequest.add_member(:tenant_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TenantName, name: "TenantName"))
     SendEmailRequest.add_member(:list_management_options, ::Smithy::Schema::Shapes::MemberShape.new(target: ListManagementOptions, name: "ListManagementOptions"))
+    SendEmailRequest.add_member(:configuration_overrides, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationOverrides, name: "ConfigurationOverrides"))
     SendEmailRequest.type = Types::SendEmailRequest
     SendEmailResponse.add_member(:message_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OutboundMessageId, name: "MessageId"))
     SendEmailResponse.type = Types::SendEmailResponse
@@ -1771,6 +1927,13 @@ module Aws::SESv2
     SendingStatus.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     SendingStatus.add_member(:reinstated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REINSTATED", traits: {"smithy.api#enumValue" => "REINSTATED"}))
     SendingStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
+    SignatureFormat.add_member(:detached, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DETACHED", traits: {"smithy.api#enumValue" => "DETACHED"}))
+    SigningScheme.add_member(:default_scheme, Types::SigningScheme::DefaultScheme, ::Smithy::Schema::Shapes::MemberShape.new(target: DefaultSigningScheme, name: "DefaultScheme"))
+    SigningScheme.add_member(:smime_scheme, Types::SigningScheme::SmimeScheme, ::Smithy::Schema::Shapes::MemberShape.new(target: SmimeSigningScheme, name: "SmimeScheme"))
+    SigningScheme.add_member(:unknown, Types::SigningScheme::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    SigningScheme.type = Types::SigningScheme
+    SmimeSigningScheme.add_member(:signature_format, ::Smithy::Schema::Shapes::MemberShape.new(target: SignatureFormat, name: "SignatureFormat"))
+    SmimeSigningScheme.type = Types::SmimeSigningScheme
     SnsDestination.add_member(:topic_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "TopicArn", traits: {"smithy.api#required" => {}}))
     SnsDestination.type = Types::SnsDestination
     Status.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
@@ -1787,6 +1950,7 @@ module Aws::SESv2
     SuppressedDestination.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: SuppressionListReason, name: "Reason", traits: {"smithy.api#required" => {}}))
     SuppressedDestination.add_member(:last_update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastUpdateTime", traits: {"smithy.api#required" => {}}))
     SuppressedDestination.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: SuppressedDestinationAttributes, name: "Attributes"))
+    SuppressedDestination.add_member(:tenant_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TenantName, name: "TenantName"))
     SuppressedDestination.type = Types::SuppressedDestination
     SuppressedDestinationAttributes.add_member(:message_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OutboundMessageId, name: "MessageId"))
     SuppressedDestinationAttributes.add_member(:feedback_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FeedbackId, name: "FeedbackId"))
@@ -1797,7 +1961,16 @@ module Aws::SESv2
     SuppressedDestinationSummary.add_member(:last_update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastUpdateTime", traits: {"smithy.api#required" => {}}))
     SuppressedDestinationSummary.type = Types::SuppressedDestinationSummary
     SuppressionAttributes.add_member(:suppressed_reasons, ::Smithy::Schema::Shapes::MemberShape.new(target: SuppressionListReasons, name: "SuppressedReasons"))
+    SuppressionAttributes.add_member(:validation_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: SuppressionValidationAttributes, name: "ValidationAttributes"))
     SuppressionAttributes.type = Types::SuppressionAttributes
+    SuppressionConditionThreshold.add_member(:condition_threshold_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: FeatureStatus, name: "ConditionThresholdEnabled", traits: {"smithy.api#required" => {}}))
+    SuppressionConditionThreshold.add_member(:overall_confidence_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: SuppressionConfidenceThreshold, name: "OverallConfidenceThreshold"))
+    SuppressionConditionThreshold.type = Types::SuppressionConditionThreshold
+    SuppressionConfidenceThreshold.add_member(:confidence_verdict_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: SuppressionConfidenceVerdictThreshold, name: "ConfidenceVerdictThreshold", traits: {"smithy.api#required" => {}}))
+    SuppressionConfidenceThreshold.type = Types::SuppressionConfidenceThreshold
+    SuppressionConfidenceVerdictThreshold.add_member(:medium, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MEDIUM", traits: {"smithy.api#enumValue" => "MEDIUM"}))
+    SuppressionConfidenceVerdictThreshold.add_member(:high, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HIGH", traits: {"smithy.api#enumValue" => "HIGH"}))
+    SuppressionConfidenceVerdictThreshold.add_member(:managed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MANAGED", traits: {"smithy.api#enumValue" => "MANAGED"}))
     SuppressionListDestination.add_member(:suppression_list_import_action, ::Smithy::Schema::Shapes::MemberShape.new(target: SuppressionListImportAction, name: "SuppressionListImportAction", traits: {"smithy.api#required" => {}}))
     SuppressionListDestination.type = Types::SuppressionListDestination
     SuppressionListImportAction.add_member(:delete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETE", traits: {"smithy.api#enumValue" => "DELETE"}))
@@ -1805,8 +1978,16 @@ module Aws::SESv2
     SuppressionListReason.add_member(:bounce, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BOUNCE", traits: {"smithy.api#enumValue" => "BOUNCE"}))
     SuppressionListReason.add_member(:complaint, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLAINT", traits: {"smithy.api#enumValue" => "COMPLAINT"}))
     SuppressionListReasons.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SuppressionListReason, name: "member"))
+    SuppressionListScope.add_member(:account, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCOUNT", traits: {"smithy.api#enumValue" => "ACCOUNT"}))
+    SuppressionListScope.add_member(:tenant, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TENANT", traits: {"smithy.api#enumValue" => "TENANT"}))
     SuppressionOptions.add_member(:suppressed_reasons, ::Smithy::Schema::Shapes::MemberShape.new(target: SuppressionListReasons, name: "SuppressedReasons"))
+    SuppressionOptions.add_member(:suppression_scope, ::Smithy::Schema::Shapes::MemberShape.new(target: SuppressionListScope, name: "SuppressionScope"))
+    SuppressionOptions.add_member(:validation_options, ::Smithy::Schema::Shapes::MemberShape.new(target: SuppressionValidationOptions, name: "ValidationOptions"))
     SuppressionOptions.type = Types::SuppressionOptions
+    SuppressionValidationAttributes.add_member(:condition_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: SuppressionConditionThreshold, name: "ConditionThreshold", traits: {"smithy.api#required" => {}}))
+    SuppressionValidationAttributes.type = Types::SuppressionValidationAttributes
+    SuppressionValidationOptions.add_member(:condition_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: SuppressionConditionThreshold, name: "ConditionThreshold", traits: {"smithy.api#required" => {}}))
+    SuppressionValidationOptions.type = Types::SuppressionValidationOptions
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
@@ -1829,17 +2010,23 @@ module Aws::SESv2
     Tenant.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedTimestamp"))
     Tenant.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     Tenant.add_member(:sending_status, ::Smithy::Schema::Shapes::MemberShape.new(target: SendingStatus, name: "SendingStatus"))
+    Tenant.add_member(:suppression_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: TenantSuppressionAttributes, name: "SuppressionAttributes"))
     Tenant.type = Types::Tenant
     TenantInfo.add_member(:tenant_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TenantName, name: "TenantName"))
     TenantInfo.add_member(:tenant_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TenantId, name: "TenantId"))
     TenantInfo.add_member(:tenant_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "TenantArn"))
     TenantInfo.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedTimestamp"))
+    TenantInfo.add_member(:sending_status, ::Smithy::Schema::Shapes::MemberShape.new(target: SendingStatus, name: "SendingStatus"))
     TenantInfo.type = Types::TenantInfo
     TenantInfoList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TenantInfo, name: "member"))
+    TenantNameFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TenantName, name: "member"))
     TenantResource.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "ResourceType"))
     TenantResource.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "ResourceArn"))
     TenantResource.type = Types::TenantResource
     TenantResourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TenantResource, name: "member"))
+    TenantSuppressionAttributes.add_member(:suppressed_reasons, ::Smithy::Schema::Shapes::MemberShape.new(target: SuppressionListReasons, name: "SuppressedReasons"))
+    TenantSuppressionAttributes.add_member(:suppression_scope, ::Smithy::Schema::Shapes::MemberShape.new(target: SuppressionListScope, name: "SuppressionScope"))
+    TenantSuppressionAttributes.type = Types::TenantSuppressionAttributes
     TestRenderEmailTemplateRequest.add_member(:template_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailTemplateName, name: "TemplateName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TestRenderEmailTemplateRequest.add_member(:template_data, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailTemplateData, name: "TemplateData", traits: {"smithy.api#required" => {}}))
     TestRenderEmailTemplateRequest.type = Types::TestRenderEmailTemplateRequest
@@ -1863,6 +2050,9 @@ module Aws::SESv2
     TopicPreference.type = Types::TopicPreference
     TopicPreferenceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicPreference, name: "member"))
     Topics.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Topic, name: "member"))
+    TrackingConfigurationOverrides.add_member(:open_tracking_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: FeatureStatus, name: "OpenTrackingEnabled"))
+    TrackingConfigurationOverrides.add_member(:click_tracking_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: FeatureStatus, name: "ClickTrackingEnabled"))
+    TrackingConfigurationOverrides.type = Types::TrackingConfigurationOverrides
     TrackingOptions.add_member(:custom_redirect_domain, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomRedirectDomain, name: "CustomRedirectDomain", traits: {"smithy.api#required" => {}}))
     TrackingOptions.add_member(:https_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpsPolicy, name: "HttpsPolicy"))
     TrackingOptions.type = Types::TrackingOptions
@@ -1875,6 +2065,10 @@ module Aws::SESv2
     UpdateConfigurationSetEventDestinationRequest.add_member(:event_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: EventDestinationDefinition, name: "EventDestination", traits: {"smithy.api#required" => {}}))
     UpdateConfigurationSetEventDestinationRequest.type = Types::UpdateConfigurationSetEventDestinationRequest
     UpdateConfigurationSetEventDestinationResponse.type = Types::UpdateConfigurationSetEventDestinationResponse
+    UpdateConfigurationSetRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetName, name: "ConfigurationSetName", traits: {"smithy.api#required" => {}}))
+    UpdateConfigurationSetRequest.add_member(:message_security_options, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageSecurityOptions, name: "MessageSecurityOptions"))
+    UpdateConfigurationSetRequest.type = Types::UpdateConfigurationSetRequest
+    UpdateConfigurationSetResponse.type = Types::UpdateConfigurationSetResponse
     UpdateContactListRequest.add_member(:contact_list_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactListName, name: "ContactListName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdateContactListRequest.add_member(:topics, ::Smithy::Schema::Shapes::MemberShape.new(target: Topics, name: "Topics"))
     UpdateContactListRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "Description"))
@@ -1954,7 +2148,18 @@ module Aws::SESv2
       service.id = "com.amazonaws.sesv2#SimpleEmailService_v2"
       service.name = "SimpleEmailServiceV2"
       service.version = "2019-09-27"
-      service.traits = {"aws.api#service" => {"sdkId" => "SESv2", "arnNamespace" => "ses", "cloudFormationName" => "SESv2", "cloudTrailEventSource" => "sesv2.amazonaws.com", "endpointPrefix" => "email"}, "aws.auth#sigv4" => {"name" => "ses"}, "aws.protocols#restJson1" => {}, "smithy.api#title" => "Amazon Simple Email Service"}
+      service.traits = {"aws.api#service" => {"sdkId" => "SESv2", "arnNamespace" => "ses", "cloudFormationName" => "SESv2", "cloudTrailEventSource" => "sesv2.amazonaws.com", "endpointPrefix" => "email"}, "aws.auth#sigv4" => {"name" => "ses"}, "aws.protocols#restJson1" => {}, "smithy.api#title" => "Amazon Simple Email Service", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}, "EndpointId" => {"required" => false, "documentation" => "Operation parameter for EndpointId", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "isSet", "argv" => [{"ref" => "EndpointId"}]}, {"fn" => "isValidHostLabel", "argv" => [{"ref" => "EndpointId"}, true]}, {"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws-us-gov"]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {"authSchemes" => [{"name" => "sigv4a", "signingName" => "ses", "signingRegionSet" => ["*"]}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://{EndpointId}.endpoints.email.us-gov.{PartitionResult#dualStackDnsSuffix}", "properties" => {"authSchemes" => [{"name" => "sigv4a", "signingName" => "ses", "signingRegionSet" => ["*"]}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://{EndpointId}.endpoints.email.us-gov.{PartitionResult#dnsSuffix}", "properties" => {"authSchemes" => [{"name" => "sigv4a", "signingName" => "ses", "signingRegionSet" => ["*"]}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://{EndpointId}.endpoints.email.global.{PartitionResult#dualStackDnsSuffix}", "properties" => {"authSchemes" => [{"name" => "sigv4a", "signingName" => "ses", "signingRegionSet" => ["*"]}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://{EndpointId}.endpoints.email.{PartitionResult#dnsSuffix}", "properties" => {"authSchemes" => [{"name" => "sigv4a", "signingName" => "ses", "signingRegionSet" => ["*"]}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: FIPS is not supported with multi-region endpoints", "type" => "error"}, {"conditions" => [], "error" => "EndpointId must be a valid host label", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://email-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://email-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://email.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://email.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 23, "nodes" => "/////wAAAAH/////AAAAAAAAAAMAAAAEAAAAAQAAAAUAAAAEAAAABAAAAA4F9eESAAAAAgAAABAAAAAGAAAABAAAAA4AAAAHAAAABQAAAAoAAAAIAAAABgAAAAkF9eERAAAABwX14RAF9eEDAAAABgAAAAwAAAALAAAACQX14Q4F9eEPAAAABwAAAA0F9eENAAAACQX14QwF9eENAAAABQX14QkAAAAPAAAABgX14QoF9eELAAAAAwAAABEF9eEIAAAABAAAABcAAAASAAAABQX14QcAAAATAAAABgAAABUAAAAUAAAACAX14QQF9eEGAAAABwAAABYF9eEDAAAACAX14QIF9eEFAAAABQX14QcF9eEB"}}
+      service.add_operation(:associate_email_identity_certificate, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.sesv2#AssociateEmailIdentityCertificate"
+        operation.name = "AssociateEmailIdentityCertificate"
+        operation.input = AssociateEmailIdentityCertificateRequest
+        operation.output = AssociateEmailIdentityCertificateResponse
+        operation.errors << AlreadyExistsException
+        operation.errors << BadRequestException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/v2/email/identity/certificates", "code" => 200}}
+      end)
       service.add_operation(:batch_get_metric_data, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.sesv2#BatchGetMetricData"
         operation.name = "BatchGetMetricData"
@@ -2288,6 +2493,16 @@ module Aws::SESv2
         operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/v2/email/tenants/resources/delete", "code" => 200}}
       end)
+      service.add_operation(:disassociate_email_identity_certificate, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.sesv2#DisassociateEmailIdentityCertificate"
+        operation.name = "DisassociateEmailIdentityCertificate"
+        operation.input = DisassociateEmailIdentityCertificateRequest
+        operation.output = DisassociateEmailIdentityCertificateResponse
+        operation.errors << BadRequestException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/v2/email/identity/certificates/delete", "code" => 200}}
+      end)
       service.add_operation(:get_account, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.sesv2#GetAccount"
         operation.name = "GetAccount"
@@ -2428,6 +2643,15 @@ module Aws::SESv2
         operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/v2/email/deliverability-dashboard/statistics-report/{Domain}", "code" => 200}}
       end)
+      service.add_operation(:get_email_address_insights, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.sesv2#GetEmailAddressInsights"
+        operation.name = "GetEmailAddressInsights"
+        operation.input = GetEmailAddressInsightsRequest
+        operation.output = GetEmailAddressInsightsResponse
+        operation.errors << BadRequestException
+        operation.errors << TooManyRequestsException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/v2/email/email-address-insights", "code" => 200}}
+      end)
       service.add_operation(:get_email_identity, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.sesv2#GetEmailIdentity"
         operation.name = "GetEmailIdentity"
@@ -2535,7 +2759,7 @@ module Aws::SESv2
         operation.output = ListConfigurationSetsResponse
         operation.errors << BadRequestException
         operation.errors << TooManyRequestsException
-        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/v2/email/configuration-sets", "code" => 200}}
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/v2/email/list-configuration-sets", "code" => 200}}
         operation[:paginator] = Paginators::ListConfigurationSets.new
       end)
       service.add_operation(:list_contact_lists, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -2608,8 +2832,19 @@ module Aws::SESv2
         operation.output = ListEmailIdentitiesResponse
         operation.errors << BadRequestException
         operation.errors << TooManyRequestsException
-        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/v2/email/identities", "code" => 200}}
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/v2/email/list-identities", "code" => 200}}
         operation[:paginator] = Paginators::ListEmailIdentities.new
+      end)
+      service.add_operation(:list_email_identity_certificates, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.sesv2#ListEmailIdentityCertificates"
+        operation.name = "ListEmailIdentityCertificates"
+        operation.input = ListEmailIdentityCertificatesRequest
+        operation.output = ListEmailIdentityCertificatesResponse
+        operation.errors << BadRequestException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/v2/email/identity/certificates/list", "code" => 200}}
+        operation[:paginator] = Paginators::ListEmailIdentityCertificates.new
       end)
       service.add_operation(:list_email_templates, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.sesv2#ListEmailTemplates"
@@ -2690,6 +2925,7 @@ module Aws::SESv2
         operation.output = ListSuppressedDestinationsResponse
         operation.errors << BadRequestException
         operation.errors << InvalidNextTokenException
+        operation.errors << NotFoundException
         operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/v2/email/suppression/addresses", "code" => 200}}
         operation[:paginator] = Paginators::ListSuppressedDestinations.new
@@ -2743,6 +2979,16 @@ module Aws::SESv2
         operation.errors << ConflictException
         operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/v2/email/account/details", "code" => 200}}
+      end)
+      service.add_operation(:put_account_pricing_attributes, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.sesv2#PutAccountPricingAttributes"
+        operation.name = "PutAccountPricingAttributes"
+        operation.input = PutAccountPricingAttributesRequest
+        operation.output = PutAccountPricingAttributesResponse
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << TooManyRequestsException
+        operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/v2/email/account/pricing-attributes", "code" => 200}}
       end)
       service.add_operation(:put_account_sending_attributes, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.sesv2#PutAccountSendingAttributes"
@@ -2912,7 +3158,7 @@ module Aws::SESv2
         operation.errors << BadRequestException
         operation.errors << NotFoundException
         operation.errors << TooManyRequestsException
-        operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/v1/email/identities/{EmailIdentity}/dkim/signing", "code" => 200}}
+        operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/v2/email/identities/{EmailIdentity}/dkim/signing", "code" => 200}}
       end)
       service.add_operation(:put_email_identity_feedback_attributes, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.sesv2#PutEmailIdentityFeedbackAttributes"
@@ -2940,8 +3186,19 @@ module Aws::SESv2
         operation.input = PutSuppressedDestinationRequest
         operation.output = PutSuppressedDestinationResponse
         operation.errors << BadRequestException
+        operation.errors << NotFoundException
         operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/v2/email/suppression/addresses", "code" => 200}}
+      end)
+      service.add_operation(:put_tenant_suppression_attributes, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.sesv2#PutTenantSuppressionAttributes"
+        operation.name = "PutTenantSuppressionAttributes"
+        operation.input = PutTenantSuppressionAttributesRequest
+        operation.output = PutTenantSuppressionAttributesResponse
+        operation.errors << BadRequestException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/v2/email/tenant/suppression", "code" => 200}}
       end)
       service.add_operation(:send_bulk_email, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.sesv2#SendBulkEmail"
@@ -3018,6 +3275,16 @@ module Aws::SESv2
         operation.errors << NotFoundException
         operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/v2/email/tags", "code" => 200}}
+      end)
+      service.add_operation(:update_configuration_set, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.sesv2#UpdateConfigurationSet"
+        operation.name = "UpdateConfigurationSet"
+        operation.input = UpdateConfigurationSetRequest
+        operation.output = UpdateConfigurationSetResponse
+        operation.errors << BadRequestException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/v2/email/update-configuration-sets", "code" => 200}}
       end)
       service.add_operation(:update_configuration_set_event_destination, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.sesv2#UpdateConfigurationSetEventDestination"

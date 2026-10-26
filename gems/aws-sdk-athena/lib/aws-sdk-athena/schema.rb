@@ -46,7 +46,10 @@ module Aws::Athena
     CapacityReservationStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.athena#CapacityReservationStatus", name: "CapacityReservationStatus")
     CapacityReservationsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.athena#CapacityReservationsList", name: "CapacityReservationsList")
     CatalogNameString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.athena#CatalogNameString", name: "CatalogNameString", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$"})
+    Classification = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.athena#Classification", name: "Classification")
+    ClassificationList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.athena#ClassificationList", name: "ClassificationList")
     ClientRequestToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.athena#ClientRequestToken", name: "ClientRequestToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 36}, "smithy.api#pattern" => "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"})
+    CloudWatchLoggingConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.athena#CloudWatchLoggingConfiguration", name: "CloudWatchLoggingConfiguration")
     CodeBlock = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.athena#CodeBlock", name: "CodeBlock", traits: {"smithy.api#length" => {"min" => 0, "max" => 68000}})
     Column = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.athena#Column", name: "Column")
     ColumnInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.athena#ColumnInfo", name: "ColumnInfo")
@@ -95,6 +98,7 @@ module Aws::Athena
     DeleteWorkGroupInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.athena#DeleteWorkGroupInput", name: "DeleteWorkGroupInput")
     DeleteWorkGroupOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.athena#DeleteWorkGroupOutput", name: "DeleteWorkGroupOutput")
     DescriptionString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.athena#DescriptionString", name: "DescriptionString", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}})
+    DpuCount = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.athena#DpuCount", name: "DpuCount")
     EncryptionConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.athena#EncryptionConfiguration", name: "EncryptionConfiguration")
     EncryptionOption = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.athena#EncryptionOption", name: "EncryptionOption")
     EngineConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.athena#EngineConfiguration", name: "EngineConfiguration")
@@ -141,6 +145,10 @@ module Aws::Athena
     GetQueryResultsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.athena#GetQueryResultsOutput", name: "GetQueryResultsOutput")
     GetQueryRuntimeStatisticsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.athena#GetQueryRuntimeStatisticsInput", name: "GetQueryRuntimeStatisticsInput")
     GetQueryRuntimeStatisticsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.athena#GetQueryRuntimeStatisticsOutput", name: "GetQueryRuntimeStatisticsOutput")
+    GetResourceDashboardRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.athena#GetResourceDashboardRequest", name: "GetResourceDashboardRequest")
+    GetResourceDashboardResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.athena#GetResourceDashboardResponse", name: "GetResourceDashboardResponse")
+    GetSessionEndpointRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.athena#GetSessionEndpointRequest", name: "GetSessionEndpointRequest")
+    GetSessionEndpointResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.athena#GetSessionEndpointResponse", name: "GetSessionEndpointResponse")
     GetSessionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.athena#GetSessionRequest", name: "GetSessionRequest")
     GetSessionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.athena#GetSessionResponse", name: "GetSessionResponse")
     GetSessionStatusRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.athena#GetSessionStatusRequest", name: "GetSessionStatusRequest")
@@ -192,7 +200,14 @@ module Aws::Athena
     ListTagsForResourceOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.athena#ListTagsForResourceOutput", name: "ListTagsForResourceOutput")
     ListWorkGroupsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.athena#ListWorkGroupsInput", name: "ListWorkGroupsInput")
     ListWorkGroupsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.athena#ListWorkGroupsOutput", name: "ListWorkGroupsOutput")
+    LogGroupName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.athena#LogGroupName", name: "LogGroupName", traits: {"smithy.api#length" => {"min" => 1, "max" => 512}, "smithy.api#pattern" => "^[a-zA-Z0-9._/-]+$"})
+    LogStreamNamePrefix = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.athena#LogStreamNamePrefix", name: "LogStreamNamePrefix", traits: {"smithy.api#length" => {"min" => 1, "max" => 512}, "smithy.api#pattern" => "^[^:*]*$"})
+    LogTypeKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.athena#LogTypeKey", name: "LogTypeKey")
+    LogTypeValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.athena#LogTypeValue", name: "LogTypeValue")
+    LogTypeValuesList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.athena#LogTypeValuesList", name: "LogTypeValuesList")
+    LogTypesMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.athena#LogTypesMap", name: "LogTypesMap")
     Long = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.athena#Long", name: "Long")
+    ManagedLoggingConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.athena#ManagedLoggingConfiguration", name: "ManagedLoggingConfiguration")
     ManagedQueryResultsConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.athena#ManagedQueryResultsConfiguration", name: "ManagedQueryResultsConfiguration")
     ManagedQueryResultsConfigurationUpdates = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.athena#ManagedQueryResultsConfigurationUpdates", name: "ManagedQueryResultsConfigurationUpdates")
     ManagedQueryResultsEncryptionConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.athena#ManagedQueryResultsEncryptionConfiguration", name: "ManagedQueryResultsEncryptionConfiguration")
@@ -214,6 +229,7 @@ module Aws::Athena
     MaxTagsCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.athena#MaxTagsCount", name: "MaxTagsCount", traits: {"smithy.api#range" => {"min" => 75}})
     MaxWorkGroupsCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.athena#MaxWorkGroupsCount", name: "MaxWorkGroupsCount", traits: {"smithy.api#range" => {"min" => 1, "max" => 50}})
     MetadataException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.athena#MetadataException", name: "MetadataException", traits: {"smithy.api#error" => "client"})
+    MonitoringConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.athena#MonitoringConfiguration", name: "MonitoringConfiguration")
     NameString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.athena#NameString", name: "NameString", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}})
     NamedQuery = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.athena#NamedQuery", name: "NamedQuery")
     NamedQueryDescriptionString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.athena#NamedQueryDescriptionString", name: "NamedQueryDescriptionString", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}})
@@ -268,6 +284,8 @@ module Aws::Athena
     Row = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.athena#Row", name: "Row")
     RowList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.athena#RowList", name: "RowList")
     S3AclOption = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.athena#S3AclOption", name: "S3AclOption")
+    S3LoggingConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.athena#S3LoggingConfiguration", name: "S3LoggingConfiguration")
+    S3OutputLocation = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.athena#S3OutputLocation", name: "S3OutputLocation", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}, "smithy.api#pattern" => "^s3://[a-z0-9][a-z0-9\\-]*[a-z0-9](/.*)?$"})
     S3Uri = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.athena#S3Uri", name: "S3Uri", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}, "smithy.api#pattern" => "^(https|s3|S3)://([^/]+)/?(.*)$"})
     SessionAlreadyExistsException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.athena#SessionAlreadyExistsException", name: "SessionAlreadyExistsException", traits: {"smithy.api#error" => "client"})
     SessionConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.athena#SessionConfiguration", name: "SessionConfiguration")
@@ -304,7 +322,7 @@ module Aws::Athena
     TagResourceInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.athena#TagResourceInput", name: "TagResourceInput")
     TagResourceOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.athena#TagResourceOutput", name: "TagResourceOutput")
     TagValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.athena#TagValue", name: "TagValue", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}})
-    TargetDpusInteger = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.athena#TargetDpusInteger", name: "TargetDpusInteger", traits: {"smithy.api#range" => {"min" => 24}})
+    TargetDpusInteger = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.athena#TargetDpusInteger", name: "TargetDpusInteger", traits: {"smithy.api#range" => {"min" => 4}})
     TerminateSessionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.athena#TerminateSessionRequest", name: "TerminateSessionRequest")
     TerminateSessionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.athena#TerminateSessionResponse", name: "TerminateSessionResponse")
     ThrottleReason = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.athena#ThrottleReason", name: "ThrottleReason")
@@ -434,6 +452,15 @@ module Aws::Athena
     CapacityReservationStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
     CapacityReservationStatus.add_member(:update_pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATE_PENDING", traits: {"smithy.api#enumValue" => "UPDATE_PENDING"}))
     CapacityReservationsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityReservation, name: "member"))
+    Classification.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "Name"))
+    Classification.add_member(:properties, ::Smithy::Schema::Shapes::MemberShape.new(target: ParametersMap, name: "Properties"))
+    Classification.type = Types::Classification
+    ClassificationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Classification, name: "member"))
+    CloudWatchLoggingConfiguration.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedBoolean, name: "Enabled", traits: {"smithy.api#required" => {}}))
+    CloudWatchLoggingConfiguration.add_member(:log_group, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupName, name: "LogGroup"))
+    CloudWatchLoggingConfiguration.add_member(:log_stream_name_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: LogStreamNamePrefix, name: "LogStreamNamePrefix"))
+    CloudWatchLoggingConfiguration.add_member(:log_types, ::Smithy::Schema::Shapes::MemberShape.new(target: LogTypesMap, name: "LogTypes"))
+    CloudWatchLoggingConfiguration.type = Types::CloudWatchLoggingConfiguration
     Column.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "Name", traits: {"smithy.api#required" => {}}))
     Column.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: TypeString, name: "Type"))
     Column.add_member(:comment, ::Smithy::Schema::Shapes::MemberShape.new(target: CommentString, name: "Comment"))
@@ -586,10 +613,11 @@ module Aws::Athena
     EncryptionOption.add_member(:sse_kms, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SSE_KMS", traits: {"smithy.api#enumValue" => "SSE_KMS"}))
     EncryptionOption.add_member(:cse_kms, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CSE_KMS", traits: {"smithy.api#enumValue" => "CSE_KMS"}))
     EngineConfiguration.add_member(:coordinator_dpu_size, ::Smithy::Schema::Shapes::MemberShape.new(target: CoordinatorDpuSize, name: "CoordinatorDpuSize"))
-    EngineConfiguration.add_member(:max_concurrent_dpus, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxConcurrentDpus, name: "MaxConcurrentDpus", traits: {"smithy.api#required" => {}}))
+    EngineConfiguration.add_member(:max_concurrent_dpus, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxConcurrentDpus, name: "MaxConcurrentDpus", traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => 20}))
     EngineConfiguration.add_member(:default_executor_dpu_size, ::Smithy::Schema::Shapes::MemberShape.new(target: DefaultExecutorDpuSize, name: "DefaultExecutorDpuSize"))
     EngineConfiguration.add_member(:additional_configs, ::Smithy::Schema::Shapes::MemberShape.new(target: ParametersMap, name: "AdditionalConfigs"))
     EngineConfiguration.add_member(:spark_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: ParametersMap, name: "SparkProperties"))
+    EngineConfiguration.add_member(:classifications, ::Smithy::Schema::Shapes::MemberShape.new(target: ClassificationList, name: "Classifications"))
     EngineConfiguration.type = Types::EngineConfiguration
     EngineVersion.add_member(:selected_engine_version, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "SelectedEngineVersion"))
     EngineVersion.add_member(:effective_engine_version, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "EffectiveEngineVersion"))
@@ -688,6 +716,16 @@ module Aws::Athena
     GetQueryRuntimeStatisticsInput.type = Types::GetQueryRuntimeStatisticsInput
     GetQueryRuntimeStatisticsOutput.add_member(:query_runtime_statistics, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryRuntimeStatistics, name: "QueryRuntimeStatistics"))
     GetQueryRuntimeStatisticsOutput.type = Types::GetQueryRuntimeStatisticsOutput
+    GetResourceDashboardRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "ResourceARN", traits: {"smithy.api#required" => {}}))
+    GetResourceDashboardRequest.type = Types::GetResourceDashboardRequest
+    GetResourceDashboardResponse.add_member(:url, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Url", traits: {"smithy.api#required" => {}}))
+    GetResourceDashboardResponse.type = Types::GetResourceDashboardResponse
+    GetSessionEndpointRequest.add_member(:session_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionId, name: "SessionId", traits: {"smithy.api#required" => {}}))
+    GetSessionEndpointRequest.type = Types::GetSessionEndpointRequest
+    GetSessionEndpointResponse.add_member(:endpoint_url, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "EndpointUrl", traits: {"smithy.api#required" => {}}))
+    GetSessionEndpointResponse.add_member(:auth_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "AuthToken", traits: {"smithy.api#required" => {}}))
+    GetSessionEndpointResponse.add_member(:auth_token_expiration_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "AuthTokenExpirationTime", traits: {"smithy.api#required" => {}}))
+    GetSessionEndpointResponse.type = Types::GetSessionEndpointResponse
     GetSessionRequest.add_member(:session_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionId, name: "SessionId", traits: {"smithy.api#required" => {}}))
     GetSessionRequest.type = Types::GetSessionRequest
     GetSessionResponse.add_member(:session_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionId, name: "SessionId"))
@@ -696,6 +734,7 @@ module Aws::Athena
     GetSessionResponse.add_member(:engine_version, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "EngineVersion"))
     GetSessionResponse.add_member(:engine_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: EngineConfiguration, name: "EngineConfiguration"))
     GetSessionResponse.add_member(:notebook_version, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "NotebookVersion"))
+    GetSessionResponse.add_member(:monitoring_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: MonitoringConfiguration, name: "MonitoringConfiguration"))
     GetSessionResponse.add_member(:session_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionConfiguration, name: "SessionConfiguration"))
     GetSessionResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionStatus, name: "Status"))
     GetSessionResponse.add_member(:statistics, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionStatistics, name: "Statistics"))
@@ -850,6 +889,12 @@ module Aws::Athena
     ListWorkGroupsOutput.add_member(:work_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkGroupsList, name: "WorkGroups"))
     ListWorkGroupsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken"))
     ListWorkGroupsOutput.type = Types::ListWorkGroupsOutput
+    LogTypeValuesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LogTypeValue, name: "member"))
+    LogTypesMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: LogTypeKey, name: "key"))
+    LogTypesMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: LogTypeValuesList, name: "value"))
+    ManagedLoggingConfiguration.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedBoolean, name: "Enabled", traits: {"smithy.api#required" => {}}))
+    ManagedLoggingConfiguration.add_member(:kms_key, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKey, name: "KmsKey"))
+    ManagedLoggingConfiguration.type = Types::ManagedLoggingConfiguration
     ManagedQueryResultsConfiguration.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Enabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
     ManagedQueryResultsConfiguration.add_member(:encryption_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedQueryResultsEncryptionConfiguration, name: "EncryptionConfiguration"))
     ManagedQueryResultsConfiguration.type = Types::ManagedQueryResultsConfiguration
@@ -861,6 +906,10 @@ module Aws::Athena
     ManagedQueryResultsEncryptionConfiguration.type = Types::ManagedQueryResultsEncryptionConfiguration
     MetadataException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     MetadataException.type = Types::MetadataException
+    MonitoringConfiguration.add_member(:cloud_watch_logging_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudWatchLoggingConfiguration, name: "CloudWatchLoggingConfiguration"))
+    MonitoringConfiguration.add_member(:managed_logging_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedLoggingConfiguration, name: "ManagedLoggingConfiguration"))
+    MonitoringConfiguration.add_member(:s3_logging_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: S3LoggingConfiguration, name: "S3LoggingConfiguration"))
+    MonitoringConfiguration.type = Types::MonitoringConfiguration
     NamedQuery.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "Name", traits: {"smithy.api#required" => {}}))
     NamedQuery.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: DescriptionString, name: "Description"))
     NamedQuery.add_member(:database, ::Smithy::Schema::Shapes::MemberShape.new(target: DatabaseString, name: "Database", traits: {"smithy.api#required" => {}}))
@@ -935,6 +984,7 @@ module Aws::Athena
     QueryExecutionStatistics.add_member(:query_planning_time_in_millis, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "QueryPlanningTimeInMillis"))
     QueryExecutionStatistics.add_member(:service_processing_time_in_millis, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "ServiceProcessingTimeInMillis"))
     QueryExecutionStatistics.add_member(:result_reuse_information, ::Smithy::Schema::Shapes::MemberShape.new(target: ResultReuseInformation, name: "ResultReuseInformation"))
+    QueryExecutionStatistics.add_member(:dpu_count, ::Smithy::Schema::Shapes::MemberShape.new(target: DpuCount, name: "DpuCount"))
     QueryExecutionStatistics.type = Types::QueryExecutionStatistics
     QueryExecutionStatus.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryExecutionState, name: "State"))
     QueryExecutionStatus.add_member(:state_change_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "StateChangeReason"))
@@ -1014,11 +1064,16 @@ module Aws::Athena
     Row.type = Types::Row
     RowList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Row, name: "member"))
     S3AclOption.add_member(:bucket_owner_full_control, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BUCKET_OWNER_FULL_CONTROL", traits: {"smithy.api#enumValue" => "BUCKET_OWNER_FULL_CONTROL"}))
+    S3LoggingConfiguration.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedBoolean, name: "Enabled", traits: {"smithy.api#required" => {}}))
+    S3LoggingConfiguration.add_member(:kms_key, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKey, name: "KmsKey"))
+    S3LoggingConfiguration.add_member(:log_location, ::Smithy::Schema::Shapes::MemberShape.new(target: S3OutputLocation, name: "LogLocation"))
+    S3LoggingConfiguration.type = Types::S3LoggingConfiguration
     SessionAlreadyExistsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     SessionAlreadyExistsException.type = Types::SessionAlreadyExistsException
     SessionConfiguration.add_member(:execution_role, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "ExecutionRole"))
     SessionConfiguration.add_member(:working_directory, ::Smithy::Schema::Shapes::MemberShape.new(target: ResultOutputLocation, name: "WorkingDirectory"))
     SessionConfiguration.add_member(:idle_timeout_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "IdleTimeoutSeconds"))
+    SessionConfiguration.add_member(:session_idle_timeout_in_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionIdleTimeoutInMinutes, name: "SessionIdleTimeoutInMinutes"))
     SessionConfiguration.add_member(:encryption_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionConfiguration, name: "EncryptionConfiguration"))
     SessionConfiguration.type = Types::SessionConfiguration
     SessionState.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
@@ -1061,15 +1116,20 @@ module Aws::Athena
     StartQueryExecutionInput.add_member(:work_group, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkGroupName, name: "WorkGroup"))
     StartQueryExecutionInput.add_member(:execution_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionParameters, name: "ExecutionParameters"))
     StartQueryExecutionInput.add_member(:result_reuse_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ResultReuseConfiguration, name: "ResultReuseConfiguration"))
+    StartQueryExecutionInput.add_member(:engine_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: EngineConfiguration, name: "EngineConfiguration"))
     StartQueryExecutionInput.type = Types::StartQueryExecutionInput
     StartQueryExecutionOutput.add_member(:query_execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryExecutionId, name: "QueryExecutionId"))
     StartQueryExecutionOutput.type = Types::StartQueryExecutionOutput
     StartSessionRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: DescriptionString, name: "Description"))
     StartSessionRequest.add_member(:work_group, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkGroupName, name: "WorkGroup", traits: {"smithy.api#required" => {}}))
     StartSessionRequest.add_member(:engine_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: EngineConfiguration, name: "EngineConfiguration", traits: {"smithy.api#required" => {}}))
+    StartSessionRequest.add_member(:execution_role, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "ExecutionRole"))
+    StartSessionRequest.add_member(:monitoring_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: MonitoringConfiguration, name: "MonitoringConfiguration"))
     StartSessionRequest.add_member(:notebook_version, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "NotebookVersion"))
     StartSessionRequest.add_member(:session_idle_timeout_in_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionIdleTimeoutInMinutes, name: "SessionIdleTimeoutInMinutes"))
     StartSessionRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: IdempotencyToken, name: "ClientRequestToken"))
+    StartSessionRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
+    StartSessionRequest.add_member(:copy_work_group_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedBoolean, name: "CopyWorkGroupTags"))
     StartSessionRequest.type = Types::StartSessionRequest
     StartSessionResponse.add_member(:session_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionId, name: "SessionId"))
     StartSessionResponse.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionState, name: "State"))
@@ -1187,6 +1247,8 @@ module Aws::Athena
     WorkGroupConfiguration.add_member(:engine_version, ::Smithy::Schema::Shapes::MemberShape.new(target: EngineVersion, name: "EngineVersion"))
     WorkGroupConfiguration.add_member(:additional_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "AdditionalConfiguration"))
     WorkGroupConfiguration.add_member(:execution_role, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "ExecutionRole"))
+    WorkGroupConfiguration.add_member(:monitoring_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: MonitoringConfiguration, name: "MonitoringConfiguration"))
+    WorkGroupConfiguration.add_member(:engine_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: EngineConfiguration, name: "EngineConfiguration"))
     WorkGroupConfiguration.add_member(:customer_content_encryption_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerContentEncryptionConfiguration, name: "CustomerContentEncryptionConfiguration"))
     WorkGroupConfiguration.add_member(:enable_minimum_encryption_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedBoolean, name: "EnableMinimumEncryptionConfiguration"))
     WorkGroupConfiguration.add_member(:identity_center_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityCenterConfiguration, name: "IdentityCenterConfiguration"))
@@ -1206,6 +1268,8 @@ module Aws::Athena
     WorkGroupConfigurationUpdates.add_member(:customer_content_encryption_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerContentEncryptionConfiguration, name: "CustomerContentEncryptionConfiguration"))
     WorkGroupConfigurationUpdates.add_member(:enable_minimum_encryption_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedBoolean, name: "EnableMinimumEncryptionConfiguration"))
     WorkGroupConfigurationUpdates.add_member(:query_results_s3_access_grants_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryResultsS3AccessGrantsConfiguration, name: "QueryResultsS3AccessGrantsConfiguration"))
+    WorkGroupConfigurationUpdates.add_member(:monitoring_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: MonitoringConfiguration, name: "MonitoringConfiguration"))
+    WorkGroupConfigurationUpdates.add_member(:engine_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: EngineConfiguration, name: "EngineConfiguration"))
     WorkGroupConfigurationUpdates.type = Types::WorkGroupConfigurationUpdates
     WorkGroupNamesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkGroupName, name: "member"))
     WorkGroupState.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
@@ -1224,7 +1288,7 @@ module Aws::Athena
       service.id = "com.amazonaws.athena#AmazonAthena"
       service.name = "AmazonAthena"
       service.version = "2017-05-18"
-      service.traits = {"aws.api#service" => {"sdkId" => "Athena", "arnNamespace" => "athena", "cloudFormationName" => "Athena", "cloudTrailEventSource" => "athena.amazonaws.com", "endpointPrefix" => "athena"}, "aws.auth#sigv4" => {"name" => "athena"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "Amazon Athena"}
+      service.traits = {"aws.api#service" => {"sdkId" => "Athena", "arnNamespace" => "athena", "cloudFormationName" => "Athena", "cloudTrailEventSource" => "athena.amazonaws.com", "endpointPrefix" => "athena"}, "aws.auth#sigv4" => {"name" => "athena"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "Amazon Athena", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://athena-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://athena-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://athena.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://athena.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
       service.add_operation(:batch_get_named_query, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.athena#BatchGetNamedQuery"
         operation.name = "BatchGetNamedQuery"
@@ -1517,11 +1581,31 @@ module Aws::Athena
         operation.errors << InvalidRequestException
         operation.traits = {}
       end)
+      service.add_operation(:get_resource_dashboard, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.athena#GetResourceDashboard"
+        operation.name = "GetResourceDashboard"
+        operation.input = GetResourceDashboardRequest
+        operation.output = GetResourceDashboardResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
+        operation.traits = {}
+      end)
       service.add_operation(:get_session, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.athena#GetSession"
         operation.name = "GetSession"
         operation.input = GetSessionRequest
         operation.output = GetSessionResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
+        operation.traits = {}
+      end)
+      service.add_operation(:get_session_endpoint, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.athena#GetSessionEndpoint"
+        operation.name = "GetSessionEndpoint"
+        operation.input = GetSessionEndpointRequest
+        operation.output = GetSessionEndpointResponse
         operation.errors << InternalServerException
         operation.errors << InvalidRequestException
         operation.errors << ResourceNotFoundException

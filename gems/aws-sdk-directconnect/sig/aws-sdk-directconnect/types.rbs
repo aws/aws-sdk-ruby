@@ -60,7 +60,13 @@ module Aws::DirectConnect
         ?port_encryption_status: String,
         ?encryption_mode: String,
         ?mac_sec_keys: Array[Types::MacSecKey],
+        ?rate_limiter_status: Types::RateLimiterStatus,
         ?partner_interconnect_mac_sec_capable: bool,
+        ?prefix_pool_size_ipv4: Integer,
+        ?prefix_pool_size_ipv6: Integer,
+        ?prefix_pool_unallocated_count_ipv4: Integer,
+        ?prefix_pool_unallocated_count_ipv6: Integer,
+        ?billing_mode: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -86,7 +92,13 @@ module Aws::DirectConnect
       attr_accessor port_encryption_status: String?
       attr_accessor encryption_mode: String?
       attr_accessor mac_sec_keys: Array[Types::MacSecKey]?
+      attr_accessor rate_limiter_status: Types::RateLimiterStatus?
       attr_accessor partner_interconnect_mac_sec_capable: bool?
+      attr_accessor prefix_pool_size_ipv4: Integer?
+      attr_accessor prefix_pool_size_ipv6: Integer?
+      attr_accessor prefix_pool_unallocated_count_ipv4: Integer?
+      attr_accessor prefix_pool_unallocated_count_ipv6: Integer?
+      attr_accessor billing_mode: String?
     end
 
     class AllocateConnectionOnInterconnectRequest
@@ -134,7 +146,13 @@ module Aws::DirectConnect
         ?port_encryption_status: String,
         ?encryption_mode: String,
         ?mac_sec_keys: Array[Types::MacSecKey],
+        ?rate_limiter_status: Types::RateLimiterStatus,
         ?partner_interconnect_mac_sec_capable: bool,
+        ?prefix_pool_size_ipv4: Integer,
+        ?prefix_pool_size_ipv6: Integer,
+        ?prefix_pool_unallocated_count_ipv4: Integer,
+        ?prefix_pool_unallocated_count_ipv6: Integer,
+        ?billing_mode: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -160,7 +178,13 @@ module Aws::DirectConnect
       attr_accessor port_encryption_status: String?
       attr_accessor encryption_mode: String?
       attr_accessor mac_sec_keys: Array[Types::MacSecKey]?
+      attr_accessor rate_limiter_status: Types::RateLimiterStatus?
       attr_accessor partner_interconnect_mac_sec_capable: bool?
+      attr_accessor prefix_pool_size_ipv4: Integer?
+      attr_accessor prefix_pool_size_ipv6: Integer?
+      attr_accessor prefix_pool_unallocated_count_ipv4: Integer?
+      attr_accessor prefix_pool_unallocated_count_ipv6: Integer?
+      attr_accessor billing_mode: String?
     end
 
     class AllocateHostedConnectionRequest
@@ -215,6 +239,9 @@ module Aws::DirectConnect
         ?aws_logical_device_id: String,
         ?tags: Array[Types::Tag],
         ?site_link_enabled: bool,
+        ?prefix_pool_allocated_count_ipv4: Integer,
+        ?prefix_pool_allocated_count_ipv6: Integer,
+        ?rate_limit: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -245,6 +272,9 @@ module Aws::DirectConnect
       attr_accessor aws_logical_device_id: String?
       attr_accessor tags: Array[Types::Tag]?
       attr_accessor site_link_enabled: bool?
+      attr_accessor prefix_pool_allocated_count_ipv4: Integer?
+      attr_accessor prefix_pool_allocated_count_ipv6: Integer?
+      attr_accessor rate_limit: String?
     end
 
     class AllocatePrivateVirtualInterfaceRequest
@@ -293,6 +323,9 @@ module Aws::DirectConnect
         ?aws_logical_device_id: String,
         ?tags: Array[Types::Tag],
         ?site_link_enabled: bool,
+        ?prefix_pool_allocated_count_ipv4: Integer,
+        ?prefix_pool_allocated_count_ipv6: Integer,
+        ?rate_limit: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -323,6 +356,9 @@ module Aws::DirectConnect
       attr_accessor aws_logical_device_id: String?
       attr_accessor tags: Array[Types::Tag]?
       attr_accessor site_link_enabled: bool?
+      attr_accessor prefix_pool_allocated_count_ipv4: Integer?
+      attr_accessor prefix_pool_allocated_count_ipv6: Integer?
+      attr_accessor rate_limit: String?
     end
 
     class AllocatePublicVirtualInterfaceRequest
@@ -366,6 +402,24 @@ module Aws::DirectConnect
       attr_accessor virtual_interface: Types::VirtualInterface?
     end
 
+    class AsPathSegment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?path_type: String,
+        ?path: Array[Integer],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor path_type: String?
+      attr_accessor path: Array[Integer]?
+    end
+
+    module AsPathType
+      Seq: String
+      Set: String
+    end
+
     class AssociateConnectionWithLagOutput
       include Smithy::Schema::Structure
 
@@ -392,7 +446,13 @@ module Aws::DirectConnect
         ?port_encryption_status: String,
         ?encryption_mode: String,
         ?mac_sec_keys: Array[Types::MacSecKey],
+        ?rate_limiter_status: Types::RateLimiterStatus,
         ?partner_interconnect_mac_sec_capable: bool,
+        ?prefix_pool_size_ipv4: Integer,
+        ?prefix_pool_size_ipv6: Integer,
+        ?prefix_pool_unallocated_count_ipv4: Integer,
+        ?prefix_pool_unallocated_count_ipv6: Integer,
+        ?billing_mode: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -418,7 +478,13 @@ module Aws::DirectConnect
       attr_accessor port_encryption_status: String?
       attr_accessor encryption_mode: String?
       attr_accessor mac_sec_keys: Array[Types::MacSecKey]?
+      attr_accessor rate_limiter_status: Types::RateLimiterStatus?
       attr_accessor partner_interconnect_mac_sec_capable: bool?
+      attr_accessor prefix_pool_size_ipv4: Integer?
+      attr_accessor prefix_pool_size_ipv6: Integer?
+      attr_accessor prefix_pool_unallocated_count_ipv4: Integer?
+      attr_accessor prefix_pool_unallocated_count_ipv6: Integer?
+      attr_accessor billing_mode: String?
     end
 
     class AssociateConnectionWithLagRequest
@@ -432,6 +498,32 @@ module Aws::DirectConnect
 
       attr_accessor connection_id: String?
       attr_accessor lag_id: String?
+    end
+
+    class AssociateConnectionsToResiliencyGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_identifiers: Array[String],
+        ?resiliency_group_id: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_identifiers: Array[String]?
+      attr_accessor resiliency_group_id: String?
+      attr_accessor client_token: String?
+    end
+
+    class AssociateConnectionsToResiliencyGroupResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resiliency_group_associations: Array[Types::ResiliencyGroupAssociation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resiliency_group_associations: Array[Types::ResiliencyGroupAssociation]?
     end
 
     class AssociateHostedConnectionOutput
@@ -460,7 +552,13 @@ module Aws::DirectConnect
         ?port_encryption_status: String,
         ?encryption_mode: String,
         ?mac_sec_keys: Array[Types::MacSecKey],
+        ?rate_limiter_status: Types::RateLimiterStatus,
         ?partner_interconnect_mac_sec_capable: bool,
+        ?prefix_pool_size_ipv4: Integer,
+        ?prefix_pool_size_ipv6: Integer,
+        ?prefix_pool_unallocated_count_ipv4: Integer,
+        ?prefix_pool_unallocated_count_ipv6: Integer,
+        ?billing_mode: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -486,7 +584,13 @@ module Aws::DirectConnect
       attr_accessor port_encryption_status: String?
       attr_accessor encryption_mode: String?
       attr_accessor mac_sec_keys: Array[Types::MacSecKey]?
+      attr_accessor rate_limiter_status: Types::RateLimiterStatus?
       attr_accessor partner_interconnect_mac_sec_capable: bool?
+      attr_accessor prefix_pool_size_ipv4: Integer?
+      attr_accessor prefix_pool_size_ipv6: Integer?
+      attr_accessor prefix_pool_unallocated_count_ipv4: Integer?
+      attr_accessor prefix_pool_unallocated_count_ipv6: Integer?
+      attr_accessor billing_mode: String?
     end
 
     class AssociateHostedConnectionRequest
@@ -563,6 +667,9 @@ module Aws::DirectConnect
         ?aws_logical_device_id: String,
         ?tags: Array[Types::Tag],
         ?site_link_enabled: bool,
+        ?prefix_pool_allocated_count_ipv4: Integer,
+        ?prefix_pool_allocated_count_ipv6: Integer,
+        ?rate_limit: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -593,6 +700,9 @@ module Aws::DirectConnect
       attr_accessor aws_logical_device_id: String?
       attr_accessor tags: Array[Types::Tag]?
       attr_accessor site_link_enabled: bool?
+      attr_accessor prefix_pool_allocated_count_ipv4: Integer?
+      attr_accessor prefix_pool_allocated_count_ipv6: Integer?
+      attr_accessor rate_limit: String?
     end
 
     class AssociateVirtualInterfaceRequest
@@ -640,6 +750,21 @@ module Aws::DirectConnect
       attr_accessor region: String?
     end
 
+    class AvailableBillingMode
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?billing_mode: String,
+        ?available_port_speeds: Array[String],
+        ?included_regions: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor billing_mode: String?
+      attr_accessor available_port_speeds: Array[String]?
+      attr_accessor included_regions: Array[String]?
+    end
+
     class BGPPeer
       include Smithy::Schema::Structure
 
@@ -683,6 +808,20 @@ module Aws::DirectConnect
       Up: String
       Down: String
       Unknown: String
+    end
+
+    module BillingMode
+      PayAsYouGo: String
+      FlatRateTier1: String
+      FlatRateTier2: String
+      FlatRateTier3: String
+      FlatRateTier4: String
+      FlatRateTier5: String
+      PortPairFlatRateTier1: String
+      PortPairFlatRateTier2: String
+      PortPairFlatRateTier3: String
+      PortPairFlatRateTier4: String
+      PortPairFlatRateTier5: String
     end
 
     class ConfirmConnectionRequest
@@ -827,7 +966,13 @@ module Aws::DirectConnect
         ?port_encryption_status: String,
         ?encryption_mode: String,
         ?mac_sec_keys: Array[Types::MacSecKey],
+        ?rate_limiter_status: Types::RateLimiterStatus,
         ?partner_interconnect_mac_sec_capable: bool,
+        ?prefix_pool_size_ipv4: Integer,
+        ?prefix_pool_size_ipv6: Integer,
+        ?prefix_pool_unallocated_count_ipv4: Integer,
+        ?prefix_pool_unallocated_count_ipv6: Integer,
+        ?billing_mode: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -853,7 +998,13 @@ module Aws::DirectConnect
       attr_accessor port_encryption_status: String?
       attr_accessor encryption_mode: String?
       attr_accessor mac_sec_keys: Array[Types::MacSecKey]?
+      attr_accessor rate_limiter_status: Types::RateLimiterStatus?
       attr_accessor partner_interconnect_mac_sec_capable: bool?
+      attr_accessor prefix_pool_size_ipv4: Integer?
+      attr_accessor prefix_pool_size_ipv6: Integer?
+      attr_accessor prefix_pool_unallocated_count_ipv4: Integer?
+      attr_accessor prefix_pool_unallocated_count_ipv6: Integer?
+      attr_accessor billing_mode: String?
     end
 
     module ConnectionState
@@ -918,7 +1069,13 @@ module Aws::DirectConnect
         ?port_encryption_status: String,
         ?encryption_mode: String,
         ?mac_sec_keys: Array[Types::MacSecKey],
+        ?rate_limiter_status: Types::RateLimiterStatus,
         ?partner_interconnect_mac_sec_capable: bool,
+        ?prefix_pool_size_ipv4: Integer,
+        ?prefix_pool_size_ipv6: Integer,
+        ?prefix_pool_unallocated_count_ipv4: Integer,
+        ?prefix_pool_unallocated_count_ipv6: Integer,
+        ?billing_mode: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -944,7 +1101,13 @@ module Aws::DirectConnect
       attr_accessor port_encryption_status: String?
       attr_accessor encryption_mode: String?
       attr_accessor mac_sec_keys: Array[Types::MacSecKey]?
+      attr_accessor rate_limiter_status: Types::RateLimiterStatus?
       attr_accessor partner_interconnect_mac_sec_capable: bool?
+      attr_accessor prefix_pool_size_ipv4: Integer?
+      attr_accessor prefix_pool_size_ipv6: Integer?
+      attr_accessor prefix_pool_unallocated_count_ipv4: Integer?
+      attr_accessor prefix_pool_unallocated_count_ipv6: Integer?
+      attr_accessor billing_mode: String?
     end
 
     class CreateConnectionRequest
@@ -958,6 +1121,7 @@ module Aws::DirectConnect
         ?tags: Array[Types::Tag],
         ?provider_name: String,
         ?request_mac_sec: bool,
+        ?billing_mode: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -968,6 +1132,7 @@ module Aws::DirectConnect
       attr_accessor tags: Array[Types::Tag]?
       attr_accessor provider_name: String?
       attr_accessor request_mac_sec: bool?
+      attr_accessor billing_mode: String?
     end
 
     class CreateDirectConnectGatewayAssociationProposalRequest
@@ -1149,6 +1314,12 @@ module Aws::DirectConnect
         ?mac_sec_capable: bool,
         ?encryption_mode: String,
         ?mac_sec_keys: Array[Types::MacSecKey],
+        ?prefix_pool_size_ipv4: Integer,
+        ?prefix_pool_size_ipv6: Integer,
+        ?prefix_pool_unallocated_count_ipv4: Integer,
+        ?prefix_pool_unallocated_count_ipv6: Integer,
+        ?rate_limiter_status: Types::RateLimiterStatus,
+        ?billing_mode: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1173,6 +1344,12 @@ module Aws::DirectConnect
       attr_accessor mac_sec_capable: bool?
       attr_accessor encryption_mode: String?
       attr_accessor mac_sec_keys: Array[Types::MacSecKey]?
+      attr_accessor prefix_pool_size_ipv4: Integer?
+      attr_accessor prefix_pool_size_ipv6: Integer?
+      attr_accessor prefix_pool_unallocated_count_ipv4: Integer?
+      attr_accessor prefix_pool_unallocated_count_ipv6: Integer?
+      attr_accessor rate_limiter_status: Types::RateLimiterStatus?
+      attr_accessor billing_mode: String?
     end
 
     class CreateLagRequest
@@ -1188,6 +1365,7 @@ module Aws::DirectConnect
         ?child_connection_tags: Array[Types::Tag],
         ?provider_name: String,
         ?request_mac_sec: bool,
+        ?billing_mode: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1200,6 +1378,7 @@ module Aws::DirectConnect
       attr_accessor child_connection_tags: Array[Types::Tag]?
       attr_accessor provider_name: String?
       attr_accessor request_mac_sec: bool?
+      attr_accessor billing_mode: String?
     end
 
     class CreatePrivateVirtualInterfaceOutput
@@ -1233,6 +1412,9 @@ module Aws::DirectConnect
         ?aws_logical_device_id: String,
         ?tags: Array[Types::Tag],
         ?site_link_enabled: bool,
+        ?prefix_pool_allocated_count_ipv4: Integer,
+        ?prefix_pool_allocated_count_ipv6: Integer,
+        ?rate_limit: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1263,6 +1445,9 @@ module Aws::DirectConnect
       attr_accessor aws_logical_device_id: String?
       attr_accessor tags: Array[Types::Tag]?
       attr_accessor site_link_enabled: bool?
+      attr_accessor prefix_pool_allocated_count_ipv4: Integer?
+      attr_accessor prefix_pool_allocated_count_ipv6: Integer?
+      attr_accessor rate_limit: String?
     end
 
     class CreatePrivateVirtualInterfaceRequest
@@ -1309,6 +1494,9 @@ module Aws::DirectConnect
         ?aws_logical_device_id: String,
         ?tags: Array[Types::Tag],
         ?site_link_enabled: bool,
+        ?prefix_pool_allocated_count_ipv4: Integer,
+        ?prefix_pool_allocated_count_ipv6: Integer,
+        ?rate_limit: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1339,6 +1527,9 @@ module Aws::DirectConnect
       attr_accessor aws_logical_device_id: String?
       attr_accessor tags: Array[Types::Tag]?
       attr_accessor site_link_enabled: bool?
+      attr_accessor prefix_pool_allocated_count_ipv4: Integer?
+      attr_accessor prefix_pool_allocated_count_ipv6: Integer?
+      attr_accessor rate_limit: String?
     end
 
     class CreatePublicVirtualInterfaceRequest
@@ -1352,6 +1543,34 @@ module Aws::DirectConnect
 
       attr_accessor connection_id: String?
       attr_accessor new_public_virtual_interface: Types::NewPublicVirtualInterface?
+    end
+
+    class CreateResiliencyGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resiliency_group_name: String,
+        ?intended_resiliency_model: String,
+        ?client_token: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resiliency_group_name: String?
+      attr_accessor intended_resiliency_model: String?
+      attr_accessor client_token: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateResiliencyGroupResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resiliency_group: Types::ResiliencyGroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resiliency_group: Types::ResiliencyGroup?
     end
 
     class CreateTransitVirtualInterfaceRequest
@@ -1447,7 +1666,13 @@ module Aws::DirectConnect
         ?port_encryption_status: String,
         ?encryption_mode: String,
         ?mac_sec_keys: Array[Types::MacSecKey],
+        ?rate_limiter_status: Types::RateLimiterStatus,
         ?partner_interconnect_mac_sec_capable: bool,
+        ?prefix_pool_size_ipv4: Integer,
+        ?prefix_pool_size_ipv6: Integer,
+        ?prefix_pool_unallocated_count_ipv4: Integer,
+        ?prefix_pool_unallocated_count_ipv6: Integer,
+        ?billing_mode: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1473,7 +1698,13 @@ module Aws::DirectConnect
       attr_accessor port_encryption_status: String?
       attr_accessor encryption_mode: String?
       attr_accessor mac_sec_keys: Array[Types::MacSecKey]?
+      attr_accessor rate_limiter_status: Types::RateLimiterStatus?
       attr_accessor partner_interconnect_mac_sec_capable: bool?
+      attr_accessor prefix_pool_size_ipv4: Integer?
+      attr_accessor prefix_pool_size_ipv6: Integer?
+      attr_accessor prefix_pool_unallocated_count_ipv4: Integer?
+      attr_accessor prefix_pool_unallocated_count_ipv6: Integer?
+      attr_accessor billing_mode: String?
     end
 
     class DeleteConnectionRequest
@@ -1604,6 +1835,12 @@ module Aws::DirectConnect
         ?mac_sec_capable: bool,
         ?encryption_mode: String,
         ?mac_sec_keys: Array[Types::MacSecKey],
+        ?prefix_pool_size_ipv4: Integer,
+        ?prefix_pool_size_ipv6: Integer,
+        ?prefix_pool_unallocated_count_ipv4: Integer,
+        ?prefix_pool_unallocated_count_ipv6: Integer,
+        ?rate_limiter_status: Types::RateLimiterStatus,
+        ?billing_mode: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1628,6 +1865,12 @@ module Aws::DirectConnect
       attr_accessor mac_sec_capable: bool?
       attr_accessor encryption_mode: String?
       attr_accessor mac_sec_keys: Array[Types::MacSecKey]?
+      attr_accessor prefix_pool_size_ipv4: Integer?
+      attr_accessor prefix_pool_size_ipv6: Integer?
+      attr_accessor prefix_pool_unallocated_count_ipv4: Integer?
+      attr_accessor prefix_pool_unallocated_count_ipv6: Integer?
+      attr_accessor rate_limiter_status: Types::RateLimiterStatus?
+      attr_accessor billing_mode: String?
     end
 
     class DeleteLagRequest
@@ -1639,6 +1882,28 @@ module Aws::DirectConnect
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor lag_id: String?
+    end
+
+    class DeleteResiliencyGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resiliency_group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resiliency_group_id: String?
+    end
+
+    class DeleteResiliencyGroupResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resiliency_group: Types::ResiliencyGroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resiliency_group: Types::ResiliencyGroup?
     end
 
     class DeleteVirtualInterfaceRequest
@@ -2141,6 +2406,7 @@ module Aws::DirectConnect
         ?owner_account: String,
         ?direct_connect_gateway_state: String,
         ?state_change_error: String,
+        ?total_prefix_pool_allocations: Integer,
         ?tags: Array[Types::Tag],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -2151,6 +2417,7 @@ module Aws::DirectConnect
       attr_accessor owner_account: String?
       attr_accessor direct_connect_gateway_state: String?
       attr_accessor state_change_error: String?
+      attr_accessor total_prefix_pool_allocations: Integer?
       attr_accessor tags: Array[Types::Tag]?
     end
 
@@ -2301,7 +2568,13 @@ module Aws::DirectConnect
         ?port_encryption_status: String,
         ?encryption_mode: String,
         ?mac_sec_keys: Array[Types::MacSecKey],
+        ?rate_limiter_status: Types::RateLimiterStatus,
         ?partner_interconnect_mac_sec_capable: bool,
+        ?prefix_pool_size_ipv4: Integer,
+        ?prefix_pool_size_ipv6: Integer,
+        ?prefix_pool_unallocated_count_ipv4: Integer,
+        ?prefix_pool_unallocated_count_ipv6: Integer,
+        ?billing_mode: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2327,7 +2600,13 @@ module Aws::DirectConnect
       attr_accessor port_encryption_status: String?
       attr_accessor encryption_mode: String?
       attr_accessor mac_sec_keys: Array[Types::MacSecKey]?
+      attr_accessor rate_limiter_status: Types::RateLimiterStatus?
       attr_accessor partner_interconnect_mac_sec_capable: bool?
+      attr_accessor prefix_pool_size_ipv4: Integer?
+      attr_accessor prefix_pool_size_ipv6: Integer?
+      attr_accessor prefix_pool_unallocated_count_ipv4: Integer?
+      attr_accessor prefix_pool_unallocated_count_ipv6: Integer?
+      attr_accessor billing_mode: String?
     end
 
     class DisassociateConnectionFromLagRequest
@@ -2341,6 +2620,32 @@ module Aws::DirectConnect
 
       attr_accessor connection_id: String?
       attr_accessor lag_id: String?
+    end
+
+    class DisassociateConnectionsFromResiliencyGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_identifiers: Array[String],
+        ?resiliency_group_id: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_identifiers: Array[String]?
+      attr_accessor resiliency_group_id: String?
+      attr_accessor client_token: String?
+    end
+
+    class DisassociateConnectionsFromResiliencyGroupResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resiliency_group_associations: Array[Types::ResiliencyGroupAssociation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resiliency_group_associations: Array[Types::ResiliencyGroupAssociation]?
     end
 
     class DisassociateMacSecKeyRequest
@@ -2383,6 +2688,28 @@ module Aws::DirectConnect
     module GatewayType
       VirtualPrivateGateway: String
       TransitGateway: String
+    end
+
+    class GetResiliencyGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resiliency_group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resiliency_group_id: String?
+    end
+
+    class GetResiliencyGroupResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resiliency_group: Types::ResiliencyGroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resiliency_group: Types::ResiliencyGroup?
     end
 
     module HasLogicalRedundancy
@@ -2473,6 +2800,12 @@ module Aws::DirectConnect
         ?mac_sec_capable: bool,
         ?encryption_mode: String,
         ?mac_sec_keys: Array[Types::MacSecKey],
+        ?prefix_pool_size_ipv4: Integer,
+        ?prefix_pool_size_ipv6: Integer,
+        ?prefix_pool_unallocated_count_ipv4: Integer,
+        ?prefix_pool_unallocated_count_ipv6: Integer,
+        ?rate_limiter_status: Types::RateLimiterStatus,
+        ?billing_mode: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2497,6 +2830,12 @@ module Aws::DirectConnect
       attr_accessor mac_sec_capable: bool?
       attr_accessor encryption_mode: String?
       attr_accessor mac_sec_keys: Array[Types::MacSecKey]?
+      attr_accessor prefix_pool_size_ipv4: Integer?
+      attr_accessor prefix_pool_size_ipv6: Integer?
+      attr_accessor prefix_pool_unallocated_count_ipv4: Integer?
+      attr_accessor prefix_pool_unallocated_count_ipv6: Integer?
+      attr_accessor rate_limiter_status: Types::RateLimiterStatus?
+      attr_accessor billing_mode: String?
     end
 
     module LagState
@@ -2507,6 +2846,103 @@ module Aws::DirectConnect
       deleting: String
       deleted: String
       unknown: String
+    end
+
+    class LimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListResiliencyGroupAssociationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resiliency_group_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resiliency_group_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListResiliencyGroupAssociationsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::ResiliencyGroupAssociation],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::ResiliencyGroupAssociation]?
+      attr_accessor next_token: String?
+    end
+
+    class ListResiliencyGroupsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListResiliencyGroupsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::ResiliencyGroupSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::ResiliencyGroupSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListVirtualInterfaceRoutesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_interface_id: String,
+        ?filters: Types::RouteFilters,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_interface_id: String?
+      attr_accessor filters: Types::RouteFilters?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListVirtualInterfaceRoutesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_interface_id: String,
+        ?routes: Array[Types::Route],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_interface_id: String?
+      attr_accessor routes: Array[Types::Route]?
+      attr_accessor next_token: String?
     end
 
     class ListVirtualInterfaceTestHistoryRequest
@@ -2570,6 +3006,7 @@ module Aws::DirectConnect
         ?available_port_speeds: Array[String],
         ?available_providers: Array[String],
         ?available_mac_sec_port_speeds: Array[String],
+        ?available_billing_modes: Array[Types::AvailableBillingMode],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2579,6 +3016,7 @@ module Aws::DirectConnect
       attr_accessor available_port_speeds: Array[String]?
       attr_accessor available_providers: Array[String]?
       attr_accessor available_mac_sec_port_speeds: Array[String]?
+      attr_accessor available_billing_modes: Array[Types::AvailableBillingMode]?
     end
 
     class MacSecKey
@@ -2636,6 +3074,9 @@ module Aws::DirectConnect
         ?direct_connect_gateway_id: String,
         ?tags: Array[Types::Tag],
         ?enable_site_link: bool,
+        ?prefix_pool_allocated_count_ipv4: Integer,
+        ?prefix_pool_allocated_count_ipv6: Integer,
+        ?rate_limit: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2652,6 +3093,9 @@ module Aws::DirectConnect
       attr_accessor direct_connect_gateway_id: String?
       attr_accessor tags: Array[Types::Tag]?
       attr_accessor enable_site_link: bool?
+      attr_accessor prefix_pool_allocated_count_ipv4: Integer?
+      attr_accessor prefix_pool_allocated_count_ipv6: Integer?
+      attr_accessor rate_limit: String?
     end
 
     class NewPrivateVirtualInterfaceAllocation
@@ -2668,6 +3112,7 @@ module Aws::DirectConnect
         ?address_family: String,
         ?customer_address: String,
         ?tags: Array[Types::Tag],
+        ?rate_limit: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2681,6 +3126,7 @@ module Aws::DirectConnect
       attr_accessor address_family: String?
       attr_accessor customer_address: String?
       attr_accessor tags: Array[Types::Tag]?
+      attr_accessor rate_limit: String?
     end
 
     class NewPublicVirtualInterface
@@ -2697,6 +3143,7 @@ module Aws::DirectConnect
         ?address_family: String,
         ?route_filter_prefixes: Array[Types::RouteFilterPrefix],
         ?tags: Array[Types::Tag],
+        ?rate_limit: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2710,6 +3157,7 @@ module Aws::DirectConnect
       attr_accessor address_family: String?
       attr_accessor route_filter_prefixes: Array[Types::RouteFilterPrefix]?
       attr_accessor tags: Array[Types::Tag]?
+      attr_accessor rate_limit: String?
     end
 
     class NewPublicVirtualInterfaceAllocation
@@ -2726,6 +3174,7 @@ module Aws::DirectConnect
         ?address_family: String,
         ?route_filter_prefixes: Array[Types::RouteFilterPrefix],
         ?tags: Array[Types::Tag],
+        ?rate_limit: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2739,6 +3188,7 @@ module Aws::DirectConnect
       attr_accessor address_family: String?
       attr_accessor route_filter_prefixes: Array[Types::RouteFilterPrefix]?
       attr_accessor tags: Array[Types::Tag]?
+      attr_accessor rate_limit: String?
     end
 
     class NewTransitVirtualInterface
@@ -2757,6 +3207,9 @@ module Aws::DirectConnect
         ?direct_connect_gateway_id: String,
         ?tags: Array[Types::Tag],
         ?enable_site_link: bool,
+        ?prefix_pool_allocated_count_ipv4: Integer,
+        ?prefix_pool_allocated_count_ipv6: Integer,
+        ?rate_limit: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2772,6 +3225,9 @@ module Aws::DirectConnect
       attr_accessor direct_connect_gateway_id: String?
       attr_accessor tags: Array[Types::Tag]?
       attr_accessor enable_site_link: bool?
+      attr_accessor prefix_pool_allocated_count_ipv4: Integer?
+      attr_accessor prefix_pool_allocated_count_ipv6: Integer?
+      attr_accessor rate_limit: String?
     end
 
     class NewTransitVirtualInterfaceAllocation
@@ -2788,6 +3244,7 @@ module Aws::DirectConnect
         ?customer_address: String,
         ?address_family: String,
         ?tags: Array[Types::Tag],
+        ?rate_limit: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2801,12 +3258,122 @@ module Aws::DirectConnect
       attr_accessor customer_address: String?
       attr_accessor address_family: String?
       attr_accessor tags: Array[Types::Tag]?
+      attr_accessor rate_limit: String?
     end
 
     module NniPartnerType
       V1: String
       V2: String
       NonPartner: String
+    end
+
+    class RateLimiterStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_allowed: Integer,
+        ?in_use: Integer,
+        ?remaining: Integer,
+        ?total_bandwidth: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_allowed: Integer?
+      attr_accessor in_use: Integer?
+      attr_accessor remaining: Integer?
+      attr_accessor total_bandwidth: String?
+    end
+
+    module RequestBillingMode
+      PayAsYouGo: String
+      FlatRateTier1: String
+      FlatRateTier2: String
+      FlatRateTier3: String
+      FlatRateTier4: String
+      FlatRateTier5: String
+    end
+
+    class ResiliencyGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resiliency_group_id: String,
+        ?resiliency_group_arn: String,
+        ?resiliency_group_name: String,
+        ?resiliency_group_type: String,
+        ?owner_account: String,
+        ?state: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resiliency_group_id: String?
+      attr_accessor resiliency_group_arn: String?
+      attr_accessor resiliency_group_name: String?
+      attr_accessor resiliency_group_type: String?
+      attr_accessor owner_account: String?
+      attr_accessor state: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class ResiliencyGroupAssociation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resiliency_group_id: String,
+        ?connection_arn: String,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resiliency_group_id: String?
+      attr_accessor connection_arn: String?
+      attr_accessor state: String?
+    end
+
+    module ResiliencyGroupAssociationState
+      Associating: String
+      Associated: String
+      Disassociating: String
+      Disassociated: String
+    end
+
+    module ResiliencyGroupState
+      Pending: String
+      Available: String
+      Deleting: String
+      Deleted: String
+    end
+
+    class ResiliencyGroupSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resiliency_group_id: String,
+        ?resiliency_group_arn: String,
+        ?resiliency_group_name: String,
+        ?resiliency_group_type: String,
+        ?owner_account: String,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resiliency_group_id: String?
+      attr_accessor resiliency_group_arn: String?
+      attr_accessor resiliency_group_name: String?
+      attr_accessor resiliency_group_type: String?
+      attr_accessor owner_account: String?
+      attr_accessor state: String?
+    end
+
+    module ResiliencyGroupType
+      Managed: String
+    end
+
+    module ResiliencyModel
+      MaximumResiliency: String
+      HighResiliency: String
+      BasicResiliency: String
     end
 
     class ResourceTag
@@ -2822,6 +3389,34 @@ module Aws::DirectConnect
       attr_accessor tags: Array[Types::Tag]?
     end
 
+    class Route
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cidr: String,
+        ?route_direction: String,
+        ?address_family: String,
+        ?as_path: Array[Types::AsPathSegment],
+        ?communities: Array[String],
+        ?aws_logical_device_id: String,
+        ?route_installed_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cidr: String?
+      attr_accessor route_direction: String?
+      attr_accessor address_family: String?
+      attr_accessor as_path: Array[Types::AsPathSegment]?
+      attr_accessor communities: Array[String]?
+      attr_accessor aws_logical_device_id: String?
+      attr_accessor route_installed_at: Time?
+    end
+
+    module RouteDirection
+      Accepted: String
+      Advertised: String
+    end
+
     class RouteFilterPrefix
       include Smithy::Schema::Structure
 
@@ -2831,6 +3426,25 @@ module Aws::DirectConnect
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor cidr: String?
+    end
+
+    class RouteFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?route_direction: String,
+        ?address_family: String,
+        ?cidrs: Array[String],
+        ?as_path: Array[Integer],
+        ?communities: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor route_direction: String?
+      attr_accessor address_family: String?
+      attr_accessor cidrs: Array[String]?
+      attr_accessor as_path: Array[Integer]?
+      attr_accessor communities: Array[String]?
     end
 
     class RouterType
@@ -2996,7 +3610,13 @@ module Aws::DirectConnect
         ?port_encryption_status: String,
         ?encryption_mode: String,
         ?mac_sec_keys: Array[Types::MacSecKey],
+        ?rate_limiter_status: Types::RateLimiterStatus,
         ?partner_interconnect_mac_sec_capable: bool,
+        ?prefix_pool_size_ipv4: Integer,
+        ?prefix_pool_size_ipv6: Integer,
+        ?prefix_pool_unallocated_count_ipv4: Integer,
+        ?prefix_pool_unallocated_count_ipv6: Integer,
+        ?billing_mode: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3022,7 +3642,13 @@ module Aws::DirectConnect
       attr_accessor port_encryption_status: String?
       attr_accessor encryption_mode: String?
       attr_accessor mac_sec_keys: Array[Types::MacSecKey]?
+      attr_accessor rate_limiter_status: Types::RateLimiterStatus?
       attr_accessor partner_interconnect_mac_sec_capable: bool?
+      attr_accessor prefix_pool_size_ipv4: Integer?
+      attr_accessor prefix_pool_size_ipv6: Integer?
+      attr_accessor prefix_pool_unallocated_count_ipv4: Integer?
+      attr_accessor prefix_pool_unallocated_count_ipv6: Integer?
+      attr_accessor billing_mode: String?
     end
 
     class UpdateConnectionRequest
@@ -3038,6 +3664,32 @@ module Aws::DirectConnect
       attr_accessor connection_id: String?
       attr_accessor connection_name: String?
       attr_accessor encryption_mode: String?
+    end
+
+    class UpdateConnectionsBillingModeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_ids: Array[String],
+        ?billing_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_ids: Array[String]?
+      attr_accessor billing_mode: String?
+    end
+
+    class UpdateConnectionsBillingModeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?billing_mode: String,
+        ?connections: Array[Types::Connection],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor billing_mode: String?
+      attr_accessor connections: Array[Types::Connection]?
     end
 
     class UpdateDirectConnectGatewayAssociationRequest
@@ -3115,6 +3767,12 @@ module Aws::DirectConnect
         ?mac_sec_capable: bool,
         ?encryption_mode: String,
         ?mac_sec_keys: Array[Types::MacSecKey],
+        ?prefix_pool_size_ipv4: Integer,
+        ?prefix_pool_size_ipv6: Integer,
+        ?prefix_pool_unallocated_count_ipv4: Integer,
+        ?prefix_pool_unallocated_count_ipv6: Integer,
+        ?rate_limiter_status: Types::RateLimiterStatus,
+        ?billing_mode: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3139,6 +3797,12 @@ module Aws::DirectConnect
       attr_accessor mac_sec_capable: bool?
       attr_accessor encryption_mode: String?
       attr_accessor mac_sec_keys: Array[Types::MacSecKey]?
+      attr_accessor prefix_pool_size_ipv4: Integer?
+      attr_accessor prefix_pool_size_ipv6: Integer?
+      attr_accessor prefix_pool_unallocated_count_ipv4: Integer?
+      attr_accessor prefix_pool_unallocated_count_ipv6: Integer?
+      attr_accessor rate_limiter_status: Types::RateLimiterStatus?
+      attr_accessor billing_mode: String?
     end
 
     class UpdateLagRequest
@@ -3156,6 +3820,32 @@ module Aws::DirectConnect
       attr_accessor lag_name: String?
       attr_accessor minimum_links: Integer?
       attr_accessor encryption_mode: String?
+    end
+
+    class UpdateResiliencyGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resiliency_group_id: String,
+        ?resiliency_group_name: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resiliency_group_id: String?
+      attr_accessor resiliency_group_name: String?
+      attr_accessor client_token: String?
+    end
+
+    class UpdateResiliencyGroupResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resiliency_group: Types::ResiliencyGroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resiliency_group: Types::ResiliencyGroup?
     end
 
     class UpdateVirtualInterfaceAttributesOutput
@@ -3189,6 +3879,9 @@ module Aws::DirectConnect
         ?aws_logical_device_id: String,
         ?tags: Array[Types::Tag],
         ?site_link_enabled: bool,
+        ?prefix_pool_allocated_count_ipv4: Integer,
+        ?prefix_pool_allocated_count_ipv6: Integer,
+        ?rate_limit: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3219,6 +3912,9 @@ module Aws::DirectConnect
       attr_accessor aws_logical_device_id: String?
       attr_accessor tags: Array[Types::Tag]?
       attr_accessor site_link_enabled: bool?
+      attr_accessor prefix_pool_allocated_count_ipv4: Integer?
+      attr_accessor prefix_pool_allocated_count_ipv6: Integer?
+      attr_accessor rate_limit: String?
     end
 
     class UpdateVirtualInterfaceAttributesRequest
@@ -3229,6 +3925,9 @@ module Aws::DirectConnect
         ?mtu: Integer,
         ?enable_site_link: bool,
         ?virtual_interface_name: String,
+        ?prefix_pool_allocated_count_ipv4: Integer,
+        ?prefix_pool_allocated_count_ipv6: Integer,
+        ?rate_limit: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3236,6 +3935,9 @@ module Aws::DirectConnect
       attr_accessor mtu: Integer?
       attr_accessor enable_site_link: bool?
       attr_accessor virtual_interface_name: String?
+      attr_accessor prefix_pool_allocated_count_ipv4: Integer?
+      attr_accessor prefix_pool_allocated_count_ipv6: Integer?
+      attr_accessor rate_limit: String?
     end
 
     class VirtualGateway
@@ -3282,6 +3984,9 @@ module Aws::DirectConnect
         ?aws_logical_device_id: String,
         ?tags: Array[Types::Tag],
         ?site_link_enabled: bool,
+        ?prefix_pool_allocated_count_ipv4: Integer,
+        ?prefix_pool_allocated_count_ipv6: Integer,
+        ?rate_limit: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3312,6 +4017,9 @@ module Aws::DirectConnect
       attr_accessor aws_logical_device_id: String?
       attr_accessor tags: Array[Types::Tag]?
       attr_accessor site_link_enabled: bool?
+      attr_accessor prefix_pool_allocated_count_ipv4: Integer?
+      attr_accessor prefix_pool_allocated_count_ipv6: Integer?
+      attr_accessor rate_limit: String?
     end
 
     module VirtualInterfaceState

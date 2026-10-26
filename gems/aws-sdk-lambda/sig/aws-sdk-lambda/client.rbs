@@ -69,13 +69,60 @@ module Aws::Lambda
       ?action: String,
       ?principal: String,
       ?source_arn: String,
+      ?function_url_auth_type: String,
+      ?invoked_via_function_url: bool,
       ?source_account: String,
       ?event_source_token: String,
       ?qualifier: String,
       ?revision_id: String,
-      ?principal_org_id: String,
-      ?function_url_auth_type: String
+      ?principal_org_id: String
     ) -> _AddPermissionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddPermissionResponse
+
+    interface _CheckpointDurableExecutionResponse
+      include Smithy::Client::_Response[Types::CheckpointDurableExecutionResponse]
+      def checkpoint_token: () -> String?
+      def new_execution_state: () -> Types::CheckpointUpdatedExecutionState?
+    end
+    def checkpoint_durable_execution: (
+      ?durable_execution_arn: String,
+      ?checkpoint_token: String,
+      ?updates: Array[
+        {
+          id: String,
+          parent_id: untyped,
+          name: String,
+          type: String,
+          sub_type: String,
+          action: String,
+          payload: String,
+          error: {
+            error_message: String,
+            error_type: String,
+            error_data: String,
+            stack_trace: Array[String]
+          },
+          context_options: {
+            replay_children: bool
+          },
+          step_options: {
+            next_attempt_delay_seconds: Integer
+          },
+          wait_options: {
+            wait_seconds: untyped
+          },
+          callback_options: {
+            timeout_seconds: untyped,
+            heartbeat_timeout_seconds: untyped
+          },
+          chained_invoke_options: {
+            function_name: String,
+            tenant_id: String,
+            x_amzn_trace_id: String
+          }
+        }
+      ],
+      ?client_token: String
+    ) -> _CheckpointDurableExecutionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CheckpointDurableExecutionResponse
 
     interface _CreateAliasResponse
       include Smithy::Client::_Response[Types::CreateAliasOutput]
@@ -95,6 +142,48 @@ module Aws::Lambda
         additional_version_weights: Hash[String, Float]
       }
     ) -> _CreateAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAliasResponse
+
+    interface _CreateCapacityProviderResponse
+      include Smithy::Client::_Response[Types::CreateCapacityProviderResponse]
+      def capacity_provider: () -> Types::CapacityProvider?
+    end
+    def create_capacity_provider: (
+      ?capacity_provider_name: String,
+      ?vpc_config: {
+        subnet_ids: Array[String],
+        security_group_ids: Array[String]
+      },
+      ?permissions_config: {
+        capacity_provider_operator_role_arn: String
+      },
+      ?instance_requirements: {
+        architectures: Array[String],
+        allowed_instance_types: Array[String],
+        excluded_instance_types: untyped
+      },
+      ?capacity_provider_scaling_config: {
+        max_v_cpu_count: Integer,
+        scaling_mode: String,
+        scaling_policies: Array[
+          {
+            predefined_metric_type: String,
+            target_value: Float
+          }
+        ]
+      },
+      ?kms_key_arn: String,
+      ?tags: Hash[String, String],
+      ?propagate_tags: {
+        mode: String,
+        explicit_tags: Hash[String, String]
+      },
+      ?telemetry_config: {
+        logging_config: {
+          system_log_level: String,
+          log_group: String
+        }
+      }
+    ) -> _CreateCapacityProviderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCapacityProviderResponse
 
     interface _CreateCodeSigningConfigResponse
       include Smithy::Client::_Response[Types::CreateCodeSigningConfigResponse]
@@ -121,6 +210,11 @@ module Aws::Lambda
       def parallelization_factor: () -> Integer?
       def event_source_arn: () -> String?
       def filter_criteria: () -> Types::FilterCriteria?
+      def filter_criteria_error: () -> Types::FilterCriteriaError?
+      def kms_key_arn: () -> String?
+      def metrics_config: () -> Types::EventSourceMappingMetricsConfig?
+      def logging_config: () -> Types::EventSourceMappingLoggingConfig?
+      def scaling_config: () -> Types::ScalingConfig?
       def function_arn: () -> String?
       def last_modified: () -> Time?
       def last_processing_result: () -> String?
@@ -138,12 +232,8 @@ module Aws::Lambda
       def function_response_types: () -> Array[String]?
       def amazon_managed_kafka_event_source_config: () -> Types::AmazonManagedKafkaEventSourceConfig?
       def self_managed_kafka_event_source_config: () -> Types::SelfManagedKafkaEventSourceConfig?
-      def scaling_config: () -> Types::ScalingConfig?
       def document_db_event_source_config: () -> Types::DocumentDBEventSourceConfig?
-      def kms_key_arn: () -> String?
-      def filter_criteria_error: () -> Types::FilterCriteriaError?
       def event_source_mapping_arn: () -> String?
-      def metrics_config: () -> Types::EventSourceMappingMetricsConfig?
       def provisioned_poller_config: () -> Types::ProvisionedPollerConfig?
     end
     def create_event_source_mapping: (
@@ -157,6 +247,16 @@ module Aws::Lambda
             pattern: String
           }
         ]
+      },
+      ?kms_key_arn: String,
+      ?metrics_config: {
+        metrics: Array[String]
+      },
+      ?logging_config: {
+        system_log_level: String
+      },
+      ?scaling_config: {
+        maximum_concurrency: Integer
       },
       ?maximum_batching_window_in_seconds: Integer,
       ?parallelization_factor: Integer,
@@ -225,21 +325,15 @@ module Aws::Lambda
           ]
         }
       },
-      ?scaling_config: {
-        maximum_concurrency: Integer
-      },
       ?document_db_event_source_config: {
         database_name: String,
         collection_name: String,
         full_document: String
       },
-      ?kms_key_arn: String,
-      ?metrics_config: {
-        metrics: Array[String]
-      },
       ?provisioned_poller_config: {
         minimum_pollers: Integer,
-        maximum_pollers: Integer
+        maximum_pollers: Integer,
+        poller_group_name: String
       }
     ) -> _CreateEventSourceMappingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateEventSourceMappingResponse
 
@@ -272,15 +366,19 @@ module Aws::Lambda
       def last_update_status_reason: () -> String?
       def last_update_status_reason_code: () -> String?
       def file_system_configs: () -> Array[Types::FileSystemConfig]?
-      def package_type: () -> String?
-      def image_config_response: () -> Types::ImageConfigResponse?
       def signing_profile_version_arn: () -> String?
       def signing_job_arn: () -> String?
+      def package_type: () -> String?
+      def image_config_response: () -> Types::ImageConfigResponse?
       def architectures: () -> Array[String]?
       def ephemeral_storage: () -> Types::EphemeralStorage?
       def snap_start: () -> Types::SnapStartResponse?
       def runtime_version_config: () -> Types::RuntimeVersionConfig?
       def logging_config: () -> Types::LoggingConfig?
+      def tenancy_config: () -> Types::TenancyConfig?
+      def capacity_provider_config: () -> Types::CapacityProviderConfig?
+      def config_sha256: () -> String?
+      def durable_config: () -> Types::DurableConfig?
     end
     def create_function: (
       ?function_name: String,
@@ -292,6 +390,7 @@ module Aws::Lambda
         s3_bucket: String,
         s3_key: String,
         s3_object_version: String,
+        s3_object_storage_mode: String,
         image_uri: String,
         source_kms_key_arn: String
       },
@@ -299,6 +398,7 @@ module Aws::Lambda
       ?timeout: Integer,
       ?memory_size: Integer,
       ?publish: bool,
+      ?publish_to: String,
       ?vpc_config: {
         subnet_ids: Array[String],
         security_group_ids: Array[String],
@@ -320,15 +420,18 @@ module Aws::Lambda
       ?file_system_configs: Array[
         {
           arn: String,
-          local_mount_path: String
+          local_mount_path: String,
+          s3_files_config: {
+            direct_s3_read: String
+          }
         }
       ],
+      ?code_signing_config_arn: String,
       ?image_config: {
         entry_point: Array[String],
         command: untyped,
         working_directory: String
       },
-      ?code_signing_config_arn: String,
       ?architectures: Array[String],
       ?ephemeral_storage: {
         size: Integer
@@ -341,6 +444,21 @@ module Aws::Lambda
         application_log_level: String,
         system_log_level: String,
         log_group: String
+      },
+      ?tenancy_config: {
+        tenant_isolation_mode: String
+      },
+      ?capacity_provider_config: {
+        lambda_managed_instances_capacity_provider_config: {
+          capacity_provider_arn: String,
+          per_execution_environment_max_concurrency: Integer,
+          execution_environment_memory_gi_b_per_v_cpu: Float
+        }
+      },
+      ?durable_config: {
+        kms_key_arn: String,
+        retention_period_in_days: Integer,
+        execution_timeout: Integer
       }
     ) -> _CreateFunctionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateFunctionResponse
 
@@ -376,6 +494,14 @@ module Aws::Lambda
       ?name: String
     ) -> _DeleteAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAliasResponse
 
+    interface _DeleteCapacityProviderResponse
+      include Smithy::Client::_Response[Types::DeleteCapacityProviderResponse]
+      def capacity_provider: () -> Types::CapacityProvider?
+    end
+    def delete_capacity_provider: (
+      ?capacity_provider_name: String
+    ) -> _DeleteCapacityProviderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCapacityProviderResponse
+
     interface _DeleteCodeSigningConfigResponse
       include Smithy::Client::_Response[Types::DeleteCodeSigningConfigResponse]
     end
@@ -393,6 +519,11 @@ module Aws::Lambda
       def parallelization_factor: () -> Integer?
       def event_source_arn: () -> String?
       def filter_criteria: () -> Types::FilterCriteria?
+      def filter_criteria_error: () -> Types::FilterCriteriaError?
+      def kms_key_arn: () -> String?
+      def metrics_config: () -> Types::EventSourceMappingMetricsConfig?
+      def logging_config: () -> Types::EventSourceMappingLoggingConfig?
+      def scaling_config: () -> Types::ScalingConfig?
       def function_arn: () -> String?
       def last_modified: () -> Time?
       def last_processing_result: () -> String?
@@ -410,12 +541,8 @@ module Aws::Lambda
       def function_response_types: () -> Array[String]?
       def amazon_managed_kafka_event_source_config: () -> Types::AmazonManagedKafkaEventSourceConfig?
       def self_managed_kafka_event_source_config: () -> Types::SelfManagedKafkaEventSourceConfig?
-      def scaling_config: () -> Types::ScalingConfig?
       def document_db_event_source_config: () -> Types::DocumentDBEventSourceConfig?
-      def kms_key_arn: () -> String?
-      def filter_criteria_error: () -> Types::FilterCriteriaError?
       def event_source_mapping_arn: () -> String?
-      def metrics_config: () -> Types::EventSourceMappingMetricsConfig?
       def provisioned_poller_config: () -> Types::ProvisionedPollerConfig?
     end
     def delete_event_source_mapping: (
@@ -423,7 +550,8 @@ module Aws::Lambda
     ) -> _DeleteEventSourceMappingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEventSourceMappingResponse
 
     interface _DeleteFunctionResponse
-      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+      include Smithy::Client::_Response[Types::DeleteFunctionResponse]
+      def status_code: () -> Integer?
     end
     def delete_function: (
       ?function_name: String,
@@ -476,6 +604,14 @@ module Aws::Lambda
       ?qualifier: String
     ) -> _DeleteProvisionedConcurrencyConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteProvisionedConcurrencyConfigResponse
 
+    interface _DeleteResourcePolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_resource_policy: (
+      ?resource_arn: String,
+      ?revision_id: String
+    ) -> _DeleteResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteResourcePolicyResponse
+
     interface _GetAccountSettingsResponse
       include Smithy::Client::_Response[Types::GetAccountSettingsResponse]
       def account_limit: () -> Types::AccountLimit?
@@ -497,6 +633,14 @@ module Aws::Lambda
       ?name: String
     ) -> _GetAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAliasResponse
 
+    interface _GetCapacityProviderResponse
+      include Smithy::Client::_Response[Types::GetCapacityProviderResponse]
+      def capacity_provider: () -> Types::CapacityProvider?
+    end
+    def get_capacity_provider: (
+      ?capacity_provider_name: String
+    ) -> _GetCapacityProviderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCapacityProviderResponse
+
     interface _GetCodeSigningConfigResponse
       include Smithy::Client::_Response[Types::GetCodeSigningConfigResponse]
       def code_signing_config: () -> Types::CodeSigningConfig?
@@ -504,6 +648,52 @@ module Aws::Lambda
     def get_code_signing_config: (
       ?code_signing_config_arn: String
     ) -> _GetCodeSigningConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCodeSigningConfigResponse
+
+    interface _GetDurableExecutionResponse
+      include Smithy::Client::_Response[Types::GetDurableExecutionResponse]
+      def durable_execution_arn: () -> String?
+      def durable_execution_name: () -> String?
+      def function_arn: () -> String?
+      def input_payload: () -> String?
+      def result: () -> String?
+      def error: () -> Types::ErrorObject?
+      def start_timestamp: () -> Time?
+      def status: () -> String?
+      def end_timestamp: () -> Time?
+      def version: () -> String?
+      def trace_header: () -> Types::TraceHeader?
+      def execution_data_included: () -> bool?
+      def durable_config: () -> Types::DurableConfig?
+    end
+    def get_durable_execution: (
+      ?durable_execution_arn: String,
+      ?include_execution_data: bool
+    ) -> _GetDurableExecutionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDurableExecutionResponse
+
+    interface _GetDurableExecutionHistoryResponse
+      include Smithy::Client::_Response[Types::GetDurableExecutionHistoryResponse]
+      def events: () -> Array[Types::Event]?
+      def next_marker: () -> String?
+    end
+    def get_durable_execution_history: (
+      ?durable_execution_arn: String,
+      ?include_execution_data: bool,
+      ?max_items: Integer,
+      ?marker: String,
+      ?reverse_order: bool
+    ) -> _GetDurableExecutionHistoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDurableExecutionHistoryResponse
+
+    interface _GetDurableExecutionStateResponse
+      include Smithy::Client::_Response[Types::GetDurableExecutionStateResponse]
+      def operations: () -> Array[Types::Operation]?
+      def next_marker: () -> String?
+    end
+    def get_durable_execution_state: (
+      ?durable_execution_arn: String,
+      ?checkpoint_token: String,
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _GetDurableExecutionStateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDurableExecutionStateResponse
 
     interface _GetEventSourceMappingResponse
       include Smithy::Client::_Response[Types::GetEventSourceMappingOutput]
@@ -515,6 +705,11 @@ module Aws::Lambda
       def parallelization_factor: () -> Integer?
       def event_source_arn: () -> String?
       def filter_criteria: () -> Types::FilterCriteria?
+      def filter_criteria_error: () -> Types::FilterCriteriaError?
+      def kms_key_arn: () -> String?
+      def metrics_config: () -> Types::EventSourceMappingMetricsConfig?
+      def logging_config: () -> Types::EventSourceMappingLoggingConfig?
+      def scaling_config: () -> Types::ScalingConfig?
       def function_arn: () -> String?
       def last_modified: () -> Time?
       def last_processing_result: () -> String?
@@ -532,12 +727,8 @@ module Aws::Lambda
       def function_response_types: () -> Array[String]?
       def amazon_managed_kafka_event_source_config: () -> Types::AmazonManagedKafkaEventSourceConfig?
       def self_managed_kafka_event_source_config: () -> Types::SelfManagedKafkaEventSourceConfig?
-      def scaling_config: () -> Types::ScalingConfig?
       def document_db_event_source_config: () -> Types::DocumentDBEventSourceConfig?
-      def kms_key_arn: () -> String?
-      def filter_criteria_error: () -> Types::FilterCriteriaError?
       def event_source_mapping_arn: () -> String?
-      def metrics_config: () -> Types::EventSourceMappingMetricsConfig?
       def provisioned_poller_config: () -> Types::ProvisionedPollerConfig?
     end
     def get_event_source_mapping: (
@@ -603,15 +794,19 @@ module Aws::Lambda
       def last_update_status_reason: () -> String?
       def last_update_status_reason_code: () -> String?
       def file_system_configs: () -> Array[Types::FileSystemConfig]?
-      def package_type: () -> String?
-      def image_config_response: () -> Types::ImageConfigResponse?
       def signing_profile_version_arn: () -> String?
       def signing_job_arn: () -> String?
+      def package_type: () -> String?
+      def image_config_response: () -> Types::ImageConfigResponse?
       def architectures: () -> Array[String]?
       def ephemeral_storage: () -> Types::EphemeralStorage?
       def snap_start: () -> Types::SnapStartResponse?
       def runtime_version_config: () -> Types::RuntimeVersionConfig?
       def logging_config: () -> Types::LoggingConfig?
+      def tenancy_config: () -> Types::TenancyConfig?
+      def capacity_provider_config: () -> Types::CapacityProviderConfig?
+      def config_sha256: () -> String?
+      def durable_config: () -> Types::DurableConfig?
     end
     def get_function_configuration: (
       ?function_name: String,
@@ -639,6 +834,17 @@ module Aws::Lambda
       ?function_name: String
     ) -> _GetFunctionRecursionConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFunctionRecursionConfigResponse
 
+    interface _GetFunctionScalingConfigResponse
+      include Smithy::Client::_Response[Types::GetFunctionScalingConfigResponse]
+      def function_arn: () -> String?
+      def applied_function_scaling_config: () -> Types::FunctionScalingConfig?
+      def requested_function_scaling_config: () -> Types::FunctionScalingConfig?
+    end
+    def get_function_scaling_config: (
+      ?function_name: String,
+      ?qualifier: String
+    ) -> _GetFunctionScalingConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFunctionScalingConfigResponse
+
     interface _GetFunctionUrlConfigResponse
       include Smithy::Client::_Response[Types::GetFunctionUrlConfigResponse]
       def function_url: () -> String?
@@ -662,9 +868,9 @@ module Aws::Lambda
       def description: () -> String?
       def created_date: () -> String?
       def version: () -> Integer?
+      def compatible_architectures: () -> Array[String]?
       def compatible_runtimes: () -> Array[String]?
       def license_info: () -> String?
-      def compatible_architectures: () -> Array[String]?
     end
     def get_layer_version: (
       ?layer_name: String,
@@ -679,9 +885,9 @@ module Aws::Lambda
       def description: () -> String?
       def created_date: () -> String?
       def version: () -> Integer?
+      def compatible_architectures: () -> Array[String]?
       def compatible_runtimes: () -> Array[String]?
       def license_info: () -> String?
-      def compatible_architectures: () -> Array[String]?
     end
     def get_layer_version_by_arn: (
       ?arn: String
@@ -721,11 +927,20 @@ module Aws::Lambda
       ?qualifier: String
     ) -> _GetProvisionedConcurrencyConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetProvisionedConcurrencyConfigResponse
 
+    interface _GetResourcePolicyResponse
+      include Smithy::Client::_Response[Types::GetResourcePolicyResponse]
+      def policy: () -> String?
+      def revision_id: () -> String?
+    end
+    def get_resource_policy: (
+      ?resource_arn: String
+    ) -> _GetResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResourcePolicyResponse
+
     interface _GetRuntimeManagementConfigResponse
       include Smithy::Client::_Response[Types::GetRuntimeManagementConfigResponse]
       def update_runtime_on: () -> String?
-      def runtime_version_arn: () -> String?
       def function_arn: () -> String?
+      def runtime_version_arn: () -> String?
     end
     def get_runtime_management_config: (
       ?function_name: String,
@@ -739,14 +954,17 @@ module Aws::Lambda
       def log_result: () -> String?
       def payload: () -> String?
       def executed_version: () -> String?
+      def durable_execution_arn: () -> String?
     end
     def invoke: (
       ?function_name: String,
       ?invocation_type: String,
       ?log_type: String,
       ?client_context: String,
+      ?durable_execution_name: String,
       ?payload: String,
-      ?qualifier: String
+      ?qualifier: String,
+      ?tenant_id: String
     ) -> _InvokeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _InvokeResponse
 
     interface _InvokeAsyncResponse
@@ -767,11 +985,12 @@ module Aws::Lambda
     end
     def invoke_with_response_stream: (
       ?function_name: String,
-      ?invocation_type: String,
       ?log_type: String,
       ?client_context: String,
       ?qualifier: String,
-      ?payload: String
+      ?payload: String,
+      ?tenant_id: String,
+      ?invocation_type: String
     ) -> _InvokeWithResponseStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _InvokeWithResponseStreamResponse
 
     interface _ListAliasesResponse
@@ -786,6 +1005,17 @@ module Aws::Lambda
       ?max_items: Integer
     ) -> _ListAliasesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAliasesResponse
 
+    interface _ListCapacityProvidersResponse
+      include Smithy::Client::_Response[Types::ListCapacityProvidersResponse]
+      def capacity_providers: () -> Array[Types::CapacityProvider]?
+      def next_marker: () -> String?
+    end
+    def list_capacity_providers: (
+      ?state: String,
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListCapacityProvidersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCapacityProvidersResponse
+
     interface _ListCodeSigningConfigsResponse
       include Smithy::Client::_Response[Types::ListCodeSigningConfigsResponse]
       def next_marker: () -> String?
@@ -795,6 +1025,23 @@ module Aws::Lambda
       ?marker: String,
       ?max_items: Integer
     ) -> _ListCodeSigningConfigsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCodeSigningConfigsResponse
+
+    interface _ListDurableExecutionsByFunctionResponse
+      include Smithy::Client::_Response[Types::ListDurableExecutionsByFunctionResponse]
+      def durable_executions: () -> Array[Types::Execution]?
+      def next_marker: () -> String?
+    end
+    def list_durable_executions_by_function: (
+      ?function_name: String,
+      ?qualifier: String,
+      ?durable_execution_name: String,
+      ?statuses: Array[String],
+      ?started_after: Time,
+      ?started_before: Time,
+      ?reverse_order: bool,
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListDurableExecutionsByFunctionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDurableExecutionsByFunctionResponse
 
     interface _ListEventSourceMappingsResponse
       include Smithy::Client::_Response[Types::ListEventSourceMappingsResponse]
@@ -830,6 +1077,18 @@ module Aws::Lambda
       ?max_items: Integer
     ) -> _ListFunctionUrlConfigsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFunctionUrlConfigsResponse
 
+    interface _ListFunctionVersionsByCapacityProviderResponse
+      include Smithy::Client::_Response[Types::ListFunctionVersionsByCapacityProviderResponse]
+      def capacity_provider_arn: () -> String?
+      def function_versions: () -> Array[Types::FunctionVersionsByCapacityProviderListItem]?
+      def next_marker: () -> String?
+    end
+    def list_function_versions_by_capacity_provider: (
+      ?capacity_provider_name: String,
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListFunctionVersionsByCapacityProviderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFunctionVersionsByCapacityProviderResponse
+
     interface _ListFunctionsResponse
       include Smithy::Client::_Response[Types::ListFunctionsResponse]
       def next_marker: () -> String?
@@ -859,11 +1118,11 @@ module Aws::Lambda
       def layer_versions: () -> Array[Types::LayerVersionsListItem]?
     end
     def list_layer_versions: (
+      ?compatible_architecture: String,
       ?compatible_runtime: String,
       ?layer_name: String,
       ?marker: String,
-      ?max_items: Integer,
-      ?compatible_architecture: String
+      ?max_items: Integer
     ) -> _ListLayerVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListLayerVersionsResponse
 
     interface _ListLayersResponse
@@ -872,10 +1131,10 @@ module Aws::Lambda
       def layers: () -> Array[Types::LayersListItem]?
     end
     def list_layers: (
+      ?compatible_architecture: String,
       ?compatible_runtime: String,
       ?marker: String,
-      ?max_items: Integer,
-      ?compatible_architecture: String
+      ?max_items: Integer
     ) -> _ListLayersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListLayersResponse
 
     interface _ListProvisionedConcurrencyConfigsResponse
@@ -916,9 +1175,9 @@ module Aws::Lambda
       def description: () -> String?
       def created_date: () -> String?
       def version: () -> Integer?
+      def compatible_architectures: () -> Array[String]?
       def compatible_runtimes: () -> Array[String]?
       def license_info: () -> String?
-      def compatible_architectures: () -> Array[String]?
     end
     def publish_layer_version: (
       ?layer_name: String,
@@ -927,11 +1186,12 @@ module Aws::Lambda
         s3_bucket: String,
         s3_key: String,
         s3_object_version: String,
+        s3_object_storage_mode: String,
         zip_file: String
       },
+      ?compatible_architectures: Array[String],
       ?compatible_runtimes: Array[String],
-      ?license_info: String,
-      ?compatible_architectures: Array[String]
+      ?license_info: String
     ) -> _PublishLayerVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PublishLayerVersionResponse
 
     interface _PublishVersionResponse
@@ -963,21 +1223,26 @@ module Aws::Lambda
       def last_update_status_reason: () -> String?
       def last_update_status_reason_code: () -> String?
       def file_system_configs: () -> Array[Types::FileSystemConfig]?
-      def package_type: () -> String?
-      def image_config_response: () -> Types::ImageConfigResponse?
       def signing_profile_version_arn: () -> String?
       def signing_job_arn: () -> String?
+      def package_type: () -> String?
+      def image_config_response: () -> Types::ImageConfigResponse?
       def architectures: () -> Array[String]?
       def ephemeral_storage: () -> Types::EphemeralStorage?
       def snap_start: () -> Types::SnapStartResponse?
       def runtime_version_config: () -> Types::RuntimeVersionConfig?
       def logging_config: () -> Types::LoggingConfig?
+      def tenancy_config: () -> Types::TenancyConfig?
+      def capacity_provider_config: () -> Types::CapacityProviderConfig?
+      def config_sha256: () -> String?
+      def durable_config: () -> Types::DurableConfig?
     end
     def publish_version: (
       ?function_name: String,
       ?code_sha256: String,
       ?description: String,
-      ?revision_id: String
+      ?revision_id: String,
+      ?publish_to: String
     ) -> _PublishVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PublishVersionResponse
 
     interface _PutFunctionCodeSigningConfigResponse
@@ -1031,11 +1296,24 @@ module Aws::Lambda
       ?recursive_loop: String
     ) -> _PutFunctionRecursionConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutFunctionRecursionConfigResponse
 
+    interface _PutFunctionScalingConfigResponse
+      include Smithy::Client::_Response[Types::PutFunctionScalingConfigResponse]
+      def function_state: () -> String?
+    end
+    def put_function_scaling_config: (
+      ?function_name: String,
+      ?qualifier: String,
+      ?function_scaling_config: {
+        min_execution_environments: Integer,
+        max_execution_environments: untyped
+      }
+    ) -> _PutFunctionScalingConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutFunctionScalingConfigResponse
+
     interface _PutProvisionedConcurrencyConfigResponse
       include Smithy::Client::_Response[Types::PutProvisionedConcurrencyConfigResponse]
       def requested_provisioned_concurrent_executions: () -> Integer?
-      def available_provisioned_concurrent_executions: () -> Integer?
       def allocated_provisioned_concurrent_executions: () -> Integer?
+      def available_provisioned_concurrent_executions: () -> Integer?
       def status: () -> String?
       def status_reason: () -> String?
       def last_modified: () -> String?
@@ -1045,6 +1323,17 @@ module Aws::Lambda
       ?qualifier: String,
       ?provisioned_concurrent_executions: Integer
     ) -> _PutProvisionedConcurrencyConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutProvisionedConcurrencyConfigResponse
+
+    interface _PutResourcePolicyResponse
+      include Smithy::Client::_Response[Types::PutResourcePolicyResponse]
+      def policy: () -> String?
+      def revision_id: () -> String?
+    end
+    def put_resource_policy: (
+      ?resource_arn: String,
+      ?policy: String,
+      ?revision_id: String
+    ) -> _PutResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutResourcePolicyResponse
 
     interface _PutRuntimeManagementConfigResponse
       include Smithy::Client::_Response[Types::PutRuntimeManagementConfigResponse]
@@ -1078,6 +1367,48 @@ module Aws::Lambda
       ?qualifier: String,
       ?revision_id: String
     ) -> _RemovePermissionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemovePermissionResponse
+
+    interface _SendDurableExecutionCallbackFailureResponse
+      include Smithy::Client::_Response[Types::SendDurableExecutionCallbackFailureResponse]
+    end
+    def send_durable_execution_callback_failure: (
+      ?callback_id: String,
+      ?error: {
+        error_message: String,
+        error_type: String,
+        error_data: String,
+        stack_trace: Array[String]
+      }
+    ) -> _SendDurableExecutionCallbackFailureResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SendDurableExecutionCallbackFailureResponse
+
+    interface _SendDurableExecutionCallbackHeartbeatResponse
+      include Smithy::Client::_Response[Types::SendDurableExecutionCallbackHeartbeatResponse]
+    end
+    def send_durable_execution_callback_heartbeat: (
+      ?callback_id: String
+    ) -> _SendDurableExecutionCallbackHeartbeatResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SendDurableExecutionCallbackHeartbeatResponse
+
+    interface _SendDurableExecutionCallbackSuccessResponse
+      include Smithy::Client::_Response[Types::SendDurableExecutionCallbackSuccessResponse]
+    end
+    def send_durable_execution_callback_success: (
+      ?callback_id: String,
+      ?result: String
+    ) -> _SendDurableExecutionCallbackSuccessResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SendDurableExecutionCallbackSuccessResponse
+
+    interface _StopDurableExecutionResponse
+      include Smithy::Client::_Response[Types::StopDurableExecutionResponse]
+      def stop_timestamp: () -> Time?
+    end
+    def stop_durable_execution: (
+      ?durable_execution_arn: String,
+      ?error: {
+        error_message: String,
+        error_type: String,
+        error_data: String,
+        stack_trace: Array[String]
+      }
+    ) -> _StopDurableExecutionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopDurableExecutionResponse
 
     interface _TagResourceResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
@@ -1115,6 +1446,34 @@ module Aws::Lambda
       ?revision_id: String
     ) -> _UpdateAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAliasResponse
 
+    interface _UpdateCapacityProviderResponse
+      include Smithy::Client::_Response[Types::UpdateCapacityProviderResponse]
+      def capacity_provider: () -> Types::CapacityProvider?
+    end
+    def update_capacity_provider: (
+      ?capacity_provider_name: String,
+      ?capacity_provider_scaling_config: {
+        max_v_cpu_count: Integer,
+        scaling_mode: String,
+        scaling_policies: Array[
+          {
+            predefined_metric_type: String,
+            target_value: Float
+          }
+        ]
+      },
+      ?propagate_tags: {
+        mode: String,
+        explicit_tags: Hash[String, String]
+      },
+      ?telemetry_config: {
+        logging_config: {
+          system_log_level: String,
+          log_group: String
+        }
+      }
+    ) -> _UpdateCapacityProviderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCapacityProviderResponse
+
     interface _UpdateCodeSigningConfigResponse
       include Smithy::Client::_Response[Types::UpdateCodeSigningConfigResponse]
       def code_signing_config: () -> Types::CodeSigningConfig?
@@ -1140,6 +1499,11 @@ module Aws::Lambda
       def parallelization_factor: () -> Integer?
       def event_source_arn: () -> String?
       def filter_criteria: () -> Types::FilterCriteria?
+      def filter_criteria_error: () -> Types::FilterCriteriaError?
+      def kms_key_arn: () -> String?
+      def metrics_config: () -> Types::EventSourceMappingMetricsConfig?
+      def logging_config: () -> Types::EventSourceMappingLoggingConfig?
+      def scaling_config: () -> Types::ScalingConfig?
       def function_arn: () -> String?
       def last_modified: () -> Time?
       def last_processing_result: () -> String?
@@ -1157,12 +1521,8 @@ module Aws::Lambda
       def function_response_types: () -> Array[String]?
       def amazon_managed_kafka_event_source_config: () -> Types::AmazonManagedKafkaEventSourceConfig?
       def self_managed_kafka_event_source_config: () -> Types::SelfManagedKafkaEventSourceConfig?
-      def scaling_config: () -> Types::ScalingConfig?
       def document_db_event_source_config: () -> Types::DocumentDBEventSourceConfig?
-      def kms_key_arn: () -> String?
-      def filter_criteria_error: () -> Types::FilterCriteriaError?
       def event_source_mapping_arn: () -> String?
-      def metrics_config: () -> Types::EventSourceMappingMetricsConfig?
       def provisioned_poller_config: () -> Types::ProvisionedPollerConfig?
     end
     def update_event_source_mapping: (
@@ -1177,7 +1537,18 @@ module Aws::Lambda
           }
         ]
       },
+      ?kms_key_arn: String,
+      ?metrics_config: {
+        metrics: Array[String]
+      },
+      ?logging_config: {
+        system_log_level: String
+      },
+      ?scaling_config: {
+        maximum_concurrency: Integer
+      },
       ?maximum_batching_window_in_seconds: Integer,
+      ?parallelization_factor: Integer,
       ?destination_config: {
         on_success: {
           destination: String
@@ -1189,18 +1560,14 @@ module Aws::Lambda
       ?maximum_record_age_in_seconds: Integer,
       ?bisect_batch_on_function_error: bool,
       ?maximum_retry_attempts: Integer,
-      ?parallelization_factor: Integer,
+      ?tumbling_window_in_seconds: Integer,
       ?source_access_configurations: Array[
         {
           type: String,
           uri: String
         }
       ],
-      ?tumbling_window_in_seconds: Integer,
       ?function_response_types: Array[String],
-      ?scaling_config: {
-        maximum_concurrency: Integer
-      },
       ?amazon_managed_kafka_event_source_config: {
         consumer_group_id: String,
         schema_registry_config: {
@@ -1242,13 +1609,10 @@ module Aws::Lambda
         collection_name: String,
         full_document: String
       },
-      ?kms_key_arn: String,
-      ?metrics_config: {
-        metrics: Array[String]
-      },
       ?provisioned_poller_config: {
         minimum_pollers: Integer,
-        maximum_pollers: Integer
+        maximum_pollers: Integer,
+        poller_group_name: String
       }
     ) -> _UpdateEventSourceMappingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateEventSourceMappingResponse
 
@@ -1281,15 +1645,19 @@ module Aws::Lambda
       def last_update_status_reason: () -> String?
       def last_update_status_reason_code: () -> String?
       def file_system_configs: () -> Array[Types::FileSystemConfig]?
-      def package_type: () -> String?
-      def image_config_response: () -> Types::ImageConfigResponse?
       def signing_profile_version_arn: () -> String?
       def signing_job_arn: () -> String?
+      def package_type: () -> String?
+      def image_config_response: () -> Types::ImageConfigResponse?
       def architectures: () -> Array[String]?
       def ephemeral_storage: () -> Types::EphemeralStorage?
       def snap_start: () -> Types::SnapStartResponse?
       def runtime_version_config: () -> Types::RuntimeVersionConfig?
       def logging_config: () -> Types::LoggingConfig?
+      def tenancy_config: () -> Types::TenancyConfig?
+      def capacity_provider_config: () -> Types::CapacityProviderConfig?
+      def config_sha256: () -> String?
+      def durable_config: () -> Types::DurableConfig?
     end
     def update_function_code: (
       ?function_name: String,
@@ -1297,11 +1665,13 @@ module Aws::Lambda
       ?s3_bucket: String,
       ?s3_key: String,
       ?s3_object_version: String,
+      ?s3_object_storage_mode: String,
       ?image_uri: String,
+      ?architectures: Array[String],
       ?publish: bool,
+      ?publish_to: String,
       ?dry_run: bool,
       ?revision_id: String,
-      ?architectures: Array[String],
       ?source_kms_key_arn: String
     ) -> _UpdateFunctionCodeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFunctionCodeResponse
 
@@ -1334,15 +1704,19 @@ module Aws::Lambda
       def last_update_status_reason: () -> String?
       def last_update_status_reason_code: () -> String?
       def file_system_configs: () -> Array[Types::FileSystemConfig]?
-      def package_type: () -> String?
-      def image_config_response: () -> Types::ImageConfigResponse?
       def signing_profile_version_arn: () -> String?
       def signing_job_arn: () -> String?
+      def package_type: () -> String?
+      def image_config_response: () -> Types::ImageConfigResponse?
       def architectures: () -> Array[String]?
       def ephemeral_storage: () -> Types::EphemeralStorage?
       def snap_start: () -> Types::SnapStartResponse?
       def runtime_version_config: () -> Types::RuntimeVersionConfig?
       def logging_config: () -> Types::LoggingConfig?
+      def tenancy_config: () -> Types::TenancyConfig?
+      def capacity_provider_config: () -> Types::CapacityProviderConfig?
+      def config_sha256: () -> String?
+      def durable_config: () -> Types::DurableConfig?
     end
     def update_function_configuration: (
       ?function_name: String,
@@ -1372,7 +1746,10 @@ module Aws::Lambda
       ?file_system_configs: Array[
         {
           arn: String,
-          local_mount_path: String
+          local_mount_path: String,
+          s3_files_config: {
+            direct_s3_read: String
+          }
         }
       ],
       ?image_config: {
@@ -1391,6 +1768,18 @@ module Aws::Lambda
         application_log_level: String,
         system_log_level: String,
         log_group: String
+      },
+      ?capacity_provider_config: {
+        lambda_managed_instances_capacity_provider_config: {
+          capacity_provider_arn: String,
+          per_execution_environment_max_concurrency: Integer,
+          execution_environment_memory_gi_b_per_v_cpu: Float
+        }
+      },
+      ?durable_config: {
+        kms_key_arn: String,
+        retention_period_in_days: Integer,
+        execution_timeout: Integer
       }
     ) -> _UpdateFunctionConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFunctionConfigurationResponse
 

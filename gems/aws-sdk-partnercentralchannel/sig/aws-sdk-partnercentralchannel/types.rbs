@@ -1,0 +1,1313 @@
+module Aws::PartnerCentralChannel
+  module Types
+
+    class AcceptChannelHandshakeDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor status: String?
+    end
+
+    class AcceptChannelHandshakeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor identifier: String?
+    end
+
+    class AcceptChannelHandshakeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_handshake_detail: Types::AcceptChannelHandshakeDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_handshake_detail: Types::AcceptChannelHandshakeDetail?
+    end
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+    end
+
+    module AssociationType
+      DOWNSTREAM_SELLER: String
+      END_CUSTOMER: String
+      INTERNAL: String
+    end
+
+    class CancelChannelHandshakeDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor status: String?
+    end
+
+    class CancelChannelHandshakeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor identifier: String?
+    end
+
+    class CancelChannelHandshakeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_handshake_detail: Types::CancelChannelHandshakeDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_handshake_detail: Types::CancelChannelHandshakeDetail?
+    end
+
+    class ChannelHandshakePayload
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?start_service_period_payload: Types::StartServicePeriodPayload,
+        ?revoke_service_period_payload: Types::RevokeServicePeriodPayload,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_service_period_payload: Types::StartServicePeriodPayload?
+      attr_accessor revoke_service_period_payload: Types::RevokeServicePeriodPayload?
+
+      class StartServicePeriodPayload < ChannelHandshakePayload
+      end
+      class RevokeServicePeriodPayload < ChannelHandshakePayload
+      end
+      class Unknown < ChannelHandshakePayload
+      end
+    end
+
+    class ChannelHandshakeSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?catalog: String,
+        ?handshake_type: String,
+        ?owner_account_id: String,
+        ?sender_account_id: String,
+        ?sender_display_name: String,
+        ?receiver_account_id: String,
+        ?associated_resource_id: String,
+        ?detail: Types::HandshakeDetail,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor catalog: String?
+      attr_accessor handshake_type: String?
+      attr_accessor owner_account_id: String?
+      attr_accessor sender_account_id: String?
+      attr_accessor sender_display_name: String?
+      attr_accessor receiver_account_id: String?
+      attr_accessor associated_resource_id: String?
+      attr_accessor detail: Types::HandshakeDetail?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor status: String?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    module Coverage
+      ENTIRE_ORGANIZATION: String
+      MANAGEMENT_ACCOUNT_ONLY: String
+    end
+
+    class CreateChannelHandshakeDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+    end
+
+    class CreateChannelHandshakeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?handshake_type: String,
+        ?catalog: String,
+        ?associated_resource_identifier: String,
+        ?payload: Types::ChannelHandshakePayload,
+        ?client_token: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor handshake_type: String?
+      attr_accessor catalog: String?
+      attr_accessor associated_resource_identifier: String?
+      attr_accessor payload: Types::ChannelHandshakePayload?
+      attr_accessor client_token: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateChannelHandshakeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_handshake_detail: Types::CreateChannelHandshakeDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_handshake_detail: Types::CreateChannelHandshakeDetail?
+    end
+
+    class CreateProgramManagementAccountDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+    end
+
+    class CreateProgramManagementAccountRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?program: String,
+        ?display_name: String,
+        ?account_id: String,
+        ?client_token: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor program: String?
+      attr_accessor display_name: String?
+      attr_accessor account_id: String?
+      attr_accessor client_token: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateProgramManagementAccountResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?program_management_account_detail: Types::CreateProgramManagementAccountDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor program_management_account_detail: Types::CreateProgramManagementAccountDetail?
+    end
+
+    class CreateRelationshipDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+    end
+
+    class CreateRelationshipRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?association_type: String,
+        ?program_management_account_identifier: String,
+        ?associated_account_id: String,
+        ?display_name: String,
+        ?resale_account_model: String,
+        ?sector: String,
+        ?client_token: String,
+        ?tags: Array[Types::Tag],
+        ?requested_support_plan: Types::SupportPlan,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor association_type: String?
+      attr_accessor program_management_account_identifier: String?
+      attr_accessor associated_account_id: String?
+      attr_accessor display_name: String?
+      attr_accessor resale_account_model: String?
+      attr_accessor sector: String?
+      attr_accessor client_token: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor requested_support_plan: Types::SupportPlan?
+    end
+
+    class CreateRelationshipResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?relationship_detail: Types::CreateRelationshipDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor relationship_detail: Types::CreateRelationshipDetail?
+    end
+
+    class DeleteProgramManagementAccountRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?identifier: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor identifier: String?
+      attr_accessor client_token: String?
+    end
+
+    class DeleteProgramManagementAccountResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteRelationshipRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?identifier: String,
+        ?program_management_account_identifier: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor identifier: String?
+      attr_accessor program_management_account_identifier: String?
+      attr_accessor client_token: String?
+    end
+
+    class DeleteRelationshipResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetRelationshipRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?program_management_account_identifier: String,
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor program_management_account_identifier: String?
+      attr_accessor identifier: String?
+    end
+
+    class GetRelationshipResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?relationship_detail: Types::RelationshipDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor relationship_detail: Types::RelationshipDetail?
+    end
+
+    class HandshakeDetail
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?start_service_period_handshake_detail: Types::StartServicePeriodHandshakeDetail,
+        ?revoke_service_period_handshake_detail: Types::RevokeServicePeriodHandshakeDetail,
+        ?program_management_account_handshake_detail: Types::ProgramManagementAccountHandshakeDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_service_period_handshake_detail: Types::StartServicePeriodHandshakeDetail?
+      attr_accessor revoke_service_period_handshake_detail: Types::RevokeServicePeriodHandshakeDetail?
+      attr_accessor program_management_account_handshake_detail: Types::ProgramManagementAccountHandshakeDetail?
+
+      class StartServicePeriodHandshakeDetail < HandshakeDetail
+      end
+      class RevokeServicePeriodHandshakeDetail < HandshakeDetail
+      end
+      class ProgramManagementAccountHandshakeDetail < HandshakeDetail
+      end
+      class Unknown < HandshakeDetail
+      end
+    end
+
+    module HandshakeStatus
+      PENDING: String
+      ACCEPTED: String
+      REJECTED: String
+      CANCELED: String
+      EXPIRED: String
+    end
+
+    module HandshakeType
+      START_SERVICE_PERIOD: String
+      REVOKE_SERVICE_PERIOD: String
+      PROGRAM_MANAGEMENT_ACCOUNT: String
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListChannelHandshakesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?handshake_type: String,
+        ?catalog: String,
+        ?participant_type: String,
+        ?max_results: Integer,
+        ?statuses: Array[String],
+        ?associated_resource_identifiers: Array[String],
+        ?handshake_type_filters: Types::ListChannelHandshakesTypeFilters,
+        ?handshake_type_sort: Types::ListChannelHandshakesTypeSort,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor handshake_type: String?
+      attr_accessor catalog: String?
+      attr_accessor participant_type: String?
+      attr_accessor max_results: Integer?
+      attr_accessor statuses: Array[String]?
+      attr_accessor associated_resource_identifiers: Array[String]?
+      attr_accessor handshake_type_filters: Types::ListChannelHandshakesTypeFilters?
+      attr_accessor handshake_type_sort: Types::ListChannelHandshakesTypeSort?
+      attr_accessor next_token: String?
+    end
+
+    class ListChannelHandshakesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::ChannelHandshakeSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::ChannelHandshakeSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListChannelHandshakesTypeFilters
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?start_service_period_type_filters: Types::StartServicePeriodTypeFilters,
+        ?revoke_service_period_type_filters: Types::RevokeServicePeriodTypeFilters,
+        ?program_management_account_type_filters: Types::ProgramManagementAccountTypeFilters,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_service_period_type_filters: Types::StartServicePeriodTypeFilters?
+      attr_accessor revoke_service_period_type_filters: Types::RevokeServicePeriodTypeFilters?
+      attr_accessor program_management_account_type_filters: Types::ProgramManagementAccountTypeFilters?
+
+      class StartServicePeriodTypeFilters < ListChannelHandshakesTypeFilters
+      end
+      class RevokeServicePeriodTypeFilters < ListChannelHandshakesTypeFilters
+      end
+      class ProgramManagementAccountTypeFilters < ListChannelHandshakesTypeFilters
+      end
+      class Unknown < ListChannelHandshakesTypeFilters
+      end
+    end
+
+    class ListChannelHandshakesTypeSort
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?start_service_period_type_sort: Types::StartServicePeriodTypeSort,
+        ?revoke_service_period_type_sort: Types::RevokeServicePeriodTypeSort,
+        ?program_management_account_type_sort: Types::ProgramManagementAccountTypeSort,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_service_period_type_sort: Types::StartServicePeriodTypeSort?
+      attr_accessor revoke_service_period_type_sort: Types::RevokeServicePeriodTypeSort?
+      attr_accessor program_management_account_type_sort: Types::ProgramManagementAccountTypeSort?
+
+      class StartServicePeriodTypeSort < ListChannelHandshakesTypeSort
+      end
+      class RevokeServicePeriodTypeSort < ListChannelHandshakesTypeSort
+      end
+      class ProgramManagementAccountTypeSort < ListChannelHandshakesTypeSort
+      end
+      class Unknown < ListChannelHandshakesTypeSort
+      end
+    end
+
+    class ListProgramManagementAccountsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?max_results: Integer,
+        ?display_names: Array[String],
+        ?programs: Array[String],
+        ?account_ids: Array[String],
+        ?statuses: Array[String],
+        ?sort: Types::ListProgramManagementAccountsSortBase,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor max_results: Integer?
+      attr_accessor display_names: Array[String]?
+      attr_accessor programs: Array[String]?
+      attr_accessor account_ids: Array[String]?
+      attr_accessor statuses: Array[String]?
+      attr_accessor sort: Types::ListProgramManagementAccountsSortBase?
+      attr_accessor next_token: String?
+    end
+
+    class ListProgramManagementAccountsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::ProgramManagementAccountSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::ProgramManagementAccountSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListProgramManagementAccountsSortBase
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sort_order: String,
+        ?sort_by: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sort_order: String?
+      attr_accessor sort_by: String?
+    end
+
+    module ListProgramManagementAccountsSortName
+      UPDATED_AT: String
+    end
+
+    class ListRelationshipsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?max_results: Integer,
+        ?associated_account_ids: Array[String],
+        ?association_types: Array[String],
+        ?display_names: Array[String],
+        ?program_management_account_identifiers: Array[String],
+        ?sort: Types::ListRelationshipsSortBase,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor max_results: Integer?
+      attr_accessor associated_account_ids: Array[String]?
+      attr_accessor association_types: Array[String]?
+      attr_accessor display_names: Array[String]?
+      attr_accessor program_management_account_identifiers: Array[String]?
+      attr_accessor sort: Types::ListRelationshipsSortBase?
+      attr_accessor next_token: String?
+    end
+
+    class ListRelationshipsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::RelationshipSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::RelationshipSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListRelationshipsSortBase
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sort_order: String,
+        ?sort_by: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sort_order: String?
+      attr_accessor sort_by: String?
+    end
+
+    module ListRelationshipsSortName
+      UPDATED_AT: String
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    module ParticipantType
+      SENDER: String
+      RECEIVER: String
+    end
+
+    class PartnerLedSupport
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?coverage: String,
+        ?provider: String,
+        ?tam_location: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor coverage: String?
+      attr_accessor provider: String?
+      attr_accessor tam_location: String?
+    end
+
+    module Program
+      SOLUTION_PROVIDER: String
+      DISTRIBUTION: String
+      DISTRIBUTION_SELLER: String
+    end
+
+    class ProgramManagementAccountHandshakeDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?program: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor program: String?
+    end
+
+    module ProgramManagementAccountStatus
+      PENDING: String
+      ACTIVE: String
+      INACTIVE: String
+    end
+
+    class ProgramManagementAccountSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?revision: String,
+        ?catalog: String,
+        ?program: String,
+        ?display_name: String,
+        ?account_id: String,
+        ?arn: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?start_date: Time,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor revision: String?
+      attr_accessor catalog: String?
+      attr_accessor program: String?
+      attr_accessor display_name: String?
+      attr_accessor account_id: String?
+      attr_accessor arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor start_date: Time?
+      attr_accessor status: String?
+    end
+
+    class ProgramManagementAccountTypeFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?programs: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor programs: Array[String]?
+    end
+
+    class ProgramManagementAccountTypeSort
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sort_order: String,
+        ?sort_by: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sort_order: String?
+      attr_accessor sort_by: String?
+    end
+
+    module ProgramManagementAccountTypeSortName
+      UPDATED_AT: String
+    end
+
+    module Provider
+      DISTRIBUTOR: String
+      DISTRIBUTION_SELLER: String
+    end
+
+    class RejectChannelHandshakeDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor status: String?
+    end
+
+    class RejectChannelHandshakeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor identifier: String?
+    end
+
+    class RejectChannelHandshakeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_handshake_detail: Types::RejectChannelHandshakeDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_handshake_detail: Types::RejectChannelHandshakeDetail?
+    end
+
+    class RelationshipDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+        ?revision: String,
+        ?catalog: String,
+        ?association_type: String,
+        ?program_management_account_id: String,
+        ?associated_account_id: String,
+        ?display_name: String,
+        ?resale_account_model: String,
+        ?sector: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?start_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor revision: String?
+      attr_accessor catalog: String?
+      attr_accessor association_type: String?
+      attr_accessor program_management_account_id: String?
+      attr_accessor associated_account_id: String?
+      attr_accessor display_name: String?
+      attr_accessor resale_account_model: String?
+      attr_accessor sector: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor start_date: Time?
+    end
+
+    class RelationshipSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+        ?revision: String,
+        ?catalog: String,
+        ?association_type: String,
+        ?program_management_account_id: String,
+        ?associated_account_id: String,
+        ?display_name: String,
+        ?sector: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?start_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor revision: String?
+      attr_accessor catalog: String?
+      attr_accessor association_type: String?
+      attr_accessor program_management_account_id: String?
+      attr_accessor associated_account_id: String?
+      attr_accessor display_name: String?
+      attr_accessor sector: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor start_date: Time?
+    end
+
+    module ResaleAccountModel
+      DISTRIBUTOR: String
+      END_CUSTOMER: String
+      SOLUTION_PROVIDER: String
+    end
+
+    class ResoldEnterprise
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?coverage: String,
+        ?tam_location: String,
+        ?charge_account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor coverage: String?
+      attr_accessor tam_location: String?
+      attr_accessor charge_account_id: String?
+    end
+
+    class ResoldUnifiedOperations
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?coverage: String,
+        ?tam_location: String,
+        ?charge_account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor coverage: String?
+      attr_accessor tam_location: String?
+      attr_accessor charge_account_id: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class RevokeServicePeriodHandshakeDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?note: String,
+        ?service_period_type: String,
+        ?minimum_notice_days: String,
+        ?start_date: Time,
+        ?end_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor note: String?
+      attr_accessor service_period_type: String?
+      attr_accessor minimum_notice_days: String?
+      attr_accessor start_date: Time?
+      attr_accessor end_date: Time?
+    end
+
+    class RevokeServicePeriodPayload
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?program_management_account_identifier: String,
+        ?note: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor program_management_account_identifier: String?
+      attr_accessor note: String?
+    end
+
+    class RevokeServicePeriodTypeFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_period_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_period_types: Array[String]?
+    end
+
+    class RevokeServicePeriodTypeSort
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sort_order: String,
+        ?sort_by: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sort_order: String?
+      attr_accessor sort_by: String?
+    end
+
+    module RevokeServicePeriodTypeSortName
+      UPDATED_AT: String
+    end
+
+    module Sector
+      COMMERCIAL: String
+      GOVERNMENT: String
+      GOVERNMENT_EXCEPTION: String
+    end
+
+    module ServicePeriodType
+      MINIMUM_NOTICE_PERIOD: String
+      FIXED_COMMITMENT_PERIOD: String
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+        ?quota_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor quota_code: String?
+    end
+
+    module SortOrder
+      ASCENDING: String
+      DESCENDING: String
+    end
+
+    class StartServicePeriodHandshakeDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?note: String,
+        ?service_period_type: String,
+        ?minimum_notice_days: String,
+        ?start_date: Time,
+        ?end_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor note: String?
+      attr_accessor service_period_type: String?
+      attr_accessor minimum_notice_days: String?
+      attr_accessor start_date: Time?
+      attr_accessor end_date: Time?
+    end
+
+    class StartServicePeriodPayload
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?program_management_account_identifier: String,
+        ?note: String,
+        ?service_period_type: String,
+        ?minimum_notice_days: String,
+        ?end_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor program_management_account_identifier: String?
+      attr_accessor note: String?
+      attr_accessor service_period_type: String?
+      attr_accessor minimum_notice_days: String?
+      attr_accessor end_date: Time?
+    end
+
+    class StartServicePeriodTypeFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_period_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_period_types: Array[String]?
+    end
+
+    class StartServicePeriodTypeSort
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sort_order: String,
+        ?sort_by: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sort_order: String?
+      attr_accessor sort_by: String?
+    end
+
+    module StartServicePeriodTypeSortName
+      UPDATED_AT: String
+    end
+
+    class SupportPlan
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?resold_enterprise: Types::ResoldEnterprise,
+        ?partner_led_support: Types::PartnerLedSupport,
+        ?resold_unified_operations: Types::ResoldUnifiedOperations,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resold_enterprise: Types::ResoldEnterprise?
+      attr_accessor partner_led_support: Types::PartnerLedSupport?
+      attr_accessor resold_unified_operations: Types::ResoldUnifiedOperations?
+
+      class ResoldEnterprise < SupportPlan
+      end
+      class PartnerLedSupport < SupportPlan
+      end
+      class ResoldUnifiedOperations < SupportPlan
+      end
+      class Unknown < SupportPlan
+      end
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?service_code: String,
+        ?quota_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateProgramManagementAccountDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?revision: String,
+        ?display_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor revision: String?
+      attr_accessor display_name: String?
+    end
+
+    class UpdateProgramManagementAccountRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?identifier: String,
+        ?revision: String,
+        ?display_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor identifier: String?
+      attr_accessor revision: String?
+      attr_accessor display_name: String?
+    end
+
+    class UpdateProgramManagementAccountResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?program_management_account_detail: Types::UpdateProgramManagementAccountDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor program_management_account_detail: Types::UpdateProgramManagementAccountDetail?
+    end
+
+    class UpdateRelationshipDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+        ?revision: String,
+        ?display_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor revision: String?
+      attr_accessor display_name: String?
+    end
+
+    class UpdateRelationshipRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?identifier: String,
+        ?program_management_account_identifier: String,
+        ?revision: String,
+        ?display_name: String,
+        ?requested_support_plan: Types::SupportPlan,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor identifier: String?
+      attr_accessor program_management_account_identifier: String?
+      attr_accessor revision: String?
+      attr_accessor display_name: String?
+      attr_accessor requested_support_plan: Types::SupportPlan?
+    end
+
+    class UpdateRelationshipResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?relationship_detail: Types::UpdateRelationshipDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor relationship_detail: Types::UpdateRelationshipDetail?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+        ?field_list: Array[Types::ValidationExceptionField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+      attr_accessor field_list: Array[Types::ValidationExceptionField]?
+    end
+
+    class ValidationExceptionField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    module ValidationExceptionReason
+      REQUEST_VALIDATION_FAILED: String
+      BUSINESS_VALIDATION_FAILED: String
+    end
+  end
+end

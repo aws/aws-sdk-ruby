@@ -144,18 +144,18 @@ module Aws::LexModelsV2
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -209,17 +209,17 @@ module Aws::LexModelsV2
       super
     end
 
-    # <p>Create a batch of custom vocabulary items for a given bot locale's 
+    # <p>Create a batch of custom vocabulary items for a given bot locale's
     #          custom vocabulary.</p>
     # @param [Hash, Types::BatchCreateCustomVocabularyItemRequest] params
     # @option params [String] :bot_id
     #   <p>The identifier of the bot associated with this custom vocabulary.</p>
     # @option params [String] :bot_version
-    #   <p>The identifier of the version of the bot associated with this 
+    #   <p>The identifier of the version of the bot associated with this
     #            custom vocabulary.</p>
     # @option params [String] :locale_id
-    #   <p>The identifier of the language and locale where this custom vocabulary 
-    #            is used. The string must match one of the supported locales. For more 
+    #   <p>The identifier of the language and locale where this custom vocabulary
+    #            is used. The string must match one of the supported locales. For more
     #            information, see <a href="https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html"> Supported Languages </a>.</p>
     # @option params [Array<Types::NewCustomVocabularyItem>] :custom_vocabulary_item_list
     #   <p>A list of new custom vocabulary items. Each entry must contain a phrase and
@@ -267,17 +267,17 @@ module Aws::LexModelsV2
       request.send_request(options)
     end
 
-    # <p>Delete a batch of custom vocabulary items for a given bot locale's 
+    # <p>Delete a batch of custom vocabulary items for a given bot locale's
     #          custom vocabulary.</p>
     # @param [Hash, Types::BatchDeleteCustomVocabularyItemRequest] params
     # @option params [String] :bot_id
     #   <p>The identifier of the bot associated with this custom vocabulary.</p>
     # @option params [String] :bot_version
-    #   <p>The identifier of the version of the bot associated with this custom 
+    #   <p>The identifier of the version of the bot associated with this custom
     #            vocabulary.</p>
     # @option params [String] :locale_id
-    #   <p>The identifier of the language and locale where this custom vocabulary is 
-    #            used. The string must match one of the supported locales. 
+    #   <p>The identifier of the language and locale where this custom vocabulary is
+    #            used. The string must match one of the supported locales.
     #            For more information, see <a href="https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html"> Supported Languages </a>.</p>
     # @option params [Array<Types::CustomVocabularyEntryId>] :custom_vocabulary_item_list
     #   <p>A list of custom vocabulary items requested to be deleted.
@@ -323,17 +323,17 @@ module Aws::LexModelsV2
       request.send_request(options)
     end
 
-    # <p>Update a batch of custom vocabulary items for a given bot locale's custom 
+    # <p>Update a batch of custom vocabulary items for a given bot locale's custom
     #          vocabulary.</p>
     # @param [Hash, Types::BatchUpdateCustomVocabularyItemRequest] params
     # @option params [String] :bot_id
     #   <p>The identifier of the bot associated with this custom vocabulary</p>
     # @option params [String] :bot_version
-    #   <p>The identifier of the version of the bot associated with this custom 
+    #   <p>The identifier of the version of the bot associated with this custom
     #            vocabulary.</p>
     # @option params [String] :locale_id
-    #   <p>The identifier of the language and locale where this custom vocabulary 
-    #            is used. The string must match one of the supported locales. For more 
+    #   <p>The identifier of the language and locale where this custom vocabulary
+    #            is used. The string must match one of the supported locales. For more
     #            information, see <a href="https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html"> Supported Languages </a>.</p>
     # @option params [Array<Types::CustomVocabularyItem>] :custom_vocabulary_item_list
     #   <p>A list of custom vocabulary items with updated fields. Each entry must contain a phrase
@@ -382,7 +382,7 @@ module Aws::LexModelsV2
       request.send_request(options)
     end
 
-    # <p>Builds a bot, its intents, and its slot types into a specific 
+    # <p>Builds a bot, its intents, and its slot types into a specific
     #          locale. A bot can be built into multiple locales. At runtime the locale
     #          is used to choose a specific build of the bot.</p>
     # @param [Hash, Types::BuildBotLocaleRequest] params
@@ -723,8 +723,24 @@ module Aws::LexModelsV2
     # @option params [Types::VoiceSettings] :voice_settings
     #   <p>The Amazon Polly voice ID that Amazon Lex uses for voice interaction with the
     #            user.</p>
+    # @option params [Types::UnifiedSpeechSettings] :unified_speech_settings
+    #   <p>Unified speech settings to configure for the new bot locale.</p>
+    # @option params [Types::AudioFillerSettings] :audio_filler_settings
+    #   <p>Audio filler settings to configure for the new bot locale. When
+    #            enabled, Amazon Lex plays a brief background audio filler during
+    #            speech-to-speech interactions to mask processing delays. Requires
+    #            <code>unifiedSpeechSettings</code> (speech-to-speech) to be configured
+    #            on the bot locale.</p>
+    # @option params [Types::SpeechRecognitionSettings] :speech_recognition_settings
+    #   <p>Speech-to-text settings to configure for the new bot locale.</p>
     # @option params [Types::GenerativeAISettings] :generative_ai_settings
     #   <p>Contains specifications about the generative AI capabilities from Amazon Bedrock that you can turn on for your bot.</p>
+    # @option params [String] :speech_detection_sensitivity
+    #   <p>The sensitivity level for voice activity detection (VAD) in the bot locale. This setting helps optimize speech recognition accuracy by adjusting how the system responds to background noise during voice interactions.</p>
+    # @option params [Types::SpeakerDiarizationSettings] :speaker_diarization_settings
+    #   <p>The speaker diarization settings to configure for the new bot
+    #            locale. When enabled, Amazon Lex restricts speech detection to the primary
+    #            (loudest) speaker during streaming audio conversations.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     bot_id: "Id", # required
@@ -733,8 +749,30 @@ module Aws::LexModelsV2
     #     description: "Description",
     #     nlu_intent_confidence_threshold: 1.0, # required
     #     voice_settings: {
+    #       engine: "standard" # One of: ["standard", "neural", "long-form", "generative"],
     #       voice_id: "VoiceId", # required
-    #       engine: "standard" # One of: ["standard", "neural", "long-form", "generative"]
+    #     },
+    #     unified_speech_settings: {
+    #       speech_foundation_model: { # required
+    #         model_arn: "BedrockModelArn", # required
+    #         voice_id: "VoiceId"
+    #       }
+    #     },
+    #     audio_filler_settings: {
+    #       enabled: false,
+    #       audio_type: "MELODY_CHIPPER_CHIME" # One of: ["MELODY_CHIPPER_CHIME", "MELODY_CURIOUS_CRAWL", "MELODY_RISING_RIPPLE", "MELODY_PATIENT_PING", "MELODY_PONDERING_PONG", "TYPING_KINETIC_KEYS", "TYPING_QUIET_QWERTY"],
+    #       start_delay_in_milliseconds: 1,
+    #       minimum_play_duration_in_milliseconds: 1,
+    #       response_delivery_delay_in_milliseconds: 1
+    #     },
+    #     speech_recognition_settings: {
+    #       speech_model_preference: "Standard" # One of: ["Standard", "Neural", "Deepgram", "Advanced"],
+    #       speech_model_config: {
+    #         deepgram_config: {
+    #           api_token_secret_arn: "SecretsManagerSecretArn", # required
+    #           model_id: "DeepgramModelId"
+    #         }
+    #       }
     #     },
     #     generative_ai_settings: {
     #       runtime_settings: {
@@ -752,6 +790,12 @@ module Aws::LexModelsV2
     #         },
     #         nlu_improvement: {
     #           enabled: false, # required
+    #           assisted_nlu_mode: "Primary" # One of: ["Primary", "Fallback"],
+    #           intent_disambiguation_settings: {
+    #             enabled: false, # required
+    #             max_disambiguation_intents: 1,
+    #             custom_disambiguation_message: "CustomDisambiguationMessage"
+    #           }
     #         }
     #       },
     #       buildtime_settings: {
@@ -780,6 +824,10 @@ module Aws::LexModelsV2
     #           }
     #         }
     #       }
+    #     },
+    #     speech_detection_sensitivity: "Default" # One of: ["Default", "HighNoiseTolerance", "MaximumNoiseTolerance"],
+    #     speaker_diarization_settings: {
+    #       enabled: false, # required
     #     }
     #   }
     #   options = {}
@@ -794,8 +842,30 @@ module Aws::LexModelsV2
     #     description: "Description",
     #     nlu_intent_confidence_threshold: 1.0,
     #     voice_settings: {
+    #       engine: "standard" # One of: ["standard", "neural", "long-form", "generative"],
     #       voice_id: "VoiceId", # required
-    #       engine: "standard" # One of: ["standard", "neural", "long-form", "generative"]
+    #     },
+    #     unified_speech_settings: {
+    #       speech_foundation_model: { # required
+    #         model_arn: "BedrockModelArn", # required
+    #         voice_id: "VoiceId"
+    #       }
+    #     },
+    #     audio_filler_settings: {
+    #       enabled: false,
+    #       audio_type: "MELODY_CHIPPER_CHIME" # One of: ["MELODY_CHIPPER_CHIME", "MELODY_CURIOUS_CRAWL", "MELODY_RISING_RIPPLE", "MELODY_PATIENT_PING", "MELODY_PONDERING_PONG", "TYPING_KINETIC_KEYS", "TYPING_QUIET_QWERTY"],
+    #       start_delay_in_milliseconds: 1,
+    #       minimum_play_duration_in_milliseconds: 1,
+    #       response_delivery_delay_in_milliseconds: 1
+    #     },
+    #     speech_recognition_settings: {
+    #       speech_model_preference: "Standard" # One of: ["Standard", "Neural", "Deepgram", "Advanced"],
+    #       speech_model_config: {
+    #         deepgram_config: {
+    #           api_token_secret_arn: "SecretsManagerSecretArn", # required
+    #           model_id: "DeepgramModelId"
+    #         }
+    #       }
     #     },
     #     bot_locale_status: "Creating" # One of: ["Creating", "Building", "Built", "ReadyExpressTesting", "Failed", "Deleting", "NotBuilt", "Importing", "Processing"],
     #     creation_date_time: Time.now,
@@ -815,6 +885,12 @@ module Aws::LexModelsV2
     #         },
     #         nlu_improvement: {
     #           enabled: false, # required
+    #           assisted_nlu_mode: "Primary" # One of: ["Primary", "Fallback"],
+    #           intent_disambiguation_settings: {
+    #             enabled: false, # required
+    #             max_disambiguation_intents: 1,
+    #             custom_disambiguation_message: "CustomDisambiguationMessage"
+    #           }
     #         }
     #       },
     #       buildtime_settings: {
@@ -843,6 +919,10 @@ module Aws::LexModelsV2
     #           }
     #         }
     #       }
+    #     },
+    #     speech_detection_sensitivity: "Default" # One of: ["Default", "HighNoiseTolerance", "MaximumNoiseTolerance"],
+    #     speaker_diarization_settings: {
+    #       enabled: false, # required
     #     }
     #   }
     # @return [Types::CreateBotLocaleResponse]
@@ -879,9 +959,9 @@ module Aws::LexModelsV2
       request.send_request(options)
     end
 
-    # <p>Creates an immutable version of the bot. When you create the first 
-    #          version of a bot, Amazon Lex sets the version number to 1. Subsequent bot versions increase 
-    #          in an increment of 1. The version number will always represent the total number 
+    # <p>Creates an immutable version of the bot. When you create the first
+    #          version of a bot, Amazon Lex sets the version number to 1. Subsequent bot versions increase
+    #          in an increment of 1. The version number will always represent the total number
     #          of versions created of the bot, not the current number of versions. If a bot version
     #          is deleted, that bot version number will not be reused.</p>
     # @param [Hash, Types::CreateBotVersionRequest] params
@@ -1049,6 +1129,11 @@ module Aws::LexModelsV2
     #   <p>The name of the intent. Intent names must be unique in the locale
     #            that contains the intent and cannot match the name of any built-in
     #            intent.</p>
+    # @option params [String] :intent_display_name
+    #   <p>A display name for the intent. If configured, This name will be shown to
+    #             users during Intent Disambiguation instead of the intent name. Display names
+    #             should be user-friendly, descriptive and match the intent's purpose to improve user experience
+    #             during disambiguation.</p>
     # @option params [String] :description
     #   <p>A description of the intent. Use the description to help identify
     #            the intent in lists.</p>
@@ -1137,6 +1222,7 @@ module Aws::LexModelsV2
     # @example Request syntax with placeholder values
     #   params = {
     #     intent_name: "Name", # required
+    #     intent_display_name: "DisplayName",
     #     description: "Description",
     #     parent_intent_signature: "IntentSignature",
     #     sample_utterances: [
@@ -4940,6 +5026,7 @@ module Aws::LexModelsV2
     #   {
     #     intent_id: "Id",
     #     intent_name: "Name",
+    #     intent_display_name: "DisplayName",
     #     description: "Description",
     #     parent_intent_signature: "IntentSignature",
     #     sample_utterances: [
@@ -8781,7 +8868,7 @@ module Aws::LexModelsV2
     #          policy. If a policy doesn't exist, a new policy is created.</p>
     #          <p>You can't create a resource policy statement that allows
     #          cross-account access.</p>
-    #          <p>You need to add the <code>CreateResourcePolicy</code> or <code>UpdateResourcePolicy</code> 
+    #          <p>You need to add the <code>CreateResourcePolicy</code> or <code>UpdateResourcePolicy</code>
     #          action to the bot role in order to call the API.</p>
     # @param [Hash, Types::CreateResourcePolicyStatementRequest] params
     # @option params [String] :resource_arn
@@ -8796,7 +8883,7 @@ module Aws::LexModelsV2
     #   <p>Determines whether the statement allows or denies access to the
     #            resource.</p>
     # @option params [Array<Types::Principal>] :principal
-    #   <p>An IAM principal, such as an IAM user, IAM role, 
+    #   <p>An IAM principal, such as an IAM user, IAM role,
     #            or Amazon Web Services services
     #            that is allowed or denied access to a resource. For more information,
     #            see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html">Amazon Web Services JSON policy elements: Principal</a>.</p>
@@ -8889,13 +8976,13 @@ module Aws::LexModelsV2
     #   <p>The identifier of the intent that contains the slot.</p>
     # @option params [Types::MultipleValuesSetting] :multiple_values_setting
     #   <p>Indicates whether the slot returns multiple values in one response.
-    #            Multi-value slots are only available in the <code>en-US</code> locale. 
+    #            Multi-value slots are only available in the <code>en-US</code> locale.
     #            If you set this value to <code>true</code> in any other locale, Amazon Lex throws a
     #               <code>ValidationException</code>. </p>
     #            <p>If the <code>multipleValuesSetting</code> is not set, the default
     #            value is <code>false</code>.</p>
     # @option params [Types::SubSlotSetting] :sub_slot_setting
-    #   <p>Specifications for the constituent sub slots and the  
+    #   <p>Specifications for the constituent sub slots and the
     #           expression for the composite slot.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -12754,11 +12841,11 @@ module Aws::LexModelsV2
     # @option params [String] :bot_id
     #   <p>The identifier of the bot to delete. </p>
     # @option params [Boolean] :skip_resource_in_use_check
-    #   <p>By default, Amazon Lex checks if any other resource, such as an alias or 
-    #            bot network, is using the bot version before it is deleted and throws a 
-    #            <code>ResourceInUseException</code> exception if the bot is 
+    #   <p>By default, Amazon Lex checks if any other resource, such as an alias or
+    #            bot network, is using the bot version before it is deleted and throws a
+    #            <code>ResourceInUseException</code> exception if the bot is
     #            being used by another resource. Set this parameter to <code>true</code>
-    #            to skip this check and remove the bot even if it is being used by 
+    #            to skip this check and remove the bot even if it is being used by
     #            another resource.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -12787,11 +12874,11 @@ module Aws::LexModelsV2
     #   <p>The unique identifier of the bot associated with the alias to
     #            delete.</p>
     # @option params [Boolean] :skip_resource_in_use_check
-    #   <p>By default, Amazon Lex checks if any other resource, such as a bot network, 
-    #            is using the bot alias before it is deleted and throws a 
-    #            <code>ResourceInUseException</code> exception if the alias is 
+    #   <p>By default, Amazon Lex checks if any other resource, such as a bot network,
+    #            is using the bot alias before it is deleted and throws a
+    #            <code>ResourceInUseException</code> exception if the alias is
     #            being used by another resource. Set this parameter to <code>true</code>
-    #            to skip this check and remove the alias even if it is being used by 
+    #            to skip this check and remove the alias even if it is being used by
     #            another resource.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -12811,6 +12898,29 @@ module Aws::LexModelsV2
     # @return [Types::DeleteBotAliasResponse]
     def delete_bot_alias(params = {}, options = {})
       request = build_request(:delete_bot_alias, params)
+      request.send_request(options)
+    end
+
+    # <p>Permanently deletes the recommendations and analysis results for a specific bot analysis request. This operation is provided for GDPR compliance and cannot be undone.</p>
+    #          <p>After deletion, the analysis results cannot be retrieved. The analysis request ID will still appear in the history list, but attempting to describe the recommendations will return a <code>ResourceNotFoundException</code>.</p>
+    # @param [Hash, Types::DeleteBotAnalyzerRecommendationRequest] params
+    # @option params [String] :bot_id
+    #   <p>The unique identifier of the bot.</p>
+    # @option params [String] :bot_analyzer_request_id
+    #   <p>The unique identifier of the analysis request whose recommendations should be deleted.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     bot_id: "Id", # required
+    #     bot_analyzer_request_id: "UUID", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_bot_analyzer_recommendation(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::DeleteBotAnalyzerRecommendationResponse]
+    def delete_bot_analyzer_recommendation(params = {}, options = {})
+      request = build_request(:delete_bot_analyzer_recommendation, params)
       request.send_request(options)
     end
 
@@ -12882,11 +12992,11 @@ module Aws::LexModelsV2
     # @option params [String] :bot_version
     #   <p>The version of the bot to delete.</p>
     # @option params [Boolean] :skip_resource_in_use_check
-    #   <p>By default, Amazon Lex checks if any other resource, such as an alias or bot network, 
-    #            is using the bot version before it is deleted and throws a 
-    #            <code>ResourceInUseException</code> exception if the version is 
+    #   <p>By default, Amazon Lex checks if any other resource, such as an alias or bot network,
+    #            is using the bot version before it is deleted and throws a
+    #            <code>ResourceInUseException</code> exception if the version is
     #            being used by another resource. Set this parameter to <code>true</code>
-    #            to skip this check and remove the version even if it is being used by 
+    #            to skip this check and remove the version even if it is being used by
     #            another resource.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -13056,7 +13166,7 @@ module Aws::LexModelsV2
     #          statement ID that doesn't exist in the policy, or if the bot or bot
     #          alias doesn't have a policy attached, Amazon Lex returns an
     #          exception.</p>
-    #          <p>You need to add the <code>DeleteResourcePolicy</code> or <code>UpdateResourcePolicy</code> 
+    #          <p>You need to add the <code>DeleteResourcePolicy</code> or <code>UpdateResourcePolicy</code>
     #          action to the bot role in order to call the API.</p>
     # @param [Hash, Types::DeleteResourcePolicyStatementRequest] params
     # @option params [String] :resource_arn
@@ -13355,6 +13465,54 @@ module Aws::LexModelsV2
       request.send_request(options)
     end
 
+    # <p>Retrieves the analysis results and recommendations for bot optimization. The analysis must be in <code>Available</code> status before recommendations can be retrieved.</p>
+    #          <p>Recommendations are returned with pagination support. Each recommendation includes the issue location, priority level, detailed description, and proposed fix.</p>
+    # @param [Hash, Types::DescribeBotAnalyzerRecommendationRequest] params
+    # @option params [String] :bot_id
+    #   <p>The unique identifier of the bot.</p>
+    # @option params [String] :bot_analyzer_request_id
+    #   <p>The unique identifier of the analysis request.</p>
+    # @option params [String] :next_token
+    #   <p>If the response from a previous request was truncated, the <code>nextToken</code> value is used to retrieve the next page of recommendations.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of recommendations to return in the response. The default is 5.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     bot_id: "Id", # required
+    #     bot_analyzer_request_id: "UUID", # required
+    #     next_token: "NextToken",
+    #     max_results: 1
+    #   }
+    #   options = {}
+    #   response = client.describe_bot_analyzer_recommendation(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     bot_id: "Id",
+    #     bot_version: "DraftBotVersion",
+    #     locale_id: "LocaleId",
+    #     bot_analyzer_status: "Processing" # One of: ["Processing", "Available", "Failed", "Stopping", "Stopped"],
+    #     creation_date_time: Time.now,
+    #     bot_analyzer_recommendation_list: [
+    #       {
+    #         issue_location: { # required
+    #           bot_locale: "LocaleId",
+    #           intent_id: "Id",
+    #           slot_id: "Id"
+    #         },
+    #         priority: "High" # One of: ["High", "Medium", "Low"], # required
+    #         issue_description: "Description", # required
+    #         proposed_fix: "Description", # required
+    #       }
+    #     ],
+    #     next_token: "NextToken"
+    #   }
+    # @return [Types::DescribeBotAnalyzerRecommendationResponse]
+    def describe_bot_analyzer_recommendation(params = {}, options = {})
+      request = build_request(:describe_bot_analyzer_recommendation, params)
+      request.send_request(options)
+    end
+
     # <p>Describes the settings that a bot has for a specific locale. </p>
     # @param [Hash, Types::DescribeBotLocaleRequest] params
     # @option params [String] :bot_id
@@ -13383,8 +13541,30 @@ module Aws::LexModelsV2
     #     description: "Description",
     #     nlu_intent_confidence_threshold: 1.0,
     #     voice_settings: {
+    #       engine: "standard" # One of: ["standard", "neural", "long-form", "generative"],
     #       voice_id: "VoiceId", # required
-    #       engine: "standard" # One of: ["standard", "neural", "long-form", "generative"]
+    #     },
+    #     unified_speech_settings: {
+    #       speech_foundation_model: { # required
+    #         model_arn: "BedrockModelArn", # required
+    #         voice_id: "VoiceId"
+    #       }
+    #     },
+    #     audio_filler_settings: {
+    #       enabled: false,
+    #       audio_type: "MELODY_CHIPPER_CHIME" # One of: ["MELODY_CHIPPER_CHIME", "MELODY_CURIOUS_CRAWL", "MELODY_RISING_RIPPLE", "MELODY_PATIENT_PING", "MELODY_PONDERING_PONG", "TYPING_KINETIC_KEYS", "TYPING_QUIET_QWERTY"],
+    #       start_delay_in_milliseconds: 1,
+    #       minimum_play_duration_in_milliseconds: 1,
+    #       response_delivery_delay_in_milliseconds: 1
+    #     },
+    #     speech_recognition_settings: {
+    #       speech_model_preference: "Standard" # One of: ["Standard", "Neural", "Deepgram", "Advanced"],
+    #       speech_model_config: {
+    #         deepgram_config: {
+    #           api_token_secret_arn: "SecretsManagerSecretArn", # required
+    #           model_id: "DeepgramModelId"
+    #         }
+    #       }
     #     },
     #     intents_count: 1,
     #     slot_types_count: 1,
@@ -13416,6 +13596,12 @@ module Aws::LexModelsV2
     #         },
     #         nlu_improvement: {
     #           enabled: false, # required
+    #           assisted_nlu_mode: "Primary" # One of: ["Primary", "Fallback"],
+    #           intent_disambiguation_settings: {
+    #             enabled: false, # required
+    #             max_disambiguation_intents: 1,
+    #             custom_disambiguation_message: "CustomDisambiguationMessage"
+    #           }
     #         }
     #       },
     #       buildtime_settings: {
@@ -13444,6 +13630,10 @@ module Aws::LexModelsV2
     #           }
     #         }
     #       }
+    #     },
+    #     speech_detection_sensitivity: "Default" # One of: ["Default", "HighNoiseTolerance", "MaximumNoiseTolerance"],
+    #     speaker_diarization_settings: {
+    #       enabled: false, # required
     #     }
     #   }
     # @return [Types::DescribeBotLocaleResponse]
@@ -13561,9 +13751,9 @@ module Aws::LexModelsV2
       request.send_request(options)
     end
 
-    # <p>Returns information about a request to generate a bot through natural language description, made through 
-    #       the <code>StartBotResource</code> API. Use the <code>generatedBotLocaleUrl</code> 
-    #       to retrieve the Amazon S3 object containing the bot locale configuration. You can 
+    # <p>Returns information about a request to generate a bot through natural language description, made through
+    #       the <code>StartBotResource</code> API. Use the <code>generatedBotLocaleUrl</code>
+    #       to retrieve the Amazon S3 object containing the bot locale configuration. You can
     #       then modify and import this configuration.</p>
     # @param [Hash, Types::DescribeBotResourceGenerationRequest] params
     # @option params [String] :bot_id
@@ -13573,7 +13763,7 @@ module Aws::LexModelsV2
     # @option params [String] :locale_id
     #   <p>The locale of the bot for which to return the generation details.</p>
     # @option params [String] :generation_id
-    #   <p>The unique identifier of the generation request for which to 
+    #   <p>The unique identifier of the generation request for which to
     #            return the generation details.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -13774,8 +13964,34 @@ module Aws::LexModelsV2
     #         locale_id: "LocaleId", # required
     #         nlu_intent_confidence_threshold: 1.0,
     #         voice_settings: {
+    #           engine: "standard" # One of: ["standard", "neural", "long-form", "generative"],
     #           voice_id: "VoiceId", # required
-    #           engine: "standard" # One of: ["standard", "neural", "long-form", "generative"]
+    #         },
+    #         speech_recognition_settings: {
+    #           speech_model_preference: "Standard" # One of: ["Standard", "Neural", "Deepgram", "Advanced"],
+    #           speech_model_config: {
+    #             deepgram_config: {
+    #               api_token_secret_arn: "SecretsManagerSecretArn", # required
+    #               model_id: "DeepgramModelId"
+    #             }
+    #           }
+    #         },
+    #         speech_detection_sensitivity: "Default" # One of: ["Default", "HighNoiseTolerance", "MaximumNoiseTolerance"],
+    #         unified_speech_settings: {
+    #           speech_foundation_model: { # required
+    #             model_arn: "BedrockModelArn", # required
+    #             voice_id: "VoiceId"
+    #           }
+    #         },
+    #         audio_filler_settings: {
+    #           enabled: false,
+    #           audio_type: "MELODY_CHIPPER_CHIME" # One of: ["MELODY_CHIPPER_CHIME", "MELODY_CURIOUS_CRAWL", "MELODY_RISING_RIPPLE", "MELODY_PATIENT_PING", "MELODY_PONDERING_PONG", "TYPING_KINETIC_KEYS", "TYPING_QUIET_QWERTY"],
+    #           start_delay_in_milliseconds: 1,
+    #           minimum_play_duration_in_milliseconds: 1,
+    #           response_delivery_delay_in_milliseconds: 1
+    #         },
+    #         speaker_diarization_settings: {
+    #           enabled: false, # required
     #         }
     #       },
     #       custom_vocabulary_import_specification: {
@@ -13842,6 +14058,7 @@ module Aws::LexModelsV2
     #   {
     #     intent_id: "Id",
     #     intent_name: "Name",
+    #     intent_display_name: "DisplayName",
     #     description: "Description",
     #     parent_intent_signature: "IntentSignature",
     #     sample_utterances: [
@@ -20033,6 +20250,50 @@ module Aws::LexModelsV2
       request.send_request(options)
     end
 
+    # <p>Retrieves a list of historical bot analysis executions for a specific bot. You can filter the results by locale and bot version.</p>
+    #          <p>The history includes all analysis executions regardless of their status, allowing you to track past analyses and their outcomes.</p>
+    # @param [Hash, Types::ListBotAnalyzerHistoryRequest] params
+    # @option params [String] :bot_id
+    #   <p>The unique identifier of the bot.</p>
+    # @option params [String] :locale_id
+    #   <p>The locale identifier to filter the history. If not specified, returns history for all locales.</p>
+    # @option params [String] :bot_version
+    #   <p>The bot version to filter the history. If not specified, defaults to <code>DRAFT</code>.</p>
+    # @option params [String] :next_token
+    #   <p>If the response from a previous request was truncated, the <code>nextToken</code> value is used to retrieve the next page of history entries.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of history entries to return in the response. The default is 10.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     bot_id: "Id", # required
+    #     locale_id: "LocaleId",
+    #     bot_version: "DraftBotVersion",
+    #     next_token: "NextToken",
+    #     max_results: 1
+    #   }
+    #   options = {}
+    #   response = client.list_bot_analyzer_history(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     bot_id: "Id",
+    #     locale_id: "LocaleId",
+    #     bot_version: "DraftBotVersion",
+    #     bot_analyzer_history_list: [
+    #       {
+    #         bot_analyzer_status: "Processing" # One of: ["Processing", "Available", "Failed", "Stopping", "Stopped"], # required
+    #         creation_date_time: Time.now,
+    #         bot_analyzer_request_id: "UUID", # required
+    #       }
+    #     ],
+    #     next_token: "NextToken"
+    #   }
+    # @return [Types::ListBotAnalyzerHistoryResponse]
+    def list_bot_analyzer_history(params = {}, options = {})
+      request = build_request(:list_bot_analyzer_history, params)
+      request.send_request(options)
+    end
+
     # <p>Gets a list of locales for the specified bot.</p>
     # @param [Hash, Types::ListBotLocalesRequest] params
     # @option params [String] :bot_id
@@ -20185,23 +20446,23 @@ module Aws::LexModelsV2
     # <p>Lists the generation requests made for a bot locale.</p>
     # @param [Hash, Types::ListBotResourceGenerationsRequest] params
     # @option params [String] :bot_id
-    #   <p>The unique identifier of the bot whose generation 
+    #   <p>The unique identifier of the bot whose generation
     #         requests you want to view.</p>
     # @option params [String] :bot_version
-    #   <p>The version of the bot whose generation 
+    #   <p>The version of the bot whose generation
     #            requests you want to view.</p>
     # @option params [String] :locale_id
-    #   <p>The locale of the bot whose generation 
+    #   <p>The locale of the bot whose generation
     #            requests you want to view.</p>
     # @option params [Types::GenerationSortBy] :sort_by
-    #   <p>An object containing information about the attribute and the 
+    #   <p>An object containing information about the attribute and the
     #         method by which to sort the results</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return in the response.</p>
     # @option params [String] :next_token
-    #   <p>If the total number of results is greater than the number 
-    #         specified in the <code>maxResults</code>, the response returns a token 
-    #         in the <code>nextToken</code> field. Use this token when making a request to 
+    #   <p>If the total number of results is greater than the number
+    #         specified in the <code>maxResults</code>, the response returns a token
+    #         in the <code>nextToken</code> field. Use this token when making a request to
     #         return the next batch of results.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -20514,24 +20775,24 @@ module Aws::LexModelsV2
       request.send_request(options)
     end
 
-    # <p>Paginated list of custom vocabulary items for a given bot locale's 
+    # <p>Paginated list of custom vocabulary items for a given bot locale's
     #          custom vocabulary.</p>
     # @param [Hash, Types::ListCustomVocabularyItemsRequest] params
     # @option params [String] :bot_id
-    #   <p>The identifier of the version of the bot associated with this custom 
+    #   <p>The identifier of the version of the bot associated with this custom
     #            vocabulary.</p>
     # @option params [String] :bot_version
-    #   <p>The bot version of the bot to the list custom vocabulary 
+    #   <p>The bot version of the bot to the list custom vocabulary
     #            request.</p>
     # @option params [String] :locale_id
-    #   <p>The identifier of the language and locale where this custom vocabulary 
-    #            is used. The string must match one of the supported locales. For more 
-    #            information, see Supported 
+    #   <p>The identifier of the language and locale where this custom vocabulary
+    #            is used. The string must match one of the supported locales. For more
+    #            information, see Supported
     #            languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html).</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of items returned by the list operation.</p>
     # @option params [String] :next_token
-    #   <p>The nextToken identifier to the list custom vocabulary 
+    #   <p>The nextToken identifier to the list custom vocabulary
     #            request.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -21115,6 +21376,7 @@ module Aws::LexModelsV2
     #       {
     #         intent_id: "Id",
     #         intent_name: "Name",
+    #         intent_display_name: "DisplayName",
     #         description: "Description",
     #         parent_intent_signature: "IntentSignature",
     #         input_contexts: [
@@ -21141,7 +21403,7 @@ module Aws::LexModelsV2
     end
 
     # <p>Gets a list of recommended intents provided by the bot
-    #          recommendation that you can use in your bot. Intents in the 
+    #          recommendation that you can use in your bot. Intents in the
     #          response are ordered by relevance.</p>
     # @param [Hash, Types::ListRecommendedIntentsRequest] params
     # @option params [String] :bot_id
@@ -21663,13 +21925,13 @@ module Aws::LexModelsV2
     # @option params [Types::TestExecutionResultFilterBy] :result_filter_by
     #   <p>The filter for the list of results from the test set execution.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of test execution result items to return in each 
-    #         page. If there are fewer results than the max page size, only the actual 
+    #   <p>The maximum number of test execution result items to return in each
+    #         page. If there are fewer results than the max page size, only the actual
     #         number of results are returned.</p>
     # @option params [String] :next_token
-    #   <p>If the response from the <code>ListTestExecutionResultItems</code> operation 
-    #         contains more results than specified in the <code>maxResults</code> parameter, 
-    #         a token is returned in the response. Use that token in the <code>nextToken</code> 
+    #   <p>If the response from the <code>ListTestExecutionResultItems</code> operation
+    #         contains more results than specified in the <code>maxResults</code> parameter,
+    #         a token is returned in the response. Use that token in the <code>nextToken</code>
     #         parameter to return the next page of results.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -21897,12 +22159,12 @@ module Aws::LexModelsV2
     # @option params [Types::TestExecutionSortBy] :sort_by
     #   <p>The sort order of the test set executions.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of test executions to return in each page. If there are 
-    #         fewer results than the max page size, only the actual number of results are 
+    #   <p>The maximum number of test executions to return in each page. If there are
+    #         fewer results than the max page size, only the actual number of results are
     #         returned.</p>
     # @option params [String] :next_token
-    #   <p>If the response from the ListTestExecutions operation contains more results 
-    #         than specified in the maxResults parameter, a token is returned in the response. 
+    #   <p>If the response from the ListTestExecutions operation contains more results
+    #         than specified in the maxResults parameter, a token is returned in the response.
     #         Use that token in the nextToken parameter to return the next page of results.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -21950,12 +22212,12 @@ module Aws::LexModelsV2
     # @option params [String] :test_set_id
     #   <p>The identifier of the test set to list its test set records.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of test set records to return in each page. If there are 
-    #         fewer records than the max page size, only the actual number of records are 
+    #   <p>The maximum number of test set records to return in each page. If there are
+    #         fewer records than the max page size, only the actual number of records are
     #         returned.</p>
     # @option params [String] :next_token
-    #   <p>If the response from the ListTestSetRecords operation contains more results 
-    #         than specified in the maxResults parameter, a token is returned in the response. 
+    #   <p>If the response from the ListTestSetRecords operation contains more results
+    #         than specified in the maxResults parameter, a token is returned in the response.
     #         Use that token in the nextToken parameter to return the next page of results.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -22056,11 +22318,11 @@ module Aws::LexModelsV2
     # @option params [Types::TestSetSortBy] :sort_by
     #   <p>The sort order for the list of test sets.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of test sets to return in each page. If there are fewer 
+    #   <p>The maximum number of test sets to return in each page. If there are fewer
     #         results than the max page size, only the actual number of results are returned.</p>
     # @option params [String] :next_token
-    #   <p>If the response from the ListTestSets operation contains more results than 
-    #         specified in the maxResults parameter, a token is returned in the response. Use 
+    #   <p>If the response from the ListTestSets operation contains more results than
+    #         specified in the maxResults parameter, a token is returned in the response. Use
     #         that token in the nextToken parameter to return the next page of results.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -22431,6 +22693,44 @@ module Aws::LexModelsV2
       request.send_request(options)
     end
 
+    # <p>Initiates an asynchronous analysis of your bot configuration using AI-powered analysis to identify potential issues and recommend improvements based on AWS best practices.</p>
+    #          <p>The analysis examines your bot's configuration, including intents, utterances, slots, and conversation flows, to provide actionable recommendations for optimization.</p>
+    # @param [Hash, Types::StartBotAnalyzerRequest] params
+    # @option params [String] :bot_id
+    #   <p>The unique identifier of the bot to analyze.</p>
+    # @option params [String] :analysis_scope
+    #   <p>The scope of analysis to perform. Currently only <code>BotLocale</code> scope is supported.</p>
+    #            <p>Valid Values: <code>BotLocale</code>
+    #            </p>
+    # @option params [String] :locale_id
+    #   <p>The locale identifier for the bot locale to analyze. Required when <code>analysisScope</code> is <code>BotLocale</code>.</p>
+    # @option params [String] :bot_version
+    #   <p>The version of the bot to analyze. Defaults to <code>DRAFT</code> if not specified.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     bot_id: "Id", # required
+    #     analysis_scope: "BotLocale" # One of: ["BotLocale"], # required
+    #     locale_id: "LocaleId",
+    #     bot_version: "DraftBotVersion"
+    #   }
+    #   options = {}
+    #   response = client.start_bot_analyzer(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     bot_id: "Id",
+    #     bot_version: "DraftBotVersion",
+    #     locale_id: "LocaleId",
+    #     bot_analyzer_status: "Processing" # One of: ["Processing", "Available", "Failed", "Stopping", "Stopped"],
+    #     bot_analyzer_request_id: "UUID",
+    #     creation_date_time: Time.now
+    #   }
+    # @return [Types::StartBotAnalyzerResponse]
+    def start_bot_analyzer(params = {}, options = {})
+      request = build_request(:start_bot_analyzer, params)
+      request.send_request(options)
+    end
+
     # <p>Use this to provide your transcript data, and to start the bot
     #          recommendation process.</p>
     # @param [Hash, Types::StartBotRecommendationRequest] params
@@ -22521,10 +22821,10 @@ module Aws::LexModelsV2
       request.send_request(options)
     end
 
-    # <p>Starts a request for the descriptive bot builder to generate a bot locale configuration 
-    #          based on the prompt you provide it. After you make this call, use the <code>DescribeBotResourceGeneration</code> 
-    #          operation to check on the status of the generation and for the <code>generatedBotLocaleUrl</code> when the 
-    #          generation is complete. Use that value to retrieve the Amazon S3 object containing the bot locale configuration. You can 
+    # <p>Starts a request for the descriptive bot builder to generate a bot locale configuration
+    #          based on the prompt you provide it. After you make this call, use the <code>DescribeBotResourceGeneration</code>
+    #          operation to check on the status of the generation and for the <code>generatedBotLocaleUrl</code> when the
+    #          generation is complete. Use that value to retrieve the Amazon S3 object containing the bot locale configuration. You can
     #          then modify and import this configuration.</p>
     # @param [Hash, Types::StartBotResourceGenerationRequest] params
     # @option params [String] :generation_input_prompt
@@ -22606,8 +22906,34 @@ module Aws::LexModelsV2
     #         locale_id: "LocaleId", # required
     #         nlu_intent_confidence_threshold: 1.0,
     #         voice_settings: {
+    #           engine: "standard" # One of: ["standard", "neural", "long-form", "generative"],
     #           voice_id: "VoiceId", # required
-    #           engine: "standard" # One of: ["standard", "neural", "long-form", "generative"]
+    #         },
+    #         speech_recognition_settings: {
+    #           speech_model_preference: "Standard" # One of: ["Standard", "Neural", "Deepgram", "Advanced"],
+    #           speech_model_config: {
+    #             deepgram_config: {
+    #               api_token_secret_arn: "SecretsManagerSecretArn", # required
+    #               model_id: "DeepgramModelId"
+    #             }
+    #           }
+    #         },
+    #         speech_detection_sensitivity: "Default" # One of: ["Default", "HighNoiseTolerance", "MaximumNoiseTolerance"],
+    #         unified_speech_settings: {
+    #           speech_foundation_model: { # required
+    #             model_arn: "BedrockModelArn", # required
+    #             voice_id: "VoiceId"
+    #           }
+    #         },
+    #         audio_filler_settings: {
+    #           enabled: false,
+    #           audio_type: "MELODY_CHIPPER_CHIME" # One of: ["MELODY_CHIPPER_CHIME", "MELODY_CURIOUS_CRAWL", "MELODY_RISING_RIPPLE", "MELODY_PATIENT_PING", "MELODY_PONDERING_PONG", "TYPING_KINETIC_KEYS", "TYPING_QUIET_QWERTY"],
+    #           start_delay_in_milliseconds: 1,
+    #           minimum_play_duration_in_milliseconds: 1,
+    #           response_delivery_delay_in_milliseconds: 1
+    #         },
+    #         speaker_diarization_settings: {
+    #           enabled: false, # required
     #         }
     #       },
     #       custom_vocabulary_import_specification: {
@@ -22667,8 +22993,34 @@ module Aws::LexModelsV2
     #         locale_id: "LocaleId", # required
     #         nlu_intent_confidence_threshold: 1.0,
     #         voice_settings: {
+    #           engine: "standard" # One of: ["standard", "neural", "long-form", "generative"],
     #           voice_id: "VoiceId", # required
-    #           engine: "standard" # One of: ["standard", "neural", "long-form", "generative"]
+    #         },
+    #         speech_recognition_settings: {
+    #           speech_model_preference: "Standard" # One of: ["Standard", "Neural", "Deepgram", "Advanced"],
+    #           speech_model_config: {
+    #             deepgram_config: {
+    #               api_token_secret_arn: "SecretsManagerSecretArn", # required
+    #               model_id: "DeepgramModelId"
+    #             }
+    #           }
+    #         },
+    #         speech_detection_sensitivity: "Default" # One of: ["Default", "HighNoiseTolerance", "MaximumNoiseTolerance"],
+    #         unified_speech_settings: {
+    #           speech_foundation_model: { # required
+    #             model_arn: "BedrockModelArn", # required
+    #             voice_id: "VoiceId"
+    #           }
+    #         },
+    #         audio_filler_settings: {
+    #           enabled: false,
+    #           audio_type: "MELODY_CHIPPER_CHIME" # One of: ["MELODY_CHIPPER_CHIME", "MELODY_CURIOUS_CRAWL", "MELODY_RISING_RIPPLE", "MELODY_PATIENT_PING", "MELODY_PONDERING_PONG", "TYPING_KINETIC_KEYS", "TYPING_QUIET_QWERTY"],
+    #           start_delay_in_milliseconds: 1,
+    #           minimum_play_duration_in_milliseconds: 1,
+    #           response_delivery_delay_in_milliseconds: 1
+    #         },
+    #         speaker_diarization_settings: {
+    #           enabled: false, # required
     #         }
     #       },
     #       custom_vocabulary_import_specification: {
@@ -22712,9 +23064,9 @@ module Aws::LexModelsV2
     # @option params [Types::TestExecutionTarget] :target
     #   <p>The target bot for the test set execution.</p>
     # @option params [String] :api_mode
-    #   <p>Indicates whether we use streaming or non-streaming APIs for the test set 
-    #         execution. For streaming, StartConversation Runtime API is used. Whereas, for 
-    #         non-streaming, RecognizeUtterance and RecognizeText Amazon Lex 
+    #   <p>Indicates whether we use streaming or non-streaming APIs for the test set
+    #         execution. For streaming, StartConversation Runtime API is used. Whereas, for
+    #         non-streaming, RecognizeUtterance and RecognizeText Amazon Lex
     #         Runtime API are used.</p>
     # @option params [String] :test_execution_modality
     #   <p>Indicates whether audio or text is used.</p>
@@ -22766,7 +23118,7 @@ module Aws::LexModelsV2
     # @option params [Types::TestSetGenerationDataSource] :generation_data_source
     #   <p>The data source for the test set generation.</p>
     # @option params [String] :role_arn
-    #   <p>The roleARN used for any operation in the test set to access 
+    #   <p>The roleARN used for any operation in the test set to access
     #         resources in the Amazon Web Services account.</p>
     # @option params [Hash<String, String>] :test_set_tags
     #   <p>A list of tags to add to the test set. You can only add tags when you import/generate a new test set. You can't use the <code>UpdateTestSet</code> operation to update tags. To update tags, use the <code>TagResource</code> operation.</p>
@@ -22831,6 +23183,34 @@ module Aws::LexModelsV2
     # @return [Types::StartTestSetGenerationResponse]
     def start_test_set_generation(params = {}, options = {})
       request = build_request(:start_test_set_generation, params)
+      request.send_request(options)
+    end
+
+    # <p>Cancels an ongoing bot analysis execution. Once stopped, the analysis cannot be resumed and no recommendations will be generated.</p>
+    # @param [Hash, Types::StopBotAnalyzerRequest] params
+    # @option params [String] :bot_id
+    #   <p>The unique identifier of the bot.</p>
+    # @option params [String] :bot_analyzer_request_id
+    #   <p>The unique identifier of the analysis request to stop.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     bot_id: "Id", # required
+    #     bot_analyzer_request_id: "UUID", # required
+    #   }
+    #   options = {}
+    #   response = client.stop_bot_analyzer(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     bot_id: "Id",
+    #     bot_version: "DraftBotVersion",
+    #     locale_id: "LocaleId",
+    #     bot_analyzer_status: "Processing" # One of: ["Processing", "Available", "Failed", "Stopping", "Stopped"],
+    #     bot_analyzer_request_id: "UUID"
+    #   }
+    # @return [Types::StopBotAnalyzerResponse]
+    def stop_bot_analyzer(params = {}, options = {})
+      request = build_request(:stop_bot_analyzer, params)
       request.send_request(options)
     end
 
@@ -22952,7 +23332,7 @@ module Aws::LexModelsV2
     # @option params [String] :bot_type
     #   <p>The type of the bot to be updated.</p>
     # @option params [Array<Types::BotMember>] :bot_members
-    #   <p>The list of bot members in the network associated 
+    #   <p>The list of bot members in the network associated
     #            with the update action.</p>
     # @option params [Types::ErrorLogSettings] :error_log_settings
     #   <p>Allows you to modify how Amazon Lex logs errors during bot interactions, including destinations for error logs and the types of errors to be captured.</p>
@@ -23167,9 +23547,24 @@ module Aws::LexModelsV2
     # @option params [Types::VoiceSettings] :voice_settings
     #   <p>The new Amazon Polly voice Amazon Lex should use for voice interaction with the
     #            user.</p>
+    # @option params [Types::UnifiedSpeechSettings] :unified_speech_settings
+    #   <p>Updated unified speech settings to apply to the bot locale.</p>
+    # @option params [Types::AudioFillerSettings] :audio_filler_settings
+    #   <p>Updated audio filler settings to apply to the bot locale. When
+    #            enabled, requires <code>unifiedSpeechSettings</code> (speech-to-speech)
+    #            to be configured on the bot locale.</p>
+    # @option params [Types::SpeechRecognitionSettings] :speech_recognition_settings
+    #   <p>Updated speech-to-text settings to apply to the bot locale.</p>
     # @option params [Types::GenerativeAISettings] :generative_ai_settings
-    #   <p>Contains settings for generative AI features powered by Amazon Bedrock for your bot locale. Use this object to turn generative AI features on and off. Pricing 
+    #   <p>Contains settings for generative AI features powered by Amazon Bedrock for your bot locale. Use this object to turn generative AI features on and off. Pricing
     #         may differ if you turn a feature on. For more information, see LINK.</p>
+    # @option params [String] :speech_detection_sensitivity
+    #   <p>The new sensitivity level for voice activity detection (VAD) in the bot locale. This setting helps optimize speech recognition accuracy by adjusting how the system responds to background noise during voice interactions.</p>
+    # @option params [Types::SpeakerDiarizationSettings] :speaker_diarization_settings
+    #   <p>The updated speaker diarization settings to apply to the bot locale.
+    #            If you omit this field, Amazon Lex keeps the setting currently stored on the
+    #            bot locale. To turn speaker diarization off, set <code>enabled</code>
+    #            to <code>false</code> explicitly.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     bot_id: "Id", # required
@@ -23178,8 +23573,30 @@ module Aws::LexModelsV2
     #     description: "Description",
     #     nlu_intent_confidence_threshold: 1.0, # required
     #     voice_settings: {
+    #       engine: "standard" # One of: ["standard", "neural", "long-form", "generative"],
     #       voice_id: "VoiceId", # required
-    #       engine: "standard" # One of: ["standard", "neural", "long-form", "generative"]
+    #     },
+    #     unified_speech_settings: {
+    #       speech_foundation_model: { # required
+    #         model_arn: "BedrockModelArn", # required
+    #         voice_id: "VoiceId"
+    #       }
+    #     },
+    #     audio_filler_settings: {
+    #       enabled: false,
+    #       audio_type: "MELODY_CHIPPER_CHIME" # One of: ["MELODY_CHIPPER_CHIME", "MELODY_CURIOUS_CRAWL", "MELODY_RISING_RIPPLE", "MELODY_PATIENT_PING", "MELODY_PONDERING_PONG", "TYPING_KINETIC_KEYS", "TYPING_QUIET_QWERTY"],
+    #       start_delay_in_milliseconds: 1,
+    #       minimum_play_duration_in_milliseconds: 1,
+    #       response_delivery_delay_in_milliseconds: 1
+    #     },
+    #     speech_recognition_settings: {
+    #       speech_model_preference: "Standard" # One of: ["Standard", "Neural", "Deepgram", "Advanced"],
+    #       speech_model_config: {
+    #         deepgram_config: {
+    #           api_token_secret_arn: "SecretsManagerSecretArn", # required
+    #           model_id: "DeepgramModelId"
+    #         }
+    #       }
     #     },
     #     generative_ai_settings: {
     #       runtime_settings: {
@@ -23197,6 +23614,12 @@ module Aws::LexModelsV2
     #         },
     #         nlu_improvement: {
     #           enabled: false, # required
+    #           assisted_nlu_mode: "Primary" # One of: ["Primary", "Fallback"],
+    #           intent_disambiguation_settings: {
+    #             enabled: false, # required
+    #             max_disambiguation_intents: 1,
+    #             custom_disambiguation_message: "CustomDisambiguationMessage"
+    #           }
     #         }
     #       },
     #       buildtime_settings: {
@@ -23225,6 +23648,10 @@ module Aws::LexModelsV2
     #           }
     #         }
     #       }
+    #     },
+    #     speech_detection_sensitivity: "Default" # One of: ["Default", "HighNoiseTolerance", "MaximumNoiseTolerance"],
+    #     speaker_diarization_settings: {
+    #       enabled: false, # required
     #     }
     #   }
     #   options = {}
@@ -23239,8 +23666,30 @@ module Aws::LexModelsV2
     #     description: "Description",
     #     nlu_intent_confidence_threshold: 1.0,
     #     voice_settings: {
+    #       engine: "standard" # One of: ["standard", "neural", "long-form", "generative"],
     #       voice_id: "VoiceId", # required
-    #       engine: "standard" # One of: ["standard", "neural", "long-form", "generative"]
+    #     },
+    #     unified_speech_settings: {
+    #       speech_foundation_model: { # required
+    #         model_arn: "BedrockModelArn", # required
+    #         voice_id: "VoiceId"
+    #       }
+    #     },
+    #     audio_filler_settings: {
+    #       enabled: false,
+    #       audio_type: "MELODY_CHIPPER_CHIME" # One of: ["MELODY_CHIPPER_CHIME", "MELODY_CURIOUS_CRAWL", "MELODY_RISING_RIPPLE", "MELODY_PATIENT_PING", "MELODY_PONDERING_PONG", "TYPING_KINETIC_KEYS", "TYPING_QUIET_QWERTY"],
+    #       start_delay_in_milliseconds: 1,
+    #       minimum_play_duration_in_milliseconds: 1,
+    #       response_delivery_delay_in_milliseconds: 1
+    #     },
+    #     speech_recognition_settings: {
+    #       speech_model_preference: "Standard" # One of: ["Standard", "Neural", "Deepgram", "Advanced"],
+    #       speech_model_config: {
+    #         deepgram_config: {
+    #           api_token_secret_arn: "SecretsManagerSecretArn", # required
+    #           model_id: "DeepgramModelId"
+    #         }
+    #       }
     #     },
     #     bot_locale_status: "Creating" # One of: ["Creating", "Building", "Built", "ReadyExpressTesting", "Failed", "Deleting", "NotBuilt", "Importing", "Processing"],
     #     failure_reasons: ["FailureReason"],
@@ -23263,6 +23712,12 @@ module Aws::LexModelsV2
     #         },
     #         nlu_improvement: {
     #           enabled: false, # required
+    #           assisted_nlu_mode: "Primary" # One of: ["Primary", "Fallback"],
+    #           intent_disambiguation_settings: {
+    #             enabled: false, # required
+    #             max_disambiguation_intents: 1,
+    #             custom_disambiguation_message: "CustomDisambiguationMessage"
+    #           }
     #         }
     #       },
     #       buildtime_settings: {
@@ -23291,6 +23746,10 @@ module Aws::LexModelsV2
     #           }
     #         }
     #       }
+    #     },
+    #     speech_detection_sensitivity: "Default" # One of: ["Default", "HighNoiseTolerance", "MaximumNoiseTolerance"],
+    #     speaker_diarization_settings: {
+    #       enabled: false, # required
     #     }
     #   }
     # @return [Types::UpdateBotLocaleResponse]
@@ -23430,6 +23889,8 @@ module Aws::LexModelsV2
     #   <p>The unique identifier of the intent to update.</p>
     # @option params [String] :intent_name
     #   <p>The new name for the intent.</p>
+    # @option params [String] :intent_display_name
+    #   <p>The new display name for the intent.</p>
     # @option params [String] :description
     #   <p>The new description of the intent.</p>
     # @option params [String] :parent_intent_signature
@@ -23480,6 +23941,7 @@ module Aws::LexModelsV2
     #   params = {
     #     intent_id: "Id", # required
     #     intent_name: "Name", # required
+    #     intent_display_name: "DisplayName",
     #     description: "Description",
     #     parent_intent_signature: "IntentSignature",
     #     sample_utterances: [
@@ -27289,6 +27751,7 @@ module Aws::LexModelsV2
     #   {
     #     intent_id: "Id",
     #     intent_name: "Name",
+    #     intent_display_name: "DisplayName",
     #     description: "Description",
     #     parent_intent_signature: "IntentSignature",
     #     sample_utterances: [
@@ -31176,7 +31639,7 @@ module Aws::LexModelsV2
     #            <p>If the <code>multipleValuesSetting</code> is not set, the default
     #            value is <code>false</code>.</p>
     # @option params [Types::SubSlotSetting] :sub_slot_setting
-    #   <p>Specifications for the constituent sub slots and the  
+    #   <p>Specifications for the constituent sub slots and the
     #           expression for the composite slot.</p>
     # @example Request syntax with placeholder values
     #   params = {

@@ -162,6 +162,7 @@ module Aws::ElasticLoadBalancingV2
     HealthCheckTimeoutSeconds: IntegerShape
     HealthUnavailableException: StructureShape
     HostHeaderConditionConfig: StructureShape
+    HostHeaderRewriteConfig: StructureShape
     HttpCode: StringShape
     HttpHeaderConditionConfig: StructureShape
     HttpHeaderConditionName: StringShape
@@ -183,6 +184,15 @@ module Aws::ElasticLoadBalancingV2
     IpamPoolId: StringShape
     IpamPools: StructureShape
     IsDefault: BooleanShape
+    JwtValidationActionAdditionalClaim: StructureShape
+    JwtValidationActionAdditionalClaimFormatEnum: EnumShape
+    JwtValidationActionAdditionalClaimName: StringShape
+    JwtValidationActionAdditionalClaimValue: StringShape
+    JwtValidationActionAdditionalClaimValues: ListShape
+    JwtValidationActionAdditionalClaims: ListShape
+    JwtValidationActionConfig: StructureShape
+    JwtValidationActionIssuer: StringShape
+    JwtValidationActionJwksEndpoint: StringShape
     LastModifiedTime: TimestampShape
     Limit: StructureShape
     Limits: ListShape
@@ -258,6 +268,7 @@ module Aws::ElasticLoadBalancingV2
     QueryStringConditionConfig: StructureShape
     QueryStringKeyValuePair: StructureShape
     QueryStringKeyValuePairList: ListShape
+    QuicServerId: StringShape
     RedirectActionConfig: StructureShape
     RedirectActionHost: StringShape
     RedirectActionPath: StringShape
@@ -276,6 +287,7 @@ module Aws::ElasticLoadBalancingV2
     RemoveTrustStoreRevocationsInput: StructureShape
     RemoveTrustStoreRevocationsOutput: StructureShape
     ResetCapacityReservation: BooleanShape
+    ResetTransforms: BooleanShape
     ResourceArn: StringShape
     ResourceArns: ListShape
     ResourceInUseException: StructureShape
@@ -287,6 +299,8 @@ module Aws::ElasticLoadBalancingV2
     RevocationIdNotFoundException: StructureShape
     RevocationIds: ListShape
     RevocationType: EnumShape
+    RewriteConfig: StructureShape
+    RewriteConfigList: ListShape
     Rule: StructureShape
     RuleArn: StringShape
     RuleArns: ListShape
@@ -296,6 +310,8 @@ module Aws::ElasticLoadBalancingV2
     RulePriority: IntegerShape
     RulePriorityList: ListShape
     RulePriorityPair: StructureShape
+    RuleTransform: StructureShape
+    RuleTransformList: ListShape
     Rules: ListShape
     S3Bucket: StringShape
     S3Key: StringShape
@@ -311,6 +327,7 @@ module Aws::ElasticLoadBalancingV2
     SetSecurityGroupsOutput: StructureShape
     SetSubnetsInput: StructureShape
     SetSubnetsOutput: StructureShape
+    SourceIpAddressTypeEnum: EnumShape
     SourceIpConditionConfig: StructureShape
     SourceNatIpv6Prefix: StringShape
     SourceNatIpv6Prefixes: ListShape
@@ -337,6 +354,7 @@ module Aws::ElasticLoadBalancingV2
     TagValue: StringShape
     TargetAdministrativeOverrideReasonEnum: EnumShape
     TargetAdministrativeOverrideStateEnum: EnumShape
+    TargetControlPort: IntegerShape
     TargetDescription: StructureShape
     TargetDescriptions: ListShape
     TargetGroup: StructureShape
@@ -378,6 +396,7 @@ module Aws::ElasticLoadBalancingV2
     TooManyTrustStoresException: StructureShape
     TooManyUniqueTargetGroupsPerLoadBalancerException: StructureShape
     TotalRevokedEntries: IntegerShape
+    TransformTypeEnum: EnumShape
     TrustStore: StructureShape
     TrustStoreArn: StringShape
     TrustStoreArns: ListShape
@@ -396,6 +415,7 @@ module Aws::ElasticLoadBalancingV2
     TrustStoreStatus: EnumShape
     TrustStores: ListShape
     UnsupportedProtocolException: StructureShape
+    UrlRewriteConfig: StructureShape
     VpcId: StringShape
     ZonalCapacityReservationState: StructureShape
     ZonalCapacityReservationStates: ListShape

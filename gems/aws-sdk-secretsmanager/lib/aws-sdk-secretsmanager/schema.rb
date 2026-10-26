@@ -29,7 +29,7 @@ module Aws::SecretsManager
     DescribeSecretRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.secretsmanager#DescribeSecretRequest", name: "DescribeSecretRequest")
     DescribeSecretResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.secretsmanager#DescribeSecretResponse", name: "DescribeSecretResponse")
     DescriptionType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.secretsmanager#DescriptionType", name: "DescriptionType", traits: {"smithy.api#length" => {"min" => 0, "max" => 2048}})
-    DurationType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.secretsmanager#DurationType", name: "DurationType", traits: {"smithy.api#length" => {"min" => 2, "max" => 3}, "smithy.api#pattern" => "^[0-9h]+$"})
+    DurationType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.secretsmanager#DurationType", name: "DurationType", traits: {"smithy.api#length" => {"min" => 2, "max" => 3}, "smithy.api#pattern" => "^[0-9]+h$"})
     EncryptionFailure = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.secretsmanager#EncryptionFailure", name: "EncryptionFailure", traits: {"smithy.api#error" => "client"})
     ErrorCode = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.secretsmanager#ErrorCode", name: "ErrorCode")
     ErrorMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.secretsmanager#ErrorMessage", name: "ErrorMessage")
@@ -38,6 +38,10 @@ module Aws::SecretsManager
     ExcludeNumbersType = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.secretsmanager#ExcludeNumbersType", name: "ExcludeNumbersType", traits: {"smithy.api#default" => false})
     ExcludePunctuationType = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.secretsmanager#ExcludePunctuationType", name: "ExcludePunctuationType", traits: {"smithy.api#default" => false})
     ExcludeUppercaseType = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.secretsmanager#ExcludeUppercaseType", name: "ExcludeUppercaseType", traits: {"smithy.api#default" => false})
+    ExternalSecretRotationMetadataItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.secretsmanager#ExternalSecretRotationMetadataItem", name: "ExternalSecretRotationMetadataItem")
+    ExternalSecretRotationMetadataItemKeyType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.secretsmanager#ExternalSecretRotationMetadataItemKeyType", name: "ExternalSecretRotationMetadataItemKeyType", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}})
+    ExternalSecretRotationMetadataItemValueType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.secretsmanager#ExternalSecretRotationMetadataItemValueType", name: "ExternalSecretRotationMetadataItemValueType", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}})
+    ExternalSecretRotationMetadataType = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.secretsmanager#ExternalSecretRotationMetadataType", name: "ExternalSecretRotationMetadataType")
     Filter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.secretsmanager#Filter", name: "Filter")
     FilterNameStringType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.secretsmanager#FilterNameStringType", name: "FilterNameStringType")
     FilterValueStringType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.secretsmanager#FilterValueStringType", name: "FilterValueStringType", traits: {"smithy.api#length" => {"min" => 0, "max" => 512}, "smithy.api#pattern" => "^\\!?[a-zA-Z0-9 :_@\\/\\+\\=\\.\\-\\!]*$"})
@@ -67,6 +71,7 @@ module Aws::SecretsManager
     MalformedPolicyDocumentException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.secretsmanager#MalformedPolicyDocumentException", name: "MalformedPolicyDocumentException", traits: {"smithy.api#error" => "client"})
     MaxResultsBatchType = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.secretsmanager#MaxResultsBatchType", name: "MaxResultsBatchType", traits: {"smithy.api#range" => {"min" => 1, "max" => 20}})
     MaxResultsType = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.secretsmanager#MaxResultsType", name: "MaxResultsType", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}})
+    MedeaTypeType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.secretsmanager#MedeaTypeType", name: "MedeaTypeType", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}})
     NameType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.secretsmanager#NameType", name: "NameType", traits: {"smithy.api#length" => {"min" => 1, "max" => 512}})
     NextRotationDateType = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.secretsmanager#NextRotationDateType", name: "NextRotationDateType")
     NextTokenType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.secretsmanager#NextTokenType", name: "NextTokenType", traits: {"smithy.api#length" => {"min" => 1, "max" => 4096}})
@@ -95,6 +100,7 @@ module Aws::SecretsManager
     ResourceNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.secretsmanager#ResourceNotFoundException", name: "ResourceNotFoundException", traits: {"smithy.api#error" => "client"})
     RestoreSecretRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.secretsmanager#RestoreSecretRequest", name: "RestoreSecretRequest")
     RestoreSecretResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.secretsmanager#RestoreSecretResponse", name: "RestoreSecretResponse")
+    RoleARNType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.secretsmanager#RoleARNType", name: "RoleARNType", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}})
     RotateSecretRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.secretsmanager#RotateSecretRequest", name: "RotateSecretRequest")
     RotateSecretResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.secretsmanager#RotateSecretResponse", name: "RotateSecretResponse")
     RotationEnabledType = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.secretsmanager#RotationEnabledType", name: "RotationEnabledType", traits: {"smithy.api#default" => false})
@@ -118,6 +124,7 @@ module Aws::SecretsManager
     SecretVersionsListEntry = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.secretsmanager#SecretVersionsListEntry", name: "SecretVersionsListEntry")
     SecretVersionsListType = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.secretsmanager#SecretVersionsListType", name: "SecretVersionsListType")
     SecretVersionsToStagesMapType = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.secretsmanager#SecretVersionsToStagesMapType", name: "SecretVersionsToStagesMapType")
+    SortByType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.secretsmanager#SortByType", name: "SortByType")
     SortOrderType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.secretsmanager#SortOrderType", name: "SortOrderType")
     StatusMessageType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.secretsmanager#StatusMessageType", name: "StatusMessageType", traits: {"smithy.api#length" => {"min" => 1, "max" => 4096}})
     StatusType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.secretsmanager#StatusType", name: "StatusType")
@@ -170,6 +177,7 @@ module Aws::SecretsManager
     CreateSecretRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagListType, name: "Tags"))
     CreateSecretRequest.add_member(:add_replica_regions, ::Smithy::Schema::Shapes::MemberShape.new(target: AddReplicaRegionListType, name: "AddReplicaRegions"))
     CreateSecretRequest.add_member(:force_overwrite_replica_secret, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanType, name: "ForceOverwriteReplicaSecret", traits: {"smithy.api#default" => false}))
+    CreateSecretRequest.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: MedeaTypeType, name: "Type"))
     CreateSecretRequest.type = Types::CreateSecretRequest
     CreateSecretResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretARNType, name: "ARN"))
     CreateSecretResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretNameType, name: "Name"))
@@ -195,11 +203,14 @@ module Aws::SecretsManager
     DescribeSecretRequest.type = Types::DescribeSecretRequest
     DescribeSecretResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretARNType, name: "ARN"))
     DescribeSecretResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretNameType, name: "Name"))
+    DescribeSecretResponse.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: MedeaTypeType, name: "Type"))
     DescribeSecretResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: DescriptionType, name: "Description"))
     DescribeSecretResponse.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyIdType, name: "KmsKeyId"))
     DescribeSecretResponse.add_member(:rotation_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: RotationEnabledType, name: "RotationEnabled", traits: {"smithy.api#default" => nil}))
     DescribeSecretResponse.add_member(:rotation_lambda_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RotationLambdaARNType, name: "RotationLambdaARN"))
     DescribeSecretResponse.add_member(:rotation_rules, ::Smithy::Schema::Shapes::MemberShape.new(target: RotationRulesType, name: "RotationRules"))
+    DescribeSecretResponse.add_member(:external_secret_rotation_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalSecretRotationMetadataType, name: "ExternalSecretRotationMetadata"))
+    DescribeSecretResponse.add_member(:external_secret_rotation_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleARNType, name: "ExternalSecretRotationRoleArn"))
     DescribeSecretResponse.add_member(:last_rotated_date, ::Smithy::Schema::Shapes::MemberShape.new(target: LastRotatedDateType, name: "LastRotatedDate"))
     DescribeSecretResponse.add_member(:last_changed_date, ::Smithy::Schema::Shapes::MemberShape.new(target: LastChangedDateType, name: "LastChangedDate"))
     DescribeSecretResponse.add_member(:last_accessed_date, ::Smithy::Schema::Shapes::MemberShape.new(target: LastAccessedDateType, name: "LastAccessedDate"))
@@ -214,6 +225,10 @@ module Aws::SecretsManager
     DescribeSecretResponse.type = Types::DescribeSecretResponse
     EncryptionFailure.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     EncryptionFailure.type = Types::EncryptionFailure
+    ExternalSecretRotationMetadataItem.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalSecretRotationMetadataItemKeyType, name: "Key"))
+    ExternalSecretRotationMetadataItem.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalSecretRotationMetadataItemValueType, name: "Value"))
+    ExternalSecretRotationMetadataItem.type = Types::ExternalSecretRotationMetadataItem
+    ExternalSecretRotationMetadataType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalSecretRotationMetadataItem, name: "member"))
     Filter.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterNameStringType, name: "Key"))
     Filter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValuesStringList, name: "Values"))
     Filter.type = Types::Filter
@@ -281,6 +296,7 @@ module Aws::SecretsManager
     ListSecretsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextTokenType, name: "NextToken"))
     ListSecretsRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: FiltersListType, name: "Filters"))
     ListSecretsRequest.add_member(:sort_order, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrderType, name: "SortOrder"))
+    ListSecretsRequest.add_member(:sort_by, ::Smithy::Schema::Shapes::MemberShape.new(target: SortByType, name: "SortBy"))
     ListSecretsRequest.type = Types::ListSecretsRequest
     ListSecretsResponse.add_member(:secret_list, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretListType, name: "SecretList"))
     ListSecretsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextTokenType, name: "NextToken"))
@@ -347,6 +363,8 @@ module Aws::SecretsManager
     RotateSecretRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestTokenType, name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
     RotateSecretRequest.add_member(:rotation_lambda_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RotationLambdaARNType, name: "RotationLambdaARN"))
     RotateSecretRequest.add_member(:rotation_rules, ::Smithy::Schema::Shapes::MemberShape.new(target: RotationRulesType, name: "RotationRules"))
+    RotateSecretRequest.add_member(:external_secret_rotation_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalSecretRotationMetadataType, name: "ExternalSecretRotationMetadata"))
+    RotateSecretRequest.add_member(:external_secret_rotation_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleARNType, name: "ExternalSecretRotationRoleArn"))
     RotateSecretRequest.add_member(:rotate_immediately, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanType, name: "RotateImmediately", traits: {"smithy.api#default" => nil}))
     RotateSecretRequest.type = Types::RotateSecretRequest
     RotateSecretResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretARNType, name: "ARN"))
@@ -360,11 +378,14 @@ module Aws::SecretsManager
     SecretIdListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretIdType, name: "member"))
     SecretListEntry.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretARNType, name: "ARN"))
     SecretListEntry.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretNameType, name: "Name"))
+    SecretListEntry.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: MedeaTypeType, name: "Type"))
     SecretListEntry.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: DescriptionType, name: "Description"))
     SecretListEntry.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyIdType, name: "KmsKeyId"))
     SecretListEntry.add_member(:rotation_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: RotationEnabledType, name: "RotationEnabled", traits: {"smithy.api#default" => nil}))
     SecretListEntry.add_member(:rotation_lambda_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RotationLambdaARNType, name: "RotationLambdaARN"))
     SecretListEntry.add_member(:rotation_rules, ::Smithy::Schema::Shapes::MemberShape.new(target: RotationRulesType, name: "RotationRules"))
+    SecretListEntry.add_member(:external_secret_rotation_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalSecretRotationMetadataType, name: "ExternalSecretRotationMetadata"))
+    SecretListEntry.add_member(:external_secret_rotation_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleARNType, name: "ExternalSecretRotationRoleArn"))
     SecretListEntry.add_member(:last_rotated_date, ::Smithy::Schema::Shapes::MemberShape.new(target: LastRotatedDateType, name: "LastRotatedDate"))
     SecretListEntry.add_member(:last_changed_date, ::Smithy::Schema::Shapes::MemberShape.new(target: LastChangedDateType, name: "LastChangedDate"))
     SecretListEntry.add_member(:last_accessed_date, ::Smithy::Schema::Shapes::MemberShape.new(target: LastAccessedDateType, name: "LastAccessedDate"))
@@ -396,6 +417,10 @@ module Aws::SecretsManager
     SecretVersionsListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretVersionsListEntry, name: "member"))
     SecretVersionsToStagesMapType.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretVersionIdType, name: "key"))
     SecretVersionsToStagesMapType.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretVersionStagesType, name: "value"))
+    SortByType.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "created_date", traits: {"smithy.api#enumValue" => "created-date"}))
+    SortByType.add_member(:last_accessed_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "last_accessed_date", traits: {"smithy.api#enumValue" => "last-accessed-date"}))
+    SortByType.add_member(:last_changed_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "last_changed_date", traits: {"smithy.api#enumValue" => "last-changed-date"}))
+    SortByType.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "name", traits: {"smithy.api#enumValue" => "name"}))
     SortOrderType.add_member(:asc, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "asc", traits: {"smithy.api#enumValue" => "asc"}))
     SortOrderType.add_member(:desc, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "desc", traits: {"smithy.api#enumValue" => "desc"}))
     StatusType.add_member(:in_sync, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "InSync", traits: {"smithy.api#enumValue" => "InSync"}))
@@ -422,6 +447,7 @@ module Aws::SecretsManager
     UpdateSecretRequest.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyIdType, name: "KmsKeyId"))
     UpdateSecretRequest.add_member(:secret_binary, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretBinaryType, name: "SecretBinary"))
     UpdateSecretRequest.add_member(:secret_string, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretStringType, name: "SecretString"))
+    UpdateSecretRequest.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: MedeaTypeType, name: "Type"))
     UpdateSecretRequest.type = Types::UpdateSecretRequest
     UpdateSecretResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretARNType, name: "ARN"))
     UpdateSecretResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretNameType, name: "Name"))
@@ -450,7 +476,7 @@ module Aws::SecretsManager
       service.id = "com.amazonaws.secretsmanager#secretsmanager"
       service.name = "Secretsmanager"
       service.version = "2017-10-17"
-      service.traits = {"aws.api#service" => {"sdkId" => "Secrets Manager", "arnNamespace" => "secretsmanager", "cloudFormationName" => "SecretsManager", "cloudTrailEventSource" => "secretsmanager.amazonaws.com", "docId" => "secretsmanager-2017-10-17", "endpointPrefix" => "secretsmanager"}, "aws.auth#sigv4" => {"name" => "secretsmanager"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "AWS Secrets Manager"}
+      service.traits = {"aws.api#service" => {"sdkId" => "Secrets Manager", "arnNamespace" => "secretsmanager", "cloudFormationName" => "SecretsManager", "cloudTrailEventSource" => "secretsmanager.amazonaws.com", "docId" => "secretsmanager-2017-10-17", "endpointPrefix" => "secretsmanager"}, "aws.auth#sigv4" => {"name" => "secretsmanager"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "AWS Secrets Manager", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws"]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws-cn"]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws-us-gov"]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://secretsmanager-fips.{Region}.amazonaws.com", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://secretsmanager-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://secretsmanager-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://secretsmanager.{Region}.amazonaws.com", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://secretsmanager.{Region}.amazonaws.com.cn", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://secretsmanager.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://secretsmanager.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 18, "nodes" => "/////wAAAAH/////AAAAAAAAABEAAAADAAAAAQAAAAQF9eEOAAAAAgAAAAUF9eEOAAAAAwAAAAsAAAAGAAAABAAAAAcF9eENAAAABQAAAAgF9eEMAAAABwX14QkAAAAJAAAACAX14QoAAAAKAAAACQX14QkF9eELAAAABAAAAA0AAAAMAAAABgX14QcF9eEIAAAABQAAAA4F9eEGAAAABgAAAA8F9eEGAAAABwX14QQAAAAQAAAACQX14QQF9eEFAAAAAwX14QEAAAASAAAABAX14QIF9eED"}}
       service.add_operation(:batch_get_secret_value, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.secretsmanager#BatchGetSecretValue"
         operation.name = "BatchGetSecretValue"

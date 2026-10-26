@@ -50,7 +50,7 @@ module Aws::VerifiedPermissions
       end
     end
 
-    # <p>The request failed because another request to modify a resource occurred at the same.</p>
+    # <p>The request failed because another request to modify a resource occurred at the same time.</p>
     class ConflictException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::VerifiedPermissions::Types::ConflictException] data

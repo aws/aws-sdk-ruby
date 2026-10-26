@@ -126,7 +126,8 @@ module Aws::TaxSettings
             sdi_account_id: String,
             cig_number: String,
             cup_number: String,
-            tax_code: String
+            tax_code: String,
+            customer_type: String
           },
           romania_additional_info: {
             tax_registration_number_type: String
@@ -136,7 +137,8 @@ module Aws::TaxSettings
           },
           poland_additional_info: {
             individual_registration_number: String,
-            is_group_vat_enabled: untyped
+            is_group_vat_enabled: untyped,
+            tax_registration_number_type: String
           },
           saudi_arabia_additional_info: {
             tax_registration_number_type: String
@@ -162,6 +164,24 @@ module Aws::TaxSettings
           uzbekistan_additional_info: {
             tax_registration_number_type: String,
             vat_registration_number: String
+          },
+          philippines_additional_info: {
+            is_vat_registered: untyped
+          },
+          belgium_additional_info: {
+            peppol_id: String,
+            is_mercurius_box_enabled: untyped
+          },
+          chile_additional_info: {
+            document_type: String,
+            business_activity: String
+          },
+          france_additional_info: {
+            siren_number: String,
+            e_invoice_routing_code: String
+          },
+          monaco_additional_info: {
+            business_number: String
           }
         },
         verification_details: {
@@ -374,7 +394,8 @@ module Aws::TaxSettings
             sdi_account_id: String,
             cig_number: String,
             cup_number: String,
-            tax_code: String
+            tax_code: String,
+            customer_type: String
           },
           romania_additional_info: {
             tax_registration_number_type: String
@@ -384,7 +405,8 @@ module Aws::TaxSettings
           },
           poland_additional_info: {
             individual_registration_number: String,
-            is_group_vat_enabled: untyped
+            is_group_vat_enabled: untyped,
+            tax_registration_number_type: String
           },
           saudi_arabia_additional_info: {
             tax_registration_number_type: String
@@ -410,6 +432,24 @@ module Aws::TaxSettings
           uzbekistan_additional_info: {
             tax_registration_number_type: String,
             vat_registration_number: String
+          },
+          philippines_additional_info: {
+            is_vat_registered: untyped
+          },
+          belgium_additional_info: {
+            peppol_id: String,
+            is_mercurius_box_enabled: untyped
+          },
+          chile_additional_info: {
+            document_type: String,
+            business_activity: String
+          },
+          france_additional_info: {
+            siren_number: String,
+            e_invoice_routing_code: String
+          },
+          monaco_additional_info: {
+            business_number: String
           }
         },
         verification_details: {

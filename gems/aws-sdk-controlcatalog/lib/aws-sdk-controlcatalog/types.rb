@@ -113,9 +113,13 @@ module Aws::ControlCatalog
     # @!attribute implementations
     #   <p>A filter that narrows the results to controls with specific implementation types or identifiers. This field allows you to find controls that are implemented by specific Amazon Web Services services or with specific service identifiers.</p>
     #   @return [Types::ImplementationFilter]
+    # @!attribute governed_providers
+    #   <p>A filter that narrows the results to controls that govern a specific provider's resources.</p>
+    #   @return [Array<String>]
     class ControlFilter < Struct.new(
       nil,
       :implementations,
+      :governed_providers,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -126,10 +130,10 @@ module Aws::ControlCatalog
     #   <p>The Amazon Resource Name (ARN) that identifies the control in the mapping.</p>
     #   @return [String]
     # @!attribute mapping_type
-    #   <p>The type of mapping relationship between the control and other entities. Indicates whether the mapping is to a framework or common control.</p>
+    #   <p>The type of mapping relationship between the control and other entities.</p>
     #   @return [String]
     # @!attribute mapping
-    #   <p>The details of the mapping relationship, containing either framework or common control information.</p>
+    #   <p>The details of the mapping relationship, for example, containing framework, common control, or related control information.</p>
     #   @return [Types::Mapping]
     class ControlMapping < Struct.new(
       nil,
@@ -161,13 +165,17 @@ module Aws::ControlCatalog
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Five types of control parameters are supported.</p> <ul> <li> <p> <b>AllowedRegions</b>: List of Amazon Web Services Regions exempted from the control. Each string is expected to be an Amazon Web Services Region code. This parameter is mandatory for the <b>OU Region deny</b> control, <b>CT.MULTISERVICE.PV.1</b>.</p> <p>Example: <code>["us-east-1","us-west-2"]</code> </p> </li> <li> <p> <b>ExemptedActions</b>: List of Amazon Web Services IAM actions exempted from the control. Each string is expected to be an IAM action.</p> <p>Example: <code>["logs:DescribeLogGroups","logs:StartQuery","logs:GetQueryResults"]</code> </p> </li> <li> <p> <b>ExemptedPrincipalArns</b>: List of Amazon Web Services IAM principal ARNs exempted from the control. Each string is expected to be an IAM principal that follows the pattern <code>^arn:(aws|aws-us-gov):(iam|sts)::.+:.+$</code> </p> <p>Example: <code>["arn:aws:iam::*:role/ReadOnly","arn:aws:sts::*:assumed-role/ReadOnly/*"]</code> </p> </li> <li> <p> <b>ExemptedResourceArns</b>: List of resource ARNs exempted from the control. Each string is expected to be a resource ARN.</p> <p>Example: <code>["arn:aws:s3:::my-bucket-name"]</code> </p> </li> <li> <p> <b>ExemptAssumeRoot</b>: A parameter that lets you choose whether to exempt requests made with <code>AssumeRoot</code> from this control, for this OU. For member accounts, the <code>AssumeRoot</code> property is included in requests initiated by IAM centralized root access. This parameter applies only to the <code>AWS-GR_RESTRICT_ROOT_USER</code> control. If you add the parameter when enabling the control, the <code>AssumeRoot</code> exemption is allowed. If you omit the parameter, the <code>AssumeRoot</code> exception is not permitted. The parameter does not accept <code>False</code> as a value.</p> <p> <i>Example: Enabling the control and allowing <code>AssumeRoot</code> </i> </p> <p> <code>{ "controlIdentifier": "arn:aws:controlcatalog:::control/5kvme4m5d2b4d7if2fs5yg2ui", "parameters": [ { "key": "ExemptAssumeRoot", "value": true } ], "targetIdentifier": "arn:aws:organizations::8633900XXXXX:ou/o-6jmn81636m/ou-qsah-jtiihcla" }</code> </p> </li> </ul>
+    # <p>Five types of control parameters are supported.</p> <ul> <li> <p> <b>AllowedRegions</b>: List of Amazon Web Services Regions exempted from the control. Each string is expected to be an Amazon Web Services Region code. This parameter is mandatory for the <b>OU Region deny</b> control, <b>CT.MULTISERVICE.PV.1</b>.</p> <p>Example: <code>["us-east-1","us-west-2"]</code> </p> </li> <li> <p> <b>ExemptedActions</b>: List of Amazon Web Services IAM actions exempted from the control. Each string is expected to be an IAM action.</p> <p>Example: <code>["logs:DescribeLogGroups","logs:StartQuery","logs:GetQueryResults"]</code> </p> </li> <li> <p> <b>ExemptedPrincipalArns</b>: List of Amazon Web Services IAM principal ARNs exempted from the control. Each string is expected to be an IAM principal that follows the format <code>arn:partition:service::account:resource</code> </p> <p>Example: <code>["arn:aws:iam::*:role/ReadOnly","arn:aws:sts::*:assumed-role/ReadOnly/*"]</code> </p> </li> <li> <p> <b>ExemptedResourceArns</b>: List of resource ARNs exempted from the control. Each string is expected to be a resource ARN.</p> <p>Example: <code>["arn:aws:s3:::my-bucket-name"]</code> </p> </li> <li> <p> <b>ExemptAssumeRoot</b>: A parameter that lets you choose whether to exempt requests made with <code>AssumeRoot</code> from this control, for this OU. For member accounts, the <code>AssumeRoot</code> property is included in requests initiated by IAM centralized root access. This parameter applies only to the <code>AWS-GR_RESTRICT_ROOT_USER</code> control. If you add the parameter when enabling the control, the <code>AssumeRoot</code> exemption is allowed. If you omit the parameter, the <code>AssumeRoot</code> exception is not permitted. The parameter does not accept <code>False</code> as a value.</p> <p> <i>Example: Enabling the control and allowing <code>AssumeRoot</code> </i> </p> <p> <code>{ "controlIdentifier": "arn:aws:controlcatalog:::control/5kvme4m5d2b4d7if2fs5yg2ui", "parameters": [ { "key": "ExemptAssumeRoot", "value": true } ], "targetIdentifier": "arn:aws:organizations::8633900XXXXX:ou/o-6jmn81636m/ou-qsah-jtiihcla" }</code> </p> </li> </ul>
     # @!attribute name
     #   <p>The parameter name. This name is the parameter <code>key</code> when you call <a href="https://docs.aws.amazon.com/controltower/latest/APIReference/API_EnableControl.html"> <code>EnableControl</code> </a> or <a href="https://docs.aws.amazon.com/controltower/latest/APIReference/API_UpdateEnabledControl.html"> <code>UpdateEnabledControl</code> </a>.</p>
+    #   @return [String]
+    # @!attribute requirement
+    #   <p>Indicates whether the parameter is required or optional when you enable the control.</p>
     #   @return [String]
     class ControlParameter < Struct.new(
       nil,
       :name,
+      :requirement,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -192,6 +200,9 @@ module Aws::ControlCatalog
     # @!attribute severity
     #   <p>An enumerated type, with the following possible values:</p>
     #   @return [String]
+    # @!attribute parameter_requirement_summary
+    #   <p>A summary that indicates whether the control requires parameters, accepts optional parameters, or does not support parameters. Use this field to determine whether you need to supply parameter values when you enable the control.</p>
+    #   @return [String]
     # @!attribute implementation
     #   <p>An object of type <code>ImplementationSummary</code> that describes how the control is implemented.</p>
     #   @return [Types::ImplementationSummary]
@@ -199,7 +210,10 @@ module Aws::ControlCatalog
     #   <p>A timestamp that notes the time when the control was released (start of its life) as a governance capability in Amazon Web Services.</p>
     #   @return [Time]
     # @!attribute governed_resources
-    #   <p>A list of Amazon Web Services resource types that are governed by this control. This information helps you understand which controls can govern certain types of resources, and conversely, which resources are affected when the control is implemented. The resources are represented as Amazon Web Services CloudFormation resource types. If <code>GovernedResources</code> cannot be represented by available CloudFormation resource types, it’s returned as an empty list.</p>
+    #   <p>A list of resource types that are governed by this control. This information helps you understand which controls can govern certain types of resources, and conversely, which resources are affected when the control is implemented. For Amazon Web Services controls, the resources are represented as CloudFormation resource types. For non-Amazon Web Services controls, the resources are represented in a provider-specific format. If <code>GovernedResources</code> cannot be represented by available resource types, it’s returned as an empty list.</p>
+    #   @return [Array<String>]
+    # @!attribute governed_providers
+    #   <p>A list of providers whose resources are governed by this control. For example, a value of <code>AWS</code> indicates that the control governs Amazon Web Services resources.</p>
     #   @return [Array<String>]
     class ControlSummary < Struct.new(
       nil,
@@ -209,9 +223,11 @@ module Aws::ControlCatalog
       :description,
       :behavior,
       :severity,
+      :parameter_requirement_summary,
       :implementation,
       :create_time,
       :governed_resources,
+      :governed_providers,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -308,6 +324,9 @@ module Aws::ControlCatalog
     # @!attribute implementation
     #   <p>Returns information about the control, as an <code>ImplementationDetails</code> object that shows the underlying implementation type for a control.</p>
     #   @return [Types::ImplementationDetails]
+    # @!attribute parameter_requirement_summary
+    #   <p>A summary that indicates whether the control requires parameters, accepts optional parameters, or does not support parameters. Use this field to determine whether you need to supply parameter values when you enable the control.</p>
+    #   @return [String]
     # @!attribute parameters
     #   <p>Returns an array of <code>ControlParameter</code> objects that specify the parameters a control supports. An empty list is returned for controls that don’t support parameters. </p>
     #   @return [Array<Types::ControlParameter>]
@@ -315,7 +334,10 @@ module Aws::ControlCatalog
     #   <p>A timestamp that notes the time when the control was released (start of its life) as a governance capability in Amazon Web Services.</p>
     #   @return [Time]
     # @!attribute governed_resources
-    #   <p>A list of Amazon Web Services resource types that are governed by this control. This information helps you understand which controls can govern certain types of resources, and conversely, which resources are affected when the control is implemented. The resources are represented as Amazon Web Services CloudFormation resource types. If <code>GovernedResources</code> cannot be represented by available CloudFormation resource types, it’s returned as an empty list.</p>
+    #   <p>A list of resource types that are governed by this control. This information helps you understand which controls can govern certain types of resources, and conversely, which resources are affected when the control is implemented. For Amazon Web Services controls, the resources are represented as CloudFormation resource types. For non-Amazon Web Services controls, the resources are represented in a provider-specific format. If <code>GovernedResources</code> cannot be represented by available resource types, it’s returned as an empty list.</p>
+    #   @return [Array<String>]
+    # @!attribute governed_providers
+    #   <p>A list of providers whose resources are governed by this control. For example, a value of <code>AWS</code> indicates that the control governs Amazon Web Services resources.</p>
     #   @return [Array<String>]
     class GetControlResponse < Struct.new(
       nil,
@@ -327,9 +349,11 @@ module Aws::ControlCatalog
       :severity,
       :region_configuration,
       :implementation,
+      :parameter_requirement_summary,
       :parameters,
       :create_time,
       :governed_resources,
+      :governed_providers,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -567,9 +591,13 @@ module Aws::ControlCatalog
     # @!attribute common_control
     #   <p>The common control mapping details when the mapping type relates to a common control.</p>
     #   @return [Types::CommonControlMappingDetails]
+    # @!attribute related_control
+    #   <p>Returns information about controls that are related to the specified control.</p>
+    #   @return [Types::RelatedControlMappingDetails]
     class Mapping < Struct.new(
       :framework,
       :common_control,
+      :related_control,
       :unknown,
       keyword_init: true
     )
@@ -577,6 +605,7 @@ module Aws::ControlCatalog
 
       class Framework < Mapping; end
       class CommonControl < Mapping; end
+      class RelatedControl < Mapping; end
       class Unknown < Mapping; end
     end
 
@@ -647,6 +676,22 @@ module Aws::ControlCatalog
       nil,
       :scope,
       :deployable_regions,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A structure that describes a control's relationship status with other controls.</p>
+    # @!attribute control_arn
+    #   <p>The unique identifier of a control.</p>
+    #   @return [String]
+    # @!attribute relation_type
+    #   <p>Returns an enumerated value that represents the relationship between two or more controls.</p>
+    #   @return [String]
+    class RelatedControlMappingDetails < Struct.new(
+      nil,
+      :control_arn,
+      :relation_type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

@@ -213,6 +213,36 @@ module Aws::NetworkFirewall
       attr_accessor update_token: String?
     end
 
+    class AttachRuleGroupsToProxyConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proxy_configuration_name: String,
+        ?proxy_configuration_arn: String,
+        ?rule_groups: Array[Types::ProxyRuleGroupAttachment],
+        ?update_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proxy_configuration_name: String?
+      attr_accessor proxy_configuration_arn: String?
+      attr_accessor rule_groups: Array[Types::ProxyRuleGroupAttachment]?
+      attr_accessor update_token: String?
+    end
+
+    class AttachRuleGroupsToProxyConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proxy_configuration: Types::ProxyConfiguration,
+        ?update_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proxy_configuration: Types::ProxyConfiguration?
+      attr_accessor update_token: String?
+    end
+
     class Attachment
       include Smithy::Schema::Structure
 
@@ -221,6 +251,7 @@ module Aws::NetworkFirewall
         ?endpoint_id: String,
         ?status: String,
         ?status_message: String,
+        ?dns_name: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -228,6 +259,7 @@ module Aws::NetworkFirewall
       attr_accessor endpoint_id: String?
       attr_accessor status: String?
       attr_accessor status_message: String?
+      attr_accessor dns_name: String?
     end
 
     module AttachmentStatus
@@ -306,6 +338,101 @@ module Aws::NetworkFirewall
       CAPACITY_CONSTRAINED: String
     end
 
+    module ContainerAssociationStatus
+      ACTIVE: String
+      CREATING: String
+      DELETING: String
+      UPDATING: String
+    end
+
+    class ContainerAssociationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+    end
+
+    class ContainerAttribute
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class ContainerMonitoringConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_arn: String,
+        ?attribute_filters: Array[Types::ContainerAttribute],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_arn: String?
+      attr_accessor attribute_filters: Array[Types::ContainerAttribute]?
+    end
+
+    module ContainerMonitoringType
+      ECS: String
+      EKS: String
+    end
+
+    class CreateContainerAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?container_association_name: String,
+        ?description: String,
+        ?type: String,
+        ?container_monitoring_configurations: Array[Types::ContainerMonitoringConfiguration],
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor container_association_name: String?
+      attr_accessor description: String?
+      attr_accessor type: String?
+      attr_accessor container_monitoring_configurations: Array[Types::ContainerMonitoringConfiguration]?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateContainerAssociationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?container_association_name: String,
+        ?container_association_arn: String,
+        ?description: String,
+        ?type: String,
+        ?container_monitoring_configurations: Array[Types::ContainerMonitoringConfiguration],
+        ?status: String,
+        ?tags: Array[Types::Tag],
+        ?update_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor container_association_name: String?
+      attr_accessor container_association_arn: String?
+      attr_accessor description: String?
+      attr_accessor type: String?
+      attr_accessor container_monitoring_configurations: Array[Types::ContainerMonitoringConfiguration]?
+      attr_accessor status: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor update_token: String?
+    end
+
     class CreateFirewallPolicyRequest
       include Smithy::Schema::Structure
 
@@ -358,6 +485,10 @@ module Aws::NetworkFirewall
         ?transit_gateway_id: String,
         ?availability_zone_mappings: Array[Types::AvailabilityZoneMapping],
         ?availability_zone_change_protection: bool,
+        ?nat_gateway_mappings: Array[Types::NatGatewayMapping],
+        ?proxy_settings: Types::ProxySettings,
+        ?no_source_preservation: bool,
+        ?vpc_endpoint: Types::VpcEndpoint,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -375,6 +506,10 @@ module Aws::NetworkFirewall
       attr_accessor transit_gateway_id: String?
       attr_accessor availability_zone_mappings: Array[Types::AvailabilityZoneMapping]?
       attr_accessor availability_zone_change_protection: bool?
+      attr_accessor nat_gateway_mappings: Array[Types::NatGatewayMapping]?
+      attr_accessor proxy_settings: Types::ProxySettings?
+      attr_accessor no_source_preservation: bool?
+      attr_accessor vpc_endpoint: Types::VpcEndpoint?
     end
 
     class CreateFirewallResponse
@@ -388,6 +523,168 @@ module Aws::NetworkFirewall
 
       attr_accessor firewall: Types::Firewall?
       attr_accessor firewall_status: Types::FirewallStatus?
+    end
+
+    class CreateProxyConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proxy_configuration_name: String,
+        ?description: String,
+        ?rule_group_names: Array[String],
+        ?rule_group_arns: Array[String],
+        ?default_rule_phase_actions: Types::ProxyConfigDefaultRulePhaseActionsRequest,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proxy_configuration_name: String?
+      attr_accessor description: String?
+      attr_accessor rule_group_names: Array[String]?
+      attr_accessor rule_group_arns: Array[String]?
+      attr_accessor default_rule_phase_actions: Types::ProxyConfigDefaultRulePhaseActionsRequest?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateProxyConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proxy_configuration: Types::ProxyConfiguration,
+        ?update_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proxy_configuration: Types::ProxyConfiguration?
+      attr_accessor update_token: String?
+    end
+
+    class CreateProxyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proxy_name: String,
+        ?nat_gateway_id: String,
+        ?proxy_configuration_name: String,
+        ?proxy_configuration_arn: String,
+        ?listener_properties: Array[Types::ListenerPropertyRequest],
+        ?tls_intercept_properties: Types::TlsInterceptPropertiesRequest,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proxy_name: String?
+      attr_accessor nat_gateway_id: String?
+      attr_accessor proxy_configuration_name: String?
+      attr_accessor proxy_configuration_arn: String?
+      attr_accessor listener_properties: Array[Types::ListenerPropertyRequest]?
+      attr_accessor tls_intercept_properties: Types::TlsInterceptPropertiesRequest?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateProxyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proxy: Types::Proxy,
+        ?update_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proxy: Types::Proxy?
+      attr_accessor update_token: String?
+    end
+
+    class CreateProxyRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proxy_rule_name: String,
+        ?description: String,
+        ?action: String,
+        ?conditions: Array[Types::ProxyRuleCondition],
+        ?insert_position: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proxy_rule_name: String?
+      attr_accessor description: String?
+      attr_accessor action: String?
+      attr_accessor conditions: Array[Types::ProxyRuleCondition]?
+      attr_accessor insert_position: Integer?
+    end
+
+    class CreateProxyRuleGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proxy_rule_group_name: String,
+        ?description: String,
+        ?rules: Types::ProxyRulesByRequestPhase,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proxy_rule_group_name: String?
+      attr_accessor description: String?
+      attr_accessor rules: Types::ProxyRulesByRequestPhase?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateProxyRuleGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proxy_rule_group: Types::ProxyRuleGroup,
+        ?update_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proxy_rule_group: Types::ProxyRuleGroup?
+      attr_accessor update_token: String?
+    end
+
+    class CreateProxyRulesByRequestPhase
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pre_dns: Array[Types::CreateProxyRule],
+        ?pre_request: Array[Types::CreateProxyRule],
+        ?post_response: Array[Types::CreateProxyRule],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pre_dns: Array[Types::CreateProxyRule]?
+      attr_accessor pre_request: Array[Types::CreateProxyRule]?
+      attr_accessor post_response: Array[Types::CreateProxyRule]?
+    end
+
+    class CreateProxyRulesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proxy_rule_group_arn: String,
+        ?proxy_rule_group_name: String,
+        ?rules: Types::CreateProxyRulesByRequestPhase,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proxy_rule_group_arn: String?
+      attr_accessor proxy_rule_group_name: String?
+      attr_accessor rules: Types::CreateProxyRulesByRequestPhase?
+    end
+
+    class CreateProxyRulesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proxy_rule_group: Types::ProxyRuleGroup,
+        ?update_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proxy_rule_group: Types::ProxyRuleGroup?
+      attr_accessor update_token: String?
     end
 
     class CreateRuleGroupRequest
@@ -513,6 +810,34 @@ module Aws::NetworkFirewall
       attr_accessor action_definition: Types::ActionDefinition?
     end
 
+    class DeleteContainerAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?container_association_name: String,
+        ?container_association_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor container_association_name: String?
+      attr_accessor container_association_arn: String?
+    end
+
+    class DeleteContainerAssociationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?container_association_name: String,
+        ?container_association_arn: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor container_association_name: String?
+      attr_accessor container_association_arn: String?
+      attr_accessor status: String?
+    end
+
     class DeleteFirewallPolicyRequest
       include Smithy::Schema::Structure
 
@@ -585,6 +910,114 @@ module Aws::NetworkFirewall
 
       attr_accessor transit_gateway_attachment_id: String?
       attr_accessor transit_gateway_attachment_status: String?
+    end
+
+    class DeleteProxyConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proxy_configuration_name: String,
+        ?proxy_configuration_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proxy_configuration_name: String?
+      attr_accessor proxy_configuration_arn: String?
+    end
+
+    class DeleteProxyConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proxy_configuration_name: String,
+        ?proxy_configuration_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proxy_configuration_name: String?
+      attr_accessor proxy_configuration_arn: String?
+    end
+
+    class DeleteProxyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?nat_gateway_id: String,
+        ?proxy_name: String,
+        ?proxy_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor nat_gateway_id: String?
+      attr_accessor proxy_name: String?
+      attr_accessor proxy_arn: String?
+    end
+
+    class DeleteProxyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?nat_gateway_id: String,
+        ?proxy_name: String,
+        ?proxy_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor nat_gateway_id: String?
+      attr_accessor proxy_name: String?
+      attr_accessor proxy_arn: String?
+    end
+
+    class DeleteProxyRuleGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proxy_rule_group_name: String,
+        ?proxy_rule_group_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proxy_rule_group_name: String?
+      attr_accessor proxy_rule_group_arn: String?
+    end
+
+    class DeleteProxyRuleGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proxy_rule_group_name: String,
+        ?proxy_rule_group_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proxy_rule_group_name: String?
+      attr_accessor proxy_rule_group_arn: String?
+    end
+
+    class DeleteProxyRulesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proxy_rule_group_arn: String,
+        ?proxy_rule_group_name: String,
+        ?rules: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proxy_rule_group_arn: String?
+      attr_accessor proxy_rule_group_name: String?
+      attr_accessor rules: Array[String]?
+    end
+
+    class DeleteProxyRulesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proxy_rule_group: Types::ProxyRuleGroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proxy_rule_group: Types::ProxyRuleGroup?
     end
 
     class DeleteResourcePolicyRequest
@@ -679,6 +1112,48 @@ module Aws::NetworkFirewall
 
       attr_accessor vpc_endpoint_association: Types::VpcEndpointAssociation?
       attr_accessor vpc_endpoint_association_status: Types::VpcEndpointAssociationStatus?
+    end
+
+    class DescribeContainerAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?container_association_name: String,
+        ?container_association_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor container_association_name: String?
+      attr_accessor container_association_arn: String?
+    end
+
+    class DescribeContainerAssociationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?container_association_name: String,
+        ?container_association_arn: String,
+        ?description: String,
+        ?type: String,
+        ?container_monitoring_configurations: Array[Types::ContainerMonitoringConfiguration],
+        ?status: String,
+        ?resolved_cidr_count: Integer,
+        ?last_updated_time: Time,
+        ?tags: Array[Types::Tag],
+        ?update_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor container_association_name: String?
+      attr_accessor container_association_arn: String?
+      attr_accessor description: String?
+      attr_accessor type: String?
+      attr_accessor container_monitoring_configurations: Array[Types::ContainerMonitoringConfiguration]?
+      attr_accessor status: String?
+      attr_accessor resolved_cidr_count: Integer?
+      attr_accessor last_updated_time: Time?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor update_token: String?
     end
 
     class DescribeFirewallMetadataRequest
@@ -845,6 +1320,155 @@ module Aws::NetworkFirewall
       attr_accessor enable_monitoring_dashboard: bool?
     end
 
+    class DescribeProxyConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proxy_configuration_name: String,
+        ?proxy_configuration_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proxy_configuration_name: String?
+      attr_accessor proxy_configuration_arn: String?
+    end
+
+    class DescribeProxyConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proxy_configuration: Types::ProxyConfiguration,
+        ?update_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proxy_configuration: Types::ProxyConfiguration?
+      attr_accessor update_token: String?
+    end
+
+    class DescribeProxyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proxy_name: String,
+        ?proxy_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proxy_name: String?
+      attr_accessor proxy_arn: String?
+    end
+
+    class DescribeProxyResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proxy_name: String,
+        ?proxy_arn: String,
+        ?proxy_configuration_name: String,
+        ?proxy_configuration_arn: String,
+        ?nat_gateway_id: String,
+        ?proxy_state: String,
+        ?proxy_modify_state: String,
+        ?listener_properties: Array[Types::ListenerProperty],
+        ?tls_intercept_properties: Types::TlsInterceptProperties,
+        ?vpc_endpoint_service_name: String,
+        ?private_dns_name: String,
+        ?create_time: Time,
+        ?delete_time: Time,
+        ?update_time: Time,
+        ?failure_code: String,
+        ?failure_message: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proxy_name: String?
+      attr_accessor proxy_arn: String?
+      attr_accessor proxy_configuration_name: String?
+      attr_accessor proxy_configuration_arn: String?
+      attr_accessor nat_gateway_id: String?
+      attr_accessor proxy_state: String?
+      attr_accessor proxy_modify_state: String?
+      attr_accessor listener_properties: Array[Types::ListenerProperty]?
+      attr_accessor tls_intercept_properties: Types::TlsInterceptProperties?
+      attr_accessor vpc_endpoint_service_name: String?
+      attr_accessor private_dns_name: String?
+      attr_accessor create_time: Time?
+      attr_accessor delete_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor failure_code: String?
+      attr_accessor failure_message: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class DescribeProxyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proxy: Types::DescribeProxyResource,
+        ?update_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proxy: Types::DescribeProxyResource?
+      attr_accessor update_token: String?
+    end
+
+    class DescribeProxyRuleGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proxy_rule_group_name: String,
+        ?proxy_rule_group_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proxy_rule_group_name: String?
+      attr_accessor proxy_rule_group_arn: String?
+    end
+
+    class DescribeProxyRuleGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proxy_rule_group: Types::ProxyRuleGroup,
+        ?update_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proxy_rule_group: Types::ProxyRuleGroup?
+      attr_accessor update_token: String?
+    end
+
+    class DescribeProxyRuleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proxy_rule_name: String,
+        ?proxy_rule_group_name: String,
+        ?proxy_rule_group_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proxy_rule_name: String?
+      attr_accessor proxy_rule_group_name: String?
+      attr_accessor proxy_rule_group_arn: String?
+    end
+
+    class DescribeProxyRuleResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proxy_rule: Types::ProxyRule,
+        ?update_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proxy_rule: Types::ProxyRule?
+      attr_accessor update_token: String?
+    end
+
     class DescribeResourcePolicyRequest
       include Smithy::Schema::Structure
 
@@ -893,6 +1517,9 @@ module Aws::NetworkFirewall
         ?capacity: Integer,
         ?stateful_rule_options: Types::StatefulRuleOptions,
         ?last_modified_time: Time,
+        ?vendor_name: String,
+        ?product_id: String,
+        ?listing_name: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -903,6 +1530,9 @@ module Aws::NetworkFirewall
       attr_accessor capacity: Integer?
       attr_accessor stateful_rule_options: Types::StatefulRuleOptions?
       attr_accessor last_modified_time: Time?
+      attr_accessor vendor_name: String?
+      attr_accessor product_id: String?
+      attr_accessor listing_name: String?
     end
 
     class DescribeRuleGroupRequest
@@ -1017,6 +1647,38 @@ module Aws::NetworkFirewall
 
       attr_accessor vpc_endpoint_association: Types::VpcEndpointAssociation?
       attr_accessor vpc_endpoint_association_status: Types::VpcEndpointAssociationStatus?
+    end
+
+    class DetachRuleGroupsFromProxyConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proxy_configuration_name: String,
+        ?proxy_configuration_arn: String,
+        ?rule_group_names: Array[String],
+        ?rule_group_arns: Array[String],
+        ?update_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proxy_configuration_name: String?
+      attr_accessor proxy_configuration_arn: String?
+      attr_accessor rule_group_names: Array[String]?
+      attr_accessor rule_group_arns: Array[String]?
+      attr_accessor update_token: String?
+    end
+
+    class DetachRuleGroupsFromProxyConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proxy_configuration: Types::ProxyConfiguration,
+        ?update_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proxy_configuration: Types::ProxyConfiguration?
+      attr_accessor update_token: String?
     end
 
     class Dimension
@@ -1143,6 +1805,10 @@ module Aws::NetworkFirewall
         ?transit_gateway_owner_account_id: String,
         ?availability_zone_mappings: Array[Types::AvailabilityZoneMapping],
         ?availability_zone_change_protection: bool,
+        ?nat_gateway_mappings: Array[Types::NatGatewayMapping],
+        ?proxy_settings: Types::ProxySettings,
+        ?no_source_preservation: bool,
+        ?vpc_endpoint: Types::VpcEndpoint,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1164,6 +1830,10 @@ module Aws::NetworkFirewall
       attr_accessor transit_gateway_owner_account_id: String?
       attr_accessor availability_zone_mappings: Array[Types::AvailabilityZoneMapping]?
       attr_accessor availability_zone_change_protection: bool?
+      attr_accessor nat_gateway_mappings: Array[Types::NatGatewayMapping]?
+      attr_accessor proxy_settings: Types::ProxySettings?
+      attr_accessor no_source_preservation: bool?
+      attr_accessor vpc_endpoint: Types::VpcEndpoint?
     end
 
     class FirewallMetadata
@@ -1235,6 +1905,7 @@ module Aws::NetworkFirewall
         ?tags: Array[Types::Tag],
         ?consumed_stateless_rule_capacity: Integer,
         ?consumed_stateful_rule_capacity: Integer,
+        ?consumed_stateful_domain_capacity: Integer,
         ?number_of_associations: Integer,
         ?encryption_configuration: Types::EncryptionConfiguration,
         ?last_modified_time: Time,
@@ -1249,6 +1920,7 @@ module Aws::NetworkFirewall
       attr_accessor tags: Array[Types::Tag]?
       attr_accessor consumed_stateless_rule_capacity: Integer?
       attr_accessor consumed_stateful_rule_capacity: Integer?
+      attr_accessor consumed_stateful_domain_capacity: Integer?
       attr_accessor number_of_associations: Integer?
       attr_accessor encryption_configuration: Types::EncryptionConfiguration?
       attr_accessor last_modified_time: Time?
@@ -1277,6 +1949,7 @@ module Aws::NetworkFirewall
       PROVISIONING: String
       DELETING: String
       READY: String
+      FAILED: String
     end
 
     class Flow
@@ -1608,6 +2281,32 @@ module Aws::NetworkFirewall
       attr_accessor next_token: String?
     end
 
+    class ListContainerAssociationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListContainerAssociationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?container_associations: Array[Types::ContainerAssociationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor container_associations: Array[Types::ContainerAssociationSummary]?
+      attr_accessor next_token: String?
+    end
+
     class ListFirewallPoliciesRequest
       include Smithy::Schema::Structure
 
@@ -1750,6 +2449,84 @@ module Aws::NetworkFirewall
       attr_accessor next_token: String?
     end
 
+    class ListProxiesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListProxiesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proxies: Array[Types::ProxyMetadata],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proxies: Array[Types::ProxyMetadata]?
+      attr_accessor next_token: String?
+    end
+
+    class ListProxyConfigurationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListProxyConfigurationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proxy_configurations: Array[Types::ProxyConfigurationMetadata],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proxy_configurations: Array[Types::ProxyConfigurationMetadata]?
+      attr_accessor next_token: String?
+    end
+
+    class ListProxyRuleGroupsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListProxyRuleGroupsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proxy_rule_groups: Array[Types::ProxyRuleGroupMetadata],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proxy_rule_groups: Array[Types::ProxyRuleGroupMetadata]?
+      attr_accessor next_token: String?
+    end
+
     class ListRuleGroupsRequest
       include Smithy::Schema::Structure
 
@@ -1758,6 +2535,7 @@ module Aws::NetworkFirewall
         ?max_results: Integer,
         ?scope: String,
         ?managed_type: String,
+        ?subscription_status: String,
         ?type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -1766,6 +2544,7 @@ module Aws::NetworkFirewall
       attr_accessor max_results: Integer?
       attr_accessor scope: String?
       attr_accessor managed_type: String?
+      attr_accessor subscription_status: String?
       attr_accessor type: String?
     end
 
@@ -1864,6 +2643,37 @@ module Aws::NetworkFirewall
       attr_accessor vpc_endpoint_associations: Array[Types::VpcEndpointAssociationMetadata]?
     end
 
+    class ListenerProperty
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?port: Integer,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor port: Integer?
+      attr_accessor type: String?
+    end
+
+    class ListenerPropertyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?port: Integer,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor port: Integer?
+      attr_accessor type: String?
+    end
+
+    module ListenerPropertyType
+      HTTP: String
+      HTTPS: String
+    end
+
     class LogDestinationConfig
       include Smithy::Schema::Structure
 
@@ -1934,6 +2744,42 @@ module Aws::NetworkFirewall
       attr_accessor tcp_flags: Array[Types::TCPFlagField]?
     end
 
+    class NatGatewayAttachment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?nat_gateway_id: String,
+        ?status: String,
+        ?status_message: String,
+        ?dns_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor nat_gateway_id: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor dns_name: String?
+    end
+
+    module NatGatewayAttachmentStatus
+      CREATING: String
+      READY: String
+      UPDATING: String
+      FAILED: String
+      DELETING: String
+    end
+
+    class NatGatewayMapping
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?nat_gateway_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor nat_gateway_id: String?
+    end
+
     module OverrideAction
       DROP_TO_ALERT: String
     end
@@ -1955,6 +2801,8 @@ module Aws::NetworkFirewall
       PENDING: String
       IN_SYNC: String
       CAPACITY_CONSTRAINED: String
+      NOT_SUBSCRIBED: String
+      DEPRECATED: String
     end
 
     class PolicyVariables
@@ -1990,6 +2838,295 @@ module Aws::NetworkFirewall
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor definition: Array[String]?
+    end
+
+    class Proxy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?create_time: Time,
+        ?delete_time: Time,
+        ?update_time: Time,
+        ?failure_code: String,
+        ?failure_message: String,
+        ?proxy_state: String,
+        ?proxy_modify_state: String,
+        ?nat_gateway_id: String,
+        ?proxy_configuration_name: String,
+        ?proxy_configuration_arn: String,
+        ?proxy_name: String,
+        ?proxy_arn: String,
+        ?listener_properties: Array[Types::ListenerProperty],
+        ?tls_intercept_properties: Types::TlsInterceptProperties,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor create_time: Time?
+      attr_accessor delete_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor failure_code: String?
+      attr_accessor failure_message: String?
+      attr_accessor proxy_state: String?
+      attr_accessor proxy_modify_state: String?
+      attr_accessor nat_gateway_id: String?
+      attr_accessor proxy_configuration_name: String?
+      attr_accessor proxy_configuration_arn: String?
+      attr_accessor proxy_name: String?
+      attr_accessor proxy_arn: String?
+      attr_accessor listener_properties: Array[Types::ListenerProperty]?
+      attr_accessor tls_intercept_properties: Types::TlsInterceptProperties?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class ProxyConfigDefaultRulePhaseActionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pre_dns: String,
+        ?pre_request: String,
+        ?post_response: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pre_dns: String?
+      attr_accessor pre_request: String?
+      attr_accessor post_response: String?
+    end
+
+    class ProxyConfigRuleGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proxy_rule_group_name: String,
+        ?proxy_rule_group_arn: String,
+        ?type: String,
+        ?priority: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proxy_rule_group_name: String?
+      attr_accessor proxy_rule_group_arn: String?
+      attr_accessor type: String?
+      attr_accessor priority: Integer?
+    end
+
+    class ProxyConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proxy_configuration_name: String,
+        ?proxy_configuration_arn: String,
+        ?description: String,
+        ?create_time: Time,
+        ?delete_time: Time,
+        ?rule_groups: Array[Types::ProxyConfigRuleGroup],
+        ?default_rule_phase_actions: Types::ProxyConfigDefaultRulePhaseActionsRequest,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proxy_configuration_name: String?
+      attr_accessor proxy_configuration_arn: String?
+      attr_accessor description: String?
+      attr_accessor create_time: Time?
+      attr_accessor delete_time: Time?
+      attr_accessor rule_groups: Array[Types::ProxyConfigRuleGroup]?
+      attr_accessor default_rule_phase_actions: Types::ProxyConfigDefaultRulePhaseActionsRequest?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class ProxyConfigurationMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+    end
+
+    class ProxyMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+    end
+
+    module ProxyModifyState
+      MODIFYING: String
+      COMPLETED: String
+      FAILED: String
+    end
+
+    class ProxyRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proxy_rule_name: String,
+        ?description: String,
+        ?action: String,
+        ?conditions: Array[Types::ProxyRuleCondition],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proxy_rule_name: String?
+      attr_accessor description: String?
+      attr_accessor action: String?
+      attr_accessor conditions: Array[Types::ProxyRuleCondition]?
+    end
+
+    class ProxyRuleCondition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?condition_operator: String,
+        ?condition_key: String,
+        ?condition_values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor condition_operator: String?
+      attr_accessor condition_key: String?
+      attr_accessor condition_values: Array[String]?
+    end
+
+    class ProxyRuleGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proxy_rule_group_name: String,
+        ?proxy_rule_group_arn: String,
+        ?create_time: Time,
+        ?delete_time: Time,
+        ?rules: Types::ProxyRulesByRequestPhase,
+        ?description: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proxy_rule_group_name: String?
+      attr_accessor proxy_rule_group_arn: String?
+      attr_accessor create_time: Time?
+      attr_accessor delete_time: Time?
+      attr_accessor rules: Types::ProxyRulesByRequestPhase?
+      attr_accessor description: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class ProxyRuleGroupAttachment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proxy_rule_group_name: String,
+        ?insert_position: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proxy_rule_group_name: String?
+      attr_accessor insert_position: Integer?
+    end
+
+    class ProxyRuleGroupMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+    end
+
+    class ProxyRuleGroupPriority
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proxy_rule_group_name: String,
+        ?new_position: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proxy_rule_group_name: String?
+      attr_accessor new_position: Integer?
+    end
+
+    class ProxyRuleGroupPriorityResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proxy_rule_group_name: String,
+        ?priority: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proxy_rule_group_name: String?
+      attr_accessor priority: Integer?
+    end
+
+    module ProxyRulePhaseAction
+      ALLOW: String
+      DENY: String
+      ALERT: String
+    end
+
+    class ProxyRulePriority
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proxy_rule_name: String,
+        ?new_position: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proxy_rule_name: String?
+      attr_accessor new_position: Integer?
+    end
+
+    class ProxyRulesByRequestPhase
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pre_dns: Array[Types::ProxyRule],
+        ?pre_request: Array[Types::ProxyRule],
+        ?post_response: Array[Types::ProxyRule],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pre_dns: Array[Types::ProxyRule]?
+      attr_accessor pre_request: Array[Types::ProxyRule]?
+      attr_accessor post_response: Array[Types::ProxyRule]?
+    end
+
+    class ProxySettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?listener_properties: Array[Types::ListenerProperty],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor listener_properties: Array[Types::ListenerProperty]?
+    end
+
+    module ProxyState
+      ATTACHING: String
+      ATTACHED: String
+      DETACHING: String
+      DETACHED: String
+      ATTACH_FAILED: String
+      DETACH_FAILED: String
     end
 
     class PublishMetricAction
@@ -2069,6 +3206,7 @@ module Aws::NetworkFirewall
       AWS_MANAGED_THREAT_SIGNATURES: String
       AWS_MANAGED_DOMAIN_LISTS: String
       ACTIVE_THREAT_DEFENSE: String
+      PARTNER_MANAGED: String
     end
 
     class ResourceNotFoundException
@@ -2141,11 +3279,19 @@ module Aws::NetworkFirewall
       def initialize: (
         ?name: String,
         ?arn: String,
+        ?vendor_name: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor name: String?
       attr_accessor arn: String?
+      attr_accessor vendor_name: String?
+    end
+
+    module RuleGroupRequestPhase
+      PRE_DNS: String
+      PRE_REQ: String
+      POST_RES: String
     end
 
     class RuleGroupResponse
@@ -2192,6 +3338,7 @@ module Aws::NetworkFirewall
     module RuleGroupType
       STATELESS: String
       STATEFUL: String
+      STATEFUL_DOMAIN: String
     end
 
     class RuleOption
@@ -2593,6 +3740,11 @@ module Aws::NetworkFirewall
       attr_accessor ip_address_type: String?
     end
 
+    module SubscriptionStatus
+      NOT_SUBSCRIBED: String
+      SUBSCRIBED: String
+    end
+
     class Summary
       include Smithy::Schema::Structure
 
@@ -2627,11 +3779,13 @@ module Aws::NetworkFirewall
       def initialize: (
         ?attachment: Types::Attachment,
         ?config: Hash[String, Types::PerObjectStatus],
+        ?nat_gateway_attachments: Array[Types::NatGatewayAttachment],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor attachment: Types::Attachment?
       attr_accessor config: Hash[String, Types::PerObjectStatus]?
+      attr_accessor nat_gateway_attachments: Array[Types::NatGatewayAttachment]?
     end
 
     module TCPFlag
@@ -2781,6 +3935,37 @@ module Aws::NetworkFirewall
       attr_accessor status_message: String?
     end
 
+    module TlsInterceptMode
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class TlsInterceptProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pca_arn: String,
+        ?tls_intercept_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pca_arn: String?
+      attr_accessor tls_intercept_mode: String?
+    end
+
+    class TlsInterceptPropertiesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pca_arn: String,
+        ?tls_intercept_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pca_arn: String?
+      attr_accessor tls_intercept_mode: String?
+    end
+
     module TransitGatewayAttachmentStatus
       CREATING: String
       DELETING: String
@@ -2884,6 +4069,54 @@ module Aws::NetworkFirewall
       attr_accessor firewall_arn: String?
       attr_accessor firewall_name: String?
       attr_accessor availability_zone_change_protection: bool?
+    end
+
+    class UpdateContainerAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?container_association_name: String,
+        ?container_association_arn: String,
+        ?description: String,
+        ?type: String,
+        ?container_monitoring_configurations: Array[Types::ContainerMonitoringConfiguration],
+        ?tags: Array[Types::Tag],
+        ?update_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor container_association_name: String?
+      attr_accessor container_association_arn: String?
+      attr_accessor description: String?
+      attr_accessor type: String?
+      attr_accessor container_monitoring_configurations: Array[Types::ContainerMonitoringConfiguration]?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor update_token: String?
+    end
+
+    class UpdateContainerAssociationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?container_association_name: String,
+        ?container_association_arn: String,
+        ?description: String,
+        ?type: String,
+        ?container_monitoring_configurations: Array[Types::ContainerMonitoringConfiguration],
+        ?status: String,
+        ?tags: Array[Types::Tag],
+        ?update_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor container_association_name: String?
+      attr_accessor container_association_arn: String?
+      attr_accessor description: String?
+      attr_accessor type: String?
+      attr_accessor container_monitoring_configurations: Array[Types::ContainerMonitoringConfiguration]?
+      attr_accessor status: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor update_token: String?
     end
 
     class UpdateFirewallAnalysisSettingsRequest
@@ -3126,6 +4359,214 @@ module Aws::NetworkFirewall
       attr_accessor enable_monitoring_dashboard: bool?
     end
 
+    class UpdateProxyConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proxy_configuration_name: String,
+        ?proxy_configuration_arn: String,
+        ?default_rule_phase_actions: Types::ProxyConfigDefaultRulePhaseActionsRequest,
+        ?update_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proxy_configuration_name: String?
+      attr_accessor proxy_configuration_arn: String?
+      attr_accessor default_rule_phase_actions: Types::ProxyConfigDefaultRulePhaseActionsRequest?
+      attr_accessor update_token: String?
+    end
+
+    class UpdateProxyConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proxy_configuration: Types::ProxyConfiguration,
+        ?update_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proxy_configuration: Types::ProxyConfiguration?
+      attr_accessor update_token: String?
+    end
+
+    class UpdateProxyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?nat_gateway_id: String,
+        ?proxy_name: String,
+        ?proxy_arn: String,
+        ?listener_properties_to_add: Array[Types::ListenerPropertyRequest],
+        ?listener_properties_to_remove: Array[Types::ListenerPropertyRequest],
+        ?tls_intercept_properties: Types::TlsInterceptPropertiesRequest,
+        ?update_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor nat_gateway_id: String?
+      attr_accessor proxy_name: String?
+      attr_accessor proxy_arn: String?
+      attr_accessor listener_properties_to_add: Array[Types::ListenerPropertyRequest]?
+      attr_accessor listener_properties_to_remove: Array[Types::ListenerPropertyRequest]?
+      attr_accessor tls_intercept_properties: Types::TlsInterceptPropertiesRequest?
+      attr_accessor update_token: String?
+    end
+
+    class UpdateProxyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proxy: Types::Proxy,
+        ?update_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proxy: Types::Proxy?
+      attr_accessor update_token: String?
+    end
+
+    class UpdateProxyRuleGroupPrioritiesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proxy_configuration_name: String,
+        ?proxy_configuration_arn: String,
+        ?rule_groups: Array[Types::ProxyRuleGroupPriority],
+        ?update_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proxy_configuration_name: String?
+      attr_accessor proxy_configuration_arn: String?
+      attr_accessor rule_groups: Array[Types::ProxyRuleGroupPriority]?
+      attr_accessor update_token: String?
+    end
+
+    class UpdateProxyRuleGroupPrioritiesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proxy_rule_groups: Array[Types::ProxyRuleGroupPriorityResult],
+        ?update_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proxy_rule_groups: Array[Types::ProxyRuleGroupPriorityResult]?
+      attr_accessor update_token: String?
+    end
+
+    class UpdateProxyRulePrioritiesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proxy_rule_group_name: String,
+        ?proxy_rule_group_arn: String,
+        ?rule_group_request_phase: String,
+        ?rules: Array[Types::ProxyRulePriority],
+        ?update_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proxy_rule_group_name: String?
+      attr_accessor proxy_rule_group_arn: String?
+      attr_accessor rule_group_request_phase: String?
+      attr_accessor rules: Array[Types::ProxyRulePriority]?
+      attr_accessor update_token: String?
+    end
+
+    class UpdateProxyRulePrioritiesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proxy_rule_group_name: String,
+        ?proxy_rule_group_arn: String,
+        ?rule_group_request_phase: String,
+        ?rules: Array[Types::ProxyRulePriority],
+        ?update_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proxy_rule_group_name: String?
+      attr_accessor proxy_rule_group_arn: String?
+      attr_accessor rule_group_request_phase: String?
+      attr_accessor rules: Array[Types::ProxyRulePriority]?
+      attr_accessor update_token: String?
+    end
+
+    class UpdateProxyRuleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proxy_rule_group_name: String,
+        ?proxy_rule_group_arn: String,
+        ?proxy_rule_name: String,
+        ?description: String,
+        ?action: String,
+        ?add_conditions: Array[Types::ProxyRuleCondition],
+        ?remove_conditions: Array[Types::ProxyRuleCondition],
+        ?update_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proxy_rule_group_name: String?
+      attr_accessor proxy_rule_group_arn: String?
+      attr_accessor proxy_rule_name: String?
+      attr_accessor description: String?
+      attr_accessor action: String?
+      attr_accessor add_conditions: Array[Types::ProxyRuleCondition]?
+      attr_accessor remove_conditions: Array[Types::ProxyRuleCondition]?
+      attr_accessor update_token: String?
+    end
+
+    class UpdateProxyRuleResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proxy_rule: Types::ProxyRule,
+        ?removed_conditions: Array[Types::ProxyRuleCondition],
+        ?update_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proxy_rule: Types::ProxyRule?
+      attr_accessor removed_conditions: Array[Types::ProxyRuleCondition]?
+      attr_accessor update_token: String?
+    end
+
+    class UpdateProxySettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?firewall_arn: String,
+        ?firewall_name: String,
+        ?update_token: String,
+        ?proxy_settings: Types::ProxySettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor firewall_arn: String?
+      attr_accessor firewall_name: String?
+      attr_accessor update_token: String?
+      attr_accessor proxy_settings: Types::ProxySettings?
+    end
+
+    class UpdateProxySettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?firewall_arn: String,
+        ?firewall_name: String,
+        ?update_token: String,
+        ?proxy_settings: Types::ProxySettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor firewall_arn: String?
+      attr_accessor firewall_name: String?
+      attr_accessor update_token: String?
+      attr_accessor proxy_settings: Types::ProxySettings?
+    end
+
     class UpdateRuleGroupRequest
       include Smithy::Schema::Structure
 
@@ -3238,6 +4679,19 @@ module Aws::NetworkFirewall
 
       attr_accessor update_token: String?
       attr_accessor tls_inspection_configuration_response: Types::TLSInspectionConfigurationResponse?
+    end
+
+    class VpcEndpoint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_id: String,
+        ?subnet_mappings: Array[Types::SubnetMapping],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_id: String?
+      attr_accessor subnet_mappings: Array[Types::SubnetMapping]?
     end
 
     class VpcEndpointAssociation

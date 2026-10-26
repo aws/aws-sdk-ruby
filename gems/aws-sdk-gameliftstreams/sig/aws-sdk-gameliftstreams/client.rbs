@@ -55,7 +55,13 @@ module Aws::GameLiftStreams
         {
           location_name: String,
           always_on_capacity: Integer,
-          on_demand_capacity: Integer
+          on_demand_capacity: Integer,
+          target_idle_capacity: Integer,
+          maximum_capacity: Integer,
+          vpc_transit_configuration: {
+            vpc_id: String,
+            ipv4_cidr_blocks: Array[String]
+          }
         }
       ]
     ) -> _AddStreamGroupLocationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddStreamGroupLocationsResponse
@@ -113,6 +119,7 @@ module Aws::GameLiftStreams
       def status_reason: () -> String?
       def last_updated_at: () -> Time?
       def created_at: () -> Time?
+      def expires_at: () -> Time?
       def associated_applications: () -> Array[String]?
     end
     def create_stream_group: (
@@ -123,12 +130,29 @@ module Aws::GameLiftStreams
         {
           location_name: String,
           always_on_capacity: Integer,
-          on_demand_capacity: Integer
+          on_demand_capacity: Integer,
+          target_idle_capacity: Integer,
+          maximum_capacity: Integer,
+          vpc_transit_configuration: {
+            vpc_id: String,
+            ipv4_cidr_blocks: Array[String]
+          }
         }
       ],
       ?tags: Hash[String, String],
       ?client_token: String
     ) -> _CreateStreamGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateStreamGroupResponse
+
+    interface _CreateStreamSessionAdminShellResponse
+      include Smithy::Client::_Response[Types::CreateStreamSessionAdminShellOutput]
+      def session_id: () -> String?
+      def stream_url: () -> String?
+      def token_value: () -> String?
+    end
+    def create_stream_session_admin_shell: (
+      ?identifier: String,
+      ?stream_session_identifier: String
+    ) -> _CreateStreamSessionAdminShellResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateStreamSessionAdminShellResponse
 
     interface _CreateStreamSessionConnectionResponse
       include Smithy::Client::_Response[Types::CreateStreamSessionConnectionOutput]
@@ -140,6 +164,49 @@ module Aws::GameLiftStreams
       ?stream_session_identifier: String,
       ?signal_request: String
     ) -> _CreateStreamSessionConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateStreamSessionConnectionResponse
+
+    interface _CreateStreamUrlResponse
+      include Smithy::Client::_Response[Types::CreateStreamUrlOutput]
+      def arn: () -> String?
+      def stream_url_id: () -> String?
+      def stream_url: () -> String?
+      def status: () -> String?
+      def status_reason: () -> String?
+      def expires_at: () -> Time?
+      def created_at: () -> Time?
+      def usage_limit: () -> Integer?
+      def remaining_uses: () -> Integer?
+      def stream_group_arn: () -> String?
+      def application_arn: () -> String?
+      def protocol: () -> String?
+      def locations: () -> Array[String]?
+      def session_length_seconds: () -> Integer?
+      def description: () -> String?
+      def additional_launch_args: () -> Array[String]?
+      def additional_environment_variables: () -> Hash[String, String]?
+      def role_arn: () -> String?
+      def display_configuration: () -> Types::DisplayConfiguration?
+    end
+    def create_stream_url: (
+      ?identifier: String,
+      ?application_identifier: String,
+      ?protocol: String,
+      ?url_expires_after_minutes: Integer,
+      ?usage_limit: Integer,
+      ?description: String,
+      ?locations: Array[String],
+      ?session_length_seconds: Integer,
+      ?additional_launch_args: Array[String],
+      ?additional_environment_variables: Hash[String, String],
+      ?role_arn: String,
+      ?display_configuration: {
+        resolution: {
+          width: Integer,
+          height: Integer
+        }
+      },
+      ?client_token: String
+    ) -> _CreateStreamUrlResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateStreamUrlResponse
 
     interface _DeleteApplicationResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
@@ -207,6 +274,7 @@ module Aws::GameLiftStreams
       def status_reason: () -> String?
       def last_updated_at: () -> Time?
       def created_at: () -> Time?
+      def expires_at: () -> Time?
       def associated_applications: () -> Array[String]?
     end
     def get_stream_group: (
@@ -229,17 +297,56 @@ module Aws::GameLiftStreams
       def session_length_seconds: () -> Integer?
       def additional_launch_args: () -> Array[String]?
       def additional_environment_variables: () -> Hash[String, String]?
+      def performance_stats_configuration: () -> Types::PerformanceStatsConfiguration?
       def log_file_location_uri: () -> String?
       def web_sdk_protocol_url: () -> String?
       def last_updated_at: () -> Time?
       def created_at: () -> Time?
       def application_arn: () -> String?
       def export_files_metadata: () -> Types::ExportFilesMetadata?
+      def role_arn: () -> String?
+      def display_configuration: () -> Types::DisplayConfiguration?
     end
     def get_stream_session: (
       ?identifier: String,
       ?stream_session_identifier: String
     ) -> _GetStreamSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetStreamSessionResponse
+
+    interface _GetStreamUrlResponse
+      include Smithy::Client::_Response[Types::GetStreamUrlOutput]
+      def arn: () -> String?
+      def stream_url_id: () -> String?
+      def stream_url: () -> String?
+      def status: () -> String?
+      def status_reason: () -> String?
+      def expires_at: () -> Time?
+      def created_at: () -> Time?
+      def usage_limit: () -> Integer?
+      def remaining_uses: () -> Integer?
+      def stream_group_arn: () -> String?
+      def application_arn: () -> String?
+      def protocol: () -> String?
+      def locations: () -> Array[String]?
+      def session_length_seconds: () -> Integer?
+      def description: () -> String?
+      def additional_launch_args: () -> Array[String]?
+      def additional_environment_variables: () -> Hash[String, String]?
+      def role_arn: () -> String?
+      def display_configuration: () -> Types::DisplayConfiguration?
+      def stream_sessions: () -> Array[Types::StreamSessionSummary]?
+    end
+    def get_stream_url: (
+      ?identifier: String,
+      ?stream_url_identifier: String
+    ) -> _GetStreamUrlResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetStreamUrlResponse
+
+    interface _ListApplicationShaderCachesResponse
+      include Smithy::Client::_Response[Types::ListApplicationShaderCachesOutput]
+      def items: () -> Array[Types::ShaderCacheSummary]?
+    end
+    def list_application_shader_caches: (
+      ?identifier: String
+    ) -> _ListApplicationShaderCachesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListApplicationShaderCachesResponse
 
     interface _ListApplicationsResponse
       include Smithy::Client::_Response[Types::ListApplicationsOutput]
@@ -286,6 +393,18 @@ module Aws::GameLiftStreams
       ?max_results: Integer
     ) -> _ListStreamSessionsByAccountResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListStreamSessionsByAccountResponse
 
+    interface _ListStreamUrlsResponse
+      include Smithy::Client::_Response[Types::ListStreamUrlsOutput]
+      def items: () -> Array[Types::StreamUrlSummary]?
+      def next_token: () -> String?
+    end
+    def list_stream_urls: (
+      ?status: String,
+      ?stream_group_identifier: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListStreamUrlsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListStreamUrlsResponse
+
     interface _ListTagsForResourceResponse
       include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
       def tags: () -> Hash[String, String]?
@@ -301,6 +420,15 @@ module Aws::GameLiftStreams
       ?identifier: String,
       ?locations: Array[String]
     ) -> _RemoveStreamGroupLocationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemoveStreamGroupLocationsResponse
+
+    interface _RevokeStreamUrlResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def revoke_stream_url: (
+      ?identifier: String,
+      ?stream_url_identifier: String,
+      ?revocation_mode: String
+    ) -> _RevokeStreamUrlResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RevokeStreamUrlResponse
 
     interface _StartStreamSessionResponse
       include Smithy::Client::_Response[Types::StartStreamSessionOutput]
@@ -318,12 +446,15 @@ module Aws::GameLiftStreams
       def session_length_seconds: () -> Integer?
       def additional_launch_args: () -> Array[String]?
       def additional_environment_variables: () -> Hash[String, String]?
+      def performance_stats_configuration: () -> Types::PerformanceStatsConfiguration?
       def log_file_location_uri: () -> String?
       def web_sdk_protocol_url: () -> String?
       def last_updated_at: () -> Time?
       def created_at: () -> Time?
       def application_arn: () -> String?
       def export_files_metadata: () -> Types::ExportFilesMetadata?
+      def role_arn: () -> String?
+      def display_configuration: () -> Types::DisplayConfiguration?
     end
     def start_stream_session: (
       ?client_token: String,
@@ -337,7 +468,17 @@ module Aws::GameLiftStreams
       ?connection_timeout_seconds: Integer,
       ?session_length_seconds: Integer,
       ?additional_launch_args: Array[String],
-      ?additional_environment_variables: Hash[String, String]
+      ?additional_environment_variables: Hash[String, String],
+      ?performance_stats_configuration: {
+        shared_with_client: bool
+      },
+      ?role_arn: String,
+      ?display_configuration: {
+        resolution: {
+          width: Integer,
+          height: Integer
+        }
+      }
     ) -> _StartStreamSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartStreamSessionResponse
 
     interface _TagResourceResponse
@@ -400,6 +541,7 @@ module Aws::GameLiftStreams
       def status_reason: () -> String?
       def last_updated_at: () -> Time?
       def created_at: () -> Time?
+      def expires_at: () -> Time?
       def associated_applications: () -> Array[String]?
     end
     def update_stream_group: (
@@ -408,7 +550,13 @@ module Aws::GameLiftStreams
         {
           location_name: String,
           always_on_capacity: Integer,
-          on_demand_capacity: Integer
+          on_demand_capacity: Integer,
+          target_idle_capacity: Integer,
+          maximum_capacity: Integer,
+          vpc_transit_configuration: {
+            vpc_id: String,
+            ipv4_cidr_blocks: Array[String]
+          }
         }
       ],
       ?description: String,

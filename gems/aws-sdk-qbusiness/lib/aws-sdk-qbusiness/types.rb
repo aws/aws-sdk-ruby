@@ -313,7 +313,7 @@ module Aws::QBusiness
     #   <p>The authentication type being used by a Amazon Q Business application.</p>
     #   @return [String]
     # @!attribute quick_sight_configuration
-    #   <p>The Amazon QuickSight configuration for an Amazon Q Business application that uses QuickSight as the identity provider.</p>
+    #   <p>The Amazon Quick Suite configuration for an Amazon Q Business application that uses Quick Suite as the identity provider.</p>
     #   @return [Types::QuickSightConfiguration]
     class Application < Struct.new(
       nil,
@@ -1425,7 +1425,7 @@ module Aws::QBusiness
     #   <p>Configuration information about chat response personalization. For more information, see <a href="https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/personalizing-chat-responses.html">Personalizing chat responses</a> </p>
     #   @return [Types::PersonalizationConfiguration]
     # @!attribute quick_sight_configuration
-    #   <p>The Amazon QuickSight configuration for an Amazon Q Business application that uses QuickSight for authentication. This configuration is required if your application uses QuickSight as the identity provider. For more information, see <a href="https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/create-quicksight-integrated-application.html">Creating an Amazon QuickSight integrated application</a>.</p>
+    #   <p>The Amazon Quick Suite configuration for an Amazon Q Business application that uses Quick Suite for authentication. This configuration is required if your application uses Quick Suite as the identity provider. For more information, see <a href="https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/create-quicksight-integrated-application.html">Creating an Amazon Quick Suite integrated application</a>.</p>
     #   @return [Types::QuickSightConfiguration]
     class CreateApplicationRequest < Struct.new(
       nil,
@@ -3041,7 +3041,7 @@ module Aws::QBusiness
     #   <p>The OIDC client ID for a Amazon Q Business application.</p>
     #   @return [Array<String>]
     # @!attribute quick_sight_configuration
-    #   <p>The Amazon QuickSight authentication configuration for the Amazon Q Business application.</p>
+    #   <p>The Amazon Quick Suite authentication configuration for the Amazon Q Business application.</p>
     #   @return [Types::QuickSightConfiguration]
     class GetApplicationResponse < Struct.new(
       nil,
@@ -5315,9 +5315,9 @@ module Aws::QBusiness
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The Amazon QuickSight configuration for an Amazon Q Business application that uses QuickSight as the identity provider. For more information, see <a href="https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/create-quicksight-integrated-application.html">Creating an Amazon QuickSight integrated application</a>.</p>
+    # <p>The Amazon Quick Suite configuration for an Amazon Q Business application that uses Quick Suite as the identity provider. For more information, see <a href="https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/create-quicksight-integrated-application.html">Creating an Amazon Quick Suite integrated application</a>.</p>
     # @!attribute client_namespace
-    #   <p>The Amazon QuickSight namespace that is used as the identity provider. For more information about QuickSight namespaces, see <a href="https://docs.aws.amazon.com/quicksight/latest/developerguide/namespace-operations.html">Namespace operations</a>. </p>
+    #   <p>The Amazon Quick Suite namespace that is used as the identity provider. For more information about Quick Suite namespaces, see <a href="https://docs.aws.amazon.com/quicksight/latest/developerguide/namespace-operations.html">Namespace operations</a>. </p>
     #   @return [String]
     class QuickSightConfiguration < Struct.new(
       nil,

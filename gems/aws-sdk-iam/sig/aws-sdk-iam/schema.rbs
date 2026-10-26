@@ -2,6 +2,7 @@ module Aws::IAM
   module Schema
     include Smithy::Schema::Shapes
 
+    AcceptDelegationRequestRequest: StructureShape
     AccessAdvisorUsageGranularityType: EnumShape
     AccessDetail: StructureShape
     AccessDetails: ListShape
@@ -9,17 +10,22 @@ module Aws::IAM
     AccessKeyLastUsed: StructureShape
     AccessKeyMetadata: StructureShape
     AccountNotManagementOrDelegatedAdministratorException: StructureShape
+    AcquireRoleRequest: StructureShape
+    AcquireRoleResponse: StructureShape
     ActionNameListType: ListShape
     ActionNameType: StringShape
     AddClientIDToOpenIDConnectProviderRequest: StructureShape
     AddRoleToInstanceProfileRequest: StructureShape
     AddUserToGroupRequest: StructureShape
     ArnListType: ListShape
+    AssociateDelegationRequestRequest: StructureShape
     AttachGroupPolicyRequest: StructureShape
     AttachRolePolicyRequest: StructureShape
     AttachUserPolicyRequest: StructureShape
     AttachedPermissionsBoundary: StructureShape
     AttachedPolicy: StructureShape
+    AttachmentName: StringShape
+    AttachmentType: EnumShape
     BootstrapDatum: BlobShape
     CallerIsNotManagementAccountException: StructureShape
     CertificationKeyType: StringShape
@@ -39,6 +45,8 @@ module Aws::IAM
     CreateAccessKeyRequest: StructureShape
     CreateAccessKeyResponse: StructureShape
     CreateAccountAliasRequest: StructureShape
+    CreateDelegationRequestRequest: StructureShape
+    CreateDelegationRequestResponse: StructureShape
     CreateGroupRequest: StructureShape
     CreateGroupResponse: StructureShape
     CreateInstanceProfileRequest: StructureShape
@@ -67,6 +75,8 @@ module Aws::IAM
     CredentialReportNotPresentException: StructureShape
     CredentialReportNotReadyException: StructureShape
     DeactivateMFADeviceRequest: StructureShape
+    DelegationPermission: StructureShape
+    DelegationRequest: StructureShape
     DeleteAccessKeyRequest: StructureShape
     DeleteAccountAliasRequest: StructureShape
     DeleteConflictException: StructureShape
@@ -108,6 +118,7 @@ module Aws::IAM
     EnableOrganizationsRootCredentialsManagementResponse: StructureShape
     EnableOrganizationsRootSessionsRequest: StructureShape
     EnableOrganizationsRootSessionsResponse: StructureShape
+    EnableOutboundWebIdentityFederationResponse: StructureShape
     EntityAlreadyExistsException: StructureShape
     EntityDetails: StructureShape
     EntityInfo: StructureShape
@@ -119,6 +130,10 @@ module Aws::IAM
     EvaluationResult: StructureShape
     EvaluationResultsListType: ListShape
     ExceptionMessage: StringShape
+    FeatureDisabledException: StructureShape
+    FeatureDisabledMessage: StringShape
+    FeatureEnabledException: StructureShape
+    FeatureEnabledMessage: StringShape
     FeatureType: EnumShape
     FeaturesListType: ListShape
     GenerateCredentialReportResponse: StructureShape
@@ -131,16 +146,22 @@ module Aws::IAM
     GetAccountAuthorizationDetailsRequest: StructureShape
     GetAccountAuthorizationDetailsResponse: StructureShape
     GetAccountPasswordPolicyResponse: StructureShape
+    GetAccountPropertiesRequest: StructureShape
+    GetAccountPropertiesResponse: StructureShape
     GetAccountSummaryResponse: StructureShape
     GetContextKeysForCustomPolicyOutput: StructureShape
     GetContextKeysForCustomPolicyRequest: StructureShape
     GetContextKeysForPrincipalPolicyOutput: StructureShape
     GetContextKeysForPrincipalPolicyRequest: StructureShape
     GetCredentialReportResponse: StructureShape
+    GetDelegationRequestRequest: StructureShape
+    GetDelegationRequestResponse: StructureShape
     GetGroupPolicyRequest: StructureShape
     GetGroupPolicyResponse: StructureShape
     GetGroupRequest: StructureShape
     GetGroupResponse: StructureShape
+    GetHumanReadableSummaryRequest: StructureShape
+    GetHumanReadableSummaryResponse: StructureShape
     GetInstanceProfileRequest: StructureShape
     GetInstanceProfileResponse: StructureShape
     GetLoginProfileRequest: StructureShape
@@ -151,6 +172,7 @@ module Aws::IAM
     GetOpenIDConnectProviderResponse: StructureShape
     GetOrganizationsAccessReportRequest: StructureShape
     GetOrganizationsAccessReportResponse: StructureShape
+    GetOutboundWebIdentityFederationInfoResponse: StructureShape
     GetPolicyRequest: StructureShape
     GetPolicyResponse: StructureShape
     GetPolicyVersionRequest: StructureShape
@@ -159,6 +181,8 @@ module Aws::IAM
     GetRolePolicyResponse: StructureShape
     GetRoleRequest: StructureShape
     GetRoleResponse: StructureShape
+    GetRoleTemplateVersionRequest: StructureShape
+    GetRoleTemplateVersionResponse: StructureShape
     GetSAMLProviderRequest: StructureShape
     GetSAMLProviderResponse: StructureShape
     GetSSHPublicKeyRequest: StructureShape
@@ -177,6 +201,8 @@ module Aws::IAM
     GetUserResponse: StructureShape
     Group: StructureShape
     GroupDetail: StructureShape
+    InlinePolicy: StructureShape
+    InlinePolicyIdentifierType: StructureShape
     InstanceProfile: StructureShape
     InvalidAuthenticationCodeException: StructureShape
     InvalidCertificateException: StructureShape
@@ -196,6 +222,8 @@ module Aws::IAM
     ListAttachedRolePoliciesResponse: StructureShape
     ListAttachedUserPoliciesRequest: StructureShape
     ListAttachedUserPoliciesResponse: StructureShape
+    ListDelegationRequestsRequest: StructureShape
+    ListDelegationRequestsResponse: StructureShape
     ListEntitiesForPolicyRequest: StructureShape
     ListEntitiesForPolicyResponse: StructureShape
     ListGroupPoliciesRequest: StructureShape
@@ -263,15 +291,19 @@ module Aws::IAM
     MalformedPolicyDocumentException: StructureShape
     ManagedPolicyDetail: StructureShape
     ManagedPolicyDetailListType: ListShape
+    NameConflictException: StructureShape
     NoSuchEntityException: StructureShape
     OpenIDConnectProviderListEntry: StructureShape
     OpenIDConnectProviderListType: ListShape
     OpenIDConnectProviderUrlType: StringShape
     OpenIdIdpCommunicationErrorException: StructureShape
+    OrderedOrganizationPolicyType: StructureShape
     OrganizationIdType: StringShape
     OrganizationNotFoundException: StructureShape
     OrganizationNotInAllFeaturesModeException: StructureShape
+    OrganizationPolicyListType: ListShape
     OrganizationsDecisionDetail: StructureShape
+    ParameterDefinition: StructureShape
     PasswordPolicy: StructureShape
     PasswordPolicyViolationException: StructureShape
     PermissionsBoundaryAttachmentType: EnumShape
@@ -280,11 +312,16 @@ module Aws::IAM
     PolicyDetail: StructureShape
     PolicyEvaluationDecisionType: EnumShape
     PolicyEvaluationException: StructureShape
+    PolicyExclusionsListType: ListShape
     PolicyGrantingServiceAccess: StructureShape
     PolicyGroup: StructureShape
     PolicyGroupListType: ListShape
+    PolicyIdentifier: UnionShape
+    PolicyIdentifierPolicyType: EnumShape
     PolicyIdentifierType: StringShape
     PolicyNotAttachableException: StructureShape
+    PolicyParameter: StructureShape
+    PolicyParameterTypeEnum: EnumShape
     PolicyRole: StructureShape
     PolicyRoleListType: ListShape
     PolicySourceType: EnumShape
@@ -293,6 +330,8 @@ module Aws::IAM
     PolicyUserListType: ListShape
     PolicyVersion: StructureShape
     Position: StructureShape
+    PutAccountPropertiesRequest: StructureShape
+    PutAccountPropertiesResponse: StructureShape
     PutGroupPolicyRequest: StructureShape
     PutRolePermissionsBoundaryRequest: StructureShape
     PutRolePolicyRequest: StructureShape
@@ -300,9 +339,11 @@ module Aws::IAM
     PutUserPolicyRequest: StructureShape
     ReasonType: StringShape
     RegionNameType: StringShape
+    RejectDelegationRequestRequest: StructureShape
     RemoveClientIDFromOpenIDConnectProviderRequest: StructureShape
     RemoveRoleFromInstanceProfileRequest: StructureShape
     RemoveUserFromGroupRequest: StructureShape
+    ReplacementValueEntry: StructureShape
     ReportContentType: BlobShape
     ReportFormatType: EnumShape
     ReportGenerationLimitExceededException: StructureShape
@@ -319,6 +360,9 @@ module Aws::IAM
     Role: StructureShape
     RoleDetail: StructureShape
     RoleLastUsed: StructureShape
+    RoleModifiedException: StructureShape
+    RoleTemplateDisabledException: StructureShape
+    RoleTemplateVersion: StructureShape
     RoleUsageListType: ListShape
     RoleUsageType: StructureShape
     SAMLMetadataDocumentType: StringShape
@@ -329,6 +373,7 @@ module Aws::IAM
     SSHPublicKey: StructureShape
     SSHPublicKeyListType: ListShape
     SSHPublicKeyMetadata: StructureShape
+    SendDelegationTokenRequest: StructureShape
     ServerCertificate: StructureShape
     ServerCertificateMetadata: StructureShape
     ServiceAccessNotEnabledException: StructureShape
@@ -347,6 +392,7 @@ module Aws::IAM
     SimulatePrincipalPolicyOutput: StructureShape
     SimulatePrincipalPolicyRequest: StructureShape
     SimulationPolicyListType: ListShape
+    SourceRoleTemplate: StructureShape
     Statement: StructureShape
     StatementListType: ListShape
     Tag: StructureShape
@@ -357,6 +403,7 @@ module Aws::IAM
     TagRoleRequest: StructureShape
     TagSAMLProviderRequest: StructureShape
     TagServerCertificateRequest: StructureShape
+    TagTemplate: StructureShape
     TagUserRequest: StructureShape
     TrackedActionLastAccessed: StructureShape
     TrackedActionsLastAccessed: ListShape
@@ -373,6 +420,7 @@ module Aws::IAM
     UpdateAccessKeyRequest: StructureShape
     UpdateAccountPasswordPolicyRequest: StructureShape
     UpdateAssumeRolePolicyRequest: StructureShape
+    UpdateDelegationRequestRequest: StructureShape
     UpdateGroupRequest: StructureShape
     UpdateLoginProfileRequest: StructureShape
     UpdateOpenIDConnectProviderThumbprintRequest: StructureShape
@@ -401,6 +449,10 @@ module Aws::IAM
     AccessKeySecretType: StringShape
     AccountAliasListType: ListShape
     AccountAliasType: StringShape
+    AccountIdType: StringShape
+    AccountPropertiesMapType: MapShape
+    AccountPropertyKeyType: StringShape
+    AccountPropertyValueType: StringShape
     AllUsers: BooleanShape
     ArnType: StringShape
     AssertionEncryptionModeType: EnumShape
@@ -416,12 +468,16 @@ module Aws::IAM
     CertificateListType: ListShape
     ClientIDListType: ListShape
     ClientIDType: StringShape
+    ConsoleDeepLinkType: StringShape
     CredentialAgeDays: IntegerShape
     CredentialReportExpiredExceptionMessage: StringShape
     CredentialReportNotPresentExceptionMessage: StringShape
     CredentialReportNotReadyExceptionMessage: StringShape
     CustomSuffixType: StringShape
     DateType: TimestampShape
+    DelegationRequestDescriptionType: StringShape
+    DelegationRequestIdType: StringShape
+    DelegationRequestsListType: ListShape
     DeleteConflictMessage: StringShape
     DuplicateCertificateMessage: StringShape
     DuplicateSSHPublicKeyMessage: StringShape
@@ -438,6 +494,7 @@ module Aws::IAM
     GroupNameListType: ListShape
     GroupNameType: StringShape
     IdType: StringShape
+    InlinePolicyTemplateListType: ListShape
     InstanceProfileListType: ListShape
     InstanceProfileNameType: StringShape
     IntegerType: IntegerShape
@@ -451,22 +508,41 @@ module Aws::IAM
     KeyPairMismatchMessage: StringShape
     LimitExceededMessage: StringShape
     ListPolicyGrantingServiceAccessResponseListType: ListShape
+    LocaleType: StringShape
     MalformedCertificateMessage: StringShape
     MalformedPolicyDocumentMessage: StringShape
+    ManagedByTypeType: EnumShape
+    ManagedByValueType: StringShape
+    ManagedPolicyArnListType: ListShape
+    MapStringReplacementValueEntry: MapShape
     MarkerType: StringShape
     MaxItemsType: IntegerShape
     MaxPasswordAgeType: IntegerShape
     MfaDeviceListType: ListShape
     MinimumPasswordLengthType: IntegerShape
+    MinorVersionType: IntegerShape
+    NameConflictMessage: StringShape
     NoSuchEntityMessage: StringShape
+    NotesType: StringShape
+    NotificationChannelType: StringShape
     OpenIdIdpCommunicationErrorExceptionMessage: StringShape
     OrganizationsEntityPathType: StringShape
     OrganizationsPolicyIdType: StringShape
+    OwnerIdType: StringShape
+    ParameterDefaultValueType: StringShape
+    ParameterDescriptionType: StringShape
+    ParameterNameType: StringShape
+    ParameterSubTypeType: StringShape
+    ParameterTypeType: EnumShape
+    ParametersDefinitionListType: ListShape
     PasswordPolicyViolationMessage: StringShape
     PasswordReusePreventionType: IntegerShape
     PasswordType: StringShape
     PathPrefixType: StringShape
     PathType: StringShape
+    PermissionCheckResultType: EnumShape
+    PermissionCheckStatusType: EnumShape
+    PermissionType: StringShape
     PolicyDescriptionType: StringShape
     PolicyDetailListType: ListShape
     PolicyDocumentType: StringShape
@@ -478,6 +554,10 @@ module Aws::IAM
     PolicyNameType: StringShape
     PolicyNotAttachableMessage: StringShape
     PolicyOwnerEntityType: EnumShape
+    PolicyParameterListType: ListShape
+    PolicyParameterNameType: StringShape
+    PolicyParameterValueType: StringShape
+    PolicyParameterValuesListType: ListShape
     PolicyPathType: StringShape
     PolicyScopeType: EnumShape
     PolicyType: EnumShape
@@ -488,13 +568,26 @@ module Aws::IAM
     PublicKeyFingerprintType: StringShape
     PublicKeyIdType: StringShape
     PublicKeyMaterialType: StringShape
+    RedirectUrlType: StringShape
+    ReplacementValueListType: ListShape
     ReportGenerationLimitExceededMessage: StringShape
+    RequestMessageType: StringShape
+    RequestorNameType: StringShape
+    RequestorWorkflowIdType: StringShape
     ResponseMarkerType: StringShape
+    RoleDescriptionPatternType: StringShape
     RoleDescriptionType: StringShape
     RoleDetailListType: ListShape
     RoleListType: ListShape
     RoleMaxSessionDurationType: IntegerShape
+    RoleModifiedMessage: StringShape
+    RoleNamePatternType: StringShape
     RoleNameType: StringShape
+    RolePathPatternType: StringShape
+    RolePermissionRestrictionArnListType: ListShape
+    RoleTemplateDescriptionType: StringShape
+    RoleTemplateDisabledMessage: StringShape
+    RoleTemplateNameType: StringShape
     SerialNumberType: StringShape
     ServerCertificateMetadataListType: ListShape
     ServerCertificateNameType: StringShape
@@ -509,15 +602,22 @@ module Aws::IAM
     ServicePassword: StringShape
     ServiceSpecificCredentialId: StringShape
     ServiceUserName: StringShape
+    SessionDurationType: IntegerShape
     SortKeyType: EnumShape
+    StateType: EnumShape
     StatusType: EnumShape
     StringType: StringShape
+    SummaryContentType: StringShape
     SummaryKeyType: EnumShape
     SummaryMapType: MapShape
+    SummaryStateType: EnumShape
     SummaryValueType: IntegerShape
     TagKeyListType: ListShape
     TagKeyType: StringShape
     TagListType: ListShape
+    TagTemplateKeyType: StringShape
+    TagTemplateListType: ListShape
+    TagTemplateValueType: StringShape
     TagValueType: StringShape
     ThumbprintListType: ListShape
     ThumbprintType: StringShape

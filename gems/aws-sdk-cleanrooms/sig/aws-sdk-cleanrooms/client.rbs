@@ -118,6 +118,21 @@ module Aws::CleanRooms
       },
       ?error_message_configuration: {
         type: String
+      },
+      ?synthetic_data_parameters: {
+        ml_synthetic_data_parameters: {
+          epsilon: Float,
+          max_membership_inference_attack_score: Float,
+          column_classification: {
+            column_mapping: Array[
+              {
+                column_name: String,
+                column_type: String,
+                is_predictive_value: bool
+              }
+            ]
+          }
+        }
       }
     ) -> _CreateAnalysisTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAnalysisTemplateResponse
 
@@ -143,6 +158,9 @@ module Aws::CleanRooms
                 is_responsible: untyped
               },
               model_inference: {
+                is_responsible: untyped
+              },
+              synthetic_data_generation: {
                 is_responsible: untyped
               }
             },
@@ -178,6 +196,9 @@ module Aws::CleanRooms
           },
           model_inference: {
             is_responsible: untyped
+          },
+          synthetic_data_generation: {
+            is_responsible: untyped
           }
         },
         job_compute: {
@@ -186,7 +207,8 @@ module Aws::CleanRooms
       },
       ?analytics_engine: String,
       ?auto_approved_change_request_types: Array[String],
-      ?allowed_result_regions: Array[String]
+      ?allowed_result_regions: Array[String],
+      ?is_metrics_enabled: bool
     ) -> _CreateCollaborationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCollaborationResponse
 
     interface _CreateCollaborationChangeRequestResponse
@@ -202,7 +224,32 @@ module Aws::CleanRooms
             member: {
               account_id: String,
               member_abilities: Array[String],
+              ml_member_abilities: {
+                custom_ml_member_abilities: Array[String]
+              },
+              payment_configuration: {
+                query_compute: {
+                  is_responsible: bool
+                },
+                machine_learning: {
+                  model_training: {
+                    is_responsible: untyped
+                  },
+                  model_inference: {
+                    is_responsible: untyped
+                  },
+                  synthetic_data_generation: {
+                    is_responsible: untyped
+                  }
+                },
+                job_compute: {
+                  is_responsible: untyped
+                }
+              },
               display_name: String
+            },
+            collaboration: {
+              auto_approved_change_types: Array[String]
             }
           }
         }
@@ -255,7 +302,8 @@ module Aws::CleanRooms
           work_group: String,
           output_location: String,
           database_name: String,
-          table_name: String
+          table_name: String,
+          catalog_name: String
         }
       },
       ?allowed_columns: Array[String],
@@ -311,7 +359,27 @@ module Aws::CleanRooms
                   name: String
                 }
               ]
-            }
+            },
+            aggregation_thresholds: Array[
+              {
+                identity_columns: untyped,
+                minimum_identity_count: untyped,
+                type: String,
+                output_column_thresholds: Array[
+                  {
+                    output_column_name: untyped,
+                    minimum_identity_count: untyped
+                  }
+                ],
+                allowed_aggregate_expression_type: String
+              }
+            ],
+            comparison_controls: {
+              allowed_literal_comparison_columns: untyped,
+              allowed_column_comparison_columns: untyped
+            },
+            allowed_result_receivers: Array[String],
+            allowed_additional_analyses: Array[String]
           }
         }
       }
@@ -390,6 +458,72 @@ module Aws::CleanRooms
       }
     ) -> _CreateIdNamespaceAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateIdNamespaceAssociationResponse
 
+    interface _CreateIntermediateTableResponse
+      include Smithy::Client::_Response[Types::CreateIntermediateTableOutput]
+      def intermediate_table: () -> Types::IntermediateTable?
+    end
+    def create_intermediate_table: (
+      ?membership_identifier: String,
+      ?name: String,
+      ?description: String,
+      ?population_analysis_configuration: {
+        sql_parameters: {
+          query_string: String,
+          analysis_template_arn: String
+        }
+      },
+      ?kms_key_arn: String,
+      ?retention_in_days: Integer,
+      ?tags: Hash[String, String]
+    ) -> _CreateIntermediateTableResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateIntermediateTableResponse
+
+    interface _CreateIntermediateTableAnalysisRuleResponse
+      include Smithy::Client::_Response[Types::CreateIntermediateTableAnalysisRuleOutput]
+      def analysis_rule: () -> Types::IntermediateTableAnalysisRule?
+    end
+    def create_intermediate_table_analysis_rule: (
+      ?membership_identifier: String,
+      ?intermediate_table_identifier: String,
+      ?analysis_rule_type: String,
+      ?analysis_rule_policy: {
+        v1: {
+          custom: {
+            allowed_analyses: Array[String],
+            additional_analyses: String,
+            allowed_additional_analyses: Array[String],
+            allowed_analysis_providers: Array[String],
+            allowed_result_receivers: Array[String],
+            differential_privacy: {
+              columns: Array[
+                {
+                  name: String
+                }
+              ]
+            },
+            disallowed_output_columns: Array[String],
+            aggregation_thresholds: Array[
+              {
+                identity_columns: untyped,
+                minimum_identity_count: Integer,
+                type: String,
+                output_column_thresholds: Array[
+                  {
+                    output_column_name: String,
+                    minimum_identity_count: untyped
+                  }
+                ],
+                allowed_aggregate_expression_type: String
+              }
+            ],
+            comparison_controls: {
+              allowed_literal_comparison_columns: untyped,
+              allowed_column_comparison_columns: untyped
+            }
+          }
+        }
+      }
+    ) -> _CreateIntermediateTableAnalysisRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateIntermediateTableAnalysisRuleResponse
+
     interface _CreateMembershipResponse
       include Smithy::Client::_Response[Types::CreateMembershipOperationOutput]
       def membership: () -> Types::Membership?
@@ -429,12 +563,16 @@ module Aws::CleanRooms
           },
           model_inference: {
             is_responsible: untyped
+          },
+          synthetic_data_generation: {
+            is_responsible: untyped
           }
         },
         job_compute: {
           is_responsible: untyped
         }
-      }
+      },
+      ?is_metrics_enabled: bool
     ) -> _CreateMembershipResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateMembershipResponse
 
     interface _CreatePrivacyBudgetTemplateResponse
@@ -535,6 +673,23 @@ module Aws::CleanRooms
       ?membership_identifier: String
     ) -> _DeleteIdNamespaceAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteIdNamespaceAssociationResponse
 
+    interface _DeleteIntermediateTableResponse
+      include Smithy::Client::_Response[Types::DeleteIntermediateTableOutput]
+    end
+    def delete_intermediate_table: (
+      ?membership_identifier: String,
+      ?intermediate_table_identifier: String
+    ) -> _DeleteIntermediateTableResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteIntermediateTableResponse
+
+    interface _DeleteIntermediateTableAnalysisRuleResponse
+      include Smithy::Client::_Response[Types::DeleteIntermediateTableAnalysisRuleOutput]
+    end
+    def delete_intermediate_table_analysis_rule: (
+      ?membership_identifier: String,
+      ?intermediate_table_identifier: String,
+      ?analysis_rule_type: String
+    ) -> _DeleteIntermediateTableAnalysisRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteIntermediateTableAnalysisRuleResponse
+
     interface _DeleteMemberResponse
       include Smithy::Client::_Response[Types::DeleteMemberOperationOutput]
     end
@@ -557,6 +712,24 @@ module Aws::CleanRooms
       ?membership_identifier: String,
       ?privacy_budget_template_identifier: String
     ) -> _DeletePrivacyBudgetTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePrivacyBudgetTemplateResponse
+
+    interface _DisallowIntermediateTableResponse
+      include Smithy::Client::_Response[Types::DisallowIntermediateTableOutput]
+    end
+    def disallow_intermediate_table: (
+      ?membership_identifier: String,
+      ?intermediate_table_name: String,
+      ?include_descendants: bool
+    ) -> _DisallowIntermediateTableResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisallowIntermediateTableResponse
+
+    interface _GetAnalysisLogExportResponse
+      include Smithy::Client::_Response[Types::GetAnalysisLogExportOutput]
+      def analysis_log_export: () -> Types::AnalysisLogExport?
+    end
+    def get_analysis_log_export: (
+      ?membership_identifier: String,
+      ?analysis_log_export_identifier: String
+    ) -> _GetAnalysisLogExportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAnalysisLogExportResponse
 
     interface _GetAnalysisTemplateResponse
       include Smithy::Client::_Response[Types::GetAnalysisTemplateOperationOutput]
@@ -683,6 +856,25 @@ module Aws::CleanRooms
       ?membership_identifier: String
     ) -> _GetIdNamespaceAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetIdNamespaceAssociationResponse
 
+    interface _GetIntermediateTableResponse
+      include Smithy::Client::_Response[Types::GetIntermediateTableOutput]
+      def intermediate_table: () -> Types::IntermediateTable?
+    end
+    def get_intermediate_table: (
+      ?intermediate_table_identifier: String,
+      ?membership_identifier: String
+    ) -> _GetIntermediateTableResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetIntermediateTableResponse
+
+    interface _GetIntermediateTableAnalysisRuleResponse
+      include Smithy::Client::_Response[Types::GetIntermediateTableAnalysisRuleOutput]
+      def analysis_rule: () -> Types::IntermediateTableAnalysisRule?
+    end
+    def get_intermediate_table_analysis_rule: (
+      ?membership_identifier: String,
+      ?intermediate_table_identifier: String,
+      ?analysis_rule_type: String
+    ) -> _GetIntermediateTableAnalysisRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetIntermediateTableAnalysisRuleResponse
+
     interface _GetMembershipResponse
       include Smithy::Client::_Response[Types::GetMembershipOperationOutput]
       def membership: () -> Types::Membership?
@@ -736,6 +928,19 @@ module Aws::CleanRooms
       ?name: String,
       ?type: String
     ) -> _GetSchemaAnalysisRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSchemaAnalysisRuleResponse
+
+    interface _ListAnalysisLogExportsResponse
+      include Smithy::Client::_Response[Types::ListAnalysisLogExportsOutput]
+      def next_token: () -> String?
+      def analysis_log_exports: () -> Array[Types::AnalysisLogExportSummary]?
+    end
+    def list_analysis_log_exports: (
+      ?membership_identifier: String,
+      ?analysis_identifier: String,
+      ?status: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAnalysisLogExportsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAnalysisLogExportsResponse
 
     interface _ListAnalysisTemplatesResponse
       include Smithy::Client::_Response[Types::ListAnalysisTemplatesOperationOutput]
@@ -882,6 +1087,29 @@ module Aws::CleanRooms
       ?max_results: Integer
     ) -> _ListIdNamespaceAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListIdNamespaceAssociationsResponse
 
+    interface _ListIntermediateTableVersionsResponse
+      include Smithy::Client::_Response[Types::ListIntermediateTableVersionsOutput]
+      def intermediate_table_version_summaries: () -> Array[Types::IntermediateTableVersionSummary]?
+      def next_token: () -> String?
+    end
+    def list_intermediate_table_versions: (
+      ?membership_identifier: String,
+      ?intermediate_table_identifier: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListIntermediateTableVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListIntermediateTableVersionsResponse
+
+    interface _ListIntermediateTablesResponse
+      include Smithy::Client::_Response[Types::ListIntermediateTablesOutput]
+      def intermediate_table_summaries: () -> Array[Types::IntermediateTableSummary]?
+      def next_token: () -> String?
+    end
+    def list_intermediate_tables: (
+      ?membership_identifier: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListIntermediateTablesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListIntermediateTablesResponse
+
     interface _ListMembersResponse
       include Smithy::Client::_Response[Types::ListMembersOperationOutput]
       def next_token: () -> String?
@@ -982,6 +1210,28 @@ module Aws::CleanRooms
       ?job_type: String
     ) -> _PopulateIdMappingTableResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PopulateIdMappingTableResponse
 
+    interface _PopulateIntermediateTableResponse
+      include Smithy::Client::_Response[Types::PopulateIntermediateTableOutput]
+      def analysis_id: () -> String?
+      def analysis_type: () -> String?
+      def version_id: () -> String?
+    end
+    def populate_intermediate_table: (
+      ?intermediate_table_identifier: String,
+      ?membership_identifier: String,
+      ?parameters: Hash[String, String],
+      ?compute_configuration: {
+        query_compute_configuration: {
+          type: String,
+          number: Integer,
+          properties: {
+            spark: Hash[String, String]
+          }
+        }
+      },
+      ?analysis_payer_account_id: String
+    ) -> _PopulateIntermediateTableResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PopulateIntermediateTableResponse
+
     interface _PreviewPrivacyImpactResponse
       include Smithy::Client::_Response[Types::PreviewPrivacyImpactOutput]
       def privacy_impact: () -> Types::PrivacyImpact?
@@ -996,6 +1246,24 @@ module Aws::CleanRooms
       }
     ) -> _PreviewPrivacyImpactResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PreviewPrivacyImpactResponse
 
+    interface _StartAnalysisLogExportResponse
+      include Smithy::Client::_Response[Types::StartAnalysisLogExportOutput]
+      def analysis_log_export: () -> Types::AnalysisLogExport?
+    end
+    def start_analysis_log_export: (
+      ?membership_identifier: String,
+      ?analysis_id: String,
+      ?analysis_type: String,
+      ?result_configuration: {
+        output_configuration: {
+          s3: {
+            bucket: String,
+            key_prefix: String
+          }
+        }
+      }
+    ) -> _StartAnalysisLogExportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartAnalysisLogExportResponse
+
     interface _StartProtectedJobResponse
       include Smithy::Client::_Response[Types::StartProtectedJobOutput]
       def protected_job: () -> Types::ProtectedJob?
@@ -1004,7 +1272,8 @@ module Aws::CleanRooms
       ?type: String,
       ?membership_identifier: String,
       ?job_parameters: {
-        analysis_template_arn: String
+        analysis_template_arn: String,
+        parameters: Hash[String, String]
       },
       ?result_configuration: {
         output_configuration: {
@@ -1016,9 +1285,13 @@ module Aws::CleanRooms
       ?compute_configuration: {
         worker: {
           type: String,
-          number: Integer
+          number: Integer,
+          properties: {
+            spark: Hash[String, String]
+          }
         }
-      }
+      },
+      ?job_compute_payer_account_id: String
     ) -> _StartProtectedJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartProtectedJobResponse
 
     interface _StartProtectedQueryResponse
@@ -1051,15 +1324,24 @@ module Aws::CleanRooms
                 member: untyped
               }
             ]
+          },
+          intermediate_table: {
+            id: String,
+            arn: String,
+            name: String
           }
         }
       },
       ?compute_configuration: {
         worker: {
           type: String,
-          number: Integer
+          number: Integer,
+          properties: {
+            spark: Hash[String, String]
+          }
         }
-      }
+      },
+      ?query_compute_payer_account_id: String
     ) -> _StartProtectedQueryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartProtectedQueryResponse
 
     interface _TagResourceResponse
@@ -1098,6 +1380,16 @@ module Aws::CleanRooms
       ?description: String,
       ?analytics_engine: String
     ) -> _UpdateCollaborationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCollaborationResponse
+
+    interface _UpdateCollaborationChangeRequestResponse
+      include Smithy::Client::_Response[Types::UpdateCollaborationChangeRequestOutput]
+      def collaboration_change_request: () -> Types::CollaborationChangeRequest?
+    end
+    def update_collaboration_change_request: (
+      ?collaboration_identifier: String,
+      ?change_request_identifier: String,
+      ?action: String
+    ) -> _UpdateCollaborationChangeRequestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCollaborationChangeRequestResponse
 
     interface _UpdateConfiguredAudienceModelAssociationResponse
       include Smithy::Client::_Response[Types::UpdateConfiguredAudienceModelAssociationOutput]
@@ -1144,7 +1436,8 @@ module Aws::CleanRooms
           work_group: String,
           output_location: String,
           database_name: String,
-          table_name: String
+          table_name: String,
+          catalog_name: String
         }
       },
       ?allowed_columns: Array[String],
@@ -1199,7 +1492,27 @@ module Aws::CleanRooms
                   name: String
                 }
               ]
-            }
+            },
+            aggregation_thresholds: Array[
+              {
+                identity_columns: untyped,
+                minimum_identity_count: untyped,
+                type: String,
+                output_column_thresholds: Array[
+                  {
+                    output_column_name: untyped,
+                    minimum_identity_count: untyped
+                  }
+                ],
+                allowed_aggregate_expression_type: String
+              }
+            ],
+            comparison_controls: {
+              allowed_literal_comparison_columns: untyped,
+              allowed_column_comparison_columns: untyped
+            },
+            allowed_result_receivers: Array[String],
+            allowed_additional_analyses: Array[String]
           }
         }
       }
@@ -1267,6 +1580,70 @@ module Aws::CleanRooms
       }
     ) -> _UpdateIdNamespaceAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateIdNamespaceAssociationResponse
 
+    interface _UpdateIntermediateTableResponse
+      include Smithy::Client::_Response[Types::UpdateIntermediateTableOutput]
+      def intermediate_table: () -> Types::IntermediateTable?
+    end
+    def update_intermediate_table: (
+      ?intermediate_table_identifier: String,
+      ?membership_identifier: String,
+      ?description: String,
+      ?kms_key_arn: String,
+      ?columns: Array[
+        {
+          name: String,
+          type: String
+        }
+      ]
+    ) -> _UpdateIntermediateTableResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateIntermediateTableResponse
+
+    interface _UpdateIntermediateTableAnalysisRuleResponse
+      include Smithy::Client::_Response[Types::UpdateIntermediateTableAnalysisRuleOutput]
+      def analysis_rule: () -> Types::IntermediateTableAnalysisRule?
+    end
+    def update_intermediate_table_analysis_rule: (
+      ?membership_identifier: String,
+      ?intermediate_table_identifier: String,
+      ?analysis_rule_type: String,
+      ?analysis_rule_policy: {
+        v1: {
+          custom: {
+            allowed_analyses: Array[String],
+            additional_analyses: String,
+            allowed_additional_analyses: Array[String],
+            allowed_analysis_providers: Array[String],
+            allowed_result_receivers: Array[String],
+            differential_privacy: {
+              columns: Array[
+                {
+                  name: String
+                }
+              ]
+            },
+            disallowed_output_columns: Array[String],
+            aggregation_thresholds: Array[
+              {
+                identity_columns: untyped,
+                minimum_identity_count: Integer,
+                type: String,
+                output_column_thresholds: Array[
+                  {
+                    output_column_name: String,
+                    minimum_identity_count: untyped
+                  }
+                ],
+                allowed_aggregate_expression_type: String
+              }
+            ],
+            comparison_controls: {
+              allowed_literal_comparison_columns: untyped,
+              allowed_column_comparison_columns: untyped
+            }
+          }
+        }
+      }
+    ) -> _UpdateIntermediateTableAnalysisRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateIntermediateTableAnalysisRuleResponse
+
     interface _UpdateMembershipResponse
       include Smithy::Client::_Response[Types::UpdateMembershipOperationOutput]
       def membership: () -> Types::Membership?
@@ -1294,6 +1671,25 @@ module Aws::CleanRooms
           }
         },
         role_arn: String
+      },
+      ?membership_payment_configuration: {
+        query_compute: {
+          is_responsible: bool
+        },
+        machine_learning: {
+          model_training: {
+            is_responsible: untyped
+          },
+          model_inference: {
+            is_responsible: untyped
+          },
+          synthetic_data_generation: {
+            is_responsible: untyped
+          }
+        },
+        job_compute: {
+          is_responsible: untyped
+        }
       }
     ) -> _UpdateMembershipResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateMembershipResponse
 

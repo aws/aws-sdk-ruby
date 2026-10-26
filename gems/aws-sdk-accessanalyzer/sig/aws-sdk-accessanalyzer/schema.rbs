@@ -37,6 +37,7 @@ module Aws::AccessAnalyzer
     AnalyzedResourcesList: ListShape
     AnalyzerArn: StringShape
     AnalyzerConfiguration: UnionShape
+    AnalyzerName: StringShape
     AnalyzerStatus: StringShape
     AnalyzerSummary: StructureShape
     AnalyzersList: ListShape
@@ -67,9 +68,12 @@ module Aws::AccessAnalyzer
     CreateAnalyzerInput: StructureShape
     CreateAnalyzerOutput: StructureShape
     CreateArchiveRuleInput: StructureShape
+    CreateServiceLinkedAnalyzerRequest: StructureShape
+    CreateServiceLinkedAnalyzerResponse: StructureShape
     Criterion: StructureShape
     DeleteAnalyzerInput: StructureShape
     DeleteArchiveRuleInput: StructureShape
+    DeleteServiceLinkedAnalyzerRequest: StructureShape
     DynamodbStreamConfiguration: StructureShape
     DynamodbStreamPolicy: StringShape
     DynamodbTableConfiguration: StructureShape

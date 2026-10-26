@@ -55,6 +55,8 @@ module Aws::ConnectParticipant
     MeetingFeaturesConfiguration: StructureShape
     Message: StringShape
     MessageMetadata: StructureShape
+    MessageProcessingMetadata: StructureShape
+    MessageProcessingStatus: EnumShape
     MostRecent: IntegerShape
     NextToken: StringShape
     NonEmptyClientToken: StringShape

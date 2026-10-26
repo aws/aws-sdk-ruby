@@ -186,6 +186,38 @@ module Aws::Athena
         },
         additional_configuration: untyped,
         execution_role: String,
+        monitoring_configuration: {
+          cloud_watch_logging_configuration: {
+            enabled: untyped,
+            log_group: String,
+            log_stream_name_prefix: String,
+            log_types: Hash[String,
+              Array[String]
+            ]
+          },
+          managed_logging_configuration: {
+            enabled: untyped,
+            kms_key: untyped
+          },
+          s3_logging_configuration: {
+            enabled: untyped,
+            kms_key: untyped,
+            log_location: String
+          }
+        },
+        engine_configuration: {
+          coordinator_dpu_size: Integer,
+          max_concurrent_dpus: Integer,
+          default_executor_dpu_size: Integer,
+          additional_configs: Hash[String, String],
+          spark_properties: untyped,
+          classifications: Array[
+            {
+              name: untyped,
+              properties: untyped
+            }
+          ]
+        },
         customer_content_encryption_configuration: {
           kms_key: untyped
         },
@@ -384,6 +416,14 @@ module Aws::Athena
       ?query_execution_id: String
     ) -> _GetQueryRuntimeStatisticsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetQueryRuntimeStatisticsResponse
 
+    interface _GetResourceDashboardResponse
+      include Smithy::Client::_Response[Types::GetResourceDashboardResponse]
+      def url: () -> String?
+    end
+    def get_resource_dashboard: (
+      ?resource_arn: String
+    ) -> _GetResourceDashboardResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResourceDashboardResponse
+
     interface _GetSessionResponse
       include Smithy::Client::_Response[Types::GetSessionResponse]
       def session_id: () -> String?
@@ -392,6 +432,7 @@ module Aws::Athena
       def engine_version: () -> String?
       def engine_configuration: () -> Types::EngineConfiguration?
       def notebook_version: () -> String?
+      def monitoring_configuration: () -> Types::MonitoringConfiguration?
       def session_configuration: () -> Types::SessionConfiguration?
       def status: () -> Types::SessionStatus?
       def statistics: () -> Types::SessionStatistics?
@@ -399,6 +440,16 @@ module Aws::Athena
     def get_session: (
       ?session_id: String
     ) -> _GetSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSessionResponse
+
+    interface _GetSessionEndpointResponse
+      include Smithy::Client::_Response[Types::GetSessionEndpointResponse]
+      def endpoint_url: () -> String?
+      def auth_token: () -> String?
+      def auth_token_expiration_time: () -> Time?
+    end
+    def get_session_endpoint: (
+      ?session_id: String
+    ) -> _GetSessionEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSessionEndpointResponse
 
     interface _GetSessionStatusResponse
       include Smithy::Client::_Response[Types::GetSessionStatusResponse]
@@ -680,6 +731,19 @@ module Aws::Athena
           enabled: bool,
           max_age_in_minutes: Integer
         }
+      },
+      ?engine_configuration: {
+        coordinator_dpu_size: Integer,
+        max_concurrent_dpus: Integer,
+        default_executor_dpu_size: Integer,
+        additional_configs: Hash[String, String],
+        spark_properties: untyped,
+        classifications: Array[
+          {
+            name: String,
+            properties: untyped
+          }
+        ]
       }
     ) -> _StartQueryExecutionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartQueryExecutionResponse
 
@@ -696,11 +760,44 @@ module Aws::Athena
         max_concurrent_dpus: Integer,
         default_executor_dpu_size: Integer,
         additional_configs: Hash[String, String],
-        spark_properties: untyped
+        spark_properties: untyped,
+        classifications: Array[
+          {
+            name: String,
+            properties: untyped
+          }
+        ]
+      },
+      ?execution_role: String,
+      ?monitoring_configuration: {
+        cloud_watch_logging_configuration: {
+          enabled: bool,
+          log_group: String,
+          log_stream_name_prefix: String,
+          log_types: Hash[String,
+            Array[String]
+          ]
+        },
+        managed_logging_configuration: {
+          enabled: untyped,
+          kms_key: String
+        },
+        s3_logging_configuration: {
+          enabled: untyped,
+          kms_key: untyped,
+          log_location: String
+        }
       },
       ?notebook_version: String,
       ?session_idle_timeout_in_minutes: Integer,
-      ?client_request_token: String
+      ?client_request_token: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?copy_work_group_tags: bool
     ) -> _StartSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartSessionResponse
 
     interface _StopCalculationExecutionResponse
@@ -854,6 +951,38 @@ module Aws::Athena
           enable_s3_access_grants: untyped,
           create_user_level_prefix: untyped,
           authentication_type: String
+        },
+        monitoring_configuration: {
+          cloud_watch_logging_configuration: {
+            enabled: untyped,
+            log_group: String,
+            log_stream_name_prefix: String,
+            log_types: Hash[String,
+              Array[String]
+            ]
+          },
+          managed_logging_configuration: {
+            enabled: untyped,
+            kms_key: untyped
+          },
+          s3_logging_configuration: {
+            enabled: untyped,
+            kms_key: untyped,
+            log_location: String
+          }
+        },
+        engine_configuration: {
+          coordinator_dpu_size: Integer,
+          max_concurrent_dpus: Integer,
+          default_executor_dpu_size: Integer,
+          additional_configs: Hash[String, String],
+          spark_properties: untyped,
+          classifications: Array[
+            {
+              name: untyped,
+              properties: untyped
+            }
+          ]
         }
       },
       ?state: String

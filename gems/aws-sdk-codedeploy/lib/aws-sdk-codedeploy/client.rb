@@ -144,18 +144,18 @@ module Aws::CodeDeploy
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -944,6 +944,7 @@ module Aws::CodeDeploy
     #         },
     #         additional_deployment_status_info: "AdditionalDeploymentStatusInfo",
     #         file_exists_behavior: "DISALLOW" # One of: ["DISALLOW", "OVERWRITE", "RETAIN"],
+    #         deployment_mode: "STANDARD" # One of: ["STANDARD", "RESTART"],
     #         deployment_status_messages: ["ErrorMessage"],
     #         compute_platform: "Server" # One of: ["Server", "Lambda", "ECS"],
     #         external_id: "ExternalId",
@@ -1140,6 +1141,40 @@ module Aws::CodeDeploy
     #                       part of the new deployment.</p>
     #               </li>
     #            </ul>
+    # @option params [String] :deployment_mode
+    #   <p>The type of deployment to create. Valid values are:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>STANDARD</code>: Deploys the specified revision. This is the default
+    #                       behavior if <code>deploymentMode</code> is not specified.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>RESTART</code>: Restarts the application on the target instances using
+    #                       the revision from the deployment group's last successful deployment, without
+    #                       downloading a new revision. <code>RESTART</code> is supported only for
+    #                       EC2/On-premises in-place deployments.</p>
+    #                  <p>When <code>deploymentMode</code> is <code>RESTART</code>, the following
+    #                       apply:</p>
+    #                  <ul>
+    #                     <li>
+    #                        <p>The call is rejected for Amazon ECS and Lambda
+    #                               deployments.</p>
+    #                     </li>
+    #                     <li>
+    #                        <p>The <code>revision</code> parameter (including its
+    #                                   <code>s3Location</code> and <code>gitHubLocation</code>) must not be
+    #                               specified, and is rejected if provided. The revision is resolved by the
+    #                               service from the deployment group's last successful deployment.</p>
+    #                     </li>
+    #                     <li>
+    #                        <p>The <code>updateOutdatedInstancesOnly</code> parameter must not be
+    #                               set to <code>true</code>, and is rejected if provided.</p>
+    #                     </li>
+    #                  </ul>
+    #               </li>
+    #            </ul>
     # @option params [Types::AlarmConfiguration] :override_alarm_configuration
     #   <p>Allows you to specify information about alarms associated with a deployment. The alarm
     #               configuration that you specify here will override the alarm configuration at the
@@ -1211,6 +1246,7 @@ module Aws::CodeDeploy
     #     },
     #     update_outdated_instances_only: false,
     #     file_exists_behavior: "DISALLOW" # One of: ["DISALLOW", "OVERWRITE", "RETAIN"],
+    #     deployment_mode: "STANDARD" # One of: ["STANDARD", "RESTART"],
     #     override_alarm_configuration: {
     #       enabled: false,
     #       ignore_poll_alarm_failure: false,
@@ -1931,6 +1967,7 @@ module Aws::CodeDeploy
     #       },
     #       additional_deployment_status_info: "AdditionalDeploymentStatusInfo",
     #       file_exists_behavior: "DISALLOW" # One of: ["DISALLOW", "OVERWRITE", "RETAIN"],
+    #       deployment_mode: "STANDARD" # One of: ["STANDARD", "RESTART"],
     #       deployment_status_messages: ["ErrorMessage"],
     #       compute_platform: "Server" # One of: ["Server", "Lambda", "ECS"],
     #       external_id: "ExternalId",

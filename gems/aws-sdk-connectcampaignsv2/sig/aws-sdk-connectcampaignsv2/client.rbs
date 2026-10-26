@@ -62,9 +62,26 @@ module Aws::ConnectCampaignsV2
               bandwidth_allocation: Float
             },
             predictive: {
-              bandwidth_allocation: untyped
+              bandwidth_allocation: untyped,
+              pacing_strategies: Array[
+                {
+                  abandonment_rate: {
+                    target_rate: Float,
+                    connection_start_point: String,
+                    connection_threshold_seconds: Integer,
+                    evaluation_window: String
+                  }
+                }
+              ]
             },
             agentless: {
+            },
+            preview: {
+              bandwidth_allocation: untyped,
+              timeout_config: {
+                duration_in_seconds: Integer
+              },
+              agent_actions: Array[String]
             }
           },
           default_outbound_config: {
@@ -73,7 +90,8 @@ module Aws::ConnectCampaignsV2
             answer_machine_detection_config: {
               enable_answer_machine_detection: bool,
               await_answer_machine_prompt: untyped
-            }
+            },
+            ring_timeout: Integer
           }
         },
         sms: {
@@ -96,8 +114,19 @@ module Aws::ConnectCampaignsV2
             source_email_address_display_name: String,
             wisdom_template_arn: untyped
           }
+        },
+        whats_app: {
+          capacity: untyped,
+          outbound_mode: {
+            agentless: untyped
+          },
+          default_outbound_config: {
+            connect_source_phone_number_arn: untyped,
+            wisdom_template_arn: untyped
+          }
         }
       },
+      ?type: String,
       ?source: {
         customer_profiles_segment_arn: String,
         event_trigger: {
@@ -110,10 +139,15 @@ module Aws::ConnectCampaignsV2
         end_time: untyped,
         refresh_frequency: String
       },
+      ?entry_limits_config: {
+        max_entry_count: Integer,
+        min_entry_interval: String
+      },
       ?communication_time_config: {
         local_time_zone_config: {
           default_time_zone: String,
-          local_time_zone_detection: Array[String]
+          local_time_zone_detection: Array[String],
+          local_time_zone_detection_scope: String
         },
         telephony: {
           open_hours: {
@@ -137,7 +171,8 @@ module Aws::ConnectCampaignsV2
           }
         },
         sms: untyped,
-        email: untyped
+        email: untyped,
+        whats_app: untyped
       },
       ?communication_limits_override: {
         all_channel_subtypes: {
@@ -185,6 +220,13 @@ module Aws::ConnectCampaignsV2
       ?config: String
     ) -> _DeleteCampaignCommunicationTimeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCampaignCommunicationTimeResponse
 
+    interface _DeleteCampaignEntryLimitsResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_campaign_entry_limits: (
+      ?id: String
+    ) -> _DeleteCampaignEntryLimitsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCampaignEntryLimitsResponse
+
     interface _DeleteConnectInstanceConfigResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
     end
@@ -204,6 +246,9 @@ module Aws::ConnectCampaignsV2
         },
         q_connect: {
           knowledge_base_arn: untyped
+        },
+        lambda: {
+          function_arn: String
         }
       }
     ) -> _DeleteConnectInstanceIntegrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteConnectInstanceIntegrationResponse
@@ -318,6 +363,9 @@ module Aws::ConnectCampaignsV2
         },
         q_connect: {
           knowledge_base_arn: untyped
+        },
+        lambda: {
+          function_arn: String
         }
       }
     ) -> _PutConnectInstanceIntegrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutConnectInstanceIntegrationResponse
@@ -359,7 +407,8 @@ module Aws::ConnectCampaignsV2
               answer_machine_detection_config: {
                 enable_answer_machine_detection: bool,
                 await_answer_machine_prompt: untyped
-              }
+              },
+              ring_timeout: Integer
             },
             sms: {
               destination_phone_number: untyped,
@@ -370,6 +419,12 @@ module Aws::ConnectCampaignsV2
             email: {
               destination_email_address: String,
               connect_source_email_address: untyped,
+              template_arn: untyped,
+              template_parameters: untyped
+            },
+            whats_app: {
+              destination_phone_number: untyped,
+              connect_source_phone_number_arn: untyped,
               template_arn: untyped,
               template_parameters: untyped
             }
@@ -389,7 +444,16 @@ module Aws::ConnectCampaignsV2
         {
           client_token: String,
           profile_id: String,
-          expiration_time: Time
+          expiration_time: Time,
+          event_trigger_context: {
+            source_event: String,
+            channel_context: {
+              web_notification_context: {
+                session_id: String,
+                browser_id: String
+              }
+            }
+          }
         }
       ]
     ) -> _PutProfileOutboundRequestBatchResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutProfileOutboundRequestBatchResponse
@@ -458,9 +522,26 @@ module Aws::ConnectCampaignsV2
               bandwidth_allocation: Float
             },
             predictive: {
-              bandwidth_allocation: untyped
+              bandwidth_allocation: untyped,
+              pacing_strategies: Array[
+                {
+                  abandonment_rate: {
+                    target_rate: Float,
+                    connection_start_point: String,
+                    connection_threshold_seconds: Integer,
+                    evaluation_window: String
+                  }
+                }
+              ]
             },
             agentless: {
+            },
+            preview: {
+              bandwidth_allocation: untyped,
+              timeout_config: {
+                duration_in_seconds: Integer
+              },
+              agent_actions: Array[String]
             }
           },
           default_outbound_config: {
@@ -469,7 +550,8 @@ module Aws::ConnectCampaignsV2
             answer_machine_detection_config: {
               enable_answer_machine_detection: bool,
               await_answer_machine_prompt: untyped
-            }
+            },
+            ring_timeout: Integer
           }
         },
         sms: {
@@ -490,6 +572,16 @@ module Aws::ConnectCampaignsV2
           default_outbound_config: {
             connect_source_email_address: String,
             source_email_address_display_name: String,
+            wisdom_template_arn: untyped
+          }
+        },
+        whats_app: {
+          capacity: untyped,
+          outbound_mode: {
+            agentless: untyped
+          },
+          default_outbound_config: {
+            connect_source_phone_number_arn: untyped,
             wisdom_template_arn: untyped
           }
         }
@@ -523,7 +615,8 @@ module Aws::ConnectCampaignsV2
       ?communication_time_config: {
         local_time_zone_config: {
           default_time_zone: String,
-          local_time_zone_detection: Array[String]
+          local_time_zone_detection: Array[String],
+          local_time_zone_detection_scope: String
         },
         telephony: {
           open_hours: {
@@ -547,9 +640,21 @@ module Aws::ConnectCampaignsV2
           }
         },
         sms: untyped,
-        email: untyped
+        email: untyped,
+        whats_app: untyped
       }
     ) -> _UpdateCampaignCommunicationTimeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCampaignCommunicationTimeResponse
+
+    interface _UpdateCampaignEntryLimitsResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_campaign_entry_limits: (
+      ?id: String,
+      ?entry_limits_config: {
+        max_entry_count: Integer,
+        min_entry_interval: String
+      }
+    ) -> _UpdateCampaignEntryLimitsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCampaignEntryLimitsResponse
 
     interface _UpdateCampaignFlowAssociationResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]

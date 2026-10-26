@@ -15,7 +15,13 @@ module Aws::MediaConvert
     class NotFoundException < Smithy::Client::ServiceError
       def message: () -> String?
     end
+    class ServiceQuotaExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
     class TooManyRequestsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UnprocessableEntityException < Smithy::Client::ServiceError
       def message: () -> String?
     end
   end

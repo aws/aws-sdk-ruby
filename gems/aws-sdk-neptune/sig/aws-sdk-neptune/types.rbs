@@ -155,6 +155,7 @@ module Aws::Neptune
         ?storage_type: String,
         ?allocated_storage: Integer,
         ?iops: Integer,
+        ?network_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -166,6 +167,7 @@ module Aws::Neptune
       attr_accessor storage_type: String?
       attr_accessor allocated_storage: Integer?
       attr_accessor iops: Integer?
+      attr_accessor network_type: String?
     end
 
     class CopyDBClusterParameterGroupMessage
@@ -340,6 +342,7 @@ module Aws::Neptune
         ?serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfiguration,
         ?global_cluster_identifier: String,
         ?storage_type: String,
+        ?network_type: String,
         ?source_region: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -372,6 +375,7 @@ module Aws::Neptune
       attr_accessor serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfiguration?
       attr_accessor global_cluster_identifier: String?
       attr_accessor storage_type: String?
+      attr_accessor network_type: String?
       attr_accessor source_region: String?
     end
 
@@ -645,6 +649,8 @@ module Aws::Neptune
         ?engine: String,
         ?engine_version: String,
         ?deletion_protection: bool,
+        ?database_name: String,
+        ?tags: Array[Types::Tag],
         ?storage_encrypted: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -654,6 +660,8 @@ module Aws::Neptune
       attr_accessor engine: String?
       attr_accessor engine_version: String?
       attr_accessor deletion_protection: bool?
+      attr_accessor database_name: String?
+      attr_accessor tags: Array[Types::Tag]?
       attr_accessor storage_encrypted: bool?
     end
 
@@ -717,6 +725,7 @@ module Aws::Neptune
         ?global_cluster_identifier: String,
         ?io_optimized_next_allowed_modification_time: Time,
         ?storage_type: String,
+        ?network_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -765,6 +774,7 @@ module Aws::Neptune
       attr_accessor global_cluster_identifier: String?
       attr_accessor io_optimized_next_allowed_modification_time: Time?
       attr_accessor storage_type: String?
+      attr_accessor network_type: String?
     end
 
     class DBClusterAlreadyExistsFault
@@ -1224,6 +1234,7 @@ module Aws::Neptune
         ?performance_insights_kms_key_id: String,
         ?enabled_cloudwatch_logs_exports: Array[String],
         ?deletion_protection: bool,
+        ?network_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1280,6 +1291,7 @@ module Aws::Neptune
       attr_accessor performance_insights_kms_key_id: String?
       attr_accessor enabled_cloudwatch_logs_exports: Array[String]?
       attr_accessor deletion_protection: bool?
+      attr_accessor network_type: String?
     end
 
     class DBInstanceAlreadyExistsFault
@@ -1466,6 +1478,7 @@ module Aws::Neptune
         ?subnet_group_status: String,
         ?subnets: Array[Types::Subnet],
         ?db_subnet_group_arn: String,
+        ?supported_network_types: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1475,6 +1488,7 @@ module Aws::Neptune
       attr_accessor subnet_group_status: String?
       attr_accessor subnets: Array[Types::Subnet]?
       attr_accessor db_subnet_group_arn: String?
+      attr_accessor supported_network_types: Array[String]?
     end
 
     class DBSubnetGroupAlreadyExistsFault
@@ -2461,10 +2475,12 @@ module Aws::Neptune
         ?status: String,
         ?engine: String,
         ?engine_version: String,
+        ?database_name: String,
         ?storage_encrypted: bool,
         ?deletion_protection: bool,
         ?global_cluster_members: Array[Types::GlobalClusterMember],
         ?failover_state: Types::FailoverState,
+        ?tag_list: Array[Types::Tag],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2474,10 +2490,12 @@ module Aws::Neptune
       attr_accessor status: String?
       attr_accessor engine: String?
       attr_accessor engine_version: String?
+      attr_accessor database_name: String?
       attr_accessor storage_encrypted: bool?
       attr_accessor deletion_protection: bool?
       attr_accessor global_cluster_members: Array[Types::GlobalClusterMember]?
       attr_accessor failover_state: Types::FailoverState?
+      attr_accessor tag_list: Array[Types::Tag]?
     end
 
     class GlobalClusterAlreadyExistsFault
@@ -2833,6 +2851,7 @@ module Aws::Neptune
         ?copy_tags_to_snapshot: bool,
         ?serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfiguration,
         ?storage_type: String,
+        ?network_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2856,6 +2875,7 @@ module Aws::Neptune
       attr_accessor copy_tags_to_snapshot: bool?
       attr_accessor serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfiguration?
       attr_accessor storage_type: String?
+      attr_accessor network_type: String?
     end
 
     class ModifyDBClusterParameterGroupMessage
@@ -3125,6 +3145,17 @@ module Aws::Neptune
       attr_accessor global_cluster: Types::GlobalCluster?
     end
 
+    class NetworkTypeNotSupportedFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
     class OptionGroupMembership
       include Smithy::Schema::Structure
 
@@ -3174,6 +3205,7 @@ module Aws::Neptune
         ?min_iops_per_gib: Float,
         ?max_iops_per_gib: Float,
         ?supports_global_databases: bool,
+        ?supported_network_types: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3198,6 +3230,7 @@ module Aws::Neptune
       attr_accessor min_iops_per_gib: Float?
       attr_accessor max_iops_per_gib: Float?
       attr_accessor supports_global_databases: bool?
+      attr_accessor supported_network_types: Array[String]?
     end
 
     class OrderableDBInstanceOptionsMessage
@@ -3573,6 +3606,7 @@ module Aws::Neptune
         ?copy_tags_to_snapshot: bool,
         ?serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfiguration,
         ?storage_type: String,
+        ?network_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3595,6 +3629,7 @@ module Aws::Neptune
       attr_accessor copy_tags_to_snapshot: bool?
       attr_accessor serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfiguration?
       attr_accessor storage_type: String?
+      attr_accessor network_type: String?
     end
 
     class RestoreDBClusterFromSnapshotResult
@@ -3629,6 +3664,7 @@ module Aws::Neptune
         ?deletion_protection: bool,
         ?serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfiguration,
         ?storage_type: String,
+        ?network_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3649,6 +3685,7 @@ module Aws::Neptune
       attr_accessor deletion_protection: bool?
       attr_accessor serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfiguration?
       attr_accessor storage_type: String?
+      attr_accessor network_type: String?
     end
 
     class RestoreDBClusterToPointInTimeResult

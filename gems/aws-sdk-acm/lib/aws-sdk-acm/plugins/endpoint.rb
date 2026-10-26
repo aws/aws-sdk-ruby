@@ -25,6 +25,12 @@ module Aws::ACM
         EndpointProvider.new
       end
 
+      option(
+        :service_type,
+        doc_type: "String",
+        docstring: "The service type: ACM or ACM-ACME. Injected via @staticContextParams."
+      )
+
       option(:endpoint_auth_schemes) do
         {"bearer" => "smithy.api#httpBearerAuth", "none" => "smithy.api#noAuth", "sigv4a" => "aws.auth#sigv4a", "sigv4" => "aws.auth#sigv4"}
       end

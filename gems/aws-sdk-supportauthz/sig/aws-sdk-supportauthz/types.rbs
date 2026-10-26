@@ -1,0 +1,601 @@
+module Aws::SupportAuthZ
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ActionSet
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?all_actions: Smithy::Schema::EmptyStructure,
+        ?actions: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor all_actions: Smithy::Schema::EmptyStructure?
+      attr_accessor actions: Array[String]?
+
+      class AllActions < ActionSet
+      end
+      class Actions < ActionSet
+      end
+      class Unknown < ActionSet
+      end
+    end
+
+    class ActionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action: String,
+        ?service: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action: String?
+      attr_accessor service: String?
+      attr_accessor description: String?
+    end
+
+    class Condition
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?allow_after: Time,
+        ?allow_before: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor allow_after: Time?
+      attr_accessor allow_before: Time?
+
+      class AllowAfter < Condition
+      end
+      class AllowBefore < Condition
+      end
+      class Unknown < Condition
+      end
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class CreateSupportPermitInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?permit: Types::Permit,
+        ?name: String,
+        ?description: String,
+        ?signing_key_info: Types::SigningKeyInfo,
+        ?support_case_display_id: String,
+        ?client_token: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor permit: Types::Permit?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor signing_key_info: Types::SigningKeyInfo?
+      attr_accessor support_case_display_id: String?
+      attr_accessor client_token: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateSupportPermitOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?description: String,
+        ?permit: Types::Permit,
+        ?status: String,
+        ?signing_key_info: Types::SigningKeyInfo,
+        ?created_at: Time,
+        ?support_case_display_id: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor description: String?
+      attr_accessor permit: Types::Permit?
+      attr_accessor status: String?
+      attr_accessor signing_key_info: Types::SigningKeyInfo?
+      attr_accessor created_at: Time?
+      attr_accessor support_case_display_id: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class DeleteSupportPermitInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?support_permit_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor support_permit_identifier: String?
+    end
+
+    class DeleteSupportPermitOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?description: String,
+        ?permit: Types::Permit,
+        ?status: String,
+        ?signing_key_info: Types::SigningKeyInfo,
+        ?created_at: Time,
+        ?support_case_display_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor description: String?
+      attr_accessor permit: Types::Permit?
+      attr_accessor status: String?
+      attr_accessor signing_key_info: Types::SigningKeyInfo?
+      attr_accessor created_at: Time?
+      attr_accessor support_case_display_id: String?
+    end
+
+    class GetActionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action: String?
+    end
+
+    class GetActionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action: String,
+        ?service: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action: String?
+      attr_accessor service: String?
+      attr_accessor description: String?
+    end
+
+    class GetSupportPermitInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?support_permit_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor support_permit_identifier: String?
+    end
+
+    class GetSupportPermitOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?description: String,
+        ?permit: Types::Permit,
+        ?status: String,
+        ?signing_key_info: Types::SigningKeyInfo,
+        ?created_at: Time,
+        ?support_case_display_id: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor description: String?
+      attr_accessor permit: Types::Permit?
+      attr_accessor status: String?
+      attr_accessor signing_key_info: Types::SigningKeyInfo?
+      attr_accessor created_at: Time?
+      attr_accessor support_case_display_id: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class ListActionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?service: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor service: String?
+    end
+
+    class ListActionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action_summaries: Array[Types::ActionSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action_summaries: Array[Types::ActionSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSupportPermitRequestsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?support_case_display_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor support_case_display_id: String?
+    end
+
+    class ListSupportPermitRequestsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?support_permit_requests: Array[Types::SupportPermitRequest],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor support_permit_requests: Array[Types::SupportPermitRequest]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSupportPermitsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?support_permit_statuses: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor support_permit_statuses: Array[String]?
+    end
+
+    class ListSupportPermitsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?support_permits: Array[Types::SupportPermitSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor support_permits: Array[Types::SupportPermitSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class Permit
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?actions: Types::ActionSet,
+        ?resources: Types::ResourceSet,
+        ?conditions: Array[Types::Condition],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor actions: Types::ActionSet?
+      attr_accessor resources: Types::ResourceSet?
+      attr_accessor conditions: Array[Types::Condition]?
+    end
+
+    class RejectSupportPermitRequestInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?request_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor request_arn: String?
+    end
+
+    class RejectSupportPermitRequestOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?request_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor request_arn: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class ResourceSet
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?all_resources_in_region: Smithy::Schema::EmptyStructure,
+        ?resources: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor all_resources_in_region: Smithy::Schema::EmptyStructure?
+      attr_accessor resources: Array[String]?
+
+      class AllResourcesInRegion < ResourceSet
+      end
+      class Resources < ResourceSet
+      end
+      class Unknown < ResourceSet
+      end
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+        ?service_code: String,
+        ?quota_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+    end
+
+    class SigningKeyInfo
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?kms_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor kms_key: String?
+
+      class KmsKey < SigningKeyInfo
+      end
+      class Unknown < SigningKeyInfo
+      end
+    end
+
+    class SupportPermitRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?request_arn: String,
+        ?permit: Types::Permit,
+        ?support_case_display_id: String,
+        ?status: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor request_arn: String?
+      attr_accessor permit: Types::Permit?
+      attr_accessor support_case_display_id: String?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    module SupportPermitRequestStatus
+      PENDING: String
+      ACCEPTED: String
+      REJECTED: String
+      CANCELLED: String
+    end
+
+    module SupportPermitStatus
+      ACTIVE: String
+      INACTIVE: String
+      DELETING: String
+    end
+
+    class SupportPermitSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?permit: Types::Permit,
+        ?status: String,
+        ?signing_key_info: Types::SigningKeyInfo,
+        ?created_at: Time,
+        ?support_case_display_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor permit: Types::Permit?
+      attr_accessor status: String?
+      attr_accessor signing_key_info: Types::SigningKeyInfo?
+      attr_accessor created_at: Time?
+      attr_accessor support_case_display_id: String?
+    end
+
+    class TagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class UntagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?field_list: Array[Types::ValidationExceptionField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor field_list: Array[Types::ValidationExceptionField]?
+    end
+
+    class ValidationExceptionField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?path: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor path: String?
+      attr_accessor message: String?
+    end
+  end
+end

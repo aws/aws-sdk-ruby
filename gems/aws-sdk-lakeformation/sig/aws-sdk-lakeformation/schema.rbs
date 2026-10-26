@@ -4,6 +4,7 @@ module Aws::LakeFormation
 
     AccessDeniedException: StructureShape
     AccessKeyIdString: StringShape
+    AccountIdString: StringShape
     AddLFTagsToResourceRequest: StructureShape
     AddLFTagsToResourceResponse: StructureShape
     AddObjectInput: StructureShape
@@ -14,6 +15,8 @@ module Aws::LakeFormation
     ApplicationStatus: EnumShape
     AssumeDecoratedRoleWithSAMLRequest: StructureShape
     AssumeDecoratedRoleWithSAMLResponse: StructureShape
+    AttachRLSPolicyRequest: StructureShape
+    AttachRLSPolicyResponse: StructureShape
     AuditContext: StructureShape
     AuditContextString: StringShape
     AuthorizedSessionTagValueList: ListShape
@@ -31,15 +34,19 @@ module Aws::LakeFormation
     CancelTransactionResponse: StructureShape
     CatalogIdString: StringShape
     CatalogResource: StructureShape
+    Column: StructureShape
     ColumnLFTag: StructureShape
     ColumnLFTagsList: ListShape
+    ColumnList: ListShape
     ColumnNames: ListShape
+    ColumnTypeString: StringShape
     ColumnWildcard: StructureShape
     CommitTransactionRequest: StructureShape
     CommitTransactionResponse: StructureShape
     ComparisonOperator: EnumShape
     ConcurrentModificationException: StructureShape
     Condition: StructureShape
+    ConflictException: StructureShape
     ContextKey: StringShape
     ContextValue: StringShape
     CreateDataCellsFilterRequest: StructureShape
@@ -52,7 +59,10 @@ module Aws::LakeFormation
     CreateLakeFormationIdentityCenterConfigurationResponse: StructureShape
     CreateLakeFormationOptInRequest: StructureShape
     CreateLakeFormationOptInResponse: StructureShape
+    CreateRLSPolicyRequest: StructureShape
+    CreateRLSPolicyResponse: StructureShape
     CredentialTimeoutDurationSecondInteger: IntegerShape
+    CredentialsScope: EnumShape
     DataCellsFilter: StructureShape
     DataCellsFilterList: ListShape
     DataCellsFilterResource: StructureShape
@@ -78,6 +88,8 @@ module Aws::LakeFormation
     DeleteObjectInput: StructureShape
     DeleteObjectsOnCancelRequest: StructureShape
     DeleteObjectsOnCancelResponse: StructureShape
+    DeleteRLSPolicyRequest: StructureShape
+    DeleteRLSPolicyResponse: StructureShape
     DeregisterResourceRequest: StructureShape
     DeregisterResourceResponse: StructureShape
     DescribeLakeFormationIdentityCenterConfigurationRequest: StructureShape
@@ -87,6 +99,8 @@ module Aws::LakeFormation
     DescribeTransactionRequest: StructureShape
     DescribeTransactionResponse: StructureShape
     DescriptionString: StringShape
+    DetachRLSPolicyRequest: StructureShape
+    DetachRLSPolicyResponse: StructureShape
     DetailsMap: StructureShape
     ETagString: StringShape
     EnableStatus: EnumShape
@@ -122,10 +136,14 @@ module Aws::LakeFormation
     GetQueryStatisticsRequest: StructureShape
     GetQueryStatisticsRequestQueryIdString: StringShape
     GetQueryStatisticsResponse: StructureShape
+    GetRLSPolicyRequest: StructureShape
+    GetRLSPolicyResponse: StructureShape
     GetResourceLFTagsRequest: StructureShape
     GetResourceLFTagsResponse: StructureShape
     GetTableObjectsRequest: StructureShape
     GetTableObjectsResponse: StructureShape
+    GetTemporaryDataLocationCredentialsRequest: StructureShape
+    GetTemporaryDataLocationCredentialsResponse: StructureShape
     GetTemporaryGluePartitionCredentialsRequest: StructureShape
     GetTemporaryGluePartitionCredentialsResponse: StructureShape
     GetTemporaryGlueTableCredentialsRequest: StructureShape
@@ -174,6 +192,10 @@ module Aws::LakeFormation
     ListLakeFormationOptInsResponse: StructureShape
     ListPermissionsRequest: StructureShape
     ListPermissionsResponse: StructureShape
+    ListRLSPoliciesRequest: StructureShape
+    ListRLSPoliciesResponse: StructureShape
+    ListRLSPolicyAttachmentsRequest: StructureShape
+    ListRLSPolicyAttachmentsResponse: StructureShape
     ListResourcesRequest: StructureShape
     ListResourcesResponse: StructureShape
     ListTableStorageOptimizersRequest: StructureShape
@@ -220,6 +242,14 @@ module Aws::LakeFormation
     QuerySessionContext: StructureShape
     QueryStateString: EnumShape
     RAMResourceShareArn: StringShape
+    RLSPolicy: StructureShape
+    RLSPolicyAttachment: StructureShape
+    RLSPolicyAttachmentList: ListShape
+    RLSPolicyList: ListShape
+    RLSPolicyResource: StructureShape
+    RedshiftConnect: StructureShape
+    RedshiftScopeUnion: UnionShape
+    RedshiftServiceIntegrations: ListShape
     RegisterResourceRequest: StructureShape
     RegisterResourceResponse: StructureShape
     RemoveLFTagsFromResourceRequest: StructureShape
@@ -247,6 +277,9 @@ module Aws::LakeFormation
     SearchTablesByLFTagsRequest: StructureShape
     SearchTablesByLFTagsResponse: StructureShape
     SecretAccessKeyString: StringShape
+    ServiceAuthorization: EnumShape
+    ServiceIntegrationList: ListShape
+    ServiceIntegrationUnion: UnionShape
     SessionTokenString: StringShape
     StartQueryPlanningRequest: StructureShape
     StartQueryPlanningResponse: StructureShape
@@ -272,6 +305,7 @@ module Aws::LakeFormation
     TagValueList: ListShape
     TaggedDatabase: StructureShape
     TaggedTable: StructureShape
+    TemporaryCredentials: StructureShape
     ThrottledException: StructureShape
     Timestamp: TimestampShape
     Token: StringShape
@@ -296,6 +330,8 @@ module Aws::LakeFormation
     UpdateLFTagResponse: StructureShape
     UpdateLakeFormationIdentityCenterConfigurationRequest: StructureShape
     UpdateLakeFormationIdentityCenterConfigurationResponse: StructureShape
+    UpdateRLSPolicyRequest: StructureShape
+    UpdateRLSPolicyResponse: StructureShape
     UpdateResourceRequest: StructureShape
     UpdateResourceResponse: StructureShape
     UpdateTableObjectsRequest: StructureShape
@@ -304,6 +340,7 @@ module Aws::LakeFormation
     UpdateTableStorageOptimizerResponse: StructureShape
     ValueString: StringShape
     ValueStringList: ListShape
+    VerificationStatus: EnumShape
     VersionString: StringShape
     VirtualObject: StructureShape
     VirtualObjectList: ListShape

@@ -1,0 +1,761 @@
+module Aws::SageMakerTrainingSessionRuntime
+  module Types
+
+    class AdamParamsConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?learning_rate: Float,
+        ?beta1: Float,
+        ?beta2: Float,
+        ?eps: Float,
+        ?weight_decay: Float,
+        ?grad_clip_norm: Float,
+        ?lora_plus_lr_ratio: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor learning_rate: Float?
+      attr_accessor beta1: Float?
+      attr_accessor beta2: Float?
+      attr_accessor eps: Float?
+      attr_accessor weight_decay: Float?
+      attr_accessor grad_clip_norm: Float?
+      attr_accessor lora_plus_lr_ratio: Float?
+    end
+
+    class ComputeLogprobsConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?prompt: Types::ModelInput,
+        ?model_package_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor prompt: Types::ModelInput?
+      attr_accessor model_package_arn: String?
+    end
+
+    class ComputeLogprobsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?logprobs: Array[Float],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor logprobs: Array[Float]?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Datum
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_input: Types::ModelInput,
+        ?loss_fn_inputs: Hash[String, Types::TensorData],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_input: Types::ModelInput?
+      attr_accessor loss_fn_inputs: Hash[String, Types::TensorData]?
+    end
+
+    class EncodedTextChunk
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tokens: Array[Integer],
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tokens: Array[Integer]?
+      attr_accessor type: String?
+    end
+
+    module EncodedTextChunkType
+      ENCODED_TEXT: String
+    end
+
+    class ExecuteSamplingOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?training_session_name: String,
+        ?operation_config: Types::SampleOperationConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor training_session_name: String?
+      attr_accessor operation_config: Types::SampleOperationConfig?
+    end
+
+    class ExecuteSamplingOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_id: String?
+    end
+
+    class ExecuteTrainingOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?training_session_name: String,
+        ?sequence_number: Integer,
+        ?client_token: String,
+        ?operation_config: Types::OperationConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor training_session_name: String?
+      attr_accessor sequence_number: Integer?
+      attr_accessor client_token: String?
+      attr_accessor operation_config: Types::OperationConfig?
+    end
+
+    class ExecuteTrainingOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_id: String?
+    end
+
+    class ForwardBackwardConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?loss_fn_name: String,
+        ?datum_list: Array[Types::Datum],
+        ?loss_fn_config: Smithy::Schema::document,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor loss_fn_name: String?
+      attr_accessor datum_list: Array[Types::Datum]?
+      attr_accessor loss_fn_config: Smithy::Schema::document?
+    end
+
+    class ForwardBackwardResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?loss_fn_output_type: String,
+        ?loss_fn_outputs: Array[Hash[String, Types::TensorData]],
+        ?metrics: Hash[String, Float],
+        ?token_usage: Types::TrainingTokenUsage,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor loss_fn_output_type: String?
+      attr_accessor loss_fn_outputs: Array[Hash[String, Types::TensorData]]?
+      attr_accessor metrics: Hash[String, Float]?
+      attr_accessor token_usage: Types::TrainingTokenUsage?
+    end
+
+    class ForwardConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?loss_fn_name: String,
+        ?datum_list: Array[Types::Datum],
+        ?loss_fn_config: Smithy::Schema::document,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor loss_fn_name: String?
+      attr_accessor datum_list: Array[Types::Datum]?
+      attr_accessor loss_fn_config: Smithy::Schema::document?
+    end
+
+    class ForwardResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?loss_fn_output_type: String,
+        ?loss_fn_outputs: Array[Hash[String, Types::TensorData]],
+        ?metrics: Hash[String, Float],
+        ?token_usage: Types::TrainingTokenUsage,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor loss_fn_output_type: String?
+      attr_accessor loss_fn_outputs: Array[Hash[String, Types::TensorData]]?
+      attr_accessor metrics: Hash[String, Float]?
+      attr_accessor token_usage: Types::TrainingTokenUsage?
+    end
+
+    class GetSamplingOperationResultInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?training_session_name: String,
+        ?operation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor training_session_name: String?
+      attr_accessor operation_id: String?
+    end
+
+    class GetSamplingOperationResultOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?operation_result: Types::SampleOperationResult,
+        ?error_details: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor operation_result: Types::SampleOperationResult?
+      attr_accessor error_details: String?
+    end
+
+    class GetTrainingOperationResultInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?training_session_name: String,
+        ?operation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor training_session_name: String?
+      attr_accessor operation_id: String?
+    end
+
+    class GetTrainingOperationResultOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?operation_result: Types::OperationResult,
+        ?error_details: String,
+        ?token_usage: Types::TrainingTokenUsage,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor operation_result: Types::OperationResult?
+      attr_accessor error_details: String?
+      attr_accessor token_usage: Types::TrainingTokenUsage?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class LoadStateConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_package_arn: String,
+        ?load_optimizer: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_package_arn: String?
+      attr_accessor load_optimizer: bool?
+    end
+
+    class LoadStateResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class LoadWeightsForSamplingConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_package_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_package_arn: String?
+    end
+
+    class LoadWeightsForSamplingResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module LossFnName
+      CROSS_ENTROPY: String
+      IMPORTANCE_SAMPLING: String
+      PPO: String
+      CISPO: String
+    end
+
+    class ModelInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?chunks: Array[Types::EncodedTextChunk],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor chunks: Array[Types::EncodedTextChunk]?
+    end
+
+    class OperationConfig
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?forward: Types::ForwardConfig,
+        ?forward_backward: Types::ForwardBackwardConfig,
+        ?optimizer_step: Types::OptimizerStepConfig,
+        ?save_weights: Types::SaveWeightsConfig,
+        ?save_state: Types::SaveStateConfig,
+        ?load_state: Types::LoadStateConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor forward: Types::ForwardConfig?
+      attr_accessor forward_backward: Types::ForwardBackwardConfig?
+      attr_accessor optimizer_step: Types::OptimizerStepConfig?
+      attr_accessor save_weights: Types::SaveWeightsConfig?
+      attr_accessor save_state: Types::SaveStateConfig?
+      attr_accessor load_state: Types::LoadStateConfig?
+
+      class Forward < OperationConfig
+      end
+      class ForwardBackward < OperationConfig
+      end
+      class OptimizerStep < OperationConfig
+      end
+      class SaveWeights < OperationConfig
+      end
+      class SaveState < OperationConfig
+      end
+      class LoadState < OperationConfig
+      end
+      class Unknown < OperationConfig
+      end
+    end
+
+    class OperationResult
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?forward: Types::ForwardResult,
+        ?forward_backward: Types::ForwardBackwardResult,
+        ?optimizer_step: Types::OptimizerStepResult,
+        ?save_weights: Types::SaveWeightsResult,
+        ?save_state: Types::SaveStateResult,
+        ?load_state: Types::LoadStateResult,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor forward: Types::ForwardResult?
+      attr_accessor forward_backward: Types::ForwardBackwardResult?
+      attr_accessor optimizer_step: Types::OptimizerStepResult?
+      attr_accessor save_weights: Types::SaveWeightsResult?
+      attr_accessor save_state: Types::SaveStateResult?
+      attr_accessor load_state: Types::LoadStateResult?
+
+      class Forward < OperationResult
+      end
+      class ForwardBackward < OperationResult
+      end
+      class OptimizerStep < OperationResult
+      end
+      class SaveWeights < OperationResult
+      end
+      class SaveState < OperationResult
+      end
+      class LoadState < OperationResult
+      end
+      class Unknown < OperationResult
+      end
+    end
+
+    class OptimizerStepConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?adam_params_config: Types::AdamParamsConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor adam_params_config: Types::AdamParamsConfig?
+    end
+
+    class OptimizerStepResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metrics: Hash[String, Float],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metrics: Hash[String, Float]?
+    end
+
+    module RequestStatus
+      PENDING: String
+      IN_PROGRESS: String
+      COMPLETED: String
+      FAILED: String
+      SKIPPED: String
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SampleConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?prompt: Types::ModelInput,
+        ?num_samples: Integer,
+        ?sampling_params: Types::SamplingParams,
+        ?include_prompt_logprobs: bool,
+        ?topk_prompt_logprobs: Integer,
+        ?model_package_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor prompt: Types::ModelInput?
+      attr_accessor num_samples: Integer?
+      attr_accessor sampling_params: Types::SamplingParams?
+      attr_accessor include_prompt_logprobs: bool?
+      attr_accessor topk_prompt_logprobs: Integer?
+      attr_accessor model_package_arn: String?
+    end
+
+    class SampleOperationConfig
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?sample: Types::SampleConfig,
+        ?compute_logprobs: Types::ComputeLogprobsConfig,
+        ?load_weights_for_sampling: Types::LoadWeightsForSamplingConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sample: Types::SampleConfig?
+      attr_accessor compute_logprobs: Types::ComputeLogprobsConfig?
+      attr_accessor load_weights_for_sampling: Types::LoadWeightsForSamplingConfig?
+
+      class Sample < SampleOperationConfig
+      end
+      class ComputeLogprobs < SampleOperationConfig
+      end
+      class LoadWeightsForSampling < SampleOperationConfig
+      end
+      class Unknown < SampleOperationConfig
+      end
+    end
+
+    class SampleOperationResult
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?sample: Types::SampleResponse,
+        ?compute_logprobs: Types::ComputeLogprobsResult,
+        ?load_weights_for_sampling: Types::LoadWeightsForSamplingResult,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sample: Types::SampleResponse?
+      attr_accessor compute_logprobs: Types::ComputeLogprobsResult?
+      attr_accessor load_weights_for_sampling: Types::LoadWeightsForSamplingResult?
+
+      class Sample < SampleOperationResult
+      end
+      class ComputeLogprobs < SampleOperationResult
+      end
+      class LoadWeightsForSampling < SampleOperationResult
+      end
+      class Unknown < SampleOperationResult
+      end
+    end
+
+    class SampleResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sequences: Array[Types::SampledSequence],
+        ?prompt_logprobs: Array[Float],
+        ?topk_prompt_logprobs: Array[Array[Types::TokenLogprob]],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sequences: Array[Types::SampledSequence]?
+      attr_accessor prompt_logprobs: Array[Float]?
+      attr_accessor topk_prompt_logprobs: Array[Array[Types::TokenLogprob]]?
+    end
+
+    class SampleTokenUsage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?prefill: Integer,
+        ?decode: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor prefill: Integer?
+      attr_accessor decode: Integer?
+    end
+
+    class SampleTrainingSessionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?training_session_name: String,
+        ?content_type: String,
+        ?accept: String,
+        ?model_package_arn: String,
+        ?body: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor training_session_name: String?
+      attr_accessor content_type: String?
+      attr_accessor accept: String?
+      attr_accessor model_package_arn: String?
+      attr_accessor body: String?
+    end
+
+    class SampleTrainingSessionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content_type: String,
+        ?body: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content_type: String?
+      attr_accessor body: String?
+    end
+
+    class SampleTrainingSessionWithResponseStreamInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?training_session_name: String,
+        ?content_type: String,
+        ?accept: String,
+        ?model_package_arn: String,
+        ?body: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor training_session_name: String?
+      attr_accessor content_type: String?
+      attr_accessor accept: String?
+      attr_accessor model_package_arn: String?
+      attr_accessor body: String?
+    end
+
+    class SampleTrainingSessionWithResponseStreamOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content_type: String,
+        ?body: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content_type: String?
+      attr_accessor body: String?
+    end
+
+    class SampledSequence
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stop_reason: String,
+        ?tokens: Array[Integer],
+        ?logprobs: Array[Float],
+        ?token_usage: Types::SampleTokenUsage,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stop_reason: String?
+      attr_accessor tokens: Array[Integer]?
+      attr_accessor logprobs: Array[Float]?
+      attr_accessor token_usage: Types::SampleTokenUsage?
+    end
+
+    class SamplingParams
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_tokens: Integer,
+        ?temperature: Float,
+        ?top_k: Integer,
+        ?top_p: Float,
+        ?seed: Integer,
+        ?stop: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_tokens: Integer?
+      attr_accessor temperature: Float?
+      attr_accessor top_k: Integer?
+      attr_accessor top_p: Float?
+      attr_accessor seed: Integer?
+      attr_accessor stop: Array[String]?
+    end
+
+    class SaveStateConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+    end
+
+    class SaveStateResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_package_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_package_arn: String?
+    end
+
+    class SaveWeightsConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?merge_weights: bool,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor merge_weights: bool?
+      attr_accessor description: String?
+    end
+
+    class SaveWeightsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_package_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_package_arn: String?
+    end
+
+    module StopReason
+      STOP: String
+      LENGTH: String
+    end
+
+    class TensorData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data: Smithy::Schema::document,
+        ?dtype: String,
+        ?shape: Array[Integer],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data: Smithy::Schema::document?
+      attr_accessor dtype: String?
+      attr_accessor shape: Array[Integer]?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TokenLogprob
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?token_id: Integer,
+        ?logprob: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor token_id: Integer?
+      attr_accessor logprob: Float?
+    end
+
+    class TrainingTokenUsage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?training_tokens: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor training_tokens: Integer?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

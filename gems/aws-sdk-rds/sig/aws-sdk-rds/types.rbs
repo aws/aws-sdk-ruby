@@ -113,6 +113,54 @@ module Aws::RDS
       attr_accessor tags: Array[Types::Tag]?
     end
 
+    class AdditionalStorageVolume
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?volume_name: String,
+        ?allocated_storage: Integer,
+        ?iops: Integer,
+        ?max_allocated_storage: Integer,
+        ?storage_throughput: Integer,
+        ?storage_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor volume_name: String?
+      attr_accessor allocated_storage: Integer?
+      attr_accessor iops: Integer?
+      attr_accessor max_allocated_storage: Integer?
+      attr_accessor storage_throughput: Integer?
+      attr_accessor storage_type: String?
+    end
+
+    class AdditionalStorageVolumeOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?volume_name: String,
+        ?storage_volume_status: String,
+        ?storage_operation_status: String,
+        ?storage_operation_percent_progress: Integer,
+        ?allocated_storage: Integer,
+        ?iops: Integer,
+        ?max_allocated_storage: Integer,
+        ?storage_throughput: Integer,
+        ?storage_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor volume_name: String?
+      attr_accessor storage_volume_status: String?
+      attr_accessor storage_operation_status: String?
+      attr_accessor storage_operation_percent_progress: Integer?
+      attr_accessor allocated_storage: Integer?
+      attr_accessor iops: Integer?
+      attr_accessor max_allocated_storage: Integer?
+      attr_accessor storage_throughput: Integer?
+      attr_accessor storage_type: String?
+    end
+
     module ApplyMethod
       immediate: String
       pending_reboot: String
@@ -230,6 +278,39 @@ module Aws::RDS
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor name: String?
+    end
+
+    class AvailableAdditionalStorageVolumesOption
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?supports_storage_autoscaling: bool,
+        ?supports_storage_throughput: bool,
+        ?supports_iops: bool,
+        ?storage_type: String,
+        ?min_storage_size: Integer,
+        ?max_storage_size: Integer,
+        ?min_iops: Integer,
+        ?max_iops: Integer,
+        ?min_iops_per_gib: Float,
+        ?max_iops_per_gib: Float,
+        ?min_storage_throughput: Integer,
+        ?max_storage_throughput: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor supports_storage_autoscaling: bool?
+      attr_accessor supports_storage_throughput: bool?
+      attr_accessor supports_iops: bool?
+      attr_accessor storage_type: String?
+      attr_accessor min_storage_size: Integer?
+      attr_accessor max_storage_size: Integer?
+      attr_accessor min_iops: Integer?
+      attr_accessor max_iops: Integer?
+      attr_accessor min_iops_per_gib: Float?
+      attr_accessor max_iops_per_gib: Float?
+      attr_accessor min_storage_throughput: Integer?
+      attr_accessor max_storage_throughput: Integer?
     end
 
     class AvailableProcessorFeature
@@ -546,7 +627,6 @@ module Aws::RDS
     module ClusterScalabilityType
       STANDARD: String
       LIMITLESS: String
-      SCALEOUT: String
     end
 
     class ConnectionPoolConfiguration
@@ -778,6 +858,7 @@ module Aws::RDS
         ?target_storage_type: String,
         ?target_allocated_storage: Integer,
         ?target_storage_throughput: Integer,
+        ?target_resource_configurations: Array[Types::TargetResourceConfiguration],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -793,6 +874,7 @@ module Aws::RDS
       attr_accessor target_storage_type: String?
       attr_accessor target_allocated_storage: Integer?
       attr_accessor target_storage_throughput: Integer?
+      attr_accessor target_resource_configurations: Array[Types::TargetResourceConfiguration]?
     end
 
     class CreateBlueGreenDeploymentResponse
@@ -825,6 +907,7 @@ module Aws::RDS
         ?engine_version: String,
         ?database_installation_files_s3_bucket_name: String,
         ?database_installation_files_s3_prefix: String,
+        ?database_installation_files: Array[String],
         ?image_id: String,
         ?kms_key_id: String,
         ?source_custom_db_engine_version_identifier: String,
@@ -839,6 +922,7 @@ module Aws::RDS
       attr_accessor engine_version: String?
       attr_accessor database_installation_files_s3_bucket_name: String?
       attr_accessor database_installation_files_s3_prefix: String?
+      attr_accessor database_installation_files: Array[String]?
       attr_accessor image_id: String?
       attr_accessor kms_key_id: String?
       attr_accessor source_custom_db_engine_version_identifier: String?
@@ -857,12 +941,14 @@ module Aws::RDS
         ?engine_version: String,
         ?database_installation_files_s3_bucket_name: String,
         ?database_installation_files_s3_prefix: String,
+        ?database_installation_files: Array[String],
         ?custom_db_engine_version_manifest: String,
         ?db_parameter_group_family: String,
         ?db_engine_description: String,
         ?db_engine_version_arn: String,
         ?db_engine_version_description: String,
         ?default_character_set: Types::CharacterSet,
+        ?failure_reason: String,
         ?image: Types::CustomDBEngineVersionAMI,
         ?db_engine_media_type: String,
         ?kms_key_id: String,
@@ -895,12 +981,14 @@ module Aws::RDS
       attr_accessor engine_version: String?
       attr_accessor database_installation_files_s3_bucket_name: String?
       attr_accessor database_installation_files_s3_prefix: String?
+      attr_accessor database_installation_files: Array[String]?
       attr_accessor custom_db_engine_version_manifest: String?
       attr_accessor db_parameter_group_family: String?
       attr_accessor db_engine_description: String?
       attr_accessor db_engine_version_arn: String?
       attr_accessor db_engine_version_description: String?
       attr_accessor default_character_set: Types::CharacterSet?
+      attr_accessor failure_reason: String?
       attr_accessor image: Types::CustomDBEngineVersionAMI?
       attr_accessor db_engine_media_type: String?
       attr_accessor kms_key_id: String?
@@ -1037,7 +1125,10 @@ module Aws::RDS
         ?master_user_secret_kms_key_id: String,
         ?ca_certificate_identifier: String,
         ?engine_lifecycle_support: String,
+        ?tag_specifications: Array[Types::TagSpecification],
         ?master_user_authentication_type: String,
+        ?with_express_configuration: bool,
+        ?associated_roles: Array[Types::DBClusterAssociatedRole],
         ?source_region: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -1098,7 +1189,10 @@ module Aws::RDS
       attr_accessor master_user_secret_kms_key_id: String?
       attr_accessor ca_certificate_identifier: String?
       attr_accessor engine_lifecycle_support: String?
+      attr_accessor tag_specifications: Array[Types::TagSpecification]?
       attr_accessor master_user_authentication_type: String?
+      attr_accessor with_express_configuration: bool?
+      attr_accessor associated_roles: Array[Types::DBClusterAssociatedRole]?
       attr_accessor source_region: String?
     end
 
@@ -1235,6 +1329,8 @@ module Aws::RDS
         ?multi_tenant: bool,
         ?dedicated_log_volume: bool,
         ?engine_lifecycle_support: String,
+        ?additional_storage_volumes: Array[Types::AdditionalStorageVolume],
+        ?tag_specifications: Array[Types::TagSpecification],
         ?master_user_authentication_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -1303,6 +1399,8 @@ module Aws::RDS
       attr_accessor multi_tenant: bool?
       attr_accessor dedicated_log_volume: bool?
       attr_accessor engine_lifecycle_support: String?
+      attr_accessor additional_storage_volumes: Array[Types::AdditionalStorageVolume]?
+      attr_accessor tag_specifications: Array[Types::TagSpecification]?
       attr_accessor master_user_authentication_type: String?
     end
 
@@ -1357,6 +1455,8 @@ module Aws::RDS
         ?dedicated_log_volume: bool,
         ?upgrade_storage_config: bool,
         ?ca_certificate_identifier: String,
+        ?additional_storage_volumes: Array[Types::AdditionalStorageVolume],
+        ?tag_specifications: Array[Types::TagSpecification],
         ?source_region: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -1408,6 +1508,8 @@ module Aws::RDS
       attr_accessor dedicated_log_volume: bool?
       attr_accessor upgrade_storage_config: bool?
       attr_accessor ca_certificate_identifier: String?
+      attr_accessor additional_storage_volumes: Array[Types::AdditionalStorageVolume]?
+      attr_accessor tag_specifications: Array[Types::TagSpecification]?
       attr_accessor source_region: String?
     end
 
@@ -1963,6 +2065,7 @@ module Aws::RDS
         ?db_cluster_option_group_memberships: Array[Types::DBClusterOptionGroupStatus],
         ?preferred_backup_window: String,
         ?preferred_maintenance_window: String,
+        ?upgrade_rollout_order: String,
         ?replication_source_identifier: String,
         ?read_replica_identifiers: Array[String],
         ?status_infos: Array[Types::DBClusterStatusInfo],
@@ -1970,6 +2073,7 @@ module Aws::RDS
         ?vpc_security_groups: Array[Types::VpcSecurityGroupMembership],
         ?hosted_zone_id: String,
         ?storage_encrypted: bool,
+        ?storage_encryption_type: String,
         ?kms_key_id: String,
         ?db_cluster_resource_id: String,
         ?db_cluster_arn: String,
@@ -2024,6 +2128,8 @@ module Aws::RDS
         ?cluster_scalability_type: String,
         ?certificate_details: Types::CertificateDetails,
         ?engine_lifecycle_support: String,
+        ?vpc_networking_enabled: bool,
+        ?internet_access_gateway_enabled: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2050,6 +2156,7 @@ module Aws::RDS
       attr_accessor db_cluster_option_group_memberships: Array[Types::DBClusterOptionGroupStatus]?
       attr_accessor preferred_backup_window: String?
       attr_accessor preferred_maintenance_window: String?
+      attr_accessor upgrade_rollout_order: String?
       attr_accessor replication_source_identifier: String?
       attr_accessor read_replica_identifiers: Array[String]?
       attr_accessor status_infos: Array[Types::DBClusterStatusInfo]?
@@ -2057,6 +2164,7 @@ module Aws::RDS
       attr_accessor vpc_security_groups: Array[Types::VpcSecurityGroupMembership]?
       attr_accessor hosted_zone_id: String?
       attr_accessor storage_encrypted: bool?
+      attr_accessor storage_encryption_type: String?
       attr_accessor kms_key_id: String?
       attr_accessor db_cluster_resource_id: String?
       attr_accessor db_cluster_arn: String?
@@ -2111,6 +2219,8 @@ module Aws::RDS
       attr_accessor cluster_scalability_type: String?
       attr_accessor certificate_details: Types::CertificateDetails?
       attr_accessor engine_lifecycle_support: String?
+      attr_accessor vpc_networking_enabled: bool?
+      attr_accessor internet_access_gateway_enabled: bool?
     end
 
     class DBClusterAlreadyExistsFault
@@ -2122,6 +2232,19 @@ module Aws::RDS
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    class DBClusterAssociatedRole
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role_arn: String,
+        ?feature_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role_arn: String?
+      attr_accessor feature_name: String?
     end
 
     class DBClusterAutomatedBackup
@@ -2141,10 +2264,12 @@ module Aws::RDS
         ?iam_database_authentication_enabled: bool,
         ?cluster_create_time: Time,
         ?storage_encrypted: bool,
+        ?storage_encryption_type: String,
         ?allocated_storage: Integer,
         ?engine_version: String,
         ?db_cluster_arn: String,
         ?backup_retention_period: Integer,
+        ?preferred_backup_window: String,
         ?engine_mode: String,
         ?availability_zones: Array[String],
         ?port: Integer,
@@ -2153,6 +2278,7 @@ module Aws::RDS
         ?iops: Integer,
         ?storage_throughput: Integer,
         ?aws_backup_recovery_point_arn: String,
+        ?tag_list: Array[Types::Tag],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2169,10 +2295,12 @@ module Aws::RDS
       attr_accessor iam_database_authentication_enabled: bool?
       attr_accessor cluster_create_time: Time?
       attr_accessor storage_encrypted: bool?
+      attr_accessor storage_encryption_type: String?
       attr_accessor allocated_storage: Integer?
       attr_accessor engine_version: String?
       attr_accessor db_cluster_arn: String?
       attr_accessor backup_retention_period: Integer?
+      attr_accessor preferred_backup_window: String?
       attr_accessor engine_mode: String?
       attr_accessor availability_zones: Array[String]?
       attr_accessor port: Integer?
@@ -2181,6 +2309,7 @@ module Aws::RDS
       attr_accessor iops: Integer?
       attr_accessor storage_throughput: Integer?
       attr_accessor aws_backup_recovery_point_arn: String?
+      attr_accessor tag_list: Array[Types::Tag]?
     end
 
     class DBClusterAutomatedBackupMessage
@@ -2513,6 +2642,9 @@ module Aws::RDS
         ?snapshot_type: String,
         ?percent_progress: Integer,
         ?storage_encrypted: bool,
+        ?storage_encryption_type: String,
+        ?backup_retention_period: Integer,
+        ?preferred_backup_window: String,
         ?kms_key_id: String,
         ?db_cluster_snapshot_arn: String,
         ?source_db_cluster_snapshot_arn: String,
@@ -2542,6 +2674,9 @@ module Aws::RDS
       attr_accessor snapshot_type: String?
       attr_accessor percent_progress: Integer?
       attr_accessor storage_encrypted: bool?
+      attr_accessor storage_encryption_type: String?
+      attr_accessor backup_retention_period: Integer?
+      attr_accessor preferred_backup_window: String?
       attr_accessor kms_key_id: String?
       attr_accessor db_cluster_snapshot_arn: String?
       attr_accessor source_db_cluster_snapshot_arn: String?
@@ -2640,12 +2775,14 @@ module Aws::RDS
         ?engine_version: String,
         ?database_installation_files_s3_bucket_name: String,
         ?database_installation_files_s3_prefix: String,
+        ?database_installation_files: Array[String],
         ?custom_db_engine_version_manifest: String,
         ?db_parameter_group_family: String,
         ?db_engine_description: String,
         ?db_engine_version_arn: String,
         ?db_engine_version_description: String,
         ?default_character_set: Types::CharacterSet,
+        ?failure_reason: String,
         ?image: Types::CustomDBEngineVersionAMI,
         ?db_engine_media_type: String,
         ?kms_key_id: String,
@@ -2678,12 +2815,14 @@ module Aws::RDS
       attr_accessor engine_version: String?
       attr_accessor database_installation_files_s3_bucket_name: String?
       attr_accessor database_installation_files_s3_prefix: String?
+      attr_accessor database_installation_files: Array[String]?
       attr_accessor custom_db_engine_version_manifest: String?
       attr_accessor db_parameter_group_family: String?
       attr_accessor db_engine_description: String?
       attr_accessor db_engine_version_arn: String?
       attr_accessor db_engine_version_description: String?
       attr_accessor default_character_set: Types::CharacterSet?
+      attr_accessor failure_reason: String?
       attr_accessor image: Types::CustomDBEngineVersionAMI?
       attr_accessor db_engine_media_type: String?
       attr_accessor kms_key_id: String?
@@ -2744,6 +2883,7 @@ module Aws::RDS
         ?availability_zone: String,
         ?db_subnet_group: Types::DBSubnetGroup,
         ?preferred_maintenance_window: String,
+        ?upgrade_rollout_order: String,
         ?pending_modified_values: Types::PendingModifiedValues,
         ?latest_restorable_time: Time,
         ?multi_az: bool,
@@ -2763,6 +2903,7 @@ module Aws::RDS
         ?publicly_accessible: bool,
         ?status_infos: Array[Types::DBInstanceStatusInfo],
         ?storage_type: String,
+        ?storage_encryption_type: String,
         ?tde_credential_arn: String,
         ?db_instance_port: Integer,
         ?db_cluster_identifier: String,
@@ -2814,6 +2955,10 @@ module Aws::RDS
         ?dedicated_log_volume: bool,
         ?is_storage_config_upgrade_available: bool,
         ?engine_lifecycle_support: String,
+        ?additional_storage_volumes: Array[Types::AdditionalStorageVolumeOutput],
+        ?storage_volume_status: String,
+        ?storage_operation_status: String,
+        ?storage_operation_percent_progress: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2834,6 +2979,7 @@ module Aws::RDS
       attr_accessor availability_zone: String?
       attr_accessor db_subnet_group: Types::DBSubnetGroup?
       attr_accessor preferred_maintenance_window: String?
+      attr_accessor upgrade_rollout_order: String?
       attr_accessor pending_modified_values: Types::PendingModifiedValues?
       attr_accessor latest_restorable_time: Time?
       attr_accessor multi_az: bool?
@@ -2853,6 +2999,7 @@ module Aws::RDS
       attr_accessor publicly_accessible: bool?
       attr_accessor status_infos: Array[Types::DBInstanceStatusInfo]?
       attr_accessor storage_type: String?
+      attr_accessor storage_encryption_type: String?
       attr_accessor tde_credential_arn: String?
       attr_accessor db_instance_port: Integer?
       attr_accessor db_cluster_identifier: String?
@@ -2904,6 +3051,10 @@ module Aws::RDS
       attr_accessor dedicated_log_volume: bool?
       attr_accessor is_storage_config_upgrade_available: bool?
       attr_accessor engine_lifecycle_support: String?
+      attr_accessor additional_storage_volumes: Array[Types::AdditionalStorageVolumeOutput]?
+      attr_accessor storage_volume_status: String?
+      attr_accessor storage_operation_status: String?
+      attr_accessor storage_operation_percent_progress: Integer?
     end
 
     class DBInstanceAlreadyExistsFault
@@ -2941,17 +3092,21 @@ module Aws::RDS
         ?option_group_name: String,
         ?tde_credential_arn: String,
         ?encrypted: bool,
+        ?storage_encryption_type: String,
         ?storage_type: String,
         ?kms_key_id: String,
         ?timezone: String,
         ?iam_database_authentication_enabled: bool,
         ?backup_retention_period: Integer,
+        ?preferred_backup_window: String,
         ?db_instance_automated_backups_arn: String,
         ?db_instance_automated_backups_replications: Array[Types::DBInstanceAutomatedBackupsReplication],
         ?backup_target: String,
         ?multi_tenant: bool,
         ?aws_backup_recovery_point_arn: String,
+        ?tag_list: Array[Types::Tag],
         ?dedicated_log_volume: bool,
+        ?additional_storage_volumes: Array[Types::AdditionalStorageVolume],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2975,17 +3130,21 @@ module Aws::RDS
       attr_accessor option_group_name: String?
       attr_accessor tde_credential_arn: String?
       attr_accessor encrypted: bool?
+      attr_accessor storage_encryption_type: String?
       attr_accessor storage_type: String?
       attr_accessor kms_key_id: String?
       attr_accessor timezone: String?
       attr_accessor iam_database_authentication_enabled: bool?
       attr_accessor backup_retention_period: Integer?
+      attr_accessor preferred_backup_window: String?
       attr_accessor db_instance_automated_backups_arn: String?
       attr_accessor db_instance_automated_backups_replications: Array[Types::DBInstanceAutomatedBackupsReplication]?
       attr_accessor backup_target: String?
       attr_accessor multi_tenant: bool?
       attr_accessor aws_backup_recovery_point_arn: String?
+      attr_accessor tag_list: Array[Types::Tag]?
       attr_accessor dedicated_log_volume: bool?
+      attr_accessor additional_storage_volumes: Array[Types::AdditionalStorageVolume]?
     end
 
     class DBInstanceAutomatedBackupMessage
@@ -3735,6 +3894,9 @@ module Aws::RDS
         ?storage_type: String,
         ?tde_credential_arn: String,
         ?encrypted: bool,
+        ?storage_encryption_type: String,
+        ?backup_retention_period: Integer,
+        ?preferred_backup_window: String,
         ?kms_key_id: String,
         ?db_snapshot_arn: String,
         ?timezone: String,
@@ -3748,7 +3910,9 @@ module Aws::RDS
         ?db_system_id: String,
         ?multi_tenant: bool,
         ?dedicated_log_volume: bool,
+        ?additional_storage_volumes: Array[Types::AdditionalStorageVolume],
         ?snapshot_availability_zone: String,
+        ?full_snapshot_size_in_bytes: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3775,6 +3939,9 @@ module Aws::RDS
       attr_accessor storage_type: String?
       attr_accessor tde_credential_arn: String?
       attr_accessor encrypted: bool?
+      attr_accessor storage_encryption_type: String?
+      attr_accessor backup_retention_period: Integer?
+      attr_accessor preferred_backup_window: String?
       attr_accessor kms_key_id: String?
       attr_accessor db_snapshot_arn: String?
       attr_accessor timezone: String?
@@ -3788,7 +3955,9 @@ module Aws::RDS
       attr_accessor db_system_id: String?
       attr_accessor multi_tenant: bool?
       attr_accessor dedicated_log_volume: bool?
+      attr_accessor additional_storage_volumes: Array[Types::AdditionalStorageVolume]?
       attr_accessor snapshot_availability_zone: String?
+      attr_accessor full_snapshot_size_in_bytes: Integer?
     end
 
     class DBSnapshotAlreadyExistsFault
@@ -4080,12 +4249,14 @@ module Aws::RDS
         ?engine_version: String,
         ?database_installation_files_s3_bucket_name: String,
         ?database_installation_files_s3_prefix: String,
+        ?database_installation_files: Array[String],
         ?custom_db_engine_version_manifest: String,
         ?db_parameter_group_family: String,
         ?db_engine_description: String,
         ?db_engine_version_arn: String,
         ?db_engine_version_description: String,
         ?default_character_set: Types::CharacterSet,
+        ?failure_reason: String,
         ?image: Types::CustomDBEngineVersionAMI,
         ?db_engine_media_type: String,
         ?kms_key_id: String,
@@ -4118,12 +4289,14 @@ module Aws::RDS
       attr_accessor engine_version: String?
       attr_accessor database_installation_files_s3_bucket_name: String?
       attr_accessor database_installation_files_s3_prefix: String?
+      attr_accessor database_installation_files: Array[String]?
       attr_accessor custom_db_engine_version_manifest: String?
       attr_accessor db_parameter_group_family: String?
       attr_accessor db_engine_description: String?
       attr_accessor db_engine_version_arn: String?
       attr_accessor db_engine_version_description: String?
       attr_accessor default_character_set: Types::CharacterSet?
+      attr_accessor failure_reason: String?
       attr_accessor image: Types::CustomDBEngineVersionAMI?
       attr_accessor db_engine_media_type: String?
       attr_accessor kms_key_id: String?
@@ -5665,6 +5838,29 @@ module Aws::RDS
       attr_accessor marker: String?
     end
 
+    class DescribeServerlessV2PlatformVersionsMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?serverless_v2_platform_version: String,
+        ?engine: String,
+        ?filters: Array[Types::Filter],
+        ?default_only: bool,
+        ?include_all: bool,
+        ?max_records: Integer,
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor serverless_v2_platform_version: String?
+      attr_accessor engine: String?
+      attr_accessor filters: Array[Types::Filter]?
+      attr_accessor default_only: bool?
+      attr_accessor include_all: bool?
+      attr_accessor max_records: Integer?
+      attr_accessor marker: String?
+    end
+
     class DescribeSourceRegionsMessage
       include Smithy::Schema::Structure
 
@@ -6226,6 +6422,7 @@ module Aws::RDS
         ?engine_lifecycle_support: String,
         ?database_name: String,
         ?storage_encrypted: bool,
+        ?storage_encryption_type: String,
         ?deletion_protection: bool,
         ?global_cluster_members: Array[Types::GlobalClusterMember],
         ?endpoint: String,
@@ -6243,6 +6440,7 @@ module Aws::RDS
       attr_accessor engine_lifecycle_support: String?
       attr_accessor database_name: String?
       attr_accessor storage_encrypted: bool?
+      attr_accessor storage_encryption_type: String?
       attr_accessor deletion_protection: bool?
       attr_accessor global_cluster_members: Array[Types::GlobalClusterMember]?
       attr_accessor endpoint: String?
@@ -7037,6 +7235,29 @@ module Aws::RDS
       attr_accessor policy_status: String?
     end
 
+    class ModifyAdditionalStorageVolume
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?volume_name: String,
+        ?allocated_storage: Integer,
+        ?iops: Integer,
+        ?max_allocated_storage: Integer,
+        ?storage_throughput: Integer,
+        ?storage_type: String,
+        ?set_for_delete: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor volume_name: String?
+      attr_accessor allocated_storage: Integer?
+      attr_accessor iops: Integer?
+      attr_accessor max_allocated_storage: Integer?
+      attr_accessor storage_throughput: Integer?
+      attr_accessor storage_type: String?
+      attr_accessor set_for_delete: bool?
+    end
+
     class ModifyCertificatesMessage
       include Smithy::Schema::Structure
 
@@ -7123,12 +7344,14 @@ module Aws::RDS
         ?engine_version: String,
         ?database_installation_files_s3_bucket_name: String,
         ?database_installation_files_s3_prefix: String,
+        ?database_installation_files: Array[String],
         ?custom_db_engine_version_manifest: String,
         ?db_parameter_group_family: String,
         ?db_engine_description: String,
         ?db_engine_version_arn: String,
         ?db_engine_version_description: String,
         ?default_character_set: Types::CharacterSet,
+        ?failure_reason: String,
         ?image: Types::CustomDBEngineVersionAMI,
         ?db_engine_media_type: String,
         ?kms_key_id: String,
@@ -7161,12 +7384,14 @@ module Aws::RDS
       attr_accessor engine_version: String?
       attr_accessor database_installation_files_s3_bucket_name: String?
       attr_accessor database_installation_files_s3_prefix: String?
+      attr_accessor database_installation_files: Array[String]?
       attr_accessor custom_db_engine_version_manifest: String?
       attr_accessor db_parameter_group_family: String?
       attr_accessor db_engine_description: String?
       attr_accessor db_engine_version_arn: String?
       attr_accessor db_engine_version_description: String?
       attr_accessor default_character_set: Types::CharacterSet?
+      attr_accessor failure_reason: String?
       attr_accessor image: Types::CustomDBEngineVersionAMI?
       attr_accessor db_engine_media_type: String?
       attr_accessor kms_key_id: String?
@@ -7290,6 +7515,7 @@ module Aws::RDS
         ?enable_limitless_database: bool,
         ?ca_certificate_identifier: String,
         ?master_user_authentication_type: String,
+        ?engine_lifecycle_support: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -7340,6 +7566,7 @@ module Aws::RDS
       attr_accessor enable_limitless_database: bool?
       attr_accessor ca_certificate_identifier: String?
       attr_accessor master_user_authentication_type: String?
+      attr_accessor engine_lifecycle_support: String?
     end
 
     class ModifyDBClusterParameterGroupMessage
@@ -7470,7 +7697,10 @@ module Aws::RDS
         ?multi_tenant: bool,
         ?dedicated_log_volume: bool,
         ?engine: String,
+        ?additional_storage_volumes: Array[Types::ModifyAdditionalStorageVolume],
+        ?tag_specifications: Array[Types::TagSpecification],
         ?master_user_authentication_type: String,
+        ?engine_lifecycle_support: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -7535,7 +7765,10 @@ module Aws::RDS
       attr_accessor multi_tenant: bool?
       attr_accessor dedicated_log_volume: bool?
       attr_accessor engine: String?
+      attr_accessor additional_storage_volumes: Array[Types::ModifyAdditionalStorageVolume]?
+      attr_accessor tag_specifications: Array[Types::TagSpecification]?
       attr_accessor master_user_authentication_type: String?
+      attr_accessor engine_lifecycle_support: String?
     end
 
     class ModifyDBInstanceResult
@@ -8279,7 +8512,9 @@ module Aws::RDS
         ?supported_network_types: Array[String],
         ?supports_clusters: bool,
         ?supports_dedicated_log_volume: bool,
+        ?supports_additional_storage_volumes: bool,
         ?supports_http_endpoint: bool,
+        ?available_additional_storage_volumes_options: Array[Types::AvailableAdditionalStorageVolumesOption],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -8319,7 +8554,9 @@ module Aws::RDS
       attr_accessor supported_network_types: Array[String]?
       attr_accessor supports_clusters: bool?
       attr_accessor supports_dedicated_log_volume: bool?
+      attr_accessor supports_additional_storage_volumes: bool?
       attr_accessor supports_http_endpoint: bool?
+      attr_accessor available_additional_storage_volumes_options: Array[Types::AvailableAdditionalStorageVolumesOption]?
     end
 
     class OrderableDBInstanceOptionsMessage
@@ -8450,6 +8687,7 @@ module Aws::RDS
         ?iam_database_authentication_enabled: bool,
         ?dedicated_log_volume: bool,
         ?engine: String,
+        ?additional_storage_volumes: Array[Types::AdditionalStorageVolume],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -8475,6 +8713,7 @@ module Aws::RDS
       attr_accessor iam_database_authentication_enabled: bool?
       attr_accessor dedicated_log_volume: bool?
       attr_accessor engine: String?
+      attr_accessor additional_storage_volumes: Array[Types::AdditionalStorageVolume]?
     end
 
     class PerformanceInsightsMetricDimensionGroup
@@ -8575,12 +8814,14 @@ module Aws::RDS
         ?db_instance_identifier: String,
         ?backup_retention_period: Integer,
         ?preferred_backup_window: String,
+        ?tag_specifications: Array[Types::TagSpecification],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor db_instance_identifier: String?
       attr_accessor backup_retention_period: Integer?
       attr_accessor preferred_backup_window: String?
+      attr_accessor tag_specifications: Array[Types::TagSpecification]?
     end
 
     class PromoteReadReplicaResult
@@ -9209,6 +9450,8 @@ module Aws::RDS
         ?manage_master_user_password: bool,
         ?master_user_secret_kms_key_id: String,
         ?engine_lifecycle_support: String,
+        ?tag_specifications: Array[Types::TagSpecification],
+        ?associated_roles: Array[Types::DBClusterAssociatedRole],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -9249,6 +9492,8 @@ module Aws::RDS
       attr_accessor manage_master_user_password: bool?
       attr_accessor master_user_secret_kms_key_id: String?
       attr_accessor engine_lifecycle_support: String?
+      attr_accessor tag_specifications: Array[Types::TagSpecification]?
+      attr_accessor associated_roles: Array[Types::DBClusterAssociatedRole]?
     end
 
     class RestoreDBClusterFromS3Result
@@ -9300,7 +9545,13 @@ module Aws::RDS
         ?enable_performance_insights: bool,
         ?performance_insights_kms_key_id: String,
         ?performance_insights_retention_period: Integer,
+        ?backup_retention_period: Integer,
+        ?preferred_backup_window: String,
         ?engine_lifecycle_support: String,
+        ?tag_specifications: Array[Types::TagSpecification],
+        ?enable_vpc_networking: bool,
+        ?enable_internet_access_gateway: bool,
+        ?associated_roles: Array[Types::DBClusterAssociatedRole],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -9338,7 +9589,13 @@ module Aws::RDS
       attr_accessor enable_performance_insights: bool?
       attr_accessor performance_insights_kms_key_id: String?
       attr_accessor performance_insights_retention_period: Integer?
+      attr_accessor backup_retention_period: Integer?
+      attr_accessor preferred_backup_window: String?
       attr_accessor engine_lifecycle_support: String?
+      attr_accessor tag_specifications: Array[Types::TagSpecification]?
+      attr_accessor enable_vpc_networking: bool?
+      attr_accessor enable_internet_access_gateway: bool?
+      attr_accessor associated_roles: Array[Types::DBClusterAssociatedRole]?
     end
 
     class RestoreDBClusterFromSnapshotResult
@@ -9390,7 +9647,13 @@ module Aws::RDS
         ?enable_performance_insights: bool,
         ?performance_insights_kms_key_id: String,
         ?performance_insights_retention_period: Integer,
+        ?backup_retention_period: Integer,
+        ?preferred_backup_window: String,
         ?engine_lifecycle_support: String,
+        ?tag_specifications: Array[Types::TagSpecification],
+        ?enable_vpc_networking: bool,
+        ?enable_internet_access_gateway: bool,
+        ?associated_roles: Array[Types::DBClusterAssociatedRole],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -9428,7 +9691,13 @@ module Aws::RDS
       attr_accessor enable_performance_insights: bool?
       attr_accessor performance_insights_kms_key_id: String?
       attr_accessor performance_insights_retention_period: Integer?
+      attr_accessor backup_retention_period: Integer?
+      attr_accessor preferred_backup_window: String?
       attr_accessor engine_lifecycle_support: String?
+      attr_accessor tag_specifications: Array[Types::TagSpecification]?
+      attr_accessor enable_vpc_networking: bool?
+      attr_accessor enable_internet_access_gateway: bool?
+      attr_accessor associated_roles: Array[Types::DBClusterAssociatedRole]?
     end
 
     class RestoreDBClusterToPointInTimeResult
@@ -9485,9 +9754,13 @@ module Aws::RDS
         ?custom_iam_instance_profile: String,
         ?allocated_storage: Integer,
         ?db_cluster_snapshot_identifier: String,
+        ?backup_retention_period: Integer,
+        ?preferred_backup_window: String,
         ?dedicated_log_volume: bool,
         ?ca_certificate_identifier: String,
         ?engine_lifecycle_support: String,
+        ?additional_storage_volumes: Array[Types::AdditionalStorageVolume],
+        ?tag_specifications: Array[Types::TagSpecification],
         ?manage_master_user_password: bool,
         ?master_user_secret_kms_key_id: String,
       ) -> void
@@ -9532,9 +9805,13 @@ module Aws::RDS
       attr_accessor custom_iam_instance_profile: String?
       attr_accessor allocated_storage: Integer?
       attr_accessor db_cluster_snapshot_identifier: String?
+      attr_accessor backup_retention_period: Integer?
+      attr_accessor preferred_backup_window: String?
       attr_accessor dedicated_log_volume: bool?
       attr_accessor ca_certificate_identifier: String?
       attr_accessor engine_lifecycle_support: String?
+      attr_accessor additional_storage_volumes: Array[Types::AdditionalStorageVolume]?
+      attr_accessor tag_specifications: Array[Types::TagSpecification]?
       attr_accessor manage_master_user_password: bool?
       attr_accessor master_user_secret_kms_key_id: String?
     end
@@ -9606,6 +9883,8 @@ module Aws::RDS
         ?dedicated_log_volume: bool,
         ?ca_certificate_identifier: String,
         ?engine_lifecycle_support: String,
+        ?additional_storage_volumes: Array[Types::AdditionalStorageVolume],
+        ?tag_specifications: Array[Types::TagSpecification],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -9661,6 +9940,8 @@ module Aws::RDS
       attr_accessor dedicated_log_volume: bool?
       attr_accessor ca_certificate_identifier: String?
       attr_accessor engine_lifecycle_support: String?
+      attr_accessor additional_storage_volumes: Array[Types::AdditionalStorageVolume]?
+      attr_accessor tag_specifications: Array[Types::TagSpecification]?
     end
 
     class RestoreDBInstanceFromS3Result
@@ -9721,9 +10002,13 @@ module Aws::RDS
         ?backup_target: String,
         ?custom_iam_instance_profile: String,
         ?allocated_storage: Integer,
+        ?backup_retention_period: Integer,
+        ?preferred_backup_window: String,
         ?dedicated_log_volume: bool,
         ?ca_certificate_identifier: String,
         ?engine_lifecycle_support: String,
+        ?additional_storage_volumes: Array[Types::AdditionalStorageVolume],
+        ?tag_specifications: Array[Types::TagSpecification],
         ?manage_master_user_password: bool,
         ?master_user_secret_kms_key_id: String,
       ) -> void
@@ -9772,9 +10057,13 @@ module Aws::RDS
       attr_accessor backup_target: String?
       attr_accessor custom_iam_instance_profile: String?
       attr_accessor allocated_storage: Integer?
+      attr_accessor backup_retention_period: Integer?
+      attr_accessor preferred_backup_window: String?
       attr_accessor dedicated_log_volume: bool?
       attr_accessor ca_certificate_identifier: String?
       attr_accessor engine_lifecycle_support: String?
+      attr_accessor additional_storage_volumes: Array[Types::AdditionalStorageVolume]?
+      attr_accessor tag_specifications: Array[Types::TagSpecification]?
       attr_accessor manage_master_user_password: bool?
       attr_accessor master_user_secret_kms_key_id: String?
     end
@@ -9930,6 +10219,40 @@ module Aws::RDS
 
       attr_accessor min_capacity: Float?
       attr_accessor max_capacity: Float?
+    end
+
+    class ServerlessV2PlatformVersionInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?serverless_v2_platform_version: String,
+        ?serverless_v2_platform_version_description: String,
+        ?engine: String,
+        ?serverless_v2_features_support: Types::ServerlessV2FeaturesSupport,
+        ?status: String,
+        ?is_default: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor serverless_v2_platform_version: String?
+      attr_accessor serverless_v2_platform_version_description: String?
+      attr_accessor engine: String?
+      attr_accessor serverless_v2_features_support: Types::ServerlessV2FeaturesSupport?
+      attr_accessor status: String?
+      attr_accessor is_default: bool?
+    end
+
+    class ServerlessV2PlatformVersionsMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?marker: String,
+        ?serverless_v2_platform_versions: Array[Types::ServerlessV2PlatformVersionInfo],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor marker: String?
+      attr_accessor serverless_v2_platform_versions: Array[Types::ServerlessV2PlatformVersionInfo]?
     end
 
     class ServerlessV2ScalingConfiguration
@@ -10131,6 +10454,7 @@ module Aws::RDS
         ?backup_retention_period: Integer,
         ?kms_key_id: String,
         ?pre_signed_url: String,
+        ?tags: Array[Types::Tag],
         ?source_region: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -10139,6 +10463,7 @@ module Aws::RDS
       attr_accessor backup_retention_period: Integer?
       attr_accessor kms_key_id: String?
       attr_accessor pre_signed_url: String?
+      attr_accessor tags: Array[Types::Tag]?
       attr_accessor source_region: String?
     end
 
@@ -10333,6 +10658,12 @@ module Aws::RDS
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor db_instance: Types::DBInstance?
+    end
+
+    module StorageEncryptionType
+      UNENCRYPTED: String
+      CMK: String
+      SSE: String
     end
 
     class StorageQuotaExceededFault
@@ -10553,6 +10884,19 @@ module Aws::RDS
       attr_accessor tag_list: Array[Types::Tag]?
     end
 
+    class TagSpecification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
     module TargetConnectionNetworkType
       IPV4: String
       IPV6: String
@@ -10580,6 +10924,19 @@ module Aws::RDS
       PENDING_PROXY_CAPACITY: String
       INVALID_REPLICATION_STATE: String
       PROMOTED: String
+    end
+
+    class TargetResourceConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_arn: String,
+        ?target_kms_key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_arn: String?
+      attr_accessor target_kms_key_id: String?
     end
 
     module TargetRole
@@ -10719,6 +11076,12 @@ module Aws::RDS
       attr_accessor message: String?
     end
 
+    module UpgradeRolloutOrder
+      FIRST: String
+      SECOND: String
+      LAST: String
+    end
+
     class UpgradeTarget
       include Smithy::Schema::Structure
 
@@ -10794,6 +11157,19 @@ module Aws::RDS
       attr_accessor client_password_auth_type: String?
     end
 
+    class ValidAdditionalStorageOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?supports_additional_storage_volumes: bool,
+        ?volumes: Array[Types::ValidVolumeOptions],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor supports_additional_storage_volumes: bool?
+      attr_accessor volumes: Array[Types::ValidVolumeOptions]?
+    end
+
     class ValidDBInstanceModificationsMessage
       include Smithy::Schema::Structure
 
@@ -10801,12 +11177,14 @@ module Aws::RDS
         ?storage: Array[Types::ValidStorageOptions],
         ?valid_processor_features: Array[Types::AvailableProcessorFeature],
         ?supports_dedicated_log_volume: bool,
+        ?additional_storage: Types::ValidAdditionalStorageOptions,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor storage: Array[Types::ValidStorageOptions]?
       attr_accessor valid_processor_features: Array[Types::AvailableProcessorFeature]?
       attr_accessor supports_dedicated_log_volume: bool?
+      attr_accessor additional_storage: Types::ValidAdditionalStorageOptions?
     end
 
     class ValidStorageOptions
@@ -10830,6 +11208,30 @@ module Aws::RDS
       attr_accessor provisioned_storage_throughput: Array[Types::Range]?
       attr_accessor storage_throughput_to_iops_ratio: Array[Types::DoubleRange]?
       attr_accessor supports_storage_autoscaling: bool?
+    end
+
+    class ValidVolumeOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?volume_name: String,
+        ?storage: Array[Types::ValidStorageOptions],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor volume_name: String?
+      attr_accessor storage: Array[Types::ValidStorageOptions]?
+    end
+
+    class VpcEncryptionControlViolationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
     end
 
     class VpcSecurityGroupMembership

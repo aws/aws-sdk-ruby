@@ -8,12 +8,27 @@ module Aws::Amp
     AlertManagerDefinitionStatus: StructureShape
     AlertManagerDefinitionStatusCode: StringShape
     AmpConfiguration: StructureShape
+    AnomalyDetectorAlias: StringShape
+    AnomalyDetectorArn: StringShape
+    AnomalyDetectorConfiguration: UnionShape
+    AnomalyDetectorDescription: StructureShape
+    AnomalyDetectorEvaluationInterval: IntegerShape
+    AnomalyDetectorId: StringShape
+    AnomalyDetectorMissingDataAction: UnionShape
+    AnomalyDetectorStatus: StructureShape
+    AnomalyDetectorStatusCode: EnumShape
+    AnomalyDetectorSummary: StructureShape
+    AnomalyDetectorSummaryList: ListShape
+    CloudWatchConfiguration: StructureShape
+    CloudWatchDatasetArn: StringShape
     CloudWatchLogDestination: StructureShape
     ClusterArn: StringShape
     ComponentConfig: StructureShape
     ConflictException: StructureShape
     CreateAlertManagerDefinitionInput: StructureShape
     CreateAlertManagerDefinitionOutput: StructureShape
+    CreateAnomalyDetectorRequest: StructureShape
+    CreateAnomalyDetectorResponse: StructureShape
     CreateLoggingConfigurationInput: StructureShape
     CreateLoggingConfigurationOutput: StructureShape
     CreateQueryLoggingConfigurationRequest: StructureShape
@@ -25,6 +40,7 @@ module Aws::Amp
     CreateWorkspaceInput: StructureShape
     CreateWorkspaceOutput: StructureShape
     DeleteAlertManagerDefinitionInput: StructureShape
+    DeleteAnomalyDetectorRequest: StructureShape
     DeleteLoggingConfigurationInput: StructureShape
     DeleteQueryLoggingConfigurationRequest: StructureShape
     DeleteResourcePolicyRequest: StructureShape
@@ -35,6 +51,8 @@ module Aws::Amp
     DeleteWorkspaceInput: StructureShape
     DescribeAlertManagerDefinitionInput: StructureShape
     DescribeAlertManagerDefinitionOutput: StructureShape
+    DescribeAnomalyDetectorRequest: StructureShape
+    DescribeAnomalyDetectorResponse: StructureShape
     DescribeLoggingConfigurationInput: StructureShape
     DescribeLoggingConfigurationOutput: StructureShape
     DescribeQueryLoggingConfigurationRequest: StructureShape
@@ -53,6 +71,8 @@ module Aws::Amp
     DescribeWorkspaceOutput: StructureShape
     Destination: UnionShape
     EksConfiguration: StructureShape
+    ExporterConfiguration: UnionShape
+    ExporterList: ListShape
     FilterKey: StringShape
     FilterValue: StringShape
     FilterValues: ListShape
@@ -60,6 +80,7 @@ module Aws::Amp
     GetDefaultScraperConfigurationResponse: StructureShape
     IamRoleArn: StringShape
     IdempotencyToken: StringShape
+    IgnoreNearExpected: UnionShape
     InternalServerException: StructureShape
     KmsKeyArn: StringShape
     LabelName: StringShape
@@ -68,6 +89,8 @@ module Aws::Amp
     LimitsPerLabelSet: StructureShape
     LimitsPerLabelSetEntry: StructureShape
     LimitsPerLabelSetList: ListShape
+    ListAnomalyDetectorsRequest: StructureShape
+    ListAnomalyDetectorsResponse: StructureShape
     ListRuleGroupsNamespacesInput: StructureShape
     ListRuleGroupsNamespacesOutput: StructureShape
     ListScrapersRequest: StructureShape
@@ -83,9 +106,16 @@ module Aws::Amp
     LoggingDestination: StructureShape
     LoggingDestinations: ListShape
     LoggingFilter: StructureShape
+    OpenSearchDomainArn: StringShape
+    OpenSearchExporterConfiguration: StructureShape
     PaginationToken: StringShape
+    PrometheusMetricLabelKey: StringShape
+    PrometheusMetricLabelMap: MapShape
+    PrometheusMetricLabelValue: StringShape
     PutAlertManagerDefinitionInput: StructureShape
     PutAlertManagerDefinitionOutput: StructureShape
+    PutAnomalyDetectorRequest: StructureShape
+    PutAnomalyDetectorResponse: StructureShape
     PutResourcePolicyRequest: StructureShape
     PutResourcePolicyResponse: StructureShape
     PutRuleGroupsNamespaceInput: StructureShape
@@ -93,6 +123,8 @@ module Aws::Amp
     QueryLoggingConfigurationMetadata: StructureShape
     QueryLoggingConfigurationStatus: StructureShape
     QueryLoggingConfigurationStatusCode: StringShape
+    RandomCutForestConfiguration: StructureShape
+    RandomCutForestQuery: StringShape
     ResourceNotFoundException: StructureShape
     RoleConfiguration: StructureShape
     RuleGroupsNamespaceArn: StringShape
@@ -152,6 +184,7 @@ module Aws::Amp
     ValidationExceptionField: StructureShape
     ValidationExceptionFieldList: ListShape
     ValidationExceptionReason: StringShape
+    VpcConfiguration: StructureShape
     WorkspaceAlias: StringShape
     WorkspaceArn: StringShape
     WorkspaceConfigurationDescription: StructureShape

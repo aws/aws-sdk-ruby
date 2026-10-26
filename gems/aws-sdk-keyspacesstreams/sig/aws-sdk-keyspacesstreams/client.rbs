@@ -48,6 +48,7 @@ module Aws::KeyspacesStreams
       include Smithy::Client::_Response[Types::GetRecordsOutput]
       def change_records: () -> Array[Types::Record]?
       def next_shard_iterator: () -> String?
+      def iterator_description: () -> Types::IteratorDescription?
     end
     def get_records: (
       ?shard_iterator: String,

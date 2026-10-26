@@ -144,18 +144,18 @@ module Aws::SecurityIR
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -430,7 +430,7 @@ module Aws::SecurityIR
     #     impacted_services: ["AwsService"],
     #     impacted_aws_regions: [
     #       {
-    #         region: "af-south-1" # One of: ["af-south-1", "ap-east-1", "ap-east-2", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "ap-south-1", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-southeast-4", "ap-southeast-5", "ap-southeast-7", "ca-central-1", "ca-west-1", "cn-north-1", "cn-northwest-1", "eu-central-1", "eu-central-2", "eu-north-1", "eu-south-1", "eu-south-2", "eu-west-1", "eu-west-2", "eu-west-3", "il-central-1", "me-central-1", "me-south-1", "mx-central-1", "sa-east-1", "us-east-1", "us-east-2", "us-west-1", "us-west-2"], # required
+    #         region: "af-south-1" # One of: ["af-south-1", "ap-east-1", "ap-east-2", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "ap-south-1", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-southeast-4", "ap-southeast-5", "ap-southeast-6", "ap-southeast-7", "ca-central-1", "ca-west-1", "cn-north-1", "cn-northwest-1", "eu-central-1", "eu-central-2", "eu-north-1", "eu-south-1", "eu-south-2", "eu-west-1", "eu-west-2", "eu-west-3", "il-central-1", "me-central-1", "me-south-1", "mx-central-1", "sa-east-1", "us-east-1", "us-east-2", "us-west-1", "us-west-2"], # required
     #       }
     #     ],
     #     tags: {
@@ -543,6 +543,7 @@ module Aws::SecurityIR
     #         name: "IncidentResponderName", # required
     #         job_title: "JobTitle", # required
     #         email: "EmailAddress", # required
+    #         communication_preferences: ["Case Created" # One of: ["Case Created", "Case Updated", "Case Acknowledged", "Case Closed", "Case Updated To Service Managed", "Case Status Updated", "Case Pending Customer Action Reminder", "Case Attachment Url Uploaded", "Case Comment Added", "Case Comment Updated", "Membership Created", "Membership Updated", "Membership Cancelled", "Register Delegated Administrator", "Deregister Delegated Administrator", "Disable AWS Service Access"]]
     #       }
     #     ],
     #     opt_in_features: [
@@ -644,7 +645,7 @@ module Aws::SecurityIR
     #     actual_incident_start_date: Time.now,
     #     impacted_aws_regions: [
     #       {
-    #         region: "af-south-1" # One of: ["af-south-1", "ap-east-1", "ap-east-2", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "ap-south-1", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-southeast-4", "ap-southeast-5", "ap-southeast-7", "ca-central-1", "ca-west-1", "cn-north-1", "cn-northwest-1", "eu-central-1", "eu-central-2", "eu-north-1", "eu-south-1", "eu-south-2", "eu-west-1", "eu-west-2", "eu-west-3", "il-central-1", "me-central-1", "me-south-1", "mx-central-1", "sa-east-1", "us-east-1", "us-east-2", "us-west-1", "us-west-2"], # required
+    #         region: "af-south-1" # One of: ["af-south-1", "ap-east-1", "ap-east-2", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "ap-south-1", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-southeast-4", "ap-southeast-5", "ap-southeast-6", "ap-southeast-7", "ca-central-1", "ca-west-1", "cn-north-1", "cn-northwest-1", "eu-central-1", "eu-central-2", "eu-north-1", "eu-south-1", "eu-south-2", "eu-west-1", "eu-west-2", "eu-west-3", "il-central-1", "me-central-1", "me-south-1", "mx-central-1", "sa-east-1", "us-east-1", "us-east-2", "us-west-1", "us-west-2"], # required
     #       }
     #     ],
     #     threat_actor_ip_addresses: [
@@ -676,7 +677,13 @@ module Aws::SecurityIR
     #         created_date: Time.now, # required
     #       }
     #     ],
-    #     closed_date: Time.now
+    #     closed_date: Time.now,
+    #     case_metadata: [
+    #       {
+    #         key: "String", # required
+    #         value: "String", # required
+    #       }
+    #     ]
     #   }
     # @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_GetCase.html API Reference
     # @return [Types::GetCaseResponse]
@@ -766,6 +773,66 @@ module Aws::SecurityIR
       request.send_request(options)
     end
 
+    # Returns finding-lifecycle metrics for a membership over a date range.
+    # @param [Hash, Types::GetFindingMetricsRequest] params
+    # @option params [String] :membership_id
+    #   The membership ID to retrieve metrics for.
+    # @option params [Time] :start_date
+    #   The start of the day-aligned UTC window, inclusive.
+    # @option params [Time] :end_date
+    #   The end of the day-aligned UTC window, inclusive.
+    # @example Retrieve finding-lifecycle metrics for a membership
+    #   # Example operation for get_finding_metrics
+    #   params = {
+    #     membership_id: "m-a1b2c3d4e5f",
+    #     start_date: Time.parse("2026-08-01T00:00:00Z"),
+    #     end_date: Time.parse("2026-08-18T00:00:00Z")
+    #   }
+    #   options = {}
+    #   response = client.get_finding_metrics(params, options)
+    #   response.to_h #=>
+    #   {
+    #     findings_ingested_security_hub: 120,
+    #     findings_ingested_guard_duty: 45,
+    #     findings_triaged: 165,
+    #     findings_triaged_false_positive: 30,
+    #     findings_investigated: 60,
+    #     findings_investigated_false_positive: 12,
+    #     findings_escalated: 8,
+    #     findings_escalated_false_positive: 2,
+    #     findings_true_positive: 6,
+    #     findings_investigated_in_progress: 40,
+    #     findings_escalated_in_progress: 0
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     membership_id: "MembershipId", # required
+    #     start_date: Time.now, # required
+    #     end_date: Time.now, # required
+    #   }
+    #   options = {}
+    #   response = client.get_finding_metrics(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     findings_ingested_security_hub: 1, # required
+    #     findings_ingested_guard_duty: 1, # required
+    #     findings_triaged: 1, # required
+    #     findings_triaged_false_positive: 1, # required
+    #     findings_investigated: 1, # required
+    #     findings_investigated_false_positive: 1, # required
+    #     findings_escalated: 1, # required
+    #     findings_escalated_false_positive: 1, # required
+    #     findings_true_positive: 1, # required
+    #     findings_investigated_in_progress: 1, # required
+    #     findings_escalated_in_progress: 1, # required
+    #   }
+    # @return [Types::GetFindingMetricsResponse]
+    def get_finding_metrics(params = {}, options = {})
+      request = build_request(:get_finding_metrics, params)
+      request.send_request(options)
+    end
+
     # <p>Returns the attributes of a membership.</p>
     # @param [Hash, Types::GetMembershipRequest] params
     # @option params [String] :membership_id
@@ -819,7 +886,7 @@ module Aws::SecurityIR
     #   {
     #     membership_id: "MembershipId", # required
     #     account_id: "AWSAccountId",
-    #     region: "af-south-1" # One of: ["af-south-1", "ap-east-1", "ap-east-2", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "ap-south-1", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-southeast-4", "ap-southeast-5", "ap-southeast-7", "ca-central-1", "ca-west-1", "cn-north-1", "cn-northwest-1", "eu-central-1", "eu-central-2", "eu-north-1", "eu-south-1", "eu-south-2", "eu-west-1", "eu-west-2", "eu-west-3", "il-central-1", "me-central-1", "me-south-1", "mx-central-1", "sa-east-1", "us-east-1", "us-east-2", "us-west-1", "us-west-2"],
+    #     region: "af-south-1" # One of: ["af-south-1", "ap-east-1", "ap-east-2", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "ap-south-1", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-southeast-4", "ap-southeast-5", "ap-southeast-6", "ap-southeast-7", "ca-central-1", "ca-west-1", "cn-north-1", "cn-northwest-1", "eu-central-1", "eu-central-2", "eu-north-1", "eu-south-1", "eu-south-2", "eu-west-1", "eu-west-2", "eu-west-3", "il-central-1", "me-central-1", "me-south-1", "mx-central-1", "sa-east-1", "us-east-1", "us-east-2", "us-west-1", "us-west-2"],
     #     membership_name: "MembershipName",
     #     membership_arn: "MembershipArn",
     #     membership_status: "Active" # One of: ["Active", "Cancelled", "Terminated"],
@@ -832,6 +899,7 @@ module Aws::SecurityIR
     #         name: "IncidentResponderName", # required
     #         job_title: "JobTitle", # required
     #         email: "EmailAddress", # required
+    #         communication_preferences: ["Case Created" # One of: ["Case Created", "Case Updated", "Case Acknowledged", "Case Closed", "Case Updated To Service Managed", "Case Status Updated", "Case Pending Customer Action Reminder", "Case Attachment Url Uploaded", "Case Comment Added", "Case Comment Updated", "Membership Created", "Membership Updated", "Membership Cancelled", "Register Delegated Administrator", "Deregister Delegated Administrator", "Disable AWS Service Access"]]
     #       }
     #     ],
     #     opt_in_features: [
@@ -1028,6 +1096,76 @@ module Aws::SecurityIR
       request.send_request(options)
     end
 
+    # <p>Investigation performed by an agent for a security incident...</p>
+    # @param [Hash, Types::ListInvestigationsRequest] params
+    # @option params [String] :next_token
+    #   <p>Investigation performed by an agent for a security incident request</p>
+    # @option params [Integer] :max_results
+    #   <p>Investigation performed by an agent for a security incident request, returning max results</p>
+    # @option params [String] :case_id
+    #   <p>Investigation performed by an agent for a security incident per caseID</p>
+    # @example Invoke ListInvestigations with feedback examples
+    #   # Example operation for list_investigations
+    #   params = {
+    #     case_id: "8403556009",
+    #     max_results: 10
+    #   }
+    #   options = {}
+    #   response = client.list_investigations(params, options)
+    #   response.to_h #=>
+    #   {
+    #     investigation_actions: [
+    #       {
+    #         investigation_id: "inv-hgyuiuytrt",
+    #         action_type: Evidence,
+    #         title: "Collected CloudTrail logs for suspicious activity",
+    #         content: "## Evidence Collection Results\n\nAnalyzed CloudTrail logs from 2024-01-15 to 2024-01-16 and found:\n\n- 15 failed login attempts from IP 192.168.1.100\n- Unusual API calls to S3 buckets\n- Privilege escalation attempts detected\n\n### Recommendations\n\n1. Block the suspicious IP address\n2. Review S3 bucket permissions\n3. Audit user privileges",
+    #         status: Completed,
+    #         last_updated: Time.parse("2024-01-16T10:30:00Z"),
+    #         feedback: {
+    #           usefulness: USEFUL,
+    #           comment: "The CloudTrail analysis was very helpful in identifying the root cause of the security incident. The recommendations were actionable and led to immediate remediation.",
+    #           submitted_at: Time.parse("2024-01-16T11:15:00Z")
+    #         }
+    #       }
+    #     ],
+    #     next_token: "eyJsYXN0RXZhbHVhdGVkS2V5Ijp7InBhcnRpdGlvbktleSI6eyJTIjoiQ0FTRV8xMjM0NTY3ODkwIn0sInNvcnRLZXkiOnsiUyI6IjIwMjQtMDEtMTZUMTA6MzA6MDBaIn19fQ=="
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     next_token: "String",
+    #     max_results: 1,
+    #     case_id: "CaseId", # required
+    #   }
+    #   options = {}
+    #   response = client.list_investigations(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     next_token: "String",
+    #     investigation_actions: [ # required
+    #       {
+    #         investigation_id: "InvestigationId", # required
+    #         action_type: "Evidence" # One of: ["Evidence", "Investigation", "Summarization"], # required
+    #         title: "InvestigationTitle", # required
+    #         content: "InvestigationContent", # required
+    #         status: "Pending" # One of: ["Pending", "InProgress", "Waiting", "Completed", "Failed", "Cancelled"], # required
+    #         last_updated: Time.now, # required
+    #         feedback: {
+    #           usefulness: "USEFUL" # One of: ["USEFUL", "NOT_USEFUL"],
+    #           comment: "FeedbackComment",
+    #           submitted_at: Time.now
+    #         }
+    #       }
+    #     ]
+    #   }
+    # @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_ListInvestigations.html API Reference
+    # @return [Types::ListInvestigationsResponse]
+    def list_investigations(params = {}, options = {})
+      request = build_request(:list_investigations, params)
+      request.send_request(options)
+    end
+
     # <p>Returns the memberships that the calling principal can access.</p>
     # @param [Hash, Types::ListMembershipsRequest] params
     # @option params [String] :next_token
@@ -1068,7 +1206,7 @@ module Aws::SecurityIR
     #       {
     #         membership_id: "MembershipId", # required
     #         account_id: "AWSAccountId",
-    #         region: "af-south-1" # One of: ["af-south-1", "ap-east-1", "ap-east-2", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "ap-south-1", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-southeast-4", "ap-southeast-5", "ap-southeast-7", "ca-central-1", "ca-west-1", "cn-north-1", "cn-northwest-1", "eu-central-1", "eu-central-2", "eu-north-1", "eu-south-1", "eu-south-2", "eu-west-1", "eu-west-2", "eu-west-3", "il-central-1", "me-central-1", "me-south-1", "mx-central-1", "sa-east-1", "us-east-1", "us-east-2", "us-west-1", "us-west-2"],
+    #         region: "af-south-1" # One of: ["af-south-1", "ap-east-1", "ap-east-2", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "ap-south-1", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-southeast-4", "ap-southeast-5", "ap-southeast-6", "ap-southeast-7", "ca-central-1", "ca-west-1", "cn-north-1", "cn-northwest-1", "eu-central-1", "eu-central-2", "eu-north-1", "eu-south-1", "eu-south-2", "eu-west-1", "eu-west-2", "eu-west-3", "il-central-1", "me-central-1", "me-south-1", "mx-central-1", "sa-east-1", "us-east-1", "us-east-2", "us-west-1", "us-west-2"],
     #         membership_arn: "MembershipArn",
     #         membership_status: "Active" # One of: ["Active", "Cancelled", "Terminated"]
     #       }
@@ -1116,6 +1254,59 @@ module Aws::SecurityIR
     # @return [Types::ListTagsForResourceOutput]
     def list_tags_for_resource(params = {}, options = {})
       request = build_request(:list_tags_for_resource, params)
+      request.send_request(options)
+    end
+
+    # <p>Send feedback based on response investigation action</p>
+    # @param [Hash, Types::SendFeedbackRequest] params
+    # @option params [String] :case_id
+    #   <p>Send feedback based on request caseID</p>
+    # @option params [String] :result_id
+    #   <p>Send feedback based on request result ID</p>
+    # @option params [String] :usefulness
+    #   <p>Required enum value indicating user assessment of result q.....</p>
+    # @option params [String] :comment
+    #   <p>Send feedback based on request comments</p>
+    # @example Send positive feedback for investigation result
+    #   # Example operation for send_feedback
+    #   params = {
+    #     case_id: "8403556009",
+    #     result_id: "inv-polkjhyuty",
+    #     usefulness: USEFUL,
+    #     comment: "The CloudTrail analysis was very helpful in identifying the root cause of the security incident."
+    #   }
+    #   options = {}
+    #   response = client.send_feedback(params, options)
+    #   response.to_h #=>
+    #   {}
+    # @example Send negative feedback with detailed comment
+    #   # Example operation for send_feedback
+    #   params = {
+    #     case_id: "8403556009",
+    #     result_id: "inv-irutjfhgjk",
+    #     usefulness: NOT_USEFUL,
+    #     comment: "The investigation results were too generic and didn't provide actionable insights for our specific incident."
+    #   }
+    #   options = {}
+    #   response = client.send_feedback(params, options)
+    #   response.to_h #=>
+    #   {}
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     case_id: "CaseId", # required
+    #     result_id: "ResultId", # required
+    #     usefulness: "USEFUL" # One of: ["USEFUL", "NOT_USEFUL"], # required
+    #     comment: "FeedbackComment"
+    #   }
+    #   options = {}
+    #   response = client.send_feedback(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_SendFeedback.html API Reference
+    # @return [Types::SendFeedbackResponse]
+    def send_feedback(params = {}, options = {})
+      request = build_request(:send_feedback, params)
       request.send_request(options)
     end
 
@@ -1226,6 +1417,8 @@ module Aws::SecurityIR
     #   <p>Optional element for UpdateCase to provide content to add accounts impacted.</p> <note> <p> AWS account ID's may appear less than 12 characters and need to be zero-prepended. An example would be <code>123123123</code> which is nine digits, and with zero-prepend would be <code>000123123123</code>. Not zero-prepending to 12 digits could result in errors. </p> </note>
     # @option params [Array<String>] :impacted_accounts_to_delete
     #   <p>Optional element for UpdateCase to provide content to add accounts impacted.</p> <note> <p> AWS account ID's may appear less than 12 characters and need to be zero-prepended. An example would be <code>123123123</code> which is nine digits, and with zero-prepend would be <code>000123123123</code>. Not zero-prepending to 12 digits could result in errors. </p> </note>
+    # @option params [Array<Types::CaseMetadataEntry>] :case_metadata
+    #   <p>Update the case request with case metadata</p>
     # @example Invoke UpdateCase
     #   # Example operation for update_case
     #   params = {
@@ -1326,16 +1519,22 @@ module Aws::SecurityIR
     #     impacted_services_to_delete: ["AwsService"],
     #     impacted_aws_regions_to_add: [
     #       {
-    #         region: "af-south-1" # One of: ["af-south-1", "ap-east-1", "ap-east-2", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "ap-south-1", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-southeast-4", "ap-southeast-5", "ap-southeast-7", "ca-central-1", "ca-west-1", "cn-north-1", "cn-northwest-1", "eu-central-1", "eu-central-2", "eu-north-1", "eu-south-1", "eu-south-2", "eu-west-1", "eu-west-2", "eu-west-3", "il-central-1", "me-central-1", "me-south-1", "mx-central-1", "sa-east-1", "us-east-1", "us-east-2", "us-west-1", "us-west-2"], # required
+    #         region: "af-south-1" # One of: ["af-south-1", "ap-east-1", "ap-east-2", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "ap-south-1", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-southeast-4", "ap-southeast-5", "ap-southeast-6", "ap-southeast-7", "ca-central-1", "ca-west-1", "cn-north-1", "cn-northwest-1", "eu-central-1", "eu-central-2", "eu-north-1", "eu-south-1", "eu-south-2", "eu-west-1", "eu-west-2", "eu-west-3", "il-central-1", "me-central-1", "me-south-1", "mx-central-1", "sa-east-1", "us-east-1", "us-east-2", "us-west-1", "us-west-2"], # required
     #       }
     #     ],
     #     impacted_aws_regions_to_delete: [
     #       {
-    #         region: "af-south-1" # One of: ["af-south-1", "ap-east-1", "ap-east-2", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "ap-south-1", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-southeast-4", "ap-southeast-5", "ap-southeast-7", "ca-central-1", "ca-west-1", "cn-north-1", "cn-northwest-1", "eu-central-1", "eu-central-2", "eu-north-1", "eu-south-1", "eu-south-2", "eu-west-1", "eu-west-2", "eu-west-3", "il-central-1", "me-central-1", "me-south-1", "mx-central-1", "sa-east-1", "us-east-1", "us-east-2", "us-west-1", "us-west-2"], # required
+    #         region: "af-south-1" # One of: ["af-south-1", "ap-east-1", "ap-east-2", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "ap-south-1", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-southeast-4", "ap-southeast-5", "ap-southeast-6", "ap-southeast-7", "ca-central-1", "ca-west-1", "cn-north-1", "cn-northwest-1", "eu-central-1", "eu-central-2", "eu-north-1", "eu-south-1", "eu-south-2", "eu-west-1", "eu-west-2", "eu-west-3", "il-central-1", "me-central-1", "me-south-1", "mx-central-1", "sa-east-1", "us-east-1", "us-east-2", "us-west-1", "us-west-2"], # required
     #       }
     #     ],
     #     impacted_accounts_to_add: ["AWSAccountId"],
-    #     impacted_accounts_to_delete: ["AWSAccountId"]
+    #     impacted_accounts_to_delete: ["AWSAccountId"],
+    #     case_metadata: [
+    #       {
+    #         key: "String", # required
+    #         value: "String", # required
+    #       }
+    #     ]
     #   }
     #   options = {}
     #   response = client.update_case(params, options)
@@ -1480,6 +1679,7 @@ module Aws::SecurityIR
     #         name: "IncidentResponderName", # required
     #         job_title: "JobTitle", # required
     #         email: "EmailAddress", # required
+    #         communication_preferences: ["Case Created" # One of: ["Case Created", "Case Updated", "Case Acknowledged", "Case Closed", "Case Updated To Service Managed", "Case Status Updated", "Case Pending Customer Action Reminder", "Case Attachment Url Uploaded", "Case Comment Added", "Case Comment Updated", "Membership Created", "Membership Updated", "Membership Cancelled", "Register Delegated Administrator", "Deregister Delegated Administrator", "Disable AWS Service Access"]]
     #       }
     #     ],
     #     opt_in_features: [

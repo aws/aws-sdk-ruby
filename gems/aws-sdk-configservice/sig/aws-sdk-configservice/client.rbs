@@ -121,6 +121,13 @@ module Aws::ConfigService
       ?conformance_pack_name: String
     ) -> _DeleteConformancePackResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteConformancePackResponse
 
+    interface _DeleteConnectorResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_connector: (
+      ?arn: String
+    ) -> _DeleteConnectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteConnectorResponse
+
     interface _DeleteDeliveryChannelResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
     end
@@ -200,7 +207,8 @@ module Aws::ConfigService
       def name: () -> String?
     end
     def delete_service_linked_configuration_recorder: (
-      ?service_principal: String
+      ?service_principal: String,
+      ?arn: String
     ) -> _DeleteServiceLinkedConfigurationRecorderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteServiceLinkedConfigurationRecorderResponse
 
     interface _DeleteStoredQueryResponse
@@ -304,10 +312,11 @@ module Aws::ConfigService
     end
     def describe_config_rules: (
       ?config_rule_names: Array[String],
-      ?next_token: String,
       ?filters: {
-        evaluation_mode: String
-      }
+        evaluation_mode: String,
+        rule_evaluation_visibility: String
+      },
+      ?next_token: String
     ) -> _DescribeConfigRulesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeConfigRulesResponse
 
     interface _DescribeConfigurationAggregatorSourcesStatusResponse
@@ -673,6 +682,14 @@ module Aws::ConfigService
       ?next_token: String
     ) -> _GetConformancePackComplianceSummaryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetConformancePackComplianceSummaryResponse
 
+    interface _GetConnectorResponse
+      include Smithy::Client::_Response[Types::GetConnectorResponse]
+      def connector: () -> Types::Connector?
+    end
+    def get_connector: (
+      ?arn: String
+    ) -> _GetConnectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetConnectorResponse
+
     interface _GetCustomRulePolicyResponse
       include Smithy::Client::_Response[Types::GetCustomRulePolicyResponse]
       def policy_text: () -> String?
@@ -817,6 +834,22 @@ module Aws::ConfigService
       ?next_token: String
     ) -> _ListConformancePackComplianceScoresResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListConformancePackComplianceScoresResponse
 
+    interface _ListConnectorsResponse
+      include Smithy::Client::_Response[Types::ListConnectorsResponse]
+      def connector_summaries: () -> Array[Types::ConnectorSummary]?
+      def next_token: () -> String?
+    end
+    def list_connectors: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?filters: Array[
+        {
+          filter_name: String,
+          filter_values: Array[String]
+        }
+      ]
+    ) -> _ListConnectorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListConnectorsResponse
+
     interface _ListDiscoveredResourcesResponse
       include Smithy::Client::_Response[Types::ListDiscoveredResourcesResponse]
       def resource_identifiers: () -> Array[Types::ResourceIdentifier]?
@@ -898,7 +931,8 @@ module Aws::ConfigService
           compliance_resource_types: Array[String],
           tag_key: String,
           tag_value: untyped,
-          compliance_resource_id: String
+          compliance_resource_id: String,
+          service_principals: Array[String]
         },
         source: {
           owner: String,
@@ -924,7 +958,8 @@ module Aws::ConfigService
           {
             mode: String
           }
-        ]
+        ],
+        rule_evaluation_visibility: String
       },
       ?tags: Array[
         {
@@ -1000,7 +1035,14 @@ module Aws::ConfigService
           ]
         },
         recording_scope: String,
-        service_principal: String
+        service_principal: String,
+        connector_arn: untyped,
+        scope_configuration: {
+          scope_type: String,
+          scope_values: Array[String],
+          all_regions: bool,
+          included_regions: Array[String]
+        }
       },
       ?tags: Array[
         {
@@ -1029,8 +1071,33 @@ module Aws::ConfigService
       ?template_ssm_document_details: {
         document_name: String,
         document_version: String
-      }
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
     ) -> _PutConformancePackResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutConformancePackResponse
+
+    interface _PutConnectorResponse
+      include Smithy::Client::_Response[Types::PutConnectorResponse]
+      def arn: () -> String?
+    end
+    def put_connector: (
+      ?connector_configuration: {
+        azure: {
+          tenant_identifier: String,
+          client_identifier: String
+        }
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _PutConnectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutConnectorResponse
 
     interface _PutDeliveryChannelResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
@@ -1120,7 +1187,13 @@ module Aws::ConfigService
         policy_runtime: String,
         policy_text: String,
         debug_log_delivery_accounts: Array[String]
-      }
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
     ) -> _PutOrganizationConfigRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutOrganizationConfigRuleResponse
 
     interface _PutOrganizationConformancePackResponse
@@ -1139,7 +1212,13 @@ module Aws::ConfigService
           parameter_value: String
         }
       ],
-      ?excluded_accounts: Array[String]
+      ?excluded_accounts: Array[String],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
     ) -> _PutOrganizationConformancePackResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutOrganizationConformancePackResponse
 
     interface _PutRemediationConfigurationsResponse
@@ -1249,6 +1328,28 @@ module Aws::ConfigService
         }
       ]
     ) -> _PutStoredQueryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutStoredQueryResponse
+
+    interface _PutThirdPartyServiceLinkedConfigurationRecorderResponse
+      include Smithy::Client::_Response[Types::PutThirdPartyServiceLinkedConfigurationRecorderResponse]
+      def arn: () -> String?
+      def name: () -> String?
+    end
+    def put_third_party_service_linked_configuration_recorder: (
+      ?service_principal: String,
+      ?connector_arn: String,
+      ?scope_configuration: {
+        scope_type: String,
+        scope_values: Array[String],
+        all_regions: bool,
+        included_regions: Array[String]
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _PutThirdPartyServiceLinkedConfigurationRecorderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutThirdPartyServiceLinkedConfigurationRecorderResponse
 
     interface _SelectAggregateResourceConfigResponse
       include Smithy::Client::_Response[Types::SelectAggregateResourceConfigResponse]

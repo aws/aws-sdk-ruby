@@ -144,18 +144,18 @@ module Aws::KeyspacesStreams
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -212,9 +212,9 @@ module Aws::KeyspacesStreams
     # <p>Retrieves data records from a specified shard in an Amazon Keyspaces data stream. This operation returns a collection of data records from the shard, including the primary key columns and information about modifications made to the captured table data. Each record represents a single data modification in the Amazon Keyspaces table and includes metadata about when the change occurred.</p>
     # @param [Hash, Types::GetRecordsInput] params
     # @option params [String] :shard_iterator
-    #   <p> The unique identifier of the shard iterator. A shard iterator specifies the position in the shard from which you want to start reading data records sequentially. You obtain this value by calling the <code>GetShardIterator</code> operation. Each shard iterator is valid for 15 minutes after creation. </p>
+    #   <p> The unique identifier of the shard iterator. A shard iterator specifies the position in the shard from which you want to start reading data records sequentially. You obtain this value by calling the <code>GetShardIterator </code> operation. Each shard iterator is valid for 15 minutes after creation. </p>
     # @option params [Integer] :max_results
-    #   <p> The maximum number of records to return in a single <code>GetRecords</code> request. Default value is 1000. You can specify a limit between 1 and 1000, but the actual number returned might be less than the specified maximum if the size of the data for the returned records exceeds the internal size limit. </p>
+    #   <p> The maximum number of records to return in a single <code>GetRecords</code> request. The default value is 100. You can specify a limit between 1 and 1000, but the actual number returned might be less than the specified maximum if the size of the data for the returned records exceeds the internal size limit. </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     shard_iterator: "ShardIterator", # required
@@ -241,6 +241,7 @@ module Aws::KeyspacesStreams
     #             date_t: "String",
     #             decimal_t: "String",
     #             double_t: "String",
+    #             duration_t: "String",
     #             float_t: "String",
     #             inet_t: "String",
     #             int_t: "String",
@@ -324,6 +325,7 @@ module Aws::KeyspacesStreams
     #             date_t: "String",
     #             decimal_t: "String",
     #             double_t: "String",
+    #             duration_t: "String",
     #             float_t: "String",
     #             inet_t: "String",
     #             int_t: "String",
@@ -409,6 +411,7 @@ module Aws::KeyspacesStreams
     #                 date_t: "String",
     #                 decimal_t: "String",
     #                 double_t: "String",
+    #                 duration_t: "String",
     #                 float_t: "String",
     #                 inet_t: "String",
     #                 int_t: "String",
@@ -474,6 +477,7 @@ module Aws::KeyspacesStreams
     #                 date_t: "String",
     #                 decimal_t: "String",
     #                 double_t: "String",
+    #                 duration_t: "String",
     #                 float_t: "String",
     #                 inet_t: "String",
     #                 int_t: "String",
@@ -545,6 +549,7 @@ module Aws::KeyspacesStreams
     #                 date_t: "String",
     #                 decimal_t: "String",
     #                 double_t: "String",
+    #                 duration_t: "String",
     #                 float_t: "String",
     #                 inet_t: "String",
     #                 int_t: "String",
@@ -610,6 +615,7 @@ module Aws::KeyspacesStreams
     #                 date_t: "String",
     #                 decimal_t: "String",
     #                 double_t: "String",
+    #                 duration_t: "String",
     #                 float_t: "String",
     #                 inet_t: "String",
     #                 int_t: "String",
@@ -671,7 +677,10 @@ module Aws::KeyspacesStreams
     #         sequence_number: "SequenceNumber"
     #       }
     #     ],
-    #     next_shard_iterator: "ShardIterator"
+    #     next_shard_iterator: "ShardIterator",
+    #     iterator_description: {
+    #       iterator_position: "AT_TIP" # One of: ["AT_TIP", "BEHIND_TIP"]
+    #     }
     #   }
     # @return [Types::GetRecordsOutput]
     def get_records(params = {}, options = {})
@@ -686,7 +695,7 @@ module Aws::KeyspacesStreams
     # @option params [String] :shard_id
     #   <p> The identifier of the shard within the stream. The shard ID uniquely identifies a subset of the stream's data records that you want to access. </p>
     # @option params [String] :shard_iterator_type
-    #   <p> Determines how the shard iterator is positioned. Must be one of the following:</p> <ul> <li> <p> <code>TRIM_HORIZON</code> - Start reading at the last untrimmed record in the shard, which is the oldest data record in the shard.</p> </li> <li> <p> <code>AT_SEQUENCE_NUMBER</code> - Start reading exactly from the specified sequence number.</p> </li> <li> <p> <code>AFTER_SEQUENCE_NUMBER</code> - Start reading right after the specified sequence number.</p> </li> <li> <p> <code>LATEST</code> - Start reading just after the most recent record in the shard, so that you always read the most recent data.</p> </li> </ul>
+    #   <p> Determines how the shard iterator is positioned. Must be one of the following: </p> <ul> <li> <p> <code>TRIM_HORIZON</code> - Start reading at the last untrimmed record in the shard, which is the oldest data record in the shard.</p> </li> <li> <p> <code>AT_SEQUENCE_NUMBER</code> - Start reading exactly from the specified sequence number.</p> </li> <li> <p> <code>AFTER_SEQUENCE_NUMBER</code> - Start reading right after the specified sequence number. </p> </li> <li> <p> <code>LATEST</code> - Start reading just after the most recent record in the shard, so that you always read the most recent data. </p> </li> </ul>
     # @option params [String] :sequence_number
     #   <p> The sequence number of the data record in the shard from which to start reading. Required if <code>ShardIteratorType</code> is <code>AT_SEQUENCE_NUMBER</code> or <code>AFTER_SEQUENCE_NUMBER</code>. This parameter is ignored for other iterator types. </p>
     # @example Request syntax with placeholder values
@@ -714,11 +723,11 @@ module Aws::KeyspacesStreams
     # @option params [String] :stream_arn
     #   <p> The Amazon Resource Name (ARN) of the stream for which detailed information is requested. This uniquely identifies the specific stream you want to get information about. </p>
     # @option params [Integer] :max_results
-    #   <p> The maximum number of shard objects to return in a single <code>GetStream</code> request. Default value is 100. The minimum value is 1 and the maximum value is 100. </p>
+    #   <p> The maximum number of shard objects to return in a single <code>GetStream</code> request. The default value is 100. The minimum value is 1 and the maximum value is 100. </p>
     # @option params [Types::ShardFilter] :shard_filter
-    #   <p> Optional filter criteria to apply when retrieving shards. You can filter shards based on their state or other attributes to narrow down the results returned by the <code>GetStream</code> operation. </p>
+    #   <p> Optional filter criteria to apply when retrieving shards. You can filter shards based on their parent <code>shardID</code> to get a list of children shards to narrow down the results returned by the <code>GetStream</code> operation. </p>
     # @option params [String] :next_token
-    #   <p> An optional pagination token provided by a previous <code>GetStream</code> operation. If this parameter is specified, the response includes only records beyond the token, up to the value specified by <code>maxResults</code>. </p>
+    #   <p> An optional pagination token provided by a previous <code>GetStream</code> operation. If this parameter is specified, the response includes only records beyond the token, up to the value specified by <code>MaxResults</code>. </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     stream_arn: "StreamArn", # required
@@ -766,7 +775,7 @@ module Aws::KeyspacesStreams
     # @option params [String] :table_name
     #   <p> The name of the table for which to list streams. Must be used together with <code>keyspaceName</code>. If specified, only streams associated with this specific table are returned. </p>
     # @option params [Integer] :max_results
-    #   <p> The maximum number of streams to return in a single <code>ListStreams</code> request. Default value is 100. The minimum value is 1 and the maximum value is 100. </p>
+    #   <p> The maximum number of streams to return in a single <code>ListStreams</code> request. The default value is 100. The minimum value is 1 and the maximum value is 100. </p>
     # @option params [String] :next_token
     #   <p> An optional pagination token provided by a previous <code>ListStreams</code> operation. If this parameter is specified, the response includes only records beyond the token, up to the value specified by <code>maxResults</code>. </p>
     # @example Request syntax with placeholder values

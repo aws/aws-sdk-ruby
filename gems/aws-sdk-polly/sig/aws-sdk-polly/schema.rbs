@@ -3,8 +3,14 @@ module Aws::Polly
     include Smithy::Schema::Shapes
 
     Alphabet: StringShape
+    AudioChunk: BlobShape
+    AudioEvent: StructureShape
     AudioStream: BlobShape
+    AvailabilityErrorMessage: StringShape
+    CloseStreamEvent: StructureShape
     ContentType: StringShape
+    CoralAvailabilityThrottledResource: StringShape
+    CoralAvailabilityThrottlingReason: StringShape
     DateTime: TimestampShape
     DeleteLexiconInput: StructureShape
     DeleteLexiconOutput: StructureShape
@@ -14,6 +20,8 @@ module Aws::Polly
     EngineList: ListShape
     EngineNotSupportedException: StructureShape
     ErrorMessage: StringShape
+    FlushStreamConfiguration: StructureShape
+    Force: BooleanShape
     Gender: EnumShape
     GetLexiconInput: StructureShape
     GetLexiconOutput: StructureShape
@@ -59,16 +67,24 @@ module Aws::Polly
     OutputUri: StringShape
     PutLexiconInput: StructureShape
     PutLexiconOutput: StructureShape
+    QuotaCode: EnumShape
     RequestCharacters: IntegerShape
     SampleRate: StringShape
+    ServiceCode: EnumShape
     ServiceFailureException: StructureShape
+    ServiceQuotaExceededException: StructureShape
     Size: IntegerShape
     SnsTopicArn: StringShape
     SpeechMarkType: EnumShape
     SpeechMarkTypeList: ListShape
     SsmlMarksNotSupportedForTextTypeException: StructureShape
+    StartSpeechSynthesisStreamActionStream: UnionShape
+    StartSpeechSynthesisStreamEventStream: UnionShape
+    StartSpeechSynthesisStreamInput: StructureShape
+    StartSpeechSynthesisStreamOutput: StructureShape
     StartSpeechSynthesisTaskInput: StructureShape
     StartSpeechSynthesisTaskOutput: StructureShape
+    StreamClosedEvent: StructureShape
     SynthesisTask: StructureShape
     SynthesisTaskNotFoundException: StructureShape
     SynthesisTasks: ListShape
@@ -78,10 +94,20 @@ module Aws::Polly
     TaskStatus: EnumShape
     TaskStatusReason: StringShape
     Text: StringShape
+    TextEvent: StructureShape
     TextLengthExceededException: StructureShape
     TextType: EnumShape
+    ThrottlingException: StructureShape
+    ThrottlingReason: StructureShape
+    ThrottlingReasonList: ListShape
     UnsupportedPlsAlphabetException: StructureShape
     UnsupportedPlsLanguageException: StructureShape
+    ValidationException: StructureShape
+    ValidationExceptionField: StructureShape
+    ValidationExceptionFieldList: ListShape
+    ValidationExceptionFieldMessage: StringShape
+    ValidationExceptionFieldName: StringShape
+    ValidationExceptionReason: EnumShape
     Voice: StructureShape
     VoiceId: EnumShape
     VoiceList: ListShape

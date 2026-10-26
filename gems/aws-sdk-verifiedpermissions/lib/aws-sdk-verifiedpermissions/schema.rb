@@ -7,10 +7,12 @@ module Aws::VerifiedPermissions
   module Schema
 
     AccessDeniedException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.verifiedpermissions#AccessDeniedException", name: "AccessDeniedException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 403})
-    ActionId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.verifiedpermissions#ActionId", name: "ActionId", traits: {"smithy.api#length" => {"min" => 1, "max" => 200}, "smithy.api#pattern" => "^.*$", "smithy.api#sensitive" => {}})
+    ActionId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.verifiedpermissions#ActionId", name: "ActionId", traits: {"smithy.api#length" => {"min" => 1, "max" => 512}, "smithy.api#pattern" => "^.*$", "smithy.api#sensitive" => {}})
     ActionIdentifier = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.verifiedpermissions#ActionIdentifier", name: "ActionIdentifier")
     ActionIdentifierList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.verifiedpermissions#ActionIdentifierList", name: "ActionIdentifierList")
     ActionType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.verifiedpermissions#ActionType", name: "ActionType", traits: {"smithy.api#length" => {"min" => 1, "max" => 200}, "smithy.api#pattern" => "^Action$|^.+::Action$", "smithy.api#sensitive" => {}})
+    Alias = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.verifiedpermissions#Alias", name: "Alias", traits: {"smithy.api#length" => {"min" => 0, "max" => 150}, "smithy.api#pattern" => "^[a-zA-Z0-9-/_]*$"})
+    AliasState = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.verifiedpermissions#AliasState", name: "AliasState")
     AmazonResourceName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.verifiedpermissions#AmazonResourceName", name: "AmazonResourceName", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}})
     AttributeValue = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.verifiedpermissions#AttributeValue", name: "AttributeValue")
     Audience = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.verifiedpermissions#Audience", name: "Audience", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}})
@@ -38,6 +40,9 @@ module Aws::VerifiedPermissions
     BatchIsAuthorizedWithTokenOutputList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.verifiedpermissions#BatchIsAuthorizedWithTokenOutputList", name: "BatchIsAuthorizedWithTokenOutputList")
     BooleanAttribute = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.verifiedpermissions#BooleanAttribute", name: "BooleanAttribute", traits: {"smithy.api#sensitive" => {}})
     CedarJson = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.verifiedpermissions#CedarJson", name: "CedarJson", traits: {"smithy.api#sensitive" => {}})
+    CedarTagRecordAttribute = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.verifiedpermissions#CedarTagRecordAttribute", name: "CedarTagRecordAttribute")
+    CedarTagSetAttribute = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.verifiedpermissions#CedarTagSetAttribute", name: "CedarTagSetAttribute")
+    CedarTagValue = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.verifiedpermissions#CedarTagValue", name: "CedarTagValue")
     CedarVersion = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.verifiedpermissions#CedarVersion", name: "CedarVersion")
     Claim = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.verifiedpermissions#Claim", name: "Claim", traits: {"smithy.api#length" => {"min" => 1}, "smithy.api#sensitive" => {}})
     ClientId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.verifiedpermissions#ClientId", name: "ClientId", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => "^.*$", "smithy.api#sensitive" => {}})
@@ -58,6 +63,8 @@ module Aws::VerifiedPermissions
     CreateIdentitySourceOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.verifiedpermissions#CreateIdentitySourceOutput", name: "CreateIdentitySourceOutput")
     CreatePolicyInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.verifiedpermissions#CreatePolicyInput", name: "CreatePolicyInput")
     CreatePolicyOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.verifiedpermissions#CreatePolicyOutput", name: "CreatePolicyOutput")
+    CreatePolicyStoreAliasInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.verifiedpermissions#CreatePolicyStoreAliasInput", name: "CreatePolicyStoreAliasInput", traits: {"smithy.api#references" => [{"resource" => "com.amazonaws.verifiedpermissions#PolicyStore"}]})
+    CreatePolicyStoreAliasOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.verifiedpermissions#CreatePolicyStoreAliasOutput", name: "CreatePolicyStoreAliasOutput")
     CreatePolicyStoreInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.verifiedpermissions#CreatePolicyStoreInput", name: "CreatePolicyStoreInput")
     CreatePolicyStoreOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.verifiedpermissions#CreatePolicyStoreOutput", name: "CreatePolicyStoreOutput")
     CreatePolicyTemplateInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.verifiedpermissions#CreatePolicyTemplateInput", name: "CreatePolicyTemplateInput")
@@ -69,18 +76,27 @@ module Aws::VerifiedPermissions
     DeleteIdentitySourceOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.verifiedpermissions#DeleteIdentitySourceOutput", name: "DeleteIdentitySourceOutput")
     DeletePolicyInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.verifiedpermissions#DeletePolicyInput", name: "DeletePolicyInput")
     DeletePolicyOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.verifiedpermissions#DeletePolicyOutput", name: "DeletePolicyOutput")
+    DeletePolicyStoreAliasInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.verifiedpermissions#DeletePolicyStoreAliasInput", name: "DeletePolicyStoreAliasInput")
+    DeletePolicyStoreAliasOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.verifiedpermissions#DeletePolicyStoreAliasOutput", name: "DeletePolicyStoreAliasOutput")
     DeletePolicyStoreInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.verifiedpermissions#DeletePolicyStoreInput", name: "DeletePolicyStoreInput")
     DeletePolicyStoreOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.verifiedpermissions#DeletePolicyStoreOutput", name: "DeletePolicyStoreOutput")
     DeletePolicyTemplateInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.verifiedpermissions#DeletePolicyTemplateInput", name: "DeletePolicyTemplateInput")
     DeletePolicyTemplateOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.verifiedpermissions#DeletePolicyTemplateOutput", name: "DeletePolicyTemplateOutput")
+    DeletionMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.verifiedpermissions#DeletionMode", name: "DeletionMode")
     DeletionProtection = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.verifiedpermissions#DeletionProtection", name: "DeletionProtection")
     DeterminingPolicyItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.verifiedpermissions#DeterminingPolicyItem", name: "DeterminingPolicyItem")
     DeterminingPolicyList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.verifiedpermissions#DeterminingPolicyList", name: "DeterminingPolicyList", traits: {"smithy.api#uniqueItems" => {}})
     DiscoveryUrl = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.verifiedpermissions#DiscoveryUrl", name: "DiscoveryUrl", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#pattern" => "^https://.*$"})
     Duration = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.verifiedpermissions#Duration", name: "Duration", traits: {"smithy.api#length" => {"min" => 2, "max" => 100}, "smithy.api#pattern" => "^-?(\\d+d)?(\\d+h)?(\\d+m)?(\\d+s)?(\\d+ms)?$", "smithy.api#sensitive" => {}})
+    EncryptionContext = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.verifiedpermissions#EncryptionContext", name: "EncryptionContext", traits: {"smithy.api#length" => {"max" => 8192, "unit" => "bytes"}})
+    EncryptionContextKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.verifiedpermissions#EncryptionContextKey", name: "EncryptionContextKey", traits: {"smithy.api#length" => {"min" => 1}})
+    EncryptionContextValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.verifiedpermissions#EncryptionContextValue", name: "EncryptionContextValue", traits: {"smithy.api#length" => {"min" => 1}})
+    EncryptionSettings = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.verifiedpermissions#EncryptionSettings", name: "EncryptionSettings")
+    EncryptionState = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.verifiedpermissions#EncryptionState", name: "EncryptionState")
     EntitiesDefinition = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.verifiedpermissions#EntitiesDefinition", name: "EntitiesDefinition")
     EntityAttributes = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.verifiedpermissions#EntityAttributes", name: "EntityAttributes")
-    EntityId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.verifiedpermissions#EntityId", name: "EntityId", traits: {"smithy.api#length" => {"min" => 1, "max" => 200}, "smithy.api#pattern" => "^.*$", "smithy.api#sensitive" => {}})
+    EntityCedarTags = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.verifiedpermissions#EntityCedarTags", name: "EntityCedarTags")
+    EntityId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.verifiedpermissions#EntityId", name: "EntityId", traits: {"smithy.api#length" => {"min" => 1, "max" => 612}, "smithy.api#pattern" => "^.*$", "smithy.api#sensitive" => {}})
     EntityIdPrefix = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.verifiedpermissions#EntityIdPrefix", name: "EntityIdPrefix", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#sensitive" => {}})
     EntityIdentifier = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.verifiedpermissions#EntityIdentifier", name: "EntityIdentifier")
     EntityItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.verifiedpermissions#EntityItem", name: "EntityItem")
@@ -93,6 +109,8 @@ module Aws::VerifiedPermissions
     GetIdentitySourceOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.verifiedpermissions#GetIdentitySourceOutput", name: "GetIdentitySourceOutput")
     GetPolicyInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.verifiedpermissions#GetPolicyInput", name: "GetPolicyInput")
     GetPolicyOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.verifiedpermissions#GetPolicyOutput", name: "GetPolicyOutput")
+    GetPolicyStoreAliasInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.verifiedpermissions#GetPolicyStoreAliasInput", name: "GetPolicyStoreAliasInput")
+    GetPolicyStoreAliasOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.verifiedpermissions#GetPolicyStoreAliasOutput", name: "GetPolicyStoreAliasOutput")
     GetPolicyStoreInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.verifiedpermissions#GetPolicyStoreInput", name: "GetPolicyStoreInput")
     GetPolicyStoreOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.verifiedpermissions#GetPolicyStoreOutput", name: "GetPolicyStoreOutput")
     GetPolicyTemplateInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.verifiedpermissions#GetPolicyTemplateInput", name: "GetPolicyTemplateInput")
@@ -116,11 +134,16 @@ module Aws::VerifiedPermissions
     IsAuthorizedWithTokenInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.verifiedpermissions#IsAuthorizedWithTokenInput", name: "IsAuthorizedWithTokenInput")
     IsAuthorizedWithTokenOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.verifiedpermissions#IsAuthorizedWithTokenOutput", name: "IsAuthorizedWithTokenOutput")
     Issuer = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.verifiedpermissions#Issuer", name: "Issuer", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#pattern" => "^https://.*$"})
+    KmsEncryptionSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.verifiedpermissions#KmsEncryptionSettings", name: "KmsEncryptionSettings")
+    KmsEncryptionState = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.verifiedpermissions#KmsEncryptionState", name: "KmsEncryptionState")
+    KmsKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.verifiedpermissions#KmsKey", name: "KmsKey", traits: {"smithy.api#pattern" => "^[a-zA-Z0-9:/_-]+$"})
     ListIdentitySourcesInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.verifiedpermissions#ListIdentitySourcesInput", name: "ListIdentitySourcesInput")
     ListIdentitySourcesMaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.verifiedpermissions#ListIdentitySourcesMaxResults", name: "ListIdentitySourcesMaxResults", traits: {"smithy.api#range" => {"min" => 1}})
     ListIdentitySourcesOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.verifiedpermissions#ListIdentitySourcesOutput", name: "ListIdentitySourcesOutput")
     ListPoliciesInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.verifiedpermissions#ListPoliciesInput", name: "ListPoliciesInput")
     ListPoliciesOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.verifiedpermissions#ListPoliciesOutput", name: "ListPoliciesOutput")
+    ListPolicyStoreAliasesInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.verifiedpermissions#ListPolicyStoreAliasesInput", name: "ListPolicyStoreAliasesInput")
+    ListPolicyStoreAliasesOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.verifiedpermissions#ListPolicyStoreAliasesOutput", name: "ListPolicyStoreAliasesOutput")
     ListPolicyStoresInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.verifiedpermissions#ListPolicyStoresInput", name: "ListPolicyStoresInput")
     ListPolicyStoresOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.verifiedpermissions#ListPolicyStoresOutput", name: "ListPolicyStoresOutput")
     ListPolicyTemplatesInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.verifiedpermissions#ListPolicyTemplatesInput", name: "ListPolicyTemplatesInput")
@@ -154,10 +177,14 @@ module Aws::VerifiedPermissions
     PolicyDefinitionItem = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.verifiedpermissions#PolicyDefinitionItem", name: "PolicyDefinitionItem")
     PolicyEffect = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.verifiedpermissions#PolicyEffect", name: "PolicyEffect")
     PolicyFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.verifiedpermissions#PolicyFilter", name: "PolicyFilter")
-    PolicyId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.verifiedpermissions#PolicyId", name: "PolicyId", traits: {"smithy.api#length" => {"min" => 1, "max" => 200}, "smithy.api#pattern" => "^[a-zA-Z0-9-]*$"})
+    PolicyId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.verifiedpermissions#PolicyId", name: "PolicyId", traits: {"smithy.api#length" => {"min" => 1, "max" => 200}, "smithy.api#pattern" => "^[a-zA-Z0-9-/_]*$"})
     PolicyItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.verifiedpermissions#PolicyItem", name: "PolicyItem")
     PolicyList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.verifiedpermissions#PolicyList", name: "PolicyList")
-    PolicyStatement = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.verifiedpermissions#PolicyStatement", name: "PolicyStatement", traits: {"smithy.api#length" => {"min" => 1, "max" => 10000}, "smithy.api#sensitive" => {}})
+    PolicyName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.verifiedpermissions#PolicyName", name: "PolicyName", traits: {"smithy.api#length" => {"min" => 0, "max" => 150}, "smithy.api#pattern" => "^[a-zA-Z0-9-/_]*$"})
+    PolicyStatement = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.verifiedpermissions#PolicyStatement", name: "PolicyStatement", traits: {"smithy.api#length" => {"min" => 1}, "smithy.api#sensitive" => {}})
+    PolicyStoreAliasFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.verifiedpermissions#PolicyStoreAliasFilter", name: "PolicyStoreAliasFilter")
+    PolicyStoreAliasItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.verifiedpermissions#PolicyStoreAliasItem", name: "PolicyStoreAliasItem")
+    PolicyStoreAliasList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.verifiedpermissions#PolicyStoreAliasList", name: "PolicyStoreAliasList")
     PolicyStoreDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.verifiedpermissions#PolicyStoreDescription", name: "PolicyStoreDescription", traits: {"smithy.api#length" => {"min" => 0, "max" => 150}, "smithy.api#sensitive" => {}})
     PolicyStoreId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.verifiedpermissions#PolicyStoreId", name: "PolicyStoreId", traits: {"smithy.api#length" => {"min" => 1, "max" => 200}, "smithy.api#pattern" => "^[a-zA-Z0-9-/_]*$"})
     PolicyStoreItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.verifiedpermissions#PolicyStoreItem", name: "PolicyStoreItem")
@@ -165,6 +192,7 @@ module Aws::VerifiedPermissions
     PolicyTemplateDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.verifiedpermissions#PolicyTemplateDescription", name: "PolicyTemplateDescription", traits: {"smithy.api#length" => {"min" => 0, "max" => 150}, "smithy.api#sensitive" => {}})
     PolicyTemplateId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.verifiedpermissions#PolicyTemplateId", name: "PolicyTemplateId", traits: {"smithy.api#length" => {"min" => 1, "max" => 200}, "smithy.api#pattern" => "^[a-zA-Z0-9-/_]*$"})
     PolicyTemplateItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.verifiedpermissions#PolicyTemplateItem", name: "PolicyTemplateItem")
+    PolicyTemplateName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.verifiedpermissions#PolicyTemplateName", name: "PolicyTemplateName", traits: {"smithy.api#length" => {"min" => 0, "max" => 150}, "smithy.api#pattern" => "^[a-zA-Z0-9-/_]*$"})
     PolicyTemplatesList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.verifiedpermissions#PolicyTemplatesList", name: "PolicyTemplatesList")
     PolicyType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.verifiedpermissions#PolicyType", name: "PolicyType")
     PrincipalEntityType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.verifiedpermissions#PrincipalEntityType", name: "PrincipalEntityType", traits: {"smithy.api#length" => {"min" => 1, "max" => 200}, "smithy.api#pattern" => "^.*$", "smithy.api#sensitive" => {}})
@@ -231,6 +259,8 @@ module Aws::VerifiedPermissions
     ActionIdentifier.add_member(:action_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionId, name: "actionId", traits: {"smithy.api#required" => {}}))
     ActionIdentifier.type = Types::ActionIdentifier
     ActionIdentifierList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionIdentifier, name: "member"))
+    AliasState.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "Active"}))
+    AliasState.add_member(:pending_deletion, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING_DELETION", traits: {"smithy.api#enumValue" => "PendingDeletion"}))
     AttributeValue.add_member(:boolean, Types::AttributeValue::Boolean, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanAttribute, name: "boolean"))
     AttributeValue.add_member(:entity_identifier, Types::AttributeValue::EntityIdentifier, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityIdentifier, name: "entityIdentifier"))
     AttributeValue.add_member(:long, Types::AttributeValue::Long, ::Smithy::Schema::Shapes::MemberShape.new(target: LongAttribute, name: "long"))
@@ -246,6 +276,7 @@ module Aws::VerifiedPermissions
     Audiences.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Audience, name: "member"))
     BatchGetPolicyErrorCode.add_member(:policy_store_not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POLICY_STORE_NOT_FOUND", traits: {"smithy.api#enumValue" => "POLICY_STORE_NOT_FOUND"}))
     BatchGetPolicyErrorCode.add_member(:policy_not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POLICY_NOT_FOUND", traits: {"smithy.api#enumValue" => "POLICY_NOT_FOUND"}))
+    BatchGetPolicyErrorCode.add_member(:policy_store_alias_not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POLICY_STORE_ALIAS_NOT_FOUND", traits: {"smithy.api#enumValue" => "POLICY_STORE_ALIAS_NOT_FOUND"}))
     BatchGetPolicyErrorItem.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetPolicyErrorCode, name: "code", traits: {"smithy.api#required" => {}}))
     BatchGetPolicyErrorItem.add_member(:policy_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "policyStoreId", traits: {"smithy.api#required" => {}}))
     BatchGetPolicyErrorItem.add_member(:policy_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "policyId", traits: {"smithy.api#required" => {}}))
@@ -267,6 +298,7 @@ module Aws::VerifiedPermissions
     BatchGetPolicyOutputItem.add_member(:definition, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyDefinitionDetail, name: "definition", traits: {"smithy.api#required" => {}}))
     BatchGetPolicyOutputItem.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampFormat, name: "createdDate", traits: {"smithy.api#required" => {}}))
     BatchGetPolicyOutputItem.add_member(:last_updated_date, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampFormat, name: "lastUpdatedDate", traits: {"smithy.api#required" => {}}))
+    BatchGetPolicyOutputItem.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyName, name: "name", traits: {"smithy.api#tags" => ["exposeToTSClient"]}))
     BatchGetPolicyOutputItem.type = Types::BatchGetPolicyOutputItem
     BatchGetPolicyOutputList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetPolicyOutputItem, name: "member"))
     BatchIsAuthorizedInput.add_member(:policy_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyStoreId, name: "policyStoreId", traits: {"smithy.api#required" => {}}))
@@ -307,6 +339,21 @@ module Aws::VerifiedPermissions
     BatchIsAuthorizedWithTokenOutputItem.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationErrorList, name: "errors", traits: {"smithy.api#required" => {}}))
     BatchIsAuthorizedWithTokenOutputItem.type = Types::BatchIsAuthorizedWithTokenOutputItem
     BatchIsAuthorizedWithTokenOutputList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchIsAuthorizedWithTokenOutputItem, name: "member"))
+    CedarTagRecordAttribute.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    CedarTagRecordAttribute.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: CedarTagValue, name: "value"))
+    CedarTagSetAttribute.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CedarTagValue, name: "member"))
+    CedarTagValue.add_member(:boolean, Types::CedarTagValue::Boolean, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanAttribute, name: "boolean"))
+    CedarTagValue.add_member(:entity_identifier, Types::CedarTagValue::EntityIdentifier, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityIdentifier, name: "entityIdentifier"))
+    CedarTagValue.add_member(:long, Types::CedarTagValue::Long, ::Smithy::Schema::Shapes::MemberShape.new(target: LongAttribute, name: "long"))
+    CedarTagValue.add_member(:string, Types::CedarTagValue::String, ::Smithy::Schema::Shapes::MemberShape.new(target: StringAttribute, name: "string"))
+    CedarTagValue.add_member(:set, Types::CedarTagValue::Set, ::Smithy::Schema::Shapes::MemberShape.new(target: CedarTagSetAttribute, name: "set"))
+    CedarTagValue.add_member(:record, Types::CedarTagValue::Record, ::Smithy::Schema::Shapes::MemberShape.new(target: CedarTagRecordAttribute, name: "record"))
+    CedarTagValue.add_member(:ipaddr, Types::CedarTagValue::Ipaddr, ::Smithy::Schema::Shapes::MemberShape.new(target: IpAddr, name: "ipaddr"))
+    CedarTagValue.add_member(:decimal, Types::CedarTagValue::Decimal, ::Smithy::Schema::Shapes::MemberShape.new(target: Decimal, name: "decimal"))
+    CedarTagValue.add_member(:datetime, Types::CedarTagValue::Datetime, ::Smithy::Schema::Shapes::MemberShape.new(target: DatetimeAttribute, name: "datetime"))
+    CedarTagValue.add_member(:duration, Types::CedarTagValue::Duration, ::Smithy::Schema::Shapes::MemberShape.new(target: Duration, name: "duration"))
+    CedarTagValue.add_member(:unknown, Types::CedarTagValue::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    CedarTagValue.type = Types::CedarTagValue
     CedarVersion.add_member(:cedar_2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CEDAR_2", traits: {"smithy.api#enumValue" => "CEDAR_2"}))
     CedarVersion.add_member(:cedar_4, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CEDAR_4", traits: {"smithy.api#enumValue" => "CEDAR_4"}))
     ClientIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientId, name: "member"))
@@ -364,6 +411,7 @@ module Aws::VerifiedPermissions
     CreatePolicyInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: IdempotencyToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     CreatePolicyInput.add_member(:policy_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyStoreId, name: "policyStoreId", traits: {"smithy.api#required" => {}}))
     CreatePolicyInput.add_member(:definition, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyDefinition, name: "definition", traits: {"smithy.api#required" => {}}))
+    CreatePolicyInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyName, name: "name", traits: {"smithy.api#tags" => ["exposeToTSClient"]}))
     CreatePolicyInput.type = Types::CreatePolicyInput
     CreatePolicyOutput.add_member(:policy_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyStoreId, name: "policyStoreId", traits: {"smithy.api#required" => {}}))
     CreatePolicyOutput.add_member(:policy_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyId, name: "policyId", traits: {"smithy.api#required" => {}}))
@@ -375,10 +423,19 @@ module Aws::VerifiedPermissions
     CreatePolicyOutput.add_member(:last_updated_date, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampFormat, name: "lastUpdatedDate", traits: {"smithy.api#required" => {}}))
     CreatePolicyOutput.add_member(:effect, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyEffect, name: "effect"))
     CreatePolicyOutput.type = Types::CreatePolicyOutput
+    CreatePolicyStoreAliasInput.add_member(:alias_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Alias, name: "aliasName", traits: {"smithy.api#required" => {}}))
+    CreatePolicyStoreAliasInput.add_member(:policy_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyStoreId, name: "policyStoreId", traits: {"smithy.api#required" => {}}))
+    CreatePolicyStoreAliasInput.type = Types::CreatePolicyStoreAliasInput
+    CreatePolicyStoreAliasOutput.add_member(:alias_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Alias, name: "aliasName", traits: {"smithy.api#required" => {}}))
+    CreatePolicyStoreAliasOutput.add_member(:policy_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyStoreId, name: "policyStoreId", traits: {"smithy.api#required" => {}}))
+    CreatePolicyStoreAliasOutput.add_member(:alias_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "aliasArn", traits: {"smithy.api#required" => {}}))
+    CreatePolicyStoreAliasOutput.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampFormat, name: "createdAt", traits: {"smithy.api#required" => {}}))
+    CreatePolicyStoreAliasOutput.type = Types::CreatePolicyStoreAliasOutput
     CreatePolicyStoreInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: IdempotencyToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     CreatePolicyStoreInput.add_member(:validation_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationSettings, name: "validationSettings", traits: {"smithy.api#required" => {}}))
     CreatePolicyStoreInput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyStoreDescription, name: "description"))
     CreatePolicyStoreInput.add_member(:deletion_protection, ::Smithy::Schema::Shapes::MemberShape.new(target: DeletionProtection, name: "deletionProtection"))
+    CreatePolicyStoreInput.add_member(:encryption_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionSettings, name: "encryptionSettings"))
     CreatePolicyStoreInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
     CreatePolicyStoreInput.type = Types::CreatePolicyStoreInput
     CreatePolicyStoreOutput.add_member(:policy_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyStoreId, name: "policyStoreId", traits: {"smithy.api#required" => {}}))
@@ -390,6 +447,7 @@ module Aws::VerifiedPermissions
     CreatePolicyTemplateInput.add_member(:policy_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyStoreId, name: "policyStoreId", traits: {"smithy.api#required" => {}}))
     CreatePolicyTemplateInput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyTemplateDescription, name: "description"))
     CreatePolicyTemplateInput.add_member(:statement, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyStatement, name: "statement", traits: {"smithy.api#required" => {}}))
+    CreatePolicyTemplateInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyTemplateName, name: "name", traits: {"smithy.api#tags" => ["exposeToTSClient"]}))
     CreatePolicyTemplateInput.type = Types::CreatePolicyTemplateInput
     CreatePolicyTemplateOutput.add_member(:policy_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyStoreId, name: "policyStoreId", traits: {"smithy.api#required" => {}}))
     CreatePolicyTemplateOutput.add_member(:policy_template_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyTemplateId, name: "policyTemplateId", traits: {"smithy.api#required" => {}}))
@@ -406,6 +464,10 @@ module Aws::VerifiedPermissions
     DeletePolicyInput.add_member(:policy_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyId, name: "policyId", traits: {"smithy.api#required" => {}}))
     DeletePolicyInput.type = Types::DeletePolicyInput
     DeletePolicyOutput.type = Types::DeletePolicyOutput
+    DeletePolicyStoreAliasInput.add_member(:alias_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Alias, name: "aliasName", traits: {"smithy.api#required" => {}}))
+    DeletePolicyStoreAliasInput.add_member(:deletion_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: DeletionMode, name: "deletionMode"))
+    DeletePolicyStoreAliasInput.type = Types::DeletePolicyStoreAliasInput
+    DeletePolicyStoreAliasOutput.type = Types::DeletePolicyStoreAliasOutput
     DeletePolicyStoreInput.add_member(:policy_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyStoreId, name: "policyStoreId", traits: {"smithy.api#required" => {}}))
     DeletePolicyStoreInput.type = Types::DeletePolicyStoreInput
     DeletePolicyStoreOutput.type = Types::DeletePolicyStoreOutput
@@ -413,23 +475,38 @@ module Aws::VerifiedPermissions
     DeletePolicyTemplateInput.add_member(:policy_template_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyTemplateId, name: "policyTemplateId", traits: {"smithy.api#required" => {}}))
     DeletePolicyTemplateInput.type = Types::DeletePolicyTemplateInput
     DeletePolicyTemplateOutput.type = Types::DeletePolicyTemplateOutput
+    DeletionMode.add_member(:soft_delete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SOFT_DELETE", traits: {"smithy.api#enumValue" => "SoftDelete"}))
+    DeletionMode.add_member(:hard_delete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HARD_DELETE", traits: {"smithy.api#enumValue" => "HardDelete"}))
     DeletionProtection.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     DeletionProtection.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
     DeterminingPolicyItem.add_member(:policy_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyId, name: "policyId", traits: {"smithy.api#required" => {}}))
     DeterminingPolicyItem.type = Types::DeterminingPolicyItem
     DeterminingPolicyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeterminingPolicyItem, name: "member"))
+    EncryptionContext.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionContextKey, name: "key"))
+    EncryptionContext.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionContextValue, name: "value"))
+    EncryptionSettings.add_member(:kms_encryption_settings, Types::EncryptionSettings::KmsEncryptionSettings, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsEncryptionSettings, name: "kmsEncryptionSettings"))
+    EncryptionSettings.add_member(:default, Types::EncryptionSettings::Default, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "default"))
+    EncryptionSettings.add_member(:unknown, Types::EncryptionSettings::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    EncryptionSettings.type = Types::EncryptionSettings
+    EncryptionState.add_member(:kms_encryption_state, Types::EncryptionState::KmsEncryptionState, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsEncryptionState, name: "kmsEncryptionState"))
+    EncryptionState.add_member(:default, Types::EncryptionState::Default, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "default"))
+    EncryptionState.add_member(:unknown, Types::EncryptionState::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    EncryptionState.type = Types::EncryptionState
     EntitiesDefinition.add_member(:entity_list, Types::EntitiesDefinition::EntityList, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityList, name: "entityList"))
     EntitiesDefinition.add_member(:cedar_json, Types::EntitiesDefinition::CedarJson, ::Smithy::Schema::Shapes::MemberShape.new(target: CedarJson, name: "cedarJson"))
     EntitiesDefinition.add_member(:unknown, Types::EntitiesDefinition::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     EntitiesDefinition.type = Types::EntitiesDefinition
     EntityAttributes.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
     EntityAttributes.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "value"))
+    EntityCedarTags.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    EntityCedarTags.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: CedarTagValue, name: "value"))
     EntityIdentifier.add_member(:entity_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityType, name: "entityType", traits: {"smithy.api#required" => {}}))
     EntityIdentifier.add_member(:entity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, name: "entityId", traits: {"smithy.api#required" => {}}))
     EntityIdentifier.type = Types::EntityIdentifier
     EntityItem.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityIdentifier, name: "identifier", traits: {"smithy.api#required" => {}}))
     EntityItem.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityAttributes, name: "attributes"))
     EntityItem.add_member(:parents, ::Smithy::Schema::Shapes::MemberShape.new(target: ParentList, name: "parents"))
+    EntityItem.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityCedarTags, name: "tags"))
     EntityItem.type = Types::EntityItem
     EntityList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityItem, name: "member"))
     EntityReference.add_member(:unspecified, Types::EntityReference::Unspecified, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "unspecified"))
@@ -463,7 +540,16 @@ module Aws::VerifiedPermissions
     GetPolicyOutput.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampFormat, name: "createdDate", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#required" => {}}))
     GetPolicyOutput.add_member(:last_updated_date, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampFormat, name: "lastUpdatedDate", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#required" => {}}))
     GetPolicyOutput.add_member(:effect, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyEffect, name: "effect", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
+    GetPolicyOutput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyName, name: "name", traits: {"smithy.api#tags" => ["exposeToTSClient"]}))
     GetPolicyOutput.type = Types::GetPolicyOutput
+    GetPolicyStoreAliasInput.add_member(:alias_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Alias, name: "aliasName", traits: {"smithy.api#required" => {}}))
+    GetPolicyStoreAliasInput.type = Types::GetPolicyStoreAliasInput
+    GetPolicyStoreAliasOutput.add_member(:alias_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Alias, name: "aliasName", traits: {"smithy.api#required" => {}}))
+    GetPolicyStoreAliasOutput.add_member(:policy_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyStoreId, name: "policyStoreId", traits: {"smithy.api#required" => {}}))
+    GetPolicyStoreAliasOutput.add_member(:alias_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "aliasArn", traits: {"smithy.api#required" => {}}))
+    GetPolicyStoreAliasOutput.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampFormat, name: "createdAt", traits: {"smithy.api#required" => {}}))
+    GetPolicyStoreAliasOutput.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: AliasState, name: "state", traits: {"smithy.api#required" => {}}))
+    GetPolicyStoreAliasOutput.type = Types::GetPolicyStoreAliasOutput
     GetPolicyStoreInput.add_member(:policy_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyStoreId, name: "policyStoreId", traits: {"smithy.api#required" => {}}))
     GetPolicyStoreInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "tags", traits: {"smithy.api#default" => false}))
     GetPolicyStoreInput.type = Types::GetPolicyStoreInput
@@ -474,6 +560,7 @@ module Aws::VerifiedPermissions
     GetPolicyStoreOutput.add_member(:last_updated_date, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampFormat, name: "lastUpdatedDate", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#required" => {}}))
     GetPolicyStoreOutput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyStoreDescription, name: "description"))
     GetPolicyStoreOutput.add_member(:deletion_protection, ::Smithy::Schema::Shapes::MemberShape.new(target: DeletionProtection, name: "deletionProtection"))
+    GetPolicyStoreOutput.add_member(:encryption_state, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionState, name: "encryptionState"))
     GetPolicyStoreOutput.add_member(:cedar_version, ::Smithy::Schema::Shapes::MemberShape.new(target: CedarVersion, name: "cedarVersion"))
     GetPolicyStoreOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
     GetPolicyStoreOutput.type = Types::GetPolicyStoreOutput
@@ -486,6 +573,7 @@ module Aws::VerifiedPermissions
     GetPolicyTemplateOutput.add_member(:statement, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyStatement, name: "statement", traits: {"smithy.api#required" => {}}))
     GetPolicyTemplateOutput.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampFormat, name: "createdDate", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#required" => {}}))
     GetPolicyTemplateOutput.add_member(:last_updated_date, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampFormat, name: "lastUpdatedDate", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#required" => {}}))
+    GetPolicyTemplateOutput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyTemplateName, name: "name", traits: {"smithy.api#tags" => ["exposeToTSClient"]}))
     GetPolicyTemplateOutput.type = Types::GetPolicyTemplateOutput
     GetSchemaInput.add_member(:policy_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyStoreId, name: "policyStoreId", traits: {"smithy.api#required" => {}}))
     GetSchemaInput.type = Types::GetSchemaInput
@@ -545,6 +633,12 @@ module Aws::VerifiedPermissions
     IsAuthorizedWithTokenOutput.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationErrorList, name: "errors", traits: {"smithy.api#required" => {}}))
     IsAuthorizedWithTokenOutput.add_member(:principal, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityIdentifier, name: "principal"))
     IsAuthorizedWithTokenOutput.type = Types::IsAuthorizedWithTokenOutput
+    KmsEncryptionSettings.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKey, name: "key", traits: {"smithy.api#required" => {}}))
+    KmsEncryptionSettings.add_member(:encryption_context, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionContext, name: "encryptionContext"))
+    KmsEncryptionSettings.type = Types::KmsEncryptionSettings
+    KmsEncryptionState.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKey, name: "key", traits: {"smithy.api#required" => {}}))
+    KmsEncryptionState.add_member(:encryption_context, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionContext, name: "encryptionContext", traits: {"smithy.api#required" => {}}))
+    KmsEncryptionState.type = Types::KmsEncryptionState
     ListIdentitySourcesInput.add_member(:policy_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyStoreId, name: "policyStoreId", traits: {"smithy.api#required" => {}}))
     ListIdentitySourcesInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
     ListIdentitySourcesInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ListIdentitySourcesMaxResults, name: "maxResults"))
@@ -561,6 +655,13 @@ module Aws::VerifiedPermissions
     ListPoliciesOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
     ListPoliciesOutput.add_member(:policies, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyList, name: "policies", traits: {"smithy.api#required" => {}}))
     ListPoliciesOutput.type = Types::ListPoliciesOutput
+    ListPolicyStoreAliasesInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
+    ListPolicyStoreAliasesInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "maxResults", traits: {"smithy.api#default" => 5}))
+    ListPolicyStoreAliasesInput.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyStoreAliasFilter, name: "filter"))
+    ListPolicyStoreAliasesInput.type = Types::ListPolicyStoreAliasesInput
+    ListPolicyStoreAliasesOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
+    ListPolicyStoreAliasesOutput.add_member(:policy_store_aliases, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyStoreAliasList, name: "policyStoreAliases", traits: {"smithy.api#required" => {}}))
+    ListPolicyStoreAliasesOutput.type = Types::ListPolicyStoreAliasesOutput
     ListPolicyStoresInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
     ListPolicyStoresInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "maxResults"))
     ListPolicyStoresInput.type = Types::ListPolicyStoresInput
@@ -664,8 +765,18 @@ module Aws::VerifiedPermissions
     PolicyItem.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampFormat, name: "createdDate", traits: {"smithy.api#required" => {}}))
     PolicyItem.add_member(:last_updated_date, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampFormat, name: "lastUpdatedDate", traits: {"smithy.api#required" => {}}))
     PolicyItem.add_member(:effect, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyEffect, name: "effect"))
+    PolicyItem.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyName, name: "name", traits: {"smithy.api#tags" => ["exposeToTSClient"]}))
     PolicyItem.type = Types::PolicyItem
     PolicyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyItem, name: "member"))
+    PolicyStoreAliasFilter.add_member(:policy_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyStoreId, name: "policyStoreId"))
+    PolicyStoreAliasFilter.type = Types::PolicyStoreAliasFilter
+    PolicyStoreAliasItem.add_member(:alias_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Alias, name: "aliasName", traits: {"smithy.api#required" => {}}))
+    PolicyStoreAliasItem.add_member(:policy_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyStoreId, name: "policyStoreId", traits: {"smithy.api#required" => {}}))
+    PolicyStoreAliasItem.add_member(:alias_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "aliasArn", traits: {"smithy.api#required" => {}}))
+    PolicyStoreAliasItem.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampFormat, name: "createdAt", traits: {"smithy.api#required" => {}}))
+    PolicyStoreAliasItem.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: AliasState, name: "state", traits: {"smithy.api#required" => {}}))
+    PolicyStoreAliasItem.type = Types::PolicyStoreAliasItem
+    PolicyStoreAliasList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyStoreAliasItem, name: "member"))
     PolicyStoreItem.add_member(:policy_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyStoreId, name: "policyStoreId", traits: {"smithy.api#required" => {}}))
     PolicyStoreItem.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "arn", traits: {"smithy.api#required" => {}}))
     PolicyStoreItem.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampFormat, name: "createdDate", traits: {"smithy.api#required" => {}}))
@@ -678,6 +789,7 @@ module Aws::VerifiedPermissions
     PolicyTemplateItem.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyTemplateDescription, name: "description"))
     PolicyTemplateItem.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampFormat, name: "createdDate", traits: {"smithy.api#required" => {}}))
     PolicyTemplateItem.add_member(:last_updated_date, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampFormat, name: "lastUpdatedDate", traits: {"smithy.api#required" => {}}))
+    PolicyTemplateItem.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyTemplateName, name: "name", traits: {"smithy.api#tags" => ["exposeToTSClient"]}))
     PolicyTemplateItem.type = Types::PolicyTemplateItem
     PolicyTemplatesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyTemplateItem, name: "member"))
     PolicyType.add_member(:static, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STATIC", traits: {"smithy.api#enumValue" => "STATIC"}))
@@ -705,6 +817,7 @@ module Aws::VerifiedPermissions
     ResourceType.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POLICY", traits: {"smithy.api#enumValue" => "POLICY"}))
     ResourceType.add_member(:policy_template, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POLICY_TEMPLATE", traits: {"smithy.api#enumValue" => "POLICY_TEMPLATE"}))
     ResourceType.add_member(:schema, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SCHEMA", traits: {"smithy.api#enumValue" => "SCHEMA"}))
+    ResourceType.add_member(:policy_store_alias, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POLICY_STORE_ALIAS", traits: {"smithy.api#enumValue" => "POLICY_STORE_ALIAS", "smithy.api#tags" => ["exposeToTSClient"]}))
     SchemaDefinition.add_member(:cedar_json, Types::SchemaDefinition::CedarJson, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaJson, name: "cedarJson"))
     SchemaDefinition.add_member(:unknown, Types::SchemaDefinition::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     SchemaDefinition.type = Types::SchemaDefinition
@@ -796,7 +909,8 @@ module Aws::VerifiedPermissions
     UpdatePolicyDefinition.type = Types::UpdatePolicyDefinition
     UpdatePolicyInput.add_member(:policy_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyStoreId, name: "policyStoreId", traits: {"smithy.api#required" => {}}))
     UpdatePolicyInput.add_member(:policy_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyId, name: "policyId", traits: {"smithy.api#required" => {}}))
-    UpdatePolicyInput.add_member(:definition, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdatePolicyDefinition, name: "definition", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#required" => {}}))
+    UpdatePolicyInput.add_member(:definition, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdatePolicyDefinition, name: "definition", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
+    UpdatePolicyInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyName, name: "name", traits: {"smithy.api#tags" => ["exposeToTSClient"]}))
     UpdatePolicyInput.type = Types::UpdatePolicyInput
     UpdatePolicyOutput.add_member(:policy_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyStoreId, name: "policyStoreId", traits: {"smithy.api#required" => {}}))
     UpdatePolicyOutput.add_member(:policy_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyId, name: "policyId", traits: {"smithy.api#required" => {}}))
@@ -822,6 +936,7 @@ module Aws::VerifiedPermissions
     UpdatePolicyTemplateInput.add_member(:policy_template_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyTemplateId, name: "policyTemplateId", traits: {"smithy.api#required" => {}}))
     UpdatePolicyTemplateInput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyTemplateDescription, name: "description"))
     UpdatePolicyTemplateInput.add_member(:statement, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyStatement, name: "statement", traits: {"smithy.api#required" => {}}))
+    UpdatePolicyTemplateInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyTemplateName, name: "name", traits: {"smithy.api#tags" => ["exposeToTSClient"]}))
     UpdatePolicyTemplateInput.type = Types::UpdatePolicyTemplateInput
     UpdatePolicyTemplateOutput.add_member(:policy_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyStoreId, name: "policyStoreId", traits: {"smithy.api#required" => {}}))
     UpdatePolicyTemplateOutput.add_member(:policy_template_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyTemplateId, name: "policyTemplateId", traits: {"smithy.api#required" => {}}))
@@ -847,7 +962,7 @@ module Aws::VerifiedPermissions
       service.id = "com.amazonaws.verifiedpermissions#VerifiedPermissions"
       service.name = "VerifiedPermissions"
       service.version = "2021-12-01"
-      service.traits = {"aws.api#service" => {"sdkId" => "VerifiedPermissions", "arnNamespace" => "verifiedpermissions", "endpointPrefix" => "verifiedpermissions"}, "aws.auth#sigv4" => {"name" => "verifiedpermissions"}, "aws.iam#defineConditionKeys" => {"aws:ResourceTag/${TagKey}" => {"type" => "String", "documentation" => "Filters access by a tag key and value pair of a resource", "externalDocumentation" => "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-resourcetag"}, "aws:RequestTag/${TagKey}" => {"type" => "String", "documentation" => "Filters access by a tag key and value pair that is allowed in the request", "externalDocumentation" => "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-requesttag"}, "aws:TagKeys" => {"type" => "ArrayOfString", "documentation" => "Filters access by a list of tag keys that are allowed in the request", "externalDocumentation" => "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-tagkeys"}}, "aws.iam#supportedPrincipalTypes" => ["Root", "IAMUser", "IAMRole", "FederatedUser"], "aws.protocols#awsJson1_0" => {}, "smithy.api#title" => "Amazon Verified Permissions"}
+      service.traits = {"aws.api#service" => {"sdkId" => "VerifiedPermissions", "arnNamespace" => "verifiedpermissions", "endpointPrefix" => "verifiedpermissions"}, "aws.auth#sigv4" => {"name" => "verifiedpermissions"}, "aws.iam#defineConditionKeys" => {"aws:ResourceTag/${TagKey}" => {"type" => "String", "documentation" => "Filters access by a tag key and value pair of a resource", "externalDocumentation" => "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-resourcetag"}, "aws:RequestTag/${TagKey}" => {"type" => "String", "documentation" => "Filters access by a tag key and value pair that is allowed in the request", "externalDocumentation" => "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-requesttag"}, "aws:TagKeys" => {"type" => "ArrayOfString", "documentation" => "Filters access by a list of tag keys that are allowed in the request", "externalDocumentation" => "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-tagkeys"}}, "aws.iam#supportedPrincipalTypes" => ["Root", "IAMUser", "IAMRole", "FederatedUser"], "aws.protocols#awsJson1_0" => {}, "smithy.api#title" => "Amazon Verified Permissions", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://verifiedpermissions-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://verifiedpermissions-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://verifiedpermissions.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://verifiedpermissions.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
       service.add_operation(:batch_get_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.verifiedpermissions#BatchGetPolicy"
         operation.name = "BatchGetPolicy"
@@ -909,7 +1024,7 @@ module Aws::VerifiedPermissions
         operation.errors << ConflictException
         operation.errors << ResourceNotFoundException
         operation.errors << ServiceQuotaExceededException
-        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to create a Cedar policy and save it in the specified policy store"}, "smithy.api#idempotent" => {}}
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to create a Cedar policy and save it in the specified policy store", "relativeDocumentation" => "API_CreatePolicy.html", "resources" => {"required" => {"policy-store" => {}}}}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:create_policy_store, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.verifiedpermissions#CreatePolicyStore"
@@ -923,6 +1038,20 @@ module Aws::VerifiedPermissions
         operation.errors << ConflictException
         operation.errors << ServiceQuotaExceededException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to create a Cedar policy and save it in the specified policy store"}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:create_policy_store_alias, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.verifiedpermissions#CreatePolicyStoreAlias"
+        operation.name = "CreatePolicyStoreAlias"
+        operation.input = CreatePolicyStoreAliasInput
+        operation.output = CreatePolicyStoreAliasOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.errors << ConflictException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to create an alias against a policy store"}, "smithy.api#idempotent" => {}, "smithy.api#tags" => ["exposeToTSClient"]}
       end)
       service.add_operation(:create_policy_template, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.verifiedpermissions#CreatePolicyTemplate"
@@ -976,6 +1105,18 @@ module Aws::VerifiedPermissions
         operation.errors << InvalidStateException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to delete the specified policy store"}, "smithy.api#idempotent" => {}}
       end)
+      service.add_operation(:delete_policy_store_alias, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.verifiedpermissions#DeletePolicyStoreAlias"
+        operation.name = "DeletePolicyStoreAlias"
+        operation.input = DeletePolicyStoreAliasInput
+        operation.output = DeletePolicyStoreAliasOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.errors << InvalidStateException
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to delete an alias for a policy store"}, "smithy.api#idempotent" => {}, "smithy.api#tags" => ["exposeToTSClient"]}
+      end)
       service.add_operation(:delete_policy_template, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.verifiedpermissions#DeletePolicyTemplate"
         operation.name = "DeletePolicyTemplate"
@@ -1024,6 +1165,18 @@ module Aws::VerifiedPermissions
         operation.errors << ValidationException
         operation.errors << ResourceNotFoundException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to retrieve details about a policy store"}, "smithy.api#readonly" => {}}
+      end)
+      service.add_operation(:get_policy_store_alias, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.verifiedpermissions#GetPolicyStoreAlias"
+        operation.name = "GetPolicyStoreAlias"
+        operation.input = GetPolicyStoreAliasInput
+        operation.output = GetPolicyStoreAliasOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.errors << ResourceNotFoundException
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to retrieve details about an alias for a policy store"}, "smithy.api#readonly" => {}, "smithy.api#tags" => ["exposeToTSClient"]}
       end)
       service.add_operation(:get_policy_template, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.verifiedpermissions#GetPolicyTemplate"
@@ -1098,6 +1251,18 @@ module Aws::VerifiedPermissions
         operation.errors << ResourceNotFoundException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to return a paginated list of all policies stored in the specified policy store"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListPolicies.new
+      end)
+      service.add_operation(:list_policy_store_aliases, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.verifiedpermissions#ListPolicyStoreAliases"
+        operation.name = "ListPolicyStoreAliases"
+        operation.input = ListPolicyStoreAliasesInput
+        operation.output = ListPolicyStoreAliasesOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to return a paginated list of all policy store aliases"}, "smithy.api#readonly" => {}, "smithy.api#tags" => ["exposeToTSClient"]}
+        operation[:paginator] = Paginators::ListPolicyStoreAliases.new
       end)
       service.add_operation(:list_policy_stores, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.verifiedpermissions#ListPolicyStores"

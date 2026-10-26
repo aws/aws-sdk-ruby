@@ -21,6 +21,13 @@ module Aws::IoTSiteWise
     Aggregates: StructureShape
     Alarms: StructureShape
     AmazonResourceName: StringShape
+    Annotation: StructureShape
+    ApplicationDescription: StringShape
+    ApplicationId: StringShape
+    ApplicationList: ListShape
+    ApplicationName: StringShape
+    ApplicationStatus: EnumShape
+    ApplicationSummary: StructureShape
     AssetBindingValueFilter: StructureShape
     AssetCompositeModel: StructureShape
     AssetCompositeModelPath: ListShape
@@ -85,14 +92,22 @@ module Aws::IoTSiteWise
     AssetSummaries: ListShape
     AssetSummary: StructureShape
     AssociateAssetsRequest: StructureShape
+    AssociateDataSegmentEntries: ListShape
+    AssociateDataSegmentEntry: StructureShape
     AssociateTimeSeriesToAssetPropertyRequest: StructureShape
     AssociatedAssetsSummaries: ListShape
     AssociatedAssetsSummary: StructureShape
     Attribute: StructureShape
     AuthMode: EnumShape
+    BatchAssociateDataSegmentsToDatasetRequest: StructureShape
+    BatchAssociateDataSegmentsToDatasetResponse: StructureShape
     BatchAssociateProjectAssetsErrors: ListShape
     BatchAssociateProjectAssetsRequest: StructureShape
     BatchAssociateProjectAssetsResponse: StructureShape
+    BatchDeleteDatasetDataSegmentsRequest: StructureShape
+    BatchDeleteDatasetDataSegmentsResponse: StructureShape
+    BatchDisassociateDataSegmentsFromDatasetRequest: StructureShape
+    BatchDisassociateDataSegmentsFromDatasetResponse: StructureShape
     BatchDisassociateProjectAssetsErrors: ListShape
     BatchDisassociateProjectAssetsRequest: StructureShape
     BatchDisassociateProjectAssetsResponse: StructureShape
@@ -145,17 +160,32 @@ module Aws::IoTSiteWise
     BindingValueList: ListShape
     BooleanValue: BooleanShape
     Bucket: StringShape
+    BulkImportJobName: StringShape
+    CancelEnrichmentJobRequest: StructureShape
+    CancelEnrichmentJobResponse: StructureShape
+    CancelPipelineExecutionRequest: StructureShape
+    CancelPipelineExecutionRequestReasonString: StringShape
+    CancelPipelineExecutionResponse: StructureShape
+    CancelQueryRequest: StructureShape
+    CancelQueryResponse: StructureShape
     CapabilityConfiguration: StringShape
     CapabilityNamespace: StringShape
     CapabilitySyncStatus: EnumShape
+    CaptureBlob: BlobShape
     Citation: StructureShape
     Citations: ListShape
     ClientToken: StringShape
+    ColumnDataType: StringShape
     ColumnInfo: StructureShape
+    ColumnInformation: StructureShape
+    ColumnInformationList: ListShape
+    ColumnLabel: StringShape
     ColumnName: EnumShape
     ColumnNames: ListShape
     ColumnType: StructureShape
+    ColumnValue: StringShape
     ColumnsList: ListShape
+    CommandList: ListShape
     CompositeModelProperty: StructureShape
     CompositionDetails: StructureShape
     CompositionRelationship: ListShape
@@ -182,16 +212,30 @@ module Aws::IoTSiteWise
     ComputationModelType: EnumShape
     ComputationModelVersionFilter: StringShape
     ComputeLocation: EnumShape
+    ComputeNode: StructureShape
+    ComputeNodeEnvironmentVariablesMap: MapShape
+    ComputeNodeErrorCode: EnumShape
+    ComputeNodeExecutionDetails: StructureShape
+    ComputeNodeExecutionDetailsList: ListShape
+    ComputeNodeExecutionState: EnumShape
+    ComputeNodeExecutionStateDetails: StructureShape
+    ComputeNodeExecutionStatus: StructureShape
+    ComputeNodeList: ListShape
+    ComputeNodeMountsMap: MapShape
+    ComputeNodeNameList: ListShape
     ConfigurationErrorDetails: StructureShape
     ConfigurationState: EnumShape
     ConfigurationStatus: StructureShape
     ConflictingOperationException: StructureShape
+    ContainerTaskConfiguration: StructureShape
     Content: StructureShape
     ConversationId: StringShape
     CoreDeviceOperatingSystem: EnumShape
     CoreDeviceThingName: StringShape
     CreateAccessPolicyRequest: StructureShape
     CreateAccessPolicyResponse: StructureShape
+    CreateApplicationRequest: StructureShape
+    CreateApplicationResponse: StructureShape
     CreateAssetModelCompositeModelRequest: StructureShape
     CreateAssetModelCompositeModelResponse: StructureShape
     CreateAssetModelRequest: StructureShape
@@ -204,15 +248,25 @@ module Aws::IoTSiteWise
     CreateComputationModelResponse: StructureShape
     CreateDashboardRequest: StructureShape
     CreateDashboardResponse: StructureShape
+    CreateDatasetExportJobRequest: StructureShape
+    CreateDatasetExportJobResponse: StructureShape
     CreateDatasetRequest: StructureShape
     CreateDatasetResponse: StructureShape
+    CreateEnrichmentJobRequest: StructureShape
+    CreateEnrichmentJobResponse: StructureShape
     CreateGatewayRequest: StructureShape
     CreateGatewayResponse: StructureShape
     CreateMissingProperty: BooleanShape
+    CreatePipelineRequest: StructureShape
+    CreatePipelineResponse: StructureShape
     CreatePortalRequest: StructureShape
     CreatePortalResponse: StructureShape
     CreateProjectRequest: StructureShape
     CreateProjectResponse: StructureShape
+    CreateTaskRequest: StructureShape
+    CreateTaskResponse: StructureShape
+    CreateWorkspaceRequest: StructureShape
+    CreateWorkspaceResponse: StructureShape
     Csv: StructureShape
     CustomID: StringShape
     CustomerManagedS3Storage: StructureShape
@@ -221,7 +275,24 @@ module Aws::IoTSiteWise
     DashboardSummary: StructureShape
     DataBindingValue: StructureShape
     DataBindingValueFilter: StructureShape
+    DataSegmentEnrichment: StructureShape
+    DataSegmentErrorCode: EnumShape
+    DataSegmentErrorMessage: StringShape
+    DataSegmentRelationshipSummaries: ListShape
+    DataSegmentRelationshipSummary: StructureShape
+    DataSegmentSummaries: ListShape
+    DataSegmentSummary: StructureShape
+    DataSetIdList: ListShape
     DataSetReference: StructureShape
+    DatasetConfig: StructureShape
+    DatasetEnrichment: StructureShape
+    DatasetEnrichmentEntry: StructureShape
+    DatasetEnrichmentStatus: EnumShape
+    DatasetExportJobFilter: EnumShape
+    DatasetExportJobId: StringShape
+    DatasetExportJobStatus: EnumShape
+    DatasetId: StringShape
+    DatasetItem: StructureShape
     DatasetSource: StructureShape
     DatasetSourceFormat: EnumShape
     DatasetSourceType: EnumShape
@@ -229,11 +300,14 @@ module Aws::IoTSiteWise
     DatasetStatus: StructureShape
     DatasetSummaries: ListShape
     DatasetSummary: StructureShape
+    DatasetTypeEnum: EnumShape
     Datum: StructureShape
     DatumList: ListShape
     DefaultValue: StringShape
     DeleteAccessPolicyRequest: StructureShape
     DeleteAccessPolicyResponse: StructureShape
+    DeleteApplicationRequest: StructureShape
+    DeleteApplicationResponse: StructureShape
     DeleteAssetModelCompositeModelRequest: StructureShape
     DeleteAssetModelCompositeModelResponse: StructureShape
     DeleteAssetModelInterfaceRelationshipRequest: StructureShape
@@ -246,19 +320,29 @@ module Aws::IoTSiteWise
     DeleteComputationModelResponse: StructureShape
     DeleteDashboardRequest: StructureShape
     DeleteDashboardResponse: StructureShape
+    DeleteDataSegmentEntries: ListShape
+    DeleteDataSegmentEntry: StructureShape
     DeleteDatasetRequest: StructureShape
     DeleteDatasetResponse: StructureShape
     DeleteFilesAfterImport: BooleanShape
     DeleteGatewayRequest: StructureShape
+    DeletePipelineRequest: StructureShape
+    DeletePipelineResponse: StructureShape
     DeletePortalRequest: StructureShape
     DeletePortalResponse: StructureShape
     DeleteProjectRequest: StructureShape
     DeleteProjectResponse: StructureShape
+    DeleteTaskRequest: StructureShape
+    DeleteTaskResponse: StructureShape
     DeleteTimeSeriesRequest: StructureShape
+    DeleteWorkspaceRequest: StructureShape
+    DeleteWorkspaceResponse: StructureShape
     DescribeAccessPolicyRequest: StructureShape
     DescribeAccessPolicyResponse: StructureShape
     DescribeActionRequest: StructureShape
     DescribeActionResponse: StructureShape
+    DescribeApplicationRequest: StructureShape
+    DescribeApplicationResponse: StructureShape
     DescribeAssetCompositeModelRequest: StructureShape
     DescribeAssetCompositeModelResponse: StructureShape
     DescribeAssetModelCompositeModelRequest: StructureShape
@@ -279,10 +363,14 @@ module Aws::IoTSiteWise
     DescribeComputationModelResponse: StructureShape
     DescribeDashboardRequest: StructureShape
     DescribeDashboardResponse: StructureShape
+    DescribeDatasetExportJobRequest: StructureShape
+    DescribeDatasetExportJobResponse: StructureShape
     DescribeDatasetRequest: StructureShape
     DescribeDatasetResponse: StructureShape
     DescribeDefaultEncryptionConfigurationRequest: StructureShape
     DescribeDefaultEncryptionConfigurationResponse: StructureShape
+    DescribeEnrichmentJobRequest: StructureShape
+    DescribeEnrichmentJobResponse: StructureShape
     DescribeExecutionRequest: StructureShape
     DescribeExecutionResponse: StructureShape
     DescribeGatewayCapabilityConfigurationRequest: StructureShape
@@ -291,31 +379,63 @@ module Aws::IoTSiteWise
     DescribeGatewayResponse: StructureShape
     DescribeLoggingOptionsRequest: StructureShape
     DescribeLoggingOptionsResponse: StructureShape
+    DescribePipelineExecutionRequest: StructureShape
+    DescribePipelineExecutionRequestMaxResultsInteger: IntegerShape
+    DescribePipelineExecutionResponse: StructureShape
+    DescribePipelineRequest: StructureShape
+    DescribePipelineResponse: StructureShape
     DescribePortalRequest: StructureShape
     DescribePortalResponse: StructureShape
     DescribeProjectRequest: StructureShape
     DescribeProjectResponse: StructureShape
+    DescribeQueryRequest: StructureShape
+    DescribeQueryResponse: StructureShape
+    DescribeSearchRequest: StructureShape
+    DescribeSearchResponse: StructureShape
     DescribeStorageConfigurationRequest: StructureShape
     DescribeStorageConfigurationResponse: StructureShape
+    DescribeTaskRequest: StructureShape
+    DescribeTaskResponse: StructureShape
     DescribeTimeSeriesRequest: StructureShape
     DescribeTimeSeriesResponse: StructureShape
+    DescribeWorkspaceRequest: StructureShape
+    DescribeWorkspaceResponse: StructureShape
     Description: StringShape
     DetailedError: StructureShape
     DetailedErrorCode: EnumShape
+    DetailedErrorList: ListShape
     DetailedErrorMessage: StringShape
     DetailedErrors: ListShape
+    DetailedPipelineError: StructureShape
+    DetailedPipelineErrorCode: EnumShape
     DisallowIngestNullNaN: BooleanShape
     DisassociateAssetsRequest: StructureShape
+    DisassociateDataSegmentEntries: ListShape
+    DisassociateDataSegmentEntry: StructureShape
     DisassociateTimeSeriesFromAssetPropertyRequest: StructureShape
     DisassociatedDataStorageState: EnumShape
+    DnsSubdomain: StringShape
     ETag: StringShape
+    EcrUri: StringShape
     Email: StringShape
     EncryptionType: EnumShape
+    EnrichmentJobConfiguration: UnionShape
+    EnrichmentJobStatus: EnumShape
+    EnrichmentJobSummaries: ListShape
+    EnrichmentJobSummary: StructureShape
+    EnrichmentStatus: EnumShape
+    EnrichmentTrimSettings: StructureShape
     EntryId: StringShape
+    EnvironmentVariableName: StringShape
+    EnvironmentVariableValue: StringShape
+    EnvironmentVariablesMap: MapShape
+    EphemeralStorageConfiguration: StructureShape
+    EphemeralStorageConfigurationStorageSizeInGiBInteger: IntegerShape
     ErrorCode: EnumShape
     ErrorDetails: StructureShape
     ErrorMessage: StringShape
     ErrorReportLocation: StructureShape
+    EventDetection: StructureShape
     ExceptionMessage: StringShape
     ExcludeProperties: BooleanShape
     ExecuteActionRequest: StructureShape
@@ -327,6 +447,11 @@ module Aws::IoTSiteWise
     ExecutionDetails: MapShape
     ExecutionDetailsKey: StringShape
     ExecutionDetailsValue: StringShape
+    ExecutionEnvironmentVariables: StructureShape
+    ExecutionEnvironmentVariablesMap: MapShape
+    ExecutionEnvironmentVariablesMapKeyString: StringShape
+    ExecutionEnvironmentVariablesMapValueString: StringShape
+    ExecutionPriority: IntegerShape
     ExecutionResult: MapShape
     ExecutionResultKey: StringShape
     ExecutionResultValue: StringShape
@@ -334,13 +459,25 @@ module Aws::IoTSiteWise
     ExecutionStatus: StructureShape
     ExecutionSummaries: ListShape
     ExecutionSummary: StructureShape
+    ExportDataType: EnumShape
+    ExportDataTypeList: ListShape
+    ExportErrorReportLocation: StructureShape
+    ExportJobSummary: StructureShape
+    ExportJobSummaryList: ListShape
     Expression: StringShape
     ExpressionVariable: StructureShape
     ExpressionVariables: ListShape
     ExternalId: StringShape
+    FailedDataSegmentAssociation: StructureShape
+    FailedDataSegmentAssociations: ListShape
+    FailedDataSegmentDeletion: StructureShape
+    FailedDataSegmentDeletions: ListShape
+    FailedDataSegmentDisassociation: StructureShape
+    FailedDataSegmentDisassociations: ListShape
     File: StructureShape
     FileFormat: StructureShape
     Files: ListShape
+    FormatSettings: StructureShape
     ForwardingConfig: StructureShape
     ForwardingConfigState: EnumShape
     GatewayCapabilitySummaries: ListShape
@@ -358,10 +495,20 @@ module Aws::IoTSiteWise
     GetAssetPropertyValueHistoryResponse: StructureShape
     GetAssetPropertyValueRequest: StructureShape
     GetAssetPropertyValueResponse: StructureShape
+    GetCaptureDataNextToken: StringShape
+    GetCaptureDataRequest: StructureShape
+    GetCaptureDataResponse: StructureShape
     GetInterpolatedAssetPropertyValuesRequest: StructureShape
     GetInterpolatedAssetPropertyValuesResponse: StructureShape
+    GetQueryResultsRequest: StructureShape
+    GetQueryResultsResponse: StructureShape
+    GetSearchResultsRequest: StructureShape
+    GetSearchResultsRequestMaxResultsInteger: IntegerShape
+    GetSearchResultsResponse: StructureShape
     Greengrass: StructureShape
     GreengrassV2: StructureShape
+    GroupId: StringShape
+    GroupIdFilterList: ListShape
     GroupIdentity: StructureShape
     HierarchyMapping: StructureShape
     HierarchyMappings: ListShape
@@ -370,6 +517,7 @@ module Aws::IoTSiteWise
     ID: StringShape
     IDs: ListShape
     IamArn: StringShape
+    IamRoleArn: StringShape
     Identity: StructureShape
     IdentityId: StringShape
     IdentityType: EnumShape
@@ -401,6 +549,7 @@ module Aws::IoTSiteWise
     JobStatus: EnumShape
     JobSummaries: ListShape
     JobSummary: StructureShape
+    JobType: EnumShape
     KendraSourceDetail: StructureShape
     KmsKeyId: StringShape
     LimitExceededException: StructureShape
@@ -408,6 +557,8 @@ module Aws::IoTSiteWise
     ListAccessPoliciesResponse: StructureShape
     ListActionsRequest: StructureShape
     ListActionsResponse: StructureShape
+    ListApplicationsRequest: StructureShape
+    ListApplicationsResponse: StructureShape
     ListAssetModelCompositeModelsRequest: StructureShape
     ListAssetModelCompositeModelsResponse: StructureShape
     ListAssetModelPropertiesFilter: EnumShape
@@ -439,25 +590,52 @@ module Aws::IoTSiteWise
     ListComputationModelsResponse: StructureShape
     ListDashboardsRequest: StructureShape
     ListDashboardsResponse: StructureShape
+    ListDatasetDataSegmentRelationshipsRequest: StructureShape
+    ListDatasetDataSegmentRelationshipsResponse: StructureShape
+    ListDatasetDataSegmentsRequest: StructureShape
+    ListDatasetDataSegmentsResponse: StructureShape
+    ListDatasetExportJobsRequest: StructureShape
+    ListDatasetExportJobsResponse: StructureShape
     ListDatasetsRequest: StructureShape
     ListDatasetsResponse: StructureShape
+    ListEnrichmentJobsRequest: StructureShape
+    ListEnrichmentJobsResponse: StructureShape
     ListExecutionsRequest: StructureShape
     ListExecutionsResponse: StructureShape
+    ListExportJobsMaxResults: IntegerShape
+    ListExportJobsNextToken: StringShape
     ListGatewaysRequest: StructureShape
     ListGatewaysResponse: StructureShape
     ListInterfaceRelationshipsRequest: StructureShape
     ListInterfaceRelationshipsResponse: StructureShape
+    ListPipelineExecutionsRequest: StructureShape
+    ListPipelineExecutionsRequestMaxResultsInteger: IntegerShape
+    ListPipelineExecutionsResponse: StructureShape
+    ListPipelinesRequest: StructureShape
+    ListPipelinesRequestMaxResultsInteger: IntegerShape
+    ListPipelinesResponse: StructureShape
     ListPortalsRequest: StructureShape
     ListPortalsResponse: StructureShape
     ListProjectAssetsRequest: StructureShape
     ListProjectAssetsResponse: StructureShape
     ListProjectsRequest: StructureShape
     ListProjectsResponse: StructureShape
+    ListQueriesRequest: StructureShape
+    ListQueriesResponse: StructureShape
+    ListSearchesFilters: StructureShape
+    ListSearchesRequest: StructureShape
+    ListSearchesRequestMaxResultsInteger: IntegerShape
+    ListSearchesResponse: StructureShape
     ListTagsForResourceRequest: StructureShape
     ListTagsForResourceResponse: StructureShape
+    ListTasksRequest: StructureShape
+    ListTasksRequestMaxResultsInteger: IntegerShape
+    ListTasksResponse: StructureShape
     ListTimeSeriesRequest: StructureShape
     ListTimeSeriesResponse: StructureShape
     ListTimeSeriesType: EnumShape
+    ListWorkspacesRequest: StructureShape
+    ListWorkspacesResponse: StructureShape
     Location: StructureShape
     LoggingLevel: EnumShape
     LoggingOptions: StructureShape
@@ -469,12 +647,24 @@ module Aws::IoTSiteWise
     Measurement: StructureShape
     MeasurementProcessingConfig: StructureShape
     MessageInput: StringShape
+    Metadata: MapShape
+    MetadataKey: StringShape
+    MetadataValue: StringShape
     Metric: StructureShape
     MetricProcessingConfig: StructureShape
     MetricWindow: StructureShape
     MonitorErrorCode: EnumShape
     MonitorErrorDetails: StructureShape
     MonitorErrorMessage: StringShape
+    Mount: StructureShape
+    MountList: ListShape
+    MountOverrides: StructureShape
+    MountRelativePath: StringShape
+    MountS3AccessPointArn: StringShape
+    MountS3KeyPrefix: StringShape
+    MountSource: UnionShape
+    MountStorageType: EnumShape
+    Mp4: StructureShape
     MultiLayerStorage: StructureShape
     Name: StringShape
     NextToken: StringShape
@@ -482,8 +672,17 @@ module Aws::IoTSiteWise
     NumberOfDays: IntegerShape
     Offset: StringShape
     OffsetInNanos: IntegerShape
+    PaginationToken: StringShape
     Parquet: StructureShape
     Permission: EnumShape
+    PipelineErrorCode: EnumShape
+    PipelineExecutionState: EnumShape
+    PipelineExecutionStateDetails: StructureShape
+    PipelineExecutionStatus: StructureShape
+    PipelineExecutionSummary: StructureShape
+    PipelineExecutionSummaryList: ListShape
+    PipelineSummaries: ListShape
+    PipelineSummary: StructureShape
     PortalClientId: StringShape
     PortalResource: StructureShape
     PortalState: EnumShape
@@ -495,7 +694,11 @@ module Aws::IoTSiteWise
     PortalTypeConfiguration: MapShape
     PortalTypeEntry: StructureShape
     PortalTypeKey: StringShape
+    PositiveInteger: IntegerShape
     PreconditionFailedException: StructureShape
+    ProcessingInput: UnionShape
+    ProcessingType: EnumShape
+    ProcessingUnit: EnumShape
     ProjectResource: StructureShape
     ProjectSummaries: ListShape
     ProjectSummary: StructureShape
@@ -527,7 +730,18 @@ module Aws::IoTSiteWise
     PutStorageConfigurationResponse: StructureShape
     Qualities: ListShape
     Quality: EnumShape
+    QueryErrorMessage: StringShape
+    QueryFilter: StringShape
+    QueryId: StringShape
+    QueryListNextToken: StringShape
+    QueryMaxResults: IntegerShape
+    QueryNextToken: StringShape
     QueryStatement: StringShape
+    QueryStatistics: StructureShape
+    QueryStatus: EnumShape
+    QueryString: StringShape
+    QuerySummary: StructureShape
+    QuerySummaryList: ListShape
     QueryTimeoutException: StructureShape
     RawValueType: EnumShape
     Reference: StructureShape
@@ -537,24 +751,52 @@ module Aws::IoTSiteWise
     Resource: StructureShape
     ResourceAlreadyExistsException: StructureShape
     ResourceArn: StringShape
+    ResourceError: StructureShape
+    ResourceErrorCode: EnumShape
     ResourceId: StringShape
+    ResourceName: StringShape
     ResourceNotFoundException: StructureShape
+    ResourceState: EnumShape
+    ResourceStatus: StructureShape
     ResourceType: EnumShape
     ResponseStream: UnionShape
     RestrictedDescription: StringShape
     RestrictedName: StringShape
+    Result: ListShape
     ResultProperty: StringShape
     RetentionPeriod: StructureShape
     Row: StructureShape
+    RowList: ListShape
     Rows: ListShape
+    S3AccessPointSource: StructureShape
+    S3Uri: StringShape
     SSOApplicationId: StringShape
     ScalarType: EnumShape
     ScalarValue: StringShape
+    SearchFilters: StructureShape
+    SearchId: StringShape
+    SearchQueryStatement: StringShape
+    SearchResult: StructureShape
+    SearchResultList: ListShape
+    SearchStatus: EnumShape
+    SearchStatusFilterList: ListShape
+    SearchSummaries: ListShape
+    SearchSummary: StructureShape
+    SearchType: EnumShape
+    SearchTypeFilterList: ListShape
     SelectAll: StringShape
     ServiceUnavailableException: StructureShape
+    SessionConfig: StructureShape
     SiemensIE: StructureShape
     Source: StructureShape
     SourceDetail: StructureShape
+    StartPipelineExecutionRequest: StructureShape
+    StartPipelineExecutionResponse: StructureShape
+    StartQueryRequest: StructureShape
+    StartQueryResponse: StructureShape
+    StartSearchRequest: StructureShape
+    StartSearchResponse: StructureShape
+    StorageClass: EnumShape
     StorageType: EnumShape
     String: StringShape
     TagKey: StringShape
@@ -565,13 +807,22 @@ module Aws::IoTSiteWise
     TagValue: StringShape
     TargetResource: StructureShape
     TargetResourceType: EnumShape
+    TaskConfiguration: UnionShape
+    TaskSummaries: ListShape
+    TaskSummary: StructureShape
     ThrottlingException: StructureShape
     TimeInNanos: StructureShape
     TimeInSeconds: IntegerShape
+    TimeInterval: StructureShape
+    TimeIntervalList: ListShape
     TimeOrdering: EnumShape
     TimeSeriesId: StringShape
+    TimeSeriesIdList: ListShape
     TimeSeriesSummaries: ListShape
     TimeSeriesSummary: StructureShape
+    TimeoutSeconds: IntegerShape
+    TimeseriesItem: StructureShape
+    TimeseriesList: ListShape
     Timestamp: TimestampShape
     Timestamps: ListShape
     TooManyTagsException: StructureShape
@@ -580,6 +831,7 @@ module Aws::IoTSiteWise
     TransformProcessingConfig: StructureShape
     TraversalDirection: EnumShape
     TraversalType: EnumShape
+    TrimSettings: StructureShape
     TumblingWindow: StructureShape
     UnauthorizedException: StructureShape
     Unlimited: BooleanShape
@@ -603,10 +855,16 @@ module Aws::IoTSiteWise
     UpdateGatewayCapabilityConfigurationRequest: StructureShape
     UpdateGatewayCapabilityConfigurationResponse: StructureShape
     UpdateGatewayRequest: StructureShape
+    UpdatePipelineRequest: StructureShape
+    UpdatePipelineResponse: StructureShape
     UpdatePortalRequest: StructureShape
     UpdatePortalResponse: StructureShape
     UpdateProjectRequest: StructureShape
     UpdateProjectResponse: StructureShape
+    UpdateTaskRequest: StructureShape
+    UpdateTaskResponse: StructureShape
+    UpdateWorkspaceRequest: StructureShape
+    UpdateWorkspaceResponse: StructureShape
     Url: StringShape
     UserIdentity: StructureShape
     ValidationException: StructureShape
@@ -614,8 +872,17 @@ module Aws::IoTSiteWise
     VariableValue: StructureShape
     Variant: StructureShape
     Version: StringShape
+    VideoDataType: EnumShape
     WarmTierRetentionPeriod: StructureShape
     WarmTierState: EnumShape
+    WorkspaceEncryptionConfiguration: StructureShape
+    WorkspaceEncryptionConfigurationInfo: StructureShape
+    WorkspaceErrorDetails: StructureShape
+    WorkspaceName: StringShape
+    WorkspaceState: EnumShape
+    WorkspaceStatus: StructureShape
+    WorkspaceSummaries: ListShape
+    WorkspaceSummary: StructureShape
 
     AWSIoTSiteWise: ServiceShape
   end

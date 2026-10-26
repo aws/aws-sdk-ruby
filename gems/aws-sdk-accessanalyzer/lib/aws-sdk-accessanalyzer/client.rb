@@ -144,18 +144,18 @@ module Aws::AccessAnalyzer
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -626,7 +626,7 @@ module Aws::AccessAnalyzer
     #   <p>Specifies the configuration of the analyzer. If the analyzer is an unused access analyzer, the specified scope of unused access is used for the configuration. If the analyzer is an internal access analyzer, the specified internal access analysis rules are used for the configuration.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     analyzer_name: "Name", # required
+    #     analyzer_name: "AnalyzerName", # required
     #     type: "Type", # required
     #     archive_rules: [
     #       {
@@ -700,7 +700,7 @@ module Aws::AccessAnalyzer
     #   <p>A client token.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     analyzer_name: "Name", # required
+    #     analyzer_name: "AnalyzerName", # required
     #     rule_name: "Name", # required
     #     filter: { # required
     #       "String" => {
@@ -723,6 +723,76 @@ module Aws::AccessAnalyzer
       request.send_request(options)
     end
 
+    # <p>Creates a service-linked analyzer managed by an Amazon Web Services service. This operation can only be invoked by authorized Amazon Web Services services. Direct customer invocation returns <code>AccessDeniedException</code>.</p> <p>Service-linked analyzers enable Amazon Web Services services to create and manage analyzers on behalf of customers. The lifecycle of these analyzers is managed by the calling service.</p>
+    # @param [Hash, Types::CreateServiceLinkedAnalyzerRequest] params
+    # @option params [String] :type
+    #   <p>The type of analyzer to create. Valid values are <code>ACCOUNT_UNUSED_ACCESS</code> and <code>ORGANIZATION_UNUSED_ACCESS</code>.</p>
+    # @option params [Array<Types::InlineArchiveRule>] :archive_rules
+    #   <p>Specifies the archive rules to add for the analyzer. Archive rules automatically archive findings that meet the criteria you define for the rule.</p>
+    # @option params [String] :client_token
+    #   <p>A client token.</p>
+    # @option params [Types::AnalyzerConfiguration] :configuration
+    #   <p>Specifies the configuration of the analyzer. The specified scope of unused access is used for the configuration.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     type: "Type", # required
+    #     archive_rules: [
+    #       {
+    #         rule_name: "Name", # required
+    #         filter: { # required
+    #           "String" => {
+    #             eq: ["String"],
+    #             neq: ["String"],
+    #             contains: ["String"],
+    #             exists: false
+    #           }
+    #         }
+    #       }
+    #     ],
+    #     client_token: "String",
+    #     configuration: {
+    #       # One of:
+    #       unused_access: {
+    #         unused_access_age: 1,
+    #         analysis_rule: {
+    #           exclusions: [
+    #             {
+    #               account_ids: ["String"],
+    #               resource_tags: [
+    #                 {
+    #                   "String" => "String"
+    #                 }
+    #               ]
+    #             }
+    #           ]
+    #         }
+    #       },
+    #       internal_access: {
+    #         analysis_rule: {
+    #           inclusions: [
+    #             {
+    #               account_ids: ["String"],
+    #               resource_types: ["ResourceType"],
+    #               resource_arns: ["String"]
+    #             }
+    #           ]
+    #         }
+    #       }
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.create_service_linked_analyzer(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     arn: "AnalyzerArn"
+    #   }
+    # @return [Types::CreateServiceLinkedAnalyzerResponse]
+    def create_service_linked_analyzer(params = {}, options = {})
+      request = build_request(:create_service_linked_analyzer, params)
+      request.send_request(options)
+    end
+
     # <p>Deletes the specified analyzer. When you delete an analyzer, IAM Access Analyzer is disabled for the account or organization in the current or specific Region. All findings that were generated by the analyzer are deleted. You cannot undo this action.</p>
     # @param [Hash, Types::DeleteAnalyzerInput] params
     # @option params [String] :analyzer_name
@@ -731,7 +801,7 @@ module Aws::AccessAnalyzer
     #   <p>A client token.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     analyzer_name: "Name", # required
+    #     analyzer_name: "AnalyzerName", # required
     #     client_token: "String"
     #   }
     #   options = {}
@@ -755,7 +825,7 @@ module Aws::AccessAnalyzer
     #   <p>A client token.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     analyzer_name: "Name", # required
+    #     analyzer_name: "AnalyzerName", # required
     #     rule_name: "Name", # required
     #     client_token: "String"
     #   }
@@ -767,6 +837,28 @@ module Aws::AccessAnalyzer
     # @return [Smithy::Schema::EmptyStructure]
     def delete_archive_rule(params = {}, options = {})
       request = build_request(:delete_archive_rule, params)
+      request.send_request(options)
+    end
+
+    # <p>Deletes a service-linked analyzer. This operation can be invoked by both authorized Amazon Web Services services and customers.</p> <p>When invoked by a customer, IAM Access Analyzer performs a callback to the managing service to verify whether the analyzer is still in use and can be deleted. If the service indicates the analyzer is still in use, the deletion is rejected with <code>ConflictException</code>.</p>
+    # @param [Hash, Types::DeleteServiceLinkedAnalyzerRequest] params
+    # @option params [String] :analyzer_name
+    #   <p>The name of the service-linked analyzer to delete. Service-linked analyzer names follow the format <code>_AccessAnalyzerFor{ServiceName}-{Id}</code>.</p>
+    # @option params [String] :client_token
+    #   <p>A client token.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     analyzer_name: "AnalyzerName", # required
+    #     client_token: "String"
+    #   }
+    #   options = {}
+    #   response = client.delete_service_linked_analyzer(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Smithy::Schema::EmptyStructure]
+    def delete_service_linked_analyzer(params = {}, options = {})
+      request = build_request(:delete_service_linked_analyzer, params)
       request.send_request(options)
     end
 
@@ -975,7 +1067,7 @@ module Aws::AccessAnalyzer
       request.send_request(options)
     end
 
-    # <p>Retrieves information about a resource that was analyzed.</p>
+    # <p>Retrieves information about a resource that was analyzed.</p> <note> <p>This action is supported only for external access analyzers.</p> </note>
     # @param [Hash, Types::GetAnalyzedResourceInput] params
     # @option params [String] :analyzer_arn
     #   <p>The <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources">ARN of the analyzer</a> to retrieve information from.</p>
@@ -1017,7 +1109,7 @@ module Aws::AccessAnalyzer
     #   <p>The name of the analyzer retrieved.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     analyzer_name: "Name", # required
+    #     analyzer_name: "AnalyzerName", # required
     #   }
     #   options = {}
     #   response = client.get_analyzer(params, options)
@@ -1026,7 +1118,7 @@ module Aws::AccessAnalyzer
     #   {
     #     analyzer: { # required
     #       arn: "AnalyzerArn", # required
-    #       name: "Name", # required
+    #       name: "AnalyzerName", # required
     #       type: "Type", # required
     #       created_at: Time.now, # required
     #       last_resource_analyzed: "String",
@@ -1066,7 +1158,8 @@ module Aws::AccessAnalyzer
     #             ]
     #           }
     #         }
-    #       }
+    #       },
+    #       managed_by: "String"
     #     }
     #   }
     # @return [Types::GetAnalyzerOutput]
@@ -1083,7 +1176,7 @@ module Aws::AccessAnalyzer
     #   <p>The name of the rule to retrieve.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     analyzer_name: "Name", # required
+    #     analyzer_name: "AnalyzerName", # required
     #     rule_name: "Name", # required
     #   }
     #   options = {}
@@ -1111,7 +1204,7 @@ module Aws::AccessAnalyzer
       request.send_request(options)
     end
 
-    # <p>Retrieves information about the specified finding. GetFinding and GetFindingV2 both use <code>access-analyzer:GetFinding</code> in the <code>Action</code> element of an IAM policy statement. You must have permission to perform the <code>access-analyzer:GetFinding</code> action.</p>
+    # <p>Retrieves information about the specified finding. GetFinding and GetFindingV2 both use <code>access-analyzer:GetFinding</code> in the <code>Action</code> element of an IAM policy statement. You must have permission to perform the <code>access-analyzer:GetFinding</code> action.</p> <note> <p>GetFinding is supported only for external access analyzers. You must use GetFindingV2 for internal and unused access analyzers.</p> </note>
     # @param [Hash, Types::GetFindingInput] params
     # @option params [String] :analyzer_arn
     #   <p>The <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources">ARN of the analyzer</a> that generated the finding.</p>
@@ -1423,7 +1516,8 @@ module Aws::AccessAnalyzer
     #         resource_type_statistics: {
     #           "ResourceType" => {
     #             total_active_public: 1,
-    #             total_active_cross_account: 1
+    #             total_active_cross_account: 1,
+    #             total_active_errors: 1
     #           }
     #         },
     #         total_active_findings: 1,
@@ -1698,7 +1792,7 @@ module Aws::AccessAnalyzer
     #     analyzers: [ # required
     #       {
     #         arn: "AnalyzerArn", # required
-    #         name: "Name", # required
+    #         name: "AnalyzerName", # required
     #         type: "Type", # required
     #         created_at: Time.now, # required
     #         last_resource_analyzed: "String",
@@ -1738,7 +1832,8 @@ module Aws::AccessAnalyzer
     #               ]
     #             }
     #           }
-    #         }
+    #         },
+    #         managed_by: "String"
     #       }
     #     ],
     #     next_token: "Token"
@@ -1759,7 +1854,7 @@ module Aws::AccessAnalyzer
     #   <p>The maximum number of results to return in the request.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     analyzer_name: "Name", # required
+    #     analyzer_name: "AnalyzerName", # required
     #     next_token: "Token",
     #     max_results: 1
     #   }
@@ -1791,7 +1886,7 @@ module Aws::AccessAnalyzer
       request.send_request(options)
     end
 
-    # <p>Retrieves a list of findings generated by the specified analyzer. ListFindings and ListFindingsV2 both use <code>access-analyzer:ListFindings</code> in the <code>Action</code> element of an IAM policy statement. You must have permission to perform the <code>access-analyzer:ListFindings</code> action.</p> <p>To learn about filter keys that you can use to retrieve a list of findings, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-filter-keys.html">IAM Access Analyzer filter keys</a> in the <b>IAM User Guide</b>.</p>
+    # <p>Retrieves a list of findings generated by the specified analyzer. ListFindings and ListFindingsV2 both use <code>access-analyzer:ListFindings</code> in the <code>Action</code> element of an IAM policy statement. You must have permission to perform the <code>access-analyzer:ListFindings</code> action.</p> <p>To learn about filter keys that you can use to retrieve a list of findings, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-filter-keys.html">IAM Access Analyzer filter keys</a> in the <b>IAM User Guide</b>.</p> <note> <p>ListFindings is supported only for external access analyzers. You must use ListFindingsV2 for internal and unused access analyzers.</p> </note>
     # @param [Hash, Types::ListFindingsInput] params
     # @option params [String] :analyzer_arn
     #   <p>The <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources">ARN of the analyzer</a> to retrieve findings from.</p>
@@ -2021,7 +2116,7 @@ module Aws::AccessAnalyzer
       request.send_request(options)
     end
 
-    # <p>Immediately starts a scan of the policies applied to the specified resource.</p>
+    # <p>Immediately starts a scan of the policies applied to the specified resource.</p> <note> <p>This action is supported only for external access analyzers.</p> </note>
     # @param [Hash, Types::StartResourceScanInput] params
     # @option params [String] :analyzer_arn
     #   <p>The <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources">ARN of the analyzer</a> to use to scan the policies applied to the specified resource.</p>
@@ -2092,7 +2187,7 @@ module Aws::AccessAnalyzer
       request.send_request(options)
     end
 
-    # <p>Modifies the configuration of an existing analyzer.</p>
+    # <p>Modifies the configuration of an existing analyzer.</p> <note> <p>This action is not supported for external access analyzers.</p> </note>
     # @param [Hash, Types::UpdateAnalyzerRequest] params
     # @option params [String] :analyzer_name
     #   <p>The name of the analyzer to modify.</p>
@@ -2100,7 +2195,7 @@ module Aws::AccessAnalyzer
     #   <p>Contains information about the configuration of an analyzer for an Amazon Web Services organization or account.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     analyzer_name: "Name", # required
+    #     analyzer_name: "AnalyzerName", # required
     #     configuration: {
     #       # One of:
     #       unused_access: {
@@ -2184,7 +2279,7 @@ module Aws::AccessAnalyzer
     #   <p>A client token.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     analyzer_name: "Name", # required
+    #     analyzer_name: "AnalyzerName", # required
     #     rule_name: "Name", # required
     #     filter: { # required
     #       "String" => {

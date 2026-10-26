@@ -125,11 +125,13 @@ module Aws::ConnectCases
       def initialize: (
         ?case_rules: Array[Types::GetCaseRuleResponse],
         ?errors: Array[Types::CaseRuleError],
+        ?unprocessed_case_rules: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor case_rules: Array[Types::GetCaseRuleResponse]?
       attr_accessor errors: Array[Types::CaseRuleError]?
+      attr_accessor unprocessed_case_rules: Array[String]?
     end
 
     class BatchGetFieldInput
@@ -190,15 +192,23 @@ module Aws::ConnectCases
       def initialize: (
         ?equal_to: Types::BooleanOperands,
         ?not_equal_to: Types::BooleanOperands,
+        ?and_all: Types::CompoundCondition,
+        ?or_all: Types::CompoundCondition,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor equal_to: Types::BooleanOperands?
       attr_accessor not_equal_to: Types::BooleanOperands?
+      attr_accessor and_all: Types::CompoundCondition?
+      attr_accessor or_all: Types::CompoundCondition?
 
       class EqualTo < BooleanCondition
       end
       class NotEqualTo < BooleanCondition
+      end
+      class AndAll < BooleanCondition
+      end
+      class OrAll < BooleanCondition
       end
       class Unknown < BooleanCondition
       end
@@ -236,6 +246,7 @@ module Aws::ConnectCases
       def initialize: (
         ?field: Types::FieldFilter,
         ?not: Types::CaseFilter,
+        ?tag: Types::TagFilter,
         ?and_all: Array[Types::CaseFilter],
         ?or_all: Array[Types::CaseFilter],
       ) -> void
@@ -243,12 +254,15 @@ module Aws::ConnectCases
 
       attr_accessor field: Types::FieldFilter?
       attr_accessor not: Types::CaseFilter?
+      attr_accessor tag: Types::TagFilter?
       attr_accessor and_all: Array[Types::CaseFilter]?
       attr_accessor or_all: Array[Types::CaseFilter]?
 
       class Field < CaseFilter
       end
       class Not < CaseFilter
+      end
+      class Tag < CaseFilter
       end
       class AndAll < CaseFilter
       end
@@ -263,12 +277,20 @@ module Aws::ConnectCases
 
       def initialize: (
         ?required: Types::RequiredCaseRule,
+        ?field_options: Types::FieldOptionsCaseRule,
+        ?hidden: Types::HiddenCaseRule,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor required: Types::RequiredCaseRule?
+      attr_accessor field_options: Types::FieldOptionsCaseRule?
+      attr_accessor hidden: Types::HiddenCaseRule?
 
       class Required < CaseRuleDetails
+      end
+      class FieldOptions < CaseRuleDetails
+      end
+      class Hidden < CaseRuleDetails
       end
       class Unknown < CaseRuleDetails
       end
@@ -352,6 +374,30 @@ module Aws::ConnectCases
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+    end
+
+    class CommentUpdateContent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?body: String,
+        ?content_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor body: String?
+      attr_accessor content_type: String?
+    end
+
+    class CompoundCondition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?conditions: Array[Types::BooleanCondition],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor conditions: Array[Types::BooleanCondition]?
     end
 
     class ConflictException
@@ -446,6 +492,7 @@ module Aws::ConnectCases
         ?fields: Array[Types::FieldValue],
         ?client_token: String,
         ?performed_by: Types::UserUnion,
+        ?tags: Hash[String, String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -454,6 +501,7 @@ module Aws::ConnectCases
       attr_accessor fields: Array[Types::FieldValue]?
       attr_accessor client_token: String?
       attr_accessor performed_by: Types::UserUnion?
+      attr_accessor tags: Hash[String, String]?
     end
 
     class CreateCaseOutput
@@ -533,6 +581,7 @@ module Aws::ConnectCases
         ?name: String,
         ?type: String,
         ?description: String,
+        ?attributes: Types::FieldAttributes,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -540,6 +589,7 @@ module Aws::ConnectCases
       attr_accessor name: String?
       attr_accessor type: String?
       attr_accessor description: String?
+      attr_accessor attributes: Types::FieldAttributes?
     end
 
     class CreateFieldOutput
@@ -626,6 +676,7 @@ module Aws::ConnectCases
         ?required_fields: Array[Types::RequiredField],
         ?status: String,
         ?rules: Array[Types::TemplateRule],
+        ?tag_propagation_configurations: Array[Types::TagPropagationConfiguration],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -636,6 +687,7 @@ module Aws::ConnectCases
       attr_accessor required_fields: Array[Types::RequiredField]?
       attr_accessor status: String?
       attr_accessor rules: Array[Types::TemplateRule]?
+      attr_accessor tag_propagation_configurations: Array[Types::TagPropagationConfiguration]?
     end
 
     class CreateTemplateOutput
@@ -702,6 +754,17 @@ module Aws::ConnectCases
     end
 
     class CustomInputContent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fields: Array[Types::FieldValue],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fields: Array[Types::FieldValue]?
+    end
+
+    class CustomUpdateContent
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -925,6 +988,22 @@ module Aws::ConnectCases
       attr_accessor related_item_data: Types::RelatedItemEventIncludedData?
     end
 
+    class FieldAttributes
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?text: Types::TextAttributes,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor text: Types::TextAttributes?
+
+      class Text < FieldAttributes
+      end
+      class Unknown < FieldAttributes
+      end
+    end
+
     class FieldError
       include Smithy::Schema::Structure
 
@@ -1041,6 +1120,21 @@ module Aws::ConnectCases
       attr_accessor value: String?
     end
 
+    class FieldOptionsCaseRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?parent_field_id: String,
+        ?child_field_id: String,
+        ?parent_child_field_options_mappings: Array[Types::ParentChildFieldOptionsMapping],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor parent_field_id: String?
+      attr_accessor child_field_id: String?
+      attr_accessor parent_child_field_options_mappings: Array[Types::ParentChildFieldOptionsMapping]?
+    end
+
     class FieldSummary
       include Smithy::Schema::Structure
 
@@ -1050,6 +1144,7 @@ module Aws::ConnectCases
         ?name: String,
         ?type: String,
         ?namespace: String,
+        ?attributes: Types::FieldAttributes,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1058,6 +1153,7 @@ module Aws::ConnectCases
       attr_accessor name: String?
       attr_accessor type: String?
       attr_accessor namespace: String?
+      attr_accessor attributes: Types::FieldAttributes?
     end
 
     class FieldValue
@@ -1286,6 +1382,7 @@ module Aws::ConnectCases
         ?deleted: bool,
         ?created_time: Time,
         ?last_modified_time: Time,
+        ?attributes: Types::FieldAttributes,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1299,6 +1396,7 @@ module Aws::ConnectCases
       attr_accessor deleted: bool?
       attr_accessor created_time: Time?
       attr_accessor last_modified_time: Time?
+      attr_accessor attributes: Types::FieldAttributes?
     end
 
     class GetLayoutInput
@@ -1368,6 +1466,7 @@ module Aws::ConnectCases
         ?created_time: Time,
         ?last_modified_time: Time,
         ?rules: Array[Types::TemplateRule],
+        ?tag_propagation_configurations: Array[Types::TagPropagationConfiguration],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1383,6 +1482,20 @@ module Aws::ConnectCases
       attr_accessor created_time: Time?
       attr_accessor last_modified_time: Time?
       attr_accessor rules: Array[Types::TemplateRule]?
+      attr_accessor tag_propagation_configurations: Array[Types::TagPropagationConfiguration]?
+    end
+
+    class HiddenCaseRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?default_value: bool,
+        ?conditions: Array[Types::BooleanCondition],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor default_value: bool?
+      attr_accessor conditions: Array[Types::BooleanCondition]?
     end
 
     class InternalServerException
@@ -1719,6 +1832,19 @@ module Aws::ConnectCases
       end
     end
 
+    class ParentChildFieldOptionsMapping
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?parent_field_option_value: String,
+        ?child_field_option_values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor parent_field_option_value: String?
+      attr_accessor child_field_option_values: Array[String]?
+    end
+
     class PutCaseEventConfigurationInput
       include Smithy::Schema::Structure
 
@@ -1860,6 +1986,26 @@ module Aws::ConnectCases
       end
     end
 
+    class RelatedItemUpdateContent
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?comment: Types::CommentUpdateContent,
+        ?custom: Types::CustomUpdateContent,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor comment: Types::CommentUpdateContent?
+      attr_accessor custom: Types::CustomUpdateContent?
+
+      class Comment < RelatedItemUpdateContent
+      end
+      class Custom < RelatedItemUpdateContent
+      end
+      class Unknown < RelatedItemUpdateContent
+      end
+    end
+
     class RequiredCaseRule
       include Smithy::Schema::Structure
 
@@ -1996,11 +2142,13 @@ module Aws::ConnectCases
       def initialize: (
         ?next_token: String,
         ?cases: Array[Types::SearchCasesResponseItem?],
+        ?total_count: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor next_token: String?
       attr_accessor cases: Array[Types::SearchCasesResponseItem?]?
+      attr_accessor total_count: Integer?
     end
 
     class SearchCasesResponseItem
@@ -2195,6 +2343,35 @@ module Aws::ConnectCases
       attr_accessor sort_order: String?
     end
 
+    class TagFilter
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?equal_to: Types::TagValue,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor equal_to: Types::TagValue?
+
+      class EqualTo < TagFilter
+      end
+      class Unknown < TagFilter
+      end
+    end
+
+    class TagPropagationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?tag_map: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor tag_map: Hash[String, String]?
+    end
+
     class TagResourceInput
       include Smithy::Schema::Structure
 
@@ -2206,6 +2383,19 @@ module Aws::ConnectCases
 
       attr_accessor arn: String?
       attr_accessor tags: Hash[String, String?]?
+    end
+
+    class TagValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
     end
 
     class TemplateRule
@@ -2229,6 +2419,7 @@ module Aws::ConnectCases
         ?template_arn: String,
         ?name: String,
         ?status: String,
+        ?tag_propagation_configurations: Array[Types::TagPropagationConfiguration],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2236,6 +2427,18 @@ module Aws::ConnectCases
       attr_accessor template_arn: String?
       attr_accessor name: String?
       attr_accessor status: String?
+      attr_accessor tag_propagation_configurations: Array[Types::TagPropagationConfiguration]?
+    end
+
+    class TextAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?is_multiline: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor is_multiline: bool?
     end
 
     class ThrottlingException
@@ -2324,6 +2527,7 @@ module Aws::ConnectCases
         ?field_id: String,
         ?name: String,
         ?description: String,
+        ?attributes: Types::FieldAttributes,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2331,6 +2535,7 @@ module Aws::ConnectCases
       attr_accessor field_id: String?
       attr_accessor name: String?
       attr_accessor description: String?
+      attr_accessor attributes: Types::FieldAttributes?
     end
 
     class UpdateFieldOutput
@@ -2368,6 +2573,50 @@ module Aws::ConnectCases
 
     end
 
+    class UpdateRelatedItemRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?case_id: String,
+        ?related_item_id: String,
+        ?content: Types::RelatedItemUpdateContent,
+        ?performed_by: Types::UserUnion,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor case_id: String?
+      attr_accessor related_item_id: String?
+      attr_accessor content: Types::RelatedItemUpdateContent?
+      attr_accessor performed_by: Types::UserUnion?
+    end
+
+    class UpdateRelatedItemResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?related_item_id: String,
+        ?related_item_arn: String,
+        ?type: String,
+        ?content: Types::RelatedItemContent,
+        ?association_time: Time,
+        ?tags: Hash[String, String?],
+        ?last_updated_user: Types::UserUnion,
+        ?created_by: Types::UserUnion,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor related_item_id: String?
+      attr_accessor related_item_arn: String?
+      attr_accessor type: String?
+      attr_accessor content: Types::RelatedItemContent?
+      attr_accessor association_time: Time?
+      attr_accessor tags: Hash[String, String?]?
+      attr_accessor last_updated_user: Types::UserUnion?
+      attr_accessor created_by: Types::UserUnion?
+    end
+
     class UpdateTemplateInput
       include Smithy::Schema::Structure
 
@@ -2380,6 +2629,7 @@ module Aws::ConnectCases
         ?required_fields: Array[Types::RequiredField],
         ?status: String,
         ?rules: Array[Types::TemplateRule],
+        ?tag_propagation_configurations: Array[Types::TagPropagationConfiguration],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2391,6 +2641,7 @@ module Aws::ConnectCases
       attr_accessor required_fields: Array[Types::RequiredField]?
       attr_accessor status: String?
       attr_accessor rules: Array[Types::TemplateRule]?
+      attr_accessor tag_propagation_configurations: Array[Types::TagPropagationConfiguration]?
     end
 
     class UpdateTemplateOutput

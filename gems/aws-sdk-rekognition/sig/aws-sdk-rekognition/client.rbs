@@ -669,6 +669,8 @@ module Aws::Rekognition
       def reference_image: () -> Types::AuditImage?
       def audit_images: () -> Array[Types::AuditImage]?
       def challenge: () -> Types::Challenge?
+      def feedback: () -> Array[Types::FeedbackItem]?
+      def metadata: () -> Types::SessionMetadata?
     end
     def get_face_liveness_session_results: (
       ?session_id: String

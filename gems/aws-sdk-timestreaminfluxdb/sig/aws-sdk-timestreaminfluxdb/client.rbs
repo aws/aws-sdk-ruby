@@ -44,6 +44,41 @@ module Aws::TimestreamInfluxDB
       ?validate_params: bool,
     ) -> void | (?Hash[Symbol, untyped]) -> void
 
+    interface _CreateDbBackupResponse
+      include Smithy::Client::_Response[Types::CreateDbBackupOutput]
+      def id: () -> String?
+      def name: () -> String?
+      def arn: () -> String?
+      def status: () -> String?
+      def created_at: () -> Time?
+      def expires_after: () -> String?
+      def db_resource_id: () -> String?
+      def type: () -> String?
+      def engine_type: () -> String?
+      def deployment_type: () -> String?
+      def kms_key_id: () -> String?
+      def cluster_configuration: () -> Types::ClusterConfiguration?
+      def db_parameter_group_id: () -> String?
+      def db_instance_type: () -> String?
+      def log_delivery_configuration: () -> Types::LogDeliveryConfiguration?
+      def failover_mode: () -> String?
+      def db_storage_type: () -> String?
+      def allocated_storage: () -> Integer?
+      def vpc_subnet_ids: () -> Array[String]?
+      def vpc_security_group_ids: () -> Array[String]?
+      def publicly_accessible: () -> bool?
+      def port: () -> Integer?
+      def network_type: () -> String?
+      def influx_auth_parameters_secret_arn: () -> String?
+      def maintenance_schedule: () -> Types::MaintenanceSchedule?
+    end
+    def create_db_backup: (
+      ?name: String,
+      ?db_resource_id: String,
+      ?retention_days: Integer,
+      ?tags: Hash[String, String]
+    ) -> _CreateDbBackupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDbBackupResponse
+
     interface _CreateDbClusterResponse
       include Smithy::Client::_Response[Types::CreateDbClusterOutput]
       def db_cluster_id: () -> String?
@@ -72,6 +107,19 @@ module Aws::TimestreamInfluxDB
           enabled: bool
         }
       },
+      ?maintenance_schedule: {
+        timezone: String,
+        preferred_maintenance_window: String
+      },
+      ?db_backup_configurations: Array[
+        {
+          type: String,
+          retention_days: Integer,
+          enabled: bool,
+          custom_schedule: String
+        }
+      ],
+      ?kms_key_id: String,
       ?tags: Hash[String, String]
     ) -> _CreateDbClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDbClusterResponse
 
@@ -98,6 +146,12 @@ module Aws::TimestreamInfluxDB
       def influx_auth_parameters_secret_arn: () -> String?
       def db_cluster_id: () -> String?
       def instance_mode: () -> String?
+      def instance_modes: () -> Array[String]?
+      def maintenance_schedule: () -> Types::MaintenanceSchedule?
+      def last_maintenance_time: () -> Time?
+      def next_maintenance_time: () -> Time?
+      def db_backup_configurations: () -> Array[Types::DbBackupConfigurationOutput]?
+      def kms_key_id: () -> String?
     end
     def create_db_instance: (
       ?name: String,
@@ -119,9 +173,22 @@ module Aws::TimestreamInfluxDB
           enabled: bool
         }
       },
+      ?maintenance_schedule: {
+        timezone: String,
+        preferred_maintenance_window: String
+      },
       ?tags: Hash[String, String],
       ?port: Integer,
-      ?network_type: String
+      ?network_type: String,
+      ?db_backup_configurations: Array[
+        {
+          type: String,
+          retention_days: Integer,
+          enabled: bool,
+          custom_schedule: String
+        }
+      ],
+      ?kms_key_id: String
     ) -> _CreateDbInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDbInstanceResponse
 
     interface _CreateDbParameterGroupResponse
@@ -174,17 +241,152 @@ module Aws::TimestreamInfluxDB
           storage_wal_max_concurrent_writes: untyped,
           storage_wal_max_write_delay: untyped,
           ui_disabled: untyped
+        },
+        influx_d_bv3_core: {
+          query_file_limit: untyped,
+          query_log_size: untyped,
+          log_filter: String,
+          log_format: String,
+          data_fusion_num_threads: untyped,
+          data_fusion_runtime_type: String,
+          data_fusion_runtime_disable_lifo_slot: untyped,
+          data_fusion_runtime_event_interval: untyped,
+          data_fusion_runtime_global_queue_interval: untyped,
+          data_fusion_runtime_max_blocking_threads: untyped,
+          data_fusion_runtime_max_io_events_per_tick: untyped,
+          data_fusion_runtime_thread_keep_alive: untyped,
+          data_fusion_runtime_thread_priority: untyped,
+          data_fusion_max_parquet_fanout: untyped,
+          data_fusion_use_cached_parquet_loader: untyped,
+          data_fusion_config: untyped,
+          max_http_request_size: untyped,
+          force_snapshot_mem_threshold: {
+            percent: untyped,
+            absolute: untyped
+          },
+          wal_snapshot_size: untyped,
+          wal_max_write_buffer_size: untyped,
+          snapshotted_wal_files_to_keep: untyped,
+          preemptive_cache_age: untyped,
+          parquet_mem_cache_prune_percentage: Float,
+          parquet_mem_cache_prune_interval: untyped,
+          disable_parquet_mem_cache: untyped,
+          parquet_mem_cache_query_path_duration: untyped,
+          last_cache_eviction_interval: untyped,
+          distinct_cache_eviction_interval: untyped,
+          gen1_duration: untyped,
+          exec_mem_pool_bytes: untyped,
+          parquet_mem_cache_size: untyped,
+          wal_replay_fail_on_error: untyped,
+          wal_replay_concurrency_limit: untyped,
+          table_index_cache_max_entries: untyped,
+          table_index_cache_concurrency_limit: untyped,
+          gen1_lookback_duration: untyped,
+          retention_check_interval: untyped,
+          delete_grace_period: untyped,
+          hard_delete_default_duration: untyped,
+          plugin_repository_url: untyped,
+          plugin_repository_secret_arn: String
+        },
+        influx_d_bv3_enterprise: {
+          query_file_limit: untyped,
+          query_log_size: untyped,
+          log_filter: untyped,
+          log_format: untyped,
+          data_fusion_num_threads: untyped,
+          data_fusion_runtime_type: untyped,
+          data_fusion_runtime_disable_lifo_slot: untyped,
+          data_fusion_runtime_event_interval: untyped,
+          data_fusion_runtime_global_queue_interval: untyped,
+          data_fusion_runtime_max_blocking_threads: untyped,
+          data_fusion_runtime_max_io_events_per_tick: untyped,
+          data_fusion_runtime_thread_keep_alive: untyped,
+          data_fusion_runtime_thread_priority: untyped,
+          data_fusion_max_parquet_fanout: untyped,
+          data_fusion_use_cached_parquet_loader: untyped,
+          data_fusion_config: untyped,
+          max_http_request_size: untyped,
+          force_snapshot_mem_threshold: untyped,
+          wal_snapshot_size: untyped,
+          wal_max_write_buffer_size: untyped,
+          snapshotted_wal_files_to_keep: untyped,
+          preemptive_cache_age: untyped,
+          parquet_mem_cache_prune_percentage: untyped,
+          parquet_mem_cache_prune_interval: untyped,
+          disable_parquet_mem_cache: untyped,
+          parquet_mem_cache_query_path_duration: untyped,
+          last_cache_eviction_interval: untyped,
+          distinct_cache_eviction_interval: untyped,
+          gen1_duration: untyped,
+          exec_mem_pool_bytes: untyped,
+          parquet_mem_cache_size: untyped,
+          wal_replay_fail_on_error: untyped,
+          wal_replay_concurrency_limit: untyped,
+          table_index_cache_max_entries: untyped,
+          table_index_cache_concurrency_limit: untyped,
+          gen1_lookback_duration: untyped,
+          retention_check_interval: untyped,
+          delete_grace_period: untyped,
+          hard_delete_default_duration: untyped,
+          plugin_repository_url: untyped,
+          plugin_repository_secret_arn: untyped,
+          ingest_query_instances: untyped,
+          query_only_instances: untyped,
+          dedicated_compactor: untyped,
+          compaction_row_limit: untyped,
+          compaction_max_num_files_per_plan: untyped,
+          compaction_gen2_duration: untyped,
+          compaction_multipliers: untyped,
+          compaction_cleanup_wait: untyped,
+          compaction_check_interval: untyped,
+          last_value_cache_disable_from_history: untyped,
+          distinct_value_cache_disable_from_history: untyped,
+          replication_interval: untyped,
+          catalog_sync_interval: untyped
         }
       },
       ?tags: Hash[String, String]
     ) -> _CreateDbParameterGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDbParameterGroupResponse
+
+    interface _DeleteDbBackupResponse
+      include Smithy::Client::_Response[Types::DeleteDbBackupOutput]
+      def id: () -> String?
+      def name: () -> String?
+      def arn: () -> String?
+      def status: () -> String?
+      def created_at: () -> Time?
+      def expires_after: () -> String?
+      def db_resource_id: () -> String?
+      def type: () -> String?
+      def engine_type: () -> String?
+      def deployment_type: () -> String?
+      def kms_key_id: () -> String?
+      def cluster_configuration: () -> Types::ClusterConfiguration?
+      def db_parameter_group_id: () -> String?
+      def db_instance_type: () -> String?
+      def log_delivery_configuration: () -> Types::LogDeliveryConfiguration?
+      def failover_mode: () -> String?
+      def db_storage_type: () -> String?
+      def allocated_storage: () -> Integer?
+      def vpc_subnet_ids: () -> Array[String]?
+      def vpc_security_group_ids: () -> Array[String]?
+      def publicly_accessible: () -> bool?
+      def port: () -> Integer?
+      def network_type: () -> String?
+      def influx_auth_parameters_secret_arn: () -> String?
+      def maintenance_schedule: () -> Types::MaintenanceSchedule?
+    end
+    def delete_db_backup: (
+      ?identifier: String
+    ) -> _DeleteDbBackupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDbBackupResponse
 
     interface _DeleteDbClusterResponse
       include Smithy::Client::_Response[Types::DeleteDbClusterOutput]
       def db_cluster_status: () -> String?
     end
     def delete_db_cluster: (
-      ?db_cluster_id: String
+      ?db_cluster_id: String,
+      ?retain_automated_backups: bool
     ) -> _DeleteDbClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDbClusterResponse
 
     interface _DeleteDbInstanceResponse
@@ -210,10 +412,49 @@ module Aws::TimestreamInfluxDB
       def influx_auth_parameters_secret_arn: () -> String?
       def db_cluster_id: () -> String?
       def instance_mode: () -> String?
+      def instance_modes: () -> Array[String]?
+      def maintenance_schedule: () -> Types::MaintenanceSchedule?
+      def last_maintenance_time: () -> Time?
+      def next_maintenance_time: () -> Time?
+      def db_backup_configurations: () -> Array[Types::DbBackupConfigurationOutput]?
+      def kms_key_id: () -> String?
     end
     def delete_db_instance: (
-      ?identifier: String
+      ?identifier: String,
+      ?retain_automated_backups: bool
     ) -> _DeleteDbInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDbInstanceResponse
+
+    interface _GetDbBackupResponse
+      include Smithy::Client::_Response[Types::GetDbBackupOutput]
+      def id: () -> String?
+      def name: () -> String?
+      def arn: () -> String?
+      def status: () -> String?
+      def created_at: () -> Time?
+      def expires_after: () -> String?
+      def db_resource_id: () -> String?
+      def type: () -> String?
+      def engine_type: () -> String?
+      def deployment_type: () -> String?
+      def kms_key_id: () -> String?
+      def cluster_configuration: () -> Types::ClusterConfiguration?
+      def db_parameter_group_id: () -> String?
+      def db_instance_type: () -> String?
+      def log_delivery_configuration: () -> Types::LogDeliveryConfiguration?
+      def failover_mode: () -> String?
+      def db_storage_type: () -> String?
+      def allocated_storage: () -> Integer?
+      def vpc_subnet_ids: () -> Array[String]?
+      def vpc_security_group_ids: () -> Array[String]?
+      def publicly_accessible: () -> bool?
+      def port: () -> Integer?
+      def network_type: () -> String?
+      def influx_auth_parameters_secret_arn: () -> String?
+      def maintenance_schedule: () -> Types::MaintenanceSchedule?
+    end
+    def get_db_backup: (
+      ?identifier: String
+    ) -> _GetDbBackupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDbBackupResponse
 
     interface _GetDbClusterResponse
       include Smithy::Client::_Response[Types::GetDbClusterOutput]
@@ -229,13 +470,21 @@ module Aws::TimestreamInfluxDB
       def network_type: () -> String?
       def db_storage_type: () -> String?
       def allocated_storage: () -> Integer?
+      def engine_type: () -> String?
       def publicly_accessible: () -> bool?
       def db_parameter_group_identifier: () -> String?
+      def effective_db_parameter_group_identifier: () -> String?
       def log_delivery_configuration: () -> Types::LogDeliveryConfiguration?
+      def maintenance_schedule: () -> Types::MaintenanceSchedule?
+      def last_maintenance_time: () -> Time?
+      def next_maintenance_time: () -> Time?
       def influx_auth_parameters_secret_arn: () -> String?
       def vpc_subnet_ids: () -> Array[String]?
       def vpc_security_group_ids: () -> Array[String]?
       def failover_mode: () -> String?
+      def cluster_configuration: () -> Types::ClusterConfiguration?
+      def db_backup_configurations: () -> Array[Types::DbBackupConfigurationOutput]?
+      def kms_key_id: () -> String?
     end
     def get_db_cluster: (
       ?db_cluster_id: String
@@ -264,6 +513,12 @@ module Aws::TimestreamInfluxDB
       def influx_auth_parameters_secret_arn: () -> String?
       def db_cluster_id: () -> String?
       def instance_mode: () -> String?
+      def instance_modes: () -> Array[String]?
+      def maintenance_schedule: () -> Types::MaintenanceSchedule?
+      def last_maintenance_time: () -> Time?
+      def next_maintenance_time: () -> Time?
+      def db_backup_configurations: () -> Array[Types::DbBackupConfigurationOutput]?
+      def kms_key_id: () -> String?
     end
     def get_db_instance: (
       ?identifier: String
@@ -280,6 +535,17 @@ module Aws::TimestreamInfluxDB
     def get_db_parameter_group: (
       ?identifier: String
     ) -> _GetDbParameterGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDbParameterGroupResponse
+
+    interface _ListDbBackupsResponse
+      include Smithy::Client::_Response[Types::ListDbBackupsOutput]
+      def items: () -> Array[Types::DbBackupSummary]?
+      def next_token: () -> String?
+    end
+    def list_db_backups: (
+      ?db_resource_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDbBackupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDbBackupsResponse
 
     interface _ListDbClustersResponse
       include Smithy::Client::_Response[Types::ListDbClustersOutput]
@@ -330,6 +596,90 @@ module Aws::TimestreamInfluxDB
       ?resource_arn: String
     ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
 
+    interface _RebootDbClusterResponse
+      include Smithy::Client::_Response[Types::RebootDbClusterOutput]
+      def db_cluster_status: () -> String?
+    end
+    def reboot_db_cluster: (
+      ?db_cluster_id: String,
+      ?instance_ids: Array[String]
+    ) -> _RebootDbClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RebootDbClusterResponse
+
+    interface _RebootDbInstanceResponse
+      include Smithy::Client::_Response[Types::RebootDbInstanceOutput]
+      def id: () -> String?
+      def name: () -> String?
+      def arn: () -> String?
+      def status: () -> String?
+      def endpoint: () -> String?
+      def port: () -> Integer?
+      def network_type: () -> String?
+      def db_instance_type: () -> String?
+      def db_storage_type: () -> String?
+      def allocated_storage: () -> Integer?
+      def deployment_type: () -> String?
+      def vpc_subnet_ids: () -> Array[String]?
+      def publicly_accessible: () -> bool?
+      def vpc_security_group_ids: () -> Array[String]?
+      def db_parameter_group_identifier: () -> String?
+      def availability_zone: () -> String?
+      def secondary_availability_zone: () -> String?
+      def log_delivery_configuration: () -> Types::LogDeliveryConfiguration?
+      def influx_auth_parameters_secret_arn: () -> String?
+      def db_cluster_id: () -> String?
+      def instance_mode: () -> String?
+      def instance_modes: () -> Array[String]?
+      def maintenance_schedule: () -> Types::MaintenanceSchedule?
+      def last_maintenance_time: () -> Time?
+      def next_maintenance_time: () -> Time?
+      def db_backup_configurations: () -> Array[Types::DbBackupConfigurationOutput]?
+      def kms_key_id: () -> String?
+    end
+    def reboot_db_instance: (
+      ?identifier: String
+    ) -> _RebootDbInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RebootDbInstanceResponse
+
+    interface _RestoreFromDbBackupResponse
+      include Smithy::Client::_Response[Types::RestoreFromDbBackupOutput]
+      def restored_db_resource_id: () -> String?
+      def restore_status: () -> String?
+      def resource_type: () -> String?
+      def engine_type: () -> String?
+      def deployment_type: () -> String?
+    end
+    def restore_from_db_backup: (
+      ?name: String,
+      ?db_backup_id: String,
+      ?restore_to_time: Time,
+      ?restore_mode: String,
+      ?vpc_subnet_ids: Array[String],
+      ?vpc_security_group_ids: Array[String],
+      ?publicly_accessible: bool,
+      ?log_delivery_configuration: {
+        s3_configuration: {
+          bucket_name: String,
+          enabled: bool
+        }
+      },
+      ?maintenance_schedule: {
+        timezone: String,
+        preferred_maintenance_window: String
+      },
+      ?tags: Hash[String, String],
+      ?port: Integer,
+      ?network_type: String,
+      ?deployment_type: String,
+      ?db_backup_configurations: Array[
+        {
+          type: String,
+          retention_days: Integer,
+          enabled: bool,
+          custom_schedule: String
+        }
+      ],
+      ?kms_key_id: String
+    ) -> _RestoreFromDbBackupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RestoreFromDbBackupResponse
+
     interface _TagResourceResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
     end
@@ -361,7 +711,19 @@ module Aws::TimestreamInfluxDB
       ?db_parameter_group_identifier: String,
       ?port: Integer,
       ?db_instance_type: String,
-      ?failover_mode: String
+      ?failover_mode: String,
+      ?maintenance_schedule: {
+        timezone: String,
+        preferred_maintenance_window: String
+      },
+      ?db_backup_configurations: Array[
+        {
+          type: String,
+          retention_days: Integer,
+          enabled: bool,
+          custom_schedule: String
+        }
+      ]
     ) -> _UpdateDbClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDbClusterResponse
 
     interface _UpdateDbInstanceResponse
@@ -387,6 +749,12 @@ module Aws::TimestreamInfluxDB
       def influx_auth_parameters_secret_arn: () -> String?
       def db_cluster_id: () -> String?
       def instance_mode: () -> String?
+      def instance_modes: () -> Array[String]?
+      def maintenance_schedule: () -> Types::MaintenanceSchedule?
+      def last_maintenance_time: () -> Time?
+      def next_maintenance_time: () -> Time?
+      def db_backup_configurations: () -> Array[Types::DbBackupConfigurationOutput]?
+      def kms_key_id: () -> String?
     end
     def update_db_instance: (
       ?identifier: String,
@@ -401,7 +769,19 @@ module Aws::TimestreamInfluxDB
       ?db_instance_type: String,
       ?deployment_type: String,
       ?db_storage_type: String,
-      ?allocated_storage: Integer
+      ?allocated_storage: Integer,
+      ?maintenance_schedule: {
+        timezone: String,
+        preferred_maintenance_window: String
+      },
+      ?db_backup_configurations: Array[
+        {
+          type: String,
+          retention_days: Integer,
+          enabled: bool,
+          custom_schedule: String
+        }
+      ]
     ) -> _UpdateDbInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDbInstanceResponse
   end
 end

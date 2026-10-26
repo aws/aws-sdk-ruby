@@ -6,6 +6,7 @@ module Aws::S3
   # This module contains a schema composed of shapes used by the client.
   module Schema
 
+    AbacStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#AbacStatus", name: "AbacStatus")
     AbortDate = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.s3#AbortDate", name: "AbortDate")
     AbortIncompleteMultipartUpload = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#AbortIncompleteMultipartUpload", name: "AbortIncompleteMultipartUpload")
     AbortMultipartUploadOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#AbortMultipartUploadOutput", name: "AbortMultipartUploadOutput")
@@ -15,6 +16,7 @@ module Aws::S3
     AcceptRanges = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#AcceptRanges", name: "AcceptRanges")
     AccessControlPolicy = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#AccessControlPolicy", name: "AccessControlPolicy")
     AccessControlTranslation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#AccessControlTranslation", name: "AccessControlTranslation")
+    AccessDenied = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#AccessDenied", name: "AccessDenied", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 403})
     AccessKeyIdValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#AccessKeyIdValue", name: "AccessKeyIdValue")
     AccessPointAlias = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.s3#AccessPointAlias", name: "AccessPointAlias")
     AccessPointArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#AccessPointArn", name: "AccessPointArn")
@@ -34,9 +36,23 @@ module Aws::S3
     AnalyticsId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#AnalyticsId", name: "AnalyticsId")
     AnalyticsS3BucketDestination = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#AnalyticsS3BucketDestination", name: "AnalyticsS3BucketDestination")
     AnalyticsS3ExportFileFormat = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#AnalyticsS3ExportFileFormat", name: "AnalyticsS3ExportFileFormat")
+    AnnotationConfigurationState = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#AnnotationConfigurationState", name: "AnnotationConfigurationState")
+    AnnotationCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.s3#AnnotationCount", name: "AnnotationCount")
+    AnnotationDirective = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#AnnotationDirective", name: "AnnotationDirective")
+    AnnotationEntry = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#AnnotationEntry", name: "AnnotationEntry")
+    AnnotationLimitExceeded = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#AnnotationLimitExceeded", name: "AnnotationLimitExceeded", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
+    AnnotationList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.s3#AnnotationList", name: "AnnotationList")
+    AnnotationName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#AnnotationName", name: "AnnotationName")
+    AnnotationNameTooLong = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#AnnotationNameTooLong", name: "AnnotationNameTooLong", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
+    AnnotationPrefix = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#AnnotationPrefix", name: "AnnotationPrefix")
+    AnnotationTableConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#AnnotationTableConfiguration", name: "AnnotationTableConfiguration")
+    AnnotationTableConfigurationResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#AnnotationTableConfigurationResult", name: "AnnotationTableConfigurationResult")
+    AnnotationTableConfigurationUpdates = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#AnnotationTableConfigurationUpdates", name: "AnnotationTableConfigurationUpdates")
     ArchiveStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#ArchiveStatus", name: "ArchiveStatus")
+    BlockedEncryptionTypes = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#BlockedEncryptionTypes", name: "BlockedEncryptionTypes")
     Body = ::Smithy::Schema::Shapes::BlobShape.new(id: "com.amazonaws.s3#Body", name: "Body")
     Bucket = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#Bucket", name: "Bucket")
+    BucketAbacStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#BucketAbacStatus", name: "BucketAbacStatus")
     BucketAccelerateStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#BucketAccelerateStatus", name: "BucketAccelerateStatus")
     BucketAlreadyExists = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#BucketAlreadyExists", name: "BucketAlreadyExists", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 409})
     BucketAlreadyOwnedByYou = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#BucketAlreadyOwnedByYou", name: "BucketAlreadyOwnedByYou", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 409})
@@ -49,6 +65,7 @@ module Aws::S3
     BucketLoggingStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#BucketLoggingStatus", name: "BucketLoggingStatus")
     BucketLogsPermission = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#BucketLogsPermission", name: "BucketLogsPermission")
     BucketName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#BucketName", name: "BucketName")
+    BucketNamespace = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#BucketNamespace", name: "BucketNamespace")
     BucketRegion = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#BucketRegion", name: "BucketRegion")
     BucketType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#BucketType", name: "BucketType")
     BucketVersioningStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#BucketVersioningStatus", name: "BucketVersioningStatus")
@@ -69,10 +86,15 @@ module Aws::S3
     ChecksumCRC32 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#ChecksumCRC32", name: "ChecksumCRC32")
     ChecksumCRC32C = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#ChecksumCRC32C", name: "ChecksumCRC32C")
     ChecksumCRC64NVME = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#ChecksumCRC64NVME", name: "ChecksumCRC64NVME")
+    ChecksumMD5 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#ChecksumMD5", name: "ChecksumMD5")
     ChecksumMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#ChecksumMode", name: "ChecksumMode")
     ChecksumSHA1 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#ChecksumSHA1", name: "ChecksumSHA1")
     ChecksumSHA256 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#ChecksumSHA256", name: "ChecksumSHA256")
+    ChecksumSHA512 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#ChecksumSHA512", name: "ChecksumSHA512")
     ChecksumType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#ChecksumType", name: "ChecksumType")
+    ChecksumXXHASH128 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#ChecksumXXHASH128", name: "ChecksumXXHASH128")
+    ChecksumXXHASH3 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#ChecksumXXHASH3", name: "ChecksumXXHASH3")
+    ChecksumXXHASH64 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#ChecksumXXHASH64", name: "ChecksumXXHASH64")
     ClientToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#ClientToken", name: "ClientToken")
     Code = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#Code", name: "Code")
     Comments = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#Comments", name: "Comments")
@@ -145,6 +167,8 @@ module Aws::S3
     DeleteMarkerReplicationStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#DeleteMarkerReplicationStatus", name: "DeleteMarkerReplicationStatus")
     DeleteMarkerVersionId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#DeleteMarkerVersionId", name: "DeleteMarkerVersionId")
     DeleteMarkers = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.s3#DeleteMarkers", name: "DeleteMarkers")
+    DeleteObjectAnnotationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#DeleteObjectAnnotationOutput", name: "DeleteObjectAnnotationOutput")
+    DeleteObjectAnnotationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#DeleteObjectAnnotationRequest", name: "DeleteObjectAnnotationRequest")
     DeleteObjectOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#DeleteObjectOutput", name: "DeleteObjectOutput")
     DeleteObjectRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#DeleteObjectRequest", name: "DeleteObjectRequest")
     DeleteObjectTaggingOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#DeleteObjectTaggingOutput", name: "DeleteObjectTaggingOutput")
@@ -166,6 +190,8 @@ module Aws::S3
     EncodingType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#EncodingType", name: "EncodingType")
     Encryption = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#Encryption", name: "Encryption")
     EncryptionConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#EncryptionConfiguration", name: "EncryptionConfiguration")
+    EncryptionType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#EncryptionType", name: "EncryptionType")
+    EncryptionTypeList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.s3#EncryptionTypeList", name: "EncryptionTypeList")
     EncryptionTypeMismatch = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#EncryptionTypeMismatch", name: "EncryptionTypeMismatch", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     End = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.s3#End", name: "End")
     EndEvent = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#EndEvent", name: "EndEvent")
@@ -177,6 +203,7 @@ module Aws::S3
     Errors = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.s3#Errors", name: "Errors")
     Event = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#Event", name: "Event")
     EventBridgeConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#EventBridgeConfiguration", name: "EventBridgeConfiguration")
+    EventHoldDuration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#EventHoldDuration", name: "EventHoldDuration")
     EventList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.s3#EventList", name: "EventList")
     ExistingObjectReplication = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#ExistingObjectReplication", name: "ExistingObjectReplication")
     ExistingObjectReplicationStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#ExistingObjectReplicationStatus", name: "ExistingObjectReplicationStatus")
@@ -196,6 +223,8 @@ module Aws::S3
     FilterRuleList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.s3#FilterRuleList", name: "FilterRuleList")
     FilterRuleName = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#FilterRuleName", name: "FilterRuleName")
     FilterRuleValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#FilterRuleValue", name: "FilterRuleValue")
+    GetBucketAbacOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetBucketAbacOutput", name: "GetBucketAbacOutput")
+    GetBucketAbacRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetBucketAbacRequest", name: "GetBucketAbacRequest")
     GetBucketAccelerateConfigurationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetBucketAccelerateConfigurationOutput", name: "GetBucketAccelerateConfigurationOutput", traits: {"smithy.api#xmlName" => "AccelerateConfiguration"})
     GetBucketAccelerateConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetBucketAccelerateConfigurationRequest", name: "GetBucketAccelerateConfigurationRequest")
     GetBucketAclOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetBucketAclOutput", name: "GetBucketAclOutput", traits: {"smithy.api#xmlName" => "AccessControlPolicy"})
@@ -244,6 +273,8 @@ module Aws::S3
     GetBucketWebsiteRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetBucketWebsiteRequest", name: "GetBucketWebsiteRequest")
     GetObjectAclOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetObjectAclOutput", name: "GetObjectAclOutput", traits: {"smithy.api#xmlName" => "AccessControlPolicy"})
     GetObjectAclRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetObjectAclRequest", name: "GetObjectAclRequest")
+    GetObjectAnnotationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetObjectAnnotationOutput", name: "GetObjectAnnotationOutput")
+    GetObjectAnnotationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetObjectAnnotationRequest", name: "GetObjectAnnotationRequest")
     GetObjectAttributesOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetObjectAttributesOutput", name: "GetObjectAttributesOutput", traits: {"smithy.api#xmlName" => "GetObjectAttributesResponse"})
     GetObjectAttributesParts = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetObjectAttributesParts", name: "GetObjectAttributesParts")
     GetObjectAttributesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#GetObjectAttributesRequest", name: "GetObjectAttributesRequest")
@@ -299,7 +330,9 @@ module Aws::S3
     IntelligentTieringFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#IntelligentTieringFilter", name: "IntelligentTieringFilter")
     IntelligentTieringId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#IntelligentTieringId", name: "IntelligentTieringId")
     IntelligentTieringStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#IntelligentTieringStatus", name: "IntelligentTieringStatus")
+    InvalidAnnotationName = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#InvalidAnnotationName", name: "InvalidAnnotationName", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     InvalidObjectState = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#InvalidObjectState", name: "InvalidObjectState", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 403})
+    InvalidPrefix = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#InvalidPrefix", name: "InvalidPrefix", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     InvalidRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#InvalidRequest", name: "InvalidRequest", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     InvalidWriteOffset = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#InvalidWriteOffset", name: "InvalidWriteOffset", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     InventoryConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#InventoryConfiguration", name: "InventoryConfiguration")
@@ -359,6 +392,8 @@ module Aws::S3
     ListDirectoryBucketsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#ListDirectoryBucketsRequest", name: "ListDirectoryBucketsRequest")
     ListMultipartUploadsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#ListMultipartUploadsOutput", name: "ListMultipartUploadsOutput", traits: {"smithy.api#xmlName" => "ListMultipartUploadsResult"})
     ListMultipartUploadsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#ListMultipartUploadsRequest", name: "ListMultipartUploadsRequest")
+    ListObjectAnnotationsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#ListObjectAnnotationsOutput", name: "ListObjectAnnotationsOutput")
+    ListObjectAnnotationsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#ListObjectAnnotationsRequest", name: "ListObjectAnnotationsRequest")
     ListObjectVersionsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#ListObjectVersionsOutput", name: "ListObjectVersionsOutput", traits: {"smithy.api#xmlName" => "ListVersionsResult"})
     ListObjectVersionsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#ListObjectVersionsRequest", name: "ListObjectVersionsRequest")
     ListObjectsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#ListObjectsOutput", name: "ListObjectsOutput", traits: {"smithy.api#xmlName" => "ListBucketResult"})
@@ -378,6 +413,7 @@ module Aws::S3
     MFADeleteStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#MFADeleteStatus", name: "MFADeleteStatus")
     Marker = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#Marker", name: "Marker")
     MaxAgeSeconds = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.s3#MaxAgeSeconds", name: "MaxAgeSeconds")
+    MaxAnnotationResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.s3#MaxAnnotationResults", name: "MaxAnnotationResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 1000}})
     MaxBuckets = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.s3#MaxBuckets", name: "MaxBuckets", traits: {"smithy.api#range" => {"min" => 1, "max" => 10000}})
     MaxDirectoryBuckets = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.s3#MaxDirectoryBuckets", name: "MaxDirectoryBuckets", traits: {"smithy.api#range" => {"min" => 0, "max" => 1000}})
     MaxKeys = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.s3#MaxKeys", name: "MaxKeys")
@@ -414,9 +450,11 @@ module Aws::S3
     NextToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#NextToken", name: "NextToken")
     NextUploadIdMarker = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#NextUploadIdMarker", name: "NextUploadIdMarker")
     NextVersionIdMarker = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#NextVersionIdMarker", name: "NextVersionIdMarker")
+    NoSuchAnnotation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#NoSuchAnnotation", name: "NoSuchAnnotation", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 404})
     NoSuchBucket = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#NoSuchBucket", name: "NoSuchBucket", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 404})
     NoSuchKey = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#NoSuchKey", name: "NoSuchKey", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 404})
     NoSuchUpload = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#NoSuchUpload", name: "NoSuchUpload", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 404})
+    NonEmptyKmsKeyArnString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#NonEmptyKmsKeyArnString", name: "NonEmptyKmsKeyArnString", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "^arn:aws[a-zA-Z0-9-]*:kms:[a-z0-9-]+:[0-9]{12}:key/[a-zA-Z0-9-]+$", "smithy.api#sensitive" => {}})
     NoncurrentVersionExpiration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#NoncurrentVersionExpiration", name: "NoncurrentVersionExpiration")
     NoncurrentVersionTransition = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#NoncurrentVersionTransition", name: "NoncurrentVersionTransition")
     NoncurrentVersionTransitionList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.s3#NoncurrentVersionTransitionList", name: "NoncurrentVersionTransitionList")
@@ -429,13 +467,18 @@ module Aws::S3
     ObjectAttributes = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#ObjectAttributes", name: "ObjectAttributes")
     ObjectAttributesList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.s3#ObjectAttributesList", name: "ObjectAttributesList")
     ObjectCannedACL = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#ObjectCannedACL", name: "ObjectCannedACL")
+    ObjectEncryption = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.s3#ObjectEncryption", name: "ObjectEncryption")
     ObjectIdentifier = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#ObjectIdentifier", name: "ObjectIdentifier")
     ObjectIdentifierList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.s3#ObjectIdentifierList", name: "ObjectIdentifierList")
+    ObjectIfMatch = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#ObjectIfMatch", name: "ObjectIfMatch")
     ObjectKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#ObjectKey", name: "ObjectKey", traits: {"smithy.api#length" => {"min" => 1}})
     ObjectList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.s3#ObjectList", name: "ObjectList")
     ObjectLockConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#ObjectLockConfiguration", name: "ObjectLockConfiguration")
     ObjectLockEnabled = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#ObjectLockEnabled", name: "ObjectLockEnabled")
     ObjectLockEnabledForBucket = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.s3#ObjectLockEnabledForBucket", name: "ObjectLockEnabledForBucket")
+    ObjectLockEventHold = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#ObjectLockEventHold", name: "ObjectLockEventHold")
+    ObjectLockEventHoldDurationDays = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.s3#ObjectLockEventHoldDurationDays", name: "ObjectLockEventHoldDurationDays")
+    ObjectLockEventHoldDurationYears = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.s3#ObjectLockEventHoldDurationYears", name: "ObjectLockEventHoldDurationYears")
     ObjectLockLegalHold = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#ObjectLockLegalHold", name: "ObjectLockLegalHold")
     ObjectLockLegalHoldStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#ObjectLockLegalHoldStatus", name: "ObjectLockLegalHoldStatus")
     ObjectLockMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#ObjectLockMode", name: "ObjectLockMode")
@@ -483,6 +526,7 @@ module Aws::S3
     ProgressEvent = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#ProgressEvent", name: "ProgressEvent")
     Protocol = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#Protocol", name: "Protocol")
     PublicAccessBlockConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#PublicAccessBlockConfiguration", name: "PublicAccessBlockConfiguration")
+    PutBucketAbacRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#PutBucketAbacRequest", name: "PutBucketAbacRequest")
     PutBucketAccelerateConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#PutBucketAccelerateConfigurationRequest", name: "PutBucketAccelerateConfigurationRequest")
     PutBucketAclRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#PutBucketAclRequest", name: "PutBucketAclRequest")
     PutBucketAnalyticsConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#PutBucketAnalyticsConfigurationRequest", name: "PutBucketAnalyticsConfigurationRequest")
@@ -504,6 +548,8 @@ module Aws::S3
     PutBucketWebsiteRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#PutBucketWebsiteRequest", name: "PutBucketWebsiteRequest")
     PutObjectAclOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#PutObjectAclOutput", name: "PutObjectAclOutput")
     PutObjectAclRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#PutObjectAclRequest", name: "PutObjectAclRequest")
+    PutObjectAnnotationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#PutObjectAnnotationOutput", name: "PutObjectAnnotationOutput")
+    PutObjectAnnotationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#PutObjectAnnotationRequest", name: "PutObjectAnnotationRequest")
     PutObjectLegalHoldOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#PutObjectLegalHoldOutput", name: "PutObjectLegalHoldOutput")
     PutObjectLegalHoldRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#PutObjectLegalHoldRequest", name: "PutObjectLegalHoldRequest")
     PutObjectLockConfigurationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#PutObjectLockConfigurationOutput", name: "PutObjectLockConfigurationOutput")
@@ -589,6 +635,7 @@ module Aws::S3
     SSECustomerKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#SSECustomerKey", name: "SSECustomerKey", traits: {"smithy.api#sensitive" => {}})
     SSECustomerKeyMD5 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#SSECustomerKeyMD5", name: "SSECustomerKeyMD5")
     SSEKMS = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#SSEKMS", name: "SSEKMS", traits: {"smithy.api#xmlName" => "SSE-KMS"})
+    SSEKMSEncryption = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#SSEKMSEncryption", name: "SSEKMSEncryption", traits: {"smithy.api#xmlName" => "SSE-KMS"})
     SSEKMSEncryptionContext = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#SSEKMSEncryptionContext", name: "SSEKMSEncryptionContext", traits: {"smithy.api#sensitive" => {}})
     SSEKMSKeyId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#SSEKMSKeyId", name: "SSEKMSKeyId", traits: {"smithy.api#sensitive" => {}})
     SSES3 = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#SSES3", name: "SSES3", traits: {"smithy.api#xmlName" => "SSE-S3"})
@@ -649,8 +696,12 @@ module Aws::S3
     TransitionStorageClass = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#TransitionStorageClass", name: "TransitionStorageClass")
     Type = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3#Type", name: "Type")
     URI = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#URI", name: "URI")
+    UnsupportedMediaType = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#UnsupportedMediaType", name: "UnsupportedMediaType", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 415})
+    UpdateBucketMetadataAnnotationTableConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#UpdateBucketMetadataAnnotationTableConfigurationRequest", name: "UpdateBucketMetadataAnnotationTableConfigurationRequest")
     UpdateBucketMetadataInventoryTableConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#UpdateBucketMetadataInventoryTableConfigurationRequest", name: "UpdateBucketMetadataInventoryTableConfigurationRequest")
     UpdateBucketMetadataJournalTableConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#UpdateBucketMetadataJournalTableConfigurationRequest", name: "UpdateBucketMetadataJournalTableConfigurationRequest")
+    UpdateObjectEncryptionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#UpdateObjectEncryptionRequest", name: "UpdateObjectEncryptionRequest")
+    UpdateObjectEncryptionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#UpdateObjectEncryptionResponse", name: "UpdateObjectEncryptionResponse")
     UploadIdMarker = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3#UploadIdMarker", name: "UploadIdMarker")
     UploadPartCopyOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#UploadPartCopyOutput", name: "UploadPartCopyOutput")
     UploadPartCopyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3#UploadPartCopyRequest", name: "UploadPartCopyRequest")
@@ -667,6 +718,8 @@ module Aws::S3
     WriteOffsetBytes = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.s3#WriteOffsetBytes", name: "WriteOffsetBytes")
     Years = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.s3#Years", name: "Years")
 
+    AbacStatus.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketAbacStatus, name: "Status"))
+    AbacStatus.type = Types::AbacStatus
     AbortIncompleteMultipartUpload.add_member(:days_after_initiation, ::Smithy::Schema::Shapes::MemberShape.new(target: DaysAfterInitiation, name: "DaysAfterInitiation"))
     AbortIncompleteMultipartUpload.type = Types::AbortIncompleteMultipartUpload
     AbortMultipartUploadOutput.add_member(:request_charged, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestCharged, name: "RequestCharged", traits: {"smithy.api#httpHeader" => "x-amz-request-charged"}))
@@ -685,6 +738,7 @@ module Aws::S3
     AccessControlPolicy.type = Types::AccessControlPolicy
     AccessControlTranslation.add_member(:owner, ::Smithy::Schema::Shapes::MemberShape.new(target: OwnerOverride, name: "Owner", traits: {"smithy.api#required" => {}}))
     AccessControlTranslation.type = Types::AccessControlTranslation
+    AccessDenied.type = Types::AccessDenied
     AllowedHeaders.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedHeader, name: "member"))
     AllowedMethods.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedMethod, name: "member"))
     AllowedOrigins.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedOrigin, name: "member"))
@@ -709,13 +763,46 @@ module Aws::S3
     AnalyticsS3BucketDestination.add_member(:prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: Prefix, name: "Prefix"))
     AnalyticsS3BucketDestination.type = Types::AnalyticsS3BucketDestination
     AnalyticsS3ExportFileFormat.add_member(:csv, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CSV", traits: {"smithy.api#enumValue" => "CSV"}))
+    AnnotationConfigurationState.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
+    AnnotationConfigurationState.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
+    AnnotationDirective.add_member(:copy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COPY", traits: {"smithy.api#enumValue" => "COPY"}))
+    AnnotationDirective.add_member(:exclude, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXCLUDE", traits: {"smithy.api#enumValue" => "EXCLUDE"}))
+    AnnotationEntry.add_member(:annotation_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AnnotationName, name: "AnnotationName", traits: {"smithy.api#required" => {}}))
+    AnnotationEntry.add_member(:last_modified, ::Smithy::Schema::Shapes::MemberShape.new(target: LastModified, name: "LastModified", traits: {"smithy.api#required" => {}}))
+    AnnotationEntry.add_member(:e_tag, ::Smithy::Schema::Shapes::MemberShape.new(target: ETag, name: "ETag"))
+    AnnotationEntry.add_member(:checksum_algorithm, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumAlgorithmList, name: "ChecksumAlgorithm", traits: {"smithy.api#xmlFlattened" => {}}))
+    AnnotationEntry.add_member(:size, ::Smithy::Schema::Shapes::MemberShape.new(target: Size, name: "Size", traits: {"smithy.api#required" => {}}))
+    AnnotationEntry.add_member(:replication_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationStatus, name: "ReplicationStatus"))
+    AnnotationEntry.type = Types::AnnotationEntry
+    AnnotationLimitExceeded.type = Types::AnnotationLimitExceeded
+    AnnotationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnnotationEntry, name: "member", traits: {"smithy.api#xmlName" => "AnnotationEntry"}))
+    AnnotationNameTooLong.type = Types::AnnotationNameTooLong
+    AnnotationTableConfiguration.add_member(:configuration_state, ::Smithy::Schema::Shapes::MemberShape.new(target: AnnotationConfigurationState, name: "ConfigurationState", traits: {"smithy.api#required" => {}}))
+    AnnotationTableConfiguration.add_member(:encryption_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataTableEncryptionConfiguration, name: "EncryptionConfiguration"))
+    AnnotationTableConfiguration.add_member(:role, ::Smithy::Schema::Shapes::MemberShape.new(target: Role, name: "Role"))
+    AnnotationTableConfiguration.type = Types::AnnotationTableConfiguration
+    AnnotationTableConfigurationResult.add_member(:configuration_state, ::Smithy::Schema::Shapes::MemberShape.new(target: AnnotationConfigurationState, name: "ConfigurationState", traits: {"smithy.api#required" => {}}))
+    AnnotationTableConfigurationResult.add_member(:table_status, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataTableStatus, name: "TableStatus"))
+    AnnotationTableConfigurationResult.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDetails, name: "Error"))
+    AnnotationTableConfigurationResult.add_member(:table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: S3TablesName, name: "TableName"))
+    AnnotationTableConfigurationResult.add_member(:table_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: S3TablesArn, name: "TableArn"))
+    AnnotationTableConfigurationResult.add_member(:role, ::Smithy::Schema::Shapes::MemberShape.new(target: Role, name: "Role"))
+    AnnotationTableConfigurationResult.type = Types::AnnotationTableConfigurationResult
+    AnnotationTableConfigurationUpdates.add_member(:configuration_state, ::Smithy::Schema::Shapes::MemberShape.new(target: AnnotationConfigurationState, name: "ConfigurationState", traits: {"smithy.api#required" => {}}))
+    AnnotationTableConfigurationUpdates.add_member(:encryption_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataTableEncryptionConfiguration, name: "EncryptionConfiguration"))
+    AnnotationTableConfigurationUpdates.add_member(:role, ::Smithy::Schema::Shapes::MemberShape.new(target: Role, name: "Role"))
+    AnnotationTableConfigurationUpdates.type = Types::AnnotationTableConfigurationUpdates
     ArchiveStatus.add_member(:archive_access, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ARCHIVE_ACCESS", traits: {"smithy.api#enumValue" => "ARCHIVE_ACCESS"}))
     ArchiveStatus.add_member(:deep_archive_access, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEEP_ARCHIVE_ACCESS", traits: {"smithy.api#enumValue" => "DEEP_ARCHIVE_ACCESS"}))
+    BlockedEncryptionTypes.add_member(:encryption_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionTypeList, name: "EncryptionType", traits: {"smithy.api#xmlFlattened" => {}}))
+    BlockedEncryptionTypes.type = Types::BlockedEncryptionTypes
     Bucket.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketName, name: "Name"))
     Bucket.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationDate, name: "CreationDate"))
     Bucket.add_member(:bucket_region, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketRegion, name: "BucketRegion"))
     Bucket.add_member(:bucket_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: S3RegionalOrS3ExpressBucketArnString, name: "BucketArn"))
     Bucket.type = Types::Bucket
+    BucketAbacStatus.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Enabled", traits: {"smithy.api#enumValue" => "Enabled"}))
+    BucketAbacStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Disabled", traits: {"smithy.api#enumValue" => "Disabled"}))
     BucketAccelerateStatus.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Enabled", traits: {"smithy.api#enumValue" => "Enabled"}))
     BucketAccelerateStatus.add_member(:suspended, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Suspended", traits: {"smithy.api#enumValue" => "Suspended"}))
     BucketAlreadyExists.type = Types::BucketAlreadyExists
@@ -731,6 +818,7 @@ module Aws::S3
     BucketLifecycleConfiguration.type = Types::BucketLifecycleConfiguration
     BucketLocationConstraint.add_member(:af_south_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "af_south_1", traits: {"smithy.api#enumValue" => "af-south-1"}))
     BucketLocationConstraint.add_member(:ap_east_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ap_east_1", traits: {"smithy.api#enumValue" => "ap-east-1"}))
+    BucketLocationConstraint.add_member(:ap_east_2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ap_east_2", traits: {"smithy.api#enumValue" => "ap-east-2"}))
     BucketLocationConstraint.add_member(:ap_northeast_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ap_northeast_1", traits: {"smithy.api#enumValue" => "ap-northeast-1"}))
     BucketLocationConstraint.add_member(:ap_northeast_2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ap_northeast_2", traits: {"smithy.api#enumValue" => "ap-northeast-2"}))
     BucketLocationConstraint.add_member(:ap_northeast_3, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ap_northeast_3", traits: {"smithy.api#enumValue" => "ap-northeast-3"}))
@@ -741,7 +829,10 @@ module Aws::S3
     BucketLocationConstraint.add_member(:ap_southeast_3, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ap_southeast_3", traits: {"smithy.api#enumValue" => "ap-southeast-3"}))
     BucketLocationConstraint.add_member(:ap_southeast_4, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ap_southeast_4", traits: {"smithy.api#enumValue" => "ap-southeast-4"}))
     BucketLocationConstraint.add_member(:ap_southeast_5, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ap_southeast_5", traits: {"smithy.api#enumValue" => "ap-southeast-5"}))
+    BucketLocationConstraint.add_member(:ap_southeast_6, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ap_southeast_6", traits: {"smithy.api#enumValue" => "ap-southeast-6"}))
+    BucketLocationConstraint.add_member(:ap_southeast_7, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ap_southeast_7", traits: {"smithy.api#enumValue" => "ap-southeast-7"}))
     BucketLocationConstraint.add_member(:ca_central_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ca_central_1", traits: {"smithy.api#enumValue" => "ca-central-1"}))
+    BucketLocationConstraint.add_member(:ca_west_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ca_west_1", traits: {"smithy.api#enumValue" => "ca-west-1"}))
     BucketLocationConstraint.add_member(:cn_north_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "cn_north_1", traits: {"smithy.api#enumValue" => "cn-north-1"}))
     BucketLocationConstraint.add_member(:cn_northwest_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "cn_northwest_1", traits: {"smithy.api#enumValue" => "cn-northwest-1"}))
     BucketLocationConstraint.add_member(:eu, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EU", traits: {"smithy.api#enumValue" => "EU"}))
@@ -756,6 +847,7 @@ module Aws::S3
     BucketLocationConstraint.add_member(:il_central_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "il_central_1", traits: {"smithy.api#enumValue" => "il-central-1"}))
     BucketLocationConstraint.add_member(:me_central_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "me_central_1", traits: {"smithy.api#enumValue" => "me-central-1"}))
     BucketLocationConstraint.add_member(:me_south_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "me_south_1", traits: {"smithy.api#enumValue" => "me-south-1"}))
+    BucketLocationConstraint.add_member(:mx_central_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "mx_central_1", traits: {"smithy.api#enumValue" => "mx-central-1"}))
     BucketLocationConstraint.add_member(:sa_east_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "sa_east_1", traits: {"smithy.api#enumValue" => "sa-east-1"}))
     BucketLocationConstraint.add_member(:us_east_2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "us_east_2", traits: {"smithy.api#enumValue" => "us-east-2"}))
     BucketLocationConstraint.add_member(:us_gov_east_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "us_gov_east_1", traits: {"smithy.api#enumValue" => "us-gov-east-1"}))
@@ -767,6 +859,8 @@ module Aws::S3
     BucketLogsPermission.add_member(:full_control, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FULL_CONTROL", traits: {"smithy.api#enumValue" => "FULL_CONTROL"}))
     BucketLogsPermission.add_member(:read, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "READ", traits: {"smithy.api#enumValue" => "READ"}))
     BucketLogsPermission.add_member(:write, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WRITE", traits: {"smithy.api#enumValue" => "WRITE"}))
+    BucketNamespace.add_member(:account_regional, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCOUNT_REGIONAL", traits: {"smithy.api#enumValue" => "account-regional"}))
+    BucketNamespace.add_member(:global, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GLOBAL", traits: {"smithy.api#enumValue" => "global"}))
     BucketType.add_member(:directory, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Directory", traits: {"smithy.api#enumValue" => "Directory"}))
     BucketVersioningStatus.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Enabled", traits: {"smithy.api#enumValue" => "Enabled"}))
     BucketVersioningStatus.add_member(:suspended, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Suspended", traits: {"smithy.api#enumValue" => "Suspended"}))
@@ -800,6 +894,11 @@ module Aws::S3
     Checksum.add_member(:checksum_crc64_nvme, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumCRC64NVME, name: "ChecksumCRC64NVME"))
     Checksum.add_member(:checksum_sha1, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumSHA1, name: "ChecksumSHA1"))
     Checksum.add_member(:checksum_sha256, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumSHA256, name: "ChecksumSHA256"))
+    Checksum.add_member(:checksum_sha512, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumSHA512, name: "ChecksumSHA512"))
+    Checksum.add_member(:checksum_md5, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumMD5, name: "ChecksumMD5"))
+    Checksum.add_member(:checksum_xxhash64, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumXXHASH64, name: "ChecksumXXHASH64"))
+    Checksum.add_member(:checksum_xxhash3, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumXXHASH3, name: "ChecksumXXHASH3"))
+    Checksum.add_member(:checksum_xxhash128, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumXXHASH128, name: "ChecksumXXHASH128"))
     Checksum.add_member(:checksum_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumType, name: "ChecksumType"))
     Checksum.type = Types::Checksum
     ChecksumAlgorithm.add_member(:crc32, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CRC32", traits: {"smithy.api#enumValue" => "CRC32"}))
@@ -807,6 +906,11 @@ module Aws::S3
     ChecksumAlgorithm.add_member(:sha1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SHA1", traits: {"smithy.api#enumValue" => "SHA1"}))
     ChecksumAlgorithm.add_member(:sha256, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SHA256", traits: {"smithy.api#enumValue" => "SHA256"}))
     ChecksumAlgorithm.add_member(:crc64_nvme, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CRC64NVME", traits: {"smithy.api#enumValue" => "CRC64NVME"}))
+    ChecksumAlgorithm.add_member(:sha512, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SHA512", traits: {"smithy.api#enumValue" => "SHA512"}))
+    ChecksumAlgorithm.add_member(:md5, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MD5", traits: {"smithy.api#enumValue" => "MD5"}))
+    ChecksumAlgorithm.add_member(:xxhash64, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "XXHASH64", traits: {"smithy.api#enumValue" => "XXHASH64"}))
+    ChecksumAlgorithm.add_member(:xxhash3, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "XXHASH3", traits: {"smithy.api#enumValue" => "XXHASH3"}))
+    ChecksumAlgorithm.add_member(:xxhash128, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "XXHASH128", traits: {"smithy.api#enumValue" => "XXHASH128"}))
     ChecksumAlgorithmList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumAlgorithm, name: "member"))
     ChecksumMode.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     ChecksumType.add_member(:composite, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPOSITE", traits: {"smithy.api#enumValue" => "COMPOSITE"}))
@@ -824,6 +928,11 @@ module Aws::S3
     CompleteMultipartUploadOutput.add_member(:checksum_crc64_nvme, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumCRC64NVME, name: "ChecksumCRC64NVME"))
     CompleteMultipartUploadOutput.add_member(:checksum_sha1, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumSHA1, name: "ChecksumSHA1"))
     CompleteMultipartUploadOutput.add_member(:checksum_sha256, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumSHA256, name: "ChecksumSHA256"))
+    CompleteMultipartUploadOutput.add_member(:checksum_sha512, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumSHA512, name: "ChecksumSHA512"))
+    CompleteMultipartUploadOutput.add_member(:checksum_md5, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumMD5, name: "ChecksumMD5"))
+    CompleteMultipartUploadOutput.add_member(:checksum_xxhash64, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumXXHASH64, name: "ChecksumXXHASH64"))
+    CompleteMultipartUploadOutput.add_member(:checksum_xxhash3, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumXXHASH3, name: "ChecksumXXHASH3"))
+    CompleteMultipartUploadOutput.add_member(:checksum_xxhash128, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumXXHASH128, name: "ChecksumXXHASH128"))
     CompleteMultipartUploadOutput.add_member(:checksum_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumType, name: "ChecksumType"))
     CompleteMultipartUploadOutput.add_member(:server_side_encryption, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerSideEncryption, name: "ServerSideEncryption", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption"}))
     CompleteMultipartUploadOutput.add_member(:version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectVersionId, name: "VersionId", traits: {"smithy.api#httpHeader" => "x-amz-version-id"}))
@@ -840,6 +949,11 @@ module Aws::S3
     CompleteMultipartUploadRequest.add_member(:checksum_crc64_nvme, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumCRC64NVME, name: "ChecksumCRC64NVME", traits: {"smithy.api#httpHeader" => "x-amz-checksum-crc64nvme"}))
     CompleteMultipartUploadRequest.add_member(:checksum_sha1, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumSHA1, name: "ChecksumSHA1", traits: {"smithy.api#httpHeader" => "x-amz-checksum-sha1"}))
     CompleteMultipartUploadRequest.add_member(:checksum_sha256, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumSHA256, name: "ChecksumSHA256", traits: {"smithy.api#httpHeader" => "x-amz-checksum-sha256"}))
+    CompleteMultipartUploadRequest.add_member(:checksum_sha512, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumSHA512, name: "ChecksumSHA512", traits: {"smithy.api#httpHeader" => "x-amz-checksum-sha512"}))
+    CompleteMultipartUploadRequest.add_member(:checksum_md5, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumMD5, name: "ChecksumMD5", traits: {"smithy.api#httpHeader" => "x-amz-checksum-md5"}))
+    CompleteMultipartUploadRequest.add_member(:checksum_xxhash64, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumXXHASH64, name: "ChecksumXXHASH64", traits: {"smithy.api#httpHeader" => "x-amz-checksum-xxhash64"}))
+    CompleteMultipartUploadRequest.add_member(:checksum_xxhash3, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumXXHASH3, name: "ChecksumXXHASH3", traits: {"smithy.api#httpHeader" => "x-amz-checksum-xxhash3"}))
+    CompleteMultipartUploadRequest.add_member(:checksum_xxhash128, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumXXHASH128, name: "ChecksumXXHASH128", traits: {"smithy.api#httpHeader" => "x-amz-checksum-xxhash128"}))
     CompleteMultipartUploadRequest.add_member(:checksum_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumType, name: "ChecksumType", traits: {"smithy.api#httpHeader" => "x-amz-checksum-type"}))
     CompleteMultipartUploadRequest.add_member(:mpu_object_size, ::Smithy::Schema::Shapes::MemberShape.new(target: MpuObjectSize, name: "MpuObjectSize", traits: {"smithy.api#httpHeader" => "x-amz-mp-object-size"}))
     CompleteMultipartUploadRequest.add_member(:request_payer, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestPayer, name: "RequestPayer", traits: {"smithy.api#httpHeader" => "x-amz-request-payer"}))
@@ -860,6 +974,11 @@ module Aws::S3
     CompletedPart.add_member(:checksum_crc64_nvme, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumCRC64NVME, name: "ChecksumCRC64NVME"))
     CompletedPart.add_member(:checksum_sha1, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumSHA1, name: "ChecksumSHA1"))
     CompletedPart.add_member(:checksum_sha256, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumSHA256, name: "ChecksumSHA256"))
+    CompletedPart.add_member(:checksum_sha512, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumSHA512, name: "ChecksumSHA512"))
+    CompletedPart.add_member(:checksum_md5, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumMD5, name: "ChecksumMD5"))
+    CompletedPart.add_member(:checksum_xxhash64, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumXXHASH64, name: "ChecksumXXHASH64"))
+    CompletedPart.add_member(:checksum_xxhash3, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumXXHASH3, name: "ChecksumXXHASH3"))
+    CompletedPart.add_member(:checksum_xxhash128, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumXXHASH128, name: "ChecksumXXHASH128"))
     CompletedPart.add_member(:part_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PartNumber, name: "PartNumber"))
     CompletedPart.type = Types::CompletedPart
     CompletedPartList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CompletedPart, name: "member"))
@@ -902,10 +1021,13 @@ module Aws::S3
     CopyObjectRequest.add_member(:grant_read, ::Smithy::Schema::Shapes::MemberShape.new(target: GrantRead, name: "GrantRead", traits: {"smithy.api#httpHeader" => "x-amz-grant-read"}))
     CopyObjectRequest.add_member(:grant_read_acp, ::Smithy::Schema::Shapes::MemberShape.new(target: GrantReadACP, name: "GrantReadACP", traits: {"smithy.api#httpHeader" => "x-amz-grant-read-acp"}))
     CopyObjectRequest.add_member(:grant_write_acp, ::Smithy::Schema::Shapes::MemberShape.new(target: GrantWriteACP, name: "GrantWriteACP", traits: {"smithy.api#httpHeader" => "x-amz-grant-write-acp"}))
+    CopyObjectRequest.add_member(:if_match, ::Smithy::Schema::Shapes::MemberShape.new(target: IfMatch, name: "IfMatch", traits: {"smithy.api#httpHeader" => "If-Match"}))
+    CopyObjectRequest.add_member(:if_none_match, ::Smithy::Schema::Shapes::MemberShape.new(target: IfNoneMatch, name: "IfNoneMatch", traits: {"smithy.api#httpHeader" => "If-None-Match"}))
     CopyObjectRequest.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectKey, name: "Key", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Key"}}))
     CopyObjectRequest.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: Metadata, name: "Metadata", traits: {"smithy.api#httpPrefixHeaders" => "x-amz-meta-"}))
     CopyObjectRequest.add_member(:metadata_directive, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataDirective, name: "MetadataDirective", traits: {"smithy.api#httpHeader" => "x-amz-metadata-directive"}))
     CopyObjectRequest.add_member(:tagging_directive, ::Smithy::Schema::Shapes::MemberShape.new(target: TaggingDirective, name: "TaggingDirective", traits: {"smithy.api#httpHeader" => "x-amz-tagging-directive"}))
+    CopyObjectRequest.add_member(:annotation_directive, ::Smithy::Schema::Shapes::MemberShape.new(target: AnnotationDirective, name: "AnnotationDirective", traits: {"smithy.api#httpHeader" => "x-amz-object-annotation-directive"}))
     CopyObjectRequest.add_member(:server_side_encryption, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerSideEncryption, name: "ServerSideEncryption", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption"}))
     CopyObjectRequest.add_member(:storage_class, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageClass, name: "StorageClass", traits: {"smithy.api#httpHeader" => "x-amz-storage-class"}))
     CopyObjectRequest.add_member(:website_redirect_location, ::Smithy::Schema::Shapes::MemberShape.new(target: WebsiteRedirectLocation, name: "WebsiteRedirectLocation", traits: {"smithy.api#httpHeader" => "x-amz-website-redirect-location"}))
@@ -923,6 +1045,9 @@ module Aws::S3
     CopyObjectRequest.add_member(:object_lock_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectLockMode, name: "ObjectLockMode", traits: {"smithy.api#httpHeader" => "x-amz-object-lock-mode"}))
     CopyObjectRequest.add_member(:object_lock_retain_until_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectLockRetainUntilDate, name: "ObjectLockRetainUntilDate", traits: {"smithy.api#httpHeader" => "x-amz-object-lock-retain-until-date"}))
     CopyObjectRequest.add_member(:object_lock_legal_hold_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectLockLegalHoldStatus, name: "ObjectLockLegalHoldStatus", traits: {"smithy.api#httpHeader" => "x-amz-object-lock-legal-hold"}))
+    CopyObjectRequest.add_member(:object_lock_event_hold, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectLockEventHold, name: "ObjectLockEventHold", traits: {"smithy.api#httpHeader" => "x-amz-object-lock-event-hold"}))
+    CopyObjectRequest.add_member(:object_lock_event_hold_duration_days, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectLockEventHoldDurationDays, name: "ObjectLockEventHoldDurationDays", traits: {"smithy.api#httpHeader" => "x-amz-object-lock-event-hold-duration-days"}))
+    CopyObjectRequest.add_member(:object_lock_event_hold_duration_years, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectLockEventHoldDurationYears, name: "ObjectLockEventHoldDurationYears", traits: {"smithy.api#httpHeader" => "x-amz-object-lock-event-hold-duration-years"}))
     CopyObjectRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
     CopyObjectRequest.add_member(:expected_source_bucket_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "ExpectedSourceBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-source-expected-bucket-owner"}))
     CopyObjectRequest.type = Types::CopyObjectRequest
@@ -934,6 +1059,11 @@ module Aws::S3
     CopyObjectResult.add_member(:checksum_crc64_nvme, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumCRC64NVME, name: "ChecksumCRC64NVME"))
     CopyObjectResult.add_member(:checksum_sha1, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumSHA1, name: "ChecksumSHA1"))
     CopyObjectResult.add_member(:checksum_sha256, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumSHA256, name: "ChecksumSHA256"))
+    CopyObjectResult.add_member(:checksum_sha512, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumSHA512, name: "ChecksumSHA512"))
+    CopyObjectResult.add_member(:checksum_md5, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumMD5, name: "ChecksumMD5"))
+    CopyObjectResult.add_member(:checksum_xxhash64, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumXXHASH64, name: "ChecksumXXHASH64"))
+    CopyObjectResult.add_member(:checksum_xxhash3, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumXXHASH3, name: "ChecksumXXHASH3"))
+    CopyObjectResult.add_member(:checksum_xxhash128, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumXXHASH128, name: "ChecksumXXHASH128"))
     CopyObjectResult.type = Types::CopyObjectResult
     CopyPartResult.add_member(:e_tag, ::Smithy::Schema::Shapes::MemberShape.new(target: ETag, name: "ETag"))
     CopyPartResult.add_member(:last_modified, ::Smithy::Schema::Shapes::MemberShape.new(target: LastModified, name: "LastModified"))
@@ -942,6 +1072,11 @@ module Aws::S3
     CopyPartResult.add_member(:checksum_crc64_nvme, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumCRC64NVME, name: "ChecksumCRC64NVME"))
     CopyPartResult.add_member(:checksum_sha1, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumSHA1, name: "ChecksumSHA1"))
     CopyPartResult.add_member(:checksum_sha256, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumSHA256, name: "ChecksumSHA256"))
+    CopyPartResult.add_member(:checksum_sha512, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumSHA512, name: "ChecksumSHA512"))
+    CopyPartResult.add_member(:checksum_md5, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumMD5, name: "ChecksumMD5"))
+    CopyPartResult.add_member(:checksum_xxhash64, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumXXHASH64, name: "ChecksumXXHASH64"))
+    CopyPartResult.add_member(:checksum_xxhash3, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumXXHASH3, name: "ChecksumXXHASH3"))
+    CopyPartResult.add_member(:checksum_xxhash128, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumXXHASH128, name: "ChecksumXXHASH128"))
     CopyPartResult.type = Types::CopyPartResult
     CreateBucketConfiguration.add_member(:location_constraint, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketLocationConstraint, name: "LocationConstraint"))
     CreateBucketConfiguration.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationInfo, name: "Location"))
@@ -977,6 +1112,7 @@ module Aws::S3
     CreateBucketRequest.add_member(:grant_write_acp, ::Smithy::Schema::Shapes::MemberShape.new(target: GrantWriteACP, name: "GrantWriteACP", traits: {"smithy.api#httpHeader" => "x-amz-grant-write-acp"}))
     CreateBucketRequest.add_member(:object_lock_enabled_for_bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectLockEnabledForBucket, name: "ObjectLockEnabledForBucket", traits: {"smithy.api#httpHeader" => "x-amz-bucket-object-lock-enabled"}))
     CreateBucketRequest.add_member(:object_ownership, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectOwnership, name: "ObjectOwnership", traits: {"smithy.api#httpHeader" => "x-amz-object-ownership"}))
+    CreateBucketRequest.add_member(:bucket_namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketNamespace, name: "BucketNamespace", traits: {"smithy.api#httpHeader" => "x-amz-bucket-namespace"}))
     CreateBucketRequest[:http_payload] = :create_bucket_configuration
     CreateBucketRequest[:http_payload_member] = CreateBucketRequest.member(:create_bucket_configuration)
     CreateBucketRequest.type = Types::CreateBucketRequest
@@ -1023,6 +1159,9 @@ module Aws::S3
     CreateMultipartUploadRequest.add_member(:object_lock_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectLockMode, name: "ObjectLockMode", traits: {"smithy.api#httpHeader" => "x-amz-object-lock-mode"}))
     CreateMultipartUploadRequest.add_member(:object_lock_retain_until_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectLockRetainUntilDate, name: "ObjectLockRetainUntilDate", traits: {"smithy.api#httpHeader" => "x-amz-object-lock-retain-until-date"}))
     CreateMultipartUploadRequest.add_member(:object_lock_legal_hold_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectLockLegalHoldStatus, name: "ObjectLockLegalHoldStatus", traits: {"smithy.api#httpHeader" => "x-amz-object-lock-legal-hold"}))
+    CreateMultipartUploadRequest.add_member(:object_lock_event_hold, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectLockEventHold, name: "ObjectLockEventHold", traits: {"smithy.api#httpHeader" => "x-amz-object-lock-event-hold"}))
+    CreateMultipartUploadRequest.add_member(:object_lock_event_hold_duration_days, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectLockEventHoldDurationDays, name: "ObjectLockEventHoldDurationDays", traits: {"smithy.api#httpHeader" => "x-amz-object-lock-event-hold-duration-days"}))
+    CreateMultipartUploadRequest.add_member(:object_lock_event_hold_duration_years, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectLockEventHoldDurationYears, name: "ObjectLockEventHoldDurationYears", traits: {"smithy.api#httpHeader" => "x-amz-object-lock-event-hold-duration-years"}))
     CreateMultipartUploadRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
     CreateMultipartUploadRequest.add_member(:checksum_algorithm, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumAlgorithm, name: "ChecksumAlgorithm", traits: {"smithy.api#httpHeader" => "x-amz-checksum-algorithm"}))
     CreateMultipartUploadRequest.add_member(:checksum_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumType, name: "ChecksumType", traits: {"smithy.api#httpHeader" => "x-amz-checksum-type"}))
@@ -1045,6 +1184,7 @@ module Aws::S3
     DefaultRetention.add_member(:mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectLockRetentionMode, name: "Mode"))
     DefaultRetention.add_member(:days, ::Smithy::Schema::Shapes::MemberShape.new(target: Days, name: "Days"))
     DefaultRetention.add_member(:years, ::Smithy::Schema::Shapes::MemberShape.new(target: Years, name: "Years"))
+    DefaultRetention.add_member(:default_event_hold, ::Smithy::Schema::Shapes::MemberShape.new(target: EventHoldDuration, name: "DefaultEventHold"))
     DefaultRetention.type = Types::DefaultRetention
     Delete.add_member(:objects, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectIdentifierList, name: "Objects", traits: {"smithy.api#required" => {}, "smithy.api#xmlFlattened" => {}, "smithy.api#xmlName" => "Object"}))
     Delete.add_member(:quiet, ::Smithy::Schema::Shapes::MemberShape.new(target: Quiet, name: "Quiet"))
@@ -1109,6 +1249,17 @@ module Aws::S3
     DeleteMarkerReplicationStatus.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Enabled", traits: {"smithy.api#enumValue" => "Enabled"}))
     DeleteMarkerReplicationStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Disabled", traits: {"smithy.api#enumValue" => "Disabled"}))
     DeleteMarkers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteMarkerEntry, name: "member"))
+    DeleteObjectAnnotationOutput.add_member(:object_version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectVersionId, name: "ObjectVersionId", traits: {"smithy.api#httpHeader" => "x-amz-object-version-id"}))
+    DeleteObjectAnnotationOutput.add_member(:request_charged, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestCharged, name: "RequestCharged", traits: {"smithy.api#httpHeader" => "x-amz-request-charged"}))
+    DeleteObjectAnnotationOutput.type = Types::DeleteObjectAnnotationOutput
+    DeleteObjectAnnotationRequest.add_member(:bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketName, name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    DeleteObjectAnnotationRequest.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectKey, name: "Key", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteObjectAnnotationRequest.add_member(:annotation_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AnnotationName, name: "AnnotationName", traits: {"smithy.api#httpQuery" => "annotationName", "smithy.api#required" => {}}))
+    DeleteObjectAnnotationRequest.add_member(:version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectVersionId, name: "VersionId", traits: {"smithy.api#httpQuery" => "versionId"}))
+    DeleteObjectAnnotationRequest.add_member(:request_payer, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestPayer, name: "RequestPayer", traits: {"smithy.api#httpHeader" => "x-amz-request-payer"}))
+    DeleteObjectAnnotationRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    DeleteObjectAnnotationRequest.add_member(:object_if_match, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectIfMatch, name: "ObjectIfMatch", traits: {"smithy.api#httpHeader" => "x-amz-object-if-match"}))
+    DeleteObjectAnnotationRequest.type = Types::DeleteObjectAnnotationRequest
     DeleteObjectOutput.add_member(:delete_marker, ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteMarker, name: "DeleteMarker", traits: {"smithy.api#httpHeader" => "x-amz-delete-marker"}))
     DeleteObjectOutput.add_member(:version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectVersionId, name: "VersionId", traits: {"smithy.api#httpHeader" => "x-amz-version-id"}))
     DeleteObjectOutput.add_member(:request_charged, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestCharged, name: "RequestCharged", traits: {"smithy.api#httpHeader" => "x-amz-request-charged"}))
@@ -1173,6 +1324,9 @@ module Aws::S3
     Encryption.type = Types::Encryption
     EncryptionConfiguration.add_member(:replica_kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicaKmsKeyID, name: "ReplicaKmsKeyID"))
     EncryptionConfiguration.type = Types::EncryptionConfiguration
+    EncryptionType.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
+    EncryptionType.add_member(:sse_c, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SSE_C", traits: {"smithy.api#enumValue" => "SSE-C"}))
+    EncryptionTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionType, name: "member", traits: {"smithy.api#xmlName" => "EncryptionType"}))
     EncryptionTypeMismatch.type = Types::EncryptionTypeMismatch
     EndEvent.type = Types::EndEvent
     Error.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectKey, name: "Key"))
@@ -1213,7 +1367,14 @@ module Aws::S3
     Event.add_member(:s3_object_tagging_, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "s3_ObjectTagging_", traits: {"smithy.api#enumValue" => "s3:ObjectTagging:*"}))
     Event.add_member(:s3_object_tagging_put, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "s3_ObjectTagging_Put", traits: {"smithy.api#enumValue" => "s3:ObjectTagging:Put"}))
     Event.add_member(:s3_object_tagging_delete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "s3_ObjectTagging_Delete", traits: {"smithy.api#enumValue" => "s3:ObjectTagging:Delete"}))
+    Event.add_member(:s3_object_annotation_, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "s3_ObjectAnnotation_", traits: {"smithy.api#enumValue" => "s3:ObjectAnnotation:*"}))
+    Event.add_member(:s3_object_annotation_put, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "s3_ObjectAnnotation_Put", traits: {"smithy.api#enumValue" => "s3:ObjectAnnotation:Put"}))
+    Event.add_member(:s3_object_annotation_delete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "s3_ObjectAnnotation_Delete", traits: {"smithy.api#enumValue" => "s3:ObjectAnnotation:Delete"}))
+    Event.add_member(:s3_object_retention_put, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "s3_ObjectRetention_Put", traits: {"smithy.api#enumValue" => "s3:ObjectRetention:Put"}))
     EventBridgeConfiguration.type = Types::EventBridgeConfiguration
+    EventHoldDuration.add_member(:days, ::Smithy::Schema::Shapes::MemberShape.new(target: Days, name: "Days"))
+    EventHoldDuration.add_member(:years, ::Smithy::Schema::Shapes::MemberShape.new(target: Years, name: "Years"))
+    EventHoldDuration.type = Types::EventHoldDuration
     EventList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Event, name: "member"))
     ExistingObjectReplication.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ExistingObjectReplicationStatus, name: "Status", traits: {"smithy.api#required" => {}}))
     ExistingObjectReplication.type = Types::ExistingObjectReplication
@@ -1234,6 +1395,13 @@ module Aws::S3
     FilterRuleList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterRule, name: "member"))
     FilterRuleName.add_member(:prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "prefix", traits: {"smithy.api#enumValue" => "prefix"}))
     FilterRuleName.add_member(:suffix, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "suffix", traits: {"smithy.api#enumValue" => "suffix"}))
+    GetBucketAbacOutput.add_member(:abac_status, ::Smithy::Schema::Shapes::MemberShape.new(target: AbacStatus, name: "AbacStatus", traits: {"smithy.api#httpPayload" => {}}))
+    GetBucketAbacOutput[:http_payload] = :abac_status
+    GetBucketAbacOutput[:http_payload_member] = GetBucketAbacOutput.member(:abac_status)
+    GetBucketAbacOutput.type = Types::GetBucketAbacOutput
+    GetBucketAbacRequest.add_member(:bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketName, name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    GetBucketAbacRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    GetBucketAbacRequest.type = Types::GetBucketAbacRequest
     GetBucketAccelerateConfigurationOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketAccelerateStatus, name: "Status"))
     GetBucketAccelerateConfigurationOutput.add_member(:request_charged, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestCharged, name: "RequestCharged", traits: {"smithy.api#httpHeader" => "x-amz-request-charged"}))
     GetBucketAccelerateConfigurationOutput.type = Types::GetBucketAccelerateConfigurationOutput
@@ -1397,6 +1565,36 @@ module Aws::S3
     GetObjectAclRequest.add_member(:request_payer, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestPayer, name: "RequestPayer", traits: {"smithy.api#httpHeader" => "x-amz-request-payer"}))
     GetObjectAclRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
     GetObjectAclRequest.type = Types::GetObjectAclRequest
+    GetObjectAnnotationOutput.add_member(:annotation_payload, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamingBlob, name: "AnnotationPayload", traits: {"smithy.api#default" => "", "smithy.api#httpPayload" => {}}))
+    GetObjectAnnotationOutput.add_member(:object_version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectVersionId, name: "ObjectVersionId", traits: {"smithy.api#httpHeader" => "x-amz-object-version-id"}))
+    GetObjectAnnotationOutput.add_member(:last_modified, ::Smithy::Schema::Shapes::MemberShape.new(target: LastModified, name: "LastModified", traits: {"smithy.api#httpHeader" => "Last-Modified"}))
+    GetObjectAnnotationOutput.add_member(:content_length, ::Smithy::Schema::Shapes::MemberShape.new(target: ContentLength, name: "ContentLength", traits: {"smithy.api#httpHeader" => "Content-Length"}))
+    GetObjectAnnotationOutput.add_member(:e_tag, ::Smithy::Schema::Shapes::MemberShape.new(target: ETag, name: "ETag", traits: {"smithy.api#httpHeader" => "ETag"}))
+    GetObjectAnnotationOutput.add_member(:checksum_crc32, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumCRC32, name: "ChecksumCRC32", traits: {"smithy.api#httpHeader" => "x-amz-checksum-crc32"}))
+    GetObjectAnnotationOutput.add_member(:checksum_crc32_c, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumCRC32C, name: "ChecksumCRC32C", traits: {"smithy.api#httpHeader" => "x-amz-checksum-crc32c"}))
+    GetObjectAnnotationOutput.add_member(:checksum_crc64_nvme, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumCRC64NVME, name: "ChecksumCRC64NVME", traits: {"smithy.api#httpHeader" => "x-amz-checksum-crc64nvme"}))
+    GetObjectAnnotationOutput.add_member(:checksum_sha1, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumSHA1, name: "ChecksumSHA1", traits: {"smithy.api#httpHeader" => "x-amz-checksum-sha1"}))
+    GetObjectAnnotationOutput.add_member(:checksum_sha256, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumSHA256, name: "ChecksumSHA256", traits: {"smithy.api#httpHeader" => "x-amz-checksum-sha256"}))
+    GetObjectAnnotationOutput.add_member(:checksum_sha512, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumSHA512, name: "ChecksumSHA512", traits: {"smithy.api#httpHeader" => "x-amz-checksum-sha512"}))
+    GetObjectAnnotationOutput.add_member(:checksum_md5, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumMD5, name: "ChecksumMD5", traits: {"smithy.api#httpHeader" => "x-amz-checksum-md5"}))
+    GetObjectAnnotationOutput.add_member(:checksum_xxhash64, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumXXHASH64, name: "ChecksumXXHASH64", traits: {"smithy.api#httpHeader" => "x-amz-checksum-xxhash64"}))
+    GetObjectAnnotationOutput.add_member(:checksum_xxhash3, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumXXHASH3, name: "ChecksumXXHASH3", traits: {"smithy.api#httpHeader" => "x-amz-checksum-xxhash3"}))
+    GetObjectAnnotationOutput.add_member(:checksum_xxhash128, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumXXHASH128, name: "ChecksumXXHASH128", traits: {"smithy.api#httpHeader" => "x-amz-checksum-xxhash128"}))
+    GetObjectAnnotationOutput.add_member(:checksum_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumType, name: "ChecksumType", traits: {"smithy.api#httpHeader" => "x-amz-checksum-type"}))
+    GetObjectAnnotationOutput.add_member(:server_side_encryption, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerSideEncryption, name: "ServerSideEncryption", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption"}))
+    GetObjectAnnotationOutput.add_member(:request_charged, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestCharged, name: "RequestCharged", traits: {"smithy.api#httpHeader" => "x-amz-request-charged"}))
+    GetObjectAnnotationOutput.add_member(:replication_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationStatus, name: "ReplicationStatus", traits: {"smithy.api#httpHeader" => "x-amz-replication-status"}))
+    GetObjectAnnotationOutput[:http_payload] = :annotation_payload
+    GetObjectAnnotationOutput[:http_payload_member] = GetObjectAnnotationOutput.member(:annotation_payload)
+    GetObjectAnnotationOutput.type = Types::GetObjectAnnotationOutput
+    GetObjectAnnotationRequest.add_member(:bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketName, name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    GetObjectAnnotationRequest.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectKey, name: "Key", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Key"}}))
+    GetObjectAnnotationRequest.add_member(:annotation_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AnnotationName, name: "AnnotationName", traits: {"smithy.api#httpQuery" => "annotationName", "smithy.api#required" => {}}))
+    GetObjectAnnotationRequest.add_member(:version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectVersionId, name: "VersionId", traits: {"smithy.api#httpQuery" => "versionId"}))
+    GetObjectAnnotationRequest.add_member(:request_payer, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestPayer, name: "RequestPayer", traits: {"smithy.api#httpHeader" => "x-amz-request-payer"}))
+    GetObjectAnnotationRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    GetObjectAnnotationRequest.add_member(:checksum_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumMode, name: "ChecksumMode", traits: {"smithy.api#httpHeader" => "x-amz-checksum-mode"}))
+    GetObjectAnnotationRequest.type = Types::GetObjectAnnotationRequest
     GetObjectAttributesOutput.add_member(:delete_marker, ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteMarker, name: "DeleteMarker", traits: {"smithy.api#httpHeader" => "x-amz-delete-marker"}))
     GetObjectAttributesOutput.add_member(:last_modified, ::Smithy::Schema::Shapes::MemberShape.new(target: LastModified, name: "LastModified", traits: {"smithy.api#httpHeader" => "Last-Modified"}))
     GetObjectAttributesOutput.add_member(:version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectVersionId, name: "VersionId", traits: {"smithy.api#httpHeader" => "x-amz-version-id"}))
@@ -1456,6 +1654,11 @@ module Aws::S3
     GetObjectOutput.add_member(:checksum_crc64_nvme, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumCRC64NVME, name: "ChecksumCRC64NVME", traits: {"smithy.api#httpHeader" => "x-amz-checksum-crc64nvme"}))
     GetObjectOutput.add_member(:checksum_sha1, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumSHA1, name: "ChecksumSHA1", traits: {"smithy.api#httpHeader" => "x-amz-checksum-sha1"}))
     GetObjectOutput.add_member(:checksum_sha256, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumSHA256, name: "ChecksumSHA256", traits: {"smithy.api#httpHeader" => "x-amz-checksum-sha256"}))
+    GetObjectOutput.add_member(:checksum_sha512, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumSHA512, name: "ChecksumSHA512", traits: {"smithy.api#httpHeader" => "x-amz-checksum-sha512"}))
+    GetObjectOutput.add_member(:checksum_md5, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumMD5, name: "ChecksumMD5", traits: {"smithy.api#httpHeader" => "x-amz-checksum-md5"}))
+    GetObjectOutput.add_member(:checksum_xxhash64, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumXXHASH64, name: "ChecksumXXHASH64", traits: {"smithy.api#httpHeader" => "x-amz-checksum-xxhash64"}))
+    GetObjectOutput.add_member(:checksum_xxhash3, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumXXHASH3, name: "ChecksumXXHASH3", traits: {"smithy.api#httpHeader" => "x-amz-checksum-xxhash3"}))
+    GetObjectOutput.add_member(:checksum_xxhash128, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumXXHASH128, name: "ChecksumXXHASH128", traits: {"smithy.api#httpHeader" => "x-amz-checksum-xxhash128"}))
     GetObjectOutput.add_member(:checksum_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumType, name: "ChecksumType", traits: {"smithy.api#httpHeader" => "x-amz-checksum-type"}))
     GetObjectOutput.add_member(:missing_meta, ::Smithy::Schema::Shapes::MemberShape.new(target: MissingMeta, name: "MissingMeta", traits: {"smithy.api#httpHeader" => "x-amz-missing-meta"}))
     GetObjectOutput.add_member(:version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectVersionId, name: "VersionId", traits: {"smithy.api#httpHeader" => "x-amz-version-id"}))
@@ -1481,6 +1684,9 @@ module Aws::S3
     GetObjectOutput.add_member(:object_lock_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectLockMode, name: "ObjectLockMode", traits: {"smithy.api#httpHeader" => "x-amz-object-lock-mode"}))
     GetObjectOutput.add_member(:object_lock_retain_until_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectLockRetainUntilDate, name: "ObjectLockRetainUntilDate", traits: {"smithy.api#httpHeader" => "x-amz-object-lock-retain-until-date"}))
     GetObjectOutput.add_member(:object_lock_legal_hold_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectLockLegalHoldStatus, name: "ObjectLockLegalHoldStatus", traits: {"smithy.api#httpHeader" => "x-amz-object-lock-legal-hold"}))
+    GetObjectOutput.add_member(:object_lock_event_hold, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectLockEventHold, name: "ObjectLockEventHold", traits: {"smithy.api#httpHeader" => "x-amz-object-lock-event-hold"}))
+    GetObjectOutput.add_member(:object_lock_event_hold_duration_days, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectLockEventHoldDurationDays, name: "ObjectLockEventHoldDurationDays", traits: {"smithy.api#httpHeader" => "x-amz-object-lock-event-hold-duration-days"}))
+    GetObjectOutput.add_member(:object_lock_event_hold_duration_years, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectLockEventHoldDurationYears, name: "ObjectLockEventHoldDurationYears", traits: {"smithy.api#httpHeader" => "x-amz-object-lock-event-hold-duration-years"}))
     GetObjectOutput[:http_payload] = :body
     GetObjectOutput[:http_payload_member] = GetObjectOutput.member(:body)
     GetObjectOutput.type = Types::GetObjectOutput
@@ -1575,6 +1781,11 @@ module Aws::S3
     HeadObjectOutput.add_member(:checksum_crc64_nvme, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumCRC64NVME, name: "ChecksumCRC64NVME", traits: {"smithy.api#httpHeader" => "x-amz-checksum-crc64nvme"}))
     HeadObjectOutput.add_member(:checksum_sha1, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumSHA1, name: "ChecksumSHA1", traits: {"smithy.api#httpHeader" => "x-amz-checksum-sha1"}))
     HeadObjectOutput.add_member(:checksum_sha256, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumSHA256, name: "ChecksumSHA256", traits: {"smithy.api#httpHeader" => "x-amz-checksum-sha256"}))
+    HeadObjectOutput.add_member(:checksum_sha512, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumSHA512, name: "ChecksumSHA512", traits: {"smithy.api#httpHeader" => "x-amz-checksum-sha512"}))
+    HeadObjectOutput.add_member(:checksum_md5, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumMD5, name: "ChecksumMD5", traits: {"smithy.api#httpHeader" => "x-amz-checksum-md5"}))
+    HeadObjectOutput.add_member(:checksum_xxhash64, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumXXHASH64, name: "ChecksumXXHASH64", traits: {"smithy.api#httpHeader" => "x-amz-checksum-xxhash64"}))
+    HeadObjectOutput.add_member(:checksum_xxhash3, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumXXHASH3, name: "ChecksumXXHASH3", traits: {"smithy.api#httpHeader" => "x-amz-checksum-xxhash3"}))
+    HeadObjectOutput.add_member(:checksum_xxhash128, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumXXHASH128, name: "ChecksumXXHASH128", traits: {"smithy.api#httpHeader" => "x-amz-checksum-xxhash128"}))
     HeadObjectOutput.add_member(:checksum_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumType, name: "ChecksumType", traits: {"smithy.api#httpHeader" => "x-amz-checksum-type"}))
     HeadObjectOutput.add_member(:e_tag, ::Smithy::Schema::Shapes::MemberShape.new(target: ETag, name: "ETag", traits: {"smithy.api#httpHeader" => "ETag"}))
     HeadObjectOutput.add_member(:missing_meta, ::Smithy::Schema::Shapes::MemberShape.new(target: MissingMeta, name: "MissingMeta", traits: {"smithy.api#httpHeader" => "x-amz-missing-meta"}))
@@ -1601,6 +1812,9 @@ module Aws::S3
     HeadObjectOutput.add_member(:object_lock_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectLockMode, name: "ObjectLockMode", traits: {"smithy.api#httpHeader" => "x-amz-object-lock-mode"}))
     HeadObjectOutput.add_member(:object_lock_retain_until_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectLockRetainUntilDate, name: "ObjectLockRetainUntilDate", traits: {"smithy.api#httpHeader" => "x-amz-object-lock-retain-until-date"}))
     HeadObjectOutput.add_member(:object_lock_legal_hold_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectLockLegalHoldStatus, name: "ObjectLockLegalHoldStatus", traits: {"smithy.api#httpHeader" => "x-amz-object-lock-legal-hold"}))
+    HeadObjectOutput.add_member(:object_lock_event_hold, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectLockEventHold, name: "ObjectLockEventHold", traits: {"smithy.api#httpHeader" => "x-amz-object-lock-event-hold"}))
+    HeadObjectOutput.add_member(:object_lock_event_hold_duration_days, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectLockEventHoldDurationDays, name: "ObjectLockEventHoldDurationDays", traits: {"smithy.api#httpHeader" => "x-amz-object-lock-event-hold-duration-days"}))
+    HeadObjectOutput.add_member(:object_lock_event_hold_duration_years, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectLockEventHoldDurationYears, name: "ObjectLockEventHoldDurationYears", traits: {"smithy.api#httpHeader" => "x-amz-object-lock-event-hold-duration-years"}))
     HeadObjectOutput.type = Types::HeadObjectOutput
     HeadObjectRequest.add_member(:bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketName, name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
     HeadObjectRequest.add_member(:if_match, ::Smithy::Schema::Shapes::MemberShape.new(target: IfMatch, name: "IfMatch", traits: {"smithy.api#httpHeader" => "If-Match"}))
@@ -1652,9 +1866,11 @@ module Aws::S3
     IntelligentTieringFilter.type = Types::IntelligentTieringFilter
     IntelligentTieringStatus.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Enabled", traits: {"smithy.api#enumValue" => "Enabled"}))
     IntelligentTieringStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Disabled", traits: {"smithy.api#enumValue" => "Disabled"}))
+    InvalidAnnotationName.type = Types::InvalidAnnotationName
     InvalidObjectState.add_member(:storage_class, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageClass, name: "StorageClass"))
     InvalidObjectState.add_member(:access_tier, ::Smithy::Schema::Shapes::MemberShape.new(target: IntelligentTieringAccessTier, name: "AccessTier"))
     InvalidObjectState.type = Types::InvalidObjectState
+    InvalidPrefix.type = Types::InvalidPrefix
     InvalidRequest.type = Types::InvalidRequest
     InvalidWriteOffset.type = Types::InvalidWriteOffset
     InventoryConfiguration.add_member(:destination, ::Smithy::Schema::Shapes::MemberShape.new(target: InventoryDestination, name: "Destination", traits: {"smithy.api#required" => {}}))
@@ -1692,11 +1908,15 @@ module Aws::S3
     InventoryOptionalField.add_member(:object_lock_retain_until_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ObjectLockRetainUntilDate", traits: {"smithy.api#enumValue" => "ObjectLockRetainUntilDate"}))
     InventoryOptionalField.add_member(:object_lock_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ObjectLockMode", traits: {"smithy.api#enumValue" => "ObjectLockMode"}))
     InventoryOptionalField.add_member(:object_lock_legal_hold_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ObjectLockLegalHoldStatus", traits: {"smithy.api#enumValue" => "ObjectLockLegalHoldStatus"}))
+    InventoryOptionalField.add_member(:object_lock_event_hold_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ObjectLockEventHoldStatus", traits: {"smithy.api#enumValue" => "ObjectLockEventHoldStatus"}))
+    InventoryOptionalField.add_member(:object_lock_event_hold_duration, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ObjectLockEventHoldDuration", traits: {"smithy.api#enumValue" => "ObjectLockEventHoldDuration"}))
     InventoryOptionalField.add_member(:intelligent_tiering_access_tier, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IntelligentTieringAccessTier", traits: {"smithy.api#enumValue" => "IntelligentTieringAccessTier"}))
     InventoryOptionalField.add_member(:bucket_key_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BucketKeyStatus", traits: {"smithy.api#enumValue" => "BucketKeyStatus"}))
     InventoryOptionalField.add_member(:checksum_algorithm, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ChecksumAlgorithm", traits: {"smithy.api#enumValue" => "ChecksumAlgorithm"}))
     InventoryOptionalField.add_member(:object_access_control_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ObjectAccessControlList", traits: {"smithy.api#enumValue" => "ObjectAccessControlList"}))
     InventoryOptionalField.add_member(:object_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ObjectOwner", traits: {"smithy.api#enumValue" => "ObjectOwner"}))
+    InventoryOptionalField.add_member(:lifecycle_expiration_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LifecycleExpirationDate", traits: {"smithy.api#enumValue" => "LifecycleExpirationDate"}))
+    InventoryOptionalField.add_member(:intelligent_tiering_reference_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IntelligentTieringReferenceDate", traits: {"smithy.api#enumValue" => "IntelligentTieringReferenceDate"}))
     InventoryOptionalFields.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InventoryOptionalField, name: "member", traits: {"smithy.api#xmlName" => "Field"}))
     InventoryS3BucketDestination.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "AccountId"))
     InventoryS3BucketDestination.add_member(:bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketName, name: "Bucket", traits: {"smithy.api#required" => {}}))
@@ -1843,6 +2063,26 @@ module Aws::S3
     ListMultipartUploadsRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
     ListMultipartUploadsRequest.add_member(:request_payer, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestPayer, name: "RequestPayer", traits: {"smithy.api#httpHeader" => "x-amz-request-payer"}))
     ListMultipartUploadsRequest.type = Types::ListMultipartUploadsRequest
+    ListObjectAnnotationsOutput.add_member(:annotations, ::Smithy::Schema::Shapes::MemberShape.new(target: AnnotationList, name: "Annotations"))
+    ListObjectAnnotationsOutput.add_member(:bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketName, name: "Bucket"))
+    ListObjectAnnotationsOutput.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectKey, name: "Key"))
+    ListObjectAnnotationsOutput.add_member(:object_version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectVersionId, name: "ObjectVersionId", traits: {"smithy.api#httpHeader" => "x-amz-object-version-id"}))
+    ListObjectAnnotationsOutput.add_member(:annotation_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: AnnotationPrefix, name: "AnnotationPrefix"))
+    ListObjectAnnotationsOutput.add_member(:max_annotation_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxAnnotationResults, name: "MaxAnnotationResults"))
+    ListObjectAnnotationsOutput.add_member(:annotation_count, ::Smithy::Schema::Shapes::MemberShape.new(target: AnnotationCount, name: "AnnotationCount"))
+    ListObjectAnnotationsOutput.add_member(:continuation_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "ContinuationToken"))
+    ListObjectAnnotationsOutput.add_member(:next_continuation_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextContinuationToken"))
+    ListObjectAnnotationsOutput.add_member(:request_charged, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestCharged, name: "RequestCharged", traits: {"smithy.api#httpHeader" => "x-amz-request-charged"}))
+    ListObjectAnnotationsOutput.type = Types::ListObjectAnnotationsOutput
+    ListObjectAnnotationsRequest.add_member(:bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketName, name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    ListObjectAnnotationsRequest.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectKey, name: "Key", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListObjectAnnotationsRequest.add_member(:version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectVersionId, name: "VersionId", traits: {"smithy.api#httpQuery" => "versionId"}))
+    ListObjectAnnotationsRequest.add_member(:max_annotation_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxAnnotationResults, name: "MaxAnnotationResults", traits: {"smithy.api#httpQuery" => "max-annotation-results"}))
+    ListObjectAnnotationsRequest.add_member(:annotation_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: AnnotationPrefix, name: "AnnotationPrefix", traits: {"smithy.api#httpQuery" => "annotation-prefix"}))
+    ListObjectAnnotationsRequest.add_member(:continuation_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "ContinuationToken", traits: {"smithy.api#httpQuery" => "continuation-token"}))
+    ListObjectAnnotationsRequest.add_member(:request_payer, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestPayer, name: "RequestPayer", traits: {"smithy.api#httpHeader" => "x-amz-request-payer"}))
+    ListObjectAnnotationsRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    ListObjectAnnotationsRequest.type = Types::ListObjectAnnotationsRequest
     ListObjectVersionsOutput.add_member(:is_truncated, ::Smithy::Schema::Shapes::MemberShape.new(target: IsTruncated, name: "IsTruncated"))
     ListObjectVersionsOutput.add_member(:key_marker, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyMarker, name: "KeyMarker"))
     ListObjectVersionsOutput.add_member(:version_id_marker, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionIdMarker, name: "VersionIdMarker"))
@@ -1963,10 +2203,12 @@ module Aws::S3
     Metadata.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataValue, name: "value"))
     MetadataConfiguration.add_member(:journal_table_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: JournalTableConfiguration, name: "JournalTableConfiguration", traits: {"smithy.api#required" => {}}))
     MetadataConfiguration.add_member(:inventory_table_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: InventoryTableConfiguration, name: "InventoryTableConfiguration"))
+    MetadataConfiguration.add_member(:annotation_table_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AnnotationTableConfiguration, name: "AnnotationTableConfiguration"))
     MetadataConfiguration.type = Types::MetadataConfiguration
     MetadataConfigurationResult.add_member(:destination_result, ::Smithy::Schema::Shapes::MemberShape.new(target: DestinationResult, name: "DestinationResult", traits: {"smithy.api#required" => {}}))
     MetadataConfigurationResult.add_member(:journal_table_configuration_result, ::Smithy::Schema::Shapes::MemberShape.new(target: JournalTableConfigurationResult, name: "JournalTableConfigurationResult"))
     MetadataConfigurationResult.add_member(:inventory_table_configuration_result, ::Smithy::Schema::Shapes::MemberShape.new(target: InventoryTableConfigurationResult, name: "InventoryTableConfigurationResult"))
+    MetadataConfigurationResult.add_member(:annotation_table_configuration_result, ::Smithy::Schema::Shapes::MemberShape.new(target: AnnotationTableConfigurationResult, name: "AnnotationTableConfigurationResult"))
     MetadataConfigurationResult.type = Types::MetadataConfigurationResult
     MetadataDirective.add_member(:copy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COPY", traits: {"smithy.api#enumValue" => "COPY"}))
     MetadataDirective.add_member(:replace, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REPLACE", traits: {"smithy.api#enumValue" => "REPLACE"}))
@@ -2009,6 +2251,7 @@ module Aws::S3
     MultipartUpload.add_member(:checksum_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumType, name: "ChecksumType"))
     MultipartUpload.type = Types::MultipartUpload
     MultipartUploadList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MultipartUpload, name: "member"))
+    NoSuchAnnotation.type = Types::NoSuchAnnotation
     NoSuchBucket.type = Types::NoSuchBucket
     NoSuchKey.type = Types::NoSuchKey
     NoSuchUpload.type = Types::NoSuchUpload
@@ -2052,6 +2295,9 @@ module Aws::S3
     ObjectCannedACL.add_member(:aws_exec_read, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "aws_exec_read", traits: {"smithy.api#enumValue" => "aws-exec-read"}))
     ObjectCannedACL.add_member(:bucket_owner_read, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "bucket_owner_read", traits: {"smithy.api#enumValue" => "bucket-owner-read"}))
     ObjectCannedACL.add_member(:bucket_owner_full_control, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "bucket_owner_full_control", traits: {"smithy.api#enumValue" => "bucket-owner-full-control"}))
+    ObjectEncryption.add_member(:ssekms, Types::ObjectEncryption::SSEKMS, ::Smithy::Schema::Shapes::MemberShape.new(target: SSEKMSEncryption, name: "SSEKMS", traits: {"smithy.api#xmlName" => "SSE-KMS"}))
+    ObjectEncryption.add_member(:unknown, Types::ObjectEncryption::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    ObjectEncryption.type = Types::ObjectEncryption
     ObjectIdentifier.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectKey, name: "Key", traits: {"smithy.api#required" => {}}))
     ObjectIdentifier.add_member(:version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectVersionId, name: "VersionId"))
     ObjectIdentifier.add_member(:e_tag, ::Smithy::Schema::Shapes::MemberShape.new(target: ETag, name: "ETag"))
@@ -2064,6 +2310,8 @@ module Aws::S3
     ObjectLockConfiguration.add_member(:rule, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectLockRule, name: "Rule"))
     ObjectLockConfiguration.type = Types::ObjectLockConfiguration
     ObjectLockEnabled.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Enabled", traits: {"smithy.api#enumValue" => "Enabled"}))
+    ObjectLockEventHold.add_member(:on, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ON", traits: {"smithy.api#enumValue" => "ON"}))
+    ObjectLockEventHold.add_member(:off, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OFF", traits: {"smithy.api#enumValue" => "OFF"}))
     ObjectLockLegalHold.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectLockLegalHoldStatus, name: "Status"))
     ObjectLockLegalHold.type = Types::ObjectLockLegalHold
     ObjectLockLegalHoldStatus.add_member(:on, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ON", traits: {"smithy.api#enumValue" => "ON"}))
@@ -2072,6 +2320,8 @@ module Aws::S3
     ObjectLockMode.add_member(:compliance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLIANCE", traits: {"smithy.api#enumValue" => "COMPLIANCE"}))
     ObjectLockRetention.add_member(:mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectLockRetentionMode, name: "Mode"))
     ObjectLockRetention.add_member(:retain_until_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "RetainUntilDate"))
+    ObjectLockRetention.add_member(:event_hold, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectLockEventHold, name: "EventHold"))
+    ObjectLockRetention.add_member(:event_hold_duration, ::Smithy::Schema::Shapes::MemberShape.new(target: EventHoldDuration, name: "EventHoldDuration"))
     ObjectLockRetention.type = Types::ObjectLockRetention
     ObjectLockRetentionMode.add_member(:governance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GOVERNANCE", traits: {"smithy.api#enumValue" => "GOVERNANCE"}))
     ObjectLockRetentionMode.add_member(:compliance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLIANCE", traits: {"smithy.api#enumValue" => "COMPLIANCE"}))
@@ -2088,6 +2338,11 @@ module Aws::S3
     ObjectPart.add_member(:checksum_crc64_nvme, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumCRC64NVME, name: "ChecksumCRC64NVME"))
     ObjectPart.add_member(:checksum_sha1, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumSHA1, name: "ChecksumSHA1"))
     ObjectPart.add_member(:checksum_sha256, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumSHA256, name: "ChecksumSHA256"))
+    ObjectPart.add_member(:checksum_sha512, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumSHA512, name: "ChecksumSHA512"))
+    ObjectPart.add_member(:checksum_md5, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumMD5, name: "ChecksumMD5"))
+    ObjectPart.add_member(:checksum_xxhash64, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumXXHASH64, name: "ChecksumXXHASH64"))
+    ObjectPart.add_member(:checksum_xxhash3, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumXXHASH3, name: "ChecksumXXHASH3"))
+    ObjectPart.add_member(:checksum_xxhash128, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumXXHASH128, name: "ChecksumXXHASH128"))
     ObjectPart.type = Types::ObjectPart
     ObjectStorageClass.add_member(:standard, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STANDARD", traits: {"smithy.api#enumValue" => "STANDARD"}))
     ObjectStorageClass.add_member(:reduced_redundancy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REDUCED_REDUNDANCY", traits: {"smithy.api#enumValue" => "REDUCED_REDUNDANCY"}))
@@ -2101,6 +2356,9 @@ module Aws::S3
     ObjectStorageClass.add_member(:snow, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SNOW", traits: {"smithy.api#enumValue" => "SNOW"}))
     ObjectStorageClass.add_member(:express_onezone, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXPRESS_ONEZONE", traits: {"smithy.api#enumValue" => "EXPRESS_ONEZONE"}))
     ObjectStorageClass.add_member(:fsx_openzfs, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FSX_OPENZFS", traits: {"smithy.api#enumValue" => "FSX_OPENZFS"}))
+    ObjectStorageClass.add_member(:fsx_ontap, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FSX_ONTAP", traits: {"smithy.api#enumValue" => "FSX_ONTAP"}))
+    ObjectStorageClass.add_member(:aws_backup_warm, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_BACKUP_WARM", traits: {"smithy.api#enumValue" => "AWS_BACKUP_WARM"}))
+    ObjectStorageClass.add_member(:aws_backup_low_cost_warm, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_BACKUP_LOW_COST_WARM", traits: {"smithy.api#enumValue" => "AWS_BACKUP_LOW_COST_WARM"}))
     ObjectVersion.add_member(:e_tag, ::Smithy::Schema::Shapes::MemberShape.new(target: ETag, name: "ETag"))
     ObjectVersion.add_member(:checksum_algorithm, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumAlgorithmList, name: "ChecksumAlgorithm", traits: {"smithy.api#xmlFlattened" => {}}))
     ObjectVersion.add_member(:checksum_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumType, name: "ChecksumType"))
@@ -2141,6 +2399,11 @@ module Aws::S3
     Part.add_member(:checksum_crc64_nvme, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumCRC64NVME, name: "ChecksumCRC64NVME"))
     Part.add_member(:checksum_sha1, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumSHA1, name: "ChecksumSHA1"))
     Part.add_member(:checksum_sha256, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumSHA256, name: "ChecksumSHA256"))
+    Part.add_member(:checksum_sha512, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumSHA512, name: "ChecksumSHA512"))
+    Part.add_member(:checksum_md5, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumMD5, name: "ChecksumMD5"))
+    Part.add_member(:checksum_xxhash64, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumXXHASH64, name: "ChecksumXXHASH64"))
+    Part.add_member(:checksum_xxhash3, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumXXHASH3, name: "ChecksumXXHASH3"))
+    Part.add_member(:checksum_xxhash128, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumXXHASH128, name: "ChecksumXXHASH128"))
     Part.type = Types::Part
     PartitionDateSource.add_member(:event_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EventTime", traits: {"smithy.api#enumValue" => "EventTime"}))
     PartitionDateSource.add_member(:delivery_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DeliveryTime", traits: {"smithy.api#enumValue" => "DeliveryTime"}))
@@ -2170,6 +2433,14 @@ module Aws::S3
     PublicAccessBlockConfiguration.add_member(:block_public_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: Setting, name: "BlockPublicPolicy", traits: {"smithy.api#xmlName" => "BlockPublicPolicy"}))
     PublicAccessBlockConfiguration.add_member(:restrict_public_buckets, ::Smithy::Schema::Shapes::MemberShape.new(target: Setting, name: "RestrictPublicBuckets", traits: {"smithy.api#xmlName" => "RestrictPublicBuckets"}))
     PublicAccessBlockConfiguration.type = Types::PublicAccessBlockConfiguration
+    PutBucketAbacRequest.add_member(:bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketName, name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    PutBucketAbacRequest.add_member(:content_md5, ::Smithy::Schema::Shapes::MemberShape.new(target: ContentMD5, name: "ContentMD5", traits: {"smithy.api#httpHeader" => "Content-MD5"}))
+    PutBucketAbacRequest.add_member(:checksum_algorithm, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumAlgorithm, name: "ChecksumAlgorithm", traits: {"smithy.api#httpHeader" => "x-amz-sdk-checksum-algorithm"}))
+    PutBucketAbacRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    PutBucketAbacRequest.add_member(:abac_status, ::Smithy::Schema::Shapes::MemberShape.new(target: AbacStatus, name: "AbacStatus", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}, "smithy.api#xmlName" => "AbacStatus"}))
+    PutBucketAbacRequest[:http_payload] = :abac_status
+    PutBucketAbacRequest[:http_payload_member] = PutBucketAbacRequest.member(:abac_status)
+    PutBucketAbacRequest.type = Types::PutBucketAbacRequest
     PutBucketAccelerateConfigurationRequest.add_member(:bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketName, name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
     PutBucketAccelerateConfigurationRequest.add_member(:accelerate_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AccelerateConfiguration, name: "AccelerateConfiguration", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}, "smithy.api#xmlName" => "AccelerateConfiguration"}))
     PutBucketAccelerateConfigurationRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
@@ -2338,6 +2609,47 @@ module Aws::S3
     PutObjectAclRequest[:http_payload] = :access_control_policy
     PutObjectAclRequest[:http_payload_member] = PutObjectAclRequest.member(:access_control_policy)
     PutObjectAclRequest.type = Types::PutObjectAclRequest
+    PutObjectAnnotationOutput.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectKey, name: "Key"))
+    PutObjectAnnotationOutput.add_member(:annotation_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AnnotationName, name: "AnnotationName"))
+    PutObjectAnnotationOutput.add_member(:object_version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectVersionId, name: "ObjectVersionId", traits: {"smithy.api#httpHeader" => "x-amz-object-version-id"}))
+    PutObjectAnnotationOutput.add_member(:e_tag, ::Smithy::Schema::Shapes::MemberShape.new(target: ETag, name: "ETag", traits: {"smithy.api#httpHeader" => "ETag"}))
+    PutObjectAnnotationOutput.add_member(:checksum_crc32, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumCRC32, name: "ChecksumCRC32", traits: {"smithy.api#httpHeader" => "x-amz-checksum-crc32"}))
+    PutObjectAnnotationOutput.add_member(:checksum_crc32_c, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumCRC32C, name: "ChecksumCRC32C", traits: {"smithy.api#httpHeader" => "x-amz-checksum-crc32c"}))
+    PutObjectAnnotationOutput.add_member(:checksum_crc64_nvme, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumCRC64NVME, name: "ChecksumCRC64NVME", traits: {"smithy.api#httpHeader" => "x-amz-checksum-crc64nvme"}))
+    PutObjectAnnotationOutput.add_member(:checksum_sha1, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumSHA1, name: "ChecksumSHA1", traits: {"smithy.api#httpHeader" => "x-amz-checksum-sha1"}))
+    PutObjectAnnotationOutput.add_member(:checksum_sha256, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumSHA256, name: "ChecksumSHA256", traits: {"smithy.api#httpHeader" => "x-amz-checksum-sha256"}))
+    PutObjectAnnotationOutput.add_member(:checksum_sha512, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumSHA512, name: "ChecksumSHA512", traits: {"smithy.api#httpHeader" => "x-amz-checksum-sha512"}))
+    PutObjectAnnotationOutput.add_member(:checksum_md5, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumMD5, name: "ChecksumMD5", traits: {"smithy.api#httpHeader" => "x-amz-checksum-md5"}))
+    PutObjectAnnotationOutput.add_member(:checksum_xxhash64, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumXXHASH64, name: "ChecksumXXHASH64", traits: {"smithy.api#httpHeader" => "x-amz-checksum-xxhash64"}))
+    PutObjectAnnotationOutput.add_member(:checksum_xxhash3, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumXXHASH3, name: "ChecksumXXHASH3", traits: {"smithy.api#httpHeader" => "x-amz-checksum-xxhash3"}))
+    PutObjectAnnotationOutput.add_member(:checksum_xxhash128, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumXXHASH128, name: "ChecksumXXHASH128", traits: {"smithy.api#httpHeader" => "x-amz-checksum-xxhash128"}))
+    PutObjectAnnotationOutput.add_member(:checksum_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumType, name: "ChecksumType", traits: {"smithy.api#httpHeader" => "x-amz-checksum-type"}))
+    PutObjectAnnotationOutput.add_member(:server_side_encryption, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerSideEncryption, name: "ServerSideEncryption", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption"}))
+    PutObjectAnnotationOutput.add_member(:request_charged, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestCharged, name: "RequestCharged", traits: {"smithy.api#httpHeader" => "x-amz-request-charged"}))
+    PutObjectAnnotationOutput.type = Types::PutObjectAnnotationOutput
+    PutObjectAnnotationRequest.add_member(:bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketName, name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    PutObjectAnnotationRequest.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectKey, name: "Key", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Key"}}))
+    PutObjectAnnotationRequest.add_member(:version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectVersionId, name: "VersionId", traits: {"smithy.api#httpQuery" => "versionId"}))
+    PutObjectAnnotationRequest.add_member(:annotation_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AnnotationName, name: "AnnotationName", traits: {"smithy.api#httpQuery" => "annotationName", "smithy.api#required" => {}}))
+    PutObjectAnnotationRequest.add_member(:annotation_payload, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamingBlob, name: "AnnotationPayload", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
+    PutObjectAnnotationRequest.add_member(:object_if_match, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectIfMatch, name: "ObjectIfMatch", traits: {"smithy.api#httpHeader" => "x-amz-object-if-match"}))
+    PutObjectAnnotationRequest.add_member(:checksum_algorithm, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumAlgorithm, name: "ChecksumAlgorithm", traits: {"smithy.api#httpHeader" => "x-amz-sdk-checksum-algorithm"}))
+    PutObjectAnnotationRequest.add_member(:checksum_crc32, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumCRC32, name: "ChecksumCRC32", traits: {"smithy.api#httpHeader" => "x-amz-checksum-crc32"}))
+    PutObjectAnnotationRequest.add_member(:checksum_crc32_c, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumCRC32C, name: "ChecksumCRC32C", traits: {"smithy.api#httpHeader" => "x-amz-checksum-crc32c"}))
+    PutObjectAnnotationRequest.add_member(:checksum_crc64_nvme, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumCRC64NVME, name: "ChecksumCRC64NVME", traits: {"smithy.api#httpHeader" => "x-amz-checksum-crc64nvme"}))
+    PutObjectAnnotationRequest.add_member(:checksum_sha1, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumSHA1, name: "ChecksumSHA1", traits: {"smithy.api#httpHeader" => "x-amz-checksum-sha1"}))
+    PutObjectAnnotationRequest.add_member(:checksum_sha256, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumSHA256, name: "ChecksumSHA256", traits: {"smithy.api#httpHeader" => "x-amz-checksum-sha256"}))
+    PutObjectAnnotationRequest.add_member(:checksum_sha512, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumSHA512, name: "ChecksumSHA512", traits: {"smithy.api#httpHeader" => "x-amz-checksum-sha512"}))
+    PutObjectAnnotationRequest.add_member(:checksum_md5, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumMD5, name: "ChecksumMD5", traits: {"smithy.api#httpHeader" => "x-amz-checksum-md5"}))
+    PutObjectAnnotationRequest.add_member(:checksum_xxhash64, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumXXHASH64, name: "ChecksumXXHASH64", traits: {"smithy.api#httpHeader" => "x-amz-checksum-xxhash64"}))
+    PutObjectAnnotationRequest.add_member(:checksum_xxhash3, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumXXHASH3, name: "ChecksumXXHASH3", traits: {"smithy.api#httpHeader" => "x-amz-checksum-xxhash3"}))
+    PutObjectAnnotationRequest.add_member(:checksum_xxhash128, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumXXHASH128, name: "ChecksumXXHASH128", traits: {"smithy.api#httpHeader" => "x-amz-checksum-xxhash128"}))
+    PutObjectAnnotationRequest.add_member(:content_md5, ::Smithy::Schema::Shapes::MemberShape.new(target: ContentMD5, name: "ContentMD5", traits: {"smithy.api#httpHeader" => "Content-MD5"}))
+    PutObjectAnnotationRequest.add_member(:request_payer, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestPayer, name: "RequestPayer", traits: {"smithy.api#httpHeader" => "x-amz-request-payer"}))
+    PutObjectAnnotationRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    PutObjectAnnotationRequest[:http_payload] = :annotation_payload
+    PutObjectAnnotationRequest[:http_payload_member] = PutObjectAnnotationRequest.member(:annotation_payload)
+    PutObjectAnnotationRequest.type = Types::PutObjectAnnotationRequest
     PutObjectLegalHoldOutput.add_member(:request_charged, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestCharged, name: "RequestCharged", traits: {"smithy.api#httpHeader" => "x-amz-request-charged"}))
     PutObjectLegalHoldOutput.type = Types::PutObjectLegalHoldOutput
     PutObjectLegalHoldRequest.add_member(:bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketName, name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
@@ -2370,6 +2682,11 @@ module Aws::S3
     PutObjectOutput.add_member(:checksum_crc64_nvme, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumCRC64NVME, name: "ChecksumCRC64NVME", traits: {"smithy.api#httpHeader" => "x-amz-checksum-crc64nvme"}))
     PutObjectOutput.add_member(:checksum_sha1, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumSHA1, name: "ChecksumSHA1", traits: {"smithy.api#httpHeader" => "x-amz-checksum-sha1"}))
     PutObjectOutput.add_member(:checksum_sha256, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumSHA256, name: "ChecksumSHA256", traits: {"smithy.api#httpHeader" => "x-amz-checksum-sha256"}))
+    PutObjectOutput.add_member(:checksum_sha512, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumSHA512, name: "ChecksumSHA512", traits: {"smithy.api#httpHeader" => "x-amz-checksum-sha512"}))
+    PutObjectOutput.add_member(:checksum_md5, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumMD5, name: "ChecksumMD5", traits: {"smithy.api#httpHeader" => "x-amz-checksum-md5"}))
+    PutObjectOutput.add_member(:checksum_xxhash64, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumXXHASH64, name: "ChecksumXXHASH64", traits: {"smithy.api#httpHeader" => "x-amz-checksum-xxhash64"}))
+    PutObjectOutput.add_member(:checksum_xxhash3, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumXXHASH3, name: "ChecksumXXHASH3", traits: {"smithy.api#httpHeader" => "x-amz-checksum-xxhash3"}))
+    PutObjectOutput.add_member(:checksum_xxhash128, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumXXHASH128, name: "ChecksumXXHASH128", traits: {"smithy.api#httpHeader" => "x-amz-checksum-xxhash128"}))
     PutObjectOutput.add_member(:checksum_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumType, name: "ChecksumType", traits: {"smithy.api#httpHeader" => "x-amz-checksum-type"}))
     PutObjectOutput.add_member(:server_side_encryption, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerSideEncryption, name: "ServerSideEncryption", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption"}))
     PutObjectOutput.add_member(:version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectVersionId, name: "VersionId", traits: {"smithy.api#httpHeader" => "x-amz-version-id"}))
@@ -2397,6 +2714,11 @@ module Aws::S3
     PutObjectRequest.add_member(:checksum_crc64_nvme, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumCRC64NVME, name: "ChecksumCRC64NVME", traits: {"smithy.api#httpHeader" => "x-amz-checksum-crc64nvme"}))
     PutObjectRequest.add_member(:checksum_sha1, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumSHA1, name: "ChecksumSHA1", traits: {"smithy.api#httpHeader" => "x-amz-checksum-sha1"}))
     PutObjectRequest.add_member(:checksum_sha256, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumSHA256, name: "ChecksumSHA256", traits: {"smithy.api#httpHeader" => "x-amz-checksum-sha256"}))
+    PutObjectRequest.add_member(:checksum_sha512, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumSHA512, name: "ChecksumSHA512", traits: {"smithy.api#httpHeader" => "x-amz-checksum-sha512"}))
+    PutObjectRequest.add_member(:checksum_md5, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumMD5, name: "ChecksumMD5", traits: {"smithy.api#httpHeader" => "x-amz-checksum-md5"}))
+    PutObjectRequest.add_member(:checksum_xxhash64, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumXXHASH64, name: "ChecksumXXHASH64", traits: {"smithy.api#httpHeader" => "x-amz-checksum-xxhash64"}))
+    PutObjectRequest.add_member(:checksum_xxhash3, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumXXHASH3, name: "ChecksumXXHASH3", traits: {"smithy.api#httpHeader" => "x-amz-checksum-xxhash3"}))
+    PutObjectRequest.add_member(:checksum_xxhash128, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumXXHASH128, name: "ChecksumXXHASH128", traits: {"smithy.api#httpHeader" => "x-amz-checksum-xxhash128"}))
     PutObjectRequest.add_member(:expires, ::Smithy::Schema::Shapes::MemberShape.new(target: Expires, name: "Expires", traits: {"smithy.api#httpHeader" => "Expires"}))
     PutObjectRequest.add_member(:if_match, ::Smithy::Schema::Shapes::MemberShape.new(target: IfMatch, name: "IfMatch", traits: {"smithy.api#httpHeader" => "If-Match"}))
     PutObjectRequest.add_member(:if_none_match, ::Smithy::Schema::Shapes::MemberShape.new(target: IfNoneMatch, name: "IfNoneMatch", traits: {"smithy.api#httpHeader" => "If-None-Match"}))
@@ -2421,6 +2743,9 @@ module Aws::S3
     PutObjectRequest.add_member(:object_lock_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectLockMode, name: "ObjectLockMode", traits: {"smithy.api#httpHeader" => "x-amz-object-lock-mode"}))
     PutObjectRequest.add_member(:object_lock_retain_until_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectLockRetainUntilDate, name: "ObjectLockRetainUntilDate", traits: {"smithy.api#httpHeader" => "x-amz-object-lock-retain-until-date"}))
     PutObjectRequest.add_member(:object_lock_legal_hold_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectLockLegalHoldStatus, name: "ObjectLockLegalHoldStatus", traits: {"smithy.api#httpHeader" => "x-amz-object-lock-legal-hold"}))
+    PutObjectRequest.add_member(:object_lock_event_hold, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectLockEventHold, name: "ObjectLockEventHold", traits: {"smithy.api#httpHeader" => "x-amz-object-lock-event-hold"}))
+    PutObjectRequest.add_member(:object_lock_event_hold_duration_days, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectLockEventHoldDurationDays, name: "ObjectLockEventHoldDurationDays", traits: {"smithy.api#httpHeader" => "x-amz-object-lock-event-hold-duration-days"}))
+    PutObjectRequest.add_member(:object_lock_event_hold_duration_years, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectLockEventHoldDurationYears, name: "ObjectLockEventHoldDurationYears", traits: {"smithy.api#httpHeader" => "x-amz-object-lock-event-hold-duration-years"}))
     PutObjectRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
     PutObjectRequest[:http_payload] = :body
     PutObjectRequest[:http_payload_member] = PutObjectRequest.member(:body)
@@ -2593,6 +2918,9 @@ module Aws::S3
     S3TablesDestinationResult.type = Types::S3TablesDestinationResult
     SSEKMS.add_member(:key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SSEKMSKeyId, name: "KeyId", traits: {"smithy.api#required" => {}}))
     SSEKMS.type = Types::SSEKMS
+    SSEKMSEncryption.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyKmsKeyArnString, name: "KMSKeyArn", traits: {"smithy.api#required" => {}}))
+    SSEKMSEncryption.add_member(:bucket_key_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketKeyEnabled, name: "BucketKeyEnabled"))
+    SSEKMSEncryption.type = Types::SSEKMSEncryption
     SSES3.type = Types::SSES3
     ScanRange.add_member(:start, ::Smithy::Schema::Shapes::MemberShape.new(target: Start, name: "Start"))
     ScanRange.add_member(:end, ::Smithy::Schema::Shapes::MemberShape.new(target: End, name: "End"))
@@ -2628,6 +2956,7 @@ module Aws::S3
     SelectParameters.type = Types::SelectParameters
     ServerSideEncryption.add_member(:aes256, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AES256", traits: {"smithy.api#enumValue" => "AES256"}))
     ServerSideEncryption.add_member(:aws_fsx, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "aws_fsx", traits: {"smithy.api#enumValue" => "aws:fsx"}))
+    ServerSideEncryption.add_member(:aws_backup, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "aws_backup", traits: {"smithy.api#enumValue" => "aws:backup"}))
     ServerSideEncryption.add_member(:aws_kms, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "aws_kms", traits: {"smithy.api#enumValue" => "aws:kms"}))
     ServerSideEncryption.add_member(:aws_kms_dsse, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "aws_kms_dsse", traits: {"smithy.api#enumValue" => "aws:kms:dsse"}))
     ServerSideEncryptionByDefault.add_member(:sse_algorithm, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerSideEncryption, name: "SSEAlgorithm", traits: {"smithy.api#required" => {}}))
@@ -2637,6 +2966,7 @@ module Aws::S3
     ServerSideEncryptionConfiguration.type = Types::ServerSideEncryptionConfiguration
     ServerSideEncryptionRule.add_member(:apply_server_side_encryption_by_default, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerSideEncryptionByDefault, name: "ApplyServerSideEncryptionByDefault"))
     ServerSideEncryptionRule.add_member(:bucket_key_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketKeyEnabled, name: "BucketKeyEnabled"))
+    ServerSideEncryptionRule.add_member(:blocked_encryption_types, ::Smithy::Schema::Shapes::MemberShape.new(target: BlockedEncryptionTypes, name: "BlockedEncryptionTypes"))
     ServerSideEncryptionRule.type = Types::ServerSideEncryptionRule
     ServerSideEncryptionRules.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerSideEncryptionRule, name: "member"))
     SessionCredentials.add_member(:access_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessKeyIdValue, name: "AccessKeyId", traits: {"smithy.api#required" => {}, "smithy.api#xmlName" => "AccessKeyId"}))
@@ -2672,6 +3002,9 @@ module Aws::S3
     StorageClass.add_member(:snow, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SNOW", traits: {"smithy.api#enumValue" => "SNOW"}))
     StorageClass.add_member(:express_onezone, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXPRESS_ONEZONE", traits: {"smithy.api#enumValue" => "EXPRESS_ONEZONE"}))
     StorageClass.add_member(:fsx_openzfs, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FSX_OPENZFS", traits: {"smithy.api#enumValue" => "FSX_OPENZFS"}))
+    StorageClass.add_member(:fsx_ontap, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FSX_ONTAP", traits: {"smithy.api#enumValue" => "FSX_ONTAP"}))
+    StorageClass.add_member(:aws_backup_warm, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_BACKUP_WARM", traits: {"smithy.api#enumValue" => "AWS_BACKUP_WARM"}))
+    StorageClass.add_member(:aws_backup_low_cost_warm, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_BACKUP_LOW_COST_WARM", traits: {"smithy.api#enumValue" => "AWS_BACKUP_LOW_COST_WARM"}))
     StorageClassAnalysis.add_member(:data_export, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageClassAnalysisDataExport, name: "DataExport"))
     StorageClassAnalysis.type = Types::StorageClassAnalysis
     StorageClassAnalysisDataExport.add_member(:output_schema_version, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageClassAnalysisSchemaVersion, name: "OutputSchemaVersion", traits: {"smithy.api#required" => {}}))
@@ -2725,6 +3058,15 @@ module Aws::S3
     Type.add_member(:canonical_user, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CanonicalUser", traits: {"smithy.api#enumValue" => "CanonicalUser"}))
     Type.add_member(:amazon_customer_by_email, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AmazonCustomerByEmail", traits: {"smithy.api#enumValue" => "AmazonCustomerByEmail"}))
     Type.add_member(:group, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Group", traits: {"smithy.api#enumValue" => "Group"}))
+    UnsupportedMediaType.type = Types::UnsupportedMediaType
+    UpdateBucketMetadataAnnotationTableConfigurationRequest.add_member(:bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketName, name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    UpdateBucketMetadataAnnotationTableConfigurationRequest.add_member(:content_md5, ::Smithy::Schema::Shapes::MemberShape.new(target: ContentMD5, name: "ContentMD5", traits: {"smithy.api#httpHeader" => "Content-MD5"}))
+    UpdateBucketMetadataAnnotationTableConfigurationRequest.add_member(:checksum_algorithm, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumAlgorithm, name: "ChecksumAlgorithm", traits: {"smithy.api#httpHeader" => "x-amz-sdk-checksum-algorithm"}))
+    UpdateBucketMetadataAnnotationTableConfigurationRequest.add_member(:annotation_table_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AnnotationTableConfigurationUpdates, name: "AnnotationTableConfiguration", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}, "smithy.api#xmlName" => "AnnotationTableConfiguration"}))
+    UpdateBucketMetadataAnnotationTableConfigurationRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    UpdateBucketMetadataAnnotationTableConfigurationRequest[:http_payload] = :annotation_table_configuration
+    UpdateBucketMetadataAnnotationTableConfigurationRequest[:http_payload_member] = UpdateBucketMetadataAnnotationTableConfigurationRequest.member(:annotation_table_configuration)
+    UpdateBucketMetadataAnnotationTableConfigurationRequest.type = Types::UpdateBucketMetadataAnnotationTableConfigurationRequest
     UpdateBucketMetadataInventoryTableConfigurationRequest.add_member(:bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketName, name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
     UpdateBucketMetadataInventoryTableConfigurationRequest.add_member(:content_md5, ::Smithy::Schema::Shapes::MemberShape.new(target: ContentMD5, name: "ContentMD5", traits: {"smithy.api#httpHeader" => "Content-MD5"}))
     UpdateBucketMetadataInventoryTableConfigurationRequest.add_member(:checksum_algorithm, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumAlgorithm, name: "ChecksumAlgorithm", traits: {"smithy.api#httpHeader" => "x-amz-sdk-checksum-algorithm"}))
@@ -2741,6 +3083,19 @@ module Aws::S3
     UpdateBucketMetadataJournalTableConfigurationRequest[:http_payload] = :journal_table_configuration
     UpdateBucketMetadataJournalTableConfigurationRequest[:http_payload_member] = UpdateBucketMetadataJournalTableConfigurationRequest.member(:journal_table_configuration)
     UpdateBucketMetadataJournalTableConfigurationRequest.type = Types::UpdateBucketMetadataJournalTableConfigurationRequest
+    UpdateObjectEncryptionRequest.add_member(:bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketName, name: "Bucket", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Bucket"}}))
+    UpdateObjectEncryptionRequest.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectKey, name: "Key", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateObjectEncryptionRequest.add_member(:version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectVersionId, name: "VersionId", traits: {"smithy.api#httpQuery" => "versionId"}))
+    UpdateObjectEncryptionRequest.add_member(:object_encryption, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectEncryption, name: "ObjectEncryption", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
+    UpdateObjectEncryptionRequest.add_member(:request_payer, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestPayer, name: "RequestPayer", traits: {"smithy.api#httpHeader" => "x-amz-request-payer"}))
+    UpdateObjectEncryptionRequest.add_member(:expected_bucket_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "ExpectedBucketOwner", traits: {"smithy.api#httpHeader" => "x-amz-expected-bucket-owner"}))
+    UpdateObjectEncryptionRequest.add_member(:content_md5, ::Smithy::Schema::Shapes::MemberShape.new(target: ContentMD5, name: "ContentMD5", traits: {"smithy.api#httpHeader" => "Content-MD5"}))
+    UpdateObjectEncryptionRequest.add_member(:checksum_algorithm, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumAlgorithm, name: "ChecksumAlgorithm", traits: {"smithy.api#httpHeader" => "x-amz-sdk-checksum-algorithm"}))
+    UpdateObjectEncryptionRequest[:http_payload] = :object_encryption
+    UpdateObjectEncryptionRequest[:http_payload_member] = UpdateObjectEncryptionRequest.member(:object_encryption)
+    UpdateObjectEncryptionRequest.type = Types::UpdateObjectEncryptionRequest
+    UpdateObjectEncryptionResponse.add_member(:request_charged, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestCharged, name: "RequestCharged", traits: {"smithy.api#httpHeader" => "x-amz-request-charged"}))
+    UpdateObjectEncryptionResponse.type = Types::UpdateObjectEncryptionResponse
     UploadPartCopyOutput.add_member(:copy_source_version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CopySourceVersionId, name: "CopySourceVersionId", traits: {"smithy.api#httpHeader" => "x-amz-copy-source-version-id"}))
     UploadPartCopyOutput.add_member(:copy_part_result, ::Smithy::Schema::Shapes::MemberShape.new(target: CopyPartResult, name: "CopyPartResult", traits: {"smithy.api#httpPayload" => {}}))
     UploadPartCopyOutput.add_member(:server_side_encryption, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerSideEncryption, name: "ServerSideEncryption", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption"}))
@@ -2779,6 +3134,11 @@ module Aws::S3
     UploadPartOutput.add_member(:checksum_crc64_nvme, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumCRC64NVME, name: "ChecksumCRC64NVME", traits: {"smithy.api#httpHeader" => "x-amz-checksum-crc64nvme"}))
     UploadPartOutput.add_member(:checksum_sha1, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumSHA1, name: "ChecksumSHA1", traits: {"smithy.api#httpHeader" => "x-amz-checksum-sha1"}))
     UploadPartOutput.add_member(:checksum_sha256, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumSHA256, name: "ChecksumSHA256", traits: {"smithy.api#httpHeader" => "x-amz-checksum-sha256"}))
+    UploadPartOutput.add_member(:checksum_sha512, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumSHA512, name: "ChecksumSHA512", traits: {"smithy.api#httpHeader" => "x-amz-checksum-sha512"}))
+    UploadPartOutput.add_member(:checksum_md5, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumMD5, name: "ChecksumMD5", traits: {"smithy.api#httpHeader" => "x-amz-checksum-md5"}))
+    UploadPartOutput.add_member(:checksum_xxhash64, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumXXHASH64, name: "ChecksumXXHASH64", traits: {"smithy.api#httpHeader" => "x-amz-checksum-xxhash64"}))
+    UploadPartOutput.add_member(:checksum_xxhash3, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumXXHASH3, name: "ChecksumXXHASH3", traits: {"smithy.api#httpHeader" => "x-amz-checksum-xxhash3"}))
+    UploadPartOutput.add_member(:checksum_xxhash128, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumXXHASH128, name: "ChecksumXXHASH128", traits: {"smithy.api#httpHeader" => "x-amz-checksum-xxhash128"}))
     UploadPartOutput.add_member(:sse_customer_algorithm, ::Smithy::Schema::Shapes::MemberShape.new(target: SSECustomerAlgorithm, name: "SSECustomerAlgorithm", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-customer-algorithm"}))
     UploadPartOutput.add_member(:sse_customer_key_md5, ::Smithy::Schema::Shapes::MemberShape.new(target: SSECustomerKeyMD5, name: "SSECustomerKeyMD5", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-customer-key-MD5"}))
     UploadPartOutput.add_member(:ssekms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SSEKMSKeyId, name: "SSEKMSKeyId", traits: {"smithy.api#httpHeader" => "x-amz-server-side-encryption-aws-kms-key-id"}))
@@ -2795,6 +3155,11 @@ module Aws::S3
     UploadPartRequest.add_member(:checksum_crc64_nvme, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumCRC64NVME, name: "ChecksumCRC64NVME", traits: {"smithy.api#httpHeader" => "x-amz-checksum-crc64nvme"}))
     UploadPartRequest.add_member(:checksum_sha1, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumSHA1, name: "ChecksumSHA1", traits: {"smithy.api#httpHeader" => "x-amz-checksum-sha1"}))
     UploadPartRequest.add_member(:checksum_sha256, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumSHA256, name: "ChecksumSHA256", traits: {"smithy.api#httpHeader" => "x-amz-checksum-sha256"}))
+    UploadPartRequest.add_member(:checksum_sha512, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumSHA512, name: "ChecksumSHA512", traits: {"smithy.api#httpHeader" => "x-amz-checksum-sha512"}))
+    UploadPartRequest.add_member(:checksum_md5, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumMD5, name: "ChecksumMD5", traits: {"smithy.api#httpHeader" => "x-amz-checksum-md5"}))
+    UploadPartRequest.add_member(:checksum_xxhash64, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumXXHASH64, name: "ChecksumXXHASH64", traits: {"smithy.api#httpHeader" => "x-amz-checksum-xxhash64"}))
+    UploadPartRequest.add_member(:checksum_xxhash3, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumXXHASH3, name: "ChecksumXXHASH3", traits: {"smithy.api#httpHeader" => "x-amz-checksum-xxhash3"}))
+    UploadPartRequest.add_member(:checksum_xxhash128, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumXXHASH128, name: "ChecksumXXHASH128", traits: {"smithy.api#httpHeader" => "x-amz-checksum-xxhash128"}))
     UploadPartRequest.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectKey, name: "Key", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "Key"}}))
     UploadPartRequest.add_member(:part_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PartNumber, name: "PartNumber", traits: {"smithy.api#httpQuery" => "partNumber", "smithy.api#required" => {}}))
     UploadPartRequest.add_member(:upload_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MultipartUploadId, name: "UploadId", traits: {"smithy.api#httpQuery" => "uploadId", "smithy.api#required" => {}}))
@@ -2834,6 +3199,11 @@ module Aws::S3
     WriteGetObjectResponseRequest.add_member(:checksum_crc64_nvme, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumCRC64NVME, name: "ChecksumCRC64NVME", traits: {"smithy.api#httpHeader" => "x-amz-fwd-header-x-amz-checksum-crc64nvme"}))
     WriteGetObjectResponseRequest.add_member(:checksum_sha1, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumSHA1, name: "ChecksumSHA1", traits: {"smithy.api#httpHeader" => "x-amz-fwd-header-x-amz-checksum-sha1"}))
     WriteGetObjectResponseRequest.add_member(:checksum_sha256, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumSHA256, name: "ChecksumSHA256", traits: {"smithy.api#httpHeader" => "x-amz-fwd-header-x-amz-checksum-sha256"}))
+    WriteGetObjectResponseRequest.add_member(:checksum_sha512, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumSHA512, name: "ChecksumSHA512", traits: {"smithy.api#httpHeader" => "x-amz-fwd-header-x-amz-checksum-sha512"}))
+    WriteGetObjectResponseRequest.add_member(:checksum_md5, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumMD5, name: "ChecksumMD5", traits: {"smithy.api#httpHeader" => "x-amz-fwd-header-x-amz-checksum-md5"}))
+    WriteGetObjectResponseRequest.add_member(:checksum_xxhash64, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumXXHASH64, name: "ChecksumXXHASH64", traits: {"smithy.api#httpHeader" => "x-amz-fwd-header-x-amz-checksum-xxhash64"}))
+    WriteGetObjectResponseRequest.add_member(:checksum_xxhash3, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumXXHASH3, name: "ChecksumXXHASH3", traits: {"smithy.api#httpHeader" => "x-amz-fwd-header-x-amz-checksum-xxhash3"}))
+    WriteGetObjectResponseRequest.add_member(:checksum_xxhash128, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumXXHASH128, name: "ChecksumXXHASH128", traits: {"smithy.api#httpHeader" => "x-amz-fwd-header-x-amz-checksum-xxhash128"}))
     WriteGetObjectResponseRequest.add_member(:delete_marker, ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteMarker, name: "DeleteMarker", traits: {"smithy.api#httpHeader" => "x-amz-fwd-header-x-amz-delete-marker"}))
     WriteGetObjectResponseRequest.add_member(:e_tag, ::Smithy::Schema::Shapes::MemberShape.new(target: ETag, name: "ETag", traits: {"smithy.api#httpHeader" => "x-amz-fwd-header-ETag"}))
     WriteGetObjectResponseRequest.add_member(:expires, ::Smithy::Schema::Shapes::MemberShape.new(target: Expires, name: "Expires", traits: {"smithy.api#httpHeader" => "x-amz-fwd-header-Expires"}))
@@ -2864,7 +3234,7 @@ module Aws::S3
       service.id = "com.amazonaws.s3#AmazonS3"
       service.name = "AmazonS3"
       service.version = "2006-03-01"
-      service.traits = {"aws.api#service" => {"sdkId" => "S3", "arnNamespace" => "s3", "cloudFormationName" => "S3", "cloudTrailEventSource" => "s3.amazonaws.com", "endpointPrefix" => "s3"}, "aws.auth#sigv4" => {"name" => "s3"}, "aws.protocols#restXml" => {"noErrorWrapping" => true}, "smithy.api#suppress" => ["RuleSetAuthSchemes"], "smithy.api#title" => "Amazon Simple Storage Service", "smithy.api#xmlNamespace" => {"uri" => "http://s3.amazonaws.com/doc/2006-03-01/"}, "smithy.rules#clientContextParams" => {"ForcePathStyle" => {"documentation" => "Forces this client to use path-style addressing for buckets.", "type" => "boolean"}, "UseArnRegion" => {"documentation" => "Enables this client to use an ARN's region when constructing an endpoint instead of the client's configured region.", "type" => "boolean"}, "DisableMultiRegionAccessPoints" => {"documentation" => "Disables this client's usage of Multi-Region Access Points.", "type" => "boolean"}, "Accelerate" => {"documentation" => "Enables this client to use S3 Transfer Acceleration endpoints.", "type" => "boolean"}, "DisableS3ExpressSessionAuth" => {"documentation" => "Disables this client's usage of Session Auth for S3Express       buckets and reverts to using conventional SigV4 for those.", "type" => "boolean"}}}
+      service.traits = {"aws.api#service" => {"sdkId" => "S3", "arnNamespace" => "s3", "cloudFormationName" => "S3", "cloudTrailEventSource" => "s3.amazonaws.com", "endpointPrefix" => "s3"}, "aws.auth#sigv4" => {"name" => "s3"}, "aws.protocols#restXml" => {"noErrorWrapping" => true}, "smithy.api#suppress" => ["RuleSetAuthSchemes"], "smithy.api#title" => "Amazon Simple Storage Service", "smithy.api#xmlNamespace" => {"uri" => "http://s3.amazonaws.com/doc/2006-03-01/"}, "smithy.rules#clientContextParams" => {"ForcePathStyle" => {"documentation" => "Forces this client to use path-style addressing for buckets.", "type" => "boolean"}, "UseArnRegion" => {"documentation" => "Enables this client to use an ARN's region when constructing an endpoint instead of the client's configured region.", "type" => "boolean"}, "DisableMultiRegionAccessPoints" => {"documentation" => "Disables this client's usage of Multi-Region Access Points.", "type" => "boolean"}, "Accelerate" => {"documentation" => "Enables this client to use S3 Transfer Acceleration endpoints.", "type" => "boolean"}, "DisableS3ExpressSessionAuth" => {"documentation" => "Disables this client's usage of Session Auth for S3Express       buckets and reverts to using conventional SigV4 for those.", "type" => "boolean"}}, "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Bucket" => {"required" => false, "documentation" => "The S3 bucket used to send the request. This is an optional parameter that will be set automatically for operations that are scoped to an S3 bucket.", "type" => "string"}, "Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}, "ForcePathStyle" => {"builtIn" => "AWS::S3::ForcePathStyle", "required" => true, "default" => false, "documentation" => "When true, force a path-style endpoint to be used where the bucket name is part of the path.", "type" => "boolean"}, "Accelerate" => {"builtIn" => "AWS::S3::Accelerate", "required" => true, "default" => false, "documentation" => "When true, use S3 Accelerate. NOTE: Not all regions support S3 accelerate.", "type" => "boolean"}, "UseGlobalEndpoint" => {"builtIn" => "AWS::S3::UseGlobalEndpoint", "required" => true, "default" => false, "documentation" => "Whether the global endpoint should be used, rather then the regional endpoint for us-east-1.", "type" => "boolean"}, "UseObjectLambdaEndpoint" => {"required" => false, "documentation" => "Internal parameter to use object lambda endpoint for an operation (eg: WriteGetObjectResponse)", "type" => "boolean"}, "Key" => {"required" => false, "documentation" => "The S3 Key used to send the request. This is an optional parameter that will be set automatically for operations that are scoped to an S3 Key.", "type" => "string"}, "Prefix" => {"required" => false, "documentation" => "The S3 Prefix used to send the request. This is an optional parameter that will be set automatically for operations that are scoped to an S3 Prefix.", "type" => "string"}, "CopySource" => {"required" => false, "documentation" => "The Copy Source used for Copy Object request. This is an optional parameter that will be set automatically for operations that are scoped to Copy Source.", "type" => "string"}, "DisableAccessPoints" => {"required" => false, "documentation" => "Internal parameter to disable Access Point Buckets", "type" => "boolean"}, "DisableMultiRegionAccessPoints" => {"builtIn" => "AWS::S3::DisableMultiRegionAccessPoints", "required" => true, "default" => false, "documentation" => "Whether multi-region access points (MRAP) should be disabled.", "type" => "boolean"}, "UseArnRegion" => {"builtIn" => "AWS::S3::UseArnRegion", "required" => false, "documentation" => "When an Access Point ARN is provided and this flag is enabled, the SDK MUST use the ARN's region when constructing the endpoint instead of the client's configured region.", "type" => "boolean"}, "UseS3ExpressControlEndpoint" => {"required" => false, "documentation" => "Internal parameter to indicate whether S3Express operation should use control plane, (ex. CreateBucket)", "type" => "boolean"}, "DisableS3ExpressSessionAuth" => {"required" => false, "documentation" => "Parameter to indicate whether S3Express session auth should be disabled", "type" => "boolean"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "Accelerate"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Bucket"}]}, {"fn" => "stringEquals", "argv" => [{"fn" => "coalesce", "argv" => [{"fn" => "substring", "argv" => [{"ref" => "Bucket"}, 0, 6, true]}, ""]}, "--x-s3"]}, {"fn" => "stringEquals", "argv" => [{"fn" => "coalesce", "argv" => [{"fn" => "substring", "argv" => [{"ref" => "Bucket"}, 0, 7, true]}, ""]}, "--xa-s3"]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "partitionResult"}, {"fn" => "substring", "argv" => [{"ref" => "Bucket"}, 0, 7, true], "assign" => "accessPointSuffix"}, {"fn" => "stringEquals", "argv" => [{"ref" => "accessPointSuffix"}, "--op-s3"]}, {"fn" => "substring", "argv" => [{"ref" => "Bucket"}, 8, 12, true], "assign" => "regionPrefix"}, {"fn" => "substring", "argv" => [{"ref" => "Bucket"}, 32, 49, true], "assign" => "outpostId_ssa_2"}, {"fn" => "substring", "argv" => [{"ref" => "Bucket"}, 49, 50, true], "assign" => "hardwareType"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "ForcePathStyle"}, true]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "partitionResult"}, "name"]}, "aws-cn"]}, {"fn" => "ite", "argv" => [{"ref" => "UseDualStack"}, ".dualstack", ""], "assign" => "_s3e_ds"}, {"fn" => "isValidHostLabel", "argv" => [{"ref" => "outpostId_ssa_2"}, false]}, {"fn" => "ite", "argv" => [{"ref" => "UseFIPS"}, "-fips", ""], "assign" => "_s3e_fips"}, {"fn" => "ite", "argv" => [{"fn" => "coalesce", "argv" => [{"ref" => "DisableS3ExpressSessionAuth"}, false]}, "sigv4", "sigv4-s3express"], "assign" => "_s3e_auth"}, {"fn" => "aws.isVirtualHostableS3Bucket", "argv" => [{"ref" => "Bucket"}, false]}, {"fn" => "parseURL", "argv" => [{"ref" => "Endpoint"}], "assign" => "url"}, {"fn" => "booleanEquals", "argv" => [{"fn" => "coalesce", "argv" => [{"ref" => "UseS3ExpressControlEndpoint"}, false]}, true]}, {"fn" => "aws.isVirtualHostableS3Bucket", "argv" => [{"ref" => "Bucket"}, true]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "url"}, "scheme"]}, "http"]}, {"fn" => "isValidHostLabel", "argv" => [{"ref" => "Region"}, false]}, {"fn" => "aws.parseArn", "argv" => [{"ref" => "Bucket"}], "assign" => "bucketArn"}, {"fn" => "getAttr", "argv" => [{"fn" => "split", "argv" => [{"ref" => "Bucket"}, "--", 0]}, "[-2]"], "assign" => "s3expressAvailabilityZoneId"}, {"fn" => "stringEquals", "argv" => [{"fn" => "coalesce", "argv" => [{"fn" => "substring", "argv" => [{"ref" => "Bucket"}, 0, 4, false]}, ""]}, "arn:"]}, {"fn" => "stringEquals", "argv" => [{"fn" => "coalesce", "argv" => [{"fn" => "substring", "argv" => [{"ref" => "Bucket"}, 16, 18, true]}, ""]}, "--"]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "url"}, "isIp"]}, true]}, {"fn" => "stringEquals", "argv" => [{"fn" => "coalesce", "argv" => [{"fn" => "substring", "argv" => [{"ref" => "Bucket"}, 21, 23, true]}, ""]}, "--"]}, {"fn" => "stringEquals", "argv" => [{"fn" => "coalesce", "argv" => [{"fn" => "substring", "argv" => [{"ref" => "Bucket"}, 27, 29, true]}, ""]}, "--"]}, {"fn" => "stringEquals", "argv" => [{"ref" => "regionPrefix"}, "beta"]}, {"fn" => "uriEncode", "argv" => [{"ref" => "Bucket"}], "assign" => "uri_encoded_bucket"}, {"fn" => "isValidHostLabel", "argv" => [{"ref" => "Region"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "coalesce", "argv" => [{"ref" => "UseObjectLambdaEndpoint"}, false]}, true]}, {"fn" => "getAttr", "argv" => [{"ref" => "bucketArn"}, "resourceId[0]"], "assign" => "arnType"}, {"fn" => "stringEquals", "argv" => [{"ref" => "arnType"}, ""]}, {"fn" => "stringEquals", "argv" => [{"ref" => "arnType"}, "accesspoint"]}, {"fn" => "getAttr", "argv" => [{"ref" => "bucketArn"}, "resourceId[1]"], "assign" => "accessPointName_ssa_1"}, {"fn" => "stringEquals", "argv" => [{"ref" => "accessPointName_ssa_1"}, ""]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "bucketArn"}, "region"]}, ""]}, {"fn" => "stringEquals", "argv" => [{"fn" => "coalesce", "argv" => [{"fn" => "substring", "argv" => [{"ref" => "Bucket"}, 14, 16, true]}, ""]}, "--"]}, {"fn" => "stringEquals", "argv" => [{"ref" => "hardwareType"}, "e"]}, {"fn" => "stringEquals", "argv" => [{"ref" => "hardwareType"}, "o"]}, {"fn" => "stringEquals", "argv" => [{"ref" => "Region"}, "aws-global"]}, {"fn" => "stringEquals", "argv" => [{"fn" => "coalesce", "argv" => [{"fn" => "substring", "argv" => [{"ref" => "Bucket"}, 19, 21, true]}, ""]}, "--"]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "bucketArn"}, "service"]}, "s3-object-lambda"]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "coalesce", "argv" => [{"ref" => "DisableAccessPoints"}, false]}, true]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "bucketArn"}, "service"]}, "s3-outposts"]}, {"fn" => "aws.partition", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "bucketArn"}, "region"]}], "assign" => "bucketPartition"}, {"fn" => "isValidHostLabel", "argv" => [{"ref" => "accessPointName_ssa_1"}, true]}, {"fn" => "stringEquals", "argv" => [{"fn" => "coalesce", "argv" => [{"fn" => "substring", "argv" => [{"ref" => "Bucket"}, 26, 28, true]}, ""]}, "--"]}, {"fn" => "stringEquals", "argv" => [{"fn" => "coalesce", "argv" => [{"fn" => "substring", "argv" => [{"ref" => "Bucket"}, 15, 17, true]}, ""]}, "--"]}, {"fn" => "getAttr", "argv" => [{"ref" => "bucketArn"}, "resourceId[4]"]}, {"fn" => "stringEquals", "argv" => [{"fn" => "coalesce", "argv" => [{"fn" => "substring", "argv" => [{"ref" => "Bucket"}, 20, 22, true]}, ""]}, "--"]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseGlobalEndpoint"}, true]}, {"fn" => "stringEquals", "argv" => [{"ref" => "Region"}, "us-east-1"]}, {"fn" => "getAttr", "argv" => [{"ref" => "bucketArn"}, "resourceId[1]"], "assign" => "outpostId_ssa_1"}, {"fn" => "booleanEquals", "argv" => [{"fn" => "coalesce", "argv" => [{"ref" => "UseArnRegion"}, true]}, true]}, {"fn" => "isValidHostLabel", "argv" => [{"ref" => "outpostId_ssa_1"}, false]}, {"fn" => "getAttr", "argv" => [{"ref" => "bucketArn"}, "resourceId[2]"], "assign" => "outpostType"}, {"fn" => "stringEquals", "argv" => [{"ref" => "Region"}, {"fn" => "getAttr", "argv" => [{"ref" => "bucketArn"}, "region"]}]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "bucketPartition"}, "name"]}, {"fn" => "getAttr", "argv" => [{"ref" => "partitionResult"}, "name"]}]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "DisableMultiRegionAccessPoints"}, true]}, {"fn" => "isValidHostLabel", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "bucketArn"}, "region"]}, true]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "bucketArn"}, "partition"]}, {"fn" => "getAttr", "argv" => [{"ref" => "partitionResult"}, "name"]}]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "bucketArn"}, "accountId"]}, ""]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "bucketArn"}, "service"]}, "s3"]}, {"fn" => "isValidHostLabel", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "bucketArn"}, "accountId"]}, false]}, {"fn" => "getAttr", "argv" => [{"ref" => "bucketArn"}, "resourceId[3]"], "assign" => "accessPointName_ssa_2"}, {"fn" => "isValidHostLabel", "argv" => [{"ref" => "accessPointName_ssa_1"}, false]}, {"fn" => "stringEquals", "argv" => [{"ref" => "outpostType"}, "accesspoint"]}, {"fn" => "isValidHostLabel", "argv" => [{"ref" => "accessPointName_ssa_2"}, false]}], "results" => [{"conditions" => [], "error" => "Accelerate cannot be used with FIPS", "type" => "error"}, {"conditions" => [], "error" => "Cannot set dual-stack in combination with a custom endpoint.", "type" => "error"}, {"conditions" => [], "error" => "A custom endpoint cannot be combined with FIPS", "type" => "error"}, {"conditions" => [], "error" => "A custom endpoint cannot be combined with S3 Accelerate", "type" => "error"}, {"conditions" => [], "error" => "Partition does not support FIPS", "type" => "error"}, {"conditions" => [], "error" => "S3Express does not support S3 Accelerate.", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "{url#scheme}://{url#authority}/{uri_encoded_bucket}{url#path}", "properties" => {"backend" => "S3Express", "authSchemes" => [{"disableDoubleEncoding" => true, "name" => "{_s3e_auth}", "signingName" => "s3express", "signingRegion" => "{Region}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "{url#scheme}://{Bucket}.{url#authority}{url#path}", "properties" => {"backend" => "S3Express", "authSchemes" => [{"disableDoubleEncoding" => true, "name" => "{_s3e_auth}", "signingName" => "s3express", "signingRegion" => "{Region}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "S3Express bucket name is not a valid virtual hostable name.", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://s3express-control{_s3e_fips}{_s3e_ds}.{Region}.{partitionResult#dnsSuffix}/{uri_encoded_bucket}", "properties" => {"backend" => "S3Express", "authSchemes" => [{"disableDoubleEncoding" => true, "name" => "sigv4", "signingName" => "s3express", "signingRegion" => "{Region}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://{Bucket}.s3express{_s3e_fips}-{s3expressAvailabilityZoneId}{_s3e_ds}.{Region}.{partitionResult#dnsSuffix}", "properties" => {"backend" => "S3Express", "authSchemes" => [{"disableDoubleEncoding" => true, "name" => "{_s3e_auth}", "signingName" => "s3express", "signingRegion" => "{Region}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Unrecognized S3Express bucket name format.", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "{url#scheme}://{url#authority}{url#path}", "properties" => {"backend" => "S3Express", "authSchemes" => [{"disableDoubleEncoding" => true, "name" => "{_s3e_auth}", "signingName" => "s3express", "signingRegion" => "{Region}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://s3express-control{_s3e_fips}{_s3e_ds}.{Region}.{partitionResult#dnsSuffix}", "properties" => {"backend" => "S3Express", "authSchemes" => [{"disableDoubleEncoding" => true, "name" => "sigv4", "signingName" => "s3express", "signingRegion" => "{Region}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Expected a endpoint to be specified but no endpoint was found", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://{Bucket}.ec2.{url#authority}", "properties" => {"authSchemes" => [{"disableDoubleEncoding" => true, "name" => "sigv4a", "signingName" => "s3-outposts", "signingRegionSet" => ["*"]}, {"disableDoubleEncoding" => true, "name" => "sigv4", "signingName" => "s3-outposts", "signingRegion" => "{Region}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://{Bucket}.ec2.s3-outposts.{Region}.{partitionResult#dnsSuffix}", "properties" => {"authSchemes" => [{"disableDoubleEncoding" => true, "name" => "sigv4a", "signingName" => "s3-outposts", "signingRegionSet" => ["*"]}, {"disableDoubleEncoding" => true, "name" => "sigv4", "signingName" => "s3-outposts", "signingRegion" => "{Region}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://{Bucket}.op-{outpostId_ssa_2}.{url#authority}", "properties" => {"authSchemes" => [{"disableDoubleEncoding" => true, "name" => "sigv4a", "signingName" => "s3-outposts", "signingRegionSet" => ["*"]}, {"disableDoubleEncoding" => true, "name" => "sigv4", "signingName" => "s3-outposts", "signingRegion" => "{Region}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://{Bucket}.op-{outpostId_ssa_2}.s3-outposts.{Region}.{partitionResult#dnsSuffix}", "properties" => {"authSchemes" => [{"disableDoubleEncoding" => true, "name" => "sigv4a", "signingName" => "s3-outposts", "signingRegionSet" => ["*"]}, {"disableDoubleEncoding" => true, "name" => "sigv4", "signingName" => "s3-outposts", "signingRegion" => "{Region}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Unrecognized hardware type: \"Expected hardware type o or e but got {hardwareType}\"", "type" => "error"}, {"conditions" => [], "error" => "Invalid Outposts Bucket alias - it must be a valid bucket name.", "type" => "error"}, {"conditions" => [], "error" => "Invalid ARN: The outpost Id must only contain a-z, A-Z, 0-9 and `-`.", "type" => "error"}, {"conditions" => [], "error" => "Custom endpoint `{Endpoint}` was not a valid URI", "type" => "error"}, {"conditions" => [], "error" => "S3 Accelerate cannot be used in this region", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://{Bucket}.s3-fips.dualstack.us-east-1.{partitionResult#dnsSuffix}", "properties" => {"authSchemes" => [{"disableDoubleEncoding" => true, "name" => "sigv4", "signingName" => "s3", "signingRegion" => "us-east-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://{Bucket}.s3-fips.dualstack.{Region}.{partitionResult#dnsSuffix}", "properties" => {"authSchemes" => [{"disableDoubleEncoding" => true, "name" => "sigv4", "signingName" => "s3", "signingRegion" => "{Region}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://{Bucket}.s3-fips.us-east-1.{partitionResult#dnsSuffix}", "properties" => {"authSchemes" => [{"disableDoubleEncoding" => true, "name" => "sigv4", "signingName" => "s3", "signingRegion" => "us-east-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://{Bucket}.s3-fips.{Region}.{partitionResult#dnsSuffix}", "properties" => {"authSchemes" => [{"disableDoubleEncoding" => true, "name" => "sigv4", "signingName" => "s3", "signingRegion" => "{Region}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://{Bucket}.s3-accelerate.dualstack.us-east-1.{partitionResult#dnsSuffix}", "properties" => {"authSchemes" => [{"disableDoubleEncoding" => true, "name" => "sigv4", "signingName" => "s3", "signingRegion" => "us-east-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://{Bucket}.s3-accelerate.dualstack.{partitionResult#dnsSuffix}", "properties" => {"authSchemes" => [{"disableDoubleEncoding" => true, "name" => "sigv4", "signingName" => "s3", "signingRegion" => "{Region}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://{Bucket}.s3.dualstack.us-east-1.{partitionResult#dnsSuffix}", "properties" => {"authSchemes" => [{"disableDoubleEncoding" => true, "name" => "sigv4", "signingName" => "s3", "signingRegion" => "us-east-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://{Bucket}.s3.dualstack.{Region}.{partitionResult#dnsSuffix}", "properties" => {"authSchemes" => [{"disableDoubleEncoding" => true, "name" => "sigv4", "signingName" => "s3", "signingRegion" => "{Region}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "{url#scheme}://{url#authority}{url#normalizedPath}{Bucket}", "properties" => {"authSchemes" => [{"disableDoubleEncoding" => true, "name" => "sigv4", "signingName" => "s3", "signingRegion" => "us-east-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "{url#scheme}://{Bucket}.{url#authority}{url#path}", "properties" => {"authSchemes" => [{"disableDoubleEncoding" => true, "name" => "sigv4", "signingName" => "s3", "signingRegion" => "us-east-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "{url#scheme}://{url#authority}{url#normalizedPath}{Bucket}", "properties" => {"authSchemes" => [{"disableDoubleEncoding" => true, "name" => "sigv4", "signingName" => "s3", "signingRegion" => "{Region}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "{url#scheme}://{Bucket}.{url#authority}{url#path}", "properties" => {"authSchemes" => [{"disableDoubleEncoding" => true, "name" => "sigv4", "signingName" => "s3", "signingRegion" => "{Region}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://{Bucket}.s3-accelerate.{partitionResult#dnsSuffix}", "properties" => {"authSchemes" => [{"disableDoubleEncoding" => true, "name" => "sigv4", "signingName" => "s3", "signingRegion" => "us-east-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://{Bucket}.s3-accelerate.{partitionResult#dnsSuffix}", "properties" => {"authSchemes" => [{"disableDoubleEncoding" => true, "name" => "sigv4", "signingName" => "s3", "signingRegion" => "{Region}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://{Bucket}.s3.{partitionResult#dnsSuffix}", "properties" => {"authSchemes" => [{"disableDoubleEncoding" => true, "name" => "sigv4", "signingName" => "s3", "signingRegion" => "us-east-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://{Bucket}.s3.{partitionResult#dnsSuffix}", "properties" => {"authSchemes" => [{"disableDoubleEncoding" => true, "name" => "sigv4", "signingName" => "s3", "signingRegion" => "{Region}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://{Bucket}.s3.{Region}.{partitionResult#dnsSuffix}", "properties" => {"authSchemes" => [{"disableDoubleEncoding" => true, "name" => "sigv4", "signingName" => "s3", "signingRegion" => "{Region}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid region: region was not a valid DNS name.", "type" => "error"}, {"conditions" => [], "error" => "S3 Object Lambda does not support Dual-stack", "type" => "error"}, {"conditions" => [], "error" => "S3 Object Lambda does not support S3 Accelerate", "type" => "error"}, {"conditions" => [], "error" => "Access points are not supported for this operation", "type" => "error"}, {"conditions" => [], "error" => "Invalid configuration: region from ARN `{bucketArn#region}` does not match client region `{Region}` and UseArnRegion is `false`", "type" => "error"}, {"conditions" => [], "error" => "Invalid ARN: Missing account id", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "{url#scheme}://{accessPointName_ssa_1}-{bucketArn#accountId}.{url#authority}{url#path}", "properties" => {"authSchemes" => [{"disableDoubleEncoding" => true, "name" => "sigv4", "signingName" => "s3-object-lambda", "signingRegion" => "{bucketArn#region}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://{accessPointName_ssa_1}-{bucketArn#accountId}.s3-object-lambda-fips.{bucketArn#region}.{bucketPartition#dnsSuffix}", "properties" => {"authSchemes" => [{"disableDoubleEncoding" => true, "name" => "sigv4", "signingName" => "s3-object-lambda", "signingRegion" => "{bucketArn#region}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://{accessPointName_ssa_1}-{bucketArn#accountId}.s3-object-lambda.{bucketArn#region}.{bucketPartition#dnsSuffix}", "properties" => {"authSchemes" => [{"disableDoubleEncoding" => true, "name" => "sigv4", "signingName" => "s3-object-lambda", "signingRegion" => "{bucketArn#region}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid ARN: The access point name may only contain a-z, A-Z, 0-9 and `-`. Found: `{accessPointName_ssa_1}`", "type" => "error"}, {"conditions" => [], "error" => "Invalid ARN: The account id may only contain a-z, A-Z, 0-9 and `-`. Found: `{bucketArn#accountId}`", "type" => "error"}, {"conditions" => [], "error" => "Invalid region in ARN: `{bucketArn#region}` (invalid DNS name)", "type" => "error"}, {"conditions" => [], "error" => "Client was configured for partition `{partitionResult#name}` but ARN (`{Bucket}`) has `{bucketPartition#name}`", "type" => "error"}, {"conditions" => [], "error" => "Invalid ARN: The ARN may only contain a single resource component after `accesspoint`.", "type" => "error"}, {"conditions" => [], "error" => "Invalid ARN: bucket ARN is missing a region", "type" => "error"}, {"conditions" => [], "error" => "Invalid ARN: Expected a resource of the format `accesspoint:<accesspoint name>` but no name was provided", "type" => "error"}, {"conditions" => [], "error" => "Invalid ARN: Object Lambda ARNs only support `accesspoint` arn types, but found: `{arnType}`", "type" => "error"}, {"conditions" => [], "error" => "Access Points do not support S3 Accelerate", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://{accessPointName_ssa_1}-{bucketArn#accountId}.s3-accesspoint-fips.dualstack.{bucketArn#region}.{bucketPartition#dnsSuffix}", "properties" => {"authSchemes" => [{"disableDoubleEncoding" => true, "name" => "sigv4", "signingName" => "s3", "signingRegion" => "{bucketArn#region}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://{accessPointName_ssa_1}-{bucketArn#accountId}.s3-accesspoint-fips.{bucketArn#region}.{bucketPartition#dnsSuffix}", "properties" => {"authSchemes" => [{"disableDoubleEncoding" => true, "name" => "sigv4", "signingName" => "s3", "signingRegion" => "{bucketArn#region}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://{accessPointName_ssa_1}-{bucketArn#accountId}.s3-accesspoint.dualstack.{bucketArn#region}.{bucketPartition#dnsSuffix}", "properties" => {"authSchemes" => [{"disableDoubleEncoding" => true, "name" => "sigv4", "signingName" => "s3", "signingRegion" => "{bucketArn#region}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "{url#scheme}://{accessPointName_ssa_1}-{bucketArn#accountId}.{url#authority}{url#path}", "properties" => {"authSchemes" => [{"disableDoubleEncoding" => true, "name" => "sigv4", "signingName" => "s3", "signingRegion" => "{bucketArn#region}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://{accessPointName_ssa_1}-{bucketArn#accountId}.s3-accesspoint.{bucketArn#region}.{bucketPartition#dnsSuffix}", "properties" => {"authSchemes" => [{"disableDoubleEncoding" => true, "name" => "sigv4", "signingName" => "s3", "signingRegion" => "{bucketArn#region}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid ARN: The ARN was not for the S3 service, found: {bucketArn#service}", "type" => "error"}, {"conditions" => [], "error" => "S3 MRAP does not support dual-stack", "type" => "error"}, {"conditions" => [], "error" => "S3 MRAP does not support FIPS", "type" => "error"}, {"conditions" => [], "error" => "S3 MRAP does not support S3 Accelerate", "type" => "error"}, {"conditions" => [], "error" => "Invalid configuration: Multi-Region Access Point ARNs are disabled.", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://{accessPointName_ssa_1}.accesspoint.s3-global.{partitionResult#dnsSuffix}", "properties" => {"authSchemes" => [{"disableDoubleEncoding" => true, "name" => "sigv4a", "signingName" => "s3", "signingRegionSet" => ["*"]}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Client was configured for partition `{partitionResult#name}` but bucket referred to partition `{bucketArn#partition}`", "type" => "error"}, {"conditions" => [], "error" => "Invalid Access Point Name", "type" => "error"}, {"conditions" => [], "error" => "S3 Outposts does not support Dual-stack", "type" => "error"}, {"conditions" => [], "error" => "S3 Outposts does not support FIPS", "type" => "error"}, {"conditions" => [], "error" => "S3 Outposts does not support S3 Accelerate", "type" => "error"}, {"conditions" => [], "error" => "Invalid Arn: Outpost Access Point ARN contains sub resources", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://{accessPointName_ssa_2}-{bucketArn#accountId}.{outpostId_ssa_1}.{url#authority}", "properties" => {"authSchemes" => [{"disableDoubleEncoding" => true, "name" => "sigv4a", "signingName" => "s3-outposts", "signingRegionSet" => ["*"]}, {"disableDoubleEncoding" => true, "name" => "sigv4", "signingName" => "s3-outposts", "signingRegion" => "{bucketArn#region}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://{accessPointName_ssa_2}-{bucketArn#accountId}.{outpostId_ssa_1}.s3-outposts.{bucketArn#region}.{bucketPartition#dnsSuffix}", "properties" => {"authSchemes" => [{"disableDoubleEncoding" => true, "name" => "sigv4a", "signingName" => "s3-outposts", "signingRegionSet" => ["*"]}, {"disableDoubleEncoding" => true, "name" => "sigv4", "signingName" => "s3-outposts", "signingRegion" => "{bucketArn#region}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid ARN: The access point name may only contain a-z, A-Z, 0-9 and `-`. Found: `{accessPointName_ssa_2}`", "type" => "error"}, {"conditions" => [], "error" => "Expected an outpost type `accesspoint`, found {outpostType}", "type" => "error"}, {"conditions" => [], "error" => "Invalid ARN: expected an access point name", "type" => "error"}, {"conditions" => [], "error" => "Invalid ARN: Expected a 4-component resource", "type" => "error"}, {"conditions" => [], "error" => "Invalid ARN: The outpost Id may only contain a-z, A-Z, 0-9 and `-`. Found: `{outpostId_ssa_1}`", "type" => "error"}, {"conditions" => [], "error" => "Invalid ARN: The Outpost Id was not set", "type" => "error"}, {"conditions" => [], "error" => "Invalid ARN: Unrecognized format: {Bucket} (type: {arnType})", "type" => "error"}, {"conditions" => [], "error" => "Invalid ARN: No ARN type specified", "type" => "error"}, {"conditions" => [], "error" => "Invalid ARN: `{Bucket}` was not a valid ARN", "type" => "error"}, {"conditions" => [], "error" => "Path-style addressing cannot be used with ARN buckets", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://s3-fips.dualstack.us-east-1.{partitionResult#dnsSuffix}/{uri_encoded_bucket}", "properties" => {"authSchemes" => [{"disableDoubleEncoding" => true, "name" => "sigv4", "signingName" => "s3", "signingRegion" => "us-east-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://s3-fips.dualstack.{Region}.{partitionResult#dnsSuffix}/{uri_encoded_bucket}", "properties" => {"authSchemes" => [{"disableDoubleEncoding" => true, "name" => "sigv4", "signingName" => "s3", "signingRegion" => "{Region}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://s3-fips.us-east-1.{partitionResult#dnsSuffix}/{uri_encoded_bucket}", "properties" => {"authSchemes" => [{"disableDoubleEncoding" => true, "name" => "sigv4", "signingName" => "s3", "signingRegion" => "us-east-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://s3-fips.{Region}.{partitionResult#dnsSuffix}/{uri_encoded_bucket}", "properties" => {"authSchemes" => [{"disableDoubleEncoding" => true, "name" => "sigv4", "signingName" => "s3", "signingRegion" => "{Region}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://s3.dualstack.us-east-1.{partitionResult#dnsSuffix}/{uri_encoded_bucket}", "properties" => {"authSchemes" => [{"disableDoubleEncoding" => true, "name" => "sigv4", "signingName" => "s3", "signingRegion" => "us-east-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://s3.dualstack.{Region}.{partitionResult#dnsSuffix}/{uri_encoded_bucket}", "properties" => {"authSchemes" => [{"disableDoubleEncoding" => true, "name" => "sigv4", "signingName" => "s3", "signingRegion" => "{Region}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "{url#scheme}://{url#authority}{url#normalizedPath}{uri_encoded_bucket}", "properties" => {"authSchemes" => [{"disableDoubleEncoding" => true, "name" => "sigv4", "signingName" => "s3", "signingRegion" => "us-east-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "{url#scheme}://{url#authority}{url#normalizedPath}{uri_encoded_bucket}", "properties" => {"authSchemes" => [{"disableDoubleEncoding" => true, "name" => "sigv4", "signingName" => "s3", "signingRegion" => "{Region}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://s3.{partitionResult#dnsSuffix}/{uri_encoded_bucket}", "properties" => {"authSchemes" => [{"disableDoubleEncoding" => true, "name" => "sigv4", "signingName" => "s3", "signingRegion" => "us-east-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://s3.{partitionResult#dnsSuffix}/{uri_encoded_bucket}", "properties" => {"authSchemes" => [{"disableDoubleEncoding" => true, "name" => "sigv4", "signingName" => "s3", "signingRegion" => "{Region}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://s3.{Region}.{partitionResult#dnsSuffix}/{uri_encoded_bucket}", "properties" => {"authSchemes" => [{"disableDoubleEncoding" => true, "name" => "sigv4", "signingName" => "s3", "signingRegion" => "{Region}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Path-style addressing cannot be used with S3 Accelerate", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "{url#scheme}://{url#authority}{url#path}", "properties" => {"authSchemes" => [{"disableDoubleEncoding" => true, "name" => "sigv4", "signingName" => "s3-object-lambda", "signingRegion" => "{Region}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://s3-object-lambda-fips.{Region}.{partitionResult#dnsSuffix}", "properties" => {"authSchemes" => [{"disableDoubleEncoding" => true, "name" => "sigv4", "signingName" => "s3-object-lambda", "signingRegion" => "{Region}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://s3-object-lambda.{Region}.{partitionResult#dnsSuffix}", "properties" => {"authSchemes" => [{"disableDoubleEncoding" => true, "name" => "sigv4", "signingName" => "s3-object-lambda", "signingRegion" => "{Region}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://s3-fips.dualstack.us-east-1.{partitionResult#dnsSuffix}", "properties" => {"authSchemes" => [{"disableDoubleEncoding" => true, "name" => "sigv4", "signingName" => "s3", "signingRegion" => "us-east-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://s3-fips.dualstack.{Region}.{partitionResult#dnsSuffix}", "properties" => {"authSchemes" => [{"disableDoubleEncoding" => true, "name" => "sigv4", "signingName" => "s3", "signingRegion" => "{Region}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://s3-fips.us-east-1.{partitionResult#dnsSuffix}", "properties" => {"authSchemes" => [{"disableDoubleEncoding" => true, "name" => "sigv4", "signingName" => "s3", "signingRegion" => "us-east-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://s3-fips.{Region}.{partitionResult#dnsSuffix}", "properties" => {"authSchemes" => [{"disableDoubleEncoding" => true, "name" => "sigv4", "signingName" => "s3", "signingRegion" => "{Region}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://s3.dualstack.us-east-1.{partitionResult#dnsSuffix}", "properties" => {"authSchemes" => [{"disableDoubleEncoding" => true, "name" => "sigv4", "signingName" => "s3", "signingRegion" => "us-east-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://s3.dualstack.{Region}.{partitionResult#dnsSuffix}", "properties" => {"authSchemes" => [{"disableDoubleEncoding" => true, "name" => "sigv4", "signingName" => "s3", "signingRegion" => "{Region}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "{url#scheme}://{url#authority}{url#path}", "properties" => {"authSchemes" => [{"disableDoubleEncoding" => true, "name" => "sigv4", "signingName" => "s3", "signingRegion" => "us-east-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "{url#scheme}://{url#authority}{url#path}", "properties" => {"authSchemes" => [{"disableDoubleEncoding" => true, "name" => "sigv4", "signingName" => "s3", "signingRegion" => "{Region}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://s3.{partitionResult#dnsSuffix}", "properties" => {"authSchemes" => [{"disableDoubleEncoding" => true, "name" => "sigv4", "signingName" => "s3", "signingRegion" => "us-east-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://s3.{partitionResult#dnsSuffix}", "properties" => {"authSchemes" => [{"disableDoubleEncoding" => true, "name" => "sigv4", "signingName" => "s3", "signingRegion" => "{Region}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://s3.{Region}.{partitionResult#dnsSuffix}", "properties" => {"authSchemes" => [{"disableDoubleEncoding" => true, "name" => "sigv4", "signingName" => "s3", "signingRegion" => "{Region}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "A region must be set when sending requests to S3.", "type" => "error"}], "root" => 2, "nodeCount" => 553, "nodes" => "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"}}
       service.add_operation(:abort_multipart_upload, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.s3#AbortMultipartUpload"
         operation.name = "AbortMultipartUpload"
@@ -3038,6 +3408,15 @@ module Aws::S3
         operation.output = DeleteObjectOutput
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/{Bucket}/{Key+}?x-id=DeleteObject", "code" => 204}}
       end)
+      service.add_operation(:delete_object_annotation, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#DeleteObjectAnnotation"
+        operation.name = "DeleteObjectAnnotation"
+        operation.input = DeleteObjectAnnotationRequest
+        operation.output = DeleteObjectAnnotationOutput
+        operation.errors << NoSuchBucket
+        operation.errors << NoSuchKey
+        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/{Bucket}/{Key+}?annotation", "code" => 204}}
+      end)
       service.add_operation(:delete_object_tagging, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.s3#DeleteObjectTagging"
         operation.name = "DeleteObjectTagging"
@@ -3058,6 +3437,13 @@ module Aws::S3
         operation.input = DeletePublicAccessBlockRequest
         operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/{Bucket}?publicAccessBlock", "code" => 204}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
+      end)
+      service.add_operation(:get_bucket_abac, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#GetBucketAbac"
+        operation.name = "GetBucketAbac"
+        operation.input = GetBucketAbacRequest
+        operation.output = GetBucketAbacOutput
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{Bucket}?abac", "code" => 200}}
       end)
       service.add_operation(:get_bucket_accelerate_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.s3#GetBucketAccelerateConfiguration"
@@ -3220,7 +3606,7 @@ module Aws::S3
         operation.output = GetObjectOutput
         operation.errors << InvalidObjectState
         operation.errors << NoSuchKey
-        operation.traits = {"aws.protocols#httpChecksum" => {"requestValidationModeMember" => "ChecksumMode", "responseAlgorithms" => ["CRC64NVME", "CRC32", "CRC32C", "SHA256", "SHA1"]}, "smithy.api#http" => {"method" => "GET", "uri" => "/{Bucket}/{Key+}?x-id=GetObject", "code" => 200}}
+        operation.traits = {"aws.protocols#httpChecksum" => {"requestValidationModeMember" => "ChecksumMode", "responseAlgorithms" => ["CRC64NVME", "CRC32", "CRC32C", "SHA256", "SHA1", "SHA512", "MD5", "XXHASH64", "XXHASH3", "XXHASH128"]}, "smithy.api#http" => {"method" => "GET", "uri" => "/{Bucket}/{Key+}?x-id=GetObject", "code" => 200}}
       end)
       service.add_operation(:get_object_acl, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.s3#GetObjectAcl"
@@ -3229,6 +3615,16 @@ module Aws::S3
         operation.output = GetObjectAclOutput
         operation.errors << NoSuchKey
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{Bucket}/{Key+}?acl", "code" => 200}}
+      end)
+      service.add_operation(:get_object_annotation, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#GetObjectAnnotation"
+        operation.name = "GetObjectAnnotation"
+        operation.input = GetObjectAnnotationRequest
+        operation.output = GetObjectAnnotationOutput
+        operation.errors << NoSuchAnnotation
+        operation.errors << NoSuchBucket
+        operation.errors << NoSuchKey
+        operation.traits = {"aws.protocols#httpChecksum" => {"requestValidationModeMember" => "ChecksumMode", "responseAlgorithms" => ["CRC64NVME", "CRC32", "CRC32C", "SHA256", "SHA1", "SHA512", "MD5", "XXHASH64", "XXHASH3", "XXHASH128"]}, "smithy.api#http" => {"method" => "GET", "uri" => "/{Bucket}/{Key+}?annotation&x-id=GetObjectAnnotation", "code" => 200}}
       end)
       service.add_operation(:get_object_attributes, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.s3#GetObjectAttributes"
@@ -3322,7 +3718,7 @@ module Aws::S3
         operation.name = "ListBucketMetricsConfigurations"
         operation.input = ListBucketMetricsConfigurationsRequest
         operation.output = ListBucketMetricsConfigurationsOutput
-        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{Bucket}?metrics&x-id=ListBucketMetricsConfigurations", "code" => 200}}
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{Bucket}?metrics&x-id=ListBucketMetricsConfigurations", "code" => 200}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
       end)
       service.add_operation(:list_buckets, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.s3#ListBuckets"
@@ -3346,6 +3742,17 @@ module Aws::S3
         operation.input = ListMultipartUploadsRequest
         operation.output = ListMultipartUploadsOutput
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{Bucket}?uploads", "code" => 200}}
+      end)
+      service.add_operation(:list_object_annotations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#ListObjectAnnotations"
+        operation.name = "ListObjectAnnotations"
+        operation.input = ListObjectAnnotationsRequest
+        operation.output = ListObjectAnnotationsOutput
+        operation.errors << InvalidPrefix
+        operation.errors << NoSuchBucket
+        operation.errors << NoSuchKey
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{Bucket}/{Key+}?annotation&x-id=ListObjectAnnotations", "code" => 200}}
+        operation[:paginator] = Paginators::ListObjectAnnotations.new
       end)
       service.add_operation(:list_object_versions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.s3#ListObjectVersions"
@@ -3378,6 +3785,13 @@ module Aws::S3
         operation.output = ListPartsOutput
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{Bucket}/{Key+}?x-id=ListParts", "code" => 200}}
         operation[:paginator] = Paginators::ListParts.new
+      end)
+      service.add_operation(:put_bucket_abac, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#PutBucketAbac"
+        operation.name = "PutBucketAbac"
+        operation.input = PutBucketAbacRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.traits = {"aws.protocols#httpChecksum" => {"requestAlgorithmMember" => "ChecksumAlgorithm"}, "smithy.api#http" => {"method" => "PUT", "uri" => "/{Bucket}?abac", "code" => 200}}
       end)
       service.add_operation(:put_bucket_accelerate_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.s3#PutBucketAccelerateConfiguration"
@@ -3524,6 +3938,20 @@ module Aws::S3
         operation.errors << NoSuchKey
         operation.traits = {"aws.protocols#httpChecksum" => {"requestAlgorithmMember" => "ChecksumAlgorithm", "requestChecksumRequired" => true}, "smithy.api#http" => {"method" => "PUT", "uri" => "/{Bucket}/{Key+}?acl", "code" => 200}}
       end)
+      service.add_operation(:put_object_annotation, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#PutObjectAnnotation"
+        operation.name = "PutObjectAnnotation"
+        operation.input = PutObjectAnnotationRequest
+        operation.output = PutObjectAnnotationOutput
+        operation.errors << AnnotationLimitExceeded
+        operation.errors << AnnotationNameTooLong
+        operation.errors << InvalidAnnotationName
+        operation.errors << InvalidRequest
+        operation.errors << NoSuchBucket
+        operation.errors << NoSuchKey
+        operation.errors << UnsupportedMediaType
+        operation.traits = {"aws.protocols#httpChecksum" => {"requestAlgorithmMember" => "ChecksumAlgorithm"}, "smithy.api#http" => {"method" => "PUT", "uri" => "/{Bucket}/{Key+}?annotation", "code" => 200}}
+      end)
       service.add_operation(:put_object_legal_hold, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.s3#PutObjectLegalHold"
         operation.name = "PutObjectLegalHold"
@@ -3582,6 +4010,13 @@ module Aws::S3
         operation.output = SelectObjectContentOutput
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/{Bucket}/{Key+}?select&select-type=2", "code" => 200}}
       end)
+      service.add_operation(:update_bucket_metadata_annotation_table_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#UpdateBucketMetadataAnnotationTableConfiguration"
+        operation.name = "UpdateBucketMetadataAnnotationTableConfiguration"
+        operation.input = UpdateBucketMetadataAnnotationTableConfigurationRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.traits = {"aws.protocols#httpChecksum" => {"requestAlgorithmMember" => "ChecksumAlgorithm", "requestChecksumRequired" => true}, "smithy.api#http" => {"method" => "PUT", "uri" => "/{Bucket}?metadataAnnotationTable", "code" => 200}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
+      end)
       service.add_operation(:update_bucket_metadata_inventory_table_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.s3#UpdateBucketMetadataInventoryTableConfiguration"
         operation.name = "UpdateBucketMetadataInventoryTableConfiguration"
@@ -3595,6 +4030,16 @@ module Aws::S3
         operation.input = UpdateBucketMetadataJournalTableConfigurationRequest
         operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
         operation.traits = {"aws.protocols#httpChecksum" => {"requestAlgorithmMember" => "ChecksumAlgorithm", "requestChecksumRequired" => true}, "smithy.api#http" => {"method" => "PUT", "uri" => "/{Bucket}?metadataJournalTable", "code" => 200}, "smithy.rules#staticContextParams" => {"UseS3ExpressControlEndpoint" => {"value" => true}}}
+      end)
+      service.add_operation(:update_object_encryption, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3#UpdateObjectEncryption"
+        operation.name = "UpdateObjectEncryption"
+        operation.input = UpdateObjectEncryptionRequest
+        operation.output = UpdateObjectEncryptionResponse
+        operation.errors << AccessDenied
+        operation.errors << InvalidRequest
+        operation.errors << NoSuchKey
+        operation.traits = {"aws.protocols#httpChecksum" => {"requestAlgorithmMember" => "ChecksumAlgorithm", "requestChecksumRequired" => true}, "smithy.api#http" => {"method" => "PUT", "uri" => "/{Bucket}/{Key+}?encryption", "code" => 200}}
       end)
       service.add_operation(:upload_part, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.s3#UploadPart"

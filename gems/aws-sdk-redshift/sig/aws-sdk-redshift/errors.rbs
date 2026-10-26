@@ -288,6 +288,12 @@ module Aws::Redshift
     class PartnerNotFoundFault < Smithy::Client::ServiceError
       def message: () -> String?
     end
+    class Qev2IdcApplicationAlreadyExistsFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class Qev2IdcApplicationNotExistsFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
     class RedshiftIdcApplicationAlreadyExistsFault < Smithy::Client::ServiceError
       def message: () -> String?
     end
@@ -295,6 +301,9 @@ module Aws::Redshift
       def message: () -> String?
     end
     class RedshiftIdcApplicationQuotaExceededFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class RedshiftInvalidParameterFault < Smithy::Client::ServiceError
       def message: () -> String?
     end
     class ReservedNodeAlreadyExistsFault < Smithy::Client::ServiceError

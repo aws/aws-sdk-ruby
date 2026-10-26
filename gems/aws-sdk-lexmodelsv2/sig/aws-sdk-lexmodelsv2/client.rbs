@@ -233,9 +233,14 @@ module Aws::LexModelsV2
       def description: () -> String?
       def nlu_intent_confidence_threshold: () -> Float?
       def voice_settings: () -> Types::VoiceSettings?
+      def unified_speech_settings: () -> Types::UnifiedSpeechSettings?
+      def audio_filler_settings: () -> Types::AudioFillerSettings?
+      def speech_recognition_settings: () -> Types::SpeechRecognitionSettings?
       def bot_locale_status: () -> String?
       def creation_date_time: () -> Time?
       def generative_ai_settings: () -> Types::GenerativeAISettings?
+      def speech_detection_sensitivity: () -> String?
+      def speaker_diarization_settings: () -> Types::SpeakerDiarizationSettings?
     end
     def create_bot_locale: (
       ?bot_id: String,
@@ -244,8 +249,30 @@ module Aws::LexModelsV2
       ?description: String,
       ?nlu_intent_confidence_threshold: Float,
       ?voice_settings: {
-        voice_id: String,
-        engine: String
+        engine: String,
+        voice_id: String
+      },
+      ?unified_speech_settings: {
+        speech_foundation_model: {
+          model_arn: String,
+          voice_id: String
+        }
+      },
+      ?audio_filler_settings: {
+        enabled: bool,
+        audio_type: String,
+        start_delay_in_milliseconds: Integer,
+        minimum_play_duration_in_milliseconds: Integer,
+        response_delivery_delay_in_milliseconds: Integer
+      },
+      ?speech_recognition_settings: {
+        speech_model_preference: String,
+        speech_model_config: {
+          deepgram_config: {
+            api_token_secret_arn: String,
+            model_id: String
+          }
+        }
       },
       ?generative_ai_settings: {
         runtime_settings: {
@@ -262,7 +289,13 @@ module Aws::LexModelsV2
             }
           },
           nlu_improvement: {
-            enabled: untyped
+            enabled: untyped,
+            assisted_nlu_mode: String,
+            intent_disambiguation_settings: {
+              enabled: untyped,
+              max_disambiguation_intents: Integer,
+              custom_disambiguation_message: String
+            }
           }
         },
         buildtime_settings: {
@@ -275,6 +308,10 @@ module Aws::LexModelsV2
             bedrock_model_specification: untyped
           }
         }
+      },
+      ?speech_detection_sensitivity: String,
+      ?speaker_diarization_settings: {
+        enabled: bool
       }
     ) -> _CreateBotLocaleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateBotLocaleResponse
 
@@ -346,6 +383,7 @@ module Aws::LexModelsV2
       include Smithy::Client::_Response[Types::CreateIntentResponse]
       def intent_id: () -> String?
       def intent_name: () -> String?
+      def intent_display_name: () -> String?
       def description: () -> String?
       def parent_intent_signature: () -> String?
       def sample_utterances: () -> Array[Types::SampleUtterance]?
@@ -366,6 +404,7 @@ module Aws::LexModelsV2
     end
     def create_intent: (
       ?intent_name: String,
+      ?intent_display_name: String,
       ?description: String,
       ?parent_intent_signature: String,
       ?sample_utterances: Array[
@@ -1304,6 +1343,14 @@ module Aws::LexModelsV2
       ?skip_resource_in_use_check: bool
     ) -> _DeleteBotAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBotAliasResponse
 
+    interface _DeleteBotAnalyzerRecommendationResponse
+      include Smithy::Client::_Response[Types::DeleteBotAnalyzerRecommendationResponse]
+    end
+    def delete_bot_analyzer_recommendation: (
+      ?bot_id: String,
+      ?bot_analyzer_request_id: String
+    ) -> _DeleteBotAnalyzerRecommendationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBotAnalyzerRecommendationResponse
+
     interface _DeleteBotLocaleResponse
       include Smithy::Client::_Response[Types::DeleteBotLocaleResponse]
       def bot_id: () -> String?
@@ -1481,6 +1528,23 @@ module Aws::LexModelsV2
       ?bot_id: String
     ) -> _DescribeBotAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeBotAliasResponse
 
+    interface _DescribeBotAnalyzerRecommendationResponse
+      include Smithy::Client::_Response[Types::DescribeBotAnalyzerRecommendationResponse]
+      def bot_id: () -> String?
+      def bot_version: () -> String?
+      def locale_id: () -> String?
+      def bot_analyzer_status: () -> String?
+      def creation_date_time: () -> Time?
+      def bot_analyzer_recommendation_list: () -> Array[Types::BotAnalyzerRecommendation]?
+      def next_token: () -> String?
+    end
+    def describe_bot_analyzer_recommendation: (
+      ?bot_id: String,
+      ?bot_analyzer_request_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _DescribeBotAnalyzerRecommendationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeBotAnalyzerRecommendationResponse
+
     interface _DescribeBotLocaleResponse
       include Smithy::Client::_Response[Types::DescribeBotLocaleResponse]
       def bot_id: () -> String?
@@ -1490,6 +1554,9 @@ module Aws::LexModelsV2
       def description: () -> String?
       def nlu_intent_confidence_threshold: () -> Float?
       def voice_settings: () -> Types::VoiceSettings?
+      def unified_speech_settings: () -> Types::UnifiedSpeechSettings?
+      def audio_filler_settings: () -> Types::AudioFillerSettings?
+      def speech_recognition_settings: () -> Types::SpeechRecognitionSettings?
       def intents_count: () -> Integer?
       def slot_types_count: () -> Integer?
       def bot_locale_status: () -> String?
@@ -1500,6 +1567,8 @@ module Aws::LexModelsV2
       def bot_locale_history_events: () -> Array[Types::BotLocaleHistoryEvent]?
       def recommended_actions: () -> Array[String]?
       def generative_ai_settings: () -> Types::GenerativeAISettings?
+      def speech_detection_sensitivity: () -> String?
+      def speaker_diarization_settings: () -> Types::SpeakerDiarizationSettings?
     end
     def describe_bot_locale: (
       ?bot_id: String,
@@ -1634,6 +1703,7 @@ module Aws::LexModelsV2
       include Smithy::Client::_Response[Types::DescribeIntentResponse]
       def intent_id: () -> String?
       def intent_name: () -> String?
+      def intent_display_name: () -> String?
       def description: () -> String?
       def parent_intent_signature: () -> String?
       def sample_utterances: () -> Array[Types::SampleUtterance]?
@@ -1876,6 +1946,22 @@ module Aws::LexModelsV2
       ?max_results: Integer,
       ?next_token: String
     ) -> _ListBotAliasesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBotAliasesResponse
+
+    interface _ListBotAnalyzerHistoryResponse
+      include Smithy::Client::_Response[Types::ListBotAnalyzerHistoryResponse]
+      def bot_id: () -> String?
+      def locale_id: () -> String?
+      def bot_version: () -> String?
+      def bot_analyzer_history_list: () -> Array[Types::BotAnalyzerHistorySummary]?
+      def next_token: () -> String?
+    end
+    def list_bot_analyzer_history: (
+      ?bot_id: String,
+      ?locale_id: String,
+      ?bot_version: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListBotAnalyzerHistoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBotAnalyzerHistoryResponse
 
     interface _ListBotLocalesResponse
       include Smithy::Client::_Response[Types::ListBotLocalesResponse]
@@ -2530,6 +2616,22 @@ module Aws::LexModelsV2
       ?next_index: Integer
     ) -> _SearchAssociatedTranscriptsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchAssociatedTranscriptsResponse
 
+    interface _StartBotAnalyzerResponse
+      include Smithy::Client::_Response[Types::StartBotAnalyzerResponse]
+      def bot_id: () -> String?
+      def bot_version: () -> String?
+      def locale_id: () -> String?
+      def bot_analyzer_status: () -> String?
+      def bot_analyzer_request_id: () -> String?
+      def creation_date_time: () -> Time?
+    end
+    def start_bot_analyzer: (
+      ?bot_id: String,
+      ?analysis_scope: String,
+      ?locale_id: String,
+      ?bot_version: String
+    ) -> _StartBotAnalyzerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartBotAnalyzerResponse
+
     interface _StartBotRecommendationResponse
       include Smithy::Client::_Response[Types::StartBotRecommendationResponse]
       def bot_id: () -> String?
@@ -2617,8 +2719,34 @@ module Aws::LexModelsV2
           locale_id: String,
           nlu_intent_confidence_threshold: Float,
           voice_settings: {
-            voice_id: String,
-            engine: String
+            engine: String,
+            voice_id: String
+          },
+          speech_recognition_settings: {
+            speech_model_preference: String,
+            speech_model_config: {
+              deepgram_config: {
+                api_token_secret_arn: String,
+                model_id: String
+              }
+            }
+          },
+          speech_detection_sensitivity: String,
+          unified_speech_settings: {
+            speech_foundation_model: {
+              model_arn: String,
+              voice_id: untyped
+            }
+          },
+          audio_filler_settings: {
+            enabled: bool,
+            audio_type: String,
+            start_delay_in_milliseconds: Integer,
+            minimum_play_duration_in_milliseconds: Integer,
+            response_delivery_delay_in_milliseconds: Integer
+          },
+          speaker_diarization_settings: {
+            enabled: bool
           }
         },
         custom_vocabulary_import_specification: {
@@ -2704,6 +2832,19 @@ module Aws::LexModelsV2
       ?role_arn: String,
       ?test_set_tags: Hash[String, String]
     ) -> _StartTestSetGenerationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartTestSetGenerationResponse
+
+    interface _StopBotAnalyzerResponse
+      include Smithy::Client::_Response[Types::StopBotAnalyzerResponse]
+      def bot_id: () -> String?
+      def bot_version: () -> String?
+      def locale_id: () -> String?
+      def bot_analyzer_status: () -> String?
+      def bot_analyzer_request_id: () -> String?
+    end
+    def stop_bot_analyzer: (
+      ?bot_id: String,
+      ?bot_analyzer_request_id: String
+    ) -> _StopBotAnalyzerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopBotAnalyzerResponse
 
     interface _StopBotRecommendationResponse
       include Smithy::Client::_Response[Types::StopBotRecommendationResponse]
@@ -2847,12 +2988,17 @@ module Aws::LexModelsV2
       def description: () -> String?
       def nlu_intent_confidence_threshold: () -> Float?
       def voice_settings: () -> Types::VoiceSettings?
+      def unified_speech_settings: () -> Types::UnifiedSpeechSettings?
+      def audio_filler_settings: () -> Types::AudioFillerSettings?
+      def speech_recognition_settings: () -> Types::SpeechRecognitionSettings?
       def bot_locale_status: () -> String?
       def failure_reasons: () -> Array[String]?
       def creation_date_time: () -> Time?
       def last_updated_date_time: () -> Time?
       def recommended_actions: () -> Array[String]?
       def generative_ai_settings: () -> Types::GenerativeAISettings?
+      def speech_detection_sensitivity: () -> String?
+      def speaker_diarization_settings: () -> Types::SpeakerDiarizationSettings?
     end
     def update_bot_locale: (
       ?bot_id: String,
@@ -2861,8 +3007,30 @@ module Aws::LexModelsV2
       ?description: String,
       ?nlu_intent_confidence_threshold: Float,
       ?voice_settings: {
-        voice_id: String,
-        engine: String
+        engine: String,
+        voice_id: String
+      },
+      ?unified_speech_settings: {
+        speech_foundation_model: {
+          model_arn: String,
+          voice_id: String
+        }
+      },
+      ?audio_filler_settings: {
+        enabled: bool,
+        audio_type: String,
+        start_delay_in_milliseconds: Integer,
+        minimum_play_duration_in_milliseconds: Integer,
+        response_delivery_delay_in_milliseconds: Integer
+      },
+      ?speech_recognition_settings: {
+        speech_model_preference: String,
+        speech_model_config: {
+          deepgram_config: {
+            api_token_secret_arn: String,
+            model_id: String
+          }
+        }
       },
       ?generative_ai_settings: {
         runtime_settings: {
@@ -2879,7 +3047,13 @@ module Aws::LexModelsV2
             }
           },
           nlu_improvement: {
-            enabled: untyped
+            enabled: untyped,
+            assisted_nlu_mode: String,
+            intent_disambiguation_settings: {
+              enabled: untyped,
+              max_disambiguation_intents: Integer,
+              custom_disambiguation_message: String
+            }
           }
         },
         buildtime_settings: {
@@ -2892,6 +3066,10 @@ module Aws::LexModelsV2
             bedrock_model_specification: untyped
           }
         }
+      },
+      ?speech_detection_sensitivity: String,
+      ?speaker_diarization_settings: {
+        enabled: bool
       }
     ) -> _UpdateBotLocaleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateBotLocaleResponse
 
@@ -2937,6 +3115,7 @@ module Aws::LexModelsV2
       include Smithy::Client::_Response[Types::UpdateIntentResponse]
       def intent_id: () -> String?
       def intent_name: () -> String?
+      def intent_display_name: () -> String?
       def description: () -> String?
       def parent_intent_signature: () -> String?
       def sample_utterances: () -> Array[Types::SampleUtterance]?
@@ -2960,6 +3139,7 @@ module Aws::LexModelsV2
     def update_intent: (
       ?intent_id: String,
       ?intent_name: String,
+      ?intent_display_name: String,
       ?description: String,
       ?parent_intent_signature: String,
       ?sample_utterances: Array[

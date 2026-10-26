@@ -1,0 +1,5 @@
+  module Aws
+    module CloudWatchOmni
+      VERSION: String
+    end
+  end

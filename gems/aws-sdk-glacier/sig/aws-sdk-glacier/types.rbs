@@ -1027,6 +1027,21 @@ module Aws::Glacier
       attr_accessor message: String?
     end
 
+    class NoLongerSupportedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
     class OutputLocation
       include Smithy::Schema::Structure
 

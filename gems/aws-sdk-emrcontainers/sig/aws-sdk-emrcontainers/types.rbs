@@ -6,6 +6,19 @@ module Aws::EMRcontainers
       DISABLED: String
     end
 
+    class AuthenticationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_center_configuration: Types::IdentityCenterConfiguration,
+        ?iam_configuration: Types::IAMConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_center_configuration: Types::IdentityCenterConfiguration?
+      attr_accessor iam_configuration: Types::IAMConfiguration?
+    end
+
     class AuthorizationConfiguration
       include Smithy::Schema::Structure
 
@@ -200,6 +213,7 @@ module Aws::EMRcontainers
         ?configuration_overrides: Types::ConfigurationOverrides,
         ?client_token: String,
         ?tags: Hash[String, String],
+        ?session_idle_timeout_in_minutes: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -212,6 +226,7 @@ module Aws::EMRcontainers
       attr_accessor configuration_overrides: Types::ConfigurationOverrides?
       attr_accessor client_token: String?
       attr_accessor tags: Hash[String, String]?
+      attr_accessor session_idle_timeout_in_minutes: Integer?
     end
 
     class CreateManagedEndpointResponse
@@ -274,6 +289,8 @@ module Aws::EMRcontainers
         ?client_token: String,
         ?tags: Hash[String, String],
         ?security_configuration_id: String,
+        ?session_enabled: bool,
+        ?scheduler_configuration: Types::SchedulerConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -282,6 +299,8 @@ module Aws::EMRcontainers
       attr_accessor client_token: String?
       attr_accessor tags: Hash[String, String]?
       attr_accessor security_configuration_id: String?
+      attr_accessor session_enabled: bool?
+      attr_accessor scheduler_configuration: Types::SchedulerConfiguration?
     end
 
     class CreateVirtualClusterResponse
@@ -361,6 +380,28 @@ module Aws::EMRcontainers
 
       attr_accessor id: String?
       attr_accessor virtual_cluster_id: String?
+    end
+
+    class DeleteSecurityConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DeleteSecurityConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
     end
 
     class DeleteVirtualClusterRequest
@@ -550,6 +591,7 @@ module Aws::EMRcontainers
         ?certificate_authority: Types::Certificate,
         ?configuration_overrides: Types::ConfigurationOverrides,
         ?server_url: String,
+        ?auth_proxy_url: String,
         ?created_at: Time,
         ?security_group: String,
         ?subnet_ids: Array[String],
@@ -571,6 +613,7 @@ module Aws::EMRcontainers
       attr_accessor certificate_authority: Types::Certificate?
       attr_accessor configuration_overrides: Types::ConfigurationOverrides?
       attr_accessor server_url: String?
+      attr_accessor auth_proxy_url: String?
       attr_accessor created_at: Time?
       attr_accessor security_group: String?
       attr_accessor subnet_ids: Array[String]?
@@ -623,13 +666,43 @@ module Aws::EMRcontainers
       def initialize: (
         ?id: String,
         ?credentials: Types::Credentials,
+        ?endpoint_credentials: Types::Credentials,
         ?expires_at: Time,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor id: String?
       attr_accessor credentials: Types::Credentials?
+      attr_accessor endpoint_credentials: Types::Credentials?
       attr_accessor expires_at: Time?
+    end
+
+    class IAMConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?system_role: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor system_role: String?
+    end
+
+    class IdentityCenterConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enable_identity_center: bool,
+        ?identity_center_application_assignment_required: bool,
+        ?identity_center_instance_arn: String,
+        ?emr_identity_center_application_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enable_identity_center: bool?
+      attr_accessor identity_center_application_assignment_required: bool?
+      attr_accessor identity_center_instance_arn: String?
+      attr_accessor emr_identity_center_application_arn: String?
     end
 
     class InTransitEncryptionConfiguration
@@ -1115,10 +1188,38 @@ module Aws::EMRcontainers
 
       def initialize: (
         ?log_uri: String,
+        ?encryption_key_arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor log_uri: String?
+      attr_accessor encryption_key_arn: String?
+    end
+
+    class SchedulerConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_in_queue_job_runs: Integer,
+        ?max_concurrent_job_runs: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_in_queue_job_runs: Integer?
+      attr_accessor max_concurrent_job_runs: Integer?
+    end
+
+    class SchedulerStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?current_in_queue_job_runs: Integer,
+        ?current_concurrent_job_runs: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor current_in_queue_job_runs: Integer?
+      attr_accessor current_concurrent_job_runs: Integer?
     end
 
     class SecureNamespaceInfo
@@ -1162,10 +1263,12 @@ module Aws::EMRcontainers
 
       def initialize: (
         ?authorization_configuration: Types::AuthorizationConfiguration,
+        ?authentication_configuration: Types::AuthenticationConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor authorization_configuration: Types::AuthorizationConfiguration?
+      attr_accessor authentication_configuration: Types::AuthenticationConfiguration?
     end
 
     class SparkSqlJobDriver
@@ -1321,6 +1424,32 @@ module Aws::EMRcontainers
 
     end
 
+    class UpdateVirtualClusterRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?scheduler_configuration: Types::SchedulerConfiguration,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor scheduler_configuration: Types::SchedulerConfiguration?
+      attr_accessor client_token: String?
+    end
+
+    class UpdateVirtualClusterResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?virtual_cluster: Types::VirtualCluster,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor virtual_cluster: Types::VirtualCluster?
+    end
+
     class ValidationException
       include Smithy::Schema::Structure
 
@@ -1344,6 +1473,9 @@ module Aws::EMRcontainers
         ?created_at: Time,
         ?tags: Hash[String, String],
         ?security_configuration_id: String,
+        ?session_enabled: bool,
+        ?scheduler_configuration: Types::SchedulerConfiguration,
+        ?scheduler_status: Types::SchedulerStatus,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1355,6 +1487,9 @@ module Aws::EMRcontainers
       attr_accessor created_at: Time?
       attr_accessor tags: Hash[String, String]?
       attr_accessor security_configuration_id: String?
+      attr_accessor session_enabled: bool?
+      attr_accessor scheduler_configuration: Types::SchedulerConfiguration?
+      attr_accessor scheduler_status: Types::SchedulerStatus?
     end
 
     module VirtualClusterState

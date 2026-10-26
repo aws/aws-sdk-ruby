@@ -219,6 +219,10 @@ module Aws::IoTWireless
         participating_gateways: {
           gateway_list: Array[String],
           transmission_interval: Integer
+        },
+        default_session_parameters: {
+          dl_dr: Integer,
+          dl_freq: Integer
         }
       },
       ?tags: Array[
@@ -351,7 +355,11 @@ module Aws::IoTWireless
       ],
       ?positioning: String,
       ?sidewalk: {
-        device_profile_id: String
+        device_profile_id: String,
+        positioning: {
+          destination_name: String
+        },
+        sidewalk_manufacturing_sn: String
       }
     ) -> _CreateWirelessDeviceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWirelessDeviceResponse
 
@@ -880,7 +888,24 @@ module Aws::IoTWireless
         assist_altitude: Float,
         use2_d_solver: bool
       },
-      ?timestamp: Time
+      ?gnss_multi_frame: {
+        captures: Array[
+          {
+            payload: String,
+            capture_time: Float
+          }
+        ],
+        capture_time_accuracy: Float,
+        assist_position: Array[Float],
+        assist_altitude: Float,
+        use2_d_solver: bool
+      },
+      ?timestamp: Time,
+      ?advanced_configuration: {
+        wi_fi_cellular: {
+          confidence_percent: Integer
+        }
+      }
     ) -> _GetPositionEstimateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPositionEstimateResponse
 
     interface _GetResourceEventConfigurationResponse
@@ -960,6 +985,7 @@ module Aws::IoTWireless
       def id: () -> String?
       def arn: () -> String?
       def destination_name: () -> String?
+      def positioning: () -> String?
       def sidewalk: () -> Types::SidewalkGetStartImportInfo?
       def creation_time: () -> Time?
       def status: () -> String?
@@ -1074,6 +1100,8 @@ module Aws::IoTWireless
       include Smithy::Client::_Response[Types::ListDevicesForWirelessDeviceImportTaskResponse]
       def next_token: () -> String?
       def destination_name: () -> String?
+      def positioning: () -> String?
+      def sidewalk: () -> Types::SidewalkListDevicesForImportInfo?
       def imported_wireless_device_list: () -> Array[Types::ImportedWirelessDevice]?
     end
     def list_devices_for_wireless_device_import_task: (
@@ -1381,8 +1409,12 @@ module Aws::IoTWireless
           value: String
         }
       ],
+      ?positioning: String,
       ?sidewalk: {
-        sidewalk_manufacturing_sn: String
+        sidewalk_manufacturing_sn: String,
+        positioning: {
+          destination_name: String
+        }
       }
     ) -> _StartSingleWirelessDeviceImportTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartSingleWirelessDeviceImportTaskResponse
 
@@ -1400,9 +1432,13 @@ module Aws::IoTWireless
           value: String
         }
       ],
+      ?positioning: String,
       ?sidewalk: {
         device_creation_file: String,
-        role: String
+        role: String,
+        positioning: {
+          destination_name: String
+        }
       }
     ) -> _StartWirelessDeviceImportTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartWirelessDeviceImportTaskResponse
 
@@ -1560,6 +1596,10 @@ module Aws::IoTWireless
         participating_gateways: {
           gateway_list: Array[String],
           transmission_interval: Integer
+        },
+        default_session_parameters: {
+          dl_dr: Integer,
+          dl_freq: Integer
         }
       }
     ) -> _UpdateMulticastGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateMulticastGroupResponse
@@ -1683,7 +1723,12 @@ module Aws::IoTWireless
           ]
         }
       },
-      ?positioning: String
+      ?positioning: String,
+      ?sidewalk: {
+        positioning: {
+          destination_name: String
+        }
+      }
     ) -> _UpdateWirelessDeviceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateWirelessDeviceResponse
 
     interface _UpdateWirelessDeviceImportTaskResponse

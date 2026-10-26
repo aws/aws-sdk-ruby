@@ -144,18 +144,18 @@ module Aws::SageMakerRuntime
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -298,6 +298,14 @@ module Aws::SageMakerRuntime
     #               expiration time. The model must also provide that information in the response to your
     #               request. You can get the ID and timestamp from the <code>NewSessionId</code> response
     #               parameter. For any subsequent request where you specify that session ID, SageMaker AI routes the request to the same instance that supports the session.</p>
+    # @option params [String] :prefix_aware_id
+    #   <p>An optional, stable identifier that serves as a routing hint for prefix-aware routing.
+    #           The service routes requests with the same prefix and the same identifier to the same
+    #           instance. If requests from different applications might have the same prompt prefix, set
+    #           a different identifier for each application to differentiate their routing
+    #           decisions.</p>
+    #            <p>Applies only to endpoints configured with a
+    #           <code>RoutingStrategy</code> of <code>PREFIX_AWARE</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     endpoint_name: "EndpointName", # required
@@ -311,7 +319,8 @@ module Aws::SageMakerRuntime
     #     inference_id: "InferenceId",
     #     enable_explanations: "EnableExplanationsHeader",
     #     inference_component_name: "InferenceComponentHeader",
-    #     session_id: "SessionIdOrNewSessionConstantHeader"
+    #     session_id: "SessionIdOrNewSessionConstantHeader",
+    #     prefix_aware_id: "PrefixAwareIdHeader"
     #   }
     #   options = {}
     #   response = client.invoke_endpoint(params, options)
@@ -371,12 +380,29 @@ module Aws::SageMakerRuntime
     #               identifier for you if none is specified. </p>
     # @option params [String] :input_location
     #   <p>The Amazon S3 URI where the inference request payload is stored.</p>
+    # @option params [String] :s3_output_path_extension
+    #   <p>The path extension that is appended to the Amazon S3 output path where the inference
+    #               response payload is stored.</p>
+    # @option params [String] :filename
+    #   <p>The filename for the inference response payload stored in Amazon S3. If not
+    #               specified, Amazon SageMaker AI generates a filename based on the inference ID.</p>
     # @option params [Integer] :request_ttl_seconds
     #   <p>Maximum age in seconds a request can be in the queue before it is marked as expired.
     #               The default is 6 hours, or 21,600 seconds.</p>
     # @option params [Integer] :invocation_timeout_seconds
     #   <p>Maximum amount of time in seconds a request can be processed before it is marked as
     #               expired. The default is 15 minutes, or 900 seconds.</p>
+    # @option params [String] :body
+    #   <p>Provides inline input data for the inference request, in the format specified in the
+    #                   <code>ContentType</code> request header. Use this parameter to send the request
+    #               payload directly in the API call instead of uploading it to Amazon S3 and
+    #               referencing it with <code>InputLocation</code>. The inline payload can be up to 128,000
+    #               bytes.</p>
+    #            <p>
+    #               <code>Body</code> and <code>InputLocation</code> are mutually exclusive. Provide
+    #               exactly one of them.</p>
+    #            <p>For information about the format of the request body, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/cdf-inference.html">Common Data
+    #               Formats-Inference</a>.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     endpoint_name: "EndpointName", # required
@@ -384,9 +410,12 @@ module Aws::SageMakerRuntime
     #     accept: "Header",
     #     custom_attributes: "CustomAttributesHeader",
     #     inference_id: "InferenceId",
-    #     input_location: "InputLocationHeader", # required
+    #     input_location: "InputLocationHeader",
+    #     s3_output_path_extension: "S3OutputPathExtensionHeader",
+    #     filename: "FilenameHeader",
     #     request_ttl_seconds: 1,
-    #     invocation_timeout_seconds: 1
+    #     invocation_timeout_seconds: 1,
+    #     body: "data"
     #   }
     #   options = {}
     #   response = client.invoke_endpoint_async(params, options)
@@ -481,6 +510,14 @@ module Aws::SageMakerRuntime
     #               specify <code>NEW_SESSION</code> for the <code>SessionId</code> request parameter. The
     #               response to that request provides the session ID for the <code>NewSessionId</code>
     #               response parameter.</p>
+    # @option params [String] :prefix_aware_id
+    #   <p>An optional, stable identifier that serves as a routing hint for prefix-aware routing.
+    #           The service routes requests with the same prefix and the same identifier to the same
+    #           instance. If requests from different applications might have the same prompt prefix, set
+    #           a different identifier for each application to differentiate their routing
+    #           decisions.</p>
+    #            <p>Applies only to endpoints configured with a
+    #           <code>RoutingStrategy</code> of <code>PREFIX_AWARE</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     endpoint_name: "EndpointName", # required
@@ -492,7 +529,8 @@ module Aws::SageMakerRuntime
     #     target_container_hostname: "TargetContainerHostnameHeader",
     #     inference_id: "InferenceId",
     #     inference_component_name: "InferenceComponentHeader",
-    #     session_id: "SessionIdHeader"
+    #     session_id: "SessionIdHeader",
+    #     prefix_aware_id: "PrefixAwareIdHeader"
     #   }
     #   options = {}
     #   response = client.invoke_endpoint_with_response_stream(params, options)

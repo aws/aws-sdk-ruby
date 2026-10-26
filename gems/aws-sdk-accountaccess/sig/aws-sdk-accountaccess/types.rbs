@@ -1,0 +1,677 @@
+module Aws::AccountAccess
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AlreadyCreatedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ApplicationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_arn: String,
+        ?tenant_id: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_arn: String?
+      attr_accessor tenant_id: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CreateApplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_source: Types::IdentitySource,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_source: Types::IdentitySource?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateApplicationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_arn: String?
+    end
+
+    class CreateEntitlementRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_arn: String,
+        ?entitlement: Types::Entitlement,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_arn: String?
+      attr_accessor entitlement: Types::Entitlement?
+    end
+
+    class CreateEntitlementResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entitlement_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entitlement_id: String?
+    end
+
+    class DeleteApplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_arn: String?
+    end
+
+    class DeleteApplicationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteEntitlementRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_arn: String,
+        ?entitlement_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_arn: String?
+      attr_accessor entitlement_id: String?
+    end
+
+    class DeleteEntitlementResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class Entitlement
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?principal_role: Types::PrincipalRoleEntitlement,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor principal_role: Types::PrincipalRoleEntitlement?
+
+      class PrincipalRole < Entitlement
+      end
+      class Unknown < Entitlement
+      end
+    end
+
+    class EntitlementDetails
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?principal_role: Types::PrincipalRoleEntitlementDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor principal_role: Types::PrincipalRoleEntitlementDetails?
+
+      class PrincipalRole < EntitlementDetails
+      end
+      class Unknown < EntitlementDetails
+      end
+    end
+
+    class EntitlementFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?principal_role: Types::PrincipalRoleEntitlementFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor principal_role: Types::PrincipalRoleEntitlementFilter?
+    end
+
+    class EntitlementSummary
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?principal_role: Types::PrincipalRoleEntitlementSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor principal_role: Types::PrincipalRoleEntitlementSummary?
+
+      class PrincipalRole < EntitlementSummary
+      end
+      class Unknown < EntitlementSummary
+      end
+    end
+
+    class EntitlementsListMember
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entitlement_id: String,
+        ?entitlement: Types::EntitlementSummary,
+        ?created_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entitlement_id: String?
+      attr_accessor entitlement: Types::EntitlementSummary?
+      attr_accessor created_at: Time?
+    end
+
+    module ErrorCode
+      AUTHORIZATION_ERROR: String
+      RESOURCE_NOT_FOUND_ERROR: String
+      SERVICE_QUOTA_EXCEEDED_ERROR: String
+      INTERNAL_SERVICE_ERROR: String
+    end
+
+    class ErrorDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class GetApplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_arn: String?
+    end
+
+    class GetApplicationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_source: Types::IdentitySourceDetails,
+        ?status: String,
+        ?tenant_id: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?tags: Hash[String, String],
+        ?error: Types::ErrorDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_source: Types::IdentitySourceDetails?
+      attr_accessor status: String?
+      attr_accessor tenant_id: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor error: Types::ErrorDetails?
+    end
+
+    class GetEntitlementRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_arn: String,
+        ?entitlement_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_arn: String?
+      attr_accessor entitlement_id: String?
+    end
+
+    class GetEntitlementResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_arn: String,
+        ?entitlement_id: String,
+        ?entitlement: Types::EntitlementDetails,
+        ?created_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_arn: String?
+      attr_accessor entitlement_id: String?
+      attr_accessor entitlement: Types::EntitlementDetails?
+      attr_accessor created_at: Time?
+    end
+
+    class IdentityCenter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_arn: String?
+    end
+
+    class IdentityCenterDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_arn: String,
+        ?application_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_arn: String?
+      attr_accessor application_arn: String?
+    end
+
+    class IdentityCenterPrincipal
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?user_id: String,
+        ?group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_id: String?
+      attr_accessor group_id: String?
+
+      class UserId < IdentityCenterPrincipal
+      end
+      class GroupId < IdentityCenterPrincipal
+      end
+      class Unknown < IdentityCenterPrincipal
+      end
+    end
+
+    class IdentityCenterPrincipalFilter
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?user_id: String,
+        ?group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_id: String?
+      attr_accessor group_id: String?
+
+      class UserId < IdentityCenterPrincipalFilter
+      end
+      class GroupId < IdentityCenterPrincipalFilter
+      end
+      class Unknown < IdentityCenterPrincipalFilter
+      end
+    end
+
+    class IdentitySource
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?identity_center: Types::IdentityCenter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_center: Types::IdentityCenter?
+
+      class IdentityCenter < IdentitySource
+      end
+      class Unknown < IdentitySource
+      end
+    end
+
+    class IdentitySourceDetails
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?identity_center: Types::IdentityCenterDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_center: Types::IdentityCenterDetails?
+
+      class IdentityCenter < IdentitySourceDetails
+      end
+      class Unknown < IdentitySourceDetails
+      end
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListApplicationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListApplicationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?applications: Array[Types::ApplicationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor applications: Array[Types::ApplicationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListEntitlementsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_arn: String,
+        ?filter: Types::EntitlementFilter,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_arn: String?
+      attr_accessor filter: Types::EntitlementFilter?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListEntitlementsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entitlements: Array[Types::EntitlementsListMember],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entitlements: Array[Types::EntitlementsListMember]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class Principal
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?identity_center: Types::IdentityCenterPrincipal,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_center: Types::IdentityCenterPrincipal?
+
+      class IdentityCenter < Principal
+      end
+      class Unknown < Principal
+      end
+    end
+
+    class PrincipalFilter
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?identity_center: Types::IdentityCenterPrincipalFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_center: Types::IdentityCenterPrincipalFilter?
+
+      class IdentityCenter < PrincipalFilter
+      end
+      class Unknown < PrincipalFilter
+      end
+    end
+
+    class PrincipalRoleEntitlement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?principal: Types::Principal,
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor principal: Types::Principal?
+      attr_accessor role_arn: String?
+    end
+
+    class PrincipalRoleEntitlementDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?principal: Types::Principal,
+        ?role_arn: String,
+        ?account: String,
+        ?account_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor principal: Types::Principal?
+      attr_accessor role_arn: String?
+      attr_accessor account: String?
+      attr_accessor account_name: String?
+    end
+
+    class PrincipalRoleEntitlementFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?principal: Types::PrincipalFilter,
+        ?role_arn: String,
+        ?account: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor principal: Types::PrincipalFilter?
+      attr_accessor role_arn: String?
+      attr_accessor account: String?
+    end
+
+    class PrincipalRoleEntitlementSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?principal: Types::Principal,
+        ?role_arn: String,
+        ?account: String,
+        ?account_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor principal: Types::Principal?
+      attr_accessor role_arn: String?
+      attr_accessor account: String?
+      attr_accessor account_name: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module Status
+      CREATE_IN_PROGRESS: String
+      ACTIVE: String
+      DELETE_IN_PROGRESS: String
+      CREATE_FAILED: String
+      DELETE_FAILED: String
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

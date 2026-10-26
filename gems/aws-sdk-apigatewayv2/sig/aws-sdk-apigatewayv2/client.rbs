@@ -266,6 +266,125 @@ module Aws::ApiGatewayV2
       ?schema: String
     ) -> _CreateModelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateModelResponse
 
+    interface _CreatePortalResponse
+      include Smithy::Client::_Response[Types::CreatePortalResponse]
+      def authorization: () -> Types::Authorization?
+      def endpoint_configuration: () -> Types::EndpointConfigurationResponse?
+      def included_portal_product_arns: () -> Array[String]?
+      def last_modified: () -> Time?
+      def last_published: () -> Time?
+      def last_published_description: () -> String?
+      def portal_arn: () -> String?
+      def portal_content: () -> Types::PortalContent?
+      def portal_id: () -> String?
+      def publish_status: () -> String?
+      def rum_app_monitor_name: () -> String?
+      def status_exception: () -> Types::StatusException?
+      def tags: () -> Hash[String, String]?
+    end
+    def create_portal: (
+      ?authorization: {
+        cognito_config: {
+          app_client_id: String,
+          user_pool_arn: String,
+          user_pool_domain: untyped
+        },
+        none: {
+        }
+      },
+      ?endpoint_configuration: {
+        acm_managed: {
+          certificate_arn: String,
+          domain_name: String
+        },
+        none: {
+        }
+      },
+      ?included_portal_product_arns: Array[String],
+      ?logo_uri: String,
+      ?portal_content: {
+        description: String,
+        display_name: String,
+        theme: {
+          custom_colors: {
+            accent_color: String,
+            background_color: untyped,
+            error_validation_color: untyped,
+            header_color: untyped,
+            navigation_color: untyped,
+            text_color: untyped
+          },
+          logo_last_uploaded: Time
+        }
+      },
+      ?rum_app_monitor_name: String,
+      ?tags: Hash[String, String]
+    ) -> _CreatePortalResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePortalResponse
+
+    interface _CreatePortalProductResponse
+      include Smithy::Client::_Response[Types::CreatePortalProductResponse]
+      def description: () -> String?
+      def display_name: () -> String?
+      def display_order: () -> Types::DisplayOrder?
+      def last_modified: () -> Time?
+      def portal_product_arn: () -> String?
+      def portal_product_id: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def create_portal_product: (
+      ?description: String,
+      ?display_name: String,
+      ?tags: Hash[String, String]
+    ) -> _CreatePortalProductResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePortalProductResponse
+
+    interface _CreateProductPageResponse
+      include Smithy::Client::_Response[Types::CreateProductPageResponse]
+      def display_content: () -> Types::DisplayContent?
+      def last_modified: () -> Time?
+      def product_page_arn: () -> String?
+      def product_page_id: () -> String?
+    end
+    def create_product_page: (
+      ?display_content: {
+        body: String,
+        title: String
+      },
+      ?portal_product_id: String
+    ) -> _CreateProductPageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateProductPageResponse
+
+    interface _CreateProductRestEndpointPageResponse
+      include Smithy::Client::_Response[Types::CreateProductRestEndpointPageResponse]
+      def display_content: () -> Types::EndpointDisplayContentResponse?
+      def last_modified: () -> Time?
+      def product_rest_endpoint_page_arn: () -> String?
+      def product_rest_endpoint_page_id: () -> String?
+      def rest_endpoint_identifier: () -> Types::RestEndpointIdentifier?
+      def status: () -> String?
+      def status_exception: () -> Types::StatusException?
+      def try_it_state: () -> String?
+    end
+    def create_product_rest_endpoint_page: (
+      ?display_content: {
+        none: {
+        },
+        overrides: {
+          body: String,
+          endpoint: String,
+          operation_name: String
+        }
+      },
+      ?portal_product_id: String,
+      ?rest_endpoint_identifier: {
+        identifier_parts: {
+          method: String,
+          path: String,
+          rest_api_id: String,
+          stage: String
+        }
+      },
+      ?try_it_state: String
+    ) -> _CreateProductRestEndpointPageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateProductRestEndpointPageResponse
+
     interface _CreateRouteResponse
       include Smithy::Client::_Response[Types::CreateRouteResult]
       def api_gateway_managed: () -> bool?
@@ -505,6 +624,43 @@ module Aws::ApiGatewayV2
       ?model_id: String
     ) -> _DeleteModelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteModelResponse
 
+    interface _DeletePortalResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_portal: (
+      ?portal_id: String
+    ) -> _DeletePortalResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePortalResponse
+
+    interface _DeletePortalProductResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_portal_product: (
+      ?portal_product_id: String
+    ) -> _DeletePortalProductResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePortalProductResponse
+
+    interface _DeletePortalProductSharingPolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_portal_product_sharing_policy: (
+      ?portal_product_id: String
+    ) -> _DeletePortalProductSharingPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePortalProductSharingPolicyResponse
+
+    interface _DeleteProductPageResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_product_page: (
+      ?portal_product_id: String,
+      ?product_page_id: String
+    ) -> _DeleteProductPageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteProductPageResponse
+
+    interface _DeleteProductRestEndpointPageResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_product_rest_endpoint_page: (
+      ?portal_product_id: String,
+      ?product_rest_endpoint_page_id: String
+    ) -> _DeleteProductRestEndpointPageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteProductRestEndpointPageResponse
+
     interface _DeleteRouteResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
     end
@@ -563,6 +719,13 @@ module Aws::ApiGatewayV2
     def delete_vpc_link: (
       ?vpc_link_id: String
     ) -> _DeleteVpcLinkResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteVpcLinkResponse
+
+    interface _DisablePortalResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def disable_portal: (
+      ?portal_id: String
+    ) -> _DisablePortalResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisablePortalResponse
 
     interface _ExportApiResponse
       include Smithy::Client::_Response[Types::ExportApiResponse]
@@ -812,6 +975,83 @@ module Aws::ApiGatewayV2
       ?next_token: String
     ) -> _GetModelsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetModelsResponse
 
+    interface _GetPortalResponse
+      include Smithy::Client::_Response[Types::GetPortalResponse]
+      def authorization: () -> Types::Authorization?
+      def endpoint_configuration: () -> Types::EndpointConfigurationResponse?
+      def included_portal_product_arns: () -> Array[String]?
+      def last_modified: () -> Time?
+      def last_published: () -> Time?
+      def last_published_description: () -> String?
+      def portal_arn: () -> String?
+      def portal_content: () -> Types::PortalContent?
+      def portal_id: () -> String?
+      def preview: () -> Types::Preview?
+      def publish_status: () -> String?
+      def rum_app_monitor_name: () -> String?
+      def status_exception: () -> Types::StatusException?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_portal: (
+      ?portal_id: String
+    ) -> _GetPortalResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPortalResponse
+
+    interface _GetPortalProductResponse
+      include Smithy::Client::_Response[Types::GetPortalProductResponse]
+      def description: () -> String?
+      def display_name: () -> String?
+      def display_order: () -> Types::DisplayOrder?
+      def last_modified: () -> Time?
+      def portal_product_arn: () -> String?
+      def portal_product_id: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_portal_product: (
+      ?portal_product_id: String,
+      ?resource_owner_account_id: String
+    ) -> _GetPortalProductResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPortalProductResponse
+
+    interface _GetPortalProductSharingPolicyResponse
+      include Smithy::Client::_Response[Types::GetPortalProductSharingPolicyResponse]
+      def policy_document: () -> String?
+      def portal_product_id: () -> String?
+    end
+    def get_portal_product_sharing_policy: (
+      ?portal_product_id: String
+    ) -> _GetPortalProductSharingPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPortalProductSharingPolicyResponse
+
+    interface _GetProductPageResponse
+      include Smithy::Client::_Response[Types::GetProductPageResponse]
+      def display_content: () -> Types::DisplayContent?
+      def last_modified: () -> Time?
+      def product_page_arn: () -> String?
+      def product_page_id: () -> String?
+    end
+    def get_product_page: (
+      ?portal_product_id: String,
+      ?product_page_id: String,
+      ?resource_owner_account_id: String
+    ) -> _GetProductPageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetProductPageResponse
+
+    interface _GetProductRestEndpointPageResponse
+      include Smithy::Client::_Response[Types::GetProductRestEndpointPageResponse]
+      def display_content: () -> Types::EndpointDisplayContentResponse?
+      def last_modified: () -> Time?
+      def product_rest_endpoint_page_arn: () -> String?
+      def product_rest_endpoint_page_id: () -> String?
+      def raw_display_content: () -> String?
+      def rest_endpoint_identifier: () -> Types::RestEndpointIdentifier?
+      def status: () -> String?
+      def status_exception: () -> Types::StatusException?
+      def try_it_state: () -> String?
+    end
+    def get_product_rest_endpoint_page: (
+      ?include_raw_display_content: String,
+      ?portal_product_id: String,
+      ?product_rest_endpoint_page_id: String,
+      ?resource_owner_account_id: String
+    ) -> _GetProductRestEndpointPageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetProductRestEndpointPageResponse
+
     interface _GetRouteResponse
       include Smithy::Client::_Response[Types::GetRouteResult]
       def api_gateway_managed: () -> bool?
@@ -977,6 +1217,51 @@ module Aws::ApiGatewayV2
       ?fail_on_warnings: bool
     ) -> _ImportApiResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ImportApiResponse
 
+    interface _ListPortalProductsResponse
+      include Smithy::Client::_Response[Types::ListPortalProductsResponse]
+      def items: () -> Array[Types::PortalProductSummary]?
+      def next_token: () -> String?
+    end
+    def list_portal_products: (
+      ?max_results: String,
+      ?next_token: String,
+      ?resource_owner: String
+    ) -> _ListPortalProductsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPortalProductsResponse
+
+    interface _ListPortalsResponse
+      include Smithy::Client::_Response[Types::ListPortalsResponse]
+      def items: () -> Array[Types::PortalSummary]?
+      def next_token: () -> String?
+    end
+    def list_portals: (
+      ?max_results: String,
+      ?next_token: String
+    ) -> _ListPortalsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPortalsResponse
+
+    interface _ListProductPagesResponse
+      include Smithy::Client::_Response[Types::ListProductPagesResponse]
+      def items: () -> Array[Types::ProductPageSummaryNoBody]?
+      def next_token: () -> String?
+    end
+    def list_product_pages: (
+      ?max_results: String,
+      ?next_token: String,
+      ?portal_product_id: String,
+      ?resource_owner_account_id: String
+    ) -> _ListProductPagesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListProductPagesResponse
+
+    interface _ListProductRestEndpointPagesResponse
+      include Smithy::Client::_Response[Types::ListProductRestEndpointPagesResponse]
+      def items: () -> Array[Types::ProductRestEndpointPageSummaryNoBody]?
+      def next_token: () -> String?
+    end
+    def list_product_rest_endpoint_pages: (
+      ?max_results: String,
+      ?next_token: String,
+      ?portal_product_id: String,
+      ?resource_owner_account_id: String
+    ) -> _ListProductRestEndpointPagesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListProductRestEndpointPagesResponse
+
     interface _ListRoutingRulesResponse
       include Smithy::Client::_Response[Types::ListRoutingRulesResponse]
       def next_token: () -> String?
@@ -988,6 +1273,29 @@ module Aws::ApiGatewayV2
       ?max_results: Integer,
       ?next_token: String
     ) -> _ListRoutingRulesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRoutingRulesResponse
+
+    interface _PreviewPortalResponse
+      include Smithy::Client::_Response[Types::PreviewPortalResponse]
+    end
+    def preview_portal: (
+      ?portal_id: String
+    ) -> _PreviewPortalResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PreviewPortalResponse
+
+    interface _PublishPortalResponse
+      include Smithy::Client::_Response[Types::PublishPortalResponse]
+    end
+    def publish_portal: (
+      ?description: String,
+      ?portal_id: String
+    ) -> _PublishPortalResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PublishPortalResponse
+
+    interface _PutPortalProductSharingPolicyResponse
+      include Smithy::Client::_Response[Types::PutPortalProductSharingPolicyResponse]
+    end
+    def put_portal_product_sharing_policy: (
+      ?policy_document: String,
+      ?portal_product_id: String
+    ) -> _PutPortalProductSharingPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutPortalProductSharingPolicyResponse
 
     interface _PutRoutingRuleResponse
       include Smithy::Client::_Response[Types::PutRoutingRuleResponse]
@@ -1303,6 +1611,130 @@ module Aws::ApiGatewayV2
       ?name: String,
       ?schema: String
     ) -> _UpdateModelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateModelResponse
+
+    interface _UpdatePortalResponse
+      include Smithy::Client::_Response[Types::UpdatePortalResponse]
+      def authorization: () -> Types::Authorization?
+      def endpoint_configuration: () -> Types::EndpointConfigurationResponse?
+      def included_portal_product_arns: () -> Array[String]?
+      def last_modified: () -> Time?
+      def last_published: () -> Time?
+      def last_published_description: () -> String?
+      def portal_arn: () -> String?
+      def portal_content: () -> Types::PortalContent?
+      def portal_id: () -> String?
+      def preview: () -> Types::Preview?
+      def publish_status: () -> String?
+      def rum_app_monitor_name: () -> String?
+      def status_exception: () -> Types::StatusException?
+      def tags: () -> Hash[String, String]?
+    end
+    def update_portal: (
+      ?authorization: {
+        cognito_config: {
+          app_client_id: String,
+          user_pool_arn: String,
+          user_pool_domain: untyped
+        },
+        none: {
+        }
+      },
+      ?endpoint_configuration: {
+        acm_managed: {
+          certificate_arn: String,
+          domain_name: String
+        },
+        none: {
+        }
+      },
+      ?included_portal_product_arns: Array[String],
+      ?logo_uri: String,
+      ?portal_content: {
+        description: String,
+        display_name: String,
+        theme: {
+          custom_colors: {
+            accent_color: String,
+            background_color: untyped,
+            error_validation_color: untyped,
+            header_color: untyped,
+            navigation_color: untyped,
+            text_color: untyped
+          },
+          logo_last_uploaded: Time
+        }
+      },
+      ?portal_id: String,
+      ?rum_app_monitor_name: String
+    ) -> _UpdatePortalResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePortalResponse
+
+    interface _UpdatePortalProductResponse
+      include Smithy::Client::_Response[Types::UpdatePortalProductResponse]
+      def description: () -> String?
+      def display_name: () -> String?
+      def display_order: () -> Types::DisplayOrder?
+      def last_modified: () -> Time?
+      def portal_product_arn: () -> String?
+      def portal_product_id: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def update_portal_product: (
+      ?description: String,
+      ?display_name: String,
+      ?display_order: {
+        contents: Array[
+          {
+            product_rest_endpoint_page_arns: Array[String],
+            section_name: String
+          }
+        ],
+        overview_page_arn: String,
+        product_page_arns: untyped
+      },
+      ?portal_product_id: String
+    ) -> _UpdatePortalProductResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePortalProductResponse
+
+    interface _UpdateProductPageResponse
+      include Smithy::Client::_Response[Types::UpdateProductPageResponse]
+      def display_content: () -> Types::DisplayContent?
+      def last_modified: () -> Time?
+      def product_page_arn: () -> String?
+      def product_page_id: () -> String?
+    end
+    def update_product_page: (
+      ?display_content: {
+        body: String,
+        title: String
+      },
+      ?portal_product_id: String,
+      ?product_page_id: String
+    ) -> _UpdateProductPageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateProductPageResponse
+
+    interface _UpdateProductRestEndpointPageResponse
+      include Smithy::Client::_Response[Types::UpdateProductRestEndpointPageResponse]
+      def display_content: () -> Types::EndpointDisplayContentResponse?
+      def last_modified: () -> Time?
+      def product_rest_endpoint_page_arn: () -> String?
+      def product_rest_endpoint_page_id: () -> String?
+      def rest_endpoint_identifier: () -> Types::RestEndpointIdentifier?
+      def status: () -> String?
+      def status_exception: () -> Types::StatusException?
+      def try_it_state: () -> String?
+    end
+    def update_product_rest_endpoint_page: (
+      ?display_content: {
+        none: {
+        },
+        overrides: {
+          body: String,
+          endpoint: String,
+          operation_name: String
+        }
+      },
+      ?portal_product_id: String,
+      ?product_rest_endpoint_page_id: String,
+      ?try_it_state: String
+    ) -> _UpdateProductRestEndpointPageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateProductRestEndpointPageResponse
 
     interface _UpdateRouteResponse
       include Smithy::Client::_Response[Types::UpdateRouteResult]

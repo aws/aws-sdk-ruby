@@ -471,7 +471,8 @@ module Aws::Neptunedata
       ?update_single_cardinality_properties: bool,
       ?queue_request: bool,
       ?dependencies: Array[String],
-      ?user_provided_edge_ids: bool
+      ?user_provided_edge_ids: bool,
+      ?edge_only_load: bool
     ) -> _StartLoaderJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartLoaderJobResponse
 
     interface _StartMLDataProcessingJobResponse

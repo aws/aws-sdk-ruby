@@ -1,0 +1,900 @@
+module Aws::NovaAct
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ActError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor type: String?
+    end
+
+    module ActStatus
+      RUNNING: String
+      PENDING_CLIENT_ACTION: String
+      PENDING_HUMAN_ACTION: String
+      SUCCEEDED: String
+      FAILED: String
+      TIMED_OUT: String
+    end
+
+    class ActSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_run_id: String,
+        ?session_id: String,
+        ?act_id: String,
+        ?status: String,
+        ?started_at: Time,
+        ?ended_at: Time,
+        ?trace_location: Types::TraceLocation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_run_id: String?
+      attr_accessor session_id: String?
+      attr_accessor act_id: String?
+      attr_accessor status: String?
+      attr_accessor started_at: Time?
+      attr_accessor ended_at: Time?
+      attr_accessor trace_location: Types::TraceLocation?
+    end
+
+    class Call
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?call_id: String,
+        ?input: Smithy::Schema::document,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor call_id: String?
+      attr_accessor input: Smithy::Schema::document?
+      attr_accessor name: String?
+    end
+
+    class CallResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?call_id: String,
+        ?content: Array[Types::CallResultContent],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor call_id: String?
+      attr_accessor content: Array[Types::CallResultContent]?
+    end
+
+    class CallResultContent
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?text: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor text: String?
+
+      class Text < CallResultContent
+      end
+      class Unknown < CallResultContent
+      end
+    end
+
+    class ClientInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?compatibility_version: Integer,
+        ?sdk_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor compatibility_version: Integer?
+      attr_accessor sdk_version: String?
+    end
+
+    class CompatibilityInformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_compatibility_version: Integer,
+        ?supported_model_ids: Array[String],
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_compatibility_version: Integer?
+      attr_accessor supported_model_ids: Array[String]?
+      attr_accessor message: String?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class CreateActRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_definition_name: String,
+        ?workflow_run_id: String,
+        ?session_id: String,
+        ?task: String,
+        ?tool_specs: Array[Types::ToolSpec],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_definition_name: String?
+      attr_accessor workflow_run_id: String?
+      attr_accessor session_id: String?
+      attr_accessor task: String?
+      attr_accessor tool_specs: Array[Types::ToolSpec]?
+      attr_accessor client_token: String?
+    end
+
+    class CreateActResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?act_id: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor act_id: String?
+      attr_accessor status: String?
+    end
+
+    class CreateSessionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_definition_name: String,
+        ?workflow_run_id: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_definition_name: String?
+      attr_accessor workflow_run_id: String?
+      attr_accessor client_token: String?
+    end
+
+    class CreateSessionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_id: String?
+    end
+
+    class CreateWorkflowDefinitionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?export_config: Types::WorkflowExportConfig,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor export_config: Types::WorkflowExportConfig?
+      attr_accessor client_token: String?
+    end
+
+    class CreateWorkflowDefinitionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    class CreateWorkflowRunRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_definition_name: String,
+        ?model_id: String,
+        ?client_token: String,
+        ?log_group_name: String,
+        ?client_info: Types::ClientInfo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_definition_name: String?
+      attr_accessor model_id: String?
+      attr_accessor client_token: String?
+      attr_accessor log_group_name: String?
+      attr_accessor client_info: Types::ClientInfo?
+    end
+
+    class CreateWorkflowRunResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_run_id: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_run_id: String?
+      attr_accessor status: String?
+    end
+
+    class DeleteWorkflowDefinitionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_definition_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_definition_name: String?
+    end
+
+    class DeleteWorkflowDefinitionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    class DeleteWorkflowRunRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_definition_name: String,
+        ?workflow_run_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_definition_name: String?
+      attr_accessor workflow_run_id: String?
+    end
+
+    class DeleteWorkflowRunResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    class GetWorkflowDefinitionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_definition_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_definition_name: String?
+    end
+
+    class GetWorkflowDefinitionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?created_at: Time,
+        ?description: String,
+        ?export_config: Types::WorkflowExportConfig,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor description: String?
+      attr_accessor export_config: Types::WorkflowExportConfig?
+      attr_accessor status: String?
+    end
+
+    class GetWorkflowRunRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_definition_name: String,
+        ?workflow_run_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_definition_name: String?
+      attr_accessor workflow_run_id: String?
+    end
+
+    class GetWorkflowRunResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_run_arn: String,
+        ?workflow_run_id: String,
+        ?status: String,
+        ?started_at: Time,
+        ?ended_at: Time,
+        ?model_id: String,
+        ?log_group_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_run_arn: String?
+      attr_accessor workflow_run_id: String?
+      attr_accessor status: String?
+      attr_accessor started_at: Time?
+      attr_accessor ended_at: Time?
+      attr_accessor model_id: String?
+      attr_accessor log_group_name: String?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?retry_after_seconds: Integer,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor retry_after_seconds: Integer?
+      attr_accessor reason: String?
+    end
+
+    module InternalServerExceptionReason
+      INVALID_MODEL_GENERATION: String
+      TOKEN_LIMIT_EXCEEDED: String
+    end
+
+    class InvokeActStepRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_definition_name: String,
+        ?workflow_run_id: String,
+        ?session_id: String,
+        ?act_id: String,
+        ?call_results: Array[Types::CallResult],
+        ?previous_step_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_definition_name: String?
+      attr_accessor workflow_run_id: String?
+      attr_accessor session_id: String?
+      attr_accessor act_id: String?
+      attr_accessor call_results: Array[Types::CallResult]?
+      attr_accessor previous_step_id: String?
+    end
+
+    class InvokeActStepResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?calls: Array[Types::Call],
+        ?step_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor calls: Array[Types::Call]?
+      attr_accessor step_id: String?
+    end
+
+    class ListActsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_definition_name: String,
+        ?workflow_run_id: String,
+        ?session_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?sort_order: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_definition_name: String?
+      attr_accessor workflow_run_id: String?
+      attr_accessor session_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor sort_order: String?
+    end
+
+    class ListActsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?act_summaries: Array[Types::ActSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor act_summaries: Array[Types::ActSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListModelsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_compatibility_version: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_compatibility_version: Integer?
+    end
+
+    class ListModelsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_summaries: Array[Types::ModelSummary],
+        ?model_aliases: Array[Types::ModelAlias],
+        ?compatibility_information: Types::CompatibilityInformation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_summaries: Array[Types::ModelSummary]?
+      attr_accessor model_aliases: Array[Types::ModelAlias]?
+      attr_accessor compatibility_information: Types::CompatibilityInformation?
+    end
+
+    class ListSessionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_definition_name: String,
+        ?workflow_run_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?sort_order: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_definition_name: String?
+      attr_accessor workflow_run_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor sort_order: String?
+    end
+
+    class ListSessionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_summaries: Array[Types::SessionSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_summaries: Array[Types::SessionSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListWorkflowDefinitionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?sort_order: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor sort_order: String?
+    end
+
+    class ListWorkflowDefinitionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_definition_summaries: Array[Types::WorkflowDefinitionSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_definition_summaries: Array[Types::WorkflowDefinitionSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListWorkflowRunsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_definition_name: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?sort_order: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_definition_name: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor sort_order: String?
+    end
+
+    class ListWorkflowRunsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_run_summaries: Array[Types::WorkflowRunSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_run_summaries: Array[Types::WorkflowRunSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ModelAlias
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alias_name: String,
+        ?latest_model_id: String,
+        ?resolved_model_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alias_name: String?
+      attr_accessor latest_model_id: String?
+      attr_accessor resolved_model_id: String?
+    end
+
+    class ModelLifecycle
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    module ModelStatus
+      ACTIVE: String
+      LEGACY: String
+      DEPRECATED: String
+      PREVIEW: String
+    end
+
+    class ModelSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_id: String,
+        ?model_lifecycle: Types::ModelLifecycle,
+        ?minimum_compatibility_version: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_id: String?
+      attr_accessor model_lifecycle: Types::ModelLifecycle?
+      attr_accessor minimum_compatibility_version: Integer?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+        ?service_code: String,
+        ?quota_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+    end
+
+    class SessionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_id: String?
+    end
+
+    module SortOrder
+      ASC: String
+      DESC: String
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?service_code: String,
+        ?quota_code: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class ToolInputSchema
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?json: Smithy::Schema::document,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor json: Smithy::Schema::document?
+
+      class Json < ToolInputSchema
+      end
+      class Unknown < ToolInputSchema
+      end
+    end
+
+    class ToolSpec
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?input_schema: Types::ToolInputSchema,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor input_schema: Types::ToolInputSchema?
+    end
+
+    class TraceLocation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location_type: String,
+        ?location: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location_type: String?
+      attr_accessor location: String?
+    end
+
+    module TraceLocationType
+      S3: String
+    end
+
+    class UpdateActRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_definition_name: String,
+        ?workflow_run_id: String,
+        ?session_id: String,
+        ?act_id: String,
+        ?status: String,
+        ?error: Types::ActError,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_definition_name: String?
+      attr_accessor workflow_run_id: String?
+      attr_accessor session_id: String?
+      attr_accessor act_id: String?
+      attr_accessor status: String?
+      attr_accessor error: Types::ActError?
+    end
+
+    class UpdateActResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateWorkflowRunRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_definition_name: String,
+        ?workflow_run_id: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_definition_name: String?
+      attr_accessor workflow_run_id: String?
+      attr_accessor status: String?
+    end
+
+    class UpdateWorkflowRunResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+        ?field_list: Array[Types::ValidationExceptionField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+      attr_accessor field_list: Array[Types::ValidationExceptionField]?
+    end
+
+    class ValidationExceptionField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor message: String?
+    end
+
+    module ValidationExceptionReason
+      FIELD_VALIDATION_FAILED: String
+      INVALID_STATUS: String
+      GUARDRAIL_INTERVENED: String
+    end
+
+    module WorkflowDefinitionStatus
+      ACTIVE: String
+      DELETING: String
+    end
+
+    class WorkflowDefinitionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_definition_arn: String,
+        ?workflow_definition_name: String,
+        ?created_at: Time,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_definition_arn: String?
+      attr_accessor workflow_definition_name: String?
+      attr_accessor created_at: Time?
+      attr_accessor status: String?
+    end
+
+    class WorkflowExportConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_bucket_name: String,
+        ?s3_key_prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_bucket_name: String?
+      attr_accessor s3_key_prefix: String?
+    end
+
+    module WorkflowRunStatus
+      RUNNING: String
+      SUCCEEDED: String
+      FAILED: String
+      TIMED_OUT: String
+      DELETING: String
+    end
+
+    class WorkflowRunSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_run_arn: String,
+        ?workflow_run_id: String,
+        ?status: String,
+        ?started_at: Time,
+        ?ended_at: Time,
+        ?trace_location: Types::TraceLocation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_run_arn: String?
+      attr_accessor workflow_run_id: String?
+      attr_accessor status: String?
+      attr_accessor started_at: Time?
+      attr_accessor ended_at: Time?
+      attr_accessor trace_location: Types::TraceLocation?
+    end
+  end
+end

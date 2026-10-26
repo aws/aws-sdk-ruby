@@ -49,6 +49,46 @@ module Aws::ConnectContactLens
       attr_accessor end_offset_char: Integer?
     end
 
+    class ExtractedInformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?extraction_definition_id: String,
+        ?extraction_definition_name: String,
+        ?extraction_definition_display_label: String,
+        ?extracted_values: Array[Types::ExtractedInformationValue],
+        ?failure_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor extraction_definition_id: String?
+      attr_accessor extraction_definition_name: String?
+      attr_accessor extraction_definition_display_label: String?
+      attr_accessor extracted_values: Array[Types::ExtractedInformationValue]?
+      attr_accessor failure_code: String?
+    end
+
+    module ExtractedInformationFailureCode
+      QUOTA_EXCEEDED: String
+      INSUFFICIENT_CONVERSATION_CONTENT: String
+      FAILED_SAFETY_GUIDELINES: String
+      INTERNAL_ERROR: String
+      MAX_PACKAGE_FEATURE_ONLY: String
+    end
+
+    class ExtractedInformationValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content: String,
+        ?points_of_interest: Array[Types::PointOfInterest],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content: String?
+      attr_accessor points_of_interest: Array[Types::PointOfInterest]?
+    end
+
     class InternalServiceException
       include Smithy::Schema::Structure
 
@@ -160,12 +200,14 @@ module Aws::ConnectContactLens
         ?transcript: Types::Transcript,
         ?categories: Types::Categories,
         ?post_contact_summary: Types::PostContactSummary,
+        ?extracted_information: Types::ExtractedInformation,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor transcript: Types::Transcript?
       attr_accessor categories: Types::Categories?
       attr_accessor post_contact_summary: Types::PostContactSummary?
+      attr_accessor extracted_information: Types::ExtractedInformation?
     end
 
     class ResourceNotFoundException

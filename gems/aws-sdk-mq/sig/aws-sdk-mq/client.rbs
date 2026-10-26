@@ -90,6 +90,7 @@ module Aws::Mq
       },
       ?publicly_accessible: bool,
       ?security_groups: Array[String],
+      ?storage_size: Integer,
       ?storage_type: String,
       ?subnet_ids: Array[String],
       ?tags: Hash[String, String],
@@ -200,8 +201,10 @@ module Aws::Mq
       def pending_host_instance_type: () -> String?
       def pending_ldap_server_metadata: () -> Types::LdapServerMetadataOutput?
       def pending_security_groups: () -> Array[String]?
+      def pending_storage_size: () -> Integer?
       def publicly_accessible: () -> bool?
       def security_groups: () -> Array[String]?
+      def storage_size: () -> Integer?
       def storage_type: () -> String?
       def subnet_ids: () -> Array[String]?
       def tags: () -> Hash[String, String]?
@@ -269,6 +272,17 @@ module Aws::Mq
       ?configuration_id: String,
       ?configuration_revision: String
     ) -> _DescribeConfigurationRevisionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeConfigurationRevisionResponse
+
+    interface _DescribeSharedResourcesResponse
+      include Smithy::Client::_Response[Types::DescribeSharedResourcesResponse]
+      def next_token: () -> String?
+      def shared_resources: () -> Array[Types::SharedResource]?
+    end
+    def describe_shared_resources: (
+      ?broker_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeSharedResourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeSharedResourcesResponse
 
     interface _DescribeUserResponse
       include Smithy::Client::_Response[Types::DescribeUserResponse]
@@ -366,11 +380,13 @@ module Aws::Mq
       def ldap_server_metadata: () -> Types::LdapServerMetadataOutput?
       def logs: () -> Types::Logs?
       def maintenance_window_start_time: () -> Types::WeeklyStartTime?
+      def resource_share_arns: () -> Array[String]?
       def security_groups: () -> Array[String]?
       def data_replication_metadata: () -> Types::DataReplicationMetadataOutput?
       def data_replication_mode: () -> String?
       def pending_data_replication_metadata: () -> Types::DataReplicationMetadataOutput?
       def pending_data_replication_mode: () -> String?
+      def storage_size: () -> Integer?
     end
     def update_broker: (
       ?authentication_strategy: String,
@@ -404,7 +420,9 @@ module Aws::Mq
         time_of_day: String,
         time_zone: untyped
       },
+      ?resource_share_arns: Array[String],
       ?security_groups: Array[String],
+      ?storage_size: Integer,
       ?data_replication_mode: String
     ) -> _UpdateBrokerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateBrokerResponse
 

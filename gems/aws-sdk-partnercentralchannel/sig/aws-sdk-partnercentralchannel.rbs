@@ -1,0 +1,5 @@
+  module Aws
+    module PartnerCentralChannel
+      VERSION: String
+    end
+  end

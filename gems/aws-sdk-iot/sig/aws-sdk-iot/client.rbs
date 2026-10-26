@@ -316,9 +316,16 @@ module Aws::IoT
         content: String,
         content_type: String
       },
+      ?payload_template: String,
+      ?preprocessor: {
+        aws_json_substitution: {
+          output_format: String
+        }
+      },
       ?mandatory_parameters: Array[
         {
           name: String,
+          type: String,
           value: {
             s: String,
             b: bool,
@@ -329,6 +336,21 @@ module Aws::IoT
             ul: String
           },
           default_value: untyped,
+          value_conditions: Array[
+            {
+              comparison_operator: String,
+              operand: {
+                number: untyped,
+                numbers: Array[String],
+                string: untyped,
+                strings: untyped,
+                number_range: {
+                  min: untyped,
+                  max: untyped
+                }
+              }
+            }
+          ],
           description: String
         }
       ],
@@ -1250,6 +1272,13 @@ module Aws::IoT
                   service_name: String,
                   role_arn: untyped
                 }
+              },
+              enable_batching: bool,
+              batch_config: {
+                max_batch_open_ms: Integer,
+                max_batch_size: Integer,
+                max_batch_size_bytes: Integer,
+                batch_across_topics: bool
               }
             },
             kafka: {
@@ -1282,6 +1311,21 @@ module Aws::IoT
               },
               latitude: untyped,
               longitude: untyped
+            },
+            influx_db: {
+              destination_arn: untyped,
+              role_arn: untyped,
+              database_name: String,
+              table_name: String,
+              organization: String,
+              tags: Hash[String, String],
+              timestamp_unit: String,
+              batch_config: {
+                max_batch_size: Integer,
+                max_batch_open_ms: Integer,
+                max_batch_size_bytes: Integer,
+                batch_across_topics: bool
+              }
             }
           }
         ],
@@ -1310,7 +1354,8 @@ module Aws::IoT
           http: untyped,
           kafka: untyped,
           open_search: untyped,
-          location: untyped
+          location: untyped,
+          influx_db: untyped
         }
       },
       ?tags: String
@@ -1330,6 +1375,13 @@ module Aws::IoT
           security_groups: Array[String],
           vpc_id: String,
           role_arn: String
+        },
+        influx_db_configuration: {
+          endpoint: untyped,
+          influx_db_version: String,
+          secret_id: String,
+          secret_type: String,
+          secret_key: String
         }
       }
     ) -> _CreateTopicRuleDestinationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTopicRuleDestinationResponse
@@ -2189,6 +2241,8 @@ module Aws::IoT
       def description: () -> String?
       def mandatory_parameters: () -> Array[Types::CommandParameter]?
       def payload: () -> Types::CommandPayload?
+      def payload_template: () -> String?
+      def preprocessor: () -> Types::CommandPreprocessor?
       def role_arn: () -> String?
       def created_at: () -> Time?
       def last_updated_at: () -> Time?
@@ -2367,9 +2421,19 @@ module Aws::IoT
       def connected: () -> bool?
       def timestamp: () -> Time?
       def disconnect_reason: () -> String?
+      def source_ip: () -> String?
+      def source_port: () -> Integer?
+      def target_ip: () -> String?
+      def target_port: () -> Integer?
+      def vpc_endpoint_id: () -> String?
+      def keep_alive_duration: () -> Integer?
+      def clean_session: () -> bool?
+      def session_expiry: () -> Integer?
+      def client_id: () -> String?
     end
     def get_thing_connectivity_data: (
-      ?thing_name: String
+      ?thing_name: String,
+      ?include_socket_information: bool
     ) -> _GetThingConnectivityDataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetThingConnectivityDataResponse
 
     interface _GetTopicRuleResponse
@@ -2394,8 +2458,11 @@ module Aws::IoT
       def role_arn: () -> String?
       def default_log_level: () -> String?
       def disable_all_logs: () -> bool?
+      def event_configurations: () -> Array[Types::LogEventConfiguration]?
     end
-    def get_v2_logging_options: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetV2LoggingOptionsResponse
+    def get_v2_logging_options: (
+      ?verbose: bool
+    ) -> _GetV2LoggingOptionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetV2LoggingOptionsResponse
 
     interface _ListActiveViolationsResponse
       include Smithy::Client::_Response[Types::ListActiveViolationsResponse]
@@ -3486,6 +3553,13 @@ module Aws::IoT
                   service_name: String,
                   role_arn: untyped
                 }
+              },
+              enable_batching: bool,
+              batch_config: {
+                max_batch_open_ms: Integer,
+                max_batch_size: Integer,
+                max_batch_size_bytes: Integer,
+                batch_across_topics: bool
               }
             },
             kafka: {
@@ -3518,6 +3592,21 @@ module Aws::IoT
               },
               latitude: untyped,
               longitude: untyped
+            },
+            influx_db: {
+              destination_arn: untyped,
+              role_arn: untyped,
+              database_name: String,
+              table_name: String,
+              organization: String,
+              tags: Hash[String, String],
+              timestamp_unit: String,
+              batch_config: {
+                max_batch_size: Integer,
+                max_batch_open_ms: Integer,
+                max_batch_size_bytes: Integer,
+                batch_across_topics: bool
+              }
             }
           }
         ],
@@ -3546,7 +3635,8 @@ module Aws::IoT
           http: untyped,
           kafka: untyped,
           open_search: untyped,
-          location: untyped
+          location: untyped,
+          influx_db: untyped
         }
       }
     ) -> _ReplaceTopicRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ReplaceTopicRuleResponse
@@ -3609,7 +3699,14 @@ module Aws::IoT
     def set_v2_logging_options: (
       ?role_arn: String,
       ?default_log_level: String,
-      ?disable_all_logs: bool
+      ?disable_all_logs: bool,
+      ?event_configurations: Array[
+        {
+          event_type: String,
+          log_level: String,
+          log_destination: String
+        }
+      ]
     ) -> _SetV2LoggingOptionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SetV2LoggingOptionsResponse
 
     interface _StartAuditMitigationActionsTaskResponse
@@ -4014,7 +4111,10 @@ module Aws::IoT
               name: String,
               order: String
             }
-          ]
+          ],
+          connectivity: {
+            include_socket_information: Array[String]
+          }
         }
       },
       ?thing_group_indexing_configuration: {

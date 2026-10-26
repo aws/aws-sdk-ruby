@@ -72,6 +72,16 @@ module Aws::ResourceExplorer2
       ?tags: Hash[String, String]
     ) -> _CreateIndexResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateIndexResponse
 
+    interface _CreateResourceExplorerSetupResponse
+      include Smithy::Client::_Response[Types::CreateResourceExplorerSetupOutput]
+      def task_id: () -> String?
+    end
+    def create_resource_explorer_setup: (
+      ?region_list: Array[String],
+      ?aggregator_regions: Array[String],
+      ?view_name: String
+    ) -> _CreateResourceExplorerSetupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateResourceExplorerSetupResponse
+
     interface _CreateViewResponse
       include Smithy::Client::_Response[Types::CreateViewOperationOutput]
       def view: () -> Types::View?
@@ -100,6 +110,15 @@ module Aws::ResourceExplorer2
     def delete_index: (
       ?arn: String
     ) -> _DeleteIndexResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteIndexResponse
+
+    interface _DeleteResourceExplorerSetupResponse
+      include Smithy::Client::_Response[Types::DeleteResourceExplorerSetupOutput]
+      def task_id: () -> String?
+    end
+    def delete_resource_explorer_setup: (
+      ?region_list: Array[String],
+      ?delete_in_all_regions: bool
+    ) -> _DeleteResourceExplorerSetupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteResourceExplorerSetupResponse
 
     interface _DeleteViewResponse
       include Smithy::Client::_Response[Types::DeleteViewOperationOutput]
@@ -146,6 +165,32 @@ module Aws::ResourceExplorer2
     def get_managed_view: (
       ?managed_view_arn: String
     ) -> _GetManagedViewResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetManagedViewResponse
+
+    interface _GetResourceExplorerSetupResponse
+      include Smithy::Client::_Response[Types::GetResourceExplorerSetupOutput]
+      def regions: () -> Array[Types::RegionStatus]?
+      def next_token: () -> String?
+    end
+    def get_resource_explorer_setup: (
+      ?task_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetResourceExplorerSetupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResourceExplorerSetupResponse
+
+    interface _GetServiceIndexResponse
+      include Smithy::Client::_Response[Types::GetServiceIndexOutput]
+      def arn: () -> String?
+      def type: () -> String?
+    end
+    def get_service_index: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetServiceIndexResponse
+
+    interface _GetServiceViewResponse
+      include Smithy::Client::_Response[Types::GetServiceViewOutput]
+      def view: () -> Types::ServiceView?
+    end
+    def get_service_view: (
+      ?service_view_arn: String
+    ) -> _GetServiceViewResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetServiceViewResponse
 
     interface _GetViewResponse
       include Smithy::Client::_Response[Types::GetViewOperationOutput]
@@ -204,6 +249,37 @@ module Aws::ResourceExplorer2
       ?view_arn: String,
       ?next_token: String
     ) -> _ListResourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListResourcesResponse
+
+    interface _ListServiceIndexesResponse
+      include Smithy::Client::_Response[Types::ListServiceIndexesOutput]
+      def indexes: () -> Array[Types::Index]?
+      def next_token: () -> String?
+    end
+    def list_service_indexes: (
+      ?regions: Array[String],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListServiceIndexesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListServiceIndexesResponse
+
+    interface _ListServiceViewsResponse
+      include Smithy::Client::_Response[Types::ListServiceViewsOutput]
+      def next_token: () -> String?
+      def service_views: () -> Array[String]?
+    end
+    def list_service_views: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListServiceViewsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListServiceViewsResponse
+
+    interface _ListStreamingAccessForServicesResponse
+      include Smithy::Client::_Response[Types::ListStreamingAccessForServicesOutput]
+      def streaming_access_for_services: () -> Array[Types::StreamingAccessDetails]?
+      def next_token: () -> String?
+    end
+    def list_streaming_access_for_services: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListStreamingAccessForServicesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListStreamingAccessForServicesResponse
 
     interface _ListSupportedResourceTypesResponse
       include Smithy::Client::_Response[Types::ListSupportedResourceTypesOperationOutput]

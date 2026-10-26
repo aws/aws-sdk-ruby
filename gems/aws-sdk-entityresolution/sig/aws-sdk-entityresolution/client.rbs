@@ -95,8 +95,8 @@ module Aws::EntityResolution
       ],
       ?output_source_config: Array[
         {
-          output_s3_path: String,
-          kms_arn: String
+          kms_arn: String,
+          output_s3_path: String
         }
       ],
       ?id_mapping_techniques: {
@@ -197,15 +197,19 @@ module Aws::EntityResolution
       ],
       ?output_source_config: Array[
         {
-          output_s3_path: String,
           kms_arn: String,
+          output_s3_path: String,
           output: Array[
             {
               name: String,
               hashed: bool
             }
           ],
-          apply_normalization: untyped
+          apply_normalization: untyped,
+          customer_profiles_integration_config: {
+            domain_arn: String,
+            object_type_arn: String
+          }
         }
       ],
       ?resolution_techniques: {
@@ -226,8 +230,12 @@ module Aws::EntityResolution
               rule_name: untyped,
               condition: untyped
             }
-          ]
+          ],
+          matching_config: {
+            enable_transitive_matching: bool
+          }
         },
+        enable_real_time_matching: untyped,
         provider_properties: {
           provider_service_arn: String,
           provider_configuration: Smithy::Schema::document,
@@ -625,8 +633,8 @@ module Aws::EntityResolution
       ],
       ?output_source_config: Array[
         {
-          output_s3_path: String,
-          kms_arn: String
+          kms_arn: String,
+          output_s3_path: String
         }
       ],
       ?id_mapping_techniques: {
@@ -722,15 +730,19 @@ module Aws::EntityResolution
       ],
       ?output_source_config: Array[
         {
-          output_s3_path: String,
           kms_arn: String,
+          output_s3_path: String,
           output: Array[
             {
               name: String,
               hashed: bool
             }
           ],
-          apply_normalization: untyped
+          apply_normalization: untyped,
+          customer_profiles_integration_config: {
+            domain_arn: String,
+            object_type_arn: String
+          }
         }
       ],
       ?resolution_techniques: {
@@ -751,8 +763,12 @@ module Aws::EntityResolution
               rule_name: untyped,
               condition: untyped
             }
-          ]
+          ],
+          matching_config: {
+            enable_transitive_matching: bool
+          }
         },
+        enable_real_time_matching: untyped,
         provider_properties: {
           provider_service_arn: String,
           provider_configuration: Smithy::Schema::document,

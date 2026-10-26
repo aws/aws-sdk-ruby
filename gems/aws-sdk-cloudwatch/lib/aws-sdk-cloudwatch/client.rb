@@ -29,7 +29,8 @@ require 'aws-sdk-core/plugins/retry_errors'
 require 'aws-sdk-core/plugins/stub_responses'
 require 'aws-sdk-core/plugins/regional_endpoints'
 require 'aws-sdk-core/plugins/sigv4'
-require 'aws-sdk-core/aws_query'
+require 'smithy-client/rpc_v2_cbor'
+require 'aws-sdk-core/json_rpc'
 
 Aws::Core::Plugins::GlobalConfiguration.add_identifier(:cloudwatch)
 
@@ -123,7 +124,7 @@ module Aws::CloudWatch
     #  at ~/.aws/config and ~/.aws/credentials, respectively.  When not specified, 'default' is used.
     # @option options [Symbol, Object] :protocol
     #  The protocol used for request serialization and response deserialization. Defaults to the service default protocol. May be a Symbol naming a supported protocol, or a custom object implementing the protocol interface.
-    #  Supported protocols: +:aws_query+ (defaults to +:aws_query+).
+    #  Supported protocols: +:rpc_v2_cbor+, +:json_rpc+ (defaults to +:rpc_v2_cbor+).
     # @option options [Boolean] :raise_response_errors (true)
     #  When `true`, response errors are raised. When `false`, the error is placed on the
     #  output in the {Smithy::Client::Response#error error accessor}.
@@ -144,18 +145,18 @@ module Aws::CloudWatch
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -209,13 +210,198 @@ module Aws::CloudWatch
       super
     end
 
+    # <p>Associates an Amazon Web Services Key Management Service (Amazon Web Services KMS)
+    #             customer managed key with the specified dataset. After this operation completes, all
+    #             data published to the dataset is encrypted at rest using the specified KMS key.
+    #             Callers must have <code>kms:Decrypt</code> permission on the key to read the
+    #             encrypted data.</p>
+    #          <p>Only the <code>default</code> dataset is supported. The <code>default</code> dataset
+    #             is implicit for every account in every Region — you do not need to create it before
+    #             calling this operation.</p>
+    #          <p>You can call <code>AssociateDatasetKmsKey</code> on a dataset that is already
+    #             associated with a KMS key to replace the existing key with a different one. The
+    #             caller must have <code>kms:Decrypt</code> permission on both the current key and
+    #             the new key.</p>
+    #          <note>
+    #             <p>If the currently associated key has been deleted, is scheduled for deletion,
+    #                 is pending import, is unavailable, or has been disabled, Amazon CloudWatch
+    #                 does not require <code>kms:Decrypt</code> permission on the current key and
+    #                 the rotation proceeds. If the key was only disabled, consider re-enabling it
+    #                 instead of rotating, because re-enabling allows Amazon CloudWatch to
+    #                 resume decrypting your existing metric data encrypted with that key.</p>
+    #          </note>
+    #          <p>The KMS key that you specify must meet all of the following requirements:</p>
+    #          <ul>
+    #             <li>
+    #                <p>It must be a symmetric encryption KMS key (key spec
+    #                     <code>SYMMETRIC_DEFAULT</code>, key usage <code>ENCRYPT_DECRYPT</code>).
+    #                     Asymmetric keys, HMAC keys, and key material types other than
+    #                     <code>SYMMETRIC_DEFAULT</code> are not supported.</p>
+    #             </li>
+    #             <li>
+    #                <p>It must be enabled and not pending deletion.</p>
+    #             </li>
+    #             <li>
+    #                <p>Its key policy must grant the CloudWatch service principal
+    #                     (<code>cloudwatch.amazonaws.com</code>) these permissions:
+    #                     <code>kms:DescribeKey</code>, <code>kms:GenerateDataKey</code>,
+    #                     <code>kms:Encrypt</code>, <code>kms:Decrypt</code>, and
+    #                     <code>kms:ReEncrypt*</code>. Amazon CloudWatch requires these permissions
+    #                     to manage the data on your behalf.</p>
+    #             </li>
+    #             <li>
+    #                <p>The calling principal must have <code>kms:Decrypt</code> permission on the
+    #                     key.</p>
+    #             </li>
+    #             <li>
+    #                <p>It must be specified as a fully qualified key ARN. Key IDs, aliases, and
+    #                     alias ARNs are not accepted.</p>
+    #             </li>
+    #             <li>
+    #                <p>It must be in the same Amazon Web Services Region as the dataset.</p>
+    #             </li>
+    #          </ul>
+    #          <p>Before completing the association, Amazon CloudWatch validates the key by
+    #             performing a series of dry-run KMS operations. Service-principal checks run first to
+    #             verify that the key policy grants the required access to Amazon CloudWatch. These
+    #             checks include <code>kms:DescribeKey</code>, <code>kms:GenerateDataKey</code>,
+    #             <code>kms:Encrypt</code>, <code>kms:Decrypt</code>, and <code>kms:ReEncrypt*</code>.
+    #             After those succeed, a <code>kms:Decrypt</code> dry-run is run with the caller's
+    #             credentials to verify that the calling principal can use the new key. When you are
+    #             replacing an existing key, the caller's <code>kms:Decrypt</code> dry-run is also run
+    #             on the current key.</p>
+    #          <p>If any of these checks on the new key fails, the operation fails and the existing
+    #             key association (if any) remains unchanged. Common failure causes include the new key
+    #             being disabled, the key policy not granting the required permissions to
+    #             Amazon CloudWatch, or the caller lacking <code>kms:Decrypt</code> permission on
+    #             the new key.</p>
+    #          <p>For more information about using customer managed keys with Amazon CloudWatch,
+    #             see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cmk-encryption.html">Encryption at rest
+    #                 with customer managed keys</a> in the <i>Amazon CloudWatch User
+    #                 Guide</i>.</p>
+    # @param [Hash, Types::AssociateDatasetKmsKeyInput] params
+    # @option params [String] :dataset_identifier
+    #   <p>Specifies the identifier of the dataset that you want to associate the KMS key
+    #               with. For the <code>default</code> dataset, you can specify either
+    #               <code>default</code> or the full dataset Amazon Resource Name (ARN) in the format
+    #               <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:dataset/default</code>.</p>
+    # @option params [String] :kms_key_arn
+    #   <p>Specifies the Amazon Resource Name (ARN) of the customer managed KMS key to
+    #               associate with the dataset. The key must be a symmetric encryption KMS key
+    #               (<code>SYMMETRIC_DEFAULT</code>) in the same Amazon Web Services Region as the
+    #               dataset.</p>
+    #            <p>The ARN must be in the format
+    #               <code>arn:aws:kms:<i>Region</i>:<i>account-id</i>:key/<i>key-id</i>
+    #               </code>.
+    #               Key IDs, aliases, and alias ARNs are not accepted.</p>
+    #            <p>For more information about KMS key ARNs, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN">Key ARN</a> in
+    #               the <i>Amazon Web Services Key Management Service Developer
+    #                   Guide</i>.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     dataset_identifier: "DatasetIdentifier", # required
+    #     kms_key_arn: "KmsKeyArn", # required
+    #   }
+    #   options = {}
+    #   response = client.associate_dataset_kms_key(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::AssociateDatasetKmsKeyOutput]
+    def associate_dataset_kms_key(params = {}, options = {})
+      request = build_request(:associate_dataset_kms_key, params)
+      request.send_request(options)
+    end
+
+    # <p>Creates a resource metrics configuration for an Amazon Web Services resource. After you
+    #             create a configuration, Amazon CloudWatch collects detailed metrics for that
+    #             resource.</p>
+    #          <p>Each Amazon Web Services resource can have only one resource metrics configuration. If a
+    #             configuration already exists for the specified resource ARN, this operation returns a
+    #             <code>ConflictException</code>. To modify an existing configuration, use <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_UpdateResourceMetricsConfiguration.html">UpdateResourceMetricsConfiguration</a>.</p>
+    #          <p>If the Amazon Web Services resource that you specify in <code>ResourceArn</code> does
+    #             not exist, this operation returns a <code>ResourceNotFoundException</code>. Verify that
+    #             the resource ARN is correct and that the resource exists before you retry the
+    #             request.</p>
+    #          <p>To create a resource metrics configuration, you must have the
+    #                 <code>cloudwatch:CreateResourceMetricsConfiguration</code> permission. For information about scoping
+    #             this permission to specific resources, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/iam-cw-condition-keys-resource-arn.html">Condition keys for resource metrics configuration access</a> in the
+    #                 <i>Amazon CloudWatch User Guide</i>.</p>
+    # @param [Hash, Types::CreateResourceMetricsConfigurationInput] params
+    # @option params [String] :resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the Amazon Web Services resource to enable detailed
+    #               monitoring for.</p>
+    # @option params [Array<Types::ResourceMetricSelection>] :metric_selections
+    #   <p>Specifies which metrics Amazon CloudWatch collects for the resource. If you omit
+    #               this parameter, Amazon CloudWatch collects all available detailed metrics for the
+    #               resource.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     resource_arn: "ResourceArn", # required
+    #     metric_selections: [
+    #       {
+    #         include_metrics: ["MetricName"], # required
+    #       }
+    #     ]
+    #   }
+    #   options = {}
+    #   response = client.create_resource_metrics_configuration(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     resource_metrics_configuration: { # required
+    #       resource_arn: "ResourceArn", # required
+    #       created_at: Time.now, # required
+    #       updated_at: Time.now, # required
+    #       metric_selections: [
+    #         {
+    #           include_metrics: ["MetricName"], # required
+    #         }
+    #       ]
+    #     }
+    #   }
+    # @return [Types::CreateResourceMetricsConfigurationOutput]
+    def create_resource_metrics_configuration(params = {}, options = {})
+      request = build_request(:create_resource_metrics_configuration, params)
+      request.send_request(options)
+    end
+
+    # <p>Deletes a specific alarm mute rule.</p>
+    #          <p>When you delete a mute rule, any alarms that are currently being muted by that rule
+    #             are immediately unmuted. If those alarms are in an ALARM state, their configured actions
+    #             will trigger.</p>
+    #          <p>This operation is idempotent. If you delete a mute rule that does not exist, the
+    #             operation succeeds without returning an error.</p>
+    #          <p>
+    #             <b>Permissions</b>
+    #          </p>
+    #          <p>To delete a mute rule, you need the <code>cloudwatch:DeleteAlarmMuteRule</code>
+    #             permission on the alarm mute rule resource.</p>
+    # @param [Hash, Types::DeleteAlarmMuteRuleInput] params
+    # @option params [String] :alarm_mute_rule_name
+    #   <p>The name of the alarm mute rule to delete.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     alarm_mute_rule_name: "Name", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_alarm_mute_rule(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Smithy::Schema::EmptyStructure]
+    def delete_alarm_mute_rule(params = {}, options = {})
+      request = build_request(:delete_alarm_mute_rule, params)
+      request.send_request(options)
+    end
+
     # <p>Deletes the specified alarms. You can delete up to 100 alarms in one operation.
     #             However, this total can include no more than one composite alarm. For example, you could
     #             delete 99 metric alarms and one composite alarms with one operation, but you can't
-    #             delete two composite alarms with one operation.</p>
-    #          <p> If you specify any incorrect alarm names, the alarms you specify with correct names are still deleted. Other syntax errors might result
-    #             in no alarms being deleted. To confirm that alarms were deleted successfully, you can use the
-    #             <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_DescribeAlarms.html">DescribeAlarms</a> operation after using <code>DeleteAlarms</code>.</p>
+    #             delete two composite alarms with one operation. Log alarms cannot be batch deleted.</p>
+    #          <p> If you specify any incorrect alarm names, the alarms you specify with correct
+    #             names are still deleted. Other syntax errors might result in no alarms being deleted. To
+    #             confirm that alarms were deleted successfully, you can use the <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_DescribeAlarms.html">DescribeAlarms</a> operation after using <code>DeleteAlarms</code>.</p>
     #          <note>
     #             <p>It is possible to create a loop or cycle of composite alarms, where composite
     #                 alarm A depends on composite alarm B, and composite alarm B also depends on
@@ -225,7 +411,7 @@ module Aws::CloudWatch
     #             <p>To get out of such a situation, you must break the cycle by changing the rule of
     #                 one of the composite alarms in the cycle to remove a dependency that creates the
     #                 cycle. The simplest change to make to break a cycle is to change the
-    #                 <code>AlarmRule</code> of one of the alarms to <code>false</code>. </p>
+    #                     <code>AlarmRule</code> of one of the alarms to <code>false</code>. </p>
     #             <p>Additionally, the evaluation of composite alarms stops if CloudWatch
     #                 detects a cycle in the evaluation path. </p>
     #          </note>
@@ -249,8 +435,11 @@ module Aws::CloudWatch
 
     # <p> Deletes the specified anomaly detection model from your account. For more information
     #             about how to delete an anomaly detection model, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Create_Anomaly_Detection_Alarm.html#Delete_Anomaly_Detection_Model">Deleting an anomaly detection model</a> in the <i>CloudWatch User
-    #             Guide</i>. </p>
+    #                 Guide</i>. </p>
     # @param [Hash, Types::DeleteAnomalyDetectorInput] params
+    # @option params [String] :anomaly_detector_id
+    #   <p>Specifies the unique identifier of the anomaly detector to delete. If you specify
+    #               this parameter, you do not need to specify a metric to identify the detector.</p>
     # @option params [String] :namespace
     #   <p>The namespace associated with the anomaly detection model to delete.</p>
     # @option params [String] :metric_name
@@ -285,12 +474,12 @@ module Aws::CloudWatch
     #               </li>
     #               <li>
     #                  <p>the <code>MetricMathAnomalyDetector</code> parameters of
-    #                       <code>DeleteAnomalyDetectorInput</code>
+    #                           <code>DeleteAnomalyDetectorInput</code>
     #                  </p>
     #               </li>
     #            </ul>
     #            <p>Instead, specify the single metric anomaly detector attributes as part of the
-    #               <code>SingleMetricAnomalyDetector</code> property.</p>
+    #                   <code>SingleMetricAnomalyDetector</code> property.</p>
     # @option params [Types::MetricMathAnomalyDetector] :metric_math_anomaly_detector
     #   <p>The metric math anomaly detector to be deleted.</p>
     #            <p>When using <code>MetricMathAnomalyDetector</code>, you cannot include following
@@ -317,14 +506,15 @@ module Aws::CloudWatch
     #               </li>
     #               <li>
     #                  <p>the <code>SingleMetricAnomalyDetector</code> parameters of
-    #                       <code>DeleteAnomalyDetectorInput</code>
+    #                           <code>DeleteAnomalyDetectorInput</code>
     #                  </p>
     #               </li>
     #            </ul>
     #            <p>Instead, specify the metric math anomaly detector attributes as part of the
-    #               <code>MetricMathAnomalyDetector</code> property.</p>
+    #                   <code>MetricMathAnomalyDetector</code> property.</p>
     # @example Request syntax with placeholder values
     #   params = {
+    #     anomaly_detector_id: "AnomalyDetectorId",
     #     namespace: "Namespace",
     #     metric_name: "MetricName",
     #     dimensions: [
@@ -386,7 +576,8 @@ module Aws::CloudWatch
     end
 
     # <p>Deletes all dashboards that you specify. You can specify up to 100 dashboards to
-    #             delete. If there is an error during this call, no dashboards are deleted.</p>
+    #             delete. If there is an error during this call, the operation attempts to delete as many
+    #             dashboards as possible.</p>
     # @param [Hash, Types::DeleteDashboardsInput] params
     # @option params [Array<String>] :dashboard_names
     #   <p>The dashboards to be deleted. This parameter is required.</p>
@@ -455,12 +646,45 @@ module Aws::CloudWatch
       request.send_request(options)
     end
 
-    # <p>Returns the information of the current alarm contributors that are in <code>ALARM</code> state. This operation returns details about the individual time series that contribute to the alarm's state.</p>
+    # <p>Deletes the resource metrics configuration for an Amazon Web Services resource. After
+    #             you delete the configuration, Amazon CloudWatch stops collecting detailed metrics
+    #             for the resource. Metric data that Amazon CloudWatch already collected for the
+    #             resource is not deleted.</p>
+    #          <p>This operation returns a <code>ResourceNotFoundException</code> if no resource metrics
+    #             configuration exists for the specified resource ARN. Verify that the resource ARN is
+    #             correct.</p>
+    #          <p>To delete a resource metrics configuration, you must have the
+    #                 <code>cloudwatch:DeleteResourceMetricsConfiguration</code> permission. For information about scoping
+    #             this permission to specific resources, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/iam-cw-condition-keys-resource-arn.html">Condition keys for resource metrics configuration access</a> in the
+    #                 <i>Amazon CloudWatch User Guide</i>.</p>
+    # @param [Hash, Types::DeleteResourceMetricsConfigurationInput] params
+    # @option params [String] :resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the Amazon Web Services resource to delete the
+    #               resource metrics configuration for.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     resource_arn: "ResourceArn", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_resource_metrics_configuration(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::DeleteResourceMetricsConfigurationOutput]
+    def delete_resource_metrics_configuration(params = {}, options = {})
+      request = build_request(:delete_resource_metrics_configuration, params)
+      request.send_request(options)
+    end
+
+    # <p>Returns the information of the current alarm contributors that are in
+    #                 <code>ALARM</code> state. This operation returns details about the individual time
+    #             series that contribute to the alarm's state.</p>
     # @param [Hash, Types::DescribeAlarmContributorsInput] params
     # @option params [String] :alarm_name
     #   <p>The name of the alarm for which to retrieve contributor information.</p>
     # @option params [String] :next_token
-    #   <p>The token returned by a previous call to indicate that there is more data available.</p>
+    #   <p>The token returned by a previous call to indicate that there is more data
+    #               available.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     alarm_name: "AlarmName", # required
@@ -496,15 +720,17 @@ module Aws::CloudWatch
     #          <p>To use this operation and return information about a composite alarm, you must be
     #             signed on with the <code>cloudwatch:DescribeAlarmHistory</code> permission that is
     #             scoped to <code>*</code>. You can't return information about composite alarms if your
-    #             <code>cloudwatch:DescribeAlarmHistory</code> permission has a narrower scope.</p>
+    #                 <code>cloudwatch:DescribeAlarmHistory</code> permission has a narrower scope.</p>
     # @param [Hash, Types::DescribeAlarmHistoryInput] params
     # @option params [String] :alarm_name
     #   <p>The name of the alarm.</p>
     # @option params [String] :alarm_contributor_id
-    #   <p>The unique identifier of a specific alarm contributor to filter the alarm history results.</p>
+    #   <p>The unique identifier of a specific alarm contributor to filter the alarm history
+    #               results.</p>
     # @option params [Array<String>] :alarm_types
-    #   <p>Use this parameter to specify whether you want the operation to return metric alarms
-    #               or composite alarms. If you omit this parameter, only metric alarms are returned.</p>
+    #   <p>Use this parameter to specify whether you want the operation to return metric alarms,
+    #               composite alarms, or log alarms. If you omit this parameter, only metric alarms are
+    #               returned.</p>
     # @option params [String] :history_item_type
     #   <p>The type of alarm histories to retrieve.</p>
     # @option params [Time] :start_date
@@ -518,14 +744,14 @@ module Aws::CloudWatch
     #               available.</p>
     # @option params [String] :scan_by
     #   <p>Specified whether to return the newest or oldest alarm history first. Specify
-    #               <code>TimestampDescending</code> to have the newest event history returned first,
+    #                   <code>TimestampDescending</code> to have the newest event history returned first,
     #               and specify <code>TimestampAscending</code> to have the oldest history returned
     #               first.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     alarm_name: "AlarmName",
     #     alarm_contributor_id: "ContributorId",
-    #     alarm_types: ["CompositeAlarm" # One of: ["CompositeAlarm", "MetricAlarm"]],
+    #     alarm_types: ["CompositeAlarm" # One of: ["CompositeAlarm", "MetricAlarm", "LogAlarm"]],
     #     history_item_type: "ConfigurationUpdate" # One of: ["ConfigurationUpdate", "StateUpdate", "Action", "AlarmContributorStateUpdate", "AlarmContributorAction"],
     #     start_date: Time.now,
     #     end_date: Time.now,
@@ -542,7 +768,7 @@ module Aws::CloudWatch
     #       {
     #         alarm_name: "AlarmName",
     #         alarm_contributor_id: "ContributorId",
-    #         alarm_type: "CompositeAlarm" # One of: ["CompositeAlarm", "MetricAlarm"],
+    #         alarm_type: "CompositeAlarm" # One of: ["CompositeAlarm", "MetricAlarm", "LogAlarm"],
     #         timestamp: Time.now,
     #         history_item_type: "ConfigurationUpdate" # One of: ["ConfigurationUpdate", "StateUpdate", "Action", "AlarmContributorStateUpdate", "AlarmContributorAction"],
     #         history_summary: "HistorySummary",
@@ -564,8 +790,8 @@ module Aws::CloudWatch
     #             for the alarm name, the alarm state, or a prefix for any action.</p>
     #          <p>To use this operation and return information about composite alarms, you must be
     #             signed on with the <code>cloudwatch:DescribeAlarms</code> permission that is scoped to
-    #             <code>*</code>. You can't return information about composite alarms if your
-    #             <code>cloudwatch:DescribeAlarms</code> permission has a narrower scope.</p>
+    #                 <code>*</code>. You can't return information about composite alarms if your
+    #                 <code>cloudwatch:DescribeAlarms</code> permission has a narrower scope.</p>
     # @param [Hash, Types::DescribeAlarmsInput] params
     # @option params [Array<String>] :alarm_names
     #   <p>The names of the alarms to retrieve information about.</p>
@@ -575,14 +801,16 @@ module Aws::CloudWatch
     #            <p>If this parameter is specified, you cannot specify
     #               <code>AlarmNames</code>.</p>
     # @option params [Array<String>] :alarm_types
-    #   <p>Use this parameter to specify whether you want the operation to return metric alarms
-    #               or composite alarms. If you omit this parameter, only metric alarms are returned, even
-    #               if composite alarms exist in the account.</p>
+    #   <p>Use this parameter to specify whether you want the operation to return metric alarms,
+    #               composite alarms, or log alarms. If you omit this parameter, only metric alarms are
+    #               returned, even if composite alarms or log alarms exist in the account.</p>
     #            <p>For example, if you omit this parameter or specify <code>MetricAlarms</code>, the
-    #               operation returns only a list of metric alarms. It does not return any composite alarms,
-    #               even if composite alarms exist in the account.</p>
+    #               operation returns only a list of metric alarms. It does not return any composite alarms
+    #               or log alarms, even if they exist in the account.</p>
     #            <p>If you specify <code>CompositeAlarms</code>, the operation returns only a list of
-    #               composite alarms, and does not return any metric alarms.</p>
+    #               composite alarms, and does not return any metric alarms or log alarms.</p>
+    #            <p>If you specify <code>LogAlarms</code>, the operation returns only a list of log
+    #               alarms, and does not return any metric alarms or composite alarms.</p>
     # @option params [String] :children_of_alarm_name
     #   <p>If you use this parameter and specify the name of a composite alarm, the operation
     #               returns information about the "children" alarms of the alarm you specify. These are the
@@ -612,8 +840,8 @@ module Aws::CloudWatch
     #            <note>
     #               <p>Only the Alarm Name and ARN are returned by this operation when you use this
     #                   parameter. To get complete information about these alarms, perform another
-    #                   <code>DescribeAlarms</code> operation and specify the parent alarm names in the
-    #                   <code>AlarmNames</code> parameter.</p>
+    #                       <code>DescribeAlarms</code> operation and specify the parent alarm names in the
+    #                       <code>AlarmNames</code> parameter.</p>
     #            </note>
     # @option params [String] :state_value
     #   <p>Specify this parameter to receive information only about alarms that are currently
@@ -631,7 +859,7 @@ module Aws::CloudWatch
     #   params = {
     #     alarm_names: ["AlarmName"],
     #     alarm_name_prefix: "AlarmNamePrefix",
-    #     alarm_types: ["CompositeAlarm" # One of: ["CompositeAlarm", "MetricAlarm"]],
+    #     alarm_types: ["CompositeAlarm" # One of: ["CompositeAlarm", "MetricAlarm", "LogAlarm"]],
     #     children_of_alarm_name: "AlarmName",
     #     parents_of_alarm_name: "AlarmName",
     #     state_value: "OK" # One of: ["OK", "ALARM", "INSUFFICIENT_DATA"],
@@ -725,8 +953,76 @@ module Aws::CloudWatch
     #           }
     #         ],
     #         threshold_metric_id: "MetricId",
-    #         evaluation_state: "PARTIAL_DATA" # One of: ["PARTIAL_DATA"],
-    #         state_transitioned_timestamp: Time.now
+    #         evaluation_state: "PARTIAL_DATA" # One of: ["PARTIAL_DATA", "EVALUATION_FAILURE", "EVALUATION_ERROR"],
+    #         state_transitioned_timestamp: Time.now,
+    #         evaluation_window: {
+    #           # One of:
+    #           wall_clock_window: {
+    #             timezone: "Timezone"
+    #           },
+    #           sliding_window: {
+    #           }
+    #         },
+    #         warm_up_configuration: {
+    #           warm_up_period_duration_in_minutes: 1, # required
+    #           only_start_evaluating_after_warm_up_period_ends: false
+    #         },
+    #         evaluation_criteria: {
+    #           # One of:
+    #           prom_ql_criteria: {
+    #             query: "Query", # required
+    #             pending_period: 1,
+    #             recovery_period: 1
+    #           }
+    #         },
+    #         evaluation_interval: 1
+    #       }
+    #     ],
+    #     log_alarms: [
+    #       {
+    #         alarm_name: "AlarmName",
+    #         alarm_arn: "AlarmArn",
+    #         alarm_description: "AlarmDescription",
+    #         alarm_configuration_updated_timestamp: Time.now,
+    #         actions_enabled: false,
+    #         ok_actions: ["ResourceName"],
+    #         alarm_actions: ["ResourceName"],
+    #         insufficient_data_actions: ["ResourceName"],
+    #         state_value: "OK" # One of: ["OK", "ALARM", "INSUFFICIENT_DATA"],
+    #         state_reason: "StateReason",
+    #         state_reason_data: "StateReasonData",
+    #         state_updated_timestamp: Time.now,
+    #         scheduled_query_configuration: {
+    #           query_string: "QueryString", # required
+    #           log_group_identifiers: ["AmazonResourceName"],
+    #           query_arn: "AmazonResourceName",
+    #           scheduled_query_role_arn: "AmazonResourceName", # required
+    #           schedule_configuration: { # required
+    #             schedule_expression: "ScheduleExpression", # required
+    #             start_time_offset: 1, # required
+    #             end_time_offset: 1
+    #           },
+    #           aggregation_expression: "AggregationExpression", # required
+    #           tags: [
+    #             {
+    #               key: "TagKey", # required
+    #               value: "TagValue", # required
+    #             }
+    #           ]
+    #         },
+    #         query_results_to_evaluate: 1,
+    #         query_results_to_alarm: 1,
+    #         threshold: 1.0,
+    #         comparison_operator: "GreaterThanOrEqualToThreshold" # One of: ["GreaterThanOrEqualToThreshold", "GreaterThanThreshold", "LessThanThreshold", "LessThanOrEqualToThreshold", "LessThanLowerOrGreaterThanUpperThreshold", "LessThanLowerThreshold", "GreaterThanUpperThreshold"],
+    #         treat_missing_data: "TreatMissingData",
+    #         state_transitioned_timestamp: Time.now,
+    #         evaluation_state: "PARTIAL_DATA" # One of: ["PARTIAL_DATA", "EVALUATION_FAILURE", "EVALUATION_ERROR"],
+    #         action_log_line_count: 1,
+    #         action_log_line_role_arn: "ActionLogLineRoleArn",
+    #         warm_up_configuration: {
+    #           warm_up_period_duration_in_minutes: 1, # required
+    #           only_start_evaluating_after_warm_up_period_ends: false
+    #         }
     #       }
     #     ],
     #     next_token: "NextToken"
@@ -838,8 +1134,29 @@ module Aws::CloudWatch
     #           }
     #         ],
     #         threshold_metric_id: "MetricId",
-    #         evaluation_state: "PARTIAL_DATA" # One of: ["PARTIAL_DATA"],
-    #         state_transitioned_timestamp: Time.now
+    #         evaluation_state: "PARTIAL_DATA" # One of: ["PARTIAL_DATA", "EVALUATION_FAILURE", "EVALUATION_ERROR"],
+    #         state_transitioned_timestamp: Time.now,
+    #         evaluation_window: {
+    #           # One of:
+    #           wall_clock_window: {
+    #             timezone: "Timezone"
+    #           },
+    #           sliding_window: {
+    #           }
+    #         },
+    #         warm_up_configuration: {
+    #           warm_up_period_duration_in_minutes: 1, # required
+    #           only_start_evaluating_after_warm_up_period_ends: false
+    #         },
+    #         evaluation_criteria: {
+    #           # One of:
+    #           prom_ql_criteria: {
+    #             query: "Query", # required
+    #             pending_period: 1,
+    #             recovery_period: 1
+    #           }
+    #         },
+    #         evaluation_interval: 1
     #       }
     #     ]
     #   }
@@ -853,9 +1170,14 @@ module Aws::CloudWatch
     #             metric anomaly detectors, you can list all of the models in your account or filter the
     #             results to only the models that are related to a certain namespace, metric name, or
     #             metric dimension. For metric math anomaly detectors, you can list them by adding
-    #             <code>METRIC_MATH</code> to the <code>AnomalyDetectorTypes</code> array. This will
+    #                 <code>METRIC_MATH</code> to the <code>AnomalyDetectorTypes</code> array. This will
     #             return all metric math anomaly detectors in your account.</p>
     # @param [Hash, Types::DescribeAnomalyDetectorsInput] params
+    # @option params [Array<String>] :anomaly_detector_ids
+    #   <p>Specifies the unique identifiers of the anomaly detectors to describe. You can specify
+    #               up to 50 identifiers. If you specify this parameter, you cannot also specify the
+    #               <code>Namespace</code>, <code>MetricName</code>, <code>Dimensions</code>, or
+    #               <code>AnomalyDetectorTypes</code> metric filters.</p>
     # @option params [String] :next_token
     #   <p>Use the token returned by the previous operation to request the next page of
     #               results.</p>
@@ -863,7 +1185,7 @@ module Aws::CloudWatch
     #   <p>The maximum number of results to return in one operation. The maximum value that you
     #               can specify is 100.</p>
     #            <p>To retrieve the remaining results, make another call with the returned
-    #               <code>NextToken</code> value. </p>
+    #                   <code>NextToken</code> value. </p>
     # @option params [String] :namespace
     #   <p>Limits the results to only the anomaly detection models that are associated with the
     #               specified namespace.</p>
@@ -877,10 +1199,11 @@ module Aws::CloudWatch
     #               and have anomaly detection models associated, they're all returned.</p>
     # @option params [Array<String>] :anomaly_detector_types
     #   <p>The anomaly detector types to request when using
-    #               <code>DescribeAnomalyDetectorsInput</code>. If empty, defaults to
-    #               <code>SINGLE_METRIC</code>.</p>
+    #                   <code>DescribeAnomalyDetectorsInput</code>. If empty, defaults to
+    #                   <code>SINGLE_METRIC</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
+    #     anomaly_detector_ids: ["AnomalyDetectorId"],
     #     next_token: "NextToken",
     #     max_results: 1,
     #     namespace: "Namespace",
@@ -900,6 +1223,7 @@ module Aws::CloudWatch
     #   {
     #     anomaly_detectors: [
     #       {
+    #         anomaly_detector_id: "AnomalyDetectorId",
     #         namespace: "Namespace",
     #         metric_name: "MetricName",
     #         dimensions: [
@@ -973,7 +1297,7 @@ module Aws::CloudWatch
 
     # <p>Returns a list of all the Contributor Insights rules in your account.</p>
     #          <p>For more information about Contributor Insights, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ContributorInsights.html">Using Contributor
-    #             Insights to Analyze High-Cardinality Data</a>.</p>
+    #                 Insights to Analyze High-Cardinality Data</a>.</p>
     # @param [Hash, Types::DescribeInsightRulesInput] params
     # @option params [String] :next_token
     #   <p>Include this value, if it was returned by the previous operation, to get the next set
@@ -1059,6 +1383,60 @@ module Aws::CloudWatch
       request.send_request(options)
     end
 
+    # <p>Removes the customer managed Amazon Web Services Key Management Service
+    #             (Amazon Web Services KMS) key association from the specified dataset. After this
+    #             operation completes, data that you publish to the dataset is encrypted at rest using
+    #             an Amazon Web Services owned key managed by Amazon CloudWatch.</p>
+    #          <p>Only the <code>default</code> dataset is supported. To call this operation, the
+    #             dataset must currently have a customer managed KMS key associated with it. If the
+    #             dataset has no associated KMS key, the operation fails with
+    #             <code>ResourceNotFoundException</code>.</p>
+    #          <p>Amazon CloudWatch performs a dry-run <code>kms:Decrypt</code> call on the
+    #             currently associated key as part of this operation. The caller must have
+    #             <code>kms:Decrypt</code> permission on the currently associated key. If the key is
+    #             accessible but the caller lacks <code>kms:Decrypt</code> permission, the operation
+    #             fails with <code>AccessDeniedException</code>.</p>
+    #          <note>
+    #             <p>If the currently associated key has been deleted, is scheduled for deletion,
+    #                 is pending import, is unavailable, or has been disabled, Amazon CloudWatch
+    #                 does not require <code>kms:Decrypt</code> permission on that key and the
+    #                 disassociation proceeds. If the key was only disabled, consider re-enabling it
+    #                 instead of disassociating, because re-enabling allows Amazon CloudWatch to
+    #                 resume decrypting your existing metric data.</p>
+    #          </note>
+    #          <important>
+    #             <p>Disassociating a KMS key from a dataset does not immediately remove the
+    #                 <code>kms:Decrypt</code> requirement on data plane operations. For up to three
+    #                 hours after disassociation, callers must continue to have
+    #                 <code>kms:Decrypt</code> permission on the previously associated key. Some data
+    #                 might still be encrypted with that key during this window. After this enforcement
+    #                 window elapses, the <code>kms:Decrypt</code> requirement is lifted.</p>
+    #          </important>
+    #          <p>For more information about using customer managed keys with Amazon CloudWatch,
+    #             see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cmk-encryption.html">Encryption at rest
+    #                 with customer managed keys</a> in the <i>Amazon CloudWatch User
+    #                 Guide</i>.</p>
+    # @param [Hash, Types::DisassociateDatasetKmsKeyInput] params
+    # @option params [String] :dataset_identifier
+    #   <p>Specifies the identifier of the dataset from which to remove the KMS key
+    #               association. For the <code>default</code> dataset, you can specify either
+    #               <code>default</code> or the full dataset Amazon Resource Name (ARN) in the format
+    #               <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:dataset/default</code>.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     dataset_identifier: "DatasetIdentifier", # required
+    #   }
+    #   options = {}
+    #   response = client.disassociate_dataset_kms_key(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::DisassociateDatasetKmsKeyOutput]
+    def disassociate_dataset_kms_key(params = {}, options = {})
+      request = build_request(:disassociate_dataset_kms_key, params)
+      request.send_request(options)
+    end
+
     # <p>Enables the actions for the specified alarms.</p>
     # @param [Hash, Types::EnableAlarmActionsInput] params
     # @option params [Array<String>] :alarm_names
@@ -1108,10 +1486,81 @@ module Aws::CloudWatch
       request.send_request(options)
     end
 
+    # <p>Retrieves details for a specific alarm mute rule.</p>
+    #          <p>This operation returns complete information about the mute rule, including its
+    #             configuration, status, targeted alarms, and metadata.</p>
+    #          <p>The returned status indicates the current state of the mute rule:</p>
+    #          <ul>
+    #             <li>
+    #                <p>
+    #                   <b>SCHEDULED</b>: The mute rule is configured and
+    #                     will become active in the future</p>
+    #             </li>
+    #             <li>
+    #                <p>
+    #                   <b>ACTIVE</b>: The mute rule is currently muting
+    #                     alarm actions</p>
+    #             </li>
+    #             <li>
+    #                <p>
+    #                   <b>EXPIRED</b>: The mute rule has passed its
+    #                     expiration date and will no longer become active</p>
+    #             </li>
+    #          </ul>
+    #          <p>
+    #             <b>Permissions</b>
+    #          </p>
+    #          <p>To retrieve details for a mute rule, you need the
+    #                 <code>cloudwatch:GetAlarmMuteRule</code> permission on the alarm mute rule
+    #             resource.</p>
+    # @param [Hash, Types::GetAlarmMuteRuleInput] params
+    # @option params [String] :alarm_mute_rule_name
+    #   <p>The name of the alarm mute rule to retrieve.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     alarm_mute_rule_name: "Name", # required
+    #   }
+    #   options = {}
+    #   response = client.get_alarm_mute_rule(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     name: "Name",
+    #     alarm_mute_rule_arn: "Arn",
+    #     description: "AlarmDescription",
+    #     rule: {
+    #       schedule: { # required
+    #         expression: "Expression", # required
+    #         duration: "Duration", # required
+    #         timezone: "Timezone"
+    #       }
+    #     },
+    #     mute_targets: {
+    #       alarm_names: ["Name"], # required
+    #     },
+    #     start_date: Time.now,
+    #     expire_date: Time.now,
+    #     status: "SCHEDULED" # One of: ["SCHEDULED", "ACTIVE", "EXPIRED"],
+    #     last_updated_timestamp: Time.now,
+    #     mute_type: "MuteType"
+    #   }
+    # @return [Types::GetAlarmMuteRuleOutput]
+    def get_alarm_mute_rule(params = {}, options = {})
+      request = build_request(:get_alarm_mute_rule, params)
+      request.send_request(options)
+    end
+
     # <p>Displays the details of the dashboard that you specify.</p>
     #          <p>To copy an existing dashboard, use <code>GetDashboard</code>, and then use the data
     #             returned within <code>DashboardBody</code> as the template for the new dashboard when
     #             you call <code>PutDashboard</code> to create the copy.</p>
+    #          <p>You might have recently enabled an <a href="https://docs.aws.amazon.com/glossary/latest/reference/glos-chap.html#optinregion">opt-in Region (Region that is disabled by default)</a> for your account. In
+    #             that Region, <code>GetDashboard</code> can return an access denied error for up to 24
+    #             hours after you enable the Region. This delay occurs while dashboard data propagates.
+    #             The error does not
+    #             indicate a problem with your permissions. Because dashboards are global, you can call
+    #             <code>GetDashboard</code> in any other enabled Region, or retry after propagation
+    #             completes.</p>
     # @param [Hash, Types::GetDashboardInput] params
     # @option params [String] :dashboard_name
     #   <p>The name of the dashboard to be described.</p>
@@ -1131,6 +1580,42 @@ module Aws::CloudWatch
     # @return [Types::GetDashboardOutput]
     def get_dashboard(params = {}, options = {})
       request = build_request(:get_dashboard, params)
+      request.send_request(options)
+    end
+
+    # <p>Returns information about the specified dataset. This includes its identifier,
+    #             Amazon Resource Name (ARN), and any customer managed Amazon Web Services Key
+    #             Management Service (Amazon Web Services KMS) key that is currently associated with
+    #             it.</p>
+    #          <p>Only the <code>default</code> dataset is supported. The <code>default</code> dataset
+    #             is implicit for every account in every Region — you can call <code>GetDataset</code>
+    #             for it without first creating it. If no customer managed KMS key has been associated
+    #             with the dataset, the response omits the <code>KmsKeyArn</code> field, indicating that
+    #             data is encrypted at rest using an Amazon Web Services owned key managed by
+    #             Amazon CloudWatch.</p>
+    #          <p>To associate a customer managed KMS key with a dataset, use <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_AssociateDatasetKmsKey.html">AssociateDatasetKmsKey</a>. To remove the association, use <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_DisassociateDatasetKmsKey.html">DisassociateDatasetKmsKey</a>.</p>
+    # @param [Hash, Types::GetDatasetInput] params
+    # @option params [String] :dataset_identifier
+    #   <p>Specifies the identifier of the dataset to retrieve. For the <code>default</code>
+    #               dataset, you can specify either <code>default</code> or the full dataset Amazon
+    #               Resource Name (ARN) in the format
+    #               <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:dataset/default</code>.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     dataset_identifier: "DatasetIdentifier", # required
+    #   }
+    #   options = {}
+    #   response = client.get_dataset(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     dataset_id: "DatasetId", # required
+    #     arn: "DatasetArn", # required
+    #     kms_key_arn: "KmsKeyArn"
+    #   }
+    # @return [Types::GetDatasetOutput]
+    def get_dataset(params = {}, options = {})
+      request = build_request(:get_dataset, params)
       request.send_request(options)
     end
 
@@ -1186,14 +1671,14 @@ module Aws::CloudWatch
     # @option params [Time] :start_time
     #   <p>The start time of the data to use in the report. When used in a raw HTTP Query API, it
     #               is formatted as <code>yyyy-MM-dd'T'HH:mm:ss</code>. For example,
-    #               <code>2019-07-01T23:59:59</code>.</p>
+    #                   <code>2019-07-01T23:59:59</code>.</p>
     # @option params [Time] :end_time
     #   <p>The end time of the data to use in the report. When used in a raw HTTP Query API, it
     #               is formatted as <code>yyyy-MM-dd'T'HH:mm:ss</code>. For example,
-    #               <code>2019-07-01T23:59:59</code>.</p>
+    #                   <code>2019-07-01T23:59:59</code>.</p>
     # @option params [Integer] :period
     #   <p>The period, in seconds, to use for the statistics in the
-    #               <code>InsightRuleMetricDatapoint</code> results.</p>
+    #                   <code>InsightRuleMetricDatapoint</code> results.</p>
     # @option params [Integer] :max_contributor_count
     #   <p>The maximum number of contributors to include in the report. The range is 1 to 100. If
     #               you omit this, the default of 10 is used.</p>
@@ -1244,7 +1729,7 @@ module Aws::CloudWatch
     #            </ul>
     # @option params [String] :order_by
     #   <p>Determines what statistic to use to rank the contributors. Valid values are
-    #               <code>Sum</code> and <code>Maximum</code>.</p>
+    #                   <code>Sum</code> and <code>Maximum</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     rule_name: "InsightRuleName", # required
@@ -1305,15 +1790,17 @@ module Aws::CloudWatch
     #             data. For example, using Lambda metrics, you could divide the Errors metric by the
     #             Invocations metric to get an error rate time series. For more information about metric
     #             math expressions, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html#metric-math-syntax">Metric Math Syntax and Functions</a> in the <i>Amazon CloudWatch User
-    #             Guide</i>.</p>
+    #                 Guide</i>.</p>
     #          <p>If you include a Metrics Insights query, each <code>GetMetricData</code> operation can
     #             include only one query. But the same <code>GetMetricData</code> operation can also
-    #             retrieve other metrics. Metrics Insights queries can query only the most recent three
-    #             hours of metric data. For more information about Metrics Insights, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/query_with_cloudwatch-metrics-insights.html">Query your metrics with CloudWatch Metrics Insights</a>.</p>
+    #             retrieve other metrics. Metrics Insights queries can query the most recent two weeks of
+    #             metric data. For alarm condition evaluations, Metrics Insights queries can query only
+    #             the most recent three hours of metric data. For more information about Metrics Insights,
+    #             see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/query_with_cloudwatch-metrics-insights.html">Query your metrics with CloudWatch Metrics Insights</a>.</p>
     #          <p>Calls to the <code>GetMetricData</code> API have a different pricing structure than
     #             calls to <code>GetMetricStatistics</code>. For more information about pricing, see
-    #             <a href="https://aws.amazon.com/cloudwatch/pricing/">Amazon CloudWatch
-    #             Pricing</a>.</p>
+    #                 <a href="https://aws.amazon.com/cloudwatch/pricing/">Amazon CloudWatch
+    #                 Pricing</a>.</p>
     #          <p>Amazon CloudWatch retains metric data as follows:</p>
     #          <ul>
     #             <li>
@@ -1384,8 +1871,8 @@ module Aws::CloudWatch
     #                       clock interval. For example, 12:32:34 is rounded down to 12:00:00.</p>
     #               </li>
     #            </ul>
-    #            <p>If you set <code>Period</code> to 5, 10, 20, or 30, the start time of your request is
-    #               rounded down to the nearest time that corresponds to even 5-, 10-, 20-, or 30-second
+    #            <p>If you set <code>Period</code> to 5, 10, 20, or 30, the start time of your request
+    #               is rounded down to the nearest time that corresponds to even 5-, 10-, 20-, or 30-second
     #               divisions of a minute. For example, if you make a query at (HH:mm:ss) 01:05:23 for the
     #               previous 10-second period, the start time of your request is rounded down and you
     #               receive data from 01:05:10 to 01:05:20. If you make a query at 15:07:17 for the previous
@@ -1547,8 +2034,8 @@ module Aws::CloudWatch
     #             2016.</p>
     #          <p>For information about metrics and dimensions supported by Amazon Web Services
     #             services, see the <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CW_Support_For_AWS.html">Amazon CloudWatch
-    #             Metrics and Dimensions Reference</a> in the <i>Amazon CloudWatch User
-    #             Guide</i>.</p>
+    #                 Metrics and Dimensions Reference</a> in the <i>Amazon CloudWatch User
+    #                 Guide</i>.</p>
     # @param [Hash, Types::GetMetricStatisticsInput] params
     # @option params [String] :namespace
     #   <p>The namespace of the metric, with or without spaces.</p>
@@ -1560,7 +2047,7 @@ module Aws::CloudWatch
     #               separate metric. If a specific combination of dimensions was not published, you can't
     #               retrieve statistics for it. You must specify the same dimensions that were used when the
     #               metrics were created. For an example, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#dimension-combinations">Dimension Combinations</a> in the <i>Amazon CloudWatch User
-    #               Guide</i>. For more information about specifying dimensions, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html">Publishing Metrics</a> in the <i>Amazon CloudWatch User
+    #                   Guide</i>. For more information about specifying dimensions, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html">Publishing Metrics</a> in the <i>Amazon CloudWatch User
     #               Guide</i>.</p>
     # @option params [Time] :start_time
     #   <p>The time stamp that determines the first data point to return. Start times are
@@ -1583,8 +2070,8 @@ module Aws::CloudWatch
     #                       clock interval. For example, 12:32:34 is rounded down to 12:00:00.</p>
     #               </li>
     #            </ul>
-    #            <p>If you set <code>Period</code> to 5, 10, 20, or 30, the start time of your request is
-    #               rounded down to the nearest time that corresponds to even 5-, 10-, 20-, or 30-second
+    #            <p>If you set <code>Period</code> to 5, 10, 20, or 30, the start time of your request
+    #               is rounded down to the nearest time that corresponds to even 5-, 10-, 20-, or 30-second
     #               divisions of a minute. For example, if you make a query at (HH:mm:ss) 01:05:23 for the
     #               previous 10-second period, the start time of your request is rounded down and you
     #               receive data from 01:05:10 to 01:05:20. If you make a query at 15:07:17 for the previous
@@ -1601,7 +2088,7 @@ module Aws::CloudWatch
     #               of 60. For high-resolution metrics that are collected at intervals of less than one
     #               minute, the period can be 1, 5, 10, 20, 30, 60, or any multiple of 60. High-resolution
     #               metrics are those metrics stored by a <code>PutMetricData</code> call that includes a
-    #               <code>StorageResolution</code> of 1 second.</p>
+    #                   <code>StorageResolution</code> of 1 second.</p>
     #            <p>If the <code>StartTime</code> parameter specifies a time stamp that is greater than
     #               3 hours ago, you must specify the period as follows or no data points in that time range
     #               is returned:</p>
@@ -1621,13 +2108,13 @@ module Aws::CloudWatch
     #            </ul>
     # @option params [Array<String>] :statistics
     #   <p>The metric statistics, other than percentile. For percentile statistics, use
-    #               <code>ExtendedStatistics</code>. When calling <code>GetMetricStatistics</code>, you
+    #                   <code>ExtendedStatistics</code>. When calling <code>GetMetricStatistics</code>, you
     #               must specify either <code>Statistics</code> or <code>ExtendedStatistics</code>, but not
     #               both.</p>
     # @option params [Array<String>] :extended_statistics
     #   <p>The percentile statistics. Specify values between p0.0 and p100. When calling
-    #               <code>GetMetricStatistics</code>, you must specify either <code>Statistics</code> or
-    #               <code>ExtendedStatistics</code>, but not both. Percentile statistics are not
+    #                   <code>GetMetricStatistics</code>, you must specify either <code>Statistics</code> or
+    #                   <code>ExtendedStatistics</code>, but not both. Percentile statistics are not
     #               available for metrics when any of the metric values are negative numbers.</p>
     # @option params [String] :unit
     #   <p>The unit for a given metric. If you omit <code>Unit</code>, all data that was
@@ -1740,7 +2227,7 @@ module Aws::CloudWatch
     #          <p>The graph you retrieve can include all CloudWatch metric graph features, including
     #             metric math and horizontal and vertical annotations.</p>
     #          <p>There is a limit of 20 transactions per second for this API. Each
-    #             <code>GetMetricWidgetImage</code> action has the following limits:</p>
+    #                 <code>GetMetricWidgetImage</code> action has the following limits:</p>
     #          <ul>
     #             <li>
     #                <p>As many as 100 metrics in the graph.</p>
@@ -1754,8 +2241,8 @@ module Aws::CloudWatch
     #   <p>A JSON string that defines the bitmap graph to be retrieved. The string includes
     #               the metrics to include in the graph, statistics, annotations, title, axis limits, and so
     #               on. You can include only one <code>MetricWidget</code> parameter in each
-    #               <code>GetMetricWidgetImage</code> call.</p>
-    #            <p>For more information about the syntax of <code>MetricWidget</code> see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/CloudWatch-Metric-Widget-Structure.html">GetMetricWidgetImage: Metric Widget Structure and Syntax</a>.</p>
+    #                   <code>GetMetricWidgetImage</code> call.</p>
+    #            <p>For more information about the syntax of <code>MetricWidget</code> see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Metric-Widget-Structure.html">GetMetricWidgetImage: Metric Widget Structure and Syntax</a>.</p>
     #            <p>If any metric on the graph could not load all the requested data points, an orange
     #               triangle with an exclamation point appears next to the graph legend.</p>
     # @option params [String] :output_format
@@ -1796,8 +2283,8 @@ module Aws::CloudWatch
     #            </p>
     #            <p>The <code>image/png</code> setting is intended only for custom HTTP requests. For
     #               most use cases, and all actions using an Amazon Web Services SDK, you should use
-    #               <code>png</code>. If you specify <code>image/png</code>, the HTTP response has a
-    #               content-type set to <code>image/png</code>, and the body of the response is a PNG 
+    #                   <code>png</code>. If you specify <code>image/png</code>, the HTTP response has a
+    #               content-type set to <code>image/png</code>, and the body of the response is a PNG
     #               image.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -1817,14 +2304,146 @@ module Aws::CloudWatch
       request.send_request(options)
     end
 
+    # <p>Returns the current status of vended metric enrichment for the account, including
+    #             whether CloudWatch vended metrics are enriched with resource ARN and resource tag labels
+    #             and queryable using PromQL. For the list of supported resources, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/UsingResourceTagsForTelemetry.html">Supported Amazon Web Services infrastructure metrics</a>.</p>
+    # @param [Hash, Types::GetOTelEnrichmentInput] params
+    # @example Request syntax with placeholder values
+    #   params = {}
+    #   options = {}
+    #   response = client.get_o_tel_enrichment(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     status: "Running" # One of: ["Running", "Stopped"], # required
+    #     include_filters: [
+    #       {
+    #         namespace: "Namespace", # required
+    #         metric_names: ["MetricName"]
+    #       }
+    #     ],
+    #     exclude_filters: [
+    #       {
+    #         namespace: "Namespace", # required
+    #         metric_names: ["MetricName"]
+    #       }
+    #     ],
+    #     created_at: Time.now,
+    #     updated_at: Time.now
+    #   }
+    # @return [Types::GetOTelEnrichmentOutput]
+    def get_o_tel_enrichment(params = {}, options = {})
+      request = build_request(:get_o_tel_enrichment, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves the current resource metrics configuration for an Amazon Web Services
+    #             resource. The response includes the resource ARN, any metric selections, and the times
+    #             at which the configuration was created and last updated.</p>
+    #          <p>This operation returns a <code>ResourceNotFoundException</code> if no resource metrics
+    #             configuration exists for the specified resource ARN. To create a configuration, use <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_CreateResourceMetricsConfiguration.html">CreateResourceMetricsConfiguration</a>.</p>
+    #          <p>To retrieve a resource metrics configuration, you must have the
+    #                 <code>cloudwatch:GetResourceMetricsConfiguration</code> permission. For information
+    #             about scoping this permission to specific resources, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/iam-cw-condition-keys-resource-arn.html">Condition keys for resource metrics configuration access</a> in the
+    #                 <i>Amazon CloudWatch User Guide</i>.</p>
+    # @param [Hash, Types::GetResourceMetricsConfigurationInput] params
+    # @option params [String] :resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the Amazon Web Services resource to retrieve the
+    #               resource metrics configuration for.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     resource_arn: "ResourceArn", # required
+    #   }
+    #   options = {}
+    #   response = client.get_resource_metrics_configuration(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     resource_metrics_configuration: { # required
+    #       resource_arn: "ResourceArn", # required
+    #       created_at: Time.now, # required
+    #       updated_at: Time.now, # required
+    #       metric_selections: [
+    #         {
+    #           include_metrics: ["MetricName"], # required
+    #         }
+    #       ]
+    #     }
+    #   }
+    # @return [Types::GetResourceMetricsConfigurationOutput]
+    def get_resource_metrics_configuration(params = {}, options = {})
+      request = build_request(:get_resource_metrics_configuration, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists alarm mute rules in your Amazon Web Services account and region.</p>
+    #          <p>You can filter the results by alarm name to find all mute rules targeting a specific
+    #             alarm, or by status to find rules that are scheduled, active, or expired.</p>
+    #          <p>This operation supports pagination for accounts with many mute rules. Use the
+    #                 <code>MaxRecords</code> and <code>NextToken</code> parameters to retrieve results in
+    #             multiple calls.</p>
+    #          <p>
+    #             <b>Permissions</b>
+    #          </p>
+    #          <p>To list mute rules, you need the <code>cloudwatch:ListAlarmMuteRules</code>
+    #             permission.</p>
+    # @param [Hash, Types::ListAlarmMuteRulesInput] params
+    # @option params [String] :alarm_name
+    #   <p>Filter results to show only mute rules that target the specified alarm
+    #               name.</p>
+    # @option params [Array<String>] :statuses
+    #   <p>Filter results to show only mute rules with the specified statuses. Valid values
+    #               are <code>SCHEDULED</code>, <code>ACTIVE</code>, or <code>EXPIRED</code>.</p>
+    # @option params [Integer] :max_records
+    #   <p>The maximum number of mute rules to return in one call. The default is
+    #               50.</p>
+    # @option params [String] :next_token
+    #   <p>The token returned from a previous call to indicate where to continue retrieving
+    #               results.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     alarm_name: "Name",
+    #     statuses: ["SCHEDULED" # One of: ["SCHEDULED", "ACTIVE", "EXPIRED"]],
+    #     max_records: 1,
+    #     next_token: "NextToken"
+    #   }
+    #   options = {}
+    #   response = client.list_alarm_mute_rules(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     alarm_mute_rule_summaries: [
+    #       {
+    #         alarm_mute_rule_arn: "Arn",
+    #         expire_date: Time.now,
+    #         status: "SCHEDULED" # One of: ["SCHEDULED", "ACTIVE", "EXPIRED"],
+    #         mute_type: "MuteType",
+    #         last_updated_timestamp: Time.now
+    #       }
+    #     ],
+    #     next_token: "NextToken"
+    #   }
+    # @return [Types::ListAlarmMuteRulesOutput]
+    def list_alarm_mute_rules(params = {}, options = {})
+      request = build_request(:list_alarm_mute_rules, params)
+      request.send_request(options)
+    end
+
     # <p>Returns a list of the dashboards for your account. If you include
-    #             <code>DashboardNamePrefix</code>, only those dashboards with names starting with the
+    #                 <code>DashboardNamePrefix</code>, only those dashboards with names starting with the
     #             prefix are listed. Otherwise, all dashboards in your account are listed. </p>
     #          <p>
     #             <code>ListDashboards</code> returns up to 1000 results on one page. If there are
     #             more than 1000 dashboards, you can call <code>ListDashboards</code> again and include
     #             the value you received for <code>NextToken</code> in the first call, to receive the next
     #             1000 results.</p>
+    #          <p>You might have recently enabled an <a href="https://docs.aws.amazon.com/glossary/latest/reference/glos-chap.html#optinregion">opt-in Region (Region that is disabled by default)</a> for your account. In
+    #             that Region, <code>ListDashboards</code> can return an access denied error for up to 24
+    #             hours after you enable the Region. This delay occurs while dashboard data propagates.
+    #             The error does not
+    #             indicate a problem with your permissions. Because dashboards are global, you can call
+    #             <code>ListDashboards</code> in any other enabled Region, or retry after propagation
+    #             completes.</p>
     # @param [Hash, Types::ListDashboardsInput] params
     # @option params [String] :dashboard_name_prefix
     #   <p>If you specify this parameter, only the dashboards with names starting with the
@@ -1861,7 +2480,7 @@ module Aws::CloudWatch
 
     # <p> Returns a list that contains the number of managed Contributor Insights rules in your
     #             account.
-    #             
+    #
     #         </p>
     # @param [Hash, Types::ListManagedInsightRulesInput] params
     # @option params [String] :resource_arn
@@ -1957,8 +2576,9 @@ module Aws::CloudWatch
     #   <p>The name of the metric to filter against. Only the metrics with names that match
     #               exactly will be returned.</p>
     # @option params [Array<Types::DimensionFilter>] :dimensions
-    #   <p>The dimensions to filter against. Only the dimension with names that match exactly will be
-    #               returned. If you specify one dimension name and a metric has that dimension and also other dimensions, it will be returned.</p>
+    #   <p>The dimensions to filter against. Only the dimension with names that match exactly
+    #               will be returned. If you specify one dimension name and a metric has that dimension and
+    #               also other dimensions, it will be returned.</p>
     # @option params [String] :next_token
     #   <p>The token returned by a previous call to indicate that there is more data
     #               available.</p>
@@ -2018,17 +2638,25 @@ module Aws::CloudWatch
       request.send_request(options)
     end
 
-    # <p>Displays the tags associated with a CloudWatch resource. Currently, alarms and
-    #             Contributor Insights rules support tagging.</p>
+    # <p>Displays the tags associated with a CloudWatch resource. Currently, alarms,
+    #             dashboards, metric streams and Contributor Insights rules support tagging.</p>
     # @param [Hash, Types::ListTagsForResourceInput] params
     # @option params [String] :resource_arn
     #   <p>The ARN of the CloudWatch resource that you want to view tags for.</p>
     #            <p>The ARN format of an alarm is
-    #               <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:alarm:<i>alarm-name</i>
+    #                       <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:alarm:<i>alarm-name</i>
     #               </code>
     #            </p>
     #            <p>The ARN format of a Contributor Insights rule is
-    #               <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:insight-rule/<i>insight-rule-name</i>
+    #                       <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:insight-rule/<i>insight-rule-name</i>
+    #               </code>
+    #            </p>
+    #            <p>The ARN format of a dashboard is
+    #                       <code>arn:aws:cloudwatch::<i>account-id</i>:dashboard/<i>dashboard-name</i>
+    #               </code>
+    #            </p>
+    #            <p>The ARN format of a metric stream is
+    #                       <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:metric-stream/<i>metric-stream-name</i>
     #               </code>
     #            </p>
     #            <p>For more information about ARN format, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazoncloudwatch.html#amazoncloudwatch-resources-for-iam-policies"> Resource Types Defined by Amazon CloudWatch</a> in the <i>Amazon Web
@@ -2055,12 +2683,96 @@ module Aws::CloudWatch
       request.send_request(options)
     end
 
+    # <p>Creates or updates an alarm mute rule.</p>
+    #          <p>Alarm mute rules automatically mute alarm actions during predefined time windows. When
+    #             a mute rule is active, targeted alarms continue to evaluate metrics and transition
+    #             between states, but their configured actions (such as Amazon SNS notifications
+    #             or Auto Scaling actions) are muted.</p>
+    #          <p>You can create mute rules with recurring schedules using <code>cron</code> expressions
+    #             or one-time mute windows using <code>at</code> expressions. Each mute rule can target up
+    #             to 100 specific alarms by name.</p>
+    #          <p>If you specify a rule name that already exists, this operation updates the existing
+    #             rule with the new configuration.</p>
+    #          <p>
+    #             <b>Permissions</b>
+    #          </p>
+    #          <p>To create or update a mute rule, you must have the
+    #                 <code>cloudwatch:PutAlarmMuteRule</code> permission on two types of resources: the
+    #             alarm mute rule resource itself, and each alarm that the rule targets.</p>
+    #          <p>For example, If you want to allow a user to create mute rules that target only
+    #             specific alarms named "WebServerCPUAlarm" and "DatabaseConnectionAlarm", you would
+    #             create an IAM policy with one statement granting
+    #                 <code>cloudwatch:PutAlarmMuteRule</code> on the alarm mute rule resource
+    #                 (<code>arn:aws:cloudwatch:[REGION]:123456789012:alarm-mute-rule:*</code>), and
+    #             another statement granting <code>cloudwatch:PutAlarmMuteRule</code> on the targeted
+    #             alarm resources
+    #                 (<code>arn:aws:cloudwatch:[REGION]:123456789012:alarm:WebServerCPUAlarm</code> and
+    #                 <code>arn:aws:cloudwatch:[REGION]:123456789012:alarm:DatabaseConnectionAlarm</code>).</p>
+    #          <p>You can also use IAM policy conditions to allow targeting alarms based on resource
+    #             tags. For example, you can restrict users to create/update mute rules to only target
+    #             alarms that have a specific tag key-value pair, such as <code>Team=TeamA</code>.</p>
+    # @param [Hash, Types::PutAlarmMuteRuleInput] params
+    # @option params [String] :name
+    #   <p>The name of the alarm mute rule. This name must be unique within your Amazon Web Services account and region.</p>
+    # @option params [String] :description
+    #   <p>A description of the alarm mute rule that helps you identify its purpose.</p>
+    # @option params [Types::Rule] :rule
+    #   <p>The configuration that defines when and how long alarms should be muted.</p>
+    # @option params [Types::MuteTargets] :mute_targets
+    #   <p>Specifies which alarms this rule applies to.</p>
+    # @option params [Array<Types::Tag>] :tags
+    #   <p>A list of key-value pairs to associate with the alarm mute rule. You can use tags
+    #               to categorize and manage your mute rules.</p>
+    # @option params [Time] :start_date
+    #   <p>The date and time after which the mute rule takes effect, specified as a timestamp
+    #               in ISO 8601 format (for example, <code>2026-04-15T08:00:00Z</code>). If not specified,
+    #               the mute rule takes effect immediately upon creation and the mutes are applied as per
+    #               the schedule expression.</p>
+    # @option params [Time] :expire_date
+    #   <p>The date and time when the mute rule expires and is no longer evaluated, specified
+    #               as a timestamp in ISO 8601 format (for example, <code>2026-12-31T23:59:59Z</code>).
+    #               After this time, the rule status becomes EXPIRED and will no longer mute the targeted
+    #               alarms.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     name: "Name", # required
+    #     description: "AlarmDescription",
+    #     rule: { # required
+    #       schedule: { # required
+    #         expression: "Expression", # required
+    #         duration: "Duration", # required
+    #         timezone: "Timezone"
+    #       }
+    #     },
+    #     mute_targets: {
+    #       alarm_names: ["Name"], # required
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       }
+    #     ],
+    #     start_date: Time.now,
+    #     expire_date: Time.now
+    #   }
+    #   options = {}
+    #   response = client.put_alarm_mute_rule(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Smithy::Schema::EmptyStructure]
+    def put_alarm_mute_rule(params = {}, options = {})
+      request = build_request(:put_alarm_mute_rule, params)
+      request.send_request(options)
+    end
+
     # <p>Creates an anomaly detection model for a CloudWatch metric. You can use the model to
     #             display a band of expected normal values when the metric is graphed.</p>
     #          <p>If you have enabled unified cross-account observability, and this account is a
     #             monitoring account, the metric can be in the same account or a source account. You can
     #             specify the account ID in the object you specify in the
-    #             <code>SingleMetricAnomalyDetector</code> parameter.</p>
+    #                 <code>SingleMetricAnomalyDetector</code> parameter.</p>
     #          <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Anomaly_Detection.html">CloudWatch Anomaly Detection</a>.</p>
     # @param [Hash, Types::PutAnomalyDetectorInput] params
     # @option params [String] :namespace
@@ -2078,7 +2790,7 @@ module Aws::CloudWatch
     #            <p>The configuration can also include the time zone to use for the metric.</p>
     # @option params [Types::MetricCharacteristics] :metric_characteristics
     #   <p>Use this object to include parameters to provide information about your metric to
-    #               CloudWatch to help it build more accurate anomaly detection models.
+    #                   CloudWatch to help it build more accurate anomaly detection models.
     #               Currently, it includes the <code>PeriodicSpikes</code> parameter.</p>
     # @option params [Types::SingleMetricAnomalyDetector] :single_metric_anomaly_detector
     #   <p>A single metric anomaly detector to be created.</p>
@@ -2107,12 +2819,12 @@ module Aws::CloudWatch
     #               </li>
     #               <li>
     #                  <p>the <code>MetricMathAnomalyDetector</code> parameters of
-    #                       <code>PutAnomalyDetectorInput</code>
+    #                           <code>PutAnomalyDetectorInput</code>
     #                  </p>
     #               </li>
     #            </ul>
     #            <p>Instead, specify the single metric anomaly detector attributes as part of the property
-    #               <code>SingleMetricAnomalyDetector</code>.</p>
+    #                   <code>SingleMetricAnomalyDetector</code>.</p>
     # @option params [Types::MetricMathAnomalyDetector] :metric_math_anomaly_detector
     #   <p>The metric math anomaly detector to be created.</p>
     #            <p>When using <code>MetricMathAnomalyDetector</code>, you cannot include the following
@@ -2140,12 +2852,12 @@ module Aws::CloudWatch
     #               </li>
     #               <li>
     #                  <p>the <code>SingleMetricAnomalyDetector</code> parameters of
-    #                       <code>PutAnomalyDetectorInput</code>
+    #                           <code>PutAnomalyDetectorInput</code>
     #                  </p>
     #               </li>
     #            </ul>
     #            <p>Instead, specify the metric math anomaly detector attributes as part of the property
-    #               <code>MetricMathAnomalyDetector</code>.</p>
+    #                   <code>MetricMathAnomalyDetector</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     namespace: "Namespace",
@@ -2213,7 +2925,9 @@ module Aws::CloudWatch
     #   response = client.put_anomaly_detector(params, options)
     # @example Response structure with placeholder values
     #   response.to_h #=>
-    #   {}
+    #   {
+    #     anomaly_detector_id: "AnomalyDetectorId"
+    #   }
     # @return [Types::PutAnomalyDetectorOutput]
     def put_anomaly_detector(params = {}, options = {})
       request = build_request(:put_anomaly_detector, params)
@@ -2256,23 +2970,23 @@ module Aws::CloudWatch
     #             <p>To get out of such a situation, you must break the cycle by changing the rule of
     #                 one of the composite alarms in the cycle to remove a dependency that creates the
     #                 cycle. The simplest change to make to break a cycle is to change the
-    #                 <code>AlarmRule</code> of one of the alarms to <code>false</code>. </p>
+    #                     <code>AlarmRule</code> of one of the alarms to <code>false</code>. </p>
     #             <p>Additionally, the evaluation of composite alarms stops if CloudWatch detects a
     #                 cycle in the evaluation path. </p>
     #          </note>
     #          <p>When this operation creates an alarm, the alarm state is immediately set to
-    #             <code>INSUFFICIENT_DATA</code>. The alarm is then evaluated and its state is set
+    #                 <code>INSUFFICIENT_DATA</code>. The alarm is then evaluated and its state is set
     #             appropriately. Any actions associated with the new state are then executed. For a
     #             composite alarm, this initial time after creation is the only time that the alarm can be
     #             in <code>INSUFFICIENT_DATA</code> state.</p>
     #          <p>When you update an existing alarm, its state is left unchanged, but the update
     #             completely overwrites the previous configuration of the alarm.</p>
     #          <p>To use this operation, you must be signed on with the
-    #             <code>cloudwatch:PutCompositeAlarm</code> permission that is scoped to
-    #             <code>*</code>. You can't create a composite alarms if your
-    #             <code>cloudwatch:PutCompositeAlarm</code> permission has a narrower scope.</p>
+    #                 <code>cloudwatch:PutCompositeAlarm</code> permission that is scoped to
+    #                 <code>*</code>. You can't create a composite alarms if your
+    #                 <code>cloudwatch:PutCompositeAlarm</code> permission has a narrower scope.</p>
     #          <p>If you are an IAM user, you must have
-    #             <code>iam:CreateServiceLinkedRole</code> to create a composite alarm that has
+    #                 <code>iam:CreateServiceLinkedRole</code> to create a composite alarm that has
     #             Systems Manager OpsItem actions.</p>
     # @param [Hash, Types::PutCompositeAlarmInput] params
     # @option params [Boolean] :actions_enabled
@@ -2296,19 +3010,19 @@ module Aws::CloudWatch
     #            <ul>
     #               <li>
     #                  <p>Invoke the latest version of a Lambda function:
-    #                       <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>
+    #                               <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>
     #                     </code>
     #                  </p>
     #               </li>
     #               <li>
     #                  <p>Invoke a specific version of a Lambda function:
-    #                       <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>version-number</i>
+    #                               <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>version-number</i>
     #                     </code>
     #                  </p>
     #               </li>
     #               <li>
     #                  <p>Invoke a function by using an alias Lambda function:
-    #                       <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>alias-name</i>
+    #                               <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>alias-name</i>
     #                     </code>
     #                  </p>
     #               </li>
@@ -2321,7 +3035,8 @@ module Aws::CloudWatch
     #               </code>
     #            </p>
     #            <p>
-    #               <b>Start a Amazon Q Developer operational investigation</b>
+    #               <b>Start a Amazon Q Developer operational
+    #                   investigation</b>
     #            </p>
     #            <p>
     #               <code>arn:aws:aiops:<i>region</i>:<i>account-id</i>:investigation-group:<i>investigation-group-id</i>
@@ -2346,19 +3061,19 @@ module Aws::CloudWatch
     #               <li>
     #                  <p>
     #                     <code>ALARM("<i>alarm-name</i> or
-    #                       <i>alarm-ARN</i>")</code> is TRUE if the named alarm is in
+    #                           <i>alarm-ARN</i>")</code> is TRUE if the named alarm is in
     #                       ALARM state.</p>
     #               </li>
     #               <li>
     #                  <p>
     #                     <code>OK("<i>alarm-name</i> or
-    #                       <i>alarm-ARN</i>")</code> is TRUE if the named alarm is in OK
+    #                           <i>alarm-ARN</i>")</code> is TRUE if the named alarm is in OK
     #                       state.</p>
     #               </li>
     #               <li>
     #                  <p>
     #                     <code>INSUFFICIENT_DATA("<i>alarm-name</i> or
-    #                       <i>alarm-ARN</i>")</code> is TRUE if the named alarm is in
+    #                               <i>alarm-ARN</i>")</code> is TRUE if the named alarm is in
     #                       INSUFFICIENT_DATA state.</p>
     #               </li>
     #               <li>
@@ -2392,7 +3107,7 @@ module Aws::CloudWatch
     #               <li>
     #                  <p>
     #                     <code>(ALARM(CPUUtilizationTooHigh) OR ALARM(DiskReadOpsTooHigh)) AND
-    #                       OK(NetworkOutTooHigh)</code> goes into ALARM state if CPUUtilizationTooHigh
+    #                           OK(NetworkOutTooHigh)</code> goes into ALARM state if CPUUtilizationTooHigh
     #                       OR DiskReadOpsTooHigh is in ALARM state, and if NetworkOutTooHigh is in OK
     #                       state. This provides another example of using a composite alarm to prevent
     #                       noise. This rule ensures that you are not notified with an alarm action on high
@@ -2400,11 +3115,11 @@ module Aws::CloudWatch
     #               </li>
     #            </ul>
     #            <p>The <code>AlarmRule</code> can specify as many as 100 "children" alarms. The
-    #               <code>AlarmRule</code> expression can have as many as 500 elements. Elements are
+    #                   <code>AlarmRule</code> expression can have as many as 500 elements. Elements are
     #               child alarms, TRUE or FALSE statements, and parentheses.</p>
     # @option params [Array<String>] :insufficient_data_actions
     #   <p>The actions to execute when this alarm transitions to the
-    #               <code>INSUFFICIENT_DATA</code> state from any other state. Each action is specified
+    #                   <code>INSUFFICIENT_DATA</code> state from any other state. Each action is specified
     #               as an Amazon Resource Name (ARN).</p>
     #            <p>Valid Values: ]</p>
     #            <p>
@@ -2420,19 +3135,19 @@ module Aws::CloudWatch
     #            <ul>
     #               <li>
     #                  <p>Invoke the latest version of a Lambda function:
-    #                       <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>
+    #                               <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>
     #                     </code>
     #                  </p>
     #               </li>
     #               <li>
     #                  <p>Invoke a specific version of a Lambda function:
-    #                       <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>version-number</i>
+    #                               <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>version-number</i>
     #                     </code>
     #                  </p>
     #               </li>
     #               <li>
     #                  <p>Invoke a function by using an alias Lambda function:
-    #                       <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>alias-name</i>
+    #                               <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>alias-name</i>
     #                     </code>
     #                  </p>
     #               </li>
@@ -2454,19 +3169,19 @@ module Aws::CloudWatch
     #            <ul>
     #               <li>
     #                  <p>Invoke the latest version of a Lambda function:
-    #                       <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>
+    #                               <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>
     #                     </code>
     #                  </p>
     #               </li>
     #               <li>
     #                  <p>Invoke a specific version of a Lambda function:
-    #                       <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>version-number</i>
+    #                               <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>version-number</i>
     #                     </code>
     #                  </p>
     #               </li>
     #               <li>
     #                  <p>Invoke a function by using an alias Lambda function:
-    #                       <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>alias-name</i>
+    #                               <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>alias-name</i>
     #                     </code>
     #                  </p>
     #               </li>
@@ -2557,11 +3272,27 @@ module Aws::CloudWatch
     # @option params [String] :dashboard_body
     #   <p>The detailed information about the dashboard in JSON format, including the widgets
     #               to include and their location on the dashboard. This parameter is required.</p>
-    #            <p>For more information about the syntax, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/CloudWatch-Dashboard-Body-Structure.html">Dashboard Body Structure and Syntax</a>.</p>
+    #            <p>For more information about the syntax, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Dashboard-Body-Structure.html">Dashboard Body Structure and Syntax</a>.</p>
+    # @option params [Array<Types::Tag>] :tags
+    #   <p>A list of key-value pairs to associate with the dashboard. You can associate as many
+    #               as 50 tags with a dashboard.</p>
+    #            <p>Tags can help you organize and categorize your dashboards. You can also use them to
+    #               scope user permissions by granting a user permission to access or change only dashboards
+    #               with certain tag values.</p>
+    #            <p>You can use this parameter only when creating a new dashboard. If you specify
+    #                   <code>Tags</code> when updating an existing dashboard, the tag updates are ignored.
+    #               To add or update tags on an existing dashboard, use <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_TagResource.html">TagResource</a>.
+    #               To remove tags, use <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_UntagResource.html">UntagResource</a>.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     dashboard_name: "DashboardName", # required
     #     dashboard_body: "DashboardBody", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       }
+    #     ]
     #   }
     #   options = {}
     #   response = client.put_dashboard(params, options)
@@ -2594,7 +3325,7 @@ module Aws::CloudWatch
     #   <p>The state of the rule. Valid values are ENABLED and DISABLED.</p>
     # @option params [String] :rule_definition
     #   <p>The definition of the rule, as a JSON object. For details on the valid syntax, see
-    #               <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ContributorInsights-RuleSyntax.html">Contributor Insights Rule Syntax</a>.</p>
+    #                   <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ContributorInsights-RuleSyntax.html">Contributor Insights Rule Syntax</a>.</p>
     # @option params [Array<Types::Tag>] :tags
     #   <p>A list of key-value pairs to associate with the Contributor Insights rule. You can
     #               associate as many as 50 tags with a rule.</p>
@@ -2602,22 +3333,24 @@ module Aws::CloudWatch
     #               scope user permissions, by granting a user permission to access or change only the
     #               resources that have certain tag values.</p>
     #            <p>To be able to associate tags with a rule, you must have the
-    #               <code>cloudwatch:TagResource</code> permission in addition to the
-    #               <code>cloudwatch:PutInsightRule</code> permission.</p>
+    #                   <code>cloudwatch:TagResource</code> permission in addition to the
+    #                   <code>cloudwatch:PutInsightRule</code> permission.</p>
     #            <p>If you are using this operation to update an existing Contributor Insights rule, any
     #               tags you specify in this parameter are ignored. To change the tags of an existing rule,
     #               use <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_TagResource.html">TagResource</a>.</p>
     # @option params [Boolean] :apply_on_transformed_logs
-    #   <p>Specify <code>true</code> to have this rule evaluate log events after they have been transformed by  
-    #               <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html">Log transformation</a>. If you specify <code>true</code>, then the log events in log groups that have transformers will 
-    #          be evaluated by Contributor Insights after being transformed. Log groups that don't have
-    #           transformers will still have their original log events evaluated by Contributor Insights.</p>
+    #   <p>Specify <code>true</code> to have this rule evaluate log events after they have been
+    #               transformed by <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html">Log
+    #                   transformation</a>. If you specify <code>true</code>, then the log events in log
+    #               groups that have transformers will be evaluated by Contributor Insights after being
+    #               transformed. Log groups that don't have transformers will still have their original log
+    #               events evaluated by Contributor Insights.</p>
     #            <p>The default is <code>false</code>
     #            </p>
     #            <note>
-    #               <p>If a log group has a transformer, and transformation fails for some log events, those log events won't be evaluated by
-    #           Contributor Insights. For information about investigating log transformation failures, see
-    #               <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Transformation-Errors-Metrics.html">Transformation metrics and errors</a>.</p>
+    #               <p>If a log group has a transformer, and transformation fails for some log events,
+    #                   those log events won't be evaluated by Contributor Insights. For information about
+    #                   investigating log transformation failures, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Transformation-Errors-Metrics.html">Transformation metrics and errors</a>.</p>
     #            </note>
     # @example Request syntax with placeholder values
     #   params = {
@@ -2643,15 +3376,218 @@ module Aws::CloudWatch
       request.send_request(options)
     end
 
+    # <p>Creates or updates a log alarm. A log alarm evaluates the results of a CloudWatch Logs scheduled query against the configured threshold and comparison operator to determine its state.</p>
+    #          <p>When you create a log alarm, the operation creates a service-managed CloudWatch Logs scheduled query that runs the query string you provide on the schedule you configure. Each scheduled query execution returns one or more aggregated values determined by the <code>AggregationExpression</code>, and each aggregated value is compared against the alarm <code>Threshold</code> to determine the alarm state. The alarm uses M-out-of-N evaluation: if <code>QueryResultsToAlarm</code> out of the most recent <code>QueryResultsToEvaluate</code> query results breach the threshold, the alarm transitions to <code>ALARM</code>.</p>
+    #          <p>Log alarms support the alarm states (<code>OK</code>, <code>ALARM</code>, <code>INSUFFICIENT_DATA</code>). Configure transition actions using <code>OKActions</code>, <code>AlarmActions</code>, and <code>InsufficientDataActions</code>.</p>
+    #          <p>If you call this operation with the name of an existing log alarm, the operation replaces the previous configuration of that alarm.</p>
+    #          <p>
+    #             <b>Permissions</b>
+    #          </p>
+    #          <p>To create or update a log alarm, you must have the <code>cloudwatch:PutLogAlarm</code> permission. The IAM role specified in <code>ScheduledQueryRoleARN</code> must grant the CloudWatch Alarms service permission to execute scheduled queries on the specified log groups. If you set <code>ActionLogLineCount</code>, the role specified in <code>ActionLogLineRoleArn</code> must grant permission to retrieve log events for inclusion in alarm notifications.</p>
+    # @param [Hash, Types::PutLogAlarmInput] params
+    # @option params [String] :alarm_name
+    #   <p>The name for the alarm. This name must be unique within the Amazon Web Services account and Region.</p>
+    # @option params [String] :alarm_description
+    #   <p>The description for the alarm.</p>
+    # @option params [Types::ScheduledQueryConfiguration] :scheduled_query_configuration
+    #   <p>The configuration of the underlying CloudWatch Logs scheduled query that this alarm evaluates, including the query string, log groups, schedule, and aggregation expression.</p>
+    # @option params [Integer] :action_log_line_count
+    #   <p>The number of log lines from the most recent scheduled query execution to include in alarm action notifications. Valid range is 0 through 50. The default is 0, which means no log lines are included.</p>
+    # @option params [String] :action_log_line_role_arn
+    #   <p>The Amazon Resource Name (ARN) of an IAM role that CloudWatch assumes to retrieve log events for inclusion in alarm action notifications. Required when <code>ActionLogLineCount</code> is greater than 0.</p>
+    # @option params [Boolean] :actions_enabled
+    #   <p>Indicates whether actions should be executed during any changes to the alarm state. The default is <code>true</code>.</p>
+    # @option params [Array<String>] :ok_actions
+    #   <p>The actions to execute when this alarm transitions to the <code>OK</code> state
+    #               from any other state. Each action is specified as an Amazon Resource Name (ARN).</p>
+    #            <p>Valid Values:</p>
+    #            <p>
+    #               <b>Amazon SNS actions:</b>
+    #            </p>
+    #            <p>
+    #               <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i>
+    #               </code>
+    #            </p>
+    #            <p>
+    #               <b>Lambda actions:</b>
+    #            </p>
+    #            <ul>
+    #               <li>
+    #                  <p>Invoke the latest version of a Lambda function:
+    #                       <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>
+    #                     </code>
+    #                  </p>
+    #               </li>
+    #               <li>
+    #                  <p>Invoke a specific version of a Lambda function:
+    #                       <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>version-number</i>
+    #                     </code>
+    #                  </p>
+    #               </li>
+    #               <li>
+    #                  <p>Invoke a function by using an alias Lambda function:
+    #                       <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>alias-name</i>
+    #                     </code>
+    #                  </p>
+    #               </li>
+    #            </ul>
+    # @option params [Array<String>] :alarm_actions
+    #   <p>The actions to execute when this alarm transitions to the <code>ALARM</code> state
+    #               from any other state. Each action is specified as an Amazon Resource Name (ARN).</p>
+    #            <p>Valid Values:</p>
+    #            <p>
+    #               <b>Amazon SNS actions:</b>
+    #            </p>
+    #            <p>
+    #               <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i>
+    #               </code>
+    #            </p>
+    #            <p>
+    #               <b>Lambda actions:</b>
+    #            </p>
+    #            <ul>
+    #               <li>
+    #                  <p>Invoke the latest version of a Lambda function:
+    #                       <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>
+    #                     </code>
+    #                  </p>
+    #               </li>
+    #               <li>
+    #                  <p>Invoke a specific version of a Lambda function:
+    #                       <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>version-number</i>
+    #                     </code>
+    #                  </p>
+    #               </li>
+    #               <li>
+    #                  <p>Invoke a function by using an alias Lambda function:
+    #                       <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>alias-name</i>
+    #                     </code>
+    #                  </p>
+    #               </li>
+    #            </ul>
+    #            <p>
+    #               <b>Systems Manager actions:</b>
+    #            </p>
+    #            <p>
+    #               <code>arn:aws:ssm:<i>region</i>:<i>account-id</i>:opsitem:<i>severity</i>
+    #               </code>
+    #            </p>
+    # @option params [Array<String>] :insufficient_data_actions
+    #   <p>The actions to execute when this alarm transitions to the <code>INSUFFICIENT_DATA</code> state
+    #               from any other state. Each action is specified as an Amazon Resource Name (ARN).</p>
+    #            <p>Valid Values:</p>
+    #            <p>
+    #               <b>Amazon SNS actions:</b>
+    #            </p>
+    #            <p>
+    #               <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i>
+    #               </code>
+    #            </p>
+    #            <p>
+    #               <b>Lambda actions:</b>
+    #            </p>
+    #            <ul>
+    #               <li>
+    #                  <p>Invoke the latest version of a Lambda function:
+    #                       <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>
+    #                     </code>
+    #                  </p>
+    #               </li>
+    #               <li>
+    #                  <p>Invoke a specific version of a Lambda function:
+    #                       <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>version-number</i>
+    #                     </code>
+    #                  </p>
+    #               </li>
+    #               <li>
+    #                  <p>Invoke a function by using an alias Lambda function:
+    #                       <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>alias-name</i>
+    #                     </code>
+    #                  </p>
+    #               </li>
+    #            </ul>
+    # @option params [Integer] :query_results_to_evaluate
+    #   <p>The number of most recent scheduled query results to evaluate against the threshold (the N in M-of-N evaluation). Valid range is 1 through 100.</p>
+    # @option params [Integer] :query_results_to_alarm
+    #   <p>The number of query results, out of the most recent <code>QueryResultsToEvaluate</code> results, that must breach the threshold to trigger the alarm to transition to <code>ALARM</code> (the M in M-of-N evaluation). Must be less than or equal to <code>QueryResultsToEvaluate</code>.</p>
+    # @option params [Float] :threshold
+    #   <p>The value to compare with the aggregated query result.</p>
+    # @option params [String] :comparison_operator
+    #   <p>The arithmetic operation to use when comparing the aggregated query result and the threshold. The aggregated query result is used as the first operand. Valid values are <code>GreaterThanThreshold</code>, <code>GreaterThanOrEqualToThreshold</code>, <code>LessThanThreshold</code>, and <code>LessThanOrEqualToThreshold</code>.</p>
+    # @option params [String] :treat_missing_data
+    #   <p>Sets how this alarm is to handle missing data points. Valid values are <code>breaching</code>, <code>notBreaching</code>, <code>ignore</code>, and <code>missing</code>. If this parameter is omitted, the default behavior of <code>missing</code> is used.</p>
+    # @option params [Array<Types::Tag>] :tags
+    #   <p>A list of key-value pairs to associate with the alarm. You can use tags to categorize and manage your alarms.</p>
+    # @option params [Types::WarmUpConfiguration] :warm_up_configuration
+    #   <p>The warm-up configuration for the alarm. A warm-up period delays alarm evaluation
+    #               after you create or update the alarm. The warm-up period reduces alarm noise from
+    #               missing data while a new resource or service starts publishing data.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/alarm-warm-up.html">Alarm warm-up
+    #                   periods</a> in the <i>Amazon CloudWatch User Guide</i>.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     alarm_name: "AlarmName", # required
+    #     alarm_description: "AlarmDescription",
+    #     scheduled_query_configuration: { # required
+    #       query_string: "QueryString", # required
+    #       log_group_identifiers: ["AmazonResourceName"],
+    #       query_arn: "AmazonResourceName",
+    #       scheduled_query_role_arn: "AmazonResourceName", # required
+    #       schedule_configuration: { # required
+    #         schedule_expression: "ScheduleExpression", # required
+    #         start_time_offset: 1, # required
+    #         end_time_offset: 1
+    #       },
+    #       aggregation_expression: "AggregationExpression", # required
+    #       tags: [
+    #         {
+    #           key: "TagKey", # required
+    #           value: "TagValue", # required
+    #         }
+    #       ]
+    #     },
+    #     action_log_line_count: 1,
+    #     action_log_line_role_arn: "ActionLogLineRoleArn",
+    #     actions_enabled: false,
+    #     ok_actions: ["ResourceName"],
+    #     alarm_actions: ["ResourceName"],
+    #     insufficient_data_actions: ["ResourceName"],
+    #     query_results_to_evaluate: 1, # required
+    #     query_results_to_alarm: 1, # required
+    #     threshold: 1.0, # required
+    #     comparison_operator: "GreaterThanOrEqualToThreshold" # One of: ["GreaterThanOrEqualToThreshold", "GreaterThanThreshold", "LessThanThreshold", "LessThanOrEqualToThreshold", "LessThanLowerOrGreaterThanUpperThreshold", "LessThanLowerThreshold", "GreaterThanUpperThreshold"], # required
+    #     treat_missing_data: "TreatMissingData",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       }
+    #     ],
+    #     warm_up_configuration: {
+    #       warm_up_period_duration_in_minutes: 1, # required
+    #       only_start_evaluating_after_warm_up_period_ends: false
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.put_log_alarm(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Smithy::Schema::EmptyStructure]
+    def put_log_alarm(params = {}, options = {})
+      request = build_request(:put_log_alarm, params)
+      request.send_request(options)
+    end
+
     # <p> Creates a managed Contributor Insights rule for a specified Amazon Web Services
     #             resource. When you enable a managed rule, you create a Contributor Insights rule that
     #             collects data from Amazon Web Services services. You cannot edit these rules with
-    #             <code>PutInsightRule</code>. The rules can be enabled, disabled, and deleted using
-    #             <code>EnableInsightRules</code>, <code>DisableInsightRules</code>, and
-    #             <code>DeleteInsightRules</code>. If a previously created managed rule is currently
+    #                 <code>PutInsightRule</code>. The rules can be enabled, disabled, and deleted using
+    #                 <code>EnableInsightRules</code>, <code>DisableInsightRules</code>, and
+    #                 <code>DeleteInsightRules</code>. If a previously created managed rule is currently
     #             disabled, a subsequent call to this API will re-enable it. Use
-    #             <code>ListManagedInsightRules</code> to describe all available rules.
-    #             
+    #                 <code>ListManagedInsightRules</code> to describe all available rules.
+    #
     #         </p>
     # @param [Hash, Types::PutManagedInsightRulesInput] params
     # @option params [Array<Types::ManagedRule>] :managed_rules
@@ -2692,12 +3628,13 @@ module Aws::CloudWatch
     end
 
     # <p>Creates or updates an alarm and associates it with the specified metric, metric
-    #             math expression, anomaly detection model, or Metrics Insights query. For more
-    #             information about using a Metrics Insights query for an alarm, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Create_Metrics_Insights_Alarm.html">Create
-    #             alarms on Metrics Insights queries</a>.</p>
+    #             math expression, anomaly detection model, Metrics Insights query, or PromQL query. For
+    #             more information about using a Metrics Insights query for an alarm, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Create_Metrics_Insights_Alarm.html">Create
+    #                 alarms on Metrics Insights queries</a>.</p>
     #          <p>Alarms based on anomaly detection models cannot have Auto Scaling actions.</p>
     #          <p>When this operation creates an alarm, the alarm state is immediately set to
-    #             <code>INSUFFICIENT_DATA</code>. The alarm is then evaluated and its state is set
+    #                 <code>INSUFFICIENT_DATA</code>. For PromQL alarms, the alarm state is instead
+    #             immediately set to <code>OK</code>. The alarm is then evaluated and its state is set
     #             appropriately. Any actions associated with the new state are then executed.</p>
     #          <p>When you update an existing alarm, its state is left unchanged, but the update
     #             completely overwrites the previous configuration of the alarm.</p>
@@ -2715,9 +3652,9 @@ module Aws::CloudWatch
     #          </ul>
     #          <p>The first time you create an alarm in the Amazon Web Services Management Console, the CLI, or by using the PutMetricAlarm API, CloudWatch creates the necessary
     #             service-linked role for you. The service-linked roles are called
-    #             <code>AWSServiceRoleForCloudWatchEvents</code> and
-    #             <code>AWSServiceRoleForCloudWatchAlarms_ActionSSM</code>. For more information, see
-    #             <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html#iam-term-service-linked-role">Amazon Web Services service-linked role</a>.</p>
+    #                 <code>AWSServiceRoleForCloudWatchEvents</code> and
+    #                 <code>AWSServiceRoleForCloudWatchAlarms_ActionSSM</code>. For more information, see
+    #                 <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html#iam-term-service-linked-role">Amazon Web Services service-linked role</a>.</p>
     #          <p>Each <code>PutMetricAlarm</code> action has a maximum uncompressed payload of 120
     #             KB.</p>
     #          <p>
@@ -2729,15 +3666,15 @@ module Aws::CloudWatch
     #          <ul>
     #             <li>
     #                <p>The account where the metrics are located (the <i>sharing
-    #                     account</i>) must already have a sharing role named <b>CloudWatch-CrossAccountSharingRole</b>. If it does not
+    #                         account</i>) must already have a sharing role named <b>CloudWatch-CrossAccountSharingRole</b>. If it does not
     #                     already have this role, you must create it using the instructions in <b>Set up a sharing account</b> in <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Cross-Account-Cross-Region.html#enable-cross-account-cross-Region"> Cross-account cross-Region CloudWatch console</a>. The policy
     #                     for that role must grant access to the ID of the account where you are creating
     #                     the alarm. </p>
     #             </li>
     #             <li>
     #                <p>The account where you are creating the alarm (the <i>monitoring
-    #                     account</i>) must already have a service-linked role named <b>AWSServiceRoleForCloudWatchCrossAccount</b> to allow
-    #                     CloudWatch to assume the sharing role in the sharing account. If it
+    #                         account</i>) must already have a service-linked role named <b>AWSServiceRoleForCloudWatchCrossAccount</b> to allow
+    #                         CloudWatch to assume the sharing role in the sharing account. If it
     #                     does not, you must create it following the directions in <b>Set up a monitoring account</b> in <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Cross-Account-Cross-Region.html#enable-cross-account-cross-Region"> Cross-account cross-Region CloudWatch console</a>.</p>
     #             </li>
     #          </ul>
@@ -2817,19 +3754,19 @@ module Aws::CloudWatch
     #            <ul>
     #               <li>
     #                  <p>Invoke the latest version of a Lambda function:
-    #                       <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>
+    #                               <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>
     #                     </code>
     #                  </p>
     #               </li>
     #               <li>
     #                  <p>Invoke a specific version of a Lambda function:
-    #                       <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>version-number</i>
+    #                               <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>version-number</i>
     #                     </code>
     #                  </p>
     #               </li>
     #               <li>
     #                  <p>Invoke a function by using an alias Lambda function:
-    #                       <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>alias-name</i>
+    #                               <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>alias-name</i>
     #                     </code>
     #                  </p>
     #               </li>
@@ -2928,19 +3865,19 @@ module Aws::CloudWatch
     #            <ul>
     #               <li>
     #                  <p>Invoke the latest version of a Lambda function:
-    #                       <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>
+    #                               <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>
     #                     </code>
     #                  </p>
     #               </li>
     #               <li>
     #                  <p>Invoke a specific version of a Lambda function:
-    #                       <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>version-number</i>
+    #                               <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>version-number</i>
     #                     </code>
     #                  </p>
     #               </li>
     #               <li>
     #                  <p>Invoke a function by using an alias Lambda function:
-    #                       <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>alias-name</i>
+    #                               <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>alias-name</i>
     #                     </code>
     #                  </p>
     #               </li>
@@ -2974,7 +3911,8 @@ module Aws::CloudWatch
     #               </li>
     #            </ul>
     #            <p>
-    #               <b>Start a Amazon Q Developer operational investigation</b>
+    #               <b>Start a Amazon Q Developer operational
+    #                   investigation</b>
     #            </p>
     #            <p>
     #               <code>arn:aws:aiops:<i>region</i>:<i>account-id</i>:investigation-group:<i>investigation-group-id</i>
@@ -2982,7 +3920,7 @@ module Aws::CloudWatch
     #            </p>
     # @option params [Array<String>] :insufficient_data_actions
     #   <p>The actions to execute when this alarm transitions to the
-    #               <code>INSUFFICIENT_DATA</code> state from any other state. Each action is specified
+    #                   <code>INSUFFICIENT_DATA</code> state from any other state. Each action is specified
     #               as an Amazon Resource Name (ARN). Valid values:</p>
     #            <p>
     #               <b>EC2 actions:</b>
@@ -3046,19 +3984,19 @@ module Aws::CloudWatch
     #            <ul>
     #               <li>
     #                  <p>Invoke the latest version of a Lambda function:
-    #                       <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>
+    #                               <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>
     #                     </code>
     #                  </p>
     #               </li>
     #               <li>
     #                  <p>Invoke a specific version of a Lambda function:
-    #                       <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>version-number</i>
+    #                               <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>version-number</i>
     #                     </code>
     #                  </p>
     #               </li>
     #               <li>
     #                  <p>Invoke a function by using an alias Lambda function:
-    #                       <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>alias-name</i>
+    #                               <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>alias-name</i>
     #                     </code>
     #                  </p>
     #               </li>
@@ -3093,12 +4031,13 @@ module Aws::CloudWatch
     #            </ul>
     # @option params [String] :metric_name
     #   <p>The name for the metric associated with the alarm. For each
-    #               <code>PutMetricAlarm</code> operation, you must specify either
-    #               <code>MetricName</code> or a <code>Metrics</code> array.</p>
+    #                   <code>PutMetricAlarm</code> operation, you must specify either
+    #                   <code>MetricName</code>, a <code>Metrics</code> array, or an
+    #                   <code>EvaluationCriteria</code>.</p>
     #            <p>If you are creating an alarm based on a math expression, you cannot specify this
     #               parameter, or any of the <code>Namespace</code>, <code>Dimensions</code>,
-    #               <code>Period</code>, <code>Unit</code>, <code>Statistic</code>, or
-    #               <code>ExtendedStatistic</code> parameters. Instead, you specify all this information
+    #                   <code>Period</code>, <code>Unit</code>, <code>Statistic</code>, or
+    #                   <code>ExtendedStatistic</code> parameters. Instead, you specify all this information
     #               in the <code>Metrics</code> array.</p>
     # @option params [String] :namespace
     #   <p>The namespace for the metric associated specified in
@@ -3106,7 +4045,7 @@ module Aws::CloudWatch
     # @option params [String] :statistic
     #   <p>The statistic for the metric specified in <code>MetricName</code>, other than
     #               percentile. For percentile statistics, use <code>ExtendedStatistic</code>. When you call
-    #               <code>PutMetricAlarm</code> and specify a <code>MetricName</code>, you must specify
+    #                   <code>PutMetricAlarm</code> and specify a <code>MetricName</code>, you must specify
     #               either <code>Statistic</code> or <code>ExtendedStatistic,</code> but not both.</p>
     # @option params [String] :extended_statistic
     #   <p>The extended statistic for the metric specified in <code>MetricName</code>. When
@@ -3176,24 +4115,25 @@ module Aws::CloudWatch
     #   <p>The dimensions for the metric specified in <code>MetricName</code>.</p>
     # @option params [Integer] :period
     #   <p>The length, in seconds, used each time the metric specified in
-    #               <code>MetricName</code> is evaluated. Valid values are 10, 20, 30, and any multiple of
-    #               60.</p>
+    #                   <code>MetricName</code> is evaluated. Valid values are 10, 20, 30, and any multiple
+    #               of 60.</p>
     #            <p>
     #               <code>Period</code> is required for alarms based on static thresholds. If you are
     #               creating an alarm based on a metric math expression, you specify the period for each
     #               metric within the objects in the <code>Metrics</code> array.</p>
     #            <p>Be sure to specify 10, 20, or 30 only for metrics that are stored by a
-    #               <code>PutMetricData</code> call with a <code>StorageResolution</code> of 1. If you
-    #               specify a period of 10, 20, or 30 for a metric that does not have sub-minute resolution, the
-    #               alarm still attempts to gather data at the period rate that you specify. In this case,
-    #               it does not receive data for the attempts that do not correspond to a one-minute data
-    #               resolution, and the alarm might often lapse into INSUFFICENT_DATA status. Specifying 10, 20,
-    #               or 30 also sets this alarm as a high-resolution alarm, which has a higher charge than
-    #               other alarms. For more information about pricing, see <a href="https://aws.amazon.com/cloudwatch/pricing/">Amazon CloudWatch
-    #                   Pricing</a>.</p>
+    #                   <code>PutMetricData</code> call with a <code>StorageResolution</code> of 1. If you
+    #               specify a period of 10, 20, or 30 for a metric that does not have sub-minute resolution,
+    #               the alarm still attempts to gather data at the period rate that you specify. In this
+    #               case, it does not receive data for the attempts that do not correspond to a one-minute
+    #               data resolution, and the alarm might often lapse into INSUFFICENT_DATA status.
+    #               Specifying 10, 20, or 30 also sets this alarm as a high-resolution alarm, which has a
+    #               higher charge than other alarms. For more information about pricing, see <a href="https://aws.amazon.com/cloudwatch/pricing/">Amazon CloudWatch
+    #               Pricing</a>.</p>
     #            <p>An alarm's total current evaluation period can be no longer than seven days, so
-    #               <code>Period</code> multiplied by <code>EvaluationPeriods</code> can't be more than
-    #               604,800 seconds. For alarms with a period of less than one hour (3,600 seconds), the total evaluation period can't be longer than one day (86,400 seconds).</p>
+    #                   <code>Period</code> multiplied by <code>EvaluationPeriods</code> can't be more than
+    #               604,800 seconds. For alarms with a period of less than one hour (3,600 seconds), the
+    #               total evaluation period can't be longer than one day (86,400 seconds).</p>
     # @option params [String] :unit
     #   <p>The unit of measure for the statistic. For example, the units for the Amazon EC2
     #               NetworkIn metric are Bytes because NetworkIn tracks the number of bytes that an instance
@@ -3220,7 +4160,7 @@ module Aws::CloudWatch
     #   <p>The number of data points that must be breaching to trigger the alarm. This is used
     #               only if you are setting an "M out of N" alarm. In that case, this value is the M. For
     #               more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarm-evaluation">Evaluating an Alarm</a> in the <i>Amazon CloudWatch User
-    #               Guide</i>.</p>
+    #                   Guide</i>.</p>
     # @option params [Float] :threshold
     #   <p>The value against which the specified statistic is compared.</p>
     #            <p>This parameter is required for alarms based on static thresholds, but should not be
@@ -3229,19 +4169,22 @@ module Aws::CloudWatch
     #   <p> The arithmetic operation to use when comparing the specified statistic and
     #               threshold. The specified statistic value is used as the first operand.</p>
     #            <p>The values <code>LessThanLowerOrGreaterThanUpperThreshold</code>,
-    #               <code>LessThanLowerThreshold</code>, and <code>GreaterThanUpperThreshold</code> are
+    #                   <code>LessThanLowerThreshold</code>, and <code>GreaterThanUpperThreshold</code> are
     #               used only for alarms based on anomaly detection models.</p>
     # @option params [String] :treat_missing_data
     #   <p> Sets how this alarm is to handle missing data points. If
-    #               <code>TreatMissingData</code> is omitted, the default behavior of
-    #               <code>missing</code> is used. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarms-and-missing-data">Configuring How CloudWatch Alarms Treats Missing Data</a>.</p>
+    #                   <code>TreatMissingData</code> is omitted, the default behavior of
+    #                   <code>missing</code> is used. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarms-and-missing-data">Configuring How CloudWatch Alarms Treats Missing Data</a>.</p>
     #            <p>Valid Values: <code>breaching | notBreaching | ignore | missing</code>
     #            </p>
     #            <note>
     #               <p>Alarms that evaluate metrics in the <code>AWS/DynamoDB</code> namespace always
-    #                   <code>ignore</code> missing data even if you choose a different option for
-    #                   <code>TreatMissingData</code>. When an <code>AWS/DynamoDB</code> metric has
+    #                       <code>ignore</code> missing data even if you choose a different option for
+    #                       <code>TreatMissingData</code>. When an <code>AWS/DynamoDB</code> metric has
     #                   missing data, alarms that evaluate that metric remain in their current state.</p>
+    #            </note>
+    #            <note>
+    #               <p>This parameter is not applicable to PromQL alarms.</p>
     #            </note>
     # @option params [String] :evaluate_low_sample_count_percentile
     #   <p> Used only for alarms based on percentiles. If you specify <code>ignore</code>, the
@@ -3254,17 +4197,17 @@ module Aws::CloudWatch
     # @option params [Array<Types::MetricDataQuery>] :metrics
     #   <p>An array of <code>MetricDataQuery</code> structures that enable you to create an alarm
     #               based on the result of a metric math expression. For each <code>PutMetricAlarm</code>
-    #               operation, you must specify either <code>MetricName</code> or a <code>Metrics</code>
-    #               array.</p>
+    #               operation, you must specify either <code>MetricName</code>, a <code>Metrics</code>
+    #               array, or an <code>EvaluationCriteria</code>.</p>
     #            <p>Each item in the <code>Metrics</code> array either retrieves a metric or performs a
     #               math expression.</p>
     #            <p>One item in the <code>Metrics</code> array is the expression that the alarm watches.
     #               You designate this expression by setting <code>ReturnData</code> to true for this object
     #               in the array. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDataQuery.html">MetricDataQuery</a>.</p>
     #            <p>If you use the <code>Metrics</code> parameter, you cannot include the
-    #               <code>Namespace</code>, <code>MetricName</code>, <code>Dimensions</code>,
-    #               <code>Period</code>, <code>Unit</code>, <code>Statistic</code>, or
-    #               <code>ExtendedStatistic</code> parameters of <code>PutMetricAlarm</code> in the same
+    #                   <code>Namespace</code>, <code>MetricName</code>, <code>Dimensions</code>,
+    #                   <code>Period</code>, <code>Unit</code>, <code>Statistic</code>, or
+    #                   <code>ExtendedStatistic</code> parameters of <code>PutMetricAlarm</code> in the same
     #               operation. Instead, you retrieve the metrics you are using in your math expression as
     #               part of the <code>Metrics</code> array.</p>
     # @option params [Array<Types::Tag>] :tags
@@ -3278,13 +4221,51 @@ module Aws::CloudWatch
     #               this parameter are ignored. To change the tags of an existing alarm, use <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_TagResource.html">TagResource</a> or <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_UntagResource.html">UntagResource</a>.</p>
     #            <p>To use this field to set tags for an alarm when you create it, you must be signed on
     #               with both the <code>cloudwatch:PutMetricAlarm</code> and
-    #               <code>cloudwatch:TagResource</code> permissions.</p>
+    #                   <code>cloudwatch:TagResource</code> permissions.</p>
     # @option params [String] :threshold_metric_id
     #   <p>If this is an alarm based on an anomaly detection model, make this value match the ID
     #               of the <code>ANOMALY_DETECTION_BAND</code> function.</p>
     #            <p>For an example of how to use this parameter, see the <b>Anomaly
-    #               Detection Model Alarm</b> example on this page.</p>
+    #                   Detection Model Alarm</b> example on this page.</p>
     #            <p>If your alarm uses this parameter, it cannot have Auto Scaling actions.</p>
+    # @option params [Types::EvaluationWindow] :evaluation_window
+    #   <p>The evaluation window that the alarm uses to select the range of metric data that it
+    #               evaluates. Specify either a sliding window or a wall clock window. If you omit this
+    #               parameter, the alarm uses a sliding window.</p>
+    #            <p>A sliding window advances each time the alarm is evaluated, forming a rolling time
+    #               window. A wall clock window aligns the evaluated range to fixed clock boundaries, such
+    #               as the top of the hour or the start of the day.</p>
+    #            <p>You can use <code>EvaluationWindow</code> with any type of metric alarm except alarms
+    #               that are based on a PromQL query.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/alarm-evaluation-window.html">Alarm
+    #                   evaluation windows</a> in the <i>CloudWatch User
+    #               Guide</i>.</p>
+    # @option params [Types::WarmUpConfiguration] :warm_up_configuration
+    #   <p>The warm-up configuration for the alarm. A warm-up period delays alarm evaluation
+    #               after you create or update the alarm. The warm-up period reduces alarm noise from
+    #               missing data while a new resource or service starts publishing metrics.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/alarm-warm-up.html">Alarm warm-up
+    #                   periods</a> in the <i>Amazon CloudWatch User Guide</i>.</p>
+    # @option params [Types::EvaluationCriteria] :evaluation_criteria
+    #   <p>The evaluation criteria for the alarm. For each <code>PutMetricAlarm</code>
+    #               operation, you must specify either <code>MetricName</code>, a <code>Metrics</code>
+    #               array, or an <code>EvaluationCriteria</code>.</p>
+    #            <p>If you use the <code>EvaluationCriteria</code> parameter, you cannot include the
+    #                   <code>Namespace</code>, <code>MetricName</code>, <code>Dimensions</code>,
+    #                   <code>Period</code>, <code>Unit</code>, <code>Statistic</code>,
+    #                   <code>ExtendedStatistic</code>, <code>Metrics</code>, <code>Threshold</code>,
+    #                   <code>ComparisonOperator</code>, <code>ThresholdMetricId</code>,
+    #                   <code>EvaluationPeriods</code>, or <code>DatapointsToAlarm</code> parameters of
+    #                   <code>PutMetricAlarm</code> in the same operation. Instead, all evaluation
+    #               parameters are defined within this structure.</p>
+    #            <p>For an example of how to use this parameter, see the <b>PromQL
+    #                   alarm</b> example on this page.</p>
+    # @option params [Integer] :evaluation_interval
+    #   <p>The frequency, in seconds, at which the alarm is evaluated. Valid values are 10,
+    #               20, 30, and any multiple of 60.</p>
+    #            <p>This parameter is required for alarms that use <code>EvaluationCriteria</code>, and
+    #               cannot be specified for alarms configured with <code>MetricName</code> or
+    #                   <code>Metrics</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     alarm_name: "AlarmName", # required
@@ -3305,10 +4286,10 @@ module Aws::CloudWatch
     #     ],
     #     period: 1,
     #     unit: "Seconds" # One of: ["Seconds", "Microseconds", "Milliseconds", "Bytes", "Kilobytes", "Megabytes", "Gigabytes", "Terabytes", "Bits", "Kilobits", "Megabits", "Gigabits", "Terabits", "Percent", "Count", "Bytes/Second", "Kilobytes/Second", "Megabytes/Second", "Gigabytes/Second", "Terabytes/Second", "Bits/Second", "Kilobits/Second", "Megabits/Second", "Gigabits/Second", "Terabits/Second", "Count/Second", "None"],
-    #     evaluation_periods: 1, # required
+    #     evaluation_periods: 1,
     #     datapoints_to_alarm: 1,
     #     threshold: 1.0,
-    #     comparison_operator: "GreaterThanOrEqualToThreshold" # One of: ["GreaterThanOrEqualToThreshold", "GreaterThanThreshold", "LessThanThreshold", "LessThanOrEqualToThreshold", "LessThanLowerOrGreaterThanUpperThreshold", "LessThanLowerThreshold", "GreaterThanUpperThreshold"], # required
+    #     comparison_operator: "GreaterThanOrEqualToThreshold" # One of: ["GreaterThanOrEqualToThreshold", "GreaterThanThreshold", "LessThanThreshold", "LessThanOrEqualToThreshold", "LessThanLowerOrGreaterThanUpperThreshold", "LessThanLowerThreshold", "GreaterThanUpperThreshold"],
     #     treat_missing_data: "TreatMissingData",
     #     evaluate_low_sample_count_percentile: "EvaluateLowSampleCountPercentile",
     #     metrics: [
@@ -3342,7 +4323,28 @@ module Aws::CloudWatch
     #         value: "TagValue", # required
     #       }
     #     ],
-    #     threshold_metric_id: "MetricId"
+    #     threshold_metric_id: "MetricId",
+    #     evaluation_window: {
+    #       # One of:
+    #       wall_clock_window: {
+    #         timezone: "Timezone"
+    #       },
+    #       sliding_window: {
+    #       }
+    #     },
+    #     warm_up_configuration: {
+    #       warm_up_period_duration_in_minutes: 1, # required
+    #       only_start_evaluating_after_warm_up_period_ends: false
+    #     },
+    #     evaluation_criteria: {
+    #       # One of:
+    #       prom_ql_criteria: {
+    #         query: "Query", # required
+    #         pending_period: 1,
+    #         recovery_period: 1
+    #       }
+    #     },
+    #     evaluation_interval: 1
     #   }
     #   options = {}
     #   response = client.put_metric_alarm(params, options)
@@ -3363,7 +4365,7 @@ module Aws::CloudWatch
     #             found and viewed together), or publish metric data by itself. To send entity data with
     #             your metrics, use the <code>EntityMetricData</code> parameter. To send metrics without
     #             entity data, use the <code>MetricData</code> parameter. The
-    #             <code>EntityMetricData</code> structure includes <code>MetricData</code> structures
+    #                 <code>EntityMetricData</code> structure includes <code>MetricData</code> structures
     #             for the metric data.</p>
     #          <p>You can publish either individual values in the <code>Value</code> field, or arrays of
     #             values and the number of times each value occurred during the period by using the
@@ -3373,8 +4375,8 @@ module Aws::CloudWatch
     #             supports retrieving percentile statistics on this data.</p>
     #          <p>Each <code>PutMetricData</code> request is limited to 1 MB in size for HTTP POST
     #             requests. You can send a payload compressed by gzip. Each request is also limited to no
-    #             more than 1000 different metrics (across both the <code>MetricData</code> and 
-    #             <code>EntityMetricData</code> properties).</p>
+    #             more than 1000 different metrics (across both the <code>MetricData</code> and
+    #                 <code>EntityMetricData</code> properties).</p>
     #          <p>Although the <code>Value</code> parameter accepts numbers of type <code>Double</code>,
     #             CloudWatch rejects values that are either too small or too large. Values must be in the
     #             range of -2^360 to 2^360. In addition, special values (for example, NaN, +Infinity,
@@ -3414,32 +4416,31 @@ module Aws::CloudWatch
     # @option params [Array<Types::MetricDatum>] :metric_data
     #   <p>The data for the metrics. Use this parameter if your metrics do not contain
     #               associated entities. The array can include no more than 1000 metrics per call.</p>
-    #            <p>The limit of metrics allowed, 1000, is the sum of both <code>EntityMetricData</code> 
+    #            <p>The limit of metrics allowed, 1000, is the sum of both <code>EntityMetricData</code>
     #               and <code>MetricData</code> metrics.</p>
     # @option params [Array<Types::EntityMetricData>] :entity_metric_data
-    #   <p>Data for metrics that contain associated entity information. You can include up to 
-    #               two <code>EntityMetricData</code> objects, each of which can contain a single 
-    #               <code>Entity</code> and associated metrics.</p>
-    #            <p>The limit of metrics allowed, 1000, is the sum of both <code>EntityMetricData</code> 
+    #   <p>Data for metrics that contain associated entity information. You can include up to two
+    #                   <code>EntityMetricData</code> objects, each of which can contain a single
+    #                   <code>Entity</code> and associated metrics.</p>
+    #            <p>The limit of metrics allowed, 1000, is the sum of both <code>EntityMetricData</code>
     #               and <code>MetricData</code> metrics.</p>
     # @option params [Boolean] :strict_entity_validation
     #   <p>Whether to accept valid metric data when an invalid entity is sent.</p>
     #            <ul>
     #               <li>
-    #                  <p>When set to <code>true</code>: Any validation error (for entity or metric 
-    #                       data) will fail the entire request, and no data will be ingested. The failed 
+    #                  <p>When set to <code>true</code>: Any validation error (for entity or metric
+    #                       data) will fail the entire request, and no data will be ingested. The failed
     #                       operation will return a 400 result with the error.</p>
     #               </li>
     #               <li>
-    #                  <p>When set to <code>false</code>: Validation errors in the entity will not 
-    #                       associate the metric with the entity, but the metric data will still be 
-    #                       accepted and ingested. Validation errors in the metric data will fail the 
-    #                       entire request, and no data will be ingested.</p>
-    #                  <p>In the case of an invalid entity, the operation will return a 
-    #                       <code>200</code> status, but an additional response header will contain 
-    #                       information about the validation errors. The new header, 
-    #                       <code>X-Amzn-Failure-Message</code> is an enumeration of the following 
-    #                       values:</p>
+    #                  <p>When set to <code>false</code>: Validation errors in the entity will not
+    #                       associate the metric with the entity, but the metric data will still be accepted
+    #                       and ingested. Validation errors in the metric data will fail the entire request,
+    #                       and no data will be ingested.</p>
+    #                  <p>In the case of an invalid entity, the operation will return a <code>200</code>
+    #                       status, but an additional response header will contain information about the
+    #                       validation errors. The new header, <code>X-Amzn-Failure-Message</code> is an
+    #                       enumeration of the following values:</p>
     #                  <ul>
     #                     <li>
     #                        <p>
@@ -3448,7 +4449,7 @@ module Aws::CloudWatch
     #                     <li>
     #                        <p>
     #                           <code>InvalidKeyAttributes</code> - The provided
-    #                               <code>KeyAttributes</code> of an entity is invalid.</p>
+    #                                   <code>KeyAttributes</code> of an entity is invalid.</p>
     #                     </li>
     #                     <li>
     #                        <p>
@@ -3458,24 +4459,22 @@ module Aws::CloudWatch
     #                     <li>
     #                        <p>
     #                           <code>InvalidTypeValue</code> - The provided <code>Type</code> in the
-    #                               <code>KeyAttributes</code> of an entity is invalid.</p>
+    #                                   <code>KeyAttributes</code> of an entity is invalid.</p>
     #                     </li>
     #                     <li>
     #                        <p>
-    #                           <code>EntitySizeTooLarge</code> - The number of 
-    #                               <code>EntityMetricData</code> objects allowed is 2.</p>
+    #                           <code>EntitySizeTooLarge</code> - The number of
+    #                                   <code>EntityMetricData</code> objects allowed is 2.</p>
     #                     </li>
     #                     <li>
     #                        <p>
-    #                           <code>MissingRequiredFields</code> - There are missing required 
-    #                               fields in the <code>KeyAttributes</code> for the provided
+    #                           <code>MissingRequiredFields</code> - There are missing required fields
+    #                               in the <code>KeyAttributes</code> for the provided
     #                               <code>Type</code>.</p>
     #                     </li>
     #                  </ul>
-    #                  <p>For details of the requirements for specifying an entity, see 
-    #                       <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/adding-your-own-related-telemetry.html">How 
-    #                       to add related information to telemetry</a> in the 
-    #                       <i>CloudWatch User Guide</i>.</p>
+    #                  <p>For details of the requirements for specifying an entity, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/adding-your-own-related-telemetry.html">How to add related information to telemetry</a> in the
+    #                               <i>CloudWatch User Guide</i>.</p>
     #               </li>
     #            </ul>
     #            <p>This parameter is <i>required</i> when <code>EntityMetricData</code> is
@@ -3558,11 +4557,11 @@ module Aws::CloudWatch
     #             metrics to Amazon Web Services destinations, including Amazon S3, and to many third-party
     #             solutions.</p>
     #          <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Metric-Streams.html"> Using
-    #             Metric Streams</a>.</p>
+    #                 Metric Streams</a>.</p>
     #          <p>To create a metric stream, you must be signed in to an account that has the
-    #             <code>iam:PassRole</code> permission and either the
-    #             <code>CloudWatchFullAccess</code> policy or the
-    #             <code>cloudwatch:PutMetricStream</code> permission.</p>
+    #                 <code>iam:PassRole</code> permission and either the
+    #                 <code>CloudWatchFullAccess</code> policy or the
+    #                 <code>cloudwatch:PutMetricStream</code> permission.</p>
     #          <p>When you create or update a metric stream, you choose one of the following:</p>
     #          <ul>
     #             <li>
@@ -3574,11 +4573,11 @@ module Aws::CloudWatch
     #             </li>
     #             <li>
     #                <p>Stream metrics from only the metric namespaces that you list in
-    #                     <code>IncludeFilters</code>.</p>
+    #                         <code>IncludeFilters</code>.</p>
     #             </li>
     #          </ul>
     #          <p>By default, a metric stream always sends the <code>MAX</code>, <code>MIN</code>,
-    #             <code>SUM</code>, and <code>SAMPLECOUNT</code> statistics for each metric that is
+    #                 <code>SUM</code>, and <code>SAMPLECOUNT</code> statistics for each metric that is
     #             streamed. You can use the <code>StatisticsConfigurations</code> parameter to have the
     #             metric stream send additional statistics in the stream. Streaming additional statistics
     #             incurs additional costs. For more information, see <a href="https://aws.amazon.com/cloudwatch/pricing/">Amazon CloudWatch Pricing</a>. </p>
@@ -3623,7 +4622,7 @@ module Aws::CloudWatch
     #            </ul>
     # @option params [String] :output_format
     #   <p>The output format for the stream. Valid values are <code>json</code>,
-    #               <code>opentelemetry1.0</code>, and <code>opentelemetry0.7</code>. For more
+    #                   <code>opentelemetry1.0</code>, and <code>opentelemetry0.7</code>. For more
     #               information about metric stream output formats, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-metric-streams-formats.html">
     #                   Metric streams output formats</a>.</p>
     # @option params [Array<Types::Tag>] :tags
@@ -3637,14 +4636,14 @@ module Aws::CloudWatch
     #               parameter are ignored. To change the tags of an existing metric stream, use <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_TagResource.html">TagResource</a> or <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_UntagResource.html">UntagResource</a>.</p>
     # @option params [Array<Types::MetricStreamStatisticsConfiguration>] :statistics_configurations
     #   <p>By default, a metric stream always sends the <code>MAX</code>, <code>MIN</code>,
-    #               <code>SUM</code>, and <code>SAMPLECOUNT</code> statistics for each metric that is
+    #                   <code>SUM</code>, and <code>SAMPLECOUNT</code> statistics for each metric that is
     #               streamed. You can use this parameter to have the metric stream also send additional
     #               statistics in the stream. This array can have up to 100 members.</p>
     #            <p>For each entry in this array, you specify one or more metrics and the list of
     #               additional statistics to stream for those metrics. The additional statistics that you
     #               can stream depend on the stream's <code>OutputFormat</code>. If the
-    #               <code>OutputFormat</code> is <code>json</code>, you can stream any additional
-    #               statistic that is supported by CloudWatch, listed in <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html.html">
+    #                   <code>OutputFormat</code> is <code>json</code>, you can stream any additional
+    #               statistic that is supported by CloudWatch, listed in <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html">
     #                   CloudWatch statistics definitions</a>. If the <code>OutputFormat</code>
     #               is <code>opentelemetry1.0</code> or <code>opentelemetry0.7</code>, you can stream
     #               percentile statistics such as p95, p99.9, and so on.</p>
@@ -3769,6 +4768,74 @@ module Aws::CloudWatch
       request.send_request(options)
     end
 
+    # <p>Enables enrichment and PromQL access for CloudWatch vended metrics for <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/UsingResourceTagsForTelemetry.html">supported Amazon Web Services resources</a> in the account. Once enabled,
+    #             metrics that contain a resource identifier dimension (for example, EC2
+    #                 <code>CPUUtilization</code> with an <code>InstanceId</code> dimension) are enriched
+    #             with resource ARN and resource tag labels and become queryable using PromQL.</p>
+    #          <p>Before calling this operation, you must enable resource tags on telemetry for your
+    #             account. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/EnableResourceTagsOnTelemetry.html">Enable
+    #                 resource tags on telemetry</a>.</p>
+    #          <p>Optionally, <code>IncludeFilters</code> and <code>ExcludeFilters</code> limit
+    #             enrichment to a subset of the account's metrics. These filters are stored only when this
+    #             operation starts enrichment. Calling <code>StartOTelEnrichment</code> for an account
+    #             where enrichment is already running has no effect and does not modify the filters that
+    #             are applied. To change them, use <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_UpdateOTelEnrichment.html">UpdateOTelEnrichment</a>.</p>
+    # @param [Hash, Types::StartOTelEnrichmentInput] params
+    # @option params [Array<Types::OTelEnrichmentMetricSelector>] :include_filters
+    #   <p>The metric namespaces, and the metric names, to enrich. If this parameter is
+    #               omitted, every namespace that Amazon CloudWatch supports for enrichment is in
+    #               scope.</p>
+    #            <p>A maximum of 100 filters is allowed across <code>IncludeFilters</code> and
+    #                   <code>ExcludeFilters</code> combined.</p>
+    # @option params [Array<Types::OTelEnrichmentMetricSelector>] :exclude_filters
+    #   <p>The metric namespaces, and the metric names, to leave unenriched. If this parameter
+    #               is omitted, nothing is excluded.</p>
+    #            <p>Amazon CloudWatch applies <code>ExcludeFilters</code> after
+    #                   <code>IncludeFilters</code>, so a metric that both parameters match is not
+    #               enriched.</p>
+    #            <p>A maximum of 100 filters is allowed across <code>IncludeFilters</code> and
+    #                   <code>ExcludeFilters</code> combined.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     include_filters: [
+    #       {
+    #         namespace: "Namespace", # required
+    #         metric_names: ["MetricName"]
+    #       }
+    #     ],
+    #     exclude_filters: [
+    #       {
+    #         namespace: "Namespace", # required
+    #         metric_names: ["MetricName"]
+    #       }
+    #     ]
+    #   }
+    #   options = {}
+    #   response = client.start_o_tel_enrichment(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     include_filters: [
+    #       {
+    #         namespace: "Namespace", # required
+    #         metric_names: ["MetricName"]
+    #       }
+    #     ],
+    #     exclude_filters: [
+    #       {
+    #         namespace: "Namespace", # required
+    #         metric_names: ["MetricName"]
+    #       }
+    #     ],
+    #     created_at: Time.now,
+    #     updated_at: Time.now
+    #   }
+    # @return [Types::StartOTelEnrichmentOutput]
+    def start_o_tel_enrichment(params = {}, options = {})
+      request = build_request(:start_o_tel_enrichment, params)
+      request.send_request(options)
+    end
+
     # <p>Stops the streaming of metrics for one or more of your metric streams.</p>
     # @param [Hash, Types::StopMetricStreamsInput] params
     # @option params [Array<String>] :names
@@ -3791,9 +4858,26 @@ module Aws::CloudWatch
       request.send_request(options)
     end
 
+    # <p>Disables enrichment and PromQL access for CloudWatch vended metrics for <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/UsingResourceTagsForTelemetry.html">supported Amazon Web Services resources</a> in the account. After disabling,
+    #             these metrics are no longer enriched with resource ARN and resource tag labels, and
+    #             cannot be queried using PromQL.</p>
+    # @param [Hash, Types::StopOTelEnrichmentInput] params
+    # @example Request syntax with placeholder values
+    #   params = {}
+    #   options = {}
+    #   response = client.stop_o_tel_enrichment(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::StopOTelEnrichmentOutput]
+    def stop_o_tel_enrichment(params = {}, options = {})
+      request = build_request(:stop_o_tel_enrichment, params)
+      request.send_request(options)
+    end
+
     # <p>Assigns one or more tags (key-value pairs) to the specified CloudWatch resource.
-    #             Currently, the only CloudWatch resources that can be tagged are alarms and Contributor
-    #             Insights rules.</p>
+    #             Currently, the only CloudWatch resources that can be tagged are alarms, dashboards,
+    #             metric streams and Contributor Insights rules.</p>
     #          <p>Tags can help you organize and categorize your resources. You can also use them to
     #             scope user permissions by granting a user permission to access or change only resources
     #             with certain tag values.</p>
@@ -3809,11 +4893,19 @@ module Aws::CloudWatch
     # @option params [String] :resource_arn
     #   <p>The ARN of the CloudWatch resource that you're adding tags to.</p>
     #            <p>The ARN format of an alarm is
-    #               <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:alarm:<i>alarm-name</i>
+    #                       <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:alarm:<i>alarm-name</i>
     #               </code>
     #            </p>
     #            <p>The ARN format of a Contributor Insights rule is
-    #               <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:insight-rule/<i>insight-rule-name</i>
+    #                       <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:insight-rule/<i>insight-rule-name</i>
+    #               </code>
+    #            </p>
+    #            <p>The ARN format of a dashboard is
+    #                       <code>arn:aws:cloudwatch::<i>account-id</i>:dashboard/<i>dashboard-name</i>
+    #               </code>
+    #            </p>
+    #            <p>The ARN format of a metric stream is
+    #                       <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:metric-stream/<i>metric-stream-name</i>
     #               </code>
     #            </p>
     #            <p>For more information about ARN format, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazoncloudwatch.html#amazoncloudwatch-resources-for-iam-policies"> Resource Types Defined by Amazon CloudWatch</a> in the <i>Amazon Web
@@ -3841,16 +4933,25 @@ module Aws::CloudWatch
       request.send_request(options)
     end
 
-    # <p>Removes one or more tags from the specified resource.</p>
+    # <p>Removes one or more tags from the specified resource. Currently, alarms, dashboards,
+    #             metric streams and Contributor Insights rules support tagging.</p>
     # @param [Hash, Types::UntagResourceInput] params
     # @option params [String] :resource_arn
     #   <p>The ARN of the CloudWatch resource that you're removing tags from.</p>
     #            <p>The ARN format of an alarm is
-    #               <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:alarm:<i>alarm-name</i>
+    #                       <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:alarm:<i>alarm-name</i>
     #               </code>
     #            </p>
     #            <p>The ARN format of a Contributor Insights rule is
-    #               <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:insight-rule/<i>insight-rule-name</i>
+    #                       <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:insight-rule/<i>insight-rule-name</i>
+    #               </code>
+    #            </p>
+    #            <p>The ARN format of a dashboard is
+    #                       <code>arn:aws:cloudwatch::<i>account-id</i>:dashboard/<i>dashboard-name</i>
+    #               </code>
+    #            </p>
+    #            <p>The ARN format of a metric stream is
+    #                       <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:metric-stream/<i>metric-stream-name</i>
     #               </code>
     #            </p>
     #            <p>For more information about ARN format, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazoncloudwatch.html#amazoncloudwatch-resources-for-iam-policies"> Resource Types Defined by Amazon CloudWatch</a> in the <i>Amazon Web
@@ -3870,6 +4971,124 @@ module Aws::CloudWatch
     # @return [Types::UntagResourceOutput]
     def untag_resource(params = {}, options = {})
       request = build_request(:untag_resource, params)
+      request.send_request(options)
+    end
+
+    # <p>Replaces the filters that determine which CloudWatch vended metrics are enriched
+    #             with resource ARN and resource tag labels for the account. Enrichment must already be
+    #             running for the account. If it is not, this operation returns a
+    #                 <code>ResourceNotFoundException</code>. To start enrichment, use <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_StartOTelEnrichment.html">StartOTelEnrichment</a>.</p>
+    #          <p>The filters in the request completely replace the stored filters; they are not
+    #             merged with them. <code>IncludeFilters</code> and <code>ExcludeFilters</code> are
+    #             replaced as a pair, so a request that specifies only <code>IncludeFilters</code> also
+    #             clears the stored <code>ExcludeFilters</code>, and a request that specifies neither
+    #             clears both.</p>
+    # @param [Hash, Types::UpdateOTelEnrichmentInput] params
+    # @option params [Array<Types::OTelEnrichmentMetricSelector>] :include_filters
+    #   <p>The metric namespaces, and the metric names, to enrich. If this parameter is
+    #               omitted, every namespace that Amazon CloudWatch supports for enrichment is in
+    #               scope.</p>
+    #            <p>A maximum of 100 filters is allowed across <code>IncludeFilters</code> and
+    #                   <code>ExcludeFilters</code> combined.</p>
+    # @option params [Array<Types::OTelEnrichmentMetricSelector>] :exclude_filters
+    #   <p>The metric namespaces, and the metric names, to leave unenriched. If this parameter
+    #               is omitted, nothing is excluded.</p>
+    #            <p>Amazon CloudWatch applies <code>ExcludeFilters</code> after
+    #                   <code>IncludeFilters</code>, so a metric that both parameters match is not
+    #               enriched.</p>
+    #            <p>A maximum of 100 filters is allowed across <code>IncludeFilters</code> and
+    #                   <code>ExcludeFilters</code> combined.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     include_filters: [
+    #       {
+    #         namespace: "Namespace", # required
+    #         metric_names: ["MetricName"]
+    #       }
+    #     ],
+    #     exclude_filters: [
+    #       {
+    #         namespace: "Namespace", # required
+    #         metric_names: ["MetricName"]
+    #       }
+    #     ]
+    #   }
+    #   options = {}
+    #   response = client.update_o_tel_enrichment(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     include_filters: [
+    #       {
+    #         namespace: "Namespace", # required
+    #         metric_names: ["MetricName"]
+    #       }
+    #     ],
+    #     exclude_filters: [
+    #       {
+    #         namespace: "Namespace", # required
+    #         metric_names: ["MetricName"]
+    #       }
+    #     ],
+    #     created_at: Time.now,
+    #     updated_at: Time.now
+    #   }
+    # @return [Types::UpdateOTelEnrichmentOutput]
+    def update_o_tel_enrichment(params = {}, options = {})
+      request = build_request(:update_o_tel_enrichment, params)
+      request.send_request(options)
+    end
+
+    # <p>Updates the resource metrics configuration for an Amazon Web Services resource. The
+    #             <code>MetricSelections</code> value that you provide replaces any existing metric
+    #             selections for the resource; it is not merged with them.</p>
+    #          <p>If you omit <code>MetricSelections</code>, Amazon CloudWatch removes any existing
+    #             metric selection filter and collects all available detailed metrics for the
+    #             resource.</p>
+    #          <p>This operation returns a <code>ResourceNotFoundException</code> if no resource metrics
+    #             configuration exists for the specified resource ARN. To create a configuration, use
+    #             <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_CreateResourceMetricsConfiguration.html">CreateResourceMetricsConfiguration</a>.</p>
+    #          <p>To update a resource metrics configuration, you must have the
+    #                 <code>cloudwatch:UpdateResourceMetricsConfiguration</code> permission. For information about scoping
+    #             this permission to specific resources, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/iam-cw-condition-keys-resource-arn.html">Condition keys for resource metrics configuration access</a> in the
+    #                 <i>Amazon CloudWatch User Guide</i>.</p>
+    # @param [Hash, Types::UpdateResourceMetricsConfigurationInput] params
+    # @option params [String] :resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the Amazon Web Services resource to update the
+    #               resource metrics configuration for.</p>
+    # @option params [Array<Types::ResourceMetricSelection>] :metric_selections
+    #   <p>Specifies which metrics Amazon CloudWatch collects for the resource. The selections
+    #               that you provide completely replace any existing metric selections.</p>
+    #            <p>If you omit this parameter, Amazon CloudWatch removes any existing metric selection
+    #               filter and collects all available detailed metrics for the resource.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     resource_arn: "ResourceArn", # required
+    #     metric_selections: [
+    #       {
+    #         include_metrics: ["MetricName"], # required
+    #       }
+    #     ]
+    #   }
+    #   options = {}
+    #   response = client.update_resource_metrics_configuration(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     resource_metrics_configuration: { # required
+    #       resource_arn: "ResourceArn", # required
+    #       created_at: Time.now, # required
+    #       updated_at: Time.now, # required
+    #       metric_selections: [
+    #         {
+    #           include_metrics: ["MetricName"], # required
+    #         }
+    #       ]
+    #     }
+    #   }
+    # @return [Types::UpdateResourceMetricsConfigurationOutput]
+    def update_resource_metrics_configuration(params = {}, options = {})
+      request = build_request(:update_resource_metrics_configuration, params)
       request.send_request(options)
     end
 
@@ -3958,7 +5177,9 @@ module Aws::CloudWatch
     def waiters
       {
         alarm_exists: Waiters::AlarmExists,
-        composite_alarm_exists: Waiters::CompositeAlarmExists
+        alarm_mute_rule_exists: Waiters::AlarmMuteRuleExists,
+        composite_alarm_exists: Waiters::CompositeAlarmExists,
+        log_alarm_exists: Waiters::LogAlarmExists
       }
     end
 
@@ -3984,7 +5205,8 @@ module Aws::CloudWatch
       # @api private
       def protocols
         {
-          aws_query: Aws::Core::AwsQuery
+          rpc_v2_cbor: Smithy::Client::RpcV2Cbor,
+          json_rpc: Aws::Core::JsonRpc
         }
       end
     end

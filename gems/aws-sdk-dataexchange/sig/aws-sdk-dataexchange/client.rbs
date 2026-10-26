@@ -154,6 +154,7 @@ module Aws::DataExchange
     interface _CreateJobResponse
       include Smithy::Client::_Response[Types::CreateJobOutput]
       def arn: () -> String?
+      def asset_configuration: () -> Types::AssetConfiguration?
       def created_at: () -> Time?
       def details: () -> Types::ResponseDetails?
       def errors: () -> Array[Types::JobError]?
@@ -163,6 +164,14 @@ module Aws::DataExchange
       def updated_at: () -> Time?
     end
     def create_job: (
+      ?asset_configuration: {
+        tags: Array[
+          {
+            key: String,
+            value: untyped
+          }
+        ]
+      },
       ?details: {
         export_asset_to_signed_url: {
           asset_id: String,
@@ -338,6 +347,7 @@ module Aws::DataExchange
       def name: () -> String?
       def revision_id: () -> String?
       def source_id: () -> String?
+      def tags: () -> Hash[String, String]?
       def updated_at: () -> Time?
     end
     def get_asset: (
@@ -403,6 +413,7 @@ module Aws::DataExchange
     interface _GetJobResponse
       include Smithy::Client::_Response[Types::GetJobOutput]
       def arn: () -> String?
+      def asset_configuration: () -> Types::AssetConfiguration?
       def created_at: () -> Time?
       def details: () -> Types::ResponseDetails?
       def errors: () -> Array[Types::JobError]?

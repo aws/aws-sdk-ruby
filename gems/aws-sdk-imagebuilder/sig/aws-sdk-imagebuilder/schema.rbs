@@ -2,6 +2,7 @@ module Aws::Imagebuilder
   module Schema
     include Smithy::Schema::Shapes
 
+    AccessDeniedException: StructureShape
     AccountAggregation: StructureShape
     AccountId: StringShape
     AccountList: ListShape
@@ -10,9 +11,12 @@ module Aws::Imagebuilder
     AmiDistributionConfiguration: StructureShape
     AmiList: ListShape
     AmiNameString: StringShape
+    AmiWatermarkName: StringShape
+    AmiWatermarksList: ListShape
     Arn: StringShape
     AutoDisableFailureCount: IntegerShape
     AutoDisablePolicy: StructureShape
+    AutoScalingGroupConfiguration: StructureShape
     Boolean: BooleanShape
     BuildType: EnumShape
     CallRateLimitExceededException: StructureShape
@@ -20,6 +24,7 @@ module Aws::Imagebuilder
     CancelImageCreationResponse: StructureShape
     CancelLifecycleExecutionRequest: StructureShape
     CancelLifecycleExecutionResponse: StructureShape
+    CapacityWaitTimeoutSeconds: IntegerShape
     ClientException: StructureShape
     ClientToken: StringShape
     Component: StructureShape
@@ -27,6 +32,7 @@ module Aws::Imagebuilder
     ComponentConfiguration: StructureShape
     ComponentConfigurationList: ListShape
     ComponentData: StringShape
+    ComponentFailureContext: StructureShape
     ComponentFormat: EnumShape
     ComponentParameter: StructureShape
     ComponentParameterDescription: StringShape
@@ -100,14 +106,18 @@ module Aws::Imagebuilder
     DeleteWorkflowRequest: StructureShape
     DeleteWorkflowResponse: StructureShape
     DiskImageFormat: EnumShape
+    DistributeImageRequest: StructureShape
+    DistributeImageResponse: StructureShape
     Distribution: StructureShape
     DistributionConfiguration: StructureShape
     DistributionConfigurationArn: StringShape
     DistributionConfigurationSummary: StructureShape
     DistributionConfigurationSummaryList: ListShape
+    DistributionFailureContext: StructureShape
     DistributionList: ListShape
     DistributionTimeoutMinutes: IntegerShape
     DockerFileTemplate: StringShape
+    DryRunOperationException: StructureShape
     EbsInstanceBlockDeviceSpecification: StructureShape
     EbsIopsInteger: IntegerShape
     EbsVolumeSizeInteger: IntegerShape
@@ -168,6 +178,8 @@ module Aws::Imagebuilder
     ImageBuildMessage: StringShape
     ImageBuildVersionArn: StringShape
     ImageBuilderArn: StringShape
+    ImageConfigurationStep: EnumShape
+    ImageFailureContext: StructureShape
     ImageLoggingConfiguration: StructureShape
     ImagePackage: StructureShape
     ImagePackageList: ListShape
@@ -228,6 +240,7 @@ module Aws::Imagebuilder
     InvalidParameterValueException: StructureShape
     InvalidRequestException: StructureShape
     InvalidVersionNumberException: StructureShape
+    LatestVersionReferences: StructureShape
     LaunchPermissionConfiguration: StructureShape
     LaunchTemplateConfiguration: StructureShape
     LaunchTemplateConfigurationList: ListShape
@@ -320,6 +333,7 @@ module Aws::Imagebuilder
     MarketplaceResourceLocation: StringShape
     MarketplaceResourceType: EnumShape
     MaxParallelLaunches: IntegerShape
+    NonEmptyMaxLengthString: StringShape
     NonEmptyString: StringShape
     NonEmptyStringList: ListShape
     NonNegativeDouble: FloatShape
@@ -338,6 +352,7 @@ module Aws::Imagebuilder
     PackageVulnerabilityDetails: StructureShape
     PaginationToken: StringShape
     ParallelGroup: StringShape
+    ParentInstanceConfiguration: StructureShape
     PipelineExecutionStartCondition: EnumShape
     PipelineLoggingConfiguration: StructureShape
     PipelineStatus: EnumShape
@@ -355,7 +370,11 @@ module Aws::Imagebuilder
     PutImagePolicyResponse: StructureShape
     PutImageRecipePolicyRequest: StructureShape
     PutImageRecipePolicyResponse: StructureShape
+    RegionFailure: StructureShape
+    RegionFailureList: ListShape
+    RegionFailureStatus: EnumShape
     RegionList: ListShape
+    RegisterImageOptions: StructureShape
     Remediation: StructureShape
     RemediationRecommendation: StructureShape
     ResourceAlreadyExistsException: StructureShape
@@ -370,6 +389,8 @@ module Aws::Imagebuilder
     ResourceStatus: EnumShape
     ResourceTagMap: MapShape
     RestrictedInteger: IntegerShape
+    RetryImageRequest: StructureShape
+    RetryImageResponse: StructureShape
     RoleNameOrArn: StringShape
     S3ExportConfiguration: StructureShape
     S3Logs: StructureShape
@@ -404,6 +425,8 @@ module Aws::Imagebuilder
     TargetResourceCount: IntegerShape
     TenancyType: EnumShape
     Timezone: StringShape
+    TooManyRequestsException: StructureShape
+    UefiData: StringShape
     UntagResourceRequest: StructureShape
     UntagResourceResponse: StructureShape
     UpdateDistributionConfigurationRequest: StructureShape
@@ -417,11 +440,15 @@ module Aws::Imagebuilder
     Uri: StringShape
     UserDataOverride: StringShape
     VersionNumber: StringShape
+    VersionNumberWithBuild: StringShape
     VulnerabilityId: StringShape
     VulnerabilityIdAggregation: StructureShape
     VulnerabilityIdList: ListShape
     VulnerablePackage: StructureShape
     VulnerablePackageList: ListShape
+    WildcardVersionNumber: StringShape
+    WindowsConfiguration: StructureShape
+    WindowsConfigurationImageIndex: IntegerShape
     Workflow: StructureShape
     WorkflowBuildVersionArn: StringShape
     WorkflowConfiguration: StructureShape
@@ -432,7 +459,6 @@ module Aws::Imagebuilder
     WorkflowExecutionMetadata: StructureShape
     WorkflowExecutionStatus: EnumShape
     WorkflowExecutionsList: ListShape
-    WorkflowNameArn: StringShape
     WorkflowParameter: StructureShape
     WorkflowParameterDescription: StringShape
     WorkflowParameterDetail: StructureShape
@@ -446,6 +472,7 @@ module Aws::Imagebuilder
     WorkflowStatus: EnumShape
     WorkflowStepAction: StringShape
     WorkflowStepActionType: EnumShape
+    WorkflowStepAttemptCount: IntegerShape
     WorkflowStepCount: IntegerShape
     WorkflowStepDescription: StringShape
     WorkflowStepExecution: StructureShape
@@ -464,7 +491,6 @@ module Aws::Imagebuilder
     WorkflowSummaryList: ListShape
     WorkflowType: EnumShape
     WorkflowVersion: StructureShape
-    WorkflowVersionArn: StringShape
     WorkflowVersionArnOrBuildVersionArn: StringShape
     WorkflowVersionList: ListShape
     WorkflowWildcardVersionArn: StringShape

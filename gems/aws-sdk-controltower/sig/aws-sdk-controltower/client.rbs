@@ -51,8 +51,9 @@ module Aws::ControlTower
     end
     def create_landing_zone: (
       ?version: String,
-      ?manifest: Smithy::Schema::document,
-      ?tags: Hash[String, String]
+      ?remediation_types: Array[String],
+      ?tags: Hash[String, String],
+      ?manifest: Smithy::Schema::document
     ) -> _CreateLandingZoneResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLandingZoneResponse
 
     interface _DeleteLandingZoneResponse
@@ -77,7 +78,8 @@ module Aws::ControlTower
     end
     def disable_control: (
       ?control_identifier: String,
-      ?target_identifier: String
+      ?target_identifier: String,
+      ?enabled_control_identifier: String
     ) -> _DisableControlResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisableControlResponse
 
     interface _EnableBaselineResponse
@@ -230,8 +232,12 @@ module Aws::ControlTower
       ?filter: {
         control_identifiers: Array[String],
         statuses: Array[String],
-        drift_statuses: Array[String]
-      }
+        drift_statuses: Array[String],
+        parent_identifiers: Array[String],
+        inheritance_drift_statuses: untyped,
+        resource_drift_statuses: untyped
+      },
+      ?include_children: bool
     ) -> _ListEnabledControlsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEnabledControlsResponse
 
     interface _ListLandingZoneOperationsResponse
@@ -341,8 +347,9 @@ module Aws::ControlTower
     end
     def update_landing_zone: (
       ?version: String,
-      ?manifest: Smithy::Schema::document,
-      ?landing_zone_identifier: String
+      ?remediation_types: Array[String],
+      ?landing_zone_identifier: String,
+      ?manifest: Smithy::Schema::document
     ) -> _UpdateLandingZoneResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateLandingZoneResponse
   end
 end

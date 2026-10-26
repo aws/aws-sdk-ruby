@@ -64,6 +64,98 @@ module Aws::Kafka
       ?secret_arn_list: Array[String]
     ) -> _BatchDisassociateScramSecretResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchDisassociateScramSecretResponse
 
+    interface _CreateChannelResponse
+      include Smithy::Client::_Response[Types::CreateChannelResponse]
+      def channel_arn: () -> String?
+      def cluster_operation_arn: () -> String?
+    end
+    def create_channel: (
+      ?channel_name: String,
+      ?cluster_arn: String,
+      ?encryption_configuration: {
+        kms_key_arn: String
+      },
+      ?iceberg_destination_configuration: {
+        append_only: bool,
+        catalog: {
+          catalog_arn: String,
+          warehouse_location: untyped
+        },
+        data_freshness_in_seconds: Integer,
+        dead_letter_queue_s3: {
+          bucket_arn: untyped,
+          error_output_prefix: untyped,
+          expected_bucket_owner: untyped
+        },
+        destination_table_list: Array[
+          {
+            destination_database_name: untyped,
+            destination_table_name: untyped,
+            partition_spec: {
+              partition_strategy: String,
+              source_list: Array[
+                {
+                  source_name: untyped
+                }
+              ]
+            }
+          }
+        ],
+        schema_evolution: {
+          enable_schema_evolution: untyped
+        },
+        service_execution_role_arn: untyped,
+        table_creation: {
+          enable_table_creation: untyped
+        },
+        compression_type: String
+      },
+      ?s3_destination_configuration: {
+        data_freshness_in_seconds: Integer,
+        dead_letter_queue_s3: {
+          bucket_arn: String,
+          error_output_prefix: untyped,
+          expected_bucket_owner: untyped
+        },
+        service_execution_role_arn: untyped,
+        storage: {
+          bucket_arn: untyped,
+          compression_type: String,
+          output_prefix: untyped,
+          output_key_template: untyped,
+          storage_class: String,
+          expected_bucket_owner: untyped
+        }
+      },
+      ?tags: Hash[String, String],
+      ?topic_configuration_list: Array[
+        {
+          record_converter: {
+            value_converter: String
+          },
+          record_schema: {
+            gsr_arn: String
+          },
+          topic_arn: untyped
+        }
+      ],
+      ?logging_info: {
+        cloud_watch_logs: {
+          enabled: bool,
+          log_group: String
+        },
+        firehose: {
+          delivery_stream: untyped,
+          enabled: untyped
+        },
+        s3: {
+          bucket: untyped,
+          enabled: untyped,
+          prefix: untyped
+        }
+      }
+    ) -> _CreateChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateChannelResponse
+
     interface _CreateClusterResponse
       include Smithy::Client::_Response[Types::CreateClusterResponse]
       def cluster_arn: () -> String?
@@ -103,9 +195,13 @@ module Aws::Kafka
                 enabled: untyped
               }
             }
-          }
+          },
+          network_type: String
         },
         zone_ids: untyped
+      },
+      ?rebalancing: {
+        status: String
       },
       ?client_authentication: {
         sasl: {
@@ -151,7 +247,7 @@ module Aws::Kafka
       },
       ?kafka_version: String,
       ?logging_info: {
-        broker_logs: {
+        authorizer_logs: {
           cloud_watch_logs: {
             enabled: bool,
             log_group: String
@@ -165,6 +261,11 @@ module Aws::Kafka
             enabled: untyped,
             prefix: untyped
           }
+        },
+        broker_logs: {
+          cloud_watch_logs: untyped,
+          firehose: untyped,
+          s3: untyped
         }
       },
       ?number_of_broker_nodes: Integer,
@@ -215,9 +316,13 @@ module Aws::Kafka
                   enabled: untyped
                 }
               }
-            }
+            },
+            network_type: String
           },
           zone_ids: untyped
+        },
+        rebalancing: {
+          status: String
         },
         client_authentication: {
           sasl: {
@@ -262,7 +367,7 @@ module Aws::Kafka
         },
         kafka_version: String,
         logging_info: {
-          broker_logs: {
+          authorizer_logs: {
             cloud_watch_logs: {
               enabled: untyped,
               log_group: untyped
@@ -276,6 +381,11 @@ module Aws::Kafka
               enabled: untyped,
               prefix: untyped
             }
+          },
+          broker_logs: {
+            cloud_watch_logs: untyped,
+            firehose: untyped,
+            s3: untyped
           }
         },
         number_of_broker_nodes: Integer,
@@ -326,9 +436,45 @@ module Aws::Kafka
           amazon_msk_cluster: {
             msk_cluster_arn: String
           },
+          apache_kafka_cluster: {
+            apache_kafka_cluster_id: untyped,
+            bootstrap_broker_string: untyped
+          },
           vpc_config: {
             security_group_ids: Array[String],
             subnet_ids: untyped
+          },
+          client_authentication: {
+            sasl_scram: {
+              mechanism: String,
+              secret_arn: untyped
+            },
+            mtls: {
+              secret_arn: untyped
+            },
+            sasl_o_auth_bearer: {
+              token_endpoint_url: untyped,
+              client_credentials: {
+                token_request_secret_arn: untyped
+              },
+              iam_jwt_bearer: {
+                audience: untyped,
+                signing_algorithm: String,
+                token_request_secret_arn: untyped
+              },
+              client_credentials_assertion: {
+                audience: untyped,
+                signing_algorithm: untyped,
+                token_request_secret_arn: untyped
+              },
+              token_endpoint_authentication_method: String,
+              scope: untyped,
+              token_endpoint_tls_certificate_arn: untyped
+            }
+          },
+          encryption_in_transit: {
+            encryption_type: String,
+            root_ca_certificate: untyped
           }
         }
       ],
@@ -338,11 +484,14 @@ module Aws::Kafka
             consumer_groups_to_exclude: Array[String],
             consumer_groups_to_replicate: untyped,
             detect_and_copy_new_consumer_groups: bool,
-            synchronise_consumer_group_offsets: untyped
+            synchronise_consumer_group_offsets: untyped,
+            consumer_group_offset_sync_mode: String
           },
           source_kafka_cluster_arn: String,
+          source_kafka_cluster_id: untyped,
           target_compression_type: String,
           target_kafka_cluster_arn: untyped,
+          target_kafka_cluster_id: untyped,
           topic_replication: {
             copy_access_control_lists_for_topics: untyped,
             copy_topic_configurations: untyped,
@@ -360,8 +509,39 @@ module Aws::Kafka
       ],
       ?replicator_name: String,
       ?service_execution_role_arn: String,
-      ?tags: Hash[String, String]
+      ?tags: Hash[String, String],
+      ?log_delivery: {
+        replicator_log_delivery: {
+          cloud_watch_logs: {
+            enabled: bool,
+            log_group: String
+          },
+          firehose: {
+            enabled: untyped,
+            delivery_stream: untyped
+          },
+          s3: {
+            enabled: untyped,
+            bucket: untyped,
+            prefix: untyped
+          }
+        }
+      }
     ) -> _CreateReplicatorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateReplicatorResponse
+
+    interface _CreateTopicResponse
+      include Smithy::Client::_Response[Types::CreateTopicResponse]
+      def topic_arn: () -> String?
+      def topic_name: () -> String?
+      def status: () -> String?
+    end
+    def create_topic: (
+      ?cluster_arn: String,
+      ?topic_name: String,
+      ?partition_count: Integer,
+      ?replication_factor: Integer,
+      ?configs: String
+    ) -> _CreateTopicResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTopicResponse
 
     interface _CreateVpcConnectionResponse
       include Smithy::Client::_Response[Types::CreateVpcConnectionResponse]
@@ -382,6 +562,16 @@ module Aws::Kafka
       ?security_groups: Array[String],
       ?tags: Hash[String, String]
     ) -> _CreateVpcConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateVpcConnectionResponse
+
+    interface _DeleteChannelResponse
+      include Smithy::Client::_Response[Types::DeleteChannelResponse]
+      def channel_arn: () -> String?
+      def cluster_operation_arn: () -> String?
+    end
+    def delete_channel: (
+      ?channel_arn: String,
+      ?cluster_arn: String
+    ) -> _DeleteChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteChannelResponse
 
     interface _DeleteClusterResponse
       include Smithy::Client::_Response[Types::DeleteClusterResponse]
@@ -419,6 +609,17 @@ module Aws::Kafka
       ?replicator_arn: String
     ) -> _DeleteReplicatorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteReplicatorResponse
 
+    interface _DeleteTopicResponse
+      include Smithy::Client::_Response[Types::DeleteTopicResponse]
+      def topic_arn: () -> String?
+      def topic_name: () -> String?
+      def status: () -> String?
+    end
+    def delete_topic: (
+      ?cluster_arn: String,
+      ?topic_name: String
+    ) -> _DeleteTopicResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTopicResponse
+
     interface _DeleteVpcConnectionResponse
       include Smithy::Client::_Response[Types::DeleteVpcConnectionResponse]
       def vpc_connection_arn: () -> String?
@@ -427,6 +628,27 @@ module Aws::Kafka
     def delete_vpc_connection: (
       ?arn: String
     ) -> _DeleteVpcConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteVpcConnectionResponse
+
+    interface _DescribeChannelResponse
+      include Smithy::Client::_Response[Types::DescribeChannelResponse]
+      def channel_arn: () -> String?
+      def channel_name: () -> String?
+      def encryption_configuration: () -> Types::EncryptionConfiguration?
+      def iceberg_destination_configuration: () -> Types::IcebergDestinationConfiguration?
+      def s3_destination_configuration: () -> Types::S3DestinationConfiguration?
+      def status: () -> String?
+      def destination_type: () -> String?
+      def creation_time: () -> Time?
+      def topic_configuration_list: () -> Array[Types::TopicConfiguration]?
+      def logging_info: () -> Types::ChannelLoggingInfo?
+      def state_info: () -> Types::ChannelStateInfo?
+      def cluster_operation_arn: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def describe_channel: (
+      ?channel_arn: String,
+      ?cluster_arn: String
+    ) -> _DescribeChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeChannelResponse
 
     interface _DescribeClusterResponse
       include Smithy::Client::_Response[Types::DescribeClusterResponse]
@@ -502,10 +724,37 @@ module Aws::Kafka
       def service_execution_role_arn: () -> String?
       def state_info: () -> Types::ReplicationStateInfo?
       def tags: () -> Hash[String, String]?
+      def log_delivery: () -> Types::LogDelivery?
     end
     def describe_replicator: (
       ?replicator_arn: String
     ) -> _DescribeReplicatorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeReplicatorResponse
+
+    interface _DescribeTopicResponse
+      include Smithy::Client::_Response[Types::DescribeTopicResponse]
+      def topic_arn: () -> String?
+      def topic_name: () -> String?
+      def replication_factor: () -> Integer?
+      def partition_count: () -> Integer?
+      def configs: () -> String?
+      def status: () -> String?
+    end
+    def describe_topic: (
+      ?cluster_arn: String,
+      ?topic_name: String
+    ) -> _DescribeTopicResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeTopicResponse
+
+    interface _DescribeTopicPartitionsResponse
+      include Smithy::Client::_Response[Types::DescribeTopicPartitionsResponse]
+      def partitions: () -> Array[Types::TopicPartitionInfo]?
+      def next_token: () -> String?
+    end
+    def describe_topic_partitions: (
+      ?cluster_arn: String,
+      ?topic_name: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeTopicPartitionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeTopicPartitionsResponse
 
     interface _DescribeVpcConnectionResponse
       include Smithy::Client::_Response[Types::DescribeVpcConnectionResponse]
@@ -535,6 +784,10 @@ module Aws::Kafka
       def bootstrap_broker_string_vpc_connectivity_tls: () -> String?
       def bootstrap_broker_string_vpc_connectivity_sasl_scram: () -> String?
       def bootstrap_broker_string_vpc_connectivity_sasl_iam: () -> String?
+      def bootstrap_broker_string_ipv6: () -> String?
+      def bootstrap_broker_string_tls_ipv6: () -> String?
+      def bootstrap_broker_string_sasl_scram_ipv6: () -> String?
+      def bootstrap_broker_string_sasl_iam_ipv6: () -> String?
     end
     def get_bootstrap_brokers: (
       ?cluster_arn: String
@@ -556,6 +809,18 @@ module Aws::Kafka
     def get_compatible_kafka_versions: (
       ?cluster_arn: String
     ) -> _GetCompatibleKafkaVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCompatibleKafkaVersionsResponse
+
+    interface _ListChannelsResponse
+      include Smithy::Client::_Response[Types::ListChannelsResponse]
+      def channels: () -> Array[Types::ChannelInfo]?
+      def next_token: () -> String?
+    end
+    def list_channels: (
+      ?cluster_arn: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?topic_name_filter: String
+    ) -> _ListChannelsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListChannelsResponse
 
     interface _ListClientVpcConnectionsResponse
       include Smithy::Client::_Response[Types::ListClientVpcConnectionsResponse]
@@ -685,6 +950,18 @@ module Aws::Kafka
       ?resource_arn: String
     ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
 
+    interface _ListTopicsResponse
+      include Smithy::Client::_Response[Types::ListTopicsResponse]
+      def topics: () -> Array[Types::TopicInfo]?
+      def next_token: () -> String?
+    end
+    def list_topics: (
+      ?cluster_arn: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?topic_name_filter: String
+    ) -> _ListTopicsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTopicsResponse
+
     interface _ListVpcConnectionsResponse
       include Smithy::Client::_Response[Types::ListVpcConnectionsResponse]
       def vpc_connections: () -> Array[Types::VpcConnection]?
@@ -781,6 +1058,22 @@ module Aws::Kafka
       ?target_instance_type: String
     ) -> _UpdateBrokerTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateBrokerTypeResponse
 
+    interface _UpdateChannelResponse
+      include Smithy::Client::_Response[Types::UpdateChannelResponse]
+      def channel_arn: () -> String?
+      def cluster_operation_arn: () -> String?
+    end
+    def update_channel: (
+      ?channel_arn: String,
+      ?cluster_arn: String,
+      ?iceberg_destination_update: {
+        data_freshness_in_seconds: Integer
+      },
+      ?s3_destination_update: {
+        data_freshness_in_seconds: Integer
+      }
+    ) -> _UpdateChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateChannelResponse
+
     interface _UpdateClusterConfigurationResponse
       include Smithy::Client::_Response[Types::UpdateClusterConfigurationResponse]
       def cluster_arn: () -> String?
@@ -846,9 +1139,13 @@ module Aws::Kafka
               enabled: untyped
             }
           }
-        }
+        },
+        network_type: String
       },
-      ?current_version: String
+      ?current_version: String,
+      ?zookeeper_access: {
+        enabled: bool
+      }
     ) -> _UpdateConnectivityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateConnectivityResponse
 
     interface _UpdateMonitoringResponse
@@ -871,7 +1168,7 @@ module Aws::Kafka
         }
       },
       ?logging_info: {
-        broker_logs: {
+        authorizer_logs: {
           cloud_watch_logs: {
             enabled: bool,
             log_group: String
@@ -885,9 +1182,27 @@ module Aws::Kafka
             enabled: untyped,
             prefix: untyped
           }
+        },
+        broker_logs: {
+          cloud_watch_logs: untyped,
+          firehose: untyped,
+          s3: untyped
         }
       }
     ) -> _UpdateMonitoringResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateMonitoringResponse
+
+    interface _UpdateRebalancingResponse
+      include Smithy::Client::_Response[Types::UpdateRebalancingResponse]
+      def cluster_arn: () -> String?
+      def cluster_operation_arn: () -> String?
+    end
+    def update_rebalancing: (
+      ?cluster_arn: String,
+      ?current_version: String,
+      ?rebalancing: {
+        status: String
+      }
+    ) -> _UpdateRebalancingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRebalancingResponse
 
     interface _UpdateReplicationInfoResponse
       include Smithy::Client::_Response[Types::UpdateReplicationInfoResponse]
@@ -904,13 +1219,32 @@ module Aws::Kafka
       ?current_version: String,
       ?replicator_arn: String,
       ?source_kafka_cluster_arn: String,
+      ?source_kafka_cluster_id: String,
       ?target_kafka_cluster_arn: String,
+      ?target_kafka_cluster_id: String,
       ?topic_replication: {
         copy_access_control_lists_for_topics: bool,
         copy_topic_configurations: untyped,
         detect_and_copy_new_topics: untyped,
         topics_to_exclude: Array[String],
         topics_to_replicate: untyped
+      },
+      ?log_delivery: {
+        replicator_log_delivery: {
+          cloud_watch_logs: {
+            enabled: bool,
+            log_group: String
+          },
+          firehose: {
+            enabled: untyped,
+            delivery_stream: untyped
+          },
+          s3: {
+            enabled: untyped,
+            bucket: untyped,
+            prefix: untyped
+          }
+        }
       }
     ) -> _UpdateReplicationInfoResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateReplicationInfoResponse
 
@@ -965,5 +1299,18 @@ module Aws::Kafka
       ?storage_mode: String,
       ?volume_size_gb: Integer
     ) -> _UpdateStorageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateStorageResponse
+
+    interface _UpdateTopicResponse
+      include Smithy::Client::_Response[Types::UpdateTopicResponse]
+      def topic_arn: () -> String?
+      def topic_name: () -> String?
+      def status: () -> String?
+    end
+    def update_topic: (
+      ?cluster_arn: String,
+      ?topic_name: String,
+      ?configs: String,
+      ?partition_count: Integer
+    ) -> _UpdateTopicResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateTopicResponse
   end
 end

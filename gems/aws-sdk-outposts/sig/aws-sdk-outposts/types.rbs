@@ -4,6 +4,7 @@ module Aws::Outposts
     module AWSServiceName
       AWS: String
       EC2: String
+      EKS: String
       ELASTICACHE: String
       ELB: String
       RDS: String
@@ -123,10 +124,15 @@ module Aws::Outposts
       ACTIVE: String
       RETIRING: String
       ISOLATED: String
+      INSTALLING: String
     end
 
     module AssetType
       COMPUTE: String
+      STORAGE: String
+      POWERSHELF: String
+      SWITCH: String
+      NETWORKING: String
     end
 
     class BlockingInstance
@@ -142,6 +148,16 @@ module Aws::Outposts
       attr_accessor instance_id: String?
       attr_accessor account_id: String?
       attr_accessor aws_service_name: String?
+    end
+
+    module BlockingResourceType
+      EC2_INSTANCE: String
+      OUTPOST_RAM_SHARE: String
+      LGW_ROUTING_DOMAIN: String
+      LGW_ROUTE_TABLE: String
+      LGW_VIRTUAL_INTERFACE_GROUP: String
+      OUTPOST_ORDER_CANCELLABLE: String
+      OUTPOST_ORDER_INTERVENTION_REQUIRED: String
     end
 
     class CancelCapacityTaskInput
@@ -184,6 +200,21 @@ module Aws::Outposts
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+    end
+
+    class CapacitySummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?existing_capacities: Array[Types::QuoteCapacity],
+        ?final_capacities: Array[Types::QuoteCapacity],
+        ?capacity_change: Array[Types::QuoteCapacity],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor existing_capacities: Array[Types::QuoteCapacity]?
+      attr_accessor final_capacities: Array[Types::QuoteCapacity]?
+      attr_accessor capacity_change: Array[Types::QuoteCapacity]?
     end
 
     class CapacityTaskFailure
@@ -253,6 +284,7 @@ module Aws::Outposts
         ?weight_lbs: Integer,
         ?supported_uplink_gbps: Array[Integer],
         ?supported_storage: Array[String],
+        ?rack_scaling_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -263,6 +295,7 @@ module Aws::Outposts
       attr_accessor weight_lbs: Integer?
       attr_accessor supported_uplink_gbps: Array[Integer]?
       attr_accessor supported_storage: Array[String]?
+      attr_accessor rack_scaling_type: String?
     end
 
     module CatalogItemClass
@@ -279,6 +312,7 @@ module Aws::Outposts
       ACTIVE: String
       ISOLATED: String
       RETIRING: String
+      INSTALLING: String
     end
 
     class ComputeAttributes
@@ -341,6 +375,8 @@ module Aws::Outposts
 
       def initialize: (
         ?outpost_identifier: String,
+        ?quote_identifier: String,
+        ?quote_option_identifier: String,
         ?line_items: Array[Types::LineItemRequest],
         ?payment_option: String,
         ?payment_term: String,
@@ -348,6 +384,8 @@ module Aws::Outposts
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor outpost_identifier: String?
+      attr_accessor quote_identifier: String?
+      attr_accessor quote_option_identifier: String?
       attr_accessor line_items: Array[Types::LineItemRequest]?
       attr_accessor payment_option: String?
       attr_accessor payment_term: String?
@@ -398,6 +436,104 @@ module Aws::Outposts
       attr_accessor outpost: Types::Outpost?
     end
 
+    class CreatePrivateConnectivityConfigInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?outpost_id: String,
+        ?vpc_information_list: Array[Types::VpcInformation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor outpost_id: String?
+      attr_accessor vpc_information_list: Array[Types::VpcInformation]?
+    end
+
+    class CreatePrivateConnectivityConfigOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?private_connectivity_config: Types::PrivateConnectivityConfig,
+        ?outpost_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor private_connectivity_config: Types::PrivateConnectivityConfig?
+      attr_accessor outpost_id: String?
+    end
+
+    class CreateQuoteInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?outpost_identifier: String,
+        ?country_code: String,
+        ?requested_capacities: Array[Types::QuoteCapacity],
+        ?requested_constraints: Array[Types::QuoteConstraint],
+        ?requested_payment_options: Array[String],
+        ?requested_payment_terms: Array[String],
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor outpost_identifier: String?
+      attr_accessor country_code: String?
+      attr_accessor requested_capacities: Array[Types::QuoteCapacity]?
+      attr_accessor requested_constraints: Array[Types::QuoteConstraint]?
+      attr_accessor requested_payment_options: Array[String]?
+      attr_accessor requested_payment_terms: Array[String]?
+      attr_accessor description: String?
+    end
+
+    class CreateQuoteOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?quote: Types::Quote,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor quote: Types::Quote?
+    end
+
+    class CreateRenewalInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?payment_option: String,
+        ?payment_term: String,
+        ?outpost_identifier: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor payment_option: String?
+      attr_accessor payment_term: String?
+      attr_accessor outpost_identifier: String?
+      attr_accessor client_token: String?
+    end
+
+    class CreateRenewalOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?payment_option: String,
+        ?payment_term: String,
+        ?outpost_id: String,
+        ?upfront_price: Float,
+        ?monthly_recurring_price: Float,
+        ?currency: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor payment_option: String?
+      attr_accessor payment_term: String?
+      attr_accessor outpost_id: String?
+      attr_accessor upfront_price: Float?
+      attr_accessor monthly_recurring_price: Float?
+      attr_accessor currency: String?
+    end
+
     class CreateSiteInput
       include Smithy::Schema::Structure
 
@@ -432,6 +568,16 @@ module Aws::Outposts
       attr_accessor site: Types::Site?
     end
 
+    module CurrencyCode
+      USD: String
+    end
+
+    module DecommissionRequestStatus
+      SKIPPED: String
+      BLOCKED: String
+      REQUESTED: String
+    end
+
     class DeleteOutpostInput
       include Smithy::Schema::Structure
 
@@ -444,6 +590,26 @@ module Aws::Outposts
     end
 
     class DeleteOutpostOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteQuoteInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?quote_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor quote_identifier: String?
+    end
+
+    class DeleteQuoteOutput
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -472,6 +638,25 @@ module Aws::Outposts
 
     end
 
+    class DetailedInstanceTypeItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_type: String,
+        ?vcp_us: Integer,
+        ?memory_in_mib: Integer,
+        ?network_performance: String,
+        ?form_factor_configs: Array[Types::FormFactorConfig],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_type: String?
+      attr_accessor vcp_us: Integer?
+      attr_accessor memory_in_mib: Integer?
+      attr_accessor network_performance: String?
+      attr_accessor form_factor_configs: Array[Types::FormFactorConfig]?
+    end
+
     class EC2Capacity
       include Smithy::Schema::Structure
 
@@ -490,6 +675,24 @@ module Aws::Outposts
     module FiberOpticCableType
       SINGLE_MODE: String
       MULTI_MODE: String
+    end
+
+    module FormFactor
+      RACK: String
+      SERVER: String
+    end
+
+    class FormFactorConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?form_factor: String,
+        ?outpost_generation: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor form_factor: String?
+      attr_accessor outpost_generation: String?
     end
 
     class GetCapacityTaskInput
@@ -630,12 +833,16 @@ module Aws::Outposts
         ?next_token: String,
         ?subscriptions: Array[Types::Subscription],
         ?contract_end_date: String,
+        ?payment_term: String,
+        ?payment_option: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor next_token: String?
       attr_accessor subscriptions: Array[Types::Subscription]?
       attr_accessor contract_end_date: String?
+      attr_accessor payment_term: String?
+      attr_accessor payment_option: String?
     end
 
     class GetOutpostInput
@@ -722,6 +929,74 @@ module Aws::Outposts
 
       attr_accessor instance_types: Array[Types::InstanceTypeItem]?
       attr_accessor next_token: String?
+    end
+
+    class GetPrivateConnectivityConfigInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?outpost_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor outpost_id: String?
+    end
+
+    class GetPrivateConnectivityConfigOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?private_connectivity_config: Types::PrivateConnectivityConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor private_connectivity_config: Types::PrivateConnectivityConfig?
+    end
+
+    class GetQuoteInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?quote_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor quote_identifier: String?
+    end
+
+    class GetQuoteOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?quote: Types::Quote,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor quote: Types::Quote?
+    end
+
+    class GetRenewalPricingInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?outpost_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor outpost_identifier: String?
+    end
+
+    class GetRenewalPricingOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pricing_result: String,
+        ?pricing_options: Array[Types::PricingOption],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pricing_result: String?
+      attr_accessor pricing_options: Array[Types::PricingOption]?
     end
 
     class GetSiteAddressInput
@@ -934,6 +1209,7 @@ module Aws::Outposts
         ?max_results: Integer,
         ?next_token: String,
         ?status_filter: Array[String],
+        ?asset_type_filter: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -942,6 +1218,7 @@ module Aws::Outposts
       attr_accessor max_results: Integer?
       attr_accessor next_token: String?
       attr_accessor status_filter: Array[String]?
+      attr_accessor asset_type_filter: Array[String]?
     end
 
     class ListAssetsOutput
@@ -1049,6 +1326,34 @@ module Aws::Outposts
       attr_accessor next_token: String?
     end
 
+    class ListOrderableInstanceTypesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?outpost_generation_filter: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor outpost_generation_filter: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListOrderableInstanceTypesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_types: Array[Types::DetailedInstanceTypeItem],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_types: Array[Types::DetailedInstanceTypeItem]?
+      attr_accessor next_token: String?
+    end
+
     class ListOrdersInput
       include Smithy::Schema::Structure
 
@@ -1106,6 +1411,32 @@ module Aws::Outposts
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor outposts: Array[Types::Outpost]?
+      attr_accessor next_token: String?
+    end
+
+    class ListQuotesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListQuotesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?quotes: Array[Types::QuoteSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor quotes: Array[Types::QuoteSummary]?
       attr_accessor next_token: String?
     end
 
@@ -1203,6 +1534,8 @@ module Aws::Outposts
 
       def initialize: (
         ?outpost_id: String,
+        ?quote_identifier: String,
+        ?quote_option_identifier: String,
         ?order_id: String,
         ?status: String,
         ?line_items: Array[Types::LineItem],
@@ -1215,6 +1548,8 @@ module Aws::Outposts
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor outpost_id: String?
+      attr_accessor quote_identifier: String?
+      attr_accessor quote_option_identifier: String?
       attr_accessor order_id: String?
       attr_accessor status: String?
       attr_accessor line_items: Array[Types::LineItem]?
@@ -1267,6 +1602,47 @@ module Aws::Outposts
       REPLACEMENT: String
     end
 
+    class OrderingRequirement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status_message: String,
+        ?ordering_requirement_type: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status_message: String?
+      attr_accessor ordering_requirement_type: String?
+      attr_accessor status: String?
+    end
+
+    module OrderingRequirementStatus
+      PASS: String
+      FAIL: String
+      EXEMPT: String
+    end
+
+    module OrderingRequirementType
+      OUTPOST_ACTIVE_CHECK_ERROR: String
+      MAXIMUM_ALLOWED_ORDERS_CHECK_ERROR: String
+      VALID_ZIP_CODE_CHECK_ERROR: String
+      RACK_PHYSICAL_PROPERTIES_CHECK_ERROR: String
+      OPERATING_ADDRESS_EXISTENCE_CHECK_ERROR: String
+      SHIPPING_ADDRESS_EXISTENCE_CHECK_ERROR: String
+      COUNTRY_CODE_MISMATCH_CHECK_ERROR: String
+      OUTPOST_GENERATION_MISMATCH_ERROR: String
+      UNSUPPORTED: String
+      OUTPOST_ID_MISSING_ON_QUOTE_ERROR: String
+      ENTERPRISE_SUPPORT_ERROR: String
+      SHIPPING_ADDRESS_MISSING_CONTACT_NAME_ERROR: String
+      SHIPPING_ADDRESS_MISSING_CONTACT_NUMBER_ERROR: String
+      SHIPPING_ADDRESS_MISSING_CONTACT_INFO_ERROR: String
+      OUTPOST_STATE_CHANGED_ERROR: String
+      OUTPOST_NOT_FOUND_ERROR: String
+      OUTPOST_RENEWAL_REQUIRED_ERROR: String
+    end
+
     class Outpost
       include Smithy::Schema::Structure
 
@@ -1283,6 +1659,8 @@ module Aws::Outposts
         ?tags: Hash[String, String],
         ?site_arn: String,
         ?supported_hardware_type: String,
+        ?generation: String,
+        ?rack_scaling_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1298,6 +1676,13 @@ module Aws::Outposts
       attr_accessor tags: Hash[String, String]?
       attr_accessor site_arn: String?
       attr_accessor supported_hardware_type: String?
+      attr_accessor generation: String?
+      attr_accessor rack_scaling_type: String?
+    end
+
+    module OutpostGeneration
+      GENERATION_2: String
+      GENERATION_1: String
     end
 
     module PaymentOption
@@ -1337,6 +1722,225 @@ module Aws::Outposts
       THREE_PHASE: String
     end
 
+    class PricingOption
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pricing_type: String,
+        ?subscription_pricing_details: Types::SubscriptionPricingDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pricing_type: String?
+      attr_accessor subscription_pricing_details: Types::SubscriptionPricingDetails?
+    end
+
+    module PricingResult
+      PRICED: String
+      UNABLE_TO_PRICE: String
+    end
+
+    class PrivateConnectivityConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role_arn: String,
+        ?private_connectivity_status: String,
+        ?vpc_information_list: Array[Types::VpcInformation],
+        ?provisioning_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role_arn: String?
+      attr_accessor private_connectivity_status: String?
+      attr_accessor vpc_information_list: Array[Types::VpcInformation]?
+      attr_accessor provisioning_role_arn: String?
+    end
+
+    module PrivateConnectivityStatus
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class Quote
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?quote_id: String,
+        ?account_id: String,
+        ?quote_status: String,
+        ?status_message: String,
+        ?outpost_arn: String,
+        ?country_code: String,
+        ?requested_capacities: Array[Types::QuoteCapacity],
+        ?requested_constraints: Array[Types::QuoteConstraint],
+        ?requested_payment_options: Array[String],
+        ?requested_payment_terms: Array[String],
+        ?quote_options: Array[Types::QuoteOption],
+        ?ordering_requirements: Array[Types::OrderingRequirement],
+        ?submitted_order_id: String,
+        ?created_date: Time,
+        ?expiration_date: Time,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor quote_id: String?
+      attr_accessor account_id: String?
+      attr_accessor quote_status: String?
+      attr_accessor status_message: String?
+      attr_accessor outpost_arn: String?
+      attr_accessor country_code: String?
+      attr_accessor requested_capacities: Array[Types::QuoteCapacity]?
+      attr_accessor requested_constraints: Array[Types::QuoteConstraint]?
+      attr_accessor requested_payment_options: Array[String]?
+      attr_accessor requested_payment_terms: Array[String]?
+      attr_accessor quote_options: Array[Types::QuoteOption]?
+      attr_accessor ordering_requirements: Array[Types::OrderingRequirement]?
+      attr_accessor submitted_order_id: String?
+      attr_accessor created_date: Time?
+      attr_accessor expiration_date: Time?
+      attr_accessor description: String?
+    end
+
+    class QuoteCapacity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?quote_capacity_type: String,
+        ?unit: String,
+        ?quantity: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor quote_capacity_type: String?
+      attr_accessor unit: String?
+      attr_accessor quantity: Float?
+    end
+
+    module QuoteCapacityType
+      EC2: String
+      EBS: String
+      S3: String
+    end
+
+    class QuoteConstraint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?quote_constraint_type: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor quote_constraint_type: String?
+      attr_accessor value: String?
+    end
+
+    module QuoteConstraintType
+      RACK_MAXIMUM: String
+      RACK_MAX_POWER_KVA: String
+      RACK_MAX_WEIGHT_LBS: String
+      RACK_SPACE_CONSTRAINED: String
+    end
+
+    class QuoteOption
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?quote_option_identifier: String,
+        ?capacities: Array[Types::QuoteCapacity],
+        ?capacity_summary: Types::CapacitySummary,
+        ?specifications: Array[Types::QuoteSpecification],
+        ?pricing_options: Array[Types::PricingOption],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor quote_option_identifier: String?
+      attr_accessor capacities: Array[Types::QuoteCapacity]?
+      attr_accessor capacity_summary: Types::CapacitySummary?
+      attr_accessor specifications: Array[Types::QuoteSpecification]?
+      attr_accessor pricing_options: Array[Types::PricingOption]?
+    end
+
+    module QuotePricingType
+      SUBSCRIPTION: String
+    end
+
+    module QuoteRackUseType
+      NETWORKING: String
+      COMPUTE: String
+    end
+
+    class QuoteSpecification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?quote_specification_type: String,
+        ?existing_rack_specification_details: Types::RackSpecificationDetails,
+        ?final_rack_specification_details: Types::RackSpecificationDetails,
+        ?server_specification_details: Types::ServerSpecificationDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor quote_specification_type: String?
+      attr_accessor existing_rack_specification_details: Types::RackSpecificationDetails?
+      attr_accessor final_rack_specification_details: Types::RackSpecificationDetails?
+      attr_accessor server_specification_details: Types::ServerSpecificationDetails?
+    end
+
+    module QuoteSpecificationType
+      UPDATED_RACK: String
+      NEW_RACK: String
+      EXISTING_RACK: String
+      SERVER: String
+    end
+
+    module QuoteStatus
+      CREATED: String
+      ORDER_SUBMITTED: String
+      EXPIRED: String
+    end
+
+    class QuoteSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?quote_id: String,
+        ?account_id: String,
+        ?quote_status: String,
+        ?status_message: String,
+        ?outpost_arn: String,
+        ?country_code: String,
+        ?requested_capacities: Array[Types::QuoteCapacity],
+        ?requested_constraints: Array[Types::QuoteConstraint],
+        ?requested_payment_options: Array[String],
+        ?requested_payment_terms: Array[String],
+        ?quote_options: Array[Types::QuoteOption],
+        ?submitted_order_id: String,
+        ?created_date: Time,
+        ?expiration_date: Time,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor quote_id: String?
+      attr_accessor account_id: String?
+      attr_accessor quote_status: String?
+      attr_accessor status_message: String?
+      attr_accessor outpost_arn: String?
+      attr_accessor country_code: String?
+      attr_accessor requested_capacities: Array[Types::QuoteCapacity]?
+      attr_accessor requested_constraints: Array[Types::QuoteConstraint]?
+      attr_accessor requested_payment_options: Array[String]?
+      attr_accessor requested_payment_terms: Array[String]?
+      attr_accessor quote_options: Array[Types::QuoteOption]?
+      attr_accessor submitted_order_id: String?
+      attr_accessor created_date: Time?
+      attr_accessor expiration_date: Time?
+      attr_accessor description: String?
+    end
+
     class RackPhysicalProperties
       include Smithy::Schema::Structure
 
@@ -1364,9 +1968,70 @@ module Aws::Outposts
       attr_accessor maximum_supported_weight_lbs: String?
     end
 
+    module RackScalingType
+      SINGLE_RACK: String
+      MULTI_RACK: String
+    end
+
+    class RackSpecificationDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rack_id: String,
+        ?rack_use: String,
+        ?rack_power_draw_kva: Float,
+        ?rack_weight_lbs: Float,
+        ?rack_height_inches: Float,
+        ?rack_width_inches: Float,
+        ?rack_depth_inches: Float,
+        ?rack_unit_height: String,
+        ?ec2_capacities: Array[Types::EC2Capacity],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rack_id: String?
+      attr_accessor rack_use: String?
+      attr_accessor rack_power_draw_kva: Float?
+      attr_accessor rack_weight_lbs: Float?
+      attr_accessor rack_height_inches: Float?
+      attr_accessor rack_width_inches: Float?
+      attr_accessor rack_depth_inches: Float?
+      attr_accessor rack_unit_height: String?
+      attr_accessor ec2_capacities: Array[Types::EC2Capacity]?
+    end
+
+    module RackUnitHeight
+      HEIGHT_42U: String
+      HEIGHT_2U: String
+      HEIGHT_1U: String
+    end
+
     module ResourceType
       OUTPOST: String
       ORDER: String
+    end
+
+    class ServerSpecificationDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?server_power_draw_kva: Float,
+        ?server_weight_lbs: Float,
+        ?server_height_inches: Float,
+        ?server_width_inches: Float,
+        ?server_depth_inches: Float,
+        ?rack_unit_height: String,
+        ?ec2_capacities: Array[Types::EC2Capacity],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor server_power_draw_kva: Float?
+      attr_accessor server_weight_lbs: Float?
+      attr_accessor server_height_inches: Float?
+      attr_accessor server_width_inches: Float?
+      attr_accessor server_depth_inches: Float?
+      attr_accessor rack_unit_height: String?
+      attr_accessor ec2_capacities: Array[Types::EC2Capacity]?
     end
 
     class ServiceQuotaExceededException
@@ -1520,6 +2185,32 @@ module Aws::Outposts
       attr_accessor underlay_ip_address: String?
     end
 
+    class StartOutpostDecommissionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?outpost_identifier: String,
+        ?validate_only: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor outpost_identifier: String?
+      attr_accessor validate_only: bool?
+    end
+
+    class StartOutpostDecommissionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?blocking_resource_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor blocking_resource_types: Array[String]?
+    end
+
     class Subscription
       include Smithy::Schema::Structure
 
@@ -1530,6 +2221,7 @@ module Aws::Outposts
         ?order_ids: Array[String],
         ?begin_date: Time,
         ?end_date: Time,
+        ?currency: String,
         ?monthly_recurring_price: Float,
         ?upfront_price: Float,
       ) -> void
@@ -1541,12 +2233,33 @@ module Aws::Outposts
       attr_accessor order_ids: Array[String]?
       attr_accessor begin_date: Time?
       attr_accessor end_date: Time?
+      attr_accessor currency: String?
       attr_accessor monthly_recurring_price: Float?
       attr_accessor upfront_price: Float?
     end
 
+    class SubscriptionPricingDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?payment_option: String,
+        ?payment_term: String,
+        ?upfront_price: Float,
+        ?monthly_recurring_price: Float,
+        ?currency: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor payment_option: String?
+      attr_accessor payment_term: String?
+      attr_accessor upfront_price: Float?
+      attr_accessor monthly_recurring_price: Float?
+      attr_accessor currency: String?
+    end
+
     module SubscriptionStatus
       ACTIVE: String
+      PENDING: String
       INACTIVE: String
       CANCELLED: String
     end
@@ -1642,6 +2355,42 @@ module Aws::Outposts
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor outpost: Types::Outpost?
+    end
+
+    class UpdateQuoteInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?quote_identifier: String,
+        ?outpost_identifier: String,
+        ?country_code: String,
+        ?requested_capacities: Array[Types::QuoteCapacity],
+        ?requested_constraints: Array[Types::QuoteConstraint],
+        ?requested_payment_options: Array[String],
+        ?requested_payment_terms: Array[String],
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor quote_identifier: String?
+      attr_accessor outpost_identifier: String?
+      attr_accessor country_code: String?
+      attr_accessor requested_capacities: Array[Types::QuoteCapacity]?
+      attr_accessor requested_constraints: Array[Types::QuoteConstraint]?
+      attr_accessor requested_payment_options: Array[String]?
+      attr_accessor requested_payment_terms: Array[String]?
+      attr_accessor description: String?
+    end
+
+    class UpdateQuoteOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?quote: Types::Quote,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor quote: Types::Quote?
     end
 
     class UpdateSiteAddressInput
@@ -1769,6 +2518,21 @@ module Aws::Outposts
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    class VpcInformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_id: String,
+        ?subnet_ids: Array[String],
+        ?vpc_endpoint_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_id: String?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor vpc_endpoint_id: String?
     end
   end
 end

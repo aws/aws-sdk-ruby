@@ -20,41 +20,116 @@ module Aws::ECR
       end
       if Smithy::Client::EndpointRules.set?(parameters.region)
         if (partition_result = Aws::Core::EndpointRules.partition(parameters.region))
+          if Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws") && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, false) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, false)
+            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://api.ecr.#{parameters.region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
+          end
+          if Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws") && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, false) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, true)
+            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://ecr.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
+          end
+          if Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws") && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, true) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, false)
+            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://api.ecr-fips.#{parameters.region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
+          end
+          if Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws") && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, true) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, true)
+            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://ecr-fips.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
+          end
+          if Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws-us-gov") && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, false) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, false)
+            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://api.ecr.#{parameters.region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
+          end
+          if Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws-us-gov") && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, false) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, true)
+            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://ecr.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
+          end
+          if Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws-us-gov") && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, true) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, false)
+            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://api.ecr-fips.#{parameters.region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
+          end
+          if Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws-us-gov") && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, true) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, true)
+            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://ecr-fips.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
+          end
+          if Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws-cn") && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, false) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, false)
+            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://api.ecr.#{parameters.region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
+          end
+          if Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws-cn") && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, false) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, true)
+            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://ecr.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
+          end
+          if Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws-cn") && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, true) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, false)
+            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://api.ecr-fips.#{parameters.region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
+          end
+          if Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws-cn") && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, true) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, true)
+            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://ecr-fips.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
+          end
+          if Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws-iso") && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, false) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, false)
+            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://api.ecr.#{parameters.region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
+          end
+          if Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws-iso") && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, false) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, true)
+            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://ecr.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
+          end
+          if Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws-iso") && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, true) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, false)
+            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://api.ecr-fips.#{parameters.region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
+          end
+          if Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws-iso") && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, true) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, true)
+            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://ecr-fips.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
+          end
+          if Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws-iso-b") && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, false) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, false)
+            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://api.ecr.#{parameters.region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
+          end
+          if Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws-iso-b") && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, false) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, true)
+            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://ecr.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
+          end
+          if Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws-iso-b") && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, true) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, false)
+            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://api.ecr-fips.#{parameters.region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
+          end
+          if Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws-iso-b") && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, true) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, true)
+            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://ecr-fips.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
+          end
+          if Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws-iso-e") && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, false) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, false)
+            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://api.ecr.#{parameters.region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
+          end
+          if Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws-iso-e") && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, false) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, true)
+            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://ecr.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
+          end
+          if Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws-iso-e") && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, true) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, false)
+            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://api.ecr-fips.#{parameters.region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
+          end
+          if Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws-iso-e") && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, true) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, true)
+            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://ecr-fips.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
+          end
+          if Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws-iso-f") && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, false) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, false)
+            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://api.ecr.#{parameters.region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
+          end
+          if Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws-iso-f") && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, false) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, true)
+            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://ecr.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
+          end
+          if Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws-iso-f") && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, true) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, false)
+            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://api.ecr-fips.#{parameters.region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
+          end
+          if Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws-iso-f") && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, true) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, true)
+            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://ecr-fips.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
+          end
+          if Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws-eusc") && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, false) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, false)
+            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://api.ecr.#{parameters.region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
+          end
+          if Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws-eusc") && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, false) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, true)
+            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://ecr.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
+          end
+          if Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws-eusc") && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, true) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, false)
+            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://api.ecr-fips.#{parameters.region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
+          end
+          if Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws-eusc") && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, true) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, true)
+            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://ecr-fips.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
+          end
           if Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, true) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, true)
             if Smithy::Client::EndpointRules.boolean_equals?(true, Smithy::Client::EndpointRules.attr(partition_result, "supportsFIPS")) && Smithy::Client::EndpointRules.boolean_equals?(true, Smithy::Client::EndpointRules.attr(partition_result, "supportsDualStack"))
-              if Smithy::Client::EndpointRules.string_equals?("aws", Smithy::Client::EndpointRules.attr(partition_result, "name"))
-                return Smithy::Client::EndpointRules::Endpoint.new(url: "https://ecr-fips.#{parameters.region}.api.aws", headers: {}, properties: {})
-              end
-              if Smithy::Client::EndpointRules.string_equals?("aws-us-gov", Smithy::Client::EndpointRules.attr(partition_result, "name"))
-                return Smithy::Client::EndpointRules::Endpoint.new(url: "https://ecr-fips.#{parameters.region}.api.aws", headers: {}, properties: {})
-              end
               return Smithy::Client::EndpointRules::Endpoint.new(url: "https://api.ecr-fips.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
             end
             raise ArgumentError, "FIPS and DualStack are enabled, but this partition does not support one or both"
           end
-          if Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, true)
+          if Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, true) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, false)
             if Smithy::Client::EndpointRules.boolean_equals?(Smithy::Client::EndpointRules.attr(partition_result, "supportsFIPS"), true)
-              if Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws")
-                return Smithy::Client::EndpointRules::Endpoint.new(url: "https://ecr-fips.#{parameters.region}.amazonaws.com", headers: {}, properties: {})
-              end
-              if Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws-us-gov")
-                return Smithy::Client::EndpointRules::Endpoint.new(url: "https://ecr-fips.#{parameters.region}.amazonaws.com", headers: {}, properties: {})
-              end
               return Smithy::Client::EndpointRules::Endpoint.new(url: "https://api.ecr-fips.#{parameters.region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
             end
             raise ArgumentError, "FIPS is enabled but this partition does not support FIPS"
           end
-          if Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, true)
+          if Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, false) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, true)
             if Smithy::Client::EndpointRules.boolean_equals?(true, Smithy::Client::EndpointRules.attr(partition_result, "supportsDualStack"))
-              if Smithy::Client::EndpointRules.string_equals?("aws", Smithy::Client::EndpointRules.attr(partition_result, "name"))
-                return Smithy::Client::EndpointRules::Endpoint.new(url: "https://ecr.#{parameters.region}.api.aws", headers: {}, properties: {})
-              end
-              if Smithy::Client::EndpointRules.string_equals?("aws-cn", Smithy::Client::EndpointRules.attr(partition_result, "name"))
-                return Smithy::Client::EndpointRules::Endpoint.new(url: "https://ecr.#{parameters.region}.api.amazonwebservices.com.cn", headers: {}, properties: {})
-              end
-              if Smithy::Client::EndpointRules.string_equals?("aws-us-gov", Smithy::Client::EndpointRules.attr(partition_result, "name"))
-                return Smithy::Client::EndpointRules::Endpoint.new(url: "https://ecr.#{parameters.region}.api.aws", headers: {}, properties: {})
-              end
               return Smithy::Client::EndpointRules::Endpoint.new(url: "https://api.ecr.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
             end
             raise ArgumentError, "DualStack is enabled but this partition does not support DualStack"

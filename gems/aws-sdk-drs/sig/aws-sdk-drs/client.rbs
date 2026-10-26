@@ -53,6 +53,14 @@ module Aws::Drs
       ?cfn_stack_name: String
     ) -> _AssociateSourceNetworkStackResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateSourceNetworkStackResponse
 
+    interface _CancelRecoveryPlanExecutionResponse
+      include Smithy::Client::_Response[Types::CancelRecoveryPlanExecutionResponse]
+      def recovery_plan_execution: () -> Types::RecoveryPlanExecution?
+    end
+    def cancel_recovery_plan_execution: (
+      ?recovery_plan_execution_arn: String
+    ) -> _CancelRecoveryPlanExecutionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelRecoveryPlanExecutionResponse
+
     interface _CreateExtendedSourceServerResponse
       include Smithy::Client::_Response[Types::CreateExtendedSourceServerOutput]
       def source_server: () -> Types::SourceServer?
@@ -77,8 +85,44 @@ module Aws::Drs
       },
       ?export_bucket_arn: String,
       ?post_launch_enabled: bool,
-      ?launch_into_source_instance: bool
+      ?launch_into_source_instance: bool,
+      ?recovery_mode: String
     ) -> _CreateLaunchConfigurationTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLaunchConfigurationTemplateResponse
+
+    interface _CreateRecoveryPlanResponse
+      include Smithy::Client::_Response[Types::CreateRecoveryPlanResponse]
+      def recovery_plan: () -> Types::RecoveryPlan?
+    end
+    def create_recovery_plan: (
+      ?name: String,
+      ?description: String,
+      ?client_token: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateRecoveryPlanResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRecoveryPlanResponse
+
+    interface _CreateRecoveryPlanStepResponse
+      include Smithy::Client::_Response[Types::CreateRecoveryPlanStepResponse]
+      def recovery_plan_step: () -> Types::RecoveryPlanStep?
+    end
+    def create_recovery_plan_step: (
+      ?recovery_plan_arn: String,
+      ?step_name: String,
+      ?step_order: Integer,
+      ?configuration: {
+        server_step_configuration: {
+          servers: Array[
+            {
+              server_arn: String,
+              impact_level: String
+            }
+          ]
+        },
+        wait_step_configuration: {
+          wait_duration_minutes: Integer
+        }
+      },
+      ?client_token: String
+    ) -> _CreateRecoveryPlanStepResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRecoveryPlanStepResponse
 
     interface _CreateReplicationConfigurationTemplateResponse
       include Smithy::Client::_Response[Types::CreateReplicationConfigurationTemplateOutput]
@@ -99,6 +143,7 @@ module Aws::Drs
       def tags: () -> Hash[String, String]?
       def pit_policy: () -> Array[Types::PITPolicyRule]?
       def auto_replicate_new_disks: () -> bool?
+      def internet_protocol: () -> String?
     end
     def create_replication_configuration_template: (
       ?staging_area_subnet_id: String,
@@ -123,7 +168,8 @@ module Aws::Drs
         }
       ],
       ?tags: Hash[String, String],
-      ?auto_replicate_new_disks: bool
+      ?auto_replicate_new_disks: bool,
+      ?internet_protocol: String
     ) -> _CreateReplicationConfigurationTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateReplicationConfigurationTemplateResponse
 
     interface _CreateSourceNetworkResponse
@@ -165,6 +211,30 @@ module Aws::Drs
     def delete_recovery_instance: (
       ?recovery_instance_id: String
     ) -> _DeleteRecoveryInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRecoveryInstanceResponse
+
+    interface _DeleteRecoveryPlanResponse
+      include Smithy::Client::_Response[Types::DeleteRecoveryPlanResponse]
+      def recovery_plan_arn: () -> String?
+    end
+    def delete_recovery_plan: (
+      ?recovery_plan_arn: String
+    ) -> _DeleteRecoveryPlanResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRecoveryPlanResponse
+
+    interface _DeleteRecoveryPlanExecutionResponse
+      include Smithy::Client::_Response[Types::DeleteRecoveryPlanExecutionResponse]
+      def recovery_plan_execution_arn: () -> String?
+    end
+    def delete_recovery_plan_execution: (
+      ?recovery_plan_execution_arn: String
+    ) -> _DeleteRecoveryPlanExecutionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRecoveryPlanExecutionResponse
+
+    interface _DeleteRecoveryPlanStepResponse
+      include Smithy::Client::_Response[Types::DeleteRecoveryPlanStepResponse]
+      def recovery_plan_step_arn: () -> String?
+    end
+    def delete_recovery_plan_step: (
+      ?recovery_plan_step_arn: String
+    ) -> _DeleteRecoveryPlanStepResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRecoveryPlanStepResponse
 
     interface _DeleteReplicationConfigurationTemplateResponse
       include Smithy::Client::_Response[Types::DeleteReplicationConfigurationTemplateOutput]
@@ -337,6 +407,7 @@ module Aws::Drs
       def name: () -> String?
       def bandwidth_throttling: () -> Integer?
       def use_private_ip: () -> bool?
+      def internet_protocol: () -> String?
     end
     def get_failback_replication_configuration: (
       ?recovery_instance_id: String
@@ -354,10 +425,43 @@ module Aws::Drs
       def licensing: () -> Types::Licensing?
       def post_launch_enabled: () -> bool?
       def launch_into_instance_properties: () -> Types::LaunchIntoInstanceProperties?
+      def recovery_mode: () -> String?
     end
     def get_launch_configuration: (
       ?source_server_id: String
     ) -> _GetLaunchConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLaunchConfigurationResponse
+
+    interface _GetRecoveryPlanResponse
+      include Smithy::Client::_Response[Types::GetRecoveryPlanResponse]
+      def recovery_plan: () -> Types::RecoveryPlan?
+    end
+    def get_recovery_plan: (
+      ?recovery_plan_arn: String
+    ) -> _GetRecoveryPlanResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRecoveryPlanResponse
+
+    interface _GetRecoveryPlanExecutionResponse
+      include Smithy::Client::_Response[Types::GetRecoveryPlanExecutionResponse]
+      def recovery_plan_execution: () -> Types::RecoveryPlanExecution?
+    end
+    def get_recovery_plan_execution: (
+      ?recovery_plan_execution_arn: String
+    ) -> _GetRecoveryPlanExecutionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRecoveryPlanExecutionResponse
+
+    interface _GetRecoveryPlanExecutionStepResponse
+      include Smithy::Client::_Response[Types::GetRecoveryPlanExecutionStepResponse]
+      def recovery_plan_execution_step: () -> Types::RecoveryPlanExecutionStep?
+    end
+    def get_recovery_plan_execution_step: (
+      ?recovery_plan_execution_step_arn: String
+    ) -> _GetRecoveryPlanExecutionStepResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRecoveryPlanExecutionStepResponse
+
+    interface _GetRecoveryPlanStepResponse
+      include Smithy::Client::_Response[Types::GetRecoveryPlanStepResponse]
+      def recovery_plan_step: () -> Types::RecoveryPlanStep?
+    end
+    def get_recovery_plan_step: (
+      ?recovery_plan_step_arn: String
+    ) -> _GetRecoveryPlanStepResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRecoveryPlanStepResponse
 
     interface _GetReplicationConfigurationResponse
       include Smithy::Client::_Response[Types::GetReplicationConfigurationOutput]
@@ -378,6 +482,7 @@ module Aws::Drs
       def staging_area_tags: () -> Hash[String, String]?
       def pit_policy: () -> Array[Types::PITPolicyRule]?
       def auto_replicate_new_disks: () -> bool?
+      def internet_protocol: () -> String?
     end
     def get_replication_configuration: (
       ?source_server_id: String
@@ -412,6 +517,53 @@ module Aws::Drs
       ?max_results: Integer,
       ?next_token: String
     ) -> _ListLaunchActionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListLaunchActionsResponse
+
+    interface _ListRecoveryPlanExecutionStepsResponse
+      include Smithy::Client::_Response[Types::ListRecoveryPlanExecutionStepsResponse]
+      def recovery_plan_execution_steps: () -> Array[Types::RecoveryPlanExecutionStepSummary]?
+      def next_token: () -> String?
+    end
+    def list_recovery_plan_execution_steps: (
+      ?recovery_plan_execution_arn: String,
+      ?filter: {
+        status: String
+      },
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListRecoveryPlanExecutionStepsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRecoveryPlanExecutionStepsResponse
+
+    interface _ListRecoveryPlanExecutionsResponse
+      include Smithy::Client::_Response[Types::ListRecoveryPlanExecutionsResponse]
+      def recovery_plan_executions: () -> Array[Types::RecoveryPlanExecutionSummary]?
+      def next_token: () -> String?
+    end
+    def list_recovery_plan_executions: (
+      ?recovery_plan_arn: String,
+      ?status: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListRecoveryPlanExecutionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRecoveryPlanExecutionsResponse
+
+    interface _ListRecoveryPlanStepsResponse
+      include Smithy::Client::_Response[Types::ListRecoveryPlanStepsResponse]
+      def recovery_plan_steps: () -> Array[Types::RecoveryPlanStep]?
+      def next_token: () -> String?
+    end
+    def list_recovery_plan_steps: (
+      ?recovery_plan_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListRecoveryPlanStepsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRecoveryPlanStepsResponse
+
+    interface _ListRecoveryPlansResponse
+      include Smithy::Client::_Response[Types::ListRecoveryPlansResponse]
+      def recovery_plans: () -> Array[Types::RecoveryPlanSummary]?
+      def next_token: () -> String?
+    end
+    def list_recovery_plans: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListRecoveryPlansResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRecoveryPlansResponse
 
     interface _ListStagingAccountsResponse
       include Smithy::Client::_Response[Types::ListStagingAccountsOutput]
@@ -465,6 +617,15 @@ module Aws::Drs
       ?description: String
     ) -> _PutLaunchActionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutLaunchActionResponse
 
+    interface _ReorderRecoveryPlanStepsResponse
+      include Smithy::Client::_Response[Types::ReorderRecoveryPlanStepsResponse]
+      def recovery_plan_steps: () -> Array[Types::RecoveryPlanStep]?
+    end
+    def reorder_recovery_plan_steps: (
+      ?recovery_plan_arn: String,
+      ?ordered_step_arns: Array[String]
+    ) -> _ReorderRecoveryPlanStepsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ReorderRecoveryPlanStepsResponse
+
     interface _RetryDataReplicationResponse
       include Smithy::Client::_Response[Types::RetryDataReplicationOutput]
       def source_server_id: () -> String?
@@ -485,6 +646,14 @@ module Aws::Drs
     def retry_data_replication: (
       ?source_server_id: String
     ) -> _RetryDataReplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RetryDataReplicationResponse
+
+    interface _RetryRecoveryPlanExecutionStepResponse
+      include Smithy::Client::_Response[Types::RetryRecoveryPlanExecutionStepResponse]
+      def recovery_plan_execution_step: () -> Types::RecoveryPlanExecutionStep?
+    end
+    def retry_recovery_plan_execution_step: (
+      ?recovery_plan_execution_step_arn: String
+    ) -> _RetryRecoveryPlanExecutionStepResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RetryRecoveryPlanExecutionStepResponse
 
     interface _ReverseReplicationResponse
       include Smithy::Client::_Response[Types::ReverseReplicationOutput]
@@ -517,6 +686,23 @@ module Aws::Drs
       ?is_drill: bool,
       ?tags: Hash[String, String]
     ) -> _StartRecoveryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartRecoveryResponse
+
+    interface _StartRecoveryPlanExecutionResponse
+      include Smithy::Client::_Response[Types::StartRecoveryPlanExecutionResponse]
+      def recovery_plan_execution: () -> Types::RecoveryPlanExecution?
+    end
+    def start_recovery_plan_execution: (
+      ?recovery_plan_arn: String,
+      ?mode: String,
+      ?client_token: String,
+      ?source_servers: Array[
+        {
+          source_server_id: String,
+          recovery_snapshot_id: String
+        }
+      ],
+      ?tags: Hash[String, String]
+    ) -> _StartRecoveryPlanExecutionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartRecoveryPlanExecutionResponse
 
     interface _StartReplicationResponse
       include Smithy::Client::_Response[Types::StartReplicationOutput]
@@ -603,7 +789,8 @@ module Aws::Drs
       ?recovery_instance_id: String,
       ?name: String,
       ?bandwidth_throttling: Integer,
-      ?use_private_ip: bool
+      ?use_private_ip: bool,
+      ?internet_protocol: String
     ) -> _UpdateFailbackReplicationConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFailbackReplicationConfigurationResponse
 
     interface _UpdateLaunchConfigurationResponse
@@ -618,6 +805,7 @@ module Aws::Drs
       def licensing: () -> Types::Licensing?
       def post_launch_enabled: () -> bool?
       def launch_into_instance_properties: () -> Types::LaunchIntoInstanceProperties?
+      def recovery_mode: () -> String?
     end
     def update_launch_configuration: (
       ?source_server_id: String,
@@ -632,7 +820,8 @@ module Aws::Drs
       ?post_launch_enabled: bool,
       ?launch_into_instance_properties: {
         launch_into_ec2_instance_id: String
-      }
+      },
+      ?recovery_mode: String
     ) -> _UpdateLaunchConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateLaunchConfigurationResponse
 
     interface _UpdateLaunchConfigurationTemplateResponse
@@ -650,8 +839,57 @@ module Aws::Drs
       },
       ?export_bucket_arn: String,
       ?post_launch_enabled: bool,
-      ?launch_into_source_instance: bool
+      ?launch_into_source_instance: bool,
+      ?recovery_mode: String
     ) -> _UpdateLaunchConfigurationTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateLaunchConfigurationTemplateResponse
+
+    interface _UpdateRecoveryPlanResponse
+      include Smithy::Client::_Response[Types::UpdateRecoveryPlanResponse]
+      def recovery_plan: () -> Types::RecoveryPlan?
+    end
+    def update_recovery_plan: (
+      ?recovery_plan_arn: String,
+      ?name: String,
+      ?description: String
+    ) -> _UpdateRecoveryPlanResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRecoveryPlanResponse
+
+    interface _UpdateRecoveryPlanExecutionStepResponse
+      include Smithy::Client::_Response[Types::UpdateRecoveryPlanExecutionStepResponse]
+      def recovery_plan_execution_step: () -> Types::RecoveryPlanExecutionStep?
+    end
+    def update_recovery_plan_execution_step: (
+      ?recovery_plan_execution_step_arn: String,
+      ?status: String,
+      ?servers: Array[
+        {
+          server_arn: String,
+          impact_level: String
+        }
+      ],
+      ?wait_duration_minutes: Integer
+    ) -> _UpdateRecoveryPlanExecutionStepResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRecoveryPlanExecutionStepResponse
+
+    interface _UpdateRecoveryPlanStepResponse
+      include Smithy::Client::_Response[Types::UpdateRecoveryPlanStepResponse]
+      def recovery_plan_step: () -> Types::RecoveryPlanStep?
+    end
+    def update_recovery_plan_step: (
+      ?recovery_plan_step_arn: String,
+      ?step_name: String,
+      ?configuration: {
+        server_step_configuration: {
+          servers: Array[
+            {
+              server_arn: String,
+              impact_level: String
+            }
+          ]
+        },
+        wait_step_configuration: {
+          wait_duration_minutes: Integer
+        }
+      }
+    ) -> _UpdateRecoveryPlanStepResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRecoveryPlanStepResponse
 
     interface _UpdateReplicationConfigurationResponse
       include Smithy::Client::_Response[Types::UpdateReplicationConfigurationOutput]
@@ -672,6 +910,7 @@ module Aws::Drs
       def staging_area_tags: () -> Hash[String, String]?
       def pit_policy: () -> Array[Types::PITPolicyRule]?
       def auto_replicate_new_disks: () -> bool?
+      def internet_protocol: () -> String?
     end
     def update_replication_configuration: (
       ?source_server_id: String,
@@ -707,7 +946,8 @@ module Aws::Drs
           enabled: bool
         }
       ],
-      ?auto_replicate_new_disks: bool
+      ?auto_replicate_new_disks: bool,
+      ?internet_protocol: String
     ) -> _UpdateReplicationConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateReplicationConfigurationResponse
 
     interface _UpdateReplicationConfigurationTemplateResponse
@@ -729,6 +969,7 @@ module Aws::Drs
       def tags: () -> Hash[String, String]?
       def pit_policy: () -> Array[Types::PITPolicyRule]?
       def auto_replicate_new_disks: () -> bool?
+      def internet_protocol: () -> String?
     end
     def update_replication_configuration_template: (
       ?replication_configuration_template_id: String,
@@ -754,7 +995,8 @@ module Aws::Drs
           enabled: bool
         }
       ],
-      ?auto_replicate_new_disks: bool
+      ?auto_replicate_new_disks: bool,
+      ?internet_protocol: String
     ) -> _UpdateReplicationConfigurationTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateReplicationConfigurationTemplateResponse
   end
 end

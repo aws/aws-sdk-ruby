@@ -15,7 +15,10 @@ module Aws::Drs
     AwsRegion: StringShape
     BoundedString: StringShape
     CPU: StructureShape
+    CancelRecoveryPlanExecutionRequest: StructureShape
+    CancelRecoveryPlanExecutionResponse: StructureShape
     CfnStackName: StringShape
+    ClientIdempotencyToken: StringShape
     ConflictException: StructureShape
     ConversionMap: MapShape
     ConversionProperties: StructureShape
@@ -24,8 +27,12 @@ module Aws::Drs
     CreateExtendedSourceServerOutput: StructureShape
     CreateLaunchConfigurationTemplateInput: StructureShape
     CreateLaunchConfigurationTemplateOutput: StructureShape
-    CreateReplicationConfigurationTemplateInput: StructureShape
+    CreateRecoveryPlanRequest: StructureShape
+    CreateRecoveryPlanResponse: StructureShape
+    CreateRecoveryPlanStepRequest: StructureShape
+    CreateRecoveryPlanStepResponse: StructureShape
     CreateReplicationConfigurationTemplateOutput: StructureShape
+    CreateReplicationConfigurationTemplateRequest: StructureShape
     CreateSourceNetworkRequest: StructureShape
     CreateSourceNetworkResponse: StructureShape
     DataReplicationError: StructureShape
@@ -46,6 +53,12 @@ module Aws::Drs
     DeleteLaunchConfigurationTemplateInput: StructureShape
     DeleteLaunchConfigurationTemplateOutput: StructureShape
     DeleteRecoveryInstanceInput: StructureShape
+    DeleteRecoveryPlanExecutionRequest: StructureShape
+    DeleteRecoveryPlanExecutionResponse: StructureShape
+    DeleteRecoveryPlanRequest: StructureShape
+    DeleteRecoveryPlanResponse: StructureShape
+    DeleteRecoveryPlanStepRequest: StructureShape
+    DeleteRecoveryPlanStepResponse: StructureShape
     DeleteReplicationConfigurationTemplateInput: StructureShape
     DeleteReplicationConfigurationTemplateOutput: StructureShape
     DeleteSourceNetworkRequest: StructureShape
@@ -88,7 +101,9 @@ module Aws::Drs
     EbsSnapshot: StringShape
     EbsSnapshotsList: ListShape
     EbsVolumeID: StringShape
+    ErrorDetail: StructureShape
     EventResourceData: UnionShape
+    ExecutionServerStepConfiguration: StructureShape
     ExportSourceNetworkCfnTemplateRequest: StructureShape
     ExportSourceNetworkCfnTemplateResponse: StructureShape
     ExtensionStatus: StringShape
@@ -100,6 +115,14 @@ module Aws::Drs
     GetFailbackReplicationConfigurationOutput: StructureShape
     GetLaunchConfigurationInput: StructureShape
     GetLaunchConfigurationOutput: StructureShape
+    GetRecoveryPlanExecutionRequest: StructureShape
+    GetRecoveryPlanExecutionResponse: StructureShape
+    GetRecoveryPlanExecutionStepRequest: StructureShape
+    GetRecoveryPlanExecutionStepResponse: StructureShape
+    GetRecoveryPlanRequest: StructureShape
+    GetRecoveryPlanResponse: StructureShape
+    GetRecoveryPlanStepRequest: StructureShape
+    GetRecoveryPlanStepResponse: StructureShape
     GetReplicationConfigurationInput: StructureShape
     GetReplicationConfigurationOutput: StructureShape
     IPsList: ListShape
@@ -110,7 +133,9 @@ module Aws::Drs
     InitializeServiceOutput: StructureShape
     InitiatedBy: StringShape
     InternalServerException: StructureShape
+    InternetProtocol: StringShape
     Job: StructureShape
+    JobEventAttemptCount: IntegerShape
     JobID: StringShape
     JobLog: StructureShape
     JobLogEvent: StringShape
@@ -159,6 +184,15 @@ module Aws::Drs
     ListExtensibleSourceServersOutput: StructureShape
     ListLaunchActionsRequest: StructureShape
     ListLaunchActionsResponse: StructureShape
+    ListRecoveryPlanExecutionStepsFilter: StructureShape
+    ListRecoveryPlanExecutionStepsRequest: StructureShape
+    ListRecoveryPlanExecutionStepsResponse: StructureShape
+    ListRecoveryPlanExecutionsRequest: StructureShape
+    ListRecoveryPlanExecutionsResponse: StructureShape
+    ListRecoveryPlanStepsRequest: StructureShape
+    ListRecoveryPlanStepsResponse: StructureShape
+    ListRecoveryPlansRequest: StructureShape
+    ListRecoveryPlansResponse: StructureShape
     ListStagingAccountsInput: StructureShape
     ListStagingAccountsOutput: StructureShape
     ListTagsForResourceInput: StructureShape
@@ -205,11 +239,43 @@ module Aws::Drs
     RecoveryInstanceProperties: StructureShape
     RecoveryInstancesForTerminationRequest: ListShape
     RecoveryLifeCycle: StructureShape
+    RecoveryMode: StringShape
+    RecoveryPlan: StructureShape
+    RecoveryPlanDescription: StringShape
+    RecoveryPlanExecution: StructureShape
+    RecoveryPlanExecutionMode: StringShape
+    RecoveryPlanExecutionServer: StructureShape
+    RecoveryPlanExecutionServers: ListShape
+    RecoveryPlanExecutionSourceServer: StructureShape
+    RecoveryPlanExecutionSourceServerList: ListShape
+    RecoveryPlanExecutionStatus: StringShape
+    RecoveryPlanExecutionStep: StructureShape
+    RecoveryPlanExecutionStepConfiguration: UnionShape
+    RecoveryPlanExecutionStepStatus: StringShape
+    RecoveryPlanExecutionStepSummary: StructureShape
+    RecoveryPlanExecutionStepSummaryList: ListShape
+    RecoveryPlanExecutionSummary: StructureShape
+    RecoveryPlanExecutionSummaryList: ListShape
+    RecoveryPlanName: StringShape
+    RecoveryPlanServer: StructureShape
+    RecoveryPlanServerImpactLevel: StringShape
+    RecoveryPlanServers: ListShape
+    RecoveryPlanStatus: StringShape
+    RecoveryPlanStep: StructureShape
+    RecoveryPlanStepArnList: ListShape
+    RecoveryPlanStepConfiguration: UnionShape
+    RecoveryPlanStepList: ListShape
+    RecoveryPlanStepName: StringShape
+    RecoveryPlanStepOrder: IntegerShape
+    RecoveryPlanSummary: StructureShape
+    RecoveryPlanSummaryList: ListShape
     RecoveryResult: StringShape
     RecoverySnapshot: StructureShape
     RecoverySnapshotID: StringShape
     RecoverySnapshotsList: ListShape
     RecoverySnapshotsOrder: StringShape
+    ReorderRecoveryPlanStepsRequest: StructureShape
+    ReorderRecoveryPlanStepsResponse: StructureShape
     ReplicationConfigurationDataPlaneRouting: StringShape
     ReplicationConfigurationDefaultLargeStagingDiskType: StringShape
     ReplicationConfigurationEbsEncryption: StringShape
@@ -226,10 +292,13 @@ module Aws::Drs
     ResourceNotFoundException: StructureShape
     RetryDataReplicationInput: StructureShape
     RetryDataReplicationOutput: StructureShape
+    RetryRecoveryPlanExecutionStepRequest: StructureShape
+    RetryRecoveryPlanExecutionStepResponse: StructureShape
     ReverseReplicationInput: StructureShape
     ReverseReplicationOutput: StructureShape
     SecurityGroupID: StringShape
     SensitiveBoundedString: StringShape
+    ServerStepConfiguration: StructureShape
     ServiceQuotaExceededException: StructureShape
     SmallBoundedString: StringShape
     SourceCloudProperties: StructureShape
@@ -240,6 +309,7 @@ module Aws::Drs
     SourceProperties: StructureShape
     SourceServer: StructureShape
     SourceServerARN: StringShape
+    SourceServerArchitecture: StringShape
     SourceServerID: StringShape
     SourceServerIDs: ListShape
     SourceServersList: ListShape
@@ -252,6 +322,8 @@ module Aws::Drs
     StartFailbackRequestRecoveryInstanceIDs: ListShape
     StartRecoveryInput: StructureShape
     StartRecoveryOutput: StructureShape
+    StartRecoveryPlanExecutionRequest: StructureShape
+    StartRecoveryPlanExecutionResponse: StructureShape
     StartRecoveryRequestSourceServer: StructureShape
     StartRecoveryRequestSourceServers: ListShape
     StartReplicationInput: StructureShape
@@ -267,6 +339,7 @@ module Aws::Drs
     StopReplicationOutput: StructureShape
     StopSourceNetworkReplicationRequest: StructureShape
     StopSourceNetworkReplicationResponse: StructureShape
+    StrictDRSARN: StringShape
     StrictlyPositiveInteger: IntegerShape
     SubnetID: StringShape
     TagKey: StringShape
@@ -285,6 +358,12 @@ module Aws::Drs
     UpdateLaunchConfigurationOutput: StructureShape
     UpdateLaunchConfigurationTemplateInput: StructureShape
     UpdateLaunchConfigurationTemplateOutput: StructureShape
+    UpdateRecoveryPlanExecutionStepRequest: StructureShape
+    UpdateRecoveryPlanExecutionStepResponse: StructureShape
+    UpdateRecoveryPlanRequest: StructureShape
+    UpdateRecoveryPlanResponse: StructureShape
+    UpdateRecoveryPlanStepRequest: StructureShape
+    UpdateRecoveryPlanStepResponse: StructureShape
     UpdateReplicationConfigurationInput: StructureShape
     UpdateReplicationConfigurationOutput: StructureShape
     UpdateReplicationConfigurationTemplateInput: StructureShape
@@ -298,6 +377,8 @@ module Aws::Drs
     VolumeToProductCodes: MapShape
     VolumeToSizeMap: MapShape
     VpcID: StringShape
+    WaitDurationMinutes: IntegerShape
+    WaitStepConfiguration: StructureShape
 
     ElasticDisasterRecoveryService: ServiceShape
   end

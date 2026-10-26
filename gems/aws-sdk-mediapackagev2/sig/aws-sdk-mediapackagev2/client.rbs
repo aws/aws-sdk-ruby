@@ -57,6 +57,8 @@ module Aws::MediaPackageV2
 
     interface _CreateChannelResponse
       include Smithy::Client::_Response[Types::CreateChannelResponse]
+      def multiview_configuration: () -> Types::MultiviewConfiguration?
+      def attached_multiview_channels: () -> Array[String]?
       def arn: () -> String?
       def channel_name: () -> String?
       def channel_group_name: () -> String?
@@ -69,6 +71,7 @@ module Aws::MediaPackageV2
       def tags: () -> Hash[String, String]?
       def input_switch_configuration: () -> Types::InputSwitchConfiguration?
       def output_header_configuration: () -> Types::OutputHeaderConfiguration?
+      def output_locking_mode: () -> String?
     end
     def create_channel: (
       ?channel_group_name: String,
@@ -83,6 +86,11 @@ module Aws::MediaPackageV2
       ?output_header_configuration: {
         publish_mqcs: bool
       },
+      ?multiview_configuration: {
+        available_sources: Array[String],
+        available_layouts: Array[String]
+      },
+      ?output_locking_mode: String,
       ?tags: Hash[String, String]
     ) -> _CreateChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateChannelResponse
 
@@ -176,6 +184,8 @@ module Aws::MediaPackageV2
       def dash_manifests: () -> Array[Types::GetDashManifestConfiguration]?
       def mss_manifests: () -> Array[Types::GetMssManifestConfiguration]?
       def force_endpoint_error_configuration: () -> Types::ForceEndpointErrorConfiguration?
+      def uri_separator: () -> String?
+      def stream_name_output_mode: () -> String?
       def e_tag: () -> String?
       def tags: () -> Hash[String, String]?
     end
@@ -191,7 +201,9 @@ module Aws::MediaPackageV2
         include_iframe_only_streams: untyped,
         ts_include_dvb_subtitles: untyped,
         scte: {
-          scte_filter: Array[String]
+          scte_filter: Array[String],
+          scte_in_segments: String,
+          custom_ad_types: Array[String]
         },
         encryption: {
           constant_initialization_vector: untyped,
@@ -210,9 +222,15 @@ module Aws::MediaPackageV2
             resource_id: untyped,
             drm_systems: Array[String],
             role_arn: untyped,
-            url: untyped
+            url: untyped,
+            certificate_arn: untyped,
+            speke_version: String,
+            content_key_period_configuration: {
+              content_key_period_timing: String
+            }
           }
-        }
+        },
+        output_timestamp_mode: String
       },
       ?client_token: String,
       ?description: String,
@@ -222,7 +240,8 @@ module Aws::MediaPackageV2
           manifest_name: String,
           child_manifest_name: untyped,
           scte_hls: {
-            ad_marker_hls: String
+            ad_marker_hls: String,
+            scte_in_manifests: String
           },
           start_tag: {
             time_offset: Float,
@@ -232,12 +251,18 @@ module Aws::MediaPackageV2
           program_date_time_interval_seconds: untyped,
           filter_configuration: {
             manifest_filter: String,
+            drm_settings: untyped,
             start: Time,
             end: untyped,
             time_delay_seconds: untyped,
-            clip_start_time: untyped
+            clip_start_time: untyped,
+            multiview: {
+              layout: String,
+              sources: Array[String]
+            }
           },
-          url_encode_child_manifest: untyped
+          url_encode_child_manifest: untyped,
+          uri_path_type: String
         }
       ],
       ?low_latency_hls_manifests: Array[
@@ -245,7 +270,8 @@ module Aws::MediaPackageV2
           manifest_name: String,
           child_manifest_name: untyped,
           scte_hls: {
-            ad_marker_hls: String
+            ad_marker_hls: String,
+            scte_in_manifests: String
           },
           start_tag: {
             time_offset: Float,
@@ -255,12 +281,18 @@ module Aws::MediaPackageV2
           program_date_time_interval_seconds: untyped,
           filter_configuration: {
             manifest_filter: String,
+            drm_settings: untyped,
             start: Time,
             end: untyped,
             time_delay_seconds: untyped,
-            clip_start_time: untyped
+            clip_start_time: untyped,
+            multiview: {
+              layout: String,
+              sources: Array[String]
+            }
           },
-          url_encode_child_manifest: untyped
+          url_encode_child_manifest: untyped,
+          uri_path_type: String
         }
       ],
       ?dash_manifests: Array[
@@ -269,10 +301,15 @@ module Aws::MediaPackageV2
           manifest_window_seconds: Integer,
           filter_configuration: {
             manifest_filter: String,
+            drm_settings: untyped,
             start: Time,
             end: untyped,
             time_delay_seconds: untyped,
-            clip_start_time: untyped
+            clip_start_time: untyped,
+            multiview: {
+              layout: String,
+              sources: Array[String]
+            }
           },
           min_update_period_seconds: untyped,
           min_buffer_time_seconds: untyped,
@@ -280,7 +317,8 @@ module Aws::MediaPackageV2
           segment_template_format: String,
           period_triggers: Array[String],
           scte_dash: {
-            ad_marker_dash: String
+            ad_marker_dash: String,
+            scte_in_manifests: String
           },
           drm_signaling: String,
           utc_timing: {
@@ -317,10 +355,15 @@ module Aws::MediaPackageV2
             ]
           },
           compactness: String,
+          audio_timeline_pattern: String,
           subtitle_configuration: {
             ttml_configuration: {
               ttml_profile: String
             }
+          },
+          uri_path_type: String,
+          availability_start_time_configuration: {
+            fixed_availability_start_time: untyped
           }
         }
       ],
@@ -330,10 +373,15 @@ module Aws::MediaPackageV2
           manifest_window_seconds: Integer,
           filter_configuration: {
             manifest_filter: String,
+            drm_settings: untyped,
             start: Time,
             end: untyped,
             time_delay_seconds: untyped,
-            clip_start_time: untyped
+            clip_start_time: untyped,
+            multiview: {
+              layout: String,
+              sources: Array[String]
+            }
           },
           manifest_layout: String
         }
@@ -341,6 +389,8 @@ module Aws::MediaPackageV2
       ?force_endpoint_error_configuration: {
         endpoint_error_conditions: Array[String]
       },
+      ?uri_separator: String,
+      ?stream_name_output_mode: String,
       ?tags: Hash[String, String]
     ) -> _CreateOriginEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateOriginEndpointResponse
 
@@ -387,6 +437,8 @@ module Aws::MediaPackageV2
 
     interface _GetChannelResponse
       include Smithy::Client::_Response[Types::GetChannelResponse]
+      def multiview_configuration: () -> Types::MultiviewConfiguration?
+      def attached_multiview_channels: () -> Array[String]?
       def arn: () -> String?
       def channel_name: () -> String?
       def channel_group_name: () -> String?
@@ -400,6 +452,7 @@ module Aws::MediaPackageV2
       def tags: () -> Hash[String, String]?
       def input_switch_configuration: () -> Types::InputSwitchConfiguration?
       def output_header_configuration: () -> Types::OutputHeaderConfiguration?
+      def output_locking_mode: () -> String?
     end
     def get_channel: (
       ?channel_group_name: String,
@@ -475,6 +528,8 @@ module Aws::MediaPackageV2
       def dash_manifests: () -> Array[Types::GetDashManifestConfiguration]?
       def mss_manifests: () -> Array[Types::GetMssManifestConfiguration]?
       def force_endpoint_error_configuration: () -> Types::ForceEndpointErrorConfiguration?
+      def uri_separator: () -> String?
+      def stream_name_output_mode: () -> String?
       def e_tag: () -> String?
       def tags: () -> Hash[String, String]?
     end
@@ -620,6 +675,8 @@ module Aws::MediaPackageV2
 
     interface _UpdateChannelResponse
       include Smithy::Client::_Response[Types::UpdateChannelResponse]
+      def multiview_configuration: () -> Types::MultiviewConfiguration?
+      def attached_multiview_channels: () -> Array[String]?
       def arn: () -> String?
       def channel_name: () -> String?
       def channel_group_name: () -> String?
@@ -632,6 +689,7 @@ module Aws::MediaPackageV2
       def tags: () -> Hash[String, String]?
       def input_switch_configuration: () -> Types::InputSwitchConfiguration?
       def output_header_configuration: () -> Types::OutputHeaderConfiguration?
+      def output_locking_mode: () -> String?
     end
     def update_channel: (
       ?channel_group_name: String,
@@ -644,6 +702,10 @@ module Aws::MediaPackageV2
       },
       ?output_header_configuration: {
         publish_mqcs: bool
+      },
+      ?multiview_configuration: {
+        available_sources: Array[String],
+        available_layouts: Array[String]
       }
     ) -> _UpdateChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateChannelResponse
 
@@ -680,6 +742,8 @@ module Aws::MediaPackageV2
       def low_latency_hls_manifests: () -> Array[Types::GetLowLatencyHlsManifestConfiguration]?
       def mss_manifests: () -> Array[Types::GetMssManifestConfiguration]?
       def force_endpoint_error_configuration: () -> Types::ForceEndpointErrorConfiguration?
+      def uri_separator: () -> String?
+      def stream_name_output_mode: () -> String?
       def e_tag: () -> String?
       def tags: () -> Hash[String, String]?
       def dash_manifests: () -> Array[Types::GetDashManifestConfiguration]?
@@ -696,7 +760,9 @@ module Aws::MediaPackageV2
         include_iframe_only_streams: untyped,
         ts_include_dvb_subtitles: untyped,
         scte: {
-          scte_filter: Array[String]
+          scte_filter: Array[String],
+          scte_in_segments: String,
+          custom_ad_types: Array[String]
         },
         encryption: {
           constant_initialization_vector: untyped,
@@ -715,9 +781,15 @@ module Aws::MediaPackageV2
             resource_id: untyped,
             drm_systems: Array[String],
             role_arn: untyped,
-            url: untyped
+            url: untyped,
+            certificate_arn: untyped,
+            speke_version: String,
+            content_key_period_configuration: {
+              content_key_period_timing: String
+            }
           }
-        }
+        },
+        output_timestamp_mode: String
       },
       ?description: String,
       ?startover_window_seconds: Integer,
@@ -726,7 +798,8 @@ module Aws::MediaPackageV2
           manifest_name: String,
           child_manifest_name: untyped,
           scte_hls: {
-            ad_marker_hls: String
+            ad_marker_hls: String,
+            scte_in_manifests: String
           },
           start_tag: {
             time_offset: Float,
@@ -736,12 +809,18 @@ module Aws::MediaPackageV2
           program_date_time_interval_seconds: untyped,
           filter_configuration: {
             manifest_filter: String,
+            drm_settings: untyped,
             start: Time,
             end: untyped,
             time_delay_seconds: untyped,
-            clip_start_time: untyped
+            clip_start_time: untyped,
+            multiview: {
+              layout: String,
+              sources: Array[String]
+            }
           },
-          url_encode_child_manifest: untyped
+          url_encode_child_manifest: untyped,
+          uri_path_type: String
         }
       ],
       ?low_latency_hls_manifests: Array[
@@ -749,7 +828,8 @@ module Aws::MediaPackageV2
           manifest_name: String,
           child_manifest_name: untyped,
           scte_hls: {
-            ad_marker_hls: String
+            ad_marker_hls: String,
+            scte_in_manifests: String
           },
           start_tag: {
             time_offset: Float,
@@ -759,12 +839,18 @@ module Aws::MediaPackageV2
           program_date_time_interval_seconds: untyped,
           filter_configuration: {
             manifest_filter: String,
+            drm_settings: untyped,
             start: Time,
             end: untyped,
             time_delay_seconds: untyped,
-            clip_start_time: untyped
+            clip_start_time: untyped,
+            multiview: {
+              layout: String,
+              sources: Array[String]
+            }
           },
-          url_encode_child_manifest: untyped
+          url_encode_child_manifest: untyped,
+          uri_path_type: String
         }
       ],
       ?dash_manifests: Array[
@@ -773,10 +859,15 @@ module Aws::MediaPackageV2
           manifest_window_seconds: Integer,
           filter_configuration: {
             manifest_filter: String,
+            drm_settings: untyped,
             start: Time,
             end: untyped,
             time_delay_seconds: untyped,
-            clip_start_time: untyped
+            clip_start_time: untyped,
+            multiview: {
+              layout: String,
+              sources: Array[String]
+            }
           },
           min_update_period_seconds: untyped,
           min_buffer_time_seconds: untyped,
@@ -784,7 +875,8 @@ module Aws::MediaPackageV2
           segment_template_format: String,
           period_triggers: Array[String],
           scte_dash: {
-            ad_marker_dash: String
+            ad_marker_dash: String,
+            scte_in_manifests: String
           },
           drm_signaling: String,
           utc_timing: {
@@ -821,10 +913,15 @@ module Aws::MediaPackageV2
             ]
           },
           compactness: String,
+          audio_timeline_pattern: String,
           subtitle_configuration: {
             ttml_configuration: {
               ttml_profile: String
             }
+          },
+          uri_path_type: String,
+          availability_start_time_configuration: {
+            fixed_availability_start_time: untyped
           }
         }
       ],
@@ -834,10 +931,15 @@ module Aws::MediaPackageV2
           manifest_window_seconds: Integer,
           filter_configuration: {
             manifest_filter: String,
+            drm_settings: untyped,
             start: Time,
             end: untyped,
             time_delay_seconds: untyped,
-            clip_start_time: untyped
+            clip_start_time: untyped,
+            multiview: {
+              layout: String,
+              sources: Array[String]
+            }
           },
           manifest_layout: String
         }
@@ -845,6 +947,8 @@ module Aws::MediaPackageV2
       ?force_endpoint_error_configuration: {
         endpoint_error_conditions: Array[String]
       },
+      ?uri_separator: String,
+      ?stream_name_output_mode: String,
       ?e_tag: String
     ) -> _UpdateOriginEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateOriginEndpointResponse
   end

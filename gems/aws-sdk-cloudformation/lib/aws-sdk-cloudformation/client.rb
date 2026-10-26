@@ -144,18 +144,18 @@ module Aws::CloudFormation
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -236,8 +236,7 @@ module Aws::CloudFormation
     #          <p>For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-public-activate-extension.html">Activate a
     #         third-party public extension in your account</a> in the
     #         <i>CloudFormation User Guide</i>. For information about creating Hooks, see the
-    #         <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/hooks-userguide/what-is-cloudformation-hooks.html">CloudFormation
-    #         Hooks User Guide</a>.</p>
+    #         <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/hooks-userguide/what-is-cloudformation-hooks.html">CloudFormation Hooks User Guide</a>.</p>
     # @param [Hash, Types::ActivateTypeInput] params
     # @option params [String] :type
     #   <p>The extension type.</p>
@@ -402,9 +401,9 @@ module Aws::CloudFormation
     #           resource-level permissions and avoid returning a response when no parameter is sent in the
     #           request:</p>
     #               <p>
-    #                  <code>{ "Version": "2012-10-17", "Statement": [{ "Effect": "Deny", "Action":
-    #             "cloudformation:DescribeStacks", "NotResource": "arn:aws:cloudformation:*:*:stack/*/*" }]
-    #             }</code>
+    #                  <code>{ "Version": "2012-10-17",		 	 	  "Statement": [{ "Effect": "Deny",
+    #             "Action": "cloudformation:DescribeStacks", "NotResource":
+    #             "arn:aws:cloudformation:*:*:stack/*/*" }] }</code>
     #               </p>
     #            </note>
     #            <p>The name or the unique stack ID that's associated with the stack.</p>
@@ -441,6 +440,9 @@ module Aws::CloudFormation
     #       attempts to roll back to it, causing the update rollback to fail.</p>
     #          <p>For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-continueupdaterollback.html">Continue rolling back an update</a> in the <i>CloudFormation User Guide</i>. For
     #       information for troubleshooting a failed update rollback, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/troubleshooting.html#troubleshooting-errors-update-rollback-failed">Update rollback failed</a>.</p>
+    #          <p>
+    #             <code>ForceRollback</code> and <code>ResourcesToSkip</code> are mutually exclusive.
+    #       For details, see <a>ContinueUpdateRollbackInput$ForceRollback</a>.</p>
     # @param [Hash, Types::ContinueUpdateRollbackInput] params
     # @option params [String] :stack_name
     #   <p>The name or the unique ID of the stack that you want to continue rolling back.</p>
@@ -494,12 +496,32 @@ module Aws::CloudFormation
     #         continue the rollback to a stack with the same name. You might retry
     #           <code>ContinueUpdateRollback</code> requests to ensure that CloudFormation successfully received
     #         them.</p>
+    # @option params [Boolean] :force_rollback
+    #   <p>Specifies whether CloudFormation forces the rollback to continue by skipping resources
+    #         currently in the <code>UPDATE_FAILED</code> state. Use this instead of listing each resource
+    #         individually in <code>ResourcesToSkip</code>. Only resources that entered the
+    #           <code>UPDATE_FAILED</code> state because a rollback failed are skipped. If you don't specify
+    #         a value, the default is <code>false</code> and CloudFormation doesn't skip any resources.</p>
+    #            <p>
+    #               <code>ForceRollback</code> and <code>ResourcesToSkip</code> are mutually exclusive.
+    #         Specifying both in the same request returns a validation error.</p>
+    #            <important>
+    #               <p>We recommend that you <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/troubleshooting.html#troubleshooting-errors-update-rollback-failed">troubleshoot</a> resources before skipping them. CloudFormation sets the status of the
+    #           skipped resources to <code>UPDATE_COMPLETE</code> and continues to roll back the stack,
+    #           including resources in nested stacks. After the rollback completes, the skipped resources no
+    #           longer match the resources in the stack template. Before performing another stack update,
+    #           you must update the stack or resources to be consistent with each other. If you don't,
+    #           subsequent stack updates might fail, and the stack will become unrecoverable.</p>
+    #               <p>Drift detection reports skipped resources as <code>NOT_CHECKED</code>. For guidance,
+    #           see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-continueupdaterollback.html">Continue rolling back an update</a> in the <i>CloudFormation User Guide</i>.</p>
+    #            </important>
     # @example Request syntax with placeholder values
     #   params = {
     #     stack_name: "StackNameOrId", # required
     #     role_arn: "RoleARN",
     #     resources_to_skip: ["ResourceToSkip"],
-    #     client_request_token: "ClientRequestToken"
+    #     client_request_token: "ClientRequestToken",
+    #     force_rollback: false
     #   }
     #   options = {}
     #   response = client.continue_update_rollback(params, options)
@@ -540,19 +562,27 @@ module Aws::CloudFormation
     #   <p>A structure that contains the body of the revised template, with a minimum length of 1
     #         byte and a maximum length of 51,200 bytes. CloudFormation generates the change set by comparing
     #         this template with the template of the stack that you specified.</p>
-    #            <p>Conditional: You must specify only <code>TemplateBody</code> or
-    #         <code>TemplateURL</code>.</p>
+    #            <p>Conditional: You must specify only one of the following parameters:
+    #           <code>TemplateBody</code>, <code>TemplateURL</code>, or set the
+    #           <code>UsePreviousTemplate</code> to <code>true</code>.</p>
     # @option params [String] :template_url
     #   <p>The URL of the file that contains the revised template. The URL must point to a template
     #         (max size: 1 MB) that's located in an Amazon S3 bucket or a Systems Manager document. CloudFormation
     #         generates the change set by comparing this template with the stack that you specified. The
     #         location for an Amazon S3 bucket must start with <code>https://</code>. URLs from S3 static
     #         websites are not supported.</p>
-    #            <p>Conditional: You must specify only <code>TemplateBody</code> or
-    #         <code>TemplateURL</code>.</p>
+    #            <p>Conditional: You must specify only one of the following parameters:
+    #           <code>TemplateBody</code>, <code>TemplateURL</code>, or set the
+    #           <code>UsePreviousTemplate</code> to <code>true</code>.</p>
     # @option params [Boolean] :use_previous_template
     #   <p>Whether to reuse the template that's associated with the stack to create the change
     #         set.</p>
+    #            <p>When using templates with the <code>AWS::LanguageExtensions</code> transform, provide the
+    #         template instead of using <code>UsePreviousTemplate</code> to ensure new parameter values and
+    #         Systems Manager parameter updates are applied correctly. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/transform-aws-languageextensions.html">AWS::LanguageExtensions transform</a>.</p>
+    #            <p>Conditional: You must specify only one of the following parameters:
+    #           <code>TemplateBody</code>, <code>TemplateURL</code>, or set the
+    #           <code>UsePreviousTemplate</code> to <code>true</code>.</p>
     # @option params [Array<Types::Parameter>] :parameters
     #   <p>A list of <code>Parameter</code> structures that specify input parameters for the change
     #         set. For more information, see the <a>Parameter</a> data type.</p>
@@ -565,7 +595,7 @@ module Aws::CloudFormation
     #                     <code>CAPABILITY_IAM</code> and <code>CAPABILITY_NAMED_IAM</code>
     #                  </p>
     #                  <p>Some stack templates might include resources that can affect permissions in your
-    #             Amazon Web Services account; for example, by creating new IAM users. For those stacks, you must
+    #             Amazon Web Services account, for example, by creating new IAM users. For those stacks, you must
     #             explicitly acknowledge this by specifying one of these capabilities.</p>
     #                  <p>The following IAM resources require you to specify either the
     #               <code>CAPABILITY_IAM</code> or <code>CAPABILITY_NAMED_IAM</code> capability.</p>
@@ -662,14 +692,13 @@ module Aws::CloudFormation
     #           be specified.</p>
     #            </note>
     # @option params [Array<String>] :resource_types
-    #   <p>The template resource types that you have permissions to work with if you execute this
-    #         change set, such as <code>AWS::EC2::Instance</code>, <code>AWS::EC2::*</code>, or
-    #           <code>Custom::MyCustomInstance</code>.</p>
+    #   <p>Specifies which resource types you can work with, such as <code>AWS::EC2::Instance</code>
+    #         or <code>Custom::MyCustomInstance</code>.</p>
     #            <p>If the list of resource types doesn't include a resource type that you're updating, the
     #         stack update fails. By default, CloudFormation grants permissions to all resource types. IAM
     #         uses this parameter for condition keys in IAM policies for CloudFormation. For more information,
-    #         see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html">Control access with
-    #           Identity and Access Management</a> in the <i>CloudFormation User Guide</i>.</p>
+    #         see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html">Control CloudFormation
+    #           access with Identity and Access Management</a> in the <i>CloudFormation User Guide</i>.</p>
     #            <note>
     #               <p>Only one of the <code>Capabilities</code> and <code>ResourceType</code> parameters can
     #           be specified.</p>
@@ -760,6 +789,28 @@ module Aws::CloudFormation
     #           accept custom names, such as EC2 instances, use the <code>ResourcesToImport</code> parameter
     #           instead.</p>
     #            </note>
+    # @option params [String] :deployment_mode
+    #   <p>Determines how CloudFormation handles configuration drift during deployment.</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>REVERT_DRIFT</code> – Creates a drift-aware change set that brings actual
+    #             resource states in line with template definitions. Provides a three-way comparison between
+    #             actual state, previous deployment state, and desired state.</p>
+    #               </li>
+    #            </ul>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/drift-aware-change-sets.html">Using drift-aware
+    #           change sets</a> in the <i>CloudFormation User Guide</i>.</p>
+    # @option params [Types::DeploymentConfig] :deployment_config
+    #   <p>The deployment configuration for this stack operation, including the deployment
+    #         mode.</p>
+    # @option params [Boolean] :disable_validation
+    #   <p>
+    #       Set to <code>true</code> to disable pre-deployment validations in changeset or stack operations.
+    #       </p>
+    #            <p>
+    #       Default: <code>false</code>
+    #            </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     stack_name: "StackNameOrId", # required
@@ -808,7 +859,13 @@ module Aws::CloudFormation
     #     ],
     #     include_nested_stacks: false,
     #     on_stack_failure: "DO_NOTHING" # One of: ["DO_NOTHING", "ROLLBACK", "DELETE"],
-    #     import_existing_resources: false
+    #     import_existing_resources: false,
+    #     deployment_mode: "REVERT_DRIFT" # One of: ["REVERT_DRIFT"],
+    #     deployment_config: {
+    #       mode: "STANDARD" # One of: ["STANDARD", "EXPRESS"],
+    #       disable_rollback: false
+    #     },
+    #     disable_validation: false
     #   }
     #   options = {}
     #   response = client.create_change_set(params, options)
@@ -1046,21 +1103,13 @@ module Aws::CloudFormation
     #           be specified.</p>
     #            </note>
     # @option params [Array<String>] :resource_types
-    #   <p>The template resource types that you have permissions to work with for this create stack
-    #         action, such as <code>AWS::EC2::Instance</code>, <code>AWS::EC2::*</code>, or
-    #           <code>Custom::MyCustomInstance</code>. Use the following syntax to describe template
-    #         resource types: <code>AWS::*</code> (for all Amazon Web Services resources), <code>Custom::*</code> (for all
-    #         custom resources), <code>Custom::<i>logical_ID</i>
-    #               </code> (for a specific custom resource),
-    #           <code>AWS::<i>service_name</i>::*</code> (for all resources of a particular
-    #         Amazon Web Services service), and
-    #             <code>AWS::<i>service_name</i>::<i>resource_logical_ID</i>
-    #               </code> (for a specific Amazon Web Services resource).</p>
+    #   <p>Specifies which resource types you can work with, such as <code>AWS::EC2::Instance</code>
+    #         or <code>Custom::MyCustomInstance</code>.</p>
     #            <p>If the list of resource types doesn't include a resource that you're creating, the stack
     #         creation fails. By default, CloudFormation grants permissions to all resource types. IAM uses
     #         this parameter for CloudFormation-specific condition keys in IAM policies. For more information,
-    #         see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html">Control access with
-    #           Identity and Access Management</a>.</p>
+    #         see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html">Control CloudFormation
+    #           access with Identity and Access Management</a>.</p>
     #            <note>
     #               <p>Only one of the <code>Capabilities</code> and <code>ResourceType</code> parameters can
     #           be specified.</p>
@@ -1131,6 +1180,16 @@ module Aws::CloudFormation
     #           <code>Retain</code>.</p>
     #            <p>Default: <code>false</code>
     #            </p>
+    # @option params [Types::DeploymentConfig] :deployment_config
+    #   <p>The deployment configuration for this stack operation, including the deployment
+    #         mode.</p>
+    # @option params [Boolean] :disable_validation
+    #   <p>
+    #       Set to <code>true</code> to disable pre-deployment validations in changeset or stack operations.
+    #       </p>
+    #            <p>
+    #       Default: <code>false</code>
+    #            </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     stack_name: "StackName", # required
@@ -1170,14 +1229,20 @@ module Aws::CloudFormation
     #     ],
     #     client_request_token: "ClientRequestToken",
     #     enable_termination_protection: false,
-    #     retain_except_on_create: false
+    #     retain_except_on_create: false,
+    #     deployment_config: {
+    #       mode: "STANDARD" # One of: ["STANDARD", "EXPRESS"],
+    #       disable_rollback: false
+    #     },
+    #     disable_validation: false
     #   }
     #   options = {}
     #   response = client.create_stack(params, options)
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {
-    #     stack_id: "StackId"
+    #     stack_id: "StackId",
+    #     operation_id: "OperationId"
     #   }
     # @return [Types::CreateStackOutput]
     def create_stack(params = {}, options = {})
@@ -1588,7 +1653,8 @@ module Aws::CloudFormation
     #     permission_model: "SERVICE_MANAGED" # One of: ["SERVICE_MANAGED", "SELF_MANAGED"],
     #     auto_deployment: {
     #       enabled: false,
-    #       retain_stacks_on_account_removal: false
+    #       retain_stacks_on_account_removal: false,
+    #       depends_on: ["StackSetARN"]
     #     },
     #     call_as: "SELF" # One of: ["SELF", "DELEGATED_ADMIN"],
     #     client_request_token: "ClientRequestToken",
@@ -1773,13 +1839,20 @@ module Aws::CloudFormation
     #               <code>DELETE_FAILED</code> state due to resource deletion failure.</p>
     #               </li>
     #            </ul>
+    # @option params [Types::DeploymentConfig] :deployment_config
+    #   <p>The deployment configuration for this stack operation, including the deployment
+    #         mode.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     stack_name: "StackName", # required
     #     retain_resources: ["LogicalResourceId"],
     #     role_arn: "RoleARN",
     #     client_request_token: "ClientRequestToken",
-    #     deletion_mode: "STANDARD" # One of: ["STANDARD", "FORCE_DELETE_STACK"]
+    #     deletion_mode: "STANDARD" # One of: ["STANDARD", "FORCE_DELETE_STACK"],
+    #     deployment_config: {
+    #       mode: "STANDARD" # One of: ["STANDARD", "EXPRESS"],
+    #       disable_rollback: false
+    #     }
     #   }
     #   options = {}
     #   response = client.delete_stack(params, options)
@@ -1990,7 +2063,8 @@ module Aws::CloudFormation
     #       can create in your account. For more information about account limits, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cloudformation-limits.html">Understand CloudFormation quotas</a> in the <i>CloudFormation User Guide</i>.</p>
     # @param [Hash, Types::DescribeAccountLimitsInput] params
     # @option params [String] :next_token
-    #   <p>A string that identifies the next page of limits that you want to retrieve.</p>
+    #   <p>The token for the next set of items to return. (You received this token from a previous
+    #         call.)</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     next_token: "NextToken"
@@ -2025,8 +2099,8 @@ module Aws::CloudFormation
     #   <p>If you specified the name of a change set, specify the stack name or ID (ARN) of the
     #         change set you want to describe.</p>
     # @option params [String] :next_token
-    #   <p>A string (provided by the <a>DescribeChangeSet</a> response output) that
-    #         identifies the next page of information that you want to retrieve.</p>
+    #   <p>The token for the next set of items to return. (You received this token from a previous
+    #         call.)</p>
     # @option params [Boolean] :include_property_values
     #   <p>If <code>true</code>, the returned changes include detailed changes in the property
     #         values.</p>
@@ -2059,6 +2133,7 @@ module Aws::CloudFormation
     #     execution_status: "UNAVAILABLE" # One of: ["UNAVAILABLE", "AVAILABLE", "EXECUTE_IN_PROGRESS", "EXECUTE_COMPLETE", "EXECUTE_FAILED", "OBSOLETE"],
     #     status: "CREATE_PENDING" # One of: ["CREATE_PENDING", "CREATE_IN_PROGRESS", "CREATE_COMPLETE", "DELETE_PENDING", "DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "FAILED"],
     #     status_reason: "ChangeSetStatusReason",
+    #     stack_drift_status: "DRIFTED" # One of: ["DRIFTED", "IN_SYNC", "UNKNOWN", "NOT_CHECKED"],
     #     notification_ar_ns: ["NotificationARN"],
     #     rollback_configuration: {
     #       rollback_triggers: [
@@ -2082,12 +2157,19 @@ module Aws::CloudFormation
     #         hook_invocation_count: 1,
     #         resource_change: {
     #           policy_action: "Delete" # One of: ["Delete", "Retain", "Snapshot", "ReplaceAndDelete", "ReplaceAndRetain", "ReplaceAndSnapshot"],
-    #           action: "Add" # One of: ["Add", "Modify", "Remove", "Import", "Dynamic"],
+    #           action: "Add" # One of: ["Add", "Modify", "Remove", "Import", "Dynamic", "SyncWithActual"],
     #           logical_resource_id: "LogicalResourceId",
     #           physical_resource_id: "PhysicalResourceId",
     #           resource_type: "ResourceType",
     #           replacement: "True" # One of: ["True", "False", "Conditional"],
     #           scope: ["Properties" # One of: ["Properties", "Metadata", "CreationPolicy", "UpdatePolicy", "DeletionPolicy", "UpdateReplacePolicy", "Tags"]],
+    #           resource_drift_status: "IN_SYNC" # One of: ["IN_SYNC", "MODIFIED", "DELETED", "NOT_CHECKED", "UNKNOWN", "UNSUPPORTED"],
+    #           resource_drift_ignored_attributes: [
+    #             {
+    #               path: "ResourcePropertyPath",
+    #               reason: "MANAGED_BY_AWS" # One of: ["MANAGED_BY_AWS", "WRITE_ONLY_PROPERTY", "SENSITIVE_PROPERTY"]
+    #             }
+    #           ],
     #           details: [
     #             {
     #               target: {
@@ -2097,10 +2179,17 @@ module Aws::CloudFormation
     #                 path: "ResourcePropertyPath",
     #                 before_value: "BeforeValue",
     #                 after_value: "AfterValue",
-    #                 attribute_change_type: "Add" # One of: ["Add", "Remove", "Modify"]
+    #                 before_value_from: "PREVIOUS_DEPLOYMENT_STATE" # One of: ["PREVIOUS_DEPLOYMENT_STATE", "ACTUAL_STATE"],
+    #                 after_value_from: "TEMPLATE" # One of: ["TEMPLATE"],
+    #                 drift: {
+    #                   previous_value: "ResourceDriftPreviousValue",
+    #                   actual_value: "ResourceDriftActualValue",
+    #                   drift_detection_timestamp: Time.now
+    #                 },
+    #                 attribute_change_type: "Add" # One of: ["Add", "Remove", "Modify", "SyncWithActual"]
     #               },
     #               evaluation: "Static" # One of: ["Static", "Dynamic"],
-    #               change_source: "ResourceReference" # One of: ["ResourceReference", "ParameterReference", "ResourceAttribute", "DirectModification", "Automatic"],
+    #               change_source: "ResourceReference" # One of: ["ResourceReference", "ParameterReference", "ResourceAttribute", "DirectModification", "Automatic", "NoModification"],
     #               causing_entity: "CausingEntity"
     #             }
     #           ],
@@ -2110,7 +2199,8 @@ module Aws::CloudFormation
     #             logical_id_hierarchy: "LogicalIdHierarchy"
     #           },
     #           before_context: "BeforeContext",
-    #           after_context: "AfterContext"
+    #           after_context: "AfterContext",
+    #           previous_deployment_context: "PreviousDeploymentContext"
     #         }
     #       }
     #     ],
@@ -2119,7 +2209,12 @@ module Aws::CloudFormation
     #     parent_change_set_id: "ChangeSetId",
     #     root_change_set_id: "ChangeSetId",
     #     on_stack_failure: "DO_NOTHING" # One of: ["DO_NOTHING", "ROLLBACK", "DELETE"],
-    #     import_existing_resources: false
+    #     import_existing_resources: false,
+    #     deployment_mode: "REVERT_DRIFT" # One of: ["REVERT_DRIFT"],
+    #     deployment_config: {
+    #       mode: "STANDARD" # One of: ["STANDARD", "EXPRESS"],
+    #       disable_rollback: false
+    #     }
     #   }
     # @return [Types::DescribeChangeSetOutput]
     def describe_change_set(params = {}, options = {})
@@ -2127,8 +2222,8 @@ module Aws::CloudFormation
       request.send_request(options)
     end
 
-    # <p>Returns hook-related information for the change set and a list of changes that CloudFormation
-    #       makes when you run the change set.</p>
+    # <p>Returns Hook-related information for the change set and a list of changes that
+    #       CloudFormation makes when you run the change set.</p>
     # @param [Hash, Types::DescribeChangeSetHooksInput] params
     # @option params [String] :change_set_name
     #   <p>The name or Amazon Resource Name (ARN) of the change set that you want to describe.</p>
@@ -2136,8 +2231,8 @@ module Aws::CloudFormation
     #   <p>If you specified the name of a change set, specify the stack name or stack ID (ARN) of the
     #         change set you want to describe.</p>
     # @option params [String] :next_token
-    #   <p>A string, provided by the <code>DescribeChangeSetHooks</code> response output, that
-    #         identifies the next page of information that you want to retrieve.</p>
+    #   <p>The token for the next set of items to return. (You received this token from a previous
+    #         call.)</p>
     # @option params [String] :logical_resource_id
     #   <p>If specified, lists only the Hooks related to the specified
     #           <code>LogicalResourceId</code>.</p>
@@ -2167,7 +2262,7 @@ module Aws::CloudFormation
     #           resource_target_details: {
     #             logical_resource_id: "LogicalResourceId",
     #             resource_type: "HookTargetTypeName",
-    #             resource_action: "Add" # One of: ["Add", "Modify", "Remove", "Import", "Dynamic"]
+    #             resource_action: "Add" # One of: ["Add", "Modify", "Remove", "Import", "Dynamic", "SyncWithActual"]
     #           }
     #         }
     #       }
@@ -2180,6 +2275,108 @@ module Aws::CloudFormation
     # @return [Types::DescribeChangeSetHooksOutput]
     def describe_change_set_hooks(params = {}, options = {})
       request = build_request(:describe_change_set_hooks, params)
+      request.send_request(options)
+    end
+
+    # <p>Returns CloudFormation events based on flexible query criteria. Groups events by operation ID,
+    #       enabling you to focus on individual stack operations during deployment.</p>
+    #          <p>An operation is any action performed on a stack, including stack lifecycle actions
+    #       (Create, Update, Delete, Rollback), change set creation, nested stack creation, and automatic
+    #       rollbacks triggered by failures. Each operation has a unique identifier (Operation ID) and
+    #       represents a discrete change attempt on the stack.</p>
+    #          <p>Returns different types of events including:</p>
+    #          <ul>
+    #             <li>
+    #                <p>
+    #                   <b>Progress events</b> - Status updates during stack operation
+    #           execution.</p>
+    #             </li>
+    #             <li>
+    #                <p>
+    #                   <b>Validation errors</b> - Failures from CloudFormation Early
+    #           Validations.</p>
+    #             </li>
+    #             <li>
+    #                <p>
+    #                   <b>Provisioning errors</b> - Resource creation and update
+    #           failures.</p>
+    #             </li>
+    #             <li>
+    #                <p>
+    #                   <b>Hook invocation errors</b> - Failures from CloudFormation
+    #           Hook during stack operations.</p>
+    #             </li>
+    #          </ul>
+    #          <note>
+    #             <p>One of <code>ChangeSetName</code>, <code>OperationId</code> or <code>StackName</code>
+    #         must be specified as input.</p>
+    #          </note>
+    # @param [Hash, Types::DescribeEventsInput] params
+    # @option params [String] :stack_name
+    #   <p>The name or unique stack ID for which you want to retrieve events. If you specified the
+    #         name of a change set, specify the stack name or ID (ARN) of the change set you want to
+    #         describe.</p>
+    # @option params [String] :change_set_name
+    #   <p>The name or Amazon Resource Name (ARN) of the change set for which you want to retrieve
+    #         events.</p>
+    # @option params [String] :operation_id
+    #   <p>The unique identifier of the operation for which you want to retrieve events.</p>
+    # @option params [Types::EventFilter] :filters
+    #   <p>Filters to apply when retrieving events.</p>
+    # @option params [String] :next_token
+    #   <p>The token for the next set of items to return. (You received this token from a previous
+    #         call.)</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     stack_name: "StackNameOrId",
+    #     change_set_name: "ChangeSetNameOrId",
+    #     operation_id: "OperationId",
+    #     filters: {
+    #       failed_events: false
+    #     },
+    #     next_token: "NextToken"
+    #   }
+    #   options = {}
+    #   response = client.describe_events(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     operation_events: [
+    #       {
+    #         event_id: "EventId",
+    #         stack_id: "StackId",
+    #         operation_id: "OperationId",
+    #         operation_type: "CREATE_STACK" # One of: ["CREATE_STACK", "UPDATE_STACK", "DELETE_STACK", "CONTINUE_ROLLBACK", "ROLLBACK", "CREATE_CHANGESET"],
+    #         operation_status: "IN_PROGRESS" # One of: ["IN_PROGRESS", "SUCCEEDED", "FAILED"],
+    #         event_type: "STACK_EVENT" # One of: ["STACK_EVENT", "PROGRESS_EVENT", "VALIDATION_ERROR", "PROVISIONING_ERROR", "HOOK_INVOCATION_ERROR"],
+    #         logical_resource_id: "LogicalResourceId",
+    #         physical_resource_id: "PhysicalResourceId",
+    #         resource_type: "ResourceType",
+    #         timestamp: Time.now,
+    #         start_time: Time.now,
+    #         end_time: Time.now,
+    #         resource_status: "CREATE_IN_PROGRESS" # One of: ["CREATE_IN_PROGRESS", "CREATE_FAILED", "CREATE_COMPLETE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETE_COMPLETE", "DELETE_SKIPPED", "UPDATE_IN_PROGRESS", "UPDATE_FAILED", "UPDATE_COMPLETE", "IMPORT_FAILED", "IMPORT_COMPLETE", "IMPORT_IN_PROGRESS", "IMPORT_ROLLBACK_IN_PROGRESS", "IMPORT_ROLLBACK_FAILED", "IMPORT_ROLLBACK_COMPLETE", "EXPORT_FAILED", "EXPORT_COMPLETE", "EXPORT_IN_PROGRESS", "EXPORT_ROLLBACK_IN_PROGRESS", "EXPORT_ROLLBACK_FAILED", "EXPORT_ROLLBACK_COMPLETE", "UPDATE_ROLLBACK_IN_PROGRESS", "UPDATE_ROLLBACK_COMPLETE", "UPDATE_ROLLBACK_FAILED", "ROLLBACK_IN_PROGRESS", "ROLLBACK_COMPLETE", "ROLLBACK_FAILED"],
+    #         resource_status_reason: "ResourceStatusReason",
+    #         resource_properties: "ResourceProperties",
+    #         client_request_token: "ClientRequestToken",
+    #         hook_type: "HookType",
+    #         hook_status: "HOOK_IN_PROGRESS" # One of: ["HOOK_IN_PROGRESS", "HOOK_COMPLETE_SUCCEEDED", "HOOK_COMPLETE_FAILED", "HOOK_FAILED"],
+    #         hook_status_reason: "HookStatusReason",
+    #         hook_invocation_point: "PRE_PROVISION" # One of: ["PRE_PROVISION"],
+    #         hook_failure_mode: "FAIL" # One of: ["FAIL", "WARN"],
+    #         detailed_status: "CONFIGURATION_COMPLETE" # One of: ["CONFIGURATION_COMPLETE", "VALIDATION_FAILED"],
+    #         validation_failure_mode: "FAIL" # One of: ["FAIL", "WARN"],
+    #         validation_name: "ValidationName",
+    #         validation_status: "FAILED" # One of: ["FAILED", "SKIPPED"],
+    #         validation_status_reason: "ValidationStatusReason",
+    #         validation_path: "ValidationPath"
+    #       }
+    #     ],
+    #     next_token: "NextToken"
+    #   }
+    # @return [Types::DescribeEventsOutput]
+    def describe_events(params = {}, options = {})
+      request = build_request(:describe_events, params)
       request.send_request(options)
     end
 
@@ -2426,10 +2623,11 @@ module Aws::CloudFormation
     #               </li>
     #            </ul>
     # @option params [String] :next_token
-    #   <p>A string that identifies the next page of events that you want to retrieve.</p>
+    #   <p>The token for the next set of items to return. (You received this token from a previous
+    #         call.)</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     stack_name: "StackName",
+    #     stack_name: "StackName", # required
     #     next_token: "NextToken"
     #   }
     #   options = {}
@@ -2442,6 +2640,7 @@ module Aws::CloudFormation
     #         stack_id: "StackId", # required
     #         event_id: "EventId", # required
     #         stack_name: "StackName", # required
+    #         operation_id: "OperationId",
     #         logical_resource_id: "LogicalResourceId",
     #         physical_resource_id: "PhysicalResourceId",
     #         resource_type: "ResourceType",
@@ -2604,7 +2803,7 @@ module Aws::CloudFormation
     #       description: "Description",
     #       metadata: "Metadata",
     #       drift_information: {
-    #         stack_resource_drift_status: "IN_SYNC" # One of: ["IN_SYNC", "MODIFIED", "DELETED", "NOT_CHECKED", "UNKNOWN"], # required
+    #         stack_resource_drift_status: "IN_SYNC" # One of: ["IN_SYNC", "MODIFIED", "DELETED", "NOT_CHECKED", "UNKNOWN", "UNSUPPORTED"], # required
     #         last_check_timestamp: Time.now
     #       },
     #       module_info: {
@@ -2663,7 +2862,8 @@ module Aws::CloudFormation
     #               </li>
     #            </ul>
     # @option params [String] :next_token
-    #   <p>A string that identifies the next page of stack resource drift results.</p>
+    #   <p>The token for the next set of items to return. (You received this token from a previous
+    #         call.)</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to be returned with a single call. If the number of
     #         available results exceeds this maximum, the response includes a <code>NextToken</code> value
@@ -2672,7 +2872,7 @@ module Aws::CloudFormation
     # @example Request syntax with placeholder values
     #   params = {
     #     stack_name: "StackNameOrId", # required
-    #     stack_resource_drift_status_filters: ["IN_SYNC" # One of: ["IN_SYNC", "MODIFIED", "DELETED", "NOT_CHECKED", "UNKNOWN"]],
+    #     stack_resource_drift_status_filters: ["IN_SYNC" # One of: ["IN_SYNC", "MODIFIED", "DELETED", "NOT_CHECKED", "UNKNOWN", "UNSUPPORTED"]],
     #     next_token: "NextToken",
     #     max_results: 1
     #   }
@@ -2703,7 +2903,7 @@ module Aws::CloudFormation
     #             difference_type: "ADD" # One of: ["ADD", "REMOVE", "NOT_EQUAL"], # required
     #           }
     #         ],
-    #         stack_resource_drift_status: "IN_SYNC" # One of: ["IN_SYNC", "MODIFIED", "DELETED", "NOT_CHECKED", "UNKNOWN"], # required
+    #         stack_resource_drift_status: "IN_SYNC" # One of: ["IN_SYNC", "MODIFIED", "DELETED", "NOT_CHECKED", "UNKNOWN", "UNSUPPORTED"], # required
     #         timestamp: Time.now, # required
     #         module_info: {
     #           type_hierarchy: "TypeHierarchy",
@@ -2786,7 +2986,7 @@ module Aws::CloudFormation
     #         resource_status_reason: "ResourceStatusReason",
     #         description: "Description",
     #         drift_information: {
-    #           stack_resource_drift_status: "IN_SYNC" # One of: ["IN_SYNC", "MODIFIED", "DELETED", "NOT_CHECKED", "UNKNOWN"], # required
+    #           stack_resource_drift_status: "IN_SYNC" # One of: ["IN_SYNC", "MODIFIED", "DELETED", "NOT_CHECKED", "UNKNOWN", "UNSUPPORTED"], # required
     #           last_check_timestamp: Time.now
     #         },
     #         module_info: {
@@ -2874,7 +3074,8 @@ module Aws::CloudFormation
     #       },
     #       auto_deployment: {
     #         enabled: false,
-    #         retain_stacks_on_account_removal: false
+    #         retain_stacks_on_account_removal: false,
+    #         depends_on: ["StackSetARN"]
     #       },
     #       permission_model: "SERVICE_MANAGED" # One of: ["SERVICE_MANAGED", "SELF_MANAGED"],
     #       organizational_unit_ids: ["OrganizationalUnitId"],
@@ -2994,7 +3195,7 @@ module Aws::CloudFormation
     #               <p>The IAM policy below can be added to IAM policies when you want to limit
     #           resource-level permissions and avoid returning a response when no parameter is sent in the
     #           request:</p>
-    #               <p>{ "Version": "2012-10-17", "Statement": [{ "Effect": "Deny", "Action":
+    #               <p>{ "Version": "2012-10-17",		 	 	  "Statement": [{ "Effect": "Deny", "Action":
     #           "cloudformation:DescribeStacks", "NotResource": "arn:aws:cloudformation:*:*:stack/*/*" }]
     #           }</p>
     #            </note>
@@ -3009,7 +3210,8 @@ module Aws::CloudFormation
     #               </li>
     #            </ul>
     # @option params [String] :next_token
-    #   <p>A string that identifies the next page of stacks that you want to retrieve.</p>
+    #   <p>The token for the next set of items to return. (You received this token from a previous
+    #         call.)</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     stack_name: "StackName",
@@ -3049,6 +3251,10 @@ module Aws::CloudFormation
     #         stack_status: "CREATE_IN_PROGRESS" # One of: ["CREATE_IN_PROGRESS", "CREATE_FAILED", "CREATE_COMPLETE", "ROLLBACK_IN_PROGRESS", "ROLLBACK_FAILED", "ROLLBACK_COMPLETE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETE_COMPLETE", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE_CLEANUP_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_FAILED", "UPDATE_ROLLBACK_IN_PROGRESS", "UPDATE_ROLLBACK_FAILED", "UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS", "UPDATE_ROLLBACK_COMPLETE", "REVIEW_IN_PROGRESS", "IMPORT_IN_PROGRESS", "IMPORT_COMPLETE", "IMPORT_ROLLBACK_IN_PROGRESS", "IMPORT_ROLLBACK_FAILED", "IMPORT_ROLLBACK_COMPLETE"], # required
     #         stack_status_reason: "StackStatusReason",
     #         disable_rollback: false,
+    #         deployment_config: {
+    #           mode: "STANDARD" # One of: ["STANDARD", "EXPRESS"],
+    #           disable_rollback: false
+    #         },
     #         notification_ar_ns: ["NotificationARN"],
     #         timeout_in_minutes: 1,
     #         capabilities: ["CAPABILITY_IAM" # One of: ["CAPABILITY_IAM", "CAPABILITY_NAMED_IAM", "CAPABILITY_AUTO_EXPAND"]],
@@ -3076,7 +3282,13 @@ module Aws::CloudFormation
     #         },
     #         retain_except_on_create: false,
     #         deletion_mode: "STANDARD" # One of: ["STANDARD", "FORCE_DELETE_STACK"],
-    #         detailed_status: "CONFIGURATION_COMPLETE" # One of: ["CONFIGURATION_COMPLETE", "VALIDATION_FAILED"]
+    #         detailed_status: "CONFIGURATION_COMPLETE" # One of: ["CONFIGURATION_COMPLETE", "VALIDATION_FAILED"],
+    #         last_operations: [
+    #           {
+    #             operation_type: "CREATE_STACK" # One of: ["CREATE_STACK", "UPDATE_STACK", "DELETE_STACK", "CONTINUE_ROLLBACK", "ROLLBACK", "CREATE_CHANGESET"],
+    #             operation_id: "OperationId"
+    #           }
+    #         ]
     #       }
     #     ],
     #     next_token: "NextToken"
@@ -3303,7 +3515,7 @@ module Aws::CloudFormation
     #           difference_type: "ADD" # One of: ["ADD", "REMOVE", "NOT_EQUAL"], # required
     #         }
     #       ],
-    #       stack_resource_drift_status: "IN_SYNC" # One of: ["IN_SYNC", "MODIFIED", "DELETED", "NOT_CHECKED", "UNKNOWN"], # required
+    #       stack_resource_drift_status: "IN_SYNC" # One of: ["IN_SYNC", "MODIFIED", "DELETED", "NOT_CHECKED", "UNKNOWN", "UNSUPPORTED"], # required
     #       timestamp: Time.now, # required
     #       module_info: {
     #         type_hierarchy: "TypeHierarchy",
@@ -3602,6 +3814,61 @@ module Aws::CloudFormation
       request.send_request(options)
     end
 
+    # <p>Retrieves detailed information and remediation guidance for a Hook invocation
+    #       result.</p>
+    #          <p>If the Hook uses a KMS key to encrypt annotations, callers of the
+    #         <code>GetHookResult</code> operation must have <code>kms:Decrypt</code> permissions. For
+    #       more information, see <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/hooks-userguide/hooks-kms-key-policy.html">KMS key policy
+    #         and permissions for encrypting CloudFormation Hooks results at rest</a> in the
+    #         <i>CloudFormation Hooks User Guide</i>.</p>
+    # @param [Hash, Types::GetHookResultInput] params
+    # @option params [String] :hook_result_id
+    #   <p>The unique identifier (ID) of the Hook invocation result that you want details about.
+    #         You can get the ID from the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ListHookResults.html">ListHookResults</a>
+    #         operation.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     hook_result_id: "HookInvocationId"
+    #   }
+    #   options = {}
+    #   response = client.get_hook_result(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     hook_result_id: "HookInvocationId",
+    #     invocation_point: "PRE_PROVISION" # One of: ["PRE_PROVISION"],
+    #     failure_mode: "FAIL" # One of: ["FAIL", "WARN"],
+    #     type_name: "HookTypeName",
+    #     original_type_name: "HookTypeName",
+    #     type_version_id: "HookTypeVersionId",
+    #     type_configuration_version_id: "HookTypeConfigurationVersionId",
+    #     type_arn: "HookTypeArn",
+    #     status: "HOOK_IN_PROGRESS" # One of: ["HOOK_IN_PROGRESS", "HOOK_COMPLETE_SUCCEEDED", "HOOK_COMPLETE_FAILED", "HOOK_FAILED"],
+    #     hook_status_reason: "HookStatusReason",
+    #     invoked_at: Time.now,
+    #     target: {
+    #       target_type: "RESOURCE" # One of: ["RESOURCE"], # required
+    #       target_type_name: "HookTargetTypeName", # required
+    #       target_id: "HookTargetId", # required
+    #       action: "CREATE" # One of: ["CREATE", "UPDATE", "DELETE", "IMPORT"], # required
+    #     },
+    #     annotations: [
+    #       {
+    #         annotation_name: "AnnotationName",
+    #         status: "PASSED" # One of: ["PASSED", "FAILED", "SKIPPED"],
+    #         status_message: "RemediationMessageStatusMessage",
+    #         remediation_message: "RemediationMessageRemediationMessage",
+    #         remediation_link: "AnnotationRemediationLink",
+    #         severity_level: "INFORMATIONAL" # One of: ["INFORMATIONAL", "LOW", "MEDIUM", "HIGH", "CRITICAL"]
+    #       }
+    #     ]
+    #   }
+    # @return [Types::GetHookResultOutput]
+    def get_hook_result(params = {}, options = {})
+      request = build_request(:get_hook_result, params)
+      request.send_request(options)
+    end
+
     # <p>Returns the stack policy for a specified stack. If a stack doesn't have a policy, a null
     #       value is returned.</p>
     # @param [Hash, Types::GetStackPolicyInput] params
@@ -3855,8 +4122,8 @@ module Aws::CloudFormation
     #   <p>The name or the Amazon Resource Name (ARN) of the stack for which you want to list change
     #         sets.</p>
     # @option params [String] :next_token
-    #   <p>A string (provided by the <a>ListChangeSets</a> response output) that
-    #         identifies the next page of change sets that you want to retrieve.</p>
+    #   <p>The token for the next set of items to return. (You received this token from a previous
+    #         call.)</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     stack_name: "StackNameOrId", # required
@@ -3899,8 +4166,8 @@ module Aws::CloudFormation
     #         from a deployed CloudFormation stack</a>.</p>
     # @param [Hash, Types::ListExportsInput] params
     # @option params [String] :next_token
-    #   <p>A string (provided by the <a>ListExports</a> response output) that identifies
-    #         the next page of exported output values that you asked to retrieve.</p>
+    #   <p>The token for the next set of items to return. (You received this token from a previous
+    #         call.)</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     next_token: "NextToken"
@@ -3928,7 +4195,8 @@ module Aws::CloudFormation
     # <p>Lists your generated templates in this Region.</p>
     # @param [Hash, Types::ListGeneratedTemplatesInput] params
     # @option params [String] :next_token
-    #   <p>A string that identifies the next page of resource scan results.</p>
+    #   <p>The token for the next set of items to return. (You received this token from a previous
+    #         call.)</p>
     # @option params [Integer] :max_results
     #   <p>If the number of available results exceeds this maximum, the response includes a
     #           <code>NextToken</code> value that you can use for the <code>NextToken</code> parameter to
@@ -3976,8 +4244,8 @@ module Aws::CloudFormation
     #             </li>
     #             <li>
     #                <p>
-    #                   <code>TypeArn</code> and <code>Status</code>: Returns summaries for a specific
-    #           Hook filtered by status.</p>
+    #                   <code>TypeArn</code> and <code>Status</code>: Returns summaries for a specific Hook
+    #           filtered by status.</p>
     #             </li>
     #             <li>
     #                <p>
@@ -4001,8 +4269,8 @@ module Aws::CloudFormation
     #   <p>Filters results by the ARN of the Hook. Can be used alone or in combination with
     #           <code>Status</code>.</p>
     # @option params [String] :status
-    #   <p>Filters results by the status of Hook invocations. Can only be used in
-    #         combination with <code>TypeArn</code>. Valid values are:</p>
+    #   <p>Filters results by the status of Hook invocations. Can only be used in combination with
+    #           <code>TypeArn</code>. Valid values are:</p>
     #            <ul>
     #               <li>
     #                  <p>
@@ -4010,22 +4278,20 @@ module Aws::CloudFormation
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>HOOK_COMPLETE_SUCCEEDED</code>: The Hook completed
-    #             successfully.</p>
+    #                     <code>HOOK_COMPLETE_SUCCEEDED</code>: The Hook completed successfully.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>HOOK_COMPLETE_FAILED</code>: The Hook completed but failed
-    #             validation.</p>
+    #                     <code>HOOK_COMPLETE_FAILED</code>: The Hook completed but failed validation.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>HOOK_FAILED</code>: The Hook encountered an error during
-    #             execution.</p>
+    #                     <code>HOOK_FAILED</code>: The Hook encountered an error during execution.</p>
     #               </li>
     #            </ul>
     # @option params [String] :next_token
-    #   <p>A string that identifies the next page of events that you want to retrieve.</p>
+    #   <p>The token for the next set of items to return. (You received this token from a previous
+    #         call.)</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     target_type: "CHANGE_SET" # One of: ["CHANGE_SET", "STACK", "RESOURCE", "CLOUD_CONTROL"],
@@ -4075,8 +4341,8 @@ module Aws::CloudFormation
     #   <p>The name of the exported output value. CloudFormation returns the stack names that are
     #         importing this value.</p>
     # @option params [String] :next_token
-    #   <p>A string (provided by the <a>ListImports</a> response output) that identifies
-    #         the next page of stacks that are importing the specified exported output value.</p>
+    #   <p>The token for the next set of items to return. (You received this token from a previous
+    #         call.)</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     export_name: "ExportName", # required
@@ -4105,7 +4371,8 @@ module Aws::CloudFormation
     #   <p>The list of resources for which you want to get the related resources. Up to 100 resources
     #         can be provided.</p>
     # @option params [String] :next_token
-    #   <p>A string that identifies the next page of resource scan results.</p>
+    #   <p>The token for the next set of items to return. (You received this token from a previous
+    #         call.)</p>
     # @option params [Integer] :max_results
     #   <p>If the number of available results exceeds this maximum, the response includes a
     #           <code>NextToken</code> value that you can use for the <code>NextToken</code> parameter to
@@ -4221,7 +4488,8 @@ module Aws::CloudFormation
     # @option params [String] :tag_value
     #   <p>If specified, the returned resources will have a matching tag value.</p>
     # @option params [String] :next_token
-    #   <p>A string that identifies the next page of resource scan results.</p>
+    #   <p>The token for the next set of items to return. (You received this token from a previous
+    #         call.)</p>
     # @option params [Integer] :max_results
     #   <p>If the number of available results exceeds this maximum, the response includes a
     #           <code>NextToken</code> value that you can use for the <code>NextToken</code> parameter to
@@ -4319,7 +4587,8 @@ module Aws::CloudFormation
     #       scans.</p>
     # @param [Hash, Types::ListResourceScansInput] params
     # @option params [String] :next_token
-    #   <p>A string that identifies the next page of resource scan results.</p>
+    #   <p>The token for the next set of items to return. (You received this token from a previous
+    #         call.)</p>
     # @option params [Integer] :max_results
     #   <p>If the number of available results exceeds this maximum, the response includes a
     #           <code>NextToken</code> value that you can use for the <code>NextToken</code> parameter to
@@ -4368,11 +4637,7 @@ module Aws::CloudFormation
     # @option params [String] :stack_set_name
     #   <p>The name or unique ID of the StackSet that you want to list drifted resources for.</p>
     # @option params [String] :next_token
-    #   <p>If the previous paginated request didn't return all of the remaining results, the response
-    #         object's <code>NextToken</code> parameter value is set to a token. To retrieve the next set of
-    #         results, call this action again and assign that token to the request object's
-    #           <code>NextToken</code> parameter. If there are no remaining results, the previous response
-    #         object's <code>NextToken</code> parameter is set to <code>null</code>.</p>
+    #   <p>The token for the next set of items to return. (You received this token from a previous call.)</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to be returned with a single call. If the number of
     #         available results exceeds this maximum, the response includes a <code>NextToken</code> value
@@ -4430,7 +4695,7 @@ module Aws::CloudFormation
     #     stack_set_name: "StackSetNameOrId", # required
     #     next_token: "NextToken",
     #     max_results: 1,
-    #     stack_instance_resource_drift_statuses: ["IN_SYNC" # One of: ["IN_SYNC", "MODIFIED", "DELETED", "NOT_CHECKED", "UNKNOWN"]],
+    #     stack_instance_resource_drift_statuses: ["IN_SYNC" # One of: ["IN_SYNC", "MODIFIED", "DELETED", "NOT_CHECKED", "UNKNOWN", "UNSUPPORTED"]],
     #     stack_instance_account: "Account", # required
     #     stack_instance_region: "Region", # required
     #     operation_id: "ClientRequestToken", # required
@@ -4461,7 +4726,7 @@ module Aws::CloudFormation
     #             difference_type: "ADD" # One of: ["ADD", "REMOVE", "NOT_EQUAL"], # required
     #           }
     #         ],
-    #         stack_resource_drift_status: "IN_SYNC" # One of: ["IN_SYNC", "MODIFIED", "DELETED", "NOT_CHECKED", "UNKNOWN"], # required
+    #         stack_resource_drift_status: "IN_SYNC" # One of: ["IN_SYNC", "MODIFIED", "DELETED", "NOT_CHECKED", "UNKNOWN", "UNSUPPORTED"], # required
     #         timestamp: Time.now, # required
     #       }
     #     ],
@@ -4480,11 +4745,7 @@ module Aws::CloudFormation
     # @option params [String] :stack_set_name
     #   <p>The name or unique ID of the StackSet that you want to list stack instances for.</p>
     # @option params [String] :next_token
-    #   <p>If the previous request didn't return all the remaining results, the response's
-    #           <code>NextToken</code> parameter value is set to a token. To retrieve the next set of
-    #         results, call <code>ListStackInstances</code> again and assign that token to the request
-    #         object's <code>NextToken</code> parameter. If there are no remaining results, the previous
-    #         response object's <code>NextToken</code> parameter is set to <code>null</code>.</p>
+    #   <p>The token for the next set of items to return. (You received this token from a previous call.)</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to be returned with a single call. If the number of
     #         available results exceeds this maximum, the response includes a <code>NextToken</code> value
@@ -4564,10 +4825,8 @@ module Aws::CloudFormation
     # @option params [String] :stack_refactor_id
     #   <p>The ID associated with the stack refactor created from the <a>CreateStackRefactor</a> action.</p>
     # @option params [String] :next_token
-    #   <p>If the request doesn't return all the remaining results, <code>NextToken</code> is set to
-    #         a token. To retrieve the next set of results, call this action again and assign that token to
-    #         the request object's <code>NextToken</code> parameter. If the request returns all results,
-    #           <code>NextToken</code> is set to <code>null</code>.</p>
+    #   <p>The token for the next set of items to return. (You received this token from a previous
+    #         call.)</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to be returned with a single call. If the number of
     #         available results exceeds this maximum, the response includes a <code>NextToken</code> value
@@ -4626,10 +4885,8 @@ module Aws::CloudFormation
     #   <p>Execution status to use as a filter. Specify one or more execution status codes to list
     #         only stack refactors with the specified execution status codes.</p>
     # @option params [String] :next_token
-    #   <p>If the request doesn't return all the remaining results, <code>NextToken</code> is set to
-    #         a token. To retrieve the next set of results, call this action again and assign that token to
-    #         the request object's <code>NextToken</code> parameter. If the request returns all results,
-    #           <code>NextToken</code> is set to <code>null</code>.</p>
+    #   <p>The token for the next set of items to return. (You received this token from a previous
+    #         call.)</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to be returned with a single call. If the number of
     #         available results exceeds this maximum, the response includes a <code>NextToken</code> value
@@ -4680,8 +4937,8 @@ module Aws::CloudFormation
     #               </li>
     #            </ul>
     # @option params [String] :next_token
-    #   <p>A string that identifies the next page of stack resources that you want to
-    #         retrieve.</p>
+    #   <p>The token for the next set of items to return. (You received this token from a previous
+    #         call.)</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     stack_name: "StackName", # required
@@ -4701,7 +4958,7 @@ module Aws::CloudFormation
     #         resource_status: "CREATE_IN_PROGRESS" # One of: ["CREATE_IN_PROGRESS", "CREATE_FAILED", "CREATE_COMPLETE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETE_COMPLETE", "DELETE_SKIPPED", "UPDATE_IN_PROGRESS", "UPDATE_FAILED", "UPDATE_COMPLETE", "IMPORT_FAILED", "IMPORT_COMPLETE", "IMPORT_IN_PROGRESS", "IMPORT_ROLLBACK_IN_PROGRESS", "IMPORT_ROLLBACK_FAILED", "IMPORT_ROLLBACK_COMPLETE", "EXPORT_FAILED", "EXPORT_COMPLETE", "EXPORT_IN_PROGRESS", "EXPORT_ROLLBACK_IN_PROGRESS", "EXPORT_ROLLBACK_FAILED", "EXPORT_ROLLBACK_COMPLETE", "UPDATE_ROLLBACK_IN_PROGRESS", "UPDATE_ROLLBACK_COMPLETE", "UPDATE_ROLLBACK_FAILED", "ROLLBACK_IN_PROGRESS", "ROLLBACK_COMPLETE", "ROLLBACK_FAILED"], # required
     #         resource_status_reason: "ResourceStatusReason",
     #         drift_information: {
-    #           stack_resource_drift_status: "IN_SYNC" # One of: ["IN_SYNC", "MODIFIED", "DELETED", "NOT_CHECKED", "UNKNOWN"], # required
+    #           stack_resource_drift_status: "IN_SYNC" # One of: ["IN_SYNC", "MODIFIED", "DELETED", "NOT_CHECKED", "UNKNOWN", "UNSUPPORTED"], # required
     #           last_check_timestamp: Time.now
     #         },
     #         module_info: {
@@ -4724,8 +4981,7 @@ module Aws::CloudFormation
     #   <p>The name or unique ID of the StackSet that you want to get automatic deployment targets
     #         for.</p>
     # @option params [String] :next_token
-    #   <p>A string that identifies the next page of deployment targets that you want to
-    #         retrieve.</p>
+    #   <p>The token for the next set of items to return. (You received this token from a previous call.)</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to be returned with a single call. If the number of
     #         available results exceeds this maximum, the response includes a <code>NextToken</code> value
@@ -4784,12 +5040,7 @@ module Aws::CloudFormation
     # @option params [String] :operation_id
     #   <p>The ID of the StackSet operation.</p>
     # @option params [String] :next_token
-    #   <p>If the previous request didn't return all the remaining results, the response object's
-    #           <code>NextToken</code> parameter value is set to a token. To retrieve the next set of
-    #         results, call <code>ListStackSetOperationResults</code> again and assign that token to the
-    #         request object's <code>NextToken</code> parameter. If there are no remaining results, the
-    #         previous response object's <code>NextToken</code> parameter is set to
-    #         <code>null</code>.</p>
+    #   <p>The token for the next set of items to return. (You received this token from a previous call.)</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to be returned with a single call. If the number of
     #         available results exceeds this maximum, the response includes a <code>NextToken</code> value
@@ -4864,11 +5115,7 @@ module Aws::CloudFormation
     # @option params [String] :stack_set_name
     #   <p>The name or unique ID of the StackSet that you want to get operation summaries for.</p>
     # @option params [String] :next_token
-    #   <p>If the previous paginated request didn't return all of the remaining results, the response
-    #         object's <code>NextToken</code> parameter value is set to a token. To retrieve the next set of
-    #         results, call <code>ListStackSetOperations</code> again and assign that token to the request
-    #         object's <code>NextToken</code> parameter. If there are no remaining results, the previous
-    #         response object's <code>NextToken</code> parameter is set to <code>null</code>.</p>
+    #   <p>The token for the next set of items to return. (You received this token from a previous call.)</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to be returned with a single call. If the number of
     #         available results exceeds this maximum, the response includes a <code>NextToken</code> value
@@ -4959,11 +5206,7 @@ module Aws::CloudFormation
     #          </ul>
     # @param [Hash, Types::ListStackSetsInput] params
     # @option params [String] :next_token
-    #   <p>If the previous paginated request didn't return all the remaining results, the response
-    #         object's <code>NextToken</code> parameter value is set to a token. To retrieve the next set of
-    #         results, call <code>ListStackSets</code> again and assign that token to the request object's
-    #           <code>NextToken</code> parameter. If there are no remaining results, the previous response
-    #         object's <code>NextToken</code> parameter is set to <code>null</code>.</p>
+    #   <p>The token for the next set of items to return. (You received this token from a previous call.)</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to be returned with a single call. If the number of
     #         available results exceeds this maximum, the response includes a <code>NextToken</code> value
@@ -5009,7 +5252,8 @@ module Aws::CloudFormation
     #         status: "ACTIVE" # One of: ["ACTIVE", "DELETED"],
     #         auto_deployment: {
     #           enabled: false,
-    #           retain_stacks_on_account_removal: false
+    #           retain_stacks_on_account_removal: false,
+    #           depends_on: ["StackSetARN"]
     #         },
     #         permission_model: "SERVICE_MANAGED" # One of: ["SERVICE_MANAGED", "SELF_MANAGED"],
     #         drift_status: "DRIFTED" # One of: ["DRIFTED", "IN_SYNC", "UNKNOWN", "NOT_CHECKED"],
@@ -5034,7 +5278,8 @@ module Aws::CloudFormation
     #       stacks that have been deleted).</p>
     # @param [Hash, Types::ListStacksInput] params
     # @option params [String] :next_token
-    #   <p>A string that identifies the next page of stacks that you want to retrieve.</p>
+    #   <p>The token for the next set of items to return. (You received this token from a previous
+    #         call.)</p>
     # @option params [Array<String>] :stack_status_filter
     #   <p>Stack status to use as a filter. Specify one or more stack status codes to list only
     #         stacks with the specified status codes. For a complete list of stack status codes, see the
@@ -5064,7 +5309,13 @@ module Aws::CloudFormation
     #         drift_information: {
     #           stack_drift_status: "DRIFTED" # One of: ["DRIFTED", "IN_SYNC", "UNKNOWN", "NOT_CHECKED"], # required
     #           last_check_timestamp: Time.now
-    #         }
+    #         },
+    #         last_operations: [
+    #           {
+    #             operation_type: "CREATE_STACK" # One of: ["CREATE_STACK", "UPDATE_STACK", "DELETE_STACK", "CONTINUE_ROLLBACK", "ROLLBACK", "CREATE_CHANGESET"],
+    #             operation_id: "OperationId"
+    #           }
+    #         ]
     #       }
     #     ],
     #     next_token: "NextToken"
@@ -5098,11 +5349,8 @@ module Aws::CloudFormation
     #         that you can assign to the <code>NextToken</code> request parameter to get the next set of
     #         results.</p>
     # @option params [String] :next_token
-    #   <p>If the previous paginated request didn't return all the remaining results, the response
-    #         object's <code>NextToken</code> parameter value is set to a token. To retrieve the next set of
-    #         results, call this action again and assign that token to the request object's
-    #           <code>NextToken</code> parameter. If there are no remaining results, the previous response
-    #         object's <code>NextToken</code> parameter is set to <code>null</code>.</p>
+    #   <p>The token for the next set of items to return. (You received this token from a previous
+    #         call.)</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     type: "RESOURCE" # One of: ["RESOURCE", "MODULE", "HOOK"],
@@ -5147,11 +5395,8 @@ module Aws::CloudFormation
     #         that you can assign to the <code>NextToken</code> request parameter to get the next set of
     #         results.</p>
     # @option params [String] :next_token
-    #   <p>If the previous paginated request didn't return all of the remaining results, the response
-    #         object's <code>NextToken</code> parameter value is set to a token. To retrieve the next set of
-    #         results, call this action again and assign that token to the request object's
-    #           <code>NextToken</code> parameter. If there are no remaining results, the previous response
-    #         object's <code>NextToken</code> parameter is set to <code>null</code>.</p>
+    #   <p>The token for the next set of items to return. (You received this token from a previous
+    #         call.)</p>
     # @option params [String] :deprecated_status
     #   <p>The deprecation status of the extension versions that you want to get summary information
     #         about.</p>
@@ -5289,11 +5534,8 @@ module Aws::CloudFormation
     #         that you can assign to the <code>NextToken</code> request parameter to get the next set of
     #         results.</p>
     # @option params [String] :next_token
-    #   <p>If the previous paginated request didn't return all the remaining results, the response
-    #         object's <code>NextToken</code> parameter value is set to a token. To retrieve the next set of
-    #         results, call this action again and assign that token to the request object's
-    #           <code>NextToken</code> parameter. If there are no remaining results, the previous response
-    #         object's <code>NextToken</code> parameter is set to <code>null</code>.</p>
+    #   <p>The token for the next set of items to return. (You received this token from a previous
+    #         call.)</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     visibility: "PUBLIC" # One of: ["PUBLIC", "PRIVATE"],
@@ -5662,19 +5904,27 @@ module Aws::CloudFormation
     #           <code>Retain</code>.</p>
     #            <p>Default: <code>false</code>
     #            </p>
+    # @option params [Types::DeploymentConfig] :deployment_config
+    #   <p>The deployment configuration for this stack operation, including the deployment
+    #         mode.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     stack_name: "StackNameOrId", # required
     #     role_arn: "RoleARN",
     #     client_request_token: "ClientRequestToken",
-    #     retain_except_on_create: false
+    #     retain_except_on_create: false,
+    #     deployment_config: {
+    #       mode: "STANDARD" # One of: ["STANDARD", "EXPRESS"],
+    #       disable_rollback: false
+    #     }
     #   }
     #   options = {}
     #   response = client.rollback_stack(params, options)
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {
-    #     stack_id: "StackId"
+    #     stack_id: "StackId",
+    #     operation_id: "OperationId"
     #   }
     # @return [Types::RollbackStackOutput]
     def rollback_stack(params = {}, options = {})
@@ -5728,8 +5978,7 @@ module Aws::CloudFormation
     #          </important>
     #          <p>For more information about setting the configuration data for resource types, see <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-model.html#resource-type-howto-configuration">Defining the account-level configuration of an extension</a> in the
     #         <i>CloudFormation Command Line Interface (CLI) User Guide</i>. For more information about setting the configuration
-    #       data for Hooks, see the <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/hooks-userguide/what-is-cloudformation-hooks.html">CloudFormation
-    #         Hooks User Guide</a>.</p>
+    #       data for Hooks, see the <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/hooks-userguide/what-is-cloudformation-hooks.html">CloudFormation Hooks User Guide</a>.</p>
     # @param [Hash, Types::SetTypeConfigurationInput] params
     # @option params [String] :type_arn
     #   <p>The Amazon Resource Name (ARN) for the extension in this account and Region.</p>
@@ -6150,6 +6399,9 @@ module Aws::CloudFormation
     # @option params [Boolean] :use_previous_template
     #   <p>Reuse the existing template that is associated with the stack that you are
     #         updating.</p>
+    #            <p>When using templates with the <code>AWS::LanguageExtensions</code> transform, provide the
+    #         template instead of using <code>UsePreviousTemplate</code> to ensure new parameter values and
+    #         Systems Manager parameter updates are applied correctly. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/transform-aws-languageextensions.html">AWS::LanguageExtensions transform</a>.</p>
     #            <p>Conditional: You must specify only one of the following parameters:
     #           <code>TemplateBody</code>, <code>TemplateURL</code>, or set the
     #           <code>UsePreviousTemplate</code> to <code>true</code>.</p>
@@ -6282,14 +6534,13 @@ module Aws::CloudFormation
     #           be specified.</p>
     #            </note>
     # @option params [Array<String>] :resource_types
-    #   <p>The template resource types that you have permissions to work with for this update stack
-    #         action, such as <code>AWS::EC2::Instance</code>, <code>AWS::EC2::*</code>, or
-    #           <code>Custom::MyCustomInstance</code>.</p>
+    #   <p>Specifies which resource types you can work with, such as <code>AWS::EC2::Instance</code>
+    #         or <code>Custom::MyCustomInstance</code>.</p>
     #            <p>If the list of resource types doesn't include a resource that you're updating, the stack
     #         update fails. By default, CloudFormation grants permissions to all resource types. IAM uses this
     #         parameter for CloudFormation-specific condition keys in IAM policies. For more information, see
-    #           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html">Control access with
-    #           Identity and Access Management</a>.</p>
+    #           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html">Control CloudFormation
+    #           access with Identity and Access Management</a>.</p>
     #            <note>
     #               <p>Only one of the <code>Capabilities</code> and <code>ResourceType</code> parameters can
     #           be specified.</p>
@@ -6357,6 +6608,16 @@ module Aws::CloudFormation
     #           <code>Retain</code>.</p>
     #            <p>Default: <code>false</code>
     #            </p>
+    # @option params [Types::DeploymentConfig] :deployment_config
+    #   <p>The deployment configuration for this stack operation, including the deployment
+    #         mode.</p>
+    # @option params [Boolean] :disable_validation
+    #   <p>
+    #       Set to <code>true</code> to disable pre-deployment validations in changeset or stack operations.
+    #       </p>
+    #            <p>
+    #       Default: <code>false</code>
+    #            </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     stack_name: "StackName", # required
@@ -6396,14 +6657,20 @@ module Aws::CloudFormation
     #     ],
     #     disable_rollback: false,
     #     client_request_token: "ClientRequestToken",
-    #     retain_except_on_create: false
+    #     retain_except_on_create: false,
+    #     deployment_config: {
+    #       mode: "STANDARD" # One of: ["STANDARD", "EXPRESS"],
+    #       disable_rollback: false
+    #     },
+    #     disable_validation: false
     #   }
     #   options = {}
     #   response = client.update_stack(params, options)
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {
-    #     stack_id: "StackId"
+    #     stack_id: "StackId",
+    #     operation_id: "OperationId"
     #   }
     # @return [Types::UpdateStackOutput]
     def update_stack(params = {}, options = {})
@@ -6889,7 +7156,8 @@ module Aws::CloudFormation
     #     permission_model: "SERVICE_MANAGED" # One of: ["SERVICE_MANAGED", "SELF_MANAGED"],
     #     auto_deployment: {
     #       enabled: false,
-    #       retain_stacks_on_account_removal: false
+    #       retain_stacks_on_account_removal: false,
+    #       depends_on: ["StackSetARN"]
     #     },
     #     operation_id: "ClientRequestToken",
     #     accounts: ["Account"],

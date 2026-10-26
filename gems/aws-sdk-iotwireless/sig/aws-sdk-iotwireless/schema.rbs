@@ -9,6 +9,7 @@ module Aws::IoTWireless
     Accuracy: StructureShape
     AckModeRetryDurationSecs: IntegerShape
     AddGwMetadata: BooleanShape
+    AdvancedConfiguration: StructureShape
     AggregationPeriod: EnumShape
     AmazonId: StringShape
     AmazonResourceName: StringShape
@@ -66,6 +67,7 @@ module Aws::IoTWireless
     ClassBTimeout: IntegerShape
     ClassCTimeout: IntegerShape
     ClientRequestToken: StringShape
+    ConfidencePercent: IntegerShape
     ConflictException: StructureShape
     ConnectionStatus: EnumShape
     ConnectionStatusEventConfiguration: StructureShape
@@ -98,6 +100,7 @@ module Aws::IoTWireless
     DakCertificateId: StringShape
     DakCertificateMetadata: StructureShape
     DakCertificateMetadataList: ListShape
+    DefaultSessionParametersMulticast: StructureShape
     DeleteDestinationRequest: StructureShape
     DeleteDestinationResponse: StructureShape
     DeleteDeviceProfileRequest: StructureShape
@@ -284,6 +287,9 @@ module Aws::IoTWireless
     GetWirelessGatewayTaskResponse: StructureShape
     GlobalIdentity: StructureShape
     Gnss: StructureShape
+    GnssCapture: StructureShape
+    GnssCaptures: ListShape
+    GnssMultiFrame: StructureShape
     GnssNav: StringShape
     GsmList: ListShape
     GsmLocalId: StructureShape
@@ -547,13 +553,16 @@ module Aws::IoTWireless
     SidewalkGetStartImportInfo: StructureShape
     SidewalkId: StringShape
     SidewalkListDevice: StructureShape
+    SidewalkListDevicesForImportInfo: StructureShape
     SidewalkManufacturingSn: StringShape
+    SidewalkPositioning: StructureShape
     SidewalkResourceTypeEventConfiguration: StructureShape
     SidewalkSendDataToDevice: StructureShape
     SidewalkSingleStartImportInfo: StructureShape
     SidewalkStartImportInfo: StructureShape
     SidewalkUpdateAccount: StructureShape
     SidewalkUpdateImportInfo: StructureShape
+    SidewalkUpdateWirelessDevice: StructureShape
     SigningAlg: EnumShape
     StartBulkAssociateWirelessDeviceWithMulticastGroupRequest: StructureShape
     StartBulkAssociateWirelessDeviceWithMulticastGroupResponse: StructureShape
@@ -666,6 +675,7 @@ module Aws::IoTWireless
     WcdmaObj: StructureShape
     WiFiAccessPoint: StructureShape
     WiFiAccessPoints: ListShape
+    WiFiCellular: StructureShape
     WirelessDeviceArn: StringShape
     WirelessDeviceEvent: EnumShape
     WirelessDeviceEventLogOption: StructureShape

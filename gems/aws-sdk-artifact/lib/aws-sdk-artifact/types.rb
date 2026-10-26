@@ -29,6 +29,26 @@ module Aws::Artifact
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Citation information for AI-generated responses.</p>
+    # @!attribute source_label
+    #   <p>Label identifying the compliance source.</p>
+    #   @return [String]
+    # @!attribute source_content
+    #   <p>Content text from the compliance source.</p>
+    #   @return [String]
+    # @!attribute source_link
+    #   <p>Link to the compliance source.</p>
+    #   @return [String]
+    class Citation < Struct.new(
+      nil,
+      :source_label,
+      :source_content,
+      :source_link,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Request to create/modify content would result in a conflict.</p>
     # @!attribute message
     #   @return [String]
@@ -43,6 +63,48 @@ module Aws::Artifact
       :message,
       :resource_id,
       :resource_type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute name
+    #   <p>Title of the inquiry.</p>
+    #   @return [String]
+    # @!attribute inquiry_content
+    #   <p>Content for creating a compliance inquiry - either a single query or file content.</p>
+    #   @return [Types::InquiryContent]
+    # @!attribute client_token
+    #   <p>Idempotency token for the request.</p>
+    #   @return [String]
+    # @!attribute support_mode
+    #   <p>Support mode for inquiry processing. Only supported for file upload mode. Defaults to AI_ONLY if not specified.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>Tags to associate with the compliance inquiry resource.</p>
+    #   @return [Hash<String, String>]
+    class CreateComplianceInquiryRequest < Struct.new(
+      nil,
+      :name,
+      :inquiry_content,
+      :client_token,
+      :support_mode,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute compliance_inquiry_summary
+    #   <p>Summary information about the created compliance inquiry.</p>
+    #   @return [Types::InquirySummary]
+    # @!attribute tags
+    #   <p>Tags associated with the compliance inquiry resource.</p>
+    #   @return [Hash<String, String>]
+    class CreateComplianceInquiryResponse < Struct.new(
+      nil,
+      :compliance_inquiry_summary,
+      :tags,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -108,6 +170,40 @@ module Aws::Artifact
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute compliance_inquiry_id
+    #   <p>Unique resource ID for the compliance inquiry.</p>
+    #   @return [String]
+    # @!attribute query_identifiers
+    #   <p>List of query identifiers to include in the export.</p>
+    #   @return [Array<Integer>]
+    # @!attribute include_citations
+    #   <p>When true, include citations in the exported document.</p>
+    #   @return [Boolean]
+    class ExportComplianceInquiryRequest < Struct.new(
+      nil,
+      :compliance_inquiry_id,
+      :query_identifiers,
+      :include_citations,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute document_presigned_url
+    #   <p>Presigned S3 URL to access the exported compliance inquiry report.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>Tags associated with the compliance inquiry resource.</p>
+    #   @return [Hash<String, String>]
+    class ExportComplianceInquiryResponse < Struct.new(
+      nil,
+      :document_presigned_url,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     class GetAccountSettingsRequest < Struct.new(
       nil,
       keyword_init: true
@@ -121,6 +217,32 @@ module Aws::Artifact
     class GetAccountSettingsResponse < Struct.new(
       nil,
       :account_settings,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute compliance_inquiry_id
+    #   <p>Unique resource ID for the compliance inquiry.</p>
+    #   @return [String]
+    class GetComplianceInquiryMetadataRequest < Struct.new(
+      nil,
+      :compliance_inquiry_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute compliance_inquiry_detail
+    #   <p>Detailed information about the compliance inquiry.</p>
+    #   @return [Types::InquiryDetail]
+    # @!attribute tags
+    #   <p>Tags associated with the compliance inquiry resource.</p>
+    #   @return [Hash<String, String>]
+    class GetComplianceInquiryMetadataResponse < Struct.new(
+      nil,
+      :compliance_inquiry_detail,
+      :tags,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -212,6 +334,123 @@ module Aws::Artifact
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Content for creating a compliance inquiry - either a single query or file content.</p>
+    # @note This shape contains sensitive data and should be treated as such.
+    # @!attribute query
+    #   <p>Single text query for AI-generated answer.</p>
+    #   @return [String]
+    # @!attribute file_content
+    #   <p>File content with multiple questions.</p>
+    #   @return [Types::InquiryFileContent]
+    class InquiryContent < Struct.new(
+      :query,
+      :file_content,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class Query < InquiryContent; end
+      class FileContent < InquiryContent; end
+      class Unknown < InquiryContent; end
+    end
+
+    # <p>Detailed information about a compliance inquiry.</p>
+    # @!attribute arn
+    #   <p>ARN of the compliance inquiry resource.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>Title of the inquiry.</p>
+    #   @return [String]
+    # @!attribute id
+    #   <p>Unique resource ID for the compliance inquiry.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>Current processing status of the inquiry.</p>
+    #   @return [String]
+    # @!attribute status_message
+    #   <p>Status message providing additional context.</p>
+    #   @return [String]
+    # @!attribute input_source
+    #   <p>Type of inquiry content (text or file).</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>Timestamp indicating when the resource was created.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>Timestamp indicating when the resource was last modified.</p>
+    #   @return [Time]
+    # @!attribute support_mode
+    #   <p>Support mode for this inquiry. AI_ONLY provides AI-generated responses. FULL_SUPPORT includes human expert review.</p>
+    #   @return [String]
+    class InquiryDetail < Struct.new(
+      nil,
+      :arn,
+      :name,
+      :id,
+      :status,
+      :status_message,
+      :input_source,
+      :created_at,
+      :updated_at,
+      :support_mode,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>File content structure for compliance inquiry uploads.</p>
+    # @!attribute file_sections
+    #   <p>List of file sections/sheets to process.</p>
+    #   @return [Array<String>]
+    # @!attribute content
+    #   <p>Binary content of the uploaded file.</p>
+    #   @return [String]
+    class InquiryFileContent < Struct.new(
+      nil,
+      :file_sections,
+      :content,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Summary information about a compliance inquiry.</p>
+    # @!attribute arn
+    #   <p>ARN of the compliance inquiry resource.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>Title of the inquiry.</p>
+    #   @return [String]
+    # @!attribute id
+    #   <p>Unique resource ID for the compliance inquiry.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>Current processing status of the inquiry.</p>
+    #   @return [String]
+    # @!attribute status_message
+    #   <p>Status message providing additional context.</p>
+    #   @return [String]
+    # @!attribute input_source
+    #   <p>Type of inquiry content (text or file).</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>Timestamp indicating when the resource was created.</p>
+    #   @return [Time]
+    class InquirySummary < Struct.new(
+      nil,
+      :arn,
+      :name,
+      :id,
+      :status,
+      :status_message,
+      :input_source,
+      :created_at,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>An unknown server exception has occurred.</p>
     # @!attribute message
     #   @return [String]
@@ -222,6 +461,70 @@ module Aws::Artifact
       nil,
       :message,
       :retry_after_seconds,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute max_results
+    #   <p>Maximum number of resources to return in the paginated response.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>Pagination token to request the next page of resources.</p>
+    #   @return [String]
+    class ListComplianceInquiriesRequest < Struct.new(
+      nil,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute compliance_inquiries
+    #   <p>List of compliance inquiry resources.</p>
+    #   @return [Array<Types::InquirySummary>]
+    # @!attribute next_token
+    #   <p>Pagination token to request the next page of resources.</p>
+    #   @return [String]
+    class ListComplianceInquiriesResponse < Struct.new(
+      nil,
+      :compliance_inquiries,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute compliance_inquiry_id
+    #   <p>Unique resource ID for the compliance inquiry.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>Maximum number of resources to return in the paginated response.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>Pagination token to request the next page of resources.</p>
+    #   @return [String]
+    class ListComplianceInquiryQueriesRequest < Struct.new(
+      nil,
+      :compliance_inquiry_id,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute queries
+    #   <p>List of compliance query summaries.</p>
+    #   @return [Array<Types::QuerySummary>]
+    # @!attribute next_token
+    #   <p>Pagination token to request the next page of resources.</p>
+    #   @return [String]
+    class ListComplianceInquiryQueriesResponse < Struct.new(
+      nil,
+      :queries,
+      :next_token,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -251,6 +554,40 @@ module Aws::Artifact
     class ListCustomerAgreementsResponse < Struct.new(
       nil,
       :customer_agreements,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute report_id
+    #   <p>Unique resource ID for the report resource.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>Maximum number of resources to return in the paginated response.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>Pagination token to request the next page of resources.</p>
+    #   @return [String]
+    class ListReportVersionsRequest < Struct.new(
+      nil,
+      :report_id,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute reports
+    #   <p>List of report resources.</p>
+    #   @return [Array<Types::ReportSummary>]
+    # @!attribute next_token
+    #   <p>Pagination token to request the next page of resources.</p>
+    #   @return [String]
+    class ListReportVersionsResponse < Struct.new(
+      nil,
+      :reports,
       :next_token,
       keyword_init: true
     )
@@ -287,6 +624,28 @@ module Aws::Artifact
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the resource.</p>
+    #   @return [String]
+    class ListTagsForResourceRequest < Struct.new(
+      nil,
+      :resource_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute tags
+    #   <p>Tags associated with the resource.</p>
+    #   @return [Hash<String, String>]
+    class ListTagsForResourceResponse < Struct.new(
+      nil,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute notification_subscription_status
     #   <p>Desired notification subscription status.</p>
     #   @return [String]
@@ -304,6 +663,96 @@ module Aws::Artifact
     class PutAccountSettingsResponse < Struct.new(
       nil,
       :account_settings,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute compliance_inquiry_id
+    #   <p>The unique identifier for the compliance inquiry.</p>
+    #   @return [String]
+    # @!attribute query_identifier
+    #   <p>The sequential identifier of the query to provide feedback on.</p>
+    #   @return [Integer]
+    # @!attribute rating
+    #   <p>The rating for the feedback. Valid values are THUMBS_UP and THUMBS_DOWN.</p>
+    #   @return [String]
+    # @!attribute response_revision_id
+    #   <p>The response revision ID. Use this value to prevent submitting feedback on a stale response.</p>
+    #   @return [Integer]
+    # @!attribute reason_codes
+    #   <p>The reason codes that describe why you rated the response. Valid values are OTHER, PARTIAL_RESPONSE, and IRRELEVANT_RESPONSE.</p>
+    #   @return [Array<String>]
+    # @!attribute comment
+    #   <p>An optional comment for the feedback.</p>
+    #   @return [String]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier to ensure that the operation completes no more than one time. If this token matches a previous request, the service ignores the request, but does not return an error.</p>
+    #   @return [String]
+    class PutComplianceInquiryFeedbackRequest < Struct.new(
+      nil,
+      :compliance_inquiry_id,
+      :query_identifier,
+      :rating,
+      :response_revision_id,
+      :reason_codes,
+      :comment,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute submitted_at
+    #   <p>The timestamp when the feedback was submitted.</p>
+    #   @return [Time]
+    class PutComplianceInquiryFeedbackResponse < Struct.new(
+      nil,
+      :submitted_at,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Summary information about a single query within a compliance inquiry.</p>
+    # @!attribute query_identifier
+    #   <p>Sequential identifier of the query within the inquiry.</p>
+    #   @return [Integer]
+    # @!attribute query
+    #   <p>The actual query text.</p>
+    #   @return [String]
+    # @!attribute response
+    #   <p>Generated response to the query.</p>
+    #   @return [String]
+    # @!attribute review_type
+    #   <p>Type of review for the response.</p>
+    #   @return [String]
+    # @!attribute citations
+    #   <p>Supporting citations for the response.</p>
+    #   @return [Array<Types::Citation>]
+    # @!attribute status
+    #   <p>Current processing status of the query.</p>
+    #   @return [String]
+    # @!attribute status_message
+    #   <p>Descriptive status message.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>Timestamp when the query was created.</p>
+    #   @return [Time]
+    # @!attribute updated_response_versions
+    #   <p>Ordered list of response version history entries, oldest first.</p>
+    #   @return [Array<Types::ResponseVersion>]
+    class QuerySummary < Struct.new(
+      nil,
+      :query_identifier,
+      :query,
+      :response,
+      :review_type,
+      :citations,
+      :status,
+      :status_message,
+      :created_at,
+      :updated_response_versions,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -484,6 +933,22 @@ module Aws::Artifact
       include ::Smithy::Schema::Structure
     end
 
+    # <p>A versioned snapshot of a response edit.</p>
+    # @!attribute response_text
+    #   <p>The response text for this version.</p>
+    #   @return [String]
+    # @!attribute timestamp
+    #   <p>ISO 8601 timestamp of when this edit was made.</p>
+    #   @return [Time]
+    class ResponseVersion < Struct.new(
+      nil,
+      :response_text,
+      :timestamp,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Request would cause a service quota to be exceeded.</p>
     # @!attribute message
     #   @return [String]
@@ -511,6 +976,28 @@ module Aws::Artifact
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the resource.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>Tags to add to the resource.</p>
+    #   @return [Hash<String, String>]
+    class TagResourceRequest < Struct.new(
+      nil,
+      :resource_arn,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class TagResourceResponse < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Request was denied due to request throttling.</p>
     # @!attribute message
     #   @return [String]
@@ -529,6 +1016,28 @@ module Aws::Artifact
       :service_code,
       :quota_code,
       :retry_after_seconds,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the resource.</p>
+    #   @return [String]
+    # @!attribute tag_keys
+    #   <p>Tag keys to remove from the resource.</p>
+    #   @return [Array<String>]
+    class UntagResourceRequest < Struct.new(
+      nil,
+      :resource_arn,
+      :tag_keys,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class UntagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

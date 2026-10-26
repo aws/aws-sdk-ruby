@@ -35,6 +35,7 @@ module Aws::LicenseManagerUserSubscriptions
       def initialize: (
         ?domain_name: String,
         ?domain_ipv4_list: Array[String],
+        ?domain_ipv6_list: Array[String],
         ?domain_credentials_provider: Types::CredentialsProvider,
         ?domain_network_settings: Types::DomainNetworkSettings,
       ) -> void
@@ -42,6 +43,7 @@ module Aws::LicenseManagerUserSubscriptions
 
       attr_accessor domain_name: String?
       attr_accessor domain_ipv4_list: Array[String]?
+      attr_accessor domain_ipv6_list: Array[String]?
       attr_accessor domain_credentials_provider: Types::CredentialsProvider?
       attr_accessor domain_network_settings: Types::DomainNetworkSettings?
     end
@@ -344,12 +346,14 @@ module Aws::LicenseManagerUserSubscriptions
         ?provisioning_status: String,
         ?health_status: String,
         ?ipv4_address: String,
+        ?ipv6_address: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor provisioning_status: String?
       attr_accessor health_status: String?
       attr_accessor ipv4_address: String?
+      attr_accessor ipv6_address: String?
     end
 
     class LicenseServerEndpoint
@@ -575,6 +579,7 @@ module Aws::LicenseManagerUserSubscriptions
         ?domain: String,
         ?subscription_start_date: String,
         ?subscription_end_date: String,
+        ?license_expiration_date: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -587,6 +592,7 @@ module Aws::LicenseManagerUserSubscriptions
       attr_accessor domain: String?
       attr_accessor subscription_start_date: String?
       attr_accessor subscription_end_date: String?
+      attr_accessor license_expiration_date: String?
     end
 
     class RdsSalSettings

@@ -131,8 +131,7 @@ module Aws::Pricing
       end
     end
 
-    # <p>You've made too many requests exceeding service quotas.
-    #       </p>
+    # <p>You've made too many requests exceeding service quotas. </p>
     class ThrottlingException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Pricing::Types::ThrottlingException] data

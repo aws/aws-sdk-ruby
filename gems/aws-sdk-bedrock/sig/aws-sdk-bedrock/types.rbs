@@ -12,6 +12,107 @@ module Aws::Bedrock
       attr_accessor message: String?
     end
 
+    class AccountEnforcedGuardrailInferenceInputConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?guardrail_identifier: String,
+        ?guardrail_version: String,
+        ?selective_content_guarding: Types::SelectiveContentGuarding,
+        ?model_enforcement: Types::ModelEnforcement,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor guardrail_identifier: String?
+      attr_accessor guardrail_version: String?
+      attr_accessor selective_content_guarding: Types::SelectiveContentGuarding?
+      attr_accessor model_enforcement: Types::ModelEnforcement?
+    end
+
+    class AccountEnforcedGuardrailOutputConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?config_id: String,
+        ?guardrail_arn: String,
+        ?guardrail_id: String,
+        ?input_tags: String,
+        ?selective_content_guarding: Types::SelectiveContentGuarding,
+        ?guardrail_version: String,
+        ?created_at: Time,
+        ?created_by: String,
+        ?updated_at: Time,
+        ?updated_by: String,
+        ?owner: String,
+        ?model_enforcement: Types::ModelEnforcement,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor config_id: String?
+      attr_accessor guardrail_arn: String?
+      attr_accessor guardrail_id: String?
+      attr_accessor input_tags: String?
+      attr_accessor selective_content_guarding: Types::SelectiveContentGuarding?
+      attr_accessor guardrail_version: String?
+      attr_accessor created_at: Time?
+      attr_accessor created_by: String?
+      attr_accessor updated_at: Time?
+      attr_accessor updated_by: String?
+      attr_accessor owner: String?
+      attr_accessor model_enforcement: Types::ModelEnforcement?
+    end
+
+    class AdvancedPromptOptimizationInputConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_uri: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_uri: String?
+    end
+
+    module AdvancedPromptOptimizationJobStatus
+      IN_PROGRESS: String
+      COMPLETED: String
+      FAILED: String
+      PARTIALLY_COMPLETED: String
+      STOPPING: String
+      STOPPED: String
+      DELETING: String
+    end
+
+    class AdvancedPromptOptimizationJobSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_arn: String,
+        ?job_name: String,
+        ?job_status: String,
+        ?creation_time: Time,
+        ?last_modified_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_arn: String?
+      attr_accessor job_name: String?
+      attr_accessor job_status: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_modified_time: Time?
+    end
+
+    class AdvancedPromptOptimizationOutputConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_uri: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_uri: String?
+    end
+
     class AgreementAvailability
       include Smithy::Schema::Structure
 
@@ -434,6 +535,48 @@ module Aws::Bedrock
       attr_accessor variable: Types::AutomatedReasoningPolicyDefinitionVariable?
     end
 
+    class AutomatedReasoningPolicyAnnotatedChunk
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?page_number: Integer,
+        ?content: Array[Types::AutomatedReasoningPolicyAnnotatedContent],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor page_number: Integer?
+      attr_accessor content: Array[Types::AutomatedReasoningPolicyAnnotatedContent]?
+    end
+
+    class AutomatedReasoningPolicyAnnotatedContent
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?line: Types::AutomatedReasoningPolicyAnnotatedLine,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor line: Types::AutomatedReasoningPolicyAnnotatedLine?
+
+      class Line < AutomatedReasoningPolicyAnnotatedContent
+      end
+      class Unknown < AutomatedReasoningPolicyAnnotatedContent
+      end
+    end
+
+    class AutomatedReasoningPolicyAnnotatedLine
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?line_number: Integer,
+        ?line_text: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor line_number: Integer?
+      attr_accessor line_text: String?
+    end
+
     class AutomatedReasoningPolicyAnnotation
       include Smithy::Schema::Union
 
@@ -503,6 +646,21 @@ module Aws::Bedrock
       FAILED: String
     end
 
+    class AutomatedReasoningPolicyAtomicStatement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?text: String,
+        ?location: Types::AutomatedReasoningPolicyStatementLocation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor text: String?
+      attr_accessor location: Types::AutomatedReasoningPolicyStatementLocation?
+    end
+
     module AutomatedReasoningPolicyBuildDocumentContentType
       PDF: String
       TEXT: String
@@ -540,10 +698,41 @@ module Aws::Bedrock
       ERROR: String
     end
 
+    class AutomatedReasoningPolicyBuildResultAssetManifest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entries: Array[Types::AutomatedReasoningPolicyBuildResultAssetManifestEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entries: Array[Types::AutomatedReasoningPolicyBuildResultAssetManifestEntry]?
+    end
+
+    class AutomatedReasoningPolicyBuildResultAssetManifestEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_type: String,
+        ?asset_name: String,
+        ?asset_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_type: String?
+      attr_accessor asset_name: String?
+      attr_accessor asset_id: String?
+    end
+
     module AutomatedReasoningPolicyBuildResultAssetType
       BUILD_LOG: String
       QUALITY_REPORT: String
       POLICY_DEFINITION: String
+      GENERATED_TEST_CASES: String
+      POLICY_SCENARIOS: String
+      FIDELITY_REPORT: String
+      ASSET_MANIFEST: String
+      SOURCE_DOCUMENT: String
     end
 
     class AutomatedReasoningPolicyBuildResultAssets
@@ -553,18 +742,38 @@ module Aws::Bedrock
         ?policy_definition: Types::AutomatedReasoningPolicyDefinition,
         ?quality_report: Types::AutomatedReasoningPolicyDefinitionQualityReport,
         ?build_log: Types::AutomatedReasoningPolicyBuildLog,
+        ?generated_test_cases: Types::AutomatedReasoningPolicyGeneratedTestCases,
+        ?policy_scenarios: Types::AutomatedReasoningPolicyScenarios,
+        ?asset_manifest: Types::AutomatedReasoningPolicyBuildResultAssetManifest,
+        ?document: Types::AutomatedReasoningPolicySourceDocument,
+        ?fidelity_report: Types::AutomatedReasoningPolicyFidelityReport,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor policy_definition: Types::AutomatedReasoningPolicyDefinition?
       attr_accessor quality_report: Types::AutomatedReasoningPolicyDefinitionQualityReport?
       attr_accessor build_log: Types::AutomatedReasoningPolicyBuildLog?
+      attr_accessor generated_test_cases: Types::AutomatedReasoningPolicyGeneratedTestCases?
+      attr_accessor policy_scenarios: Types::AutomatedReasoningPolicyScenarios?
+      attr_accessor asset_manifest: Types::AutomatedReasoningPolicyBuildResultAssetManifest?
+      attr_accessor document: Types::AutomatedReasoningPolicySourceDocument?
+      attr_accessor fidelity_report: Types::AutomatedReasoningPolicyFidelityReport?
 
       class PolicyDefinition < AutomatedReasoningPolicyBuildResultAssets
       end
       class QualityReport < AutomatedReasoningPolicyBuildResultAssets
       end
       class BuildLog < AutomatedReasoningPolicyBuildResultAssets
+      end
+      class GeneratedTestCases < AutomatedReasoningPolicyBuildResultAssets
+      end
+      class PolicyScenarios < AutomatedReasoningPolicyBuildResultAssets
+      end
+      class AssetManifest < AutomatedReasoningPolicyBuildResultAssets
+      end
+      class Document < AutomatedReasoningPolicyBuildResultAssets
+      end
+      class FidelityReport < AutomatedReasoningPolicyBuildResultAssets
       end
       class Unknown < AutomatedReasoningPolicyBuildResultAssets
       end
@@ -695,6 +904,10 @@ module Aws::Bedrock
       INGEST_CONTENT: String
       REFINE_POLICY: String
       IMPORT_POLICY: String
+      GENERATE_FIDELITY_REPORT: String
+      GENERATE_POLICY_SCENARIOS: String
+      RESOLVE_POLICY_AMBIGUITIES: String
+      ITERATIVELY_REFINE_POLICY: String
     end
 
     class AutomatedReasoningPolicyDefinition
@@ -924,6 +1137,67 @@ module Aws::Bedrock
       attr_accessor rules: Array[String]?
     end
 
+    class AutomatedReasoningPolicyFidelityReport
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?coverage_score: Float,
+        ?accuracy_score: Float,
+        ?rule_reports: Hash[String, Types::AutomatedReasoningPolicyRuleReport],
+        ?variable_reports: Hash[String, Types::AutomatedReasoningPolicyVariableReport],
+        ?document_sources: Array[Types::AutomatedReasoningPolicyReportSourceDocument],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor coverage_score: Float?
+      attr_accessor accuracy_score: Float?
+      attr_accessor rule_reports: Hash[String, Types::AutomatedReasoningPolicyRuleReport]?
+      attr_accessor variable_reports: Hash[String, Types::AutomatedReasoningPolicyVariableReport]?
+      attr_accessor document_sources: Array[Types::AutomatedReasoningPolicyReportSourceDocument]?
+    end
+
+    class AutomatedReasoningPolicyGenerateFidelityReportContent
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?documents: Array[Types::AutomatedReasoningPolicyBuildWorkflowDocument],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor documents: Array[Types::AutomatedReasoningPolicyBuildWorkflowDocument]?
+
+      class Documents < AutomatedReasoningPolicyGenerateFidelityReportContent
+      end
+      class Unknown < AutomatedReasoningPolicyGenerateFidelityReportContent
+      end
+    end
+
+    class AutomatedReasoningPolicyGeneratedTestCase
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_content: String,
+        ?guard_content: String,
+        ?expected_aggregated_findings_result: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_content: String?
+      attr_accessor guard_content: String?
+      attr_accessor expected_aggregated_findings_result: String?
+    end
+
+    class AutomatedReasoningPolicyGeneratedTestCases
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?generated_test_cases: Array[Types::AutomatedReasoningPolicyGeneratedTestCase],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor generated_test_cases: Array[Types::AutomatedReasoningPolicyGeneratedTestCase]?
+    end
+
     class AutomatedReasoningPolicyIngestContentAnnotation
       include Smithy::Schema::Structure
 
@@ -933,6 +1207,19 @@ module Aws::Bedrock
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor content: String?
+    end
+
+    class AutomatedReasoningPolicyIterativeRefinementContent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?documents: Array[Types::AutomatedReasoningPolicyBuildWorkflowDocument],
+        ?feedback: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor documents: Array[Types::AutomatedReasoningPolicyBuildWorkflowDocument]?
+      attr_accessor feedback: String?
     end
 
     class AutomatedReasoningPolicyMutation
@@ -992,21 +1279,113 @@ module Aws::Bedrock
 
     end
 
+    class AutomatedReasoningPolicyReportSourceDocument
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?document_name: String,
+        ?document_hash: String,
+        ?document_id: String,
+        ?atomic_statements: Array[Types::AutomatedReasoningPolicyAtomicStatement],
+        ?document_content: Array[Types::AutomatedReasoningPolicyAnnotatedChunk],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor document_name: String?
+      attr_accessor document_hash: String?
+      attr_accessor document_id: String?
+      attr_accessor atomic_statements: Array[Types::AutomatedReasoningPolicyAtomicStatement]?
+      attr_accessor document_content: Array[Types::AutomatedReasoningPolicyAnnotatedChunk]?
+    end
+
+    class AutomatedReasoningPolicyRuleReport
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule: String,
+        ?grounding_statements: Array[Types::AutomatedReasoningPolicyStatementReference],
+        ?grounding_justifications: Array[String],
+        ?accuracy_score: Float,
+        ?accuracy_justification: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule: String?
+      attr_accessor grounding_statements: Array[Types::AutomatedReasoningPolicyStatementReference]?
+      attr_accessor grounding_justifications: Array[String]?
+      attr_accessor accuracy_score: Float?
+      attr_accessor accuracy_justification: String?
+    end
+
     class AutomatedReasoningPolicyScenario
       include Smithy::Schema::Structure
 
       def initialize: (
         ?expression: String,
         ?alternate_expression: String,
-        ?rule_ids: Array[String],
         ?expected_result: String,
+        ?rule_ids: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor expression: String?
       attr_accessor alternate_expression: String?
-      attr_accessor rule_ids: Array[String]?
       attr_accessor expected_result: String?
+      attr_accessor rule_ids: Array[String]?
+    end
+
+    class AutomatedReasoningPolicyScenarios
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_scenarios: Array[Types::AutomatedReasoningPolicyScenario],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_scenarios: Array[Types::AutomatedReasoningPolicyScenario]?
+    end
+
+    class AutomatedReasoningPolicySourceDocument
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?document: String,
+        ?document_content_type: String,
+        ?document_name: String,
+        ?document_description: String,
+        ?document_hash: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor document: String?
+      attr_accessor document_content_type: String?
+      attr_accessor document_name: String?
+      attr_accessor document_description: String?
+      attr_accessor document_hash: String?
+    end
+
+    class AutomatedReasoningPolicyStatementLocation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lines: Array[Integer],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lines: Array[Integer]?
+    end
+
+    class AutomatedReasoningPolicyStatementReference
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?document_id: String,
+        ?statement_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor document_id: String?
+      attr_accessor statement_id: String?
     end
 
     class AutomatedReasoningPolicySummary
@@ -1236,24 +1615,103 @@ module Aws::Bedrock
       attr_accessor variable: Types::AutomatedReasoningPolicyDefinitionVariable?
     end
 
+    class AutomatedReasoningPolicyVariableReport
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_variable: String,
+        ?grounding_statements: Array[Types::AutomatedReasoningPolicyStatementReference],
+        ?grounding_justifications: Array[String],
+        ?accuracy_score: Float,
+        ?accuracy_justification: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_variable: String?
+      attr_accessor grounding_statements: Array[Types::AutomatedReasoningPolicyStatementReference]?
+      attr_accessor grounding_justifications: Array[String]?
+      attr_accessor accuracy_score: Float?
+      attr_accessor accuracy_justification: String?
+    end
+
     class AutomatedReasoningPolicyWorkflowTypeContent
       include Smithy::Schema::Union
 
       def initialize: (
         ?documents: Array[Types::AutomatedReasoningPolicyBuildWorkflowDocument],
         ?policy_repair_assets: Types::AutomatedReasoningPolicyBuildWorkflowRepairContent,
+        ?generate_fidelity_report_content: Types::AutomatedReasoningPolicyGenerateFidelityReportContent,
+        ?iterative_refinement_content: Types::AutomatedReasoningPolicyIterativeRefinementContent,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor documents: Array[Types::AutomatedReasoningPolicyBuildWorkflowDocument]?
       attr_accessor policy_repair_assets: Types::AutomatedReasoningPolicyBuildWorkflowRepairContent?
+      attr_accessor generate_fidelity_report_content: Types::AutomatedReasoningPolicyGenerateFidelityReportContent?
+      attr_accessor iterative_refinement_content: Types::AutomatedReasoningPolicyIterativeRefinementContent?
 
       class Documents < AutomatedReasoningPolicyWorkflowTypeContent
       end
       class PolicyRepairAssets < AutomatedReasoningPolicyWorkflowTypeContent
       end
+      class GenerateFidelityReportContent < AutomatedReasoningPolicyWorkflowTypeContent
+      end
+      class IterativeRefinementContent < AutomatedReasoningPolicyWorkflowTypeContent
+      end
       class Unknown < AutomatedReasoningPolicyWorkflowTypeContent
       end
+    end
+
+    class BatchDeleteAdvancedPromptOptimizationJobError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_identifier: String,
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_identifier: String?
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class BatchDeleteAdvancedPromptOptimizationJobItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_identifier: String,
+        ?job_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_identifier: String?
+      attr_accessor job_status: String?
+    end
+
+    class BatchDeleteAdvancedPromptOptimizationJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_identifiers: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_identifiers: Array[String]?
+    end
+
+    class BatchDeleteAdvancedPromptOptimizationJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?errors: Array[Types::BatchDeleteAdvancedPromptOptimizationJobError],
+        ?advanced_prompt_optimization_jobs: Array[Types::BatchDeleteAdvancedPromptOptimizationJobItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor errors: Array[Types::BatchDeleteAdvancedPromptOptimizationJobError]?
+      attr_accessor advanced_prompt_optimization_jobs: Array[Types::BatchDeleteAdvancedPromptOptimizationJobItem]?
     end
 
     class BatchDeleteEvaluationJobError
@@ -1387,6 +1845,42 @@ module Aws::Bedrock
       attr_accessor message: String?
     end
 
+    class CreateAdvancedPromptOptimizationJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_name: String,
+        ?job_description: String,
+        ?client_token: String,
+        ?input_config: Types::AdvancedPromptOptimizationInputConfig,
+        ?output_config: Types::AdvancedPromptOptimizationOutputConfig,
+        ?encryption_key_arn: String,
+        ?tags: Array[Types::Tag],
+        ?model_configurations: Array[Types::ModelConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_name: String?
+      attr_accessor job_description: String?
+      attr_accessor client_token: String?
+      attr_accessor input_config: Types::AdvancedPromptOptimizationInputConfig?
+      attr_accessor output_config: Types::AdvancedPromptOptimizationOutputConfig?
+      attr_accessor encryption_key_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor model_configurations: Array[Types::ModelConfiguration]?
+    end
+
+    class CreateAdvancedPromptOptimizationJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_arn: String?
+    end
+
     class CreateAutomatedReasoningPolicyRequest
       include Smithy::Schema::Structure
 
@@ -1395,6 +1889,7 @@ module Aws::Bedrock
         ?description: String,
         ?client_request_token: String,
         ?policy_definition: Types::AutomatedReasoningPolicyDefinition,
+        ?kms_key_id: String,
         ?tags: Array[Types::Tag],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -1403,6 +1898,7 @@ module Aws::Bedrock
       attr_accessor description: String?
       attr_accessor client_request_token: String?
       attr_accessor policy_definition: Types::AutomatedReasoningPolicyDefinition?
+      attr_accessor kms_key_id: String?
       attr_accessor tags: Array[Types::Tag]?
     end
 
@@ -1537,6 +2033,7 @@ module Aws::Bedrock
       def initialize: (
         ?model_name: String,
         ?model_source_config: Types::ModelDataSource,
+        ?custom_model_data_source: Types::CustomModelDataSource,
         ?model_kms_key_arn: String,
         ?role_arn: String,
         ?model_tags: Array[Types::Tag],
@@ -1546,6 +2043,7 @@ module Aws::Bedrock
 
       attr_accessor model_name: String?
       attr_accessor model_source_config: Types::ModelDataSource?
+      attr_accessor custom_model_data_source: Types::CustomModelDataSource?
       attr_accessor model_kms_key_arn: String?
       attr_accessor role_arn: String?
       attr_accessor model_tags: Array[Types::Tag]?
@@ -1904,6 +2402,7 @@ module Aws::Bedrock
         ?vpc_config: Types::VpcConfig,
         ?timeout_duration_in_hours: Integer,
         ?tags: Array[Types::Tag],
+        ?model_invocation_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1916,6 +2415,7 @@ module Aws::Bedrock
       attr_accessor vpc_config: Types::VpcConfig?
       attr_accessor timeout_duration_in_hours: Integer?
       attr_accessor tags: Array[Types::Tag]?
+      attr_accessor model_invocation_type: String?
     end
 
     class CreateModelInvocationJobResponse
@@ -2032,6 +2532,22 @@ module Aws::Bedrock
       attr_accessor bedrock_evaluator_models: Array[Types::CustomMetricBedrockEvaluatorModel]?
     end
 
+    class CustomModelDataSource
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?model_package_arn_data_source: Types::ModelPackageArnDataSource,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_package_arn_data_source: Types::ModelPackageArnDataSource?
+
+      class ModelPackageArnDataSource < CustomModelDataSource
+      end
+      class Unknown < CustomModelDataSource
+      end
+    end
+
     module CustomModelDeploymentStatus
       CREATING: String
       ACTIVE: String
@@ -2059,6 +2575,25 @@ module Aws::Bedrock
       attr_accessor status: String?
       attr_accessor last_updated_at: Time?
       attr_accessor failure_message: String?
+    end
+
+    class CustomModelDeploymentUpdateDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_arn: String,
+        ?update_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_arn: String?
+      attr_accessor update_status: String?
+    end
+
+    module CustomModelDeploymentUpdateStatus
+      UPDATING: String
+      UPDATE_COMPLETED: String
+      UPDATE_FAILED: String
     end
 
     class CustomModelSummary
@@ -2104,12 +2639,16 @@ module Aws::Bedrock
 
       def initialize: (
         ?distillation_config: Types::DistillationConfig,
+        ?rft_config: Types::RFTConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor distillation_config: Types::DistillationConfig?
+      attr_accessor rft_config: Types::RFTConfig?
 
       class DistillationConfig < CustomizationConfig
+      end
+      class RftConfig < CustomizationConfig
       end
       class Unknown < CustomizationConfig
       end
@@ -2119,6 +2658,7 @@ module Aws::Bedrock
       FINE_TUNING: String
       CONTINUED_PRE_TRAINING: String
       DISTILLATION: String
+      REINFORCEMENT_FINE_TUNING: String
       IMPORTED: String
     end
 
@@ -2135,6 +2675,14 @@ module Aws::Bedrock
       attr_accessor status: String?
       attr_accessor creation_time: Time?
       attr_accessor last_modified_time: Time?
+    end
+
+    module DataRetentionMode
+      DEFAULT: String
+      NONE: String
+      AWS_REVIEW: String
+      PROVIDER_DATA_SHARE: String
+      INHERIT: String
     end
 
     class DeleteAutomatedReasoningPolicyBuildWorkflowRequest
@@ -2166,10 +2714,12 @@ module Aws::Bedrock
 
       def initialize: (
         ?policy_arn: String,
+        ?force: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor policy_arn: String?
+      attr_accessor force: bool?
     end
 
     class DeleteAutomatedReasoningPolicyResponse
@@ -2237,6 +2787,26 @@ module Aws::Bedrock
     end
 
     class DeleteCustomModelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteEnforcedGuardrailConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?config_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor config_id: String?
+    end
+
+    class DeleteEnforcedGuardrailConfigurationResponse
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -2397,6 +2967,26 @@ module Aws::Bedrock
     end
 
     class DeleteProvisionedModelThroughputResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteResourcePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class DeleteResourcePolicyResponse
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -2907,10 +3497,18 @@ module Aws::Bedrock
 
       def initialize: (
         ?status: String,
+        ?start_of_life_time: Time,
+        ?end_of_life_time: Time,
+        ?legacy_time: Time,
+        ?public_extended_access_time: Time,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor status: String?
+      attr_accessor start_of_life_time: Time?
+      attr_accessor end_of_life_time: Time?
+      attr_accessor legacy_time: Time?
+      attr_accessor public_extended_access_time: Time?
     end
 
     module FoundationModelLifecycleStatus
@@ -2962,6 +3560,70 @@ module Aws::Bedrock
       attr_accessor guardrail_configuration: Types::GuardrailConfiguration?
       attr_accessor kb_inference_config: Types::KbInferenceConfig?
       attr_accessor additional_model_request_fields: Hash[String, Smithy::Schema::document]?
+    end
+
+    class GetAccountDataRetentionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetAccountDataRetentionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mode: String,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mode: String?
+      attr_accessor updated_at: Time?
+    end
+
+    class GetAdvancedPromptOptimizationJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_identifier: String?
+    end
+
+    class GetAdvancedPromptOptimizationJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_arn: String,
+        ?job_name: String,
+        ?job_description: String,
+        ?job_status: String,
+        ?input_config: Types::AdvancedPromptOptimizationInputConfig,
+        ?output_config: Types::AdvancedPromptOptimizationOutputConfig,
+        ?encryption_key_arn: String,
+        ?creation_time: Time,
+        ?last_modified_time: Time,
+        ?failure_message: String,
+        ?model_configurations: Array[Types::ModelConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_arn: String?
+      attr_accessor job_name: String?
+      attr_accessor job_description: String?
+      attr_accessor job_status: String?
+      attr_accessor input_config: Types::AdvancedPromptOptimizationInputConfig?
+      attr_accessor output_config: Types::AdvancedPromptOptimizationOutputConfig?
+      attr_accessor encryption_key_arn: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_modified_time: Time?
+      attr_accessor failure_message: String?
+      attr_accessor model_configurations: Array[Types::ModelConfiguration]?
     end
 
     class GetAutomatedReasoningPolicyAnnotationsRequest
@@ -3045,12 +3707,14 @@ module Aws::Bedrock
         ?policy_arn: String,
         ?build_workflow_id: String,
         ?asset_type: String,
+        ?asset_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor policy_arn: String?
       attr_accessor build_workflow_id: String?
       attr_accessor asset_type: String?
+      attr_accessor asset_id: String?
     end
 
     class GetAutomatedReasoningPolicyBuildWorkflowResultAssetsResponse
@@ -3115,6 +3779,7 @@ module Aws::Bedrock
         ?policy_id: String,
         ?description: String,
         ?definition_hash: String,
+        ?kms_key_arn: String,
         ?created_at: Time,
         ?updated_at: Time,
       ) -> void
@@ -3126,6 +3791,7 @@ module Aws::Bedrock
       attr_accessor policy_id: String?
       attr_accessor description: String?
       attr_accessor definition_hash: String?
+      attr_accessor kms_key_arn: String?
       attr_accessor created_at: Time?
       attr_accessor updated_at: Time?
     end
@@ -3203,6 +3869,7 @@ module Aws::Bedrock
         ?created_at: Time,
         ?status: String,
         ?description: String,
+        ?update_details: Types::CustomModelDeploymentUpdateDetails,
         ?failure_message: String,
         ?last_updated_at: Time,
       ) -> void
@@ -3214,6 +3881,7 @@ module Aws::Bedrock
       attr_accessor created_at: Time?
       attr_accessor status: String?
       attr_accessor description: String?
+      attr_accessor update_details: Types::CustomModelDeploymentUpdateDetails?
       attr_accessor failure_message: String?
       attr_accessor last_updated_at: Time?
     end
@@ -3718,6 +4386,11 @@ module Aws::Bedrock
         ?vpc_config: Types::VpcConfig,
         ?timeout_duration_in_hours: Integer,
         ?job_expiration_time: Time,
+        ?model_invocation_type: String,
+        ?total_record_count: Integer,
+        ?processed_record_count: Integer,
+        ?success_record_count: Integer,
+        ?error_record_count: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3736,6 +4409,11 @@ module Aws::Bedrock
       attr_accessor vpc_config: Types::VpcConfig?
       attr_accessor timeout_duration_in_hours: Integer?
       attr_accessor job_expiration_time: Time?
+      attr_accessor model_invocation_type: String?
+      attr_accessor total_record_count: Integer?
+      attr_accessor processed_record_count: Integer?
+      attr_accessor success_record_count: Integer?
+      attr_accessor error_record_count: Integer?
     end
 
     class GetModelInvocationLoggingConfigurationRequest
@@ -3844,6 +4522,28 @@ module Aws::Bedrock
       attr_accessor commitment_expiration_time: Time?
     end
 
+    class GetResourcePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class GetResourcePolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_policy: String?
+    end
+
     class GetUseCaseForModelAccessRequest
       include Smithy::Schema::Structure
 
@@ -3862,6 +4562,22 @@ module Aws::Bedrock
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor form_data: String?
+    end
+
+    class GraderConfig
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?lambda_grader: Types::LambdaGraderConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lambda_grader: Types::LambdaGraderConfig?
+
+      class LambdaGrader < GraderConfig
+      end
+      class Unknown < GraderConfig
+      end
     end
 
     class GuardrailAutomatedReasoningPolicy
@@ -4618,6 +5334,23 @@ module Aws::Bedrock
       attr_accessor model_architecture: String?
     end
 
+    class InferenceConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_tokens: Integer,
+        ?temperature: Float,
+        ?top_p: Float,
+        ?stop_sequences: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_tokens: Integer?
+      attr_accessor temperature: Float?
+      attr_accessor top_p: Float?
+      attr_accessor stop_sequences: Array[String]?
+    end
+
     class InferenceProfileModel
       include Smithy::Schema::Structure
 
@@ -4684,6 +5417,11 @@ module Aws::Bedrock
     module InferenceType
       ON_DEMAND: String
       PROVISIONED: String
+    end
+
+    module InputTags
+      HONOR: String
+      IGNORE: String
     end
 
     class InternalServerException
@@ -4817,6 +5555,17 @@ module Aws::Bedrock
       attr_accessor reranking_configuration: Types::VectorSearchRerankingConfiguration?
     end
 
+    class LambdaGraderConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lambda_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lambda_arn: String?
+    end
+
     class LegalTerm
       include Smithy::Schema::Structure
 
@@ -4826,6 +5575,36 @@ module Aws::Bedrock
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor url: String?
+    end
+
+    class ListAdvancedPromptOptimizationJobsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?sort_by: String,
+        ?sort_order: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor sort_by: String?
+      attr_accessor sort_order: String?
+    end
+
+    class ListAdvancedPromptOptimizationJobsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_summaries: Array[Types::AdvancedPromptOptimizationJobSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_summaries: Array[Types::AdvancedPromptOptimizationJobSummary]?
+      attr_accessor next_token: String?
     end
 
     class ListAutomatedReasoningPoliciesRequest
@@ -5024,6 +5803,30 @@ module Aws::Bedrock
 
       attr_accessor next_token: String?
       attr_accessor model_summaries: Array[Types::CustomModelSummary]?
+    end
+
+    class ListEnforcedGuardrailsConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+    end
+
+    class ListEnforcedGuardrailsConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?guardrails_config: Array[Types::AccountEnforcedGuardrailOutputConfiguration],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor guardrails_config: Array[Types::AccountEnforcedGuardrailOutputConfiguration]?
+      attr_accessor next_token: String?
     end
 
     class ListEvaluationJobsRequest
@@ -5496,6 +6299,7 @@ module Aws::Bedrock
         ?image_data_delivery_enabled: bool,
         ?embedding_data_delivery_enabled: bool,
         ?video_data_delivery_enabled: bool,
+        ?audio_data_delivery_enabled: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -5505,6 +6309,7 @@ module Aws::Bedrock
       attr_accessor image_data_delivery_enabled: bool?
       attr_accessor embedding_data_delivery_enabled: bool?
       attr_accessor video_data_delivery_enabled: bool?
+      attr_accessor audio_data_delivery_enabled: bool?
     end
 
     class MarketplaceModelEndpoint
@@ -5581,6 +6386,21 @@ module Aws::Bedrock
 
       attr_accessor selection_mode: String?
       attr_accessor selective_mode_configuration: Types::RerankingMetadataSelectiveModeConfiguration?
+    end
+
+    class ModelConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_id: String,
+        ?inference_config: Types::InferenceConfiguration,
+        ?additional_model_request_fields: Hash[String, Smithy::Schema::document],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_id: String?
+      attr_accessor inference_config: Types::InferenceConfiguration?
+      attr_accessor additional_model_request_fields: Hash[String, Smithy::Schema::document]?
     end
 
     module ModelCopyJobStatus
@@ -5679,6 +6499,19 @@ module Aws::Bedrock
       end
       class Unknown < ModelDataSource
       end
+    end
+
+    class ModelEnforcement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?included_models: Array[String],
+        ?excluded_models: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor included_models: Array[String]?
+      attr_accessor excluded_models: Array[String]?
     end
 
     module ModelImportJobStatus
@@ -5806,6 +6639,11 @@ module Aws::Bedrock
         ?vpc_config: Types::VpcConfig,
         ?timeout_duration_in_hours: Integer,
         ?job_expiration_time: Time,
+        ?model_invocation_type: String,
+        ?total_record_count: Integer,
+        ?processed_record_count: Integer,
+        ?success_record_count: Integer,
+        ?error_record_count: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -5824,12 +6662,33 @@ module Aws::Bedrock
       attr_accessor vpc_config: Types::VpcConfig?
       attr_accessor timeout_duration_in_hours: Integer?
       attr_accessor job_expiration_time: Time?
+      attr_accessor model_invocation_type: String?
+      attr_accessor total_record_count: Integer?
+      attr_accessor processed_record_count: Integer?
+      attr_accessor success_record_count: Integer?
+      attr_accessor error_record_count: Integer?
+    end
+
+    module ModelInvocationType
+      InvokeModel: String
+      Converse: String
     end
 
     module ModelModality
       TEXT: String
       IMAGE: String
       EMBEDDING: String
+    end
+
+    class ModelPackageArnDataSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_package_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_package_arn: String?
     end
 
     module ModelStatus
@@ -6007,6 +6866,58 @@ module Aws::Bedrock
       attr_accessor last_modified_time: Time?
     end
 
+    class PutAccountDataRetentionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mode: String?
+    end
+
+    class PutAccountDataRetentionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mode: String,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mode: String?
+      attr_accessor updated_at: Time?
+    end
+
+    class PutEnforcedGuardrailConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?config_id: String,
+        ?guardrail_inference_config: Types::AccountEnforcedGuardrailInferenceInputConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor config_id: String?
+      attr_accessor guardrail_inference_config: Types::AccountEnforcedGuardrailInferenceInputConfiguration?
+    end
+
+    class PutEnforcedGuardrailConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?config_id: String,
+        ?updated_at: Time,
+        ?updated_by: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor config_id: String?
+      attr_accessor updated_at: Time?
+      attr_accessor updated_by: String?
+    end
+
     class PutModelInvocationLoggingConfigurationRequest
       include Smithy::Schema::Structure
 
@@ -6025,6 +6936,30 @@ module Aws::Bedrock
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+    end
+
+    class PutResourcePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?resource_policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor resource_policy: String?
+    end
+
+    class PutResourcePolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
     end
 
     class PutUseCaseForModelAccessRequest
@@ -6082,6 +7017,44 @@ module Aws::Bedrock
       end
     end
 
+    class RFTConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?grader_config: Types::GraderConfig,
+        ?hyper_parameters: Types::RFTHyperParameters,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor grader_config: Types::GraderConfig?
+      attr_accessor hyper_parameters: Types::RFTHyperParameters?
+    end
+
+    class RFTHyperParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?epoch_count: Integer,
+        ?batch_size: Integer,
+        ?learning_rate: Float,
+        ?max_prompt_length: Integer,
+        ?training_sample_per_prompt: Integer,
+        ?inference_max_tokens: Integer,
+        ?reasoning_effort: String,
+        ?eval_interval: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor epoch_count: Integer?
+      attr_accessor batch_size: Integer?
+      attr_accessor learning_rate: Float?
+      attr_accessor max_prompt_length: Integer?
+      attr_accessor training_sample_per_prompt: Integer?
+      attr_accessor inference_max_tokens: Integer?
+      attr_accessor reasoning_effort: String?
+      attr_accessor eval_interval: Integer?
+    end
+
     class RatingScaleItem
       include Smithy::Schema::Structure
 
@@ -6113,6 +7086,12 @@ module Aws::Bedrock
       end
       class Unknown < RatingScaleItemValue
       end
+    end
+
+    module ReasoningEffort
+      LOW: String
+      MEDIUM: String
+      HIGH: String
     end
 
     module RegionAvailability
@@ -6403,6 +7382,24 @@ module Aws::Bedrock
       SEMANTIC: String
     end
 
+    class SelectiveContentGuarding
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?system: String,
+        ?messages: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor system: String?
+      attr_accessor messages: String?
+    end
+
+    module SelectiveGuardingMode
+      SELECTIVE: String
+      COMPREHENSIVE: String
+    end
+
     class ServiceQuotaExceededException
       include Smithy::Schema::Structure
 
@@ -6518,6 +7515,26 @@ module Aws::Bedrock
       attr_accessor validation_details: Types::ValidationDetails?
       attr_accessor data_processing_details: Types::DataProcessingDetails?
       attr_accessor training_details: Types::TrainingDetails?
+    end
+
+    class StopAdvancedPromptOptimizationJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_identifier: String?
+    end
+
+    class StopAdvancedPromptOptimizationJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
     end
 
     class StopEvaluationJobRequest
@@ -6862,6 +7879,30 @@ module Aws::Bedrock
 
       attr_accessor policy_arn: String?
       attr_accessor test_case_id: String?
+    end
+
+    class UpdateCustomModelDeploymentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_arn: String,
+        ?custom_model_deployment_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_arn: String?
+      attr_accessor custom_model_deployment_identifier: String?
+    end
+
+    class UpdateCustomModelDeploymentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?custom_model_deployment_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor custom_model_deployment_arn: String?
     end
 
     class UpdateGuardrailRequest

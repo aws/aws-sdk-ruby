@@ -144,18 +144,18 @@ module Aws::BedrockAgent
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -304,7 +304,7 @@ module Aws::BedrockAgent
       request.send_request(options)
     end
 
-    # <p>Creates an agent that orchestrates interactions between foundation models, data sources, software applications, user conversations, and APIs to carry out tasks to help customers.</p> <ul> <li> <p>Specify the following fields for security purposes.</p> <ul> <li> <p> <code>agentResourceRoleArn</code> – The Amazon Resource Name (ARN) of the role with permissions to invoke API operations on an agent.</p> </li> <li> <p>(Optional) <code>customerEncryptionKeyArn</code> – The Amazon Resource Name (ARN) of a KMS key to encrypt the creation of the agent.</p> </li> <li> <p>(Optional) <code>idleSessionTTLinSeconds</code> – Specify the number of seconds for which the agent should maintain session information. After this time expires, the subsequent <code>InvokeAgent</code> request begins a new session.</p> </li> </ul> </li> <li> <p>To enable your agent to retain conversational context across multiple sessions, include a <code>memoryConfiguration</code> object. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/agents-configure-memory.html">Configure memory</a>.</p> </li> <li> <p>To override the default prompt behavior for agent orchestration and to use advanced prompts, include a <code>promptOverrideConfiguration</code> object. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts.html">Advanced prompts</a>.</p> </li> <li> <p>If your agent fails to be created, the response returns a list of <code>failureReasons</code> alongside a list of <code>recommendedActions</code> for you to troubleshoot.</p> </li> <li> <p>The agent instructions will not be honored if your agent has only one knowledge base, uses default prompts, has no action group, and user input is disabled.</p> </li> </ul>
+    # <note> <p>Amazon Bedrock Agents (now Amazon Bedrock Agents Classic) is no longer open to new customers. For capabilities similar to Bedrock Agents Classic, explore Amazon Bedrock AgentCore. Existing customers can continue to use the service as normal. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/agents-classic-maintenance-mode.html">Amazon Bedrock Agents Classic availability change</a>.</p> </note> <p>Creates an agent that orchestrates interactions between foundation models, data sources, software applications, user conversations, and APIs to carry out tasks to help customers.</p> <ul> <li> <p>Specify the following fields for security purposes.</p> <ul> <li> <p> <code>agentResourceRoleArn</code> – The Amazon Resource Name (ARN) of the role with permissions to invoke API operations on an agent.</p> </li> <li> <p>(Optional) <code>customerEncryptionKeyArn</code> – The Amazon Resource Name (ARN) of a KMS key to encrypt the creation of the agent.</p> </li> <li> <p>(Optional) <code>idleSessionTTLinSeconds</code> – Specify the number of seconds for which the agent should maintain session information. After this time expires, the subsequent <code>InvokeAgent</code> request begins a new session.</p> </li> </ul> </li> <li> <p>To enable your agent to retain conversational context across multiple sessions, include a <code>memoryConfiguration</code> object. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/agents-configure-memory.html">Configure memory</a>.</p> </li> <li> <p>To override the default prompt behavior for agent orchestration and to use advanced prompts, include a <code>promptOverrideConfiguration</code> object. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts.html">Advanced prompts</a>.</p> </li> <li> <p>If your agent fails to be created, the response returns a list of <code>failureReasons</code> alongside a list of <code>recommendedActions</code> for you to troubleshoot.</p> </li> <li> <p>The agent instructions will not be honored if your agent has only one knowledge base, uses default prompts, has no action group, and user input is disabled.</p> </li> </ul>
     # @param [Hash, Types::CreateAgentRequest] params
     # @option params [String] :agent_name
     #   <p>A name for the agent that you create.</p>
@@ -671,7 +671,7 @@ module Aws::BedrockAgent
     # @option params [Types::DataSourceConfiguration] :data_source_configuration
     #   <p>The connection configuration for the data source.</p>
     # @option params [String] :data_deletion_policy
-    #   <p>The data deletion policy for the data source.</p> <p>You can set the data deletion policy to:</p> <ul> <li> <p>DELETE: Deletes all data from your data source that’s converted into vector embeddings upon deletion of a knowledge base or data source resource. Note that the <b>vector store itself is not deleted</b>, only the data. This flag is ignored if an Amazon Web Services account is deleted.</p> </li> <li> <p>RETAIN: Retains all data from your data source that’s converted into vector embeddings upon deletion of a knowledge base or data source resource. Note that the <b>vector store itself is not deleted</b> if you delete a knowledge base or data source resource.</p> </li> </ul>
+    #   <p>The data deletion policy for the data source.</p> <p>You can set the data deletion policy to:</p> <ul> <li> <p>DELETE: Deletes all data from your data source that’s converted into vector embeddings upon deletion of a knowledge base or data source resource. Note that the <b>vector store itself is not deleted</b>, only the data. This flag is ignored if an Amazon Web Services account is deleted.</p> </li> <li> <p>RETAIN: Retains all data from your data source that’s converted into vector embeddings upon deletion of a knowledge base or data source resource. Note that the <b>vector store itself is not deleted</b> if you delete a knowledge base or data source resource.</p> </li> </ul> <note> <p>For managed knowledge bases, the only supported option is <code>DELETE</code>, which is also the default.</p> </note>
     # @option params [Types::ServerSideEncryptionConfiguration] :server_side_encryption_configuration
     #   <p>Contains details about the server-side encryption for the data source.</p>
     # @option params [Types::VectorIngestionConfiguration] :vector_ingestion_configuration
@@ -683,7 +683,41 @@ module Aws::BedrockAgent
     #     name: "Name", # required
     #     description: "Description",
     #     data_source_configuration: { # required
-    #       type: "S3" # One of: ["S3", "WEB", "CONFLUENCE", "SALESFORCE", "SHAREPOINT", "CUSTOM", "REDSHIFT_METADATA"], # required
+    #       type: "S3" # One of: ["S3", "WEB", "CONFLUENCE", "SALESFORCE", "SHAREPOINT", "CUSTOM", "REDSHIFT_METADATA", "MANAGED_KNOWLEDGE_BASE_CONNECTOR"], # required
+    #       managed_knowledge_base_connector_configuration: {
+    #         deletion_protection_configuration: {
+    #           deletion_protection_status: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
+    #           deletion_protection_threshold: 1
+    #         },
+    #         media_extraction_configuration: {
+    #           image_extraction_configuration: {
+    #             image_extraction_status: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
+    #           },
+    #           audio_extraction_configuration: {
+    #             audio_extraction_status: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
+    #           },
+    #           video_extraction_configuration: {
+    #             video_extraction_status: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
+    #           }
+    #         },
+    #         connector_parameters: ""null"",
+    #         sync_schedule: {
+    #           # One of:
+    #           daily: {
+    #           },
+    #           weekly: {
+    #             day_of_week: "SUNDAY" # One of: ["SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"], # required
+    #           },
+    #           monthly: {
+    #             day_of_month: { # required
+    #               # One of:
+    #               day_number: 1,
+    #               last_day_of_month: {
+    #               }
+    #             }
+    #           }
+    #         }
+    #       },
     #       s3_configuration: {
     #         bucket_arn: "S3BucketArn", # required
     #         inclusion_prefixes: ["S3Prefix"],
@@ -822,7 +856,7 @@ module Aws::BedrockAgent
     #         ]
     #       },
     #       parsing_configuration: {
-    #         parsing_strategy: "BEDROCK_FOUNDATION_MODEL" # One of: ["BEDROCK_FOUNDATION_MODEL", "BEDROCK_DATA_AUTOMATION"], # required
+    #         parsing_strategy: "BEDROCK_FOUNDATION_MODEL" # One of: ["BEDROCK_FOUNDATION_MODEL", "BEDROCK_DATA_AUTOMATION", "SMART_PARSING", "MULTI_MODAL_EMBEDDINGS"], # required
     #         bedrock_foundation_model_configuration: {
     #           model_arn: "BedrockModelArn", # required
     #           parsing_prompt: {
@@ -854,10 +888,44 @@ module Aws::BedrockAgent
     #       knowledge_base_id: "Id", # required
     #       data_source_id: "Id", # required
     #       name: "Name", # required
-    #       status: "AVAILABLE" # One of: ["AVAILABLE", "DELETING", "DELETE_UNSUCCESSFUL"], # required
+    #       status: "AVAILABLE" # One of: ["AVAILABLE", "DELETING", "DELETE_UNSUCCESSFUL", "CREATING", "UPDATING", "FAILED"], # required
     #       description: "Description",
     #       data_source_configuration: { # required
-    #         type: "S3" # One of: ["S3", "WEB", "CONFLUENCE", "SALESFORCE", "SHAREPOINT", "CUSTOM", "REDSHIFT_METADATA"], # required
+    #         type: "S3" # One of: ["S3", "WEB", "CONFLUENCE", "SALESFORCE", "SHAREPOINT", "CUSTOM", "REDSHIFT_METADATA", "MANAGED_KNOWLEDGE_BASE_CONNECTOR"], # required
+    #         managed_knowledge_base_connector_configuration: {
+    #           deletion_protection_configuration: {
+    #             deletion_protection_status: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
+    #             deletion_protection_threshold: 1
+    #           },
+    #           media_extraction_configuration: {
+    #             image_extraction_configuration: {
+    #               image_extraction_status: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
+    #             },
+    #             audio_extraction_configuration: {
+    #               audio_extraction_status: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
+    #             },
+    #             video_extraction_configuration: {
+    #               video_extraction_status: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
+    #             }
+    #           },
+    #           connector_parameters: ""null"",
+    #           sync_schedule: {
+    #             # One of:
+    #             daily: {
+    #             },
+    #             weekly: {
+    #               day_of_week: "SUNDAY" # One of: ["SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"], # required
+    #             },
+    #             monthly: {
+    #               day_of_month: { # required
+    #                 # One of:
+    #                 day_number: 1,
+    #                 last_day_of_month: {
+    #                 }
+    #               }
+    #             }
+    #           }
+    #         },
     #         s3_configuration: {
     #           bucket_arn: "S3BucketArn", # required
     #           inclusion_prefixes: ["S3Prefix"],
@@ -995,7 +1063,7 @@ module Aws::BedrockAgent
     #           ]
     #         },
     #         parsing_configuration: {
-    #           parsing_strategy: "BEDROCK_FOUNDATION_MODEL" # One of: ["BEDROCK_FOUNDATION_MODEL", "BEDROCK_DATA_AUTOMATION"], # required
+    #           parsing_strategy: "BEDROCK_FOUNDATION_MODEL" # One of: ["BEDROCK_FOUNDATION_MODEL", "BEDROCK_DATA_AUTOMATION", "SMART_PARSING", "MULTI_MODAL_EMBEDDINGS"], # required
     #           bedrock_foundation_model_configuration: {
     #             model_arn: "BedrockModelArn", # required
     #             parsing_prompt: {
@@ -1198,7 +1266,8 @@ module Aws::BedrockAgent
     #                             input_schema: { # required
     #                               # One of:
     #                               json: ""null""
-    #                             }
+    #                             },
+    #                             strict: false
     #                           },
     #                           cache_point: {
     #                             type: "default" # One of: ["default"], # required
@@ -1482,7 +1551,8 @@ module Aws::BedrockAgent
     #                             input_schema: { # required
     #                               # One of:
     #                               json: ""null""
-    #                             }
+    #                             },
+    #                             strict: false
     #                           },
     #                           cache_point: {
     #                             type: "default" # One of: ["default"], # required
@@ -1844,7 +1914,8 @@ module Aws::BedrockAgent
     #                             input_schema: { # required
     #                               # One of:
     #                               json: ""null""
-    #                             }
+    #                             },
+    #                             strict: false
     #                           },
     #                           cache_point: {
     #                             type: "default" # One of: ["default"], # required
@@ -1968,7 +2039,7 @@ module Aws::BedrockAgent
       request.send_request(options)
     end
 
-    # <p>Creates a knowledge base. A knowledge base contains your data sources so that Large Language Models (LLMs) can use your data. To create a knowledge base, you must first set up your data sources and configure a supported vector store. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/knowlege-base-prereq.html">Set up a knowledge base</a>.</p> <note> <p>If you prefer to let Amazon Bedrock create and manage a vector store for you in Amazon OpenSearch Service, use the console. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-create">Create a knowledge base</a>.</p> </note> <ul> <li> <p>Provide the <code>name</code> and an optional <code>description</code>.</p> </li> <li> <p>Provide the Amazon Resource Name (ARN) with permissions to create a knowledge base in the <code>roleArn</code> field.</p> </li> <li> <p>Provide the embedding model to use in the <code>embeddingModelArn</code> field in the <code>knowledgeBaseConfiguration</code> object.</p> </li> <li> <p>Provide the configuration for your vector store in the <code>storageConfiguration</code> object.</p> <ul> <li> <p>For an Amazon OpenSearch Service database, use the <code>opensearchServerlessConfiguration</code> object. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-oss.html">Create a vector store in Amazon OpenSearch Service</a>.</p> </li> <li> <p>For an Amazon Aurora database, use the <code>RdsConfiguration</code> object. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-rds.html">Create a vector store in Amazon Aurora</a>.</p> </li> <li> <p>For a Pinecone database, use the <code>pineconeConfiguration</code> object. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-pinecone.html">Create a vector store in Pinecone</a>.</p> </li> <li> <p>For a Redis Enterprise Cloud database, use the <code>redisEnterpriseCloudConfiguration</code> object. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-redis.html">Create a vector store in Redis Enterprise Cloud</a>.</p> </li> </ul> </li> </ul>
+    # <p>Creates a knowledge base. A knowledge base contains your data sources so that Large Language Models (LLMs) can use your data. To create a knowledge base, you must first set up your data sources and configure a supported vector store. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/knowlege-base-prereq.html">Set up a knowledge base</a>.</p> <note> <p>To create a managed knowledge base, provide a <code>managedKnowledgeBaseConfiguration</code> during creation. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/kb-build-managed.html">Build a managed knowledge base</a>.</p> </note> <ul> <li> <p>Provide the <code>name</code> and an optional <code>description</code>.</p> </li> <li> <p>Provide the Amazon Resource Name (ARN) with permissions to create a knowledge base in the <code>roleArn</code> field.</p> </li> <li> <p>For managed knowledge bases, set <code>embeddingModelType</code> to <code>MANAGED</code> to use the service-managed embedding model, or <code>CUSTOM</code> with an <code>embeddingModelArn</code> to use your own. To use your own KMS key for encryption, provide the ARN in <code>serverSideEncryptionConfiguration</code>. No vector store configuration is required for managed knowledge bases.</p> </li> <li> <p>For self-managed knowledge bases, provide the embedding model to use in the <code>embeddingModelArn</code> field in the <code>knowledgeBaseConfiguration</code> object.</p> </li> <li> <p>For self-managed knowledge bases, provide the configuration for your vector store in the <code>storageConfiguration</code> object.</p> <ul> <li> <p>For an Amazon OpenSearch Service database, use the <code>opensearchServerlessConfiguration</code> object. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-oss.html">Create a vector store in Amazon OpenSearch Service</a>.</p> </li> <li> <p>For an Amazon Aurora database, use the <code>RdsConfiguration</code> object. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-rds.html">Create a vector store in Amazon Aurora</a>.</p> </li> <li> <p>For a Pinecone database, use the <code>pineconeConfiguration</code> object. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-pinecone.html">Create a vector store in Pinecone</a>.</p> </li> <li> <p>For a Redis Enterprise Cloud database, use the <code>redisEnterpriseCloudConfiguration</code> object. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-redis.html">Create a vector store in Redis Enterprise Cloud</a>.</p> </li> </ul> </li> </ul>
     # @param [Hash, Types::CreateKnowledgeBaseRequest] params
     # @option params [String] :client_token
     #   <p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request, Amazon Bedrock ignores the request, but does not return an error. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html">Ensuring idempotency</a>.</p>
@@ -1991,14 +2062,67 @@ module Aws::BedrockAgent
     #     description: "Description",
     #     role_arn: "KnowledgeBaseRoleArn", # required
     #     knowledge_base_configuration: { # required
-    #       type: "VECTOR" # One of: ["VECTOR", "KENDRA", "SQL"], # required
+    #       type: "VECTOR" # One of: ["VECTOR", "KENDRA", "SQL", "MANAGED"], # required
     #       vector_knowledge_base_configuration: {
     #         embedding_model_arn: "BedrockEmbeddingModelArn", # required
     #         embedding_model_configuration: {
     #           bedrock_embedding_model_configuration: {
     #             dimensions: 1,
-    #             embedding_data_type: "FLOAT32" # One of: ["FLOAT32", "BINARY"]
+    #             embedding_data_type: "FLOAT32" # One of: ["FLOAT32", "BINARY"],
+    #             audio: [
+    #               {
+    #                 segmentation_configuration: { # required
+    #                   fixed_length_duration: 1, # required
+    #                 }
+    #               }
+    #             ],
+    #             video: [
+    #               {
+    #                 segmentation_configuration: { # required
+    #                   fixed_length_duration: 1, # required
+    #                 }
+    #               }
+    #             ],
+    #             model_configuration: ""null""
     #           }
+    #         },
+    #         supplemental_data_storage_configuration: {
+    #           storage_locations: [ # required
+    #             {
+    #               type: "S3" # One of: ["S3"], # required
+    #               s3_location: {
+    #                 uri: "S3BucketUri", # required
+    #               }
+    #             }
+    #           ]
+    #         }
+    #       },
+    #       managed_knowledge_base_configuration: {
+    #         embedding_model_type: "CUSTOM" # One of: ["CUSTOM", "MANAGED"],
+    #         embedding_model_arn: "BedrockEmbeddingModelArn",
+    #         embedding_model_configuration: {
+    #           bedrock_embedding_model_configuration: {
+    #             dimensions: 1,
+    #             embedding_data_type: "FLOAT32" # One of: ["FLOAT32", "BINARY"],
+    #             audio: [
+    #               {
+    #                 segmentation_configuration: { # required
+    #                   fixed_length_duration: 1, # required
+    #                 }
+    #               }
+    #             ],
+    #             video: [
+    #               {
+    #                 segmentation_configuration: { # required
+    #                   fixed_length_duration: 1, # required
+    #                 }
+    #               }
+    #             ],
+    #             model_configuration: ""null""
+    #           }
+    #         },
+    #         server_side_encryption_configuration: {
+    #           kms_key_arn: "KmsKeyArn"
     #         },
     #         supplemental_data_storage_configuration: {
     #           storage_locations: [ # required
@@ -2170,14 +2294,67 @@ module Aws::BedrockAgent
     #       description: "Description",
     #       role_arn: "KnowledgeBaseRoleArn", # required
     #       knowledge_base_configuration: { # required
-    #         type: "VECTOR" # One of: ["VECTOR", "KENDRA", "SQL"], # required
+    #         type: "VECTOR" # One of: ["VECTOR", "KENDRA", "SQL", "MANAGED"], # required
     #         vector_knowledge_base_configuration: {
     #           embedding_model_arn: "BedrockEmbeddingModelArn", # required
     #           embedding_model_configuration: {
     #             bedrock_embedding_model_configuration: {
     #               dimensions: 1,
-    #               embedding_data_type: "FLOAT32" # One of: ["FLOAT32", "BINARY"]
+    #               embedding_data_type: "FLOAT32" # One of: ["FLOAT32", "BINARY"],
+    #               audio: [
+    #                 {
+    #                   segmentation_configuration: { # required
+    #                     fixed_length_duration: 1, # required
+    #                   }
+    #                 }
+    #               ],
+    #               video: [
+    #                 {
+    #                   segmentation_configuration: { # required
+    #                     fixed_length_duration: 1, # required
+    #                   }
+    #                 }
+    #               ],
+    #               model_configuration: ""null""
     #             }
+    #           },
+    #           supplemental_data_storage_configuration: {
+    #             storage_locations: [ # required
+    #               {
+    #                 type: "S3" # One of: ["S3"], # required
+    #                 s3_location: {
+    #                   uri: "S3BucketUri", # required
+    #                 }
+    #               }
+    #             ]
+    #           }
+    #         },
+    #         managed_knowledge_base_configuration: {
+    #           embedding_model_type: "CUSTOM" # One of: ["CUSTOM", "MANAGED"],
+    #           embedding_model_arn: "BedrockEmbeddingModelArn",
+    #           embedding_model_configuration: {
+    #             bedrock_embedding_model_configuration: {
+    #               dimensions: 1,
+    #               embedding_data_type: "FLOAT32" # One of: ["FLOAT32", "BINARY"],
+    #               audio: [
+    #                 {
+    #                   segmentation_configuration: { # required
+    #                     fixed_length_duration: 1, # required
+    #                   }
+    #                 }
+    #               ],
+    #               video: [
+    #                 {
+    #                   segmentation_configuration: { # required
+    #                     fixed_length_duration: 1, # required
+    #                   }
+    #                 }
+    #               ],
+    #               model_configuration: ""null""
+    #             }
+    #           },
+    #           server_side_encryption_configuration: {
+    #             kms_key_arn: "KmsKeyArn"
     #           },
     #           supplemental_data_storage_configuration: {
     #             storage_locations: [ # required
@@ -2333,7 +2510,7 @@ module Aws::BedrockAgent
     #           index_name: "IndexName"
     #         }
     #       },
-    #       status: "CREATING" # One of: ["CREATING", "ACTIVE", "DELETING", "UPDATING", "FAILED", "DELETE_UNSUCCESSFUL"], # required
+    #       status: "CREATING" # One of: ["CREATING", "ACTIVE", "DELETING", "UPDATING", "FAILED", "DELETE_UNSUCCESSFUL", "UPDATE_UNSUCCESSFUL"], # required
     #       created_at: Time.now, # required
     #       updated_at: Time.now, # required
     #       failure_reasons: ["FailureReason"]
@@ -2418,7 +2595,8 @@ module Aws::BedrockAgent
     #                   input_schema: { # required
     #                     # One of:
     #                     json: ""null""
-    #                   }
+    #                   },
+    #                   strict: false
     #                 },
     #                 cache_point: {
     #                   type: "default" # One of: ["default"], # required
@@ -2527,7 +2705,8 @@ module Aws::BedrockAgent
     #                   input_schema: { # required
     #                     # One of:
     #                     json: ""null""
-    #                   }
+    #                   },
+    #                   strict: false
     #                 },
     #                 cache_point: {
     #                   type: "default" # One of: ["default"], # required
@@ -2662,7 +2841,8 @@ module Aws::BedrockAgent
     #                   input_schema: { # required
     #                     # One of:
     #                     json: ""null""
-    #                   }
+    #                   },
+    #                   strict: false
     #                 },
     #                 cache_point: {
     #                   type: "default" # One of: ["default"], # required
@@ -2715,6 +2895,61 @@ module Aws::BedrockAgent
     # @return [Types::CreatePromptVersionResponse]
     def create_prompt_version(params = {}, options = {})
       request = build_request(:create_prompt_version, params)
+      request.send_request(options)
+    end
+
+    # <p>Creates a VPC configuration that lets a knowledge base connect to a resource in your private VPC. This operation is asynchronous: it returns a <code>vpcConfigurationId</code> with status <code>CREATING</code>. Poll <code>GetVpcConfiguration</code> until the status becomes <code>CREATED</code> or <code>CREATE_FAILED</code>.</p>
+    # @param [Hash, Types::CreateVpcConfigurationRequest] params
+    # @option params [String] :knowledge_base_id
+    #   <p>The unique identifier of the knowledge base to associate this VPC configuration with.</p>
+    # @option params [String] :client_token
+    #   <p>A unique, case-sensitive identifier to ensure that the operation completes no more than one time. If this token matches a previous request, the service ignores the request but does not return an error.</p>
+    # @option params [String] :vpc_id
+    #   <p>The identifier of the VPC that the knowledge base connects through to reach the resource.</p>
+    # @option params [Array<String>] :subnet_ids
+    #   <p>The subnets, in the VPC identified by <code>vpcId</code>, that the knowledge base uses to connect to the resource.</p>
+    # @option params [String] :resource_target
+    #   <p>The private IPv4 address or DNS name of the resource you want the knowledge base to reach. The target must be privately reachable from inside your VPC, such as an internal load balancer or a private IP. The following are not supported:</p> <ul> <li> <p>Internet-facing endpoints</p> </li> <li> <p>Loopback addresses</p> </li> <li> <p>Link-local addresses</p> </li> <li> <p>Wildcard addresses</p> </li> <li> <p>Multicast addresses</p> </li> <li> <p>IPv6 literals</p> </li> </ul>
+    # @option params [Integer] :port
+    #   <p>The port on which to reach the resource.</p>
+    # @option params [String] :protocol
+    #   <p>The protocol used to connect to the resource. Specify <code>HTTP</code> for plaintext or <code>HTTPS</code> for TLS. When you specify <code>HTTPS</code>, you must also provide <code>tlsServerName</code>.</p>
+    # @option params [String] :resolution_mode
+    #   <p>Controls how a domain-name <code>resourceTarget</code> is resolved. This applies only when the target is a domain name; it has no effect for IP-address targets, which have no name to resolve. In all cases the resolved address must be reachable from inside your VPC. Valid values:</p> <ul> <li> <p> <code>IN_VPC</code> (default, recommended) – The target domain name is resolved privately, using the DNS resolvers of the VPC, such as private Route 53 hosted zones or on-premises DNS reachable from the VPC. Use this for targets that are private to your VPC, such as internal load balancers, private hosted-zone names, or on-premises hosts.</p> </li> <li> <p> <code>PUBLIC</code> – The target domain name is resolved against public DNS resolvers. Select this only when the target's domain name must be resolved through public DNS and the resulting address is still reachable from the VPC, an uncommon split-horizon configuration. If you are unsure, use <code>IN_VPC</code>.</p> </li> </ul>
+    # @option params [String] :host_header
+    #   <p>An optional HTTP <code>Host</code> header value to send when invoking the resource. Set this only if your resource (or an upstream router or ingress) routes by the <code>Host</code> header and that host differs from the target. This setting is independent of <code>tlsServerName</code>.</p>
+    # @option params [String] :tls_server_name
+    #   <p>The expected TLS server name. The service matches this value against the Subject Alternative Names on your resource's TLS certificate during invocation. This field is required when <code>protocol</code> is <code>HTTPS</code>. Set it to a hostname on your certificate, such as <code>app.internal.example.com</code>. You can use a single leftmost wildcard, such as <code>*.example.com</code>. The value must be a hostname without a port.</p>
+    # @option params [String] :name
+    #   <p>An optional human-readable name for the VPC configuration. If you don't specify a name, the VPC configuration has no name.</p>
+    # @option params [String] :description
+    #   <p>An optional description of the VPC configuration. If you don't specify a description, the VPC configuration has no description.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     knowledge_base_id: "Id", # required
+    #     client_token: "ClientToken",
+    #     vpc_id: "VpcId", # required
+    #     subnet_ids: ["SubnetId"], # required
+    #     resource_target: "ResourceTarget", # required
+    #     port: 1, # required
+    #     protocol: "HTTP" # One of: ["HTTP", "HTTPS"], # required
+    #     resolution_mode: "PUBLIC" # One of: ["PUBLIC", "IN_VPC"], # required
+    #     host_header: "HostHeader",
+    #     tls_server_name: "TlsServerName",
+    #     name: "VpcConfigurationName",
+    #     description: "VpcConfigurationDescription"
+    #   }
+    #   options = {}
+    #   response = client.create_vpc_configuration(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     vpc_configuration_id: "VpcConfigurationId", # required
+    #     status: "CREATING" # One of: ["CREATING", "CREATED", "DELETING", "CREATE_FAILED", "DELETE_FAILED"], # required
+    #   }
+    # @return [Types::CreateVpcConfigurationResponse]
+    def create_vpc_configuration(params = {}, options = {})
+      request = build_request(:create_vpc_configuration, params)
       request.send_request(options)
     end
 
@@ -2844,7 +3079,7 @@ module Aws::BedrockAgent
     #   {
     #     knowledge_base_id: "Id", # required
     #     data_source_id: "Id", # required
-    #     status: "AVAILABLE" # One of: ["AVAILABLE", "DELETING", "DELETE_UNSUCCESSFUL"], # required
+    #     status: "AVAILABLE" # One of: ["AVAILABLE", "DELETING", "DELETE_UNSUCCESSFUL", "CREATING", "UPDATING", "FAILED"], # required
     #   }
     # @return [Types::DeleteDataSourceResponse]
     def delete_data_source(params = {}, options = {})
@@ -2943,7 +3178,7 @@ module Aws::BedrockAgent
     #   response.to_h #=>
     #   {
     #     knowledge_base_id: "Id", # required
-    #     status: "CREATING" # One of: ["CREATING", "ACTIVE", "DELETING", "UPDATING", "FAILED", "DELETE_UNSUCCESSFUL"], # required
+    #     status: "CREATING" # One of: ["CREATING", "ACTIVE", "DELETING", "UPDATING", "FAILED", "DELETE_UNSUCCESSFUL", "UPDATE_UNSUCCESSFUL"], # required
     #   }
     # @return [Types::DeleteKnowledgeBaseResponse]
     def delete_knowledge_base(params = {}, options = {})
@@ -3030,6 +3265,56 @@ module Aws::BedrockAgent
     # @return [Types::DeletePromptResponse]
     def delete_prompt(params = {}, options = {})
       request = build_request(:delete_prompt, params)
+      request.send_request(options)
+    end
+
+    # <p>Removes the resource policy associated with a knowledge base. After deletion, other AWS accounts can no longer access the knowledge base using cross-account permissions.</p>
+    # @param [Hash, Types::DeleteResourcePolicyRequest] params
+    # @option params [String] :resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the knowledge base to remove the resource policy from.</p>
+    # @option params [String] :expected_revision_id
+    #   <p>The expected revision identifier of the resource policy. Use this to prevent conflicts when multiple users update the same policy concurrently.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     resource_arn: "ResourceArn", # required
+    #     expected_revision_id: "RevisionId"
+    #   }
+    #   options = {}
+    #   response = client.delete_resource_policy(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     resource_arn: "ResourceArn", # required
+    #     revision_id: "RevisionId"
+    #   }
+    # @return [Types::DeleteResourcePolicyResponse]
+    def delete_resource_policy(params = {}, options = {})
+      request = build_request(:delete_resource_policy, params)
+      request.send_request(options)
+    end
+
+    # <p>Deletes a VPC configuration. This operation is asynchronous: it returns status <code>DELETING</code>. Poll <code>GetVpcConfiguration</code> until it returns a <code>ResourceNotFoundException</code>, indicating the configuration is deleted. Delete requests are idempotent and safe to retry.</p>
+    # @param [Hash, Types::DeleteVpcConfigurationRequest] params
+    # @option params [String] :knowledge_base_id
+    #   <p>The unique identifier of the knowledge base that owns the VPC configuration.</p>
+    # @option params [String] :vpc_configuration_id
+    #   <p>The unique identifier of the VPC configuration to delete.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     knowledge_base_id: "Id", # required
+    #     vpc_configuration_id: "VpcConfigurationId", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_vpc_configuration(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     vpc_configuration_id: "VpcConfigurationId", # required
+    #     status: "CREATING" # One of: ["CREATING", "CREATED", "DELETING", "CREATE_FAILED", "DELETE_FAILED"], # required
+    #   }
+    # @return [Types::DeleteVpcConfigurationResponse]
+    def delete_vpc_configuration(params = {}, options = {})
+      request = build_request(:delete_vpc_configuration, params)
       request.send_request(options)
     end
 
@@ -3455,10 +3740,44 @@ module Aws::BedrockAgent
     #       knowledge_base_id: "Id", # required
     #       data_source_id: "Id", # required
     #       name: "Name", # required
-    #       status: "AVAILABLE" # One of: ["AVAILABLE", "DELETING", "DELETE_UNSUCCESSFUL"], # required
+    #       status: "AVAILABLE" # One of: ["AVAILABLE", "DELETING", "DELETE_UNSUCCESSFUL", "CREATING", "UPDATING", "FAILED"], # required
     #       description: "Description",
     #       data_source_configuration: { # required
-    #         type: "S3" # One of: ["S3", "WEB", "CONFLUENCE", "SALESFORCE", "SHAREPOINT", "CUSTOM", "REDSHIFT_METADATA"], # required
+    #         type: "S3" # One of: ["S3", "WEB", "CONFLUENCE", "SALESFORCE", "SHAREPOINT", "CUSTOM", "REDSHIFT_METADATA", "MANAGED_KNOWLEDGE_BASE_CONNECTOR"], # required
+    #         managed_knowledge_base_connector_configuration: {
+    #           deletion_protection_configuration: {
+    #             deletion_protection_status: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
+    #             deletion_protection_threshold: 1
+    #           },
+    #           media_extraction_configuration: {
+    #             image_extraction_configuration: {
+    #               image_extraction_status: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
+    #             },
+    #             audio_extraction_configuration: {
+    #               audio_extraction_status: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
+    #             },
+    #             video_extraction_configuration: {
+    #               video_extraction_status: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
+    #             }
+    #           },
+    #           connector_parameters: ""null"",
+    #           sync_schedule: {
+    #             # One of:
+    #             daily: {
+    #             },
+    #             weekly: {
+    #               day_of_week: "SUNDAY" # One of: ["SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"], # required
+    #             },
+    #             monthly: {
+    #               day_of_month: { # required
+    #                 # One of:
+    #                 day_number: 1,
+    #                 last_day_of_month: {
+    #                 }
+    #               }
+    #             }
+    #           }
+    #         },
     #         s3_configuration: {
     #           bucket_arn: "S3BucketArn", # required
     #           inclusion_prefixes: ["S3Prefix"],
@@ -3596,7 +3915,7 @@ module Aws::BedrockAgent
     #           ]
     #         },
     #         parsing_configuration: {
-    #           parsing_strategy: "BEDROCK_FOUNDATION_MODEL" # One of: ["BEDROCK_FOUNDATION_MODEL", "BEDROCK_DATA_AUTOMATION"], # required
+    #           parsing_strategy: "BEDROCK_FOUNDATION_MODEL" # One of: ["BEDROCK_FOUNDATION_MODEL", "BEDROCK_DATA_AUTOMATION", "SMART_PARSING", "MULTI_MODAL_EMBEDDINGS"], # required
     #           bedrock_foundation_model_configuration: {
     #             model_arn: "BedrockModelArn", # required
     #             parsing_prompt: {
@@ -3634,9 +3953,12 @@ module Aws::BedrockAgent
     # @param [Hash, Types::GetFlowRequest] params
     # @option params [String] :flow_identifier
     #   <p>The unique identifier of the flow.</p>
+    # @option params [String] :included_data
+    #   <p>Controls the scope of data returned. Set to <code>METADATA_ONLY</code> to return only resource metadata. Set to <code>ALL_DATA</code> or omit this field to return the full response.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     flow_identifier: "FlowIdentifier", # required
+    #     included_data: "ALL_DATA" # One of: ["ALL_DATA", "METADATA_ONLY"]
     #   }
     #   options = {}
     #   response = client.get_flow(params, options)
@@ -3800,7 +4122,8 @@ module Aws::BedrockAgent
     #                             input_schema: { # required
     #                               # One of:
     #                               json: ""null""
-    #                             }
+    #                             },
+    #                             strict: false
     #                           },
     #                           cache_point: {
     #                             type: "default" # One of: ["default"], # required
@@ -4095,10 +4418,13 @@ module Aws::BedrockAgent
     #   <p>The unique identifier of the flow for which to get information.</p>
     # @option params [String] :flow_version
     #   <p>The version of the flow for which to get information.</p>
+    # @option params [String] :included_data
+    #   <p>Controls the scope of data returned. Set to <code>METADATA_ONLY</code> to return only resource metadata. Set to <code>ALL_DATA</code> or omit this field to return the full response.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     flow_identifier: "FlowIdentifier", # required
     #     flow_version: "NumericalVersion", # required
+    #     included_data: "ALL_DATA" # One of: ["ALL_DATA", "METADATA_ONLY"]
     #   }
     #   options = {}
     #   response = client.get_flow_version(params, options)
@@ -4261,7 +4587,8 @@ module Aws::BedrockAgent
     #                             input_schema: { # required
     #                               # One of:
     #                               json: ""null""
-    #                             }
+    #                             },
+    #                             strict: false
     #                           },
     #                           cache_point: {
     #                             type: "default" # One of: ["default"], # required
@@ -4417,11 +4744,13 @@ module Aws::BedrockAgent
     #         number_of_modified_documents_indexed: 1,
     #         number_of_metadata_documents_modified: 1,
     #         number_of_documents_deleted: 1,
-    #         number_of_documents_failed: 1
+    #         number_of_documents_failed: 1,
+    #         number_of_documents_skipped: 1
     #       },
     #       failure_reasons: ["FailureReason"],
     #       started_at: Time.now, # required
     #       updated_at: Time.now, # required
+    #       text_ready_at: Time.now
     #     }
     #   }
     # @return [Types::GetIngestionJobResponse]
@@ -4430,7 +4759,7 @@ module Aws::BedrockAgent
       request.send_request(options)
     end
 
-    # <p>Gets information about a knoweldge base.</p>
+    # <p>Gets information about a knowledge base.</p>
     # @param [Hash, Types::GetKnowledgeBaseRequest] params
     # @option params [String] :knowledge_base_id
     #   <p>The unique identifier of the knowledge base you want to get information on.</p>
@@ -4450,14 +4779,67 @@ module Aws::BedrockAgent
     #       description: "Description",
     #       role_arn: "KnowledgeBaseRoleArn", # required
     #       knowledge_base_configuration: { # required
-    #         type: "VECTOR" # One of: ["VECTOR", "KENDRA", "SQL"], # required
+    #         type: "VECTOR" # One of: ["VECTOR", "KENDRA", "SQL", "MANAGED"], # required
     #         vector_knowledge_base_configuration: {
     #           embedding_model_arn: "BedrockEmbeddingModelArn", # required
     #           embedding_model_configuration: {
     #             bedrock_embedding_model_configuration: {
     #               dimensions: 1,
-    #               embedding_data_type: "FLOAT32" # One of: ["FLOAT32", "BINARY"]
+    #               embedding_data_type: "FLOAT32" # One of: ["FLOAT32", "BINARY"],
+    #               audio: [
+    #                 {
+    #                   segmentation_configuration: { # required
+    #                     fixed_length_duration: 1, # required
+    #                   }
+    #                 }
+    #               ],
+    #               video: [
+    #                 {
+    #                   segmentation_configuration: { # required
+    #                     fixed_length_duration: 1, # required
+    #                   }
+    #                 }
+    #               ],
+    #               model_configuration: ""null""
     #             }
+    #           },
+    #           supplemental_data_storage_configuration: {
+    #             storage_locations: [ # required
+    #               {
+    #                 type: "S3" # One of: ["S3"], # required
+    #                 s3_location: {
+    #                   uri: "S3BucketUri", # required
+    #                 }
+    #               }
+    #             ]
+    #           }
+    #         },
+    #         managed_knowledge_base_configuration: {
+    #           embedding_model_type: "CUSTOM" # One of: ["CUSTOM", "MANAGED"],
+    #           embedding_model_arn: "BedrockEmbeddingModelArn",
+    #           embedding_model_configuration: {
+    #             bedrock_embedding_model_configuration: {
+    #               dimensions: 1,
+    #               embedding_data_type: "FLOAT32" # One of: ["FLOAT32", "BINARY"],
+    #               audio: [
+    #                 {
+    #                   segmentation_configuration: { # required
+    #                     fixed_length_duration: 1, # required
+    #                   }
+    #                 }
+    #               ],
+    #               video: [
+    #                 {
+    #                   segmentation_configuration: { # required
+    #                     fixed_length_duration: 1, # required
+    #                   }
+    #                 }
+    #               ],
+    #               model_configuration: ""null""
+    #             }
+    #           },
+    #           server_side_encryption_configuration: {
+    #             kms_key_arn: "KmsKeyArn"
     #           },
     #           supplemental_data_storage_configuration: {
     #             storage_locations: [ # required
@@ -4613,7 +4995,7 @@ module Aws::BedrockAgent
     #           index_name: "IndexName"
     #         }
     #       },
-    #       status: "CREATING" # One of: ["CREATING", "ACTIVE", "DELETING", "UPDATING", "FAILED", "DELETE_UNSUCCESSFUL"], # required
+    #       status: "CREATING" # One of: ["CREATING", "ACTIVE", "DELETING", "UPDATING", "FAILED", "DELETE_UNSUCCESSFUL", "UPDATE_UNSUCCESSFUL"], # required
     #       created_at: Time.now, # required
     #       updated_at: Time.now, # required
     #       failure_reasons: ["FailureReason"]
@@ -4685,10 +5067,13 @@ module Aws::BedrockAgent
     #   <p>The unique identifier of the prompt.</p>
     # @option params [String] :prompt_version
     #   <p>The version of the prompt about which you want to retrieve information. Omit this field to return information about the working draft of the prompt.</p>
+    # @option params [String] :included_data
+    #   <p>Controls the scope of data returned. Set to <code>METADATA_ONLY</code> to return only resource metadata. Set to <code>ALL_DATA</code> or omit this field to return the full response.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     prompt_identifier: "PromptIdentifier", # required
-    #     prompt_version: "Version"
+    #     prompt_version: "Version",
+    #     included_data: "ALL_DATA" # One of: ["ALL_DATA", "METADATA_ONLY"]
     #   }
     #   options = {}
     #   response = client.get_prompt(params, options)
@@ -4750,7 +5135,8 @@ module Aws::BedrockAgent
     #                   input_schema: { # required
     #                     # One of:
     #                     json: ""null""
-    #                   }
+    #                   },
+    #                   strict: false
     #                 },
     #                 cache_point: {
     #                   type: "default" # One of: ["default"], # required
@@ -4806,6 +5192,69 @@ module Aws::BedrockAgent
       request.send_request(options)
     end
 
+    # <p>Retrieves the resource policy associated with a knowledge base.</p>
+    # @param [Hash, Types::GetResourcePolicyRequest] params
+    # @option params [String] :resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the knowledge base to retrieve the resource policy for.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     resource_arn: "ResourceArn", # required
+    #   }
+    #   options = {}
+    #   response = client.get_resource_policy(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     resource_arn: "ResourceArn", # required
+    #     policy: "ResourcePolicy", # required
+    #     revision_id: "RevisionId", # required
+    #   }
+    # @return [Types::GetResourcePolicyResponse]
+    def get_resource_policy(params = {}, options = {})
+      request = build_request(:get_resource_policy, params)
+      request.send_request(options)
+    end
+
+    # <p>Returns the details and current status of a single VPC configuration. Use this operation to poll for the outcome of an asynchronous create or delete.</p>
+    # @param [Hash, Types::GetVpcConfigurationRequest] params
+    # @option params [String] :knowledge_base_id
+    #   <p>The unique identifier of the knowledge base that owns the VPC configuration.</p>
+    # @option params [String] :vpc_configuration_id
+    #   <p>The unique identifier of the VPC configuration to retrieve.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     knowledge_base_id: "Id", # required
+    #     vpc_configuration_id: "VpcConfigurationId", # required
+    #   }
+    #   options = {}
+    #   response = client.get_vpc_configuration(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     vpc_configuration: { # required
+    #       vpc_configuration_id: "VpcConfigurationId", # required
+    #       status: "CREATING" # One of: ["CREATING", "CREATED", "DELETING", "CREATE_FAILED", "DELETE_FAILED"], # required
+    #       status_message: "VpcConfigurationStatusMessage",
+    #       vpc_id: "VpcId", # required
+    #       subnet_ids: ["SubnetId"], # required
+    #       resource_target: "ResourceTarget", # required
+    #       port: 1, # required
+    #       protocol: "HTTP" # One of: ["HTTP", "HTTPS"], # required
+    #       resolution_mode: "PUBLIC" # One of: ["PUBLIC", "IN_VPC"], # required
+    #       host_header: "HostHeader",
+    #       tls_server_name: "TlsServerName",
+    #       name: "VpcConfigurationName",
+    #       description: "VpcConfigurationDescription",
+    #       created_at: Time.now, # required
+    #       updated_at: Time.now, # required
+    #     }
+    #   }
+    # @return [Types::GetVpcConfigurationResponse]
+    def get_vpc_configuration(params = {}, options = {})
+      request = build_request(:get_vpc_configuration, params)
+      request.send_request(options)
+    end
+
     # <p>Ingests documents directly into the knowledge base that is connected to the data source. The <code>dataSourceType</code> specified in the content for each document must match the type of the data source that you specify in the header. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/kb-direct-ingestion.html">Ingest changes directly into a knowledge base</a> in the Amazon Bedrock User Guide.</p>
     # @param [Hash, Types::IngestKnowledgeBaseDocumentsRequest] params
     # @option params [String] :knowledge_base_id
@@ -4840,7 +5289,14 @@ module Aws::BedrockAgent
     #           s3_location: {
     #             uri: "S3ObjectUri", # required
     #             bucket_owner_account_id: "BucketOwnerAccountId"
-    #           }
+    #           },
+    #           access_control_list: [
+    #             {
+    #               name: "String", # required
+    #               type: "USER" # One of: ["USER"], # required
+    #               access: "ALLOW" # One of: ["ALLOW", "DENY"], # required
+    #             }
+    #           ]
     #         },
     #         content: { # required
     #           data_source_type: "CUSTOM" # One of: ["CUSTOM", "S3"], # required
@@ -5172,7 +5628,7 @@ module Aws::BedrockAgent
     #         knowledge_base_id: "Id", # required
     #         data_source_id: "Id", # required
     #         name: "Name", # required
-    #         status: "AVAILABLE" # One of: ["AVAILABLE", "DELETING", "DELETE_UNSUCCESSFUL"], # required
+    #         status: "AVAILABLE" # One of: ["AVAILABLE", "DELETING", "DELETE_UNSUCCESSFUL", "CREATING", "UPDATING", "FAILED"], # required
     #         description: "Description",
     #         updated_at: Time.now, # required
     #       }
@@ -5350,6 +5806,7 @@ module Aws::BedrockAgent
     #         status: "STARTING" # One of: ["STARTING", "IN_PROGRESS", "COMPLETE", "FAILED", "STOPPING", "STOPPED"], # required
     #         started_at: Time.now, # required
     #         updated_at: Time.now, # required
+    #         text_ready_at: Time.now,
     #         statistics: {
     #           number_of_documents_scanned: 1,
     #           number_of_metadata_documents_scanned: 1,
@@ -5357,7 +5814,8 @@ module Aws::BedrockAgent
     #           number_of_modified_documents_indexed: 1,
     #           number_of_metadata_documents_modified: 1,
     #           number_of_documents_deleted: 1,
-    #           number_of_documents_failed: 1
+    #           number_of_documents_failed: 1,
+    #           number_of_documents_skipped: 1
     #         }
     #       }
     #     ],
@@ -5438,7 +5896,7 @@ module Aws::BedrockAgent
     #         knowledge_base_id: "Id", # required
     #         name: "Name", # required
     #         description: "Description",
-    #         status: "CREATING" # One of: ["CREATING", "ACTIVE", "DELETING", "UPDATING", "FAILED", "DELETE_UNSUCCESSFUL"], # required
+    #         status: "CREATING" # One of: ["CREATING", "ACTIVE", "DELETING", "UPDATING", "FAILED", "DELETE_UNSUCCESSFUL", "UPDATE_UNSUCCESSFUL"], # required
     #         updated_at: Time.now, # required
     #       }
     #     ],
@@ -5511,6 +5969,53 @@ module Aws::BedrockAgent
       request.send_request(options)
     end
 
+    # <p>Returns a paginated list of the VPC configurations for a knowledge base. You can optionally filter by status. Use the <code>nextToken</code> parameter to retrieve additional results.</p>
+    # @param [Hash, Types::ListVpcConfigurationsRequest] params
+    # @option params [String] :knowledge_base_id
+    #   <p>The unique identifier of the knowledge base whose VPC configurations you want to list.</p>
+    # @option params [String] :status_filter
+    #   <p>The status to filter the results by. Only VPC configurations with the specified status are returned.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return in the response. If more results are available, the response returns a <code>nextToken</code>.</p>
+    # @option params [String] :next_token
+    #   <p>A pagination token to retrieve the next page of results, returned in a previous response when more results are available.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     knowledge_base_id: "Id", # required
+    #     status_filter: "CREATING" # One of: ["CREATING", "CREATED", "DELETING", "CREATE_FAILED", "DELETE_FAILED"],
+    #     max_results: 1,
+    #     next_token: "NextToken"
+    #   }
+    #   options = {}
+    #   response = client.list_vpc_configurations(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     items: [ # required
+    #       {
+    #         vpc_configuration_id: "VpcConfigurationId", # required
+    #         status: "CREATING" # One of: ["CREATING", "CREATED", "DELETING", "CREATE_FAILED", "DELETE_FAILED"], # required
+    #         status_message: "VpcConfigurationStatusMessage",
+    #         vpc_id: "VpcId", # required
+    #         resource_target: "ResourceTarget", # required
+    #         port: 1, # required
+    #         protocol: "HTTP" # One of: ["HTTP", "HTTPS"], # required
+    #         resolution_mode: "PUBLIC" # One of: ["PUBLIC", "IN_VPC"], # required
+    #         host_header: "HostHeader",
+    #         tls_server_name: "TlsServerName",
+    #         name: "VpcConfigurationName",
+    #         description: "VpcConfigurationDescription",
+    #         created_at: Time.now, # required
+    #       }
+    #     ],
+    #     next_token: "NextToken"
+    #   }
+    # @return [Types::ListVpcConfigurationsResponse]
+    def list_vpc_configurations(params = {}, options = {})
+      request = build_request(:list_vpc_configurations, params)
+      request.send_request(options)
+    end
+
     # <p>Creates a <code>DRAFT</code> version of the agent that can be used for internal testing.</p>
     # @param [Hash, Types::PrepareAgentRequest] params
     # @option params [String] :agent_id
@@ -5557,6 +6062,34 @@ module Aws::BedrockAgent
       request.send_request(options)
     end
 
+    # <p>Associates a resource policy with a knowledge base. A resource policy allows other AWS accounts to access the knowledge base. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/kb-managed-cross-account.html">Cross-account access for knowledge bases</a>.</p>
+    # @param [Hash, Types::PutResourcePolicyRequest] params
+    # @option params [String] :resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the knowledge base to attach the resource policy to.</p>
+    # @option params [String] :policy
+    #   <p>The JSON-formatted resource policy to associate with the knowledge base.</p>
+    # @option params [String] :expected_revision_id
+    #   <p>The expected revision identifier of the resource policy. Use this to prevent conflicts when multiple users update the same policy concurrently. Specify the <code>revisionId</code> from the most recent <code>GetResourcePolicy</code> or <code>PutResourcePolicy</code> response.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     resource_arn: "ResourceArn", # required
+    #     policy: "ResourcePolicy", # required
+    #     expected_revision_id: "RevisionId"
+    #   }
+    #   options = {}
+    #   response = client.put_resource_policy(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     resource_arn: "ResourceArn", # required
+    #     revision_id: "RevisionId", # required
+    #   }
+    # @return [Types::PutResourcePolicyResponse]
+    def put_resource_policy(params = {}, options = {})
+      request = build_request(:put_resource_policy, params)
+      request.send_request(options)
+    end
+
     # <p>Begins a data ingestion job. Data sources are ingested into your knowledge base so that Large Language Models (LLMs) can use your data.</p>
     # @param [Hash, Types::StartIngestionJobRequest] params
     # @option params [String] :knowledge_base_id
@@ -5592,11 +6125,13 @@ module Aws::BedrockAgent
     #         number_of_modified_documents_indexed: 1,
     #         number_of_metadata_documents_modified: 1,
     #         number_of_documents_deleted: 1,
-    #         number_of_documents_failed: 1
+    #         number_of_documents_failed: 1,
+    #         number_of_documents_skipped: 1
     #       },
     #       failure_reasons: ["FailureReason"],
     #       started_at: Time.now, # required
     #       updated_at: Time.now, # required
+    #       text_ready_at: Time.now
     #     }
     #   }
     # @return [Types::StartIngestionJobResponse]
@@ -5637,11 +6172,13 @@ module Aws::BedrockAgent
     #         number_of_modified_documents_indexed: 1,
     #         number_of_metadata_documents_modified: 1,
     #         number_of_documents_deleted: 1,
-    #         number_of_documents_failed: 1
+    #         number_of_documents_failed: 1,
+    #         number_of_documents_skipped: 1
     #       },
     #       failure_reasons: ["FailureReason"],
     #       started_at: Time.now, # required
     #       updated_at: Time.now, # required
+    #       text_ready_at: Time.now
     #     }
     #   }
     # @return [Types::StopIngestionJobResponse]
@@ -6163,7 +6700,41 @@ module Aws::BedrockAgent
     #     name: "Name", # required
     #     description: "Description",
     #     data_source_configuration: { # required
-    #       type: "S3" # One of: ["S3", "WEB", "CONFLUENCE", "SALESFORCE", "SHAREPOINT", "CUSTOM", "REDSHIFT_METADATA"], # required
+    #       type: "S3" # One of: ["S3", "WEB", "CONFLUENCE", "SALESFORCE", "SHAREPOINT", "CUSTOM", "REDSHIFT_METADATA", "MANAGED_KNOWLEDGE_BASE_CONNECTOR"], # required
+    #       managed_knowledge_base_connector_configuration: {
+    #         deletion_protection_configuration: {
+    #           deletion_protection_status: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
+    #           deletion_protection_threshold: 1
+    #         },
+    #         media_extraction_configuration: {
+    #           image_extraction_configuration: {
+    #             image_extraction_status: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
+    #           },
+    #           audio_extraction_configuration: {
+    #             audio_extraction_status: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
+    #           },
+    #           video_extraction_configuration: {
+    #             video_extraction_status: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
+    #           }
+    #         },
+    #         connector_parameters: ""null"",
+    #         sync_schedule: {
+    #           # One of:
+    #           daily: {
+    #           },
+    #           weekly: {
+    #             day_of_week: "SUNDAY" # One of: ["SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"], # required
+    #           },
+    #           monthly: {
+    #             day_of_month: { # required
+    #               # One of:
+    #               day_number: 1,
+    #               last_day_of_month: {
+    #               }
+    #             }
+    #           }
+    #         }
+    #       },
     #       s3_configuration: {
     #         bucket_arn: "S3BucketArn", # required
     #         inclusion_prefixes: ["S3Prefix"],
@@ -6302,7 +6873,7 @@ module Aws::BedrockAgent
     #         ]
     #       },
     #       parsing_configuration: {
-    #         parsing_strategy: "BEDROCK_FOUNDATION_MODEL" # One of: ["BEDROCK_FOUNDATION_MODEL", "BEDROCK_DATA_AUTOMATION"], # required
+    #         parsing_strategy: "BEDROCK_FOUNDATION_MODEL" # One of: ["BEDROCK_FOUNDATION_MODEL", "BEDROCK_DATA_AUTOMATION", "SMART_PARSING", "MULTI_MODAL_EMBEDDINGS"], # required
     #         bedrock_foundation_model_configuration: {
     #           model_arn: "BedrockModelArn", # required
     #           parsing_prompt: {
@@ -6334,10 +6905,44 @@ module Aws::BedrockAgent
     #       knowledge_base_id: "Id", # required
     #       data_source_id: "Id", # required
     #       name: "Name", # required
-    #       status: "AVAILABLE" # One of: ["AVAILABLE", "DELETING", "DELETE_UNSUCCESSFUL"], # required
+    #       status: "AVAILABLE" # One of: ["AVAILABLE", "DELETING", "DELETE_UNSUCCESSFUL", "CREATING", "UPDATING", "FAILED"], # required
     #       description: "Description",
     #       data_source_configuration: { # required
-    #         type: "S3" # One of: ["S3", "WEB", "CONFLUENCE", "SALESFORCE", "SHAREPOINT", "CUSTOM", "REDSHIFT_METADATA"], # required
+    #         type: "S3" # One of: ["S3", "WEB", "CONFLUENCE", "SALESFORCE", "SHAREPOINT", "CUSTOM", "REDSHIFT_METADATA", "MANAGED_KNOWLEDGE_BASE_CONNECTOR"], # required
+    #         managed_knowledge_base_connector_configuration: {
+    #           deletion_protection_configuration: {
+    #             deletion_protection_status: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
+    #             deletion_protection_threshold: 1
+    #           },
+    #           media_extraction_configuration: {
+    #             image_extraction_configuration: {
+    #               image_extraction_status: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
+    #             },
+    #             audio_extraction_configuration: {
+    #               audio_extraction_status: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
+    #             },
+    #             video_extraction_configuration: {
+    #               video_extraction_status: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
+    #             }
+    #           },
+    #           connector_parameters: ""null"",
+    #           sync_schedule: {
+    #             # One of:
+    #             daily: {
+    #             },
+    #             weekly: {
+    #               day_of_week: "SUNDAY" # One of: ["SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"], # required
+    #             },
+    #             monthly: {
+    #               day_of_month: { # required
+    #                 # One of:
+    #                 day_number: 1,
+    #                 last_day_of_month: {
+    #                 }
+    #               }
+    #             }
+    #           }
+    #         },
     #         s3_configuration: {
     #           bucket_arn: "S3BucketArn", # required
     #           inclusion_prefixes: ["S3Prefix"],
@@ -6475,7 +7080,7 @@ module Aws::BedrockAgent
     #           ]
     #         },
     #         parsing_configuration: {
-    #           parsing_strategy: "BEDROCK_FOUNDATION_MODEL" # One of: ["BEDROCK_FOUNDATION_MODEL", "BEDROCK_DATA_AUTOMATION"], # required
+    #           parsing_strategy: "BEDROCK_FOUNDATION_MODEL" # One of: ["BEDROCK_FOUNDATION_MODEL", "BEDROCK_DATA_AUTOMATION", "SMART_PARSING", "MULTI_MODAL_EMBEDDINGS"], # required
     #           bedrock_foundation_model_configuration: {
     #             model_arn: "BedrockModelArn", # required
     #             parsing_prompt: {
@@ -6676,7 +7281,8 @@ module Aws::BedrockAgent
     #                             input_schema: { # required
     #                               # One of:
     #                               json: ""null""
-    #                             }
+    #                             },
+    #                             strict: false
     #                           },
     #                           cache_point: {
     #                             type: "default" # One of: ["default"], # required
@@ -6957,7 +7563,8 @@ module Aws::BedrockAgent
     #                             input_schema: { # required
     #                               # One of:
     #                               json: ""null""
-    #                             }
+    #                             },
+    #                             strict: false
     #                           },
     #                           cache_point: {
     #                             type: "default" # One of: ["default"], # required
@@ -7160,14 +7767,67 @@ module Aws::BedrockAgent
     #     description: "Description",
     #     role_arn: "KnowledgeBaseRoleArn", # required
     #     knowledge_base_configuration: { # required
-    #       type: "VECTOR" # One of: ["VECTOR", "KENDRA", "SQL"], # required
+    #       type: "VECTOR" # One of: ["VECTOR", "KENDRA", "SQL", "MANAGED"], # required
     #       vector_knowledge_base_configuration: {
     #         embedding_model_arn: "BedrockEmbeddingModelArn", # required
     #         embedding_model_configuration: {
     #           bedrock_embedding_model_configuration: {
     #             dimensions: 1,
-    #             embedding_data_type: "FLOAT32" # One of: ["FLOAT32", "BINARY"]
+    #             embedding_data_type: "FLOAT32" # One of: ["FLOAT32", "BINARY"],
+    #             audio: [
+    #               {
+    #                 segmentation_configuration: { # required
+    #                   fixed_length_duration: 1, # required
+    #                 }
+    #               }
+    #             ],
+    #             video: [
+    #               {
+    #                 segmentation_configuration: { # required
+    #                   fixed_length_duration: 1, # required
+    #                 }
+    #               }
+    #             ],
+    #             model_configuration: ""null""
     #           }
+    #         },
+    #         supplemental_data_storage_configuration: {
+    #           storage_locations: [ # required
+    #             {
+    #               type: "S3" # One of: ["S3"], # required
+    #               s3_location: {
+    #                 uri: "S3BucketUri", # required
+    #               }
+    #             }
+    #           ]
+    #         }
+    #       },
+    #       managed_knowledge_base_configuration: {
+    #         embedding_model_type: "CUSTOM" # One of: ["CUSTOM", "MANAGED"],
+    #         embedding_model_arn: "BedrockEmbeddingModelArn",
+    #         embedding_model_configuration: {
+    #           bedrock_embedding_model_configuration: {
+    #             dimensions: 1,
+    #             embedding_data_type: "FLOAT32" # One of: ["FLOAT32", "BINARY"],
+    #             audio: [
+    #               {
+    #                 segmentation_configuration: { # required
+    #                   fixed_length_duration: 1, # required
+    #                 }
+    #               }
+    #             ],
+    #             video: [
+    #               {
+    #                 segmentation_configuration: { # required
+    #                   fixed_length_duration: 1, # required
+    #                 }
+    #               }
+    #             ],
+    #             model_configuration: ""null""
+    #           }
+    #         },
+    #         server_side_encryption_configuration: {
+    #           kms_key_arn: "KmsKeyArn"
     #         },
     #         supplemental_data_storage_configuration: {
     #           storage_locations: [ # required
@@ -7336,14 +7996,67 @@ module Aws::BedrockAgent
     #       description: "Description",
     #       role_arn: "KnowledgeBaseRoleArn", # required
     #       knowledge_base_configuration: { # required
-    #         type: "VECTOR" # One of: ["VECTOR", "KENDRA", "SQL"], # required
+    #         type: "VECTOR" # One of: ["VECTOR", "KENDRA", "SQL", "MANAGED"], # required
     #         vector_knowledge_base_configuration: {
     #           embedding_model_arn: "BedrockEmbeddingModelArn", # required
     #           embedding_model_configuration: {
     #             bedrock_embedding_model_configuration: {
     #               dimensions: 1,
-    #               embedding_data_type: "FLOAT32" # One of: ["FLOAT32", "BINARY"]
+    #               embedding_data_type: "FLOAT32" # One of: ["FLOAT32", "BINARY"],
+    #               audio: [
+    #                 {
+    #                   segmentation_configuration: { # required
+    #                     fixed_length_duration: 1, # required
+    #                   }
+    #                 }
+    #               ],
+    #               video: [
+    #                 {
+    #                   segmentation_configuration: { # required
+    #                     fixed_length_duration: 1, # required
+    #                   }
+    #                 }
+    #               ],
+    #               model_configuration: ""null""
     #             }
+    #           },
+    #           supplemental_data_storage_configuration: {
+    #             storage_locations: [ # required
+    #               {
+    #                 type: "S3" # One of: ["S3"], # required
+    #                 s3_location: {
+    #                   uri: "S3BucketUri", # required
+    #                 }
+    #               }
+    #             ]
+    #           }
+    #         },
+    #         managed_knowledge_base_configuration: {
+    #           embedding_model_type: "CUSTOM" # One of: ["CUSTOM", "MANAGED"],
+    #           embedding_model_arn: "BedrockEmbeddingModelArn",
+    #           embedding_model_configuration: {
+    #             bedrock_embedding_model_configuration: {
+    #               dimensions: 1,
+    #               embedding_data_type: "FLOAT32" # One of: ["FLOAT32", "BINARY"],
+    #               audio: [
+    #                 {
+    #                   segmentation_configuration: { # required
+    #                     fixed_length_duration: 1, # required
+    #                   }
+    #                 }
+    #               ],
+    #               video: [
+    #                 {
+    #                   segmentation_configuration: { # required
+    #                     fixed_length_duration: 1, # required
+    #                   }
+    #                 }
+    #               ],
+    #               model_configuration: ""null""
+    #             }
+    #           },
+    #           server_side_encryption_configuration: {
+    #             kms_key_arn: "KmsKeyArn"
     #           },
     #           supplemental_data_storage_configuration: {
     #             storage_locations: [ # required
@@ -7499,7 +8212,7 @@ module Aws::BedrockAgent
     #           index_name: "IndexName"
     #         }
     #       },
-    #       status: "CREATING" # One of: ["CREATING", "ACTIVE", "DELETING", "UPDATING", "FAILED", "DELETE_UNSUCCESSFUL"], # required
+    #       status: "CREATING" # One of: ["CREATING", "ACTIVE", "DELETING", "UPDATING", "FAILED", "DELETE_UNSUCCESSFUL", "UPDATE_UNSUCCESSFUL"], # required
     #       created_at: Time.now, # required
     #       updated_at: Time.now, # required
     #       failure_reasons: ["FailureReason"]
@@ -7582,7 +8295,8 @@ module Aws::BedrockAgent
     #                   input_schema: { # required
     #                     # One of:
     #                     json: ""null""
-    #                   }
+    #                   },
+    #                   strict: false
     #                 },
     #                 cache_point: {
     #                   type: "default" # One of: ["default"], # required
@@ -7688,7 +8402,8 @@ module Aws::BedrockAgent
     #                   input_schema: { # required
     #                     # One of:
     #                     json: ""null""
-    #                   }
+    #                   },
+    #                   strict: false
     #                 },
     #                 cache_point: {
     #                   type: "default" # One of: ["default"], # required
@@ -7897,7 +8612,8 @@ module Aws::BedrockAgent
     #                             input_schema: { # required
     #                               # One of:
     #                               json: ""null""
-    #                             }
+    #                             },
+    #                             strict: false
     #                           },
     #                           cache_point: {
     #                             type: "default" # One of: ["default"], # required

@@ -25,6 +25,7 @@ module Aws::DirectConnect
   # * {DirectConnectClientException}
   # * {DirectConnectServerException}
   # * {DuplicateTagKeysException}
+  # * {LimitExceededException}
   # * {TooManyTagsException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
@@ -62,6 +63,19 @@ module Aws::DirectConnect
     class DuplicateTagKeysException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DirectConnect::Types::DuplicateTagKeysException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>The rate limiter limit has been exceeded for the connection. You cannot add more rate limiters to virtual interfaces on this connection.</p>
+    class LimitExceededException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::DirectConnect::Types::LimitExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
         super
       end

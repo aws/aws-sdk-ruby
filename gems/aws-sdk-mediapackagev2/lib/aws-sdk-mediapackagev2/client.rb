@@ -144,18 +144,18 @@ module Aws::MediaPackageV2
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -261,13 +261,17 @@ module Aws::MediaPackageV2
     # @option params [String] :client_token
     #   <p>A unique, case-sensitive token that you provide to ensure the idempotency of the request.</p>
     # @option params [String] :input_type
-    #   <p>The input type will be an immutable field which will be used to define whether the channel will allow CMAF ingest or HLS ingest. If unprovided, it will default to HLS to preserve current behavior.</p> <p>The allowed values are:</p> <ul> <li> <p> <code>HLS</code> - The HLS streaming specification (which defines M3U8 manifests and TS segments).</p> </li> <li> <p> <code>CMAF</code> - The DASH-IF CMAF Ingest specification (which defines CMAF segments with optional DASH manifests).</p> </li> </ul>
+    #   <p>The input type is an immutable field. It defines whether the channel allows CMAF ingest, HLS ingest, or server-side multiview output. Multiview channels receive no ingest of their own. If unprovided, the value defaults to HLS.</p> <p>The allowed values are:</p> <ul> <li> <p> <code>HLS</code> - The HLS streaming specification (which defines M3U8 manifests and TS segments).</p> </li> <li> <p> <code>CMAF</code> - The DASH-IF CMAF Ingest specification (which defines CMAF segments with optional DASH manifests).</p> </li> <li> <p> <code>MULTIVIEW</code> – Server-side multiview. The channel receives no ingest of its own. Instead, it composites video from the source channels in its <code>MultiviewConfiguration</code> into a single tiled output stream.</p> </li> </ul>
     # @option params [String] :description
     #   <p>Enter any descriptive text that helps you to identify the channel.</p>
     # @option params [Types::InputSwitchConfiguration] :input_switch_configuration
     #   <p>The configuration for input switching based on the media quality confidence score (MQCS) as provided from AWS Elemental MediaLive. This setting is valid only when <code>InputType</code> is <code>CMAF</code>.</p>
     # @option params [Types::OutputHeaderConfiguration] :output_header_configuration
     #   <p>The settings for what common media server data (CMSD) headers AWS Elemental MediaPackage includes in responses to the CDN. This setting is valid only when <code>InputType</code> is <code>CMAF</code>.</p>
+    # @option params [Types::MultiviewConfiguration] :multiview_configuration
+    #   <p>The multiview configuration for the channel. This setting is required when <code>InputType</code> is <code>MULTIVIEW</code>, and can't be set for any other input type.</p>
+    # @option params [String] :output_locking_mode
+    #   <p>The output locking mode for the channel. This setting is only valid when <code>InputType</code> is <code>CMAF</code>. This value is immutable after channel creation. If you don't specify a value, the default is <code>EPOCH_LOCKED</code>.</p> <p>The allowed values are:</p> <ul> <li> <p> <code>EPOCH_LOCKED</code> - The channel uses epoch-locked behavior with deterministic sequence numbering and fixed segment boundaries aligned to epoch time. This mode supports cross-region synchronization and failover.</p> </li> <li> <p> <code>NON_EPOCH_LOCKED</code> - The channel uses non-epoch-locked behavior with duration-based segment combining and monotonically increasing sequence numbers starting from 0. This mode does not support cross-region synchronization or failover.</p> </li> </ul>
     # @option params [Hash<String, String>] :tags
     #   <p>A comma-separated list of tag key:value pairs that you define. For example:</p> <p> <code>"Key1": "Value1",</code> </p> <p> <code>"Key2": "Value2"</code> </p>
     # @example Creating a Channel
@@ -309,12 +313,45 @@ module Aws::MediaPackageV2
     #       "key2" => "value2"
     #     }
     #   }
+    # @example Creating a CMAF Channel with non-epoch-locked output locking mode
+    #   # Example operation for create_channel
+    #   params = {
+    #     channel_group_name: "exampleChannelGroup",
+    #     channel_name: "exampleCmafChannel",
+    #     input_type: CMAF,
+    #     output_locking_mode: NON_EPOCH_LOCKED,
+    #     description: "Non-epoch-locked CMAF channel"
+    #   }
+    #   options = {}
+    #   response = client.create_channel(params, options)
+    #   response.to_h #=>
+    #   {
+    #     channel_group_name: "exampleChannelGroup",
+    #     channel_name: "exampleCmafChannel",
+    #     description: "Non-epoch-locked CMAF channel",
+    #     arn: "arn:aws:mediapackagev2:us-west-2:123456789012:channelGroup/exampleChannelGroup/channel/exampleCmafChannel",
+    #     created_at: Time.parse("2022-10-18T09:36:00.00Z"),
+    #     modified_at: Time.parse("2022-10-18T09:36:00.00Z"),
+    #     input_type: CMAF,
+    #     output_locking_mode: NON_EPOCH_LOCKED,
+    #     ingest_endpoints: [
+    #       {
+    #         id: "1",
+    #         url: "https://abcde-1.ingest.vwxyz.mediapackagev2.us-west-2.amazonaws.com/v1/exampleChannelGroup/exampleCmafChannel"
+    #       },
+    #       {
+    #         id: "2",
+    #         url: "https://abcde-2.ingest.vwxyz.mediapackagev2.us-west-2.amazonaws.com/v1/exampleChannelGroup/exampleCmafChannel"
+    #       }
+    #     ],
+    #     e_tag: "GlfT+dwAyGIR4wuy8nKWl1RDPwSrjQej9qUutLZxoxk="
+    #   }
     # @example Request syntax with placeholder values
     #   params = {
     #     channel_group_name: "ResourceName", # required
     #     channel_name: "ResourceName", # required
     #     client_token: "IdempotencyToken",
-    #     input_type: "HLS" # One of: ["HLS", "CMAF"],
+    #     input_type: "HLS" # One of: ["HLS", "CMAF", "MULTIVIEW"],
     #     description: "ResourceDescription",
     #     input_switch_configuration: {
     #       mqcs_input_switching: false,
@@ -323,6 +360,11 @@ module Aws::MediaPackageV2
     #     output_header_configuration: {
     #       publish_mqcs: false
     #     },
+    #     multiview_configuration: {
+    #       available_sources: ["ResourceName"], # required
+    #       available_layouts: ["LAYOUT_2EH" # One of: ["LAYOUT_2EH", "LAYOUT_2PL", "LAYOUT_3EL", "LAYOUT_3PL", "LAYOUT_4E", "LAYOUT_4PL"]], # required
+    #     },
+    #     output_locking_mode: "EPOCH_LOCKED" # One of: ["EPOCH_LOCKED", "NON_EPOCH_LOCKED"],
     #     tags: {
     #       "TagKey" => "TagValue"
     #     }
@@ -332,6 +374,11 @@ module Aws::MediaPackageV2
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {
+    #     multiview_configuration: {
+    #       available_sources: ["ResourceName"], # required
+    #       available_layouts: ["LAYOUT_2EH" # One of: ["LAYOUT_2EH", "LAYOUT_2PL", "LAYOUT_3EL", "LAYOUT_3PL", "LAYOUT_4E", "LAYOUT_4PL"]], # required
+    #     },
+    #     attached_multiview_channels: ["ResourceName"],
     #     arn: "String", # required
     #     channel_name: "String", # required
     #     channel_group_name: "String", # required
@@ -344,7 +391,7 @@ module Aws::MediaPackageV2
     #         url: "String"
     #       }
     #     ],
-    #     input_type: "HLS" # One of: ["HLS", "CMAF"],
+    #     input_type: "HLS" # One of: ["HLS", "CMAF", "MULTIVIEW"],
     #     e_tag: "EntityTag",
     #     tags: {
     #       "TagKey" => "TagValue"
@@ -355,7 +402,8 @@ module Aws::MediaPackageV2
     #     },
     #     output_header_configuration: {
     #       publish_mqcs: false
-    #     }
+    #     },
+    #     output_locking_mode: "EPOCH_LOCKED" # One of: ["EPOCH_LOCKED", "NON_EPOCH_LOCKED"]
     #   }
     # @return [Types::CreateChannelResponse]
     def create_channel(params = {}, options = {})
@@ -653,6 +701,10 @@ module Aws::MediaPackageV2
     #   <p>A list of Microsoft Smooth Streaming (MSS) manifest configurations for the origin endpoint. You can configure multiple MSS manifests to provide different streaming experiences or to support different client requirements.</p>
     # @option params [Types::ForceEndpointErrorConfiguration] :force_endpoint_error_configuration
     #   <p>The failover settings for the endpoint.</p>
+    # @option params [String] :uri_separator
+    #   <p>The separator character to use in generated URIs for this origin endpoint. This setting applies to all manifest types on the endpoint. If you don't specify a value, the default is <code>UNDERSCORE</code>.</p>
+    # @option params [String] :stream_name_output_mode
+    #   <p>The output mode for stream names in egress manifests. This setting is valid only when the associated channel's <code>InputType</code> is <code>HLS</code>. You can't change the stream name output mode after you create the endpoint.</p> <p> <code>INDEX</code> uses numeric indices for stream names (for example, 1, 2, 3). <code>PASSTHROUGH_NAME</code> uses the stream names from the input manifest. If you don't specify a value, the default is <code>INDEX</code>.</p>
     # @option params [Hash<String, String>] :tags
     #   <p>A comma-separated list of tag key:value pairs that you define. For example:</p> <p> <code>"Key1": "Value1",</code> </p> <p> <code>"Key2": "Value2"</code> </p>
     # @example Creating an OriginEndpoint with container type TS, and encryption enabled
@@ -672,6 +724,8 @@ module Aws::MediaPackageV2
     #         SLATE_INPUT
     #       ]
     #     },
+    #     uri_separator: UNDERSCORE,
+    #     stream_name_output_mode: INDEX,
     #     segment: {
     #       segment_duration_seconds: 6,
     #       segment_name: "segmentName",
@@ -700,7 +754,8 @@ module Aws::MediaPackageV2
     #             CLEAR_KEY_AES_128
     #           ],
     #           role_arn: "arn:aws:iam::123456789012:role/empRole",
-    #           url: "https://foo.com"
+    #           url: "https://foo.com",
+    #           certificate_arn: "arn:aws:acm:us-west-2:123456789012:certificate/0c6a65f1-7bd3-48ac-be17-f38675def22e"
     #         }
     #       }
     #     },
@@ -712,7 +767,8 @@ module Aws::MediaPackageV2
     #           ad_marker_hls: DATERANGE
     #         },
     #         manifest_window_seconds: 30,
-    #         program_date_time_interval_seconds: 60
+    #         program_date_time_interval_seconds: 60,
+    #         uri_path_type: ROOT
     #       },
     #       {
     #         manifest_name: "exampleManifest2",
@@ -721,7 +777,8 @@ module Aws::MediaPackageV2
     #           ad_marker_hls: DATERANGE
     #         },
     #         manifest_window_seconds: 30,
-    #         program_date_time_interval_seconds: 60
+    #         program_date_time_interval_seconds: 60,
+    #         uri_path_type: ROOT
     #       }
     #     ],
     #     low_latency_hls_manifests: [
@@ -770,6 +827,8 @@ module Aws::MediaPackageV2
     #         SLATE_INPUT
     #       ]
     #     },
+    #     uri_separator: UNDERSCORE,
+    #     stream_name_output_mode: INDEX,
     #     segment: {
     #       segment_duration_seconds: 6,
     #       segment_name: "segmentName",
@@ -798,7 +857,8 @@ module Aws::MediaPackageV2
     #             CLEAR_KEY_AES_128
     #           ],
     #           role_arn: "arn:aws:iam::123456789012:role/empRole",
-    #           url: "https://foo.com"
+    #           url: "https://foo.com",
+    #           certificate_arn: "arn:aws:acm:us-west-2:123456789012:certificate/0c6a65f1-7bd3-48ac-be17-f38675def22e"
     #         }
     #       }
     #     },
@@ -811,7 +871,8 @@ module Aws::MediaPackageV2
     #         },
     #         manifest_window_seconds: 30,
     #         program_date_time_interval_seconds: 60,
-    #         url: "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointTS/exampleManifest1.m3u8"
+    #         url: "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointTS/exampleManifest1.m3u8",
+    #         uri_path_type: ROOT
     #       },
     #       {
     #         manifest_name: "exampleManifest2",
@@ -821,7 +882,8 @@ module Aws::MediaPackageV2
     #         },
     #         manifest_window_seconds: 30,
     #         program_date_time_interval_seconds: 60,
-    #         url: "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointTS/exampleManifest2.m3u8"
+    #         url: "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointTS/exampleManifest2.m3u8",
+    #         uri_path_type: ROOT
     #       }
     #     ],
     #     low_latency_hls_manifests: [
@@ -833,7 +895,8 @@ module Aws::MediaPackageV2
     #         },
     #         manifest_window_seconds: 30,
     #         program_date_time_interval_seconds: 60,
-    #         url: "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointTS/exampleLLManifest1.m3u8"
+    #         url: "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointTS/exampleLLManifest1.m3u8",
+    #         uri_path_type: LEAF
     #       },
     #       {
     #         manifest_name: "exampleLLManifest2",
@@ -843,7 +906,8 @@ module Aws::MediaPackageV2
     #         },
     #         manifest_window_seconds: 30,
     #         program_date_time_interval_seconds: 60,
-    #         url: "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointTS/exampleLLManifest2.m3u8"
+    #         url: "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointTS/exampleLLManifest2.m3u8",
+    #         uri_path_type: LEAF
     #       }
     #     ],
     #     e_tag: "GlfT+dwAyGIR4wuy8nKWl1RDPwSrjQej9qUutLZxoxk=",
@@ -868,6 +932,7 @@ module Aws::MediaPackageV2
     #         SLATE_INPUT
     #       ]
     #     },
+    #     uri_separator: UNDERSCORE,
     #     segment: {
     #       segment_duration_seconds: 6,
     #       segment_name: "segmentName",
@@ -895,9 +960,11 @@ module Aws::MediaPackageV2
     #             WIDEVINE
     #           ],
     #           role_arn: "arn:aws:iam::123456789012:role/empRole",
-    #           url: "https://foo.com"
+    #           url: "https://foo.com",
+    #           certificate_arn: "arn:aws:acm:us-west-2:123456789012:certificate/0c6a65f1-7bd3-48ac-be17-f38675def22e"
     #         }
-    #       }
+    #       },
+    #       output_timestamp_mode: REBASED_TO_CHANNEL_START
     #     },
     #     hls_manifests: [
     #       {
@@ -1043,7 +1110,10 @@ module Aws::MediaPackageV2
     #             }
     #           ]
     #         },
-    #         compactness: STANDARD
+    #         compactness: STANDARD,
+    #         availability_start_time_configuration: {
+    #     "FixedAvailabilityStartTime" => 2026-04-17T23:00:00.00Z
+    #   }
     #       }
     #     ],
     #     tags: {
@@ -1071,6 +1141,7 @@ module Aws::MediaPackageV2
     #         SLATE_INPUT
     #       ]
     #     },
+    #     uri_separator: UNDERSCORE,
     #     segment: {
     #       segment_duration_seconds: 6,
     #       segment_name: "segmentName",
@@ -1098,9 +1169,11 @@ module Aws::MediaPackageV2
     #             WIDEVINE
     #           ],
     #           role_arn: "arn:aws:iam::123456789012:role/empRole",
-    #           url: "https://foo.com"
+    #           url: "https://foo.com",
+    #           certificate_arn: "arn:aws:acm:us-west-2:123456789012:certificate/0c6a65f1-7bd3-48ac-be17-f38675def22e"
     #         }
-    #       }
+    #       },
+    #       output_timestamp_mode: REBASED_TO_CHANNEL_START
     #     },
     #     hls_manifests: [
     #       {
@@ -1111,7 +1184,8 @@ module Aws::MediaPackageV2
     #         },
     #         manifest_window_seconds: 30,
     #         program_date_time_interval_seconds: 60,
-    #         url: "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointCMAF/exampleManifest1.m3u8"
+    #         url: "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointCMAF/exampleManifest1.m3u8",
+    #         uri_path_type: LEAF
     #       },
     #       {
     #         manifest_name: "exampleManifest2",
@@ -1121,7 +1195,8 @@ module Aws::MediaPackageV2
     #         },
     #         manifest_window_seconds: 30,
     #         program_date_time_interval_seconds: 60,
-    #         url: "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointCMAF/exampleManifest2.m3u8"
+    #         url: "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointCMAF/exampleManifest2.m3u8",
+    #         uri_path_type: LEAF
     #       }
     #     ],
     #     low_latency_hls_manifests: [
@@ -1133,7 +1208,8 @@ module Aws::MediaPackageV2
     #         },
     #         manifest_window_seconds: 30,
     #         program_date_time_interval_seconds: 60,
-    #         url: "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointCMAF/exampleLLManifest1.m3u8"
+    #         url: "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointCMAF/exampleLLManifest1.m3u8",
+    #         uri_path_type: LEAF
     #       },
     #       {
     #         manifest_name: "exampleLLManifest2",
@@ -1143,7 +1219,8 @@ module Aws::MediaPackageV2
     #         },
     #         manifest_window_seconds: 30,
     #         program_date_time_interval_seconds: 60,
-    #         url: "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointCMAF/exampleLLManifest2.m3u8"
+    #         url: "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointCMAF/exampleLLManifest2.m3u8",
+    #         uri_path_type: LEAF
     #       }
     #     ],
     #     dash_manifests: [
@@ -1197,7 +1274,8 @@ module Aws::MediaPackageV2
     #             }
     #           ]
     #         },
-    #         compactness: STANDARD
+    #         compactness: STANDARD,
+    #         uri_path_type: LEAF
     #       },
     #       {
     #         manifest_name: "exampleDashManifest2",
@@ -1252,7 +1330,11 @@ module Aws::MediaPackageV2
     #             }
     #           ]
     #         },
-    #         compactness: STANDARD
+    #         compactness: STANDARD,
+    #         uri_path_type: LEAF,
+    #         availability_start_time_configuration: {
+    #     "FixedAvailabilityStartTime" => 2026-04-17T23:00:00.00Z
+    #   }
     #       }
     #     ],
     #     e_tag: "GlfT+dwAyGIR4wuy8nKWl1RDPwSrjQej9qUutLZxoxk=",
@@ -1278,6 +1360,7 @@ module Aws::MediaPackageV2
     #         SLATE_INPUT
     #       ]
     #     },
+    #     uri_separator: UNDERSCORE,
     #     segment: {
     #       segment_duration_seconds: 2,
     #       segment_name: "segmentName",
@@ -1332,6 +1415,7 @@ module Aws::MediaPackageV2
     #         SLATE_INPUT
     #       ]
     #     },
+    #     uri_separator: UNDERSCORE,
     #     segment: {
     #       segment_duration_seconds: 2,
     #       segment_name: "segmentName",
@@ -1380,7 +1464,9 @@ module Aws::MediaPackageV2
     #       include_iframe_only_streams: false,
     #       ts_include_dvb_subtitles: false,
     #       scte: {
-    #         scte_filter: ["SPLICE_INSERT" # One of: ["SPLICE_INSERT", "BREAK", "PROVIDER_ADVERTISEMENT", "DISTRIBUTOR_ADVERTISEMENT", "PROVIDER_PLACEMENT_OPPORTUNITY", "DISTRIBUTOR_PLACEMENT_OPPORTUNITY", "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY", "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY", "PROGRAM"]]
+    #         scte_filter: ["SPLICE_INSERT" # One of: ["SPLICE_INSERT", "BREAK", "PROVIDER_ADVERTISEMENT", "DISTRIBUTOR_ADVERTISEMENT", "PROVIDER_PLACEMENT_OPPORTUNITY", "DISTRIBUTOR_PLACEMENT_OPPORTUNITY", "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY", "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY", "PROGRAM", "CHAPTER", "UNSCHEDULED_EVENT", "ALTERNATE_CONTENT_OPPORTUNITY", "NETWORK", "PROVIDER_PROMO", "DISTRIBUTOR_PROMO", "PROVIDER_AD_BLOCK", "DISTRIBUTOR_AD_BLOCK", "CONTENT_IDENTIFICATION", "CALL_AD_SERVER"]],
+    #         scte_in_segments: "NONE" # One of: ["NONE", "ALL", "MATCHES_FILTER"],
+    #         custom_ad_types: ["PROGRAM" # One of: ["PROGRAM", "CHAPTER", "UNSCHEDULED_EVENT", "ALTERNATE_CONTENT_OPPORTUNITY", "NETWORK"]]
     #       },
     #       encryption: {
     #         constant_initialization_vector: "String",
@@ -1400,8 +1486,14 @@ module Aws::MediaPackageV2
     #           drm_systems: ["CLEAR_KEY_AES_128" # One of: ["CLEAR_KEY_AES_128", "FAIRPLAY", "PLAYREADY", "WIDEVINE", "IRDETO"]], # required
     #           role_arn: "String", # required
     #           url: "String", # required
+    #           certificate_arn: "String",
+    #           speke_version: "V2_0" # One of: ["V2_0", "V2_1"],
+    #           content_key_period_configuration: {
+    #             content_key_period_timing: "INDEX_ONLY" # One of: ["INDEX_ONLY", "START_END_ONLY", "INDEX_WITH_START_END"]
+    #           }
     #         }
-    #       }
+    #       },
+    #       output_timestamp_mode: "PASSTHROUGH" # One of: ["PASSTHROUGH", "REBASED_TO_CHANNEL_START"]
     #     },
     #     client_token: "IdempotencyToken",
     #     description: "ResourceDescription",
@@ -1411,7 +1503,8 @@ module Aws::MediaPackageV2
     #         manifest_name: "ManifestName", # required
     #         child_manifest_name: "ManifestName",
     #         scte_hls: {
-    #           ad_marker_hls: "DATERANGE" # One of: ["DATERANGE", "SCTE35_ENHANCED"]
+    #           ad_marker_hls: "DATERANGE" # One of: ["DATERANGE", "SCTE35_ENHANCED"],
+    #           scte_in_manifests: "ALL" # One of: ["ALL", "MATCHES_FILTER"]
     #         },
     #         start_tag: {
     #           time_offset: 1.0, # required
@@ -1421,12 +1514,18 @@ module Aws::MediaPackageV2
     #         program_date_time_interval_seconds: 1,
     #         filter_configuration: {
     #           manifest_filter: "String",
+    #           drm_settings: "String",
     #           start: Time.now,
     #           end: Time.now,
     #           time_delay_seconds: 1,
-    #           clip_start_time: Time.now
+    #           clip_start_time: Time.now,
+    #           multiview: {
+    #             layout: "LAYOUT_2EH" # One of: ["LAYOUT_2EH", "LAYOUT_2PL", "LAYOUT_3EL", "LAYOUT_3PL", "LAYOUT_4E", "LAYOUT_4PL"], # required
+    #             sources: ["ResourceName"], # required
+    #           }
     #         },
-    #         url_encode_child_manifest: false
+    #         url_encode_child_manifest: false,
+    #         uri_path_type: "LEAF" # One of: ["LEAF", "ROOT"]
     #       }
     #     ],
     #     low_latency_hls_manifests: [
@@ -1434,7 +1533,8 @@ module Aws::MediaPackageV2
     #         manifest_name: "ManifestName", # required
     #         child_manifest_name: "ManifestName",
     #         scte_hls: {
-    #           ad_marker_hls: "DATERANGE" # One of: ["DATERANGE", "SCTE35_ENHANCED"]
+    #           ad_marker_hls: "DATERANGE" # One of: ["DATERANGE", "SCTE35_ENHANCED"],
+    #           scte_in_manifests: "ALL" # One of: ["ALL", "MATCHES_FILTER"]
     #         },
     #         start_tag: {
     #           time_offset: 1.0, # required
@@ -1444,12 +1544,18 @@ module Aws::MediaPackageV2
     #         program_date_time_interval_seconds: 1,
     #         filter_configuration: {
     #           manifest_filter: "String",
+    #           drm_settings: "String",
     #           start: Time.now,
     #           end: Time.now,
     #           time_delay_seconds: 1,
-    #           clip_start_time: Time.now
+    #           clip_start_time: Time.now,
+    #           multiview: {
+    #             layout: "LAYOUT_2EH" # One of: ["LAYOUT_2EH", "LAYOUT_2PL", "LAYOUT_3EL", "LAYOUT_3PL", "LAYOUT_4E", "LAYOUT_4PL"], # required
+    #             sources: ["ResourceName"], # required
+    #           }
     #         },
-    #         url_encode_child_manifest: false
+    #         url_encode_child_manifest: false,
+    #         uri_path_type: "LEAF" # One of: ["LEAF", "ROOT"]
     #       }
     #     ],
     #     dash_manifests: [
@@ -1458,10 +1564,15 @@ module Aws::MediaPackageV2
     #         manifest_window_seconds: 1,
     #         filter_configuration: {
     #           manifest_filter: "String",
+    #           drm_settings: "String",
     #           start: Time.now,
     #           end: Time.now,
     #           time_delay_seconds: 1,
-    #           clip_start_time: Time.now
+    #           clip_start_time: Time.now,
+    #           multiview: {
+    #             layout: "LAYOUT_2EH" # One of: ["LAYOUT_2EH", "LAYOUT_2PL", "LAYOUT_3EL", "LAYOUT_3PL", "LAYOUT_4E", "LAYOUT_4PL"], # required
+    #             sources: ["ResourceName"], # required
+    #           }
     #         },
     #         min_update_period_seconds: 1,
     #         min_buffer_time_seconds: 1,
@@ -1469,7 +1580,8 @@ module Aws::MediaPackageV2
     #         segment_template_format: "NUMBER_WITH_TIMELINE" # One of: ["NUMBER_WITH_TIMELINE"],
     #         period_triggers: ["AVAILS" # One of: ["AVAILS", "DRM_KEY_ROTATION", "SOURCE_CHANGES", "SOURCE_DISRUPTIONS", "NONE"]],
     #         scte_dash: {
-    #           ad_marker_dash: "BINARY" # One of: ["BINARY", "XML"]
+    #           ad_marker_dash: "BINARY" # One of: ["BINARY", "XML"],
+    #           scte_in_manifests: "ALL" # One of: ["ALL", "MATCHES_FILTER"]
     #         },
     #         drm_signaling: "INDIVIDUAL" # One of: ["INDIVIDUAL", "REFERENCED"],
     #         utc_timing: {
@@ -1506,10 +1618,16 @@ module Aws::MediaPackageV2
     #           ]
     #         },
     #         compactness: "STANDARD" # One of: ["STANDARD", "NONE"],
+    #         audio_timeline_pattern: "NONE" # One of: ["NONE", "PATTERNED"],
     #         subtitle_configuration: {
     #           ttml_configuration: {
     #             ttml_profile: "IMSC_1" # One of: ["IMSC_1", "EBU_TT_D_101"], # required
     #           }
+    #         },
+    #         uri_path_type: "LEAF" # One of: ["LEAF", "ROOT"],
+    #         availability_start_time_configuration: {
+    #           # One of:
+    #           fixed_availability_start_time: Time.now
     #         }
     #       }
     #     ],
@@ -1519,10 +1637,15 @@ module Aws::MediaPackageV2
     #         manifest_window_seconds: 1,
     #         filter_configuration: {
     #           manifest_filter: "String",
+    #           drm_settings: "String",
     #           start: Time.now,
     #           end: Time.now,
     #           time_delay_seconds: 1,
-    #           clip_start_time: Time.now
+    #           clip_start_time: Time.now,
+    #           multiview: {
+    #             layout: "LAYOUT_2EH" # One of: ["LAYOUT_2EH", "LAYOUT_2PL", "LAYOUT_3EL", "LAYOUT_3PL", "LAYOUT_4E", "LAYOUT_4PL"], # required
+    #             sources: ["ResourceName"], # required
+    #           }
     #         },
     #         manifest_layout: "FULL" # One of: ["FULL", "COMPACT"]
     #       }
@@ -1530,6 +1653,8 @@ module Aws::MediaPackageV2
     #     force_endpoint_error_configuration: {
     #       endpoint_error_conditions: ["STALE_MANIFEST" # One of: ["STALE_MANIFEST", "INCOMPLETE_MANIFEST", "MISSING_DRM_KEY", "SLATE_INPUT"]]
     #     },
+    #     uri_separator: "UNDERSCORE" # One of: ["UNDERSCORE", "HYPHEN"],
+    #     stream_name_output_mode: "INDEX" # One of: ["INDEX", "PASSTHROUGH_NAME"],
     #     tags: {
     #       "TagKey" => "TagValue"
     #     }
@@ -1551,7 +1676,9 @@ module Aws::MediaPackageV2
     #       include_iframe_only_streams: false,
     #       ts_include_dvb_subtitles: false,
     #       scte: {
-    #         scte_filter: ["SPLICE_INSERT" # One of: ["SPLICE_INSERT", "BREAK", "PROVIDER_ADVERTISEMENT", "DISTRIBUTOR_ADVERTISEMENT", "PROVIDER_PLACEMENT_OPPORTUNITY", "DISTRIBUTOR_PLACEMENT_OPPORTUNITY", "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY", "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY", "PROGRAM"]]
+    #         scte_filter: ["SPLICE_INSERT" # One of: ["SPLICE_INSERT", "BREAK", "PROVIDER_ADVERTISEMENT", "DISTRIBUTOR_ADVERTISEMENT", "PROVIDER_PLACEMENT_OPPORTUNITY", "DISTRIBUTOR_PLACEMENT_OPPORTUNITY", "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY", "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY", "PROGRAM", "CHAPTER", "UNSCHEDULED_EVENT", "ALTERNATE_CONTENT_OPPORTUNITY", "NETWORK", "PROVIDER_PROMO", "DISTRIBUTOR_PROMO", "PROVIDER_AD_BLOCK", "DISTRIBUTOR_AD_BLOCK", "CONTENT_IDENTIFICATION", "CALL_AD_SERVER"]],
+    #         scte_in_segments: "NONE" # One of: ["NONE", "ALL", "MATCHES_FILTER"],
+    #         custom_ad_types: ["PROGRAM" # One of: ["PROGRAM", "CHAPTER", "UNSCHEDULED_EVENT", "ALTERNATE_CONTENT_OPPORTUNITY", "NETWORK"]]
     #       },
     #       encryption: {
     #         constant_initialization_vector: "String",
@@ -1571,8 +1698,14 @@ module Aws::MediaPackageV2
     #           drm_systems: ["CLEAR_KEY_AES_128" # One of: ["CLEAR_KEY_AES_128", "FAIRPLAY", "PLAYREADY", "WIDEVINE", "IRDETO"]], # required
     #           role_arn: "String", # required
     #           url: "String", # required
+    #           certificate_arn: "String",
+    #           speke_version: "V2_0" # One of: ["V2_0", "V2_1"],
+    #           content_key_period_configuration: {
+    #             content_key_period_timing: "INDEX_ONLY" # One of: ["INDEX_ONLY", "START_END_ONLY", "INDEX_WITH_START_END"]
+    #           }
     #         }
-    #       }
+    #       },
+    #       output_timestamp_mode: "PASSTHROUGH" # One of: ["PASSTHROUGH", "REBASED_TO_CHANNEL_START"]
     #     },
     #     created_at: Time.now, # required
     #     modified_at: Time.now, # required
@@ -1586,20 +1719,27 @@ module Aws::MediaPackageV2
     #         manifest_window_seconds: 1,
     #         program_date_time_interval_seconds: 1,
     #         scte_hls: {
-    #           ad_marker_hls: "DATERANGE" # One of: ["DATERANGE", "SCTE35_ENHANCED"]
+    #           ad_marker_hls: "DATERANGE" # One of: ["DATERANGE", "SCTE35_ENHANCED"],
+    #           scte_in_manifests: "ALL" # One of: ["ALL", "MATCHES_FILTER"]
     #         },
     #         filter_configuration: {
     #           manifest_filter: "String",
+    #           drm_settings: "String",
     #           start: Time.now,
     #           end: Time.now,
     #           time_delay_seconds: 1,
-    #           clip_start_time: Time.now
+    #           clip_start_time: Time.now,
+    #           multiview: {
+    #             layout: "LAYOUT_2EH" # One of: ["LAYOUT_2EH", "LAYOUT_2PL", "LAYOUT_3EL", "LAYOUT_3PL", "LAYOUT_4E", "LAYOUT_4PL"], # required
+    #             sources: ["ResourceName"], # required
+    #           }
     #         },
     #         start_tag: {
     #           time_offset: 1.0, # required
     #           precise: false
     #         },
-    #         url_encode_child_manifest: false
+    #         url_encode_child_manifest: false,
+    #         uri_path_type: "LEAF" # One of: ["LEAF", "ROOT"]
     #       }
     #     ],
     #     low_latency_hls_manifests: [
@@ -1610,20 +1750,27 @@ module Aws::MediaPackageV2
     #         manifest_window_seconds: 1,
     #         program_date_time_interval_seconds: 1,
     #         scte_hls: {
-    #           ad_marker_hls: "DATERANGE" # One of: ["DATERANGE", "SCTE35_ENHANCED"]
+    #           ad_marker_hls: "DATERANGE" # One of: ["DATERANGE", "SCTE35_ENHANCED"],
+    #           scte_in_manifests: "ALL" # One of: ["ALL", "MATCHES_FILTER"]
     #         },
     #         filter_configuration: {
     #           manifest_filter: "String",
+    #           drm_settings: "String",
     #           start: Time.now,
     #           end: Time.now,
     #           time_delay_seconds: 1,
-    #           clip_start_time: Time.now
+    #           clip_start_time: Time.now,
+    #           multiview: {
+    #             layout: "LAYOUT_2EH" # One of: ["LAYOUT_2EH", "LAYOUT_2PL", "LAYOUT_3EL", "LAYOUT_3PL", "LAYOUT_4E", "LAYOUT_4PL"], # required
+    #             sources: ["ResourceName"], # required
+    #           }
     #         },
     #         start_tag: {
     #           time_offset: 1.0, # required
     #           precise: false
     #         },
-    #         url_encode_child_manifest: false
+    #         url_encode_child_manifest: false,
+    #         uri_path_type: "LEAF" # One of: ["LEAF", "ROOT"]
     #       }
     #     ],
     #     dash_manifests: [
@@ -1633,10 +1780,15 @@ module Aws::MediaPackageV2
     #         manifest_window_seconds: 1,
     #         filter_configuration: {
     #           manifest_filter: "String",
+    #           drm_settings: "String",
     #           start: Time.now,
     #           end: Time.now,
     #           time_delay_seconds: 1,
-    #           clip_start_time: Time.now
+    #           clip_start_time: Time.now,
+    #           multiview: {
+    #             layout: "LAYOUT_2EH" # One of: ["LAYOUT_2EH", "LAYOUT_2PL", "LAYOUT_3EL", "LAYOUT_3PL", "LAYOUT_4E", "LAYOUT_4PL"], # required
+    #             sources: ["ResourceName"], # required
+    #           }
     #         },
     #         min_update_period_seconds: 1,
     #         min_buffer_time_seconds: 1,
@@ -1644,7 +1796,8 @@ module Aws::MediaPackageV2
     #         segment_template_format: "NUMBER_WITH_TIMELINE" # One of: ["NUMBER_WITH_TIMELINE"],
     #         period_triggers: ["AVAILS" # One of: ["AVAILS", "DRM_KEY_ROTATION", "SOURCE_CHANGES", "SOURCE_DISRUPTIONS", "NONE"]],
     #         scte_dash: {
-    #           ad_marker_dash: "BINARY" # One of: ["BINARY", "XML"]
+    #           ad_marker_dash: "BINARY" # One of: ["BINARY", "XML"],
+    #           scte_in_manifests: "ALL" # One of: ["ALL", "MATCHES_FILTER"]
     #         },
     #         drm_signaling: "INDIVIDUAL" # One of: ["INDIVIDUAL", "REFERENCED"],
     #         utc_timing: {
@@ -1681,10 +1834,16 @@ module Aws::MediaPackageV2
     #           ]
     #         },
     #         compactness: "STANDARD" # One of: ["STANDARD", "NONE"],
+    #         audio_timeline_pattern: "NONE" # One of: ["NONE", "PATTERNED"],
     #         subtitle_configuration: {
     #           ttml_configuration: {
     #             ttml_profile: "IMSC_1" # One of: ["IMSC_1", "EBU_TT_D_101"], # required
     #           }
+    #         },
+    #         uri_path_type: "LEAF" # One of: ["LEAF", "ROOT"],
+    #         availability_start_time_configuration: {
+    #           # One of:
+    #           fixed_availability_start_time: Time.now
     #         }
     #       }
     #     ],
@@ -1694,10 +1853,15 @@ module Aws::MediaPackageV2
     #         url: "String", # required
     #         filter_configuration: {
     #           manifest_filter: "String",
+    #           drm_settings: "String",
     #           start: Time.now,
     #           end: Time.now,
     #           time_delay_seconds: 1,
-    #           clip_start_time: Time.now
+    #           clip_start_time: Time.now,
+    #           multiview: {
+    #             layout: "LAYOUT_2EH" # One of: ["LAYOUT_2EH", "LAYOUT_2PL", "LAYOUT_3EL", "LAYOUT_3PL", "LAYOUT_4E", "LAYOUT_4PL"], # required
+    #             sources: ["ResourceName"], # required
+    #           }
     #         },
     #         manifest_window_seconds: 1,
     #         manifest_layout: "FULL" # One of: ["FULL", "COMPACT"]
@@ -1706,6 +1870,8 @@ module Aws::MediaPackageV2
     #     force_endpoint_error_configuration: {
     #       endpoint_error_conditions: ["STALE_MANIFEST" # One of: ["STALE_MANIFEST", "INCOMPLETE_MANIFEST", "MISSING_DRM_KEY", "SLATE_INPUT"]]
     #     },
+    #     uri_separator: "UNDERSCORE" # One of: ["UNDERSCORE", "HYPHEN"],
+    #     stream_name_output_mode: "INDEX" # One of: ["INDEX", "PASSTHROUGH_NAME"],
     #     e_tag: "EntityTag",
     #     tags: {
     #       "TagKey" => "TagValue"
@@ -1920,6 +2086,40 @@ module Aws::MediaPackageV2
     #       "key2" => "value2"
     #     }
     #   }
+    # @example Getting a CMAF Channel with non-epoch-locked output locking mode
+    #   # Example operation for get_channel
+    #   params = {
+    #     channel_group_name: "exampleChannelGroup",
+    #     channel_name: "exampleCmafChannel"
+    #   }
+    #   options = {}
+    #   response = client.get_channel(params, options)
+    #   response.to_h #=>
+    #   {
+    #     channel_group_name: "exampleChannelGroup",
+    #     channel_name: "exampleCmafChannel",
+    #     description: "Non-epoch-locked CMAF channel",
+    #     arn: "arn:aws:mediapackagev2:us-west-2:123456789012:channelGroup/exampleChannelGroup/channel/exampleCmafChannel",
+    #     created_at: Time.parse("2022-10-18T09:36:00.00Z"),
+    #     modified_at: Time.parse("2022-10-18T09:36:00.00Z"),
+    #     input_type: CMAF,
+    #     output_locking_mode: NON_EPOCH_LOCKED,
+    #     ingest_endpoints: [
+    #       {
+    #         id: "1",
+    #         url: "https://abcde-1.ingest.vwxyz.mediapackagev2.us-west-2.amazonaws.com/v1/exampleChannelGroup/exampleCmafChannel"
+    #       },
+    #       {
+    #         id: "2",
+    #         url: "https://abcde-2.ingest.vwxyz.mediapackagev2.us-west-2.amazonaws.com/v1/exampleChannelGroup/exampleCmafChannel"
+    #       }
+    #     ],
+    #     e_tag: "GlfT+dwAyGIR4wuy8nKWl1RDPwSrjQej9qUutLZxoxk=",
+    #     tags: {
+    #       "key1" => "value1",
+    #       "key2" => "value2"
+    #     }
+    #   }
     # @example Request syntax with placeholder values
     #   params = {
     #     channel_group_name: "ResourceName", # required
@@ -1930,6 +2130,11 @@ module Aws::MediaPackageV2
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {
+    #     multiview_configuration: {
+    #       available_sources: ["ResourceName"], # required
+    #       available_layouts: ["LAYOUT_2EH" # One of: ["LAYOUT_2EH", "LAYOUT_2PL", "LAYOUT_3EL", "LAYOUT_3PL", "LAYOUT_4E", "LAYOUT_4PL"]], # required
+    #     },
+    #     attached_multiview_channels: ["ResourceName"],
     #     arn: "String", # required
     #     channel_name: "String", # required
     #     channel_group_name: "String", # required
@@ -1943,7 +2148,7 @@ module Aws::MediaPackageV2
     #         url: "String"
     #       }
     #     ],
-    #     input_type: "HLS" # One of: ["HLS", "CMAF"],
+    #     input_type: "HLS" # One of: ["HLS", "CMAF", "MULTIVIEW"],
     #     e_tag: "EntityTag",
     #     tags: {
     #       "TagKey" => "TagValue"
@@ -1954,7 +2159,8 @@ module Aws::MediaPackageV2
     #     },
     #     output_header_configuration: {
     #       publish_mqcs: false
-    #     }
+    #     },
+    #     output_locking_mode: "EPOCH_LOCKED" # One of: ["EPOCH_LOCKED", "NON_EPOCH_LOCKED"]
     #   }
     # @return [Types::GetChannelResponse]
     def get_channel(params = {}, options = {})
@@ -2213,6 +2419,7 @@ module Aws::MediaPackageV2
     #         SLATE_INPUT
     #       ]
     #     },
+    #     uri_separator: UNDERSCORE,
     #     segment: {
     #       segment_duration_seconds: 6,
     #       segment_name: "segmentName",
@@ -2241,7 +2448,8 @@ module Aws::MediaPackageV2
     #             CLEAR_KEY_AES_128
     #           ],
     #           role_arn: "arn:aws:iam::123456789012:role/empRole",
-    #           url: "https://foo.com"
+    #           url: "https://foo.com",
+    #           certificate_arn: "arn:aws:acm:us-west-2:123456789012:certificate/0c6a65f1-7bd3-48ac-be17-f38675def22e"
     #         }
     #       }
     #     },
@@ -2254,7 +2462,8 @@ module Aws::MediaPackageV2
     #         },
     #         manifest_window_seconds: 30,
     #         program_date_time_interval_seconds: 60,
-    #         url: "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointTS/exampleManifest1.m3u8"
+    #         url: "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointTS/exampleManifest1.m3u8",
+    #         uri_path_type: ROOT
     #       },
     #       {
     #         manifest_name: "exampleManifest2",
@@ -2264,7 +2473,8 @@ module Aws::MediaPackageV2
     #         },
     #         manifest_window_seconds: 30,
     #         program_date_time_interval_seconds: 60,
-    #         url: "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointTS/exampleManifest2.m3u8"
+    #         url: "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointTS/exampleManifest2.m3u8",
+    #         uri_path_type: ROOT
     #       }
     #     ],
     #     low_latency_hls_manifests: [
@@ -2276,7 +2486,8 @@ module Aws::MediaPackageV2
     #         },
     #         manifest_window_seconds: 30,
     #         program_date_time_interval_seconds: 60,
-    #         url: "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointTS/exampleLLManifest1.m3u8"
+    #         url: "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointTS/exampleLLManifest1.m3u8",
+    #         uri_path_type: LEAF
     #       },
     #       {
     #         manifest_name: "exampleLLManifest2",
@@ -2286,7 +2497,8 @@ module Aws::MediaPackageV2
     #         },
     #         manifest_window_seconds: 30,
     #         program_date_time_interval_seconds: 60,
-    #         url: "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointTS/exampleLLManifest2.m3u8"
+    #         url: "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointTS/exampleLLManifest2.m3u8",
+    #         uri_path_type: LEAF
     #       }
     #     ],
     #     e_tag: "GlfT+dwAyGIR4wuy8nKWl1RDPwSrjQej9qUutLZxoxk=",
@@ -2323,6 +2535,7 @@ module Aws::MediaPackageV2
     #         SLATE_INPUT
     #       ]
     #     },
+    #     uri_separator: UNDERSCORE,
     #     segment: {
     #       segment_duration_seconds: 2,
     #       segment_name: "segmentName",
@@ -2387,7 +2600,9 @@ module Aws::MediaPackageV2
     #       include_iframe_only_streams: false,
     #       ts_include_dvb_subtitles: false,
     #       scte: {
-    #         scte_filter: ["SPLICE_INSERT" # One of: ["SPLICE_INSERT", "BREAK", "PROVIDER_ADVERTISEMENT", "DISTRIBUTOR_ADVERTISEMENT", "PROVIDER_PLACEMENT_OPPORTUNITY", "DISTRIBUTOR_PLACEMENT_OPPORTUNITY", "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY", "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY", "PROGRAM"]]
+    #         scte_filter: ["SPLICE_INSERT" # One of: ["SPLICE_INSERT", "BREAK", "PROVIDER_ADVERTISEMENT", "DISTRIBUTOR_ADVERTISEMENT", "PROVIDER_PLACEMENT_OPPORTUNITY", "DISTRIBUTOR_PLACEMENT_OPPORTUNITY", "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY", "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY", "PROGRAM", "CHAPTER", "UNSCHEDULED_EVENT", "ALTERNATE_CONTENT_OPPORTUNITY", "NETWORK", "PROVIDER_PROMO", "DISTRIBUTOR_PROMO", "PROVIDER_AD_BLOCK", "DISTRIBUTOR_AD_BLOCK", "CONTENT_IDENTIFICATION", "CALL_AD_SERVER"]],
+    #         scte_in_segments: "NONE" # One of: ["NONE", "ALL", "MATCHES_FILTER"],
+    #         custom_ad_types: ["PROGRAM" # One of: ["PROGRAM", "CHAPTER", "UNSCHEDULED_EVENT", "ALTERNATE_CONTENT_OPPORTUNITY", "NETWORK"]]
     #       },
     #       encryption: {
     #         constant_initialization_vector: "String",
@@ -2407,8 +2622,14 @@ module Aws::MediaPackageV2
     #           drm_systems: ["CLEAR_KEY_AES_128" # One of: ["CLEAR_KEY_AES_128", "FAIRPLAY", "PLAYREADY", "WIDEVINE", "IRDETO"]], # required
     #           role_arn: "String", # required
     #           url: "String", # required
+    #           certificate_arn: "String",
+    #           speke_version: "V2_0" # One of: ["V2_0", "V2_1"],
+    #           content_key_period_configuration: {
+    #             content_key_period_timing: "INDEX_ONLY" # One of: ["INDEX_ONLY", "START_END_ONLY", "INDEX_WITH_START_END"]
+    #           }
     #         }
-    #       }
+    #       },
+    #       output_timestamp_mode: "PASSTHROUGH" # One of: ["PASSTHROUGH", "REBASED_TO_CHANNEL_START"]
     #     },
     #     created_at: Time.now, # required
     #     modified_at: Time.now, # required
@@ -2423,20 +2644,27 @@ module Aws::MediaPackageV2
     #         manifest_window_seconds: 1,
     #         program_date_time_interval_seconds: 1,
     #         scte_hls: {
-    #           ad_marker_hls: "DATERANGE" # One of: ["DATERANGE", "SCTE35_ENHANCED"]
+    #           ad_marker_hls: "DATERANGE" # One of: ["DATERANGE", "SCTE35_ENHANCED"],
+    #           scte_in_manifests: "ALL" # One of: ["ALL", "MATCHES_FILTER"]
     #         },
     #         filter_configuration: {
     #           manifest_filter: "String",
+    #           drm_settings: "String",
     #           start: Time.now,
     #           end: Time.now,
     #           time_delay_seconds: 1,
-    #           clip_start_time: Time.now
+    #           clip_start_time: Time.now,
+    #           multiview: {
+    #             layout: "LAYOUT_2EH" # One of: ["LAYOUT_2EH", "LAYOUT_2PL", "LAYOUT_3EL", "LAYOUT_3PL", "LAYOUT_4E", "LAYOUT_4PL"], # required
+    #             sources: ["ResourceName"], # required
+    #           }
     #         },
     #         start_tag: {
     #           time_offset: 1.0, # required
     #           precise: false
     #         },
-    #         url_encode_child_manifest: false
+    #         url_encode_child_manifest: false,
+    #         uri_path_type: "LEAF" # One of: ["LEAF", "ROOT"]
     #       }
     #     ],
     #     low_latency_hls_manifests: [
@@ -2447,20 +2675,27 @@ module Aws::MediaPackageV2
     #         manifest_window_seconds: 1,
     #         program_date_time_interval_seconds: 1,
     #         scte_hls: {
-    #           ad_marker_hls: "DATERANGE" # One of: ["DATERANGE", "SCTE35_ENHANCED"]
+    #           ad_marker_hls: "DATERANGE" # One of: ["DATERANGE", "SCTE35_ENHANCED"],
+    #           scte_in_manifests: "ALL" # One of: ["ALL", "MATCHES_FILTER"]
     #         },
     #         filter_configuration: {
     #           manifest_filter: "String",
+    #           drm_settings: "String",
     #           start: Time.now,
     #           end: Time.now,
     #           time_delay_seconds: 1,
-    #           clip_start_time: Time.now
+    #           clip_start_time: Time.now,
+    #           multiview: {
+    #             layout: "LAYOUT_2EH" # One of: ["LAYOUT_2EH", "LAYOUT_2PL", "LAYOUT_3EL", "LAYOUT_3PL", "LAYOUT_4E", "LAYOUT_4PL"], # required
+    #             sources: ["ResourceName"], # required
+    #           }
     #         },
     #         start_tag: {
     #           time_offset: 1.0, # required
     #           precise: false
     #         },
-    #         url_encode_child_manifest: false
+    #         url_encode_child_manifest: false,
+    #         uri_path_type: "LEAF" # One of: ["LEAF", "ROOT"]
     #       }
     #     ],
     #     dash_manifests: [
@@ -2470,10 +2705,15 @@ module Aws::MediaPackageV2
     #         manifest_window_seconds: 1,
     #         filter_configuration: {
     #           manifest_filter: "String",
+    #           drm_settings: "String",
     #           start: Time.now,
     #           end: Time.now,
     #           time_delay_seconds: 1,
-    #           clip_start_time: Time.now
+    #           clip_start_time: Time.now,
+    #           multiview: {
+    #             layout: "LAYOUT_2EH" # One of: ["LAYOUT_2EH", "LAYOUT_2PL", "LAYOUT_3EL", "LAYOUT_3PL", "LAYOUT_4E", "LAYOUT_4PL"], # required
+    #             sources: ["ResourceName"], # required
+    #           }
     #         },
     #         min_update_period_seconds: 1,
     #         min_buffer_time_seconds: 1,
@@ -2481,7 +2721,8 @@ module Aws::MediaPackageV2
     #         segment_template_format: "NUMBER_WITH_TIMELINE" # One of: ["NUMBER_WITH_TIMELINE"],
     #         period_triggers: ["AVAILS" # One of: ["AVAILS", "DRM_KEY_ROTATION", "SOURCE_CHANGES", "SOURCE_DISRUPTIONS", "NONE"]],
     #         scte_dash: {
-    #           ad_marker_dash: "BINARY" # One of: ["BINARY", "XML"]
+    #           ad_marker_dash: "BINARY" # One of: ["BINARY", "XML"],
+    #           scte_in_manifests: "ALL" # One of: ["ALL", "MATCHES_FILTER"]
     #         },
     #         drm_signaling: "INDIVIDUAL" # One of: ["INDIVIDUAL", "REFERENCED"],
     #         utc_timing: {
@@ -2518,10 +2759,16 @@ module Aws::MediaPackageV2
     #           ]
     #         },
     #         compactness: "STANDARD" # One of: ["STANDARD", "NONE"],
+    #         audio_timeline_pattern: "NONE" # One of: ["NONE", "PATTERNED"],
     #         subtitle_configuration: {
     #           ttml_configuration: {
     #             ttml_profile: "IMSC_1" # One of: ["IMSC_1", "EBU_TT_D_101"], # required
     #           }
+    #         },
+    #         uri_path_type: "LEAF" # One of: ["LEAF", "ROOT"],
+    #         availability_start_time_configuration: {
+    #           # One of:
+    #           fixed_availability_start_time: Time.now
     #         }
     #       }
     #     ],
@@ -2531,10 +2778,15 @@ module Aws::MediaPackageV2
     #         url: "String", # required
     #         filter_configuration: {
     #           manifest_filter: "String",
+    #           drm_settings: "String",
     #           start: Time.now,
     #           end: Time.now,
     #           time_delay_seconds: 1,
-    #           clip_start_time: Time.now
+    #           clip_start_time: Time.now,
+    #           multiview: {
+    #             layout: "LAYOUT_2EH" # One of: ["LAYOUT_2EH", "LAYOUT_2PL", "LAYOUT_3EL", "LAYOUT_3PL", "LAYOUT_4E", "LAYOUT_4PL"], # required
+    #             sources: ["ResourceName"], # required
+    #           }
     #         },
     #         manifest_window_seconds: 1,
     #         manifest_layout: "FULL" # One of: ["FULL", "COMPACT"]
@@ -2543,6 +2795,8 @@ module Aws::MediaPackageV2
     #     force_endpoint_error_configuration: {
     #       endpoint_error_conditions: ["STALE_MANIFEST" # One of: ["STALE_MANIFEST", "INCOMPLETE_MANIFEST", "MISSING_DRM_KEY", "SLATE_INPUT"]]
     #     },
+    #     uri_separator: "UNDERSCORE" # One of: ["UNDERSCORE", "HYPHEN"],
+    #     stream_name_output_mode: "INDEX" # One of: ["INDEX", "PASSTHROUGH_NAME"],
     #     e_tag: "EntityTag",
     #     tags: {
     #       "TagKey" => "TagValue"
@@ -2714,7 +2968,13 @@ module Aws::MediaPackageV2
     #         created_at: Time.now, # required
     #         modified_at: Time.now, # required
     #         description: "ResourceDescription",
-    #         input_type: "HLS" # One of: ["HLS", "CMAF"]
+    #         input_type: "HLS" # One of: ["HLS", "CMAF", "MULTIVIEW"],
+    #         output_locking_mode: "EPOCH_LOCKED" # One of: ["EPOCH_LOCKED", "NON_EPOCH_LOCKED"],
+    #         multiview_configuration: {
+    #           available_sources: ["ResourceName"], # required
+    #           available_layouts: ["LAYOUT_2EH" # One of: ["LAYOUT_2EH", "LAYOUT_2PL", "LAYOUT_3EL", "LAYOUT_3PL", "LAYOUT_4E", "LAYOUT_4PL"]], # required
+    #         },
+    #         attached_multiview_channels: ["ResourceName"]
     #       }
     #     ],
     #     next_token: "String"
@@ -3143,6 +3403,7 @@ module Aws::MediaPackageV2
     #             SLATE_INPUT
     #           ]
     #         },
+    #         uri_separator: UNDERSCORE,
     #         hls_manifests: [
     #           {
     #             manifest_name: "exampleManifest1",
@@ -3184,6 +3445,7 @@ module Aws::MediaPackageV2
     #             SLATE_INPUT
     #           ]
     #         },
+    #         uri_separator: UNDERSCORE,
     #         hls_manifests: [
     #           {
     #             manifest_name: "exampleManifest1",
@@ -3236,6 +3498,7 @@ module Aws::MediaPackageV2
     #             SLATE_INPUT
     #           ]
     #         },
+    #         uri_separator: UNDERSCORE,
     #         mss_manifests: [
     #           {
     #             manifest_name: "exampleMssManifest1",
@@ -3299,7 +3562,9 @@ module Aws::MediaPackageV2
     #         ],
     #         force_endpoint_error_configuration: {
     #           endpoint_error_conditions: ["STALE_MANIFEST" # One of: ["STALE_MANIFEST", "INCOMPLETE_MANIFEST", "MISSING_DRM_KEY", "SLATE_INPUT"]]
-    #         }
+    #         },
+    #         uri_separator: "UNDERSCORE" # One of: ["UNDERSCORE", "HYPHEN"],
+    #         stream_name_output_mode: "INDEX" # One of: ["INDEX", "PASSTHROUGH_NAME"]
     #       }
     #     ],
     #     next_token: "String"
@@ -3605,6 +3870,8 @@ module Aws::MediaPackageV2
     #   <p>The configuration for input switching based on the media quality confidence score (MQCS) as provided from AWS Elemental MediaLive. This setting is valid only when <code>InputType</code> is <code>CMAF</code>.</p>
     # @option params [Types::OutputHeaderConfiguration] :output_header_configuration
     #   <p>The settings for what common media server data (CMSD) headers AWS Elemental MediaPackage includes in responses to the CDN. This setting is valid only when <code>InputType</code> is <code>CMAF</code>.</p>
+    # @option params [Types::MultiviewConfiguration] :multiview_configuration
+    #   <p>The multiview configuration for the channel. This setting is required when the channel's <code>InputType</code> is <code>MULTIVIEW</code>, and can't be set for any other input type. Because <code>InputType</code> is immutable, you can change a multiview channel's sources and layouts. You can't add or remove the multiview configuration itself.</p>
     # @example Updating a Channel
     #   # Example operation for update_channel
     #   params = {
@@ -3639,6 +3906,41 @@ module Aws::MediaPackageV2
     #       "key2" => "value2"
     #     }
     #   }
+    # @example Updating a CMAF Channel with non-epoch-locked output locking mode
+    #   # Example operation for update_channel
+    #   params = {
+    #     channel_group_name: "exampleChannelGroup",
+    #     channel_name: "exampleCmafChannel",
+    #     description: "Updated non-epoch-locked CMAF channel"
+    #   }
+    #   options = {}
+    #   response = client.update_channel(params, options)
+    #   response.to_h #=>
+    #   {
+    #     channel_group_name: "exampleChannelGroup",
+    #     channel_name: "exampleCmafChannel",
+    #     description: "Updated non-epoch-locked CMAF channel",
+    #     arn: "arn:aws:mediapackagev2:us-west-2:123456789012:channelGroup/exampleChannelGroup/channel/exampleCmafChannel",
+    #     created_at: Time.parse("2022-10-18T09:36:00.00Z"),
+    #     modified_at: Time.parse("2022-10-18T10:36:00.00Z"),
+    #     input_type: CMAF,
+    #     output_locking_mode: NON_EPOCH_LOCKED,
+    #     ingest_endpoints: [
+    #       {
+    #         id: "1",
+    #         url: "https://abcde-1.ingest.vwxyz.mediapackagev2.us-west-2.amazonaws.com/v1/exampleChannelGroup/exampleCmafChannel"
+    #       },
+    #       {
+    #         id: "2",
+    #         url: "https://abcde-2.ingest.vwxyz.mediapackagev2.us-west-2.amazonaws.com/v1/exampleChannelGroup/exampleCmafChannel"
+    #       }
+    #     ],
+    #     e_tag: "GlfT+dwAyGIR4wuy8nKWl1RDPwSrjQej9qUutLZxoxk=",
+    #     tags: {
+    #       "key1" => "value1",
+    #       "key2" => "value2"
+    #     }
+    #   }
     # @example Request syntax with placeholder values
     #   params = {
     #     channel_group_name: "ResourceName", # required
@@ -3651,6 +3953,10 @@ module Aws::MediaPackageV2
     #     },
     #     output_header_configuration: {
     #       publish_mqcs: false
+    #     },
+    #     multiview_configuration: {
+    #       available_sources: ["ResourceName"], # required
+    #       available_layouts: ["LAYOUT_2EH" # One of: ["LAYOUT_2EH", "LAYOUT_2PL", "LAYOUT_3EL", "LAYOUT_3PL", "LAYOUT_4E", "LAYOUT_4PL"]], # required
     #     }
     #   }
     #   options = {}
@@ -3658,6 +3964,11 @@ module Aws::MediaPackageV2
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {
+    #     multiview_configuration: {
+    #       available_sources: ["ResourceName"], # required
+    #       available_layouts: ["LAYOUT_2EH" # One of: ["LAYOUT_2EH", "LAYOUT_2PL", "LAYOUT_3EL", "LAYOUT_3PL", "LAYOUT_4E", "LAYOUT_4PL"]], # required
+    #     },
+    #     attached_multiview_channels: ["ResourceName"],
     #     arn: "String", # required
     #     channel_name: "String", # required
     #     channel_group_name: "String", # required
@@ -3670,7 +3981,7 @@ module Aws::MediaPackageV2
     #         url: "String"
     #       }
     #     ],
-    #     input_type: "HLS" # One of: ["HLS", "CMAF"],
+    #     input_type: "HLS" # One of: ["HLS", "CMAF", "MULTIVIEW"],
     #     e_tag: "EntityTag",
     #     tags: {
     #       "TagKey" => "TagValue"
@@ -3681,7 +3992,8 @@ module Aws::MediaPackageV2
     #     },
     #     output_header_configuration: {
     #       publish_mqcs: false
-    #     }
+    #     },
+    #     output_locking_mode: "EPOCH_LOCKED" # One of: ["EPOCH_LOCKED", "NON_EPOCH_LOCKED"]
     #   }
     # @return [Types::UpdateChannelResponse]
     def update_channel(params = {}, options = {})
@@ -3773,6 +4085,10 @@ module Aws::MediaPackageV2
     #   <p>A list of Microsoft Smooth Streaming (MSS) manifest configurations to update for the origin endpoint. This replaces the existing MSS manifest configurations.</p>
     # @option params [Types::ForceEndpointErrorConfiguration] :force_endpoint_error_configuration
     #   <p>The failover settings for the endpoint.</p>
+    # @option params [String] :uri_separator
+    #   <p>The separator character to use in generated URIs for this origin endpoint. This setting applies to all manifest types on the endpoint. If you don't specify a value in the update request, the current value is preserved.</p>
+    # @option params [String] :stream_name_output_mode
+    #   <p>The output mode for stream names in egress manifests. If you provide a value, it must match the current value. You can't change the stream name output mode after you create the endpoint.</p>
     # @option params [String] :e_tag
     #   <p>The expected current Entity Tag (ETag) for the resource. If the specified ETag does not match the resource's current entity tag, the update request will be rejected.</p>
     # @example Updating an OriginEndpoint
@@ -3792,6 +4108,7 @@ module Aws::MediaPackageV2
     #         SLATE_INPUT
     #       ]
     #     },
+    #     uri_separator: HYPHEN,
     #     segment: {
     #       segment_duration_seconds: 7,
     #       segment_name: "segmentName2",
@@ -3819,7 +4136,8 @@ module Aws::MediaPackageV2
     #             CLEAR_KEY_AES_128
     #           ],
     #           role_arn: "arn:aws:iam::123456789012:role/empRole",
-    #           url: "https://foo.com"
+    #           url: "https://foo.com",
+    #           certificate_arn: "arn:aws:acm:us-west-2:123456789012:certificate/0c6a65f1-7bd3-48ac-be17-f38675def22e"
     #         }
     #       }
     #     },
@@ -3831,7 +4149,8 @@ module Aws::MediaPackageV2
     #           ad_marker_hls: DATERANGE
     #         },
     #         manifest_window_seconds: 30,
-    #         program_date_time_interval_seconds: 60
+    #         program_date_time_interval_seconds: 60,
+    #         uri_path_type: LEAF
     #       },
     #       {
     #         manifest_name: "exampleManifest2",
@@ -3840,7 +4159,8 @@ module Aws::MediaPackageV2
     #           ad_marker_hls: DATERANGE
     #         },
     #         manifest_window_seconds: 30,
-    #         program_date_time_interval_seconds: 60
+    #         program_date_time_interval_seconds: 60,
+    #         uri_path_type: LEAF
     #       }
     #     ],
     #     low_latency_hls_manifests: [
@@ -3851,7 +4171,8 @@ module Aws::MediaPackageV2
     #           ad_marker_hls: DATERANGE
     #         },
     #         manifest_window_seconds: 30,
-    #         program_date_time_interval_seconds: 60
+    #         program_date_time_interval_seconds: 60,
+    #         uri_path_type: ROOT
     #       },
     #       {
     #         manifest_name: "exampleLLManifest2",
@@ -3860,7 +4181,8 @@ module Aws::MediaPackageV2
     #           ad_marker_hls: DATERANGE
     #         },
     #         manifest_window_seconds: 30,
-    #         program_date_time_interval_seconds: 60
+    #         program_date_time_interval_seconds: 60,
+    #         uri_path_type: ROOT
     #       }
     #     ]
     #   }
@@ -3885,6 +4207,7 @@ module Aws::MediaPackageV2
     #         SLATE_INPUT
     #       ]
     #     },
+    #     uri_separator: HYPHEN,
     #     segment: {
     #       segment_duration_seconds: 7,
     #       segment_name: "segmentName2",
@@ -3912,7 +4235,8 @@ module Aws::MediaPackageV2
     #             CLEAR_KEY_AES_128
     #           ],
     #           role_arn: "arn:aws:iam::123456789012:role/empRole",
-    #           url: "https://foo.com"
+    #           url: "https://foo.com",
+    #           certificate_arn: "arn:aws:acm:us-west-2:123456789012:certificate/0c6a65f1-7bd3-48ac-be17-f38675def22e"
     #         }
     #       }
     #     },
@@ -3925,7 +4249,8 @@ module Aws::MediaPackageV2
     #         },
     #         manifest_window_seconds: 30,
     #         program_date_time_interval_seconds: 60,
-    #         url: "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointTS/exampleManifest1.m3u8"
+    #         url: "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointTS/exampleManifest1.m3u8",
+    #         uri_path_type: LEAF
     #       },
     #       {
     #         manifest_name: "exampleManifest2",
@@ -3935,7 +4260,8 @@ module Aws::MediaPackageV2
     #         },
     #         manifest_window_seconds: 30,
     #         program_date_time_interval_seconds: 60,
-    #         url: "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointTS/exampleManifest2.m3u8"
+    #         url: "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointTS/exampleManifest2.m3u8",
+    #         uri_path_type: LEAF
     #       }
     #     ],
     #     low_latency_hls_manifests: [
@@ -3947,7 +4273,8 @@ module Aws::MediaPackageV2
     #         },
     #         manifest_window_seconds: 30,
     #         program_date_time_interval_seconds: 60,
-    #         url: "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointTS/exampleLLManifest1.m3u8"
+    #         url: "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointTS/exampleLLManifest1.m3u8",
+    #         uri_path_type: ROOT
     #       },
     #       {
     #         manifest_name: "exampleLLManifest2",
@@ -3957,7 +4284,8 @@ module Aws::MediaPackageV2
     #         },
     #         manifest_window_seconds: 30,
     #         program_date_time_interval_seconds: 60,
-    #         url: "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointTS/exampleLLManifest2.m3u8"
+    #         url: "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointTS/exampleLLManifest2.m3u8",
+    #         uri_path_type: ROOT
     #       }
     #     ],
     #     e_tag: "GlfT+dwAyGIR4wuy8nKWl1RDPwSrjQej9qUutLZxoxk=",
@@ -3983,6 +4311,7 @@ module Aws::MediaPackageV2
     #         SLATE_INPUT
     #       ]
     #     },
+    #     uri_separator: HYPHEN,
     #     segment: {
     #       segment_duration_seconds: 2,
     #       segment_name: "segmentName2",
@@ -4038,6 +4367,7 @@ module Aws::MediaPackageV2
     #         SLATE_INPUT
     #       ]
     #     },
+    #     uri_separator: HYPHEN,
     #     segment: {
     #       segment_duration_seconds: 2,
     #       segment_name: "segmentName2",
@@ -4092,7 +4422,9 @@ module Aws::MediaPackageV2
     #       include_iframe_only_streams: false,
     #       ts_include_dvb_subtitles: false,
     #       scte: {
-    #         scte_filter: ["SPLICE_INSERT" # One of: ["SPLICE_INSERT", "BREAK", "PROVIDER_ADVERTISEMENT", "DISTRIBUTOR_ADVERTISEMENT", "PROVIDER_PLACEMENT_OPPORTUNITY", "DISTRIBUTOR_PLACEMENT_OPPORTUNITY", "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY", "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY", "PROGRAM"]]
+    #         scte_filter: ["SPLICE_INSERT" # One of: ["SPLICE_INSERT", "BREAK", "PROVIDER_ADVERTISEMENT", "DISTRIBUTOR_ADVERTISEMENT", "PROVIDER_PLACEMENT_OPPORTUNITY", "DISTRIBUTOR_PLACEMENT_OPPORTUNITY", "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY", "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY", "PROGRAM", "CHAPTER", "UNSCHEDULED_EVENT", "ALTERNATE_CONTENT_OPPORTUNITY", "NETWORK", "PROVIDER_PROMO", "DISTRIBUTOR_PROMO", "PROVIDER_AD_BLOCK", "DISTRIBUTOR_AD_BLOCK", "CONTENT_IDENTIFICATION", "CALL_AD_SERVER"]],
+    #         scte_in_segments: "NONE" # One of: ["NONE", "ALL", "MATCHES_FILTER"],
+    #         custom_ad_types: ["PROGRAM" # One of: ["PROGRAM", "CHAPTER", "UNSCHEDULED_EVENT", "ALTERNATE_CONTENT_OPPORTUNITY", "NETWORK"]]
     #       },
     #       encryption: {
     #         constant_initialization_vector: "String",
@@ -4112,8 +4444,14 @@ module Aws::MediaPackageV2
     #           drm_systems: ["CLEAR_KEY_AES_128" # One of: ["CLEAR_KEY_AES_128", "FAIRPLAY", "PLAYREADY", "WIDEVINE", "IRDETO"]], # required
     #           role_arn: "String", # required
     #           url: "String", # required
+    #           certificate_arn: "String",
+    #           speke_version: "V2_0" # One of: ["V2_0", "V2_1"],
+    #           content_key_period_configuration: {
+    #             content_key_period_timing: "INDEX_ONLY" # One of: ["INDEX_ONLY", "START_END_ONLY", "INDEX_WITH_START_END"]
+    #           }
     #         }
-    #       }
+    #       },
+    #       output_timestamp_mode: "PASSTHROUGH" # One of: ["PASSTHROUGH", "REBASED_TO_CHANNEL_START"]
     #     },
     #     description: "ResourceDescription",
     #     startover_window_seconds: 1,
@@ -4122,7 +4460,8 @@ module Aws::MediaPackageV2
     #         manifest_name: "ManifestName", # required
     #         child_manifest_name: "ManifestName",
     #         scte_hls: {
-    #           ad_marker_hls: "DATERANGE" # One of: ["DATERANGE", "SCTE35_ENHANCED"]
+    #           ad_marker_hls: "DATERANGE" # One of: ["DATERANGE", "SCTE35_ENHANCED"],
+    #           scte_in_manifests: "ALL" # One of: ["ALL", "MATCHES_FILTER"]
     #         },
     #         start_tag: {
     #           time_offset: 1.0, # required
@@ -4132,12 +4471,18 @@ module Aws::MediaPackageV2
     #         program_date_time_interval_seconds: 1,
     #         filter_configuration: {
     #           manifest_filter: "String",
+    #           drm_settings: "String",
     #           start: Time.now,
     #           end: Time.now,
     #           time_delay_seconds: 1,
-    #           clip_start_time: Time.now
+    #           clip_start_time: Time.now,
+    #           multiview: {
+    #             layout: "LAYOUT_2EH" # One of: ["LAYOUT_2EH", "LAYOUT_2PL", "LAYOUT_3EL", "LAYOUT_3PL", "LAYOUT_4E", "LAYOUT_4PL"], # required
+    #             sources: ["ResourceName"], # required
+    #           }
     #         },
-    #         url_encode_child_manifest: false
+    #         url_encode_child_manifest: false,
+    #         uri_path_type: "LEAF" # One of: ["LEAF", "ROOT"]
     #       }
     #     ],
     #     low_latency_hls_manifests: [
@@ -4145,7 +4490,8 @@ module Aws::MediaPackageV2
     #         manifest_name: "ManifestName", # required
     #         child_manifest_name: "ManifestName",
     #         scte_hls: {
-    #           ad_marker_hls: "DATERANGE" # One of: ["DATERANGE", "SCTE35_ENHANCED"]
+    #           ad_marker_hls: "DATERANGE" # One of: ["DATERANGE", "SCTE35_ENHANCED"],
+    #           scte_in_manifests: "ALL" # One of: ["ALL", "MATCHES_FILTER"]
     #         },
     #         start_tag: {
     #           time_offset: 1.0, # required
@@ -4155,12 +4501,18 @@ module Aws::MediaPackageV2
     #         program_date_time_interval_seconds: 1,
     #         filter_configuration: {
     #           manifest_filter: "String",
+    #           drm_settings: "String",
     #           start: Time.now,
     #           end: Time.now,
     #           time_delay_seconds: 1,
-    #           clip_start_time: Time.now
+    #           clip_start_time: Time.now,
+    #           multiview: {
+    #             layout: "LAYOUT_2EH" # One of: ["LAYOUT_2EH", "LAYOUT_2PL", "LAYOUT_3EL", "LAYOUT_3PL", "LAYOUT_4E", "LAYOUT_4PL"], # required
+    #             sources: ["ResourceName"], # required
+    #           }
     #         },
-    #         url_encode_child_manifest: false
+    #         url_encode_child_manifest: false,
+    #         uri_path_type: "LEAF" # One of: ["LEAF", "ROOT"]
     #       }
     #     ],
     #     dash_manifests: [
@@ -4169,10 +4521,15 @@ module Aws::MediaPackageV2
     #         manifest_window_seconds: 1,
     #         filter_configuration: {
     #           manifest_filter: "String",
+    #           drm_settings: "String",
     #           start: Time.now,
     #           end: Time.now,
     #           time_delay_seconds: 1,
-    #           clip_start_time: Time.now
+    #           clip_start_time: Time.now,
+    #           multiview: {
+    #             layout: "LAYOUT_2EH" # One of: ["LAYOUT_2EH", "LAYOUT_2PL", "LAYOUT_3EL", "LAYOUT_3PL", "LAYOUT_4E", "LAYOUT_4PL"], # required
+    #             sources: ["ResourceName"], # required
+    #           }
     #         },
     #         min_update_period_seconds: 1,
     #         min_buffer_time_seconds: 1,
@@ -4180,7 +4537,8 @@ module Aws::MediaPackageV2
     #         segment_template_format: "NUMBER_WITH_TIMELINE" # One of: ["NUMBER_WITH_TIMELINE"],
     #         period_triggers: ["AVAILS" # One of: ["AVAILS", "DRM_KEY_ROTATION", "SOURCE_CHANGES", "SOURCE_DISRUPTIONS", "NONE"]],
     #         scte_dash: {
-    #           ad_marker_dash: "BINARY" # One of: ["BINARY", "XML"]
+    #           ad_marker_dash: "BINARY" # One of: ["BINARY", "XML"],
+    #           scte_in_manifests: "ALL" # One of: ["ALL", "MATCHES_FILTER"]
     #         },
     #         drm_signaling: "INDIVIDUAL" # One of: ["INDIVIDUAL", "REFERENCED"],
     #         utc_timing: {
@@ -4217,10 +4575,16 @@ module Aws::MediaPackageV2
     #           ]
     #         },
     #         compactness: "STANDARD" # One of: ["STANDARD", "NONE"],
+    #         audio_timeline_pattern: "NONE" # One of: ["NONE", "PATTERNED"],
     #         subtitle_configuration: {
     #           ttml_configuration: {
     #             ttml_profile: "IMSC_1" # One of: ["IMSC_1", "EBU_TT_D_101"], # required
     #           }
+    #         },
+    #         uri_path_type: "LEAF" # One of: ["LEAF", "ROOT"],
+    #         availability_start_time_configuration: {
+    #           # One of:
+    #           fixed_availability_start_time: Time.now
     #         }
     #       }
     #     ],
@@ -4230,10 +4594,15 @@ module Aws::MediaPackageV2
     #         manifest_window_seconds: 1,
     #         filter_configuration: {
     #           manifest_filter: "String",
+    #           drm_settings: "String",
     #           start: Time.now,
     #           end: Time.now,
     #           time_delay_seconds: 1,
-    #           clip_start_time: Time.now
+    #           clip_start_time: Time.now,
+    #           multiview: {
+    #             layout: "LAYOUT_2EH" # One of: ["LAYOUT_2EH", "LAYOUT_2PL", "LAYOUT_3EL", "LAYOUT_3PL", "LAYOUT_4E", "LAYOUT_4PL"], # required
+    #             sources: ["ResourceName"], # required
+    #           }
     #         },
     #         manifest_layout: "FULL" # One of: ["FULL", "COMPACT"]
     #       }
@@ -4241,6 +4610,8 @@ module Aws::MediaPackageV2
     #     force_endpoint_error_configuration: {
     #       endpoint_error_conditions: ["STALE_MANIFEST" # One of: ["STALE_MANIFEST", "INCOMPLETE_MANIFEST", "MISSING_DRM_KEY", "SLATE_INPUT"]]
     #     },
+    #     uri_separator: "UNDERSCORE" # One of: ["UNDERSCORE", "HYPHEN"],
+    #     stream_name_output_mode: "INDEX" # One of: ["INDEX", "PASSTHROUGH_NAME"],
     #     e_tag: "EntityTag"
     #   }
     #   options = {}
@@ -4260,7 +4631,9 @@ module Aws::MediaPackageV2
     #       include_iframe_only_streams: false,
     #       ts_include_dvb_subtitles: false,
     #       scte: {
-    #         scte_filter: ["SPLICE_INSERT" # One of: ["SPLICE_INSERT", "BREAK", "PROVIDER_ADVERTISEMENT", "DISTRIBUTOR_ADVERTISEMENT", "PROVIDER_PLACEMENT_OPPORTUNITY", "DISTRIBUTOR_PLACEMENT_OPPORTUNITY", "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY", "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY", "PROGRAM"]]
+    #         scte_filter: ["SPLICE_INSERT" # One of: ["SPLICE_INSERT", "BREAK", "PROVIDER_ADVERTISEMENT", "DISTRIBUTOR_ADVERTISEMENT", "PROVIDER_PLACEMENT_OPPORTUNITY", "DISTRIBUTOR_PLACEMENT_OPPORTUNITY", "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY", "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY", "PROGRAM", "CHAPTER", "UNSCHEDULED_EVENT", "ALTERNATE_CONTENT_OPPORTUNITY", "NETWORK", "PROVIDER_PROMO", "DISTRIBUTOR_PROMO", "PROVIDER_AD_BLOCK", "DISTRIBUTOR_AD_BLOCK", "CONTENT_IDENTIFICATION", "CALL_AD_SERVER"]],
+    #         scte_in_segments: "NONE" # One of: ["NONE", "ALL", "MATCHES_FILTER"],
+    #         custom_ad_types: ["PROGRAM" # One of: ["PROGRAM", "CHAPTER", "UNSCHEDULED_EVENT", "ALTERNATE_CONTENT_OPPORTUNITY", "NETWORK"]]
     #       },
     #       encryption: {
     #         constant_initialization_vector: "String",
@@ -4280,8 +4653,14 @@ module Aws::MediaPackageV2
     #           drm_systems: ["CLEAR_KEY_AES_128" # One of: ["CLEAR_KEY_AES_128", "FAIRPLAY", "PLAYREADY", "WIDEVINE", "IRDETO"]], # required
     #           role_arn: "String", # required
     #           url: "String", # required
+    #           certificate_arn: "String",
+    #           speke_version: "V2_0" # One of: ["V2_0", "V2_1"],
+    #           content_key_period_configuration: {
+    #             content_key_period_timing: "INDEX_ONLY" # One of: ["INDEX_ONLY", "START_END_ONLY", "INDEX_WITH_START_END"]
+    #           }
     #         }
-    #       }
+    #       },
+    #       output_timestamp_mode: "PASSTHROUGH" # One of: ["PASSTHROUGH", "REBASED_TO_CHANNEL_START"]
     #     },
     #     created_at: Time.now, # required
     #     modified_at: Time.now, # required
@@ -4295,20 +4674,27 @@ module Aws::MediaPackageV2
     #         manifest_window_seconds: 1,
     #         program_date_time_interval_seconds: 1,
     #         scte_hls: {
-    #           ad_marker_hls: "DATERANGE" # One of: ["DATERANGE", "SCTE35_ENHANCED"]
+    #           ad_marker_hls: "DATERANGE" # One of: ["DATERANGE", "SCTE35_ENHANCED"],
+    #           scte_in_manifests: "ALL" # One of: ["ALL", "MATCHES_FILTER"]
     #         },
     #         filter_configuration: {
     #           manifest_filter: "String",
+    #           drm_settings: "String",
     #           start: Time.now,
     #           end: Time.now,
     #           time_delay_seconds: 1,
-    #           clip_start_time: Time.now
+    #           clip_start_time: Time.now,
+    #           multiview: {
+    #             layout: "LAYOUT_2EH" # One of: ["LAYOUT_2EH", "LAYOUT_2PL", "LAYOUT_3EL", "LAYOUT_3PL", "LAYOUT_4E", "LAYOUT_4PL"], # required
+    #             sources: ["ResourceName"], # required
+    #           }
     #         },
     #         start_tag: {
     #           time_offset: 1.0, # required
     #           precise: false
     #         },
-    #         url_encode_child_manifest: false
+    #         url_encode_child_manifest: false,
+    #         uri_path_type: "LEAF" # One of: ["LEAF", "ROOT"]
     #       }
     #     ],
     #     low_latency_hls_manifests: [
@@ -4319,20 +4705,27 @@ module Aws::MediaPackageV2
     #         manifest_window_seconds: 1,
     #         program_date_time_interval_seconds: 1,
     #         scte_hls: {
-    #           ad_marker_hls: "DATERANGE" # One of: ["DATERANGE", "SCTE35_ENHANCED"]
+    #           ad_marker_hls: "DATERANGE" # One of: ["DATERANGE", "SCTE35_ENHANCED"],
+    #           scte_in_manifests: "ALL" # One of: ["ALL", "MATCHES_FILTER"]
     #         },
     #         filter_configuration: {
     #           manifest_filter: "String",
+    #           drm_settings: "String",
     #           start: Time.now,
     #           end: Time.now,
     #           time_delay_seconds: 1,
-    #           clip_start_time: Time.now
+    #           clip_start_time: Time.now,
+    #           multiview: {
+    #             layout: "LAYOUT_2EH" # One of: ["LAYOUT_2EH", "LAYOUT_2PL", "LAYOUT_3EL", "LAYOUT_3PL", "LAYOUT_4E", "LAYOUT_4PL"], # required
+    #             sources: ["ResourceName"], # required
+    #           }
     #         },
     #         start_tag: {
     #           time_offset: 1.0, # required
     #           precise: false
     #         },
-    #         url_encode_child_manifest: false
+    #         url_encode_child_manifest: false,
+    #         uri_path_type: "LEAF" # One of: ["LEAF", "ROOT"]
     #       }
     #     ],
     #     mss_manifests: [
@@ -4341,10 +4734,15 @@ module Aws::MediaPackageV2
     #         url: "String", # required
     #         filter_configuration: {
     #           manifest_filter: "String",
+    #           drm_settings: "String",
     #           start: Time.now,
     #           end: Time.now,
     #           time_delay_seconds: 1,
-    #           clip_start_time: Time.now
+    #           clip_start_time: Time.now,
+    #           multiview: {
+    #             layout: "LAYOUT_2EH" # One of: ["LAYOUT_2EH", "LAYOUT_2PL", "LAYOUT_3EL", "LAYOUT_3PL", "LAYOUT_4E", "LAYOUT_4PL"], # required
+    #             sources: ["ResourceName"], # required
+    #           }
     #         },
     #         manifest_window_seconds: 1,
     #         manifest_layout: "FULL" # One of: ["FULL", "COMPACT"]
@@ -4353,6 +4751,8 @@ module Aws::MediaPackageV2
     #     force_endpoint_error_configuration: {
     #       endpoint_error_conditions: ["STALE_MANIFEST" # One of: ["STALE_MANIFEST", "INCOMPLETE_MANIFEST", "MISSING_DRM_KEY", "SLATE_INPUT"]]
     #     },
+    #     uri_separator: "UNDERSCORE" # One of: ["UNDERSCORE", "HYPHEN"],
+    #     stream_name_output_mode: "INDEX" # One of: ["INDEX", "PASSTHROUGH_NAME"],
     #     e_tag: "EntityTag",
     #     tags: {
     #       "TagKey" => "TagValue"
@@ -4364,10 +4764,15 @@ module Aws::MediaPackageV2
     #         manifest_window_seconds: 1,
     #         filter_configuration: {
     #           manifest_filter: "String",
+    #           drm_settings: "String",
     #           start: Time.now,
     #           end: Time.now,
     #           time_delay_seconds: 1,
-    #           clip_start_time: Time.now
+    #           clip_start_time: Time.now,
+    #           multiview: {
+    #             layout: "LAYOUT_2EH" # One of: ["LAYOUT_2EH", "LAYOUT_2PL", "LAYOUT_3EL", "LAYOUT_3PL", "LAYOUT_4E", "LAYOUT_4PL"], # required
+    #             sources: ["ResourceName"], # required
+    #           }
     #         },
     #         min_update_period_seconds: 1,
     #         min_buffer_time_seconds: 1,
@@ -4375,7 +4780,8 @@ module Aws::MediaPackageV2
     #         segment_template_format: "NUMBER_WITH_TIMELINE" # One of: ["NUMBER_WITH_TIMELINE"],
     #         period_triggers: ["AVAILS" # One of: ["AVAILS", "DRM_KEY_ROTATION", "SOURCE_CHANGES", "SOURCE_DISRUPTIONS", "NONE"]],
     #         scte_dash: {
-    #           ad_marker_dash: "BINARY" # One of: ["BINARY", "XML"]
+    #           ad_marker_dash: "BINARY" # One of: ["BINARY", "XML"],
+    #           scte_in_manifests: "ALL" # One of: ["ALL", "MATCHES_FILTER"]
     #         },
     #         drm_signaling: "INDIVIDUAL" # One of: ["INDIVIDUAL", "REFERENCED"],
     #         utc_timing: {
@@ -4412,10 +4818,16 @@ module Aws::MediaPackageV2
     #           ]
     #         },
     #         compactness: "STANDARD" # One of: ["STANDARD", "NONE"],
+    #         audio_timeline_pattern: "NONE" # One of: ["NONE", "PATTERNED"],
     #         subtitle_configuration: {
     #           ttml_configuration: {
     #             ttml_profile: "IMSC_1" # One of: ["IMSC_1", "EBU_TT_D_101"], # required
     #           }
+    #         },
+    #         uri_path_type: "LEAF" # One of: ["LEAF", "ROOT"],
+    #         availability_start_time_configuration: {
+    #           # One of:
+    #           fixed_availability_start_time: Time.now
     #         }
     #       }
     #     ]

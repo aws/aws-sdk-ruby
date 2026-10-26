@@ -234,6 +234,21 @@ module Aws::GeoRoutes
       attr_accessor radius: Integer?
     end
 
+    module DayOfWeek
+      MONDAY: String
+      TUESDAY: String
+      WEDNESDAY: String
+      THURSDAY: String
+      FRIDAY: String
+      SATURDAY: String
+      SUNDAY: String
+    end
+
+    module GeometryFormat
+      FLEXIBLE_POLYLINE: String
+      SIMPLE: String
+    end
+
     class InternalServerException
       include Smithy::Schema::Structure
 
@@ -413,6 +428,12 @@ module Aws::GeoRoutes
       attr_accessor side_of_street: Types::IsolineSideOfStreetOptions?
     end
 
+    module IsolineEngineType
+      ELECTRIC: String
+      INTERNAL_COMBUSTION: String
+      PLUGIN_HYBRID: String
+    end
+
     class IsolineGranularityOptions
       include Smithy::Schema::Structure
 
@@ -424,6 +445,20 @@ module Aws::GeoRoutes
 
       attr_accessor max_points: Integer?
       attr_accessor max_resolution: Integer?
+    end
+
+    module IsolineHazardousCargoType
+      COMBUSTIBLE: String
+      CORROSIVE: String
+      EXPLOSIVE: String
+      FLAMMABLE: String
+      GAS: String
+      HARMFUL_TO_WATER: String
+      ORGANIC: String
+      OTHER: String
+      POISON: String
+      POISONOUS_INHALATION: String
+      RADIOACTIVE: String
     end
 
     class IsolineMatchingOptions
@@ -441,6 +476,12 @@ module Aws::GeoRoutes
       attr_accessor on_road_threshold: Integer?
       attr_accessor radius: Integer?
       attr_accessor strategy: String?
+    end
+
+    module IsolineOptimizationObjective
+      ACCURATE_CALCULATION: String
+      BALANCED_CALCULATION: String
+      FAST_CALCULATION: String
     end
 
     class IsolineOriginOptions
@@ -542,6 +583,13 @@ module Aws::GeoRoutes
       attr_accessor trailer_count: Integer?
     end
 
+    module IsolineTravelMode
+      CAR: String
+      PEDESTRIAN: String
+      SCOOTER: String
+      TRUCK: String
+    end
+
     class IsolineTravelModeOptions
       include Smithy::Schema::Structure
 
@@ -604,6 +652,12 @@ module Aws::GeoRoutes
       attr_accessor width: Integer?
     end
 
+    module IsolineTruckType
+      LIGHT_TRUCK: String
+      STRAIGHT_TRUCK: String
+      TRACTOR: String
+    end
+
     class IsolineVehicleLicensePlate
       include Smithy::Schema::Structure
 
@@ -613,6 +667,12 @@ module Aws::GeoRoutes
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor last_character: String?
+    end
+
+    module IsolineZoneCategory
+      CONGESTION_PRICING: String
+      ENVIRONMENTAL: String
+      VIGNETTE: String
     end
 
     class LocalizedString
@@ -626,6 +686,16 @@ module Aws::GeoRoutes
 
       attr_accessor language: String?
       attr_accessor value: String?
+    end
+
+    module MatchingStrategy
+      MATCH_ANY: String
+      MATCH_MOST_SIGNIFICANT_ROAD: String
+    end
+
+    module MeasurementSystem
+      METRIC: String
+      IMPERIAL: String
     end
 
     class OptimizeWaypointsRequest
@@ -703,6 +773,20 @@ module Aws::GeoRoutes
       attr_accessor radius: Integer?
     end
 
+    module RoadSnapHazardousCargoType
+      COMBUSTIBLE: String
+      CORROSIVE: String
+      EXPLOSIVE: String
+      FLAMMABLE: String
+      GAS: String
+      HARMFUL_TO_WATER: String
+      ORGANIC: String
+      OTHER: String
+      POISON: String
+      POISONOUS_INHALATION: String
+      RADIOACTIVE: String
+    end
+
     class RoadSnapNotice
       include Smithy::Schema::Structure
 
@@ -716,6 +800,16 @@ module Aws::GeoRoutes
       attr_accessor code: String?
       attr_accessor title: String?
       attr_accessor trace_point_indexes: Array[Integer]?
+    end
+
+    module RoadSnapNoticeCode
+      TRACE_POINTS_HEADING_IGNORED: String
+      TRACE_POINTS_IGNORED: String
+      TRACE_POINTS_MOVED_BY_LARGE_DISTANCE: String
+      TRACE_POINTS_NOT_MATCHED: String
+      TRACE_POINTS_OUT_OF_SEQUENCE: String
+      TRACE_POINTS_SPEED_ESTIMATED: String
+      TRACE_POINTS_SPEED_IGNORED: String
     end
 
     class RoadSnapSnappedGeometry
@@ -774,6 +868,13 @@ module Aws::GeoRoutes
       attr_accessor trailer_count: Integer?
     end
 
+    module RoadSnapTravelMode
+      CAR: String
+      PEDESTRIAN: String
+      SCOOTER: String
+      TRUCK: String
+    end
+
     class RoadSnapTravelModeOptions
       include Smithy::Schema::Structure
 
@@ -823,6 +924,39 @@ module Aws::GeoRoutes
       attr_accessor summary: Types::RouteSummary?
     end
 
+    class RouteAccessPointDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accessibility: Types::RouteAccessibilityAvailabilityDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accessibility: Types::RouteAccessibilityAvailabilityDetails?
+    end
+
+    module RouteAccessibilityAttribute
+      WHEELCHAIR: String
+    end
+
+    module RouteAccessibilityAvailability
+      AVAILABLE: String
+      LIMITED: String
+      UNAVAILABLE: String
+      UNKNOWN: String
+    end
+
+    class RouteAccessibilityAvailabilityDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?wheelchair: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor wheelchair: String?
+    end
+
     class RouteAllowOptions
       include Smithy::Schema::Structure
 
@@ -834,6 +968,24 @@ module Aws::GeoRoutes
 
       attr_accessor hot: bool?
       attr_accessor hov: bool?
+    end
+
+    class RouteAttribution
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attribution_type: String,
+        ?web_link: Types::RouteWebLink,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribution_type: String?
+      attr_accessor web_link: Types::RouteWebLink?
+    end
+
+    module RouteAttributionType
+      DISCLAIMER: String
+      TARIFF: String
     end
 
     class RouteAvoidanceArea
@@ -929,6 +1081,21 @@ module Aws::GeoRoutes
       attr_accessor occupancy: Integer?
     end
 
+    class RouteChargeStepDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arrival_charge: Float,
+        ?consumable_power: Float,
+        ?desired_charge: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arrival_charge: Float?
+      attr_accessor consumable_power: Float?
+      attr_accessor desired_charge: Float?
+    end
+
     class RouteContinueHighwayStepDetails
       include Smithy::Schema::Structure
 
@@ -978,6 +1145,13 @@ module Aws::GeoRoutes
       attr_accessor stop_duration: Integer?
     end
 
+    module RouteDirection
+      EAST: String
+      NORTH: String
+      SOUTH: String
+      WEST: String
+    end
+
     class RouteDriverOptions
       include Smithy::Schema::Structure
 
@@ -1013,6 +1187,12 @@ module Aws::GeoRoutes
 
       attr_accessor co2_emission_class: String?
       attr_accessor type: String?
+    end
+
+    module RouteEngineType
+      ELECTRIC: String
+      INTERNAL_COMBUSTION: String
+      PLUGIN_HYBRID: String
     end
 
     class RouteEnterHighwayStepDetails
@@ -1077,6 +1257,10 @@ module Aws::GeoRoutes
       attr_accessor type: String?
     end
 
+    module RouteFerryAfterTravelStepType
+      DEBOARD: String
+    end
+
     class RouteFerryArrival
       include Smithy::Schema::Structure
 
@@ -1103,6 +1287,10 @@ module Aws::GeoRoutes
       attr_accessor duration: Integer?
       attr_accessor instruction: String?
       attr_accessor type: String?
+    end
+
+    module RouteFerryBeforeTravelStepType
+      BOARD: String
     end
 
     class RouteFerryDeparture
@@ -1158,6 +1346,18 @@ module Aws::GeoRoutes
 
       attr_accessor code: String?
       attr_accessor impact: String?
+    end
+
+    module RouteFerryNoticeCode
+      ACCURATE_POLYLINE_UNAVAILABLE: String
+      NO_SCHEDULE: String
+      OTHER: String
+      VIOLATED_AVOID_FERRY: String
+      VIOLATED_AVOID_RAIL_FERRY: String
+      SEASONAL_CLOSURE: String
+      POTENTIAL_VIOLATED_VEHICLE_RESTRICTION_USAGE: String
+      VIOLATED_AVOID_AREAS: String
+      VIOLATED_VEHICLE_RESTRICTION: String
     end
 
     class RouteFerryOverviewSummary
@@ -1254,6 +1454,129 @@ module Aws::GeoRoutes
       attr_accessor type: String?
     end
 
+    module RouteFerryTravelStepType
+      DEPART: String
+      CONTINUE: String
+      ARRIVE: String
+    end
+
+    module RouteHazardousCargoType
+      COMBUSTIBLE: String
+      CORROSIVE: String
+      EXPLOSIVE: String
+      FLAMMABLE: String
+      GAS: String
+      HARMFUL_TO_WATER: String
+      ORGANIC: String
+      OTHER: String
+      POISON: String
+      POISONOUS_INHALATION: String
+      RADIOACTIVE: String
+    end
+
+    module RouteIntermodalEnabledLegs
+      FIRST_LEG: String
+      LAST_LEG: String
+      ENTIRE_ROUTE: String
+      NONE: String
+    end
+
+    class RouteIntermodalOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accessibility_attributes: Array[String],
+        ?max_transfers: Integer,
+        ?pedestrian: Types::RouteIntermodalPedestrianOptions,
+        ?rental: Types::RouteIntermodalRentalOptions,
+        ?taxi: Types::RouteIntermodalTaxiOptions,
+        ?transit: Types::RouteIntermodalTransitOptions,
+        ?vehicle: Types::RouteIntermodalVehicleOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accessibility_attributes: Array[String]?
+      attr_accessor max_transfers: Integer?
+      attr_accessor pedestrian: Types::RouteIntermodalPedestrianOptions?
+      attr_accessor rental: Types::RouteIntermodalRentalOptions?
+      attr_accessor taxi: Types::RouteIntermodalTaxiOptions?
+      attr_accessor transit: Types::RouteIntermodalTransitOptions?
+      attr_accessor vehicle: Types::RouteIntermodalVehicleOptions?
+    end
+
+    class RouteIntermodalPedestrianOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_distance: Integer,
+        ?speed: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_distance: Integer?
+      attr_accessor speed: Float?
+    end
+
+    class RouteIntermodalRentalOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?allowed_modes: Array[String],
+        ?enabled_for: Array[String],
+        ?excluded_modes: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor allowed_modes: Array[String]?
+      attr_accessor enabled_for: Array[String]?
+      attr_accessor excluded_modes: Array[String]?
+    end
+
+    class RouteIntermodalTaxiOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?allowed_modes: Array[String],
+        ?enabled_for: Array[String],
+        ?excluded_modes: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor allowed_modes: Array[String]?
+      attr_accessor enabled_for: Array[String]?
+      attr_accessor excluded_modes: Array[String]?
+    end
+
+    class RouteIntermodalTransitOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?allowed_modes: Array[String],
+        ?enabled_for: Array[String],
+        ?excluded_modes: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor allowed_modes: Array[String]?
+      attr_accessor enabled_for: Array[String]?
+      attr_accessor excluded_modes: Array[String]?
+    end
+
+    class RouteIntermodalVehicleOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?allowed_modes: Array[String],
+        ?enabled_for: Array[String],
+        ?excluded_modes: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor allowed_modes: Array[String]?
+      attr_accessor enabled_for: Array[String]?
+      attr_accessor excluded_modes: Array[String]?
+    end
+
     class RouteKeepStepDetails
       include Smithy::Schema::Structure
 
@@ -1282,6 +1605,9 @@ module Aws::GeoRoutes
         ?travel_mode: String,
         ?type: String,
         ?vehicle_leg_details: Types::RouteVehicleLegDetails,
+        ?rental_leg_details: Types::RouteRentalLegDetails,
+        ?taxi_leg_details: Types::RouteTaxiLegDetails,
+        ?transit_leg_details: Types::RouteTransitLegDetails,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1292,6 +1618,24 @@ module Aws::GeoRoutes
       attr_accessor travel_mode: String?
       attr_accessor type: String?
       attr_accessor vehicle_leg_details: Types::RouteVehicleLegDetails?
+      attr_accessor rental_leg_details: Types::RouteRentalLegDetails?
+      attr_accessor taxi_leg_details: Types::RouteTaxiLegDetails?
+      attr_accessor transit_leg_details: Types::RouteTransitLegDetails?
+    end
+
+    module RouteLegAdditionalFeature
+      ELEVATION: String
+      INCIDENTS: String
+      PASS_THROUGH_WAYPOINTS: String
+      SUMMARY: String
+      TOLLS: String
+      TRAVEL_STEP_INSTRUCTIONS: String
+      TRUCK_ROAD_TYPES: String
+      TYPICAL_DURATION: String
+      ZONES: String
+      BOOKINGS: String
+      INTERMEDIATE_STOPS: String
+      NEXT_DEPARTURES: String
     end
 
     class RouteLegGeometry
@@ -1305,6 +1649,38 @@ module Aws::GeoRoutes
 
       attr_accessor line_string: Array[Array[Float]]?
       attr_accessor polyline: String?
+    end
+
+    module RouteLegTravelMode
+      CAR: String
+      FERRY: String
+      PEDESTRIAN: String
+      SCOOTER: String
+      TRUCK: String
+      CAR_SHUTTLE_TRAIN: String
+      AERIAL_TRAMWAY: String
+      AIRPLANE: String
+      BUS: String
+      BUS_RAPID_TRANSIT: String
+      CITY_TRAIN: String
+      FUNICULAR_RAILWAY: String
+      HIGH_SPEED_TRAIN: String
+      INTERCITY_TRAIN: String
+      INTERREGIONAL_TRAIN: String
+      LIGHT_RAIL: String
+      MONORAIL: String
+      PRIVATE_BUS: String
+      REGIONAL_TRAIN: String
+      SUBWAY: String
+    end
+
+    module RouteLegType
+      FERRY: String
+      PEDESTRIAN: String
+      VEHICLE: String
+      RENTAL: String
+      TAXI: String
+      TRANSIT: String
     end
 
     class RouteMajorRoadLabel
@@ -1521,6 +1897,18 @@ module Aws::GeoRoutes
       attr_accessor error: String?
     end
 
+    module RouteMatrixErrorCode
+      NO_MATCH: String
+      NO_MATCH_DESTINATION: String
+      NO_MATCH_ORIGIN: String
+      NO_ROUTE: String
+      OUT_OF_BOUNDS: String
+      OUT_OF_BOUNDS_DESTINATION: String
+      OUT_OF_BOUNDS_ORIGIN: String
+      OTHER: String
+      VIOLATION: String
+    end
+
     class RouteMatrixExclusionOptions
       include Smithy::Schema::Structure
 
@@ -1530,6 +1918,20 @@ module Aws::GeoRoutes
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor countries: Array[String]?
+    end
+
+    module RouteMatrixHazardousCargoType
+      COMBUSTIBLE: String
+      CORROSIVE: String
+      EXPLOSIVE: String
+      FLAMMABLE: String
+      GAS: String
+      HARMFUL_TO_WATER: String
+      ORGANIC: String
+      OTHER: String
+      POISON: String
+      POISONOUS_INHALATION: String
+      RADIOACTIVE: String
     end
 
     class RouteMatrixMatchingOptions
@@ -1631,6 +2033,13 @@ module Aws::GeoRoutes
       attr_accessor trailer_count: Integer?
     end
 
+    module RouteMatrixTravelMode
+      CAR: String
+      PEDESTRIAN: String
+      SCOOTER: String
+      TRUCK: String
+    end
+
     class RouteMatrixTravelModeOptions
       include Smithy::Schema::Structure
 
@@ -1687,6 +2096,12 @@ module Aws::GeoRoutes
       attr_accessor width: Integer?
     end
 
+    module RouteMatrixTruckType
+      LIGHT_TRUCK: String
+      STRAIGHT_TRUCK: String
+      TRACTOR: String
+    end
+
     class RouteMatrixVehicleLicensePlate
       include Smithy::Schema::Structure
 
@@ -1696,6 +2111,12 @@ module Aws::GeoRoutes
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor last_character: String?
+    end
+
+    module RouteMatrixZoneCategory
+      CONGESTION_PRICING: String
+      ENVIRONMENTAL: String
+      VIGNETTE: String
     end
 
     class RouteNoticeDetailRange
@@ -1709,6 +2130,11 @@ module Aws::GeoRoutes
 
       attr_accessor min: Integer?
       attr_accessor max: Integer?
+    end
+
+    module RouteNoticeImpact
+      HIGH: String
+      LOW: String
     end
 
     class RouteNumber
@@ -1773,6 +2199,25 @@ module Aws::GeoRoutes
       attr_accessor place: Types::RoutePassThroughPlace?
     end
 
+    class RoutePedestrianAfterTravelStep
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?duration: Integer,
+        ?instruction: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor duration: Integer?
+      attr_accessor instruction: String?
+      attr_accessor type: String?
+    end
+
+    module RoutePedestrianAfterTravelStepType
+      WAIT: String
+    end
+
     class RoutePedestrianArrival
       include Smithy::Schema::Structure
 
@@ -1803,6 +2248,7 @@ module Aws::GeoRoutes
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?after_travel_steps: Array[Types::RoutePedestrianAfterTravelStep],
         ?arrival: Types::RoutePedestrianArrival,
         ?departure: Types::RoutePedestrianDeparture,
         ?notices: Array[Types::RoutePedestrianNotice],
@@ -1813,6 +2259,7 @@ module Aws::GeoRoutes
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor after_travel_steps: Array[Types::RoutePedestrianAfterTravelStep]?
       attr_accessor arrival: Types::RoutePedestrianArrival?
       attr_accessor departure: Types::RoutePedestrianDeparture?
       attr_accessor notices: Array[Types::RoutePedestrianNotice]?
@@ -1833,6 +2280,15 @@ module Aws::GeoRoutes
 
       attr_accessor code: String?
       attr_accessor impact: String?
+    end
+
+    module RoutePedestrianNoticeCode
+      ACCURATE_POLYLINE_UNAVAILABLE: String
+      OTHER: String
+      VIOLATED_AVOID_DIRT_ROAD: String
+      VIOLATED_AVOID_TUNNEL: String
+      VIOLATED_PEDESTRIAN_OPTION: String
+      VIOLATED_AVOID_AREAS: String
     end
 
     class RoutePedestrianOptions
@@ -1863,19 +2319,32 @@ module Aws::GeoRoutes
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?access_point_details: Types::RouteAccessPointDetails,
         ?name: String,
         ?original_position: Array[Float],
         ?position: Array[Float],
         ?side_of_street: String,
+        ?station_details: Types::RouteStationDetails,
+        ?type: String,
         ?waypoint_index: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor access_point_details: Types::RouteAccessPointDetails?
       attr_accessor name: String?
       attr_accessor original_position: Array[Float]?
       attr_accessor position: Array[Float]?
       attr_accessor side_of_street: String?
+      attr_accessor station_details: Types::RouteStationDetails?
+      attr_accessor type: String?
       attr_accessor waypoint_index: Integer?
+    end
+
+    module RoutePedestrianPlaceType
+      ACCESS_POINT: String
+      DOCKING_STATION: String
+      PARKING_LOT: String
+      STATION: String
     end
 
     class RoutePedestrianSpan
@@ -1980,6 +2449,17 @@ module Aws::GeoRoutes
       attr_accessor type: String?
     end
 
+    module RoutePedestrianTravelStepType
+      ARRIVE: String
+      CONTINUE: String
+      DEPART: String
+      KEEP: String
+      ROUNDABOUT_ENTER: String
+      ROUNDABOUT_EXIT: String
+      ROUNDABOUT_PASS: String
+      TURN: String
+    end
+
     class RouteRampStepDetails
       include Smithy::Schema::Structure
 
@@ -1997,6 +2477,262 @@ module Aws::GeoRoutes
       attr_accessor turn_intensity: String?
     end
 
+    class RouteRentalAfterTravelStep
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?duration: Integer,
+        ?instruction: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor duration: Integer?
+      attr_accessor instruction: String?
+      attr_accessor type: String?
+    end
+
+    module RouteRentalAfterTravelStepType
+      PARK: String
+    end
+
+    class RouteRentalAgency
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor url: String?
+    end
+
+    class RouteRentalArrival
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?place: Types::RouteRentalPlace,
+        ?time: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor place: Types::RouteRentalPlace?
+      attr_accessor time: String?
+    end
+
+    class RouteRentalBeforeTravelStep
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?duration: Integer,
+        ?instruction: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor duration: Integer?
+      attr_accessor instruction: String?
+      attr_accessor type: String?
+    end
+
+    module RouteRentalBeforeTravelStepType
+      SETUP: String
+    end
+
+    class RouteRentalDeparture
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?place: Types::RouteRentalPlace,
+        ?time: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor place: Types::RouteRentalPlace?
+      attr_accessor time: String?
+    end
+
+    class RouteRentalLegDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?after_travel_steps: Array[Types::RouteRentalAfterTravelStep],
+        ?agency: Types::RouteRentalAgency,
+        ?arrival: Types::RouteRentalArrival,
+        ?attributions: Array[Types::RouteAttribution],
+        ?before_travel_steps: Array[Types::RouteRentalBeforeTravelStep],
+        ?booking_web_links: Array[Types::RouteWebLink],
+        ?departure: Types::RouteRentalDeparture,
+        ?summary: Types::RouteRentalSummary,
+        ?transport: Types::RouteRentalTransportModeDetails,
+        ?travel_steps: Array[Types::RouteRentalTravelStep],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor after_travel_steps: Array[Types::RouteRentalAfterTravelStep]?
+      attr_accessor agency: Types::RouteRentalAgency?
+      attr_accessor arrival: Types::RouteRentalArrival?
+      attr_accessor attributions: Array[Types::RouteAttribution]?
+      attr_accessor before_travel_steps: Array[Types::RouteRentalBeforeTravelStep]?
+      attr_accessor booking_web_links: Array[Types::RouteWebLink]?
+      attr_accessor departure: Types::RouteRentalDeparture?
+      attr_accessor summary: Types::RouteRentalSummary?
+      attr_accessor transport: Types::RouteRentalTransportModeDetails?
+      attr_accessor travel_steps: Array[Types::RouteRentalTravelStep]?
+    end
+
+    module RouteRentalMode
+      ALL: String
+      CAR: String
+    end
+
+    class RouteRentalOverviewSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?duration: Integer,
+        ?distance: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor duration: Integer?
+      attr_accessor distance: Integer?
+    end
+
+    class RouteRentalPlace
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_point_details: Types::RouteAccessPointDetails,
+        ?name: String,
+        ?original_position: Array[Float],
+        ?position: Array[Float],
+        ?station_details: Types::RouteStationDetails,
+        ?type: String,
+        ?waypoint_index: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_point_details: Types::RouteAccessPointDetails?
+      attr_accessor name: String?
+      attr_accessor original_position: Array[Float]?
+      attr_accessor position: Array[Float]?
+      attr_accessor station_details: Types::RouteStationDetails?
+      attr_accessor type: String?
+      attr_accessor waypoint_index: Integer?
+    end
+
+    module RouteRentalPlaceType
+      ACCESS_POINT: String
+      DOCKING_STATION: String
+      PARKING_LOT: String
+      STATION: String
+    end
+
+    class RouteRentalSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?overview: Types::RouteRentalOverviewSummary,
+        ?travel_only: Types::RouteRentalTravelOnlySummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor overview: Types::RouteRentalOverviewSummary?
+      attr_accessor travel_only: Types::RouteRentalTravelOnlySummary?
+    end
+
+    class RouteRentalTransportModeDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?available_seats: Integer,
+        ?category: String,
+        ?color: String,
+        ?engine: String,
+        ?license_plate: String,
+        ?mode: String,
+        ?model: String,
+        ?name: String,
+        ?text_color: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor available_seats: Integer?
+      attr_accessor category: String?
+      attr_accessor color: String?
+      attr_accessor engine: String?
+      attr_accessor license_plate: String?
+      attr_accessor mode: String?
+      attr_accessor model: String?
+      attr_accessor name: String?
+      attr_accessor text_color: String?
+    end
+
+    class RouteRentalTravelOnlySummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?duration: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor duration: Integer?
+    end
+
+    class RouteRentalTravelStep
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?continue_step_details: Types::RouteContinueStepDetails,
+        ?distance: Integer,
+        ?duration: Integer,
+        ?exit_step_details: Types::RouteExitStepDetails,
+        ?geometry_offset: Integer,
+        ?instruction: String,
+        ?keep_step_details: Types::RouteKeepStepDetails,
+        ?ramp_step_details: Types::RouteRampStepDetails,
+        ?roundabout_enter_step_details: Types::RouteRoundaboutEnterStepDetails,
+        ?roundabout_exit_step_details: Types::RouteRoundaboutExitStepDetails,
+        ?roundabout_pass_step_details: Types::RouteRoundaboutPassStepDetails,
+        ?turn_step_details: Types::RouteTurnStepDetails,
+        ?type: String,
+        ?u_turn_step_details: Types::RouteUTurnStepDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor continue_step_details: Types::RouteContinueStepDetails?
+      attr_accessor distance: Integer?
+      attr_accessor duration: Integer?
+      attr_accessor exit_step_details: Types::RouteExitStepDetails?
+      attr_accessor geometry_offset: Integer?
+      attr_accessor instruction: String?
+      attr_accessor keep_step_details: Types::RouteKeepStepDetails?
+      attr_accessor ramp_step_details: Types::RouteRampStepDetails?
+      attr_accessor roundabout_enter_step_details: Types::RouteRoundaboutEnterStepDetails?
+      attr_accessor roundabout_exit_step_details: Types::RouteRoundaboutExitStepDetails?
+      attr_accessor roundabout_pass_step_details: Types::RouteRoundaboutPassStepDetails?
+      attr_accessor turn_step_details: Types::RouteTurnStepDetails?
+      attr_accessor type: String?
+      attr_accessor u_turn_step_details: Types::RouteUTurnStepDetails?
+    end
+
+    module RouteRentalTravelStepType
+      ARRIVE: String
+      CONTINUE: String
+      DEPART: String
+      EXIT: String
+      KEEP: String
+      RAMP: String
+      ROUNDABOUT_ENTER: String
+      ROUNDABOUT_EXIT: String
+      ROUNDABOUT_PASS: String
+      TURN: String
+      U_TURN: String
+    end
+
     class RouteResponseNotice
       include Smithy::Schema::Structure
 
@@ -2008,6 +2744,15 @@ module Aws::GeoRoutes
 
       attr_accessor code: String?
       attr_accessor impact: String?
+    end
+
+    module RouteResponseNoticeCode
+      MAIN_LANGUAGE_NOT_FOUND: String
+      OTHER: String
+      TRAVEL_TIME_EXCEEDS_DRIVER_WORK_HOURS: String
+      TRANSIT_DATA_UNAVAILABLE: String
+      TRANSIT_ROUTE_UNAVAILABLE: String
+      NO_TRANSIT_STATIONS_FOUND: String
     end
 
     class RouteRoad
@@ -2025,6 +2770,12 @@ module Aws::GeoRoutes
       attr_accessor route_number: Array[Types::RouteNumber]?
       attr_accessor towards: Array[Types::LocalizedString]?
       attr_accessor type: String?
+    end
+
+    module RouteRoadType
+      HIGHWAY: String
+      RURAL: String
+      URBAN: String
     end
 
     class RouteRoundaboutEnterStepDetails
@@ -2095,6 +2846,11 @@ module Aws::GeoRoutes
       attr_accessor occupancy: Integer?
     end
 
+    module RouteSideOfStreet
+      LEFT: String
+      RIGHT: String
+    end
+
     class RouteSideOfStreetOptions
       include Smithy::Schema::Structure
 
@@ -2132,6 +2888,39 @@ module Aws::GeoRoutes
       attr_accessor text: Types::LocalizedString?
     end
 
+    module RouteSpanAdditionalFeature
+      BEST_CASE_DURATION: String
+      CAR_ACCESS: String
+      COUNTRY: String
+      DISTANCE: String
+      DURATION: String
+      DYNAMIC_SPEED: String
+      FUNCTIONAL_CLASSIFICATION: String
+      GATES: String
+      INCIDENTS: String
+      NAMES: String
+      NOTICES: String
+      PEDESTRIAN_ACCESS: String
+      RAILWAY_CROSSINGS: String
+      REGION: String
+      ROAD_ATTRIBUTES: String
+      ROUTE_NUMBERS: String
+      SCOOTER_ACCESS: String
+      SPEED_LIMIT: String
+      TOLL_SYSTEMS: String
+      TRUCK_ACCESS: String
+      TRUCK_ROAD_TYPES: String
+      TYPICAL_DURATION: String
+      ZONES: String
+      CONSUMPTION: String
+    end
+
+    module RouteSpanCarAccessAttribute
+      ALLOWED: String
+      NO_THROUGH_TRAFFIC: String
+      TOLL_ROAD: String
+    end
+
     class RouteSpanDynamicSpeedDetails
       include Smithy::Schema::Structure
 
@@ -2147,6 +2936,47 @@ module Aws::GeoRoutes
       attr_accessor typical_speed: Float?
     end
 
+    module RouteSpanGateAttribute
+      EMERGENCY: String
+      KEY_ACCESS: String
+      PERMISSION_REQUIRED: String
+    end
+
+    module RouteSpanPedestrianAccessAttribute
+      ALLOWED: String
+      INDOORS: String
+      NO_THROUGH_TRAFFIC: String
+      PARK: String
+      STAIRS: String
+      TOLL_ROAD: String
+    end
+
+    module RouteSpanRailwayCrossingAttribute
+      PROTECTED: String
+      UNPROTECTED: String
+    end
+
+    module RouteSpanRoadAttribute
+      BRIDGE: String
+      BUILT_UP_AREA: String
+      CONTROLLED_ACCESS_HIGHWAY: String
+      DIRT_ROAD: String
+      DIVIDED_ROAD: String
+      MOTORWAY: String
+      PRIVATE_ROAD: String
+      RAMP: String
+      RIGHT_HAND_TRAFFIC: String
+      ROUNDABOUT: String
+      TUNNEL: String
+      UNDER_CONSTRUCTION: String
+    end
+
+    module RouteSpanScooterAccessAttribute
+      ALLOWED: String
+      NO_THROUGH_TRAFFIC: String
+      TOLL_ROAD: String
+    end
+
     class RouteSpanSpeedLimitDetails
       include Smithy::Schema::Structure
 
@@ -2158,6 +2988,33 @@ module Aws::GeoRoutes
 
       attr_accessor max_speed: Float?
       attr_accessor unlimited: bool?
+    end
+
+    module RouteSpanTruckAccessAttribute
+      ALLOWED: String
+      NO_THROUGH_TRAFFIC: String
+      TOLL_ROAD: String
+    end
+
+    class RouteStationDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accessibility: Types::RouteAccessibilityAvailabilityDetails,
+        ?platform_name: String,
+        ?short_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accessibility: Types::RouteAccessibilityAvailabilityDetails?
+      attr_accessor platform_name: String?
+      attr_accessor short_name: String?
+    end
+
+    module RouteSteeringDirection
+      LEFT: String
+      RIGHT: String
+      STRAIGHT: String
     end
 
     class RouteSummary
@@ -2173,6 +3030,280 @@ module Aws::GeoRoutes
       attr_accessor distance: Integer?
       attr_accessor duration: Integer?
       attr_accessor tolls: Types::RouteTollSummary?
+    end
+
+    class RouteTaxiAfterTravelStep
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?duration: Integer,
+        ?instruction: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor duration: Integer?
+      attr_accessor instruction: String?
+      attr_accessor type: String?
+    end
+
+    module RouteTaxiAfterTravelStepType
+      PARK: String
+    end
+
+    class RouteTaxiAgency
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor url: String?
+    end
+
+    class RouteTaxiArrival
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?place: Types::RouteTaxiPlace,
+        ?time: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor place: Types::RouteTaxiPlace?
+      attr_accessor time: String?
+    end
+
+    class RouteTaxiBeforeTravelStep
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?duration: Integer,
+        ?instruction: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor duration: Integer?
+      attr_accessor instruction: String?
+      attr_accessor type: String?
+    end
+
+    module RouteTaxiBeforeTravelStepType
+      WAIT: String
+    end
+
+    class RouteTaxiDeparture
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?place: Types::RouteTaxiPlace,
+        ?time: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor place: Types::RouteTaxiPlace?
+      attr_accessor time: String?
+    end
+
+    class RouteTaxiLegDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?after_travel_steps: Array[Types::RouteTaxiAfterTravelStep],
+        ?agency: Types::RouteTaxiAgency,
+        ?arrival: Types::RouteTaxiArrival,
+        ?attributions: Array[Types::RouteAttribution],
+        ?before_travel_steps: Array[Types::RouteTaxiBeforeTravelStep],
+        ?booking_web_links: Array[Types::RouteWebLink],
+        ?departure: Types::RouteTaxiDeparture,
+        ?notices: Array[Types::RouteTaxiNotice],
+        ?summary: Types::RouteTaxiSummary,
+        ?transport: Types::RouteTaxiTransportModeDetails,
+        ?travel_steps: Array[Types::RouteTaxiTravelStep],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor after_travel_steps: Array[Types::RouteTaxiAfterTravelStep]?
+      attr_accessor agency: Types::RouteTaxiAgency?
+      attr_accessor arrival: Types::RouteTaxiArrival?
+      attr_accessor attributions: Array[Types::RouteAttribution]?
+      attr_accessor before_travel_steps: Array[Types::RouteTaxiBeforeTravelStep]?
+      attr_accessor booking_web_links: Array[Types::RouteWebLink]?
+      attr_accessor departure: Types::RouteTaxiDeparture?
+      attr_accessor notices: Array[Types::RouteTaxiNotice]?
+      attr_accessor summary: Types::RouteTaxiSummary?
+      attr_accessor transport: Types::RouteTaxiTransportModeDetails?
+      attr_accessor travel_steps: Array[Types::RouteTaxiTravelStep]?
+    end
+
+    module RouteTaxiMode
+      ALL: String
+      CAR: String
+    end
+
+    class RouteTaxiNotice
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?impact: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor impact: String?
+    end
+
+    module RouteTaxiNoticeCode
+      ACCURATE_POLYLINE_UNAVAILABLE: String
+      OTHER: String
+    end
+
+    class RouteTaxiOverviewSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?duration: Integer,
+        ?distance: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor duration: Integer?
+      attr_accessor distance: Integer?
+    end
+
+    class RouteTaxiPlace
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_point_details: Types::RouteAccessPointDetails,
+        ?name: String,
+        ?original_position: Array[Float],
+        ?position: Array[Float],
+        ?station_details: Types::RouteStationDetails,
+        ?type: String,
+        ?waypoint_index: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_point_details: Types::RouteAccessPointDetails?
+      attr_accessor name: String?
+      attr_accessor original_position: Array[Float]?
+      attr_accessor position: Array[Float]?
+      attr_accessor station_details: Types::RouteStationDetails?
+      attr_accessor type: String?
+      attr_accessor waypoint_index: Integer?
+    end
+
+    module RouteTaxiPlaceType
+      ACCESS_POINT: String
+      STATION: String
+    end
+
+    class RouteTaxiSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?overview: Types::RouteTaxiOverviewSummary,
+        ?travel_only: Types::RouteTaxiTravelOnlySummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor overview: Types::RouteTaxiOverviewSummary?
+      attr_accessor travel_only: Types::RouteTaxiTravelOnlySummary?
+    end
+
+    class RouteTaxiTransportModeDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?available_seats: Integer,
+        ?category: String,
+        ?color: String,
+        ?engine: String,
+        ?license_plate: String,
+        ?mode: String,
+        ?model: String,
+        ?name: String,
+        ?text_color: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor available_seats: Integer?
+      attr_accessor category: String?
+      attr_accessor color: String?
+      attr_accessor engine: String?
+      attr_accessor license_plate: String?
+      attr_accessor mode: String?
+      attr_accessor model: String?
+      attr_accessor name: String?
+      attr_accessor text_color: String?
+    end
+
+    class RouteTaxiTravelOnlySummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?duration: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor duration: Integer?
+    end
+
+    class RouteTaxiTravelStep
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?continue_step_details: Types::RouteContinueStepDetails,
+        ?distance: Integer,
+        ?duration: Integer,
+        ?exit_step_details: Types::RouteExitStepDetails,
+        ?geometry_offset: Integer,
+        ?instruction: String,
+        ?keep_step_details: Types::RouteKeepStepDetails,
+        ?ramp_step_details: Types::RouteRampStepDetails,
+        ?roundabout_enter_step_details: Types::RouteRoundaboutEnterStepDetails,
+        ?roundabout_exit_step_details: Types::RouteRoundaboutExitStepDetails,
+        ?roundabout_pass_step_details: Types::RouteRoundaboutPassStepDetails,
+        ?turn_step_details: Types::RouteTurnStepDetails,
+        ?type: String,
+        ?u_turn_step_details: Types::RouteUTurnStepDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor continue_step_details: Types::RouteContinueStepDetails?
+      attr_accessor distance: Integer?
+      attr_accessor duration: Integer?
+      attr_accessor exit_step_details: Types::RouteExitStepDetails?
+      attr_accessor geometry_offset: Integer?
+      attr_accessor instruction: String?
+      attr_accessor keep_step_details: Types::RouteKeepStepDetails?
+      attr_accessor ramp_step_details: Types::RouteRampStepDetails?
+      attr_accessor roundabout_enter_step_details: Types::RouteRoundaboutEnterStepDetails?
+      attr_accessor roundabout_exit_step_details: Types::RouteRoundaboutExitStepDetails?
+      attr_accessor roundabout_pass_step_details: Types::RouteRoundaboutPassStepDetails?
+      attr_accessor turn_step_details: Types::RouteTurnStepDetails?
+      attr_accessor type: String?
+      attr_accessor u_turn_step_details: Types::RouteUTurnStepDetails?
+    end
+
+    module RouteTaxiTravelStepType
+      ARRIVE: String
+      CONTINUE: String
+      DEPART: String
+      EXIT: String
+      KEEP: String
+      RAMP: String
+      ROUNDABOUT_ENTER: String
+      ROUNDABOUT_EXIT: String
+      ROUNDABOUT_PASS: String
+      TURN: String
+      U_TURN: String
     end
 
     class RouteToll
@@ -2241,6 +3372,25 @@ module Aws::GeoRoutes
 
       attr_accessor period: String?
       attr_accessor period_count: Integer?
+    end
+
+    module RouteTollPassValidityPeriodType
+      ANNUAL: String
+      DAYS: String
+      EXTENDED_ANNUAL: String
+      MINUTES: String
+      MONTHS: String
+    end
+
+    module RouteTollPaymentMethod
+      BANK_CARD: String
+      CASH: String
+      CASH_EXACT: String
+      CREDIT_CARD: String
+      PASS_SUBSCRIPTION: String
+      TRAVEL_CARD: String
+      TRANSPONDER: String
+      VIDEO_TOLL: String
     end
 
     class RouteTollPaymentSite
@@ -2356,6 +3506,10 @@ module Aws::GeoRoutes
       attr_accessor name: String?
     end
 
+    module RouteTollVehicleCategory
+      MINIBUS: String
+    end
+
     class RouteTrafficOptions
       include Smithy::Schema::Structure
 
@@ -2382,6 +3536,438 @@ module Aws::GeoRoutes
       attr_accessor trailer_count: Integer?
     end
 
+    class RouteTransitAfterTravelStep
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?duration: Integer,
+        ?instruction: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor duration: Integer?
+      attr_accessor instruction: String?
+      attr_accessor type: String?
+    end
+
+    module RouteTransitAfterTravelStepType
+      DEBOARD: String
+    end
+
+    class RouteTransitAgency
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor url: String?
+    end
+
+    class RouteTransitArrival
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delay: Integer,
+        ?place: Types::RouteTransitPlace,
+        ?status: String,
+        ?time: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delay: Integer?
+      attr_accessor place: Types::RouteTransitPlace?
+      attr_accessor status: String?
+      attr_accessor time: String?
+    end
+
+    class RouteTransitBeforeTravelStep
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?duration: Integer,
+        ?instruction: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor duration: Integer?
+      attr_accessor instruction: String?
+      attr_accessor type: String?
+    end
+
+    module RouteTransitBeforeTravelStepType
+      BOARD: String
+    end
+
+    class RouteTransitDeparture
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delay: Integer,
+        ?place: Types::RouteTransitPlace,
+        ?status: String,
+        ?time: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delay: Integer?
+      attr_accessor place: Types::RouteTransitPlace?
+      attr_accessor status: String?
+      attr_accessor time: String?
+    end
+
+    class RouteTransitIncident
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?effect: String,
+        ?end_time: String,
+        ?start_time: String,
+        ?type: String,
+        ?url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor effect: String?
+      attr_accessor end_time: String?
+      attr_accessor start_time: String?
+      attr_accessor type: String?
+      attr_accessor url: String?
+    end
+
+    module RouteTransitIncidentEffect
+      DELAYED: String
+      DETOURED: String
+      OTHER: String
+      SERVICE_ADDED: String
+      SERVICE_CANCELLED: String
+      SERVICE_MODIFIED: String
+      SERVICE_REDUCED: String
+      STOP_MOVED: String
+    end
+
+    module RouteTransitIncidentType
+      ACCIDENT: String
+      CONSTRUCTION: String
+      DEMONSTRATION: String
+      HOLIDAY: String
+      MAINTENANCE: String
+      MEDICAL_EMERGENCY: String
+      OTHER: String
+      POLICE_ACTIVITY: String
+      STRIKE: String
+      TECHNICAL_PROBLEM: String
+      WEATHER: String
+    end
+
+    class RouteTransitIntermediateStop
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attributes: Array[String],
+        ?departure: Types::RouteTransitDeparture,
+        ?duration: Integer,
+        ?geometry_offset: Integer,
+        ?transport: Types::RouteTransitTransportModeDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attributes: Array[String]?
+      attr_accessor departure: Types::RouteTransitDeparture?
+      attr_accessor duration: Integer?
+      attr_accessor geometry_offset: Integer?
+      attr_accessor transport: Types::RouteTransitTransportModeDetails?
+    end
+
+    module RouteTransitIntermediateStopAttribute
+      NO_ENTRY: String
+      NO_EXIT: String
+    end
+
+    class RouteTransitLegDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?after_travel_steps: Array[Types::RouteTransitAfterTravelStep],
+        ?agency: Types::RouteTransitAgency,
+        ?arrival: Types::RouteTransitArrival,
+        ?attributions: Array[Types::RouteAttribution],
+        ?before_travel_steps: Array[Types::RouteTransitBeforeTravelStep],
+        ?booking_web_links: Array[Types::RouteWebLink],
+        ?departure: Types::RouteTransitDeparture,
+        ?incidents: Array[Types::RouteTransitIncident],
+        ?intermediate_stops: Array[Types::RouteTransitIntermediateStop],
+        ?next_departures: Array[Types::RouteTransitNextDeparture],
+        ?notices: Array[Types::RouteTransitNotice],
+        ?pass_through_waypoints: Array[Types::RoutePassThroughWaypoint],
+        ?spans: Array[Types::RouteTransitSpan],
+        ?summary: Types::RouteTransitSummary,
+        ?transport: Types::RouteTransitTransportModeDetails,
+        ?travel_steps: Array[Types::RouteTransitTravelStep],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor after_travel_steps: Array[Types::RouteTransitAfterTravelStep]?
+      attr_accessor agency: Types::RouteTransitAgency?
+      attr_accessor arrival: Types::RouteTransitArrival?
+      attr_accessor attributions: Array[Types::RouteAttribution]?
+      attr_accessor before_travel_steps: Array[Types::RouteTransitBeforeTravelStep]?
+      attr_accessor booking_web_links: Array[Types::RouteWebLink]?
+      attr_accessor departure: Types::RouteTransitDeparture?
+      attr_accessor incidents: Array[Types::RouteTransitIncident]?
+      attr_accessor intermediate_stops: Array[Types::RouteTransitIntermediateStop]?
+      attr_accessor next_departures: Array[Types::RouteTransitNextDeparture]?
+      attr_accessor notices: Array[Types::RouteTransitNotice]?
+      attr_accessor pass_through_waypoints: Array[Types::RoutePassThroughWaypoint]?
+      attr_accessor spans: Array[Types::RouteTransitSpan]?
+      attr_accessor summary: Types::RouteTransitSummary?
+      attr_accessor transport: Types::RouteTransitTransportModeDetails?
+      attr_accessor travel_steps: Array[Types::RouteTransitTravelStep]?
+    end
+
+    module RouteTransitMode
+      AERIAL_TRAMWAY: String
+      AIRPLANE: String
+      ALL: String
+      BUS: String
+      BUS_RAPID_TRANSIT: String
+      CITY_TRAIN: String
+      FERRY: String
+      FUNICULAR_RAILWAY: String
+      HIGH_SPEED_TRAIN: String
+      INTERCITY_TRAIN: String
+      INTERREGIONAL_TRAIN: String
+      LIGHT_RAIL: String
+      MONORAIL: String
+      PRIVATE_BUS: String
+      REGIONAL_TRAIN: String
+      SUBWAY: String
+    end
+
+    class RouteTransitNextDeparture
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delay: Integer,
+        ?platform_name: String,
+        ?status: String,
+        ?time: String,
+        ?transport: Types::RouteTransitTransportModeDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delay: Integer?
+      attr_accessor platform_name: String?
+      attr_accessor status: String?
+      attr_accessor time: String?
+      attr_accessor transport: Types::RouteTransitTransportModeDetails?
+    end
+
+    class RouteTransitNotice
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?impact: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor impact: String?
+    end
+
+    module RouteTransitNoticeCode
+      ACCURATE_POLYLINE_UNAVAILABLE: String
+      INTERMEDIATE_STOPS_UNAVAILABLE: String
+      NO_SCHEDULE: String
+      OTHER: String
+      POTENTIAL_VIOLATED_VEHICLE_RESTRICTION_USAGE: String
+      SCHEDULED_TIMES: String
+      SEASONAL_CLOSURE: String
+      VIOLATED_AVOID_FERRY: String
+      VIOLATED_AVOID_RAIL_FERRY: String
+      VIOLATED_EXCLUDED_TRANSIT_MODE: String
+      VIOLATED_VEHICLE_RESTRICTION: String
+      VIOLATED_AVOID_AREAS: String
+    end
+
+    class RouteTransitOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accessibility_attributes: Array[String],
+        ?allowed_modes: Array[String],
+        ?excluded_modes: Array[String],
+        ?max_transfers: Integer,
+        ?pedestrian: Types::RouteTransitPedestrianOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accessibility_attributes: Array[String]?
+      attr_accessor allowed_modes: Array[String]?
+      attr_accessor excluded_modes: Array[String]?
+      attr_accessor max_transfers: Integer?
+      attr_accessor pedestrian: Types::RouteTransitPedestrianOptions?
+    end
+
+    class RouteTransitOverviewSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?distance: Integer,
+        ?duration: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor distance: Integer?
+      attr_accessor duration: Integer?
+    end
+
+    class RouteTransitPedestrianOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_distance: Integer,
+        ?speed: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_distance: Integer?
+      attr_accessor speed: Float?
+    end
+
+    class RouteTransitPlace
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?original_position: Array[Float],
+        ?position: Array[Float],
+        ?station_details: Types::RouteStationDetails,
+        ?type: String,
+        ?waypoint_index: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor original_position: Array[Float]?
+      attr_accessor position: Array[Float]?
+      attr_accessor station_details: Types::RouteStationDetails?
+      attr_accessor type: String?
+      attr_accessor waypoint_index: Integer?
+    end
+
+    module RouteTransitPlaceType
+      STATION: String
+    end
+
+    class RouteTransitSpan
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?country: String,
+        ?distance: Integer,
+        ?duration: Integer,
+        ?geometry_offset: Integer,
+        ?names: Array[Types::LocalizedString],
+        ?region: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor country: String?
+      attr_accessor distance: Integer?
+      attr_accessor duration: Integer?
+      attr_accessor geometry_offset: Integer?
+      attr_accessor names: Array[Types::LocalizedString]?
+      attr_accessor region: String?
+    end
+
+    class RouteTransitSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?overview: Types::RouteTransitOverviewSummary,
+        ?travel_only: Types::RouteTransitTravelOnlySummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor overview: Types::RouteTransitOverviewSummary?
+      attr_accessor travel_only: Types::RouteTransitTravelOnlySummary?
+    end
+
+    class RouteTransitTransportModeDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accessibility: Types::RouteAccessibilityAvailabilityDetails,
+        ?color: String,
+        ?headsign: String,
+        ?long_route_name: String,
+        ?mode: String,
+        ?route_name: String,
+        ?short_route_name: String,
+        ?text_color: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accessibility: Types::RouteAccessibilityAvailabilityDetails?
+      attr_accessor color: String?
+      attr_accessor headsign: String?
+      attr_accessor long_route_name: String?
+      attr_accessor mode: String?
+      attr_accessor route_name: String?
+      attr_accessor short_route_name: String?
+      attr_accessor text_color: String?
+    end
+
+    class RouteTransitTravelOnlySummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?duration: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor duration: Integer?
+    end
+
+    class RouteTransitTravelStep
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?distance: Integer,
+        ?duration: Integer,
+        ?geometry_offset: Integer,
+        ?instruction: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor distance: Integer?
+      attr_accessor duration: Integer?
+      attr_accessor geometry_offset: Integer?
+      attr_accessor instruction: String?
+      attr_accessor type: String?
+    end
+
+    module RouteTransitTravelStepType
+      DEPART: String
+    end
+
+    module RouteTransitTripStatus
+      ADDED: String
+      CANCELLED: String
+      REPLACED: String
+      SCHEDULED: String
+    end
+
     class RouteTransponder
       include Smithy::Schema::Structure
 
@@ -2393,6 +3979,15 @@ module Aws::GeoRoutes
       attr_accessor system_name: String?
     end
 
+    module RouteTravelMode
+      CAR: String
+      PEDESTRIAN: String
+      SCOOTER: String
+      TRUCK: String
+      INTERMODAL: String
+      TRANSIT: String
+    end
+
     class RouteTravelModeOptions
       include Smithy::Schema::Structure
 
@@ -2401,6 +3996,8 @@ module Aws::GeoRoutes
         ?pedestrian: Types::RoutePedestrianOptions,
         ?scooter: Types::RouteScooterOptions,
         ?truck: Types::RouteTruckOptions,
+        ?intermodal: Types::RouteIntermodalOptions,
+        ?transit: Types::RouteTransitOptions,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2408,6 +4005,13 @@ module Aws::GeoRoutes
       attr_accessor pedestrian: Types::RoutePedestrianOptions?
       attr_accessor scooter: Types::RouteScooterOptions?
       attr_accessor truck: Types::RouteTruckOptions?
+      attr_accessor intermodal: Types::RouteIntermodalOptions?
+      attr_accessor transit: Types::RouteTransitOptions?
+    end
+
+    module RouteTravelStepType
+      DEFAULT: String
+      TURN_BY_TURN: String
     end
 
     class RouteTruckOptions
@@ -2457,6 +4061,18 @@ module Aws::GeoRoutes
       attr_accessor width: Integer?
     end
 
+    module RouteTruckType
+      LIGHT_TRUCK: String
+      STRAIGHT_TRUCK: String
+      TRACTOR: String
+    end
+
+    module RouteTurnIntensity
+      SHARP: String
+      SLIGHT: String
+      TYPICAL: String
+    end
+
     class RouteTurnStepDetails
       include Smithy::Schema::Structure
 
@@ -2489,6 +4105,27 @@ module Aws::GeoRoutes
       attr_accessor steering_direction: String?
       attr_accessor turn_angle: Float?
       attr_accessor turn_intensity: String?
+    end
+
+    class RouteVehicleAfterTravelStep
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?charge_step_details: Types::RouteChargeStepDetails,
+        ?duration: Integer,
+        ?instruction: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor charge_step_details: Types::RouteChargeStepDetails?
+      attr_accessor duration: Integer?
+      attr_accessor instruction: String?
+      attr_accessor type: String?
+    end
+
+    module RouteVehicleAfterTravelStepType
+      PARK: String
     end
 
     class RouteVehicleArrival
@@ -2536,10 +4173,32 @@ module Aws::GeoRoutes
       attr_accessor type: String?
     end
 
+    module RouteVehicleIncidentSeverity
+      CRITICAL: String
+      HIGH: String
+      MEDIUM: String
+      LOW: String
+    end
+
+    module RouteVehicleIncidentType
+      ACCIDENT: String
+      CONGESTION: String
+      CONSTRUCTION: String
+      DISABLED_VEHICLE: String
+      LANE_RESTRICTION: String
+      MASS_TRANSIT: String
+      OTHER: String
+      PLANNED_EVENT: String
+      ROAD_CLOSURE: String
+      ROAD_HAZARD: String
+      WEATHER: String
+    end
+
     class RouteVehicleLegDetails
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?after_travel_steps: Array[Types::RouteVehicleAfterTravelStep],
         ?arrival: Types::RouteVehicleArrival,
         ?departure: Types::RouteVehicleDeparture,
         ?incidents: Array[Types::RouteVehicleIncident],
@@ -2555,6 +4214,7 @@ module Aws::GeoRoutes
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor after_travel_steps: Array[Types::RouteVehicleAfterTravelStep]?
       attr_accessor arrival: Types::RouteVehicleArrival?
       attr_accessor departure: Types::RouteVehicleDeparture?
       attr_accessor incidents: Array[Types::RouteVehicleIncident]?
@@ -2580,6 +4240,11 @@ module Aws::GeoRoutes
       attr_accessor last_character: String?
     end
 
+    module RouteVehicleMode
+      ALL: String
+      CAR: String
+    end
+
     class RouteVehicleNotice
       include Smithy::Schema::Structure
 
@@ -2593,6 +4258,37 @@ module Aws::GeoRoutes
       attr_accessor code: String?
       attr_accessor details: Array[Types::RouteVehicleNoticeDetail]?
       attr_accessor impact: String?
+    end
+
+    module RouteVehicleNoticeCode
+      ACCURATE_POLYLINE_UNAVAILABLE: String
+      OTHER: String
+      POTENTIAL_VIOLATED_AVOID_TOLL_ROAD_USAGE: String
+      POTENTIAL_VIOLATED_CARPOOL_USAGE: String
+      POTENTIAL_VIOLATED_TURN_RESTRICTION_USAGE: String
+      POTENTIAL_VIOLATED_VEHICLE_RESTRICTION_USAGE: String
+      POTENTIAL_VIOLATED_ZONE_RESTRICTION_USAGE: String
+      SEASONAL_CLOSURE: String
+      TOLLS_DATA_TEMPORARILY_UNAVAILABLE: String
+      TOLLS_DATA_UNAVAILABLE: String
+      TOLL_TRANSPONDER: String
+      VIOLATED_AVOID_CONTROLLED_ACCESS_HIGHWAY: String
+      VIOLATED_AVOID_DIFFICULT_TURNS: String
+      VIOLATED_AVOID_DIRT_ROAD: String
+      VIOLATED_AVOID_SEASONAL_CLOSURE: String
+      VIOLATED_AVOID_TOLL_ROAD: String
+      VIOLATED_AVOID_TOLL_TRANSPONDER: String
+      VIOLATED_AVOID_TRUCK_ROAD_TYPE: String
+      VIOLATED_AVOID_TUNNEL: String
+      VIOLATED_AVOID_U_TURNS: String
+      VIOLATED_BLOCKED_ROAD: String
+      VIOLATED_CARPOOL: String
+      VIOLATED_EMERGENCY_GATE: String
+      VIOLATED_START_DIRECTION: String
+      VIOLATED_TURN_RESTRICTION: String
+      VIOLATED_VEHICLE_RESTRICTION: String
+      VIOLATED_ZONE_RESTRICTION: String
+      TRAVEL_TIME_EXCEEDS_DRIVER_WORK_HOURS: String
     end
 
     class RouteVehicleNoticeDetail
@@ -2634,6 +4330,9 @@ module Aws::GeoRoutes
         ?position: Array[Float],
         ?side_of_street: String,
         ?waypoint_index: Integer,
+        ?access_point_details: Types::RouteAccessPointDetails,
+        ?station_details: Types::RouteStationDetails,
+        ?type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2642,6 +4341,16 @@ module Aws::GeoRoutes
       attr_accessor position: Array[Float]?
       attr_accessor side_of_street: String?
       attr_accessor waypoint_index: Integer?
+      attr_accessor access_point_details: Types::RouteAccessPointDetails?
+      attr_accessor station_details: Types::RouteStationDetails?
+      attr_accessor type: String?
+    end
+
+    module RouteVehiclePlaceType
+      ACCESS_POINT: String
+      DOCKING_STATION: String
+      PARKING_LOT: String
+      STATION: String
     end
 
     class RouteVehicleSpan
@@ -2776,6 +4485,22 @@ module Aws::GeoRoutes
       attr_accessor u_turn_step_details: Types::RouteUTurnStepDetails?
     end
 
+    module RouteVehicleTravelStepType
+      ARRIVE: String
+      CONTINUE: String
+      CONTINUE_HIGHWAY: String
+      DEPART: String
+      ENTER_HIGHWAY: String
+      EXIT: String
+      KEEP: String
+      RAMP: String
+      ROUNDABOUT_ENTER: String
+      ROUNDABOUT_EXIT: String
+      ROUNDABOUT_PASS: String
+      TURN: String
+      U_TURN: String
+    end
+
     class RouteViolatedConstraints
       include Smithy::Schema::Structure
 
@@ -2848,6 +4573,29 @@ module Aws::GeoRoutes
       attr_accessor stop_duration: Integer?
     end
 
+    class RouteWebLink
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?anchor_text: String,
+        ?description: String,
+        ?device_type: String,
+        ?url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor anchor_text: String?
+      attr_accessor description: String?
+      attr_accessor device_type: String?
+      attr_accessor url: String?
+    end
+
+    module RouteWebLinkDeviceType
+      ANDROID: String
+      IOS: String
+      WEB: String
+    end
+
     class RouteWeightConstraint
       include Smithy::Schema::Structure
 
@@ -2861,6 +4609,12 @@ module Aws::GeoRoutes
       attr_accessor value: Integer?
     end
 
+    module RouteWeightConstraintType
+      CURRENT: String
+      GROSS: String
+      UNKNOWN: String
+    end
+
     class RouteZone
       include Smithy::Schema::Structure
 
@@ -2872,6 +4626,22 @@ module Aws::GeoRoutes
 
       attr_accessor category: String?
       attr_accessor name: String?
+    end
+
+    module RouteZoneCategory
+      CONGESTION_PRICING: String
+      ENVIRONMENTAL: String
+      VIGNETTE: String
+    end
+
+    module RoutingObjective
+      FASTEST_ROUTE: String
+      SHORTEST_ROUTE: String
+    end
+
+    module SideOfStreetMatchingStrategy
+      ANY_STREET: String
+      DIVIDED_STREET_ONLY: String
     end
 
     class SnapToRoadsRequest
@@ -2925,6 +4695,11 @@ module Aws::GeoRoutes
       attr_accessor message: String?
     end
 
+    module TrafficUsage
+      IGNORE_TRAFFIC_DATA: String
+      USE_TRAFFIC_DATA: String
+    end
+
     class ValidationException
       include Smithy::Schema::Structure
 
@@ -2951,6 +4726,15 @@ module Aws::GeoRoutes
 
       attr_accessor name: String?
       attr_accessor message: String?
+    end
+
+    module ValidationExceptionReason
+      UNKNOWN_OPERATION: String
+      MISSING: String
+      CANNOT_PARSE: String
+      FIELD_VALIDATION_FAILED: String
+      OTHER: String
+      UNKNOWN_FIELD: String
     end
 
     class WaypointOptimizationAccessHours
@@ -3026,6 +4810,11 @@ module Aws::GeoRoutes
       attr_accessor u_turns: bool?
     end
 
+    module WaypointOptimizationClusteringAlgorithm
+      DRIVING_DISTANCE: String
+      TOPOLOGY_SEGMENT: String
+    end
+
     class WaypointOptimizationClusteringOptions
       include Smithy::Schema::Structure
 
@@ -3058,6 +4847,15 @@ module Aws::GeoRoutes
       attr_accessor to: String?
       attr_accessor travel_duration: Integer?
       attr_accessor wait_duration: Integer?
+    end
+
+    module WaypointOptimizationConstraint
+      ACCESS_HOURS: String
+      APPOINTMENT_TIME: String
+      BEFORE: String
+      HEADING: String
+      SERVICE_DURATION: String
+      SIDE_OF_STREET: String
     end
 
     class WaypointOptimizationDestinationOptions
@@ -3129,6 +4927,20 @@ module Aws::GeoRoutes
 
       attr_accessor constraint: String?
       attr_accessor reason: String?
+    end
+
+    module WaypointOptimizationHazardousCargoType
+      COMBUSTIBLE: String
+      CORROSIVE: String
+      EXPLOSIVE: String
+      FLAMMABLE: String
+      GAS: String
+      HARMFUL_TO_WATER: String
+      ORGANIC: String
+      OTHER: String
+      POISON: String
+      POISONOUS_INHALATION: String
+      RADIOACTIVE: String
     end
 
     class WaypointOptimizationImpedingWaypoint
@@ -3224,6 +5036,16 @@ module Aws::GeoRoutes
       attr_accessor profile: String?
     end
 
+    module WaypointOptimizationSequencingObjective
+      FASTEST_ROUTE: String
+      SHORTEST_ROUTE: String
+    end
+
+    module WaypointOptimizationServiceTimeTreatment
+      REST: String
+      WORK: String
+    end
+
     class WaypointOptimizationSideOfStreetOptions
       include Smithy::Schema::Structure
 
@@ -3276,6 +5098,13 @@ module Aws::GeoRoutes
       attr_accessor trailer_count: Integer?
     end
 
+    module WaypointOptimizationTravelMode
+      CAR: String
+      PEDESTRIAN: String
+      SCOOTER: String
+      TRUCK: String
+    end
+
     class WaypointOptimizationTravelModeOptions
       include Smithy::Schema::Structure
 
@@ -3314,6 +5143,11 @@ module Aws::GeoRoutes
       attr_accessor tunnel_restriction_code: String?
       attr_accessor weight_per_axle: Integer?
       attr_accessor width: Integer?
+    end
+
+    module WaypointOptimizationTruckType
+      STRAIGHT_TRUCK: String
+      TRACTOR: String
     end
 
     class WaypointOptimizationWaypoint

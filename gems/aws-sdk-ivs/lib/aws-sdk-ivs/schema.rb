@@ -7,6 +7,13 @@ module Aws::Ivs
   module Schema
 
     AccessDeniedException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ivs#AccessDeniedException", name: "AccessDeniedException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 403})
+    AdBreakId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ivs#AdBreakId", name: "AdBreakId", traits: {"smithy.api#length" => {"min" => 12, "max" => 12}, "smithy.api#pattern" => "^[a-zA-Z0-9]+$"})
+    AdConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ivs#AdConfiguration", name: "AdConfiguration")
+    AdConfigurationArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ivs#AdConfigurationArn", name: "AdConfigurationArn", traits: {"smithy.api#length" => {"min" => 0, "max" => 128}, "smithy.api#pattern" => "^arn:aws:ivs:[a-z0-9-]+:[0-9]+:ad-configuration/[a-zA-Z0-9-]+$"})
+    AdConfigurationList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ivs#AdConfigurationList", name: "AdConfigurationList")
+    AdConfigurationName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ivs#AdConfigurationName", name: "AdConfigurationName", traits: {"smithy.api#length" => {"min" => 0, "max" => 128}, "smithy.api#pattern" => "^[a-zA-Z0-9-_]*$"})
+    AdConfigurationSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ivs#AdConfigurationSummary", name: "AdConfigurationSummary")
+    AdDurationSeconds = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.ivs#AdDurationSeconds", name: "AdDurationSeconds", traits: {"smithy.api#range" => {"min" => 1, "max" => 300}})
     AudioConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ivs#AudioConfiguration", name: "AudioConfiguration")
     AudioConfigurationList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ivs#AudioConfigurationList", name: "AudioConfigurationList")
     BatchError = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ivs#BatchError", name: "BatchError")
@@ -23,6 +30,7 @@ module Aws::Ivs
     BatchStartViewerSessionRevocationViewerSessionList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ivs#BatchStartViewerSessionRevocationViewerSessionList", name: "BatchStartViewerSessionRevocationViewerSessionList", traits: {"smithy.api#length" => {"min" => 1, "max" => 20}})
     Boolean = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.ivs#Boolean", name: "Boolean", traits: {"smithy.api#default" => false})
     Channel = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ivs#Channel", name: "Channel")
+    ChannelAdConfigurationArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ivs#ChannelAdConfigurationArn", name: "ChannelAdConfigurationArn", traits: {"smithy.api#length" => {"min" => 0, "max" => 128}, "smithy.api#pattern" => "^^$|^arn:aws:ivs:[a-z0-9-]+:[0-9]+:ad-configuration/[a-zA-Z0-9-]+$$"})
     ChannelArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ivs#ChannelArn", name: "ChannelArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^arn:aws:ivs:[a-z0-9-]+:[0-9]+:channel/[a-zA-Z0-9-]+$"})
     ChannelArnList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ivs#ChannelArnList", name: "ChannelArnList", traits: {"smithy.api#length" => {"min" => 1, "max" => 50}})
     ChannelLatencyMode = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ivs#ChannelLatencyMode", name: "ChannelLatencyMode", traits: {"smithy.api#enum" => [{"value" => "NORMAL", "name" => "NormalLatency"}, {"value" => "LOW", "name" => "LowLatency"}]})
@@ -36,6 +44,8 @@ module Aws::Ivs
     Channels = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ivs#Channels", name: "Channels")
     ConflictException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ivs#ConflictException", name: "ConflictException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 409})
     ContainerFormat = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ivs#ContainerFormat", name: "ContainerFormat", traits: {"smithy.api#enum" => [{"value" => "TS", "name" => "TS"}, {"value" => "FRAGMENTED_MP4", "name" => "FragmentedMP4"}]})
+    CreateAdConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ivs#CreateAdConfigurationRequest", name: "CreateAdConfigurationRequest")
+    CreateAdConfigurationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ivs#CreateAdConfigurationResponse", name: "CreateAdConfigurationResponse")
     CreateChannelInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ivs#CreateChannelInput", name: "CreateChannelInput")
     CreateChannelOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ivs#CreateChannelOutput", name: "CreateChannelOutput")
     CreatePlaybackRestrictionPolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ivs#CreatePlaybackRestrictionPolicyRequest", name: "CreatePlaybackRestrictionPolicyRequest")
@@ -44,6 +54,7 @@ module Aws::Ivs
     CreateRecordingConfigurationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ivs#CreateRecordingConfigurationOutput", name: "CreateRecordingConfigurationOutput")
     CreateStreamKeyInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ivs#CreateStreamKeyInput", name: "CreateStreamKeyInput")
     CreateStreamKeyOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ivs#CreateStreamKeyOutput", name: "CreateStreamKeyOutput")
+    DeleteAdConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ivs#DeleteAdConfigurationRequest", name: "DeleteAdConfigurationRequest")
     DeleteChannelInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ivs#DeleteChannelInput", name: "DeleteChannelInput")
     DeletePlaybackKeyPairInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ivs#DeletePlaybackKeyPairInput", name: "DeletePlaybackKeyPairInput")
     DeletePlaybackKeyPairOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ivs#DeletePlaybackKeyPairOutput", name: "DeletePlaybackKeyPairOutput")
@@ -51,6 +62,8 @@ module Aws::Ivs
     DeleteRecordingConfigurationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ivs#DeleteRecordingConfigurationInput", name: "DeleteRecordingConfigurationInput")
     DeleteStreamKeyInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ivs#DeleteStreamKeyInput", name: "DeleteStreamKeyInput")
     DestinationConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ivs#DestinationConfiguration", name: "DestinationConfiguration")
+    GetAdConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ivs#GetAdConfigurationRequest", name: "GetAdConfigurationRequest")
+    GetAdConfigurationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ivs#GetAdConfigurationResponse", name: "GetAdConfigurationResponse")
     GetChannelInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ivs#GetChannelInput", name: "GetChannelInput")
     GetChannelOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ivs#GetChannelOutput", name: "GetChannelOutput")
     GetPlaybackKeyPairInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ivs#GetPlaybackKeyPairInput", name: "GetPlaybackKeyPairInput")
@@ -71,10 +84,14 @@ module Aws::Ivs
     IngestConfigurations = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ivs#IngestConfigurations", name: "IngestConfigurations")
     IngestEndpoint = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ivs#IngestEndpoint", name: "IngestEndpoint")
     InsecureIngest = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.ivs#InsecureIngest", name: "InsecureIngest", traits: {"smithy.api#default" => false})
+    InsertAdBreakRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ivs#InsertAdBreakRequest", name: "InsertAdBreakRequest")
+    InsertAdBreakResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ivs#InsertAdBreakResponse", name: "InsertAdBreakResponse")
     Integer = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.ivs#Integer", name: "Integer", traits: {"smithy.api#default" => 0})
     InternalServerException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ivs#InternalServerException", name: "InternalServerException", traits: {"smithy.api#error" => "server", "smithy.api#httpError" => 500})
     IsAuthorized = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.ivs#IsAuthorized", name: "IsAuthorized", traits: {"smithy.api#default" => false})
     IsMultitrackInputEnabled = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.ivs#IsMultitrackInputEnabled", name: "IsMultitrackInputEnabled", traits: {"smithy.api#default" => false})
+    ListAdConfigurationsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ivs#ListAdConfigurationsRequest", name: "ListAdConfigurationsRequest")
+    ListAdConfigurationsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ivs#ListAdConfigurationsResponse", name: "ListAdConfigurationsResponse")
     ListChannelsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ivs#ListChannelsInput", name: "ListChannelsInput")
     ListChannelsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ivs#ListChannelsOutput", name: "ListChannelsOutput")
     ListPlaybackKeyPairsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ivs#ListPlaybackKeyPairsInput", name: "ListPlaybackKeyPairsInput")
@@ -91,12 +108,16 @@ module Aws::Ivs
     ListStreamsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ivs#ListStreamsOutput", name: "ListStreamsOutput")
     ListTagsForResourceInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ivs#ListTagsForResourceInput", name: "ListTagsForResourceInput")
     ListTagsForResourceOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ivs#ListTagsForResourceOutput", name: "ListTagsForResourceOutput")
+    MaxAdConfigurationResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.ivs#MaxAdConfigurationResults", name: "MaxAdConfigurationResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}})
     MaxChannelResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.ivs#MaxChannelResults", name: "MaxChannelResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}})
     MaxPlaybackKeyPairResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.ivs#MaxPlaybackKeyPairResults", name: "MaxPlaybackKeyPairResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}})
     MaxPlaybackRestrictionPolicyResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.ivs#MaxPlaybackRestrictionPolicyResults", name: "MaxPlaybackRestrictionPolicyResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}})
     MaxRecordingConfigurationResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.ivs#MaxRecordingConfigurationResults", name: "MaxRecordingConfigurationResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}})
     MaxStreamKeyResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.ivs#MaxStreamKeyResults", name: "MaxStreamKeyResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 50}})
     MaxStreamResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.ivs#MaxStreamResults", name: "MaxStreamResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}})
+    MediaTailorPlaybackConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ivs#MediaTailorPlaybackConfiguration", name: "MediaTailorPlaybackConfiguration")
+    MediaTailorPlaybackConfigurationArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ivs#MediaTailorPlaybackConfigurationArn", name: "MediaTailorPlaybackConfigurationArn", traits: {"smithy.api#length" => {"min" => 0, "max" => 128}, "smithy.api#pattern" => "^arn:aws:mediatailor:[a-z0-9-]+:[0-9]+:playbackConfiguration/[a-zA-Z0-9-]+$"})
+    MediaTailorPlaybackConfigurationsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ivs#MediaTailorPlaybackConfigurationsList", name: "MediaTailorPlaybackConfigurationsList", traits: {"smithy.api#length" => {"min" => 1, "max" => 3}})
     MultitrackInputConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ivs#MultitrackInputConfiguration", name: "MultitrackInputConfiguration")
     MultitrackMaximumResolution = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ivs#MultitrackMaximumResolution", name: "MultitrackMaximumResolution")
     MultitrackPolicy = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ivs#MultitrackPolicy", name: "MultitrackPolicy")
@@ -120,6 +141,7 @@ module Aws::Ivs
     PlaybackRestrictionPolicyName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ivs#PlaybackRestrictionPolicyName", name: "PlaybackRestrictionPolicyName", traits: {"smithy.api#length" => {"min" => 0, "max" => 128}, "smithy.api#pattern" => "^[a-zA-Z0-9-_]*$"})
     PlaybackRestrictionPolicySummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ivs#PlaybackRestrictionPolicySummary", name: "PlaybackRestrictionPolicySummary")
     PlaybackURL = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ivs#PlaybackURL", name: "PlaybackURL")
+    PostRollConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ivs#PostRollConfiguration", name: "PostRollConfiguration")
     PutMetadataInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ivs#PutMetadataInput", name: "PutMetadataInput")
     RecordingConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ivs#RecordingConfiguration", name: "RecordingConfiguration")
     RecordingConfigurationArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ivs#RecordingConfigurationArn", name: "RecordingConfigurationArn", traits: {"smithy.api#length" => {"min" => 0, "max" => 128}, "smithy.api#pattern" => "^arn:aws:ivs:[a-z0-9-]+:[0-9]+:recording-configuration/[a-zA-Z0-9-]+$"})
@@ -138,6 +160,7 @@ module Aws::Ivs
     S3DestinationBucketName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ivs#S3DestinationBucketName", name: "S3DestinationBucketName", traits: {"smithy.api#length" => {"min" => 3, "max" => 63}, "smithy.api#pattern" => "^[a-z0-9-.]+$"})
     S3DestinationConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ivs#S3DestinationConfiguration", name: "S3DestinationConfiguration")
     ServiceQuotaExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ivs#ServiceQuotaExceededException", name: "ServiceQuotaExceededException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 402})
+    ServiceUnavailable = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ivs#ServiceUnavailable", name: "ServiceUnavailable", traits: {"smithy.api#error" => "server", "smithy.api#httpError" => 503})
     Srt = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ivs#Srt", name: "Srt")
     SrtEndpoint = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ivs#SrtEndpoint", name: "SrtEndpoint")
     SrtPassphrase = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ivs#SrtPassphrase", name: "SrtPassphrase", traits: {"smithy.api#sensitive" => {}})
@@ -169,11 +192,11 @@ module Aws::Ivs
     StreamUnavailable = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ivs#StreamUnavailable", name: "StreamUnavailable", traits: {"smithy.api#error" => "server", "smithy.api#httpError" => 503})
     StreamViewerCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.ivs#StreamViewerCount", name: "StreamViewerCount", traits: {"smithy.api#default" => 0})
     String = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ivs#String", name: "String")
-    TagKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ivs#TagKey", name: "TagKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}})
+    TagKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ivs#TagKey", name: "TagKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]+)$"})
     TagKeyList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ivs#TagKeyList", name: "TagKeyList", traits: {"smithy.api#length" => {"min" => 0, "max" => 50}})
     TagResourceInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ivs#TagResourceInput", name: "TagResourceInput")
     TagResourceOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ivs#TagResourceOutput", name: "TagResourceOutput")
-    TagValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ivs#TagValue", name: "TagValue", traits: {"smithy.api#length" => {"max" => 256}})
+    TagValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ivs#TagValue", name: "TagValue", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#pattern" => "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"})
     Tags = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.ivs#Tags", name: "Tags", traits: {"smithy.api#length" => {"min" => 0, "max" => 50}})
     TargetIntervalSeconds = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.ivs#TargetIntervalSeconds", name: "TargetIntervalSeconds", traits: {"smithy.api#range" => {"min" => 1, "max" => 60}})
     ThrottlingException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ivs#ThrottlingException", name: "ThrottlingException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 429})
@@ -185,6 +208,8 @@ module Aws::Ivs
     TranscodePreset = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ivs#TranscodePreset", name: "TranscodePreset")
     UntagResourceInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ivs#UntagResourceInput", name: "UntagResourceInput")
     UntagResourceOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ivs#UntagResourceOutput", name: "UntagResourceOutput")
+    UpdateAdConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ivs#UpdateAdConfigurationRequest", name: "UpdateAdConfigurationRequest")
+    UpdateAdConfigurationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ivs#UpdateAdConfigurationResponse", name: "UpdateAdConfigurationResponse")
     UpdateChannelInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ivs#UpdateChannelInput", name: "UpdateChannelInput")
     UpdateChannelOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ivs#UpdateChannelOutput", name: "UpdateChannelOutput")
     UpdatePlaybackRestrictionPolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ivs#UpdatePlaybackRestrictionPolicyRequest", name: "UpdatePlaybackRestrictionPolicyRequest")
@@ -197,8 +222,29 @@ module Aws::Ivs
     ErrorCode = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ivs#errorCode", name: "ErrorCode")
     ErrorMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ivs#errorMessage", name: "ErrorMessage")
 
+    AccessDeniedException.add_member(:access_control_allow_origin, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "accessControlAllowOrigin", traits: {"smithy.api#httpHeader" => "Access-Control-Allow-Origin"}))
+    AccessDeniedException.add_member(:access_control_expose_headers, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "accessControlExposeHeaders", traits: {"smithy.api#httpHeader" => "Access-Control-Expose-Headers"}))
+    AccessDeniedException.add_member(:cache_control, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cacheControl", traits: {"smithy.api#httpHeader" => "Cache-Control"}))
+    AccessDeniedException.add_member(:content_security_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "contentSecurityPolicy", traits: {"smithy.api#httpHeader" => "Content-Security-Policy"}))
+    AccessDeniedException.add_member(:strict_transport_security, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "strictTransportSecurity", traits: {"smithy.api#httpHeader" => "Strict-Transport-Security"}))
+    AccessDeniedException.add_member(:x_content_type_options, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "xContentTypeOptions", traits: {"smithy.api#httpHeader" => "X-Content-Type-Options"}))
+    AccessDeniedException.add_member(:x_frame_options, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "xFrameOptions", traits: {"smithy.api#httpHeader" => "X-Frame-Options"}))
+    AccessDeniedException.add_member(:x_amzn_error_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "xAmznErrorType", traits: {"smithy.api#httpHeader" => "x-amzn-ErrorType"}))
     AccessDeniedException.add_member(:exception_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "exceptionMessage"))
     AccessDeniedException.type = Types::AccessDeniedException
+    AdConfiguration.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AdConfigurationArn, name: "arn", traits: {"smithy.api#required" => {}}))
+    AdConfiguration.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AdConfigurationName, name: "name"))
+    AdConfiguration.add_member(:media_tailor_playback_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: MediaTailorPlaybackConfigurationsList, name: "mediaTailorPlaybackConfigurations", traits: {"smithy.api#required" => {}}))
+    AdConfiguration.add_member(:post_roll_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: PostRollConfiguration, name: "postRollConfiguration"))
+    AdConfiguration.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags"))
+    AdConfiguration.type = Types::AdConfiguration
+    AdConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AdConfigurationSummary, name: "member"))
+    AdConfigurationSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AdConfigurationArn, name: "arn", traits: {"smithy.api#required" => {}}))
+    AdConfigurationSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AdConfigurationName, name: "name"))
+    AdConfigurationSummary.add_member(:media_tailor_playback_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: MediaTailorPlaybackConfigurationsList, name: "mediaTailorPlaybackConfigurations", traits: {"smithy.api#required" => {}}))
+    AdConfigurationSummary.add_member(:post_roll_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: PostRollConfiguration, name: "postRollConfiguration"))
+    AdConfigurationSummary.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags"))
+    AdConfigurationSummary.type = Types::AdConfigurationSummary
     AudioConfiguration.add_member(:codec, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "codec"))
     AudioConfiguration.add_member(:target_bitrate, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "targetBitrate", traits: {"smithy.api#default" => 0}))
     AudioConfiguration.add_member(:sample_rate, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "sampleRate", traits: {"smithy.api#default" => 0}))
@@ -213,11 +259,25 @@ module Aws::Ivs
     BatchErrors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchError, name: "member"))
     BatchGetChannelInput.add_member(:arns, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelArnList, name: "arns", traits: {"smithy.api#required" => {}}))
     BatchGetChannelInput.type = Types::BatchGetChannelInput
+    BatchGetChannelOutput.add_member(:access_control_allow_origin, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "accessControlAllowOrigin", traits: {"smithy.api#httpHeader" => "Access-Control-Allow-Origin"}))
+    BatchGetChannelOutput.add_member(:access_control_expose_headers, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "accessControlExposeHeaders", traits: {"smithy.api#httpHeader" => "Access-Control-Expose-Headers"}))
+    BatchGetChannelOutput.add_member(:cache_control, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cacheControl", traits: {"smithy.api#httpHeader" => "Cache-Control"}))
+    BatchGetChannelOutput.add_member(:content_security_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "contentSecurityPolicy", traits: {"smithy.api#httpHeader" => "Content-Security-Policy"}))
+    BatchGetChannelOutput.add_member(:strict_transport_security, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "strictTransportSecurity", traits: {"smithy.api#httpHeader" => "Strict-Transport-Security"}))
+    BatchGetChannelOutput.add_member(:x_content_type_options, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "xContentTypeOptions", traits: {"smithy.api#httpHeader" => "X-Content-Type-Options"}))
+    BatchGetChannelOutput.add_member(:x_frame_options, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "xFrameOptions", traits: {"smithy.api#httpHeader" => "X-Frame-Options"}))
     BatchGetChannelOutput.add_member(:channels, ::Smithy::Schema::Shapes::MemberShape.new(target: Channels, name: "channels"))
     BatchGetChannelOutput.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchErrors, name: "errors"))
     BatchGetChannelOutput.type = Types::BatchGetChannelOutput
     BatchGetStreamKeyInput.add_member(:arns, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamKeyArnList, name: "arns", traits: {"smithy.api#required" => {}}))
     BatchGetStreamKeyInput.type = Types::BatchGetStreamKeyInput
+    BatchGetStreamKeyOutput.add_member(:access_control_allow_origin, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "accessControlAllowOrigin", traits: {"smithy.api#httpHeader" => "Access-Control-Allow-Origin"}))
+    BatchGetStreamKeyOutput.add_member(:access_control_expose_headers, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "accessControlExposeHeaders", traits: {"smithy.api#httpHeader" => "Access-Control-Expose-Headers"}))
+    BatchGetStreamKeyOutput.add_member(:cache_control, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cacheControl", traits: {"smithy.api#httpHeader" => "Cache-Control"}))
+    BatchGetStreamKeyOutput.add_member(:content_security_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "contentSecurityPolicy", traits: {"smithy.api#httpHeader" => "Content-Security-Policy"}))
+    BatchGetStreamKeyOutput.add_member(:strict_transport_security, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "strictTransportSecurity", traits: {"smithy.api#httpHeader" => "Strict-Transport-Security"}))
+    BatchGetStreamKeyOutput.add_member(:x_content_type_options, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "xContentTypeOptions", traits: {"smithy.api#httpHeader" => "X-Content-Type-Options"}))
+    BatchGetStreamKeyOutput.add_member(:x_frame_options, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "xFrameOptions", traits: {"smithy.api#httpHeader" => "X-Frame-Options"}))
     BatchGetStreamKeyOutput.add_member(:stream_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamKeys, name: "streamKeys"))
     BatchGetStreamKeyOutput.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchErrors, name: "errors"))
     BatchGetStreamKeyOutput.type = Types::BatchGetStreamKeyOutput
@@ -229,6 +289,13 @@ module Aws::Ivs
     BatchStartViewerSessionRevocationErrors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchStartViewerSessionRevocationError, name: "member"))
     BatchStartViewerSessionRevocationInput.add_member(:viewer_sessions, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchStartViewerSessionRevocationViewerSessionList, name: "viewerSessions", traits: {"smithy.api#required" => {}}))
     BatchStartViewerSessionRevocationInput.type = Types::BatchStartViewerSessionRevocationInput
+    BatchStartViewerSessionRevocationOutput.add_member(:access_control_allow_origin, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "accessControlAllowOrigin", traits: {"smithy.api#httpHeader" => "Access-Control-Allow-Origin"}))
+    BatchStartViewerSessionRevocationOutput.add_member(:access_control_expose_headers, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "accessControlExposeHeaders", traits: {"smithy.api#httpHeader" => "Access-Control-Expose-Headers"}))
+    BatchStartViewerSessionRevocationOutput.add_member(:cache_control, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cacheControl", traits: {"smithy.api#httpHeader" => "Cache-Control"}))
+    BatchStartViewerSessionRevocationOutput.add_member(:content_security_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "contentSecurityPolicy", traits: {"smithy.api#httpHeader" => "Content-Security-Policy"}))
+    BatchStartViewerSessionRevocationOutput.add_member(:strict_transport_security, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "strictTransportSecurity", traits: {"smithy.api#httpHeader" => "Strict-Transport-Security"}))
+    BatchStartViewerSessionRevocationOutput.add_member(:x_content_type_options, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "xContentTypeOptions", traits: {"smithy.api#httpHeader" => "X-Content-Type-Options"}))
+    BatchStartViewerSessionRevocationOutput.add_member(:x_frame_options, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "xFrameOptions", traits: {"smithy.api#httpHeader" => "X-Frame-Options"}))
     BatchStartViewerSessionRevocationOutput.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchStartViewerSessionRevocationErrors, name: "errors"))
     BatchStartViewerSessionRevocationOutput.type = Types::BatchStartViewerSessionRevocationOutput
     BatchStartViewerSessionRevocationViewerSession.add_member(:channel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelArn, name: "channelArn", traits: {"smithy.api#required" => {}}))
@@ -251,9 +318,18 @@ module Aws::Ivs
     Channel.add_member(:playback_restriction_policy_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelPlaybackRestrictionPolicyArn, name: "playbackRestrictionPolicyArn"))
     Channel.add_member(:multitrack_input_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: MultitrackInputConfiguration, name: "multitrackInputConfiguration"))
     Channel.add_member(:container_format, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerFormat, name: "containerFormat"))
+    Channel.add_member(:ad_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelAdConfigurationArn, name: "adConfigurationArn"))
     Channel.type = Types::Channel
     ChannelArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelArn, name: "member"))
     ChannelList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelSummary, name: "member"))
+    ChannelNotBroadcasting.add_member(:access_control_allow_origin, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "accessControlAllowOrigin", traits: {"smithy.api#httpHeader" => "Access-Control-Allow-Origin"}))
+    ChannelNotBroadcasting.add_member(:access_control_expose_headers, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "accessControlExposeHeaders", traits: {"smithy.api#httpHeader" => "Access-Control-Expose-Headers"}))
+    ChannelNotBroadcasting.add_member(:cache_control, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cacheControl", traits: {"smithy.api#httpHeader" => "Cache-Control"}))
+    ChannelNotBroadcasting.add_member(:content_security_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "contentSecurityPolicy", traits: {"smithy.api#httpHeader" => "Content-Security-Policy"}))
+    ChannelNotBroadcasting.add_member(:strict_transport_security, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "strictTransportSecurity", traits: {"smithy.api#httpHeader" => "Strict-Transport-Security"}))
+    ChannelNotBroadcasting.add_member(:x_content_type_options, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "xContentTypeOptions", traits: {"smithy.api#httpHeader" => "X-Content-Type-Options"}))
+    ChannelNotBroadcasting.add_member(:x_frame_options, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "xFrameOptions", traits: {"smithy.api#httpHeader" => "X-Frame-Options"}))
+    ChannelNotBroadcasting.add_member(:x_amzn_error_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "xAmznErrorType", traits: {"smithy.api#httpHeader" => "x-amzn-ErrorType"}))
     ChannelNotBroadcasting.add_member(:exception_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "exceptionMessage"))
     ChannelNotBroadcasting.type = Types::ChannelNotBroadcasting
     ChannelSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelArn, name: "arn"))
@@ -266,14 +342,30 @@ module Aws::Ivs
     ChannelSummary.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelType, name: "type"))
     ChannelSummary.add_member(:preset, ::Smithy::Schema::Shapes::MemberShape.new(target: TranscodePreset, name: "preset"))
     ChannelSummary.add_member(:playback_restriction_policy_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelPlaybackRestrictionPolicyArn, name: "playbackRestrictionPolicyArn"))
+    ChannelSummary.add_member(:ad_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelAdConfigurationArn, name: "adConfigurationArn"))
     ChannelSummary.type = Types::ChannelSummary
     ChannelType.add_member(:basic_channel_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BasicChannelType", traits: {"smithy.api#enumValue" => "BASIC"}))
     ChannelType.add_member(:standard_channel_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "StandardChannelType", traits: {"smithy.api#enumValue" => "STANDARD"}))
     ChannelType.add_member(:advanced_sd_channel_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AdvancedSDChannelType", traits: {"smithy.api#enumValue" => "ADVANCED_SD"}))
     ChannelType.add_member(:advanced_hd_channel_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AdvancedHDChannelType", traits: {"smithy.api#enumValue" => "ADVANCED_HD"}))
     Channels.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Channel, name: "member"))
+    ConflictException.add_member(:access_control_allow_origin, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "accessControlAllowOrigin", traits: {"smithy.api#httpHeader" => "Access-Control-Allow-Origin"}))
+    ConflictException.add_member(:access_control_expose_headers, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "accessControlExposeHeaders", traits: {"smithy.api#httpHeader" => "Access-Control-Expose-Headers"}))
+    ConflictException.add_member(:cache_control, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cacheControl", traits: {"smithy.api#httpHeader" => "Cache-Control"}))
+    ConflictException.add_member(:content_security_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "contentSecurityPolicy", traits: {"smithy.api#httpHeader" => "Content-Security-Policy"}))
+    ConflictException.add_member(:strict_transport_security, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "strictTransportSecurity", traits: {"smithy.api#httpHeader" => "Strict-Transport-Security"}))
+    ConflictException.add_member(:x_content_type_options, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "xContentTypeOptions", traits: {"smithy.api#httpHeader" => "X-Content-Type-Options"}))
+    ConflictException.add_member(:x_frame_options, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "xFrameOptions", traits: {"smithy.api#httpHeader" => "X-Frame-Options"}))
+    ConflictException.add_member(:x_amzn_error_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "xAmznErrorType", traits: {"smithy.api#httpHeader" => "x-amzn-ErrorType"}))
     ConflictException.add_member(:exception_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "exceptionMessage"))
     ConflictException.type = Types::ConflictException
+    CreateAdConfigurationRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AdConfigurationName, name: "name"))
+    CreateAdConfigurationRequest.add_member(:media_tailor_playback_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: MediaTailorPlaybackConfigurationsList, name: "mediaTailorPlaybackConfigurations", traits: {"smithy.api#required" => {}}))
+    CreateAdConfigurationRequest.add_member(:post_roll_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: PostRollConfiguration, name: "postRollConfiguration"))
+    CreateAdConfigurationRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags"))
+    CreateAdConfigurationRequest.type = Types::CreateAdConfigurationRequest
+    CreateAdConfigurationResponse.add_member(:ad_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AdConfiguration, name: "adConfiguration", traits: {"smithy.api#required" => {}}))
+    CreateAdConfigurationResponse.type = Types::CreateAdConfigurationResponse
     CreateChannelInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelName, name: "name"))
     CreateChannelInput.add_member(:latency_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelLatencyMode, name: "latencyMode"))
     CreateChannelInput.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelType, name: "type"))
@@ -285,6 +377,7 @@ module Aws::Ivs
     CreateChannelInput.add_member(:playback_restriction_policy_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelPlaybackRestrictionPolicyArn, name: "playbackRestrictionPolicyArn"))
     CreateChannelInput.add_member(:multitrack_input_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: MultitrackInputConfiguration, name: "multitrackInputConfiguration"))
     CreateChannelInput.add_member(:container_format, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerFormat, name: "containerFormat"))
+    CreateChannelInput.add_member(:ad_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelAdConfigurationArn, name: "adConfigurationArn"))
     CreateChannelInput.type = Types::CreateChannelInput
     CreateChannelOutput.add_member(:channel, ::Smithy::Schema::Shapes::MemberShape.new(target: Channel, name: "channel"))
     CreateChannelOutput.add_member(:stream_key, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamKey, name: "streamKey"))
@@ -311,6 +404,8 @@ module Aws::Ivs
     CreateStreamKeyInput.type = Types::CreateStreamKeyInput
     CreateStreamKeyOutput.add_member(:stream_key, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamKey, name: "streamKey"))
     CreateStreamKeyOutput.type = Types::CreateStreamKeyOutput
+    DeleteAdConfigurationRequest.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AdConfigurationArn, name: "arn", traits: {"smithy.api#required" => {}}))
+    DeleteAdConfigurationRequest.type = Types::DeleteAdConfigurationRequest
     DeleteChannelInput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelArn, name: "arn", traits: {"smithy.api#required" => {}}))
     DeleteChannelInput.type = Types::DeleteChannelInput
     DeletePlaybackKeyPairInput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaybackKeyPairArn, name: "arn", traits: {"smithy.api#required" => {}}))
@@ -324,6 +419,10 @@ module Aws::Ivs
     DeleteStreamKeyInput.type = Types::DeleteStreamKeyInput
     DestinationConfiguration.add_member(:s3, ::Smithy::Schema::Shapes::MemberShape.new(target: S3DestinationConfiguration, name: "s3"))
     DestinationConfiguration.type = Types::DestinationConfiguration
+    GetAdConfigurationRequest.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AdConfigurationArn, name: "arn", traits: {"smithy.api#required" => {}}))
+    GetAdConfigurationRequest.type = Types::GetAdConfigurationRequest
+    GetAdConfigurationResponse.add_member(:ad_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AdConfiguration, name: "adConfiguration"))
+    GetAdConfigurationResponse.type = Types::GetAdConfigurationResponse
     GetChannelInput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelArn, name: "arn", traits: {"smithy.api#required" => {}}))
     GetChannelInput.type = Types::GetChannelInput
     GetChannelOutput.add_member(:channel, ::Smithy::Schema::Shapes::MemberShape.new(target: Channel, name: "channel"))
@@ -365,11 +464,31 @@ module Aws::Ivs
     IngestConfigurations.add_member(:video_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: VideoConfigurationList, name: "videoConfigurations", traits: {"smithy.api#required" => {}}))
     IngestConfigurations.add_member(:audio_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioConfigurationList, name: "audioConfigurations", traits: {"smithy.api#required" => {}}))
     IngestConfigurations.type = Types::IngestConfigurations
+    InsertAdBreakRequest.add_member(:channel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelArn, name: "channelArn", traits: {"smithy.api#required" => {}}))
+    InsertAdBreakRequest.add_member(:duration_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: AdDurationSeconds, name: "durationSeconds", traits: {"smithy.api#required" => {}}))
+    InsertAdBreakRequest.type = Types::InsertAdBreakRequest
+    InsertAdBreakResponse.add_member(:ad_break_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AdBreakId, name: "adBreakId"))
+    InsertAdBreakResponse.type = Types::InsertAdBreakResponse
+    InternalServerException.add_member(:access_control_allow_origin, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "accessControlAllowOrigin", traits: {"smithy.api#httpHeader" => "Access-Control-Allow-Origin"}))
+    InternalServerException.add_member(:access_control_expose_headers, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "accessControlExposeHeaders", traits: {"smithy.api#httpHeader" => "Access-Control-Expose-Headers"}))
+    InternalServerException.add_member(:cache_control, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cacheControl", traits: {"smithy.api#httpHeader" => "Cache-Control"}))
+    InternalServerException.add_member(:content_security_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "contentSecurityPolicy", traits: {"smithy.api#httpHeader" => "Content-Security-Policy"}))
+    InternalServerException.add_member(:strict_transport_security, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "strictTransportSecurity", traits: {"smithy.api#httpHeader" => "Strict-Transport-Security"}))
+    InternalServerException.add_member(:x_content_type_options, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "xContentTypeOptions", traits: {"smithy.api#httpHeader" => "X-Content-Type-Options"}))
+    InternalServerException.add_member(:x_frame_options, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "xFrameOptions", traits: {"smithy.api#httpHeader" => "X-Frame-Options"}))
+    InternalServerException.add_member(:x_amzn_error_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "xAmznErrorType", traits: {"smithy.api#httpHeader" => "x-amzn-ErrorType"}))
     InternalServerException.add_member(:exception_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "exceptionMessage"))
     InternalServerException.type = Types::InternalServerException
+    ListAdConfigurationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
+    ListAdConfigurationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxAdConfigurationResults, name: "maxResults"))
+    ListAdConfigurationsRequest.type = Types::ListAdConfigurationsRequest
+    ListAdConfigurationsResponse.add_member(:ad_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: AdConfigurationList, name: "adConfigurations", traits: {"smithy.api#required" => {}}))
+    ListAdConfigurationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
+    ListAdConfigurationsResponse.type = Types::ListAdConfigurationsResponse
     ListChannelsInput.add_member(:filter_by_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelName, name: "filterByName"))
     ListChannelsInput.add_member(:filter_by_recording_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelRecordingConfigurationArn, name: "filterByRecordingConfigurationArn"))
     ListChannelsInput.add_member(:filter_by_playback_restriction_policy_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelPlaybackRestrictionPolicyArn, name: "filterByPlaybackRestrictionPolicyArn"))
+    ListChannelsInput.add_member(:filter_by_ad_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelAdConfigurationArn, name: "filterByAdConfigurationArn"))
     ListChannelsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
     ListChannelsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxChannelResults, name: "maxResults"))
     ListChannelsInput.type = Types::ListChannelsInput
@@ -419,6 +538,9 @@ module Aws::Ivs
     ListTagsForResourceInput.type = Types::ListTagsForResourceInput
     ListTagsForResourceOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags", traits: {"smithy.api#required" => {}}))
     ListTagsForResourceOutput.type = Types::ListTagsForResourceOutput
+    MediaTailorPlaybackConfiguration.add_member(:playback_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: MediaTailorPlaybackConfigurationArn, name: "playbackConfigurationArn"))
+    MediaTailorPlaybackConfiguration.type = Types::MediaTailorPlaybackConfiguration
+    MediaTailorPlaybackConfigurationsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MediaTailorPlaybackConfiguration, name: "member"))
     MultitrackInputConfiguration.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: IsMultitrackInputEnabled, name: "enabled", traits: {"smithy.api#default" => false}))
     MultitrackInputConfiguration.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: MultitrackPolicy, name: "policy"))
     MultitrackInputConfiguration.add_member(:maximum_resolution, ::Smithy::Schema::Shapes::MemberShape.new(target: MultitrackMaximumResolution, name: "maximumResolution"))
@@ -428,6 +550,14 @@ module Aws::Ivs
     MultitrackMaximumResolution.add_member(:full_hd, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FULL_HD", traits: {"smithy.api#enumValue" => "FULL_HD"}))
     MultitrackPolicy.add_member(:allow, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALLOW", traits: {"smithy.api#enumValue" => "ALLOW"}))
     MultitrackPolicy.add_member(:require, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REQUIRE", traits: {"smithy.api#enumValue" => "REQUIRE"}))
+    PendingVerification.add_member(:access_control_allow_origin, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "accessControlAllowOrigin", traits: {"smithy.api#httpHeader" => "Access-Control-Allow-Origin"}))
+    PendingVerification.add_member(:access_control_expose_headers, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "accessControlExposeHeaders", traits: {"smithy.api#httpHeader" => "Access-Control-Expose-Headers"}))
+    PendingVerification.add_member(:cache_control, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cacheControl", traits: {"smithy.api#httpHeader" => "Cache-Control"}))
+    PendingVerification.add_member(:content_security_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "contentSecurityPolicy", traits: {"smithy.api#httpHeader" => "Content-Security-Policy"}))
+    PendingVerification.add_member(:strict_transport_security, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "strictTransportSecurity", traits: {"smithy.api#httpHeader" => "Strict-Transport-Security"}))
+    PendingVerification.add_member(:x_content_type_options, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "xContentTypeOptions", traits: {"smithy.api#httpHeader" => "X-Content-Type-Options"}))
+    PendingVerification.add_member(:x_frame_options, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "xFrameOptions", traits: {"smithy.api#httpHeader" => "X-Frame-Options"}))
+    PendingVerification.add_member(:x_amzn_error_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "xAmznErrorType", traits: {"smithy.api#httpHeader" => "x-amzn-ErrorType"}))
     PendingVerification.add_member(:exception_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "exceptionMessage"))
     PendingVerification.type = Types::PendingVerification
     PlaybackKeyPair.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaybackKeyPairArn, name: "arn"))
@@ -457,6 +587,9 @@ module Aws::Ivs
     PlaybackRestrictionPolicySummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaybackRestrictionPolicyName, name: "name"))
     PlaybackRestrictionPolicySummary.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags"))
     PlaybackRestrictionPolicySummary.type = Types::PlaybackRestrictionPolicySummary
+    PostRollConfiguration.add_member(:duration_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: AdDurationSeconds, name: "durationSeconds", traits: {"smithy.api#required" => {}}))
+    PostRollConfiguration.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "enabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    PostRollConfiguration.type = Types::PostRollConfiguration
     PutMetadataInput.add_member(:channel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelArn, name: "channelArn", traits: {"smithy.api#required" => {}}))
     PutMetadataInput.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamMetadata, name: "metadata", traits: {"smithy.api#required" => {}}))
     PutMetadataInput.type = Types::PutMetadataInput
@@ -484,12 +617,38 @@ module Aws::Ivs
     RenditionConfigurationRendition.add_member(:full_hd, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FULL_HD", traits: {"smithy.api#enumValue" => "FULL_HD"}))
     RenditionConfigurationRendition.add_member(:lowest_resolution, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOWEST_RESOLUTION", traits: {"smithy.api#enumValue" => "LOWEST_RESOLUTION"}))
     RenditionConfigurationRenditionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RenditionConfigurationRendition, name: "member"))
+    ResourceNotFoundException.add_member(:access_control_allow_origin, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "accessControlAllowOrigin", traits: {"smithy.api#httpHeader" => "Access-Control-Allow-Origin"}))
+    ResourceNotFoundException.add_member(:access_control_expose_headers, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "accessControlExposeHeaders", traits: {"smithy.api#httpHeader" => "Access-Control-Expose-Headers"}))
+    ResourceNotFoundException.add_member(:cache_control, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cacheControl", traits: {"smithy.api#httpHeader" => "Cache-Control"}))
+    ResourceNotFoundException.add_member(:content_security_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "contentSecurityPolicy", traits: {"smithy.api#httpHeader" => "Content-Security-Policy"}))
+    ResourceNotFoundException.add_member(:strict_transport_security, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "strictTransportSecurity", traits: {"smithy.api#httpHeader" => "Strict-Transport-Security"}))
+    ResourceNotFoundException.add_member(:x_content_type_options, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "xContentTypeOptions", traits: {"smithy.api#httpHeader" => "X-Content-Type-Options"}))
+    ResourceNotFoundException.add_member(:x_frame_options, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "xFrameOptions", traits: {"smithy.api#httpHeader" => "X-Frame-Options"}))
+    ResourceNotFoundException.add_member(:x_amzn_error_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "xAmznErrorType", traits: {"smithy.api#httpHeader" => "x-amzn-ErrorType"}))
     ResourceNotFoundException.add_member(:exception_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "exceptionMessage"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
     S3DestinationConfiguration.add_member(:bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: S3DestinationBucketName, name: "bucketName", traits: {"smithy.api#required" => {}}))
     S3DestinationConfiguration.type = Types::S3DestinationConfiguration
+    ServiceQuotaExceededException.add_member(:access_control_allow_origin, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "accessControlAllowOrigin", traits: {"smithy.api#httpHeader" => "Access-Control-Allow-Origin"}))
+    ServiceQuotaExceededException.add_member(:access_control_expose_headers, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "accessControlExposeHeaders", traits: {"smithy.api#httpHeader" => "Access-Control-Expose-Headers"}))
+    ServiceQuotaExceededException.add_member(:cache_control, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cacheControl", traits: {"smithy.api#httpHeader" => "Cache-Control"}))
+    ServiceQuotaExceededException.add_member(:content_security_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "contentSecurityPolicy", traits: {"smithy.api#httpHeader" => "Content-Security-Policy"}))
+    ServiceQuotaExceededException.add_member(:strict_transport_security, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "strictTransportSecurity", traits: {"smithy.api#httpHeader" => "Strict-Transport-Security"}))
+    ServiceQuotaExceededException.add_member(:x_content_type_options, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "xContentTypeOptions", traits: {"smithy.api#httpHeader" => "X-Content-Type-Options"}))
+    ServiceQuotaExceededException.add_member(:x_frame_options, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "xFrameOptions", traits: {"smithy.api#httpHeader" => "X-Frame-Options"}))
+    ServiceQuotaExceededException.add_member(:x_amzn_error_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "xAmznErrorType", traits: {"smithy.api#httpHeader" => "x-amzn-ErrorType"}))
     ServiceQuotaExceededException.add_member(:exception_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "exceptionMessage"))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
+    ServiceUnavailable.add_member(:access_control_allow_origin, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "accessControlAllowOrigin", traits: {"smithy.api#httpHeader" => "Access-Control-Allow-Origin"}))
+    ServiceUnavailable.add_member(:access_control_expose_headers, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "accessControlExposeHeaders", traits: {"smithy.api#httpHeader" => "Access-Control-Expose-Headers"}))
+    ServiceUnavailable.add_member(:cache_control, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cacheControl", traits: {"smithy.api#httpHeader" => "Cache-Control"}))
+    ServiceUnavailable.add_member(:content_security_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "contentSecurityPolicy", traits: {"smithy.api#httpHeader" => "Content-Security-Policy"}))
+    ServiceUnavailable.add_member(:strict_transport_security, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "strictTransportSecurity", traits: {"smithy.api#httpHeader" => "Strict-Transport-Security"}))
+    ServiceUnavailable.add_member(:x_content_type_options, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "xContentTypeOptions", traits: {"smithy.api#httpHeader" => "X-Content-Type-Options"}))
+    ServiceUnavailable.add_member(:x_frame_options, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "xFrameOptions", traits: {"smithy.api#httpHeader" => "X-Frame-Options"}))
+    ServiceUnavailable.add_member(:x_amzn_error_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "xAmznErrorType", traits: {"smithy.api#httpHeader" => "x-amzn-ErrorType"}))
+    ServiceUnavailable.add_member(:exception_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "exceptionMessage"))
+    ServiceUnavailable.type = Types::ServiceUnavailable
     Srt.add_member(:endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: SrtEndpoint, name: "endpoint"))
     Srt.add_member(:passphrase, ::Smithy::Schema::Shapes::MemberShape.new(target: SrtPassphrase, name: "passphrase"))
     Srt.type = Types::Srt
@@ -552,6 +711,14 @@ module Aws::Ivs
     StreamSummary.add_member(:viewer_count, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamViewerCount, name: "viewerCount", traits: {"smithy.api#default" => 0}))
     StreamSummary.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamStartTime, name: "startTime"))
     StreamSummary.type = Types::StreamSummary
+    StreamUnavailable.add_member(:access_control_allow_origin, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "accessControlAllowOrigin", traits: {"smithy.api#httpHeader" => "Access-Control-Allow-Origin"}))
+    StreamUnavailable.add_member(:access_control_expose_headers, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "accessControlExposeHeaders", traits: {"smithy.api#httpHeader" => "Access-Control-Expose-Headers"}))
+    StreamUnavailable.add_member(:cache_control, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cacheControl", traits: {"smithy.api#httpHeader" => "Cache-Control"}))
+    StreamUnavailable.add_member(:content_security_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "contentSecurityPolicy", traits: {"smithy.api#httpHeader" => "Content-Security-Policy"}))
+    StreamUnavailable.add_member(:strict_transport_security, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "strictTransportSecurity", traits: {"smithy.api#httpHeader" => "Strict-Transport-Security"}))
+    StreamUnavailable.add_member(:x_content_type_options, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "xContentTypeOptions", traits: {"smithy.api#httpHeader" => "X-Content-Type-Options"}))
+    StreamUnavailable.add_member(:x_frame_options, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "xFrameOptions", traits: {"smithy.api#httpHeader" => "X-Frame-Options"}))
+    StreamUnavailable.add_member(:x_amzn_error_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "xAmznErrorType", traits: {"smithy.api#httpHeader" => "x-amzn-ErrorType"}))
     StreamUnavailable.add_member(:exception_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "exceptionMessage"))
     StreamUnavailable.type = Types::StreamUnavailable
     TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
@@ -561,6 +728,14 @@ module Aws::Ivs
     TagResourceOutput.type = Types::TagResourceOutput
     Tags.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
     Tags.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
+    ThrottlingException.add_member(:access_control_allow_origin, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "accessControlAllowOrigin", traits: {"smithy.api#httpHeader" => "Access-Control-Allow-Origin"}))
+    ThrottlingException.add_member(:access_control_expose_headers, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "accessControlExposeHeaders", traits: {"smithy.api#httpHeader" => "Access-Control-Expose-Headers"}))
+    ThrottlingException.add_member(:cache_control, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cacheControl", traits: {"smithy.api#httpHeader" => "Cache-Control"}))
+    ThrottlingException.add_member(:content_security_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "contentSecurityPolicy", traits: {"smithy.api#httpHeader" => "Content-Security-Policy"}))
+    ThrottlingException.add_member(:strict_transport_security, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "strictTransportSecurity", traits: {"smithy.api#httpHeader" => "Strict-Transport-Security"}))
+    ThrottlingException.add_member(:x_content_type_options, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "xContentTypeOptions", traits: {"smithy.api#httpHeader" => "X-Content-Type-Options"}))
+    ThrottlingException.add_member(:x_frame_options, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "xFrameOptions", traits: {"smithy.api#httpHeader" => "X-Frame-Options"}))
+    ThrottlingException.add_member(:x_amzn_error_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "xAmznErrorType", traits: {"smithy.api#httpHeader" => "x-amzn-ErrorType"}))
     ThrottlingException.add_member(:exception_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "exceptionMessage"))
     ThrottlingException.type = Types::ThrottlingException
     ThumbnailConfiguration.add_member(:recording_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordingMode, name: "recordingMode"))
@@ -579,6 +754,13 @@ module Aws::Ivs
     UntagResourceInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, name: "tagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
     UntagResourceInput.type = Types::UntagResourceInput
     UntagResourceOutput.type = Types::UntagResourceOutput
+    UpdateAdConfigurationRequest.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AdConfigurationArn, name: "arn", traits: {"smithy.api#required" => {}}))
+    UpdateAdConfigurationRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AdConfigurationName, name: "name"))
+    UpdateAdConfigurationRequest.add_member(:media_tailor_playback_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: MediaTailorPlaybackConfigurationsList, name: "mediaTailorPlaybackConfigurations"))
+    UpdateAdConfigurationRequest.add_member(:post_roll_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: PostRollConfiguration, name: "postRollConfiguration"))
+    UpdateAdConfigurationRequest.type = Types::UpdateAdConfigurationRequest
+    UpdateAdConfigurationResponse.add_member(:ad_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AdConfiguration, name: "adConfiguration", traits: {"smithy.api#required" => {}}))
+    UpdateAdConfigurationResponse.type = Types::UpdateAdConfigurationResponse
     UpdateChannelInput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelArn, name: "arn", traits: {"smithy.api#required" => {}}))
     UpdateChannelInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelName, name: "name"))
     UpdateChannelInput.add_member(:latency_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelLatencyMode, name: "latencyMode"))
@@ -590,6 +772,7 @@ module Aws::Ivs
     UpdateChannelInput.add_member(:playback_restriction_policy_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelPlaybackRestrictionPolicyArn, name: "playbackRestrictionPolicyArn"))
     UpdateChannelInput.add_member(:multitrack_input_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: MultitrackInputConfiguration, name: "multitrackInputConfiguration"))
     UpdateChannelInput.add_member(:container_format, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerFormat, name: "containerFormat"))
+    UpdateChannelInput.add_member(:ad_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelAdConfigurationArn, name: "adConfigurationArn"))
     UpdateChannelInput.type = Types::UpdateChannelInput
     UpdateChannelOutput.add_member(:channel, ::Smithy::Schema::Shapes::MemberShape.new(target: Channel, name: "channel"))
     UpdateChannelOutput.type = Types::UpdateChannelOutput
@@ -601,6 +784,14 @@ module Aws::Ivs
     UpdatePlaybackRestrictionPolicyRequest.type = Types::UpdatePlaybackRestrictionPolicyRequest
     UpdatePlaybackRestrictionPolicyResponse.add_member(:playback_restriction_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaybackRestrictionPolicy, name: "playbackRestrictionPolicy"))
     UpdatePlaybackRestrictionPolicyResponse.type = Types::UpdatePlaybackRestrictionPolicyResponse
+    ValidationException.add_member(:access_control_allow_origin, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "accessControlAllowOrigin", traits: {"smithy.api#httpHeader" => "Access-Control-Allow-Origin"}))
+    ValidationException.add_member(:access_control_expose_headers, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "accessControlExposeHeaders", traits: {"smithy.api#httpHeader" => "Access-Control-Expose-Headers"}))
+    ValidationException.add_member(:cache_control, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cacheControl", traits: {"smithy.api#httpHeader" => "Cache-Control"}))
+    ValidationException.add_member(:content_security_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "contentSecurityPolicy", traits: {"smithy.api#httpHeader" => "Content-Security-Policy"}))
+    ValidationException.add_member(:strict_transport_security, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "strictTransportSecurity", traits: {"smithy.api#httpHeader" => "Strict-Transport-Security"}))
+    ValidationException.add_member(:x_content_type_options, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "xContentTypeOptions", traits: {"smithy.api#httpHeader" => "X-Content-Type-Options"}))
+    ValidationException.add_member(:x_frame_options, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "xFrameOptions", traits: {"smithy.api#httpHeader" => "X-Frame-Options"}))
+    ValidationException.add_member(:x_amzn_error_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "xAmznErrorType", traits: {"smithy.api#httpHeader" => "x-amzn-ErrorType"}))
     ValidationException.add_member(:exception_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "exceptionMessage"))
     ValidationException.type = Types::ValidationException
     VideoConfiguration.add_member(:avc_profile, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "avcProfile"))
@@ -621,12 +812,15 @@ module Aws::Ivs
       service.id = "com.amazonaws.ivs#AmazonInteractiveVideoService"
       service.name = "AmazonInteractiveVideoService"
       service.version = "2020-07-14"
-      service.traits = {"aws.api#service" => {"sdkId" => "ivs", "arnNamespace" => "ivs", "cloudFormationName" => "IVS", "cloudTrailEventSource" => "ivs.amazonaws.com"}, "aws.auth#sigv4" => {"name" => "ivs"}, "aws.protocols#restJson1" => {}, "smithy.api#cors" => {"additionalAllowedHeaders" => ["Content-Type", "X-Api-Key", "X-Amz-Content-Sha256", "X-Amz-User-Agent", "amz-sdk-invocation-id", "amz-sdk-request"], "additionalExposedHeaders" => ["x-amzn-errortype", "x-amzn-requestid", "x-amzn-errormessage", "x-amzn-trace-id", "x-amzn-requestid", "x-amz-apigw-id", "date"]}, "smithy.api#title" => "Amazon Interactive Video Service"}
+      service.traits = {"aws.api#service" => {"sdkId" => "ivs", "arnNamespace" => "ivs", "cloudFormationName" => "IVS", "cloudTrailEventSource" => "ivs.amazonaws.com"}, "aws.auth#sigv4" => {"name" => "ivs"}, "aws.protocols#restJson1" => {}, "smithy.api#cors" => {"additionalAllowedHeaders" => ["Content-Type", "X-Api-Key", "X-Amz-Content-Sha256", "X-Amz-User-Agent", "amz-sdk-invocation-id", "amz-sdk-request"], "additionalExposedHeaders" => ["x-amzn-errortype", "x-amzn-requestid", "x-amzn-errormessage", "x-amzn-trace-id", "x-amzn-requestid", "x-amz-apigw-id", "date"]}, "smithy.api#title" => "Amazon Interactive Video Service", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://ivs-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://ivs-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://ivs.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://ivs.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
       service.add_operation(:batch_get_channel, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ivs#BatchGetChannel"
         operation.name = "BatchGetChannel"
         operation.input = BatchGetChannelInput
         operation.output = BatchGetChannelOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ServiceUnavailable
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/BatchGetChannel"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:batch_get_stream_key, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -634,6 +828,9 @@ module Aws::Ivs
         operation.name = "BatchGetStreamKey"
         operation.input = BatchGetStreamKeyInput
         operation.output = BatchGetStreamKeyOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ServiceUnavailable
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/BatchGetStreamKey"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:batch_start_viewer_session_revocation, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -646,6 +843,21 @@ module Aws::Ivs
         operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/BatchStartViewerSessionRevocation"}, "smithy.api#readonly" => {}}
+      end)
+      service.add_operation(:create_ad_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ivs#CreateAdConfiguration"
+        operation.name = "CreateAdConfiguration"
+        operation.input = CreateAdConfigurationRequest
+        operation.output = CreateAdConfigurationResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << PendingVerification
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/CreateAdConfiguration"}}
       end)
       service.add_operation(:create_channel, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ivs#CreateChannel"
@@ -695,6 +907,18 @@ module Aws::Ivs
         operation.errors << ServiceQuotaExceededException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/CreateStreamKey"}}
+      end)
+      service.add_operation(:delete_ad_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ivs#DeleteAdConfiguration"
+        operation.name = "DeleteAdConfiguration"
+        operation.input = DeleteAdConfigurationRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/DeleteAdConfiguration", "code" => 204}}
       end)
       service.add_operation(:delete_channel, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ivs#DeleteChannel"
@@ -753,6 +977,17 @@ module Aws::Ivs
         operation.errors << ResourceNotFoundException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/DeleteStreamKey", "code" => 204}}
+      end)
+      service.add_operation(:get_ad_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ivs#GetAdConfiguration"
+        operation.name = "GetAdConfiguration"
+        operation.input = GetAdConfigurationRequest
+        operation.output = GetAdConfigurationResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/GetAdConfiguration"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_channel, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ivs#GetChannel"
@@ -838,6 +1073,31 @@ module Aws::Ivs
         operation.errors << ServiceQuotaExceededException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/ImportPlaybackKeyPair"}}
+      end)
+      service.add_operation(:insert_ad_break, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ivs#InsertAdBreak"
+        operation.name = "InsertAdBreak"
+        operation.input = InsertAdBreakRequest
+        operation.output = InsertAdBreakResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ChannelNotBroadcasting
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/InsertAdBreak"}}
+      end)
+      service.add_operation(:list_ad_configurations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ivs#ListAdConfigurations"
+        operation.name = "ListAdConfigurations"
+        operation.input = ListAdConfigurationsRequest
+        operation.output = ListAdConfigurationsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/ListAdConfigurations"}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListAdConfigurations.new
       end)
       service.add_operation(:list_channels, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ivs#ListChannels"
@@ -981,6 +1241,21 @@ module Aws::Ivs
         operation.errors << ResourceNotFoundException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/tags/{resourceArn}"}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:update_ad_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ivs#UpdateAdConfiguration"
+        operation.name = "UpdateAdConfiguration"
+        operation.input = UpdateAdConfigurationRequest
+        operation.output = UpdateAdConfigurationResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << PendingVerification
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/UpdateAdConfiguration"}}
       end)
       service.add_operation(:update_channel, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ivs#UpdateChannel"

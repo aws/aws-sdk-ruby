@@ -52,7 +52,7 @@ module Aws
     #   `before_refresh` is called when AWS credentials are required and need to be refreshed. Login tokens can be
     #   refreshed using the following example:
     #
-    #      before_refresh = Proc.new do |cognito_credentials_provider| do
+    #      before_refresh = Proc.new do |cognito_credentials_provider|
     #        cognito_credentials_provider.logins['graph.facebook.com'] = update_token
     #      end
     def initialize(options = {})

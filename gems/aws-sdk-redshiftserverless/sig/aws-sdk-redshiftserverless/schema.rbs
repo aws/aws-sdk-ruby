@@ -8,6 +8,7 @@ module Aws::RedshiftServerless
     Association: StructureShape
     AssociationList: ListShape
     Capacity: IntegerShape
+    CatalogNameString: StringShape
     Charge: FloatShape
     ConfigParameter: StructureShape
     ConfigParameterList: ListShape
@@ -57,6 +58,7 @@ module Aws::RedshiftServerless
     DeleteUsageLimitResponse: StructureShape
     DeleteWorkgroupRequest: StructureShape
     DeleteWorkgroupResponse: StructureShape
+    DryRunException: StructureShape
     Duration: IntegerShape
     Endpoint: StructureShape
     EndpointAccess: StructureShape
@@ -67,6 +69,8 @@ module Aws::RedshiftServerless
     GetCustomDomainAssociationResponse: StructureShape
     GetEndpointAccessRequest: StructureShape
     GetEndpointAccessResponse: StructureShape
+    GetIdentityCenterAuthTokenRequest: StructureShape
+    GetIdentityCenterAuthTokenResponse: StructureShape
     GetNamespaceRequest: StructureShape
     GetNamespaceResponse: StructureShape
     GetRecoveryPointRequest: StructureShape
@@ -97,6 +101,8 @@ module Aws::RedshiftServerless
     IpAddressType: StringShape
     Ipv6CidrBlockNotFoundException: StructureShape
     KmsKeyId: StringShape
+    LakehouseIdcRegistration: StringShape
+    LakehouseRegistration: StringShape
     ListCustomDomainAssociationsRequest: StructureShape
     ListCustomDomainAssociationsResponse: StructureShape
     ListEndpointAccessRequest: StructureShape
@@ -127,6 +133,7 @@ module Aws::RedshiftServerless
     ListUsageLimitsResponse: StructureShape
     ListWorkgroupsRequest: StructureShape
     ListWorkgroupsResponse: StructureShape
+    LogDestinationType: StringShape
     LogExport: StringShape
     LogExportList: ListShape
     ManagedWorkgroupListItem: StructureShape
@@ -169,6 +176,12 @@ module Aws::RedshiftServerless
     RestoreTableFromRecoveryPointResponse: StructureShape
     RestoreTableFromSnapshotRequest: StructureShape
     RestoreTableFromSnapshotResponse: StructureShape
+    S3TableAction: StringShape
+    S3TableGranularity: StringShape
+    S3TableLastIngestionTimeMap: MapShape
+    S3TableName: StringShape
+    S3TableNameList: ListShape
+    S3TablePublishStatus: StructureShape
     Schedule: UnionShape
     ScheduledActionAssociation: StructureShape
     ScheduledActionName: StringShape
@@ -209,6 +222,8 @@ module Aws::RedshiftServerless
     UpdateCustomDomainAssociationResponse: StructureShape
     UpdateEndpointAccessRequest: StructureShape
     UpdateEndpointAccessResponse: StructureShape
+    UpdateLakehouseConfigurationRequest: StructureShape
+    UpdateLakehouseConfigurationResponse: StructureShape
     UpdateNamespaceRequest: StructureShape
     UpdateNamespaceResponse: StructureShape
     UpdateScheduledActionRequest: StructureShape
@@ -239,6 +254,7 @@ module Aws::RedshiftServerless
     Workgroup: StructureShape
     WorkgroupList: ListShape
     WorkgroupName: StringShape
+    WorkgroupNameList: ListShape
     WorkgroupStatus: StringShape
 
     RedshiftServerless: ServiceShape

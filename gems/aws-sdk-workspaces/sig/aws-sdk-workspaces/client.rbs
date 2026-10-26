@@ -288,7 +288,8 @@ module Aws::WorkSpaces
             global_accelerator: {
               mode: String,
               preferred_protocol: String
-            }
+            },
+            nested_virtualization_enabled: untyped
           },
           tags: Array[
             {
@@ -296,7 +297,8 @@ module Aws::WorkSpaces
               value: String
             }
           ],
-          workspace_name: String
+          workspace_name: String,
+          ipv6_address: String
         }
       ]
     ) -> _CreateWorkspacesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWorkspacesResponse
@@ -523,6 +525,8 @@ module Aws::WorkSpaces
       def image_id: () -> String?
       def infrastructure_configuration_arn: () -> String?
       def state: () -> String?
+      def state_message: () -> String?
+      def progress_percentage: () -> Integer?
       def created: () -> Time?
       def last_updated_time: () -> Time?
       def image_source: () -> Types::ImageSourceIdentifier?
@@ -881,7 +885,8 @@ module Aws::WorkSpaces
       ?resource_id: String,
       ?client_properties: {
         reconnect_enabled: String,
-        log_upload_enabled: String
+        log_upload_enabled: String,
+        client_experience_policy: String
       }
     ) -> _ModifyClientPropertiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyClientPropertiesResponse
 
@@ -1005,7 +1010,8 @@ module Aws::WorkSpaces
         global_accelerator: {
           mode: String,
           preferred_protocol: String
-        }
+        },
+        nested_virtualization_enabled: bool
       },
       ?data_replication: String
     ) -> _ModifyWorkspacePropertiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyWorkspacePropertiesResponse

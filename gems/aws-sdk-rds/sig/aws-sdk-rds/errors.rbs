@@ -435,5 +435,8 @@ module Aws::RDS
     class UnsupportedDBEngineVersionFault < Smithy::Client::ServiceError
       def message: () -> String?
     end
+    class VpcEncryptionControlViolationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
   end
 end

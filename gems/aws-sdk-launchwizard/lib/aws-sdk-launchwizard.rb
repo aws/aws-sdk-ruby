@@ -11,10 +11,7 @@ Object.const_set('Aws', Module.new) unless Object.const_defined?('Aws')
 Aws.const_set('LaunchWizard', Module.new) unless Aws.const_defined?('LaunchWizard')
 
 # @title AWS Launch Wizard
-# <p>Launch Wizard offers a guided way of sizing, configuring, and deploying Amazon Web Services resources for
-#          third party applications, such as Microsoft SQL Server Always On and HANA based SAP
-#          systems, without the need to manually identify and provision individual Amazon Web Services
-#          resources.</p>
+# <p>Launch Wizard offers a guided way of sizing, configuring, and deploying Amazon Web Services resources for third party applications, such as Microsoft SQL Server Always On and HANA based SAP systems, without the need to manually identify and provision individual Amazon Web Services resources.</p>
 module Aws::LaunchWizard
   VERSION = '2.0.0.pre0'
 end

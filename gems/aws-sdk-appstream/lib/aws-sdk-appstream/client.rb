@@ -29,6 +29,7 @@ require 'aws-sdk-core/plugins/retry_errors'
 require 'aws-sdk-core/plugins/stub_responses'
 require 'aws-sdk-core/plugins/regional_endpoints'
 require 'aws-sdk-core/plugins/sigv4'
+require 'smithy-client/rpc_v2_cbor'
 require 'aws-sdk-core/json_rpc'
 
 Aws::Core::Plugins::GlobalConfiguration.add_identifier(:appstream)
@@ -123,7 +124,7 @@ module Aws::AppStream
     #  at ~/.aws/config and ~/.aws/credentials, respectively.  When not specified, 'default' is used.
     # @option options [Symbol, Object] :protocol
     #  The protocol used for request serialization and response deserialization. Defaults to the service default protocol. May be a Symbol naming a supported protocol, or a custom object implementing the protocol interface.
-    #  Supported protocols: +:json_rpc+ (defaults to +:json_rpc+).
+    #  Supported protocols: +:rpc_v2_cbor+, +:json_rpc+ (defaults to +:rpc_v2_cbor+).
     # @option options [Boolean] :raise_response_errors (true)
     #  When `true`, response errors are raised. When `false`, the error is placed on the
     #  output in the {Smithy::Client::Response#error error accessor}.
@@ -144,18 +145,18 @@ module Aws::AppStream
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -310,6 +311,103 @@ module Aws::AppStream
       request.send_request(options)
     end
 
+    # <p>Associates license included application(s) with an existing image builder instance.</p>
+    # @param [Hash, Types::AssociateSoftwareToImageBuilderRequest] params
+    # @option params [String] :image_builder_name
+    #   <p>The name of the target image builder instance.</p>
+    # @option params [Array<String>] :software_names
+    #   <p>The list of license included applications to associate with the image builder.</p>
+    #            <p>Possible values include the following:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>Microsoft_Office_2021_LTSC_Professional_Plus_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Office_2021_LTSC_Professional_Plus_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Office_2024_LTSC_Professional_Plus_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Office_2024_LTSC_Professional_Plus_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2021_LTSC_Professional_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2021_LTSC_Professional_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2024_LTSC_Professional_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2024_LTSC_Professional_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2021_Professional_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2021_Professional_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2024_Professional_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2024_Professional_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Office_2021_LTSC_Standard_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Office_2021_LTSC_Standard_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Office_2024_LTSC_Standard_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Office_2024_LTSC_Standard_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2021_LTSC_Standard_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2021_LTSC_Standard_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2024_LTSC_Standard_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2024_LTSC_Standard_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2021_Standard_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2021_Standard_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2024_Standard_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2024_Standard_64Bit</p>
+    #               </li>
+    #            </ul>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     image_builder_name: "Name", # required
+    #     software_names: ["String"], # required
+    #   }
+    #   options = {}
+    #   response = client.associate_software_to_image_builder(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::AssociateSoftwareToImageBuilderResult]
+    def associate_software_to_image_builder(params = {}, options = {})
+      request = build_request(:associate_software_to_image_builder, params)
+      request.send_request(options)
+    end
+
     # <p>Associates the specified users with the specified stacks. Users in a user pool cannot be assigned to stacks with fleets that are joined to an Active Directory domain.</p>
     # @param [Hash, Types::BatchAssociateUserStackRequest] params
     # @option params [Array<Types::UserStackAssociation>] :user_stack_associations
@@ -419,7 +517,7 @@ module Aws::AppStream
     end
 
     # <p>Creates an app block.</p>
-    #          <p>App blocks are an Amazon AppStream 2.0 resource that stores the details about the
+    #          <p>App blocks are a WorkSpaces Applications resource that stores the details about the
     #             virtual hard disk in an S3 bucket. It also stores the setup script with details about
     #             how to mount the virtual hard disk. The virtual hard disk includes the application
     #             binaries and other files necessary to launch your applications. Multiple applications
@@ -540,7 +638,7 @@ module Aws::AppStream
     #            <p>If you do not specify a value, the value is set to an empty string.</p>
     #            <p>Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following special characters: </p>
     #            <p>_ . : / = + \ - @</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html">Tagging Your Resources</a> in the <i>Amazon WorkSpaces Applications Administration Guide</i>.</p>
     # @option params [String] :platform
     #   <p>The platform of the app block builder.</p>
     #            <p>
@@ -575,11 +673,13 @@ module Aws::AppStream
     #   <p>The Amazon Resource Name (ARN) of the IAM role to apply to the app block builder. To
     #               assume a role, the app block builder calls the AWS Security Token Service (STS)
     #                   <code>AssumeRole</code> API operation and passes the ARN of the role to use. The
-    #               operation creates a new session with temporary credentials. AppStream 2.0 retrieves the
+    #               operation creates a new session with temporary credentials. WorkSpaces Applications retrieves the
     #               temporary credentials and creates the <b>appstream_machine_role</b> credential profile on the instance.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html">Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html">Using an IAM Role to Grant Permissions to Applications and Scripts Running on WorkSpaces Applications Streaming Instances</a> in the <i>Amazon WorkSpaces Applications Administration Guide</i>.</p>
     # @option params [Array<Types::AccessEndpoint>] :access_endpoints
     #   <p>The list of interface VPC endpoint (interface endpoint) objects. Administrators can connect to the app block builder only through the specified endpoints.</p>
+    # @option params [Boolean] :disable_imdsv1
+    #   <p>Set to true to disable Instance Metadata Service Version 1 (IMDSv1) and enforce IMDSv2. Set to false to enable both IMDSv1 and IMDSv2.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     name: "Name", # required
@@ -601,7 +701,8 @@ module Aws::AppStream
     #         endpoint_type: "STREAMING" # One of: ["STREAMING"], # required
     #         vpce_id: "String"
     #       }
-    #     ]
+    #     ],
+    #     disable_imdsv1: false
     #   }
     #   options = {}
     #   response = client.create_app_block_builder(params, options)
@@ -625,7 +726,7 @@ module Aws::AppStream
     #       created_time: Time.now,
     #       app_block_builder_errors: [
     #         {
-    #           error_code: "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION" # One of: ["IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"],
+    #           error_code: "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION" # One of: ["IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR", "VALIDATION_ERROR"],
     #           error_message: "String",
     #           error_timestamp: Time.now
     #         }
@@ -639,7 +740,8 @@ module Aws::AppStream
     #           endpoint_type: "STREAMING" # One of: ["STREAMING"], # required
     #           vpce_id: "String"
     #         }
-    #       ]
+    #       ],
+    #       disable_imdsv1: false
     #     }
     #   }
     # @return [Types::CreateAppBlockBuilderResult]
@@ -653,7 +755,7 @@ module Aws::AppStream
     # @option params [String] :app_block_builder_name
     #   <p>The name of the app block builder.</p>
     # @option params [Integer] :validity
-    #   <p>The time that the streaming URL will be valid, in seconds. 
+    #   <p>The time that the streaming URL will be valid, in seconds.
     #               Specify a value between 1 and 604800 seconds. The default is 3600 seconds.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -675,7 +777,7 @@ module Aws::AppStream
     end
 
     # <p>Creates an application.</p>
-    #          <p>Applications are an Amazon AppStream 2.0 resource that stores the details about how to
+    #          <p>Applications are a WorkSpaces Applications resource that stores the details about how to
     #             launch applications on Elastic fleet streaming instances. An application consists of the
     #             launch details, icon, and display name. Applications are associated with an app block
     #             that contains the application binaries and other files. The applications assigned to an
@@ -697,7 +799,7 @@ module Aws::AppStream
     # @option params [String] :launch_parameters
     #   <p>The launch parameters of the application.</p>
     # @option params [Array<String>] :platforms
-    #   <p>The platforms the application supports. WINDOWS_SERVER_2019 and AMAZON_LINUX2 are supported for Elastic fleets.</p>
+    #   <p>The platforms the application supports. WINDOWS_SERVER_2019, AMAZON_LINUX2 and UBUNTU_PRO_2404 are supported for Elastic fleets.</p>
     # @option params [Array<String>] :instance_families
     #   <p>The instance families the application supports. Valid values are GENERAL_PURPOSE and GRAPHICS_G4.</p>
     # @option params [String] :app_block_arn
@@ -716,7 +818,7 @@ module Aws::AppStream
     #     launch_path: "String", # required
     #     working_directory: "String",
     #     launch_parameters: "String",
-    #     platforms: ["WINDOWS" # One of: ["WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8"]], # required
+    #     platforms: ["WINDOWS" # One of: ["WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"]], # required
     #     instance_families: ["String"], # required
     #     app_block_arn: "Arn", # required
     #     tags: {
@@ -746,7 +848,7 @@ module Aws::AppStream
     #         s3_bucket: "S3Bucket", # required
     #         s3_key: "S3Key"
     #       },
-    #       platforms: ["WINDOWS" # One of: ["WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8"]],
+    #       platforms: ["WINDOWS" # One of: ["WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"]],
     #       instance_families: ["String"],
     #       created_time: Time.now
     #     }
@@ -757,7 +859,7 @@ module Aws::AppStream
       request.send_request(options)
     end
 
-    # <p>Creates a Directory Config object in AppStream 2.0. This object includes the configuration information required to join fleets and image builders to Microsoft Active Directory domains.</p>
+    # <p>Creates a Directory Config object in WorkSpaces Applications. This object includes the configuration information required to join fleets and image builders to Microsoft Active Directory domains.</p>
     # @param [Hash, Types::CreateDirectoryConfigRequest] params
     # @option params [String] :directory_name
     #   <p>The fully qualified name of the directory (for example, corp.example.com).</p>
@@ -813,7 +915,7 @@ module Aws::AppStream
 
     # <p>Creates a new entitlement. Entitlements control access to specific applications within
     #             a stack, based on user attributes. Entitlements apply to SAML 2.0 federated user
-    #             identities. Amazon AppStream 2.0 user pool and streaming URL users are entitled to all
+    #             identities. WorkSpaces Applications user pool and streaming URL users are entitled to all
     #             applications in a stack. Entitlements don't apply to the desktop stream view
     #             application, or to applications managed by a dynamic app provider using the Dynamic
     #             Application Framework.</p>
@@ -864,6 +966,58 @@ module Aws::AppStream
     # @return [Types::CreateEntitlementResult]
     def create_entitlement(params = {}, options = {})
       request = build_request(:create_entitlement, params)
+      request.send_request(options)
+    end
+
+    # <p>Creates a task to export a WorkSpaces Applications image to an EC2 AMI. This allows you to use your customized WorkSpaces Applications images with other AWS services or for backup purposes.</p>
+    # @param [Hash, Types::CreateExportImageTaskRequest] params
+    # @option params [String] :image_name
+    #   <p>The name of the WorkSpaces Applications image to export. The image must be in an available state and owned by your account.</p>
+    # @option params [String] :ami_name
+    #   <p>The name for the exported EC2 AMI. This is a required field that must be unique within your account and region.</p>
+    # @option params [String] :iam_role_arn
+    #   <p>The ARN of the IAM role that allows WorkSpaces Applications to create the AMI. The role must have permissions to copy images, describe images, and create tags, with a trust relationship allowing appstream.amazonaws.com to assume the role.</p>
+    # @option params [Hash<String, String>] :tag_specifications
+    #   <p>The tags to apply to the exported AMI. These tags help you organize and manage your EC2 AMIs.</p>
+    # @option params [String] :ami_description
+    #   <p>An optional description for the exported AMI. This description will be applied to the resulting EC2 AMI.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     image_name: "Name", # required
+    #     ami_name: "AmiName", # required
+    #     iam_role_arn: "Arn", # required
+    #     tag_specifications: {
+    #       "TagKey" => "TagValue"
+    #     },
+    #     ami_description: "Description"
+    #   }
+    #   options = {}
+    #   response = client.create_export_image_task(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     export_image_task: {
+    #       task_id: "UUID", # required
+    #       image_arn: "Arn", # required
+    #       ami_name: "AmiName", # required
+    #       created_date: Time.now, # required
+    #       ami_description: "Description",
+    #       state: "EXPORTING" # One of: ["EXPORTING", "COMPLETED", "FAILED", "TIMED_OUT"],
+    #       ami_id: "PhotonAmiId",
+    #       tag_specifications: {
+    #         "TagKey" => "TagValue"
+    #       },
+    #       error_details: [
+    #         {
+    #           error_code: "String",
+    #           error_message: "String"
+    #         }
+    #       ]
+    #     }
+    #   }
+    # @return [Types::CreateExportImageTaskResult]
+    def create_export_image_task(params = {}, options = {})
+      request = build_request(:create_export_image_task, params)
       request.send_request(options)
     end
 
@@ -942,21 +1096,6 @@ module Aws::AppStream
     #                  <p>stream.memory.z1d.12xlarge</p>
     #               </li>
     #               <li>
-    #                  <p>stream.graphics-design.large</p>
-    #               </li>
-    #               <li>
-    #                  <p>stream.graphics-design.xlarge</p>
-    #               </li>
-    #               <li>
-    #                  <p>stream.graphics-design.2xlarge</p>
-    #               </li>
-    #               <li>
-    #                  <p>stream.graphics-design.4xlarge</p>
-    #               </li>
-    #               <li>
-    #                  <p>stream.graphics-desktop.2xlarge</p>
-    #               </li>
-    #               <li>
     #                  <p>stream.graphics.g4dn.xlarge</p>
     #               </li>
     #               <li>
@@ -994,15 +1133,6 @@ module Aws::AppStream
     #               </li>
     #               <li>
     #                  <p>stream.graphics.g5.24xlarge</p>
-    #               </li>
-    #               <li>
-    #                  <p>stream.graphics-pro.4xlarge</p>
-    #               </li>
-    #               <li>
-    #                  <p>stream.graphics-pro.8xlarge</p>
-    #               </li>
-    #               <li>
-    #                  <p>stream.graphics-pro.16xlarge</p>
     #               </li>
     #               <li>
     #                  <p>stream.graphics.g6.xlarge</p>
@@ -1103,7 +1233,7 @@ module Aws::AppStream
     #            <p>If you do not specify a value, the value is set to an empty string.</p>
     #            <p>Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following special characters: </p>
     #            <p>_ . : / = + \ - @</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html">Tagging Your Resources</a> in the <i>Amazon WorkSpaces Applications Administration Guide</i>.</p>
     # @option params [Integer] :idle_disconnect_timeout_in_seconds
     #   <p>The amount of time that users can be idle (inactive) before they are disconnected
     #               from their streaming session and the <code>DisconnectTimeoutInSeconds</code> time
@@ -1120,13 +1250,13 @@ module Aws::AppStream
     #               <p>If you enable this feature, we recommend that you specify a value that corresponds exactly to a whole number of minutes (for example, 60, 120, and 180). If you don't do this, the value is rounded to the nearest minute. For example, if you specify a value of 70, users are disconnected after 1 minute of inactivity. If you specify a value that is at the midpoint between two different minutes, the value is rounded up. For example, if you specify a value of 90, users are disconnected after 2 minutes of inactivity. </p>
     #            </note>
     # @option params [String] :iam_role_arn
-    #   <p>The Amazon Resource Name (ARN) of the IAM role to apply to the fleet. To assume a role, a fleet instance calls the AWS Security Token Service (STS) <code>AssumeRole</code> API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials. AppStream 2.0 retrieves the temporary credentials and creates the <b>appstream_machine_role</b> credential profile on the instance.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html">Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>
+    #   <p>The Amazon Resource Name (ARN) of the IAM role to apply to the fleet. To assume a role, a fleet instance calls the AWS Security Token Service (STS) <code>AssumeRole</code> API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials. WorkSpaces Applications retrieves the temporary credentials and creates the <b>appstream_machine_role</b> credential profile on the instance.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html">Using an IAM Role to Grant Permissions to Applications and Scripts Running on WorkSpaces Applications Streaming Instances</a> in the <i>Amazon WorkSpaces Applications Administration Guide</i>.</p>
     # @option params [String] :stream_view
-    #   <p>The AppStream 2.0 view that is displayed to your users when they stream from the fleet. When <code>APP</code> is specified, only the windows of applications opened by users display. When <code>DESKTOP</code> is specified, the standard desktop that is provided by the operating system displays.</p>
+    #   <p>The WorkSpaces Applications view that is displayed to your users when they stream from the fleet. When <code>APP</code> is specified, only the windows of applications opened by users display. When <code>DESKTOP</code> is specified, the standard desktop that is provided by the operating system displays.</p>
     #            <p>The default value is <code>APP</code>.</p>
     # @option params [String] :platform
-    #   <p>The fleet platform. WINDOWS_SERVER_2019 and AMAZON_LINUX2 are supported for Elastic
+    #   <p>The fleet platform. WINDOWS_SERVER_2019, AMAZON_LINUX2 and UBUNTU_PRO_2404 are supported for Elastic
     #               fleets. </p>
     # @option params [Integer] :max_concurrent_sessions
     #   <p>The maximum concurrent sessions of the Elastic fleet. This is required for Elastic
@@ -1137,6 +1267,13 @@ module Aws::AppStream
     #   <p>The S3 location of the session scripts configuration zip file. This only applies to Elastic fleets.</p>
     # @option params [Integer] :max_sessions_per_instance
     #   <p>The maximum number of user sessions on an instance. This only applies to multi-session fleets.</p>
+    # @option params [Types::VolumeConfig] :root_volume_config
+    #   <p>The configuration for the root volume of fleet instances. Use this to customize storage capacity from 200 GB up to 500 GB based on your application requirements.</p>
+    # @option params [Boolean] :disable_imdsv1
+    #   <p>Set to true to disable Instance Metadata Service Version 1 (IMDSv1) and enforce IMDSv2. Set to false to enable both IMDSv1 and IMDSv2.</p>
+    #            <note>
+    #               <p>Before disabling IMDSv1, ensure your WorkSpaces Applications images are running the agent version or managed image update released on or after January 16, 2024 to support IMDSv2 enforcement.</p>
+    #            </note>
     # @example Request syntax with placeholder values
     #   params = {
     #     name: "Name", # required
@@ -1167,14 +1304,18 @@ module Aws::AppStream
     #     idle_disconnect_timeout_in_seconds: 1,
     #     iam_role_arn: "Arn",
     #     stream_view: "APP" # One of: ["APP", "DESKTOP"],
-    #     platform: "WINDOWS" # One of: ["WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8"],
+    #     platform: "WINDOWS" # One of: ["WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"],
     #     max_concurrent_sessions: 1,
     #     usb_device_filter_strings: ["UsbDeviceFilterString"],
     #     session_script_s3_location: {
     #       s3_bucket: "S3Bucket", # required
     #       s3_key: "S3Key"
     #     },
-    #     max_sessions_per_instance: 1
+    #     max_sessions_per_instance: 1,
+    #     root_volume_config: {
+    #       volume_size_in_gb: 1
+    #     },
+    #     disable_imdsv1: false
     #   }
     #   options = {}
     #   response = client.create_fleet(params, options)
@@ -1198,7 +1339,10 @@ module Aws::AppStream
     #         desired_user_sessions: 1,
     #         available_user_sessions: 1,
     #         active_user_sessions: 1,
-    #         actual_user_sessions: 1
+    #         actual_user_sessions: 1,
+    #         draining: 1,
+    #         drain_mode_active_user_sessions: 1,
+    #         drain_mode_unused_user_sessions: 1
     #       },
     #       max_user_duration_in_seconds: 1,
     #       disconnect_timeout_in_seconds: 1,
@@ -1210,7 +1354,7 @@ module Aws::AppStream
     #       created_time: Time.now,
     #       fleet_errors: [
     #         {
-    #           error_code: "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION" # One of: ["IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"],
+    #           error_code: "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION" # One of: ["IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR", "VALIDATION_ERROR"],
     #           error_message: "String"
     #         }
     #       ],
@@ -1222,14 +1366,18 @@ module Aws::AppStream
     #       idle_disconnect_timeout_in_seconds: 1,
     #       iam_role_arn: "Arn",
     #       stream_view: "APP" # One of: ["APP", "DESKTOP"],
-    #       platform: "WINDOWS" # One of: ["WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8"],
+    #       platform: "WINDOWS" # One of: ["WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"],
     #       max_concurrent_sessions: 1,
     #       usb_device_filter_strings: ["UsbDeviceFilterString"],
     #       session_script_s3_location: {
     #         s3_bucket: "S3Bucket", # required
     #         s3_key: "S3Key"
     #       },
-    #       max_sessions_per_instance: 1
+    #       max_sessions_per_instance: 1,
+    #       root_volume_config: {
+    #         volume_size_in_gb: 1
+    #       },
+    #       disable_imdsv1: false
     #     }
     #   }
     # @return [Types::CreateFleetResult]
@@ -1308,21 +1456,6 @@ module Aws::AppStream
     #                  <p>stream.memory.z1d.12xlarge</p>
     #               </li>
     #               <li>
-    #                  <p>stream.graphics-design.large</p>
-    #               </li>
-    #               <li>
-    #                  <p>stream.graphics-design.xlarge</p>
-    #               </li>
-    #               <li>
-    #                  <p>stream.graphics-design.2xlarge</p>
-    #               </li>
-    #               <li>
-    #                  <p>stream.graphics-design.4xlarge</p>
-    #               </li>
-    #               <li>
-    #                  <p>stream.graphics-desktop.2xlarge</p>
-    #               </li>
-    #               <li>
     #                  <p>stream.graphics.g4dn.xlarge</p>
     #               </li>
     #               <li>
@@ -1339,15 +1472,6 @@ module Aws::AppStream
     #               </li>
     #               <li>
     #                  <p>stream.graphics.g4dn.16xlarge</p>
-    #               </li>
-    #               <li>
-    #                  <p>stream.graphics-pro.4xlarge</p>
-    #               </li>
-    #               <li>
-    #                  <p>stream.graphics-pro.8xlarge</p>
-    #               </li>
-    #               <li>
-    #                  <p>stream.graphics-pro.16xlarge</p>
     #               </li>
     #               <li>
     #                  <p>stream.graphics.g5.xlarge</p>
@@ -1420,22 +1544,183 @@ module Aws::AppStream
     # @option params [Types::VpcConfig] :vpc_config
     #   <p>The VPC configuration for the image builder. You can specify only one subnet.</p>
     # @option params [String] :iam_role_arn
-    #   <p>The Amazon Resource Name (ARN) of the IAM role to apply to the image builder. To assume a role, the image builder calls the AWS Security Token Service (STS) <code>AssumeRole</code> API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials. AppStream 2.0 retrieves the temporary credentials and creates the <b>appstream_machine_role</b> credential profile on the instance.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html">Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>
+    #   <p>The Amazon Resource Name (ARN) of the IAM role to apply to the image builder. To assume a role, the image builder calls the AWS Security Token Service (STS) <code>AssumeRole</code> API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials. WorkSpaces Applications retrieves the temporary credentials and creates the <b>appstream_machine_role</b> credential profile on the instance.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html">Using an IAM Role to Grant Permissions to Applications and Scripts Running on WorkSpaces Applications Streaming Instances</a> in the <i>Amazon WorkSpaces Applications Administration Guide</i>.</p>
     # @option params [Boolean] :enable_default_internet_access
     #   <p>Enables or disables default internet access for the image builder.</p>
     # @option params [Types::DomainJoinInfo] :domain_join_info
     #   <p>The name of the directory and organizational unit (OU) to use to join the image builder to a Microsoft Active Directory domain. </p>
     # @option params [String] :appstream_agent_version
-    #   <p>The version of the AppStream 2.0 agent to use for this image builder. To use the latest version of the AppStream 2.0 agent, specify [LATEST]. </p>
+    #   <p>The version of the WorkSpaces Applications agent to use for this image builder. To use the latest version of the WorkSpaces Applications agent, specify [LATEST]. </p>
     # @option params [Hash<String, String>] :tags
     #   <p>The tags to associate with the image builder. A tag is a key-value pair, and the value is optional. For example, Environment=Test. If you do not specify a value, Environment=. </p>
     #            <p>Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following special characters: </p>
     #            <p>_ . : / = + \ - @</p>
     #            <p>If you do not specify a value, the value is set to an empty string.</p>
-    #            <p>For more information about tags, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>
+    #            <p>For more information about tags, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html">Tagging Your Resources</a> in the <i>Amazon WorkSpaces Applications Administration Guide</i>.</p>
     # @option params [Array<Types::AccessEndpoint>] :access_endpoints
     #   <p>The list of interface VPC endpoint (interface endpoint) objects. Administrators can connect to the image builder only through the specified endpoints.</p>
+    # @option params [Types::VolumeConfig] :root_volume_config
+    #   <p>The configuration for the root volume of the image builder. Use this to customize storage capacity from 200 GB up to 500 GB based on your application installation requirements.</p>
+    # @option params [Array<String>] :softwares_to_install
+    #   <p>The list of license included applications to install on the image builder during creation.</p>
+    #            <p>Possible values include the following:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>Microsoft_Office_2021_LTSC_Professional_Plus_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Office_2021_LTSC_Professional_Plus_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Office_2024_LTSC_Professional_Plus_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Office_2024_LTSC_Professional_Plus_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2021_LTSC_Professional_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2021_LTSC_Professional_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2024_LTSC_Professional_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2024_LTSC_Professional_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2021_Professional_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2021_Professional_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2024_Professional_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2024_Professional_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Office_2021_LTSC_Standard_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Office_2021_LTSC_Standard_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Office_2024_LTSC_Standard_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Office_2024_LTSC_Standard_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2021_LTSC_Standard_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2021_LTSC_Standard_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2024_LTSC_Standard_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2024_LTSC_Standard_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2021_Standard_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2021_Standard_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2024_Standard_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2024_Standard_64Bit</p>
+    #               </li>
+    #            </ul>
+    # @option params [Array<String>] :softwares_to_uninstall
+    #   <p>The list of license included applications to uninstall from the image builder during creation.</p>
+    #            <p>Possible values include the following:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>Microsoft_Office_2021_LTSC_Professional_Plus_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Office_2021_LTSC_Professional_Plus_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Office_2024_LTSC_Professional_Plus_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Office_2024_LTSC_Professional_Plus_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2021_LTSC_Professional_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2021_LTSC_Professional_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2024_LTSC_Professional_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2024_LTSC_Professional_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2021_Professional_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2021_Professional_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2024_Professional_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2024_Professional_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Office_2021_LTSC_Standard_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Office_2021_LTSC_Standard_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Office_2024_LTSC_Standard_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Office_2024_LTSC_Standard_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2021_LTSC_Standard_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2021_LTSC_Standard_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2024_LTSC_Standard_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2024_LTSC_Standard_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2021_Standard_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2021_Standard_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2024_Standard_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2024_Standard_64Bit</p>
+    #               </li>
+    #            </ul>
+    # @option params [Boolean] :disable_imdsv1
+    #   <p>Set to true to disable Instance Metadata Service Version 1 (IMDSv1) and enforce IMDSv2. Set to false to enable both IMDSv1 and IMDSv2.</p>
+    #            <note>
+    #               <p>Before disabling IMDSv1, ensure your WorkSpaces Applications images are running the agent version or managed image update released on or after January 16, 2024 to support IMDSv2 enforcement.</p>
+    #            </note>
     # @example Request syntax with placeholder values
     #   params = {
     #     name: "Name", # required
@@ -1463,7 +1748,13 @@ module Aws::AppStream
     #         endpoint_type: "STREAMING" # One of: ["STREAMING"], # required
     #         vpce_id: "String"
     #       }
-    #     ]
+    #     ],
+    #     root_volume_config: {
+    #       volume_size_in_gb: 1
+    #     },
+    #     softwares_to_install: ["String"],
+    #     softwares_to_uninstall: ["String"],
+    #     disable_imdsv1: false
     #   }
     #   options = {}
     #   response = client.create_image_builder(params, options)
@@ -1481,9 +1772,9 @@ module Aws::AppStream
     #         security_group_ids: ["String"]
     #       },
     #       instance_type: "String",
-    #       platform: "WINDOWS" # One of: ["WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8"],
+    #       platform: "WINDOWS" # One of: ["WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"],
     #       iam_role_arn: "Arn",
-    #       state: "PENDING" # One of: ["PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED", "UPDATING", "PENDING_QUALIFICATION"],
+    #       state: "PENDING" # One of: ["PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED", "UPDATING", "PENDING_QUALIFICATION", "PENDING_SYNCING_APPS", "SYNCING_APPS", "PENDING_IMAGE_IMPORT"],
     #       state_change_reason: {
     #         code: "INTERNAL_ERROR" # One of: ["INTERNAL_ERROR", "IMAGE_UNAVAILABLE"],
     #         message: "String"
@@ -1496,11 +1787,12 @@ module Aws::AppStream
     #       },
     #       network_access_configuration: {
     #         eni_private_ip_address: "String",
+    #         eni_ipv6_addresses: ["String"],
     #         eni_id: "String"
     #       },
     #       image_builder_errors: [
     #         {
-    #           error_code: "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION" # One of: ["IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"],
+    #           error_code: "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION" # One of: ["IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR", "VALIDATION_ERROR"],
     #           error_message: "String",
     #           error_timestamp: Time.now
     #         }
@@ -1512,7 +1804,11 @@ module Aws::AppStream
     #           vpce_id: "String"
     #         }
     #       ],
-    #       latest_appstream_agent_version: "TRUE" # One of: ["TRUE", "FALSE"]
+    #       root_volume_config: {
+    #         volume_size_in_gb: 1
+    #       },
+    #       latest_appstream_agent_version: "TRUE" # One of: ["TRUE", "FALSE"],
+    #       disable_imdsv1: false
     #     }
     #   }
     # @return [Types::CreateImageBuilderResult]
@@ -1526,7 +1822,7 @@ module Aws::AppStream
     # @option params [String] :name
     #   <p>The name of the image builder.</p>
     # @option params [Integer] :validity
-    #   <p>The time that the streaming URL will be valid, in seconds. 
+    #   <p>The time that the streaming URL will be valid, in seconds.
     #               Specify a value between 1 and 604800 seconds. The default is 3600 seconds.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -1544,6 +1840,133 @@ module Aws::AppStream
     # @return [Types::CreateImageBuilderStreamingURLResult]
     def create_image_builder_streaming_url(params = {}, options = {})
       request = build_request(:create_image_builder_streaming_url, params)
+      request.send_request(options)
+    end
+
+    # <p>Creates a custom WorkSpaces Applications image by importing an EC2 AMI. This allows you to use your own customized AMI to create WorkSpaces Applications images that support additional instance types beyond the standard stream.* instances.</p>
+    # @param [Hash, Types::CreateImportedImageRequest] params
+    # @option params [String] :name
+    #   <p>A unique name for the imported image. The name must be between 1 and 100 characters and can contain letters, numbers, underscores, periods, and hyphens.</p>
+    # @option params [String] :source_ami_id
+    #   <p>The ID of the EC2 AMI to import.</p>
+    # @option params [String] :workspace_image_id
+    #   <p>The ID of the Workspaces Image to import.</p>
+    # @option params [String] :iam_role_arn
+    #   <p>The ARN of the IAM role that allows WorkSpaces Applications to access your AMI. The role must have permissions to modify image attributes and describe images, with a trust relationship allowing appstream.amazonaws.com to assume the role.</p>
+    # @option params [String] :description
+    #   <p>An optional description for the imported image. The description must match approved regex patterns and can be up to 256 characters.</p>
+    # @option params [String] :display_name
+    #   <p>An optional display name for the imported image. The display name must match approved regex patterns and can be up to 100 characters.</p>
+    # @option params [Hash<String, String>] :tags
+    #   <p>The tags to apply to the imported image. Tags help you organize and manage your WorkSpaces Applications resources.</p>
+    # @option params [Types::RuntimeValidationConfig] :runtime_validation_config
+    #   <p>Configuration for runtime validation of the imported image. When specified, WorkSpaces Applications provisions an instance to test streaming functionality, which helps ensure the image is suitable for use.</p>
+    # @option params [String] :agent_software_version
+    #   <p>The version of the WorkSpaces Applications agent to use for the imported image. Choose CURRENT_LATEST to use the agent version available at the time of import, or ALWAYS_LATEST to automatically update to the latest agent version when new versions are released.</p>
+    # @option params [Array<Types::ApplicationConfig>] :app_catalog_config
+    #   <p>Configuration for the application catalog of the imported image. This allows you to specify applications available for streaming, including their paths, icons, and launch parameters. This field contains sensitive data.</p>
+    # @option params [Boolean] :dry_run
+    #   <p>When set to true, performs validation checks without actually creating the imported image. Use this to verify your configuration before executing the actual import operation.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     name: "Name", # required
+    #     source_ami_id: "PhotonAmiId",
+    #     workspace_image_id: "WorkspaceImageId",
+    #     iam_role_arn: "Arn",
+    #     description: "ImageImportDescription",
+    #     display_name: "ImageImportDisplayName",
+    #     tags: {
+    #       "TagKey" => "TagValue"
+    #     },
+    #     runtime_validation_config: {
+    #       intended_instance_type: "InstanceType"
+    #     },
+    #     agent_software_version: "CURRENT_LATEST" # One of: ["CURRENT_LATEST", "ALWAYS_LATEST"],
+    #     app_catalog_config: [
+    #       {
+    #         name: "AppName", # required
+    #         display_name: "AppDisplayName",
+    #         absolute_app_path: "FilePath", # required
+    #         absolute_icon_path: "FilePath",
+    #         absolute_manifest_path: "FilePath",
+    #         working_directory: "FilePath",
+    #         launch_parameters: "LaunchParameters"
+    #       }
+    #     ],
+    #     dry_run: false
+    #   }
+    #   options = {}
+    #   response = client.create_imported_image(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     image: {
+    #       name: "String", # required
+    #       arn: "Arn",
+    #       base_image_arn: "Arn",
+    #       display_name: "String",
+    #       state: "PENDING" # One of: ["PENDING", "AVAILABLE", "FAILED", "COPYING", "DELETING", "CREATING", "IMPORTING", "VALIDATING"],
+    #       visibility: "PUBLIC" # One of: ["PUBLIC", "PRIVATE", "SHARED"],
+    #       image_builder_supported: false,
+    #       image_builder_name: "String",
+    #       platform: "WINDOWS" # One of: ["WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"],
+    #       description: "String",
+    #       state_change_reason: {
+    #         code: "INTERNAL_ERROR" # One of: ["INTERNAL_ERROR", "IMAGE_BUILDER_NOT_AVAILABLE", "IMAGE_COPY_FAILURE", "IMAGE_UPDATE_FAILURE", "IMAGE_IMPORT_FAILURE"],
+    #         message: "String"
+    #       },
+    #       applications: [
+    #         {
+    #           name: "String",
+    #           display_name: "String",
+    #           icon_url: "String",
+    #           launch_path: "String",
+    #           launch_parameters: "String",
+    #           enabled: false,
+    #           metadata: {
+    #             "String" => "String"
+    #           },
+    #           working_directory: "String",
+    #           description: "String",
+    #           arn: "Arn",
+    #           app_block_arn: "Arn",
+    #           icon_s3_location: {
+    #             s3_bucket: "S3Bucket", # required
+    #             s3_key: "S3Key"
+    #           },
+    #           platforms: ["WINDOWS" # One of: ["WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"]],
+    #           instance_families: ["String"],
+    #           created_time: Time.now
+    #         }
+    #       ],
+    #       created_time: Time.now,
+    #       public_base_image_released_date: Time.now,
+    #       appstream_agent_version: "AppstreamAgentVersion",
+    #       image_permissions: {
+    #         allow_fleet: false,
+    #         allow_image_builder: false
+    #       },
+    #       image_errors: [
+    #         {
+    #           error_code: "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION" # One of: ["IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR", "VALIDATION_ERROR"],
+    #           error_message: "String",
+    #           error_timestamp: Time.now
+    #         }
+    #       ],
+    #       latest_appstream_agent_version: "TRUE" # One of: ["TRUE", "FALSE"],
+    #       supported_instance_families: ["String"],
+    #       dynamic_app_providers_enabled: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #       image_shared_with_others: "TRUE" # One of: ["TRUE", "FALSE"],
+    #       managed_software_included: false,
+    #       image_type: "CUSTOM" # One of: ["CUSTOM", "NATIVE", "BYOL"],
+    #       image_software_metadata: {
+    #         nvidia_grid_driver_version: "NvidiaGridDriverVersion"
+    #       }
+    #     }
+    #   }
+    # @return [Types::CreateImportedImageResult]
+    def create_imported_image(params = {}, options = {})
+      request = build_request(:create_imported_image, params)
       request.send_request(options)
     end
 
@@ -1570,13 +1993,19 @@ module Aws::AppStream
     #            <p>If you do not specify a value, the value is set to an empty string.</p>
     #            <p>Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following special characters: </p>
     #            <p>_ . : / = + \ - @</p>
-    #            <p>For more information about tags, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>
+    #            <p>For more information about tags, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html">Tagging Your Resources</a> in the <i>Amazon WorkSpaces Applications Administration Guide</i>.</p>
     # @option params [Array<Types::AccessEndpoint>] :access_endpoints
-    #   <p>The list of interface VPC endpoint (interface endpoint) objects. Users of the stack can connect to AppStream 2.0 only through the specified endpoints.</p>
+    #   <p>The list of interface VPC endpoint (interface endpoint) objects. Users of the stack can connect to WorkSpaces Applications only through the specified endpoints.</p>
     # @option params [Array<String>] :embed_host_domains
-    #   <p>The domains where AppStream 2.0 streaming sessions can be embedded in an iframe. You must approve the domains that you want to host embedded AppStream 2.0 streaming sessions. </p>
+    #   <p>The domains where WorkSpaces Applications streaming sessions can be embedded in an iframe. You must approve the domains that you want to host embedded WorkSpaces Applications streaming sessions. </p>
     # @option params [Types::StreamingExperienceSettings] :streaming_experience_settings
     #   <p>The streaming protocol you want your stack to prefer. This can be UDP or TCP. Currently, UDP is only supported in the Windows native client.</p>
+    # @option params [Types::ContentRedirection] :content_redirection
+    #   <p>Configuration for bidirectional URL redirection between the streaming session and the local client. Use HostToClient to redirect URLs from the remote desktop to the local browser.</p>
+    # @option params [Types::AgentAccessConfig] :agent_access_config
+    #   <p>The configuration for agent access on the stack. If specified, agent access is enabled for the stack.</p>
+    # @option params [String] :storage_connector_authentication
+    #   <p>Specifies whether users' cloud storage authentication persists across streaming sessions. When you specify FORCE_REAUTHENTICATION, WorkSpaces Applications removes the stored authentication for the stack's OneDrive and Google Drive connectors when a user's session ends. The user links their cloud storage again on their next session. The default is REUSE_CREDENTIALS.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     name: "Name", # required
@@ -1615,7 +2044,28 @@ module Aws::AppStream
     #     embed_host_domains: ["EmbedHostDomain"],
     #     streaming_experience_settings: {
     #       preferred_protocol: "TCP" # One of: ["TCP", "UDP"]
-    #     }
+    #     },
+    #     content_redirection: {
+    #       host_to_client: {
+    #         enabled: false, # required
+    #         allowed_urls: ["UrlPattern"],
+    #         denied_urls: ["UrlPattern"]
+    #       }
+    #     },
+    #     agent_access_config: {
+    #       settings: [ # required
+    #         {
+    #           agent_action: "COMPUTER_VISION" # One of: ["COMPUTER_VISION", "COMPUTER_INPUT", "FORWARD_MCP_TOOLS"], # required
+    #           permission: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
+    #         }
+    #       ],
+    #       s3_bucket_arn: "S3BucketArn",
+    #       screenshots_upload_enabled: false,
+    #       screen_resolution: "W_1280xH_720" # One of: ["W_1280xH_720"], # required
+    #       screen_image_format: "PNG" # One of: ["PNG", "JPEG"], # required
+    #       user_control_mode: "VIEW_ONLY" # One of: ["VIEW_ONLY", "VIEW_STOP", "DISABLED"]
+    #     },
+    #     storage_connector_authentication: "FORCE_REAUTHENTICATION" # One of: ["FORCE_REAUTHENTICATION", "REUSE_CREDENTIALS"]
     #   }
     #   options = {}
     #   response = client.create_stack(params, options)
@@ -1665,7 +2115,28 @@ module Aws::AppStream
     #       embed_host_domains: ["EmbedHostDomain"],
     #       streaming_experience_settings: {
     #         preferred_protocol: "TCP" # One of: ["TCP", "UDP"]
-    #       }
+    #       },
+    #       content_redirection: {
+    #         host_to_client: {
+    #           enabled: false, # required
+    #           allowed_urls: ["UrlPattern"],
+    #           denied_urls: ["UrlPattern"]
+    #         }
+    #       },
+    #       agent_access_config: {
+    #         settings: [ # required
+    #           {
+    #             agent_action: "COMPUTER_VISION" # One of: ["COMPUTER_VISION", "COMPUTER_INPUT", "FORWARD_MCP_TOOLS"], # required
+    #             permission: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
+    #           }
+    #         ],
+    #         s3_bucket_arn: "S3BucketArn",
+    #         screenshots_upload_enabled: false,
+    #         screen_resolution: "W_1280xH_720" # One of: ["W_1280xH_720"], # required
+    #         screen_image_format: "PNG" # One of: ["PNG", "JPEG"], # required
+    #         user_control_mode: "VIEW_ONLY" # One of: ["VIEW_ONLY", "VIEW_STOP", "DISABLED"]
+    #       },
+    #       storage_connector_authentication: "FORCE_REAUTHENTICATION" # One of: ["FORCE_REAUTHENTICATION", "REUSE_CREDENTIALS"]
     #     }
     #   }
     # @return [Types::CreateStackResult]
@@ -1674,7 +2145,7 @@ module Aws::AppStream
       request.send_request(options)
     end
 
-    # <p>Creates a temporary URL to start an AppStream 2.0 streaming session for the specified user. A streaming URL enables application streaming to be tested without user setup. </p>
+    # <p>Creates a temporary URL to start an WorkSpaces Applications streaming session for the specified user. A streaming URL enables application streaming to be tested without user setup. </p>
     # @param [Hash, Types::CreateStreamingURLRequest] params
     # @option params [String] :stack_name
     #   <p>The name of the stack.</p>
@@ -1689,7 +2160,7 @@ module Aws::AppStream
     #   <p>The time that the streaming URL will be valid, in seconds.
     #               Specify a value between 1 and 604800 seconds. The default is 60 seconds.</p>
     # @option params [String] :session_context
-    #   <p>The session context. For more information, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/managing-stacks-fleets.html#managing-stacks-fleets-parameters">Session Context</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>
+    #   <p>The session context. For more information, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/managing-stacks-fleets.html#managing-stacks-fleets-parameters">Session Context</a> in the <i>Amazon WorkSpaces Applications Administration Guide</i>.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     stack_name: "String", # required
@@ -1774,9 +2245,9 @@ module Aws::AppStream
       request.send_request(options)
     end
 
-    # <p>Creates a new image with the latest Windows operating system updates, driver updates, and AppStream 2.0 agent software.</p>
+    # <p>Creates a new image with the latest Windows operating system updates, driver updates, and WorkSpaces Applications agent software.</p>
     #          <p>For more information, see the "Update an Image by Using
-    #             Managed AppStream 2.0 Image Updates" section in <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/administer-images.html">Administer Your AppStream 2.0 Images</a>, in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>
+    #             Managed WorkSpaces Applications Image Updates" section in <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/administer-images.html">Administer Your WorkSpaces Applications Images</a>, in the <i>Amazon WorkSpaces Applications Administration Guide</i>.</p>
     # @param [Hash, Types::CreateUpdatedImageRequest] params
     # @option params [String] :existing_image_name
     #   <p>The name of the image to update.</p>
@@ -1791,9 +2262,9 @@ module Aws::AppStream
     #            <p>Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following special characters: </p>
     #            <p>_ . : / = + \ - @</p>
     #            <p>If you do not specify a value, the value is set to an empty string.</p>
-    #            <p>For more information about tags, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>
+    #            <p>For more information about tags, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html">Tagging Your Resources</a> in the <i>Amazon WorkSpaces Applications Administration Guide</i>.</p>
     # @option params [Boolean] :dry_run
-    #   <p>Indicates whether to display the status of image update availability before AppStream 2.0 initiates the process of creating a new updated image. If this value is set to <code>true</code>, AppStream 2.0 displays whether image updates are available. If this value is set to <code>false</code>, AppStream 2.0 initiates the process of creating a new updated image without displaying whether image updates are available.</p>
+    #   <p>Indicates whether to display the status of image update availability before WorkSpaces Applications initiates the process of creating a new updated image. If this value is set to <code>true</code>, WorkSpaces Applications displays whether image updates are available. If this value is set to <code>false</code>, WorkSpaces Applications initiates the process of creating a new updated image without displaying whether image updates are available.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     existing_image_name: "Name", # required
@@ -1815,14 +2286,14 @@ module Aws::AppStream
     #       arn: "Arn",
     #       base_image_arn: "Arn",
     #       display_name: "String",
-    #       state: "PENDING" # One of: ["PENDING", "AVAILABLE", "FAILED", "COPYING", "DELETING", "CREATING", "IMPORTING"],
+    #       state: "PENDING" # One of: ["PENDING", "AVAILABLE", "FAILED", "COPYING", "DELETING", "CREATING", "IMPORTING", "VALIDATING"],
     #       visibility: "PUBLIC" # One of: ["PUBLIC", "PRIVATE", "SHARED"],
     #       image_builder_supported: false,
     #       image_builder_name: "String",
-    #       platform: "WINDOWS" # One of: ["WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8"],
+    #       platform: "WINDOWS" # One of: ["WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"],
     #       description: "String",
     #       state_change_reason: {
-    #         code: "INTERNAL_ERROR" # One of: ["INTERNAL_ERROR", "IMAGE_BUILDER_NOT_AVAILABLE", "IMAGE_COPY_FAILURE"],
+    #         code: "INTERNAL_ERROR" # One of: ["INTERNAL_ERROR", "IMAGE_BUILDER_NOT_AVAILABLE", "IMAGE_COPY_FAILURE", "IMAGE_UPDATE_FAILURE", "IMAGE_IMPORT_FAILURE"],
     #         message: "String"
     #       },
     #       applications: [
@@ -1844,7 +2315,7 @@ module Aws::AppStream
     #             s3_bucket: "S3Bucket", # required
     #             s3_key: "S3Key"
     #           },
-    #           platforms: ["WINDOWS" # One of: ["WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8"]],
+    #           platforms: ["WINDOWS" # One of: ["WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"]],
     #           instance_families: ["String"],
     #           created_time: Time.now
     #         }
@@ -1858,7 +2329,7 @@ module Aws::AppStream
     #       },
     #       image_errors: [
     #         {
-    #           error_code: "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION" # One of: ["IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"],
+    #           error_code: "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION" # One of: ["IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR", "VALIDATION_ERROR"],
     #           error_message: "String",
     #           error_timestamp: Time.now
     #         }
@@ -1866,7 +2337,12 @@ module Aws::AppStream
     #       latest_appstream_agent_version: "TRUE" # One of: ["TRUE", "FALSE"],
     #       supported_instance_families: ["String"],
     #       dynamic_app_providers_enabled: "ENABLED" # One of: ["ENABLED", "DISABLED"],
-    #       image_shared_with_others: "TRUE" # One of: ["TRUE", "FALSE"]
+    #       image_shared_with_others: "TRUE" # One of: ["TRUE", "FALSE"],
+    #       managed_software_included: false,
+    #       image_type: "CUSTOM" # One of: ["CUSTOM", "NATIVE", "BYOL"],
+    #       image_software_metadata: {
+    #         nvidia_grid_driver_version: "NvidiaGridDriverVersion"
+    #       }
     #     },
     #     can_update_image: false
     #   }
@@ -1990,7 +2466,7 @@ module Aws::AppStream
       request.send_request(options)
     end
 
-    # <p>Deletes the specified Directory Config object from AppStream 2.0. This object includes the information required to join streaming instances to an Active Directory domain.</p>
+    # <p>Deletes the specified Directory Config object from WorkSpaces Applications. This object includes the information required to join streaming instances to an Active Directory domain.</p>
     # @param [Hash, Types::DeleteDirectoryConfigRequest] params
     # @option params [String] :directory_name
     #   <p>The name of the directory configuration.</p>
@@ -2050,7 +2526,7 @@ module Aws::AppStream
       request.send_request(options)
     end
 
-    # <p>Deletes the specified image. You cannot delete an image when it is in use.  
+    # <p>Deletes the specified image. You cannot delete an image when it is in use.
     #             After you delete an image, you cannot provision new capacity using the image.</p>
     # @param [Hash, Types::DeleteImageRequest] params
     # @option params [String] :name
@@ -2069,14 +2545,14 @@ module Aws::AppStream
     #       arn: "Arn",
     #       base_image_arn: "Arn",
     #       display_name: "String",
-    #       state: "PENDING" # One of: ["PENDING", "AVAILABLE", "FAILED", "COPYING", "DELETING", "CREATING", "IMPORTING"],
+    #       state: "PENDING" # One of: ["PENDING", "AVAILABLE", "FAILED", "COPYING", "DELETING", "CREATING", "IMPORTING", "VALIDATING"],
     #       visibility: "PUBLIC" # One of: ["PUBLIC", "PRIVATE", "SHARED"],
     #       image_builder_supported: false,
     #       image_builder_name: "String",
-    #       platform: "WINDOWS" # One of: ["WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8"],
+    #       platform: "WINDOWS" # One of: ["WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"],
     #       description: "String",
     #       state_change_reason: {
-    #         code: "INTERNAL_ERROR" # One of: ["INTERNAL_ERROR", "IMAGE_BUILDER_NOT_AVAILABLE", "IMAGE_COPY_FAILURE"],
+    #         code: "INTERNAL_ERROR" # One of: ["INTERNAL_ERROR", "IMAGE_BUILDER_NOT_AVAILABLE", "IMAGE_COPY_FAILURE", "IMAGE_UPDATE_FAILURE", "IMAGE_IMPORT_FAILURE"],
     #         message: "String"
     #       },
     #       applications: [
@@ -2098,7 +2574,7 @@ module Aws::AppStream
     #             s3_bucket: "S3Bucket", # required
     #             s3_key: "S3Key"
     #           },
-    #           platforms: ["WINDOWS" # One of: ["WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8"]],
+    #           platforms: ["WINDOWS" # One of: ["WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"]],
     #           instance_families: ["String"],
     #           created_time: Time.now
     #         }
@@ -2112,7 +2588,7 @@ module Aws::AppStream
     #       },
     #       image_errors: [
     #         {
-    #           error_code: "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION" # One of: ["IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"],
+    #           error_code: "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION" # One of: ["IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR", "VALIDATION_ERROR"],
     #           error_message: "String",
     #           error_timestamp: Time.now
     #         }
@@ -2120,7 +2596,12 @@ module Aws::AppStream
     #       latest_appstream_agent_version: "TRUE" # One of: ["TRUE", "FALSE"],
     #       supported_instance_families: ["String"],
     #       dynamic_app_providers_enabled: "ENABLED" # One of: ["ENABLED", "DISABLED"],
-    #       image_shared_with_others: "TRUE" # One of: ["TRUE", "FALSE"]
+    #       image_shared_with_others: "TRUE" # One of: ["TRUE", "FALSE"],
+    #       managed_software_included: false,
+    #       image_type: "CUSTOM" # One of: ["CUSTOM", "NATIVE", "BYOL"],
+    #       image_software_metadata: {
+    #         nvidia_grid_driver_version: "NvidiaGridDriverVersion"
+    #       }
     #     }
     #   }
     # @return [Types::DeleteImageResult]
@@ -2153,9 +2634,9 @@ module Aws::AppStream
     #         security_group_ids: ["String"]
     #       },
     #       instance_type: "String",
-    #       platform: "WINDOWS" # One of: ["WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8"],
+    #       platform: "WINDOWS" # One of: ["WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"],
     #       iam_role_arn: "Arn",
-    #       state: "PENDING" # One of: ["PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED", "UPDATING", "PENDING_QUALIFICATION"],
+    #       state: "PENDING" # One of: ["PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED", "UPDATING", "PENDING_QUALIFICATION", "PENDING_SYNCING_APPS", "SYNCING_APPS", "PENDING_IMAGE_IMPORT"],
     #       state_change_reason: {
     #         code: "INTERNAL_ERROR" # One of: ["INTERNAL_ERROR", "IMAGE_UNAVAILABLE"],
     #         message: "String"
@@ -2168,11 +2649,12 @@ module Aws::AppStream
     #       },
     #       network_access_configuration: {
     #         eni_private_ip_address: "String",
+    #         eni_ipv6_addresses: ["String"],
     #         eni_id: "String"
     #       },
     #       image_builder_errors: [
     #         {
-    #           error_code: "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION" # One of: ["IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"],
+    #           error_code: "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION" # One of: ["IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR", "VALIDATION_ERROR"],
     #           error_message: "String",
     #           error_timestamp: Time.now
     #         }
@@ -2184,7 +2666,11 @@ module Aws::AppStream
     #           vpce_id: "String"
     #         }
     #       ],
-    #       latest_appstream_agent_version: "TRUE" # One of: ["TRUE", "FALSE"]
+    #       root_volume_config: {
+    #         volume_size_in_gb: 1
+    #       },
+    #       latest_appstream_agent_version: "TRUE" # One of: ["TRUE", "FALSE"],
+    #       disable_imdsv1: false
     #     }
     #   }
     # @return [Types::DeleteImageBuilderResult]
@@ -2368,7 +2854,7 @@ module Aws::AppStream
     #         created_time: Time.now,
     #         app_block_builder_errors: [
     #           {
-    #             error_code: "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION" # One of: ["IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"],
+    #             error_code: "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION" # One of: ["IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR", "VALIDATION_ERROR"],
     #             error_message: "String",
     #             error_timestamp: Time.now
     #           }
@@ -2382,7 +2868,8 @@ module Aws::AppStream
     #             endpoint_type: "STREAMING" # One of: ["STREAMING"], # required
     #             vpce_id: "String"
     #           }
-    #         ]
+    #         ],
+    #         disable_imdsv1: false
     #       }
     #     ],
     #     next_token: "String"
@@ -2457,6 +2944,46 @@ module Aws::AppStream
     # @return [Types::DescribeAppBlocksResult]
     def describe_app_blocks(params = {}, options = {})
       request = build_request(:describe_app_blocks, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves license included application usage information.</p>
+    # @param [Hash, Types::DescribeAppLicenseUsageRequest] params
+    # @option params [String] :billing_period
+    #   <p>Billing period for the usage record.</p>
+    #            <p>Specify the value in <i>yyyy-mm</i> format. For example, for August
+    #               2025, use <i>2025-08</i>.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return.</p>
+    # @option params [String] :next_token
+    #   <p>Token for pagination of results.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     billing_period: "String", # required
+    #     max_results: 1,
+    #     next_token: "String"
+    #   }
+    #   options = {}
+    #   response = client.describe_app_license_usage(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     app_license_usages: [
+    #       {
+    #         user_arn: "String", # required
+    #         billing_period: "String", # required
+    #         owner_aws_account_id: "AwsAccountId", # required
+    #         subscription_first_used_date: Time.now, # required
+    #         subscription_last_used_date: Time.now, # required
+    #         license_type: "String", # required
+    #         user_id: "String", # required
+    #       }
+    #     ],
+    #     next_token: "String"
+    #   }
+    # @return [Types::DescribeAppLicenseUsageResult]
+    def describe_app_license_usage(params = {}, options = {})
+      request = build_request(:describe_app_license_usage, params)
       request.send_request(options)
     end
 
@@ -2536,7 +3063,7 @@ module Aws::AppStream
     #           s3_bucket: "S3Bucket", # required
     #           s3_key: "S3Key"
     #         },
-    #         platforms: ["WINDOWS" # One of: ["WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8"]],
+    #         platforms: ["WINDOWS" # One of: ["WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"]],
     #         instance_families: ["String"],
     #         created_time: Time.now
     #       }
@@ -2549,7 +3076,7 @@ module Aws::AppStream
       request.send_request(options)
     end
 
-    # <p>Retrieves a list that describes one or more specified Directory Config objects for AppStream 2.0, if the names for these objects are provided. Otherwise, all Directory Config objects in the account are described. These objects include the configuration information required to join fleets and image builders to Microsoft Active Directory domains. 
+    # <p>Retrieves a list that describes one or more specified Directory Config objects for WorkSpaces Applications, if the names for these objects are provided. Otherwise, all Directory Config objects in the account are described. These objects include the configuration information required to join fleets and image builders to Microsoft Active Directory domains.
     #         </p>
     #          <p>Although the response syntax in this topic includes the account password, this password is not returned in the actual response.</p>
     # @param [Hash, Types::DescribeDirectoryConfigsRequest] params
@@ -2673,7 +3200,10 @@ module Aws::AppStream
     #           desired_user_sessions: 1,
     #           available_user_sessions: 1,
     #           active_user_sessions: 1,
-    #           actual_user_sessions: 1
+    #           actual_user_sessions: 1,
+    #           draining: 1,
+    #           drain_mode_active_user_sessions: 1,
+    #           drain_mode_unused_user_sessions: 1
     #         },
     #         max_user_duration_in_seconds: 1,
     #         disconnect_timeout_in_seconds: 1,
@@ -2685,7 +3215,7 @@ module Aws::AppStream
     #         created_time: Time.now,
     #         fleet_errors: [
     #           {
-    #             error_code: "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION" # One of: ["IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"],
+    #             error_code: "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION" # One of: ["IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR", "VALIDATION_ERROR"],
     #             error_message: "String"
     #           }
     #         ],
@@ -2697,14 +3227,18 @@ module Aws::AppStream
     #         idle_disconnect_timeout_in_seconds: 1,
     #         iam_role_arn: "Arn",
     #         stream_view: "APP" # One of: ["APP", "DESKTOP"],
-    #         platform: "WINDOWS" # One of: ["WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8"],
+    #         platform: "WINDOWS" # One of: ["WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"],
     #         max_concurrent_sessions: 1,
     #         usb_device_filter_strings: ["UsbDeviceFilterString"],
     #         session_script_s3_location: {
     #           s3_bucket: "S3Bucket", # required
     #           s3_key: "S3Key"
     #         },
-    #         max_sessions_per_instance: 1
+    #         max_sessions_per_instance: 1,
+    #         root_volume_config: {
+    #           volume_size_in_gb: 1
+    #         },
+    #         disable_imdsv1: false
     #       }
     #     ],
     #     next_token: "String"
@@ -2746,9 +3280,9 @@ module Aws::AppStream
     #           security_group_ids: ["String"]
     #         },
     #         instance_type: "String",
-    #         platform: "WINDOWS" # One of: ["WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8"],
+    #         platform: "WINDOWS" # One of: ["WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"],
     #         iam_role_arn: "Arn",
-    #         state: "PENDING" # One of: ["PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED", "UPDATING", "PENDING_QUALIFICATION"],
+    #         state: "PENDING" # One of: ["PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED", "UPDATING", "PENDING_QUALIFICATION", "PENDING_SYNCING_APPS", "SYNCING_APPS", "PENDING_IMAGE_IMPORT"],
     #         state_change_reason: {
     #           code: "INTERNAL_ERROR" # One of: ["INTERNAL_ERROR", "IMAGE_UNAVAILABLE"],
     #           message: "String"
@@ -2761,11 +3295,12 @@ module Aws::AppStream
     #         },
     #         network_access_configuration: {
     #           eni_private_ip_address: "String",
+    #           eni_ipv6_addresses: ["String"],
     #           eni_id: "String"
     #         },
     #         image_builder_errors: [
     #           {
-    #             error_code: "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION" # One of: ["IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"],
+    #             error_code: "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION" # One of: ["IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR", "VALIDATION_ERROR"],
     #             error_message: "String",
     #             error_timestamp: Time.now
     #           }
@@ -2777,7 +3312,11 @@ module Aws::AppStream
     #             vpce_id: "String"
     #           }
     #         ],
-    #         latest_appstream_agent_version: "TRUE" # One of: ["TRUE", "FALSE"]
+    #         root_volume_config: {
+    #           volume_size_in_gb: 1
+    #         },
+    #         latest_appstream_agent_version: "TRUE" # One of: ["TRUE", "FALSE"],
+    #         disable_imdsv1: false
     #       }
     #     ],
     #     next_token: "String"
@@ -2859,14 +3398,14 @@ module Aws::AppStream
     #         arn: "Arn",
     #         base_image_arn: "Arn",
     #         display_name: "String",
-    #         state: "PENDING" # One of: ["PENDING", "AVAILABLE", "FAILED", "COPYING", "DELETING", "CREATING", "IMPORTING"],
+    #         state: "PENDING" # One of: ["PENDING", "AVAILABLE", "FAILED", "COPYING", "DELETING", "CREATING", "IMPORTING", "VALIDATING"],
     #         visibility: "PUBLIC" # One of: ["PUBLIC", "PRIVATE", "SHARED"],
     #         image_builder_supported: false,
     #         image_builder_name: "String",
-    #         platform: "WINDOWS" # One of: ["WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8"],
+    #         platform: "WINDOWS" # One of: ["WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"],
     #         description: "String",
     #         state_change_reason: {
-    #           code: "INTERNAL_ERROR" # One of: ["INTERNAL_ERROR", "IMAGE_BUILDER_NOT_AVAILABLE", "IMAGE_COPY_FAILURE"],
+    #           code: "INTERNAL_ERROR" # One of: ["INTERNAL_ERROR", "IMAGE_BUILDER_NOT_AVAILABLE", "IMAGE_COPY_FAILURE", "IMAGE_UPDATE_FAILURE", "IMAGE_IMPORT_FAILURE"],
     #           message: "String"
     #         },
     #         applications: [
@@ -2888,7 +3427,7 @@ module Aws::AppStream
     #               s3_bucket: "S3Bucket", # required
     #               s3_key: "S3Key"
     #             },
-    #             platforms: ["WINDOWS" # One of: ["WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8"]],
+    #             platforms: ["WINDOWS" # One of: ["WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"]],
     #             instance_families: ["String"],
     #             created_time: Time.now
     #           }
@@ -2902,7 +3441,7 @@ module Aws::AppStream
     #         },
     #         image_errors: [
     #           {
-    #             error_code: "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION" # One of: ["IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"],
+    #             error_code: "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION" # One of: ["IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR", "VALIDATION_ERROR"],
     #             error_message: "String",
     #             error_timestamp: Time.now
     #           }
@@ -2910,7 +3449,12 @@ module Aws::AppStream
     #         latest_appstream_agent_version: "TRUE" # One of: ["TRUE", "FALSE"],
     #         supported_instance_families: ["String"],
     #         dynamic_app_providers_enabled: "ENABLED" # One of: ["ENABLED", "DISABLED"],
-    #         image_shared_with_others: "TRUE" # One of: ["TRUE", "FALSE"]
+    #         image_shared_with_others: "TRUE" # One of: ["TRUE", "FALSE"],
+    #         managed_software_included: false,
+    #         image_type: "CUSTOM" # One of: ["CUSTOM", "NATIVE", "BYOL"],
+    #         image_software_metadata: {
+    #           nvidia_grid_driver_version: "NvidiaGridDriverVersion"
+    #         }
     #       }
     #     ],
     #     next_token: "String"
@@ -2922,7 +3466,7 @@ module Aws::AppStream
     end
 
     # <p>Retrieves a list that describes the streaming sessions for a specified stack and fleet. If a UserId is provided for the stack and fleet,
-    #             only streaming sessions for that user are described. If an authentication type is not provided, 
+    #             only streaming sessions for that user are described. If an authentication type is not provided,
     #             the default is to authenticate users using a streaming URL.</p>
     # @param [Hash, Types::DescribeSessionsRequest] params
     # @option params [String] :stack_name
@@ -2937,7 +3481,7 @@ module Aws::AppStream
     #   <p>The size of each page of results. The default value is 20 and the maximum value is 50.</p>
     # @option params [String] :authentication_type
     #   <p>The authentication method. Specify <code>API</code> for a user
-    #               authenticated using a streaming URL or <code>SAML</code> for a SAML federated user. 
+    #               authenticated using a streaming URL or <code>SAML</code> for a SAML federated user.
     #               The default is to authenticate users using a streaming URL.</p>
     # @option params [String] :instance_id
     #   <p>The identifier for the instance hosting the session.</p>
@@ -2969,9 +3513,11 @@ module Aws::AppStream
     #         authentication_type: "API" # One of: ["API", "SAML", "USERPOOL", "AWS_AD"],
     #         network_access_configuration: {
     #           eni_private_ip_address: "String",
+    #           eni_ipv6_addresses: ["String"],
     #           eni_id: "String"
     #         },
-    #         instance_id: "String"
+    #         instance_id: "String",
+    #         instance_drain_status: "ACTIVE" # One of: ["ACTIVE", "DRAINING", "NOT_APPLICABLE"]
     #       }
     #     ],
     #     next_token: "String"
@@ -2979,6 +3525,46 @@ module Aws::AppStream
     # @return [Types::DescribeSessionsResult]
     def describe_sessions(params = {}, options = {})
       request = build_request(:describe_sessions, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves license included application associations for a specified resource.</p>
+    # @param [Hash, Types::DescribeSoftwareAssociationsRequest] params
+    # @option params [String] :associated_resource
+    #   <p>The ARN of the resource to describe software associations. Possible resources are Image and ImageBuilder.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return.</p>
+    # @option params [String] :next_token
+    #   <p>The pagination token to use to retrieve the next page of results for this operation.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     associated_resource: "Arn", # required
+    #     max_results: 1,
+    #     next_token: "String"
+    #   }
+    #   options = {}
+    #   response = client.describe_software_associations(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     associated_resource: "Arn",
+    #     software_associations: [
+    #       {
+    #         software_name: "String",
+    #         status: "STAGED_FOR_INSTALLATION" # One of: ["STAGED_FOR_INSTALLATION", "PENDING_INSTALLATION", "INSTALLED", "STAGED_FOR_UNINSTALLATION", "PENDING_UNINSTALLATION", "FAILED_TO_INSTALL", "FAILED_TO_UNINSTALL"],
+    #         deployment_error: [
+    #           {
+    #             error_code: "String",
+    #             error_message: "String"
+    #           }
+    #         ]
+    #       }
+    #     ],
+    #     next_token: "String"
+    #   }
+    # @return [Types::DescribeSoftwareAssociationsResult]
+    def describe_software_associations(params = {}, options = {})
+      request = build_request(:describe_software_associations, params)
       request.send_request(options)
     end
 
@@ -3042,7 +3628,28 @@ module Aws::AppStream
     #         embed_host_domains: ["EmbedHostDomain"],
     #         streaming_experience_settings: {
     #           preferred_protocol: "TCP" # One of: ["TCP", "UDP"]
-    #         }
+    #         },
+    #         content_redirection: {
+    #           host_to_client: {
+    #             enabled: false, # required
+    #             allowed_urls: ["UrlPattern"],
+    #             denied_urls: ["UrlPattern"]
+    #           }
+    #         },
+    #         agent_access_config: {
+    #           settings: [ # required
+    #             {
+    #               agent_action: "COMPUTER_VISION" # One of: ["COMPUTER_VISION", "COMPUTER_INPUT", "FORWARD_MCP_TOOLS"], # required
+    #               permission: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
+    #             }
+    #           ],
+    #           s3_bucket_arn: "S3BucketArn",
+    #           screenshots_upload_enabled: false,
+    #           screen_resolution: "W_1280xH_720" # One of: ["W_1280xH_720"], # required
+    #           screen_image_format: "PNG" # One of: ["PNG", "JPEG"], # required
+    #           user_control_mode: "VIEW_ONLY" # One of: ["VIEW_ONLY", "VIEW_STOP", "DISABLED"]
+    #         },
+    #         storage_connector_authentication: "FORCE_REAUTHENTICATION" # One of: ["FORCE_REAUTHENTICATION", "REUSE_CREDENTIALS"]
     #       }
     #     ],
     #     next_token: "String"
@@ -3216,7 +3823,7 @@ module Aws::AppStream
       request.send_request(options)
     end
 
-    # <p>Disables the specified user in the user pool. Users can't sign in to AppStream 2.0 until they are re-enabled. This action does not delete the user. </p>
+    # <p>Disables the specified user in the user pool. Users can't sign in to WorkSpaces Applications until they are re-enabled. This action does not delete the user. </p>
     # @param [Hash, Types::DisableUserRequest] params
     # @option params [String] :user_name
     #   <p>The email address of the user.</p>
@@ -3332,7 +3939,123 @@ module Aws::AppStream
       request.send_request(options)
     end
 
-    # <p>Enables a user in the user pool. After being enabled, users can sign in to AppStream 2.0 and open applications from the stacks to which they are assigned.</p>
+    # <p>Removes license included application(s) association(s) from an image builder instance.</p>
+    # @param [Hash, Types::DisassociateSoftwareFromImageBuilderRequest] params
+    # @option params [String] :image_builder_name
+    #   <p>The name of the target image builder instance.</p>
+    # @option params [Array<String>] :software_names
+    #   <p>The list of license included applications to disassociate from the image builder.</p>
+    #            <p>Possible values include the following:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>Microsoft_Office_2021_LTSC_Professional_Plus_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Office_2021_LTSC_Professional_Plus_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Office_2024_LTSC_Professional_Plus_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Office_2024_LTSC_Professional_Plus_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2021_LTSC_Professional_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2021_LTSC_Professional_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2024_LTSC_Professional_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2024_LTSC_Professional_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2021_Professional_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2021_Professional_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2024_Professional_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2024_Professional_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Office_2021_LTSC_Standard_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Office_2021_LTSC_Standard_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Office_2024_LTSC_Standard_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Office_2024_LTSC_Standard_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2021_LTSC_Standard_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2021_LTSC_Standard_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2024_LTSC_Standard_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2024_LTSC_Standard_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2021_Standard_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2021_Standard_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2024_Standard_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2024_Standard_64Bit</p>
+    #               </li>
+    #            </ul>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     image_builder_name: "Name", # required
+    #     software_names: ["String"], # required
+    #   }
+    #   options = {}
+    #   response = client.disassociate_software_from_image_builder(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::DisassociateSoftwareFromImageBuilderResult]
+    def disassociate_software_from_image_builder(params = {}, options = {})
+      request = build_request(:disassociate_software_from_image_builder, params)
+      request.send_request(options)
+    end
+
+    # <p>Drains the instance hosting the specified streaming session. The instance stops accepting new sessions while existing sessions continue uninterrupted. Once all sessions end, the instance is reclaimed and replaced. This only applies to multi-session fleets.</p>
+    # @param [Hash, Types::DrainSessionInstanceRequest] params
+    # @option params [String] :session_id
+    #   <p>The identifier of the streaming session.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     session_id: "String", # required
+    #   }
+    #   options = {}
+    #   response = client.drain_session_instance(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::DrainSessionInstanceResult]
+    def drain_session_instance(params = {}, options = {})
+      request = build_request(:drain_session_instance, params)
+      request.send_request(options)
+    end
+
+    # <p>Enables a user in the user pool. After being enabled, users can sign in to WorkSpaces Applications and open applications from the stacks to which they are assigned.</p>
     # @param [Hash, Types::EnableUserRequest] params
     # @option params [String] :user_name
     #   <p>The email address of the user.</p>
@@ -3373,6 +4096,44 @@ module Aws::AppStream
     # @return [Types::ExpireSessionResult]
     def expire_session(params = {}, options = {})
       request = build_request(:expire_session, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves information about an export image task, including its current state, progress, and any error details.</p>
+    # @param [Hash, Types::GetExportImageTaskRequest] params
+    # @option params [String] :task_id
+    #   <p>The unique identifier of the export image task to retrieve information about.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     task_id: "UUID"
+    #   }
+    #   options = {}
+    #   response = client.get_export_image_task(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     export_image_task: {
+    #       task_id: "UUID", # required
+    #       image_arn: "Arn", # required
+    #       ami_name: "AmiName", # required
+    #       created_date: Time.now, # required
+    #       ami_description: "Description",
+    #       state: "EXPORTING" # One of: ["EXPORTING", "COMPLETED", "FAILED", "TIMED_OUT"],
+    #       ami_id: "PhotonAmiId",
+    #       tag_specifications: {
+    #         "TagKey" => "TagValue"
+    #       },
+    #       error_details: [
+    #         {
+    #           error_code: "String",
+    #           error_message: "String"
+    #         }
+    #       ]
+    #     }
+    #   }
+    # @return [Types::GetExportImageTaskResult]
+    def get_export_image_task(params = {}, options = {})
+      request = build_request(:get_export_image_task, params)
       request.send_request(options)
     end
 
@@ -3461,8 +4222,60 @@ module Aws::AppStream
       request.send_request(options)
     end
 
-    # <p>Retrieves a list of all tags for the specified AppStream 2.0 resource. You can tag AppStream 2.0 image builders, images, fleets, and stacks.</p>
-    #          <p>For more information about tags, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>
+    # <p>Lists export image tasks, with optional filtering and pagination. Use this operation to monitor the status of multiple export operations.</p>
+    # @param [Hash, Types::ListExportImageTasksRequest] params
+    # @option params [Array<Types::Filter>] :filters
+    #   <p>Optional filters to apply when listing export image tasks. Filters help you narrow down the results based on specific criteria.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of export image tasks to return in a single request. The valid range is 1-500, with a default of 50.</p>
+    # @option params [String] :next_token
+    #   <p>The pagination token from a previous request. Use this to retrieve the next page of results when there are more tasks than the MaxResults limit.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     filters: [
+    #       {
+    #         name: "FilterName", # required
+    #         values: ["FilterValue"], # required
+    #       }
+    #     ],
+    #     max_results: 1,
+    #     next_token: "String"
+    #   }
+    #   options = {}
+    #   response = client.list_export_image_tasks(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     export_image_tasks: [
+    #       {
+    #         task_id: "UUID", # required
+    #         image_arn: "Arn", # required
+    #         ami_name: "AmiName", # required
+    #         created_date: Time.now, # required
+    #         ami_description: "Description",
+    #         state: "EXPORTING" # One of: ["EXPORTING", "COMPLETED", "FAILED", "TIMED_OUT"],
+    #         ami_id: "PhotonAmiId",
+    #         tag_specifications: {
+    #           "TagKey" => "TagValue"
+    #         },
+    #         error_details: [
+    #           {
+    #             error_code: "String",
+    #             error_message: "String"
+    #           }
+    #         ]
+    #       }
+    #     ],
+    #     next_token: "String"
+    #   }
+    # @return [Types::ListExportImageTasksResult]
+    def list_export_image_tasks(params = {}, options = {})
+      request = build_request(:list_export_image_tasks, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves a list of all tags for the specified WorkSpaces Applications resource. You can tag WorkSpaces Applications image builders, images, fleets, and stacks.</p>
+    #          <p>For more information about tags, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html">Tagging Your Resources</a> in the <i>Amazon WorkSpaces Applications Administration Guide</i>.</p>
     # @param [Hash, Types::ListTagsForResourceRequest] params
     # @option params [String] :resource_arn
     #   <p>The Amazon Resource Name (ARN) of the resource.</p>
@@ -3519,7 +4332,7 @@ module Aws::AppStream
     #       created_time: Time.now,
     #       app_block_builder_errors: [
     #         {
-    #           error_code: "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION" # One of: ["IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"],
+    #           error_code: "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION" # One of: ["IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR", "VALIDATION_ERROR"],
     #           error_message: "String",
     #           error_timestamp: Time.now
     #         }
@@ -3533,7 +4346,8 @@ module Aws::AppStream
     #           endpoint_type: "STREAMING" # One of: ["STREAMING"], # required
     #           vpce_id: "String"
     #         }
-    #       ]
+    #       ],
+    #       disable_imdsv1: false
     #     }
     #   }
     # @return [Types::StartAppBlockBuilderResult]
@@ -3566,7 +4380,7 @@ module Aws::AppStream
     # @option params [String] :name
     #   <p>The name of the image builder.</p>
     # @option params [String] :appstream_agent_version
-    #   <p>The version of the AppStream 2.0 agent to use for this image builder. To use the latest version of the AppStream 2.0 agent, specify [LATEST]. </p>
+    #   <p>The version of the WorkSpaces Applications agent to use for this image builder. To use the latest version of the WorkSpaces Applications agent, specify [LATEST]. </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     name: "String", # required
@@ -3588,9 +4402,9 @@ module Aws::AppStream
     #         security_group_ids: ["String"]
     #       },
     #       instance_type: "String",
-    #       platform: "WINDOWS" # One of: ["WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8"],
+    #       platform: "WINDOWS" # One of: ["WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"],
     #       iam_role_arn: "Arn",
-    #       state: "PENDING" # One of: ["PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED", "UPDATING", "PENDING_QUALIFICATION"],
+    #       state: "PENDING" # One of: ["PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED", "UPDATING", "PENDING_QUALIFICATION", "PENDING_SYNCING_APPS", "SYNCING_APPS", "PENDING_IMAGE_IMPORT"],
     #       state_change_reason: {
     #         code: "INTERNAL_ERROR" # One of: ["INTERNAL_ERROR", "IMAGE_UNAVAILABLE"],
     #         message: "String"
@@ -3603,11 +4417,12 @@ module Aws::AppStream
     #       },
     #       network_access_configuration: {
     #         eni_private_ip_address: "String",
+    #         eni_ipv6_addresses: ["String"],
     #         eni_id: "String"
     #       },
     #       image_builder_errors: [
     #         {
-    #           error_code: "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION" # One of: ["IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"],
+    #           error_code: "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION" # One of: ["IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR", "VALIDATION_ERROR"],
     #           error_message: "String",
     #           error_timestamp: Time.now
     #         }
@@ -3619,12 +4434,38 @@ module Aws::AppStream
     #           vpce_id: "String"
     #         }
     #       ],
-    #       latest_appstream_agent_version: "TRUE" # One of: ["TRUE", "FALSE"]
+    #       root_volume_config: {
+    #         volume_size_in_gb: 1
+    #       },
+    #       latest_appstream_agent_version: "TRUE" # One of: ["TRUE", "FALSE"],
+    #       disable_imdsv1: false
     #     }
     #   }
     # @return [Types::StartImageBuilderResult]
     def start_image_builder(params = {}, options = {})
       request = build_request(:start_image_builder, params)
+      request.send_request(options)
+    end
+
+    # <p>Initiates license included applications deployment to an image builder instance.</p>
+    # @param [Hash, Types::StartSoftwareDeploymentToImageBuilderRequest] params
+    # @option params [String] :image_builder_name
+    #   <p>The name of the target image builder instance.</p>
+    # @option params [Boolean] :retry_failed_deployments
+    #   <p>Whether to retry previously failed license included application deployments.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     image_builder_name: "Name", # required
+    #     retry_failed_deployments: false
+    #   }
+    #   options = {}
+    #   response = client.start_software_deployment_to_image_builder(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::StartSoftwareDeploymentToImageBuilderResult]
+    def start_software_deployment_to_image_builder(params = {}, options = {})
+      request = build_request(:start_software_deployment_to_image_builder, params)
       request.send_request(options)
     end
 
@@ -3660,7 +4501,7 @@ module Aws::AppStream
     #       created_time: Time.now,
     #       app_block_builder_errors: [
     #         {
-    #           error_code: "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION" # One of: ["IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"],
+    #           error_code: "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION" # One of: ["IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR", "VALIDATION_ERROR"],
     #           error_message: "String",
     #           error_timestamp: Time.now
     #         }
@@ -3674,7 +4515,8 @@ module Aws::AppStream
     #           endpoint_type: "STREAMING" # One of: ["STREAMING"], # required
     #           vpce_id: "String"
     #         }
-    #       ]
+    #       ],
+    #       disable_imdsv1: false
     #     }
     #   }
     # @return [Types::StopAppBlockBuilderResult]
@@ -3726,9 +4568,9 @@ module Aws::AppStream
     #         security_group_ids: ["String"]
     #       },
     #       instance_type: "String",
-    #       platform: "WINDOWS" # One of: ["WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8"],
+    #       platform: "WINDOWS" # One of: ["WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"],
     #       iam_role_arn: "Arn",
-    #       state: "PENDING" # One of: ["PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED", "UPDATING", "PENDING_QUALIFICATION"],
+    #       state: "PENDING" # One of: ["PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED", "UPDATING", "PENDING_QUALIFICATION", "PENDING_SYNCING_APPS", "SYNCING_APPS", "PENDING_IMAGE_IMPORT"],
     #       state_change_reason: {
     #         code: "INTERNAL_ERROR" # One of: ["INTERNAL_ERROR", "IMAGE_UNAVAILABLE"],
     #         message: "String"
@@ -3741,11 +4583,12 @@ module Aws::AppStream
     #       },
     #       network_access_configuration: {
     #         eni_private_ip_address: "String",
+    #         eni_ipv6_addresses: ["String"],
     #         eni_id: "String"
     #       },
     #       image_builder_errors: [
     #         {
-    #           error_code: "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION" # One of: ["IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"],
+    #           error_code: "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION" # One of: ["IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR", "VALIDATION_ERROR"],
     #           error_message: "String",
     #           error_timestamp: Time.now
     #         }
@@ -3757,7 +4600,11 @@ module Aws::AppStream
     #           vpce_id: "String"
     #         }
     #       ],
-    #       latest_appstream_agent_version: "TRUE" # One of: ["TRUE", "FALSE"]
+    #       root_volume_config: {
+    #         volume_size_in_gb: 1
+    #       },
+    #       latest_appstream_agent_version: "TRUE" # One of: ["TRUE", "FALSE"],
+    #       disable_imdsv1: false
     #     }
     #   }
     # @return [Types::StopImageBuilderResult]
@@ -3766,12 +4613,12 @@ module Aws::AppStream
       request.send_request(options)
     end
 
-    # <p>Adds or overwrites one or more tags for the specified AppStream 2.0 resource. You can tag AppStream 2.0 image builders, images, fleets, and stacks.</p>
-    #          <p>Each tag consists of a key and an optional value. If a resource already has a tag with the same key, 
+    # <p>Adds or overwrites one or more tags for the specified WorkSpaces Applications resource. You can tag WorkSpaces Applications image builders, images, fleets, and stacks.</p>
+    #          <p>Each tag consists of a key and an optional value. If a resource already has a tag with the same key,
     #                 this operation updates its value.</p>
     #          <p>To list the current tags for your resources, use <a>ListTagsForResource</a>.
     #                 To disassociate tags from your resources, use <a>UntagResource</a>.</p>
-    #          <p>For more information about tags, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>
+    #          <p>For more information about tags, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html">Tagging Your Resources</a> in the <i>Amazon WorkSpaces Applications Administration Guide</i>.</p>
     # @param [Hash, Types::TagResourceRequest] params
     # @option params [String] :resource_arn
     #   <p>The Amazon Resource Name (ARN) of the resource.</p>
@@ -3798,9 +4645,9 @@ module Aws::AppStream
       request.send_request(options)
     end
 
-    # <p>Disassociates one or more specified tags from the specified AppStream 2.0 resource.</p>
+    # <p>Disassociates one or more specified tags from the specified WorkSpaces Applications resource.</p>
     #          <p>To list the current tags for your resources, use <a>ListTagsForResource</a>.</p>
-    #          <p>For more information about tags, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>
+    #          <p>For more information about tags, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html">Tagging Your Resources</a> in the <i>Amazon WorkSpaces Applications Administration Guide</i>.</p>
     # @param [Hash, Types::UntagResourceRequest] params
     # @option params [String] :resource_arn
     #   <p>The Amazon Resource Name (ARN) of the resource.</p>
@@ -3868,19 +4715,21 @@ module Aws::AppStream
     #   <p>The Amazon Resource Name (ARN) of the IAM role to apply to the app block builder. To
     #               assume a role, the app block builder calls the AWS Security Token Service (STS)
     #               <code>AssumeRole</code> API operation and passes the ARN of the role to use. The
-    #               operation creates a new session with temporary credentials. AppStream 2.0 retrieves the
+    #               operation creates a new session with temporary credentials. WorkSpaces Applications retrieves the
     #               temporary credentials and creates the <b>appstream_machine_role</b> credential profile on the instance.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html">Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html">Using an IAM Role to Grant Permissions to Applications and Scripts Running on WorkSpaces Applications Streaming Instances</a> in the <i>Amazon WorkSpaces Applications Administration Guide</i>.</p>
     # @option params [Array<Types::AccessEndpoint>] :access_endpoints
     #   <p>The list of interface VPC endpoint (interface endpoint) objects. Administrators can connect to the app block builder only through the specified endpoints.</p>
     # @option params [Array<String>] :attributes_to_delete
     #   <p>The attributes to delete from the app block builder.</p>
+    # @option params [Boolean] :disable_imdsv1
+    #   <p>Set to true to disable Instance Metadata Service Version 1 (IMDSv1) and enforce IMDSv2. Set to false to enable both IMDSv1 and IMDSv2.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     name: "Name", # required
     #     description: "Description",
     #     display_name: "DisplayName",
-    #     platform: "WINDOWS" # One of: ["WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8"],
+    #     platform: "WINDOWS" # One of: ["WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"],
     #     instance_type: "String",
     #     vpc_config: {
     #       subnet_ids: ["String"],
@@ -3894,7 +4743,8 @@ module Aws::AppStream
     #         vpce_id: "String"
     #       }
     #     ],
-    #     attributes_to_delete: ["IAM_ROLE_ARN" # One of: ["IAM_ROLE_ARN", "ACCESS_ENDPOINTS", "VPC_CONFIGURATION_SECURITY_GROUP_IDS"]]
+    #     attributes_to_delete: ["IAM_ROLE_ARN" # One of: ["IAM_ROLE_ARN", "ACCESS_ENDPOINTS", "VPC_CONFIGURATION_SECURITY_GROUP_IDS"]],
+    #     disable_imdsv1: false
     #   }
     #   options = {}
     #   response = client.update_app_block_builder(params, options)
@@ -3918,7 +4768,7 @@ module Aws::AppStream
     #       created_time: Time.now,
     #       app_block_builder_errors: [
     #         {
-    #           error_code: "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION" # One of: ["IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"],
+    #           error_code: "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION" # One of: ["IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR", "VALIDATION_ERROR"],
     #           error_message: "String",
     #           error_timestamp: Time.now
     #         }
@@ -3932,7 +4782,8 @@ module Aws::AppStream
     #           endpoint_type: "STREAMING" # One of: ["STREAMING"], # required
     #           vpce_id: "String"
     #         }
-    #       ]
+    #       ],
+    #       disable_imdsv1: false
     #     }
     #   }
     # @return [Types::UpdateAppBlockBuilderResult]
@@ -3999,7 +4850,7 @@ module Aws::AppStream
     #         s3_bucket: "S3Bucket", # required
     #         s3_key: "S3Key"
     #       },
-    #       platforms: ["WINDOWS" # One of: ["WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8"]],
+    #       platforms: ["WINDOWS" # One of: ["WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"]],
     #       instance_families: ["String"],
     #       created_time: Time.now
     #     }
@@ -4010,7 +4861,7 @@ module Aws::AppStream
       request.send_request(options)
     end
 
-    # <p>Updates the specified Directory Config object in AppStream 2.0. This object includes the configuration information required to join fleets and image builders to Microsoft Active Directory domains.</p>
+    # <p>Updates the specified Directory Config object in WorkSpaces Applications. This object includes the configuration information required to join fleets and image builders to Microsoft Active Directory domains.</p>
     # @param [Hash, Types::UpdateDirectoryConfigRequest] params
     # @option params [String] :directory_name
     #   <p>The name of the Directory Config object.</p>
@@ -4211,21 +5062,6 @@ module Aws::AppStream
     #                  <p>stream.memory.z1d.12xlarge</p>
     #               </li>
     #               <li>
-    #                  <p>stream.graphics-design.large</p>
-    #               </li>
-    #               <li>
-    #                  <p>stream.graphics-design.xlarge</p>
-    #               </li>
-    #               <li>
-    #                  <p>stream.graphics-design.2xlarge</p>
-    #               </li>
-    #               <li>
-    #                  <p>stream.graphics-design.4xlarge</p>
-    #               </li>
-    #               <li>
-    #                  <p>stream.graphics-desktop.2xlarge</p>
-    #               </li>
-    #               <li>
     #                  <p>stream.graphics.g4dn.xlarge</p>
     #               </li>
     #               <li>
@@ -4242,15 +5078,6 @@ module Aws::AppStream
     #               </li>
     #               <li>
     #                  <p>stream.graphics.g4dn.16xlarge</p>
-    #               </li>
-    #               <li>
-    #                  <p>stream.graphics-pro.4xlarge</p>
-    #               </li>
-    #               <li>
-    #                  <p>stream.graphics-pro.8xlarge</p>
-    #               </li>
-    #               <li>
-    #                  <p>stream.graphics-pro.16xlarge</p>
     #               </li>
     #               <li>
     #                  <p>stream.graphics.g5.xlarge</p>
@@ -4372,13 +5199,13 @@ module Aws::AppStream
     # @option params [Array<String>] :attributes_to_delete
     #   <p>The fleet attributes to delete.</p>
     # @option params [String] :iam_role_arn
-    #   <p>The Amazon Resource Name (ARN) of the IAM role to apply to the fleet. To assume a role, a fleet instance calls the AWS Security Token Service (STS) <code>AssumeRole</code> API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials. AppStream 2.0 retrieves the temporary credentials and creates the <b>appstream_machine_role</b> credential profile on the instance.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html">Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>
+    #   <p>The Amazon Resource Name (ARN) of the IAM role to apply to the fleet. To assume a role, a fleet instance calls the AWS Security Token Service (STS) <code>AssumeRole</code> API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials. WorkSpaces Applications retrieves the temporary credentials and creates the <b>appstream_machine_role</b> credential profile on the instance.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html">Using an IAM Role to Grant Permissions to Applications and Scripts Running on WorkSpaces Applications Streaming Instances</a> in the <i>Amazon WorkSpaces Applications Administration Guide</i>.</p>
     # @option params [String] :stream_view
-    #   <p>The AppStream 2.0 view that is displayed to your users when they stream from the fleet. When <code>APP</code> is specified, only the windows of applications opened by users display. When <code>DESKTOP</code> is specified, the standard desktop that is provided by the operating system displays.</p>
+    #   <p>The WorkSpaces Applications view that is displayed to your users when they stream from the fleet. When <code>APP</code> is specified, only the windows of applications opened by users display. When <code>DESKTOP</code> is specified, the standard desktop that is provided by the operating system displays.</p>
     #            <p>The default value is <code>APP</code>.</p>
     # @option params [String] :platform
-    #   <p>The platform of the fleet. WINDOWS_SERVER_2019 and AMAZON_LINUX2 are supported for Elastic fleets. </p>
+    #   <p>The platform of the fleet. WINDOWS_SERVER_2019, AMAZON_LINUX2 and UBUNTU_PRO_2404 are supported for Elastic fleets. </p>
     # @option params [Integer] :max_concurrent_sessions
     #   <p>The maximum number of concurrent sessions for a fleet.</p>
     # @option params [Array<String>] :usb_device_filter_strings
@@ -4387,6 +5214,13 @@ module Aws::AppStream
     #   <p>The S3 location of the session scripts configuration zip file. This only applies to Elastic fleets. </p>
     # @option params [Integer] :max_sessions_per_instance
     #   <p>The maximum number of user sessions on an instance. This only applies to multi-session fleets.</p>
+    # @option params [Types::VolumeConfig] :root_volume_config
+    #   <p>The updated configuration for the root volume of fleet instances. Note that volume size cannot be decreased below the image volume size.</p>
+    # @option params [Boolean] :disable_imdsv1
+    #   <p>Set to true to disable Instance Metadata Service Version 1 (IMDSv1) and enforce IMDSv2. Set to false to enable both IMDSv1 and IMDSv2.</p>
+    #            <note>
+    #               <p>Before disabling IMDSv1, ensure your WorkSpaces Applications images are running the agent version or managed image update released on or after January 16, 2024 to support IMDSv2 enforcement.</p>
+    #            </note>
     # @example Request syntax with placeholder values
     #   params = {
     #     image_name: "String",
@@ -4412,17 +5246,21 @@ module Aws::AppStream
     #       organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName"
     #     },
     #     idle_disconnect_timeout_in_seconds: 1,
-    #     attributes_to_delete: ["VPC_CONFIGURATION" # One of: ["VPC_CONFIGURATION", "VPC_CONFIGURATION_SECURITY_GROUP_IDS", "DOMAIN_JOIN_INFO", "IAM_ROLE_ARN", "USB_DEVICE_FILTER_STRINGS", "SESSION_SCRIPT_S3_LOCATION", "MAX_SESSIONS_PER_INSTANCE"]],
+    #     attributes_to_delete: ["VPC_CONFIGURATION" # One of: ["VPC_CONFIGURATION", "VPC_CONFIGURATION_SECURITY_GROUP_IDS", "DOMAIN_JOIN_INFO", "IAM_ROLE_ARN", "USB_DEVICE_FILTER_STRINGS", "SESSION_SCRIPT_S3_LOCATION", "MAX_SESSIONS_PER_INSTANCE", "VOLUME_CONFIGURATION"]],
     #     iam_role_arn: "Arn",
     #     stream_view: "APP" # One of: ["APP", "DESKTOP"],
-    #     platform: "WINDOWS" # One of: ["WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8"],
+    #     platform: "WINDOWS" # One of: ["WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"],
     #     max_concurrent_sessions: 1,
     #     usb_device_filter_strings: ["UsbDeviceFilterString"],
     #     session_script_s3_location: {
     #       s3_bucket: "S3Bucket", # required
     #       s3_key: "S3Key"
     #     },
-    #     max_sessions_per_instance: 1
+    #     max_sessions_per_instance: 1,
+    #     root_volume_config: {
+    #       volume_size_in_gb: 1
+    #     },
+    #     disable_imdsv1: false
     #   }
     #   options = {}
     #   response = client.update_fleet(params, options)
@@ -4446,7 +5284,10 @@ module Aws::AppStream
     #         desired_user_sessions: 1,
     #         available_user_sessions: 1,
     #         active_user_sessions: 1,
-    #         actual_user_sessions: 1
+    #         actual_user_sessions: 1,
+    #         draining: 1,
+    #         drain_mode_active_user_sessions: 1,
+    #         drain_mode_unused_user_sessions: 1
     #       },
     #       max_user_duration_in_seconds: 1,
     #       disconnect_timeout_in_seconds: 1,
@@ -4458,7 +5299,7 @@ module Aws::AppStream
     #       created_time: Time.now,
     #       fleet_errors: [
     #         {
-    #           error_code: "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION" # One of: ["IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"],
+    #           error_code: "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION" # One of: ["IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR", "VALIDATION_ERROR"],
     #           error_message: "String"
     #         }
     #       ],
@@ -4470,14 +5311,18 @@ module Aws::AppStream
     #       idle_disconnect_timeout_in_seconds: 1,
     #       iam_role_arn: "Arn",
     #       stream_view: "APP" # One of: ["APP", "DESKTOP"],
-    #       platform: "WINDOWS" # One of: ["WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8"],
+    #       platform: "WINDOWS" # One of: ["WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"],
     #       max_concurrent_sessions: 1,
     #       usb_device_filter_strings: ["UsbDeviceFilterString"],
     #       session_script_s3_location: {
     #         s3_bucket: "S3Bucket", # required
     #         s3_key: "S3Key"
     #       },
-    #       max_sessions_per_instance: 1
+    #       max_sessions_per_instance: 1,
+    #       root_volume_config: {
+    #         volume_size_in_gb: 1
+    #       },
+    #       disable_imdsv1: false
     #     }
     #   }
     # @return [Types::UpdateFleetResult]
@@ -4537,11 +5382,17 @@ module Aws::AppStream
     # @option params [Types::ApplicationSettings] :application_settings
     #   <p>The persistent application settings for users of a stack. When these settings are enabled, changes that users make to applications and Windows settings are automatically saved after each session and applied to the next session.</p>
     # @option params [Array<Types::AccessEndpoint>] :access_endpoints
-    #   <p>The list of interface VPC endpoint (interface endpoint) objects. Users of the stack can connect to AppStream 2.0 only through the specified endpoints.</p>
+    #   <p>The list of interface VPC endpoint (interface endpoint) objects. Users of the stack can connect to WorkSpaces Applications only through the specified endpoints.</p>
     # @option params [Array<String>] :embed_host_domains
-    #   <p>The domains where AppStream 2.0 streaming sessions can be embedded in an iframe. You must approve the domains that you want to host embedded AppStream 2.0 streaming sessions. </p>
+    #   <p>The domains where WorkSpaces Applications streaming sessions can be embedded in an iframe. You must approve the domains that you want to host embedded WorkSpaces Applications streaming sessions. </p>
     # @option params [Types::StreamingExperienceSettings] :streaming_experience_settings
     #   <p>The streaming protocol you want your stack to prefer. This can be UDP or TCP. Currently, UDP is only supported in the Windows native client.</p>
+    # @option params [Types::ContentRedirection] :content_redirection
+    #   <p>Configuration for bidirectional URL redirection between the streaming session and the local client. Use HostToClient to redirect URLs from the remote desktop to the local browser.</p>
+    # @option params [Types::AgentAccessConfigForUpdate] :agent_access_config
+    #   <p>The configuration for agent access on the stack. Specify this to update agent access settings. To remove agent access, use AttributesToDelete with the AGENT_ACCESS_CONFIG value.</p>
+    # @option params [String] :storage_connector_authentication
+    #   <p>Specifies whether users' cloud storage authentication persists across streaming sessions. When you specify FORCE_REAUTHENTICATION, WorkSpaces Applications removes the stored authentication for the stack's OneDrive and Google Drive connectors when a user's session ends. The user links their cloud storage again on their next session. To clear this attribute, add STORAGE_CONNECTOR_AUTHENTICATION to AttributesToDelete.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     display_name: "DisplayName",
@@ -4558,7 +5409,7 @@ module Aws::AppStream
     #     delete_storage_connectors: false,
     #     redirect_url: "RedirectURL",
     #     feedback_url: "FeedbackURL",
-    #     attributes_to_delete: ["STORAGE_CONNECTORS" # One of: ["STORAGE_CONNECTORS", "STORAGE_CONNECTOR_HOMEFOLDERS", "STORAGE_CONNECTOR_GOOGLE_DRIVE", "STORAGE_CONNECTOR_ONE_DRIVE", "REDIRECT_URL", "FEEDBACK_URL", "THEME_NAME", "USER_SETTINGS", "EMBED_HOST_DOMAINS", "IAM_ROLE_ARN", "ACCESS_ENDPOINTS", "STREAMING_EXPERIENCE_SETTINGS"]],
+    #     attributes_to_delete: ["STORAGE_CONNECTORS" # One of: ["STORAGE_CONNECTORS", "STORAGE_CONNECTOR_HOMEFOLDERS", "STORAGE_CONNECTOR_GOOGLE_DRIVE", "STORAGE_CONNECTOR_ONE_DRIVE", "REDIRECT_URL", "FEEDBACK_URL", "THEME_NAME", "USER_SETTINGS", "EMBED_HOST_DOMAINS", "IAM_ROLE_ARN", "ACCESS_ENDPOINTS", "STREAMING_EXPERIENCE_SETTINGS", "CONTENT_REDIRECTION", "AGENT_ACCESS_CONFIG", "STORAGE_CONNECTOR_AUTHENTICATION"]],
     #     user_settings: [
     #       {
     #         action: "CLIPBOARD_COPY_FROM_LOCAL_DEVICE" # One of: ["CLIPBOARD_COPY_FROM_LOCAL_DEVICE", "CLIPBOARD_COPY_TO_LOCAL_DEVICE", "FILE_UPLOAD", "FILE_DOWNLOAD", "PRINTING_TO_LOCAL_DEVICE", "DOMAIN_PASSWORD_SIGNIN", "DOMAIN_SMART_CARD_SIGNIN", "AUTO_TIME_ZONE_REDIRECTION"], # required
@@ -4579,7 +5430,28 @@ module Aws::AppStream
     #     embed_host_domains: ["EmbedHostDomain"],
     #     streaming_experience_settings: {
     #       preferred_protocol: "TCP" # One of: ["TCP", "UDP"]
-    #     }
+    #     },
+    #     content_redirection: {
+    #       host_to_client: {
+    #         enabled: false, # required
+    #         allowed_urls: ["UrlPattern"],
+    #         denied_urls: ["UrlPattern"]
+    #       }
+    #     },
+    #     agent_access_config: {
+    #       settings: [
+    #         {
+    #           agent_action: "COMPUTER_VISION" # One of: ["COMPUTER_VISION", "COMPUTER_INPUT", "FORWARD_MCP_TOOLS"], # required
+    #           permission: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
+    #         }
+    #       ],
+    #       s3_bucket_arn: "S3BucketArn",
+    #       screenshots_upload_enabled: false,
+    #       screen_resolution: "W_1280xH_720" # One of: ["W_1280xH_720"],
+    #       screen_image_format: "PNG" # One of: ["PNG", "JPEG"],
+    #       user_control_mode: "VIEW_ONLY" # One of: ["VIEW_ONLY", "VIEW_STOP", "DISABLED"]
+    #     },
+    #     storage_connector_authentication: "FORCE_REAUTHENTICATION" # One of: ["FORCE_REAUTHENTICATION", "REUSE_CREDENTIALS"]
     #   }
     #   options = {}
     #   response = client.update_stack(params, options)
@@ -4629,7 +5501,28 @@ module Aws::AppStream
     #       embed_host_domains: ["EmbedHostDomain"],
     #       streaming_experience_settings: {
     #         preferred_protocol: "TCP" # One of: ["TCP", "UDP"]
-    #       }
+    #       },
+    #       content_redirection: {
+    #         host_to_client: {
+    #           enabled: false, # required
+    #           allowed_urls: ["UrlPattern"],
+    #           denied_urls: ["UrlPattern"]
+    #         }
+    #       },
+    #       agent_access_config: {
+    #         settings: [ # required
+    #           {
+    #             agent_action: "COMPUTER_VISION" # One of: ["COMPUTER_VISION", "COMPUTER_INPUT", "FORWARD_MCP_TOOLS"], # required
+    #             permission: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
+    #           }
+    #         ],
+    #         s3_bucket_arn: "S3BucketArn",
+    #         screenshots_upload_enabled: false,
+    #         screen_resolution: "W_1280xH_720" # One of: ["W_1280xH_720"], # required
+    #         screen_image_format: "PNG" # One of: ["PNG", "JPEG"], # required
+    #         user_control_mode: "VIEW_ONLY" # One of: ["VIEW_ONLY", "VIEW_STOP", "DISABLED"]
+    #       },
+    #       storage_connector_authentication: "FORCE_REAUTHENTICATION" # One of: ["FORCE_REAUTHENTICATION", "REUSE_CREDENTIALS"]
     #     }
     #   }
     # @return [Types::UpdateStackResult]
@@ -4816,6 +5709,7 @@ module Aws::AppStream
       # @api private
       def protocols
         {
+          rpc_v2_cbor: Smithy::Client::RpcV2Cbor,
           json_rpc: Aws::Core::JsonRpc
         }
       end

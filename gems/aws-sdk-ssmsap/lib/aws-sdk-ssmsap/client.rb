@@ -144,18 +144,18 @@ module Aws::SsmSap
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -448,7 +448,7 @@ module Aws::SsmSap
     #       database_name: "String",
     #       database_type: "SYSTEM" # One of: ["SYSTEM", "TENANT"],
     #       arn: "SsmSapArn",
-    #       status: "RUNNING" # One of: ["RUNNING", "STARTING", "STOPPED", "WARNING", "UNKNOWN", "ERROR"],
+    #       status: "RUNNING" # One of: ["RUNNING", "STARTING", "STOPPED", "WARNING", "UNKNOWN", "ERROR", "STOPPING"],
     #       primary_host: "String",
     #       sql_port: 1,
     #       last_updated: Time.now,

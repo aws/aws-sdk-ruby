@@ -21,7 +21,8 @@ namespace :sync do
     end
   end
 
-  desc 'Sync AWS service models from aws-models repository'
+  # Set AWS_MODELS_DIR to the local model-source directory before running this task.
+  desc 'Import service models (maintainer workflow)'
   task 'aws-models' do
     raise 'Models directory not provided' unless (src_dir = ENV.fetch('AWS_MODELS_DIR', nil))
 

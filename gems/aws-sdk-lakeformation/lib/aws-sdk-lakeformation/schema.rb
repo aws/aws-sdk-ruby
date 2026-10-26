@@ -8,6 +8,7 @@ module Aws::LakeFormation
 
     AccessDeniedException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#AccessDeniedException", name: "AccessDeniedException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 403})
     AccessKeyIdString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.lakeformation#AccessKeyIdString", name: "AccessKeyIdString")
+    AccountIdString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.lakeformation#AccountIdString", name: "AccountIdString", traits: {"smithy.api#pattern" => "^\\d{12}$"})
     AddLFTagsToResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#AddLFTagsToResourceRequest", name: "AddLFTagsToResourceRequest")
     AddLFTagsToResourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#AddLFTagsToResourceResponse", name: "AddLFTagsToResourceResponse")
     AddObjectInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#AddObjectInput", name: "AddObjectInput")
@@ -18,6 +19,8 @@ module Aws::LakeFormation
     ApplicationStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.lakeformation#ApplicationStatus", name: "ApplicationStatus")
     AssumeDecoratedRoleWithSAMLRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#AssumeDecoratedRoleWithSAMLRequest", name: "AssumeDecoratedRoleWithSAMLRequest")
     AssumeDecoratedRoleWithSAMLResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#AssumeDecoratedRoleWithSAMLResponse", name: "AssumeDecoratedRoleWithSAMLResponse")
+    AttachRLSPolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#AttachRLSPolicyRequest", name: "AttachRLSPolicyRequest")
+    AttachRLSPolicyResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#AttachRLSPolicyResponse", name: "AttachRLSPolicyResponse")
     AuditContext = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#AuditContext", name: "AuditContext")
     AuditContextString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.lakeformation#AuditContextString", name: "AuditContextString", traits: {"smithy.api#length" => {"min" => 0, "max" => 2048}, "smithy.api#pattern" => "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$"})
     AuthorizedSessionTagValueList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.lakeformation#AuthorizedSessionTagValueList", name: "AuthorizedSessionTagValueList")
@@ -35,15 +38,19 @@ module Aws::LakeFormation
     CancelTransactionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#CancelTransactionResponse", name: "CancelTransactionResponse")
     CatalogIdString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.lakeformation#CatalogIdString", name: "CatalogIdString", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$"})
     CatalogResource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#CatalogResource", name: "CatalogResource")
+    Column = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#Column", name: "Column")
     ColumnLFTag = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#ColumnLFTag", name: "ColumnLFTag")
     ColumnLFTagsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.lakeformation#ColumnLFTagsList", name: "ColumnLFTagsList")
+    ColumnList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.lakeformation#ColumnList", name: "ColumnList")
     ColumnNames = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.lakeformation#ColumnNames", name: "ColumnNames")
+    ColumnTypeString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.lakeformation#ColumnTypeString", name: "ColumnTypeString", traits: {"smithy.api#length" => {"min" => 0, "max" => 131072}, "smithy.api#pattern" => "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$"})
     ColumnWildcard = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#ColumnWildcard", name: "ColumnWildcard")
     CommitTransactionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#CommitTransactionRequest", name: "CommitTransactionRequest")
     CommitTransactionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#CommitTransactionResponse", name: "CommitTransactionResponse")
     ComparisonOperator = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.lakeformation#ComparisonOperator", name: "ComparisonOperator")
     ConcurrentModificationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#ConcurrentModificationException", name: "ConcurrentModificationException", traits: {"smithy.api#error" => "client"})
     Condition = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#Condition", name: "Condition")
+    ConflictException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#ConflictException", name: "ConflictException", traits: {"smithy.api#error" => "client"})
     ContextKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.lakeformation#ContextKey", name: "ContextKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}})
     ContextValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.lakeformation#ContextValue", name: "ContextValue", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}})
     CreateDataCellsFilterRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#CreateDataCellsFilterRequest", name: "CreateDataCellsFilterRequest")
@@ -56,7 +63,10 @@ module Aws::LakeFormation
     CreateLakeFormationIdentityCenterConfigurationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#CreateLakeFormationIdentityCenterConfigurationResponse", name: "CreateLakeFormationIdentityCenterConfigurationResponse")
     CreateLakeFormationOptInRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#CreateLakeFormationOptInRequest", name: "CreateLakeFormationOptInRequest")
     CreateLakeFormationOptInResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#CreateLakeFormationOptInResponse", name: "CreateLakeFormationOptInResponse")
+    CreateRLSPolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#CreateRLSPolicyRequest", name: "CreateRLSPolicyRequest")
+    CreateRLSPolicyResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#CreateRLSPolicyResponse", name: "CreateRLSPolicyResponse")
     CredentialTimeoutDurationSecondInteger = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.lakeformation#CredentialTimeoutDurationSecondInteger", name: "CredentialTimeoutDurationSecondInteger", traits: {"smithy.api#range" => {"min" => 900, "max" => 43200}})
+    CredentialsScope = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.lakeformation#CredentialsScope", name: "CredentialsScope")
     DataCellsFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#DataCellsFilter", name: "DataCellsFilter")
     DataCellsFilterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.lakeformation#DataCellsFilterList", name: "DataCellsFilterList")
     DataCellsFilterResource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#DataCellsFilterResource", name: "DataCellsFilterResource")
@@ -82,6 +92,8 @@ module Aws::LakeFormation
     DeleteObjectInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#DeleteObjectInput", name: "DeleteObjectInput")
     DeleteObjectsOnCancelRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#DeleteObjectsOnCancelRequest", name: "DeleteObjectsOnCancelRequest")
     DeleteObjectsOnCancelResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#DeleteObjectsOnCancelResponse", name: "DeleteObjectsOnCancelResponse")
+    DeleteRLSPolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#DeleteRLSPolicyRequest", name: "DeleteRLSPolicyRequest")
+    DeleteRLSPolicyResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#DeleteRLSPolicyResponse", name: "DeleteRLSPolicyResponse")
     DeregisterResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#DeregisterResourceRequest", name: "DeregisterResourceRequest")
     DeregisterResourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#DeregisterResourceResponse", name: "DeregisterResourceResponse")
     DescribeLakeFormationIdentityCenterConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#DescribeLakeFormationIdentityCenterConfigurationRequest", name: "DescribeLakeFormationIdentityCenterConfigurationRequest")
@@ -91,6 +103,8 @@ module Aws::LakeFormation
     DescribeTransactionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#DescribeTransactionRequest", name: "DescribeTransactionRequest")
     DescribeTransactionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#DescribeTransactionResponse", name: "DescribeTransactionResponse")
     DescriptionString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.lakeformation#DescriptionString", name: "DescriptionString", traits: {"smithy.api#length" => {"min" => 0, "max" => 2048}, "smithy.api#pattern" => "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*$"})
+    DetachRLSPolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#DetachRLSPolicyRequest", name: "DetachRLSPolicyRequest")
+    DetachRLSPolicyResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#DetachRLSPolicyResponse", name: "DetachRLSPolicyResponse")
     DetailsMap = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#DetailsMap", name: "DetailsMap")
     ETagString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.lakeformation#ETagString", name: "ETagString", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => "^[\\p{L}\\p{N}\\p{P}]*$"})
     EnableStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.lakeformation#EnableStatus", name: "EnableStatus")
@@ -126,10 +140,14 @@ module Aws::LakeFormation
     GetQueryStatisticsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#GetQueryStatisticsRequest", name: "GetQueryStatisticsRequest")
     GetQueryStatisticsRequestQueryIdString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.lakeformation#GetQueryStatisticsRequestQueryIdString", name: "GetQueryStatisticsRequestQueryIdString", traits: {"smithy.api#length" => {"min" => 36, "max" => 36}})
     GetQueryStatisticsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#GetQueryStatisticsResponse", name: "GetQueryStatisticsResponse")
+    GetRLSPolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#GetRLSPolicyRequest", name: "GetRLSPolicyRequest")
+    GetRLSPolicyResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#GetRLSPolicyResponse", name: "GetRLSPolicyResponse")
     GetResourceLFTagsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#GetResourceLFTagsRequest", name: "GetResourceLFTagsRequest")
     GetResourceLFTagsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#GetResourceLFTagsResponse", name: "GetResourceLFTagsResponse")
     GetTableObjectsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#GetTableObjectsRequest", name: "GetTableObjectsRequest")
     GetTableObjectsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#GetTableObjectsResponse", name: "GetTableObjectsResponse")
+    GetTemporaryDataLocationCredentialsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#GetTemporaryDataLocationCredentialsRequest", name: "GetTemporaryDataLocationCredentialsRequest")
+    GetTemporaryDataLocationCredentialsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#GetTemporaryDataLocationCredentialsResponse", name: "GetTemporaryDataLocationCredentialsResponse")
     GetTemporaryGluePartitionCredentialsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#GetTemporaryGluePartitionCredentialsRequest", name: "GetTemporaryGluePartitionCredentialsRequest")
     GetTemporaryGluePartitionCredentialsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#GetTemporaryGluePartitionCredentialsResponse", name: "GetTemporaryGluePartitionCredentialsResponse")
     GetTemporaryGlueTableCredentialsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#GetTemporaryGlueTableCredentialsRequest", name: "GetTemporaryGlueTableCredentialsRequest")
@@ -178,6 +196,10 @@ module Aws::LakeFormation
     ListLakeFormationOptInsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#ListLakeFormationOptInsResponse", name: "ListLakeFormationOptInsResponse")
     ListPermissionsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#ListPermissionsRequest", name: "ListPermissionsRequest")
     ListPermissionsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#ListPermissionsResponse", name: "ListPermissionsResponse")
+    ListRLSPoliciesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#ListRLSPoliciesRequest", name: "ListRLSPoliciesRequest")
+    ListRLSPoliciesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#ListRLSPoliciesResponse", name: "ListRLSPoliciesResponse")
+    ListRLSPolicyAttachmentsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#ListRLSPolicyAttachmentsRequest", name: "ListRLSPolicyAttachmentsRequest")
+    ListRLSPolicyAttachmentsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#ListRLSPolicyAttachmentsResponse", name: "ListRLSPolicyAttachmentsResponse")
     ListResourcesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#ListResourcesRequest", name: "ListResourcesRequest")
     ListResourcesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#ListResourcesResponse", name: "ListResourcesResponse")
     ListTableStorageOptimizersRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#ListTableStorageOptimizersRequest", name: "ListTableStorageOptimizersRequest")
@@ -224,6 +246,14 @@ module Aws::LakeFormation
     QuerySessionContext = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#QuerySessionContext", name: "QuerySessionContext")
     QueryStateString = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.lakeformation#QueryStateString", name: "QueryStateString")
     RAMResourceShareArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.lakeformation#RAMResourceShareArn", name: "RAMResourceShareArn")
+    RLSPolicy = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#RLSPolicy", name: "RLSPolicy")
+    RLSPolicyAttachment = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#RLSPolicyAttachment", name: "RLSPolicyAttachment")
+    RLSPolicyAttachmentList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.lakeformation#RLSPolicyAttachmentList", name: "RLSPolicyAttachmentList")
+    RLSPolicyList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.lakeformation#RLSPolicyList", name: "RLSPolicyList")
+    RLSPolicyResource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#RLSPolicyResource", name: "RLSPolicyResource")
+    RedshiftConnect = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#RedshiftConnect", name: "RedshiftConnect")
+    RedshiftScopeUnion = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.lakeformation#RedshiftScopeUnion", name: "RedshiftScopeUnion")
+    RedshiftServiceIntegrations = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.lakeformation#RedshiftServiceIntegrations", name: "RedshiftServiceIntegrations")
     RegisterResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#RegisterResourceRequest", name: "RegisterResourceRequest")
     RegisterResourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#RegisterResourceResponse", name: "RegisterResourceResponse")
     RemoveLFTagsFromResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#RemoveLFTagsFromResourceRequest", name: "RemoveLFTagsFromResourceRequest")
@@ -251,6 +281,9 @@ module Aws::LakeFormation
     SearchTablesByLFTagsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#SearchTablesByLFTagsRequest", name: "SearchTablesByLFTagsRequest")
     SearchTablesByLFTagsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#SearchTablesByLFTagsResponse", name: "SearchTablesByLFTagsResponse")
     SecretAccessKeyString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.lakeformation#SecretAccessKeyString", name: "SecretAccessKeyString")
+    ServiceAuthorization = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.lakeformation#ServiceAuthorization", name: "ServiceAuthorization")
+    ServiceIntegrationList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.lakeformation#ServiceIntegrationList", name: "ServiceIntegrationList")
+    ServiceIntegrationUnion = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.lakeformation#ServiceIntegrationUnion", name: "ServiceIntegrationUnion")
     SessionTokenString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.lakeformation#SessionTokenString", name: "SessionTokenString")
     StartQueryPlanningRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#StartQueryPlanningRequest", name: "StartQueryPlanningRequest")
     StartQueryPlanningResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#StartQueryPlanningResponse", name: "StartQueryPlanningResponse")
@@ -276,6 +309,7 @@ module Aws::LakeFormation
     TagValueList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.lakeformation#TagValueList", name: "TagValueList", traits: {"smithy.api#length" => {"min" => 1, "max" => 50}})
     TaggedDatabase = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#TaggedDatabase", name: "TaggedDatabase")
     TaggedTable = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#TaggedTable", name: "TaggedTable")
+    TemporaryCredentials = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#TemporaryCredentials", name: "TemporaryCredentials")
     ThrottledException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#ThrottledException", name: "ThrottledException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 429, "smithy.api#retryable" => {"throttling" => true}})
     Timestamp = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.lakeformation#Timestamp", name: "Timestamp")
     Token = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.lakeformation#Token", name: "Token")
@@ -300,6 +334,8 @@ module Aws::LakeFormation
     UpdateLFTagResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#UpdateLFTagResponse", name: "UpdateLFTagResponse")
     UpdateLakeFormationIdentityCenterConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#UpdateLakeFormationIdentityCenterConfigurationRequest", name: "UpdateLakeFormationIdentityCenterConfigurationRequest")
     UpdateLakeFormationIdentityCenterConfigurationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#UpdateLakeFormationIdentityCenterConfigurationResponse", name: "UpdateLakeFormationIdentityCenterConfigurationResponse")
+    UpdateRLSPolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#UpdateRLSPolicyRequest", name: "UpdateRLSPolicyRequest")
+    UpdateRLSPolicyResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#UpdateRLSPolicyResponse", name: "UpdateRLSPolicyResponse")
     UpdateResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#UpdateResourceRequest", name: "UpdateResourceRequest")
     UpdateResourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#UpdateResourceResponse", name: "UpdateResourceResponse")
     UpdateTableObjectsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#UpdateTableObjectsRequest", name: "UpdateTableObjectsRequest")
@@ -308,6 +344,7 @@ module Aws::LakeFormation
     UpdateTableStorageOptimizerResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#UpdateTableStorageOptimizerResponse", name: "UpdateTableStorageOptimizerResponse")
     ValueString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.lakeformation#ValueString", name: "ValueString")
     ValueStringList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.lakeformation#ValueStringList", name: "ValueStringList", traits: {"smithy.api#length" => {"min" => 1}})
+    VerificationStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.lakeformation#VerificationStatus", name: "VerificationStatus")
     VersionString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.lakeformation#VersionString", name: "VersionString", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$"})
     VirtualObject = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lakeformation#VirtualObject", name: "VirtualObject")
     VirtualObjectList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.lakeformation#VirtualObjectList", name: "VirtualObjectList", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
@@ -349,6 +386,13 @@ module Aws::LakeFormation
     AssumeDecoratedRoleWithSAMLResponse.add_member(:session_token, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionTokenString, name: "SessionToken"))
     AssumeDecoratedRoleWithSAMLResponse.add_member(:expiration, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpirationTimestamp, name: "Expiration"))
     AssumeDecoratedRoleWithSAMLResponse.type = Types::AssumeDecoratedRoleWithSAMLResponse
+    AttachRLSPolicyRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "Name", traits: {"smithy.api#required" => {}}))
+    AttachRLSPolicyRequest.add_member(:resource, ::Smithy::Schema::Shapes::MemberShape.new(target: Resource, name: "Resource", traits: {"smithy.api#required" => {}}))
+    AttachRLSPolicyRequest.add_member(:principal, ::Smithy::Schema::Shapes::MemberShape.new(target: DataLakePrincipal, name: "Principal"))
+    AttachRLSPolicyRequest.add_member(:condition, ::Smithy::Schema::Shapes::MemberShape.new(target: Condition, name: "Condition"))
+    AttachRLSPolicyRequest.add_member(:set_default, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "SetDefault"))
+    AttachRLSPolicyRequest.type = Types::AttachRLSPolicyRequest
+    AttachRLSPolicyResponse.type = Types::AttachRLSPolicyResponse
     AuditContext.add_member(:additional_audit_context, ::Smithy::Schema::Shapes::MemberShape.new(target: AuditContextString, name: "AdditionalAuditContext"))
     AuditContext.type = Types::AuditContext
     AuthorizedSessionTagValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "member"))
@@ -379,10 +423,14 @@ module Aws::LakeFormation
     CancelTransactionResponse.type = Types::CancelTransactionResponse
     CatalogResource.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdString, name: "Id"))
     CatalogResource.type = Types::CatalogResource
+    Column.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "Name", traits: {"smithy.api#required" => {}}))
+    Column.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnTypeString, name: "Type"))
+    Column.type = Types::Column
     ColumnLFTag.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "Name"))
     ColumnLFTag.add_member(:lf_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: LFTagsList, name: "LFTags"))
     ColumnLFTag.type = Types::ColumnLFTag
     ColumnLFTagsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnLFTag, name: "member"))
+    ColumnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Column, name: "member"))
     ColumnNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "member"))
     ColumnWildcard.add_member(:excluded_column_names, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnNames, name: "ExcludedColumnNames"))
     ColumnWildcard.type = Types::ColumnWildcard
@@ -405,6 +453,8 @@ module Aws::LakeFormation
     ConcurrentModificationException.type = Types::ConcurrentModificationException
     Condition.add_member(:expression, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpressionString, name: "Expression"))
     Condition.type = Types::Condition
+    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageString, name: "Message"))
+    ConflictException.type = Types::ConflictException
     CreateDataCellsFilterRequest.add_member(:table_data, ::Smithy::Schema::Shapes::MemberShape.new(target: DataCellsFilter, name: "TableData", traits: {"smithy.api#required" => {}}))
     CreateDataCellsFilterRequest.type = Types::CreateDataCellsFilterRequest
     CreateDataCellsFilterResponse.type = Types::CreateDataCellsFilterResponse
@@ -423,6 +473,7 @@ module Aws::LakeFormation
     CreateLakeFormationIdentityCenterConfigurationRequest.add_member(:instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityCenterInstanceArn, name: "InstanceArn"))
     CreateLakeFormationIdentityCenterConfigurationRequest.add_member(:external_filtering, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalFilteringConfiguration, name: "ExternalFiltering"))
     CreateLakeFormationIdentityCenterConfigurationRequest.add_member(:share_recipients, ::Smithy::Schema::Shapes::MemberShape.new(target: DataLakePrincipalList, name: "ShareRecipients"))
+    CreateLakeFormationIdentityCenterConfigurationRequest.add_member(:service_integrations, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceIntegrationList, name: "ServiceIntegrations"))
     CreateLakeFormationIdentityCenterConfigurationRequest.type = Types::CreateLakeFormationIdentityCenterConfigurationRequest
     CreateLakeFormationIdentityCenterConfigurationResponse.add_member(:application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationArn, name: "ApplicationArn"))
     CreateLakeFormationIdentityCenterConfigurationResponse.type = Types::CreateLakeFormationIdentityCenterConfigurationResponse
@@ -431,6 +482,13 @@ module Aws::LakeFormation
     CreateLakeFormationOptInRequest.add_member(:condition, ::Smithy::Schema::Shapes::MemberShape.new(target: Condition, name: "Condition"))
     CreateLakeFormationOptInRequest.type = Types::CreateLakeFormationOptInRequest
     CreateLakeFormationOptInResponse.type = Types::CreateLakeFormationOptInResponse
+    CreateRLSPolicyRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "Name", traits: {"smithy.api#required" => {}}))
+    CreateRLSPolicyRequest.add_member(:attachment_columns, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnList, name: "AttachmentColumns", traits: {"smithy.api#required" => {}}))
+    CreateRLSPolicyRequest.add_member(:filter_expression, ::Smithy::Schema::Shapes::MemberShape.new(target: PredicateString, name: "FilterExpression", traits: {"smithy.api#required" => {}}))
+    CreateRLSPolicyRequest.type = Types::CreateRLSPolicyRequest
+    CreateRLSPolicyResponse.type = Types::CreateRLSPolicyResponse
+    CredentialsScope.add_member(:read, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "READ", traits: {"smithy.api#enumValue" => "READ"}))
+    CredentialsScope.add_member(:readwrite, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "READWRITE", traits: {"smithy.api#enumValue" => "READWRITE"}))
     DataCellsFilter.add_member(:table_catalog_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdString, name: "TableCatalogId", traits: {"smithy.api#required" => {}}))
     DataCellsFilter.add_member(:database_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "DatabaseName", traits: {"smithy.api#required" => {}}))
     DataCellsFilter.add_member(:table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "TableName", traits: {"smithy.api#required" => {}}))
@@ -509,6 +567,9 @@ module Aws::LakeFormation
     DeleteObjectsOnCancelRequest.add_member(:objects, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualObjectList, name: "Objects", traits: {"smithy.api#required" => {}}))
     DeleteObjectsOnCancelRequest.type = Types::DeleteObjectsOnCancelRequest
     DeleteObjectsOnCancelResponse.type = Types::DeleteObjectsOnCancelResponse
+    DeleteRLSPolicyRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "Name", traits: {"smithy.api#required" => {}}))
+    DeleteRLSPolicyRequest.type = Types::DeleteRLSPolicyRequest
+    DeleteRLSPolicyResponse.type = Types::DeleteRLSPolicyResponse
     DeregisterResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArnString, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
     DeregisterResourceRequest.type = Types::DeregisterResourceRequest
     DeregisterResourceResponse.type = Types::DeregisterResourceResponse
@@ -519,6 +580,7 @@ module Aws::LakeFormation
     DescribeLakeFormationIdentityCenterConfigurationResponse.add_member(:application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationArn, name: "ApplicationArn"))
     DescribeLakeFormationIdentityCenterConfigurationResponse.add_member(:external_filtering, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalFilteringConfiguration, name: "ExternalFiltering"))
     DescribeLakeFormationIdentityCenterConfigurationResponse.add_member(:share_recipients, ::Smithy::Schema::Shapes::MemberShape.new(target: DataLakePrincipalList, name: "ShareRecipients"))
+    DescribeLakeFormationIdentityCenterConfigurationResponse.add_member(:service_integrations, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceIntegrationList, name: "ServiceIntegrations"))
     DescribeLakeFormationIdentityCenterConfigurationResponse.add_member(:resource_share, ::Smithy::Schema::Shapes::MemberShape.new(target: RAMResourceShareArn, name: "ResourceShare"))
     DescribeLakeFormationIdentityCenterConfigurationResponse.type = Types::DescribeLakeFormationIdentityCenterConfigurationResponse
     DescribeResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArnString, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
@@ -529,6 +591,13 @@ module Aws::LakeFormation
     DescribeTransactionRequest.type = Types::DescribeTransactionRequest
     DescribeTransactionResponse.add_member(:transaction_description, ::Smithy::Schema::Shapes::MemberShape.new(target: TransactionDescription, name: "TransactionDescription"))
     DescribeTransactionResponse.type = Types::DescribeTransactionResponse
+    DetachRLSPolicyRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "Name", traits: {"smithy.api#required" => {}}))
+    DetachRLSPolicyRequest.add_member(:resource, ::Smithy::Schema::Shapes::MemberShape.new(target: Resource, name: "Resource", traits: {"smithy.api#required" => {}}))
+    DetachRLSPolicyRequest.add_member(:principal, ::Smithy::Schema::Shapes::MemberShape.new(target: DataLakePrincipal, name: "Principal"))
+    DetachRLSPolicyRequest.add_member(:condition, ::Smithy::Schema::Shapes::MemberShape.new(target: Condition, name: "Condition"))
+    DetachRLSPolicyRequest.add_member(:remove_default, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "RemoveDefault"))
+    DetachRLSPolicyRequest.type = Types::DetachRLSPolicyRequest
+    DetachRLSPolicyResponse.type = Types::DetachRLSPolicyResponse
     DetailsMap.add_member(:resource_share, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceShareList, name: "ResourceShare"))
     DetailsMap.type = Types::DetailsMap
     EnableStatus.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
@@ -607,6 +676,10 @@ module Aws::LakeFormation
     GetQueryStatisticsResponse.add_member(:planning_statistics, ::Smithy::Schema::Shapes::MemberShape.new(target: PlanningStatistics, name: "PlanningStatistics"))
     GetQueryStatisticsResponse.add_member(:query_submission_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "QuerySubmissionTime"))
     GetQueryStatisticsResponse.type = Types::GetQueryStatisticsResponse
+    GetRLSPolicyRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "Name", traits: {"smithy.api#required" => {}}))
+    GetRLSPolicyRequest.type = Types::GetRLSPolicyRequest
+    GetRLSPolicyResponse.add_member(:rls_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: RLSPolicy, name: "RLSPolicy"))
+    GetRLSPolicyResponse.type = Types::GetRLSPolicyResponse
     GetResourceLFTagsRequest.add_member(:catalog_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdString, name: "CatalogId"))
     GetResourceLFTagsRequest.add_member(:resource, ::Smithy::Schema::Shapes::MemberShape.new(target: Resource, name: "Resource", traits: {"smithy.api#required" => {}}))
     GetResourceLFTagsRequest.add_member(:show_assigned_lf_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanNullable, name: "ShowAssignedLFTags"))
@@ -627,6 +700,15 @@ module Aws::LakeFormation
     GetTableObjectsResponse.add_member(:objects, ::Smithy::Schema::Shapes::MemberShape.new(target: PartitionedTableObjectsList, name: "Objects"))
     GetTableObjectsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenString, name: "NextToken"))
     GetTableObjectsResponse.type = Types::GetTableObjectsResponse
+    GetTemporaryDataLocationCredentialsRequest.add_member(:duration_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: CredentialTimeoutDurationSecondInteger, name: "DurationSeconds"))
+    GetTemporaryDataLocationCredentialsRequest.add_member(:audit_context, ::Smithy::Schema::Shapes::MemberShape.new(target: AuditContext, name: "AuditContext"))
+    GetTemporaryDataLocationCredentialsRequest.add_member(:data_locations, ::Smithy::Schema::Shapes::MemberShape.new(target: PathStringList, name: "DataLocations"))
+    GetTemporaryDataLocationCredentialsRequest.add_member(:credentials_scope, ::Smithy::Schema::Shapes::MemberShape.new(target: CredentialsScope, name: "CredentialsScope"))
+    GetTemporaryDataLocationCredentialsRequest.type = Types::GetTemporaryDataLocationCredentialsRequest
+    GetTemporaryDataLocationCredentialsResponse.add_member(:credentials, ::Smithy::Schema::Shapes::MemberShape.new(target: TemporaryCredentials, name: "Credentials"))
+    GetTemporaryDataLocationCredentialsResponse.add_member(:accessible_data_locations, ::Smithy::Schema::Shapes::MemberShape.new(target: PathStringList, name: "AccessibleDataLocations"))
+    GetTemporaryDataLocationCredentialsResponse.add_member(:credentials_scope, ::Smithy::Schema::Shapes::MemberShape.new(target: CredentialsScope, name: "CredentialsScope"))
+    GetTemporaryDataLocationCredentialsResponse.type = Types::GetTemporaryDataLocationCredentialsResponse
     GetTemporaryGluePartitionCredentialsRequest.add_member(:table_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArnString, name: "TableArn", traits: {"smithy.api#required" => {}}))
     GetTemporaryGluePartitionCredentialsRequest.add_member(:partition, ::Smithy::Schema::Shapes::MemberShape.new(target: PartitionValueList, name: "Partition", traits: {"smithy.api#required" => {}}))
     GetTemporaryGluePartitionCredentialsRequest.add_member(:permissions, ::Smithy::Schema::Shapes::MemberShape.new(target: PermissionList, name: "Permissions"))
@@ -761,6 +843,21 @@ module Aws::LakeFormation
     ListPermissionsResponse.add_member(:principal_resource_permissions, ::Smithy::Schema::Shapes::MemberShape.new(target: PrincipalResourcePermissionsList, name: "PrincipalResourcePermissions"))
     ListPermissionsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken"))
     ListPermissionsResponse.type = Types::ListPermissionsResponse
+    ListRLSPoliciesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: PageSize, name: "MaxResults"))
+    ListRLSPoliciesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken"))
+    ListRLSPoliciesRequest.type = Types::ListRLSPoliciesRequest
+    ListRLSPoliciesResponse.add_member(:rls_policies, ::Smithy::Schema::Shapes::MemberShape.new(target: RLSPolicyList, name: "RLSPolicies"))
+    ListRLSPoliciesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken"))
+    ListRLSPoliciesResponse.type = Types::ListRLSPoliciesResponse
+    ListRLSPolicyAttachmentsRequest.add_member(:resource, ::Smithy::Schema::Shapes::MemberShape.new(target: Resource, name: "Resource"))
+    ListRLSPolicyAttachmentsRequest.add_member(:principal, ::Smithy::Schema::Shapes::MemberShape.new(target: DataLakePrincipal, name: "Principal"))
+    ListRLSPolicyAttachmentsRequest.add_member(:policy_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "PolicyName"))
+    ListRLSPolicyAttachmentsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: PageSize, name: "MaxResults"))
+    ListRLSPolicyAttachmentsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken"))
+    ListRLSPolicyAttachmentsRequest.type = Types::ListRLSPolicyAttachmentsRequest
+    ListRLSPolicyAttachmentsResponse.add_member(:rls_policy_attachments, ::Smithy::Schema::Shapes::MemberShape.new(target: RLSPolicyAttachmentList, name: "RLSPolicyAttachments"))
+    ListRLSPolicyAttachmentsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken"))
+    ListRLSPolicyAttachmentsResponse.type = Types::ListRLSPolicyAttachmentsResponse
     ListResourcesRequest.add_member(:filter_condition_list, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterConditionList, name: "FilterConditionList"))
     ListResourcesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: PageSize, name: "MaxResults"))
     ListResourcesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken"))
@@ -867,12 +964,36 @@ module Aws::LakeFormation
     QueryStateString.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ERROR", traits: {"smithy.api#enumValue" => "ERROR"}))
     QueryStateString.add_member(:finished, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FINISHED", traits: {"smithy.api#enumValue" => "FINISHED"}))
     QueryStateString.add_member(:expired, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXPIRED", traits: {"smithy.api#enumValue" => "EXPIRED"}))
+    RLSPolicy.add_member(:catalog_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdString, name: "CatalogId"))
+    RLSPolicy.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "Name"))
+    RLSPolicy.add_member(:attachment_columns, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnList, name: "AttachmentColumns"))
+    RLSPolicy.add_member(:filter_expression, ::Smithy::Schema::Shapes::MemberShape.new(target: PredicateString, name: "FilterExpression"))
+    RLSPolicy.type = Types::RLSPolicy
+    RLSPolicyAttachment.add_member(:catalog_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdString, name: "CatalogId"))
+    RLSPolicyAttachment.add_member(:policy_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "PolicyName"))
+    RLSPolicyAttachment.add_member(:principal, ::Smithy::Schema::Shapes::MemberShape.new(target: DataLakePrincipal, name: "Principal"))
+    RLSPolicyAttachment.add_member(:resource, ::Smithy::Schema::Shapes::MemberShape.new(target: Resource, name: "Resource"))
+    RLSPolicyAttachment.add_member(:condition, ::Smithy::Schema::Shapes::MemberShape.new(target: Condition, name: "Condition"))
+    RLSPolicyAttachment.add_member(:default_rls_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "DefaultRLSPolicy"))
+    RLSPolicyAttachment.type = Types::RLSPolicyAttachment
+    RLSPolicyAttachmentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RLSPolicyAttachment, name: "member"))
+    RLSPolicyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RLSPolicy, name: "member"))
+    RLSPolicyResource.add_member(:catalog_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdString, name: "CatalogId"))
+    RLSPolicyResource.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "Name", traits: {"smithy.api#required" => {}}))
+    RLSPolicyResource.type = Types::RLSPolicyResource
+    RedshiftConnect.add_member(:authorization, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceAuthorization, name: "Authorization", traits: {"smithy.api#required" => {}}))
+    RedshiftConnect.type = Types::RedshiftConnect
+    RedshiftScopeUnion.add_member(:redshift_connect, Types::RedshiftScopeUnion::RedshiftConnect, ::Smithy::Schema::Shapes::MemberShape.new(target: RedshiftConnect, name: "RedshiftConnect"))
+    RedshiftScopeUnion.add_member(:unknown, Types::RedshiftScopeUnion::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    RedshiftScopeUnion.type = Types::RedshiftScopeUnion
+    RedshiftServiceIntegrations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RedshiftScopeUnion, name: "member"))
     RegisterResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArnString, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
     RegisterResourceRequest.add_member(:use_service_linked_role, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "UseServiceLinkedRole"))
     RegisterResourceRequest.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IAMRoleArn, name: "RoleArn"))
     RegisterResourceRequest.add_member(:with_federation, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "WithFederation"))
     RegisterResourceRequest.add_member(:hybrid_access_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "HybridAccessEnabled"))
     RegisterResourceRequest.add_member(:with_privileged_access, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "WithPrivilegedAccess", traits: {"smithy.api#default" => false}))
+    RegisterResourceRequest.add_member(:expected_resource_owner_account, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountIdString, name: "ExpectedResourceOwnerAccount"))
     RegisterResourceRequest.type = Types::RegisterResourceRequest
     RegisterResourceResponse.type = Types::RegisterResourceResponse
     RemoveLFTagsFromResourceRequest.add_member(:catalog_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdString, name: "CatalogId"))
@@ -890,6 +1011,7 @@ module Aws::LakeFormation
     Resource.add_member(:lf_tag, ::Smithy::Schema::Shapes::MemberShape.new(target: LFTagKeyResource, name: "LFTag"))
     Resource.add_member(:lf_tag_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: LFTagPolicyResource, name: "LFTagPolicy"))
     Resource.add_member(:lf_tag_expression, ::Smithy::Schema::Shapes::MemberShape.new(target: LFTagExpressionResource, name: "LFTagExpression"))
+    Resource.add_member(:rls_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: RLSPolicyResource, name: "RLSPolicy"))
     Resource.type = Types::Resource
     ResourceInfo.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArnString, name: "ResourceArn"))
     ResourceInfo.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IAMRoleArn, name: "RoleArn"))
@@ -897,6 +1019,8 @@ module Aws::LakeFormation
     ResourceInfo.add_member(:with_federation, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "WithFederation"))
     ResourceInfo.add_member(:hybrid_access_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "HybridAccessEnabled"))
     ResourceInfo.add_member(:with_privileged_access, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "WithPrivilegedAccess"))
+    ResourceInfo.add_member(:verification_status, ::Smithy::Schema::Shapes::MemberShape.new(target: VerificationStatus, name: "VerificationStatus"))
+    ResourceInfo.add_member(:expected_resource_owner_account, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountIdString, name: "ExpectedResourceOwnerAccount"))
     ResourceInfo.type = Types::ResourceInfo
     ResourceInfoList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceInfo, name: "member"))
     ResourceNotReadyException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageString, name: "Message"))
@@ -936,6 +1060,12 @@ module Aws::LakeFormation
     SearchTablesByLFTagsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken"))
     SearchTablesByLFTagsResponse.add_member(:table_list, ::Smithy::Schema::Shapes::MemberShape.new(target: TableLFTagsList, name: "TableList"))
     SearchTablesByLFTagsResponse.type = Types::SearchTablesByLFTagsResponse
+    ServiceAuthorization.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
+    ServiceAuthorization.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
+    ServiceIntegrationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceIntegrationUnion, name: "member"))
+    ServiceIntegrationUnion.add_member(:redshift, Types::ServiceIntegrationUnion::Redshift, ::Smithy::Schema::Shapes::MemberShape.new(target: RedshiftServiceIntegrations, name: "Redshift"))
+    ServiceIntegrationUnion.add_member(:unknown, Types::ServiceIntegrationUnion::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    ServiceIntegrationUnion.type = Types::ServiceIntegrationUnion
     StartQueryPlanningRequest.add_member(:query_planning_context, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryPlanningContext, name: "QueryPlanningContext", traits: {"smithy.api#required" => {}}))
     StartQueryPlanningRequest.add_member(:query_string, ::Smithy::Schema::Shapes::MemberShape.new(target: SyntheticStartQueryPlanningRequestQueryString, name: "QueryString", traits: {"smithy.api#required" => {}}))
     StartQueryPlanningRequest.type = Types::StartQueryPlanningRequest
@@ -986,6 +1116,11 @@ module Aws::LakeFormation
     TaggedTable.add_member(:lf_tags_on_table, ::Smithy::Schema::Shapes::MemberShape.new(target: LFTagsList, name: "LFTagsOnTable"))
     TaggedTable.add_member(:lf_tags_on_columns, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnLFTagsList, name: "LFTagsOnColumns"))
     TaggedTable.type = Types::TaggedTable
+    TemporaryCredentials.add_member(:access_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessKeyIdString, name: "AccessKeyId"))
+    TemporaryCredentials.add_member(:secret_access_key, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretAccessKeyString, name: "SecretAccessKey"))
+    TemporaryCredentials.add_member(:session_token, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionTokenString, name: "SessionToken"))
+    TemporaryCredentials.add_member(:expiration, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpirationTimestamp, name: "Expiration"))
+    TemporaryCredentials.type = Types::TemporaryCredentials
     ThrottledException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageString, name: "Message"))
     ThrottledException.type = Types::ThrottledException
     TransactionCanceledException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageString, name: "Message"))
@@ -1029,14 +1164,20 @@ module Aws::LakeFormation
     UpdateLFTagResponse.type = Types::UpdateLFTagResponse
     UpdateLakeFormationIdentityCenterConfigurationRequest.add_member(:catalog_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdString, name: "CatalogId"))
     UpdateLakeFormationIdentityCenterConfigurationRequest.add_member(:share_recipients, ::Smithy::Schema::Shapes::MemberShape.new(target: DataLakePrincipalList, name: "ShareRecipients"))
+    UpdateLakeFormationIdentityCenterConfigurationRequest.add_member(:service_integrations, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceIntegrationList, name: "ServiceIntegrations"))
     UpdateLakeFormationIdentityCenterConfigurationRequest.add_member(:application_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationStatus, name: "ApplicationStatus"))
     UpdateLakeFormationIdentityCenterConfigurationRequest.add_member(:external_filtering, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalFilteringConfiguration, name: "ExternalFiltering"))
     UpdateLakeFormationIdentityCenterConfigurationRequest.type = Types::UpdateLakeFormationIdentityCenterConfigurationRequest
     UpdateLakeFormationIdentityCenterConfigurationResponse.type = Types::UpdateLakeFormationIdentityCenterConfigurationResponse
+    UpdateRLSPolicyRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "Name", traits: {"smithy.api#required" => {}}))
+    UpdateRLSPolicyRequest.add_member(:filter_expression, ::Smithy::Schema::Shapes::MemberShape.new(target: PredicateString, name: "FilterExpression"))
+    UpdateRLSPolicyRequest.type = Types::UpdateRLSPolicyRequest
+    UpdateRLSPolicyResponse.type = Types::UpdateRLSPolicyResponse
     UpdateResourceRequest.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IAMRoleArn, name: "RoleArn", traits: {"smithy.api#required" => {}}))
     UpdateResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArnString, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
     UpdateResourceRequest.add_member(:with_federation, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "WithFederation"))
     UpdateResourceRequest.add_member(:hybrid_access_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "HybridAccessEnabled"))
+    UpdateResourceRequest.add_member(:expected_resource_owner_account, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountIdString, name: "ExpectedResourceOwnerAccount"))
     UpdateResourceRequest.type = Types::UpdateResourceRequest
     UpdateResourceResponse.type = Types::UpdateResourceResponse
     UpdateTableObjectsRequest.add_member(:catalog_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdString, name: "CatalogId"))
@@ -1054,6 +1195,9 @@ module Aws::LakeFormation
     UpdateTableStorageOptimizerResponse.add_member(:result, ::Smithy::Schema::Shapes::MemberShape.new(target: Result, name: "Result"))
     UpdateTableStorageOptimizerResponse.type = Types::UpdateTableStorageOptimizerResponse
     ValueStringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValueString, name: "member"))
+    VerificationStatus.add_member(:verified, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VERIFIED", traits: {"smithy.api#enumValue" => "VERIFIED"}))
+    VerificationStatus.add_member(:verification_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VERIFICATION_FAILED", traits: {"smithy.api#enumValue" => "VERIFICATION_FAILED"}))
+    VerificationStatus.add_member(:not_verified, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_VERIFIED", traits: {"smithy.api#enumValue" => "NOT_VERIFIED"}))
     VirtualObject.add_member(:uri, ::Smithy::Schema::Shapes::MemberShape.new(target: URI, name: "Uri", traits: {"smithy.api#required" => {}}))
     VirtualObject.add_member(:e_tag, ::Smithy::Schema::Shapes::MemberShape.new(target: ETagString, name: "ETag"))
     VirtualObject.type = Types::VirtualObject
@@ -1074,7 +1218,7 @@ module Aws::LakeFormation
       service.id = "com.amazonaws.lakeformation#AWSLakeFormation"
       service.name = "AWSLakeFormation"
       service.version = "2017-03-31"
-      service.traits = {"aws.api#service" => {"sdkId" => "LakeFormation", "arnNamespace" => "lakeformation", "cloudFormationName" => "LakeFormation", "cloudTrailEventSource" => "lakeformation.amazonaws.com", "endpointPrefix" => "lakeformation"}, "aws.auth#sigv4" => {"name" => "lakeformation"}, "aws.protocols#restJson1" => {}, "smithy.api#title" => "AWS Lake Formation"}
+      service.traits = {"aws.api#service" => {"sdkId" => "LakeFormation", "arnNamespace" => "lakeformation", "cloudFormationName" => "LakeFormation", "cloudTrailEventSource" => "lakeformation.amazonaws.com", "endpointPrefix" => "lakeformation"}, "aws.auth#sigv4" => {"name" => "lakeformation"}, "aws.protocols#restJson1" => {}, "smithy.api#title" => "AWS Lake Formation", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://lakeformation-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://lakeformation-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://lakeformation.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://lakeformation.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
       service.add_operation(:add_lf_tags_to_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lakeformation#AddLFTagsToResource"
         operation.name = "AddLFTagsToResource"
@@ -1099,6 +1243,21 @@ module Aws::LakeFormation
         operation.errors << InvalidInputException
         operation.errors << OperationTimeoutException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/AssumeDecoratedRoleWithSAML", "code" => 200}}
+      end)
+      service.add_operation(:attach_rls_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.lakeformation#AttachRLSPolicy"
+        operation.name = "AttachRLSPolicy"
+        operation.input = AttachRLSPolicyRequest
+        operation.output = AttachRLSPolicyResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AlreadyExistsException
+        operation.errors << ConcurrentModificationException
+        operation.errors << EntityNotFoundException
+        operation.errors << InternalServiceException
+        operation.errors << InvalidInputException
+        operation.errors << OperationTimeoutException
+        operation.errors << ResourceNumberLimitExceededException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/AttachRLSPolicy", "code" => 200}}
       end)
       service.add_operation(:batch_grant_permissions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lakeformation#BatchGrantPermissions"
@@ -1212,6 +1371,20 @@ module Aws::LakeFormation
         operation.errors << ResourceNumberLimitExceededException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/CreateLakeFormationOptIn", "code" => 200}}
       end)
+      service.add_operation(:create_rls_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.lakeformation#CreateRLSPolicy"
+        operation.name = "CreateRLSPolicy"
+        operation.input = CreateRLSPolicyRequest
+        operation.output = CreateRLSPolicyResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AlreadyExistsException
+        operation.errors << ConcurrentModificationException
+        operation.errors << InternalServiceException
+        operation.errors << InvalidInputException
+        operation.errors << OperationTimeoutException
+        operation.errors << ResourceNumberLimitExceededException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/CreateRLSPolicy", "code" => 200}}
+      end)
       service.add_operation(:delete_data_cells_filter, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lakeformation#DeleteDataCellsFilter"
         operation.name = "DeleteDataCellsFilter"
@@ -1289,6 +1462,19 @@ module Aws::LakeFormation
         operation.errors << TransactionCommittedException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/DeleteObjectsOnCancel", "code" => 200}}
       end)
+      service.add_operation(:delete_rls_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.lakeformation#DeleteRLSPolicy"
+        operation.name = "DeleteRLSPolicy"
+        operation.input = DeleteRLSPolicyRequest
+        operation.output = DeleteRLSPolicyResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConcurrentModificationException
+        operation.errors << EntityNotFoundException
+        operation.errors << InternalServiceException
+        operation.errors << InvalidInputException
+        operation.errors << OperationTimeoutException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/DeleteRLSPolicy", "code" => 200}}
+      end)
       service.add_operation(:deregister_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lakeformation#DeregisterResource"
         operation.name = "DeregisterResource"
@@ -1333,6 +1519,19 @@ module Aws::LakeFormation
         operation.errors << InvalidInputException
         operation.errors << OperationTimeoutException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/DescribeTransaction", "code" => 200}}
+      end)
+      service.add_operation(:detach_rls_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.lakeformation#DetachRLSPolicy"
+        operation.name = "DetachRLSPolicy"
+        operation.input = DetachRLSPolicyRequest
+        operation.output = DetachRLSPolicyResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConcurrentModificationException
+        operation.errors << EntityNotFoundException
+        operation.errors << InternalServiceException
+        operation.errors << InvalidInputException
+        operation.errors << OperationTimeoutException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/DetachRLSPolicy", "code" => 200}}
       end)
       service.add_operation(:extend_transaction, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lakeformation#ExtendTransaction"
@@ -1439,6 +1638,18 @@ module Aws::LakeFormation
         operation.errors << ThrottledException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "query-"}, "smithy.api#http" => {"method" => "POST", "uri" => "/GetQueryStatistics", "code" => 200}}
       end)
+      service.add_operation(:get_rls_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.lakeformation#GetRLSPolicy"
+        operation.name = "GetRLSPolicy"
+        operation.input = GetRLSPolicyRequest
+        operation.output = GetRLSPolicyResponse
+        operation.errors << AccessDeniedException
+        operation.errors << EntityNotFoundException
+        operation.errors << InternalServiceException
+        operation.errors << InvalidInputException
+        operation.errors << OperationTimeoutException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/GetRLSPolicy", "code" => 200}}
+      end)
       service.add_operation(:get_resource_lf_tags, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lakeformation#GetResourceLFTags"
         operation.name = "GetResourceLFTags"
@@ -1466,6 +1677,20 @@ module Aws::LakeFormation
         operation.errors << TransactionCommittedException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/GetTableObjects", "code" => 200}}
         operation[:paginator] = Paginators::GetTableObjects.new
+      end)
+      service.add_operation(:get_temporary_data_location_credentials, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.lakeformation#GetTemporaryDataLocationCredentials"
+        operation.name = "GetTemporaryDataLocationCredentials"
+        operation.input = GetTemporaryDataLocationCredentialsRequest
+        operation.output = GetTemporaryDataLocationCredentialsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << EntityNotFoundException
+        operation.errors << GlueEncryptionException
+        operation.errors << InternalServiceException
+        operation.errors << InvalidInputException
+        operation.errors << OperationTimeoutException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/GetTemporaryDataLocationCredentials", "code" => 200}}
       end)
       service.add_operation(:get_temporary_glue_partition_credentials, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lakeformation#GetTemporaryGluePartitionCredentials"
@@ -1588,6 +1813,32 @@ module Aws::LakeFormation
         operation.errors << OperationTimeoutException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/ListPermissions", "code" => 200}}
         operation[:paginator] = Paginators::ListPermissions.new
+      end)
+      service.add_operation(:list_rls_policies, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.lakeformation#ListRLSPolicies"
+        operation.name = "ListRLSPolicies"
+        operation.input = ListRLSPoliciesRequest
+        operation.output = ListRLSPoliciesResponse
+        operation.errors << AccessDeniedException
+        operation.errors << EntityNotFoundException
+        operation.errors << InternalServiceException
+        operation.errors << InvalidInputException
+        operation.errors << OperationTimeoutException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/ListRLSPolicies", "code" => 200}}
+        operation[:paginator] = Paginators::ListRLSPolicies.new
+      end)
+      service.add_operation(:list_rls_policy_attachments, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.lakeformation#ListRLSPolicyAttachments"
+        operation.name = "ListRLSPolicyAttachments"
+        operation.input = ListRLSPolicyAttachmentsRequest
+        operation.output = ListRLSPolicyAttachmentsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << EntityNotFoundException
+        operation.errors << InternalServiceException
+        operation.errors << InvalidInputException
+        operation.errors << OperationTimeoutException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/ListRLSPolicyAttachments", "code" => 200}}
+        operation[:paginator] = Paginators::ListRLSPolicyAttachments.new
       end)
       service.add_operation(:list_resources, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lakeformation#ListResources"
@@ -1769,6 +2020,20 @@ module Aws::LakeFormation
         operation.errors << InvalidInputException
         operation.errors << OperationTimeoutException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/UpdateLakeFormationIdentityCenterConfiguration", "code" => 200}}
+      end)
+      service.add_operation(:update_rls_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.lakeformation#UpdateRLSPolicy"
+        operation.name = "UpdateRLSPolicy"
+        operation.input = UpdateRLSPolicyRequest
+        operation.output = UpdateRLSPolicyResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConcurrentModificationException
+        operation.errors << EntityNotFoundException
+        operation.errors << InternalServiceException
+        operation.errors << InvalidInputException
+        operation.errors << OperationTimeoutException
+        operation.errors << ResourceNumberLimitExceededException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/UpdateRLSPolicy", "code" => 200}}
       end)
       service.add_operation(:update_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lakeformation#UpdateResource"

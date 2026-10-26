@@ -668,14 +668,14 @@ module Aws::EventBridge
     #   @return [Integer]
     # @!attribute kms_key_identifier
     #   <p>The identifier of the KMS
-    #         customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt this archive. The identifier can be the key 
+    #         customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt this archive. The identifier can be the key
     #         Amazon Resource Name (ARN), KeyId, key alias, or key alias ARN.</p>
     #            <p>If you do not specify a customer managed key identifier, EventBridge uses an
     #           Amazon Web Services owned key to encrypt the archive.</p>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/viewing-keys.html">Identify and view keys</a> in the <i>Key Management Service
     #                                   Developer Guide</i>. </p>
     #            <important>
-    #               <p>If you have specified that EventBridge use a customer managed key for encrypting the source event bus, we strongly recommend you also specify a 
+    #               <p>If you have specified that EventBridge use a customer managed key for encrypting the source event bus, we strongly recommend you also specify a
     #           customer managed key for any archives for the event bus as well. </p>
     #               <p>For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/encryption-archives.html">Encrypting archives</a> in the <i>Amazon EventBridge User Guide</i>.</p>
     #            </important>
@@ -854,7 +854,7 @@ module Aws::EventBridge
     #   @return [Types::ConnectivityResourceParameters]
     # @!attribute kms_key_identifier
     #   <p>The identifier of the KMS
-    #         customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt this connection. The identifier can be the key 
+    #         customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt this connection. The identifier can be the key
     #         Amazon Resource Name (ARN), KeyId, key alias, or key alias ARN.</p>
     #            <p>If you do not specify a customer managed key identifier, EventBridge uses an
     #           Amazon Web Services owned key to encrypt the connection.</p>
@@ -987,7 +987,7 @@ module Aws::EventBridge
     #   @return [String]
     # @!attribute kms_key_identifier
     #   <p>The identifier of the KMS
-    #         customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt events on this event bus. The identifier can be the key 
+    #         customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt events on this event bus. The identifier can be the key
     #         Amazon Resource Name (ARN), KeyId, key alias, or key alias ARN.</p>
     #            <p>If you do not specify a customer managed key identifier, EventBridge uses an
     #           Amazon Web Services owned key to encrypt events on the event bus.</p>
@@ -1012,7 +1012,7 @@ module Aws::EventBridge
     #           use an Amazon Web Services owned key. For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-encryption-event-bus-cmkey.html">Encrypting events</a> in the <i>Amazon EventBridge User Guide</i>.</p>
     #            </note>
     #            <important>
-    #               <p>If you have specified that EventBridge use a customer managed key for encrypting the source event bus, we strongly recommend you also specify a 
+    #               <p>If you have specified that EventBridge use a customer managed key for encrypting the source event bus, we strongly recommend you also specify a
     #           customer managed key for any archives for the event bus as well. </p>
     #               <p>For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/encryption-archives.html">Encrypting archives</a> in the <i>Amazon EventBridge User Guide</i>.</p>
     #            </important>
@@ -1025,7 +1025,7 @@ module Aws::EventBridge
     #   @return [Types::DeadLetterConfig]
     # @!attribute log_config
     #   <p>The logging configuration settings for the event bus.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/eb-event-bus-logs.html">Configuring logs for event buses</a> in the <i>EventBridge User Guide</i>.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-bus-logs.html">Configuring logs for event buses</a> in the <i>EventBridge User Guide</i>.</p>
     #   @return [Types::LogConfig]
     # @!attribute tags
     #   <p>Tags to associate with the event bus.</p>
@@ -1063,7 +1063,7 @@ module Aws::EventBridge
     #   @return [Types::DeadLetterConfig]
     # @!attribute log_config
     #   <p>The logging configuration settings for the event bus.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/eb-event-bus-logs.html">Configuring logs for event buses</a> in the <i>EventBridge User Guide</i>.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-bus-logs.html">Configuring logs for event buses</a> in the <i>EventBridge User Guide</i>.</p>
     #   @return [Types::LogConfig]
     class CreateEventBusResponse < Struct.new(
       nil,
@@ -1682,7 +1682,7 @@ module Aws::EventBridge
     #   @return [String]
     # @!attribute log_config
     #   <p>The logging configuration settings for the event bus.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/eb-event-bus-logs.html">Configuring logs for event buses</a> in the <i>EventBridge User Guide</i>.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-bus-logs.html">Configuring logs for event buses</a> in the <i>EventBridge User Guide</i>.</p>
     #   @return [Types::LogConfig]
     # @!attribute creation_time
     #   <p>The time the event bus was created.</p>
@@ -1690,6 +1690,10 @@ module Aws::EventBridge
     # @!attribute last_modified_time
     #   <p>The time the event bus was last modified.</p>
     #   @return [Time]
+    # @!attribute managed_by
+    #   <p>If the event bus was created on behalf of your account by an Amazon Web Services service,
+    #         this field displays the principal name of the service that created the event bus.</p>
+    #   @return [String]
     class DescribeEventBusResponse < Struct.new(
       nil,
       :name,
@@ -1701,6 +1705,7 @@ module Aws::EventBridge
       :log_config,
       :creation_time,
       :last_modified_time,
+      :managed_by,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2154,6 +2159,10 @@ module Aws::EventBridge
     # @!attribute last_modified_time
     #   <p>The time the event bus was last modified.</p>
     #   @return [Time]
+    # @!attribute managed_by
+    #   <p>If the event bus was created on behalf of your account by an Amazon Web Services service,
+    #         this field displays the principal name of the service that created the event bus.</p>
+    #   @return [String]
     class EventBus < Struct.new(
       nil,
       :name,
@@ -2162,6 +2171,7 @@ module Aws::EventBridge
       :policy,
       :creation_time,
       :last_modified_time,
+      :managed_by,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2974,9 +2984,9 @@ module Aws::EventBridge
     end
 
     # <p>The logging configuration settings for the event bus.</p>
-    #          <p>For more information, see <a href="https://docs.aws.amazon.com/eb-event-bus-logs.html">Configuring logs for event buses</a> in the <i>EventBridge User Guide</i>.</p>
+    #          <p>For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-bus-logs.html">Configuring logs for event buses</a> in the <i>EventBridge User Guide</i>.</p>
     # @!attribute include_detail
-    #   <p>Whether EventBridge include detailed event information in the records it generates. 
+    #   <p>Whether EventBridge include detailed event information in the records it generates.
     #         Detailed data can be useful for troubleshooting and debugging. This information includes details of the event itself, as well as target details.</p>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-bus-logs.html#eb-event-logs-data">Including detail data in event bus logs</a> in the <i>EventBridge User Guide</i>.</p>
     #   @return [String]
@@ -3179,8 +3189,8 @@ module Aws::EventBridge
     #   <p>The source of the event.</p>
     #            <note>
     #               <p>
-    #                  <code>Detail</code>, <code>DetailType</code>, and <code>Source</code> are required for EventBridge to successfully send an event to an event bus. 
-    #       If you include event entries in a request that do not include each of those properties, EventBridge fails that entry. 
+    #                  <code>Detail</code>, <code>DetailType</code>, and <code>Source</code> are required for EventBridge to successfully send an event to an event bus.
+    #       If you include event entries in a request that do not include each of those properties, EventBridge fails that entry.
     #       If you submit a request in which <i>none</i> of the entries have each of these properties, EventBridge fails the entire request.
     #       </p>
     #            </note>
@@ -3194,8 +3204,8 @@ module Aws::EventBridge
     #         in the event detail.</p>
     #            <note>
     #               <p>
-    #                  <code>Detail</code>, <code>DetailType</code>, and <code>Source</code> are required for EventBridge to successfully send an event to an event bus. 
-    #       If you include event entries in a request that do not include each of those properties, EventBridge fails that entry. 
+    #                  <code>Detail</code>, <code>DetailType</code>, and <code>Source</code> are required for EventBridge to successfully send an event to an event bus.
+    #       If you include event entries in a request that do not include each of those properties, EventBridge fails that entry.
     #       If you submit a request in which <i>none</i> of the entries have each of these properties, EventBridge fails the entire request.
     #       </p>
     #            </note>
@@ -3205,8 +3215,8 @@ module Aws::EventBridge
     #         and nested sub-objects.</p>
     #            <note>
     #               <p>
-    #                  <code>Detail</code>, <code>DetailType</code>, and <code>Source</code> are required for EventBridge to successfully send an event to an event bus. 
-    #       If you include event entries in a request that do not include each of those properties, EventBridge fails that entry. 
+    #                  <code>Detail</code>, <code>DetailType</code>, and <code>Source</code> are required for EventBridge to successfully send an event to an event bus.
+    #       If you include event entries in a request that do not include each of those properties, EventBridge fails that entry.
     #       If you submit a request in which <i>none</i> of the entries have each of these properties, EventBridge fails the entire request.
     #       </p>
     #            </note>
@@ -3378,8 +3388,8 @@ module Aws::EventBridge
     #   <p>The event source that is generating the entry.</p>
     #            <note>
     #               <p>
-    #                  <code>Detail</code>, <code>DetailType</code>, and <code>Source</code> are required for EventBridge to successfully send an event to an event bus. 
-    #       If you include event entries in a request that do not include each of those properties, EventBridge fails that entry. 
+    #                  <code>Detail</code>, <code>DetailType</code>, and <code>Source</code> are required for EventBridge to successfully send an event to an event bus.
+    #       If you include event entries in a request that do not include each of those properties, EventBridge fails that entry.
     #       If you submit a request in which <i>none</i> of the entries have each of these properties, EventBridge fails the entire request.
     #       </p>
     #            </note>
@@ -3393,8 +3403,8 @@ module Aws::EventBridge
     #         in the event detail.</p>
     #            <note>
     #               <p>
-    #                  <code>Detail</code>, <code>DetailType</code>, and <code>Source</code> are required for EventBridge to successfully send an event to an event bus. 
-    #       If you include event entries in a request that do not include each of those properties, EventBridge fails that entry. 
+    #                  <code>Detail</code>, <code>DetailType</code>, and <code>Source</code> are required for EventBridge to successfully send an event to an event bus.
+    #       If you include event entries in a request that do not include each of those properties, EventBridge fails that entry.
     #       If you submit a request in which <i>none</i> of the entries have each of these properties, EventBridge fails the entire request.
     #       </p>
     #            </note>
@@ -3404,8 +3414,8 @@ module Aws::EventBridge
     #         and nested sub-objects.</p>
     #            <note>
     #               <p>
-    #                  <code>Detail</code>, <code>DetailType</code>, and <code>Source</code> are required for EventBridge to successfully send an event to an event bus. 
-    #       If you include event entries in a request that do not include each of those properties, EventBridge fails that entry. 
+    #                  <code>Detail</code>, <code>DetailType</code>, and <code>Source</code> are required for EventBridge to successfully send an event to an event bus.
+    #       If you include event entries in a request that do not include each of those properties, EventBridge fails that entry.
     #       If you submit a request in which <i>none</i> of the entries have each of these properties, EventBridge fails the entire request.
     #       </p>
     #            </note>
@@ -3546,7 +3556,7 @@ module Aws::EventBridge
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>ENABLED</code>: The rule is enabled. 
+    #                     <code>ENABLED</code>: The rule is enabled.
     #             EventBridge matches events against the rule, <i>except</i> for Amazon Web Services management events delivered through CloudTrail.</p>
     #               </li>
     #               <li>
@@ -3560,8 +3570,8 @@ module Aws::EventBridge
     #               <i>
     #                        <i>Amazon EventBridge User Guide</i>
     #                     </i>.</p>
-    #                  <p>This value is only valid for rules on the <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-what-is-how-it-works-concepts.html#eb-bus-concepts-buses">default</a> event bus 
-    #             or <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-create-event-bus.html">custom event buses</a>. 
+    #                  <p>This value is only valid for rules on the <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-what-is-how-it-works-concepts.html#eb-bus-concepts-buses">default</a> event bus
+    #             or <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-create-event-bus.html">custom event buses</a>.
     #             It does not apply to <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-saas.html">partner event buses</a>.</p>
     #               </li>
     #            </ul>
@@ -3963,7 +3973,7 @@ module Aws::EventBridge
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>ENABLED</code>: The rule is enabled. 
+    #                     <code>ENABLED</code>: The rule is enabled.
     #             EventBridge matches events against the rule, <i>except</i> for Amazon Web Services management events delivered through CloudTrail.</p>
     #               </li>
     #               <li>
@@ -3977,8 +3987,8 @@ module Aws::EventBridge
     #               <i>
     #                        <i>Amazon EventBridge User Guide</i>
     #                     </i>.</p>
-    #                  <p>This value is only valid for rules on the <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-what-is-how-it-works-concepts.html#eb-bus-concepts-buses">default</a> event bus 
-    #             or <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-create-event-bus.html">custom event buses</a>. 
+    #                  <p>This value is only valid for rules on the <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-what-is-how-it-works-concepts.html#eb-bus-concepts-buses">default</a> event bus
+    #             or <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-create-event-bus.html">custom event buses</a>.
     #             It does not apply to <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-saas.html">partner event buses</a>.</p>
     #               </li>
     #            </ul>
@@ -4105,10 +4115,10 @@ module Aws::EventBridge
       include ::Smithy::Schema::Structure
     end
 
-    # <p>This structure includes the custom parameter to be used when the target is an SQS FIFO
-    #       queue.</p>
+    # <p>The custom parameters for EventBridge to use for a target that is an Amazon SQS fair or FIFO queue. </p>
+    #          <p></p>
     # @!attribute message_group_id
-    #   <p>The FIFO message group ID to use as the target.</p>
+    #   <p>The ID of the message group to use as the target.</p>
     #   @return [String]
     class SqsParameters < Struct.new(
       nil,
@@ -4268,8 +4278,8 @@ module Aws::EventBridge
     #           User Guide</i>.</p>
     #   @return [Types::BatchParameters]
     # @!attribute sqs_parameters
-    #   <p>Contains the message group ID to use when the target is a FIFO queue.</p>
-    #            <p>If you specify an SQS FIFO queue as a target, the queue must have content-based
+    #   <p>Contains the message group ID to use when the target is an Amazon SQS fair or FIFO queue.</p>
+    #            <p>If you specify a fair or FIFO queue as a target, the queue must have content-based
     #         deduplication enabled.</p>
     #   @return [Types::SqsParameters]
     # @!attribute http_parameters
@@ -4502,14 +4512,14 @@ module Aws::EventBridge
     #   @return [Integer]
     # @!attribute kms_key_identifier
     #   <p>The identifier of the KMS
-    #         customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt this archive. The identifier can be the key 
+    #         customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt this archive. The identifier can be the key
     #         Amazon Resource Name (ARN), KeyId, key alias, or key alias ARN.</p>
     #            <p>If you do not specify a customer managed key identifier, EventBridge uses an
     #           Amazon Web Services owned key to encrypt the archive.</p>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/viewing-keys.html">Identify and view keys</a> in the <i>Key Management Service
     #                                   Developer Guide</i>. </p>
     #            <important>
-    #               <p>If you have specified that EventBridge use a customer managed key for encrypting the source event bus, we strongly recommend you also specify a 
+    #               <p>If you have specified that EventBridge use a customer managed key for encrypting the source event bus, we strongly recommend you also specify a
     #           customer managed key for any archives for the event bus as well. </p>
     #               <p>For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/encryption-archives.html">Encrypting archives</a> in the <i>Amazon EventBridge User Guide</i>.</p>
     #            </important>
@@ -4679,7 +4689,7 @@ module Aws::EventBridge
     #   @return [Types::ConnectivityResourceParameters]
     # @!attribute kms_key_identifier
     #   <p>The identifier of the KMS
-    #         customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt this connection. The identifier can be the key 
+    #         customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt this connection. The identifier can be the key
     #         Amazon Resource Name (ARN), KeyId, key alias, or key alias ARN.</p>
     #            <p>If you do not specify a customer managed key identifier, EventBridge uses an
     #           Amazon Web Services owned key to encrypt the connection.</p>
@@ -4807,7 +4817,7 @@ module Aws::EventBridge
     #   @return [String]
     # @!attribute kms_key_identifier
     #   <p>The identifier of the KMS
-    #         customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt events on this event bus. The identifier can be the key 
+    #         customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt events on this event bus. The identifier can be the key
     #         Amazon Resource Name (ARN), KeyId, key alias, or key alias ARN.</p>
     #            <p>If you do not specify a customer managed key identifier, EventBridge uses an
     #           Amazon Web Services owned key to encrypt events on the event bus.</p>
@@ -4832,7 +4842,7 @@ module Aws::EventBridge
     #           use an Amazon Web Services owned key. For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-encryption-event-bus-cmkey.html">Encrypting events</a> in the <i>Amazon EventBridge User Guide</i>.</p>
     #            </note>
     #            <important>
-    #               <p>If you have specified that EventBridge use a customer managed key for encrypting the source event bus, we strongly recommend you also specify a 
+    #               <p>If you have specified that EventBridge use a customer managed key for encrypting the source event bus, we strongly recommend you also specify a
     #           customer managed key for any archives for the event bus as well. </p>
     #               <p>For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/encryption-archives.html">Encrypting archives</a> in the <i>Amazon EventBridge User Guide</i>.</p>
     #            </important>
@@ -4848,7 +4858,7 @@ module Aws::EventBridge
     #   @return [Types::DeadLetterConfig]
     # @!attribute log_config
     #   <p>The logging configuration settings for the event bus.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/eb-event-bus-logs.html">Configuring logs for event buses</a> in the <i>EventBridge User Guide</i>.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-bus-logs.html">Configuring logs for event buses</a> in the <i>EventBridge User Guide</i>.</p>
     #   @return [Types::LogConfig]
     class UpdateEventBusRequest < Struct.new(
       nil,
@@ -4884,7 +4894,7 @@ module Aws::EventBridge
     #   @return [Types::DeadLetterConfig]
     # @!attribute log_config
     #   <p>The logging configuration settings for the event bus.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/eb-event-bus-logs.html">Configuring logs for event buses</a> in the <i>EventBridge User Guide</i>.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-bus-logs.html">Configuring logs for event buses</a> in the <i>EventBridge User Guide</i>.</p>
     #   @return [Types::LogConfig]
     class UpdateEventBusResponse < Struct.new(
       nil,

@@ -61,6 +61,15 @@ module Aws::Lightsail
     BucketAccessLogPrefix = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.lightsail#BucketAccessLogPrefix", name: "BucketAccessLogPrefix", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#pattern" => "^[\\w/!.*')(-]+$"})
     BucketBundle = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lightsail#BucketBundle", name: "BucketBundle")
     BucketBundleList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.lightsail#BucketBundleList", name: "BucketBundleList")
+    BucketCorsAllowedHeaders = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.lightsail#BucketCorsAllowedHeaders", name: "BucketCorsAllowedHeaders")
+    BucketCorsAllowedMethod = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.lightsail#BucketCorsAllowedMethod", name: "BucketCorsAllowedMethod", traits: {"smithy.api#pattern" => "^(DELETE|GET|HEAD|POST|PUT)$"})
+    BucketCorsAllowedMethods = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.lightsail#BucketCorsAllowedMethods", name: "BucketCorsAllowedMethods")
+    BucketCorsAllowedOrigins = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.lightsail#BucketCorsAllowedOrigins", name: "BucketCorsAllowedOrigins")
+    BucketCorsConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lightsail#BucketCorsConfig", name: "BucketCorsConfig")
+    BucketCorsExposeHeaders = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.lightsail#BucketCorsExposeHeaders", name: "BucketCorsExposeHeaders")
+    BucketCorsRule = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lightsail#BucketCorsRule", name: "BucketCorsRule")
+    BucketCorsRuleId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.lightsail#BucketCorsRuleId", name: "BucketCorsRuleId", traits: {"smithy.api#length" => {"min" => 0, "max" => 255}})
+    BucketCorsRules = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.lightsail#BucketCorsRules", name: "BucketCorsRules", traits: {"smithy.api#length" => {"min" => 0, "max" => 20}})
     BucketList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.lightsail#BucketList", name: "BucketList")
     BucketMetricName = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.lightsail#BucketMetricName", name: "BucketMetricName")
     BucketName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.lightsail#BucketName", name: "BucketName", traits: {"smithy.api#length" => {"min" => 3, "max" => 54}, "smithy.api#pattern" => "^[a-z0-9][a-z0-9-]{1,52}[a-z0-9]$"})
@@ -247,6 +256,8 @@ module Aws::Lightsail
     DiskState = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.lightsail#DiskState", name: "DiskState")
     DistributionBundle = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lightsail#DistributionBundle", name: "DistributionBundle")
     DistributionBundleList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.lightsail#DistributionBundleList", name: "DistributionBundleList")
+    DistributionCustomErrorResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lightsail#DistributionCustomErrorResponse", name: "DistributionCustomErrorResponse")
+    DistributionCustomErrorResponseList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.lightsail#DistributionCustomErrorResponseList", name: "DistributionCustomErrorResponseList")
     DistributionList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.lightsail#DistributionList", name: "DistributionList")
     DistributionMetricName = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.lightsail#DistributionMetricName", name: "DistributionMetricName")
     DnsRecordCreationState = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lightsail#DnsRecordCreationState", name: "DnsRecordCreationState")
@@ -376,6 +387,8 @@ module Aws::Lightsail
     GetOperationsForResourceResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lightsail#GetOperationsForResourceResult", name: "GetOperationsForResourceResult")
     GetOperationsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lightsail#GetOperationsRequest", name: "GetOperationsRequest")
     GetOperationsResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lightsail#GetOperationsResult", name: "GetOperationsResult")
+    GetProfileRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lightsail#GetProfileRequest", name: "GetProfileRequest")
+    GetProfileResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lightsail#GetProfileResult", name: "GetProfileResult")
     GetRegionsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lightsail#GetRegionsRequest", name: "GetRegionsRequest")
     GetRegionsResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lightsail#GetRegionsResult", name: "GetRegionsResult")
     GetRelationalDatabaseBlueprintsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lightsail#GetRelationalDatabaseBlueprintsRequest", name: "GetRelationalDatabaseBlueprintsRequest")
@@ -511,8 +524,11 @@ module Aws::Lightsail
     OperationStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.lightsail#OperationStatus", name: "OperationStatus")
     OperationType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.lightsail#OperationType", name: "OperationType")
     Origin = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lightsail#Origin", name: "Origin")
+    OriginIpAddressTypeEnum = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.lightsail#OriginIpAddressTypeEnum", name: "OriginIpAddressTypeEnum")
     OriginProtocolPolicyEnum = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.lightsail#OriginProtocolPolicyEnum", name: "OriginProtocolPolicyEnum")
     PartnerIdList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.lightsail#PartnerIdList", name: "PartnerIdList", traits: {"smithy.api#length" => {"min" => 0, "max" => 10}})
+    PartnerInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lightsail#PartnerInfo", name: "PartnerInfo")
+    PartnerStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.lightsail#PartnerStatus", name: "PartnerStatus")
     PasswordData = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lightsail#PasswordData", name: "PasswordData")
     PeerVpcRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lightsail#PeerVpcRequest", name: "PeerVpcRequest")
     PeerVpcResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lightsail#PeerVpcResult", name: "PeerVpcResult")
@@ -530,6 +546,7 @@ module Aws::Lightsail
     PricingUnit = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.lightsail#PricingUnit", name: "PricingUnit")
     PrivateRegistryAccess = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lightsail#PrivateRegistryAccess", name: "PrivateRegistryAccess")
     PrivateRegistryAccessRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lightsail#PrivateRegistryAccessRequest", name: "PrivateRegistryAccessRequest")
+    ProfileType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.lightsail#ProfileType", name: "ProfileType")
     PutAlarmRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lightsail#PutAlarmRequest", name: "PutAlarmRequest")
     PutAlarmResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lightsail#PutAlarmResult", name: "PutAlarmResult")
     PutInstancePublicPortsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lightsail#PutInstancePublicPortsRequest", name: "PutInstancePublicPortsRequest")
@@ -637,6 +654,7 @@ module Aws::Lightsail
     TagValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.lightsail#TagValue", name: "TagValue")
     TestAlarmRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lightsail#TestAlarmRequest", name: "TestAlarmRequest")
     TestAlarmResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lightsail#TestAlarmResult", name: "TestAlarmResult")
+    TierName = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.lightsail#TierName", name: "TierName")
     TimeOfDay = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.lightsail#TimeOfDay", name: "TimeOfDay", traits: {"smithy.api#pattern" => "^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$"})
     TimePeriod = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lightsail#TimePeriod", name: "TimePeriod")
     TreatMissingData = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.lightsail#TreatMissingData", name: "TreatMissingData")
@@ -748,6 +766,7 @@ module Aws::Lightsail
     Alarm.add_member(:contact_protocols, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactProtocolsList, name: "contactProtocols"))
     Alarm.add_member(:notification_triggers, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationTriggerList, name: "notificationTriggers"))
     Alarm.add_member(:notification_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "notificationEnabled"))
+    Alarm.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tags"))
     Alarm.type = Types::Alarm
     AlarmState.add_member(:ok, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OK", traits: {"smithy.api#enumValue" => "OK"}))
     AlarmState.add_member(:alarm, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALARM", traits: {"smithy.api#enumValue" => "ALARM"}))
@@ -851,6 +870,7 @@ module Aws::Lightsail
     Bucket.add_member(:resources_receiving_access, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessReceiverList, name: "resourcesReceivingAccess"))
     Bucket.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketState, name: "state"))
     Bucket.add_member(:access_log_config, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketAccessLogConfig, name: "accessLogConfig"))
+    Bucket.add_member(:cors, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketCorsConfig, name: "cors"))
     Bucket.type = Types::Bucket
     BucketAccessLogConfig.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "enabled", traits: {"smithy.api#required" => {}}))
     BucketAccessLogConfig.add_member(:destination, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketName, name: "destination"))
@@ -864,6 +884,20 @@ module Aws::Lightsail
     BucketBundle.add_member(:is_active, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "isActive"))
     BucketBundle.type = Types::BucketBundle
     BucketBundleList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketBundle, name: "member"))
+    BucketCorsAllowedHeaders.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
+    BucketCorsAllowedMethods.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketCorsAllowedMethod, name: "member"))
+    BucketCorsAllowedOrigins.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
+    BucketCorsConfig.add_member(:rules, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketCorsRules, name: "rules"))
+    BucketCorsConfig.type = Types::BucketCorsConfig
+    BucketCorsExposeHeaders.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
+    BucketCorsRule.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketCorsRuleId, name: "id"))
+    BucketCorsRule.add_member(:allowed_methods, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketCorsAllowedMethods, name: "allowedMethods", traits: {"smithy.api#required" => {}}))
+    BucketCorsRule.add_member(:allowed_origins, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketCorsAllowedOrigins, name: "allowedOrigins", traits: {"smithy.api#required" => {}}))
+    BucketCorsRule.add_member(:allowed_headers, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketCorsAllowedHeaders, name: "allowedHeaders"))
+    BucketCorsRule.add_member(:expose_headers, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketCorsExposeHeaders, name: "exposeHeaders"))
+    BucketCorsRule.add_member(:max_age_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "maxAgeSeconds"))
+    BucketCorsRule.type = Types::BucketCorsRule
+    BucketCorsRules.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketCorsRule, name: "member"))
     BucketList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Bucket, name: "member"))
     BucketMetricName.add_member(:bucket_size_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BucketSizeBytes", traits: {"smithy.api#enumValue" => "BucketSizeBytes"}))
     BucketMetricName.add_member(:number_of_objects, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NumberOfObjects", traits: {"smithy.api#enumValue" => "NumberOfObjects"}))
@@ -975,6 +1009,7 @@ module Aws::Lightsail
     ContactMethod.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceLocation, name: "location"))
     ContactMethod.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "resourceType"))
     ContactMethod.add_member(:support_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "supportCode"))
+    ContactMethod.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tags"))
     ContactMethod.type = Types::ContactMethod
     ContactMethodStatus.add_member(:pending_verification, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PendingVerification", traits: {"smithy.api#enumValue" => "PendingVerification"}))
     ContactMethodStatus.add_member(:valid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Valid", traits: {"smithy.api#enumValue" => "Valid"}))
@@ -1146,6 +1181,7 @@ module Aws::Lightsail
     CreateCloudFormationStackResult.type = Types::CreateCloudFormationStackResult
     CreateContactMethodRequest.add_member(:protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactProtocol, name: "protocol", traits: {"smithy.api#required" => {}}))
     CreateContactMethodRequest.add_member(:contact_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: StringMax256, name: "contactEndpoint", traits: {"smithy.api#required" => {}}))
+    CreateContactMethodRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tags"))
     CreateContactMethodRequest.type = Types::CreateContactMethodRequest
     CreateContactMethodResult.add_member(:operations, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationList, name: "operations"))
     CreateContactMethodResult.type = Types::CreateContactMethodResult
@@ -1205,6 +1241,9 @@ module Aws::Lightsail
     CreateDistributionRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tags"))
     CreateDistributionRequest.add_member(:certificate_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "certificateName"))
     CreateDistributionRequest.add_member(:viewer_minimum_tls_protocol_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ViewerMinimumTlsProtocolVersionEnum, name: "viewerMinimumTlsProtocolVersion"))
+    CreateDistributionRequest.add_member(:enable_private_origin_access, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "enablePrivateOriginAccess"))
+    CreateDistributionRequest.add_member(:default_root_object, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "defaultRootObject"))
+    CreateDistributionRequest.add_member(:custom_error_responses, ::Smithy::Schema::Shapes::MemberShape.new(target: DistributionCustomErrorResponseList, name: "customErrorResponses"))
     CreateDistributionRequest.type = Types::CreateDistributionRequest
     CreateDistributionResult.add_member(:distribution, ::Smithy::Schema::Shapes::MemberShape.new(target: LightsailDistribution, name: "distribution"))
     CreateDistributionResult.add_member(:operation, ::Smithy::Schema::Shapes::MemberShape.new(target: Operation, name: "operation"))
@@ -1507,6 +1546,12 @@ module Aws::Lightsail
     DistributionBundle.add_member(:is_active, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "isActive"))
     DistributionBundle.type = Types::DistributionBundle
     DistributionBundleList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DistributionBundle, name: "member"))
+    DistributionCustomErrorResponse.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "errorCode"))
+    DistributionCustomErrorResponse.add_member(:response_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "responseCode"))
+    DistributionCustomErrorResponse.add_member(:response_page_path, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "responsePagePath"))
+    DistributionCustomErrorResponse.add_member(:error_caching_min_ttl, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "errorCachingMinTTL"))
+    DistributionCustomErrorResponse.type = Types::DistributionCustomErrorResponse
+    DistributionCustomErrorResponseList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DistributionCustomErrorResponse, name: "member"))
     DistributionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LightsailDistribution, name: "member"))
     DistributionMetricName.add_member(:requests, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Requests", traits: {"smithy.api#enumValue" => "Requests"}))
     DistributionMetricName.add_member(:bytes_downloaded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BytesDownloaded", traits: {"smithy.api#enumValue" => "BytesDownloaded"}))
@@ -1646,6 +1691,7 @@ module Aws::Lightsail
     GetBucketsRequest.add_member(:bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketName, name: "bucketName"))
     GetBucketsRequest.add_member(:page_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "pageToken"))
     GetBucketsRequest.add_member(:include_connected_resources, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "includeConnectedResources"))
+    GetBucketsRequest.add_member(:include_cors, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "includeCors"))
     GetBucketsRequest.type = Types::GetBucketsRequest
     GetBucketsResult.add_member(:buckets, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketList, name: "buckets"))
     GetBucketsResult.add_member(:next_page_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "nextPageToken"))
@@ -1871,6 +1917,10 @@ module Aws::Lightsail
     GetOperationsResult.add_member(:operations, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationList, name: "operations"))
     GetOperationsResult.add_member(:next_page_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "nextPageToken"))
     GetOperationsResult.type = Types::GetOperationsResult
+    GetProfileRequest.type = Types::GetProfileRequest
+    GetProfileResult.add_member(:profile_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfileType, name: "profileType", traits: {"smithy.api#required" => {}}))
+    GetProfileResult.add_member(:partner, ::Smithy::Schema::Shapes::MemberShape.new(target: PartnerInfo, name: "partner"))
+    GetProfileResult.type = Types::GetProfileResult
     GetRegionsRequest.add_member(:include_availability_zones, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "includeAvailabilityZones"))
     GetRegionsRequest.add_member(:include_relational_database_availability_zones, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "includeRelationalDatabaseAvailabilityZones"))
     GetRegionsRequest.type = Types::GetRegionsRequest
@@ -2008,6 +2058,7 @@ module Aws::Lightsail
     InputOrigin.add_member(:region_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionName, name: "regionName"))
     InputOrigin.add_member(:protocol_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: OriginProtocolPolicyEnum, name: "protocolPolicy"))
     InputOrigin.add_member(:response_timeout, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "responseTimeout"))
+    InputOrigin.add_member(:ip_address_type, ::Smithy::Schema::Shapes::MemberShape.new(target: OriginIpAddressTypeEnum, name: "ipAddressType"))
     InputOrigin.type = Types::InputOrigin
     Instance.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "name"))
     Instance.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "arn"))
@@ -2195,6 +2246,8 @@ module Aws::Lightsail
     LightsailDistribution.add_member(:ip_address_type, ::Smithy::Schema::Shapes::MemberShape.new(target: IpAddressType, name: "ipAddressType"))
     LightsailDistribution.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tags"))
     LightsailDistribution.add_member(:viewer_minimum_tls_protocol_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "viewerMinimumTlsProtocolVersion"))
+    LightsailDistribution.add_member(:default_root_object, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "defaultRootObject"))
+    LightsailDistribution.add_member(:custom_error_responses, ::Smithy::Schema::Shapes::MemberShape.new(target: DistributionCustomErrorResponseList, name: "customErrorResponses"))
     LightsailDistribution.type = Types::LightsailDistribution
     LoadBalancer.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "name"))
     LoadBalancer.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "arn"))
@@ -2368,6 +2421,8 @@ module Aws::Lightsail
     MetricName.add_member(:free_storage_space, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FreeStorageSpace", traits: {"smithy.api#enumValue" => "FreeStorageSpace"}))
     MetricName.add_member(:network_receive_throughput, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NetworkReceiveThroughput", traits: {"smithy.api#enumValue" => "NetworkReceiveThroughput"}))
     MetricName.add_member(:network_transmit_throughput, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NetworkTransmitThroughput", traits: {"smithy.api#enumValue" => "NetworkTransmitThroughput"}))
+    MetricName.add_member(:freeable_memory, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FreeableMemory", traits: {"smithy.api#enumValue" => "FreeableMemory"}))
+    MetricName.add_member(:swap_usage, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SwapUsage", traits: {"smithy.api#enumValue" => "SwapUsage"}))
     MetricName.add_member(:burst_capacity_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BurstCapacityTime", traits: {"smithy.api#enumValue" => "BurstCapacityTime"}))
     MetricName.add_member(:burst_capacity_percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BurstCapacityPercentage", traits: {"smithy.api#enumValue" => "BurstCapacityPercentage"}))
     MetricStatistic.add_member(:minimum, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Minimum", traits: {"smithy.api#enumValue" => "Minimum"}))
@@ -2539,15 +2594,27 @@ module Aws::Lightsail
     OperationType.add_member(:start_gui_session, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "StartGUISession", traits: {"smithy.api#enumValue" => "StartGUISession"}))
     OperationType.add_member(:stop_gui_session, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "StopGUISession", traits: {"smithy.api#enumValue" => "StopGUISession"}))
     OperationType.add_member(:setup_instance_https, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SetupInstanceHttps", traits: {"smithy.api#enumValue" => "SetupInstanceHttps"}))
+    OperationType.add_member(:get_profile, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GetProfile", traits: {"smithy.api#enumValue" => "GetProfile"}))
     Origin.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "name"))
     Origin.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "resourceType"))
     Origin.add_member(:region_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionName, name: "regionName"))
     Origin.add_member(:protocol_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: OriginProtocolPolicyEnum, name: "protocolPolicy"))
     Origin.add_member(:response_timeout, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "responseTimeout"))
+    Origin.add_member(:ip_address_type, ::Smithy::Schema::Shapes::MemberShape.new(target: OriginIpAddressTypeEnum, name: "ipAddressType"))
+    Origin.add_member(:is_private_origin_access_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "isPrivateOriginAccessEnabled"))
     Origin.type = Types::Origin
+    OriginIpAddressTypeEnum.add_member(:ipv4, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IPV4", traits: {"smithy.api#enumValue" => "ipv4"}))
+    OriginIpAddressTypeEnum.add_member(:ipv6, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IPV6", traits: {"smithy.api#enumValue" => "ipv6"}))
+    OriginIpAddressTypeEnum.add_member(:dualstack, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DUALSTACK", traits: {"smithy.api#enumValue" => "dualstack"}))
     OriginProtocolPolicyEnum.add_member(:http_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HTTPOnly", traits: {"smithy.api#enumValue" => "http-only"}))
     OriginProtocolPolicyEnum.add_member(:https_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HTTPSOnly", traits: {"smithy.api#enumValue" => "https-only"}))
     PartnerIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member"))
+    PartnerInfo.add_member(:enrolled_at, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoDate, name: "enrolledAt", traits: {"smithy.api#required" => {}}))
+    PartnerInfo.add_member(:tier_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TierName, name: "tierName"))
+    PartnerInfo.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: PartnerStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    PartnerInfo.type = Types::PartnerInfo
+    PartnerStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Active", traits: {"smithy.api#enumValue" => "Active"}))
+    PartnerStatus.add_member(:suspended, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Suspended", traits: {"smithy.api#enumValue" => "Suspended"}))
     PasswordData.add_member(:ciphertext, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ciphertext"))
     PasswordData.add_member(:key_pair_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "keyPairName"))
     PasswordData.type = Types::PasswordData
@@ -2591,6 +2658,8 @@ module Aws::Lightsail
     PrivateRegistryAccess.type = Types::PrivateRegistryAccess
     PrivateRegistryAccessRequest.add_member(:ecr_image_puller_role, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerServiceECRImagePullerRoleRequest, name: "ecrImagePullerRole"))
     PrivateRegistryAccessRequest.type = Types::PrivateRegistryAccessRequest
+    ProfileType.add_member(:lightsailor, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Lightsailor", traits: {"smithy.api#enumValue" => "Lightsailor"}))
+    ProfileType.add_member(:lightsail_partner, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LightsailPartner", traits: {"smithy.api#enumValue" => "LightsailPartner"}))
     PutAlarmRequest.add_member(:alarm_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "alarmName", traits: {"smithy.api#required" => {}}))
     PutAlarmRequest.add_member(:metric_name, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricName, name: "metricName", traits: {"smithy.api#required" => {}}))
     PutAlarmRequest.add_member(:monitored_resource_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "monitoredResourceName", traits: {"smithy.api#required" => {}}))
@@ -2602,6 +2671,7 @@ module Aws::Lightsail
     PutAlarmRequest.add_member(:contact_protocols, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactProtocolsList, name: "contactProtocols"))
     PutAlarmRequest.add_member(:notification_triggers, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationTriggerList, name: "notificationTriggers"))
     PutAlarmRequest.add_member(:notification_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "notificationEnabled"))
+    PutAlarmRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tags"))
     PutAlarmRequest.type = Types::PutAlarmRequest
     PutAlarmResult.add_member(:operations, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationList, name: "operations"))
     PutAlarmResult.type = Types::PutAlarmResult
@@ -2647,14 +2717,18 @@ module Aws::Lightsail
     RegionName.add_member(:eu_west_2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EU_WEST_2", traits: {"smithy.api#enumValue" => "eu-west-2"}))
     RegionName.add_member(:eu_west_3, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EU_WEST_3", traits: {"smithy.api#enumValue" => "eu-west-3"}))
     RegionName.add_member(:eu_central_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EU_CENTRAL_1", traits: {"smithy.api#enumValue" => "eu-central-1"}))
+    RegionName.add_member(:eu_north_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EU_NORTH_1", traits: {"smithy.api#enumValue" => "eu-north-1"}))
+    RegionName.add_member(:eu_south_2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EU_SOUTH_2", traits: {"smithy.api#enumValue" => "eu-south-2"}))
     RegionName.add_member(:ca_central_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CA_CENTRAL_1", traits: {"smithy.api#enumValue" => "ca-central-1"}))
+    RegionName.add_member(:ap_east_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AP_EAST_1", traits: {"smithy.api#enumValue" => "ap-east-1"}))
     RegionName.add_member(:ap_south_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AP_SOUTH_1", traits: {"smithy.api#enumValue" => "ap-south-1"}))
     RegionName.add_member(:ap_southeast_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AP_SOUTHEAST_1", traits: {"smithy.api#enumValue" => "ap-southeast-1"}))
     RegionName.add_member(:ap_southeast_2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AP_SOUTHEAST_2", traits: {"smithy.api#enumValue" => "ap-southeast-2"}))
     RegionName.add_member(:ap_northeast_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AP_NORTHEAST_1", traits: {"smithy.api#enumValue" => "ap-northeast-1"}))
     RegionName.add_member(:ap_northeast_2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AP_NORTHEAST_2", traits: {"smithy.api#enumValue" => "ap-northeast-2"}))
-    RegionName.add_member(:eu_north_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EU_NORTH_1", traits: {"smithy.api#enumValue" => "eu-north-1"}))
     RegionName.add_member(:ap_southeast_3, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AP_SOUTHEAST_3", traits: {"smithy.api#enumValue" => "ap-southeast-3"}))
+    RegionName.add_member(:ap_southeast_5, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AP_SOUTHEAST_5", traits: {"smithy.api#enumValue" => "ap-southeast-5"}))
+    RegionName.add_member(:sa_east_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SA_EAST_1", traits: {"smithy.api#enumValue" => "sa-east-1"}))
     RegionSetupInProgressException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "code"))
     RegionSetupInProgressException.add_member(:docs, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "docs"))
     RegionSetupInProgressException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
@@ -2736,6 +2810,8 @@ module Aws::Lightsail
     RelationalDatabaseMetricName.add_member(:free_storage_space, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FreeStorageSpace", traits: {"smithy.api#enumValue" => "FreeStorageSpace"}))
     RelationalDatabaseMetricName.add_member(:network_receive_throughput, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NetworkReceiveThroughput", traits: {"smithy.api#enumValue" => "NetworkReceiveThroughput"}))
     RelationalDatabaseMetricName.add_member(:network_transmit_throughput, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NetworkTransmitThroughput", traits: {"smithy.api#enumValue" => "NetworkTransmitThroughput"}))
+    RelationalDatabaseMetricName.add_member(:freeable_memory, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FreeableMemory", traits: {"smithy.api#enumValue" => "FreeableMemory"}))
+    RelationalDatabaseMetricName.add_member(:swap_usage, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SwapUsage", traits: {"smithy.api#enumValue" => "SwapUsage"}))
     RelationalDatabaseParameter.add_member(:allowed_values, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "allowedValues"))
     RelationalDatabaseParameter.add_member(:apply_method, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "applyMethod"))
     RelationalDatabaseParameter.add_member(:apply_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "applyType"))
@@ -2958,6 +3034,10 @@ module Aws::Lightsail
     TestAlarmRequest.type = Types::TestAlarmRequest
     TestAlarmResult.add_member(:operations, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationList, name: "operations"))
     TestAlarmResult.type = Types::TestAlarmResult
+    TierName.add_member(:essential, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Essential", traits: {"smithy.api#enumValue" => "Essential"}))
+    TierName.add_member(:growth, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Growth", traits: {"smithy.api#enumValue" => "Growth"}))
+    TierName.add_member(:accelerate, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Accelerate", traits: {"smithy.api#enumValue" => "Accelerate"}))
+    TierName.add_member(:premier, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Premier", traits: {"smithy.api#enumValue" => "Premier"}))
     TimePeriod.add_member(:start, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoDate, name: "start"))
     TimePeriod.add_member(:end, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoDate, name: "end"))
     TimePeriod.type = Types::TimePeriod
@@ -2989,6 +3069,7 @@ module Aws::Lightsail
     UpdateBucketRequest.add_member(:versioning, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "versioning"))
     UpdateBucketRequest.add_member(:readonly_access_accounts, ::Smithy::Schema::Shapes::MemberShape.new(target: PartnerIdList, name: "readonlyAccessAccounts"))
     UpdateBucketRequest.add_member(:access_log_config, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketAccessLogConfig, name: "accessLogConfig"))
+    UpdateBucketRequest.add_member(:cors, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketCorsConfig, name: "cors"))
     UpdateBucketRequest.type = Types::UpdateBucketRequest
     UpdateBucketResult.add_member(:bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: Bucket, name: "bucket"))
     UpdateBucketResult.add_member(:operations, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationList, name: "operations"))
@@ -3016,6 +3097,9 @@ module Aws::Lightsail
     UpdateDistributionRequest.add_member(:viewer_minimum_tls_protocol_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ViewerMinimumTlsProtocolVersionEnum, name: "viewerMinimumTlsProtocolVersion"))
     UpdateDistributionRequest.add_member(:certificate_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "certificateName"))
     UpdateDistributionRequest.add_member(:use_default_certificate, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "useDefaultCertificate"))
+    UpdateDistributionRequest.add_member(:enable_private_origin_access, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "enablePrivateOriginAccess"))
+    UpdateDistributionRequest.add_member(:default_root_object, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "defaultRootObject"))
+    UpdateDistributionRequest.add_member(:custom_error_responses, ::Smithy::Schema::Shapes::MemberShape.new(target: DistributionCustomErrorResponseList, name: "customErrorResponses"))
     UpdateDistributionRequest.type = Types::UpdateDistributionRequest
     UpdateDistributionResult.add_member(:operation, ::Smithy::Schema::Shapes::MemberShape.new(target: Operation, name: "operation"))
     UpdateDistributionResult.type = Types::UpdateDistributionResult
@@ -3067,7 +3151,7 @@ module Aws::Lightsail
       service.id = "com.amazonaws.lightsail#Lightsail_20161128"
       service.name = "Lightsail20161128"
       service.version = "2016-11-28"
-      service.traits = {"aws.api#service" => {"sdkId" => "Lightsail", "arnNamespace" => "lightsail", "cloudFormationName" => "Lightsail", "cloudTrailEventSource" => "lightsail.amazonaws.com", "endpointPrefix" => "lightsail"}, "aws.auth#sigv4" => {"name" => "lightsail"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "Amazon Lightsail"}
+      service.traits = {"aws.api#service" => {"sdkId" => "Lightsail", "arnNamespace" => "lightsail", "cloudFormationName" => "Lightsail", "cloudTrailEventSource" => "lightsail.amazonaws.com", "endpointPrefix" => "lightsail"}, "aws.auth#sigv4" => {"name" => "lightsail"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "Amazon Lightsail", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://lightsail-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://lightsail-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://lightsail.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://lightsail.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
       service.add_operation(:allocate_static_ip, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lightsail#AllocateStaticIp"
         operation.name = "AllocateStaticIp"
@@ -4636,6 +4720,18 @@ module Aws::Lightsail
         operation.errors << ServiceException
         operation.errors << UnauthenticatedException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/ls/api/2016-11-28/GetOperationsForResource", "code" => 200}}
+      end)
+      service.add_operation(:get_profile, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.lightsail#GetProfile"
+        operation.name = "GetProfile"
+        operation.input = GetProfileRequest
+        operation.output = GetProfileResult
+        operation.errors << AccessDeniedException
+        operation.errors << AccountSetupInProgressException
+        operation.errors << InvalidInputException
+        operation.errors << ServiceException
+        operation.errors << UnauthenticatedException
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/ls/api/2016-11-28/GetProfile", "code" => 200}}
       end)
       service.add_operation(:get_regions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lightsail#GetRegions"

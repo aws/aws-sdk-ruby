@@ -114,6 +114,34 @@ module Aws::LakeFormation
       attr_accessor expiration: Time?
     end
 
+    class AttachRLSPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?resource: Types::Resource,
+        ?principal: Types::DataLakePrincipal,
+        ?condition: Types::Condition,
+        ?set_default: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor resource: Types::Resource?
+      attr_accessor principal: Types::DataLakePrincipal?
+      attr_accessor condition: Types::Condition?
+      attr_accessor set_default: bool?
+    end
+
+    class AttachRLSPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
     class AuditContext
       include Smithy::Schema::Structure
 
@@ -238,6 +266,19 @@ module Aws::LakeFormation
       attr_accessor id: String?
     end
 
+    class Column
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor type: String?
+    end
+
     class ColumnLFTag
       include Smithy::Schema::Structure
 
@@ -320,6 +361,17 @@ module Aws::LakeFormation
       attr_accessor expression: String?
     end
 
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
     class CreateDataCellsFilterRequest
       include Smithy::Schema::Structure
 
@@ -398,6 +450,7 @@ module Aws::LakeFormation
         ?instance_arn: String,
         ?external_filtering: Types::ExternalFilteringConfiguration,
         ?share_recipients: Array[Types::DataLakePrincipal],
+        ?service_integrations: Array[Types::ServiceIntegrationUnion],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -405,6 +458,7 @@ module Aws::LakeFormation
       attr_accessor instance_arn: String?
       attr_accessor external_filtering: Types::ExternalFilteringConfiguration?
       attr_accessor share_recipients: Array[Types::DataLakePrincipal]?
+      attr_accessor service_integrations: Array[Types::ServiceIntegrationUnion]?
     end
 
     class CreateLakeFormationIdentityCenterConfigurationResponse
@@ -440,6 +494,35 @@ module Aws::LakeFormation
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+    end
+
+    class CreateRLSPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?attachment_columns: Array[Types::Column],
+        ?filter_expression: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor attachment_columns: Array[Types::Column]?
+      attr_accessor filter_expression: String?
+    end
+
+    class CreateRLSPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module CredentialsScope
+      READ: String
+      READWRITE: String
     end
 
     class DataCellsFilter
@@ -719,6 +802,26 @@ module Aws::LakeFormation
 
     end
 
+    class DeleteRLSPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class DeleteRLSPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
     class DeregisterResourceRequest
       include Smithy::Schema::Structure
 
@@ -759,6 +862,7 @@ module Aws::LakeFormation
         ?application_arn: String,
         ?external_filtering: Types::ExternalFilteringConfiguration,
         ?share_recipients: Array[Types::DataLakePrincipal],
+        ?service_integrations: Array[Types::ServiceIntegrationUnion],
         ?resource_share: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -768,6 +872,7 @@ module Aws::LakeFormation
       attr_accessor application_arn: String?
       attr_accessor external_filtering: Types::ExternalFilteringConfiguration?
       attr_accessor share_recipients: Array[Types::DataLakePrincipal]?
+      attr_accessor service_integrations: Array[Types::ServiceIntegrationUnion]?
       attr_accessor resource_share: String?
     end
 
@@ -813,6 +918,34 @@ module Aws::LakeFormation
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor transaction_description: Types::TransactionDescription?
+    end
+
+    class DetachRLSPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?resource: Types::Resource,
+        ?principal: Types::DataLakePrincipal,
+        ?condition: Types::Condition,
+        ?remove_default: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor resource: Types::Resource?
+      attr_accessor principal: Types::DataLakePrincipal?
+      attr_accessor condition: Types::Condition?
+      attr_accessor remove_default: bool?
+    end
+
+    class DetachRLSPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
     end
 
     class DetailsMap
@@ -1143,6 +1276,28 @@ module Aws::LakeFormation
       attr_accessor query_submission_time: Time?
     end
 
+    class GetRLSPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class GetRLSPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rls_policy: Types::RLSPolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rls_policy: Types::RLSPolicy?
+    end
+
     class GetResourceLFTagsRequest
       include Smithy::Schema::Structure
 
@@ -1209,6 +1364,38 @@ module Aws::LakeFormation
 
       attr_accessor objects: Array[Types::PartitionObjects]?
       attr_accessor next_token: String?
+    end
+
+    class GetTemporaryDataLocationCredentialsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?duration_seconds: Integer,
+        ?audit_context: Types::AuditContext,
+        ?data_locations: Array[String],
+        ?credentials_scope: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor duration_seconds: Integer?
+      attr_accessor audit_context: Types::AuditContext?
+      attr_accessor data_locations: Array[String]?
+      attr_accessor credentials_scope: String?
+    end
+
+    class GetTemporaryDataLocationCredentialsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?credentials: Types::TemporaryCredentials,
+        ?accessible_data_locations: Array[String],
+        ?credentials_scope: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor credentials: Types::TemporaryCredentials?
+      attr_accessor accessible_data_locations: Array[String]?
+      attr_accessor credentials_scope: String?
     end
 
     class GetTemporaryGluePartitionCredentialsRequest
@@ -1684,6 +1871,64 @@ module Aws::LakeFormation
       attr_accessor next_token: String?
     end
 
+    class ListRLSPoliciesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListRLSPoliciesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rls_policies: Array[Types::RLSPolicy],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rls_policies: Array[Types::RLSPolicy]?
+      attr_accessor next_token: String?
+    end
+
+    class ListRLSPolicyAttachmentsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource: Types::Resource,
+        ?principal: Types::DataLakePrincipal,
+        ?policy_name: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource: Types::Resource?
+      attr_accessor principal: Types::DataLakePrincipal?
+      attr_accessor policy_name: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListRLSPolicyAttachmentsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rls_policy_attachments: Array[Types::RLSPolicyAttachment],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rls_policy_attachments: Array[Types::RLSPolicyAttachment]?
+      attr_accessor next_token: String?
+    end
+
     class ListResourcesRequest
       include Smithy::Schema::Structure
 
@@ -1977,6 +2222,84 @@ module Aws::LakeFormation
       EXPIRED: String
     end
 
+    class RLSPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog_id: String,
+        ?name: String,
+        ?attachment_columns: Array[Types::Column],
+        ?filter_expression: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog_id: String?
+      attr_accessor name: String?
+      attr_accessor attachment_columns: Array[Types::Column]?
+      attr_accessor filter_expression: String?
+    end
+
+    class RLSPolicyAttachment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog_id: String,
+        ?policy_name: String,
+        ?principal: Types::DataLakePrincipal,
+        ?resource: Types::Resource,
+        ?condition: Types::Condition,
+        ?default_rls_policy: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog_id: String?
+      attr_accessor policy_name: String?
+      attr_accessor principal: Types::DataLakePrincipal?
+      attr_accessor resource: Types::Resource?
+      attr_accessor condition: Types::Condition?
+      attr_accessor default_rls_policy: bool?
+    end
+
+    class RLSPolicyResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog_id: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog_id: String?
+      attr_accessor name: String?
+    end
+
+    class RedshiftConnect
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authorization: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authorization: String?
+    end
+
+    class RedshiftScopeUnion
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?redshift_connect: Types::RedshiftConnect,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor redshift_connect: Types::RedshiftConnect?
+
+      class RedshiftConnect < RedshiftScopeUnion
+      end
+      class Unknown < RedshiftScopeUnion
+      end
+    end
+
     class RegisterResourceRequest
       include Smithy::Schema::Structure
 
@@ -1987,6 +2310,7 @@ module Aws::LakeFormation
         ?with_federation: bool,
         ?hybrid_access_enabled: bool,
         ?with_privileged_access: bool,
+        ?expected_resource_owner_account: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1996,6 +2320,7 @@ module Aws::LakeFormation
       attr_accessor with_federation: bool?
       attr_accessor hybrid_access_enabled: bool?
       attr_accessor with_privileged_access: bool?
+      attr_accessor expected_resource_owner_account: String?
     end
 
     class RegisterResourceResponse
@@ -2046,6 +2371,7 @@ module Aws::LakeFormation
         ?lf_tag: Types::LFTagKeyResource,
         ?lf_tag_policy: Types::LFTagPolicyResource,
         ?lf_tag_expression: Types::LFTagExpressionResource,
+        ?rls_policy: Types::RLSPolicyResource,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2058,6 +2384,7 @@ module Aws::LakeFormation
       attr_accessor lf_tag: Types::LFTagKeyResource?
       attr_accessor lf_tag_policy: Types::LFTagPolicyResource?
       attr_accessor lf_tag_expression: Types::LFTagExpressionResource?
+      attr_accessor rls_policy: Types::RLSPolicyResource?
     end
 
     class ResourceInfo
@@ -2070,6 +2397,8 @@ module Aws::LakeFormation
         ?with_federation: bool,
         ?hybrid_access_enabled: bool,
         ?with_privileged_access: bool,
+        ?verification_status: String,
+        ?expected_resource_owner_account: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2079,6 +2408,8 @@ module Aws::LakeFormation
       attr_accessor with_federation: bool?
       attr_accessor hybrid_access_enabled: bool?
       attr_accessor with_privileged_access: bool?
+      attr_accessor verification_status: String?
+      attr_accessor expected_resource_owner_account: String?
     end
 
     class ResourceNotReadyException
@@ -2214,6 +2545,27 @@ module Aws::LakeFormation
 
       attr_accessor next_token: String?
       attr_accessor table_list: Array[Types::TaggedTable]?
+    end
+
+    module ServiceAuthorization
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class ServiceIntegrationUnion
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?redshift: Array[Types::RedshiftScopeUnion],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor redshift: Array[Types::RedshiftScopeUnion]?
+
+      class Redshift < ServiceIntegrationUnion
+      end
+      class Unknown < ServiceIntegrationUnion
+      end
     end
 
     class StartQueryPlanningRequest
@@ -2382,6 +2734,23 @@ module Aws::LakeFormation
       attr_accessor lf_tags_on_columns: Array[Types::ColumnLFTag]?
     end
 
+    class TemporaryCredentials
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_key_id: String,
+        ?secret_access_key: String,
+        ?session_token: String,
+        ?expiration: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_key_id: String?
+      attr_accessor secret_access_key: String?
+      attr_accessor session_token: String?
+      attr_accessor expiration: Time?
+    end
+
     class ThrottledException
       include Smithy::Schema::Structure
 
@@ -2541,6 +2910,7 @@ module Aws::LakeFormation
       def initialize: (
         ?catalog_id: String,
         ?share_recipients: Array[Types::DataLakePrincipal],
+        ?service_integrations: Array[Types::ServiceIntegrationUnion],
         ?application_status: String,
         ?external_filtering: Types::ExternalFilteringConfiguration,
       ) -> void
@@ -2548,11 +2918,34 @@ module Aws::LakeFormation
 
       attr_accessor catalog_id: String?
       attr_accessor share_recipients: Array[Types::DataLakePrincipal]?
+      attr_accessor service_integrations: Array[Types::ServiceIntegrationUnion]?
       attr_accessor application_status: String?
       attr_accessor external_filtering: Types::ExternalFilteringConfiguration?
     end
 
     class UpdateLakeFormationIdentityCenterConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateRLSPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?filter_expression: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor filter_expression: String?
+    end
+
+    class UpdateRLSPolicyResponse
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -2569,6 +2962,7 @@ module Aws::LakeFormation
         ?resource_arn: String,
         ?with_federation: bool,
         ?hybrid_access_enabled: bool,
+        ?expected_resource_owner_account: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2576,6 +2970,7 @@ module Aws::LakeFormation
       attr_accessor resource_arn: String?
       attr_accessor with_federation: bool?
       attr_accessor hybrid_access_enabled: bool?
+      attr_accessor expected_resource_owner_account: String?
     end
 
     class UpdateResourceResponse
@@ -2641,6 +3036,12 @@ module Aws::LakeFormation
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor result: String?
+    end
+
+    module VerificationStatus
+      VERIFIED: String
+      VERIFICATION_FAILED: String
+      NOT_VERIFIED: String
     end
 
     class VirtualObject

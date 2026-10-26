@@ -92,7 +92,7 @@ module Aws::ConnectParticipant
         @data[:resource_id]
       end
 
-      # <p>The type of Amazon Connect resource.</p>
+      # <p>The type of Connect Customer resource.</p>
       def resource_type
         @data[:resource_type]
       end

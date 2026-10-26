@@ -134,7 +134,14 @@ module Aws::MailManager
       ?traffic_policy_id: String,
       ?ingress_point_configuration: {
         smtp_password: String,
-        secret_arn: String
+        secret_arn: String,
+        tls_auth_configuration: {
+          trust_store: {
+            ca_content: String,
+            crl_content: String,
+            kms_key_arn: String
+          }
+        }
       },
       ?network_configuration: {
         public_network_configuration: {
@@ -144,6 +151,7 @@ module Aws::MailManager
           vpc_endpoint_id: String
         }
       },
+      ?tls_policy: String,
       ?tags: Array[
         {
           key: String,
@@ -204,7 +212,8 @@ module Aws::MailManager
                 evaluate: {
                   attribute: String,
                   mime_header_attribute: String,
-                  analysis: untyped
+                  analysis: untyped,
+                  client_certificate_attribute: String
                 },
                 operator: String,
                 values: Array[String]
@@ -286,6 +295,22 @@ module Aws::MailManager
                 role_arn: untyped,
                 encoding: String,
                 payload_type: String
+              },
+              bounce: {
+                action_failure_policy: untyped,
+                role_arn: untyped,
+                sender: String,
+                status_code: String,
+                smtp_reply_code: String,
+                diagnostic_message: String,
+                message: String
+              },
+              invoke_lambda: {
+                action_failure_policy: untyped,
+                function_arn: String,
+                invocation_type: String,
+                role_arn: untyped,
+                retry_time_minutes: Integer
               }
             }
           ]
@@ -563,11 +588,13 @@ module Aws::MailManager
       def traffic_policy_id: () -> String?
       def ingress_point_auth_configuration: () -> Types::IngressPointAuthConfiguration?
       def network_configuration: () -> Types::NetworkConfiguration?
+      def tls_policy: () -> String?
       def created_timestamp: () -> Time?
       def last_updated_timestamp: () -> Time?
     end
     def get_ingress_point: (
-      ?ingress_point_id: String
+      ?ingress_point_id: String,
+      ?include_trust_store_contents: String
     ) -> _GetIngressPointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetIngressPointResponse
 
     interface _GetMemberOfAddressListResponse
@@ -905,8 +932,16 @@ module Aws::MailManager
       ?traffic_policy_id: String,
       ?ingress_point_configuration: {
         smtp_password: String,
-        secret_arn: String
-      }
+        secret_arn: String,
+        tls_auth_configuration: {
+          trust_store: {
+            ca_content: String,
+            crl_content: String,
+            kms_key_arn: String
+          }
+        }
+      },
+      ?tls_policy: String
     ) -> _UpdateIngressPointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateIngressPointResponse
 
     interface _UpdateRelayResponse
@@ -953,7 +988,8 @@ module Aws::MailManager
                 evaluate: {
                   attribute: String,
                   mime_header_attribute: String,
-                  analysis: untyped
+                  analysis: untyped,
+                  client_certificate_attribute: String
                 },
                 operator: String,
                 values: Array[String]
@@ -1035,6 +1071,22 @@ module Aws::MailManager
                 role_arn: untyped,
                 encoding: String,
                 payload_type: String
+              },
+              bounce: {
+                action_failure_policy: untyped,
+                role_arn: untyped,
+                sender: String,
+                status_code: String,
+                smtp_reply_code: String,
+                diagnostic_message: String,
+                message: String
+              },
+              invoke_lambda: {
+                action_failure_policy: untyped,
+                function_arn: String,
+                invocation_type: String,
+                role_arn: untyped,
+                retry_time_minutes: Integer
               }
             }
           ]

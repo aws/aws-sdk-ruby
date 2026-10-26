@@ -26,9 +26,75 @@ module Aws::BedrockAgentRuntime
     AgentCollaboratorInvocationOutput: StructureShape
     AgentCollaboratorOutputPayload: StructureShape
     AgentCollaboratorPayloadString: StringShape
+    AgentCoreMemoryActorId: StringShape
+    AgentCoreMemoryId: StringShape
+    AgentCoreMemorySessionId: StringShape
     AgentId: StringShape
     AgentTraces: ListShape
     AgentVersion: StringShape
+    AgenticRetrieveAction: StructureShape
+    AgenticRetrieveActionDetails: StructureShape
+    AgenticRetrieveActions: ListShape
+    AgenticRetrieveBedrockGuardrailConfiguration: StructureShape
+    AgenticRetrieveBedrockRerankingConfiguration: StructureShape
+    AgenticRetrieveBedrockRerankingModelConfiguration: StructureShape
+    AgenticRetrieveCitation: StructureShape
+    AgenticRetrieveCitationList: ListShape
+    AgenticRetrieveCitationReference: StructureShape
+    AgenticRetrieveCitationReferenceList: ListShape
+    AgenticRetrieveConfiguration: StructureShape
+    AgenticRetrieveFailure: StructureShape
+    AgenticRetrieveFailures: ListShape
+    AgenticRetrieveFullDocExpansionDetails: StructureShape
+    AgenticRetrieveGeneratedResponse: StructureShape
+    AgenticRetrieveGuardrailWarning: StructureShape
+    AgenticRetrieveMemoryConfiguration: StructureShape
+    AgenticRetrieveMemoryMetadataFilter: StructureShape
+    AgenticRetrieveMemoryMetadataFilterLeft: UnionShape
+    AgenticRetrieveMemoryMetadataFilterList: ListShape
+    AgenticRetrieveMemoryMetadataFilterOperator: EnumShape
+    AgenticRetrieveMemoryMetadataFilterRight: UnionShape
+    AgenticRetrieveMemoryMetadataKey: StringShape
+    AgenticRetrieveMemoryMetadataStringList: ListShape
+    AgenticRetrieveMemoryMetadataStringListItem: StringShape
+    AgenticRetrieveMemoryMetadataStringValue: StringShape
+    AgenticRetrieveMemoryMetadataValue: UnionShape
+    AgenticRetrieveMemoryPersistenceMode: EnumShape
+    AgenticRetrieveMemoryRetrievalConfig: StructureShape
+    AgenticRetrieveMemoryRetrievalConfigList: ListShape
+    AgenticRetrieveMemoryRetrieveDetails: StructureShape
+    AgenticRetrieveMemorySessionBinding: StructureShape
+    AgenticRetrieveMessage: StructureShape
+    AgenticRetrieveMessageContent: StructureShape
+    AgenticRetrieveMessages: ListShape
+    AgenticRetrieveMetadata: MapShape
+    AgenticRetrievePolicyConfiguration: StructureShape
+    AgenticRetrieveRerankingConfiguration: StructureShape
+    AgenticRetrieveRerankingConfigurationType: EnumShape
+    AgenticRetrieveRerankingModelType: EnumShape
+    AgenticRetrieveResponseEvent: StructureShape
+    AgenticRetrieveResultEvent: StructureShape
+    AgenticRetrieveResultItem: StructureShape
+    AgenticRetrieveResults: ListShape
+    AgenticRetrieveSourceMetadata: StructureShape
+    AgenticRetrieveSourceMetadataList: ListShape
+    AgenticRetrieveSourceRetriever: StructureShape
+    AgenticRetrieveSourceRetrieverList: ListShape
+    AgenticRetrieveStatus: EnumShape
+    AgenticRetrieveStep: EnumShape
+    AgenticRetrieveStreamRequest: StructureShape
+    AgenticRetrieveStreamResponse: StructureShape
+    AgenticRetrieveStreamResponseOutput: UnionShape
+    AgenticRetrieveTraceEvent: StructureShape
+    AgenticRetrieveTraceEventAttributes: StructureShape
+    AgenticRetrieveTraceResultItem: StructureShape
+    AgenticRetrieveTraceResults: ListShape
+    AgenticRetrieveType: EnumShape
+    AgenticRetrieveWarning: UnionShape
+    AgenticRetrieveWarningMessage: StructureShape
+    AgenticRetrieveWarnings: ListShape
+    AgenticRetriever: StructureShape
+    AgenticRetrievers: ListShape
     AnalyzePromptEvent: StructureShape
     ApiContentMap: MapShape
     ApiInvocationInput: StructureShape
@@ -39,8 +105,11 @@ module Aws::BedrockAgentRuntime
     ApiResult: StructureShape
     AttributeType: EnumShape
     Attribution: StructureShape
+    AudioSegment: StructureShape
     BadGatewayException: StructureShape
     BasePromptTemplate: StringShape
+    BedrockFoundationModelConfiguration: StructureShape
+    BedrockFoundationModelModelConfiguration: StructureShape
     BedrockModelArn: StringShape
     BedrockModelConfigurations: StructureShape
     BedrockRerankingConfiguration: StructureShape
@@ -53,6 +122,8 @@ module Aws::BedrockAgentRuntime
     ByteContentFile: StructureShape
     Caller: UnionShape
     CallerChain: ListShape
+    CheckIngestedDocumentAclRequest: StructureShape
+    CheckIngestedDocumentAclResponse: StructureShape
     Citation: StructureShape
     CitationEvent: StructureShape
     Citations: ListShape
@@ -82,12 +153,25 @@ module Aws::BedrockAgentRuntime
     CustomOrchestration: StructureShape
     CustomOrchestrationTrace: StructureShape
     CustomOrchestrationTraceEvent: StructureShape
+    DataSourceId: StringShape
     DateTimestamp: TimestampShape
     DeleteAgentMemoryRequest: StructureShape
     DeleteAgentMemoryResponse: StructureShape
     DeleteSessionRequest: StructureShape
     DeleteSessionResponse: StructureShape
     DependencyFailedException: StructureShape
+    DocumentAcl: StructureShape
+    DocumentAclCondition: StructureShape
+    DocumentAclConditionList: ListShape
+    DocumentAclGroup: StructureShape
+    DocumentAclGroupList: ListShape
+    DocumentAclMemberRelation: EnumShape
+    DocumentAclMembership: StructureShape
+    DocumentAclMembershipType: EnumShape
+    DocumentAclUser: StructureShape
+    DocumentAclUserList: ListShape
+    DocumentId: StringShape
+    DocumentOutputFormat: EnumShape
     EndSessionRequest: StructureShape
     EndSessionResponse: StructureShape
     ExecutionType: EnumShape
@@ -171,6 +255,9 @@ module Aws::BedrockAgentRuntime
     FlowTraceNodeOutputFields: ListShape
     FlowTraceNodeOutputNext: StructureShape
     FlowTraceNodeOutputNextList: ListShape
+    FoundationModelConfiguration: StructureShape
+    FoundationModelConfigurationType: EnumShape
+    FoundationModelType: EnumShape
     Function: StringShape
     FunctionDefinition: StructureShape
     FunctionDescription: StringShape
@@ -189,10 +276,14 @@ module Aws::BedrockAgentRuntime
     GenerationConfiguration: StructureShape
     GetAgentMemoryRequest: StructureShape
     GetAgentMemoryResponse: StructureShape
+    GetDocumentContentRequest: StructureShape
+    GetDocumentContentResponse: StructureShape
     GetExecutionFlowSnapshotRequest: StructureShape
     GetExecutionFlowSnapshotResponse: StructureShape
     GetFlowExecutionRequest: StructureShape
     GetFlowExecutionResponse: StructureShape
+    GetIngestedDocumentAclRequest: StructureShape
+    GetIngestedDocumentAclResponse: StructureShape
     GetInvocationStepRequest: StructureShape
     GetInvocationStepResponse: StructureShape
     GetSessionRequest: StructureShape
@@ -252,6 +343,8 @@ module Aws::BedrockAgentRuntime
     InlineSessionState: StructureShape
     InputFile: StructureShape
     InputFiles: ListShape
+    InputImage: StructureShape
+    InputImageFormat: EnumShape
     InputPrompt: UnionShape
     InputQueryType: EnumShape
     InputText: StringShape
@@ -282,14 +375,17 @@ module Aws::BedrockAgentRuntime
     KnowledgeBaseConfiguration: StructureShape
     KnowledgeBaseConfigurations: ListShape
     KnowledgeBaseId: StringShape
+    KnowledgeBaseIdentifier: StringShape
     KnowledgeBaseLookupInput: StructureShape
     KnowledgeBaseLookupInputString: StringShape
     KnowledgeBaseLookupOutput: StructureShape
     KnowledgeBaseQuery: StructureShape
+    KnowledgeBaseQueryType: EnumShape
     KnowledgeBaseRetrievalConfiguration: StructureShape
     KnowledgeBaseRetrievalResult: StructureShape
     KnowledgeBaseRetrievalResults: ListShape
     KnowledgeBaseRetrieveAndGenerateConfiguration: StructureShape
+    KnowledgeBaseRetrieverConfiguration: StructureShape
     KnowledgeBaseVectorSearchConfiguration: StructureShape
     KnowledgeBases: ListShape
     LambdaArn: StringShape
@@ -306,13 +402,23 @@ module Aws::BedrockAgentRuntime
     ListSessionsResponse: StructureShape
     ListTagsForResourceRequest: StructureShape
     ListTagsForResourceResponse: StructureShape
+    ManagedSearchBedrockRerankingConfiguration: StructureShape
+    ManagedSearchBedrockRerankingModelConfiguration: StructureShape
+    ManagedSearchConfiguration: StructureShape
+    ManagedSearchRerankingConfiguration: StructureShape
+    ManagedSearchRerankingConfigurationType: EnumShape
+    MantleFoundationModelConfiguration: StructureShape
+    MantleFoundationModelModelConfiguration: StructureShape
+    MantleProjectId: StringShape
     MaxResults: IntegerShape
     MaxTokens: IntegerShape
     MaximumLength: IntegerShape
     Memories: ListShape
     Memory: UnionShape
     MemoryId: StringShape
+    MemoryNamespace: StringShape
     MemorySessionSummary: StructureShape
+    MemoryStrategyId: StringShape
     MemoryType: EnumShape
     Message: StructureShape
     Messages: ListShape
@@ -383,6 +489,7 @@ module Aws::BedrockAgentRuntime
     PreProcessingModelInvocationOutput: StructureShape
     PreProcessingParsedResponse: StructureShape
     PreProcessingTrace: UnionShape
+    PresignedUrl: StringShape
     PromptConfiguration: StructureShape
     PromptConfigurations: ListShape
     PromptCreationConfigurations: StructureShape
@@ -426,14 +533,17 @@ module Aws::BedrockAgentRuntime
     RerankingConfigurationType: EnumShape
     RerankingMetadataSelectionMode: EnumShape
     RerankingMetadataSelectiveModeConfiguration: UnionShape
+    RerankingModelType: EnumShape
     ResourceDescription: StringShape
     ResourceName: StringShape
     ResourceNotFoundException: StructureShape
     ResponseBody: MapShape
     ResponseState: EnumShape
     ResponseStream: UnionShape
+    RetrievalContent: StructureShape
     RetrievalFilter: UnionShape
     RetrievalFilterList: ListShape
+    RetrievalOverrides: StructureShape
     RetrievalResultConfluenceLocation: StructureShape
     RetrievalResultContent: StructureShape
     RetrievalResultContentColumn: StructureShape
@@ -441,12 +551,14 @@ module Aws::BedrockAgentRuntime
     RetrievalResultContentRow: ListShape
     RetrievalResultContentType: EnumShape
     RetrievalResultCustomDocumentLocation: StructureShape
+    RetrievalResultGoogleDriveLocation: StructureShape
     RetrievalResultKendraDocumentLocation: StructureShape
     RetrievalResultLocation: StructureShape
     RetrievalResultLocationType: EnumShape
     RetrievalResultMetadata: MapShape
     RetrievalResultMetadataKey: StringShape
     RetrievalResultMetadataValue: DocumentShape
+    RetrievalResultOneDriveLocation: StructureShape
     RetrievalResultS3Location: StructureShape
     RetrievalResultSalesforceLocation: StructureShape
     RetrievalResultSharePointLocation: StructureShape
@@ -467,6 +579,7 @@ module Aws::BedrockAgentRuntime
     RetrieveResponse: StructureShape
     RetrievedReference: StructureShape
     RetrievedReferences: ListShape
+    RetrieverConfiguration: UnionShape
     ReturnControlInvocationResults: ListShape
     ReturnControlPayload: StructureShape
     ReturnControlResults: StructureShape
@@ -534,6 +647,7 @@ module Aws::BedrockAgentRuntime
     UpdateSessionRequest: StructureShape
     UpdateSessionResponse: StructureShape
     Usage: StructureShape
+    UserContext: StructureShape
     Uuid: StringShape
     ValidationException: StructureShape
     VectorSearchBedrockRerankingConfiguration: StructureShape
@@ -542,6 +656,7 @@ module Aws::BedrockAgentRuntime
     VectorSearchRerankingConfigurationType: EnumShape
     Verb: StringShape
     Version: StringShape
+    VideoSegment: StructureShape
 
     AmazonBedrockAgentRunTimeService: ServiceShape
   end

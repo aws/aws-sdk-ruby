@@ -13,10 +13,13 @@ module Aws::CloudWatchLogs
     AccountPolicies = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatchlogs#AccountPolicies", name: "AccountPolicies")
     AccountPolicy = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#AccountPolicy", name: "AccountPolicy")
     AccountPolicyDocument = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#AccountPolicyDocument", name: "AccountPolicyDocument")
+    ActionStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudwatchlogs#ActionStatus", name: "ActionStatus")
     AddKeyEntries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatchlogs#AddKeyEntries", name: "AddKeyEntries", traits: {"smithy.api#length" => {"min" => 1, "max" => 5}})
     AddKeyEntry = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#AddKeyEntry", name: "AddKeyEntry")
     AddKeyValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#AddKeyValue", name: "AddKeyValue", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}})
     AddKeys = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#AddKeys", name: "AddKeys")
+    AggregateLogGroupSummaries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatchlogs#AggregateLogGroupSummaries", name: "AggregateLogGroupSummaries")
+    AggregateLogGroupSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#AggregateLogGroupSummary", name: "AggregateLogGroupSummary")
     AllowedActionForAllowVendedLogsDeliveryForResource = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#AllowedActionForAllowVendedLogsDeliveryForResource", name: "AllowedActionForAllowVendedLogsDeliveryForResource")
     AllowedFieldDelimiters = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatchlogs#AllowedFieldDelimiters", name: "AllowedFieldDelimiters")
     AllowedFields = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatchlogs#AllowedFields", name: "AllowedFields")
@@ -32,10 +35,17 @@ module Aws::CloudWatchLogs
     ApplyOnTransformedLogs = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.cloudwatchlogs#ApplyOnTransformedLogs", name: "ApplyOnTransformedLogs", traits: {"smithy.api#default" => false})
     Arn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#Arn", name: "Arn")
     AssociateKmsKeyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#AssociateKmsKeyRequest", name: "AssociateKmsKeyRequest")
+    AssociateSourceToS3TableIntegrationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#AssociateSourceToS3TableIntegrationRequest", name: "AssociateSourceToS3TableIntegrationRequest")
+    AssociateSourceToS3TableIntegrationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#AssociateSourceToS3TableIntegrationResponse", name: "AssociateSourceToS3TableIntegrationResponse")
     Baseline = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.cloudwatchlogs#Baseline", name: "Baseline")
+    BatchId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#BatchId", name: "BatchId", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}})
+    BearerTokenAuthenticationEnabled = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.cloudwatchlogs#BearerTokenAuthenticationEnabled", name: "BearerTokenAuthenticationEnabled")
     Boolean = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.cloudwatchlogs#Boolean", name: "Boolean")
+    BytesScannedValue = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.cloudwatchlogs#BytesScannedValue", name: "BytesScannedValue")
     CSV = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#CSV", name: "CSV")
     CancelExportTaskRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#CancelExportTaskRequest", name: "CancelExportTaskRequest")
+    CancelImportTaskRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#CancelImportTaskRequest", name: "CancelImportTaskRequest")
+    CancelImportTaskResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#CancelImportTaskResponse", name: "CancelImportTaskResponse")
     ClientToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#ClientToken", name: "ClientToken", traits: {"smithy.api#length" => {"min" => 36, "max" => 128}, "smithy.api#pattern" => "^\\S{36,128}$"})
     CollectionRetentionDays = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.cloudwatchlogs#CollectionRetentionDays", name: "CollectionRetentionDays", traits: {"smithy.api#range" => {"min" => 1, "max" => 30}})
     Column = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#Column", name: "Column", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}})
@@ -52,15 +62,27 @@ module Aws::CloudWatchLogs
     CreateDeliveryResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#CreateDeliveryResponse", name: "CreateDeliveryResponse")
     CreateExportTaskRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#CreateExportTaskRequest", name: "CreateExportTaskRequest")
     CreateExportTaskResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#CreateExportTaskResponse", name: "CreateExportTaskResponse")
+    CreateImportTaskRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#CreateImportTaskRequest", name: "CreateImportTaskRequest")
+    CreateImportTaskResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#CreateImportTaskResponse", name: "CreateImportTaskResponse")
     CreateLogAnomalyDetectorRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#CreateLogAnomalyDetectorRequest", name: "CreateLogAnomalyDetectorRequest")
     CreateLogAnomalyDetectorResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#CreateLogAnomalyDetectorResponse", name: "CreateLogAnomalyDetectorResponse")
     CreateLogGroupRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#CreateLogGroupRequest", name: "CreateLogGroupRequest")
     CreateLogStreamRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#CreateLogStreamRequest", name: "CreateLogStreamRequest")
+    CreateLookupTableRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#CreateLookupTableRequest", name: "CreateLookupTableRequest")
+    CreateLookupTableResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#CreateLookupTableResponse", name: "CreateLookupTableResponse")
+    CreateScheduledQueryRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#CreateScheduledQueryRequest", name: "CreateScheduledQueryRequest")
+    CreateScheduledQueryResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#CreateScheduledQueryResponse", name: "CreateScheduledQueryResponse")
     DashboardViewerPrincipals = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatchlogs#DashboardViewerPrincipals", name: "DashboardViewerPrincipals")
     Data = ::Smithy::Schema::Shapes::BlobShape.new(id: "com.amazonaws.cloudwatchlogs#Data", name: "Data")
     DataAlreadyAcceptedException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#DataAlreadyAcceptedException", name: "DataAlreadyAcceptedException", traits: {"smithy.api#error" => "client"})
     DataProtectionPolicyDocument = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#DataProtectionPolicyDocument", name: "DataProtectionPolicyDocument")
     DataProtectionStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudwatchlogs#DataProtectionStatus", name: "DataProtectionStatus")
+    DataSource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#DataSource", name: "DataSource")
+    DataSourceFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#DataSourceFilter", name: "DataSourceFilter")
+    DataSourceFilters = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatchlogs#DataSourceFilters", name: "DataSourceFilters", traits: {"smithy.api#length" => {"min" => 1, "max" => 5}})
+    DataSourceName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#DataSourceName", name: "DataSourceName")
+    DataSourceType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#DataSourceType", name: "DataSourceType")
+    DataType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#DataType", name: "DataType")
     DateTimeConverter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#DateTimeConverter", name: "DateTimeConverter")
     Days = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.cloudwatchlogs#Days", name: "Days")
     DefaultValue = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.cloudwatchlogs#DefaultValue", name: "DefaultValue")
@@ -79,14 +101,19 @@ module Aws::CloudWatchLogs
     DeleteLogAnomalyDetectorRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#DeleteLogAnomalyDetectorRequest", name: "DeleteLogAnomalyDetectorRequest")
     DeleteLogGroupRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#DeleteLogGroupRequest", name: "DeleteLogGroupRequest")
     DeleteLogStreamRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#DeleteLogStreamRequest", name: "DeleteLogStreamRequest")
+    DeleteLookupTableRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#DeleteLookupTableRequest", name: "DeleteLookupTableRequest")
     DeleteMetricFilterRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#DeleteMetricFilterRequest", name: "DeleteMetricFilterRequest")
     DeleteQueryDefinitionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#DeleteQueryDefinitionRequest", name: "DeleteQueryDefinitionRequest")
     DeleteQueryDefinitionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#DeleteQueryDefinitionResponse", name: "DeleteQueryDefinitionResponse")
     DeleteResourcePolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#DeleteResourcePolicyRequest", name: "DeleteResourcePolicyRequest")
     DeleteRetentionPolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#DeleteRetentionPolicyRequest", name: "DeleteRetentionPolicyRequest")
+    DeleteScheduledQueryRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#DeleteScheduledQueryRequest", name: "DeleteScheduledQueryRequest")
+    DeleteScheduledQueryResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#DeleteScheduledQueryResponse", name: "DeleteScheduledQueryResponse")
     DeleteSubscriptionFilterRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#DeleteSubscriptionFilterRequest", name: "DeleteSubscriptionFilterRequest")
+    DeleteSyslogConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#DeleteSyslogConfigurationRequest", name: "DeleteSyslogConfigurationRequest")
     DeleteTransformerRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#DeleteTransformerRequest", name: "DeleteTransformerRequest")
     DeleteWithKeys = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatchlogs#DeleteWithKeys", name: "DeleteWithKeys", traits: {"smithy.api#length" => {"min" => 1, "max" => 5}})
+    DeletionProtectionEnabled = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.cloudwatchlogs#DeletionProtectionEnabled", name: "DeletionProtectionEnabled")
     Delimiter = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#Delimiter", name: "Delimiter", traits: {"smithy.api#length" => {"min" => 1, "max" => 2}})
     Deliveries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatchlogs#Deliveries", name: "Deliveries")
     Delivery = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#Delivery", name: "Delivery")
@@ -99,7 +126,18 @@ module Aws::CloudWatchLogs
     DeliveryDestinations = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatchlogs#DeliveryDestinations", name: "DeliveryDestinations")
     DeliveryId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#DeliveryId", name: "DeliveryId", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[0-9A-Za-z]+$"})
     DeliverySource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#DeliverySource", name: "DeliverySource")
+    DeliverySourceConfiguration = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.cloudwatchlogs#DeliverySourceConfiguration", name: "DeliverySourceConfiguration")
+    DeliverySourceConfigurationKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#DeliverySourceConfigurationKey", name: "DeliverySourceConfigurationKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}})
+    DeliverySourceConfigurationNumericValue = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.cloudwatchlogs#DeliverySourceConfigurationNumericValue", name: "DeliverySourceConfigurationNumericValue")
+    DeliverySourceConfigurationSchema = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#DeliverySourceConfigurationSchema", name: "DeliverySourceConfigurationSchema")
+    DeliverySourceConfigurationSchemaField = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#DeliverySourceConfigurationSchemaField", name: "DeliverySourceConfigurationSchemaField", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}})
+    DeliverySourceConfigurationSchemaValueType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudwatchlogs#DeliverySourceConfigurationSchemaValueType", name: "DeliverySourceConfigurationSchemaValueType")
+    DeliverySourceConfigurationSchemas = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatchlogs#DeliverySourceConfigurationSchemas", name: "DeliverySourceConfigurationSchemas")
+    DeliverySourceConfigurationSupportedValues = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatchlogs#DeliverySourceConfigurationSupportedValues", name: "DeliverySourceConfigurationSupportedValues")
+    DeliverySourceConfigurationValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#DeliverySourceConfigurationValue", name: "DeliverySourceConfigurationValue", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}})
     DeliverySourceName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#DeliverySourceName", name: "DeliverySourceName", traits: {"smithy.api#length" => {"min" => 1, "max" => 60}, "smithy.api#pattern" => "^[\\w-]*$"})
+    DeliverySourceStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudwatchlogs#DeliverySourceStatus", name: "DeliverySourceStatus")
+    DeliverySourceStatusReason = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudwatchlogs#DeliverySourceStatusReason", name: "DeliverySourceStatusReason")
     DeliverySources = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatchlogs#DeliverySources", name: "DeliverySources")
     DeliverySuffixPath = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#DeliverySuffixPath", name: "DeliverySuffixPath", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}})
     Descending = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.cloudwatchlogs#Descending", name: "Descending")
@@ -120,6 +158,10 @@ module Aws::CloudWatchLogs
     DescribeFieldIndexesLogGroupIdentifiers = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatchlogs#DescribeFieldIndexesLogGroupIdentifiers", name: "DescribeFieldIndexesLogGroupIdentifiers", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
     DescribeFieldIndexesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#DescribeFieldIndexesRequest", name: "DescribeFieldIndexesRequest")
     DescribeFieldIndexesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#DescribeFieldIndexesResponse", name: "DescribeFieldIndexesResponse")
+    DescribeImportTaskBatchesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#DescribeImportTaskBatchesRequest", name: "DescribeImportTaskBatchesRequest")
+    DescribeImportTaskBatchesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#DescribeImportTaskBatchesResponse", name: "DescribeImportTaskBatchesResponse")
+    DescribeImportTasksRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#DescribeImportTasksRequest", name: "DescribeImportTasksRequest")
+    DescribeImportTasksResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#DescribeImportTasksResponse", name: "DescribeImportTasksResponse")
     DescribeIndexPoliciesLogGroupIdentifiers = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatchlogs#DescribeIndexPoliciesLogGroupIdentifiers", name: "DescribeIndexPoliciesLogGroupIdentifiers", traits: {"smithy.api#length" => {"min" => 1, "max" => 1}})
     DescribeIndexPoliciesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#DescribeIndexPoliciesRequest", name: "DescribeIndexPoliciesRequest")
     DescribeIndexPoliciesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#DescribeIndexPoliciesResponse", name: "DescribeIndexPoliciesResponse")
@@ -129,6 +171,9 @@ module Aws::CloudWatchLogs
     DescribeLogGroupsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#DescribeLogGroupsResponse", name: "DescribeLogGroupsResponse")
     DescribeLogStreamsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#DescribeLogStreamsRequest", name: "DescribeLogStreamsRequest")
     DescribeLogStreamsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#DescribeLogStreamsResponse", name: "DescribeLogStreamsResponse")
+    DescribeLookupTablesMaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.cloudwatchlogs#DescribeLookupTablesMaxResults", name: "DescribeLookupTablesMaxResults", traits: {"smithy.api#default" => 0, "smithy.api#range" => {"max" => 100}})
+    DescribeLookupTablesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#DescribeLookupTablesRequest", name: "DescribeLookupTablesRequest")
+    DescribeLookupTablesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#DescribeLookupTablesResponse", name: "DescribeLookupTablesResponse")
     DescribeMetricFiltersRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#DescribeMetricFiltersRequest", name: "DescribeMetricFiltersRequest")
     DescribeMetricFiltersResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#DescribeMetricFiltersResponse", name: "DescribeMetricFiltersResponse")
     DescribeQueriesMaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.cloudwatchlogs#DescribeQueriesMaxResults", name: "DescribeQueriesMaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 1000}})
@@ -143,6 +188,7 @@ module Aws::CloudWatchLogs
     Description = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#Description", name: "Description", traits: {"smithy.api#length" => {"min" => 1}})
     Destination = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#Destination", name: "Destination")
     DestinationArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#DestinationArn", name: "DestinationArn", traits: {"smithy.api#length" => {"min" => 1}})
+    DestinationConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#DestinationConfiguration", name: "DestinationConfiguration")
     DestinationField = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#DestinationField", name: "DestinationField", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}})
     DestinationName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#DestinationName", name: "DestinationName", traits: {"smithy.api#length" => {"min" => 1, "max" => 512}, "smithy.api#pattern" => "^[^:*]*$"})
     Destinations = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatchlogs#Destinations", name: "Destinations")
@@ -152,10 +198,13 @@ module Aws::CloudWatchLogs
     DimensionsKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#DimensionsKey", name: "DimensionsKey", traits: {"smithy.api#length" => {"min" => 0, "max" => 255}})
     DimensionsValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#DimensionsValue", name: "DimensionsValue", traits: {"smithy.api#length" => {"min" => 0, "max" => 255}})
     DisassociateKmsKeyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#DisassociateKmsKeyRequest", name: "DisassociateKmsKeyRequest")
+    DisassociateSourceFromS3TableIntegrationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#DisassociateSourceFromS3TableIntegrationRequest", name: "DisassociateSourceFromS3TableIntegrationRequest")
+    DisassociateSourceFromS3TableIntegrationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#DisassociateSourceFromS3TableIntegrationResponse", name: "DisassociateSourceFromS3TableIntegrationResponse")
     Distribution = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudwatchlogs#Distribution", name: "Distribution")
     DynamicTokenPosition = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.cloudwatchlogs#DynamicTokenPosition", name: "DynamicTokenPosition", traits: {"smithy.api#default" => 0})
     EmitSystemFields = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatchlogs#EmitSystemFields", name: "EmitSystemFields")
     EncryptionKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#EncryptionKey", name: "EncryptionKey", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}})
+    EndTimeOffset = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.cloudwatchlogs#EndTimeOffset", name: "EndTimeOffset")
     Entity = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#Entity", name: "Entity")
     EntityAttributes = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.cloudwatchlogs#EntityAttributes", name: "EntityAttributes", traits: {"smithy.api#length" => {"min" => 0, "max" => 10}})
     EntityAttributesKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#EntityAttributesKey", name: "EntityAttributesKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}})
@@ -166,12 +215,16 @@ module Aws::CloudWatchLogs
     EntityRejectionErrorType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudwatchlogs#EntityRejectionErrorType", name: "EntityRejectionErrorType")
     Enumerations = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.cloudwatchlogs#Enumerations", name: "Enumerations")
     EpochMillis = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.cloudwatchlogs#EpochMillis", name: "EpochMillis", traits: {"smithy.api#default" => 0, "smithy.api#range" => {"min" => 0}})
+    ErrorMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#ErrorMessage", name: "ErrorMessage")
     EvaluationFrequency = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudwatchlogs#EvaluationFrequency", name: "EvaluationFrequency")
     EventId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#EventId", name: "EventId")
     EventMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#EventMessage", name: "EventMessage", traits: {"smithy.api#length" => {"min" => 1}})
     EventNumber = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.cloudwatchlogs#EventNumber", name: "EventNumber", traits: {"smithy.api#default" => 0})
     EventSource = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudwatchlogs#EventSource", name: "EventSource")
     EventsLimit = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.cloudwatchlogs#EventsLimit", name: "EventsLimit", traits: {"smithy.api#range" => {"min" => 1, "max" => 10000}})
+    EventsLimitStartQuery = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.cloudwatchlogs#EventsLimitStartQuery", name: "EventsLimitStartQuery", traits: {"smithy.api#range" => {"min" => 1, "max" => 100000}})
+    ExecutionStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudwatchlogs#ExecutionStatus", name: "ExecutionStatus")
+    ExecutionStatusList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatchlogs#ExecutionStatusList", name: "ExecutionStatusList")
     ExpectedRevisionId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#ExpectedRevisionId", name: "ExpectedRevisionId", traits: {"smithy.api#length" => {"min" => 1}})
     ExportDestinationBucket = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#ExportDestinationBucket", name: "ExportDestinationBucket", traits: {"smithy.api#length" => {"min" => 1, "max" => 512}})
     ExportDestinationPrefix = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#ExportDestinationPrefix", name: "ExportDestinationPrefix")
@@ -189,6 +242,7 @@ module Aws::CloudWatchLogs
     FieldHeader = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#FieldHeader", name: "FieldHeader", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}})
     FieldIndex = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#FieldIndex", name: "FieldIndex")
     FieldIndexName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#FieldIndexName", name: "FieldIndexName", traits: {"smithy.api#length" => {"min" => 1, "max" => 512}, "smithy.api#pattern" => "^[\\.\\-_/#A-Za-z0-9]+$"})
+    FieldIndexNames = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatchlogs#FieldIndexNames", name: "FieldIndexNames", traits: {"smithy.api#length" => {"min" => 1, "max" => 20}})
     FieldIndexes = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatchlogs#FieldIndexes", name: "FieldIndexes")
     FieldSelectionCriteria = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#FieldSelectionCriteria", name: "FieldSelectionCriteria", traits: {"smithy.api#length" => {"min" => 0, "max" => 2000}})
     FieldsData = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#FieldsData", name: "FieldsData")
@@ -220,6 +274,8 @@ module Aws::CloudWatchLogs
     GetLogAnomalyDetectorResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#GetLogAnomalyDetectorResponse", name: "GetLogAnomalyDetectorResponse")
     GetLogEventsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#GetLogEventsRequest", name: "GetLogEventsRequest")
     GetLogEventsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#GetLogEventsResponse", name: "GetLogEventsResponse")
+    GetLogFieldsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#GetLogFieldsRequest", name: "GetLogFieldsRequest")
+    GetLogFieldsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#GetLogFieldsResponse", name: "GetLogFieldsResponse")
     GetLogGroupFieldsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#GetLogGroupFieldsRequest", name: "GetLogGroupFieldsRequest")
     GetLogGroupFieldsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#GetLogGroupFieldsResponse", name: "GetLogGroupFieldsResponse")
     GetLogObjectRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#GetLogObjectRequest", name: "GetLogObjectRequest")
@@ -227,17 +283,44 @@ module Aws::CloudWatchLogs
     GetLogObjectResponseStream = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.cloudwatchlogs#GetLogObjectResponseStream", name: "GetLogObjectResponseStream", traits: {"smithy.api#streaming" => {}})
     GetLogRecordRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#GetLogRecordRequest", name: "GetLogRecordRequest")
     GetLogRecordResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#GetLogRecordResponse", name: "GetLogRecordResponse")
+    GetLookupTableRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#GetLookupTableRequest", name: "GetLookupTableRequest")
+    GetLookupTableResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#GetLookupTableResponse", name: "GetLookupTableResponse")
+    GetQueryResultsMaxItems = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.cloudwatchlogs#GetQueryResultsMaxItems", name: "GetQueryResultsMaxItems", traits: {"smithy.api#range" => {"min" => 0, "max" => 10000}})
+    GetQueryResultsNextToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#GetQueryResultsNextToken", name: "GetQueryResultsNextToken", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}})
     GetQueryResultsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#GetQueryResultsRequest", name: "GetQueryResultsRequest")
     GetQueryResultsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#GetQueryResultsResponse", name: "GetQueryResultsResponse")
+    GetScheduledQueryHistoryMaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.cloudwatchlogs#GetScheduledQueryHistoryMaxResults", name: "GetScheduledQueryHistoryMaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 1000}})
+    GetScheduledQueryHistoryRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#GetScheduledQueryHistoryRequest", name: "GetScheduledQueryHistoryRequest")
+    GetScheduledQueryHistoryResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#GetScheduledQueryHistoryResponse", name: "GetScheduledQueryHistoryResponse")
+    GetScheduledQueryRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#GetScheduledQueryRequest", name: "GetScheduledQueryRequest")
+    GetScheduledQueryResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#GetScheduledQueryResponse", name: "GetScheduledQueryResponse")
+    GetStorageTierPolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#GetStorageTierPolicyRequest", name: "GetStorageTierPolicyRequest")
+    GetStorageTierPolicyResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#GetStorageTierPolicyResponse", name: "GetStorageTierPolicyResponse")
     GetTransformerRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#GetTransformerRequest", name: "GetTransformerRequest")
     GetTransformerResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#GetTransformerResponse", name: "GetTransformerResponse")
     Grok = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#Grok", name: "Grok")
     GrokMatch = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#GrokMatch", name: "GrokMatch", traits: {"smithy.api#length" => {"min" => 1, "max" => 512}})
+    GroupingIdentifier = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#GroupingIdentifier", name: "GroupingIdentifier")
+    GroupingIdentifierKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#GroupingIdentifierKey", name: "GroupingIdentifierKey")
+    GroupingIdentifierValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#GroupingIdentifierValue", name: "GroupingIdentifierValue")
+    GroupingIdentifiers = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatchlogs#GroupingIdentifiers", name: "GroupingIdentifiers")
     Histogram = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.cloudwatchlogs#Histogram", name: "Histogram")
+    Import = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#Import", name: "Import")
+    ImportBatch = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#ImportBatch", name: "ImportBatch")
+    ImportBatchList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatchlogs#ImportBatchList", name: "ImportBatchList")
+    ImportFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#ImportFilter", name: "ImportFilter")
+    ImportId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#ImportId", name: "ImportId", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[\\-a-zA-Z0-9]+$"})
+    ImportList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatchlogs#ImportList", name: "ImportList")
+    ImportStatistics = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#ImportStatistics", name: "ImportStatistics")
+    ImportStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudwatchlogs#ImportStatus", name: "ImportStatus")
+    ImportStatusList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatchlogs#ImportStatusList", name: "ImportStatusList")
     IncludeLinkedAccounts = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.cloudwatchlogs#IncludeLinkedAccounts", name: "IncludeLinkedAccounts")
+    IndexCategories = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatchlogs#IndexCategories", name: "IndexCategories", traits: {"smithy.api#length" => {"min" => 0, "max" => 4}})
+    IndexCategory = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudwatchlogs#IndexCategory", name: "IndexCategory")
     IndexPolicies = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatchlogs#IndexPolicies", name: "IndexPolicies")
     IndexPolicy = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#IndexPolicy", name: "IndexPolicy")
     IndexSource = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudwatchlogs#IndexSource", name: "IndexSource")
+    IndexType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudwatchlogs#IndexType", name: "IndexType")
     InferredTokenName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#InferredTokenName", name: "InferredTokenName", traits: {"smithy.api#length" => {"min" => 1}})
     InheritedProperties = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatchlogs#InheritedProperties", name: "InheritedProperties")
     InheritedProperty = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudwatchlogs#InheritedProperty", name: "InheritedProperty")
@@ -254,6 +337,7 @@ module Aws::CloudWatchLogs
     IntegrationSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#IntegrationSummary", name: "IntegrationSummary")
     IntegrationType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudwatchlogs#IntegrationType", name: "IntegrationType")
     Interleaved = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.cloudwatchlogs#Interleaved", name: "Interleaved")
+    InternalServerException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#InternalServerException", name: "InternalServerException", traits: {"smithy.api#error" => "server", "smithy.api#httpError" => 500})
     InternalStreamingException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#InternalStreamingException", name: "InternalStreamingException", traits: {"smithy.api#error" => "client"})
     InvalidOperationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#InvalidOperationException", name: "InvalidOperationException", traits: {"smithy.api#error" => "client"})
     InvalidParameterException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#InvalidParameterException", name: "InvalidParameterException", traits: {"smithy.api#error" => "client"})
@@ -264,6 +348,9 @@ module Aws::CloudWatchLogs
     KeyValueDelimiter = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#KeyValueDelimiter", name: "KeyValueDelimiter", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}})
     KmsKeyId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#KmsKeyId", name: "KmsKeyId", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}})
     LimitExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#LimitExceededException", name: "LimitExceededException", traits: {"smithy.api#error" => "client"})
+    ListAggregateLogGroupSummariesGroupBy = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudwatchlogs#ListAggregateLogGroupSummariesGroupBy", name: "ListAggregateLogGroupSummariesGroupBy")
+    ListAggregateLogGroupSummariesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#ListAggregateLogGroupSummariesRequest", name: "ListAggregateLogGroupSummariesRequest")
+    ListAggregateLogGroupSummariesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#ListAggregateLogGroupSummariesResponse", name: "ListAggregateLogGroupSummariesResponse")
     ListAnomaliesLimit = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.cloudwatchlogs#ListAnomaliesLimit", name: "ListAnomaliesLimit", traits: {"smithy.api#range" => {"min" => 1, "max" => 50}})
     ListAnomaliesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#ListAnomaliesRequest", name: "ListAnomaliesRequest")
     ListAnomaliesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#ListAnomaliesResponse", name: "ListAnomaliesResponse")
@@ -277,7 +364,17 @@ module Aws::CloudWatchLogs
     ListLogGroupsForQueryRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#ListLogGroupsForQueryRequest", name: "ListLogGroupsForQueryRequest")
     ListLogGroupsForQueryResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#ListLogGroupsForQueryResponse", name: "ListLogGroupsForQueryResponse")
     ListLogGroupsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#ListLogGroupsRequest", name: "ListLogGroupsRequest")
+    ListLogGroupsRequestLimit = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.cloudwatchlogs#ListLogGroupsRequestLimit", name: "ListLogGroupsRequestLimit", traits: {"smithy.api#range" => {"min" => 1, "max" => 50}})
     ListLogGroupsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#ListLogGroupsResponse", name: "ListLogGroupsResponse")
+    ListScheduledQueriesMaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.cloudwatchlogs#ListScheduledQueriesMaxResults", name: "ListScheduledQueriesMaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 1000}})
+    ListScheduledQueriesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#ListScheduledQueriesRequest", name: "ListScheduledQueriesRequest")
+    ListScheduledQueriesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#ListScheduledQueriesResponse", name: "ListScheduledQueriesResponse")
+    ListSourcesForS3TableIntegrationMaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.cloudwatchlogs#ListSourcesForS3TableIntegrationMaxResults", name: "ListSourcesForS3TableIntegrationMaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}})
+    ListSourcesForS3TableIntegrationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#ListSourcesForS3TableIntegrationRequest", name: "ListSourcesForS3TableIntegrationRequest")
+    ListSourcesForS3TableIntegrationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#ListSourcesForS3TableIntegrationResponse", name: "ListSourcesForS3TableIntegrationResponse")
+    ListSyslogConfigurationsMaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.cloudwatchlogs#ListSyslogConfigurationsMaxResults", name: "ListSyslogConfigurationsMaxResults", traits: {"smithy.api#default" => 0, "smithy.api#range" => {"min" => 0, "max" => 50}})
+    ListSyslogConfigurationsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#ListSyslogConfigurationsRequest", name: "ListSyslogConfigurationsRequest")
+    ListSyslogConfigurationsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#ListSyslogConfigurationsResponse", name: "ListSyslogConfigurationsResponse")
     ListTagsForResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#ListTagsForResourceRequest", name: "ListTagsForResourceRequest")
     ListTagsForResourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#ListTagsForResourceResponse", name: "ListTagsForResourceResponse")
     ListTagsLogGroupRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#ListTagsLogGroupRequest", name: "ListTagsLogGroupRequest", traits: {"smithy.api#deprecated" => {"message" => "Please use the generic tagging API model ListTagsForResourceRequest and ListTagsForResourceResponse"}})
@@ -291,10 +388,15 @@ module Aws::CloudWatchLogs
     Locale = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#Locale", name: "Locale", traits: {"smithy.api#length" => {"min" => 1}})
     LogEvent = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#LogEvent", name: "LogEvent")
     LogEventIndex = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.cloudwatchlogs#LogEventIndex", name: "LogEventIndex")
+    LogFieldName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#LogFieldName", name: "LogFieldName", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}})
+    LogFieldType = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#LogFieldType", name: "LogFieldType")
+    LogFieldsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatchlogs#LogFieldsList", name: "LogFieldsList")
+    LogFieldsListItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#LogFieldsListItem", name: "LogFieldsListItem")
     LogGroup = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#LogGroup", name: "LogGroup")
     LogGroupArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#LogGroupArn", name: "LogGroupArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#pattern" => "^[\\w#+=/:,.@-]*$"})
     LogGroupArnList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatchlogs#LogGroupArnList", name: "LogGroupArnList")
     LogGroupClass = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudwatchlogs#LogGroupClass", name: "LogGroupClass")
+    LogGroupCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.cloudwatchlogs#LogGroupCount", name: "LogGroupCount")
     LogGroupField = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#LogGroupField", name: "LogGroupField")
     LogGroupFieldList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatchlogs#LogGroupFieldList", name: "LogGroupFieldList")
     LogGroupIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#LogGroupIdentifier", name: "LogGroupIdentifier", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#pattern" => "^[\\w#+=/:,.@-]*$"})
@@ -316,9 +418,15 @@ module Aws::CloudWatchLogs
     LogStreams = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatchlogs#LogStreams", name: "LogStreams")
     LogType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#LogType", name: "LogType", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => "^[\\w]*$"})
     LogTypes = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatchlogs#LogTypes", name: "LogTypes", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
+    LookupTable = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#LookupTable", name: "LookupTable")
+    LookupTableConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#LookupTableConfiguration", name: "LookupTableConfiguration")
+    LookupTableDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#LookupTableDescription", name: "LookupTableDescription", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}})
+    LookupTableName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#LookupTableName", name: "LookupTableName", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[a-zA-Z0-9_]+$"})
+    LookupTables = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatchlogs#LookupTables", name: "LookupTables")
     LowerCaseString = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#LowerCaseString", name: "LowerCaseString")
     LowerCaseStringWithKeys = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatchlogs#LowerCaseStringWithKeys", name: "LowerCaseStringWithKeys", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
     MalformedQueryException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#MalformedQueryException", name: "MalformedQueryException", traits: {"smithy.api#error" => "client"})
+    MappingVersion = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#MappingVersion", name: "MappingVersion", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}, "smithy.api#pattern" => "^\\d+\\.\\d+(\\.\\d+)?$"})
     MatchPattern = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#MatchPattern", name: "MatchPattern", traits: {"smithy.api#length" => {"min" => 1}})
     MatchPatterns = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatchlogs#MatchPatterns", name: "MatchPatterns", traits: {"smithy.api#length" => {"min" => 1, "max" => 5}})
     Message = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#Message", name: "Message")
@@ -378,7 +486,7 @@ module Aws::CloudWatchLogs
     PatternTokens = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatchlogs#PatternTokens", name: "PatternTokens")
     Percentage = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.cloudwatchlogs#Percentage", name: "Percentage", traits: {"smithy.api#default" => 0, "smithy.api#range" => {"min" => 0, "max" => 100}})
     Policy = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#Policy", name: "Policy")
-    PolicyDocument = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#PolicyDocument", name: "PolicyDocument", traits: {"smithy.api#length" => {"min" => 1, "max" => 5120}})
+    PolicyDocument = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#PolicyDocument", name: "PolicyDocument", traits: {"smithy.api#length" => {"min" => 1, "max" => 51200}})
     PolicyName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#PolicyName", name: "PolicyName")
     PolicyScope = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudwatchlogs#PolicyScope", name: "PolicyScope")
     PolicyType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudwatchlogs#PolicyType", name: "PolicyType")
@@ -387,6 +495,7 @@ module Aws::CloudWatchLogs
     Processors = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatchlogs#Processors", name: "Processors", traits: {"smithy.api#length" => {"min" => 1, "max" => 20}})
     PutAccountPolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#PutAccountPolicyRequest", name: "PutAccountPolicyRequest")
     PutAccountPolicyResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#PutAccountPolicyResponse", name: "PutAccountPolicyResponse")
+    PutBearerTokenAuthenticationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#PutBearerTokenAuthenticationRequest", name: "PutBearerTokenAuthenticationRequest")
     PutDataProtectionPolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#PutDataProtectionPolicyRequest", name: "PutDataProtectionPolicyRequest")
     PutDataProtectionPolicyResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#PutDataProtectionPolicyResponse", name: "PutDataProtectionPolicyResponse")
     PutDeliveryDestinationPolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#PutDeliveryDestinationPolicyRequest", name: "PutDeliveryDestinationPolicyRequest")
@@ -404,13 +513,17 @@ module Aws::CloudWatchLogs
     PutIntegrationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#PutIntegrationResponse", name: "PutIntegrationResponse")
     PutLogEventsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#PutLogEventsRequest", name: "PutLogEventsRequest")
     PutLogEventsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#PutLogEventsResponse", name: "PutLogEventsResponse")
+    PutLogGroupDeletionProtectionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#PutLogGroupDeletionProtectionRequest", name: "PutLogGroupDeletionProtectionRequest")
     PutMetricFilterRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#PutMetricFilterRequest", name: "PutMetricFilterRequest")
     PutQueryDefinitionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#PutQueryDefinitionRequest", name: "PutQueryDefinitionRequest")
     PutQueryDefinitionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#PutQueryDefinitionResponse", name: "PutQueryDefinitionResponse")
     PutResourcePolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#PutResourcePolicyRequest", name: "PutResourcePolicyRequest")
     PutResourcePolicyResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#PutResourcePolicyResponse", name: "PutResourcePolicyResponse")
     PutRetentionPolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#PutRetentionPolicyRequest", name: "PutRetentionPolicyRequest")
+    PutStorageTierPolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#PutStorageTierPolicyRequest", name: "PutStorageTierPolicyRequest")
+    PutStorageTierPolicyResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#PutStorageTierPolicyResponse", name: "PutStorageTierPolicyResponse")
     PutSubscriptionFilterRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#PutSubscriptionFilterRequest", name: "PutSubscriptionFilterRequest")
+    PutSyslogConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#PutSyslogConfigurationRequest", name: "PutSyslogConfigurationRequest")
     PutTransformerRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#PutTransformerRequest", name: "PutTransformerRequest")
     QueryCharOffset = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.cloudwatchlogs#QueryCharOffset", name: "QueryCharOffset")
     QueryCompileError = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#QueryCompileError", name: "QueryCompileError")
@@ -419,11 +532,17 @@ module Aws::CloudWatchLogs
     QueryDefinitionList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatchlogs#QueryDefinitionList", name: "QueryDefinitionList")
     QueryDefinitionName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#QueryDefinitionName", name: "QueryDefinitionName", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}})
     QueryDefinitionString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#QueryDefinitionString", name: "QueryDefinitionString", traits: {"smithy.api#length" => {"min" => 1, "max" => 10000}})
+    QueryDuration = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.cloudwatchlogs#QueryDuration", name: "QueryDuration")
     QueryId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#QueryId", name: "QueryId", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}})
     QueryInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#QueryInfo", name: "QueryInfo")
     QueryInfoList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatchlogs#QueryInfoList", name: "QueryInfoList")
     QueryLanguage = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudwatchlogs#QueryLanguage", name: "QueryLanguage")
     QueryListMaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.cloudwatchlogs#QueryListMaxResults", name: "QueryListMaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 1000}})
+    QueryParameter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#QueryParameter", name: "QueryParameter")
+    QueryParameterDefaultValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#QueryParameterDefaultValue", name: "QueryParameterDefaultValue", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}})
+    QueryParameterDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#QueryParameterDescription", name: "QueryParameterDescription", traits: {"smithy.api#length" => {"min" => 0, "max" => 512}})
+    QueryParameterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatchlogs#QueryParameterList", name: "QueryParameterList", traits: {"smithy.api#length" => {"min" => 0, "max" => 20}})
+    QueryParameterName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#QueryParameterName", name: "QueryParameterName", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[a-zA-Z_][a-zA-Z0-9_]*$"})
     QueryResults = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatchlogs#QueryResults", name: "QueryResults")
     QueryStatistics = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#QueryStatistics", name: "QueryStatistics")
     QueryStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudwatchlogs#QueryStatus", name: "QueryStatus")
@@ -431,6 +550,7 @@ module Aws::CloudWatchLogs
     QuoteCharacter = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#QuoteCharacter", name: "QuoteCharacter", traits: {"smithy.api#length" => {"min" => 1, "max" => 1}})
     RecordField = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#RecordField", name: "RecordField")
     RecordFields = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatchlogs#RecordFields", name: "RecordFields", traits: {"smithy.api#length" => {"min" => 0, "max" => 128}})
+    RecordsCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.cloudwatchlogs#RecordsCount", name: "RecordsCount", traits: {"smithy.api#range" => {"min" => 0}})
     RejectedEntityInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#RejectedEntityInfo", name: "RejectedEntityInfo")
     RejectedLogEventsInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#RejectedLogEventsInfo", name: "RejectedLogEventsInfo")
     RenameKeyEntries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatchlogs#RenameKeyEntries", name: "RenameKeyEntries", traits: {"smithy.api#length" => {"min" => 1, "max" => 5}})
@@ -450,7 +570,30 @@ module Aws::CloudWatchLogs
     ResultField = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#ResultField", name: "ResultField")
     ResultRows = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatchlogs#ResultRows", name: "ResultRows")
     RoleArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#RoleArn", name: "RoleArn", traits: {"smithy.api#length" => {"min" => 1}})
+    S3Configuration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#S3Configuration", name: "S3Configuration")
     S3DeliveryConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#S3DeliveryConfiguration", name: "S3DeliveryConfiguration")
+    S3TableIntegrationSource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#S3TableIntegrationSource", name: "S3TableIntegrationSource")
+    S3TableIntegrationSourceIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#S3TableIntegrationSourceIdentifier", name: "S3TableIntegrationSourceIdentifier", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}})
+    S3TableIntegrationSourceStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudwatchlogs#S3TableIntegrationSourceStatus", name: "S3TableIntegrationSourceStatus")
+    S3TableIntegrationSourceStatusReason = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#S3TableIntegrationSourceStatusReason", name: "S3TableIntegrationSourceStatusReason", traits: {"smithy.api#length" => {"min" => 1}})
+    S3TableIntegrationSources = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatchlogs#S3TableIntegrationSources", name: "S3TableIntegrationSources")
+    S3TablesDatasourceName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#S3TablesDatasourceName", name: "S3TablesDatasourceName", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}})
+    S3TablesDatasourceType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#S3TablesDatasourceType", name: "S3TablesDatasourceType", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}})
+    S3TablesIntegration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#S3TablesIntegration", name: "S3TablesIntegration")
+    S3Uri = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#S3Uri", name: "S3Uri", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}, "smithy.api#pattern" => "^s3://[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9](/.*)?$"})
+    ScheduleExpression = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#ScheduleExpression", name: "ScheduleExpression", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}})
+    ScheduleTimezone = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#ScheduleTimezone", name: "ScheduleTimezone", traits: {"smithy.api#length" => {"min" => 1}})
+    ScheduleType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudwatchlogs#ScheduleType", name: "ScheduleType")
+    ScheduledQueryDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#ScheduledQueryDescription", name: "ScheduledQueryDescription", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}})
+    ScheduledQueryDestination = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#ScheduledQueryDestination", name: "ScheduledQueryDestination")
+    ScheduledQueryDestinationList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatchlogs#ScheduledQueryDestinationList", name: "ScheduledQueryDestinationList")
+    ScheduledQueryDestinationType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudwatchlogs#ScheduledQueryDestinationType", name: "ScheduledQueryDestinationType")
+    ScheduledQueryIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#ScheduledQueryIdentifier", name: "ScheduledQueryIdentifier", traits: {"smithy.api#length" => {"min" => 1, "max" => 300}})
+    ScheduledQueryLogGroupIdentifiers = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatchlogs#ScheduledQueryLogGroupIdentifiers", name: "ScheduledQueryLogGroupIdentifiers", traits: {"smithy.api#length" => {"min" => 1, "max" => 50}})
+    ScheduledQueryName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#ScheduledQueryName", name: "ScheduledQueryName", traits: {"smithy.api#length" => {"min" => 1, "max" => 300}})
+    ScheduledQueryState = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudwatchlogs#ScheduledQueryState", name: "ScheduledQueryState")
+    ScheduledQuerySummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#ScheduledQuerySummary", name: "ScheduledQuerySummary")
+    ScheduledQuerySummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatchlogs#ScheduledQuerySummaryList", name: "ScheduledQuerySummaryList")
     Scope = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudwatchlogs#Scope", name: "Scope")
     SearchedLogStream = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#SearchedLogStream", name: "SearchedLogStream")
     SearchedLogStreams = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatchlogs#SearchedLogStreams", name: "SearchedLogStreams")
@@ -476,11 +619,14 @@ module Aws::CloudWatchLogs
     StartLiveTailResponseStream = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.cloudwatchlogs#StartLiveTailResponseStream", name: "StartLiveTailResponseStream", traits: {"smithy.api#streaming" => {}})
     StartQueryRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#StartQueryRequest", name: "StartQueryRequest")
     StartQueryResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#StartQueryResponse", name: "StartQueryResponse")
+    StartTimeOffset = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.cloudwatchlogs#StartTimeOffset", name: "StartTimeOffset")
     State = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudwatchlogs#State", name: "State")
     StatsValue = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.cloudwatchlogs#StatsValue", name: "StatsValue", traits: {"smithy.api#default" => 0})
     StopQueryRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#StopQueryRequest", name: "StopQueryRequest")
     StopQueryResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#StopQueryResponse", name: "StopQueryResponse")
+    StorageTier = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudwatchlogs#StorageTier", name: "StorageTier")
     StoredBytes = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.cloudwatchlogs#StoredBytes", name: "StoredBytes", traits: {"smithy.api#range" => {"min" => 0}})
+    String = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#String", name: "String")
     SubscriptionFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#SubscriptionFilter", name: "SubscriptionFilter")
     SubscriptionFilters = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatchlogs#SubscriptionFilters", name: "SubscriptionFilters")
     SubstituteString = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#SubstituteString", name: "SubstituteString")
@@ -491,7 +637,17 @@ module Aws::CloudWatchLogs
     SuppressionState = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudwatchlogs#SuppressionState", name: "SuppressionState")
     SuppressionType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudwatchlogs#SuppressionType", name: "SuppressionType")
     SuppressionUnit = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudwatchlogs#SuppressionUnit", name: "SuppressionUnit")
+    SyslogConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#SyslogConfiguration", name: "SyslogConfiguration")
+    SyslogConfigurations = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatchlogs#SyslogConfigurations", name: "SyslogConfigurations")
+    SyslogSourceType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudwatchlogs#SyslogSourceType", name: "SyslogSourceType")
     SystemField = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#SystemField", name: "SystemField")
+    TableBody = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#TableBody", name: "TableBody", traits: {"smithy.api#length" => {"min" => 1, "max" => 10485760}})
+    TableFields = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatchlogs#TableFields", name: "TableFields")
+    TagFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#TagFilter", name: "TagFilter")
+    TagFilterKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#TagFilterKey", name: "TagFilterKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]+)$"})
+    TagFilterValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#TagFilterValue", name: "TagFilterValue", traits: {"smithy.api#length" => {"min" => 0, "max" => 259}, "smithy.api#pattern" => "^!?\\*?([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)\\*?$"})
+    TagFilterValues = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatchlogs#TagFilterValues", name: "TagFilterValues", traits: {"smithy.api#length" => {"min" => 0, "max" => 5}})
+    TagFilters = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatchlogs#TagFilters", name: "TagFilters", traits: {"smithy.api#length" => {"min" => 1, "max" => 5}})
     TagKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#TagKey", name: "TagKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]+)$"})
     TagKeyList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatchlogs#TagKeyList", name: "TagKeyList", traits: {"smithy.api#length" => {"min" => 0, "max" => 50}})
     TagList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatchlogs#TagList", name: "TagList", traits: {"smithy.api#length" => {"min" => 1}})
@@ -519,6 +675,8 @@ module Aws::CloudWatchLogs
     TransformedEventMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#TransformedEventMessage", name: "TransformedEventMessage", traits: {"smithy.api#length" => {"min" => 1}})
     TransformedLogRecord = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#TransformedLogRecord", name: "TransformedLogRecord")
     TransformedLogs = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatchlogs#TransformedLogs", name: "TransformedLogs")
+    TriggerHistoryRecord = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#TriggerHistoryRecord", name: "TriggerHistoryRecord")
+    TriggerHistoryRecordList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatchlogs#TriggerHistoryRecordList", name: "TriggerHistoryRecordList")
     TrimString = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#TrimString", name: "TrimString")
     TrimStringWithKeys = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatchlogs#TrimStringWithKeys", name: "TrimStringWithKeys", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
     Type = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudwatchlogs#Type", name: "Type")
@@ -533,11 +691,17 @@ module Aws::CloudWatchLogs
     UpdateDeliveryConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#UpdateDeliveryConfigurationRequest", name: "UpdateDeliveryConfigurationRequest")
     UpdateDeliveryConfigurationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#UpdateDeliveryConfigurationResponse", name: "UpdateDeliveryConfigurationResponse")
     UpdateLogAnomalyDetectorRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#UpdateLogAnomalyDetectorRequest", name: "UpdateLogAnomalyDetectorRequest")
+    UpdateLookupTableRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#UpdateLookupTableRequest", name: "UpdateLookupTableRequest")
+    UpdateLookupTableResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#UpdateLookupTableResponse", name: "UpdateLookupTableResponse")
+    UpdateScheduledQueryRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#UpdateScheduledQueryRequest", name: "UpdateScheduledQueryRequest")
+    UpdateScheduledQueryResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#UpdateScheduledQueryResponse", name: "UpdateScheduledQueryResponse")
     UpperCaseString = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#UpperCaseString", name: "UpperCaseString")
     UpperCaseStringWithKeys = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatchlogs#UpperCaseStringWithKeys", name: "UpperCaseStringWithKeys", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
+    UserIdentity = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#UserIdentity", name: "UserIdentity", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}})
     ValidationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatchlogs#ValidationException", name: "ValidationException", traits: {"smithy.api#error" => "client"})
     Value = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#Value", name: "Value")
     ValueKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#ValueKey", name: "ValueKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}})
+    VpcEndpointId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#VpcEndpointId", name: "VpcEndpointId", traits: {"smithy.api#pattern" => "^vpce-[0-9a-f]{1,64}$"})
     WithKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatchlogs#WithKey", name: "WithKey", traits: {"smithy.api#length" => {"min" => 1}})
 
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
@@ -552,6 +716,10 @@ module Aws::CloudWatchLogs
     AccountPolicy.add_member(:selection_criteria, ::Smithy::Schema::Shapes::MemberShape.new(target: SelectionCriteria, name: "selectionCriteria"))
     AccountPolicy.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "accountId"))
     AccountPolicy.type = Types::AccountPolicy
+    ActionStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
+    ActionStatus.add_member(:client_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLIENT_ERROR", traits: {"smithy.api#enumValue" => "CLIENT_ERROR"}))
+    ActionStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    ActionStatus.add_member(:complete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETE", traits: {"smithy.api#enumValue" => "COMPLETE"}))
     AddKeyEntries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AddKeyEntry, name: "member"))
     AddKeyEntry.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Key, name: "key", traits: {"smithy.api#required" => {}}))
     AddKeyEntry.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AddKeyValue, name: "value", traits: {"smithy.api#required" => {}}))
@@ -559,6 +727,10 @@ module Aws::CloudWatchLogs
     AddKeyEntry.type = Types::AddKeyEntry
     AddKeys.add_member(:entries, ::Smithy::Schema::Shapes::MemberShape.new(target: AddKeyEntries, name: "entries", traits: {"smithy.api#required" => {}}))
     AddKeys.type = Types::AddKeys
+    AggregateLogGroupSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregateLogGroupSummary, name: "member"))
+    AggregateLogGroupSummary.add_member(:log_group_count, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupCount, name: "logGroupCount"))
+    AggregateLogGroupSummary.add_member(:grouping_identifiers, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupingIdentifiers, name: "groupingIdentifiers"))
+    AggregateLogGroupSummary.type = Types::AggregateLogGroupSummary
     AllowedFieldDelimiters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldDelimiter, name: "member"))
     AllowedFields.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordField, name: "member"))
     Anomalies.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Anomaly, name: "member"))
@@ -604,13 +776,27 @@ module Aws::CloudWatchLogs
     AssociateKmsKeyRequest.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, name: "kmsKeyId", traits: {"smithy.api#required" => {}}))
     AssociateKmsKeyRequest.add_member(:resource_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdentifier, name: "resourceIdentifier"))
     AssociateKmsKeyRequest.type = Types::AssociateKmsKeyRequest
+    AssociateSourceToS3TableIntegrationRequest.add_member(:integration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "integrationArn", traits: {"smithy.api#required" => {}}))
+    AssociateSourceToS3TableIntegrationRequest.add_member(:data_source, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSource, name: "dataSource", traits: {"smithy.api#required" => {}}))
+    AssociateSourceToS3TableIntegrationRequest.type = Types::AssociateSourceToS3TableIntegrationRequest
+    AssociateSourceToS3TableIntegrationResponse.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: S3TableIntegrationSourceIdentifier, name: "identifier"))
+    AssociateSourceToS3TableIntegrationResponse.type = Types::AssociateSourceToS3TableIntegrationResponse
     CSV.add_member(:quote_character, ::Smithy::Schema::Shapes::MemberShape.new(target: QuoteCharacter, name: "quoteCharacter"))
     CSV.add_member(:delimiter, ::Smithy::Schema::Shapes::MemberShape.new(target: Delimiter, name: "delimiter"))
     CSV.add_member(:columns, ::Smithy::Schema::Shapes::MemberShape.new(target: Columns, name: "columns"))
     CSV.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: Source, name: "source"))
+    CSV.add_member(:destination, ::Smithy::Schema::Shapes::MemberShape.new(target: DestinationField, name: "destination"))
     CSV.type = Types::CSV
     CancelExportTaskRequest.add_member(:task_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportTaskId, name: "taskId", traits: {"smithy.api#required" => {}}))
     CancelExportTaskRequest.type = Types::CancelExportTaskRequest
+    CancelImportTaskRequest.add_member(:import_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportId, name: "importId", traits: {"smithy.api#required" => {}}))
+    CancelImportTaskRequest.type = Types::CancelImportTaskRequest
+    CancelImportTaskResponse.add_member(:import_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportId, name: "importId"))
+    CancelImportTaskResponse.add_member(:import_statistics, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportStatistics, name: "importStatistics"))
+    CancelImportTaskResponse.add_member(:import_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportStatus, name: "importStatus"))
+    CancelImportTaskResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "creationTime"))
+    CancelImportTaskResponse.add_member(:last_updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastUpdatedTime"))
+    CancelImportTaskResponse.type = Types::CancelImportTaskResponse
     Columns.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Column, name: "member"))
     ConfigurationTemplate.add_member(:service, ::Smithy::Schema::Shapes::MemberShape.new(target: Service, name: "service"))
     ConfigurationTemplate.add_member(:log_type, ::Smithy::Schema::Shapes::MemberShape.new(target: LogType, name: "logType"))
@@ -622,6 +808,8 @@ module Aws::CloudWatchLogs
     ConfigurationTemplate.add_member(:allowed_action_for_allow_vended_logs_delivery_for_resource, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedActionForAllowVendedLogsDeliveryForResource, name: "allowedActionForAllowVendedLogsDeliveryForResource"))
     ConfigurationTemplate.add_member(:allowed_field_delimiters, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedFieldDelimiters, name: "allowedFieldDelimiters"))
     ConfigurationTemplate.add_member(:allowed_suffix_path_fields, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordFields, name: "allowedSuffixPathFields"))
+    ConfigurationTemplate.add_member(:delivery_source_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliverySourceConfigurationSchemas, name: "deliverySourceConfiguration"))
+    ConfigurationTemplate.add_member(:s3_tables_integration, ::Smithy::Schema::Shapes::MemberShape.new(target: S3TablesIntegration, name: "s3TablesIntegration"))
     ConfigurationTemplate.type = Types::ConfigurationTemplate
     ConfigurationTemplateDeliveryConfigValues.add_member(:record_fields, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordFields, name: "recordFields"))
     ConfigurationTemplateDeliveryConfigValues.add_member(:field_delimiter, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldDelimiter, name: "fieldDelimiter"))
@@ -656,6 +844,14 @@ module Aws::CloudWatchLogs
     CreateExportTaskRequest.type = Types::CreateExportTaskRequest
     CreateExportTaskResponse.add_member(:task_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportTaskId, name: "taskId"))
     CreateExportTaskResponse.type = Types::CreateExportTaskResponse
+    CreateImportTaskRequest.add_member(:import_source_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "importSourceArn", traits: {"smithy.api#required" => {}}))
+    CreateImportTaskRequest.add_member(:import_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "importRoleArn", traits: {"smithy.api#required" => {}}))
+    CreateImportTaskRequest.add_member(:import_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportFilter, name: "importFilter"))
+    CreateImportTaskRequest.type = Types::CreateImportTaskRequest
+    CreateImportTaskResponse.add_member(:import_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportId, name: "importId"))
+    CreateImportTaskResponse.add_member(:import_destination_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "importDestinationArn"))
+    CreateImportTaskResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "creationTime"))
+    CreateImportTaskResponse.type = Types::CreateImportTaskResponse
     CreateLogAnomalyDetectorRequest.add_member(:log_group_arn_list, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupArnList, name: "logGroupArnList", traits: {"smithy.api#required" => {}}))
     CreateLogAnomalyDetectorRequest.add_member(:detector_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DetectorName, name: "detectorName"))
     CreateLogAnomalyDetectorRequest.add_member(:evaluation_frequency, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationFrequency, name: "evaluationFrequency"))
@@ -670,10 +866,40 @@ module Aws::CloudWatchLogs
     CreateLogGroupRequest.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, name: "kmsKeyId"))
     CreateLogGroupRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags"))
     CreateLogGroupRequest.add_member(:log_group_class, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupClass, name: "logGroupClass"))
+    CreateLogGroupRequest.add_member(:deletion_protection_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: DeletionProtectionEnabled, name: "deletionProtectionEnabled"))
     CreateLogGroupRequest.type = Types::CreateLogGroupRequest
     CreateLogStreamRequest.add_member(:log_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupName, name: "logGroupName", traits: {"smithy.api#required" => {}}))
     CreateLogStreamRequest.add_member(:log_stream_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LogStreamName, name: "logStreamName", traits: {"smithy.api#required" => {}}))
     CreateLogStreamRequest.type = Types::CreateLogStreamRequest
+    CreateLookupTableRequest.add_member(:lookup_table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LookupTableName, name: "lookupTableName", traits: {"smithy.api#required" => {}}))
+    CreateLookupTableRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: LookupTableDescription, name: "description"))
+    CreateLookupTableRequest.add_member(:table_body, ::Smithy::Schema::Shapes::MemberShape.new(target: TableBody, name: "tableBody"))
+    CreateLookupTableRequest.add_member(:query_id, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryId, name: "queryId"))
+    CreateLookupTableRequest.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, name: "kmsKeyId"))
+    CreateLookupTableRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags"))
+    CreateLookupTableRequest.type = Types::CreateLookupTableRequest
+    CreateLookupTableResponse.add_member(:lookup_table_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "lookupTableArn"))
+    CreateLookupTableResponse.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "createdAt"))
+    CreateLookupTableResponse.type = Types::CreateLookupTableResponse
+    CreateScheduledQueryRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledQueryName, name: "name", traits: {"smithy.api#required" => {}}))
+    CreateScheduledQueryRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledQueryDescription, name: "description"))
+    CreateScheduledQueryRequest.add_member(:query_language, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryLanguage, name: "queryLanguage", traits: {"smithy.api#required" => {}}))
+    CreateScheduledQueryRequest.add_member(:query_string, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryString, name: "queryString", traits: {"smithy.api#required" => {}}))
+    CreateScheduledQueryRequest.add_member(:log_group_identifiers, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledQueryLogGroupIdentifiers, name: "logGroupIdentifiers"))
+    CreateScheduledQueryRequest.add_member(:schedule_expression, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleExpression, name: "scheduleExpression", traits: {"smithy.api#required" => {}}))
+    CreateScheduledQueryRequest.add_member(:timezone, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleTimezone, name: "timezone"))
+    CreateScheduledQueryRequest.add_member(:start_time_offset, ::Smithy::Schema::Shapes::MemberShape.new(target: StartTimeOffset, name: "startTimeOffset"))
+    CreateScheduledQueryRequest.add_member(:end_time_offset, ::Smithy::Schema::Shapes::MemberShape.new(target: EndTimeOffset, name: "endTimeOffset"))
+    CreateScheduledQueryRequest.add_member(:destination_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: DestinationConfiguration, name: "destinationConfiguration"))
+    CreateScheduledQueryRequest.add_member(:schedule_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "scheduleStartTime"))
+    CreateScheduledQueryRequest.add_member(:schedule_end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "scheduleEndTime"))
+    CreateScheduledQueryRequest.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "executionRoleArn", traits: {"smithy.api#required" => {}}))
+    CreateScheduledQueryRequest.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledQueryState, name: "state"))
+    CreateScheduledQueryRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags"))
+    CreateScheduledQueryRequest.type = Types::CreateScheduledQueryRequest
+    CreateScheduledQueryResponse.add_member(:scheduled_query_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "scheduledQueryArn"))
+    CreateScheduledQueryResponse.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledQueryState, name: "state"))
+    CreateScheduledQueryResponse.type = Types::CreateScheduledQueryResponse
     DashboardViewerPrincipals.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member"))
     DataAlreadyAcceptedException.add_member(:expected_sequence_token, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceToken, name: "expectedSequenceToken"))
     DataAlreadyAcceptedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
@@ -682,6 +908,13 @@ module Aws::CloudWatchLogs
     DataProtectionStatus.add_member(:deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETED", traits: {"smithy.api#enumValue" => "DELETED"}))
     DataProtectionStatus.add_member(:archived, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ARCHIVED", traits: {"smithy.api#enumValue" => "ARCHIVED"}))
     DataProtectionStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
+    DataSource.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceName, name: "name", traits: {"smithy.api#required" => {}}))
+    DataSource.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceType, name: "type"))
+    DataSource.type = Types::DataSource
+    DataSourceFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceName, name: "name", traits: {"smithy.api#required" => {}}))
+    DataSourceFilter.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceType, name: "type"))
+    DataSourceFilter.type = Types::DataSourceFilter
+    DataSourceFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceFilter, name: "member"))
     DateTimeConverter.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: Source, name: "source", traits: {"smithy.api#required" => {}}))
     DateTimeConverter.add_member(:target, ::Smithy::Schema::Shapes::MemberShape.new(target: Target, name: "target", traits: {"smithy.api#required" => {}}))
     DateTimeConverter.add_member(:target_format, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetFormat, name: "targetFormat"))
@@ -721,6 +954,8 @@ module Aws::CloudWatchLogs
     DeleteLogStreamRequest.add_member(:log_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupName, name: "logGroupName", traits: {"smithy.api#required" => {}}))
     DeleteLogStreamRequest.add_member(:log_stream_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LogStreamName, name: "logStreamName", traits: {"smithy.api#required" => {}}))
     DeleteLogStreamRequest.type = Types::DeleteLogStreamRequest
+    DeleteLookupTableRequest.add_member(:lookup_table_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "lookupTableArn", traits: {"smithy.api#required" => {}}))
+    DeleteLookupTableRequest.type = Types::DeleteLookupTableRequest
     DeleteMetricFilterRequest.add_member(:log_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupName, name: "logGroupName", traits: {"smithy.api#required" => {}}))
     DeleteMetricFilterRequest.add_member(:filter_name, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterName, name: "filterName", traits: {"smithy.api#required" => {}}))
     DeleteMetricFilterRequest.type = Types::DeleteMetricFilterRequest
@@ -734,9 +969,15 @@ module Aws::CloudWatchLogs
     DeleteResourcePolicyRequest.type = Types::DeleteResourcePolicyRequest
     DeleteRetentionPolicyRequest.add_member(:log_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupName, name: "logGroupName", traits: {"smithy.api#required" => {}}))
     DeleteRetentionPolicyRequest.type = Types::DeleteRetentionPolicyRequest
+    DeleteScheduledQueryRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledQueryIdentifier, name: "identifier", traits: {"smithy.api#required" => {}}))
+    DeleteScheduledQueryRequest.type = Types::DeleteScheduledQueryRequest
+    DeleteScheduledQueryResponse.type = Types::DeleteScheduledQueryResponse
     DeleteSubscriptionFilterRequest.add_member(:log_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupName, name: "logGroupName", traits: {"smithy.api#required" => {}}))
     DeleteSubscriptionFilterRequest.add_member(:filter_name, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterName, name: "filterName", traits: {"smithy.api#required" => {}}))
     DeleteSubscriptionFilterRequest.type = Types::DeleteSubscriptionFilterRequest
+    DeleteSyslogConfigurationRequest.add_member(:log_group_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupIdentifier, name: "logGroupIdentifier", traits: {"smithy.api#required" => {}}))
+    DeleteSyslogConfigurationRequest.add_member(:vpc_endpoint_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcEndpointId, name: "vpcEndpointId"))
+    DeleteSyslogConfigurationRequest.type = Types::DeleteSyslogConfigurationRequest
     DeleteTransformerRequest.add_member(:log_group_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupIdentifier, name: "logGroupIdentifier", traits: {"smithy.api#required" => {}}))
     DeleteTransformerRequest.type = Types::DeleteTransformerRequest
     DeleteWithKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WithKey, name: "member"))
@@ -756,6 +997,7 @@ module Aws::CloudWatchLogs
     DeliveryDestination.add_member(:delivery_destination_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliveryDestinationType, name: "deliveryDestinationType"))
     DeliveryDestination.add_member(:output_format, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputFormat, name: "outputFormat"))
     DeliveryDestination.add_member(:delivery_destination_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliveryDestinationConfiguration, name: "deliveryDestinationConfiguration"))
+    DeliveryDestination.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "roleArn"))
     DeliveryDestination.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags"))
     DeliveryDestination.type = Types::DeliveryDestination
     DeliveryDestinationConfiguration.add_member(:destination_resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "destinationResourceArn", traits: {"smithy.api#required" => {}}))
@@ -772,7 +1014,29 @@ module Aws::CloudWatchLogs
     DeliverySource.add_member(:service, ::Smithy::Schema::Shapes::MemberShape.new(target: Service, name: "service"))
     DeliverySource.add_member(:log_type, ::Smithy::Schema::Shapes::MemberShape.new(target: LogType, name: "logType"))
     DeliverySource.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags"))
+    DeliverySource.add_member(:delivery_source_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliverySourceConfiguration, name: "deliverySourceConfiguration"))
+    DeliverySource.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliverySourceStatus, name: "status"))
+    DeliverySource.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliverySourceStatusReason, name: "statusReason"))
     DeliverySource.type = Types::DeliverySource
+    DeliverySourceConfiguration.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliverySourceConfigurationKey, name: "key"))
+    DeliverySourceConfiguration.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliverySourceConfigurationValue, name: "value"))
+    DeliverySourceConfigurationSchema.add_member(:key_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliverySourceConfigurationSchemaField, name: "keyName", traits: {"smithy.api#required" => {}}))
+    DeliverySourceConfigurationSchema.add_member(:value_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliverySourceConfigurationSchemaValueType, name: "valueType", traits: {"smithy.api#required" => {}}))
+    DeliverySourceConfigurationSchema.add_member(:default_value, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliverySourceConfigurationSchemaField, name: "defaultValue", traits: {"smithy.api#required" => {}}))
+    DeliverySourceConfigurationSchema.add_member(:supported_values, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliverySourceConfigurationSupportedValues, name: "supportedValues"))
+    DeliverySourceConfigurationSchema.add_member(:min_value, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliverySourceConfigurationNumericValue, name: "minValue"))
+    DeliverySourceConfigurationSchema.add_member(:max_value, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliverySourceConfigurationNumericValue, name: "maxValue"))
+    DeliverySourceConfigurationSchema.type = Types::DeliverySourceConfigurationSchema
+    DeliverySourceConfigurationSchemaValueType.add_member(:string, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STRING", traits: {"smithy.api#enumValue" => "string"}))
+    DeliverySourceConfigurationSchemaValueType.add_member(:boolean, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BOOLEAN", traits: {"smithy.api#enumValue" => "boolean"}))
+    DeliverySourceConfigurationSchemaValueType.add_member(:int, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INT", traits: {"smithy.api#enumValue" => "int"}))
+    DeliverySourceConfigurationSchemaValueType.add_member(:double, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DOUBLE", traits: {"smithy.api#enumValue" => "double"}))
+    DeliverySourceConfigurationSchemaValueType.add_member(:long, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LONG", traits: {"smithy.api#enumValue" => "long"}))
+    DeliverySourceConfigurationSchemas.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliverySourceConfigurationSchema, name: "member"))
+    DeliverySourceConfigurationSupportedValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliverySourceConfigurationSchemaField, name: "member"))
+    DeliverySourceStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
+    DeliverySourceStatus.add_member(:inactive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INACTIVE", traits: {"smithy.api#enumValue" => "INACTIVE"}))
+    DeliverySourceStatusReason.add_member(:resource_deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_DELETED", traits: {"smithy.api#enumValue" => "RESOURCE_DELETED"}))
     DeliverySources.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliverySource, name: "member"))
     DescribeAccountPoliciesRequest.add_member(:policy_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyType, name: "policyType", traits: {"smithy.api#required" => {}}))
     DescribeAccountPoliciesRequest.add_member(:policy_name, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyName, name: "policyName"))
@@ -827,11 +1091,31 @@ module Aws::CloudWatchLogs
     DescribeExportTasksResponse.type = Types::DescribeExportTasksResponse
     DescribeFieldIndexesLogGroupIdentifiers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupIdentifier, name: "member"))
     DescribeFieldIndexesRequest.add_member(:log_group_identifiers, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribeFieldIndexesLogGroupIdentifiers, name: "logGroupIdentifiers", traits: {"smithy.api#required" => {}}))
+    DescribeFieldIndexesRequest.add_member(:index_categories, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexCategories, name: "indexCategories"))
     DescribeFieldIndexesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
     DescribeFieldIndexesRequest.type = Types::DescribeFieldIndexesRequest
     DescribeFieldIndexesResponse.add_member(:field_indexes, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldIndexes, name: "fieldIndexes"))
     DescribeFieldIndexesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
     DescribeFieldIndexesResponse.type = Types::DescribeFieldIndexesResponse
+    DescribeImportTaskBatchesRequest.add_member(:import_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportId, name: "importId", traits: {"smithy.api#required" => {}}))
+    DescribeImportTaskBatchesRequest.add_member(:batch_import_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportStatusList, name: "batchImportStatus"))
+    DescribeImportTaskBatchesRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribeLimit, name: "limit"))
+    DescribeImportTaskBatchesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
+    DescribeImportTaskBatchesRequest.type = Types::DescribeImportTaskBatchesRequest
+    DescribeImportTaskBatchesResponse.add_member(:import_source_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "importSourceArn"))
+    DescribeImportTaskBatchesResponse.add_member(:import_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportId, name: "importId"))
+    DescribeImportTaskBatchesResponse.add_member(:import_batches, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportBatchList, name: "importBatches"))
+    DescribeImportTaskBatchesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
+    DescribeImportTaskBatchesResponse.type = Types::DescribeImportTaskBatchesResponse
+    DescribeImportTasksRequest.add_member(:import_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportId, name: "importId"))
+    DescribeImportTasksRequest.add_member(:import_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportStatus, name: "importStatus"))
+    DescribeImportTasksRequest.add_member(:import_source_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "importSourceArn"))
+    DescribeImportTasksRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribeLimit, name: "limit"))
+    DescribeImportTasksRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
+    DescribeImportTasksRequest.type = Types::DescribeImportTasksRequest
+    DescribeImportTasksResponse.add_member(:imports, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportList, name: "imports"))
+    DescribeImportTasksResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
+    DescribeImportTasksResponse.type = Types::DescribeImportTasksResponse
     DescribeIndexPoliciesLogGroupIdentifiers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupIdentifier, name: "member"))
     DescribeIndexPoliciesRequest.add_member(:log_group_identifiers, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribeIndexPoliciesLogGroupIdentifiers, name: "logGroupIdentifiers", traits: {"smithy.api#required" => {}}))
     DescribeIndexPoliciesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
@@ -863,6 +1147,13 @@ module Aws::CloudWatchLogs
     DescribeLogStreamsResponse.add_member(:log_streams, ::Smithy::Schema::Shapes::MemberShape.new(target: LogStreams, name: "logStreams"))
     DescribeLogStreamsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
     DescribeLogStreamsResponse.type = Types::DescribeLogStreamsResponse
+    DescribeLookupTablesRequest.add_member(:lookup_table_name_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: LookupTableName, name: "lookupTableNamePrefix"))
+    DescribeLookupTablesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribeLookupTablesMaxResults, name: "maxResults", traits: {"smithy.api#default" => 0}))
+    DescribeLookupTablesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
+    DescribeLookupTablesRequest.type = Types::DescribeLookupTablesRequest
+    DescribeLookupTablesResponse.add_member(:lookup_tables, ::Smithy::Schema::Shapes::MemberShape.new(target: LookupTables, name: "lookupTables"))
+    DescribeLookupTablesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
+    DescribeLookupTablesResponse.type = Types::DescribeLookupTablesResponse
     DescribeMetricFiltersRequest.add_member(:log_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupName, name: "logGroupName"))
     DescribeMetricFiltersRequest.add_member(:filter_name_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterName, name: "filterNamePrefix"))
     DescribeMetricFiltersRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
@@ -913,12 +1204,19 @@ module Aws::CloudWatchLogs
     Destination.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "arn"))
     Destination.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "creationTime"))
     Destination.type = Types::Destination
+    DestinationConfiguration.add_member(:s3_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Configuration, name: "s3Configuration"))
+    DestinationConfiguration.add_member(:lookup_table_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: LookupTableConfiguration, name: "lookupTableConfiguration"))
+    DestinationConfiguration.type = Types::DestinationConfiguration
     Destinations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Destination, name: "member"))
     Dimensions.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionsKey, name: "key"))
     Dimensions.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionsValue, name: "value"))
     DisassociateKmsKeyRequest.add_member(:log_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupName, name: "logGroupName"))
     DisassociateKmsKeyRequest.add_member(:resource_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdentifier, name: "resourceIdentifier"))
     DisassociateKmsKeyRequest.type = Types::DisassociateKmsKeyRequest
+    DisassociateSourceFromS3TableIntegrationRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: S3TableIntegrationSourceIdentifier, name: "identifier", traits: {"smithy.api#required" => {}}))
+    DisassociateSourceFromS3TableIntegrationRequest.type = Types::DisassociateSourceFromS3TableIntegrationRequest
+    DisassociateSourceFromS3TableIntegrationResponse.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: S3TableIntegrationSourceIdentifier, name: "identifier"))
+    DisassociateSourceFromS3TableIntegrationResponse.type = Types::DisassociateSourceFromS3TableIntegrationResponse
     Distribution.add_member(:random, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Random", traits: {"smithy.api#enumValue" => "Random"}))
     Distribution.add_member(:by_log_stream, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ByLogStream", traits: {"smithy.api#enumValue" => "ByLogStream"}))
     EmitSystemFields.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SystemField, name: "member"))
@@ -949,6 +1247,12 @@ module Aws::CloudWatchLogs
     EventSource.add_member(:vpc_flow, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VPC_FLOW", traits: {"smithy.api#enumValue" => "VPCFlow"}))
     EventSource.add_member(:eks_audit, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EKS_AUDIT", traits: {"smithy.api#enumValue" => "EKSAudit"}))
     EventSource.add_member(:awswaf, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWSWAF", traits: {"smithy.api#enumValue" => "AWSWAF"}))
+    ExecutionStatus.add_member(:running, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Running", traits: {"smithy.api#enumValue" => "Running"}))
+    ExecutionStatus.add_member(:invalid_query, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "InvalidQuery", traits: {"smithy.api#enumValue" => "InvalidQuery"}))
+    ExecutionStatus.add_member(:complete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Complete", traits: {"smithy.api#enumValue" => "Complete"}))
+    ExecutionStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Failed", traits: {"smithy.api#enumValue" => "Failed"}))
+    ExecutionStatus.add_member(:timeout, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Timeout", traits: {"smithy.api#enumValue" => "Timeout"}))
+    ExecutionStatusList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionStatus, name: "member"))
     ExportTask.add_member(:task_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportTaskId, name: "taskId"))
     ExportTask.add_member(:task_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportTaskName, name: "taskName"))
     ExportTask.add_member(:log_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupName, name: "logGroupName"))
@@ -979,7 +1283,10 @@ module Aws::CloudWatchLogs
     FieldIndex.add_member(:last_scan_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastScanTime"))
     FieldIndex.add_member(:first_event_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "firstEventTime"))
     FieldIndex.add_member(:last_event_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastEventTime"))
+    FieldIndex.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexType, name: "type"))
+    FieldIndex.add_member(:index_category, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexCategory, name: "indexCategory"))
     FieldIndex.type = Types::FieldIndex
+    FieldIndexNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldIndexName, name: "member"))
     FieldIndexes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldIndex, name: "member"))
     FieldsData.add_member(:data, ::Smithy::Schema::Shapes::MemberShape.new(target: Data, name: "data"))
     FieldsData.type = Types::FieldsData
@@ -992,6 +1299,7 @@ module Aws::CloudWatchLogs
     FilterLogEventsRequest.add_member(:filter_pattern, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterPattern, name: "filterPattern"))
     FilterLogEventsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
     FilterLogEventsRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: EventsLimit, name: "limit"))
+    FilterLogEventsRequest.add_member(:start_from_head, ::Smithy::Schema::Shapes::MemberShape.new(target: StartFromHead, name: "startFromHead"))
     FilterLogEventsRequest.add_member(:interleaved, ::Smithy::Schema::Shapes::MemberShape.new(target: Interleaved, name: "interleaved", traits: {"smithy.api#deprecated" => {"message" => "Starting on June 17, 2019, this parameter will be ignored and the value will be assumed to be true. The response from this operation will always interleave events from multiple log streams within a log group."}}))
     FilterLogEventsRequest.add_member(:unmask, ::Smithy::Schema::Shapes::MemberShape.new(target: Unmask, name: "unmask", traits: {"smithy.api#default" => false}))
     FilterLogEventsRequest.type = Types::FilterLogEventsRequest
@@ -1063,6 +1371,11 @@ module Aws::CloudWatchLogs
     GetLogEventsResponse.add_member(:next_forward_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextForwardToken"))
     GetLogEventsResponse.add_member(:next_backward_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextBackwardToken"))
     GetLogEventsResponse.type = Types::GetLogEventsResponse
+    GetLogFieldsRequest.add_member(:data_source_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceName, name: "dataSourceName", traits: {"smithy.api#required" => {}}))
+    GetLogFieldsRequest.add_member(:data_source_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceType, name: "dataSourceType", traits: {"smithy.api#required" => {}}))
+    GetLogFieldsRequest.type = Types::GetLogFieldsRequest
+    GetLogFieldsResponse.add_member(:log_fields, ::Smithy::Schema::Shapes::MemberShape.new(target: LogFieldsList, name: "logFields"))
+    GetLogFieldsResponse.type = Types::GetLogFieldsResponse
     GetLogGroupFieldsRequest.add_member(:log_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupName, name: "logGroupName"))
     GetLogGroupFieldsRequest.add_member(:time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "time"))
     GetLogGroupFieldsRequest.add_member(:log_group_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupIdentifier, name: "logGroupIdentifier"))
@@ -1083,14 +1396,66 @@ module Aws::CloudWatchLogs
     GetLogRecordRequest.type = Types::GetLogRecordRequest
     GetLogRecordResponse.add_member(:log_record, ::Smithy::Schema::Shapes::MemberShape.new(target: LogRecord, name: "logRecord"))
     GetLogRecordResponse.type = Types::GetLogRecordResponse
+    GetLookupTableRequest.add_member(:lookup_table_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "lookupTableArn", traits: {"smithy.api#required" => {}}))
+    GetLookupTableRequest.type = Types::GetLookupTableRequest
+    GetLookupTableResponse.add_member(:lookup_table_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "lookupTableArn"))
+    GetLookupTableResponse.add_member(:lookup_table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LookupTableName, name: "lookupTableName"))
+    GetLookupTableResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: LookupTableDescription, name: "description"))
+    GetLookupTableResponse.add_member(:table_body, ::Smithy::Schema::Shapes::MemberShape.new(target: TableBody, name: "tableBody"))
+    GetLookupTableResponse.add_member(:size_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: StoredBytes, name: "sizeBytes"))
+    GetLookupTableResponse.add_member(:last_updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastUpdatedTime"))
+    GetLookupTableResponse.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, name: "kmsKeyId"))
+    GetLookupTableResponse.type = Types::GetLookupTableResponse
     GetQueryResultsRequest.add_member(:query_id, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryId, name: "queryId", traits: {"smithy.api#required" => {}}))
+    GetQueryResultsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: GetQueryResultsNextToken, name: "nextToken"))
+    GetQueryResultsRequest.add_member(:max_items, ::Smithy::Schema::Shapes::MemberShape.new(target: GetQueryResultsMaxItems, name: "maxItems"))
     GetQueryResultsRequest.type = Types::GetQueryResultsRequest
     GetQueryResultsResponse.add_member(:query_language, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryLanguage, name: "queryLanguage"))
     GetQueryResultsResponse.add_member(:results, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryResults, name: "results"))
     GetQueryResultsResponse.add_member(:statistics, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryStatistics, name: "statistics"))
     GetQueryResultsResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryStatus, name: "status"))
     GetQueryResultsResponse.add_member(:encryption_key, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionKey, name: "encryptionKey"))
+    GetQueryResultsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: GetQueryResultsNextToken, name: "nextToken"))
     GetQueryResultsResponse.type = Types::GetQueryResultsResponse
+    GetScheduledQueryHistoryRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledQueryIdentifier, name: "identifier", traits: {"smithy.api#required" => {}}))
+    GetScheduledQueryHistoryRequest.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "startTime", traits: {"smithy.api#required" => {}}))
+    GetScheduledQueryHistoryRequest.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "endTime", traits: {"smithy.api#required" => {}}))
+    GetScheduledQueryHistoryRequest.add_member(:execution_statuses, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionStatusList, name: "executionStatuses"))
+    GetScheduledQueryHistoryRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: GetScheduledQueryHistoryMaxResults, name: "maxResults"))
+    GetScheduledQueryHistoryRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
+    GetScheduledQueryHistoryRequest.type = Types::GetScheduledQueryHistoryRequest
+    GetScheduledQueryHistoryResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledQueryName, name: "name"))
+    GetScheduledQueryHistoryResponse.add_member(:scheduled_query_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "scheduledQueryArn"))
+    GetScheduledQueryHistoryResponse.add_member(:trigger_history, ::Smithy::Schema::Shapes::MemberShape.new(target: TriggerHistoryRecordList, name: "triggerHistory"))
+    GetScheduledQueryHistoryResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
+    GetScheduledQueryHistoryResponse.type = Types::GetScheduledQueryHistoryResponse
+    GetScheduledQueryRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledQueryIdentifier, name: "identifier", traits: {"smithy.api#required" => {}}))
+    GetScheduledQueryRequest.type = Types::GetScheduledQueryRequest
+    GetScheduledQueryResponse.add_member(:scheduled_query_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "scheduledQueryArn"))
+    GetScheduledQueryResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledQueryName, name: "name"))
+    GetScheduledQueryResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledQueryDescription, name: "description"))
+    GetScheduledQueryResponse.add_member(:query_language, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryLanguage, name: "queryLanguage"))
+    GetScheduledQueryResponse.add_member(:query_string, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryString, name: "queryString"))
+    GetScheduledQueryResponse.add_member(:log_group_identifiers, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledQueryLogGroupIdentifiers, name: "logGroupIdentifiers"))
+    GetScheduledQueryResponse.add_member(:schedule_expression, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleExpression, name: "scheduleExpression"))
+    GetScheduledQueryResponse.add_member(:timezone, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleTimezone, name: "timezone"))
+    GetScheduledQueryResponse.add_member(:start_time_offset, ::Smithy::Schema::Shapes::MemberShape.new(target: StartTimeOffset, name: "startTimeOffset"))
+    GetScheduledQueryResponse.add_member(:end_time_offset, ::Smithy::Schema::Shapes::MemberShape.new(target: EndTimeOffset, name: "endTimeOffset"))
+    GetScheduledQueryResponse.add_member(:destination_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: DestinationConfiguration, name: "destinationConfiguration"))
+    GetScheduledQueryResponse.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledQueryState, name: "state"))
+    GetScheduledQueryResponse.add_member(:schedule_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleType, name: "scheduleType"))
+    GetScheduledQueryResponse.add_member(:last_triggered_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastTriggeredTime"))
+    GetScheduledQueryResponse.add_member(:last_execution_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionStatus, name: "lastExecutionStatus"))
+    GetScheduledQueryResponse.add_member(:schedule_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "scheduleStartTime"))
+    GetScheduledQueryResponse.add_member(:schedule_end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "scheduleEndTime"))
+    GetScheduledQueryResponse.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "executionRoleArn"))
+    GetScheduledQueryResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "creationTime"))
+    GetScheduledQueryResponse.add_member(:last_updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastUpdatedTime"))
+    GetScheduledQueryResponse.type = Types::GetScheduledQueryResponse
+    GetStorageTierPolicyRequest.type = Types::GetStorageTierPolicyRequest
+    GetStorageTierPolicyResponse.add_member(:storage_tier, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageTier, name: "storageTier"))
+    GetStorageTierPolicyResponse.add_member(:last_updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastUpdatedTime"))
+    GetStorageTierPolicyResponse.type = Types::GetStorageTierPolicyResponse
     GetTransformerRequest.add_member(:log_group_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupIdentifier, name: "logGroupIdentifier", traits: {"smithy.api#required" => {}}))
     GetTransformerRequest.type = Types::GetTransformerRequest
     GetTransformerResponse.add_member(:log_group_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupIdentifier, name: "logGroupIdentifier"))
@@ -1101,8 +1466,43 @@ module Aws::CloudWatchLogs
     Grok.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: Source, name: "source"))
     Grok.add_member(:match, ::Smithy::Schema::Shapes::MemberShape.new(target: GrokMatch, name: "match", traits: {"smithy.api#required" => {}}))
     Grok.type = Types::Grok
+    GroupingIdentifier.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupingIdentifierKey, name: "key"))
+    GroupingIdentifier.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupingIdentifierValue, name: "value"))
+    GroupingIdentifier.type = Types::GroupingIdentifier
+    GroupingIdentifiers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupingIdentifier, name: "member"))
     Histogram.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Time, name: "key"))
     Histogram.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Count, name: "value"))
+    Import.add_member(:import_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportId, name: "importId"))
+    Import.add_member(:import_source_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "importSourceArn"))
+    Import.add_member(:import_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportStatus, name: "importStatus"))
+    Import.add_member(:import_destination_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "importDestinationArn"))
+    Import.add_member(:import_statistics, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportStatistics, name: "importStatistics"))
+    Import.add_member(:import_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportFilter, name: "importFilter"))
+    Import.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "creationTime"))
+    Import.add_member(:last_updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastUpdatedTime"))
+    Import.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "errorMessage"))
+    Import.type = Types::Import
+    ImportBatch.add_member(:batch_id, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchId, name: "batchId", traits: {"smithy.api#required" => {}}))
+    ImportBatch.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    ImportBatch.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "errorMessage"))
+    ImportBatch.type = Types::ImportBatch
+    ImportBatchList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportBatch, name: "member"))
+    ImportFilter.add_member(:start_event_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "startEventTime"))
+    ImportFilter.add_member(:end_event_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "endEventTime"))
+    ImportFilter.type = Types::ImportFilter
+    ImportList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Import, name: "member"))
+    ImportStatistics.add_member(:bytes_imported, ::Smithy::Schema::Shapes::MemberShape.new(target: StoredBytes, name: "bytesImported"))
+    ImportStatistics.type = Types::ImportStatistics
+    ImportStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
+    ImportStatus.add_member(:cancelled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANCELLED", traits: {"smithy.api#enumValue" => "CANCELLED"}))
+    ImportStatus.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
+    ImportStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    ImportStatusList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportStatus, name: "member"))
+    IndexCategories.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexCategory, name: "member"))
+    IndexCategory.add_member(:default, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEFAULT", traits: {"smithy.api#enumValue" => "DEFAULT"}))
+    IndexCategory.add_member(:custom, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOM", traits: {"smithy.api#enumValue" => "CUSTOM"}))
+    IndexCategory.add_member(:auto, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AUTO", traits: {"smithy.api#enumValue" => "AUTO"}))
+    IndexCategory.add_member(:inactive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INACTIVE", traits: {"smithy.api#enumValue" => "INACTIVE"}))
     IndexPolicies.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexPolicy, name: "member"))
     IndexPolicy.add_member(:log_group_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupIdentifier, name: "logGroupIdentifier"))
     IndexPolicy.add_member(:last_update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastUpdateTime"))
@@ -1112,6 +1512,8 @@ module Aws::CloudWatchLogs
     IndexPolicy.type = Types::IndexPolicy
     IndexSource.add_member(:account, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCOUNT", traits: {"smithy.api#enumValue" => "ACCOUNT"}))
     IndexSource.add_member(:log_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOG_GROUP", traits: {"smithy.api#enumValue" => "LOG_GROUP"}))
+    IndexType.add_member(:facet, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FACET", traits: {"smithy.api#enumValue" => "FACET"}))
+    IndexType.add_member(:field_index, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FIELD_INDEX", traits: {"smithy.api#enumValue" => "FIELD_INDEX"}))
     InheritedProperties.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InheritedProperty, name: "member"))
     InheritedProperty.add_member(:account_data_protection, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCOUNT_DATA_PROTECTION", traits: {"smithy.api#enumValue" => "ACCOUNT_DATA_PROTECTION"}))
     InputLogEvent.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "timestamp", traits: {"smithy.api#required" => {}}))
@@ -1131,6 +1533,8 @@ module Aws::CloudWatchLogs
     IntegrationSummary.add_member(:integration_status, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegrationStatus, name: "integrationStatus"))
     IntegrationSummary.type = Types::IntegrationSummary
     IntegrationType.add_member(:opensearch, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OPENSEARCH", traits: {"smithy.api#enumValue" => "OPENSEARCH"}))
+    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
+    InternalServerException.type = Types::InternalServerException
     InternalStreamingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     InternalStreamingException.type = Types::InternalStreamingException
     InvalidOperationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
@@ -1142,6 +1546,20 @@ module Aws::CloudWatchLogs
     InvalidSequenceTokenException.type = Types::InvalidSequenceTokenException
     LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     LimitExceededException.type = Types::LimitExceededException
+    ListAggregateLogGroupSummariesGroupBy.add_member(:data_source_name_type_and_format, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DATA_SOURCE_NAME_TYPE_AND_FORMAT", traits: {"smithy.api#enumValue" => "DATA_SOURCE_NAME_TYPE_AND_FORMAT"}))
+    ListAggregateLogGroupSummariesGroupBy.add_member(:data_source_name_and_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DATA_SOURCE_NAME_AND_TYPE", traits: {"smithy.api#enumValue" => "DATA_SOURCE_NAME_AND_TYPE"}))
+    ListAggregateLogGroupSummariesRequest.add_member(:account_identifiers, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountIds, name: "accountIdentifiers"))
+    ListAggregateLogGroupSummariesRequest.add_member(:include_linked_accounts, ::Smithy::Schema::Shapes::MemberShape.new(target: IncludeLinkedAccounts, name: "includeLinkedAccounts"))
+    ListAggregateLogGroupSummariesRequest.add_member(:log_group_class, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupClass, name: "logGroupClass"))
+    ListAggregateLogGroupSummariesRequest.add_member(:log_group_name_pattern, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupNameRegexPattern, name: "logGroupNamePattern"))
+    ListAggregateLogGroupSummariesRequest.add_member(:data_sources, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceFilters, name: "dataSources"))
+    ListAggregateLogGroupSummariesRequest.add_member(:group_by, ::Smithy::Schema::Shapes::MemberShape.new(target: ListAggregateLogGroupSummariesGroupBy, name: "groupBy", traits: {"smithy.api#required" => {}}))
+    ListAggregateLogGroupSummariesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
+    ListAggregateLogGroupSummariesRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: ListLogGroupsRequestLimit, name: "limit"))
+    ListAggregateLogGroupSummariesRequest.type = Types::ListAggregateLogGroupSummariesRequest
+    ListAggregateLogGroupSummariesResponse.add_member(:aggregate_log_group_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregateLogGroupSummaries, name: "aggregateLogGroupSummaries"))
+    ListAggregateLogGroupSummariesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
+    ListAggregateLogGroupSummariesResponse.type = Types::ListAggregateLogGroupSummariesResponse
     ListAnomaliesRequest.add_member(:anomaly_detector_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyDetectorArn, name: "anomalyDetectorArn"))
     ListAnomaliesRequest.add_member(:suppression_state, ::Smithy::Schema::Shapes::MemberShape.new(target: SuppressionState, name: "suppressionState"))
     ListAnomaliesRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: ListAnomaliesLimit, name: "limit"))
@@ -1176,10 +1594,36 @@ module Aws::CloudWatchLogs
     ListLogGroupsRequest.add_member(:account_identifiers, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountIds, name: "accountIdentifiers"))
     ListLogGroupsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
     ListLogGroupsRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: ListLimit, name: "limit"))
+    ListLogGroupsRequest.add_member(:data_sources, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceFilters, name: "dataSources"))
+    ListLogGroupsRequest.add_member(:field_index_names, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldIndexNames, name: "fieldIndexNames"))
+    ListLogGroupsRequest.add_member(:log_group_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagFilters, name: "logGroupTags"))
     ListLogGroupsRequest.type = Types::ListLogGroupsRequest
     ListLogGroupsResponse.add_member(:log_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupSummaries, name: "logGroups"))
     ListLogGroupsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
     ListLogGroupsResponse.type = Types::ListLogGroupsResponse
+    ListScheduledQueriesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ListScheduledQueriesMaxResults, name: "maxResults"))
+    ListScheduledQueriesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
+    ListScheduledQueriesRequest.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledQueryState, name: "state"))
+    ListScheduledQueriesRequest.add_member(:schedule_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleType, name: "scheduleType"))
+    ListScheduledQueriesRequest.type = Types::ListScheduledQueriesRequest
+    ListScheduledQueriesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
+    ListScheduledQueriesResponse.add_member(:scheduled_queries, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledQuerySummaryList, name: "scheduledQueries"))
+    ListScheduledQueriesResponse.type = Types::ListScheduledQueriesResponse
+    ListSourcesForS3TableIntegrationRequest.add_member(:integration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "integrationArn", traits: {"smithy.api#required" => {}}))
+    ListSourcesForS3TableIntegrationRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ListSourcesForS3TableIntegrationMaxResults, name: "maxResults"))
+    ListSourcesForS3TableIntegrationRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
+    ListSourcesForS3TableIntegrationRequest.type = Types::ListSourcesForS3TableIntegrationRequest
+    ListSourcesForS3TableIntegrationResponse.add_member(:sources, ::Smithy::Schema::Shapes::MemberShape.new(target: S3TableIntegrationSources, name: "sources"))
+    ListSourcesForS3TableIntegrationResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
+    ListSourcesForS3TableIntegrationResponse.type = Types::ListSourcesForS3TableIntegrationResponse
+    ListSyslogConfigurationsRequest.add_member(:log_group_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupIdentifier, name: "logGroupIdentifier"))
+    ListSyslogConfigurationsRequest.add_member(:vpc_endpoint_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcEndpointId, name: "vpcEndpointId"))
+    ListSyslogConfigurationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
+    ListSyslogConfigurationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ListSyslogConfigurationsMaxResults, name: "maxResults", traits: {"smithy.api#default" => 0}))
+    ListSyslogConfigurationsRequest.type = Types::ListSyslogConfigurationsRequest
+    ListSyslogConfigurationsResponse.add_member(:syslog_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: SyslogConfigurations, name: "syslogConfigurations"))
+    ListSyslogConfigurationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
+    ListSyslogConfigurationsResponse.type = Types::ListSyslogConfigurationsResponse
     ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "resourceArn", traits: {"smithy.api#required" => {}}))
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
     ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags"))
@@ -1217,6 +1661,14 @@ module Aws::CloudWatchLogs
     LogEvent.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "timestamp"))
     LogEvent.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: EventMessage, name: "message"))
     LogEvent.type = Types::LogEvent
+    LogFieldType.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: DataType, name: "type"))
+    LogFieldType.add_member(:element, ::Smithy::Schema::Shapes::MemberShape.new(target: LogFieldType, name: "element"))
+    LogFieldType.add_member(:fields, ::Smithy::Schema::Shapes::MemberShape.new(target: LogFieldsList, name: "fields"))
+    LogFieldType.type = Types::LogFieldType
+    LogFieldsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LogFieldsListItem, name: "member"))
+    LogFieldsListItem.add_member(:log_field_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LogFieldName, name: "logFieldName"))
+    LogFieldsListItem.add_member(:log_field_type, ::Smithy::Schema::Shapes::MemberShape.new(target: LogFieldType, name: "logFieldType"))
+    LogFieldsListItem.type = Types::LogFieldsListItem
     LogGroup.add_member(:log_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupName, name: "logGroupName"))
     LogGroup.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "creationTime"))
     LogGroup.add_member(:retention_in_days, ::Smithy::Schema::Shapes::MemberShape.new(target: Days, name: "retentionInDays"))
@@ -1228,6 +1680,8 @@ module Aws::CloudWatchLogs
     LogGroup.add_member(:inherited_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: InheritedProperties, name: "inheritedProperties"))
     LogGroup.add_member(:log_group_class, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupClass, name: "logGroupClass"))
     LogGroup.add_member(:log_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "logGroupArn"))
+    LogGroup.add_member(:deletion_protection_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: DeletionProtectionEnabled, name: "deletionProtectionEnabled"))
+    LogGroup.add_member(:bearer_token_authentication_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: BearerTokenAuthenticationEnabled, name: "bearerTokenAuthenticationEnabled"))
     LogGroup.type = Types::LogGroup
     LogGroupArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupArn, name: "member"))
     LogGroupClass.add_member(:standard, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STANDARD", traits: {"smithy.api#enumValue" => "STANDARD"}))
@@ -1259,6 +1713,22 @@ module Aws::CloudWatchLogs
     LogStream.type = Types::LogStream
     LogStreams.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LogStream, name: "member"))
     LogTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LogType, name: "member"))
+    LookupTable.add_member(:lookup_table_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "lookupTableArn"))
+    LookupTable.add_member(:lookup_table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LookupTableName, name: "lookupTableName"))
+    LookupTable.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: LookupTableDescription, name: "description"))
+    LookupTable.add_member(:table_fields, ::Smithy::Schema::Shapes::MemberShape.new(target: TableFields, name: "tableFields"))
+    LookupTable.add_member(:records_count, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordsCount, name: "recordsCount"))
+    LookupTable.add_member(:size_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: StoredBytes, name: "sizeBytes"))
+    LookupTable.add_member(:last_updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastUpdatedTime"))
+    LookupTable.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, name: "kmsKeyId"))
+    LookupTable.type = Types::LookupTable
+    LookupTableConfiguration.add_member(:table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LookupTableName, name: "tableName", traits: {"smithy.api#required" => {}}))
+    LookupTableConfiguration.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "roleArn", traits: {"smithy.api#required" => {}}))
+    LookupTableConfiguration.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: LookupTableDescription, name: "description"))
+    LookupTableConfiguration.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, name: "kmsKeyId"))
+    LookupTableConfiguration.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags"))
+    LookupTableConfiguration.type = Types::LookupTableConfiguration
+    LookupTables.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LookupTable, name: "member"))
     LowerCaseString.add_member(:with_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: LowerCaseStringWithKeys, name: "withKeys", traits: {"smithy.api#required" => {}}))
     LowerCaseString.type = Types::LowerCaseString
     LowerCaseStringWithKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WithKey, name: "member"))
@@ -1297,6 +1767,7 @@ module Aws::CloudWatchLogs
     MoveKeys.add_member(:entries, ::Smithy::Schema::Shapes::MemberShape.new(target: MoveKeyEntries, name: "entries", traits: {"smithy.api#required" => {}}))
     MoveKeys.type = Types::MoveKeys
     OCSFVersion.add_member(:v1_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "V1_1", traits: {"smithy.api#enumValue" => "V1.1"}))
+    OCSFVersion.add_member(:v1_5, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "V1_5", traits: {"smithy.api#enumValue" => "V1.5"}))
     OpenSearchApplication.add_member(:application_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: OpenSearchApplicationEndpoint, name: "applicationEndpoint"))
     OpenSearchApplication.add_member(:application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "applicationArn"))
     OpenSearchApplication.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OpenSearchApplicationId, name: "applicationId"))
@@ -1380,6 +1851,7 @@ module Aws::CloudWatchLogs
     ParseToOCSF.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: Source, name: "source"))
     ParseToOCSF.add_member(:event_source, ::Smithy::Schema::Shapes::MemberShape.new(target: EventSource, name: "eventSource", traits: {"smithy.api#required" => {}}))
     ParseToOCSF.add_member(:ocsf_version, ::Smithy::Schema::Shapes::MemberShape.new(target: OCSFVersion, name: "ocsfVersion", traits: {"smithy.api#required" => {}}))
+    ParseToOCSF.add_member(:mapping_version, ::Smithy::Schema::Shapes::MemberShape.new(target: MappingVersion, name: "mappingVersion"))
     ParseToOCSF.type = Types::ParseToOCSF
     ParseVPC.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: Source, name: "source"))
     ParseVPC.type = Types::ParseVPC
@@ -1434,6 +1906,9 @@ module Aws::CloudWatchLogs
     PutAccountPolicyRequest.type = Types::PutAccountPolicyRequest
     PutAccountPolicyResponse.add_member(:account_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountPolicy, name: "accountPolicy"))
     PutAccountPolicyResponse.type = Types::PutAccountPolicyResponse
+    PutBearerTokenAuthenticationRequest.add_member(:log_group_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupIdentifier, name: "logGroupIdentifier", traits: {"smithy.api#required" => {}}))
+    PutBearerTokenAuthenticationRequest.add_member(:bearer_token_authentication_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: BearerTokenAuthenticationEnabled, name: "bearerTokenAuthenticationEnabled", traits: {"smithy.api#required" => {}}))
+    PutBearerTokenAuthenticationRequest.type = Types::PutBearerTokenAuthenticationRequest
     PutDataProtectionPolicyRequest.add_member(:log_group_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupIdentifier, name: "logGroupIdentifier", traits: {"smithy.api#required" => {}}))
     PutDataProtectionPolicyRequest.add_member(:policy_document, ::Smithy::Schema::Shapes::MemberShape.new(target: DataProtectionPolicyDocument, name: "policyDocument", traits: {"smithy.api#required" => {}}))
     PutDataProtectionPolicyRequest.type = Types::PutDataProtectionPolicyRequest
@@ -1450,6 +1925,7 @@ module Aws::CloudWatchLogs
     PutDeliveryDestinationRequest.add_member(:output_format, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputFormat, name: "outputFormat"))
     PutDeliveryDestinationRequest.add_member(:delivery_destination_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliveryDestinationConfiguration, name: "deliveryDestinationConfiguration"))
     PutDeliveryDestinationRequest.add_member(:delivery_destination_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliveryDestinationType, name: "deliveryDestinationType"))
+    PutDeliveryDestinationRequest.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "roleArn"))
     PutDeliveryDestinationRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags"))
     PutDeliveryDestinationRequest.type = Types::PutDeliveryDestinationRequest
     PutDeliveryDestinationResponse.add_member(:delivery_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliveryDestination, name: "deliveryDestination"))
@@ -1458,6 +1934,7 @@ module Aws::CloudWatchLogs
     PutDeliverySourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "resourceArn", traits: {"smithy.api#required" => {}}))
     PutDeliverySourceRequest.add_member(:log_type, ::Smithy::Schema::Shapes::MemberShape.new(target: LogType, name: "logType", traits: {"smithy.api#required" => {}}))
     PutDeliverySourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags"))
+    PutDeliverySourceRequest.add_member(:delivery_source_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliverySourceConfiguration, name: "deliverySourceConfiguration"))
     PutDeliverySourceRequest.type = Types::PutDeliverySourceRequest
     PutDeliverySourceResponse.add_member(:delivery_source, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliverySource, name: "deliverySource"))
     PutDeliverySourceResponse.type = Types::PutDeliverySourceResponse
@@ -1494,6 +1971,9 @@ module Aws::CloudWatchLogs
     PutLogEventsResponse.add_member(:rejected_log_events_info, ::Smithy::Schema::Shapes::MemberShape.new(target: RejectedLogEventsInfo, name: "rejectedLogEventsInfo"))
     PutLogEventsResponse.add_member(:rejected_entity_info, ::Smithy::Schema::Shapes::MemberShape.new(target: RejectedEntityInfo, name: "rejectedEntityInfo"))
     PutLogEventsResponse.type = Types::PutLogEventsResponse
+    PutLogGroupDeletionProtectionRequest.add_member(:log_group_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupIdentifier, name: "logGroupIdentifier", traits: {"smithy.api#required" => {}}))
+    PutLogGroupDeletionProtectionRequest.add_member(:deletion_protection_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: DeletionProtectionEnabled, name: "deletionProtectionEnabled", traits: {"smithy.api#required" => {}}))
+    PutLogGroupDeletionProtectionRequest.type = Types::PutLogGroupDeletionProtectionRequest
     PutMetricFilterRequest.add_member(:log_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupName, name: "logGroupName", traits: {"smithy.api#required" => {}}))
     PutMetricFilterRequest.add_member(:filter_name, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterName, name: "filterName", traits: {"smithy.api#required" => {}}))
     PutMetricFilterRequest.add_member(:filter_pattern, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterPattern, name: "filterPattern", traits: {"smithy.api#required" => {}}))
@@ -1508,6 +1988,7 @@ module Aws::CloudWatchLogs
     PutQueryDefinitionRequest.add_member(:log_group_names, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupNames, name: "logGroupNames"))
     PutQueryDefinitionRequest.add_member(:query_string, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryDefinitionString, name: "queryString", traits: {"smithy.api#required" => {}}))
     PutQueryDefinitionRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    PutQueryDefinitionRequest.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryParameterList, name: "parameters"))
     PutQueryDefinitionRequest.type = Types::PutQueryDefinitionRequest
     PutQueryDefinitionResponse.add_member(:query_definition_id, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryId, name: "queryDefinitionId"))
     PutQueryDefinitionResponse.type = Types::PutQueryDefinitionResponse
@@ -1522,6 +2003,11 @@ module Aws::CloudWatchLogs
     PutRetentionPolicyRequest.add_member(:log_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupName, name: "logGroupName", traits: {"smithy.api#required" => {}}))
     PutRetentionPolicyRequest.add_member(:retention_in_days, ::Smithy::Schema::Shapes::MemberShape.new(target: Days, name: "retentionInDays", traits: {"smithy.api#required" => {}}))
     PutRetentionPolicyRequest.type = Types::PutRetentionPolicyRequest
+    PutStorageTierPolicyRequest.add_member(:storage_tier, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageTier, name: "storageTier", traits: {"smithy.api#required" => {}}))
+    PutStorageTierPolicyRequest.type = Types::PutStorageTierPolicyRequest
+    PutStorageTierPolicyResponse.add_member(:storage_tier, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageTier, name: "storageTier"))
+    PutStorageTierPolicyResponse.add_member(:last_updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastUpdatedTime"))
+    PutStorageTierPolicyResponse.type = Types::PutStorageTierPolicyResponse
     PutSubscriptionFilterRequest.add_member(:log_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupName, name: "logGroupName", traits: {"smithy.api#required" => {}}))
     PutSubscriptionFilterRequest.add_member(:filter_name, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterName, name: "filterName", traits: {"smithy.api#required" => {}}))
     PutSubscriptionFilterRequest.add_member(:filter_pattern, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterPattern, name: "filterPattern", traits: {"smithy.api#required" => {}}))
@@ -1532,6 +2018,9 @@ module Aws::CloudWatchLogs
     PutSubscriptionFilterRequest.add_member(:field_selection_criteria, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldSelectionCriteria, name: "fieldSelectionCriteria"))
     PutSubscriptionFilterRequest.add_member(:emit_system_fields, ::Smithy::Schema::Shapes::MemberShape.new(target: EmitSystemFields, name: "emitSystemFields"))
     PutSubscriptionFilterRequest.type = Types::PutSubscriptionFilterRequest
+    PutSyslogConfigurationRequest.add_member(:log_group_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupIdentifier, name: "logGroupIdentifier", traits: {"smithy.api#required" => {}}))
+    PutSyslogConfigurationRequest.add_member(:vpc_endpoint_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcEndpointId, name: "vpcEndpointId"))
+    PutSyslogConfigurationRequest.type = Types::PutSyslogConfigurationRequest
     PutTransformerRequest.add_member(:log_group_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupIdentifier, name: "logGroupIdentifier", traits: {"smithy.api#required" => {}}))
     PutTransformerRequest.add_member(:transformer_config, ::Smithy::Schema::Shapes::MemberShape.new(target: Processors, name: "transformerConfig", traits: {"smithy.api#required" => {}}))
     PutTransformerRequest.type = Types::PutTransformerRequest
@@ -1547,6 +2036,7 @@ module Aws::CloudWatchLogs
     QueryDefinition.add_member(:query_string, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryDefinitionString, name: "queryString"))
     QueryDefinition.add_member(:last_modified, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastModified"))
     QueryDefinition.add_member(:log_group_names, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupNames, name: "logGroupNames"))
+    QueryDefinition.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryParameterList, name: "parameters"))
     QueryDefinition.type = Types::QueryDefinition
     QueryDefinitionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryDefinition, name: "member"))
     QueryInfo.add_member(:query_language, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryLanguage, name: "queryLanguage"))
@@ -1555,11 +2045,19 @@ module Aws::CloudWatchLogs
     QueryInfo.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryStatus, name: "status"))
     QueryInfo.add_member(:create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "createTime"))
     QueryInfo.add_member(:log_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupName, name: "logGroupName"))
+    QueryInfo.add_member(:query_duration, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryDuration, name: "queryDuration"))
+    QueryInfo.add_member(:bytes_scanned, ::Smithy::Schema::Shapes::MemberShape.new(target: BytesScannedValue, name: "bytesScanned"))
+    QueryInfo.add_member(:user_identity, ::Smithy::Schema::Shapes::MemberShape.new(target: UserIdentity, name: "userIdentity"))
     QueryInfo.type = Types::QueryInfo
     QueryInfoList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryInfo, name: "member"))
     QueryLanguage.add_member(:cwli, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CWLI", traits: {"smithy.api#enumValue" => "CWLI"}))
     QueryLanguage.add_member(:sql, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SQL", traits: {"smithy.api#enumValue" => "SQL"}))
     QueryLanguage.add_member(:ppl, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PPL", traits: {"smithy.api#enumValue" => "PPL"}))
+    QueryParameter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryParameterName, name: "name", traits: {"smithy.api#required" => {}}))
+    QueryParameter.add_member(:default_value, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryParameterDefaultValue, name: "defaultValue"))
+    QueryParameter.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryParameterDescription, name: "description"))
+    QueryParameter.type = Types::QueryParameter
+    QueryParameterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryParameter, name: "member"))
     QueryResults.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResultRows, name: "member"))
     QueryStatistics.add_member(:records_matched, ::Smithy::Schema::Shapes::MemberShape.new(target: StatsValue, name: "recordsMatched", traits: {"smithy.api#default" => 0}))
     QueryStatistics.add_member(:records_scanned, ::Smithy::Schema::Shapes::MemberShape.new(target: StatsValue, name: "recordsScanned", traits: {"smithy.api#default" => 0}))
@@ -1567,6 +2065,7 @@ module Aws::CloudWatchLogs
     QueryStatistics.add_member(:bytes_scanned, ::Smithy::Schema::Shapes::MemberShape.new(target: StatsValue, name: "bytesScanned", traits: {"smithy.api#default" => 0}))
     QueryStatistics.add_member(:estimated_bytes_skipped, ::Smithy::Schema::Shapes::MemberShape.new(target: StatsValue, name: "estimatedBytesSkipped", traits: {"smithy.api#default" => 0}))
     QueryStatistics.add_member(:log_groups_scanned, ::Smithy::Schema::Shapes::MemberShape.new(target: StatsValue, name: "logGroupsScanned", traits: {"smithy.api#default" => 0}))
+    QueryStatistics.add_member(:result_count, ::Smithy::Schema::Shapes::MemberShape.new(target: StatsValue, name: "resultCount", traits: {"smithy.api#default" => 0}))
     QueryStatistics.type = Types::QueryStatistics
     QueryStatus.add_member(:scheduled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Scheduled", traits: {"smithy.api#enumValue" => "Scheduled"}))
     QueryStatus.add_member(:running, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Running", traits: {"smithy.api#enumValue" => "Running"}))
@@ -1613,9 +2112,56 @@ module Aws::CloudWatchLogs
     ResultField.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Value, name: "value"))
     ResultField.type = Types::ResultField
     ResultRows.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResultField, name: "member"))
+    S3Configuration.add_member(:destination_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, name: "destinationIdentifier", traits: {"smithy.api#required" => {}}))
+    S3Configuration.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "roleArn", traits: {"smithy.api#required" => {}}))
+    S3Configuration.add_member(:owner_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "ownerAccountId"))
+    S3Configuration.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, name: "kmsKeyId"))
+    S3Configuration.type = Types::S3Configuration
     S3DeliveryConfiguration.add_member(:suffix_path, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliverySuffixPath, name: "suffixPath"))
     S3DeliveryConfiguration.add_member(:enable_hive_compatible_path, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "enableHiveCompatiblePath"))
     S3DeliveryConfiguration.type = Types::S3DeliveryConfiguration
+    S3TableIntegrationSource.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: S3TableIntegrationSourceIdentifier, name: "identifier"))
+    S3TableIntegrationSource.add_member(:data_source, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSource, name: "dataSource"))
+    S3TableIntegrationSource.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: S3TableIntegrationSourceStatus, name: "status"))
+    S3TableIntegrationSource.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: S3TableIntegrationSourceStatusReason, name: "statusReason"))
+    S3TableIntegrationSource.add_member(:created_time_stamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "createdTimeStamp"))
+    S3TableIntegrationSource.add_member(:parent_source_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: S3TableIntegrationSourceIdentifier, name: "parentSourceIdentifier"))
+    S3TableIntegrationSource.type = Types::S3TableIntegrationSource
+    S3TableIntegrationSourceStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
+    S3TableIntegrationSourceStatus.add_member(:unhealthy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNHEALTHY", traits: {"smithy.api#enumValue" => "UNHEALTHY"}))
+    S3TableIntegrationSourceStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    S3TableIntegrationSourceStatus.add_member(:data_source_delete_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DATA_SOURCE_DELETE_IN_PROGRESS", traits: {"smithy.api#enumValue" => "DATA_SOURCE_DELETE_IN_PROGRESS"}))
+    S3TableIntegrationSources.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: S3TableIntegrationSource, name: "member"))
+    S3TablesIntegration.add_member(:datasource_name, ::Smithy::Schema::Shapes::MemberShape.new(target: S3TablesDatasourceName, name: "datasourceName"))
+    S3TablesIntegration.add_member(:datasource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: S3TablesDatasourceType, name: "datasourceType"))
+    S3TablesIntegration.type = Types::S3TablesIntegration
+    ScheduleType.add_member(:customer_managed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOMER_MANAGED", traits: {"smithy.api#enumValue" => "CUSTOMER_MANAGED"}))
+    ScheduleType.add_member(:aws_managed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_MANAGED", traits: {"smithy.api#enumValue" => "AWS_MANAGED"}))
+    ScheduledQueryDestination.add_member(:destination_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledQueryDestinationType, name: "destinationType"))
+    ScheduledQueryDestination.add_member(:destination_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "destinationIdentifier"))
+    ScheduledQueryDestination.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionStatus, name: "status"))
+    ScheduledQueryDestination.add_member(:processed_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "processedIdentifier"))
+    ScheduledQueryDestination.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "errorMessage"))
+    ScheduledQueryDestination.type = Types::ScheduledQueryDestination
+    ScheduledQueryDestinationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledQueryDestination, name: "member"))
+    ScheduledQueryDestinationType.add_member(:s3, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "S3", traits: {"smithy.api#enumValue" => "S3"}))
+    ScheduledQueryDestinationType.add_member(:lookup_table, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOOKUP_TABLE", traits: {"smithy.api#enumValue" => "LOOKUP_TABLE"}))
+    ScheduledQueryLogGroupIdentifiers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupIdentifier, name: "member"))
+    ScheduledQueryState.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
+    ScheduledQueryState.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
+    ScheduledQuerySummary.add_member(:scheduled_query_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "scheduledQueryArn"))
+    ScheduledQuerySummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledQueryName, name: "name"))
+    ScheduledQuerySummary.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledQueryState, name: "state"))
+    ScheduledQuerySummary.add_member(:schedule_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleType, name: "scheduleType"))
+    ScheduledQuerySummary.add_member(:last_triggered_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastTriggeredTime"))
+    ScheduledQuerySummary.add_member(:last_execution_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionStatus, name: "lastExecutionStatus"))
+    ScheduledQuerySummary.add_member(:schedule_expression, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleExpression, name: "scheduleExpression"))
+    ScheduledQuerySummary.add_member(:timezone, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleTimezone, name: "timezone"))
+    ScheduledQuerySummary.add_member(:destination_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: DestinationConfiguration, name: "destinationConfiguration"))
+    ScheduledQuerySummary.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "creationTime"))
+    ScheduledQuerySummary.add_member(:last_updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastUpdatedTime"))
+    ScheduledQuerySummary.type = Types::ScheduledQuerySummary
+    ScheduledQuerySummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledQuerySummary, name: "member"))
     Scope.add_member(:all, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALL", traits: {"smithy.api#enumValue" => "ALL"}))
     SearchedLogStream.add_member(:log_stream_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LogStreamName, name: "logStreamName"))
     SearchedLogStream.add_member(:searched_completely, ::Smithy::Schema::Shapes::MemberShape.new(target: LogStreamSearchedCompletely, name: "searchedCompletely"))
@@ -1683,7 +2229,7 @@ module Aws::CloudWatchLogs
     StartQueryRequest.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "startTime", traits: {"smithy.api#required" => {}}))
     StartQueryRequest.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "endTime", traits: {"smithy.api#required" => {}}))
     StartQueryRequest.add_member(:query_string, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryString, name: "queryString", traits: {"smithy.api#required" => {}}))
-    StartQueryRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: EventsLimit, name: "limit"))
+    StartQueryRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: EventsLimitStartQuery, name: "limit"))
     StartQueryRequest.type = Types::StartQueryRequest
     StartQueryResponse.add_member(:query_id, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryId, name: "queryId"))
     StartQueryResponse.type = Types::StartQueryResponse
@@ -1694,6 +2240,8 @@ module Aws::CloudWatchLogs
     StopQueryRequest.type = Types::StopQueryRequest
     StopQueryResponse.add_member(:success, ::Smithy::Schema::Shapes::MemberShape.new(target: Success, name: "success", traits: {"smithy.api#default" => false}))
     StopQueryResponse.type = Types::StopQueryResponse
+    StorageTier.add_member(:standard, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STANDARD", traits: {"smithy.api#enumValue" => "STANDARD"}))
+    StorageTier.add_member(:intelligent_tiering, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTELLIGENT_TIERING", traits: {"smithy.api#enumValue" => "INTELLIGENT_TIERING"}))
     SubscriptionFilter.add_member(:filter_name, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterName, name: "filterName"))
     SubscriptionFilter.add_member(:log_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupName, name: "logGroupName"))
     SubscriptionFilter.add_member(:filter_pattern, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterPattern, name: "filterPattern"))
@@ -1723,6 +2271,19 @@ module Aws::CloudWatchLogs
     SuppressionUnit.add_member(:seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SECONDS", traits: {"smithy.api#enumValue" => "SECONDS"}))
     SuppressionUnit.add_member(:minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MINUTES", traits: {"smithy.api#enumValue" => "MINUTES"}))
     SuppressionUnit.add_member(:hours, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HOURS", traits: {"smithy.api#enumValue" => "HOURS"}))
+    SyslogConfiguration.add_member(:log_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupArn, name: "logGroupArn"))
+    SyslogConfiguration.add_member(:source_type, ::Smithy::Schema::Shapes::MemberShape.new(target: SyslogSourceType, name: "sourceType"))
+    SyslogConfiguration.add_member(:vpc_endpoint_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcEndpointId, name: "vpcEndpointId"))
+    SyslogConfiguration.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "createdAt"))
+    SyslogConfiguration.type = Types::SyslogConfiguration
+    SyslogConfigurations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SyslogConfiguration, name: "member"))
+    SyslogSourceType.add_member(:vpce, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VPCE", traits: {"smithy.api#enumValue" => "VPCE"}))
+    TableFields.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
+    TagFilter.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagFilterKey, name: "key", traits: {"smithy.api#required" => {}}))
+    TagFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: TagFilterValues, name: "values"))
+    TagFilter.type = Types::TagFilter
+    TagFilterValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagFilterValue, name: "member"))
+    TagFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagFilter, name: "member"))
     TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
     TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
     TagLogGroupRequest.add_member(:log_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupName, name: "logGroupName", traits: {"smithy.api#required" => {}}))
@@ -1754,6 +2315,13 @@ module Aws::CloudWatchLogs
     TransformedLogRecord.add_member(:transformed_event_message, ::Smithy::Schema::Shapes::MemberShape.new(target: TransformedEventMessage, name: "transformedEventMessage"))
     TransformedLogRecord.type = Types::TransformedLogRecord
     TransformedLogs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TransformedLogRecord, name: "member"))
+    TriggerHistoryRecord.add_member(:query_id, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryId, name: "queryId"))
+    TriggerHistoryRecord.add_member(:execution_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionStatus, name: "executionStatus"))
+    TriggerHistoryRecord.add_member(:triggered_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "triggeredTimestamp"))
+    TriggerHistoryRecord.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "errorMessage"))
+    TriggerHistoryRecord.add_member(:destinations, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledQueryDestinationList, name: "destinations"))
+    TriggerHistoryRecord.type = Types::TriggerHistoryRecord
+    TriggerHistoryRecordList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TriggerHistoryRecord, name: "member"))
     TrimString.add_member(:with_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TrimStringWithKeys, name: "withKeys", traits: {"smithy.api#required" => {}}))
     TrimString.type = Types::TrimString
     TrimStringWithKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WithKey, name: "member"))
@@ -1794,6 +2362,51 @@ module Aws::CloudWatchLogs
     UpdateLogAnomalyDetectorRequest.add_member(:anomaly_visibility_time, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyVisibilityTime, name: "anomalyVisibilityTime"))
     UpdateLogAnomalyDetectorRequest.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "enabled", traits: {"smithy.api#required" => {}}))
     UpdateLogAnomalyDetectorRequest.type = Types::UpdateLogAnomalyDetectorRequest
+    UpdateLookupTableRequest.add_member(:lookup_table_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "lookupTableArn", traits: {"smithy.api#required" => {}}))
+    UpdateLookupTableRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: LookupTableDescription, name: "description"))
+    UpdateLookupTableRequest.add_member(:table_body, ::Smithy::Schema::Shapes::MemberShape.new(target: TableBody, name: "tableBody"))
+    UpdateLookupTableRequest.add_member(:query_id, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryId, name: "queryId"))
+    UpdateLookupTableRequest.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, name: "kmsKeyId"))
+    UpdateLookupTableRequest.type = Types::UpdateLookupTableRequest
+    UpdateLookupTableResponse.add_member(:lookup_table_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "lookupTableArn"))
+    UpdateLookupTableResponse.add_member(:last_updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastUpdatedTime"))
+    UpdateLookupTableResponse.type = Types::UpdateLookupTableResponse
+    UpdateScheduledQueryRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledQueryIdentifier, name: "identifier", traits: {"smithy.api#required" => {}}))
+    UpdateScheduledQueryRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledQueryDescription, name: "description"))
+    UpdateScheduledQueryRequest.add_member(:query_language, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryLanguage, name: "queryLanguage", traits: {"smithy.api#required" => {}}))
+    UpdateScheduledQueryRequest.add_member(:query_string, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryString, name: "queryString", traits: {"smithy.api#required" => {}}))
+    UpdateScheduledQueryRequest.add_member(:log_group_identifiers, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledQueryLogGroupIdentifiers, name: "logGroupIdentifiers"))
+    UpdateScheduledQueryRequest.add_member(:schedule_expression, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleExpression, name: "scheduleExpression", traits: {"smithy.api#required" => {}}))
+    UpdateScheduledQueryRequest.add_member(:timezone, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleTimezone, name: "timezone"))
+    UpdateScheduledQueryRequest.add_member(:start_time_offset, ::Smithy::Schema::Shapes::MemberShape.new(target: StartTimeOffset, name: "startTimeOffset"))
+    UpdateScheduledQueryRequest.add_member(:end_time_offset, ::Smithy::Schema::Shapes::MemberShape.new(target: EndTimeOffset, name: "endTimeOffset"))
+    UpdateScheduledQueryRequest.add_member(:destination_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: DestinationConfiguration, name: "destinationConfiguration"))
+    UpdateScheduledQueryRequest.add_member(:schedule_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "scheduleStartTime"))
+    UpdateScheduledQueryRequest.add_member(:schedule_end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "scheduleEndTime"))
+    UpdateScheduledQueryRequest.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "executionRoleArn", traits: {"smithy.api#required" => {}}))
+    UpdateScheduledQueryRequest.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledQueryState, name: "state"))
+    UpdateScheduledQueryRequest.type = Types::UpdateScheduledQueryRequest
+    UpdateScheduledQueryResponse.add_member(:scheduled_query_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "scheduledQueryArn"))
+    UpdateScheduledQueryResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledQueryName, name: "name"))
+    UpdateScheduledQueryResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledQueryDescription, name: "description"))
+    UpdateScheduledQueryResponse.add_member(:query_language, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryLanguage, name: "queryLanguage"))
+    UpdateScheduledQueryResponse.add_member(:query_string, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryString, name: "queryString"))
+    UpdateScheduledQueryResponse.add_member(:log_group_identifiers, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledQueryLogGroupIdentifiers, name: "logGroupIdentifiers"))
+    UpdateScheduledQueryResponse.add_member(:schedule_expression, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleExpression, name: "scheduleExpression"))
+    UpdateScheduledQueryResponse.add_member(:timezone, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleTimezone, name: "timezone"))
+    UpdateScheduledQueryResponse.add_member(:start_time_offset, ::Smithy::Schema::Shapes::MemberShape.new(target: StartTimeOffset, name: "startTimeOffset"))
+    UpdateScheduledQueryResponse.add_member(:end_time_offset, ::Smithy::Schema::Shapes::MemberShape.new(target: EndTimeOffset, name: "endTimeOffset"))
+    UpdateScheduledQueryResponse.add_member(:destination_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: DestinationConfiguration, name: "destinationConfiguration"))
+    UpdateScheduledQueryResponse.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledQueryState, name: "state"))
+    UpdateScheduledQueryResponse.add_member(:schedule_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleType, name: "scheduleType"))
+    UpdateScheduledQueryResponse.add_member(:last_triggered_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastTriggeredTime"))
+    UpdateScheduledQueryResponse.add_member(:last_execution_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionStatus, name: "lastExecutionStatus"))
+    UpdateScheduledQueryResponse.add_member(:schedule_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "scheduleStartTime"))
+    UpdateScheduledQueryResponse.add_member(:schedule_end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "scheduleEndTime"))
+    UpdateScheduledQueryResponse.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "executionRoleArn"))
+    UpdateScheduledQueryResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "creationTime"))
+    UpdateScheduledQueryResponse.add_member(:last_updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastUpdatedTime"))
+    UpdateScheduledQueryResponse.type = Types::UpdateScheduledQueryResponse
     UpperCaseString.add_member(:with_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: UpperCaseStringWithKeys, name: "withKeys", traits: {"smithy.api#required" => {}}))
     UpperCaseString.type = Types::UpperCaseString
     UpperCaseStringWithKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WithKey, name: "member"))
@@ -1804,7 +2417,7 @@ module Aws::CloudWatchLogs
       service.id = "com.amazonaws.cloudwatchlogs#Logs_20140328"
       service.name = "Logs20140328"
       service.version = "2014-03-28"
-      service.traits = {"aws.api#service" => {"sdkId" => "CloudWatch Logs", "arnNamespace" => "logs", "cloudFormationName" => "Logs", "cloudTrailEventSource" => "logs.amazonaws.com", "docId" => "logs-2014-03-28", "endpointPrefix" => "logs"}, "aws.auth#sigv4" => {"name" => "logs"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "Amazon CloudWatch Logs", "smithy.api#xmlNamespace" => {"uri" => "http://monitoring.amazonaws.com/doc/2014-03-28/"}}
+      service.traits = {"aws.api#service" => {"sdkId" => "CloudWatch Logs", "arnNamespace" => "logs", "cloudFormationName" => "Logs", "cloudTrailEventSource" => "logs.amazonaws.com", "docId" => "logs-2014-03-28", "endpointPrefix" => "logs"}, "aws.auth#sigv4" => {"name" => "logs"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "Amazon CloudWatch Logs", "smithy.api#xmlNamespace" => {"uri" => "http://monitoring.amazonaws.com/doc/2014-03-28/"}, "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}, {"fn" => "stringEquals", "argv" => [{"ref" => "Region"}, "us-gov-east-1"]}, {"fn" => "stringEquals", "argv" => [{"ref" => "Region"}, "us-gov-west-1"]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://logs-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://logs.us-gov-east-1.amazonaws.com", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://logs.us-gov-west-1.amazonaws.com", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://logs-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://logs.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://logs.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 15, "nodes" => "/////wAAAAH/////AAAAAAAAAA4AAAADAAAAAQAAAAQF9eENAAAAAgAAAAUF9eENAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEMAAAABQX14QoF9eELAAAABAAAAAwAAAAJAAAABgAAAAoF9eEJAAAABwX14QYAAAALAAAACAX14QcF9eEIAAAABQAAAA0F9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAAPAAAABAX14QIF9eED"}}
       service.add_operation(:associate_kms_key, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cloudwatchlogs#AssociateKmsKey"
         operation.name = "AssociateKmsKey"
@@ -1816,6 +2429,18 @@ module Aws::CloudWatchLogs
         operation.errors << ServiceUnavailableException
         operation.traits = {}
       end)
+      service.add_operation(:associate_source_to_s3_table_integration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cloudwatchlogs#AssociateSourceToS3TableIntegration"
+        operation.name = "AssociateSourceToS3TableIntegration"
+        operation.input = AssociateSourceToS3TableIntegrationRequest
+        operation.output = AssociateSourceToS3TableIntegrationResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {}
+      end)
       service.add_operation(:cancel_export_task, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cloudwatchlogs#CancelExportTask"
         operation.name = "CancelExportTask"
@@ -1825,6 +2450,18 @@ module Aws::CloudWatchLogs
         operation.errors << InvalidParameterException
         operation.errors << ResourceNotFoundException
         operation.errors << ServiceUnavailableException
+        operation.traits = {}
+      end)
+      service.add_operation(:cancel_import_task, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cloudwatchlogs#CancelImportTask"
+        operation.name = "CancelImportTask"
+        operation.input = CancelImportTaskRequest
+        operation.output = CancelImportTaskResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InvalidOperationException
+        operation.errors << InvalidParameterException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
         operation.traits = {}
       end)
       service.add_operation(:create_delivery, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -1852,6 +2489,20 @@ module Aws::CloudWatchLogs
         operation.errors << ResourceAlreadyExistsException
         operation.errors << ResourceNotFoundException
         operation.errors << ServiceUnavailableException
+        operation.traits = {}
+      end)
+      service.add_operation(:create_import_task, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cloudwatchlogs#CreateImportTask"
+        operation.name = "CreateImportTask"
+        operation.input = CreateImportTaskRequest
+        operation.output = CreateImportTaskResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InvalidOperationException
+        operation.errors << InvalidParameterException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:create_log_anomaly_detector, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -1887,6 +2538,33 @@ module Aws::CloudWatchLogs
         operation.errors << ResourceAlreadyExistsException
         operation.errors << ResourceNotFoundException
         operation.errors << ServiceUnavailableException
+        operation.traits = {}
+      end)
+      service.add_operation(:create_lookup_table, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cloudwatchlogs#CreateLookupTable"
+        operation.name = "CreateLookupTable"
+        operation.input = CreateLookupTableRequest
+        operation.output = CreateLookupTableResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InvalidParameterException
+        operation.errors << LimitExceededException
+        operation.errors << ResourceAlreadyExistsException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ValidationException
+        operation.traits = {}
+      end)
+      service.add_operation(:create_scheduled_query, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cloudwatchlogs#CreateScheduledQuery"
+        operation.name = "CreateScheduledQuery"
+        operation.input = CreateScheduledQueryRequest
+        operation.output = CreateScheduledQueryResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:delete_account_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -2015,6 +2693,7 @@ module Aws::CloudWatchLogs
         operation.errors << OperationAbortedException
         operation.errors << ResourceNotFoundException
         operation.errors << ServiceUnavailableException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:delete_log_stream, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -2024,6 +2703,18 @@ module Aws::CloudWatchLogs
         operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
         operation.errors << InvalidParameterException
         operation.errors << OperationAbortedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ValidationException
+        operation.traits = {}
+      end)
+      service.add_operation(:delete_lookup_table, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cloudwatchlogs#DeleteLookupTable"
+        operation.name = "DeleteLookupTable"
+        operation.input = DeleteLookupTableRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << InvalidParameterException
         operation.errors << ResourceNotFoundException
         operation.errors << ServiceUnavailableException
         operation.traits = {}
@@ -2071,6 +2762,18 @@ module Aws::CloudWatchLogs
         operation.errors << ServiceUnavailableException
         operation.traits = {}
       end)
+      service.add_operation(:delete_scheduled_query, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cloudwatchlogs#DeleteScheduledQuery"
+        operation.name = "DeleteScheduledQuery"
+        operation.input = DeleteScheduledQueryRequest
+        operation.output = DeleteScheduledQueryResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {}
+      end)
       service.add_operation(:delete_subscription_filter, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cloudwatchlogs#DeleteSubscriptionFilter"
         operation.name = "DeleteSubscriptionFilter"
@@ -2080,6 +2783,20 @@ module Aws::CloudWatchLogs
         operation.errors << OperationAbortedException
         operation.errors << ResourceNotFoundException
         operation.errors << ServiceUnavailableException
+        operation.traits = {}
+      end)
+      service.add_operation(:delete_syslog_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cloudwatchlogs#DeleteSyslogConfiguration"
+        operation.name = "DeleteSyslogConfiguration"
+        operation.input = DeleteSyslogConfigurationRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << InvalidOperationException
+        operation.errors << InvalidParameterException
+        operation.errors << OperationAbortedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottlingException
         operation.traits = {}
       end)
       service.add_operation(:delete_transformer, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -2184,6 +2901,30 @@ module Aws::CloudWatchLogs
         operation.errors << ServiceUnavailableException
         operation.traits = {}
       end)
+      service.add_operation(:describe_import_task_batches, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cloudwatchlogs#DescribeImportTaskBatches"
+        operation.name = "DescribeImportTaskBatches"
+        operation.input = DescribeImportTaskBatchesRequest
+        operation.output = DescribeImportTaskBatchesResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InvalidOperationException
+        operation.errors << InvalidParameterException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {}
+      end)
+      service.add_operation(:describe_import_tasks, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cloudwatchlogs#DescribeImportTasks"
+        operation.name = "DescribeImportTasks"
+        operation.input = DescribeImportTasksRequest
+        operation.output = DescribeImportTasksResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InvalidOperationException
+        operation.errors << InvalidParameterException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {}
+      end)
       service.add_operation(:describe_index_policies, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cloudwatchlogs#DescribeIndexPolicies"
         operation.name = "DescribeIndexPolicies"
@@ -2216,6 +2957,17 @@ module Aws::CloudWatchLogs
         operation.errors << ServiceUnavailableException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeLogStreams.new
+      end)
+      service.add_operation(:describe_lookup_tables, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cloudwatchlogs#DescribeLookupTables"
+        operation.name = "DescribeLookupTables"
+        operation.input = DescribeLookupTablesRequest
+        operation.output = DescribeLookupTablesResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InvalidParameterException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.traits = {}
       end)
       service.add_operation(:describe_metric_filters, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cloudwatchlogs#DescribeMetricFilters"
@@ -2276,6 +3028,18 @@ module Aws::CloudWatchLogs
         operation.errors << OperationAbortedException
         operation.errors << ResourceNotFoundException
         operation.errors << ServiceUnavailableException
+        operation.traits = {}
+      end)
+      service.add_operation(:disassociate_source_from_s3_table_integration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cloudwatchlogs#DisassociateSourceFromS3TableIntegration"
+        operation.name = "DisassociateSourceFromS3TableIntegration"
+        operation.input = DisassociateSourceFromS3TableIntegrationRequest
+        operation.output = DisassociateSourceFromS3TableIntegrationResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:filter_log_events, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -2378,6 +3142,17 @@ module Aws::CloudWatchLogs
         operation.traits = {"smithy.test#smokeTests" => [{"id" => "GetLogEventsFailure", "params" => {"logGroupName" => "fakegroup", "logStreamName" => "fakestream"}, "vendorParams" => {"region" => "us-west-2"}, "vendorParamsShape" => "aws.test#AwsVendorParams", "expect" => {"failure" => {}}}]}
         operation[:paginator] = Paginators::GetLogEvents.new
       end)
+      service.add_operation(:get_log_fields, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cloudwatchlogs#GetLogFields"
+        operation.name = "GetLogFields"
+        operation.input = GetLogFieldsRequest
+        operation.output = GetLogFieldsResponse
+        operation.errors << InvalidParameterException
+        operation.errors << OperationAbortedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.traits = {}
+      end)
       service.add_operation(:get_log_group_fields, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cloudwatchlogs#GetLogGroupFields"
         operation.name = "GetLogGroupFields"
@@ -2399,7 +3174,7 @@ module Aws::CloudWatchLogs
         operation.errors << InvalidParameterException
         operation.errors << LimitExceededException
         operation.errors << ResourceNotFoundException
-        operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "streaming-"}}
+        operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "stream-"}}
       end)
       service.add_operation(:get_log_record, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cloudwatchlogs#GetLogRecord"
@@ -2408,6 +3183,17 @@ module Aws::CloudWatchLogs
         operation.output = GetLogRecordResponse
         operation.errors << InvalidParameterException
         operation.errors << LimitExceededException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.traits = {}
+      end)
+      service.add_operation(:get_lookup_table, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cloudwatchlogs#GetLookupTable"
+        operation.name = "GetLookupTable"
+        operation.input = GetLookupTableRequest
+        operation.output = GetLookupTableResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InvalidParameterException
         operation.errors << ResourceNotFoundException
         operation.errors << ServiceUnavailableException
         operation.traits = {}
@@ -2422,6 +3208,43 @@ module Aws::CloudWatchLogs
         operation.errors << ServiceUnavailableException
         operation.traits = {}
       end)
+      service.add_operation(:get_scheduled_query, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cloudwatchlogs#GetScheduledQuery"
+        operation.name = "GetScheduledQuery"
+        operation.input = GetScheduledQueryRequest
+        operation.output = GetScheduledQueryResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {}
+      end)
+      service.add_operation(:get_scheduled_query_history, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cloudwatchlogs#GetScheduledQueryHistory"
+        operation.name = "GetScheduledQueryHistory"
+        operation.input = GetScheduledQueryHistoryRequest
+        operation.output = GetScheduledQueryHistoryResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {}
+        operation[:paginator] = Paginators::GetScheduledQueryHistory.new
+      end)
+      service.add_operation(:get_storage_tier_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cloudwatchlogs#GetStorageTierPolicy"
+        operation.name = "GetStorageTierPolicy"
+        operation.input = GetStorageTierPolicyRequest
+        operation.output = GetStorageTierPolicyResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InvalidParameterException
+        operation.errors << OperationAbortedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.traits = {}
+      end)
       service.add_operation(:get_transformer, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cloudwatchlogs#GetTransformer"
         operation.name = "GetTransformer"
@@ -2432,6 +3255,17 @@ module Aws::CloudWatchLogs
         operation.errors << ResourceNotFoundException
         operation.errors << ServiceUnavailableException
         operation.traits = {}
+      end)
+      service.add_operation(:list_aggregate_log_group_summaries, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cloudwatchlogs#ListAggregateLogGroupSummaries"
+        operation.name = "ListAggregateLogGroupSummaries"
+        operation.input = ListAggregateLogGroupSummariesRequest
+        operation.output = ListAggregateLogGroupSummariesResponse
+        operation.errors << InvalidParameterException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ValidationException
+        operation.traits = {}
+        operation[:paginator] = Paginators::ListAggregateLogGroupSummaries.new
       end)
       service.add_operation(:list_anomalies, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cloudwatchlogs#ListAnomalies"
@@ -2487,6 +3321,44 @@ module Aws::CloudWatchLogs
         operation.traits = {}
         operation[:paginator] = Paginators::ListLogGroupsForQuery.new
       end)
+      service.add_operation(:list_scheduled_queries, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cloudwatchlogs#ListScheduledQueries"
+        operation.name = "ListScheduledQueries"
+        operation.input = ListScheduledQueriesRequest
+        operation.output = ListScheduledQueriesResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {}
+        operation[:paginator] = Paginators::ListScheduledQueries.new
+      end)
+      service.add_operation(:list_sources_for_s3_table_integration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cloudwatchlogs#ListSourcesForS3TableIntegration"
+        operation.name = "ListSourcesForS3TableIntegration"
+        operation.input = ListSourcesForS3TableIntegrationRequest
+        operation.output = ListSourcesForS3TableIntegrationResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {}
+        operation[:paginator] = Paginators::ListSourcesForS3TableIntegration.new
+      end)
+      service.add_operation(:list_syslog_configurations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cloudwatchlogs#ListSyslogConfigurations"
+        operation.name = "ListSyslogConfigurations"
+        operation.input = ListSyslogConfigurationsRequest
+        operation.output = ListSyslogConfigurationsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InvalidOperationException
+        operation.errors << InvalidParameterException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottlingException
+        operation.traits = {}
+      end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cloudwatchlogs#ListTagsForResource"
         operation.name = "ListTagsForResource"
@@ -2514,6 +3386,19 @@ module Aws::CloudWatchLogs
         operation.errors << InvalidParameterException
         operation.errors << LimitExceededException
         operation.errors << OperationAbortedException
+        operation.errors << ServiceUnavailableException
+        operation.traits = {}
+      end)
+      service.add_operation(:put_bearer_token_authentication, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cloudwatchlogs#PutBearerTokenAuthentication"
+        operation.name = "PutBearerTokenAuthentication"
+        operation.input = PutBearerTokenAuthenticationRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << InvalidOperationException
+        operation.errors << InvalidParameterException
+        operation.errors << OperationAbortedException
+        operation.errors << ResourceNotFoundException
         operation.errors << ServiceUnavailableException
         operation.traits = {}
       end)
@@ -2622,6 +3507,19 @@ module Aws::CloudWatchLogs
         operation.errors << UnrecognizedClientException
         operation.traits = {}
       end)
+      service.add_operation(:put_log_group_deletion_protection, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cloudwatchlogs#PutLogGroupDeletionProtection"
+        operation.name = "PutLogGroupDeletionProtection"
+        operation.input = PutLogGroupDeletionProtectionRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << InvalidOperationException
+        operation.errors << InvalidParameterException
+        operation.errors << OperationAbortedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.traits = {}
+      end)
       service.add_operation(:put_metric_filter, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cloudwatchlogs#PutMetricFilter"
         operation.name = "PutMetricFilter"
@@ -2669,6 +3567,18 @@ module Aws::CloudWatchLogs
         operation.errors << ServiceUnavailableException
         operation.traits = {}
       end)
+      service.add_operation(:put_storage_tier_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cloudwatchlogs#PutStorageTierPolicy"
+        operation.name = "PutStorageTierPolicy"
+        operation.input = PutStorageTierPolicyRequest
+        operation.output = PutStorageTierPolicyResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InvalidParameterException
+        operation.errors << OperationAbortedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.traits = {}
+      end)
       service.add_operation(:put_subscription_filter, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cloudwatchlogs#PutSubscriptionFilter"
         operation.name = "PutSubscriptionFilter"
@@ -2680,6 +3590,20 @@ module Aws::CloudWatchLogs
         operation.errors << OperationAbortedException
         operation.errors << ResourceNotFoundException
         operation.errors << ServiceUnavailableException
+        operation.traits = {}
+      end)
+      service.add_operation(:put_syslog_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cloudwatchlogs#PutSyslogConfiguration"
+        operation.name = "PutSyslogConfiguration"
+        operation.input = PutSyslogConfigurationRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << InvalidOperationException
+        operation.errors << InvalidParameterException
+        operation.errors << OperationAbortedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottlingException
         operation.traits = {}
       end)
       service.add_operation(:put_transformer, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -2705,7 +3629,7 @@ module Aws::CloudWatchLogs
         operation.errors << InvalidParameterException
         operation.errors << LimitExceededException
         operation.errors << ResourceNotFoundException
-        operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "streaming-"}}
+        operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "stream-"}}
       end)
       service.add_operation(:start_query, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cloudwatchlogs#StartQuery"
@@ -2819,6 +3743,31 @@ module Aws::CloudWatchLogs
         operation.errors << OperationAbortedException
         operation.errors << ResourceNotFoundException
         operation.errors << ServiceUnavailableException
+        operation.traits = {}
+      end)
+      service.add_operation(:update_lookup_table, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cloudwatchlogs#UpdateLookupTable"
+        operation.name = "UpdateLookupTable"
+        operation.input = UpdateLookupTableRequest
+        operation.output = UpdateLookupTableResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InvalidParameterException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ValidationException
+        operation.traits = {}
+      end)
+      service.add_operation(:update_scheduled_query, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cloudwatchlogs#UpdateScheduledQuery"
+        operation.name = "UpdateScheduledQuery"
+        operation.input = UpdateScheduledQueryRequest
+        operation.output = UpdateScheduledQueryResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
     end

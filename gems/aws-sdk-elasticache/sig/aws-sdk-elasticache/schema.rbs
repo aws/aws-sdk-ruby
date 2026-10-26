@@ -79,6 +79,7 @@ module Aws::ElastiCache
     CompleteMigrationMessage: StructureShape
     CompleteMigrationResponse: StructureShape
     ConfigureShard: StructureShape
+    ConnectionType: EnumShape
     CopyServerlessCacheSnapshotRequest: StructureShape
     CopyServerlessCacheSnapshotResponse: StructureShape
     CopySnapshotMessage: StructureShape
@@ -168,9 +169,11 @@ module Aws::ElastiCache
     DisassociateGlobalReplicationGroupResult: StructureShape
     Double: FloatShape
     DuplicateUserNameFault: StructureShape
+    Durability: EnumShape
     EC2SecurityGroup: StructureShape
     EC2SecurityGroupList: ListShape
     ECPUPerSecond: StructureShape
+    EffectiveDurability: EnumShape
     Endpoint: StructureShape
     EngineDefaults: StructureShape
     EngineType: StringShape
@@ -371,6 +374,7 @@ module Aws::ElastiCache
     SourceType: EnumShape
     StartMigrationMessage: StructureShape
     StartMigrationResponse: StructureShape
+    StorageEncryptionType: EnumShape
     String: StringShape
     Subnet: StructureShape
     SubnetIdentifierList: ListShape

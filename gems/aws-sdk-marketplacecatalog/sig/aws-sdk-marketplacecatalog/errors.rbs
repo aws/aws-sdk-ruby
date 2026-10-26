@@ -23,6 +23,7 @@ module Aws::MarketplaceCatalog
     end
     class ValidationException < Smithy::Client::ServiceError
       def message: () -> String?
+      def validation_exception_field_list: () -> Array[Types::ValidationExceptionField]?
     end
   end
 end

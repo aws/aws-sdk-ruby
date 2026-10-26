@@ -241,6 +241,8 @@ module Aws::TranscribeStreaming
       def identify_multiple_languages: () -> bool?
       def vocabulary_names: () -> String?
       def vocabulary_filter_names: () -> String?
+      def session_resume_window: () -> Integer?
+      def transcript_format: () -> String?
     end
     def start_stream_transcription: (
       ?language_code: String,
@@ -283,7 +285,9 @@ module Aws::TranscribeStreaming
       ?preferred_language: String,
       ?identify_multiple_languages: bool,
       ?vocabulary_names: String,
-      ?vocabulary_filter_names: String
+      ?vocabulary_filter_names: String,
+      ?session_resume_window: Integer,
+      ?transcript_format: String
     ) -> _StartStreamTranscriptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartStreamTranscriptionResponse
   end
 end

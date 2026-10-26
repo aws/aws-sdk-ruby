@@ -5,8 +5,33 @@ module Aws::Kinesis
     AccessDeniedException: StructureShape
     AddTagsToStreamInput: StructureShape
     BooleanObject: BooleanShape
+    BucketARN: StringShape
+    ChannelARN: StringShape
+    ChannelCountObject: IntegerShape
+    ChannelDescription: StructureShape
+    ChannelDestinationType: EnumShape
+    ChannelEncryptionConfiguration: StructureShape
+    ChannelEncryptionType: EnumShape
+    ChannelId: StringShape
+    ChannelLoggingConfiguration: StructureShape
+    ChannelLoggingUpdateInput: StructureShape
+    ChannelName: StringShape
+    ChannelStatus: EnumShape
+    ChannelStatusReason: StringShape
+    ChannelStreamConfiguration: StructureShape
+    ChannelStreamConfigurationList: ListShape
+    ChannelStreamDescription: StructureShape
+    ChannelStreamDescriptionList: ListShape
+    ChannelStreamIdentifier: StructureShape
+    ChannelStreamIdentifierList: ListShape
+    ChannelSummary: StructureShape
+    ChannelSummaryList: ListShape
     ChildShard: StructureShape
     ChildShardList: ListShape
+    CloudWatchLogGroupName: StringShape
+    CloudWatchLogStreamName: StringShape
+    CloudWatchLogs: StructureShape
+    CloudWatchLogsUpdateInput: StructureShape
     Consumer: StructureShape
     ConsumerARN: StringShape
     ConsumerCountObject: IntegerShape
@@ -14,12 +39,21 @@ module Aws::Kinesis
     ConsumerList: ListShape
     ConsumerName: StringShape
     ConsumerStatus: EnumShape
+    CreateChannelInput: StructureShape
+    CreateChannelOutput: StructureShape
     CreateStreamInput: StructureShape
     Data: BlobShape
+    DataFreshnessInSeconds: IntegerShape
+    DeadLetterQueueS3Configuration: StructureShape
     DecreaseStreamRetentionPeriodInput: StructureShape
+    DeleteChannelInput: StructureShape
     DeleteResourcePolicyInput: StructureShape
     DeleteStreamInput: StructureShape
     DeregisterStreamConsumerInput: StructureShape
+    DescribeAccountSettingsInput: StructureShape
+    DescribeAccountSettingsOutput: StructureShape
+    DescribeChannelInput: StructureShape
+    DescribeChannelOutput: StructureShape
     DescribeLimitsInput: StructureShape
     DescribeLimitsOutput: StructureShape
     DescribeStreamConsumerInput: StructureShape
@@ -31,6 +65,7 @@ module Aws::Kinesis
     DescribeStreamSummaryOutput: StructureShape
     DisableEnhancedMonitoringInput: StructureShape
     DisableEnhancedMonitoringOutput: StructureShape
+    DryRunOperationException: StructureShape
     EnableEnhancedMonitoringInput: StructureShape
     EnableEnhancedMonitoringOutput: StructureShape
     EncryptionType: EnumShape
@@ -38,8 +73,10 @@ module Aws::Kinesis
     EnhancedMonitoringList: ListShape
     ErrorCode: StringShape
     ErrorMessage: StringShape
+    ExpectedBucketOwner: StringShape
     ExpiredIteratorException: StructureShape
     ExpiredNextTokenException: StructureShape
+    GSRSchemaARN: StringShape
     GetRecordsInput: StructureShape
     GetRecordsInputLimit: IntegerShape
     GetRecordsOutput: StructureShape
@@ -60,6 +97,9 @@ module Aws::Kinesis
     KMSThrottlingException: StructureShape
     KeyId: StringShape
     LimitExceededException: StructureShape
+    ListChannelsInput: StructureShape
+    ListChannelsInputLimit: IntegerShape
+    ListChannelsOutput: StructureShape
     ListShardsInput: StructureShape
     ListShardsInputLimit: IntegerShape
     ListShardsOutput: StructureShape
@@ -74,14 +114,25 @@ module Aws::Kinesis
     ListTagsForStreamInput: StructureShape
     ListTagsForStreamInputLimit: IntegerShape
     ListTagsForStreamOutput: StructureShape
+    MaxRecordSizeInKiB: IntegerShape
     MergeShardsInput: StructureShape
     MetricsName: EnumShape
     MetricsNameList: ListShape
     MillisBehindLatest: IntegerShape
+    MinimumThroughputBillingCommitmentInput: StructureShape
+    MinimumThroughputBillingCommitmentInputStatus: EnumShape
+    MinimumThroughputBillingCommitmentOutput: StructureShape
+    MinimumThroughputBillingCommitmentOutputStatus: EnumShape
+    NaturalIntegerObject: IntegerShape
     NextToken: StringShape
     OnDemandStreamCountLimitObject: IntegerShape
     OnDemandStreamCountObject: IntegerShape
+    PartitionField: StructureShape
+    PartitionFieldList: ListShape
     PartitionKey: StringShape
+    PartitionSourceName: StringShape
+    PartitionSpec: StructureShape
+    PartitionTransform: EnumShape
     Policy: StringShape
     PositiveIntegerObject: IntegerShape
     ProvisionedThroughputExceededException: StructureShape
@@ -95,6 +146,9 @@ module Aws::Kinesis
     PutRecordsResultEntryList: ListShape
     PutResourcePolicyInput: StructureShape
     Record: StructureShape
+    RecordConfiguration: StructureShape
+    RecordDistributionStrategy: EnumShape
+    RecordFormatType: EnumShape
     RecordList: ListShape
     RegisterStreamConsumerInput: StructureShape
     RegisterStreamConsumerOutput: StructureShape
@@ -103,6 +157,23 @@ module Aws::Kinesis
     ResourceInUseException: StructureShape
     ResourceNotFoundException: StructureShape
     RetentionPeriodHours: IntegerShape
+    RoleARN: StringShape
+    S3CompressionType: EnumShape
+    S3DestinationConfiguration: StructureShape
+    S3DestinationDescription: StructureShape
+    S3DestinationUpdateInput: StructureShape
+    S3ErrorOutputPrefix: StringShape
+    S3OutputKeyTemplate: StringShape
+    S3StorageClass: EnumShape
+    S3StorageConfiguration: StructureShape
+    S3TablesCompressionType: EnumShape
+    S3TablesConfiguration: StructureShape
+    S3TablesConfigurationList: ListShape
+    S3TablesDestinationConfiguration: StructureShape
+    S3TablesDestinationDescription: StructureShape
+    S3TablesDestinationUpdateInput: StructureShape
+    S3TablesNamespace: StringShape
+    S3TablesTableName: StringShape
     ScalingType: EnumShape
     SequenceNumber: StringShape
     SequenceNumberRange: StructureShape
@@ -122,6 +193,9 @@ module Aws::Kinesis
     StreamARN: StringShape
     StreamDescription: StructureShape
     StreamDescriptionSummary: StructureShape
+    StreamFilter: StructureShape
+    StreamFilterList: ListShape
+    StreamId: StringShape
     StreamMode: EnumShape
     StreamModeDetails: StructureShape
     StreamName: StringShape
@@ -133,6 +207,7 @@ module Aws::Kinesis
     SubscribeToShardEventStream: UnionShape
     SubscribeToShardInput: StructureShape
     SubscribeToShardOutput: StructureShape
+    TableBucketARN: StringShape
     Tag: StructureShape
     TagKey: StringShape
     TagKeyList: ListShape
@@ -142,10 +217,19 @@ module Aws::Kinesis
     TagValue: StringShape
     Timestamp: TimestampShape
     UntagResourceInput: StructureShape
+    UpdateAccountSettingsInput: StructureShape
+    UpdateAccountSettingsOutput: StructureShape
+    UpdateChannelInput: StructureShape
+    UpdateChannelOutput: StructureShape
+    UpdateMaxRecordSizeInput: StructureShape
     UpdateShardCountInput: StructureShape
     UpdateShardCountOutput: StructureShape
     UpdateStreamModeInput: StructureShape
+    UpdateStreamRecordDistributionStrategyInput: StructureShape
+    UpdateStreamWarmThroughputInput: StructureShape
+    UpdateStreamWarmThroughputOutput: StructureShape
     ValidationException: StructureShape
+    WarmThroughputObject: StructureShape
 
     Kinesis20131202: ServiceShape
   end

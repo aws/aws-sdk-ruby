@@ -1,0 +1,326 @@
+module Aws::Sustainability
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module Dimension
+      USAGE_ACCOUNT_ID: String
+      REGION: String
+      SERVICE: String
+    end
+
+    class DimensionEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dimension: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dimension: String?
+      attr_accessor value: String?
+    end
+
+    class Emissions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: Float,
+        ?unit: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: Float?
+      attr_accessor unit: String?
+    end
+
+    module EmissionsType
+      TOTAL_LBM_CARBON_EMISSIONS: String
+      TOTAL_MBM_CARBON_EMISSIONS: String
+      TOTAL_SCOPE_1_CARBON_EMISSIONS: String
+      TOTAL_SCOPE_2_LBM_CARBON_EMISSIONS: String
+      TOTAL_SCOPE_2_MBM_CARBON_EMISSIONS: String
+      TOTAL_SCOPE_3_LBM_CARBON_EMISSIONS: String
+      TOTAL_SCOPE_3_MBM_CARBON_EMISSIONS: String
+    end
+
+    module EmissionsUnit
+      MT_CO2E: String
+    end
+
+    class EstimatedCarbonEmissions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?time_period: Types::TimePeriod,
+        ?dimensions_values: Hash[String, String],
+        ?model_version: String,
+        ?emissions_values: Hash[String, Types::Emissions],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor time_period: Types::TimePeriod?
+      attr_accessor dimensions_values: Hash[String, String]?
+      attr_accessor model_version: String?
+      attr_accessor emissions_values: Hash[String, Types::Emissions]?
+    end
+
+    class EstimatedWaterAllocation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?time_period: Types::TimePeriod,
+        ?dimensions_values: Hash[String, String],
+        ?model_version: String,
+        ?allocation_values: Hash[String, Types::WaterAllocation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor time_period: Types::TimePeriod?
+      attr_accessor dimensions_values: Hash[String, String]?
+      attr_accessor model_version: String?
+      attr_accessor allocation_values: Hash[String, Types::WaterAllocation]?
+    end
+
+    class FilterExpression
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dimensions: Hash[String, Array[String]],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dimensions: Hash[String, Array[String]]?
+    end
+
+    class GetEstimatedCarbonEmissionsDimensionValuesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?time_period: Types::TimePeriod,
+        ?dimensions: Array[String],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor time_period: Types::TimePeriod?
+      attr_accessor dimensions: Array[String]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class GetEstimatedCarbonEmissionsDimensionValuesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?results: Array[Types::DimensionEntry],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor results: Array[Types::DimensionEntry]?
+      attr_accessor next_token: String?
+    end
+
+    class GetEstimatedCarbonEmissionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?time_period: Types::TimePeriod,
+        ?group_by: Array[String],
+        ?filter_by: Types::FilterExpression,
+        ?emissions_types: Array[String],
+        ?granularity: String,
+        ?granularity_configuration: Types::GranularityConfiguration,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor time_period: Types::TimePeriod?
+      attr_accessor group_by: Array[String]?
+      attr_accessor filter_by: Types::FilterExpression?
+      attr_accessor emissions_types: Array[String]?
+      attr_accessor granularity: String?
+      attr_accessor granularity_configuration: Types::GranularityConfiguration?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class GetEstimatedCarbonEmissionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?results: Array[Types::EstimatedCarbonEmissions],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor results: Array[Types::EstimatedCarbonEmissions]?
+      attr_accessor next_token: String?
+    end
+
+    class GetEstimatedWaterAllocationDimensionValuesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?time_period: Types::TimePeriod,
+        ?dimensions: Array[String],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor time_period: Types::TimePeriod?
+      attr_accessor dimensions: Array[String]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class GetEstimatedWaterAllocationDimensionValuesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?results: Array[Types::DimensionEntry],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor results: Array[Types::DimensionEntry]?
+      attr_accessor next_token: String?
+    end
+
+    class GetEstimatedWaterAllocationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?time_period: Types::TimePeriod,
+        ?group_by: Array[String],
+        ?filter_by: Types::FilterExpression,
+        ?allocation_types: Array[String],
+        ?granularity: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor time_period: Types::TimePeriod?
+      attr_accessor group_by: Array[String]?
+      attr_accessor filter_by: Types::FilterExpression?
+      attr_accessor allocation_types: Array[String]?
+      attr_accessor granularity: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class GetEstimatedWaterAllocationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?results: Array[Types::EstimatedWaterAllocation],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor results: Array[Types::EstimatedWaterAllocation]?
+      attr_accessor next_token: String?
+    end
+
+    class GranularityConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fiscal_year_start_month: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fiscal_year_start_month: Integer?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module TimeGranularity
+      YEARLY_CALENDAR: String
+      YEARLY_FISCAL: String
+      QUARTERLY_CALENDAR: String
+      QUARTERLY_FISCAL: String
+      MONTHLY: String
+    end
+
+    class TimePeriod
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start: Time,
+        ?end: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start: Time?
+      attr_accessor end: Time?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class WaterAllocation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: Float,
+        ?unit: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: Float?
+      attr_accessor unit: String?
+    end
+
+    module WaterAllocationType
+      TOTAL_WATER_WITHDRAWALS: String
+    end
+
+    module WaterAllocationUnit
+      CUBIC_METERS: String
+    end
+  end
+end

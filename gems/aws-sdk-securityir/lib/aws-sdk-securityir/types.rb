@@ -143,6 +143,22 @@ module Aws::SecurityIR
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Represents a single metadata entry associated with a case. Each entry consists of a key-value pair that provides additional contextual information about the case, such as classification tags, custom attributes, or system-generated properties. </p>
+    # @!attribute key
+    #   <p>The identifier for the metadata field. This key uniquely identifies the type of metadata being stored, such as "severity", "category", or "assignee".</p>
+    #   @return [String]
+    # @!attribute value
+    #   <p>The value associated with the metadata key. This contains the actual data for the metadata field identified by the key.</p>
+    #   @return [String]
+    class CaseMetadataEntry < Struct.new(
+      nil,
+      :key,
+      :value,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute case_id
     #   <p>Required element used in combination with CloseCase to identify the case ID to close.</p>
     #   @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_CloseCase.html#securityir-CloseCase-request-uri-caseId API Reference
@@ -511,6 +527,10 @@ module Aws::SecurityIR
     #   <p>Response element for GetCase that provides the date a specified case was closed.</p>
     #   @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_GetCase.html#securityir-GetCase-response-closedDate API Reference
     #   @return [Time]
+    # @!attribute case_metadata
+    #   <p>Case response metadata</p>
+    #   @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_GetCase.html#securityir-GetCase-response-caseMetadata API Reference
+    #   @return [Array<Types::CaseMetadataEntry>]
     class GetCaseResponse < Struct.new(
       nil,
       :title,
@@ -532,6 +552,78 @@ module Aws::SecurityIR
       :impacted_services,
       :case_attachments,
       :closed_date,
+      :case_metadata,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute membership_id
+    #   The membership ID to retrieve metrics for.
+    #   @return [String]
+    # @!attribute start_date
+    #   The start of the day-aligned UTC window, inclusive.
+    #   @return [Time]
+    # @!attribute end_date
+    #   The end of the day-aligned UTC window, inclusive.
+    #   @return [Time]
+    class GetFindingMetricsRequest < Struct.new(
+      nil,
+      :membership_id,
+      :start_date,
+      :end_date,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # Finding-lifecycle metrics for a membership over the requested date range.
+    # @!attribute findings_ingested_security_hub
+    #   The number of findings ingested from AWS Security Hub during the requested date range.
+    #   @return [Integer]
+    # @!attribute findings_ingested_guard_duty
+    #   The number of findings ingested from Amazon GuardDuty during the requested date range.
+    #   @return [Integer]
+    # @!attribute findings_triaged
+    #   The number of findings triaged during the requested date range.
+    #   @return [Integer]
+    # @!attribute findings_triaged_false_positive
+    #   The number of triaged findings that were closed as false positives during the requested date range.
+    #   @return [Integer]
+    # @!attribute findings_investigated
+    #   The number of findings investigated during the requested date range.
+    #   @return [Integer]
+    # @!attribute findings_investigated_false_positive
+    #   The number of investigated findings that were closed as false positives during the requested date range.
+    #   @return [Integer]
+    # @!attribute findings_escalated
+    #   The number of findings escalated during the requested date range.
+    #   @return [Integer]
+    # @!attribute findings_escalated_false_positive
+    #   The number of escalated findings that were closed as false positives during the requested date range.
+    #   @return [Integer]
+    # @!attribute findings_true_positive
+    #   The number of findings confirmed as true positives during the requested date range.
+    #   @return [Integer]
+    # @!attribute findings_investigated_in_progress
+    #   The number of findings whose investigation was in progress during the requested date range.
+    #   @return [Integer]
+    # @!attribute findings_escalated_in_progress
+    #   The number of findings whose escalation was in progress during the requested date range.
+    #   @return [Integer]
+    class GetFindingMetricsResponse < Struct.new(
+      nil,
+      :findings_ingested_security_hub,
+      :findings_ingested_guard_duty,
+      :findings_triaged,
+      :findings_triaged_false_positive,
+      :findings_investigated,
+      :findings_investigated_false_positive,
+      :findings_escalated,
+      :findings_escalated_false_positive,
+      :findings_true_positive,
+      :findings_investigated_in_progress,
+      :findings_escalated_in_progress,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -690,11 +782,15 @@ module Aws::SecurityIR
     # @!attribute email
     #   <p/>
     #   @return [String]
+    # @!attribute communication_preferences
+    #   <p/>
+    #   @return [Array<String>]
     class IncidentResponder < Struct.new(
       nil,
       :name,
       :job_title,
       :email,
+      :communication_preferences,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -723,6 +819,62 @@ module Aws::SecurityIR
     class InvalidTokenException < Struct.new(
       nil,
       :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Represents an investigation action performed within a case. This structure captures the details of an automated or manual investigation, including its status, results, and user feedback.</p>
+    # @!attribute investigation_id
+    #   <p>The unique identifier for this investigation action. This ID is used to track and reference the specific investigation throughout its lifecycle.</p>
+    #   @return [String]
+    # @!attribute action_type
+    #   <p>The type of investigation action being performed. This categorizes the investigation method or approach used in the case.</p>
+    #   @return [String]
+    # @!attribute title
+    #   <p>Human-readable summary of the investigation focus. This provides a brief description of what the investigation is examining or analyzing.</p>
+    #   @return [String]
+    # @!attribute content
+    #   <p>Detailed investigation results in rich markdown format. This field contains the comprehensive findings, analysis, and conclusions from the investigation.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current execution status of the investigation. This indicates whether the investigation is pending, in progress, completed, or failed.</p>
+    #   @return [String]
+    # @!attribute last_updated
+    #   <p>ISO 8601 timestamp of the most recent status update. This indicates when the investigation was last modified or when its status last changed.</p>
+    #   @return [Time]
+    # @!attribute feedback
+    #   <p>User feedback for this investigation result. This contains the user's assessment and comments about the quality and usefulness of the investigation findings.</p>
+    #   @return [Types::InvestigationFeedback]
+    class InvestigationAction < Struct.new(
+      nil,
+      :investigation_id,
+      :action_type,
+      :title,
+      :content,
+      :status,
+      :last_updated,
+      :feedback,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Represents user feedback for an investigation result. This structure captures the user's evaluation of the investigation's quality, usefulness, and any additional comments.</p>
+    # @!attribute usefulness
+    #   <p>User assessment of the investigation result's quality and helpfulness. This rating indicates how valuable the investigation findings were in addressing the case.</p>
+    #   @return [String]
+    # @!attribute comment
+    #   <p>Optional user comments providing additional context about the investigation feedback. This allows users to explain their rating or provide suggestions for improvement.</p>
+    #   @return [String]
+    # @!attribute submitted_at
+    #   <p>ISO 8601 timestamp when the feedback was submitted. This records when the user provided their assessment of the investigation results.</p>
+    #   @return [Time]
+    class InvestigationFeedback < Struct.new(
+      nil,
+      :usefulness,
+      :comment,
+      :submitted_at,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -947,6 +1099,46 @@ module Aws::SecurityIR
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute next_token
+    #   <p>Investigation performed by an agent for a security incident request</p>
+    #   @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_ListInvestigations.html#securityir-ListInvestigations-request-nextToken API Reference
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>Investigation performed by an agent for a security incident request, returning max results</p>
+    #   @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_ListInvestigations.html#securityir-ListInvestigations-request-maxResults API Reference
+    #   @return [Integer]
+    # @!attribute case_id
+    #   <p>Investigation performed by an agent for a security incident per caseID</p>
+    #   @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_ListInvestigations.html#securityir-ListInvestigations-request-uri-caseId API Reference
+    #   @return [String]
+    class ListInvestigationsRequest < Struct.new(
+      nil,
+      :next_token,
+      :max_results,
+      :case_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_ListInvestigations.html#API_ListInvestigations_ResponseSyntax API Reference
+    # @!attribute next_token
+    #   <p>Investigation performed by an agent for a security incident for next Token</p>
+    #   @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_ListInvestigations.html#securityir-ListInvestigations-response-nextToken API Reference
+    #   @return [String]
+    # @!attribute investigation_actions
+    #   <p>Investigation performed by an agent for a security incid…Unique identifier for the specific investigation&gt;</p>
+    #   @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_ListInvestigations.html#securityir-ListInvestigations-response-investigationActions API Reference
+    #   @return [Array<Types::InvestigationAction>]
+    class ListInvestigationsResponse < Struct.new(
+      nil,
+      :next_token,
+      :investigation_actions,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p/>
     # @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_ListMemberships.html#securityir-ListMemberships-response-items API Reference
     # @!attribute membership_id
@@ -1111,6 +1303,41 @@ module Aws::SecurityIR
     class SecurityIncidentResponseNotActiveException < Struct.new(
       nil,
       :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute case_id
+    #   <p>Send feedback based on request caseID</p>
+    #   @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_SendFeedback.html#securityir-SendFeedback-request-uri-caseId API Reference
+    #   @return [String]
+    # @!attribute result_id
+    #   <p>Send feedback based on request result ID</p>
+    #   @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_SendFeedback.html#securityir-SendFeedback-request-uri-resultId API Reference
+    #   @return [String]
+    # @!attribute usefulness
+    #   <p>Required enum value indicating user assessment of result q.....</p>
+    #   @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_SendFeedback.html#securityir-SendFeedback-request-usefulness API Reference
+    #   @return [String]
+    # @!attribute comment
+    #   <p>Send feedback based on request comments</p>
+    #   @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_SendFeedback.html#securityir-SendFeedback-request-comment API Reference
+    #   @return [String]
+    class SendFeedbackRequest < Struct.new(
+      nil,
+      :case_id,
+      :result_id,
+      :usefulness,
+      :comment,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_SendFeedback.html#API_SendFeedback_ResponseSyntax API Reference
+    class SendFeedbackResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1337,6 +1564,10 @@ module Aws::SecurityIR
     #   <p>Optional element for UpdateCase to provide content to add accounts impacted.</p> <note> <p> AWS account ID's may appear less than 12 characters and need to be zero-prepended. An example would be <code>123123123</code> which is nine digits, and with zero-prepend would be <code>000123123123</code>. Not zero-prepending to 12 digits could result in errors. </p> </note>
     #   @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_UpdateCase.html#securityir-UpdateCase-request-impactedAccountsToDelete API Reference
     #   @return [Array<String>]
+    # @!attribute case_metadata
+    #   <p>Update the case request with case metadata</p>
+    #   @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_GetCase.html#securityir-GetCase-response-caseMetadata API Reference
+    #   @return [Array<Types::CaseMetadataEntry>]
     class UpdateCaseRequest < Struct.new(
       nil,
       :case_id,
@@ -1355,6 +1586,7 @@ module Aws::SecurityIR
       :impacted_aws_regions_to_delete,
       :impacted_accounts_to_add,
       :impacted_accounts_to_delete,
+      :case_metadata,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

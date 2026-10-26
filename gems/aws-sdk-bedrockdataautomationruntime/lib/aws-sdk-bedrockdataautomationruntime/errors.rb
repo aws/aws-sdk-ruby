@@ -26,6 +26,7 @@ module Aws::BedrockDataAutomationRuntime
   # * {InternalServerException}
   # * {ResourceNotFoundException}
   # * {ServiceQuotaExceededException}
+  # * {ServiceUnavailableException}
   # * {ThrottlingException}
   # * {ValidationException}
   #
@@ -77,6 +78,19 @@ module Aws::BedrockDataAutomationRuntime
     class ServiceQuotaExceededException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::BedrockDataAutomationRuntime::Types::ServiceQuotaExceededException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
+    # This exception will be thrown when service is temporarily unavailable.
+    class ServiceUnavailableException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::BedrockDataAutomationRuntime::Types::ServiceUnavailableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
         super
       end

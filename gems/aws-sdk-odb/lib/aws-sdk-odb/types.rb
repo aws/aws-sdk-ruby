@@ -35,6 +35,1268 @@ module Aws::Odb
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The configuration of the admin password source. This is a union, so only one of the following members can be specified.</p>
+    # @!attribute customer_managed_aws_secret
+    #   <p>The configuration for a customer-managed Amazon Web Services Secrets Manager secret used as the admin password source.</p>
+    #   @return [Types::CustomerManagedAwsSecretConfiguration]
+    class AdminPasswordSourceConfiguration < Struct.new(
+      :customer_managed_aws_secret,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class CustomerManagedAwsSecret < AdminPasswordSourceConfiguration; end
+      class Unknown < AdminPasswordSourceConfiguration; end
+    end
+
+    # <p>The input configuration for the admin password source. This is a union, so only one of the following members can be specified.</p>
+    # @!attribute customer_managed_aws_secret
+    #   <p>The configuration for using a customer-managed Amazon Web Services Secrets Manager secret as the admin password source.</p>
+    #   @return [Types::CustomerManagedAwsSecretConfigurationInput]
+    class AdminPasswordSourceConfigurationInput < Struct.new(
+      :customer_managed_aws_secret,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class CustomerManagedAwsSecret < AdminPasswordSourceConfigurationInput; end
+      class Unknown < AdminPasswordSourceConfigurationInput; end
+    end
+
+    # <p>A summary of the admin password source configuration for an Autonomous Database.</p>
+    # @!attribute admin_password_source
+    #   <p>The source of the admin password for the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute admin_password_source_configuration
+    #   <p>The configuration of the admin password source for the Autonomous Database.</p>
+    #   @return [Types::AdminPasswordSourceConfiguration]
+    class AdminPasswordSourceSummary < Struct.new(
+      nil,
+      :admin_password_source,
+      :admin_password_source_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute iam_role_arn
+    #   <p>The Amazon Resource Name (ARN) of the Amazon Web Services Identity and Access Management (IAM) service role to associate with the resource.</p>
+    #   @return [String]
+    # @!attribute aws_integration
+    #   <p>The Amazon Web Services integration configuration settings for the Amazon Web Services Identity and Access Management (IAM) service role association.</p>
+    #   @return [String]
+    # @!attribute resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the target resource to associate with the Amazon Web Services Identity and Access Management (IAM) service role.</p>
+    #   @return [String]
+    class AssociateIamRoleToResourceInput < Struct.new(
+      nil,
+      :iam_role_arn,
+      :aws_integration,
+      :resource_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class AssociateIamRoleToResourceOutput < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute exadb_vm_cluster_id
+    #   <p>The unique identifier of the Exascale VM cluster to add virtual machines to.</p>
+    #   @return [String]
+    # @!attribute desired_node_count
+    #   <p>The desired number of nodes in the Exascale VM cluster after the association.</p>
+    #   @return [Integer]
+    class AssociateVirtualMachinesToExadbVmClusterInput < Struct.new(
+      nil,
+      :exadb_vm_cluster_id,
+      :desired_node_count,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute display_name
+    #   <p>The user-friendly name for the Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute status_reason
+    #   <p>Additional information about the status of the Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute exadb_vm_cluster_id
+    #   <p>The unique identifier of the Exascale VM cluster.</p>
+    #   @return [String]
+    class AssociateVirtualMachinesToExadbVmClusterOutput < Struct.new(
+      nil,
+      :display_name,
+      :status,
+      :status_reason,
+      :exadb_vm_cluster_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Information about an Autonomous Database.</p>
+    # @!attribute autonomous_database_id
+    #   <p>The unique identifier of the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute autonomous_database_arn
+    #   <p>The Amazon Resource Name (ARN) of the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute oci_resource_anchor_name
+    #   <p>The name of the Oracle Cloud Infrastructure (OCI) resource anchor associated with the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute percent_progress
+    #   <p>The progress of the current operation on the Autonomous Database, as a percentage.</p>
+    #   @return [Float]
+    # @!attribute ocid
+    #   <p>The Oracle Cloud Identifier (OCID) of the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute oci_url
+    #   <p>The URL for accessing the OCI console page for the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute display_name
+    #   <p>The user-friendly name of the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute db_name
+    #   <p>The name of the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute source_id
+    #   <p>The unique identifier of the source from which the Autonomous Database was created.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute status_reason
+    #   <p>Additional information about the current status of the Autonomous Database, if applicable.</p>
+    #   @return [String]
+    # @!attribute database_type
+    #   <p>The type of the Autonomous Database, either a regular database or a clone.</p>
+    #   @return [String]
+    # @!attribute db_version
+    #   <p>The Oracle Database software version of the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute db_workload
+    #   <p>The intended use of the Autonomous Database, such as transaction processing, data warehouse, JSON database, or APEX.</p>
+    #   @return [String]
+    # @!attribute character_set
+    #   <p>The character set of the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute ncharacter_set
+    #   <p>The national character set of the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute database_edition
+    #   <p>The Oracle Database edition of the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute license_model
+    #   <p>The Oracle license model that applies to the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute open_mode
+    #   <p>The mode in which the Autonomous Database is open, either read-only or read/write.</p>
+    #   @return [String]
+    # @!attribute permission_level
+    #   <p>The permission level of the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute is_mtls_connection_required
+    #   <p>Indicates whether mutual TLS (mTLS) authentication is required to connect to the Autonomous Database.</p>
+    #   @return [Boolean]
+    # @!attribute autonomous_maintenance_schedule_type
+    #   <p>The maintenance schedule type for the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute net_services_architecture
+    #   <p>The Oracle Net Services architecture of the Autonomous Database, either dedicated or shared.</p>
+    #   @return [String]
+    # @!attribute available_upgrade_versions
+    #   <p>The list of Oracle Database software versions to which the Autonomous Database can be upgraded.</p>
+    #   @return [Array<String>]
+    # @!attribute byol_compute_count_limit
+    #   <p>The maximum number of compute resources that you can allocate to the Autonomous Database under the bring-your-own-license (BYOL) model.</p>
+    #   @return [Integer]
+    # @!attribute connection_string_details
+    #   <p>The connection string details for the Autonomous Database.</p>
+    #   @return [Types::AutonomousDatabaseConnectionStrings]
+    # @!attribute service_console_url
+    #   <p>The URL for accessing the Oracle service console for the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute sql_web_developer_url
+    #   <p>The URL for accessing Oracle SQL Developer Web for the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute customer_contacts
+    #   <p>The list of customer contacts that receive operational notifications from Oracle for the Autonomous Database.</p>
+    #   @return [Array<Types::CustomerContact>]
+    # @!attribute apex_details
+    #   <p>The Oracle Application Express (APEX) details for the Autonomous Database.</p>
+    #   @return [Types::AutonomousDatabaseApex]
+    # @!attribute standby_db
+    #   <p>The details of the standby Autonomous Database in a cross-Region Oracle Data Guard configuration.</p>
+    #   @return [Types::DatabaseStandbySummary]
+    # @!attribute local_standby_db
+    #   <p>The details of the local standby Autonomous Database in an Oracle Data Guard configuration.</p>
+    #   @return [Types::DatabaseStandbySummary]
+    # @!attribute data_safe_status
+    #   <p>The status of the Oracle Data Safe registration for the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute database_management_status
+    #   <p>The status of Oracle Database Management for the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute operations_insights_status
+    #   <p>The status of Oracle Operations Insights for the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute availability_zone
+    #   <p>The Availability Zone where the Autonomous Database is located.</p>
+    #   @return [String]
+    # @!attribute availability_zone_id
+    #   <p>The unique identifier of the Availability Zone where the Autonomous Database is located.</p>
+    #   @return [String]
+    # @!attribute maintenance_target_component
+    #   <p>The component on the Autonomous Database that the current maintenance is being applied to.</p>
+    #   @return [String]
+    # @!attribute connection_urls
+    #   <p>The connection URLs for accessing tools and services for the Autonomous Database.</p>
+    #   @return [Types::AutonomousDatabaseConnectionUrls]
+    # @!attribute db_tools_details
+    #   <p>The list of database management tools enabled for the Autonomous Database.</p>
+    #   @return [Array<Types::DatabaseTool>]
+    # @!attribute scheduled_operations
+    #   <p>The list of scheduled start and stop times for the Autonomous Database.</p>
+    #   @return [Array<Types::ScheduledOperationDetails>]
+    # @!attribute resource_pool_leader_id
+    #   <p>The unique identifier of the resource pool leader Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute compute_count
+    #   <p>The compute capacity, in number of Elastic CPUs (ECPUs) or Oracle CPUs (OCPUs), assigned to the Autonomous Database.</p>
+    #   @return [Float]
+    # @!attribute compute_model
+    #   <p>The compute model of the Autonomous Database, either ECPU or OCPU.</p>
+    #   @return [String]
+    # @!attribute cpu_core_count
+    #   <p>The number of CPU cores allocated to the Autonomous Database.</p>
+    #   @return [Integer]
+    # @!attribute memory_per_oracle_compute_unit_in_g_bs
+    #   <p>The amount of memory allocated per Oracle Compute Unit, in GB.</p>
+    #   @return [Integer]
+    # @!attribute provisionable_cpus
+    #   <p>The list of CPU core counts that you can provision for the Autonomous Database.</p>
+    #   @return [Array<Integer>]
+    # @!attribute is_auto_scaling_enabled
+    #   <p>Indicates whether automatic scaling of the compute resources is enabled for the Autonomous Database.</p>
+    #   @return [Boolean]
+    # @!attribute data_storage_size_in_t_bs
+    #   <p>The size, in terabytes (TB), of the data volume allocated for the Autonomous Database.</p>
+    #   @return [Float]
+    # @!attribute data_storage_size_in_g_bs
+    #   <p>The size, in gigabytes (GB), of the data volume allocated for the Autonomous Database.</p>
+    #   @return [Integer]
+    # @!attribute used_data_storage_size_in_t_bs
+    #   <p>The amount of data storage currently in use by the Autonomous Database, in TB.</p>
+    #   @return [Float]
+    # @!attribute used_data_storage_size_in_g_bs
+    #   <p>The amount of data storage currently in use by the Autonomous Database, in GB.</p>
+    #   @return [Integer]
+    # @!attribute actual_used_data_storage_size_in_t_bs
+    #   <p>The actual amount of data storage currently in use by the Autonomous Database, in TB.</p>
+    #   @return [Float]
+    # @!attribute allocated_storage_size_in_t_bs
+    #   <p>The amount of storage currently allocated to the Autonomous Database, in TB.</p>
+    #   @return [Float]
+    # @!attribute in_memory_area_in_g_bs
+    #   <p>The size of the in-memory area of the Autonomous Database, in GB.</p>
+    #   @return [Integer]
+    # @!attribute is_auto_scaling_for_storage_enabled
+    #   <p>Indicates whether automatic scaling of the storage is enabled for the Autonomous Database.</p>
+    #   @return [Boolean]
+    # @!attribute odb_network_id
+    #   <p>The unique identifier of the ODB network associated with the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute odb_network_arn
+    #   <p>The Amazon Resource Name (ARN) of the ODB network associated with the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute private_endpoint
+    #   <p>The private endpoint for the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute private_endpoint_ip
+    #   <p>The private endpoint IP address for the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute private_endpoint_label
+    #   <p>The private endpoint label for the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute allowlisted_ips
+    #   <p>The list of IP addresses that are allowed to access the Autonomous Database.</p>
+    #   @return [Array<String>]
+    # @!attribute standby_allowlisted_ips
+    #   <p>The list of IP addresses that are allowed to access the standby Autonomous Database.</p>
+    #   @return [Array<String>]
+    # @!attribute standby_allowlisted_ips_source
+    #   <p>The source of the allowlisted IP addresses for the standby Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute is_local_data_guard_enabled
+    #   <p>Indicates whether local Oracle Data Guard is enabled for the Autonomous Database.</p>
+    #   @return [Boolean]
+    # @!attribute is_remote_data_guard_enabled
+    #   <p>Indicates whether remote Oracle Data Guard is enabled for the Autonomous Database.</p>
+    #   @return [Boolean]
+    # @!attribute local_disaster_recovery_type
+    #   <p>The type of local disaster recovery configured for the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute role
+    #   <p>The Oracle Data Guard role of the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute peer_db_ids
+    #   <p>The list of unique identifiers of the peer Autonomous Databases.</p>
+    #   @return [Array<String>]
+    # @!attribute failed_data_recovery_in_seconds
+    #   <p>The amount of time, in seconds, that the data in the Autonomous Database is behind the data in the primary database.</p>
+    #   @return [Integer]
+    # @!attribute local_adg_auto_failover_max_data_loss_limit
+    #   <p>The maximum data loss limit, in seconds, for automatic failover to the local Oracle Data Guard standby database.</p>
+    #   @return [Integer]
+    # @!attribute remote_disaster_recovery_configuration
+    #   <p>The configuration of the remote disaster recovery for the Autonomous Database.</p>
+    #   @return [Types::DisasterRecoveryConfiguration]
+    # @!attribute is_refreshable_clone
+    #   <p>Indicates whether the Autonomous Database is a refreshable clone.</p>
+    #   @return [Boolean]
+    # @!attribute refreshable_mode
+    #   <p>The refresh mode of the refreshable clone Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute refreshable_status
+    #   <p>The refresh status of the refreshable clone Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute auto_refresh_frequency_in_seconds
+    #   <p>The frequency, in seconds, at which the refreshable clone Autonomous Database is automatically refreshed.</p>
+    #   @return [Integer]
+    # @!attribute auto_refresh_point_lag_in_seconds
+    #   <p>The time lag, in seconds, between the refreshable clone and its source Autonomous Database.</p>
+    #   @return [Integer]
+    # @!attribute is_reconnect_clone_enabled
+    #   <p>Indicates whether reconnecting the refreshable clone to its source Autonomous Database is enabled.</p>
+    #   @return [Boolean]
+    # @!attribute clone_table_space_list
+    #   <p>The list of tablespace identifiers to clone for the Autonomous Database.</p>
+    #   @return [Array<Integer>]
+    # @!attribute backup_retention_period_in_days
+    #   <p>The retention period, in days, for automatic backups of the Autonomous Database.</p>
+    #   @return [Integer]
+    # @!attribute long_term_backup_schedule
+    #   <p>The long-term backup schedule for the Autonomous Database.</p>
+    #   @return [Types::LongTermBackupSchedule]
+    # @!attribute is_backup_retention_locked
+    #   <p>Indicates whether the backup retention period of the Autonomous Database is locked.</p>
+    #   @return [Boolean]
+    # @!attribute total_backup_storage_size_in_g_bs
+    #   <p>The total amount of backup storage used by the Autonomous Database, in GB.</p>
+    #   @return [Float]
+    # @!attribute resource_pool_summary
+    #   <p>The configuration of the resource pool for the Autonomous Database.</p>
+    #   @return [Types::ResourcePoolSummary]
+    # @!attribute encryption_summary
+    #   <p>The encryption configuration for the Autonomous Database.</p>
+    #   @return [Types::EncryptionSummary]
+    # @!attribute created_at
+    #   <p>The date and time when the Autonomous Database was created.</p>
+    #   @return [Time]
+    # @!attribute time_of_last_backup
+    #   <p>The date and time of the last backup of the Autonomous Database.</p>
+    #   @return [Time]
+    # @!attribute time_maintenance_begin
+    #   <p>The date and time when the next maintenance of the Autonomous Database begins.</p>
+    #   @return [Time]
+    # @!attribute time_maintenance_end
+    #   <p>The date and time when the next maintenance of the Autonomous Database ends.</p>
+    #   @return [Time]
+    # @!attribute time_local_data_guard_enabled
+    #   <p>The date and time when local Oracle Data Guard was enabled for the Autonomous Database.</p>
+    #   @return [Time]
+    # @!attribute time_data_guard_role_changed
+    #   <p>The date and time when the Oracle Data Guard role of the Autonomous Database last changed.</p>
+    #   @return [Time]
+    # @!attribute time_of_last_switchover
+    #   <p>The date and time of the last switchover operation for the Autonomous Database.</p>
+    #   @return [Time]
+    # @!attribute time_of_last_failover
+    #   <p>The date and time of the last failover operation for the Autonomous Database.</p>
+    #   @return [Time]
+    # @!attribute time_of_last_refresh
+    #   <p>The date and time of the last refresh of the refreshable clone Autonomous Database.</p>
+    #   @return [Time]
+    # @!attribute time_of_last_refresh_point
+    #   <p>The date and time as of which the data in the refreshable clone Autonomous Database is current.</p>
+    #   @return [Time]
+    # @!attribute time_of_next_refresh
+    #   <p>The date and time of the next scheduled refresh of the refreshable clone Autonomous Database.</p>
+    #   @return [Time]
+    # @!attribute time_of_auto_refresh_start
+    #   <p>The date and time at which the automatic refresh of the refreshable clone Autonomous Database starts.</p>
+    #   @return [Time]
+    # @!attribute time_deletion_of_free_autonomous_database
+    #   <p>The date and time when the inactive Always Free Autonomous Database is scheduled to be automatically deleted.</p>
+    #   @return [Time]
+    # @!attribute time_reclamation_of_free_autonomous_database
+    #   <p>The date and time when the Always Free Autonomous Database is scheduled to be stopped because of inactivity.</p>
+    #   @return [Time]
+    # @!attribute time_disaster_recovery_role_changed
+    #   <p>The date and time when the disaster recovery role of the Autonomous Database last changed.</p>
+    #   @return [Time]
+    # @!attribute time_until_reconnect_clone_enabled
+    #   <p>The date and time until which reconnecting the refreshable clone to its source Autonomous Database is allowed.</p>
+    #   @return [Time]
+    # @!attribute next_long_term_backup_time_stamp
+    #   <p>The date and time of the next scheduled long-term backup of the Autonomous Database.</p>
+    #   @return [Time]
+    # @!attribute time_undeleted
+    #   <p>The date and time when the Autonomous Database was restored after deletion.</p>
+    #   @return [Time]
+    # @!attribute admin_password_source_summary
+    #   <p>The summary of the admin password source configuration for the Autonomous Database.</p>
+    #   @return [Types::AdminPasswordSourceSummary]
+    class AutonomousDatabase < Struct.new(
+      nil,
+      :autonomous_database_id,
+      :autonomous_database_arn,
+      :oci_resource_anchor_name,
+      :percent_progress,
+      :ocid,
+      :oci_url,
+      :display_name,
+      :db_name,
+      :source_id,
+      :status,
+      :status_reason,
+      :database_type,
+      :db_version,
+      :db_workload,
+      :character_set,
+      :ncharacter_set,
+      :database_edition,
+      :license_model,
+      :open_mode,
+      :permission_level,
+      :is_mtls_connection_required,
+      :autonomous_maintenance_schedule_type,
+      :net_services_architecture,
+      :available_upgrade_versions,
+      :byol_compute_count_limit,
+      :connection_string_details,
+      :service_console_url,
+      :sql_web_developer_url,
+      :customer_contacts,
+      :apex_details,
+      :standby_db,
+      :local_standby_db,
+      :data_safe_status,
+      :database_management_status,
+      :operations_insights_status,
+      :availability_zone,
+      :availability_zone_id,
+      :maintenance_target_component,
+      :connection_urls,
+      :db_tools_details,
+      :scheduled_operations,
+      :resource_pool_leader_id,
+      :compute_count,
+      :compute_model,
+      :cpu_core_count,
+      :memory_per_oracle_compute_unit_in_g_bs,
+      :provisionable_cpus,
+      :is_auto_scaling_enabled,
+      :data_storage_size_in_t_bs,
+      :data_storage_size_in_g_bs,
+      :used_data_storage_size_in_t_bs,
+      :used_data_storage_size_in_g_bs,
+      :actual_used_data_storage_size_in_t_bs,
+      :allocated_storage_size_in_t_bs,
+      :in_memory_area_in_g_bs,
+      :is_auto_scaling_for_storage_enabled,
+      :odb_network_id,
+      :odb_network_arn,
+      :private_endpoint,
+      :private_endpoint_ip,
+      :private_endpoint_label,
+      :allowlisted_ips,
+      :standby_allowlisted_ips,
+      :standby_allowlisted_ips_source,
+      :is_local_data_guard_enabled,
+      :is_remote_data_guard_enabled,
+      :local_disaster_recovery_type,
+      :role,
+      :peer_db_ids,
+      :failed_data_recovery_in_seconds,
+      :local_adg_auto_failover_max_data_loss_limit,
+      :remote_disaster_recovery_configuration,
+      :is_refreshable_clone,
+      :refreshable_mode,
+      :refreshable_status,
+      :auto_refresh_frequency_in_seconds,
+      :auto_refresh_point_lag_in_seconds,
+      :is_reconnect_clone_enabled,
+      :clone_table_space_list,
+      :backup_retention_period_in_days,
+      :long_term_backup_schedule,
+      :is_backup_retention_locked,
+      :total_backup_storage_size_in_g_bs,
+      :resource_pool_summary,
+      :encryption_summary,
+      :created_at,
+      :time_of_last_backup,
+      :time_maintenance_begin,
+      :time_maintenance_end,
+      :time_local_data_guard_enabled,
+      :time_data_guard_role_changed,
+      :time_of_last_switchover,
+      :time_of_last_failover,
+      :time_of_last_refresh,
+      :time_of_last_refresh_point,
+      :time_of_next_refresh,
+      :time_of_auto_refresh_start,
+      :time_deletion_of_free_autonomous_database,
+      :time_reclamation_of_free_autonomous_database,
+      :time_disaster_recovery_role_changed,
+      :time_until_reconnect_clone_enabled,
+      :next_long_term_backup_time_stamp,
+      :time_undeleted,
+      :admin_password_source_summary,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The Oracle Application Express (APEX) details for an Autonomous Database.</p>
+    # @!attribute apex_version
+    #   <p>The Oracle Application Express (APEX) version of the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute ords_version
+    #   <p>The Oracle REST Data Services (ORDS) version of the Autonomous Database.</p>
+    #   @return [String]
+    class AutonomousDatabaseApex < Struct.new(
+      nil,
+      :apex_version,
+      :ords_version,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Information about an Autonomous Database backup.</p>
+    # @!attribute autonomous_database_backup_id
+    #   <p>The unique identifier of the Autonomous Database backup.</p>
+    #   @return [String]
+    # @!attribute autonomous_database_backup_arn
+    #   <p>The Amazon Resource Name (ARN) of the Autonomous Database backup.</p>
+    #   @return [String]
+    # @!attribute autonomous_database_id
+    #   <p>The unique identifier of the Autonomous Database that the backup was created from.</p>
+    #   @return [String]
+    # @!attribute ocid
+    #   <p>The Oracle Cloud Identifier (OCID) of the Autonomous Database backup.</p>
+    #   @return [String]
+    # @!attribute display_name
+    #   <p>The user-friendly name of the Autonomous Database backup.</p>
+    #   @return [String]
+    # @!attribute db_version
+    #   <p>The Oracle Database software version of the Autonomous Database backup.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the Autonomous Database backup.</p>
+    #   @return [String]
+    # @!attribute status_reason
+    #   <p>Additional information about the current status of the Autonomous Database backup, if applicable.</p>
+    #   @return [String]
+    # @!attribute is_automatic
+    #   <p>Indicates whether the backup was created automatically.</p>
+    #   @return [Boolean]
+    # @!attribute retention_period_in_days
+    #   <p>The retention period, in days, for the Autonomous Database backup.</p>
+    #   @return [Integer]
+    # @!attribute size_in_t_bs
+    #   <p>The size of the Autonomous Database backup, in terabytes (TB).</p>
+    #   @return [Float]
+    # @!attribute time_available_till
+    #   <p>The date and time until which the Autonomous Database backup is available for restore.</p>
+    #   @return [Time]
+    # @!attribute time_started
+    #   <p>The date and time when the Autonomous Database backup started.</p>
+    #   @return [Time]
+    # @!attribute time_ended
+    #   <p>The date and time when the Autonomous Database backup ended.</p>
+    #   @return [Time]
+    # @!attribute type
+    #   <p>The type of the Autonomous Database backup.</p>
+    #   @return [String]
+    class AutonomousDatabaseBackup < Struct.new(
+      nil,
+      :autonomous_database_backup_id,
+      :autonomous_database_backup_arn,
+      :autonomous_database_id,
+      :ocid,
+      :display_name,
+      :db_version,
+      :status,
+      :status_reason,
+      :is_automatic,
+      :retention_period_in_days,
+      :size_in_t_bs,
+      :time_available_till,
+      :time_started,
+      :time_ended,
+      :type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A summary of an Autonomous Database backup.</p>
+    # @!attribute autonomous_database_backup_id
+    #   <p>The unique identifier of the Autonomous Database backup.</p>
+    #   @return [String]
+    # @!attribute autonomous_database_backup_arn
+    #   <p>The Amazon Resource Name (ARN) of the Autonomous Database backup.</p>
+    #   @return [String]
+    # @!attribute autonomous_database_id
+    #   <p>The unique identifier of the Autonomous Database that the backup was created from.</p>
+    #   @return [String]
+    # @!attribute ocid
+    #   <p>The Oracle Cloud Identifier (OCID) of the Autonomous Database backup.</p>
+    #   @return [String]
+    # @!attribute display_name
+    #   <p>The user-friendly name of the Autonomous Database backup.</p>
+    #   @return [String]
+    # @!attribute db_version
+    #   <p>The Oracle Database software version of the Autonomous Database backup.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the Autonomous Database backup.</p>
+    #   @return [String]
+    # @!attribute status_reason
+    #   <p>Additional information about the current status of the Autonomous Database backup, if applicable.</p>
+    #   @return [String]
+    # @!attribute is_automatic
+    #   <p>Indicates whether the backup was created automatically.</p>
+    #   @return [Boolean]
+    # @!attribute retention_period_in_days
+    #   <p>The retention period, in days, for the Autonomous Database backup.</p>
+    #   @return [Integer]
+    # @!attribute size_in_t_bs
+    #   <p>The size of the Autonomous Database backup, in terabytes (TB).</p>
+    #   @return [Float]
+    # @!attribute time_available_till
+    #   <p>The date and time until which the Autonomous Database backup is available for restore.</p>
+    #   @return [Time]
+    # @!attribute time_started
+    #   <p>The date and time when the Autonomous Database backup started.</p>
+    #   @return [Time]
+    # @!attribute time_ended
+    #   <p>The date and time when the Autonomous Database backup ended.</p>
+    #   @return [Time]
+    # @!attribute type
+    #   <p>The type of the Autonomous Database backup.</p>
+    #   @return [String]
+    class AutonomousDatabaseBackupSummary < Struct.new(
+      nil,
+      :autonomous_database_backup_id,
+      :autonomous_database_backup_arn,
+      :autonomous_database_id,
+      :ocid,
+      :display_name,
+      :db_version,
+      :status,
+      :status_reason,
+      :is_automatic,
+      :retention_period_in_days,
+      :size_in_t_bs,
+      :time_available_till,
+      :time_started,
+      :time_ended,
+      :type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A summary of an available character set for Autonomous Databases.</p>
+    # @!attribute character_set
+    #   <p>The name of the character set.</p>
+    #   @return [String]
+    class AutonomousDatabaseCharacterSetSummary < Struct.new(
+      nil,
+      :character_set,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The connection strings used to connect to an Autonomous Database.</p>
+    # @!attribute all_connection_strings
+    #   <p>The list of all connection strings that you can use to connect to the Autonomous Database.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute dedicated
+    #   <p>The connection string for connecting to the Autonomous Database with a dedicated service.</p>
+    #   @return [String]
+    # @!attribute high
+    #   <p>The connection string for the high-priority database service.</p>
+    #   @return [String]
+    # @!attribute medium
+    #   <p>The connection string for the medium-priority database service.</p>
+    #   @return [String]
+    # @!attribute low
+    #   <p>The connection string for the low-priority database service.</p>
+    #   @return [String]
+    # @!attribute profiles
+    #   <p>The list of connection string profiles for the Autonomous Database.</p>
+    #   @return [Array<Types::DatabaseConnectionStringProfile>]
+    class AutonomousDatabaseConnectionStrings < Struct.new(
+      nil,
+      :all_connection_strings,
+      :dedicated,
+      :high,
+      :medium,
+      :low,
+      :profiles,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The connection URLs for accessing tools and services for an Autonomous Database.</p>
+    # @!attribute apex_url
+    #   <p>The URL for accessing Oracle Application Express (APEX) for the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute database_transforms_url
+    #   <p>The URL for accessing Oracle Database Transforms for the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute graph_studio_url
+    #   <p>The URL for accessing Oracle Graph Studio for the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute machine_learning_notebook_url
+    #   <p>The URL for accessing the Oracle Machine Learning notebook for the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute machine_learning_user_management_url
+    #   <p>The URL for accessing Oracle Machine Learning user management for the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute mongo_db_url
+    #   <p>The URL for accessing the MongoDB API for the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute ords_url
+    #   <p>The URL for accessing Oracle REST Data Services (ORDS) for the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute spatial_studio_url
+    #   <p>The URL for accessing Oracle Spatial Studio for the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute sql_dev_web_url
+    #   <p>The URL for accessing Oracle SQL Developer Web for the Autonomous Database.</p>
+    #   @return [String]
+    class AutonomousDatabaseConnectionUrls < Struct.new(
+      nil,
+      :apex_url,
+      :database_transforms_url,
+      :graph_studio_url,
+      :machine_learning_notebook_url,
+      :machine_learning_user_management_url,
+      :mongo_db_url,
+      :ords_url,
+      :spatial_studio_url,
+      :sql_dev_web_url,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A summary of a peer database of an Autonomous Database.</p>
+    # @!attribute autonomous_database_id
+    #   <p>The unique identifier of the peer Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute autonomous_database_arn
+    #   <p>The Amazon Resource Name (ARN) of the peer Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute ocid
+    #   <p>The Oracle Cloud Identifier (OCID) of the peer Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute region
+    #   <p>The Amazon Web Services Region where the peer Autonomous Database is located.</p>
+    #   @return [String]
+    class AutonomousDatabasePeerSummary < Struct.new(
+      nil,
+      :autonomous_database_id,
+      :autonomous_database_arn,
+      :ocid,
+      :region,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A summary of an Autonomous Database.</p>
+    # @!attribute autonomous_database_id
+    #   <p>The unique identifier of the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute autonomous_database_arn
+    #   <p>The Amazon Resource Name (ARN) of the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute oci_resource_anchor_name
+    #   <p>The name of the Oracle Cloud Infrastructure (OCI) resource anchor associated with the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute percent_progress
+    #   <p>The progress of the current operation on the Autonomous Database, as a percentage.</p>
+    #   @return [Float]
+    # @!attribute ocid
+    #   <p>The Oracle Cloud Identifier (OCID) of the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute oci_url
+    #   <p>The URL for accessing the OCI console page for the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute display_name
+    #   <p>The user-friendly name of the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute db_name
+    #   <p>The name of the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute source_id
+    #   <p>The unique identifier of the source from which the Autonomous Database was created.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute status_reason
+    #   <p>Additional information about the current status of the Autonomous Database, if applicable.</p>
+    #   @return [String]
+    # @!attribute database_type
+    #   <p>The type of the Autonomous Database, either a regular database or a clone.</p>
+    #   @return [String]
+    # @!attribute db_version
+    #   <p>The Oracle Database software version of the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute db_workload
+    #   <p>The intended use of the Autonomous Database, such as transaction processing, data warehouse, JSON database, or APEX.</p>
+    #   @return [String]
+    # @!attribute character_set
+    #   <p>The character set of the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute ncharacter_set
+    #   <p>The national character set of the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute database_edition
+    #   <p>The Oracle Database edition of the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute license_model
+    #   <p>The Oracle license model that applies to the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute open_mode
+    #   <p>The mode in which the Autonomous Database is open, either read-only or read/write.</p>
+    #   @return [String]
+    # @!attribute permission_level
+    #   <p>The permission level of the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute is_mtls_connection_required
+    #   <p>Indicates whether mutual TLS (mTLS) authentication is required to connect to the Autonomous Database.</p>
+    #   @return [Boolean]
+    # @!attribute autonomous_maintenance_schedule_type
+    #   <p>The maintenance schedule type for the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute net_services_architecture
+    #   <p>The Oracle Net Services architecture of the Autonomous Database, either dedicated or shared.</p>
+    #   @return [String]
+    # @!attribute available_upgrade_versions
+    #   <p>The list of Oracle Database software versions to which the Autonomous Database can be upgraded.</p>
+    #   @return [Array<String>]
+    # @!attribute byol_compute_count_limit
+    #   <p>The maximum number of compute resources that you can allocate to the Autonomous Database under the bring-your-own-license (BYOL) model.</p>
+    #   @return [Integer]
+    # @!attribute connection_string_details
+    #   <p>The connection string details for the Autonomous Database.</p>
+    #   @return [Types::AutonomousDatabaseConnectionStrings]
+    # @!attribute service_console_url
+    #   <p>The URL for accessing the Oracle service console for the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute sql_web_developer_url
+    #   <p>The URL for accessing Oracle SQL Developer Web for the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute customer_contacts
+    #   <p>The list of customer contacts that receive operational notifications from Oracle for the Autonomous Database.</p>
+    #   @return [Array<Types::CustomerContact>]
+    # @!attribute apex_details
+    #   <p>The Oracle Application Express (APEX) details for the Autonomous Database.</p>
+    #   @return [Types::AutonomousDatabaseApex]
+    # @!attribute standby_db
+    #   <p>The details of the standby Autonomous Database in a cross-Region Oracle Data Guard configuration.</p>
+    #   @return [Types::DatabaseStandbySummary]
+    # @!attribute local_standby_db
+    #   <p>The details of the local standby Autonomous Database in an Oracle Data Guard configuration.</p>
+    #   @return [Types::DatabaseStandbySummary]
+    # @!attribute data_safe_status
+    #   <p>The status of the Oracle Data Safe registration for the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute database_management_status
+    #   <p>The status of Oracle Database Management for the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute operations_insights_status
+    #   <p>The status of Oracle Operations Insights for the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute availability_zone
+    #   <p>The Availability Zone where the Autonomous Database is located.</p>
+    #   @return [String]
+    # @!attribute availability_zone_id
+    #   <p>The unique identifier of the Availability Zone where the Autonomous Database is located.</p>
+    #   @return [String]
+    # @!attribute maintenance_target_component
+    #   <p>The component on the Autonomous Database that the current maintenance is being applied to.</p>
+    #   @return [String]
+    # @!attribute connection_urls
+    #   <p>The connection URLs for accessing tools and services for the Autonomous Database.</p>
+    #   @return [Types::AutonomousDatabaseConnectionUrls]
+    # @!attribute db_tools_details
+    #   <p>The list of database management tools enabled for the Autonomous Database.</p>
+    #   @return [Array<Types::DatabaseTool>]
+    # @!attribute scheduled_operations
+    #   <p>The list of scheduled start and stop times for the Autonomous Database.</p>
+    #   @return [Array<Types::ScheduledOperationDetails>]
+    # @!attribute resource_pool_leader_id
+    #   <p>The unique identifier of the resource pool leader Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute compute_count
+    #   <p>The compute capacity, in number of Elastic CPUs (ECPUs) or Oracle CPUs (OCPUs), assigned to the Autonomous Database.</p>
+    #   @return [Float]
+    # @!attribute compute_model
+    #   <p>The compute model of the Autonomous Database, either ECPU or OCPU.</p>
+    #   @return [String]
+    # @!attribute cpu_core_count
+    #   <p>The number of CPU cores allocated to the Autonomous Database.</p>
+    #   @return [Integer]
+    # @!attribute memory_per_oracle_compute_unit_in_g_bs
+    #   <p>The amount of memory allocated per Oracle Compute Unit, in GB.</p>
+    #   @return [Integer]
+    # @!attribute provisionable_cpus
+    #   <p>The list of CPU core counts that you can provision for the Autonomous Database.</p>
+    #   @return [Array<Integer>]
+    # @!attribute is_auto_scaling_enabled
+    #   <p>Indicates whether automatic scaling of the compute resources is enabled for the Autonomous Database.</p>
+    #   @return [Boolean]
+    # @!attribute data_storage_size_in_t_bs
+    #   <p>The size, in terabytes (TB), of the data volume allocated for the Autonomous Database.</p>
+    #   @return [Float]
+    # @!attribute data_storage_size_in_g_bs
+    #   <p>The size, in gigabytes (GB), of the data volume allocated for the Autonomous Database.</p>
+    #   @return [Integer]
+    # @!attribute used_data_storage_size_in_t_bs
+    #   <p>The amount of data storage currently in use by the Autonomous Database, in TB.</p>
+    #   @return [Float]
+    # @!attribute used_data_storage_size_in_g_bs
+    #   <p>The amount of data storage currently in use by the Autonomous Database, in GB.</p>
+    #   @return [Integer]
+    # @!attribute actual_used_data_storage_size_in_t_bs
+    #   <p>The actual amount of data storage currently in use by the Autonomous Database, in TB.</p>
+    #   @return [Float]
+    # @!attribute allocated_storage_size_in_t_bs
+    #   <p>The amount of storage currently allocated to the Autonomous Database, in TB.</p>
+    #   @return [Float]
+    # @!attribute in_memory_area_in_g_bs
+    #   <p>The size of the in-memory area of the Autonomous Database, in GB.</p>
+    #   @return [Integer]
+    # @!attribute is_auto_scaling_for_storage_enabled
+    #   <p>Indicates whether automatic scaling of the storage is enabled for the Autonomous Database.</p>
+    #   @return [Boolean]
+    # @!attribute odb_network_id
+    #   <p>The unique identifier of the ODB network associated with the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute odb_network_arn
+    #   <p>The Amazon Resource Name (ARN) of the ODB network associated with the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute private_endpoint
+    #   <p>The private endpoint for the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute private_endpoint_ip
+    #   <p>The private endpoint IP address for the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute private_endpoint_label
+    #   <p>The private endpoint label for the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute allowlisted_ips
+    #   <p>The list of IP addresses that are allowed to access the Autonomous Database.</p>
+    #   @return [Array<String>]
+    # @!attribute standby_allowlisted_ips
+    #   <p>The list of IP addresses that are allowed to access the standby Autonomous Database.</p>
+    #   @return [Array<String>]
+    # @!attribute standby_allowlisted_ips_source
+    #   <p>The source of the allowlisted IP addresses for the standby Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute is_local_data_guard_enabled
+    #   <p>Indicates whether local Oracle Data Guard is enabled for the Autonomous Database.</p>
+    #   @return [Boolean]
+    # @!attribute is_remote_data_guard_enabled
+    #   <p>Indicates whether remote Oracle Data Guard is enabled for the Autonomous Database.</p>
+    #   @return [Boolean]
+    # @!attribute local_disaster_recovery_type
+    #   <p>The type of local disaster recovery configured for the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute role
+    #   <p>The Oracle Data Guard role of the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute peer_db_ids
+    #   <p>The list of unique identifiers of the peer Autonomous Databases.</p>
+    #   @return [Array<String>]
+    # @!attribute failed_data_recovery_in_seconds
+    #   <p>The amount of time, in seconds, that the data in the Autonomous Database is behind the data in the primary database.</p>
+    #   @return [Integer]
+    # @!attribute local_adg_auto_failover_max_data_loss_limit
+    #   <p>The maximum data loss limit, in seconds, for automatic failover to the local Oracle Data Guard standby database.</p>
+    #   @return [Integer]
+    # @!attribute remote_disaster_recovery_configuration
+    #   <p>The configuration of the remote disaster recovery for the Autonomous Database.</p>
+    #   @return [Types::DisasterRecoveryConfiguration]
+    # @!attribute is_refreshable_clone
+    #   <p>Indicates whether the Autonomous Database is a refreshable clone.</p>
+    #   @return [Boolean]
+    # @!attribute refreshable_mode
+    #   <p>The refresh mode of the refreshable clone Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute refreshable_status
+    #   <p>The refresh status of the refreshable clone Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute auto_refresh_frequency_in_seconds
+    #   <p>The frequency, in seconds, at which the refreshable clone Autonomous Database is automatically refreshed.</p>
+    #   @return [Integer]
+    # @!attribute auto_refresh_point_lag_in_seconds
+    #   <p>The time lag, in seconds, between the refreshable clone and its source Autonomous Database.</p>
+    #   @return [Integer]
+    # @!attribute is_reconnect_clone_enabled
+    #   <p>Indicates whether reconnecting the refreshable clone to its source Autonomous Database is enabled.</p>
+    #   @return [Boolean]
+    # @!attribute clone_table_space_list
+    #   <p>The list of tablespace identifiers to clone for the Autonomous Database.</p>
+    #   @return [Array<Integer>]
+    # @!attribute backup_retention_period_in_days
+    #   <p>The retention period, in days, for automatic backups of the Autonomous Database.</p>
+    #   @return [Integer]
+    # @!attribute long_term_backup_schedule
+    #   <p>The long-term backup schedule for the Autonomous Database.</p>
+    #   @return [Types::LongTermBackupSchedule]
+    # @!attribute is_backup_retention_locked
+    #   <p>Indicates whether the backup retention period of the Autonomous Database is locked.</p>
+    #   @return [Boolean]
+    # @!attribute total_backup_storage_size_in_g_bs
+    #   <p>The total amount of backup storage used by the Autonomous Database, in GB.</p>
+    #   @return [Float]
+    # @!attribute resource_pool_summary
+    #   <p>The configuration of the resource pool for the Autonomous Database.</p>
+    #   @return [Types::ResourcePoolSummary]
+    # @!attribute encryption_summary
+    #   <p>The encryption configuration for the Autonomous Database.</p>
+    #   @return [Types::EncryptionSummary]
+    # @!attribute created_at
+    #   <p>The date and time when the Autonomous Database was created.</p>
+    #   @return [Time]
+    # @!attribute time_of_last_backup
+    #   <p>The date and time of the last backup of the Autonomous Database.</p>
+    #   @return [Time]
+    # @!attribute time_maintenance_begin
+    #   <p>The date and time when the next maintenance of the Autonomous Database begins.</p>
+    #   @return [Time]
+    # @!attribute time_maintenance_end
+    #   <p>The date and time when the next maintenance of the Autonomous Database ends.</p>
+    #   @return [Time]
+    # @!attribute time_local_data_guard_enabled
+    #   <p>The date and time when local Oracle Data Guard was enabled for the Autonomous Database.</p>
+    #   @return [Time]
+    # @!attribute time_data_guard_role_changed
+    #   <p>The date and time when the Oracle Data Guard role of the Autonomous Database last changed.</p>
+    #   @return [Time]
+    # @!attribute time_of_last_switchover
+    #   <p>The date and time of the last switchover operation for the Autonomous Database.</p>
+    #   @return [Time]
+    # @!attribute time_of_last_failover
+    #   <p>The date and time of the last failover operation for the Autonomous Database.</p>
+    #   @return [Time]
+    # @!attribute time_of_last_refresh
+    #   <p>The date and time of the last refresh of the refreshable clone Autonomous Database.</p>
+    #   @return [Time]
+    # @!attribute time_of_last_refresh_point
+    #   <p>The date and time as of which the data in the refreshable clone Autonomous Database is current.</p>
+    #   @return [Time]
+    # @!attribute time_of_next_refresh
+    #   <p>The date and time of the next scheduled refresh of the refreshable clone Autonomous Database.</p>
+    #   @return [Time]
+    # @!attribute time_of_auto_refresh_start
+    #   <p>The date and time at which the automatic refresh of the refreshable clone Autonomous Database starts.</p>
+    #   @return [Time]
+    # @!attribute time_deletion_of_free_autonomous_database
+    #   <p>The date and time when the inactive Always Free Autonomous Database is scheduled to be automatically deleted.</p>
+    #   @return [Time]
+    # @!attribute time_reclamation_of_free_autonomous_database
+    #   <p>The date and time when the Always Free Autonomous Database is scheduled to be stopped because of inactivity.</p>
+    #   @return [Time]
+    # @!attribute time_disaster_recovery_role_changed
+    #   <p>The date and time when the disaster recovery role of the Autonomous Database last changed.</p>
+    #   @return [Time]
+    # @!attribute time_until_reconnect_clone_enabled
+    #   <p>The date and time until which reconnecting the refreshable clone to its source Autonomous Database is allowed.</p>
+    #   @return [Time]
+    # @!attribute next_long_term_backup_time_stamp
+    #   <p>The date and time of the next scheduled long-term backup of the Autonomous Database.</p>
+    #   @return [Time]
+    # @!attribute time_undeleted
+    #   <p>The date and time when the Autonomous Database was restored after deletion.</p>
+    #   @return [Time]
+    # @!attribute admin_password_source_summary
+    #   <p>The summary of the admin password source configuration for the Autonomous Database.</p>
+    #   @return [Types::AdminPasswordSourceSummary]
+    class AutonomousDatabaseSummary < Struct.new(
+      nil,
+      :autonomous_database_id,
+      :autonomous_database_arn,
+      :oci_resource_anchor_name,
+      :percent_progress,
+      :ocid,
+      :oci_url,
+      :display_name,
+      :db_name,
+      :source_id,
+      :status,
+      :status_reason,
+      :database_type,
+      :db_version,
+      :db_workload,
+      :character_set,
+      :ncharacter_set,
+      :database_edition,
+      :license_model,
+      :open_mode,
+      :permission_level,
+      :is_mtls_connection_required,
+      :autonomous_maintenance_schedule_type,
+      :net_services_architecture,
+      :available_upgrade_versions,
+      :byol_compute_count_limit,
+      :connection_string_details,
+      :service_console_url,
+      :sql_web_developer_url,
+      :customer_contacts,
+      :apex_details,
+      :standby_db,
+      :local_standby_db,
+      :data_safe_status,
+      :database_management_status,
+      :operations_insights_status,
+      :availability_zone,
+      :availability_zone_id,
+      :maintenance_target_component,
+      :connection_urls,
+      :db_tools_details,
+      :scheduled_operations,
+      :resource_pool_leader_id,
+      :compute_count,
+      :compute_model,
+      :cpu_core_count,
+      :memory_per_oracle_compute_unit_in_g_bs,
+      :provisionable_cpus,
+      :is_auto_scaling_enabled,
+      :data_storage_size_in_t_bs,
+      :data_storage_size_in_g_bs,
+      :used_data_storage_size_in_t_bs,
+      :used_data_storage_size_in_g_bs,
+      :actual_used_data_storage_size_in_t_bs,
+      :allocated_storage_size_in_t_bs,
+      :in_memory_area_in_g_bs,
+      :is_auto_scaling_for_storage_enabled,
+      :odb_network_id,
+      :odb_network_arn,
+      :private_endpoint,
+      :private_endpoint_ip,
+      :private_endpoint_label,
+      :allowlisted_ips,
+      :standby_allowlisted_ips,
+      :standby_allowlisted_ips_source,
+      :is_local_data_guard_enabled,
+      :is_remote_data_guard_enabled,
+      :local_disaster_recovery_type,
+      :role,
+      :peer_db_ids,
+      :failed_data_recovery_in_seconds,
+      :local_adg_auto_failover_max_data_loss_limit,
+      :remote_disaster_recovery_configuration,
+      :is_refreshable_clone,
+      :refreshable_mode,
+      :refreshable_status,
+      :auto_refresh_frequency_in_seconds,
+      :auto_refresh_point_lag_in_seconds,
+      :is_reconnect_clone_enabled,
+      :clone_table_space_list,
+      :backup_retention_period_in_days,
+      :long_term_backup_schedule,
+      :is_backup_retention_locked,
+      :total_backup_storage_size_in_g_bs,
+      :resource_pool_summary,
+      :encryption_summary,
+      :created_at,
+      :time_of_last_backup,
+      :time_maintenance_begin,
+      :time_maintenance_end,
+      :time_local_data_guard_enabled,
+      :time_data_guard_role_changed,
+      :time_of_last_switchover,
+      :time_of_last_failover,
+      :time_of_last_refresh,
+      :time_of_last_refresh_point,
+      :time_of_next_refresh,
+      :time_of_auto_refresh_start,
+      :time_deletion_of_free_autonomous_database,
+      :time_reclamation_of_free_autonomous_database,
+      :time_disaster_recovery_role_changed,
+      :time_until_reconnect_clone_enabled,
+      :next_long_term_backup_time_stamp,
+      :time_undeleted,
+      :admin_password_source_summary,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A summary of an available Oracle Database software version for Autonomous Databases.</p>
+    # @!attribute db_workload
+    #   <p>The intended use of the Autonomous Database that the version supports, such as transaction processing, data warehouse, JSON database, or APEX.</p>
+    #   @return [String]
+    # @!attribute details
+    #   <p>Additional details about the Autonomous Database software version.</p>
+    #   @return [String]
+    # @!attribute version
+    #   <p>The Oracle Database software version.</p>
+    #   @return [String]
+    class AutonomousDatabaseVersionSummary < Struct.new(
+      nil,
+      :db_workload,
+      :details,
+      :version,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The wallet details for an Autonomous Database.</p>
+    # @!attribute status
+    #   <p>The current status of the Autonomous Database wallet.</p>
+    #   @return [String]
+    # @!attribute time_rotated
+    #   <p>The date and time when the Autonomous Database wallet was last rotated.</p>
+    #   @return [Time]
+    # @!attribute password_source_summary
+    #   <p>The summary of the password source configuration for the Autonomous Database wallet.</p>
+    #   @return [Types::WalletPasswordSourceSummary]
+    class AutonomousDatabaseWalletDetails < Struct.new(
+      nil,
+      :status,
+      :time_rotated,
+      :password_source_summary,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>A summary of an Autonomous Virtual Machine (VM) within an Autonomous VM cluster.</p>
     # @!attribute autonomous_virtual_machine_id
     #   <p>The unique identifier of the Autonomous VM.</p>
@@ -95,6 +1357,82 @@ module Aws::Odb
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The configuration of the Amazon Web Services Key Management Service (KMS) encryption key used for an Autonomous Database.</p>
+    # @!attribute iam_role_arn
+    #   <p>The Amazon Resource Name (ARN) of the Amazon Web Services Identity and Access Management (IAM) role that grants access to the KMS key.</p>
+    #   @return [String]
+    # @!attribute external_id_type
+    #   <p>The type of external identifier associated with the encryption key.</p>
+    #   @return [String]
+    # @!attribute kms_key_id
+    #   <p>The identifier or ARN of the Amazon Web Services KMS key used for encryption.</p>
+    #   @return [String]
+    class AwsEncryptionKeyConfiguration < Struct.new(
+      nil,
+      :iam_role_arn,
+      :external_id_type,
+      :kms_key_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration of the Amazon Web Services Key Management Service (KMS) encryption key to use for an Autonomous Database.</p>
+    # @!attribute iam_role_arn
+    #   <p>The Amazon Resource Name (ARN) of the Amazon Web Services Identity and Access Management (IAM) role that grants access to the KMS key.</p>
+    #   @return [String]
+    # @!attribute external_id_type
+    #   <p>The type of external identifier associated with the encryption key.</p>
+    #   @return [String]
+    # @!attribute kms_key_id
+    #   <p>The identifier or ARN of the Amazon Web Services KMS key to use for encryption.</p>
+    #   @return [String]
+    class AwsEncryptionKeyConfigurationInput < Struct.new(
+      nil,
+      :iam_role_arn,
+      :external_id_type,
+      :kms_key_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration for creating an Autonomous Database as a refreshable clone.</p>
+    # @!attribute source_autonomous_database_id
+    #   <p>The unique identifier of the source Autonomous Database to create the refreshable clone from.</p>
+    #   @return [String]
+    # @!attribute refreshable_mode
+    #   <p>The refresh mode of the refreshable clone, either automatic or manual.</p>
+    #   @return [String]
+    # @!attribute auto_refresh_frequency_in_seconds
+    #   <p>The frequency, in seconds, at which the refreshable clone is automatically refreshed.</p>
+    #   @return [Integer]
+    # @!attribute auto_refresh_point_lag_in_seconds
+    #   <p>The time lag, in seconds, between the refreshable clone and its source database.</p>
+    #   @return [Integer]
+    # @!attribute time_of_auto_refresh_start
+    #   <p>The date and time at which the automatic refresh of the refreshable clone starts.</p>
+    #   @return [Time]
+    # @!attribute open_mode
+    #   <p>The mode in which to open the refreshable clone, either read-only or read/write.</p>
+    #   @return [String]
+    # @!attribute clone_type
+    #   <p>The type of clone to create.</p>
+    #   @return [String]
+    class CloneToRefreshableConfiguration < Struct.new(
+      nil,
+      :source_autonomous_database_id,
+      :refreshable_mode,
+      :auto_refresh_frequency_in_seconds,
+      :auto_refresh_point_lag_in_seconds,
+      :time_of_auto_refresh_start,
+      :open_mode,
+      :clone_type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Information about an Autonomous VM cluster resource.</p>
     # @!attribute cloud_autonomous_vm_cluster_id
     #   <p>The unique identifier of the Autonomous VM cluster.</p>
@@ -104,6 +1442,9 @@ module Aws::Odb
     #   @return [String]
     # @!attribute odb_network_id
     #   <p>The unique identifier of the ODB network associated with this Autonomous VM cluster.</p>
+    #   @return [String]
+    # @!attribute odb_network_arn
+    #   <p>The Amazon Resource Name (ARN) of the ODB network associated with this Autonomous VM cluster.</p>
     #   @return [String]
     # @!attribute oci_resource_anchor_name
     #   <p>The name of the OCI resource anchor associated with this Autonomous VM cluster.</p>
@@ -122,6 +1463,9 @@ module Aws::Odb
     #   @return [String]
     # @!attribute cloud_exadata_infrastructure_id
     #   <p>The unique identifier of the Cloud Exadata Infrastructure containing this Autonomous VM cluster.</p>
+    #   @return [String]
+    # @!attribute cloud_exadata_infrastructure_arn
+    #   <p>The Amazon Resource Name (ARN) of the Cloud Exadata Infrastructure containing this Autonomous VM cluster.</p>
     #   @return [String]
     # @!attribute autonomous_data_storage_percentage
     #   <p>The percentage of data storage currently in use for Autonomous Databases in the Autonomous VM cluster.</p>
@@ -184,7 +1528,7 @@ module Aws::Odb
     #   <p>Indicates whether mutual TLS (mTLS) authentication is enabled for the Autonomous VM cluster.</p>
     #   @return [Boolean]
     # @!attribute license_model
-    #   <p>The Oracle license model that applies to the Autonomous VM cluster. Valid values are <code>LICENSE_INCLUDED</code> or <code>BRING_YOUR_OWN_LICENSE</code>.</p>
+    #   <p>The Oracle license model that applies to the Autonomous VM cluster.</p>
     #   @return [String]
     # @!attribute maintenance_window
     #   <p>The scheduling details for the maintenance window. Patching and system updates take place during the maintenance window.</p>
@@ -243,17 +1587,22 @@ module Aws::Odb
     # @!attribute total_container_databases
     #   <p>The total number of Autonomous Container Databases that can be created with the allocated local storage.</p>
     #   @return [Integer]
+    # @!attribute iam_roles
+    #   <p>The Amazon Web Services Identity and Access Management (IAM) service roles associated with the Autonomous VM cluster.</p>
+    #   @return [Array<Types::IamRole>]
     class CloudAutonomousVmCluster < Struct.new(
       nil,
       :cloud_autonomous_vm_cluster_id,
       :cloud_autonomous_vm_cluster_arn,
       :odb_network_id,
+      :odb_network_arn,
       :oci_resource_anchor_name,
       :percent_progress,
       :display_name,
       :status,
       :status_reason,
       :cloud_exadata_infrastructure_id,
+      :cloud_exadata_infrastructure_arn,
       :autonomous_data_storage_percentage,
       :autonomous_data_storage_size_in_t_bs,
       :available_autonomous_data_storage_size_in_t_bs,
@@ -294,6 +1643,7 @@ module Aws::Odb
       :time_ords_certificate_expires,
       :time_zone,
       :total_container_databases,
+      :iam_roles,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -325,6 +1675,9 @@ module Aws::Odb
     # @!attribute odb_network_id
     #   <p>The unique identifier of the ODB network associated with this Autonomous VM cluster.</p>
     #   @return [String]
+    # @!attribute odb_network_arn
+    #   <p>The Amazon Resource Name (ARN) of the ODB network associated with this Autonomous VM cluster.</p>
+    #   @return [String]
     # @!attribute oci_resource_anchor_name
     #   <p>The name of the OCI resource anchor associated with this Autonomous VM cluster.</p>
     #   @return [String]
@@ -342,6 +1695,9 @@ module Aws::Odb
     #   @return [String]
     # @!attribute cloud_exadata_infrastructure_id
     #   <p>The unique identifier of the Exadata infrastructure containing this Autonomous VM cluster.</p>
+    #   @return [String]
+    # @!attribute cloud_exadata_infrastructure_arn
+    #   <p>The Amazon Resource Name (ARN) of the Exadata infrastructure containing this Autonomous VM cluster.</p>
     #   @return [String]
     # @!attribute autonomous_data_storage_percentage
     #   <p>The percentage of data storage currently in use for Autonomous Databases in the Autonomous VM cluster.</p>
@@ -463,17 +1819,22 @@ module Aws::Odb
     # @!attribute total_container_databases
     #   <p>The total number of Autonomous Container Databases that can be created in the Autonomous VM cluster.</p>
     #   @return [Integer]
+    # @!attribute iam_roles
+    #   <p>The Amazon Web Services Identity and Access Management (IAM) service roles associated with the Autonomous VM cluster in the summary information.</p>
+    #   @return [Array<Types::IamRole>]
     class CloudAutonomousVmClusterSummary < Struct.new(
       nil,
       :cloud_autonomous_vm_cluster_id,
       :cloud_autonomous_vm_cluster_arn,
       :odb_network_id,
+      :odb_network_arn,
       :oci_resource_anchor_name,
       :percent_progress,
       :display_name,
       :status,
       :status_reason,
       :cloud_exadata_infrastructure_id,
+      :cloud_exadata_infrastructure_arn,
       :autonomous_data_storage_percentage,
       :autonomous_data_storage_size_in_t_bs,
       :available_autonomous_data_storage_size_in_t_bs,
@@ -514,6 +1875,7 @@ module Aws::Odb
       :time_ords_certificate_expires,
       :time_zone,
       :total_container_databases,
+      :iam_roles,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -894,6 +2256,9 @@ module Aws::Odb
     # @!attribute cloud_exadata_infrastructure_id
     #   <p>The unique identifier of the Exadata infrastructure that this VM cluster belongs to.</p>
     #   @return [String]
+    # @!attribute cloud_exadata_infrastructure_arn
+    #   <p>The Amazon Resource Name (ARN) of the Exadata infrastructure that this VM cluster belongs to.</p>
+    #   @return [String]
     # @!attribute cluster_name
     #   <p>The name of the Grid Infrastructure (GI) cluster.</p>
     #   @return [String]
@@ -958,7 +2323,7 @@ module Aws::Odb
     #   <p>The domain of the VM cluster.</p>
     #   @return [String]
     # @!attribute scan_dns_name
-    #   <p>The FQDN of the DNS record for the Single Client Access Name (SCAN) IP addresses that are associated with the VM cluster.</p>
+    #   <p>The fully qualified domain name (FQDN) of the DNS record for the Single Client Access Name (SCAN) IP addresses that are associated with the VM cluster.</p>
     #   @return [String]
     # @!attribute scan_dns_record_id
     #   <p>The OCID of the DNS record for the SCAN IP addresses that are associated with the VM cluster.</p>
@@ -990,12 +2355,18 @@ module Aws::Odb
     # @!attribute odb_network_id
     #   <p>The unique identifier of the ODB network for the VM cluster.</p>
     #   @return [String]
+    # @!attribute odb_network_arn
+    #   <p>The Amazon Resource Name (ARN) of the ODB network associated with this VM cluster.</p>
+    #   @return [String]
     # @!attribute percent_progress
     #   <p>The amount of progress made on the current operation on the VM cluster, expressed as a percentage.</p>
     #   @return [Float]
     # @!attribute compute_model
     #   <p>The OCI model compute model used when you create or clone an instance: ECPU or OCPU. An ECPU is an abstracted measure of compute resources. ECPUs are based on the number of cores elastically allocated from a pool of compute and storage servers. An OCPU is a legacy physical measure of compute resources. OCPUs are based on the physical core of a processor with hyper-threading enabled. </p>
     #   @return [String]
+    # @!attribute iam_roles
+    #   <p>The Amazon Web Services Identity and Access Management (IAM) service roles associated with the VM cluster.</p>
+    #   @return [Array<Types::IamRole>]
     class CloudVmCluster < Struct.new(
       nil,
       :cloud_vm_cluster_id,
@@ -1004,6 +2375,7 @@ module Aws::Odb
       :status_reason,
       :cloud_vm_cluster_arn,
       :cloud_exadata_infrastructure_id,
+      :cloud_exadata_infrastructure_arn,
       :cluster_name,
       :cpu_core_count,
       :data_collection_options,
@@ -1036,8 +2408,10 @@ module Aws::Odb
       :time_zone,
       :vip_ids,
       :odb_network_id,
+      :odb_network_arn,
       :percent_progress,
       :compute_model,
+      :iam_roles,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1061,6 +2435,9 @@ module Aws::Odb
     #   @return [String]
     # @!attribute cloud_exadata_infrastructure_id
     #   <p>The unique identifier of the Exadata infrastructure that this VM cluster belongs to.</p>
+    #   @return [String]
+    # @!attribute cloud_exadata_infrastructure_arn
+    #   <p>The Amazon Resource Name (ARN) of the Exadata infrastructure that this VM cluster belongs to.</p>
     #   @return [String]
     # @!attribute cluster_name
     #   <p>The name of the Grid Infrastructure (GI) cluster.</p>
@@ -1126,7 +2503,7 @@ module Aws::Odb
     #   <p>The domain of the VM cluster.</p>
     #   @return [String]
     # @!attribute scan_dns_name
-    #   <p>The FQDN of the DNS record for the Single Client Access Name (SCAN) IP addresses that are associated with the VM cluster.</p>
+    #   <p>The fully qualified domain name (FQDN) of the DNS record for the Single Client Access Name (SCAN) IP addresses that are associated with the VM cluster.</p>
     #   @return [String]
     # @!attribute scan_dns_record_id
     #   <p>The OCID of the DNS record for the SCAN IP addresses that are associated with the VM cluster.</p>
@@ -1158,12 +2535,18 @@ module Aws::Odb
     # @!attribute odb_network_id
     #   <p>The unique identifier of the ODB network for the VM cluster.</p>
     #   @return [String]
+    # @!attribute odb_network_arn
+    #   <p>The Amazon Resource Name (ARN) of the ODB network associated with this VM cluster.</p>
+    #   @return [String]
     # @!attribute percent_progress
     #   <p>The amount of progress made on the current operation on the VM cluster, expressed as a percentage.</p>
     #   @return [Float]
     # @!attribute compute_model
     #   <p>The OCI model compute model used when you create or clone an instance: ECPU or OCPU. An ECPU is an abstracted measure of compute resources. ECPUs are based on the number of cores elastically allocated from a pool of compute and storage servers. An OCPU is a legacy physical measure of compute resources. OCPUs are based on the physical core of a processor with hyper-threading enabled. </p>
     #   @return [String]
+    # @!attribute iam_roles
+    #   <p>The Amazon Web Services Identity and Access Management (IAM) service roles associated with the VM cluster in the summary information.</p>
+    #   @return [Array<Types::IamRole>]
     class CloudVmClusterSummary < Struct.new(
       nil,
       :cloud_vm_cluster_id,
@@ -1172,6 +2555,7 @@ module Aws::Odb
       :status_reason,
       :cloud_vm_cluster_arn,
       :cloud_exadata_infrastructure_id,
+      :cloud_exadata_infrastructure_arn,
       :cluster_name,
       :cpu_core_count,
       :data_collection_options,
@@ -1204,8 +2588,10 @@ module Aws::Odb
       :time_zone,
       :vip_ids,
       :odb_network_id,
+      :odb_network_arn,
       :percent_progress,
       :compute_model,
+      :iam_roles,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1225,6 +2611,292 @@ module Aws::Odb
       :message,
       :resource_id,
       :resource_type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute autonomous_database_id
+    #   <p>The unique identifier of the Autonomous Database to back up.</p>
+    #   @return [String]
+    # @!attribute display_name
+    #   <p>The user-friendly name for the Autonomous Database backup.</p>
+    #   @return [String]
+    # @!attribute retention_period_in_days
+    #   <p>The retention period, in days, for the Autonomous Database backup.</p>
+    #   @return [Integer]
+    # @!attribute client_token
+    #   <p>A client-provided token to ensure the idempotency of the request.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>The list of resource tags to apply to the Autonomous Database backup. Each tag is a key-value pair with no predefined name, type, or namespace.</p>
+    #   @return [Hash<String, String>]
+    class CreateAutonomousDatabaseBackupInput < Struct.new(
+      nil,
+      :autonomous_database_id,
+      :display_name,
+      :retention_period_in_days,
+      :client_token,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute display_name
+    #   <p>The user-friendly name of the Autonomous Database backup that was created.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the Autonomous Database backup.</p>
+    #   @return [String]
+    # @!attribute status_reason
+    #   <p>Additional information about the current status of the Autonomous Database backup, if applicable.</p>
+    #   @return [String]
+    # @!attribute autonomous_database_backup_id
+    #   <p>The unique identifier of the Autonomous Database backup that was created.</p>
+    #   @return [String]
+    class CreateAutonomousDatabaseBackupOutput < Struct.new(
+      nil,
+      :display_name,
+      :status,
+      :status_reason,
+      :autonomous_database_backup_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute odb_network_id
+    #   <p>The unique identifier of the ODB network to be used for the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute display_name
+    #   <p>The user-friendly name for the Autonomous Database. The name does not have to be unique.</p>
+    #   @return [String]
+    # @!attribute db_name
+    #   <p>The name of the Autonomous Database. The name must begin with an alphabetic character and can contain a maximum of 30 alphanumeric characters. Special characters are not permitted. The name must be unique in the Amazon Web Services account.</p>
+    #   @return [String]
+    # @!attribute admin_password
+    #   <p>The password for the <code>ADMIN</code> user of the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute compute_count
+    #   <p>The compute capacity, in number of Elastic CPUs (ECPUs) or Oracle CPUs (OCPUs), to assign to the Autonomous Database.</p>
+    #   @return [Float]
+    # @!attribute data_storage_size_in_t_bs
+    #   <p>The size, in terabytes (TB), of the data volume to allocate for the Autonomous Database.</p>
+    #   @return [Integer]
+    # @!attribute data_storage_size_in_g_bs
+    #   <p>The size, in gigabytes (GB), of the data volume to allocate for the Autonomous Database.</p>
+    #   @return [Integer]
+    # @!attribute db_workload
+    #   <p>The intended use of the Autonomous Database, such as transaction processing, data warehouse, JSON database, or APEX.</p>
+    #   @return [String]
+    # @!attribute is_auto_scaling_enabled
+    #   <p>Specifies whether to enable automatic scaling of the compute resources for the Autonomous Database.</p>
+    #   @return [Boolean]
+    # @!attribute is_auto_scaling_for_storage_enabled
+    #   <p>Specifies whether to enable automatic scaling of the storage for the Autonomous Database.</p>
+    #   @return [Boolean]
+    # @!attribute license_model
+    #   <p>The Oracle license model to apply to the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute character_set
+    #   <p>The character set to use for the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute ncharacter_set
+    #   <p>The national character set to use for the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute db_version
+    #   <p>The Oracle Database software version to use for the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute database_edition
+    #   <p>The Oracle Database edition to apply to the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute standby_allowlisted_ips_source
+    #   <p>The source of the allowlisted IP addresses for the standby Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute autonomous_maintenance_schedule_type
+    #   <p>The maintenance schedule type for the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute backup_retention_period_in_days
+    #   <p>The retention period, in days, for automatic backups of the Autonomous Database.</p>
+    #   @return [Integer]
+    # @!attribute byol_compute_count_limit
+    #   <p>The maximum number of compute resources that you can allocate to the Autonomous Database under the bring-your-own-license (BYOL) model.</p>
+    #   @return [Float]
+    # @!attribute cpu_core_count
+    #   <p>The number of CPU cores to allocate to the Autonomous Database.</p>
+    #   @return [Integer]
+    # @!attribute customer_contacts_to_send_to_oci
+    #   <p>The list of customer contacts to receive operational notifications from Oracle Cloud Infrastructure (OCI) for the Autonomous Database.</p>
+    #   @return [Array<Types::CustomerContact>]
+    # @!attribute private_endpoint_ip
+    #   <p>The private endpoint IP address for the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute private_endpoint_label
+    #   <p>The private endpoint label for the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute resource_pool_leader_id
+    #   <p>The unique identifier of the resource pool leader Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute resource_pool_summary
+    #   <p>The configuration of the resource pool for the Autonomous Database.</p>
+    #   @return [Types::ResourcePoolSummary]
+    # @!attribute scheduled_operations
+    #   <p>The list of scheduled start and stop times for the Autonomous Database.</p>
+    #   @return [Array<Types::ScheduledOperationDetails>]
+    # @!attribute standby_allowlisted_ips
+    #   <p>The list of IP addresses that are allowed to access the standby Autonomous Database.</p>
+    #   @return [Array<String>]
+    # @!attribute allowlisted_ips
+    #   <p>The list of IP addresses that are allowed to access the Autonomous Database.</p>
+    #   @return [Array<String>]
+    # @!attribute transportable_tablespace
+    #   <p>The transportable tablespace configuration to use when creating the Autonomous Database.</p>
+    #   @return [Types::TransportableTablespace]
+    # @!attribute is_backup_retention_locked
+    #   <p>Specifies whether to lock the backup retention period of the Autonomous Database to prevent it from being shortened.</p>
+    #   @return [Boolean]
+    # @!attribute is_local_data_guard_enabled
+    #   <p>Specifies whether to enable local Oracle Data Guard for the Autonomous Database.</p>
+    #   @return [Boolean]
+    # @!attribute is_mtls_connection_required
+    #   <p>Specifies whether mutual TLS (mTLS) authentication is required to connect to the Autonomous Database.</p>
+    #   @return [Boolean]
+    # @!attribute db_tools_details
+    #   <p>The list of database management tools to enable for the Autonomous Database.</p>
+    #   @return [Array<Types::DatabaseTool>]
+    # @!attribute source
+    #   <p>The source from which to create the Autonomous Database, such as a clone, backup, or cross-Region copy.</p>
+    #   @return [String]
+    # @!attribute source_configuration
+    #   <p>The configuration details for the source used to create the Autonomous Database.</p>
+    #   @return [Types::SourceConfiguration]
+    # @!attribute encryption_key_provider
+    #   <p>The provider of the encryption key to use for the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute encryption_key_configuration
+    #   <p>The configuration of the encryption key to use for the Autonomous Database.</p>
+    #   @return [Types::EncryptionKeyConfigurationInput]
+    # @!attribute admin_password_source
+    #   <p>The source of the admin password for the Autonomous Database. When set to <code>CUSTOMER_MANAGED_AWS_SECRET</code>, the admin password is retrieved from an Amazon Web Services Secrets Manager secret.</p>
+    #   @return [String]
+    # @!attribute admin_password_source_configuration
+    #   <p>The configuration of the admin password source for the Autonomous Database.</p>
+    #   @return [Types::AdminPasswordSourceConfigurationInput]
+    # @!attribute client_token
+    #   <p>A client-provided token to ensure the idempotency of the request.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>The list of resource tags to apply to the Autonomous Database. Each tag is a key-value pair with no predefined name, type, or namespace.</p>
+    #   @return [Hash<String, String>]
+    class CreateAutonomousDatabaseInput < Struct.new(
+      nil,
+      :odb_network_id,
+      :display_name,
+      :db_name,
+      :admin_password,
+      :compute_count,
+      :data_storage_size_in_t_bs,
+      :data_storage_size_in_g_bs,
+      :db_workload,
+      :is_auto_scaling_enabled,
+      :is_auto_scaling_for_storage_enabled,
+      :license_model,
+      :character_set,
+      :ncharacter_set,
+      :db_version,
+      :database_edition,
+      :standby_allowlisted_ips_source,
+      :autonomous_maintenance_schedule_type,
+      :backup_retention_period_in_days,
+      :byol_compute_count_limit,
+      :cpu_core_count,
+      :customer_contacts_to_send_to_oci,
+      :private_endpoint_ip,
+      :private_endpoint_label,
+      :resource_pool_leader_id,
+      :resource_pool_summary,
+      :scheduled_operations,
+      :standby_allowlisted_ips,
+      :allowlisted_ips,
+      :transportable_tablespace,
+      :is_backup_retention_locked,
+      :is_local_data_guard_enabled,
+      :is_mtls_connection_required,
+      :db_tools_details,
+      :source,
+      :source_configuration,
+      :encryption_key_provider,
+      :encryption_key_configuration,
+      :admin_password_source,
+      :admin_password_source_configuration,
+      :client_token,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute autonomous_database_id
+    #   <p>The unique identifier of the Autonomous Database that was created.</p>
+    #   @return [String]
+    # @!attribute display_name
+    #   <p>The user-friendly name of the Autonomous Database that was created.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute status_reason
+    #   <p>Additional information about the current status of the Autonomous Database, if applicable.</p>
+    #   @return [String]
+    class CreateAutonomousDatabaseOutput < Struct.new(
+      nil,
+      :autonomous_database_id,
+      :display_name,
+      :status,
+      :status_reason,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute autonomous_database_id
+    #   <p>The unique identifier of the Autonomous Database to create a wallet for.</p>
+    #   @return [String]
+    # @!attribute wallet_type
+    #   <p>The type of wallet to create, either a regional wallet or an instance wallet.</p>
+    #   @return [String]
+    # @!attribute password
+    #   <p>The password to encrypt the keys inside the wallet.</p>
+    #   @return [String]
+    # @!attribute password_source
+    #   <p>The source of the password for encrypting the wallet. When set to <code>CUSTOMER_MANAGED_AWS_SECRET</code>, the password is retrieved from an Amazon Web Services Secrets Manager secret.</p>
+    #   @return [String]
+    # @!attribute password_source_configuration
+    #   <p>The configuration of the password source for the Autonomous Database wallet.</p>
+    #   @return [Types::WalletPasswordSourceConfigurationInput]
+    # @!attribute client_token
+    #   <p>A client-provided token to ensure the idempotency of the request.</p>
+    #   @return [String]
+    class CreateAutonomousDatabaseWalletInput < Struct.new(
+      nil,
+      :autonomous_database_id,
+      :wallet_type,
+      :password,
+      :password_source,
+      :password_source_configuration,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute autonomous_database_wallet_file
+    #   <p>The generated wallet file for the Autonomous Database, returned as a compressed archive.</p>
+    #   @return [String]
+    class CreateAutonomousDatabaseWalletOutput < Struct.new(
+      nil,
+      :autonomous_database_wallet_file,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1437,7 +3109,7 @@ module Aws::Odb
     #   <p>The size of the data disk group, in terabytes (TBs), to allocate for the VM cluster.</p>
     #   @return [Float]
     # @!attribute db_node_storage_size_in_g_bs
-    #   <p>The amount of local node storage, in gigabytes (GBs), to allocate for the VM cluster.</p>
+    #   <p>The amount of local node storage, in gigabytes (GB), to allocate for the VM cluster.</p>
     #   @return [Integer]
     # @!attribute db_servers
     #   <p>The list of database servers for the VM cluster.</p>
@@ -1455,7 +3127,7 @@ module Aws::Odb
     #   <p>The Oracle license model to apply to the VM cluster.</p> <p>Default: <code>LICENSE_INCLUDED</code> </p>
     #   @return [String]
     # @!attribute memory_size_in_g_bs
-    #   <p>The amount of memory, in gigabytes (GBs), to allocate for the VM cluster.</p>
+    #   <p>The amount of memory, in gigabytes (GB), to allocate for the VM cluster.</p>
     #   @return [Integer]
     # @!attribute system_version
     #   <p>The version of the operating system of the image for the VM cluster.</p>
@@ -1521,6 +3193,194 @@ module Aws::Odb
     end
 
     # @!attribute display_name
+    #   <p>A user-friendly name for the Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute enabled_ecpu_count
+    #   <p>The number of ECPUs to enable for the Exascale VM cluster.</p>
+    #   @return [Integer]
+    # @!attribute exascale_db_storage_vault_id
+    #   <p>The unique identifier of the Exascale storage vault for this Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute grid_image_id
+    #   <p>The Grid Infrastructure software image ID for the Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute hostname
+    #   <p>The host name for the Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute node_count
+    #   <p>The number of nodes in the Exascale VM cluster.</p>
+    #   @return [Integer]
+    # @!attribute odb_network_id
+    #   <p>The unique identifier of the ODB network for the Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute shape
+    #   <p>The shape of the Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute ssh_public_keys
+    #   <p>The public key portion of one or more key pairs used for SSH access to the Exascale VM cluster.</p>
+    #   @return [Array<String>]
+    # @!attribute total_ecpu_count
+    #   <p>The total number of ECPUs for the Exascale VM cluster.</p>
+    #   @return [Integer]
+    # @!attribute vm_file_system_storage_total_size_in_g_bs
+    #   <p>The total amount of file system storage, in gigabytes (GB), for the Exascale VM cluster.</p>
+    #   @return [Integer]
+    # @!attribute cluster_name
+    #   <p>A name for the Grid Infrastructure cluster. The name isn't case sensitive.</p>
+    #   @return [String]
+    # @!attribute data_collection_options
+    #   <p>The set of preferences for the various diagnostic collection options for the Exascale VM cluster.</p>
+    #   @return [Types::DataCollectionOptions]
+    # @!attribute license_model
+    #   <p>The Oracle license model to apply to the Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute scan_listener_port_tcp
+    #   <p>The port number for TCP connections to the Single Client Access Name (SCAN) listener.</p>
+    #   @return [Integer]
+    # @!attribute scan_listener_port_tcp_ssl
+    #   <p>The port number for TCP connections with SSL to the Single Client Access Name (SCAN) listener.</p>
+    #   @return [Integer]
+    # @!attribute shape_attribute
+    #   <p>The shape attribute for the Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute system_version
+    #   <p>The version of the operating system of the image for the Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>The list of resource tags to apply to the Exascale VM cluster.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute time_zone
+    #   <p>The time zone for the Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure that the operation completes no more than one time. If you submit the same request twice with the same client token, the service ignores the second request and returns the result of the first. If you don't specify a client token, the AWS SDK automatically generates one. The client token is valid for up to 24 hours after it's first used.</p>
+    #   @return [String]
+    class CreateExadbVmClusterInput < Struct.new(
+      nil,
+      :display_name,
+      :enabled_ecpu_count,
+      :exascale_db_storage_vault_id,
+      :grid_image_id,
+      :hostname,
+      :node_count,
+      :odb_network_id,
+      :shape,
+      :ssh_public_keys,
+      :total_ecpu_count,
+      :vm_file_system_storage_total_size_in_g_bs,
+      :cluster_name,
+      :data_collection_options,
+      :license_model,
+      :scan_listener_port_tcp,
+      :scan_listener_port_tcp_ssl,
+      :shape_attribute,
+      :system_version,
+      :tags,
+      :time_zone,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute display_name
+    #   <p>The user-friendly name for the Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute status_reason
+    #   <p>Additional information about the status of the Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute exadb_vm_cluster_id
+    #   <p>The unique identifier of the Exascale VM cluster.</p>
+    #   @return [String]
+    class CreateExadbVmClusterOutput < Struct.new(
+      nil,
+      :display_name,
+      :status,
+      :status_reason,
+      :exadb_vm_cluster_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute display_name
+    #   <p>A user-friendly name for the Exascale storage vault.</p>
+    #   @return [String]
+    # @!attribute high_capacity_database_storage_total_size_in_g_bs
+    #   <p>The total size of the high-capacity database storage, in gigabytes (GB), for the Exascale storage vault.</p>
+    #   @return [Integer]
+    # @!attribute additional_flash_cache_in_percent
+    #   <p>The additional flash cache percentage for the Exascale storage vault.</p>
+    #   @return [Integer]
+    # @!attribute autoscale_limit_in_g_bs
+    #   <p>The autoscale limit in gigabytes (GB) for the Exascale storage vault.</p>
+    #   @return [Integer]
+    # @!attribute availability_zone_id
+    #   <p>The Availability Zone ID for the Exascale storage vault.</p>
+    #   @return [String]
+    # @!attribute availability_zone
+    #   <p>The Availability Zone for the Exascale storage vault.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>A description of the Exascale storage vault.</p>
+    #   @return [String]
+    # @!attribute is_autoscale_enabled
+    #   <p>Specifies whether autoscaling is enabled for the Exascale storage vault.</p>
+    #   @return [Boolean]
+    # @!attribute tags
+    #   <p>The list of resource tags to apply to the Exascale storage vault.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute time_zone
+    #   <p>The time zone for the Exascale storage vault.</p>
+    #   @return [String]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure that the operation completes no more than one time. If you submit the same request twice with the same client token, the service ignores the second request and returns the result of the first. If you don't specify a client token, the AWS SDK automatically generates one. The client token is valid for up to 24 hours after it's first used.</p>
+    #   @return [String]
+    class CreateExascaleDbStorageVaultInput < Struct.new(
+      nil,
+      :display_name,
+      :high_capacity_database_storage_total_size_in_g_bs,
+      :additional_flash_cache_in_percent,
+      :autoscale_limit_in_g_bs,
+      :availability_zone_id,
+      :availability_zone,
+      :description,
+      :is_autoscale_enabled,
+      :tags,
+      :time_zone,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute display_name
+    #   <p>The user-friendly name for the Exascale storage vault.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the Exascale storage vault.</p>
+    #   @return [String]
+    # @!attribute status_reason
+    #   <p>Additional information about the status of the Exascale storage vault.</p>
+    #   @return [String]
+    # @!attribute exascale_db_storage_vault_id
+    #   <p>The unique identifier of the Exascale storage vault.</p>
+    #   @return [String]
+    class CreateExascaleDbStorageVaultOutput < Struct.new(
+      nil,
+      :display_name,
+      :status,
+      :status_reason,
+      :exascale_db_storage_vault_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute display_name
     #   <p>A user-friendly name for the ODB network.</p>
     #   @return [String]
     # @!attribute availability_zone
@@ -1550,9 +3410,24 @@ module Aws::Odb
     # @!attribute zero_etl_access
     #   <p>Specifies the configuration for Zero-ETL access from the ODB network.</p>
     #   @return [String]
+    # @!attribute sts_access
+    #   <p>The Amazon Web Services Security Token Service (STS) access configuration for the ODB network.</p>
+    #   @return [String]
+    # @!attribute kms_access
+    #   <p>The Amazon Web Services Key Management Service (KMS) access configuration for the ODB network.</p>
+    #   @return [String]
     # @!attribute s3_policy_document
     #   <p>Specifies the endpoint policy for Amazon S3 access from the ODB network.</p>
     #   @return [String]
+    # @!attribute sts_policy_document
+    #   <p>The Amazon Web Services Security Token Service (STS) policy document that defines permissions for token service usage within the ODB network.</p>
+    #   @return [String]
+    # @!attribute kms_policy_document
+    #   <p>The Amazon Web Services Key Management Service (KMS) policy document that defines permissions for key usage within the ODB network.</p>
+    #   @return [String]
+    # @!attribute cross_region_s3_restore_sources_to_enable
+    #   <p>The cross-Region Amazon S3 restore sources to enable for the ODB network.</p>
+    #   @return [Array<String>]
     # @!attribute tags
     #   <p>The list of resource tags to apply to the ODB network.</p>
     #   @return [Hash<String, String>]
@@ -1568,7 +3443,12 @@ module Aws::Odb
       :client_token,
       :s3_access,
       :zero_etl_access,
+      :sts_access,
+      :kms_access,
       :s3_policy_document,
+      :sts_policy_document,
+      :kms_policy_document,
+      :cross_region_s3_restore_sources_to_enable,
       :tags,
       keyword_init: true
     )
@@ -1607,6 +3487,12 @@ module Aws::Odb
     # @!attribute display_name
     #   <p>The display name for the ODB peering connection.</p>
     #   @return [String]
+    # @!attribute peer_network_cidrs_to_be_added
+    #   <p>A list of CIDR blocks to add to the peering connection. These CIDR blocks define the IP address ranges that can communicate through the peering connection.</p>
+    #   @return [Array<String>]
+    # @!attribute peer_network_route_table_ids
+    #   <p>The unique identifier of the VPC route table for which a route to the ODB network is automatically created during peering connection establishment.</p>
+    #   @return [Array<String>]
     # @!attribute client_token
     #   <p>The client token for the ODB peering connection request.</p> <p>Constraints:</p> <ul> <li> <p>Must be unique for each request.</p> </li> </ul>
     #   @return [String]
@@ -1618,6 +3504,8 @@ module Aws::Odb
       :odb_network_id,
       :peer_network_id,
       :display_name,
+      :peer_network_cidrs_to_be_added,
+      :peer_network_route_table_ids,
       :client_token,
       :tags,
       keyword_init: true
@@ -1629,7 +3517,7 @@ module Aws::Odb
     #   <p>The display name of the ODB peering connection.</p>
     #   @return [String]
     # @!attribute status
-    #   <p>The status of the ODB peering connection.</p> <p>Valid Values: <code>provisioning | active | terminating | terminated | failed</code> </p>
+    #   <p>The status of the ODB peering connection.</p>
     #   @return [String]
     # @!attribute status_reason
     #   <p>The reason for the current status of the ODB peering connection.</p>
@@ -1648,6 +3536,58 @@ module Aws::Odb
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The configuration for creating an Autonomous Database as a cross-Region Oracle Data Guard peer.</p>
+    # @!attribute source_autonomous_database_arn
+    #   <p>The Amazon Resource Name (ARN) of the source Autonomous Database for the cross-Region Oracle Data Guard configuration.</p>
+    #   @return [String]
+    class CrossRegionDataGuardConfiguration < Struct.new(
+      nil,
+      :source_autonomous_database_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration for creating an Autonomous Database as a cross-Region disaster recovery peer.</p>
+    # @!attribute source_autonomous_database_arn
+    #   <p>The Amazon Resource Name (ARN) of the source Autonomous Database for the cross-Region disaster recovery configuration.</p>
+    #   @return [String]
+    # @!attribute remote_disaster_recovery_type
+    #   <p>The type of remote disaster recovery to configure, either Autonomous Data Guard or backup-based.</p>
+    #   @return [String]
+    # @!attribute is_replicate_automatic_backups
+    #   <p>Indicates whether automatic backups are replicated to the disaster recovery database.</p>
+    #   @return [Boolean]
+    class CrossRegionDisasterRecoveryConfiguration < Struct.new(
+      nil,
+      :source_autonomous_database_arn,
+      :remote_disaster_recovery_type,
+      :is_replicate_automatic_backups,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration access for the cross-Region Amazon S3 database restore source for the ODB network.</p>
+    # @!attribute region
+    #   <p>The Amazon Web Services Region for cross-Region Amazon S3 restore access.</p>
+    #   @return [String]
+    # @!attribute ipv4_addresses
+    #   <p>The IPv4 addresses allowed for cross-Region Amazon S3 restore access.</p>
+    #   @return [Array<String>]
+    # @!attribute status
+    #   <p>The current status of the cross-Region Amazon S3 restore access configuration.</p>
+    #   @return [String]
+    class CrossRegionS3RestoreSourcesAccess < Struct.new(
+      nil,
+      :region,
+      :ipv4_addresses,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>A contact to receive notification from Oracle about maintenance updates for a specific Exadata infrastructure.</p>
     # @!attribute email
     #   <p>The email address of the contact.</p>
@@ -1655,6 +3595,46 @@ module Aws::Odb
     class CustomerContact < Struct.new(
       nil,
       :email,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration of a customer-managed Amazon Web Services Secrets Manager secret used to supply a password.</p>
+    # @!attribute iam_role_arn
+    #   <p>The Amazon Resource Name (ARN) of the Amazon Web Services Identity and Access Management (IAM) role that OCI assumes to retrieve the secret value.</p>
+    #   @return [String]
+    # @!attribute secret_id
+    #   <p>The identifier or ARN of the Amazon Web Services Secrets Manager secret that contains the password.</p>
+    #   @return [String]
+    # @!attribute external_id_type
+    #   <p>The type of Oracle Cloud Identifier (OCID) used as the external ID when assuming the IAM role.</p>
+    #   @return [String]
+    class CustomerManagedAwsSecretConfiguration < Struct.new(
+      nil,
+      :iam_role_arn,
+      :secret_id,
+      :external_id_type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The input configuration for a customer-managed Amazon Web Services Secrets Manager secret used to supply a password.</p>
+    # @!attribute secret_id
+    #   <p>The identifier or ARN of the Amazon Web Services Secrets Manager secret that contains the password.</p>
+    #   @return [String]
+    # @!attribute iam_role_arn
+    #   <p>The Amazon Resource Name (ARN) of the Amazon Web Services Identity and Access Management (IAM) role that OCI assumes to retrieve the secret value.</p>
+    #   @return [String]
+    # @!attribute external_id_type
+    #   <p>The type of Oracle Cloud Identifier (OCID) used as the external ID when assuming the IAM role.</p> <p>The valid values depend on the operation. For the <code>CreateAutonomousDatabase</code> operation, only <code>compartment_ocid</code> and <code>tenant_ocid</code> are allowed. For the <code>UpdateAutonomousDatabase</code> and <code>CreateAutonomousDatabaseWallet</code> operations, <code>database_ocid</code>, <code>compartment_ocid</code>, and <code>tenant_ocid</code> are all allowed.</p>
+    #   @return [String]
+    class CustomerManagedAwsSecretConfigurationInput < Struct.new(
+      nil,
+      :secret_id,
+      :iam_role_arn,
+      :external_id_type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1675,6 +3655,134 @@ module Aws::Odb
       :is_diagnostics_events_enabled,
       :is_health_monitoring_enabled,
       :is_incident_logs_enabled,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration for creating an Autonomous Database as a clone of an existing database.</p>
+    # @!attribute source_autonomous_database_id
+    #   <p>The unique identifier of the source Autonomous Database to clone.</p>
+    #   @return [String]
+    # @!attribute clone_type
+    #   <p>The type of clone to create, either a full clone, a metadata clone, or a partial clone.</p>
+    #   @return [String]
+    class DatabaseCloneConfiguration < Struct.new(
+      nil,
+      :source_autonomous_database_id,
+      :clone_type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A connection string profile for an Autonomous Database.</p>
+    # @!attribute consumer_group
+    #   <p>The consumer group associated with the connection string profile.</p>
+    #   @return [String]
+    # @!attribute display_name
+    #   <p>The user-friendly name of the connection string profile.</p>
+    #   @return [String]
+    # @!attribute host_format
+    #   <p>The host name format used in the connection string.</p>
+    #   @return [String]
+    # @!attribute is_regional
+    #   <p>Indicates whether the connection string profile is regional.</p>
+    #   @return [Boolean]
+    # @!attribute protocol
+    #   <p>The protocol used by the connection string profile.</p>
+    #   @return [String]
+    # @!attribute session_mode
+    #   <p>The session mode of the connection string profile.</p>
+    #   @return [String]
+    # @!attribute syntax_format
+    #   <p>The syntax format of the connection string profile.</p>
+    #   @return [String]
+    # @!attribute tls_authentication
+    #   <p>The TLS authentication method used by the connection string profile.</p>
+    #   @return [String]
+    # @!attribute value
+    #   <p>The connection string value of the profile.</p>
+    #   @return [String]
+    class DatabaseConnectionStringProfile < Struct.new(
+      nil,
+      :consumer_group,
+      :display_name,
+      :host_format,
+      :is_regional,
+      :protocol,
+      :session_mode,
+      :syntax_format,
+      :tls_authentication,
+      :value,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A summary of a standby Autonomous Database in an Oracle Data Guard configuration.</p>
+    # @!attribute availability_domain
+    #   <p>The availability domain of the standby Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute lag_time_in_seconds
+    #   <p>The time lag, in seconds, between the standby database and the primary database.</p>
+    #   @return [Integer]
+    # @!attribute status
+    #   <p>The current status of the standby Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute status_reason
+    #   <p>Additional information about the current status of the standby Autonomous Database, if applicable.</p>
+    #   @return [String]
+    # @!attribute maintenance_target_component
+    #   <p>The component on the standby Autonomous Database that the current maintenance is being applied to.</p>
+    #   @return [String]
+    # @!attribute time_data_guard_role_changed
+    #   <p>The date and time when the Oracle Data Guard role of the standby database last changed.</p>
+    #   @return [Time]
+    # @!attribute time_disaster_recovery_role_changed
+    #   <p>The date and time when the disaster recovery role of the standby database last changed.</p>
+    #   @return [Time]
+    # @!attribute time_maintenance_begin
+    #   <p>The date and time when the next maintenance of the standby database begins.</p>
+    #   @return [Time]
+    # @!attribute time_maintenance_end
+    #   <p>The date and time when the next maintenance of the standby database ends.</p>
+    #   @return [Time]
+    class DatabaseStandbySummary < Struct.new(
+      nil,
+      :availability_domain,
+      :lag_time_in_seconds,
+      :status,
+      :status_reason,
+      :maintenance_target_component,
+      :time_data_guard_role_changed,
+      :time_disaster_recovery_role_changed,
+      :time_maintenance_begin,
+      :time_maintenance_end,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Information about a database management tool for an Autonomous Database.</p>
+    # @!attribute is_enabled
+    #   <p>Indicates whether the database management tool is enabled.</p>
+    #   @return [Boolean]
+    # @!attribute name
+    #   <p>The name of the database management tool.</p>
+    #   @return [String]
+    # @!attribute compute_count
+    #   <p>The compute capacity allocated to the database management tool.</p>
+    #   @return [Float]
+    # @!attribute max_idle_time_in_minutes
+    #   <p>The maximum amount of time, in minutes, that the database management tool can be idle before it is shut down.</p>
+    #   @return [Integer]
+    class DatabaseTool < Struct.new(
+      nil,
+      :is_enabled,
+      :name,
+      :compute_count,
+      :max_idle_time_in_minutes,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1741,7 +3849,7 @@ module Aws::Odb
     #   <p>Number of CPU cores enabled on the DB node.</p>
     #   @return [Integer]
     # @!attribute db_node_storage_size_in_g_bs
-    #   <p>The amount of local node storage, in gigabytes (GBs), that's allocated on the DB node.</p>
+    #   <p>The amount of local node storage, in gigabytes (GB), that's allocated on the DB node.</p>
     #   @return [Integer]
     # @!attribute db_server_id
     #   <p>The unique identifier of the Db server that is associated with the DB node.</p>
@@ -2208,6 +4316,9 @@ module Aws::Odb
     # @!attribute shape_type
     #   <p>The shape type. This property is determined by the CPU hardware.</p>
     #   @return [String]
+    # @!attribute shape_attributes
+    #   <p>If provided and applicable, return DB System shape parameters based on the shape attribute provided.</p>
+    #   @return [Array<String>]
     # @!attribute name
     #   <p>The name of the shape.</p>
     #   @return [String]
@@ -2240,9 +4351,46 @@ module Aws::Odb
       :runtime_minimum_core_count,
       :shape_family,
       :shape_type,
+      :shape_attributes,
       :name,
       :compute_model,
       :are_server_types_supported,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute autonomous_database_backup_id
+    #   <p>The unique identifier of the Autonomous Database backup to delete.</p>
+    #   @return [String]
+    class DeleteAutonomousDatabaseBackupInput < Struct.new(
+      nil,
+      :autonomous_database_backup_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class DeleteAutonomousDatabaseBackupOutput < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute autonomous_database_id
+    #   <p>The unique identifier of the Autonomous Database to delete.</p>
+    #   @return [String]
+    class DeleteAutonomousDatabaseInput < Struct.new(
+      nil,
+      :autonomous_database_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class DeleteAutonomousDatabaseOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2302,6 +4450,42 @@ module Aws::Odb
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute exadb_vm_cluster_id
+    #   <p>The unique identifier of the Exascale VM cluster to delete.</p>
+    #   @return [String]
+    class DeleteExadbVmClusterInput < Struct.new(
+      nil,
+      :exadb_vm_cluster_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class DeleteExadbVmClusterOutput < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute exascale_db_storage_vault_id
+    #   <p>The unique identifier of the Exascale storage vault to delete.</p>
+    #   @return [String]
+    class DeleteExascaleDbStorageVaultInput < Struct.new(
+      nil,
+      :exascale_db_storage_vault_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class DeleteExascaleDbStorageVaultOutput < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute odb_network_id
     #   <p>The unique identifier of the ODB network to delete.</p>
     #   @return [String]
@@ -2342,6 +4526,150 @@ module Aws::Odb
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute iam_role_arn
+    #   <p>The Amazon Resource Name (ARN) of the Amazon Web Services Identity and Access Management (IAM) service role to disassociate from the resource.</p>
+    #   @return [String]
+    # @!attribute aws_integration
+    #   <p>The Amazon Web Services integration configuration settings for the Amazon Web Services Identity and Access Management (IAM) service role disassociation.</p>
+    #   @return [String]
+    # @!attribute resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the target resource to disassociate from the Amazon Web Services Identity and Access Management (IAM) service role.</p>
+    #   @return [String]
+    class DisassociateIamRoleFromResourceInput < Struct.new(
+      nil,
+      :iam_role_arn,
+      :aws_integration,
+      :resource_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class DisassociateIamRoleFromResourceOutput < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute exadb_vm_cluster_id
+    #   <p>The unique identifier of the Exascale VM cluster to remove virtual machines from.</p>
+    #   @return [String]
+    # @!attribute db_node_ids
+    #   <p>The list of DB node IDs to remove from the Exascale VM cluster.</p>
+    #   @return [Array<String>]
+    class DisassociateVirtualMachinesFromExadbVmClusterInput < Struct.new(
+      nil,
+      :exadb_vm_cluster_id,
+      :db_node_ids,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute display_name
+    #   <p>The user-friendly name for the Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute status_reason
+    #   <p>Additional information about the status of the Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute exadb_vm_cluster_id
+    #   <p>The unique identifier of the Exascale VM cluster.</p>
+    #   @return [String]
+    class DisassociateVirtualMachinesFromExadbVmClusterOutput < Struct.new(
+      nil,
+      :display_name,
+      :status,
+      :status_reason,
+      :exadb_vm_cluster_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The disaster recovery configuration for an Autonomous Database.</p>
+    # @!attribute disaster_recovery_type
+    #   <p>The type of disaster recovery configured for the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute is_replicate_automatic_backups
+    #   <p>Indicates whether automatic backups are replicated to the disaster recovery database.</p>
+    #   @return [Boolean]
+    # @!attribute is_snapshot_standby
+    #   <p>Indicates whether the standby database is a snapshot standby.</p>
+    #   @return [Boolean]
+    # @!attribute time_snapshot_standby_enabled_till
+    #   <p>The date and time until which the snapshot standby database remains enabled.</p>
+    #   @return [Time]
+    class DisasterRecoveryConfiguration < Struct.new(
+      nil,
+      :disaster_recovery_type,
+      :is_replicate_automatic_backups,
+      :is_snapshot_standby,
+      :time_snapshot_standby_enabled_till,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration of the encryption key used for an Autonomous Database. This is a union, so only one of the following members can be specified.</p>
+    # @!attribute aws_encryption_key
+    #   <p>The configuration of the Amazon Web Services Key Management Service (KMS) encryption key.</p>
+    #   @return [Types::AwsEncryptionKeyConfiguration]
+    # @!attribute oci_encryption_key
+    #   <p>The configuration of the Oracle Cloud Infrastructure (OCI) Vault encryption key.</p>
+    #   @return [Types::OciEncryptionKeyConfiguration]
+    # @!attribute okv_encryption_key
+    #   <p>The configuration of the Oracle Key Vault (OKV) encryption key.</p>
+    #   @return [Types::OkvEncryptionKeyConfiguration]
+    class EncryptionKeyConfiguration < Struct.new(
+      :aws_encryption_key,
+      :oci_encryption_key,
+      :okv_encryption_key,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class AwsEncryptionKey < EncryptionKeyConfiguration; end
+      class OciEncryptionKey < EncryptionKeyConfiguration; end
+      class OkvEncryptionKey < EncryptionKeyConfiguration; end
+      class Unknown < EncryptionKeyConfiguration; end
+    end
+
+    # <p>The configuration of the encryption key to use for an Autonomous Database. This is a union, so only one of the following members can be specified.</p>
+    # @!attribute aws_encryption_key
+    #   <p>The configuration of the Amazon Web Services Key Management Service (KMS) encryption key to use.</p>
+    #   @return [Types::AwsEncryptionKeyConfigurationInput]
+    class EncryptionKeyConfigurationInput < Struct.new(
+      :aws_encryption_key,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class AwsEncryptionKey < EncryptionKeyConfigurationInput; end
+      class Unknown < EncryptionKeyConfigurationInput; end
+    end
+
+    # <p>The encryption configuration for an Autonomous Database.</p>
+    # @!attribute encryption_key_provider
+    #   <p>The provider of the encryption key used for the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute encryption_key_configuration
+    #   <p>The configuration of the encryption key used for the Autonomous Database.</p>
+    #   @return [Types::EncryptionKeyConfiguration]
+    class EncryptionSummary < Struct.new(
+      nil,
+      :encryption_key_provider,
+      :encryption_key_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The IORM settings of the Exadata DB system.</p>
     # @!attribute db_plans
     #   <p>An array of IORM settings for all the database in the Exadata DB system.</p>
@@ -2361,6 +4689,750 @@ module Aws::Odb
       :lifecycle_details,
       :lifecycle_state,
       :objective,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Information about an Exascale VM cluster.</p>
+    # @!attribute exadb_vm_cluster_id
+    #   <p>The unique identifier of the Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute cluster_name
+    #   <p>The name of the Grid Infrastructure (GI) cluster.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The date and time when the Exascale VM cluster was created.</p>
+    #   @return [Time]
+    # @!attribute data_collection_options
+    #   <p>The set of diagnostic collection options enabled for the Exascale VM cluster.</p>
+    #   @return [Types::DataCollectionOptions]
+    # @!attribute display_name
+    #   <p>The user-friendly name for the Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute domain
+    #   <p>The domain of the Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute enabled_ecpu_count
+    #   <p>The number of elastic compute processing units (ECPUs) enabled on the Exascale VM cluster.</p>
+    #   @return [Integer]
+    # @!attribute exadb_vm_cluster_arn
+    #   <p>The Amazon Resource Name (ARN) of the Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute exascale_db_storage_vault_arn
+    #   <p>The Amazon Resource Name (ARN) of the Exascale storage vault associated with this Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute exascale_db_storage_vault_id
+    #   <p>The unique identifier of the Exascale storage vault associated with this Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute gi_version
+    #   <p>The software version of the Oracle Grid Infrastructure (GI) for the Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute grid_image_id
+    #   <p>The Grid Infrastructure software image ID for the Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute grid_image_type
+    #   <p>The type of Grid Infrastructure image for the Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute hostname
+    #   <p>The host name for the Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute iam_roles
+    #   <p>The Amazon Web Services Identity and Access Management (IAM) service roles associated with the Exascale VM cluster.</p>
+    #   @return [Array<Types::IamRole>]
+    # @!attribute iorm_config_cache
+    #   <p>The I/O Resource Management (IORM) configuration cache details for the Exascale VM cluster.</p>
+    #   @return [Types::ExadataIormConfig]
+    # @!attribute last_update_history_entry_id
+    #   <p>The Oracle Cloud ID (OCID) of the last maintenance update history entry.</p>
+    #   @return [String]
+    # @!attribute license_model
+    #   <p>The Oracle license model applied to the Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute listener_port
+    #   <p>The port number configured for the listener on the Exascale VM cluster.</p>
+    #   @return [Integer]
+    # @!attribute memory_size_in_g_bs
+    #   <p>The amount of memory, in gigabytes (GB), that's allocated for the Exascale VM cluster.</p>
+    #   @return [Integer]
+    # @!attribute node_count
+    #   <p>The number of nodes in the Exascale VM cluster.</p>
+    #   @return [Integer]
+    # @!attribute ocid
+    #   <p>The OCID of the Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute oci_resource_anchor_name
+    #   <p>The name of the OCI resource anchor for the Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute oci_url
+    #   <p>The HTTPS link to the Exascale VM cluster in Oracle Cloud Infrastructure (OCI).</p>
+    #   @return [String]
+    # @!attribute odb_network_arn
+    #   <p>The Amazon Resource Name (ARN) of the ODB network associated with this Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute odb_network_id
+    #   <p>The unique identifier of the ODB network for the Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute percent_progress
+    #   <p>The amount of progress made on the current operation on the Exascale VM cluster, expressed as a percentage.</p>
+    #   @return [Float]
+    # @!attribute scan_dns_name
+    #   <p>The fully qualified domain name (FQDN) of the DNS record for the Single Client Access Name (SCAN) IP addresses that are associated with the Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute scan_dns_record_id
+    #   <p>The OCID of the DNS record for the SCAN IP addresses that are associated with the Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute scan_ip_ids
+    #   <p>The OCID of the SCAN IP addresses that are associated with the Exascale VM cluster.</p>
+    #   @return [Array<String>]
+    # @!attribute scan_listener_port_tcp
+    #   <p>The port number for TCP connections to the Single Client Access Name (SCAN) listener for the Exascale VM cluster.</p>
+    #   @return [Integer]
+    # @!attribute scan_listener_port_tcp_ssl
+    #   <p>The port number for TCP connections with SSL to the Single Client Access Name (SCAN) listener for the Exascale VM cluster.</p>
+    #   @return [Integer]
+    # @!attribute shape
+    #   <p>The hardware model name of the Exadata infrastructure that's running the Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute shape_attribute
+    #   <p>The shape attribute for the Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute snapshot_file_system_storage
+    #   <p>The snapshot file system storage details for the Exascale VM cluster.</p>
+    #   @return [Types::ExadbVmClusterStorageDetails]
+    # @!attribute ssh_public_keys
+    #   <p>The public key portion of one or more key pairs used for SSH access to the Exascale VM cluster.</p>
+    #   @return [Array<String>]
+    # @!attribute status
+    #   <p>The current status of the Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute status_reason
+    #   <p>Additional information about the status of the Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute system_version
+    #   <p>The operating system version of the image chosen for the Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute time_zone
+    #   <p>The time zone of the Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute total_ecpu_count
+    #   <p>The total number of ECPUs for the Exascale VM cluster.</p>
+    #   @return [Integer]
+    # @!attribute total_file_system_storage
+    #   <p>The total file system storage details for the Exascale VM cluster.</p>
+    #   @return [Types::ExadbVmClusterStorageDetails]
+    # @!attribute vip_ids
+    #   <p>The virtual IP (VIP) addresses associated with the Exascale VM cluster. One VIP address is assigned per node to support failover. If a node fails, its VIP is reassigned to another active node in the cluster.</p>
+    #   @return [Array<String>]
+    # @!attribute vm_file_system_storage
+    #   <p>The VM file system storage details for the Exascale VM cluster.</p>
+    #   @return [Types::ExadbVmClusterStorageDetails]
+    class ExadbVmCluster < Struct.new(
+      nil,
+      :exadb_vm_cluster_id,
+      :cluster_name,
+      :created_at,
+      :data_collection_options,
+      :display_name,
+      :domain,
+      :enabled_ecpu_count,
+      :exadb_vm_cluster_arn,
+      :exascale_db_storage_vault_arn,
+      :exascale_db_storage_vault_id,
+      :gi_version,
+      :grid_image_id,
+      :grid_image_type,
+      :hostname,
+      :iam_roles,
+      :iorm_config_cache,
+      :last_update_history_entry_id,
+      :license_model,
+      :listener_port,
+      :memory_size_in_g_bs,
+      :node_count,
+      :ocid,
+      :oci_resource_anchor_name,
+      :oci_url,
+      :odb_network_arn,
+      :odb_network_id,
+      :percent_progress,
+      :scan_dns_name,
+      :scan_dns_record_id,
+      :scan_ip_ids,
+      :scan_listener_port_tcp,
+      :scan_listener_port_tcp_ssl,
+      :shape,
+      :shape_attribute,
+      :snapshot_file_system_storage,
+      :ssh_public_keys,
+      :status,
+      :status_reason,
+      :system_version,
+      :time_zone,
+      :total_ecpu_count,
+      :total_file_system_storage,
+      :vip_ids,
+      :vm_file_system_storage,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Storage details for an Exascale VM cluster.</p>
+    # @!attribute total_size_in_g_bs
+    #   <p>The total storage size, in gigabytes (GB).</p>
+    #   @return [Integer]
+    class ExadbVmClusterStorageDetails < Struct.new(
+      nil,
+      :total_size_in_g_bs,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Summary information about an Exascale VM cluster.</p>
+    # @!attribute exadb_vm_cluster_id
+    #   <p>The unique identifier of the Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute cluster_name
+    #   <p>The name of the Grid Infrastructure (GI) cluster.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The date and time when the Exascale VM cluster was created.</p>
+    #   @return [Time]
+    # @!attribute data_collection_options
+    #   <p>The set of diagnostic collection options enabled for the Exascale VM cluster.</p>
+    #   @return [Types::DataCollectionOptions]
+    # @!attribute display_name
+    #   <p>The user-friendly name for the Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute domain
+    #   <p>The domain of the Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute enabled_ecpu_count
+    #   <p>The number of elastic compute processing units (ECPUs) enabled on the Exascale VM cluster.</p>
+    #   @return [Integer]
+    # @!attribute exadb_vm_cluster_arn
+    #   <p>The Amazon Resource Name (ARN) of the Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute exascale_db_storage_vault_arn
+    #   <p>The Amazon Resource Name (ARN) of the Exascale storage vault associated with this Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute exascale_db_storage_vault_id
+    #   <p>The unique identifier of the Exascale storage vault associated with this Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute gi_version
+    #   <p>The software version of the Oracle Grid Infrastructure (GI) for the Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute grid_image_id
+    #   <p>The Grid Infrastructure software image ID for the Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute grid_image_type
+    #   <p>The type of Grid Infrastructure image for the Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute hostname
+    #   <p>The host name for the Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute iam_roles
+    #   <p>The Amazon Web Services Identity and Access Management (IAM) service roles associated with the Exascale VM cluster.</p>
+    #   @return [Array<Types::IamRole>]
+    # @!attribute iorm_config_cache
+    #   <p>The I/O Resource Management (IORM) configuration cache details for the Exascale VM cluster.</p>
+    #   @return [Types::ExadataIormConfig]
+    # @!attribute last_update_history_entry_id
+    #   <p>The Oracle Cloud ID (OCID) of the last maintenance update history entry.</p>
+    #   @return [String]
+    # @!attribute license_model
+    #   <p>The Oracle license model applied to the Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute listener_port
+    #   <p>The port number configured for the listener on the Exascale VM cluster.</p>
+    #   @return [Integer]
+    # @!attribute memory_size_in_g_bs
+    #   <p>The amount of memory, in gigabytes (GB), that's allocated for the Exascale VM cluster.</p>
+    #   @return [Integer]
+    # @!attribute node_count
+    #   <p>The number of nodes in the Exascale VM cluster.</p>
+    #   @return [Integer]
+    # @!attribute ocid
+    #   <p>The OCID of the Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute oci_resource_anchor_name
+    #   <p>The name of the OCI resource anchor for the Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute oci_url
+    #   <p>The HTTPS link to the Exascale VM cluster in Oracle Cloud Infrastructure (OCI).</p>
+    #   @return [String]
+    # @!attribute odb_network_arn
+    #   <p>The Amazon Resource Name (ARN) of the ODB network associated with this Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute odb_network_id
+    #   <p>The unique identifier of the ODB network for the Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute percent_progress
+    #   <p>The amount of progress made on the current operation on the Exascale VM cluster, expressed as a percentage.</p>
+    #   @return [Float]
+    # @!attribute scan_dns_name
+    #   <p>The fully qualified domain name (FQDN) of the DNS record for the Single Client Access Name (SCAN) IP addresses that are associated with the Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute scan_dns_record_id
+    #   <p>The OCID of the DNS record for the SCAN IP addresses that are associated with the Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute scan_ip_ids
+    #   <p>The OCID of the SCAN IP addresses that are associated with the Exascale VM cluster.</p>
+    #   @return [Array<String>]
+    # @!attribute scan_listener_port_tcp
+    #   <p>The port number for TCP connections to the Single Client Access Name (SCAN) listener for the Exascale VM cluster.</p>
+    #   @return [Integer]
+    # @!attribute scan_listener_port_tcp_ssl
+    #   <p>The port number for TCP connections with SSL to the Single Client Access Name (SCAN) listener for the Exascale VM cluster.</p>
+    #   @return [Integer]
+    # @!attribute shape
+    #   <p>The hardware model name of the Exadata infrastructure that's running the Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute shape_attribute
+    #   <p>The shape attribute for the Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute snapshot_file_system_storage
+    #   <p>The snapshot file system storage details for the Exascale VM cluster.</p>
+    #   @return [Types::ExadbVmClusterStorageDetails]
+    # @!attribute ssh_public_keys
+    #   <p>The public key portion of one or more key pairs used for SSH access to the Exascale VM cluster.</p>
+    #   @return [Array<String>]
+    # @!attribute status
+    #   <p>The current status of the Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute status_reason
+    #   <p>Additional information about the status of the Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute system_version
+    #   <p>The operating system version of the image chosen for the Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute time_zone
+    #   <p>The time zone of the Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute total_ecpu_count
+    #   <p>The total number of ECPUs for the Exascale VM cluster.</p>
+    #   @return [Integer]
+    # @!attribute total_file_system_storage
+    #   <p>The total file system storage details for the Exascale VM cluster.</p>
+    #   @return [Types::ExadbVmClusterStorageDetails]
+    # @!attribute vip_ids
+    #   <p>The virtual IP (VIP) addresses associated with the Exascale VM cluster. One VIP address is assigned per node to support failover. If a node fails, its VIP is reassigned to another active node in the cluster.</p>
+    #   @return [Array<String>]
+    # @!attribute vm_file_system_storage
+    #   <p>The VM file system storage details for the Exascale VM cluster.</p>
+    #   @return [Types::ExadbVmClusterStorageDetails]
+    class ExadbVmClusterSummary < Struct.new(
+      nil,
+      :exadb_vm_cluster_id,
+      :cluster_name,
+      :created_at,
+      :data_collection_options,
+      :display_name,
+      :domain,
+      :enabled_ecpu_count,
+      :exadb_vm_cluster_arn,
+      :exascale_db_storage_vault_arn,
+      :exascale_db_storage_vault_id,
+      :gi_version,
+      :grid_image_id,
+      :grid_image_type,
+      :hostname,
+      :iam_roles,
+      :iorm_config_cache,
+      :last_update_history_entry_id,
+      :license_model,
+      :listener_port,
+      :memory_size_in_g_bs,
+      :node_count,
+      :ocid,
+      :oci_resource_anchor_name,
+      :oci_url,
+      :odb_network_arn,
+      :odb_network_id,
+      :percent_progress,
+      :scan_dns_name,
+      :scan_dns_record_id,
+      :scan_ip_ids,
+      :scan_listener_port_tcp,
+      :scan_listener_port_tcp_ssl,
+      :shape,
+      :shape_attribute,
+      :snapshot_file_system_storage,
+      :ssh_public_keys,
+      :status,
+      :status_reason,
+      :system_version,
+      :time_zone,
+      :total_ecpu_count,
+      :total_file_system_storage,
+      :vip_ids,
+      :vm_file_system_storage,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The storage details for an Exascale storage vault.</p>
+    # @!attribute available_size_in_g_bs
+    #   <p>The available storage size, in gigabytes (GB).</p>
+    #   @return [Integer]
+    # @!attribute total_size_in_g_bs
+    #   <p>The total storage size, in gigabytes (GB).</p>
+    #   @return [Integer]
+    class ExascaleDbStorageDetails < Struct.new(
+      nil,
+      :available_size_in_g_bs,
+      :total_size_in_g_bs,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Information about an Exascale storage vault.</p>
+    # @!attribute exascale_db_storage_vault_id
+    #   <p>The unique identifier of the Exascale storage vault.</p>
+    #   @return [String]
+    # @!attribute additional_flash_cache_in_percent
+    #   <p>The additional flash cache percentage for the Exascale storage vault.</p>
+    #   @return [Integer]
+    # @!attribute attached_shape_attributes
+    #   <p>The list of shape attributes attached to the Exascale storage vault.</p>
+    #   @return [Array<String>]
+    # @!attribute autoscale_limit_in_g_bs
+    #   <p>The autoscale limit in gigabytes (GB) for the Exascale storage vault.</p>
+    #   @return [Integer]
+    # @!attribute availability_zone
+    #   <p>The Availability Zone for the Exascale storage vault.</p>
+    #   @return [String]
+    # @!attribute availability_zone_id
+    #   <p>The Availability Zone ID for the Exascale storage vault.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The date and time when the Exascale storage vault was created.</p>
+    #   @return [Time]
+    # @!attribute description
+    #   <p>The description of the Exascale storage vault.</p>
+    #   @return [String]
+    # @!attribute display_name
+    #   <p>The user-friendly name for the Exascale storage vault.</p>
+    #   @return [String]
+    # @!attribute vm_cluster_arns
+    #   <p>The list of Amazon Resource Names (ARNs) of the VM clusters associated with this Exascale storage vault.</p>
+    #   @return [Array<String>]
+    # @!attribute vm_cluster_count
+    #   <p>The number of VM clusters associated with this Exascale storage vault.</p>
+    #   @return [Integer]
+    # @!attribute vm_cluster_ids
+    #   <p>The list of unique identifiers of the VM clusters associated with this Exascale storage vault.</p>
+    #   @return [Array<String>]
+    # @!attribute exascale_db_storage_vault_arn
+    #   <p>The Amazon Resource Name (ARN) of the Exascale storage vault.</p>
+    #   @return [String]
+    # @!attribute high_capacity_database_storage
+    #   <p>The high-capacity database storage details for the Exascale storage vault.</p>
+    #   @return [Types::ExascaleDbStorageDetails]
+    # @!attribute is_autoscale_enabled
+    #   <p>Specifies whether autoscaling is enabled for the Exascale storage vault.</p>
+    #   @return [Boolean]
+    # @!attribute ocid
+    #   <p>The OCID of the Exascale storage vault.</p>
+    #   @return [String]
+    # @!attribute oci_resource_anchor_name
+    #   <p>The name of the OCI resource anchor for the Exascale storage vault.</p>
+    #   @return [String]
+    # @!attribute oci_url
+    #   <p>The HTTPS link to the Exascale storage vault in Oracle Cloud Infrastructure (OCI).</p>
+    #   @return [String]
+    # @!attribute percent_progress
+    #   <p>The amount of progress made on the current operation on the Exascale storage vault, expressed as a percentage.</p>
+    #   @return [Float]
+    # @!attribute status
+    #   <p>The current status of the Exascale storage vault.</p>
+    #   @return [String]
+    # @!attribute status_reason
+    #   <p>Additional information about the status of the Exascale storage vault.</p>
+    #   @return [String]
+    # @!attribute time_zone
+    #   <p>The time zone of the Exascale storage vault.</p>
+    #   @return [String]
+    class ExascaleDbStorageVault < Struct.new(
+      nil,
+      :exascale_db_storage_vault_id,
+      :additional_flash_cache_in_percent,
+      :attached_shape_attributes,
+      :autoscale_limit_in_g_bs,
+      :availability_zone,
+      :availability_zone_id,
+      :created_at,
+      :description,
+      :display_name,
+      :vm_cluster_arns,
+      :vm_cluster_count,
+      :vm_cluster_ids,
+      :exascale_db_storage_vault_arn,
+      :high_capacity_database_storage,
+      :is_autoscale_enabled,
+      :ocid,
+      :oci_resource_anchor_name,
+      :oci_url,
+      :percent_progress,
+      :status,
+      :status_reason,
+      :time_zone,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Summary information about an Exascale storage vault.</p>
+    # @!attribute exascale_db_storage_vault_id
+    #   <p>The unique identifier of the Exascale storage vault.</p>
+    #   @return [String]
+    # @!attribute additional_flash_cache_in_percent
+    #   <p>The additional flash cache percentage for the Exascale storage vault.</p>
+    #   @return [Integer]
+    # @!attribute attached_shape_attributes
+    #   <p>The list of shape attributes attached to the Exascale storage vault.</p>
+    #   @return [Array<String>]
+    # @!attribute autoscale_limit_in_g_bs
+    #   <p>The autoscale limit in gigabytes (GB) for the Exascale storage vault.</p>
+    #   @return [Integer]
+    # @!attribute availability_zone
+    #   <p>The Availability Zone for the Exascale storage vault.</p>
+    #   @return [String]
+    # @!attribute availability_zone_id
+    #   <p>The Availability Zone ID for the Exascale storage vault.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The date and time when the Exascale storage vault was created.</p>
+    #   @return [Time]
+    # @!attribute description
+    #   <p>The description of the Exascale storage vault.</p>
+    #   @return [String]
+    # @!attribute display_name
+    #   <p>The user-friendly name for the Exascale storage vault.</p>
+    #   @return [String]
+    # @!attribute vm_cluster_arns
+    #   <p>The list of Amazon Resource Names (ARNs) of the VM clusters associated with this Exascale storage vault.</p>
+    #   @return [Array<String>]
+    # @!attribute vm_cluster_count
+    #   <p>The number of VM clusters associated with this Exascale storage vault.</p>
+    #   @return [Integer]
+    # @!attribute vm_cluster_ids
+    #   <p>The list of unique identifiers of the VM clusters associated with this Exascale storage vault.</p>
+    #   @return [Array<String>]
+    # @!attribute exascale_db_storage_vault_arn
+    #   <p>The Amazon Resource Name (ARN) of the Exascale storage vault.</p>
+    #   @return [String]
+    # @!attribute high_capacity_database_storage
+    #   <p>The high-capacity database storage details for the Exascale storage vault.</p>
+    #   @return [Types::ExascaleDbStorageDetails]
+    # @!attribute is_autoscale_enabled
+    #   <p>Specifies whether autoscaling is enabled for the Exascale storage vault.</p>
+    #   @return [Boolean]
+    # @!attribute ocid
+    #   <p>The OCID of the Exascale storage vault.</p>
+    #   @return [String]
+    # @!attribute oci_resource_anchor_name
+    #   <p>The name of the OCI resource anchor for the Exascale storage vault.</p>
+    #   @return [String]
+    # @!attribute oci_url
+    #   <p>The HTTPS link to the Exascale storage vault in Oracle Cloud Infrastructure (OCI).</p>
+    #   @return [String]
+    # @!attribute percent_progress
+    #   <p>The amount of progress made on the current operation on the Exascale storage vault, expressed as a percentage.</p>
+    #   @return [Float]
+    # @!attribute status
+    #   <p>The current status of the Exascale storage vault.</p>
+    #   @return [String]
+    # @!attribute status_reason
+    #   <p>Additional information about the status of the Exascale storage vault.</p>
+    #   @return [String]
+    # @!attribute time_zone
+    #   <p>The time zone of the Exascale storage vault.</p>
+    #   @return [String]
+    class ExascaleDbStorageVaultSummary < Struct.new(
+      nil,
+      :exascale_db_storage_vault_id,
+      :additional_flash_cache_in_percent,
+      :attached_shape_attributes,
+      :autoscale_limit_in_g_bs,
+      :availability_zone,
+      :availability_zone_id,
+      :created_at,
+      :description,
+      :display_name,
+      :vm_cluster_arns,
+      :vm_cluster_count,
+      :vm_cluster_ids,
+      :exascale_db_storage_vault_arn,
+      :high_capacity_database_storage,
+      :is_autoscale_enabled,
+      :ocid,
+      :oci_resource_anchor_name,
+      :oci_url,
+      :percent_progress,
+      :status,
+      :status_reason,
+      :time_zone,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute autonomous_database_id
+    #   <p>The unique identifier of the Autonomous Database to fail over.</p>
+    #   @return [String]
+    # @!attribute peer_db_arn
+    #   <p>The Amazon Resource Name (ARN) of the peer Autonomous Database to fail over to.</p>
+    #   @return [String]
+    class FailoverAutonomousDatabaseInput < Struct.new(
+      nil,
+      :autonomous_database_id,
+      :peer_db_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute autonomous_database_id
+    #   <p>The unique identifier of the Autonomous Database that was failed over.</p>
+    #   @return [String]
+    # @!attribute display_name
+    #   <p>The user-friendly name of the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the Autonomous Database after the failover operation.</p>
+    #   @return [String]
+    # @!attribute status_reason
+    #   <p>Additional information about the status of the Autonomous Database after the failover operation.</p>
+    #   @return [String]
+    class FailoverAutonomousDatabaseOutput < Struct.new(
+      nil,
+      :autonomous_database_id,
+      :display_name,
+      :status,
+      :status_reason,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Information about a flex component that's available for an Exadata infrastructure. A flex component defines the hardware resources, such as CPU cores, memory, and storage, that can be allocated to a shape.</p>
+    # @!attribute available_core_count
+    #   <p>The maximum number of CPU cores that can be enabled for the flex component.</p>
+    #   @return [Integer]
+    # @!attribute available_db_storage_in_g_bs
+    #   <p>The maximum amount of database storage, in gigabytes (GB), that can be enabled for the flex component.</p>
+    #   @return [Integer]
+    # @!attribute available_local_storage_in_g_bs
+    #   <p>The maximum amount of local storage, in gigabytes (GB), that can be enabled for the flex component.</p>
+    #   @return [Integer]
+    # @!attribute available_memory_in_g_bs
+    #   <p>The maximum amount of memory, in gigabytes (GB), that can be enabled for the flex component.</p>
+    #   @return [Integer]
+    # @!attribute compute_model
+    #   <p>The OCI model compute model used when you create or clone an instance: ECPU or OCPU. An ECPU is an abstracted measure of compute resources. ECPUs are based on the number of cores elastically allocated from a pool of compute and storage servers. An OCPU is a legacy physical measure of compute resources. OCPUs are based on the physical core of a processor with hyper-threading enabled. </p>
+    #   @return [String]
+    # @!attribute description_summary
+    #   <p>A summary description of the flex component.</p>
+    #   @return [String]
+    # @!attribute hardware_type
+    #   <p>The type of hardware for the flex component. Valid values are <code>COMPUTE</code> for compute servers and <code>CELL</code> for storage servers.</p>
+    #   @return [String]
+    # @!attribute minimum_core_count
+    #   <p>The minimum number of CPU cores that can be enabled for the flex component.</p>
+    #   @return [Integer]
+    # @!attribute name
+    #   <p>The name of the flex component.</p>
+    #   @return [String]
+    # @!attribute runtime_minimum_core_count
+    #   <p>The runtime minimum number of CPU cores that can be enabled for the flex component.</p>
+    #   @return [Integer]
+    # @!attribute shape
+    #   <p>The shape that uses the flex component.</p>
+    #   @return [String]
+    class FlexComponentSummary < Struct.new(
+      nil,
+      :available_core_count,
+      :available_db_storage_in_g_bs,
+      :available_local_storage_in_g_bs,
+      :available_memory_in_g_bs,
+      :compute_model,
+      :description_summary,
+      :hardware_type,
+      :minimum_core_count,
+      :name,
+      :runtime_minimum_core_count,
+      :shape,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute autonomous_database_backup_id
+    #   <p>The unique identifier of the Autonomous Database backup to retrieve information about.</p>
+    #   @return [String]
+    class GetAutonomousDatabaseBackupInput < Struct.new(
+      nil,
+      :autonomous_database_backup_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute autonomous_database_backup
+    #   <p>The details of the requested Autonomous Database backup.</p>
+    #   @return [Types::AutonomousDatabaseBackup]
+    class GetAutonomousDatabaseBackupOutput < Struct.new(
+      nil,
+      :autonomous_database_backup,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute autonomous_database_id
+    #   <p>The unique identifier of the Autonomous Database to retrieve information about.</p>
+    #   @return [String]
+    class GetAutonomousDatabaseInput < Struct.new(
+      nil,
+      :autonomous_database_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute autonomous_database
+    #   <p>The details of the requested Autonomous Database.</p>
+    #   @return [Types::AutonomousDatabase]
+    class GetAutonomousDatabaseOutput < Struct.new(
+      nil,
+      :autonomous_database,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute autonomous_database_id
+    #   <p>The unique identifier of the Autonomous Database to retrieve wallet details for.</p>
+    #   @return [String]
+    class GetAutonomousDatabaseWalletDetailsInput < Struct.new(
+      nil,
+      :autonomous_database_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute autonomous_database_wallet_details
+    #   <p>The wallet details for the Autonomous Database.</p>
+    #   @return [Types::AutonomousDatabaseWalletDetails]
+    class GetAutonomousDatabaseWalletDetailsOutput < Struct.new(
+      nil,
+      :autonomous_database_wallet_details,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2459,7 +5531,10 @@ module Aws::Odb
     end
 
     # @!attribute cloud_vm_cluster_id
-    #   <p>The unique identifier of the VM cluster that contains the DB node.</p>
+    #   <p>The unique identifier of the VM cluster that contains the DB node. You must specify either this parameter or <code>exadbVmClusterId</code>.</p>
+    #   @return [String]
+    # @!attribute exadb_vm_cluster_id
+    #   <p>The unique identifier of the Exascale VM cluster that contains the DB node. You must specify either this parameter or <code>cloudVmClusterId</code>.</p>
     #   @return [String]
     # @!attribute db_node_id
     #   <p>The unique identifier of the DB node to retrieve information about.</p>
@@ -2467,6 +5542,7 @@ module Aws::Odb
     class GetDbNodeInput < Struct.new(
       nil,
       :cloud_vm_cluster_id,
+      :exadb_vm_cluster_id,
       :db_node_id,
       keyword_init: true
     )
@@ -2510,6 +5586,50 @@ module Aws::Odb
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute exadb_vm_cluster_id
+    #   <p>The unique identifier of the Exascale VM cluster.</p>
+    #   @return [String]
+    class GetExadbVmClusterInput < Struct.new(
+      nil,
+      :exadb_vm_cluster_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute exadb_vm_cluster
+    #   <p>The Exascale VM cluster.</p>
+    #   @return [Types::ExadbVmCluster]
+    class GetExadbVmClusterOutput < Struct.new(
+      nil,
+      :exadb_vm_cluster,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute exascale_db_storage_vault_id
+    #   <p>The unique identifier of the Exascale storage vault.</p>
+    #   @return [String]
+    class GetExascaleDbStorageVaultInput < Struct.new(
+      nil,
+      :exascale_db_storage_vault_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute exascale_db_storage_vault
+    #   <p>The Exascale storage vault.</p>
+    #   @return [Types::ExascaleDbStorageVault]
+    class GetExascaleDbStorageVaultOutput < Struct.new(
+      nil,
+      :exascale_db_storage_vault,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     class GetOciOnboardingStatusInput < Struct.new(
       nil,
       keyword_init: true
@@ -2526,11 +5646,31 @@ module Aws::Odb
     # @!attribute new_tenancy_activation_link
     #   <p>A new OCI tenancy activation link for your Amazon Web Services account.</p>
     #   @return [String]
+    # @!attribute oci_identity_domain
+    #   <p>The Oracle Cloud Infrastructure (OCI) identity domain information in the onboarding status response.</p>
+    #   @return [Types::OciIdentityDomain]
+    # @!attribute autonomous_database_oci_integration_iam_roles
+    #   <p>The list of Amazon Web Services Identity and Access Management (IAM) service roles used for Autonomous Database integration with Oracle Cloud Infrastructure (OCI).</p>
+    #   @return [Array<Types::OciIamRole>]
+    # @!attribute linked_oci_tenancy_id
+    #   <p>The unique identifier of the Oracle Cloud Infrastructure (OCI) tenancy that is linked to your Amazon Web Services account.</p>
+    #   @return [String]
+    # @!attribute linked_oci_compartment_id
+    #   <p>The unique identifier of the Oracle Cloud Infrastructure (OCI) compartment that is linked to your Amazon Web Services account.</p>
+    #   @return [String]
+    # @!attribute subscription_errors
+    #   <p>The list of errors that occurred during the subscription process for your Amazon Web Services account, if any.</p>
+    #   @return [Array<Types::SubscriptionError>]
     class GetOciOnboardingStatusOutput < Struct.new(
       nil,
       :status,
       :existing_tenancy_activation_link,
       :new_tenancy_activation_link,
+      :oci_identity_domain,
+      :autonomous_database_oci_integration_iam_roles,
+      :linked_oci_tenancy_id,
+      :linked_oci_compartment_id,
+      :subscription_errors,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2580,6 +5720,22 @@ module Aws::Odb
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Summary information about an Oracle Grid Infrastructure (GI) minor version.</p>
+    # @!attribute version
+    #   <p>The GI minor version.</p>
+    #   @return [String]
+    # @!attribute grid_image_id
+    #   <p>The Grid Infrastructure software image ID for this minor version.</p>
+    #   @return [String]
+    class GiMinorVersionSummary < Struct.new(
+      nil,
+      :version,
+      :grid_image_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Information about a specific version of Oracle Grid Infrastructure (GI) software that can be installed on a VM cluster.</p>
     # @!attribute version
     #   <p>The GI software version.</p>
@@ -2592,8 +5748,40 @@ module Aws::Odb
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Information about an Amazon Web Services Identity and Access Management (IAM) service role associated with a resource.</p>
+    # @!attribute iam_role_arn
+    #   <p>The Amazon Resource Name (ARN) of the Amazon Web Services Identity and Access Management (IAM) service role.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the Amazon Web Services Identity and Access Management (IAM) service role.</p>
+    #   @return [String]
+    # @!attribute status_reason
+    #   <p>Additional information about the current status of the Amazon Web Services Identity and Access Management (IAM) service role, if applicable.</p>
+    #   @return [String]
+    # @!attribute aws_integration
+    #   <p>The Amazon Web Services integration configuration settings for the Amazon Web Services Identity and Access Management (IAM) service role.</p>
+    #   @return [String]
+    class IamRole < Struct.new(
+      nil,
+      :iam_role_arn,
+      :status,
+      :status_reason,
+      :aws_integration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute oci_identity_domain
+    #   <p>The Oracle Cloud Infrastructure (OCI) identity domain configuration for service initialization.</p>
+    #   @return [Boolean]
+    # @!attribute autonomous_database_oci_aws_secrets_manager_integration
+    #   <p>Specifies whether to enable or disable the OCI service-account role for Amazon Web Services Secrets Manager integration with Autonomous Database.</p>
+    #   @return [String]
     class InitializeServiceInput < Struct.new(
       nil,
+      :oci_identity_domain,
+      :autonomous_database_oci_aws_secrets_manager_integration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2616,6 +5804,238 @@ module Aws::Odb
       nil,
       :message,
       :retry_after_seconds,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration for Amazon Web Services Key Management Service (KMS) access from the ODB network.</p>
+    # @!attribute status
+    #   <p>The current status of the Amazon Web Services Key Management Service (KMS) access configuration.</p>
+    #   @return [String]
+    # @!attribute ipv4_addresses
+    #   <p>The IPv4 addresses allowed for Amazon Web Services Key Management Service (KMS) access.</p>
+    #   @return [Array<String>]
+    # @!attribute domain_name
+    #   <p>The domain name for Amazon Web Services Key Management Service (KMS) access configuration.</p>
+    #   @return [String]
+    # @!attribute kms_policy_document
+    #   <p>The Amazon Web Services Key Management Service (KMS) policy document that defines permissions for key usage.</p>
+    #   @return [String]
+    class KmsAccess < Struct.new(
+      nil,
+      :status,
+      :ipv4_addresses,
+      :domain_name,
+      :kms_policy_document,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute max_results
+    #   <p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.</p>
+    #   @return [String]
+    # @!attribute autonomous_database_id
+    #   <p>The unique identifier of the Autonomous Database whose backups you want to list.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status of the Autonomous Database backups to return results for.</p>
+    #   @return [String]
+    # @!attribute type
+    #   <p>The type of the Autonomous Database backups to return results for.</p>
+    #   @return [String]
+    class ListAutonomousDatabaseBackupsInput < Struct.new(
+      nil,
+      :max_results,
+      :next_token,
+      :autonomous_database_id,
+      :status,
+      :type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute next_token
+    #   <p>The token to include in another request to get the next page of items. This value is <code>null</code> when there are no more items to return.</p>
+    #   @return [String]
+    # @!attribute autonomous_database_backups
+    #   <p>The list of Autonomous Database backups along with their properties.</p>
+    #   @return [Array<Types::AutonomousDatabaseBackupSummary>]
+    class ListAutonomousDatabaseBackupsOutput < Struct.new(
+      nil,
+      :next_token,
+      :autonomous_database_backups,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute max_results
+    #   <p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.</p>
+    #   @return [String]
+    # @!attribute character_set_type
+    #   <p>The type of character set to return results for, either the database character set or the national character set.</p>
+    #   @return [String]
+    class ListAutonomousDatabaseCharacterSetsInput < Struct.new(
+      nil,
+      :max_results,
+      :next_token,
+      :character_set_type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute next_token
+    #   <p>The token to include in another request to get the next page of items. This value is <code>null</code> when there are no more items to return.</p>
+    #   @return [String]
+    # @!attribute autonomous_database_character_sets
+    #   <p>The list of available Autonomous Database character sets.</p>
+    #   @return [Array<Types::AutonomousDatabaseCharacterSetSummary>]
+    class ListAutonomousDatabaseCharacterSetsOutput < Struct.new(
+      nil,
+      :next_token,
+      :autonomous_database_character_sets,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute max_results
+    #   <p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.</p>
+    #   @return [String]
+    # @!attribute autonomous_database_id
+    #   <p>The unique identifier of the source Autonomous Database whose clones you want to list.</p>
+    #   @return [String]
+    class ListAutonomousDatabaseClonesInput < Struct.new(
+      nil,
+      :max_results,
+      :next_token,
+      :autonomous_database_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute next_token
+    #   <p>The token to include in another request to get the next page of items. This value is <code>null</code> when there are no more items to return.</p>
+    #   @return [String]
+    # @!attribute autonomous_database_clones
+    #   <p>The list of Autonomous Database clones along with their properties.</p>
+    #   @return [Array<Types::AutonomousDatabaseSummary>]
+    class ListAutonomousDatabaseClonesOutput < Struct.new(
+      nil,
+      :next_token,
+      :autonomous_database_clones,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute max_results
+    #   <p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.</p>
+    #   @return [String]
+    # @!attribute autonomous_database_id
+    #   <p>The unique identifier of the Autonomous Database whose peer databases you want to list.</p>
+    #   @return [String]
+    class ListAutonomousDatabasePeersInput < Struct.new(
+      nil,
+      :max_results,
+      :next_token,
+      :autonomous_database_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute next_token
+    #   <p>The token to include in another request to get the next page of items. This value is <code>null</code> when there are no more items to return.</p>
+    #   @return [String]
+    # @!attribute autonomous_database_peers
+    #   <p>The list of peer databases for the Autonomous Database.</p>
+    #   @return [Array<Types::AutonomousDatabasePeerSummary>]
+    class ListAutonomousDatabasePeersOutput < Struct.new(
+      nil,
+      :next_token,
+      :autonomous_database_peers,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute max_results
+    #   <p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.</p>
+    #   @return [String]
+    # @!attribute db_workload
+    #   <p>The intended use of the Autonomous Database to return versions for, such as transaction processing, data warehouse, JSON database, or APEX.</p>
+    #   @return [String]
+    class ListAutonomousDatabaseVersionsInput < Struct.new(
+      nil,
+      :max_results,
+      :next_token,
+      :db_workload,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute next_token
+    #   <p>The token to include in another request to get the next page of items. This value is <code>null</code> when there are no more items to return.</p>
+    #   @return [String]
+    # @!attribute autonomous_database_versions
+    #   <p>The list of available Autonomous Database software versions.</p>
+    #   @return [Array<Types::AutonomousDatabaseVersionSummary>]
+    class ListAutonomousDatabaseVersionsOutput < Struct.new(
+      nil,
+      :next_token,
+      :autonomous_database_versions,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute max_results
+    #   <p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.</p>
+    #   @return [String]
+    class ListAutonomousDatabasesInput < Struct.new(
+      nil,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute next_token
+    #   <p>The token to include in another request to get the next page of items. This value is <code>null</code> when there are no more items to return.</p>
+    #   @return [String]
+    # @!attribute autonomous_databases
+    #   <p>The list of Autonomous Databases along with their properties.</p>
+    #   @return [Array<Types::AutonomousDatabaseSummary>]
+    class ListAutonomousDatabasesOutput < Struct.new(
+      nil,
+      :next_token,
+      :autonomous_databases,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2760,13 +6180,17 @@ module Aws::Odb
     #   <p>The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.</p>
     #   @return [String]
     # @!attribute cloud_vm_cluster_id
-    #   <p>The unique identifier of the VM cluster.</p>
+    #   <p>The unique identifier of the VM cluster. You must specify either this parameter or <code>exadbVmClusterId</code>.</p>
+    #   @return [String]
+    # @!attribute exadb_vm_cluster_id
+    #   <p>The unique identifier of the Exascale VM cluster. You must specify either this parameter or <code>cloudVmClusterId</code>.</p>
     #   @return [String]
     class ListDbNodesInput < Struct.new(
       nil,
       :max_results,
       :next_token,
       :cloud_vm_cluster_id,
+      :exadb_vm_cluster_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2833,12 +6257,16 @@ module Aws::Odb
     # @!attribute availability_zone_id
     #   <p>The physical ID of the AZ, for example, use1-az4. This ID persists across accounts.</p>
     #   @return [String]
+    # @!attribute shape_family
+    #   <p>The shape family to filter results by.</p>
+    #   @return [String]
     class ListDbSystemShapesInput < Struct.new(
       nil,
       :max_results,
       :next_token,
       :availability_zone,
       :availability_zone_id,
+      :shape_family,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2854,6 +6282,150 @@ module Aws::Odb
       nil,
       :next_token,
       :db_system_shapes,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute exascale_db_storage_vault_id
+    #   <p>The unique identifier of the Exascale storage vault to list the associated Exascale VM clusters.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.</p>
+    #   @return [String]
+    class ListExadbVmClustersInput < Struct.new(
+      nil,
+      :exascale_db_storage_vault_id,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute next_token
+    #   <p>The token to include in another request to get the next page of items. This value is <code>null</code> when there are no more items to return.</p>
+    #   @return [String]
+    # @!attribute exadb_vm_clusters
+    #   <p>The list of Exascale VM clusters.</p>
+    #   @return [Array<Types::ExadbVmClusterSummary>]
+    class ListExadbVmClustersOutput < Struct.new(
+      nil,
+      :next_token,
+      :exadb_vm_clusters,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute max_results
+    #   <p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.</p>
+    #   @return [String]
+    class ListExascaleDbStorageVaultsInput < Struct.new(
+      nil,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute next_token
+    #   <p>The token to include in another request to get the next page of items. This value is <code>null</code> when there are no more items to return.</p>
+    #   @return [String]
+    # @!attribute exascale_db_storage_vaults
+    #   <p>The list of Exascale storage vaults.</p>
+    #   @return [Array<Types::ExascaleDbStorageVaultSummary>]
+    class ListExascaleDbStorageVaultsOutput < Struct.new(
+      nil,
+      :next_token,
+      :exascale_db_storage_vaults,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute max_results
+    #   <p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.</p>
+    #   @return [String]
+    # @!attribute shape
+    #   <p>The shape to return flex components for. For a list of valid shapes, use the <code>ListDbSystemShapes</code> operation.</p>
+    #   @return [String]
+    class ListFlexComponentsInput < Struct.new(
+      nil,
+      :max_results,
+      :next_token,
+      :shape,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute next_token
+    #   <p>The token to include in another request to get the next page of items. This value is <code>null</code> when there are no more items to return.</p>
+    #   @return [String]
+    # @!attribute flex_components
+    #   <p>The list of flex components along with their properties.</p>
+    #   @return [Array<Types::FlexComponentSummary>]
+    class ListFlexComponentsOutput < Struct.new(
+      nil,
+      :next_token,
+      :flex_components,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute gi_version
+    #   <p>The Oracle Grid Infrastructure (GI) major version.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.</p>
+    #   @return [String]
+    # @!attribute shape_family
+    #   <p>The shape family for the GI minor version.</p>
+    #   @return [String]
+    # @!attribute availability_zone
+    #   <p>The Availability Zone to filter GI minor versions.</p>
+    #   @return [String]
+    # @!attribute availability_zone_id
+    #   <p>The Availability Zone ID to filter GI minor versions.</p>
+    #   @return [String]
+    class ListGiMinorVersionsInput < Struct.new(
+      nil,
+      :gi_version,
+      :max_results,
+      :next_token,
+      :shape_family,
+      :availability_zone,
+      :availability_zone_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute next_token
+    #   <p>The token to include in another request to get the next page of items. This value is <code>null</code> when there are no more items to return.</p>
+    #   @return [String]
+    # @!attribute gi_minor_versions
+    #   <p>The list of GI minor versions.</p>
+    #   @return [Array<Types::GiMinorVersionSummary>]
+    class ListGiMinorVersionsOutput < Struct.new(
+      nil,
+      :next_token,
+      :gi_minor_versions,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3017,6 +6589,30 @@ module Aws::Odb
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The long-term backup schedule for an Autonomous Database.</p>
+    # @!attribute is_disabled
+    #   <p>Indicates whether the long-term backup schedule is disabled.</p>
+    #   @return [Boolean]
+    # @!attribute repeat_cadence
+    #   <p>The cadence at which long-term backups are taken.</p>
+    #   @return [String]
+    # @!attribute retention_period_in_days
+    #   <p>The retention period, in days, for long-term backups.</p>
+    #   @return [Integer]
+    # @!attribute time_of_backup
+    #   <p>The date and time at which the long-term backup is taken.</p>
+    #   @return [Time]
+    class LongTermBackupSchedule < Struct.new(
+      nil,
+      :is_disabled,
+      :repeat_cadence,
+      :retention_period_in_days,
+      :time_of_backup,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The scheduling details for the maintenance window. Patching and system updates take place during the maintenance window.</p>
     # @!attribute custom_action_timeout_in_mins
     #   <p>The custom action timeout in minutes for the maintenance window.</p>
@@ -3067,7 +6663,7 @@ module Aws::Odb
 
     # <p>The configuration for managed Amazon S3 backup access from the ODB network.</p>
     # @!attribute status
-    #   <p>The status of the managed Amazon S3 backup access.</p> <p>Valid Values: <code>enabled | disabled</code> </p>
+    #   <p>The status of the managed Amazon S3 backup access.</p>
     #   @return [String]
     # @!attribute ipv4_addresses
     #   <p>The IPv4 addresses for the managed Amazon S3 backup access.</p>
@@ -3103,6 +6699,15 @@ module Aws::Odb
     # @!attribute s3_access
     #   <p>The Amazon S3 access configuration.</p>
     #   @return [Types::S3Access]
+    # @!attribute sts_access
+    #   <p>The Amazon Web Services Security Token Service (STS) access configuration.</p>
+    #   @return [Types::StsAccess]
+    # @!attribute kms_access
+    #   <p>The Amazon Web Services Key Management Service (KMS) access configuration.</p>
+    #   @return [Types::KmsAccess]
+    # @!attribute cross_region_s3_restore_sources_access
+    #   <p>The access configuration for the cross-Region Amazon S3 database restore source.</p>
+    #   @return [Array<Types::CrossRegionS3RestoreSourcesAccess>]
     class ManagedServices < Struct.new(
       nil,
       :service_network_arn,
@@ -3112,6 +6717,9 @@ module Aws::Odb
       :managed_s3_backup_access,
       :zero_etl_access,
       :s3_access,
+      :sts_access,
+      :kms_access,
+      :cross_region_s3_restore_sources_access,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3140,6 +6748,78 @@ module Aws::Odb
       nil,
       :domain_name,
       :oci_dns_listener_ip,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration of the Oracle Cloud Infrastructure (OCI) Vault encryption key used for an Autonomous Database.</p>
+    # @!attribute kms_key_id
+    #   <p>The Oracle Cloud Identifier (OCID) of the OCI Vault key to use for encryption.</p>
+    #   @return [String]
+    # @!attribute vault_id
+    #   <p>The Oracle Cloud Identifier (OCID) of the OCI Vault that contains the encryption key.</p>
+    #   @return [String]
+    class OciEncryptionKeyConfiguration < Struct.new(
+      nil,
+      :kms_key_id,
+      :vault_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Information about an Amazon Web Services Identity and Access Management (IAM) service role used for Autonomous Database integration with Oracle Cloud Infrastructure (OCI).</p>
+    # @!attribute iam_role_arn
+    #   <p>The Amazon Resource Name (ARN) of the Amazon Web Services Identity and Access Management (IAM) service role.</p>
+    #   @return [String]
+    # @!attribute aws_integration
+    #   <p>The Amazon Web Services integration configuration settings for the Amazon Web Services Identity and Access Management (IAM) service role.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current lifecycle status of the IAM service role.</p>
+    #   @return [String]
+    # @!attribute status_reason
+    #   <p>Additional information about the current status of the IAM service role, if applicable.</p>
+    #   @return [String]
+    class OciIamRole < Struct.new(
+      nil,
+      :iam_role_arn,
+      :aws_integration,
+      :status,
+      :status_reason,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Information about an Oracle Cloud Infrastructure (OCI) identity domain configuration.</p>
+    # @!attribute oci_identity_domain_id
+    #   <p>The unique identifier of the OCI identity domain.</p>
+    #   @return [String]
+    # @!attribute oci_identity_domain_resource_url
+    #   <p>The resource URL for accessing the OCI identity domain.</p>
+    #   @return [String]
+    # @!attribute oci_identity_domain_url
+    #   <p>The URL of the OCI identity domain.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the OCI identity domain.</p>
+    #   @return [String]
+    # @!attribute status_reason
+    #   <p>Additional information about the current status of the OCI identity domain, if applicable.</p>
+    #   @return [String]
+    # @!attribute account_setup_cloud_formation_url
+    #   <p>The Amazon Web Services CloudFormation URL for setting up the account integration with the OCI identity domain.</p>
+    #   @return [String]
+    class OciIdentityDomain < Struct.new(
+      nil,
+      :oci_identity_domain_id,
+      :oci_identity_domain_resource_url,
+      :oci_identity_domain_url,
+      :status,
+      :status_reason,
+      :account_setup_cloud_formation_url,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3209,6 +6889,9 @@ module Aws::Odb
     # @!attribute managed_services
     #   <p>The managed services configuration for the ODB network.</p>
     #   @return [Types::ManagedServices]
+    # @!attribute ec2_placement_group_ids
+    #   <p>The list of EC2 Placement Group IDs associated with your ODB network.</p>
+    #   @return [Array<String>]
     class OdbNetwork < Struct.new(
       nil,
       :odb_network_id,
@@ -3232,6 +6915,7 @@ module Aws::Odb
       :created_at,
       :percent_progress,
       :managed_services,
+      :ec2_placement_group_ids,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3301,6 +6985,9 @@ module Aws::Odb
     # @!attribute managed_services
     #   <p>The managed services configuration for the ODB network.</p>
     #   @return [Types::ManagedServices]
+    # @!attribute ec2_placement_group_ids
+    #   <p>The list of EC2 Placement Group IDs associated with your ODB network.</p>
+    #   @return [Array<String>]
     class OdbNetworkSummary < Struct.new(
       nil,
       :odb_network_id,
@@ -3324,6 +7011,7 @@ module Aws::Odb
       :created_at,
       :percent_progress,
       :managed_services,
+      :ec2_placement_group_ids,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3337,7 +7025,7 @@ module Aws::Odb
     #   <p>The display name of the ODB peering connection.</p>
     #   @return [String]
     # @!attribute status
-    #   <p>The status of the ODB peering connection.</p> <p>Valid Values: <code>provisioning | active | terminating | terminated | failed</code> </p>
+    #   <p>The status of the ODB peering connection.</p>
     #   @return [String]
     # @!attribute status_reason
     #   <p>The reason for the current status of the ODB peering connection.</p>
@@ -3354,6 +7042,9 @@ module Aws::Odb
     # @!attribute odb_peering_connection_type
     #   <p>The type of the ODB peering connection.</p> <p>Valid Values: <code>ODB-VPC | ODB-ODB</code> </p>
     #   @return [String]
+    # @!attribute peer_network_cidrs
+    #   <p>The CIDR blocks associated with the peering connection. These CIDR blocks define the IP address ranges that can communicate through the peering connection.</p>
+    #   @return [Array<String>]
     # @!attribute created_at
     #   <p>The timestamp when the ODB peering connection was created.</p>
     #   @return [Time]
@@ -3370,6 +7061,7 @@ module Aws::Odb
       :odb_network_arn,
       :peer_network_arn,
       :odb_peering_connection_type,
+      :peer_network_cidrs,
       :created_at,
       :percent_progress,
       keyword_init: true
@@ -3385,7 +7077,7 @@ module Aws::Odb
     #   <p>The display name of the ODB peering connection.</p>
     #   @return [String]
     # @!attribute status
-    #   <p>The status of the ODB peering connection.</p> <p>Valid Values: <code>provisioning | active | terminating | terminated | failed</code> </p>
+    #   <p>The status of the ODB peering connection.</p>
     #   @return [String]
     # @!attribute status_reason
     #   <p>The reason for the current status of the ODB peering connection.</p>
@@ -3402,6 +7094,9 @@ module Aws::Odb
     # @!attribute odb_peering_connection_type
     #   <p>The type of the ODB peering connection.</p> <p>Valid Values: <code>ODB-VPC | ODB-ODB</code> </p>
     #   @return [String]
+    # @!attribute peer_network_cidrs
+    #   <p>The CIDR blocks associated with the peering connection. These CIDR blocks define the IP address ranges that can communicate through the peering connection.</p>
+    #   @return [Array<String>]
     # @!attribute created_at
     #   <p>The timestamp when the ODB peering connection was created.</p>
     #   @return [Time]
@@ -3418,6 +7113,7 @@ module Aws::Odb
       :odb_network_arn,
       :peer_network_arn,
       :odb_peering_connection_type,
+      :peer_network_cidrs,
       :created_at,
       :percent_progress,
       keyword_init: true
@@ -3425,8 +7121,105 @@ module Aws::Odb
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The configuration of the Oracle Key Vault (OKV) encryption key used for an Autonomous Database.</p>
+    # @!attribute certificate_directory_name
+    #   <p>The name of the directory that contains the Oracle Key Vault (OKV) certificate.</p>
+    #   @return [String]
+    # @!attribute certificate_id
+    #   <p>The identifier of the Oracle Key Vault (OKV) certificate.</p>
+    #   @return [String]
+    # @!attribute directory_name
+    #   <p>The name of the directory where the Oracle Key Vault (OKV) configuration is stored.</p>
+    #   @return [String]
+    # @!attribute okv_kms_key
+    #   <p>The identifier of the Oracle Key Vault (OKV) key to use for encryption.</p>
+    #   @return [String]
+    # @!attribute okv_uri
+    #   <p>The URI of the Oracle Key Vault (OKV) server.</p>
+    #   @return [String]
+    class OkvEncryptionKeyConfiguration < Struct.new(
+      nil,
+      :certificate_directory_name,
+      :certificate_id,
+      :directory_name,
+      :okv_kms_key,
+      :okv_uri,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration for creating an Autonomous Database by restoring to a point in time.</p>
+    # @!attribute source_autonomous_database_id
+    #   <p>The unique identifier of the source Autonomous Database to restore from.</p>
+    #   @return [String]
+    # @!attribute clone_type
+    #   <p>The type of clone to create from the point-in-time restore.</p>
+    #   @return [String]
+    # @!attribute timestamp
+    #   <p>The date and time to which to restore the Autonomous Database.</p>
+    #   @return [Time]
+    # @!attribute use_latest_available_backup_timestamp
+    #   <p>Indicates whether to use the latest available backup timestamp for the restore.</p>
+    #   @return [Boolean]
+    # @!attribute clone_table_space_list
+    #   <p>The list of tablespace identifiers to clone from the point-in-time restore.</p>
+    #   @return [Array<Integer>]
+    class PointInTimeRestoreConfiguration < Struct.new(
+      nil,
+      :source_autonomous_database_id,
+      :clone_type,
+      :timestamp,
+      :use_latest_available_backup_timestamp,
+      :clone_table_space_list,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute autonomous_database_id
+    #   <p>The unique identifier of the Autonomous Database to reboot.</p>
+    #   @return [String]
+    # @!attribute is_online_reboot
+    #   <p>Specifies whether to perform an online reboot of the Autonomous Database without interrupting active connections.</p>
+    #   @return [Boolean]
+    class RebootAutonomousDatabaseInput < Struct.new(
+      nil,
+      :autonomous_database_id,
+      :is_online_reboot,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute autonomous_database_id
+    #   <p>The unique identifier of the Autonomous Database that was rebooted.</p>
+    #   @return [String]
+    # @!attribute display_name
+    #   <p>The user-friendly name of the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the Autonomous Database after the reboot operation.</p>
+    #   @return [String]
+    # @!attribute status_reason
+    #   <p>Additional information about the status of the Autonomous Database after the reboot operation.</p>
+    #   @return [String]
+    class RebootAutonomousDatabaseOutput < Struct.new(
+      nil,
+      :autonomous_database_id,
+      :display_name,
+      :status,
+      :status_reason,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute cloud_vm_cluster_id
-    #   <p>The unique identifier of the VM cluster that contains the DB node to reboot.</p>
+    #   <p>The unique identifier of the VM cluster that contains the DB node to reboot. You must specify either this parameter or <code>exadbVmClusterId</code>.</p>
+    #   @return [String]
+    # @!attribute exadb_vm_cluster_id
+    #   <p>The unique identifier of the Exascale VM cluster that contains the DB node to reboot. You must specify either this parameter or <code>cloudVmClusterId</code>.</p>
     #   @return [String]
     # @!attribute db_node_id
     #   <p>The unique identifier of the DB node to reboot.</p>
@@ -3434,6 +7227,7 @@ module Aws::Odb
     class RebootDbNodeInput < Struct.new(
       nil,
       :cloud_vm_cluster_id,
+      :exadb_vm_cluster_id,
       :db_node_id,
       keyword_init: true
     )
@@ -3478,9 +7272,99 @@ module Aws::Odb
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The configuration of a resource pool for an Autonomous Database.</p>
+    # @!attribute is_disabled
+    #   <p>Indicates whether the resource pool is disabled.</p>
+    #   @return [Boolean]
+    # @!attribute pool_size
+    #   <p>The number of Autonomous Databases that the resource pool can contain.</p>
+    #   @return [Integer]
+    # @!attribute pool_storage_size_in_t_bs
+    #   <p>The total storage size of the resource pool, in terabytes (TB).</p>
+    #   @return [Integer]
+    # @!attribute available_storage_capacity_in_t_bs
+    #   <p>The available storage capacity in the resource pool, in TB.</p>
+    #   @return [Float]
+    # @!attribute total_compute_capacity
+    #   <p>The total compute capacity of the resource pool.</p>
+    #   @return [Integer]
+    # @!attribute available_compute_capacity
+    #   <p>The available compute capacity in the resource pool.</p>
+    #   @return [Integer]
+    class ResourcePoolSummary < Struct.new(
+      nil,
+      :is_disabled,
+      :pool_size,
+      :pool_storage_size_in_t_bs,
+      :available_storage_capacity_in_t_bs,
+      :total_compute_capacity,
+      :available_compute_capacity,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute autonomous_database_id
+    #   <p>The unique identifier of the Autonomous Database to restore.</p>
+    #   @return [String]
+    # @!attribute timestamp
+    #   <p>The date and time to which to restore the Autonomous Database.</p>
+    #   @return [Time]
+    class RestoreAutonomousDatabaseInput < Struct.new(
+      nil,
+      :autonomous_database_id,
+      :timestamp,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute autonomous_database_id
+    #   <p>The unique identifier of the Autonomous Database that was restored.</p>
+    #   @return [String]
+    # @!attribute display_name
+    #   <p>The user-friendly name of the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the Autonomous Database after the restore operation.</p>
+    #   @return [String]
+    # @!attribute status_reason
+    #   <p>Additional information about the status of the Autonomous Database after the restore operation.</p>
+    #   @return [String]
+    class RestoreAutonomousDatabaseOutput < Struct.new(
+      nil,
+      :autonomous_database_id,
+      :display_name,
+      :status,
+      :status_reason,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration for creating an Autonomous Database by restoring from a backup.</p>
+    # @!attribute autonomous_database_backup_id
+    #   <p>The unique identifier of the Autonomous Database backup to restore from.</p>
+    #   @return [String]
+    # @!attribute clone_type
+    #   <p>The type of clone to create from the backup.</p>
+    #   @return [String]
+    # @!attribute clone_table_space_list
+    #   <p>The list of tablespace identifiers to clone from the backup.</p>
+    #   @return [Array<Integer>]
+    class RestoreFromBackupConfiguration < Struct.new(
+      nil,
+      :autonomous_database_backup_id,
+      :clone_type,
+      :clone_table_space_list,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The configuration for Amazon S3 access from the ODB network.</p>
     # @!attribute status
-    #   <p>The status of the Amazon S3 access.</p> <p>Valid Values: <code>enabled | disabled</code> </p>
+    #   <p>The status of the Amazon S3 access.</p>
     #   @return [String]
     # @!attribute ipv4_addresses
     #   <p>The IPv4 addresses for the Amazon S3 access.</p>
@@ -3502,12 +7386,32 @@ module Aws::Odb
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The scheduled start and stop times for an Autonomous Database on a specific day of the week.</p>
+    # @!attribute day_of_week
+    #   <p>The day of the week on which the scheduled operation occurs.</p>
+    #   @return [Types::DayOfWeek]
+    # @!attribute scheduled_start_time
+    #   <p>The scheduled start time for the Autonomous Database, in UTC.</p>
+    #   @return [String]
+    # @!attribute scheduled_stop_time
+    #   <p>The scheduled stop time for the Autonomous Database, in UTC.</p>
+    #   @return [String]
+    class ScheduledOperationDetails < Struct.new(
+      nil,
+      :day_of_week,
+      :scheduled_start_time,
+      :scheduled_stop_time,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The configuration for a service network endpoint.</p>
     # @!attribute vpc_endpoint_id
     #   <p>The identifier of the VPC endpoint.</p>
     #   @return [String]
     # @!attribute vpc_endpoint_type
-    #   <p>The type of the VPC endpoint.</p> <p>Valid Values: <code>Interface | Gateway</code> </p>
+    #   <p>The type of the VPC endpoint.</p>
     #   @return [String]
     class ServiceNetworkEndpoint < Struct.new(
       nil,
@@ -3541,8 +7445,119 @@ module Aws::Odb
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute autonomous_database_id
+    #   <p>The unique identifier of the Autonomous Database to shrink.</p>
+    #   @return [String]
+    class ShrinkAutonomousDatabaseInput < Struct.new(
+      nil,
+      :autonomous_database_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute autonomous_database_id
+    #   <p>The unique identifier of the Autonomous Database that was shrunk.</p>
+    #   @return [String]
+    # @!attribute display_name
+    #   <p>The user-friendly name of the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the Autonomous Database after the shrink operation.</p>
+    #   @return [String]
+    # @!attribute status_reason
+    #   <p>Additional information about the status of the Autonomous Database after the shrink operation.</p>
+    #   @return [String]
+    class ShrinkAutonomousDatabaseOutput < Struct.new(
+      nil,
+      :autonomous_database_id,
+      :display_name,
+      :status,
+      :status_reason,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration details for the source used to create an Autonomous Database. This is a union, so only one of the following members can be specified.</p>
+    # @!attribute database_clone
+    #   <p>The configuration for creating the Autonomous Database as a clone of an existing database.</p>
+    #   @return [Types::DatabaseCloneConfiguration]
+    # @!attribute restore_from_backup
+    #   <p>The configuration for creating the Autonomous Database by restoring from a backup.</p>
+    #   @return [Types::RestoreFromBackupConfiguration]
+    # @!attribute point_in_time_restore
+    #   <p>The configuration for creating the Autonomous Database by restoring to a point in time.</p>
+    #   @return [Types::PointInTimeRestoreConfiguration]
+    # @!attribute cross_region_data_guard
+    #   <p>The configuration for creating the Autonomous Database as a cross-Region Oracle Data Guard peer.</p>
+    #   @return [Types::CrossRegionDataGuardConfiguration]
+    # @!attribute cross_region_disaster_recovery
+    #   <p>The configuration for creating the Autonomous Database as a cross-Region disaster recovery peer.</p>
+    #   @return [Types::CrossRegionDisasterRecoveryConfiguration]
+    # @!attribute clone_to_refreshable
+    #   <p>The configuration for creating the Autonomous Database as a refreshable clone.</p>
+    #   @return [Types::CloneToRefreshableConfiguration]
+    class SourceConfiguration < Struct.new(
+      :database_clone,
+      :restore_from_backup,
+      :point_in_time_restore,
+      :cross_region_data_guard,
+      :cross_region_disaster_recovery,
+      :clone_to_refreshable,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class DatabaseClone < SourceConfiguration; end
+      class RestoreFromBackup < SourceConfiguration; end
+      class PointInTimeRestore < SourceConfiguration; end
+      class CrossRegionDataGuard < SourceConfiguration; end
+      class CrossRegionDisasterRecovery < SourceConfiguration; end
+      class CloneToRefreshable < SourceConfiguration; end
+      class Unknown < SourceConfiguration; end
+    end
+
+    # @!attribute autonomous_database_id
+    #   <p>The unique identifier of the Autonomous Database to start.</p>
+    #   @return [String]
+    class StartAutonomousDatabaseInput < Struct.new(
+      nil,
+      :autonomous_database_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute autonomous_database_id
+    #   <p>The unique identifier of the Autonomous Database that was started.</p>
+    #   @return [String]
+    # @!attribute display_name
+    #   <p>The user-friendly name of the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the Autonomous Database after the start operation.</p>
+    #   @return [String]
+    # @!attribute status_reason
+    #   <p>Additional information about the status of the Autonomous Database after the start operation.</p>
+    #   @return [String]
+    class StartAutonomousDatabaseOutput < Struct.new(
+      nil,
+      :autonomous_database_id,
+      :display_name,
+      :status,
+      :status_reason,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute cloud_vm_cluster_id
-    #   <p>The unique identifier of the VM cluster that contains the DB node to start.</p>
+    #   <p>The unique identifier of the VM cluster that contains the DB node to start. You must specify either this parameter or <code>exadbVmClusterId</code>.</p>
+    #   @return [String]
+    # @!attribute exadb_vm_cluster_id
+    #   <p>The unique identifier of the Exascale VM cluster that contains the DB node to start. You must specify either this parameter or <code>cloudVmClusterId</code>.</p>
     #   @return [String]
     # @!attribute db_node_id
     #   <p>The unique identifier of the DB node to start.</p>
@@ -3550,6 +7565,7 @@ module Aws::Odb
     class StartDbNodeInput < Struct.new(
       nil,
       :cloud_vm_cluster_id,
+      :exadb_vm_cluster_id,
       :db_node_id,
       keyword_init: true
     )
@@ -3575,8 +7591,45 @@ module Aws::Odb
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute autonomous_database_id
+    #   <p>The unique identifier of the Autonomous Database to stop.</p>
+    #   @return [String]
+    class StopAutonomousDatabaseInput < Struct.new(
+      nil,
+      :autonomous_database_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute autonomous_database_id
+    #   <p>The unique identifier of the Autonomous Database that was stopped.</p>
+    #   @return [String]
+    # @!attribute display_name
+    #   <p>The user-friendly name of the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the Autonomous Database after the stop operation.</p>
+    #   @return [String]
+    # @!attribute status_reason
+    #   <p>Additional information about the status of the Autonomous Database after the stop operation.</p>
+    #   @return [String]
+    class StopAutonomousDatabaseOutput < Struct.new(
+      nil,
+      :autonomous_database_id,
+      :display_name,
+      :status,
+      :status_reason,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute cloud_vm_cluster_id
-    #   <p>The unique identifier of the VM cluster that contains the DB node to stop.</p>
+    #   <p>The unique identifier of the VM cluster that contains the DB node to stop. You must specify either this parameter or <code>exadbVmClusterId</code>.</p>
+    #   @return [String]
+    # @!attribute exadb_vm_cluster_id
+    #   <p>The unique identifier of the Exascale VM cluster that contains the DB node to stop. You must specify either this parameter or <code>cloudVmClusterId</code>.</p>
     #   @return [String]
     # @!attribute db_node_id
     #   <p>The unique identifier of the DB node to stop.</p>
@@ -3584,6 +7637,7 @@ module Aws::Odb
     class StopDbNodeInput < Struct.new(
       nil,
       :cloud_vm_cluster_id,
+      :exadb_vm_cluster_id,
       :db_node_id,
       keyword_init: true
     )
@@ -3602,6 +7656,80 @@ module Aws::Odb
     class StopDbNodeOutput < Struct.new(
       nil,
       :db_node_id,
+      :status,
+      :status_reason,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration for Amazon Web Services Security Token Service (STS) access from the ODB network.</p>
+    # @!attribute status
+    #   <p>The current status of the Amazon Web Services Security Token Service (STS) access configuration.</p>
+    #   @return [String]
+    # @!attribute ipv4_addresses
+    #   <p>The IPv4 addresses allowed for Amazon Web Services Security Token Service (STS) access.</p>
+    #   @return [Array<String>]
+    # @!attribute domain_name
+    #   <p>The domain name for Amazon Web Services Security Token Service (STS) access configuration.</p>
+    #   @return [String]
+    # @!attribute sts_policy_document
+    #   <p>The Amazon Web Services Security Token Service (STS) policy document that defines permissions for token service usage.</p>
+    #   @return [String]
+    class StsAccess < Struct.new(
+      nil,
+      :status,
+      :ipv4_addresses,
+      :domain_name,
+      :sts_policy_document,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Information about an error that occurred during the subscription process.</p>
+    # @!attribute error_message
+    #   <p>A human-readable message that describes the subscription error.</p>
+    #   @return [String]
+    class SubscriptionError < Struct.new(
+      nil,
+      :error_message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute autonomous_database_id
+    #   <p>The unique identifier of the Autonomous Database to switch over.</p>
+    #   @return [String]
+    # @!attribute peer_db_arn
+    #   <p>The Amazon Resource Name (ARN) of the peer Autonomous Database to switch over to.</p>
+    #   @return [String]
+    class SwitchoverAutonomousDatabaseInput < Struct.new(
+      nil,
+      :autonomous_database_id,
+      :peer_db_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute autonomous_database_id
+    #   <p>The unique identifier of the Autonomous Database that was switched over.</p>
+    #   @return [String]
+    # @!attribute display_name
+    #   <p>The user-friendly name of the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the Autonomous Database after the switchover operation.</p>
+    #   @return [String]
+    # @!attribute status_reason
+    #   <p>Additional information about the status of the Autonomous Database after the switchover operation.</p>
+    #   @return [String]
+    class SwitchoverAutonomousDatabaseOutput < Struct.new(
+      nil,
+      :autonomous_database_id,
+      :display_name,
       :status,
       :status_reason,
       keyword_init: true
@@ -3666,6 +7794,18 @@ module Aws::Odb
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The transportable tablespace configuration used when creating an Autonomous Database.</p>
+    # @!attribute tts_bundle_url
+    #   <p>The URL of the transportable tablespace bundle to use when creating the Autonomous Database.</p>
+    #   @return [String]
+    class TransportableTablespace < Struct.new(
+      nil,
+      :tts_bundle_url,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute resource_arn
     #   <p>The Amazon Resource Name (ARN) of the resource to remove tags from.</p>
     #   @return [String]
@@ -3683,6 +7823,254 @@ module Aws::Odb
 
     class UntagResourceResponse < Struct.new(
       nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute autonomous_database_backup_id
+    #   <p>The unique identifier of the Autonomous Database backup to update.</p>
+    #   @return [String]
+    # @!attribute retention_period_in_days
+    #   <p>The retention period, in days, for the Autonomous Database backup.</p>
+    #   @return [Integer]
+    class UpdateAutonomousDatabaseBackupInput < Struct.new(
+      nil,
+      :autonomous_database_backup_id,
+      :retention_period_in_days,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute display_name
+    #   <p>The user-friendly name of the Autonomous Database backup.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the Autonomous Database backup.</p>
+    #   @return [String]
+    # @!attribute status_reason
+    #   <p>Additional information about the current status of the Autonomous Database backup, if applicable.</p>
+    #   @return [String]
+    # @!attribute autonomous_database_backup_id
+    #   <p>The unique identifier of the Autonomous Database backup that was updated.</p>
+    #   @return [String]
+    class UpdateAutonomousDatabaseBackupOutput < Struct.new(
+      nil,
+      :display_name,
+      :status,
+      :status_reason,
+      :autonomous_database_backup_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute autonomous_database_id
+    #   <p>The unique identifier of the Autonomous Database to update.</p>
+    #   @return [String]
+    # @!attribute admin_password
+    #   <p>The new password for the <code>ADMIN</code> user of the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute compute_count
+    #   <p>The compute capacity, in number of ECPUs or OCPUs, to assign to the Autonomous Database.</p>
+    #   @return [Float]
+    # @!attribute cpu_core_count
+    #   <p>The number of CPU cores to allocate to the Autonomous Database.</p>
+    #   @return [Integer]
+    # @!attribute data_storage_size_in_t_bs
+    #   <p>The size, in terabytes (TB), of the data volume to allocate for the Autonomous Database.</p>
+    #   @return [Integer]
+    # @!attribute data_storage_size_in_g_bs
+    #   <p>The size, in gigabytes (GB), of the data volume to allocate for the Autonomous Database.</p>
+    #   @return [Integer]
+    # @!attribute display_name
+    #   <p>The new user-friendly name for the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute db_name
+    #   <p>The new name of the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute db_version
+    #   <p>The Oracle Database software version to use for the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute db_workload
+    #   <p>The intended use of the Autonomous Database, such as transaction processing, data warehouse, JSON database, or APEX.</p>
+    #   @return [String]
+    # @!attribute db_tools_details
+    #   <p>The list of database management tools to enable for the Autonomous Database.</p>
+    #   @return [Array<Types::DatabaseTool>]
+    # @!attribute database_edition
+    #   <p>The Oracle Database edition to apply to the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute license_model
+    #   <p>The Oracle license model to apply to the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute is_auto_scaling_enabled
+    #   <p>Specifies whether to enable automatic scaling of the compute resources for the Autonomous Database.</p>
+    #   @return [Boolean]
+    # @!attribute is_auto_scaling_for_storage_enabled
+    #   <p>Specifies whether to enable automatic scaling of the storage for the Autonomous Database.</p>
+    #   @return [Boolean]
+    # @!attribute is_backup_retention_locked
+    #   <p>Specifies whether to lock the backup retention period of the Autonomous Database to prevent it from being shortened.</p>
+    #   @return [Boolean]
+    # @!attribute is_local_data_guard_enabled
+    #   <p>Specifies whether to enable local Oracle Data Guard for the Autonomous Database.</p>
+    #   @return [Boolean]
+    # @!attribute is_mtls_connection_required
+    #   <p>Specifies whether mutual TLS (mTLS) authentication is required to connect to the Autonomous Database.</p>
+    #   @return [Boolean]
+    # @!attribute is_refreshable_clone
+    #   <p>Specifies whether the Autonomous Database is a refreshable clone.</p>
+    #   @return [Boolean]
+    # @!attribute is_disconnect_peer
+    #   <p>Specifies whether to disconnect the Autonomous Database from its peer database.</p>
+    #   @return [Boolean]
+    # @!attribute backup_retention_period_in_days
+    #   <p>The retention period, in days, for automatic backups of the Autonomous Database.</p>
+    #   @return [Integer]
+    # @!attribute byol_compute_count_limit
+    #   <p>The maximum number of compute resources that you can allocate to the Autonomous Database under the bring-your-own-license (BYOL) model.</p>
+    #   @return [Float]
+    # @!attribute local_adg_auto_failover_max_data_loss_limit
+    #   <p>The maximum data loss limit, in seconds, for automatic failover to the local Oracle Data Guard standby database.</p>
+    #   @return [Integer]
+    # @!attribute autonomous_maintenance_schedule_type
+    #   <p>The maintenance schedule type for the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute customer_contacts_to_send_to_oci
+    #   <p>The list of customer contacts to receive operational notifications from OCI for the Autonomous Database.</p>
+    #   @return [Array<Types::CustomerContact>]
+    # @!attribute scheduled_operations
+    #   <p>The list of scheduled start and stop times for the Autonomous Database.</p>
+    #   @return [Array<Types::ScheduledOperationDetails>]
+    # @!attribute long_term_backup_schedule
+    #   <p>The long-term backup schedule for the Autonomous Database.</p>
+    #   @return [Types::LongTermBackupSchedule]
+    # @!attribute open_mode
+    #   <p>The mode in which to open the Autonomous Database, either read-only or read/write.</p>
+    #   @return [String]
+    # @!attribute permission_level
+    #   <p>The permission level of the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute refreshable_mode
+    #   <p>The refresh mode of the refreshable clone Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute private_endpoint_ip
+    #   <p>The private endpoint IP address for the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute private_endpoint_label
+    #   <p>The private endpoint label for the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute peer_db_id
+    #   <p>The unique identifier of the peer Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute resource_pool_leader_id
+    #   <p>The unique identifier of the resource pool leader Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute resource_pool_summary
+    #   <p>The configuration of the resource pool for the Autonomous Database.</p>
+    #   @return [Types::ResourcePoolSummary]
+    # @!attribute standby_allowlisted_ips_source
+    #   <p>The source of the allowlisted IP addresses for the standby Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute standby_allowlisted_ips
+    #   <p>The list of IP addresses that are allowed to access the standby Autonomous Database.</p>
+    #   @return [Array<String>]
+    # @!attribute allowlisted_ips
+    #   <p>The list of IP addresses that are allowed to access the Autonomous Database.</p>
+    #   @return [Array<String>]
+    # @!attribute auto_refresh_frequency_in_seconds
+    #   <p>The frequency, in seconds, at which the refreshable clone Autonomous Database is automatically refreshed.</p>
+    #   @return [Integer]
+    # @!attribute auto_refresh_point_lag_in_seconds
+    #   <p>The time lag, in seconds, between the refreshable clone and its source Autonomous Database.</p>
+    #   @return [Integer]
+    # @!attribute time_of_auto_refresh_start
+    #   <p>The date and time at which the automatic refresh of the refreshable clone Autonomous Database starts.</p>
+    #   @return [Time]
+    # @!attribute encryption_key_provider
+    #   <p>The provider of the encryption key to use for the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute encryption_key_configuration
+    #   <p>The configuration of the encryption key to use for the Autonomous Database.</p>
+    #   @return [Types::EncryptionKeyConfigurationInput]
+    # @!attribute admin_password_source
+    #   <p>The source of the admin password for the Autonomous Database. When set to <code>CUSTOMER_MANAGED_AWS_SECRET</code>, the admin password is retrieved from an Amazon Web Services Secrets Manager secret.</p>
+    #   @return [String]
+    # @!attribute admin_password_source_configuration
+    #   <p>The configuration of the admin password source for the Autonomous Database.</p>
+    #   @return [Types::AdminPasswordSourceConfigurationInput]
+    class UpdateAutonomousDatabaseInput < Struct.new(
+      nil,
+      :autonomous_database_id,
+      :admin_password,
+      :compute_count,
+      :cpu_core_count,
+      :data_storage_size_in_t_bs,
+      :data_storage_size_in_g_bs,
+      :display_name,
+      :db_name,
+      :db_version,
+      :db_workload,
+      :db_tools_details,
+      :database_edition,
+      :license_model,
+      :is_auto_scaling_enabled,
+      :is_auto_scaling_for_storage_enabled,
+      :is_backup_retention_locked,
+      :is_local_data_guard_enabled,
+      :is_mtls_connection_required,
+      :is_refreshable_clone,
+      :is_disconnect_peer,
+      :backup_retention_period_in_days,
+      :byol_compute_count_limit,
+      :local_adg_auto_failover_max_data_loss_limit,
+      :autonomous_maintenance_schedule_type,
+      :customer_contacts_to_send_to_oci,
+      :scheduled_operations,
+      :long_term_backup_schedule,
+      :open_mode,
+      :permission_level,
+      :refreshable_mode,
+      :private_endpoint_ip,
+      :private_endpoint_label,
+      :peer_db_id,
+      :resource_pool_leader_id,
+      :resource_pool_summary,
+      :standby_allowlisted_ips_source,
+      :standby_allowlisted_ips,
+      :allowlisted_ips,
+      :auto_refresh_frequency_in_seconds,
+      :auto_refresh_point_lag_in_seconds,
+      :time_of_auto_refresh_start,
+      :encryption_key_provider,
+      :encryption_key_configuration,
+      :admin_password_source,
+      :admin_password_source_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute autonomous_database_id
+    #   <p>The unique identifier of the Autonomous Database that was updated.</p>
+    #   @return [String]
+    # @!attribute display_name
+    #   <p>The user-friendly name of the Autonomous Database that was updated.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the Autonomous Database.</p>
+    #   @return [String]
+    # @!attribute status_reason
+    #   <p>Additional information about the current status of the Autonomous Database, if applicable.</p>
+    #   @return [String]
+    class UpdateAutonomousDatabaseOutput < Struct.new(
+      nil,
+      :autonomous_database_id,
+      :display_name,
+      :status,
+      :status_reason,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3726,6 +8114,138 @@ module Aws::Odb
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute exadb_vm_cluster_id
+    #   <p>The unique identifier of the Exascale VM cluster to update.</p>
+    #   @return [String]
+    # @!attribute data_collection_options
+    #   <p>The set of preferences for the various diagnostic collection options for the Exascale VM cluster.</p>
+    #   @return [Types::DataCollectionOptions]
+    # @!attribute display_name
+    #   <p>A new user-friendly name for the Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute enabled_ecpu_count
+    #   <p>The number of ECPUs to enable for the Exascale VM cluster.</p>
+    #   @return [Integer]
+    # @!attribute grid_image_id
+    #   <p>The Grid Infrastructure software image ID for the Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute license_model
+    #   <p>The Oracle license model to apply to the Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute ssh_public_keys
+    #   <p>The public key portion of one or more key pairs used for SSH access to the Exascale VM cluster.</p>
+    #   @return [Array<String>]
+    # @!attribute system_version
+    #   <p>The version of the operating system of the image for the Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute total_ecpu_count
+    #   <p>The total number of ECPUs for the Exascale VM cluster.</p>
+    #   @return [Integer]
+    # @!attribute update_action
+    #   <p>The update action to perform on the Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute vm_file_system_storage_total_size_in_g_bs
+    #   <p>The total amount of file system storage, in gigabytes (GB), for the Exascale VM cluster.</p>
+    #   @return [Integer]
+    class UpdateExadbVmClusterInput < Struct.new(
+      nil,
+      :exadb_vm_cluster_id,
+      :data_collection_options,
+      :display_name,
+      :enabled_ecpu_count,
+      :grid_image_id,
+      :license_model,
+      :ssh_public_keys,
+      :system_version,
+      :total_ecpu_count,
+      :update_action,
+      :vm_file_system_storage_total_size_in_g_bs,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute display_name
+    #   <p>The user-friendly name for the Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute status_reason
+    #   <p>Additional information about the status of the Exascale VM cluster.</p>
+    #   @return [String]
+    # @!attribute exadb_vm_cluster_id
+    #   <p>The unique identifier of the Exascale VM cluster.</p>
+    #   @return [String]
+    class UpdateExadbVmClusterOutput < Struct.new(
+      nil,
+      :display_name,
+      :status,
+      :status_reason,
+      :exadb_vm_cluster_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute exascale_db_storage_vault_id
+    #   <p>The unique identifier of the Exascale storage vault to update.</p>
+    #   @return [String]
+    # @!attribute additional_flash_cache_in_percent
+    #   <p>The additional flash cache percentage for the Exascale storage vault.</p>
+    #   @return [Integer]
+    # @!attribute autoscale_limit_in_g_bs
+    #   <p>The autoscale limit in gigabytes (GB) for the Exascale storage vault.</p>
+    #   @return [Integer]
+    # @!attribute description
+    #   <p>A new description for the Exascale storage vault.</p>
+    #   @return [String]
+    # @!attribute display_name
+    #   <p>A new user-friendly name for the Exascale storage vault.</p>
+    #   @return [String]
+    # @!attribute high_capacity_database_storage_total_size_in_g_bs
+    #   <p>The total size of the high-capacity database storage, in gigabytes (GB), for the Exascale storage vault.</p>
+    #   @return [Integer]
+    # @!attribute is_autoscale_enabled
+    #   <p>Specifies whether autoscaling is enabled for the Exascale storage vault.</p>
+    #   @return [Boolean]
+    class UpdateExascaleDbStorageVaultInput < Struct.new(
+      nil,
+      :exascale_db_storage_vault_id,
+      :additional_flash_cache_in_percent,
+      :autoscale_limit_in_g_bs,
+      :description,
+      :display_name,
+      :high_capacity_database_storage_total_size_in_g_bs,
+      :is_autoscale_enabled,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute display_name
+    #   <p>The user-friendly name for the Exascale storage vault.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the Exascale storage vault.</p>
+    #   @return [String]
+    # @!attribute status_reason
+    #   <p>Additional information about the status of the Exascale storage vault.</p>
+    #   @return [String]
+    # @!attribute exascale_db_storage_vault_id
+    #   <p>The unique identifier of the Exascale storage vault.</p>
+    #   @return [String]
+    class UpdateExascaleDbStorageVaultOutput < Struct.new(
+      nil,
+      :display_name,
+      :status,
+      :status_reason,
+      :exascale_db_storage_vault_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute odb_network_id
     #   <p>The unique identifier of the ODB network to update.</p>
     #   @return [String]
@@ -3744,9 +8264,27 @@ module Aws::Odb
     # @!attribute zero_etl_access
     #   <p>Specifies the updated configuration for Zero-ETL access from the ODB network.</p>
     #   @return [String]
+    # @!attribute sts_access
+    #   <p>The Amazon Web Services Security Token Service (STS) access configuration for the ODB network.</p>
+    #   @return [String]
+    # @!attribute kms_access
+    #   <p>The Amazon Web Services Key Management Service (KMS) access configuration for the ODB network.</p>
+    #   @return [String]
     # @!attribute s3_policy_document
     #   <p>Specifies the updated endpoint policy for Amazon S3 access from the ODB network.</p>
     #   @return [String]
+    # @!attribute sts_policy_document
+    #   <p>The Amazon Web Services Security Token Service (STS) policy document that defines permissions for token service usage within the ODB network.</p>
+    #   @return [String]
+    # @!attribute kms_policy_document
+    #   <p>The Amazon Web Services Key Management Service (KMS) policy document that defines permissions for key usage within the ODB network.</p>
+    #   @return [String]
+    # @!attribute cross_region_s3_restore_sources_to_enable
+    #   <p>The cross-Region Amazon S3 restore sources to enable for the ODB network.</p>
+    #   @return [Array<String>]
+    # @!attribute cross_region_s3_restore_sources_to_disable
+    #   <p>The cross-Region Amazon S3 restore sources to disable for the ODB network.</p>
+    #   @return [Array<String>]
     class UpdateOdbNetworkInput < Struct.new(
       nil,
       :odb_network_id,
@@ -3755,7 +8293,13 @@ module Aws::Odb
       :peered_cidrs_to_be_removed,
       :s3_access,
       :zero_etl_access,
+      :sts_access,
+      :kms_access,
       :s3_policy_document,
+      :sts_policy_document,
+      :kms_policy_document,
+      :cross_region_s3_restore_sources_to_enable,
+      :cross_region_s3_restore_sources_to_disable,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3779,6 +8323,52 @@ module Aws::Odb
       :status,
       :status_reason,
       :odb_network_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute odb_peering_connection_id
+    #   <p>The identifier of the Oracle Database@Amazon Web Services peering connection to update.</p>
+    #   @return [String]
+    # @!attribute display_name
+    #   <p>A new display name for the peering connection.</p>
+    #   @return [String]
+    # @!attribute peer_network_cidrs_to_be_added
+    #   <p>A list of CIDR blocks to add to the peering connection. These CIDR blocks define the IP address ranges that can communicate through the peering connection. The CIDR blocks must not overlap with existing CIDR blocks in the Oracle Database@Amazon Web Services network.</p>
+    #   @return [Array<String>]
+    # @!attribute peer_network_cidrs_to_be_removed
+    #   <p>A list of CIDR blocks to remove from the peering connection. The CIDR blocks must currently exist in the peering connection.</p>
+    #   @return [Array<String>]
+    class UpdateOdbPeeringConnectionInput < Struct.new(
+      nil,
+      :odb_peering_connection_id,
+      :display_name,
+      :peer_network_cidrs_to_be_added,
+      :peer_network_cidrs_to_be_removed,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute display_name
+    #   <p>The display name of the peering connection.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status of the peering connection update operation.</p>
+    #   @return [String]
+    # @!attribute status_reason
+    #   <p>Additional information about the status of the peering connection update operation.</p>
+    #   @return [String]
+    # @!attribute odb_peering_connection_id
+    #   <p>The identifier of the Oracle Database@Amazon Web Services peering connection that was updated.</p>
+    #   @return [String]
+    class UpdateOdbPeeringConnectionOutput < Struct.new(
+      nil,
+      :display_name,
+      :status,
+      :status_reason,
+      :odb_peering_connection_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3819,9 +8409,55 @@ module Aws::Odb
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The configuration of the wallet password source. This is a union, so only one of the following members can be specified.</p>
+    # @!attribute customer_managed_aws_secret
+    #   <p>The configuration for a customer-managed Amazon Web Services Secrets Manager secret used as the wallet password source.</p>
+    #   @return [Types::CustomerManagedAwsSecretConfiguration]
+    class WalletPasswordSourceConfiguration < Struct.new(
+      :customer_managed_aws_secret,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class CustomerManagedAwsSecret < WalletPasswordSourceConfiguration; end
+      class Unknown < WalletPasswordSourceConfiguration; end
+    end
+
+    # <p>The input configuration for the wallet password source. This is a union, so only one of the following members can be specified.</p>
+    # @!attribute customer_managed_aws_secret
+    #   <p>The configuration for using a customer-managed Amazon Web Services Secrets Manager secret as the wallet password source.</p>
+    #   @return [Types::CustomerManagedAwsSecretConfigurationInput]
+    class WalletPasswordSourceConfigurationInput < Struct.new(
+      :customer_managed_aws_secret,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class CustomerManagedAwsSecret < WalletPasswordSourceConfigurationInput; end
+      class Unknown < WalletPasswordSourceConfigurationInput; end
+    end
+
+    # <p>A summary of the password source configuration for an Autonomous Database wallet.</p>
+    # @!attribute password_source
+    #   <p>The source of the password for the Autonomous Database wallet.</p>
+    #   @return [String]
+    # @!attribute password_source_configuration
+    #   <p>The configuration of the password source for the Autonomous Database wallet.</p>
+    #   @return [Types::WalletPasswordSourceConfiguration]
+    class WalletPasswordSourceSummary < Struct.new(
+      nil,
+      :password_source,
+      :password_source_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The configuration for Zero-ETL access from the ODB network.</p>
     # @!attribute status
-    #   <p>The status of the Zero-ETL access.</p> <p>Valid Values: <code>enabled | disabled</code> </p>
+    #   <p>The status of the Zero-ETL access.</p>
     #   @return [String]
     # @!attribute cidr
     #   <p>The CIDR block for the Zero-ETL access.</p>

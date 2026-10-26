@@ -583,6 +583,7 @@ module Aws::DynamoDB
         ?table: Types::Capacity,
         ?local_secondary_indexes: Hash[String, Types::Capacity],
         ?global_secondary_indexes: Hash[String, Types::Capacity],
+        ?vector_indexes: Hash[String, Types::VectorCapacity],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -593,6 +594,7 @@ module Aws::DynamoDB
       attr_accessor table: Types::Capacity?
       attr_accessor local_secondary_indexes: Hash[String, Types::Capacity]?
       attr_accessor global_secondary_indexes: Hash[String, Types::Capacity]?
+      attr_accessor vector_indexes: Hash[String, Types::VectorCapacity]?
     end
 
     class ContinuousBackupsDescription
@@ -790,6 +792,9 @@ module Aws::DynamoDB
         ?warm_throughput: Types::WarmThroughput,
         ?resource_policy: String,
         ?on_demand_throughput: Types::OnDemandThroughput,
+        ?global_table_source_arn: String,
+        ?global_table_settings_replication_mode: String,
+        ?vector_indexes: Array[Types::VectorIndex],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -808,6 +813,9 @@ module Aws::DynamoDB
       attr_accessor warm_throughput: Types::WarmThroughput?
       attr_accessor resource_policy: String?
       attr_accessor on_demand_throughput: Types::OnDemandThroughput?
+      attr_accessor global_table_source_arn: String?
+      attr_accessor global_table_settings_replication_mode: String?
+      attr_accessor vector_indexes: Array[Types::VectorIndex]?
     end
 
     class CreateTableOutput
@@ -819,6 +827,27 @@ module Aws::DynamoDB
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor table_description: Types::TableDescription?
+    end
+
+    class CreateVectorIndexAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_name: String,
+        ?vector_attribute: Types::VectorAttributeDefinition,
+        ?search_schema: Array[Types::SearchSchemaElement],
+        ?projection: Types::Projection,
+        ?dimensions: Integer,
+        ?distance_function: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_name: String?
+      attr_accessor vector_attribute: Types::VectorAttributeDefinition?
+      attr_accessor search_schema: Array[Types::SearchSchemaElement]?
+      attr_accessor projection: Types::Projection?
+      attr_accessor dimensions: Integer?
+      attr_accessor distance_function: String?
     end
 
     class CsvOptions
@@ -1022,6 +1051,17 @@ module Aws::DynamoDB
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor table_description: Types::TableDescription?
+    end
+
+    class DeleteVectorIndexAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_name: String?
     end
 
     class DescribeBackupInput
@@ -1559,6 +1599,7 @@ module Aws::DynamoDB
         ?item_count: Integer,
         ?export_type: String,
         ?incremental_export_specification: Types::IncrementalExportSpecification,
+        ?filter_specification: Types::FilterSpecification,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1583,6 +1624,7 @@ module Aws::DynamoDB
       attr_accessor item_count: Integer?
       attr_accessor export_type: String?
       attr_accessor incremental_export_specification: Types::IncrementalExportSpecification?
+      attr_accessor filter_specification: Types::FilterSpecification?
     end
 
     module ExportFormat
@@ -1637,6 +1679,7 @@ module Aws::DynamoDB
         ?export_format: String,
         ?export_type: String,
         ?incremental_export_specification: Types::IncrementalExportSpecification,
+        ?filter_specification: Types::FilterSpecification,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1651,6 +1694,7 @@ module Aws::DynamoDB
       attr_accessor export_format: String?
       attr_accessor export_type: String?
       attr_accessor incremental_export_specification: Types::IncrementalExportSpecification?
+      attr_accessor filter_specification: Types::FilterSpecification?
     end
 
     class ExportTableToPointInTimeOutput
@@ -1685,6 +1729,25 @@ module Aws::DynamoDB
 
       attr_accessor exception_name: String?
       attr_accessor exception_description: String?
+    end
+
+    class FilterSpecification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filter_expression: String,
+        ?projection_expression: String,
+        ?key_condition_expression: String,
+        ?expression_attribute_names: Hash[String, String],
+        ?expression_attribute_values: Hash[String, Types::AttributeValue],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filter_expression: String?
+      attr_accessor projection_expression: String?
+      attr_accessor key_condition_expression: String?
+      attr_accessor expression_attribute_names: Hash[String, String]?
+      attr_accessor expression_attribute_values: Hash[String, Types::AttributeValue]?
     end
 
     class Get
@@ -1945,6 +2008,12 @@ module Aws::DynamoDB
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    module GlobalTableSettingsReplicationMode
+      ENABLED: String
+      DISABLED: String
+      ENABLED_WITH_OVERRIDES: String
     end
 
     module GlobalTableStatus
@@ -2980,6 +3049,7 @@ module Aws::DynamoDB
       def initialize: (
         ?region_name: String,
         ?replica_status: String,
+        ?replica_arn: String,
         ?replica_status_description: String,
         ?replica_status_percent_progress: String,
         ?kms_master_key_id: String,
@@ -2989,11 +3059,13 @@ module Aws::DynamoDB
         ?global_secondary_indexes: Array[Types::ReplicaGlobalSecondaryIndexDescription],
         ?replica_inaccessible_date_time: Time,
         ?replica_table_class_summary: Types::TableClassSummary,
+        ?global_table_settings_replication_mode: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor region_name: String?
       attr_accessor replica_status: String?
+      attr_accessor replica_arn: String?
       attr_accessor replica_status_description: String?
       attr_accessor replica_status_percent_progress: String?
       attr_accessor kms_master_key_id: String?
@@ -3003,6 +3075,7 @@ module Aws::DynamoDB
       attr_accessor global_secondary_indexes: Array[Types::ReplicaGlobalSecondaryIndexDescription]?
       attr_accessor replica_inaccessible_date_time: Time?
       attr_accessor replica_table_class_summary: Types::TableClassSummary?
+      attr_accessor global_table_settings_replication_mode: String?
     end
 
     class ReplicaGlobalSecondaryIndex
@@ -3276,6 +3349,7 @@ module Aws::DynamoDB
         ?provisioned_throughput_override: Types::ProvisionedThroughput,
         ?on_demand_throughput_override: Types::OnDemandThroughput,
         ?sse_specification_override: Types::SSESpecification,
+        ?vector_index_override: Array[Types::VectorIndex],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3287,6 +3361,7 @@ module Aws::DynamoDB
       attr_accessor provisioned_throughput_override: Types::ProvisionedThroughput?
       attr_accessor on_demand_throughput_override: Types::OnDemandThroughput?
       attr_accessor sse_specification_override: Types::SSESpecification?
+      attr_accessor vector_index_override: Array[Types::VectorIndex]?
     end
 
     class RestoreTableFromBackupOutput
@@ -3315,6 +3390,7 @@ module Aws::DynamoDB
         ?provisioned_throughput_override: Types::ProvisionedThroughput,
         ?on_demand_throughput_override: Types::OnDemandThroughput,
         ?sse_specification_override: Types::SSESpecification,
+        ?vector_index_override: Array[Types::VectorIndex],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3329,6 +3405,7 @@ module Aws::DynamoDB
       attr_accessor provisioned_throughput_override: Types::ProvisionedThroughput?
       attr_accessor on_demand_throughput_override: Types::OnDemandThroughput?
       attr_accessor sse_specification_override: Types::SSESpecification?
+      attr_accessor vector_index_override: Array[Types::VectorIndex]?
     end
 
     class RestoreTableToPointInTimeOutput
@@ -3497,6 +3574,77 @@ module Aws::DynamoDB
       attr_accessor consumed_capacity: Types::ConsumedCapacity?
     end
 
+    class SearchResultItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?item: Hash[String, Types::AttributeValue],
+        ?score: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor item: Hash[String, Types::AttributeValue]?
+      attr_accessor score: Float?
+    end
+
+    class SearchSchemaElement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attribute_name: String,
+        ?search_schema_element_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute_name: String?
+      attr_accessor search_schema_element_type: String?
+    end
+
+    module SearchSchemaElementType
+      HASH: String
+      INLINE_FILTER: String
+    end
+
+    class SearchVectorsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_name: String,
+        ?index_name: String,
+        ?return_consumed_capacity: String,
+        ?expression_attribute_names: Hash[String, String],
+        ?expression_attribute_values: Hash[String, Types::AttributeValue],
+        ?projection_expression: String,
+        ?search_vector: Array[Types::AttributeValue],
+        ?search_condition_expression: String,
+        ?top_k: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_name: String?
+      attr_accessor index_name: String?
+      attr_accessor return_consumed_capacity: String?
+      attr_accessor expression_attribute_names: Hash[String, String]?
+      attr_accessor expression_attribute_values: Hash[String, Types::AttributeValue]?
+      attr_accessor projection_expression: String?
+      attr_accessor search_vector: Array[Types::AttributeValue]?
+      attr_accessor search_condition_expression: String?
+      attr_accessor top_k: Integer?
+    end
+
+    class SearchVectorsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?consumed_capacity: Types::VectorCapacity,
+        ?search_results: Array[Types::SearchResultItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor consumed_capacity: Types::VectorCapacity?
+      attr_accessor search_results: Array[Types::SearchResultItem]?
+    end
+
     module Select
       ALL_ATTRIBUTES: String
       ALL_PROJECTED_ATTRIBUTES: String
@@ -3542,6 +3690,7 @@ module Aws::DynamoDB
         ?stream_description: Types::StreamSpecification,
         ?time_to_live_description: Types::TimeToLiveDescription,
         ?sse_description: Types::SSEDescription,
+        ?vector_indexes: Array[Types::VectorIndexInfo],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3550,6 +3699,7 @@ module Aws::DynamoDB
       attr_accessor stream_description: Types::StreamSpecification?
       attr_accessor time_to_live_description: Types::TimeToLiveDescription?
       attr_accessor sse_description: Types::SSEDescription?
+      attr_accessor vector_indexes: Array[Types::VectorIndexInfo]?
     end
 
     class StreamSpecification
@@ -3628,6 +3778,7 @@ module Aws::DynamoDB
         ?on_demand_throughput: Types::OnDemandThroughput,
         ?sse_specification: Types::SSESpecification,
         ?global_secondary_indexes: Array[Types::GlobalSecondaryIndex],
+        ?vector_indexes: Array[Types::VectorIndex],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3639,6 +3790,7 @@ module Aws::DynamoDB
       attr_accessor on_demand_throughput: Types::OnDemandThroughput?
       attr_accessor sse_specification: Types::SSESpecification?
       attr_accessor global_secondary_indexes: Array[Types::GlobalSecondaryIndex]?
+      attr_accessor vector_indexes: Array[Types::VectorIndex]?
     end
 
     class TableDescription
@@ -3664,6 +3816,7 @@ module Aws::DynamoDB
         ?global_table_version: String,
         ?replicas: Array[Types::ReplicaDescription],
         ?global_table_witnesses: Array[Types::GlobalTableWitnessDescription],
+        ?global_table_settings_replication_mode: String,
         ?restore_summary: Types::RestoreSummary,
         ?sse_description: Types::SSEDescription,
         ?archival_summary: Types::ArchivalSummary,
@@ -3672,6 +3825,7 @@ module Aws::DynamoDB
         ?on_demand_throughput: Types::OnDemandThroughput,
         ?warm_throughput: Types::TableWarmThroughputDescription,
         ?multi_region_consistency: String,
+        ?vector_indexes: Array[Types::VectorIndexDescription],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3694,6 +3848,7 @@ module Aws::DynamoDB
       attr_accessor global_table_version: String?
       attr_accessor replicas: Array[Types::ReplicaDescription]?
       attr_accessor global_table_witnesses: Array[Types::GlobalTableWitnessDescription]?
+      attr_accessor global_table_settings_replication_mode: String?
       attr_accessor restore_summary: Types::RestoreSummary?
       attr_accessor sse_description: Types::SSEDescription?
       attr_accessor archival_summary: Types::ArchivalSummary?
@@ -3702,6 +3857,7 @@ module Aws::DynamoDB
       attr_accessor on_demand_throughput: Types::OnDemandThroughput?
       attr_accessor warm_throughput: Types::TableWarmThroughputDescription?
       attr_accessor multi_region_consistency: String?
+      attr_accessor vector_indexes: Array[Types::VectorIndexDescription]?
     end
 
     class TableInUseException
@@ -4257,6 +4413,8 @@ module Aws::DynamoDB
         ?global_table_witness_updates: Array[Types::GlobalTableWitnessGroupUpdate],
         ?on_demand_throughput: Types::OnDemandThroughput,
         ?warm_throughput: Types::WarmThroughput,
+        ?global_table_settings_replication_mode: String,
+        ?vector_index_updates: Array[Types::VectorIndexUpdate],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4274,6 +4432,8 @@ module Aws::DynamoDB
       attr_accessor global_table_witness_updates: Array[Types::GlobalTableWitnessGroupUpdate]?
       attr_accessor on_demand_throughput: Types::OnDemandThroughput?
       attr_accessor warm_throughput: Types::WarmThroughput?
+      attr_accessor global_table_settings_replication_mode: String?
+      attr_accessor vector_index_updates: Array[Types::VectorIndexUpdate]?
     end
 
     class UpdateTableOutput
@@ -4337,6 +4497,122 @@ module Aws::DynamoDB
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor time_to_live_specification: Types::TimeToLiveSpecification?
+    end
+
+    class VectorAttributeDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attribute_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute_name: String?
+    end
+
+    class VectorCapacity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vector_search_request_bytes: Float,
+        ?vector_write_request_bytes: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vector_search_request_bytes: Float?
+      attr_accessor vector_write_request_bytes: Float?
+    end
+
+    module VectorDistanceFunction
+      COSINE: String
+      DOT_PRODUCT: String
+      EUCLIDEAN: String
+    end
+
+    class VectorIndex
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_name: String,
+        ?vector_attribute: Types::VectorAttributeDefinition,
+        ?search_schema: Array[Types::SearchSchemaElement],
+        ?projection: Types::Projection,
+        ?dimensions: Integer,
+        ?distance_function: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_name: String?
+      attr_accessor vector_attribute: Types::VectorAttributeDefinition?
+      attr_accessor search_schema: Array[Types::SearchSchemaElement]?
+      attr_accessor projection: Types::Projection?
+      attr_accessor dimensions: Integer?
+      attr_accessor distance_function: String?
+    end
+
+    class VectorIndexDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_name: String,
+        ?search_schema: Array[Types::SearchSchemaElement],
+        ?projection: Types::Projection,
+        ?vector_attribute: Types::VectorAttributeDefinition,
+        ?dimensions: Integer,
+        ?distance_function: String,
+        ?index_status: String,
+        ?backfilling: bool,
+        ?index_size_bytes: Integer,
+        ?item_count: Integer,
+        ?index_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_name: String?
+      attr_accessor search_schema: Array[Types::SearchSchemaElement]?
+      attr_accessor projection: Types::Projection?
+      attr_accessor vector_attribute: Types::VectorAttributeDefinition?
+      attr_accessor dimensions: Integer?
+      attr_accessor distance_function: String?
+      attr_accessor index_status: String?
+      attr_accessor backfilling: bool?
+      attr_accessor index_size_bytes: Integer?
+      attr_accessor item_count: Integer?
+      attr_accessor index_arn: String?
+    end
+
+    class VectorIndexInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_name: String,
+        ?vector_attribute: Types::VectorAttributeDefinition,
+        ?search_schema: Array[Types::SearchSchemaElement],
+        ?projection: Types::Projection,
+        ?dimensions: Integer,
+        ?distance_function: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_name: String?
+      attr_accessor vector_attribute: Types::VectorAttributeDefinition?
+      attr_accessor search_schema: Array[Types::SearchSchemaElement]?
+      attr_accessor projection: Types::Projection?
+      attr_accessor dimensions: Integer?
+      attr_accessor distance_function: String?
+    end
+
+    class VectorIndexUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?create: Types::CreateVectorIndexAction,
+        ?delete: Types::DeleteVectorIndexAction,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor create: Types::CreateVectorIndexAction?
+      attr_accessor delete: Types::DeleteVectorIndexAction?
     end
 
     class WarmThroughput

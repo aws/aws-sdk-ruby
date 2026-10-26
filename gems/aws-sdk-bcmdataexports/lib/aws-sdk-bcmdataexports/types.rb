@@ -6,8 +6,18 @@ module Aws::BCMDataExports
   # This module contains the types returned by client operations.
   module Types
 
-    # <p>Includes basic information for a data column such as its description, name, and
-    #       type.</p>
+    # <p>You don't have sufficient access to perform this action.</p>
+    # @!attribute message
+    #   @return [String]
+    class AccessDeniedException < Struct.new(
+      nil,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Includes basic information for a data column such as its description, name, and type.</p>
     # @!attribute name
     #   <p>The column name.</p>
     #   @return [String]
@@ -28,12 +38,10 @@ module Aws::BCMDataExports
     end
 
     # @!attribute export
-    #   <p>The details of the export, including data query, name, description, and destination
-    #         configuration.</p>
+    #   <p>The details of the export, including data query, name, description, and destination configuration.</p>
     #   @return [Types::Export]
     # @!attribute resource_tags
-    #   <p>An optional list of tags to associate with the specified export. Each tag consists of a
-    #         key and a value, and each key must be unique for the resource.</p>
+    #   <p>An optional list of tags to associate with the specified export. Each tag consists of a key and a value, and each key must be unique for the resource.</p>
     #   @return [Array<Types::ResourceTag>]
     class CreateExportRequest < Struct.new(
       nil,
@@ -209,10 +217,10 @@ module Aws::BCMDataExports
     #   <p>The description for the status code.</p>
     #   @return [String]
     # @!attribute created_at
-    #   <p>The timestamp of when the export  was created.</p>
+    #   <p>The timestamp of when the export was created.</p>
     #   @return [Time]
     # @!attribute last_updated_at
-    #   <p>The timestamp of when the export  was updated.</p>
+    #   <p>The timestamp of when the export was updated.</p>
     #   @return [Time]
     # @!attribute last_refreshed_at
     #   <p>The timestamp of when the export was last generated.</p>
@@ -230,8 +238,7 @@ module Aws::BCMDataExports
     end
 
     # @!attribute export_arn
-    #   <p>The Amazon Resource Name (ARN) of the Export object that generated this specific
-    #         execution.</p>
+    #   <p>The Amazon Resource Name (ARN) of the Export object that generated this specific execution.</p>
     #   @return [String]
     # @!attribute execution_id
     #   <p>The ID for this specific execution.</p>
@@ -249,9 +256,7 @@ module Aws::BCMDataExports
     #   <p>The ID for this specific execution.</p>
     #   @return [String]
     # @!attribute export
-    #   <p>The export data for this specific execution. This export data is a snapshot from when the
-    #         execution was generated. The data could be different from the current export data if the
-    #         export was updated since the execution was generated.</p>
+    #   <p>The export data for this specific execution. This export data is a snapshot from when the execution was generated. The data could be different from the current export data if the export was updated since the execution was generated.</p>
     #   @return [Types::Export]
     # @!attribute execution_status
     #   <p>The status of this specific execution.</p>
@@ -296,10 +301,7 @@ module Aws::BCMDataExports
     #   <p>The name of the table.</p>
     #   @return [String]
     # @!attribute table_properties
-    #   <p>TableProperties are additional configurations you can provide to change the data and
-    #         schema of a table. Each table can have different TableProperties. Tables are not required to
-    #         have any TableProperties. Each table property has a default value that it assumes if not
-    #         specified.</p>
+    #   <p>TableProperties are additional configurations you can provide to change the data and schema of a table. Each table can have different TableProperties. Tables are not required to have any TableProperties. Each table property has a default value that it assumes if not specified.</p>
     #   @return [Hash<String, String>]
     class GetTableRequest < Struct.new(
       nil,
@@ -317,10 +319,7 @@ module Aws::BCMDataExports
     #   <p>The table description.</p>
     #   @return [String]
     # @!attribute table_properties
-    #   <p>TableProperties are additional configurations you can provide to change the data and
-    #         schema of a table. Each table can have different TableProperties. Tables are not required to
-    #         have any TableProperties. Each table property has a default value that it assumes if not
-    #         specified.</p>
+    #   <p>TableProperties are additional configurations you can provide to change the data and schema of a table. Each table can have different TableProperties. Tables are not required to have any TableProperties. Each table property has a default value that it assumes if not specified.</p>
     #   @return [Hash<String, String>]
     # @!attribute schema
     #   <p>The schema of the table.</p>
@@ -336,8 +335,7 @@ module Aws::BCMDataExports
       include ::Smithy::Schema::Structure
     end
 
-    # <p>An error on the server occurred during the processing of your request. Try again
-    #       later.</p>
+    # <p>An error on the server occurred during the processing of your request. Try again later.</p>
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
@@ -462,8 +460,7 @@ module Aws::BCMDataExports
     end
 
     # @!attribute resource_tags
-    #   <p>An optional list of tags to associate with the specified export. Each tag consists of a
-    #         key and a value, and each key must be unique for the resource.</p>
+    #   <p>An optional list of tags to associate with the specified export. Each tag consists of a key and a value, and each key must be unique for the resource.</p>
     #   @return [Array<Types::ResourceTag>]
     # @!attribute next_token
     #   <p>The token to retrieve the next set of results.</p>
@@ -479,8 +476,7 @@ module Aws::BCMDataExports
 
     # <p>The cadence for Amazon Web Services to update the data export in your S3 bucket.</p>
     # @!attribute frequency
-    #   <p>The frequency that data exports are updated. The export refreshes each time the source
-    #         data updates, up to three times daily.</p>
+    #   <p>The frequency that data exports are updated. The export refreshes each time the source data updates, up to three times daily.</p>
     #   @return [String]
     class RefreshCadence < Struct.new(
       nil,
@@ -525,10 +521,12 @@ module Aws::BCMDataExports
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Describes the destination Amazon Simple Storage Service (Amazon S3) bucket name and object
-    #       keys of a data exports file.</p>
+    # <p>Describes the destination Amazon Simple Storage Service (Amazon S3) bucket name and object keys of a data exports file.</p>
     # @!attribute s3_bucket
     #   <p>The name of the Amazon S3 bucket used as the destination of a data export file.</p>
+    #   @return [String]
+    # @!attribute s3_bucket_owner
+    #   <p>The Amazon Web Services account ID that owns the S3 bucket used as the destination for the data export.</p>
     #   @return [String]
     # @!attribute s3_prefix
     #   <p>The S3 path prefix you want prepended to the name of your data export.</p>
@@ -542,6 +540,7 @@ module Aws::BCMDataExports
     class S3Destination < Struct.new(
       nil,
       :s3_bucket,
+      :s3_bucket_owner,
       :s3_prefix,
       :s3_region,
       :s3_output_configurations,
@@ -561,10 +560,7 @@ module Aws::BCMDataExports
     #   <p>The compression type for the data export.</p>
     #   @return [String]
     # @!attribute overwrite
-    #   <p>The rule to follow when generating a version of the data export file. You have the choice
-    #         to overwrite the previous version or to be delivered in addition to the previous versions.
-    #         Overwriting exports can save on Amazon S3 storage costs. Creating new export versions allows
-    #         you to track the changes in cost and usage data over time.</p>
+    #   <p>The rule to follow when generating a version of the data export file. You have the choice to overwrite the previous version or to be delivered in addition to the previous versions. Overwriting exports can save on Amazon S3 storage costs. Creating new export versions allows you to track the changes in cost and usage data over time.</p>
     #   @return [String]
     class S3OutputConfigurations < Struct.new(
       nil,
@@ -577,8 +573,7 @@ module Aws::BCMDataExports
       include ::Smithy::Schema::Structure
     end
 
-    # <p>You've reached the limit on the number of resources you can create, or exceeded the size
-    #       of an individual resource.</p>
+    # <p>You've reached the limit on the number of resources you can create, or exceeded the size of an individual resource.</p>
     # @!attribute message
     #   @return [String]
     # @!attribute resource_id
@@ -591,8 +586,7 @@ module Aws::BCMDataExports
     #   <p>The quota code that was exceeded.</p>
     #   @return [String]
     # @!attribute service_code
-    #   <p>The service code that exceeded quota. It will always be
-    #         “AWSBillingAndCostManagementDataExports”.</p>
+    #   <p>The service code that exceeded quota. It will always be “AWSBillingAndCostManagementDataExports”.</p>
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       nil,
@@ -654,8 +648,7 @@ module Aws::BCMDataExports
     #   <p>The unique identifier for the resource.</p>
     #   @return [String]
     # @!attribute resource_tags
-    #   <p>The tags to associate with the resource. Each tag consists of a key and a value, and each
-    #         key must be unique for the resource.</p>
+    #   <p>The tags to associate with the resource. Each tag consists of a key and a value, and each key must be unique for the resource.</p>
     #   @return [Array<Types::ResourceTag>]
     class TagResourceRequest < Struct.new(
       nil,
@@ -680,8 +673,7 @@ module Aws::BCMDataExports
     #   <p>The quota code that exceeded the throttling limit.</p>
     #   @return [String]
     # @!attribute service_code
-    #   <p>The service code that exceeded the throttling limit. It will always be
-    #         “AWSBillingAndCostManagementDataExports”.</p>
+    #   <p>The service code that exceeded the throttling limit. It will always be “AWSBillingAndCostManagementDataExports”.</p>
     #   @return [String]
     class ThrottlingException < Struct.new(
       nil,
@@ -741,8 +733,7 @@ module Aws::BCMDataExports
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The input fails to satisfy the constraints specified by an Amazon Web Services
-    #       service.</p>
+    # <p>The input fails to satisfy the constraints specified by an Amazon Web Services service.</p>
     # @!attribute message
     #   @return [String]
     # @!attribute reason
@@ -761,8 +752,7 @@ module Aws::BCMDataExports
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The input failed to meet the constraints specified by the Amazon Web Services service in a
-    #       specified field.</p>
+    # <p>The input failed to meet the constraints specified by the Amazon Web Services service in a specified field.</p>
     # @!attribute name
     #   <p>The field name where the invalid entry was detected.</p>
     #   @return [String]

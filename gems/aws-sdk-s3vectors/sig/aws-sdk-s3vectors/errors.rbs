@@ -25,6 +25,10 @@ module Aws::S3Vectors
     class NotFoundException < Smithy::Client::ServiceError
       def message: () -> String?
     end
+    class RequestTimeoutException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def retryable?: () -> true
+    end
     class ServiceQuotaExceededException < Smithy::Client::ServiceError
       def message: () -> String?
     end

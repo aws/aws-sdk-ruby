@@ -40,6 +40,9 @@ module Aws::ElasticsearchService
     AutoTuneState = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.elasticsearchservice#AutoTuneState", name: "AutoTuneState")
     AutoTuneStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticsearchservice#AutoTuneStatus", name: "AutoTuneStatus")
     AutoTuneType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.elasticsearchservice#AutoTuneType", name: "AutoTuneType")
+    AutomatedSnapshotPauseOptions = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticsearchservice#AutomatedSnapshotPauseOptions", name: "AutomatedSnapshotPauseOptions")
+    AutomatedSnapshotPauseOptionsStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticsearchservice#AutomatedSnapshotPauseOptionsStatus", name: "AutomatedSnapshotPauseOptionsStatus")
+    AutomatedSnapshotPauseRequestOptions = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticsearchservice#AutomatedSnapshotPauseRequestOptions", name: "AutomatedSnapshotPauseRequestOptions")
     BackendRole = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.elasticsearchservice#BackendRole", name: "BackendRole", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}})
     BaseException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticsearchservice#BaseException", name: "BaseException", traits: {"smithy.api#error" => "client"})
     Boolean = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.elasticsearchservice#Boolean", name: "Boolean")
@@ -89,6 +92,9 @@ module Aws::ElasticsearchService
     DeleteVpcEndpointResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticsearchservice#DeleteVpcEndpointResponse", name: "DeleteVpcEndpointResponse")
     DeploymentCloseDateTimeStamp = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.elasticsearchservice#DeploymentCloseDateTimeStamp", name: "DeploymentCloseDateTimeStamp")
     DeploymentStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.elasticsearchservice#DeploymentStatus", name: "DeploymentStatus")
+    DeploymentStrategy = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.elasticsearchservice#DeploymentStrategy", name: "DeploymentStrategy")
+    DeploymentStrategyOptions = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticsearchservice#DeploymentStrategyOptions", name: "DeploymentStrategyOptions")
+    DeploymentStrategyOptionsStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticsearchservice#DeploymentStrategyOptionsStatus", name: "DeploymentStrategyOptionsStatus")
     DeploymentType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.elasticsearchservice#DeploymentType", name: "DeploymentType", traits: {"smithy.api#length" => {"min" => 2, "max" => 128}})
     DescribeDomainAutoTunesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticsearchservice#DescribeDomainAutoTunesRequest", name: "DescribeDomainAutoTunesRequest")
     DescribeDomainAutoTunesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticsearchservice#DescribeDomainAutoTunesResponse", name: "DescribeDomainAutoTunesResponse")
@@ -127,6 +133,7 @@ module Aws::ElasticsearchService
     DomainArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.elasticsearchservice#DomainArn", name: "DomainArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 512}, "smithy.api#pattern" => "^arn:aws[a-z\\-]*:[a-z]+:[a-z0-9\\-]+:[0-9]+:domain\\/[a-z0-9\\-]+$"})
     DomainEndpointOptions = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticsearchservice#DomainEndpointOptions", name: "DomainEndpointOptions")
     DomainEndpointOptionsStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticsearchservice#DomainEndpointOptionsStatus", name: "DomainEndpointOptionsStatus")
+    DomainEngineMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.elasticsearchservice#DomainEngineMode", name: "DomainEngineMode")
     DomainId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.elasticsearchservice#DomainId", name: "DomainId", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}})
     DomainInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticsearchservice#DomainInfo", name: "DomainInfo")
     DomainInfoList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.elasticsearchservice#DomainInfoList", name: "DomainInfoList")
@@ -138,6 +145,7 @@ module Aws::ElasticsearchService
     DomainPackageDetailsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.elasticsearchservice#DomainPackageDetailsList", name: "DomainPackageDetailsList")
     DomainPackageStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.elasticsearchservice#DomainPackageStatus", name: "DomainPackageStatus")
     DomainProcessingStatusType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.elasticsearchservice#DomainProcessingStatusType", name: "DomainProcessingStatusType")
+    DomainUseCase = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.elasticsearchservice#DomainUseCase", name: "DomainUseCase")
     Double = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.elasticsearchservice#Double", name: "Double")
     DryRun = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.elasticsearchservice#DryRun", name: "DryRun")
     DryRunResults = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticsearchservice#DryRunResults", name: "DryRunResults")
@@ -160,6 +168,7 @@ module Aws::ElasticsearchService
     EncryptionAtRestOptionsStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticsearchservice#EncryptionAtRestOptionsStatus", name: "EncryptionAtRestOptionsStatus")
     Endpoint = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.elasticsearchservice#Endpoint", name: "Endpoint", traits: {"smithy.api#pattern" => "^[A-Za-z0-9\\-\\.]+$"})
     EndpointsMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.elasticsearchservice#EndpointsMap", name: "EndpointsMap")
+    EngineModeStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticsearchservice#EngineModeStatus", name: "EngineModeStatus")
     EngineType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.elasticsearchservice#EngineType", name: "EngineType")
     ErrorDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticsearchservice#ErrorDetails", name: "ErrorDetails")
     ErrorMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.elasticsearchservice#ErrorMessage", name: "ErrorMessage")
@@ -254,6 +263,7 @@ module Aws::ElasticsearchService
     PackageVersionHistory = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticsearchservice#PackageVersionHistory", name: "PackageVersionHistory")
     PackageVersionHistoryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.elasticsearchservice#PackageVersionHistoryList", name: "PackageVersionHistoryList")
     Password = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.elasticsearchservice#Password", name: "Password", traits: {"smithy.api#length" => {"min" => 8}, "smithy.api#sensitive" => {}})
+    PauseState = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.elasticsearchservice#PauseState", name: "PauseState")
     PolicyDocument = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.elasticsearchservice#PolicyDocument", name: "PolicyDocument")
     PrincipalType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.elasticsearchservice#PrincipalType", name: "PrincipalType")
     PropertyValueType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.elasticsearchservice#PropertyValueType", name: "PropertyValueType")
@@ -329,6 +339,7 @@ module Aws::ElasticsearchService
     UpgradeStep = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.elasticsearchservice#UpgradeStep", name: "UpgradeStep")
     UpgradeStepItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticsearchservice#UpgradeStepItem", name: "UpgradeStepItem")
     UpgradeStepsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.elasticsearchservice#UpgradeStepsList", name: "UpgradeStepsList")
+    UseCaseStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticsearchservice#UseCaseStatus", name: "UseCaseStatus")
     UserPoolId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.elasticsearchservice#UserPoolId", name: "UserPoolId", traits: {"smithy.api#length" => {"min" => 1, "max" => 55}, "smithy.api#pattern" => "^[\\w-]+_[0-9a-zA-Z]+$"})
     Username = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.elasticsearchservice#Username", name: "Username", traits: {"smithy.api#length" => {"min" => 1}, "smithy.api#sensitive" => {}})
     VPCDerivedInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticsearchservice#VPCDerivedInfo", name: "VPCDerivedInfo")
@@ -442,6 +453,18 @@ module Aws::ElasticsearchService
     AutoTuneStatus.add_member(:pending_deletion, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "PendingDeletion"))
     AutoTuneStatus.type = Types::AutoTuneStatus
     AutoTuneType.add_member(:scheduled_action, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SCHEDULED_ACTION", traits: {"smithy.api#enumValue" => "SCHEDULED_ACTION"}))
+    AutomatedSnapshotPauseOptions.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Enabled", traits: {"smithy.api#required" => {}}))
+    AutomatedSnapshotPauseOptions.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateTimestamp, name: "StartTime"))
+    AutomatedSnapshotPauseOptions.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateTimestamp, name: "EndTime"))
+    AutomatedSnapshotPauseOptions.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: PauseState, name: "State"))
+    AutomatedSnapshotPauseOptions.type = Types::AutomatedSnapshotPauseOptions
+    AutomatedSnapshotPauseOptionsStatus.add_member(:options, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedSnapshotPauseOptions, name: "Options", traits: {"smithy.api#required" => {}}))
+    AutomatedSnapshotPauseOptionsStatus.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionStatus, name: "Status", traits: {"smithy.api#required" => {}}))
+    AutomatedSnapshotPauseOptionsStatus.type = Types::AutomatedSnapshotPauseOptionsStatus
+    AutomatedSnapshotPauseRequestOptions.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Enabled", traits: {"smithy.api#required" => {}}))
+    AutomatedSnapshotPauseRequestOptions.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateTimestamp, name: "StartTime"))
+    AutomatedSnapshotPauseRequestOptions.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateTimestamp, name: "EndTime"))
+    AutomatedSnapshotPauseRequestOptions.type = Types::AutomatedSnapshotPauseRequestOptions
     BaseException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     BaseException.type = Types::BaseException
     CancelDomainConfigChangeRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "DomainName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -524,6 +547,10 @@ module Aws::ElasticsearchService
     CreateElasticsearchDomainRequest.add_member(:advanced_security_options, ::Smithy::Schema::Shapes::MemberShape.new(target: AdvancedSecurityOptionsInput, name: "AdvancedSecurityOptions"))
     CreateElasticsearchDomainRequest.add_member(:auto_tune_options, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoTuneOptionsInput, name: "AutoTuneOptions"))
     CreateElasticsearchDomainRequest.add_member(:tag_list, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "TagList"))
+    CreateElasticsearchDomainRequest.add_member(:deployment_strategy_options, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentStrategyOptions, name: "DeploymentStrategyOptions"))
+    CreateElasticsearchDomainRequest.add_member(:automated_snapshot_pause_options, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedSnapshotPauseRequestOptions, name: "AutomatedSnapshotPauseOptions"))
+    CreateElasticsearchDomainRequest.add_member(:use_case, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainUseCase, name: "UseCase"))
+    CreateElasticsearchDomainRequest.add_member(:engine_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainEngineMode, name: "EngineMode"))
     CreateElasticsearchDomainRequest.type = Types::CreateElasticsearchDomainRequest
     CreateElasticsearchDomainResponse.add_member(:domain_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ElasticsearchDomainStatus, name: "DomainStatus"))
     CreateElasticsearchDomainResponse.type = Types::CreateElasticsearchDomainResponse
@@ -575,9 +602,16 @@ module Aws::ElasticsearchService
     DeploymentStatus.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
     DeploymentStatus.add_member(:not_eligible, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_ELIGIBLE", traits: {"smithy.api#enumValue" => "NOT_ELIGIBLE"}))
     DeploymentStatus.add_member(:eligible, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ELIGIBLE", traits: {"smithy.api#enumValue" => "ELIGIBLE"}))
+    DeploymentStrategy.add_member(:default, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEFAULT", traits: {"smithy.api#enumValue" => "Default"}))
+    DeploymentStrategy.add_member(:capacity_optimized, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CAPACITY_OPTIMIZED", traits: {"smithy.api#enumValue" => "CapacityOptimized"}))
+    DeploymentStrategyOptions.add_member(:deployment_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentStrategy, name: "DeploymentStrategy", traits: {"smithy.api#required" => {}}))
+    DeploymentStrategyOptions.type = Types::DeploymentStrategyOptions
+    DeploymentStrategyOptionsStatus.add_member(:options, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentStrategyOptions, name: "Options", traits: {"smithy.api#required" => {}}))
+    DeploymentStrategyOptionsStatus.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionStatus, name: "Status", traits: {"smithy.api#required" => {}}))
+    DeploymentStrategyOptionsStatus.type = Types::DeploymentStrategyOptionsStatus
     DescribeDomainAutoTunesRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "DomainName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DescribeDomainAutoTunesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults", traits: {"smithy.api#default" => 0}))
-    DescribeDomainAutoTunesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    DescribeDomainAutoTunesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults", traits: {"smithy.api#default" => 0, "smithy.api#httpQuery" => "maxResults"}))
+    DescribeDomainAutoTunesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
     DescribeDomainAutoTunesRequest.type = Types::DescribeDomainAutoTunesRequest
     DescribeDomainAutoTunesResponse.add_member(:auto_tunes, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoTuneList, name: "AutoTunes"))
     DescribeDomainAutoTunesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
@@ -669,6 +703,8 @@ module Aws::ElasticsearchService
     DomainEndpointOptionsStatus.add_member(:options, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainEndpointOptions, name: "Options", traits: {"smithy.api#required" => {}}))
     DomainEndpointOptionsStatus.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionStatus, name: "Status", traits: {"smithy.api#required" => {}}))
     DomainEndpointOptionsStatus.type = Types::DomainEndpointOptionsStatus
+    DomainEngineMode.add_member(:general, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GENERAL", traits: {"smithy.api#enumValue" => "GENERAL"}))
+    DomainEngineMode.add_member(:optimized, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OPTIMIZED", traits: {"smithy.api#enumValue" => "OPTIMIZED"}))
     DomainInfo.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "DomainName"))
     DomainInfo.add_member(:engine_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EngineType, name: "EngineType"))
     DomainInfo.type = Types::DomainInfo
@@ -701,6 +737,10 @@ module Aws::ElasticsearchService
     DomainProcessingStatusType.add_member(:updating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATING", traits: {"smithy.api#enumValue" => "UpdatingServiceSoftware"}))
     DomainProcessingStatusType.add_member(:isolated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ISOLATED", traits: {"smithy.api#enumValue" => "Isolated"}))
     DomainProcessingStatusType.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "Deleting"}))
+    DomainUseCase.add_member(:search, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SEARCH", traits: {"smithy.api#enumValue" => "SEARCH"}))
+    DomainUseCase.add_member(:vector, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VECTOR", traits: {"smithy.api#enumValue" => "VECTOR"}))
+    DomainUseCase.add_member(:observability, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OBSERVABILITY", traits: {"smithy.api#enumValue" => "OBSERVABILITY"}))
+    DomainUseCase.add_member(:mixed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MIXED", traits: {"smithy.api#enumValue" => "MIXED"}))
     DryRunResults.add_member(:deployment_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentType, name: "DeploymentType"))
     DryRunResults.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message"))
     DryRunResults.type = Types::DryRunResults
@@ -807,6 +847,10 @@ module Aws::ElasticsearchService
     ElasticsearchDomainConfig.add_member(:auto_tune_options, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoTuneOptionsStatus, name: "AutoTuneOptions"))
     ElasticsearchDomainConfig.add_member(:change_progress_details, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeProgressDetails, name: "ChangeProgressDetails"))
     ElasticsearchDomainConfig.add_member(:modifying_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: ModifyingPropertiesList, name: "ModifyingProperties"))
+    ElasticsearchDomainConfig.add_member(:deployment_strategy_options, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentStrategyOptionsStatus, name: "DeploymentStrategyOptions"))
+    ElasticsearchDomainConfig.add_member(:automated_snapshot_pause_options, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedSnapshotPauseOptionsStatus, name: "AutomatedSnapshotPauseOptions"))
+    ElasticsearchDomainConfig.add_member(:use_case, ::Smithy::Schema::Shapes::MemberShape.new(target: UseCaseStatus, name: "UseCase"))
+    ElasticsearchDomainConfig.add_member(:engine_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: EngineModeStatus, name: "EngineMode"))
     ElasticsearchDomainConfig.type = Types::ElasticsearchDomainConfig
     ElasticsearchDomainStatus.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "DomainId", traits: {"smithy.api#required" => {}}))
     ElasticsearchDomainStatus.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "DomainName", traits: {"smithy.api#required" => {}}))
@@ -835,6 +879,10 @@ module Aws::ElasticsearchService
     ElasticsearchDomainStatus.add_member(:change_progress_details, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeProgressDetails, name: "ChangeProgressDetails"))
     ElasticsearchDomainStatus.add_member(:domain_processing_status, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainProcessingStatusType, name: "DomainProcessingStatus"))
     ElasticsearchDomainStatus.add_member(:modifying_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: ModifyingPropertiesList, name: "ModifyingProperties"))
+    ElasticsearchDomainStatus.add_member(:deployment_strategy_options, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentStrategyOptions, name: "DeploymentStrategyOptions"))
+    ElasticsearchDomainStatus.add_member(:automated_snapshot_pause_options, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedSnapshotPauseOptions, name: "AutomatedSnapshotPauseOptions"))
+    ElasticsearchDomainStatus.add_member(:use_case, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainUseCase, name: "UseCase"))
+    ElasticsearchDomainStatus.add_member(:engine_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainEngineMode, name: "EngineMode"))
     ElasticsearchDomainStatus.type = Types::ElasticsearchDomainStatus
     ElasticsearchDomainStatusList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ElasticsearchDomainStatus, name: "member"))
     ElasticsearchInstanceTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ESPartitionInstanceType, name: "member"))
@@ -850,6 +898,9 @@ module Aws::ElasticsearchService
     EncryptionAtRestOptionsStatus.type = Types::EncryptionAtRestOptionsStatus
     EndpointsMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
     EndpointsMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceUrl, name: "value"))
+    EngineModeStatus.add_member(:options, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainEngineMode, name: "Options", traits: {"smithy.api#required" => {}}))
+    EngineModeStatus.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionStatus, name: "Status", traits: {"smithy.api#required" => {}}))
+    EngineModeStatus.type = Types::EngineModeStatus
     EngineType.add_member(:open_search, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OpenSearch", traits: {"smithy.api#enumValue" => "OpenSearch"}))
     EngineType.add_member(:elasticsearch, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Elasticsearch", traits: {"smithy.api#enumValue" => "Elasticsearch"}))
     ErrorDetails.add_member(:error_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorType, name: "ErrorType"))
@@ -1062,6 +1113,10 @@ module Aws::ElasticsearchService
     PackageVersionHistory.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedAt, name: "CreatedAt"))
     PackageVersionHistory.type = Types::PackageVersionHistory
     PackageVersionHistoryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PackageVersionHistory, name: "member"))
+    PauseState.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "Active"}))
+    PauseState.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED", traits: {"smithy.api#enumValue" => "Completed"}))
+    PauseState.add_member(:scheduled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SCHEDULED", traits: {"smithy.api#enumValue" => "Scheduled"}))
+    PauseState.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "Disabled"}))
     PrincipalType.add_member(:aws_account, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_ACCOUNT", traits: {"smithy.api#enumValue" => "AWS_ACCOUNT"}))
     PrincipalType.add_member(:aws_service, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_SERVICE", traits: {"smithy.api#enumValue" => "AWS_SERVICE"}))
     PropertyValueType.add_member(:plain_text, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PLAIN_TEXT", traits: {"smithy.api#enumValue" => "PLAIN_TEXT"}))
@@ -1180,6 +1235,7 @@ module Aws::ElasticsearchService
     TLSSecurityPolicy.add_member(:policy_min_tls_1_0_2019_07, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POLICY_MIN_TLS_1_0_2019_07", traits: {"smithy.api#enumValue" => "Policy-Min-TLS-1-0-2019-07"}))
     TLSSecurityPolicy.add_member(:policy_min_tls_1_2_2019_07, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POLICY_MIN_TLS_1_2_2019_07", traits: {"smithy.api#enumValue" => "Policy-Min-TLS-1-2-2019-07"}))
     TLSSecurityPolicy.add_member(:policy_min_tls_1_2_pfs_2023_10, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POLICY_MIN_TLS_1_2_PFS_2023_10", traits: {"smithy.api#enumValue" => "Policy-Min-TLS-1-2-PFS-2023-10"}))
+    TLSSecurityPolicy.add_member(:policy_min_tls_1_2_rfc9151_fips_2024_08, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POLICY_MIN_TLS_1_2_RFC9151_FIPS_2024_08", traits: {"smithy.api#enumValue" => "Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08"}))
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
@@ -1200,6 +1256,10 @@ module Aws::ElasticsearchService
     UpdateElasticsearchDomainConfigRequest.add_member(:encryption_at_rest_options, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionAtRestOptions, name: "EncryptionAtRestOptions"))
     UpdateElasticsearchDomainConfigRequest.add_member(:auto_tune_options, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoTuneOptions, name: "AutoTuneOptions"))
     UpdateElasticsearchDomainConfigRequest.add_member(:dry_run, ::Smithy::Schema::Shapes::MemberShape.new(target: DryRun, name: "DryRun"))
+    UpdateElasticsearchDomainConfigRequest.add_member(:deployment_strategy_options, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentStrategyOptions, name: "DeploymentStrategyOptions"))
+    UpdateElasticsearchDomainConfigRequest.add_member(:automated_snapshot_pause_options, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedSnapshotPauseRequestOptions, name: "AutomatedSnapshotPauseOptions"))
+    UpdateElasticsearchDomainConfigRequest.add_member(:use_case, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainUseCase, name: "UseCase"))
+    UpdateElasticsearchDomainConfigRequest.add_member(:engine_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainEngineMode, name: "EngineMode"))
     UpdateElasticsearchDomainConfigRequest.type = Types::UpdateElasticsearchDomainConfigRequest
     UpdateElasticsearchDomainConfigResponse.add_member(:domain_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ElasticsearchDomainConfig, name: "DomainConfig", traits: {"smithy.api#required" => {}}))
     UpdateElasticsearchDomainConfigResponse.add_member(:dry_run_results, ::Smithy::Schema::Shapes::MemberShape.new(target: DryRunResults, name: "DryRunResults"))
@@ -1244,6 +1304,9 @@ module Aws::ElasticsearchService
     UpgradeStepItem.add_member(:progress_percent, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "ProgressPercent"))
     UpgradeStepItem.type = Types::UpgradeStepItem
     UpgradeStepsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UpgradeStepItem, name: "member"))
+    UseCaseStatus.add_member(:options, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainUseCase, name: "Options", traits: {"smithy.api#required" => {}}))
+    UseCaseStatus.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionStatus, name: "Status", traits: {"smithy.api#required" => {}}))
+    UseCaseStatus.type = Types::UseCaseStatus
     VPCDerivedInfo.add_member(:vpc_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "VPCId"))
     VPCDerivedInfo.add_member(:subnet_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "SubnetIds"))
     VPCDerivedInfo.add_member(:availability_zones, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "AvailabilityZones"))
@@ -1298,7 +1361,7 @@ module Aws::ElasticsearchService
       service.id = "com.amazonaws.elasticsearchservice#AmazonElasticsearchService2015"
       service.name = "AmazonElasticsearchService2015"
       service.version = "2015-01-01"
-      service.traits = {"aws.api#service" => {"sdkId" => "Elasticsearch Service", "arnNamespace" => "es", "cloudFormationName" => "Elasticsearch", "cloudTrailEventSource" => "elasticsearchservice.amazonaws.com", "docId" => "es-2015-01-01", "endpointPrefix" => "es"}, "aws.auth#sigv4" => {"name" => "es"}, "aws.protocols#restJson1" => {}, "smithy.api#title" => "Amazon Elasticsearch Service", "smithy.api#xmlNamespace" => {"uri" => "http://es.amazonaws.com/doc/2015-01-01/"}}
+      service.traits = {"aws.api#service" => {"sdkId" => "Elasticsearch Service", "arnNamespace" => "es", "cloudFormationName" => "Elasticsearch", "cloudTrailEventSource" => "elasticsearchservice.amazonaws.com", "docId" => "es-2015-01-01", "endpointPrefix" => "es"}, "aws.auth#sigv4" => {"name" => "es"}, "aws.protocols#restJson1" => {}, "smithy.api#title" => "Amazon Elasticsearch Service", "smithy.api#xmlNamespace" => {"uri" => "http://es.amazonaws.com/doc/2015-01-01/"}, "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws"]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws-cn"]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws-us-gov"]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://es-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://es-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://aos.{Region}.api.aws", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://aos.{Region}.api.amazonwebservices.com.cn", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://es.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://es.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 16, "nodes" => "/////wAAAAH/////AAAAAAAAAA8AAAADAAAAAQAAAAQF9eENAAAAAgAAAAUF9eENAAAAAwAAAAsAAAAGAAAABAAAAAcF9eEMAAAABQAAAAgF9eELAAAABwX14QgAAAAJAAAACAX14QkAAAAKAAAACQX14QgF9eEKAAAABAAAAA0AAAAMAAAABgX14QYF9eEHAAAABQAAAA4F9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAAQAAAABAX14QIF9eED"}}
       service.add_operation(:accept_inbound_cross_cluster_search_connection, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.elasticsearchservice#AcceptInboundCrossClusterSearchConnection"
         operation.name = "AcceptInboundCrossClusterSearchConnection"

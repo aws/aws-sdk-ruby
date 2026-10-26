@@ -4,7 +4,15 @@ module Aws::Kafka
       def invalid_parameter: () -> String?
       def message: () -> String?
     end
+    class ClusterConnectivityException < Smithy::Client::ServiceError
+      def invalid_parameter: () -> String?
+      def message: () -> String?
+    end
     class ConflictException < Smithy::Client::ServiceError
+      def invalid_parameter: () -> String?
+      def message: () -> String?
+    end
+    class ControllerMovedException < Smithy::Client::ServiceError
       def invalid_parameter: () -> String?
       def message: () -> String?
     end
@@ -12,11 +20,31 @@ module Aws::Kafka
       def invalid_parameter: () -> String?
       def message: () -> String?
     end
+    class GroupSubscribedToTopicException < Smithy::Client::ServiceError
+      def invalid_parameter: () -> String?
+      def message: () -> String?
+    end
     class InternalServerErrorException < Smithy::Client::ServiceError
       def invalid_parameter: () -> String?
       def message: () -> String?
     end
+    class KafkaRequestException < Smithy::Client::ServiceError
+      def invalid_parameter: () -> String?
+      def message: () -> String?
+    end
+    class KafkaTimeoutException < Smithy::Client::ServiceError
+      def invalid_parameter: () -> String?
+      def message: () -> String?
+    end
+    class NotControllerException < Smithy::Client::ServiceError
+      def invalid_parameter: () -> String?
+      def message: () -> String?
+    end
     class NotFoundException < Smithy::Client::ServiceError
+      def invalid_parameter: () -> String?
+      def message: () -> String?
+    end
+    class ReassignmentInProgressException < Smithy::Client::ServiceError
       def invalid_parameter: () -> String?
       def message: () -> String?
     end
@@ -28,7 +56,15 @@ module Aws::Kafka
       def invalid_parameter: () -> String?
       def message: () -> String?
     end
+    class TopicExistsException < Smithy::Client::ServiceError
+      def invalid_parameter: () -> String?
+      def message: () -> String?
+    end
     class UnauthorizedException < Smithy::Client::ServiceError
+      def invalid_parameter: () -> String?
+      def message: () -> String?
+    end
+    class UnknownTopicOrPartitionException < Smithy::Client::ServiceError
       def invalid_parameter: () -> String?
       def message: () -> String?
     end

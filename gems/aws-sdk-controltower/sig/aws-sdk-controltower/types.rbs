@@ -163,14 +163,16 @@ module Aws::ControlTower
 
       def initialize: (
         ?version: String,
-        ?manifest: Smithy::Schema::document,
+        ?remediation_types: Array[String],
         ?tags: Hash[String, String],
+        ?manifest: Smithy::Schema::document,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor version: String?
-      attr_accessor manifest: Smithy::Schema::document?
+      attr_accessor remediation_types: Array[String]?
       attr_accessor tags: Hash[String, String]?
+      attr_accessor manifest: Smithy::Schema::document?
     end
 
     class CreateLandingZoneOutput
@@ -236,11 +238,13 @@ module Aws::ControlTower
       def initialize: (
         ?control_identifier: String,
         ?target_identifier: String,
+        ?enabled_control_identifier: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor control_identifier: String?
       attr_accessor target_identifier: String?
+      attr_accessor enabled_control_identifier: String?
     end
 
     class DisableControlOutput
@@ -266,10 +270,12 @@ module Aws::ControlTower
 
       def initialize: (
         ?drift_status: String,
+        ?types: Types::EnabledControlDriftTypes,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor drift_status: String?
+      attr_accessor types: Types::EnabledControlDriftTypes?
     end
 
     class EnableBaselineInput
@@ -472,9 +478,10 @@ module Aws::ControlTower
         ?arn: String,
         ?control_identifier: String,
         ?target_identifier: String,
-        ?target_regions: Array[Types::Region],
         ?status_summary: Types::EnablementStatusSummary,
         ?drift_status_summary: Types::DriftStatusSummary,
+        ?parent_identifier: String,
+        ?target_regions: Array[Types::Region],
         ?parameters: Array[Types::EnabledControlParameterSummary],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -482,10 +489,24 @@ module Aws::ControlTower
       attr_accessor arn: String?
       attr_accessor control_identifier: String?
       attr_accessor target_identifier: String?
-      attr_accessor target_regions: Array[Types::Region]?
       attr_accessor status_summary: Types::EnablementStatusSummary?
       attr_accessor drift_status_summary: Types::DriftStatusSummary?
+      attr_accessor parent_identifier: String?
+      attr_accessor target_regions: Array[Types::Region]?
       attr_accessor parameters: Array[Types::EnabledControlParameterSummary]?
+    end
+
+    class EnabledControlDriftTypes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?inheritance: Types::EnabledControlInheritanceDrift,
+        ?resource: Types::EnabledControlResourceDrift,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor inheritance: Types::EnabledControlInheritanceDrift?
+      attr_accessor resource: Types::EnabledControlResourceDrift?
     end
 
     class EnabledControlFilter
@@ -495,12 +516,29 @@ module Aws::ControlTower
         ?control_identifiers: Array[String],
         ?statuses: Array[String],
         ?drift_statuses: Array[String],
+        ?parent_identifiers: Array[String],
+        ?inheritance_drift_statuses: Array[String],
+        ?resource_drift_statuses: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor control_identifiers: Array[String]?
       attr_accessor statuses: Array[String]?
       attr_accessor drift_statuses: Array[String]?
+      attr_accessor parent_identifiers: Array[String]?
+      attr_accessor inheritance_drift_statuses: Array[String]?
+      attr_accessor resource_drift_statuses: Array[String]?
+    end
+
+    class EnabledControlInheritanceDrift
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
     end
 
     class EnabledControlParameter
@@ -529,23 +567,36 @@ module Aws::ControlTower
       attr_accessor value: Smithy::Schema::document?
     end
 
+    class EnabledControlResourceDrift
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
     class EnabledControlSummary
       include Smithy::Schema::Structure
 
       def initialize: (
-        ?control_identifier: String,
         ?arn: String,
+        ?control_identifier: String,
         ?target_identifier: String,
         ?status_summary: Types::EnablementStatusSummary,
         ?drift_status_summary: Types::DriftStatusSummary,
+        ?parent_identifier: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
-      attr_accessor control_identifier: String?
       attr_accessor arn: String?
+      attr_accessor control_identifier: String?
       attr_accessor target_identifier: String?
       attr_accessor status_summary: Types::EnablementStatusSummary?
       attr_accessor drift_status_summary: Types::DriftStatusSummary?
+      attr_accessor parent_identifier: String?
     end
 
     module EnablementStatus
@@ -741,20 +792,22 @@ module Aws::ControlTower
 
       def initialize: (
         ?version: String,
-        ?manifest: Smithy::Schema::document,
+        ?remediation_types: Array[String],
         ?arn: String,
         ?status: String,
         ?latest_available_version: String,
         ?drift_status: Types::LandingZoneDriftStatusSummary,
+        ?manifest: Smithy::Schema::document,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor version: String?
-      attr_accessor manifest: Smithy::Schema::document?
+      attr_accessor remediation_types: Array[String]?
       attr_accessor arn: String?
       attr_accessor status: String?
       attr_accessor latest_available_version: String?
       attr_accessor drift_status: Types::LandingZoneDriftStatusSummary?
+      attr_accessor manifest: Smithy::Schema::document?
     end
 
     module LandingZoneDriftStatus
@@ -944,6 +997,7 @@ module Aws::ControlTower
         ?next_token: String,
         ?max_results: Integer,
         ?filter: Types::EnabledControlFilter,
+        ?include_children: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -951,6 +1005,7 @@ module Aws::ControlTower
       attr_accessor next_token: String?
       attr_accessor max_results: Integer?
       attr_accessor filter: Types::EnabledControlFilter?
+      attr_accessor include_children: bool?
     end
 
     class ListEnabledControlsOutput
@@ -1051,6 +1106,10 @@ module Aws::ControlTower
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor name: String?
+    end
+
+    module RemediationType
+      INHERITANCE_DRIFT: String
     end
 
     class ResetEnabledBaselineInput
@@ -1257,14 +1316,16 @@ module Aws::ControlTower
 
       def initialize: (
         ?version: String,
-        ?manifest: Smithy::Schema::document,
+        ?remediation_types: Array[String],
         ?landing_zone_identifier: String,
+        ?manifest: Smithy::Schema::document,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor version: String?
-      attr_accessor manifest: Smithy::Schema::document?
+      attr_accessor remediation_types: Array[String]?
       attr_accessor landing_zone_identifier: String?
+      attr_accessor manifest: Smithy::Schema::document?
     end
 
     class UpdateLandingZoneOutput

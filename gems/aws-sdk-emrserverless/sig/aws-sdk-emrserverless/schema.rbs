@@ -31,10 +31,15 @@ module Aws::EMRServerless
     Date: TimestampShape
     DeleteApplicationInput: StructureShape
     DeleteApplicationOutput: StructureShape
+    DiskEncryptionConfiguration: StructureShape
     DiskSize: StringShape
     DiskType: StringShape
     Duration: IntegerShape
+    EncryptionContext: MapShape
+    EncryptionContextKey: StringShape
+    EncryptionContextValue: StringShape
     EncryptionKeyArn: StringShape
+    EndpointUrl: StringShape
     EngineType: StringShape
     EntryPointArgument: StringShape
     EntryPointArguments: ListShape
@@ -45,6 +50,12 @@ module Aws::EMRServerless
     GetDashboardForJobRunOutput: StructureShape
     GetJobRunInput: StructureShape
     GetJobRunOutput: StructureShape
+    GetResourceDashboardRequest: StructureShape
+    GetResourceDashboardResponse: StructureShape
+    GetSessionEndpointRequest: StructureShape
+    GetSessionEndpointResponse: StructureShape
+    GetSessionRequest: StructureShape
+    GetSessionResponse: StructureShape
     Hive: StructureShape
     HiveCliParameters: StringShape
     IAMRoleArn: StringShape
@@ -63,6 +74,7 @@ module Aws::EMRServerless
     InternalServerException: StructureShape
     JobArn: StringShape
     JobDriver: UnionShape
+    JobLevelCostAllocationConfiguration: StructureShape
     JobRun: StructureShape
     JobRunAttemptSummary: StructureShape
     JobRunAttempts: ListShape
@@ -80,6 +92,8 @@ module Aws::EMRServerless
     ListJobRunAttemptsResponse: StructureShape
     ListJobRunsInput: StructureShape
     ListJobRunsOutput: StructureShape
+    ListSessionsRequest: StructureShape
+    ListSessionsResponse: StructureShape
     ListTagsForResourceInput: StructureShape
     ListTagsForResourceOutput: StructureShape
     LogGroupName: StringShape
@@ -101,7 +115,9 @@ module Aws::EMRServerless
     ReleaseLabel: StringShape
     RequestIdentityUserArn: StringShape
     ResourceArn: StringShape
+    ResourceId: StringShape
     ResourceNotFoundException: StructureShape
+    ResourceType: StringShape
     ResourceUtilization: StructureShape
     RetryPolicy: StructureShape
     S3MonitoringConfiguration: StructureShape
@@ -110,6 +126,15 @@ module Aws::EMRServerless
     SecurityGroupString: StringShape
     SensitivePropertiesMap: MapShape
     ServiceQuotaExceededException: StructureShape
+    Session: StructureShape
+    SessionArn: StringShape
+    SessionAuthToken: StringShape
+    SessionConfigurationOverrides: StructureShape
+    SessionId: StringShape
+    SessionState: StringShape
+    SessionStateSet: ListShape
+    SessionSummary: StructureShape
+    Sessions: ListShape
     ShutdownGracePeriodInSeconds: IntegerShape
     SparkSubmit: StructureShape
     SparkSubmitParameters: StringShape
@@ -117,6 +142,8 @@ module Aws::EMRServerless
     StartApplicationOutput: StructureShape
     StartJobRunInput: StructureShape
     StartJobRunOutput: StructureShape
+    StartSessionRequest: StructureShape
+    StartSessionResponse: StructureShape
     StopApplicationInput: StructureShape
     StopApplicationOutput: StructureShape
     String1024: StringShape
@@ -129,6 +156,8 @@ module Aws::EMRServerless
     TagResourceInput: StructureShape
     TagResourceOutput: StructureShape
     TagValue: StringShape
+    TerminateSessionRequest: StructureShape
+    TerminateSessionResponse: StructureShape
     TotalResourceUtilization: StructureShape
     UntagResourceInput: StructureShape
     UntagResourceOutput: StructureShape

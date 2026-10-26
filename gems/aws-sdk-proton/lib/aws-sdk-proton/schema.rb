@@ -1409,7 +1409,7 @@ module Aws::Proton
       service.id = "com.amazonaws.proton#AwsProton20200720"
       service.name = "AwsProton20200720"
       service.version = "2020-07-20"
-      service.traits = {"aws.api#service" => {"sdkId" => "Proton", "endpointPrefix" => "proton"}, "aws.auth#sigv4" => {"name" => "proton"}, "aws.protocols#awsJson1_0" => {}, "smithy.api#title" => "AWS Proton"}
+      service.traits = {"aws.api#service" => {"sdkId" => "Proton", "endpointPrefix" => "proton"}, "aws.auth#sigv4" => {"name" => "proton"}, "aws.protocols#awsJson1_0" => {}, "smithy.api#title" => "AWS Proton", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://proton-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://proton-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://proton.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://proton.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
       service.add_operation(:accept_environment_account_connection, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.proton#AcceptEnvironmentAccountConnection"
         operation.name = "AcceptEnvironmentAccountConnection"
@@ -1421,7 +1421,7 @@ module Aws::Proton
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"smithy.api#idempotent" => {}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:cancel_component_deployment, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.proton#CancelComponentDeployment"
@@ -1434,7 +1434,7 @@ module Aws::Proton
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}}
       end)
       service.add_operation(:cancel_environment_deployment, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.proton#CancelEnvironmentDeployment"
@@ -1447,7 +1447,7 @@ module Aws::Proton
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}}
       end)
       service.add_operation(:cancel_service_instance_deployment, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.proton#CancelServiceInstanceDeployment"
@@ -1460,7 +1460,7 @@ module Aws::Proton
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}}
       end)
       service.add_operation(:cancel_service_pipeline_deployment, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.proton#CancelServicePipelineDeployment"
@@ -1473,7 +1473,7 @@ module Aws::Proton
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}}
       end)
       service.add_operation(:create_component, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.proton#CreateComponent"
@@ -1487,7 +1487,7 @@ module Aws::Proton
         operation.errors << ServiceQuotaExceededException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"smithy.api#idempotent" => {}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:create_environment, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.proton#CreateEnvironment"
@@ -1501,7 +1501,7 @@ module Aws::Proton
         operation.errors << ServiceQuotaExceededException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"smithy.api#idempotent" => {}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:create_environment_account_connection, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.proton#CreateEnvironmentAccountConnection"
@@ -1514,7 +1514,7 @@ module Aws::Proton
         operation.errors << ServiceQuotaExceededException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"smithy.api#idempotent" => {}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:create_environment_template, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.proton#CreateEnvironmentTemplate"
@@ -1527,7 +1527,7 @@ module Aws::Proton
         operation.errors << ServiceQuotaExceededException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"smithy.api#idempotent" => {}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:create_environment_template_version, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.proton#CreateEnvironmentTemplateVersion"
@@ -1541,7 +1541,7 @@ module Aws::Proton
         operation.errors << ServiceQuotaExceededException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"smithy.api#idempotent" => {}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:create_repository, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.proton#CreateRepository"
@@ -1554,7 +1554,7 @@ module Aws::Proton
         operation.errors << ServiceQuotaExceededException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"smithy.api#idempotent" => {}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:create_service, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.proton#CreateService"
@@ -1568,7 +1568,7 @@ module Aws::Proton
         operation.errors << ServiceQuotaExceededException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"smithy.api#idempotent" => {}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:create_service_instance, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.proton#CreateServiceInstance"
@@ -1581,7 +1581,7 @@ module Aws::Proton
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"smithy.api#idempotent" => {}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:create_service_sync_config, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.proton#CreateServiceSyncConfig"
@@ -1594,7 +1594,7 @@ module Aws::Proton
         operation.errors << ServiceQuotaExceededException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"smithy.api#idempotent" => {}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:create_service_template, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.proton#CreateServiceTemplate"
@@ -1607,7 +1607,7 @@ module Aws::Proton
         operation.errors << ServiceQuotaExceededException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"smithy.api#idempotent" => {}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:create_service_template_version, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.proton#CreateServiceTemplateVersion"
@@ -1621,7 +1621,7 @@ module Aws::Proton
         operation.errors << ServiceQuotaExceededException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"smithy.api#idempotent" => {}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:create_template_sync_config, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.proton#CreateTemplateSyncConfig"
@@ -1634,7 +1634,7 @@ module Aws::Proton
         operation.errors << ServiceQuotaExceededException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"smithy.api#idempotent" => {}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_component, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.proton#DeleteComponent"
@@ -1647,7 +1647,7 @@ module Aws::Proton
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"smithy.api#idempotent" => {}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_deployment, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.proton#DeleteDeployment"
@@ -1659,7 +1659,7 @@ module Aws::Proton
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"smithy.api#idempotent" => {}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_environment, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.proton#DeleteEnvironment"
@@ -1672,7 +1672,7 @@ module Aws::Proton
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"smithy.api#idempotent" => {}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_environment_account_connection, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.proton#DeleteEnvironmentAccountConnection"
@@ -1685,7 +1685,7 @@ module Aws::Proton
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"smithy.api#idempotent" => {}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_environment_template, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.proton#DeleteEnvironmentTemplate"
@@ -1698,7 +1698,7 @@ module Aws::Proton
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"smithy.api#idempotent" => {}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_environment_template_version, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.proton#DeleteEnvironmentTemplateVersion"
@@ -1711,7 +1711,7 @@ module Aws::Proton
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"smithy.api#idempotent" => {}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_repository, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.proton#DeleteRepository"
@@ -1724,7 +1724,7 @@ module Aws::Proton
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"smithy.api#idempotent" => {}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_service, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.proton#DeleteService"
@@ -1737,7 +1737,7 @@ module Aws::Proton
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"smithy.api#idempotent" => {}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_service_sync_config, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.proton#DeleteServiceSyncConfig"
@@ -1750,7 +1750,7 @@ module Aws::Proton
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"smithy.api#idempotent" => {}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_service_template, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.proton#DeleteServiceTemplate"
@@ -1763,7 +1763,7 @@ module Aws::Proton
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"smithy.api#idempotent" => {}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_service_template_version, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.proton#DeleteServiceTemplateVersion"
@@ -1776,7 +1776,7 @@ module Aws::Proton
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"smithy.api#idempotent" => {}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_template_sync_config, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.proton#DeleteTemplateSyncConfig"
@@ -1789,7 +1789,7 @@ module Aws::Proton
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"smithy.api#idempotent" => {}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:get_account_settings, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.proton#GetAccountSettings"
@@ -1801,7 +1801,7 @@ module Aws::Proton
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"smithy.api#readonly" => {}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_component, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.proton#GetComponent"
@@ -1813,7 +1813,7 @@ module Aws::Proton
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"smithy.api#readonly" => {}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_deployment, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.proton#GetDeployment"
@@ -1825,7 +1825,7 @@ module Aws::Proton
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"smithy.api#readonly" => {}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_environment, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.proton#GetEnvironment"
@@ -1837,7 +1837,7 @@ module Aws::Proton
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"smithy.api#readonly" => {}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_environment_account_connection, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.proton#GetEnvironmentAccountConnection"
@@ -1849,7 +1849,7 @@ module Aws::Proton
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"smithy.api#readonly" => {}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_environment_template, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.proton#GetEnvironmentTemplate"
@@ -1861,7 +1861,7 @@ module Aws::Proton
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"smithy.api#readonly" => {}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_environment_template_version, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.proton#GetEnvironmentTemplateVersion"
@@ -1873,7 +1873,7 @@ module Aws::Proton
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"smithy.api#readonly" => {}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_repository, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.proton#GetRepository"
@@ -1885,7 +1885,7 @@ module Aws::Proton
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"smithy.api#readonly" => {}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_repository_sync_status, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.proton#GetRepositorySyncStatus"
@@ -1897,7 +1897,7 @@ module Aws::Proton
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}}
       end)
       service.add_operation(:get_resources_summary, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.proton#GetResourcesSummary"
@@ -1908,7 +1908,7 @@ module Aws::Proton
         operation.errors << InternalServerException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"smithy.api#readonly" => {}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_service, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.proton#GetService"
@@ -1920,7 +1920,7 @@ module Aws::Proton
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"smithy.api#readonly" => {}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_service_instance, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.proton#GetServiceInstance"
@@ -1932,7 +1932,7 @@ module Aws::Proton
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"smithy.api#readonly" => {}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_service_instance_sync_status, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.proton#GetServiceInstanceSyncStatus"
@@ -1944,7 +1944,7 @@ module Aws::Proton
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}}
       end)
       service.add_operation(:get_service_sync_blocker_summary, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.proton#GetServiceSyncBlockerSummary"
@@ -1956,7 +1956,7 @@ module Aws::Proton
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"smithy.api#readonly" => {}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_service_sync_config, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.proton#GetServiceSyncConfig"
@@ -1968,7 +1968,7 @@ module Aws::Proton
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"smithy.api#readonly" => {}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_service_template, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.proton#GetServiceTemplate"
@@ -1980,7 +1980,7 @@ module Aws::Proton
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"smithy.api#readonly" => {}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_service_template_version, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.proton#GetServiceTemplateVersion"
@@ -1992,7 +1992,7 @@ module Aws::Proton
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"smithy.api#readonly" => {}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_template_sync_config, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.proton#GetTemplateSyncConfig"
@@ -2004,7 +2004,7 @@ module Aws::Proton
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"smithy.api#readonly" => {}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_template_sync_status, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.proton#GetTemplateSyncStatus"
@@ -2016,7 +2016,7 @@ module Aws::Proton
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}}
       end)
       service.add_operation(:list_component_outputs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.proton#ListComponentOutputs"
@@ -2028,7 +2028,7 @@ module Aws::Proton
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"smithy.api#readonly" => {}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListComponentOutputs.new
       end)
       service.add_operation(:list_component_provisioned_resources, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -2041,7 +2041,7 @@ module Aws::Proton
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"smithy.api#readonly" => {}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListComponentProvisionedResources.new
       end)
       service.add_operation(:list_components, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -2053,7 +2053,7 @@ module Aws::Proton
         operation.errors << InternalServerException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"smithy.api#readonly" => {}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListComponents.new
       end)
       service.add_operation(:list_deployments, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -2066,7 +2066,7 @@ module Aws::Proton
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"smithy.api#readonly" => {}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListDeployments.new
       end)
       service.add_operation(:list_environment_account_connections, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -2078,7 +2078,7 @@ module Aws::Proton
         operation.errors << InternalServerException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"smithy.api#readonly" => {}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListEnvironmentAccountConnections.new
       end)
       service.add_operation(:list_environment_outputs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -2091,7 +2091,7 @@ module Aws::Proton
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"smithy.api#readonly" => {}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListEnvironmentOutputs.new
       end)
       service.add_operation(:list_environment_provisioned_resources, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -2104,7 +2104,7 @@ module Aws::Proton
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"smithy.api#readonly" => {}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListEnvironmentProvisionedResources.new
       end)
       service.add_operation(:list_environment_template_versions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -2117,7 +2117,7 @@ module Aws::Proton
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"smithy.api#readonly" => {}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListEnvironmentTemplateVersions.new
       end)
       service.add_operation(:list_environment_templates, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -2129,7 +2129,7 @@ module Aws::Proton
         operation.errors << InternalServerException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"smithy.api#readonly" => {}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListEnvironmentTemplates.new
       end)
       service.add_operation(:list_environments, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -2142,7 +2142,7 @@ module Aws::Proton
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"smithy.api#readonly" => {}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListEnvironments.new
       end)
       service.add_operation(:list_repositories, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -2155,7 +2155,7 @@ module Aws::Proton
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"smithy.api#readonly" => {}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListRepositories.new
       end)
       service.add_operation(:list_repository_sync_definitions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -2167,7 +2167,7 @@ module Aws::Proton
         operation.errors << InternalServerException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"smithy.api#readonly" => {}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListRepositorySyncDefinitions.new
       end)
       service.add_operation(:list_service_instance_outputs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -2180,7 +2180,7 @@ module Aws::Proton
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"smithy.api#readonly" => {}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListServiceInstanceOutputs.new
       end)
       service.add_operation(:list_service_instance_provisioned_resources, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -2193,7 +2193,7 @@ module Aws::Proton
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"smithy.api#readonly" => {}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListServiceInstanceProvisionedResources.new
       end)
       service.add_operation(:list_service_instances, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -2206,7 +2206,7 @@ module Aws::Proton
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"smithy.api#readonly" => {}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListServiceInstances.new
       end)
       service.add_operation(:list_service_pipeline_outputs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -2219,7 +2219,7 @@ module Aws::Proton
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"smithy.api#readonly" => {}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListServicePipelineOutputs.new
       end)
       service.add_operation(:list_service_pipeline_provisioned_resources, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -2232,7 +2232,7 @@ module Aws::Proton
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"smithy.api#readonly" => {}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListServicePipelineProvisionedResources.new
       end)
       service.add_operation(:list_service_template_versions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -2245,7 +2245,7 @@ module Aws::Proton
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"smithy.api#readonly" => {}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListServiceTemplateVersions.new
       end)
       service.add_operation(:list_service_templates, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -2257,7 +2257,7 @@ module Aws::Proton
         operation.errors << InternalServerException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"smithy.api#readonly" => {}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListServiceTemplates.new
       end)
       service.add_operation(:list_services, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -2269,7 +2269,7 @@ module Aws::Proton
         operation.errors << InternalServerException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"smithy.api#readonly" => {}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListServices.new
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -2282,7 +2282,7 @@ module Aws::Proton
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"smithy.api#readonly" => {}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListTagsForResource.new
       end)
       service.add_operation(:notify_resource_deployment_status_change, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -2297,7 +2297,7 @@ module Aws::Proton
         operation.errors << ServiceQuotaExceededException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}}
       end)
       service.add_operation(:reject_environment_account_connection, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.proton#RejectEnvironmentAccountConnection"
@@ -2310,7 +2310,7 @@ module Aws::Proton
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"smithy.api#idempotent" => {}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.proton#TagResource"
@@ -2323,7 +2323,7 @@ module Aws::Proton
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"smithy.api#idempotent" => {}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.proton#UntagResource"
@@ -2336,7 +2336,7 @@ module Aws::Proton
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"smithy.api#idempotent" => {}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:update_account_settings, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.proton#UpdateAccountSettings"
@@ -2348,7 +2348,7 @@ module Aws::Proton
         operation.errors << InternalServerException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}}
       end)
       service.add_operation(:update_component, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.proton#UpdateComponent"
@@ -2362,7 +2362,7 @@ module Aws::Proton
         operation.errors << ServiceQuotaExceededException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}}
       end)
       service.add_operation(:update_environment, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.proton#UpdateEnvironment"
@@ -2375,7 +2375,7 @@ module Aws::Proton
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}}
       end)
       service.add_operation(:update_environment_account_connection, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.proton#UpdateEnvironmentAccountConnection"
@@ -2388,7 +2388,7 @@ module Aws::Proton
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"smithy.api#idempotent" => {}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:update_environment_template, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.proton#UpdateEnvironmentTemplate"
@@ -2401,7 +2401,7 @@ module Aws::Proton
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}}
       end)
       service.add_operation(:update_environment_template_version, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.proton#UpdateEnvironmentTemplateVersion"
@@ -2414,7 +2414,7 @@ module Aws::Proton
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}}
       end)
       service.add_operation(:update_service, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.proton#UpdateService"
@@ -2428,7 +2428,7 @@ module Aws::Proton
         operation.errors << ServiceQuotaExceededException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}}
       end)
       service.add_operation(:update_service_instance, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.proton#UpdateServiceInstance"
@@ -2441,7 +2441,7 @@ module Aws::Proton
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}}
       end)
       service.add_operation(:update_service_pipeline, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.proton#UpdateServicePipeline"
@@ -2454,7 +2454,7 @@ module Aws::Proton
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}}
       end)
       service.add_operation(:update_service_sync_blocker, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.proton#UpdateServiceSyncBlocker"
@@ -2467,7 +2467,7 @@ module Aws::Proton
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}}
       end)
       service.add_operation(:update_service_sync_config, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.proton#UpdateServiceSyncConfig"
@@ -2480,7 +2480,7 @@ module Aws::Proton
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}}
       end)
       service.add_operation(:update_service_template, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.proton#UpdateServiceTemplate"
@@ -2493,7 +2493,7 @@ module Aws::Proton
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}}
       end)
       service.add_operation(:update_service_template_version, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.proton#UpdateServiceTemplateVersion"
@@ -2506,7 +2506,7 @@ module Aws::Proton
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}}
       end)
       service.add_operation(:update_template_sync_config, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.proton#UpdateTemplateSyncConfig"
@@ -2519,7 +2519,7 @@ module Aws::Proton
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "10/07/2025", "message" => "AWS Proton is not accepting new customers."}}
       end)
     end
 

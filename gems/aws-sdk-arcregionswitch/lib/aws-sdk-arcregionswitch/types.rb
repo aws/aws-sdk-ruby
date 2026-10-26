@@ -29,16 +29,19 @@ module Aws::ARCRegionswitch
     #   <p>The timestamp when the plan execution was ended.</p>
     #   @return [Time]
     # @!attribute mode
-    #   <p>The plan execution mode. Valid values are <code>Practice</code>, for testing without making actual changes, or <code>Recovery</code>, for actual traffic shifting and application recovery.</p>
+    #   <p>The plan execution mode. Valid values are <code>graceful</code>, for graceful executions, or <code>ungraceful</code>, for ungraceful executions.</p>
     #   @return [String]
     # @!attribute execution_state
     #   <p>The plan execution state. Provides the state of a plan execution, for example, In Progress or Paused by Operator.</p>
     #   @return [String]
     # @!attribute execution_action
-    #   <p>The plan execution action. Valid values are <code>Activate</code>, to activate an Amazon Web Services Region, or <code>Deactivate</code>, to deactivate a Region.</p>
+    #   <p>The plan execution action. Valid values are <code>activate</code>, to activate an Amazon Web Services Region, or <code>deactivate</code>, to deactivate a Region.</p>
     #   @return [String]
     # @!attribute execution_region
     #   <p>The Amazon Web Services Region for a plan execution.</p>
+    #   @return [String]
+    # @!attribute recovery_execution_id
+    #   <p>The unique identifier of the most recent recovery execution. Required when starting a post-recovery execution.</p>
     #   @return [String]
     # @!attribute actual_recovery_time
     #   <p>The actual recovery time that Region switch calculates for a plan execution. Actual recovery time includes the time for the plan to run added to the time elapsed until the application health alarms that you've specified are healthy again.</p>
@@ -56,6 +59,7 @@ module Aws::ARCRegionswitch
       :execution_state,
       :execution_action,
       :execution_region,
+      :recovery_execution_id,
       :actual_recovery_time,
       keyword_init: true
     )
@@ -252,6 +256,81 @@ module Aws::ARCRegionswitch
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Configuration for Amazon Aurora provisioned cluster scaling used in a Region switch plan.</p>
+    # @!attribute timeout_minutes
+    #   <p>The timeout value specified for the configuration.</p>
+    #   @return [Integer]
+    # @!attribute cross_account_role
+    #   <p>The cross account role for the configuration.</p>
+    #   @return [String]
+    # @!attribute external_id
+    #   <p>The external ID (secret key) for the configuration.</p>
+    #   @return [String]
+    # @!attribute global_cluster_identifier
+    #   <p>The global cluster identifier for a global database.</p>
+    #   @return [String]
+    # @!attribute region_database_cluster_arns
+    #   <p>Per-Region configuration that maps each Region to the Aurora database cluster ARN for scaling.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute instance_arns
+    #   <p>Per-Region configuration that maps each Region to the Aurora database instance ARN for scaling.</p>
+    #   @return [Hash<String, String>]
+    class AuroraProvisionedScalingConfiguration < Struct.new(
+      nil,
+      :timeout_minutes,
+      :cross_account_role,
+      :external_id,
+      :global_cluster_identifier,
+      :region_database_cluster_arns,
+      :instance_arns,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:timeout_minutes] = 60 unless options.key?(:timeout_minutes)
+        super
+      end
+    end
+
+    # <p>Configuration for Amazon Aurora Serverless scaling used in a Region switch plan.</p>
+    # @!attribute timeout_minutes
+    #   <p>The timeout value specified for the configuration.</p>
+    #   @return [Integer]
+    # @!attribute cross_account_role
+    #   <p>The cross account role for the configuration.</p>
+    #   @return [String]
+    # @!attribute external_id
+    #   <p>The external ID (secret key) for the configuration.</p>
+    #   @return [String]
+    # @!attribute global_cluster_identifier
+    #   <p>The global cluster identifier for a global database.</p>
+    #   @return [String]
+    # @!attribute region_database_cluster_arns
+    #   <p>Per-Region configuration that maps each Region to the Aurora database cluster ARN for scaling.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute target_percent
+    #   <p>The target capacity percentage for Aurora Serverless scaling.</p>
+    #   @return [Integer]
+    class AuroraServerlessScalingConfiguration < Struct.new(
+      nil,
+      :timeout_minutes,
+      :cross_account_role,
+      :external_id,
+      :global_cluster_identifier,
+      :region_database_cluster_arns,
+      :target_percent,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:timeout_minutes] = 60 unless options.key?(:timeout_minutes)
+        options[:target_percent] = 100 unless options.key?(:target_percent)
+        super
+      end
+    end
+
     # @!attribute plan_arn
     #   <p>The Amazon Resource Name (ARN) of the plan.</p>
     #   @return [String]
@@ -278,6 +357,25 @@ module Aws::ARCRegionswitch
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The client token was already used with different request parameters. A client token must map to the same parameters for every request. To retry this operation, provide a new client token.</p>
+    # @!attribute message
+    #   @return [String]
+    # @!attribute resource_id
+    #   <p>The identifier of the resource involved in the client token conflict.</p>
+    #   @return [String]
+    # @!attribute resource_type
+    #   <p>The type of the resource involved in the client token conflict.</p>
+    #   @return [String]
+    class ConflictException < Struct.new(
+      nil,
+      :message,
+      :resource_id,
+      :resource_type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute description
     #   <p>The description of a Region switch plan.</p>
     #   @return [String]
@@ -296,6 +394,12 @@ module Aws::ARCRegionswitch
     # @!attribute triggers
     #   <p>The triggers associated with a Region switch plan.</p>
     #   @return [Array<Types::Trigger>]
+    # @!attribute report_configuration
+    #   <p>Configuration for automatic report generation for plan executions. When configured, Region switch automatically generates a report after each plan execution that includes execution events, plan configuration, and CloudWatch alarm states.</p>
+    #   @return [Types::ReportConfiguration]
+    # @!attribute service_quota_checks_enabled
+    #   <p>Specifies whether to enable service quota checks for the Region switch plan.</p>
+    #   @return [Boolean]
     # @!attribute name
     #   <p>The name of a Region switch plan.</p>
     #   @return [String]
@@ -319,6 +423,8 @@ module Aws::ARCRegionswitch
       :recovery_time_objective_minutes,
       :associated_alarms,
       :triggers,
+      :report_configuration,
+      :service_quota_checks_enabled,
       :name,
       :regions,
       :recovery_approach,
@@ -351,7 +457,7 @@ module Aws::ARCRegionswitch
     #   <p>The retry interval specified.</p>
     #   @return [Float]
     # @!attribute region_to_run
-    #   <p>The Amazon Web Services Region for the function to run in.</p>
+    #   <p>The Amazon Web Services Region for the function to run in. For recovery workflows use <code>activatingRegion</code> or <code>deactivatingRegion</code>. For post-recovery workflows, use <code>activeRegion</code> (the Region with customer traffic) or <code>inactiveRegion</code> (the Region with no customer traffic).</p>
     #   @return [String]
     # @!attribute ungraceful
     #   <p>The settings for ungraceful execution.</p>
@@ -391,6 +497,60 @@ module Aws::ARCRegionswitch
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Configuration for Amazon DocumentDB global clusters used in a Region switch plan.</p>
+    # @!attribute timeout_minutes
+    #   <p>The timeout value specified for the configuration.</p>
+    #   @return [Integer]
+    # @!attribute cross_account_role
+    #   <p>The cross account role for the configuration.</p>
+    #   @return [String]
+    # @!attribute external_id
+    #   <p>The external ID (secret key) for the configuration.</p>
+    #   @return [String]
+    # @!attribute behavior
+    #   <p>The behavior for a global cluster, that is, only allow switchover or also allow failover.</p>
+    #   @return [String]
+    # @!attribute ungraceful
+    #   <p>The settings for ungraceful execution.</p>
+    #   @return [Types::DocumentDbUngraceful]
+    # @!attribute global_cluster_identifier
+    #   <p>The global cluster identifier for a DocumentDB global cluster.</p>
+    #   @return [String]
+    # @!attribute database_cluster_arns
+    #   <p>The database cluster Amazon Resource Names (ARNs) for a DocumentDB global cluster.</p>
+    #   @return [Array<String>]
+    class DocumentDbConfiguration < Struct.new(
+      nil,
+      :timeout_minutes,
+      :cross_account_role,
+      :external_id,
+      :behavior,
+      :ungraceful,
+      :global_cluster_identifier,
+      :database_cluster_arns,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:timeout_minutes] = 60 unless options.key?(:timeout_minutes)
+        options[:behavior] = 'switchoverOnly' unless options.key?(:behavior)
+        super
+      end
+    end
+
+    # <p>Configuration for handling failures when performing operations on DocumentDB global clusters.</p>
+    # @!attribute ungraceful
+    #   <p>The settings for ungraceful execution.</p>
+    #   @return [String]
+    class DocumentDbUngraceful < Struct.new(
+      nil,
+      :ungraceful,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Configuration for increasing the capacity of Amazon EC2 Auto Scaling groups during a Region switch.</p>
     # @!attribute timeout_minutes
     #   <p>The timeout value specified for the configuration.</p>
@@ -402,10 +562,13 @@ module Aws::ARCRegionswitch
     #   <p>The settings for ungraceful execution.</p>
     #   @return [Types::Ec2Ungraceful]
     # @!attribute target_percent
-    #   <p>The target percentage that you specify for EC2 Auto Scaling groups.</p>
+    #   <p>The target percentage that you specify for EC2 Auto Scaling groups. The default is 100.</p>
     #   @return [Integer]
     # @!attribute capacity_monitoring_approach
     #   <p>The monitoring approach that you specify EC2 Auto Scaling groups for the configuration.</p>
+    #   @return [String]
+    # @!attribute wait_elb_target_group_healthy
+    #   <p>If enabled, the step completes only after each attached ELB target group reports a healthy target count that matches the group's new desired capacity calculated in the step.</p>
     #   @return [String]
     class Ec2AsgCapacityIncreaseConfiguration < Struct.new(
       nil,
@@ -414,6 +577,7 @@ module Aws::ARCRegionswitch
       :ungraceful,
       :target_percent,
       :capacity_monitoring_approach,
+      :wait_elb_target_group_healthy,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -449,10 +613,13 @@ module Aws::ARCRegionswitch
     #   <p>The settings for ungraceful execution.</p>
     #   @return [Types::EcsUngraceful]
     # @!attribute target_percent
-    #   <p>The target percentage specified for the configuration.</p>
+    #   <p>The target percentage specified for the configuration. The default is 100.</p>
     #   @return [Integer]
     # @!attribute capacity_monitoring_approach
     #   <p>The monitoring approach specified for the configuration, for example, <code>Most_Recent</code>.</p>
+    #   @return [String]
+    # @!attribute wait_elb_target_group_healthy
+    #   <p>If enabled, the step completes only after each attached ELB target group reports a healthy target count that matches the service's new desired task count calculated in the step.</p>
     #   @return [String]
     class EcsCapacityIncreaseConfiguration < Struct.new(
       nil,
@@ -461,6 +628,7 @@ module Aws::ARCRegionswitch
       :ungraceful,
       :target_percent,
       :capacity_monitoring_approach,
+      :wait_elb_target_group_healthy,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -522,7 +690,7 @@ module Aws::ARCRegionswitch
     #   <p>The settings for ungraceful execution.</p>
     #   @return [Types::EksResourceScalingUngraceful]
     # @!attribute target_percent
-    #   <p>The target percentage for the configuration.</p>
+    #   <p>The target percentage for the configuration. The default is 100.</p>
     #   @return [Integer]
     # @!attribute capacity_monitoring_approach
     #   <p>The monitoring approach for the configuration, that is, whether it was sampled in the last 24 hours or autoscaled in the last 24 hours.</p>
@@ -555,6 +723,26 @@ module Aws::ARCRegionswitch
     class EksResourceScalingUngraceful < Struct.new(
       nil,
       :minimum_success_percentage,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The Amazon Web Services Lambda event source mapping configuration, containing the resource ARN and optional cross-account configuration.</p>
+    # @!attribute cross_account_role
+    #   <p>The cross account role for the configuration.</p>
+    #   @return [String]
+    # @!attribute external_id
+    #   <p>The external ID (secret key) for the configuration.</p>
+    #   @return [String]
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the Lambda event source mapping.</p>
+    #   @return [String]
+    class EventSourceMapping < Struct.new(
+      nil,
+      :cross_account_role,
+      :external_id,
+      :arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -612,6 +800,33 @@ module Aws::ARCRegionswitch
     # @!attribute route53_health_check_config
     #   <p>The Amazon Route 53 health check configuration.</p>
     #   @return [Types::Route53HealthCheckConfiguration]
+    # @!attribute document_db_config
+    #   <p>Configuration for Amazon DocumentDB global clusters used in a Region switch plan.</p>
+    #   @return [Types::DocumentDbConfiguration]
+    # @!attribute rds_promote_read_replica_config
+    #   <p>An Amazon RDS promote read replica execution block.</p>
+    #   @return [Types::RdsPromoteReadReplicaConfiguration]
+    # @!attribute rds_create_cross_region_read_replica_config
+    #   <p>An Amazon RDS create cross-Region replica execution block.</p>
+    #   @return [Types::RdsCreateCrossRegionReplicaConfiguration]
+    # @!attribute lambda_event_source_mapping_config
+    #   <p>A Lambda event source mapping execution block.</p>
+    #   @return [Types::LambdaEventSourceMappingConfiguration]
+    # @!attribute aurora_serverless_scaling_config
+    #   <p>An Aurora Serverless scaling execution block.</p>
+    #   @return [Types::AuroraServerlessScalingConfiguration]
+    # @!attribute aurora_provisioned_scaling_config
+    #   <p>An Aurora provisioned cluster scaling execution block.</p>
+    #   @return [Types::AuroraProvisionedScalingConfiguration]
+    # @!attribute neptune_global_database_config
+    #   <p>A Neptune global database execution block.</p>
+    #   @return [Types::NeptuneGlobalDatabaseConfiguration]
+    # @!attribute rds_switchover_read_replica_config
+    #   <p>An Amazon RDS switchover read replica execution block.</p>
+    #   @return [Types::RdsSwitchoverReadReplicaConfiguration]
+    # @!attribute ssm_send_command_config
+    #   <p>Specifies an AWS Systems Manager <code>SendCommand</code> execution block.</p>
+    #   @return [Types::SsmSendCommandConfiguration]
     class ExecutionBlockConfiguration < Struct.new(
       :custom_action_lambda_config,
       :ec2_asg_capacity_increase_config,
@@ -623,6 +838,15 @@ module Aws::ARCRegionswitch
       :ecs_capacity_increase_config,
       :eks_resource_scaling_config,
       :route53_health_check_config,
+      :document_db_config,
+      :rds_promote_read_replica_config,
+      :rds_create_cross_region_read_replica_config,
+      :lambda_event_source_mapping_config,
+      :aurora_serverless_scaling_config,
+      :aurora_provisioned_scaling_config,
+      :neptune_global_database_config,
+      :rds_switchover_read_replica_config,
+      :ssm_send_command_config,
       :unknown,
       keyword_init: true
     )
@@ -638,6 +862,15 @@ module Aws::ARCRegionswitch
       class EcsCapacityIncreaseConfig < ExecutionBlockConfiguration; end
       class EksResourceScalingConfig < ExecutionBlockConfiguration; end
       class Route53HealthCheckConfig < ExecutionBlockConfiguration; end
+      class DocumentDbConfig < ExecutionBlockConfiguration; end
+      class RdsPromoteReadReplicaConfig < ExecutionBlockConfiguration; end
+      class RdsCreateCrossRegionReadReplicaConfig < ExecutionBlockConfiguration; end
+      class LambdaEventSourceMappingConfig < ExecutionBlockConfiguration; end
+      class AuroraServerlessScalingConfig < ExecutionBlockConfiguration; end
+      class AuroraProvisionedScalingConfig < ExecutionBlockConfiguration; end
+      class NeptuneGlobalDatabaseConfig < ExecutionBlockConfiguration; end
+      class RdsSwitchoverReadReplicaConfig < ExecutionBlockConfiguration; end
+      class SsmSendCommandConfig < ExecutionBlockConfiguration; end
       class Unknown < ExecutionBlockConfiguration; end
     end
 
@@ -680,6 +913,38 @@ module Aws::ARCRegionswitch
       :description,
       :event_id,
       :previous_event_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Information about a report generation that failed.</p>
+    # @!attribute error_code
+    #   <p>The error code for the failed report generation.</p>
+    #   @return [String]
+    # @!attribute error_message
+    #   <p>The error message for the failed report generation.</p>
+    #   @return [String]
+    class FailedReportOutput < Struct.new(
+      nil,
+      :error_code,
+      :error_message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Information about a generated execution report.</p>
+    # @!attribute report_generation_time
+    #   <p>The timestamp when the report was generated.</p>
+    #   @return [Time]
+    # @!attribute report_output
+    #   <p>The output location or cause of a failure in report generation.</p>
+    #   @return [Types::ReportOutput]
+    class GeneratedReport < Struct.new(
+      nil,
+      :report_generation_time,
+      :report_output,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -784,16 +1049,19 @@ module Aws::ARCRegionswitch
     #   <p>The time (UTC) when the plan execution ended.</p>
     #   @return [Time]
     # @!attribute mode
-    #   <p>The plan execution mode. Valid values are <code>Practice</code>, for testing without making actual changes, or <code>Recovery</code>, for actual traffic shifting and application recovery.</p>
+    #   <p>The plan execution mode. Valid values are <code>graceful</code>, for graceful executions, or <code>ungraceful</code>, for ungraceful executions.</p>
     #   @return [String]
     # @!attribute execution_state
     #   <p>The plan execution state. Provides the state of a plan execution, for example, In Progress or Paused by Operator.</p>
     #   @return [String]
     # @!attribute execution_action
-    #   <p>The plan execution action. Valid values are <code>Activate</code>, to activate an Amazon Web Services Region, or <code>Deactivate</code>, to deactivate a Region.</p>
+    #   <p>The plan execution action. Valid values are <code>activate</code>, to activate an Amazon Web Services Region, or <code>deactivate</code>, to deactivate a Region.</p>
     #   @return [String]
     # @!attribute execution_region
     #   <p>The Amazon Web Services Region for a plan execution.</p>
+    #   @return [String]
+    # @!attribute recovery_execution_id
+    #   <p>The unique identifier of the most recent recovery execution. Required when starting a post-recovery execution.</p>
     #   @return [String]
     # @!attribute step_states
     #   <p>The states of the steps in the plan execution.</p>
@@ -804,6 +1072,9 @@ module Aws::ARCRegionswitch
     # @!attribute actual_recovery_time
     #   <p>The actual recovery time that Region switch calculates for a plan execution. Actual recovery time includes the time for the plan to run added to the time elapsed until the application health alarms that you've specified are healthy again.</p>
     #   @return [String]
+    # @!attribute generated_report_details
+    #   <p>Information about the location of a generated report, or the cause of its failure.</p>
+    #   @return [Array<Types::GeneratedReport>]
     # @!attribute next_token
     #   <p>Specifies that you want to receive the next page of results. Valid only if you received a <code>nextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call's <code>nextToken</code> response to request the next page of results.</p>
     #   @return [String]
@@ -820,9 +1091,11 @@ module Aws::ARCRegionswitch
       :execution_state,
       :execution_action,
       :execution_region,
+      :recovery_execution_id,
       :step_states,
       :plan,
       :actual_recovery_time,
+      :generated_report_details,
       :next_token,
       keyword_init: true
     )
@@ -884,10 +1157,10 @@ module Aws::ARCRegionswitch
     #   <p>The external ID (secret key) for the configuration.</p>
     #   @return [String]
     # @!attribute behavior
-    #   <p>The behavior for a global database, that is, only allow switchover or also allow failover.</p>
+    #   <p>The default behavior for the Aurora global database execution block. Valid values:</p> <ul> <li> <p> <code>switchoverOnly</code> - Calls <code>SwitchoverGlobalCluster</code> for a zero-data-loss switchover during graceful execution.</p> </li> <li> <p> <code>failover</code> - Calls <code>FailoverGlobalCluster</code> with <code>AllowDataLoss</code> set to <code>true</code>. This operation might cause data loss, including during graceful execution.</p> </li> </ul>
     #   @return [String]
     # @!attribute ungraceful
-    #   <p>The settings for ungraceful execution.</p>
+    #   <p>The behavior to use when the plan runs in ungraceful mode. If you omit this value, Region switch uses the value of <code>behavior</code>.</p>
     #   @return [Types::GlobalAuroraUngraceful]
     # @!attribute global_cluster_identifier
     #   <p>The global cluster identifier for a global database.</p>
@@ -915,9 +1188,9 @@ module Aws::ARCRegionswitch
       end
     end
 
-    # <p>Configuration for handling failures when performing operations on Aurora global databases.</p>
+    # <p>Configuration for an Aurora global database execution block in ungraceful mode.</p>
     # @!attribute ungraceful
-    #   <p>The settings for ungraceful execution.</p>
+    #   <p>The ungraceful behavior. The only valid value is <code>failover</code>, which calls <code>FailoverGlobalCluster</code> with <code>AllowDataLoss</code> set to <code>true</code> and might cause data loss.</p>
     #   @return [String]
     class GlobalAuroraUngraceful < Struct.new(
       nil,
@@ -996,6 +1269,52 @@ module Aws::ARCRegionswitch
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Configuration for Amazon Web Services Lambda event source mappings used in a Region switch plan.</p>
+    # @!attribute timeout_minutes
+    #   <p>The timeout value specified for the configuration.</p>
+    #   @return [Integer]
+    # @!attribute action
+    #   <p>The action to take - whether to <code>enable</code> or <code>disable</code> an event source mapping.</p>
+    #   @return [String]
+    # @!attribute region_event_source_mappings
+    #   <p>Per-region configuration for which Lambda event source mapping to enable or disable when activating or deactivating a region.</p>
+    #   @return [Hash<String, Types::EventSourceMapping>]
+    # @!attribute ungraceful
+    #   <p>The settings for ungraceful execution.</p>
+    #   @return [Types::LambdaEventSourceMappingUngraceful]
+    class LambdaEventSourceMappingConfiguration < Struct.new(
+      nil,
+      :timeout_minutes,
+      :action,
+      :region_event_source_mappings,
+      :ungraceful,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:timeout_minutes] = 60 unless options.key?(:timeout_minutes)
+        super
+      end
+    end
+
+    # <p>Specifies whether to skip enabling or disabling an event source mapping during an ungraceful execution.</p>
+    # @!attribute behavior
+    #   <p>Set to <code>skip</code> to skip executing this event source mapping step during an ungraceful execution.</p>
+    #   @return [String]
+    class LambdaEventSourceMappingUngraceful < Struct.new(
+      nil,
+      :behavior,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:behavior] = 'skip' unless options.key?(:behavior)
+        super
+      end
+    end
+
     # <p>Configuration for handling failures when invoking Lambda functions.</p>
     # @!attribute behavior
     #   <p>The ungraceful behavior for a Lambda function, which must be set to <code>skip</code>.</p>
@@ -1023,11 +1342,15 @@ module Aws::ARCRegionswitch
     # @!attribute arn
     #   <p>The Amazon Resource Name (ARN) of the Lambda function.</p>
     #   @return [String]
+    # @!attribute payload
+    #   <p>The JSON payload to send to the Lambda function invocation. If you don't specify a payload, Region switch invokes the function with only the execution metadata.</p> <p>If you provide a JSON object, Region switch merges execution metadata keys (<code>InvokedBy</code>, <code>PlanArn</code>, <code>ExecutionId</code>, <code>StepName</code>) into the top level. If one of your keys has the same name as a metadata key, your key takes precedence.</p> <p>If you provide any other JSON type (string, number, boolean, or array), Region switch forwards it to the Lambda function unchanged, without adding metadata.</p>
+    #   @return [String]
     class Lambdas < Struct.new(
       nil,
       :cross_account_role,
       :external_id,
       :arn,
+      :payload,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1174,6 +1497,48 @@ module Aws::ARCRegionswitch
     end
 
     # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the Arc Region Switch Plan.</p>
+    #   @return [String]
+    # @!attribute hosted_zone_id
+    #   <p>The hosted zone ID for the health checks.</p>
+    #   @return [String]
+    # @!attribute record_name
+    #   <p>The record name for the health checks.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return in the response.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>Specifies that you want to receive the next page of results. Valid only if you received a <code>nextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call's <code>nextToken</code> response to request the next page of results.</p>
+    #   @return [String]
+    class ListRoute53HealthChecksInRegionRequest < Struct.new(
+      nil,
+      :arn,
+      :hosted_zone_id,
+      :record_name,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute health_checks
+    #   <p>List of the health checks requested.</p>
+    #   @return [Array<Types::Route53HealthCheck>]
+    # @!attribute next_token
+    #   <p>A pagination token. A response may contain no results while still including a <code>nextToken</code>. Continue paginating until <code>nextToken</code> is null to retrieve all results.</p>
+    #   @return [String]
+    class ListRoute53HealthChecksInRegionResponse < Struct.new(
+      nil,
+      :health_checks,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
     #   <p>The Amazon Resource Name (ARN) of the Amazon Route 53 health check request.</p>
     #   @return [String]
     # @!attribute hosted_zone_id
@@ -1183,7 +1548,7 @@ module Aws::ARCRegionswitch
     #   <p>The record name for the health checks.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The number of objects that you want to return with this call.</p>
+    #   <p>The maximum number of results to return in the response.</p>
     #   @return [Integer]
     # @!attribute next_token
     #   <p>Specifies that you want to receive the next page of results. Valid only if you received a <code>nextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call's <code>nextToken</code> response to request the next page of results.</p>
@@ -1204,11 +1569,45 @@ module Aws::ARCRegionswitch
     #   <p>List of the health checks requested.</p>
     #   @return [Array<Types::Route53HealthCheck>]
     # @!attribute next_token
-    #   <p>Specifies that you want to receive the next page of results. Valid only if you received a <code>nextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call's <code>nextToken</code> response to request the next page of results.</p>
+    #   <p>A pagination token. A response may contain no results while still including a <code>nextToken</code>. Continue paginating until <code>nextToken</code> is null to retrieve all results.</p>
     #   @return [String]
     class ListRoute53HealthChecksResponse < Struct.new(
       nil,
       :health_checks,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute plan_arns
+    #   <p>The Amazon Resource Names (ARNs) of the plans to return service quota warnings for. You can specify up to 100 plan ARNs. Region switch ignores any plan ARN that you can't access. If you omit this parameter, Region switch returns the warnings for all of your accessible plans.</p>
+    #   @return [Array<String>]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return with this call. Valid values are <code>1</code> to <code>100</code>. If you don't specify a value, the operation returns up to the maximum number of results.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>Specifies that you want to receive the next page of results. Valid only if you received a <code>nextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call's <code>nextToken</code> response to request the next page of results.</p>
+    #   @return [String]
+    class ListServiceQuotaWarningsRequest < Struct.new(
+      nil,
+      :plan_arns,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute service_quota_warning_summaries
+    #   <p>The service quota warnings for the plans that you can access.</p>
+    #   @return [Array<Types::ServiceQuotaWarningSummary>]
+    # @!attribute next_token
+    #   <p>A pagination token. A response may contain no results while still including a <code>nextToken</code>. Continue paginating until <code>nextToken</code> is null to retrieve all results.</p>
+    #   @return [String]
+    class ListServiceQuotaWarningsResponse < Struct.new(
+      nil,
+      :service_quota_warning_summaries,
       :next_token,
       keyword_init: true
     )
@@ -1253,6 +1652,60 @@ module Aws::ARCRegionswitch
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Configuration for Amazon Neptune global databases used in a Region switch plan.</p>
+    # @!attribute timeout_minutes
+    #   <p>The timeout value specified for the configuration.</p>
+    #   @return [Integer]
+    # @!attribute cross_account_role
+    #   <p>The cross account role for the configuration.</p>
+    #   @return [String]
+    # @!attribute external_id
+    #   <p>The external ID (secret key) for the configuration.</p>
+    #   @return [String]
+    # @!attribute behavior
+    #   <p>The behavior for a global database, that is, only allow switchover or also allow failover.</p>
+    #   @return [String]
+    # @!attribute ungraceful
+    #   <p>The settings for ungraceful execution.</p>
+    #   @return [Types::NeptuneUngraceful]
+    # @!attribute global_cluster_identifier
+    #   <p>The global cluster identifier for a Neptune global database.</p>
+    #   @return [String]
+    # @!attribute region_database_cluster_arns
+    #   <p>The database cluster Amazon Resource Names (ARNs) for a Neptune global database.</p>
+    #   @return [Hash<String, String>]
+    class NeptuneGlobalDatabaseConfiguration < Struct.new(
+      nil,
+      :timeout_minutes,
+      :cross_account_role,
+      :external_id,
+      :behavior,
+      :ungraceful,
+      :global_cluster_identifier,
+      :region_database_cluster_arns,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:timeout_minutes] = 60 unless options.key?(:timeout_minutes)
+        options[:behavior] = 'switchoverOnly' unless options.key?(:behavior)
+        super
+      end
+    end
+
+    # <p>Configuration for handling failures when performing operations on Neptune global databases.</p>
+    # @!attribute ungraceful
+    #   <p>The settings for ungraceful execution.</p>
+    #   @return [String]
+    class NeptuneUngraceful < Struct.new(
+      nil,
+      :ungraceful,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Configuration for steps that should be executed in parallel during a Region switch.</p>
     # @!attribute steps
     #   <p>The steps for a parallel execution block.</p>
@@ -1287,6 +1740,12 @@ module Aws::ARCRegionswitch
     # @!attribute triggers
     #   <p>The triggers for a plan.</p>
     #   @return [Array<Types::Trigger>]
+    # @!attribute report_configuration
+    #   <p>The report configuration for a plan.</p>
+    #   @return [Types::ReportConfiguration]
+    # @!attribute service_quota_checks_enabled
+    #   <p>Indicates whether service quota checks are enabled for the Region switch plan. When enabled, Region switch compares the applied service quota values across the plan's Amazon Web Services Regions and creates a warning when a quota in one Region is lower than the value required for the matching resource in another Region. Service quota checks are advisory and don't prevent you from creating, evaluating, or executing a plan.</p>
+    #   @return [Boolean]
     # @!attribute name
     #   <p>The name for a plan.</p>
     #   @return [String]
@@ -1317,6 +1776,8 @@ module Aws::ARCRegionswitch
       :recovery_time_objective_minutes,
       :associated_alarms,
       :triggers,
+      :report_configuration,
+      :service_quota_checks_enabled,
       :name,
       :regions,
       :recovery_approach,
@@ -1324,6 +1785,109 @@ module Aws::ARCRegionswitch
       :owner,
       :version,
       :updated_at,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration for creating an Amazon RDS cross-Region read replica during post-recovery in a Region switch.</p>
+    # @!attribute timeout_minutes
+    #   <p>The timeout value specified for the configuration.</p>
+    #   @return [Integer]
+    # @!attribute cross_account_role
+    #   <p>The cross-account role for the configuration.</p>
+    #   @return [String]
+    # @!attribute external_id
+    #   <p>The external ID (secret key) for the configuration.</p>
+    #   @return [String]
+    # @!attribute db_instance_arn_map
+    #   <p>A map of database instance ARNs for each Region in the plan.</p>
+    #   @return [Hash<String, String>]
+    class RdsCreateCrossRegionReplicaConfiguration < Struct.new(
+      nil,
+      :timeout_minutes,
+      :cross_account_role,
+      :external_id,
+      :db_instance_arn_map,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:timeout_minutes] = 60 unless options.key?(:timeout_minutes)
+        super
+      end
+    end
+
+    # <p>Configuration for promoting an Amazon RDS read replica to a standalone database instance during a Region switch.</p>
+    # @!attribute timeout_minutes
+    #   <p>The timeout value specified for the configuration.</p>
+    #   @return [Integer]
+    # @!attribute cross_account_role
+    #   <p>The cross-account role for the configuration.</p>
+    #   @return [String]
+    # @!attribute external_id
+    #   <p>The external ID (secret key) for the configuration.</p>
+    #   @return [String]
+    # @!attribute db_instance_arn_map
+    #   <p>A map of database instance ARNs for each Region in the plan.</p>
+    #   @return [Hash<String, String>]
+    class RdsPromoteReadReplicaConfiguration < Struct.new(
+      nil,
+      :timeout_minutes,
+      :cross_account_role,
+      :external_id,
+      :db_instance_arn_map,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:timeout_minutes] = 60 unless options.key?(:timeout_minutes)
+        super
+      end
+    end
+
+    # <p>Configuration for switching over an Amazon RDS read replica to become the new primary database instance during a Region switch.</p>
+    # @!attribute timeout_minutes
+    #   <p>The timeout value specified for the configuration.</p>
+    #   @return [Integer]
+    # @!attribute cross_account_role
+    #   <p>The cross-account role for the configuration.</p>
+    #   @return [String]
+    # @!attribute external_id
+    #   <p>The external ID (secret key) for the configuration.</p>
+    #   @return [String]
+    # @!attribute db_instance_arn_map
+    #   <p>A map of database instance ARNs for each Region in the plan.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute ungraceful
+    #   <p>The ungraceful execution settings for the configuration.</p>
+    #   @return [Types::RdsUngraceful]
+    class RdsSwitchoverReadReplicaConfiguration < Struct.new(
+      nil,
+      :timeout_minutes,
+      :cross_account_role,
+      :external_id,
+      :db_instance_arn_map,
+      :ungraceful,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:timeout_minutes] = 60 unless options.key?(:timeout_minutes)
+        super
+      end
+    end
+
+    # <p>The ungraceful execution settings for an Amazon RDS switchover read replica execution block.</p>
+    # @!attribute ungraceful
+    #   <p>The ungraceful behavior to perform if switching to ungraceful execution.</p>
+    #   @return [String]
+    class RdsUngraceful < Struct.new(
+      nil,
+      :ungraceful,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1347,6 +1911,53 @@ module Aws::ARCRegionswitch
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration for automatic report generation for plan executions. When configured, Region switch automatically generates a report after each plan execution that includes execution events, plan configuration, and CloudWatch alarm states.</p>
+    # @!attribute report_output
+    #   <p>The output configuration for the report.</p>
+    #   @return [Array<Types::ReportOutputConfiguration>]
+    class ReportConfiguration < Struct.new(
+      nil,
+      :report_output,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The output location or cause of a failure in report generation.</p>
+    # @!attribute s3_report_output
+    #   <p>Information about a report delivered to Amazon S3.</p>
+    #   @return [Types::S3ReportOutput]
+    # @!attribute failed_report_output
+    #   <p>The details about a failed report generation.</p>
+    #   @return [Types::FailedReportOutput]
+    class ReportOutput < Struct.new(
+      :s3_report_output,
+      :failed_report_output,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class S3ReportOutput < ReportOutput; end
+      class FailedReportOutput < ReportOutput; end
+      class Unknown < ReportOutput; end
+    end
+
+    # <p>Configuration for report output destinations used in a Region switch plan.</p>
+    # @!attribute s3_configuration
+    #   <p>Configuration for delivering reports to an Amazon S3 bucket.</p>
+    #   @return [Types::S3ReportOutputConfiguration]
+    class ReportOutputConfiguration < Struct.new(
+      :s3_configuration,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class S3Configuration < ReportOutputConfiguration; end
+      class Unknown < ReportOutputConfiguration; end
     end
 
     # <p>The specified resource was not found.</p> <p>HTTP Status Code: 404</p>
@@ -1406,6 +2017,9 @@ module Aws::ARCRegionswitch
     # @!attribute health_check_id
     #   <p>The Amazon Route 53 health check ID.</p>
     #   @return [String]
+    # @!attribute status
+    #   <p>The Amazon Route 53 health check status.</p>
+    #   @return [String]
     # @!attribute region
     #   <p>The Amazon Route 53 Region.</p>
     #   @return [String]
@@ -1414,6 +2028,7 @@ module Aws::ARCRegionswitch
       :hosted_zone_id,
       :record_name,
       :health_check_id,
+      :status,
       :region,
       keyword_init: true
     )
@@ -1473,6 +2088,34 @@ module Aws::ARCRegionswitch
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Information about a report delivered to Amazon S3.</p>
+    # @!attribute s3_object_key
+    #   <p>The S3 object key where the generated report is stored.</p>
+    #   @return [String]
+    class S3ReportOutput < Struct.new(
+      nil,
+      :s3_object_key,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration for delivering generated reports to an Amazon S3 bucket.</p>
+    # @!attribute bucket_path
+    #   <p>The S3 bucket name and optional prefix where reports are stored. Format: bucket-name or bucket-name/prefix.</p>
+    #   @return [String]
+    # @!attribute bucket_owner
+    #   <p>The Amazon Web Services account ID that owns the S3 bucket. Required to ensure the bucket is still owned by the same expected owner at generation time.</p>
+    #   @return [String]
+    class S3ReportOutputConfiguration < Struct.new(
+      nil,
+      :bucket_path,
+      :bucket_owner,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The service for a cross account role.</p>
     # @!attribute cross_account_role
     #   <p>The cross account role for a service.</p>
@@ -1497,6 +2140,151 @@ module Aws::ARCRegionswitch
       include ::Smithy::Schema::Structure
     end
 
+    # <p>A service quota warning for a plan. Region switch creates a warning when the applied quota value in one Region of a plan is lower than the value for the matching resource in another Region or account in the plan, or when it can't complete a service quota check.</p>
+    # @!attribute account_id
+    #   <p>The Amazon Web Services account ID that owns the plan that the warning applies to.</p>
+    #   @return [String]
+    # @!attribute quota_region
+    #   <p>The Amazon Web Services Region that the quota applies to.</p>
+    #   @return [String]
+    # @!attribute service_code
+    #   <p>The service code of the service that the quota belongs to, as defined in Service Quotas. For example, <code>ec2</code>.</p>
+    #   @return [String]
+    # @!attribute quota_code
+    #   <p>The quota code of the quota that the warning applies to, as defined in Service Quotas.</p>
+    #   @return [String]
+    # @!attribute quota_name
+    #   <p>The name of the quota that the warning applies to, as defined in Service Quotas.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status of the service quota warning.</p>
+    #   @return [String]
+    # @!attribute plan_arn
+    #   <p>The Amazon Resource Name (ARN) of the plan that the warning applies to.</p>
+    #   @return [String]
+    # @!attribute request_id
+    #   <p>The ID of the quota increase request that Region switch submitted, if it submitted one for this quota.</p>
+    #   @return [String]
+    # @!attribute case_id
+    #   <p>The ID of the support case associated with the quota increase request, if Region switch submitted one for this quota.</p>
+    #   @return [String]
+    # @!attribute warning_message
+    #   <p>A message that describes the service quota warning.</p>
+    #   @return [String]
+    # @!attribute last_checked_at
+    #   <p>The time (UTC) when Region switch last checked this quota.</p>
+    #   @return [Time]
+    # @!attribute warning_created_at
+    #   <p>The time (UTC) when Region switch created this warning.</p>
+    #   @return [Time]
+    class ServiceQuotaWarningSummary < Struct.new(
+      nil,
+      :account_id,
+      :quota_region,
+      :service_code,
+      :quota_code,
+      :quota_name,
+      :status,
+      :plan_arn,
+      :request_id,
+      :case_id,
+      :warning_message,
+      :last_checked_at,
+      :warning_created_at,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The Systems Manager document to run and the managed nodes to target for a single Amazon Web Services Region.</p>
+    # @!attribute cross_account_role
+    #   <p>The cross-account role for the configuration.</p>
+    #   @return [String]
+    # @!attribute external_id
+    #   <p>The external ID (secret key) for the configuration.</p>
+    #   @return [String]
+    # @!attribute document_arn
+    #   <p>The Amazon Resource Name (ARN) of the Systems Manager document to run.</p>
+    #   @return [String]
+    # @!attribute targets
+    #   <p>The target filters that Systems Manager resolves to managed nodes when the command runs. To target specific managed nodes, use the <code>InstanceIds</code> key. You can specify up to five target filters.</p>
+    #   @return [Array<Types::SsmTarget>]
+    # @!attribute parameters
+    #   <p>The parameters that are passed to this Region's Systems Manager document. You set parameters for each document, so each Region can run its document with its own parameters.</p>
+    #   @return [Hash<String, Array<String>>]
+    # @!attribute document_version
+    #   <p>The version of the Systems Manager document to run for this Region. When you omit it, Systems Manager runs the document's default version.</p>
+    #   @return [String]
+    class SsmDocumentConfig < Struct.new(
+      nil,
+      :cross_account_role,
+      :external_id,
+      :document_arn,
+      :targets,
+      :parameters,
+      :document_version,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration for an AWS Systems Manager <code>SendCommand</code> execution block in a Region switch plan. This execution block runs a Systems Manager document on the managed nodes that you target in each Amazon Web Services Region of the plan.</p>
+    # @!attribute timeout_minutes
+    #   <p>The timeout value specified for the configuration.</p>
+    #   @return [Integer]
+    # @!attribute region_documents
+    #   <p>The Systems Manager document and target configuration for each Amazon Web Services Region in the plan. Provide an entry for each Amazon Web Services Region that you want the command to run in.</p>
+    #   @return [Hash<String, Types::SsmDocumentConfig>]
+    # @!attribute retry_interval_minutes
+    #   <p>How often, in minutes, Region switch retries the command if it returns a failure.</p>
+    #   @return [Float]
+    # @!attribute ungraceful
+    #   <p>Specifies the settings that determine how the execution block behaves when the plan runs ungracefully, such as whether to skip the command.</p>
+    #   @return [Types::SsmSendCommandUngraceful]
+    class SsmSendCommandConfiguration < Struct.new(
+      nil,
+      :timeout_minutes,
+      :region_documents,
+      :retry_interval_minutes,
+      :ungraceful,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:timeout_minutes] = 60 unless options.key?(:timeout_minutes)
+        super
+      end
+    end
+
+    # <p>The ungraceful execution settings for an AWS Systems Manager <code>SendCommand</code> execution block.</p>
+    # @!attribute behavior
+    #   <p>Specifies whether to skip running this command during an ungraceful execution. Set to <code>skip</code> to skip the command.</p>
+    #   @return [String]
+    class SsmSendCommandUngraceful < Struct.new(
+      nil,
+      :behavior,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A single <code>SendCommand</code> target filter, consisting of a target key and the values matched by that key.</p>
+    # @!attribute key
+    #   <p>The target key, such as <code>tag:Environment</code> or <code>InstanceIds</code>.</p>
+    #   @return [String]
+    # @!attribute values
+    #   <p>The values matched by this target key. Multiple values combine with a logical OR.</p>
+    #   @return [Array<String>]
+    class SsmTarget < Struct.new(
+      nil,
+      :key,
+      :values,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute plan_arn
     #   <p>The Amazon Resource Name (ARN) of the plan to execute.</p>
     #   @return [String]
@@ -1504,16 +2292,22 @@ module Aws::ARCRegionswitch
     #   <p>The Amazon Web Services Region to target with this execution. This is the Region that traffic will be shifted to or from, depending on the action.</p>
     #   @return [String]
     # @!attribute action
-    #   <p>The action to perform. Valid values are ACTIVATE (to shift traffic to the target Region) or DEACTIVATE (to shift traffic away from the target Region).</p>
+    #   <p>The action to perform. Valid values are <code>activate</code> (to shift traffic to the target Region) or <code>deactivate</code> (to shift traffic away from the target Region).</p>
     #   @return [String]
     # @!attribute mode
-    #   <p>The plan execution mode. Valid values are <code>Practice</code>, for testing without making actual changes, or <code>Recovery</code>, for actual traffic shifting and application recovery.</p>
+    #   <p>The plan execution mode. Valid values are <code>graceful</code>, for starting the execution in graceful mode, or <code>ungraceful</code>, for starting the execution in ungraceful mode.</p>
     #   @return [String]
     # @!attribute comment
     #   <p>An optional comment explaining why the plan execution is being started.</p>
     #   @return [String]
     # @!attribute latest_version
     #   <p>A boolean value indicating whether to use the latest version of the plan. If set to false, you must specify a specific version.</p>
+    #   @return [String]
+    # @!attribute recovery_execution_id
+    #   <p>The execution identifier of the recovery execution that ran in the opposite region post-recovery is ran in. Required when starting a post-recovery execution.</p>
+    #   @return [String]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier to ensure that the operation completes no more than one time. If this token matches a previous request, the service ignores the request and returns the result of the original successful request. If you don't provide a client token, the service automatically generates one. For more information about idempotency, see <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.</p>
     #   @return [String]
     class StartPlanExecutionRequest < Struct.new(
       nil,
@@ -1523,6 +2317,8 @@ module Aws::ARCRegionswitch
       :mode,
       :comment,
       :latest_version,
+      :recovery_execution_id,
+      :client_token,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1637,7 +2433,7 @@ module Aws::ARCRegionswitch
     #   <p>The Amazon Web Services Region for a trigger.</p>
     #   @return [String]
     # @!attribute action
-    #   <p>The action to perform when the trigger fires. Valid values include ACTIVATE and DEACTIVATE.</p>
+    #   <p>The action to perform when the trigger fires. Valid values include <code>activate</code> and <code>deactivate</code>.</p>
     #   @return [String]
     # @!attribute conditions
     #   <p>The conditions that must be met for the trigger to fire.</p>
@@ -1662,7 +2458,7 @@ module Aws::ARCRegionswitch
     #   <p>The name of the CloudWatch alarm associated with the condition.</p>
     #   @return [String]
     # @!attribute condition
-    #   <p>The condition that must be met. Valid values include ALARM and OK.</p>
+    #   <p>The condition that must be met. Valid values include <code>green</code> and <code>red</code>.</p>
     #   @return [String]
     class TriggerCondition < Struct.new(
       nil,
@@ -1780,6 +2576,12 @@ module Aws::ARCRegionswitch
     # @!attribute triggers
     #   <p>The updated conditions that can automatically trigger the execution of the plan.</p>
     #   @return [Array<Types::Trigger>]
+    # @!attribute report_configuration
+    #   <p>The updated report configuration for the plan.</p>
+    #   @return [Types::ReportConfiguration]
+    # @!attribute service_quota_checks_enabled
+    #   <p>Specifies whether service quota checks are enabled for the Region switch plan.</p>
+    #   @return [Boolean]
     class UpdatePlanRequest < Struct.new(
       nil,
       :arn,
@@ -1789,6 +2591,8 @@ module Aws::ARCRegionswitch
       :recovery_time_objective_minutes,
       :associated_alarms,
       :triggers,
+      :report_configuration,
+      :service_quota_checks_enabled,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1810,7 +2614,7 @@ module Aws::ARCRegionswitch
     #   <p>The steps that make up the workflow.</p>
     #   @return [Array<Types::Step>]
     # @!attribute workflow_target_action
-    #   <p>The action that the workflow performs. Valid values include ACTIVATE and DEACTIVATE.</p>
+    #   <p>The action that the workflow performs. Valid values include <code>activate</code> and <code>deactivate</code>.</p>
     #   @return [String]
     # @!attribute workflow_target_region
     #   <p>The Amazon Web Services Region that the workflow targets.</p>

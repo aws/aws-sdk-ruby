@@ -144,18 +144,18 @@ module Aws::Mq
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -241,6 +241,8 @@ module Aws::Mq
     #   <p>Enables connections from applications outside of the VPC that hosts the broker's subnets. Set to false by default, if no value is provided.</p>
     # @option params [Array<String>] :security_groups
     #   <p>The list of rules (1 minimum, 125 maximum) that authorize connections to brokers.</p>
+    # @option params [Integer] :storage_size
+    #   <p>The broker's storage size in GB.</p>
     # @option params [String] :storage_type
     #   <p>The broker's storage type.</p>
     # @option params [Array<String>] :subnet_ids
@@ -295,6 +297,7 @@ module Aws::Mq
     #     },
     #     publicly_accessible: false, # required
     #     security_groups: ["__string"],
+    #     storage_size: 1,
     #     storage_type: "EBS" # One of: ["EBS", "EFS"],
     #     subnet_ids: ["__string"],
     #     tags: {
@@ -614,8 +617,10 @@ module Aws::Mq
     #       user_search_subtree: false
     #     },
     #     pending_security_groups: ["__string"],
+    #     pending_storage_size: 1,
     #     publicly_accessible: false,
     #     security_groups: ["__string"],
+    #     storage_size: 1,
     #     storage_type: "EBS" # One of: ["EBS", "EFS"],
     #     subnet_ids: ["__string"],
     #     tags: {
@@ -796,6 +801,46 @@ module Aws::Mq
     # @return [Types::DescribeConfigurationRevisionResponse]
     def describe_configuration_revision(params = {}, options = {})
       request = build_request(:describe_configuration_revision, params)
+      request.send_request(options)
+    end
+
+    # <p>Returns the resources shared to a broker.</p>
+    # @param [Hash, Types::DescribeSharedResourcesRequest] params
+    # @option params [String] :broker_id
+    #   <p>The unique ID that Amazon MQ generates for the broker.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of resources that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100.</p>
+    # @option params [String] :next_token
+    #   <p>The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     broker_id: "__string", # required
+    #     max_results: 1,
+    #     next_token: "__string"
+    #   }
+    #   options = {}
+    #   response = client.describe_shared_resources(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     next_token: "__string",
+    #     shared_resources: [
+    #       {
+    #         dns_names: ["__string"],
+    #         error: {
+    #           code: "QUOTA_EXCEEDED" # One of: ["QUOTA_EXCEEDED", "SHARE_NOT_FOUND", "INVITE_FAILED", "SETUP_INCOMPLETE", "INTERNAL_ERROR", "AZ_MISMATCH", "RESOURCE_CONFIGURATION_NOT_FOUND"], # required
+    #           message: "__string", # required
+    #         },
+    #         resource_arn: "__string", # required
+    #         resource_share_arns: ["__string"],
+    #         status: "AVAILABLE" # One of: ["AVAILABLE", "SETUP_IN_PROGRESS", "DELETION_IN_PROGRESS", "PENDING_CREATE", "PENDING_DELETE", "ERROR"], # required
+    #         type: "RESOURCE_SHARE" # One of: ["RESOURCE_SHARE", "RESOURCE"], # required
+    #       }
+    #     ]
+    #   }
+    # @return [Types::DescribeSharedResourcesResponse]
+    def describe_shared_resources(params = {}, options = {})
+      request = build_request(:describe_shared_resources, params)
       request.send_request(options)
     end
 
@@ -1070,8 +1115,12 @@ module Aws::Mq
     #   <p>Enables Amazon CloudWatch logging for brokers.</p>
     # @option params [Types::WeeklyStartTime] :maintenance_window_start_time
     #   <p>The parameters that determine the WeeklyStartTime.</p>
+    # @option params [Array<String>] :resource_share_arns
+    #   <p>The list of resource shares to update on the broker</p>
     # @option params [Array<String>] :security_groups
     #   <p>The list of security groups (1 minimum, 5 maximum) that authorizes connections to brokers.</p>
+    # @option params [Integer] :storage_size
+    #   <p>The broker's storage size in GB.</p>
     # @option params [String] :data_replication_mode
     #   <p>Defines whether this broker is a part of a data replication pair.</p>
     # @example Request syntax with placeholder values
@@ -1107,7 +1156,9 @@ module Aws::Mq
     #       time_of_day: "__string", # required
     #       time_zone: "__string"
     #     },
+    #     resource_share_arns: ["__string"],
     #     security_groups: ["__string"],
+    #     storage_size: 1,
     #     data_replication_mode: "NONE" # One of: ["NONE", "CRDR"]
     #   }
     #   options = {}
@@ -1145,6 +1196,7 @@ module Aws::Mq
     #       time_of_day: "__string", # required
     #       time_zone: "__string"
     #     },
+    #     resource_share_arns: ["__string"],
     #     security_groups: ["__string"],
     #     data_replication_metadata: {
     #       data_replication_counterpart: {
@@ -1161,7 +1213,8 @@ module Aws::Mq
     #       },
     #       data_replication_role: "__string", # required
     #     },
-    #     pending_data_replication_mode: "NONE" # One of: ["NONE", "CRDR"]
+    #     pending_data_replication_mode: "NONE" # One of: ["NONE", "CRDR"],
+    #     storage_size: 1
     #   }
     # @return [Types::UpdateBrokerResponse]
     def update_broker(params = {}, options = {})

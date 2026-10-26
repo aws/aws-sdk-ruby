@@ -44,15 +44,39 @@ module Aws::BedrockDataAutomation
       attr_accessor transcript: Types::TranscriptConfiguration?
     end
 
+    module AudioGenerativeOutputLanguage
+      DEFAULT: String
+      EN: String
+    end
+
+    class AudioLanguageConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input_languages: Array[String],
+        ?generative_output_language: String,
+        ?identify_multiple_languages: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input_languages: Array[String]?
+      attr_accessor generative_output_language: String?
+      attr_accessor identify_multiple_languages: bool?
+    end
+
     class AudioOverrideConfiguration
       include Smithy::Schema::Structure
 
       def initialize: (
         ?modality_processing: Types::ModalityProcessingConfiguration,
+        ?language_configuration: Types::AudioLanguageConfiguration,
+        ?sensitive_data_configuration: Types::SensitiveDataConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor modality_processing: Types::ModalityProcessingConfiguration?
+      attr_accessor language_configuration: Types::AudioLanguageConfiguration?
+      attr_accessor sensitive_data_configuration: Types::SensitiveDataConfiguration?
     end
 
     class AudioStandardExtraction
@@ -112,6 +136,8 @@ module Aws::BedrockDataAutomation
         ?blueprint_stage: String,
         ?kms_key_id: String,
         ?kms_encryption_context: Hash[String, String],
+        ?optimization_samples: Array[Types::BlueprintOptimizationSample],
+        ?optimization_time: Time,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -125,6 +151,8 @@ module Aws::BedrockDataAutomation
       attr_accessor blueprint_stage: String?
       attr_accessor kms_key_id: String?
       attr_accessor kms_encryption_context: Hash[String, String]?
+      attr_accessor optimization_samples: Array[Types::BlueprintOptimizationSample]?
+      attr_accessor optimization_time: Time?
     end
 
     class BlueprintFilter
@@ -155,6 +183,51 @@ module Aws::BedrockDataAutomation
       attr_accessor blueprint_arn: String?
       attr_accessor blueprint_version: String?
       attr_accessor blueprint_stage: String?
+    end
+
+    module BlueprintOptimizationJobStatus
+      CREATED: String
+      IN_PROGRESS: String
+      SUCCESS: String
+      SERVICE_ERROR: String
+      CLIENT_ERROR: String
+    end
+
+    class BlueprintOptimizationObject
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?blueprint_arn: String,
+        ?stage: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor blueprint_arn: String?
+      attr_accessor stage: String?
+    end
+
+    class BlueprintOptimizationOutputConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_object: Types::S3Object,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_object: Types::S3Object?
+    end
+
+    class BlueprintOptimizationSample
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_s3_object: Types::S3Object,
+        ?ground_truth_s3_object: Types::S3Object,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_s3_object: Types::S3Object?
+      attr_accessor ground_truth_s3_object: Types::S3Object?
     end
 
     module BlueprintStage
@@ -209,6 +282,32 @@ module Aws::BedrockDataAutomation
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    class CopyBlueprintStageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?blueprint_arn: String,
+        ?source_stage: String,
+        ?target_stage: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor blueprint_arn: String?
+      attr_accessor source_stage: String?
+      attr_accessor target_stage: String?
+      attr_accessor client_token: String?
+    end
+
+    class CopyBlueprintStageResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
     end
 
     class CreateBlueprintRequest
@@ -269,6 +368,38 @@ module Aws::BedrockDataAutomation
       attr_accessor blueprint: Types::Blueprint?
     end
 
+    class CreateDataAutomationLibraryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?library_name: String,
+        ?library_description: String,
+        ?client_token: String,
+        ?encryption_configuration: Types::EncryptionConfiguration,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor library_name: String?
+      attr_accessor library_description: String?
+      attr_accessor client_token: String?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateDataAutomationLibraryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?library_arn: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor library_arn: String?
+      attr_accessor status: String?
+    end
+
     class CreateDataAutomationProjectRequest
       include Smithy::Schema::Structure
 
@@ -276,9 +407,11 @@ module Aws::BedrockDataAutomation
         ?project_name: String,
         ?project_description: String,
         ?project_stage: String,
+        ?project_type: String,
         ?standard_output_configuration: Types::StandardOutputConfiguration,
         ?custom_output_configuration: Types::CustomOutputConfiguration,
         ?override_configuration: Types::OverrideConfiguration,
+        ?data_automation_library_configuration: Types::DataAutomationLibraryConfiguration,
         ?client_token: String,
         ?encryption_configuration: Types::EncryptionConfiguration,
         ?tags: Array[Types::Tag],
@@ -288,9 +421,11 @@ module Aws::BedrockDataAutomation
       attr_accessor project_name: String?
       attr_accessor project_description: String?
       attr_accessor project_stage: String?
+      attr_accessor project_type: String?
       attr_accessor standard_output_configuration: Types::StandardOutputConfiguration?
       attr_accessor custom_output_configuration: Types::CustomOutputConfiguration?
       attr_accessor override_configuration: Types::OverrideConfiguration?
+      attr_accessor data_automation_library_configuration: Types::DataAutomationLibraryConfiguration?
       attr_accessor client_token: String?
       attr_accessor encryption_configuration: Types::EncryptionConfiguration?
       attr_accessor tags: Array[Types::Tag]?
@@ -316,10 +451,154 @@ module Aws::BedrockDataAutomation
 
       def initialize: (
         ?blueprints: Array[Types::BlueprintItem],
+        ?document: Types::DocumentCustomOutputConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor blueprints: Array[Types::BlueprintItem]?
+      attr_accessor document: Types::DocumentCustomOutputConfiguration?
+    end
+
+    class DataAutomationLibrary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?library_arn: String,
+        ?creation_time: Time,
+        ?library_name: String,
+        ?library_description: String,
+        ?status: String,
+        ?entity_types: Array[Types::EntityTypeInfo],
+        ?kms_key_id: String,
+        ?kms_encryption_context: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor library_arn: String?
+      attr_accessor creation_time: Time?
+      attr_accessor library_name: String?
+      attr_accessor library_description: String?
+      attr_accessor status: String?
+      attr_accessor entity_types: Array[Types::EntityTypeInfo]?
+      attr_accessor kms_key_id: String?
+      attr_accessor kms_encryption_context: Hash[String, String]?
+    end
+
+    class DataAutomationLibraryConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?libraries: Array[Types::DataAutomationLibraryItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor libraries: Array[Types::DataAutomationLibraryItem]?
+    end
+
+    class DataAutomationLibraryEntitySummary
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?vocabulary: Types::VocabularyEntitySummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vocabulary: Types::VocabularyEntitySummary?
+
+      class Vocabulary < DataAutomationLibraryEntitySummary
+      end
+      class Unknown < DataAutomationLibraryEntitySummary
+      end
+    end
+
+    class DataAutomationLibraryFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?library_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor library_arn: String?
+    end
+
+    class DataAutomationLibraryIngestionJob
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_arn: String,
+        ?creation_time: Time,
+        ?entity_type: String,
+        ?operation_type: String,
+        ?job_status: String,
+        ?output_configuration: Types::OutputConfiguration,
+        ?completion_time: Time,
+        ?error_message: String,
+        ?error_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_arn: String?
+      attr_accessor creation_time: Time?
+      attr_accessor entity_type: String?
+      attr_accessor operation_type: String?
+      attr_accessor job_status: String?
+      attr_accessor output_configuration: Types::OutputConfiguration?
+      attr_accessor completion_time: Time?
+      attr_accessor error_message: String?
+      attr_accessor error_type: String?
+    end
+
+    class DataAutomationLibraryIngestionJobSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_arn: String,
+        ?job_status: String,
+        ?entity_type: String,
+        ?operation_type: String,
+        ?creation_time: Time,
+        ?completion_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_arn: String?
+      attr_accessor job_status: String?
+      attr_accessor entity_type: String?
+      attr_accessor operation_type: String?
+      attr_accessor creation_time: Time?
+      attr_accessor completion_time: Time?
+    end
+
+    class DataAutomationLibraryItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?library_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor library_arn: String?
+    end
+
+    module DataAutomationLibraryStatus
+      ACTIVE: String
+      DELETING: String
+    end
+
+    class DataAutomationLibrarySummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?library_arn: String,
+        ?library_name: String,
+        ?creation_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor library_arn: String?
+      attr_accessor library_name: String?
+      attr_accessor creation_time: Time?
     end
 
     class DataAutomationProject
@@ -331,10 +610,12 @@ module Aws::BedrockDataAutomation
         ?last_modified_time: Time,
         ?project_name: String,
         ?project_stage: String,
+        ?project_type: String,
         ?project_description: String,
         ?standard_output_configuration: Types::StandardOutputConfiguration,
         ?custom_output_configuration: Types::CustomOutputConfiguration,
         ?override_configuration: Types::OverrideConfiguration,
+        ?data_automation_library_configuration: Types::DataAutomationLibraryConfiguration,
         ?status: String,
         ?kms_key_id: String,
         ?kms_encryption_context: Hash[String, String],
@@ -346,10 +627,12 @@ module Aws::BedrockDataAutomation
       attr_accessor last_modified_time: Time?
       attr_accessor project_name: String?
       attr_accessor project_stage: String?
+      attr_accessor project_type: String?
       attr_accessor project_description: String?
       attr_accessor standard_output_configuration: Types::StandardOutputConfiguration?
       attr_accessor custom_output_configuration: Types::CustomOutputConfiguration?
       attr_accessor override_configuration: Types::OverrideConfiguration?
+      attr_accessor data_automation_library_configuration: Types::DataAutomationLibraryConfiguration?
       attr_accessor status: String?
       attr_accessor kms_key_id: String?
       attr_accessor kms_encryption_context: Hash[String, String]?
@@ -391,6 +674,7 @@ module Aws::BedrockDataAutomation
       def initialize: (
         ?project_arn: String,
         ?project_stage: String,
+        ?project_type: String,
         ?project_name: String,
         ?creation_time: Time,
       ) -> void
@@ -398,8 +682,14 @@ module Aws::BedrockDataAutomation
 
       attr_accessor project_arn: String?
       attr_accessor project_stage: String?
+      attr_accessor project_type: String?
       attr_accessor project_name: String?
       attr_accessor creation_time: Time?
+    end
+
+    module DataAutomationProjectType
+      ASYNC: String
+      SYNC: String
     end
 
     class DeleteBlueprintRequest
@@ -422,6 +712,30 @@ module Aws::BedrockDataAutomation
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+    end
+
+    class DeleteDataAutomationLibraryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?library_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor library_arn: String?
+    end
+
+    class DeleteDataAutomationLibraryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?library_arn: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor library_arn: String?
+      attr_accessor status: String?
     end
 
     class DeleteDataAutomationProjectRequest
@@ -448,6 +762,17 @@ module Aws::BedrockDataAutomation
       attr_accessor status: String?
     end
 
+    class DeleteEntitiesInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entity_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entity_ids: Array[String]?
+    end
+
     module DesiredModality
       IMAGE: String
       DOCUMENT: String
@@ -464,6 +789,17 @@ module Aws::BedrockDataAutomation
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor state: String?
+    end
+
+    class DocumentCustomOutputConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fallback_blueprints: Array[Types::BlueprintItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fallback_blueprints: Array[Types::BlueprintItem]?
     end
 
     class DocumentExtractionGranularity
@@ -533,11 +869,13 @@ module Aws::BedrockDataAutomation
       def initialize: (
         ?splitter: Types::SplitterConfiguration,
         ?modality_processing: Types::ModalityProcessingConfiguration,
+        ?sensitive_data_configuration: Types::SensitiveDataConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor splitter: Types::SplitterConfiguration?
       attr_accessor modality_processing: Types::ModalityProcessingConfiguration?
+      attr_accessor sensitive_data_configuration: Types::SensitiveDataConfiguration?
     end
 
     class DocumentStandardExtraction
@@ -592,6 +930,78 @@ module Aws::BedrockDataAutomation
       attr_accessor kms_encryption_context: Hash[String, String]?
     end
 
+    class EntityDetails
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?vocabulary: Types::VocabularyEntity,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vocabulary: Types::VocabularyEntity?
+
+      class Vocabulary < EntityDetails
+      end
+      class Unknown < EntityDetails
+      end
+    end
+
+    module EntityType
+      VOCABULARY: String
+    end
+
+    class EntityTypeInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entity_type: String,
+        ?entity_metadata: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entity_type: String?
+      attr_accessor entity_metadata: String?
+    end
+
+    class EventBridgeConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_bridge_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_bridge_enabled: bool?
+    end
+
+    class GetBlueprintOptimizationStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?invocation_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor invocation_arn: String?
+    end
+
+    class GetBlueprintOptimizationStatusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?error_type: String,
+        ?error_message: String,
+        ?output_configuration: Types::BlueprintOptimizationOutputConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor error_type: String?
+      attr_accessor error_message: String?
+      attr_accessor output_configuration: Types::BlueprintOptimizationOutputConfiguration?
+    end
+
     class GetBlueprintRequest
       include Smithy::Schema::Structure
 
@@ -616,6 +1026,78 @@ module Aws::BedrockDataAutomation
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor blueprint: Types::Blueprint?
+    end
+
+    class GetDataAutomationLibraryEntityRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?library_arn: String,
+        ?entity_type: String,
+        ?entity_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor library_arn: String?
+      attr_accessor entity_type: String?
+      attr_accessor entity_id: String?
+    end
+
+    class GetDataAutomationLibraryEntityResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entity: Types::EntityDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entity: Types::EntityDetails?
+    end
+
+    class GetDataAutomationLibraryIngestionJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?library_arn: String,
+        ?job_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor library_arn: String?
+      attr_accessor job_arn: String?
+    end
+
+    class GetDataAutomationLibraryIngestionJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job: Types::DataAutomationLibraryIngestionJob,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job: Types::DataAutomationLibraryIngestionJob?
+    end
+
+    class GetDataAutomationLibraryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?library_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor library_arn: String?
+    end
+
+    class GetDataAutomationLibraryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?library: Types::DataAutomationLibrary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor library: Types::DataAutomationLibrary?
     end
 
     class GetDataAutomationProjectRequest
@@ -677,10 +1159,12 @@ module Aws::BedrockDataAutomation
 
       def initialize: (
         ?modality_processing: Types::ModalityProcessingConfiguration,
+        ?sensitive_data_configuration: Types::SensitiveDataConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor modality_processing: Types::ModalityProcessingConfiguration?
+      attr_accessor sensitive_data_configuration: Types::SensitiveDataConfiguration?
     end
 
     class ImageStandardExtraction
@@ -727,6 +1211,39 @@ module Aws::BedrockDataAutomation
       attr_accessor generative_field: Types::ImageStandardGenerativeField?
     end
 
+    class InlinePayload
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?upsert_entities_info: Array[Types::UpsertEntityInfo],
+        ?delete_entities_info: Types::DeleteEntitiesInfo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor upsert_entities_info: Array[Types::UpsertEntityInfo]?
+      attr_accessor delete_entities_info: Types::DeleteEntitiesInfo?
+
+      class UpsertEntitiesInfo < InlinePayload
+      end
+      class DeleteEntitiesInfo < InlinePayload
+      end
+      class Unknown < InlinePayload
+      end
+    end
+
+    class InputConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_object: Types::S3Object,
+        ?inline_payload: Types::InlinePayload,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_object: Types::S3Object?
+      attr_accessor inline_payload: Types::InlinePayload?
+    end
+
     class InternalServerException
       include Smithy::Schema::Structure
 
@@ -736,6 +1253,100 @@ module Aws::BedrockDataAutomation
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    class InvokeBlueprintOptimizationAsyncRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?blueprint: Types::BlueprintOptimizationObject,
+        ?samples: Array[Types::BlueprintOptimizationSample],
+        ?output_configuration: Types::BlueprintOptimizationOutputConfiguration,
+        ?data_automation_profile_arn: String,
+        ?encryption_configuration: Types::EncryptionConfiguration,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor blueprint: Types::BlueprintOptimizationObject?
+      attr_accessor samples: Array[Types::BlueprintOptimizationSample]?
+      attr_accessor output_configuration: Types::BlueprintOptimizationOutputConfiguration?
+      attr_accessor data_automation_profile_arn: String?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class InvokeBlueprintOptimizationAsyncResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?invocation_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor invocation_arn: String?
+    end
+
+    class InvokeDataAutomationLibraryIngestionJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?library_arn: String,
+        ?client_token: String,
+        ?input_configuration: Types::InputConfiguration,
+        ?entity_type: String,
+        ?operation_type: String,
+        ?output_configuration: Types::OutputConfiguration,
+        ?notification_configuration: Types::NotificationConfiguration,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor library_arn: String?
+      attr_accessor client_token: String?
+      attr_accessor input_configuration: Types::InputConfiguration?
+      attr_accessor entity_type: String?
+      attr_accessor operation_type: String?
+      attr_accessor output_configuration: Types::OutputConfiguration?
+      attr_accessor notification_configuration: Types::NotificationConfiguration?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class InvokeDataAutomationLibraryIngestionJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_arn: String?
+    end
+
+    module Language
+      EN: String
+      DE: String
+      ES: String
+      FR: String
+      IT: String
+      PT: String
+      JA: String
+      KO: String
+      CN: String
+      TW: String
+      HK: String
+    end
+
+    module LibraryIngestionJobOperationType
+      UPSERT: String
+      DELETE: String
+    end
+
+    module LibraryIngestionJobStatus
+      IN_PROGRESS: String
+      COMPLETED: String
+      COMPLETED_WITH_ERRORS: String
+      FAILED: String
     end
 
     class ListBlueprintsRequest
@@ -772,6 +1383,92 @@ module Aws::BedrockDataAutomation
       attr_accessor next_token: String?
     end
 
+    class ListDataAutomationLibrariesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?project_filter: Types::DataAutomationProjectFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor project_filter: Types::DataAutomationProjectFilter?
+    end
+
+    class ListDataAutomationLibrariesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?libraries: Array[Types::DataAutomationLibrarySummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor libraries: Array[Types::DataAutomationLibrarySummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDataAutomationLibraryEntitiesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?library_arn: String,
+        ?entity_type: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor library_arn: String?
+      attr_accessor entity_type: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListDataAutomationLibraryEntitiesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entities: Array[Types::DataAutomationLibraryEntitySummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entities: Array[Types::DataAutomationLibraryEntitySummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDataAutomationLibraryIngestionJobsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?library_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor library_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListDataAutomationLibraryIngestionJobsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?jobs: Array[Types::DataAutomationLibraryIngestionJobSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor jobs: Array[Types::DataAutomationLibraryIngestionJobSummary]?
+      attr_accessor next_token: String?
+    end
+
     class ListDataAutomationProjectsRequest
       include Smithy::Schema::Structure
 
@@ -781,6 +1478,7 @@ module Aws::BedrockDataAutomation
         ?project_stage_filter: String,
         ?blueprint_filter: Types::BlueprintFilter,
         ?resource_owner: String,
+        ?library_filter: Types::DataAutomationLibraryFilter,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -789,6 +1487,7 @@ module Aws::BedrockDataAutomation
       attr_accessor project_stage_filter: String?
       attr_accessor blueprint_filter: Types::BlueprintFilter?
       attr_accessor resource_owner: String?
+      attr_accessor library_filter: Types::DataAutomationLibraryFilter?
     end
 
     class ListDataAutomationProjectsResponse
@@ -854,6 +1553,28 @@ module Aws::BedrockDataAutomation
       attr_accessor mov: String?
     end
 
+    class NotificationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_bridge_configuration: Types::EventBridgeConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_bridge_configuration: Types::EventBridgeConfiguration?
+    end
+
+    class OutputConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_uri: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_uri: String?
+    end
+
     class OverrideConfiguration
       include Smithy::Schema::Structure
 
@@ -873,6 +1594,72 @@ module Aws::BedrockDataAutomation
       attr_accessor modality_routing: Types::ModalityRoutingConfiguration?
     end
 
+    class PIIEntitiesConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pii_entity_types: Array[String],
+        ?redaction_mask_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pii_entity_types: Array[String]?
+      attr_accessor redaction_mask_mode: String?
+    end
+
+    module PIIEntityType
+      ALL: String
+      ADDRESS: String
+      AGE: String
+      NAME: String
+      EMAIL: String
+      PHONE: String
+      USERNAME: String
+      PASSWORD: String
+      DRIVER_ID: String
+      LICENSE_PLATE: String
+      VEHICLE_IDENTIFICATION_NUMBER: String
+      CREDIT_DEBIT_CARD_CVV: String
+      CREDIT_DEBIT_CARD_EXPIRY: String
+      CREDIT_DEBIT_CARD_NUMBER: String
+      PIN: String
+      INTERNATIONAL_BANK_ACCOUNT_NUMBER: String
+      SWIFT_CODE: String
+      IP_ADDRESS: String
+      MAC_ADDRESS: String
+      URL: String
+      AWS_ACCESS_KEY: String
+      AWS_SECRET_KEY: String
+      US_BANK_ACCOUNT_NUMBER: String
+      US_BANK_ROUTING_NUMBER: String
+      US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER: String
+      US_PASSPORT_NUMBER: String
+      US_SOCIAL_SECURITY_NUMBER: String
+      CA_HEALTH_NUMBER: String
+      CA_SOCIAL_INSURANCE_NUMBER: String
+      UK_NATIONAL_HEALTH_SERVICE_NUMBER: String
+      UK_NATIONAL_INSURANCE_NUMBER: String
+      UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER: String
+    end
+
+    module PIIRedactionMaskMode
+      PII: String
+      ENTITY_TYPE: String
+    end
+
+    class Phrase
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?text: String,
+        ?display_as_text: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor text: String?
+      attr_accessor display_as_text: String?
+    end
+
     class ResourceNotFoundException
       include Smithy::Schema::Structure
 
@@ -887,6 +1674,44 @@ module Aws::BedrockDataAutomation
     module ResourceOwner
       SERVICE: String
       ACCOUNT: String
+    end
+
+    class S3Object
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_uri: String,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_uri: String?
+      attr_accessor version: String?
+    end
+
+    class SensitiveDataConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?detection_mode: String,
+        ?detection_scope: Array[String],
+        ?pii_entities_configuration: Types::PIIEntitiesConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor detection_mode: String?
+      attr_accessor detection_scope: Array[String]?
+      attr_accessor pii_entities_configuration: Types::PIIEntitiesConfiguration?
+    end
+
+    module SensitiveDataDetectionMode
+      DETECTION: String
+      DETECTION_AND_REDACTION: String
+    end
+
+    module SensitiveDataDetectionScopeType
+      STANDARD: String
+      CUSTOM: String
     end
 
     class ServiceQuotaExceededException
@@ -1060,6 +1885,34 @@ module Aws::BedrockDataAutomation
       attr_accessor blueprint: Types::Blueprint?
     end
 
+    class UpdateDataAutomationLibraryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?library_arn: String,
+        ?library_description: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor library_arn: String?
+      attr_accessor library_description: String?
+      attr_accessor client_token: String?
+    end
+
+    class UpdateDataAutomationLibraryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?library_arn: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor library_arn: String?
+      attr_accessor status: String?
+    end
+
     class UpdateDataAutomationProjectRequest
       include Smithy::Schema::Structure
 
@@ -1070,6 +1923,7 @@ module Aws::BedrockDataAutomation
         ?standard_output_configuration: Types::StandardOutputConfiguration,
         ?custom_output_configuration: Types::CustomOutputConfiguration,
         ?override_configuration: Types::OverrideConfiguration,
+        ?data_automation_library_configuration: Types::DataAutomationLibraryConfiguration,
         ?encryption_configuration: Types::EncryptionConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -1080,6 +1934,7 @@ module Aws::BedrockDataAutomation
       attr_accessor standard_output_configuration: Types::StandardOutputConfiguration?
       attr_accessor custom_output_configuration: Types::CustomOutputConfiguration?
       attr_accessor override_configuration: Types::OverrideConfiguration?
+      attr_accessor data_automation_library_configuration: Types::DataAutomationLibraryConfiguration?
       attr_accessor encryption_configuration: Types::EncryptionConfiguration?
     end
 
@@ -1096,6 +1951,22 @@ module Aws::BedrockDataAutomation
       attr_accessor project_arn: String?
       attr_accessor project_stage: String?
       attr_accessor status: String?
+    end
+
+    class UpsertEntityInfo
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?vocabulary: Types::VocabularyEntityInfo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vocabulary: Types::VocabularyEntityInfo?
+
+      class Vocabulary < UpsertEntityInfo
+      end
+      class Unknown < UpsertEntityInfo
+      end
     end
 
     class ValidationException
@@ -1160,10 +2031,12 @@ module Aws::BedrockDataAutomation
 
       def initialize: (
         ?modality_processing: Types::ModalityProcessingConfiguration,
+        ?sensitive_data_configuration: Types::SensitiveDataConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor modality_processing: Types::ModalityProcessingConfiguration?
+      attr_accessor sensitive_data_configuration: Types::SensitiveDataConfiguration?
     end
 
     class VideoStandardExtraction
@@ -1209,6 +2082,61 @@ module Aws::BedrockDataAutomation
 
       attr_accessor extraction: Types::VideoStandardExtraction?
       attr_accessor generative_field: Types::VideoStandardGenerativeField?
+    end
+
+    class VocabularyEntity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entity_id: String,
+        ?description: String,
+        ?language: String,
+        ?phrases: Array[Types::Phrase],
+        ?last_modified_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entity_id: String?
+      attr_accessor description: String?
+      attr_accessor language: String?
+      attr_accessor phrases: Array[Types::Phrase]?
+      attr_accessor last_modified_time: Time?
+    end
+
+    class VocabularyEntityInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entity_id: String,
+        ?description: String,
+        ?language: String,
+        ?phrases: Array[Types::Phrase],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entity_id: String?
+      attr_accessor description: String?
+      attr_accessor language: String?
+      attr_accessor phrases: Array[Types::Phrase]?
+    end
+
+    class VocabularyEntitySummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entity_id: String,
+        ?description: String,
+        ?language: String,
+        ?num_of_phrases: Integer,
+        ?last_modified_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entity_id: String?
+      attr_accessor description: String?
+      attr_accessor language: String?
+      attr_accessor num_of_phrases: Integer?
+      attr_accessor last_modified_time: Time?
     end
   end
 end

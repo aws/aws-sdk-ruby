@@ -10,6 +10,7 @@ module Aws::BedrockDataAutomationRuntime
     BlueprintList: ListShape
     BlueprintStage: EnumShape
     BlueprintVersion: StringShape
+    CustomOutputStatus: EnumShape
     DataAutomationArn: StringShape
     DataAutomationConfiguration: StructureShape
     DataAutomationProfileArn: StringShape
@@ -27,15 +28,22 @@ module Aws::BedrockDataAutomationRuntime
     InvocationArn: StringShape
     InvokeDataAutomationAsyncRequest: StructureShape
     InvokeDataAutomationAsyncResponse: StructureShape
+    InvokeDataAutomationRequest: StructureShape
+    InvokeDataAutomationResponse: StructureShape
     KMSKeyId: StringShape
     ListTagsForResourceRequest: StructureShape
     ListTagsForResourceResponse: StructureShape
     NonBlankString: StringShape
     NotificationConfiguration: StructureShape
     OutputConfiguration: StructureShape
+    OutputSegment: StructureShape
+    OutputSegmentList: ListShape
     ResourceNotFoundException: StructureShape
     S3Uri: StringShape
+    SemanticModality: EnumShape
     ServiceQuotaExceededException: StructureShape
+    ServiceUnavailableException: StructureShape
+    SyncInputConfiguration: StructureShape
     Tag: StructureShape
     TagKey: StringShape
     TagKeyList: ListShape

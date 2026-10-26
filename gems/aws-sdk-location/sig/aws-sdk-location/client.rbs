@@ -232,6 +232,16 @@ module Aws::Location
       ?key: String
     ) -> _CalculateRouteMatrixResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CalculateRouteMatrixResponse
 
+    interface _CancelJobResponse
+      include Smithy::Client::_Response[Types::CancelJobResponse]
+      def job_arn: () -> String?
+      def job_id: () -> String?
+      def status: () -> String?
+    end
+    def cancel_job: (
+      ?job_id: String
+    ) -> _CancelJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelJobResponse
+
     interface _CreateGeofenceCollectionResponse
       include Smithy::Client::_Response[Types::CreateGeofenceCollectionOutput]
       def collection_name: () -> String?
@@ -259,7 +269,18 @@ module Aws::Location
       ?restrictions: {
         allow_actions: Array[String],
         allow_resources: Array[String],
-        allow_referers: Array[String]
+        allow_referers: Array[String],
+        allow_android_apps: Array[
+          {
+            package: String,
+            certificate_fingerprint: String
+          }
+        ],
+        allow_apple_apps: Array[
+          {
+            bundle_id: String
+          }
+        ]
       },
       ?description: String,
       ?expire_time: Time,
@@ -546,6 +567,27 @@ module Aws::Location
       ?geofence_id: String
     ) -> _GetGeofenceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetGeofenceResponse
 
+    interface _GetJobResponse
+      include Smithy::Client::_Response[Types::GetJobResponse]
+      def action: () -> String?
+      def action_options: () -> Types::JobActionOptions?
+      def created_at: () -> Time?
+      def ended_at: () -> Time?
+      def error: () -> Types::JobError?
+      def execution_role_arn: () -> String?
+      def input_options: () -> Types::JobInputOptions?
+      def job_arn: () -> String?
+      def job_id: () -> String?
+      def name: () -> String?
+      def output_options: () -> Types::JobOutputOptions?
+      def status: () -> String?
+      def updated_at: () -> Time?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_job: (
+      ?job_id: String
+    ) -> _GetJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetJobResponse
+
     interface _GetMapGlyphsResponse
       include Smithy::Client::_Response[Types::GetMapGlyphsOutput]
       def blob: () -> String?
@@ -645,6 +687,19 @@ module Aws::Location
       ?next_token: String,
       ?max_results: Integer
     ) -> _ListGeofencesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListGeofencesResponse
+
+    interface _ListJobsResponse
+      include Smithy::Client::_Response[Types::ListJobsResponse]
+      def entries: () -> Array[Types::ListJobsResponseEntry]?
+      def next_token: () -> String?
+    end
+    def list_jobs: (
+      ?filter: {
+        job_status: String
+      },
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListJobsResponse
 
     interface _ListKeysResponse
       include Smithy::Client::_Response[Types::ListKeysOutput]
@@ -796,6 +851,34 @@ module Aws::Location
       ?key: String
     ) -> _SearchPlaceIndexForTextResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchPlaceIndexForTextResponse
 
+    interface _StartJobResponse
+      include Smithy::Client::_Response[Types::StartJobResponse]
+      def created_at: () -> Time?
+      def job_arn: () -> String?
+      def job_id: () -> String?
+      def status: () -> String?
+    end
+    def start_job: (
+      ?client_token: String,
+      ?action: String,
+      ?action_options: {
+        validate_address: {
+          additional_features: Array[String]
+        }
+      },
+      ?execution_role_arn: String,
+      ?input_options: {
+        location: String,
+        format: String
+      },
+      ?name: String,
+      ?output_options: {
+        format: String,
+        location: String
+      },
+      ?tags: Hash[String, String]
+    ) -> _StartJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartJobResponse
+
     interface _TagResourceResponse
       include Smithy::Client::_Response[Types::TagResourceOutput]
     end
@@ -840,7 +923,18 @@ module Aws::Location
       ?restrictions: {
         allow_actions: Array[String],
         allow_resources: Array[String],
-        allow_referers: Array[String]
+        allow_referers: Array[String],
+        allow_android_apps: Array[
+          {
+            package: String,
+            certificate_fingerprint: String
+          }
+        ],
+        allow_apple_apps: Array[
+          {
+            bundle_id: String
+          }
+        ]
       }
     ) -> _UpdateKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateKeyResponse
 

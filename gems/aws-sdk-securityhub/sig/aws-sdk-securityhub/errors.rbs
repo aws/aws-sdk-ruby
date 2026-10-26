@@ -28,6 +28,14 @@ module Aws::SecurityHub
       def message: () -> String?
       def code: () -> String?
     end
+    class OrganizationNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def code: () -> String?
+    end
+    class OrganizationalUnitNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def code: () -> String?
+    end
     class ResourceConflictException < Smithy::Client::ServiceError
       def message: () -> String?
       def code: () -> String?
@@ -37,6 +45,10 @@ module Aws::SecurityHub
       def code: () -> String?
     end
     class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def code: () -> String?
+    end
+    class ServiceQuotaExceededException < Smithy::Client::ServiceError
       def message: () -> String?
       def code: () -> String?
     end

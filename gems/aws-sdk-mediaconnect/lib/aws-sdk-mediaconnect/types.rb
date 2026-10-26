@@ -375,6 +375,9 @@ module Aws::MediaConnect
     # @!attribute video_format
     #   <p> The resolution of the video.</p>
     #   @return [String]
+    # @!attribute media_stream_tags
+    #   <p> The key-value pairs that can be used to tag and organize the media stream. </p>
+    #   @return [Hash<String, String>]
     class AddMediaStreamRequest < Struct.new(
       nil,
       :attributes,
@@ -384,6 +387,7 @@ module Aws::MediaConnect
       :media_stream_name,
       :media_stream_type,
       :video_format,
+      :media_stream_tags,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -442,8 +446,23 @@ module Aws::MediaConnect
     #   <p>A quality setting for the NDI Speed HQ encoder. </p>
     #   @return [Integer]
     # @!attribute ndi_program_name
-    #   <p> A suffix for the names of the NDI sources that the flow creates. If a custom name isn't specified, MediaConnect uses the output name. </p>
+    #   <p> A suffix for the name of the NDI® sender that the flow creates. If a custom name isn't specified, MediaConnect uses the output name. </p>
     #   @return [String]
+    # @!attribute output_tags
+    #   <p> The key-value pairs that can be used to tag and organize the output. </p>
+    #   @return [Hash<String, String>]
+    # @!attribute router_integration_state
+    #   <p>Indicates whether to enable or disable router integration when creating a new flow output.</p>
+    #   @return [String]
+    # @!attribute router_integration_transit_encryption
+    #   <p>The configuration that defines how content is encrypted during transit between the MediaConnect router and a MediaConnect flow.</p>
+    #   @return [Types::FlowTransitEncryption]
+    # @!attribute ndi_output_timecode_source
+    #   <p>Controls how MediaConnect generates timecodes for NDI output frames. If you don't specify this field, MediaConnect uses <code>EMBEDDED_TIMECODE</code>.</p> <ul> <li> <p> <code>EMBEDDED_TIMECODE</code> (default) - Preserves timecodes from the input transport stream. The timecodes must be embedded in the video stream as SEI timing messages. If no embedded timecode is detected, MediaConnect uses the UTC system time instead.</p> </li> <li> <p> <code>UTC_SYSTEM_TIME</code> - Generates timecodes based on the system clock time when each frame is sent.</p> </li> </ul>
+    #   @return [String]
+    # @!attribute ndi_audio_reference_level
+    #   <p>The audio reference level of the NDI receiver, in decibels relative to full scale (dBFS). Common values are <code>-20</code> (NDI and SMPTE) and <code>-18</code> (EBU). If you don't specify this field, MediaConnect uses <code>-20</code>.</p>
+    #   @return [Integer]
     class AddOutputRequest < Struct.new(
       nil,
       :cidr_allow_list,
@@ -464,6 +483,11 @@ module Aws::MediaConnect
       :output_status,
       :ndi_speed_hq_quality,
       :ndi_program_name,
+      :output_tags,
+      :router_integration_state,
+      :router_integration_transit_encryption,
+      :ndi_output_timecode_source,
+      :ndi_audio_reference_level,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -481,6 +505,14 @@ module Aws::MediaConnect
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Configuration settings for automatic encryption key management, where MediaConnect handles key creation and rotation.</p>
+    class AutomaticEncryptionKeyConfiguration < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>This exception is thrown if the request contains a semantic error. The precise meaning depends on the API, and is documented in the error message. </p>
     # @!attribute message
     #   @return [String]
@@ -492,14 +524,168 @@ module Aws::MediaConnect
       include ::Smithy::Schema::Structure
     end
 
+    # <p>An error that occurred when retrieving multiple router inputs in the BatchGetRouterInput operation, including the ARN, error code, and error message.</p>
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the router input for which the error occurred.</p>
+    #   @return [String]
+    # @!attribute code
+    #   <p>The error code associated with the error.</p>
+    #   @return [String]
+    # @!attribute message
+    #   <p>A message describing the error.</p>
+    #   @return [String]
+    class BatchGetRouterInputError < Struct.new(
+      nil,
+      :arn,
+      :code,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arns
+    #   <p>The Amazon Resource Names (ARNs) of the router inputs you want to retrieve information about.</p>
+    #   @return [Array<String>]
+    class BatchGetRouterInputRequest < Struct.new(
+      nil,
+      :arns,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute router_inputs
+    #   <p>An array of router inputs that were successfully retrieved.</p>
+    #   @return [Array<Types::RouterInput>]
+    # @!attribute errors
+    #   <p>An array of errors that occurred when retrieving the requested router inputs.</p>
+    #   @return [Array<Types::BatchGetRouterInputError>]
+    class BatchGetRouterInputResponse < Struct.new(
+      nil,
+      :router_inputs,
+      :errors,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>An error that occurred when retrieving multiple router network interfaces in the BatchGetRouterNetworkInterface operation, including the ARN, error code, and error message.</p>
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the router network interface for which the error occurred.</p>
+    #   @return [String]
+    # @!attribute code
+    #   <p>The error code associated with the error.</p>
+    #   @return [String]
+    # @!attribute message
+    #   <p>A message describing the error.</p>
+    #   @return [String]
+    class BatchGetRouterNetworkInterfaceError < Struct.new(
+      nil,
+      :arn,
+      :code,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arns
+    #   <p>The Amazon Resource Names (ARNs) of the router network interfaces you want to retrieve information about.</p>
+    #   @return [Array<String>]
+    class BatchGetRouterNetworkInterfaceRequest < Struct.new(
+      nil,
+      :arns,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute router_network_interfaces
+    #   <p>An array of router network interfaces that were successfully retrieved.</p>
+    #   @return [Array<Types::RouterNetworkInterface>]
+    # @!attribute errors
+    #   <p>An array of errors that occurred when retrieving the requested router network interfaces.</p>
+    #   @return [Array<Types::BatchGetRouterNetworkInterfaceError>]
+    class BatchGetRouterNetworkInterfaceResponse < Struct.new(
+      nil,
+      :router_network_interfaces,
+      :errors,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>An error that occurred when retrieving multiple router outputs in the BatchGetRouterOutput operation, including the ARN, error code, and error message.</p>
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the router output for which the error occurred.</p>
+    #   @return [String]
+    # @!attribute code
+    #   <p>The error code associated with the error.</p>
+    #   @return [String]
+    # @!attribute message
+    #   <p>A message describing the error.</p>
+    #   @return [String]
+    class BatchGetRouterOutputError < Struct.new(
+      nil,
+      :arn,
+      :code,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arns
+    #   <p>The Amazon Resource Names (ARNs) of the router outputs you want to retrieve information about.</p>
+    #   @return [Array<String>]
+    class BatchGetRouterOutputRequest < Struct.new(
+      nil,
+      :arns,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute router_outputs
+    #   <p>An array of router outputs that were successfully retrieved.</p>
+    #   @return [Array<Types::RouterOutput>]
+    # @!attribute errors
+    #   <p>An array of errors that occurred when retrieving the requested router outputs.</p>
+    #   @return [Array<Types::BatchGetRouterOutputError>]
+    class BatchGetRouterOutputResponse < Struct.new(
+      nil,
+      :router_outputs,
+      :errors,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p> Configures settings for the <code>BlackFrames</code> metric.</p>
     # @!attribute state
-    #   <p> Indicates whether the <code>BlackFrames</code> metric is enabled or disabled..</p>
+    #   <p> Indicates whether the <code>BlackFrames</code> metric is enabled or disabled.</p>
     #   @return [String]
     # @!attribute threshold_seconds
     #   <p> Specifies the number of consecutive seconds of black frames that triggers an event or alert.</p>
     #   @return [Integer]
     class BlackFrames < Struct.new(
+      nil,
+      :state,
+      :threshold_seconds,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Detects black frames in the router input's source content and reports them through a CloudWatch metric, an EventBridge event, and a router input message.</p>
+    # @!attribute state
+    #   <p>Indicates whether black frames detection is enabled or disabled.</p>
+    #   @return [String]
+    # @!attribute threshold_seconds
+    #   <p>The number of consecutive seconds of black frames that MediaConnect must detect before it reports an issue.</p>
+    #   @return [Integer]
+    class BlackFramesConfiguration < Struct.new(
       nil,
       :state,
       :threshold_seconds,
@@ -696,12 +882,52 @@ module Aws::MediaConnect
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The color signaling of the video stream.</p>
+    # @!attribute colorimetry
+    #   <p>The color primaries that the video stream uses (for example, <code>BT709</code> or <code>BT2020</code>).</p>
+    #   @return [String]
+    # @!attribute transfer_characteristics
+    #   <p>The transfer characteristics that the video stream uses (for example, <code>BT601</code>, <code>BT709</code>, <code>BT2100_PQ</code>, or <code>BT2100_HLG</code>).</p>
+    #   @return [String]
+    # @!attribute matrix_coefficients
+    #   <p>The YCbCr matrix coefficients that the video stream uses (for example, <code>BT709</code> or <code>BT2020_NCL</code>).</p>
+    #   @return [String]
+    class ColorInformation < Struct.new(
+      nil,
+      :colorimetry,
+      :transfer_characteristics,
+      :matrix_coefficients,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The requested operation would cause a conflict with the current state of a service resource associated with the request. Resolve the conflict before retrying this request. </p>
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
       nil,
       :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configures the content quality analysis features for the router input.</p>
+    # @!attribute black_frames
+    #   <p>Settings for black frames detection.</p>
+    #   @return [Types::BlackFramesConfiguration]
+    # @!attribute frozen_frames
+    #   <p>Settings for frozen frames detection.</p>
+    #   @return [Types::FrozenFramesConfiguration]
+    # @!attribute silent_audio
+    #   <p>Settings for silent audio detection.</p>
+    #   @return [Types::SilentAudioConfiguration]
+    class ContentQualityAnalysisFeatureConfiguration < Struct.new(
+      nil,
+      :black_frames,
+      :frozen_frames,
+      :silent_audio,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -809,11 +1035,17 @@ module Aws::MediaConnect
     #   <p> The settings for source monitoring. </p>
     #   @return [Types::MonitoringConfig]
     # @!attribute flow_size
-    #   <p> Determines the processing capacity and feature set of the flow. Set this optional parameter to <code>LARGE</code> if you want to enable NDI outputs on the flow. </p>
+    #   <p> Determines the processing capacity and feature set of the flow. Set this optional parameter to <code>LARGE</code> if you want to enable NDI sources or outputs on the flow. </p>
     #   @return [String]
     # @!attribute ndi_config
-    #   <p> Specifies the configuration settings for NDI outputs. Required when the flow includes NDI outputs. </p>
+    #   <p> Specifies the configuration settings for a flow's NDI source or output. Required when the flow includes an NDI source or output. </p>
     #   @return [Types::NdiConfig]
+    # @!attribute encoding_config
+    #   <p> The encoding configuration to apply to the NDI® source when transcoding it to a transport stream for downstream distribution. You can choose between several predefined encoding profiles based on common use cases. </p>
+    #   @return [Types::EncodingConfig]
+    # @!attribute flow_tags
+    #   <p> The key-value pairs that can be used to tag and organize the flow. </p>
+    #   @return [Hash<String, String>]
     class CreateFlowRequest < Struct.new(
       nil,
       :availability_zone,
@@ -829,6 +1061,8 @@ module Aws::MediaConnect
       :source_monitoring_config,
       :flow_size,
       :ndi_config,
+      :encoding_config,
+      :flow_tags,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -881,6 +1115,180 @@ module Aws::MediaConnect
     class CreateGatewayResponse < Struct.new(
       nil,
       :gateway,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute name
+    #   <p>The name of the router input.</p>
+    #   @return [String]
+    # @!attribute configuration
+    #   <p>The configuration settings for the router input, which can include the protocol, network interface, and other details.</p>
+    #   @return [Types::RouterInputConfiguration]
+    # @!attribute maximum_bitrate
+    #   <p>The maximum bitrate for the router input.</p>
+    #   @return [Integer]
+    # @!attribute routing_scope
+    #   <p>Specifies whether the router input can be assigned to outputs in different Regions. REGIONAL (default) - connects only to outputs in same Region. GLOBAL - connects to outputs in any Region.</p>
+    #   @return [String]
+    # @!attribute tier
+    #   <p>The tier level for the router input. The tier sets the maximum bitrate, in Mbps, for the router input. Valid values include the following:</p> <ul> <li> <p> <code>INPUT_20</code> – 20 Mbps</p> </li> <li> <p> <code>INPUT_50</code> – 50 Mbps</p> </li> <li> <p> <code>INPUT_100</code> – 100 Mbps</p> </li> <li> <p> <code>INPUT_250</code> – 250 Mbps</p> </li> <li> <p> <code>INPUT_500</code> – 500 Mbps</p> </li> </ul> <p>The 250 Mbps and 500 Mbps tiers are high-bitrate tiers that support TR-07 (JPEG XS) workflows.</p>
+    #   @return [String]
+    # @!attribute region_name
+    #   <p>The Amazon Web Services Region for the router input. Defaults to the current region if not specified.</p>
+    #   @return [String]
+    # @!attribute availability_zone
+    #   <p>The Availability Zone where you want to create the router input. This must be a valid Availability Zone for the region specified by <code>regionName</code>, or the current region if no <code>regionName</code> is provided. </p>
+    #   @return [String]
+    # @!attribute transit_encryption
+    #   <p>The transit encryption settings for the router input.</p>
+    #   @return [Types::RouterInputTransitEncryption]
+    # @!attribute maintenance_configuration
+    #   <p>The maintenance configuration settings for the router input, including preferred maintenance windows and schedules.</p>
+    #   @return [Types::MaintenanceConfiguration]
+    # @!attribute tags
+    #   <p>Key-value pairs that can be used to tag and organize this router input.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute client_token
+    #   <p>A unique identifier for the request to ensure idempotency.</p>
+    #   @return [String]
+    # @!attribute content_quality_analysis_configuration
+    #   <p>The content quality analysis configuration for the router input.</p>
+    #   @return [Types::RouterContentQualityAnalysisConfiguration]
+    class CreateRouterInputRequest < Struct.new(
+      nil,
+      :name,
+      :configuration,
+      :maximum_bitrate,
+      :routing_scope,
+      :tier,
+      :region_name,
+      :availability_zone,
+      :transit_encryption,
+      :maintenance_configuration,
+      :tags,
+      :client_token,
+      :content_quality_analysis_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute router_input
+    #   <p>The newly-created router input.</p>
+    #   @return [Types::RouterInput]
+    class CreateRouterInputResponse < Struct.new(
+      nil,
+      :router_input,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute name
+    #   <p>The name of the router network interface.</p>
+    #   @return [String]
+    # @!attribute configuration
+    #   <p>The configuration settings for the router network interface.</p>
+    #   @return [Types::RouterNetworkInterfaceConfiguration]
+    # @!attribute region_name
+    #   <p>The Amazon Web Services Region for the router network interface. Defaults to the current region if not specified.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>Key-value pairs that can be used to tag and organize this router network interface.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute client_token
+    #   <p>A unique identifier for the request to ensure idempotency.</p>
+    #   @return [String]
+    class CreateRouterNetworkInterfaceRequest < Struct.new(
+      nil,
+      :name,
+      :configuration,
+      :region_name,
+      :tags,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute router_network_interface
+    #   <p>The newly-created router network interface.</p>
+    #   @return [Types::RouterNetworkInterface]
+    class CreateRouterNetworkInterfaceResponse < Struct.new(
+      nil,
+      :router_network_interface,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute name
+    #   <p>The name of the router output.</p>
+    #   @return [String]
+    # @!attribute configuration
+    #   <p>The configuration settings for the router output.</p>
+    #   @return [Types::RouterOutputConfiguration]
+    # @!attribute maximum_bitrate
+    #   <p>The maximum bitrate for the router output.</p>
+    #   @return [Integer]
+    # @!attribute routing_scope
+    #   <p>Specifies whether the router output can take inputs that are in different Regions. REGIONAL (default) - can only take inputs from same Region. GLOBAL - can take inputs from any Region.</p>
+    #   @return [String]
+    # @!attribute tier
+    #   <p>The tier level for the router output. The tier sets the maximum bitrate, in Mbps, for the router output. Valid values include the following:</p> <ul> <li> <p> <code>OUTPUT_20</code> – 20 Mbps</p> </li> <li> <p> <code>OUTPUT_50</code> – 50 Mbps</p> </li> <li> <p> <code>OUTPUT_100</code> – 100 Mbps</p> </li> <li> <p> <code>OUTPUT_250</code> – 250 Mbps</p> </li> <li> <p> <code>OUTPUT_500</code> – 500 Mbps</p> </li> </ul> <p>The 250 Mbps and 500 Mbps tiers are high-bitrate tiers that support TR-07 (JPEG XS) workflows.</p>
+    #   @return [String]
+    # @!attribute region_name
+    #   <p>The Amazon Web Services Region for the router output. Defaults to the current region if not specified.</p>
+    #   @return [String]
+    # @!attribute availability_zone
+    #   <p>The Availability Zone where you want to create the router output. This must be a valid Availability Zone for the region specified by <code>regionName</code>, or the current region if no <code>regionName</code> is provided. </p>
+    #   @return [String]
+    # @!attribute maintenance_configuration
+    #   <p>The maintenance configuration settings for the router output, including preferred maintenance windows and schedules.</p>
+    #   @return [Types::MaintenanceConfiguration]
+    # @!attribute tags
+    #   <p>Key-value pairs that can be used to tag this router output.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute fabric_configuration
+    #   <p>The fabric configuration settings for the router output.</p>
+    #   @return [Types::FabricConfiguration]
+    # @!attribute client_token
+    #   <p>A unique identifier for the request to ensure idempotency.</p>
+    #   @return [String]
+    class CreateRouterOutputRequest < Struct.new(
+      nil,
+      :name,
+      :configuration,
+      :maximum_bitrate,
+      :routing_scope,
+      :tier,
+      :region_name,
+      :availability_zone,
+      :maintenance_configuration,
+      :tags,
+      :fabric_configuration,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute router_output
+    #   <p>The newly-created router output.</p>
+    #   @return [Types::RouterOutput]
+    class CreateRouterOutputResponse < Struct.new(
+      nil,
+      :router_output,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration settings for default maintenance scheduling.</p>
+    class DefaultMaintenanceConfiguration < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -951,6 +1359,96 @@ module Aws::MediaConnect
     class DeleteGatewayResponse < Struct.new(
       nil,
       :gateway_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the router input that you want to delete.</p>
+    #   @return [String]
+    class DeleteRouterInputRequest < Struct.new(
+      nil,
+      :arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>The ARN of the deleted router input.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the deleted router input.</p>
+    #   @return [String]
+    # @!attribute state
+    #   <p>The current state of the deleted router input, indicating where it is in the deletion process.</p>
+    #   @return [String]
+    class DeleteRouterInputResponse < Struct.new(
+      nil,
+      :arn,
+      :name,
+      :state,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the router network interface that you want to delete.</p>
+    #   @return [String]
+    class DeleteRouterNetworkInterfaceRequest < Struct.new(
+      nil,
+      :arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>The ARN of the deleted router network interface.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the deleted router network interface.</p>
+    #   @return [String]
+    # @!attribute state
+    #   <p>The current state of the deleted router network interface, indicating where it is in the deletion process.</p>
+    #   @return [String]
+    class DeleteRouterNetworkInterfaceResponse < Struct.new(
+      nil,
+      :arn,
+      :name,
+      :state,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the router output that you want to delete.</p>
+    #   @return [String]
+    class DeleteRouterOutputRequest < Struct.new(
+      nil,
+      :arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>The ARN of the deleted router output.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the deleted router output.</p>
+    #   @return [String]
+    # @!attribute state
+    #   <p>The current state of the deleted router output, indicating where it is in the deletion process.</p>
+    #   @return [String]
+    class DeleteRouterOutputResponse < Struct.new(
+      nil,
+      :arn,
+      :name,
+      :state,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1057,12 +1555,16 @@ module Aws::MediaConnect
     # @!attribute transport_media_info
     #   <p> Information about the flow's transport media. </p>
     #   @return [Types::TransportMediaInfo]
+    # @!attribute ndi_info
+    #   <p> The NDI® specific information about the flow's source. This includes the current active NDI sender, a list of all discovered NDI senders, the associated media streams for the active NDI sender, and any relevant status messages. </p>
+    #   @return [Types::NdiSourceMetadataInfo]
     class DescribeFlowSourceMetadataResponse < Struct.new(
       nil,
       :flow_arn,
       :messages,
       :timestamp,
       :transport_media_info,
+      :ndi_info,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1238,6 +1740,22 @@ module Aws::MediaConnect
       include ::Smithy::Schema::Structure
     end
 
+    # <p> The encoding configuration to apply to the NDI® source when transcoding it to a transport stream for downstream distribution. You can choose between several predefined encoding profiles based on common use cases. </p>
+    # @!attribute encoding_profile
+    #   <p> The encoding profile to use when transcoding the NDI source content to a transport stream. You can change this value while the flow is running. </p>
+    #   @return [String]
+    # @!attribute video_max_bitrate
+    #   <p> The maximum video bitrate to use when transcoding the NDI source to a transport stream. This parameter enables you to override the default video bitrate within the encoding profile's supported range. </p> <p> The supported range is 10,000,000 - 50,000,000 bits per second (bps). If you don't specify a value, MediaConnect uses the default value of 20,000,000 bps. </p>
+    #   @return [Integer]
+    class EncodingConfig < Struct.new(
+      nil,
+      :encoding_profile,
+      :video_max_bitrate,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p> A collection of parameters that determine how MediaConnect will convert the content. These fields only apply to outputs on flows that have a CDI source.</p>
     # @!attribute compression_factor
     #   <p> A value that is used to calculate compression for an output. The bitrate of the output is calculated as follows: Output bitrate = (1 / compressionFactor) * (source bitrate) This property only applies to outputs that use the ST 2110 JPEG XS protocol, with a flow source that uses the CDI protocol. Valid values are floating point numbers in the range of 3.0 to 10.0, inclusive.</p>
@@ -1270,7 +1788,7 @@ module Aws::MediaConnect
       include ::Smithy::Schema::Structure
     end
 
-    # <p> Information about the encryption of the flow.</p>
+    # <p> Encryption information.</p>
     # @!attribute algorithm
     #   <p> The type of algorithm that is used for the encryption (such as aes128, aes192, or aes256).</p>
     #   @return [String]
@@ -1350,6 +1868,18 @@ module Aws::MediaConnect
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The fabric configuration settings for the router output.</p>
+    # @!attribute recovery_latency_mode
+    #   <p>The recovery latency mode for the router fabric connection. Valid values include the following:</p> <ul> <li> <p> <code>BALANCED</code> (default) – Optimizes for stream quality.</p> </li> <li> <p> <code>LOW_LATENCY</code> – Reduces latency at the potential cost of stream quality under adverse network conditions.</p> </li> </ul>
+    #   @return [String]
+    class FabricConfiguration < Struct.new(
+      nil,
+      :recovery_latency_mode,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p> The settings for source failover.</p>
     # @!attribute failover_mode
     #   <p> The type of failover you choose for this flow. MERGE combines the source streams into a single stream, allowing graceful recovery from any single-source loss. FAILOVER allows switching between different streams.</p>
@@ -1369,6 +1899,92 @@ module Aws::MediaConnect
       :recovery_window,
       :source_priority,
       :state,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration settings for a failover router input that allows switching between two input sources.</p>
+    # @!attribute network_interface_arn
+    #   <p>The ARN of the network interface to use for this failover router input.</p>
+    #   @return [String]
+    # @!attribute protocol_configurations
+    #   <p>A list of exactly two protocol configurations for the failover input sources. Both must use the same protocol type.</p>
+    #   @return [Array<Types::FailoverRouterInputProtocolConfiguration>]
+    # @!attribute source_priority_mode
+    #   <p>The mode for determining source priority in failover configurations.</p>
+    #   @return [String]
+    # @!attribute primary_source_index
+    #   <p>The index (0 or 1) that specifies which source in the protocol configurations list is currently active. Used to control which of the two failover sources is currently selected. This field is ignored when sourcePriorityMode is set to NO_PRIORITY</p>
+    #   @return [Integer]
+    class FailoverRouterInputConfiguration < Struct.new(
+      nil,
+      :network_interface_arn,
+      :protocol_configurations,
+      :source_priority_mode,
+      :primary_source_index,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration details for an indexed stream in a failover router input setup.</p>
+    # @!attribute source_index
+    #   <p>The index number (0 or 1) assigned to this source in the failover configuration.</p>
+    #   @return [Integer]
+    # @!attribute source_ip_address
+    #   <p>The IP address of the source for this indexed stream.</p>
+    #   @return [String]
+    class FailoverRouterInputIndexedStreamDetails < Struct.new(
+      nil,
+      :source_index,
+      :source_ip_address,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Protocol configuration settings for failover router inputs.</p>
+    # @!attribute rist
+    #   <p>The configuration settings for a router input using the RIST (Reliable Internet Stream Transport) protocol, including the port and recovery latency.</p>
+    #   @return [Types::RistRouterInputConfiguration]
+    # @!attribute srt_listener
+    #   <p>The configuration settings for a router input using the SRT (Secure Reliable Transport) protocol in listener mode, including the port, minimum latency, and decryption key configuration.</p>
+    #   @return [Types::SrtListenerRouterInputConfiguration]
+    # @!attribute srt_caller
+    #   <p>The configuration settings for a router input using the SRT (Secure Reliable Transport) protocol in caller mode, including the source address and port, minimum latency, stream ID, and decryption key configuration.</p>
+    #   @return [Types::SrtCallerRouterInputConfiguration]
+    # @!attribute rtp
+    #   <p>The configuration settings for a Router Input using the RTP (Real-Time Transport Protocol) protocol, including the port and forward error correction state.</p>
+    #   @return [Types::RtpRouterInputConfiguration]
+    class FailoverRouterInputProtocolConfiguration < Struct.new(
+      :rist,
+      :srt_listener,
+      :srt_caller,
+      :rtp,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class Rist < FailoverRouterInputProtocolConfiguration; end
+      class SrtListener < FailoverRouterInputProtocolConfiguration; end
+      class SrtCaller < FailoverRouterInputProtocolConfiguration; end
+      class Rtp < FailoverRouterInputProtocolConfiguration; end
+      class Unknown < FailoverRouterInputProtocolConfiguration; end
+    end
+
+    # <p>Configuration details for a failover router input that can automatically switch between two sources.</p>
+    # @!attribute source_index_zero_stream_details
+    #   <p>Configuration details for the primary source (index 0) in the failover setup.</p>
+    #   @return [Types::FailoverRouterInputIndexedStreamDetails]
+    # @!attribute source_index_one_stream_details
+    #   <p>Configuration details for the secondary source (index 1) in the failover setup.</p>
+    #   @return [Types::FailoverRouterInputIndexedStreamDetails]
+    class FailoverRouterInputStreamDetails < Struct.new(
+      nil,
+      :source_index_zero_stream_details,
+      :source_index_one_stream_details,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1421,11 +2037,14 @@ module Aws::MediaConnect
     #   <p> The settings for source monitoring. </p>
     #   @return [Types::MonitoringConfig]
     # @!attribute flow_size
-    #   <p> Determines the processing capacity and feature set of the flow. Set this optional parameter to LARGE if you want to enable NDI outputs on the flow. </p>
+    #   <p> Determines the processing capacity and feature set of the flow. </p>
     #   @return [String]
     # @!attribute ndi_config
-    #   <p>Specifies the configuration settings for NDI outputs. Required when the flow includes NDI outputs. </p>
+    #   <p>Specifies the configuration settings for a flow's NDI source or output. Required when the flow includes an NDI source or output.</p>
     #   @return [Types::NdiConfig]
+    # @!attribute encoding_config
+    #   <p> The encoding configuration to apply to the NDI® source when transcoding it to a transport stream for downstream distribution. </p>
+    #   @return [Types::EncodingConfig]
     class Flow < Struct.new(
       nil,
       :availability_zone,
@@ -1445,9 +2064,46 @@ module Aws::MediaConnect
       :source_monitoring_config,
       :flow_size,
       :ndi_config,
+      :encoding_config,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration that defines how content is encrypted during transit between the MediaConnect router and a MediaConnect flow.</p>
+    # @!attribute encryption_key_type
+    #   <p>The type of encryption key to use for flow transit encryption.</p>
+    #   @return [String]
+    # @!attribute encryption_key_configuration
+    #   <p>The configuration details for the encryption key.</p>
+    #   @return [Types::FlowTransitEncryptionKeyConfiguration]
+    class FlowTransitEncryption < Struct.new(
+      nil,
+      :encryption_key_type,
+      :encryption_key_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration settings for flow transit encryption keys.</p>
+    # @!attribute secrets_manager
+    #   <p>The configuration settings for transit encryption using Secrets Manager, including the secret ARN and role ARN.</p>
+    #   @return [Types::SecretsManagerEncryptionKeyConfiguration]
+    # @!attribute automatic
+    #   <p>Configuration settings for automatic encryption key management, where MediaConnect handles key creation and rotation.</p>
+    #   @return [Types::AutomaticEncryptionKeyConfiguration]
+    class FlowTransitEncryptionKeyConfiguration < Struct.new(
+      :secrets_manager,
+      :automatic,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class SecretsManager < FlowTransitEncryptionKeyConfiguration; end
+      class Automatic < FlowTransitEncryptionKeyConfiguration; end
+      class Unknown < FlowTransitEncryptionKeyConfiguration; end
     end
 
     # <p> A set of parameters that define the media stream. </p>
@@ -1565,6 +2221,22 @@ module Aws::MediaConnect
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Detects frozen video frames in the router input's source content and reports them through a CloudWatch metric, an EventBridge event, and a router input message.</p>
+    # @!attribute state
+    #   <p>Indicates whether frozen frames detection is enabled or disabled.</p>
+    #   @return [String]
+    # @!attribute threshold_seconds
+    #   <p>The number of consecutive seconds of a frozen frame that MediaConnect must detect before it reports an issue.</p>
+    #   @return [Integer]
+    class FrozenFramesConfiguration < Struct.new(
+      nil,
+      :state,
+      :threshold_seconds,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The settings for a gateway, including its networks. </p>
     # @!attribute egress_cidr_blocks
     #   <p> The range of IP addresses that contribute content or initiate output requests for flows communicating with this gateway. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.</p>
@@ -1669,6 +2341,132 @@ module Aws::MediaConnect
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the router input to retrieve information about.</p>
+    #   @return [String]
+    class GetRouterInputRequest < Struct.new(
+      nil,
+      :arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute router_input
+    #   <p>The details of the requested router input, including its configuration, state, and other attributes.</p>
+    #   @return [Types::RouterInput]
+    class GetRouterInputResponse < Struct.new(
+      nil,
+      :router_input,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the router input to retrieve metadata for.</p>
+    #   @return [String]
+    class GetRouterInputSourceMetadataRequest < Struct.new(
+      nil,
+      :arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the router input.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the router input.</p>
+    #   @return [String]
+    # @!attribute source_metadata_details
+    #   <p>Detailed metadata information about the router input source, including connection state, timestamps, and stream configuration.</p>
+    #   @return [Types::RouterInputSourceMetadataDetails]
+    class GetRouterInputSourceMetadataResponse < Struct.new(
+      nil,
+      :arn,
+      :name,
+      :source_metadata_details,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the router input that you want to see a thumbnail of.</p>
+    #   @return [String]
+    class GetRouterInputThumbnailRequest < Struct.new(
+      nil,
+      :arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>The ARN of the router input.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the router input.</p>
+    #   @return [String]
+    # @!attribute thumbnail_details
+    #   <p>The details of the thumbnail associated with the router input, including the thumbnail image, timecode, timestamp, and any associated error messages.</p>
+    #   @return [Types::RouterInputThumbnailDetails]
+    class GetRouterInputThumbnailResponse < Struct.new(
+      nil,
+      :arn,
+      :name,
+      :thumbnail_details,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the router network interface that you want to retrieve information about.</p>
+    #   @return [String]
+    class GetRouterNetworkInterfaceRequest < Struct.new(
+      nil,
+      :arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute router_network_interface
+    #   <p>The details of the requested router network interface, including its configuration and other attributes.</p>
+    #   @return [Types::RouterNetworkInterface]
+    class GetRouterNetworkInterfaceResponse < Struct.new(
+      nil,
+      :router_network_interface,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the router output that you want to retrieve information about.</p>
+    #   @return [String]
+    class GetRouterOutputRequest < Struct.new(
+      nil,
+      :arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute router_output
+    #   <p>The details of the requested router output, including its configuration, state, and other attributes.</p>
+    #   @return [Types::RouterOutput]
+    class GetRouterOutputResponse < Struct.new(
+      nil,
+      :router_output,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p> The entitlements that you want to grant on a flow.</p>
     # @!attribute data_transfer_subscriber_fee_percent
     #   <p> Percentage from 0-100 of the data transfer cost to be billed to the subscriber.</p>
@@ -1688,6 +2486,9 @@ module Aws::MediaConnect
     # @!attribute subscribers
     #   <p> The Amazon Web Services account IDs that you want to share your content with. The receiving accounts (subscribers) will be allowed to create their own flows using your content as the source.</p>
     #   @return [Array<String>]
+    # @!attribute entitlement_tags
+    #   <p> The key-value pairs that can be used to tag and organize the entitlement. </p>
+    #   @return [Hash<String, String>]
     class GrantEntitlementRequest < Struct.new(
       nil,
       :data_transfer_subscriber_fee_percent,
@@ -1696,6 +2497,7 @@ module Aws::MediaConnect
       :entitlement_status,
       :name,
       :subscribers,
+      :entitlement_tags,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2051,6 +2853,130 @@ module Aws::MediaConnect
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute max_results
+    #   <p>The maximum number of router inputs to return in the response.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>A token used to retrieve the next page of results.</p>
+    #   @return [String]
+    # @!attribute filters
+    #   <p>The filters to apply when retrieving the list of router inputs.</p>
+    #   @return [Array<Types::RouterInputFilter>]
+    class ListRouterInputsRequest < Struct.new(
+      nil,
+      :max_results,
+      :next_token,
+      :filters,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute router_inputs
+    #   <p>The summary information for the retrieved router inputs.</p>
+    #   @return [Array<Types::ListedRouterInput>]
+    # @!attribute next_token
+    #   <p>The token to use to retrieve the next page of results.</p>
+    #   @return [String]
+    class ListRouterInputsResponse < Struct.new(
+      nil,
+      :router_inputs,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute max_results
+    #   <p>The maximum number of router network interfaces to return in the response.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>A token used to retrieve the next page of results.</p>
+    #   @return [String]
+    # @!attribute filters
+    #   <p>The filters to apply when retrieving the list of router network interfaces.</p>
+    #   @return [Array<Types::RouterNetworkInterfaceFilter>]
+    class ListRouterNetworkInterfacesRequest < Struct.new(
+      nil,
+      :max_results,
+      :next_token,
+      :filters,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute router_network_interfaces
+    #   <p>The summary information for the retrieved router network interfaces.</p>
+    #   @return [Array<Types::ListedRouterNetworkInterface>]
+    # @!attribute next_token
+    #   <p>The token to use to retrieve the next page of results.</p>
+    #   @return [String]
+    class ListRouterNetworkInterfacesResponse < Struct.new(
+      nil,
+      :router_network_interfaces,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute max_results
+    #   <p>The maximum number of router outputs to return in the response.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>A token used to retrieve the next page of results.</p>
+    #   @return [String]
+    # @!attribute filters
+    #   <p>The filters to apply when retrieving the list of router outputs.</p>
+    #   @return [Array<Types::RouterOutputFilter>]
+    class ListRouterOutputsRequest < Struct.new(
+      nil,
+      :max_results,
+      :next_token,
+      :filters,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute router_outputs
+    #   <p>The summary information for the retrieved router outputs.</p>
+    #   @return [Array<Types::ListedRouterOutput>]
+    # @!attribute next_token
+    #   <p>The token to use to retrieve the next page of results.</p>
+    #   @return [String]
+    class ListRouterOutputsResponse < Struct.new(
+      nil,
+      :router_outputs,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the global resource whose tags you want to list.</p>
+    #   @return [String]
+    class ListTagsForGlobalResourceRequest < Struct.new(
+      nil,
+      :resource_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute tags
+    #   <p>A map of tag keys and values associated with the global resource.</p>
+    #   @return [Hash<String, String>]
+    class ListTagsForGlobalResourceResponse < Struct.new(
+      nil,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute resource_arn
     #   <p> The Amazon Resource Name (ARN) that identifies the MediaConnect resource for which to list the tags.</p>
     #   @return [String]
@@ -2201,6 +3127,202 @@ module Aws::MediaConnect
       include ::Smithy::Schema::Structure
     end
 
+    # <p>A summary of a router input, including its name, type, ARN, ID, state, and other key details. This structure is used in the response of the ListRouterInputs operation.</p>
+    # @!attribute name
+    #   <p>The name of the router input.</p>
+    #   @return [String]
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the router input.</p>
+    #   @return [String]
+    # @!attribute id
+    #   <p>The unique identifier of the router input.</p>
+    #   @return [String]
+    # @!attribute input_type
+    #   <p>The type of the router input.</p>
+    #   @return [String]
+    # @!attribute state
+    #   <p>The overall state of the router input.</p>
+    #   @return [String]
+    # @!attribute routed_outputs
+    #   <p>The number of router outputs that are associated with this router input.</p>
+    #   @return [Integer]
+    # @!attribute region_name
+    #   <p>The Amazon Web Services Region where the router input is located.</p>
+    #   @return [String]
+    # @!attribute availability_zone
+    #   <p>The Availability Zone of the router input.</p>
+    #   @return [String]
+    # @!attribute maximum_bitrate
+    #   <p>The maximum bitrate of the router input.</p>
+    #   @return [Integer]
+    # @!attribute routing_scope
+    #   <p>Indicates whether the router input is configured for Regional or global routing.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The timestamp when the router input was created.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The timestamp when the router input was last updated.</p>
+    #   @return [Time]
+    # @!attribute message_count
+    #   <p>The number of messages associated with the router input.</p>
+    #   @return [Integer]
+    # @!attribute network_interface_arn
+    #   <p>The ARN of the network interface associated with the router input.</p>
+    #   @return [String]
+    # @!attribute maintenance_schedule_type
+    #   <p>The type of maintenance schedule currently associated with the listed router input.</p>
+    #   @return [String]
+    # @!attribute maintenance_schedule
+    #   <p>The details of the maintenance schedule for the listed router input.</p>
+    #   @return [Types::MaintenanceSchedule]
+    class ListedRouterInput < Struct.new(
+      nil,
+      :name,
+      :arn,
+      :id,
+      :input_type,
+      :state,
+      :routed_outputs,
+      :region_name,
+      :availability_zone,
+      :maximum_bitrate,
+      :routing_scope,
+      :created_at,
+      :updated_at,
+      :message_count,
+      :network_interface_arn,
+      :maintenance_schedule_type,
+      :maintenance_schedule,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A summary of a router network interface, including its name, type, ARN, ID, associated input/output counts, state, and other key details. This structure is used in the response of the ListRouterNetworkInterfaces operation.</p>
+    # @!attribute name
+    #   <p>The name of the router network interface.</p>
+    #   @return [String]
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the router network interface.</p>
+    #   @return [String]
+    # @!attribute id
+    #   <p>The unique identifier of the router network interface.</p>
+    #   @return [String]
+    # @!attribute network_interface_type
+    #   <p>The type of the router network interface.</p>
+    #   @return [String]
+    # @!attribute associated_output_count
+    #   <p>The number of router outputs associated with the network interface.</p>
+    #   @return [Integer]
+    # @!attribute associated_input_count
+    #   <p>The number of router inputs associated with the network interface.</p>
+    #   @return [Integer]
+    # @!attribute state
+    #   <p>The current state of the router network interface.</p>
+    #   @return [String]
+    # @!attribute region_name
+    #   <p>The Amazon Web Services Region where the router network interface is located.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The timestamp when the network interface was created.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The timestamp when the router network interface was last updated.</p>
+    #   @return [Time]
+    class ListedRouterNetworkInterface < Struct.new(
+      nil,
+      :name,
+      :arn,
+      :id,
+      :network_interface_type,
+      :associated_output_count,
+      :associated_input_count,
+      :state,
+      :region_name,
+      :created_at,
+      :updated_at,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A summary of a router output, including its name, type, ARN, ID, state, routed state, and other key details. This structure is used in the response of the ListRouterOutputs operation.</p>
+    # @!attribute name
+    #   <p>The name of the router output.</p>
+    #   @return [String]
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the router output.</p>
+    #   @return [String]
+    # @!attribute id
+    #   <p>The unique identifier of the router output.</p>
+    #   @return [String]
+    # @!attribute output_type
+    #   <p>The type of the router output.</p>
+    #   @return [String]
+    # @!attribute state
+    #   <p>The overall state of the router output.</p>
+    #   @return [String]
+    # @!attribute routed_state
+    #   <p>The current state of the association between the router output and its input.</p>
+    #   @return [String]
+    # @!attribute region_name
+    #   <p>The AAmazon Web Services Region where the router output is located.</p>
+    #   @return [String]
+    # @!attribute availability_zone
+    #   <p>The Availability Zone of the router output.</p>
+    #   @return [String]
+    # @!attribute maximum_bitrate
+    #   <p>The maximum bitrate of the router output.</p>
+    #   @return [Integer]
+    # @!attribute routing_scope
+    #   <p>Indicates whether the router output is configured for Regional or global routing.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The timestamp when the router output was created.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The timestamp when the router output was last updated.</p>
+    #   @return [Time]
+    # @!attribute message_count
+    #   <p>The number of messages associated with the router output.</p>
+    #   @return [Integer]
+    # @!attribute routed_input_arn
+    #   <p>The ARN of the router input associated with the output.</p>
+    #   @return [String]
+    # @!attribute network_interface_arn
+    #   <p>The ARN of the network interface associated with the router output.</p>
+    #   @return [String]
+    # @!attribute maintenance_schedule_type
+    #   <p>The type of maintenance schedule currently associated with the listed router output.</p>
+    #   @return [String]
+    # @!attribute maintenance_schedule
+    #   <p>The details of the maintenance schedule for the listed router output.</p>
+    #   @return [Types::MaintenanceSchedule]
+    class ListedRouterOutput < Struct.new(
+      nil,
+      :name,
+      :arn,
+      :id,
+      :output_type,
+      :state,
+      :routed_state,
+      :region_name,
+      :availability_zone,
+      :maximum_bitrate,
+      :routing_scope,
+      :created_at,
+      :updated_at,
+      :message_count,
+      :routed_input_arn,
+      :network_interface_arn,
+      :maintenance_schedule_type,
+      :maintenance_schedule,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p> The maintenance setting of a flow.</p>
     # @!attribute maintenance_day
     #   <p> A day of a week when the maintenance will happen. Use Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday.</p>
@@ -2223,6 +3345,193 @@ module Aws::MediaConnect
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration settings for maintenance operations, including preferred maintenance windows and schedules.</p>
+    # @!attribute preferred_day_time
+    #   <p>Preferred day and time maintenance configuration settings.</p>
+    #   @return [Types::PreferredDayTimeMaintenanceConfiguration]
+    # @!attribute default
+    #   <p>Default maintenance configuration settings.</p>
+    #   @return [Types::DefaultMaintenanceConfiguration]
+    class MaintenanceConfiguration < Struct.new(
+      :preferred_day_time,
+      :default,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class PreferredDayTime < MaintenanceConfiguration; end
+      class Default < MaintenanceConfiguration; end
+      class Unknown < MaintenanceConfiguration; end
+    end
+
+    # <p>The details of the maintenance schedule.</p>
+    # @!attribute window
+    #   <p>Defines a specific time window for maintenance operations.</p>
+    #   @return [Types::WindowMaintenanceSchedule]
+    class MaintenanceSchedule < Struct.new(
+      :window,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class Window < MaintenanceSchedule; end
+      class Unknown < MaintenanceSchedule; end
+    end
+
+    # <p>Configuration settings for connecting a router input to a flow output.</p> <p>To connect the router input to the flow output, provide both <code>flowArn</code> and <code>flowOutputArn</code>. To disconnect it, call the update operation and omit both fields while keeping this configuration object.</p> <note> <p>You can't change <code>sourceTransitDecryption</code> while the router input is connected to a flow output. To change it, first disconnect the router input, then update the decryption.</p> </note>
+    # @!attribute flow_arn
+    #   <p>The ARN of the flow to connect to.</p>
+    #   @return [String]
+    # @!attribute flow_output_arn
+    #   <p>The ARN of the flow output to connect to this router input.</p>
+    #   @return [String]
+    # @!attribute source_transit_decryption
+    #   <p>The decryption configuration for the flow source when connected to this router input.</p>
+    #   @return [Types::FlowTransitEncryption]
+    class MediaConnectFlowRouterInputConfiguration < Struct.new(
+      nil,
+      :flow_arn,
+      :flow_output_arn,
+      :source_transit_decryption,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration details for a MediaConnect flow when used as a router input source.</p>
+    class MediaConnectFlowRouterInputStreamDetails < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration settings for connecting a router output to a MediaConnect flow source.</p> <p>To connect the router output to the flow source, provide both <code>flowArn</code> and <code>flowSourceArn</code>. To disconnect it, call the update operation and omit both fields while keeping this configuration object.</p> <note> <p>You can't change <code>destinationTransitEncryption</code> while the router output is connected to a flow source. To change it, first disconnect the router output, then update the encryption.</p> </note>
+    # @!attribute flow_arn
+    #   <p>The ARN of the flow to connect to this router output.</p>
+    #   @return [String]
+    # @!attribute flow_source_arn
+    #   <p>The ARN of the flow source to connect to this router output.</p>
+    #   @return [String]
+    # @!attribute destination_transit_encryption
+    #   <p>The encryption configuration for the flow destination when connected to this router output.</p>
+    #   @return [Types::FlowTransitEncryption]
+    class MediaConnectFlowRouterOutputConfiguration < Struct.new(
+      nil,
+      :flow_arn,
+      :flow_source_arn,
+      :destination_transit_encryption,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration details for a MediaConnect flow when used as a router output destination.</p>
+    class MediaConnectFlowRouterOutputStreamDetails < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration settings for connecting a router input to a MediaLive channel output.</p> <p>To connect the router input to the MediaLive channel output, provide all three of <code>mediaLiveChannelArn</code>, <code>mediaLivePipelineId</code>, and <code>mediaLiveChannelOutputName</code>. To disconnect it, call the update operation and omit all three fields while keeping this configuration object.</p> <note> <p>You can't change <code>sourceTransitDecryption</code> while the router input is connected to a MediaLive channel output. To change it, first disconnect the router input, then update the decryption.</p> </note>
+    # @!attribute media_live_channel_arn
+    #   <p>The ARN of the MediaLive channel to connect to this router input.</p>
+    #   @return [String]
+    # @!attribute media_live_pipeline_id
+    #   <p>The index of the MediaLive pipeline to connect to this router input.</p>
+    #   @return [String]
+    # @!attribute media_live_channel_output_name
+    #   <p>The name of the MediaLive channel output to connect to this router input.</p>
+    #   @return [String]
+    # @!attribute source_transit_decryption
+    #   <p>The encryption configuration that defines how content is encrypted during transit between MediaConnect Router and MediaLive. This configuration determines whether encryption keys are automatically managed by the service or manually managed through Secrets Manager.</p>
+    #   @return [Types::MediaLiveTransitEncryption]
+    class MediaLiveChannelRouterInputConfiguration < Struct.new(
+      nil,
+      :media_live_channel_arn,
+      :media_live_pipeline_id,
+      :media_live_channel_output_name,
+      :source_transit_decryption,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration details for a MediaLive channel when used as a router input source.</p>
+    class MediaLiveChannelRouterInputStreamDetails < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration settings for connecting a router output to a MediaLive input.</p> <p>To connect the router output to the MediaLive input, provide both <code>mediaLiveInputArn</code> and <code>mediaLivePipelineId</code>. To disconnect it, call the update operation and omit both fields while keeping this configuration object.</p> <note> <p>You can't change <code>destinationTransitEncryption</code> while the router output is connected to a MediaLive input. To change it, first disconnect the router output, then update the encryption.</p> </note>
+    # @!attribute media_live_input_arn
+    #   <p>The ARN of the MediaLive input to connect to this router output.</p>
+    #   @return [String]
+    # @!attribute media_live_pipeline_id
+    #   <p>The index of the MediaLive pipeline to connect to this router output.</p>
+    #   @return [String]
+    # @!attribute destination_transit_encryption
+    #   <p>The encryption configuration for the MediaLive input when connected to this router output.</p>
+    #   @return [Types::MediaLiveTransitEncryption]
+    class MediaLiveInputRouterOutputConfiguration < Struct.new(
+      nil,
+      :media_live_input_arn,
+      :media_live_pipeline_id,
+      :destination_transit_encryption,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration details for a MediaLive input when used as a router output destination.</p>
+    class MediaLiveInputRouterOutputStreamDetails < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The encryption configuration that defines how content is encrypted during transit between MediaConnect Router and MediaLive. This configuration determines whether encryption keys are automatically managed by the service or manually managed through Secrets Manager.</p>
+    # @!attribute encryption_key_type
+    #   <p>The type of encryption key to use for MediaLive transit encryption.</p>
+    #   @return [String]
+    # @!attribute encryption_key_configuration
+    #   <p>The configuration details for the MediaLive encryption key.</p>
+    #   @return [Types::MediaLiveTransitEncryptionKeyConfiguration]
+    class MediaLiveTransitEncryption < Struct.new(
+      nil,
+      :encryption_key_type,
+      :encryption_key_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration settings for the MediaLive transit encryption key.</p>
+    # @!attribute secrets_manager
+    #   <p>The configuration settings for transit encryption using Secrets Manager, including the secret ARN and role ARN.</p>
+    #   @return [Types::SecretsManagerEncryptionKeyConfiguration]
+    # @!attribute automatic
+    #   <p>Configuration settings for automatic encryption key management, where MediaConnect handles key creation and rotation.</p>
+    #   @return [Types::AutomaticEncryptionKeyConfiguration]
+    class MediaLiveTransitEncryptionKeyConfiguration < Struct.new(
+      :secrets_manager,
+      :automatic,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class SecretsManager < MediaLiveTransitEncryptionKeyConfiguration; end
+      class Automatic < MediaLiveTransitEncryptionKeyConfiguration; end
+      class Unknown < MediaLiveTransitEncryptionKeyConfiguration; end
     end
 
     # <p> A media stream represents one component of your content, such as video, audio, or ancillary data. After you add a media stream to your flow, you can associate it with sources and outputs that use the ST 2110 JPEG XS or CDI protocol. </p>
@@ -2385,6 +3694,78 @@ module Aws::MediaConnect
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Configuration settings for a merge router input that combines two input sources.</p>
+    # @!attribute network_interface_arn
+    #   <p>The ARN of the network interface to use for this merge router input.</p>
+    #   @return [String]
+    # @!attribute protocol_configurations
+    #   <p>A list of exactly two protocol configurations for the merge input sources. Both must use the same protocol type.</p>
+    #   @return [Array<Types::MergeRouterInputProtocolConfiguration>]
+    # @!attribute merge_recovery_window_milliseconds
+    #   <p>The time window in milliseconds for merging the two input sources.</p>
+    #   @return [Integer]
+    class MergeRouterInputConfiguration < Struct.new(
+      nil,
+      :network_interface_arn,
+      :protocol_configurations,
+      :merge_recovery_window_milliseconds,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration details for an indexed stream in a merge router input setup.</p>
+    # @!attribute source_index
+    #   <p>The index number (0 or 1) assigned to this source in the merge configuration.</p>
+    #   @return [Integer]
+    # @!attribute source_ip_address
+    #   <p>The IP address of the source for this indexed stream in the merge setup.</p>
+    #   @return [String]
+    class MergeRouterInputIndexedStreamDetails < Struct.new(
+      nil,
+      :source_index,
+      :source_ip_address,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Protocol configuration settings for merge router inputs.</p>
+    # @!attribute rtp
+    #   <p>The configuration settings for a Router Input using the RTP (Real-Time Transport Protocol) protocol, including the port and forward error correction state.</p>
+    #   @return [Types::RtpRouterInputConfiguration]
+    # @!attribute rist
+    #   <p>The configuration settings for a router input using the RIST (Reliable Internet Stream Transport) protocol, including the port and recovery latency.</p>
+    #   @return [Types::RistRouterInputConfiguration]
+    class MergeRouterInputProtocolConfiguration < Struct.new(
+      :rtp,
+      :rist,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class Rtp < MergeRouterInputProtocolConfiguration; end
+      class Rist < MergeRouterInputProtocolConfiguration; end
+      class Unknown < MergeRouterInputProtocolConfiguration; end
+    end
+
+    # <p>Configuration details for a merge router input that combines two input sources.</p>
+    # @!attribute source_index_zero_stream_details
+    #   <p>Configuration details for the first source (index 0) in the merge setup.</p>
+    #   @return [Types::MergeRouterInputIndexedStreamDetails]
+    # @!attribute source_index_one_stream_details
+    #   <p>Configuration details for the second source (index 1) in the merge setup.</p>
+    #   @return [Types::MergeRouterInputIndexedStreamDetails]
+    class MergeRouterInputStreamDetails < Struct.new(
+      nil,
+      :source_index_zero_stream_details,
+      :source_index_one_stream_details,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The details of an error message. </p>
     # @!attribute code
     #   <p> The error code.</p>
@@ -2453,9 +3834,9 @@ module Aws::MediaConnect
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Specifies the configuration settings for NDI outputs. Required when the flow includes NDI outputs. </p>
+    # <p>Specifies the configuration settings for NDI sources and outputs. </p>
     # @!attribute ndi_state
-    #   <p>A setting that controls whether NDI outputs can be used in the flow. Must be ENABLED to add NDI outputs. Default is DISABLED. </p>
+    #   <p>A setting that controls whether NDI® sources or outputs can be used in the flow. </p> <p> The default value is <code>DISABLED</code>. This value must be set as <code>ENABLED</code> for your flow to support NDI sources or outputs. </p>
     #   @return [String]
     # @!attribute machine_name
     #   <p>A prefix for the names of the NDI sources that the flow creates. If a custom name isn't specified, MediaConnect generates a unique 12-character ID as the prefix. </p>
@@ -2473,7 +3854,7 @@ module Aws::MediaConnect
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Specifies the configuration settings for individual NDI discovery servers. A maximum of 3 servers is allowed. </p>
+    # <p>Specifies the configuration settings for individual NDI® discovery servers. A maximum of 3 servers is allowed. </p>
     # @!attribute discovery_server_address
     #   <p>The unique network address of the NDI discovery server. </p>
     #   @return [String]
@@ -2488,6 +3869,114 @@ module Aws::MediaConnect
       :discovery_server_address,
       :discovery_server_port,
       :vpc_interface_adapter,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p> Metadata about the audio and video media that is part of the NDI® source content. This includes details about the individual media streams. </p>
+    # @!attribute streams
+    #   <p> A list of the individual media streams that make up the NDI source. This includes details about each stream's codec, resolution, frame rate, audio channels, and other parameters. </p>
+    #   @return [Array<Types::NdiMediaStreamInfo>]
+    class NdiMediaInfo < Struct.new(
+      nil,
+      :streams,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p> Detailed information about a single media stream that is part of an NDI® source. This includes details about the stream type, codec, resolution, frame rate, audio channels, and sample rate. </p>
+    # @!attribute stream_type
+    #   <p> The type of media stream (for example, <code>Video</code> or <code>Audio</code>). </p>
+    #   @return [String]
+    # @!attribute codec
+    #   <p> The codec used for the media stream. For NDI sources, use <code>speed-hq</code>. </p>
+    #   @return [String]
+    # @!attribute stream_id
+    #   <p> A unique identifier for the media stream. </p>
+    #   @return [Integer]
+    # @!attribute scan_mode
+    #   <p> The method used to display video frames. Used when the <code>streamType</code> is <code>Video</code>.</p>
+    #   @return [String]
+    # @!attribute color
+    #   <p> The color signaling of the video stream. Used when the <code>streamType</code> is <code>Video</code>. </p>
+    #   @return [Types::ColorInformation]
+    # @!attribute frame_resolution
+    #   <p> The width and height dimensions of the video frame in pixels. Used when the <code>streamType</code> is <code>Video</code>. </p>
+    #   @return [Types::FrameResolution]
+    # @!attribute frame_rate
+    #   <p> The number of video frames displayed per second. Used when the <code>streamType</code> is <code>Video</code>. </p>
+    #   @return [String]
+    # @!attribute channels
+    #   <p> The number of audio channels in the stream. Used when the <code>streamType</code> is <code>Audio</code>.</p>
+    #   @return [Integer]
+    # @!attribute sample_rate
+    #   <p> The number of audio samples captured per second, measured in kilohertz (kHz). Used when the <code>streamType</code> is <code>Audio</code>.</p>
+    #   @return [Integer]
+    class NdiMediaStreamInfo < Struct.new(
+      nil,
+      :stream_type,
+      :codec,
+      :stream_id,
+      :scan_mode,
+      :color,
+      :frame_resolution,
+      :frame_rate,
+      :channels,
+      :sample_rate,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p> Information about a single NDI® sender, including its name. </p>
+    # @!attribute source_name
+    #   <p> The name of the upstream NDI sender. </p>
+    #   @return [String]
+    class NdiSourceInfo < Struct.new(
+      nil,
+      :source_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p> Comprehensive information about the NDI® source that's associated with a flow. This includes the currently active NDI source, a list of all discovered NDI senders, metadata about the media streams, and any relevant status messages. </p>
+    # @!attribute active_source
+    #   <p> The connected NDI sender that's currently sending source content to the flow's NDI source. </p>
+    #   @return [Types::NdiSourceInfo]
+    # @!attribute discovered_sources
+    #   <p> A list of the available upstream NDI senders aggregated from all of your configured discovery servers. </p>
+    #   @return [Array<Types::NdiSourceInfo>]
+    # @!attribute media_info
+    #   <p> Detailed information about the media streams (video, audio, and so on) that are part of the active NDI source. </p>
+    #   @return [Types::NdiMediaInfo]
+    # @!attribute messages
+    #   <p> Any status messages or error codes related to the NDI source and its metadata. </p>
+    #   @return [Array<Types::MessageDetail>]
+    class NdiSourceMetadataInfo < Struct.new(
+      nil,
+      :active_source,
+      :discovered_sources,
+      :media_info,
+      :messages,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p> The settings for the NDI® source. This includes the exact name of the upstream NDI sender that you want to connect to your source. </p> <note> <p>When you update the NDI source, include only the members you want to change. MediaConnect leaves the members that you don't specify unchanged.</p> </note>
+    # @!attribute source_name
+    #   <p> The exact name of an existing NDI sender that's registered with your discovery server. If included, the format of this name must be <code>MACHINENAME (ProgramName)</code>. </p>
+    #   @return [String]
+    # @!attribute audio_reference_level
+    #   <p>The audio reference level of the NDI sender, in decibels relative to full scale (dBFS). Common values are <code>-20</code> (NDI and SMPTE) and <code>-18</code> (EBU). If you don't specify this field, MediaConnect uses <code>-20</code>.</p>
+    #   @return [Integer]
+    class NdiSourceSettings < Struct.new(
+      nil,
+      :source_name,
+      :audio_reference_level,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2594,7 +4083,16 @@ module Aws::MediaConnect
     #   <p> An indication of whether the output is transmitting data or not.</p>
     #   @return [String]
     # @!attribute peer_ip_address
-    #   <p>The IP address of the device that is currently receiving content from this output.</p> <note> <ul> <li> <p>For outputs that use protocols where you specify the destination (such as SRT Caller or Zixi Push), this value matches the configured destination address.</p> </li> <li> <p>For outputs that use listener protocols (such as SRT Listener), this value shows the address of the connected receiver. </p> </li> <li> <p>Peer IP addresses aren't available for entitlements, managed MediaLive outputs, NDI outputs, and CDI/ST2110 outputs. </p> </li> <li> <p>The peer IP address might not be visible for flows that haven't been started yet, or flows that were started before May 2025. In these cases, restart your flow to see the peer IP address.</p> </li> </ul> </note>
+    #   <p>The IP address of the device that is currently receiving content from this output.</p> <note> <ul> <li> <p>For outputs that use protocols where you specify the destination (such as SRT Caller or Zixi Push), this value matches the configured destination address.</p> </li> <li> <p>For outputs that use listener protocols (such as SRT Listener), this value shows the address of the connected receiver. </p> </li> <li> <p>Peer IP addresses aren't available for entitlements, managed MediaLive outputs, NDI® sources and outputs, and CDI/ST2110 outputs. </p> </li> <li> <p>The peer IP address might not be visible for flows that haven't been started yet, or flows that were started before May 2025. In these cases, restart your flow to see the peer IP address.</p> </li> </ul> </note>
+    #   @return [String]
+    # @!attribute router_integration_state
+    #   <p>Indicates if router integration is enabled or disabled on the flow output.</p>
+    #   @return [String]
+    # @!attribute router_integration_transit_encryption
+    #   <p>The encryption configuration for the output when router integration is enabled.</p>
+    #   @return [Types::FlowTransitEncryption]
+    # @!attribute connected_router_input_arn
+    #   <p>The ARN of the router input that's connected to this flow output.</p>
     #   @return [String]
     class Output < Struct.new(
       nil,
@@ -2615,6 +4113,57 @@ module Aws::MediaConnect
       :bridge_ports,
       :output_status,
       :peer_ip_address,
+      :router_integration_state,
+      :router_integration_transit_encryption,
+      :connected_router_input_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration for preferred day and time maintenance settings.</p>
+    # @!attribute day
+    #   <p>The preferred day for maintenance operations.</p>
+    #   @return [String]
+    # @!attribute time
+    #   <p>The preferred time for maintenance operations.</p>
+    #   @return [String]
+    class PreferredDayTimeMaintenanceConfiguration < Struct.new(
+      nil,
+      :day,
+      :time,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration settings for a public router network interface, including the list of allowed CIDR blocks.</p>
+    # @!attribute allow_rules
+    #   <p>The list of allowed CIDR blocks for the public router network interface.</p>
+    #   @return [Array<Types::PublicRouterNetworkInterfaceRule>]
+    class PublicRouterNetworkInterfaceConfiguration < Struct.new(
+      nil,
+      :allow_rules,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A rule that allows a specific CIDR block to access the public router network interface.</p>
+    # @!attribute cidr
+    #   <p>The CIDR block that is allowed to access the public router network interface.</p>
+    #   @return [String]
+    class PublicRouterNetworkInterfaceRule < Struct.new(
+      nil,
+      :cidr,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The TLS encryption configuration for destinations that present a certificate from a publicly trusted certificate authority. This type does not require any additional settings.</p>
+    class PublicTlsEncryptionConfiguration < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2910,6 +4459,66 @@ module Aws::MediaConnect
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the router input that you want to restart.</p>
+    #   @return [String]
+    class RestartRouterInputRequest < Struct.new(
+      nil,
+      :arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>The ARN of the router input that was restarted.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the router input that was restarted.</p>
+    #   @return [String]
+    # @!attribute state
+    #   <p>The current state of the router input after the restart operation.</p>
+    #   @return [String]
+    class RestartRouterInputResponse < Struct.new(
+      nil,
+      :arn,
+      :name,
+      :state,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the router output that you want to restart.</p>
+    #   @return [String]
+    class RestartRouterOutputRequest < Struct.new(
+      nil,
+      :arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>The ARN of the router output that was restarted.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the router output that was restarted.</p>
+    #   @return [String]
+    # @!attribute state
+    #   <p>The current state of the router output after the restart operation.</p>
+    #   @return [String]
+    class RestartRouterOutputResponse < Struct.new(
+      nil,
+      :arn,
+      :name,
+      :state,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute entitlement_arn
     #   <p> The Amazon Resource Name (ARN) of the entitlement that you want to revoke.</p>
     #   @return [String]
@@ -2935,6 +4544,870 @@ module Aws::MediaConnect
       nil,
       :entitlement_arn,
       :flow_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration settings for a router input using the RIST (Reliable Internet Stream Transport) protocol, including the port and recovery latency.</p>
+    # @!attribute port
+    #   <p>The port number used for the RIST protocol in the router input configuration.</p>
+    #   @return [Integer]
+    # @!attribute recovery_latency_milliseconds
+    #   <p>The recovery latency in milliseconds for the RIST protocol in the router input configuration.</p>
+    #   @return [Integer]
+    class RistRouterInputConfiguration < Struct.new(
+      nil,
+      :port,
+      :recovery_latency_milliseconds,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration settings for a router output using the RIST (Reliable Internet Stream Transport) protocol, including the destination address and port.</p>
+    # @!attribute destination_address
+    #   <p>The destination IP address for the RIST protocol in the router output configuration.</p>
+    #   @return [String]
+    # @!attribute destination_port
+    #   <p>The destination port number for the RIST protocol in the router output configuration.</p>
+    #   @return [Integer]
+    class RistRouterOutputConfiguration < Struct.new(
+      nil,
+      :destination_address,
+      :destination_port,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The content quality analysis configuration for the router input.</p> <important> <p>The content quality analysis feature only monitors the first video stream and the first audio stream it encounters within the router input source.</p> </important>
+    # @!attribute content_level
+    #   <p>The content quality analysis configuration.</p>
+    #   @return [Types::ContentQualityAnalysisFeatureConfiguration]
+    class RouterContentQualityAnalysisConfiguration < Struct.new(
+      :content_level,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class ContentLevel < RouterContentQualityAnalysisConfiguration; end
+      class Unknown < RouterContentQualityAnalysisConfiguration; end
+    end
+
+    # <p>A router input in AWS Elemental MediaConnect. A router input is a source of media content that can be routed to one or more router outputs.</p>
+    # @!attribute name
+    #   <p>The name of the router input.</p>
+    #   @return [String]
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the router input.</p>
+    #   @return [String]
+    # @!attribute id
+    #   <p>The unique identifier of the router input.</p>
+    #   @return [String]
+    # @!attribute state
+    #   <p>The current state of the router input.</p>
+    #   @return [String]
+    # @!attribute input_type
+    #   <p>The type of the router input.</p>
+    #   @return [String]
+    # @!attribute configuration
+    #   <p>The configuration settings for a router input.</p>
+    #   @return [Types::RouterInputConfiguration]
+    # @!attribute routed_outputs
+    #   <p>The number of router outputs associated with the router input.</p>
+    #   @return [Integer]
+    # @!attribute maximum_routed_outputs
+    #   <p>The maximum number of outputs that can be simultaneously routed to this input.</p>
+    #   @return [Integer]
+    # @!attribute region_name
+    #   <p>The Amazon Web Services Region where the router input is located.</p>
+    #   @return [String]
+    # @!attribute availability_zone
+    #   <p>The Availability Zone of the router input.</p>
+    #   @return [String]
+    # @!attribute maximum_bitrate
+    #   <p>The maximum bitrate for the router input.</p>
+    #   @return [Integer]
+    # @!attribute tier
+    #   <p>The tier level for the router input. The tier sets the maximum bitrate, in Mbps, for the router input. Valid values include the following:</p> <ul> <li> <p> <code>INPUT_20</code> – 20 Mbps</p> </li> <li> <p> <code>INPUT_50</code> – 50 Mbps</p> </li> <li> <p> <code>INPUT_100</code> – 100 Mbps</p> </li> <li> <p> <code>INPUT_250</code> – 250 Mbps</p> </li> <li> <p> <code>INPUT_500</code> – 500 Mbps</p> </li> </ul> <p>The 250 Mbps and 500 Mbps tiers are high-bitrate tiers that support TR-07 (JPEG XS) workflows.</p>
+    #   @return [String]
+    # @!attribute routing_scope
+    #   <p>Indicates whether the router input is configured for Regional or global routing.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The timestamp when the router input was created.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The timestamp when the router input was last updated.</p>
+    #   @return [Time]
+    # @!attribute messages
+    #   <p>The messages associated with the router input.</p>
+    #   @return [Array<Types::RouterInputMessage>]
+    # @!attribute transit_encryption
+    #   <p>The transit encryption settings for a router input.</p>
+    #   @return [Types::RouterInputTransitEncryption]
+    # @!attribute tags
+    #   <p>Key-value pairs that can be used to tag and organize this router input.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute stream_details
+    #   <p>Configuration details for the router input stream.</p>
+    #   @return [Types::RouterInputStreamDetails]
+    # @!attribute ip_address
+    #   <p>The IP address of the router input.</p>
+    #   @return [String]
+    # @!attribute maintenance_type
+    #   <p>The type of maintenance configuration applied to this router input.</p>
+    #   @return [String]
+    # @!attribute maintenance_configuration
+    #   <p>The maintenance configuration settings applied to this router input.</p>
+    #   @return [Types::MaintenanceConfiguration]
+    # @!attribute maintenance_schedule_type
+    #   <p>The type of maintenance schedule currently in effect for this router input.</p>
+    #   @return [String]
+    # @!attribute maintenance_schedule
+    #   <p>The current maintenance schedule details for this router input.</p>
+    #   @return [Types::MaintenanceSchedule]
+    # @!attribute content_quality_analysis_type
+    #   <p>The type of content quality analysis applied to the router input.</p>
+    #   @return [String]
+    # @!attribute content_quality_analysis_configuration
+    #   <p>The content quality analysis configuration for the router input.</p>
+    #   @return [Types::RouterContentQualityAnalysisConfiguration]
+    class RouterInput < Struct.new(
+      nil,
+      :name,
+      :arn,
+      :id,
+      :state,
+      :input_type,
+      :configuration,
+      :routed_outputs,
+      :maximum_routed_outputs,
+      :region_name,
+      :availability_zone,
+      :maximum_bitrate,
+      :tier,
+      :routing_scope,
+      :created_at,
+      :updated_at,
+      :messages,
+      :transit_encryption,
+      :tags,
+      :stream_details,
+      :ip_address,
+      :maintenance_type,
+      :maintenance_configuration,
+      :maintenance_schedule_type,
+      :maintenance_schedule,
+      :content_quality_analysis_type,
+      :content_quality_analysis_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration settings for a router input.</p>
+    # @!attribute standard
+    #   <p>The configuration settings for a standard router input, including the protocol, protocol-specific configuration, network interface, and availability zone.</p>
+    #   @return [Types::StandardRouterInputConfiguration]
+    # @!attribute media_live_channel
+    #   <p>Configuration settings for connecting a router input to a MediaLive channel output.</p> <p>To connect the router input to the MediaLive channel output, provide all three of <code>mediaLiveChannelArn</code>, <code>mediaLivePipelineId</code>, and <code>mediaLiveChannelOutputName</code>. To disconnect it, call the update operation and omit all three fields while keeping this configuration object.</p> <note> <p>You can't change <code>sourceTransitDecryption</code> while the router input is connected to a MediaLive channel output. To change it, first disconnect the router input, then update the decryption.</p> </note>
+    #   @return [Types::MediaLiveChannelRouterInputConfiguration]
+    # @!attribute failover
+    #   <p>Configuration settings for a failover router input that allows switching between two input sources.</p>
+    #   @return [Types::FailoverRouterInputConfiguration]
+    # @!attribute media_connect_flow
+    #   <p>Configuration settings for connecting a router input to a flow output.</p> <p>To connect the router input to the flow output, provide both <code>flowArn</code> and <code>flowOutputArn</code>. To disconnect it, call the update operation and omit both fields while keeping this configuration object.</p> <note> <p>You can't change <code>sourceTransitDecryption</code> while the router input is connected to a flow output. To change it, first disconnect the router input, then update the decryption.</p> </note>
+    #   @return [Types::MediaConnectFlowRouterInputConfiguration]
+    # @!attribute merge
+    #   <p>Configuration settings for a merge router input that combines two input sources.</p>
+    #   @return [Types::MergeRouterInputConfiguration]
+    class RouterInputConfiguration < Struct.new(
+      :standard,
+      :media_live_channel,
+      :failover,
+      :media_connect_flow,
+      :merge,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class Standard < RouterInputConfiguration; end
+      class MediaLiveChannel < RouterInputConfiguration; end
+      class Failover < RouterInputConfiguration; end
+      class MediaConnectFlow < RouterInputConfiguration; end
+      class Merge < RouterInputConfiguration; end
+      class Unknown < RouterInputConfiguration; end
+    end
+
+    # <p>A filter that can be used to retrieve a list of router inputs.</p>
+    # @!attribute name_contains
+    #   <p>The names of the router inputs to include in the filter.</p>
+    #   @return [Array<String>]
+    # @!attribute region_names
+    #   <p>The AWS Regions of the router inputs to include in the filter.</p>
+    #   @return [Array<String>]
+    # @!attribute network_interface_arns
+    #   <p>The Amazon Resource Names (ARNs) of the network interfaces associated with the router inputs to include in the filter.</p>
+    #   @return [Array<String>]
+    # @!attribute routing_scopes
+    #   <p>Filter criteria to list router inputs based on their routing scope (REGIONAL or GLOBAL).</p>
+    #   @return [Array<String>]
+    # @!attribute input_types
+    #   <p>The types of router inputs to include in the filter.</p>
+    #   @return [Array<String>]
+    class RouterInputFilter < Struct.new(
+      :name_contains,
+      :region_names,
+      :network_interface_arns,
+      :routing_scopes,
+      :input_types,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class NameContains < RouterInputFilter; end
+      class RegionNames < RouterInputFilter; end
+      class NetworkInterfaceArns < RouterInputFilter; end
+      class RoutingScopes < RouterInputFilter; end
+      class InputTypes < RouterInputFilter; end
+      class Unknown < RouterInputFilter; end
+    end
+
+    # <p>A message associated with a router input, including a code and a message.</p>
+    # @!attribute code
+    #   <p>The code associated with the router input message.</p>
+    #   @return [String]
+    # @!attribute message
+    #   <p>The message text associated with the router input message.</p>
+    #   @return [String]
+    class RouterInputMessage < Struct.new(
+      nil,
+      :code,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Metadata information associated with the router input, including stream details and connection state.</p>
+    # @!attribute transport_stream_media_info
+    #   <p> The metadata of the transport stream in the current flow's source.</p>
+    #   @return [Types::TransportMediaInfo]
+    class RouterInputMetadata < Struct.new(
+      :transport_stream_media_info,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class TransportStreamMediaInfo < RouterInputMetadata; end
+      class Unknown < RouterInputMetadata; end
+    end
+
+    # <p>The protocol configuration settings for a router input.</p>
+    # @!attribute rist
+    #   <p>The configuration settings for a router input using the RIST (Reliable Internet Stream Transport) protocol, including the port and recovery latency.</p>
+    #   @return [Types::RistRouterInputConfiguration]
+    # @!attribute srt_listener
+    #   <p>The configuration settings for a router input using the SRT (Secure Reliable Transport) protocol in listener mode, including the port, minimum latency, and decryption key configuration.</p>
+    #   @return [Types::SrtListenerRouterInputConfiguration]
+    # @!attribute srt_caller
+    #   <p>The configuration settings for a router input using the SRT (Secure Reliable Transport) protocol in caller mode, including the source address and port, minimum latency, stream ID, and decryption key configuration.</p>
+    #   @return [Types::SrtCallerRouterInputConfiguration]
+    # @!attribute rtp
+    #   <p>The configuration settings for a Router Input using the RTP (Real-Time Transport Protocol) protocol, including the port and forward error correction state.</p>
+    #   @return [Types::RtpRouterInputConfiguration]
+    class RouterInputProtocolConfiguration < Struct.new(
+      :rist,
+      :srt_listener,
+      :srt_caller,
+      :rtp,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class Rist < RouterInputProtocolConfiguration; end
+      class SrtListener < RouterInputProtocolConfiguration; end
+      class SrtCaller < RouterInputProtocolConfiguration; end
+      class Rtp < RouterInputProtocolConfiguration; end
+      class Unknown < RouterInputProtocolConfiguration; end
+    end
+
+    # <p>The request to create a new router input would exceed the service quotas for the account. </p>
+    # @!attribute message
+    #   @return [String]
+    class RouterInputServiceQuotaExceededException < Struct.new(
+      nil,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Detailed metadata information about a router input source.</p>
+    # @!attribute source_metadata_messages
+    #   <p>Collection of metadata messages associated with the router input source.</p>
+    #   @return [Array<Types::RouterInputMessage>]
+    # @!attribute timestamp
+    #   <p>The timestamp when the metadata was last updated.</p>
+    #   @return [Time]
+    # @!attribute router_input_metadata
+    #   <p>Metadata information specific to the router input configuration and state.</p>
+    #   @return [Types::RouterInputMetadata]
+    class RouterInputSourceMetadataDetails < Struct.new(
+      nil,
+      :source_metadata_messages,
+      :timestamp,
+      :router_input_metadata,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration details for the router input stream.</p>
+    # @!attribute standard
+    #   <p>Configuration details for a standard router input stream type.</p>
+    #   @return [Types::StandardRouterInputStreamDetails]
+    # @!attribute media_live_channel
+    #   <p>Configuration details for a MediaLive channel when used as a router input source.</p>
+    #   @return [Types::MediaLiveChannelRouterInputStreamDetails]
+    # @!attribute failover
+    #   <p>Configuration details for a failover router input that can automatically switch between two sources.</p>
+    #   @return [Types::FailoverRouterInputStreamDetails]
+    # @!attribute media_connect_flow
+    #   <p>Configuration details for a MediaConnect flow when used as a router input source.</p>
+    #   @return [Types::MediaConnectFlowRouterInputStreamDetails]
+    # @!attribute merge
+    #   <p>Configuration details for a merge router input that combines two input sources.</p>
+    #   @return [Types::MergeRouterInputStreamDetails]
+    class RouterInputStreamDetails < Struct.new(
+      :standard,
+      :media_live_channel,
+      :failover,
+      :media_connect_flow,
+      :merge,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class Standard < RouterInputStreamDetails; end
+      class MediaLiveChannel < RouterInputStreamDetails; end
+      class Failover < RouterInputStreamDetails; end
+      class MediaConnectFlow < RouterInputStreamDetails; end
+      class Merge < RouterInputStreamDetails; end
+      class Unknown < RouterInputStreamDetails; end
+    end
+
+    # <p>The details of a thumbnail associated with a router input, including the thumbnail messages, the thumbnail image, the timecode, and the timestamp.</p>
+    # @!attribute thumbnail_messages
+    #   <p>The messages associated with the router input thumbnail.</p>
+    #   @return [Array<Types::RouterInputMessage>]
+    # @!attribute thumbnail
+    #   <p>The thumbnail image, encoded as a Base64-encoded binary data object.</p>
+    #   @return [String]
+    # @!attribute timecode
+    #   <p>The timecode associated with the thumbnail.</p>
+    #   @return [String]
+    # @!attribute timestamp
+    #   <p>The timestamp associated with the thumbnail.</p>
+    #   @return [Time]
+    class RouterInputThumbnailDetails < Struct.new(
+      nil,
+      :thumbnail_messages,
+      :thumbnail,
+      :timecode,
+      :timestamp,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The transit encryption settings for a router input.</p>
+    # @!attribute encryption_key_type
+    #   <p>Specifies the type of encryption key to use for transit encryption.</p>
+    #   @return [String]
+    # @!attribute encryption_key_configuration
+    #   <p>Contains the configuration details for the encryption key used in transit encryption, including the key source and associated parameters.</p>
+    #   @return [Types::RouterInputTransitEncryptionKeyConfiguration]
+    class RouterInputTransitEncryption < Struct.new(
+      nil,
+      :encryption_key_type,
+      :encryption_key_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Defines the configuration settings for transit encryption keys.</p>
+    # @!attribute secrets_manager
+    #   <p>The configuration settings for transit encryption using Secrets Manager, including the secret ARN and role ARN.</p>
+    #   @return [Types::SecretsManagerEncryptionKeyConfiguration]
+    # @!attribute automatic
+    #   <p>Configuration settings for automatic encryption key management, where MediaConnect handles key creation and rotation.</p>
+    #   @return [Types::AutomaticEncryptionKeyConfiguration]
+    class RouterInputTransitEncryptionKeyConfiguration < Struct.new(
+      :secrets_manager,
+      :automatic,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class SecretsManager < RouterInputTransitEncryptionKeyConfiguration; end
+      class Automatic < RouterInputTransitEncryptionKeyConfiguration; end
+      class Unknown < RouterInputTransitEncryptionKeyConfiguration; end
+    end
+
+    # <p>A router network interface in AWS Elemental MediaConnect. A router network interface is a network interface that can be associated with one or more router inputs and outputs.</p>
+    # @!attribute name
+    #   <p>The name of the router network interface.</p>
+    #   @return [String]
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the router network interface.</p>
+    #   @return [String]
+    # @!attribute id
+    #   <p>The unique identifier of the router network interface.</p>
+    #   @return [String]
+    # @!attribute state
+    #   <p>The current state of the router network interface.</p>
+    #   @return [String]
+    # @!attribute network_interface_type
+    #   <p>The type of the router network interface.</p>
+    #   @return [String]
+    # @!attribute configuration
+    #   <p>The configuration settings for a router network interface.</p>
+    #   @return [Types::RouterNetworkInterfaceConfiguration]
+    # @!attribute associated_output_count
+    #   <p>The number of router outputs associated with the network interface.</p>
+    #   @return [Integer]
+    # @!attribute associated_input_count
+    #   <p>The number of router inputs associated with the network interface.</p>
+    #   @return [Integer]
+    # @!attribute region_name
+    #   <p>The Amazon Web Services Region where the router network interface is located.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The timestamp when the router network interface was created.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The timestamp when the router network interface was last updated.</p>
+    #   @return [Time]
+    # @!attribute tags
+    #   <p>Key-value pairs that can be used to tag and organize this router network interface.</p>
+    #   @return [Hash<String, String>]
+    class RouterNetworkInterface < Struct.new(
+      nil,
+      :name,
+      :arn,
+      :id,
+      :state,
+      :network_interface_type,
+      :configuration,
+      :associated_output_count,
+      :associated_input_count,
+      :region_name,
+      :created_at,
+      :updated_at,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration settings for a router network interface.</p>
+    # @!attribute public
+    #   <p>The configuration settings for a public router network interface, including the list of allowed CIDR blocks.</p>
+    #   @return [Types::PublicRouterNetworkInterfaceConfiguration]
+    # @!attribute vpc
+    #   <p>The configuration settings for a router network interface within a VPC, including the security group IDs and subnet ID.</p>
+    #   @return [Types::VpcRouterNetworkInterfaceConfiguration]
+    class RouterNetworkInterfaceConfiguration < Struct.new(
+      :public,
+      :vpc,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class Public < RouterNetworkInterfaceConfiguration; end
+      class Vpc < RouterNetworkInterfaceConfiguration; end
+      class Unknown < RouterNetworkInterfaceConfiguration; end
+    end
+
+    # <p>A filter that can be used to retrieve a list of router network interfaces.</p>
+    # @!attribute region_names
+    #   <p>The AWS Regions of the router network interfaces to include in the filter.</p>
+    #   @return [Array<String>]
+    # @!attribute network_interface_types
+    #   <p>The types of router network interfaces to include in the filter.</p>
+    #   @return [Array<String>]
+    # @!attribute name_contains
+    #   <p>The names of the router network interfaces to include in the filter.</p>
+    #   @return [Array<String>]
+    class RouterNetworkInterfaceFilter < Struct.new(
+      :region_names,
+      :network_interface_types,
+      :name_contains,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class RegionNames < RouterNetworkInterfaceFilter; end
+      class NetworkInterfaceTypes < RouterNetworkInterfaceFilter; end
+      class NameContains < RouterNetworkInterfaceFilter; end
+      class Unknown < RouterNetworkInterfaceFilter; end
+    end
+
+    # <p>The request to create a new router network interface would exceed the service quotas (limits) set for the account. </p>
+    # @!attribute message
+    #   @return [String]
+    class RouterNetworkInterfaceServiceQuotaExceededException < Struct.new(
+      nil,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A router output in AWS Elemental MediaConnect. A router output is a destination for media content that can receive input from one or more router inputs.</p>
+    # @!attribute name
+    #   <p>The name of the router output.</p>
+    #   @return [String]
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the router output.</p>
+    #   @return [String]
+    # @!attribute id
+    #   <p>The unique identifier of the router output.</p>
+    #   @return [String]
+    # @!attribute state
+    #   <p>The overall state of the router output.</p>
+    #   @return [String]
+    # @!attribute output_type
+    #   <p>The type of the router output.</p>
+    #   @return [String]
+    # @!attribute configuration
+    #   <p>The configuration settings for a router output.</p>
+    #   @return [Types::RouterOutputConfiguration]
+    # @!attribute routed_state
+    #   <p>The current state of the association between the router output and its input.</p>
+    #   @return [String]
+    # @!attribute region_name
+    #   <p>The Amazon Web Services Region where the router output is located.</p>
+    #   @return [String]
+    # @!attribute availability_zone
+    #   <p>The Availability Zone of the router output.</p>
+    #   @return [String]
+    # @!attribute maximum_bitrate
+    #   <p>The maximum bitrate for the router output.</p>
+    #   @return [Integer]
+    # @!attribute routing_scope
+    #   <p>Indicates whether the router output is configured for Regional or global routing.</p>
+    #   @return [String]
+    # @!attribute tier
+    #   <p>The tier level for the router output. The tier sets the maximum bitrate, in Mbps, for the router output. Valid values include the following:</p> <ul> <li> <p> <code>OUTPUT_20</code> – 20 Mbps</p> </li> <li> <p> <code>OUTPUT_50</code> – 50 Mbps</p> </li> <li> <p> <code>OUTPUT_100</code> – 100 Mbps</p> </li> <li> <p> <code>OUTPUT_250</code> – 250 Mbps</p> </li> <li> <p> <code>OUTPUT_500</code> – 500 Mbps</p> </li> </ul> <p>The 250 Mbps and 500 Mbps tiers are high-bitrate tiers that support TR-07 (JPEG XS) workflows.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The timestamp when the router output was created.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The timestamp when the router output was last updated.</p>
+    #   @return [Time]
+    # @!attribute messages
+    #   <p>The messages associated with the router output.</p>
+    #   @return [Array<Types::RouterOutputMessage>]
+    # @!attribute tags
+    #   <p>Key-value pairs that can be used to tag and organize this router output.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute stream_details
+    #   <p>Information about the router output's stream, including connection state and destination details. The specific details provided vary based on the router output type.</p>
+    #   @return [Types::RouterOutputStreamDetails]
+    # @!attribute ip_address
+    #   <p>The IP address of the router output.</p>
+    #   @return [String]
+    # @!attribute routed_input_arn
+    #   <p>The Amazon Resource Name (ARN) of the router input associated with the output.</p>
+    #   @return [String]
+    # @!attribute maintenance_type
+    #   <p>The type of maintenance configuration applied to this router output.</p>
+    #   @return [String]
+    # @!attribute maintenance_configuration
+    #   <p>The maintenance configuration settings applied to this router output.</p>
+    #   @return [Types::MaintenanceConfiguration]
+    # @!attribute maintenance_schedule_type
+    #   <p>The type of maintenance schedule currently in effect for this router output.</p>
+    #   @return [String]
+    # @!attribute maintenance_schedule
+    #   <p>The current maintenance schedule details for this router output.</p>
+    #   @return [Types::MaintenanceSchedule]
+    # @!attribute fabric_configuration
+    #   <p>The fabric configuration settings for the router output.</p>
+    #   @return [Types::FabricConfiguration]
+    class RouterOutput < Struct.new(
+      nil,
+      :name,
+      :arn,
+      :id,
+      :state,
+      :output_type,
+      :configuration,
+      :routed_state,
+      :region_name,
+      :availability_zone,
+      :maximum_bitrate,
+      :routing_scope,
+      :tier,
+      :created_at,
+      :updated_at,
+      :messages,
+      :tags,
+      :stream_details,
+      :ip_address,
+      :routed_input_arn,
+      :maintenance_type,
+      :maintenance_configuration,
+      :maintenance_schedule_type,
+      :maintenance_schedule,
+      :fabric_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration settings for a router output.</p>
+    # @!attribute standard
+    #   <p>The configuration settings for a standard router output, including the protocol, protocol-specific configuration, network interface, and availability zone.</p>
+    #   @return [Types::StandardRouterOutputConfiguration]
+    # @!attribute media_connect_flow
+    #   <p>Configuration settings for connecting a router output to a MediaConnect flow source.</p> <p>To connect the router output to the flow source, provide both <code>flowArn</code> and <code>flowSourceArn</code>. To disconnect it, call the update operation and omit both fields while keeping this configuration object.</p> <note> <p>You can't change <code>destinationTransitEncryption</code> while the router output is connected to a flow source. To change it, first disconnect the router output, then update the encryption.</p> </note>
+    #   @return [Types::MediaConnectFlowRouterOutputConfiguration]
+    # @!attribute media_live_input
+    #   <p>Configuration settings for connecting a router output to a MediaLive input.</p> <p>To connect the router output to the MediaLive input, provide both <code>mediaLiveInputArn</code> and <code>mediaLivePipelineId</code>. To disconnect it, call the update operation and omit both fields while keeping this configuration object.</p> <note> <p>You can't change <code>destinationTransitEncryption</code> while the router output is connected to a MediaLive input. To change it, first disconnect the router output, then update the encryption.</p> </note>
+    #   @return [Types::MediaLiveInputRouterOutputConfiguration]
+    class RouterOutputConfiguration < Struct.new(
+      :standard,
+      :media_connect_flow,
+      :media_live_input,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class Standard < RouterOutputConfiguration; end
+      class MediaConnectFlow < RouterOutputConfiguration; end
+      class MediaLiveInput < RouterOutputConfiguration; end
+      class Unknown < RouterOutputConfiguration; end
+    end
+
+    # <p>A filter that can be used to retrieve a list of router outputs.</p>
+    # @!attribute region_names
+    #   <p>The AWS Regions of the router outputs to include in the filter.</p>
+    #   @return [Array<String>]
+    # @!attribute network_interface_arns
+    #   <p>The Amazon Resource Names (ARNs) of the network interfaces associated with the router outputs to include in the filter.</p>
+    #   @return [Array<String>]
+    # @!attribute routing_scopes
+    #   <p>Filter criteria to list router outputs based on their routing scope.</p>
+    #   @return [Array<String>]
+    # @!attribute output_types
+    #   <p>The types of router outputs to include in the filter.</p>
+    #   @return [Array<String>]
+    # @!attribute routed_input_arns
+    #   <p>The ARNs of the router inputs associated with the router outputs to include in the filter.</p>
+    #   @return [Array<String>]
+    # @!attribute name_contains
+    #   <p>The names of the router outputs to include in the filter.</p>
+    #   @return [Array<String>]
+    class RouterOutputFilter < Struct.new(
+      :region_names,
+      :network_interface_arns,
+      :routing_scopes,
+      :output_types,
+      :routed_input_arns,
+      :name_contains,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class RegionNames < RouterOutputFilter; end
+      class NetworkInterfaceArns < RouterOutputFilter; end
+      class RoutingScopes < RouterOutputFilter; end
+      class OutputTypes < RouterOutputFilter; end
+      class RoutedInputArns < RouterOutputFilter; end
+      class NameContains < RouterOutputFilter; end
+      class Unknown < RouterOutputFilter; end
+    end
+
+    # <p>A message associated with a router output.</p>
+    # @!attribute code
+    #   <p>The code associated with the router output message.</p>
+    #   @return [String]
+    # @!attribute message
+    #   <p>The message text associated with the router output message.</p>
+    #   @return [String]
+    class RouterOutputMessage < Struct.new(
+      nil,
+      :code,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The protocol configuration settings for a router output.</p>
+    # @!attribute rist
+    #   <p>The configuration settings for a router output using the RIST (Reliable Internet Stream Transport) protocol, including the destination address and port.</p>
+    #   @return [Types::RistRouterOutputConfiguration]
+    # @!attribute srt_listener
+    #   <p>The configuration settings for a router output using the SRT (Secure Reliable Transport) protocol in listener mode, including the port, minimum latency, and encryption key configuration.</p>
+    #   @return [Types::SrtListenerRouterOutputConfiguration]
+    # @!attribute rtmp_push
+    #   <p>The configuration settings for a router output that pushes a stream to a destination using the RTMP (Real-Time Messaging Protocol) protocol, or RTMPS (RTMP over TLS) when TLS encryption is specified. These settings include the destination address and port, the application and stream names, and optional TLS encryption configuration.</p>
+    #   @return [Types::RtmpPushRouterOutputConfiguration]
+    # @!attribute srt_caller
+    #   <p>The configuration settings for a router output using the SRT (Secure Reliable Transport) protocol in caller mode, including the destination address and port, minimum latency, stream ID, and encryption key configuration.</p>
+    #   @return [Types::SrtCallerRouterOutputConfiguration]
+    # @!attribute rtp
+    #   <p>The configuration settings for a router output using the RTP (Real-Time Transport Protocol) protocol, including the destination address and port, and forward error correction state.</p>
+    #   @return [Types::RtpRouterOutputConfiguration]
+    class RouterOutputProtocolConfiguration < Struct.new(
+      :rist,
+      :srt_listener,
+      :rtmp_push,
+      :srt_caller,
+      :rtp,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class Rist < RouterOutputProtocolConfiguration; end
+      class SrtListener < RouterOutputProtocolConfiguration; end
+      class RtmpPush < RouterOutputProtocolConfiguration; end
+      class SrtCaller < RouterOutputProtocolConfiguration; end
+      class Rtp < RouterOutputProtocolConfiguration; end
+      class Unknown < RouterOutputProtocolConfiguration; end
+    end
+
+    # <p>The request to create a new router output would exceed the service quotas (limits) set for the account. </p>
+    # @!attribute message
+    #   @return [String]
+    class RouterOutputServiceQuotaExceededException < Struct.new(
+      nil,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Information about the router output's stream, including connection state and destination details. The specific details provided vary based on the router output type.</p>
+    # @!attribute standard
+    #   <p>Configuration details for a standard router output stream type. Contains information about the destination IP address and connection state for basic output routing.</p>
+    #   @return [Types::StandardRouterOutputStreamDetails]
+    # @!attribute media_connect_flow
+    #   <p>Configuration details for a MediaConnect flow when used as a router output destination.</p>
+    #   @return [Types::MediaConnectFlowRouterOutputStreamDetails]
+    # @!attribute media_live_input
+    #   <p>Configuration details for a MediaLive input when used as a router output destination.</p>
+    #   @return [Types::MediaLiveInputRouterOutputStreamDetails]
+    class RouterOutputStreamDetails < Struct.new(
+      :standard,
+      :media_connect_flow,
+      :media_live_input,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class Standard < RouterOutputStreamDetails; end
+      class MediaConnectFlow < RouterOutputStreamDetails; end
+      class MediaLiveInput < RouterOutputStreamDetails; end
+      class Unknown < RouterOutputStreamDetails; end
+    end
+
+    # <p>The configuration settings for a router output that pushes a stream to a destination using the RTMP (Real-Time Messaging Protocol) protocol, or RTMPS (RTMP over TLS) when TLS encryption is specified. These settings include the destination address and port, the application and stream names, and optional TLS encryption configuration.</p>
+    # @!attribute destination_address
+    #   <p>The IP address or hostname of the destination RTMP server that the router output pushes the stream to. Provide only the server address; specify the application and stream names separately.</p>
+    #   @return [String]
+    # @!attribute destination_port
+    #   <p>The TCP port on the destination RTMP server. For RTMP, valid values range from <code>1024</code> to <code>65535</code>. For RTMPS (RTMP over TLS), valid values are <code>443</code> or <code>1024</code> to <code>65535</code>. RTMP typically uses port <code>1935</code>, and RTMPS typically uses port <code>443</code>.</p>
+    #   @return [Integer]
+    # @!attribute application_name
+    #   <p>The name of the RTMP application on the destination server. Together with the stream name, the application name forms the RTMP URL path, in the pattern <code>rtmp://destinationAddress/applicationName/streamName</code>.</p>
+    #   @return [String]
+    # @!attribute stream_name
+    #   <p>The name of the RTMP stream that the output publishes to the destination application. The stream name forms the final segment of the RTMP URL path.</p>
+    #   @return [String]
+    # @!attribute tls_encryption
+    #   <p>The TLS encryption settings for the output. When you specify these settings, the output uses RTMPS (RTMP over TLS) to establish a secure, encrypted connection to the destination server.</p>
+    #   @return [Types::TlsEncryption]
+    class RtmpPushRouterOutputConfiguration < Struct.new(
+      nil,
+      :destination_address,
+      :destination_port,
+      :application_name,
+      :stream_name,
+      :tls_encryption,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration settings for a Router Input using the RTP (Real-Time Transport Protocol) protocol, including the port and forward error correction state.</p>
+    # @!attribute port
+    #   <p>The port number used for the RTP protocol in the router input configuration.</p>
+    #   @return [Integer]
+    # @!attribute forward_error_correction
+    #   <p>The state of forward error correction for the RTP protocol in the router input configuration.</p>
+    #   @return [String]
+    class RtpRouterInputConfiguration < Struct.new(
+      nil,
+      :port,
+      :forward_error_correction,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration settings for a router output using the RTP (Real-Time Transport Protocol) protocol, including the destination address and port, and forward error correction state.</p>
+    # @!attribute destination_address
+    #   <p>The destination IP address for the RTP protocol in the router output configuration.</p>
+    #   @return [String]
+    # @!attribute destination_port
+    #   <p>The destination port number for the RTP protocol in the router output configuration.</p>
+    #   @return [Integer]
+    # @!attribute forward_error_correction
+    #   <p>The state of forward error correction for the RTP protocol in the router output configuration.</p>
+    #   @return [String]
+    class RtpRouterOutputConfiguration < Struct.new(
+      nil,
+      :destination_address,
+      :destination_port,
+      :forward_error_correction,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration settings for transit encryption using Secrets Manager, including the secret ARN and role ARN.</p>
+    # @!attribute secret_arn
+    #   <p>The ARN of the Secrets Manager secret used for transit encryption.</p>
+    #   @return [String]
+    # @!attribute role_arn
+    #   <p>The ARN of the IAM role assumed by MediaConnect to access the Secrets Manager secret.</p>
+    #   @return [String]
+    class SecretsManagerEncryptionKeyConfiguration < Struct.new(
+      nil,
+      :secret_arn,
+      :role_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3025,6 +5498,18 @@ module Aws::MediaConnect
     # @!attribute gateway_bridge_source
     #   <p> The source configuration for cloud flows receiving a stream from a bridge.</p>
     #   @return [Types::SetGatewayBridgeSourceRequest]
+    # @!attribute ndi_source_settings
+    #   <p> The settings for the NDI® source. This includes the exact name of the upstream NDI sender that you want to connect to your source. </p>
+    #   @return [Types::NdiSourceSettings]
+    # @!attribute source_tags
+    #   <p> The key-value pairs that can be used to tag and organize the source. </p>
+    #   @return [Hash<String, String>]
+    # @!attribute router_integration_state
+    #   <p>Indicates whether to enable or disable router integration when setting a flow source.</p>
+    #   @return [String]
+    # @!attribute router_integration_transit_decryption
+    #   <p>The decryption configuration for the flow source when router integration is enabled. Specifies how the source content should be decrypted when router integration is used.</p>
+    #   @return [Types::FlowTransitEncryption]
     class SetSourceRequest < Struct.new(
       nil,
       :decryption,
@@ -3046,6 +5531,10 @@ module Aws::MediaConnect
       :vpc_interface_name,
       :whitelist_cidr,
       :gateway_bridge_source,
+      :ndi_source_settings,
+      :source_tags,
+      :router_integration_state,
+      :router_integration_transit_decryption,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3059,6 +5548,22 @@ module Aws::MediaConnect
     #   <p>Specifies the number of consecutive seconds of silence that triggers an event or alert. </p>
     #   @return [Integer]
     class SilentAudio < Struct.new(
+      nil,
+      :state,
+      :threshold_seconds,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Detects silent audio in the router input's source content and reports it through a CloudWatch metric, an EventBridge event, and a router input message.</p>
+    # @!attribute state
+    #   <p>Indicates whether silent audio detection is enabled or disabled.</p>
+    #   @return [String]
+    # @!attribute threshold_seconds
+    #   <p>The number of consecutive seconds of silence that MediaConnect must detect before it reports an issue.</p>
+    #   @return [Integer]
+    class SilentAudioConfiguration < Struct.new(
       nil,
       :state,
       :threshold_seconds,
@@ -3093,10 +5598,10 @@ module Aws::MediaConnect
     #   <p> The name of the source.</p>
     #   @return [String]
     # @!attribute sender_control_port
-    #   <p> The IP address that the flow communicates with to initiate connection with the sender.</p>
+    #   <p> The port that the flow uses to send outbound requests to initiate connection with the sender.</p>
     #   @return [Integer]
     # @!attribute sender_ip_address
-    #   <p> The port that the flow uses to send outbound requests to initiate connection with the sender.</p>
+    #   <p> The IP address that the flow communicates with to initiate connection with the sender.</p>
     #   @return [String]
     # @!attribute source_arn
     #   <p> The ARN of the source.</p>
@@ -3116,6 +5621,15 @@ module Aws::MediaConnect
     # @!attribute peer_ip_address
     #   <p>The IP address of the device that is currently sending content to this source. </p> <note> <ul> <li> <p>For sources that use protocols where you specify the origin (such as SRT Caller), this value matches the configured origin address. </p> </li> <li> <p>For sources that use listener protocols (such as SRT Listener or RTP), this value shows the address of the connected sender. </p> </li> <li> <p>Peer IP addresses aren't available for entitlements and CDI/ST2110 sources.</p> </li> <li> <p>The peer IP address might not be visible for flows that haven't been started yet, or flows that were started before May 2025. In these cases, restart your flow to see the peer IP address.</p> </li> </ul> </note>
     #   @return [String]
+    # @!attribute router_integration_state
+    #   <p>Indicates if router integration is enabled or disabled on the flow source.</p>
+    #   @return [String]
+    # @!attribute router_integration_transit_decryption
+    #   <p>The decryption configuration for the flow source when router integration is enabled.</p>
+    #   @return [Types::FlowTransitEncryption]
+    # @!attribute connected_router_output_arn
+    #   <p>The ARN of the router output that's currently connected to this source.</p>
+    #   @return [String]
     class Source < Struct.new(
       nil,
       :data_transfer_subscriber_fee_percent,
@@ -3134,6 +5648,9 @@ module Aws::MediaConnect
       :whitelist_cidr,
       :gateway_bridge_source,
       :peer_ip_address,
+      :router_integration_state,
+      :router_integration_transit_decryption,
+      :connected_router_output_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3146,6 +5663,190 @@ module Aws::MediaConnect
     class SourcePriority < Struct.new(
       nil,
       :primary_source,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration settings for a router input using the SRT (Secure Reliable Transport) protocol in caller mode, including the source address and port, minimum latency, stream ID, and decryption key configuration.</p>
+    # @!attribute source_address
+    #   <p>The source IP address for the SRT protocol in caller mode.</p>
+    #   @return [String]
+    # @!attribute source_port
+    #   <p>The source port number for the SRT protocol in caller mode.</p>
+    #   @return [Integer]
+    # @!attribute minimum_latency_milliseconds
+    #   <p>The minimum latency in milliseconds for the SRT protocol in caller mode.</p>
+    #   @return [Integer]
+    # @!attribute stream_id
+    #   <p>The stream ID for the SRT protocol in caller mode.</p>
+    #   @return [String]
+    # @!attribute decryption_configuration
+    #   <p>Specifies the decryption settings for an SRT caller input, including the encryption key configuration and associated parameters.</p>
+    #   @return [Types::SrtDecryptionConfiguration]
+    class SrtCallerRouterInputConfiguration < Struct.new(
+      nil,
+      :source_address,
+      :source_port,
+      :minimum_latency_milliseconds,
+      :stream_id,
+      :decryption_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration settings for a router output using the SRT (Secure Reliable Transport) protocol in caller mode, including the destination address and port, minimum latency, stream ID, and encryption key configuration.</p>
+    # @!attribute destination_address
+    #   <p>The destination IP address for the SRT protocol in caller mode.</p>
+    #   @return [String]
+    # @!attribute destination_port
+    #   <p>The destination port number for the SRT protocol in caller mode.</p>
+    #   @return [Integer]
+    # @!attribute minimum_latency_milliseconds
+    #   <p>The minimum latency in milliseconds for the SRT protocol in caller mode.</p>
+    #   @return [Integer]
+    # @!attribute stream_id
+    #   <p>The stream ID for the SRT protocol in caller mode.</p>
+    #   @return [String]
+    # @!attribute encryption_configuration
+    #   <p>Defines the encryption settings for an SRT caller output, including the encryption key configuration and associated parameters.</p>
+    #   @return [Types::SrtEncryptionConfiguration]
+    class SrtCallerRouterOutputConfiguration < Struct.new(
+      nil,
+      :destination_address,
+      :destination_port,
+      :minimum_latency_milliseconds,
+      :stream_id,
+      :encryption_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the configuration settings for decrypting SRT streams, including the encryption key details and decryption parameters.</p>
+    # @!attribute encryption_key
+    #   <p>Specifies the encryption key configuration used for decrypting SRT streams, including the key source and associated credentials.</p>
+    #   @return [Types::SecretsManagerEncryptionKeyConfiguration]
+    class SrtDecryptionConfiguration < Struct.new(
+      nil,
+      :encryption_key,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the configuration settings for encrypting SRT streams, including the encryption key details and encryption parameters.</p>
+    # @!attribute encryption_key
+    #   <p>Specifies the encryption key configuration used for encrypting SRT streams, including the key source and associated credentials.</p>
+    #   @return [Types::SecretsManagerEncryptionKeyConfiguration]
+    class SrtEncryptionConfiguration < Struct.new(
+      nil,
+      :encryption_key,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration settings for a router input using the SRT (Secure Reliable Transport) protocol in listener mode, including the port, minimum latency, and decryption key configuration.</p>
+    # @!attribute port
+    #   <p>The port number for the SRT protocol in listener mode.</p>
+    #   @return [Integer]
+    # @!attribute minimum_latency_milliseconds
+    #   <p>The minimum latency in milliseconds for the SRT protocol in listener mode.</p>
+    #   @return [Integer]
+    # @!attribute decryption_configuration
+    #   <p>Specifies the decryption settings for an SRT listener input, including the encryption key configuration and associated parameters.</p>
+    #   @return [Types::SrtDecryptionConfiguration]
+    class SrtListenerRouterInputConfiguration < Struct.new(
+      nil,
+      :port,
+      :minimum_latency_milliseconds,
+      :decryption_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration settings for a router output using the SRT (Secure Reliable Transport) protocol in listener mode, including the port, minimum latency, and encryption key configuration.</p>
+    # @!attribute port
+    #   <p>The port number for the SRT protocol in listener mode.</p>
+    #   @return [Integer]
+    # @!attribute minimum_latency_milliseconds
+    #   <p>The minimum latency in milliseconds for the SRT protocol in listener mode.</p>
+    #   @return [Integer]
+    # @!attribute encryption_configuration
+    #   <p>Defines the encryption settings for an SRT listener output, including the encryption key configuration and associated parameters.</p>
+    #   @return [Types::SrtEncryptionConfiguration]
+    class SrtListenerRouterOutputConfiguration < Struct.new(
+      nil,
+      :port,
+      :minimum_latency_milliseconds,
+      :encryption_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration settings for a standard router input, including the protocol, protocol-specific configuration, network interface, and availability zone.</p>
+    # @!attribute network_interface_arn
+    #   <p>The Amazon Resource Name (ARN) of the network interface associated with the standard router input.</p>
+    #   @return [String]
+    # @!attribute protocol_configuration
+    #   <p>The configuration settings for the protocol used by the standard router input.</p>
+    #   @return [Types::RouterInputProtocolConfiguration]
+    # @!attribute protocol
+    #   <p>The protocol used by the standard router input.</p>
+    #   @return [String]
+    class StandardRouterInputConfiguration < Struct.new(
+      nil,
+      :network_interface_arn,
+      :protocol_configuration,
+      :protocol,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration details for a standard router input stream type.</p>
+    # @!attribute source_ip_address
+    #   <p>The source IP address for the standard router input stream.</p>
+    #   @return [String]
+    class StandardRouterInputStreamDetails < Struct.new(
+      nil,
+      :source_ip_address,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration settings for a standard router output, including the protocol, protocol-specific configuration, network interface, and availability zone.</p>
+    # @!attribute network_interface_arn
+    #   <p>The Amazon Resource Name (ARN) of the network interface associated with the standard router output.</p>
+    #   @return [String]
+    # @!attribute protocol_configuration
+    #   <p>The configuration settings for the protocol used by the standard router output.</p>
+    #   @return [Types::RouterOutputProtocolConfiguration]
+    # @!attribute protocol
+    #   <p>The protocol used by the standard router output.</p>
+    #   @return [String]
+    class StandardRouterOutputConfiguration < Struct.new(
+      nil,
+      :network_interface_arn,
+      :protocol_configuration,
+      :protocol,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration details for a standard router output stream type. Contains information about the destination IP address and connection state for basic output routing.</p>
+    # @!attribute destination_ip_address
+    #   <p>The IP address where the output stream will be sent. This is the destination address that will receive the routed media content.</p>
+    #   @return [String]
+    class StandardRouterOutputStreamDetails < Struct.new(
+      nil,
+      :destination_ip_address,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3177,6 +5878,82 @@ module Aws::MediaConnect
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the router input that you want to start.</p>
+    #   @return [String]
+    class StartRouterInputRequest < Struct.new(
+      nil,
+      :arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>The ARN of the router input that was started.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the router input that was started.</p>
+    #   @return [String]
+    # @!attribute state
+    #   <p>The current state of the router input after being started.</p>
+    #   @return [String]
+    # @!attribute maintenance_schedule_type
+    #   <p>The type of maintenance schedule associated with the router input.</p>
+    #   @return [String]
+    # @!attribute maintenance_schedule
+    #   <p>The details of the maintenance schedule for the router input.</p>
+    #   @return [Types::MaintenanceSchedule]
+    class StartRouterInputResponse < Struct.new(
+      nil,
+      :arn,
+      :name,
+      :state,
+      :maintenance_schedule_type,
+      :maintenance_schedule,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the router output that you want to start.</p>
+    #   @return [String]
+    class StartRouterOutputRequest < Struct.new(
+      nil,
+      :arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the router output that was started.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the router output that was started.</p>
+    #   @return [String]
+    # @!attribute state
+    #   <p>The current state of the router output after being started.</p>
+    #   @return [String]
+    # @!attribute maintenance_schedule_type
+    #   <p>The type of maintenance schedule associated with the router output.</p>
+    #   @return [String]
+    # @!attribute maintenance_schedule
+    #   <p>The details of the maintenance schedule for the router output.</p>
+    #   @return [Types::MaintenanceSchedule]
+    class StartRouterOutputResponse < Struct.new(
+      nil,
+      :arn,
+      :name,
+      :state,
+      :maintenance_schedule_type,
+      :maintenance_schedule,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute flow_arn
     #   <p> The Amazon Resource Name (ARN) of the flow that you want to stop.</p>
     #   @return [String]
@@ -3203,6 +5980,81 @@ module Aws::MediaConnect
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the router input that you want to stop.</p>
+    #   @return [String]
+    class StopRouterInputRequest < Struct.new(
+      nil,
+      :arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>The ARN of the router input that was stopped.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the router input that was stopped.</p>
+    #   @return [String]
+    # @!attribute state
+    #   <p>The current state of the router input after being stopped.</p>
+    #   @return [String]
+    class StopRouterInputResponse < Struct.new(
+      nil,
+      :arn,
+      :name,
+      :state,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the router output that you want to stop.</p>
+    #   @return [String]
+    class StopRouterOutputRequest < Struct.new(
+      nil,
+      :arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>The ARN of the router output that was stopped.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the router output that was stopped.</p>
+    #   @return [String]
+    # @!attribute state
+    #   <p>The current state of the router output after being stopped.</p>
+    #   @return [String]
+    class StopRouterOutputResponse < Struct.new(
+      nil,
+      :arn,
+      :name,
+      :state,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the global resource to tag.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>A map of tag keys and values to add to the global resource.</p>
+    #   @return [Hash<String, String>]
+    class TagGlobalResourceRequest < Struct.new(
+      nil,
+      :resource_arn,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute resource_arn
     #   <p> The Amazon Resource Name (ARN) that identifies the MediaConnect resource to which to add tags.</p>
     #   @return [String]
@@ -3213,6 +6065,48 @@ module Aws::MediaConnect
       nil,
       :resource_arn,
       :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute router_output_arn
+    #   <p>The Amazon Resource Name (ARN) of the router output that you want to associate with a router input.</p>
+    #   @return [String]
+    # @!attribute router_input_arn
+    #   <p>The Amazon Resource Name (ARN) of the router input that you want to associate with a router output.</p>
+    #   @return [String]
+    class TakeRouterInputRequest < Struct.new(
+      nil,
+      :router_output_arn,
+      :router_input_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute routed_state
+    #   <p>The state of the association between the router input and output.</p>
+    #   @return [String]
+    # @!attribute router_output_arn
+    #   <p>The ARN of the associated router output.</p>
+    #   @return [String]
+    # @!attribute router_output_name
+    #   <p>The name of the associated router output.</p>
+    #   @return [String]
+    # @!attribute router_input_arn
+    #   <p>The ARN of the associated router input.</p>
+    #   @return [String]
+    # @!attribute router_input_name
+    #   <p>The name of the associated router input.</p>
+    #   @return [String]
+    class TakeRouterInputResponse < Struct.new(
+      nil,
+      :routed_state,
+      :router_output_arn,
+      :router_output_name,
+      :router_input_arn,
+      :router_input_name,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3244,6 +6138,37 @@ module Aws::MediaConnect
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+    end
+
+    # <p>The Transport Layer Security (TLS) encryption settings used to establish a secure connection to a destination.</p>
+    # @!attribute encryption_type
+    #   <p>The type of TLS encryption to use for the connection.</p>
+    #   @return [String]
+    # @!attribute encryption_configuration
+    #   <p>The configuration settings for the specified TLS encryption type.</p>
+    #   @return [Types::TlsEncryptionConfiguration]
+    class TlsEncryption < Struct.new(
+      nil,
+      :encryption_type,
+      :encryption_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration settings for TLS encryption.</p>
+    # @!attribute public
+    #   <p>The TLS encryption configuration that validates the destination by using a publicly trusted certificate authority.</p>
+    #   @return [Types::PublicTlsEncryptionConfiguration]
+    class TlsEncryptionConfiguration < Struct.new(
+      :public,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class Public < TlsEncryptionConfiguration; end
+      class Unknown < TlsEncryptionConfiguration; end
     end
 
     # <p>The request was denied due to request throttling. </p>
@@ -3301,8 +6226,17 @@ module Aws::MediaConnect
     #   <p>A quality setting for the NDI Speed HQ encoder. </p>
     #   @return [Integer]
     # @!attribute ndi_program_name
-    #   <p>A suffix for the names of the NDI sources that the flow creates. If a custom name isn't specified, MediaConnect uses the output name. </p>
+    #   <p>A suffix for the name of the NDI® sender that the flow creates. If a custom name isn't specified, MediaConnect uses the output name. </p>
     #   @return [String]
+    # @!attribute ndi_source_settings
+    #   <p> The settings for the NDI source. This includes the exact name of the upstream NDI sender that you want to connect to your source. </p>
+    #   @return [Types::NdiSourceSettings]
+    # @!attribute ndi_output_timecode_source
+    #   <p>The timecode source for NDI output frames. For NDI outputs, this field is always present and defaults to <code>EMBEDDED_TIMECODE</code>.</p> <ul> <li> <p> <code>EMBEDDED_TIMECODE</code> - Preserves timecodes from the input transport stream. The timecodes must be embedded in the video stream as SEI timing messages. If no embedded timecode is detected, MediaConnect uses the UTC system time instead.</p> </li> <li> <p> <code>UTC_SYSTEM_TIME</code> - Generates timecodes based on the system clock time when each frame is sent.</p> </li> </ul>
+    #   @return [String]
+    # @!attribute ndi_audio_reference_level
+    #   <p>The audio reference level of the NDI receiver, in decibels relative to full scale (dBFS). Common values are <code>-20</code> (NDI and SMPTE) and <code>-18</code> (EBU). For NDI outputs, this field is always present and defaults to <code>-20</code>.</p>
+    #   @return [Integer]
     class Transport < Struct.new(
       nil,
       :cidr_allow_list,
@@ -3320,6 +6254,9 @@ module Aws::MediaConnect
       :stream_id,
       :ndi_speed_hq_quality,
       :ndi_program_name,
+      :ndi_source_settings,
+      :ndi_output_timecode_source,
+      :ndi_audio_reference_level,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3329,9 +6266,13 @@ module Aws::MediaConnect
     # @!attribute programs
     #   <p> The list of transport stream programs in the current flow's source.</p>
     #   @return [Array<Types::TransportStreamProgram>]
+    # @!attribute ts_id
+    #   <p>The transport stream ID (TSID) of the source, from the Program Association Table (PAT).</p>
+    #   @return [Integer]
     class TransportMediaInfo < Struct.new(
       nil,
       :programs,
+      :ts_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3344,6 +6285,9 @@ module Aws::MediaConnect
     # @!attribute codec
     #   <p> The codec used by the stream.</p>
     #   @return [String]
+    # @!attribute color
+    #   <p>The color signaling of the video stream.</p>
+    #   @return [Types::ColorInformation]
     # @!attribute frame_rate
     #   <p> The frame rate used by the video stream.</p>
     #   @return [String]
@@ -3366,6 +6310,7 @@ module Aws::MediaConnect
       nil,
       :channels,
       :codec,
+      :color,
       :frame_rate,
       :frame_resolution,
       :pid,
@@ -3400,6 +6345,21 @@ module Aws::MediaConnect
       :program_number,
       :program_pid,
       :streams,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the global resource to remove tags from.</p>
+    #   @return [String]
+    # @!attribute tag_keys
+    #   <p>The keys of the tags to remove from the global resource.</p>
+    #   @return [Array<String>]
+    class UntagGlobalResourceRequest < Struct.new(
+      nil,
+      :resource_arn,
+      :tag_keys,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3859,10 +6819,22 @@ module Aws::MediaConnect
     #   <p> An indication of whether the output should transmit data or not. If you don't specify the <code>outputStatus</code> field in your request, MediaConnect leaves the value unchanged.</p>
     #   @return [String]
     # @!attribute ndi_program_name
-    #   <p> A suffix for the names of the NDI sources that the flow creates. If a custom name isn't specified, MediaConnect uses the output name. </p>
+    #   <p> A suffix for the name of the NDI® sender that the flow creates. If a custom name isn't specified, MediaConnect uses the output name. </p>
     #   @return [String]
     # @!attribute ndi_speed_hq_quality
     #   <p>A quality setting for the NDI Speed HQ encoder. </p>
+    #   @return [Integer]
+    # @!attribute router_integration_state
+    #   <p>Indicates whether to enable or disable router integration for this flow output.</p>
+    #   @return [String]
+    # @!attribute router_integration_transit_encryption
+    #   <p>The configuration that defines how content is encrypted during transit between the MediaConnect router and a MediaConnect flow.</p>
+    #   @return [Types::FlowTransitEncryption]
+    # @!attribute ndi_output_timecode_source
+    #   <p>Controls how MediaConnect generates timecodes for NDI output frames. If you don't specify this field, MediaConnect leaves the value unchanged.</p> <ul> <li> <p> <code>EMBEDDED_TIMECODE</code> - Preserves timecodes from the input transport stream. The timecodes must be embedded in the video stream as SEI timing messages. If no embedded timecode is detected, MediaConnect uses the UTC system time instead.</p> </li> <li> <p> <code>UTC_SYSTEM_TIME</code> - Generates timecodes based on the system clock time when each frame is sent.</p> </li> </ul>
+    #   @return [String]
+    # @!attribute ndi_audio_reference_level
+    #   <p>The audio reference level of the NDI receiver, in decibels relative to full scale (dBFS). Common values are <code>-20</code> (NDI and SMPTE) and <code>-18</code> (EBU). If you don't specify this field, MediaConnect leaves the value unchanged.</p>
     #   @return [Integer]
     class UpdateFlowOutputRequest < Struct.new(
       nil,
@@ -3886,6 +6858,10 @@ module Aws::MediaConnect
       :output_status,
       :ndi_program_name,
       :ndi_speed_hq_quality,
+      :router_integration_state,
+      :router_integration_transit_encryption,
+      :ndi_output_timecode_source,
+      :ndi_audio_reference_level,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3919,8 +6895,14 @@ module Aws::MediaConnect
     #   <p> The settings for source monitoring. </p>
     #   @return [Types::MonitoringConfig]
     # @!attribute ndi_config
-    #   <p> Specifies the configuration settings for NDI outputs. Required when the flow includes NDI outputs. </p>
+    #   <p> Specifies the configuration settings for a flow's NDI source or output. Required when the flow includes an NDI source or output. </p>
     #   @return [Types::NdiConfig]
+    # @!attribute flow_size
+    #   <p> Determines the processing capacity and feature set of the flow. </p>
+    #   @return [String]
+    # @!attribute encoding_config
+    #   <p> The encoding configuration to apply to the NDI® source when transcoding it to a transport stream for downstream distribution. You can choose between several predefined encoding profiles based on common use cases. </p>
+    #   @return [Types::EncodingConfig]
     class UpdateFlowRequest < Struct.new(
       nil,
       :flow_arn,
@@ -3928,6 +6910,8 @@ module Aws::MediaConnect
       :maintenance,
       :source_monitoring_config,
       :ndi_config,
+      :flow_size,
+      :encoding_config,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4004,6 +6988,15 @@ module Aws::MediaConnect
     # @!attribute gateway_bridge_source
     #   <p>The source configuration for cloud flows receiving a stream from a bridge. </p>
     #   @return [Types::UpdateGatewayBridgeSourceRequest]
+    # @!attribute ndi_source_settings
+    #   <p> The settings for the NDI source. This includes the exact name of the upstream NDI sender that you want to connect to your source. </p>
+    #   @return [Types::NdiSourceSettings]
+    # @!attribute router_integration_state
+    #   <p>Indicates whether to enable or disable router integration for this flow source.</p>
+    #   @return [String]
+    # @!attribute router_integration_transit_decryption
+    #   <p>The encryption configuration for the flow source when router integration is enabled.</p>
+    #   @return [Types::FlowTransitEncryption]
     class UpdateFlowSourceRequest < Struct.new(
       nil,
       :decryption,
@@ -4026,13 +7019,16 @@ module Aws::MediaConnect
       :vpc_interface_name,
       :whitelist_cidr,
       :gateway_bridge_source,
+      :ndi_source_settings,
+      :router_integration_state,
+      :router_integration_transit_decryption,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_arn
-    #   <p>The ARN of the flow that you was updated. </p>
+    #   <p>The ARN of the flow that you updated.</p>
     #   @return [String]
     # @!attribute source
     #   <p>The details of the sources that are assigned to the flow. </p>
@@ -4128,6 +7124,140 @@ module Aws::MediaConnect
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the router input that you want to update.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The updated name for the router input.</p>
+    #   @return [String]
+    # @!attribute configuration
+    #   <p>The updated configuration settings for the router input. Changing the type of the configuration is not supported.</p>
+    #   @return [Types::RouterInputConfiguration]
+    # @!attribute maximum_bitrate
+    #   <p>The updated maximum bitrate for the router input.</p>
+    #   @return [Integer]
+    # @!attribute routing_scope
+    #   <p>Specifies whether the router input can be assigned to outputs in different Regions. REGIONAL (default) - can be assigned only to outputs in the same Region. GLOBAL - can be assigned to outputs in any Region.</p>
+    #   @return [String]
+    # @!attribute tier
+    #   <p>The updated tier level for the router input. The tier sets the maximum bitrate, in Mbps, for the router input. Valid values include the following:</p> <ul> <li> <p> <code>INPUT_20</code> – 20 Mbps</p> </li> <li> <p> <code>INPUT_50</code> – 50 Mbps</p> </li> <li> <p> <code>INPUT_100</code> – 100 Mbps</p> </li> <li> <p> <code>INPUT_250</code> – 250 Mbps</p> </li> <li> <p> <code>INPUT_500</code> – 500 Mbps</p> </li> </ul> <p>The 250 Mbps and 500 Mbps tiers are high-bitrate tiers that support TR-07 (JPEG XS) workflows.</p>
+    #   @return [String]
+    # @!attribute transit_encryption
+    #   <p>The updated transit encryption settings for the router input.</p>
+    #   @return [Types::RouterInputTransitEncryption]
+    # @!attribute maintenance_configuration
+    #   <p>The updated maintenance configuration settings for the router input, including any changes to preferred maintenance windows and schedules.</p>
+    #   @return [Types::MaintenanceConfiguration]
+    # @!attribute content_quality_analysis_configuration
+    #   <p>The content quality analysis configuration for the router input.</p>
+    #   @return [Types::RouterContentQualityAnalysisConfiguration]
+    class UpdateRouterInputRequest < Struct.new(
+      nil,
+      :arn,
+      :name,
+      :configuration,
+      :maximum_bitrate,
+      :routing_scope,
+      :tier,
+      :transit_encryption,
+      :maintenance_configuration,
+      :content_quality_analysis_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute router_input
+    #   <p>The updated router input.</p>
+    #   @return [Types::RouterInput]
+    class UpdateRouterInputResponse < Struct.new(
+      nil,
+      :router_input,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the router network interface that you want to update.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The updated name for the router network interface.</p>
+    #   @return [String]
+    # @!attribute configuration
+    #   <p>The updated configuration settings for the router network interface. Changing the type of the configuration is not supported.</p>
+    #   @return [Types::RouterNetworkInterfaceConfiguration]
+    class UpdateRouterNetworkInterfaceRequest < Struct.new(
+      nil,
+      :arn,
+      :name,
+      :configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute router_network_interface
+    #   <p>The updated router network interface.</p>
+    #   @return [Types::RouterNetworkInterface]
+    class UpdateRouterNetworkInterfaceResponse < Struct.new(
+      nil,
+      :router_network_interface,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the router output that you want to update.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The updated name for the router output.</p>
+    #   @return [String]
+    # @!attribute configuration
+    #   <p>The updated configuration settings for the router output. Changing the type of the configuration is not supported.</p>
+    #   @return [Types::RouterOutputConfiguration]
+    # @!attribute maximum_bitrate
+    #   <p>The updated maximum bitrate for the router output.</p>
+    #   @return [Integer]
+    # @!attribute routing_scope
+    #   <p>Specifies whether the router output can take inputs that are in different Regions. REGIONAL (default) - can only take inputs from same Region. GLOBAL - can take inputs from any Region.</p>
+    #   @return [String]
+    # @!attribute tier
+    #   <p>The updated tier level for the router output. The tier sets the maximum bitrate, in Mbps, for the router output. Valid values include the following:</p> <ul> <li> <p> <code>OUTPUT_20</code> – 20 Mbps</p> </li> <li> <p> <code>OUTPUT_50</code> – 50 Mbps</p> </li> <li> <p> <code>OUTPUT_100</code> – 100 Mbps</p> </li> <li> <p> <code>OUTPUT_250</code> – 250 Mbps</p> </li> <li> <p> <code>OUTPUT_500</code> – 500 Mbps</p> </li> </ul> <p>The 250 Mbps and 500 Mbps tiers are high-bitrate tiers that support TR-07 (JPEG XS) workflows.</p>
+    #   @return [String]
+    # @!attribute maintenance_configuration
+    #   <p>The updated maintenance configuration settings for the router output, including any changes to preferred maintenance windows and schedules.</p>
+    #   @return [Types::MaintenanceConfiguration]
+    # @!attribute fabric_configuration
+    #   <p>The updated fabric configuration settings for the router output. You cannot update the fabric configuration while the output has an active route. You must unroute the output before updating the fabric configuration.</p>
+    #   @return [Types::FabricConfiguration]
+    class UpdateRouterOutputRequest < Struct.new(
+      nil,
+      :arn,
+      :name,
+      :configuration,
+      :maximum_bitrate,
+      :routing_scope,
+      :tier,
+      :maintenance_configuration,
+      :fabric_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute router_output
+    #   <p>The updated router output.</p>
+    #   @return [Types::RouterOutput]
+    class UpdateRouterOutputResponse < Struct.new(
+      nil,
+      :router_output,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Specifies the configuration for video stream metrics monitoring.</p>
     # @!attribute black_frames
     #   <p>Detects video frames that are black. </p>
@@ -4204,6 +7334,9 @@ module Aws::MediaConnect
     # @!attribute subnet_id
     #   <p> The subnet IDs that you want to use for your VPC interface. A range of IP addresses in your VPC. When you create your VPC, you specify a range of IPv4 addresses for the VPC in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16. This is the primary CIDR block for your VPC. When you create a subnet for your VPC, you specify the CIDR block for the subnet, which is a subset of the VPC CIDR block. The subnets that you use across all VPC interfaces on the flow must be in the same Availability Zone as the flow. </p>
     #   @return [String]
+    # @!attribute vpc_interface_tags
+    #   <p> The key-value pairs that can be used to tag and organize the VPC network interface. </p>
+    #   @return [Hash<String, String>]
     class VpcInterfaceRequest < Struct.new(
       nil,
       :name,
@@ -4211,6 +7344,43 @@ module Aws::MediaConnect
       :role_arn,
       :security_group_ids,
       :subnet_id,
+      :vpc_interface_tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration settings for a router network interface within a VPC, including the security group IDs and subnet ID.</p>
+    # @!attribute security_group_ids
+    #   <p>The IDs of the security groups to associate with the router network interface within the VPC.</p>
+    #   @return [Array<String>]
+    # @!attribute subnet_id
+    #   <p>The ID of the subnet within the VPC to associate the router network interface with.</p>
+    #   @return [String]
+    class VpcRouterNetworkInterfaceConfiguration < Struct.new(
+      nil,
+      :security_group_ids,
+      :subnet_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Defines a specific time window for maintenance operations.</p>
+    # @!attribute start
+    #   <p>The start time of the maintenance window.</p>
+    #   @return [Time]
+    # @!attribute end
+    #   <p>The end time of the maintenance window.</p>
+    #   @return [Time]
+    # @!attribute scheduled_time
+    #   <p>The date and time when the maintenance window is scheduled to occur.</p>
+    #   @return [Time]
+    class WindowMaintenanceSchedule < Struct.new(
+      nil,
+      :start,
+      :end,
+      :scheduled_time,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

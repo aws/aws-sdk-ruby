@@ -3,6 +3,8 @@ module Aws::BedrockAgent
     include Smithy::Schema::Shapes
 
     APISchema: UnionShape
+    AccessControlAccess: EnumShape
+    AccessControlPrincipalType: EnumShape
     AccessDeniedException: StructureShape
     ActionGroupExecutor: UnionShape
     ActionGroupSignature: EnumShape
@@ -48,6 +50,10 @@ module Aws::BedrockAgent
     AssociateAgentCollaboratorResponse: StructureShape
     AssociateAgentKnowledgeBaseRequest: StructureShape
     AssociateAgentKnowledgeBaseResponse: StructureShape
+    AudioConfiguration: StructureShape
+    AudioConfigurations: ListShape
+    AudioExtractionConfiguration: StructureShape
+    AudioSegmentationConfiguration: StructureShape
     AutoToolChoice: StructureShape
     AwsDataCatalogTableName: StringShape
     AwsDataCatalogTableNames: ListShape
@@ -107,6 +113,8 @@ module Aws::BedrockAgent
     CreatePromptResponse: StructureShape
     CreatePromptVersionRequest: StructureShape
     CreatePromptVersionResponse: StructureShape
+    CreateVpcConfigurationRequest: StructureShape
+    CreateVpcConfigurationResponse: StructureShape
     CreationMode: EnumShape
     CuratedQueries: ListShape
     CuratedQuery: StructureShape
@@ -118,6 +126,7 @@ module Aws::BedrockAgent
     CustomSourceType: EnumShape
     CustomTransformationConfiguration: StructureShape
     CyclicConnectionFlowValidationDetails: StructureShape
+    DailySchedule: StructureShape
     Data: StringShape
     DataDeletionPolicy: EnumShape
     DataSource: StructureShape
@@ -127,6 +136,9 @@ module Aws::BedrockAgent
     DataSourceSummary: StructureShape
     DataSourceType: EnumShape
     DateTimestamp: TimestampShape
+    DayOfMonth: UnionShape
+    DayOfMonthNumber: IntegerShape
+    DayOfWeek: EnumShape
     DeleteAgentActionGroupRequest: StructureShape
     DeleteAgentActionGroupResponse: StructureShape
     DeleteAgentAliasRequest: StructureShape
@@ -149,6 +161,11 @@ module Aws::BedrockAgent
     DeleteKnowledgeBaseResponse: StructureShape
     DeletePromptRequest: StructureShape
     DeletePromptResponse: StructureShape
+    DeleteResourcePolicyRequest: StructureShape
+    DeleteResourcePolicyResponse: StructureShape
+    DeleteVpcConfigurationRequest: StructureShape
+    DeleteVpcConfigurationResponse: StructureShape
+    DeletionProtectionConfiguration: StructureShape
     Description: StringShape
     DescriptionString: StringShape
     Dimensions: IntegerShape
@@ -156,6 +173,8 @@ module Aws::BedrockAgent
     DisassociateAgentCollaboratorResponse: StructureShape
     DisassociateAgentKnowledgeBaseRequest: StructureShape
     DisassociateAgentKnowledgeBaseResponse: StructureShape
+    DocumentAccessControlEntry: StructureShape
+    DocumentAccessControlList: ListShape
     DocumentContent: StructureShape
     DocumentIdentifier: StructureShape
     DocumentIdentifiers: ListShape
@@ -166,7 +185,9 @@ module Aws::BedrockAgent
     DuplicateConnectionsFlowValidationDetails: StructureShape
     EmbeddingDataType: EnumShape
     EmbeddingModelConfiguration: StructureShape
+    EmbeddingModelType: EnumShape
     EnabledMemoryTypes: ListShape
+    EnabledOrDisabledState: EnumShape
     EnrichmentStrategyConfiguration: StructureShape
     EnrichmentStrategyMethod: EnumShape
     ErrorMessage: StringShape
@@ -269,6 +290,10 @@ module Aws::BedrockAgent
     GetKnowledgeBaseResponse: StructureShape
     GetPromptRequest: StructureShape
     GetPromptResponse: StructureShape
+    GetResourcePolicyRequest: StructureShape
+    GetResourcePolicyResponse: StructureShape
+    GetVpcConfigurationRequest: StructureShape
+    GetVpcConfigurationResponse: StructureShape
     GraphArn: StringShape
     GuardrailConfiguration: StructureShape
     GuardrailIdentifier: StringShape
@@ -276,9 +301,12 @@ module Aws::BedrockAgent
     HierarchicalChunkingConfiguration: StructureShape
     HierarchicalChunkingLevelConfiguration: StructureShape
     HierarchicalChunkingLevelConfigurations: ListShape
+    HostHeader: StringShape
     HttpsUrl: StringShape
     Id: StringShape
+    ImageExtractionConfiguration: StructureShape
     IncludeExclude: EnumShape
+    IncludedData: EnumShape
     IncompatibleConnectionDataTypeFlowValidationDetails: StructureShape
     IncompatibleLoopNodeType: EnumShape
     IndexArn: StringShape
@@ -334,6 +362,7 @@ module Aws::BedrockAgent
     KnowledgeBaseType: EnumShape
     LambdaArn: StringShape
     LambdaFunctionFlowNodeConfiguration: StructureShape
+    LastDayOfMonth: StructureShape
     LexFlowNodeConfiguration: StructureShape
     ListAgentActionGroupsRequest: StructureShape
     ListAgentActionGroupsResponse: StructureShape
@@ -365,15 +394,20 @@ module Aws::BedrockAgent
     ListPromptsResponse: StructureShape
     ListTagsForResourceRequest: StructureShape
     ListTagsForResourceResponse: StructureShape
+    ListVpcConfigurationsRequest: StructureShape
+    ListVpcConfigurationsResponse: StructureShape
     LoopControllerFlowNodeConfiguration: StructureShape
     LoopFlowNodeConfiguration: StructureShape
     LoopIncompatibleNodeTypeFlowValidationDetails: StructureShape
     LoopInputFlowNodeConfiguration: StructureShape
     MalformedConditionExpressionFlowValidationDetails: StructureShape
     MalformedNodeInputExpressionFlowValidationDetails: StructureShape
+    ManagedKnowledgeBaseConfiguration: StructureShape
+    ManagedKnowledgeBaseConnectorConfiguration: StructureShape
     MaxRecentSessions: IntegerShape
     MaxResults: IntegerShape
     MaximumLength: IntegerShape
+    MediaExtractionConfiguration: StructureShape
     MemoryConfiguration: StructureShape
     MemoryType: EnumShape
     Message: StructureShape
@@ -404,6 +438,7 @@ module Aws::BedrockAgent
     MongoDbAtlasEndpointServiceName: StringShape
     MongoDbAtlasFieldMapping: StructureShape
     MongoDbAtlasIndexName: StringShape
+    MonthlySchedule: StructureShape
     MultipleLoopControllerNodesFlowValidationDetails: StructureShape
     MultipleLoopInputNodesFlowValidationDetails: StructureShape
     MultipleNodeInputConnectionsFlowValidationDetails: StructureShape
@@ -446,6 +481,7 @@ module Aws::BedrockAgent
     PineconeConnectionString: StringShape
     PineconeFieldMapping: StructureShape
     PineconeNamespace: StringShape
+    Port: IntegerShape
     PrepareAgentRequest: StructureShape
     PrepareAgentResponse: StructureShape
     PrepareFlowRequest: StructureShape
@@ -484,6 +520,8 @@ module Aws::BedrockAgent
     PromptVariantList: ListShape
     PromptVariantName: StringShape
     ProvisionedModelIdentifier: StringShape
+    PutResourcePolicyRequest: StructureShape
+    PutResourcePolicyResponse: StructureShape
     QueryEngineType: EnumShape
     QueryExecutionTimeoutSeconds: IntegerShape
     QueryGenerationColumn: StructureShape
@@ -525,10 +563,14 @@ module Aws::BedrockAgent
     RequireConfirmation: EnumShape
     RerankingMetadataSelectionMode: EnumShape
     RerankingMetadataSelectiveModeConfiguration: UnionShape
+    ResourceArn: StringShape
     ResourceNotFoundException: StructureShape
+    ResourcePolicy: StringShape
+    ResourceTarget: StringShape
     RetrievalFlowNodeConfiguration: StructureShape
     RetrievalFlowNodeS3Configuration: StructureShape
     RetrievalFlowNodeServiceConfiguration: UnionShape
+    RevisionId: StringShape
     S3BucketArn: StringShape
     S3BucketName: StringShape
     S3BucketUri: StringShape
@@ -577,11 +619,14 @@ module Aws::BedrockAgent
     StorageFlowNodeServiceConfiguration: UnionShape
     StringListValue: ListShape
     StringValue: StringShape
+    SubnetId: StringShape
+    SubnetIdList: ListShape
     SupplementalDataStorageConfiguration: StructureShape
     SupplementalDataStorageLocation: StructureShape
     SupplementalDataStorageLocationType: EnumShape
     SupplementalDataStorageLocations: ListShape
     SupportedLanguages: EnumShape
+    SyncSchedule: UnionShape
     SystemContentBlock: UnionShape
     SystemContentBlocks: ListShape
     TagKey: StringShape
@@ -596,6 +641,7 @@ module Aws::BedrockAgent
     TextPrompt: StringShape
     TextPromptTemplateConfiguration: StructureShape
     ThrottlingException: StructureShape
+    TlsServerName: StringShape
     Tool: UnionShape
     ToolChoice: UnionShape
     ToolConfiguration: StructureShape
@@ -660,11 +706,27 @@ module Aws::BedrockAgent
     VectorSearchRerankingConfiguration: StructureShape
     VectorSearchRerankingConfigurationType: EnumShape
     Version: StringShape
+    VideoConfiguration: StructureShape
+    VideoConfigurations: ListShape
+    VideoExtractionConfiguration: StructureShape
+    VideoSegmentationConfiguration: StructureShape
+    VpcConfiguration: StructureShape
+    VpcConfigurationDescription: StringShape
+    VpcConfigurationId: StringShape
+    VpcConfigurationName: StringShape
+    VpcConfigurationStatus: EnumShape
+    VpcConfigurationStatusMessage: StringShape
+    VpcConfigurationSummary: StructureShape
+    VpcConfigurationSummaryList: ListShape
+    VpcId: StringShape
+    VpcProtocol: EnumShape
+    VpcResolutionMode: EnumShape
     WebCrawlerConfiguration: StructureShape
     WebCrawlerLimits: StructureShape
     WebDataSourceConfiguration: StructureShape
     WebScopeType: EnumShape
     WebSourceConfiguration: StructureShape
+    WeeklySchedule: StructureShape
     WorkgroupArn: StringShape
 
     AmazonBedrockAgentBuildTimeLambda: ServiceShape

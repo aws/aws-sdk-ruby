@@ -27,6 +27,7 @@ module Aws::S3Tables
   # * {ConflictException}
   # * {ForbiddenException}
   # * {InternalServerErrorException}
+  # * {MethodNotAllowedException}
   # * {NotFoundException}
   # * {TooManyRequestsException}
   #
@@ -91,6 +92,19 @@ module Aws::S3Tables
     class InternalServerErrorException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::S3Tables::Types::InternalServerErrorException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>The requested operation is not allowed on this resource. This may occur when attempting to modify a resource that is managed by a service or has restrictions that prevent the operation.</p>
+    class MethodNotAllowedException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::S3Tables::Types::MethodNotAllowedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
         super
       end

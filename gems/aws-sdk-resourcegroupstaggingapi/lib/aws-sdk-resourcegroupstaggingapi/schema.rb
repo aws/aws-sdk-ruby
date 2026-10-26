@@ -7,6 +7,8 @@ module Aws::ResourceGroupsTaggingAPI
   module Schema
 
     AmazonResourceType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.resourcegroupstaggingapi#AmazonResourceType", name: "AmazonResourceType", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#pattern" => "^[\\s\\S]*$"})
+    CloudFormationResourceType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.resourcegroupstaggingapi#CloudFormationResourceType", name: "CloudFormationResourceType")
+    CloudFormationResourceTypes = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.resourcegroupstaggingapi#CloudFormationResourceTypes", name: "CloudFormationResourceTypes")
     ComplianceDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.resourcegroupstaggingapi#ComplianceDetails", name: "ComplianceDetails")
     ComplianceStatus = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.resourcegroupstaggingapi#ComplianceStatus", name: "ComplianceStatus")
     ConcurrentModificationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.resourcegroupstaggingapi#ConcurrentModificationException", name: "ConcurrentModificationException", traits: {"smithy.api#error" => "client"})
@@ -33,17 +35,24 @@ module Aws::ResourceGroupsTaggingAPI
     InternalServiceException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.resourcegroupstaggingapi#InternalServiceException", name: "InternalServiceException", traits: {"smithy.api#error" => "server"})
     InvalidParameterException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.resourcegroupstaggingapi#InvalidParameterException", name: "InvalidParameterException", traits: {"smithy.api#error" => "client"})
     LastUpdated = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.resourcegroupstaggingapi#LastUpdated", name: "LastUpdated")
+    ListRequiredTagsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.resourcegroupstaggingapi#ListRequiredTagsInput", name: "ListRequiredTagsInput")
+    ListRequiredTagsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.resourcegroupstaggingapi#ListRequiredTagsOutput", name: "ListRequiredTagsOutput")
+    MaxResultsForListRequiredTags = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.resourcegroupstaggingapi#MaxResultsForListRequiredTags", name: "MaxResultsForListRequiredTags", traits: {"smithy.api#range" => {"min" => 1, "max" => 200}})
     MaxResultsGetComplianceSummary = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.resourcegroupstaggingapi#MaxResultsGetComplianceSummary", name: "MaxResultsGetComplianceSummary", traits: {"smithy.api#range" => {"min" => 1, "max" => 1000}})
     NonCompliantResources = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.resourcegroupstaggingapi#NonCompliantResources", name: "NonCompliantResources", traits: {"smithy.api#default" => 0})
     PaginationToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.resourcegroupstaggingapi#PaginationToken", name: "PaginationToken", traits: {"smithy.api#length" => {"min" => 0, "max" => 2048}, "smithy.api#pattern" => "^[\\s\\S]*$"})
     PaginationTokenExpiredException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.resourcegroupstaggingapi#PaginationTokenExpiredException", name: "PaginationTokenExpiredException", traits: {"smithy.api#error" => "client"})
     Region = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.resourcegroupstaggingapi#Region", name: "Region", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[\\s\\S]*$"})
     RegionFilterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.resourcegroupstaggingapi#RegionFilterList", name: "RegionFilterList", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
+    ReportingTagKeys = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.resourcegroupstaggingapi#ReportingTagKeys", name: "ReportingTagKeys")
+    RequiredTag = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.resourcegroupstaggingapi#RequiredTag", name: "RequiredTag")
+    RequiredTagsForListRequiredTags = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.resourcegroupstaggingapi#RequiredTagsForListRequiredTags", name: "RequiredTagsForListRequiredTags")
     ResourceARN = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.resourcegroupstaggingapi#ResourceARN", name: "ResourceARN", traits: {"smithy.api#length" => {"min" => 1, "max" => 1011}, "smithy.api#pattern" => "^[\\s\\S]*$"})
     ResourceARNListForGet = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.resourcegroupstaggingapi#ResourceARNListForGet", name: "ResourceARNListForGet", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
     ResourceARNListForTagUntag = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.resourcegroupstaggingapi#ResourceARNListForTagUntag", name: "ResourceARNListForTagUntag", traits: {"smithy.api#length" => {"min" => 1, "max" => 20}})
     ResourceTagMapping = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.resourcegroupstaggingapi#ResourceTagMapping", name: "ResourceTagMapping")
     ResourceTagMappingList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.resourcegroupstaggingapi#ResourceTagMappingList", name: "ResourceTagMappingList")
+    ResourceType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.resourcegroupstaggingapi#ResourceType", name: "ResourceType")
     ResourceTypeFilterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.resourcegroupstaggingapi#ResourceTypeFilterList", name: "ResourceTypeFilterList")
     ResourcesPerPage = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.resourcegroupstaggingapi#ResourcesPerPage", name: "ResourcesPerPage")
     S3Bucket = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.resourcegroupstaggingapi#S3Bucket", name: "S3Bucket", traits: {"smithy.api#length" => {"min" => 3, "max" => 63}, "smithy.api#pattern" => "^[a-z0-9.-]*$"})
@@ -77,8 +86,10 @@ module Aws::ResourceGroupsTaggingAPI
     UntagResourcesInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.resourcegroupstaggingapi#UntagResourcesInput", name: "UntagResourcesInput")
     UntagResourcesOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.resourcegroupstaggingapi#UntagResourcesOutput", name: "UntagResourcesOutput")
 
+    CloudFormationResourceTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudFormationResourceType, name: "member"))
     ComplianceDetails.add_member(:noncompliant_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, name: "NoncompliantKeys"))
     ComplianceDetails.add_member(:keys_with_noncompliant_values, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, name: "KeysWithNoncompliantValues"))
+    ComplianceDetails.add_member(:missing_tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, name: "MissingTagKeys"))
     ComplianceDetails.add_member(:compliance_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ComplianceStatus, name: "ComplianceStatus"))
     ComplianceDetails.type = Types::ComplianceDetails
     ConcurrentModificationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))
@@ -141,9 +152,21 @@ module Aws::ResourceGroupsTaggingAPI
     InternalServiceException.type = Types::InternalServiceException
     InvalidParameterException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))
     InvalidParameterException.type = Types::InvalidParameterException
+    ListRequiredTagsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "NextToken"))
+    ListRequiredTagsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResultsForListRequiredTags, name: "MaxResults"))
+    ListRequiredTagsInput.type = Types::ListRequiredTagsInput
+    ListRequiredTagsOutput.add_member(:required_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: RequiredTagsForListRequiredTags, name: "RequiredTags"))
+    ListRequiredTagsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "NextToken"))
+    ListRequiredTagsOutput.type = Types::ListRequiredTagsOutput
     PaginationTokenExpiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))
     PaginationTokenExpiredException.type = Types::PaginationTokenExpiredException
     RegionFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "member"))
+    ReportingTagKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    RequiredTag.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "ResourceType"))
+    RequiredTag.add_member(:cloud_formation_resource_types, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudFormationResourceTypes, name: "CloudFormationResourceTypes"))
+    RequiredTag.add_member(:reporting_tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportingTagKeys, name: "ReportingTagKeys"))
+    RequiredTag.type = Types::RequiredTag
+    RequiredTagsForListRequiredTags.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RequiredTag, name: "member"))
     ResourceARNListForGet.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, name: "member"))
     ResourceARNListForTagUntag.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, name: "member"))
     ResourceTagMapping.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, name: "ResourceARN"))
@@ -199,7 +222,7 @@ module Aws::ResourceGroupsTaggingAPI
       service.id = "com.amazonaws.resourcegroupstaggingapi#ResourceGroupsTaggingAPI_20170126"
       service.name = "ResourceGroupsTaggingAPI20170126"
       service.version = "2017-01-26"
-      service.traits = {"aws.api#service" => {"sdkId" => "Resource Groups Tagging API", "arnNamespace" => "tagging", "cloudFormationName" => "ResourceGroupsTaggingAPI", "cloudTrailEventSource" => "resourcegroupstaggingapi.amazonaws.com", "docId" => "resourcegroupstaggingapi-2017-01-26", "endpointPrefix" => "tagging"}, "aws.auth#sigv4" => {"name" => "tagging"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "AWS Resource Groups Tagging API"}
+      service.traits = {"aws.api#service" => {"sdkId" => "Resource Groups Tagging API", "arnNamespace" => "tagging", "cloudFormationName" => "ResourceGroupsTaggingAPI", "cloudTrailEventSource" => "resourcegroupstaggingapi.amazonaws.com", "docId" => "resourcegroupstaggingapi-2017-01-26", "endpointPrefix" => "tagging"}, "aws.auth#sigv4" => {"name" => "tagging"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "AWS Resource Groups Tagging API", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://tagging-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://tagging-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://tagging.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://tagging.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
       service.add_operation(:describe_report_creation, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.resourcegroupstaggingapi#DescribeReportCreation"
         operation.name = "DescribeReportCreation"
@@ -209,7 +232,7 @@ module Aws::ResourceGroupsTaggingAPI
         operation.errors << InternalServiceException
         operation.errors << InvalidParameterException
         operation.errors << ThrottledException
-        operation.traits = {}
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/DescribeReportCreation", "code" => 200}}
       end)
       service.add_operation(:get_compliance_summary, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.resourcegroupstaggingapi#GetComplianceSummary"
@@ -220,7 +243,7 @@ module Aws::ResourceGroupsTaggingAPI
         operation.errors << InternalServiceException
         operation.errors << InvalidParameterException
         operation.errors << ThrottledException
-        operation.traits = {}
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/GetComplianceSummary", "code" => 200}}
         operation[:paginator] = Paginators::GetComplianceSummary.new
       end)
       service.add_operation(:get_resources, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -232,7 +255,7 @@ module Aws::ResourceGroupsTaggingAPI
         operation.errors << InvalidParameterException
         operation.errors << PaginationTokenExpiredException
         operation.errors << ThrottledException
-        operation.traits = {}
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/GetResources", "code" => 200}}
         operation[:paginator] = Paginators::GetResources.new
       end)
       service.add_operation(:get_tag_keys, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -244,7 +267,7 @@ module Aws::ResourceGroupsTaggingAPI
         operation.errors << InvalidParameterException
         operation.errors << PaginationTokenExpiredException
         operation.errors << ThrottledException
-        operation.traits = {}
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/GetTagKeys", "code" => 200}}
         operation[:paginator] = Paginators::GetTagKeys.new
       end)
       service.add_operation(:get_tag_values, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -256,8 +279,20 @@ module Aws::ResourceGroupsTaggingAPI
         operation.errors << InvalidParameterException
         operation.errors << PaginationTokenExpiredException
         operation.errors << ThrottledException
-        operation.traits = {}
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/GetTagValues", "code" => 200}}
         operation[:paginator] = Paginators::GetTagValues.new
+      end)
+      service.add_operation(:list_required_tags, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.resourcegroupstaggingapi#ListRequiredTags"
+        operation.name = "ListRequiredTags"
+        operation.input = ListRequiredTagsInput
+        operation.output = ListRequiredTagsOutput
+        operation.errors << InternalServiceException
+        operation.errors << InvalidParameterException
+        operation.errors << PaginationTokenExpiredException
+        operation.errors << ThrottledException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/ListRequiredTags", "code" => 200}}
+        operation[:paginator] = Paginators::ListRequiredTags.new
       end)
       service.add_operation(:start_report_creation, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.resourcegroupstaggingapi#StartReportCreation"
@@ -269,7 +304,7 @@ module Aws::ResourceGroupsTaggingAPI
         operation.errors << InternalServiceException
         operation.errors << InvalidParameterException
         operation.errors << ThrottledException
-        operation.traits = {}
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/StartReportCreation", "code" => 200}}
       end)
       service.add_operation(:tag_resources, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.resourcegroupstaggingapi#TagResources"
@@ -279,7 +314,7 @@ module Aws::ResourceGroupsTaggingAPI
         operation.errors << InternalServiceException
         operation.errors << InvalidParameterException
         operation.errors << ThrottledException
-        operation.traits = {}
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/TagResources", "code" => 200}}
       end)
       service.add_operation(:untag_resources, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.resourcegroupstaggingapi#UntagResources"
@@ -289,7 +324,7 @@ module Aws::ResourceGroupsTaggingAPI
         operation.errors << InternalServiceException
         operation.errors << InvalidParameterException
         operation.errors << ThrottledException
-        operation.traits = {}
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/UntagResources", "code" => 200}}
       end)
     end
 

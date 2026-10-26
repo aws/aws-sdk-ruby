@@ -46,6 +46,18 @@ module Aws::WorkspacesInstances
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Defines billing configuration settings for WorkSpace Instances, containing the billing mode selection.</p>
+    # @!attribute billing_mode
+    #   <p>Specifies the billing mode for WorkSpace Instances. MONTHLY provides fixed monthly rates for predictable budgeting, while HOURLY enables pay-per-second billing for actual usage.</p>
+    #   @return [String]
+    class BillingConfiguration < Struct.new(
+      nil,
+      :billing_mode,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Defines device mapping for WorkSpace Instance storage.</p>
     # @!attribute device_name
     #   <p>Name of the device for storage mapping.</p>
@@ -152,11 +164,15 @@ module Aws::WorkspacesInstances
     # @!attribute threads_per_core
     #   <p>Number of threads per CPU core.</p>
     #   @return [Integer]
+    # @!attribute nested_virtualization
+    #   <p>Specifies whether to enable or disable nested virtualization.</p>
+    #   @return [String]
     class CpuOptionsRequest < Struct.new(
       nil,
       :amd_sev_snp,
       :core_count,
       :threads_per_core,
+      :nested_virtualization,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -232,11 +248,15 @@ module Aws::WorkspacesInstances
     # @!attribute managed_instance
     #   <p>Comprehensive configuration settings for the WorkSpaces Instance, including network, compute, and storage parameters.</p>
     #   @return [Types::ManagedInstanceRequest]
+    # @!attribute billing_configuration
+    #   <p>Optional billing configuration for the WorkSpace Instance. Allows customers to specify their preferred billing mode when creating a new instance. Defaults to hourly billing if not specified.</p>
+    #   @return [Types::BillingConfiguration]
     class CreateWorkspaceInstanceRequest < Struct.new(
       nil,
       :client_token,
       :tags,
       :managed_instance,
+      :billing_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -470,6 +490,9 @@ module Aws::WorkspacesInstances
     # @!attribute ec2_managed_instance
     #   <p>Details of the associated EC2 managed instance.</p>
     #   @return [Types::EC2ManagedInstance]
+    # @!attribute billing_configuration
+    #   <p>Returns the current billing configuration for the WorkSpace Instance, indicating the active billing mode.</p>
+    #   @return [Types::BillingConfiguration]
     class GetWorkspaceInstanceResponse < Struct.new(
       nil,
       :workspace_instance_errors,
@@ -477,6 +500,7 @@ module Aws::WorkspacesInstances
       :provision_state,
       :workspace_instance_id,
       :ec2_managed_instance,
+      :billing_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -505,6 +529,26 @@ module Aws::WorkspacesInstances
       nil,
       :arn,
       :name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Defines filtering criteria for WorkSpace Instance type searches. Combines multiple filter conditions including billing mode, platform type, and tenancy to help customers find instance types that meet their specific requirements.</p>
+    # @!attribute billing_mode
+    #   <p>Filters WorkSpace Instance types based on supported billing modes. Allows customers to search for instance types that support their preferred billing model, such as HOURLY or MONTHLY billing.</p>
+    #   @return [String]
+    # @!attribute platform_type
+    #   <p>Filters WorkSpace Instance types by operating system platform. Allows customers to find instances that support their desired OS, such as Windows, Linux/UNIX, Ubuntu Pro, RHEL, or SUSE.</p>
+    #   @return [String]
+    # @!attribute tenancy
+    #   <p>Filters WorkSpace Instance types by tenancy model. Allows customers to find instances that match their tenancy requirements, such as SHARED or DEDICATED.</p>
+    #   @return [String]
+    class InstanceConfigurationFilter < Struct.new(
+      nil,
+      :billing_mode,
+      :platform_type,
+      :tenancy,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -690,9 +734,13 @@ module Aws::WorkspacesInstances
     # @!attribute instance_type
     #   <p>Unique identifier for the WorkSpace Instance type.</p>
     #   @return [String]
+    # @!attribute supported_instance_configurations
+    #   <p>Lists all valid combinations of tenancy, platform type, and billing mode supported for the specific WorkSpace Instance type. Contains the complete set of configuration options available for this instance type.</p>
+    #   @return [Array<Types::SupportedInstanceConfiguration>]
     class InstanceTypeInfo < Struct.new(
       nil,
       :instance_type,
+      :supported_instance_configurations,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -757,10 +805,14 @@ module Aws::WorkspacesInstances
     # @!attribute next_token
     #   <p>Pagination token for retrieving subsequent pages of instance type results.</p>
     #   @return [String]
+    # @!attribute instance_configuration_filter
+    #   <p>Optional filter to narrow instance type results based on configuration requirements. Only returns instance types that support the specified combination of tenancy, platform type, and billing mode.</p>
+    #   @return [Types::InstanceConfigurationFilter]
     class ListInstanceTypesRequest < Struct.new(
       nil,
       :max_results,
       :next_token,
+      :instance_configuration_filter,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1181,6 +1233,26 @@ module Aws::WorkspacesInstances
       :max_price,
       :spot_instance_type,
       :valid_until_utc,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Represents a single valid configuration combination that an instance type supports, combining tenancy, platform type, and billing mode into one complete configuration specification.</p>
+    # @!attribute billing_mode
+    #   <p>Specifies the billing mode supported in this configuration combination.</p>
+    #   @return [String]
+    # @!attribute platform_type
+    #   <p>Specifies the operating system platform supported in this configuration combination.</p>
+    #   @return [String]
+    # @!attribute tenancy
+    #   <p>Specifies the tenancy model supported in this configuration combination.</p>
+    #   @return [String]
+    class SupportedInstanceConfiguration < Struct.new(
+      nil,
+      :billing_mode,
+      :platform_type,
+      :tenancy,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

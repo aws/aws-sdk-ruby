@@ -7,19 +7,27 @@ module Aws::CloudWatch
   module Schema
 
     AccountId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatch#AccountId", name: "AccountId", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}})
+    ActionLogLineCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.cloudwatch#ActionLogLineCount", name: "ActionLogLineCount")
+    ActionLogLineRoleArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatch#ActionLogLineRoleArn", name: "ActionLogLineRoleArn")
     ActionPrefix = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatch#ActionPrefix", name: "ActionPrefix", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}})
     ActionsEnabled = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.cloudwatch#ActionsEnabled", name: "ActionsEnabled")
     ActionsSuppressedBy = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudwatch#ActionsSuppressedBy", name: "ActionsSuppressedBy")
     ActionsSuppressedReason = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatch#ActionsSuppressedReason", name: "ActionsSuppressedReason", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}})
+    AggregationExpression = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatch#AggregationExpression", name: "AggregationExpression", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}})
     AlarmArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatch#AlarmArn", name: "AlarmArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 1600}})
     AlarmContributor = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#AlarmContributor", name: "AlarmContributor")
     AlarmContributors = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatch#AlarmContributors", name: "AlarmContributors")
     AlarmDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatch#AlarmDescription", name: "AlarmDescription", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}})
     AlarmHistoryItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#AlarmHistoryItem", name: "AlarmHistoryItem")
     AlarmHistoryItems = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatch#AlarmHistoryItems", name: "AlarmHistoryItems")
+    AlarmMuteRuleStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudwatch#AlarmMuteRuleStatus", name: "AlarmMuteRuleStatus")
+    AlarmMuteRuleStatuses = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatch#AlarmMuteRuleStatuses", name: "AlarmMuteRuleStatuses")
+    AlarmMuteRuleSummaries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatch#AlarmMuteRuleSummaries", name: "AlarmMuteRuleSummaries")
+    AlarmMuteRuleSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#AlarmMuteRuleSummary", name: "AlarmMuteRuleSummary")
     AlarmName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatch#AlarmName", name: "AlarmName", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}})
     AlarmNamePrefix = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatch#AlarmNamePrefix", name: "AlarmNamePrefix", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}})
     AlarmNames = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatch#AlarmNames", name: "AlarmNames", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}})
+    AlarmPromQLCriteria = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#AlarmPromQLCriteria", name: "AlarmPromQLCriteria")
     AlarmRule = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatch#AlarmRule", name: "AlarmRule", traits: {"smithy.api#length" => {"min" => 1, "max" => 10240}})
     AlarmType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudwatch#AlarmType", name: "AlarmType")
     AlarmTypes = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatch#AlarmTypes", name: "AlarmTypes")
@@ -27,12 +35,17 @@ module Aws::CloudWatch
     AnomalyDetector = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#AnomalyDetector", name: "AnomalyDetector")
     AnomalyDetectorConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#AnomalyDetectorConfiguration", name: "AnomalyDetectorConfiguration")
     AnomalyDetectorExcludedTimeRanges = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatch#AnomalyDetectorExcludedTimeRanges", name: "AnomalyDetectorExcludedTimeRanges")
+    AnomalyDetectorId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatch#AnomalyDetectorId", name: "AnomalyDetectorId", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[A-Za-z0-9_./:%()+-]+$"})
+    AnomalyDetectorIds = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatch#AnomalyDetectorIds", name: "AnomalyDetectorIds", traits: {"smithy.api#length" => {"min" => 0, "max" => 50}})
     AnomalyDetectorMetricStat = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatch#AnomalyDetectorMetricStat", name: "AnomalyDetectorMetricStat", traits: {"smithy.api#length" => {"min" => 0, "max" => 50}, "smithy.api#pattern" => "^(SampleCount|Average|Sum|Minimum|Maximum|IQM|(p|tc|tm|ts|wm)(\\d{1,2}(\\.\\d{0,10})?|100)|[ou]\\d+(\\.\\d*)?)(_E|_L|_H)?|(TM|TC|TS|WM)\\(((((\\d{1,2})(\\.\\d{0,10})?|100(\\.0{0,10})?)%)?:((\\d{1,2})(\\.\\d{0,10})?|100(\\.0{0,10})?)%|((\\d{1,2})(\\.\\d{0,10})?|100(\\.0{0,10})?)%:(((\\d{1,2})(\\.\\d{0,10})?|100(\\.0{0,10})?)%)?)\\)|(TM|TC|TS|WM|PR)\\(((\\d+(\\.\\d{0,10})?|(\\d+(\\.\\d{0,10})?[Ee][+-]?\\d+)):((\\d+(\\.\\d{0,10})?|(\\d+(\\.\\d{0,10})?[Ee][+-]?\\d+)))?|((\\d+(\\.\\d{0,10})?|(\\d+(\\.\\d{0,10})?[Ee][+-]?\\d+)))?:(\\d+(\\.\\d{0,10})?|(\\d+(\\.\\d{0,10})?[Ee][+-]?\\d+)))\\)$"})
     AnomalyDetectorMetricTimezone = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatch#AnomalyDetectorMetricTimezone", name: "AnomalyDetectorMetricTimezone", traits: {"smithy.api#length" => {"min" => 0, "max" => 50}, "smithy.api#pattern" => ".*"})
     AnomalyDetectorStateValue = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudwatch#AnomalyDetectorStateValue", name: "AnomalyDetectorStateValue")
     AnomalyDetectorType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudwatch#AnomalyDetectorType", name: "AnomalyDetectorType")
     AnomalyDetectorTypes = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatch#AnomalyDetectorTypes", name: "AnomalyDetectorTypes", traits: {"smithy.api#length" => {"min" => 0, "max" => 2}})
     AnomalyDetectors = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatch#AnomalyDetectors", name: "AnomalyDetectors")
+    Arn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatch#Arn", name: "Arn", traits: {"smithy.api#length" => {"min" => 1, "max" => 1600}})
+    AssociateDatasetKmsKeyInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#AssociateDatasetKmsKeyInput", name: "AssociateDatasetKmsKeyInput")
+    AssociateDatasetKmsKeyOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#AssociateDatasetKmsKeyOutput", name: "AssociateDatasetKmsKeyOutput")
     AttributeName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatch#AttributeName", name: "AttributeName", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}})
     AttributeValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatch#AttributeValue", name: "AttributeValue", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}})
     AwsQueryErrorMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatch#AwsQueryErrorMessage", name: "AwsQueryErrorMessage")
@@ -42,9 +55,11 @@ module Aws::CloudWatch
     CompositeAlarms = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatch#CompositeAlarms", name: "CompositeAlarms")
     ConcurrentModificationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#ConcurrentModificationException", name: "ConcurrentModificationException", traits: {"aws.protocols#awsQueryError" => {"code" => "ConcurrentModificationException", "httpResponseCode" => 429}, "smithy.api#error" => "client", "smithy.api#httpError" => 429})
     ConflictException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#ConflictException", name: "ConflictException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 409})
-    ContributorAttributes = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.cloudwatch#ContributorAttributes", name: "ContributorAttributes", traits: {"smithy.api#length" => {"min" => 0, "max" => 30}})
-    ContributorId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatch#ContributorId", name: "ContributorId", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}})
+    ContributorAttributes = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.cloudwatch#ContributorAttributes", name: "ContributorAttributes", traits: {"smithy.api#length" => {"min" => 0, "max" => 150}})
+    ContributorId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatch#ContributorId", name: "ContributorId", traits: {"smithy.api#length" => {"min" => 1, "max" => 16}})
     Counts = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatch#Counts", name: "Counts")
+    CreateResourceMetricsConfigurationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#CreateResourceMetricsConfigurationInput", name: "CreateResourceMetricsConfigurationInput")
+    CreateResourceMetricsConfigurationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#CreateResourceMetricsConfigurationOutput", name: "CreateResourceMetricsConfigurationOutput")
     DashboardArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatch#DashboardArn", name: "DashboardArn")
     DashboardBody = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatch#DashboardBody", name: "DashboardBody")
     DashboardEntries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatch#DashboardEntries", name: "DashboardEntries")
@@ -64,6 +79,10 @@ module Aws::CloudWatch
     DatapointValues = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatch#DatapointValues", name: "DatapointValues")
     Datapoints = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatch#Datapoints", name: "Datapoints")
     DatapointsToAlarm = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.cloudwatch#DatapointsToAlarm", name: "DatapointsToAlarm", traits: {"smithy.api#range" => {"min" => 1}})
+    DatasetArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatch#DatasetArn", name: "DatasetArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#pattern" => "^arn:[a-zA-Z0-9-]+:cloudwatch:[a-zA-Z0-9-]*:\\d{12}:dataset/default$"})
+    DatasetId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatch#DatasetId", name: "DatasetId", traits: {"smithy.api#length" => {"min" => 7, "max" => 7}, "smithy.api#pattern" => "^default$"})
+    DatasetIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatch#DatasetIdentifier", name: "DatasetIdentifier", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#pattern" => "^(default|arn:[a-zA-Z0-9-]+:cloudwatch:[a-zA-Z0-9-]*:\\d{12}:dataset/default)$"})
+    DeleteAlarmMuteRuleInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#DeleteAlarmMuteRuleInput", name: "DeleteAlarmMuteRuleInput")
     DeleteAlarmsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#DeleteAlarmsInput", name: "DeleteAlarmsInput")
     DeleteAnomalyDetectorInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#DeleteAnomalyDetectorInput", name: "DeleteAnomalyDetectorInput")
     DeleteAnomalyDetectorOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#DeleteAnomalyDetectorOutput", name: "DeleteAnomalyDetectorOutput")
@@ -73,6 +92,8 @@ module Aws::CloudWatch
     DeleteInsightRulesOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#DeleteInsightRulesOutput", name: "DeleteInsightRulesOutput")
     DeleteMetricStreamInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#DeleteMetricStreamInput", name: "DeleteMetricStreamInput")
     DeleteMetricStreamOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#DeleteMetricStreamOutput", name: "DeleteMetricStreamOutput")
+    DeleteResourceMetricsConfigurationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#DeleteResourceMetricsConfigurationInput", name: "DeleteResourceMetricsConfigurationInput")
+    DeleteResourceMetricsConfigurationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#DeleteResourceMetricsConfigurationOutput", name: "DeleteResourceMetricsConfigurationOutput")
     DescribeAlarmContributorsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#DescribeAlarmContributorsInput", name: "DescribeAlarmContributorsInput")
     DescribeAlarmContributorsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#DescribeAlarmContributorsOutput", name: "DescribeAlarmContributorsOutput")
     DescribeAlarmHistoryInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#DescribeAlarmHistoryInput", name: "DescribeAlarmHistoryInput")
@@ -94,9 +115,13 @@ module Aws::CloudWatch
     DisableAlarmActionsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#DisableAlarmActionsInput", name: "DisableAlarmActionsInput")
     DisableInsightRulesInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#DisableInsightRulesInput", name: "DisableInsightRulesInput")
     DisableInsightRulesOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#DisableInsightRulesOutput", name: "DisableInsightRulesOutput")
+    DisassociateDatasetKmsKeyInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#DisassociateDatasetKmsKeyInput", name: "DisassociateDatasetKmsKeyInput")
+    DisassociateDatasetKmsKeyOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#DisassociateDatasetKmsKeyOutput", name: "DisassociateDatasetKmsKeyOutput")
+    Duration = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatch#Duration", name: "Duration", traits: {"smithy.api#length" => {"min" => 1, "max" => 50}})
     EnableAlarmActionsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#EnableAlarmActionsInput", name: "EnableAlarmActionsInput")
     EnableInsightRulesInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#EnableInsightRulesInput", name: "EnableInsightRulesInput")
     EnableInsightRulesOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#EnableInsightRulesOutput", name: "EnableInsightRulesOutput")
+    EndTimeOffset = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.cloudwatch#EndTimeOffset", name: "EndTimeOffset", traits: {"smithy.api#range" => {"min" => 0, "max" => 2592000}})
     Entity = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#Entity", name: "Entity")
     EntityAttributesMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.cloudwatch#EntityAttributesMap", name: "EntityAttributesMap", traits: {"smithy.api#length" => {"min" => 0, "max" => 10}})
     EntityAttributesMapKeyString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatch#EntityAttributesMapKeyString", name: "EntityAttributesMapKeyString", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}})
@@ -108,17 +133,25 @@ module Aws::CloudWatch
     EntityMetricDataList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatch#EntityMetricDataList", name: "EntityMetricDataList")
     ErrorMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatch#ErrorMessage", name: "ErrorMessage", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}})
     EvaluateLowSampleCountPercentile = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatch#EvaluateLowSampleCountPercentile", name: "EvaluateLowSampleCountPercentile", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}})
+    EvaluationCriteria = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.cloudwatch#EvaluationCriteria", name: "EvaluationCriteria")
+    EvaluationInterval = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.cloudwatch#EvaluationInterval", name: "EvaluationInterval", traits: {"smithy.api#range" => {"min" => 10, "max" => 3600}})
     EvaluationPeriods = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.cloudwatch#EvaluationPeriods", name: "EvaluationPeriods", traits: {"smithy.api#range" => {"min" => 1}})
     EvaluationState = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudwatch#EvaluationState", name: "EvaluationState")
+    EvaluationWindow = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.cloudwatch#EvaluationWindow", name: "EvaluationWindow")
     ExceptionType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatch#ExceptionType", name: "ExceptionType")
+    Expression = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatch#Expression", name: "Expression", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}})
     ExtendedStatistic = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatch#ExtendedStatistic", name: "ExtendedStatistic")
     ExtendedStatistics = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatch#ExtendedStatistics", name: "ExtendedStatistics", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
     FailureCode = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatch#FailureCode", name: "FailureCode")
     FailureDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatch#FailureDescription", name: "FailureDescription")
     FailureResource = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatch#FailureResource", name: "FailureResource")
     FaultDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatch#FaultDescription", name: "FaultDescription")
+    GetAlarmMuteRuleInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#GetAlarmMuteRuleInput", name: "GetAlarmMuteRuleInput")
+    GetAlarmMuteRuleOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#GetAlarmMuteRuleOutput", name: "GetAlarmMuteRuleOutput")
     GetDashboardInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#GetDashboardInput", name: "GetDashboardInput")
     GetDashboardOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#GetDashboardOutput", name: "GetDashboardOutput")
+    GetDatasetInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#GetDatasetInput", name: "GetDatasetInput")
+    GetDatasetOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#GetDatasetOutput", name: "GetDatasetOutput")
     GetInsightRuleReportInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#GetInsightRuleReportInput", name: "GetInsightRuleReportInput")
     GetInsightRuleReportOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#GetInsightRuleReportOutput", name: "GetInsightRuleReportOutput")
     GetMetricDataInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#GetMetricDataInput", name: "GetMetricDataInput")
@@ -131,6 +164,10 @@ module Aws::CloudWatch
     GetMetricStreamOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#GetMetricStreamOutput", name: "GetMetricStreamOutput")
     GetMetricWidgetImageInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#GetMetricWidgetImageInput", name: "GetMetricWidgetImageInput")
     GetMetricWidgetImageOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#GetMetricWidgetImageOutput", name: "GetMetricWidgetImageOutput")
+    GetOTelEnrichmentInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#GetOTelEnrichmentInput", name: "GetOTelEnrichmentInput")
+    GetOTelEnrichmentOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#GetOTelEnrichmentOutput", name: "GetOTelEnrichmentOutput")
+    GetResourceMetricsConfigurationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#GetResourceMetricsConfigurationInput", name: "GetResourceMetricsConfigurationInput")
+    GetResourceMetricsConfigurationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#GetResourceMetricsConfigurationOutput", name: "GetResourceMetricsConfigurationOutput")
     HistoryData = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatch#HistoryData", name: "HistoryData", traits: {"smithy.api#length" => {"min" => 1, "max" => 4095}})
     HistoryItemType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudwatch#HistoryItemType", name: "HistoryItemType")
     HistorySummary = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatch#HistorySummary", name: "HistorySummary", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}})
@@ -168,10 +205,16 @@ module Aws::CloudWatch
     InvalidNextToken = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#InvalidNextToken", name: "InvalidNextToken", traits: {"aws.protocols#awsQueryError" => {"code" => "InvalidNextToken", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
     InvalidParameterCombinationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#InvalidParameterCombinationException", name: "InvalidParameterCombinationException", traits: {"aws.protocols#awsQueryError" => {"code" => "InvalidParameterCombination", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
     InvalidParameterValueException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#InvalidParameterValueException", name: "InvalidParameterValueException", traits: {"aws.protocols#awsQueryError" => {"code" => "InvalidParameterValue", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
+    KmsAccessDeniedException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#KmsAccessDeniedException", name: "KmsAccessDeniedException", traits: {"smithy.api#error" => "client"})
+    KmsKeyArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatch#KmsKeyArn", name: "KmsKeyArn", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "^arn:[a-zA-Z0-9-]+:kms:[a-zA-Z0-9-]+:\\d{12}:key/[a-f0-9-]+$"})
+    KmsKeyDisabledException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#KmsKeyDisabledException", name: "KmsKeyDisabledException", traits: {"smithy.api#error" => "client"})
+    KmsKeyNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#KmsKeyNotFoundException", name: "KmsKeyNotFoundException", traits: {"smithy.api#error" => "client"})
     LabelOptions = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#LabelOptions", name: "LabelOptions")
     LastModified = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.cloudwatch#LastModified", name: "LastModified")
     LimitExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#LimitExceededException", name: "LimitExceededException", traits: {"aws.protocols#awsQueryError" => {"code" => "LimitExceededException", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
     LimitExceededFault = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#LimitExceededFault", name: "LimitExceededFault", traits: {"aws.protocols#awsQueryError" => {"code" => "LimitExceeded", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
+    ListAlarmMuteRulesInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#ListAlarmMuteRulesInput", name: "ListAlarmMuteRulesInput")
+    ListAlarmMuteRulesOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#ListAlarmMuteRulesOutput", name: "ListAlarmMuteRulesOutput")
     ListDashboardsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#ListDashboardsInput", name: "ListDashboardsInput")
     ListDashboardsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#ListDashboardsOutput", name: "ListDashboardsOutput")
     ListManagedInsightRulesInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#ListManagedInsightRulesInput", name: "ListManagedInsightRulesInput")
@@ -183,6 +226,9 @@ module Aws::CloudWatch
     ListMetricsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#ListMetricsOutput", name: "ListMetricsOutput")
     ListTagsForResourceInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#ListTagsForResourceInput", name: "ListTagsForResourceInput")
     ListTagsForResourceOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#ListTagsForResourceOutput", name: "ListTagsForResourceOutput")
+    LogAlarm = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#LogAlarm", name: "LogAlarm")
+    LogAlarms = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatch#LogAlarms", name: "LogAlarms")
+    LogGroupIdentifiers = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatch#LogGroupIdentifiers", name: "LogGroupIdentifiers", traits: {"smithy.api#length" => {"min" => 1, "max" => 50}})
     ManagedRule = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#ManagedRule", name: "ManagedRule")
     ManagedRuleDescription = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#ManagedRuleDescription", name: "ManagedRuleDescription")
     ManagedRuleDescriptions = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatch#ManagedRuleDescriptions", name: "ManagedRuleDescriptions")
@@ -210,6 +256,7 @@ module Aws::CloudWatch
     MetricLabel = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatch#MetricLabel", name: "MetricLabel")
     MetricMathAnomalyDetector = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#MetricMathAnomalyDetector", name: "MetricMathAnomalyDetector")
     MetricName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatch#MetricName", name: "MetricName", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}})
+    MetricNameList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatch#MetricNameList", name: "MetricNameList", traits: {"smithy.api#length" => {"min" => 1, "max" => 500}})
     MetricStat = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#MetricStat", name: "MetricStat")
     MetricStreamEntries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatch#MetricStreamEntries", name: "MetricStreamEntries")
     MetricStreamEntry = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#MetricStreamEntry", name: "MetricStreamEntry")
@@ -230,13 +277,24 @@ module Aws::CloudWatch
     MetricWidgetImage = ::Smithy::Schema::Shapes::BlobShape.new(id: "com.amazonaws.cloudwatch#MetricWidgetImage", name: "MetricWidgetImage")
     Metrics = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatch#Metrics", name: "Metrics")
     MissingRequiredParameterException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#MissingRequiredParameterException", name: "MissingRequiredParameterException", traits: {"aws.protocols#awsQueryError" => {"code" => "MissingParameter", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
+    MuteTargetAlarmNameList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatch#MuteTargetAlarmNameList", name: "MuteTargetAlarmNameList", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}})
+    MuteTargets = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#MuteTargets", name: "MuteTargets")
+    MuteType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatch#MuteType", name: "MuteType")
+    Name = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatch#Name", name: "Name", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}})
     Namespace = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatch#Namespace", name: "Namespace", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => "^[^:]"})
     NextToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatch#NextToken", name: "NextToken")
+    OTelEnrichmentMetricNameList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatch#OTelEnrichmentMetricNameList", name: "OTelEnrichmentMetricNameList", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}})
+    OTelEnrichmentMetricSelector = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#OTelEnrichmentMetricSelector", name: "OTelEnrichmentMetricSelector")
+    OTelEnrichmentMetricSelectorList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatch#OTelEnrichmentMetricSelectorList", name: "OTelEnrichmentMetricSelectorList", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}})
+    OTelEnrichmentStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudwatch#OTelEnrichmentStatus", name: "OTelEnrichmentStatus")
+    OnlyStartEvaluatingAfterWarmUpPeriodEnds = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.cloudwatch#OnlyStartEvaluatingAfterWarmUpPeriodEnds", name: "OnlyStartEvaluatingAfterWarmUpPeriodEnds")
     OutputFormat = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatch#OutputFormat", name: "OutputFormat")
     OwningAccounts = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatch#OwningAccounts", name: "OwningAccounts")
     PartialFailure = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#PartialFailure", name: "PartialFailure")
+    PendingPeriod = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.cloudwatch#PendingPeriod", name: "PendingPeriod", traits: {"smithy.api#range" => {"min" => 0, "max" => 86400}})
     Period = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.cloudwatch#Period", name: "Period", traits: {"smithy.api#range" => {"min" => 1}})
     PeriodicSpikes = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.cloudwatch#PeriodicSpikes", name: "PeriodicSpikes")
+    PutAlarmMuteRuleInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#PutAlarmMuteRuleInput", name: "PutAlarmMuteRuleInput")
     PutAnomalyDetectorInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#PutAnomalyDetectorInput", name: "PutAnomalyDetectorInput")
     PutAnomalyDetectorOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#PutAnomalyDetectorOutput", name: "PutAnomalyDetectorOutput")
     PutCompositeAlarmInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#PutCompositeAlarmInput", name: "PutCompositeAlarmInput")
@@ -244,28 +302,48 @@ module Aws::CloudWatch
     PutDashboardOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#PutDashboardOutput", name: "PutDashboardOutput")
     PutInsightRuleInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#PutInsightRuleInput", name: "PutInsightRuleInput")
     PutInsightRuleOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#PutInsightRuleOutput", name: "PutInsightRuleOutput")
+    PutLogAlarmInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#PutLogAlarmInput", name: "PutLogAlarmInput")
     PutManagedInsightRulesInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#PutManagedInsightRulesInput", name: "PutManagedInsightRulesInput")
     PutManagedInsightRulesOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#PutManagedInsightRulesOutput", name: "PutManagedInsightRulesOutput")
     PutMetricAlarmInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#PutMetricAlarmInput", name: "PutMetricAlarmInput")
     PutMetricDataInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#PutMetricDataInput", name: "PutMetricDataInput")
     PutMetricStreamInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#PutMetricStreamInput", name: "PutMetricStreamInput")
     PutMetricStreamOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#PutMetricStreamOutput", name: "PutMetricStreamOutput")
+    Query = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatch#Query", name: "Query", traits: {"smithy.api#length" => {"min" => 1, "max" => 10000}})
+    QueryResultsToAlarm = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.cloudwatch#QueryResultsToAlarm", name: "QueryResultsToAlarm", traits: {"smithy.api#range" => {"min" => 1}})
+    QueryResultsToEvaluate = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.cloudwatch#QueryResultsToEvaluate", name: "QueryResultsToEvaluate", traits: {"smithy.api#range" => {"min" => 1}})
+    QueryString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatch#QueryString", name: "QueryString", traits: {"smithy.api#length" => {"min" => 0, "max" => 10000}})
     Range = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#Range", name: "Range")
     RecentlyActive = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudwatch#RecentlyActive", name: "RecentlyActive")
+    RecoveryPeriod = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.cloudwatch#RecoveryPeriod", name: "RecoveryPeriod", traits: {"smithy.api#range" => {"min" => 0, "max" => 86400}})
+    ResourceArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatch#ResourceArn", name: "ResourceArn", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "^arn:[a-zA-Z0-9-]+:[a-zA-Z0-9-]+:[a-zA-Z0-9-]*:\\d{12}:.+$"})
+    ResourceConflict = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#ResourceConflict", name: "ResourceConflict", traits: {"aws.protocols#awsQueryError" => {"code" => "ResourceConflict", "httpResponseCode" => 409}, "smithy.api#error" => "client", "smithy.api#httpError" => 409})
     ResourceId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatch#ResourceId", name: "ResourceId")
     ResourceList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatch#ResourceList", name: "ResourceList", traits: {"smithy.api#length" => {"min" => 0, "max" => 5}})
+    ResourceMetricSelection = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#ResourceMetricSelection", name: "ResourceMetricSelection")
+    ResourceMetricSelectionList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatch#ResourceMetricSelectionList", name: "ResourceMetricSelectionList", traits: {"smithy.api#length" => {"min" => 1, "max" => 1}})
+    ResourceMetricsConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#ResourceMetricsConfiguration", name: "ResourceMetricsConfiguration")
     ResourceName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatch#ResourceName", name: "ResourceName", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}})
     ResourceNotFound = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#ResourceNotFound", name: "ResourceNotFound", traits: {"aws.protocols#awsQueryError" => {"code" => "ResourceNotFound", "httpResponseCode" => 404}, "smithy.api#error" => "client", "smithy.api#httpError" => 404})
     ResourceNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#ResourceNotFoundException", name: "ResourceNotFoundException", traits: {"aws.protocols#awsQueryError" => {"code" => "ResourceNotFoundException", "httpResponseCode" => 404}, "smithy.api#error" => "client", "smithy.api#httpError" => 404})
     ResourceType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatch#ResourceType", name: "ResourceType")
     ReturnData = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.cloudwatch#ReturnData", name: "ReturnData")
+    Rule = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#Rule", name: "Rule")
     ScanBy = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudwatch#ScanBy", name: "ScanBy")
+    Schedule = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#Schedule", name: "Schedule")
+    ScheduleConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#ScheduleConfiguration", name: "ScheduleConfiguration")
+    ScheduleExpression = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatch#ScheduleExpression", name: "ScheduleExpression", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}})
+    ScheduledQueryConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#ScheduledQueryConfiguration", name: "ScheduledQueryConfiguration")
     SetAlarmStateInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#SetAlarmStateInput", name: "SetAlarmStateInput")
     SingleMetricAnomalyDetector = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#SingleMetricAnomalyDetector", name: "SingleMetricAnomalyDetector")
     Size = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.cloudwatch#Size", name: "Size")
+    SlidingWindow = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#SlidingWindow", name: "SlidingWindow")
     StandardUnit = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudwatch#StandardUnit", name: "StandardUnit")
     StartMetricStreamsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#StartMetricStreamsInput", name: "StartMetricStreamsInput")
     StartMetricStreamsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#StartMetricStreamsOutput", name: "StartMetricStreamsOutput")
+    StartOTelEnrichmentInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#StartOTelEnrichmentInput", name: "StartOTelEnrichmentInput")
+    StartOTelEnrichmentOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#StartOTelEnrichmentOutput", name: "StartOTelEnrichmentOutput")
+    StartTimeOffset = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.cloudwatch#StartTimeOffset", name: "StartTimeOffset", traits: {"smithy.api#range" => {"min" => 1, "max" => 2592000}})
     Stat = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatch#Stat", name: "Stat")
     StateReason = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatch#StateReason", name: "StateReason", traits: {"smithy.api#length" => {"min" => 0, "max" => 1023}})
     StateReasonData = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatch#StateReasonData", name: "StateReasonData", traits: {"smithy.api#length" => {"min" => 0, "max" => 4000}})
@@ -276,8 +354,11 @@ module Aws::CloudWatch
     StatusCode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudwatch#StatusCode", name: "StatusCode")
     StopMetricStreamsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#StopMetricStreamsInput", name: "StopMetricStreamsInput")
     StopMetricStreamsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#StopMetricStreamsOutput", name: "StopMetricStreamsOutput")
+    StopOTelEnrichmentInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#StopOTelEnrichmentInput", name: "StopOTelEnrichmentInput")
+    StopOTelEnrichmentOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#StopOTelEnrichmentOutput", name: "StopOTelEnrichmentOutput")
     StorageResolution = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.cloudwatch#StorageResolution", name: "StorageResolution", traits: {"smithy.api#range" => {"min" => 1}})
     StrictEntityValidation = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.cloudwatch#StrictEntityValidation", name: "StrictEntityValidation")
+    String = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatch#String", name: "String")
     SuppressorPeriod = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.cloudwatch#SuppressorPeriod", name: "SuppressorPeriod")
     Tag = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#Tag", name: "Tag")
     TagKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatch#TagKey", name: "TagKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}})
@@ -290,10 +371,20 @@ module Aws::CloudWatch
     Threshold = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.cloudwatch#Threshold", name: "Threshold")
     Timestamp = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.cloudwatch#Timestamp", name: "Timestamp")
     Timestamps = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatch#Timestamps", name: "Timestamps")
+    Timezone = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatch#Timezone", name: "Timezone", traits: {"smithy.api#length" => {"min" => 1, "max" => 50}})
     TreatMissingData = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatch#TreatMissingData", name: "TreatMissingData", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}})
     UntagResourceInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#UntagResourceInput", name: "UntagResourceInput")
     UntagResourceOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#UntagResourceOutput", name: "UntagResourceOutput")
+    UpdateOTelEnrichmentInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#UpdateOTelEnrichmentInput", name: "UpdateOTelEnrichmentInput")
+    UpdateOTelEnrichmentOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#UpdateOTelEnrichmentOutput", name: "UpdateOTelEnrichmentOutput")
+    UpdateResourceMetricsConfigurationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#UpdateResourceMetricsConfigurationInput", name: "UpdateResourceMetricsConfigurationInput")
+    UpdateResourceMetricsConfigurationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#UpdateResourceMetricsConfigurationOutput", name: "UpdateResourceMetricsConfigurationOutput")
+    ValidationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#ValidationException", name: "ValidationException", traits: {"aws.protocols#awsQueryError" => {"code" => "ValidationError", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
+    ValidationExceptionMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudwatch#ValidationExceptionMessage", name: "ValidationExceptionMessage")
     Values = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudwatch#Values", name: "Values")
+    WallClockWindow = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#WallClockWindow", name: "WallClockWindow")
+    WarmUpConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudwatch#WarmUpConfiguration", name: "WarmUpConfiguration")
+    WarmUpPeriodDurationInMinutes = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.cloudwatch#WarmUpPeriodDurationInMinutes", name: "WarmUpPeriodDurationInMinutes", traits: {"smithy.api#range" => {"min" => 1, "max" => 2880}})
 
     ActionsSuppressedBy.add_member(:wait_period, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WaitPeriod", traits: {"smithy.api#enumValue" => "WaitPeriod"}))
     ActionsSuppressedBy.add_member(:extension_period, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ExtensionPeriod", traits: {"smithy.api#enumValue" => "ExtensionPeriod"}))
@@ -314,10 +405,27 @@ module Aws::CloudWatch
     AlarmHistoryItem.add_member(:alarm_contributor_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: ContributorAttributes, name: "AlarmContributorAttributes"))
     AlarmHistoryItem.type = Types::AlarmHistoryItem
     AlarmHistoryItems.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmHistoryItem, name: "member"))
+    AlarmMuteRuleStatus.add_member(:scheduled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SCHEDULED", traits: {"smithy.api#enumValue" => "SCHEDULED"}))
+    AlarmMuteRuleStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
+    AlarmMuteRuleStatus.add_member(:expired, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXPIRED", traits: {"smithy.api#enumValue" => "EXPIRED"}))
+    AlarmMuteRuleStatuses.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmMuteRuleStatus, name: "member"))
+    AlarmMuteRuleSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmMuteRuleSummary, name: "member"))
+    AlarmMuteRuleSummary.add_member(:alarm_mute_rule_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "AlarmMuteRuleArn"))
+    AlarmMuteRuleSummary.add_member(:expire_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "ExpireDate"))
+    AlarmMuteRuleSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmMuteRuleStatus, name: "Status"))
+    AlarmMuteRuleSummary.add_member(:mute_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MuteType, name: "MuteType"))
+    AlarmMuteRuleSummary.add_member(:last_updated_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastUpdatedTimestamp"))
+    AlarmMuteRuleSummary.type = Types::AlarmMuteRuleSummary
     AlarmNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmName, name: "member"))
+    AlarmPromQLCriteria.add_member(:query, ::Smithy::Schema::Shapes::MemberShape.new(target: Query, name: "Query", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    AlarmPromQLCriteria.add_member(:pending_period, ::Smithy::Schema::Shapes::MemberShape.new(target: PendingPeriod, name: "PendingPeriod"))
+    AlarmPromQLCriteria.add_member(:recovery_period, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPeriod, name: "RecoveryPeriod"))
+    AlarmPromQLCriteria.type = Types::AlarmPromQLCriteria
     AlarmType.add_member(:composite_alarm, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CompositeAlarm", traits: {"smithy.api#enumValue" => "CompositeAlarm"}))
     AlarmType.add_member(:metric_alarm, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MetricAlarm", traits: {"smithy.api#enumValue" => "MetricAlarm"}))
+    AlarmType.add_member(:log_alarm, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LogAlarm", traits: {"smithy.api#enumValue" => "LogAlarm"}))
     AlarmTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmType, name: "member"))
+    AnomalyDetector.add_member(:anomaly_detector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyDetectorId, name: "AnomalyDetectorId"))
     AnomalyDetector.add_member(:namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: Namespace, name: "Namespace", traits: {"smithy.api#deprecated" => {"message" => "Use SingleMetricAnomalyDetector.Namespace property."}}))
     AnomalyDetector.add_member(:metric_name, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricName, name: "MetricName", traits: {"smithy.api#deprecated" => {"message" => "Use SingleMetricAnomalyDetector.MetricName property."}}))
     AnomalyDetector.add_member(:dimensions, ::Smithy::Schema::Shapes::MemberShape.new(target: Dimensions, name: "Dimensions", traits: {"smithy.api#deprecated" => {"message" => "Use SingleMetricAnomalyDetector.Dimensions property."}}))
@@ -332,6 +440,7 @@ module Aws::CloudWatch
     AnomalyDetectorConfiguration.add_member(:metric_timezone, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyDetectorMetricTimezone, name: "MetricTimezone"))
     AnomalyDetectorConfiguration.type = Types::AnomalyDetectorConfiguration
     AnomalyDetectorExcludedTimeRanges.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Range, name: "member"))
+    AnomalyDetectorIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyDetectorId, name: "member"))
     AnomalyDetectorStateValue.add_member(:pending_training, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING_TRAINING", traits: {"smithy.api#enumValue" => "PENDING_TRAINING"}))
     AnomalyDetectorStateValue.add_member(:trained_insufficient_data, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TRAINED_INSUFFICIENT_DATA", traits: {"smithy.api#enumValue" => "TRAINED_INSUFFICIENT_DATA"}))
     AnomalyDetectorStateValue.add_member(:trained, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TRAINED", traits: {"smithy.api#enumValue" => "TRAINED"}))
@@ -339,6 +448,10 @@ module Aws::CloudWatch
     AnomalyDetectorType.add_member(:metric_math, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "METRIC_MATH", traits: {"smithy.api#enumValue" => "METRIC_MATH"}))
     AnomalyDetectorTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyDetectorType, name: "member"))
     AnomalyDetectors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyDetector, name: "member"))
+    AssociateDatasetKmsKeyInput.add_member(:dataset_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetIdentifier, name: "DatasetIdentifier", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    AssociateDatasetKmsKeyInput.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyArn, name: "KmsKeyArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    AssociateDatasetKmsKeyInput.type = Types::AssociateDatasetKmsKeyInput
+    AssociateDatasetKmsKeyOutput.type = Types::AssociateDatasetKmsKeyOutput
     BatchFailures.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PartialFailure, name: "member"))
     ComparisonOperator.add_member(:greater_than_or_equal_to_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GreaterThanOrEqualToThreshold", traits: {"smithy.api#enumValue" => "GreaterThanOrEqualToThreshold"}))
     ComparisonOperator.add_member(:greater_than_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GreaterThanThreshold", traits: {"smithy.api#enumValue" => "GreaterThanThreshold"}))
@@ -375,6 +488,11 @@ module Aws::CloudWatch
     ContributorAttributes.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "key"))
     ContributorAttributes.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "value"))
     Counts.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DatapointValue, name: "member"))
+    CreateResourceMetricsConfigurationInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "ResourceArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateResourceMetricsConfigurationInput.add_member(:metric_selections, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceMetricSelectionList, name: "MetricSelections"))
+    CreateResourceMetricsConfigurationInput.type = Types::CreateResourceMetricsConfigurationInput
+    CreateResourceMetricsConfigurationOutput.add_member(:resource_metrics_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceMetricsConfiguration, name: "ResourceMetricsConfiguration", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateResourceMetricsConfigurationOutput.type = Types::CreateResourceMetricsConfigurationOutput
     DashboardEntries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardEntry, name: "member"))
     DashboardEntry.add_member(:dashboard_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardName, name: "DashboardName"))
     DashboardEntry.add_member(:dashboard_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardArn, name: "DashboardArn"))
@@ -404,8 +522,11 @@ module Aws::CloudWatch
     DatapointValueMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: DatapointValue, name: "value"))
     DatapointValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DatapointValue, name: "member"))
     Datapoints.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Datapoint, name: "member"))
+    DeleteAlarmMuteRuleInput.add_member(:alarm_mute_rule_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "AlarmMuteRuleName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DeleteAlarmMuteRuleInput.type = Types::DeleteAlarmMuteRuleInput
     DeleteAlarmsInput.add_member(:alarm_names, ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmNames, name: "AlarmNames", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     DeleteAlarmsInput.type = Types::DeleteAlarmsInput
+    DeleteAnomalyDetectorInput.add_member(:anomaly_detector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyDetectorId, name: "AnomalyDetectorId"))
     DeleteAnomalyDetectorInput.add_member(:namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: Namespace, name: "Namespace", traits: {"smithy.api#deprecated" => {"message" => "Use SingleMetricAnomalyDetector."}}))
     DeleteAnomalyDetectorInput.add_member(:metric_name, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricName, name: "MetricName", traits: {"smithy.api#deprecated" => {"message" => "Use SingleMetricAnomalyDetector."}}))
     DeleteAnomalyDetectorInput.add_member(:dimensions, ::Smithy::Schema::Shapes::MemberShape.new(target: Dimensions, name: "Dimensions", traits: {"smithy.api#deprecated" => {"message" => "Use SingleMetricAnomalyDetector."}}))
@@ -424,6 +545,9 @@ module Aws::CloudWatch
     DeleteMetricStreamInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricStreamName, name: "Name", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     DeleteMetricStreamInput.type = Types::DeleteMetricStreamInput
     DeleteMetricStreamOutput.type = Types::DeleteMetricStreamOutput
+    DeleteResourceMetricsConfigurationInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "ResourceArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DeleteResourceMetricsConfigurationInput.type = Types::DeleteResourceMetricsConfigurationInput
+    DeleteResourceMetricsConfigurationOutput.type = Types::DeleteResourceMetricsConfigurationOutput
     DescribeAlarmContributorsInput.add_member(:alarm_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmName, name: "AlarmName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     DescribeAlarmContributorsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     DescribeAlarmContributorsInput.type = Types::DescribeAlarmContributorsInput
@@ -465,8 +589,10 @@ module Aws::CloudWatch
     DescribeAlarmsInput.type = Types::DescribeAlarmsInput
     DescribeAlarmsOutput.add_member(:composite_alarms, ::Smithy::Schema::Shapes::MemberShape.new(target: CompositeAlarms, name: "CompositeAlarms"))
     DescribeAlarmsOutput.add_member(:metric_alarms, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricAlarms, name: "MetricAlarms"))
+    DescribeAlarmsOutput.add_member(:log_alarms, ::Smithy::Schema::Shapes::MemberShape.new(target: LogAlarms, name: "LogAlarms"))
     DescribeAlarmsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     DescribeAlarmsOutput.type = Types::DescribeAlarmsOutput
+    DescribeAnomalyDetectorsInput.add_member(:anomaly_detector_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyDetectorIds, name: "AnomalyDetectorIds"))
     DescribeAnomalyDetectorsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     DescribeAnomalyDetectorsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxReturnedResultsCount, name: "MaxResults"))
     DescribeAnomalyDetectorsInput.add_member(:namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: Namespace, name: "Namespace"))
@@ -497,6 +623,9 @@ module Aws::CloudWatch
     DisableInsightRulesInput.type = Types::DisableInsightRulesInput
     DisableInsightRulesOutput.add_member(:failures, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchFailures, name: "Failures"))
     DisableInsightRulesOutput.type = Types::DisableInsightRulesOutput
+    DisassociateDatasetKmsKeyInput.add_member(:dataset_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetIdentifier, name: "DatasetIdentifier", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DisassociateDatasetKmsKeyInput.type = Types::DisassociateDatasetKmsKeyInput
+    DisassociateDatasetKmsKeyOutput.type = Types::DisassociateDatasetKmsKeyOutput
     EnableAlarmActionsInput.add_member(:alarm_names, ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmNames, name: "AlarmNames", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     EnableAlarmActionsInput.type = Types::EnableAlarmActionsInput
     EnableInsightRulesInput.add_member(:rule_names, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightRuleNames, name: "RuleNames", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -514,14 +643,42 @@ module Aws::CloudWatch
     EntityMetricData.add_member(:metric_data, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricData, name: "MetricData"))
     EntityMetricData.type = Types::EntityMetricData
     EntityMetricDataList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityMetricData, name: "member"))
+    EvaluationCriteria.add_member(:prom_ql_criteria, Types::EvaluationCriteria::PromQLCriteria, ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmPromQLCriteria, name: "PromQLCriteria"))
+    EvaluationCriteria.add_member(:unknown, Types::EvaluationCriteria::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    EvaluationCriteria.type = Types::EvaluationCriteria
     EvaluationState.add_member(:partial_data, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PARTIAL_DATA", traits: {"smithy.api#enumValue" => "PARTIAL_DATA"}))
+    EvaluationState.add_member(:evaluation_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EVALUATION_FAILURE", traits: {"smithy.api#enumValue" => "EVALUATION_FAILURE"}))
+    EvaluationState.add_member(:evaluation_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EVALUATION_ERROR", traits: {"smithy.api#enumValue" => "EVALUATION_ERROR"}))
+    EvaluationWindow.add_member(:wall_clock_window, Types::EvaluationWindow::WallClockWindow, ::Smithy::Schema::Shapes::MemberShape.new(target: WallClockWindow, name: "WallClockWindow"))
+    EvaluationWindow.add_member(:sliding_window, Types::EvaluationWindow::SlidingWindow, ::Smithy::Schema::Shapes::MemberShape.new(target: SlidingWindow, name: "SlidingWindow"))
+    EvaluationWindow.add_member(:unknown, Types::EvaluationWindow::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    EvaluationWindow.type = Types::EvaluationWindow
     ExtendedStatistics.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExtendedStatistic, name: "member"))
+    GetAlarmMuteRuleInput.add_member(:alarm_mute_rule_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "AlarmMuteRuleName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    GetAlarmMuteRuleInput.type = Types::GetAlarmMuteRuleInput
+    GetAlarmMuteRuleOutput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "Name"))
+    GetAlarmMuteRuleOutput.add_member(:alarm_mute_rule_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "AlarmMuteRuleArn"))
+    GetAlarmMuteRuleOutput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmDescription, name: "Description"))
+    GetAlarmMuteRuleOutput.add_member(:rule, ::Smithy::Schema::Shapes::MemberShape.new(target: Rule, name: "Rule"))
+    GetAlarmMuteRuleOutput.add_member(:mute_targets, ::Smithy::Schema::Shapes::MemberShape.new(target: MuteTargets, name: "MuteTargets"))
+    GetAlarmMuteRuleOutput.add_member(:start_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "StartDate"))
+    GetAlarmMuteRuleOutput.add_member(:expire_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "ExpireDate"))
+    GetAlarmMuteRuleOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmMuteRuleStatus, name: "Status"))
+    GetAlarmMuteRuleOutput.add_member(:last_updated_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastUpdatedTimestamp"))
+    GetAlarmMuteRuleOutput.add_member(:mute_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MuteType, name: "MuteType"))
+    GetAlarmMuteRuleOutput.type = Types::GetAlarmMuteRuleOutput
     GetDashboardInput.add_member(:dashboard_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardName, name: "DashboardName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     GetDashboardInput.type = Types::GetDashboardInput
     GetDashboardOutput.add_member(:dashboard_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardArn, name: "DashboardArn"))
     GetDashboardOutput.add_member(:dashboard_body, ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardBody, name: "DashboardBody"))
     GetDashboardOutput.add_member(:dashboard_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardName, name: "DashboardName"))
     GetDashboardOutput.type = Types::GetDashboardOutput
+    GetDatasetInput.add_member(:dataset_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetIdentifier, name: "DatasetIdentifier", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    GetDatasetInput.type = Types::GetDatasetInput
+    GetDatasetOutput.add_member(:dataset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetId, name: "DatasetId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    GetDatasetOutput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetArn, name: "Arn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    GetDatasetOutput.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyArn, name: "KmsKeyArn"))
+    GetDatasetOutput.type = Types::GetDatasetOutput
     GetInsightRuleReportInput.add_member(:rule_name, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightRuleName, name: "RuleName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     GetInsightRuleReportInput.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "StartTime", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     GetInsightRuleReportInput.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "EndTime", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -582,6 +739,17 @@ module Aws::CloudWatch
     GetMetricWidgetImageInput.type = Types::GetMetricWidgetImageInput
     GetMetricWidgetImageOutput.add_member(:metric_widget_image, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricWidgetImage, name: "MetricWidgetImage"))
     GetMetricWidgetImageOutput.type = Types::GetMetricWidgetImageOutput
+    GetOTelEnrichmentInput.type = Types::GetOTelEnrichmentInput
+    GetOTelEnrichmentOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: OTelEnrichmentStatus, name: "Status", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    GetOTelEnrichmentOutput.add_member(:include_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: OTelEnrichmentMetricSelectorList, name: "IncludeFilters"))
+    GetOTelEnrichmentOutput.add_member(:exclude_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: OTelEnrichmentMetricSelectorList, name: "ExcludeFilters"))
+    GetOTelEnrichmentOutput.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedAt"))
+    GetOTelEnrichmentOutput.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "UpdatedAt"))
+    GetOTelEnrichmentOutput.type = Types::GetOTelEnrichmentOutput
+    GetResourceMetricsConfigurationInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "ResourceArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    GetResourceMetricsConfigurationInput.type = Types::GetResourceMetricsConfigurationInput
+    GetResourceMetricsConfigurationOutput.add_member(:resource_metrics_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceMetricsConfiguration, name: "ResourceMetricsConfiguration", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    GetResourceMetricsConfigurationOutput.type = Types::GetResourceMetricsConfigurationOutput
     HistoryItemType.add_member(:configuration_update, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ConfigurationUpdate", traits: {"smithy.api#enumValue" => "ConfigurationUpdate"}))
     HistoryItemType.add_member(:state_update, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "StateUpdate", traits: {"smithy.api#enumValue" => "StateUpdate"}))
     HistoryItemType.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Action", traits: {"smithy.api#enumValue" => "Action"}))
@@ -628,12 +796,26 @@ module Aws::CloudWatch
     InvalidParameterCombinationException.type = Types::InvalidParameterCombinationException
     InvalidParameterValueException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsQueryErrorMessage, name: "message"))
     InvalidParameterValueException.type = Types::InvalidParameterValueException
+    KmsAccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    KmsAccessDeniedException.type = Types::KmsAccessDeniedException
+    KmsKeyDisabledException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    KmsKeyDisabledException.type = Types::KmsKeyDisabledException
+    KmsKeyNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    KmsKeyNotFoundException.type = Types::KmsKeyNotFoundException
     LabelOptions.add_member(:timezone, ::Smithy::Schema::Shapes::MemberShape.new(target: GetMetricDataLabelTimezone, name: "Timezone"))
     LabelOptions.type = Types::LabelOptions
     LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: FaultDescription, name: "Message"))
     LimitExceededException.type = Types::LimitExceededException
     LimitExceededFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     LimitExceededFault.type = Types::LimitExceededFault
+    ListAlarmMuteRulesInput.add_member(:alarm_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "AlarmName"))
+    ListAlarmMuteRulesInput.add_member(:statuses, ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmMuteRuleStatuses, name: "Statuses"))
+    ListAlarmMuteRulesInput.add_member(:max_records, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxRecords, name: "MaxRecords"))
+    ListAlarmMuteRulesInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    ListAlarmMuteRulesInput.type = Types::ListAlarmMuteRulesInput
+    ListAlarmMuteRulesOutput.add_member(:alarm_mute_rule_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmMuteRuleSummaries, name: "AlarmMuteRuleSummaries"))
+    ListAlarmMuteRulesOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    ListAlarmMuteRulesOutput.type = Types::ListAlarmMuteRulesOutput
     ListDashboardsInput.add_member(:dashboard_name_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardNamePrefix, name: "DashboardNamePrefix"))
     ListDashboardsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     ListDashboardsInput.type = Types::ListDashboardsInput
@@ -669,6 +851,32 @@ module Aws::CloudWatch
     ListTagsForResourceInput.type = Types::ListTagsForResourceInput
     ListTagsForResourceOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     ListTagsForResourceOutput.type = Types::ListTagsForResourceOutput
+    LogAlarm.add_member(:alarm_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmName, name: "AlarmName"))
+    LogAlarm.add_member(:alarm_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmArn, name: "AlarmArn"))
+    LogAlarm.add_member(:alarm_description, ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmDescription, name: "AlarmDescription"))
+    LogAlarm.add_member(:alarm_configuration_updated_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "AlarmConfigurationUpdatedTimestamp"))
+    LogAlarm.add_member(:actions_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionsEnabled, name: "ActionsEnabled"))
+    LogAlarm.add_member(:ok_actions, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceList, name: "OKActions"))
+    LogAlarm.add_member(:alarm_actions, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceList, name: "AlarmActions"))
+    LogAlarm.add_member(:insufficient_data_actions, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceList, name: "InsufficientDataActions"))
+    LogAlarm.add_member(:state_value, ::Smithy::Schema::Shapes::MemberShape.new(target: StateValue, name: "StateValue"))
+    LogAlarm.add_member(:state_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: StateReason, name: "StateReason"))
+    LogAlarm.add_member(:state_reason_data, ::Smithy::Schema::Shapes::MemberShape.new(target: StateReasonData, name: "StateReasonData"))
+    LogAlarm.add_member(:state_updated_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "StateUpdatedTimestamp"))
+    LogAlarm.add_member(:scheduled_query_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledQueryConfiguration, name: "ScheduledQueryConfiguration"))
+    LogAlarm.add_member(:query_results_to_evaluate, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryResultsToEvaluate, name: "QueryResultsToEvaluate"))
+    LogAlarm.add_member(:query_results_to_alarm, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryResultsToAlarm, name: "QueryResultsToAlarm"))
+    LogAlarm.add_member(:threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: Threshold, name: "Threshold"))
+    LogAlarm.add_member(:comparison_operator, ::Smithy::Schema::Shapes::MemberShape.new(target: ComparisonOperator, name: "ComparisonOperator"))
+    LogAlarm.add_member(:treat_missing_data, ::Smithy::Schema::Shapes::MemberShape.new(target: TreatMissingData, name: "TreatMissingData"))
+    LogAlarm.add_member(:state_transitioned_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "StateTransitionedTimestamp"))
+    LogAlarm.add_member(:evaluation_state, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationState, name: "EvaluationState"))
+    LogAlarm.add_member(:action_log_line_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionLogLineCount, name: "ActionLogLineCount"))
+    LogAlarm.add_member(:action_log_line_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionLogLineRoleArn, name: "ActionLogLineRoleArn"))
+    LogAlarm.add_member(:warm_up_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: WarmUpConfiguration, name: "WarmUpConfiguration"))
+    LogAlarm.type = Types::LogAlarm
+    LogAlarms.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LogAlarm, name: "member"))
+    LogGroupIdentifiers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "member"))
     ManagedRule.add_member(:template_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateName, name: "TemplateName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ManagedRule.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "ResourceARN", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ManagedRule.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
@@ -718,6 +926,10 @@ module Aws::CloudWatch
     MetricAlarm.add_member(:threshold_metric_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricId, name: "ThresholdMetricId"))
     MetricAlarm.add_member(:evaluation_state, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationState, name: "EvaluationState"))
     MetricAlarm.add_member(:state_transitioned_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "StateTransitionedTimestamp"))
+    MetricAlarm.add_member(:evaluation_window, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationWindow, name: "EvaluationWindow"))
+    MetricAlarm.add_member(:warm_up_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: WarmUpConfiguration, name: "WarmUpConfiguration"))
+    MetricAlarm.add_member(:evaluation_criteria, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationCriteria, name: "EvaluationCriteria"))
+    MetricAlarm.add_member(:evaluation_interval, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationInterval, name: "EvaluationInterval"))
     MetricAlarm.type = Types::MetricAlarm
     MetricAlarms.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricAlarm, name: "member"))
     MetricCharacteristics.add_member(:periodic_spikes, ::Smithy::Schema::Shapes::MemberShape.new(target: PeriodicSpikes, name: "PeriodicSpikes"))
@@ -753,6 +965,7 @@ module Aws::CloudWatch
     MetricDatum.type = Types::MetricDatum
     MetricMathAnomalyDetector.add_member(:metric_data_queries, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricDataQueries, name: "MetricDataQueries"))
     MetricMathAnomalyDetector.type = Types::MetricMathAnomalyDetector
+    MetricNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricName, name: "member"))
     MetricStat.add_member(:metric, ::Smithy::Schema::Shapes::MemberShape.new(target: Metric, name: "Metric", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     MetricStat.add_member(:period, ::Smithy::Schema::Shapes::MemberShape.new(target: Period, name: "Period", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     MetricStat.add_member(:stat, ::Smithy::Schema::Shapes::MemberShape.new(target: Stat, name: "Stat", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -788,12 +1001,30 @@ module Aws::CloudWatch
     Metrics.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Metric, name: "member"))
     MissingRequiredParameterException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsQueryErrorMessage, name: "message"))
     MissingRequiredParameterException.type = Types::MissingRequiredParameterException
+    MuteTargetAlarmNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "member"))
+    MuteTargets.add_member(:alarm_names, ::Smithy::Schema::Shapes::MemberShape.new(target: MuteTargetAlarmNameList, name: "AlarmNames", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    MuteTargets.type = Types::MuteTargets
+    OTelEnrichmentMetricNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricName, name: "member"))
+    OTelEnrichmentMetricSelector.add_member(:namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: Namespace, name: "Namespace", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    OTelEnrichmentMetricSelector.add_member(:metric_names, ::Smithy::Schema::Shapes::MemberShape.new(target: OTelEnrichmentMetricNameList, name: "MetricNames"))
+    OTelEnrichmentMetricSelector.type = Types::OTelEnrichmentMetricSelector
+    OTelEnrichmentMetricSelectorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OTelEnrichmentMetricSelector, name: "member"))
+    OTelEnrichmentStatus.add_member(:running, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RUNNING", traits: {"smithy.api#enumValue" => "Running"}))
+    OTelEnrichmentStatus.add_member(:stopped, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STOPPED", traits: {"smithy.api#enumValue" => "Stopped"}))
     OwningAccounts.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "member"))
     PartialFailure.add_member(:failure_resource, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureResource, name: "FailureResource"))
     PartialFailure.add_member(:exception_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionType, name: "ExceptionType"))
     PartialFailure.add_member(:failure_code, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureCode, name: "FailureCode"))
     PartialFailure.add_member(:failure_description, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureDescription, name: "FailureDescription"))
     PartialFailure.type = Types::PartialFailure
+    PutAlarmMuteRuleInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "Name", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    PutAlarmMuteRuleInput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmDescription, name: "Description"))
+    PutAlarmMuteRuleInput.add_member(:rule, ::Smithy::Schema::Shapes::MemberShape.new(target: Rule, name: "Rule", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    PutAlarmMuteRuleInput.add_member(:mute_targets, ::Smithy::Schema::Shapes::MemberShape.new(target: MuteTargets, name: "MuteTargets"))
+    PutAlarmMuteRuleInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
+    PutAlarmMuteRuleInput.add_member(:start_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "StartDate"))
+    PutAlarmMuteRuleInput.add_member(:expire_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "ExpireDate"))
+    PutAlarmMuteRuleInput.type = Types::PutAlarmMuteRuleInput
     PutAnomalyDetectorInput.add_member(:namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: Namespace, name: "Namespace", traits: {"smithy.api#deprecated" => {"message" => "Use SingleMetricAnomalyDetector."}}))
     PutAnomalyDetectorInput.add_member(:metric_name, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricName, name: "MetricName", traits: {"smithy.api#deprecated" => {"message" => "Use SingleMetricAnomalyDetector."}}))
     PutAnomalyDetectorInput.add_member(:dimensions, ::Smithy::Schema::Shapes::MemberShape.new(target: Dimensions, name: "Dimensions", traits: {"smithy.api#deprecated" => {"message" => "Use SingleMetricAnomalyDetector."}}))
@@ -803,6 +1034,7 @@ module Aws::CloudWatch
     PutAnomalyDetectorInput.add_member(:single_metric_anomaly_detector, ::Smithy::Schema::Shapes::MemberShape.new(target: SingleMetricAnomalyDetector, name: "SingleMetricAnomalyDetector"))
     PutAnomalyDetectorInput.add_member(:metric_math_anomaly_detector, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricMathAnomalyDetector, name: "MetricMathAnomalyDetector"))
     PutAnomalyDetectorInput.type = Types::PutAnomalyDetectorInput
+    PutAnomalyDetectorOutput.add_member(:anomaly_detector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyDetectorId, name: "AnomalyDetectorId"))
     PutAnomalyDetectorOutput.type = Types::PutAnomalyDetectorOutput
     PutCompositeAlarmInput.add_member(:actions_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionsEnabled, name: "ActionsEnabled"))
     PutCompositeAlarmInput.add_member(:alarm_actions, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceList, name: "AlarmActions"))
@@ -818,6 +1050,7 @@ module Aws::CloudWatch
     PutCompositeAlarmInput.type = Types::PutCompositeAlarmInput
     PutDashboardInput.add_member(:dashboard_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardName, name: "DashboardName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     PutDashboardInput.add_member(:dashboard_body, ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardBody, name: "DashboardBody", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    PutDashboardInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     PutDashboardInput.type = Types::PutDashboardInput
     PutDashboardOutput.add_member(:dashboard_validation_messages, ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardValidationMessages, name: "DashboardValidationMessages"))
     PutDashboardOutput.type = Types::PutDashboardOutput
@@ -828,6 +1061,23 @@ module Aws::CloudWatch
     PutInsightRuleInput.add_member(:apply_on_transformed_logs, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightRuleOnTransformedLogs, name: "ApplyOnTransformedLogs"))
     PutInsightRuleInput.type = Types::PutInsightRuleInput
     PutInsightRuleOutput.type = Types::PutInsightRuleOutput
+    PutLogAlarmInput.add_member(:alarm_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmName, name: "AlarmName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    PutLogAlarmInput.add_member(:alarm_description, ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmDescription, name: "AlarmDescription"))
+    PutLogAlarmInput.add_member(:scheduled_query_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledQueryConfiguration, name: "ScheduledQueryConfiguration", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    PutLogAlarmInput.add_member(:action_log_line_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionLogLineCount, name: "ActionLogLineCount"))
+    PutLogAlarmInput.add_member(:action_log_line_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionLogLineRoleArn, name: "ActionLogLineRoleArn"))
+    PutLogAlarmInput.add_member(:actions_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionsEnabled, name: "ActionsEnabled"))
+    PutLogAlarmInput.add_member(:ok_actions, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceList, name: "OKActions"))
+    PutLogAlarmInput.add_member(:alarm_actions, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceList, name: "AlarmActions"))
+    PutLogAlarmInput.add_member(:insufficient_data_actions, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceList, name: "InsufficientDataActions"))
+    PutLogAlarmInput.add_member(:query_results_to_evaluate, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryResultsToEvaluate, name: "QueryResultsToEvaluate", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    PutLogAlarmInput.add_member(:query_results_to_alarm, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryResultsToAlarm, name: "QueryResultsToAlarm", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    PutLogAlarmInput.add_member(:threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: Threshold, name: "Threshold", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    PutLogAlarmInput.add_member(:comparison_operator, ::Smithy::Schema::Shapes::MemberShape.new(target: ComparisonOperator, name: "ComparisonOperator", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    PutLogAlarmInput.add_member(:treat_missing_data, ::Smithy::Schema::Shapes::MemberShape.new(target: TreatMissingData, name: "TreatMissingData"))
+    PutLogAlarmInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
+    PutLogAlarmInput.add_member(:warm_up_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: WarmUpConfiguration, name: "WarmUpConfiguration"))
+    PutLogAlarmInput.type = Types::PutLogAlarmInput
     PutManagedInsightRulesInput.add_member(:managed_rules, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedRules, name: "ManagedRules", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     PutManagedInsightRulesInput.type = Types::PutManagedInsightRulesInput
     PutManagedInsightRulesOutput.add_member(:failures, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchFailures, name: "Failures"))
@@ -845,15 +1095,19 @@ module Aws::CloudWatch
     PutMetricAlarmInput.add_member(:dimensions, ::Smithy::Schema::Shapes::MemberShape.new(target: Dimensions, name: "Dimensions"))
     PutMetricAlarmInput.add_member(:period, ::Smithy::Schema::Shapes::MemberShape.new(target: Period, name: "Period"))
     PutMetricAlarmInput.add_member(:unit, ::Smithy::Schema::Shapes::MemberShape.new(target: StandardUnit, name: "Unit"))
-    PutMetricAlarmInput.add_member(:evaluation_periods, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationPeriods, name: "EvaluationPeriods", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    PutMetricAlarmInput.add_member(:evaluation_periods, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationPeriods, name: "EvaluationPeriods"))
     PutMetricAlarmInput.add_member(:datapoints_to_alarm, ::Smithy::Schema::Shapes::MemberShape.new(target: DatapointsToAlarm, name: "DatapointsToAlarm"))
     PutMetricAlarmInput.add_member(:threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: Threshold, name: "Threshold"))
-    PutMetricAlarmInput.add_member(:comparison_operator, ::Smithy::Schema::Shapes::MemberShape.new(target: ComparisonOperator, name: "ComparisonOperator", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    PutMetricAlarmInput.add_member(:comparison_operator, ::Smithy::Schema::Shapes::MemberShape.new(target: ComparisonOperator, name: "ComparisonOperator"))
     PutMetricAlarmInput.add_member(:treat_missing_data, ::Smithy::Schema::Shapes::MemberShape.new(target: TreatMissingData, name: "TreatMissingData"))
     PutMetricAlarmInput.add_member(:evaluate_low_sample_count_percentile, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluateLowSampleCountPercentile, name: "EvaluateLowSampleCountPercentile"))
     PutMetricAlarmInput.add_member(:metrics, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricDataQueries, name: "Metrics"))
     PutMetricAlarmInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     PutMetricAlarmInput.add_member(:threshold_metric_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricId, name: "ThresholdMetricId"))
+    PutMetricAlarmInput.add_member(:evaluation_window, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationWindow, name: "EvaluationWindow"))
+    PutMetricAlarmInput.add_member(:warm_up_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: WarmUpConfiguration, name: "WarmUpConfiguration"))
+    PutMetricAlarmInput.add_member(:evaluation_criteria, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationCriteria, name: "EvaluationCriteria"))
+    PutMetricAlarmInput.add_member(:evaluation_interval, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationInterval, name: "EvaluationInterval"))
     PutMetricAlarmInput.type = Types::PutMetricAlarmInput
     PutMetricDataInput.add_member(:namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: Namespace, name: "Namespace", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     PutMetricDataInput.add_member(:metric_data, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricData, name: "MetricData"))
@@ -876,15 +1130,43 @@ module Aws::CloudWatch
     Range.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "EndTime", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     Range.type = Types::Range
     RecentlyActive.add_member(:pt3_h, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PT3H", traits: {"smithy.api#enumValue" => "PT3H"}))
+    ResourceConflict.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
+    ResourceConflict.type = Types::ResourceConflict
     ResourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "member"))
+    ResourceMetricSelection.add_member(:include_metrics, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricNameList, name: "IncludeMetrics", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ResourceMetricSelection.type = Types::ResourceMetricSelection
+    ResourceMetricSelectionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceMetricSelection, name: "member"))
+    ResourceMetricsConfiguration.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "ResourceArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ResourceMetricsConfiguration.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedAt", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ResourceMetricsConfiguration.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "UpdatedAt", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ResourceMetricsConfiguration.add_member(:metric_selections, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceMetricSelectionList, name: "MetricSelections"))
+    ResourceMetricsConfiguration.type = Types::ResourceMetricsConfiguration
     ResourceNotFound.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     ResourceNotFound.type = Types::ResourceNotFound
     ResourceNotFoundException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "ResourceType"))
     ResourceNotFoundException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "ResourceId"))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: FaultDescription, name: "Message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
+    Rule.add_member(:schedule, ::Smithy::Schema::Shapes::MemberShape.new(target: Schedule, name: "Schedule", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    Rule.type = Types::Rule
     ScanBy.add_member(:timestamp_descending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TIMESTAMP_DESCENDING", traits: {"smithy.api#enumValue" => "TimestampDescending"}))
     ScanBy.add_member(:timestamp_ascending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TIMESTAMP_ASCENDING", traits: {"smithy.api#enumValue" => "TimestampAscending"}))
+    Schedule.add_member(:expression, ::Smithy::Schema::Shapes::MemberShape.new(target: Expression, name: "Expression", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    Schedule.add_member(:duration, ::Smithy::Schema::Shapes::MemberShape.new(target: Duration, name: "Duration", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    Schedule.add_member(:timezone, ::Smithy::Schema::Shapes::MemberShape.new(target: Timezone, name: "Timezone"))
+    Schedule.type = Types::Schedule
+    ScheduleConfiguration.add_member(:schedule_expression, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleExpression, name: "ScheduleExpression", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ScheduleConfiguration.add_member(:start_time_offset, ::Smithy::Schema::Shapes::MemberShape.new(target: StartTimeOffset, name: "StartTimeOffset", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ScheduleConfiguration.add_member(:end_time_offset, ::Smithy::Schema::Shapes::MemberShape.new(target: EndTimeOffset, name: "EndTimeOffset"))
+    ScheduleConfiguration.type = Types::ScheduleConfiguration
+    ScheduledQueryConfiguration.add_member(:query_string, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryString, name: "QueryString", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ScheduledQueryConfiguration.add_member(:log_group_identifiers, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupIdentifiers, name: "LogGroupIdentifiers"))
+    ScheduledQueryConfiguration.add_member(:query_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "QueryARN"))
+    ScheduledQueryConfiguration.add_member(:scheduled_query_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "ScheduledQueryRoleARN", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ScheduledQueryConfiguration.add_member(:schedule_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleConfiguration, name: "ScheduleConfiguration", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ScheduledQueryConfiguration.add_member(:aggregation_expression, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregationExpression, name: "AggregationExpression", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ScheduledQueryConfiguration.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
+    ScheduledQueryConfiguration.type = Types::ScheduledQueryConfiguration
     SetAlarmStateInput.add_member(:alarm_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmName, name: "AlarmName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     SetAlarmStateInput.add_member(:state_value, ::Smithy::Schema::Shapes::MemberShape.new(target: StateValue, name: "StateValue", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     SetAlarmStateInput.add_member(:state_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: StateReason, name: "StateReason", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -896,6 +1178,7 @@ module Aws::CloudWatch
     SingleMetricAnomalyDetector.add_member(:dimensions, ::Smithy::Schema::Shapes::MemberShape.new(target: Dimensions, name: "Dimensions"))
     SingleMetricAnomalyDetector.add_member(:stat, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyDetectorMetricStat, name: "Stat"))
     SingleMetricAnomalyDetector.type = Types::SingleMetricAnomalyDetector
+    SlidingWindow.type = Types::SlidingWindow
     StandardUnit.add_member(:seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Seconds", traits: {"smithy.api#enumValue" => "Seconds"}))
     StandardUnit.add_member(:microseconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Microseconds", traits: {"smithy.api#enumValue" => "Microseconds"}))
     StandardUnit.add_member(:milliseconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Milliseconds", traits: {"smithy.api#enumValue" => "Milliseconds"}))
@@ -926,6 +1209,14 @@ module Aws::CloudWatch
     StartMetricStreamsInput.add_member(:names, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricStreamNames, name: "Names", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     StartMetricStreamsInput.type = Types::StartMetricStreamsInput
     StartMetricStreamsOutput.type = Types::StartMetricStreamsOutput
+    StartOTelEnrichmentInput.add_member(:include_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: OTelEnrichmentMetricSelectorList, name: "IncludeFilters"))
+    StartOTelEnrichmentInput.add_member(:exclude_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: OTelEnrichmentMetricSelectorList, name: "ExcludeFilters"))
+    StartOTelEnrichmentInput.type = Types::StartOTelEnrichmentInput
+    StartOTelEnrichmentOutput.add_member(:include_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: OTelEnrichmentMetricSelectorList, name: "IncludeFilters"))
+    StartOTelEnrichmentOutput.add_member(:exclude_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: OTelEnrichmentMetricSelectorList, name: "ExcludeFilters"))
+    StartOTelEnrichmentOutput.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedAt"))
+    StartOTelEnrichmentOutput.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "UpdatedAt"))
+    StartOTelEnrichmentOutput.type = Types::StartOTelEnrichmentOutput
     StateValue.add_member(:ok, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OK", traits: {"smithy.api#enumValue" => "OK"}))
     StateValue.add_member(:alarm, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALARM", traits: {"smithy.api#enumValue" => "ALARM"}))
     StateValue.add_member(:insufficient_data, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INSUFFICIENT_DATA", traits: {"smithy.api#enumValue" => "INSUFFICIENT_DATA"}))
@@ -947,6 +1238,8 @@ module Aws::CloudWatch
     StopMetricStreamsInput.add_member(:names, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricStreamNames, name: "Names", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     StopMetricStreamsInput.type = Types::StopMetricStreamsInput
     StopMetricStreamsOutput.type = Types::StopMetricStreamsOutput
+    StopOTelEnrichmentInput.type = Types::StopOTelEnrichmentInput
+    StopOTelEnrichmentOutput.type = Types::StopOTelEnrichmentOutput
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     Tag.type = Types::Tag
@@ -961,18 +1254,67 @@ module Aws::CloudWatch
     UntagResourceInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, name: "TagKeys", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     UntagResourceInput.type = Types::UntagResourceInput
     UntagResourceOutput.type = Types::UntagResourceOutput
+    UpdateOTelEnrichmentInput.add_member(:include_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: OTelEnrichmentMetricSelectorList, name: "IncludeFilters"))
+    UpdateOTelEnrichmentInput.add_member(:exclude_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: OTelEnrichmentMetricSelectorList, name: "ExcludeFilters"))
+    UpdateOTelEnrichmentInput.type = Types::UpdateOTelEnrichmentInput
+    UpdateOTelEnrichmentOutput.add_member(:include_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: OTelEnrichmentMetricSelectorList, name: "IncludeFilters"))
+    UpdateOTelEnrichmentOutput.add_member(:exclude_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: OTelEnrichmentMetricSelectorList, name: "ExcludeFilters"))
+    UpdateOTelEnrichmentOutput.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedAt"))
+    UpdateOTelEnrichmentOutput.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "UpdatedAt"))
+    UpdateOTelEnrichmentOutput.type = Types::UpdateOTelEnrichmentOutput
+    UpdateResourceMetricsConfigurationInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "ResourceArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    UpdateResourceMetricsConfigurationInput.add_member(:metric_selections, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceMetricSelectionList, name: "MetricSelections"))
+    UpdateResourceMetricsConfigurationInput.type = Types::UpdateResourceMetricsConfigurationInput
+    UpdateResourceMetricsConfigurationOutput.add_member(:resource_metrics_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceMetricsConfiguration, name: "ResourceMetricsConfiguration", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    UpdateResourceMetricsConfigurationOutput.type = Types::UpdateResourceMetricsConfigurationOutput
+    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionMessage, name: "message"))
+    ValidationException.type = Types::ValidationException
     Values.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DatapointValue, name: "member"))
+    WallClockWindow.add_member(:timezone, ::Smithy::Schema::Shapes::MemberShape.new(target: Timezone, name: "Timezone"))
+    WallClockWindow.type = Types::WallClockWindow
+    WarmUpConfiguration.add_member(:warm_up_period_duration_in_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: WarmUpPeriodDurationInMinutes, name: "WarmUpPeriodDurationInMinutes", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    WarmUpConfiguration.add_member(:only_start_evaluating_after_warm_up_period_ends, ::Smithy::Schema::Shapes::MemberShape.new(target: OnlyStartEvaluatingAfterWarmUpPeriodEnds, name: "OnlyStartEvaluatingAfterWarmUpPeriodEnds"))
+    WarmUpConfiguration.type = Types::WarmUpConfiguration
 
     GraniteServiceVersion20100801 = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.cloudwatch#GraniteServiceVersion20100801"
       service.name = "GraniteServiceVersion20100801"
       service.version = "2010-08-01"
-      service.traits = {"aws.api#service" => {"sdkId" => "CloudWatch", "arnNamespace" => "monitoring", "cloudFormationName" => "CloudWatch", "cloudTrailEventSource" => "monitoring.amazonaws.com", "docId" => "monitoring-2010-08-01", "endpointPrefix" => "monitoring"}, "aws.auth#sigv4" => {"name" => "monitoring"}, "aws.protocols#awsQuery" => {}, "smithy.api#title" => "Amazon CloudWatch", "smithy.api#xmlNamespace" => {"uri" => "http://monitoring.amazonaws.com/doc/2010-08-01/"}}
+      service.traits = {"aws.api#service" => {"sdkId" => "CloudWatch", "arnNamespace" => "monitoring", "cloudFormationName" => "CloudWatch", "cloudTrailEventSource" => "monitoring.amazonaws.com", "docId" => "monitoring-2010-08-01", "endpointPrefix" => "monitoring"}, "aws.auth#sigv4" => {"name" => "monitoring"}, "aws.protocols#awsJson1_0" => {}, "aws.protocols#awsQuery" => {}, "aws.protocols#awsQueryCompatible" => {}, "smithy.api#title" => "Amazon CloudWatch", "smithy.api#xmlNamespace" => {"uri" => "http://monitoring.amazonaws.com/doc/2010-08-01/"}, "smithy.protocols#rpcv2Cbor" => {}, "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}, "Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws-us-gov"]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://monitoring.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://monitoring.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://monitoring-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://monitoring-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 15, "nodes" => "/////wAAAAH/////AAAAAAAAAA4AAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEEAAAABwX14QUF9eEKAAAABAAAAAsAAAAJAAAABQX14QQAAAAKAAAABgX14QgF9eEJAAAABQX14QUAAAAMAAAABgAAAA0F9eEHAAAABwX14QYF9eEHAAAAAwX14QEAAAAPAAAABAX14QIF9eED"}}
+      service.add_operation(:associate_dataset_kms_key, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cloudwatch#AssociateDatasetKmsKey"
+        operation.name = "AssociateDatasetKmsKey"
+        operation.input = AssociateDatasetKmsKeyInput
+        operation.output = AssociateDatasetKmsKeyOutput
+        operation.errors << ConflictException
+        operation.errors << KmsAccessDeniedException
+        operation.errors << KmsKeyDisabledException
+        operation.errors << KmsKeyNotFoundException
+        operation.errors << ResourceNotFoundException
+        operation.traits = {}
+      end)
+      service.add_operation(:create_resource_metrics_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cloudwatch#CreateResourceMetricsConfiguration"
+        operation.name = "CreateResourceMetricsConfiguration"
+        operation.input = CreateResourceMetricsConfigurationInput
+        operation.output = CreateResourceMetricsConfigurationOutput
+        operation.errors << ConflictException
+        operation.errors << ResourceNotFoundException
+        operation.traits = {}
+      end)
+      service.add_operation(:delete_alarm_mute_rule, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cloudwatch#DeleteAlarmMuteRule"
+        operation.name = "DeleteAlarmMuteRule"
+        operation.input = DeleteAlarmMuteRuleInput
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.traits = {}
+      end)
       service.add_operation(:delete_alarms, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cloudwatch#DeleteAlarms"
         operation.name = "DeleteAlarms"
         operation.input = DeleteAlarmsInput
         operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << ResourceConflict
         operation.errors << ResourceNotFound
         operation.traits = {}
       end)
@@ -994,7 +1336,6 @@ module Aws::CloudWatch
         operation.input = DeleteDashboardsInput
         operation.output = DeleteDashboardsOutput
         operation.errors << ConflictException
-        operation.errors << DashboardNotFoundError
         operation.errors << InternalServiceFault
         operation.errors << InvalidParameterValueException
         operation.traits = {}
@@ -1016,6 +1357,14 @@ module Aws::CloudWatch
         operation.errors << InternalServiceFault
         operation.errors << InvalidParameterValueException
         operation.errors << MissingRequiredParameterException
+        operation.traits = {}
+      end)
+      service.add_operation(:delete_resource_metrics_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cloudwatch#DeleteResourceMetricsConfiguration"
+        operation.name = "DeleteResourceMetricsConfiguration"
+        operation.input = DeleteResourceMetricsConfigurationInput
+        operation.output = DeleteResourceMetricsConfigurationOutput
+        operation.errors << ResourceNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:describe_alarm_contributors, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -1089,6 +1438,15 @@ module Aws::CloudWatch
         operation.errors << MissingRequiredParameterException
         operation.traits = {}
       end)
+      service.add_operation(:disassociate_dataset_kms_key, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cloudwatch#DisassociateDatasetKmsKey"
+        operation.name = "DisassociateDatasetKmsKey"
+        operation.input = DisassociateDatasetKmsKeyInput
+        operation.output = DisassociateDatasetKmsKeyOutput
+        operation.errors << ConflictException
+        operation.errors << ResourceNotFoundException
+        operation.traits = {"smithy.api#idempotent" => {}}
+      end)
       service.add_operation(:enable_alarm_actions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cloudwatch#EnableAlarmActions"
         operation.name = "EnableAlarmActions"
@@ -1106,6 +1464,14 @@ module Aws::CloudWatch
         operation.errors << MissingRequiredParameterException
         operation.traits = {}
       end)
+      service.add_operation(:get_alarm_mute_rule, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cloudwatch#GetAlarmMuteRule"
+        operation.name = "GetAlarmMuteRule"
+        operation.input = GetAlarmMuteRuleInput
+        operation.output = GetAlarmMuteRuleOutput
+        operation.errors << ResourceNotFoundException
+        operation.traits = {}
+      end)
       service.add_operation(:get_dashboard, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cloudwatch#GetDashboard"
         operation.name = "GetDashboard"
@@ -1115,6 +1481,14 @@ module Aws::CloudWatch
         operation.errors << InternalServiceFault
         operation.errors << InvalidParameterValueException
         operation.traits = {}
+      end)
+      service.add_operation(:get_dataset, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cloudwatch#GetDataset"
+        operation.name = "GetDataset"
+        operation.input = GetDatasetInput
+        operation.output = GetDatasetOutput
+        operation.errors << ResourceNotFoundException
+        operation.traits = {"smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_insight_rule_report, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cloudwatch#GetInsightRuleReport"
@@ -1164,6 +1538,31 @@ module Aws::CloudWatch
         operation.input = GetMetricWidgetImageInput
         operation.output = GetMetricWidgetImageOutput
         operation.traits = {}
+      end)
+      service.add_operation(:get_o_tel_enrichment, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cloudwatch#GetOTelEnrichment"
+        operation.name = "GetOTelEnrichment"
+        operation.input = GetOTelEnrichmentInput
+        operation.output = GetOTelEnrichmentOutput
+        operation.traits = {}
+      end)
+      service.add_operation(:get_resource_metrics_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cloudwatch#GetResourceMetricsConfiguration"
+        operation.name = "GetResourceMetricsConfiguration"
+        operation.input = GetResourceMetricsConfigurationInput
+        operation.output = GetResourceMetricsConfigurationOutput
+        operation.errors << ResourceNotFoundException
+        operation.traits = {}
+      end)
+      service.add_operation(:list_alarm_mute_rules, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cloudwatch#ListAlarmMuteRules"
+        operation.name = "ListAlarmMuteRules"
+        operation.input = ListAlarmMuteRulesInput
+        operation.output = ListAlarmMuteRulesOutput
+        operation.errors << InvalidNextToken
+        operation.errors << ResourceNotFoundException
+        operation.traits = {}
+        operation[:paginator] = Paginators::ListAlarmMuteRules.new
       end)
       service.add_operation(:list_dashboards, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cloudwatch#ListDashboards"
@@ -1218,6 +1617,14 @@ module Aws::CloudWatch
         operation.errors << ResourceNotFoundException
         operation.traits = {}
       end)
+      service.add_operation(:put_alarm_mute_rule, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cloudwatch#PutAlarmMuteRule"
+        operation.name = "PutAlarmMuteRule"
+        operation.input = PutAlarmMuteRuleInput
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << LimitExceededFault
+        operation.traits = {}
+      end)
       service.add_operation(:put_anomaly_detector, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cloudwatch#PutAnomalyDetector"
         operation.name = "PutAnomalyDetector"
@@ -1256,6 +1663,15 @@ module Aws::CloudWatch
         operation.errors << InvalidParameterValueException
         operation.errors << LimitExceededException
         operation.errors << MissingRequiredParameterException
+        operation.traits = {}
+      end)
+      service.add_operation(:put_log_alarm, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cloudwatch#PutLogAlarm"
+        operation.name = "PutLogAlarm"
+        operation.input = PutLogAlarmInput
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << LimitExceededFault
+        operation.errors << ResourceConflict
         operation.traits = {}
       end)
       service.add_operation(:put_managed_insight_rules, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -1317,6 +1733,14 @@ module Aws::CloudWatch
         operation.errors << MissingRequiredParameterException
         operation.traits = {}
       end)
+      service.add_operation(:start_o_tel_enrichment, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cloudwatch#StartOTelEnrichment"
+        operation.name = "StartOTelEnrichment"
+        operation.input = StartOTelEnrichmentInput
+        operation.output = StartOTelEnrichmentOutput
+        operation.errors << ValidationException
+        operation.traits = {}
+      end)
       service.add_operation(:stop_metric_streams, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cloudwatch#StopMetricStreams"
         operation.name = "StopMetricStreams"
@@ -1325,6 +1749,13 @@ module Aws::CloudWatch
         operation.errors << InternalServiceFault
         operation.errors << InvalidParameterValueException
         operation.errors << MissingRequiredParameterException
+        operation.traits = {}
+      end)
+      service.add_operation(:stop_o_tel_enrichment, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cloudwatch#StopOTelEnrichment"
+        operation.name = "StopOTelEnrichment"
+        operation.input = StopOTelEnrichmentInput
+        operation.output = StopOTelEnrichmentOutput
         operation.traits = {}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -1348,6 +1779,23 @@ module Aws::CloudWatch
         operation.errors << ConflictException
         operation.errors << InternalServiceFault
         operation.errors << InvalidParameterValueException
+        operation.errors << ResourceNotFoundException
+        operation.traits = {}
+      end)
+      service.add_operation(:update_o_tel_enrichment, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cloudwatch#UpdateOTelEnrichment"
+        operation.name = "UpdateOTelEnrichment"
+        operation.input = UpdateOTelEnrichmentInput
+        operation.output = UpdateOTelEnrichmentOutput
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
+        operation.traits = {}
+      end)
+      service.add_operation(:update_resource_metrics_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cloudwatch#UpdateResourceMetricsConfiguration"
+        operation.name = "UpdateResourceMetricsConfiguration"
+        operation.input = UpdateResourceMetricsConfigurationInput
+        operation.output = UpdateResourceMetricsConfigurationOutput
         operation.errors << ResourceNotFoundException
         operation.traits = {}
       end)

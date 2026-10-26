@@ -254,7 +254,9 @@ module Aws::Redshift
       ?master_password_secret_kms_key_id: String,
       ?ip_address_type: String,
       ?multi_az: bool,
-      ?redshift_idc_application_arn: String
+      ?redshift_idc_application_arn: String,
+      ?catalog_name: String,
+      ?extra_compute_for_automatic_optimization: bool
     ) -> _CreateClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateClusterResponse
 
     interface _CreateClusterParameterGroupResponse
@@ -436,6 +438,22 @@ module Aws::Redshift
       ?description: String
     ) -> _CreateIntegrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateIntegrationResponse
 
+    interface _CreateQev2IdcApplicationResponse
+      include Smithy::Client::_Response[Types::CreateQev2IdcApplicationResult]
+      def qev2_idc_application: () -> Types::Qev2IdcApplication?
+    end
+    def create_qev2_idc_application: (
+      ?idc_instance_arn: String,
+      ?qev2_idc_application_name: String,
+      ?idc_display_name: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: untyped
+        }
+      ]
+    ) -> _CreateQev2IdcApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateQev2IdcApplicationResponse
+
     interface _CreateRedshiftIdcApplicationResponse
       include Smithy::Client::_Response[Types::CreateRedshiftIdcApplicationResult]
       def redshift_idc_application: () -> Types::RedshiftIdcApplication?
@@ -467,9 +485,17 @@ module Aws::Redshift
                 authorization: untyped
               }
             }
+          ],
+          redshift: Array[
+            {
+              connect: {
+                authorization: untyped
+              }
+            }
           ]
         }
       ],
+      ?application_type: String,
       ?tags: Array[
         {
           key: String,
@@ -734,6 +760,13 @@ module Aws::Redshift
       ?database_name: String,
       ?partner_name: String
     ) -> _DeletePartnerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePartnerResponse
+
+    interface _DeleteQev2IdcApplicationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_qev2_idc_application: (
+      ?qev2_idc_application_arn: String
+    ) -> _DeleteQev2IdcApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteQev2IdcApplicationResponse
 
     interface _DeleteRedshiftIdcApplicationResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
@@ -1127,6 +1160,7 @@ module Aws::Redshift
       def last_failure_message: () -> String?
       def log_destination_type: () -> String?
       def log_exports: () -> Array[String]?
+      def s3_tables: () -> Types::S3TablePublishStatus?
     end
     def describe_logging_status: (
       ?cluster_identifier: String
@@ -1176,6 +1210,17 @@ module Aws::Redshift
       ?database_name: String,
       ?partner_name: String
     ) -> _DescribePartnersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribePartnersResponse
+
+    interface _DescribeQev2IdcApplicationsResponse
+      include Smithy::Client::_Response[Types::DescribeQev2IdcApplicationsResult]
+      def qev2_idc_applications: () -> Array[Types::Qev2IdcApplication]?
+      def marker: () -> String?
+    end
+    def describe_qev2_idc_applications: (
+      ?qev2_idc_application_arn: String,
+      ?max_records: Integer,
+      ?marker: String
+    ) -> _DescribeQev2IdcApplicationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeQev2IdcApplicationsResponse
 
     interface _DescribeRedshiftIdcApplicationsResponse
       include Smithy::Client::_Response[Types::DescribeRedshiftIdcApplicationsResult]
@@ -1351,9 +1396,12 @@ module Aws::Redshift
       def last_failure_message: () -> String?
       def log_destination_type: () -> String?
       def log_exports: () -> Array[String]?
+      def s3_tables: () -> Types::S3TablePublishStatus?
     end
     def disable_logging: (
-      ?cluster_identifier: String
+      ?cluster_identifier: String,
+      ?log_destination_type: String,
+      ?log_exports: Array[String]
     ) -> _DisableLoggingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisableLoggingResponse
 
     interface _DisableSnapshotCopyResponse
@@ -1390,13 +1438,16 @@ module Aws::Redshift
       def last_failure_message: () -> String?
       def log_destination_type: () -> String?
       def log_exports: () -> Array[String]?
+      def s3_tables: () -> Types::S3TablePublishStatus?
     end
     def enable_logging: (
       ?cluster_identifier: String,
       ?bucket_name: String,
       ?s3_key_prefix: String,
       ?log_destination_type: String,
-      ?log_exports: Array[String]
+      ?log_exports: Array[String],
+      ?s3_table_kms_key_id: String,
+      ?s3_table_granularity: String
     ) -> _EnableLoggingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnableLoggingResponse
 
     interface _EnableSnapshotCopyResponse
@@ -1448,6 +1499,15 @@ module Aws::Redshift
       ?duration_seconds: Integer,
       ?custom_domain_name: String
     ) -> _GetClusterCredentialsWithIAMResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetClusterCredentialsWithIAMResponse
+
+    interface _GetIdentityCenterAuthTokenResponse
+      include Smithy::Client::_Response[Types::GetIdentityCenterAuthTokenResponse]
+      def token: () -> String?
+      def expiration_time: () -> Time?
+    end
+    def get_identity_center_auth_token: (
+      ?cluster_ids: Array[String]
+    ) -> _GetIdentityCenterAuthTokenResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetIdentityCenterAuthTokenResponse
 
     interface _GetReservedNodeExchangeConfigurationOptionsResponse
       include Smithy::Client::_Response[Types::GetReservedNodeExchangeConfigurationOptionsOutputMessage]
@@ -1545,7 +1605,8 @@ module Aws::Redshift
       ?manage_master_password: bool,
       ?master_password_secret_kms_key_id: String,
       ?ip_address_type: String,
-      ?multi_az: bool
+      ?multi_az: bool,
+      ?extra_compute_for_automatic_optimization: bool
     ) -> _ModifyClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyClusterResponse
 
     interface _ModifyClusterDbRevisionResponse
@@ -1697,6 +1758,31 @@ module Aws::Redshift
       ?integration_name: String
     ) -> _ModifyIntegrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyIntegrationResponse
 
+    interface _ModifyLakehouseConfigurationResponse
+      include Smithy::Client::_Response[Types::ModifyLakehouseConfigurationOutput]
+      def cluster_identifier: () -> String?
+      def lakehouse_idc_application_arn: () -> String?
+      def lakehouse_registration_status: () -> String?
+      def catalog_arn: () -> String?
+    end
+    def modify_lakehouse_configuration: (
+      ?cluster_identifier: String,
+      ?lakehouse_registration: String,
+      ?catalog_name: String,
+      ?lakehouse_idc_registration: String,
+      ?lakehouse_idc_application_arn: String,
+      ?dry_run: bool
+    ) -> _ModifyLakehouseConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyLakehouseConfigurationResponse
+
+    interface _ModifyQev2IdcApplicationResponse
+      include Smithy::Client::_Response[Types::ModifyQev2IdcApplicationResult]
+      def qev2_idc_application: () -> Types::Qev2IdcApplication?
+    end
+    def modify_qev2_idc_application: (
+      ?qev2_idc_application_arn: String,
+      ?idc_display_name: String
+    ) -> _ModifyQev2IdcApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyQev2IdcApplicationResponse
+
     interface _ModifyRedshiftIdcApplicationResponse
       include Smithy::Client::_Response[Types::ModifyRedshiftIdcApplicationResult]
       def redshift_idc_application: () -> Types::RedshiftIdcApplication?
@@ -1724,6 +1810,13 @@ module Aws::Redshift
           s3_access_grants: Array[
             {
               read_write_access: {
+                authorization: untyped
+              }
+            }
+          ],
+          redshift: Array[
+            {
+              connect: {
                 authorization: untyped
               }
             }
@@ -1955,7 +2048,9 @@ module Aws::Redshift
       ?manage_master_password: bool,
       ?master_password_secret_kms_key_id: String,
       ?ip_address_type: String,
-      ?multi_az: bool
+      ?multi_az: bool,
+      ?catalog_name: String,
+      ?redshift_idc_application_arn: String
     ) -> _RestoreFromClusterSnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RestoreFromClusterSnapshotResponse
 
     interface _RestoreTableFromClusterSnapshotResponse

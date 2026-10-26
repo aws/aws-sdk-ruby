@@ -30,9 +30,75 @@ module Aws::BedrockAgentRuntime
     AgentCollaboratorInvocationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#AgentCollaboratorInvocationOutput", name: "AgentCollaboratorInvocationOutput")
     AgentCollaboratorOutputPayload = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#AgentCollaboratorOutputPayload", name: "AgentCollaboratorOutputPayload")
     AgentCollaboratorPayloadString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrockagentruntime#AgentCollaboratorPayloadString", name: "AgentCollaboratorPayloadString", traits: {"smithy.api#sensitive" => {}})
+    AgentCoreMemoryActorId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrockagentruntime#AgentCoreMemoryActorId", name: "AgentCoreMemoryActorId", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => "^[a-zA-Z0-9][a-zA-Z0-9\\-_/]*(?::[a-zA-Z0-9\\-_/]+)*[a-zA-Z0-9\\-_/]*$"})
+    AgentCoreMemoryId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrockagentruntime#AgentCoreMemoryId", name: "AgentCoreMemoryId", traits: {"smithy.api#length" => {"min" => 12, "max" => 111}, "smithy.api#pattern" => "^[a-zA-Z][a-zA-Z0-9\\-_]{0,99}-[a-zA-Z0-9]{10}$"})
+    AgentCoreMemorySessionId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrockagentruntime#AgentCoreMemorySessionId", name: "AgentCoreMemorySessionId", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#pattern" => "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*$"})
     AgentId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrockagentruntime#AgentId", name: "AgentId", traits: {"smithy.api#length" => {"max" => 10}, "smithy.api#pattern" => "^[0-9a-zA-Z]+$"})
     AgentTraces = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrockagentruntime#AgentTraces", name: "AgentTraces")
     AgentVersion = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrockagentruntime#AgentVersion", name: "AgentVersion", traits: {"smithy.api#length" => {"min" => 1, "max" => 5}, "smithy.api#pattern" => "^(DRAFT|[0-9]{0,4}[1-9][0-9]{0,4})$"})
+    AgenticRetrieveAction = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#AgenticRetrieveAction", name: "AgenticRetrieveAction")
+    AgenticRetrieveActionDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#AgenticRetrieveActionDetails", name: "AgenticRetrieveActionDetails")
+    AgenticRetrieveActions = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrockagentruntime#AgenticRetrieveActions", name: "AgenticRetrieveActions")
+    AgenticRetrieveBedrockGuardrailConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#AgenticRetrieveBedrockGuardrailConfiguration", name: "AgenticRetrieveBedrockGuardrailConfiguration")
+    AgenticRetrieveBedrockRerankingConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#AgenticRetrieveBedrockRerankingConfiguration", name: "AgenticRetrieveBedrockRerankingConfiguration")
+    AgenticRetrieveBedrockRerankingModelConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#AgenticRetrieveBedrockRerankingModelConfiguration", name: "AgenticRetrieveBedrockRerankingModelConfiguration")
+    AgenticRetrieveCitation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#AgenticRetrieveCitation", name: "AgenticRetrieveCitation")
+    AgenticRetrieveCitationList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrockagentruntime#AgenticRetrieveCitationList", name: "AgenticRetrieveCitationList")
+    AgenticRetrieveCitationReference = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#AgenticRetrieveCitationReference", name: "AgenticRetrieveCitationReference")
+    AgenticRetrieveCitationReferenceList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrockagentruntime#AgenticRetrieveCitationReferenceList", name: "AgenticRetrieveCitationReferenceList")
+    AgenticRetrieveConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#AgenticRetrieveConfiguration", name: "AgenticRetrieveConfiguration")
+    AgenticRetrieveFailure = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#AgenticRetrieveFailure", name: "AgenticRetrieveFailure")
+    AgenticRetrieveFailures = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrockagentruntime#AgenticRetrieveFailures", name: "AgenticRetrieveFailures", traits: {"smithy.api#length" => {"min" => 1}})
+    AgenticRetrieveFullDocExpansionDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#AgenticRetrieveFullDocExpansionDetails", name: "AgenticRetrieveFullDocExpansionDetails")
+    AgenticRetrieveGeneratedResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#AgenticRetrieveGeneratedResponse", name: "AgenticRetrieveGeneratedResponse")
+    AgenticRetrieveGuardrailWarning = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#AgenticRetrieveGuardrailWarning", name: "AgenticRetrieveGuardrailWarning")
+    AgenticRetrieveMemoryConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#AgenticRetrieveMemoryConfiguration", name: "AgenticRetrieveMemoryConfiguration")
+    AgenticRetrieveMemoryMetadataFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#AgenticRetrieveMemoryMetadataFilter", name: "AgenticRetrieveMemoryMetadataFilter")
+    AgenticRetrieveMemoryMetadataFilterLeft = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.bedrockagentruntime#AgenticRetrieveMemoryMetadataFilterLeft", name: "AgenticRetrieveMemoryMetadataFilterLeft")
+    AgenticRetrieveMemoryMetadataFilterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrockagentruntime#AgenticRetrieveMemoryMetadataFilterList", name: "AgenticRetrieveMemoryMetadataFilterList")
+    AgenticRetrieveMemoryMetadataFilterOperator = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrockagentruntime#AgenticRetrieveMemoryMetadataFilterOperator", name: "AgenticRetrieveMemoryMetadataFilterOperator")
+    AgenticRetrieveMemoryMetadataFilterRight = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.bedrockagentruntime#AgenticRetrieveMemoryMetadataFilterRight", name: "AgenticRetrieveMemoryMetadataFilterRight")
+    AgenticRetrieveMemoryMetadataKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrockagentruntime#AgenticRetrieveMemoryMetadataKey", name: "AgenticRetrieveMemoryMetadataKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[a-zA-Z0-9\\s._:/=+@-]*$"})
+    AgenticRetrieveMemoryMetadataStringList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrockagentruntime#AgenticRetrieveMemoryMetadataStringList", name: "AgenticRetrieveMemoryMetadataStringList")
+    AgenticRetrieveMemoryMetadataStringListItem = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrockagentruntime#AgenticRetrieveMemoryMetadataStringListItem", name: "AgenticRetrieveMemoryMetadataStringListItem", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[a-zA-Z0-9\\s._:/=+@-]*$"})
+    AgenticRetrieveMemoryMetadataStringValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrockagentruntime#AgenticRetrieveMemoryMetadataStringValue", name: "AgenticRetrieveMemoryMetadataStringValue", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[a-zA-Z0-9\\s._:/=+@-]*$"})
+    AgenticRetrieveMemoryMetadataValue = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.bedrockagentruntime#AgenticRetrieveMemoryMetadataValue", name: "AgenticRetrieveMemoryMetadataValue")
+    AgenticRetrieveMemoryPersistenceMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrockagentruntime#AgenticRetrieveMemoryPersistenceMode", name: "AgenticRetrieveMemoryPersistenceMode")
+    AgenticRetrieveMemoryRetrievalConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#AgenticRetrieveMemoryRetrievalConfig", name: "AgenticRetrieveMemoryRetrievalConfig")
+    AgenticRetrieveMemoryRetrievalConfigList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrockagentruntime#AgenticRetrieveMemoryRetrievalConfigList", name: "AgenticRetrieveMemoryRetrievalConfigList")
+    AgenticRetrieveMemoryRetrieveDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#AgenticRetrieveMemoryRetrieveDetails", name: "AgenticRetrieveMemoryRetrieveDetails")
+    AgenticRetrieveMemorySessionBinding = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#AgenticRetrieveMemorySessionBinding", name: "AgenticRetrieveMemorySessionBinding")
+    AgenticRetrieveMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#AgenticRetrieveMessage", name: "AgenticRetrieveMessage")
+    AgenticRetrieveMessageContent = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#AgenticRetrieveMessageContent", name: "AgenticRetrieveMessageContent", traits: {"smithy.api#sensitive" => {}})
+    AgenticRetrieveMessages = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrockagentruntime#AgenticRetrieveMessages", name: "AgenticRetrieveMessages")
+    AgenticRetrieveMetadata = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.bedrockagentruntime#AgenticRetrieveMetadata", name: "AgenticRetrieveMetadata")
+    AgenticRetrievePolicyConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#AgenticRetrievePolicyConfiguration", name: "AgenticRetrievePolicyConfiguration")
+    AgenticRetrieveRerankingConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#AgenticRetrieveRerankingConfiguration", name: "AgenticRetrieveRerankingConfiguration")
+    AgenticRetrieveRerankingConfigurationType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrockagentruntime#AgenticRetrieveRerankingConfigurationType", name: "AgenticRetrieveRerankingConfigurationType")
+    AgenticRetrieveRerankingModelType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrockagentruntime#AgenticRetrieveRerankingModelType", name: "AgenticRetrieveRerankingModelType")
+    AgenticRetrieveResponseEvent = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#AgenticRetrieveResponseEvent", name: "AgenticRetrieveResponseEvent")
+    AgenticRetrieveResultEvent = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#AgenticRetrieveResultEvent", name: "AgenticRetrieveResultEvent")
+    AgenticRetrieveResultItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#AgenticRetrieveResultItem", name: "AgenticRetrieveResultItem")
+    AgenticRetrieveResults = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrockagentruntime#AgenticRetrieveResults", name: "AgenticRetrieveResults")
+    AgenticRetrieveSourceMetadata = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#AgenticRetrieveSourceMetadata", name: "AgenticRetrieveSourceMetadata")
+    AgenticRetrieveSourceMetadataList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrockagentruntime#AgenticRetrieveSourceMetadataList", name: "AgenticRetrieveSourceMetadataList")
+    AgenticRetrieveSourceRetriever = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#AgenticRetrieveSourceRetriever", name: "AgenticRetrieveSourceRetriever")
+    AgenticRetrieveSourceRetrieverList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrockagentruntime#AgenticRetrieveSourceRetrieverList", name: "AgenticRetrieveSourceRetrieverList")
+    AgenticRetrieveStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrockagentruntime#AgenticRetrieveStatus", name: "AgenticRetrieveStatus")
+    AgenticRetrieveStep = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrockagentruntime#AgenticRetrieveStep", name: "AgenticRetrieveStep")
+    AgenticRetrieveStreamRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#AgenticRetrieveStreamRequest", name: "AgenticRetrieveStreamRequest")
+    AgenticRetrieveStreamResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#AgenticRetrieveStreamResponse", name: "AgenticRetrieveStreamResponse")
+    AgenticRetrieveStreamResponseOutput = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.bedrockagentruntime#AgenticRetrieveStreamResponseOutput", name: "AgenticRetrieveStreamResponseOutput", traits: {"smithy.api#streaming" => {}})
+    AgenticRetrieveTraceEvent = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#AgenticRetrieveTraceEvent", name: "AgenticRetrieveTraceEvent")
+    AgenticRetrieveTraceEventAttributes = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#AgenticRetrieveTraceEventAttributes", name: "AgenticRetrieveTraceEventAttributes")
+    AgenticRetrieveTraceResultItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#AgenticRetrieveTraceResultItem", name: "AgenticRetrieveTraceResultItem")
+    AgenticRetrieveTraceResults = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrockagentruntime#AgenticRetrieveTraceResults", name: "AgenticRetrieveTraceResults")
+    AgenticRetrieveType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrockagentruntime#AgenticRetrieveType", name: "AgenticRetrieveType")
+    AgenticRetrieveWarning = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.bedrockagentruntime#AgenticRetrieveWarning", name: "AgenticRetrieveWarning")
+    AgenticRetrieveWarningMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#AgenticRetrieveWarningMessage", name: "AgenticRetrieveWarningMessage")
+    AgenticRetrieveWarnings = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrockagentruntime#AgenticRetrieveWarnings", name: "AgenticRetrieveWarnings", traits: {"smithy.api#length" => {"min" => 1}})
+    AgenticRetriever = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#AgenticRetriever", name: "AgenticRetriever")
+    AgenticRetrievers = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrockagentruntime#AgenticRetrievers", name: "AgenticRetrievers")
     AnalyzePromptEvent = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#AnalyzePromptEvent", name: "AnalyzePromptEvent", traits: {"smithy.api#sensitive" => {}})
     ApiContentMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.bedrockagentruntime#ApiContentMap", name: "ApiContentMap")
     ApiInvocationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#ApiInvocationInput", name: "ApiInvocationInput")
@@ -43,8 +109,11 @@ module Aws::BedrockAgentRuntime
     ApiResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#ApiResult", name: "ApiResult")
     AttributeType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrockagentruntime#AttributeType", name: "AttributeType")
     Attribution = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#Attribution", name: "Attribution")
+    AudioSegment = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#AudioSegment", name: "AudioSegment")
     BadGatewayException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#BadGatewayException", name: "BadGatewayException", traits: {"smithy.api#error" => "server", "smithy.api#httpError" => 502})
     BasePromptTemplate = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrockagentruntime#BasePromptTemplate", name: "BasePromptTemplate", traits: {"smithy.api#length" => {"min" => 1, "max" => 100000}, "smithy.api#sensitive" => {}})
+    BedrockFoundationModelConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#BedrockFoundationModelConfiguration", name: "BedrockFoundationModelConfiguration")
+    BedrockFoundationModelModelConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#BedrockFoundationModelModelConfiguration", name: "BedrockFoundationModelModelConfiguration")
     BedrockModelArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrockagentruntime#BedrockModelArn", name: "BedrockModelArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#pattern" => "^(arn:aws(-[^:]+)?:(bedrock|sagemaker):[a-z0-9-]{1,20}:([0-9]{12})?:([a-z-]+/)?)?([a-z0-9.-]{1,63}){0,2}(([:][a-z0-9-]{1,63}){0,2})?(/[a-z0-9]{1,12})?$"})
     BedrockModelConfigurations = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#BedrockModelConfigurations", name: "BedrockModelConfigurations")
     BedrockRerankingConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#BedrockRerankingConfiguration", name: "BedrockRerankingConfiguration")
@@ -57,6 +126,8 @@ module Aws::BedrockAgentRuntime
     ByteContentFile = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#ByteContentFile", name: "ByteContentFile")
     Caller = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.bedrockagentruntime#Caller", name: "Caller")
     CallerChain = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrockagentruntime#CallerChain", name: "CallerChain")
+    CheckIngestedDocumentAclRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#CheckIngestedDocumentAclRequest", name: "CheckIngestedDocumentAclRequest")
+    CheckIngestedDocumentAclResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#CheckIngestedDocumentAclResponse", name: "CheckIngestedDocumentAclResponse")
     Citation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#Citation", name: "Citation")
     CitationEvent = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#CitationEvent", name: "CitationEvent")
     Citations = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrockagentruntime#Citations", name: "Citations")
@@ -86,12 +157,25 @@ module Aws::BedrockAgentRuntime
     CustomOrchestration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#CustomOrchestration", name: "CustomOrchestration")
     CustomOrchestrationTrace = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#CustomOrchestrationTrace", name: "CustomOrchestrationTrace", traits: {"smithy.api#sensitive" => {}})
     CustomOrchestrationTraceEvent = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#CustomOrchestrationTraceEvent", name: "CustomOrchestrationTraceEvent", traits: {"smithy.api#sensitive" => {}})
+    DataSourceId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrockagentruntime#DataSourceId", name: "DataSourceId", traits: {"smithy.api#length" => {"max" => 10}, "smithy.api#pattern" => "^[0-9a-zA-Z]+$"})
     DateTimestamp = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.bedrockagentruntime#DateTimestamp", name: "DateTimestamp", traits: {"smithy.api#timestampFormat" => "date-time"})
     DeleteAgentMemoryRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#DeleteAgentMemoryRequest", name: "DeleteAgentMemoryRequest")
     DeleteAgentMemoryResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#DeleteAgentMemoryResponse", name: "DeleteAgentMemoryResponse")
     DeleteSessionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#DeleteSessionRequest", name: "DeleteSessionRequest")
     DeleteSessionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#DeleteSessionResponse", name: "DeleteSessionResponse")
     DependencyFailedException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#DependencyFailedException", name: "DependencyFailedException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 424})
+    DocumentAcl = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#DocumentAcl", name: "DocumentAcl", traits: {"smithy.api#sensitive" => {}})
+    DocumentAclCondition = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#DocumentAclCondition", name: "DocumentAclCondition")
+    DocumentAclConditionList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrockagentruntime#DocumentAclConditionList", name: "DocumentAclConditionList")
+    DocumentAclGroup = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#DocumentAclGroup", name: "DocumentAclGroup")
+    DocumentAclGroupList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrockagentruntime#DocumentAclGroupList", name: "DocumentAclGroupList")
+    DocumentAclMemberRelation = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrockagentruntime#DocumentAclMemberRelation", name: "DocumentAclMemberRelation")
+    DocumentAclMembership = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#DocumentAclMembership", name: "DocumentAclMembership")
+    DocumentAclMembershipType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrockagentruntime#DocumentAclMembershipType", name: "DocumentAclMembershipType")
+    DocumentAclUser = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#DocumentAclUser", name: "DocumentAclUser")
+    DocumentAclUserList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrockagentruntime#DocumentAclUserList", name: "DocumentAclUserList")
+    DocumentId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrockagentruntime#DocumentId", name: "DocumentId", traits: {"smithy.api#length" => {"min" => 1, "max" => 1825}, "smithy.api#pattern" => "^\\P{C}*$"})
+    DocumentOutputFormat = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrockagentruntime#DocumentOutputFormat", name: "DocumentOutputFormat")
     EndSessionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#EndSessionRequest", name: "EndSessionRequest")
     EndSessionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#EndSessionResponse", name: "EndSessionResponse")
     ExecutionType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrockagentruntime#ExecutionType", name: "ExecutionType")
@@ -175,6 +259,9 @@ module Aws::BedrockAgentRuntime
     FlowTraceNodeOutputFields = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrockagentruntime#FlowTraceNodeOutputFields", name: "FlowTraceNodeOutputFields", traits: {"smithy.api#length" => {"min" => 1, "max" => 2}})
     FlowTraceNodeOutputNext = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#FlowTraceNodeOutputNext", name: "FlowTraceNodeOutputNext", traits: {"smithy.api#sensitive" => {}})
     FlowTraceNodeOutputNextList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrockagentruntime#FlowTraceNodeOutputNextList", name: "FlowTraceNodeOutputNextList")
+    FoundationModelConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#FoundationModelConfiguration", name: "FoundationModelConfiguration")
+    FoundationModelConfigurationType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrockagentruntime#FoundationModelConfigurationType", name: "FoundationModelConfigurationType")
+    FoundationModelType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrockagentruntime#FoundationModelType", name: "FoundationModelType")
     Function = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrockagentruntime#Function", name: "Function", traits: {"smithy.api#sensitive" => {}})
     FunctionDefinition = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#FunctionDefinition", name: "FunctionDefinition")
     FunctionDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrockagentruntime#FunctionDescription", name: "FunctionDescription", traits: {"smithy.api#length" => {"min" => 1, "max" => 1200}})
@@ -193,10 +280,14 @@ module Aws::BedrockAgentRuntime
     GenerationConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#GenerationConfiguration", name: "GenerationConfiguration")
     GetAgentMemoryRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#GetAgentMemoryRequest", name: "GetAgentMemoryRequest")
     GetAgentMemoryResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#GetAgentMemoryResponse", name: "GetAgentMemoryResponse")
+    GetDocumentContentRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#GetDocumentContentRequest", name: "GetDocumentContentRequest")
+    GetDocumentContentResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#GetDocumentContentResponse", name: "GetDocumentContentResponse")
     GetExecutionFlowSnapshotRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#GetExecutionFlowSnapshotRequest", name: "GetExecutionFlowSnapshotRequest")
     GetExecutionFlowSnapshotResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#GetExecutionFlowSnapshotResponse", name: "GetExecutionFlowSnapshotResponse")
     GetFlowExecutionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#GetFlowExecutionRequest", name: "GetFlowExecutionRequest")
     GetFlowExecutionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#GetFlowExecutionResponse", name: "GetFlowExecutionResponse")
+    GetIngestedDocumentAclRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#GetIngestedDocumentAclRequest", name: "GetIngestedDocumentAclRequest")
+    GetIngestedDocumentAclResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#GetIngestedDocumentAclResponse", name: "GetIngestedDocumentAclResponse")
     GetInvocationStepRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#GetInvocationStepRequest", name: "GetInvocationStepRequest")
     GetInvocationStepResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#GetInvocationStepResponse", name: "GetInvocationStepResponse")
     GetSessionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#GetSessionRequest", name: "GetSessionRequest")
@@ -256,6 +347,8 @@ module Aws::BedrockAgentRuntime
     InlineSessionState = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#InlineSessionState", name: "InlineSessionState")
     InputFile = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#InputFile", name: "InputFile")
     InputFiles = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrockagentruntime#InputFiles", name: "InputFiles")
+    InputImage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#InputImage", name: "InputImage")
+    InputImageFormat = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrockagentruntime#InputImageFormat", name: "InputImageFormat")
     InputPrompt = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.bedrockagentruntime#InputPrompt", name: "InputPrompt")
     InputQueryType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrockagentruntime#InputQueryType", name: "InputQueryType")
     InputText = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrockagentruntime#InputText", name: "InputText", traits: {"smithy.api#length" => {"max" => 25000000}, "smithy.api#sensitive" => {}})
@@ -286,14 +379,17 @@ module Aws::BedrockAgentRuntime
     KnowledgeBaseConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#KnowledgeBaseConfiguration", name: "KnowledgeBaseConfiguration")
     KnowledgeBaseConfigurations = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrockagentruntime#KnowledgeBaseConfigurations", name: "KnowledgeBaseConfigurations", traits: {"smithy.api#length" => {"min" => 1}})
     KnowledgeBaseId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrockagentruntime#KnowledgeBaseId", name: "KnowledgeBaseId", traits: {"smithy.api#length" => {"max" => 10}, "smithy.api#pattern" => "^[0-9a-zA-Z]+$"})
+    KnowledgeBaseIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrockagentruntime#KnowledgeBaseIdentifier", name: "KnowledgeBaseIdentifier", traits: {"smithy.api#length" => {"min" => 10, "max" => 2048}, "smithy.api#pattern" => "^[0-9a-zA-Z]{10}$|^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:knowledge-base/[0-9a-zA-Z]{10}$"})
     KnowledgeBaseLookupInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#KnowledgeBaseLookupInput", name: "KnowledgeBaseLookupInput")
     KnowledgeBaseLookupInputString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrockagentruntime#KnowledgeBaseLookupInputString", name: "KnowledgeBaseLookupInputString", traits: {"smithy.api#sensitive" => {}})
     KnowledgeBaseLookupOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#KnowledgeBaseLookupOutput", name: "KnowledgeBaseLookupOutput")
     KnowledgeBaseQuery = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#KnowledgeBaseQuery", name: "KnowledgeBaseQuery", traits: {"smithy.api#sensitive" => {}})
+    KnowledgeBaseQueryType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrockagentruntime#KnowledgeBaseQueryType", name: "KnowledgeBaseQueryType")
     KnowledgeBaseRetrievalConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#KnowledgeBaseRetrievalConfiguration", name: "KnowledgeBaseRetrievalConfiguration")
     KnowledgeBaseRetrievalResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#KnowledgeBaseRetrievalResult", name: "KnowledgeBaseRetrievalResult")
     KnowledgeBaseRetrievalResults = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrockagentruntime#KnowledgeBaseRetrievalResults", name: "KnowledgeBaseRetrievalResults", traits: {"smithy.api#sensitive" => {}})
     KnowledgeBaseRetrieveAndGenerateConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#KnowledgeBaseRetrieveAndGenerateConfiguration", name: "KnowledgeBaseRetrieveAndGenerateConfiguration")
+    KnowledgeBaseRetrieverConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#KnowledgeBaseRetrieverConfiguration", name: "KnowledgeBaseRetrieverConfiguration")
     KnowledgeBaseVectorSearchConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#KnowledgeBaseVectorSearchConfiguration", name: "KnowledgeBaseVectorSearchConfiguration")
     KnowledgeBases = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrockagentruntime#KnowledgeBases", name: "KnowledgeBases")
     LambdaArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrockagentruntime#LambdaArn", name: "LambdaArn")
@@ -310,13 +406,23 @@ module Aws::BedrockAgentRuntime
     ListSessionsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#ListSessionsResponse", name: "ListSessionsResponse")
     ListTagsForResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#ListTagsForResourceRequest", name: "ListTagsForResourceRequest")
     ListTagsForResourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#ListTagsForResourceResponse", name: "ListTagsForResourceResponse")
+    ManagedSearchBedrockRerankingConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#ManagedSearchBedrockRerankingConfiguration", name: "ManagedSearchBedrockRerankingConfiguration")
+    ManagedSearchBedrockRerankingModelConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#ManagedSearchBedrockRerankingModelConfiguration", name: "ManagedSearchBedrockRerankingModelConfiguration")
+    ManagedSearchConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#ManagedSearchConfiguration", name: "ManagedSearchConfiguration")
+    ManagedSearchRerankingConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#ManagedSearchRerankingConfiguration", name: "ManagedSearchRerankingConfiguration")
+    ManagedSearchRerankingConfigurationType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrockagentruntime#ManagedSearchRerankingConfigurationType", name: "ManagedSearchRerankingConfigurationType")
+    MantleFoundationModelConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#MantleFoundationModelConfiguration", name: "MantleFoundationModelConfiguration")
+    MantleFoundationModelModelConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#MantleFoundationModelModelConfiguration", name: "MantleFoundationModelModelConfiguration")
+    MantleProjectId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrockagentruntime#MantleProjectId", name: "MantleProjectId", traits: {"smithy.api#length" => {"max" => 128}, "smithy.api#pattern" => "^(proj_[a-zA-Z0-9]+|default)$"})
     MaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.bedrockagentruntime#MaxResults", name: "MaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 1000}})
     MaxTokens = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.bedrockagentruntime#MaxTokens", name: "MaxTokens", traits: {"smithy.api#range" => {"min" => 0, "max" => 65536}})
     MaximumLength = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.bedrockagentruntime#MaximumLength", name: "MaximumLength", traits: {"smithy.api#range" => {"min" => 0, "max" => 8192}})
     Memories = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrockagentruntime#Memories", name: "Memories")
     Memory = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.bedrockagentruntime#Memory", name: "Memory")
     MemoryId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrockagentruntime#MemoryId", name: "MemoryId", traits: {"smithy.api#length" => {"min" => 2, "max" => 100}, "smithy.api#pattern" => "^[0-9a-zA-Z._:-]+$"})
+    MemoryNamespace = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrockagentruntime#MemoryNamespace", name: "MemoryNamespace", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => "^[a-zA-Z0-9/*][a-zA-Z0-9\\-_/*]*(?::[a-zA-Z0-9\\-_/*]+)*[a-zA-Z0-9\\-_/*]*$"})
     MemorySessionSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#MemorySessionSummary", name: "MemorySessionSummary")
+    MemoryStrategyId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrockagentruntime#MemoryStrategyId", name: "MemoryStrategyId", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#pattern" => "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*$"})
     MemoryType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrockagentruntime#MemoryType", name: "MemoryType")
     Message = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#Message", name: "Message")
     Messages = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrockagentruntime#Messages", name: "Messages")
@@ -387,6 +493,7 @@ module Aws::BedrockAgentRuntime
     PreProcessingModelInvocationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#PreProcessingModelInvocationOutput", name: "PreProcessingModelInvocationOutput", traits: {"smithy.api#sensitive" => {}})
     PreProcessingParsedResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#PreProcessingParsedResponse", name: "PreProcessingParsedResponse", traits: {"smithy.api#sensitive" => {}})
     PreProcessingTrace = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.bedrockagentruntime#PreProcessingTrace", name: "PreProcessingTrace", traits: {"smithy.api#sensitive" => {}})
+    PresignedUrl = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrockagentruntime#PresignedUrl", name: "PresignedUrl", traits: {"smithy.api#sensitive" => {}})
     PromptConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#PromptConfiguration", name: "PromptConfiguration")
     PromptConfigurations = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrockagentruntime#PromptConfigurations", name: "PromptConfigurations", traits: {"smithy.api#length" => {"max" => 10}})
     PromptCreationConfigurations = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#PromptCreationConfigurations", name: "PromptCreationConfigurations")
@@ -430,14 +537,17 @@ module Aws::BedrockAgentRuntime
     RerankingConfigurationType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrockagentruntime#RerankingConfigurationType", name: "RerankingConfigurationType")
     RerankingMetadataSelectionMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrockagentruntime#RerankingMetadataSelectionMode", name: "RerankingMetadataSelectionMode")
     RerankingMetadataSelectiveModeConfiguration = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.bedrockagentruntime#RerankingMetadataSelectiveModeConfiguration", name: "RerankingMetadataSelectiveModeConfiguration")
+    RerankingModelType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrockagentruntime#RerankingModelType", name: "RerankingModelType")
     ResourceDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrockagentruntime#ResourceDescription", name: "ResourceDescription", traits: {"smithy.api#length" => {"min" => 1, "max" => 200}, "smithy.api#sensitive" => {}})
     ResourceName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrockagentruntime#ResourceName", name: "ResourceName", traits: {"smithy.api#pattern" => "^([0-9a-zA-Z][_-]?){1,100}$", "smithy.api#sensitive" => {}})
     ResourceNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#ResourceNotFoundException", name: "ResourceNotFoundException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 404})
     ResponseBody = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.bedrockagentruntime#ResponseBody", name: "ResponseBody")
     ResponseState = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrockagentruntime#ResponseState", name: "ResponseState")
     ResponseStream = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.bedrockagentruntime#ResponseStream", name: "ResponseStream", traits: {"smithy.api#streaming" => {}})
+    RetrievalContent = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#RetrievalContent", name: "RetrievalContent")
     RetrievalFilter = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.bedrockagentruntime#RetrievalFilter", name: "RetrievalFilter", traits: {"smithy.api#sensitive" => {}})
     RetrievalFilterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrockagentruntime#RetrievalFilterList", name: "RetrievalFilterList", traits: {"smithy.api#length" => {"min" => 2}})
+    RetrievalOverrides = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#RetrievalOverrides", name: "RetrievalOverrides")
     RetrievalResultConfluenceLocation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#RetrievalResultConfluenceLocation", name: "RetrievalResultConfluenceLocation")
     RetrievalResultContent = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#RetrievalResultContent", name: "RetrievalResultContent", traits: {"smithy.api#sensitive" => {}})
     RetrievalResultContentColumn = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#RetrievalResultContentColumn", name: "RetrievalResultContentColumn", traits: {"smithy.api#sensitive" => {}})
@@ -445,12 +555,14 @@ module Aws::BedrockAgentRuntime
     RetrievalResultContentRow = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrockagentruntime#RetrievalResultContentRow", name: "RetrievalResultContentRow", traits: {"smithy.api#sensitive" => {}})
     RetrievalResultContentType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrockagentruntime#RetrievalResultContentType", name: "RetrievalResultContentType")
     RetrievalResultCustomDocumentLocation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#RetrievalResultCustomDocumentLocation", name: "RetrievalResultCustomDocumentLocation")
+    RetrievalResultGoogleDriveLocation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#RetrievalResultGoogleDriveLocation", name: "RetrievalResultGoogleDriveLocation")
     RetrievalResultKendraDocumentLocation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#RetrievalResultKendraDocumentLocation", name: "RetrievalResultKendraDocumentLocation")
     RetrievalResultLocation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#RetrievalResultLocation", name: "RetrievalResultLocation", traits: {"smithy.api#sensitive" => {}})
     RetrievalResultLocationType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrockagentruntime#RetrievalResultLocationType", name: "RetrievalResultLocationType")
     RetrievalResultMetadata = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.bedrockagentruntime#RetrievalResultMetadata", name: "RetrievalResultMetadata", traits: {"smithy.api#length" => {"min" => 1}, "smithy.api#sensitive" => {}})
     RetrievalResultMetadataKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrockagentruntime#RetrievalResultMetadataKey", name: "RetrievalResultMetadataKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
     RetrievalResultMetadataValue = ::Smithy::Schema::Shapes::DocumentShape.new(id: "com.amazonaws.bedrockagentruntime#RetrievalResultMetadataValue", name: "RetrievalResultMetadataValue")
+    RetrievalResultOneDriveLocation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#RetrievalResultOneDriveLocation", name: "RetrievalResultOneDriveLocation")
     RetrievalResultS3Location = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#RetrievalResultS3Location", name: "RetrievalResultS3Location")
     RetrievalResultSalesforceLocation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#RetrievalResultSalesforceLocation", name: "RetrievalResultSalesforceLocation")
     RetrievalResultSharePointLocation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#RetrievalResultSharePointLocation", name: "RetrievalResultSharePointLocation")
@@ -471,6 +583,7 @@ module Aws::BedrockAgentRuntime
     RetrieveResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#RetrieveResponse", name: "RetrieveResponse")
     RetrievedReference = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#RetrievedReference", name: "RetrievedReference")
     RetrievedReferences = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrockagentruntime#RetrievedReferences", name: "RetrievedReferences")
+    RetrieverConfiguration = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.bedrockagentruntime#RetrieverConfiguration", name: "RetrieverConfiguration")
     ReturnControlInvocationResults = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrockagentruntime#ReturnControlInvocationResults", name: "ReturnControlInvocationResults", traits: {"smithy.api#length" => {"min" => 1, "max" => 5}})
     ReturnControlPayload = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#ReturnControlPayload", name: "ReturnControlPayload", traits: {"smithy.api#sensitive" => {}})
     ReturnControlResults = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#ReturnControlResults", name: "ReturnControlResults")
@@ -538,6 +651,7 @@ module Aws::BedrockAgentRuntime
     UpdateSessionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#UpdateSessionRequest", name: "UpdateSessionRequest")
     UpdateSessionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#UpdateSessionResponse", name: "UpdateSessionResponse")
     Usage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#Usage", name: "Usage", traits: {"smithy.api#sensitive" => {}})
+    UserContext = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#UserContext", name: "UserContext", traits: {"smithy.api#sensitive" => {}})
     Uuid = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrockagentruntime#Uuid", name: "Uuid", traits: {"smithy.api#pattern" => "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"})
     ValidationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#ValidationException", name: "ValidationException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     VectorSearchBedrockRerankingConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#VectorSearchBedrockRerankingConfiguration", name: "VectorSearchBedrockRerankingConfiguration")
@@ -546,6 +660,7 @@ module Aws::BedrockAgentRuntime
     VectorSearchRerankingConfigurationType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrockagentruntime#VectorSearchRerankingConfigurationType", name: "VectorSearchRerankingConfigurationType")
     Verb = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrockagentruntime#Verb", name: "Verb", traits: {"smithy.api#sensitive" => {}})
     Version = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrockagentruntime#Version", name: "Version", traits: {"smithy.api#length" => {"min" => 1, "max" => 5}, "smithy.api#pattern" => "^(DRAFT|[0-9]{0,4}[1-9][0-9]{0,4})$"})
+    VideoSegment = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockagentruntime#VideoSegment", name: "VideoSegment")
 
     APISchema.add_member(:s3, Types::APISchema::S3, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Identifier, name: "s3"))
     APISchema.add_member(:payload, Types::APISchema::Payload, ::Smithy::Schema::Shapes::MemberShape.new(target: Payload, name: "payload"))
@@ -611,6 +726,200 @@ module Aws::BedrockAgentRuntime
     AgentCollaboratorOutputPayload.add_member(:return_control_payload, ::Smithy::Schema::Shapes::MemberShape.new(target: ReturnControlPayload, name: "returnControlPayload"))
     AgentCollaboratorOutputPayload.type = Types::AgentCollaboratorOutputPayload
     AgentTraces.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TracePart, name: "member"))
+    AgenticRetrieveAction.add_member(:retrieve, ::Smithy::Schema::Shapes::MemberShape.new(target: AgenticRetrieveActionDetails, name: "retrieve"))
+    AgenticRetrieveAction.add_member(:full_document_expansion, ::Smithy::Schema::Shapes::MemberShape.new(target: AgenticRetrieveFullDocExpansionDetails, name: "fullDocumentExpansion"))
+    AgenticRetrieveAction.add_member(:memory_retrieve, ::Smithy::Schema::Shapes::MemberShape.new(target: AgenticRetrieveMemoryRetrieveDetails, name: "memoryRetrieve"))
+    AgenticRetrieveAction.type = Types::AgenticRetrieveAction
+    AgenticRetrieveActionDetails.add_member(:input_query, ::Smithy::Schema::Shapes::MemberShape.new(target: AgenticRetrieveMessageContent, name: "inputQuery", traits: {"smithy.api#required" => {}}))
+    AgenticRetrieveActionDetails.add_member(:source_retrievers, ::Smithy::Schema::Shapes::MemberShape.new(target: AgenticRetrieveSourceRetrieverList, name: "sourceRetrievers", traits: {"smithy.api#required" => {}}))
+    AgenticRetrieveActionDetails.type = Types::AgenticRetrieveActionDetails
+    AgenticRetrieveActions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AgenticRetrieveAction, name: "member"))
+    AgenticRetrieveBedrockGuardrailConfiguration.add_member(:guardrail_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "guardrailId", traits: {"smithy.api#length" => {"max" => 64}, "smithy.api#pattern" => "^[a-z0-9]+$", "smithy.api#required" => {}}))
+    AgenticRetrieveBedrockGuardrailConfiguration.add_member(:guardrail_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "guardrailVersion", traits: {"smithy.api#length" => {"min" => 1, "max" => 5}, "smithy.api#pattern" => "^(([1-9][0-9]{0,7})|(DRAFT))$", "smithy.api#required" => {}}))
+    AgenticRetrieveBedrockGuardrailConfiguration.type = Types::AgenticRetrieveBedrockGuardrailConfiguration
+    AgenticRetrieveBedrockRerankingConfiguration.add_member(:model_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AgenticRetrieveBedrockRerankingModelConfiguration, name: "modelConfiguration", traits: {"smithy.api#required" => {}}))
+    AgenticRetrieveBedrockRerankingConfiguration.type = Types::AgenticRetrieveBedrockRerankingConfiguration
+    AgenticRetrieveBedrockRerankingModelConfiguration.add_member(:model_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: BedrockModelArn, name: "modelArn", traits: {"smithy.api#required" => {}}))
+    AgenticRetrieveBedrockRerankingModelConfiguration.type = Types::AgenticRetrieveBedrockRerankingModelConfiguration
+    AgenticRetrieveCitation.add_member(:start_index, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "startIndex", traits: {"smithy.api#required" => {}}))
+    AgenticRetrieveCitation.add_member(:end_index, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "endIndex", traits: {"smithy.api#required" => {}}))
+    AgenticRetrieveCitation.add_member(:references, ::Smithy::Schema::Shapes::MemberShape.new(target: AgenticRetrieveCitationReferenceList, name: "references", traits: {"smithy.api#required" => {}}))
+    AgenticRetrieveCitation.type = Types::AgenticRetrieveCitation
+    AgenticRetrieveCitationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AgenticRetrieveCitation, name: "member"))
+    AgenticRetrieveCitationReference.add_member(:result_index, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "resultIndex", traits: {"smithy.api#required" => {}}))
+    AgenticRetrieveCitationReference.type = Types::AgenticRetrieveCitationReference
+    AgenticRetrieveCitationReferenceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AgenticRetrieveCitationReference, name: "member"))
+    AgenticRetrieveConfiguration.add_member(:foundation_model_type, ::Smithy::Schema::Shapes::MemberShape.new(target: FoundationModelType, name: "foundationModelType", traits: {"smithy.api#default" => "MANAGED"}))
+    AgenticRetrieveConfiguration.add_member(:foundation_model_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: FoundationModelConfiguration, name: "foundationModelConfiguration"))
+    AgenticRetrieveConfiguration.add_member(:reranking_model_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AgenticRetrieveRerankingModelType, name: "rerankingModelType"))
+    AgenticRetrieveConfiguration.add_member(:reranking_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AgenticRetrieveRerankingConfiguration, name: "rerankingConfiguration"))
+    AgenticRetrieveConfiguration.add_member(:max_agent_iteration, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "maxAgentIteration", traits: {"smithy.api#default" => 5, "smithy.api#range" => {"min" => 0}}))
+    AgenticRetrieveConfiguration.type = Types::AgenticRetrieveConfiguration
+    AgenticRetrieveFailure.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
+    AgenticRetrieveFailure.type = Types::AgenticRetrieveFailure
+    AgenticRetrieveFailures.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AgenticRetrieveFailure, name: "member"))
+    AgenticRetrieveFullDocExpansionDetails.add_member(:document_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "documentId"))
+    AgenticRetrieveFullDocExpansionDetails.add_member(:source_retriever, ::Smithy::Schema::Shapes::MemberShape.new(target: AgenticRetrieveSourceRetriever, name: "sourceRetriever"))
+    AgenticRetrieveFullDocExpansionDetails.type = Types::AgenticRetrieveFullDocExpansionDetails
+    AgenticRetrieveGeneratedResponse.add_member(:answer, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "answer", traits: {"smithy.api#required" => {}}))
+    AgenticRetrieveGeneratedResponse.add_member(:citations, ::Smithy::Schema::Shapes::MemberShape.new(target: AgenticRetrieveCitationList, name: "citations"))
+    AgenticRetrieveGeneratedResponse.type = Types::AgenticRetrieveGeneratedResponse
+    AgenticRetrieveGuardrailWarning.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "id", traits: {"smithy.api#required" => {}}))
+    AgenticRetrieveGuardrailWarning.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "version", traits: {"smithy.api#required" => {}}))
+    AgenticRetrieveGuardrailWarning.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailAction, name: "action", traits: {"smithy.api#required" => {}}))
+    AgenticRetrieveGuardrailWarning.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
+    AgenticRetrieveGuardrailWarning.type = Types::AgenticRetrieveGuardrailWarning
+    AgenticRetrieveMemoryConfiguration.add_member(:memory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentCoreMemoryId, name: "memoryId", traits: {"smithy.api#required" => {}}))
+    AgenticRetrieveMemoryConfiguration.add_member(:session_binding, ::Smithy::Schema::Shapes::MemberShape.new(target: AgenticRetrieveMemorySessionBinding, name: "sessionBinding"))
+    AgenticRetrieveMemoryConfiguration.add_member(:retrieval_configs, ::Smithy::Schema::Shapes::MemberShape.new(target: AgenticRetrieveMemoryRetrievalConfigList, name: "retrievalConfigs"))
+    AgenticRetrieveMemoryConfiguration.add_member(:persistence_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: AgenticRetrieveMemoryPersistenceMode, name: "persistenceMode"))
+    AgenticRetrieveMemoryConfiguration.type = Types::AgenticRetrieveMemoryConfiguration
+    AgenticRetrieveMemoryMetadataFilter.add_member(:left, ::Smithy::Schema::Shapes::MemberShape.new(target: AgenticRetrieveMemoryMetadataFilterLeft, name: "left", traits: {"smithy.api#required" => {}}))
+    AgenticRetrieveMemoryMetadataFilter.add_member(:operator, ::Smithy::Schema::Shapes::MemberShape.new(target: AgenticRetrieveMemoryMetadataFilterOperator, name: "operator", traits: {"smithy.api#required" => {}}))
+    AgenticRetrieveMemoryMetadataFilter.add_member(:right, ::Smithy::Schema::Shapes::MemberShape.new(target: AgenticRetrieveMemoryMetadataFilterRight, name: "right"))
+    AgenticRetrieveMemoryMetadataFilter.type = Types::AgenticRetrieveMemoryMetadataFilter
+    AgenticRetrieveMemoryMetadataFilterLeft.add_member(:metadata_key, Types::AgenticRetrieveMemoryMetadataFilterLeft::MetadataKey, ::Smithy::Schema::Shapes::MemberShape.new(target: AgenticRetrieveMemoryMetadataKey, name: "metadataKey"))
+    AgenticRetrieveMemoryMetadataFilterLeft.add_member(:unknown, Types::AgenticRetrieveMemoryMetadataFilterLeft::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    AgenticRetrieveMemoryMetadataFilterLeft.type = Types::AgenticRetrieveMemoryMetadataFilterLeft
+    AgenticRetrieveMemoryMetadataFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AgenticRetrieveMemoryMetadataFilter, name: "member"))
+    AgenticRetrieveMemoryMetadataFilterOperator.add_member(:equals_to, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EQUALS_TO", traits: {"smithy.api#enumValue" => "EQUALS_TO"}))
+    AgenticRetrieveMemoryMetadataFilterOperator.add_member(:exists, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXISTS", traits: {"smithy.api#enumValue" => "EXISTS"}))
+    AgenticRetrieveMemoryMetadataFilterOperator.add_member(:not_exists, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_EXISTS", traits: {"smithy.api#enumValue" => "NOT_EXISTS"}))
+    AgenticRetrieveMemoryMetadataFilterOperator.add_member(:before, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BEFORE", traits: {"smithy.api#enumValue" => "BEFORE"}))
+    AgenticRetrieveMemoryMetadataFilterOperator.add_member(:after, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AFTER", traits: {"smithy.api#enumValue" => "AFTER"}))
+    AgenticRetrieveMemoryMetadataFilterOperator.add_member(:contains, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONTAINS", traits: {"smithy.api#enumValue" => "CONTAINS"}))
+    AgenticRetrieveMemoryMetadataFilterOperator.add_member(:greater_than, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GREATER_THAN", traits: {"smithy.api#enumValue" => "GREATER_THAN"}))
+    AgenticRetrieveMemoryMetadataFilterOperator.add_member(:greater_than_or_equals, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GREATER_THAN_OR_EQUALS", traits: {"smithy.api#enumValue" => "GREATER_THAN_OR_EQUALS"}))
+    AgenticRetrieveMemoryMetadataFilterOperator.add_member(:less_than, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LESS_THAN", traits: {"smithy.api#enumValue" => "LESS_THAN"}))
+    AgenticRetrieveMemoryMetadataFilterOperator.add_member(:less_than_or_equals, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LESS_THAN_OR_EQUALS", traits: {"smithy.api#enumValue" => "LESS_THAN_OR_EQUALS"}))
+    AgenticRetrieveMemoryMetadataFilterRight.add_member(:metadata_value, Types::AgenticRetrieveMemoryMetadataFilterRight::MetadataValue, ::Smithy::Schema::Shapes::MemberShape.new(target: AgenticRetrieveMemoryMetadataValue, name: "metadataValue"))
+    AgenticRetrieveMemoryMetadataFilterRight.add_member(:unknown, Types::AgenticRetrieveMemoryMetadataFilterRight::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    AgenticRetrieveMemoryMetadataFilterRight.type = Types::AgenticRetrieveMemoryMetadataFilterRight
+    AgenticRetrieveMemoryMetadataStringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AgenticRetrieveMemoryMetadataStringListItem, name: "member"))
+    AgenticRetrieveMemoryMetadataValue.add_member(:string_value, Types::AgenticRetrieveMemoryMetadataValue::StringValue, ::Smithy::Schema::Shapes::MemberShape.new(target: AgenticRetrieveMemoryMetadataStringValue, name: "stringValue"))
+    AgenticRetrieveMemoryMetadataValue.add_member(:number_value, Types::AgenticRetrieveMemoryMetadataValue::NumberValue, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "numberValue"))
+    AgenticRetrieveMemoryMetadataValue.add_member(:string_list_value, Types::AgenticRetrieveMemoryMetadataValue::StringListValue, ::Smithy::Schema::Shapes::MemberShape.new(target: AgenticRetrieveMemoryMetadataStringList, name: "stringListValue"))
+    AgenticRetrieveMemoryMetadataValue.add_member(:date_time_value, Types::AgenticRetrieveMemoryMetadataValue::DateTimeValue, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "dateTimeValue"))
+    AgenticRetrieveMemoryMetadataValue.add_member(:unknown, Types::AgenticRetrieveMemoryMetadataValue::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    AgenticRetrieveMemoryMetadataValue.type = Types::AgenticRetrieveMemoryMetadataValue
+    AgenticRetrieveMemoryPersistenceMode.add_member(:default, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEFAULT", traits: {"smithy.api#enumValue" => "DEFAULT"}))
+    AgenticRetrieveMemoryPersistenceMode.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
+    AgenticRetrieveMemoryRetrievalConfig.add_member(:namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: MemoryNamespace, name: "namespace"))
+    AgenticRetrieveMemoryRetrievalConfig.add_member(:namespace_path, ::Smithy::Schema::Shapes::MemberShape.new(target: MemoryNamespace, name: "namespacePath"))
+    AgenticRetrieveMemoryRetrievalConfig.add_member(:strategy_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MemoryStrategyId, name: "strategyId"))
+    AgenticRetrieveMemoryRetrievalConfig.add_member(:metadata_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: AgenticRetrieveMemoryMetadataFilterList, name: "metadataFilters"))
+    AgenticRetrieveMemoryRetrievalConfig.type = Types::AgenticRetrieveMemoryRetrievalConfig
+    AgenticRetrieveMemoryRetrievalConfigList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AgenticRetrieveMemoryRetrievalConfig, name: "member"))
+    AgenticRetrieveMemoryRetrieveDetails.add_member(:input_query, ::Smithy::Schema::Shapes::MemberShape.new(target: AgenticRetrieveMessageContent, name: "inputQuery", traits: {"smithy.api#required" => {}}))
+    AgenticRetrieveMemoryRetrieveDetails.add_member(:memory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "memoryId", traits: {"smithy.api#required" => {}}))
+    AgenticRetrieveMemoryRetrieveDetails.add_member(:namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "namespace"))
+    AgenticRetrieveMemoryRetrieveDetails.add_member(:namespace_path, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "namespacePath"))
+    AgenticRetrieveMemoryRetrieveDetails.add_member(:strategy_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "strategyId"))
+    AgenticRetrieveMemoryRetrieveDetails.type = Types::AgenticRetrieveMemoryRetrieveDetails
+    AgenticRetrieveMemorySessionBinding.add_member(:actor_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentCoreMemoryActorId, name: "actorId", traits: {"smithy.api#required" => {}}))
+    AgenticRetrieveMemorySessionBinding.add_member(:session_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentCoreMemorySessionId, name: "sessionId", traits: {"smithy.api#required" => {}}))
+    AgenticRetrieveMemorySessionBinding.type = Types::AgenticRetrieveMemorySessionBinding
+    AgenticRetrieveMessage.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: AgenticRetrieveMessageContent, name: "content", traits: {"smithy.api#required" => {}}))
+    AgenticRetrieveMessage.add_member(:role, ::Smithy::Schema::Shapes::MemberShape.new(target: ConversationRole, name: "role", traits: {"smithy.api#required" => {}}))
+    AgenticRetrieveMessage.type = Types::AgenticRetrieveMessage
+    AgenticRetrieveMessageContent.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "text"))
+    AgenticRetrieveMessageContent.type = Types::AgenticRetrieveMessageContent
+    AgenticRetrieveMessages.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AgenticRetrieveMessage, name: "member"))
+    AgenticRetrieveMetadata.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    AgenticRetrieveMetadata.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Document, name: "value"))
+    AgenticRetrievePolicyConfiguration.add_member(:bedrock_guardrail_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AgenticRetrieveBedrockGuardrailConfiguration, name: "bedrockGuardrailConfiguration"))
+    AgenticRetrievePolicyConfiguration.type = Types::AgenticRetrievePolicyConfiguration
+    AgenticRetrieveRerankingConfiguration.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: AgenticRetrieveRerankingConfigurationType, name: "type", traits: {"smithy.api#required" => {}}))
+    AgenticRetrieveRerankingConfiguration.add_member(:bedrock_reranking_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AgenticRetrieveBedrockRerankingConfiguration, name: "bedrockRerankingConfiguration"))
+    AgenticRetrieveRerankingConfiguration.type = Types::AgenticRetrieveRerankingConfiguration
+    AgenticRetrieveRerankingConfigurationType.add_member(:bedrock_reranking_model, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BEDROCK_RERANKING_MODEL", traits: {"smithy.api#enumValue" => "BEDROCK_RERANKING_MODEL"}))
+    AgenticRetrieveRerankingModelType.add_member(:custom, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOM", traits: {"smithy.api#enumValue" => "CUSTOM"}))
+    AgenticRetrieveRerankingModelType.add_member(:managed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MANAGED", traits: {"smithy.api#enumValue" => "MANAGED"}))
+    AgenticRetrieveRerankingModelType.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
+    AgenticRetrieveResponseEvent.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "text", traits: {"smithy.api#required" => {}}))
+    AgenticRetrieveResponseEvent.type = Types::AgenticRetrieveResponseEvent
+    AgenticRetrieveResultEvent.add_member(:results, ::Smithy::Schema::Shapes::MemberShape.new(target: AgenticRetrieveResults, name: "results", traits: {"smithy.api#required" => {}}))
+    AgenticRetrieveResultEvent.add_member(:generated_response, ::Smithy::Schema::Shapes::MemberShape.new(target: AgenticRetrieveGeneratedResponse, name: "generatedResponse"))
+    AgenticRetrieveResultEvent.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
+    AgenticRetrieveResultEvent.type = Types::AgenticRetrieveResultEvent
+    AgenticRetrieveResultItem.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: RetrievalContent, name: "content", traits: {"smithy.api#required" => {}}))
+    AgenticRetrieveResultItem.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: AgenticRetrieveMetadata, name: "metadata"))
+    AgenticRetrieveResultItem.add_member(:source_retriever, ::Smithy::Schema::Shapes::MemberShape.new(target: AgenticRetrieveSourceRetriever, name: "sourceRetriever", traits: {"smithy.api#required" => {}}))
+    AgenticRetrieveResultItem.type = Types::AgenticRetrieveResultItem
+    AgenticRetrieveResults.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AgenticRetrieveResultItem, name: "member"))
+    AgenticRetrieveSourceMetadata.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "identifier"))
+    AgenticRetrieveSourceMetadata.add_member(:retrieval_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AgenticRetrieveType, name: "retrievalType"))
+    AgenticRetrieveSourceMetadata.type = Types::AgenticRetrieveSourceMetadata
+    AgenticRetrieveSourceMetadataList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AgenticRetrieveSourceMetadata, name: "member"))
+    AgenticRetrieveSourceRetriever.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "identifier", traits: {"smithy.api#required" => {}}))
+    AgenticRetrieveSourceRetriever.type = Types::AgenticRetrieveSourceRetriever
+    AgenticRetrieveSourceRetrieverList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AgenticRetrieveSourceRetriever, name: "member"))
+    AgenticRetrieveStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
+    AgenticRetrieveStatus.add_member(:succeeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCEEDED", traits: {"smithy.api#enumValue" => "SUCCEEDED"}))
+    AgenticRetrieveStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    AgenticRetrieveStep.add_member(:planning, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PLANNING", traits: {"smithy.api#enumValue" => "Planning"}))
+    AgenticRetrieveStep.add_member(:retrieval, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RETRIEVAL", traits: {"smithy.api#enumValue" => "Retrieval"}))
+    AgenticRetrieveStep.add_member(:speculative_retrieval, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SPECULATIVE_RETRIEVAL", traits: {"smithy.api#enumValue" => "SpeculativeRetrieval"}))
+    AgenticRetrieveStep.add_member(:full_document_expansion, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FULL_DOCUMENT_EXPANSION", traits: {"smithy.api#enumValue" => "FullDocumentExpansion"}))
+    AgenticRetrieveStep.add_member(:session_history_load, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SESSION_HISTORY_LOAD", traits: {"smithy.api#enumValue" => "SessionHistoryLoad"}))
+    AgenticRetrieveStreamRequest.add_member(:messages, ::Smithy::Schema::Shapes::MemberShape.new(target: AgenticRetrieveMessages, name: "messages", traits: {"smithy.api#length" => {"min" => 1}, "smithy.api#required" => {}}))
+    AgenticRetrieveStreamRequest.add_member(:retrievers, ::Smithy::Schema::Shapes::MemberShape.new(target: AgenticRetrievers, name: "retrievers", traits: {"smithy.api#length" => {"min" => 1}, "smithy.api#required" => {}}))
+    AgenticRetrieveStreamRequest.add_member(:agentic_retrieve_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AgenticRetrieveConfiguration, name: "agenticRetrieveConfiguration", traits: {"smithy.api#required" => {}}))
+    AgenticRetrieveStreamRequest.add_member(:policy_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AgenticRetrievePolicyConfiguration, name: "policyConfiguration"))
+    AgenticRetrieveStreamRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
+    AgenticRetrieveStreamRequest.add_member(:user_context, ::Smithy::Schema::Shapes::MemberShape.new(target: UserContext, name: "userContext"))
+    AgenticRetrieveStreamRequest.add_member(:memory_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AgenticRetrieveMemoryConfiguration, name: "memoryConfiguration"))
+    AgenticRetrieveStreamRequest.add_member(:generate_response, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "generateResponse", traits: {"smithy.api#default" => true}))
+    AgenticRetrieveStreamRequest.type = Types::AgenticRetrieveStreamRequest
+    AgenticRetrieveStreamResponse.add_member(:stream, ::Smithy::Schema::Shapes::MemberShape.new(target: AgenticRetrieveStreamResponseOutput, name: "stream", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
+    AgenticRetrieveStreamResponse[:http_payload] = :stream
+    AgenticRetrieveStreamResponse[:http_payload_member] = AgenticRetrieveStreamResponse.member(:stream)
+    AgenticRetrieveStreamResponse.type = Types::AgenticRetrieveStreamResponse
+    AgenticRetrieveStreamResponseOutput.add_member(:result, Types::AgenticRetrieveStreamResponseOutput::Result, ::Smithy::Schema::Shapes::MemberShape.new(target: AgenticRetrieveResultEvent, name: "result"))
+    AgenticRetrieveStreamResponseOutput.add_member(:trace_event, Types::AgenticRetrieveStreamResponseOutput::TraceEvent, ::Smithy::Schema::Shapes::MemberShape.new(target: AgenticRetrieveTraceEvent, name: "traceEvent"))
+    AgenticRetrieveStreamResponseOutput.add_member(:response_event, Types::AgenticRetrieveStreamResponseOutput::ResponseEvent, ::Smithy::Schema::Shapes::MemberShape.new(target: AgenticRetrieveResponseEvent, name: "responseEvent"))
+    AgenticRetrieveStreamResponseOutput.add_member(:internal_server_exception, Types::AgenticRetrieveStreamResponseOutput::InternalServerException, ::Smithy::Schema::Shapes::MemberShape.new(target: InternalServerException, name: "internalServerException"))
+    AgenticRetrieveStreamResponseOutput.add_member(:validation_exception, Types::AgenticRetrieveStreamResponseOutput::ValidationException, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationException, name: "validationException"))
+    AgenticRetrieveStreamResponseOutput.add_member(:resource_not_found_exception, Types::AgenticRetrieveStreamResponseOutput::ResourceNotFoundException, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceNotFoundException, name: "resourceNotFoundException"))
+    AgenticRetrieveStreamResponseOutput.add_member(:service_quota_exceeded_exception, Types::AgenticRetrieveStreamResponseOutput::ServiceQuotaExceededException, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceQuotaExceededException, name: "serviceQuotaExceededException"))
+    AgenticRetrieveStreamResponseOutput.add_member(:throttling_exception, Types::AgenticRetrieveStreamResponseOutput::ThrottlingException, ::Smithy::Schema::Shapes::MemberShape.new(target: ThrottlingException, name: "throttlingException"))
+    AgenticRetrieveStreamResponseOutput.add_member(:access_denied_exception, Types::AgenticRetrieveStreamResponseOutput::AccessDeniedException, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessDeniedException, name: "accessDeniedException"))
+    AgenticRetrieveStreamResponseOutput.add_member(:conflict_exception, Types::AgenticRetrieveStreamResponseOutput::ConflictException, ::Smithy::Schema::Shapes::MemberShape.new(target: ConflictException, name: "conflictException"))
+    AgenticRetrieveStreamResponseOutput.add_member(:dependency_failed_exception, Types::AgenticRetrieveStreamResponseOutput::DependencyFailedException, ::Smithy::Schema::Shapes::MemberShape.new(target: DependencyFailedException, name: "dependencyFailedException"))
+    AgenticRetrieveStreamResponseOutput.add_member(:bad_gateway_exception, Types::AgenticRetrieveStreamResponseOutput::BadGatewayException, ::Smithy::Schema::Shapes::MemberShape.new(target: BadGatewayException, name: "badGatewayException"))
+    AgenticRetrieveStreamResponseOutput.add_member(:unknown, Types::AgenticRetrieveStreamResponseOutput::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    AgenticRetrieveStreamResponseOutput.type = Types::AgenticRetrieveStreamResponseOutput
+    AgenticRetrieveTraceEvent.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "id", traits: {"smithy.api#required" => {}}))
+    AgenticRetrieveTraceEvent.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "timestamp", traits: {"smithy.api#required" => {}}))
+    AgenticRetrieveTraceEvent.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: AgenticRetrieveTraceEventAttributes, name: "attributes", traits: {"smithy.api#required" => {}}))
+    AgenticRetrieveTraceEvent.type = Types::AgenticRetrieveTraceEvent
+    AgenticRetrieveTraceEventAttributes.add_member(:step, ::Smithy::Schema::Shapes::MemberShape.new(target: AgenticRetrieveStep, name: "step", traits: {"smithy.api#required" => {}}))
+    AgenticRetrieveTraceEventAttributes.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: AgenticRetrieveStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    AgenticRetrieveTraceEventAttributes.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
+    AgenticRetrieveTraceEventAttributes.add_member(:actions, ::Smithy::Schema::Shapes::MemberShape.new(target: AgenticRetrieveActions, name: "actions"))
+    AgenticRetrieveTraceEventAttributes.add_member(:warnings, ::Smithy::Schema::Shapes::MemberShape.new(target: AgenticRetrieveWarnings, name: "warnings"))
+    AgenticRetrieveTraceEventAttributes.add_member(:failures, ::Smithy::Schema::Shapes::MemberShape.new(target: AgenticRetrieveFailures, name: "failures"))
+    AgenticRetrieveTraceEventAttributes.add_member(:retrieval_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: AgenticRetrieveSourceMetadataList, name: "retrievalMetadata"))
+    AgenticRetrieveTraceEventAttributes.add_member(:retrieval_response, ::Smithy::Schema::Shapes::MemberShape.new(target: AgenticRetrieveTraceResults, name: "retrievalResponse"))
+    AgenticRetrieveTraceEventAttributes.type = Types::AgenticRetrieveTraceEventAttributes
+    AgenticRetrieveTraceResultItem.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: RetrievalContent, name: "content"))
+    AgenticRetrieveTraceResultItem.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: AgenticRetrieveMetadata, name: "metadata"))
+    AgenticRetrieveTraceResultItem.add_member(:source_retriever, ::Smithy::Schema::Shapes::MemberShape.new(target: AgenticRetrieveSourceRetriever, name: "sourceRetriever"))
+    AgenticRetrieveTraceResultItem.type = Types::AgenticRetrieveTraceResultItem
+    AgenticRetrieveTraceResults.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AgenticRetrieveTraceResultItem, name: "member"))
+    AgenticRetrieveType.add_member(:bedrock_knowledge_base, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BEDROCK_KNOWLEDGE_BASE", traits: {"smithy.api#enumValue" => "BedrockKnowledgeBase"}))
+    AgenticRetrieveType.add_member(:bedrock_agent_core_memory, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BEDROCK_AGENT_CORE_MEMORY", traits: {"smithy.api#enumValue" => "BedrockAgentCoreMemory"}))
+    AgenticRetrieveWarning.add_member(:message, Types::AgenticRetrieveWarning::Message, ::Smithy::Schema::Shapes::MemberShape.new(target: AgenticRetrieveWarningMessage, name: "message"))
+    AgenticRetrieveWarning.add_member(:guardrail, Types::AgenticRetrieveWarning::Guardrail, ::Smithy::Schema::Shapes::MemberShape.new(target: AgenticRetrieveGuardrailWarning, name: "guardrail"))
+    AgenticRetrieveWarning.add_member(:unknown, Types::AgenticRetrieveWarning::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    AgenticRetrieveWarning.type = Types::AgenticRetrieveWarning
+    AgenticRetrieveWarningMessage.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
+    AgenticRetrieveWarningMessage.type = Types::AgenticRetrieveWarningMessage
+    AgenticRetrieveWarnings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AgenticRetrieveWarning, name: "member"))
+    AgenticRetriever.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "description"))
+    AgenticRetriever.add_member(:configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: RetrieverConfiguration, name: "configuration", traits: {"smithy.api#required" => {}}))
+    AgenticRetriever.type = Types::AgenticRetriever
+    AgenticRetrievers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AgenticRetriever, name: "member"))
     AnalyzePromptEvent.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     AnalyzePromptEvent.type = Types::AnalyzePromptEvent
     ApiContentMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
@@ -646,9 +955,16 @@ module Aws::BedrockAgentRuntime
     AttributeType.add_member(:string_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STRING_LIST", traits: {"smithy.api#enumValue" => "STRING_LIST"}))
     Attribution.add_member(:citations, ::Smithy::Schema::Shapes::MemberShape.new(target: Citations, name: "citations"))
     Attribution.type = Types::Attribution
+    AudioSegment.add_member(:s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "s3Uri", traits: {"smithy.api#length" => {"min" => 1}, "smithy.api#required" => {}}))
+    AudioSegment.add_member(:transcription, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "transcription"))
+    AudioSegment.type = Types::AudioSegment
     BadGatewayException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonBlankString, name: "message"))
     BadGatewayException.add_member(:resource_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonBlankString, name: "resourceName"))
     BadGatewayException.type = Types::BadGatewayException
+    BedrockFoundationModelConfiguration.add_member(:model_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: BedrockFoundationModelModelConfiguration, name: "modelConfiguration", traits: {"smithy.api#required" => {}}))
+    BedrockFoundationModelConfiguration.type = Types::BedrockFoundationModelConfiguration
+    BedrockFoundationModelModelConfiguration.add_member(:model_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: BedrockModelArn, name: "modelArn", traits: {"smithy.api#required" => {}}))
+    BedrockFoundationModelModelConfiguration.type = Types::BedrockFoundationModelModelConfiguration
     BedrockModelConfigurations.add_member(:performance_config, ::Smithy::Schema::Shapes::MemberShape.new(target: PerformanceConfiguration, name: "performanceConfig"))
     BedrockModelConfigurations.type = Types::BedrockModelConfigurations
     BedrockRerankingConfiguration.add_member(:number_of_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "numberOfResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 1000}}))
@@ -673,6 +989,13 @@ module Aws::BedrockAgentRuntime
     Caller.add_member(:unknown, Types::Caller::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     Caller.type = Types::Caller
     CallerChain.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Caller, name: "member"))
+    CheckIngestedDocumentAclRequest.add_member(:knowledge_base_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KnowledgeBaseIdentifier, name: "knowledgeBaseId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CheckIngestedDocumentAclRequest.add_member(:data_source_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceId, name: "dataSourceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CheckIngestedDocumentAclRequest.add_member(:document_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentId, name: "documentId", traits: {"smithy.api#required" => {}}))
+    CheckIngestedDocumentAclRequest.add_member(:user_context, ::Smithy::Schema::Shapes::MemberShape.new(target: UserContext, name: "userContext", traits: {"smithy.api#required" => {}}))
+    CheckIngestedDocumentAclRequest.type = Types::CheckIngestedDocumentAclRequest
+    CheckIngestedDocumentAclResponse.add_member(:has_access, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "hasAccess", traits: {"smithy.api#required" => {}}))
+    CheckIngestedDocumentAclResponse.type = Types::CheckIngestedDocumentAclResponse
     Citation.add_member(:generated_response_part, ::Smithy::Schema::Shapes::MemberShape.new(target: GeneratedResponsePart, name: "generatedResponsePart"))
     Citation.add_member(:retrieved_references, ::Smithy::Schema::Shapes::MemberShape.new(target: RetrievedReferences, name: "retrievedReferences"))
     Citation.type = Types::Citation
@@ -769,6 +1092,31 @@ module Aws::BedrockAgentRuntime
     DependencyFailedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonBlankString, name: "message"))
     DependencyFailedException.add_member(:resource_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonBlankString, name: "resourceName"))
     DependencyFailedException.type = Types::DependencyFailedException
+    DocumentAcl.add_member(:allow_list, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAclMembership, name: "allowList"))
+    DocumentAcl.add_member(:deny_list, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAclMembership, name: "denyList"))
+    DocumentAcl.type = Types::DocumentAcl
+    DocumentAclCondition.add_member(:condition_operator, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAclMemberRelation, name: "conditionOperator"))
+    DocumentAclCondition.add_member(:users, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAclUserList, name: "users", traits: {"smithy.api#length" => {"max" => 3000}}))
+    DocumentAclCondition.add_member(:groups, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAclGroupList, name: "groups", traits: {"smithy.api#length" => {"max" => 3000}}))
+    DocumentAclCondition.type = Types::DocumentAclCondition
+    DocumentAclConditionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAclCondition, name: "member"))
+    DocumentAclGroup.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "id", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => "^\\P{C}*$", "smithy.api#required" => {}}))
+    DocumentAclGroup.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAclMembershipType, name: "type", traits: {"smithy.api#required" => {}}))
+    DocumentAclGroup.type = Types::DocumentAclGroup
+    DocumentAclGroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAclGroup, name: "member"))
+    DocumentAclMemberRelation.add_member(:and, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AND", traits: {"smithy.api#enumValue" => "AND"}))
+    DocumentAclMemberRelation.add_member(:or, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OR", traits: {"smithy.api#enumValue" => "OR"}))
+    DocumentAclMembership.add_member(:member_relation, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAclMemberRelation, name: "memberRelation"))
+    DocumentAclMembership.add_member(:conditions, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAclConditionList, name: "conditions", traits: {"smithy.api#length" => {"max" => 100}}))
+    DocumentAclMembership.type = Types::DocumentAclMembership
+    DocumentAclMembershipType.add_member(:knowledge_base, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "KNOWLEDGE_BASE", traits: {"smithy.api#enumValue" => "KNOWLEDGE_BASE"}))
+    DocumentAclMembershipType.add_member(:data_source, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DATA_SOURCE", traits: {"smithy.api#enumValue" => "DATA_SOURCE"}))
+    DocumentAclUser.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "id", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => "^\\P{C}*$", "smithy.api#required" => {}}))
+    DocumentAclUser.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAclMembershipType, name: "type", traits: {"smithy.api#required" => {}}))
+    DocumentAclUser.type = Types::DocumentAclUser
+    DocumentAclUserList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAclUser, name: "member"))
+    DocumentOutputFormat.add_member(:raw, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RAW", traits: {"smithy.api#enumValue" => "RAW"}))
+    DocumentOutputFormat.add_member(:extracted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXTRACTED", traits: {"smithy.api#enumValue" => "EXTRACTED"}))
     EndSessionRequest.add_member(:session_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionIdentifier, name: "sessionIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     EndSessionRequest.type = Types::EndSessionRequest
     EndSessionResponse.add_member(:session_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "sessionId", traits: {"smithy.api#required" => {}}))
@@ -1000,6 +1348,14 @@ module Aws::BedrockAgentRuntime
     FlowTraceNodeOutputNext.add_member(:input_field_name, ::Smithy::Schema::Shapes::MemberShape.new(target: FlowNodeInputName, name: "inputFieldName", traits: {"smithy.api#required" => {}}))
     FlowTraceNodeOutputNext.type = Types::FlowTraceNodeOutputNext
     FlowTraceNodeOutputNextList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FlowTraceNodeOutputNext, name: "member"))
+    FoundationModelConfiguration.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: FoundationModelConfigurationType, name: "type", traits: {"smithy.api#required" => {}}))
+    FoundationModelConfiguration.add_member(:bedrock_foundation_model_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: BedrockFoundationModelConfiguration, name: "bedrockFoundationModelConfiguration"))
+    FoundationModelConfiguration.add_member(:mantle_foundation_model_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: MantleFoundationModelConfiguration, name: "mantleFoundationModelConfiguration"))
+    FoundationModelConfiguration.type = Types::FoundationModelConfiguration
+    FoundationModelConfigurationType.add_member(:bedrock_foundation_model, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BEDROCK_FOUNDATION_MODEL", traits: {"smithy.api#enumValue" => "BEDROCK_FOUNDATION_MODEL"}))
+    FoundationModelConfigurationType.add_member(:mantle_foundation_model, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MANTLE_FOUNDATION_MODEL", traits: {"smithy.api#enumValue" => "MANTLE_FOUNDATION_MODEL"}))
+    FoundationModelType.add_member(:custom, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOM", traits: {"smithy.api#enumValue" => "CUSTOM"}))
+    FoundationModelType.add_member(:managed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MANAGED", traits: {"smithy.api#enumValue" => "MANAGED"}))
     FunctionDefinition.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "name", traits: {"smithy.api#required" => {}}))
     FunctionDefinition.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: FunctionDescription, name: "description"))
     FunctionDefinition.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterMap, name: "parameters"))
@@ -1056,6 +1412,16 @@ module Aws::BedrockAgentRuntime
     GetAgentMemoryResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
     GetAgentMemoryResponse.add_member(:memory_contents, ::Smithy::Schema::Shapes::MemberShape.new(target: Memories, name: "memoryContents"))
     GetAgentMemoryResponse.type = Types::GetAgentMemoryResponse
+    GetDocumentContentRequest.add_member(:knowledge_base_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KnowledgeBaseIdentifier, name: "knowledgeBaseId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetDocumentContentRequest.add_member(:data_source_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceId, name: "dataSourceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetDocumentContentRequest.add_member(:document_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentId, name: "documentId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetDocumentContentRequest.add_member(:output_format, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentOutputFormat, name: "outputFormat"))
+    GetDocumentContentRequest.add_member(:user_context, ::Smithy::Schema::Shapes::MemberShape.new(target: UserContext, name: "userContext"))
+    GetDocumentContentRequest.type = Types::GetDocumentContentRequest
+    GetDocumentContentResponse.add_member(:mime_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "mimeType", traits: {"smithy.api#required" => {}}))
+    GetDocumentContentResponse.add_member(:presigned_url, ::Smithy::Schema::Shapes::MemberShape.new(target: PresignedUrl, name: "presignedUrl", traits: {"smithy.api#required" => {}}))
+    GetDocumentContentResponse.add_member(:document_content_length, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "documentContentLength"))
+    GetDocumentContentResponse.type = Types::GetDocumentContentResponse
     GetExecutionFlowSnapshotRequest.add_member(:flow_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: FlowIdentifier, name: "flowIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetExecutionFlowSnapshotRequest.add_member(:flow_alias_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: FlowAliasIdentifier, name: "flowAliasIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetExecutionFlowSnapshotRequest.add_member(:execution_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: FlowExecutionIdentifier, name: "executionIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -1080,6 +1446,12 @@ module Aws::BedrockAgentRuntime
     GetFlowExecutionResponse.add_member(:flow_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: FlowIdentifier, name: "flowIdentifier", traits: {"smithy.api#required" => {}}))
     GetFlowExecutionResponse.add_member(:flow_version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, name: "flowVersion", traits: {"smithy.api#required" => {}}))
     GetFlowExecutionResponse.type = Types::GetFlowExecutionResponse
+    GetIngestedDocumentAclRequest.add_member(:knowledge_base_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KnowledgeBaseIdentifier, name: "knowledgeBaseId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetIngestedDocumentAclRequest.add_member(:data_source_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceId, name: "dataSourceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetIngestedDocumentAclRequest.add_member(:document_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentId, name: "documentId", traits: {"smithy.api#required" => {}}))
+    GetIngestedDocumentAclRequest.type = Types::GetIngestedDocumentAclRequest
+    GetIngestedDocumentAclResponse.add_member(:document_acl, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAcl, name: "documentAcl", traits: {"smithy.api#required" => {}}))
+    GetIngestedDocumentAclResponse.type = Types::GetIngestedDocumentAclResponse
     GetInvocationStepRequest.add_member(:invocation_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: InvocationIdentifier, name: "invocationIdentifier", traits: {"smithy.api#required" => {}}))
     GetInvocationStepRequest.add_member(:invocation_step_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "invocationStepId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetInvocationStepRequest.add_member(:session_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionIdentifier, name: "sessionIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -1284,6 +1656,13 @@ module Aws::BedrockAgentRuntime
     InputFile.add_member(:use_case, ::Smithy::Schema::Shapes::MemberShape.new(target: FileUseCase, name: "useCase", traits: {"smithy.api#required" => {}}))
     InputFile.type = Types::InputFile
     InputFiles.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InputFile, name: "member"))
+    InputImage.add_member(:format, ::Smithy::Schema::Shapes::MemberShape.new(target: InputImageFormat, name: "format", traits: {"smithy.api#required" => {}}))
+    InputImage.add_member(:inline_content, ::Smithy::Schema::Shapes::MemberShape.new(target: ByteContentBlob, name: "inlineContent", traits: {"smithy.api#length" => {"min" => 1, "max" => 5242880}, "smithy.api#required" => {}}))
+    InputImage.type = Types::InputImage
+    InputImageFormat.add_member(:png, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "png", traits: {"smithy.api#enumValue" => "png"}))
+    InputImageFormat.add_member(:jpeg, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "jpeg", traits: {"smithy.api#enumValue" => "jpeg"}))
+    InputImageFormat.add_member(:gif, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "gif", traits: {"smithy.api#enumValue" => "gif"}))
+    InputImageFormat.add_member(:webp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "webp", traits: {"smithy.api#enumValue" => "webp"}))
     InputPrompt.add_member(:text_prompt, Types::InputPrompt::TextPrompt, ::Smithy::Schema::Shapes::MemberShape.new(target: TextPrompt, name: "textPrompt"))
     InputPrompt.add_member(:unknown, Types::InputPrompt::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     InputPrompt.type = Types::InputPrompt
@@ -1407,14 +1786,20 @@ module Aws::BedrockAgentRuntime
     KnowledgeBaseLookupOutput.add_member(:retrieved_references, ::Smithy::Schema::Shapes::MemberShape.new(target: RetrievedReferences, name: "retrievedReferences"))
     KnowledgeBaseLookupOutput.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: Metadata, name: "metadata"))
     KnowledgeBaseLookupOutput.type = Types::KnowledgeBaseLookupOutput
-    KnowledgeBaseQuery.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "text", traits: {"smithy.api#length" => {"max" => 1000}, "smithy.api#required" => {}}))
+    KnowledgeBaseQuery.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: KnowledgeBaseQueryType, name: "type", traits: {"smithy.api#default" => "TEXT"}))
+    KnowledgeBaseQuery.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "text", traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => "", "smithy.api#length" => {"max" => 20000}}))
+    KnowledgeBaseQuery.add_member(:image, ::Smithy::Schema::Shapes::MemberShape.new(target: InputImage, name: "image"))
     KnowledgeBaseQuery.type = Types::KnowledgeBaseQuery
-    KnowledgeBaseRetrievalConfiguration.add_member(:vector_search_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: KnowledgeBaseVectorSearchConfiguration, name: "vectorSearchConfiguration", traits: {"smithy.api#required" => {}}))
+    KnowledgeBaseQueryType.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TEXT", traits: {"smithy.api#enumValue" => "TEXT"}))
+    KnowledgeBaseQueryType.add_member(:image, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IMAGE", traits: {"smithy.api#enumValue" => "IMAGE"}))
+    KnowledgeBaseRetrievalConfiguration.add_member(:vector_search_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: KnowledgeBaseVectorSearchConfiguration, name: "vectorSearchConfiguration"))
+    KnowledgeBaseRetrievalConfiguration.add_member(:managed_search_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedSearchConfiguration, name: "managedSearchConfiguration"))
     KnowledgeBaseRetrievalConfiguration.type = Types::KnowledgeBaseRetrievalConfiguration
     KnowledgeBaseRetrievalResult.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: RetrievalResultContent, name: "content", traits: {"smithy.api#required" => {}}))
     KnowledgeBaseRetrievalResult.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: RetrievalResultLocation, name: "location"))
     KnowledgeBaseRetrievalResult.add_member(:score, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "score"))
     KnowledgeBaseRetrievalResult.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: RetrievalResultMetadata, name: "metadata"))
+    KnowledgeBaseRetrievalResult.add_member(:document_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentId, name: "documentId"))
     KnowledgeBaseRetrievalResult.type = Types::KnowledgeBaseRetrievalResult
     KnowledgeBaseRetrievalResults.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: KnowledgeBaseRetrievalResult, name: "member"))
     KnowledgeBaseRetrieveAndGenerateConfiguration.add_member(:knowledge_base_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KnowledgeBaseId, name: "knowledgeBaseId", traits: {"smithy.api#required" => {}}))
@@ -1423,6 +1808,9 @@ module Aws::BedrockAgentRuntime
     KnowledgeBaseRetrieveAndGenerateConfiguration.add_member(:generation_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: GenerationConfiguration, name: "generationConfiguration"))
     KnowledgeBaseRetrieveAndGenerateConfiguration.add_member(:orchestration_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: OrchestrationConfiguration, name: "orchestrationConfiguration"))
     KnowledgeBaseRetrieveAndGenerateConfiguration.type = Types::KnowledgeBaseRetrieveAndGenerateConfiguration
+    KnowledgeBaseRetrieverConfiguration.add_member(:knowledge_base_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KnowledgeBaseId, name: "knowledgeBaseId", traits: {"smithy.api#required" => {}}))
+    KnowledgeBaseRetrieverConfiguration.add_member(:retrieval_overrides, ::Smithy::Schema::Shapes::MemberShape.new(target: RetrievalOverrides, name: "retrievalOverrides"))
+    KnowledgeBaseRetrieverConfiguration.type = Types::KnowledgeBaseRetrieverConfiguration
     KnowledgeBaseVectorSearchConfiguration.add_member(:number_of_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "numberOfResults", traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => 5, "smithy.api#range" => {"min" => 1, "max" => 100}}))
     KnowledgeBaseVectorSearchConfiguration.add_member(:override_search_type, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchType, name: "overrideSearchType"))
     KnowledgeBaseVectorSearchConfiguration.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: RetrievalFilter, name: "filter"))
@@ -1473,6 +1861,27 @@ module Aws::BedrockAgentRuntime
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
     ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "tags"))
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
+    ManagedSearchBedrockRerankingConfiguration.add_member(:model_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedSearchBedrockRerankingModelConfiguration, name: "modelConfiguration", traits: {"smithy.api#required" => {}}))
+    ManagedSearchBedrockRerankingConfiguration.add_member(:number_of_reranked_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "numberOfRerankedResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}}))
+    ManagedSearchBedrockRerankingConfiguration.add_member(:metadata_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataConfigurationForReranking, name: "metadataConfiguration"))
+    ManagedSearchBedrockRerankingConfiguration.type = Types::ManagedSearchBedrockRerankingConfiguration
+    ManagedSearchBedrockRerankingModelConfiguration.add_member(:model_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: BedrockRerankingModelArn, name: "modelArn", traits: {"smithy.api#required" => {}}))
+    ManagedSearchBedrockRerankingModelConfiguration.add_member(:additional_model_request_fields, ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalModelRequestFields, name: "additionalModelRequestFields"))
+    ManagedSearchBedrockRerankingModelConfiguration.type = Types::ManagedSearchBedrockRerankingModelConfiguration
+    ManagedSearchConfiguration.add_member(:number_of_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "numberOfResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}}))
+    ManagedSearchConfiguration.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: RetrievalFilter, name: "filter"))
+    ManagedSearchConfiguration.add_member(:reranking_model_type, ::Smithy::Schema::Shapes::MemberShape.new(target: RerankingModelType, name: "rerankingModelType"))
+    ManagedSearchConfiguration.add_member(:reranking_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedSearchRerankingConfiguration, name: "rerankingConfiguration"))
+    ManagedSearchConfiguration.type = Types::ManagedSearchConfiguration
+    ManagedSearchRerankingConfiguration.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedSearchRerankingConfigurationType, name: "type", traits: {"smithy.api#required" => {}}))
+    ManagedSearchRerankingConfiguration.add_member(:bedrock_reranking_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedSearchBedrockRerankingConfiguration, name: "bedrockRerankingConfiguration"))
+    ManagedSearchRerankingConfiguration.type = Types::ManagedSearchRerankingConfiguration
+    ManagedSearchRerankingConfigurationType.add_member(:bedrock_reranking_model, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BEDROCK_RERANKING_MODEL", traits: {"smithy.api#enumValue" => "BEDROCK_RERANKING_MODEL"}))
+    MantleFoundationModelConfiguration.add_member(:model_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: MantleFoundationModelModelConfiguration, name: "modelConfiguration", traits: {"smithy.api#required" => {}}))
+    MantleFoundationModelConfiguration.type = Types::MantleFoundationModelConfiguration
+    MantleFoundationModelModelConfiguration.add_member(:model_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: BedrockModelArn, name: "modelArn", traits: {"smithy.api#required" => {}}))
+    MantleFoundationModelModelConfiguration.add_member(:project_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MantleProjectId, name: "projectId"))
+    MantleFoundationModelModelConfiguration.type = Types::MantleFoundationModelModelConfiguration
     Memories.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Memory, name: "member"))
     Memory.add_member(:session_summary, Types::Memory::SessionSummary, ::Smithy::Schema::Shapes::MemberShape.new(target: MemorySessionSummary, name: "sessionSummary"))
     Memory.add_member(:unknown, Types::Memory::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
@@ -1733,7 +2142,7 @@ module Aws::BedrockAgentRuntime
     PutInvocationStepResponse.add_member(:invocation_step_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "invocationStepId", traits: {"smithy.api#required" => {}}))
     PutInvocationStepResponse.type = Types::PutInvocationStepResponse
     QueryGenerationInput.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: InputQueryType, name: "type", traits: {"smithy.api#required" => {}}))
-    QueryGenerationInput.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "text", traits: {"smithy.api#length" => {"min" => 1, "max" => 20000}, "smithy.api#required" => {}}))
+    QueryGenerationInput.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "text", traits: {"smithy.api#length" => {"min" => 1, "max" => 20000}, "smithy.api#pattern" => "^(?!\\s*$).+", "smithy.api#required" => {}}))
     QueryGenerationInput.type = Types::QueryGenerationInput
     QueryTransformationConfiguration.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryTransformationType, name: "type", traits: {"smithy.api#required" => {}}))
     QueryTransformationConfiguration.type = Types::QueryTransformationConfiguration
@@ -1802,6 +2211,9 @@ module Aws::BedrockAgentRuntime
     RerankingMetadataSelectiveModeConfiguration.add_member(:fields_to_exclude, Types::RerankingMetadataSelectiveModeConfiguration::FieldsToExclude, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldsForReranking, name: "fieldsToExclude"))
     RerankingMetadataSelectiveModeConfiguration.add_member(:unknown, Types::RerankingMetadataSelectiveModeConfiguration::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     RerankingMetadataSelectiveModeConfiguration.type = Types::RerankingMetadataSelectiveModeConfiguration
+    RerankingModelType.add_member(:custom, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOM", traits: {"smithy.api#enumValue" => "CUSTOM"}))
+    RerankingModelType.add_member(:managed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MANAGED", traits: {"smithy.api#enumValue" => "MANAGED"}))
+    RerankingModelType.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonBlankString, name: "message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
     ResponseBody.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
@@ -1824,6 +2236,10 @@ module Aws::BedrockAgentRuntime
     ResponseStream.add_member(:files, Types::ResponseStream::Files, ::Smithy::Schema::Shapes::MemberShape.new(target: FilePart, name: "files"))
     ResponseStream.add_member(:unknown, Types::ResponseStream::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     ResponseStream.type = Types::ResponseStream
+    RetrievalContent.add_member(:byte_content, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Blob, name: "byteContent"))
+    RetrievalContent.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "text"))
+    RetrievalContent.add_member(:mime_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MimeType, name: "mimeType", traits: {"smithy.api#required" => {}}))
+    RetrievalContent.type = Types::RetrievalContent
     RetrievalFilter.add_member(:equals, Types::RetrievalFilter::Equals, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterAttribute, name: "equals"))
     RetrievalFilter.add_member(:not_equals, Types::RetrievalFilter::NotEquals, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterAttribute, name: "notEquals"))
     RetrievalFilter.add_member(:greater_than, Types::RetrievalFilter::GreaterThan, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterAttribute, name: "greaterThan"))
@@ -1840,11 +2256,16 @@ module Aws::BedrockAgentRuntime
     RetrievalFilter.add_member(:unknown, Types::RetrievalFilter::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     RetrievalFilter.type = Types::RetrievalFilter
     RetrievalFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RetrievalFilter, name: "member"))
+    RetrievalOverrides.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: RetrievalFilter, name: "filter"))
+    RetrievalOverrides.add_member(:max_number_of_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "maxNumberOfResults", traits: {"smithy.api#range" => {"min" => 1}}))
+    RetrievalOverrides.type = Types::RetrievalOverrides
     RetrievalResultConfluenceLocation.add_member(:url, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "url"))
     RetrievalResultConfluenceLocation.type = Types::RetrievalResultConfluenceLocation
     RetrievalResultContent.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: RetrievalResultContentType, name: "type"))
     RetrievalResultContent.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "text", traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => ""}))
     RetrievalResultContent.add_member(:byte_content, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "byteContent"))
+    RetrievalResultContent.add_member(:video, ::Smithy::Schema::Shapes::MemberShape.new(target: VideoSegment, name: "video"))
+    RetrievalResultContent.add_member(:audio, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioSegment, name: "audio"))
     RetrievalResultContent.add_member(:row, ::Smithy::Schema::Shapes::MemberShape.new(target: RetrievalResultContentRow, name: "row"))
     RetrievalResultContent.type = Types::RetrievalResultContent
     RetrievalResultContentColumn.add_member(:column_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "columnName"))
@@ -1861,8 +2282,12 @@ module Aws::BedrockAgentRuntime
     RetrievalResultContentType.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TEXT", traits: {"smithy.api#enumValue" => "TEXT"}))
     RetrievalResultContentType.add_member(:image, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IMAGE", traits: {"smithy.api#enumValue" => "IMAGE"}))
     RetrievalResultContentType.add_member(:row, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ROW", traits: {"smithy.api#enumValue" => "ROW"}))
+    RetrievalResultContentType.add_member(:audio, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AUDIO", traits: {"smithy.api#enumValue" => "AUDIO"}))
+    RetrievalResultContentType.add_member(:video, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VIDEO", traits: {"smithy.api#enumValue" => "VIDEO"}))
     RetrievalResultCustomDocumentLocation.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "id"))
     RetrievalResultCustomDocumentLocation.type = Types::RetrievalResultCustomDocumentLocation
+    RetrievalResultGoogleDriveLocation.add_member(:url, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "url"))
+    RetrievalResultGoogleDriveLocation.type = Types::RetrievalResultGoogleDriveLocation
     RetrievalResultKendraDocumentLocation.add_member(:uri, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "uri"))
     RetrievalResultKendraDocumentLocation.type = Types::RetrievalResultKendraDocumentLocation
     RetrievalResultLocation.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: RetrievalResultLocationType, name: "type", traits: {"smithy.api#required" => {}}))
@@ -1874,6 +2299,8 @@ module Aws::BedrockAgentRuntime
     RetrievalResultLocation.add_member(:custom_document_location, ::Smithy::Schema::Shapes::MemberShape.new(target: RetrievalResultCustomDocumentLocation, name: "customDocumentLocation"))
     RetrievalResultLocation.add_member(:kendra_document_location, ::Smithy::Schema::Shapes::MemberShape.new(target: RetrievalResultKendraDocumentLocation, name: "kendraDocumentLocation"))
     RetrievalResultLocation.add_member(:sql_location, ::Smithy::Schema::Shapes::MemberShape.new(target: RetrievalResultSqlLocation, name: "sqlLocation"))
+    RetrievalResultLocation.add_member(:one_drive_location, ::Smithy::Schema::Shapes::MemberShape.new(target: RetrievalResultOneDriveLocation, name: "oneDriveLocation"))
+    RetrievalResultLocation.add_member(:google_drive_location, ::Smithy::Schema::Shapes::MemberShape.new(target: RetrievalResultGoogleDriveLocation, name: "googleDriveLocation"))
     RetrievalResultLocation.type = Types::RetrievalResultLocation
     RetrievalResultLocationType.add_member(:s3, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "S3", traits: {"smithy.api#enumValue" => "S3"}))
     RetrievalResultLocationType.add_member(:web, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WEB", traits: {"smithy.api#enumValue" => "WEB"}))
@@ -1883,8 +2310,12 @@ module Aws::BedrockAgentRuntime
     RetrievalResultLocationType.add_member(:custom, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOM", traits: {"smithy.api#enumValue" => "CUSTOM"}))
     RetrievalResultLocationType.add_member(:kendra, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "KENDRA", traits: {"smithy.api#enumValue" => "KENDRA"}))
     RetrievalResultLocationType.add_member(:sql, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SQL", traits: {"smithy.api#enumValue" => "SQL"}))
+    RetrievalResultLocationType.add_member(:onedrive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ONEDRIVE", traits: {"smithy.api#enumValue" => "ONEDRIVE"}))
+    RetrievalResultLocationType.add_member(:googledrive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GOOGLEDRIVE", traits: {"smithy.api#enumValue" => "GOOGLEDRIVE"}))
     RetrievalResultMetadata.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: RetrievalResultMetadataKey, name: "key"))
     RetrievalResultMetadata.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: RetrievalResultMetadataValue, name: "value"))
+    RetrievalResultOneDriveLocation.add_member(:url, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "url"))
+    RetrievalResultOneDriveLocation.type = Types::RetrievalResultOneDriveLocation
     RetrievalResultS3Location.add_member(:uri, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "uri"))
     RetrievalResultS3Location.type = Types::RetrievalResultS3Location
     RetrievalResultSalesforceLocation.add_member(:url, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "url"))
@@ -1909,6 +2340,7 @@ module Aws::BedrockAgentRuntime
     RetrieveAndGenerateRequest.add_member(:input, ::Smithy::Schema::Shapes::MemberShape.new(target: RetrieveAndGenerateInput, name: "input", traits: {"smithy.api#required" => {}}))
     RetrieveAndGenerateRequest.add_member(:retrieve_and_generate_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: RetrieveAndGenerateConfiguration, name: "retrieveAndGenerateConfiguration"))
     RetrieveAndGenerateRequest.add_member(:session_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: RetrieveAndGenerateSessionConfiguration, name: "sessionConfiguration"))
+    RetrieveAndGenerateRequest.add_member(:user_context, ::Smithy::Schema::Shapes::MemberShape.new(target: UserContext, name: "userContext"))
     RetrieveAndGenerateRequest.type = Types::RetrieveAndGenerateRequest
     RetrieveAndGenerateResponse.add_member(:session_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionId, name: "sessionId", traits: {"smithy.api#required" => {}}))
     RetrieveAndGenerateResponse.add_member(:output, ::Smithy::Schema::Shapes::MemberShape.new(target: RetrieveAndGenerateOutput, name: "output", traits: {"smithy.api#required" => {}}))
@@ -1921,6 +2353,7 @@ module Aws::BedrockAgentRuntime
     RetrieveAndGenerateStreamRequest.add_member(:input, ::Smithy::Schema::Shapes::MemberShape.new(target: RetrieveAndGenerateInput, name: "input", traits: {"smithy.api#required" => {}}))
     RetrieveAndGenerateStreamRequest.add_member(:retrieve_and_generate_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: RetrieveAndGenerateConfiguration, name: "retrieveAndGenerateConfiguration"))
     RetrieveAndGenerateStreamRequest.add_member(:session_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: RetrieveAndGenerateSessionConfiguration, name: "sessionConfiguration"))
+    RetrieveAndGenerateStreamRequest.add_member(:user_context, ::Smithy::Schema::Shapes::MemberShape.new(target: UserContext, name: "userContext"))
     RetrieveAndGenerateStreamRequest.type = Types::RetrieveAndGenerateStreamRequest
     RetrieveAndGenerateStreamResponse.add_member(:stream, ::Smithy::Schema::Shapes::MemberShape.new(target: RetrieveAndGenerateStreamResponseOutput, name: "stream", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
     RetrieveAndGenerateStreamResponse.add_member(:session_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionId, name: "sessionId", traits: {"smithy.api#httpHeader" => "x-amzn-bedrock-knowledge-base-session-id", "smithy.api#required" => {}}))
@@ -1943,11 +2376,12 @@ module Aws::BedrockAgentRuntime
     RetrieveAndGenerateStreamResponseOutput.type = Types::RetrieveAndGenerateStreamResponseOutput
     RetrieveAndGenerateType.add_member(:knowledge_base, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "KNOWLEDGE_BASE", traits: {"smithy.api#enumValue" => "KNOWLEDGE_BASE"}))
     RetrieveAndGenerateType.add_member(:external_sources, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXTERNAL_SOURCES", traits: {"smithy.api#enumValue" => "EXTERNAL_SOURCES"}))
-    RetrieveRequest.add_member(:knowledge_base_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KnowledgeBaseId, name: "knowledgeBaseId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    RetrieveRequest.add_member(:knowledge_base_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KnowledgeBaseIdentifier, name: "knowledgeBaseId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     RetrieveRequest.add_member(:retrieval_query, ::Smithy::Schema::Shapes::MemberShape.new(target: KnowledgeBaseQuery, name: "retrievalQuery", traits: {"smithy.api#required" => {}}))
     RetrieveRequest.add_member(:retrieval_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: KnowledgeBaseRetrievalConfiguration, name: "retrievalConfiguration"))
     RetrieveRequest.add_member(:guardrail_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailConfiguration, name: "guardrailConfiguration"))
     RetrieveRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
+    RetrieveRequest.add_member(:user_context, ::Smithy::Schema::Shapes::MemberShape.new(target: UserContext, name: "userContext"))
     RetrieveRequest.type = Types::RetrieveRequest
     RetrieveResponse.add_member(:retrieval_results, ::Smithy::Schema::Shapes::MemberShape.new(target: KnowledgeBaseRetrievalResults, name: "retrievalResults", traits: {"smithy.api#required" => {}}))
     RetrieveResponse.add_member(:guardrail_action, ::Smithy::Schema::Shapes::MemberShape.new(target: GuadrailAction, name: "guardrailAction"))
@@ -1958,6 +2392,9 @@ module Aws::BedrockAgentRuntime
     RetrievedReference.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: RetrievalResultMetadata, name: "metadata"))
     RetrievedReference.type = Types::RetrievedReference
     RetrievedReferences.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RetrievedReference, name: "member"))
+    RetrieverConfiguration.add_member(:knowledge_base, Types::RetrieverConfiguration::KnowledgeBase, ::Smithy::Schema::Shapes::MemberShape.new(target: KnowledgeBaseRetrieverConfiguration, name: "knowledgeBase"))
+    RetrieverConfiguration.add_member(:unknown, Types::RetrieverConfiguration::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    RetrieverConfiguration.type = Types::RetrieverConfiguration
     ReturnControlInvocationResults.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InvocationResultMember, name: "member"))
     ReturnControlPayload.add_member(:invocation_inputs, ::Smithy::Schema::Shapes::MemberShape.new(target: InvocationInputs, name: "invocationInputs"))
     ReturnControlPayload.add_member(:invocation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "invocationId"))
@@ -2109,6 +2546,8 @@ module Aws::BedrockAgentRuntime
     Usage.add_member(:input_tokens, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "inputTokens"))
     Usage.add_member(:output_tokens, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "outputTokens"))
     Usage.type = Types::Usage
+    UserContext.add_member(:user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "userId", traits: {"smithy.api#required" => {}}))
+    UserContext.type = Types::UserContext
     ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonBlankString, name: "message"))
     ValidationException.type = Types::ValidationException
     VectorSearchBedrockRerankingConfiguration.add_member(:model_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorSearchBedrockRerankingModelConfiguration, name: "modelConfiguration", traits: {"smithy.api#required" => {}}))
@@ -2122,12 +2561,43 @@ module Aws::BedrockAgentRuntime
     VectorSearchRerankingConfiguration.add_member(:bedrock_reranking_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorSearchBedrockRerankingConfiguration, name: "bedrockRerankingConfiguration"))
     VectorSearchRerankingConfiguration.type = Types::VectorSearchRerankingConfiguration
     VectorSearchRerankingConfigurationType.add_member(:bedrock_reranking_model, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BEDROCK_RERANKING_MODEL", traits: {"smithy.api#enumValue" => "BEDROCK_RERANKING_MODEL"}))
+    VideoSegment.add_member(:s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "s3Uri", traits: {"smithy.api#length" => {"min" => 1}, "smithy.api#required" => {}}))
+    VideoSegment.add_member(:summary, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "summary"))
+    VideoSegment.type = Types::VideoSegment
 
     AmazonBedrockAgentRunTimeService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.bedrockagentruntime#AmazonBedrockAgentRunTimeService"
       service.name = "AmazonBedrockAgentRunTimeService"
       service.version = "2023-07-26"
-      service.traits = {"aws.api#service" => {"sdkId" => "Bedrock Agent Runtime", "arnNamespace" => "bedrock", "endpointPrefix" => "bedrock-agent-runtime", "cloudTrailEventSource" => "bedrock.amazonaws.com"}, "aws.auth#sigv4" => {"name" => "bedrock"}, "aws.protocols#restJson1" => {}, "smithy.api#title" => "Agents for Amazon Bedrock Runtime"}
+      service.traits = {"aws.api#service" => {"sdkId" => "Bedrock Agent Runtime", "arnNamespace" => "bedrock", "endpointPrefix" => "bedrock-agent-runtime", "cloudTrailEventSource" => "bedrock.amazonaws.com"}, "aws.auth#sigv4" => {"name" => "bedrock"}, "aws.protocols#restJson1" => {"http" => ["h2", "http/1.1"], "eventStreamHttp" => ["h2", "http/1.1"]}, "smithy.api#title" => "Agents for Amazon Bedrock Runtime", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://bedrock-agent-runtime-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://bedrock-agent-runtime-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://bedrock-agent-runtime.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://bedrock-agent-runtime.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
+      service.add_operation(:agentic_retrieve_stream, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.bedrockagentruntime#AgenticRetrieveStream"
+        operation.name = "AgenticRetrieveStream"
+        operation.input = AgenticRetrieveStreamRequest
+        operation.output = AgenticRetrieveStreamResponse
+        operation.errors << AccessDeniedException
+        operation.errors << BadGatewayException
+        operation.errors << ConflictException
+        operation.errors << DependencyFailedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/agenticRetrieveStream"}}
+      end)
+      service.add_operation(:check_ingested_document_acl, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.bedrockagentruntime#CheckIngestedDocumentAcl"
+        operation.name = "CheckIngestedDocumentAcl"
+        operation.input = CheckIngestedDocumentAclRequest
+        operation.output = CheckIngestedDocumentAclResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/knowledgebases/{knowledgeBaseId}/datasources/{dataSourceId}/check-ingested-document-acl"}, "smithy.api#readonly" => {}}
+      end)
       service.add_operation(:create_invocation, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.bedrockagentruntime#CreateInvocation"
         operation.name = "CreateInvocation"
@@ -2230,6 +2700,18 @@ module Aws::BedrockAgentRuntime
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/agents/{agentId}/agentAliases/{agentAliasId}/memories"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::GetAgentMemory.new
       end)
+      service.add_operation(:get_document_content, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.bedrockagentruntime#GetDocumentContent"
+        operation.name = "GetDocumentContent"
+        operation.input = GetDocumentContentRequest
+        operation.output = GetDocumentContentResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/knowledgebases/{knowledgeBaseId}/datasources/{dataSourceId}/documents/{documentId}/content"}, "smithy.api#readonly" => {}}
+      end)
       service.add_operation(:get_execution_flow_snapshot, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.bedrockagentruntime#GetExecutionFlowSnapshot"
         operation.name = "GetExecutionFlowSnapshot"
@@ -2253,6 +2735,18 @@ module Aws::BedrockAgentRuntime
         operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/flows/{flowIdentifier}/aliases/{flowAliasIdentifier}/executions/{executionIdentifier}"}, "smithy.api#readonly" => {}}
+      end)
+      service.add_operation(:get_ingested_document_acl, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.bedrockagentruntime#GetIngestedDocumentAcl"
+        operation.name = "GetIngestedDocumentAcl"
+        operation.input = GetIngestedDocumentAclRequest
+        operation.output = GetIngestedDocumentAclResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/knowledgebases/{knowledgeBaseId}/datasources/{dataSourceId}/get-ingested-document-acl"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_invocation_step, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.bedrockagentruntime#GetInvocationStep"

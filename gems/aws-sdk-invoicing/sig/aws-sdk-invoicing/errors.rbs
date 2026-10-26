@@ -4,6 +4,11 @@ module Aws::Invoicing
       def message: () -> String?
       def resource_name: () -> String?
     end
+    class ConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def resource_id: () -> String?
+      def resource_type: () -> String?
+    end
     class InternalServerException < Smithy::Client::ServiceError
       def retry_after_seconds: () -> Integer?
       def message: () -> String?

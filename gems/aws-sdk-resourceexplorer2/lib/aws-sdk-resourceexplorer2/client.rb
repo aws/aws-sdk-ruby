@@ -144,18 +144,18 @@ module Aws::ResourceExplorer2
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -209,18 +209,10 @@ module Aws::ResourceExplorer2
       super
     end
 
-    # <p>Sets the specified view as the default for the Amazon Web Services Region in which you call this
-    #             operation. When a user performs a <a>Search</a> that doesn't explicitly
-    #             specify which view to use, then Amazon Web Services Resource Explorer automatically chooses this default view for
-    #             searches performed in this Amazon Web Services Region.</p>
-    #          <p>If an Amazon Web Services Region doesn't have a default view 
-    #     configured, then users must explicitly specify a view with every <code>Search</code> 
-    #     operation performed in that Region.</p>
+    # <p>Sets the specified view as the default for the Amazon Web Services Region in which you call this operation. When a user performs a <a>Search</a> that doesn't explicitly specify which view to use, then Amazon Web Services Resource Explorer automatically chooses this default view for searches performed in this Amazon Web Services Region.</p> <p>If an Amazon Web Services Region doesn't have a default view configured, then users must explicitly specify a view with every <code>Search</code> operation performed in that Region.</p>
     # @param [Hash, Types::AssociateDefaultViewOperationInput] params
     # @option params [String] :view_arn
-    #   <p>The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon resource name (ARN)</a> of the view to set as the default for the Amazon Web Services Region and
-    #               Amazon Web Services account in which you call this operation. The specified view must already exist in
-    #               the called Region.</p>
+    #   <p>The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon resource name (ARN)</a> of the view to set as the default for the Amazon Web Services Region and Amazon Web Services account in which you call this operation. The specified view must already exist in the called Region.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     view_arn: "String", # required
@@ -254,6 +246,7 @@ module Aws::ResourceExplorer2
     #     views: [
     #       {
     #         view_arn: "String",
+    #         view_name: "ViewName",
     #         owner: "String",
     #         last_updated_at: Time.now,
     #         scope: "String",
@@ -280,65 +273,12 @@ module Aws::ResourceExplorer2
       request.send_request(options)
     end
 
-    # <p>Turns on Amazon Web Services Resource Explorer in the Amazon Web Services Region in which you called this operation by creating
-    #             an index. Resource Explorer begins discovering the resources in this Region and stores the details
-    #             about the resources in the index so that they can be queried by using the <a>Search</a> operation. You can create only one index in a Region.</p>
-    #          <note>
-    #             <p>This operation creates only a <i>local</i> index. To promote the
-    #                 local index in one Amazon Web Services Region into the aggregator index for the Amazon Web Services account, use the
-    #                     <a>UpdateIndexType</a> operation. For more information, see <a href="https://docs.aws.amazon.com/resource-explorer/latest/userguide/manage-aggregator-region.html">Turning on cross-Region search by creating an aggregator index</a> in the
-    #                     <i>Amazon Web Services Resource Explorer User Guide</i>.</p>
-    #          </note>
-    #          <p>For more details about what happens when you turn on Resource Explorer in an Amazon Web Services Region, see
-    #                 <a href="https://docs.aws.amazon.com/resource-explorer/latest/userguide/manage-service-activate.html">Turn
-    #                 on Resource Explorer to index your resources in an Amazon Web Services Region</a> in the
-    #                 <i>Amazon Web Services Resource Explorer User Guide</i>.</p>
-    #          <p>If this is the first Amazon Web Services Region in which you've created an index for Resource Explorer, then
-    #             this operation also <a href="https://docs.aws.amazon.com/resource-explorer/latest/userguide/security_iam_service-linked-roles.html">creates a
-    #                 service-linked role</a> in your Amazon Web Services account that allows Resource Explorer to enumerate
-    #             your resources to populate the index.</p>
-    #          <ul>
-    #             <li>
-    #                <p>
-    #                   <b>Action</b>:
-    #                         <code>resource-explorer-2:CreateIndex</code>
-    #                </p>
-    #                <p>
-    #                   <b>Resource</b>: The ARN of the index (as it will
-    #                     exist after the operation completes) in the Amazon Web Services Region and account in which
-    #                     you're trying to create the index. Use the wildcard character (<code>*</code>)
-    #                     at the end of the string to match the eventual UUID. For example, the following
-    #                         <code>Resource</code> element restricts the role or user to creating an
-    #                     index in only the <code>us-east-2</code> Region of the specified account.</p>
-    #                <p>
-    #                   <code>"Resource":
-    #                             "arn:aws:resource-explorer-2:us-west-2:<i>&lt;account-id&gt;</i>:index/*"</code>
-    #                </p>
-    #                <p>Alternatively, you can use <code>"Resource": "*"</code> to allow the role or
-    #                     user to create an index in any Region.</p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <b>Action</b>:
-    #                         <code>iam:CreateServiceLinkedRole</code>
-    #                </p>
-    #                <p>
-    #                   <b>Resource</b>: No specific resource (*). </p>
-    #                <p>This permission is required only the first time you create an index to turn on
-    #                     Resource Explorer in the account. Resource Explorer uses this to create the <a href="https://docs.aws.amazon.com/resource-explorer/latest/userguide/security_iam_service-linked-roles.html">service-linked
-    #                         role needed to index the resources in your account</a>. Resource Explorer uses the
-    #                     same service-linked role for all additional indexes you create
-    #                     afterwards.</p>
-    #             </li>
-    #          </ul>
+    # <p>Turns on Amazon Web Services Resource Explorer in the Amazon Web Services Region in which you called this operation by creating an index. Resource Explorer begins discovering the resources in this Region and stores the details about the resources in the index so that they can be queried by using the <a>Search</a> operation. You can create only one index in a Region.</p> <note> <p>This operation creates only a <i>local</i> index. To promote the local index in one Amazon Web Services Region into the aggregator index for the Amazon Web Services account, use the <a>UpdateIndexType</a> operation. For more information, see <a href="https://docs.aws.amazon.com/resource-explorer/latest/userguide/manage-aggregator-region.html">Turning on cross-Region search by creating an aggregator index</a> in the <i>Amazon Web Services Resource Explorer User Guide</i>.</p> </note> <p>For more details about what happens when you turn on Resource Explorer in an Amazon Web Services Region, see <a href="https://docs.aws.amazon.com/resource-explorer/latest/userguide/manage-service-activate.html">Turn on Resource Explorer to index your resources in an Amazon Web Services Region</a> in the <i>Amazon Web Services Resource Explorer User Guide</i>.</p> <p>If this is the first Amazon Web Services Region in which you've created an index for Resource Explorer, then this operation also <a href="https://docs.aws.amazon.com/resource-explorer/latest/userguide/security_iam_service-linked-roles.html">creates a service-linked role</a> in your Amazon Web Services account that allows Resource Explorer to enumerate your resources to populate the index.</p> <ul> <li> <p> <b>Action</b>: <code>resource-explorer-2:CreateIndex</code> </p> <p> <b>Resource</b>: The ARN of the index (as it will exist after the operation completes) in the Amazon Web Services Region and account in which you're trying to create the index. Use the wildcard character (<code>*</code>) at the end of the string to match the eventual UUID. For example, the following <code>Resource</code> element restricts the role or user to creating an index in only the <code>us-east-2</code> Region of the specified account.</p> <p> <code>"Resource": "arn:aws:resource-explorer-2:us-west-2:<i>&lt;account-id&gt;</i>:index/*"</code> </p> <p>Alternatively, you can use <code>"Resource": "*"</code> to allow the role or user to create an index in any Region.</p> </li> <li> <p> <b>Action</b>: <code>iam:CreateServiceLinkedRole</code> </p> <p> <b>Resource</b>: No specific resource (*). </p> <p>This permission is required only the first time you create an index to turn on Resource Explorer in the account. Resource Explorer uses this to create the <a href="https://docs.aws.amazon.com/resource-explorer/latest/userguide/security_iam_service-linked-roles.html">service-linked role needed to index the resources in your account</a>. Resource Explorer uses the same service-linked role for all additional indexes you create afterwards.</p> </li> </ul>
     # @param [Hash, Types::CreateIndexOperationInput] params
     # @option params [String] :client_token
-    #   <p>This value helps ensure idempotency. Resource Explorer uses this value to prevent the
-    #           accidental creation of duplicate versions. We recommend that you generate a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID-type
-    #           value</a> to ensure the uniqueness of your index.</p>
+    #   <p>This value helps ensure idempotency. Resource Explorer uses this value to prevent the accidental creation of duplicate versions. We recommend that you generate a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID-type value</a> to ensure the uniqueness of your index.</p>
     # @option params [Hash<String, String>] :tags
-    #   <p>The specified tags are attached only to the index created in this Amazon Web Services Region. The
-    #               tags aren't attached to any of the resources listed in the index.</p>
+    #   <p>The specified tags are attached only to the index created in this Amazon Web Services Region. The tags aren't attached to any of the resources listed in the index.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     client_token: "String",
@@ -361,45 +301,45 @@ module Aws::ResourceExplorer2
       request.send_request(options)
     end
 
-    # <p>Creates a view that users can query by using the <a>Search</a> operation.
-    #             Results from queries that you make using this view include only resources that match the
-    #             view's <code>Filters</code>. For more information about Amazon Web Services Resource Explorer views, see <a href="https://docs.aws.amazon.com/resource-explorer/latest/userguide/manage-views.html">Managing views</a>
-    #             in the <i>Amazon Web Services Resource Explorer User Guide</i>.</p>
-    #          <p>Only the principals with an IAM identity-based policy that grants <code>Allow</code>
-    #             to the <code>Search</code> action on a <code>Resource</code> with the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon resource name (ARN)</a> of
-    #             this view can <a>Search</a> using views you create with this
-    #             operation.</p>
+    # <p>Creates a Resource Explorer setup configuration across multiple Amazon Web Services Regions. This operation sets up indexes and views in the specified Regions. This operation can also be used to set an aggregator Region for cross-Region resource search.</p>
+    # @param [Hash, Types::CreateResourceExplorerSetupInput] params
+    # @option params [Array<String>] :region_list
+    #   <p>A list of Amazon Web Services Regions where Resource Explorer should be configured. Each Region in the list will have a user-owned index created.</p>
+    # @option params [Array<String>] :aggregator_regions
+    #   <p>A list of Amazon Web Services Regions that should be configured as aggregator Regions. Aggregator Regions receive replicated index information from all other Regions where there is a user-owned index.</p>
+    # @option params [String] :view_name
+    #   <p>The name for the view to be created as part of the Resource Explorer setup. The view name must be unique within the Amazon Web Services account and Region.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     region_list: ["String"], # required
+    #     aggregator_regions: ["String"],
+    #     view_name: "String", # required
+    #   }
+    #   options = {}
+    #   response = client.create_resource_explorer_setup(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     task_id: "String", # required
+    #   }
+    # @return [Types::CreateResourceExplorerSetupOutput]
+    def create_resource_explorer_setup(params = {}, options = {})
+      request = build_request(:create_resource_explorer_setup, params)
+      request.send_request(options)
+    end
+
+    # <p>Creates a view that users can query by using the <a>Search</a> operation. Results from queries that you make using this view include only resources that match the view's <code>Filters</code>. For more information about Amazon Web Services Resource Explorer views, see <a href="https://docs.aws.amazon.com/resource-explorer/latest/userguide/manage-views.html">Managing views</a> in the <i>Amazon Web Services Resource Explorer User Guide</i>.</p> <p>Only the principals with an IAM identity-based policy that grants <code>Allow</code> to the <code>Search</code> action on a <code>Resource</code> with the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon resource name (ARN)</a> of this view can <a>Search</a> using views you create with this operation.</p>
     # @param [Hash, Types::CreateViewOperationInput] params
     # @option params [String] :client_token
-    #   <p>This value helps ensure idempotency. Resource Explorer uses this value to prevent the
-    #           accidental creation of duplicate versions. We recommend that you generate a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID-type
-    #           value</a> to ensure the uniqueness of your views.</p>
+    #   <p>This value helps ensure idempotency. Resource Explorer uses this value to prevent the accidental creation of duplicate versions. We recommend that you generate a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID-type value</a> to ensure the uniqueness of your views.</p>
     # @option params [String] :view_name
-    #   <p>The name of the new view. This name appears in the list of views in Resource Explorer.</p>
-    #            <p>The name must be no more than 64 characters long, and can include letters, digits, and
-    #               the dash (-) character. The name must be unique within its Amazon Web Services Region.</p>
+    #   <p>The name of the new view. This name appears in the list of views in Resource Explorer.</p> <p>The name must be no more than 64 characters long, and can include letters, digits, and the dash (-) character. The name must be unique within its Amazon Web Services Region.</p>
     # @option params [Array<Types::IncludedProperty>] :included_properties
-    #   <p>Specifies optional fields that you want included in search results from this
-    #           view. It is a list of objects that each describe a field to include.</p>
-    #            <p>The default is an empty list, with no optional fields included in the results.</p>
+    #   <p>Specifies optional fields that you want included in search results from this view. It is a list of objects that each describe a field to include.</p> <p>The default is an empty list, with no optional fields included in the results.</p>
     # @option params [String] :scope
-    #   <p>The root ARN of the account, an organizational unit (OU), or an organization ARN. If
-    #               left empty, the default is account.</p>
+    #   <p>The root ARN of the account, an organizational unit (OU), or an organization ARN. If left empty, the default is account.</p>
     # @option params [Types::SearchFilter] :filters
-    #   <p>An array of strings that specify which resources are included in the results of 
-    #               queries made using this view. When you use this view in a <a>Search</a> 
-    #               operation, the filter string is combined with the search's <code>QueryString</code> 
-    #               parameter using a logical <code>AND</code> operator.</p>
-    #            <p>For information about the supported syntax, see <a href="https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html">Search query reference for
-    #                   Resource Explorer</a> in the <i>Amazon Web Services Resource Explorer User Guide</i>.</p>
-    #            <important>
-    #               <p>This query string in the context of this operation supports only <a href="https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html#query-syntax-filters">filter
-    #                       prefixes</a> with optional <a href="https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html#query-syntax-operators">operators</a>. It doesn't support free-form text. For example, the 
-    #                       string <code>region:us* service:ec2 -tag:stage=prod</code> includes all Amazon EC2 
-    #                       resources in any Amazon Web Services Region that begins with the letters <code>us</code> and is
-    #                       <i>not</i> tagged with a key <code>Stage</code> that has the value
-    #                       <code>prod</code>.</p>
-    #            </important>
+    #   <p>An array of strings that specify which resources are included in the results of queries made using this view. When you use this view in a <a>Search</a> operation, the filter string is combined with the search's <code>QueryString</code> parameter using a logical <code>AND</code> operator.</p> <p>For information about the supported syntax, see <a href="https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html">Search query reference for Resource Explorer</a> in the <i>Amazon Web Services Resource Explorer User Guide</i>.</p> <important> <p>This query string in the context of this operation supports only <a href="https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html#query-syntax-filters">filter prefixes</a> with optional <a href="https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html#query-syntax-operators">operators</a>. It doesn't support free-form text. For example, the string <code>region:us* service:ec2 -tag:stage=prod</code> includes all Amazon EC2 resources in any Amazon Web Services Region that begins with the letters <code>us</code> and is <i>not</i> tagged with a key <code>Stage</code> that has the value <code>prod</code>.</p> </important>
     # @option params [Hash<String, String>] :tags
     #   <p>Tag key and value pairs that are attached to the view.</p>
     # @example Request syntax with placeholder values
@@ -426,6 +366,7 @@ module Aws::ResourceExplorer2
     #   {
     #     view: {
     #       view_arn: "String",
+    #       view_name: "ViewName",
     #       owner: "String",
     #       last_updated_at: Time.now,
     #       scope: "String",
@@ -445,18 +386,7 @@ module Aws::ResourceExplorer2
       request.send_request(options)
     end
 
-    # <p>Deletes the specified index and turns off Amazon Web Services Resource Explorer in the specified Amazon Web Services Region.
-    #             When you delete an index, Resource Explorer stops discovering and indexing resources in that
-    #             Region. Resource Explorer also deletes all views in that Region. These actions occur as
-    #             asynchronous background tasks. You can check to see when the actions are complete by
-    #             using the <a>GetIndex</a> operation and checking the <code>Status</code>
-    #             response value.</p>
-    #          <note>
-    #             <p>If the index you delete is the aggregator index for the Amazon Web Services account, you must
-    #                 wait 24 hours before you can promote another local index to be the
-    #                 aggregator index for the account. Users can't perform account-wide searches using
-    #                 Resource Explorer until another aggregator index is configured.</p>
-    #          </note>
+    # <p>Deletes the specified index and turns off Amazon Web Services Resource Explorer in the specified Amazon Web Services Region. When you delete an index, Resource Explorer stops discovering and indexing resources in that Region. Resource Explorer also deletes all views in that Region. These actions occur as asynchronous background tasks. You can check to see when the actions are complete by using the <a>GetIndex</a> operation and checking the <code>Status</code> response value.</p> <note> <p>If the index you delete is the aggregator index for the Amazon Web Services account, you must wait 24 hours before you can promote another local index to be the aggregator index for the account. Users can't perform account-wide searches using Resource Explorer until another aggregator index is configured.</p> </note>
     # @param [Hash, Types::DeleteIndexOperationInput] params
     # @option params [String] :arn
     #   <p>The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon resource name (ARN)</a> of the index that you want to delete.</p>
@@ -479,10 +409,31 @@ module Aws::ResourceExplorer2
       request.send_request(options)
     end
 
-    # <p>Deletes the specified view.</p>
-    #          <p>If the specified view is the default view for its Amazon Web Services Region, then all <a>Search</a> operations in that Region must explicitly specify the view to use
-    #             until you configure a new default by calling the <a>AssociateDefaultView</a>
-    #             operation.</p>
+    # <p>Deletes a Resource Explorer setup configuration. This operation removes indexes and views from the specified Regions or all Regions where Resource Explorer is configured.</p>
+    # @param [Hash, Types::DeleteResourceExplorerSetupInput] params
+    # @option params [Array<String>] :region_list
+    #   <p>A list of Amazon Web Services Regions from which to delete the Resource Explorer configuration. If not specified, the operation uses the <code>DeleteInAllRegions</code> parameter to determine scope.</p>
+    # @option params [Boolean] :delete_in_all_regions
+    #   <p>Specifies whether to delete Resource Explorer configuration from all Regions where it is currently enabled. If this parameter is set to <code>true</code>, a value for <code>RegionList</code> must not be provided. Otherwise, the operation fails with a <code>ValidationException</code> error.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     region_list: ["String"],
+    #     delete_in_all_regions: false
+    #   }
+    #   options = {}
+    #   response = client.delete_resource_explorer_setup(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     task_id: "String", # required
+    #   }
+    # @return [Types::DeleteResourceExplorerSetupOutput]
+    def delete_resource_explorer_setup(params = {}, options = {})
+      request = build_request(:delete_resource_explorer_setup, params)
+      request.send_request(options)
+    end
+
+    # <p>Deletes the specified view.</p> <p>If the specified view is the default view for its Amazon Web Services Region, then all <a>Search</a> operations in that Region must explicitly specify the view to use until you configure a new default by calling the <a>AssociateDefaultView</a> operation.</p>
     # @param [Hash, Types::DeleteViewOperationInput] params
     # @option params [String] :view_arn
     #   <p>The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon resource name (ARN)</a> of the view that you want to delete.</p>
@@ -503,12 +454,7 @@ module Aws::ResourceExplorer2
       request.send_request(options)
     end
 
-    # <p>After you call this operation, the affected Amazon Web Services Region no longer has a default view.
-    #             All <a>Search</a> operations in that Region must explicitly specify a view or
-    #             the operation fails. You can configure a new default by calling the <a>AssociateDefaultView</a> operation.</p>
-    #          <p>If an Amazon Web Services Region doesn't have a default view 
-    #     configured, then users must explicitly specify a view with every <code>Search</code> 
-    #     operation performed in that Region.</p>
+    # <p>After you call this operation, the affected Amazon Web Services Region no longer has a default view. All <a>Search</a> operations in that Region must explicitly specify a view or the operation fails. You can configure a new default by calling the <a>AssociateDefaultView</a> operation.</p> <p>If an Amazon Web Services Region doesn't have a default view configured, then users must explicitly specify a view with every <code>Search</code> operation performed in that Region.</p>
     # @param [Hash, Smithy::Schema::EmptyStructure] params
     # @example Request syntax with placeholder values
     #   params = {}
@@ -523,9 +469,7 @@ module Aws::ResourceExplorer2
       request.send_request(options)
     end
 
-    # <p>Retrieves the status of your account's Amazon Web Services service access, and validates the service
-    #             linked role required to access the multi-account search feature. Only the management
-    #             account can invoke this API call. </p>
+    # <p>Retrieves the status of your account's Amazon Web Services service access, and validates the service linked role required to access the multi-account search feature. Only the management account can invoke this API call. </p>
     # @param [Hash, Smithy::Schema::EmptyStructure] params
     # @example Request syntax with placeholder values
     #   params = {}
@@ -545,8 +489,7 @@ module Aws::ResourceExplorer2
       request.send_request(options)
     end
 
-    # <p>Retrieves the Amazon Resource Name (ARN) of the view that is the default for the
-    #             Amazon Web Services Region in which you call this operation. You can then call <a>GetView</a> to retrieve the details of that view.</p>
+    # <p>Retrieves the Amazon Resource Name (ARN) of the view that is the default for the Amazon Web Services Region in which you call this operation. You can then call <a>GetView</a> to retrieve the details of that view.</p>
     # @param [Hash, Smithy::Schema::EmptyStructure] params
     # @example Request syntax with placeholder values
     #   params = {}
@@ -563,8 +506,7 @@ module Aws::ResourceExplorer2
       request.send_request(options)
     end
 
-    # <p>Retrieves details about the Amazon Web Services Resource Explorer index in the Amazon Web Services Region in which you invoked
-    #             the operation.</p>
+    # <p>Retrieves details about the Amazon Web Services Resource Explorer index in the Amazon Web Services Region in which you invoked the operation.</p>
     # @param [Hash, Smithy::Schema::EmptyStructure] params
     # @example Request syntax with placeholder values
     #   params = {}
@@ -628,6 +570,129 @@ module Aws::ResourceExplorer2
       request.send_request(options)
     end
 
+    # <p>Retrieves the status and details of a Resource Explorer setup operation. This operation returns information about the progress of creating or deleting Resource Explorer configurations across Regions.</p>
+    # @param [Hash, Types::GetResourceExplorerSetupInput] params
+    # @option params [String] :task_id
+    #   <p>The unique identifier of the setup task to retrieve status information for. This ID is returned by <code>CreateResourceExplorerSetup</code> or <code>DeleteResourceExplorerSetup</code> operations.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of Region status results to return in a single response. Valid values are between <code>1</code> and <code>100</code>.</p>
+    # @option params [String] :next_token
+    #   <p>The pagination token from a previous <code>GetResourceExplorerSetup</code> response. Use this token to retrieve the next set of results.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     task_id: "String", # required
+    #     max_results: 1,
+    #     next_token: "String"
+    #   }
+    #   options = {}
+    #   response = client.get_resource_explorer_setup(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     regions: [
+    #       {
+    #         region: "String",
+    #         index: {
+    #           status: "OperationStatus",
+    #           index: {
+    #             region: "String",
+    #             arn: "String",
+    #             type: "IndexType"
+    #           },
+    #           error_details: {
+    #             code: "String",
+    #             message: "String"
+    #           }
+    #         },
+    #         view: {
+    #           status: "OperationStatus",
+    #           view: {
+    #             view_arn: "String",
+    #             view_name: "ViewName",
+    #             owner: "String",
+    #             last_updated_at: Time.now,
+    #             scope: "String",
+    #             included_properties: [
+    #               {
+    #                 name: "String", # required
+    #               }
+    #             ],
+    #             filters: {
+    #               filter_string: "String", # required
+    #             }
+    #           },
+    #           error_details: {
+    #             code: "String",
+    #             message: "String"
+    #           }
+    #         }
+    #       }
+    #     ],
+    #     next_token: "String"
+    #   }
+    # @return [Types::GetResourceExplorerSetupOutput]
+    def get_resource_explorer_setup(params = {}, options = {})
+      request = build_request(:get_resource_explorer_setup, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves information about the Resource Explorer index in the current Amazon Web Services Region. This operation returns the ARN and type of the index if one exists.</p>
+    # @param [Hash, Smithy::Schema::EmptyStructure] params
+    # @example Request syntax with placeholder values
+    #   params = {}
+    #   options = {}
+    #   response = client.get_service_index(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     arn: "String",
+    #     type: "IndexType"
+    #   }
+    # @return [Types::GetServiceIndexOutput]
+    def get_service_index(params = {}, options = {})
+      request = build_request(:get_service_index, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves details about a specific Resource Explorer service view. This operation returns the configuration and properties of the specified view.</p>
+    # @param [Hash, Types::GetServiceViewInput] params
+    # @option params [String] :service_view_arn
+    #   <p>The Amazon Resource Name (ARN) of the service view to retrieve details for.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     service_view_arn: "String", # required
+    #   }
+    #   options = {}
+    #   response = client.get_service_view(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     view: { # required
+    #       service_view_arn: "String", # required
+    #       service_view_name: "ServiceViewName",
+    #       filters: {
+    #         filter_string: "String", # required
+    #       },
+    #       included_properties: [
+    #         {
+    #           name: "String", # required
+    #         }
+    #       ],
+    #       streaming_access_for_service: "String",
+    #       scope_type: "String",
+    #       service_linked_recorder: {
+    #         service_principal: "String",
+    #         recorder_name: "String",
+    #         recorder_type: "RecorderType"
+    #       }
+    #     }
+    #   }
+    # @return [Types::GetServiceViewOutput]
+    def get_service_view(params = {}, options = {})
+      request = build_request(:get_service_view, params)
+      request.send_request(options)
+    end
+
     # <p>Retrieves details of the specified view.</p>
     # @param [Hash, Types::GetViewOperationInput] params
     # @option params [String] :view_arn
@@ -643,6 +708,7 @@ module Aws::ResourceExplorer2
     #   {
     #     view: {
     #       view_arn: "String",
+    #       view_name: "ViewName",
     #       owner: "String",
     #       last_updated_at: Time.now,
     #       scope: "String",
@@ -665,34 +731,16 @@ module Aws::ResourceExplorer2
       request.send_request(options)
     end
 
-    # <p>Retrieves a list of all of the indexes in Amazon Web Services Regions that are currently collecting
-    #             resource information for Amazon Web Services Resource Explorer.</p>
+    # <p>Retrieves a list of all of the indexes in Amazon Web Services Regions that are currently collecting resource information for Amazon Web Services Resource Explorer.</p>
     # @param [Hash, Types::ListIndexesOperationInput] params
     # @option params [String] :type
-    #   <p>If specified, limits the output to only indexes of the specified Type, either
-    #                   <code>LOCAL</code> or <code>AGGREGATOR</code>.</p>
-    #            <p>Use this option to discover the aggregator index for your account.</p>
+    #   <p>If specified, limits the output to only indexes of the specified Type, either <code>LOCAL</code> or <code>AGGREGATOR</code>.</p> <p>Use this option to discover the aggregator index for your account.</p>
     # @option params [Array<String>] :regions
-    #   <p>If specified, limits the response to only information about the index in the specified
-    #               list of Amazon Web Services Regions.</p>
+    #   <p>If specified, limits the response to only information about the index in the specified list of Amazon Web Services Regions.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of results that you want included on each page of the 
-    #       response. If you do not include this parameter, it defaults to a value appropriate to the 
-    #       operation. If additional items exist beyond those included in the current response, the 
-    #       <code>NextToken</code> response element is present and has a value (is not null). Include that 
-    #       value as the <code>NextToken</code> request parameter in the next call to the operation to get 
-    #       the next part of the results.</p>
-    #            <note>
-    #               <p>An API operation can return fewer results than the maximum even when there are 
-    #       more results available. You should check <code>NextToken</code> after every operation to ensure 
-    #       that you receive all of the results.</p>
-    #            </note>
+    #   <p>The maximum number of results that you want included on each page of the response. If you do not include this parameter, it defaults to a value appropriate to the operation. If additional items exist beyond those included in the current response, the <code>NextToken</code> response element is present and has a value (is not null). Include that value as the <code>NextToken</code> request parameter in the next call to the operation to get the next part of the results.</p> <note> <p>An API operation can return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.</p> </note>
     # @option params [String] :next_token
-    #   <p>The parameter for receiving additional results if you receive a 
-    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response 
-    #       indicates that more output is available. Set this parameter to the value of the previous 
-    #       call's <code>NextToken</code> response to indicate where the output should continue 
-    #       from. The pagination tokens expire after 24 hours.</p>
+    #   <p>The parameter for receiving additional results if you receive a <code>NextToken</code> response in a previous request. A <code>NextToken</code> response indicates that more output is available. Set this parameter to the value of the previous call's <code>NextToken</code> response to indicate where the output should continue from. The pagination tokens expire after 24 hours.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     type: "IndexType",
@@ -720,32 +768,14 @@ module Aws::ResourceExplorer2
       request.send_request(options)
     end
 
-    # <p>Retrieves a list of a member's indexes in all Amazon Web Services Regions that are currently
-    #             collecting resource information for Amazon Web Services Resource Explorer. Only the management account or a
-    #             delegated administrator with service access enabled can invoke this API call.
-    #             </p>
+    # <p>Retrieves a list of a member's indexes in all Amazon Web Services Regions that are currently collecting resource information for Amazon Web Services Resource Explorer. Only the management account or a delegated administrator with service access enabled can invoke this API call. </p>
     # @param [Hash, Types::ListIndexesForMembersInput] params
     # @option params [Array<String>] :account_id_list
-    #   <p>The account IDs will limit the output to only indexes from these
-    #               accounts.</p>
+    #   <p>The account IDs will limit the output to only indexes from these accounts.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of results that you want included on each page of the 
-    #       response. If you do not include this parameter, it defaults to a value appropriate to the 
-    #       operation. If additional items exist beyond those included in the current response, the 
-    #       <code>NextToken</code> response element is present and has a value (is not null). Include that 
-    #       value as the <code>NextToken</code> request parameter in the next call to the operation to get 
-    #       the next part of the results.</p>
-    #            <note>
-    #               <p>An API operation can return fewer results than the maximum even when there are 
-    #       more results available. You should check <code>NextToken</code> after every operation to ensure 
-    #       that you receive all of the results.</p>
-    #            </note>
+    #   <p>The maximum number of results that you want included on each page of the response. If you do not include this parameter, it defaults to a value appropriate to the operation. If additional items exist beyond those included in the current response, the <code>NextToken</code> response element is present and has a value (is not null). Include that value as the <code>NextToken</code> request parameter in the next call to the operation to get the next part of the results.</p> <note> <p>An API operation can return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.</p> </note>
     # @option params [String] :next_token
-    #   <p>The parameter for receiving additional results if you receive a 
-    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response 
-    #       indicates that more output is available. Set this parameter to the value of the previous 
-    #       call's <code>NextToken</code> response to indicate where the output should continue 
-    #       from. The pagination tokens expire after 24 hours.</p>
+    #   <p>The parameter for receiving additional results if you receive a <code>NextToken</code> response in a previous request. A <code>NextToken</code> response indicates that more output is available. Set this parameter to the value of the previous call's <code>NextToken</code> response to indicate where the output should continue from. The pagination tokens expire after 24 hours.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     account_id_list: ["AccountId"], # required
@@ -773,31 +803,14 @@ module Aws::ResourceExplorer2
       request.send_request(options)
     end
 
-    # <p>Lists the Amazon resource names (ARNs) of the 
-    #             <a href="https://docs.aws.amazon.com/resource-explorer/latest/userguide/aws-managed-views.html">Amazon Web Services-managed views</a> available 
-    #             in the Amazon Web Services Region in which you call this operation. </p>
+    # <p>Lists the Amazon resource names (ARNs) of the <a href="https://docs.aws.amazon.com/resource-explorer/latest/userguide/aws-managed-views.html">Amazon Web Services-managed views</a> available in the Amazon Web Services Region in which you call this operation. </p>
     # @param [Hash, Types::ListManagedViewsInput] params
     # @option params [Integer] :max_results
-    #   <p>The maximum number of results that you want included on each page of the 
-    #       response. If you do not include this parameter, it defaults to a value appropriate to the 
-    #       operation. If additional items exist beyond those included in the current response, the 
-    #       <code>NextToken</code> response element is present and has a value (is not null). Include that 
-    #       value as the <code>NextToken</code> request parameter in the next call to the operation to get 
-    #       the next part of the results.</p>
-    #            <note>
-    #               <p>An API operation can return fewer results than the maximum even when there are 
-    #       more results available. You should check <code>NextToken</code> after every operation to ensure 
-    #       that you receive all of the results.</p>
-    #            </note>
+    #   <p>The maximum number of results that you want included on each page of the response. If you do not include this parameter, it defaults to a value appropriate to the operation. If additional items exist beyond those included in the current response, the <code>NextToken</code> response element is present and has a value (is not null). Include that value as the <code>NextToken</code> request parameter in the next call to the operation to get the next part of the results.</p> <note> <p>An API operation can return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.</p> </note>
     # @option params [String] :next_token
-    #   <p>The parameter for receiving additional results if you receive a 
-    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response 
-    #       indicates that more output is available. Set this parameter to the value of the previous 
-    #       call's <code>NextToken</code> response to indicate where the output should continue 
-    #       from. The pagination tokens expire after 24 hours.</p>
+    #   <p>The parameter for receiving additional results if you receive a <code>NextToken</code> response in a previous request. A <code>NextToken</code> response indicates that more output is available. Set this parameter to the value of the previous call's <code>NextToken</code> response to indicate where the output should continue from. The pagination tokens expire after 24 hours.</p>
     # @option params [String] :service_principal
-    #   <p>Specifies a service principal name. If specified, then the 
-    #               operation only returns the managed views that are managed by the input service. </p>
+    #   <p>Specifies a service principal name. If specified, then the operation only returns the managed views that are managed by the input service. </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     max_results: 1,
@@ -818,53 +831,16 @@ module Aws::ResourceExplorer2
       request.send_request(options)
     end
 
-    # <p>Returns a list of resources and their details that match the specified criteria. This query must 
-    #             use a view. If you don’t explicitly specify a view, then Resource Explorer uses the default view for the Amazon Web Services Region 
-    #             in which you call this operation. </p>
+    # <p>Returns a list of resources and their details that match the specified criteria. This query must use a view. If you don’t explicitly specify a view, then Resource Explorer uses the default view for the Amazon Web Services Region in which you call this operation. </p>
     # @param [Hash, Types::ListResourcesInput] params
     # @option params [Types::SearchFilter] :filters
-    #   <p>An array of strings that specify which resources are included in the results of 
-    #               queries made using this view. When you use this view in a <a>Search</a> 
-    #               operation, the filter string is combined with the search's <code>QueryString</code> 
-    #               parameter using a logical <code>AND</code> operator.</p>
-    #            <p>For information about the supported syntax, see <a href="https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html">Search query reference for
-    #                   Resource Explorer</a> in the <i>Amazon Web Services Resource Explorer User Guide</i>.</p>
-    #            <important>
-    #               <p>This query string in the context of this operation supports only <a href="https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html#query-syntax-filters">filter
-    #                       prefixes</a> with optional <a href="https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html#query-syntax-operators">operators</a>. It doesn't support free-form text. For example, the 
-    #                       string <code>region:us* service:ec2 -tag:stage=prod</code> includes all Amazon EC2 
-    #                       resources in any Amazon Web Services Region that begins with the letters <code>us</code> and is
-    #                       <i>not</i> tagged with a key <code>Stage</code> that has the value
-    #                       <code>prod</code>.</p>
-    #            </important>
+    #   <p>An array of strings that specify which resources are included in the results of queries made using this view. When you use this view in a <a>Search</a> operation, the filter string is combined with the search's <code>QueryString</code> parameter using a logical <code>AND</code> operator.</p> <p>For information about the supported syntax, see <a href="https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html">Search query reference for Resource Explorer</a> in the <i>Amazon Web Services Resource Explorer User Guide</i>.</p> <important> <p>This query string in the context of this operation supports only <a href="https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html#query-syntax-filters">filter prefixes</a> with optional <a href="https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html#query-syntax-operators">operators</a>. It doesn't support free-form text. For example, the string <code>region:us* service:ec2 -tag:stage=prod</code> includes all Amazon EC2 resources in any Amazon Web Services Region that begins with the letters <code>us</code> and is <i>not</i> tagged with a key <code>Stage</code> that has the value <code>prod</code>.</p> </important>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of results that you want included on each page of the 
-    #       response. If you do not include this parameter, it defaults to a value appropriate to the 
-    #       operation. If additional items exist beyond those included in the current response, the 
-    #       <code>NextToken</code> response element is present and has a value (is not null). Include that 
-    #       value as the <code>NextToken</code> request parameter in the next call to the operation to get 
-    #       the next part of the results.</p>
-    #            <note>
-    #               <p>An API operation can return fewer results than the maximum even when there are 
-    #       more results available. You should check <code>NextToken</code> after every operation to ensure 
-    #       that you receive all of the results.</p>
-    #            </note>
+    #   <p>The maximum number of results that you want included on each page of the response. If you do not include this parameter, it defaults to a value appropriate to the operation. If additional items exist beyond those included in the current response, the <code>NextToken</code> response element is present and has a value (is not null). Include that value as the <code>NextToken</code> request parameter in the next call to the operation to get the next part of the results.</p> <note> <p>An API operation can return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.</p> </note>
     # @option params [String] :view_arn
-    #   <p>Specifies the Amazon resource name (ARN) of the view to use for the query. If you don't 
-    #               specify a value for this parameter, then the operation automatically uses the default view 
-    #               for the Amazon Web Services Region in which you called this operation. If the Region either doesn't have 
-    #               a default view or if you don't have permission to use the default view, then the operation 
-    #               fails with a 401 Unauthorized exception.</p>
+    #   <p>Specifies the Amazon resource name (ARN) of the view to use for the query. If you don't specify a value for this parameter, then the operation automatically uses the default view for the Amazon Web Services Region in which you called this operation. If the Region either doesn't have a default view or if you don't have permission to use the default view, then the operation fails with a 401 Unauthorized exception.</p>
     # @option params [String] :next_token
-    #   <p>The parameter for receiving additional results if you receive a 
-    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response 
-    #       indicates that more output is available. Set this parameter to the value of the previous 
-    #       call's <code>NextToken</code> response to indicate where the output should continue 
-    #       from. The pagination tokens expire after 24 hours.</p>
-    #            <note>
-    #               <p>The <code>ListResources</code> operation 
-    #               does not generate a <code>NextToken</code> if you set <code>MaxResults</code> to 1000. </p>
-    #            </note>
+    #   <p>The parameter for receiving additional results if you receive a <code>NextToken</code> response in a previous request. A <code>NextToken</code> response indicates that more output is available. Set this parameter to the value of the previous call's <code>NextToken</code> response to indicate where the output should continue from. The pagination tokens expire after 24 hours.</p> <note> <p>The <code>ListResources</code> operation does not generate a <code>NextToken</code> if you set <code>MaxResults</code> to 1000. </p> </note>
     # @example Request syntax with placeholder values
     #   params = {
     #     filters: {
@@ -886,6 +862,7 @@ module Aws::ResourceExplorer2
     #         region: "String",
     #         resource_type: "String",
     #         service: "String",
+    #         cfn_resource_type: "String",
     #         last_reported_at: Time.now,
     #         properties: [
     #           {
@@ -905,26 +882,101 @@ module Aws::ResourceExplorer2
       request.send_request(options)
     end
 
+    # <p>Lists all Resource Explorer indexes across the specified Amazon Web Services Regions. This operation returns information about indexes including their ARNs, types, and Regions.</p>
+    # @param [Hash, Types::ListServiceIndexesInput] params
+    # @option params [Array<String>] :regions
+    #   <p>A list of Amazon Web Services Regions to include in the search for indexes. If not specified, indexes from all Regions are returned.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of index results to return in a single response. Valid values are between <code>1</code> and <code>100</code>.</p>
+    # @option params [String] :next_token
+    #   <p>The pagination token from a previous <code>ListServiceIndexes</code> response. Use this token to retrieve the next set of results.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     regions: ["String"],
+    #     max_results: 1,
+    #     next_token: "String"
+    #   }
+    #   options = {}
+    #   response = client.list_service_indexes(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     indexes: [
+    #       {
+    #         region: "String",
+    #         arn: "String",
+    #         type: "IndexType"
+    #       }
+    #     ],
+    #     next_token: "String"
+    #   }
+    # @return [Types::ListServiceIndexesOutput]
+    def list_service_indexes(params = {}, options = {})
+      request = build_request(:list_service_indexes, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists all Resource Explorer service views available in the current Amazon Web Services account. This operation returns the ARNs of available service views.</p>
+    # @param [Hash, Types::ListServiceViewsInput] params
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of service view results to return in a single response. Valid values are between <code>1</code> and <code>50</code>.</p>
+    # @option params [String] :next_token
+    #   <p>The pagination token from a previous <code>ListServiceViews</code> response. Use this token to retrieve the next set of results.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     max_results: 1,
+    #     next_token: "String"
+    #   }
+    #   options = {}
+    #   response = client.list_service_views(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     next_token: "String",
+    #     service_views: ["String"]
+    #   }
+    # @return [Types::ListServiceViewsOutput]
+    def list_service_views(params = {}, options = {})
+      request = build_request(:list_service_views, params)
+      request.send_request(options)
+    end
+
+    # <p>Returns a list of Amazon Web Services services that have been granted streaming access to your Resource Explorer data. Streaming access allows Amazon Web Services services to receive real-time updates about your resources as they are indexed by Resource Explorer.</p>
+    # @param [Hash, Types::ListStreamingAccessForServicesInput] params
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of streaming access entries to return in the response. If there are more results available, the response includes a NextToken value that you can use in a subsequent call to get the next set of results. The value must be between 1 and 50. If you don't specify a value, the default is 50.</p>
+    # @option params [String] :next_token
+    #   <p>The parameter for receiving additional results if you receive a <code>NextToken</code> response in a previous request. A <code>NextToken</code> response indicates that more output is available. Set this parameter to the value of the previous call's <code>NextToken</code> response to indicate where the output should continue from. The pagination tokens expire after 24 hours.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     max_results: 1,
+    #     next_token: "String"
+    #   }
+    #   options = {}
+    #   response = client.list_streaming_access_for_services(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     streaming_access_for_services: [ # required
+    #       {
+    #         service_principal: "String", # required
+    #         created_at: Time.now, # required
+    #       }
+    #     ],
+    #     next_token: "String"
+    #   }
+    # @return [Types::ListStreamingAccessForServicesOutput]
+    def list_streaming_access_for_services(params = {}, options = {})
+      request = build_request(:list_streaming_access_for_services, params)
+      request.send_request(options)
+    end
+
     # <p>Retrieves a list of all resource types currently supported by Amazon Web Services Resource Explorer.</p>
     # @param [Hash, Types::ListSupportedResourceTypesOperationInput] params
     # @option params [String] :next_token
-    #   <p>The parameter for receiving additional results if you receive a 
-    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response 
-    #       indicates that more output is available. Set this parameter to the value of the previous 
-    #       call's <code>NextToken</code> response to indicate where the output should continue 
-    #       from. The pagination tokens expire after 24 hours.</p>
+    #   <p>The parameter for receiving additional results if you receive a <code>NextToken</code> response in a previous request. A <code>NextToken</code> response indicates that more output is available. Set this parameter to the value of the previous call's <code>NextToken</code> response to indicate where the output should continue from. The pagination tokens expire after 24 hours.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of results that you want included on each page of the 
-    #       response. If you do not include this parameter, it defaults to a value appropriate to the 
-    #       operation. If additional items exist beyond those included in the current response, the 
-    #       <code>NextToken</code> response element is present and has a value (is not null). Include that 
-    #       value as the <code>NextToken</code> request parameter in the next call to the operation to get 
-    #       the next part of the results.</p>
-    #            <note>
-    #               <p>An API operation can return fewer results than the maximum even when there are 
-    #       more results available. You should check <code>NextToken</code> after every operation to ensure 
-    #       that you receive all of the results.</p>
-    #            </note>
+    #   <p>The maximum number of results that you want included on each page of the response. If you do not include this parameter, it defaults to a value appropriate to the operation. If additional items exist beyond those included in the current response, the <code>NextToken</code> response element is present and has a value (is not null). Include that value as the <code>NextToken</code> request parameter in the next call to the operation to get the next part of the results.</p> <note> <p>An API operation can return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.</p> </note>
     # @example Request syntax with placeholder values
     #   params = {
     #     next_token: "String",
@@ -938,7 +990,8 @@ module Aws::ResourceExplorer2
     #     resource_types: [
     #       {
     #         service: "String",
-    #         resource_type: "String"
+    #         resource_type: "String",
+    #         cfn_resource_types: ["String"]
     #       }
     #     ],
     #     next_token: "String"
@@ -972,35 +1025,12 @@ module Aws::ResourceExplorer2
       request.send_request(options)
     end
 
-    # <p>Lists the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon resource names (ARNs)</a> of the views available in the Amazon Web Services Region in which you
-    #             call this operation.</p>
-    #          <note>
-    #             <p>Always check the <code>NextToken</code> response parameter 
-    # for a <code>null</code> value when calling a paginated operation. These operations can 
-    # occasionally return an empty set of results even when there are more results available. The 
-    # <code>NextToken</code> response parameter value is <code>null</code>
-    #                <i>only</i> 
-    # when there are no more results to display.</p>
-    #          </note>
+    # <p>Lists the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon resource names (ARNs)</a> of the views available in the Amazon Web Services Region in which you call this operation.</p> <note> <p>Always check the <code>NextToken</code> response parameter for a <code>null</code> value when calling a paginated operation. These operations can occasionally return an empty set of results even when there are more results available. The <code>NextToken</code> response parameter value is <code>null</code> <i>only</i> when there are no more results to display.</p> </note>
     # @param [Hash, Types::ListViewsOperationInput] params
     # @option params [String] :next_token
-    #   <p>The parameter for receiving additional results if you receive a 
-    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response 
-    #       indicates that more output is available. Set this parameter to the value of the previous 
-    #       call's <code>NextToken</code> response to indicate where the output should continue 
-    #       from. The pagination tokens expire after 24 hours.</p>
+    #   <p>The parameter for receiving additional results if you receive a <code>NextToken</code> response in a previous request. A <code>NextToken</code> response indicates that more output is available. Set this parameter to the value of the previous call's <code>NextToken</code> response to indicate where the output should continue from. The pagination tokens expire after 24 hours.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of results that you want included on each page of the 
-    #       response. If you do not include this parameter, it defaults to a value appropriate to the 
-    #       operation. If additional items exist beyond those included in the current response, the 
-    #       <code>NextToken</code> response element is present and has a value (is not null). Include that 
-    #       value as the <code>NextToken</code> request parameter in the next call to the operation to get 
-    #       the next part of the results.</p>
-    #            <note>
-    #               <p>An API operation can return fewer results than the maximum even when there are 
-    #       more results available. You should check <code>NextToken</code> after every operation to ensure 
-    #       that you receive all of the results.</p>
-    #            </note>
+    #   <p>The maximum number of results that you want included on each page of the response. If you do not include this parameter, it defaults to a value appropriate to the operation. If additional items exist beyond those included in the current response, the <code>NextToken</code> response element is present and has a value (is not null). Include that value as the <code>NextToken</code> request parameter in the next call to the operation to get the next part of the results.</p> <note> <p>An API operation can return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.</p> </note>
     # @example Request syntax with placeholder values
     #   params = {
     #     next_token: "String",
@@ -1020,56 +1050,16 @@ module Aws::ResourceExplorer2
       request.send_request(options)
     end
 
-    # <p>Searches for resources and displays details about all resources that match the
-    #             specified criteria. You must specify a query string.</p>
-    #          <p>All search queries must use a view. If you don't explicitly specify a view, then
-    #             Amazon Web Services Resource Explorer uses the default view for the Amazon Web Services Region in which you call this operation.
-    #             The results are the logical intersection of the results that match both the
-    #                 <code>QueryString</code> parameter supplied to this operation and the
-    #                 <code>SearchFilter</code> parameter attached to the view.</p>
-    #          <p>For the complete syntax supported by the <code>QueryString</code> parameter, see
-    #                 <a href="https://docs.aws.amazon.com/resource-explorer/latest/APIReference/about-query-syntax.html">Search
-    #                 query syntax reference for Resource Explorer</a>.</p>
-    #          <p>If your search results are empty, or are missing results that you think should be
-    #             there, see <a href="https://docs.aws.amazon.com/resource-explorer/latest/userguide/troubleshooting_search.html">Troubleshooting Resource Explorer
-    #                 search</a>.</p>
+    # <p>Searches for resources and displays details about all resources that match the specified criteria. You must specify a query string.</p> <p>All search queries must use a view. If you don't explicitly specify a view, then Amazon Web Services Resource Explorer uses the default view for the Amazon Web Services Region in which you call this operation. The results are the logical intersection of the results that match both the <code>QueryString</code> parameter supplied to this operation and the <code>SearchFilter</code> parameter attached to the view.</p> <p>For the complete syntax supported by the <code>QueryString</code> parameter, see <a href="https://docs.aws.amazon.com/resource-explorer/latest/APIReference/about-query-syntax.html">Search query syntax reference for Resource Explorer</a>.</p> <p>If your search results are empty, or are missing results that you think should be there, see <a href="https://docs.aws.amazon.com/resource-explorer/latest/userguide/troubleshooting_search.html">Troubleshooting Resource Explorer search</a>.</p>
     # @param [Hash, Types::SearchOperationInput] params
     # @option params [String] :query_string
-    #   <p>A string that includes keywords and filters that specify the resources that you want
-    #               to include in the results.</p>
-    #            <p>For the complete syntax supported by the <code>QueryString</code> parameter, see
-    #                   <a href="https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html">Search query syntax reference for Resource Explorer</a>.</p>
-    #            <p>The search is completely case insensitive. You can specify an empty string to return
-    #               all results up to the limit of 1,000 total results.</p>
-    #            <note>
-    #               <p>The operation can return only the first 1,000 results. If the
-    #                   resource you want is not included, then use a different value for
-    #                       <code>QueryString</code> to refine the results.</p>
-    #            </note>
+    #   <p>A string that includes keywords and filters that specify the resources that you want to include in the results.</p> <p>For the complete syntax supported by the <code>QueryString</code> parameter, see <a href="https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html">Search query syntax reference for Resource Explorer</a>.</p> <p>The search is completely case insensitive. You can specify an empty string to return all results up to the limit of 1,000 total results.</p> <note> <p>The operation can return only the first 1,000 results. If the resource you want is not included, then use a different value for <code>QueryString</code> to refine the results.</p> </note>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of results that you want included on each page of the 
-    #       response. If you do not include this parameter, it defaults to a value appropriate to the 
-    #       operation. If additional items exist beyond those included in the current response, the 
-    #       <code>NextToken</code> response element is present and has a value (is not null). Include that 
-    #       value as the <code>NextToken</code> request parameter in the next call to the operation to get 
-    #       the next part of the results.</p>
-    #            <note>
-    #               <p>An API operation can return fewer results than the maximum even when there are 
-    #       more results available. You should check <code>NextToken</code> after every operation to ensure 
-    #       that you receive all of the results.</p>
-    #            </note>
+    #   <p>The maximum number of results that you want included on each page of the response. If you do not include this parameter, it defaults to a value appropriate to the operation. If additional items exist beyond those included in the current response, the <code>NextToken</code> response element is present and has a value (is not null). Include that value as the <code>NextToken</code> request parameter in the next call to the operation to get the next part of the results.</p> <note> <p>An API operation can return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.</p> </note>
     # @option params [String] :view_arn
-    #   <p>Specifies the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon resource name (ARN)</a> of the view to use for the query. If you don't specify a
-    #               value for this parameter, then the operation automatically uses the default view for the
-    #               Amazon Web Services Region in which you called this operation. If the Region either doesn't have a
-    #               default view or if you don't have permission to use the default view, then the operation
-    #               fails with a <code>401 Unauthorized</code> exception.</p>
+    #   <p>Specifies the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon resource name (ARN)</a> of the view to use for the query. If you don't specify a value for this parameter, then the operation automatically uses the default view for the Amazon Web Services Region in which you called this operation. If the Region either doesn't have a default view or if you don't have permission to use the default view, then the operation fails with a <code>401 Unauthorized</code> exception.</p>
     # @option params [String] :next_token
-    #   <p>The parameter for receiving additional results if you receive a 
-    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response 
-    #       indicates that more output is available. Set this parameter to the value of the previous 
-    #       call's <code>NextToken</code> response to indicate where the output should continue 
-    #       from. The pagination tokens expire after 24 hours.</p>
+    #   <p>The parameter for receiving additional results if you receive a <code>NextToken</code> response in a previous request. A <code>NextToken</code> response indicates that more output is available. Set this parameter to the value of the previous call's <code>NextToken</code> response to indicate where the output should continue from. The pagination tokens expire after 24 hours.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     query_string: "QueryString", # required
@@ -1089,6 +1079,7 @@ module Aws::ResourceExplorer2
     #         region: "String",
     #         resource_type: "String",
     #         service: "String",
+    #         cfn_resource_type: "String",
     #         last_reported_at: Time.now,
     #         properties: [
     #           {
@@ -1115,11 +1106,9 @@ module Aws::ResourceExplorer2
     # <p>Adds one or more tag key and value pairs to an Amazon Web Services Resource Explorer view or index.</p>
     # @param [Hash, Types::TagResourceOperationInput] params
     # @option params [String] :resource_arn
-    #   <p>The Amazon Resource Name (ARN) of the view or index that you want to attach tags
-    #               to.</p>
+    #   <p>The Amazon Resource Name (ARN) of the view or index that you want to attach tags to.</p>
     # @option params [Hash<String, String>] :tags
-    #   <p>A list of tag key and value pairs that you want to attach to the specified view or
-    #               index.</p>
+    #   <p>A list of tag key and value pairs that you want to attach to the specified view or index.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     resource_arn: "String", # required
@@ -1141,11 +1130,9 @@ module Aws::ResourceExplorer2
     # <p>Removes one or more tag key and value pairs from an Amazon Web Services Resource Explorer view or index.</p>
     # @param [Hash, Types::UntagResourceOperationInput] params
     # @option params [String] :resource_arn
-    #   <p>The Amazon Resource Name (ARN) of the view or index that you want to remove tags
-    #               from.</p>
+    #   <p>The Amazon Resource Name (ARN) of the view or index that you want to remove tags from.</p>
     # @option params [Array<String>] :tag_keys
-    #   <p>A list of the keys for the tags that you want to remove from the specified view or
-    #               index.</p>
+    #   <p>A list of the keys for the tags that you want to remove from the specified view or index.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     resource_arn: "String", # required
@@ -1162,70 +1149,12 @@ module Aws::ResourceExplorer2
       request.send_request(options)
     end
 
-    # <p>Changes the type of the index from one of the following types to the other. For more
-    #             information about indexes and the role they perform in Amazon Web Services Resource Explorer, see <a href="https://docs.aws.amazon.com/resource-explorer/latest/userguide/manage-aggregator-region.html">Turning on
-    #                 cross-Region search by creating an aggregator index</a> in the
-    #                 <i>Amazon Web Services Resource Explorer User Guide</i>.</p>
-    #          <ul>
-    #             <li>
-    #                <p>
-    #                   <b>
-    #                      <code>AGGREGATOR</code> index type</b>
-    #                </p>
-    #                <p>The index contains information about resources from all Amazon Web Services Regions in the
-    #                     Amazon Web Services account in which you've created a Resource Explorer index. Resource information from
-    #                     all other Regions is replicated to this Region's index.</p>
-    #                <p>When you change the index type to <code>AGGREGATOR</code>, Resource Explorer turns on
-    #                     replication of all discovered resource information from the other Amazon Web Services Regions
-    #                     in your account to this index. You can then, from this Region only, perform
-    #                     resource search queries that span all Amazon Web Services Regions in the Amazon Web Services account.
-    #                     Turning on replication from all other Regions is performed by asynchronous
-    #                     background tasks. You can check the status of the asynchronous tasks by using
-    #                     the <a>GetIndex</a> operation. When the asynchronous tasks complete,
-    #                     the <code>Status</code> response of that operation changes from
-    #                         <code>UPDATING</code> to <code>ACTIVE</code>. After that, you can start to
-    #                     see results from other Amazon Web Services Regions in query results. However, it can take
-    #                     several hours for replication from all other Regions to complete.</p>
-    #                <important>
-    #                   <p>You can have only one aggregator index per Amazon Web Services account. Before you can
-    #                         promote a different index to be the aggregator index for the account, you must
-    #                         first demote the existing aggregator index to type <code>LOCAL</code>.</p>
-    #                </important>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <b>
-    #                      <code>LOCAL</code> index type</b>
-    #                </p>
-    #                <p>The index contains information about resources in only the Amazon Web Services Region in
-    #                     which the index exists. If an aggregator index in another Region exists, then
-    #                     information in this local index is replicated to the aggregator index.</p>
-    #                <p>When you change the index type to <code>LOCAL</code>, Resource Explorer turns off the
-    #                     replication of resource information from all other Amazon Web Services Regions in the
-    #                     Amazon Web Services account to this Region. The aggregator index remains in the
-    #                         <code>UPDATING</code> state until all replication with other Regions
-    #                     successfully stops. You can check the status of the asynchronous task by using
-    #                     the <a>GetIndex</a> operation. When Resource Explorer successfully stops all
-    #                     replication with other Regions, the <code>Status</code> response of that
-    #                     operation changes from <code>UPDATING</code> to <code>ACTIVE</code>. Separately,
-    #                     the resource information from other Regions that was previously stored in the
-    #                     index is deleted within 30 days by another background task. Until that
-    #                     asynchronous task completes, some results from other Regions can continue to
-    #                     appear in search results.</p>
-    #                <important>
-    #                   <p>After you demote an aggregator index to a local index, you must wait
-    #                         24 hours before you can promote another index to be the new
-    #                         aggregator index for the account.</p>
-    #                </important>
-    #             </li>
-    #          </ul>
+    # <p>Changes the type of the index from one of the following types to the other. For more information about indexes and the role they perform in Amazon Web Services Resource Explorer, see <a href="https://docs.aws.amazon.com/resource-explorer/latest/userguide/manage-aggregator-region.html">Turning on cross-Region search by creating an aggregator index</a> in the <i>Amazon Web Services Resource Explorer User Guide</i>.</p> <ul> <li> <p> <b> <code>AGGREGATOR</code> index type</b> </p> <p>The index contains information about resources from all Amazon Web Services Regions in the Amazon Web Services account in which you've created a Resource Explorer index. Resource information from all other Regions is replicated to this Region's index.</p> <p>When you change the index type to <code>AGGREGATOR</code>, Resource Explorer turns on replication of all discovered resource information from the other Amazon Web Services Regions in your account to this index. You can then, from this Region only, perform resource search queries that span all Amazon Web Services Regions in the Amazon Web Services account. Turning on replication from all other Regions is performed by asynchronous background tasks. You can check the status of the asynchronous tasks by using the <a>GetIndex</a> operation. When the asynchronous tasks complete, the <code>Status</code> response of that operation changes from <code>UPDATING</code> to <code>ACTIVE</code>. After that, you can start to see results from other Amazon Web Services Regions in query results. However, it can take several hours for replication from all other Regions to complete.</p> <important> <p>You can have only one aggregator index per Amazon Web Services account. Before you can promote a different index to be the aggregator index for the account, you must first demote the existing aggregator index to type <code>LOCAL</code>.</p> </important> </li> <li> <p> <b> <code>LOCAL</code> index type</b> </p> <p>The index contains information about resources in only the Amazon Web Services Region in which the index exists. If an aggregator index in another Region exists, then information in this local index is replicated to the aggregator index.</p> <p>When you change the index type to <code>LOCAL</code>, Resource Explorer turns off the replication of resource information from all other Amazon Web Services Regions in the Amazon Web Services account to this Region. The aggregator index remains in the <code>UPDATING</code> state until all replication with other Regions successfully stops. You can check the status of the asynchronous task by using the <a>GetIndex</a> operation. When Resource Explorer successfully stops all replication with other Regions, the <code>Status</code> response of that operation changes from <code>UPDATING</code> to <code>ACTIVE</code>. Separately, the resource information from other Regions that was previously stored in the index is deleted within 30 days by another background task. Until that asynchronous task completes, some results from other Regions can continue to appear in search results.</p> <important> <p>After you demote an aggregator index to a local index, you must wait 24 hours before you can promote another index to be the new aggregator index for the account.</p> </important> </li> </ul>
     # @param [Hash, Types::UpdateIndexTypeOperationInput] params
     # @option params [String] :arn
     #   <p>The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon resource name (ARN)</a> of the index that you want to update.</p>
     # @option params [String] :type
-    #   <p>The type of the index. To understand the difference between <code>LOCAL</code> and
-    #                   <code>AGGREGATOR</code>, see <a href="https://docs.aws.amazon.com/resource-explorer/latest/userguide/manage-aggregator-region.html">Turning on cross-Region
-    #                   search</a> in the <i>Amazon Web Services Resource Explorer User Guide</i>.</p>
+    #   <p>The type of the index. To understand the difference between <code>LOCAL</code> and <code>AGGREGATOR</code>, see <a href="https://docs.aws.amazon.com/resource-explorer/latest/userguide/manage-aggregator-region.html">Turning on cross-Region search</a> in the <i>Amazon Web Services Resource Explorer User Guide</i>.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     arn: "String", # required
@@ -1247,30 +1176,14 @@ module Aws::ResourceExplorer2
       request.send_request(options)
     end
 
-    # <p>Modifies some of the details of a view. You can change the filter string and the list
-    #             of included properties. You can't change the name of the view.</p>
+    # <p>Modifies some of the details of a view. You can change the filter string and the list of included properties. You can't change the name of the view.</p>
     # @param [Hash, Types::UpdateViewOperationInput] params
     # @option params [String] :view_arn
     #   <p>The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon resource name (ARN)</a> of the view that you want to modify.</p>
     # @option params [Array<Types::IncludedProperty>] :included_properties
-    #   <p>Specifies optional fields that you want included in search results from this
-    #           view. It is a list of objects that each describe a field to include.</p>
-    #            <p>The default is an empty list, with no optional fields included in the results.</p>
+    #   <p>Specifies optional fields that you want included in search results from this view. It is a list of objects that each describe a field to include.</p> <p>The default is an empty list, with no optional fields included in the results.</p>
     # @option params [Types::SearchFilter] :filters
-    #   <p>An array of strings that specify which resources are included in the results of 
-    #               queries made using this view. When you use this view in a <a>Search</a> 
-    #               operation, the filter string is combined with the search's <code>QueryString</code> 
-    #               parameter using a logical <code>AND</code> operator.</p>
-    #            <p>For information about the supported syntax, see <a href="https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html">Search query reference for
-    #                   Resource Explorer</a> in the <i>Amazon Web Services Resource Explorer User Guide</i>.</p>
-    #            <important>
-    #               <p>This query string in the context of this operation supports only <a href="https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html#query-syntax-filters">filter
-    #                       prefixes</a> with optional <a href="https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html#query-syntax-operators">operators</a>. It doesn't support free-form text. For example, the 
-    #                       string <code>region:us* service:ec2 -tag:stage=prod</code> includes all Amazon EC2 
-    #                       resources in any Amazon Web Services Region that begins with the letters <code>us</code> and is
-    #                       <i>not</i> tagged with a key <code>Stage</code> that has the value
-    #                       <code>prod</code>.</p>
-    #            </important>
+    #   <p>An array of strings that specify which resources are included in the results of queries made using this view. When you use this view in a <a>Search</a> operation, the filter string is combined with the search's <code>QueryString</code> parameter using a logical <code>AND</code> operator.</p> <p>For information about the supported syntax, see <a href="https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html">Search query reference for Resource Explorer</a> in the <i>Amazon Web Services Resource Explorer User Guide</i>.</p> <important> <p>This query string in the context of this operation supports only <a href="https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html#query-syntax-filters">filter prefixes</a> with optional <a href="https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html#query-syntax-operators">operators</a>. It doesn't support free-form text. For example, the string <code>region:us* service:ec2 -tag:stage=prod</code> includes all Amazon EC2 resources in any Amazon Web Services Region that begins with the letters <code>us</code> and is <i>not</i> tagged with a key <code>Stage</code> that has the value <code>prod</code>.</p> </important>
     # @example Request syntax with placeholder values
     #   params = {
     #     view_arn: "String", # required
@@ -1290,6 +1203,7 @@ module Aws::ResourceExplorer2
     #   {
     #     view: {
     #       view_arn: "String",
+    #       view_name: "ViewName",
     #       owner: "String",
     #       last_updated_at: Time.now,
     #       scope: "String",

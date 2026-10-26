@@ -1,0 +1,6306 @@
+module Aws::SecurityAgent
+  module Types
+
+    class AWSResources
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpcs: Array[Types::VpcConfig],
+        ?log_groups: Array[String],
+        ?s3_buckets: Array[String],
+        ?secret_arns: Array[String],
+        ?lambda_function_arns: Array[String],
+        ?iam_roles: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpcs: Array[Types::VpcConfig]?
+      attr_accessor log_groups: Array[String]?
+      attr_accessor s3_buckets: Array[String]?
+      attr_accessor secret_arns: Array[String]?
+      attr_accessor lambda_function_arns: Array[String]?
+      attr_accessor iam_roles: Array[String]?
+    end
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module AccessType
+      PRIVATE: String
+      PUBLIC: String
+    end
+
+    class Actor
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?uris: Array[String],
+        ?authentication: Types::Authentication,
+        ?description: String,
+        ?enable_email_mfa: bool,
+        ?mfa_forwarding_address: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor uris: Array[String]?
+      attr_accessor authentication: Types::Authentication?
+      attr_accessor description: String?
+      attr_accessor enable_email_mfa: bool?
+      attr_accessor mfa_forwarding_address: String?
+    end
+
+    class ActorMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sender: String,
+        ?subject: String,
+        ?body: String,
+        ?received_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sender: String?
+      attr_accessor subject: String?
+      attr_accessor body: String?
+      attr_accessor received_at: Time?
+    end
+
+    class AddArtifactInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agent_space_id: String,
+        ?artifact_content: String,
+        ?artifact_type: String,
+        ?file_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agent_space_id: String?
+      attr_accessor artifact_content: String?
+      attr_accessor artifact_type: String?
+      attr_accessor file_name: String?
+    end
+
+    class AddArtifactOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?artifact_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor artifact_id: String?
+    end
+
+    class AgentSpace
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agent_space_id: String,
+        ?name: String,
+        ?description: String,
+        ?aws_resources: Types::AWSResources,
+        ?target_domain_ids: Array[String],
+        ?code_review_settings: Types::CodeReviewSettings,
+        ?kms_key_id: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agent_space_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor aws_resources: Types::AWSResources?
+      attr_accessor target_domain_ids: Array[String]?
+      attr_accessor code_review_settings: Types::CodeReviewSettings?
+      attr_accessor kms_key_id: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class AgentSpaceSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agent_space_id: String,
+        ?name: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agent_space_id: String?
+      attr_accessor name: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class ApplicationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?application_name: String,
+        ?domain: String,
+        ?default_kms_key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor application_name: String?
+      attr_accessor domain: String?
+      attr_accessor default_kms_key_id: String?
+    end
+
+    class Artifact
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?contents: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contents: String?
+      attr_accessor type: String?
+    end
+
+    class ArtifactMetadataItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agent_space_id: String,
+        ?artifact_id: String,
+        ?file_name: String,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agent_space_id: String?
+      attr_accessor artifact_id: String?
+      attr_accessor file_name: String?
+      attr_accessor updated_at: Time?
+    end
+
+    class ArtifactSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?artifact_id: String,
+        ?file_name: String,
+        ?artifact_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor artifact_id: String?
+      attr_accessor file_name: String?
+      attr_accessor artifact_type: String?
+    end
+
+    module ArtifactType
+      TXT: String
+      PNG: String
+      JPEG: String
+      MD: String
+      PDF: String
+      DOCX: String
+      DOC: String
+      JSON: String
+      YAML: String
+    end
+
+    class Assets
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoints: Array[Types::Endpoint],
+        ?actors: Array[Types::Actor],
+        ?documents: Array[Types::DocumentInfo],
+        ?source_code: Array[Types::SourceCodeRepository],
+        ?integrated_repositories: Array[Types::IntegratedRepository],
+        ?trusted_ca_certificates: Array[Types::TrustedCaCertificate],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoints: Array[Types::Endpoint]?
+      attr_accessor actors: Array[Types::Actor]?
+      attr_accessor documents: Array[Types::DocumentInfo]?
+      attr_accessor source_code: Array[Types::SourceCodeRepository]?
+      attr_accessor integrated_repositories: Array[Types::IntegratedRepository]?
+      attr_accessor trusted_ca_certificates: Array[Types::TrustedCaCertificate]?
+    end
+
+    class Authentication
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?provider_type: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor provider_type: String?
+      attr_accessor value: String?
+    end
+
+    module AuthenticationProviderType
+      SECRETS_MANAGER: String
+      AWS_LAMBDA: String
+      AWS_IAM_ROLE: String
+      AWS_INTERNAL: String
+    end
+
+    class AzureDevOpsIntegrationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?state: String,
+        ?organization_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor state: String?
+      attr_accessor organization_name: String?
+    end
+
+    class AzureDevOpsRepositoryMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?provider_resource_id: String,
+        ?organization: String,
+        ?project: String,
+        ?project_id: String,
+        ?access_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor provider_resource_id: String?
+      attr_accessor organization: String?
+      attr_accessor project: String?
+      attr_accessor project_id: String?
+      attr_accessor access_type: String?
+    end
+
+    class AzureDevOpsRepositoryResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?organization: String,
+        ?project: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor organization: String?
+      attr_accessor project: String?
+    end
+
+    class AzureDevOpsResourceCapabilities
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trigger_filter_groups: Array[Types::TriggerFilterGroup],
+        ?leave_comments: bool,
+        ?remediate_code: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trigger_filter_groups: Array[Types::TriggerFilterGroup]?
+      attr_accessor leave_comments: bool?
+      attr_accessor remediate_code: bool?
+    end
+
+    class BatchCreateSecurityRequirementResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pack_id: String,
+        ?name: String,
+        ?description: String,
+        ?domain: String,
+        ?evaluation: String,
+        ?remediation: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pack_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor domain: String?
+      attr_accessor evaluation: String?
+      attr_accessor remediation: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class BatchCreateSecurityRequirementsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pack_id: String,
+        ?security_requirements: Array[Types::CreateSecurityRequirementEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pack_id: String?
+      attr_accessor security_requirements: Array[Types::CreateSecurityRequirementEntry]?
+    end
+
+    class BatchCreateSecurityRequirementsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?security_requirements: Array[Types::BatchCreateSecurityRequirementResult],
+        ?errors: Array[Types::BatchSecurityRequirementError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor security_requirements: Array[Types::BatchCreateSecurityRequirementResult]?
+      attr_accessor errors: Array[Types::BatchSecurityRequirementError]?
+    end
+
+    class BatchDeleteCodeReviewsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code_review_ids: Array[String],
+        ?agent_space_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code_review_ids: Array[String]?
+      attr_accessor agent_space_id: String?
+    end
+
+    class BatchDeleteCodeReviewsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deleted: Array[String],
+        ?failed: Array[Types::DeleteCodeReviewFailure],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deleted: Array[String]?
+      attr_accessor failed: Array[Types::DeleteCodeReviewFailure]?
+    end
+
+    class BatchDeletePentestsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pentest_ids: Array[String],
+        ?agent_space_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pentest_ids: Array[String]?
+      attr_accessor agent_space_id: String?
+    end
+
+    class BatchDeletePentestsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deleted: Array[Types::Pentest],
+        ?failed: Array[Types::DeletePentestFailure],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deleted: Array[Types::Pentest]?
+      attr_accessor failed: Array[Types::DeletePentestFailure]?
+    end
+
+    class BatchDeleteSecurityRequirementsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pack_id: String,
+        ?security_requirement_names: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pack_id: String?
+      attr_accessor security_requirement_names: Array[String]?
+    end
+
+    class BatchDeleteSecurityRequirementsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deleted_security_requirement_names: Array[String],
+        ?errors: Array[Types::BatchSecurityRequirementError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deleted_security_requirement_names: Array[String]?
+      attr_accessor errors: Array[Types::BatchSecurityRequirementError]?
+    end
+
+    class BatchDeleteThreatModelsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?threat_model_ids: Array[String],
+        ?agent_space_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor threat_model_ids: Array[String]?
+      attr_accessor agent_space_id: String?
+    end
+
+    class BatchDeleteThreatModelsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deleted: Array[String],
+        ?failed: Array[Types::DeleteThreatModelFailure],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deleted: Array[String]?
+      attr_accessor failed: Array[Types::DeleteThreatModelFailure]?
+    end
+
+    class BatchDisassociateFindingIssueError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?finding_id: String,
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor finding_id: String?
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class BatchDisassociateFindingIssueInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agent_space_id: String,
+        ?pentest_job_id: String,
+        ?code_review_job_id: String,
+        ?finding_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agent_space_id: String?
+      attr_accessor pentest_job_id: String?
+      attr_accessor code_review_job_id: String?
+      attr_accessor finding_ids: Array[String]?
+    end
+
+    class BatchDisassociateFindingIssueOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?errors: Array[Types::BatchDisassociateFindingIssueError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor errors: Array[Types::BatchDisassociateFindingIssueError]?
+    end
+
+    class BatchExportFindingError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?finding_id: String,
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor finding_id: String?
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class BatchExportFindingResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?finding_id: String,
+        ?linked_issue: Types::LinkedIssue,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor finding_id: String?
+      attr_accessor linked_issue: Types::LinkedIssue?
+    end
+
+    class BatchExportFindingsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agent_space_id: String,
+        ?pentest_job_id: String,
+        ?code_review_job_id: String,
+        ?issue_destination: Types::IssueDestination,
+        ?finding_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agent_space_id: String?
+      attr_accessor pentest_job_id: String?
+      attr_accessor code_review_job_id: String?
+      attr_accessor issue_destination: Types::IssueDestination?
+      attr_accessor finding_ids: Array[String]?
+    end
+
+    class BatchExportFindingsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?results: Array[Types::BatchExportFindingResult],
+        ?errors: Array[Types::BatchExportFindingError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor results: Array[Types::BatchExportFindingResult]?
+      attr_accessor errors: Array[Types::BatchExportFindingError]?
+    end
+
+    class BatchGetAgentSpacesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agent_space_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agent_space_ids: Array[String]?
+    end
+
+    class BatchGetAgentSpacesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agent_spaces: Array[Types::AgentSpace],
+        ?not_found: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agent_spaces: Array[Types::AgentSpace]?
+      attr_accessor not_found: Array[String]?
+    end
+
+    class BatchGetArtifactMetadataInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agent_space_id: String,
+        ?artifact_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agent_space_id: String?
+      attr_accessor artifact_ids: Array[String]?
+    end
+
+    class BatchGetArtifactMetadataOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?artifact_metadata_list: Array[Types::ArtifactMetadataItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor artifact_metadata_list: Array[Types::ArtifactMetadataItem]?
+    end
+
+    class BatchGetCodeReviewJobTasksInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agent_space_id: String,
+        ?code_review_job_task_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agent_space_id: String?
+      attr_accessor code_review_job_task_ids: Array[String]?
+    end
+
+    class BatchGetCodeReviewJobTasksOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code_review_job_tasks: Array[Types::CodeReviewJobTask],
+        ?not_found: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code_review_job_tasks: Array[Types::CodeReviewJobTask]?
+      attr_accessor not_found: Array[String]?
+    end
+
+    class BatchGetCodeReviewJobsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code_review_job_ids: Array[String],
+        ?agent_space_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code_review_job_ids: Array[String]?
+      attr_accessor agent_space_id: String?
+    end
+
+    class BatchGetCodeReviewJobsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code_review_jobs: Array[Types::CodeReviewJob],
+        ?not_found: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code_review_jobs: Array[Types::CodeReviewJob]?
+      attr_accessor not_found: Array[String]?
+    end
+
+    class BatchGetCodeReviewsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code_review_ids: Array[String],
+        ?agent_space_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code_review_ids: Array[String]?
+      attr_accessor agent_space_id: String?
+    end
+
+    class BatchGetCodeReviewsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code_reviews: Array[Types::CodeReview],
+        ?not_found: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code_reviews: Array[Types::CodeReview]?
+      attr_accessor not_found: Array[String]?
+    end
+
+    class BatchGetFindingsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?finding_ids: Array[String],
+        ?agent_space_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor finding_ids: Array[String]?
+      attr_accessor agent_space_id: String?
+    end
+
+    class BatchGetFindingsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?findings: Array[Types::Finding],
+        ?not_found: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor findings: Array[Types::Finding]?
+      attr_accessor not_found: Array[String]?
+    end
+
+    class BatchGetPentestJobTasksInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agent_space_id: String,
+        ?task_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agent_space_id: String?
+      attr_accessor task_ids: Array[String]?
+    end
+
+    class BatchGetPentestJobTasksOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tasks: Array[Types::Task],
+        ?not_found: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tasks: Array[Types::Task]?
+      attr_accessor not_found: Array[String]?
+    end
+
+    class BatchGetPentestJobsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pentest_job_ids: Array[String],
+        ?agent_space_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pentest_job_ids: Array[String]?
+      attr_accessor agent_space_id: String?
+    end
+
+    class BatchGetPentestJobsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pentest_jobs: Array[Types::PentestJob],
+        ?not_found: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pentest_jobs: Array[Types::PentestJob]?
+      attr_accessor not_found: Array[String]?
+    end
+
+    class BatchGetPentestsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pentest_ids: Array[String],
+        ?agent_space_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pentest_ids: Array[String]?
+      attr_accessor agent_space_id: String?
+    end
+
+    class BatchGetPentestsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pentests: Array[Types::Pentest],
+        ?not_found: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pentests: Array[Types::Pentest]?
+      attr_accessor not_found: Array[String]?
+    end
+
+    class BatchGetSecurityRequirementResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pack_id: String,
+        ?name: String,
+        ?description: String,
+        ?domain: String,
+        ?evaluation: String,
+        ?remediation: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pack_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor domain: String?
+      attr_accessor evaluation: String?
+      attr_accessor remediation: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class BatchGetSecurityRequirementsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pack_id: String,
+        ?security_requirement_names: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pack_id: String?
+      attr_accessor security_requirement_names: Array[String]?
+    end
+
+    class BatchGetSecurityRequirementsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?security_requirements: Array[Types::BatchGetSecurityRequirementResult],
+        ?errors: Array[Types::BatchSecurityRequirementError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor security_requirements: Array[Types::BatchGetSecurityRequirementResult]?
+      attr_accessor errors: Array[Types::BatchSecurityRequirementError]?
+    end
+
+    class BatchGetTargetDomainsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_domain_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_domain_ids: Array[String]?
+    end
+
+    class BatchGetTargetDomainsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_domains: Array[Types::TargetDomain],
+        ?not_found: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_domains: Array[Types::TargetDomain]?
+      attr_accessor not_found: Array[String]?
+    end
+
+    class BatchGetThreatModelJobTasksInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agent_space_id: String,
+        ?threat_model_job_task_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agent_space_id: String?
+      attr_accessor threat_model_job_task_ids: Array[String]?
+    end
+
+    class BatchGetThreatModelJobTasksOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?threat_model_job_tasks: Array[Types::ThreatModelJobTask],
+        ?not_found: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor threat_model_job_tasks: Array[Types::ThreatModelJobTask]?
+      attr_accessor not_found: Array[String]?
+    end
+
+    class BatchGetThreatModelJobsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?threat_model_job_ids: Array[String],
+        ?agent_space_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor threat_model_job_ids: Array[String]?
+      attr_accessor agent_space_id: String?
+    end
+
+    class BatchGetThreatModelJobsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?threat_model_jobs: Array[Types::ThreatModelJob],
+        ?not_found: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor threat_model_jobs: Array[Types::ThreatModelJob]?
+      attr_accessor not_found: Array[String]?
+    end
+
+    class BatchGetThreatModelsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?threat_model_ids: Array[String],
+        ?agent_space_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor threat_model_ids: Array[String]?
+      attr_accessor agent_space_id: String?
+    end
+
+    class BatchGetThreatModelsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?threat_models: Array[Types::ThreatModel],
+        ?not_found: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor threat_models: Array[Types::ThreatModel]?
+      attr_accessor not_found: Array[String]?
+    end
+
+    class BatchGetThreatsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?threat_ids: Array[String],
+        ?agent_space_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor threat_ids: Array[String]?
+      attr_accessor agent_space_id: String?
+    end
+
+    class BatchGetThreatsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?threats: Array[Types::Threat],
+        ?not_found: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor threats: Array[Types::Threat]?
+      attr_accessor not_found: Array[String]?
+    end
+
+    class BatchSecurityRequirementError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?security_requirement_name: String,
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor security_requirement_name: String?
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class BatchUpdateSecurityRequirementsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pack_id: String,
+        ?security_requirements: Array[Types::UpdateSecurityRequirementEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pack_id: String?
+      attr_accessor security_requirements: Array[Types::UpdateSecurityRequirementEntry]?
+    end
+
+    class BatchUpdateSecurityRequirementsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?updated_security_requirement_names: Array[String],
+        ?errors: Array[Types::BatchSecurityRequirementError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor updated_security_requirement_names: Array[String]?
+      attr_accessor errors: Array[Types::BatchSecurityRequirementError]?
+    end
+
+    class BitbucketDataCenterIntegrationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_url: String,
+        ?code: String,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_url: String?
+      attr_accessor code: String?
+      attr_accessor state: String?
+    end
+
+    class BitbucketIntegrationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?installation_id: String,
+        ?workspace: String,
+        ?code: String,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor installation_id: String?
+      attr_accessor workspace: String?
+      attr_accessor code: String?
+      attr_accessor state: String?
+    end
+
+    class BitbucketRepositoryMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?provider_resource_id: String,
+        ?workspace: String,
+        ?access_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor provider_resource_id: String?
+      attr_accessor workspace: String?
+      attr_accessor access_type: String?
+    end
+
+    class BitbucketRepositoryResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?workspace: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor workspace: String?
+    end
+
+    class BitbucketResourceCapabilities
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trigger_filter_groups: Array[Types::TriggerFilterGroup],
+        ?leave_comments: bool,
+        ?remediate_code: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trigger_filter_groups: Array[Types::TriggerFilterGroup]?
+      attr_accessor leave_comments: bool?
+      attr_accessor remediate_code: bool?
+    end
+
+    class CaCertificateSource
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?inline_pem: String,
+        ?artifact_id: String,
+        ?s3_location: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor inline_pem: String?
+      attr_accessor artifact_id: String?
+      attr_accessor s3_location: String?
+
+      class InlinePem < CaCertificateSource
+      end
+      class ArtifactId < CaCertificateSource
+      end
+      class S3Location < CaCertificateSource
+      end
+      class Unknown < CaCertificateSource
+      end
+    end
+
+    class Category
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?is_primary: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor is_primary: bool?
+    end
+
+    class CiCdConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+    end
+
+    module CleanUpStrategy
+      BEST_EFFORT_DELETE: String
+      RETAIN_ALL: String
+    end
+
+    class CloudWatchLog
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group: String,
+        ?log_stream: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group: String?
+      attr_accessor log_stream: String?
+    end
+
+    class CodeLocation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_path: String,
+        ?line_start: Integer,
+        ?line_end: Integer,
+        ?label: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_path: String?
+      attr_accessor line_start: Integer?
+      attr_accessor line_end: Integer?
+      attr_accessor label: String?
+    end
+
+    module CodeRemediationStrategy
+      AUTOMATIC: String
+      DISABLED: String
+    end
+
+    class CodeRemediationTask
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?status_reason: String,
+        ?task_details: Array[Types::CodeRemediationTaskDetails],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor task_details: Array[Types::CodeRemediationTaskDetails]?
+    end
+
+    class CodeRemediationTaskDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repo_name: String,
+        ?code_diff_link: String,
+        ?pull_request_link: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repo_name: String?
+      attr_accessor code_diff_link: String?
+      attr_accessor pull_request_link: String?
+    end
+
+    module CodeRemediationTaskStatus
+      IN_PROGRESS: String
+      COMPLETED: String
+      FAILED: String
+    end
+
+    class CodeReview
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code_review_id: String,
+        ?agent_space_id: String,
+        ?title: String,
+        ?assets: Types::Assets,
+        ?service_role: String,
+        ?log_config: Types::CloudWatchLog,
+        ?code_remediation_strategy: String,
+        ?validation_mode: String,
+        ?max_task_hours: Float,
+        ?report_destination: Types::ReportDestination,
+        ?report_filters: Types::ReportFilters,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code_review_id: String?
+      attr_accessor agent_space_id: String?
+      attr_accessor title: String?
+      attr_accessor assets: Types::Assets?
+      attr_accessor service_role: String?
+      attr_accessor log_config: Types::CloudWatchLog?
+      attr_accessor code_remediation_strategy: String?
+      attr_accessor validation_mode: String?
+      attr_accessor max_task_hours: Float?
+      attr_accessor report_destination: Types::ReportDestination?
+      attr_accessor report_filters: Types::ReportFilters?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class CodeReviewJob
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code_review_job_id: String,
+        ?code_review_id: String,
+        ?title: String,
+        ?overview: String,
+        ?status: String,
+        ?documents: Array[Types::DocumentInfo],
+        ?source_code: Array[Types::SourceCodeRepository],
+        ?steps: Array[Types::Step],
+        ?execution_context: Array[Types::ExecutionContext],
+        ?service_role: String,
+        ?log_config: Types::CloudWatchLog,
+        ?error_information: Types::ErrorInformation,
+        ?integrated_repositories: Array[Types::IntegratedRepository],
+        ?code_remediation_strategy: String,
+        ?max_task_hours: Float,
+        ?report_destination: Types::ReportDestination,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code_review_job_id: String?
+      attr_accessor code_review_id: String?
+      attr_accessor title: String?
+      attr_accessor overview: String?
+      attr_accessor status: String?
+      attr_accessor documents: Array[Types::DocumentInfo]?
+      attr_accessor source_code: Array[Types::SourceCodeRepository]?
+      attr_accessor steps: Array[Types::Step]?
+      attr_accessor execution_context: Array[Types::ExecutionContext]?
+      attr_accessor service_role: String?
+      attr_accessor log_config: Types::CloudWatchLog?
+      attr_accessor error_information: Types::ErrorInformation?
+      attr_accessor integrated_repositories: Array[Types::IntegratedRepository]?
+      attr_accessor code_remediation_strategy: String?
+      attr_accessor max_task_hours: Float?
+      attr_accessor report_destination: Types::ReportDestination?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class CodeReviewJobSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code_review_job_id: String,
+        ?code_review_id: String,
+        ?title: String,
+        ?status: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code_review_job_id: String?
+      attr_accessor code_review_id: String?
+      attr_accessor title: String?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class CodeReviewJobTask
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_id: String,
+        ?code_review_id: String,
+        ?code_review_job_id: String,
+        ?agent_space_id: String,
+        ?title: String,
+        ?description: String,
+        ?categories: Array[Types::Category],
+        ?risk_type: String,
+        ?execution_status: String,
+        ?logs_location: Types::LogLocation,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_id: String?
+      attr_accessor code_review_id: String?
+      attr_accessor code_review_job_id: String?
+      attr_accessor agent_space_id: String?
+      attr_accessor title: String?
+      attr_accessor description: String?
+      attr_accessor categories: Array[Types::Category]?
+      attr_accessor risk_type: String?
+      attr_accessor execution_status: String?
+      attr_accessor logs_location: Types::LogLocation?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class CodeReviewJobTaskSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_id: String,
+        ?code_review_id: String,
+        ?code_review_job_id: String,
+        ?agent_space_id: String,
+        ?title: String,
+        ?risk_type: String,
+        ?execution_status: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_id: String?
+      attr_accessor code_review_id: String?
+      attr_accessor code_review_job_id: String?
+      attr_accessor agent_space_id: String?
+      attr_accessor title: String?
+      attr_accessor risk_type: String?
+      attr_accessor execution_status: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class CodeReviewSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?controls_scanning: bool,
+        ?general_purpose_scanning: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor controls_scanning: bool?
+      attr_accessor general_purpose_scanning: bool?
+    end
+
+    class CodeReviewSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code_review_id: String,
+        ?agent_space_id: String,
+        ?title: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code_review_id: String?
+      attr_accessor agent_space_id: String?
+      attr_accessor title: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    module ConfidenceLevel
+      FALSE_POSITIVE: String
+      UNCONFIRMED: String
+      LOW: String
+      MEDIUM: String
+      HIGH: String
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ConfluenceDocumentMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?provider_resource_id: String,
+        ?space_key: String,
+        ?page_id: String,
+        ?title: String,
+        ?space_title: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor provider_resource_id: String?
+      attr_accessor space_key: String?
+      attr_accessor page_id: String?
+      attr_accessor title: String?
+      attr_accessor space_title: String?
+    end
+
+    class ConfluenceDocumentResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?space_key: String,
+        ?page_id: String,
+        ?title: String,
+        ?space_title: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor space_key: String?
+      attr_accessor page_id: String?
+      attr_accessor title: String?
+      attr_accessor space_title: String?
+    end
+
+    class ConfluenceIntegrationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?installation_id: String,
+        ?code: String,
+        ?state: String,
+        ?site_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor installation_id: String?
+      attr_accessor code: String?
+      attr_accessor state: String?
+      attr_accessor site_url: String?
+    end
+
+    class ConfluenceResourceCapabilities
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fetch_document: bool,
+        ?create_document: bool,
+        ?update_document: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fetch_document: bool?
+      attr_accessor create_document: bool?
+      attr_accessor update_document: bool?
+    end
+
+    module ContextType
+      ERROR: String
+      CLIENT_ERROR: String
+      WARNING: String
+      INFO: String
+    end
+
+    class CreateAgentSpaceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?aws_resources: Types::AWSResources,
+        ?target_domain_ids: Array[String],
+        ?code_review_settings: Types::CodeReviewSettings,
+        ?kms_key_id: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor aws_resources: Types::AWSResources?
+      attr_accessor target_domain_ids: Array[String]?
+      attr_accessor code_review_settings: Types::CodeReviewSettings?
+      attr_accessor kms_key_id: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateAgentSpaceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agent_space_id: String,
+        ?name: String,
+        ?description: String,
+        ?aws_resources: Types::AWSResources,
+        ?target_domain_ids: Array[String],
+        ?code_review_settings: Types::CodeReviewSettings,
+        ?kms_key_id: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agent_space_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor aws_resources: Types::AWSResources?
+      attr_accessor target_domain_ids: Array[String]?
+      attr_accessor code_review_settings: Types::CodeReviewSettings?
+      attr_accessor kms_key_id: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class CreateApplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?idc_instance_arn: String,
+        ?role_arn: String,
+        ?default_kms_key_id: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor idc_instance_arn: String?
+      attr_accessor role_arn: String?
+      attr_accessor default_kms_key_id: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateApplicationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+    end
+
+    class CreateCodeReviewInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?title: String,
+        ?agent_space_id: String,
+        ?assets: Types::Assets,
+        ?service_role: String,
+        ?log_config: Types::CloudWatchLog,
+        ?code_remediation_strategy: String,
+        ?validation_mode: String,
+        ?max_task_hours: Float,
+        ?report_destination: Types::ReportDestination,
+        ?report_filters: Types::ReportFilters,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor title: String?
+      attr_accessor agent_space_id: String?
+      attr_accessor assets: Types::Assets?
+      attr_accessor service_role: String?
+      attr_accessor log_config: Types::CloudWatchLog?
+      attr_accessor code_remediation_strategy: String?
+      attr_accessor validation_mode: String?
+      attr_accessor max_task_hours: Float?
+      attr_accessor report_destination: Types::ReportDestination?
+      attr_accessor report_filters: Types::ReportFilters?
+    end
+
+    class CreateCodeReviewOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code_review_id: String,
+        ?title: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?assets: Types::Assets,
+        ?service_role: String,
+        ?log_config: Types::CloudWatchLog,
+        ?agent_space_id: String,
+        ?code_remediation_strategy: String,
+        ?validation_mode: String,
+        ?max_task_hours: Float,
+        ?report_destination: Types::ReportDestination,
+        ?report_filters: Types::ReportFilters,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code_review_id: String?
+      attr_accessor title: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor assets: Types::Assets?
+      attr_accessor service_role: String?
+      attr_accessor log_config: Types::CloudWatchLog?
+      attr_accessor agent_space_id: String?
+      attr_accessor code_remediation_strategy: String?
+      attr_accessor validation_mode: String?
+      attr_accessor max_task_hours: Float?
+      attr_accessor report_destination: Types::ReportDestination?
+      attr_accessor report_filters: Types::ReportFilters?
+    end
+
+    class CreateIntegrationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?provider: String,
+        ?input: Types::ProviderInput,
+        ?integration_display_name: String,
+        ?kms_key_id: String,
+        ?tags: Hash[String, String],
+        ?private_connection_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor provider: String?
+      attr_accessor input: Types::ProviderInput?
+      attr_accessor integration_display_name: String?
+      attr_accessor kms_key_id: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor private_connection_name: String?
+    end
+
+    class CreateIntegrationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?integration_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor integration_id: String?
+    end
+
+    class CreateMembershipRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?agent_space_id: String,
+        ?membership_id: String,
+        ?member_type: String,
+        ?config: Types::MembershipConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor agent_space_id: String?
+      attr_accessor membership_id: String?
+      attr_accessor member_type: String?
+      attr_accessor config: Types::MembershipConfig?
+    end
+
+    class CreateMembershipResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CreatePentestInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?title: String,
+        ?agent_space_id: String,
+        ?assets: Types::Assets,
+        ?exclude_risk_types: Array[String],
+        ?service_role: String,
+        ?log_config: Types::CloudWatchLog,
+        ?vpc_config: Types::VpcConfig,
+        ?network_traffic_config: Types::NetworkTrafficConfig,
+        ?code_remediation_strategy: String,
+        ?disable_managed_skills: Array[String],
+        ?max_task_hours: Float,
+        ?report_destination: Types::ReportDestination,
+        ?report_filters: Types::ReportFilters,
+        ?cicd_configuration: Types::CiCdConfiguration,
+        ?test_scope: Types::TestScope,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor title: String?
+      attr_accessor agent_space_id: String?
+      attr_accessor assets: Types::Assets?
+      attr_accessor exclude_risk_types: Array[String]?
+      attr_accessor service_role: String?
+      attr_accessor log_config: Types::CloudWatchLog?
+      attr_accessor vpc_config: Types::VpcConfig?
+      attr_accessor network_traffic_config: Types::NetworkTrafficConfig?
+      attr_accessor code_remediation_strategy: String?
+      attr_accessor disable_managed_skills: Array[String]?
+      attr_accessor max_task_hours: Float?
+      attr_accessor report_destination: Types::ReportDestination?
+      attr_accessor report_filters: Types::ReportFilters?
+      attr_accessor cicd_configuration: Types::CiCdConfiguration?
+      attr_accessor test_scope: Types::TestScope?
+    end
+
+    class CreatePentestOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pentest_id: String,
+        ?title: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?assets: Types::Assets,
+        ?exclude_risk_types: Array[String],
+        ?service_role: String,
+        ?log_config: Types::CloudWatchLog,
+        ?agent_space_id: String,
+        ?report_destination: Types::ReportDestination,
+        ?report_filters: Types::ReportFilters,
+        ?cicd_configuration: Types::CiCdConfiguration,
+        ?test_scope: Types::TestScope,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pentest_id: String?
+      attr_accessor title: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor assets: Types::Assets?
+      attr_accessor exclude_risk_types: Array[String]?
+      attr_accessor service_role: String?
+      attr_accessor log_config: Types::CloudWatchLog?
+      attr_accessor agent_space_id: String?
+      attr_accessor report_destination: Types::ReportDestination?
+      attr_accessor report_filters: Types::ReportFilters?
+      attr_accessor cicd_configuration: Types::CiCdConfiguration?
+      attr_accessor test_scope: Types::TestScope?
+    end
+
+    class CreatePrivateConnectionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?private_connection_name: String,
+        ?mode: Types::PrivateConnectionMode,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor private_connection_name: String?
+      attr_accessor mode: Types::PrivateConnectionMode?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreatePrivateConnectionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?type: String,
+        ?status: String,
+        ?resource_gateway_id: String,
+        ?host_address: String,
+        ?vpc_id: String,
+        ?resource_configuration_id: String,
+        ?certificate_expiry_time: Time,
+        ?dns_resolution: String,
+        ?failure_message: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor status: String?
+      attr_accessor resource_gateway_id: String?
+      attr_accessor host_address: String?
+      attr_accessor vpc_id: String?
+      attr_accessor resource_configuration_id: String?
+      attr_accessor certificate_expiry_time: Time?
+      attr_accessor dns_resolution: String?
+      attr_accessor failure_message: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateSecurityRequirementEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?domain: String,
+        ?evaluation: String,
+        ?remediation: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor domain: String?
+      attr_accessor evaluation: String?
+      attr_accessor remediation: String?
+    end
+
+    class CreateSecurityRequirementPackInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?status: String,
+        ?kms_key_id: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor status: String?
+      attr_accessor kms_key_id: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateSecurityRequirementPackOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pack_id: String,
+        ?status: String,
+        ?kms_key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pack_id: String?
+      attr_accessor status: String?
+      attr_accessor kms_key_id: String?
+    end
+
+    class CreateTargetDomainInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_domain_name: String,
+        ?verification_method: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_domain_name: String?
+      attr_accessor verification_method: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateTargetDomainOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_domain_id: String,
+        ?domain_name: String,
+        ?verification_status: String,
+        ?verification_status_reason: String,
+        ?verification_details: Types::VerificationDetails,
+        ?created_at: Time,
+        ?verified_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_domain_id: String?
+      attr_accessor domain_name: String?
+      attr_accessor verification_status: String?
+      attr_accessor verification_status_reason: String?
+      attr_accessor verification_details: Types::VerificationDetails?
+      attr_accessor created_at: Time?
+      attr_accessor verified_at: Time?
+    end
+
+    class CreateThreatInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agent_space_id: String,
+        ?threat_job_id: String,
+        ?title: String,
+        ?statement: String,
+        ?severity: String,
+        ?comments: String,
+        ?stride: Array[String],
+        ?threat_source: String,
+        ?prerequisites: String,
+        ?threat_action: String,
+        ?threat_impact: String,
+        ?impacted_goal: Array[String],
+        ?impacted_assets: Array[String],
+        ?anchor: Types::ThreatAnchorShape,
+        ?evidence: Array[Types::ThreatEvidenceShape],
+        ?recommendation: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agent_space_id: String?
+      attr_accessor threat_job_id: String?
+      attr_accessor title: String?
+      attr_accessor statement: String?
+      attr_accessor severity: String?
+      attr_accessor comments: String?
+      attr_accessor stride: Array[String]?
+      attr_accessor threat_source: String?
+      attr_accessor prerequisites: String?
+      attr_accessor threat_action: String?
+      attr_accessor threat_impact: String?
+      attr_accessor impacted_goal: Array[String]?
+      attr_accessor impacted_assets: Array[String]?
+      attr_accessor anchor: Types::ThreatAnchorShape?
+      attr_accessor evidence: Array[Types::ThreatEvidenceShape]?
+      attr_accessor recommendation: String?
+    end
+
+    class CreateThreatModelInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?title: String,
+        ?agent_space_id: String,
+        ?description: String,
+        ?assets: Types::Assets,
+        ?scope_docs: Array[Types::DocumentInfo],
+        ?service_role: String,
+        ?log_config: Types::CloudWatchLog,
+        ?report_destination: Types::ReportDestination,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor title: String?
+      attr_accessor agent_space_id: String?
+      attr_accessor description: String?
+      attr_accessor assets: Types::Assets?
+      attr_accessor scope_docs: Array[Types::DocumentInfo]?
+      attr_accessor service_role: String?
+      attr_accessor log_config: Types::CloudWatchLog?
+      attr_accessor report_destination: Types::ReportDestination?
+    end
+
+    class CreateThreatModelOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?threat_model_id: String,
+        ?title: String,
+        ?agent_space_id: String,
+        ?description: String,
+        ?assets: Types::Assets,
+        ?scope_docs: Array[Types::DocumentInfo],
+        ?service_role: String,
+        ?log_config: Types::CloudWatchLog,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?report_destination: Types::ReportDestination,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor threat_model_id: String?
+      attr_accessor title: String?
+      attr_accessor agent_space_id: String?
+      attr_accessor description: String?
+      attr_accessor assets: Types::Assets?
+      attr_accessor scope_docs: Array[Types::DocumentInfo]?
+      attr_accessor service_role: String?
+      attr_accessor log_config: Types::CloudWatchLog?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor report_destination: Types::ReportDestination?
+    end
+
+    class CreateThreatOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?threat_id: String,
+        ?threat_job_id: String,
+        ?title: String,
+        ?statement: String,
+        ?severity: String,
+        ?status: String,
+        ?comments: String,
+        ?stride: Array[String],
+        ?threat_source: String,
+        ?prerequisites: String,
+        ?threat_action: String,
+        ?threat_impact: String,
+        ?impacted_goal: Array[String],
+        ?impacted_assets: Array[String],
+        ?anchor: Types::ThreatAnchorShape,
+        ?evidence: Array[Types::ThreatEvidenceShape],
+        ?recommendation: String,
+        ?created_by: String,
+        ?updated_by: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor threat_id: String?
+      attr_accessor threat_job_id: String?
+      attr_accessor title: String?
+      attr_accessor statement: String?
+      attr_accessor severity: String?
+      attr_accessor status: String?
+      attr_accessor comments: String?
+      attr_accessor stride: Array[String]?
+      attr_accessor threat_source: String?
+      attr_accessor prerequisites: String?
+      attr_accessor threat_action: String?
+      attr_accessor threat_impact: String?
+      attr_accessor impacted_goal: Array[String]?
+      attr_accessor impacted_assets: Array[String]?
+      attr_accessor anchor: Types::ThreatAnchorShape?
+      attr_accessor evidence: Array[Types::ThreatEvidenceShape]?
+      attr_accessor recommendation: String?
+      attr_accessor created_by: String?
+      attr_accessor updated_by: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class CustomHeader
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: String?
+    end
+
+    module DNSRecordType
+      TXT: String
+    end
+
+    class DeleteAgentSpaceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agent_space_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agent_space_id: String?
+    end
+
+    class DeleteAgentSpaceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agent_space_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agent_space_id: String?
+    end
+
+    class DeleteApplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+    end
+
+    class DeleteArtifactInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agent_space_id: String,
+        ?artifact_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agent_space_id: String?
+      attr_accessor artifact_id: String?
+    end
+
+    class DeleteArtifactOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteCodeReviewFailure
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code_review_id: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code_review_id: String?
+      attr_accessor reason: String?
+    end
+
+    class DeleteIntegrationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?integration_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor integration_id: String?
+    end
+
+    class DeleteIntegrationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteMembershipRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?agent_space_id: String,
+        ?membership_id: String,
+        ?member_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor agent_space_id: String?
+      attr_accessor membership_id: String?
+      attr_accessor member_type: String?
+    end
+
+    class DeleteMembershipResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeletePentestFailure
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pentest_id: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pentest_id: String?
+      attr_accessor reason: String?
+    end
+
+    class DeletePrivateConnectionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?private_connection_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor private_connection_name: String?
+    end
+
+    class DeletePrivateConnectionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?type: String,
+        ?status: String,
+        ?resource_gateway_id: String,
+        ?host_address: String,
+        ?vpc_id: String,
+        ?resource_configuration_id: String,
+        ?certificate_expiry_time: Time,
+        ?dns_resolution: String,
+        ?failure_message: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor status: String?
+      attr_accessor resource_gateway_id: String?
+      attr_accessor host_address: String?
+      attr_accessor vpc_id: String?
+      attr_accessor resource_configuration_id: String?
+      attr_accessor certificate_expiry_time: Time?
+      attr_accessor dns_resolution: String?
+      attr_accessor failure_message: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class DeleteSecurityRequirementPackInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pack_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pack_id: String?
+    end
+
+    class DeleteSecurityRequirementPackOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteTargetDomainInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_domain_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_domain_id: String?
+    end
+
+    class DeleteTargetDomainOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_domain_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_domain_id: String?
+    end
+
+    class DeleteThreatModelFailure
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?threat_model_id: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor threat_model_id: String?
+      attr_accessor reason: String?
+    end
+
+    class DescribePrivateConnectionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?private_connection_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor private_connection_name: String?
+    end
+
+    class DescribePrivateConnectionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?type: String,
+        ?status: String,
+        ?resource_gateway_id: String,
+        ?host_address: String,
+        ?vpc_id: String,
+        ?resource_configuration_id: String,
+        ?certificate_expiry_time: Time,
+        ?dns_resolution: String,
+        ?failure_message: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor status: String?
+      attr_accessor resource_gateway_id: String?
+      attr_accessor host_address: String?
+      attr_accessor vpc_id: String?
+      attr_accessor resource_configuration_id: String?
+      attr_accessor certificate_expiry_time: Time?
+      attr_accessor dns_resolution: String?
+      attr_accessor failure_message: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class DiffSource
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?s3_uri: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_uri: String?
+
+      class S3Uri < DiffSource
+      end
+      class Unknown < DiffSource
+      end
+    end
+
+    class DiscoveredEndpoint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?uri: String,
+        ?pentest_job_id: String,
+        ?task_id: String,
+        ?agent_space_id: String,
+        ?evidence: String,
+        ?operation: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor uri: String?
+      attr_accessor pentest_job_id: String?
+      attr_accessor task_id: String?
+      attr_accessor agent_space_id: String?
+      attr_accessor evidence: String?
+      attr_accessor operation: String?
+      attr_accessor description: String?
+    end
+
+    class DnsVerification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?token: String,
+        ?dns_record_name: String,
+        ?dns_record_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor token: String?
+      attr_accessor dns_record_name: String?
+      attr_accessor dns_record_type: String?
+    end
+
+    class DocumentInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_location: String,
+        ?artifact_id: String,
+        ?integrated_document: Types::IntegratedDocument,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_location: String?
+      attr_accessor artifact_id: String?
+      attr_accessor integrated_document: Types::IntegratedDocument?
+    end
+
+    module DomainVerificationMethod
+      DNS_TXT: String
+      HTTP_ROUTE: String
+      PRIVATE_VPC: String
+    end
+
+    class Endpoint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?uri: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor uri: String?
+    end
+
+    module ErrorCode
+      CLIENT_ERROR: String
+      INTERNAL_ERROR: String
+      STOPPED_BY_USER: String
+    end
+
+    class ErrorInformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class ExecutionContext
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?context_type: String,
+        ?context: String,
+        ?timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor context_type: String?
+      attr_accessor context: String?
+      attr_accessor timestamp: Time?
+    end
+
+    class Finding
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?finding_id: String,
+        ?agent_space_id: String,
+        ?pentest_id: String,
+        ?pentest_job_id: String,
+        ?code_review_id: String,
+        ?code_review_job_id: String,
+        ?task_id: String,
+        ?name: String,
+        ?description: String,
+        ?status: String,
+        ?risk_type: String,
+        ?risk_level: String,
+        ?risk_score: String,
+        ?reasoning: String,
+        ?confidence: String,
+        ?validation_status: String,
+        ?attack_script: String,
+        ?remediation_code: String,
+        ?code_remediation_task: Types::CodeRemediationTask,
+        ?last_updated_by: String,
+        ?customer_note: String,
+        ?code_locations: Array[Types::CodeLocation],
+        ?verification_script: Types::VerificationScript,
+        ?alignment_rationale: String,
+        ?revalidation_job_ids: Array[String],
+        ?original_finding_id: String,
+        ?linked_issue: Types::LinkedIssue,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor finding_id: String?
+      attr_accessor agent_space_id: String?
+      attr_accessor pentest_id: String?
+      attr_accessor pentest_job_id: String?
+      attr_accessor code_review_id: String?
+      attr_accessor code_review_job_id: String?
+      attr_accessor task_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor status: String?
+      attr_accessor risk_type: String?
+      attr_accessor risk_level: String?
+      attr_accessor risk_score: String?
+      attr_accessor reasoning: String?
+      attr_accessor confidence: String?
+      attr_accessor validation_status: String?
+      attr_accessor attack_script: String?
+      attr_accessor remediation_code: String?
+      attr_accessor code_remediation_task: Types::CodeRemediationTask?
+      attr_accessor last_updated_by: String?
+      attr_accessor customer_note: String?
+      attr_accessor code_locations: Array[Types::CodeLocation]?
+      attr_accessor verification_script: Types::VerificationScript?
+      attr_accessor alignment_rationale: String?
+      attr_accessor revalidation_job_ids: Array[String]?
+      attr_accessor original_finding_id: String?
+      attr_accessor linked_issue: Types::LinkedIssue?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    module FindingStatus
+      ACTIVE: String
+      RESOLVED: String
+      ACCEPTED: String
+      FALSE_POSITIVE: String
+    end
+
+    class FindingSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?finding_id: String,
+        ?agent_space_id: String,
+        ?pentest_id: String,
+        ?pentest_job_id: String,
+        ?code_review_id: String,
+        ?code_review_job_id: String,
+        ?name: String,
+        ?status: String,
+        ?risk_type: String,
+        ?risk_level: String,
+        ?confidence: String,
+        ?validation_status: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor finding_id: String?
+      attr_accessor agent_space_id: String?
+      attr_accessor pentest_id: String?
+      attr_accessor pentest_job_id: String?
+      attr_accessor code_review_id: String?
+      attr_accessor code_review_job_id: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor risk_type: String?
+      attr_accessor risk_level: String?
+      attr_accessor confidence: String?
+      attr_accessor validation_status: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class GetApplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+    end
+
+    class GetApplicationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?domain: String,
+        ?application_name: String,
+        ?idc_configuration: Types::IdCConfiguration,
+        ?role_arn: String,
+        ?default_kms_key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor domain: String?
+      attr_accessor application_name: String?
+      attr_accessor idc_configuration: Types::IdCConfiguration?
+      attr_accessor role_arn: String?
+      attr_accessor default_kms_key_id: String?
+    end
+
+    class GetArtifactInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agent_space_id: String,
+        ?artifact_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agent_space_id: String?
+      attr_accessor artifact_id: String?
+    end
+
+    class GetArtifactOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agent_space_id: String,
+        ?artifact_id: String,
+        ?artifact: Types::Artifact,
+        ?file_name: String,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agent_space_id: String?
+      attr_accessor artifact_id: String?
+      attr_accessor artifact: Types::Artifact?
+      attr_accessor file_name: String?
+      attr_accessor updated_at: Time?
+    end
+
+    class GetIntegrationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?integration_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor integration_id: String?
+    end
+
+    class GetIntegrationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?integration_id: String,
+        ?installation_id: String,
+        ?provider: String,
+        ?provider_type: String,
+        ?display_name: String,
+        ?kms_key_id: String,
+        ?target_url: String,
+        ?site_url: String,
+        ?webhook_url: String,
+        ?private_connection_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor integration_id: String?
+      attr_accessor installation_id: String?
+      attr_accessor provider: String?
+      attr_accessor provider_type: String?
+      attr_accessor display_name: String?
+      attr_accessor kms_key_id: String?
+      attr_accessor target_url: String?
+      attr_accessor site_url: String?
+      attr_accessor webhook_url: String?
+      attr_accessor private_connection_name: String?
+    end
+
+    class GetSecurityRequirementPackInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pack_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pack_id: String?
+    end
+
+    class GetSecurityRequirementPackOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pack_id: String,
+        ?name: String,
+        ?description: String,
+        ?vendor_name: String,
+        ?management_type: String,
+        ?status: String,
+        ?import_status: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?kms_key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pack_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor vendor_name: String?
+      attr_accessor management_type: String?
+      attr_accessor status: String?
+      attr_accessor import_status: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor kms_key_id: String?
+    end
+
+    class GitHubIntegrationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?state: String,
+        ?organization_name: String,
+        ?target_url: String,
+        ?installation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor state: String?
+      attr_accessor organization_name: String?
+      attr_accessor target_url: String?
+      attr_accessor installation_id: String?
+    end
+
+    class GitHubRepositoryMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?provider_resource_id: String,
+        ?owner: String,
+        ?access_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor provider_resource_id: String?
+      attr_accessor owner: String?
+      attr_accessor access_type: String?
+    end
+
+    class GitHubRepositoryResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor owner: String?
+    end
+
+    class GitHubResourceCapabilities
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trigger_filter_groups: Array[Types::TriggerFilterGroup],
+        ?leave_comments: bool,
+        ?remediate_code: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trigger_filter_groups: Array[Types::TriggerFilterGroup]?
+      attr_accessor leave_comments: bool?
+      attr_accessor remediate_code: bool?
+    end
+
+    class GitLabIntegrationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_token: String,
+        ?target_url: String,
+        ?token_type: String,
+        ?group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_token: String?
+      attr_accessor target_url: String?
+      attr_accessor token_type: String?
+      attr_accessor group_id: String?
+    end
+
+    class GitLabRepositoryMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?provider_resource_id: String,
+        ?namespace: String,
+        ?access_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor provider_resource_id: String?
+      attr_accessor namespace: String?
+      attr_accessor access_type: String?
+    end
+
+    class GitLabRepositoryResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?namespace: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor namespace: String?
+    end
+
+    class GitLabResourceCapabilities
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trigger_filter_groups: Array[Types::TriggerFilterGroup],
+        ?leave_comments: bool,
+        ?remediate_code: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trigger_filter_groups: Array[Types::TriggerFilterGroup]?
+      attr_accessor leave_comments: bool?
+      attr_accessor remediate_code: bool?
+    end
+
+    module GitLabTokenType
+      PERSONAL: String
+      GROUP: String
+    end
+
+    class HttpVerification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?token: String,
+        ?route_path: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor token: String?
+      attr_accessor route_path: String?
+    end
+
+    class IdCConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?idc_application_arn: String,
+        ?idc_instance_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor idc_application_arn: String?
+      attr_accessor idc_instance_arn: String?
+    end
+
+    class ImportSecurityRequirementsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pack_id: String,
+        ?input: Types::ImportSource,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pack_id: String?
+      attr_accessor input: Types::ImportSource?
+    end
+
+    class ImportSecurityRequirementsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pack_id: String,
+        ?import_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pack_id: String?
+      attr_accessor import_status: String?
+    end
+
+    class ImportSource
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?documents: Array[Types::SecurityRequirementArtifact],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor documents: Array[Types::SecurityRequirementArtifact]?
+
+      class Documents < ImportSource
+      end
+      class Unknown < ImportSource
+      end
+    end
+
+    class InitiateProviderRegistrationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?provider: String,
+        ?target_url: String,
+        ?organization_name: String,
+        ?client_id: String,
+        ?client_secret: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor provider: String?
+      attr_accessor target_url: String?
+      attr_accessor organization_name: String?
+      attr_accessor client_id: String?
+      attr_accessor client_secret: String?
+    end
+
+    class InitiateProviderRegistrationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?redirect_to: String,
+        ?csrf_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor redirect_to: String?
+      attr_accessor csrf_state: String?
+    end
+
+    class IntegratedDocument
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?integration_id: String,
+        ?resource_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor integration_id: String?
+      attr_accessor resource_id: String?
+    end
+
+    class IntegratedRepository
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?integration_id: String,
+        ?provider_resource_id: String,
+        ?branch: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor integration_id: String?
+      attr_accessor provider_resource_id: String?
+      attr_accessor branch: String?
+    end
+
+    class IntegratedResource
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?github_repository: Types::GitHubRepositoryResource,
+        ?gitlab_repository: Types::GitLabRepositoryResource,
+        ?bitbucket_repository: Types::BitbucketRepositoryResource,
+        ?confluence_document: Types::ConfluenceDocumentResource,
+        ?azure_dev_ops_repository: Types::AzureDevOpsRepositoryResource,
+        ?jira_project: Types::JiraProjectResource,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor github_repository: Types::GitHubRepositoryResource?
+      attr_accessor gitlab_repository: Types::GitLabRepositoryResource?
+      attr_accessor bitbucket_repository: Types::BitbucketRepositoryResource?
+      attr_accessor confluence_document: Types::ConfluenceDocumentResource?
+      attr_accessor azure_dev_ops_repository: Types::AzureDevOpsRepositoryResource?
+      attr_accessor jira_project: Types::JiraProjectResource?
+
+      class GithubRepository < IntegratedResource
+      end
+      class GitlabRepository < IntegratedResource
+      end
+      class BitbucketRepository < IntegratedResource
+      end
+      class ConfluenceDocument < IntegratedResource
+      end
+      class AzureDevOpsRepository < IntegratedResource
+      end
+      class JiraProject < IntegratedResource
+      end
+      class Unknown < IntegratedResource
+      end
+    end
+
+    class IntegratedResourceInputItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource: Types::IntegratedResource,
+        ?capabilities: Types::ProviderResourceCapabilities,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource: Types::IntegratedResource?
+      attr_accessor capabilities: Types::ProviderResourceCapabilities?
+    end
+
+    class IntegratedResourceMetadata
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?github_repository: Types::GitHubRepositoryMetadata,
+        ?gitlab_repository: Types::GitLabRepositoryMetadata,
+        ?bitbucket_repository: Types::BitbucketRepositoryMetadata,
+        ?confluence_document: Types::ConfluenceDocumentMetadata,
+        ?azure_dev_ops_repository: Types::AzureDevOpsRepositoryMetadata,
+        ?jira_project: Types::JiraProjectMetadata,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor github_repository: Types::GitHubRepositoryMetadata?
+      attr_accessor gitlab_repository: Types::GitLabRepositoryMetadata?
+      attr_accessor bitbucket_repository: Types::BitbucketRepositoryMetadata?
+      attr_accessor confluence_document: Types::ConfluenceDocumentMetadata?
+      attr_accessor azure_dev_ops_repository: Types::AzureDevOpsRepositoryMetadata?
+      attr_accessor jira_project: Types::JiraProjectMetadata?
+
+      class GithubRepository < IntegratedResourceMetadata
+      end
+      class GitlabRepository < IntegratedResourceMetadata
+      end
+      class BitbucketRepository < IntegratedResourceMetadata
+      end
+      class ConfluenceDocument < IntegratedResourceMetadata
+      end
+      class AzureDevOpsRepository < IntegratedResourceMetadata
+      end
+      class JiraProject < IntegratedResourceMetadata
+      end
+      class Unknown < IntegratedResourceMetadata
+      end
+    end
+
+    class IntegratedResourceSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?integration_id: String,
+        ?resource: Types::IntegratedResourceMetadata,
+        ?capabilities: Types::ProviderResourceCapabilities,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor integration_id: String?
+      attr_accessor resource: Types::IntegratedResourceMetadata?
+      attr_accessor capabilities: Types::ProviderResourceCapabilities?
+    end
+
+    class IntegrationFilter
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?provider: String,
+        ?provider_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor provider: String?
+      attr_accessor provider_type: String?
+
+      class Provider < IntegrationFilter
+      end
+      class ProviderType < IntegrationFilter
+      end
+      class Unknown < IntegrationFilter
+      end
+    end
+
+    class IntegrationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?integration_id: String,
+        ?installation_id: String,
+        ?provider: String,
+        ?provider_type: String,
+        ?display_name: String,
+        ?target_url: String,
+        ?webhook_url: String,
+        ?private_connection_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor integration_id: String?
+      attr_accessor installation_id: String?
+      attr_accessor provider: String?
+      attr_accessor provider_type: String?
+      attr_accessor display_name: String?
+      attr_accessor target_url: String?
+      attr_accessor webhook_url: String?
+      attr_accessor private_connection_name: String?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module IpAddressType
+      IPV4: String
+      IPV6: String
+      DUAL_STACK: String
+    end
+
+    class IssueDestination
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?integration_id: String,
+        ?project_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor integration_id: String?
+      attr_accessor project_key: String?
+    end
+
+    class JiraIntegrationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?installation_id: String,
+        ?code: String,
+        ?state: String,
+        ?site_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor installation_id: String?
+      attr_accessor code: String?
+      attr_accessor state: String?
+      attr_accessor site_url: String?
+    end
+
+    class JiraProjectMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?provider_resource_id: String,
+        ?project_key: String,
+        ?project_id: String,
+        ?project_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor provider_resource_id: String?
+      attr_accessor project_key: String?
+      attr_accessor project_id: String?
+      attr_accessor project_name: String?
+    end
+
+    class JiraProjectResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?project_key: String,
+        ?project_id: String,
+        ?project_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor project_key: String?
+      attr_accessor project_id: String?
+      attr_accessor project_name: String?
+    end
+
+    class JiraResourceCapabilities
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?create_issue: bool,
+        ?comment_issue: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor create_issue: bool?
+      attr_accessor comment_issue: bool?
+    end
+
+    module JobStatus
+      IN_PROGRESS: String
+      STOPPING: String
+      STOPPED: String
+      FAILED: String
+      COMPLETED: String
+    end
+
+    module JobType
+      FULL: String
+      REVALIDATION: String
+      CICD: String
+    end
+
+    class LinkedIssue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?provider: String,
+        ?integration_id: String,
+        ?project_key: String,
+        ?issue_key: String,
+        ?issue_id: String,
+        ?issue_url: String,
+        ?site_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor provider: String?
+      attr_accessor integration_id: String?
+      attr_accessor project_key: String?
+      attr_accessor issue_key: String?
+      attr_accessor issue_id: String?
+      attr_accessor issue_url: String?
+      attr_accessor site_url: String?
+    end
+
+    class ListActorMessagesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?agent_space_id: String,
+        ?pentest_id: String,
+        ?actor_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor agent_space_id: String?
+      attr_accessor pentest_id: String?
+      attr_accessor actor_identifier: String?
+    end
+
+    class ListActorMessagesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?messages: Array[Types::ActorMessage],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor messages: Array[Types::ActorMessage]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAgentSpacesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListAgentSpacesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agent_space_summaries: Array[Types::AgentSpaceSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agent_space_summaries: Array[Types::AgentSpaceSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListApplicationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListApplicationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_summaries: Array[Types::ApplicationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_summaries: Array[Types::ApplicationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListArtifactsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agent_space_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agent_space_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListArtifactsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?artifact_summaries: Array[Types::ArtifactSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor artifact_summaries: Array[Types::ArtifactSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListCodeReviewJobTasksInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agent_space_id: String,
+        ?max_results: Integer,
+        ?code_review_job_id: String,
+        ?step_name: String,
+        ?category_name: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agent_space_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor code_review_job_id: String?
+      attr_accessor step_name: String?
+      attr_accessor category_name: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListCodeReviewJobTasksOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code_review_job_task_summaries: Array[Types::CodeReviewJobTaskSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code_review_job_task_summaries: Array[Types::CodeReviewJobTaskSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListCodeReviewJobsForCodeReviewInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?code_review_id: String,
+        ?agent_space_id: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor code_review_id: String?
+      attr_accessor agent_space_id: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListCodeReviewJobsForCodeReviewOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code_review_job_summaries: Array[Types::CodeReviewJobSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code_review_job_summaries: Array[Types::CodeReviewJobSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListCodeReviewsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?agent_space_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor agent_space_id: String?
+    end
+
+    class ListCodeReviewsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code_review_summaries: Array[Types::CodeReviewSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code_review_summaries: Array[Types::CodeReviewSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDiscoveredEndpointsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?pentest_job_id: String,
+        ?agent_space_id: String,
+        ?prefix: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor pentest_job_id: String?
+      attr_accessor agent_space_id: String?
+      attr_accessor prefix: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListDiscoveredEndpointsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?discovered_endpoints: Array[Types::DiscoveredEndpoint],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor discovered_endpoints: Array[Types::DiscoveredEndpoint]?
+      attr_accessor next_token: String?
+    end
+
+    class ListFindingsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?pentest_job_id: String,
+        ?code_review_job_id: String,
+        ?agent_space_id: String,
+        ?next_token: String,
+        ?risk_type: String,
+        ?risk_level: String,
+        ?status: String,
+        ?confidence: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor pentest_job_id: String?
+      attr_accessor code_review_job_id: String?
+      attr_accessor agent_space_id: String?
+      attr_accessor next_token: String?
+      attr_accessor risk_type: String?
+      attr_accessor risk_level: String?
+      attr_accessor status: String?
+      attr_accessor confidence: String?
+      attr_accessor name: String?
+    end
+
+    class ListFindingsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?findings_summaries: Array[Types::FindingSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor findings_summaries: Array[Types::FindingSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListIntegratedResourcesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agent_space_id: String,
+        ?integration_id: String,
+        ?resource_type: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agent_space_id: String?
+      attr_accessor integration_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListIntegratedResourcesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?integrated_resource_summaries: Array[Types::IntegratedResourceSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor integrated_resource_summaries: Array[Types::IntegratedResourceSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListIntegrationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filter: Types::IntegrationFilter,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filter: Types::IntegrationFilter?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListIntegrationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?integration_summaries: Array[Types::IntegrationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor integration_summaries: Array[Types::IntegrationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListMembershipsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?agent_space_id: String,
+        ?member_type: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor agent_space_id: String?
+      attr_accessor member_type: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListMembershipsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_summaries: Array[Types::MembershipSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_summaries: Array[Types::MembershipSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListPentestJobTasksInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agent_space_id: String,
+        ?max_results: Integer,
+        ?pentest_job_id: String,
+        ?step_name: String,
+        ?category_name: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agent_space_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor pentest_job_id: String?
+      attr_accessor step_name: String?
+      attr_accessor category_name: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListPentestJobTasksOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_summaries: Array[Types::TaskSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_summaries: Array[Types::TaskSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListPentestJobsForPentestInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?pentest_id: String,
+        ?agent_space_id: String,
+        ?next_token: String,
+        ?job_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor pentest_id: String?
+      attr_accessor agent_space_id: String?
+      attr_accessor next_token: String?
+      attr_accessor job_type: String?
+    end
+
+    class ListPentestJobsForPentestOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pentest_job_summaries: Array[Types::PentestJobSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pentest_job_summaries: Array[Types::PentestJobSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListPentestsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?agent_space_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor agent_space_id: String?
+    end
+
+    class ListPentestsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pentest_summaries: Array[Types::PentestSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pentest_summaries: Array[Types::PentestSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListPrivateConnectionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListPrivateConnectionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?private_connections: Array[Types::PrivateConnectionSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor private_connections: Array[Types::PrivateConnectionSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSecurityRequirementPackFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?management_type: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor management_type: String?
+      attr_accessor status: String?
+    end
+
+    class ListSecurityRequirementPacksInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filter: Types::ListSecurityRequirementPackFilter,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filter: Types::ListSecurityRequirementPackFilter?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListSecurityRequirementPacksOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?security_requirement_pack_summaries: Array[Types::SecurityRequirementPackSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor security_requirement_pack_summaries: Array[Types::SecurityRequirementPackSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSecurityRequirementsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pack_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pack_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListSecurityRequirementsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?security_requirement_summaries: Array[Types::SecurityRequirementSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor security_requirement_summaries: Array[Types::SecurityRequirementSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ListTargetDomainsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListTargetDomainsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_domain_summaries: Array[Types::TargetDomainSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_domain_summaries: Array[Types::TargetDomainSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListThreatModelJobTasksInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agent_space_id: String,
+        ?max_results: Integer,
+        ?threat_model_job_id: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agent_space_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor threat_model_job_id: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListThreatModelJobTasksOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?threat_model_job_task_summaries: Array[Types::ThreatModelJobTaskSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor threat_model_job_task_summaries: Array[Types::ThreatModelJobTaskSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListThreatModelJobsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?threat_model_id: String,
+        ?agent_space_id: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor threat_model_id: String?
+      attr_accessor agent_space_id: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListThreatModelJobsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?threat_model_job_summaries: Array[Types::ThreatModelJobSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor threat_model_job_summaries: Array[Types::ThreatModelJobSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListThreatModelsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?agent_space_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor agent_space_id: String?
+    end
+
+    class ListThreatModelsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?threat_model_summaries: Array[Types::ThreatModelSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor threat_model_summaries: Array[Types::ThreatModelSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListThreatsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?threat_job_id: String,
+        ?agent_space_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor threat_job_id: String?
+      attr_accessor agent_space_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListThreatsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?threats: Array[Types::ThreatSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor threats: Array[Types::ThreatSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class LogLocation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_type: String,
+        ?cloud_watch_log: Types::CloudWatchLog,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_type: String?
+      attr_accessor cloud_watch_log: Types::CloudWatchLog?
+    end
+
+    module LogType
+      CLOUDWATCH: String
+    end
+
+    module ManagementType
+      AWS_MANAGED: String
+      CUSTOMER_MANAGED: String
+    end
+
+    class MemberMetadata
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?user: Types::UserMetadata,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user: Types::UserMetadata?
+
+      class User < MemberMetadata
+      end
+      class Unknown < MemberMetadata
+      end
+    end
+
+    class MembershipConfig
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?user: Types::UserConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user: Types::UserConfig?
+
+      class User < MembershipConfig
+      end
+      class Unknown < MembershipConfig
+      end
+    end
+
+    class MembershipSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_id: String,
+        ?application_id: String,
+        ?agent_space_id: String,
+        ?member_type: String,
+        ?config: Types::MembershipConfig,
+        ?metadata: Types::MemberMetadata,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?created_by: String,
+        ?updated_by: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_id: String?
+      attr_accessor application_id: String?
+      attr_accessor agent_space_id: String?
+      attr_accessor member_type: String?
+      attr_accessor config: Types::MembershipConfig?
+      attr_accessor metadata: Types::MemberMetadata?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor created_by: String?
+      attr_accessor updated_by: String?
+    end
+
+    module MembershipType
+      USER: String
+    end
+
+    module MembershipTypeFilter
+      USER: String
+      ALL: String
+    end
+
+    class NetworkTrafficConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rules: Array[Types::NetworkTrafficRule],
+        ?custom_headers: Array[Types::CustomHeader],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rules: Array[Types::NetworkTrafficRule]?
+      attr_accessor custom_headers: Array[Types::CustomHeader]?
+    end
+
+    class NetworkTrafficRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?effect: String,
+        ?pattern: String,
+        ?network_traffic_rule_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor effect: String?
+      attr_accessor pattern: String?
+      attr_accessor network_traffic_rule_type: String?
+    end
+
+    module NetworkTrafficRuleEffect
+      ALLOW: String
+      DENY: String
+    end
+
+    module NetworkTrafficRuleType
+      URL: String
+    end
+
+    class Pentest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pentest_id: String,
+        ?agent_space_id: String,
+        ?title: String,
+        ?assets: Types::Assets,
+        ?exclude_risk_types: Array[String],
+        ?service_role: String,
+        ?log_config: Types::CloudWatchLog,
+        ?vpc_config: Types::VpcConfig,
+        ?network_traffic_config: Types::NetworkTrafficConfig,
+        ?code_remediation_strategy: String,
+        ?clean_up_strategy: String,
+        ?disable_managed_skills: Array[String],
+        ?max_task_hours: Float,
+        ?report_destination: Types::ReportDestination,
+        ?report_filters: Types::ReportFilters,
+        ?cicd_configuration: Types::CiCdConfiguration,
+        ?test_scope: Types::TestScope,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pentest_id: String?
+      attr_accessor agent_space_id: String?
+      attr_accessor title: String?
+      attr_accessor assets: Types::Assets?
+      attr_accessor exclude_risk_types: Array[String]?
+      attr_accessor service_role: String?
+      attr_accessor log_config: Types::CloudWatchLog?
+      attr_accessor vpc_config: Types::VpcConfig?
+      attr_accessor network_traffic_config: Types::NetworkTrafficConfig?
+      attr_accessor code_remediation_strategy: String?
+      attr_accessor clean_up_strategy: String?
+      attr_accessor disable_managed_skills: Array[String]?
+      attr_accessor max_task_hours: Float?
+      attr_accessor report_destination: Types::ReportDestination?
+      attr_accessor report_filters: Types::ReportFilters?
+      attr_accessor cicd_configuration: Types::CiCdConfiguration?
+      attr_accessor test_scope: Types::TestScope?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class PentestJob
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pentest_job_id: String,
+        ?pentest_id: String,
+        ?title: String,
+        ?overview: String,
+        ?status: String,
+        ?endpoints: Array[Types::Endpoint],
+        ?actors: Array[Types::Actor],
+        ?documents: Array[Types::DocumentInfo],
+        ?source_code: Array[Types::SourceCodeRepository],
+        ?exclude_paths: Array[Types::Endpoint],
+        ?allowed_domains: Array[Types::Endpoint],
+        ?exclude_risk_types: Array[String],
+        ?steps: Array[Types::Step],
+        ?execution_context: Array[Types::ExecutionContext],
+        ?service_role: String,
+        ?log_config: Types::CloudWatchLog,
+        ?vpc_config: Types::VpcConfig,
+        ?network_traffic_config: Types::NetworkTrafficConfig,
+        ?error_information: Types::ErrorInformation,
+        ?integrated_repositories: Array[Types::IntegratedRepository],
+        ?trusted_ca_certificates: Array[Types::TrustedCaCertificate],
+        ?code_remediation_strategy: String,
+        ?clean_up_strategy: String,
+        ?disable_managed_skills: Array[String],
+        ?max_task_hours: Float,
+        ?job_type: String,
+        ?selected_finding_ids: Array[String],
+        ?report_destination: Types::ReportDestination,
+        ?report_url: String,
+        ?scope_result: Types::ScopeResult,
+        ?scope_changes: Array[Types::ScopeChange],
+        ?cicd_configuration: Types::CiCdConfiguration,
+        ?test_scope: Types::TestScope,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pentest_job_id: String?
+      attr_accessor pentest_id: String?
+      attr_accessor title: String?
+      attr_accessor overview: String?
+      attr_accessor status: String?
+      attr_accessor endpoints: Array[Types::Endpoint]?
+      attr_accessor actors: Array[Types::Actor]?
+      attr_accessor documents: Array[Types::DocumentInfo]?
+      attr_accessor source_code: Array[Types::SourceCodeRepository]?
+      attr_accessor exclude_paths: Array[Types::Endpoint]?
+      attr_accessor allowed_domains: Array[Types::Endpoint]?
+      attr_accessor exclude_risk_types: Array[String]?
+      attr_accessor steps: Array[Types::Step]?
+      attr_accessor execution_context: Array[Types::ExecutionContext]?
+      attr_accessor service_role: String?
+      attr_accessor log_config: Types::CloudWatchLog?
+      attr_accessor vpc_config: Types::VpcConfig?
+      attr_accessor network_traffic_config: Types::NetworkTrafficConfig?
+      attr_accessor error_information: Types::ErrorInformation?
+      attr_accessor integrated_repositories: Array[Types::IntegratedRepository]?
+      attr_accessor trusted_ca_certificates: Array[Types::TrustedCaCertificate]?
+      attr_accessor code_remediation_strategy: String?
+      attr_accessor clean_up_strategy: String?
+      attr_accessor disable_managed_skills: Array[String]?
+      attr_accessor max_task_hours: Float?
+      attr_accessor job_type: String?
+      attr_accessor selected_finding_ids: Array[String]?
+      attr_accessor report_destination: Types::ReportDestination?
+      attr_accessor report_url: String?
+      attr_accessor scope_result: Types::ScopeResult?
+      attr_accessor scope_changes: Array[Types::ScopeChange]?
+      attr_accessor cicd_configuration: Types::CiCdConfiguration?
+      attr_accessor test_scope: Types::TestScope?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class PentestJobSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pentest_job_id: String,
+        ?pentest_id: String,
+        ?title: String,
+        ?status: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?job_type: String,
+        ?report_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pentest_job_id: String?
+      attr_accessor pentest_id: String?
+      attr_accessor title: String?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor job_type: String?
+      attr_accessor report_url: String?
+    end
+
+    class PentestSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pentest_id: String,
+        ?agent_space_id: String,
+        ?title: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pentest_id: String?
+      attr_accessor agent_space_id: String?
+      attr_accessor title: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class PrivateConnectionMode
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?service_managed: Types::ServiceManagedInput,
+        ?self_managed: Types::SelfManagedInput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_managed: Types::ServiceManagedInput?
+      attr_accessor self_managed: Types::SelfManagedInput?
+
+      class ServiceManaged < PrivateConnectionMode
+      end
+      class SelfManaged < PrivateConnectionMode
+      end
+      class Unknown < PrivateConnectionMode
+      end
+    end
+
+    module PrivateConnectionStatus
+      ACTIVE: String
+      CREATE_IN_PROGRESS: String
+      CREATE_FAILED: String
+      DELETE_IN_PROGRESS: String
+      DELETE_FAILED: String
+    end
+
+    class PrivateConnectionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?type: String,
+        ?status: String,
+        ?resource_gateway_id: String,
+        ?host_address: String,
+        ?vpc_id: String,
+        ?resource_configuration_id: String,
+        ?certificate_expiry_time: Time,
+        ?dns_resolution: String,
+        ?failure_message: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor status: String?
+      attr_accessor resource_gateway_id: String?
+      attr_accessor host_address: String?
+      attr_accessor vpc_id: String?
+      attr_accessor resource_configuration_id: String?
+      attr_accessor certificate_expiry_time: Time?
+      attr_accessor dns_resolution: String?
+      attr_accessor failure_message: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    module PrivateConnectionType
+      SERVICE_MANAGED: String
+      SELF_MANAGED: String
+    end
+
+    module Provider
+      GITHUB: String
+      GITLAB: String
+      BITBUCKET: String
+      CONFLUENCE: String
+      AZURE_DEVOPS: String
+      JIRA: String
+    end
+
+    class ProviderInput
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?github: Types::GitHubIntegrationInput,
+        ?gitlab: Types::GitLabIntegrationInput,
+        ?bitbucket: Types::BitbucketIntegrationInput,
+        ?confluence: Types::ConfluenceIntegrationInput,
+        ?azure_dev_ops: Types::AzureDevOpsIntegrationInput,
+        ?bitbucket_data_center: Types::BitbucketDataCenterIntegrationInput,
+        ?jira: Types::JiraIntegrationInput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor github: Types::GitHubIntegrationInput?
+      attr_accessor gitlab: Types::GitLabIntegrationInput?
+      attr_accessor bitbucket: Types::BitbucketIntegrationInput?
+      attr_accessor confluence: Types::ConfluenceIntegrationInput?
+      attr_accessor azure_dev_ops: Types::AzureDevOpsIntegrationInput?
+      attr_accessor bitbucket_data_center: Types::BitbucketDataCenterIntegrationInput?
+      attr_accessor jira: Types::JiraIntegrationInput?
+
+      class Github < ProviderInput
+      end
+      class Gitlab < ProviderInput
+      end
+      class Bitbucket < ProviderInput
+      end
+      class Confluence < ProviderInput
+      end
+      class AzureDevOps < ProviderInput
+      end
+      class BitbucketDataCenter < ProviderInput
+      end
+      class Jira < ProviderInput
+      end
+      class Unknown < ProviderInput
+      end
+    end
+
+    class ProviderResourceCapabilities
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?github: Types::GitHubResourceCapabilities,
+        ?gitlab: Types::GitLabResourceCapabilities,
+        ?bitbucket: Types::BitbucketResourceCapabilities,
+        ?confluence: Types::ConfluenceResourceCapabilities,
+        ?azure_dev_ops: Types::AzureDevOpsResourceCapabilities,
+        ?jira: Types::JiraResourceCapabilities,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor github: Types::GitHubResourceCapabilities?
+      attr_accessor gitlab: Types::GitLabResourceCapabilities?
+      attr_accessor bitbucket: Types::BitbucketResourceCapabilities?
+      attr_accessor confluence: Types::ConfluenceResourceCapabilities?
+      attr_accessor azure_dev_ops: Types::AzureDevOpsResourceCapabilities?
+      attr_accessor jira: Types::JiraResourceCapabilities?
+
+      class Github < ProviderResourceCapabilities
+      end
+      class Gitlab < ProviderResourceCapabilities
+      end
+      class Bitbucket < ProviderResourceCapabilities
+      end
+      class Confluence < ProviderResourceCapabilities
+      end
+      class AzureDevOps < ProviderResourceCapabilities
+      end
+      class Jira < ProviderResourceCapabilities
+      end
+      class Unknown < ProviderResourceCapabilities
+      end
+    end
+
+    module ProviderType
+      SOURCE_CODE: String
+      DOCUMENTATION: String
+      ISSUE_TRACKING: String
+    end
+
+    class ReportDestination
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?integration_id: String,
+        ?container_id: String,
+        ?parent_id: String,
+        ?document_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor integration_id: String?
+      attr_accessor container_id: String?
+      attr_accessor parent_id: String?
+      attr_accessor document_id: String?
+    end
+
+    class ReportFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?risk_levels: Array[String],
+        ?confidence_levels: Array[String],
+        ?statuses: Array[String],
+        ?risk_types: Array[String],
+        ?finding_types: Array[String],
+        ?task_statuses: Array[String],
+        ?annotation_notes: bool,
+        ?compliance_report: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor risk_levels: Array[String]?
+      attr_accessor confidence_levels: Array[String]?
+      attr_accessor statuses: Array[String]?
+      attr_accessor risk_types: Array[String]?
+      attr_accessor finding_types: Array[String]?
+      attr_accessor task_statuses: Array[String]?
+      attr_accessor annotation_notes: bool?
+      attr_accessor compliance_report: bool?
+    end
+
+    module ResourceConfigDnsResolution
+      PUBLIC: String
+      IN_VPC: String
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ResourceType
+      CODE_REPOSITORY: String
+      DOCUMENT: String
+      PROJECT: String
+    end
+
+    module RiskLevel
+      UNKNOWN: String
+      INFORMATIONAL: String
+      LOW: String
+      MEDIUM: String
+      HIGH: String
+      CRITICAL: String
+    end
+
+    module RiskType
+      CROSS_SITE_SCRIPTING: String
+      DEFAULT_CREDENTIALS: String
+      INSECURE_DIRECT_OBJECT_REFERENCE: String
+      PRIVILEGE_ESCALATION: String
+      SERVER_SIDE_TEMPLATE_INJECTION: String
+      COMMAND_INJECTION: String
+      CODE_INJECTION: String
+      SQL_INJECTION: String
+      ARBITRARY_FILE_UPLOAD: String
+      INSECURE_DESERIALIZATION: String
+      LOCAL_FILE_INCLUSION: String
+      INFORMATION_DISCLOSURE: String
+      PATH_TRAVERSAL: String
+      SERVER_SIDE_REQUEST_FORGERY: String
+      JSON_WEB_TOKEN_VULNERABILITIES: String
+      XML_EXTERNAL_ENTITY: String
+      FILE_DELETION: String
+      OTHER: String
+      GRAPHQL_VULNERABILITIES: String
+      BUSINESS_LOGIC_VULNERABILITIES: String
+      CRYPTOGRAPHIC_VULNERABILITIES: String
+      DENIAL_OF_SERVICE: String
+      FILE_ACCESS: String
+      FILE_CREATION: String
+      DATABASE_MODIFICATION: String
+      DATABASE_ACCESS: String
+      OUTBOUND_SERVICE_REQUEST: String
+      UNKNOWN: String
+    end
+
+    class ScopeChange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?integration_id: String,
+        ?provider_resource_id: String,
+        ?base_commit_sha: String,
+        ?head_commit_sha: String,
+        ?trigger_run_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor integration_id: String?
+      attr_accessor provider_resource_id: String?
+      attr_accessor base_commit_sha: String?
+      attr_accessor head_commit_sha: String?
+      attr_accessor trigger_run_id: String?
+    end
+
+    module ScopeDecision
+      IN_SCOPE: String
+      SCOPED_OUT: String
+      SCOPE_CONFLICT: String
+    end
+
+    class ScopeResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?decision: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor decision: String?
+      attr_accessor reason: String?
+    end
+
+    class SecurityRequirementArtifact
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?format: String,
+        ?content: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor format: String?
+      attr_accessor content: String?
+    end
+
+    module SecurityRequirementArtifactFormat
+      MD: String
+      PDF: String
+      TXT: String
+      DOCX: String
+      DOC: String
+    end
+
+    module SecurityRequirementPackImportStatus
+      PENDING: String
+      IN_PROGRESS: String
+      FAILED: String
+      COMPLETED: String
+    end
+
+    module SecurityRequirementPackStatus
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class SecurityRequirementPackSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pack_id: String,
+        ?name: String,
+        ?description: String,
+        ?vendor_name: String,
+        ?management_type: String,
+        ?status: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pack_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor vendor_name: String?
+      attr_accessor management_type: String?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class SecurityRequirementSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pack_id: String,
+        ?name: String,
+        ?description: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pack_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class SelfManagedInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_configuration_id: String,
+        ?certificate: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_configuration_id: String?
+      attr_accessor certificate: String?
+    end
+
+    class ServiceManagedInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?host_address: String,
+        ?vpc_id: String,
+        ?subnet_ids: Array[String],
+        ?security_group_ids: Array[String],
+        ?ip_address_type: String,
+        ?ipv4_addresses_per_eni: Integer,
+        ?port_ranges: Array[String],
+        ?certificate: String,
+        ?dns_resolution: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor host_address: String?
+      attr_accessor vpc_id: String?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor security_group_ids: Array[String]?
+      attr_accessor ip_address_type: String?
+      attr_accessor ipv4_addresses_per_eni: Integer?
+      attr_accessor port_ranges: Array[String]?
+      attr_accessor certificate: String?
+      attr_accessor dns_resolution: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module SkillType
+      FINDING_PERSONALIZATION: String
+      LOGIN_OPTIMIZATION: String
+    end
+
+    class SourceCodeRepository
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_location: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_location: String?
+    end
+
+    class StartCodeRemediationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agent_space_id: String,
+        ?pentest_job_id: String,
+        ?code_review_job_id: String,
+        ?finding_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agent_space_id: String?
+      attr_accessor pentest_job_id: String?
+      attr_accessor code_review_job_id: String?
+      attr_accessor finding_ids: Array[String]?
+    end
+
+    class StartCodeRemediationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class StartCodeReviewJobInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agent_space_id: String,
+        ?code_review_id: String,
+        ?diff_source: Types::DiffSource,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agent_space_id: String?
+      attr_accessor code_review_id: String?
+      attr_accessor diff_source: Types::DiffSource?
+    end
+
+    class StartCodeReviewJobOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?title: String,
+        ?status: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?code_review_id: String,
+        ?code_review_job_id: String,
+        ?agent_space_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor title: String?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor code_review_id: String?
+      attr_accessor code_review_job_id: String?
+      attr_accessor agent_space_id: String?
+    end
+
+    class StartPentestJobInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agent_space_id: String,
+        ?pentest_id: String,
+        ?job_type: String,
+        ?selected_finding_ids: Array[String],
+        ?scope_changes: Array[Types::ScopeChange],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agent_space_id: String?
+      attr_accessor pentest_id: String?
+      attr_accessor job_type: String?
+      attr_accessor selected_finding_ids: Array[String]?
+      attr_accessor scope_changes: Array[Types::ScopeChange]?
+    end
+
+    class StartPentestJobOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?title: String,
+        ?status: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?pentest_id: String,
+        ?pentest_job_id: String,
+        ?agent_space_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor title: String?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor pentest_id: String?
+      attr_accessor pentest_job_id: String?
+      attr_accessor agent_space_id: String?
+    end
+
+    class StartThreatModelJobInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agent_space_id: String,
+        ?threat_model_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agent_space_id: String?
+      attr_accessor threat_model_id: String?
+    end
+
+    class StartThreatModelJobOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?title: String,
+        ?status: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?threat_model_id: String,
+        ?threat_model_job_id: String,
+        ?agent_space_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor title: String?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor threat_model_id: String?
+      attr_accessor threat_model_job_id: String?
+      attr_accessor agent_space_id: String?
+    end
+
+    class Step
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?status: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    module StepName
+      PREFLIGHT: String
+      STATIC_ANALYSIS: String
+      PENTEST: String
+      FINALIZING: String
+      VALIDATION: String
+    end
+
+    module StepStatus
+      NOT_STARTED: String
+      IN_PROGRESS: String
+      COMPLETED: String
+      FAILED: String
+      STOPPED: String
+    end
+
+    class StopCodeReviewJobInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agent_space_id: String,
+        ?code_review_job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agent_space_id: String?
+      attr_accessor code_review_job_id: String?
+    end
+
+    class StopCodeReviewJobOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class StopPentestJobInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agent_space_id: String,
+        ?pentest_job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agent_space_id: String?
+      attr_accessor pentest_job_id: String?
+    end
+
+    class StopPentestJobOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class StopThreatModelJobInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agent_space_id: String,
+        ?threat_model_job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agent_space_id: String?
+      attr_accessor threat_model_job_id: String?
+    end
+
+    class StopThreatModelJobOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module StrideCategory
+      SPOOFING: String
+      TAMPERING: String
+      REPUDIATION: String
+      INFORMATION_DISCLOSURE: String
+      DENIAL_OF_SERVICE: String
+      ELEVATION_OF_PRIVILEGE: String
+    end
+
+    class TagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TargetDomain
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_domain_id: String,
+        ?domain_name: String,
+        ?verification_status: String,
+        ?verification_status_reason: String,
+        ?verification_details: Types::VerificationDetails,
+        ?created_at: Time,
+        ?verified_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_domain_id: String?
+      attr_accessor domain_name: String?
+      attr_accessor verification_status: String?
+      attr_accessor verification_status_reason: String?
+      attr_accessor verification_details: Types::VerificationDetails?
+      attr_accessor created_at: Time?
+      attr_accessor verified_at: Time?
+    end
+
+    module TargetDomainStatus
+      PENDING: String
+      VERIFIED: String
+      FAILED: String
+      UNREACHABLE: String
+    end
+
+    class TargetDomainSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_domain_id: String,
+        ?domain_name: String,
+        ?verification_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_domain_id: String?
+      attr_accessor domain_name: String?
+      attr_accessor verification_status: String?
+    end
+
+    class Task
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_id: String,
+        ?pentest_id: String,
+        ?pentest_job_id: String,
+        ?agent_space_id: String,
+        ?title: String,
+        ?description: String,
+        ?categories: Array[Types::Category],
+        ?risk_type: String,
+        ?target_endpoint: Types::Endpoint,
+        ?execution_status: String,
+        ?logs_location: Types::LogLocation,
+        ?task_hours: Float,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_id: String?
+      attr_accessor pentest_id: String?
+      attr_accessor pentest_job_id: String?
+      attr_accessor agent_space_id: String?
+      attr_accessor title: String?
+      attr_accessor description: String?
+      attr_accessor categories: Array[Types::Category]?
+      attr_accessor risk_type: String?
+      attr_accessor target_endpoint: Types::Endpoint?
+      attr_accessor execution_status: String?
+      attr_accessor logs_location: Types::LogLocation?
+      attr_accessor task_hours: Float?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    module TaskExecutionStatus
+      IN_PROGRESS: String
+      ABORTED: String
+      COMPLETED: String
+      INTERNAL_ERROR: String
+      FAILED: String
+    end
+
+    class TaskSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_id: String,
+        ?pentest_id: String,
+        ?pentest_job_id: String,
+        ?agent_space_id: String,
+        ?title: String,
+        ?risk_type: String,
+        ?execution_status: String,
+        ?task_hours: Float,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_id: String?
+      attr_accessor pentest_id: String?
+      attr_accessor pentest_job_id: String?
+      attr_accessor agent_space_id: String?
+      attr_accessor title: String?
+      attr_accessor risk_type: String?
+      attr_accessor execution_status: String?
+      attr_accessor task_hours: Float?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class TestScope
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+    end
+
+    module TestScopeType
+      WEB_APP: String
+      GENERATIVE_AI_APP: String
+    end
+
+    class Threat
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?threat_id: String,
+        ?threat_job_id: String,
+        ?title: String,
+        ?statement: String,
+        ?severity: String,
+        ?status: String,
+        ?comments: String,
+        ?threat_source: String,
+        ?prerequisites: String,
+        ?threat_action: String,
+        ?threat_impact: String,
+        ?impacted_goal: Array[String],
+        ?impacted_assets: Array[String],
+        ?anchor: Types::ThreatAnchorShape,
+        ?evidence: Array[Types::ThreatEvidenceShape],
+        ?stride: Array[String],
+        ?recommendation: String,
+        ?created_by: String,
+        ?updated_by: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor threat_id: String?
+      attr_accessor threat_job_id: String?
+      attr_accessor title: String?
+      attr_accessor statement: String?
+      attr_accessor severity: String?
+      attr_accessor status: String?
+      attr_accessor comments: String?
+      attr_accessor threat_source: String?
+      attr_accessor prerequisites: String?
+      attr_accessor threat_action: String?
+      attr_accessor threat_impact: String?
+      attr_accessor impacted_goal: Array[String]?
+      attr_accessor impacted_assets: Array[String]?
+      attr_accessor anchor: Types::ThreatAnchorShape?
+      attr_accessor evidence: Array[Types::ThreatEvidenceShape]?
+      attr_accessor stride: Array[String]?
+      attr_accessor recommendation: String?
+      attr_accessor created_by: String?
+      attr_accessor updated_by: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    module ThreatActor
+      CUSTOMER: String
+      AGENT: String
+    end
+
+    class ThreatAnchorShape
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?kind: String,
+        ?id: String,
+        ?package_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor kind: String?
+      attr_accessor id: String?
+      attr_accessor package_id: String?
+    end
+
+    class ThreatEvidenceShape
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?package_id: String,
+        ?path: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor package_id: String?
+      attr_accessor path: String?
+    end
+
+    class ThreatModel
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?threat_model_id: String,
+        ?agent_space_id: String,
+        ?title: String,
+        ?description: String,
+        ?assets: Types::Assets,
+        ?scope_docs: Array[Types::DocumentInfo],
+        ?service_role: String,
+        ?log_config: Types::CloudWatchLog,
+        ?report_destination: Types::ReportDestination,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor threat_model_id: String?
+      attr_accessor agent_space_id: String?
+      attr_accessor title: String?
+      attr_accessor description: String?
+      attr_accessor assets: Types::Assets?
+      attr_accessor scope_docs: Array[Types::DocumentInfo]?
+      attr_accessor service_role: String?
+      attr_accessor log_config: Types::CloudWatchLog?
+      attr_accessor report_destination: Types::ReportDestination?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class ThreatModelJob
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?threat_model_job_id: String,
+        ?threat_model_id: String,
+        ?agent_space_id: String,
+        ?title: String,
+        ?status: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?execution_start_time: Time,
+        ?execution_end_time: Time,
+        ?source_code: Array[Types::SourceCodeRepository],
+        ?integrated_repositories: Array[Types::IntegratedRepository],
+        ?documents: Array[Types::DocumentInfo],
+        ?scope_docs: Array[Types::DocumentInfo],
+        ?error_information: Types::ErrorInformation,
+        ?system_overview: String,
+        ?report_destination: Types::ReportDestination,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor threat_model_job_id: String?
+      attr_accessor threat_model_id: String?
+      attr_accessor agent_space_id: String?
+      attr_accessor title: String?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor execution_start_time: Time?
+      attr_accessor execution_end_time: Time?
+      attr_accessor source_code: Array[Types::SourceCodeRepository]?
+      attr_accessor integrated_repositories: Array[Types::IntegratedRepository]?
+      attr_accessor documents: Array[Types::DocumentInfo]?
+      attr_accessor scope_docs: Array[Types::DocumentInfo]?
+      attr_accessor error_information: Types::ErrorInformation?
+      attr_accessor system_overview: String?
+      attr_accessor report_destination: Types::ReportDestination?
+    end
+
+    class ThreatModelJobSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?threat_model_job_id: String,
+        ?threat_model_id: String,
+        ?agent_space_id: String,
+        ?title: String,
+        ?status: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor threat_model_job_id: String?
+      attr_accessor threat_model_id: String?
+      attr_accessor agent_space_id: String?
+      attr_accessor title: String?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class ThreatModelJobTask
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_id: String,
+        ?threat_model_id: String,
+        ?threat_model_job_id: String,
+        ?agent_space_id: String,
+        ?title: String,
+        ?description: String,
+        ?execution_status: String,
+        ?logs_location: Types::LogLocation,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_id: String?
+      attr_accessor threat_model_id: String?
+      attr_accessor threat_model_job_id: String?
+      attr_accessor agent_space_id: String?
+      attr_accessor title: String?
+      attr_accessor description: String?
+      attr_accessor execution_status: String?
+      attr_accessor logs_location: Types::LogLocation?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class ThreatModelJobTaskSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_id: String,
+        ?threat_model_id: String,
+        ?threat_model_job_id: String,
+        ?agent_space_id: String,
+        ?title: String,
+        ?execution_status: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_id: String?
+      attr_accessor threat_model_id: String?
+      attr_accessor threat_model_job_id: String?
+      attr_accessor agent_space_id: String?
+      attr_accessor title: String?
+      attr_accessor execution_status: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class ThreatModelSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?threat_model_id: String,
+        ?agent_space_id: String,
+        ?title: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor threat_model_id: String?
+      attr_accessor agent_space_id: String?
+      attr_accessor title: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    module ThreatSeverity
+      CRITICAL: String
+      HIGH: String
+      MEDIUM: String
+      LOW: String
+      INFO: String
+    end
+
+    module ThreatStatus
+      OPEN: String
+      RESOLVED: String
+      DISMISSED: String
+    end
+
+    class ThreatSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?threat_id: String,
+        ?threat_job_id: String,
+        ?title: String,
+        ?statement: String,
+        ?severity: String,
+        ?status: String,
+        ?stride: Array[String],
+        ?created_by: String,
+        ?updated_by: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor threat_id: String?
+      attr_accessor threat_job_id: String?
+      attr_accessor title: String?
+      attr_accessor statement: String?
+      attr_accessor severity: String?
+      attr_accessor status: String?
+      attr_accessor stride: Array[String]?
+      attr_accessor created_by: String?
+      attr_accessor updated_by: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?service_code: String,
+        ?quota_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+    end
+
+    module TriggerEvent
+      PULL_REQUEST_READY_FOR_REVIEW: String
+      PULL_REQUEST_DRAFT: String
+      PULL_REQUEST_LABEL_ADDED: String
+    end
+
+    class TriggerFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?patterns: Array[String],
+        ?match_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor patterns: Array[String]?
+      attr_accessor match_mode: String?
+    end
+
+    class TriggerFilterGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?events: Array[String],
+        ?filters: Array[Types::TriggerFilter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor events: Array[String]?
+      attr_accessor filters: Array[Types::TriggerFilter]?
+    end
+
+    module TriggerFilterMatchMode
+      INCLUDE: String
+      EXCLUDE: String
+    end
+
+    module TriggerFilterType
+      TARGET_BRANCH: String
+      LABEL: String
+    end
+
+    class TrustedCaCertificate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source: Types::CaCertificateSource,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source: Types::CaCertificateSource?
+    end
+
+    class UntagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateAgentSpaceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agent_space_id: String,
+        ?name: String,
+        ?description: String,
+        ?aws_resources: Types::AWSResources,
+        ?target_domain_ids: Array[String],
+        ?code_review_settings: Types::CodeReviewSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agent_space_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor aws_resources: Types::AWSResources?
+      attr_accessor target_domain_ids: Array[String]?
+      attr_accessor code_review_settings: Types::CodeReviewSettings?
+    end
+
+    class UpdateAgentSpaceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agent_space_id: String,
+        ?name: String,
+        ?description: String,
+        ?aws_resources: Types::AWSResources,
+        ?target_domain_ids: Array[String],
+        ?code_review_settings: Types::CodeReviewSettings,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agent_space_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor aws_resources: Types::AWSResources?
+      attr_accessor target_domain_ids: Array[String]?
+      attr_accessor code_review_settings: Types::CodeReviewSettings?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class UpdateApplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?role_arn: String,
+        ?default_kms_key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor role_arn: String?
+      attr_accessor default_kms_key_id: String?
+    end
+
+    class UpdateApplicationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+    end
+
+    class UpdateCodeReviewInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code_review_id: String,
+        ?agent_space_id: String,
+        ?title: String,
+        ?assets: Types::Assets,
+        ?service_role: String,
+        ?log_config: Types::CloudWatchLog,
+        ?code_remediation_strategy: String,
+        ?validation_mode: String,
+        ?max_task_hours: Float,
+        ?report_destination: Types::ReportDestination,
+        ?report_filters: Types::ReportFilters,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code_review_id: String?
+      attr_accessor agent_space_id: String?
+      attr_accessor title: String?
+      attr_accessor assets: Types::Assets?
+      attr_accessor service_role: String?
+      attr_accessor log_config: Types::CloudWatchLog?
+      attr_accessor code_remediation_strategy: String?
+      attr_accessor validation_mode: String?
+      attr_accessor max_task_hours: Float?
+      attr_accessor report_destination: Types::ReportDestination?
+      attr_accessor report_filters: Types::ReportFilters?
+    end
+
+    class UpdateCodeReviewOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code_review_id: String,
+        ?title: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?assets: Types::Assets,
+        ?service_role: String,
+        ?log_config: Types::CloudWatchLog,
+        ?agent_space_id: String,
+        ?code_remediation_strategy: String,
+        ?validation_mode: String,
+        ?max_task_hours: Float,
+        ?report_destination: Types::ReportDestination,
+        ?report_filters: Types::ReportFilters,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code_review_id: String?
+      attr_accessor title: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor assets: Types::Assets?
+      attr_accessor service_role: String?
+      attr_accessor log_config: Types::CloudWatchLog?
+      attr_accessor agent_space_id: String?
+      attr_accessor code_remediation_strategy: String?
+      attr_accessor validation_mode: String?
+      attr_accessor max_task_hours: Float?
+      attr_accessor report_destination: Types::ReportDestination?
+      attr_accessor report_filters: Types::ReportFilters?
+    end
+
+    class UpdateFindingInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?finding_id: String,
+        ?agent_space_id: String,
+        ?name: String,
+        ?description: String,
+        ?risk_type: String,
+        ?risk_level: String,
+        ?risk_score: String,
+        ?attack_script: String,
+        ?reasoning: String,
+        ?status: String,
+        ?customer_note: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor finding_id: String?
+      attr_accessor agent_space_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor risk_type: String?
+      attr_accessor risk_level: String?
+      attr_accessor risk_score: String?
+      attr_accessor attack_script: String?
+      attr_accessor reasoning: String?
+      attr_accessor status: String?
+      attr_accessor customer_note: String?
+    end
+
+    class UpdateFindingOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateIntegratedResourcesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agent_space_id: String,
+        ?integration_id: String,
+        ?items: Array[Types::IntegratedResourceInputItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agent_space_id: String?
+      attr_accessor integration_id: String?
+      attr_accessor items: Array[Types::IntegratedResourceInputItem]?
+    end
+
+    class UpdateIntegratedResourcesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateIntegrationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?integration_id: String,
+        ?webhook_action: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor integration_id: String?
+      attr_accessor webhook_action: String?
+    end
+
+    class UpdateIntegrationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?integration_id: String,
+        ?webhook_url: String,
+        ?secret: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor integration_id: String?
+      attr_accessor webhook_url: String?
+      attr_accessor secret: String?
+    end
+
+    class UpdatePentestInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pentest_id: String,
+        ?agent_space_id: String,
+        ?title: String,
+        ?assets: Types::Assets,
+        ?exclude_risk_types: Array[String],
+        ?service_role: String,
+        ?log_config: Types::CloudWatchLog,
+        ?vpc_config: Types::VpcConfig,
+        ?network_traffic_config: Types::NetworkTrafficConfig,
+        ?code_remediation_strategy: String,
+        ?disable_managed_skills: Array[String],
+        ?max_task_hours: Float,
+        ?report_destination: Types::ReportDestination,
+        ?report_filters: Types::ReportFilters,
+        ?cicd_configuration: Types::CiCdConfiguration,
+        ?test_scope: Types::TestScope,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pentest_id: String?
+      attr_accessor agent_space_id: String?
+      attr_accessor title: String?
+      attr_accessor assets: Types::Assets?
+      attr_accessor exclude_risk_types: Array[String]?
+      attr_accessor service_role: String?
+      attr_accessor log_config: Types::CloudWatchLog?
+      attr_accessor vpc_config: Types::VpcConfig?
+      attr_accessor network_traffic_config: Types::NetworkTrafficConfig?
+      attr_accessor code_remediation_strategy: String?
+      attr_accessor disable_managed_skills: Array[String]?
+      attr_accessor max_task_hours: Float?
+      attr_accessor report_destination: Types::ReportDestination?
+      attr_accessor report_filters: Types::ReportFilters?
+      attr_accessor cicd_configuration: Types::CiCdConfiguration?
+      attr_accessor test_scope: Types::TestScope?
+    end
+
+    class UpdatePentestOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pentest_id: String,
+        ?title: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?assets: Types::Assets,
+        ?exclude_risk_types: Array[String],
+        ?service_role: String,
+        ?log_config: Types::CloudWatchLog,
+        ?agent_space_id: String,
+        ?report_destination: Types::ReportDestination,
+        ?report_filters: Types::ReportFilters,
+        ?cicd_configuration: Types::CiCdConfiguration,
+        ?test_scope: Types::TestScope,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pentest_id: String?
+      attr_accessor title: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor assets: Types::Assets?
+      attr_accessor exclude_risk_types: Array[String]?
+      attr_accessor service_role: String?
+      attr_accessor log_config: Types::CloudWatchLog?
+      attr_accessor agent_space_id: String?
+      attr_accessor report_destination: Types::ReportDestination?
+      attr_accessor report_filters: Types::ReportFilters?
+      attr_accessor cicd_configuration: Types::CiCdConfiguration?
+      attr_accessor test_scope: Types::TestScope?
+    end
+
+    class UpdatePrivateConnectionCertificateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?private_connection_name: String,
+        ?certificate: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor private_connection_name: String?
+      attr_accessor certificate: String?
+    end
+
+    class UpdatePrivateConnectionCertificateOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?type: String,
+        ?status: String,
+        ?resource_gateway_id: String,
+        ?host_address: String,
+        ?vpc_id: String,
+        ?resource_configuration_id: String,
+        ?certificate_expiry_time: Time,
+        ?dns_resolution: String,
+        ?failure_message: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor status: String?
+      attr_accessor resource_gateway_id: String?
+      attr_accessor host_address: String?
+      attr_accessor vpc_id: String?
+      attr_accessor resource_configuration_id: String?
+      attr_accessor certificate_expiry_time: Time?
+      attr_accessor dns_resolution: String?
+      attr_accessor failure_message: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class UpdateSecurityRequirementEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?domain: String,
+        ?evaluation: String,
+        ?remediation: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor domain: String?
+      attr_accessor evaluation: String?
+      attr_accessor remediation: String?
+    end
+
+    class UpdateSecurityRequirementPackInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pack_id: String,
+        ?name: String,
+        ?description: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pack_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor status: String?
+    end
+
+    class UpdateSecurityRequirementPackOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pack_id: String,
+        ?name: String,
+        ?description: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pack_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor status: String?
+    end
+
+    class UpdateTargetDomainInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_domain_id: String,
+        ?verification_method: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_domain_id: String?
+      attr_accessor verification_method: String?
+    end
+
+    class UpdateTargetDomainOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_domain_id: String,
+        ?domain_name: String,
+        ?verification_status: String,
+        ?verification_status_reason: String,
+        ?verification_details: Types::VerificationDetails,
+        ?created_at: Time,
+        ?verified_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_domain_id: String?
+      attr_accessor domain_name: String?
+      attr_accessor verification_status: String?
+      attr_accessor verification_status_reason: String?
+      attr_accessor verification_details: Types::VerificationDetails?
+      attr_accessor created_at: Time?
+      attr_accessor verified_at: Time?
+    end
+
+    class UpdateThreatInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?threat_id: String,
+        ?agent_space_id: String,
+        ?title: String,
+        ?status: String,
+        ?comments: String,
+        ?statement: String,
+        ?severity: String,
+        ?threat_source: String,
+        ?prerequisites: String,
+        ?threat_action: String,
+        ?threat_impact: String,
+        ?impacted_goal: Array[String],
+        ?impacted_assets: Array[String],
+        ?anchor: Types::ThreatAnchorShape,
+        ?evidence: Array[Types::ThreatEvidenceShape],
+        ?recommendation: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor threat_id: String?
+      attr_accessor agent_space_id: String?
+      attr_accessor title: String?
+      attr_accessor status: String?
+      attr_accessor comments: String?
+      attr_accessor statement: String?
+      attr_accessor severity: String?
+      attr_accessor threat_source: String?
+      attr_accessor prerequisites: String?
+      attr_accessor threat_action: String?
+      attr_accessor threat_impact: String?
+      attr_accessor impacted_goal: Array[String]?
+      attr_accessor impacted_assets: Array[String]?
+      attr_accessor anchor: Types::ThreatAnchorShape?
+      attr_accessor evidence: Array[Types::ThreatEvidenceShape]?
+      attr_accessor recommendation: String?
+    end
+
+    class UpdateThreatModelInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?threat_model_id: String,
+        ?agent_space_id: String,
+        ?title: String,
+        ?description: String,
+        ?assets: Types::Assets,
+        ?scope_docs: Array[Types::DocumentInfo],
+        ?service_role: String,
+        ?log_config: Types::CloudWatchLog,
+        ?report_destination: Types::ReportDestination,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor threat_model_id: String?
+      attr_accessor agent_space_id: String?
+      attr_accessor title: String?
+      attr_accessor description: String?
+      attr_accessor assets: Types::Assets?
+      attr_accessor scope_docs: Array[Types::DocumentInfo]?
+      attr_accessor service_role: String?
+      attr_accessor log_config: Types::CloudWatchLog?
+      attr_accessor report_destination: Types::ReportDestination?
+    end
+
+    class UpdateThreatModelOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?threat_model_id: String,
+        ?title: String,
+        ?agent_space_id: String,
+        ?description: String,
+        ?assets: Types::Assets,
+        ?scope_docs: Array[Types::DocumentInfo],
+        ?service_role: String,
+        ?log_config: Types::CloudWatchLog,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?report_destination: Types::ReportDestination,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor threat_model_id: String?
+      attr_accessor title: String?
+      attr_accessor agent_space_id: String?
+      attr_accessor description: String?
+      attr_accessor assets: Types::Assets?
+      attr_accessor scope_docs: Array[Types::DocumentInfo]?
+      attr_accessor service_role: String?
+      attr_accessor log_config: Types::CloudWatchLog?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor report_destination: Types::ReportDestination?
+    end
+
+    class UpdateThreatOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?threat_id: String,
+        ?threat_job_id: String,
+        ?title: String,
+        ?statement: String,
+        ?severity: String,
+        ?status: String,
+        ?comments: String,
+        ?stride: Array[String],
+        ?threat_source: String,
+        ?prerequisites: String,
+        ?threat_action: String,
+        ?threat_impact: String,
+        ?impacted_goal: Array[String],
+        ?impacted_assets: Array[String],
+        ?anchor: Types::ThreatAnchorShape,
+        ?evidence: Array[Types::ThreatEvidenceShape],
+        ?recommendation: String,
+        ?created_by: String,
+        ?updated_by: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor threat_id: String?
+      attr_accessor threat_job_id: String?
+      attr_accessor title: String?
+      attr_accessor statement: String?
+      attr_accessor severity: String?
+      attr_accessor status: String?
+      attr_accessor comments: String?
+      attr_accessor stride: Array[String]?
+      attr_accessor threat_source: String?
+      attr_accessor prerequisites: String?
+      attr_accessor threat_action: String?
+      attr_accessor threat_impact: String?
+      attr_accessor impacted_goal: Array[String]?
+      attr_accessor impacted_assets: Array[String]?
+      attr_accessor anchor: Types::ThreatAnchorShape?
+      attr_accessor evidence: Array[Types::ThreatEvidenceShape]?
+      attr_accessor recommendation: String?
+      attr_accessor created_by: String?
+      attr_accessor updated_by: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class UserConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role: String?
+    end
+
+    class UserMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?username: String,
+        ?email: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor username: String?
+      attr_accessor email: String?
+    end
+
+    module UserRole
+      MEMBER: String
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?field_list: Array[Types::ValidationExceptionField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor field_list: Array[Types::ValidationExceptionField]?
+    end
+
+    class ValidationExceptionField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?path: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor path: String?
+      attr_accessor message: String?
+    end
+
+    module ValidationMode
+      DISABLED: String
+      SIMULATED: String
+    end
+
+    module ValidationStatus
+      CONFIRMED: String
+      NOT_REPRODUCED: String
+      VALIDATION_FAILED: String
+      VALIDATING: String
+      NOT_VALIDATED: String
+    end
+
+    class VerificationDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?method: String,
+        ?dns_txt: Types::DnsVerification,
+        ?http_route: Types::HttpVerification,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor method: String?
+      attr_accessor dns_txt: Types::DnsVerification?
+      attr_accessor http_route: Types::HttpVerification?
+    end
+
+    class VerificationScript
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?script_type: String,
+        ?script_url: String,
+        ?instructions: String,
+        ?env_vars: Array[Types::VerificationScriptEnvVar],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor script_type: String?
+      attr_accessor script_url: String?
+      attr_accessor instructions: String?
+      attr_accessor env_vars: Array[Types::VerificationScriptEnvVar]?
+    end
+
+    class VerificationScriptEnvVar
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: String?
+    end
+
+    class VerifyTargetDomainInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_domain_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_domain_id: String?
+    end
+
+    class VerifyTargetDomainOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_domain_id: String,
+        ?domain_name: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?verified_at: Time,
+        ?status: String,
+        ?verification_status_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_domain_id: String?
+      attr_accessor domain_name: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor verified_at: Time?
+      attr_accessor status: String?
+      attr_accessor verification_status_reason: String?
+    end
+
+    class VpcConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_arn: String,
+        ?security_group_arns: Array[String],
+        ?subnet_arns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_arn: String?
+      attr_accessor security_group_arns: Array[String]?
+      attr_accessor subnet_arns: Array[String]?
+    end
+
+    module WebhookAction
+      CREATE_IF_ABSENT: String
+      ROTATE: String
+    end
+  end
+end

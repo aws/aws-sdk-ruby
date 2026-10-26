@@ -15,6 +15,7 @@ module Aws::DataExchange
     ApiDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.dataexchange#ApiDescription", name: "ApiDescription")
     ApiGatewayApiAsset = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.dataexchange#ApiGatewayApiAsset", name: "ApiGatewayApiAsset")
     Arn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.dataexchange#Arn", name: "Arn")
+    AssetConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.dataexchange#AssetConfiguration", name: "AssetConfiguration")
     AssetDestinationEntry = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.dataexchange#AssetDestinationEntry", name: "AssetDestinationEntry")
     AssetDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.dataexchange#AssetDetails", name: "AssetDetails")
     AssetEntry = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.dataexchange#AssetEntry", name: "AssetEntry")
@@ -145,6 +146,7 @@ module Aws::DataExchange
     ListOfS3DataAccesses = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.dataexchange#ListOfS3DataAccesses", name: "ListOfS3DataAccesses")
     ListOfSchemaChangeDetails = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.dataexchange#ListOfSchemaChangeDetails", name: "ListOfSchemaChangeDetails")
     ListOfTableTagPolicyLFPermissions = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.dataexchange#ListOfTableTagPolicyLFPermissions", name: "ListOfTableTagPolicyLFPermissions")
+    ListOfTag = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.dataexchange#ListOfTag", name: "ListOfTag", traits: {"smithy.api#length" => {"max" => 50}})
     ListOfString = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.dataexchange#ListOf__string", name: "ListOfString")
     ListReceivedDataGrantsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.dataexchange#ListReceivedDataGrantsRequest", name: "ListReceivedDataGrantsRequest")
     ListReceivedDataGrantsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.dataexchange#ListReceivedDataGrantsResponse", name: "ListReceivedDataGrantsResponse")
@@ -197,6 +199,7 @@ module Aws::DataExchange
     TableLFTagPolicy = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.dataexchange#TableLFTagPolicy", name: "TableLFTagPolicy")
     TableLFTagPolicyAndPermissions = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.dataexchange#TableLFTagPolicyAndPermissions", name: "TableLFTagPolicyAndPermissions")
     TableTagPolicyLFPermission = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.dataexchange#TableTagPolicyLFPermission", name: "TableTagPolicyLFPermission", traits: {"smithy.api#enum" => [{"value" => "DESCRIBE", "name" => "DESCRIBE"}, {"value" => "SELECT", "name" => "SELECT"}]})
+    Tag = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.dataexchange#Tag", name: "Tag")
     TagResourceInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.dataexchange#TagResourceInput", name: "TagResourceInput")
     ThrottlingException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.dataexchange#ThrottlingException", name: "ThrottlingException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 429})
     Timestamp = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.dataexchange#Timestamp", name: "Timestamp", traits: {"smithy.api#timestampFormat" => "date-time"})
@@ -251,6 +254,8 @@ module Aws::DataExchange
     ApiGatewayApiAsset.add_member(:protocol_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtocolType, name: "ProtocolType"))
     ApiGatewayApiAsset.add_member(:stage, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Stage"))
     ApiGatewayApiAsset.type = Types::ApiGatewayApiAsset
+    AssetConfiguration.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfTag, name: "Tags"))
+    AssetConfiguration.type = Types::AssetConfiguration
     AssetDestinationEntry.add_member(:asset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "AssetId", traits: {"smithy.api#required" => {}}))
     AssetDestinationEntry.add_member(:bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Bucket", traits: {"smithy.api#required" => {}}))
     AssetDestinationEntry.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Key"))
@@ -340,10 +345,12 @@ module Aws::DataExchange
     CreateEventActionOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: MapOfString, name: "Tags"))
     CreateEventActionOutput.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "UpdatedAt"))
     CreateEventActionOutput.type = Types::CreateEventActionOutput
+    CreateJobInput.add_member(:asset_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetConfiguration, name: "AssetConfiguration"))
     CreateJobInput.add_member(:details, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestDetails, name: "Details", traits: {"smithy.api#required" => {}}))
     CreateJobInput.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: Type, name: "Type", traits: {"smithy.api#required" => {}}))
     CreateJobInput.type = Types::CreateJobInput
     CreateJobOutput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "Arn"))
+    CreateJobOutput.add_member(:asset_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetConfiguration, name: "AssetConfiguration"))
     CreateJobOutput.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedAt"))
     CreateJobOutput.add_member(:details, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseDetails, name: "Details"))
     CreateJobOutput.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfJobError, name: "Errors"))
@@ -480,6 +487,7 @@ module Aws::DataExchange
     GetAssetOutput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetName, name: "Name"))
     GetAssetOutput.add_member(:revision_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "RevisionId"))
     GetAssetOutput.add_member(:source_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "SourceId"))
+    GetAssetOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: MapOfString, name: "Tags"))
     GetAssetOutput.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "UpdatedAt"))
     GetAssetOutput.type = Types::GetAssetOutput
     GetDataGrantRequest.add_member(:data_grant_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DataGrantId, name: "DataGrantId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -527,6 +535,7 @@ module Aws::DataExchange
     GetJobInput.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "JobId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetJobInput.type = Types::GetJobInput
     GetJobOutput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "Arn"))
+    GetJobOutput.add_member(:asset_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetConfiguration, name: "AssetConfiguration"))
     GetJobOutput.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedAt"))
     GetJobOutput.add_member(:details, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseDetails, name: "Details"))
     GetJobOutput.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfJobError, name: "Errors"))
@@ -636,6 +645,7 @@ module Aws::DataExchange
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message", traits: {"smithy.api#required" => {}}))
     InternalServerException.type = Types::InternalServerException
     JobEntry.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "Arn", traits: {"smithy.api#required" => {}}))
+    JobEntry.add_member(:asset_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetConfiguration, name: "AssetConfiguration"))
     JobEntry.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedAt", traits: {"smithy.api#required" => {}}))
     JobEntry.add_member(:details, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseDetails, name: "Details", traits: {"smithy.api#required" => {}}))
     JobEntry.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfJobError, name: "Errors"))
@@ -731,6 +741,7 @@ module Aws::DataExchange
     ListOfS3DataAccesses.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: S3DataAccessDetails, name: "member"))
     ListOfSchemaChangeDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaChangeDetails, name: "member"))
     ListOfTableTagPolicyLFPermissions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TableTagPolicyLFPermission, name: "member"))
+    ListOfTag.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     ListOfString.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     ListReceivedDataGrantsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults", traits: {"smithy.api#default" => nil, "smithy.api#httpQuery" => "maxResults"}))
     ListReceivedDataGrantsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
@@ -905,6 +916,9 @@ module Aws::DataExchange
     TableLFTagPolicyAndPermissions.add_member(:expression, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfLFTags, name: "Expression", traits: {"smithy.api#required" => {}}))
     TableLFTagPolicyAndPermissions.add_member(:permissions, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfTableTagPolicyLFPermissions, name: "Permissions", traits: {"smithy.api#required" => {}}))
     TableLFTagPolicyAndPermissions.type = Types::TableLFTagPolicyAndPermissions
+    Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Key", traits: {"smithy.api#required" => {}}))
+    Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Value", traits: {"smithy.api#required" => {}}))
+    Tag.type = Types::Tag
     TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: MapOfString, name: "Tags", traits: {"smithy.api#jsonName" => "tags", "smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput
@@ -979,7 +993,7 @@ module Aws::DataExchange
       service.id = "com.amazonaws.dataexchange#DataExchange"
       service.name = "DataExchange"
       service.version = "2017-07-25"
-      service.traits = {"aws.api#service" => {"sdkId" => "DataExchange", "arnNamespace" => "dataexchange", "cloudTrailEventSource" => "dataexchange.amazonaws.com", "endpointPrefix" => "dataexchange"}, "aws.auth#sigv4" => {"name" => "dataexchange"}, "aws.protocols#restJson1" => {}, "smithy.api#title" => "AWS Data Exchange"}
+      service.traits = {"aws.api#service" => {"sdkId" => "DataExchange", "arnNamespace" => "dataexchange", "cloudTrailEventSource" => "dataexchange.amazonaws.com", "endpointPrefix" => "dataexchange"}, "aws.auth#sigv4" => {"name" => "dataexchange"}, "aws.protocols#restJson1" => {}, "smithy.api#title" => "AWS Data Exchange", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://dataexchange-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://dataexchange-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://dataexchange.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://dataexchange.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
       service.add_operation(:accept_data_grant, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.dataexchange#AcceptDataGrant"
         operation.name = "AcceptDataGrant"

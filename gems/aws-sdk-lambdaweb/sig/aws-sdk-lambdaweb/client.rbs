@@ -1,0 +1,431 @@
+module Aws::LambdaWeb
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?account_id_endpoint_mode: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
+      ?connect_timeout: Numeric,
+      ?convert_params: bool,
+      ?credentials_provider: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::LambdaWeb::EndpointProvider,
+      ?http_proxy: URI::HTTP | String,
+      ?http_wire_trace: bool,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?max_attempts: Integer,
+      ?profile: String,
+      ?protocol: Symbol | Object,
+      ?raise_response_errors: bool,
+      ?read_timeout: Numeric,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_mode: String,
+      ?retry_strategy: Object,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?ssl_ca_bundle: String,
+      ?ssl_ca_directory: String,
+      ?ssl_ca_store: OpenSSL::X509::Store,
+      ?ssl_verify_peer: bool,
+      ?stub_responses: bool,
+      ?transport: Smithy::Client::NetHTTP::Transport,
+      ?use_dualstack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateWebFunctionResponse
+      include Smithy::Client::_Response[Types::CreateWebFunctionResponse]
+      def function_name: () -> String?
+      def function_arn: () -> String?
+      def state: () -> String?
+      def state_reason: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def revision: () -> Types::FunctionRevisionSummary?
+      def endpoint: () -> Types::FunctionEndpointSummary?
+      def tags: () -> Hash[String, String]?
+    end
+    def create_web_function: (
+      ?function_name: String,
+      ?revision_config: {
+        description: String,
+        kms_key_arn: String,
+        build_config: {
+          code_config: {
+            s3_object: {
+              bucket: String,
+              key: untyped,
+              version_id: untyped
+            }
+          },
+          runtime_config: {
+            runtime: untyped
+          }
+        },
+        service_config: {
+          execution_role_arn: String,
+          timeout_seconds: Integer,
+          egress_network_connector_arn: untyped,
+          max_concurrency_per_environment: untyped,
+          environment_variables: Hash[String, String],
+          telemetry_config: {
+            logging_config: {
+              log_group: untyped,
+              application_log_level: String,
+              system_log_level: String
+            }
+          }
+        }
+      },
+      ?endpoint_config: {
+        endpoint_name: String,
+        description: String,
+        endpoint_type: String,
+        auth_type: String,
+        auto_deployment_mode: String,
+        regions: Array[String],
+        scaling_config: {
+          max_environments: Integer
+        },
+        throttle_config: {
+          rate_limit: untyped
+        }
+      },
+      ?tags: Hash[String, String]
+    ) -> _CreateWebFunctionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWebFunctionResponse
+
+    interface _CreateWebFunctionEndpointResponse
+      include Smithy::Client::_Response[Types::CreateWebFunctionEndpointResponse]
+      def function_arn: () -> String?
+      def endpoint_arn: () -> String?
+      def endpoint_name: () -> String?
+      def description: () -> String?
+      def endpoint_type: () -> String?
+      def domain_name: () -> String?
+      def auth_type: () -> String?
+      def auto_deployment_mode: () -> String?
+      def revision_weights: () -> Array[Types::RevisionWeight]?
+      def regions: () -> Array[String]?
+      def scaling_config: () -> Types::ScalingConfig?
+      def throttle_config: () -> Types::ThrottleConfig?
+      def state: () -> String?
+      def state_reason: () -> String?
+      def update_status: () -> String?
+      def update_status_reason: () -> String?
+      def regional_endpoints: () -> Hash[String, Types::RegionalEndpoint]?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+    end
+    def create_web_function_endpoint: (
+      ?function_name: String,
+      ?endpoint_name: String,
+      ?description: String,
+      ?endpoint_type: String,
+      ?auth_type: String,
+      ?auto_deployment_mode: String,
+      ?revision_weights: Array[
+        {
+          revision_id: String,
+          weight: Integer
+        }
+      ],
+      ?regions: Array[String],
+      ?scaling_config: {
+        max_environments: Integer
+      },
+      ?throttle_config: {
+        rate_limit: Integer
+      }
+    ) -> _CreateWebFunctionEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWebFunctionEndpointResponse
+
+    interface _CreateWebFunctionRevisionResponse
+      include Smithy::Client::_Response[Types::CreateWebFunctionRevisionResponse]
+      def function_arn: () -> String?
+      def revision_arn: () -> String?
+      def revision_id: () -> String?
+      def description: () -> String?
+      def kms_key_arn: () -> String?
+      def build_config: () -> Types::BuildConfig?
+      def service_config: () -> Types::ServiceConfig?
+      def state: () -> String?
+      def state_reason: () -> String?
+      def errors: () -> Array[Types::RevisionError]?
+      def created_at: () -> Time?
+    end
+    def create_web_function_revision: (
+      ?function_name: String,
+      ?description: String,
+      ?kms_key_arn: String,
+      ?build_config: {
+        code_config: {
+          s3_object: {
+            bucket: String,
+            key: untyped,
+            version_id: untyped
+          }
+        },
+        runtime_config: {
+          runtime: untyped
+        }
+      },
+      ?service_config: {
+        execution_role_arn: String,
+        timeout_seconds: Integer,
+        egress_network_connector_arn: String,
+        max_concurrency_per_environment: untyped,
+        environment_variables: Hash[String, String],
+        telemetry_config: {
+          logging_config: {
+            log_group: untyped,
+            application_log_level: String,
+            system_log_level: String
+          }
+        }
+      }
+    ) -> _CreateWebFunctionRevisionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWebFunctionRevisionResponse
+
+    interface _DeleteResourcePolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_resource_policy: (
+      ?resource_arn: String,
+      ?revision_id: String
+    ) -> _DeleteResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteResourcePolicyResponse
+
+    interface _DeleteWebFunctionResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_web_function: (
+      ?function_name: String
+    ) -> _DeleteWebFunctionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteWebFunctionResponse
+
+    interface _DeleteWebFunctionEndpointResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_web_function_endpoint: (
+      ?function_name: String,
+      ?endpoint_name: String
+    ) -> _DeleteWebFunctionEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteWebFunctionEndpointResponse
+
+    interface _DeleteWebFunctionRevisionResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_web_function_revision: (
+      ?function_name: String,
+      ?revision_id: String
+    ) -> _DeleteWebFunctionRevisionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteWebFunctionRevisionResponse
+
+    interface _GetResourcePolicyResponse
+      include Smithy::Client::_Response[Types::GetResourcePolicyResponse]
+      def policy: () -> String?
+      def revision_id: () -> String?
+    end
+    def get_resource_policy: (
+      ?resource_arn: String
+    ) -> _GetResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResourcePolicyResponse
+
+    interface _GetWebAccountSettingsResponse
+      include Smithy::Client::_Response[Types::GetWebAccountSettingsResponse]
+      def account_quotas: () -> Types::AccountQuotas?
+      def account_usage: () -> Types::AccountUsage?
+    end
+    def get_web_account_settings: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetWebAccountSettingsResponse
+
+    interface _GetWebFunctionResponse
+      include Smithy::Client::_Response[Types::GetWebFunctionResponse]
+      def function_name: () -> String?
+      def function_arn: () -> String?
+      def state: () -> String?
+      def state_reason: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+    end
+    def get_web_function: (
+      ?function_name: String
+    ) -> _GetWebFunctionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetWebFunctionResponse
+
+    interface _GetWebFunctionEndpointResponse
+      include Smithy::Client::_Response[Types::GetWebFunctionEndpointResponse]
+      def function_arn: () -> String?
+      def endpoint_arn: () -> String?
+      def endpoint_name: () -> String?
+      def description: () -> String?
+      def endpoint_type: () -> String?
+      def domain_name: () -> String?
+      def auth_type: () -> String?
+      def auto_deployment_mode: () -> String?
+      def revision_weights: () -> Array[Types::RevisionWeight]?
+      def regions: () -> Array[String]?
+      def scaling_config: () -> Types::ScalingConfig?
+      def throttle_config: () -> Types::ThrottleConfig?
+      def state: () -> String?
+      def state_reason: () -> String?
+      def update_status: () -> String?
+      def update_status_reason: () -> String?
+      def regional_endpoints: () -> Hash[String, Types::RegionalEndpoint]?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+    end
+    def get_web_function_endpoint: (
+      ?function_name: String,
+      ?endpoint_name: String
+    ) -> _GetWebFunctionEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetWebFunctionEndpointResponse
+
+    interface _GetWebFunctionRevisionResponse
+      include Smithy::Client::_Response[Types::GetWebFunctionRevisionResponse]
+      def function_arn: () -> String?
+      def revision_arn: () -> String?
+      def revision_id: () -> String?
+      def description: () -> String?
+      def kms_key_arn: () -> String?
+      def build_config: () -> Types::BuildConfig?
+      def service_config: () -> Types::ServiceConfig?
+      def state: () -> String?
+      def state_reason: () -> String?
+      def errors: () -> Array[Types::RevisionError]?
+      def created_at: () -> Time?
+    end
+    def get_web_function_revision: (
+      ?function_name: String,
+      ?revision_id: String
+    ) -> _GetWebFunctionRevisionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetWebFunctionRevisionResponse
+
+    interface _ListTagsResponse
+      include Smithy::Client::_Response[Types::ListTagsResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags: (
+      ?resource: String
+    ) -> _ListTagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsResponse
+
+    interface _ListWebFunctionEndpointsResponse
+      include Smithy::Client::_Response[Types::ListWebFunctionEndpointsResponse]
+      def endpoints: () -> Array[Types::FunctionEndpointSummary]?
+      def next_token: () -> String?
+    end
+    def list_web_function_endpoints: (
+      ?function_name: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListWebFunctionEndpointsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListWebFunctionEndpointsResponse
+
+    interface _ListWebFunctionRevisionsResponse
+      include Smithy::Client::_Response[Types::ListWebFunctionRevisionsResponse]
+      def revisions: () -> Array[Types::FunctionRevisionSummary]?
+      def next_token: () -> String?
+    end
+    def list_web_function_revisions: (
+      ?function_name: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListWebFunctionRevisionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListWebFunctionRevisionsResponse
+
+    interface _ListWebFunctionsResponse
+      include Smithy::Client::_Response[Types::ListWebFunctionsResponse]
+      def functions: () -> Array[Types::FunctionSummary]?
+      def next_token: () -> String?
+    end
+    def list_web_functions: (
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListWebFunctionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListWebFunctionsResponse
+
+    interface _PutResourcePolicyResponse
+      include Smithy::Client::_Response[Types::PutResourcePolicyResponse]
+      def policy: () -> String?
+      def revision_id: () -> String?
+    end
+    def put_resource_policy: (
+      ?resource_arn: String,
+      ?policy: String,
+      ?revision_id: String
+    ) -> _PutResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutResourcePolicyResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def tag_resource: (
+      ?resource: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def untag_resource: (
+      ?resource: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateWebFunctionEndpointResponse
+      include Smithy::Client::_Response[Types::UpdateWebFunctionEndpointResponse]
+      def function_arn: () -> String?
+      def endpoint_arn: () -> String?
+      def endpoint_name: () -> String?
+      def description: () -> String?
+      def endpoint_type: () -> String?
+      def domain_name: () -> String?
+      def auth_type: () -> String?
+      def auto_deployment_mode: () -> String?
+      def revision_weights: () -> Array[Types::RevisionWeight]?
+      def regions: () -> Array[String]?
+      def scaling_config: () -> Types::ScalingConfig?
+      def throttle_config: () -> Types::ThrottleConfig?
+      def state: () -> String?
+      def state_reason: () -> String?
+      def update_status: () -> String?
+      def update_status_reason: () -> String?
+      def regional_endpoints: () -> Hash[String, Types::RegionalEndpoint]?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+    end
+    def update_web_function_endpoint: (
+      ?function_name: String,
+      ?endpoint_name: String,
+      ?description: String,
+      ?auth_type: String,
+      ?auto_deployment_mode: String,
+      ?revision_weights: Array[
+        {
+          revision_id: String,
+          weight: Integer
+        }
+      ],
+      ?scaling_config: {
+        max_environments: Integer
+      },
+      ?throttle_config: {
+        rate_limit: Integer
+      }
+    ) -> _UpdateWebFunctionEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateWebFunctionEndpointResponse
+  end
+end

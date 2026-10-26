@@ -2,7 +2,10 @@ module Aws::Evs
   module Schema
     include Smithy::Schema::Shapes
 
+    AccountSetting: StructureShape
+    AccountSettingList: ListShape
     AllocationId: StringShape
+    ApplianceFqdn: StringShape
     Arn: StringShape
     AssociateEipToVlanRequest: StructureShape
     AssociateEipToVlanResponse: StructureShape
@@ -14,11 +17,26 @@ module Aws::Evs
     Cidr: StringShape
     ClientToken: StringShape
     ConnectivityInfo: StructureShape
+    Connector: StructureShape
+    ConnectorCheck: StructureShape
+    ConnectorId: StringShape
+    ConnectorList: ListShape
+    ConnectorState: EnumShape
+    ConnectorType: EnumShape
+    ConnectorsChecksList: ListShape
+    CreateEntitlementRequest: StructureShape
+    CreateEntitlementResponse: StructureShape
+    CreateEnvironmentConnectorRequest: StructureShape
+    CreateEnvironmentConnectorResponse: StructureShape
     CreateEnvironmentHostRequest: StructureShape
     CreateEnvironmentHostResponse: StructureShape
     CreateEnvironmentRequest: StructureShape
     CreateEnvironmentResponse: StructureShape
     DedicatedHostId: StringShape
+    DeleteEntitlementRequest: StructureShape
+    DeleteEntitlementResponse: StructureShape
+    DeleteEnvironmentConnectorRequest: StructureShape
+    DeleteEnvironmentConnectorResponse: StructureShape
     DeleteEnvironmentHostRequest: StructureShape
     DeleteEnvironmentHostResponse: StructureShape
     DeleteEnvironmentRequest: StructureShape
@@ -27,6 +45,8 @@ module Aws::Evs
     DisassociateEipFromVlanResponse: StructureShape
     EipAssociation: StructureShape
     EipAssociationList: ListShape
+    EntitlementStatus: EnumShape
+    EntitlementType: EnumShape
     Environment: StructureShape
     EnvironmentId: StringShape
     EnvironmentName: StringShape
@@ -34,8 +54,17 @@ module Aws::Evs
     EnvironmentStateList: ListShape
     EnvironmentSummary: StructureShape
     EnvironmentSummaryList: ListShape
+    ErrorDetail: StructureShape
+    EsxVersion: StringShape
+    EsxVersionList: ListShape
+    GetAccountSettingsRequest: StructureShape
+    GetAccountSettingsResponse: StructureShape
+    GetDepotUrlRequest: StructureShape
+    GetDepotUrlResponse: StructureShape
     GetEnvironmentRequest: StructureShape
     GetEnvironmentResponse: StructureShape
+    GetVersionsRequest: StructureShape
+    GetVersionsResponse: StructureShape
     Host: StructureShape
     HostInfoForCreate: StructureShape
     HostInfoForCreateList: ListShape
@@ -45,10 +74,16 @@ module Aws::Evs
     InitialVlanInfo: StructureShape
     InitialVlans: StructureShape
     InstanceType: EnumShape
+    InstanceTypeEsxVersionsInfo: StructureShape
+    InstanceTypeEsxVersionsList: ListShape
+    InstanceTypeList: ListShape
+    InternalServerException: StructureShape
     IpAddress: StringShape
     KeyName: StringShape
     LicenseInfo: StructureShape
     LicenseInfoList: ListShape
+    ListEnvironmentConnectorsRequest: StructureShape
+    ListEnvironmentConnectorsResponse: StructureShape
     ListEnvironmentHostsRequest: StructureShape
     ListEnvironmentHostsResponse: StructureShape
     ListEnvironmentVlansRequest: StructureShape
@@ -57,6 +92,8 @@ module Aws::Evs
     ListEnvironmentsResponse: StructureShape
     ListTagsForResourceRequest: StructureShape
     ListTagsForResourceResponse: StructureShape
+    ListVmEntitlementsRequest: StructureShape
+    ListVmEntitlementsResponse: StructureShape
     MaxResults: IntegerShape
     NetworkAclId: StringShape
     NetworkInterface: StructureShape
@@ -64,17 +101,22 @@ module Aws::Evs
     NetworkInterfaceList: ListShape
     PaginationToken: StringShape
     PlacementGroupId: StringShape
+    PutAccountSettingsRequest: StructureShape
+    PutAccountSettingsResponse: StructureShape
     RequestTagMap: MapShape
     ResourceNotFoundException: StructureShape
     ResponseTagMap: MapShape
     RouteServerPeering: StringShape
     RouteServerPeeringList: ListShape
     Secret: StructureShape
+    SecretIdentifier: StringShape
     SecretList: ListShape
     SecurityGroupId: StringShape
     SecurityGroups: ListShape
     ServiceAccessSecurityGroups: StructureShape
     ServiceQuotaExceededException: StructureShape
+    SettingName: StringShape
+    SettingValue: StringShape
     SolutionKey: StringShape
     StateDetails: StringShape
     SubnetId: StringShape
@@ -88,6 +130,8 @@ module Aws::Evs
     TooManyTagsException: StructureShape
     UntagResourceRequest: StructureShape
     UntagResourceResponse: StructureShape
+    UpdateEnvironmentConnectorRequest: StructureShape
+    UpdateEnvironmentConnectorResponse: StructureShape
     VSanLicenseKey: StringShape
     ValidationException: StructureShape
     ValidationExceptionField: StructureShape
@@ -95,10 +139,17 @@ module Aws::Evs
     ValidationExceptionReason: EnumShape
     VcfHostnames: StructureShape
     VcfVersion: EnumShape
+    VcfVersionInfo: StructureShape
+    VcfVersionList: ListShape
     Vlan: StructureShape
     VlanId: IntegerShape
     VlanList: ListShape
     VlanState: EnumShape
+    VmEntitlement: StructureShape
+    VmEntitlementList: ListShape
+    VmId: StringShape
+    VmIdList: ListShape
+    VmName: StringShape
     VpcId: StringShape
 
     AmazonElasticVMwareService: ServiceShape

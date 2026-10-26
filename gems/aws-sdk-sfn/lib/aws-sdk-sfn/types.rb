@@ -298,9 +298,7 @@ module Aws::SFN
     end
 
     # @!attribute name
-    #   <p>The name of the activity to create. This name must be unique for your Amazon Web Services account and region for 90 days. For more information,
-    #       see <a href="https://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions">
-    #       Limits Related to State Machine Executions</a> in the <i>Step Functions Developer Guide</i>.</p>
+    #   <p>The name of the activity to create. This name must be unique for your Amazon Web Services account and region.</p>
     #            <p>A name must <i>not</i> contain:</p>
     #            <ul>
     #               <li>
@@ -1531,7 +1529,7 @@ module Aws::SFN
 
     # <p>Contains details about the events of an execution.</p>
     # @!attribute timestamp
-    #   <p>The date and time the event occurred.</p>
+    #   <p>The date and time the event occurred, expressed in seconds and fractional milliseconds since the Unix epoch, which is defined as January 1, 1970, at 00:00:00 Coordinated Universal Time (UTC).</p>
     #   @return [Time]
     # @!attribute type
     #   <p>The type of the event.</p>
@@ -1760,6 +1758,30 @@ module Aws::SFN
     # @!attribute variables
     #   <p>JSON string that contains the set of workflow variables after execution of the state. The set will include variables assigned in the state and variables set up as test state input.</p>
     #   @return [String]
+    # @!attribute error_details
+    #   <p>An object containing data about a handled exception in the tested state.</p>
+    #   @return [Types::InspectionErrorDetails]
+    # @!attribute after_items_path
+    #   <p>The effective input after the ItemsPath filter is applied. Not populated when the QueryLanguage is JSONata.</p>
+    #   @return [String]
+    # @!attribute after_item_selector
+    #   <p>An array containing the inputs for each Map iteration, transformed by the ItemSelector specified in a Map state.</p>
+    #   @return [String]
+    # @!attribute after_item_batcher
+    #   <p>The effective input after the ItemBatcher filter is applied in a Map state.</p>
+    #   @return [String]
+    # @!attribute after_items_pointer
+    #   <p>The effective input after the ItemsPointer filter is applied in a Map state.</p>
+    #   @return [String]
+    # @!attribute tolerated_failure_count
+    #   <p>The tolerated failure threshold for a Map state as defined in number of Map state iterations.</p>
+    #   @return [Integer]
+    # @!attribute tolerated_failure_percentage
+    #   <p>The tolerated failure threshold for a Map state as defined in percentage of Map state iterations.</p>
+    #   @return [Float]
+    # @!attribute max_concurrency
+    #   <p>The max concurrency of the Map state.</p>
+    #   @return [Integer]
     class InspectionData < Struct.new(
       nil,
       :input,
@@ -1772,6 +1794,14 @@ module Aws::SFN
       :request,
       :response,
       :variables,
+      :error_details,
+      :after_items_path,
+      :after_item_selector,
+      :after_item_batcher,
+      :after_items_pointer,
+      :tolerated_failure_count,
+      :tolerated_failure_percentage,
+      :max_concurrency,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1828,6 +1858,26 @@ module Aws::SFN
       :status_message,
       :headers,
       :body,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>An object containing data about a handled exception in the tested state.</p>
+    # @!attribute catch_index
+    #   <p>The array index of the Catch which handled the exception.</p>
+    #   @return [Integer]
+    # @!attribute retry_index
+    #   <p>The array index of the Retry which handled the exception.</p>
+    #   @return [Integer]
+    # @!attribute retry_backoff_interval_seconds
+    #   <p>The duration in seconds of the backoff for a retry on a failed state invocation.</p>
+    #   @return [Integer]
+    class InspectionErrorDetails < Struct.new(
+      nil,
+      :catch_index,
+      :retry_index,
+      :retry_backoff_interval_seconds,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2127,7 +2177,7 @@ module Aws::SFN
     # @!attribute status_filter
     #   <p>If specified, only list the executions whose current execution status matches the given
     #         filter.</p>
-    #            <p>If you provide a <code>PENDING_REDRIVE</code> statusFilter, you must specify <code>mapRunArn</code>. 
+    #            <p>If you provide a <code>PENDING_REDRIVE</code> statusFilter, you must specify <code>mapRunArn</code>.
     #         For more information, see <a href="https://docs.aws.amazon.com/step-functions/latest/dg/redrive-map-run.html#redrive-child-workflow-behavior">Child workflow execution redrive behaviour</a>
     #         in the <i>Step Functions Developer Guide</i>.
     #       </p>
@@ -2633,6 +2683,57 @@ module Aws::SFN
       include ::Smithy::Schema::Structure
     end
 
+    # <p>A JSON object that contains a mocked error.</p>
+    # @!attribute error
+    #   <p>A string denoting the error code of the exception thrown when invoking the tested state. This field is required if <code>mock.errorOutput</code> is specified.</p>
+    #   @return [String]
+    # @!attribute cause
+    #   <p>A string containing the cause of the exception thrown when executing the state's logic.</p>
+    #   @return [String]
+    class MockErrorOutput < Struct.new(
+      nil,
+      :error,
+      :cause,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A JSON object that contains a mocked <code>result</code> or <code>errorOutput</code>.</p>
+    # @!attribute result
+    #   <p>A JSON string containing the mocked result of the state invocation.</p>
+    #   @return [String]
+    # @!attribute error_output
+    #   <p>The mocked error output when calling TestState. When specified, the mocked response is returned as a JSON object that contains an <code>error</code> and <code>cause</code> field.</p>
+    #   @return [Types::MockErrorOutput]
+    # @!attribute field_validation_mode
+    #   <p>Determines the level of strictness when validating mocked results against their respective API models. Values include:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>STRICT</code>: All required fields must be present, and all present fields must conform to the API's schema.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>PRESENT</code>: All present fields must conform to the API's schema.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>NONE</code>: No validation is performed.</p>
+    #               </li>
+    #            </ul>
+    #            <p>If no value is specified, the default value is <code>STRICT</code>.</p>
+    #   @return [String]
+    class MockInput < Struct.new(
+      nil,
+      :result,
+      :error_output,
+      :field_validation_mode,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute state_machine_arn
     #   <p>The Amazon Resource Name (ARN) of the state machine.</p>
     #   @return [String]
@@ -2858,8 +2959,10 @@ module Aws::SFN
     #            </ul>
     #   @return [String]
     # @!attribute name
-    #   <p>Optional name of the execution. This name must be unique for your Amazon Web Services account, Region, and state machine for 90 days. For more information,
-    #       see <a href="https://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions">
+    #   <p>Optional name of the execution. For STANDARD workflows, this name must be unique for your Amazon Web Services account, region, and state machine.
+    #       If a previous execution with the same name exists, you can reuse the name 90 days after it closes.  For EXPRESS workflows, execution names
+    #       can be reused immediately.
+    #       For more information, see <a href="https://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions">
     #       Limits Related to State Machine Executions</a> in the <i>Step Functions Developer Guide</i>.</p>
     #            <p>If you don't provide a name for the execution, Step Functions automatically generates a universally unique identifier (UUID) as the execution name.</p>
     #            <p>A name must <i>not</i> contain:</p>
@@ -3583,8 +3686,32 @@ module Aws::SFN
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Contains configurations for the tested state.</p>
+    # @!attribute retrier_retry_count
+    #   <p>The number of retry attempts that have occurred for the state's Retry that applies to the mocked error.</p>
+    #   @return [Integer]
+    # @!attribute error_caused_by_state
+    #   <p>The name of the state from which an error originates when an error is mocked for a Map or Parallel state.</p>
+    #   @return [String]
+    # @!attribute map_iteration_failure_count
+    #   <p>The number of Map state iterations that failed during the Map state invocation.</p>
+    #   @return [Integer]
+    # @!attribute map_item_reader_data
+    #   <p>The data read by ItemReader in Distributed Map states as found in its original source.</p>
+    #   @return [String]
+    class TestStateConfiguration < Struct.new(
+      nil,
+      :retrier_retry_count,
+      :error_caused_by_state,
+      :map_iteration_failure_count,
+      :map_item_reader_data,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute definition
-    #   <p>The <a href="https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html">Amazon States Language</a> (ASL) definition of the state.</p>
+    #   <p>The <a href="https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html">Amazon States Language</a> (ASL) definition of the state or state machine.</p>
     #   @return [String]
     # @!attribute role_arn
     #   <p>The Amazon Resource Name (ARN) of the execution role with the required IAM permissions for the state.</p>
@@ -3618,6 +3745,19 @@ module Aws::SFN
     # @!attribute variables
     #   <p>JSON object literal that sets variables used in the state under test. Object keys are the variable names and values are the variable values.</p>
     #   @return [String]
+    # @!attribute state_name
+    #   <p>Denotes the particular state within a state machine definition to be tested. If this field is specified, the <code>definition</code> must contain a fully-formed state machine definition.</p>
+    #   @return [String]
+    # @!attribute mock
+    #   <p>Defines a mocked result or error for the state under test.</p>
+    #            <p>A mock can only be specified for Task, Map, or Parallel states. If it is specified for another state type, an exception will be thrown.</p>
+    #   @return [Types::MockInput]
+    # @!attribute context
+    #   <p>A JSON string representing a valid Context object for the state under test. This field may only be specified if a mock is specified in the same request.</p>
+    #   @return [String]
+    # @!attribute state_configuration
+    #   <p>Contains configurations for the state under test.</p>
+    #   @return [Types::TestStateConfiguration]
     class TestStateInput < Struct.new(
       nil,
       :definition,
@@ -3626,6 +3766,10 @@ module Aws::SFN
       :inspection_level,
       :reveal_secrets,
       :variables,
+      :state_name,
+      :mock,
+      :context,
+      :state_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

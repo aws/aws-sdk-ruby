@@ -199,17 +199,21 @@ module Aws::ControlTower
     # @!attribute version
     #   <p>The landing zone version, for example, 3.0.</p>
     #   @return [String]
-    # @!attribute manifest
-    #   <p>The manifest JSON file is a text file that describes your Amazon Web Services resources. For examples, review <a href="https://docs.aws.amazon.com/controltower/latest/userguide/lz-api-launch">Launch your landing zone</a>. </p>
-    #   @return [JSON]
+    # @!attribute remediation_types
+    #   <p>Specifies the types of remediation actions to apply when creating the landing zone, such as automatic drift correction or compliance enforcement.</p>
+    #   @return [Array<String>]
     # @!attribute tags
     #   <p>Tags to be applied to the landing zone. </p>
     #   @return [Hash<String, String>]
+    # @!attribute manifest
+    #   <p>The manifest JSON file is a text file that describes your Amazon Web Services resources. For examples, review <a href="https://docs.aws.amazon.com/controltower/latest/userguide/lz-api-launch">Launch your landing zone</a>. </p>
+    #   @return [JSON]
     class CreateLandingZoneInput < Struct.new(
       nil,
       :version,
-      :manifest,
+      :remediation_types,
       :tags,
+      :manifest,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -280,10 +284,14 @@ module Aws::ControlTower
     # @!attribute target_identifier
     #   <p>The ARN of the organizational unit. For information on how to find the <code>targetIdentifier</code>, see <a href="https://docs.aws.amazon.com/controltower/latest/APIReference/Welcome.html">the overview page</a>.</p>
     #   @return [String]
+    # @!attribute enabled_control_identifier
+    #   <p>The ARN of the enabled control to be disabled, which uniquely identifies the control instance on the target organizational unit.</p>
+    #   @return [String]
     class DisableControlInput < Struct.new(
       nil,
       :control_identifier,
       :target_identifier,
+      :enabled_control_identifier,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -304,9 +312,13 @@ module Aws::ControlTower
     # @!attribute drift_status
     #   <p> The drift status of the enabled control.</p> <p>Valid values:</p> <ul> <li> <p> <code>DRIFTED</code>: The <code>enabledControl</code> deployed in this configuration doesn’t match the configuration that Amazon Web Services Control Tower expected. </p> </li> <li> <p> <code>IN_SYNC</code>: The <code>enabledControl</code> deployed in this configuration matches the configuration that Amazon Web Services Control Tower expected.</p> </li> <li> <p> <code>NOT_CHECKING</code>: Amazon Web Services Control Tower does not check drift for this enabled control. Drift is not supported for the control type.</p> </li> <li> <p> <code>UNKNOWN</code>: Amazon Web Services Control Tower is not able to check the drift status for the enabled control. </p> </li> </ul>
     #   @return [String]
+    # @!attribute types
+    #   <p>An object that categorizes the different types of drift detected for the enabled control.</p>
+    #   @return [Types::EnabledControlDriftTypes]
     class DriftStatusSummary < Struct.new(
       nil,
       :drift_status,
+      :types,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -574,15 +586,18 @@ module Aws::ControlTower
     # @!attribute target_identifier
     #   <p>The ARN of the organizational unit. For information on how to find the <code>targetIdentifier</code>, see <a href="https://docs.aws.amazon.com/controltower/latest/APIReference/Welcome.html">the overview page</a>.</p>
     #   @return [String]
-    # @!attribute target_regions
-    #   <p>Target Amazon Web Services Regions for the enabled control.</p>
-    #   @return [Array<Types::Region>]
     # @!attribute status_summary
     #   <p>The deployment summary of the enabled control.</p>
     #   @return [Types::EnablementStatusSummary]
     # @!attribute drift_status_summary
     #   <p>The drift status of the enabled control.</p>
     #   @return [Types::DriftStatusSummary]
+    # @!attribute parent_identifier
+    #   <p>The ARN of the parent enabled control from which this control inherits its configuration, if applicable.</p>
+    #   @return [String]
+    # @!attribute target_regions
+    #   <p>Target Amazon Web Services Regions for the enabled control.</p>
+    #   @return [Array<Types::Region>]
     # @!attribute parameters
     #   <p>Array of <code>EnabledControlParameter</code> objects.</p>
     #   @return [Array<Types::EnabledControlParameterSummary>]
@@ -591,10 +606,27 @@ module Aws::ControlTower
       :arn,
       :control_identifier,
       :target_identifier,
-      :target_regions,
       :status_summary,
       :drift_status_summary,
+      :parent_identifier,
+      :target_regions,
       :parameters,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Defines the various categories of drift that can occur for an enabled control resource.</p>
+    # @!attribute inheritance
+    #   <p>Indicates drift related to inheritance configuration between parent and child controls.</p>
+    #   @return [Types::EnabledControlInheritanceDrift]
+    # @!attribute resource
+    #   <p>Indicates drift related to the underlying Amazon Web Services resources managed by the control.</p>
+    #   @return [Types::EnabledControlResourceDrift]
+    class EnabledControlDriftTypes < Struct.new(
+      nil,
+      :inheritance,
+      :resource,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -610,11 +642,35 @@ module Aws::ControlTower
     # @!attribute drift_statuses
     #   <p>A list of <code>DriftStatus</code> items.</p>
     #   @return [Array<String>]
+    # @!attribute parent_identifiers
+    #   <p>Filters enabled controls by their parent control identifiers, allowing you to find child controls of specific parent controls.</p>
+    #   @return [Array<String>]
+    # @!attribute inheritance_drift_statuses
+    #   <p>Filters enabled controls by their inheritance drift status, allowing you to find controls with specific inheritance-related drift conditions.</p>
+    #   @return [Array<String>]
+    # @!attribute resource_drift_statuses
+    #   <p>Filters enabled controls by their resource drift status, allowing you to find controls with specific resource-related drift conditions.</p>
+    #   @return [Array<String>]
     class EnabledControlFilter < Struct.new(
       nil,
       :control_identifiers,
       :statuses,
       :drift_statuses,
+      :parent_identifiers,
+      :inheritance_drift_statuses,
+      :resource_drift_statuses,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Represents drift information related to control inheritance between organizational units.</p>
+    # @!attribute status
+    #   <p>The status of inheritance drift for the enabled control, indicating whether inheritance configuration matches expectations.</p>
+    #   @return [String]
+    class EnabledControlInheritanceDrift < Struct.new(
+      nil,
+      :status,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -652,12 +708,24 @@ module Aws::ControlTower
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Returns a summary of information about an enabled control.</p>
-    # @!attribute control_identifier
-    #   <p>The <code>controlIdentifier</code> of the enabled control.</p>
+    # <p>Represents drift information related to the underlying Amazon Web Services resources managed by the control.</p>
+    # @!attribute status
+    #   <p>The status of resource drift for the enabled control, indicating whether the underlying resources match the expected configuration.</p>
     #   @return [String]
+    class EnabledControlResourceDrift < Struct.new(
+      nil,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Returns a summary of information about an enabled control.</p>
     # @!attribute arn
     #   <p>The ARN of the enabled control.</p>
+    #   @return [String]
+    # @!attribute control_identifier
+    #   <p>The <code>controlIdentifier</code> of the enabled control.</p>
     #   @return [String]
     # @!attribute target_identifier
     #   <p>The ARN of the organizational unit.</p>
@@ -668,13 +736,17 @@ module Aws::ControlTower
     # @!attribute drift_status_summary
     #   <p>The drift status of the enabled control.</p>
     #   @return [Types::DriftStatusSummary]
+    # @!attribute parent_identifier
+    #   <p>The ARN of the parent enabled control from which this control inherits its configuration, if applicable.</p>
+    #   @return [String]
     class EnabledControlSummary < Struct.new(
       nil,
-      :control_identifier,
       :arn,
+      :control_identifier,
       :target_identifier,
       :status_summary,
       :drift_status_summary,
+      :parent_identifier,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -873,9 +945,9 @@ module Aws::ControlTower
     # @!attribute version
     #   <p>The landing zone's current deployed version.</p>
     #   @return [String]
-    # @!attribute manifest
-    #   <p>The landing zone manifest JSON text file that specifies the landing zone configurations. </p>
-    #   @return [JSON]
+    # @!attribute remediation_types
+    #   <p>The types of remediation actions configured for the landing zone, such as automatic drift correction or compliance enforcement.</p>
+    #   @return [Array<String>]
     # @!attribute arn
     #   <p>The ARN of the landing zone.</p>
     #   @return [String]
@@ -888,14 +960,18 @@ module Aws::ControlTower
     # @!attribute drift_status
     #   <p>The drift status of the landing zone.</p>
     #   @return [Types::LandingZoneDriftStatusSummary]
+    # @!attribute manifest
+    #   <p>The landing zone manifest JSON text file that specifies the landing zone configurations. </p>
+    #   @return [JSON]
     class LandingZoneDetail < Struct.new(
       nil,
       :version,
-      :manifest,
+      :remediation_types,
       :arn,
       :status,
       :latest_available_version,
       :drift_status,
+      :manifest,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1096,7 +1172,7 @@ module Aws::ControlTower
     end
 
     # @!attribute target_identifier
-    #   <p>The ARN of the organizational unit. For information on how to find the <code>targetIdentifier</code>, see <a href="https://docs.aws.amazon.com/controltower/latest/APIReference/Welcome.html">the overview page</a>.</p>
+    #   <p>The ARN of the target. The value depends on the target type:</p> <ul> <li> <p>Organizational unit (OU) – Specify the ARN of the OU.</p> </li> <li> <p>Account – Specify the ARN of the account.</p> </li> </ul> <p>For information on how to find the <code>targetIdentifier</code>, see <a href="https://docs.aws.amazon.com/controltower/latest/APIReference/Welcome.html">the overview page</a>.</p>
     #   @return [String]
     # @!attribute next_token
     #   <p>The token to continue the list from a previous API call with the same parameters.</p>
@@ -1107,12 +1183,16 @@ module Aws::ControlTower
     # @!attribute filter
     #   <p>An input filter for the <code>ListEnabledControls</code> API that lets you select the types of control operations to view.</p>
     #   @return [Types::EnabledControlFilter]
+    # @!attribute include_children
+    #   <p>Specifies whether to include enabled controls from child organizational units and child accounts in the response.</p>
+    #   @return [Boolean]
     class ListEnabledControlsInput < Struct.new(
       nil,
       :target_identifier,
       :next_token,
       :max_results,
       :filter,
+      :include_children,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1308,7 +1388,7 @@ module Aws::ControlTower
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The request would cause a service quota to be exceeded. The limit is 100 concurrent operations.</p>
+    # <p>The request would cause a service quota to be exceeded. See <a href="https://docs.aws.amazon.com/controltower/latest/userguide/request-an-increase.html">Service quotas</a>.</p>
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
@@ -1445,17 +1525,21 @@ module Aws::ControlTower
     # @!attribute version
     #   <p>The landing zone version, for example, 3.2.</p>
     #   @return [String]
-    # @!attribute manifest
-    #   <p>The manifest file (JSON) is a text file that describes your Amazon Web Services resources. For an example, review <a href="https://docs.aws.amazon.com/controltower/latest/userguide/lz-api-launch">Launch your landing zone</a>. The example manifest file contains each of the available parameters. The schema for the landing zone's JSON manifest file is not published, by design.</p>
-    #   @return [JSON]
+    # @!attribute remediation_types
+    #   <p>Specifies the types of remediation actions to apply when updating the landing zone configuration.</p>
+    #   @return [Array<String>]
     # @!attribute landing_zone_identifier
     #   <p>The unique identifier of the landing zone.</p>
     #   @return [String]
+    # @!attribute manifest
+    #   <p>The manifest file (JSON) is a text file that describes your Amazon Web Services resources. For an example, review <a href="https://docs.aws.amazon.com/controltower/latest/userguide/lz-api-launch">Launch your landing zone</a>. The example manifest file contains each of the available parameters. The schema for the landing zone's JSON manifest file is not published, by design.</p>
+    #   @return [JSON]
     class UpdateLandingZoneInput < Struct.new(
       nil,
       :version,
-      :manifest,
+      :remediation_types,
       :landing_zone_identifier,
+      :manifest,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

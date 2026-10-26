@@ -127,7 +127,10 @@ module Aws::RAM
       ?allow_external_principals: bool,
       ?client_token: String,
       ?permission_arns: Array[String],
-      ?sources: Array[String]
+      ?sources: Array[String],
+      ?resource_share_configuration: {
+        retain_sharing_on_account_leave_organization: bool
+      }
     ) -> _CreateResourceShareResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateResourceShareResponse
 
     interface _DeletePermissionResponse
@@ -378,6 +381,20 @@ module Aws::RAM
       ?max_results: Integer,
       ?resource_region_scope: String
     ) -> _ListResourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListResourcesResponse
+
+    interface _ListSourceAssociationsResponse
+      include Smithy::Client::_Response[Types::ListSourceAssociationsResponse]
+      def source_associations: () -> Array[Types::AssociatedSource]?
+      def next_token: () -> String?
+    end
+    def list_source_associations: (
+      ?resource_share_arns: Array[String],
+      ?source_id: String,
+      ?source_type: String,
+      ?association_status: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListSourceAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSourceAssociationsResponse
 
     interface _PromotePermissionCreatedFromPolicyResponse
       include Smithy::Client::_Response[Types::PromotePermissionCreatedFromPolicyResponse]

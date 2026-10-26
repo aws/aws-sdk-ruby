@@ -23,6 +23,7 @@ module Aws::SageMakerFeatureStoreRuntime
   # ## Error Classes
   #
   # * {AccessForbidden}
+  # * {ConflictException}
   # * {InternalFailure}
   # * {ResourceNotFound}
   # * {ServiceUnavailable}
@@ -37,6 +38,22 @@ module Aws::SageMakerFeatureStoreRuntime
     class AccessForbidden < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SageMakerFeatureStoreRuntime::Types::AccessForbidden] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>The service rejected the update because the provided <code>EventTime</code> is
+    #          older than the record's current <code>EventTime</code>. To persist the update, retrieve
+    #          the record's latest <code>EventTime</code> and resubmit the request with an
+    #             <code>EventTime</code> that is equal to or newer than the current value.</p>
+    class ConflictException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::SageMakerFeatureStoreRuntime::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
         super
       end

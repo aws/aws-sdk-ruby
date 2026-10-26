@@ -215,7 +215,8 @@ module Aws::AutoScaling
                     ]
                   }
                 }
-              }
+              },
+              image_id: String
             }
           ]
         },
@@ -225,7 +226,12 @@ module Aws::AutoScaling
           on_demand_percentage_above_base_capacity: Integer,
           spot_allocation_strategy: untyped,
           spot_instance_pools: Integer,
-          spot_max_price: String
+          spot_max_price: String,
+          distribution_segments: Array[
+            {
+              target_capacity_types: Array[String]
+            }
+          ]
         }
       },
       ?instance_id: String,
@@ -234,6 +240,7 @@ module Aws::AutoScaling
       ?desired_capacity: Integer,
       ?default_cooldown: Integer,
       ?availability_zones: Array[String],
+      ?availability_zone_ids: Array[String],
       ?load_balancer_names: Array[String],
       ?target_group_ar_ns: Array[String],
       ?health_check_type: String,
@@ -254,6 +261,7 @@ module Aws::AutoScaling
           role_arn: String
         }
       ],
+      ?deletion_protection: String,
       ?tags: Array[
         {
           resource_id: String,
@@ -292,6 +300,14 @@ module Aws::AutoScaling
           capacity_reservation_ids: Array[String],
           capacity_reservation_resource_group_arns: Array[String]
         }
+      },
+      ?instance_lifecycle_policy: {
+        retention_triggers: {
+          terminate_hook_abandon: String
+        }
+      },
+      ?operator: {
+        principal: String
       }
     ) -> _CreateAutoScalingGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAutoScalingGroupResponse
 
@@ -577,7 +593,13 @@ module Aws::AutoScaling
       ?auto_scaling_group_name: String,
       ?include_deleted_groups: bool,
       ?max_records: Integer,
-      ?next_token: String
+      ?next_token: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ]
     ) -> _DescribeScalingActivitiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeScalingActivitiesResponse
 
     interface _DescribeScalingProcessTypesResponse
@@ -744,6 +766,23 @@ module Aws::AutoScaling
       ?start_time: Time,
       ?end_time: Time
     ) -> _GetPredictiveScalingForecastResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPredictiveScalingForecastResponse
+
+    interface _LaunchInstancesResponse
+      include Smithy::Client::_Response[Types::LaunchInstancesResult]
+      def auto_scaling_group_name: () -> String?
+      def client_token: () -> String?
+      def instances: () -> Array[Types::InstanceCollection]?
+      def errors: () -> Array[Types::LaunchInstancesError]?
+    end
+    def launch_instances: (
+      ?auto_scaling_group_name: String,
+      ?requested_capacity: Integer,
+      ?client_token: String,
+      ?availability_zones: Array[String],
+      ?availability_zone_ids: Array[String],
+      ?subnet_ids: Array[String],
+      ?retry_strategy: String
+    ) -> _LaunchInstancesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _LaunchInstancesResponse
 
     interface _PutLifecycleHookResponse
       include Smithy::Client::_Response[Types::PutLifecycleHookOutput]
@@ -1051,7 +1090,8 @@ module Aws::AutoScaling
                       ]
                     }
                   }
-                }
+                },
+                image_id: String
               }
             ]
           },
@@ -1061,7 +1101,12 @@ module Aws::AutoScaling
             on_demand_percentage_above_base_capacity: Integer,
             spot_allocation_strategy: untyped,
             spot_instance_pools: Integer,
-            spot_max_price: String
+            spot_max_price: String,
+            distribution_segments: Array[
+              {
+                target_capacity_types: Array[String]
+              }
+            ]
           }
         }
       },
@@ -1093,9 +1138,12 @@ module Aws::AutoScaling
     interface _TerminateInstanceInAutoScalingGroupResponse
       include Smithy::Client::_Response[Types::TerminateInstanceInAutoScalingGroupOutput]
       def activity: () -> Types::Activity?
+      def activities: () -> Array[Types::Activity]?
     end
     def terminate_instance_in_auto_scaling_group: (
       ?instance_id: String,
+      ?instance_ids: Array[String],
+      ?auto_scaling_group_name: String,
       ?should_decrement_desired_capacity: bool
     ) -> _TerminateInstanceInAutoScalingGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TerminateInstanceInAutoScalingGroupResponse
 
@@ -1183,7 +1231,8 @@ module Aws::AutoScaling
                     ]
                   }
                 }
-              }
+              },
+              image_id: String
             }
           ]
         },
@@ -1193,7 +1242,12 @@ module Aws::AutoScaling
           on_demand_percentage_above_base_capacity: Integer,
           spot_allocation_strategy: untyped,
           spot_instance_pools: Integer,
-          spot_max_price: String
+          spot_max_price: String,
+          distribution_segments: Array[
+            {
+              target_capacity_types: Array[String]
+            }
+          ]
         }
       },
       ?min_size: Integer,
@@ -1201,6 +1255,7 @@ module Aws::AutoScaling
       ?desired_capacity: Integer,
       ?default_cooldown: Integer,
       ?availability_zones: Array[String],
+      ?availability_zone_ids: Array[String],
       ?health_check_type: String,
       ?health_check_grace_period: Integer,
       ?placement_group: String,
@@ -1231,7 +1286,13 @@ module Aws::AutoScaling
           capacity_reservation_ids: Array[String],
           capacity_reservation_resource_group_arns: Array[String]
         }
-      }
+      },
+      ?instance_lifecycle_policy: {
+        retention_triggers: {
+          terminate_hook_abandon: String
+        }
+      },
+      ?deletion_protection: String
     ) -> _UpdateAutoScalingGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAutoScalingGroupResponse
   end
 end

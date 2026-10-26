@@ -144,18 +144,18 @@ module Aws::CodeBuild
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -384,7 +384,8 @@ module Aws::CodeBuild
     #               status: "String",
     #               message: "String"
     #             }
-    #           }
+    #           },
+    #           host_kernel: "LINUX_KERNEL_4" # One of: ["LINUX_KERNEL_4", "LINUX_KERNEL_6", "LINUX_KERNEL_LATEST"]
     #         },
     #         service_role: "NonEmptyString",
     #         log_config: {
@@ -635,7 +636,8 @@ module Aws::CodeBuild
     #               status: "String",
     #               message: "String"
     #             }
-    #           }
+    #           },
+    #           host_kernel: "LINUX_KERNEL_4" # One of: ["LINUX_KERNEL_4", "LINUX_KERNEL_6", "LINUX_KERNEL_LATEST"]
     #         },
     #         service_role: "NonEmptyString",
     #         logs: {
@@ -983,7 +985,8 @@ module Aws::CodeBuild
     #               status: "String",
     #               message: "String"
     #             }
-    #           }
+    #           },
+    #           host_kernel: "LINUX_KERNEL_4" # One of: ["LINUX_KERNEL_4", "LINUX_KERNEL_6", "LINUX_KERNEL_LATEST"]
     #         },
     #         service_role: "NonEmptyString",
     #         timeout_in_minutes: 1,
@@ -1305,7 +1308,8 @@ module Aws::CodeBuild
     #               status: "String",
     #               message: "String"
     #             }
-    #           }
+    #           },
+    #           host_kernel: "LINUX_KERNEL_4" # One of: ["LINUX_KERNEL_4", "LINUX_KERNEL_6", "LINUX_KERNEL_LATEST"]
     #         },
     #         file_system_locations: [
     #           {
@@ -1406,38 +1410,38 @@ module Aws::CodeBuild
     #               <li>
     #                  <p>The environment type <code>ARM_CONTAINER</code> is available only in regions
     #                       US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland),
-    #                       Asia Pacific (Mumbai), Asia Pacific (Tokyo), Asia Pacific (Singapore), Asia Pacific (Sydney), 
+    #                       Asia Pacific (Mumbai), Asia Pacific (Tokyo), Asia Pacific (Singapore), Asia Pacific (Sydney),
     #                       EU (Frankfurt), and South America (São Paulo).</p>
     #               </li>
     #               <li>
     #                  <p>The environment type <code>ARM_EC2</code> is available only in regions
-    #                       US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland), 
+    #                       US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland),
     #                       EU (Frankfurt), Asia Pacific (Tokyo),
     #                       Asia Pacific (Singapore), Asia Pacific (Sydney), South America (São Paulo), and
     #                       Asia Pacific (Mumbai).</p>
     #               </li>
     #               <li>
     #                  <p>The environment type <code>LINUX_CONTAINER</code> is available only in regions
-    #                       US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland), 
+    #                       US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland),
     #                       EU (Frankfurt), Asia Pacific (Tokyo),
     #                       Asia Pacific (Singapore), Asia Pacific (Sydney), South America (São Paulo), and
     #                       Asia Pacific (Mumbai).</p>
     #               </li>
     #               <li>
     #                  <p>The environment type <code>LINUX_EC2</code> is available only in regions
-    #                       US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland), 
+    #                       US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland),
     #                       EU (Frankfurt), Asia Pacific (Tokyo),
     #                       Asia Pacific (Singapore), Asia Pacific (Sydney), South America (São Paulo), and
     #                       Asia Pacific (Mumbai).</p>
     #               </li>
     #               <li>
     #                  <p>The environment type <code>LINUX_GPU_CONTAINER</code> is available only in
-    #                       regions US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland), 
+    #                       regions US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland),
     #                       EU (Frankfurt), Asia Pacific (Tokyo), and Asia Pacific (Sydney).</p>
     #               </li>
     #               <li>
     #                  <p>The environment type <code>MAC_ARM</code> is available for Medium fleets only in
-    #                       regions US East (N. Virginia), US East (Ohio), US West (Oregon), Asia Pacific (Sydney), 
+    #                       regions US East (N. Virginia), US East (Ohio), US West (Oregon), Asia Pacific (Sydney),
     #                       and EU (Frankfurt)</p>
     #               </li>
     #               <li>
@@ -1446,20 +1450,20 @@ module Aws::CodeBuild
     #               </li>
     #               <li>
     #                  <p>The environment type <code>WINDOWS_EC2</code> is available only in regions
-    #                       US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland), 
+    #                       US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland),
     #                       EU (Frankfurt), Asia Pacific (Tokyo),
     #                       Asia Pacific (Singapore), Asia Pacific (Sydney), South America (São Paulo), and
     #                       Asia Pacific (Mumbai).</p>
     #               </li>
     #               <li>
     #                  <p>The environment type <code>WINDOWS_SERVER_2019_CONTAINER</code> is available only in regions
-    #                       US East (N. Virginia), US East (Ohio), US West (Oregon), Asia Pacific (Sydney), 
+    #                       US East (N. Virginia), US East (Ohio), US West (Oregon), Asia Pacific (Sydney),
     #                       Asia Pacific (Tokyo), Asia Pacific (Mumbai) and
     #                       EU (Ireland).</p>
     #               </li>
     #               <li>
     #                  <p>The environment type <code>WINDOWS_SERVER_2022_CONTAINER</code> is available only in regions
-    #                       US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland), EU (Frankfurt), 
+    #                       US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland), EU (Frankfurt),
     #                       Asia Pacific (Sydney), Asia Pacific (Singapore), Asia Pacific (Tokyo), South America (São Paulo) and
     #                       Asia Pacific (Mumbai).</p>
     #               </li>
@@ -1474,8 +1478,8 @@ module Aws::CodeBuild
     #                  <p>
     #                     <code>ATTRIBUTE_BASED_COMPUTE</code>: Specify the amount of vCPUs, memory, disk space, and the type of machine.</p>
     #                  <note>
-    #                     <p> If you use <code>ATTRIBUTE_BASED_COMPUTE</code>, you must define your attributes by using <code>computeConfiguration</code>. CodeBuild 
-    #                           will select the cheapest instance that satisfies your specified attributes. For more information, see <a href="https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html#environment-reserved-capacity.types">Reserved capacity environment 
+    #                     <p> If you use <code>ATTRIBUTE_BASED_COMPUTE</code>, you must define your attributes by using <code>computeConfiguration</code>. CodeBuild
+    #                           will select the cheapest instance that satisfies your specified attributes. For more information, see <a href="https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html#environment-reserved-capacity.types">Reserved capacity environment
     #                           types</a> in the <i>CodeBuild User Guide</i>.</p>
     #                  </note>
     #               </li>
@@ -1566,7 +1570,7 @@ module Aws::CodeBuild
     #                       memory and 8 vCPUs on ARM-based processors for builds.</p>
     #               </li>
     #            </ul>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html#environment.types">On-demand environment types</a> 
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html#environment.types">On-demand environment types</a>
     #                   in the <i>CodeBuild User Guide.</i>
     #            </p>
     # @option params [Types::ComputeConfiguration] :compute_configuration
@@ -1577,15 +1581,15 @@ module Aws::CodeBuild
     #   <p>The compute fleet overflow behavior.</p>
     #            <ul>
     #               <li>
-    #                  <p>For overflow behavior <code>QUEUE</code>, your overflow builds need to wait on 
+    #                  <p>For overflow behavior <code>QUEUE</code>, your overflow builds need to wait on
     #                       the existing fleet instance to become available.</p>
     #               </li>
     #               <li>
     #                  <p>For overflow behavior <code>ON_DEMAND</code>, your overflow builds run on CodeBuild on-demand.</p>
     #                  <note>
-    #                     <p>If you choose to set your overflow behavior to on-demand while creating a VPC-connected 
-    #                       fleet, make sure that you add the required VPC permissions to your project service role. For more 
-    #                       information, see <a href="https://docs.aws.amazon.com/codebuild/latest/userguide/auth-and-access-control-iam-identity-based-access-control.html#customer-managed-policies-example-create-vpc-network-interface">Example 
+    #                     <p>If you choose to set your overflow behavior to on-demand while creating a VPC-connected
+    #                       fleet, make sure that you add the required VPC permissions to your project service role. For more
+    #                       information, see <a href="https://docs.aws.amazon.com/codebuild/latest/userguide/auth-and-access-control-iam-identity-based-access-control.html#customer-managed-policies-example-create-vpc-network-interface">Example
     #                       policy statement to allow CodeBuild access to Amazon Web Services services required to create a VPC network interface</a>.</p>
     #                  </note>
     #               </li>
@@ -1762,7 +1766,7 @@ module Aws::CodeBuild
     #            <p>If <code>sourceVersion</code> is specified at the build level, then that version takes
     #               precedence over this <code>sourceVersion</code> (at the project level). </p>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html">Source Version Sample
-    #                   with CodeBuild</a> in the <i>CodeBuild User Guide</i>. 
+    #                   with CodeBuild</a> in the <i>CodeBuild User Guide</i>.
     #       </p>
     # @option params [Array<Types::ProjectSourceVersion>] :secondary_source_versions
     #   <p>An array of <code>ProjectSourceVersion</code> objects. If
@@ -1813,8 +1817,8 @@ module Aws::CodeBuild
     #         uploaded to a specified S3 bucket, or both. </p>
     # @option params [Array<Types::ProjectFileSystemLocation>] :file_system_locations
     #   <p>
-    #         An array of <code>ProjectFileSystemLocation</code> objects for a CodeBuild build project. A <code>ProjectFileSystemLocation</code> object 
-    #         specifies the <code>identifier</code>, <code>location</code>, <code>mountOptions</code>, 
+    #         An array of <code>ProjectFileSystemLocation</code> objects for a CodeBuild build project. A <code>ProjectFileSystemLocation</code> object
+    #         specifies the <code>identifier</code>, <code>location</code>, <code>mountOptions</code>,
     #         <code>mountPoint</code>, and <code>type</code> of a file system created using Amazon Elastic File System.
     #     </p>
     # @option params [Types::ProjectBuildBatchConfig] :build_batch_config
@@ -1823,11 +1827,11 @@ module Aws::CodeBuild
     #               for the project.</p>
     # @option params [Integer] :concurrent_build_limit
     #   <p>The maximum number of concurrent builds that are allowed for this project.</p>
-    #            <p>New builds are only started if the current number of builds is less than or equal to this limit. 
+    #            <p>New builds are only started if the current number of builds is less than or equal to this limit.
     #     If the current build count meets this limit, new builds are throttled and are not run.</p>
     # @option params [Integer] :auto_retry_limit
-    #   <p>The maximum number of additional automatic retries after a failed build. For example, if the 
-    #         auto-retry limit is set to 2, CodeBuild will call the <code>RetryBuild</code> API to automatically 
+    #   <p>The maximum number of additional automatic retries after a failed build. For example, if the
+    #         auto-retry limit is set to 2, CodeBuild will call the <code>RetryBuild</code> API to automatically
     #         retry your build for up to 2 additional times.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -1949,7 +1953,8 @@ module Aws::CodeBuild
     #           status: "String",
     #           message: "String"
     #         }
-    #       }
+    #       },
+    #       host_kernel: "LINUX_KERNEL_4" # One of: ["LINUX_KERNEL_4", "LINUX_KERNEL_6", "LINUX_KERNEL_LATEST"]
     #     },
     #     service_role: "NonEmptyString", # required
     #     timeout_in_minutes: 1,
@@ -2128,7 +2133,8 @@ module Aws::CodeBuild
     #             status: "String",
     #             message: "String"
     #           }
-    #         }
+    #         },
+    #         host_kernel: "LINUX_KERNEL_4" # One of: ["LINUX_KERNEL_4", "LINUX_KERNEL_6", "LINUX_KERNEL_LATEST"]
     #       },
     #       service_role: "NonEmptyString",
     #       timeout_in_minutes: 1,
@@ -2340,13 +2346,13 @@ module Aws::CodeBuild
     #   <p>Specifies the type of build this webhook will trigger.</p>
     #            <note>
     #               <p>
-    #                  <code>RUNNER_BUILDKITE_BUILD</code> is only available for <code>NO_SOURCE</code> source type projects 
+    #                  <code>RUNNER_BUILDKITE_BUILD</code> is only available for <code>NO_SOURCE</code> source type projects
     #           configured for Buildkite runner builds. For more information about CodeBuild-hosted Buildkite runner builds, see <a href="https://docs.aws.amazon.com/codebuild/latest/userguide/sample-runner-buildkite.html">Tutorial: Configure a CodeBuild-hosted Buildkite runner</a> in the <i>CodeBuild
     #           user guide</i>.</p>
     #            </note>
     # @option params [Boolean] :manual_creation
-    #   <p>If manualCreation is true, CodeBuild doesn't create a webhook in GitHub and instead returns <code>payloadUrl</code> and 
-    #         <code>secret</code> values for the webhook. The <code>payloadUrl</code> and <code>secret</code> values in the output can be 
+    #   <p>If manualCreation is true, CodeBuild doesn't create a webhook in GitHub and instead returns <code>payloadUrl</code> and
+    #         <code>secret</code> values for the webhook. The <code>payloadUrl</code> and <code>secret</code> values in the output can be
     #         used to manually create a webhook within GitHub.</p>
     #            <note>
     #               <p>
@@ -2857,7 +2863,7 @@ module Aws::CodeBuild
     #               is not valid for other types of source providers or connections. </p>
     # @option params [String] :token
     #   <p> For GitHub or GitHub Enterprise, this is the personal access token. For Bitbucket,
-    #               this is either the access token or the app password. For the <code>authType</code> CODECONNECTIONS, 
+    #               this is either the access token or the app password. For the <code>authType</code> CODECONNECTIONS,
     #               this is the <code>connectionArn</code>. For the <code>authType</code> SECRETS_MANAGER, this is the <code>secretArn</code>.</p>
     # @option params [String] :server_type
     #   <p> The source provider used for this project. </p>
@@ -3885,7 +3891,8 @@ module Aws::CodeBuild
     #             status: "String",
     #             message: "String"
     #           }
-    #         }
+    #         },
+    #         host_kernel: "LINUX_KERNEL_4" # One of: ["LINUX_KERNEL_4", "LINUX_KERNEL_6", "LINUX_KERNEL_LATEST"]
     #       },
     #       service_role: "NonEmptyString",
     #       logs: {
@@ -4113,7 +4120,8 @@ module Aws::CodeBuild
     #             status: "String",
     #             message: "String"
     #           }
-    #         }
+    #         },
+    #         host_kernel: "LINUX_KERNEL_4" # One of: ["LINUX_KERNEL_4", "LINUX_KERNEL_6", "LINUX_KERNEL_LATEST"]
     #       },
     #       service_role: "NonEmptyString",
     #       log_config: {
@@ -4213,9 +4221,9 @@ module Aws::CodeBuild
       request.send_request(options)
     end
 
-    # <p>Starts running a build with the settings defined in the project. These setting include: how to run a build, 
+    # <p>Starts running a build with the settings defined in the project. These setting include: how to run a build,
     #             where to get the source code, which build environment to use, which build commands to run, and where to store the build output.</p>
-    #          <p>You can also start a build run by overriding some of the build settings in the project. The overrides only apply for that 
+    #          <p>You can also start a build run by overriding some of the build settings in the project. The overrides only apply for that
     #             specific start build request. The settings in the project are unaltered.</p>
     # @param [Hash, Types::StartBuildInput] params
     # @option params [String] :project_name
@@ -4280,7 +4288,7 @@ module Aws::CodeBuild
     #               the build project.</p>
     # @option params [Types::SourceAuth] :source_auth_override
     #   <p>An authorization type for this build that overrides the one defined in the build
-    #               project. This override applies only if the build project's source is BitBucket, GitHub, 
+    #               project. This override applies only if the build project's source is BitBucket, GitHub,
     #               GitLab, or GitLab Self Managed.</p>
     # @option params [Integer] :git_clone_depth_override
     #   <p>The user-defined depth of history, with a minimum value of 0, that overrides, for this
@@ -4289,7 +4297,7 @@ module Aws::CodeBuild
     #   <p> Information about the Git submodules configuration for this build of an CodeBuild build
     #               project. </p>
     # @option params [String] :buildspec_override
-    #   <p>A buildspec file declaration that overrides the latest one defined 
+    #   <p>A buildspec file declaration that overrides the latest one defined
     #               in the build project, for this build only. The buildspec defined on the project is not changed.</p>
     #            <p>If this value is set, it can be either an inline buildspec definition, the path to an
     #               alternate buildspec file relative to the value of the built-in
@@ -4300,10 +4308,10 @@ module Aws::CodeBuild
     #               provided or is set to an empty string, the source code must contain a buildspec file in
     #               its root directory. For more information, see <a href="https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#build-spec-ref-name-storage">Buildspec File Name and Storage Location</a>.</p>
     #            <note>
-    #               <p>Since this property allows you to change the build commands that will run in the container, 
-    #               you should note that an IAM principal with the ability to call this API and set this parameter 
-    #               can override the default settings. Moreover, we encourage that you use a trustworthy buildspec location 
-    #               like a file in your source repository or a Amazon S3 bucket. Alternatively, you can restrict overrides 
+    #               <p>Since this property allows you to change the build commands that will run in the container,
+    #               you should note that an IAM principal with the ability to call this API and set this parameter
+    #               can override the default settings. Moreover, we encourage that you use a trustworthy buildspec location
+    #               like a file in your source repository or a Amazon S3 bucket. Alternatively, you can restrict overrides
     #               to the buildspec by using a condition key: <a href="https://docs.aws.amazon.com/codebuild/latest/userguide/action-context-keys.html#action-context-keys-example-overridebuildspec.html">Prevent unauthorized modifications to project buildspec</a>.</p>
     #            </note>
     # @option params [Boolean] :insecure_ssl_override
@@ -4394,9 +4402,12 @@ module Aws::CodeBuild
     #   <p>A ProjectFleet object specified for this build that overrides the one defined in the
     #               build project.</p>
     # @option params [Integer] :auto_retry_limit_override
-    #   <p>The maximum number of additional automatic retries after a failed build. For example, if the 
-    #               auto-retry limit is set to 2, CodeBuild will call the <code>RetryBuild</code> API to automatically 
+    #   <p>The maximum number of additional automatic retries after a failed build. For example, if the
+    #               auto-retry limit is set to 2, CodeBuild will call the <code>RetryBuild</code> API to automatically
     #               retry your build for up to 2 additional times.</p>
+    # @option params [String] :host_kernel_override
+    #   <p>The host operating system kernel for this build that overrides the one specified in the
+    #               build project.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     project_name: "NonEmptyString", # required
@@ -4517,7 +4528,8 @@ module Aws::CodeBuild
     #     fleet_override: {
     #       fleet_arn: "String"
     #     },
-    #     auto_retry_limit_override: 1
+    #     auto_retry_limit_override: 1,
+    #     host_kernel_override: "LINUX_KERNEL_4" # One of: ["LINUX_KERNEL_4", "LINUX_KERNEL_6", "LINUX_KERNEL_LATEST"]
     #   }
     #   options = {}
     #   response = client.start_build(params, options)
@@ -4659,7 +4671,8 @@ module Aws::CodeBuild
     #             status: "String",
     #             message: "String"
     #           }
-    #         }
+    #         },
+    #         host_kernel: "LINUX_KERNEL_4" # One of: ["LINUX_KERNEL_4", "LINUX_KERNEL_6", "LINUX_KERNEL_LATEST"]
     #       },
     #       service_role: "NonEmptyString",
     #       logs: {
@@ -5155,7 +5168,8 @@ module Aws::CodeBuild
     #             status: "String",
     #             message: "String"
     #           }
-    #         }
+    #         },
+    #         host_kernel: "LINUX_KERNEL_4" # One of: ["LINUX_KERNEL_4", "LINUX_KERNEL_6", "LINUX_KERNEL_LATEST"]
     #       },
     #       service_role: "NonEmptyString",
     #       log_config: {
@@ -5422,7 +5436,8 @@ module Aws::CodeBuild
     #             status: "String",
     #             message: "String"
     #           }
-    #         }
+    #         },
+    #         host_kernel: "LINUX_KERNEL_4" # One of: ["LINUX_KERNEL_4", "LINUX_KERNEL_6", "LINUX_KERNEL_LATEST"]
     #       },
     #       file_system_locations: [
     #         {
@@ -5682,7 +5697,8 @@ module Aws::CodeBuild
     #             status: "String",
     #             message: "String"
     #           }
-    #         }
+    #         },
+    #         host_kernel: "LINUX_KERNEL_4" # One of: ["LINUX_KERNEL_4", "LINUX_KERNEL_6", "LINUX_KERNEL_LATEST"]
     #       },
     #       service_role: "NonEmptyString",
     #       logs: {
@@ -5900,7 +5916,8 @@ module Aws::CodeBuild
     #             status: "String",
     #             message: "String"
     #           }
-    #         }
+    #         },
+    #         host_kernel: "LINUX_KERNEL_4" # One of: ["LINUX_KERNEL_4", "LINUX_KERNEL_6", "LINUX_KERNEL_LATEST"]
     #       },
     #       service_role: "NonEmptyString",
     #       log_config: {
@@ -6105,7 +6122,8 @@ module Aws::CodeBuild
     #             status: "String",
     #             message: "String"
     #           }
-    #         }
+    #         },
+    #         host_kernel: "LINUX_KERNEL_4" # One of: ["LINUX_KERNEL_4", "LINUX_KERNEL_6", "LINUX_KERNEL_LATEST"]
     #       },
     #       file_system_locations: [
     #         {
@@ -6205,38 +6223,38 @@ module Aws::CodeBuild
     #               <li>
     #                  <p>The environment type <code>ARM_CONTAINER</code> is available only in regions
     #                       US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland),
-    #                       Asia Pacific (Mumbai), Asia Pacific (Tokyo), Asia Pacific (Singapore), Asia Pacific (Sydney), 
+    #                       Asia Pacific (Mumbai), Asia Pacific (Tokyo), Asia Pacific (Singapore), Asia Pacific (Sydney),
     #                       EU (Frankfurt), and South America (São Paulo).</p>
     #               </li>
     #               <li>
     #                  <p>The environment type <code>ARM_EC2</code> is available only in regions
-    #                       US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland), 
+    #                       US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland),
     #                       EU (Frankfurt), Asia Pacific (Tokyo),
     #                       Asia Pacific (Singapore), Asia Pacific (Sydney), South America (São Paulo), and
     #                       Asia Pacific (Mumbai).</p>
     #               </li>
     #               <li>
     #                  <p>The environment type <code>LINUX_CONTAINER</code> is available only in regions
-    #                       US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland), 
+    #                       US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland),
     #                       EU (Frankfurt), Asia Pacific (Tokyo),
     #                       Asia Pacific (Singapore), Asia Pacific (Sydney), South America (São Paulo), and
     #                       Asia Pacific (Mumbai).</p>
     #               </li>
     #               <li>
     #                  <p>The environment type <code>LINUX_EC2</code> is available only in regions
-    #                       US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland), 
+    #                       US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland),
     #                       EU (Frankfurt), Asia Pacific (Tokyo),
     #                       Asia Pacific (Singapore), Asia Pacific (Sydney), South America (São Paulo), and
     #                       Asia Pacific (Mumbai).</p>
     #               </li>
     #               <li>
     #                  <p>The environment type <code>LINUX_GPU_CONTAINER</code> is available only in
-    #                       regions US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland), 
+    #                       regions US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland),
     #                       EU (Frankfurt), Asia Pacific (Tokyo), and Asia Pacific (Sydney).</p>
     #               </li>
     #               <li>
     #                  <p>The environment type <code>MAC_ARM</code> is available for Medium fleets only in
-    #                       regions US East (N. Virginia), US East (Ohio), US West (Oregon), Asia Pacific (Sydney), 
+    #                       regions US East (N. Virginia), US East (Ohio), US West (Oregon), Asia Pacific (Sydney),
     #                       and EU (Frankfurt)</p>
     #               </li>
     #               <li>
@@ -6245,20 +6263,20 @@ module Aws::CodeBuild
     #               </li>
     #               <li>
     #                  <p>The environment type <code>WINDOWS_EC2</code> is available only in regions
-    #                       US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland), 
+    #                       US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland),
     #                       EU (Frankfurt), Asia Pacific (Tokyo),
     #                       Asia Pacific (Singapore), Asia Pacific (Sydney), South America (São Paulo), and
     #                       Asia Pacific (Mumbai).</p>
     #               </li>
     #               <li>
     #                  <p>The environment type <code>WINDOWS_SERVER_2019_CONTAINER</code> is available only in regions
-    #                       US East (N. Virginia), US East (Ohio), US West (Oregon), Asia Pacific (Sydney), 
+    #                       US East (N. Virginia), US East (Ohio), US West (Oregon), Asia Pacific (Sydney),
     #                       Asia Pacific (Tokyo), Asia Pacific (Mumbai) and
     #                       EU (Ireland).</p>
     #               </li>
     #               <li>
     #                  <p>The environment type <code>WINDOWS_SERVER_2022_CONTAINER</code> is available only in regions
-    #                       US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland), EU (Frankfurt), 
+    #                       US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland), EU (Frankfurt),
     #                       Asia Pacific (Sydney), Asia Pacific (Singapore), Asia Pacific (Tokyo), South America (São Paulo) and
     #                       Asia Pacific (Mumbai).</p>
     #               </li>
@@ -6273,8 +6291,8 @@ module Aws::CodeBuild
     #                  <p>
     #                     <code>ATTRIBUTE_BASED_COMPUTE</code>: Specify the amount of vCPUs, memory, disk space, and the type of machine.</p>
     #                  <note>
-    #                     <p> If you use <code>ATTRIBUTE_BASED_COMPUTE</code>, you must define your attributes by using <code>computeConfiguration</code>. CodeBuild 
-    #                           will select the cheapest instance that satisfies your specified attributes. For more information, see <a href="https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html#environment-reserved-capacity.types">Reserved capacity environment 
+    #                     <p> If you use <code>ATTRIBUTE_BASED_COMPUTE</code>, you must define your attributes by using <code>computeConfiguration</code>. CodeBuild
+    #                           will select the cheapest instance that satisfies your specified attributes. For more information, see <a href="https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html#environment-reserved-capacity.types">Reserved capacity environment
     #                           types</a> in the <i>CodeBuild User Guide</i>.</p>
     #                  </note>
     #               </li>
@@ -6365,7 +6383,7 @@ module Aws::CodeBuild
     #                       memory and 8 vCPUs on ARM-based processors for builds.</p>
     #               </li>
     #            </ul>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html#environment.types">On-demand environment types</a> 
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html#environment.types">On-demand environment types</a>
     #                   in the <i>CodeBuild User Guide.</i>
     #            </p>
     # @option params [Types::ComputeConfiguration] :compute_configuration
@@ -6376,15 +6394,15 @@ module Aws::CodeBuild
     #   <p>The compute fleet overflow behavior.</p>
     #            <ul>
     #               <li>
-    #                  <p>For overflow behavior <code>QUEUE</code>, your overflow builds need to wait on 
+    #                  <p>For overflow behavior <code>QUEUE</code>, your overflow builds need to wait on
     #                       the existing fleet instance to become available.</p>
     #               </li>
     #               <li>
     #                  <p>For overflow behavior <code>ON_DEMAND</code>, your overflow builds run on CodeBuild on-demand.</p>
     #                  <note>
-    #                     <p>If you choose to set your overflow behavior to on-demand while creating a VPC-connected 
-    #                       fleet, make sure that you add the required VPC permissions to your project service role. For more 
-    #                       information, see <a href="https://docs.aws.amazon.com/codebuild/latest/userguide/auth-and-access-control-iam-identity-based-access-control.html#customer-managed-policies-example-create-vpc-network-interface">Example 
+    #                     <p>If you choose to set your overflow behavior to on-demand while creating a VPC-connected
+    #                       fleet, make sure that you add the required VPC permissions to your project service role. For more
+    #                       information, see <a href="https://docs.aws.amazon.com/codebuild/latest/userguide/auth-and-access-control-iam-identity-based-access-control.html#customer-managed-policies-example-create-vpc-network-interface">Example
     #                       policy statement to allow CodeBuild access to Amazon Web Services services required to create a VPC network interface</a>.</p>
     #                  </note>
     #               </li>
@@ -6565,7 +6583,7 @@ module Aws::CodeBuild
     #            <p> If <code>sourceVersion</code> is specified at the build level, then that version
     #       takes precedence over this <code>sourceVersion</code> (at the project level). </p>
     #            <p> For more information, see <a href="https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html">Source Version Sample
-    #           with CodeBuild</a> in the <i>CodeBuild User Guide</i>. 
+    #           with CodeBuild</a> in the <i>CodeBuild User Guide</i>.
     #       </p>
     # @option params [Array<Types::ProjectSourceVersion>] :secondary_source_versions
     #   <p> An array of <code>ProjectSourceVersion</code> objects. If
@@ -6613,20 +6631,20 @@ module Aws::CodeBuild
     #       logs in an S3 bucket, or both. </p>
     # @option params [Array<Types::ProjectFileSystemLocation>] :file_system_locations
     #   <p>
-    #         An array of <code>ProjectFileSystemLocation</code> objects for a CodeBuild build project. A <code>ProjectFileSystemLocation</code> object 
-    #         specifies the <code>identifier</code>, <code>location</code>, <code>mountOptions</code>, 
+    #         An array of <code>ProjectFileSystemLocation</code> objects for a CodeBuild build project. A <code>ProjectFileSystemLocation</code> object
+    #         specifies the <code>identifier</code>, <code>location</code>, <code>mountOptions</code>,
     #         <code>mountPoint</code>, and <code>type</code> of a file system created using Amazon Elastic File System.
     #     </p>
     # @option params [Types::ProjectBuildBatchConfig] :build_batch_config
     #   <p>Contains configuration information about a batch build project.</p>
     # @option params [Integer] :concurrent_build_limit
     #   <p>The maximum number of concurrent builds that are allowed for this project.</p>
-    #            <p>New builds are only started if the current number of builds is less than or equal to this limit. 
+    #            <p>New builds are only started if the current number of builds is less than or equal to this limit.
     #     If the current build count meets this limit, new builds are throttled and are not run.</p>
     #            <p>To remove this limit, set this value to -1.</p>
     # @option params [Integer] :auto_retry_limit
-    #   <p>The maximum number of additional automatic retries after a failed build. For example, if the 
-    #         auto-retry limit is set to 2, CodeBuild will call the <code>RetryBuild</code> API to automatically 
+    #   <p>The maximum number of additional automatic retries after a failed build. For example, if the
+    #         auto-retry limit is set to 2, CodeBuild will call the <code>RetryBuild</code> API to automatically
     #         retry your build for up to 2 additional times.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -6748,7 +6766,8 @@ module Aws::CodeBuild
     #           status: "String",
     #           message: "String"
     #         }
-    #       }
+    #       },
+    #       host_kernel: "LINUX_KERNEL_4" # One of: ["LINUX_KERNEL_4", "LINUX_KERNEL_6", "LINUX_KERNEL_LATEST"]
     #     },
     #     service_role: "NonEmptyString",
     #     timeout_in_minutes: 1,
@@ -6927,7 +6946,8 @@ module Aws::CodeBuild
     #             status: "String",
     #             message: "String"
     #           }
-    #         }
+    #         },
+    #         host_kernel: "LINUX_KERNEL_4" # One of: ["LINUX_KERNEL_4", "LINUX_KERNEL_6", "LINUX_KERNEL_LATEST"]
     #       },
     #       service_role: "NonEmptyString",
     #       timeout_in_minutes: 1,
@@ -7218,7 +7238,7 @@ module Aws::CodeBuild
     #   <p>Specifies the type of build this webhook will trigger.</p>
     #            <note>
     #               <p>
-    #                  <code>RUNNER_BUILDKITE_BUILD</code> is only available for <code>NO_SOURCE</code> source type projects 
+    #                  <code>RUNNER_BUILDKITE_BUILD</code> is only available for <code>NO_SOURCE</code> source type projects
     #           configured for Buildkite runner builds. For more information about CodeBuild-hosted Buildkite runner builds, see <a href="https://docs.aws.amazon.com/codebuild/latest/userguide/sample-runner-buildkite.html">Tutorial: Configure a CodeBuild-hosted Buildkite runner</a> in the <i>CodeBuild
     #           user guide</i>.</p>
     #            </note>

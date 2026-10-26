@@ -9,6 +9,12 @@ module Aws::Health
     # @return [Smithy::Client::EndpointRules::Endpoint]
     # @raise [ArgumentError]
     def resolve(parameters)
+      if Smithy::Client::EndpointRules.not?(Smithy::Client::EndpointRules.set?(parameters.endpoint)) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, false) && Smithy::Client::EndpointRules.set?(parameters.region) && (partition_result = Aws::Core::EndpointRules.partition(parameters.region)) && Smithy::Client::EndpointRules.not?(Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws")) && Smithy::Client::EndpointRules.not?(Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws-cn")) && Smithy::Client::EndpointRules.not?(Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws-us-gov")) && Smithy::Client::EndpointRules.not?(Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws-iso")) && Smithy::Client::EndpointRules.not?(Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws-iso-b")) && Smithy::Client::EndpointRules.not?(Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws-iso-e")) && Smithy::Client::EndpointRules.not?(Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws-iso-f"))
+        if Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, true)
+          return Smithy::Client::EndpointRules::Endpoint.new(url: "https://health-fips.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
+        end
+        return Smithy::Client::EndpointRules::Endpoint.new(url: "https://health.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
+      end
       if Smithy::Client::EndpointRules.set?(parameters.endpoint)
         if Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, true)
           raise ArgumentError, "Invalid Configuration: FIPS and custom endpoint are not supported"

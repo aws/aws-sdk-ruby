@@ -1233,6 +1233,19 @@ module Aws::GlobalAccelerator
       attr_accessor message: String?
     end
 
+    class IpAddressDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ip_address: String,
+        ?network_zone: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ip_address: String?
+      attr_accessor network_zone: String?
+    end
+
     module IpAddressFamily
       IPv4: String
       IPv6: String
@@ -1250,12 +1263,14 @@ module Aws::GlobalAccelerator
         ?ip_family: String,
         ?ip_addresses: Array[String],
         ?ip_address_family: String,
+        ?ip_address_details: Array[Types::IpAddressDetail],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor ip_family: String?
       attr_accessor ip_addresses: Array[String]?
       attr_accessor ip_address_family: String?
+      attr_accessor ip_address_details: Array[Types::IpAddressDetail]?
     end
 
     class LimitExceededException

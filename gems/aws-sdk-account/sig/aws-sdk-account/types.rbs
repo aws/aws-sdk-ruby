@@ -162,12 +162,14 @@ module Aws::Account
         ?account_id: String,
         ?account_name: String,
         ?account_created_date: Time,
+        ?account_state: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor account_id: String?
       attr_accessor account_name: String?
       attr_accessor account_created_date: Time?
+      attr_accessor account_state: String?
     end
 
     class GetAlternateContactRequest
@@ -210,10 +212,36 @@ module Aws::Account
 
       def initialize: (
         ?contact_information: Types::ContactInformation,
+        ?verification_status: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor contact_information: Types::ContactInformation?
+      attr_accessor verification_status: String?
+    end
+
+    class GetGovCloudAccountInformationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?standard_account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor standard_account_id: String?
+    end
+
+    class GetGovCloudAccountInformationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gov_cloud_account_id: String,
+        ?account_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gov_cloud_account_id: String?
+      attr_accessor account_state: String?
     end
 
     class GetPrimaryEmailRequest
@@ -236,6 +264,30 @@ module Aws::Account
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor primary_email: String?
+    end
+
+    class GetPrimaryEmailUpdateStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+    end
+
+    class GetPrimaryEmailUpdateStatusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor updated_at: Time?
     end
 
     class GetRegionOptStatusRequest
@@ -380,6 +432,41 @@ module Aws::Account
       attr_accessor error_type: String?
     end
 
+    class ResourceUnavailableException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?error_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor error_type: String?
+    end
+
+    class SendPhoneNumberVerificationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+    end
+
+    class SendPhoneNumberVerificationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
     class StartPrimaryEmailUpdateRequest
       include Smithy::Schema::Structure
 
@@ -443,6 +530,30 @@ module Aws::Account
 
       attr_accessor name: String?
       attr_accessor message: String?
+    end
+
+    class VerifyPhoneNumberRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?otp: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor otp: String?
+    end
+
+    class VerifyPhoneNumberResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
     end
   end
 end

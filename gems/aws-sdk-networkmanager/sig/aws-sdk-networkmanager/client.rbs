@@ -103,6 +103,7 @@ module Aws::NetworkManager
       ?core_network_id: String,
       ?edge_location: String,
       ?transport_attachment_id: String,
+      ?routing_policy_label: String,
       ?options: {
         protocol: String
       },
@@ -173,6 +174,19 @@ module Aws::NetworkManager
       ?client_token: String
     ) -> _CreateCoreNetworkResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCoreNetworkResponse
 
+    interface _CreateCoreNetworkPrefixListAssociationResponse
+      include Smithy::Client::_Response[Types::CreateCoreNetworkPrefixListAssociationResponse]
+      def core_network_id: () -> String?
+      def prefix_list_arn: () -> String?
+      def prefix_list_alias: () -> String?
+    end
+    def create_core_network_prefix_list_association: (
+      ?core_network_id: String,
+      ?prefix_list_arn: String,
+      ?prefix_list_alias: String,
+      ?client_token: String
+    ) -> _CreateCoreNetworkPrefixListAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCoreNetworkPrefixListAssociationResponse
+
     interface _CreateDeviceResponse
       include Smithy::Client::_Response[Types::CreateDeviceResponse]
       def device: () -> Types::Device?
@@ -209,6 +223,7 @@ module Aws::NetworkManager
     def create_direct_connect_gateway_attachment: (
       ?core_network_id: String,
       ?direct_connect_gateway_arn: String,
+      ?routing_policy_label: String,
       ?edge_locations: Array[String],
       ?tags: Array[
         {
@@ -282,6 +297,7 @@ module Aws::NetworkManager
     def create_site_to_site_vpn_attachment: (
       ?core_network_id: String,
       ?vpn_connection_arn: String,
+      ?routing_policy_label: String,
       ?tags: Array[
         {
           key: String,
@@ -314,6 +330,7 @@ module Aws::NetworkManager
     def create_transit_gateway_route_table_attachment: (
       ?peering_id: String,
       ?transit_gateway_route_table_arn: String,
+      ?routing_policy_label: String,
       ?tags: Array[
         {
           key: String,
@@ -337,6 +354,7 @@ module Aws::NetworkManager
         dns_support: untyped,
         security_group_referencing_support: untyped
       },
+      ?routing_policy_label: String,
       ?tags: Array[
         {
           key: String,
@@ -387,6 +405,16 @@ module Aws::NetworkManager
       ?core_network_id: String,
       ?policy_version_id: Integer
     ) -> _DeleteCoreNetworkPolicyVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCoreNetworkPolicyVersionResponse
+
+    interface _DeleteCoreNetworkPrefixListAssociationResponse
+      include Smithy::Client::_Response[Types::DeleteCoreNetworkPrefixListAssociationResponse]
+      def core_network_id: () -> String?
+      def prefix_list_arn: () -> String?
+    end
+    def delete_core_network_prefix_list_association: (
+      ?core_network_id: String,
+      ?prefix_list_arn: String
+    ) -> _DeleteCoreNetworkPrefixListAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCoreNetworkPrefixListAssociationResponse
 
     interface _DeleteDeviceResponse
       include Smithy::Client::_Response[Types::DeleteDeviceResponse]
@@ -830,6 +858,18 @@ module Aws::NetworkManager
       ?attachment_id: String
     ) -> _GetVpcAttachmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetVpcAttachmentResponse
 
+    interface _ListAttachmentRoutingPolicyAssociationsResponse
+      include Smithy::Client::_Response[Types::ListAttachmentRoutingPolicyAssociationsResponse]
+      def attachment_routing_policy_associations: () -> Array[Types::AttachmentRoutingPolicyAssociationSummary]?
+      def next_token: () -> String?
+    end
+    def list_attachment_routing_policy_associations: (
+      ?core_network_id: String,
+      ?attachment_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAttachmentRoutingPolicyAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAttachmentRoutingPolicyAssociationsResponse
+
     interface _ListAttachmentsResponse
       include Smithy::Client::_Response[Types::ListAttachmentsResponse]
       def attachments: () -> Array[Types::Attachment]?
@@ -866,6 +906,38 @@ module Aws::NetworkManager
       ?max_results: Integer,
       ?next_token: String
     ) -> _ListCoreNetworkPolicyVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCoreNetworkPolicyVersionsResponse
+
+    interface _ListCoreNetworkPrefixListAssociationsResponse
+      include Smithy::Client::_Response[Types::ListCoreNetworkPrefixListAssociationsResponse]
+      def prefix_list_associations: () -> Array[Types::PrefixListAssociation]?
+      def next_token: () -> String?
+    end
+    def list_core_network_prefix_list_associations: (
+      ?core_network_id: String,
+      ?prefix_list_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListCoreNetworkPrefixListAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCoreNetworkPrefixListAssociationsResponse
+
+    interface _ListCoreNetworkRoutingInformationResponse
+      include Smithy::Client::_Response[Types::ListCoreNetworkRoutingInformationResponse]
+      def core_network_routing_information: () -> Array[Types::CoreNetworkRoutingInformation]?
+      def next_token: () -> String?
+    end
+    def list_core_network_routing_information: (
+      ?core_network_id: String,
+      ?segment_name: String,
+      ?edge_location: String,
+      ?next_hop_filters: Hash[String,
+        Array[String]
+      ],
+      ?local_preference_matches: Array[String],
+      ?exact_as_path_matches: Array[String],
+      ?med_matches: Array[String],
+      ?community_matches: Array[String],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListCoreNetworkRoutingInformationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCoreNetworkRoutingInformationResponse
 
     interface _ListCoreNetworksResponse
       include Smithy::Client::_Response[Types::ListCoreNetworksResponse]
@@ -909,6 +981,19 @@ module Aws::NetworkManager
       ?resource_arn: String
     ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
 
+    interface _PutAttachmentRoutingPolicyLabelResponse
+      include Smithy::Client::_Response[Types::PutAttachmentRoutingPolicyLabelResponse]
+      def core_network_id: () -> String?
+      def attachment_id: () -> String?
+      def routing_policy_label: () -> String?
+    end
+    def put_attachment_routing_policy_label: (
+      ?core_network_id: String,
+      ?attachment_id: String,
+      ?routing_policy_label: String,
+      ?client_token: String
+    ) -> _PutAttachmentRoutingPolicyLabelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutAttachmentRoutingPolicyLabelResponse
+
     interface _PutCoreNetworkPolicyResponse
       include Smithy::Client::_Response[Types::PutCoreNetworkPolicyResponse]
       def core_network_policy: () -> Types::CoreNetworkPolicy?
@@ -945,6 +1030,17 @@ module Aws::NetworkManager
     def reject_attachment: (
       ?attachment_id: String
     ) -> _RejectAttachmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RejectAttachmentResponse
+
+    interface _RemoveAttachmentRoutingPolicyLabelResponse
+      include Smithy::Client::_Response[Types::RemoveAttachmentRoutingPolicyLabelResponse]
+      def core_network_id: () -> String?
+      def attachment_id: () -> String?
+      def routing_policy_label: () -> String?
+    end
+    def remove_attachment_routing_policy_label: (
+      ?core_network_id: String,
+      ?attachment_id: String
+    ) -> _RemoveAttachmentRoutingPolicyLabelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemoveAttachmentRoutingPolicyLabelResponse
 
     interface _RestoreCoreNetworkPolicyVersionResponse
       include Smithy::Client::_Response[Types::RestoreCoreNetworkPolicyVersionResponse]

@@ -23,6 +23,7 @@ module Aws::AppIntegrations
   # ## Error Classes
   #
   # * {AccessDeniedException}
+  # * {ConflictException}
   # * {DuplicateResourceException}
   # * {InternalServiceError}
   # * {InvalidRequestException}
@@ -40,6 +41,19 @@ module Aws::AppIntegrations
     class AccessDeniedException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AppIntegrations::Types::AccessDeniedException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>The request conflicts with the current state of the resource. Verify the application's current state and retry the request.</p>
+    class ConflictException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::AppIntegrations::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
         super
       end

@@ -4,6 +4,7 @@ module Aws::PartnerCentralSelling
 
     AcceptEngagementInvitationRequest: StructureShape
     AccessDeniedException: StructureShape
+    AccessDeniedExceptionErrorCode: EnumShape
     Account: StructureShape
     AccountReceiver: StructureShape
     AccountSummary: StructureShape
@@ -12,6 +13,7 @@ module Aws::PartnerCentralSelling
     AddressSummary: StructureShape
     Alias: StringShape
     Amount: StringShape
+    AmountMap: MapShape
     ApnPrograms: ListShape
     AssignOpportunityRequest: StructureShape
     AssigneeContact: StructureShape
@@ -23,6 +25,15 @@ module Aws::PartnerCentralSelling
     AwsFundingUsed: EnumShape
     AwsMarketplaceOfferIdentifier: StringShape
     AwsMarketplaceOfferIdentifiers: ListShape
+    AwsMarketplaceOfferSetIdentifier: StringShape
+    AwsMarketplaceOfferSetIdentifiers: ListShape
+    AwsMarketplaceProductArn: StringShape
+    AwsMarketplaceProductIdentifiers: ListShape
+    AwsMarketplaceSolutionArn: StringShape
+    AwsMarketplaceSolutionArnList: ListShape
+    AwsMarketplaceSolutionIdentifier: StringShape
+    AwsMarketplaceSolutionIdentifiers: ListShape
+    AwsMaturity: StringShape
     AwsMemberBusinessTitle: EnumShape
     AwsOpportunityCustomer: StructureShape
     AwsOpportunityInsights: StructureShape
@@ -30,9 +41,18 @@ module Aws::PartnerCentralSelling
     AwsOpportunityProject: StructureShape
     AwsOpportunityRelatedEntities: StructureShape
     AwsOpportunityStage: EnumShape
+    AwsOpportunitySummaryFullView: StructureShape
     AwsOpportunityTeamMembersList: ListShape
+    AwsPartition: EnumShape
+    AwsProductDetails: StructureShape
     AwsProductIdentifier: StringShape
     AwsProductIdentifiers: ListShape
+    AwsProductInsights: StructureShape
+    AwsProductOptimization: StructureShape
+    AwsProductOptimizationsList: ListShape
+    AwsProductsList: ListShape
+    AwsProductsSpendInsightsBySource: StructureShape
+    AwsSoftwareRevenue: StructureShape
     AwsSubmission: StructureShape
     AwsTeamMember: StructureShape
     CatalogIdentifier: StringShape
@@ -45,7 +65,11 @@ module Aws::PartnerCentralSelling
     CompetitorName: EnumShape
     ConflictException: StructureShape
     Contact: StructureShape
+    ContextIdentifier: StringShape
+    ContextIdentifiers: ListShape
     CountryCode: EnumShape
+    CreateEngagementContextRequest: StructureShape
+    CreateEngagementContextResponse: StructureShape
     CreateEngagementInvitationRequest: StructureShape
     CreateEngagementInvitationResponse: StructureShape
     CreateEngagementRequest: StructureShape
@@ -56,8 +80,10 @@ module Aws::PartnerCentralSelling
     CreateResourceSnapshotJobResponse: StructureShape
     CreateResourceSnapshotRequest: StructureShape
     CreateResourceSnapshotResponse: StructureShape
+    CreatedDateFilter: StructureShape
     CurrencyCode: EnumShape
     Customer: StructureShape
+    CustomerAction: StringShape
     CustomerContactsList: ListShape
     CustomerProjectsContext: StructureShape
     CustomerSummary: StructureShape
@@ -68,12 +94,15 @@ module Aws::PartnerCentralSelling
     DeliveryModels: ListShape
     DisassociateOpportunityRequest: StructureShape
     DunsNumber: StringShape
+    EligibleProgramsList: ListShape
     Email: StringShape
     EngagementArn: StringShape
     EngagementArnOrIdentifier: StringShape
     EngagementContextDetails: StructureShape
+    EngagementContextIdentifier: StringShape
     EngagementContextPayload: UnionShape
     EngagementContextType: EnumShape
+    EngagementContextTypeList: ListShape
     EngagementContexts: ListShape
     EngagementCustomer: StructureShape
     EngagementCustomerBusinessProblem: StringShape
@@ -81,6 +110,7 @@ module Aws::PartnerCentralSelling
     EngagementCustomerProjectTitle: StringShape
     EngagementDescription: StringShape
     EngagementIdentifier: StringShape
+    EngagementIdentifierList: ListShape
     EngagementIdentifiers: ListShape
     EngagementInvitationArn: StringShape
     EngagementInvitationArnOrIdentifier: StringShape
@@ -95,14 +125,22 @@ module Aws::PartnerCentralSelling
     EngagementMemberSummary: StructureShape
     EngagementMembers: ListShape
     EngagementPageSize: IntegerShape
+    EngagementProspectingResult: StructureShape
+    EngagementProspectingResultList: ListShape
     EngagementResourceAssociationSummary: StructureShape
     EngagementResourceAssociationSummaryList: ListShape
     EngagementScore: EnumShape
+    EngagementScoreLevel: StringShape
     EngagementSort: StructureShape
     EngagementSortName: EnumShape
     EngagementSummary: StructureShape
     EngagementSummaryList: ListShape
     EngagementTitle: StringShape
+    EngagementUseCase: StringShape
+    EnrichmentContext: StructureShape
+    EstimationUrl: StringShape
+    ExpectedContractDuration: StructureShape
+    ExpectedContractDurationTerm: EnumShape
     ExpectedCustomerSpend: StructureShape
     ExpectedCustomerSpendList: ListShape
     FilterIdentifier: ListShape
@@ -117,6 +155,8 @@ module Aws::PartnerCentralSelling
     GetEngagementResponse: StructureShape
     GetOpportunityRequest: StructureShape
     GetOpportunityResponse: StructureShape
+    GetProspectingFromEngagementTaskRequest: StructureShape
+    GetProspectingFromEngagementTaskResponse: StructureShape
     GetResourceSnapshotJobRequest: StructureShape
     GetResourceSnapshotJobResponse: StructureShape
     GetResourceSnapshotRequest: StructureShape
@@ -127,11 +167,34 @@ module Aws::PartnerCentralSelling
     InternalServerException: StructureShape
     Invitation: StructureShape
     InvitationMessage: StringShape
+    InvitationProspectingResultAws: StructureShape
     InvitationStatus: EnumShape
     InvitationStatusList: ListShape
     InvolvementTypeChangeReason: EnumShape
     JobTitle: StringShape
     LastModifiedDate: StructureShape
+    LeadAddress: StructureShape
+    LeadBusinessProblem: StringShape
+    LeadContact: StructureShape
+    LeadContext: StructureShape
+    LeadCountryCode: StringShape
+    LeadCustomer: StructureShape
+    LeadEmail: StringShape
+    LeadIndustry: StringShape
+    LeadInsights: StructureShape
+    LeadInteraction: StructureShape
+    LeadInteractionList: ListShape
+    LeadInvitationCustomer: StructureShape
+    LeadInvitationInteraction: StructureShape
+    LeadInvitationPayload: StructureShape
+    LeadJobTitle: StringShape
+    LeadMarketSegment: StringShape
+    LeadPhoneNumber: StringShape
+    LeadQualificationStatus: StringShape
+    LeadSourceId: StringShape
+    LeadSourceName: StringShape
+    LeadSourceType: StringShape
+    LeadWebsiteUrl: StringShape
     LifeCycle: StructureShape
     LifeCycleForView: StructureShape
     LifeCycleSummary: StructureShape
@@ -153,6 +216,12 @@ module Aws::PartnerCentralSelling
     ListEngagementsResponse: StructureShape
     ListOpportunitiesRequest: StructureShape
     ListOpportunitiesResponse: StructureShape
+    ListOpportunityFromEngagementTaskSummaries: ListShape
+    ListOpportunityFromEngagementTaskSummary: StructureShape
+    ListOpportunityFromEngagementTasksRequest: StructureShape
+    ListOpportunityFromEngagementTasksResponse: StructureShape
+    ListProspectingFromEngagementTasksRequest: StructureShape
+    ListProspectingFromEngagementTasksResponse: StructureShape
     ListResourceSnapshotJobsRequest: StructureShape
     ListResourceSnapshotJobsResponse: StructureShape
     ListResourceSnapshotsRequest: StructureShape
@@ -167,6 +236,7 @@ module Aws::PartnerCentralSelling
     MarketingSource: EnumShape
     MemberCompanyName: StringShape
     MemberPageSize: IntegerShape
+    MonetaryAmount: StringShape
     MonetaryValue: StructureShape
     Name: StringShape
     NationalSecurity: EnumShape
@@ -179,6 +249,7 @@ module Aws::PartnerCentralSelling
     OpportunityIdentifiers: ListShape
     OpportunityInvitationPayload: StructureShape
     OpportunityOrigin: EnumShape
+    OpportunityQuality: StructureShape
     OpportunitySort: StructureShape
     OpportunitySortName: EnumShape
     OpportunitySummaries: ListShape
@@ -200,12 +271,34 @@ module Aws::PartnerCentralSelling
     ProjectDetails: StructureShape
     ProjectSummary: StructureShape
     ProjectView: StructureShape
+    ProspectingAccountName: StringShape
+    ProspectingCompanySize: StringShape
+    ProspectingFromEngagementTaskSort: StructureShape
+    ProspectingFromEngagementTaskSortName: EnumShape
+    ProspectingGeo: StringShape
+    ProspectingInsights: StructureShape
+    ProspectingPublicProfileSummary: StringShape
+    ProspectingRegion: StringShape
+    ProspectingResult: StructureShape
+    ProspectingResultAws: StructureShape
+    ProspectingResultCustomer: StructureShape
+    ProspectingSegment: StringShape
+    ProspectingSubIndustry: StringShape
+    ProspectingSubRegion: StringShape
+    ProspectingTaskArn: StringShape
+    ProspectingTaskIdentifier: StringShape
+    ProspectingTaskStatus: EnumShape
+    ProspectingTaskSummary: StructureShape
+    ProspectingTaskSummaryList: ListShape
     PutSellingSystemSettingsRequest: StructureShape
     PutSellingSystemSettingsResponse: StructureShape
     ReasonCode: EnumShape
     Receiver: UnionShape
     ReceiverResponsibility: EnumShape
     ReceiverResponsibilityList: ListShape
+    Recommendation: StructureShape
+    RecommendationAttributeMap: MapShape
+    RecommendationList: ListShape
     RejectEngagementInvitationRequest: StructureShape
     RejectionReasonString: StringShape
     RelatedEntityIdentifiers: StructureShape
@@ -253,6 +346,10 @@ module Aws::PartnerCentralSelling
     StartEngagementByAcceptingInvitationTaskResponse: StructureShape
     StartEngagementFromOpportunityTaskRequest: StructureShape
     StartEngagementFromOpportunityTaskResponse: StructureShape
+    StartOpportunityFromEngagementTaskRequest: StructureShape
+    StartOpportunityFromEngagementTaskResponse: StructureShape
+    StartProspectingFromEngagementTaskRequest: StructureShape
+    StartProspectingFromEngagementTaskResponse: StructureShape
     StartResourceSnapshotJobRequest: StructureShape
     StopResourceSnapshotJobRequest: StructureShape
     StringList: ListShape
@@ -265,15 +362,23 @@ module Aws::PartnerCentralSelling
     TagResourceResponse: StructureShape
     TagValue: StringShape
     TaggableResourceArn: StringShape
+    TargetCloseDateFilter: StructureShape
     TaskArn: StringShape
     TaskArnOrIdentifier: StringShape
     TaskIdentifier: StringShape
+    TaskIdentifierList: ListShape
     TaskIdentifiers: ListShape
+    TaskName: StringShape
+    TaskNameList: ListShape
     TaskStatus: EnumShape
     TaskStatuses: ListShape
     ThrottlingException: StructureShape
     UntagResourceRequest: StructureShape
     UntagResourceResponse: StructureShape
+    UpdateEngagementContextPayload: UnionShape
+    UpdateEngagementContextRequest: StructureShape
+    UpdateEngagementContextResponse: StructureShape
+    UpdateLeadContext: StructureShape
     UpdateOpportunityRequest: StructureShape
     UpdateOpportunityResponse: StructureShape
     UseCases: ListShape

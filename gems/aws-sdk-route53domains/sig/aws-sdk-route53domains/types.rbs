@@ -108,10 +108,12 @@ module Aws::Route53Domains
 
       def initialize: (
         ?availability: String,
+        ?price: Types::PriceWithCurrency,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor availability: String?
+      attr_accessor price: Types::PriceWithCurrency?
     end
 
     class CheckDomainTransferabilityRequest
@@ -133,11 +135,13 @@ module Aws::Route53Domains
       def initialize: (
         ?transferability: Types::DomainTransferability,
         ?message: String,
+        ?price: Types::PriceWithCurrency,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor transferability: Types::DomainTransferability?
       attr_accessor message: String?
+      attr_accessor price: Types::PriceWithCurrency?
     end
 
     class Consent
@@ -662,11 +666,13 @@ module Aws::Route53Domains
       def initialize: (
         ?domain_name: String,
         ?availability: String,
+        ?price: Types::PriceWithCurrency,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor domain_name: String?
       attr_accessor availability: String?
+      attr_accessor price: Types::PriceWithCurrency?
     end
 
     class DomainSummary
@@ -909,6 +915,28 @@ module Aws::Route53Domains
       attr_accessor billing_privacy: bool?
     end
 
+    class GetDomainPricesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+    end
+
+    class GetDomainPricesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_price: Types::DomainPrice,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_price: Types::DomainPrice?
+    end
+
     class GetDomainSuggestionsRequest
       include Smithy::Schema::Structure
 
@@ -916,12 +944,14 @@ module Aws::Route53Domains
         ?domain_name: String,
         ?suggestion_count: Integer,
         ?only_available: bool,
+        ?only_standard_prices: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor domain_name: String?
       attr_accessor suggestion_count: Integer?
       attr_accessor only_available: bool?
+      attr_accessor only_standard_prices: bool?
     end
 
     class GetDomainSuggestionsResponse
@@ -1194,17 +1224,24 @@ module Aws::Route53Domains
       BEGINS_WITH: String
     end
 
+    module PriceType
+      STANDARD: String
+      REGISTRY_PREMIUM: String
+    end
+
     class PriceWithCurrency
       include Smithy::Schema::Structure
 
       def initialize: (
         ?price: Float,
         ?currency: String,
+        ?price_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor price: Float?
       attr_accessor currency: String?
+      attr_accessor price_type: String?
     end
 
     class PushDomainRequest
@@ -1242,6 +1279,7 @@ module Aws::Route53Domains
         ?privacy_protect_tech_contact: bool,
         ?billing_contact: Types::ContactDetail,
         ?privacy_protect_billing_contact: bool,
+        ?consent: Types::Consent,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1257,6 +1295,7 @@ module Aws::Route53Domains
       attr_accessor privacy_protect_tech_contact: bool?
       attr_accessor billing_contact: Types::ContactDetail?
       attr_accessor privacy_protect_billing_contact: bool?
+      attr_accessor consent: Types::Consent?
     end
 
     class RegisterDomainResponse
@@ -1299,12 +1338,14 @@ module Aws::Route53Domains
         ?domain_name: String,
         ?duration_in_years: Integer,
         ?current_expiry_year: Integer,
+        ?consent: Types::Consent,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor domain_name: String?
       attr_accessor duration_in_years: Integer?
       attr_accessor current_expiry_year: Integer?
+      attr_accessor consent: Types::Consent?
     end
 
     class RenewDomainResponse
@@ -1403,6 +1444,19 @@ module Aws::Route53Domains
       PENDING_SUPPORT_CASE: String
     end
 
+    class TLDInMaintenance
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?tld: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor tld: String?
+    end
+
     class TLDRulesViolation
       include Smithy::Schema::Structure
 
@@ -1445,6 +1499,7 @@ module Aws::Route53Domains
         ?privacy_protect_tech_contact: bool,
         ?billing_contact: Types::ContactDetail,
         ?privacy_protect_billing_contact: bool,
+        ?consent: Types::Consent,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1462,6 +1517,7 @@ module Aws::Route53Domains
       attr_accessor privacy_protect_tech_contact: bool?
       attr_accessor billing_contact: Types::ContactDetail?
       attr_accessor privacy_protect_billing_contact: bool?
+      attr_accessor consent: Types::Consent?
     end
 
     class TransferDomainResponse
@@ -1508,6 +1564,7 @@ module Aws::Route53Domains
       DOMAIN_IN_OWN_ACCOUNT: String
       DOMAIN_IN_ANOTHER_ACCOUNT: String
       PREMIUM_DOMAIN: String
+      PENDING: String
     end
 
     class UnsupportedTLD

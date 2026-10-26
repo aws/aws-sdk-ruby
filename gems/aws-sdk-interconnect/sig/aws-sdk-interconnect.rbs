@@ -1,0 +1,5 @@
+  module Aws
+    module Interconnect
+      VERSION: String
+    end
+  end

@@ -11,6 +11,7 @@ module Aws::ECS
     AcceleratorType: EnumShape
     AcceleratorTypeSet: ListShape
     AccessDeniedException: StructureShape
+    AccessType: EnumShape
     AdvancedConfiguration: StructureShape
     AgentUpdateStatus: EnumShape
     AllowedInstanceType: StringShape
@@ -25,6 +26,8 @@ module Aws::ECS
     Attribute: StructureShape
     AttributeLimitExceededException: StructureShape
     Attributes: ListShape
+    AutoRepairActionsStatus: EnumShape
+    AutoRepairConfiguration: StructureShape
     AutoScalingGroupProvider: StructureShape
     AutoScalingGroupProviderUpdate: StructureShape
     AvailabilityZoneRebalancing: EnumShape
@@ -38,6 +41,8 @@ module Aws::ECS
     BoxedInteger: IntegerShape
     BurstablePerformance: EnumShape
     CPUArchitecture: EnumShape
+    CanaryConfiguration: StructureShape
+    CapacityOptionType: EnumShape
     CapacityProvider: StructureShape
     CapacityProviderField: EnumShape
     CapacityProviderFieldList: ListShape
@@ -49,6 +54,8 @@ module Aws::ECS
     CapacityProviderType: EnumShape
     CapacityProviderUpdateStatus: EnumShape
     CapacityProviders: ListShape
+    CapacityReservationPreference: EnumShape
+    CapacityReservationRequest: StructureShape
     ClientException: StructureShape
     Cluster: StructureShape
     ClusterConfiguration: StructureShape
@@ -89,18 +96,69 @@ module Aws::ECS
     ContainerStateChange: StructureShape
     ContainerStateChanges: ListShape
     Containers: ListShape
+    ContinueServiceDeploymentRequest: StructureShape
+    ContinueServiceDeploymentResponse: StructureShape
     CpuManufacturer: EnumShape
     CpuManufacturerSet: ListShape
     CreateCapacityProviderRequest: StructureShape
     CreateCapacityProviderResponse: StructureShape
     CreateClusterRequest: StructureShape
     CreateClusterResponse: StructureShape
+    CreateDaemonRequest: StructureShape
+    CreateDaemonResponse: StructureShape
+    CreateExpressGatewayServiceRequest: StructureShape
+    CreateExpressGatewayServiceResponse: StructureShape
     CreateManagedInstancesProviderConfiguration: StructureShape
     CreateServiceRequest: StructureShape
     CreateServiceResponse: StructureShape
     CreateTaskSetRequest: StructureShape
     CreateTaskSetResponse: StructureShape
     CreatedAt: StructureShape
+    DaemonAlarmConfiguration: StructureShape
+    DaemonCapacityProvider: StructureShape
+    DaemonCapacityProviderList: ListShape
+    DaemonCircuitBreaker: StructureShape
+    DaemonContainerDefinition: StructureShape
+    DaemonContainerDefinitionList: ListShape
+    DaemonContainerImage: StructureShape
+    DaemonContainerImages: ListShape
+    DaemonDeployment: StructureShape
+    DaemonDeploymentAlarms: StructureShape
+    DaemonDeploymentCapacityProvider: StructureShape
+    DaemonDeploymentCapacityProviderList: ListShape
+    DaemonDeploymentConfiguration: StructureShape
+    DaemonDeploymentList: ListShape
+    DaemonDeploymentRevisionDetail: StructureShape
+    DaemonDeploymentRevisionDetailList: ListShape
+    DaemonDeploymentRollbackMonitorsStatus: EnumShape
+    DaemonDeploymentStatus: EnumShape
+    DaemonDeploymentStatusList: ListShape
+    DaemonDeploymentSummary: StructureShape
+    DaemonDeploymentSummaryList: ListShape
+    DaemonDetail: StructureShape
+    DaemonDrainPercent: FloatShape
+    DaemonIpcMode: EnumShape
+    DaemonLinuxParameters: StructureShape
+    DaemonNotActiveException: StructureShape
+    DaemonNotFoundException: StructureShape
+    DaemonPidMode: EnumShape
+    DaemonPropagateTags: EnumShape
+    DaemonRevision: StructureShape
+    DaemonRevisionDetail: StructureShape
+    DaemonRevisionDetailList: ListShape
+    DaemonRevisions: ListShape
+    DaemonRollback: StructureShape
+    DaemonStatus: EnumShape
+    DaemonSummariesList: ListShape
+    DaemonSummary: StructureShape
+    DaemonTaskDefinition: StructureShape
+    DaemonTaskDefinitionRevisionFilter: EnumShape
+    DaemonTaskDefinitionStatus: EnumShape
+    DaemonTaskDefinitionStatusFilter: EnumShape
+    DaemonTaskDefinitionSummaries: ListShape
+    DaemonTaskDefinitionSummary: StructureShape
+    DaemonVolume: StructureShape
+    DaemonVolumeList: ListShape
     DeleteAccountSettingRequest: StructureShape
     DeleteAccountSettingResponse: StructureShape
     DeleteAttributesRequest: StructureShape
@@ -109,6 +167,12 @@ module Aws::ECS
     DeleteCapacityProviderResponse: StructureShape
     DeleteClusterRequest: StructureShape
     DeleteClusterResponse: StructureShape
+    DeleteDaemonRequest: StructureShape
+    DeleteDaemonResponse: StructureShape
+    DeleteDaemonTaskDefinitionRequest: StructureShape
+    DeleteDaemonTaskDefinitionResponse: StructureShape
+    DeleteExpressGatewayServiceRequest: StructureShape
+    DeleteExpressGatewayServiceResponse: StructureShape
     DeleteServiceRequest: StructureShape
     DeleteServiceResponse: StructureShape
     DeleteTaskDefinitionsRequest: StructureShape
@@ -121,11 +185,19 @@ module Aws::ECS
     DeploymentConfiguration: StructureShape
     DeploymentController: StructureShape
     DeploymentControllerType: EnumShape
+    DeploymentEarlySuccessCriteria: StructureShape
     DeploymentEphemeralStorage: StructureShape
     DeploymentLifecycleHook: StructureShape
+    DeploymentLifecycleHookAction: EnumShape
+    DeploymentLifecycleHookDetail: StructureShape
+    DeploymentLifecycleHookDetailList: ListShape
+    DeploymentLifecycleHookDuration: IntegerShape
     DeploymentLifecycleHookList: ListShape
     DeploymentLifecycleHookStage: EnumShape
     DeploymentLifecycleHookStageList: ListShape
+    DeploymentLifecycleHookStatus: EnumShape
+    DeploymentLifecycleHookTargetType: EnumShape
+    DeploymentLifecycleHookTimeoutConfiguration: StructureShape
     DeploymentRolloutState: EnumShape
     DeploymentStrategy: EnumShape
     Deployments: ListShape
@@ -139,6 +211,16 @@ module Aws::ECS
     DescribeClustersResponse: StructureShape
     DescribeContainerInstancesRequest: StructureShape
     DescribeContainerInstancesResponse: StructureShape
+    DescribeDaemonDeploymentsRequest: StructureShape
+    DescribeDaemonDeploymentsResponse: StructureShape
+    DescribeDaemonRequest: StructureShape
+    DescribeDaemonResponse: StructureShape
+    DescribeDaemonRevisionsRequest: StructureShape
+    DescribeDaemonRevisionsResponse: StructureShape
+    DescribeDaemonTaskDefinitionRequest: StructureShape
+    DescribeDaemonTaskDefinitionResponse: StructureShape
+    DescribeExpressGatewayServiceRequest: StructureShape
+    DescribeExpressGatewayServiceResponse: StructureShape
     DescribeServiceDeploymentsRequest: StructureShape
     DescribeServiceDeploymentsResponse: StructureShape
     DescribeServiceRevisionsRequest: StructureShape
@@ -168,6 +250,8 @@ module Aws::ECS
     EBSTagSpecification: StructureShape
     EBSTagSpecifications: ListShape
     EBSVolumeType: StringShape
+    ECSExpressGatewayService: StructureShape
+    ECSManagedResources: StructureShape
     ECSVolumeName: StringShape
     EFSAuthorizationConfig: StructureShape
     EFSAuthorizationConfigIAM: EnumShape
@@ -185,6 +269,19 @@ module Aws::ECS
     ExecuteCommandLogging: EnumShape
     ExecuteCommandRequest: StructureShape
     ExecuteCommandResponse: StructureShape
+    ExpressCpuArchitecture: EnumShape
+    ExpressGatewayContainer: StructureShape
+    ExpressGatewayRepositoryCredentials: StructureShape
+    ExpressGatewayScalingTarget: StructureShape
+    ExpressGatewayServiceAwsLogsConfiguration: StructureShape
+    ExpressGatewayServiceConfiguration: StructureShape
+    ExpressGatewayServiceConfigurations: ListShape
+    ExpressGatewayServiceInclude: EnumShape
+    ExpressGatewayServiceIncludeList: ListShape
+    ExpressGatewayServiceNetworkConfiguration: StructureShape
+    ExpressGatewayServiceScalingMetric: EnumShape
+    ExpressGatewayServiceStatus: StructureShape
+    ExpressGatewayServiceStatusCode: EnumShape
     FSxWindowsFileServerAuthorizationConfig: StructureShape
     FSxWindowsFileServerVolumeConfiguration: StructureShape
     Failure: StructureShape
@@ -197,6 +294,7 @@ module Aws::ECS
     GpuIds: ListShape
     HealthCheck: StructureShape
     HealthStatus: EnumShape
+    HealthyPercentInteger: IntegerShape
     HookDetails: DocumentShape
     HostEntry: StructureShape
     HostEntryList: ListShape
@@ -206,6 +304,9 @@ module Aws::ECS
     InferenceAcceleratorOverride: StructureShape
     InferenceAcceleratorOverrides: ListShape
     InferenceAccelerators: ListShape
+    InfrastructureOptimization: StructureShape
+    IngressPathSummaries: ListShape
+    IngressPathSummary: StructureShape
     InstanceGeneration: EnumShape
     InstanceGenerationSet: ListShape
     InstanceHealthCheckResult: StructureShape
@@ -223,6 +324,7 @@ module Aws::ECS
     KeyValuePair: StructureShape
     LaunchType: EnumShape
     LimitExceededException: StructureShape
+    LinearConfiguration: StructureShape
     LinuxParameters: StructureShape
     ListAccountSettingsRequest: StructureShape
     ListAccountSettingsResponse: StructureShape
@@ -232,6 +334,12 @@ module Aws::ECS
     ListClustersResponse: StructureShape
     ListContainerInstancesRequest: StructureShape
     ListContainerInstancesResponse: StructureShape
+    ListDaemonDeploymentsRequest: StructureShape
+    ListDaemonDeploymentsResponse: StructureShape
+    ListDaemonTaskDefinitionsRequest: StructureShape
+    ListDaemonTaskDefinitionsResponse: StructureShape
+    ListDaemonsRequest: StructureShape
+    ListDaemonsResponse: StructureShape
     ListServiceDeploymentsRequest: StructureShape
     ListServiceDeploymentsResponse: StructureShape
     ListServicesByNamespaceRequest: StructureShape
@@ -260,21 +368,47 @@ module Aws::ECS
     ManagedAgentStateChange: StructureShape
     ManagedAgentStateChanges: ListShape
     ManagedAgents: ListShape
+    ManagedApplicationAutoScalingPolicies: ListShape
+    ManagedApplicationAutoScalingPolicy: StructureShape
+    ManagedAutoScaling: StructureShape
+    ManagedCertificate: StructureShape
     ManagedDraining: EnumShape
+    ManagedIngressPath: StructureShape
+    ManagedIngressPaths: ListShape
+    ManagedInstancesLocalStorageConfiguration: StructureShape
     ManagedInstancesMonitoringOptions: EnumShape
     ManagedInstancesNetworkConfiguration: StructureShape
     ManagedInstancesProvider: StructureShape
     ManagedInstancesStorageConfiguration: StructureShape
+    ManagedListener: StructureShape
+    ManagedListenerRule: StructureShape
+    ManagedLoadBalancer: StructureShape
+    ManagedLogGroup: StructureShape
+    ManagedLogGroups: ListShape
+    ManagedMetricAlarm: StructureShape
+    ManagedMetricAlarms: ListShape
+    ManagedResourceStatus: EnumShape
+    ManagedScalableTarget: StructureShape
     ManagedScaling: StructureShape
     ManagedScalingInstanceWarmupPeriod: IntegerShape
     ManagedScalingStatus: EnumShape
     ManagedScalingStepSize: IntegerShape
     ManagedScalingTargetCapacity: IntegerShape
+    ManagedSecurityGroup: StructureShape
+    ManagedSecurityGroups: ListShape
     ManagedStorageConfiguration: StructureShape
+    ManagedTargetGroup: StructureShape
+    ManagedTargetGroups: ListShape
     ManagedTerminationProtection: EnumShape
     MemoryGiBPerVCpuRequest: StructureShape
     MemoryMiBRequest: StructureShape
+    MetricConfiguration: StructureShape
+    MetricConfigurationList: ListShape
+    MetricName: StringShape
+    MetricNamesList: ListShape
+    MetricResolutionSeconds: IntegerShape
     MissingVersionException: StructureShape
+    MonitoringConfiguration: StructureShape
     MountPoint: StructureShape
     MountPointList: ListShape
     NamespaceNotFoundException: StructureShape
@@ -286,6 +420,7 @@ module Aws::ECS
     NetworkInterfaceCountRequest: StructureShape
     NetworkInterfaces: ListShape
     NetworkMode: EnumShape
+    NeuronDeviceIds: ListShape
     NoUpdateAvailableException: StructureShape
     OSFamily: EnumShape
     PidMode: EnumShape
@@ -320,6 +455,8 @@ module Aws::ECS
     PutClusterCapacityProvidersResponse: StructureShape
     RegisterContainerInstanceRequest: StructureShape
     RegisterContainerInstanceResponse: StructureShape
+    RegisterDaemonTaskDefinitionRequest: StructureShape
+    RegisterDaemonTaskDefinitionResponse: StructureShape
     RegisterTaskDefinitionRequest: StructureShape
     RegisterTaskDefinitionResponse: StructureShape
     RepositoryCredentials: StructureShape
@@ -328,6 +465,7 @@ module Aws::ECS
     Resource: StructureShape
     ResourceIds: ListShape
     ResourceInUseException: StructureShape
+    ResourceManagementType: EnumShape
     ResourceNotFoundException: StructureShape
     ResourceRequirement: StructureShape
     ResourceRequirements: ListShape
@@ -337,6 +475,8 @@ module Aws::ECS
     RunTaskRequest: StructureShape
     RunTaskResponse: StructureShape
     RuntimePlatform: StructureShape
+    RuntimePlatformOverride: StructureShape
+    S3FilesVolumeConfiguration: StructureShape
     Scale: StructureShape
     ScaleUnit: EnumShape
     SchedulingStrategy: EnumShape
@@ -346,9 +486,12 @@ module Aws::ECS
     SensitiveString: StringShape
     ServerException: StructureShape
     Service: StructureShape
+    ServiceConnectAccessLogConfiguration: StructureShape
+    ServiceConnectAccessLoggingFormat: EnumShape
     ServiceConnectClientAlias: StructureShape
     ServiceConnectClientAliasList: ListShape
     ServiceConnectConfiguration: StructureShape
+    ServiceConnectIncludeQueryParameters: EnumShape
     ServiceConnectService: StructureShape
     ServiceConnectServiceList: ListShape
     ServiceConnectServiceResource: StructureShape
@@ -358,6 +501,8 @@ module Aws::ECS
     ServiceConnectTestTrafficRules: StructureShape
     ServiceConnectTlsCertificateAuthority: StructureShape
     ServiceConnectTlsConfiguration: StructureShape
+    ServiceCurrentRevisionSummary: StructureShape
+    ServiceCurrentRevisionSummaryList: ListShape
     ServiceDeployment: StructureShape
     ServiceDeploymentAlarms: StructureShape
     ServiceDeploymentBrief: StructureShape
@@ -379,9 +524,13 @@ module Aws::ECS
     ServiceRegistries: ListShape
     ServiceRegistry: StructureShape
     ServiceRevision: StructureShape
+    ServiceRevisionCleanup: EnumShape
     ServiceRevisionLoadBalancer: StructureShape
     ServiceRevisionLoadBalancers: ListShape
+    ServiceRevisionOverrides: StructureShape
     ServiceRevisionSummary: StructureShape
+    ServiceRevisionVpcLatticeConfiguration: StructureShape
+    ServiceRevisionVpcLatticeConfigurations: ListShape
     ServiceRevisions: ListShape
     ServiceRevisionsSummaryList: ListShape
     ServiceVolumeConfiguration: StructureShape
@@ -450,6 +599,8 @@ module Aws::ECS
     TaskVolumeConfigurations: ListShape
     TaskVolumeStorageGiB: IntegerShape
     Tasks: ListShape
+    ThresholdConfiguration: StructureShape
+    ThresholdType: EnumShape
     TimeoutConfiguration: StructureShape
     Timestamp: TimestampShape
     Tmpfs: StructureShape
@@ -472,6 +623,10 @@ module Aws::ECS
     UpdateContainerAgentResponse: StructureShape
     UpdateContainerInstancesStateRequest: StructureShape
     UpdateContainerInstancesStateResponse: StructureShape
+    UpdateDaemonRequest: StructureShape
+    UpdateDaemonResponse: StructureShape
+    UpdateExpressGatewayServiceRequest: StructureShape
+    UpdateExpressGatewayServiceResponse: StructureShape
     UpdateInProgressException: StructureShape
     UpdateManagedInstancesProviderConfiguration: StructureShape
     UpdateServicePrimaryTaskSetRequest: StructureShape
@@ -482,6 +637,7 @@ module Aws::ECS
     UpdateTaskProtectionResponse: StructureShape
     UpdateTaskSetRequest: StructureShape
     UpdateTaskSetResponse: StructureShape
+    UpdatedExpressGatewayService: StructureShape
     VCpuCountRangeRequest: StructureShape
     VersionConsistency: EnumShape
     VersionInfo: StructureShape
@@ -489,6 +645,7 @@ module Aws::ECS
     VolumeFrom: StructureShape
     VolumeFromList: ListShape
     VolumeList: ListShape
+    VpcLatticeAdvancedConfiguration: StructureShape
     VpcLatticeConfiguration: StructureShape
     VpcLatticeConfigurations: ListShape
 

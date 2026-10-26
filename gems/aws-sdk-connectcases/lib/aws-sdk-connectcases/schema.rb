@@ -17,13 +17,14 @@ module Aws::ConnectCases
     AuditEventFieldValueUnion = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.connectcases#AuditEventFieldValueUnion", name: "AuditEventFieldValueUnion")
     AuditEventId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcases#AuditEventId", name: "AuditEventId", traits: {"smithy.api#length" => {"min" => 1, "max" => 500}})
     AuditEventPerformedBy = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcases#AuditEventPerformedBy", name: "AuditEventPerformedBy")
-    AuditEventType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcases#AuditEventType", name: "AuditEventType", traits: {"smithy.api#enum" => [{"value" => "Case.Created", "name" => "CASE_CREATED"}, {"value" => "Case.Updated", "name" => "CASE_UPDATED"}, {"value" => "RelatedItem.Created", "name" => "RELATED_ITEM_CREATED"}]})
+    AuditEventType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcases#AuditEventType", name: "AuditEventType", traits: {"smithy.api#enum" => [{"value" => "Case.Created", "name" => "CASE_CREATED"}, {"value" => "Case.Updated", "name" => "CASE_UPDATED"}, {"value" => "RelatedItem.Created", "name" => "RELATED_ITEM_CREATED"}, {"value" => "RelatedItem.Deleted", "name" => "RELATED_ITEM_DELETED"}, {"value" => "RelatedItem.Updated", "name" => "RELATED_ITEM_UPDATED"}]})
     AuditEventsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.connectcases#AuditEventsList", name: "AuditEventsList", traits: {"smithy.api#sparse" => {}})
     BasicLayout = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcases#BasicLayout", name: "BasicLayout")
     BatchGetCaseRuleErrorList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.connectcases#BatchGetCaseRuleErrorList", name: "BatchGetCaseRuleErrorList")
     BatchGetCaseRuleList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.connectcases#BatchGetCaseRuleList", name: "BatchGetCaseRuleList")
     BatchGetCaseRuleRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcases#BatchGetCaseRuleRequest", name: "BatchGetCaseRuleRequest")
     BatchGetCaseRuleResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcases#BatchGetCaseRuleResponse", name: "BatchGetCaseRuleResponse")
+    BatchGetCaseRuleUnprocessedList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.connectcases#BatchGetCaseRuleUnprocessedList", name: "BatchGetCaseRuleUnprocessedList")
     BatchGetFieldErrorList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.connectcases#BatchGetFieldErrorList", name: "BatchGetFieldErrorList")
     BatchGetFieldIdentifierList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.connectcases#BatchGetFieldIdentifierList", name: "BatchGetFieldIdentifierList", traits: {"smithy.api#length" => {"min" => 1, "max" => 50}})
     BatchGetFieldInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcases#BatchGetFieldInput", name: "BatchGetFieldInput")
@@ -57,6 +58,8 @@ module Aws::ConnectCases
     CommentBodyTextType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcases#CommentBodyTextType", name: "CommentBodyTextType", traits: {"smithy.api#enum" => [{"value" => "Text/Plain", "name" => "PLAINTEXT"}]})
     CommentContent = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcases#CommentContent", name: "CommentContent")
     CommentFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcases#CommentFilter", name: "CommentFilter")
+    CommentUpdateContent = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcases#CommentUpdateContent", name: "CommentUpdateContent")
+    CompoundCondition = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcases#CompoundCondition", name: "CompoundCondition")
     ConflictException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcases#ConflictException", name: "ConflictException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 409})
     ConnectCaseContent = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcases#ConnectCaseContent", name: "ConnectCaseContent")
     ConnectCaseFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcases#ConnectCaseFilter", name: "ConnectCaseFilter")
@@ -87,6 +90,7 @@ module Aws::ConnectCases
     CustomFieldsFilterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.connectcases#CustomFieldsFilterList", name: "CustomFieldsFilterList")
     CustomFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcases#CustomFilter", name: "CustomFilter")
     CustomInputContent = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcases#CustomInputContent", name: "CustomInputContent")
+    CustomUpdateContent = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcases#CustomUpdateContent", name: "CustomUpdateContent")
     DeleteCaseRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcases#DeleteCaseRequest", name: "DeleteCaseRequest")
     DeleteCaseResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcases#DeleteCaseResponse", name: "DeleteCaseResponse")
     DeleteCaseRuleRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcases#DeleteCaseRuleRequest", name: "DeleteCaseRuleRequest")
@@ -113,6 +117,7 @@ module Aws::ConnectCases
     EventBridgeConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcases#EventBridgeConfiguration", name: "EventBridgeConfiguration")
     EventIncludedData = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcases#EventIncludedData", name: "EventIncludedData")
     FieldArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcases#FieldArn", name: "FieldArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 500}})
+    FieldAttributes = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.connectcases#FieldAttributes", name: "FieldAttributes")
     FieldDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcases#FieldDescription", name: "FieldDescription", traits: {"smithy.api#length" => {"max" => 255}})
     FieldError = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcases#FieldError", name: "FieldError")
     FieldFilter = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.connectcases#FieldFilter", name: "FieldFilter")
@@ -129,6 +134,7 @@ module Aws::ConnectCases
     FieldOptionErrorList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.connectcases#FieldOptionErrorList", name: "FieldOptionErrorList")
     FieldOptionName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcases#FieldOptionName", name: "FieldOptionName", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#pattern" => "^.*[\\S]$"})
     FieldOptionValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcases#FieldOptionValue", name: "FieldOptionValue", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#pattern" => "^.*[\\S]$"})
+    FieldOptionsCaseRule = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcases#FieldOptionsCaseRule", name: "FieldOptionsCaseRule")
     FieldOptionsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.connectcases#FieldOptionsList", name: "FieldOptionsList")
     FieldSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcases#FieldSummary", name: "FieldSummary")
     FieldSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.connectcases#FieldSummaryList", name: "FieldSummaryList")
@@ -153,6 +159,7 @@ module Aws::ConnectCases
     GetLayoutOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcases#GetLayoutOutput", name: "GetLayoutOutput")
     GetTemplateInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcases#GetTemplateInput", name: "GetTemplateInput")
     GetTemplateOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcases#GetTemplateOutput", name: "GetTemplateOutput")
+    HiddenCaseRule = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcases#HiddenCaseRule", name: "HiddenCaseRule")
     IamPrincipalArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcases#IamPrincipalArn", name: "IamPrincipalArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 500}})
     InternalServerException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcases#InternalServerException", name: "InternalServerException", traits: {"smithy.api#error" => "server", "smithy.api#httpError" => 500, "smithy.api#retryable" => {}})
     LastModifiedTime = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.connectcases#LastModifiedTime", name: "LastModifiedTime", traits: {"smithy.api#timestampFormat" => "date-time"})
@@ -181,10 +188,16 @@ module Aws::ConnectCases
     ListTemplatesInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcases#ListTemplatesInput", name: "ListTemplatesInput")
     ListTemplatesOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcases#ListTemplatesOutput", name: "ListTemplatesOutput")
     MaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.connectcases#MaxResults", name: "MaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}})
+    MutableTagKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcases#MutableTagKey", name: "MutableTagKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^(?![aA][wW][sS]:)[a-zA-Z0-9 _.:/=+\\-@]+$"})
+    MutableTags = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.connectcases#MutableTags", name: "MutableTags", traits: {"smithy.api#length" => {"min" => 0, "max" => 50}})
     NextToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcases#NextToken", name: "NextToken", traits: {"smithy.api#length" => {"min" => 0, "max" => 9000}})
     OperandOne = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.connectcases#OperandOne", name: "OperandOne")
     OperandTwo = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.connectcases#OperandTwo", name: "OperandTwo")
     Order = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcases#Order", name: "Order", traits: {"smithy.api#enum" => [{"value" => "Asc", "name" => "ASCENDING"}, {"value" => "Desc", "name" => "DESCENDING"}]})
+    ParentChildFieldOptionValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcases#ParentChildFieldOptionValue", name: "ParentChildFieldOptionValue", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}, "smithy.api#pattern" => "^$|^.*[\\S]$"})
+    ParentChildFieldOptionValueList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.connectcases#ParentChildFieldOptionValueList", name: "ParentChildFieldOptionValueList")
+    ParentChildFieldOptionsMapping = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcases#ParentChildFieldOptionsMapping", name: "ParentChildFieldOptionsMapping")
+    ParentChildFieldOptionsMappingList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.connectcases#ParentChildFieldOptionsMappingList", name: "ParentChildFieldOptionsMappingList", traits: {"smithy.api#length" => {"min" => 1, "max" => 200}})
     PutCaseEventConfigurationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcases#PutCaseEventConfigurationInput", name: "PutCaseEventConfigurationInput")
     PutCaseEventConfigurationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcases#PutCaseEventConfigurationOutput", name: "PutCaseEventConfigurationOutput")
     RelatedItemArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcases#RelatedItemArn", name: "RelatedItemArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 500}})
@@ -195,11 +208,12 @@ module Aws::ConnectCases
     RelatedItemInputContent = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.connectcases#RelatedItemInputContent", name: "RelatedItemInputContent")
     RelatedItemType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcases#RelatedItemType", name: "RelatedItemType", traits: {"smithy.api#enum" => [{"value" => "Contact", "name" => "CONTACT"}, {"value" => "Comment", "name" => "COMMENT"}, {"value" => "File", "name" => "FILE"}, {"value" => "Sla", "name" => "SLA"}, {"value" => "ConnectCase", "name" => "CONNECT_CASE"}, {"value" => "Custom", "name" => "CUSTOM"}]})
     RelatedItemTypeFilter = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.connectcases#RelatedItemTypeFilter", name: "RelatedItemTypeFilter")
+    RelatedItemUpdateContent = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.connectcases#RelatedItemUpdateContent", name: "RelatedItemUpdateContent")
     RequiredCaseRule = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcases#RequiredCaseRule", name: "RequiredCaseRule")
     RequiredField = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcases#RequiredField", name: "RequiredField")
     RequiredFieldList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.connectcases#RequiredFieldList", name: "RequiredFieldList", traits: {"smithy.api#length" => {"max" => 100}})
     ResourceNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcases#ResourceNotFoundException", name: "ResourceNotFoundException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 404})
-    RuleType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcases#RuleType", name: "RuleType", traits: {"smithy.api#enum" => [{"name" => "REQUIRED", "value" => "Required"}]})
+    RuleType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcases#RuleType", name: "RuleType", traits: {"smithy.api#enum" => [{"name" => "REQUIRED", "value" => "Required"}, {"name" => "HIDDEN", "value" => "Hidden"}, {"name" => "FIELD_OPTIONS", "value" => "FieldOptions"}]})
     SearchAllRelatedItemsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcases#SearchAllRelatedItemsRequest", name: "SearchAllRelatedItemsRequest")
     SearchAllRelatedItemsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcases#SearchAllRelatedItemsResponse", name: "SearchAllRelatedItemsResponse")
     SearchAllRelatedItemsResponseItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcases#SearchAllRelatedItemsResponseItem", name: "SearchAllRelatedItemsResponseItem")
@@ -215,6 +229,7 @@ module Aws::ConnectCases
     SearchRelatedItemsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcases#SearchRelatedItemsOutput", name: "SearchRelatedItemsOutput")
     SearchRelatedItemsResponseItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcases#SearchRelatedItemsResponseItem", name: "SearchRelatedItemsResponseItem")
     SearchRelatedItemsResponseItemList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.connectcases#SearchRelatedItemsResponseItemList", name: "SearchRelatedItemsResponseItemList", traits: {"smithy.api#sparse" => {}})
+    SearchTagKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcases#SearchTagKey", name: "SearchTagKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[a-zA-Z0-9 _.:/=+\\-@]+$"})
     Section = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.connectcases#Section", name: "Section")
     SectionsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.connectcases#SectionsList", name: "SectionsList", traits: {"smithy.api#length" => {"max" => 1}})
     ServiceQuotaExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcases#ServiceQuotaExceededException", name: "ServiceQuotaExceededException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 402})
@@ -231,22 +246,30 @@ module Aws::ConnectCases
     SlaType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcases#SlaType", name: "SlaType", traits: {"smithy.api#enum" => [{"value" => "CaseField", "name" => "CASE_FIELD"}]})
     Sort = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcases#Sort", name: "Sort")
     SortList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.connectcases#SortList", name: "SortList")
+    TagFilter = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.connectcases#TagFilter", name: "TagFilter")
     TagKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcases#TagKey", name: "TagKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^(?!aws:)[a-zA-Z+-=._:/]+$"})
     TagKeyList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.connectcases#TagKeyList", name: "TagKeyList", traits: {"smithy.api#length" => {"min" => 0, "max" => 50}})
+    TagPropagationConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcases#TagPropagationConfiguration", name: "TagPropagationConfiguration")
+    TagPropagationConfigurationList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.connectcases#TagPropagationConfigurationList", name: "TagPropagationConfigurationList", traits: {"smithy.api#length" => {"max" => 1}})
+    TagPropagationResourceType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcases#TagPropagationResourceType", name: "TagPropagationResourceType", traits: {"smithy.api#enum" => [{"value" => "Cases", "name" => "CASES", "documentation" => "Cases resources created within the domain"}]})
     TagResourceInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcases#TagResourceInput", name: "TagResourceInput")
+    TagValue = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcases#TagValue", name: "TagValue")
+    TagValueString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcases#TagValueString", name: "TagValueString", traits: {"smithy.api#length" => {"max" => 256}, "smithy.api#pattern" => "^([a-zA-Z0-9 _.:/=+\\-@]*)$"})
     Tags = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.connectcases#Tags", name: "Tags", traits: {"smithy.api#sparse" => {}})
-    TargetSlaMinutes = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.connectcases#TargetSlaMinutes", name: "TargetSlaMinutes", traits: {"smithy.api#range" => {"min" => 1, "max" => 129600}})
+    TargetSlaMinutes = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.connectcases#TargetSlaMinutes", name: "TargetSlaMinutes", traits: {"smithy.api#range" => {"min" => 1, "max" => 1051200}})
     TemplateArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcases#TemplateArn", name: "TemplateArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 500}})
     TemplateCaseRuleList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.connectcases#TemplateCaseRuleList", name: "TemplateCaseRuleList", traits: {"smithy.api#length" => {"max" => 50}})
     TemplateDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcases#TemplateDescription", name: "TemplateDescription", traits: {"smithy.api#length" => {"max" => 255}})
     TemplateId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcases#TemplateId", name: "TemplateId", traits: {"smithy.api#length" => {"min" => 1, "max" => 500}})
     TemplateName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcases#TemplateName", name: "TemplateName", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#pattern" => "^.*[\\S]$"})
     TemplateRule = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcases#TemplateRule", name: "TemplateRule")
-    TemplateStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcases#TemplateStatus", name: "TemplateStatus", traits: {"smithy.api#enum" => [{"value" => "Active", "name" => "ACTIVE"}, {"value" => "Inactive", "name" => "INACTIVE"}]})
+    TemplateStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcases#TemplateStatus", name: "TemplateStatus", traits: {"smithy.api#enum" => [{"name" => "ACTIVE", "value" => "Active"}, {"name" => "INACTIVE", "value" => "Inactive"}]})
     TemplateStatusFilters = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.connectcases#TemplateStatusFilters", name: "TemplateStatusFilters", traits: {"smithy.api#length" => {"min" => 1, "max" => 2}, "smithy.api#uniqueItems" => {}})
     TemplateSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcases#TemplateSummary", name: "TemplateSummary")
     TemplateSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.connectcases#TemplateSummaryList", name: "TemplateSummaryList")
+    TextAttributes = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcases#TextAttributes", name: "TextAttributes")
     ThrottlingException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcases#ThrottlingException", name: "ThrottlingException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 429, "smithy.api#retryable" => {}})
+    TotalCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.connectcases#TotalCount", name: "TotalCount", traits: {"smithy.api#default" => 0, "smithy.api#range" => {"min" => 0}})
     UntagResourceInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcases#UntagResourceInput", name: "UntagResourceInput")
     UpdateCaseInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcases#UpdateCaseInput", name: "UpdateCaseInput")
     UpdateCaseOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcases#UpdateCaseOutput", name: "UpdateCaseOutput")
@@ -256,6 +279,8 @@ module Aws::ConnectCases
     UpdateFieldOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcases#UpdateFieldOutput", name: "UpdateFieldOutput")
     UpdateLayoutInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcases#UpdateLayoutInput", name: "UpdateLayoutInput")
     UpdateLayoutOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcases#UpdateLayoutOutput", name: "UpdateLayoutOutput")
+    UpdateRelatedItemRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcases#UpdateRelatedItemRequest", name: "UpdateRelatedItemRequest")
+    UpdateRelatedItemResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcases#UpdateRelatedItemResponse", name: "UpdateRelatedItemResponse")
     UpdateTemplateInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcases#UpdateTemplateInput", name: "UpdateTemplateInput")
     UpdateTemplateOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.connectcases#UpdateTemplateOutput", name: "UpdateTemplateOutput")
     UserArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.connectcases#UserArn", name: "UserArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 500}})
@@ -278,7 +303,7 @@ module Aws::ConnectCases
     AuditEventField.add_member(:new_value, ::Smithy::Schema::Shapes::MemberShape.new(target: AuditEventFieldValueUnion, name: "newValue", traits: {"smithy.api#required" => {}}))
     AuditEventField.type = Types::AuditEventField
     AuditEventFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AuditEventField, name: "member"))
-    AuditEventFieldValueUnion.add_member(:string_value, Types::AuditEventFieldValueUnion::StringValue, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "stringValue", traits: {"smithy.api#length" => {"max" => 500}}))
+    AuditEventFieldValueUnion.add_member(:string_value, Types::AuditEventFieldValueUnion::StringValue, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "stringValue", traits: {"smithy.api#length" => {"max" => 4100}}))
     AuditEventFieldValueUnion.add_member(:double_value, Types::AuditEventFieldValueUnion::DoubleValue, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "doubleValue"))
     AuditEventFieldValueUnion.add_member(:boolean_value, Types::AuditEventFieldValueUnion::BooleanValue, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "booleanValue"))
     AuditEventFieldValueUnion.add_member(:empty_value, Types::AuditEventFieldValueUnion::EmptyValue, ::Smithy::Schema::Shapes::MemberShape.new(target: EmptyFieldValue, name: "emptyValue"))
@@ -299,7 +324,9 @@ module Aws::ConnectCases
     BatchGetCaseRuleRequest.type = Types::BatchGetCaseRuleRequest
     BatchGetCaseRuleResponse.add_member(:case_rules, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetCaseRuleList, name: "caseRules", traits: {"smithy.api#length" => {"max" => 50}, "smithy.api#required" => {}}))
     BatchGetCaseRuleResponse.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetCaseRuleErrorList, name: "errors", traits: {"smithy.api#length" => {"max" => 50}, "smithy.api#required" => {}}))
+    BatchGetCaseRuleResponse.add_member(:unprocessed_case_rules, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetCaseRuleUnprocessedList, name: "unprocessedCaseRules", traits: {"smithy.api#length" => {"max" => 50}}))
     BatchGetCaseRuleResponse.type = Types::BatchGetCaseRuleResponse
+    BatchGetCaseRuleUnprocessedList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CaseRuleId, name: "member"))
     BatchGetFieldErrorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldError, name: "member"))
     BatchGetFieldIdentifierList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldIdentifier, name: "member"))
     BatchGetFieldInput.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -317,6 +344,8 @@ module Aws::ConnectCases
     BatchPutFieldOptionsOutput.type = Types::BatchPutFieldOptionsOutput
     BooleanCondition.add_member(:equal_to, Types::BooleanCondition::EqualTo, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOperands, name: "equalTo"))
     BooleanCondition.add_member(:not_equal_to, Types::BooleanCondition::NotEqualTo, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOperands, name: "notEqualTo"))
+    BooleanCondition.add_member(:and_all, Types::BooleanCondition::AndAll, ::Smithy::Schema::Shapes::MemberShape.new(target: CompoundCondition, name: "andAll"))
+    BooleanCondition.add_member(:or_all, Types::BooleanCondition::OrAll, ::Smithy::Schema::Shapes::MemberShape.new(target: CompoundCondition, name: "orAll"))
     BooleanCondition.add_member(:unknown, Types::BooleanCondition::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     BooleanCondition.type = Types::BooleanCondition
     BooleanConditionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanCondition, name: "member"))
@@ -324,16 +353,19 @@ module Aws::ConnectCases
     BooleanOperands.add_member(:operand_two, ::Smithy::Schema::Shapes::MemberShape.new(target: OperandTwo, name: "operandTwo", traits: {"smithy.api#required" => {}}))
     BooleanOperands.add_member(:result, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "result", traits: {"smithy.api#required" => {}}))
     BooleanOperands.type = Types::BooleanOperands
-    CaseEventIncludedData.add_member(:fields, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldIdentifierList, name: "fields", traits: {"smithy.api#length" => {"max" => 200}, "smithy.api#required" => {}}))
+    CaseEventIncludedData.add_member(:fields, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldIdentifierList, name: "fields", traits: {"smithy.api#length" => {"max" => 400}, "smithy.api#required" => {}}))
     CaseEventIncludedData.type = Types::CaseEventIncludedData
     CaseFilter.add_member(:field, Types::CaseFilter::Field, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldFilter, name: "field"))
     CaseFilter.add_member(:not, Types::CaseFilter::Not, ::Smithy::Schema::Shapes::MemberShape.new(target: CaseFilter, name: "not"))
+    CaseFilter.add_member(:tag, Types::CaseFilter::Tag, ::Smithy::Schema::Shapes::MemberShape.new(target: TagFilter, name: "tag"))
     CaseFilter.add_member(:and_all, Types::CaseFilter::AndAll, ::Smithy::Schema::Shapes::MemberShape.new(target: CaseFilterList, name: "andAll", traits: {"smithy.api#length" => {"max" => 10}}))
     CaseFilter.add_member(:or_all, Types::CaseFilter::OrAll, ::Smithy::Schema::Shapes::MemberShape.new(target: CaseFilterList, name: "orAll", traits: {"smithy.api#length" => {"max" => 10}}))
     CaseFilter.add_member(:unknown, Types::CaseFilter::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     CaseFilter.type = Types::CaseFilter
     CaseFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CaseFilter, name: "member"))
     CaseRuleDetails.add_member(:required, Types::CaseRuleDetails::Required, ::Smithy::Schema::Shapes::MemberShape.new(target: RequiredCaseRule, name: "required"))
+    CaseRuleDetails.add_member(:field_options, Types::CaseRuleDetails::FieldOptions, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldOptionsCaseRule, name: "fieldOptions"))
+    CaseRuleDetails.add_member(:hidden, Types::CaseRuleDetails::Hidden, ::Smithy::Schema::Shapes::MemberShape.new(target: HiddenCaseRule, name: "hidden"))
     CaseRuleDetails.add_member(:unknown, Types::CaseRuleDetails::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     CaseRuleDetails.type = Types::CaseRuleDetails
     CaseRuleError.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: CaseRuleId, name: "id", traits: {"smithy.api#required" => {}}))
@@ -359,6 +391,11 @@ module Aws::ConnectCases
     CommentContent.add_member(:content_type, ::Smithy::Schema::Shapes::MemberShape.new(target: CommentBodyTextType, name: "contentType", traits: {"smithy.api#required" => {}}))
     CommentContent.type = Types::CommentContent
     CommentFilter.type = Types::CommentFilter
+    CommentUpdateContent.add_member(:body, ::Smithy::Schema::Shapes::MemberShape.new(target: CommentBody, name: "body", traits: {"smithy.api#required" => {}}))
+    CommentUpdateContent.add_member(:content_type, ::Smithy::Schema::Shapes::MemberShape.new(target: CommentBodyTextType, name: "contentType", traits: {"smithy.api#required" => {}}))
+    CommentUpdateContent.type = Types::CommentUpdateContent
+    CompoundCondition.add_member(:conditions, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanConditionList, name: "conditions", traits: {"smithy.api#required" => {}}))
+    CompoundCondition.type = Types::CompoundCondition
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ConflictException.type = Types::ConflictException
     ConnectCaseContent.add_member(:case_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CaseId, name: "caseId", traits: {"smithy.api#required" => {}}))
@@ -378,9 +415,10 @@ module Aws::ConnectCases
     ContactFilter.type = Types::ContactFilter
     CreateCaseInput.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     CreateCaseInput.add_member(:template_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateId, name: "templateId", traits: {"smithy.api#required" => {}}))
-    CreateCaseInput.add_member(:fields, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldValueList, name: "fields", traits: {"smithy.api#length" => {"max" => 100}, "smithy.api#required" => {}}))
+    CreateCaseInput.add_member(:fields, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldValueList, name: "fields", traits: {"smithy.api#length" => {"max" => 220}, "smithy.api#required" => {}}))
     CreateCaseInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#length" => {"max" => 64}}))
     CreateCaseInput.add_member(:performed_by, ::Smithy::Schema::Shapes::MemberShape.new(target: UserUnion, name: "performedBy"))
+    CreateCaseInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: MutableTags, name: "tags"))
     CreateCaseInput.type = Types::CreateCaseInput
     CreateCaseOutput.add_member(:case_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CaseId, name: "caseId", traits: {"smithy.api#required" => {}}))
     CreateCaseOutput.add_member(:case_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CaseArn, name: "caseArn", traits: {"smithy.api#required" => {}}))
@@ -403,6 +441,7 @@ module Aws::ConnectCases
     CreateFieldInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldName, name: "name", traits: {"smithy.api#required" => {}}))
     CreateFieldInput.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldType, name: "type", traits: {"smithy.api#required" => {}}))
     CreateFieldInput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldDescription, name: "description"))
+    CreateFieldInput.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldAttributes, name: "attributes"))
     CreateFieldInput.type = Types::CreateFieldInput
     CreateFieldOutput.add_member(:field_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldId, name: "fieldId", traits: {"smithy.api#required" => {}}))
     CreateFieldOutput.add_member(:field_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldArn, name: "fieldArn", traits: {"smithy.api#required" => {}}))
@@ -430,6 +469,7 @@ module Aws::ConnectCases
     CreateTemplateInput.add_member(:required_fields, ::Smithy::Schema::Shapes::MemberShape.new(target: RequiredFieldList, name: "requiredFields"))
     CreateTemplateInput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateStatus, name: "status"))
     CreateTemplateInput.add_member(:rules, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateCaseRuleList, name: "rules"))
+    CreateTemplateInput.add_member(:tag_propagation_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: TagPropagationConfigurationList, name: "tagPropagationConfigurations"))
     CreateTemplateInput.type = Types::CreateTemplateInput
     CreateTemplateOutput.add_member(:template_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateId, name: "templateId", traits: {"smithy.api#required" => {}}))
     CreateTemplateOutput.add_member(:template_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateArn, name: "templateArn", traits: {"smithy.api#required" => {}}))
@@ -447,6 +487,8 @@ module Aws::ConnectCases
     CustomFilter.type = Types::CustomFilter
     CustomInputContent.add_member(:fields, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldValueList, name: "fields", traits: {"smithy.api#length" => {"min" => 1, "max" => 50}, "smithy.api#required" => {}}))
     CustomInputContent.type = Types::CustomInputContent
+    CustomUpdateContent.add_member(:fields, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldValueList, name: "fields", traits: {"smithy.api#length" => {"min" => 1, "max" => 50}, "smithy.api#required" => {}}))
+    CustomUpdateContent.type = Types::CustomUpdateContent
     DeleteCaseRequest.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteCaseRequest.add_member(:case_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CaseId, name: "caseId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteCaseRequest.type = Types::DeleteCaseRequest
@@ -488,6 +530,9 @@ module Aws::ConnectCases
     EventIncludedData.add_member(:case_data, ::Smithy::Schema::Shapes::MemberShape.new(target: CaseEventIncludedData, name: "caseData"))
     EventIncludedData.add_member(:related_item_data, ::Smithy::Schema::Shapes::MemberShape.new(target: RelatedItemEventIncludedData, name: "relatedItemData"))
     EventIncludedData.type = Types::EventIncludedData
+    FieldAttributes.add_member(:text, Types::FieldAttributes::Text, ::Smithy::Schema::Shapes::MemberShape.new(target: TextAttributes, name: "text"))
+    FieldAttributes.add_member(:unknown, Types::FieldAttributes::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    FieldAttributes.type = Types::FieldAttributes
     FieldError.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldId, name: "id", traits: {"smithy.api#required" => {}}))
     FieldError.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "errorCode", traits: {"smithy.api#required" => {}}))
     FieldError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
@@ -501,7 +546,7 @@ module Aws::ConnectCases
     FieldFilter.add_member(:unknown, Types::FieldFilter::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     FieldFilter.type = Types::FieldFilter
     FieldGroup.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "name", traits: {"smithy.api#length" => {"max" => 100}}))
-    FieldGroup.add_member(:fields, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldList, name: "fields", traits: {"smithy.api#length" => {"max" => 100}, "smithy.api#required" => {}}))
+    FieldGroup.add_member(:fields, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldList, name: "fields", traits: {"smithy.api#length" => {"max" => 220}, "smithy.api#required" => {}}))
     FieldGroup.type = Types::FieldGroup
     FieldIdentifier.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldId, name: "id", traits: {"smithy.api#required" => {}}))
     FieldIdentifier.type = Types::FieldIdentifier
@@ -518,19 +563,24 @@ module Aws::ConnectCases
     FieldOptionError.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldOptionValue, name: "value", traits: {"smithy.api#required" => {}}))
     FieldOptionError.type = Types::FieldOptionError
     FieldOptionErrorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldOptionError, name: "member"))
+    FieldOptionsCaseRule.add_member(:parent_field_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldId, name: "parentFieldId"))
+    FieldOptionsCaseRule.add_member(:child_field_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldId, name: "childFieldId"))
+    FieldOptionsCaseRule.add_member(:parent_child_field_options_mappings, ::Smithy::Schema::Shapes::MemberShape.new(target: ParentChildFieldOptionsMappingList, name: "parentChildFieldOptionsMappings", traits: {"smithy.api#required" => {}}))
+    FieldOptionsCaseRule.type = Types::FieldOptionsCaseRule
     FieldOptionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldOption, name: "member"))
     FieldSummary.add_member(:field_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldId, name: "fieldId", traits: {"smithy.api#required" => {}}))
     FieldSummary.add_member(:field_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldArn, name: "fieldArn", traits: {"smithy.api#required" => {}}))
     FieldSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldName, name: "name", traits: {"smithy.api#required" => {}}))
     FieldSummary.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldType, name: "type", traits: {"smithy.api#required" => {}}))
     FieldSummary.add_member(:namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldNamespace, name: "namespace", traits: {"smithy.api#required" => {}}))
+    FieldSummary.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldAttributes, name: "attributes"))
     FieldSummary.type = Types::FieldSummary
     FieldSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldSummary, name: "member"))
     FieldValue.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldId, name: "id", traits: {"smithy.api#required" => {}}))
     FieldValue.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldValueUnion, name: "value", traits: {"smithy.api#required" => {}}))
     FieldValue.type = Types::FieldValue
     FieldValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldValue, name: "member"))
-    FieldValueUnion.add_member(:string_value, Types::FieldValueUnion::StringValue, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "stringValue", traits: {"smithy.api#length" => {"max" => 3000}}))
+    FieldValueUnion.add_member(:string_value, Types::FieldValueUnion::StringValue, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "stringValue", traits: {"smithy.api#length" => {"max" => 4100}}))
     FieldValueUnion.add_member(:double_value, Types::FieldValueUnion::DoubleValue, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "doubleValue"))
     FieldValueUnion.add_member(:boolean_value, Types::FieldValueUnion::BooleanValue, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "booleanValue"))
     FieldValueUnion.add_member(:empty_value, Types::FieldValueUnion::EmptyValue, ::Smithy::Schema::Shapes::MemberShape.new(target: EmptyFieldValue, name: "emptyValue"))
@@ -555,10 +605,10 @@ module Aws::ConnectCases
     GetCaseEventConfigurationOutput.type = Types::GetCaseEventConfigurationOutput
     GetCaseInput.add_member(:case_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CaseId, name: "caseId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetCaseInput.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    GetCaseInput.add_member(:fields, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldIdentifierList, name: "fields", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#required" => {}}))
+    GetCaseInput.add_member(:fields, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldIdentifierList, name: "fields", traits: {"smithy.api#length" => {"min" => 1, "max" => 220}, "smithy.api#required" => {}}))
     GetCaseInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
     GetCaseInput.type = Types::GetCaseInput
-    GetCaseOutput.add_member(:fields, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldValueList, name: "fields", traits: {"smithy.api#length" => {"max" => 100}, "smithy.api#required" => {}}))
+    GetCaseOutput.add_member(:fields, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldValueList, name: "fields", traits: {"smithy.api#length" => {"max" => 220}, "smithy.api#required" => {}}))
     GetCaseOutput.add_member(:template_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateId, name: "templateId", traits: {"smithy.api#required" => {}}))
     GetCaseOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
     GetCaseOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags"))
@@ -592,6 +642,7 @@ module Aws::ConnectCases
     GetFieldResponse.add_member(:deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: Deleted, name: "deleted", traits: {"smithy.api#default" => false}))
     GetFieldResponse.add_member(:created_time, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedTime, name: "createdTime"))
     GetFieldResponse.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: LastModifiedTime, name: "lastModifiedTime"))
+    GetFieldResponse.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldAttributes, name: "attributes"))
     GetFieldResponse.type = Types::GetFieldResponse
     GetLayoutInput.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetLayoutInput.add_member(:layout_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LayoutId, name: "layoutId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -620,7 +671,11 @@ module Aws::ConnectCases
     GetTemplateOutput.add_member(:created_time, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedTime, name: "createdTime"))
     GetTemplateOutput.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: LastModifiedTime, name: "lastModifiedTime"))
     GetTemplateOutput.add_member(:rules, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateCaseRuleList, name: "rules"))
+    GetTemplateOutput.add_member(:tag_propagation_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: TagPropagationConfigurationList, name: "tagPropagationConfigurations"))
     GetTemplateOutput.type = Types::GetTemplateOutput
+    HiddenCaseRule.add_member(:default_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "defaultValue", traits: {"smithy.api#required" => {}}))
+    HiddenCaseRule.add_member(:conditions, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanConditionList, name: "conditions", traits: {"smithy.api#required" => {}}))
+    HiddenCaseRule.type = Types::HiddenCaseRule
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     InternalServerException.add_member(:retry_after_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "retryAfterSeconds", traits: {"smithy.api#httpHeader" => "Retry-After"}))
     InternalServerException.type = Types::InternalServerException
@@ -692,6 +747,8 @@ module Aws::ConnectCases
     ListTemplatesOutput.add_member(:templates, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateSummaryList, name: "templates", traits: {"smithy.api#length" => {"max" => 100}, "smithy.api#required" => {}}))
     ListTemplatesOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
     ListTemplatesOutput.type = Types::ListTemplatesOutput
+    MutableTags.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: MutableTagKey, name: "key"))
+    MutableTags.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValueString, name: "value"))
     OperandOne.add_member(:field_id, Types::OperandOne::FieldId, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldId, name: "fieldId"))
     OperandOne.add_member(:unknown, Types::OperandOne::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     OperandOne.type = Types::OperandOne
@@ -701,6 +758,11 @@ module Aws::ConnectCases
     OperandTwo.add_member(:empty_value, Types::OperandTwo::EmptyValue, ::Smithy::Schema::Shapes::MemberShape.new(target: EmptyOperandValue, name: "emptyValue"))
     OperandTwo.add_member(:unknown, Types::OperandTwo::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     OperandTwo.type = Types::OperandTwo
+    ParentChildFieldOptionValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ParentChildFieldOptionValue, name: "member"))
+    ParentChildFieldOptionsMapping.add_member(:parent_field_option_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ParentChildFieldOptionValue, name: "parentFieldOptionValue", traits: {"smithy.api#required" => {}}))
+    ParentChildFieldOptionsMapping.add_member(:child_field_option_values, ::Smithy::Schema::Shapes::MemberShape.new(target: ParentChildFieldOptionValueList, name: "childFieldOptionValues", traits: {"smithy.api#length" => {"max" => 1500}, "smithy.api#required" => {}}))
+    ParentChildFieldOptionsMapping.type = Types::ParentChildFieldOptionsMapping
+    ParentChildFieldOptionsMappingList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ParentChildFieldOptionsMapping, name: "member"))
     PutCaseEventConfigurationInput.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     PutCaseEventConfigurationInput.add_member(:event_bridge, ::Smithy::Schema::Shapes::MemberShape.new(target: EventBridgeConfiguration, name: "eventBridge", traits: {"smithy.api#required" => {}}))
     PutCaseEventConfigurationInput.type = Types::PutCaseEventConfigurationInput
@@ -732,6 +794,10 @@ module Aws::ConnectCases
     RelatedItemTypeFilter.add_member(:custom, Types::RelatedItemTypeFilter::Custom, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomFilter, name: "custom"))
     RelatedItemTypeFilter.add_member(:unknown, Types::RelatedItemTypeFilter::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     RelatedItemTypeFilter.type = Types::RelatedItemTypeFilter
+    RelatedItemUpdateContent.add_member(:comment, Types::RelatedItemUpdateContent::Comment, ::Smithy::Schema::Shapes::MemberShape.new(target: CommentUpdateContent, name: "comment"))
+    RelatedItemUpdateContent.add_member(:custom, Types::RelatedItemUpdateContent::Custom, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomUpdateContent, name: "custom"))
+    RelatedItemUpdateContent.add_member(:unknown, Types::RelatedItemUpdateContent::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    RelatedItemUpdateContent.type = Types::RelatedItemUpdateContent
     RequiredCaseRule.add_member(:default_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "defaultValue", traits: {"smithy.api#required" => {}}))
     RequiredCaseRule.add_member(:conditions, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanConditionList, name: "conditions", traits: {"smithy.api#required" => {}}))
     RequiredCaseRule.type = Types::RequiredCaseRule
@@ -770,14 +836,15 @@ module Aws::ConnectCases
     SearchCasesInput.add_member(:search_term, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "searchTerm", traits: {"smithy.api#length" => {"min" => 0, "max" => 255}}))
     SearchCasesInput.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: CaseFilter, name: "filter"))
     SearchCasesInput.add_member(:sorts, ::Smithy::Schema::Shapes::MemberShape.new(target: SortList, name: "sorts", traits: {"smithy.api#length" => {"min" => 0, "max" => 2}}))
-    SearchCasesInput.add_member(:fields, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldIdentifierList, name: "fields", traits: {"smithy.api#length" => {"min" => 0, "max" => 10}}))
+    SearchCasesInput.add_member(:fields, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldIdentifierList, name: "fields", traits: {"smithy.api#length" => {"min" => 0, "max" => 25}}))
     SearchCasesInput.type = Types::SearchCasesInput
     SearchCasesOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
     SearchCasesOutput.add_member(:cases, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchCasesResponseItemList, name: "cases", traits: {"smithy.api#length" => {"max" => 100}, "smithy.api#required" => {}}))
+    SearchCasesOutput.add_member(:total_count, ::Smithy::Schema::Shapes::MemberShape.new(target: TotalCount, name: "totalCount", traits: {"smithy.api#default" => 0}))
     SearchCasesOutput.type = Types::SearchCasesOutput
     SearchCasesResponseItem.add_member(:case_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CaseId, name: "caseId", traits: {"smithy.api#required" => {}}))
     SearchCasesResponseItem.add_member(:template_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateId, name: "templateId", traits: {"smithy.api#required" => {}}))
-    SearchCasesResponseItem.add_member(:fields, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldValueList, name: "fields", traits: {"smithy.api#length" => {"max" => 10}, "smithy.api#required" => {}}))
+    SearchCasesResponseItem.add_member(:fields, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldValueList, name: "fields", traits: {"smithy.api#length" => {"max" => 25}, "smithy.api#required" => {}}))
     SearchCasesResponseItem.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags"))
     SearchCasesResponseItem.type = Types::SearchCasesResponseItem
     SearchCasesResponseItemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchCasesResponseItem, name: "member"))
@@ -831,23 +898,36 @@ module Aws::ConnectCases
     Sort.add_member(:sort_order, ::Smithy::Schema::Shapes::MemberShape.new(target: Order, name: "sortOrder", traits: {"smithy.api#required" => {}}))
     Sort.type = Types::Sort
     SortList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Sort, name: "member"))
+    TagFilter.add_member(:equal_to, Types::TagFilter::EqualTo, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "equalTo"))
+    TagFilter.add_member(:unknown, Types::TagFilter::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    TagFilter.type = Types::TagFilter
     TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagPropagationConfiguration.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: TagPropagationResourceType, name: "resourceType", traits: {"smithy.api#required" => {}}))
+    TagPropagationConfiguration.add_member(:tag_map, ::Smithy::Schema::Shapes::MemberShape.new(target: MutableTags, name: "tagMap", traits: {"smithy.api#length" => {"max" => 10}, "smithy.api#required" => {}}))
+    TagPropagationConfiguration.type = Types::TagPropagationConfiguration
+    TagPropagationConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagPropagationConfiguration, name: "member"))
     TagResourceInput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "arn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput
+    TagValue.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchTagKey, name: "key"))
+    TagValue.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValueString, name: "value"))
+    TagValue.type = Types::TagValue
     Tags.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
     Tags.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value"))
     TemplateCaseRuleList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateRule, name: "member"))
     TemplateRule.add_member(:case_rule_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CaseRuleId, name: "caseRuleId", traits: {"smithy.api#required" => {}}))
-    TemplateRule.add_member(:field_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldId, name: "fieldId", traits: {"smithy.api#required" => {}}))
+    TemplateRule.add_member(:field_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldId, name: "fieldId", traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => "NULL"}))
     TemplateRule.type = Types::TemplateRule
     TemplateStatusFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateStatus, name: "member"))
     TemplateSummary.add_member(:template_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateId, name: "templateId", traits: {"smithy.api#required" => {}}))
     TemplateSummary.add_member(:template_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateArn, name: "templateArn", traits: {"smithy.api#required" => {}}))
     TemplateSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateName, name: "name", traits: {"smithy.api#required" => {}}))
     TemplateSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    TemplateSummary.add_member(:tag_propagation_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: TagPropagationConfigurationList, name: "tagPropagationConfigurations"))
     TemplateSummary.type = Types::TemplateSummary
     TemplateSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateSummary, name: "member"))
+    TextAttributes.add_member(:is_multiline, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "isMultiline", traits: {"smithy.api#required" => {}}))
+    TextAttributes.type = Types::TextAttributes
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ThrottlingException.type = Types::ThrottlingException
     UntagResourceInput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "arn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -855,7 +935,7 @@ module Aws::ConnectCases
     UntagResourceInput.type = Types::UntagResourceInput
     UpdateCaseInput.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdateCaseInput.add_member(:case_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CaseId, name: "caseId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateCaseInput.add_member(:fields, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldValueList, name: "fields", traits: {"smithy.api#length" => {"max" => 100}, "smithy.api#required" => {}}))
+    UpdateCaseInput.add_member(:fields, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldValueList, name: "fields", traits: {"smithy.api#length" => {"max" => 220}, "smithy.api#required" => {}}))
     UpdateCaseInput.add_member(:performed_by, ::Smithy::Schema::Shapes::MemberShape.new(target: UserUnion, name: "performedBy"))
     UpdateCaseInput.type = Types::UpdateCaseInput
     UpdateCaseOutput.type = Types::UpdateCaseOutput
@@ -870,6 +950,7 @@ module Aws::ConnectCases
     UpdateFieldInput.add_member(:field_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldId, name: "fieldId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdateFieldInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldName, name: "name"))
     UpdateFieldInput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldDescription, name: "description"))
+    UpdateFieldInput.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldAttributes, name: "attributes"))
     UpdateFieldInput.type = Types::UpdateFieldInput
     UpdateFieldOutput.type = Types::UpdateFieldOutput
     UpdateLayoutInput.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -878,6 +959,21 @@ module Aws::ConnectCases
     UpdateLayoutInput.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: LayoutContent, name: "content"))
     UpdateLayoutInput.type = Types::UpdateLayoutInput
     UpdateLayoutOutput.type = Types::UpdateLayoutOutput
+    UpdateRelatedItemRequest.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateRelatedItemRequest.add_member(:case_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CaseId, name: "caseId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateRelatedItemRequest.add_member(:related_item_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RelatedItemId, name: "relatedItemId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateRelatedItemRequest.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: RelatedItemUpdateContent, name: "content", traits: {"smithy.api#required" => {}}))
+    UpdateRelatedItemRequest.add_member(:performed_by, ::Smithy::Schema::Shapes::MemberShape.new(target: UserUnion, name: "performedBy"))
+    UpdateRelatedItemRequest.type = Types::UpdateRelatedItemRequest
+    UpdateRelatedItemResponse.add_member(:related_item_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RelatedItemId, name: "relatedItemId", traits: {"smithy.api#required" => {}}))
+    UpdateRelatedItemResponse.add_member(:related_item_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RelatedItemArn, name: "relatedItemArn", traits: {"smithy.api#required" => {}}))
+    UpdateRelatedItemResponse.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: RelatedItemType, name: "type", traits: {"smithy.api#required" => {}}))
+    UpdateRelatedItemResponse.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: RelatedItemContent, name: "content", traits: {"smithy.api#required" => {}}))
+    UpdateRelatedItemResponse.add_member(:association_time, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociationTime, name: "associationTime", traits: {"smithy.api#required" => {}}))
+    UpdateRelatedItemResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags"))
+    UpdateRelatedItemResponse.add_member(:last_updated_user, ::Smithy::Schema::Shapes::MemberShape.new(target: UserUnion, name: "lastUpdatedUser"))
+    UpdateRelatedItemResponse.add_member(:created_by, ::Smithy::Schema::Shapes::MemberShape.new(target: UserUnion, name: "createdBy"))
+    UpdateRelatedItemResponse.type = Types::UpdateRelatedItemResponse
     UpdateTemplateInput.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdateTemplateInput.add_member(:template_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateId, name: "templateId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdateTemplateInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateName, name: "name"))
@@ -886,6 +982,7 @@ module Aws::ConnectCases
     UpdateTemplateInput.add_member(:required_fields, ::Smithy::Schema::Shapes::MemberShape.new(target: RequiredFieldList, name: "requiredFields"))
     UpdateTemplateInput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateStatus, name: "status"))
     UpdateTemplateInput.add_member(:rules, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateCaseRuleList, name: "rules"))
+    UpdateTemplateInput.add_member(:tag_propagation_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: TagPropagationConfigurationList, name: "tagPropagationConfigurations"))
     UpdateTemplateInput.type = Types::UpdateTemplateInput
     UpdateTemplateOutput.type = Types::UpdateTemplateOutput
     UserUnion.add_member(:user_arn, Types::UserUnion::UserArn, ::Smithy::Schema::Shapes::MemberShape.new(target: UserArn, name: "userArn"))
@@ -900,7 +997,7 @@ module Aws::ConnectCases
       service.id = "com.amazonaws.connectcases#AmazonConnectCases"
       service.name = "AmazonConnectCases"
       service.version = "2022-10-03"
-      service.traits = {"aws.api#service" => {"sdkId" => "ConnectCases", "arnNamespace" => "cases", "cloudTrailEventSource" => "event-source-placeholder", "endpointPrefix" => "cases"}, "aws.auth#sigv4" => {"name" => "cases"}, "aws.protocols#restJson1" => {}, "smithy.api#cors" => {"additionalAllowedHeaders" => ["*", "Authorization", "Date", "X-Amz-Date", "X-Amz-Security-Token", "X-Amz-Target", "content-type", "x-amz-content-sha256", "x-amz-user-agent", "x-amzn-platform-id", "x-amzn-trace-id"]}, "smithy.api#title" => "Amazon Connect Cases"}
+      service.traits = {"aws.api#service" => {"sdkId" => "ConnectCases", "arnNamespace" => "cases", "cloudTrailEventSource" => "event-source-placeholder", "endpointPrefix" => "cases"}, "aws.auth#sigv4" => {"name" => "cases"}, "aws.protocols#restJson1" => {}, "smithy.api#cors" => {"additionalAllowedHeaders" => ["*", "Authorization", "Date", "X-Amz-Date", "X-Amz-Security-Token", "X-Amz-Target", "content-type", "x-amz-content-sha256", "x-amz-user-agent", "x-amzn-platform-id", "x-amzn-trace-id"]}, "smithy.api#title" => "Amazon Connect Cases", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://cases-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://cases-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://cases.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://cases.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
       service.add_operation(:batch_get_case_rule, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.connectcases#BatchGetCaseRule"
         operation.name = "BatchGetCaseRule"
@@ -1395,6 +1492,7 @@ module Aws::ConnectCases
         operation.errors << ConflictException
         operation.errors << InternalServerException
         operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/domains/{domainId}/case-rules/{caseRuleId}", "method" => "PUT"}, "smithy.api#idempotent" => {}}
@@ -1426,6 +1524,19 @@ module Aws::ConnectCases
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/domains/{domainId}/layouts/{layoutId}", "method" => "PUT"}, "smithy.api#idempotent" => {}}
       end)
+      service.add_operation(:update_related_item, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.connectcases#UpdateRelatedItem"
+        operation.name = "UpdateRelatedItem"
+        operation.input = UpdateRelatedItemRequest
+        operation.output = UpdateRelatedItemResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"uri" => "/domains/{domainId}/cases/{caseId}/related-items/{relatedItemId}", "method" => "PUT"}, "smithy.api#idempotent" => {}}
+      end)
       service.add_operation(:update_template, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.connectcases#UpdateTemplate"
         operation.name = "UpdateTemplate"
@@ -1435,6 +1546,7 @@ module Aws::ConnectCases
         operation.errors << ConflictException
         operation.errors << InternalServerException
         operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/domains/{domainId}/templates/{templateId}", "method" => "PUT"}, "smithy.api#idempotent" => {}}

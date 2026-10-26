@@ -10,6 +10,8 @@ module Aws::WorkspacesInstances
     AutoRecoveryEnum: EnumShape
     AvailabilityZone: StringShape
     BandwidthWeightingEnum: EnumShape
+    BillingConfiguration: StructureShape
+    BillingMode: EnumShape
     BlockDeviceMappingRequest: StructureShape
     BlockDeviceMappings: ListShape
     CapacityReservationPreferenceEnum: EnumShape
@@ -52,6 +54,8 @@ module Aws::WorkspacesInstances
     HttpTokensEnum: EnumShape
     IamInstanceProfileSpecification: StructureShape
     ImageId: StringShape
+    InstanceConfigurationFilter: StructureShape
+    InstanceConfigurationTenancyEnum: EnumShape
     InstanceInterruptionBehaviorEnum: EnumShape
     InstanceIpv6Address: StructureShape
     InstanceMaintenanceOptionsRequest: StructureShape
@@ -77,6 +81,7 @@ module Aws::WorkspacesInstances
     KmsKeyId: StringShape
     LicenseConfigurationRequest: StructureShape
     LicenseSpecifications: ListShape
+    ListInstanceTypesMaxResults: IntegerShape
     ListInstanceTypesRequest: StructureShape
     ListInstanceTypesResponse: StructureShape
     ListRegionsRequest: StructureShape
@@ -88,12 +93,14 @@ module Aws::WorkspacesInstances
     ManagedInstanceRequest: StructureShape
     MarketTypeEnum: EnumShape
     MaxResults: IntegerShape
+    NestedVirtualizationEnum: EnumShape
     NetworkInterfaceId: StringShape
     NetworkInterfaces: ListShape
     NextToken: StringShape
     NonNegativeInteger: IntegerShape
     Placement: StructureShape
     PlacementGroupId: StringShape
+    PlatformTypeEnum: EnumShape
     PrivateDnsNameOptionsRequest: StructureShape
     PrivateIpAddressSpecification: StructureShape
     PrivateIpAddresses: ListShape
@@ -116,6 +123,8 @@ module Aws::WorkspacesInstances
     String128: StringShape
     String64: StringShape
     SubnetId: StringShape
+    SupportedInstanceConfiguration: StructureShape
+    SupportedInstanceConfigurations: ListShape
     Tag: StructureShape
     TagKey: StringShape
     TagKeyList: ListShape

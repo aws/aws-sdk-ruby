@@ -916,6 +916,190 @@ module Aws::EC2
     # @api private
     #
     #
+    class SecondaryNetworkCreateComplete
+      def initialize(options = {})
+        @client = options[:client]
+        @waiter = Smithy::Client::Waiters::Waiter.new(
+          max_wait_time: options[:max_wait_time],
+          min_delay: options[:min_delay] || 10,
+          max_delay: options[:max_delay] || 120,
+          poller: Smithy::Client::Waiters::Poller.new(
+            operation_name: :describe_secondary_networks,
+            acceptors: [
+              {
+                "state" => "success",
+                "matcher" => {
+                  "output" => {
+                    "path" => "secondary_networks[].state",
+                    "expected" => "create-complete",
+                    "comparator" => "allStringEquals"
+                  }
+                }
+              },
+              {
+                "state" => "failure",
+                "matcher" => {
+                  "output" => {
+                    "path" => "secondary_networks[].state",
+                    "expected" => "create-failed",
+                    "comparator" => "anyStringEquals"
+                  }
+                }
+              },
+              {
+                "state" => "retry",
+                "matcher" => {
+                  "errorType" => "InvalidSecondaryNetworkId.NotFound"
+                }
+              }
+            ]
+          )
+        )
+      end
+
+      def wait(params = {})
+        @waiter.wait(@client, params)
+      end
+    end
+
+    # @api private
+    #
+    #
+    class SecondaryNetworkDeleteComplete
+      def initialize(options = {})
+        @client = options[:client]
+        @waiter = Smithy::Client::Waiters::Waiter.new(
+          max_wait_time: options[:max_wait_time],
+          min_delay: options[:min_delay] || 10,
+          max_delay: options[:max_delay] || 120,
+          poller: Smithy::Client::Waiters::Poller.new(
+            operation_name: :describe_secondary_networks,
+            acceptors: [
+              {
+                "state" => "success",
+                "matcher" => {
+                  "output" => {
+                    "path" => "secondary_networks[].state",
+                    "expected" => "delete-complete",
+                    "comparator" => "allStringEquals"
+                  }
+                }
+              },
+              {
+                "state" => "failure",
+                "matcher" => {
+                  "output" => {
+                    "path" => "secondary_networks[].state",
+                    "expected" => "delete-failed",
+                    "comparator" => "anyStringEquals"
+                  }
+                }
+              }
+            ]
+          )
+        )
+      end
+
+      def wait(params = {})
+        @waiter.wait(@client, params)
+      end
+    end
+
+    # @api private
+    #
+    #
+    class SecondarySubnetCreateComplete
+      def initialize(options = {})
+        @client = options[:client]
+        @waiter = Smithy::Client::Waiters::Waiter.new(
+          max_wait_time: options[:max_wait_time],
+          min_delay: options[:min_delay] || 10,
+          max_delay: options[:max_delay] || 120,
+          poller: Smithy::Client::Waiters::Poller.new(
+            operation_name: :describe_secondary_subnets,
+            acceptors: [
+              {
+                "state" => "success",
+                "matcher" => {
+                  "output" => {
+                    "path" => "secondary_subnets[].state",
+                    "expected" => "create-complete",
+                    "comparator" => "allStringEquals"
+                  }
+                }
+              },
+              {
+                "state" => "failure",
+                "matcher" => {
+                  "output" => {
+                    "path" => "secondary_subnets[].state",
+                    "expected" => "delete-failed",
+                    "comparator" => "anyStringEquals"
+                  }
+                }
+              },
+              {
+                "state" => "retry",
+                "matcher" => {
+                  "errorType" => "InvalidSecondarySubnetId.NotFound"
+                }
+              }
+            ]
+          )
+        )
+      end
+
+      def wait(params = {})
+        @waiter.wait(@client, params)
+      end
+    end
+
+    # @api private
+    #
+    #
+    class SecondarySubnetDeleteComplete
+      def initialize(options = {})
+        @client = options[:client]
+        @waiter = Smithy::Client::Waiters::Waiter.new(
+          max_wait_time: options[:max_wait_time],
+          min_delay: options[:min_delay] || 10,
+          max_delay: options[:max_delay] || 120,
+          poller: Smithy::Client::Waiters::Poller.new(
+            operation_name: :describe_secondary_subnets,
+            acceptors: [
+              {
+                "state" => "success",
+                "matcher" => {
+                  "output" => {
+                    "path" => "secondary_subnets[].state",
+                    "expected" => "delete-complete",
+                    "comparator" => "allStringEquals"
+                  }
+                }
+              },
+              {
+                "state" => "failure",
+                "matcher" => {
+                  "output" => {
+                    "path" => "secondary_subnets[].state",
+                    "expected" => "delete-failed",
+                    "comparator" => "anyStringEquals"
+                  }
+                }
+              }
+            ]
+          )
+        )
+      end
+
+      def wait(params = {})
+        @waiter.wait(@client, params)
+      end
+    end
+
+    # @api private
+    #
+    #
     class SecurityGroupExists
       def initialize(options = {})
         @client = options[:client]

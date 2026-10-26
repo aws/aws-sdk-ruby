@@ -80,7 +80,7 @@ module Aws::Redshift
     #               snapshot.</p>
     #   @return [String]
     # @!attribute account_alias
-    #   <p>The identifier of an Amazon Web Services support account authorized to restore a 
+    #   <p>The identifier of an Amazon Web Services support account authorized to restore a
     #               snapshot. For Amazon Web Services Support, the identifier is <code>amazon-redshift-support</code>. </p>
     #   @return [String]
     class AccountWithRestoreAccess < Struct.new(
@@ -490,12 +490,12 @@ module Aws::Redshift
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <i>If the snapshot to access doesn't exist and the associated IAM policy doesn't allow access to all (*) snapshots</i> -  This parameter is required. Otherwise, permissions 
+    #                     <i>If the snapshot to access doesn't exist and the associated IAM policy doesn't allow access to all (*) snapshots</i> -  This parameter is required. Otherwise, permissions
     #                   aren't available to check if the snapshot exists.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <i>If the snapshot to access exists</i> - This parameter isn't required. Redshift can retrieve the cluster identifier and use it to 
+    #                     <i>If the snapshot to access exists</i> - This parameter isn't required. Redshift can retrieve the cluster identifier and use it to
     #                   validate snapshot authorization.</p>
     #               </li>
     #            </ul>
@@ -532,7 +532,7 @@ module Aws::Redshift
     #   <p>The ARN for the authorized token issuer for integrating Amazon Redshift with IDC Identity Center.</p>
     #   @return [String]
     # @!attribute authorized_audiences_list
-    #   <p>The list of audiences for the authorized token issuer for integrating Amazon Redshift 
+    #   <p>The list of audiences for the authorized token issuer for integrating Amazon Redshift
     #               with IDC Identity Center.</p>
     #   @return [Array<String>]
     class AuthorizedTokenIssuer < Struct.new(
@@ -770,7 +770,7 @@ module Aws::Redshift
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A cluster ID and custom domain name tied to a specific certificate. These are typically 
+    # <p>A cluster ID and custom domain name tied to a specific certificate. These are typically
     #             returned in a list.</p>
     # @!attribute custom_domain_name
     #   <p>The custom domain name for the certificate association.</p>
@@ -1140,6 +1140,19 @@ module Aws::Redshift
     # @!attribute multi_az_secondary
     #   <p>The secondary compute unit of a cluster, if Multi-AZ deployment is turned on.</p>
     #   @return [Types::SecondaryClusterInfo]
+    # @!attribute lakehouse_registration_status
+    #   <p>The status of the lakehouse registration for the cluster. Indicates whether the cluster is successfully registered with Amazon Redshift federated permissions.</p>
+    #   @return [String]
+    # @!attribute catalog_arn
+    #   <p>The Amazon Resource Name (ARN) of the Glue data catalog associated with the cluster enabled with Amazon Redshift federated permissions.</p>
+    #   @return [String]
+    # @!attribute extra_compute_for_automatic_optimization
+    #   <p>A boolean value that, if <code>true</code>, indicates that the cluster allocates additional compute resources to run automatic optimization operations.</p>
+    #            <p>Default: false</p>
+    #   @return [String]
+    # @!attribute logging_publish_status
+    #   <p>The status of system table publishing for the cluster. This field is present only when system table publishing is configured.</p>
+    #   @return [Types::LoggingPublishStatus]
     class Cluster < Struct.new(
       nil,
       :cluster_identifier,
@@ -1202,6 +1215,10 @@ module Aws::Redshift
       :ip_address_type,
       :multi_az,
       :multi_az_secondary,
+      :lakehouse_registration_status,
+      :catalog_arn,
+      :extra_compute_for_automatic_optimization,
+      :logging_publish_status,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1404,8 +1421,8 @@ module Aws::Redshift
     end
 
     # <p>The request would result in the user exceeding the allowed number of cluster
-    #             parameter groups. 
-    # For information about increasing your quota, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html">Limits in Amazon Redshift</a> 
+    #             parameter groups.
+    # For information about increasing your quota, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html">Limits in Amazon Redshift</a>
     # in the <i>Amazon Redshift Cluster Management Guide</i>.
     # </p>
     # @!attribute message
@@ -1428,8 +1445,8 @@ module Aws::Redshift
     # @!attribute cluster_parameter_status_list
     #   <p>The list of parameter statuses.</p>
     #            <p>
-    #   For more information about parameters and parameter groups, go to 
-    #   <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html">Amazon Redshift Parameter Groups</a> 
+    #   For more information about parameters and parameter groups, go to
+    #   <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html">Amazon Redshift Parameter Groups</a>
     #   in the <i>Amazon Redshift Cluster Management Guide</i>.</p>
     #   @return [Array<Types::ClusterParameterStatus>]
     class ClusterParameterGroupStatus < Struct.new(
@@ -1526,8 +1543,8 @@ module Aws::Redshift
     end
 
     # <p>The request would exceed the allowed number of cluster instances for this account.
-    #             
-    # For information about increasing your quota, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html">Limits in Amazon Redshift</a> 
+    #
+    # For information about increasing your quota, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html">Limits in Amazon Redshift</a>
     # in the <i>Amazon Redshift Cluster Management Guide</i>.
     # </p>
     # @!attribute message
@@ -1631,8 +1648,8 @@ module Aws::Redshift
     end
 
     # <p>The request would result in the user exceeding the allowed number of cluster
-    #             security groups. 
-    # For information about increasing your quota, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html">Limits in Amazon Redshift</a> 
+    #             security groups.
+    # For information about increasing your quota, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html">Limits in Amazon Redshift</a>
     # in the <i>Amazon Redshift Cluster Management Guide</i>.
     # </p>
     # @!attribute message
@@ -1793,8 +1810,8 @@ module Aws::Redshift
     end
 
     # <p>The request would result in user exceeding the allowed number of cluster subnet
-    #             groups. 
-    # For information about increasing your quota, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html">Limits in Amazon Redshift</a> 
+    #             groups.
+    # For information about increasing your quota, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html">Limits in Amazon Redshift</a>
     # in the <i>Amazon Redshift Cluster Management Guide</i>.
     # </p>
     # @!attribute message
@@ -1808,8 +1825,8 @@ module Aws::Redshift
     end
 
     # <p>The request would result in user exceeding the allowed number of subnets in a
-    #             cluster subnet groups. 
-    # For information about increasing your quota, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html">Limits in Amazon Redshift</a> 
+    #             cluster subnet groups.
+    # For information about increasing your quota, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html">Limits in Amazon Redshift</a>
     # in the <i>Amazon Redshift Cluster Management Guide</i>.
     # </p>
     # @!attribute message
@@ -1891,6 +1908,18 @@ module Aws::Redshift
     class ConflictPolicyUpdateFault < Struct.new(
       nil,
       :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A structure that defines the Amazon Redshift connect service integration scope.</p>
+    # @!attribute authorization
+    #   <p>Determines whether the Amazon Redshift connect integration is enabled or disabled for the application.</p>
+    #   @return [String]
+    class Connect < Struct.new(
+      nil,
+      :authorization,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1983,7 +2012,7 @@ module Aws::Redshift
     #   <p>The name of the authentication profile to be created.</p>
     #   @return [String]
     # @!attribute authentication_profile_content
-    #   <p>The content of the authentication profile in JSON format. 
+    #   <p>The content of the authentication profile in JSON format.
     #               The maximum length of the JSON string is determined by a quota for your account.</p>
     #   @return [String]
     class CreateAuthenticationProfileMessage < Struct.new(
@@ -2082,9 +2111,9 @@ module Aws::Redshift
     #   <p>The node type to be provisioned for the cluster. For information about node types,
     #               go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#how-many-nodes"> Working with
     #                   Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>. </p>
-    #            <p>Valid Values: 
-    #               <code>dc2.large</code> | <code>dc2.8xlarge</code> | 
-    #               <code>ra3.large</code> |  <code>ra3.xlplus</code> |  <code>ra3.4xlarge</code> | <code>ra3.16xlarge</code>
+    #            <p>Valid Values:
+    #               <code>dc2.large</code> | <code>dc2.8xlarge</code> | <code>rg.large</code> | <code>rg.xlarge</code> | <code>rg.4xlarge</code> | <code>rg.12xlarge</code> |
+    #               <code>ra3.large</code> | <code>ra3.xlplus</code> | <code>ra3.4xlarge</code> | <code>ra3.16xlarge</code>
     #            </p>
     #   @return [String]
     # @!attribute master_username
@@ -2195,7 +2224,7 @@ module Aws::Redshift
     #   <p>The number of days that automated snapshots are retained. If the value is 0,
     #               automated snapshots are disabled. Even if automated snapshots are disabled, you can
     #               still create manual snapshots when you want with <a>CreateClusterSnapshot</a>. </p>
-    #            <p>You can't disable automated snapshots for RA3 node types. Set the automated retention period from 1-35 days.</p>
+    #            <p>You can't disable automated snapshots for RG or RA3 node types. Set the automated retention period from 1-35 days.</p>
     #            <p>Default: <code>1</code>
     #            </p>
     #            <p>Constraints: Must be a value from 0 to 35.</p>
@@ -2217,8 +2246,8 @@ module Aws::Redshift
     #           </p>
     #            <ul>
     #               <li>
-    #                  <p>For clusters with ra3 nodes - Select a port within the ranges <code>5431-5455</code> or <code>8191-8215</code>. (If you have an existing cluster 
-    #                   with ra3 nodes, it isn't required that you change the port to these ranges.)</p>
+    #                  <p>For clusters with RG or RA3 nodes - Select a port within the ranges <code>5431-5455</code> or <code>8191-8215</code>. (If you have an existing cluster
+    #                   with RG or RA3 nodes, it isn't required that you change the port to these ranges.)</p>
     #               </li>
     #               <li>
     #                  <p>For clusters with dc2 nodes - Select a port within the range <code>1150-65535</code>.</p>
@@ -2260,7 +2289,7 @@ module Aws::Redshift
     #            <p>Default: false</p>
     #   @return [Boolean]
     # @!attribute encrypted
-    #   <p>If <code>true</code>, the data in the cluster is encrypted at rest. 
+    #   <p>If <code>true</code>, the data in the cluster is encrypted at rest.
     #               If you set the value on this parameter to <code>false</code>, the request will fail.</p>
     #            <p>Default: true</p>
     #   @return [Boolean]
@@ -2275,7 +2304,7 @@ module Aws::Redshift
     # @!attribute elastic_ip
     #   <p>The Elastic IP (EIP) address for the cluster.</p>
     #            <p>Constraints: The cluster must be provisioned in EC2-VPC and publicly-accessible
-    #               through an Internet gateway. Don't specify the Elastic IP address for a publicly accessible 
+    #               through an Internet gateway. Don't specify the Elastic IP address for a publicly accessible
     #               cluster with availability zone relocation turned on. For more information about provisioning clusters in
     #               EC2-VPC, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#cluster-platforms">Supported
     #                   Platforms to Launch Your Cluster</a> in the Amazon Redshift Cluster Management Guide.</p>
@@ -2327,14 +2356,14 @@ module Aws::Redshift
     #   <p>A flag that specifies whether to load sample data once the cluster is created.</p>
     #   @return [String]
     # @!attribute manage_master_password
-    #   <p>If <code>true</code>, Amazon Redshift uses Secrets Manager to manage this cluster's admin credentials. 
-    #               You can't use <code>MasterUserPassword</code> if <code>ManageMasterPassword</code> is true. 
-    #               If <code>ManageMasterPassword</code> is false or not set, Amazon Redshift uses 
+    #   <p>If <code>true</code>, Amazon Redshift uses Secrets Manager to manage this cluster's admin credentials.
+    #               You can't use <code>MasterUserPassword</code> if <code>ManageMasterPassword</code> is true.
+    #               If <code>ManageMasterPassword</code> is false or not set, Amazon Redshift uses
     #               <code>MasterUserPassword</code> for the admin user account's password.
     #           </p>
     #   @return [Boolean]
     # @!attribute master_password_secret_kms_key_id
-    #   <p>The ID of the Key Management Service (KMS) key used to encrypt and store the cluster's admin credentials secret. 
+    #   <p>The ID of the Key Management Service (KMS) key used to encrypt and store the cluster's admin credentials secret.
     #               You can only use this parameter if <code>ManageMasterPassword</code> is true.</p>
     #   @return [String]
     # @!attribute ip_address_type
@@ -2346,6 +2375,26 @@ module Aws::Redshift
     # @!attribute redshift_idc_application_arn
     #   <p>The Amazon resource name (ARN) of the Amazon Redshift IAM Identity Center application.</p>
     #   @return [String]
+    # @!attribute catalog_name
+    #   <p>The name of the Glue data catalog that will be associated with the cluster enabled with Amazon Redshift federated permissions.</p>
+    #            <p>Constraints:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>Must contain at least one lowercase letter.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Can only contain lowercase letters (a-z), numbers (0-9), underscores (_), and hyphens (-).</p>
+    #               </li>
+    #            </ul>
+    #            <p>Pattern: <code>^[a-z0-9_-]*[a-z]+[a-z0-9_-]*$</code>
+    #            </p>
+    #            <p>Example: <code>my-catalog_01</code>
+    #            </p>
+    #   @return [String]
+    # @!attribute extra_compute_for_automatic_optimization
+    #   <p>If <code>true</code>, allocates additional compute resources for running automatic optimization operations.</p>
+    #            <p>Default: false</p>
+    #   @return [Boolean]
     class CreateClusterMessage < Struct.new(
       nil,
       :db_name,
@@ -2387,6 +2436,8 @@ module Aws::Redshift
       :ip_address_type,
       :multi_az,
       :redshift_idc_application_arn,
+      :catalog_name,
+      :extra_compute_for_automatic_optimization,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2971,7 +3022,7 @@ module Aws::Redshift
     #               encrypt the integration.</p>
     #   @return [String]
     # @!attribute additional_encryption_context
-    #   <p>The encryption context for the integration. For more information, 
+    #   <p>The encryption context for the integration. For more information,
     #               see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context">Encryption context</a> in the <i>Amazon Web Services Key Management Service Developer
     #                   Guide</i>.</p>
     #   @return [Hash<String, String>]
@@ -2997,20 +3048,54 @@ module Aws::Redshift
     end
 
     # @!attribute idc_instance_arn
+    #   <p>The Amazon Resource Name (ARN) of the IAM Identity Center instance used to create the Amazon Redshift Query Editor (QEV2) managed application.</p>
+    #   @return [String]
+    # @!attribute qev2_idc_application_name
+    #   <p>The name of the Amazon Redshift Query Editor (QEV2) application in IAM Identity Center.</p>
+    #   @return [String]
+    # @!attribute idc_display_name
+    #   <p>The display name for the Amazon Redshift Query Editor (QEV2) IAM Identity Center application. It appears in the console.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>A list of tags to associate with the application. Tags are key-value pairs that you can use to organize and identify your resources.</p>
+    #   @return [Array<Types::Tag>]
+    class CreateQev2IdcApplicationMessage < Struct.new(
+      nil,
+      :idc_instance_arn,
+      :qev2_idc_application_name,
+      :idc_display_name,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute qev2_idc_application
+    #   <p>Contains configuration and status information for an Amazon Redshift Query Editor (QEV2) application that is registered with IAM Identity Center.</p>
+    #   @return [Types::Qev2IdcApplication]
+    class CreateQev2IdcApplicationResult < Struct.new(
+      nil,
+      :qev2_idc_application,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute idc_instance_arn
     #   <p>The Amazon resource name (ARN) of the IAM Identity Center instance where Amazon Redshift creates a new managed application.</p>
     #   @return [String]
     # @!attribute redshift_idc_application_name
     #   <p>The name of the Redshift application in IAM Identity Center.</p>
     #   @return [String]
     # @!attribute identity_namespace
-    #   <p>The namespace for the Amazon Redshift IAM Identity Center application instance. It determines which managed application 
+    #   <p>The namespace for the Amazon Redshift IAM Identity Center application instance. It determines which managed application
     #               verifies the connection token.</p>
     #   @return [String]
     # @!attribute idc_display_name
     #   <p>The display name for the Amazon Redshift IAM Identity Center application instance. It appears in the console.</p>
     #   @return [String]
     # @!attribute iam_role_arn
-    #   <p>The IAM role ARN for the Amazon Redshift IAM Identity Center application instance. It has the required permissions 
+    #   <p>The IAM role ARN for the Amazon Redshift IAM Identity Center application instance. It has the required permissions
     #               to be assumed and invoke the IDC Identity Center API.</p>
     #   @return [String]
     # @!attribute authorized_token_issuer_list
@@ -3019,6 +3104,9 @@ module Aws::Redshift
     # @!attribute service_integrations
     #   <p>A collection of service integrations for the Redshift IAM Identity Center application.</p>
     #   @return [Array<Types::ServiceIntegrationsUnion>]
+    # @!attribute application_type
+    #   <p>The type of application being created. Valid values are <code>None</code> or <code>Lakehouse</code>. Use <code>Lakehouse</code> to enable Amazon Redshift federated permissions on cluster.</p>
+    #   @return [String]
     # @!attribute tags
     #   <p>A list of tags.</p>
     #   @return [Array<Types::Tag>]
@@ -3036,6 +3124,7 @@ module Aws::Redshift
       :iam_role_arn,
       :authorized_token_issuer_list,
       :service_integrations,
+      :application_type,
       :tags,
       :sso_tag_keys,
       keyword_init: true
@@ -3055,36 +3144,36 @@ module Aws::Redshift
     end
 
     # @!attribute scheduled_action_name
-    #   <p>The name of the scheduled action. The name must be unique within an account. 
+    #   <p>The name of the scheduled action. The name must be unique within an account.
     #               For more information about this parameter, see <a>ScheduledAction</a>. </p>
     #   @return [String]
     # @!attribute target_action
-    #   <p>A JSON format string of the Amazon Redshift API operation with input parameters. 
+    #   <p>A JSON format string of the Amazon Redshift API operation with input parameters.
     #               For more information about this parameter, see <a>ScheduledAction</a>. </p>
     #   @return [Types::ScheduledActionType]
     # @!attribute schedule
-    #   <p>The schedule in <code>at( )</code> or <code>cron( )</code> format. 
+    #   <p>The schedule in <code>at( )</code> or <code>cron( )</code> format.
     #               For more information about this parameter, see <a>ScheduledAction</a>.</p>
     #   @return [String]
     # @!attribute iam_role
-    #   <p>The IAM role to assume to run the target action. 
+    #   <p>The IAM role to assume to run the target action.
     #               For more information about this parameter, see <a>ScheduledAction</a>. </p>
     #   @return [String]
     # @!attribute scheduled_action_description
-    #   <p>The description of the scheduled action. 
+    #   <p>The description of the scheduled action.
     #               </p>
     #   @return [String]
     # @!attribute start_time
-    #   <p>The start time in UTC of the scheduled action. 
+    #   <p>The start time in UTC of the scheduled action.
     #               Before this time, the scheduled action does not trigger.
     #               For more information about this parameter, see <a>ScheduledAction</a>.</p>
     #   @return [Time]
     # @!attribute end_time
-    #   <p>The end time in UTC of the scheduled action. After this time, the scheduled action does not trigger. 
+    #   <p>The end time in UTC of the scheduled action. After this time, the scheduled action does not trigger.
     #               For more information about this parameter, see <a>ScheduledAction</a>. </p>
     #   @return [Time]
     # @!attribute enable
-    #   <p>If true, the schedule is enabled. If false, the scheduled action does not trigger. 
+    #   <p>If true, the schedule is enabled. If false, the scheduled action does not trigger.
     #               For more information about <code>state</code> of the scheduled action, see <a>ScheduledAction</a>. </p>
     #   @return [Boolean]
     class CreateScheduledActionMessage < Struct.new(
@@ -3102,7 +3191,7 @@ module Aws::Redshift
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Describes a scheduled action. You can use a scheduled action to trigger some Amazon Redshift API operations on a schedule. 
+    # <p>Describes a scheduled action. You can use a scheduled action to trigger some Amazon Redshift API operations on a schedule.
     #             For information about which API operations can be scheduled, see  <a>ScheduledActionType</a>. </p>
     # @!attribute scheduled_action_name
     #   <p>The name of the scheduled action. </p>
@@ -3112,21 +3201,21 @@ module Aws::Redshift
     #            <p>"<code>{\"ResizeCluster\":{\"NodeType\":\"ra3.4xlarge\",\"ClusterIdentifier\":\"my-test-cluster\",\"NumberOfNodes\":3}}</code>". </p>
     #   @return [Types::ScheduledActionType]
     # @!attribute schedule
-    #   <p>The schedule for a one-time (at format) or recurring (cron format) scheduled action. 
+    #   <p>The schedule for a one-time (at format) or recurring (cron format) scheduled action.
     #               Schedule invocations must be separated by at least one hour.</p>
     #            <p>Format of at expressions is "<code>at(yyyy-mm-ddThh:mm:ss)</code>". For example, "<code>at(2016-03-04T17:27:00)</code>".</p>
-    #            <p>Format of cron expressions is "<code>cron(Minutes Hours Day-of-month Month Day-of-week Year)</code>". 
-    #               For example, "<code>cron(0 10 ? * MON *)</code>". For more information, see 
-    #               <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions">Cron Expressions</a> 
+    #            <p>Format of cron expressions is "<code>cron(Minutes Hours Day-of-month Month Day-of-week Year)</code>".
+    #               For example, "<code>cron(0 10 ? * MON *)</code>". For more information, see
+    #               <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions">Cron Expressions</a>
     #               in the <i>Amazon CloudWatch Events User Guide</i>.</p>
     #   @return [String]
     # @!attribute iam_role
-    #   <p>The IAM role to assume to run the scheduled action. 
+    #   <p>The IAM role to assume to run the scheduled action.
     #               This IAM role must have permission to run the Amazon Redshift API operation in the scheduled action.
     #               This IAM role must allow the Amazon Redshift scheduler (Principal scheduler.redshift.amazonaws.com) to assume permissions on your behalf.
-    #                  
-    #   For more information about the IAM role to use with the Amazon Redshift scheduler, see 
-    #   <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html">Using Identity-Based Policies for Amazon Redshift</a> 
+    #
+    #   For more information about the IAM role to use with the Amazon Redshift scheduler, see
+    #   <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html">Using Identity-Based Policies for Amazon Redshift</a>
     #   in the <i>Amazon Redshift Cluster Management Guide</i>.
     #   </p>
     #   @return [String]
@@ -3206,8 +3295,8 @@ module Aws::Redshift
     #               snapshots with the specified encrypted symmetric key from Amazon Web Services KMS in the destination
     #               region.</p>
     #            <p>
-    #   For more information about managing snapshot copy grants, go to 
-    #   <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html">Amazon Redshift Database Encryption</a> 
+    #   For more information about managing snapshot copy grants, go to
+    #   <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html">Amazon Redshift Database Encryption</a>
     #   in the <i>Amazon Redshift Cluster Management Guide</i>.
     #   </p>
     #   @return [Types::SnapshotCopyGrant]
@@ -3322,6 +3411,7 @@ module Aws::Redshift
     #               If <code>FeatureType</code> is <code>spectrum</code>, then <code>LimitType</code> must be <code>data-scanned</code>.
     #               If <code>FeatureType</code> is <code>concurrency-scaling</code>, then <code>LimitType</code> must be <code>time</code>.
     #               If <code>FeatureType</code> is <code>cross-region-datasharing</code>, then <code>LimitType</code> must be <code>data-scanned</code>.
+    #               If <code>FeatureType</code> is <code>extra-compute-for-automatic-optimization</code>, then <code>LimitType</code> must be <code>time</code>.
     #              </p>
     #   @return [String]
     # @!attribute amount
@@ -3330,11 +3420,11 @@ module Aws::Redshift
     #               </p>
     #   @return [Integer]
     # @!attribute period
-    #   <p>The time period that the amount applies to. A <code>weekly</code> period begins on Sunday. The default is <code>monthly</code>. 
+    #   <p>The time period that the amount applies to. A <code>weekly</code> period begins on Sunday. The default is <code>monthly</code>.
     #               </p>
     #   @return [String]
     # @!attribute breach_action
-    #   <p>The action that Amazon Redshift takes when the limit is reached. The default is log. 
+    #   <p>The action that Amazon Redshift takes when the limit is reached. The default is log.
     #               For more information about this parameter, see <a>UsageLimit</a>.</p>
     #   @return [String]
     # @!attribute tags
@@ -3568,7 +3658,7 @@ module Aws::Redshift
     #   <p>The namespace Amazon Resource Name (ARN) of the datashare to remove authorization from.</p>
     #   @return [String]
     # @!attribute consumer_identifier
-    #   <p>The identifier of the data consumer that is to have authorization removed from the datashare. 
+    #   <p>The identifier of the data consumer that is to have authorization removed from the datashare.
     #               This identifier is an Amazon Web Services account ID or a keyword, such as ADX.</p>
     #   @return [String]
     class DeauthorizeDataShareMessage < Struct.new(
@@ -4007,7 +4097,7 @@ module Aws::Redshift
     #               encrypt the integration.</p>
     #   @return [String]
     # @!attribute additional_encryption_context
-    #   <p>The encryption context for the integration. For more information, 
+    #   <p>The encryption context for the integration. For more information,
     #               see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context">Encryption context</a> in the <i>Amazon Web Services Key Management Service Developer
     #                   Guide</i>.</p>
     #   @return [Hash<String, String>]
@@ -4065,6 +4155,17 @@ module Aws::Redshift
       nil,
       :database_name,
       :partner_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute qev2_idc_application_arn
+    #   <p>The Amazon Resource Name (ARN) for the Amazon Redshift Query Editor (QEV2) IAM Identity Center application to delete.</p>
+    #   @return [String]
+    class DeleteQev2IdcApplicationMessage < Struct.new(
+      nil,
+      :qev2_idc_application_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4190,11 +4291,11 @@ module Aws::Redshift
     end
 
     # @!attribute namespace_identifier
-    #   <p>The unique identifier of the cluster or 
+    #   <p>The unique identifier of the cluster or
     #               serverless namespace that you want to deregister.</p>
     #   @return [Types::NamespaceIdentifierUnion]
     # @!attribute consumer_identifiers
-    #   <p>An array containing the ID of the consumer account 
+    #   <p>An array containing the ID of the consumer account
     #               that you want to deregister the cluster or serverless namespace from.</p>
     #   @return [Array<String>]
     class DeregisterNamespaceInputMessage < Struct.new(
@@ -4207,7 +4308,7 @@ module Aws::Redshift
     end
 
     # @!attribute status
-    #   <p>The registration status of the cluster or 
+    #   <p>The registration status of the cluster or
     #               serverless namespace.</p>
     #   @return [String]
     class DeregisterNamespaceOutputMessage < Struct.new(
@@ -5022,11 +5123,11 @@ module Aws::Redshift
     #   <p>The cluster identifier of the cluster to access.</p>
     #   @return [String]
     # @!attribute account
-    #   <p>The Amazon Web Services account ID of either the cluster owner (grantor) or grantee. 
+    #   <p>The Amazon Web Services account ID of either the cluster owner (grantor) or grantee.
     #          If <code>Grantee</code> parameter is true, then the <code>Account</code> value is of the grantor.</p>
     #   @return [String]
     # @!attribute grantee
-    #   <p>Indicates whether to check authorization from a grantor or grantee point of view. 
+    #   <p>Indicates whether to check authorization from a grantor or grantee point of view.
     #              If true, Amazon Redshift returns endpoint authorizations that you've been granted.
     #              If false (default), checks authorization from a grantor point of view.</p>
     #   @return [Boolean]
@@ -5459,12 +5560,15 @@ module Aws::Redshift
     #   <p>The message indicating that logs failed to be delivered.</p>
     #   @return [String]
     # @!attribute log_destination_type
-    #   <p>The log destination type. An enum with possible values of <code>s3</code> and <code>cloudwatch</code>.</p>
+    #   <p>The log destination type. An enum with possible values of <code>s3</code>, <code>cloudwatch</code>, and <code>s3table</code>.</p>
     #   @return [String]
     # @!attribute log_exports
-    #   <p>The collection of exported log types. Possible values are <code>connectionlog</code>, <code>useractivitylog</code>, and 
-    #               <code>userlog</code>.</p>
+    #   <p>The collection of exported log types. When <code>LogDestinationType</code> is <code>s3</code> or <code>cloudwatch</code>, possible values are <code>connectionlog</code>, <code>useractivitylog</code>, and
+    #               <code>userlog</code>. When <code>LogDestinationType</code> is <code>s3table</code>, the values are the names of the system tables being published.</p>
     #   @return [Array<String>]
+    # @!attribute s3_tables
+    #   <p>The status of system table publishing to S3 Tables. This field is populated only when system table publishing is active.</p>
+    #   @return [Types::S3TablePublishStatus]
     class DescribeLoggingStatusOutput < Struct.new(
       nil,
       :logging_enabled,
@@ -5475,6 +5579,7 @@ module Aws::Redshift
       :last_failure_message,
       :log_destination_type,
       :log_exports,
+      :s3_tables,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5482,8 +5587,8 @@ module Aws::Redshift
 
     # @!attribute action_type
     #   <p>The action type to evaluate for possible node configurations.
-    #               Specify "restore-cluster" to get configuration combinations based on an existing snapshot. 
-    #               Specify "recommend-node-config" to get configuration recommendations based on an existing cluster or snapshot. 
+    #               Specify "restore-cluster" to get configuration combinations based on an existing snapshot.
+    #               Specify "recommend-node-config" to get configuration recommendations based on an existing cluster or snapshot.
     #               Specify "resize-cluster" to get configuration combinations for elastic resize based on an existing cluster.
     #           </p>
     #   @return [String]
@@ -5497,8 +5602,8 @@ module Aws::Redshift
     #   <p>The Amazon Resource Name (ARN) of the snapshot associated with the message to describe node configuration.</p>
     #   @return [String]
     # @!attribute owner_account
-    #   <p>The Amazon Web Services account used to create or copy the snapshot. 
-    #               Required if you are restoring a snapshot you do not own, 
+    #   <p>The Amazon Web Services account used to create or copy the snapshot.
+    #               Required if you are restoring a snapshot you do not own,
     #               optional if you own the snapshot.</p>
     #   @return [String]
     # @!attribute filters
@@ -5609,16 +5714,62 @@ module Aws::Redshift
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute qev2_idc_application_arn
+    #   <p>The Amazon Resource Name (ARN) for the Amazon Redshift Query Editor (QEV2) application that integrates with IAM Identity Center.</p>
+    #   @return [String]
+    # @!attribute max_records
+    #   <p>The maximum number of response records to return in each call. If the number of remaining response records
+    #               exceeds the specified MaxRecords value, a value is returned in a marker field of the response. You can retrieve
+    #               the next set of records by retrying the command with the returned marker value.</p>
+    #   @return [Integer]
+    # @!attribute marker
+    #   <p>A value that indicates the starting point for the next set of response records in a subsequent request. If a
+    #               value is returned in a response, you can retrieve the next set
+    #               of records by providing this returned marker value in the Marker parameter
+    #               and retrying the command. If the Marker field is empty, all response
+    #               records have been retrieved for the request.
+    #           </p>
+    #   @return [String]
+    class DescribeQev2IdcApplicationsMessage < Struct.new(
+      nil,
+      :qev2_idc_application_arn,
+      :max_records,
+      :marker,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute qev2_idc_applications
+    #   <p>The list of Amazon Redshift Query Editor (QEV2) IAM Identity Center applications.</p>
+    #   @return [Array<Types::Qev2IdcApplication>]
+    # @!attribute marker
+    #   <p>A value that indicates the starting point for the next set of response records in a subsequent
+    #               request. If a value is returned in a response, you can retrieve the next set
+    #               of records by providing this returned marker value in the Marker parameter
+    #               and retrying the command. If the Marker field is empty, all response
+    #               records have been retrieved for the request.
+    #           </p>
+    #   @return [String]
+    class DescribeQev2IdcApplicationsResult < Struct.new(
+      nil,
+      :qev2_idc_applications,
+      :marker,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute redshift_idc_application_arn
     #   <p>The ARN for the Redshift application that integrates with IAM Identity Center.</p>
     #   @return [String]
     # @!attribute max_records
-    #   <p>The maximum number of response records to return in each call. If the number of remaining response records 
-    #               exceeds the specified MaxRecords value, a value is returned in a marker field of the response. You can retrieve 
+    #   <p>The maximum number of response records to return in each call. If the number of remaining response records
+    #               exceeds the specified MaxRecords value, a value is returned in a marker field of the response. You can retrieve
     #               the next set of records by retrying the command with the returned marker value.</p>
     #   @return [Integer]
     # @!attribute marker
-    #   <p>A value that indicates the starting point for the next set of response records in a subsequent request. If a 
+    #   <p>A value that indicates the starting point for the next set of response records in a subsequent request. If a
     #               value is returned in a response, you can retrieve the next set
     #               of records by providing this returned marker value in the Marker parameter
     #               and retrying the command. If the Marker field is empty, all response
@@ -5639,7 +5790,7 @@ module Aws::Redshift
     #   <p>The list of Amazon Redshift IAM Identity Center applications.</p>
     #   @return [Array<Types::RedshiftIdcApplication>]
     # @!attribute marker
-    #   <p>A value that indicates the starting point for the next set of response records in a subsequent 
+    #   <p>A value that indicates the starting point for the next set of response records in a subsequent
     #               request. If a value is returned in a response, you can retrieve the next set
     #               of records by providing this returned marker value in the Marker parameter
     #               and retrying the command. If the Marker field is empty, all response
@@ -5668,8 +5819,8 @@ module Aws::Redshift
     #               set of records by retrying the command with the returned marker value.</p>
     #   @return [Integer]
     # @!attribute marker
-    #   <p>An optional pagination token provided by a previous <code>DescribeReservedNodeExchangeStatus</code> request. If this 
-    #               parameter is specified, the response includes only records beyond the marker, up to the value 
+    #   <p>An optional pagination token provided by a previous <code>DescribeReservedNodeExchangeStatus</code> request. If this
+    #               parameter is specified, the response includes only records beyond the marker, up to the value
     #               specified by the <code>MaxRecords</code> parameter. You can retrieve the next set of response
     #               records by providing the returned marker value in the <code>Marker</code> parameter and
     #               retrying the request.</p>
@@ -5882,15 +6033,15 @@ module Aws::Redshift
     #   <p>The type of the scheduled actions to retrieve. </p>
     #   @return [String]
     # @!attribute start_time
-    #   <p>The start time in UTC of the scheduled actions to retrieve. 
+    #   <p>The start time in UTC of the scheduled actions to retrieve.
     #               Only active scheduled actions that have invocations after this time are retrieved.</p>
     #   @return [Time]
     # @!attribute end_time
-    #   <p>The end time in UTC of the scheduled action to retrieve. 
+    #   <p>The end time in UTC of the scheduled action to retrieve.
     #               Only active scheduled actions that have invocations before this time are retrieved.</p>
     #   @return [Time]
     # @!attribute active
-    #   <p>If true, retrieve only active scheduled actions. 
+    #   <p>If true, retrieve only active scheduled actions.
     #              If false, retrieve only disabled scheduled actions. </p>
     #   @return [Boolean]
     # @!attribute filters
@@ -6108,7 +6259,7 @@ module Aws::Redshift
     #               <li>
     #                  <p>Integration (zero-ETL integration or S3 event integration)</p>
     #                  <note>
-    #                     <p>To describe the tags associated with an <code>integration</code>, don't specify <code>ResourceType</code>, 
+    #                     <p>To describe the tags associated with an <code>integration</code>, don't specify <code>ResourceType</code>,
     #                       instead specify the <code>ResourceName</code> of the integration.</p>
     #                  </note>
     #               </li>
@@ -6240,9 +6391,17 @@ module Aws::Redshift
     #            <p>Example: <code>examplecluster</code>
     #            </p>
     #   @return [String]
+    # @!attribute log_destination_type
+    #   <p>The log destination type. An enum with possible values of <code>s3</code>, <code>cloudwatch</code>, and <code>s3table</code>. When set to <code>s3table</code>, stops system table publishing. When omitted, the operation disables audit logging.</p>
+    #   @return [String]
+    # @!attribute log_exports
+    #   <p>The collection of log types to stop exporting. When <code>LogDestinationType</code> is <code>s3table</code>, the values are the names of the system tables to stop publishing. Omitting this parameter or passing <code>all</code> stops publishing all system tables.</p>
+    #   @return [Array<String>]
     class DisableLoggingMessage < Struct.new(
       nil,
       :cluster_identifier,
+      :log_destination_type,
+      :log_exports,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6269,12 +6428,15 @@ module Aws::Redshift
     #   <p>The message indicating that logs failed to be delivered.</p>
     #   @return [String]
     # @!attribute log_destination_type
-    #   <p>The log destination type. An enum with possible values of <code>s3</code> and <code>cloudwatch</code>.</p>
+    #   <p>The log destination type. An enum with possible values of <code>s3</code>, <code>cloudwatch</code>, and <code>s3table</code>.</p>
     #   @return [String]
     # @!attribute log_exports
-    #   <p>The collection of exported log types. Possible values are <code>connectionlog</code>, <code>useractivitylog</code>, and 
-    #               <code>userlog</code>.</p>
+    #   <p>The collection of exported log types. When <code>LogDestinationType</code> is <code>s3</code> or <code>cloudwatch</code>, possible values are <code>connectionlog</code>, <code>useractivitylog</code>, and
+    #               <code>userlog</code>. When <code>LogDestinationType</code> is <code>s3table</code>, the values are the names of the system tables being published.</p>
     #   @return [Array<String>]
+    # @!attribute s3_tables
+    #   <p>The status of system table publishing to S3 Tables. This field is populated only when system table publishing is active.</p>
+    #   @return [Types::S3TablePublishStatus]
     class DisableLoggingOutput < Struct.new(
       nil,
       :logging_enabled,
@@ -6285,6 +6447,7 @@ module Aws::Redshift
       :last_failure_message,
       :log_destination_type,
       :log_exports,
+      :s3_tables,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6434,16 +6597,22 @@ module Aws::Redshift
     #   @return [String]
     # @!attribute s3_key_prefix
     #   <p>The prefix applied to the log file names.</p>
-    #            <p>Valid characters are any letter from any language, any whitespace character, any numeric character, and the following characters: 
+    #            <p>Valid characters are any letter from any language, any whitespace character, any numeric character, and the following characters:
     #               underscore (<code>_</code>), period (<code>.</code>), colon (<code>:</code>), slash (<code>/</code>), equal (<code>=</code>), plus (<code>+</code>), backslash (<code>\</code>),
     #               hyphen (<code>-</code>), at symbol (<code>@</code>).</p>
     #   @return [String]
     # @!attribute log_destination_type
-    #   <p>The log destination type. An enum with possible values of <code>s3</code> and <code>cloudwatch</code>.</p>
+    #   <p>The log destination type. An enum with possible values of <code>s3</code>, <code>cloudwatch</code>, and <code>s3table</code>.</p>
     #   @return [String]
     # @!attribute log_exports
-    #   <p>The collection of exported log types. Possible values are <code>connectionlog</code>, <code>useractivitylog</code>, and <code>userlog</code>.</p>
+    #   <p>The collection of exported log types. When <code>LogDestinationType</code> is <code>s3</code> or <code>cloudwatch</code>, possible values are <code>connectionlog</code>, <code>useractivitylog</code>, and <code>userlog</code>. When <code>LogDestinationType</code> is <code>s3table</code>, the values are the names of the system tables to publish. Omitting this parameter, passing an empty list, or including the value <code>all</code> publishes all current and future system tables.</p>
     #   @return [Array<String>]
+    # @!attribute s3_table_kms_key_id
+    #   <p>The identifier of a customer managed KMS key used to encrypt the S3 tables. This parameter is valid only when <code>LogDestinationType</code> is <code>s3table</code>.</p>
+    #   @return [String]
+    # @!attribute s3_table_granularity
+    #   <p>The scope of system table publishing. Valid values are <code>cluster</code> and <code>account</code>. A value of <code>cluster</code> scopes publishing to the individual cluster. A value of <code>account</code> scopes publishing to the Amazon Web Services account. This parameter is valid only when <code>LogDestinationType</code> is <code>s3table</code>.</p>
+    #   @return [String]
     class EnableLoggingMessage < Struct.new(
       nil,
       :cluster_identifier,
@@ -6451,6 +6620,8 @@ module Aws::Redshift
       :s3_key_prefix,
       :log_destination_type,
       :log_exports,
+      :s3_table_kms_key_id,
+      :s3_table_granularity,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6477,12 +6648,15 @@ module Aws::Redshift
     #   <p>The message indicating that logs failed to be delivered.</p>
     #   @return [String]
     # @!attribute log_destination_type
-    #   <p>The log destination type. An enum with possible values of <code>s3</code> and <code>cloudwatch</code>.</p>
+    #   <p>The log destination type. An enum with possible values of <code>s3</code>, <code>cloudwatch</code>, and <code>s3table</code>.</p>
     #   @return [String]
     # @!attribute log_exports
-    #   <p>The collection of exported log types. Possible values are <code>connectionlog</code>, <code>useractivitylog</code>, and 
-    #               <code>userlog</code>.</p>
+    #   <p>The collection of exported log types. When <code>LogDestinationType</code> is <code>s3</code> or <code>cloudwatch</code>, possible values are <code>connectionlog</code>, <code>useractivitylog</code>, and
+    #               <code>userlog</code>. When <code>LogDestinationType</code> is <code>s3table</code>, the values are the names of the system tables being published.</p>
     #   @return [Array<String>]
+    # @!attribute s3_tables
+    #   <p>The status of system table publishing to S3 Tables. This field is populated only when system table publishing is active.</p>
+    #   @return [Types::S3TablePublishStatus]
     class EnableLoggingOutput < Struct.new(
       nil,
       :logging_enabled,
@@ -6493,6 +6667,7 @@ module Aws::Redshift
       :last_failure_message,
       :log_destination_type,
       :log_exports,
+      :s3_tables,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6906,8 +7081,8 @@ module Aws::Redshift
     end
 
     # <p>The request would exceed the allowed number of event subscriptions for this
-    #             account. 
-    # For information about increasing your quota, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html">Limits in Amazon Redshift</a> 
+    #             account.
+    # For information about increasing your quota, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html">Limits in Amazon Redshift</a>
     # in the <i>Amazon Redshift Cluster Management Guide</i>.
     # </p>
     # @!attribute message
@@ -7174,6 +7349,69 @@ module Aws::Redshift
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The request parameters for <code>GetIdentityCenterAuthToken</code>.</p>
+    # @!attribute cluster_ids
+    #   <p>A list of cluster identifiers that the generated token can be used with.
+    #               The token will be scoped to only allow authentication to the specified clusters.</p>
+    #            <p>Constraints:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>ClusterIds</code> must contain at least 1 cluster identifier.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ClusterIds</code> can hold a maximum of 20 cluster identifiers.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Cluster identifiers must be 1 to 63 characters in length.</p>
+    #               </li>
+    #               <li>
+    #                  <p>The characters accepted for cluster identifiers are the following:</p>
+    #                  <ul>
+    #                     <li>
+    #                        <p>Alphanumeric characters</p>
+    #                     </li>
+    #                     <li>
+    #                        <p>Hyphens</p>
+    #                     </li>
+    #                  </ul>
+    #               </li>
+    #               <li>
+    #                  <p>Cluster identifiers must start with a letter.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Cluster identifiers can't end with a hyphen or contain two consecutive hyphens.</p>
+    #               </li>
+    #            </ul>
+    #   @return [Array<String>]
+    class GetIdentityCenterAuthTokenRequest < Struct.new(
+      nil,
+      :cluster_ids,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The response from GetIdentityCenterAuthToken containing the encrypted authentication token and expiration time.</p>
+    # @!attribute token
+    #   <p>The encrypted authentication token containing the caller's Amazon Web Services IAM Identity Center identity information.
+    #               This token is encrypted using Key Management Service and can only be decrypted by the specified Amazon Redshift clusters.
+    #               Use this token with Amazon Redshift drivers to authenticate using your Amazon Web Services IAM Identity Center identity.</p>
+    #   @return [String]
+    # @!attribute expiration_time
+    #   <p>The time (UTC) when the token expires. After this timestamp,
+    #               the token will no longer be valid for authentication.</p>
+    #   @return [Time]
+    class GetIdentityCenterAuthTokenResponse < Struct.new(
+      nil,
+      :token,
+      :expiration_time,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute action_type
     #   <p>The action type of the reserved-node configuration. The action type can be an exchange initiated from either a snapshot or a resize.</p>
     #   @return [String]
@@ -7190,8 +7428,8 @@ module Aws::Redshift
     #               set of records by retrying the command with the returned marker value.</p>
     #   @return [Integer]
     # @!attribute marker
-    #   <p>An optional pagination token provided by a previous <code>GetReservedNodeExchangeConfigurationOptions</code> request. If this 
-    #               parameter is specified, the response includes only records beyond the marker, up to the value 
+    #   <p>An optional pagination token provided by a previous <code>GetReservedNodeExchangeConfigurationOptions</code> request. If this
+    #               parameter is specified, the response includes only records beyond the marker, up to the value
     #               specified by the <code>MaxRecords</code> parameter. You can retrieve the next set of response
     #               records by providing the returned marker value in the <code>Marker</code> parameter and
     #               retrying the request.</p>
@@ -7359,8 +7597,8 @@ module Aws::Redshift
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The quota for HSM client certificates has been reached. 
-    # For information about increasing your quota, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html">Limits in Amazon Redshift</a> 
+    # <p>The quota for HSM client certificates has been reached.
+    # For information about increasing your quota, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html">Limits in Amazon Redshift</a>
     # in the <i>Amazon Redshift Cluster Management Guide</i>.
     # </p>
     # @!attribute message
@@ -7447,8 +7685,8 @@ module Aws::Redshift
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The quota for HSM configurations has been reached. 
-    # For information about increasing your quota, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html">Limits in Amazon Redshift</a> 
+    # <p>The quota for HSM configurations has been reached.
+    # For information about increasing your quota, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html">Limits in Amazon Redshift</a>
     # in the <i>Amazon Redshift Cluster Management Guide</i>.
     # </p>
     # @!attribute message
@@ -7633,7 +7871,7 @@ module Aws::Redshift
     #               encrypt the integration.</p>
     #   @return [String]
     # @!attribute additional_encryption_context
-    #   <p>The encryption context for the integration. For more information, 
+    #   <p>The encryption context for the integration. For more information,
     #               see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context">Encryption context</a> in the <i>Amazon Web Services Key Management Service Developer
     #                   Guide</i>.</p>
     #   @return [Hash<String, String>]
@@ -7754,8 +7992,8 @@ module Aws::Redshift
     end
 
     # @!attribute marker
-    #   <p>A value that indicates the starting point for the next set of response records in a subsequent request. 
-    #               If a value is returned in a response, you can retrieve the next set of records by providing this returned marker value in the <code>Marker</code> parameter and retrying the command. 
+    #   <p>A value that indicates the starting point for the next set of response records in a subsequent request.
+    #               If a value is returned in a response, you can retrieve the next set of records by providing this returned marker value in the <code>Marker</code> parameter and retrying the command.
     #               If the <code>Marker</code> field is empty, all response records have been retrieved for the request.</p>
     #   @return [String]
     # @!attribute integrations
@@ -7770,7 +8008,7 @@ module Aws::Redshift
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The authentication profile request is not valid. The profile name can't be null or empty. 
+    # <p>The authentication profile request is not valid. The profile name can't be null or empty.
     #             The authentication profile API operation must be available in the Amazon Web Services Region.</p>
     # @!attribute message
     #   @return [String]
@@ -8178,7 +8416,7 @@ module Aws::Redshift
     end
 
     # @!attribute cluster_identifier
-    #   <p>The unique identifier of the Amazon Redshift cluster for which the list of Advisor recommendations is returned. 
+    #   <p>The unique identifier of the Amazon Redshift cluster for which the list of Advisor recommendations is returned.
     #             If the neither the cluster identifier and the cluster namespace ARN parameters are specified, then recommendations for all clusters in the account are returned.</p>
     #   @return [String]
     # @!attribute namespace_arn
@@ -8186,12 +8424,12 @@ module Aws::Redshift
     #               If the neither the cluster identifier and the cluster namespace ARN parameters are specified, then recommendations for all clusters in the account are returned.</p>
     #   @return [String]
     # @!attribute max_records
-    #   <p>The maximum number of response records to return in each call. If the number of remaining response records 
-    #               exceeds the specified MaxRecords value, a value is returned in a marker field of the response. You can retrieve 
+    #   <p>The maximum number of response records to return in each call. If the number of remaining response records
+    #               exceeds the specified MaxRecords value, a value is returned in a marker field of the response. You can retrieve
     #               the next set of records by retrying the command with the returned marker value.</p>
     #   @return [Integer]
     # @!attribute marker
-    #   <p>A value that indicates the starting point for the next set of response records in a subsequent request. If a 
+    #   <p>A value that indicates the starting point for the next set of response records in a subsequent request. If a
     #               value is returned in a response, you can retrieve the next set
     #               of records by providing this returned marker value in the Marker parameter
     #               and retrying the command. If the Marker field is empty, all response
@@ -8213,7 +8451,7 @@ module Aws::Redshift
     #   <p>The Advisor recommendations for action on the Amazon Redshift cluster.</p>
     #   @return [Array<Types::Recommendation>]
     # @!attribute marker
-    #   <p>A value that indicates the starting point for the next set of response records in a subsequent 
+    #   <p>A value that indicates the starting point for the next set of response records in a subsequent
     #               request. If a value is returned in a response, you can retrieve the next set
     #               of records by providing this returned marker value in the Marker parameter
     #               and retrying the command. If the Marker field is empty, all response
@@ -8224,6 +8462,18 @@ module Aws::Redshift
       nil,
       :recommendations,
       :marker,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Describes the system table publishing status for a cluster.</p>
+    # @!attribute s3_tables
+    #   <p>The status of system table publishing to S3 Tables.</p>
+    #   @return [Types::S3TablePublishStatus]
+    class LoggingPublishStatus < Struct.new(
+      nil,
+      :s3_tables,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8396,7 +8646,7 @@ module Aws::Redshift
     #   @return [Time]
     # @!attribute defer_maintenance_duration
     #   <p>An integer indicating the duration of the maintenance window in days. If you specify a
-    #               duration, you can't specify an end time. The duration must be 45 days or less.</p>
+    #               duration, you can't specify an end time. The duration must be 60 days or less.</p>
     #   @return [Integer]
     class ModifyClusterMaintenanceMessage < Struct.new(
       nil,
@@ -8441,20 +8691,20 @@ module Aws::Redshift
     #   <p>The new node type of the cluster. If you specify a new node type, you must also
     #               specify the number of nodes parameter.</p>
     #            <p>
-    #   For more information about resizing clusters, go to 
-    #   <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/rs-resize-tutorial.html">Resizing Clusters in Amazon Redshift</a> 
+    #   For more information about resizing clusters, go to
+    #   <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/rs-resize-tutorial.html">Resizing Clusters in Amazon Redshift</a>
     #   in the <i>Amazon Redshift Cluster Management Guide</i>.</p>
-    #            <p>Valid Values: 
-    #               <code>dc2.large</code> | <code>dc2.8xlarge</code> | 
-    #               <code>ra3.large</code> |  <code>ra3.xlplus</code> |  <code>ra3.4xlarge</code> | <code>ra3.16xlarge</code>
+    #            <p>Valid Values:
+    #               <code>dc2.large</code> | <code>dc2.8xlarge</code> | <code>rg.large</code> | <code>rg.xlarge</code> | <code>rg.4xlarge</code> | <code>rg.12xlarge</code> |
+    #               <code>ra3.large</code> | <code>ra3.xlplus</code> | <code>ra3.4xlarge</code> | <code>ra3.16xlarge</code>
     #            </p>
     #   @return [String]
     # @!attribute number_of_nodes
     #   <p>The new number of nodes of the cluster. If you specify a new number of nodes, you
     #               must also specify the node type parameter.</p>
     #            <p>
-    #   For more information about resizing clusters, go to 
-    #   <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/rs-resize-tutorial.html">Resizing Clusters in Amazon Redshift</a> 
+    #   For more information about resizing clusters, go to
+    #   <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/rs-resize-tutorial.html">Resizing Clusters in Amazon Redshift</a>
     #   in the <i>Amazon Redshift Cluster Management Guide</i>.</p>
     #            <p>Valid Values: Integer greater than <code>0</code>.</p>
     #   @return [Integer]
@@ -8526,7 +8776,7 @@ module Aws::Redshift
     #            <p>If you decrease the automated snapshot retention period from its current value,
     #               existing automated snapshots that fall outside of the new retention period will be
     #               immediately deleted.</p>
-    #            <p>You can't disable automated snapshots for RA3 node types. Set the automated retention period from 1-35 days.</p>
+    #            <p>You can't disable automated snapshots for RG or RA3 node types. Set the automated retention period from 1-35 days.</p>
     #            <p>Default: Uses existing setting.</p>
     #            <p>Constraints: Must be a value from 0 to 35.</p>
     #   @return [Integer]
@@ -8555,9 +8805,9 @@ module Aws::Redshift
     #            <p>For major version upgrades, if a non-default cluster parameter group is currently
     #               in use, a new cluster parameter group in the cluster parameter group family for the new
     #               version must be specified. The new cluster parameter group can be the default for that
-    #               cluster parameter group family. 
-    #   For more information about parameters and parameter groups, go to 
-    #   <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html">Amazon Redshift Parameter Groups</a> 
+    #               cluster parameter group family.
+    #   For more information about parameters and parameter groups, go to
+    #   <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html">Amazon Redshift Parameter Groups</a>
     #   in the <i>Amazon Redshift Cluster Management Guide</i>.</p>
     #            <p>Example: <code>1.0</code>
     #            </p>
@@ -8650,8 +8900,8 @@ module Aws::Redshift
     #           </p>
     #            <ul>
     #               <li>
-    #                  <p>For clusters with ra3 nodes - Select a port within the ranges <code>5431-5455</code> or <code>8191-8215</code>. (If you have an existing cluster 
-    #                   with ra3 nodes, it isn't required that you change the port to these ranges.)</p>
+    #                  <p>For clusters with RG or RA3 nodes - Select a port within the ranges <code>5431-5455</code> or <code>8191-8215</code>. (If you have an existing cluster
+    #                   with RG or RA3 nodes, it isn't required that you change the port to these ranges.)</p>
     #               </li>
     #               <li>
     #                  <p>For clusters with dc2 nodes - Select a port within the range <code>1150-65535</code>.</p>
@@ -8659,14 +8909,14 @@ module Aws::Redshift
     #            </ul>
     #   @return [Integer]
     # @!attribute manage_master_password
-    #   <p>If <code>true</code>, Amazon Redshift uses Secrets Manager to manage this cluster's admin credentials. 
-    #               You can't use <code>MasterUserPassword</code> if <code>ManageMasterPassword</code> is true. 
-    #               If <code>ManageMasterPassword</code> is false or not set, Amazon Redshift uses 
+    #   <p>If <code>true</code>, Amazon Redshift uses Secrets Manager to manage this cluster's admin credentials.
+    #               You can't use <code>MasterUserPassword</code> if <code>ManageMasterPassword</code> is true.
+    #               If <code>ManageMasterPassword</code> is false or not set, Amazon Redshift uses
     #               <code>MasterUserPassword</code> for the admin user account's password.
     #           </p>
     #   @return [Boolean]
     # @!attribute master_password_secret_kms_key_id
-    #   <p>The ID of the Key Management Service (KMS) key used to encrypt and store the cluster's admin credentials secret. 
+    #   <p>The ID of the Key Management Service (KMS) key used to encrypt and store the cluster's admin credentials secret.
     #               You can only use this parameter if <code>ManageMasterPassword</code> is true.</p>
     #   @return [String]
     # @!attribute ip_address_type
@@ -8674,6 +8924,10 @@ module Aws::Redshift
     #   @return [String]
     # @!attribute multi_az
     #   <p>If true and the cluster is currently only deployed in a single Availability Zone, the cluster will be modified to be deployed in two Availability Zones.</p>
+    #   @return [Boolean]
+    # @!attribute extra_compute_for_automatic_optimization
+    #   <p>If <code>true</code>, allocates additional compute resources for running automatic optimization operations.</p>
+    #            <p>Default: false</p>
     #   @return [Boolean]
     class ModifyClusterMessage < Struct.new(
       nil,
@@ -8706,6 +8960,7 @@ module Aws::Redshift
       :master_password_secret_kms_key_id,
       :ip_address_type,
       :multi_az,
+      :extra_compute_for_automatic_optimization,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -9067,7 +9322,7 @@ module Aws::Redshift
     #               encrypt the integration.</p>
     #   @return [String]
     # @!attribute additional_encryption_context
-    #   <p>The encryption context for the integration. For more information, 
+    #   <p>The encryption context for the integration. For more information,
     #               see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context">Encryption context</a> in the <i>Amazon Web Services Key Management Service Developer
     #                   Guide</i>.</p>
     #   @return [Hash<String, String>]
@@ -9092,15 +9347,109 @@ module Aws::Redshift
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute cluster_identifier
+    #   <p>The unique identifier of the cluster whose lakehouse configuration you want to modify.</p>
+    #   @return [String]
+    # @!attribute lakehouse_registration
+    #   <p>Specifies whether to register or deregister the cluster with Amazon Redshift federated permissions. Valid values are <code>Register</code> or <code>Deregister</code>.</p>
+    #   @return [String]
+    # @!attribute catalog_name
+    #   <p>The name of the Glue data catalog that will be associated with the cluster enabled with Amazon Redshift federated permissions.</p>
+    #            <p>Constraints:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>Must contain at least one lowercase letter.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Can only contain lowercase letters (a-z), numbers (0-9), underscores (_), and hyphens (-).</p>
+    #               </li>
+    #            </ul>
+    #            <p>Pattern: <code>^[a-z0-9_-]*[a-z]+[a-z0-9_-]*$</code>
+    #            </p>
+    #            <p>Example: <code>my-catalog_01</code>
+    #            </p>
+    #   @return [String]
+    # @!attribute lakehouse_idc_registration
+    #   <p>Modifies the Amazon Web Services IAM Identity Center trusted identity propagation on a cluster enabled with Amazon Redshift federated permissions. Valid values are <code>Associate</code> or <code>Disassociate</code>.</p>
+    #   @return [String]
+    # @!attribute lakehouse_idc_application_arn
+    #   <p>The Amazon Resource Name (ARN) of the IAM Identity Center application used for enabling Amazon Web Services IAM Identity Center trusted identity propagation on a cluster enabled with Amazon Redshift federated permissions.</p>
+    #   @return [String]
+    # @!attribute dry_run
+    #   <p>A boolean value that, if <code>true</code>, validates the request without actually modifying the lakehouse configuration. Use this to check for errors before making changes.</p>
+    #   @return [Boolean]
+    class ModifyLakehouseConfigurationMessage < Struct.new(
+      nil,
+      :cluster_identifier,
+      :lakehouse_registration,
+      :catalog_name,
+      :lakehouse_idc_registration,
+      :lakehouse_idc_application_arn,
+      :dry_run,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains configuration information for lakehouse integration, including the cluster identifier, catalog ARN, and registration status.</p>
+    # @!attribute cluster_identifier
+    #   <p>The unique identifier of the cluster associated with this lakehouse configuration.</p>
+    #   @return [String]
+    # @!attribute lakehouse_idc_application_arn
+    #   <p>The Amazon Resource Name (ARN) of the IAM Identity Center application used for enabling Amazon Web Services IAM Identity Center trusted identity propagation on a cluster enabled with Amazon Redshift federated permissions.</p>
+    #   @return [String]
+    # @!attribute lakehouse_registration_status
+    #   <p>The current status of the lakehouse registration. Indicates whether the cluster is successfully registered with the lakehouse.</p>
+    #   @return [String]
+    # @!attribute catalog_arn
+    #   <p>The Amazon Resource Name (ARN) of the Glue data catalog associated with the lakehouse configuration.</p>
+    #   @return [String]
+    class ModifyLakehouseConfigurationOutput < Struct.new(
+      nil,
+      :cluster_identifier,
+      :lakehouse_idc_application_arn,
+      :lakehouse_registration_status,
+      :catalog_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute qev2_idc_application_arn
+    #   <p>The Amazon Resource Name (ARN) for the Amazon Redshift Query Editor (QEV2) application that integrates with IAM Identity Center.</p>
+    #   @return [String]
+    # @!attribute idc_display_name
+    #   <p>The display name for the Amazon Redshift Query Editor (QEV2) IAM Identity Center application. It appears in the console.</p>
+    #   @return [String]
+    class ModifyQev2IdcApplicationMessage < Struct.new(
+      nil,
+      :qev2_idc_application_arn,
+      :idc_display_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute qev2_idc_application
+    #   <p>Contains configuration and status information for an Amazon Redshift Query Editor (QEV2) application that is registered with IAM Identity Center.</p>
+    #   @return [Types::Qev2IdcApplication]
+    class ModifyQev2IdcApplicationResult < Struct.new(
+      nil,
+      :qev2_idc_application,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute redshift_idc_application_arn
     #   <p>The ARN for the Redshift application that integrates with IAM Identity Center.</p>
     #   @return [String]
     # @!attribute identity_namespace
-    #   <p>The namespace for the Amazon Redshift IAM Identity Center application to change. It determines which managed application 
+    #   <p>The namespace for the Amazon Redshift IAM Identity Center application to change. It determines which managed application
     #               verifies the connection token.</p>
     #   @return [String]
     # @!attribute iam_role_arn
-    #   <p>The IAM role ARN associated with the Amazon Redshift IAM Identity Center application to change. It has the required permissions 
+    #   <p>The IAM role ARN associated with the Amazon Redshift IAM Identity Center application to change. It has the required permissions
     #               to be assumed and invoke the IDC Identity Center API.</p>
     #   @return [String]
     # @!attribute idc_display_name
@@ -9140,26 +9489,26 @@ module Aws::Redshift
     #   <p>The name of the scheduled action to modify. </p>
     #   @return [String]
     # @!attribute target_action
-    #   <p>A modified JSON format of the scheduled action. 
+    #   <p>A modified JSON format of the scheduled action.
     #               For more information about this parameter, see <a>ScheduledAction</a>. </p>
     #   @return [Types::ScheduledActionType]
     # @!attribute schedule
-    #   <p>A modified schedule in either <code>at( )</code> or <code>cron( )</code> format. 
+    #   <p>A modified schedule in either <code>at( )</code> or <code>cron( )</code> format.
     #               For more information about this parameter, see <a>ScheduledAction</a>.</p>
     #   @return [String]
     # @!attribute iam_role
-    #   <p>A different IAM role to assume to run the target action. 
+    #   <p>A different IAM role to assume to run the target action.
     #               For more information about this parameter, see <a>ScheduledAction</a>.</p>
     #   @return [String]
     # @!attribute scheduled_action_description
     #   <p>A modified description of the scheduled action. </p>
     #   @return [String]
     # @!attribute start_time
-    #   <p>A modified start time of the scheduled action. 
+    #   <p>A modified start time of the scheduled action.
     #               For more information about this parameter, see <a>ScheduledAction</a>. </p>
     #   @return [Time]
     # @!attribute end_time
-    #   <p>A modified end time of the scheduled action. 
+    #   <p>A modified end time of the scheduled action.
     #               For more information about this parameter, see <a>ScheduledAction</a>. </p>
     #   @return [Time]
     # @!attribute enable
@@ -9180,7 +9529,7 @@ module Aws::Redshift
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Describes a scheduled action. You can use a scheduled action to trigger some Amazon Redshift API operations on a schedule. 
+    # <p>Describes a scheduled action. You can use a scheduled action to trigger some Amazon Redshift API operations on a schedule.
     #             For information about which API operations can be scheduled, see  <a>ScheduledActionType</a>. </p>
     # @!attribute scheduled_action_name
     #   <p>The name of the scheduled action. </p>
@@ -9190,21 +9539,21 @@ module Aws::Redshift
     #            <p>"<code>{\"ResizeCluster\":{\"NodeType\":\"ra3.4xlarge\",\"ClusterIdentifier\":\"my-test-cluster\",\"NumberOfNodes\":3}}</code>". </p>
     #   @return [Types::ScheduledActionType]
     # @!attribute schedule
-    #   <p>The schedule for a one-time (at format) or recurring (cron format) scheduled action. 
+    #   <p>The schedule for a one-time (at format) or recurring (cron format) scheduled action.
     #               Schedule invocations must be separated by at least one hour.</p>
     #            <p>Format of at expressions is "<code>at(yyyy-mm-ddThh:mm:ss)</code>". For example, "<code>at(2016-03-04T17:27:00)</code>".</p>
-    #            <p>Format of cron expressions is "<code>cron(Minutes Hours Day-of-month Month Day-of-week Year)</code>". 
-    #               For example, "<code>cron(0 10 ? * MON *)</code>". For more information, see 
-    #               <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions">Cron Expressions</a> 
+    #            <p>Format of cron expressions is "<code>cron(Minutes Hours Day-of-month Month Day-of-week Year)</code>".
+    #               For example, "<code>cron(0 10 ? * MON *)</code>". For more information, see
+    #               <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions">Cron Expressions</a>
     #               in the <i>Amazon CloudWatch Events User Guide</i>.</p>
     #   @return [String]
     # @!attribute iam_role
-    #   <p>The IAM role to assume to run the scheduled action. 
+    #   <p>The IAM role to assume to run the scheduled action.
     #               This IAM role must have permission to run the Amazon Redshift API operation in the scheduled action.
     #               This IAM role must allow the Amazon Redshift scheduler (Principal scheduler.redshift.amazonaws.com) to assume permissions on your behalf.
-    #                  
-    #   For more information about the IAM role to use with the Amazon Redshift scheduler, see 
-    #   <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html">Using Identity-Based Policies for Amazon Redshift</a> 
+    #
+    #   For more information about the IAM role to use with the Amazon Redshift scheduler, see
+    #   <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html">Using Identity-Based Policies for Amazon Redshift</a>
     #   in the <i>Amazon Redshift Cluster Management Guide</i>.
     #   </p>
     #   @return [String]
@@ -9344,11 +9693,11 @@ module Aws::Redshift
     #   <p>The identifier of the usage limit to modify.</p>
     #   @return [String]
     # @!attribute amount
-    #   <p>The new limit amount. 
+    #   <p>The new limit amount.
     #               For more information about this parameter, see <a>UsageLimit</a>. </p>
     #   @return [Integer]
     # @!attribute breach_action
-    #   <p>The new action that Amazon Redshift takes when the limit is reached. 
+    #   <p>The new action that Amazon Redshift takes when the limit is reached.
     #               For more information about this parameter, see <a>UsageLimit</a>. </p>
     #   @return [String]
     class ModifyUsageLimitMessage < Struct.new(
@@ -9415,7 +9764,7 @@ module Aws::Redshift
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Object to store union of values for a 
+    # <p>Object to store union of values for a
     #             provisioned cluster or serverless namespace’s identifier.</p>
     # @!attribute serverless_identifier
     #   <p>The identifier for a serverless namespace.</p>
@@ -9495,14 +9844,14 @@ module Aws::Redshift
     # @!attribute operator
     #   <p>The filter operator.
     #               If filter Name is NodeType only the 'in' operator is supported.
-    #               Provide one value to evaluate for 'eq', 'lt', 'le', 'gt', and 'ge'. 
+    #               Provide one value to evaluate for 'eq', 'lt', 'le', 'gt', and 'ge'.
     #               Provide two values to evaluate for 'between'.
     #               Provide a list of values for 'in'.</p>
     #   @return [String]
     # @!attribute values
     #   <p>List of values. Compare Name using Operator to Values.
     #               If filter Name is NumberOfNodes, then values can range from 0 to 200.
-    #               If filter Name is EstimatedDiskUtilizationPercent, then values can range from 0 to 100. 
+    #               If filter Name is EstimatedDiskUtilizationPercent, then values can range from 0 to 100.
     #               For example, filter NumberOfNodes (name) GT (operator) 3 (values).</p>
     #   @return [Array<String>]
     class NodeConfigurationOptionsFilter < Struct.new(
@@ -9546,8 +9895,8 @@ module Aws::Redshift
     end
 
     # <p>The operation would exceed the number of nodes allotted to the account.
-    #             
-    # For information about increasing your quota, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html">Limits in Amazon Redshift</a> 
+    #
+    # For information about increasing your quota, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html">Limits in Amazon Redshift</a>
     # in the <i>Amazon Redshift Cluster Management Guide</i>.
     # </p>
     # @!attribute message
@@ -9611,7 +9960,7 @@ module Aws::Redshift
     #   <p>The name of the parameter.</p>
     #   @return [String]
     # @!attribute parameter_value
-    #   <p>The value of the parameter. If <code>ParameterName</code> is <code>wlm_json_configuration</code>, 
+    #   <p>The value of the parameter. If <code>ParameterName</code> is <code>wlm_json_configuration</code>,
     #               then the maximum size of <code>ParameterValue</code> is 8000 characters.</p>
     #   @return [String]
     # @!attribute description
@@ -9629,9 +9978,9 @@ module Aws::Redshift
     # @!attribute apply_type
     #   <p>Specifies how to apply the WLM configuration parameter. Some properties can be
     #               applied dynamically, while other properties require that any associated clusters be
-    #               rebooted for the configuration changes to be applied. 
-    #   For more information about parameters and parameter groups, go to 
-    #   <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html">Amazon Redshift Parameter Groups</a> 
+    #               rebooted for the configuration changes to be applied.
+    #   For more information about parameters and parameter groups, go to
+    #   <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html">Amazon Redshift Parameter Groups</a>
     #   in the <i>Amazon Redshift Cluster Management Guide</i>.</p>
     #   @return [String]
     # @!attribute is_modifiable
@@ -9865,6 +10214,64 @@ module Aws::Redshift
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Contains configuration and status information for an Amazon Redshift Query Editor (QEV2) application that is registered with IAM Identity Center.</p>
+    # @!attribute idc_instance_arn
+    #   <p>The Amazon Resource Name (ARN) for the IAM Identity Center instance that the Amazon Redshift Query Editor (QEV2) application integrates with.</p>
+    #   @return [String]
+    # @!attribute qev2_idc_application_name
+    #   <p>The name of the Amazon Redshift Query Editor (QEV2) application in IAM Identity Center.</p>
+    #   @return [String]
+    # @!attribute qev2_idc_application_arn
+    #   <p>The Amazon Resource Name (ARN) for the Amazon Redshift Query Editor (QEV2) application that integrates with IAM Identity Center.</p>
+    #   @return [String]
+    # @!attribute idc_managed_application_arn
+    #   <p>The Amazon Resource Name (ARN) for the Amazon Redshift Query Editor (QEV2) IAM Identity Center managed application.</p>
+    #   @return [String]
+    # @!attribute idc_onboard_status
+    #   <p>The onboarding status for the Amazon Redshift Query Editor (QEV2) IAM Identity Center application.</p>
+    #   @return [String]
+    # @!attribute idc_display_name
+    #   <p>The display name for the Amazon Redshift Query Editor (QEV2) IAM Identity Center application. It appears in the console.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>A list of tags associated with the application. Tags are key-value pairs that you can use to organize and identify your resources.</p>
+    #   @return [Array<Types::Tag>]
+    class Qev2IdcApplication < Struct.new(
+      nil,
+      :idc_instance_arn,
+      :qev2_idc_application_name,
+      :qev2_idc_application_arn,
+      :idc_managed_application_arn,
+      :idc_onboard_status,
+      :idc_display_name,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The Amazon Redshift Query Editor (QEV2) IAM Identity Center application already exists. Use a different application name or describe existing applications to find the ARN.</p>
+    # @!attribute message
+    #   @return [String]
+    class Qev2IdcApplicationAlreadyExistsFault < Struct.new(
+      nil,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The specified Amazon Redshift Query Editor (QEV2) IAM Identity Center application doesn't exist. Verify that the application ARN is correct and that the application exists in this Region.</p>
+    # @!attribute message
+    #   @return [String]
+    class Qev2IdcApplicationNotExistsFault < Struct.new(
+      nil,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The S3 Access Grants scope.</p>
     # @!attribute authorization
     #   <p>Determines whether the read/write scope is enabled or disabled.</p>
@@ -10028,6 +10435,9 @@ module Aws::Redshift
     # @!attribute service_integrations
     #   <p>A list of service integrations for the Redshift IAM Identity Center application.</p>
     #   @return [Array<Types::ServiceIntegrationsUnion>]
+    # @!attribute application_type
+    #   <p>The type of application being created. Valid values are <code>None</code> or <code>Lakehouse</code>. Use <code>Lakehouse</code> to enable Amazon Redshift federated permissions on cluster.</p>
+    #   @return [String]
     # @!attribute tags
     #   <p>A list of tags.</p>
     #   @return [Array<Types::Tag>]
@@ -10048,6 +10458,7 @@ module Aws::Redshift
       :idc_onboard_status,
       :authorized_token_issuer_list,
       :service_integrations,
+      :application_type,
       :tags,
       :sso_tag_keys,
       keyword_init: true
@@ -10088,6 +10499,35 @@ module Aws::Redshift
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The request contains one or more invalid parameters.
+    #             This error occurs when required parameters are missing,
+    #             parameter values are outside acceptable ranges,
+    #             or parameter formats are incorrect.</p>
+    # @!attribute message
+    #   @return [String]
+    class RedshiftInvalidParameterFault < Struct.new(
+      nil,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A union structure that defines the scope of Amazon Redshift service integrations. Contains configuration for different integration types such as Amazon Redshift.</p>
+    # @!attribute connect
+    #   <p>The Amazon Redshift connect integration scope configuration. Defines authorization settings for Amazon Redshift connect service integration.</p>
+    #   @return [Types::Connect]
+    class RedshiftScopeUnion < Struct.new(
+      :connect,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class Connect < RedshiftScopeUnion; end
+      class Unknown < RedshiftScopeUnion; end
+    end
+
     # <p>A link to an Amazon Redshift Advisor reference for more information about a recommendation.</p>
     # @!attribute text
     #   <p>The hyperlink text that describes the link to more information.</p>
@@ -10105,11 +10545,11 @@ module Aws::Redshift
     end
 
     # @!attribute namespace_identifier
-    #   <p>The unique identifier of the cluster or 
+    #   <p>The unique identifier of the cluster or
     #               serverless namespace that you want to register. </p>
     #   @return [Types::NamespaceIdentifierUnion]
     # @!attribute consumer_identifiers
-    #   <p>An array containing the ID of the consumer account 
+    #   <p>An array containing the ID of the consumer account
     #               that you want to register the namespace to.</p>
     #   @return [Array<String>]
     class RegisterNamespaceInputMessage < Struct.new(
@@ -10122,7 +10562,7 @@ module Aws::Redshift
     end
 
     # @!attribute status
-    #   <p>The registration status of the cluster or 
+    #   <p>The registration status of the cluster or
     #               serverless namespace.</p>
     #   @return [String]
     class RegisterNamespaceOutputMessage < Struct.new(
@@ -10452,8 +10892,8 @@ module Aws::Redshift
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Request would exceed the user's compute node quota. 
-    # For information about increasing your quota, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html">Limits in Amazon Redshift</a> 
+    # <p>Request would exceed the user's compute node quota.
+    # For information about increasing your quota, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html">Limits in Amazon Redshift</a>
     # in the <i>Amazon Redshift Cluster Management Guide</i>.
     # </p>
     # @!attribute message
@@ -10712,7 +11152,7 @@ module Aws::Redshift
     # @!attribute port
     #   <p>The port number on which the cluster accepts connections.</p>
     #            <p>Default: The same port as the original cluster.</p>
-    #            <p>Valid values: For clusters with DC2 nodes, must be within the range <code>1150</code>-<code>65535</code>. For clusters with ra3 nodes, must be 
+    #            <p>Valid values: For clusters with DC2 nodes, must be within the range <code>1150</code>-<code>65535</code>. For clusters with RG or RA3 nodes, must be
     #               within the ranges <code>5431</code>-<code>5455</code> or <code>8191</code>-<code>8215</code>.</p>
     #   @return [Integer]
     # @!attribute availability_zone
@@ -10749,7 +11189,7 @@ module Aws::Redshift
     #               Amazon Redshift cluster can use to retrieve and store keys in an HSM.</p>
     #   @return [String]
     # @!attribute elastic_ip
-    #   <p>The Elastic IP (EIP) address for the cluster. Don't specify the Elastic IP address for a publicly 
+    #   <p>The Elastic IP (EIP) address for the cluster. Don't specify the Elastic IP address for a publicly
     #               accessible cluster with availability zone relocation turned on.</p>
     #   @return [String]
     # @!attribute cluster_parameter_group_name
@@ -10795,7 +11235,7 @@ module Aws::Redshift
     #   <p>The number of days that automated snapshots are retained. If the value is 0,
     #               automated snapshots are disabled. Even if automated snapshots are disabled, you can
     #               still create manual snapshots when you want with <a>CreateClusterSnapshot</a>. </p>
-    #            <p>You can't disable automated snapshots for RA3 node types. Set the automated retention period from 1-35 days.</p>
+    #            <p>You can't disable automated snapshots for RG or RA3 node types. Set the automated retention period from 1-35 days.</p>
     #            <p>Default: The value selected for the cluster from which the snapshot was
     #               taken.</p>
     #            <p>Constraints: Must be a value from 0 to 35.</p>
@@ -10807,18 +11247,18 @@ module Aws::Redshift
     #            <p>The value must be either -1 or an integer between 1 and 3,653.</p>
     #   @return [Integer]
     # @!attribute kms_key_id
-    #   <p>The Key Management Service (KMS) key ID of the encryption key that encrypts data in the cluster 
-    #               restored from a shared snapshot. You can also provide 
-    #               the key ID when you restore from an unencrypted snapshot to an encrypted cluster in 
-    #               the same account. Additionally, you can specify a new KMS key ID when you restore from an encrypted 
-    #               snapshot in the same account in order to change it. In that case, the restored cluster is encrypted 
+    #   <p>The Key Management Service (KMS) key ID of the encryption key that encrypts data in the cluster
+    #               restored from a shared snapshot. You can also provide
+    #               the key ID when you restore from an unencrypted snapshot to an encrypted cluster in
+    #               the same account. Additionally, you can specify a new KMS key ID when you restore from an encrypted
+    #               snapshot in the same account in order to change it. In that case, the restored cluster is encrypted
     #               with the new KMS key ID.</p>
     #   @return [String]
     # @!attribute node_type
     #   <p>The node type that the restored cluster will be provisioned with.</p>
     #            <p>If you have a DC instance type, you
     #               must restore into that same instance type and size. In other words, you can only restore
-    #               a dc2.large node type into another dc2 type. For more information about node types, see 
+    #               a dc2.large node type into another dc2 type. For more information about node types, see
     #                   <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#rs-about-clusters-and-nodes">
     #                   About Clusters and Nodes</a> in the <i>Amazon Redshift Cluster Management Guide</i>. </p>
     #   @return [String]
@@ -10871,16 +11311,16 @@ module Aws::Redshift
     #   <p>The identifier of the target reserved node offering.</p>
     #   @return [String]
     # @!attribute encrypted
-    #   <p>Enables support for restoring an unencrypted snapshot to a cluster encrypted 
+    #   <p>Enables support for restoring an unencrypted snapshot to a cluster encrypted
     #               with Key Management Service (KMS) and a customer managed key.</p>
     #   @return [Boolean]
     # @!attribute manage_master_password
-    #   <p>If <code>true</code>, Amazon Redshift uses Secrets Manager to manage the restored 
-    #               cluster's admin credentials. If <code>ManageMasterPassword</code> is false or not set, 
+    #   <p>If <code>true</code>, Amazon Redshift uses Secrets Manager to manage the restored
+    #               cluster's admin credentials. If <code>ManageMasterPassword</code> is false or not set,
     #               Amazon Redshift uses the admin credentials the cluster had at the time the snapshot was taken.</p>
     #   @return [Boolean]
     # @!attribute master_password_secret_kms_key_id
-    #   <p>The ID of the Key Management Service (KMS) key used to encrypt and store the cluster's admin credentials secret. 
+    #   <p>The ID of the Key Management Service (KMS) key used to encrypt and store the cluster's admin credentials secret.
     #               You can only use this parameter if <code>ManageMasterPassword</code> is true.</p>
     #   @return [String]
     # @!attribute ip_address_type
@@ -10889,6 +11329,25 @@ module Aws::Redshift
     # @!attribute multi_az
     #   <p>If true, the snapshot will be restored to a cluster deployed in two Availability Zones.</p>
     #   @return [Boolean]
+    # @!attribute catalog_name
+    #   <p>The name of the Glue Data Catalog that will be associated with the cluster enabled with Amazon Redshift federated permissions.</p>
+    #            <p>Constraints:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>Must contain at least one lowercase letter.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Can only contain lowercase letters (a-z), numbers (0-9), underscores (_), and hyphens (-).</p>
+    #               </li>
+    #            </ul>
+    #            <p>Pattern: <code>^[a-z0-9_-]*[a-z]+[a-z0-9_-]*$</code>
+    #            </p>
+    #            <p>Example: <code>my-catalog_01</code>
+    #            </p>
+    #   @return [String]
+    # @!attribute redshift_idc_application_arn
+    #   <p>The Amazon Resource Name (ARN) of the IAM Identity Center application used for enabling Amazon Web Services IAM Identity Center trusted identity propagation on a cluster enabled with Amazon Redshift federated permissions.</p>
+    #   @return [String]
     class RestoreFromClusterSnapshotMessage < Struct.new(
       nil,
       :cluster_identifier,
@@ -10928,6 +11387,8 @@ module Aws::Redshift
       :master_password_secret_kms_key_id,
       :ip_address_type,
       :multi_az,
+      :catalog_name,
+      :redshift_idc_application_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -11016,8 +11477,8 @@ module Aws::Redshift
     #   <p>The name of the table to create as a result of the current request.</p>
     #   @return [String]
     # @!attribute enable_case_sensitive_identifier
-    #   <p>Indicates whether name identifiers for database, schema, and table are case sensitive. 
-    #               If <code>true</code>, the names are case sensitive. 
+    #   <p>Indicates whether name identifiers for database, schema, and table are case sensitive.
+    #               If <code>true</code>, the names are case sensitive.
     #               If <code>false</code> (default), the names are not case sensitive.</p>
     #   @return [Boolean]
     class RestoreTableFromClusterSnapshotMessage < Struct.new(
@@ -11161,7 +11622,7 @@ module Aws::Redshift
     #   <p>The virtual private cloud (VPC) identifiers for which access is to be revoked.</p>
     #   @return [Array<String>]
     # @!attribute force
-    #   <p>Indicates whether to force the revoke action. 
+    #   <p>Indicates whether to force the revoke action.
     #              If true, the Redshift-managed VPC endpoints associated with the endpoint authorization are also deleted.</p>
     #   @return [Boolean]
     class RevokeEndpointAccessMessage < Struct.new(
@@ -11298,6 +11759,35 @@ module Aws::Redshift
       class Unknown < S3AccessGrantsScopeUnion; end
     end
 
+    # <p>Describes the status of system table publishing to S3 Tables for a cluster.</p>
+    # @!attribute s3_tables
+    #   <p>The system tables currently being published.</p>
+    #   @return [Array<String>]
+    # @!attribute s3_table_namespace
+    #   <p>The namespace in the S3 table bucket that holds the published tables.</p>
+    #   @return [String]
+    # @!attribute s3_table_granularity
+    #   <p>The scope of system table publishing in effect. Possible values are <code>cluster</code> and <code>account</code>.</p>
+    #   @return [String]
+    # @!attribute enabled_all
+    #   <p>
+    #               <code>true</code> if the cluster is enrolled in all current and future system tables rather than an explicit subset.</p>
+    #   @return [Boolean]
+    # @!attribute last_ingestion_times
+    #   <p>A map whose keys are the names of the published system tables and whose values are the time each table last received data. Use this to judge data freshness.</p>
+    #   @return [Hash<String, String>]
+    class S3TablePublishStatus < Struct.new(
+      nil,
+      :s3_tables,
+      :s3_table_namespace,
+      :s3_table_granularity,
+      :enabled_all,
+      :last_ingestion_times,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Amazon SNS has responded that there is a problem with the specified Amazon SNS
     #             topic.</p>
     # @!attribute message
@@ -11344,7 +11834,7 @@ module Aws::Redshift
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Describes a scheduled action. You can use a scheduled action to trigger some Amazon Redshift API operations on a schedule. 
+    # <p>Describes a scheduled action. You can use a scheduled action to trigger some Amazon Redshift API operations on a schedule.
     #             For information about which API operations can be scheduled, see  <a>ScheduledActionType</a>. </p>
     # @!attribute scheduled_action_name
     #   <p>The name of the scheduled action. </p>
@@ -11354,21 +11844,21 @@ module Aws::Redshift
     #            <p>"<code>{\"ResizeCluster\":{\"NodeType\":\"ra3.4xlarge\",\"ClusterIdentifier\":\"my-test-cluster\",\"NumberOfNodes\":3}}</code>". </p>
     #   @return [Types::ScheduledActionType]
     # @!attribute schedule
-    #   <p>The schedule for a one-time (at format) or recurring (cron format) scheduled action. 
+    #   <p>The schedule for a one-time (at format) or recurring (cron format) scheduled action.
     #               Schedule invocations must be separated by at least one hour.</p>
     #            <p>Format of at expressions is "<code>at(yyyy-mm-ddThh:mm:ss)</code>". For example, "<code>at(2016-03-04T17:27:00)</code>".</p>
-    #            <p>Format of cron expressions is "<code>cron(Minutes Hours Day-of-month Month Day-of-week Year)</code>". 
-    #               For example, "<code>cron(0 10 ? * MON *)</code>". For more information, see 
-    #               <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions">Cron Expressions</a> 
+    #            <p>Format of cron expressions is "<code>cron(Minutes Hours Day-of-month Month Day-of-week Year)</code>".
+    #               For example, "<code>cron(0 10 ? * MON *)</code>". For more information, see
+    #               <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions">Cron Expressions</a>
     #               in the <i>Amazon CloudWatch Events User Guide</i>.</p>
     #   @return [String]
     # @!attribute iam_role
-    #   <p>The IAM role to assume to run the scheduled action. 
+    #   <p>The IAM role to assume to run the scheduled action.
     #               This IAM role must have permission to run the Amazon Redshift API operation in the scheduled action.
     #               This IAM role must allow the Amazon Redshift scheduler (Principal scheduler.redshift.amazonaws.com) to assume permissions on your behalf.
-    #                  
-    #   For more information about the IAM role to use with the Amazon Redshift scheduler, see 
-    #   <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html">Using Identity-Based Policies for Amazon Redshift</a> 
+    #
+    #   For more information about the IAM role to use with the Amazon Redshift scheduler, see
+    #   <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html">Using Identity-Based Policies for Amazon Redshift</a>
     #   in the <i>Amazon Redshift Cluster Management Guide</i>.
     #   </p>
     #   @return [String]
@@ -11524,7 +12014,7 @@ module Aws::Redshift
     #   <p>The unique identifier for the serverless namespace.</p>
     #   @return [String]
     # @!attribute workgroup_identifier
-    #   <p>The unique identifier for the workgroup 
+    #   <p>The unique identifier for the workgroup
     #               associated with the serverless namespace.</p>
     #   @return [String]
     class ServerlessIdentifier < Struct.new(
@@ -11543,9 +12033,13 @@ module Aws::Redshift
     # @!attribute s3_access_grants
     #   <p>A list of scopes set up for S3 Access Grants integration.</p>
     #   @return [Array<Types::S3AccessGrantsScopeUnion>]
+    # @!attribute redshift
+    #   <p>A list of scopes set up for Amazon Redshift integration.</p>
+    #   @return [Array<Types::RedshiftScopeUnion>]
     class ServiceIntegrationsUnion < Struct.new(
       :lake_formation,
       :s3_access_grants,
+      :redshift,
       :unknown,
       keyword_init: true
     )
@@ -11553,6 +12047,7 @@ module Aws::Redshift
 
       class LakeFormation < ServiceIntegrationsUnion; end
       class S3AccessGrants < ServiceIntegrationsUnion; end
+      class Redshift < ServiceIntegrationsUnion; end
       class Unknown < ServiceIntegrationsUnion; end
     end
 
@@ -11788,8 +12283,8 @@ module Aws::Redshift
     #             snapshots with the specified encrypted symmetric key from Amazon Web Services KMS in the destination
     #             region.</p>
     #          <p>
-    # For more information about managing snapshot copy grants, go to 
-    # <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html">Amazon Redshift Database Encryption</a> 
+    # For more information about managing snapshot copy grants, go to
+    # <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html">Amazon Redshift Database Encryption</a>
     # in the <i>Amazon Redshift Cluster Management Guide</i>.
     # </p>
     # @!attribute snapshot_copy_grant_name

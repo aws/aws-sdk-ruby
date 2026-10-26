@@ -218,6 +218,7 @@ module Aws::Keyspaces
         ?auto_scaling_specification: Types::AutoScalingSpecification,
         ?replica_specifications: Array[Types::ReplicaSpecification],
         ?cdc_specification: Types::CdcSpecification,
+        ?warm_throughput_specification: Types::WarmThroughputSpecification,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -235,6 +236,7 @@ module Aws::Keyspaces
       attr_accessor auto_scaling_specification: Types::AutoScalingSpecification?
       attr_accessor replica_specifications: Array[Types::ReplicaSpecification]?
       attr_accessor cdc_specification: Types::CdcSpecification?
+      attr_accessor warm_throughput_specification: Types::WarmThroughputSpecification?
     end
 
     class CreateTableOutput
@@ -465,6 +467,7 @@ module Aws::Keyspaces
         ?replica_specifications: Array[Types::ReplicaSpecificationSummary],
         ?latest_stream_arn: String,
         ?cdc_specification: Types::CdcSpecificationSummary,
+        ?warm_throughput_specification: Types::WarmThroughputSpecificationSummary,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -484,6 +487,7 @@ module Aws::Keyspaces
       attr_accessor replica_specifications: Array[Types::ReplicaSpecificationSummary]?
       attr_accessor latest_stream_arn: String?
       attr_accessor cdc_specification: Types::CdcSpecificationSummary?
+      attr_accessor warm_throughput_specification: Types::WarmThroughputSpecificationSummary?
     end
 
     class GetTypeRequest
@@ -734,12 +738,14 @@ module Aws::Keyspaces
         ?region: String,
         ?status: String,
         ?capacity_specification: Types::CapacitySpecificationSummary,
+        ?warm_throughput_specification: Types::WarmThroughputSpecificationSummary,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor region: String?
       attr_accessor status: String?
       attr_accessor capacity_specification: Types::CapacitySpecificationSummary?
+      attr_accessor warm_throughput_specification: Types::WarmThroughputSpecificationSummary?
     end
 
     class ReplicationGroupStatus
@@ -1006,6 +1012,7 @@ module Aws::Keyspaces
         ?auto_scaling_specification: Types::AutoScalingSpecification,
         ?replica_specifications: Array[Types::ReplicaSpecification],
         ?cdc_specification: Types::CdcSpecification,
+        ?warm_throughput_specification: Types::WarmThroughputSpecification,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1021,6 +1028,7 @@ module Aws::Keyspaces
       attr_accessor auto_scaling_specification: Types::AutoScalingSpecification?
       attr_accessor replica_specifications: Array[Types::ReplicaSpecification]?
       attr_accessor cdc_specification: Types::CdcSpecification?
+      attr_accessor warm_throughput_specification: Types::WarmThroughputSpecification?
     end
 
     class UpdateTableOutput
@@ -1043,6 +1051,34 @@ module Aws::Keyspaces
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    class WarmThroughputSpecification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?read_units_per_second: Integer,
+        ?write_units_per_second: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor read_units_per_second: Integer?
+      attr_accessor write_units_per_second: Integer?
+    end
+
+    class WarmThroughputSpecificationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?read_units_per_second: Integer,
+        ?write_units_per_second: Integer,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor read_units_per_second: Integer?
+      attr_accessor write_units_per_second: Integer?
+      attr_accessor status: String?
     end
   end
 end

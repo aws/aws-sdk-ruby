@@ -16,6 +16,10 @@ module Aws::MPA
       AUTO_COMPLETION_UPON_APPROVAL: String
     end
 
+    module AdditionalSecurityRequirement
+      APPROVER_VERIFICATION_REQUIRED: String
+    end
+
     class ApprovalStrategy
       include Smithy::Schema::Union
 
@@ -81,6 +85,12 @@ module Aws::MPA
       DELETE_PENDING_APPROVAL: String
       DELETE_FAILED_APPROVAL: String
       DELETE_FAILED_VALIDATION: String
+    end
+
+    module ApproverLastActivity
+      VOTED: String
+      BASELINED: String
+      RESPONDED_TO_INVITATION: String
     end
 
     class CancelSessionRequest
@@ -300,6 +310,10 @@ module Aws::MPA
         ?primary_identity_id: String,
         ?primary_identity_source_arn: String,
         ?primary_identity_status: String,
+        ?last_activity: String,
+        ?last_activity_time: Time,
+        ?pending_baseline_session_arn: String,
+        ?mfa_methods: Array[Types::MfaMethod],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -308,6 +322,10 @@ module Aws::MPA
       attr_accessor primary_identity_id: String?
       attr_accessor primary_identity_source_arn: String?
       attr_accessor primary_identity_status: String?
+      attr_accessor last_activity: String?
+      attr_accessor last_activity_time: Time?
+      attr_accessor pending_baseline_session_arn: String?
+      attr_accessor mfa_methods: Array[Types::MfaMethod]?
     end
 
     class GetIdentitySourceRequest
@@ -438,6 +456,7 @@ module Aws::MPA
         ?requester_comment: String,
         ?action_completion_strategy: String,
         ?approver_responses: Array[Types::GetSessionResponseApproverResponse],
+        ?additional_security_requirements: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -464,6 +483,7 @@ module Aws::MPA
       attr_accessor requester_comment: String?
       attr_accessor action_completion_strategy: String?
       attr_accessor approver_responses: Array[Types::GetSessionResponseApproverResponse]?
+      attr_accessor additional_security_requirements: Array[String]?
     end
 
     class GetSessionResponseApproverResponse
@@ -868,6 +888,7 @@ module Aws::MPA
         ?status_code: String,
         ?status_message: String,
         ?action_completion_strategy: String,
+        ?additional_security_requirements: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -888,6 +909,7 @@ module Aws::MPA
       attr_accessor status_code: String?
       attr_accessor status_message: String?
       attr_accessor action_completion_strategy: String?
+      attr_accessor additional_security_requirements: Array[String]?
     end
 
     class ListTagsForResourceRequest
@@ -910,6 +932,28 @@ module Aws::MPA
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor tags: Hash[String, String]?
+    end
+
+    class MfaMethod
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?sync_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor sync_status: String?
+    end
+
+    module MfaSyncStatus
+      IN_SYNC: String
+      OUT_OF_SYNC: String
+    end
+
+    module MfaType
+      EMAIL_OTP: String
     end
 
     class MofNApprovalStrategy
@@ -1102,6 +1146,7 @@ module Aws::MPA
       REJECTED: String
       EXPIRED: String
       CONFIGURATION_CHANGED: String
+      ALL_APPROVERS_IN_SESSION: String
     end
 
     class StartActiveApprovalTeamDeletionRequest
@@ -1128,6 +1173,30 @@ module Aws::MPA
 
       attr_accessor deletion_completion_time: Time?
       attr_accessor deletion_start_time: Time?
+    end
+
+    class StartApprovalTeamBaselineRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?approver_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor approver_ids: Array[String]?
+    end
+
+    class StartApprovalTeamBaselineResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?baseline_session_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor baseline_session_arn: String?
     end
 
     class TagResourceRequest
@@ -1198,6 +1267,10 @@ module Aws::MPA
 
     end
 
+    module UpdateAction
+      SYNCHRONIZE_MFA_DEVICES: String
+    end
+
     class UpdateApprovalTeamRequest
       include Smithy::Schema::Structure
 
@@ -1206,6 +1279,7 @@ module Aws::MPA
         ?approvers: Array[Types::ApprovalTeamRequestApprover],
         ?description: String,
         ?arn: String,
+        ?update_actions: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1213,6 +1287,7 @@ module Aws::MPA
       attr_accessor approvers: Array[Types::ApprovalTeamRequestApprover]?
       attr_accessor description: String?
       attr_accessor arn: String?
+      attr_accessor update_actions: Array[String]?
     end
 
     class UpdateApprovalTeamResponse

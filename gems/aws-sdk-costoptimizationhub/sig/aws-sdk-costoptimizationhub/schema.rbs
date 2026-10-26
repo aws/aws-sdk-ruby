@@ -18,8 +18,10 @@ module Aws::CostOptimizationHub
     ComputeSavingsPlansConfiguration: StructureShape
     Datetime: TimestampShape
     DbInstanceConfiguration: StructureShape
+    DocumentDbCluster: StructureShape
     DynamoDbReservedCapacity: StructureShape
     DynamoDbReservedCapacityConfiguration: StructureShape
+    DynamoDbTable: StructureShape
     EbsVolume: StructureShape
     EbsVolumeConfiguration: StructureShape
     Ec2AutoScalingGroup: StructureShape
@@ -33,6 +35,9 @@ module Aws::CostOptimizationHub
     Ec2ReservedInstancesConfiguration: StructureShape
     EcsService: StructureShape
     EcsServiceConfiguration: StructureShape
+    EfficiencyMetricsByGroup: StructureShape
+    EfficiencyMetricsByGroupList: ListShape
+    ElastiCacheCluster: StructureShape
     ElastiCacheReservedInstances: StructureShape
     ElastiCacheReservedInstancesConfiguration: StructureShape
     EnrollmentStatus: EnumShape
@@ -42,12 +47,15 @@ module Aws::CostOptimizationHub
     GetPreferencesResponse: StructureShape
     GetRecommendationRequest: StructureShape
     GetRecommendationResponse: StructureShape
+    GranularityType: EnumShape
     ImplementationEffort: EnumShape
     ImplementationEffortList: ListShape
     InstanceConfiguration: StructureShape
     InternalServerException: StructureShape
     LambdaFunction: StructureShape
     LambdaFunctionConfiguration: StructureShape
+    ListEfficiencyMetricsRequest: StructureShape
+    ListEfficiencyMetricsResponse: StructureShape
     ListEnrollmentStatusesRequest: StructureShape
     ListEnrollmentStatusesResponse: StructureShape
     ListRecommendationSummariesRequest: StructureShape
@@ -56,10 +64,15 @@ module Aws::CostOptimizationHub
     ListRecommendationsResponse: StructureShape
     MaxResults: IntegerShape
     MemberAccountDiscountVisibility: EnumShape
+    MemoryDbCluster: StructureShape
     MemoryDbReservedInstances: StructureShape
     MemoryDbReservedInstancesConfiguration: StructureShape
+    MetricsByTime: StructureShape
+    MetricsByTimeList: ListShape
     MixedInstanceConfiguration: StructureShape
     MixedInstanceConfigurationList: ListShape
+    NatGateway: StructureShape
+    NatGatewayConfiguration: StructureShape
     OpenSearchReservedInstances: StructureShape
     OpenSearchReservedInstancesConfiguration: StructureShape
     Order: EnumShape
@@ -90,6 +103,7 @@ module Aws::CostOptimizationHub
     ResourcePricing: StructureShape
     ResourceType: EnumShape
     ResourceTypeList: ListShape
+    SageMakerEndpoint: StructureShape
     SageMakerSavingsPlans: StructureShape
     SageMakerSavingsPlansConfiguration: StructureShape
     SavingsEstimationMode: EnumShape
@@ -104,6 +118,7 @@ module Aws::CostOptimizationHub
     TagList: ListShape
     Term: EnumShape
     ThrottlingException: StructureShape
+    TimePeriod: StructureShape
     UpdateEnrollmentStatusRequest: StructureShape
     UpdateEnrollmentStatusResponse: StructureShape
     UpdatePreferencesRequest: StructureShape
@@ -114,6 +129,7 @@ module Aws::CostOptimizationHub
     ValidationExceptionDetail: StructureShape
     ValidationExceptionDetails: ListShape
     ValidationExceptionReason: EnumShape
+    WorkSpaces: StructureShape
 
     CostOptimizationHubService: ServiceShape
   end

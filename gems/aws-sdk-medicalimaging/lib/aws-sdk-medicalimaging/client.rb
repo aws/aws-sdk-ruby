@@ -144,18 +144,18 @@ module Aws::MedicalImaging
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -250,7 +250,7 @@ module Aws::MedicalImaging
     #       image_set_id: "ImageSetId", # required
     #       latest_version_id: "ImageSetExternalVersionId", # required
     #       image_set_state: "ACTIVE" # One of: ["ACTIVE", "LOCKED", "DELETED"],
-    #       image_set_workflow_status: "CREATED" # One of: ["CREATED", "COPIED", "COPYING", "COPYING_WITH_READ_ONLY_ACCESS", "COPY_FAILED", "UPDATING", "UPDATED", "UPDATE_FAILED", "DELETING", "DELETED", "IMPORTING", "IMPORTED", "IMPORT_FAILED"],
+    #       image_set_workflow_status: "CREATED" # One of: ["CREATED", "COPIED", "COPYING", "COPYING_WITH_READ_ONLY_ACCESS", "COPY_FAILED", "UPDATING", "UPDATING_FOR_STUDY_CONSISTENCY", "UPDATED", "UPDATE_FAILED", "DELETING", "DELETED", "IMPORTING", "IMPORTED", "IMPORT_FAILED"],
     #       created_at: Time.now,
     #       updated_at: Time.now,
     #       image_set_arn: "Arn"
@@ -259,7 +259,7 @@ module Aws::MedicalImaging
     #       image_set_id: "ImageSetId", # required
     #       latest_version_id: "ImageSetExternalVersionId", # required
     #       image_set_state: "ACTIVE" # One of: ["ACTIVE", "LOCKED", "DELETED"],
-    #       image_set_workflow_status: "CREATED" # One of: ["CREATED", "COPIED", "COPYING", "COPYING_WITH_READ_ONLY_ACCESS", "COPY_FAILED", "UPDATING", "UPDATED", "UPDATE_FAILED", "DELETING", "DELETED", "IMPORTING", "IMPORTED", "IMPORT_FAILED"],
+    #       image_set_workflow_status: "CREATED" # One of: ["CREATED", "COPIED", "COPYING", "COPYING_WITH_READ_ONLY_ACCESS", "COPY_FAILED", "UPDATING", "UPDATING_FOR_STUDY_CONSISTENCY", "UPDATED", "UPDATE_FAILED", "DELETING", "DELETED", "IMPORTING", "IMPORTED", "IMPORT_FAILED"],
     #       created_at: Time.now,
     #       updated_at: Time.now,
     #       image_set_arn: "Arn"
@@ -283,6 +283,8 @@ module Aws::MedicalImaging
     #   <p>The Amazon Resource Name (ARN) assigned to the Key Management Service (KMS) key for accessing encrypted data.</p>
     # @option params [String] :lambda_authorizer_arn
     #   <p>The ARN of the authorizer's Lambda function.</p>
+    # @option params [String] :lossless_storage_format
+    #   <p>The lossless storage format for the datastore.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     datastore_name: "DatastoreName",
@@ -291,7 +293,8 @@ module Aws::MedicalImaging
     #       "TagKey" => "TagValue"
     #     },
     #     kms_key_arn: "KmsKeyArn",
-    #     lambda_authorizer_arn: "LambdaArn"
+    #     lambda_authorizer_arn: "LambdaArn",
+    #     lossless_storage_format: "HTJ2K" # One of: ["HTJ2K", "JPEG_2000_LOSSLESS"]
     #   }
     #   options = {}
     #   response = client.create_datastore(params, options)
@@ -348,7 +351,7 @@ module Aws::MedicalImaging
     #     datastore_id: "DatastoreId", # required
     #     image_set_id: "ImageSetId", # required
     #     image_set_state: "ACTIVE" # One of: ["ACTIVE", "LOCKED", "DELETED"], # required
-    #     image_set_workflow_status: "CREATED" # One of: ["CREATED", "COPIED", "COPYING", "COPYING_WITH_READ_ONLY_ACCESS", "COPY_FAILED", "UPDATING", "UPDATED", "UPDATE_FAILED", "DELETING", "DELETED", "IMPORTING", "IMPORTED", "IMPORT_FAILED"], # required
+    #     image_set_workflow_status: "CREATED" # One of: ["CREATED", "COPIED", "COPYING", "COPYING_WITH_READ_ONLY_ACCESS", "COPY_FAILED", "UPDATING", "UPDATING_FOR_STUDY_CONSISTENCY", "UPDATED", "UPDATE_FAILED", "DELETING", "DELETED", "IMPORTING", "IMPORTED", "IMPORT_FAILED"], # required
     #   }
     # @return [Types::DeleteImageSetResponse]
     def delete_image_set(params = {}, options = {})
@@ -382,7 +385,19 @@ module Aws::MedicalImaging
     #       submitted_at: Time.now,
     #       input_s3_uri: "S3Uri", # required
     #       output_s3_uri: "S3Uri", # required
-    #       message: "Message"
+    #       message: "Message",
+    #       import_configuration: {
+    #         # One of:
+    #         dicom_json_metadata_import_configuration: {
+    #           dicom_metadata_mappings: [ # required
+    #             {
+    #               study_instance_uid: "DICOMStudyInstanceUID", # required
+    #               series_instance_uid: "DICOMSeriesInstanceUID",
+    #               metadata_file_path: "MetadataFilePath", # required
+    #             }
+    #           ]
+    #         }
+    #       }
     #     }
     #   }
     # @return [Types::GetDICOMImportJobResponse]
@@ -410,6 +425,7 @@ module Aws::MedicalImaging
     #       datastore_status: "CREATING" # One of: ["CREATING", "CREATE_FAILED", "ACTIVE", "DELETING", "DELETED"], # required
     #       kms_key_arn: "KmsKeyArn",
     #       lambda_authorizer_arn: "LambdaArn",
+    #       lossless_storage_format: "HTJ2K" # One of: ["HTJ2K", "JPEG_2000_LOSSLESS"],
     #       datastore_arn: "Arn",
     #       created_at: Time.now,
     #       updated_at: Time.now
@@ -474,7 +490,7 @@ module Aws::MedicalImaging
     #     image_set_id: "ImageSetId", # required
     #     version_id: "ImageSetExternalVersionId", # required
     #     image_set_state: "ACTIVE" # One of: ["ACTIVE", "LOCKED", "DELETED"], # required
-    #     image_set_workflow_status: "CREATED" # One of: ["CREATED", "COPIED", "COPYING", "COPYING_WITH_READ_ONLY_ACCESS", "COPY_FAILED", "UPDATING", "UPDATED", "UPDATE_FAILED", "DELETING", "DELETED", "IMPORTING", "IMPORTED", "IMPORT_FAILED"],
+    #     image_set_workflow_status: "CREATED" # One of: ["CREATED", "COPIED", "COPYING", "COPYING_WITH_READ_ONLY_ACCESS", "COPY_FAILED", "UPDATING", "UPDATING_FOR_STUDY_CONSISTENCY", "UPDATED", "UPDATE_FAILED", "DELETING", "DELETED", "IMPORTING", "IMPORTED", "IMPORT_FAILED"],
     #     created_at: Time.now,
     #     updated_at: Time.now,
     #     deleted_at: Time.now,
@@ -483,7 +499,9 @@ module Aws::MedicalImaging
     #     overrides: {
     #       forced: false
     #     },
-    #     is_primary: false
+    #     is_primary: false,
+    #     last_accessed_at: Time.now,
+    #     storage_tier: "FREQUENT_ACCESS" # One of: ["FREQUENT_ACCESS", "ARCHIVE_INSTANT_ACCESS"]
     #   }
     # @return [Types::GetImageSetResponse]
     def get_image_set(params = {}, options = {})
@@ -626,7 +644,7 @@ module Aws::MedicalImaging
     #         image_set_id: "ImageSetId", # required
     #         version_id: "ImageSetExternalVersionId", # required
     #         image_set_state: "ACTIVE" # One of: ["ACTIVE", "LOCKED", "DELETED"], # required
-    #         image_set_workflow_status: "CREATED" # One of: ["CREATED", "COPIED", "COPYING", "COPYING_WITH_READ_ONLY_ACCESS", "COPY_FAILED", "UPDATING", "UPDATED", "UPDATE_FAILED", "DELETING", "DELETED", "IMPORTING", "IMPORTED", "IMPORT_FAILED"],
+    #         image_set_workflow_status: "CREATED" # One of: ["CREATED", "COPIED", "COPYING", "COPYING_WITH_READ_ONLY_ACCESS", "COPY_FAILED", "UPDATING", "UPDATING_FOR_STUDY_CONSISTENCY", "UPDATED", "UPDATE_FAILED", "DELETING", "DELETED", "IMPORTING", "IMPORTED", "IMPORT_FAILED"],
     #         created_at: Time.now,
     #         updated_at: Time.now,
     #         deleted_at: Time.now,
@@ -721,6 +739,8 @@ module Aws::MedicalImaging
     #         version: 1,
     #         created_at: Time.now,
     #         updated_at: Time.now,
+    #         last_accessed_at: Time.now,
+    #         storage_tier: "FREQUENT_ACCESS" # One of: ["FREQUENT_ACCESS", "ARCHIVE_INSTANT_ACCESS"],
     #         dicom_tags: {
     #           dicom_patient_id: "DICOMPatientId",
     #           dicom_patient_name: "DICOMPatientName",
@@ -754,7 +774,7 @@ module Aws::MedicalImaging
       request.send_request(options)
     end
 
-    # <p>Start importing bulk data into an <code>ACTIVE</code> data store. The import job imports DICOM P10 files found in the S3 prefix specified by the <code>inputS3Uri</code> parameter. The import job stores processing results in the file specified by the <code>outputS3Uri</code> parameter.</p>
+    # <p>Start importing bulk data into an <code>ACTIVE</code> data store. The import job imports DICOM P10 files or enhances existing DICOM files with JSON metadata. The <code>importConfiguration</code> parameter specifies the import type. The data is found in the S3 prefix specified by the <code>inputS3Uri</code> parameter. The import job stores processing results in the file specified by the <code>outputS3Uri</code> parameter.</p>
     # @param [Hash, Types::StartDICOMImportJobRequest] params
     # @option params [String] :job_name
     #   <p>The import job name.</p>
@@ -770,6 +790,8 @@ module Aws::MedicalImaging
     #   <p>The output prefix of the S3 bucket to upload the results of the DICOM import job.</p>
     # @option params [String] :input_owner_account_id
     #   <p>The account ID of the source S3 bucket owner.</p>
+    # @option params [Types::ImportConfiguration] :import_configuration
+    #   <p>The import configuration for the import job.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     job_name: "JobName",
@@ -778,7 +800,19 @@ module Aws::MedicalImaging
     #     datastore_id: "DatastoreId", # required
     #     input_s3_uri: "S3Uri", # required
     #     output_s3_uri: "S3Uri", # required
-    #     input_owner_account_id: "AwsAccountId"
+    #     input_owner_account_id: "AwsAccountId",
+    #     import_configuration: {
+    #       # One of:
+    #       dicom_json_metadata_import_configuration: {
+    #         dicom_metadata_mappings: [ # required
+    #           {
+    #             study_instance_uid: "DICOMStudyInstanceUID", # required
+    #             series_instance_uid: "DICOMSeriesInstanceUID",
+    #             metadata_file_path: "MetadataFilePath", # required
+    #           }
+    #         ]
+    #       }
+    #     }
     #   }
     #   options = {}
     #   response = client.start_dicom_import_job(params, options)
@@ -852,6 +886,8 @@ module Aws::MedicalImaging
     #   <p>The latest image set version identifier.</p>
     # @option params [Boolean] :force
     #   <p>Setting this flag will force the <code>UpdateImageSetMetadata</code> operation for the following attributes:</p> <ul> <li> <p> <code>Tag.StudyInstanceUID</code>, <code>Tag.SeriesInstanceUID</code>, <code>Tag.SOPInstanceUID</code>, and <code>Tag.StudyID</code> </p> </li> <li> <p>Adding, removing, or updating private tags for an individual SOP Instance</p> </li> </ul>
+    # @option params [Boolean] :include_study_image_sets
+    #   <p>Flag to apply the metadata updates to all image sets in the same Study as the requested image set ID.</p>
     # @option params [Types::MetadataUpdates] :update_image_set_metadata_updates
     #   <p>Update image set metadata updates.</p>
     # @example Request syntax with placeholder values
@@ -860,6 +896,7 @@ module Aws::MedicalImaging
     #     image_set_id: "ImageSetId", # required
     #     latest_version_id: "ImageSetExternalVersionId", # required
     #     force: false,
+    #     include_study_image_sets: false,
     #     update_image_set_metadata_updates: { # required
     #       # One of:
     #       dicom_updates: {
@@ -878,7 +915,7 @@ module Aws::MedicalImaging
     #     image_set_id: "ImageSetId", # required
     #     latest_version_id: "ImageSetExternalVersionId", # required
     #     image_set_state: "ACTIVE" # One of: ["ACTIVE", "LOCKED", "DELETED"], # required
-    #     image_set_workflow_status: "CREATED" # One of: ["CREATED", "COPIED", "COPYING", "COPYING_WITH_READ_ONLY_ACCESS", "COPY_FAILED", "UPDATING", "UPDATED", "UPDATE_FAILED", "DELETING", "DELETED", "IMPORTING", "IMPORTED", "IMPORT_FAILED"],
+    #     image_set_workflow_status: "CREATED" # One of: ["CREATED", "COPIED", "COPYING", "COPYING_WITH_READ_ONLY_ACCESS", "COPY_FAILED", "UPDATING", "UPDATING_FOR_STUDY_CONSISTENCY", "UPDATED", "UPDATE_FAILED", "DELETING", "DELETED", "IMPORTING", "IMPORTED", "IMPORT_FAILED"],
     #     created_at: Time.now,
     #     updated_at: Time.now,
     #     message: "Message"

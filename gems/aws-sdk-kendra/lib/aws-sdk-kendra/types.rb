@@ -96,8 +96,8 @@ module Aws::Kendra
     # <p>Provides the configuration information to connect to Alfresco as your data
     #             source.</p>
     #          <note>
-    #             <p>Support for <code>AlfrescoConfiguration</code> ended May 2023. 
-    #                 We recommend migrating to or using the Alfresco data source template 
+    #             <p>Support for <code>AlfrescoConfiguration</code> ended May 2023.
+    #                 We recommend migrating to or using the Alfresco data source template
     #                 schema / <a href="https://docs.aws.amazon.com/kendra/latest/APIReference/API_TemplateConfiguration.html">TemplateConfiguration</a> API.</p>
     #          </note>
     # @!attribute site_url
@@ -225,7 +225,7 @@ module Aws::Kendra
     end
 
     # @!attribute failed_entity_list
-    #   <p>Lists the users or groups in your IAM Identity Center identity source that 
+    #   <p>Lists the users or groups in your IAM Identity Center identity source that
     #               failed to properly configure with your Amazon Kendra experience.</p>
     #   @return [Array<Types::FailedEntity>]
     class AssociateEntitiesToExperienceResponse < Struct.new(
@@ -243,10 +243,10 @@ module Aws::Kendra
     #   <p>The identifier of the index for your Amazon Kendra experience.</p>
     #   @return [String]
     # @!attribute personas
-    #   <p>The personas that define the specific permissions of users or groups in 
-    #               your IAM Identity Center identity source. The available personas or access 
-    #               roles are <code>Owner</code> and <code>Viewer</code>. For more information 
-    #               on these personas, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html#access-search-experience">Providing 
+    #   <p>The personas that define the specific permissions of users or groups in
+    #               your IAM Identity Center identity source. The available personas or access
+    #               roles are <code>Owner</code> and <code>Viewer</code>. For more information
+    #               on these personas, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html#access-search-experience">Providing
     #                   access to your search page</a>.</p>
     #   @return [Array<Types::EntityPersonaConfiguration>]
     class AssociatePersonasToEntitiesRequest < Struct.new(
@@ -260,7 +260,7 @@ module Aws::Kendra
     end
 
     # @!attribute failed_entity_list
-    #   <p>Lists the users or groups in your IAM Identity Center identity source that 
+    #   <p>Lists the users or groups in your IAM Identity Center identity source that
     #               failed to properly configure with your Amazon Kendra experience.</p>
     #   @return [Array<Types::FailedEntity>]
     class AssociatePersonasToEntitiesResponse < Struct.new(
@@ -373,16 +373,16 @@ module Aws::Kendra
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Gets information on the configuration of document fields/attributes that you want to base 
+    # <p>Gets information on the configuration of document fields/attributes that you want to base
     #             query suggestions on. To change your configuration, use <a href="https://docs.aws.amazon.com/kendra/latest/dg/API_AttributeSuggestionsUpdateConfig.html">AttributeSuggestionsUpdateConfig</a> and then call <a href="https://docs.aws.amazon.com/kendra/latest/dg/API_UpdateQuerySuggestionsConfig.html">UpdateQuerySuggestionsConfig</a>.</p>
     # @!attribute suggestable_config_list
     #   <p>The list of fields/attributes that you want to set as suggestible for query suggestions.</p>
     #   @return [Array<Types::SuggestableConfig>]
     # @!attribute attribute_suggestions_mode
-    #   <p>The mode is set to either <code>ACTIVE</code> or <code>INACTIVE</code>. If the <code>Mode</code> 
-    #               for query history is set to <code>ENABLED</code> when calling <a href="https://docs.aws.amazon.com/kendra/latest/dg/API_UpdateQuerySuggestionsConfig.html">UpdateQuerySuggestionsConfig</a> 
-    #               and <code>AttributeSuggestionsMode</code> to use fields/attributes is set to <code>ACTIVE</code>, 
-    #               and you haven't set your <code>SuggestionTypes</code> preference to <code>DOCUMENT_ATTRIBUTES</code>, 
+    #   <p>The mode is set to either <code>ACTIVE</code> or <code>INACTIVE</code>. If the <code>Mode</code>
+    #               for query history is set to <code>ENABLED</code> when calling <a href="https://docs.aws.amazon.com/kendra/latest/dg/API_UpdateQuerySuggestionsConfig.html">UpdateQuerySuggestionsConfig</a>
+    #               and <code>AttributeSuggestionsMode</code> to use fields/attributes is set to <code>ACTIVE</code>,
+    #               and you haven't set your <code>SuggestionTypes</code> preference to <code>DOCUMENT_ATTRIBUTES</code>,
     #               then Amazon Kendra uses the query history.</p>
     #   @return [String]
     class AttributeSuggestionsDescribeConfig < Struct.new(
@@ -394,23 +394,23 @@ module Aws::Kendra
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Provides the configuration information for the document fields/attributes that you want 
+    # <p>Provides the configuration information for the document fields/attributes that you want
     #             to base query suggestions on.</p>
     # @!attribute suggestion_attributes
-    #   <p>The list of document field/attribute keys or field names to use for query suggestions. 
-    #               If the content within any of the fields match what your user starts typing as their query, 
+    #   <p>The list of document field/attribute keys or field names to use for query suggestions.
+    #               If the content within any of the fields match what your user starts typing as their query,
     #               then the field content is returned as a query suggestion.</p>
     #   @return [Array<String>]
     # @!attribute additional_response_attributes
-    #   <p>The list of additional document field/attribute keys or field names to include in the 
-    #               response. You can use additional fields to provide extra information in the response. 
+    #   <p>The list of additional document field/attribute keys or field names to include in the
+    #               response. You can use additional fields to provide extra information in the response.
     #               Additional fields are not used to based suggestions on.</p>
     #   @return [Array<String>]
     # @!attribute attribute_filter
     #   <p>Filters the search results based on document fields/attributes.</p>
     #   @return [Types::AttributeFilter]
     # @!attribute user_context
-    #   <p>Applies user context filtering so that only users who are given access to certain 
+    #   <p>Applies user context filtering so that only users who are given access to certain
     #               documents see these document in their search results.</p>
     #   @return [Types::UserContext]
     class AttributeSuggestionsGetConfig < Struct.new(
@@ -424,25 +424,25 @@ module Aws::Kendra
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Updates the configuration information for the document fields/attributes that you want 
+    # <p>Updates the configuration information for the document fields/attributes that you want
     #             to base query suggestions on.</p>
-    #          <p>To deactivate using documents fields for query suggestions, set the mode to 
-    #             <code>INACTIVE</code>. You must also set <code>SuggestionTypes</code> as either 
-    #             <code>QUERY</code> or <code>DOCUMENT_ATTRIBUTES</code> and then call <a href="https://docs.aws.amazon.com/kendra/latest/dg/API_GetQuerySuggestions.html">GetQuerySuggestions</a>. If you set to <code>QUERY</code>, then 
-    #             Amazon Kendra uses the query history to base suggestions on. If you set to 
-    #             <code>DOCUMENT_ATTRIBUTES</code>, then Amazon Kendra uses the contents of document 
+    #          <p>To deactivate using documents fields for query suggestions, set the mode to
+    #             <code>INACTIVE</code>. You must also set <code>SuggestionTypes</code> as either
+    #             <code>QUERY</code> or <code>DOCUMENT_ATTRIBUTES</code> and then call <a href="https://docs.aws.amazon.com/kendra/latest/dg/API_GetQuerySuggestions.html">GetQuerySuggestions</a>. If you set to <code>QUERY</code>, then
+    #             Amazon Kendra uses the query history to base suggestions on. If you set to
+    #             <code>DOCUMENT_ATTRIBUTES</code>, then Amazon Kendra uses the contents of document
     #             fields to base suggestions on.</p>
     # @!attribute suggestable_config_list
-    #   <p>The list of fields/attributes that you want to set as suggestible for query 
+    #   <p>The list of fields/attributes that you want to set as suggestible for query
     #               suggestions.</p>
     #   @return [Array<Types::SuggestableConfig>]
     # @!attribute attribute_suggestions_mode
-    #   <p>You can set the mode to <code>ACTIVE</code> or <code>INACTIVE</code>. You must also set 
-    #               <code>SuggestionTypes</code> as either <code>QUERY</code> or <code>DOCUMENT_ATTRIBUTES</code> 
-    #               and then call <a href="https://docs.aws.amazon.com/kendra/latest/dg/API_GetQuerySuggestions.html">GetQuerySuggestions</a>. If <code>Mode</code> to use query history is set to 
-    #               <code>ENABLED</code> when calling <a href="https://docs.aws.amazon.com/kendra/latest/dg/API_UpdateQuerySuggestionsConfig.html">UpdateQuerySuggestionsConfig</a> and <code>AttributeSuggestionsMode</code> to use 
-    #               fields/attributes is set to <code>ACTIVE</code>, and you haven't set your 
-    #               <code>SuggestionTypes</code> preference to <code>DOCUMENT_ATTRIBUTES</code>, then 
+    #   <p>You can set the mode to <code>ACTIVE</code> or <code>INACTIVE</code>. You must also set
+    #               <code>SuggestionTypes</code> as either <code>QUERY</code> or <code>DOCUMENT_ATTRIBUTES</code>
+    #               and then call <a href="https://docs.aws.amazon.com/kendra/latest/dg/API_GetQuerySuggestions.html">GetQuerySuggestions</a>. If <code>Mode</code> to use query history is set to
+    #               <code>ENABLED</code> when calling <a href="https://docs.aws.amazon.com/kendra/latest/dg/API_UpdateQuerySuggestionsConfig.html">UpdateQuerySuggestionsConfig</a> and <code>AttributeSuggestionsMode</code> to use
+    #               fields/attributes is set to <code>ACTIVE</code>, and you haven't set your
+    #               <code>SuggestionTypes</code> preference to <code>DOCUMENT_ATTRIBUTES</code>, then
     #               Amazon Kendra uses the query history.</p>
     #   @return [String]
     class AttributeSuggestionsUpdateConfig < Struct.new(
@@ -484,7 +484,7 @@ module Aws::Kendra
     #               for HTTPS.</p>
     #   @return [Integer]
     # @!attribute credentials
-    #   <p>The Amazon Resource Name (ARN) of an Secrets Manager secret. You create a 
+    #   <p>The Amazon Resource Name (ARN) of an Secrets Manager secret. You create a
     #               secret to store your credentials in <a href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html">Secrets Manager</a>
     #            </p>
     #            <p>You use a secret if basic authentication credentials are required to connect to a
@@ -556,18 +556,18 @@ module Aws::Kendra
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Provides information about a set of featured results that couldn't be 
+    # <p>Provides information about a set of featured results that couldn't be
     #             removed from an index by the <a href="https://docs.aws.amazon.com/kendra/latest/dg/API_BatchDeleteFeaturedResultsSet.html">BatchDeleteFeaturedResultsSet</a> API.</p>
     # @!attribute id
-    #   <p>The identifier of the set of featured results that couldn't be removed 
+    #   <p>The identifier of the set of featured results that couldn't be removed
     #               from the index.</p>
     #   @return [String]
     # @!attribute error_code
-    #   <p>The error code for why the set of featured results couldn't be removed 
+    #   <p>The error code for why the set of featured results couldn't be removed
     #               from the index.</p>
     #   @return [String]
     # @!attribute error_message
-    #   <p>An explanation for why the set of featured results couldn't be removed 
+    #   <p>An explanation for why the set of featured results couldn't be removed
     #               from the index.</p>
     #   @return [String]
     class BatchDeleteFeaturedResultsSetError < Struct.new(
@@ -596,7 +596,7 @@ module Aws::Kendra
     end
 
     # @!attribute errors
-    #   <p>The list of errors for the featured results set IDs, explaining why they 
+    #   <p>The list of errors for the featured results set IDs, explaining why they
     #               couldn't be removed from the index.</p>
     #   @return [Array<Types::BatchDeleteFeaturedResultsSetError>]
     class BatchDeleteFeaturedResultsSetResponse < Struct.new(
@@ -748,16 +748,16 @@ module Aws::Kendra
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Provides the configuration information to connect to Box as 
+    # <p>Provides the configuration information to connect to Box as
     #             your data source.</p>
     # @!attribute enterprise_id
-    #   <p>The identifier of the Box Enterprise platform. You can find the enterprise 
-    #               ID in the Box Developer Console settings or when you create an app in Box and 
+    #   <p>The identifier of the Box Enterprise platform. You can find the enterprise
+    #               ID in the Box Developer Console settings or when you create an app in Box and
     #               download your authentication credentials. For example, <i>801234567</i>.</p>
     #   @return [String]
     # @!attribute secret_arn
-    #   <p>The Amazon Resource Name (ARN) of an Secrets Manager secret that contains 
-    #               the key-value pairs required to connect to your Box platform. The secret must 
+    #   <p>The Amazon Resource Name (ARN) of an Secrets Manager secret that contains
+    #               the key-value pairs required to connect to your Box platform. The secret must
     #               contain a JSON structure with the following keys:</p>
     #            <ul>
     #               <li>
@@ -779,7 +779,7 @@ module Aws::Kendra
     #                  <p>passphrase—A set of characters that act like a password.</p>
     #               </li>
     #            </ul>
-    #            <p>You create an application in Box to generate the keys or credentials required 
+    #            <p>You create an application in Box to generate the keys or credentials required
     #               for the secret. For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/data-source-box.html">Using a Box data source</a>.</p>
     #   @return [String]
     # @!attribute use_change_log
@@ -803,49 +803,49 @@ module Aws::Kendra
     #   @return [Boolean]
     # @!attribute file_field_mappings
     #   <p>A
-    #               list of <code>DataSourceToIndexFieldMapping</code> objects that map attributes or 
-    #               field names of Box files to Amazon Kendra index field names. To create custom 
-    #               fields, use the <code>UpdateIndex</code> API before you map to Box fields. For more 
-    #               information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html">Mapping data source fields</a>. 
+    #               list of <code>DataSourceToIndexFieldMapping</code> objects that map attributes or
+    #               field names of Box files to Amazon Kendra index field names. To create custom
+    #               fields, use the <code>UpdateIndex</code> API before you map to Box fields. For more
+    #               information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html">Mapping data source fields</a>.
     #               The Box field names must exist in your Box custom metadata.</p>
     #   @return [Array<Types::DataSourceToIndexFieldMapping>]
     # @!attribute task_field_mappings
-    #   <p>A list of <code>DataSourceToIndexFieldMapping</code> objects that map attributes 
-    #               or field names of Box tasks to Amazon Kendra index field names. To create 
-    #               custom fields, use the <code>UpdateIndex</code> API before you map to Box fields. 
-    #               For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html">Mapping data source fields</a>. 
+    #   <p>A list of <code>DataSourceToIndexFieldMapping</code> objects that map attributes
+    #               or field names of Box tasks to Amazon Kendra index field names. To create
+    #               custom fields, use the <code>UpdateIndex</code> API before you map to Box fields.
+    #               For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html">Mapping data source fields</a>.
     #               The Box field names must exist in your Box custom metadata.</p>
     #   @return [Array<Types::DataSourceToIndexFieldMapping>]
     # @!attribute comment_field_mappings
-    #   <p>A list of <code>DataSourceToIndexFieldMapping</code> objects that map attributes 
-    #               or field names of Box comments to Amazon Kendra index field names. To create 
-    #               custom fields, use the <code>UpdateIndex</code> API before you map to Box fields. 
-    #               For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html">Mapping data source fields</a>. 
+    #   <p>A list of <code>DataSourceToIndexFieldMapping</code> objects that map attributes
+    #               or field names of Box comments to Amazon Kendra index field names. To create
+    #               custom fields, use the <code>UpdateIndex</code> API before you map to Box fields.
+    #               For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html">Mapping data source fields</a>.
     #               The Box field names must exist in your Box custom metadata.</p>
     #   @return [Array<Types::DataSourceToIndexFieldMapping>]
     # @!attribute web_link_field_mappings
-    #   <p>A list of <code>DataSourceToIndexFieldMapping</code> objects that map attributes 
-    #               or field names of Box web links to Amazon Kendra index field names. To create 
-    #               custom fields, use the <code>UpdateIndex</code> API before you map to Box fields. 
-    #               For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html">Mapping data source fields</a>. 
+    #   <p>A list of <code>DataSourceToIndexFieldMapping</code> objects that map attributes
+    #               or field names of Box web links to Amazon Kendra index field names. To create
+    #               custom fields, use the <code>UpdateIndex</code> API before you map to Box fields.
+    #               For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html">Mapping data source fields</a>.
     #               The Box field names must exist in your Box custom metadata.</p>
     #   @return [Array<Types::DataSourceToIndexFieldMapping>]
     # @!attribute inclusion_patterns
-    #   <p>A list of regular expression patterns to include certain files and folders in your 
-    #               Box platform. Files and folders that match the patterns are included in the index. 
-    #               Files and folders that don't match the patterns are excluded from the index. If a 
-    #               file or folder matches both an inclusion and exclusion pattern, the exclusion pattern 
+    #   <p>A list of regular expression patterns to include certain files and folders in your
+    #               Box platform. Files and folders that match the patterns are included in the index.
+    #               Files and folders that don't match the patterns are excluded from the index. If a
+    #               file or folder matches both an inclusion and exclusion pattern, the exclusion pattern
     #               takes precedence and the file or folder isn't included in the index.</p>
     #   @return [Array<String>]
     # @!attribute exclusion_patterns
-    #   <p>A list of regular expression patterns to exclude certain files and folders from 
-    #               your Box platform. Files and folders that match the patterns are excluded from the 
-    #               index.Files and folders that don't match the patterns are included in the index. 
-    #               If a file or folder matches both an inclusion and exclusion pattern, the exclusion 
+    #   <p>A list of regular expression patterns to exclude certain files and folders from
+    #               your Box platform. Files and folders that match the patterns are excluded from the
+    #               index.Files and folders that don't match the patterns are included in the index.
+    #               If a file or folder matches both an inclusion and exclusion pattern, the exclusion
     #               pattern takes precedence and the file or folder isn't included in the index.</p>
     #   @return [Array<String>]
     # @!attribute vpc_configuration
-    #   <p>Configuration information for an Amazon VPC to connect to your Box. For 
+    #   <p>Configuration information for an Amazon VPC to connect to your Box. For
     #               more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/vpc-configuration.html">Configuring a VPC</a>.</p>
     #   @return [Types::DataSourceVpcConfiguration]
     class BoxConfiguration < Struct.new(
@@ -1048,18 +1048,18 @@ module Aws::Kendra
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Information about a conflicting query used across different sets of 
-    #             featured results. When you create a featured results set, you must check 
+    # <p>Information about a conflicting query used across different sets of
+    #             featured results. When you create a featured results set, you must check
     #             that the queries are unique per featured results set for each index.</p>
     # @!attribute query_text
     #   <p>The text of the conflicting query.</p>
     #   @return [String]
     # @!attribute set_name
-    #   <p>The name for the set of featured results that the conflicting query 
+    #   <p>The name for the set of featured results that the conflicting query
     #               belongs to.</p>
     #   @return [String]
     # @!attribute set_id
-    #   <p>The identifier of the set of featured results that the conflicting 
+    #   <p>The identifier of the set of featured results that the conflicting
     #               query belongs to.</p>
     #   @return [String]
     class ConflictingItem < Struct.new(
@@ -1401,11 +1401,11 @@ module Aws::Kendra
     #   <p>The name of the table that contains the document data.</p>
     #   @return [String]
     # @!attribute secret_arn
-    #   <p>The Amazon Resource Name (ARN) of an Secrets Manager secret that stores 
+    #   <p>The Amazon Resource Name (ARN) of an Secrets Manager secret that stores
     #               the credentials. The credentials should be a user-password pair. For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/data-source-database.html">Using a
-    #                   Database Data Source</a>. For more information about Secrets Manager, see 
+    #                   Database Data Source</a>. For more information about Secrets Manager, see
     #               <a href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html"> What
-    #                   Is Secrets Manager</a> in the <i>Secrets Manager</i> 
+    #                   Is Secrets Manager</a> in the <i>Secrets Manager</i>
     #               user guide.</p>
     #   @return [String]
     class ConnectionConfiguration < Struct.new(
@@ -1420,7 +1420,7 @@ module Aws::Kendra
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Provides the configuration information for your content sources, such as data sources, 
+    # <p>Provides the configuration information for your content sources, such as data sources,
     #             FAQs, and content indexed directly via <a href="https://docs.aws.amazon.com/kendra/latest/dg/API_BatchPutDocument.html">BatchPutDocument</a>.</p>
     # @!attribute data_source_ids
     #   <p>The identifier of the data sources you want to use for your Amazon Kendra experience.</p>
@@ -1450,11 +1450,11 @@ module Aws::Kendra
 
     # <p>A corrected misspelled word in a query.</p>
     # @!attribute begin_offset
-    #   <p>The zero-based location in the response string or text where 
+    #   <p>The zero-based location in the response string or text where
     #               the corrected word starts.</p>
     #   @return [Integer]
     # @!attribute end_offset
-    #   <p>The zero-based location in the response string or text where 
+    #   <p>The zero-based location in the response string or text where
     #               the corrected word ends.</p>
     #   @return [Integer]
     # @!attribute term
@@ -1551,14 +1551,14 @@ module Aws::Kendra
     #         repository and update the index. If you don't set a schedule Amazon Kendra will not
     #         periodically update the index. You can call the <code>StartDataSourceSyncJob</code> API to
     #         update the index.</p>
-    #            <p>Specify a <code>cron-</code> format schedule string or an empty string to indicate that 
+    #            <p>Specify a <code>cron-</code> format schedule string or an empty string to indicate that
     #         the index is updated on demand.</p>
     #            <p>You can't specify the <code>Schedule</code> parameter when the <code>Type</code> parameter
     #         is set to <code>CUSTOM</code>. If you do, you receive a <code>ValidationException</code>
     #         exception.</p>
     #   @return [String]
     # @!attribute role_arn
-    #   <p>The Amazon Resource Name (ARN) of an IAM role with permission to access 
+    #   <p>The Amazon Resource Name (ARN) of an IAM role with permission to access
     #         the data source and required resources. For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html">IAM access roles for Amazon Kendra.</a>.</p>
     #            <p>You can't specify the <code>RoleArn</code> parameter when the <code>Type</code> parameter
     #         is set to <code>CUSTOM</code>. If you do, you receive a <code>ValidationException</code>
@@ -1566,9 +1566,9 @@ module Aws::Kendra
     #            <p>The <code>RoleArn</code> parameter is required for all other data sources.</p>
     #   @return [String]
     # @!attribute tags
-    #   <p>A list of key-value pairs that identify or categorize the data source connector. You 
-    #         can also use tags to help control access to the data source connector. Tag keys and values 
-    #         can consist of Unicode letters, digits, white space, and any of the following symbols: 
+    #   <p>A list of key-value pairs that identify or categorize the data source connector. You
+    #         can also use tags to help control access to the data source connector. Tag keys and values
+    #         can consist of Unicode letters, digits, white space, and any of the following symbols:
     #         _ . : / = + - @.</p>
     #   @return [Array<Types::Tag>]
     # @!attribute client_token
@@ -1577,10 +1577,10 @@ module Aws::Kendra
     #         only one data source connector.</p>
     #   @return [String]
     # @!attribute language_code
-    #   <p>The code for a language. This allows you to support a language for all 
-    #               documents when creating the data source connector. English is supported 
-    #               by default. For more information on supported languages, including their codes, 
-    #               see <a href="https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html">Adding 
+    #   <p>The code for a language. This allows you to support a language for all
+    #               documents when creating the data source connector. English is supported
+    #               by default. For more information on supported languages, including their codes,
+    #               see <a href="https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html">Adding
     #                   documents in languages other than English</a>.</p>
     #   @return [String]
     # @!attribute custom_document_enrichment_configuration
@@ -1626,15 +1626,15 @@ module Aws::Kendra
     #   <p>The identifier of the index for your Amazon Kendra experience.</p>
     #   @return [String]
     # @!attribute role_arn
-    #   <p>The Amazon Resource Name (ARN) of an IAM role with permission to access 
-    #               <code>Query</code> API, <code>GetQuerySuggestions</code> API, and other required APIs. 
-    #               The role also must include permission to access IAM Identity Center that stores your 
+    #   <p>The Amazon Resource Name (ARN) of an IAM role with permission to access
+    #               <code>Query</code> API, <code>GetQuerySuggestions</code> API, and other required APIs.
+    #               The role also must include permission to access IAM Identity Center that stores your
     #               user and group information. For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html">IAM access roles for Amazon Kendra</a>.</p>
     #   @return [String]
     # @!attribute configuration
     #   <p>Configuration information for your Amazon Kendra experience. This includes
-    #               <code>ContentSourceConfiguration</code>, which specifies the data source IDs 
-    #               and/or FAQ IDs, and <code>UserIdentityConfiguration</code>, which specifies the 
+    #               <code>ContentSourceConfiguration</code>, which specifies the data source IDs
+    #               and/or FAQ IDs, and <code>UserIdentityConfiguration</code>, which specifies the
     #               user or group information to grant access to your Amazon Kendra experience.</p>
     #   @return [Types::ExperienceConfiguration]
     # @!attribute description
@@ -1642,7 +1642,7 @@ module Aws::Kendra
     #   @return [String]
     # @!attribute client_token
     #   <p>A token that you provide to identify the request to create your Amazon Kendra experience.
-    #               Multiple calls to the <code>CreateExperience</code> API with the same client 
+    #               Multiple calls to the <code>CreateExperience</code> API with the same client
     #               token creates only one Amazon Kendra experience.</p>
     #   @return [String]
     class CreateExperienceRequest < Struct.new(
@@ -1682,8 +1682,8 @@ module Aws::Kendra
     #   <p>The path to the FAQ file in S3.</p>
     #   @return [Types::S3Path]
     # @!attribute role_arn
-    #   <p>The Amazon Resource Name (ARN) of an IAM role with permission to access 
-    #               the S3 bucket that contains the FAQ file. For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html">IAM access roles for 
+    #   <p>The Amazon Resource Name (ARN) of an IAM role with permission to access
+    #               the S3 bucket that contains the FAQ file. For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html">IAM access roles for
     #                   Amazon Kendra</a>.</p>
     #   @return [String]
     # @!attribute tags
@@ -1695,7 +1695,7 @@ module Aws::Kendra
     #               format that includes customs attributes in a header, and a JSON format that includes
     #               custom attributes.</p>
     #            <p>The default format is CSV.</p>
-    #            <p>The format must match the format of the file stored in the S3 bucket identified in 
+    #            <p>The format must match the format of the file stored in the S3 bucket identified in
     #               the <code>S3Path</code> parameter.</p>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/in-creating-faq.html">Adding questions and
     #               answers</a>.</p>
@@ -1706,10 +1706,10 @@ module Aws::Kendra
     #               FAQ. </p>
     #   @return [String]
     # @!attribute language_code
-    #   <p>The code for a language. This allows you to support a language 
-    #               for the FAQ document. English is supported by default. 
-    #               For more information on supported languages, including their codes, 
-    #               see <a href="https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html">Adding 
+    #   <p>The code for a language. This allows you to support a language
+    #               for the FAQ document. English is supported by default.
+    #               For more information on supported languages, including their codes,
+    #               see <a href="https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html">Adding
     #                   documents in languages other than English</a>.</p>
     #   @return [String]
     class CreateFaqRequest < Struct.new(
@@ -1749,26 +1749,26 @@ module Aws::Kendra
     #   <p>A description for the set of featured results.</p>
     #   @return [String]
     # @!attribute client_token
-    #   <p>A token that you provide to identify the request to create a set of 
-    #               featured results. Multiple calls to the <code>CreateFeaturedResultsSet</code> 
+    #   <p>A token that you provide to identify the request to create a set of
+    #               featured results. Multiple calls to the <code>CreateFeaturedResultsSet</code>
     #               API with the same client token will create only one featured results set.</p>
     #   @return [String]
     # @!attribute status
-    #   <p>The current status of the set of featured results. When the value is 
-    #               <code>ACTIVE</code>, featured results are ready for use. You can still 
-    #               configure your settings before setting the status to <code>ACTIVE</code>. 
-    #               You can set the status to <code>ACTIVE</code> or <code>INACTIVE</code> 
-    #               using the <a href="https://docs.aws.amazon.com/kendra/latest/dg/API_UpdateFeaturedResultsSet.html">UpdateFeaturedResultsSet</a> API. The queries you specify for 
-    #               featured results must be unique per featured results set for each index, 
+    #   <p>The current status of the set of featured results. When the value is
+    #               <code>ACTIVE</code>, featured results are ready for use. You can still
+    #               configure your settings before setting the status to <code>ACTIVE</code>.
+    #               You can set the status to <code>ACTIVE</code> or <code>INACTIVE</code>
+    #               using the <a href="https://docs.aws.amazon.com/kendra/latest/dg/API_UpdateFeaturedResultsSet.html">UpdateFeaturedResultsSet</a> API. The queries you specify for
+    #               featured results must be unique per featured results set for each index,
     #               whether the status is <code>ACTIVE</code> or <code>INACTIVE</code>.</p>
     #   @return [String]
     # @!attribute query_texts
-    #   <p>A list of queries for featuring results. For more information on the 
+    #   <p>A list of queries for featuring results. For more information on the
     #               list of queries, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/API_FeaturedResultsSet.html">FeaturedResultsSet</a>.</p>
     #   @return [Array<String>]
     # @!attribute featured_documents
-    #   <p>A list of document IDs for the documents you want to feature at the 
-    #               top of the search results page. For more information on the list of 
+    #   <p>A list of document IDs for the documents you want to feature at the
+    #               top of the search results page. For more information on the list of
     #               documents, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/API_FeaturedResultsSet.html">FeaturedResultsSet</a>.</p>
     #   @return [Array<Types::FeaturedDocument>]
     # @!attribute tags
@@ -1793,8 +1793,8 @@ module Aws::Kendra
     end
 
     # @!attribute featured_results_set
-    #   <p>Information on the set of featured results. This includes the identifier of 
-    #               the featured results set, whether the featured results set is active or inactive, 
+    #   <p>Information on the set of featured results. This includes the identifier of
+    #               the featured results set, whether the featured results set is active or inactive,
     #               when the featured results set was created, and more.</p>
     #   @return [Types::FeaturedResultsSet]
     class CreateFeaturedResultsSetResponse < Struct.new(
@@ -1917,35 +1917,35 @@ module Aws::Kendra
     #   @return [String]
     # @!attribute name
     #   <p>A name for the block list.</p>
-    #            <p>For example, the name 'offensive-words', which includes all 
-    #               offensive words that could appear in user queries and need to be 
+    #            <p>For example, the name 'offensive-words', which includes all
+    #               offensive words that could appear in user queries and need to be
     #               blocked from suggestions.</p>
     #   @return [String]
     # @!attribute description
     #   <p>A description for the block list.</p>
-    #            <p>For example, the description "List of all offensive words that can 
+    #            <p>For example, the description "List of all offensive words that can
     #               appear in user queries and need to be blocked from suggestions."</p>
     #   @return [String]
     # @!attribute source_s3_path
     #   <p>The S3 path to your block list text file in your S3 bucket.</p>
     #            <p>Each block word or phrase should be on a separate line in a text file.</p>
-    #            <p>For information on the current quota limits for block lists, see 
-    #                   <a href="https://docs.aws.amazon.com/kendra/latest/dg/quotas.html">Quotas 
+    #            <p>For information on the current quota limits for block lists, see
+    #                   <a href="https://docs.aws.amazon.com/kendra/latest/dg/quotas.html">Quotas
     #                       for Amazon Kendra</a>.</p>
     #   @return [Types::S3Path]
     # @!attribute client_token
-    #   <p>A token that you provide to identify the request to create a 
+    #   <p>A token that you provide to identify the request to create a
     #               query suggestions block list.</p>
     #   @return [String]
     # @!attribute role_arn
-    #   <p>The Amazon Resource Name (ARN) of an IAM role with permission to 
-    #               access your S3 bucket that contains the block list text file. For more information, 
-    #               see <a href="https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html">IAM access roles for 
+    #   <p>The Amazon Resource Name (ARN) of an IAM role with permission to
+    #               access your S3 bucket that contains the block list text file. For more information,
+    #               see <a href="https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html">IAM access roles for
     #                   Amazon Kendra</a>.</p>
     #   @return [String]
     # @!attribute tags
-    #   <p>A list of key-value pairs that identify or categorize the block list. 
-    #               Tag keys and values can consist of Unicode letters, digits, white space, 
+    #   <p>A list of key-value pairs that identify or categorize the block list.
+    #               Tag keys and values can consist of Unicode letters, digits, white space,
     #               and any of the following symbols: _ . : / = + - @.</p>
     #   @return [Array<Types::Tag>]
     class CreateQuerySuggestionsBlockListRequest < Struct.new(
@@ -1983,23 +1983,23 @@ module Aws::Kendra
     #   <p>A description for the thesaurus.</p>
     #   @return [String]
     # @!attribute role_arn
-    #   <p>The Amazon Resource Name (ARN) of an IAM role with permission 
-    #            to access your S3 bucket that contains the thesaurus file. For more information, 
-    #            see <a href="https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html">IAM 
+    #   <p>The Amazon Resource Name (ARN) of an IAM role with permission
+    #            to access your S3 bucket that contains the thesaurus file. For more information,
+    #            see <a href="https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html">IAM
     #               access roles for Amazon Kendra</a>.</p>
     #   @return [String]
     # @!attribute tags
-    #   <p>A list of key-value pairs that identify or categorize the thesaurus. You can 
-    #            also use tags to help control access to the thesaurus. Tag keys and values can 
-    #            consist of Unicode letters, digits, white space, and any of the following 
+    #   <p>A list of key-value pairs that identify or categorize the thesaurus. You can
+    #            also use tags to help control access to the thesaurus. Tag keys and values can
+    #            consist of Unicode letters, digits, white space, and any of the following
     #            symbols: _ . : / = + - @.</p>
     #   @return [Array<Types::Tag>]
     # @!attribute source_s3_path
     #   <p>The path to the thesaurus file in S3.</p>
     #   @return [Types::S3Path]
     # @!attribute client_token
-    #   <p>A token that you provide to identify the request to create a 
-    #            thesaurus. Multiple calls to the <code>CreateThesaurus</code> API 
+    #   <p>A token that you provide to identify the request to create a
+    #            thesaurus. Multiple calls to the <code>CreateThesaurus</code> API
     #            with the same client token will create only one thesaurus.
     #         </p>
     #   @return [String]
@@ -2018,7 +2018,7 @@ module Aws::Kendra
     end
 
     # @!attribute id
-    #   <p>The identifier of the thesaurus. 
+    #   <p>The identifier of the thesaurus.
     #         </p>
     #   @return [String]
     class CreateThesaurusResponse < Struct.new(
@@ -2072,12 +2072,12 @@ module Aws::Kendra
     #         data source.</p>
     #            <note>
     #               <p>Amazon Kendra now supports an upgraded Amazon S3 connector.</p>
-    #               <p>You must now use the <a href="https://docs.aws.amazon.com/kendra/latest/APIReference/API_TemplateConfiguration.html">TemplateConfiguration</a> object instead of the 
+    #               <p>You must now use the <a href="https://docs.aws.amazon.com/kendra/latest/APIReference/API_TemplateConfiguration.html">TemplateConfiguration</a> object instead of the
     #           <code>S3DataSourceConfiguration</code> object to configure your connector.</p>
     #               <p>Connectors configured using the older console and API architecture will continue to
     #           function as configured. However, you won't be able to edit or update them. If you want
     #           to edit or update your connector configuration, you must create a new connector.</p>
-    #               <p>We recommended migrating your connector workflow to the upgraded version. Support for 
+    #               <p>We recommended migrating your connector workflow to the upgraded version. Support for
     #           connectors configured using the older architecture is scheduled to end by June 2024.</p>
     #            </note>
     #   @return [Types::S3DataSourceConfiguration]
@@ -2114,7 +2114,7 @@ module Aws::Kendra
     #               Crawler.</p>
     #   @return [Types::WebCrawlerConfiguration]
     # @!attribute work_docs_configuration
-    #   <p>Provides the configuration information to connect to Amazon WorkDocs as your data
+    #   <p>Provides the configuration information to connect to WorkDocs as your data
     #         source.</p>
     #   @return [Types::WorkDocsConfiguration]
     # @!attribute fsx_configuration
@@ -2122,12 +2122,12 @@ module Aws::Kendra
     #         source.</p>
     #            <note>
     #               <p>Amazon Kendra now supports an upgraded Amazon FSx Windows connector.</p>
-    #               <p>You must now use the <a href="https://docs.aws.amazon.com/kendra/latest/APIReference/API_TemplateConfiguration.html">TemplateConfiguration</a> object instead of the 
+    #               <p>You must now use the <a href="https://docs.aws.amazon.com/kendra/latest/APIReference/API_TemplateConfiguration.html">TemplateConfiguration</a> object instead of the
     #           <code>FsxConfiguration</code> object to configure your connector.</p>
     #               <p>Connectors configured using the older console and API architecture will continue to
     #           function as configured. However, you won't be able to edit or update them. If you want
     #           to edit or update your connector configuration, you must create a new connector.</p>
-    #               <p>We recommended migrating your connector workflow to the upgraded version. Support for 
+    #               <p>We recommended migrating your connector workflow to the upgraded version. Support for
     #           connectors configured using the older architecture is scheduled to end by June 2024.</p>
     #            </note>
     #   @return [Types::FsxConfiguration]
@@ -2135,12 +2135,12 @@ module Aws::Kendra
     #   <p>Provides the configuration information to connect to Slack as your data source.</p>
     #            <note>
     #               <p>Amazon Kendra now supports an upgraded Slack connector.</p>
-    #               <p>You must now use the <a href="https://docs.aws.amazon.com/kendra/latest/APIReference/API_TemplateConfiguration.html">TemplateConfiguration</a> object instead of the 
+    #               <p>You must now use the <a href="https://docs.aws.amazon.com/kendra/latest/APIReference/API_TemplateConfiguration.html">TemplateConfiguration</a> object instead of the
     #           <code>SlackConfiguration</code> object to configure your connector.</p>
     #               <p>Connectors configured using the older console and API architecture will continue to
     #           function as configured. However, you won't be able to edit or update them. If you want
     #           to edit or update your connector configuration, you must create a new connector.</p>
-    #               <p>We recommended migrating your connector workflow to the upgraded version. Support for 
+    #               <p>We recommended migrating your connector workflow to the upgraded version. Support for
     #           connectors configured using the older architecture is scheduled to end by June 2024.</p>
     #            </note>
     #   @return [Types::SlackConfiguration]
@@ -2171,9 +2171,9 @@ module Aws::Kendra
     # @!attribute alfresco_configuration
     #   <p>Provides the configuration information to connect to Alfresco as your data source.</p>
     #            <note>
-    #               <p>Support for <code>AlfrescoConfiguration</code> ended May 2023. 
-    #           We recommend migrating to or using the Alfresco data source template 
-    #           schema / <a href="https://docs.aws.amazon.com/kendra/latest/APIReference/API_TemplateConfiguration.html">TemplateConfiguration</a> 
+    #               <p>Support for <code>AlfrescoConfiguration</code> ended May 2023.
+    #           We recommend migrating to or using the Alfresco data source template
+    #           schema / <a href="https://docs.aws.amazon.com/kendra/latest/APIReference/API_TemplateConfiguration.html">TemplateConfiguration</a>
     #           API.</p>
     #            </note>
     #   @deprecated
@@ -2248,10 +2248,10 @@ module Aws::Kendra
     #         ready to use.</p>
     #   @return [String]
     # @!attribute language_code
-    #   <p>The code for a language. This shows a supported language for all documents 
-    #               in the data source. English is supported by default.  
-    #               For more information on supported languages, including their codes, 
-    #               see <a href="https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html">Adding 
+    #   <p>The code for a language. This shows a supported language for all documents
+    #               in the data source. English is supported by default.
+    #               For more information on supported languages, including their codes,
+    #               see <a href="https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html">Adding
     #                   documents in languages other than English</a>.</p>
     #   @return [String]
     class DataSourceSummary < Struct.new(
@@ -2370,23 +2370,23 @@ module Aws::Kendra
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Maps attributes or field names of the documents synced from the data source 
-    #       to Amazon Kendra index field names. You can set up field mappings for each 
-    #       data source when calling <a href="https://docs.aws.amazon.com/kendra/latest/APIReference/API_CreateDataSource.html">CreateDataSource</a> 
-    #       or <a href="https://docs.aws.amazon.com/kendra/latest/APIReference/API_UpdateDataSource.html">UpdateDataSource</a> API. To create custom fields, use the <code>UpdateIndex</code> 
-    #       API to first create an index field and then map to the data source field. For more 
+    # <p>Maps attributes or field names of the documents synced from the data source
+    #       to Amazon Kendra index field names. You can set up field mappings for each
+    #       data source when calling <a href="https://docs.aws.amazon.com/kendra/latest/APIReference/API_CreateDataSource.html">CreateDataSource</a>
+    #       or <a href="https://docs.aws.amazon.com/kendra/latest/APIReference/API_UpdateDataSource.html">UpdateDataSource</a> API. To create custom fields, use the <code>UpdateIndex</code>
+    #       API to first create an index field and then map to the data source field. For more
     #       information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html">Mapping data source fields</a>.</p>
     # @!attribute data_source_field_name
-    #   <p>The name of the field in the data source. You must first create the index field 
+    #   <p>The name of the field in the data source. You must first create the index field
     #         using the <code>UpdateIndex</code> API.</p>
     #   @return [String]
     # @!attribute date_field_format
-    #   <p>The format for date fields in the data source. If the field specified in 
-    #         <code>DataSourceFieldName</code> is a date field, you must specify the date 
+    #   <p>The format for date fields in the data source. If the field specified in
+    #         <code>DataSourceFieldName</code> is a date field, you must specify the date
     #         format. If the field is not a date field, an exception is thrown.</p>
     #   @return [String]
     # @!attribute index_field_name
-    #   <p>The name of the index field to map to the data source field. The index field type 
+    #   <p>The name of the index field to map to the data source field. The index field type
     #         must match the data source field type.</p>
     #   @return [String]
     class DataSourceToIndexFieldMapping < Struct.new(
@@ -2418,7 +2418,7 @@ module Aws::Kendra
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Provides the configuration information to an <a href="https://docs.aws.amazon.com/kendra/latest/dg/data-source-database.html">Amazon Kendra supported 
+    # <p>Provides the configuration information to an <a href="https://docs.aws.amazon.com/kendra/latest/dg/data-source-database.html">Amazon Kendra supported
     #             database</a>.</p>
     # @!attribute database_engine_type
     #   <p>The type of database engine that runs the database.</p>
@@ -2711,7 +2711,7 @@ module Aws::Kendra
     #   <p>The schedule for Amazon Kendra to update the index.</p>
     #   @return [String]
     # @!attribute role_arn
-    #   <p>The Amazon Resource Name (ARN) of the IAM role with permission to 
+    #   <p>The Amazon Resource Name (ARN) of the IAM role with permission to
     #         access the data source and required resources.</p>
     #   @return [String]
     # @!attribute error_message
@@ -2720,10 +2720,10 @@ module Aws::Kendra
     #         source to fail.</p>
     #   @return [String]
     # @!attribute language_code
-    #   <p>The code for a language. This shows a supported language for all 
-    #               documents in the data source. English is supported by 
-    #               default. For more information on supported languages, including their codes, 
-    #               see <a href="https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html">Adding 
+    #   <p>The code for a language. This shows a supported language for all
+    #               documents in the data source. English is supported by
+    #               default. For more information on supported languages, including their codes,
+    #               see <a href="https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html">Adding
     #                   documents in languages other than English</a>.</p>
     #   @return [String]
     # @!attribute custom_document_enrichment_configuration
@@ -2784,8 +2784,8 @@ module Aws::Kendra
     #   @return [Array<Types::ExperienceEndpoint>]
     # @!attribute configuration
     #   <p>Shows the configuration information for your Amazon Kendra experience. This includes
-    #                   <code>ContentSourceConfiguration</code>, which specifies the data source IDs 
-    #               and/or FAQ IDs, and <code>UserIdentityConfiguration</code>, which specifies the 
+    #                   <code>ContentSourceConfiguration</code>, which specifies the data source IDs
+    #               and/or FAQ IDs, and <code>UserIdentityConfiguration</code>, which specifies the
     #               user or group information to grant access to your Amazon Kendra experience.</p>
     #   @return [Types::ExperienceConfiguration]
     # @!attribute created_at
@@ -2798,15 +2798,15 @@ module Aws::Kendra
     #   <p>Shows the description for your Amazon Kendra experience.</p>
     #   @return [String]
     # @!attribute status
-    #   <p>The current processing status of your Amazon Kendra experience. When the status 
-    #               is <code>ACTIVE</code>, your Amazon Kendra experience is ready to use. When the 
-    #               status is <code>FAILED</code>, the <code>ErrorMessage</code> field contains 
+    #   <p>The current processing status of your Amazon Kendra experience. When the status
+    #               is <code>ACTIVE</code>, your Amazon Kendra experience is ready to use. When the
+    #               status is <code>FAILED</code>, the <code>ErrorMessage</code> field contains
     #               the reason that this failed.</p>
     #   @return [String]
     # @!attribute role_arn
-    #   <p>The Amazon Resource Name (ARN) of the IAM role with permission to access 
-    #               the <code>Query</code> API, <code>QuerySuggestions</code> API, 
-    #               <code>SubmitFeedback</code> API, and IAM Identity Center that stores 
+    #   <p>The Amazon Resource Name (ARN) of the IAM role with permission to access
+    #               the <code>Query</code> API, <code>QuerySuggestions</code> API,
+    #               <code>SubmitFeedback</code> API, and IAM Identity Center that stores
     #               your users and groups information.</p>
     #   @return [String]
     # @!attribute error_message
@@ -2871,7 +2871,7 @@ module Aws::Kendra
     #               <code>ACTIVE</code>.</p>
     #   @return [String]
     # @!attribute role_arn
-    #   <p>The Amazon Resource Name (ARN) of the IAM role that provides access 
+    #   <p>The Amazon Resource Name (ARN) of the IAM role that provides access
     #               to the S3 bucket containing the FAQ file.</p>
     #   @return [String]
     # @!attribute error_message
@@ -2882,10 +2882,10 @@ module Aws::Kendra
     #   <p>The file format used for the FAQ file.</p>
     #   @return [String]
     # @!attribute language_code
-    #   <p>The code for a language. This shows a supported language 
-    #               for the FAQ document. English is supported by default.  
-    #               For more information on supported languages, including their codes, 
-    #               see <a href="https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html">Adding 
+    #   <p>The code for a language. This shows a supported language
+    #               for the FAQ document. English is supported by default.
+    #               For more information on supported languages, including their codes,
+    #               see <a href="https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html">Adding
     #                   documents in languages other than English</a>.</p>
     #   @return [String]
     class DescribeFaqResponse < Struct.new(
@@ -2911,7 +2911,7 @@ module Aws::Kendra
     #   <p>The identifier of the index used for featuring results.</p>
     #   @return [String]
     # @!attribute featured_results_set_id
-    #   <p>The identifier of the set of featured results that you want to get 
+    #   <p>The identifier of the set of featured results that you want to get
     #               information on.</p>
     #   @return [String]
     class DescribeFeaturedResultsSetRequest < Struct.new(
@@ -2933,27 +2933,27 @@ module Aws::Kendra
     #   <p>The description for the set of featured results.</p>
     #   @return [String]
     # @!attribute status
-    #   <p>The current status of the set of featured results. When the value is 
-    #               <code>ACTIVE</code>, featured results are ready for use. You can still 
-    #               configure your settings before setting the status to <code>ACTIVE</code>. 
-    #               You can set the status to <code>ACTIVE</code> or <code>INACTIVE</code> 
-    #               using the <a href="https://docs.aws.amazon.com/kendra/latest/dg/API_UpdateFeaturedResultsSet.html">UpdateFeaturedResultsSet</a> API. The queries you specify for 
-    #               featured results must be unique per featured results set for each index, 
+    #   <p>The current status of the set of featured results. When the value is
+    #               <code>ACTIVE</code>, featured results are ready for use. You can still
+    #               configure your settings before setting the status to <code>ACTIVE</code>.
+    #               You can set the status to <code>ACTIVE</code> or <code>INACTIVE</code>
+    #               using the <a href="https://docs.aws.amazon.com/kendra/latest/dg/API_UpdateFeaturedResultsSet.html">UpdateFeaturedResultsSet</a> API. The queries you specify for
+    #               featured results must be unique per featured results set for each index,
     #               whether the status is <code>ACTIVE</code> or <code>INACTIVE</code>.</p>
     #   @return [String]
     # @!attribute query_texts
-    #   <p>The list of queries for featuring results. For more information on the 
+    #   <p>The list of queries for featuring results. For more information on the
     #               list of queries, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/API_FeaturedResultsSet.html">FeaturedResultsSet</a>.</p>
     #   @return [Array<String>]
     # @!attribute featured_documents_with_metadata
-    #   <p>The list of document IDs for the documents you want to feature with their 
-    #               metadata information. For more information on the list of featured documents, 
+    #   <p>The list of document IDs for the documents you want to feature with their
+    #               metadata information. For more information on the list of featured documents,
     #               see <a href="https://docs.aws.amazon.com/kendra/latest/dg/API_FeaturedResultsSet.html">FeaturedResultsSet</a>.</p>
     #   @return [Array<Types::FeaturedDocumentWithMetadata>]
     # @!attribute featured_documents_missing
-    #   <p>The list of document IDs that don't exist but you have specified as featured 
-    #               documents. Amazon Kendra cannot feature these documents if they don't exist 
-    #               in the index. You can check the status of a document and its ID or check for 
+    #   <p>The list of document IDs that don't exist but you have specified as featured
+    #               documents. Amazon Kendra cannot feature these documents if they don't exist
+    #               in the index. You can check the status of a document and its ID or check for
     #               documents with status errors using the <a href="https://docs.aws.amazon.com/kendra/latest/dg/API_BatchGetDocumentStatus.html">BatchGetDocumentStatus</a> API.</p>
     #   @return [Array<Types::FeaturedDocumentMissing>]
     # @!attribute last_updated_timestamp
@@ -3175,11 +3175,11 @@ module Aws::Kendra
     #   <p>The description for the block list.</p>
     #   @return [String]
     # @!attribute status
-    #   <p>The current status of the block list. When the value is 
+    #   <p>The current status of the block list. When the value is
     #               <code>ACTIVE</code>, the block list is ready for use.</p>
     #   @return [String]
     # @!attribute error_message
-    #   <p>The error message containing details if there are issues processing 
+    #   <p>The error message containing details if there are issues processing
     #               the block list.</p>
     #   @return [String]
     # @!attribute created_at
@@ -3191,22 +3191,22 @@ module Aws::Kendra
     # @!attribute source_s3_path
     #   <p>Shows the current S3 path to your block list text file in your S3 bucket.</p>
     #            <p>Each block word or phrase should be on a separate line in a text file.</p>
-    #            <p>For information on the current quota limits for block lists, see 
-    #               <a href="https://docs.aws.amazon.com/kendra/latest/dg/quotas.html">Quotas 
+    #            <p>For information on the current quota limits for block lists, see
+    #               <a href="https://docs.aws.amazon.com/kendra/latest/dg/quotas.html">Quotas
     #                   for Amazon Kendra</a>.</p>
     #   @return [Types::S3Path]
     # @!attribute item_count
-    #   <p>The current number of valid, non-empty words or phrases in 
+    #   <p>The current number of valid, non-empty words or phrases in
     #               the block list text file.</p>
     #   @return [Integer]
     # @!attribute file_size_bytes
     #   <p>The current size of the block list text file in S3.</p>
     #   @return [Integer]
     # @!attribute role_arn
-    #   <p>The IAM (Identity and Access Management) role used by 
+    #   <p>The IAM (Identity and Access Management) role used by
     #               Amazon Kendra to access the block list text file in S3.</p>
-    #            <p>The role needs S3 read permissions to your file in S3 and needs to 
-    #               give STS (Security Token Service) assume role permissions to 
+    #            <p>The role needs S3 read permissions to your file in S3 and needs to
+    #               give STS (Security Token Service) assume role permissions to
     #               Amazon Kendra.</p>
     #   @return [String]
     class DescribeQuerySuggestionsBlockListResponse < Struct.new(
@@ -3229,7 +3229,7 @@ module Aws::Kendra
     end
 
     # @!attribute index_id
-    #   <p>The identifier of the index with query suggestions that you want to get 
+    #   <p>The identifier of the index with query suggestions that you want to get
     #               information on.</p>
     #   @return [String]
     class DescribeQuerySuggestionsConfigRequest < Struct.new(
@@ -3241,59 +3241,59 @@ module Aws::Kendra
     end
 
     # @!attribute mode
-    #   <p>Whether query suggestions are currently in 
+    #   <p>Whether query suggestions are currently in
     #               <code>ENABLED</code> mode or <code>LEARN_ONLY</code> mode.</p>
-    #            <p>By default, Amazon Kendra enables query suggestions.<code>LEARN_ONLY</code> 
-    #               turns off query suggestions for your users. You can change the mode using 
-    #               the <a href="https://docs.aws.amazon.com/kendra/latest/dg/API_UpdateQuerySuggestionsConfig.html">UpdateQuerySuggestionsConfig</a> 
+    #            <p>By default, Amazon Kendra enables query suggestions.<code>LEARN_ONLY</code>
+    #               turns off query suggestions for your users. You can change the mode using
+    #               the <a href="https://docs.aws.amazon.com/kendra/latest/dg/API_UpdateQuerySuggestionsConfig.html">UpdateQuerySuggestionsConfig</a>
     #               API.</p>
     #   @return [String]
     # @!attribute status
-    #   <p>Whether the status of query suggestions settings is currently 
+    #   <p>Whether the status of query suggestions settings is currently
     #               <code>ACTIVE</code> or <code>UPDATING</code>.</p>
-    #            <p>Active means the current settings apply and Updating means your 
+    #            <p>Active means the current settings apply and Updating means your
     #               changed settings are in the process of applying.</p>
     #   @return [String]
     # @!attribute query_log_look_back_window_in_days
-    #   <p>How recent your queries are in your query log time 
+    #   <p>How recent your queries are in your query log time
     #               window (in days).</p>
     #   @return [Integer]
     # @!attribute include_queries_without_user_information
     #   <p>
-    #               <code>TRUE</code> to use all queries, otherwise use only queries that include 
+    #               <code>TRUE</code> to use all queries, otherwise use only queries that include
     #               user information to generate the query suggestions.</p>
     #   @return [Boolean]
     # @!attribute minimum_number_of_querying_users
-    #   <p>The minimum number of unique users who must search a query in 
+    #   <p>The minimum number of unique users who must search a query in
     #               order for the query to be eligible to suggest to your users.</p>
     #   @return [Integer]
     # @!attribute minimum_query_count
-    #   <p>The minimum number of times a query must be searched in order for 
+    #   <p>The minimum number of times a query must be searched in order for
     #               the query to be eligible to suggest to your users.</p>
     #   @return [Integer]
     # @!attribute last_suggestions_build_time
     #   <p>The Unix timestamp when query suggestions for an index was last updated.</p>
-    #            <p>Amazon Kendra automatically updates suggestions every 24 hours, after you 
+    #            <p>Amazon Kendra automatically updates suggestions every 24 hours, after you
     #               change a setting or after you apply a <a href="https://docs.aws.amazon.com/kendra/latest/dg/query-suggestions.html#query-suggestions-blocklist">block list</a>.</p>
     #   @return [Time]
     # @!attribute last_clear_time
     #   <p>The Unix timestamp when query suggestions for an index was last cleared.</p>
-    #            <p>After you clear suggestions, Amazon Kendra learns new suggestions based 
-    #               on new queries added to the query log from the time you cleared suggestions. 
-    #               Amazon Kendra only considers re-occurences of a query from the time you cleared 
+    #            <p>After you clear suggestions, Amazon Kendra learns new suggestions based
+    #               on new queries added to the query log from the time you cleared suggestions.
+    #               Amazon Kendra only considers re-occurences of a query from the time you cleared
     #               suggestions. </p>
     #   @return [Time]
     # @!attribute total_suggestions_count
     #   <p>The current total count of query suggestions for an index.</p>
-    #            <p>This count can change when you update your query suggestions settings, 
-    #               if you filter out certain queries from suggestions using a block list, 
+    #            <p>This count can change when you update your query suggestions settings,
+    #               if you filter out certain queries from suggestions using a block list,
     #               and as the query log accumulates more queries for Amazon Kendra to learn from.</p>
-    #            <p>If the count is much lower than you expected, it could be because Amazon Kendra 
-    #               needs more queries in the query history to learn from or your current query suggestions 
+    #            <p>If the count is much lower than you expected, it could be because Amazon Kendra
+    #               needs more queries in the query history to learn from or your current query suggestions
     #               settings are too strict.</p>
     #   @return [Integer]
     # @!attribute attribute_suggestions_config
-    #   <p>Configuration information for the document fields/attributes that you want to base query 
+    #   <p>Configuration information for the document fields/attributes that you want to base query
     #               suggestions on.</p>
     #   @return [Types::AttributeSuggestionsDescribeConfig]
     class DescribeQuerySuggestionsConfigResponse < Struct.new(
@@ -3341,8 +3341,8 @@ module Aws::Kendra
     #   <p>The thesaurus description.</p>
     #   @return [String]
     # @!attribute status
-    #   <p>The current status of the thesaurus. When the value is <code>ACTIVE</code>, 
-    #            queries are able to use the thesaurus. If the <code>Status</code> field value 
+    #   <p>The current status of the thesaurus. When the value is <code>ACTIVE</code>,
+    #            queries are able to use the thesaurus. If the <code>Status</code> field value
     #            is <code>FAILED</code>, the <code>ErrorMessage</code> field provides
     #            more information.
     #         </p>
@@ -3363,7 +3363,7 @@ module Aws::Kendra
     #   <p>The Unix timestamp when the thesaurus was last updated.</p>
     #   @return [Time]
     # @!attribute role_arn
-    #   <p>An IAM role that gives Amazon Kendra permissions 
+    #   <p>An IAM role that gives Amazon Kendra permissions
     #            to access thesaurus file specified in <code>SourceS3Path</code>.
     #         </p>
     #   @return [String]
@@ -3422,7 +3422,7 @@ module Aws::Kendra
     end
 
     # @!attribute failed_entity_list
-    #   <p>Lists the users or groups in your IAM Identity Center identity source that 
+    #   <p>Lists the users or groups in your IAM Identity Center identity source that
     #               failed to properly remove access to your Amazon Kendra experience.</p>
     #   @return [Array<Types::FailedEntity>]
     class DisassociateEntitiesFromExperienceResponse < Struct.new(
@@ -3440,7 +3440,7 @@ module Aws::Kendra
     #   <p>The identifier of the index for your Amazon Kendra experience.</p>
     #   @return [String]
     # @!attribute entity_ids
-    #   <p>The identifiers of users or groups in your IAM Identity Center identity 
+    #   <p>The identifiers of users or groups in your IAM Identity Center identity
     #               source. For example, user IDs could be user emails.</p>
     #   @return [Array<String>]
     class DisassociatePersonasFromEntitiesRequest < Struct.new(
@@ -3454,7 +3454,7 @@ module Aws::Kendra
     end
 
     # @!attribute failed_entity_list
-    #   <p>Lists the users or groups in your IAM Identity Center identity source that 
+    #   <p>Lists the users or groups in your IAM Identity Center identity source that
     #               failed to properly remove access to your Amazon Kendra experience.</p>
     #   @return [Array<Types::FailedEntity>]
     class DisassociatePersonasFromEntitiesResponse < Struct.new(
@@ -3796,11 +3796,11 @@ module Aws::Kendra
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Provides the configuration information for users or groups in 
-    #             your IAM Identity Center identity source to grant access your Amazon Kendra 
+    # <p>Provides the configuration information for users or groups in
+    #             your IAM Identity Center identity source to grant access your Amazon Kendra
     #             experience.</p>
     # @!attribute entity_id
-    #   <p>The identifier of a user or group in your IAM Identity Center identity 
+    #   <p>The identifier of a user or group in your IAM Identity Center identity
     #               source. For example, a user ID could be an email.</p>
     #   @return [String]
     # @!attribute entity_type
@@ -3844,19 +3844,19 @@ module Aws::Kendra
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Provides the configuration information for users or groups in your 
-    #             IAM Identity Center identity source for access to your Amazon Kendra experience. 
-    #             Specific permissions are defined for each user or group once they are 
+    # <p>Provides the configuration information for users or groups in your
+    #             IAM Identity Center identity source for access to your Amazon Kendra experience.
+    #             Specific permissions are defined for each user or group once they are
     #             granted access to your Amazon Kendra experience.</p>
     # @!attribute entity_id
-    #   <p>The identifier of a user or group in your IAM Identity Center identity 
+    #   <p>The identifier of a user or group in your IAM Identity Center identity
     #               source. For example, a user ID could be an email.</p>
     #   @return [String]
     # @!attribute persona
-    #   <p>The persona that defines the specific permissions of the user or group 
-    #               in your IAM Identity Center identity source. The available personas or 
-    #               access roles are <code>Owner</code> and <code>Viewer</code>. For more 
-    #               information on these personas, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html#access-search-experience">Providing 
+    #   <p>The persona that defines the specific permissions of the user or group
+    #               in your IAM Identity Center identity source. The available personas or
+    #               access roles are <code>Owner</code> and <code>Viewer</code>. For more
+    #               information on these personas, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html#access-search-experience">Providing
     #                   access to your search page</a>.</p>
     #   @return [String]
     class EntityPersonaConfiguration < Struct.new(
@@ -3927,16 +3927,16 @@ module Aws::Kendra
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Provides the configuration information for your Amazon Kendra experience. This includes 
-    #             the data source IDs and/or FAQ IDs, and user or group information to grant access 
+    # <p>Provides the configuration information for your Amazon Kendra experience. This includes
+    #             the data source IDs and/or FAQ IDs, and user or group information to grant access
     #             to your Amazon Kendra experience.</p>
     # @!attribute content_source_configuration
-    #   <p>The identifiers of your data sources and FAQs. Or, you can specify 
-    #               that you want to use documents indexed via the <code>BatchPutDocument</code> 
+    #   <p>The identifiers of your data sources and FAQs. Or, you can specify
+    #               that you want to use documents indexed via the <code>BatchPutDocument</code>
     #               API. This is the content you want to use for your Amazon Kendra experience.</p>
     #   @return [Types::ContentSourceConfiguration]
     # @!attribute user_identity_configuration
-    #   <p>The IAM Identity Center field name that contains the identifiers of your users, 
+    #   <p>The IAM Identity Center field name that contains the identifiers of your users,
     #               such as their emails.</p>
     #   @return [Types::UserIdentityConfiguration]
     class ExperienceConfiguration < Struct.new(
@@ -3951,8 +3951,8 @@ module Aws::Kendra
     # <p>Provides the configuration information for the endpoint for your Amazon Kendra
     #             experience.</p>
     # @!attribute endpoint_type
-    #   <p>The type of endpoint for your Amazon Kendra experience. The type currently available 
-    #               is <code>HOME</code>, which is a unique and fully hosted URL to the home page 
+    #   <p>The type of endpoint for your Amazon Kendra experience. The type currently available
+    #               is <code>HOME</code>, which is a unique and fully hosted URL to the home page
     #               of your Amazon Kendra experience.</p>
     #   @return [String]
     # @!attribute endpoint
@@ -3968,12 +3968,12 @@ module Aws::Kendra
     end
 
     # <p>Summary information for users or groups in your IAM Identity Center identity
-    #             source with granted access to your Amazon Kendra experience. You can create an Amazon Kendra 
-    #             experience such as a search application. For more information on creating a 
-    #             search application experience, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html">Building 
+    #             source with granted access to your Amazon Kendra experience. You can create an Amazon Kendra
+    #             experience such as a search application. For more information on creating a
+    #             search application experience, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html">Building
     #                 a search experience with no code</a>.</p>
     # @!attribute entity_id
-    #   <p>The identifier of a user or group in your IAM Identity Center identity source. 
+    #   <p>The identifier of a user or group in your IAM Identity Center identity source.
     #               For example, a user ID could be an email.</p>
     #   @return [String]
     # @!attribute entity_type
@@ -3992,9 +3992,9 @@ module Aws::Kendra
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Summary information for your Amazon Kendra experience. You can create an Amazon Kendra 
-    #             experience such as a search application. For more information on creating 
-    #             a search application experience, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html">Building 
+    # <p>Summary information for your Amazon Kendra experience. You can create an Amazon Kendra
+    #             experience such as a search application. For more information on creating
+    #             a search application experience, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html">Building
     #                 a search experience with no code</a>.</p>
     # @!attribute name
     #   <p>The name of your Amazon Kendra experience.</p>
@@ -4009,7 +4009,7 @@ module Aws::Kendra
     #   <p>The processing status of your Amazon Kendra experience.</p>
     #   @return [String]
     # @!attribute endpoints
-    #   <p>The endpoint URLs for your Amazon Kendra experiences. The URLs are unique 
+    #   <p>The endpoint URLs for your Amazon Kendra experiences. The URLs are unique
     #               and fully hosted by Amazon Web Services.</p>
     #   @return [Array<Types::ExperienceEndpoint>]
     class ExperiencesSummary < Struct.new(
@@ -4088,14 +4088,14 @@ module Aws::Kendra
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Information on the users or groups in your IAM Identity Center identity 
+    # <p>Information on the users or groups in your IAM Identity Center identity
     #             source that failed to properly configure with your Amazon Kendra experience.</p>
     # @!attribute entity_id
-    #   <p>The identifier of the user or group in your IAM Identity Center identity 
+    #   <p>The identifier of the user or group in your IAM Identity Center identity
     #               source. For example, a user ID could be an email.</p>
     #   @return [String]
     # @!attribute error_message
-    #   <p>The reason the user or group in your IAM Identity Center identity source 
+    #   <p>The reason the user or group in your IAM Identity Center identity source
     #               failed to properly configure with your Amazon Kendra experience.</p>
     #   @return [String]
     class FailedEntity < Struct.new(
@@ -4147,10 +4147,10 @@ module Aws::Kendra
     #   <p>The file type used to create the FAQ. </p>
     #   @return [String]
     # @!attribute language_code
-    #   <p>The code for a language. This shows a supported language for the FAQ document 
-    #               as part of the summary information for FAQs. English is supported by default.  
-    #               For more information on supported languages, including their codes, 
-    #               see <a href="https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html">Adding 
+    #   <p>The code for a language. This shows a supported language for the FAQ document
+    #               as part of the summary information for FAQs. English is supported by default.
+    #               For more information on supported languages, including their codes,
+    #               see <a href="https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html">Adding
     #                   documents in languages other than English</a>.</p>
     #   @return [String]
     class FaqSummary < Struct.new(
@@ -4167,13 +4167,13 @@ module Aws::Kendra
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A featured document. This document is displayed at the top of the search 
-    #             results page, placed above all other results for certain queries. If there's 
+    # <p>A featured document. This document is displayed at the top of the search
+    #             results page, placed above all other results for certain queries. If there's
     #             an exact match of a query, then the document is featured in the search results.</p>
     # @!attribute id
-    #   <p>The identifier of the document to feature in the search results. You can 
-    #               use the <a href="https://docs.aws.amazon.com/kendra/latest/dg/API_Query.html">Query</a> API to search for 
-    #               specific documents with their document IDs included in the result items, 
+    #   <p>The identifier of the document to feature in the search results. You can
+    #               use the <a href="https://docs.aws.amazon.com/kendra/latest/dg/API_Query.html">Query</a> API to search for
+    #               specific documents with their document IDs included in the result items,
     #               or you can use the console.</p>
     #   @return [String]
     class FeaturedDocument < Struct.new(
@@ -4184,13 +4184,13 @@ module Aws::Kendra
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A document ID doesn't exist but you have specified as a featured document. 
-    #             Amazon Kendra cannot feature the document if it doesn't exist in the index. 
-    #             You can check the status of a document and its ID or check for documents with 
-    #             status errors using the <a href="https://docs.aws.amazon.com/kendra/latest/dg/API_BatchGetDocumentStatus.html">BatchGetDocumentStatus</a> 
+    # <p>A document ID doesn't exist but you have specified as a featured document.
+    #             Amazon Kendra cannot feature the document if it doesn't exist in the index.
+    #             You can check the status of a document and its ID or check for documents with
+    #             status errors using the <a href="https://docs.aws.amazon.com/kendra/latest/dg/API_BatchGetDocumentStatus.html">BatchGetDocumentStatus</a>
     #             API.</p>
     # @!attribute id
-    #   <p>The identifier of the document that doesn't exist but you have specified 
+    #   <p>The identifier of the document that doesn't exist but you have specified
     #               as a featured document.</p>
     #   @return [String]
     class FeaturedDocumentMissing < Struct.new(
@@ -4201,14 +4201,14 @@ module Aws::Kendra
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A featured document with its metadata information. This document is displayed 
-    #             at the top of the search results page, placed above all other results for certain 
-    #             queries. If there's an exact match of a query, then the document is featured in 
+    # <p>A featured document with its metadata information. This document is displayed
+    #             at the top of the search results page, placed above all other results for certain
+    #             queries. If there's an exact match of a query, then the document is featured in
     #             the search results.</p>
     # @!attribute id
-    #   <p>The identifier of the featured document with its metadata. You can use 
-    #               the <a href="https://docs.aws.amazon.com/kendra/latest/dg/API_Query.html">Query</a> API to search for 
-    #               specific documents with their document IDs included in the result items, 
+    #   <p>The identifier of the featured document with its metadata. You can use
+    #               the <a href="https://docs.aws.amazon.com/kendra/latest/dg/API_Query.html">Query</a> API to search for
+    #               specific documents with their document IDs included in the result items,
     #               or you can use the console.</p>
     #   @return [String]
     # @!attribute title
@@ -4227,15 +4227,15 @@ module Aws::Kendra
       include ::Smithy::Schema::Structure
     end
 
-    # <p>An error message with a list of conflicting queries used across different sets 
+    # <p>An error message with a list of conflicting queries used across different sets
     #             of featured results. This occurred with the request for a new featured results set.
-    #             Check that the queries you specified for featured results are unique per featured 
+    #             Check that the queries you specified for featured results are unique per featured
     #             results set for each index.</p>
     # @!attribute message
     #   <p>An explanation for the conflicting queries.</p>
     #   @return [String]
     # @!attribute conflicting_items
-    #   <p>A list of the conflicting queries, including the query text, the name for 
+    #   <p>A list of the conflicting queries, including the query text, the name for
     #               the featured results set, and the identifier of the featured results set.</p>
     #   @return [Array<Types::ConflictingItem>]
     class FeaturedResultsConflictException < Struct.new(
@@ -4247,16 +4247,16 @@ module Aws::Kendra
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A single featured result item. A featured result is displayed at the top of 
-    #             the search results page, placed above all other results for certain queries. If 
-    #             there's an exact match of a query, then certain documents are featured in the 
+    # <p>A single featured result item. A featured result is displayed at the top of
+    #             the search results page, placed above all other results for certain queries. If
+    #             there's an exact match of a query, then certain documents are featured in the
     #             search results.</p>
     # @!attribute id
     #   <p>The identifier of the featured result.</p>
     #   @return [String]
     # @!attribute type
-    #   <p>The type of document within the featured result response. For example, 
-    #               a response could include a question-answer type that's relevant to the 
+    #   <p>The type of document within the featured result response. For example,
+    #               a response could include a question-answer type that's relevant to the
     #               query.</p>
     #   @return [String]
     # @!attribute additional_attributes
@@ -4275,13 +4275,13 @@ module Aws::Kendra
     #   <p>The source URI location of the featured document.</p>
     #   @return [String]
     # @!attribute document_attributes
-    #   <p>An array of document attributes assigned to a featured document in the 
-    #               search results. For example, the document author (<code>_author</code>) or 
+    #   <p>An array of document attributes assigned to a featured document in the
+    #               search results. For example, the document author (<code>_author</code>) or
     #               the source URI (<code>_source_uri</code>) of the document.</p>
     #   @return [Array<Types::DocumentAttribute>]
     # @!attribute feedback_token
-    #   <p>A token that identifies a particular featured result from a particular 
-    #               query. Use this token to provide click-through feedback for the result. 
+    #   <p>A token that identifies a particular featured result from a particular
+    #               query. Use this token to provide click-through feedback for the result.
     #               For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/submitting-feedback.html">Submitting feedback</a>.</p>
     #   @return [String]
     class FeaturedResultsItem < Struct.new(
@@ -4301,8 +4301,8 @@ module Aws::Kendra
     end
 
     # <p>A set of featured results that are displayed at the top of your search results.
-    #             Featured results are placed above all other results for certain queries. If there's 
-    #             an exact match of a query, then one or more specific documents are featured in the 
+    #             Featured results are placed above all other results for certain queries. If there's
+    #             an exact match of a query, then one or more specific documents are featured in the
     #             search results.</p>
     # @!attribute featured_results_set_id
     #   <p>The identifier of the set of featured results.</p>
@@ -4314,37 +4314,37 @@ module Aws::Kendra
     #   <p>The description for the set of featured results.</p>
     #   @return [String]
     # @!attribute status
-    #   <p>The current status of the set of featured results. When the value is 
-    #               <code>ACTIVE</code>, featured results are ready for use. You can still 
-    #               configure your settings before setting the status to <code>ACTIVE</code>. 
-    #               You can set the status to <code>ACTIVE</code> or <code>INACTIVE</code> 
-    #               using the <a href="https://docs.aws.amazon.com/kendra/latest/dg/API_UpdateFeaturedResultsSet.html">UpdateFeaturedResultsSet</a> API. The queries you specify for 
-    #               featured results must be unique per featured results set for each index, 
+    #   <p>The current status of the set of featured results. When the value is
+    #               <code>ACTIVE</code>, featured results are ready for use. You can still
+    #               configure your settings before setting the status to <code>ACTIVE</code>.
+    #               You can set the status to <code>ACTIVE</code> or <code>INACTIVE</code>
+    #               using the <a href="https://docs.aws.amazon.com/kendra/latest/dg/API_UpdateFeaturedResultsSet.html">UpdateFeaturedResultsSet</a> API. The queries you specify for
+    #               featured results must be unique per featured results set for each index,
     #               whether the status is <code>ACTIVE</code> or <code>INACTIVE</code>.</p>
     #   @return [String]
     # @!attribute query_texts
     #   <p>The list of queries for featuring results.</p>
-    #            <p>Specific queries are mapped to specific documents for featuring in 
-    #               the results. If a query contains an exact match, then one or more 
-    #               specific documents are featured in the results. The exact match applies 
-    #               to the full query. For example, if you only specify 'Kendra', queries 
-    #               such as 'How does kendra semantically rank results?' will not render the 
-    #               featured results. Featured results are designed for specific queries, 
+    #            <p>Specific queries are mapped to specific documents for featuring in
+    #               the results. If a query contains an exact match, then one or more
+    #               specific documents are featured in the results. The exact match applies
+    #               to the full query. For example, if you only specify 'Kendra', queries
+    #               such as 'How does kendra semantically rank results?' will not render the
+    #               featured results. Featured results are designed for specific queries,
     #               rather than queries that are too broad in scope.</p>
     #   @return [Array<String>]
     # @!attribute featured_documents
-    #   <p>The list of document IDs for the documents you want to feature at the 
-    #               top of the search results page. You can use the <a href="https://docs.aws.amazon.com/kendra/latest/dg/API_Query.html">Query</a> API to search for 
-    #               specific documents with their document IDs included in the result items, 
+    #   <p>The list of document IDs for the documents you want to feature at the
+    #               top of the search results page. You can use the <a href="https://docs.aws.amazon.com/kendra/latest/dg/API_Query.html">Query</a> API to search for
+    #               specific documents with their document IDs included in the result items,
     #               or you can use the console.</p>
-    #            <p>You can add up to four featured documents. You can request to increase this 
+    #            <p>You can add up to four featured documents. You can request to increase this
     #               limit by contacting <a href="http://aws.amazon.com/contact-us/">Support</a>.</p>
-    #            <p>Specific queries are mapped to specific documents for featuring in the 
-    #               results. If a query contains an exact match, then one or more specific 
-    #               documents are featured in the results. The exact match applies to the full 
-    #               query. For example, if you only specify 'Kendra', queries such as 'How does 
-    #               kendra semantically rank results?' will not render the featured results. 
-    #               Featured results are designed for specific queries, rather than queries 
+    #            <p>Specific queries are mapped to specific documents for featuring in the
+    #               results. If a query contains an exact match, then one or more specific
+    #               documents are featured in the results. The exact match applies to the full
+    #               query. For example, if you only specify 'Kendra', queries such as 'How does
+    #               kendra semantically rank results?' will not render the featured results.
+    #               Featured results are designed for specific queries, rather than queries
     #               that are too broad in scope.</p>
     #   @return [Array<Types::FeaturedDocument>]
     # @!attribute last_updated_timestamp
@@ -4369,7 +4369,7 @@ module Aws::Kendra
     end
 
     # <p>Summary information for a set of featured results. Featured results are placed
-    #             above all other results for certain queries. If there's an exact match of a query, 
+    #             above all other results for certain queries. If there's an exact match of a query,
     #             then one or more specific documents are featured in the search results.</p>
     # @!attribute featured_results_set_id
     #   <p>The identifier of the set of featured results.</p>
@@ -4378,12 +4378,12 @@ module Aws::Kendra
     #   <p>The name for the set of featured results.</p>
     #   @return [String]
     # @!attribute status
-    #   <p>The current status of the set of featured results. When the value is 
-    #               <code>ACTIVE</code>, featured results are ready for use. You can still 
-    #               configure your settings before setting the status to <code>ACTIVE</code>. 
-    #               You can set the status to <code>ACTIVE</code> or <code>INACTIVE</code> 
-    #               using the <a href="https://docs.aws.amazon.com/kendra/latest/dg/API_UpdateFeaturedResultsSet.html">UpdateFeaturedResultsSet</a> API. The queries you specify for 
-    #               featured results must be unique per featured results set for each index, 
+    #   <p>The current status of the set of featured results. When the value is
+    #               <code>ACTIVE</code>, featured results are ready for use. You can still
+    #               configure your settings before setting the status to <code>ACTIVE</code>.
+    #               You can set the status to <code>ACTIVE</code> or <code>INACTIVE</code>
+    #               using the <a href="https://docs.aws.amazon.com/kendra/latest/dg/API_UpdateFeaturedResultsSet.html">UpdateFeaturedResultsSet</a> API. The queries you specify for
+    #               featured results must be unique per featured results set for each index,
     #               whether the status is <code>ACTIVE</code> or <code>INACTIVE</code>.</p>
     #   @return [String]
     # @!attribute last_updated_timestamp
@@ -4408,12 +4408,12 @@ module Aws::Kendra
     #             source.</p>
     #          <note>
     #             <p>Amazon Kendra now supports an upgraded Amazon FSx Windows connector.</p>
-    #             <p>You must now use the <a href="https://docs.aws.amazon.com/kendra/latest/APIReference/API_TemplateConfiguration.html">TemplateConfiguration</a> object instead of the 
+    #             <p>You must now use the <a href="https://docs.aws.amazon.com/kendra/latest/APIReference/API_TemplateConfiguration.html">TemplateConfiguration</a> object instead of the
     #                 <code>FsxConfiguration</code> object to configure your connector.</p>
     #             <p>Connectors configured using the older console and API architecture will continue to
     #                 function as configured. However, you won't be able to edit or update them. If you want
     #                 to edit or update your connector configuration, you must create a new connector.</p>
-    #             <p>We recommended migrating your connector workflow to the upgraded version. Support for 
+    #             <p>We recommended migrating your connector workflow to the upgraded version. Support for
     #                 connectors configured using the older architecture is scheduled to end by June 2024.</p>
     #          </note>
     # @!attribute file_system_id
@@ -4485,30 +4485,30 @@ module Aws::Kendra
     #   @return [String]
     # @!attribute query_text
     #   <p>The text of a user's query to generate query suggestions.</p>
-    #            <p>A query is suggested if the query prefix matches 
+    #            <p>A query is suggested if the query prefix matches
     #               what a user starts to type as their query.</p>
-    #            <p>Amazon Kendra does not show any suggestions if a user 
-    #               types fewer than two characters or more than 60 characters. 
-    #               A query must also have at least one search result and contain 
+    #            <p>Amazon Kendra does not show any suggestions if a user
+    #               types fewer than two characters or more than 60 characters.
+    #               A query must also have at least one search result and contain
     #               at least one word of more than four characters.</p>
     #   @return [String]
     # @!attribute max_suggestions_count
-    #   <p>The maximum number of query suggestions you want to show 
+    #   <p>The maximum number of query suggestions you want to show
     #               to your users.</p>
     #   @return [Integer]
     # @!attribute suggestion_types
-    #   <p>The suggestions type to base query suggestions on. The suggestion 
-    #               types are query history or document fields/attributes. You can set 
+    #   <p>The suggestions type to base query suggestions on. The suggestion
+    #               types are query history or document fields/attributes. You can set
     #               one type or the other.</p>
-    #            <p>If you set query history as your suggestions type, Amazon Kendra 
-    #               suggests queries relevant to your users based on popular queries in 
+    #            <p>If you set query history as your suggestions type, Amazon Kendra
+    #               suggests queries relevant to your users based on popular queries in
     #               the query history.</p>
-    #            <p>If you set document fields/attributes as your suggestions type, 
-    #               Amazon Kendra suggests queries relevant to your users based on the 
+    #            <p>If you set document fields/attributes as your suggestions type,
+    #               Amazon Kendra suggests queries relevant to your users based on the
     #               contents of document fields.</p>
     #   @return [Array<String>]
     # @!attribute attribute_suggestions_config
-    #   <p>Configuration information for the document fields/attributes that you 
+    #   <p>Configuration information for the document fields/attributes that you
     #               want to base query suggestions on.</p>
     #   @return [Types::AttributeSuggestionsGetConfig]
     class GetQuerySuggestionsRequest < Struct.new(
@@ -4603,7 +4603,7 @@ module Aws::Kendra
     end
 
     # @!attribute snap_shot_time_filter
-    #   <p>The Unix timestamp for the beginning and end of the time window for the 
+    #   <p>The Unix timestamp for the beginning and end of the time window for the
     #               search metrics data.</p>
     #   @return [Types::TimeRange]
     # @!attribute snapshots_data_header
@@ -4932,8 +4932,8 @@ module Aws::Kendra
     #             filtering, where search results are filtered based on the user or their group access to
     #             documents.</p>
     # @!attribute member_groups
-    #   <p>A list of users that belong to a group. This can also include sub groups. For example, 
-    #               the sub groups "Research", "Engineering", and "Sales and Marketing" all belong to the group 
+    #   <p>A list of users that belong to a group. This can also include sub groups. For example,
+    #               the sub groups "Research", "Engineering", and "Sales and Marketing" all belong to the group
     #               "Company A".</p>
     #   @return [Array<Types::MemberGroup>]
     # @!attribute member_users
@@ -4968,11 +4968,11 @@ module Aws::Kendra
     #                   <code>DELETED</code>, or <code>FAILED</code>.</p>
     #   @return [String]
     # @!attribute last_updated_at
-    #   <p>The Unix timestamp when an action was last updated. An action can be a <code>PUT</code> 
+    #   <p>The Unix timestamp when an action was last updated. An action can be a <code>PUT</code>
     #               or <code>DELETE</code> action for mapping users to their groups.</p>
     #   @return [Time]
     # @!attribute received_at
-    #   <p>The Unix timestamp when an action was received by Amazon Kendra. An action can 
+    #   <p>The Unix timestamp when an action was received by Amazon Kendra. An action can
     #               be a <code>PUT</code> or <code>DELETE</code> action for mapping users to their groups.</p>
     #   @return [Time]
     # @!attribute ordering_id
@@ -5511,7 +5511,7 @@ module Aws::Kendra
     #   @return [String]
     # @!attribute next_token
     #   <p>If the previous response was incomplete (because there is more data to retrieve),
-    #               Amazon Kendra returns a pagination token in the response. You can use this pagination 
+    #               Amazon Kendra returns a pagination token in the response. You can use this pagination
     #               token to retrieve the next set of users or groups.</p>
     #   @return [String]
     # @!attribute max_results
@@ -5532,7 +5532,7 @@ module Aws::Kendra
     #   <p>An array of summary information for one or more users or groups.</p>
     #   @return [Array<Types::PersonasSummary>]
     # @!attribute next_token
-    #   <p>If the response is truncated, Amazon Kendra returns this token, which you can use in 
+    #   <p>If the response is truncated, Amazon Kendra returns this token, which you can use in
     #               a later request to retrieve the next set of users or groups.</p>
     #   @return [String]
     class ListEntityPersonasResponse < Struct.new(
@@ -5552,7 +5552,7 @@ module Aws::Kendra
     #   @return [String]
     # @!attribute next_token
     #   <p>If the previous response was incomplete (because there is more data to retrieve),
-    #               Amazon Kendra returns a pagination token in the response. You can use this pagination 
+    #               Amazon Kendra returns a pagination token in the response. You can use this pagination
     #               token to retrieve the next set of users or groups.</p>
     #   @return [String]
     class ListExperienceEntitiesRequest < Struct.new(
@@ -5569,7 +5569,7 @@ module Aws::Kendra
     #   <p>An array of summary information for one or more users or groups.</p>
     #   @return [Array<Types::ExperienceEntitiesSummary>]
     # @!attribute next_token
-    #   <p>If the response is truncated, Amazon Kendra returns this token, which you can use in 
+    #   <p>If the response is truncated, Amazon Kendra returns this token, which you can use in
     #               a later request to retrieve the next set of users or groups.</p>
     #   @return [String]
     class ListExperienceEntitiesResponse < Struct.new(
@@ -5606,7 +5606,7 @@ module Aws::Kendra
     #   <p>An array of summary information for one or more Amazon Kendra experiences.</p>
     #   @return [Array<Types::ExperiencesSummary>]
     # @!attribute next_token
-    #   <p>If the response is truncated, Amazon Kendra returns this token, which you can use 
+    #   <p>If the response is truncated, Amazon Kendra returns this token, which you can use
     #               in a later request to retrieve the next set of Amazon Kendra experiences.</p>
     #   @return [String]
     class ListExperiencesResponse < Struct.new(
@@ -5660,8 +5660,8 @@ module Aws::Kendra
     #   <p>The identifier of the index used for featuring results.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>If the response is truncated, Amazon Kendra returns a pagination token 
-    #               in the response. You can use this pagination token to retrieve the next set 
+    #   <p>If the response is truncated, Amazon Kendra returns a pagination token
+    #               in the response. You can use this pagination token to retrieve the next set
     #               of featured results sets.</p>
     #   @return [String]
     # @!attribute max_results
@@ -5681,7 +5681,7 @@ module Aws::Kendra
     #   <p>An array of summary information for one or more featured results sets.</p>
     #   @return [Array<Types::FeaturedResultsSetSummary>]
     # @!attribute next_token
-    #   <p>If the response is truncated, Amazon Kendra returns a pagination token 
+    #   <p>If the response is truncated, Amazon Kendra returns a pagination token
     #               in the response.</p>
     #   @return [String]
     class ListFeaturedResultsSetsResponse < Struct.new(
@@ -5778,15 +5778,15 @@ module Aws::Kendra
     end
 
     # @!attribute index_id
-    #   <p>The identifier of the index for a list of all block lists that exist for 
+    #   <p>The identifier of the index for a list of all block lists that exist for
     #               that index.</p>
-    #            <p>For information on the current quota limits for block lists, see 
-    #               <a href="https://docs.aws.amazon.com/kendra/latest/dg/quotas.html">Quotas 
+    #            <p>For information on the current quota limits for block lists, see
+    #               <a href="https://docs.aws.amazon.com/kendra/latest/dg/quotas.html">Quotas
     #                   for Amazon Kendra</a>.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>If the previous response was incomplete (because there is more data to retrieve), 
-    #               Amazon Kendra returns a pagination token in the response. You can use this pagination 
+    #   <p>If the previous response was incomplete (because there is more data to retrieve),
+    #               Amazon Kendra returns a pagination token in the response. You can use this pagination
     #               token to retrieve the next set of block lists (<code>BlockListSummaryItems</code>).</p>
     #   @return [String]
     # @!attribute max_results
@@ -5804,15 +5804,15 @@ module Aws::Kendra
 
     # @!attribute block_list_summary_items
     #   <p>Summary items for a block list.</p>
-    #            <p>This includes summary items on the block list ID, block list name, when the 
-    #               block list was created, when the block list was last updated, and the count 
+    #            <p>This includes summary items on the block list ID, block list name, when the
+    #               block list was created, when the block list was last updated, and the count
     #               of block words/phrases in the block list.</p>
-    #            <p>For information on the current quota limits for block lists, see 
-    #               <a href="https://docs.aws.amazon.com/kendra/latest/dg/quotas.html">Quotas 
+    #            <p>For information on the current quota limits for block lists, see
+    #               <a href="https://docs.aws.amazon.com/kendra/latest/dg/quotas.html">Quotas
     #                   for Amazon Kendra</a>.</p>
     #   @return [Array<Types::QuerySuggestionsBlockListSummary>]
     # @!attribute next_token
-    #   <p>If the response is truncated, Amazon Kendra returns this token that you can use 
+    #   <p>If the response is truncated, Amazon Kendra returns this token that you can use
     #               in the subsequent request to retrieve the next set of block lists.</p>
     #   @return [String]
     class ListQuerySuggestionsBlockListsResponse < Struct.new(
@@ -5825,11 +5825,11 @@ module Aws::Kendra
     end
 
     # @!attribute resource_arn
-    #   <p>The Amazon Resource Name (ARN) of the index, FAQ, data source, or other resource to 
-    #         get a list of tags for. For example, the ARN of an index is constructed as follows: 
-    #         <i>arn:aws:kendra:your-region:your-account-id:index/index-id</i> 
-    #         For information on how to construct an ARN for all types of Amazon Kendra resources, see 
-    #         <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonkendra.html#amazonkendra-resources-for-iam-policies">Resource 
+    #   <p>The Amazon Resource Name (ARN) of the index, FAQ, data source, or other resource to
+    #         get a list of tags for. For example, the ARN of an index is constructed as follows:
+    #         <i>arn:aws:kendra:your-region:your-account-id:index/index-id</i>
+    #         For information on how to construct an ARN for all types of Amazon Kendra resources, see
+    #         <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonkendra.html#amazonkendra-resources-for-iam-policies">Resource
     #           types</a>.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
@@ -5857,7 +5857,7 @@ module Aws::Kendra
     # @!attribute next_token
     #   <p>If the previous response was incomplete (because there is more data to retrieve),
     #            Amazon Kendra returns a pagination token in the response. You can use this pagination token to
-    #            retrieve the next set of thesauri (<code>ThesaurusSummaryItems</code>). 
+    #            retrieve the next set of thesauri (<code>ThesaurusSummaryItems</code>).
     #         </p>
     #   @return [String]
     # @!attribute max_results
@@ -5874,8 +5874,8 @@ module Aws::Kendra
     end
 
     # @!attribute next_token
-    #   <p>If the response is truncated, Amazon Kendra returns this 
-    #            token that you can use in the subsequent request to 
+    #   <p>If the response is truncated, Amazon Kendra returns this
+    #            token that you can use in the subsequent request to
     #            retrieve the next set of thesauri.
     #         </p>
     #   @return [String]
@@ -6028,21 +6028,21 @@ module Aws::Kendra
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Summary information for users or groups in your IAM Identity Center identity 
-    #             source. This applies to users and groups with specific permissions that define 
-    #             their level of access to your Amazon Kendra experience. You can create an Amazon Kendra experience 
-    #             such as a search application. For more information on creating a search application 
-    #             experience, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html">Building a 
+    # <p>Summary information for users or groups in your IAM Identity Center identity
+    #             source. This applies to users and groups with specific permissions that define
+    #             their level of access to your Amazon Kendra experience. You can create an Amazon Kendra experience
+    #             such as a search application. For more information on creating a search application
+    #             experience, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html">Building a
     #                 search experience with no code</a>.</p>
     # @!attribute entity_id
-    #   <p>The identifier of a user or group in your IAM Identity Center identity source. 
+    #   <p>The identifier of a user or group in your IAM Identity Center identity source.
     #               For example, a user ID could be an email.</p>
     #   @return [String]
     # @!attribute persona
-    #   <p>The persona that defines the specific permissions of the user or group in 
-    #               your IAM Identity Center identity source. The available personas or access 
-    #               roles are <code>Owner</code> and <code>Viewer</code>. For more information on 
-    #               these personas, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html#access-search-experience">Providing 
+    #   <p>The persona that defines the specific permissions of the user or group in
+    #               your IAM Identity Center identity source. The available personas or access
+    #               roles are <code>Owner</code> and <code>Viewer</code>. For more information on
+    #               these personas, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html#access-search-experience">Providing
     #                   access to your search page</a>.</p>
     #   @return [String]
     # @!attribute created_at
@@ -6100,7 +6100,7 @@ module Aws::Kendra
     #               for HTTPS.</p>
     #   @return [Integer]
     # @!attribute credentials
-    #   <p>The Amazon Resource Name (ARN) of an Secrets Manager secret. You create a 
+    #   <p>The Amazon Resource Name (ARN) of an Secrets Manager secret. You create a
     #               secret to store your credentials in <a href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html">Secrets Manager</a>
     #            </p>
     #            <p>The credentials are optional. You use a secret if web proxy credentials are required
@@ -6132,7 +6132,7 @@ module Aws::Kendra
     #   <p>The identifier of the group you want to map its users to.</p>
     #   @return [String]
     # @!attribute group_members
-    #   <p>The list that contains your users that belong the same group. This can include sub groups 
+    #   <p>The list that contains your users that belong the same group. This can include sub groups
     #               that belong to a group.</p>
     #            <p>For example, the group "Company A" includes the user "CEO" and the sub groups
     #               "Research", "Engineering", and "Sales and Marketing".</p>
@@ -6156,9 +6156,9 @@ module Aws::Kendra
     #               received by Amazon Kendra.</p>
     #   @return [Integer]
     # @!attribute role_arn
-    #   <p>The Amazon Resource Name (ARN) of an IAM role that has access to the 
+    #   <p>The Amazon Resource Name (ARN) of an IAM role that has access to the
     #               S3 file that contains your list of users that belong to a group.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html#iam-roles-ds">IAM roles for 
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html#iam-roles-ds">IAM roles for
     #               Amazon Kendra</a>.</p>
     #   @return [String]
     class PutPrincipalMappingRequest < Struct.new(
@@ -6413,11 +6413,11 @@ module Aws::Kendra
     end
 
     # <p>Summary information on a query suggestions block list.</p>
-    #          <p>This includes information on the block list ID, block list name, when the 
-    #             block list was created, when the block list was last updated, and the count 
+    #          <p>This includes information on the block list ID, block list name, when the
+    #             block list was created, when the block list was last updated, and the count
     #             of block words/phrases in the block list.</p>
-    #          <p>For information on the current quota limits for block lists, see 
-    #             <a href="https://docs.aws.amazon.com/kendra/latest/dg/quotas.html">Quotas 
+    #          <p>For information on the current quota limits for block lists, see
+    #             <a href="https://docs.aws.amazon.com/kendra/latest/dg/quotas.html">Quotas
     #                 for Amazon Kendra</a>.</p>
     # @!attribute id
     #   <p>The identifier of a block list.</p>
@@ -6796,12 +6796,12 @@ module Aws::Kendra
     #             bucket.</p>
     #          <note>
     #             <p>Amazon Kendra now supports an upgraded Amazon S3 connector.</p>
-    #             <p>You must now use the <a href="https://docs.aws.amazon.com/kendra/latest/APIReference/API_TemplateConfiguration.html">TemplateConfiguration</a> object instead of the 
+    #             <p>You must now use the <a href="https://docs.aws.amazon.com/kendra/latest/APIReference/API_TemplateConfiguration.html">TemplateConfiguration</a> object instead of the
     #                 <code>S3DataSourceConfiguration</code> object to configure your connector.</p>
     #             <p>Connectors configured using the older console and API architecture will continue to
     #                 function as configured. However, you won't be able to edit or update them. If you want
     #                 to edit or update your connector configuration, you must create a new connector.</p>
-    #             <p>We recommended migrating your connector workflow to the upgraded version. Support for 
+    #             <p>We recommended migrating your connector workflow to the upgraded version. Support for
     #                 connectors configured using the older architecture is scheduled to end by June 2024.</p>
     #          </note>
     # @!attribute bucket_name
@@ -6812,9 +6812,9 @@ module Aws::Kendra
     #   @return [Array<String>]
     # @!attribute inclusion_patterns
     #   <p>A list of glob patterns (patterns that can expand a wildcard pattern into a list of
-    #               path names that match the given pattern) for certain file names and file types to include 
-    #               in your index. If a document matches both an inclusion and exclusion prefix or pattern, 
-    #               the exclusion prefix takes precendence and the document is not indexed. Examples of glob 
+    #               path names that match the given pattern) for certain file names and file types to include
+    #               in your index. If a document matches both an inclusion and exclusion prefix or pattern,
+    #               the exclusion prefix takes precendence and the document is not indexed. Examples of glob
     #               patterns include:</p>
     #            <ul>
     #               <li>
@@ -6861,9 +6861,9 @@ module Aws::Kendra
     #   @return [Array<String>]
     # @!attribute exclusion_patterns
     #   <p>A list of glob patterns (patterns that can expand a wildcard pattern into a list of
-    #               path names that match the given pattern) for certain file names and file types to exclude 
-    #               from your index. If a document matches both an inclusion and exclusion prefix or pattern, 
-    #               the exclusion prefix takes precendence and the document is not indexed. Examples of glob 
+    #               path names that match the given pattern) for certain file names and file types to exclude
+    #               from your index. If a document matches both an inclusion and exclusion prefix or pattern,
+    #               the exclusion prefix takes precendence and the document is not indexed. Examples of glob
     #               patterns include:</p>
     #            <ul>
     #               <li>
@@ -7490,7 +7490,7 @@ module Aws::Kendra
     end
 
     # <p>You have exceeded the set limits for your Amazon Kendra service. Please see
-    #             <a href="https://docs.aws.amazon.com/kendra/latest/dg/quotas.html">Quotas</a> for 
+    #             <a href="https://docs.aws.amazon.com/kendra/latest/dg/quotas.html">Quotas</a> for
     #             more information, or contact <a href="http://aws.amazon.com/contact-us/">Support</a> to inquire about
     #             an increase of limits.</p>
     # @!attribute message
@@ -7641,12 +7641,12 @@ module Aws::Kendra
     # <p>Provides the configuration information to connect to Slack as your data source.</p>
     #          <note>
     #             <p>Amazon Kendra now supports an upgraded Slack connector.</p>
-    #             <p>You must now use the <a href="https://docs.aws.amazon.com/kendra/latest/APIReference/API_TemplateConfiguration.html">TemplateConfiguration</a> object instead of the 
+    #             <p>You must now use the <a href="https://docs.aws.amazon.com/kendra/latest/APIReference/API_TemplateConfiguration.html">TemplateConfiguration</a> object instead of the
     #                 <code>SlackConfiguration</code> object to configure your connector.</p>
     #             <p>Connectors configured using the older console and API architecture will continue to
     #                 function as configured. However, you won’t be able to edit or update them. If you want
     #                 to edit or update your connector configuration, you must create a new connector.</p>
-    #             <p>We recommended migrating your connector workflow to the upgraded version. Support for 
+    #             <p>We recommended migrating your connector workflow to the upgraded version. Support for
     #                 connectors configured using the older architecture is scheduled to end by June 2024.</p>
     #          </note>
     # @!attribute team_id
@@ -7820,7 +7820,7 @@ module Aws::Kendra
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The document ID and its fields/attributes that are used for a query suggestion, if 
+    # <p>The document ID and its fields/attributes that are used for a query suggestion, if
     #             document fields set to use for query suggestions.</p>
     # @!attribute document_id
     #   <p>The identifier of the document used for a query suggestion.</p>
@@ -7829,8 +7829,8 @@ module Aws::Kendra
     #   <p>The document fields/attributes used for a query suggestion.</p>
     #   @return [Array<String>]
     # @!attribute additional_attributes
-    #   <p>The additional fields/attributes to include in the response. You can use additional 
-    #               fields to provide extra information in the response. Additional fields are not used 
+    #   <p>The additional fields/attributes to include in the response. You can use additional
+    #               fields to provide extra information in the response. Additional fields are not used
     #               to based suggestions on.</p>
     #   @return [Array<Types::DocumentAttribute>]
     class SourceDocument < Struct.new(
@@ -7860,11 +7860,11 @@ module Aws::Kendra
     end
 
     # <p>Provides the configuration information for suggested query spell corrections.</p>
-    #          <p>Suggested spell corrections are based on words that appear in your indexed documents 
+    #          <p>Suggested spell corrections are based on words that appear in your indexed documents
     #             and how closely a corrected word matches a misspelled word.</p>
-    #          <p>This feature is designed with certain defaults or limits. For information on the 
-    #             current limits and how to request more support for some limits, see the 
-    #             <a href="https://docs.aws.amazon.com/kendra/latest/dg/query-spell-check.html">Spell 
+    #          <p>This feature is designed with certain defaults or limits. For information on the
+    #             current limits and how to request more support for some limits, see the
+    #             <a href="https://docs.aws.amazon.com/kendra/latest/dg/query-spell-check.html">Spell
     #                 Checker documentation</a>.</p>
     # @!attribute include_query_spell_check_suggestions
     #   <p>
@@ -8000,14 +8000,14 @@ module Aws::Kendra
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Provides the configuration information for a document field/attribute that you want to base query 
+    # <p>Provides the configuration information for a document field/attribute that you want to base query
     #             suggestions on.</p>
     # @!attribute attribute_name
     #   <p>The name of the document field/attribute.</p>
     #   @return [String]
     # @!attribute suggestable
     #   <p>
-    #               <code>TRUE</code> means the document field/attribute is suggestible, so the contents within the 
+    #               <code>TRUE</code> means the document field/attribute is suggestible, so the contents within the
     #               field can be used for query suggestions.</p>
     #   @return [Boolean]
     class SuggestableConfig < Struct.new(
@@ -8021,16 +8021,16 @@ module Aws::Kendra
 
     # <p>A single query suggestion.</p>
     # @!attribute id
-    #   <p>The UUID (universally unique identifier) of a single 
+    #   <p>The UUID (universally unique identifier) of a single
     #               query suggestion.</p>
     #   @return [String]
     # @!attribute value
-    #   <p>The value for the UUID (universally unique identifier) 
+    #   <p>The value for the UUID (universally unique identifier)
     #               of a single query suggestion.</p>
     #            <p>The value is the text string of a suggestion.</p>
     #   @return [Types::SuggestionValue]
     # @!attribute source_documents
-    #   <p>The list of document IDs and their fields/attributes that are used for a 
+    #   <p>The list of document IDs and their fields/attributes that are used for a
     #               single query suggestion, if document fields set to use for query suggestions.</p>
     #   @return [Array<Types::SourceDocument>]
     class Suggestion < Struct.new(
@@ -8077,7 +8077,7 @@ module Aws::Kendra
 
     # <p>The <code>SuggestionTextWithHighlights</code> structure information.</p>
     # @!attribute text
-    #   <p>The <code>SuggestionTextWithHighlights</code> structure that contains 
+    #   <p>The <code>SuggestionTextWithHighlights</code> structure that contains
     #               the query suggestion text and highlights.</p>
     #   @return [Types::SuggestionTextWithHighlights]
     class SuggestionValue < Struct.new(
@@ -8157,11 +8157,11 @@ module Aws::Kendra
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A key-value pair that identifies or categorizes an index, FAQ, 
-    #       data source, or other resource. TA tag key and value can consist of Unicode letters, 
+    # <p>A key-value pair that identifies or categorizes an index, FAQ,
+    #       data source, or other resource. TA tag key and value can consist of Unicode letters,
     #       digits, white space, and any of the following symbols: _ . : / = + - @.</p>
     # @!attribute key
-    #   <p>The key for the tag. Keys are not case sensitive and must be unique for the index, FAQ, 
+    #   <p>The key for the tag. Keys are not case sensitive and must be unique for the index, FAQ,
     #         data source, or other resource.</p>
     #   @return [String]
     # @!attribute value
@@ -8178,15 +8178,15 @@ module Aws::Kendra
     end
 
     # @!attribute resource_arn
-    #   <p>The Amazon Resource Name (ARN) of the index, FAQ, data source, or other resource to add a tag. 
-    #         For example, the ARN of an index is constructed as follows: 
-    #         <i>arn:aws:kendra:your-region:your-account-id:index/index-id</i>  
-    #         For information on how to construct an ARN for all types of Amazon Kendra resources, see 
-    #         <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonkendra.html#amazonkendra-resources-for-iam-policies">Resource 
+    #   <p>The Amazon Resource Name (ARN) of the index, FAQ, data source, or other resource to add a tag.
+    #         For example, the ARN of an index is constructed as follows:
+    #         <i>arn:aws:kendra:your-region:your-account-id:index/index-id</i>
+    #         For information on how to construct an ARN for all types of Amazon Kendra resources, see
+    #         <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonkendra.html#amazonkendra-resources-for-iam-policies">Resource
     #           types</a>.</p>
     #   @return [String]
     # @!attribute tags
-    #   <p>A list of tag keys to add to the index, FAQ, data source, or other resource. If a tag already 
+    #   <p>A list of tag keys to add to the index, FAQ, data source, or other resource. If a tag already
     #         exists, the existing value is replaced with the new value.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
@@ -8316,15 +8316,15 @@ module Aws::Kendra
     end
 
     # @!attribute resource_arn
-    #   <p>The Amazon Resource Name (ARN) of the index, FAQ, data source, or other resource to remove a tag. 
-    #         For example, the ARN of an index is constructed as follows: 
-    #         <i>arn:aws:kendra:your-region:your-account-id:index/index-id</i> 
-    #         For information on how to construct an ARN for all types of Amazon Kendra resources, see 
-    #         <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonkendra.html#amazonkendra-resources-for-iam-policies">Resource 
+    #   <p>The Amazon Resource Name (ARN) of the index, FAQ, data source, or other resource to remove a tag.
+    #         For example, the ARN of an index is constructed as follows:
+    #         <i>arn:aws:kendra:your-region:your-account-id:index/index-id</i>
+    #         For information on how to construct an ARN for all types of Amazon Kendra resources, see
+    #         <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonkendra.html#amazonkendra-resources-for-iam-policies">Resource
     #           types</a>.</p>
     #   @return [String]
     # @!attribute tag_keys
-    #   <p>A list of tag keys to remove from the index, FAQ, data source, or other resource. If a tag 
+    #   <p>A list of tag keys to remove from the index, FAQ, data source, or other resource. If a tag
     #         key doesn't exist for the resource, it is ignored.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
@@ -8407,15 +8407,15 @@ module Aws::Kendra
     #   <p>The sync schedule you want to update for the data source connector.</p>
     #   @return [String]
     # @!attribute role_arn
-    #   <p>The Amazon Resource Name (ARN) of an IAM role with permission to access 
+    #   <p>The Amazon Resource Name (ARN) of an IAM role with permission to access
     #         the data source and required resources. For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html">IAM roles for Amazon Kendra</a>.</p>
     #   @return [String]
     # @!attribute language_code
-    #   <p>The code for a language you want to update for the data source connector. 
-    #               This allows you to support a language for all 
-    #               documents when updating the data source. English is supported 
-    #               by default. For more information on supported languages, including their codes, 
-    #               see <a href="https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html">Adding 
+    #   <p>The code for a language you want to update for the data source connector.
+    #               This allows you to support a language for all
+    #               documents when updating the data source. English is supported
+    #               by default. For more information on supported languages, including their codes,
+    #               see <a href="https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html">Adding
     #                   documents in languages other than English</a>.</p>
     #   @return [String]
     # @!attribute custom_document_enrichment_configuration
@@ -8451,9 +8451,9 @@ module Aws::Kendra
     #   <p>The identifier of the index for your Amazon Kendra experience.</p>
     #   @return [String]
     # @!attribute role_arn
-    #   <p>The Amazon Resource Name (ARN) of an IAM role with permission to access 
+    #   <p>The Amazon Resource Name (ARN) of an IAM role with permission to access
     #               the <code>Query</code> API, <code>QuerySuggestions</code> API, <code>SubmitFeedback</code>
-    #               API, and IAM Identity Center that stores your users and groups information. 
+    #               API, and IAM Identity Center that stores your users and groups information.
     #               For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html">IAM roles for Amazon Kendra</a>.</p>
     #   @return [String]
     # @!attribute configuration
@@ -8488,20 +8488,20 @@ module Aws::Kendra
     #   <p>A new description for the set of featured results.</p>
     #   @return [String]
     # @!attribute status
-    #   <p>You can set the status to <code>ACTIVE</code> or <code>INACTIVE</code>. 
-    #               When the value is <code>ACTIVE</code>, featured results are ready for 
-    #               use. You can still configure your settings before setting the status 
-    #               to <code>ACTIVE</code>. The queries you specify for featured results 
-    #               must be unique per featured results set for each index, whether the 
+    #   <p>You can set the status to <code>ACTIVE</code> or <code>INACTIVE</code>.
+    #               When the value is <code>ACTIVE</code>, featured results are ready for
+    #               use. You can still configure your settings before setting the status
+    #               to <code>ACTIVE</code>. The queries you specify for featured results
+    #               must be unique per featured results set for each index, whether the
     #               status is <code>ACTIVE</code> or <code>INACTIVE</code>.</p>
     #   @return [String]
     # @!attribute query_texts
-    #   <p>A list of queries for featuring results. For more information on the 
+    #   <p>A list of queries for featuring results. For more information on the
     #               list of queries, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/API_FeaturedResultsSet.html">FeaturedResultsSet</a>.</p>
     #   @return [Array<String>]
     # @!attribute featured_documents
-    #   <p>A list of document IDs for the documents you want to feature at the 
-    #               top of the search results page. For more information on the list of 
+    #   <p>A list of document IDs for the documents you want to feature at the
+    #               top of the search results page. For more information on the list of
     #               featured documents, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/API_FeaturedResultsSet.html">FeaturedResultsSet</a>.</p>
     #   @return [Array<Types::FeaturedDocument>]
     class UpdateFeaturedResultsSetRequest < Struct.new(
@@ -8519,7 +8519,7 @@ module Aws::Kendra
     end
 
     # @!attribute featured_results_set
-    #   <p>Information on the set of featured results. This includes the identifier 
+    #   <p>Information on the set of featured results. This includes the identifier
     #               of the featured results set, whether the featured results set is active
     #               or inactive, when the featured results set was last updated, and more.</p>
     #   @return [Types::FeaturedResultsSet]
@@ -8614,17 +8614,17 @@ module Aws::Kendra
     #   @return [String]
     # @!attribute source_s3_path
     #   <p>The S3 path where your block list text file sits in S3.</p>
-    #            <p>If you update your block list and provide the same path to the 
-    #               block list text file in S3, then Amazon Kendra reloads the file to refresh 
-    #               the block list. Amazon Kendra does not automatically refresh your block list. 
-    #               You need to call the <code>UpdateQuerySuggestionsBlockList</code> API 
+    #            <p>If you update your block list and provide the same path to the
+    #               block list text file in S3, then Amazon Kendra reloads the file to refresh
+    #               the block list. Amazon Kendra does not automatically refresh your block list.
+    #               You need to call the <code>UpdateQuerySuggestionsBlockList</code> API
     #               to refresh you block list.</p>
-    #            <p>If you update your block list, then Amazon Kendra asynchronously refreshes 
-    #               all query suggestions with the latest content in the S3 file. This 
+    #            <p>If you update your block list, then Amazon Kendra asynchronously refreshes
+    #               all query suggestions with the latest content in the S3 file. This
     #               means changes might not take effect immediately.</p>
     #   @return [Types::S3Path]
     # @!attribute role_arn
-    #   <p>The IAM (Identity and Access Management) role used to access the 
+    #   <p>The IAM (Identity and Access Management) role used to access the
     #               block list text file in S3.</p>
     #   @return [String]
     class UpdateQuerySuggestionsBlockListRequest < Struct.new(
@@ -8645,11 +8645,11 @@ module Aws::Kendra
     #   @return [String]
     # @!attribute mode
     #   <p>Set the mode to <code>ENABLED</code> or <code>LEARN_ONLY</code>.</p>
-    #            <p>By default, Amazon Kendra enables query suggestions. 
-    #               <code>LEARN_ONLY</code> mode allows you to turn off query suggestions. 
+    #            <p>By default, Amazon Kendra enables query suggestions.
+    #               <code>LEARN_ONLY</code> mode allows you to turn off query suggestions.
     #               You can to update this at any time.</p>
-    #            <p>In <code>LEARN_ONLY</code> mode, Amazon Kendra continues to learn from new 
-    #               queries to keep suggestions up to date for when you are ready to 
+    #            <p>In <code>LEARN_ONLY</code> mode, Amazon Kendra continues to learn from new
+    #               queries to keep suggestions up to date for when you are ready to
     #               switch to ENABLED mode again.</p>
     #   @return [String]
     # @!attribute query_log_look_back_window_in_days
@@ -8659,35 +8659,35 @@ module Aws::Kendra
     #   @return [Integer]
     # @!attribute include_queries_without_user_information
     #   <p>
-    #               <code>TRUE</code> to include queries without user information (i.e. all queries, 
-    #               irrespective of the user), otherwise <code>FALSE</code> to only include queries 
+    #               <code>TRUE</code> to include queries without user information (i.e. all queries,
+    #               irrespective of the user), otherwise <code>FALSE</code> to only include queries
     #               with user information.</p>
-    #            <p>If you pass user information to Amazon Kendra along with the queries, you can set this 
-    #               flag to <code>FALSE</code> and instruct Amazon Kendra to only consider queries with user 
+    #            <p>If you pass user information to Amazon Kendra along with the queries, you can set this
+    #               flag to <code>FALSE</code> and instruct Amazon Kendra to only consider queries with user
     #               information.</p>
-    #            <p>If you set to <code>FALSE</code>, Amazon Kendra only considers queries searched at least 
-    #               <code>MinimumQueryCount</code> times across <code>MinimumNumberOfQueryingUsers</code> 
+    #            <p>If you set to <code>FALSE</code>, Amazon Kendra only considers queries searched at least
+    #               <code>MinimumQueryCount</code> times across <code>MinimumNumberOfQueryingUsers</code>
     #               unique users for suggestions.</p>
-    #            <p>If you set to <code>TRUE</code>, Amazon Kendra ignores all user information and learns 
+    #            <p>If you set to <code>TRUE</code>, Amazon Kendra ignores all user information and learns
     #               from all queries.</p>
     #   @return [Boolean]
     # @!attribute minimum_number_of_querying_users
-    #   <p>The minimum number of unique users who must search a query in order for the query 
+    #   <p>The minimum number of unique users who must search a query in order for the query
     #               to be eligible to suggest to your users.</p>
-    #            <p>Increasing this number might decrease the number of suggestions. However, this 
+    #            <p>Increasing this number might decrease the number of suggestions. However, this
     #               ensures a query is searched by many users and is truly popular to suggest to users.</p>
     #            <p>How you tune this setting depends on your specific needs.</p>
     #   @return [Integer]
     # @!attribute minimum_query_count
-    #   <p>The the minimum number of times a query must be searched in order to be 
+    #   <p>The the minimum number of times a query must be searched in order to be
     #               eligible to suggest to your users.</p>
-    #            <p>Decreasing this number increases the number of suggestions. However, this 
-    #               affects the quality of suggestions as it sets a low bar for a query to be 
+    #            <p>Decreasing this number increases the number of suggestions. However, this
+    #               affects the quality of suggestions as it sets a low bar for a query to be
     #               considered popular to suggest to users.</p>
     #            <p>How you tune this setting depends on your specific needs.</p>
     #   @return [Integer]
     # @!attribute attribute_suggestions_config
-    #   <p>Configuration information for the document fields/attributes that you want to base 
+    #   <p>Configuration information for the document fields/attributes that you want to base
     #               query suggestions on.</p>
     #   @return [Types::AttributeSuggestionsUpdateConfig]
     class UpdateQuerySuggestionsConfigRequest < Struct.new(
@@ -8717,7 +8717,7 @@ module Aws::Kendra
     #   <p>A new description for the thesaurus.</p>
     #   @return [String]
     # @!attribute role_arn
-    #   <p>An IAM role that gives Amazon Kendra permissions to 
+    #   <p>An IAM role that gives Amazon Kendra permissions to
     #            access thesaurus file specified in <code>SourceS3Path</code>.</p>
     #   @return [String]
     # @!attribute source_s3_path
@@ -8851,12 +8851,12 @@ module Aws::Kendra
 
     # <p>Provides the configuration information for the identifiers of your users.</p>
     # @!attribute identity_attribute_name
-    #   <p>The IAM Identity Center field name that contains the identifiers of your users, 
-    #               such as their emails. This is used for <a href="https://docs.aws.amazon.com/kendra/latest/dg/user-context-filter.html">user context filtering</a> 
-    #               and for granting access to your Amazon Kendra experience. You must set up IAM Identity Center 
-    #               with Amazon Kendra. You must include your users and groups in your Access Control List when 
-    #               you ingest documents into your index. For more information, see 
-    #               <a href="https://docs.aws.amazon.com/kendra/latest/dg/getting-started-aws-sso.html">Getting 
+    #   <p>The IAM Identity Center field name that contains the identifiers of your users,
+    #               such as their emails. This is used for <a href="https://docs.aws.amazon.com/kendra/latest/dg/user-context-filter.html">user context filtering</a>
+    #               and for granting access to your Amazon Kendra experience. You must set up IAM Identity Center
+    #               with Amazon Kendra. You must include your users and groups in your Access Control List when
+    #               you ingest documents into your index. For more information, see
+    #               <a href="https://docs.aws.amazon.com/kendra/latest/dg/getting-started-aws-sso.html">Getting
     #                   started with an IAM Identity Center identity source</a>.</p>
     #   @return [String]
     class UserIdentityConfiguration < Struct.new(
@@ -8934,7 +8934,7 @@ module Aws::Kendra
     #            </p>
     #   @return [Types::Urls]
     # @!attribute crawl_depth
-    #   <p>The 'depth' or number of levels from the seed level to crawl. For example, the seed 
+    #   <p>The 'depth' or number of levels from the seed level to crawl. For example, the seed
     #               URL page is depth 1 and any hyperlinks on this page that are also crawled are depth 2.</p>
     #   @return [Integer]
     # @!attribute max_links_per_page
@@ -9001,59 +9001,59 @@ module Aws::Kendra
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Provides the configuration information to connect to Amazon WorkDocs 
+    # <p>Provides the configuration information to connect to WorkDocs
     #             as your data source.</p>
-    #          <p>Amazon WorkDocs connector is available in Oregon, North Virginia, Sydney, Singapore and Ireland 
+    #          <p>WorkDocs connector is available in Oregon, North Virginia, Sydney, Singapore and Ireland
     #             regions.</p>
     # @!attribute organization_id
-    #   <p>The identifier of the directory corresponding to your 
-    #               Amazon WorkDocs site repository.</p>
-    #            <p>You can find the organization ID in the 
-    #               <a href="https://console.aws.amazon.com/directoryservicev2/">Directory Service</a> by going to 
-    #               <b>Active Directory</b>, then 
-    #               <b>Directories</b>. Your Amazon WorkDocs site directory has an 
-    #               ID, which is the organization ID. You can also set up a new Amazon WorkDocs 
-    #               directory in the Directory Service console and enable a Amazon WorkDocs site 
-    #               for the directory in the Amazon WorkDocs console.</p>
+    #   <p>The identifier of the directory corresponding to your
+    #               WorkDocs site repository.</p>
+    #            <p>You can find the organization ID in the
+    #               <a href="https://console.aws.amazon.com/directoryservicev2/">Directory Service</a> by going to
+    #               <b>Active Directory</b>, then
+    #               <b>Directories</b>. Your WorkDocs site directory has an
+    #               ID, which is the organization ID. You can also set up a new WorkDocs
+    #               directory in the Directory Service console and enable a WorkDocs site
+    #               for the directory in the WorkDocs console.</p>
     #   @return [String]
     # @!attribute crawl_comments
     #   <p>
-    #               <code>TRUE</code> to include comments on documents 
-    #               in your index. Including comments in your index means each comment 
+    #               <code>TRUE</code> to include comments on documents
+    #               in your index. Including comments in your index means each comment
     #               is a document that can be searched on.</p>
     #            <p>The default is set to <code>FALSE</code>.</p>
     #   @return [Boolean]
     # @!attribute use_change_log
     #   <p>
-    #               <code>TRUE</code> to use the Amazon WorkDocs change log to determine 
+    #               <code>TRUE</code> to use the WorkDocs change log to determine
     #               which documents require updating in the index. Depending on the change log's
-    #               size, it may take longer for Amazon Kendra to use the change log than to 
-    #               scan all of your documents in Amazon WorkDocs.</p>
+    #               size, it may take longer for Amazon Kendra to use the change log than to
+    #               scan all of your documents in WorkDocs.</p>
     #   @return [Boolean]
     # @!attribute inclusion_patterns
-    #   <p>A list of regular expression patterns to include certain files 
-    #               in your Amazon WorkDocs site repository. Files that match the patterns 
-    #               are included in the index. Files that don't match the patterns are 
-    #               excluded from the index. If a file matches both an inclusion and exclusion 
-    #               pattern, the exclusion pattern takes precedence and the file isn't included 
+    #   <p>A list of regular expression patterns to include certain files
+    #               in your WorkDocs site repository. Files that match the patterns
+    #               are included in the index. Files that don't match the patterns are
+    #               excluded from the index. If a file matches both an inclusion and exclusion
+    #               pattern, the exclusion pattern takes precedence and the file isn't included
     #               in the index.</p>
     #   @return [Array<String>]
     # @!attribute exclusion_patterns
-    #   <p>A list of regular expression patterns to exclude certain files 
-    #               in your Amazon WorkDocs site repository. Files that match the patterns 
-    #               are excluded from the index. Files that don’t match the patterns 
-    #               are included in the index. If a file matches both an inclusion and exclusion 
-    #               pattern, the exclusion pattern takes precedence and the file isn't included 
+    #   <p>A list of regular expression patterns to exclude certain files
+    #               in your WorkDocs site repository. Files that match the patterns
+    #               are excluded from the index. Files that don’t match the patterns
+    #               are included in the index. If a file matches both an inclusion and exclusion
+    #               pattern, the exclusion pattern takes precedence and the file isn't included
     #               in the index.</p>
     #   @return [Array<String>]
     # @!attribute field_mappings
-    #   <p>A list of <code>DataSourceToIndexFieldMapping</code> objects that 
-    #               map Amazon WorkDocs data source attributes or field names to Amazon Kendra 
-    #               index field names. To create custom fields, use the 
-    #               <code>UpdateIndex</code> API before you map to Amazon WorkDocs fields. 
-    #               For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html">Mapping 
-    #                   data source fields</a>. The Amazon WorkDocs data source field names 
-    #               must exist in your Amazon WorkDocs custom metadata.</p>
+    #   <p>A list of <code>DataSourceToIndexFieldMapping</code> objects that
+    #               map WorkDocs data source attributes or field names to Amazon Kendra
+    #               index field names. To create custom fields, use the
+    #               <code>UpdateIndex</code> API before you map to WorkDocs fields.
+    #               For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html">Mapping
+    #                   data source fields</a>. The WorkDocs data source field names
+    #               must exist in your WorkDocs custom metadata.</p>
     #   @return [Array<Types::DataSourceToIndexFieldMapping>]
     class WorkDocsConfiguration < Struct.new(
       nil,

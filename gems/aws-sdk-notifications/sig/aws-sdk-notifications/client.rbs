@@ -57,7 +57,8 @@ module Aws::Notifications
     end
     def associate_managed_notification_account_contact: (
       ?contact_identifier: String,
-      ?managed_notification_configuration_arn: String
+      ?managed_notification_configuration_arn: String,
+      ?is_sensitive_events_subscribed: bool
     ) -> _AssociateManagedNotificationAccountContactResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateManagedNotificationAccountContactResponse
 
     interface _AssociateManagedNotificationAdditionalChannelResponse
@@ -65,7 +66,8 @@ module Aws::Notifications
     end
     def associate_managed_notification_additional_channel: (
       ?channel_arn: String,
-      ?managed_notification_configuration_arn: String
+      ?managed_notification_configuration_arn: String,
+      ?is_sensitive_events_subscribed: bool
     ) -> _AssociateManagedNotificationAdditionalChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateManagedNotificationAdditionalChannelResponse
 
     interface _AssociateOrganizationalUnitResponse
@@ -324,7 +326,8 @@ module Aws::Notifications
       ?max_results: Integer,
       ?next_token: String,
       ?organizational_unit_id: String,
-      ?related_account: String
+      ?related_account: String,
+      ?include_sensitive_events: bool
     ) -> _ListManagedNotificationEventsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListManagedNotificationEventsResponse
 
     interface _ListMemberAccountsResponse
@@ -439,6 +442,15 @@ module Aws::Notifications
       ?event_pattern: String,
       ?regions: Array[String]
     ) -> _UpdateEventRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateEventRuleResponse
+
+    interface _UpdateManagedNotificationChannelAssociationResponse
+      include Smithy::Client::_Response[Types::UpdateManagedNotificationChannelAssociationResponse]
+    end
+    def update_managed_notification_channel_association: (
+      ?managed_notification_configuration_arn: String,
+      ?channel_identifier: String,
+      ?is_sensitive_events_subscribed: bool
+    ) -> _UpdateManagedNotificationChannelAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateManagedNotificationChannelAssociationResponse
 
     interface _UpdateNotificationConfigurationResponse
       include Smithy::Client::_Response[Types::UpdateNotificationConfigurationResponse]

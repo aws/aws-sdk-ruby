@@ -11,6 +11,7 @@ module Aws::RUM
     AppMonitorDomainList: ListShape
     AppMonitorId: StringShape
     AppMonitorName: StringShape
+    AppMonitorPlatform: StringShape
     AppMonitorSummary: StructureShape
     AppMonitorSummaryList: ListShape
     Arn: StringShape

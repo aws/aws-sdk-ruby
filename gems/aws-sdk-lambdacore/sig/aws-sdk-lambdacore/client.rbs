@@ -1,0 +1,162 @@
+module Aws::LambdaCore
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?account_id_endpoint_mode: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
+      ?connect_timeout: Numeric,
+      ?convert_params: bool,
+      ?credentials_provider: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::LambdaCore::EndpointProvider,
+      ?http_proxy: URI::HTTP | String,
+      ?http_wire_trace: bool,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?max_attempts: Integer,
+      ?profile: String,
+      ?protocol: Symbol | Object,
+      ?raise_response_errors: bool,
+      ?read_timeout: Numeric,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_mode: String,
+      ?retry_strategy: Object,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?ssl_ca_bundle: String,
+      ?ssl_ca_directory: String,
+      ?ssl_ca_store: OpenSSL::X509::Store,
+      ?ssl_verify_peer: bool,
+      ?stub_responses: bool,
+      ?transport: Smithy::Client::NetHTTP::Transport,
+      ?use_dualstack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateNetworkConnectorResponse
+      include Smithy::Client::_Response[Types::CreateNetworkConnectorResponse]
+      def arn: () -> String?
+      def name: () -> String?
+      def id: () -> String?
+      def version_arn: () -> String?
+      def version: () -> Integer?
+      def configuration: () -> Types::NetworkConnectorConfiguration?
+      def operator_role: () -> String?
+      def state: () -> String?
+    end
+    def create_network_connector: (
+      ?name: String,
+      ?configuration: {
+        vpc_egress_configuration: {
+          subnet_ids: Array[String],
+          security_group_ids: Array[String],
+          network_protocol: String,
+          associated_compute_resource_types: Array[String]
+        }
+      },
+      ?operator_role: String,
+      ?client_token: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateNetworkConnectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateNetworkConnectorResponse
+
+    interface _DeleteNetworkConnectorResponse
+      include Smithy::Client::_Response[Types::DeleteNetworkConnectorResponse]
+      def arn: () -> String?
+      def name: () -> String?
+      def id: () -> String?
+      def version_arn: () -> String?
+      def version: () -> Integer?
+      def configuration: () -> Types::NetworkConnectorConfiguration?
+      def operator_role: () -> String?
+      def state: () -> String?
+    end
+    def delete_network_connector: (
+      ?identifier: String
+    ) -> _DeleteNetworkConnectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteNetworkConnectorResponse
+
+    interface _GetNetworkConnectorResponse
+      include Smithy::Client::_Response[Types::GetNetworkConnectorResponse]
+      def arn: () -> String?
+      def name: () -> String?
+      def id: () -> String?
+      def version_arn: () -> String?
+      def version: () -> Integer?
+      def latest_version_arn: () -> String?
+      def latest_version: () -> Integer?
+      def configuration: () -> Types::NetworkConnectorConfiguration?
+      def operator_role: () -> String?
+      def state: () -> String?
+      def state_reason: () -> String?
+      def state_reason_code: () -> String?
+      def last_update_status: () -> String?
+      def last_update_status_reason: () -> String?
+      def last_update_status_reason_code: () -> String?
+      def last_modified: () -> Time?
+    end
+    def get_network_connector: (
+      ?identifier: String
+    ) -> _GetNetworkConnectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetNetworkConnectorResponse
+
+    interface _ListNetworkConnectorVersionsResponse
+      include Smithy::Client::_Response[Types::ListNetworkConnectorVersionsResponse]
+      def network_connector_versions: () -> Array[Types::NetworkConnectorVersionSummary]?
+      def next_marker: () -> String?
+    end
+    def list_network_connector_versions: (
+      ?identifier: String,
+      ?state: String,
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListNetworkConnectorVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListNetworkConnectorVersionsResponse
+
+    interface _ListNetworkConnectorsResponse
+      include Smithy::Client::_Response[Types::ListNetworkConnectorsResponse]
+      def network_connectors: () -> Array[Types::NetworkConnectorSummary]?
+      def next_marker: () -> String?
+    end
+    def list_network_connectors: (
+      ?state: String,
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListNetworkConnectorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListNetworkConnectorsResponse
+
+    interface _UpdateNetworkConnectorResponse
+      include Smithy::Client::_Response[Types::UpdateNetworkConnectorResponse]
+      def arn: () -> String?
+      def name: () -> String?
+      def id: () -> String?
+      def version_arn: () -> String?
+      def version: () -> Integer?
+      def operator_role: () -> String?
+      def configuration: () -> Types::NetworkConnectorConfiguration?
+      def state: () -> String?
+      def last_update_status: () -> String?
+      def last_update_status_reason: () -> String?
+      def last_modified: () -> Time?
+    end
+    def update_network_connector: (
+      ?identifier: String,
+      ?configuration: {
+        vpc_egress_configuration: {
+          subnet_ids: Array[String],
+          security_group_ids: Array[String],
+          network_protocol: String,
+          associated_compute_resource_types: Array[String]
+        }
+      },
+      ?operator_role: String,
+      ?client_token: String
+    ) -> _UpdateNetworkConnectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateNetworkConnectorResponse
+  end
+end

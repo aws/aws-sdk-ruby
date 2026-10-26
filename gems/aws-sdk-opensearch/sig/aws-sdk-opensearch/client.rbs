@@ -79,10 +79,15 @@ module Aws::OpenSearch
         },
         security_lake: {
           role_arn: untyped
+        },
+        prometheus: {
+          role_arn: untyped,
+          workspace_arn: String
         }
       },
       ?description: String,
       ?open_search_arns: Array[String],
+      ?data_source_access_policy: String,
       ?tag_list: Array[
         {
           key: String,
@@ -140,6 +145,25 @@ module Aws::OpenSearch
       ?domain_name: String
     ) -> _AssociatePackagesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociatePackagesResponse
 
+    interface _AttachDataSourceResponse
+      include Smithy::Client::_Response[Types::AttachDataSourceResponse]
+      def attachment_id: () -> String?
+      def id: () -> String?
+      def arn: () -> String?
+      def data_source_arn: () -> String?
+      def status: () -> String?
+    end
+    def attach_data_source: (
+      ?id: String,
+      ?data_source_arn: String,
+      ?workspace_id: String,
+      ?workspace_configuration: {
+        name: String,
+        workspace_type: untyped
+      },
+      ?client_token: String
+    ) -> _AttachDataSourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AttachDataSourceResponse
+
     interface _AuthorizeVpcEndpointAccessResponse
       include Smithy::Client::_Response[Types::AuthorizeVpcEndpointAccessResponse]
       def authorized_principal: () -> Types::AuthorizedPrincipal?
@@ -147,7 +171,10 @@ module Aws::OpenSearch
     def authorize_vpc_endpoint_access: (
       ?domain_name: String,
       ?account: String,
-      ?service: String
+      ?service: String,
+      ?service_options: {
+        supported_regions: Array[String]
+      }
     ) -> _AuthorizeVpcEndpointAccessResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AuthorizeVpcEndpointAccessResponse
 
     interface _CancelDomainConfigChangeResponse
@@ -179,6 +206,7 @@ module Aws::OpenSearch
       def app_configs: () -> Array[Types::AppConfig]?
       def tag_list: () -> Array[Types::Tag]?
       def created_at: () -> Time?
+      def kms_key_arn: () -> String?
     end
     def create_application: (
       ?client_token: String,
@@ -186,7 +214,8 @@ module Aws::OpenSearch
       ?data_sources: Array[
         {
           data_source_arn: String,
-          data_source_description: String
+          data_source_description: String,
+          iam_role_for_data_source_arn: String
         }
       ],
       ?iam_identity_center_options: {
@@ -205,7 +234,8 @@ module Aws::OpenSearch
           key: String,
           value: String
         }
-      ]
+      ],
+      ?kms_key_arn: String
     ) -> _CreateApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateApplicationResponse
 
     interface _CreateDomainResponse
@@ -257,7 +287,8 @@ module Aws::OpenSearch
       },
       ?vpc_options: {
         subnet_ids: Array[String],
-        security_group_ids: untyped
+        security_group_ids: untyped,
+        egress_enabled: bool
       },
       ?cognito_options: {
         enabled: bool,
@@ -267,7 +298,8 @@ module Aws::OpenSearch
       },
       ?encryption_at_rest_options: {
         enabled: bool,
-        kms_key_id: String
+        kms_key_id: String,
+        encryption_mode: String
       },
       ?node_to_node_encryption_options: {
         enabled: bool
@@ -310,6 +342,7 @@ module Aws::OpenSearch
           enabled: untyped,
           subject_key: String,
           roles_key: String,
+          jwks_url: String,
           public_key: untyped
         },
         iam_federation_options: {
@@ -322,6 +355,7 @@ module Aws::OpenSearch
       ?identity_center_options: {
         enabled_api_access: bool,
         identity_center_instance_arn: String,
+        identity_center_instance_region: String,
         subject_key: String,
         roles_key: String
       },
@@ -355,7 +389,8 @@ module Aws::OpenSearch
         }
       },
       ?software_update_options: {
-        auto_software_update_enabled: bool
+        auto_software_update_enabled: bool,
+        use_latest_service_software_for_blue_green: untyped
       },
       ?aiml_options: {
         natural_language_query_generation_options: {
@@ -363,9 +398,32 @@ module Aws::OpenSearch
         },
         s3_vectors_engine: {
           enabled: bool
+        },
+        serverless_vector_acceleration: {
+          enabled: untyped
         }
-      }
+      },
+      ?deployment_strategy_options: {
+        deployment_strategy: String
+      },
+      ?automated_snapshot_pause_options: {
+        enabled: bool,
+        start_time: Time,
+        end_time: untyped
+      },
+      ?use_case: String,
+      ?engine_mode: String
     ) -> _CreateDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDomainResponse
+
+    interface _CreateIndexResponse
+      include Smithy::Client::_Response[Types::CreateIndexResponse]
+      def status: () -> String?
+    end
+    def create_index: (
+      ?domain_name: String,
+      ?index_name: String,
+      ?index_schema: Smithy::Schema::document
+    ) -> _CreateIndexResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateIndexResponse
 
     interface _CreateOutboundConnectionResponse
       include Smithy::Client::_Response[Types::CreateOutboundConnectionResponse]
@@ -438,7 +496,8 @@ module Aws::OpenSearch
       ?domain_arn: String,
       ?vpc_options: {
         subnet_ids: Array[String],
-        security_group_ids: untyped
+        security_group_ids: untyped,
+        egress_enabled: bool
       },
       ?client_token: String
     ) -> _CreateVpcEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateVpcEndpointResponse
@@ -482,6 +541,15 @@ module Aws::OpenSearch
       ?connection_id: String
     ) -> _DeleteInboundConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteInboundConnectionResponse
 
+    interface _DeleteIndexResponse
+      include Smithy::Client::_Response[Types::DeleteIndexResponse]
+      def status: () -> String?
+    end
+    def delete_index: (
+      ?domain_name: String,
+      ?index_name: String
+    ) -> _DeleteIndexResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteIndexResponse
+
     interface _DeleteOutboundConnectionResponse
       include Smithy::Client::_Response[Types::DeleteOutboundConnectionResponse]
       def connection: () -> Types::OutboundConnection?
@@ -505,6 +573,28 @@ module Aws::OpenSearch
     def delete_vpc_endpoint: (
       ?vpc_endpoint_id: String
     ) -> _DeleteVpcEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteVpcEndpointResponse
+
+    interface _DeregisterCapabilityResponse
+      include Smithy::Client::_Response[Types::DeregisterCapabilityResponse]
+      def status: () -> String?
+    end
+    def deregister_capability: (
+      ?application_id: String,
+      ?capability_name: String
+    ) -> _DeregisterCapabilityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeregisterCapabilityResponse
+
+    interface _DescribeDataSourceAttachmentResponse
+      include Smithy::Client::_Response[Types::DescribeDataSourceAttachmentResponse]
+      def attachment_id: () -> String?
+      def id: () -> String?
+      def arn: () -> String?
+      def data_source_arn: () -> String?
+      def status: () -> String?
+    end
+    def describe_data_source_attachment: (
+      ?id: String,
+      ?data_source_arn: String
+    ) -> _DescribeDataSourceAttachmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDataSourceAttachmentResponse
 
     interface _DescribeDomainResponse
       include Smithy::Client::_Response[Types::DescribeDomainResponse]
@@ -606,6 +696,19 @@ module Aws::OpenSearch
       ?next_token: String
     ) -> _DescribeInboundConnectionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeInboundConnectionsResponse
 
+    interface _DescribeInsightDetailsResponse
+      include Smithy::Client::_Response[Types::DescribeInsightDetailsResponse]
+      def fields: () -> Array[Types::InsightField]?
+    end
+    def describe_insight_details: (
+      ?entity: {
+        type: String,
+        value: String
+      },
+      ?insight_id: String,
+      ?show_html_content: bool
+    ) -> _DescribeInsightDetailsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeInsightDetailsResponse
+
     interface _DescribeInstanceTypeLimitsResponse
       include Smithy::Client::_Response[Types::DescribeInstanceTypeLimitsResponse]
       def limits_by_role: () -> Hash[String, Types::Limits]?
@@ -679,6 +782,17 @@ module Aws::OpenSearch
       ?vpc_endpoint_ids: Array[String]
     ) -> _DescribeVpcEndpointsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeVpcEndpointsResponse
 
+    interface _DetachDataSourceResponse
+      include Smithy::Client::_Response[Types::DetachDataSourceResponse]
+      def id: () -> String?
+      def arn: () -> String?
+      def data_source_arn: () -> String?
+    end
+    def detach_data_source: (
+      ?id: String,
+      ?data_source_arn: String
+    ) -> _DetachDataSourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DetachDataSourceResponse
+
     interface _DissociatePackageResponse
       include Smithy::Client::_Response[Types::DissociatePackageResponse]
       def domain_package_details: () -> Types::DomainPackageDetails?
@@ -709,10 +823,24 @@ module Aws::OpenSearch
       def app_configs: () -> Array[Types::AppConfig]?
       def created_at: () -> Time?
       def last_updated_at: () -> Time?
+      def kms_key_arn: () -> String?
     end
     def get_application: (
       ?id: String
     ) -> _GetApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetApplicationResponse
+
+    interface _GetCapabilityResponse
+      include Smithy::Client::_Response[Types::GetCapabilityResponse]
+      def capability_name: () -> String?
+      def application_id: () -> String?
+      def status: () -> String?
+      def capability_config: () -> Types::CapabilityExtendedResponseConfig?
+      def failures: () -> Array[Types::CapabilityFailure]?
+    end
+    def get_capability: (
+      ?application_id: String,
+      ?capability_name: String
+    ) -> _GetCapabilityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCapabilityResponse
 
     interface _GetCompatibleVersionsResponse
       include Smithy::Client::_Response[Types::GetCompatibleVersionsResponse]
@@ -734,12 +862,19 @@ module Aws::OpenSearch
       ?name: String
     ) -> _GetDataSourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDataSourceResponse
 
+    interface _GetDefaultApplicationSettingResponse
+      include Smithy::Client::_Response[Types::GetDefaultApplicationSettingResponse]
+      def application_arn: () -> String?
+    end
+    def get_default_application_setting: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDefaultApplicationSettingResponse
+
     interface _GetDirectQueryDataSourceResponse
       include Smithy::Client::_Response[Types::GetDirectQueryDataSourceResponse]
       def data_source_name: () -> String?
       def data_source_type: () -> Types::DirectQueryDataSourceType?
       def description: () -> String?
       def open_search_arns: () -> Array[String]?
+      def data_source_access_policy: () -> String?
       def data_source_arn: () -> String?
     end
     def get_direct_query_data_source: (
@@ -759,6 +894,31 @@ module Aws::OpenSearch
       ?domain_name: String,
       ?maintenance_id: String
     ) -> _GetDomainMaintenanceStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDomainMaintenanceStatusResponse
+
+    interface _GetIndexResponse
+      include Smithy::Client::_Response[Types::GetIndexResponse]
+      def index_schema: () -> Smithy::Schema::document?
+    end
+    def get_index: (
+      ?domain_name: String,
+      ?index_name: String
+    ) -> _GetIndexResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetIndexResponse
+
+    interface _GetMigrationResponse
+      include Smithy::Client::_Response[Types::GetMigrationResponse]
+      def migration_id: () -> String?
+      def status: () -> String?
+      def application_id: () -> String?
+      def source: () -> Types::MigrationSource?
+      def exported_count: () -> Integer?
+      def imported_count: () -> Integer?
+      def error: () -> Types::MigrationError?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+    end
+    def get_migration: (
+      ?migration_id: String
+    ) -> _GetMigrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMigrationResponse
 
     interface _GetPackageVersionHistoryResponse
       include Smithy::Client::_Response[Types::GetPackageVersionHistoryResponse]
@@ -793,6 +953,20 @@ module Aws::OpenSearch
       ?domain_name: String
     ) -> _GetUpgradeStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetUpgradeStatusResponse
 
+    interface _InsightFeedbackResponse
+      include Smithy::Client::_Response[Types::InsightFeedbackResponse]
+      def status: () -> String?
+    end
+    def insight_feedback: (
+      ?entity: {
+        type: String,
+        value: String
+      },
+      ?insight_id: String,
+      ?thumbs: String,
+      ?feedback_text: String
+    ) -> _InsightFeedbackResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _InsightFeedbackResponse
+
     interface _ListApplicationsResponse
       include Smithy::Client::_Response[Types::ListApplicationsResponse]
       def application_summaries: () -> Array[Types::ApplicationSummary]?
@@ -803,6 +977,17 @@ module Aws::OpenSearch
       ?statuses: Array[String],
       ?max_results: Integer
     ) -> _ListApplicationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListApplicationsResponse
+
+    interface _ListDataSourceAttachmentsResponse
+      include Smithy::Client::_Response[Types::ListDataSourceAttachmentsResponse]
+      def attachments: () -> Array[Types::DataSourceAttachmentSummary]?
+      def next_token: () -> String?
+    end
+    def list_data_source_attachments: (
+      ?id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDataSourceAttachmentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDataSourceAttachmentsResponse
 
     interface _ListDataSourcesResponse
       include Smithy::Client::_Response[Types::ListDataSourcesResponse]
@@ -853,6 +1038,25 @@ module Aws::OpenSearch
       ?next_token: String
     ) -> _ListDomainsForPackageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDomainsForPackageResponse
 
+    interface _ListInsightsResponse
+      include Smithy::Client::_Response[Types::ListInsightsResponse]
+      def insights: () -> Array[Types::Insight]?
+      def next_token: () -> String?
+    end
+    def list_insights: (
+      ?entity: {
+        type: String,
+        value: String
+      },
+      ?time_range: {
+        from: Integer,
+        to: untyped
+      },
+      ?sort_order: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListInsightsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListInsightsResponse
+
     interface _ListInstanceTypeDetailsResponse
       include Smithy::Client::_Response[Types::ListInstanceTypeDetailsResponse]
       def instance_type_details: () -> Array[Types::InstanceTypeDetails]?
@@ -866,6 +1070,18 @@ module Aws::OpenSearch
       ?retrieve_a_zs: bool,
       ?instance_type: String
     ) -> _ListInstanceTypeDetailsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListInstanceTypeDetailsResponse
+
+    interface _ListMigrationsResponse
+      include Smithy::Client::_Response[Types::ListMigrationsResponse]
+      def migrations: () -> Array[Types::MigrationSummary]?
+      def next_token: () -> String?
+    end
+    def list_migrations: (
+      ?application_id: String,
+      ?status: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListMigrationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMigrationsResponse
 
     interface _ListPackagesForDomainResponse
       include Smithy::Client::_Response[Types::ListPackagesForDomainResponse]
@@ -947,6 +1163,31 @@ module Aws::OpenSearch
       ?instance_count: Integer
     ) -> _PurchaseReservedInstanceOfferingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PurchaseReservedInstanceOfferingResponse
 
+    interface _PutDefaultApplicationSettingResponse
+      include Smithy::Client::_Response[Types::PutDefaultApplicationSettingResponse]
+      def application_arn: () -> String?
+    end
+    def put_default_application_setting: (
+      ?application_arn: String,
+      ?set_as_default: bool
+    ) -> _PutDefaultApplicationSettingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutDefaultApplicationSettingResponse
+
+    interface _RegisterCapabilityResponse
+      include Smithy::Client::_Response[Types::RegisterCapabilityResponse]
+      def capability_name: () -> String?
+      def application_id: () -> String?
+      def status: () -> String?
+      def capability_config: () -> Types::CapabilityBaseResponseConfig?
+    end
+    def register_capability: (
+      ?application_id: String,
+      ?capability_name: String,
+      ?capability_config: {
+        ai_config: {
+        }
+      }
+    ) -> _RegisterCapabilityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterCapabilityResponse
+
     interface _RejectInboundConnectionResponse
       include Smithy::Client::_Response[Types::RejectInboundConnectionResponse]
       def connection: () -> Types::InboundConnection?
@@ -969,8 +1210,19 @@ module Aws::OpenSearch
     def revoke_vpc_endpoint_access: (
       ?domain_name: String,
       ?account: String,
-      ?service: String
+      ?service: String,
+      ?service_options: {
+        supported_regions: Array[String]
+      }
     ) -> _RevokeVpcEndpointAccessResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RevokeVpcEndpointAccessResponse
+
+    interface _RollbackServiceSoftwareUpdateResponse
+      include Smithy::Client::_Response[Types::RollbackServiceSoftwareUpdateResponse]
+      def rollback_service_software_options: () -> Types::RollbackServiceSoftwareOptions?
+    end
+    def rollback_service_software_update: (
+      ?domain_name: String
+    ) -> _RollbackServiceSoftwareUpdateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RollbackServiceSoftwareUpdateResponse
 
     interface _StartDomainMaintenanceResponse
       include Smithy::Client::_Response[Types::StartDomainMaintenanceResponse]
@@ -981,6 +1233,38 @@ module Aws::OpenSearch
       ?action: String,
       ?node_id: String
     ) -> _StartDomainMaintenanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartDomainMaintenanceResponse
+
+    interface _StartMigrationResponse
+      include Smithy::Client::_Response[Types::StartMigrationResponse]
+      def migration_id: () -> String?
+      def status: () -> String?
+    end
+    def start_migration: (
+      ?application_id: String,
+      ?migration_options: {
+        source: {
+          datasource_arn: String
+        },
+        workspace: {
+          workspace_id: String,
+          create_workspace: bool,
+          name: untyped,
+          type: untyped
+        },
+        export_options: {
+          types: Array[String],
+          objects: Array[
+            {
+              type: untyped,
+              id: untyped
+            }
+          ],
+          include_references_deep: untyped
+        },
+        conflict_resolution: untyped
+      },
+      ?client_token: String
+    ) -> _StartMigrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartMigrationResponse
 
     interface _StartServiceSoftwareUpdateResponse
       include Smithy::Client::_Response[Types::StartServiceSoftwareUpdateResponse]
@@ -1008,7 +1292,8 @@ module Aws::OpenSearch
       ?data_sources: Array[
         {
           data_source_arn: String,
-          data_source_description: String
+          data_source_description: String,
+          iam_role_for_data_source_arn: String
         }
       ],
       ?app_configs: Array[
@@ -1016,7 +1301,12 @@ module Aws::OpenSearch
           key: String,
           value: String
         }
-      ]
+      ],
+      ?iam_identity_center_options: {
+        enabled: bool,
+        iam_identity_center_instance_arn: String,
+        iam_role_for_identity_center_application_arn: String
+      }
     ) -> _UpdateApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateApplicationResponse
 
     interface _UpdateDataSourceResponse
@@ -1047,10 +1337,15 @@ module Aws::OpenSearch
         },
         security_lake: {
           role_arn: untyped
+        },
+        prometheus: {
+          role_arn: untyped,
+          workspace_arn: String
         }
       },
       ?description: String,
-      ?open_search_arns: Array[String]
+      ?open_search_arns: Array[String],
+      ?data_source_access_policy: String
     ) -> _UpdateDirectQueryDataSourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDirectQueryDataSourceResponse
 
     interface _UpdateDomainConfigResponse
@@ -1101,7 +1396,8 @@ module Aws::OpenSearch
       },
       ?vpc_options: {
         subnet_ids: Array[String],
-        security_group_ids: untyped
+        security_group_ids: untyped,
+        egress_enabled: bool
       },
       ?cognito_options: {
         enabled: bool,
@@ -1120,7 +1416,8 @@ module Aws::OpenSearch
       ],
       ?encryption_at_rest_options: {
         enabled: bool,
-        kms_key_id: String
+        kms_key_id: String,
+        encryption_mode: String
       },
       ?domain_endpoint_options: {
         enforce_https: bool,
@@ -1156,6 +1453,7 @@ module Aws::OpenSearch
           enabled: untyped,
           subject_key: String,
           roles_key: String,
+          jwks_url: String,
           public_key: untyped
         },
         iam_federation_options: {
@@ -1168,6 +1466,7 @@ module Aws::OpenSearch
       ?identity_center_options: {
         enabled_api_access: bool,
         identity_center_instance_arn: String,
+        identity_center_instance_region: String,
         subject_key: String,
         roles_key: String
       },
@@ -1198,7 +1497,8 @@ module Aws::OpenSearch
         }
       },
       ?software_update_options: {
-        auto_software_update_enabled: bool
+        auto_software_update_enabled: bool,
+        use_latest_service_software_for_blue_green: untyped
       },
       ?aiml_options: {
         natural_language_query_generation_options: {
@@ -1206,9 +1506,33 @@ module Aws::OpenSearch
         },
         s3_vectors_engine: {
           enabled: bool
+        },
+        serverless_vector_acceleration: {
+          enabled: untyped
         }
-      }
+      },
+      ?deployment_strategy_options: {
+        deployment_strategy: String
+      },
+      ?automated_snapshot_pause_options: {
+        enabled: bool,
+        start_time: Time,
+        end_time: untyped
+      },
+      ?use_case: String,
+      ?engine_mode: String,
+      ?accepted_warnings: Array[String]
     ) -> _UpdateDomainConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDomainConfigResponse
+
+    interface _UpdateIndexResponse
+      include Smithy::Client::_Response[Types::UpdateIndexResponse]
+      def status: () -> String?
+    end
+    def update_index: (
+      ?domain_name: String,
+      ?index_name: String,
+      ?index_schema: Smithy::Schema::document
+    ) -> _UpdateIndexResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateIndexResponse
 
     interface _UpdatePackageResponse
       include Smithy::Client::_Response[Types::UpdatePackageResponse]
@@ -1266,7 +1590,8 @@ module Aws::OpenSearch
       ?vpc_endpoint_id: String,
       ?vpc_options: {
         subnet_ids: Array[String],
-        security_group_ids: untyped
+        security_group_ids: untyped,
+        egress_enabled: bool
       }
     ) -> _UpdateVpcEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateVpcEndpointResponse
 

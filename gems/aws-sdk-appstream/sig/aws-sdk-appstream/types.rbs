@@ -29,6 +29,95 @@ module Aws::AppStream
       AUTO_TIME_ZONE_REDIRECTION: String
     end
 
+    class AdminAppLicenseUsageRecord
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_arn: String,
+        ?billing_period: String,
+        ?owner_aws_account_id: String,
+        ?subscription_first_used_date: Time,
+        ?subscription_last_used_date: Time,
+        ?license_type: String,
+        ?user_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_arn: String?
+      attr_accessor billing_period: String?
+      attr_accessor owner_aws_account_id: String?
+      attr_accessor subscription_first_used_date: Time?
+      attr_accessor subscription_last_used_date: Time?
+      attr_accessor license_type: String?
+      attr_accessor user_id: String?
+    end
+
+    class AgentAccessConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?settings: Array[Types::AgentAccessSetting],
+        ?s3_bucket_arn: String,
+        ?screenshots_upload_enabled: bool,
+        ?screen_resolution: String,
+        ?screen_image_format: String,
+        ?user_control_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor settings: Array[Types::AgentAccessSetting]?
+      attr_accessor s3_bucket_arn: String?
+      attr_accessor screenshots_upload_enabled: bool?
+      attr_accessor screen_resolution: String?
+      attr_accessor screen_image_format: String?
+      attr_accessor user_control_mode: String?
+    end
+
+    class AgentAccessConfigForUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?settings: Array[Types::AgentAccessSetting],
+        ?s3_bucket_arn: String,
+        ?screenshots_upload_enabled: bool,
+        ?screen_resolution: String,
+        ?screen_image_format: String,
+        ?user_control_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor settings: Array[Types::AgentAccessSetting]?
+      attr_accessor s3_bucket_arn: String?
+      attr_accessor screenshots_upload_enabled: bool?
+      attr_accessor screen_resolution: String?
+      attr_accessor screen_image_format: String?
+      attr_accessor user_control_mode: String?
+    end
+
+    class AgentAccessSetting
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agent_action: String,
+        ?permission: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agent_action: String?
+      attr_accessor permission: String?
+    end
+
+    module AgentAction
+      COMPUTER_VISION: String
+      COMPUTER_INPUT: String
+      FORWARD_MCP_TOOLS: String
+    end
+
+    module AgentSoftwareVersion
+      CURRENT_LATEST: String
+      ALWAYS_LATEST: String
+    end
+
     class AppBlock
       include Smithy::Schema::Structure
 
@@ -78,6 +167,7 @@ module Aws::AppStream
         ?app_block_builder_errors: Array[Types::ResourceError],
         ?state_change_reason: Types::AppBlockBuilderStateChangeReason,
         ?access_endpoints: Array[Types::AccessEndpoint],
+        ?disable_imdsv1: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -95,6 +185,7 @@ module Aws::AppStream
       attr_accessor app_block_builder_errors: Array[Types::ResourceError]?
       attr_accessor state_change_reason: Types::AppBlockBuilderStateChangeReason?
       attr_accessor access_endpoints: Array[Types::AccessEndpoint]?
+      attr_accessor disable_imdsv1: bool?
     end
 
     class AppBlockBuilderAppBlockAssociation
@@ -196,6 +287,29 @@ module Aws::AppStream
     module ApplicationAttribute
       LAUNCH_PARAMETERS: String
       WORKING_DIRECTORY: String
+    end
+
+    class ApplicationConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?display_name: String,
+        ?absolute_app_path: String,
+        ?absolute_icon_path: String,
+        ?absolute_manifest_path: String,
+        ?working_directory: String,
+        ?launch_parameters: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor display_name: String?
+      attr_accessor absolute_app_path: String?
+      attr_accessor absolute_icon_path: String?
+      attr_accessor absolute_manifest_path: String?
+      attr_accessor working_directory: String?
+      attr_accessor launch_parameters: String?
     end
 
     class ApplicationFleetAssociation
@@ -333,6 +447,28 @@ module Aws::AppStream
 
     end
 
+    class AssociateSoftwareToImageBuilderRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_builder_name: String,
+        ?software_names: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_builder_name: String?
+      attr_accessor software_names: Array[String]?
+    end
+
+    class AssociateSoftwareToImageBuilderResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
     module AuthenticationType
       API: String
       SAML: String
@@ -428,6 +564,9 @@ module Aws::AppStream
         ?available_user_sessions: Integer,
         ?active_user_sessions: Integer,
         ?actual_user_sessions: Integer,
+        ?draining: Integer,
+        ?drain_mode_active_user_sessions: Integer,
+        ?drain_mode_unused_user_sessions: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -439,6 +578,9 @@ module Aws::AppStream
       attr_accessor available_user_sessions: Integer?
       attr_accessor active_user_sessions: Integer?
       attr_accessor actual_user_sessions: Integer?
+      attr_accessor draining: Integer?
+      attr_accessor drain_mode_active_user_sessions: Integer?
+      attr_accessor drain_mode_unused_user_sessions: Integer?
     end
 
     class ConcurrentModificationException
@@ -450,6 +592,17 @@ module Aws::AppStream
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    class ContentRedirection
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?host_to_client: Types::UrlRedirectionConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor host_to_client: Types::UrlRedirectionConfig?
     end
 
     class CopyImageRequest
@@ -494,6 +647,7 @@ module Aws::AppStream
         ?enable_default_internet_access: bool,
         ?iam_role_arn: String,
         ?access_endpoints: Array[Types::AccessEndpoint],
+        ?disable_imdsv1: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -507,6 +661,7 @@ module Aws::AppStream
       attr_accessor enable_default_internet_access: bool?
       attr_accessor iam_role_arn: String?
       attr_accessor access_endpoints: Array[Types::AccessEndpoint]?
+      attr_accessor disable_imdsv1: bool?
     end
 
     class CreateAppBlockBuilderResult
@@ -682,6 +837,36 @@ module Aws::AppStream
       attr_accessor entitlement: Types::Entitlement?
     end
 
+    class CreateExportImageTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_name: String,
+        ?ami_name: String,
+        ?iam_role_arn: String,
+        ?tag_specifications: Hash[String, String],
+        ?ami_description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_name: String?
+      attr_accessor ami_name: String?
+      attr_accessor iam_role_arn: String?
+      attr_accessor tag_specifications: Hash[String, String]?
+      attr_accessor ami_description: String?
+    end
+
+    class CreateExportImageTaskResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?export_image_task: Types::ExportImageTask,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor export_image_task: Types::ExportImageTask?
+    end
+
     class CreateFleetRequest
       include Smithy::Schema::Structure
 
@@ -708,6 +893,8 @@ module Aws::AppStream
         ?usb_device_filter_strings: Array[String],
         ?session_script_s3_location: Types::S3Location,
         ?max_sessions_per_instance: Integer,
+        ?root_volume_config: Types::VolumeConfig,
+        ?disable_imdsv1: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -733,6 +920,8 @@ module Aws::AppStream
       attr_accessor usb_device_filter_strings: Array[String]?
       attr_accessor session_script_s3_location: Types::S3Location?
       attr_accessor max_sessions_per_instance: Integer?
+      attr_accessor root_volume_config: Types::VolumeConfig?
+      attr_accessor disable_imdsv1: bool?
     end
 
     class CreateFleetResult
@@ -763,6 +952,10 @@ module Aws::AppStream
         ?appstream_agent_version: String,
         ?tags: Hash[String, String],
         ?access_endpoints: Array[Types::AccessEndpoint],
+        ?root_volume_config: Types::VolumeConfig,
+        ?softwares_to_install: Array[String],
+        ?softwares_to_uninstall: Array[String],
+        ?disable_imdsv1: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -779,6 +972,10 @@ module Aws::AppStream
       attr_accessor appstream_agent_version: String?
       attr_accessor tags: Hash[String, String]?
       attr_accessor access_endpoints: Array[Types::AccessEndpoint]?
+      attr_accessor root_volume_config: Types::VolumeConfig?
+      attr_accessor softwares_to_install: Array[String]?
+      attr_accessor softwares_to_uninstall: Array[String]?
+      attr_accessor disable_imdsv1: bool?
     end
 
     class CreateImageBuilderResult
@@ -818,6 +1015,48 @@ module Aws::AppStream
       attr_accessor expires: Time?
     end
 
+    class CreateImportedImageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?source_ami_id: String,
+        ?workspace_image_id: String,
+        ?iam_role_arn: String,
+        ?description: String,
+        ?display_name: String,
+        ?tags: Hash[String, String],
+        ?runtime_validation_config: Types::RuntimeValidationConfig,
+        ?agent_software_version: String,
+        ?app_catalog_config: Array[Types::ApplicationConfig],
+        ?dry_run: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor source_ami_id: String?
+      attr_accessor workspace_image_id: String?
+      attr_accessor iam_role_arn: String?
+      attr_accessor description: String?
+      attr_accessor display_name: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor runtime_validation_config: Types::RuntimeValidationConfig?
+      attr_accessor agent_software_version: String?
+      attr_accessor app_catalog_config: Array[Types::ApplicationConfig]?
+      attr_accessor dry_run: bool?
+    end
+
+    class CreateImportedImageResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image: Types::Image,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image: Types::Image?
+    end
+
     class CreateStackRequest
       include Smithy::Schema::Structure
 
@@ -834,6 +1073,9 @@ module Aws::AppStream
         ?access_endpoints: Array[Types::AccessEndpoint],
         ?embed_host_domains: Array[String],
         ?streaming_experience_settings: Types::StreamingExperienceSettings,
+        ?content_redirection: Types::ContentRedirection,
+        ?agent_access_config: Types::AgentAccessConfig,
+        ?storage_connector_authentication: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -849,6 +1091,9 @@ module Aws::AppStream
       attr_accessor access_endpoints: Array[Types::AccessEndpoint]?
       attr_accessor embed_host_domains: Array[String]?
       attr_accessor streaming_experience_settings: Types::StreamingExperienceSettings?
+      attr_accessor content_redirection: Types::ContentRedirection?
+      attr_accessor agent_access_config: Types::AgentAccessConfig?
+      attr_accessor storage_connector_authentication: String?
     end
 
     class CreateStackResult
@@ -1366,6 +1611,34 @@ module Aws::AppStream
       attr_accessor next_token: String?
     end
 
+    class DescribeAppLicenseUsageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?billing_period: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor billing_period: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeAppLicenseUsageResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_license_usages: Array[Types::AdminAppLicenseUsageRecord],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_license_usages: Array[Types::AdminAppLicenseUsageRecord]?
+      attr_accessor next_token: String?
+    end
+
     class DescribeApplicationFleetAssociationsRequest
       include Smithy::Schema::Structure
 
@@ -1636,6 +1909,36 @@ module Aws::AppStream
       attr_accessor next_token: String?
     end
 
+    class DescribeSoftwareAssociationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?associated_resource: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor associated_resource: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeSoftwareAssociationsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?associated_resource: String,
+        ?software_associations: Array[Types::SoftwareAssociations],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor associated_resource: String?
+      attr_accessor software_associations: Array[Types::SoftwareAssociations]?
+      attr_accessor next_token: String?
+    end
+
     class DescribeStacksRequest
       include Smithy::Schema::Structure
 
@@ -1901,6 +2204,28 @@ module Aws::AppStream
 
     end
 
+    class DisassociateSoftwareFromImageBuilderRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_builder_name: String,
+        ?software_names: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_builder_name: String?
+      attr_accessor software_names: Array[String]?
+    end
+
+    class DisassociateSoftwareFromImageBuilderResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
     class DomainJoinInfo
       include Smithy::Schema::Structure
 
@@ -1912,6 +2237,37 @@ module Aws::AppStream
 
       attr_accessor directory_name: String?
       attr_accessor organizational_unit_distinguished_name: String?
+    end
+
+    class DrainSessionInstanceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_id: String?
+    end
+
+    class DrainSessionInstanceResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DryRunOperationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
     end
 
     module DynamicAppProvidersEnabled
@@ -2043,6 +2399,53 @@ module Aws::AppStream
 
     end
 
+    class ExportImageTask
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_id: String,
+        ?image_arn: String,
+        ?ami_name: String,
+        ?created_date: Time,
+        ?ami_description: String,
+        ?state: String,
+        ?ami_id: String,
+        ?tag_specifications: Hash[String, String],
+        ?error_details: Array[Types::ErrorDetails],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_id: String?
+      attr_accessor image_arn: String?
+      attr_accessor ami_name: String?
+      attr_accessor created_date: Time?
+      attr_accessor ami_description: String?
+      attr_accessor state: String?
+      attr_accessor ami_id: String?
+      attr_accessor tag_specifications: Hash[String, String]?
+      attr_accessor error_details: Array[Types::ErrorDetails]?
+    end
+
+    module ExportImageTaskState
+      EXPORTING: String
+      COMPLETED: String
+      FAILED: String
+      TIMED_OUT: String
+    end
+
+    class Filter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
     class Fleet
       include Smithy::Schema::Structure
 
@@ -2072,6 +2475,8 @@ module Aws::AppStream
         ?usb_device_filter_strings: Array[String],
         ?session_script_s3_location: Types::S3Location,
         ?max_sessions_per_instance: Integer,
+        ?root_volume_config: Types::VolumeConfig,
+        ?disable_imdsv1: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2100,6 +2505,8 @@ module Aws::AppStream
       attr_accessor usb_device_filter_strings: Array[String]?
       attr_accessor session_script_s3_location: Types::S3Location?
       attr_accessor max_sessions_per_instance: Integer?
+      attr_accessor root_volume_config: Types::VolumeConfig?
+      attr_accessor disable_imdsv1: bool?
     end
 
     module FleetAttribute
@@ -2110,6 +2517,7 @@ module Aws::AppStream
       USB_DEVICE_FILTER_STRINGS: String
       SESSION_SCRIPT_S3_LOCATION: String
       MAX_SESSIONS_PER_INSTANCE: String
+      VOLUME_CONFIGURATION: String
     end
 
     class FleetError
@@ -2156,6 +2564,7 @@ module Aws::AppStream
       DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED: String
       DOMAIN_JOIN_NERR_PASSWORD_EXPIRED: String
       DOMAIN_JOIN_INTERNAL_SERVICE_ERROR: String
+      VALIDATION_ERROR: String
     end
 
     module FleetState
@@ -2169,6 +2578,28 @@ module Aws::AppStream
       ALWAYS_ON: String
       ON_DEMAND: String
       ELASTIC: String
+    end
+
+    class GetExportImageTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_id: String?
+    end
+
+    class GetExportImageTaskResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?export_image_task: Types::ExportImageTask,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor export_image_task: Types::ExportImageTask?
     end
 
     class Image
@@ -2196,6 +2627,9 @@ module Aws::AppStream
         ?supported_instance_families: Array[String],
         ?dynamic_app_providers_enabled: String,
         ?image_shared_with_others: String,
+        ?managed_software_included: bool,
+        ?image_type: String,
+        ?image_software_metadata: Types::ImageSoftwareMetadata,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2220,6 +2654,9 @@ module Aws::AppStream
       attr_accessor supported_instance_families: Array[String]?
       attr_accessor dynamic_app_providers_enabled: String?
       attr_accessor image_shared_with_others: String?
+      attr_accessor managed_software_included: bool?
+      attr_accessor image_type: String?
+      attr_accessor image_software_metadata: Types::ImageSoftwareMetadata?
     end
 
     class ImageBuilder
@@ -2244,7 +2681,9 @@ module Aws::AppStream
         ?image_builder_errors: Array[Types::ResourceError],
         ?appstream_agent_version: String,
         ?access_endpoints: Array[Types::AccessEndpoint],
+        ?root_volume_config: Types::VolumeConfig,
         ?latest_appstream_agent_version: String,
+        ?disable_imdsv1: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2266,7 +2705,9 @@ module Aws::AppStream
       attr_accessor image_builder_errors: Array[Types::ResourceError]?
       attr_accessor appstream_agent_version: String?
       attr_accessor access_endpoints: Array[Types::AccessEndpoint]?
+      attr_accessor root_volume_config: Types::VolumeConfig?
       attr_accessor latest_appstream_agent_version: String?
+      attr_accessor disable_imdsv1: bool?
     end
 
     module ImageBuilderState
@@ -2281,6 +2722,9 @@ module Aws::AppStream
       FAILED: String
       UPDATING: String
       PENDING_QUALIFICATION: String
+      PENDING_SYNCING_APPS: String
+      SYNCING_APPS: String
+      PENDING_IMAGE_IMPORT: String
     end
 
     class ImageBuilderStateChangeReason
@@ -2319,6 +2763,17 @@ module Aws::AppStream
       FALSE: String
     end
 
+    class ImageSoftwareMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?nvidia_grid_driver_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor nvidia_grid_driver_version: String?
+    end
+
     module ImageState
       PENDING: String
       AVAILABLE: String
@@ -2327,6 +2782,7 @@ module Aws::AppStream
       DELETING: String
       CREATING: String
       IMPORTING: String
+      VALIDATING: String
     end
 
     class ImageStateChangeReason
@@ -2346,6 +2802,14 @@ module Aws::AppStream
       INTERNAL_ERROR: String
       IMAGE_BUILDER_NOT_AVAILABLE: String
       IMAGE_COPY_FAILURE: String
+      IMAGE_UPDATE_FAILURE: String
+      IMAGE_IMPORT_FAILURE: String
+    end
+
+    module ImageType
+      CUSTOM: String
+      NATIVE: String
+      BYOL: String
     end
 
     class IncompatibleImageException
@@ -2357,6 +2821,12 @@ module Aws::AppStream
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    module InstanceDrainStatus
+      ACTIVE: String
+      DRAINING: String
+      NOT_APPLICABLE: String
     end
 
     class InvalidAccountStatusException
@@ -2503,6 +2973,34 @@ module Aws::AppStream
       attr_accessor next_token: String?
     end
 
+    class ListExportImageTasksRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filters: Array[Types::Filter],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filters: Array[Types::Filter]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListExportImageTasksResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?export_image_tasks: Array[Types::ExportImageTask],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor export_image_tasks: Array[Types::ExportImageTask]?
+      attr_accessor next_token: String?
+    end
+
     class ListTagsForResourceRequest
       include Smithy::Schema::Structure
 
@@ -2535,11 +3033,13 @@ module Aws::AppStream
 
       def initialize: (
         ?eni_private_ip_address: String,
+        ?eni_ipv6_addresses: Array[String],
         ?eni_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor eni_private_ip_address: String?
+      attr_accessor eni_ipv6_addresses: Array[String]?
       attr_accessor eni_id: String?
     end
 
@@ -2569,9 +3069,11 @@ module Aws::AppStream
       WINDOWS_SERVER_2016: String
       WINDOWS_SERVER_2019: String
       WINDOWS_SERVER_2022: String
+      WINDOWS_SERVER_2025: String
       AMAZON_LINUX2: String
       RHEL8: String
       ROCKY_LINUX8: String
+      UBUNTU_PRO_2404: String
     end
 
     module PreferredProtocol
@@ -2649,6 +3151,17 @@ module Aws::AppStream
       attr_accessor message: String?
     end
 
+    class RuntimeValidationConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?intended_instance_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor intended_instance_type: String?
+    end
+
     class S3Location
       include Smithy::Schema::Structure
 
@@ -2660,6 +3173,15 @@ module Aws::AppStream
 
       attr_accessor s3_bucket: String?
       attr_accessor s3_key: String?
+    end
+
+    module ScreenImageFormat
+      PNG: String
+      JPEG: String
+    end
+
+    module ScreenResolution
+      W_1280xH_720: String
     end
 
     class ScriptDetails
@@ -2707,6 +3229,7 @@ module Aws::AppStream
         ?authentication_type: String,
         ?network_access_configuration: Types::NetworkAccessConfiguration,
         ?instance_id: String,
+        ?instance_drain_status: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2721,6 +3244,7 @@ module Aws::AppStream
       attr_accessor authentication_type: String?
       attr_accessor network_access_configuration: Types::NetworkAccessConfiguration?
       attr_accessor instance_id: String?
+      attr_accessor instance_drain_status: String?
     end
 
     module SessionConnectionState
@@ -2747,6 +3271,31 @@ module Aws::AppStream
       attr_accessor image_permissions: Types::ImagePermissions?
     end
 
+    class SoftwareAssociations
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?software_name: String,
+        ?status: String,
+        ?deployment_error: Array[Types::ErrorDetails],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor software_name: String?
+      attr_accessor status: String?
+      attr_accessor deployment_error: Array[Types::ErrorDetails]?
+    end
+
+    module SoftwareDeploymentStatus
+      STAGED_FOR_INSTALLATION: String
+      PENDING_INSTALLATION: String
+      INSTALLED: String
+      STAGED_FOR_UNINSTALLATION: String
+      PENDING_UNINSTALLATION: String
+      FAILED_TO_INSTALL: String
+      FAILED_TO_UNINSTALL: String
+    end
+
     class Stack
       include Smithy::Schema::Structure
 
@@ -2765,6 +3314,9 @@ module Aws::AppStream
         ?access_endpoints: Array[Types::AccessEndpoint],
         ?embed_host_domains: Array[String],
         ?streaming_experience_settings: Types::StreamingExperienceSettings,
+        ?content_redirection: Types::ContentRedirection,
+        ?agent_access_config: Types::AgentAccessConfig,
+        ?storage_connector_authentication: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2782,6 +3334,9 @@ module Aws::AppStream
       attr_accessor access_endpoints: Array[Types::AccessEndpoint]?
       attr_accessor embed_host_domains: Array[String]?
       attr_accessor streaming_experience_settings: Types::StreamingExperienceSettings?
+      attr_accessor content_redirection: Types::ContentRedirection?
+      attr_accessor agent_access_config: Types::AgentAccessConfig?
+      attr_accessor storage_connector_authentication: String?
     end
 
     module StackAttribute
@@ -2797,6 +3352,9 @@ module Aws::AppStream
       IAM_ROLE_ARN: String
       ACCESS_ENDPOINTS: String
       STREAMING_EXPERIENCE_SETTINGS: String
+      CONTENT_REDIRECTION: String
+      AGENT_ACCESS_CONFIG: String
+      STORAGE_CONNECTOR_AUTHENTICATION: String
     end
 
     class StackError
@@ -2883,6 +3441,28 @@ module Aws::AppStream
       attr_accessor image_builder: Types::ImageBuilder?
     end
 
+    class StartSoftwareDeploymentToImageBuilderRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_builder_name: String,
+        ?retry_failed_deployments: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_builder_name: String?
+      attr_accessor retry_failed_deployments: bool?
+    end
+
+    class StartSoftwareDeploymentToImageBuilderResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
     class StopAppBlockBuilderRequest
       include Smithy::Schema::Structure
 
@@ -2962,6 +3542,11 @@ module Aws::AppStream
       attr_accessor resource_identifier: String?
       attr_accessor domains: Array[String]?
       attr_accessor domains_require_admin_consent: Array[String]?
+    end
+
+    module StorageConnectorAuthentication
+      FORCE_REAUTHENTICATION: String
+      REUSE_CREDENTIALS: String
     end
 
     module StorageConnectorType
@@ -3098,6 +3683,7 @@ module Aws::AppStream
         ?iam_role_arn: String,
         ?access_endpoints: Array[Types::AccessEndpoint],
         ?attributes_to_delete: Array[String],
+        ?disable_imdsv1: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3111,6 +3697,7 @@ module Aws::AppStream
       attr_accessor iam_role_arn: String?
       attr_accessor access_endpoints: Array[Types::AccessEndpoint]?
       attr_accessor attributes_to_delete: Array[String]?
+      attr_accessor disable_imdsv1: bool?
     end
 
     class UpdateAppBlockBuilderResult
@@ -3246,6 +3833,8 @@ module Aws::AppStream
         ?usb_device_filter_strings: Array[String],
         ?session_script_s3_location: Types::S3Location,
         ?max_sessions_per_instance: Integer,
+        ?root_volume_config: Types::VolumeConfig,
+        ?disable_imdsv1: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3271,6 +3860,8 @@ module Aws::AppStream
       attr_accessor usb_device_filter_strings: Array[String]?
       attr_accessor session_script_s3_location: Types::S3Location?
       attr_accessor max_sessions_per_instance: Integer?
+      attr_accessor root_volume_config: Types::VolumeConfig?
+      attr_accessor disable_imdsv1: bool?
     end
 
     class UpdateFleetResult
@@ -3325,6 +3916,9 @@ module Aws::AppStream
         ?access_endpoints: Array[Types::AccessEndpoint],
         ?embed_host_domains: Array[String],
         ?streaming_experience_settings: Types::StreamingExperienceSettings,
+        ?content_redirection: Types::ContentRedirection,
+        ?agent_access_config: Types::AgentAccessConfigForUpdate,
+        ?storage_connector_authentication: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3341,6 +3935,9 @@ module Aws::AppStream
       attr_accessor access_endpoints: Array[Types::AccessEndpoint]?
       attr_accessor embed_host_domains: Array[String]?
       attr_accessor streaming_experience_settings: Types::StreamingExperienceSettings?
+      attr_accessor content_redirection: Types::ContentRedirection?
+      attr_accessor agent_access_config: Types::AgentAccessConfigForUpdate?
+      attr_accessor storage_connector_authentication: String?
     end
 
     class UpdateStackResult
@@ -3388,6 +3985,21 @@ module Aws::AppStream
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor theme: Types::Theme?
+    end
+
+    class UrlRedirectionConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?allowed_urls: Array[String],
+        ?denied_urls: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor allowed_urls: Array[String]?
+      attr_accessor denied_urls: Array[String]?
     end
 
     module UsageReportExecutionErrorCode
@@ -3440,6 +4052,12 @@ module Aws::AppStream
       attr_accessor last_name: String?
       attr_accessor created_time: Time?
       attr_accessor authentication_type: String?
+    end
+
+    module UserControlMode
+      VIEW_ONLY: String
+      VIEW_STOP: String
+      DISABLED: String
     end
 
     class UserSetting
@@ -3500,6 +4118,17 @@ module Aws::AppStream
       PUBLIC: String
       PRIVATE: String
       SHARED: String
+    end
+
+    class VolumeConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?volume_size_in_gb: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor volume_size_in_gb: Integer?
     end
 
     class VpcConfig

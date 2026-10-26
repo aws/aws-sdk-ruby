@@ -126,6 +126,7 @@ module Aws::DynamoDBStreams
         ?shard_id: String,
         ?shard_iterator_type: String,
         ?sequence_number: String,
+        ?timestamp: Time,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -133,6 +134,7 @@ module Aws::DynamoDBStreams
       attr_accessor shard_id: String?
       attr_accessor shard_iterator_type: String?
       attr_accessor sequence_number: String?
+      attr_accessor timestamp: Time?
     end
 
     class GetShardIteratorOutput
@@ -317,6 +319,7 @@ module Aws::DynamoDBStreams
       LATEST: String
       AT_SEQUENCE_NUMBER: String
       AFTER_SEQUENCE_NUMBER: String
+      AT_TIMESTAMP: String
     end
 
     class Stream

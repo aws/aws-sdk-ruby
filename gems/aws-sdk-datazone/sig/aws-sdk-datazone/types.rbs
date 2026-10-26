@@ -78,6 +78,7 @@ module Aws::DataZone
         ?identifier: String,
         ?decision_comment: String,
         ?asset_scopes: Array[Types::AcceptedAssetScope],
+        ?asset_permissions: Array[Types::AssetPermission],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -85,6 +86,7 @@ module Aws::DataZone
       attr_accessor identifier: String?
       attr_accessor decision_comment: String?
       attr_accessor asset_scopes: Array[Types::AcceptedAssetScope]?
+      attr_accessor asset_permissions: Array[Types::AssetPermission]?
     end
 
     class AcceptSubscriptionRequestOutput
@@ -295,6 +297,17 @@ module Aws::DataZone
       attr_accessor include_child_domain_units: bool?
     end
 
+    class AdditionalAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?form_names: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor form_names: Array[String]?
+    end
+
     class AggregationListItem
       include Smithy::Schema::Structure
 
@@ -354,6 +367,51 @@ module Aws::DataZone
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+    end
+
+    class AmazonQPropertiesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?is_enabled: bool,
+        ?profile_arn: String,
+        ?auth_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor is_enabled: bool?
+      attr_accessor profile_arn: String?
+      attr_accessor auth_mode: String?
+    end
+
+    class AmazonQPropertiesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?is_enabled: bool,
+        ?profile_arn: String,
+        ?auth_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor is_enabled: bool?
+      attr_accessor profile_arn: String?
+      attr_accessor auth_mode: String?
+    end
+
+    class AmazonQPropertiesPatch
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?is_enabled: bool,
+        ?profile_arn: String,
+        ?auth_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor is_enabled: bool?
+      attr_accessor profile_arn: String?
+      attr_accessor auth_mode: String?
     end
 
     class AssetFilterConfiguration
@@ -568,6 +626,19 @@ module Aws::DataZone
       attr_accessor latest_time_series_data_point_forms: Array[Types::TimeSeriesDataPointSummaryFormOutput]?
     end
 
+    class AssetPermission
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_id: String,
+        ?permissions: Types::Permissions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_id: String?
+      attr_accessor permissions: Types::Permissions?
+    end
+
     class AssetRevision
       include Smithy::Schema::Structure
 
@@ -594,6 +665,7 @@ module Aws::DataZone
         ?asset_id: String,
         ?filter_ids: Array[String],
         ?status: String,
+        ?scope_name: String,
         ?error_message: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -601,6 +673,7 @@ module Aws::DataZone
       attr_accessor asset_id: String?
       attr_accessor filter_ids: Array[String]?
       attr_accessor status: String?
+      attr_accessor scope_name: String?
       attr_accessor error_message: String?
     end
 
@@ -746,6 +819,39 @@ module Aws::DataZone
       attr_accessor workgroup_name: String?
     end
 
+    module AttributeEntityType
+      ASSET: String
+      LISTING: String
+    end
+
+    class AttributeError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attribute_identifier: String,
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute_identifier: String?
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class AttributeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attribute_identifier: String,
+        ?forms: Array[Types::FormInput],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute_identifier: String?
+      attr_accessor forms: Array[Types::FormInput]?
+    end
+
     module AuthType
       IAM_IDC: String
       DISABLED: String
@@ -880,6 +986,98 @@ module Aws::DataZone
       attr_accessor password: String?
     end
 
+    class BatchGetAttributeOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attribute_identifier: String,
+        ?forms: Array[Types::FormOutput],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute_identifier: String?
+      attr_accessor forms: Array[Types::FormOutput]?
+    end
+
+    class BatchGetAttributesMetadataInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_identifier: String,
+        ?entity_type: String,
+        ?entity_identifier: String,
+        ?entity_revision: String,
+        ?attribute_identifiers: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_identifier: String?
+      attr_accessor entity_type: String?
+      attr_accessor entity_identifier: String?
+      attr_accessor entity_revision: String?
+      attr_accessor attribute_identifiers: Array[String]?
+    end
+
+    class BatchGetAttributesMetadataOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attributes: Array[Types::BatchGetAttributeOutput],
+        ?errors: Array[Types::AttributeError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attributes: Array[Types::BatchGetAttributeOutput]?
+      attr_accessor errors: Array[Types::AttributeError]?
+    end
+
+    class BatchPutAttributeOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attribute_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute_identifier: String?
+    end
+
+    class BatchPutAttributesMetadataInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_identifier: String,
+        ?entity_type: String,
+        ?entity_identifier: String,
+        ?client_token: String,
+        ?attributes: Array[Types::AttributeInput],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_identifier: String?
+      attr_accessor entity_type: String?
+      attr_accessor entity_identifier: String?
+      attr_accessor client_token: String?
+      attr_accessor attributes: Array[Types::AttributeInput]?
+    end
+
+    class BatchPutAttributesMetadataOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?errors: Array[Types::AttributeError],
+        ?attributes: Array[Types::BatchPutAttributeOutput],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor errors: Array[Types::AttributeError]?
+      attr_accessor attributes: Array[Types::BatchPutAttributeOutput]?
+    end
+
+    module BlueprintCategory
+      TOOLING: String
+    end
+
     class BusinessNameGenerationConfiguration
       include Smithy::Schema::Structure
 
@@ -957,6 +1155,15 @@ module Aws::DataZone
       attr_accessor retain_permissions: bool?
     end
 
+    class CellInformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
     module ChangeAction
       PUBLISH: String
       UNPUBLISH: String
@@ -982,6 +1189,19 @@ module Aws::DataZone
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor included_column_names: Array[String]?
+    end
+
+    class ComputeConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_type: String,
+        ?environment_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_type: String?
+      attr_accessor environment_version: String?
     end
 
     module ComputeEnvironments
@@ -1021,6 +1241,24 @@ module Aws::DataZone
       attr_accessor type: String?
       attr_accessor auth: String?
       attr_accessor parameters: Array[Types::ConfigurableActionParameter]?
+    end
+
+    class Configuration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?classification: String,
+        ?properties: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor classification: String?
+      attr_accessor properties: Hash[String, String]?
+    end
+
+    module ConfigurationStatus
+      COMPLETED: String
+      FAILED: String
     end
 
     class ConflictException
@@ -1063,6 +1301,14 @@ module Aws::DataZone
         ?spark_emr_properties: Types::SparkEmrPropertiesInput,
         ?spark_glue_properties: Types::SparkGluePropertiesInput,
         ?s3_properties: Types::S3PropertiesInput,
+        ?snowflake_properties: Types::SnowflakePropertiesInput,
+        ?amazon_q_properties: Types::AmazonQPropertiesInput,
+        ?mlflow_properties: Types::MlflowPropertiesInput,
+        ?workflows_mwaa_properties: Types::WorkflowsMwaaPropertiesInput,
+        ?workflows_serverless_properties: Types::WorkflowsServerlessPropertiesInput,
+        ?lakehouse_properties: Types::LakehousePropertiesInput,
+        ?vpc_properties: Types::VpcPropertiesInput,
+        ?git_properties: Types::GitPropertiesInput,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1074,6 +1320,14 @@ module Aws::DataZone
       attr_accessor spark_emr_properties: Types::SparkEmrPropertiesInput?
       attr_accessor spark_glue_properties: Types::SparkGluePropertiesInput?
       attr_accessor s3_properties: Types::S3PropertiesInput?
+      attr_accessor snowflake_properties: Types::SnowflakePropertiesInput?
+      attr_accessor amazon_q_properties: Types::AmazonQPropertiesInput?
+      attr_accessor mlflow_properties: Types::MlflowPropertiesInput?
+      attr_accessor workflows_mwaa_properties: Types::WorkflowsMwaaPropertiesInput?
+      attr_accessor workflows_serverless_properties: Types::WorkflowsServerlessPropertiesInput?
+      attr_accessor lakehouse_properties: Types::LakehousePropertiesInput?
+      attr_accessor vpc_properties: Types::VpcPropertiesInput?
+      attr_accessor git_properties: Types::GitPropertiesInput?
 
       class AthenaProperties < ConnectionPropertiesInput
       end
@@ -1091,6 +1345,22 @@ module Aws::DataZone
       end
       class S3Properties < ConnectionPropertiesInput
       end
+      class SnowflakeProperties < ConnectionPropertiesInput
+      end
+      class AmazonQProperties < ConnectionPropertiesInput
+      end
+      class MlflowProperties < ConnectionPropertiesInput
+      end
+      class WorkflowsMwaaProperties < ConnectionPropertiesInput
+      end
+      class WorkflowsServerlessProperties < ConnectionPropertiesInput
+      end
+      class LakehouseProperties < ConnectionPropertiesInput
+      end
+      class VpcProperties < ConnectionPropertiesInput
+      end
+      class GitProperties < ConnectionPropertiesInput
+      end
       class Unknown < ConnectionPropertiesInput
       end
     end
@@ -1107,6 +1377,14 @@ module Aws::DataZone
         ?spark_emr_properties: Types::SparkEmrPropertiesOutput,
         ?spark_glue_properties: Types::SparkGluePropertiesOutput,
         ?s3_properties: Types::S3PropertiesOutput,
+        ?snowflake_properties: Types::SnowflakePropertiesOutput,
+        ?amazon_q_properties: Types::AmazonQPropertiesOutput,
+        ?mlflow_properties: Types::MlflowPropertiesOutput,
+        ?workflows_mwaa_properties: Types::WorkflowsMwaaPropertiesOutput,
+        ?workflows_serverless_properties: Types::WorkflowsServerlessPropertiesOutput,
+        ?lakehouse_properties: Types::LakehousePropertiesOutput,
+        ?vpc_properties: Types::VpcPropertiesOutput,
+        ?git_properties: Types::GitPropertiesOutput,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1118,6 +1396,14 @@ module Aws::DataZone
       attr_accessor spark_emr_properties: Types::SparkEmrPropertiesOutput?
       attr_accessor spark_glue_properties: Types::SparkGluePropertiesOutput?
       attr_accessor s3_properties: Types::S3PropertiesOutput?
+      attr_accessor snowflake_properties: Types::SnowflakePropertiesOutput?
+      attr_accessor amazon_q_properties: Types::AmazonQPropertiesOutput?
+      attr_accessor mlflow_properties: Types::MlflowPropertiesOutput?
+      attr_accessor workflows_mwaa_properties: Types::WorkflowsMwaaPropertiesOutput?
+      attr_accessor workflows_serverless_properties: Types::WorkflowsServerlessPropertiesOutput?
+      attr_accessor lakehouse_properties: Types::LakehousePropertiesOutput?
+      attr_accessor vpc_properties: Types::VpcPropertiesOutput?
+      attr_accessor git_properties: Types::GitPropertiesOutput?
 
       class AthenaProperties < ConnectionPropertiesOutput
       end
@@ -1135,6 +1421,22 @@ module Aws::DataZone
       end
       class S3Properties < ConnectionPropertiesOutput
       end
+      class SnowflakeProperties < ConnectionPropertiesOutput
+      end
+      class AmazonQProperties < ConnectionPropertiesOutput
+      end
+      class MlflowProperties < ConnectionPropertiesOutput
+      end
+      class WorkflowsMwaaProperties < ConnectionPropertiesOutput
+      end
+      class WorkflowsServerlessProperties < ConnectionPropertiesOutput
+      end
+      class LakehouseProperties < ConnectionPropertiesOutput
+      end
+      class VpcProperties < ConnectionPropertiesOutput
+      end
+      class GitProperties < ConnectionPropertiesOutput
+      end
       class Unknown < ConnectionPropertiesOutput
       end
     end
@@ -1149,6 +1451,12 @@ module Aws::DataZone
         ?redshift_properties: Types::RedshiftPropertiesPatch,
         ?spark_emr_properties: Types::SparkEmrPropertiesPatch,
         ?s3_properties: Types::S3PropertiesPatch,
+        ?snowflake_properties: Types::SnowflakePropertiesPatch,
+        ?amazon_q_properties: Types::AmazonQPropertiesPatch,
+        ?mlflow_properties: Types::MlflowPropertiesPatch,
+        ?lakehouse_properties: Types::LakehousePropertiesPatch,
+        ?vpc_properties: Types::VpcPropertiesPatch,
+        ?git_properties: Types::GitPropertiesPatch,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1158,6 +1466,12 @@ module Aws::DataZone
       attr_accessor redshift_properties: Types::RedshiftPropertiesPatch?
       attr_accessor spark_emr_properties: Types::SparkEmrPropertiesPatch?
       attr_accessor s3_properties: Types::S3PropertiesPatch?
+      attr_accessor snowflake_properties: Types::SnowflakePropertiesPatch?
+      attr_accessor amazon_q_properties: Types::AmazonQPropertiesPatch?
+      attr_accessor mlflow_properties: Types::MlflowPropertiesPatch?
+      attr_accessor lakehouse_properties: Types::LakehousePropertiesPatch?
+      attr_accessor vpc_properties: Types::VpcPropertiesPatch?
+      attr_accessor git_properties: Types::GitPropertiesPatch?
 
       class AthenaProperties < ConnectionPropertiesPatch
       end
@@ -1171,8 +1485,25 @@ module Aws::DataZone
       end
       class S3Properties < ConnectionPropertiesPatch
       end
+      class SnowflakeProperties < ConnectionPropertiesPatch
+      end
+      class AmazonQProperties < ConnectionPropertiesPatch
+      end
+      class MlflowProperties < ConnectionPropertiesPatch
+      end
+      class LakehouseProperties < ConnectionPropertiesPatch
+      end
+      class VpcProperties < ConnectionPropertiesPatch
+      end
+      class GitProperties < ConnectionPropertiesPatch
+      end
       class Unknown < ConnectionPropertiesPatch
       end
+    end
+
+    module ConnectionScope
+      DOMAIN: String
+      PROJECT: String
     end
 
     module ConnectionStatus
@@ -1190,6 +1521,7 @@ module Aws::DataZone
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?configurations: Array[Types::Configuration],
         ?connection_id: String,
         ?domain_id: String,
         ?domain_unit_id: String,
@@ -1199,9 +1531,11 @@ module Aws::DataZone
         ?project_id: String,
         ?props: Types::ConnectionPropertiesOutput,
         ?type: String,
+        ?scope: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor configurations: Array[Types::Configuration]?
       attr_accessor connection_id: String?
       attr_accessor domain_id: String?
       attr_accessor domain_unit_id: String?
@@ -1211,6 +1545,7 @@ module Aws::DataZone
       attr_accessor project_id: String?
       attr_accessor props: Types::ConnectionPropertiesOutput?
       attr_accessor type: String?
+      attr_accessor scope: String?
     end
 
     module ConnectionType
@@ -1234,6 +1569,54 @@ module Aws::DataZone
       TERADATA: String
       VERTICA: String
       WORKFLOWS_MWAA: String
+      AMAZON_Q: String
+      MLFLOW: String
+      VPC: String
+      GIT: String
+    end
+
+    class ConnectivityProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_properties: Hash[String, String],
+        ?physical_connection_requirements: Types::PhysicalConnectionRequirements,
+        ?name: String,
+        ?description: String,
+        ?validate_credentials: bool,
+        ?validate_for_compute_environments: Array[String],
+        ?spark_properties: Hash[String, String],
+        ?athena_properties: Hash[String, String],
+        ?python_properties: Hash[String, String],
+        ?authentication_configuration: Types::AuthenticationConfigurationInput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_properties: Hash[String, String]?
+      attr_accessor physical_connection_requirements: Types::PhysicalConnectionRequirements?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor validate_credentials: bool?
+      attr_accessor validate_for_compute_environments: Array[String]?
+      attr_accessor spark_properties: Hash[String, String]?
+      attr_accessor athena_properties: Hash[String, String]?
+      attr_accessor python_properties: Hash[String, String]?
+      attr_accessor authentication_configuration: Types::AuthenticationConfigurationInput?
+    end
+
+    class ConnectivityPropertiesPatch
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?connection_properties: Hash[String, String],
+        ?authentication_configuration: Types::AuthenticationConfigurationPatch,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor connection_properties: Hash[String, String]?
+      attr_accessor authentication_configuration: Types::AuthenticationConfigurationPatch?
     end
 
     class CreateAccountPoolInput
@@ -1563,21 +1946,27 @@ module Aws::DataZone
       def initialize: (
         ?aws_location: Types::AwsLocation,
         ?client_token: String,
+        ?configurations: Array[Types::Configuration],
         ?description: String,
         ?domain_identifier: String,
         ?environment_identifier: String,
         ?name: String,
         ?props: Types::ConnectionPropertiesInput,
+        ?enable_trusted_identity_propagation: bool,
+        ?scope: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor aws_location: Types::AwsLocation?
       attr_accessor client_token: String?
+      attr_accessor configurations: Array[Types::Configuration]?
       attr_accessor description: String?
       attr_accessor domain_identifier: String?
       attr_accessor environment_identifier: String?
       attr_accessor name: String?
       attr_accessor props: Types::ConnectionPropertiesInput?
+      attr_accessor enable_trusted_identity_propagation: bool?
+      attr_accessor scope: String?
     end
 
     class CreateConnectionOutput
@@ -1585,6 +1974,7 @@ module Aws::DataZone
 
       def initialize: (
         ?connection_id: String,
+        ?configurations: Array[Types::Configuration],
         ?description: String,
         ?domain_id: String,
         ?domain_unit_id: String,
@@ -1594,10 +1984,12 @@ module Aws::DataZone
         ?project_id: String,
         ?props: Types::ConnectionPropertiesOutput,
         ?type: String,
+        ?scope: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor connection_id: String?
+      attr_accessor configurations: Array[Types::Configuration]?
       attr_accessor description: String?
       attr_accessor domain_id: String?
       attr_accessor domain_unit_id: String?
@@ -1607,6 +1999,7 @@ module Aws::DataZone
       attr_accessor project_id: String?
       attr_accessor props: Types::ConnectionPropertiesOutput?
       attr_accessor type: String?
+      attr_accessor scope: String?
     end
 
     class CreateDataProductInput
@@ -1989,6 +2382,7 @@ module Aws::DataZone
         ?description: String,
         ?provisioning_properties: Types::ProvisioningProperties,
         ?user_parameters: Array[Types::CustomParameter],
+        ?blueprint_category: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1997,6 +2391,7 @@ module Aws::DataZone
       attr_accessor description: String?
       attr_accessor provisioning_properties: Types::ProvisioningProperties?
       attr_accessor user_parameters: Array[Types::CustomParameter]?
+      attr_accessor blueprint_category: String?
     end
 
     class CreateEnvironmentBlueprintOutput
@@ -2011,6 +2406,7 @@ module Aws::DataZone
         ?deployment_properties: Types::DeploymentProperties,
         ?user_parameters: Array[Types::CustomParameter],
         ?glossary_terms: Array[String],
+        ?blueprint_category: String,
         ?created_at: Time,
         ?updated_at: Time,
       ) -> void
@@ -2024,6 +2420,7 @@ module Aws::DataZone
       attr_accessor deployment_properties: Types::DeploymentProperties?
       attr_accessor user_parameters: Array[Types::CustomParameter]?
       attr_accessor glossary_terms: Array[String]?
+      attr_accessor blueprint_category: String?
       attr_accessor created_at: Time?
       attr_accessor updated_at: Time?
     end
@@ -2044,6 +2441,7 @@ module Aws::DataZone
         ?environment_blueprint_identifier: String,
         ?deployment_order: Integer,
         ?environment_configuration_id: String,
+        ?environment_configuration_name: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2059,6 +2457,7 @@ module Aws::DataZone
       attr_accessor environment_blueprint_identifier: String?
       attr_accessor deployment_order: Integer?
       attr_accessor environment_configuration_id: String?
+      attr_accessor environment_configuration_name: String?
     end
 
     class CreateEnvironmentOutput
@@ -2087,6 +2486,7 @@ module Aws::DataZone
         ?deployment_properties: Types::DeploymentProperties,
         ?environment_blueprint_id: String,
         ?environment_configuration_id: String,
+        ?environment_configuration_name: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2112,6 +2512,7 @@ module Aws::DataZone
       attr_accessor deployment_properties: Types::DeploymentProperties?
       attr_accessor environment_blueprint_id: String?
       attr_accessor environment_configuration_id: String?
+      attr_accessor environment_configuration_name: String?
     end
 
     class CreateEnvironmentProfileInput
@@ -2353,12 +2754,14 @@ module Aws::DataZone
       def initialize: (
         ?domain_identifier: String,
         ?group_identifier: String,
+        ?role_principal_arn: String,
         ?client_token: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor domain_identifier: String?
       attr_accessor group_identifier: String?
+      attr_accessor role_principal_arn: String?
       attr_accessor client_token: String?
     end
 
@@ -2370,6 +2773,8 @@ module Aws::DataZone
         ?id: String,
         ?status: String,
         ?group_name: String,
+        ?role_principal_arn: String,
+        ?role_principal_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2377,6 +2782,8 @@ module Aws::DataZone
       attr_accessor id: String?
       attr_accessor status: String?
       attr_accessor group_name: String?
+      attr_accessor role_principal_arn: String?
+      attr_accessor role_principal_id: String?
     end
 
     class CreateListingChangeSetInput
@@ -2415,6 +2822,82 @@ module Aws::DataZone
       attr_accessor status: String?
     end
 
+    class CreateNotebookInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_identifier: String,
+        ?owning_project_identifier: String,
+        ?name: String,
+        ?description: String,
+        ?type: String,
+        ?metadata: Hash[String, String],
+        ?parameters: Hash[String, String],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_identifier: String?
+      attr_accessor owning_project_identifier: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor type: String?
+      attr_accessor metadata: Hash[String, String]?
+      attr_accessor parameters: Hash[String, String]?
+      attr_accessor client_token: String?
+    end
+
+    class CreateNotebookOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?owning_project_id: String,
+        ?domain_id: String,
+        ?cell_order: Array[Types::CellInformation],
+        ?status: String,
+        ?type: String,
+        ?description: String,
+        ?created_at: Time,
+        ?created_by: String,
+        ?updated_at: Time,
+        ?updated_by: String,
+        ?locked_by: String,
+        ?locked_at: Time,
+        ?lock_expires_at: Time,
+        ?compute_id: String,
+        ?metadata: Hash[String, String],
+        ?parameters: Hash[String, String],
+        ?environment_configuration: Types::EnvironmentConfig,
+        ?error: Types::NotebookError,
+        ?git_metadata: Types::GitMetadata,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor owning_project_id: String?
+      attr_accessor domain_id: String?
+      attr_accessor cell_order: Array[Types::CellInformation]?
+      attr_accessor status: String?
+      attr_accessor type: String?
+      attr_accessor description: String?
+      attr_accessor created_at: Time?
+      attr_accessor created_by: String?
+      attr_accessor updated_at: Time?
+      attr_accessor updated_by: String?
+      attr_accessor locked_by: String?
+      attr_accessor locked_at: Time?
+      attr_accessor lock_expires_at: Time?
+      attr_accessor compute_id: String?
+      attr_accessor metadata: Hash[String, String]?
+      attr_accessor parameters: Hash[String, String]?
+      attr_accessor environment_configuration: Types::EnvironmentConfig?
+      attr_accessor error: Types::NotebookError?
+      attr_accessor git_metadata: Types::GitMetadata?
+    end
+
     class CreateProjectFromProjectProfilePolicyGrantDetail
       include Smithy::Schema::Structure
 
@@ -2435,20 +2918,28 @@ module Aws::DataZone
         ?domain_identifier: String,
         ?name: String,
         ?description: String,
+        ?resource_tags: Hash[String, String],
         ?glossary_terms: Array[String],
         ?domain_unit_id: String,
         ?project_profile_id: String,
         ?user_parameters: Array[Types::EnvironmentConfigurationUserParameter],
+        ?project_category: String,
+        ?project_execution_role: String,
+        ?membership_assignments: Array[Types::ProjectMembershipAssignment],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor domain_identifier: String?
       attr_accessor name: String?
       attr_accessor description: String?
+      attr_accessor resource_tags: Hash[String, String]?
       attr_accessor glossary_terms: Array[String]?
       attr_accessor domain_unit_id: String?
       attr_accessor project_profile_id: String?
       attr_accessor user_parameters: Array[Types::EnvironmentConfigurationUserParameter]?
+      attr_accessor project_category: String?
+      attr_accessor project_execution_role: String?
+      attr_accessor membership_assignments: Array[Types::ProjectMembershipAssignment]?
     end
 
     class CreateProjectMembershipInput
@@ -2490,11 +2981,13 @@ module Aws::DataZone
         ?created_by: String,
         ?created_at: Time,
         ?last_updated_at: Time,
+        ?resource_tags: Array[Types::ResourceTag],
         ?glossary_terms: Array[String],
         ?domain_unit_id: String,
         ?project_profile_id: String,
         ?user_parameters: Array[Types::EnvironmentConfigurationUserParameter],
         ?environment_deployment_details: Types::EnvironmentDeploymentDetails,
+        ?project_category: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2507,11 +3000,13 @@ module Aws::DataZone
       attr_accessor created_by: String?
       attr_accessor created_at: Time?
       attr_accessor last_updated_at: Time?
+      attr_accessor resource_tags: Array[Types::ResourceTag]?
       attr_accessor glossary_terms: Array[String]?
       attr_accessor domain_unit_id: String?
       attr_accessor project_profile_id: String?
       attr_accessor user_parameters: Array[Types::EnvironmentConfigurationUserParameter]?
       attr_accessor environment_deployment_details: Types::EnvironmentDeploymentDetails?
+      attr_accessor project_category: String?
     end
 
     class CreateProjectPolicyGrantDetail
@@ -2533,6 +3028,9 @@ module Aws::DataZone
         ?name: String,
         ?description: String,
         ?status: String,
+        ?project_resource_tags: Array[Types::ResourceTagParameter],
+        ?allow_custom_project_resource_tags: bool,
+        ?project_resource_tags_description: String,
         ?environment_configurations: Array[Types::EnvironmentConfiguration],
         ?domain_unit_identifier: String,
       ) -> void
@@ -2542,6 +3040,9 @@ module Aws::DataZone
       attr_accessor name: String?
       attr_accessor description: String?
       attr_accessor status: String?
+      attr_accessor project_resource_tags: Array[Types::ResourceTagParameter]?
+      attr_accessor allow_custom_project_resource_tags: bool?
+      attr_accessor project_resource_tags_description: String?
       attr_accessor environment_configurations: Array[Types::EnvironmentConfiguration]?
       attr_accessor domain_unit_identifier: String?
     end
@@ -2555,6 +3056,9 @@ module Aws::DataZone
         ?name: String,
         ?description: String,
         ?status: String,
+        ?project_resource_tags: Array[Types::ResourceTagParameter],
+        ?allow_custom_project_resource_tags: bool,
+        ?project_resource_tags_description: String,
         ?environment_configurations: Array[Types::EnvironmentConfiguration],
         ?created_by: String,
         ?created_at: Time,
@@ -2568,6 +3072,9 @@ module Aws::DataZone
       attr_accessor name: String?
       attr_accessor description: String?
       attr_accessor status: String?
+      attr_accessor project_resource_tags: Array[Types::ResourceTagParameter]?
+      attr_accessor allow_custom_project_resource_tags: bool?
+      attr_accessor project_resource_tags_description: String?
       attr_accessor environment_configurations: Array[Types::EnvironmentConfiguration]?
       attr_accessor created_by: String?
       attr_accessor created_at: Time?
@@ -2662,6 +3169,7 @@ module Aws::DataZone
         ?domain_id: String,
         ?created_at: Time,
         ?updated_at: Time,
+        ?environment_id: String,
         ?subscription_target_id: String,
         ?granted_entity: Types::GrantedEntity,
         ?status: String,
@@ -2676,6 +3184,7 @@ module Aws::DataZone
       attr_accessor domain_id: String?
       attr_accessor created_at: Time?
       attr_accessor updated_at: Time?
+      attr_accessor environment_id: String?
       attr_accessor subscription_target_id: String?
       attr_accessor granted_entity: Types::GrantedEntity?
       attr_accessor status: String?
@@ -2693,6 +3202,8 @@ module Aws::DataZone
         ?request_reason: String,
         ?client_token: String,
         ?metadata_forms: Array[Types::FormInput],
+        ?asset_permissions: Array[Types::AssetPermission],
+        ?asset_scopes: Array[Types::AcceptedAssetScope],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2702,6 +3213,8 @@ module Aws::DataZone
       attr_accessor request_reason: String?
       attr_accessor client_token: String?
       attr_accessor metadata_forms: Array[Types::FormInput]?
+      attr_accessor asset_permissions: Array[Types::AssetPermission]?
+      attr_accessor asset_scopes: Array[Types::AcceptedAssetScope]?
     end
 
     class CreateSubscriptionRequestOutput
@@ -2755,6 +3268,7 @@ module Aws::DataZone
         ?applicable_asset_types: Array[String],
         ?provider: String,
         ?client_token: String,
+        ?subscription_grant_creation_mode: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2768,6 +3282,7 @@ module Aws::DataZone
       attr_accessor applicable_asset_types: Array[String]?
       attr_accessor provider: String?
       attr_accessor client_token: String?
+      attr_accessor subscription_grant_creation_mode: String?
     end
 
     class CreateSubscriptionTargetOutput
@@ -2789,6 +3304,7 @@ module Aws::DataZone
         ?applicable_asset_types: Array[String],
         ?subscription_target_config: Array[Types::SubscriptionTargetForm],
         ?provider: String,
+        ?subscription_grant_creation_mode: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2807,6 +3323,7 @@ module Aws::DataZone
       attr_accessor applicable_asset_types: Array[String]?
       attr_accessor subscription_target_config: Array[Types::SubscriptionTargetForm]?
       attr_accessor provider: String?
+      attr_accessor subscription_grant_creation_mode: String?
     end
 
     class CreateUserProfileInput
@@ -2816,6 +3333,7 @@ module Aws::DataZone
         ?domain_identifier: String,
         ?user_identifier: String,
         ?user_type: String,
+        ?session_name: String,
         ?client_token: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -2823,6 +3341,7 @@ module Aws::DataZone
       attr_accessor domain_identifier: String?
       attr_accessor user_identifier: String?
       attr_accessor user_type: String?
+      attr_accessor session_name: String?
       attr_accessor client_token: String?
     end
 
@@ -3371,6 +3890,26 @@ module Aws::DataZone
       attr_accessor status: String?
     end
 
+    class DeleteDataExportConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_identifier: String?
+    end
+
+    class DeleteDataExportConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
     class DeleteDataProductInput
       include Smithy::Schema::Structure
 
@@ -3470,12 +4009,14 @@ module Aws::DataZone
         ?identifier: String,
         ?client_token: String,
         ?skip_deletion_check: bool,
+        ?cascade_delete: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor identifier: String?
       attr_accessor client_token: String?
       attr_accessor skip_deletion_check: bool?
+      attr_accessor cascade_delete: bool?
     end
 
     class DeleteDomainOutput
@@ -3653,6 +4194,34 @@ module Aws::DataZone
 
     end
 
+    class DeleteLineageEventInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_identifier: String,
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_identifier: String?
+      attr_accessor identifier: String?
+    end
+
+    class DeleteLineageEventOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?domain_id: String,
+        ?processing_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor domain_id: String?
+      attr_accessor processing_status: String?
+    end
+
     class DeleteListingInput
       include Smithy::Schema::Structure
 
@@ -3673,6 +4242,39 @@ module Aws::DataZone
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+    end
+
+    class DeleteNotebookInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_identifier: String,
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_identifier: String?
+      attr_accessor identifier: String?
+    end
+
+    class DeleteNotebookOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteProgress
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?successfully_deleted_project_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor successfully_deleted_project_count: Integer?
     end
 
     class DeleteProjectInput
@@ -3790,6 +4392,7 @@ module Aws::DataZone
         ?domain_id: String,
         ?created_at: Time,
         ?updated_at: Time,
+        ?environment_id: String,
         ?subscription_target_id: String,
         ?granted_entity: Types::GrantedEntity,
         ?status: String,
@@ -3804,6 +4407,7 @@ module Aws::DataZone
       attr_accessor domain_id: String?
       attr_accessor created_at: Time?
       attr_accessor updated_at: Time?
+      attr_accessor environment_id: String?
       attr_accessor subscription_target_id: String?
       attr_accessor granted_entity: Types::GrantedEntity?
       attr_accessor status: String?
@@ -4151,6 +4755,34 @@ module Aws::DataZone
       DISABLED: String
     end
 
+    class EncryptionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?kms_key_arn: String,
+        ?sse_algorithm: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor kms_key_arn: String?
+      attr_accessor sse_algorithm: String?
+    end
+
+    class EntityPattern
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entity_type: String,
+        ?identifier: String,
+        ?filters: Types::FilterClause,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entity_type: String?
+      attr_accessor identifier: String?
+      attr_accessor filters: Types::FilterClause?
+    end
+
     module EntityType
       ASSET: String
       DATA_PRODUCT: String
@@ -4188,8 +4820,10 @@ module Aws::DataZone
         ?manage_access_role_arn: String,
         ?enabled_regions: Array[String],
         ?regional_parameters: Hash[String, Hash[String, String]],
+        ?allow_user_provided_configurations: bool,
         ?created_at: Time,
         ?updated_at: Time,
+        ?resource_configurations: Array[Types::ResourceConfiguration],
         ?provisioning_configurations: Array[Types::ProvisioningConfiguration],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -4201,8 +4835,10 @@ module Aws::DataZone
       attr_accessor manage_access_role_arn: String?
       attr_accessor enabled_regions: Array[String]?
       attr_accessor regional_parameters: Hash[String, Hash[String, String]]?
+      attr_accessor allow_user_provided_configurations: bool?
       attr_accessor created_at: Time?
       attr_accessor updated_at: Time?
+      attr_accessor resource_configurations: Array[Types::ResourceConfiguration]?
       attr_accessor provisioning_configurations: Array[Types::ProvisioningConfiguration]?
     end
 
@@ -4217,6 +4853,7 @@ module Aws::DataZone
         ?provisioning_properties: Types::ProvisioningProperties,
         ?created_at: Time,
         ?updated_at: Time,
+        ?blueprint_category: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4227,6 +4864,20 @@ module Aws::DataZone
       attr_accessor provisioning_properties: Types::ProvisioningProperties?
       attr_accessor created_at: Time?
       attr_accessor updated_at: Time?
+      attr_accessor blueprint_category: String?
+    end
+
+    class EnvironmentConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_version: String,
+        ?package_config: Types::PackageConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_version: String?
+      attr_accessor package_config: Types::PackageConfig?
     end
 
     class EnvironmentConfiguration
@@ -4424,6 +5075,7 @@ module Aws::DataZone
         ?provider: String,
         ?status: String,
         ?environment_configuration_id: String,
+        ?environment_configuration_name: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4441,6 +5093,7 @@ module Aws::DataZone
       attr_accessor provider: String?
       attr_accessor status: String?
       attr_accessor environment_configuration_id: String?
+      attr_accessor environment_configuration_name: String?
     end
 
     class EqualToExpression
@@ -4483,17 +5136,39 @@ module Aws::DataZone
       attr_accessor message: String?
     end
 
+    class FailureReason
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor message: String?
+    end
+
+    module FileFormat
+      PDF: String
+      IPYNB: String
+    end
+
     class Filter
       include Smithy::Schema::Structure
 
       def initialize: (
         ?attribute: String,
         ?value: String,
+        ?int_value: Integer,
+        ?operator: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor attribute: String?
       attr_accessor value: String?
+      attr_accessor int_value: Integer?
+      attr_accessor operator: String?
     end
 
     class FilterClause
@@ -4536,6 +5211,15 @@ module Aws::DataZone
     module FilterExpressionType
       INCLUDE: String
       EXCLUDE: String
+    end
+
+    module FilterOperator
+      EQ: String
+      LE: String
+      LT: String
+      GE: String
+      GT: String
+      TEXT_SEARCH: String
     end
 
     module FilterStatus
@@ -4865,6 +5549,7 @@ module Aws::DataZone
 
       def initialize: (
         ?connection_credentials: Types::ConnectionCredentials,
+        ?configurations: Array[Types::Configuration],
         ?connection_id: String,
         ?description: String,
         ?domain_id: String,
@@ -4876,10 +5561,12 @@ module Aws::DataZone
         ?project_id: String,
         ?props: Types::ConnectionPropertiesOutput,
         ?type: String,
+        ?scope: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor connection_credentials: Types::ConnectionCredentials?
+      attr_accessor configurations: Array[Types::Configuration]?
       attr_accessor connection_id: String?
       attr_accessor description: String?
       attr_accessor domain_id: String?
@@ -4891,6 +5578,39 @@ module Aws::DataZone
       attr_accessor project_id: String?
       attr_accessor props: Types::ConnectionPropertiesOutput?
       attr_accessor type: String?
+      attr_accessor scope: String?
+    end
+
+    class GetDataExportConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_identifier: String?
+    end
+
+    class GetDataExportConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?is_export_enabled: bool,
+        ?status: String,
+        ?encryption_configuration: Types::EncryptionConfiguration,
+        ?s3_table_bucket_arn: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor is_export_enabled: bool?
+      attr_accessor status: String?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+      attr_accessor s3_table_bucket_arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
     end
 
     class GetDataProductInput
@@ -5093,6 +5813,8 @@ module Aws::DataZone
         ?tags: Hash[String, String],
         ?domain_version: String,
         ?service_role: String,
+        ?failure_reasons: Array[Types::FailureReason],
+        ?delete_progress: Types::DeleteProgress,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -5111,6 +5833,8 @@ module Aws::DataZone
       attr_accessor tags: Hash[String, String]?
       attr_accessor domain_version: String?
       attr_accessor service_role: String?
+      attr_accessor failure_reasons: Array[Types::FailureReason]?
+      attr_accessor delete_progress: Types::DeleteProgress?
     end
 
     class GetDomainUnitInput
@@ -5215,8 +5939,10 @@ module Aws::DataZone
         ?manage_access_role_arn: String,
         ?enabled_regions: Array[String],
         ?regional_parameters: Hash[String, Hash[String, String]],
+        ?allow_user_provided_configurations: bool,
         ?created_at: Time,
         ?updated_at: Time,
+        ?resource_configurations: Array[Types::ResourceConfiguration],
         ?provisioning_configurations: Array[Types::ProvisioningConfiguration],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -5228,8 +5954,10 @@ module Aws::DataZone
       attr_accessor manage_access_role_arn: String?
       attr_accessor enabled_regions: Array[String]?
       attr_accessor regional_parameters: Hash[String, Hash[String, String]]?
+      attr_accessor allow_user_provided_configurations: bool?
       attr_accessor created_at: Time?
       attr_accessor updated_at: Time?
+      attr_accessor resource_configurations: Array[Types::ResourceConfiguration]?
       attr_accessor provisioning_configurations: Array[Types::ProvisioningConfiguration]?
     end
 
@@ -5258,6 +5986,7 @@ module Aws::DataZone
         ?deployment_properties: Types::DeploymentProperties,
         ?user_parameters: Array[Types::CustomParameter],
         ?glossary_terms: Array[String],
+        ?blueprint_category: String,
         ?created_at: Time,
         ?updated_at: Time,
       ) -> void
@@ -5271,6 +6000,7 @@ module Aws::DataZone
       attr_accessor deployment_properties: Types::DeploymentProperties?
       attr_accessor user_parameters: Array[Types::CustomParameter]?
       attr_accessor glossary_terms: Array[String]?
+      attr_accessor blueprint_category: String?
       attr_accessor created_at: Time?
       attr_accessor updated_at: Time?
     end
@@ -5344,6 +6074,7 @@ module Aws::DataZone
         ?deployment_properties: Types::DeploymentProperties,
         ?environment_blueprint_id: String,
         ?environment_configuration_id: String,
+        ?environment_configuration_name: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -5369,6 +6100,7 @@ module Aws::DataZone
       attr_accessor deployment_properties: Types::DeploymentProperties?
       attr_accessor environment_blueprint_id: String?
       attr_accessor environment_configuration_id: String?
+      attr_accessor environment_configuration_name: String?
     end
 
     class GetEnvironmentProfileInput
@@ -5578,6 +6310,8 @@ module Aws::DataZone
         ?id: String,
         ?status: String,
         ?group_name: String,
+        ?role_principal_arn: String,
+        ?role_principal_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -5585,6 +6319,8 @@ module Aws::DataZone
       attr_accessor id: String?
       attr_accessor status: String?
       attr_accessor group_name: String?
+      attr_accessor role_principal_arn: String?
+      attr_accessor role_principal_id: String?
     end
 
     class GetIamPortalLoginUrlInput
@@ -5799,11 +6535,13 @@ module Aws::DataZone
       def initialize: (
         ?domain_identifier: String,
         ?identifier: String,
+        ?type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor domain_identifier: String?
       attr_accessor identifier: String?
+      attr_accessor type: String?
     end
 
     class GetMetadataGenerationRunOutput
@@ -5815,9 +6553,11 @@ module Aws::DataZone
         ?target: Types::MetadataGenerationRunTarget,
         ?status: String,
         ?type: String,
+        ?types: Array[String],
         ?created_at: Time,
         ?created_by: String,
         ?owning_project_id: String,
+        ?type_stats: Array[Types::MetadataGenerationRunTypeStat],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -5826,9 +6566,187 @@ module Aws::DataZone
       attr_accessor target: Types::MetadataGenerationRunTarget?
       attr_accessor status: String?
       attr_accessor type: String?
+      attr_accessor types: Array[String]?
       attr_accessor created_at: Time?
       attr_accessor created_by: String?
       attr_accessor owning_project_id: String?
+      attr_accessor type_stats: Array[Types::MetadataGenerationRunTypeStat]?
+    end
+
+    class GetNotebookExportInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_identifier: String,
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_identifier: String?
+      attr_accessor identifier: String?
+    end
+
+    class GetNotebookExportOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?domain_id: String,
+        ?owning_project_id: String,
+        ?notebook_id: String,
+        ?file_format: String,
+        ?status: String,
+        ?output_location: Types::OutputLocation,
+        ?error: Types::NotebookExportError,
+        ?completed_at: Time,
+        ?created_at: Time,
+        ?created_by: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor domain_id: String?
+      attr_accessor owning_project_id: String?
+      attr_accessor notebook_id: String?
+      attr_accessor file_format: String?
+      attr_accessor status: String?
+      attr_accessor output_location: Types::OutputLocation?
+      attr_accessor error: Types::NotebookExportError?
+      attr_accessor completed_at: Time?
+      attr_accessor created_at: Time?
+      attr_accessor created_by: String?
+    end
+
+    class GetNotebookInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_identifier: String,
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_identifier: String?
+      attr_accessor identifier: String?
+    end
+
+    class GetNotebookOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?owning_project_id: String,
+        ?domain_id: String,
+        ?cell_order: Array[Types::CellInformation],
+        ?status: String,
+        ?type: String,
+        ?description: String,
+        ?created_at: Time,
+        ?created_by: String,
+        ?updated_at: Time,
+        ?updated_by: String,
+        ?locked_by: String,
+        ?locked_at: Time,
+        ?lock_expires_at: Time,
+        ?compute_id: String,
+        ?metadata: Hash[String, String],
+        ?parameters: Hash[String, String],
+        ?environment_configuration: Types::EnvironmentConfig,
+        ?error: Types::NotebookError,
+        ?git_metadata: Types::GitMetadata,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor owning_project_id: String?
+      attr_accessor domain_id: String?
+      attr_accessor cell_order: Array[Types::CellInformation]?
+      attr_accessor status: String?
+      attr_accessor type: String?
+      attr_accessor description: String?
+      attr_accessor created_at: Time?
+      attr_accessor created_by: String?
+      attr_accessor updated_at: Time?
+      attr_accessor updated_by: String?
+      attr_accessor locked_by: String?
+      attr_accessor locked_at: Time?
+      attr_accessor lock_expires_at: Time?
+      attr_accessor compute_id: String?
+      attr_accessor metadata: Hash[String, String]?
+      attr_accessor parameters: Hash[String, String]?
+      attr_accessor environment_configuration: Types::EnvironmentConfig?
+      attr_accessor error: Types::NotebookError?
+      attr_accessor git_metadata: Types::GitMetadata?
+    end
+
+    class GetNotebookRunInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_identifier: String,
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_identifier: String?
+      attr_accessor identifier: String?
+    end
+
+    class GetNotebookRunOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?domain_id: String,
+        ?owning_project_id: String,
+        ?notebook_id: String,
+        ?schedule_id: String,
+        ?status: String,
+        ?cell_order: Array[Types::CellInformation],
+        ?metadata: Hash[String, String],
+        ?parameters: Hash[String, String],
+        ?compute_configuration: Types::ComputeConfig,
+        ?network_configuration: Types::NetworkConfig,
+        ?timeout_configuration: Types::TimeoutConfig,
+        ?environment_configuration: Types::EnvironmentConfig,
+        ?storage_configuration: Types::StorageConfig,
+        ?notification_configuration: Types::NotificationConfig,
+        ?trigger_source: Types::TriggerSource,
+        ?error: Types::NotebookRunError,
+        ?created_at: Time,
+        ?created_by: String,
+        ?updated_at: Time,
+        ?updated_by: String,
+        ?started_at: Time,
+        ?completed_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor domain_id: String?
+      attr_accessor owning_project_id: String?
+      attr_accessor notebook_id: String?
+      attr_accessor schedule_id: String?
+      attr_accessor status: String?
+      attr_accessor cell_order: Array[Types::CellInformation]?
+      attr_accessor metadata: Hash[String, String]?
+      attr_accessor parameters: Hash[String, String]?
+      attr_accessor compute_configuration: Types::ComputeConfig?
+      attr_accessor network_configuration: Types::NetworkConfig?
+      attr_accessor timeout_configuration: Types::TimeoutConfig?
+      attr_accessor environment_configuration: Types::EnvironmentConfig?
+      attr_accessor storage_configuration: Types::StorageConfig?
+      attr_accessor notification_configuration: Types::NotificationConfig?
+      attr_accessor trigger_source: Types::TriggerSource?
+      attr_accessor error: Types::NotebookRunError?
+      attr_accessor created_at: Time?
+      attr_accessor created_by: String?
+      attr_accessor updated_at: Time?
+      attr_accessor updated_by: String?
+      attr_accessor started_at: Time?
+      attr_accessor completed_at: Time?
     end
 
     class GetProjectInput
@@ -5857,11 +6775,13 @@ module Aws::DataZone
         ?created_by: String,
         ?created_at: Time,
         ?last_updated_at: Time,
+        ?resource_tags: Array[Types::ResourceTag],
         ?glossary_terms: Array[String],
         ?domain_unit_id: String,
         ?project_profile_id: String,
         ?user_parameters: Array[Types::EnvironmentConfigurationUserParameter],
         ?environment_deployment_details: Types::EnvironmentDeploymentDetails,
+        ?project_category: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -5874,11 +6794,13 @@ module Aws::DataZone
       attr_accessor created_by: String?
       attr_accessor created_at: Time?
       attr_accessor last_updated_at: Time?
+      attr_accessor resource_tags: Array[Types::ResourceTag]?
       attr_accessor glossary_terms: Array[String]?
       attr_accessor domain_unit_id: String?
       attr_accessor project_profile_id: String?
       attr_accessor user_parameters: Array[Types::EnvironmentConfigurationUserParameter]?
       attr_accessor environment_deployment_details: Types::EnvironmentDeploymentDetails?
+      attr_accessor project_category: String?
     end
 
     class GetProjectProfileInput
@@ -5903,6 +6825,9 @@ module Aws::DataZone
         ?name: String,
         ?description: String,
         ?status: String,
+        ?project_resource_tags: Array[Types::ResourceTagParameter],
+        ?allow_custom_project_resource_tags: bool,
+        ?project_resource_tags_description: String,
         ?environment_configurations: Array[Types::EnvironmentConfiguration],
         ?created_by: String,
         ?created_at: Time,
@@ -5916,6 +6841,9 @@ module Aws::DataZone
       attr_accessor name: String?
       attr_accessor description: String?
       attr_accessor status: String?
+      attr_accessor project_resource_tags: Array[Types::ResourceTagParameter]?
+      attr_accessor allow_custom_project_resource_tags: bool?
+      attr_accessor project_resource_tags_description: String?
       attr_accessor environment_configurations: Array[Types::EnvironmentConfiguration]?
       attr_accessor created_by: String?
       attr_accessor created_at: Time?
@@ -5998,6 +6926,7 @@ module Aws::DataZone
         ?domain_id: String,
         ?created_at: Time,
         ?updated_at: Time,
+        ?environment_id: String,
         ?subscription_target_id: String,
         ?granted_entity: Types::GrantedEntity,
         ?status: String,
@@ -6012,6 +6941,7 @@ module Aws::DataZone
       attr_accessor domain_id: String?
       attr_accessor created_at: Time?
       attr_accessor updated_at: Time?
+      attr_accessor environment_id: String?
       attr_accessor subscription_target_id: String?
       attr_accessor granted_entity: Types::GrantedEntity?
       attr_accessor status: String?
@@ -6147,6 +7077,7 @@ module Aws::DataZone
         ?applicable_asset_types: Array[String],
         ?subscription_target_config: Array[Types::SubscriptionTargetForm],
         ?provider: String,
+        ?subscription_grant_creation_mode: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -6165,6 +7096,7 @@ module Aws::DataZone
       attr_accessor applicable_asset_types: Array[String]?
       attr_accessor subscription_target_config: Array[Types::SubscriptionTargetForm]?
       attr_accessor provider: String?
+      attr_accessor subscription_grant_creation_mode: String?
     end
 
     class GetTimeSeriesDataPointInput
@@ -6212,12 +7144,14 @@ module Aws::DataZone
         ?domain_identifier: String,
         ?user_identifier: String,
         ?type: String,
+        ?session_name: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor domain_identifier: String?
       attr_accessor user_identifier: String?
       attr_accessor type: String?
+      attr_accessor session_name: String?
     end
 
     class GetUserProfileOutput
@@ -6237,6 +7171,76 @@ module Aws::DataZone
       attr_accessor type: String?
       attr_accessor status: String?
       attr_accessor details: Types::UserProfileDetails?
+    end
+
+    class GitMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_id: String,
+        ?repository: String,
+        ?branch: String,
+        ?commit_hash: String,
+        ?file_name: String,
+        ?committed_at: Time,
+        ?commit_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_id: String?
+      attr_accessor repository: String?
+      attr_accessor branch: String?
+      attr_accessor commit_hash: String?
+      attr_accessor file_name: String?
+      attr_accessor committed_at: Time?
+      attr_accessor commit_message: String?
+    end
+
+    class GitPropertiesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code_connection_arn: String,
+        ?repository_id: String,
+        ?default_branch: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code_connection_arn: String?
+      attr_accessor repository_id: String?
+      attr_accessor default_branch: String?
+    end
+
+    class GitPropertiesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code_connection_arn: String,
+        ?repository_id: String,
+        ?default_branch: String,
+        ?status: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code_connection_arn: String?
+      attr_accessor repository_id: String?
+      attr_accessor default_branch: String?
+      attr_accessor status: String?
+      attr_accessor error_message: String?
+    end
+
+    class GitPropertiesPatch
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code_connection_arn: String,
+        ?default_branch: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code_connection_arn: String?
+      attr_accessor default_branch: String?
     end
 
     class GlossaryItem
@@ -6286,6 +7290,17 @@ module Aws::DataZone
     module GlossaryStatus
       DISABLED: String
       ENABLED: String
+    end
+
+    class GlossaryTermEnforcementDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?required_glossary_term_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor required_glossary_term_ids: Array[String]?
     end
 
     class GlossaryTermItem
@@ -6596,6 +7611,10 @@ module Aws::DataZone
       end
     end
 
+    module GraphEntityType
+      LINEAGE_NODE: String
+    end
+
     class GreaterThanExpression
       include Smithy::Schema::Structure
 
@@ -6662,6 +7681,8 @@ module Aws::DataZone
         ?id: String,
         ?status: String,
         ?group_name: String,
+        ?role_principal_arn: String,
+        ?role_principal_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -6669,11 +7690,14 @@ module Aws::DataZone
       attr_accessor id: String?
       attr_accessor status: String?
       attr_accessor group_name: String?
+      attr_accessor role_principal_arn: String?
+      attr_accessor role_principal_id: String?
     end
 
     module GroupSearchType
       SSO_GROUP: String
       DATAZONE_SSO_GROUP: String
+      IAM_ROLE_SESSION_GROUP: String
     end
 
     module HyperPodOrchestrator
@@ -6712,10 +7736,12 @@ module Aws::DataZone
 
       def initialize: (
         ?glue_lineage_sync_enabled: bool,
+        ?role_arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor glue_lineage_sync_enabled: bool?
+      attr_accessor role_arn: String?
     end
 
     class IamPropertiesOutput
@@ -6748,11 +7774,28 @@ module Aws::DataZone
       def initialize: (
         ?arn: String,
         ?principal_id: String,
+        ?session_name: String,
+        ?group_profile_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor arn: String?
       attr_accessor principal_id: String?
+      attr_accessor session_name: String?
+      attr_accessor group_profile_id: String?
+    end
+
+    class IdentityMapping
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?username_attribute: String,
+        ?prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor username_attribute: String?
+      attr_accessor prefix: String?
     end
 
     class Import
@@ -6912,6 +7955,39 @@ module Aws::DataZone
       attr_accessor location_registration_exclude_s3_locations: Array[String]?
     end
 
+    class LakehousePropertiesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?glue_lineage_sync_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor glue_lineage_sync_enabled: bool?
+    end
+
+    class LakehousePropertiesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?glue_lineage_sync_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor glue_lineage_sync_enabled: bool?
+    end
+
+    class LakehousePropertiesPatch
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?glue_lineage_sync_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor glue_lineage_sync_enabled: bool?
+    end
+
     class LessThanExpression
       include Smithy::Schema::Structure
 
@@ -7001,6 +8077,45 @@ module Aws::DataZone
       attr_accessor event_id: String?
       attr_accessor event_status: String?
       attr_accessor error_message: String?
+    end
+
+    class LineageNodeItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?name: String,
+        ?description: String,
+        ?created_at: Time,
+        ?created_by: String,
+        ?updated_at: Time,
+        ?updated_by: String,
+        ?id: String,
+        ?type_name: String,
+        ?type_revision: String,
+        ?source_identifier: String,
+        ?event_timestamp: Time,
+        ?forms_output: Array[Types::FormOutput],
+        ?upstream_lineage_node_ids: Array[String],
+        ?downstream_lineage_node_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor created_at: Time?
+      attr_accessor created_by: String?
+      attr_accessor updated_at: Time?
+      attr_accessor updated_by: String?
+      attr_accessor id: String?
+      attr_accessor type_name: String?
+      attr_accessor type_revision: String?
+      attr_accessor source_identifier: String?
+      attr_accessor event_timestamp: Time?
+      attr_accessor forms_output: Array[Types::FormOutput]?
+      attr_accessor upstream_lineage_node_ids: Array[String]?
+      attr_accessor downstream_lineage_node_ids: Array[String]?
     end
 
     class LineageNodeReference
@@ -7104,6 +8219,38 @@ module Aws::DataZone
       attr_accessor total_queries_processed: Integer?
       attr_accessor num_queries_failed: Integer?
       attr_accessor error_messages: Array[String]?
+    end
+
+    class LineageSyncInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timezone: String,
+        ?enabled: bool,
+        ?schedule: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timezone: String?
+      attr_accessor enabled: bool?
+      attr_accessor schedule: String?
+    end
+
+    class LineageSyncOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lineage_job_id: String,
+        ?timezone: String,
+        ?enabled: bool,
+        ?schedule: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lineage_job_id: String?
+      attr_accessor timezone: String?
+      attr_accessor enabled: bool?
+      attr_accessor schedule: String?
     end
 
     class LineageSyncSchedule
@@ -7256,6 +8403,7 @@ module Aws::DataZone
         ?environment_identifier: String,
         ?project_identifier: String,
         ?type: String,
+        ?scope: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -7268,6 +8416,7 @@ module Aws::DataZone
       attr_accessor environment_identifier: String?
       attr_accessor project_identifier: String?
       attr_accessor type: String?
+      attr_accessor scope: String?
     end
 
     class ListConnectionsOutput
@@ -7796,6 +8945,7 @@ module Aws::DataZone
         ?type: String,
         ?next_token: String,
         ?max_results: Integer,
+        ?target_identifier: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -7804,6 +8954,7 @@ module Aws::DataZone
       attr_accessor type: String?
       attr_accessor next_token: String?
       attr_accessor max_results: Integer?
+      attr_accessor target_identifier: String?
     end
 
     class ListMetadataGenerationRunsOutput
@@ -7816,6 +8967,82 @@ module Aws::DataZone
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor items: Array[Types::MetadataGenerationRunItem]?
+      attr_accessor next_token: String?
+    end
+
+    class ListNotebookRunsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_identifier: String,
+        ?owning_project_identifier: String,
+        ?notebook_identifier: String,
+        ?status: String,
+        ?schedule_identifier: String,
+        ?max_results: Integer,
+        ?sort_order: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_identifier: String?
+      attr_accessor owning_project_identifier: String?
+      attr_accessor notebook_identifier: String?
+      attr_accessor status: String?
+      attr_accessor schedule_identifier: String?
+      attr_accessor max_results: Integer?
+      attr_accessor sort_order: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListNotebookRunsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::NotebookRunSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::NotebookRunSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListNotebooksInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_identifier: String,
+        ?owning_project_identifier: String,
+        ?max_results: Integer,
+        ?sort_order: String,
+        ?sort_by: String,
+        ?status: String,
+        ?type: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_identifier: String?
+      attr_accessor owning_project_identifier: String?
+      attr_accessor max_results: Integer?
+      attr_accessor sort_order: String?
+      attr_accessor sort_by: String?
+      attr_accessor status: String?
+      attr_accessor type: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListNotebooksOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::NotebookSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::NotebookSummary]?
       attr_accessor next_token: String?
     end
 
@@ -7967,6 +9194,7 @@ module Aws::DataZone
         ?user_identifier: String,
         ?group_identifier: String,
         ?name: String,
+        ?project_category: String,
         ?next_token: String,
         ?max_results: Integer,
       ) -> void
@@ -7976,6 +9204,7 @@ module Aws::DataZone
       attr_accessor user_identifier: String?
       attr_accessor group_identifier: String?
       attr_accessor name: String?
+      attr_accessor project_category: String?
       attr_accessor next_token: String?
       attr_accessor max_results: Integer?
     end
@@ -8047,6 +9276,9 @@ module Aws::DataZone
         ?subscribed_listing_id: String,
         ?subscription_id: String,
         ?owning_project_id: String,
+        ?owning_iam_principal_arn: String,
+        ?owning_user_id: String,
+        ?owning_group_id: String,
         ?sort_by: String,
         ?sort_order: String,
         ?max_results: Integer,
@@ -8060,6 +9292,9 @@ module Aws::DataZone
       attr_accessor subscribed_listing_id: String?
       attr_accessor subscription_id: String?
       attr_accessor owning_project_id: String?
+      attr_accessor owning_iam_principal_arn: String?
+      attr_accessor owning_user_id: String?
+      attr_accessor owning_group_id: String?
       attr_accessor sort_by: String?
       attr_accessor sort_order: String?
       attr_accessor max_results: Integer?
@@ -8087,7 +9322,10 @@ module Aws::DataZone
         ?status: String,
         ?subscribed_listing_id: String,
         ?owning_project_id: String,
+        ?owning_iam_principal_arn: String,
         ?approver_project_id: String,
+        ?owning_user_id: String,
+        ?owning_group_id: String,
         ?sort_by: String,
         ?sort_order: String,
         ?max_results: Integer,
@@ -8099,7 +9337,10 @@ module Aws::DataZone
       attr_accessor status: String?
       attr_accessor subscribed_listing_id: String?
       attr_accessor owning_project_id: String?
+      attr_accessor owning_iam_principal_arn: String?
       attr_accessor approver_project_id: String?
+      attr_accessor owning_user_id: String?
+      attr_accessor owning_group_id: String?
       attr_accessor sort_by: String?
       attr_accessor sort_order: String?
       attr_accessor max_results: Integer?
@@ -8162,6 +9403,9 @@ module Aws::DataZone
         ?status: String,
         ?subscribed_listing_id: String,
         ?owning_project_id: String,
+        ?owning_iam_principal_arn: String,
+        ?owning_user_id: String,
+        ?owning_group_id: String,
         ?approver_project_id: String,
         ?sort_by: String,
         ?sort_order: String,
@@ -8175,6 +9419,9 @@ module Aws::DataZone
       attr_accessor status: String?
       attr_accessor subscribed_listing_id: String?
       attr_accessor owning_project_id: String?
+      attr_accessor owning_iam_principal_arn: String?
+      attr_accessor owning_user_id: String?
+      attr_accessor owning_group_id: String?
       attr_accessor approver_project_id: String?
       attr_accessor sort_by: String?
       attr_accessor sort_order: String?
@@ -8367,6 +9614,26 @@ module Aws::DataZone
       USE_ASSET_TYPE: String
     end
 
+    class MatchClause
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?relation_pattern: Types::RelationPattern,
+        ?entity_pattern: Types::EntityPattern,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor relation_pattern: Types::RelationPattern?
+      attr_accessor entity_pattern: Types::EntityPattern?
+
+      class RelationPattern < MatchClause
+      end
+      class EntityPattern < MatchClause
+      end
+      class Unknown < MatchClause
+      end
+    end
+
     class MatchOffset
       include Smithy::Schema::Structure
 
@@ -8484,6 +9751,7 @@ module Aws::DataZone
         ?target: Types::MetadataGenerationRunTarget,
         ?status: String,
         ?type: String,
+        ?types: Array[String],
         ?created_at: Time,
         ?created_by: String,
         ?owning_project_id: String,
@@ -8495,6 +9763,7 @@ module Aws::DataZone
       attr_accessor target: Types::MetadataGenerationRunTarget?
       attr_accessor status: String?
       attr_accessor type: String?
+      attr_accessor types: Array[String]?
       attr_accessor created_at: Time?
       attr_accessor created_by: String?
       attr_accessor owning_project_id: String?
@@ -8506,6 +9775,7 @@ module Aws::DataZone
       CANCELED: String
       SUCCEEDED: String
       FAILED: String
+      PARTIALLY_SUCCEEDED: String
     end
 
     class MetadataGenerationRunTarget
@@ -8525,10 +9795,60 @@ module Aws::DataZone
 
     module MetadataGenerationRunType
       BUSINESS_DESCRIPTIONS: String
+      BUSINESS_NAMES: String
+      BUSINESS_GLOSSARY_ASSOCIATIONS: String
+    end
+
+    class MetadataGenerationRunTypeStat
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?status: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor status: String?
+      attr_accessor error_message: String?
     end
 
     module MetadataGenerationTargetType
       ASSET: String
+    end
+
+    class MlflowPropertiesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tracking_server_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tracking_server_arn: String?
+    end
+
+    class MlflowPropertiesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tracking_server_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tracking_server_arn: String?
+    end
+
+    class MlflowPropertiesPatch
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tracking_server_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tracking_server_arn: String?
     end
 
     class Model
@@ -8558,6 +9878,28 @@ module Aws::DataZone
 
       attr_accessor name: String?
       attr_accessor namespace: String?
+    end
+
+    module NetworkAccessType
+      PUBLIC_INTERNET_ONLY: String
+      VPC_ONLY: String
+    end
+
+    class NetworkConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_access_type: String,
+        ?vpc_id: String,
+        ?subnet_ids: Array[String],
+        ?security_group_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_access_type: String?
+      attr_accessor vpc_id: String?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor security_group_ids: Array[String]?
     end
 
     class NotEqualToExpression
@@ -8597,6 +9939,144 @@ module Aws::DataZone
 
       attr_accessor column_name: String?
       attr_accessor value: String?
+    end
+
+    class NotebookError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class NotebookExportError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module NotebookExportStatus
+      IN_PROGRESS: String
+      SUCCEEDED: String
+      FAILED: String
+    end
+
+    class NotebookRunError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module NotebookRunStatus
+      QUEUED: String
+      STARTING: String
+      RUNNING: String
+      STOPPING: String
+      STOPPED: String
+      SUCCEEDED: String
+      FAILED: String
+    end
+
+    class NotebookRunSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?domain_id: String,
+        ?owning_project_id: String,
+        ?notebook_id: String,
+        ?schedule_id: String,
+        ?status: String,
+        ?trigger_source: Types::TriggerSource,
+        ?created_at: Time,
+        ?created_by: String,
+        ?updated_at: Time,
+        ?updated_by: String,
+        ?started_at: Time,
+        ?completed_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor domain_id: String?
+      attr_accessor owning_project_id: String?
+      attr_accessor notebook_id: String?
+      attr_accessor schedule_id: String?
+      attr_accessor status: String?
+      attr_accessor trigger_source: Types::TriggerSource?
+      attr_accessor created_at: Time?
+      attr_accessor created_by: String?
+      attr_accessor updated_at: Time?
+      attr_accessor updated_by: String?
+      attr_accessor started_at: Time?
+      attr_accessor completed_at: Time?
+    end
+
+    module NotebookStatus
+      ACTIVE: String
+      ARCHIVED: String
+      SYNC_IN_PROGRESS: String
+      SYNC_FAILED: String
+    end
+
+    class NotebookSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?owning_project_id: String,
+        ?domain_id: String,
+        ?status: String,
+        ?type: String,
+        ?description: String,
+        ?created_at: Time,
+        ?created_by: String,
+        ?updated_at: Time,
+        ?updated_by: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor owning_project_id: String?
+      attr_accessor domain_id: String?
+      attr_accessor status: String?
+      attr_accessor type: String?
+      attr_accessor description: String?
+      attr_accessor created_at: Time?
+      attr_accessor created_by: String?
+      attr_accessor updated_at: Time?
+      attr_accessor updated_by: String?
+    end
+
+    module NotebookType
+      DATA: String
+      SQL: String
+    end
+
+    class NotificationConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notify_on: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notify_on: Array[String]?
     end
 
     class NotificationOutput
@@ -8660,6 +10140,16 @@ module Aws::DataZone
     module NotificationType
       TASK: String
       EVENT: String
+    end
+
+    module NotifyOnState
+      SUCCEEDED: String
+      FAILED: String
+      STOPPED: String
+      QUEUED: String
+      STARTING: String
+      RUNNING: String
+      STOPPING: String
     end
 
     class OAuth2ClientApplication
@@ -8728,6 +10218,22 @@ module Aws::DataZone
       ABORT: String
       FAIL: String
       OTHER: String
+    end
+
+    class OutputLocation
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?s3: Types::S3Destination,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3: Types::S3Destination?
+
+      class S3 < OutputLocation
+      end
+      class Unknown < OutputLocation
+      end
     end
 
     module OverallDeploymentStatus
@@ -8844,6 +10350,39 @@ module Aws::DataZone
       attr_accessor user_id: String?
     end
 
+    class PackageConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?package_manager: String,
+        ?package_specification: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor package_manager: String?
+      attr_accessor package_specification: String?
+    end
+
+    module PackageManager
+      UV: String
+    end
+
+    class Permissions
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?s3: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3: Array[String]?
+
+      class S3 < Permissions
+      end
+      class Unknown < Permissions
+      end
+    end
+
     class PhysicalConnectionRequirements
       include Smithy::Schema::Structure
 
@@ -8867,7 +10406,9 @@ module Aws::DataZone
       def initialize: (
         ?aws_location: Types::AwsLocation,
         ?glue_connection_name: String,
+        ?glue_connection_names: Array[String],
         ?glue_connection: Types::GlueConnection,
+        ?enable_trusted_identity_propagation: bool,
         ?host: String,
         ?port: Integer,
         ?protocol: String,
@@ -8877,7 +10418,9 @@ module Aws::DataZone
 
       attr_accessor aws_location: Types::AwsLocation?
       attr_accessor glue_connection_name: String?
+      attr_accessor glue_connection_names: Array[String]?
       attr_accessor glue_connection: Types::GlueConnection?
+      attr_accessor enable_trusted_identity_propagation: bool?
       attr_accessor host: String?
       attr_accessor port: Integer?
       attr_accessor protocol: String?
@@ -9122,6 +10665,19 @@ module Aws::DataZone
       attr_accessor designation: String?
     end
 
+    class ProjectMembershipAssignment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?member: Types::Member,
+        ?designation: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor member: Types::Member?
+      attr_accessor designation: String?
+    end
+
     class ProjectPolicyGrantPrincipal
       include Smithy::Schema::Structure
 
@@ -9187,6 +10743,7 @@ module Aws::DataZone
         ?created_at: Time,
         ?updated_at: Time,
         ?domain_unit_id: String,
+        ?project_category: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -9200,6 +10757,7 @@ module Aws::DataZone
       attr_accessor created_at: Time?
       attr_accessor updated_at: Time?
       attr_accessor domain_unit_id: String?
+      attr_accessor project_category: String?
     end
 
     class ProjectsForRule
@@ -9257,6 +10815,32 @@ module Aws::DataZone
       end
     end
 
+    class PutDataExportConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_identifier: String,
+        ?enable_export: bool,
+        ?encryption_configuration: Types::EncryptionConfiguration,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_identifier: String?
+      attr_accessor enable_export: bool?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+      attr_accessor client_token: String?
+    end
+
+    class PutDataExportConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
     class PutEnvironmentBlueprintConfigurationInput
       include Smithy::Schema::Structure
 
@@ -9268,6 +10852,8 @@ module Aws::DataZone
         ?environment_role_permission_boundary: String,
         ?enabled_regions: Array[String],
         ?regional_parameters: Hash[String, Hash[String, String]],
+        ?resource_configurations: Array[Types::PutResourceConfiguration],
+        ?allow_user_provided_configurations: bool,
         ?global_parameters: Hash[String, String],
         ?provisioning_configurations: Array[Types::ProvisioningConfiguration],
       ) -> void
@@ -9280,6 +10866,8 @@ module Aws::DataZone
       attr_accessor environment_role_permission_boundary: String?
       attr_accessor enabled_regions: Array[String]?
       attr_accessor regional_parameters: Hash[String, Hash[String, String]]?
+      attr_accessor resource_configurations: Array[Types::PutResourceConfiguration]?
+      attr_accessor allow_user_provided_configurations: bool?
       attr_accessor global_parameters: Hash[String, String]?
       attr_accessor provisioning_configurations: Array[Types::ProvisioningConfiguration]?
     end
@@ -9295,8 +10883,10 @@ module Aws::DataZone
         ?manage_access_role_arn: String,
         ?enabled_regions: Array[String],
         ?regional_parameters: Hash[String, Hash[String, String]],
+        ?allow_user_provided_configurations: bool,
         ?created_at: Time,
         ?updated_at: Time,
+        ?resource_configurations: Array[Types::ResourceConfiguration],
         ?provisioning_configurations: Array[Types::ProvisioningConfiguration],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -9308,9 +10898,60 @@ module Aws::DataZone
       attr_accessor manage_access_role_arn: String?
       attr_accessor enabled_regions: Array[String]?
       attr_accessor regional_parameters: Hash[String, Hash[String, String]]?
+      attr_accessor allow_user_provided_configurations: bool?
       attr_accessor created_at: Time?
       attr_accessor updated_at: Time?
+      attr_accessor resource_configurations: Array[Types::ResourceConfiguration]?
       attr_accessor provisioning_configurations: Array[Types::ProvisioningConfiguration]?
+    end
+
+    class PutResourceConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?region: String,
+        ?parameters: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor region: String?
+      attr_accessor parameters: Hash[String, String]?
+    end
+
+    class QueryGraphInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_identifier: String,
+        ?match: Array[Types::MatchClause],
+        ?max_results: Integer,
+        ?next_token: String,
+        ?additional_attributes: Types::AdditionalAttributes,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_identifier: String?
+      attr_accessor match: Array[Types::MatchClause]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor additional_attributes: Types::AdditionalAttributes?
+    end
+
+    class QueryGraphOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::ResultItem],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::ResultItem]?
+      attr_accessor next_token: String?
     end
 
     class RecommendationConfiguration
@@ -9702,6 +11343,30 @@ module Aws::DataZone
       attr_accessor metadata_forms: Array[Types::FormOutput]?
     end
 
+    module RelationDirection
+      IN: String
+      OUT: String
+    end
+
+    class RelationPattern
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?relation_type: String,
+        ?relation_direction: String,
+        ?max_path_length: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor relation_type: String?
+      attr_accessor relation_direction: String?
+      attr_accessor max_path_length: Integer?
+    end
+
+    module RelationType
+      LINEAGE: String
+    end
+
     class RelationalFilterConfiguration
       include Smithy::Schema::Structure
 
@@ -9798,6 +11463,25 @@ module Aws::DataZone
       attr_accessor type: String?
     end
 
+    class ResourceConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?name: String,
+        ?description: String,
+        ?region: String,
+        ?parameters: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor region: String?
+      attr_accessor parameters: Hash[String, String]?
+    end
+
     class ResourceNotFoundException
       include Smithy::Schema::Structure
 
@@ -9807,6 +11491,57 @@ module Aws::DataZone
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    class ResourceTag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+        ?source: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+      attr_accessor source: String?
+    end
+
+    class ResourceTagParameter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+        ?is_value_editable: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+      attr_accessor is_value_editable: bool?
+    end
+
+    module ResourceTagSource
+      PROJECT: String
+      PROJECT_PROFILE: String
+    end
+
+    class ResultItem
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?lineage_node: Types::LineageNodeItem,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lineage_node: Types::LineageNodeItem?
+
+      class LineageNode < ResultItem
+      end
+      class Unknown < ResultItem
+      end
     end
 
     class RevokeSubscriptionInput
@@ -9962,12 +11697,16 @@ module Aws::DataZone
 
       def initialize: (
         ?metadata_form_enforcement_detail: Types::MetadataFormEnforcementDetail,
+        ?glossary_term_enforcement_detail: Types::GlossaryTermEnforcementDetail,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor metadata_form_enforcement_detail: Types::MetadataFormEnforcementDetail?
+      attr_accessor glossary_term_enforcement_detail: Types::GlossaryTermEnforcementDetail?
 
       class MetadataFormEnforcementDetail < RuleDetail
+      end
+      class GlossaryTermEnforcementDetail < RuleDetail
       end
       class Unknown < RuleDetail
       end
@@ -10044,6 +11783,7 @@ module Aws::DataZone
 
     module RuleType
       METADATA_FORM_ENFORCEMENT: String
+      GLOSSARY_TERM_ENFORCEMENT: String
     end
 
     class RunStatisticsForAssets
@@ -10065,17 +11805,59 @@ module Aws::DataZone
       attr_accessor failed: Integer?
     end
 
+    class S3Destination
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?uri: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor uri: String?
+    end
+
+    class S3File
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+    end
+
+    class S3FilesLocation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?file_list: Array[Types::S3File],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor file_list: Array[Types::S3File]?
+    end
+
+    module S3Permission
+      READ: String
+      WRITE: String
+    end
+
     class S3PropertiesInput
       include Smithy::Schema::Structure
 
       def initialize: (
         ?s3_uri: String,
         ?s3_access_grant_location_id: String,
+        ?register_s3_access_grant_location: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor s3_uri: String?
       attr_accessor s3_access_grant_location_id: String?
+      attr_accessor register_s3_access_grant_location: bool?
     end
 
     class S3PropertiesOutput
@@ -10084,6 +11866,7 @@ module Aws::DataZone
       def initialize: (
         ?s3_uri: String,
         ?s3_access_grant_location_id: String,
+        ?register_s3_access_grant_location: bool,
         ?status: String,
         ?error_message: String,
       ) -> void
@@ -10091,6 +11874,7 @@ module Aws::DataZone
 
       attr_accessor s3_uri: String?
       attr_accessor s3_access_grant_location_id: String?
+      attr_accessor register_s3_access_grant_location: bool?
       attr_accessor status: String?
       attr_accessor error_message: String?
     end
@@ -10101,11 +11885,13 @@ module Aws::DataZone
       def initialize: (
         ?s3_uri: String,
         ?s3_access_grant_location_id: String,
+        ?register_s3_access_grant_location: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor s3_uri: String?
       attr_accessor s3_access_grant_location_id: String?
+      attr_accessor register_s3_access_grant_location: bool?
     end
 
     class SageMakerRunConfigurationInput
@@ -10516,6 +12302,57 @@ module Aws::DataZone
       attr_accessor idc_instance_arn: String?
     end
 
+    class SnowflakePropertiesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connectivity_properties: Types::ConnectivityProperties,
+        ?snowflake_role: String,
+        ?identity_mapping: Types::IdentityMapping,
+        ?lineage_sync: Types::LineageSyncInput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connectivity_properties: Types::ConnectivityProperties?
+      attr_accessor snowflake_role: String?
+      attr_accessor identity_mapping: Types::IdentityMapping?
+      attr_accessor lineage_sync: Types::LineageSyncInput?
+    end
+
+    class SnowflakePropertiesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?snowflake_role: String,
+        ?identity_mapping: Types::IdentityMapping,
+        ?lineage_sync: Types::LineageSyncOutput,
+        ?status: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor snowflake_role: String?
+      attr_accessor identity_mapping: Types::IdentityMapping?
+      attr_accessor lineage_sync: Types::LineageSyncOutput?
+      attr_accessor status: String?
+      attr_accessor error_message: String?
+    end
+
+    class SnowflakePropertiesPatch
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connectivity_properties_patch: Types::ConnectivityPropertiesPatch,
+        ?snowflake_role: String,
+        ?lineage_sync: Types::LineageSyncInput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connectivity_properties_patch: Types::ConnectivityPropertiesPatch?
+      attr_accessor snowflake_role: String?
+      attr_accessor lineage_sync: Types::LineageSyncInput?
+    end
+
     module SortFieldAccountPool
       NAME: String
     end
@@ -10536,6 +12373,26 @@ module Aws::DataZone
     module SortOrder
       ASCENDING: String
       DESCENDING: String
+    end
+
+    class SourceLocation
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?s3: String,
+        ?s3_files: Types::S3FilesLocation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3: String?
+      attr_accessor s3_files: Types::S3FilesLocation?
+
+      class S3 < SourceLocation
+      end
+      class S3Files < SourceLocation
+      end
+      class Unknown < SourceLocation
+      end
     end
 
     class SparkEmrPropertiesInput
@@ -10642,6 +12499,7 @@ module Aws::DataZone
       def initialize: (
         ?additional_args: Types::SparkGlueArgs,
         ?glue_connection_name: String,
+        ?glue_connection_names: Array[String],
         ?glue_version: String,
         ?idle_timeout: Integer,
         ?java_virtual_env: String,
@@ -10653,6 +12511,7 @@ module Aws::DataZone
 
       attr_accessor additional_args: Types::SparkGlueArgs?
       attr_accessor glue_connection_name: String?
+      attr_accessor glue_connection_names: Array[String]?
       attr_accessor glue_version: String?
       attr_accessor idle_timeout: Integer?
       attr_accessor java_virtual_env: String?
@@ -10667,6 +12526,7 @@ module Aws::DataZone
       def initialize: (
         ?additional_args: Types::SparkGlueArgs,
         ?glue_connection_name: String,
+        ?glue_connection_names: Array[String],
         ?glue_version: String,
         ?idle_timeout: Integer,
         ?java_virtual_env: String,
@@ -10678,6 +12538,7 @@ module Aws::DataZone
 
       attr_accessor additional_args: Types::SparkGlueArgs?
       attr_accessor glue_connection_name: String?
+      attr_accessor glue_connection_names: Array[String]?
       attr_accessor glue_version: String?
       attr_accessor idle_timeout: Integer?
       attr_accessor java_virtual_env: String?
@@ -10757,6 +12618,7 @@ module Aws::DataZone
       def initialize: (
         ?domain_identifier: String,
         ?type: String,
+        ?types: Array[String],
         ?target: Types::MetadataGenerationRunTarget,
         ?client_token: String,
         ?owning_project_identifier: String,
@@ -10765,6 +12627,7 @@ module Aws::DataZone
 
       attr_accessor domain_identifier: String?
       attr_accessor type: String?
+      attr_accessor types: Array[String]?
       attr_accessor target: Types::MetadataGenerationRunTarget?
       attr_accessor client_token: String?
       attr_accessor owning_project_identifier: String?
@@ -10778,6 +12641,7 @@ module Aws::DataZone
         ?id: String,
         ?status: String,
         ?type: String,
+        ?types: Array[String],
         ?created_at: Time,
         ?created_by: String,
         ?owning_project_id: String,
@@ -10788,14 +12652,298 @@ module Aws::DataZone
       attr_accessor id: String?
       attr_accessor status: String?
       attr_accessor type: String?
+      attr_accessor types: Array[String]?
       attr_accessor created_at: Time?
       attr_accessor created_by: String?
       attr_accessor owning_project_id: String?
     end
 
+    class StartNotebookExportInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_identifier: String,
+        ?notebook_identifier: String,
+        ?owning_project_identifier: String,
+        ?file_format: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_identifier: String?
+      attr_accessor notebook_identifier: String?
+      attr_accessor owning_project_identifier: String?
+      attr_accessor file_format: String?
+      attr_accessor client_token: String?
+    end
+
+    class StartNotebookExportOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?domain_id: String,
+        ?owning_project_id: String,
+        ?notebook_id: String,
+        ?file_format: String,
+        ?status: String,
+        ?created_at: Time,
+        ?created_by: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor domain_id: String?
+      attr_accessor owning_project_id: String?
+      attr_accessor notebook_id: String?
+      attr_accessor file_format: String?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor created_by: String?
+    end
+
+    class StartNotebookImportInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_identifier: String,
+        ?owning_project_identifier: String,
+        ?source_location: Types::SourceLocation,
+        ?name: String,
+        ?description: String,
+        ?type: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_identifier: String?
+      attr_accessor owning_project_identifier: String?
+      attr_accessor source_location: Types::SourceLocation?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor type: String?
+      attr_accessor client_token: String?
+    end
+
+    class StartNotebookImportOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notebook_id: String,
+        ?status: String,
+        ?domain_id: String,
+        ?owning_project_id: String,
+        ?name: String,
+        ?description: String,
+        ?type: String,
+        ?source_location: Types::SourceLocation,
+        ?created_at: Time,
+        ?created_by: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notebook_id: String?
+      attr_accessor status: String?
+      attr_accessor domain_id: String?
+      attr_accessor owning_project_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor type: String?
+      attr_accessor source_location: Types::SourceLocation?
+      attr_accessor created_at: Time?
+      attr_accessor created_by: String?
+    end
+
+    class StartNotebookRunInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_identifier: String,
+        ?owning_project_identifier: String,
+        ?notebook_identifier: String,
+        ?schedule_identifier: String,
+        ?compute_configuration: Types::ComputeConfig,
+        ?network_configuration: Types::NetworkConfig,
+        ?timeout_configuration: Types::TimeoutConfig,
+        ?notification_configuration: Types::NotificationConfig,
+        ?trigger_source: Types::TriggerSource,
+        ?metadata: Hash[String, String],
+        ?parameters: Hash[String, String],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_identifier: String?
+      attr_accessor owning_project_identifier: String?
+      attr_accessor notebook_identifier: String?
+      attr_accessor schedule_identifier: String?
+      attr_accessor compute_configuration: Types::ComputeConfig?
+      attr_accessor network_configuration: Types::NetworkConfig?
+      attr_accessor timeout_configuration: Types::TimeoutConfig?
+      attr_accessor notification_configuration: Types::NotificationConfig?
+      attr_accessor trigger_source: Types::TriggerSource?
+      attr_accessor metadata: Hash[String, String]?
+      attr_accessor parameters: Hash[String, String]?
+      attr_accessor client_token: String?
+    end
+
+    class StartNotebookRunOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?domain_id: String,
+        ?owning_project_id: String,
+        ?notebook_id: String,
+        ?schedule_id: String,
+        ?status: String,
+        ?cell_order: Array[Types::CellInformation],
+        ?metadata: Hash[String, String],
+        ?parameters: Hash[String, String],
+        ?compute_configuration: Types::ComputeConfig,
+        ?network_configuration: Types::NetworkConfig,
+        ?timeout_configuration: Types::TimeoutConfig,
+        ?environment_configuration: Types::EnvironmentConfig,
+        ?storage_configuration: Types::StorageConfig,
+        ?notification_configuration: Types::NotificationConfig,
+        ?trigger_source: Types::TriggerSource,
+        ?error: Types::NotebookRunError,
+        ?created_at: Time,
+        ?created_by: String,
+        ?updated_at: Time,
+        ?updated_by: String,
+        ?started_at: Time,
+        ?completed_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor domain_id: String?
+      attr_accessor owning_project_id: String?
+      attr_accessor notebook_id: String?
+      attr_accessor schedule_id: String?
+      attr_accessor status: String?
+      attr_accessor cell_order: Array[Types::CellInformation]?
+      attr_accessor metadata: Hash[String, String]?
+      attr_accessor parameters: Hash[String, String]?
+      attr_accessor compute_configuration: Types::ComputeConfig?
+      attr_accessor network_configuration: Types::NetworkConfig?
+      attr_accessor timeout_configuration: Types::TimeoutConfig?
+      attr_accessor environment_configuration: Types::EnvironmentConfig?
+      attr_accessor storage_configuration: Types::StorageConfig?
+      attr_accessor notification_configuration: Types::NotificationConfig?
+      attr_accessor trigger_source: Types::TriggerSource?
+      attr_accessor error: Types::NotebookRunError?
+      attr_accessor created_at: Time?
+      attr_accessor created_by: String?
+      attr_accessor updated_at: Time?
+      attr_accessor updated_by: String?
+      attr_accessor started_at: Time?
+      attr_accessor completed_at: Time?
+    end
+
+    class StartNotebookSyncInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_identifier: String,
+        ?owning_project_identifier: String,
+        ?source_location: Types::SourceLocation,
+        ?git_metadata: Types::GitMetadata,
+        ?notebook_id: String,
+        ?name: String,
+        ?description: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_identifier: String?
+      attr_accessor owning_project_identifier: String?
+      attr_accessor source_location: Types::SourceLocation?
+      attr_accessor git_metadata: Types::GitMetadata?
+      attr_accessor notebook_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor client_token: String?
+    end
+
+    class StartNotebookSyncOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notebook_id: String,
+        ?status: String,
+        ?domain_id: String,
+        ?owning_project_id: String,
+        ?source_location: Types::SourceLocation,
+        ?git_metadata: Types::GitMetadata,
+        ?name: String,
+        ?description: String,
+        ?created_at: Time,
+        ?created_by: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notebook_id: String?
+      attr_accessor status: String?
+      attr_accessor domain_id: String?
+      attr_accessor owning_project_id: String?
+      attr_accessor source_location: Types::SourceLocation?
+      attr_accessor git_metadata: Types::GitMetadata?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor created_at: Time?
+      attr_accessor created_by: String?
+    end
+
     module Status
       ENABLED: String
       DISABLED: String
+    end
+
+    class StopNotebookRunInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_identifier: String,
+        ?identifier: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_identifier: String?
+      attr_accessor identifier: String?
+      attr_accessor client_token: String?
+    end
+
+    class StopNotebookRunOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?domain_id: String,
+        ?owning_project_id: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor domain_id: String?
+      attr_accessor owning_project_id: String?
+      attr_accessor status: String?
+    end
+
+    class StorageConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?project_s3_path: String,
+        ?kms_key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor project_s3_path: String?
+      attr_accessor kms_key_arn: String?
     end
 
     class SubscribedAsset
@@ -10810,6 +12958,7 @@ module Aws::DataZone
         ?granted_timestamp: Time,
         ?failure_timestamp: Time,
         ?asset_scope: Types::AssetScope,
+        ?permissions: Types::Permissions,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -10821,6 +12970,7 @@ module Aws::DataZone
       attr_accessor granted_timestamp: Time?
       attr_accessor failure_timestamp: Time?
       attr_accessor asset_scope: Types::AssetScope?
+      attr_accessor permissions: Types::Permissions?
     end
 
     class SubscribedAssetListing
@@ -10833,6 +12983,7 @@ module Aws::DataZone
         ?forms: String,
         ?glossary_terms: Array[Types::DetailedGlossaryTerm],
         ?asset_scope: Types::AssetScope,
+        ?permissions: Types::Permissions,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -10842,6 +12993,53 @@ module Aws::DataZone
       attr_accessor forms: String?
       attr_accessor glossary_terms: Array[Types::DetailedGlossaryTerm]?
       attr_accessor asset_scope: Types::AssetScope?
+      attr_accessor permissions: Types::Permissions?
+    end
+
+    class SubscribedGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+    end
+
+    class SubscribedGroupInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+    end
+
+    class SubscribedIamPrincipal
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?principal_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor principal_arn: String?
+    end
+
+    class SubscribedIamPrincipalInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
     end
 
     class SubscribedListing
@@ -10903,12 +13101,24 @@ module Aws::DataZone
 
       def initialize: (
         ?project: Types::SubscribedProject,
+        ?user: Types::SubscribedUser,
+        ?group: Types::SubscribedGroup,
+        ?iam: Types::SubscribedIamPrincipal,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor project: Types::SubscribedProject?
+      attr_accessor user: Types::SubscribedUser?
+      attr_accessor group: Types::SubscribedGroup?
+      attr_accessor iam: Types::SubscribedIamPrincipal?
 
       class Project < SubscribedPrincipal
+      end
+      class User < SubscribedPrincipal
+      end
+      class Group < SubscribedPrincipal
+      end
+      class Iam < SubscribedPrincipal
       end
       class Unknown < SubscribedPrincipal
       end
@@ -10919,12 +13129,24 @@ module Aws::DataZone
 
       def initialize: (
         ?project: Types::SubscribedProjectInput,
+        ?user: Types::SubscribedUserInput,
+        ?group: Types::SubscribedGroupInput,
+        ?iam: Types::SubscribedIamPrincipalInput,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor project: Types::SubscribedProjectInput?
+      attr_accessor user: Types::SubscribedUserInput?
+      attr_accessor group: Types::SubscribedGroupInput?
+      attr_accessor iam: Types::SubscribedIamPrincipalInput?
 
       class Project < SubscribedPrincipalInput
+      end
+      class User < SubscribedPrincipalInput
+      end
+      class Group < SubscribedPrincipalInput
+      end
+      class Iam < SubscribedPrincipalInput
       end
       class Unknown < SubscribedPrincipalInput
       end
@@ -10975,6 +13197,35 @@ module Aws::DataZone
       attr_accessor identifier: String?
     end
 
+    class SubscribedUser
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?details: Types::UserProfileDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor details: Types::UserProfileDetails?
+    end
+
+    class SubscribedUserInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+    end
+
+    module SubscriptionGrantCreationMode
+      AUTOMATIC: String
+      MANUAL: String
+    end
+
     module SubscriptionGrantOverallStatus
       PENDING: String
       IN_PROGRESS: String
@@ -11006,6 +13257,7 @@ module Aws::DataZone
         ?domain_id: String,
         ?created_at: Time,
         ?updated_at: Time,
+        ?environment_id: String,
         ?subscription_target_id: String,
         ?granted_entity: Types::GrantedEntity,
         ?status: String,
@@ -11020,6 +13272,7 @@ module Aws::DataZone
       attr_accessor domain_id: String?
       attr_accessor created_at: Time?
       attr_accessor updated_at: Time?
+      attr_accessor environment_id: String?
       attr_accessor subscription_target_id: String?
       attr_accessor granted_entity: Types::GrantedEntity?
       attr_accessor status: String?
@@ -11139,6 +13392,7 @@ module Aws::DataZone
         ?applicable_asset_types: Array[String],
         ?subscription_target_config: Array[Types::SubscriptionTargetForm],
         ?provider: String,
+        ?subscription_grant_creation_mode: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -11157,6 +13411,7 @@ module Aws::DataZone
       attr_accessor applicable_asset_types: Array[String]?
       attr_accessor subscription_target_config: Array[Types::SubscriptionTargetForm]?
       attr_accessor provider: String?
+      attr_accessor subscription_grant_creation_mode: String?
     end
 
     class TagResourceRequest
@@ -11298,6 +13553,17 @@ module Aws::DataZone
       LISTING: String
     end
 
+    class TimeoutConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?run_timeout_in_minutes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor run_timeout_in_minutes: Integer?
+    end
+
     module Timezone
       UTC: String
       AFRICA_JOHANNESBURG: String
@@ -11378,6 +13644,25 @@ module Aws::DataZone
       attr_accessor subject: String?
       attr_accessor resource: Types::NotificationResource?
       attr_accessor role: String?
+    end
+
+    class TriggerSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor name: String?
+    end
+
+    module TriggerSourceType
+      MANUAL: String
+      SCHEDULED: String
+      WORKFLOW: String
     end
 
     module TypesSearchScope
@@ -11536,6 +13821,7 @@ module Aws::DataZone
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?configurations: Array[Types::Configuration],
         ?domain_identifier: String,
         ?identifier: String,
         ?description: String,
@@ -11544,6 +13830,7 @@ module Aws::DataZone
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor configurations: Array[Types::Configuration]?
       attr_accessor domain_identifier: String?
       attr_accessor identifier: String?
       attr_accessor description: String?
@@ -11555,6 +13842,7 @@ module Aws::DataZone
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?configurations: Array[Types::Configuration],
         ?connection_id: String,
         ?description: String,
         ?domain_id: String,
@@ -11565,9 +13853,11 @@ module Aws::DataZone
         ?project_id: String,
         ?props: Types::ConnectionPropertiesOutput,
         ?type: String,
+        ?scope: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor configurations: Array[Types::Configuration]?
       attr_accessor connection_id: String?
       attr_accessor description: String?
       attr_accessor domain_id: String?
@@ -11578,6 +13868,7 @@ module Aws::DataZone
       attr_accessor project_id: String?
       attr_accessor props: Types::ConnectionPropertiesOutput?
       attr_accessor type: String?
+      attr_accessor scope: String?
     end
 
     class UpdateDataSourceInput
@@ -11811,6 +14102,7 @@ module Aws::DataZone
         ?description: String,
         ?provisioning_properties: Types::ProvisioningProperties,
         ?user_parameters: Array[Types::CustomParameter],
+        ?blueprint_category: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -11819,6 +14111,7 @@ module Aws::DataZone
       attr_accessor description: String?
       attr_accessor provisioning_properties: Types::ProvisioningProperties?
       attr_accessor user_parameters: Array[Types::CustomParameter]?
+      attr_accessor blueprint_category: String?
     end
 
     class UpdateEnvironmentBlueprintOutput
@@ -11833,6 +14126,7 @@ module Aws::DataZone
         ?deployment_properties: Types::DeploymentProperties,
         ?user_parameters: Array[Types::CustomParameter],
         ?glossary_terms: Array[String],
+        ?blueprint_category: String,
         ?created_at: Time,
         ?updated_at: Time,
       ) -> void
@@ -11846,6 +14140,7 @@ module Aws::DataZone
       attr_accessor deployment_properties: Types::DeploymentProperties?
       attr_accessor user_parameters: Array[Types::CustomParameter]?
       attr_accessor glossary_terms: Array[String]?
+      attr_accessor blueprint_category: String?
       attr_accessor created_at: Time?
       attr_accessor updated_at: Time?
     end
@@ -11861,6 +14156,7 @@ module Aws::DataZone
         ?glossary_terms: Array[String],
         ?blueprint_version: String,
         ?user_parameters: Array[Types::EnvironmentParameter],
+        ?environment_configuration_name: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -11871,6 +14167,7 @@ module Aws::DataZone
       attr_accessor glossary_terms: Array[String]?
       attr_accessor blueprint_version: String?
       attr_accessor user_parameters: Array[Types::EnvironmentParameter]?
+      attr_accessor environment_configuration_name: String?
     end
 
     class UpdateEnvironmentOutput
@@ -11899,6 +14196,7 @@ module Aws::DataZone
         ?deployment_properties: Types::DeploymentProperties,
         ?environment_blueprint_id: String,
         ?environment_configuration_id: String,
+        ?environment_configuration_name: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -11924,6 +14222,7 @@ module Aws::DataZone
       attr_accessor deployment_properties: Types::DeploymentProperties?
       attr_accessor environment_blueprint_id: String?
       attr_accessor environment_configuration_id: String?
+      attr_accessor environment_configuration_name: String?
     end
 
     class UpdateEnvironmentProfileInput
@@ -12101,6 +14400,8 @@ module Aws::DataZone
         ?id: String,
         ?status: String,
         ?group_name: String,
+        ?role_principal_arn: String,
+        ?role_principal_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -12108,6 +14409,90 @@ module Aws::DataZone
       attr_accessor id: String?
       attr_accessor status: String?
       attr_accessor group_name: String?
+      attr_accessor role_principal_arn: String?
+      attr_accessor role_principal_id: String?
+    end
+
+    class UpdateNotebookInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_identifier: String,
+        ?identifier: String,
+        ?description: String,
+        ?status: String,
+        ?name: String,
+        ?cell_order: Array[Types::CellInformation],
+        ?type: String,
+        ?metadata: Hash[String, String],
+        ?parameters: Hash[String, String],
+        ?environment_configuration: Types::EnvironmentConfig,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_identifier: String?
+      attr_accessor identifier: String?
+      attr_accessor description: String?
+      attr_accessor status: String?
+      attr_accessor name: String?
+      attr_accessor cell_order: Array[Types::CellInformation]?
+      attr_accessor type: String?
+      attr_accessor metadata: Hash[String, String]?
+      attr_accessor parameters: Hash[String, String]?
+      attr_accessor environment_configuration: Types::EnvironmentConfig?
+      attr_accessor client_token: String?
+    end
+
+    class UpdateNotebookOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?owning_project_id: String,
+        ?domain_id: String,
+        ?cell_order: Array[Types::CellInformation],
+        ?status: String,
+        ?type: String,
+        ?description: String,
+        ?created_at: Time,
+        ?created_by: String,
+        ?updated_at: Time,
+        ?updated_by: String,
+        ?locked_by: String,
+        ?locked_at: Time,
+        ?lock_expires_at: Time,
+        ?compute_id: String,
+        ?metadata: Hash[String, String],
+        ?parameters: Hash[String, String],
+        ?environment_configuration: Types::EnvironmentConfig,
+        ?error: Types::NotebookError,
+        ?git_metadata: Types::GitMetadata,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor owning_project_id: String?
+      attr_accessor domain_id: String?
+      attr_accessor cell_order: Array[Types::CellInformation]?
+      attr_accessor status: String?
+      attr_accessor type: String?
+      attr_accessor description: String?
+      attr_accessor created_at: Time?
+      attr_accessor created_by: String?
+      attr_accessor updated_at: Time?
+      attr_accessor updated_by: String?
+      attr_accessor locked_by: String?
+      attr_accessor locked_at: Time?
+      attr_accessor lock_expires_at: Time?
+      attr_accessor compute_id: String?
+      attr_accessor metadata: Hash[String, String]?
+      attr_accessor parameters: Hash[String, String]?
+      attr_accessor environment_configuration: Types::EnvironmentConfig?
+      attr_accessor error: Types::NotebookError?
+      attr_accessor git_metadata: Types::GitMetadata?
     end
 
     class UpdateProjectInput
@@ -12118,6 +14503,7 @@ module Aws::DataZone
         ?identifier: String,
         ?name: String,
         ?description: String,
+        ?resource_tags: Hash[String, String],
         ?glossary_terms: Array[String],
         ?domain_unit_id: String,
         ?environment_deployment_details: Types::EnvironmentDeploymentDetails,
@@ -12130,6 +14516,7 @@ module Aws::DataZone
       attr_accessor identifier: String?
       attr_accessor name: String?
       attr_accessor description: String?
+      attr_accessor resource_tags: Hash[String, String]?
       attr_accessor glossary_terms: Array[String]?
       attr_accessor domain_unit_id: String?
       attr_accessor environment_deployment_details: Types::EnvironmentDeploymentDetails?
@@ -12150,11 +14537,13 @@ module Aws::DataZone
         ?created_by: String,
         ?created_at: Time,
         ?last_updated_at: Time,
+        ?resource_tags: Array[Types::ResourceTag],
         ?glossary_terms: Array[String],
         ?domain_unit_id: String,
         ?project_profile_id: String,
         ?user_parameters: Array[Types::EnvironmentConfigurationUserParameter],
         ?environment_deployment_details: Types::EnvironmentDeploymentDetails,
+        ?project_category: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -12167,11 +14556,13 @@ module Aws::DataZone
       attr_accessor created_by: String?
       attr_accessor created_at: Time?
       attr_accessor last_updated_at: Time?
+      attr_accessor resource_tags: Array[Types::ResourceTag]?
       attr_accessor glossary_terms: Array[String]?
       attr_accessor domain_unit_id: String?
       attr_accessor project_profile_id: String?
       attr_accessor user_parameters: Array[Types::EnvironmentConfigurationUserParameter]?
       attr_accessor environment_deployment_details: Types::EnvironmentDeploymentDetails?
+      attr_accessor project_category: String?
     end
 
     class UpdateProjectProfileInput
@@ -12183,6 +14574,9 @@ module Aws::DataZone
         ?name: String,
         ?description: String,
         ?status: String,
+        ?project_resource_tags: Array[Types::ResourceTagParameter],
+        ?allow_custom_project_resource_tags: bool,
+        ?project_resource_tags_description: String,
         ?environment_configurations: Array[Types::EnvironmentConfiguration],
         ?domain_unit_identifier: String,
       ) -> void
@@ -12193,6 +14587,9 @@ module Aws::DataZone
       attr_accessor name: String?
       attr_accessor description: String?
       attr_accessor status: String?
+      attr_accessor project_resource_tags: Array[Types::ResourceTagParameter]?
+      attr_accessor allow_custom_project_resource_tags: bool?
+      attr_accessor project_resource_tags_description: String?
       attr_accessor environment_configurations: Array[Types::EnvironmentConfiguration]?
       attr_accessor domain_unit_identifier: String?
     end
@@ -12206,6 +14603,9 @@ module Aws::DataZone
         ?name: String,
         ?description: String,
         ?status: String,
+        ?project_resource_tags: Array[Types::ResourceTagParameter],
+        ?allow_custom_project_resource_tags: bool,
+        ?project_resource_tags_description: String,
         ?environment_configurations: Array[Types::EnvironmentConfiguration],
         ?created_by: String,
         ?created_at: Time,
@@ -12219,11 +14619,40 @@ module Aws::DataZone
       attr_accessor name: String?
       attr_accessor description: String?
       attr_accessor status: String?
+      attr_accessor project_resource_tags: Array[Types::ResourceTagParameter]?
+      attr_accessor allow_custom_project_resource_tags: bool?
+      attr_accessor project_resource_tags_description: String?
       attr_accessor environment_configurations: Array[Types::EnvironmentConfiguration]?
       attr_accessor created_by: String?
       attr_accessor created_at: Time?
       attr_accessor last_updated_at: Time?
       attr_accessor domain_unit_id: String?
+    end
+
+    class UpdateRootDomainUnitOwnerInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_identifier: String,
+        ?current_owner: String,
+        ?new_owner: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_identifier: String?
+      attr_accessor current_owner: String?
+      attr_accessor new_owner: String?
+      attr_accessor client_token: String?
+    end
+
+    class UpdateRootDomainUnitOwnerOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
     end
 
     class UpdateRuleInput
@@ -12315,6 +14744,7 @@ module Aws::DataZone
         ?domain_id: String,
         ?created_at: Time,
         ?updated_at: Time,
+        ?environment_id: String,
         ?subscription_target_id: String,
         ?granted_entity: Types::GrantedEntity,
         ?status: String,
@@ -12329,6 +14759,7 @@ module Aws::DataZone
       attr_accessor domain_id: String?
       attr_accessor created_at: Time?
       attr_accessor updated_at: Time?
+      attr_accessor environment_id: String?
       attr_accessor subscription_target_id: String?
       attr_accessor granted_entity: Types::GrantedEntity?
       attr_accessor status: String?
@@ -12401,6 +14832,7 @@ module Aws::DataZone
         ?subscription_target_config: Array[Types::SubscriptionTargetForm],
         ?manage_access_role: String,
         ?provider: String,
+        ?subscription_grant_creation_mode: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -12413,6 +14845,7 @@ module Aws::DataZone
       attr_accessor subscription_target_config: Array[Types::SubscriptionTargetForm]?
       attr_accessor manage_access_role: String?
       attr_accessor provider: String?
+      attr_accessor subscription_grant_creation_mode: String?
     end
 
     class UpdateSubscriptionTargetOutput
@@ -12434,6 +14867,7 @@ module Aws::DataZone
         ?applicable_asset_types: Array[String],
         ?subscription_target_config: Array[Types::SubscriptionTargetForm],
         ?provider: String,
+        ?subscription_grant_creation_mode: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -12452,6 +14886,7 @@ module Aws::DataZone
       attr_accessor applicable_asset_types: Array[String]?
       attr_accessor subscription_target_config: Array[Types::SubscriptionTargetForm]?
       attr_accessor provider: String?
+      attr_accessor subscription_grant_creation_mode: String?
     end
 
     class UpdateUserProfileInput
@@ -12462,6 +14897,7 @@ module Aws::DataZone
         ?user_identifier: String,
         ?type: String,
         ?status: String,
+        ?session_name: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -12469,6 +14905,7 @@ module Aws::DataZone
       attr_accessor user_identifier: String?
       attr_accessor type: String?
       attr_accessor status: String?
+      attr_accessor session_name: String?
     end
 
     class UpdateUserProfileOutput
@@ -12607,6 +15044,7 @@ module Aws::DataZone
       IAM_USER: String
       IAM_ROLE: String
       SSO_USER: String
+      IAM_ROLE_SESSION: String
     end
 
     class UsernamePassword
@@ -12631,6 +15069,95 @@ module Aws::DataZone
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    class VpcPropertiesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_id: String,
+        ?subnet_ids: Array[String],
+        ?security_group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_id: String?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor security_group_id: String?
+    end
+
+    class VpcPropertiesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_id: String,
+        ?subnet_ids: Array[String],
+        ?status: String,
+        ?security_group_id: String,
+        ?glue_connection_names: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_id: String?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor status: String?
+      attr_accessor security_group_id: String?
+      attr_accessor glue_connection_names: Array[String]?
+    end
+
+    class VpcPropertiesPatch
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_id: String,
+        ?subnet_ids: Array[String],
+        ?security_group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_id: String?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor security_group_id: String?
+    end
+
+    class WorkflowsMwaaPropertiesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mwaa_environment_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mwaa_environment_name: String?
+    end
+
+    class WorkflowsMwaaPropertiesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mwaa_environment_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mwaa_environment_name: String?
+    end
+
+    class WorkflowsServerlessPropertiesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class WorkflowsServerlessPropertiesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
     end
   end
 end

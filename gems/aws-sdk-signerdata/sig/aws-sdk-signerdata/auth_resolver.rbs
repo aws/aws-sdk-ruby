@@ -1,0 +1,5 @@
+module Aws::SignerData
+  class AuthResolver
+    def resolve: (AuthParameters) -> Array[Smithy::Client::AuthOption]
+  end
+end

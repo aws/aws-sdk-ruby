@@ -304,6 +304,7 @@ module Aws::WorkSpaces
       UNSUPPORTED_OPERATING_SYSTEM: String
       INTERNAL_SERVER_ERROR: String
       WORKSPACE_UNREACHABLE: String
+      APPLICATION_OLDVERSIONEXIST_FAILURE: String
     end
 
     module AssociationState
@@ -458,11 +459,13 @@ module Aws::WorkSpaces
       def initialize: (
         ?reconnect_enabled: String,
         ?log_upload_enabled: String,
+        ?client_experience_policy: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor reconnect_enabled: String?
       attr_accessor log_upload_enabled: String?
+      attr_accessor client_experience_policy: String?
     end
 
     class ClientPropertiesResult
@@ -490,6 +493,22 @@ module Aws::WorkSpaces
       GRAPHICSPRO: String
       GRAPHICS_G4DN: String
       GRAPHICSPRO_G4DN: String
+      GRAPHICS_G6_XLARGE: String
+      GRAPHICS_G6_2XLARGE: String
+      GRAPHICS_G6_4XLARGE: String
+      GRAPHICS_G6_8XLARGE: String
+      GRAPHICS_G6_16XLARGE: String
+      GRAPHICS_GR6_4XLARGE: String
+      GRAPHICS_GR6_8XLARGE: String
+      GRAPHICS_G6F_LARGE: String
+      GRAPHICS_G6F_XLARGE: String
+      GRAPHICS_G6F_2XLARGE: String
+      GRAPHICS_G6F_4XLARGE: String
+      GRAPHICS_GR6F_4XLARGE: String
+      GRAPHICS_G7_2XLARGE: String
+      GRAPHICS_G7_4XLARGE: String
+      GRAPHICS_G7_8XLARGE: String
+      GRAPHICS_G7_12XLARGE: String
     end
 
     class ComputeNotCompatibleException
@@ -969,6 +988,16 @@ module Aws::WorkSpaces
     module CustomWorkspaceImageImportState
       PENDING: String
       IN_PROGRESS: String
+      PROCESSING_SOURCE_IMAGE: String
+      IMAGE_TESTING_START: String
+      UPDATING_OPERATING_SYSTEM: String
+      IMAGE_COMPATIBILITY_CHECKING: String
+      IMAGE_TESTING_GENERALIZATION: String
+      CREATING_TEST_INSTANCE: String
+      INSTALLING_COMPONENTS: String
+      GENERALIZING: String
+      VALIDATING: String
+      PUBLISHING: String
       COMPLETED: String
       ERROR: String
     end
@@ -1593,6 +1622,8 @@ module Aws::WorkSpaces
         ?image_id: String,
         ?infrastructure_configuration_arn: String,
         ?state: String,
+        ?state_message: String,
+        ?progress_percentage: Integer,
         ?created: Time,
         ?last_updated_time: Time,
         ?image_source: Types::ImageSourceIdentifier,
@@ -1604,6 +1635,8 @@ module Aws::WorkSpaces
       attr_accessor image_id: String?
       attr_accessor infrastructure_configuration_arn: String?
       attr_accessor state: String?
+      attr_accessor state_message: String?
+      attr_accessor progress_percentage: Integer?
       attr_accessor created: Time?
       attr_accessor last_updated_time: Time?
       attr_accessor image_source: Types::ImageSourceIdentifier?
@@ -2218,6 +2251,8 @@ module Aws::WorkSpaces
     module ImageComputeType
       BASE: String
       GRAPHICS_G4DN: String
+      GRAPHICS_G6: String
+      GRAPHICS_G7: String
     end
 
     class ImagePermission
@@ -2619,6 +2654,8 @@ module Aws::WorkSpaces
       ROOT_VOLUME: String
       USER_VOLUME: String
       COMPUTE_TYPE: String
+      PROTOCOL: String
+      NESTED_VIRTUALIZATION: String
     end
 
     class ModificationState
@@ -2637,6 +2674,7 @@ module Aws::WorkSpaces
     module ModificationStateEnum
       UPDATE_INITIATED: String
       UPDATE_IN_PROGRESS: String
+      UPDATE_FAILED: String
     end
 
     class ModifyAccountRequest
@@ -2930,6 +2968,7 @@ module Aws::WorkSpaces
       WINDOWS_SERVER_2016: String
       WINDOWS_SERVER_2019: String
       WINDOWS_SERVER_2022: String
+      WINDOWS_SERVER_2025: String
       RHEL_8: String
       ROCKY_8: String
     end
@@ -3963,6 +4002,7 @@ module Aws::WorkSpaces
         ?directory_id: String,
         ?user_name: String,
         ?ip_address: String,
+        ?ipv6_address: String,
         ?state: String,
         ?bundle_id: String,
         ?subnet_id: String,
@@ -3985,6 +4025,7 @@ module Aws::WorkSpaces
       attr_accessor directory_id: String?
       attr_accessor user_name: String?
       attr_accessor ip_address: String?
+      attr_accessor ipv6_address: String?
       attr_accessor state: String?
       attr_accessor bundle_id: String?
       attr_accessor subnet_id: String?
@@ -4118,6 +4159,7 @@ module Aws::WorkSpaces
         ?registration_code: String,
         ?subnet_ids: Array[String],
         ?dns_ip_addresses: Array[String],
+        ?dns_ipv6_addresses: Array[String],
         ?customer_user_name: String,
         ?iam_role_id: String,
         ?directory_type: String,
@@ -4149,6 +4191,7 @@ module Aws::WorkSpaces
       attr_accessor registration_code: String?
       attr_accessor subnet_ids: Array[String]?
       attr_accessor dns_ip_addresses: Array[String]?
+      attr_accessor dns_ipv6_addresses: Array[String]?
       attr_accessor customer_user_name: String?
       attr_accessor iam_role_id: String?
       attr_accessor directory_type: String?
@@ -4306,6 +4349,7 @@ module Aws::WorkSpaces
         ?protocols: Array[String],
         ?operating_system_name: String,
         ?global_accelerator: Types::GlobalAcceleratorForWorkSpace,
+        ?nested_virtualization_enabled: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4317,6 +4361,7 @@ module Aws::WorkSpaces
       attr_accessor protocols: Array[String]?
       attr_accessor operating_system_name: String?
       attr_accessor global_accelerator: Types::GlobalAcceleratorForWorkSpace?
+      attr_accessor nested_virtualization_enabled: bool?
     end
 
     class WorkspaceRequest
@@ -4332,6 +4377,7 @@ module Aws::WorkSpaces
         ?workspace_properties: Types::WorkspaceProperties,
         ?tags: Array[Types::Tag],
         ?workspace_name: String,
+        ?ipv6_address: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4344,6 +4390,7 @@ module Aws::WorkSpaces
       attr_accessor workspace_properties: Types::WorkspaceProperties?
       attr_accessor tags: Array[Types::Tag]?
       attr_accessor workspace_name: String?
+      attr_accessor ipv6_address: String?
     end
 
     class WorkspaceResourceAssociation

@@ -14,6 +14,7 @@ module Aws::Mgn
     ActionID = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#ActionID", name: "ActionID", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "[0-9a-zA-Z]$"})
     ActionIDs = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mgn#ActionIDs", name: "ActionIDs", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}})
     ActionName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#ActionName", name: "ActionName", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[^\\s\\x00]( *[^\\s\\x00])*$"})
+    AnalyzerType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#AnalyzerType", name: "AnalyzerType", traits: {"smithy.api#enum" => [{"name" => "REACHABILITY_ANALYZER", "value" => "REACHABILITY_ANALYZER"}]})
     Application = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#Application", name: "Application", traits: {"smithy.api#references" => [{"resource" => "com.amazonaws.mgn#ApplicationResource"}]})
     ApplicationAggregatedStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ApplicationAggregatedStatus", name: "ApplicationAggregatedStatus")
     ApplicationDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#ApplicationDescription", name: "ApplicationDescription", traits: {"smithy.api#length" => {"min" => 0, "max" => 600}, "smithy.api#pattern" => "^[^\\x00]*$"})
@@ -41,8 +42,18 @@ module Aws::Mgn
     ChangeServerLifeCycleStateOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ChangeServerLifeCycleStateOutput", name: "ChangeServerLifeCycleStateOutput", traits: {"smithy.api#references" => [{"resource" => "com.amazonaws.mgn#SourceServerResource"}]})
     ChangeServerLifeCycleStateSourceServerLifecycle = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ChangeServerLifeCycleStateSourceServerLifecycle", name: "ChangeServerLifeCycleStateSourceServerLifecycle")
     ChangeServerLifeCycleStateSourceServerLifecycleState = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#ChangeServerLifeCycleStateSourceServerLifecycleState", name: "ChangeServerLifeCycleStateSourceServerLifecycleState", traits: {"smithy.api#enum" => [{"name" => "READY_FOR_TEST", "value" => "READY_FOR_TEST"}, {"name" => "READY_FOR_CUTOVER", "value" => "READY_FOR_CUTOVER"}, {"name" => "CUTOVER", "value" => "CUTOVER"}]})
+    Checksum = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#Checksum", name: "Checksum")
+    Cidr = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#Cidr", name: "Cidr", traits: {"smithy.api#length" => {"min" => 9, "max" => 18}, "smithy.api#pattern" => "^((25[0-4]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])\\.){3}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])\\/(1[6-9]|2[0-8])$"})
+    CidrBlock = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#CidrBlock", name: "CidrBlock", traits: {"smithy.api#pattern" => "^([0-9]{1,3}\\.){3}[0-9]{1,3}/[0-9]{1,2}$"})
+    CidrMapping = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#CidrMapping", name: "CidrMapping")
+    CidrMappingsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mgn#CidrMappingsList", name: "CidrMappingsList", traits: {"smithy.api#length" => {"min" => 0, "max" => 50}})
     ClientIdempotencyToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#ClientIdempotencyToken", name: "ClientIdempotencyToken", traits: {"smithy.api#length" => {"min" => 0, "max" => 64}})
     CloudWatchLogGroupName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#CloudWatchLogGroupName", name: "CloudWatchLogGroupName", traits: {"smithy.api#length" => {"min" => 1, "max" => 512}, "smithy.api#pattern" => "^[\\.\\-_/#A-Za-z0-9]+$"})
+    CodeGenerationOutputFormatStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#CodeGenerationOutputFormatStatus", name: "CodeGenerationOutputFormatStatus", traits: {"smithy.api#enum" => [{"value" => "SUCCEEDED", "name" => "SUCCEEDED"}, {"value" => "FAILED", "name" => "FAILED"}]})
+    CodeGenerationOutputFormatStatusDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#CodeGenerationOutputFormatStatusDetails", name: "CodeGenerationOutputFormatStatusDetails")
+    CodeGenerationOutputFormatStatusDetailsMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.mgn#CodeGenerationOutputFormatStatusDetailsMap", name: "CodeGenerationOutputFormatStatusDetailsMap", traits: {"smithy.api#length" => {"min" => 0, "max" => 10}})
+    CodeGenerationOutputFormatType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#CodeGenerationOutputFormatType", name: "CodeGenerationOutputFormatType", traits: {"smithy.api#enum" => [{"value" => "CDK_L1", "name" => "CDK_L1"}, {"value" => "CDK_L2", "name" => "CDK_L2"}, {"value" => "TERRAFORM", "name" => "TERRAFORM"}, {"value" => "LZA", "name" => "LZA"}]})
+    CodeGenerationOutputFormatTypes = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mgn#CodeGenerationOutputFormatTypes", name: "CodeGenerationOutputFormatTypes", traits: {"smithy.api#length" => {"min" => 0, "max" => 10}, "smithy.api#uniqueItems" => {}})
     ConflictException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ConflictException", name: "ConflictException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 409})
     ConflictExceptionErrors = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mgn#ConflictExceptionErrors", name: "ConflictExceptionErrors")
     Connector = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#Connector", name: "Connector", traits: {"smithy.api#references" => [{"resource" => "com.amazonaws.mgn#ConnectorResource"}]})
@@ -52,6 +63,9 @@ module Aws::Mgn
     ConnectorName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#ConnectorName", name: "ConnectorName", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[A-Za-z0-9_-]+$"})
     ConnectorSsmCommandConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ConnectorSsmCommandConfig", name: "ConnectorSsmCommandConfig")
     ConnectorsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mgn#ConnectorsList", name: "ConnectorsList")
+    ConstructID = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#ConstructID", name: "ConstructID", traits: {"smithy.api#length" => {"min" => 36, "max" => 36}, "smithy.api#pattern" => "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"})
+    ConstructProperties = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.mgn#ConstructProperties", name: "ConstructProperties", traits: {"smithy.api#length" => {"min" => 0, "max" => 20}})
+    ConstructPropertyKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#ConstructPropertyKey", name: "ConstructPropertyKey", traits: {"smithy.api#length" => {"min" => 0, "max" => 24}})
     Cpus = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mgn#Cpus", name: "Cpus", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}})
     CreateApplicationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#CreateApplicationInput", name: "CreateApplicationInput")
     CreateApplicationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#CreateApplicationOutput", name: "CreateApplicationOutput", traits: {"smithy.api#references" => [{"resource" => "com.amazonaws.mgn#ApplicationResource"}]})
@@ -59,18 +73,20 @@ module Aws::Mgn
     CreateConnectorRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#CreateConnectorRequest", name: "CreateConnectorRequest")
     CreateLaunchConfigurationTemplateInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#CreateLaunchConfigurationTemplateInput", name: "CreateLaunchConfigurationTemplateInput")
     CreateLaunchConfigurationTemplateOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#CreateLaunchConfigurationTemplateOutput", name: "CreateLaunchConfigurationTemplateOutput")
+    CreateNetworkMigrationDefinitionOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#CreateNetworkMigrationDefinitionOutput", name: "CreateNetworkMigrationDefinitionOutput", traits: {"smithy.api#references" => [{"resource" => "com.amazonaws.mgn#NetworkMigrationDefinitionResource"}]})
+    CreateNetworkMigrationDefinitionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#CreateNetworkMigrationDefinitionRequest", name: "CreateNetworkMigrationDefinitionRequest")
     CreateReplicationConfigurationTemplateInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#CreateReplicationConfigurationTemplateInput", name: "CreateReplicationConfigurationTemplateInput")
     CreateReplicationConfigurationTemplateOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#CreateReplicationConfigurationTemplateOutput", name: "CreateReplicationConfigurationTemplateOutput")
     CreateWaveInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#CreateWaveInput", name: "CreateWaveInput")
     CreateWaveOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#CreateWaveOutput", name: "CreateWaveOutput", traits: {"smithy.api#references" => [{"resource" => "com.amazonaws.mgn#WaveResource"}]})
     DataReplicationError = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#DataReplicationError", name: "DataReplicationError")
-    DataReplicationErrorString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#DataReplicationErrorString", name: "DataReplicationErrorString", traits: {"smithy.api#enum" => [{"name" => "AGENT_NOT_SEEN", "value" => "AGENT_NOT_SEEN"}, {"name" => "SNAPSHOTS_FAILURE", "value" => "SNAPSHOTS_FAILURE"}, {"name" => "NOT_CONVERGING", "value" => "NOT_CONVERGING"}, {"name" => "UNSTABLE_NETWORK", "value" => "UNSTABLE_NETWORK"}, {"name" => "FAILED_TO_CREATE_SECURITY_GROUP", "value" => "FAILED_TO_CREATE_SECURITY_GROUP"}, {"name" => "FAILED_TO_LAUNCH_REPLICATION_SERVER", "value" => "FAILED_TO_LAUNCH_REPLICATION_SERVER"}, {"name" => "FAILED_TO_BOOT_REPLICATION_SERVER", "value" => "FAILED_TO_BOOT_REPLICATION_SERVER"}, {"name" => "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "value" => "FAILED_TO_AUTHENTICATE_WITH_SERVICE"}, {"name" => "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "value" => "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE"}, {"name" => "FAILED_TO_CREATE_STAGING_DISKS", "value" => "FAILED_TO_CREATE_STAGING_DISKS"}, {"name" => "FAILED_TO_ATTACH_STAGING_DISKS", "value" => "FAILED_TO_ATTACH_STAGING_DISKS"}, {"name" => "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "value" => "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT"}, {"name" => "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "value" => "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER"}, {"name" => "FAILED_TO_START_DATA_TRANSFER", "value" => "FAILED_TO_START_DATA_TRANSFER"}, {"name" => "UNSUPPORTED_VM_CONFIGURATION", "value" => "UNSUPPORTED_VM_CONFIGURATION"}, {"name" => "LAST_SNAPSHOT_JOB_FAILED", "value" => "LAST_SNAPSHOT_JOB_FAILED"}]})
+    DataReplicationErrorString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#DataReplicationErrorString", name: "DataReplicationErrorString", traits: {"smithy.api#enum" => [{"name" => "AGENT_NOT_SEEN", "value" => "AGENT_NOT_SEEN"}, {"name" => "SNAPSHOTS_FAILURE", "value" => "SNAPSHOTS_FAILURE"}, {"name" => "NOT_CONVERGING", "value" => "NOT_CONVERGING"}, {"name" => "UNSTABLE_NETWORK", "value" => "UNSTABLE_NETWORK"}, {"name" => "FAILED_TO_CREATE_SECURITY_GROUP", "value" => "FAILED_TO_CREATE_SECURITY_GROUP"}, {"name" => "FAILED_TO_LAUNCH_REPLICATION_SERVER", "value" => "FAILED_TO_LAUNCH_REPLICATION_SERVER"}, {"name" => "FAILED_TO_BOOT_REPLICATION_SERVER", "value" => "FAILED_TO_BOOT_REPLICATION_SERVER"}, {"name" => "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "value" => "FAILED_TO_AUTHENTICATE_WITH_SERVICE"}, {"name" => "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "value" => "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE"}, {"name" => "FAILED_TO_CREATE_STAGING_DISKS", "value" => "FAILED_TO_CREATE_STAGING_DISKS"}, {"name" => "FAILED_TO_ATTACH_STAGING_DISKS", "value" => "FAILED_TO_ATTACH_STAGING_DISKS"}, {"name" => "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "value" => "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT"}, {"name" => "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "value" => "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER"}, {"name" => "FAILED_TO_START_DATA_TRANSFER", "value" => "FAILED_TO_START_DATA_TRANSFER"}, {"name" => "UNSUPPORTED_VM_CONFIGURATION", "value" => "UNSUPPORTED_VM_CONFIGURATION"}, {"name" => "LAST_SNAPSHOT_JOB_FAILED", "value" => "LAST_SNAPSHOT_JOB_FAILED"}, {"name" => "FAILED_TO_SETUP_FSX_PROXY", "value" => "FAILED_TO_SETUP_FSX_PROXY"}, {"name" => "FAILED_TO_CREATE_FSX_SNAPSHOT", "value" => "FAILED_TO_CREATE_FSX_SNAPSHOT"}]})
     DataReplicationInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#DataReplicationInfo", name: "DataReplicationInfo")
     DataReplicationInfoReplicatedDisk = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#DataReplicationInfoReplicatedDisk", name: "DataReplicationInfoReplicatedDisk")
     DataReplicationInfoReplicatedDisks = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mgn#DataReplicationInfoReplicatedDisks", name: "DataReplicationInfoReplicatedDisks", traits: {"smithy.api#length" => {"min" => 0, "max" => 60}})
     DataReplicationInitiation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#DataReplicationInitiation", name: "DataReplicationInitiation")
     DataReplicationInitiationStep = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#DataReplicationInitiationStep", name: "DataReplicationInitiationStep")
-    DataReplicationInitiationStepName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#DataReplicationInitiationStepName", name: "DataReplicationInitiationStepName", traits: {"smithy.api#enum" => [{"value" => "WAIT", "name" => "WAIT"}, {"value" => "CREATE_SECURITY_GROUP", "name" => "CREATE_SECURITY_GROUP"}, {"value" => "LAUNCH_REPLICATION_SERVER", "name" => "LAUNCH_REPLICATION_SERVER"}, {"value" => "BOOT_REPLICATION_SERVER", "name" => "BOOT_REPLICATION_SERVER"}, {"value" => "AUTHENTICATE_WITH_SERVICE", "name" => "AUTHENTICATE_WITH_SERVICE"}, {"value" => "DOWNLOAD_REPLICATION_SOFTWARE", "name" => "DOWNLOAD_REPLICATION_SOFTWARE"}, {"value" => "CREATE_STAGING_DISKS", "name" => "CREATE_STAGING_DISKS"}, {"value" => "ATTACH_STAGING_DISKS", "name" => "ATTACH_STAGING_DISKS"}, {"value" => "PAIR_REPLICATION_SERVER_WITH_AGENT", "name" => "PAIR_REPLICATION_SERVER_WITH_AGENT"}, {"value" => "CONNECT_AGENT_TO_REPLICATION_SERVER", "name" => "CONNECT_AGENT_TO_REPLICATION_SERVER"}, {"value" => "START_DATA_TRANSFER", "name" => "START_DATA_TRANSFER"}]})
+    DataReplicationInitiationStepName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#DataReplicationInitiationStepName", name: "DataReplicationInitiationStepName", traits: {"smithy.api#enum" => [{"value" => "WAIT", "name" => "WAIT"}, {"value" => "CREATE_SECURITY_GROUP", "name" => "CREATE_SECURITY_GROUP"}, {"value" => "LAUNCH_REPLICATION_SERVER", "name" => "LAUNCH_REPLICATION_SERVER"}, {"value" => "BOOT_REPLICATION_SERVER", "name" => "BOOT_REPLICATION_SERVER"}, {"value" => "AUTHENTICATE_WITH_SERVICE", "name" => "AUTHENTICATE_WITH_SERVICE"}, {"value" => "DOWNLOAD_REPLICATION_SOFTWARE", "name" => "DOWNLOAD_REPLICATION_SOFTWARE"}, {"value" => "CREATE_STAGING_DISKS", "name" => "CREATE_STAGING_DISKS"}, {"value" => "ATTACH_STAGING_DISKS", "name" => "ATTACH_STAGING_DISKS"}, {"value" => "PAIR_REPLICATION_SERVER_WITH_AGENT", "name" => "PAIR_REPLICATION_SERVER_WITH_AGENT"}, {"value" => "CONNECT_AGENT_TO_REPLICATION_SERVER", "name" => "CONNECT_AGENT_TO_REPLICATION_SERVER"}, {"value" => "START_DATA_TRANSFER", "name" => "START_DATA_TRANSFER"}, {"value" => "SETUP_FSX_PROXY", "name" => "SETUP_FSX_PROXY"}]})
     DataReplicationInitiationStepStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#DataReplicationInitiationStepStatus", name: "DataReplicationInitiationStepStatus", traits: {"smithy.api#enum" => [{"name" => "NOT_STARTED", "value" => "NOT_STARTED"}, {"name" => "IN_PROGRESS", "value" => "IN_PROGRESS"}, {"name" => "SUCCEEDED", "value" => "SUCCEEDED"}, {"name" => "FAILED", "value" => "FAILED"}, {"name" => "SKIPPED", "value" => "SKIPPED"}]})
     DataReplicationInitiationSteps = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mgn#DataReplicationInitiationSteps", name: "DataReplicationInitiationSteps")
     DataReplicationState = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#DataReplicationState", name: "DataReplicationState", traits: {"smithy.api#enum" => [{"name" => "STOPPED", "value" => "STOPPED"}, {"name" => "INITIATING", "value" => "INITIATING"}, {"name" => "INITIAL_SYNC", "value" => "INITIAL_SYNC"}, {"name" => "BACKLOG", "value" => "BACKLOG"}, {"name" => "CREATING_SNAPSHOT", "value" => "CREATING_SNAPSHOT"}, {"name" => "CONTINUOUS", "value" => "CONTINUOUS"}, {"name" => "PAUSED", "value" => "PAUSED"}, {"name" => "RESCAN", "value" => "RESCAN"}, {"name" => "STALLED", "value" => "STALLED"}, {"name" => "DISCONNECTED", "value" => "DISCONNECTED"}, {"name" => "PENDING_SNAPSHOT_SHIPPING", "value" => "PENDING_SNAPSHOT_SHIPPING"}, {"name" => "SHIPPING_SNAPSHOT", "value" => "SHIPPING_SNAPSHOT"}]})
@@ -81,6 +97,9 @@ module Aws::Mgn
     DeleteJobOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#DeleteJobOutput", name: "DeleteJobOutput")
     DeleteLaunchConfigurationTemplateInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#DeleteLaunchConfigurationTemplateInput", name: "DeleteLaunchConfigurationTemplateInput")
     DeleteLaunchConfigurationTemplateOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#DeleteLaunchConfigurationTemplateOutput", name: "DeleteLaunchConfigurationTemplateOutput")
+    DeleteNetworkMigrationDefinitionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#DeleteNetworkMigrationDefinitionRequest", name: "DeleteNetworkMigrationDefinitionRequest")
+    DeleteNetworkMigrationDefinitionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#DeleteNetworkMigrationDefinitionResponse", name: "DeleteNetworkMigrationDefinitionResponse")
+    DeleteOperation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#DeleteOperation", name: "DeleteOperation")
     DeleteReplicationConfigurationTemplateInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#DeleteReplicationConfigurationTemplateInput", name: "DeleteReplicationConfigurationTemplateInput")
     DeleteReplicationConfigurationTemplateOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#DeleteReplicationConfigurationTemplateOutput", name: "DeleteReplicationConfigurationTemplateOutput")
     DeleteSourceServerInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#DeleteSourceServerInput", name: "DeleteSourceServerInput")
@@ -118,7 +137,13 @@ module Aws::Mgn
     EC2InstanceID = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#EC2InstanceID", name: "EC2InstanceID", traits: {"smithy.api#length" => {"min" => 0, "max" => 255}, "smithy.api#pattern" => "^i-[0-9a-fA-F]{8,}$"})
     EC2InstanceType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#EC2InstanceType", name: "EC2InstanceType", traits: {"smithy.api#length" => {"min" => 0, "max" => 255}})
     EC2LaunchConfigurationTemplateID = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#EC2LaunchConfigurationTemplateID", name: "EC2LaunchConfigurationTemplateID", traits: {"smithy.api#length" => {"min" => 20, "max" => 20}, "smithy.api#pattern" => "^lt-[0-9a-z]{17}$"})
+    EncryptionAlgorithm = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#EncryptionAlgorithm", name: "EncryptionAlgorithm", traits: {"smithy.api#enum" => [{"name" => "SHA256", "value" => "SHA256"}]})
+    EnrichmentSourceS3Configuration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#EnrichmentSourceS3Configuration", name: "EnrichmentSourceS3Configuration")
+    EnrichmentTargetS3Configuration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#EnrichmentTargetS3Configuration", name: "EnrichmentTargetS3Configuration")
     ErrorDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ErrorDetails", name: "ErrorDetails")
+    ExecutionStage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#ExecutionStage", name: "ExecutionStage", traits: {"smithy.api#enum" => [{"name" => "MAPPING", "value" => "MAPPING"}, {"name" => "CODE_GENERATION", "value" => "CODE_GENERATION"}, {"name" => "DEPLOY", "value" => "DEPLOY"}, {"name" => "DEPLOYED_STACKS_DELETION", "value" => "DEPLOYED_STACKS_DELETION"}, {"name" => "ANALYZE", "value" => "ANALYZE"}]})
+    ExecutionStageActivity = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#ExecutionStageActivity", name: "ExecutionStageActivity", traits: {"smithy.api#enum" => [{"name" => "MAPPING", "value" => "MAPPING"}, {"name" => "MAPPING_UPDATE", "value" => "MAPPING_UPDATE"}, {"name" => "CODE_GENERATION", "value" => "CODE_GENERATION"}, {"name" => "DEPLOY", "value" => "DEPLOY"}, {"name" => "DEPLOYED_STACKS_DELETION", "value" => "DEPLOYED_STACKS_DELETION"}, {"name" => "ANALYZE", "value" => "ANALYZE"}]})
+    ExecutionStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#ExecutionStatus", name: "ExecutionStatus", traits: {"smithy.api#enum" => [{"name" => "PENDING", "value" => "PENDING"}, {"name" => "STARTED", "value" => "STARTED"}, {"name" => "SUCCEEDED", "value" => "SUCCEEDED"}, {"name" => "FAILED", "value" => "FAILED"}]})
     ExportErrorData = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ExportErrorData", name: "ExportErrorData")
     ExportErrors = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mgn#ExportErrors", name: "ExportErrors")
     ExportID = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#ExportID", name: "ExportID", traits: {"smithy.api#length" => {"min" => 24, "max" => 24}, "smithy.api#pattern" => "^export-[0-9a-zA-Z]{17}$"})
@@ -130,10 +155,17 @@ module Aws::Mgn
     FinalizeCutoverInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#FinalizeCutoverInput", name: "FinalizeCutoverInput")
     FinalizeCutoverOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#FinalizeCutoverOutput", name: "FinalizeCutoverOutput", traits: {"smithy.api#references" => [{"resource" => "com.amazonaws.mgn#SourceServerResource"}]})
     FirstBoot = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#FirstBoot", name: "FirstBoot", traits: {"smithy.api#enum" => [{"value" => "WAITING", "name" => "WAITING"}, {"value" => "SUCCEEDED", "name" => "SUCCEEDED"}, {"value" => "UNKNOWN", "name" => "UNKNOWN"}, {"value" => "STOPPED", "name" => "STOPPED"}]})
+    FqdnForActionFramework = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#FqdnForActionFramework", name: "FqdnForActionFramework", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[a-zA-Z0-9_](([a-zA-Z0-9_\\-]{0,61}[a-zA-Z0-9_])?\\.)+[a-zA-Z]{2,63}$|^((25[0-5]|(2[0-4]|1\\d|[1-9]|)\\d)\\.?\\b){4}$|^(?:[A-Fa-f0-9]{1,4}:){7}[A-Fa-f0-9]{1,4}$"})
+    FsxOntapConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#FsxOntapConfiguration", name: "FsxOntapConfiguration")
     GetLaunchConfigurationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#GetLaunchConfigurationInput", name: "GetLaunchConfigurationInput")
     GetLaunchConfigurationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#GetLaunchConfigurationOutput", name: "GetLaunchConfigurationOutput")
+    GetNetworkMigrationDefinitionOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#GetNetworkMigrationDefinitionOutput", name: "GetNetworkMigrationDefinitionOutput", traits: {"smithy.api#references" => [{"resource" => "com.amazonaws.mgn#NetworkMigrationDefinitionResource"}]})
+    GetNetworkMigrationDefinitionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#GetNetworkMigrationDefinitionRequest", name: "GetNetworkMigrationDefinitionRequest")
+    GetNetworkMigrationMapperSegmentConstructRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#GetNetworkMigrationMapperSegmentConstructRequest", name: "GetNetworkMigrationMapperSegmentConstructRequest")
+    GetNetworkMigrationMapperSegmentConstructResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#GetNetworkMigrationMapperSegmentConstructResponse", name: "GetNetworkMigrationMapperSegmentConstructResponse")
     GetReplicationConfigurationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#GetReplicationConfigurationInput", name: "GetReplicationConfigurationInput")
     GetReplicationConfigurationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#GetReplicationConfigurationOutput", name: "GetReplicationConfigurationOutput")
+    Hash = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#Hash", name: "Hash", traits: {"smithy.api#length" => {"min" => 32, "max" => 32}, "smithy.api#pattern" => "^[A-Za-z0-9+/=]{32}$"})
     IPsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mgn#IPsList", name: "IPsList")
     ISO8601DatetimeString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#ISO8601DatetimeString", name: "ISO8601DatetimeString", traits: {"smithy.api#length" => {"min" => 19, "max" => 32}, "smithy.api#pattern" => "^[1-9][0-9]*-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])T([0-1][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?Z$"})
     ISO8601DurationString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#ISO8601DurationString", name: "ISO8601DurationString", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}})
@@ -141,6 +173,11 @@ module Aws::Mgn
     ImportErrorData = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ImportErrorData", name: "ImportErrorData")
     ImportErrorType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#ImportErrorType", name: "ImportErrorType", traits: {"smithy.api#enum" => [{"name" => "VALIDATION_ERROR", "value" => "VALIDATION_ERROR"}, {"name" => "PROCESSING_ERROR", "value" => "PROCESSING_ERROR"}]})
     ImportErrors = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mgn#ImportErrors", name: "ImportErrors")
+    ImportFileEnrichment = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ImportFileEnrichment", name: "ImportFileEnrichment")
+    ImportFileEnrichmentJobID = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#ImportFileEnrichmentJobID", name: "ImportFileEnrichmentJobID", traits: {"smithy.api#length" => {"min" => 36, "max" => 36}, "smithy.api#pattern" => "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"})
+    ImportFileEnrichmentStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#ImportFileEnrichmentStatus", name: "ImportFileEnrichmentStatus", traits: {"smithy.api#enum" => [{"value" => "PENDING", "name" => "PENDING"}, {"value" => "STARTED", "name" => "STARTED"}, {"value" => "FAILED", "name" => "FAILED"}, {"value" => "SUCCEEDED", "name" => "SUCCEEDED"}, {"value" => "SUCCEEDED_WITH_WARNINGS", "name" => "SUCCEEDED_WITH_WARNINGS"}]})
+    ImportFileEnrichmentsIDsFilter = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mgn#ImportFileEnrichmentsIDsFilter", name: "ImportFileEnrichmentsIDsFilter", traits: {"smithy.api#length" => {"min" => 0, "max" => 10}})
+    ImportFileEnrichmentsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mgn#ImportFileEnrichmentsList", name: "ImportFileEnrichmentsList")
     ImportID = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#ImportID", name: "ImportID", traits: {"smithy.api#length" => {"min" => 24, "max" => 24}, "smithy.api#pattern" => "^import-[0-9a-zA-Z]{17}$"})
     ImportIDsFilter = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mgn#ImportIDsFilter", name: "ImportIDsFilter", traits: {"smithy.api#length" => {"min" => 0, "max" => 10}})
     ImportList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mgn#ImportList", name: "ImportList")
@@ -155,7 +192,9 @@ module Aws::Mgn
     InitializeServiceOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#InitializeServiceOutput", name: "InitializeServiceOutput")
     InitiatedBy = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#InitiatedBy", name: "InitiatedBy", traits: {"smithy.api#enum" => [{"value" => "START_TEST", "name" => "START_TEST"}, {"value" => "START_CUTOVER", "name" => "START_CUTOVER"}, {"value" => "DIAGNOSTIC", "name" => "DIAGNOSTIC"}, {"value" => "TERMINATE", "name" => "TERMINATE"}]})
     InternalServerException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#InternalServerException", name: "InternalServerException", traits: {"smithy.api#error" => "server", "smithy.api#httpError" => 500})
+    InternetProtocol = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#InternetProtocol", name: "InternetProtocol", traits: {"smithy.api#enum" => [{"value" => "IPV4", "name" => "IPV4"}, {"value" => "IPV6", "name" => "IPV6"}]})
     Iops = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.mgn#Iops", name: "Iops", traits: {"smithy.api#range" => {"min" => 100, "max" => 64000}})
+    IpAssignmentStrategy = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#IpAssignmentStrategy", name: "IpAssignmentStrategy", traits: {"smithy.api#enum" => [{"value" => "STATIC", "name" => "STATIC"}, {"value" => "DYNAMIC", "name" => "DYNAMIC"}]})
     JmesPathString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#JmesPathString", name: "JmesPathString", traits: {"smithy.api#length" => {"min" => 1, "max" => 1011}, "smithy.api#pattern" => "^[a-zA-Z0-9_]+(\\.[a-zA-Z0-9_\\[\\]]+)*$"})
     Job = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#Job", name: "Job")
     JobID = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#JobID", name: "JobID", traits: {"smithy.api#length" => {"min" => 24, "max" => 24}, "smithy.api#pattern" => "^mgnjob-[0-9a-zA-Z]{17}$"})
@@ -167,7 +206,12 @@ module Aws::Mgn
     JobStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#JobStatus", name: "JobStatus", traits: {"smithy.api#enum" => [{"value" => "PENDING", "name" => "PENDING"}, {"value" => "STARTED", "name" => "STARTED"}, {"value" => "COMPLETED", "name" => "COMPLETED"}]})
     JobType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#JobType", name: "JobType", traits: {"smithy.api#enum" => [{"value" => "LAUNCH", "name" => "LAUNCH"}, {"value" => "TERMINATE", "name" => "TERMINATE"}]})
     JobsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mgn#JobsList", name: "JobsList")
+    KmsKeyArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#KmsKeyArn", name: "KmsKeyArn", traits: {"smithy.api#length" => {"min" => 0, "max" => 276}, "smithy.api#pattern" => "^((arn:[\\w-]+:kms:([a-z]{2}-(gov-)?[a-z]+-\\d{1})?:(\\d{12})?:((alias|key)/[a-zA-Z0-9:/_-]{1,256}))|())$"})
     LargeBoundedString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#LargeBoundedString", name: "LargeBoundedString", traits: {"smithy.api#length" => {"min" => 0, "max" => 65536}})
+    LastKnownCheck = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#LastKnownCheck", name: "LastKnownCheck")
+    LastKnownCheckStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#LastKnownCheckStatus", name: "LastKnownCheckStatus", traits: {"smithy.api#enum" => [{"value" => "PASSED", "name" => "PASSED"}, {"value" => "FAILED", "name" => "FAILED"}, {"value" => "PENDING", "name" => "PENDING"}]})
+    LastKnownCheckType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#LastKnownCheckType", name: "LastKnownCheckType", traits: {"smithy.api#enum" => [{"value" => "EC2", "name" => "EC2"}, {"value" => "FSx", "name" => "FSx"}]})
+    LastKnownChecksList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mgn#LastKnownChecksList", name: "LastKnownChecksList", traits: {"smithy.api#length" => {"min" => 0, "max" => 10}})
     LaunchConfigurationTemplate = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#LaunchConfigurationTemplate", name: "LaunchConfigurationTemplate")
     LaunchConfigurationTemplateID = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#LaunchConfigurationTemplateID", name: "LaunchConfigurationTemplateID", traits: {"smithy.api#length" => {"min" => 21, "max" => 21}, "smithy.api#pattern" => "^lct-[0-9a-zA-Z]{17}$"})
     LaunchConfigurationTemplateIDs = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mgn#LaunchConfigurationTemplateIDs", name: "LaunchConfigurationTemplateIDs", traits: {"smithy.api#length" => {"min" => 0, "max" => 200}})
@@ -202,11 +246,58 @@ module Aws::Mgn
     ListExportsRequestFiltersExportIDs = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mgn#ListExportsRequestFiltersExportIDs", name: "ListExportsRequestFiltersExportIDs", traits: {"smithy.api#length" => {"min" => 0, "max" => 10}})
     ListImportErrorsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ListImportErrorsInput", name: "ListImportErrorsInput")
     ListImportErrorsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ListImportErrorsOutput", name: "ListImportErrorsOutput")
+    ListImportFileEnrichmentsFilters = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ListImportFileEnrichmentsFilters", name: "ListImportFileEnrichmentsFilters")
+    ListImportFileEnrichmentsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ListImportFileEnrichmentsRequest", name: "ListImportFileEnrichmentsRequest")
+    ListImportFileEnrichmentsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ListImportFileEnrichmentsResponse", name: "ListImportFileEnrichmentsResponse")
     ListImportsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ListImportsInput", name: "ListImportsInput")
     ListImportsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ListImportsOutput", name: "ListImportsOutput")
     ListImportsRequestFilters = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ListImportsRequestFilters", name: "ListImportsRequestFilters")
     ListManagedAccountsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ListManagedAccountsRequest", name: "ListManagedAccountsRequest")
     ListManagedAccountsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ListManagedAccountsResponse", name: "ListManagedAccountsResponse")
+    ListNetworkMigrationAnalysesFilters = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ListNetworkMigrationAnalysesFilters", name: "ListNetworkMigrationAnalysesFilters")
+    ListNetworkMigrationAnalysesIDsFilter = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mgn#ListNetworkMigrationAnalysesIDsFilter", name: "ListNetworkMigrationAnalysesIDsFilter", traits: {"smithy.api#length" => {"min" => 0, "max" => 10}})
+    ListNetworkMigrationAnalysesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ListNetworkMigrationAnalysesRequest", name: "ListNetworkMigrationAnalysesRequest")
+    ListNetworkMigrationAnalysesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ListNetworkMigrationAnalysesResponse", name: "ListNetworkMigrationAnalysesResponse")
+    ListNetworkMigrationAnalysisResultsFilters = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ListNetworkMigrationAnalysisResultsFilters", name: "ListNetworkMigrationAnalysisResultsFilters")
+    ListNetworkMigrationAnalysisResultsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ListNetworkMigrationAnalysisResultsRequest", name: "ListNetworkMigrationAnalysisResultsRequest")
+    ListNetworkMigrationAnalysisResultsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ListNetworkMigrationAnalysisResultsResponse", name: "ListNetworkMigrationAnalysisResultsResponse")
+    ListNetworkMigrationCodeGenerationSegmentsFilters = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ListNetworkMigrationCodeGenerationSegmentsFilters", name: "ListNetworkMigrationCodeGenerationSegmentsFilters")
+    ListNetworkMigrationCodeGenerationSegmentsIDsFilter = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mgn#ListNetworkMigrationCodeGenerationSegmentsIDsFilter", name: "ListNetworkMigrationCodeGenerationSegmentsIDsFilter", traits: {"smithy.api#length" => {"min" => 0, "max" => 10}})
+    ListNetworkMigrationCodeGenerationSegmentsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ListNetworkMigrationCodeGenerationSegmentsRequest", name: "ListNetworkMigrationCodeGenerationSegmentsRequest")
+    ListNetworkMigrationCodeGenerationSegmentsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ListNetworkMigrationCodeGenerationSegmentsResponse", name: "ListNetworkMigrationCodeGenerationSegmentsResponse")
+    ListNetworkMigrationCodeGenerationsFilters = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ListNetworkMigrationCodeGenerationsFilters", name: "ListNetworkMigrationCodeGenerationsFilters")
+    ListNetworkMigrationCodeGenerationsIDsFilter = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mgn#ListNetworkMigrationCodeGenerationsIDsFilter", name: "ListNetworkMigrationCodeGenerationsIDsFilter", traits: {"smithy.api#length" => {"min" => 0, "max" => 10}})
+    ListNetworkMigrationCodeGenerationsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ListNetworkMigrationCodeGenerationsRequest", name: "ListNetworkMigrationCodeGenerationsRequest")
+    ListNetworkMigrationCodeGenerationsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ListNetworkMigrationCodeGenerationsResponse", name: "ListNetworkMigrationCodeGenerationsResponse")
+    ListNetworkMigrationDefinitionsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ListNetworkMigrationDefinitionsRequest", name: "ListNetworkMigrationDefinitionsRequest")
+    ListNetworkMigrationDefinitionsRequestFilters = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ListNetworkMigrationDefinitionsRequestFilters", name: "ListNetworkMigrationDefinitionsRequestFilters")
+    ListNetworkMigrationDefinitionsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ListNetworkMigrationDefinitionsResponse", name: "ListNetworkMigrationDefinitionsResponse")
+    ListNetworkMigrationDeployedStacksRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ListNetworkMigrationDeployedStacksRequest", name: "ListNetworkMigrationDeployedStacksRequest")
+    ListNetworkMigrationDeployedStacksResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ListNetworkMigrationDeployedStacksResponse", name: "ListNetworkMigrationDeployedStacksResponse")
+    ListNetworkMigrationDeployerJobFilters = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ListNetworkMigrationDeployerJobFilters", name: "ListNetworkMigrationDeployerJobFilters")
+    ListNetworkMigrationDeployerJobIDsFilters = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mgn#ListNetworkMigrationDeployerJobIDsFilters", name: "ListNetworkMigrationDeployerJobIDsFilters", traits: {"smithy.api#length" => {"min" => 0, "max" => 10}})
+    ListNetworkMigrationDeploymentsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ListNetworkMigrationDeploymentsOutput", name: "ListNetworkMigrationDeploymentsOutput")
+    ListNetworkMigrationDeploymentsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ListNetworkMigrationDeploymentsRequest", name: "ListNetworkMigrationDeploymentsRequest")
+    ListNetworkMigrationExecutionRequestFilters = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ListNetworkMigrationExecutionRequestFilters", name: "ListNetworkMigrationExecutionRequestFilters")
+    ListNetworkMigrationExecutionsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ListNetworkMigrationExecutionsRequest", name: "ListNetworkMigrationExecutionsRequest")
+    ListNetworkMigrationExecutionsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ListNetworkMigrationExecutionsResponse", name: "ListNetworkMigrationExecutionsResponse")
+    ListNetworkMigrationMapperSegmentConstructTypesFilter = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mgn#ListNetworkMigrationMapperSegmentConstructTypesFilter", name: "ListNetworkMigrationMapperSegmentConstructTypesFilter", traits: {"smithy.api#length" => {"min" => 0, "max" => 10}})
+    ListNetworkMigrationMapperSegmentConstructsFilters = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ListNetworkMigrationMapperSegmentConstructsFilters", name: "ListNetworkMigrationMapperSegmentConstructsFilters")
+    ListNetworkMigrationMapperSegmentConstructsIDsFilter = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mgn#ListNetworkMigrationMapperSegmentConstructsIDsFilter", name: "ListNetworkMigrationMapperSegmentConstructsIDsFilter", traits: {"smithy.api#length" => {"min" => 0, "max" => 10}})
+    ListNetworkMigrationMapperSegmentConstructsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ListNetworkMigrationMapperSegmentConstructsRequest", name: "ListNetworkMigrationMapperSegmentConstructsRequest")
+    ListNetworkMigrationMapperSegmentConstructsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ListNetworkMigrationMapperSegmentConstructsResponse", name: "ListNetworkMigrationMapperSegmentConstructsResponse")
+    ListNetworkMigrationMapperSegmentsFilters = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ListNetworkMigrationMapperSegmentsFilters", name: "ListNetworkMigrationMapperSegmentsFilters")
+    ListNetworkMigrationMapperSegmentsIDsFilter = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mgn#ListNetworkMigrationMapperSegmentsIDsFilter", name: "ListNetworkMigrationMapperSegmentsIDsFilter", traits: {"smithy.api#length" => {"min" => 0, "max" => 10}})
+    ListNetworkMigrationMapperSegmentsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ListNetworkMigrationMapperSegmentsRequest", name: "ListNetworkMigrationMapperSegmentsRequest")
+    ListNetworkMigrationMapperSegmentsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ListNetworkMigrationMapperSegmentsResponse", name: "ListNetworkMigrationMapperSegmentsResponse")
+    ListNetworkMigrationMappingUpdatesFilters = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ListNetworkMigrationMappingUpdatesFilters", name: "ListNetworkMigrationMappingUpdatesFilters")
+    ListNetworkMigrationMappingUpdatesIDsFilter = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mgn#ListNetworkMigrationMappingUpdatesIDsFilter", name: "ListNetworkMigrationMappingUpdatesIDsFilter", traits: {"smithy.api#length" => {"min" => 0, "max" => 10}})
+    ListNetworkMigrationMappingUpdatesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ListNetworkMigrationMappingUpdatesRequest", name: "ListNetworkMigrationMappingUpdatesRequest")
+    ListNetworkMigrationMappingUpdatesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ListNetworkMigrationMappingUpdatesResponse", name: "ListNetworkMigrationMappingUpdatesResponse")
+    ListNetworkMigrationMappingsFilters = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ListNetworkMigrationMappingsFilters", name: "ListNetworkMigrationMappingsFilters")
+    ListNetworkMigrationMappingsIDsFilter = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mgn#ListNetworkMigrationMappingsIDsFilter", name: "ListNetworkMigrationMappingsIDsFilter", traits: {"smithy.api#length" => {"min" => 0, "max" => 10}})
+    ListNetworkMigrationMappingsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ListNetworkMigrationMappingsRequest", name: "ListNetworkMigrationMappingsRequest")
+    ListNetworkMigrationMappingsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ListNetworkMigrationMappingsResponse", name: "ListNetworkMigrationMappingsResponse")
     ListSourceServerActionsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ListSourceServerActionsInput", name: "ListSourceServerActionsInput")
     ListSourceServerActionsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ListSourceServerActionsOutput", name: "ListSourceServerActionsOutput")
     ListTagsForResourceInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ListTagsForResourceInput", name: "ListTagsForResourceInput")
@@ -216,21 +307,76 @@ module Aws::Mgn
     ListWavesInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ListWavesInput", name: "ListWavesInput")
     ListWavesOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ListWavesOutput", name: "ListWavesOutput")
     ListWavesRequestFilters = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ListWavesRequestFilters", name: "ListWavesRequestFilters")
+    LogicalID = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#LogicalID", name: "LogicalID", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => "^[a-zA-Z][a-zA-Z0-9-]*$"})
     ManagedAccount = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ManagedAccount", name: "ManagedAccount")
     ManagedAccounts = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mgn#ManagedAccounts", name: "ManagedAccounts", traits: {"smithy.api#length" => {"min" => 0, "max" => 1000}})
     MarkAsArchivedInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#MarkAsArchivedInput", name: "MarkAsArchivedInput")
     MarkAsArchivedOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#MarkAsArchivedOutput", name: "MarkAsArchivedOutput", traits: {"smithy.api#references" => [{"resource" => "com.amazonaws.mgn#SourceServerResource"}]})
+    MarshalledResourceDefinition = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#MarshalledResourceDefinition", name: "MarshalledResourceDefinition", traits: {"smithy.api#length" => {"min" => 0, "max" => 65536}})
     MaxResultsType = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.mgn#MaxResultsType", name: "MaxResultsType", traits: {"smithy.api#range" => {"min" => 1, "max" => 1000}})
+    MergeConstruct = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#MergeConstruct", name: "MergeConstruct")
+    MergeConstructs = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mgn#MergeConstructs", name: "MergeConstructs", traits: {"smithy.api#length" => {"min" => 1, "max" => 1}})
+    MergeOperation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#MergeOperation", name: "MergeOperation")
     NetworkInterface = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#NetworkInterface", name: "NetworkInterface")
     NetworkInterfaces = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mgn#NetworkInterfaces", name: "NetworkInterfaces", traits: {"smithy.api#length" => {"min" => 0, "max" => 32}})
+    NetworkMigrationAnalysesList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mgn#NetworkMigrationAnalysesList", name: "NetworkMigrationAnalysesList", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}})
+    NetworkMigrationAnalysisJobDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#NetworkMigrationAnalysisJobDetails", name: "NetworkMigrationAnalysisJobDetails")
+    NetworkMigrationAnalysisResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#NetworkMigrationAnalysisResult", name: "NetworkMigrationAnalysisResult")
+    NetworkMigrationAnalysisResultSource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#NetworkMigrationAnalysisResultSource", name: "NetworkMigrationAnalysisResultSource")
+    NetworkMigrationAnalysisResultStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#NetworkMigrationAnalysisResultStatus", name: "NetworkMigrationAnalysisResultStatus", traits: {"smithy.api#enum" => [{"value" => "PENDING", "name" => "PENDING"}, {"value" => "STARTED", "name" => "STARTED"}, {"value" => "SUCCEEDED", "name" => "SUCCEEDED"}, {"value" => "FAILED", "name" => "FAILED"}]})
+    NetworkMigrationAnalysisResultTarget = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#NetworkMigrationAnalysisResultTarget", name: "NetworkMigrationAnalysisResultTarget")
+    NetworkMigrationAnalysisResultsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mgn#NetworkMigrationAnalysisResultsList", name: "NetworkMigrationAnalysisResultsList", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}})
+    NetworkMigrationCodeGenerationArtifact = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#NetworkMigrationCodeGenerationArtifact", name: "NetworkMigrationCodeGenerationArtifact")
+    NetworkMigrationCodeGenerationArtifactID = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#NetworkMigrationCodeGenerationArtifactID", name: "NetworkMigrationCodeGenerationArtifactID", traits: {"smithy.api#length" => {"min" => 36, "max" => 36}, "smithy.api#pattern" => "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"})
+    NetworkMigrationCodeGenerationArtifactSubType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#NetworkMigrationCodeGenerationArtifactSubType", name: "NetworkMigrationCodeGenerationArtifactSubType", traits: {"smithy.api#enum" => [{"value" => "APPLICATION", "name" => "APPLICATION"}, {"value" => "NESTED_STACK", "name" => "NESTED_STACK"}, {"value" => "STACK", "name" => "STACK"}]})
+    NetworkMigrationCodeGenerationArtifactType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#NetworkMigrationCodeGenerationArtifactType", name: "NetworkMigrationCodeGenerationArtifactType", traits: {"smithy.api#enum" => [{"value" => "CDK_TYPESCRIPT", "name" => "CDK_TYPESCRIPT"}, {"value" => "CLOUDFORMATION_TEMPLATE", "name" => "CLOUDFORMATION_TEMPLATE"}, {"value" => "CDKTF_TYPESCRIPT", "name" => "CDKTF_TYPESCRIPT"}, {"value" => "TERRAFORM_CONFIGURATION", "name" => "TERRAFORM_CONFIGURATION"}, {"value" => "CDK_L2_TYPESCRIPT", "name" => "CDK_L2_TYPESCRIPT"}]})
+    NetworkMigrationCodeGenerationArtifacts = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mgn#NetworkMigrationCodeGenerationArtifacts", name: "NetworkMigrationCodeGenerationArtifacts")
+    NetworkMigrationCodeGenerationJobDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#NetworkMigrationCodeGenerationJobDetails", name: "NetworkMigrationCodeGenerationJobDetails")
+    NetworkMigrationCodeGenerationSegment = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#NetworkMigrationCodeGenerationSegment", name: "NetworkMigrationCodeGenerationSegment")
+    NetworkMigrationCodeGenerationSegmentType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#NetworkMigrationCodeGenerationSegmentType", name: "NetworkMigrationCodeGenerationSegmentType", traits: {"smithy.api#enum" => [{"value" => "WORKLOAD", "name" => "WORKLOAD"}, {"value" => "APPLIANCE", "name" => "APPLIANCE"}, {"value" => "NETWORK", "name" => "NETWORK"}]})
+    NetworkMigrationCodeGenerationSegmentsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mgn#NetworkMigrationCodeGenerationSegmentsList", name: "NetworkMigrationCodeGenerationSegmentsList", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}})
+    NetworkMigrationCodeGenerationsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mgn#NetworkMigrationCodeGenerationsList", name: "NetworkMigrationCodeGenerationsList", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}})
+    NetworkMigrationDefinitionDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#NetworkMigrationDefinitionDescription", name: "NetworkMigrationDefinitionDescription", traits: {"smithy.api#length" => {"min" => 0, "max" => 600}, "smithy.api#pattern" => "^[^\\x00]*$"})
+    NetworkMigrationDefinitionID = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#NetworkMigrationDefinitionID", name: "NetworkMigrationDefinitionID", traits: {"smithy.api#length" => {"min" => 21, "max" => 21}, "smithy.api#pattern" => "^nmd-[0-9a-zA-Z]{17}$"})
+    NetworkMigrationDefinitionName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#NetworkMigrationDefinitionName", name: "NetworkMigrationDefinitionName", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[^\\s\\x00]( *[^\\s\\x00])*$"})
+    NetworkMigrationDefinitionSummariesList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mgn#NetworkMigrationDefinitionSummariesList", name: "NetworkMigrationDefinitionSummariesList")
+    NetworkMigrationDefinitionSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#NetworkMigrationDefinitionSummary", name: "NetworkMigrationDefinitionSummary")
+    NetworkMigrationDefintionsIDsFilter = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mgn#NetworkMigrationDefintionsIDsFilter", name: "NetworkMigrationDefintionsIDsFilter", traits: {"smithy.api#length" => {"min" => 0, "max" => 20}})
+    NetworkMigrationDeployedStackDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#NetworkMigrationDeployedStackDetails", name: "NetworkMigrationDeployedStackDetails")
+    NetworkMigrationDeployedStackStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#NetworkMigrationDeployedStackStatus", name: "NetworkMigrationDeployedStackStatus", traits: {"smithy.api#enum" => [{"value" => "CREATE_COMPLETE", "name" => "CREATE_COMPLETE"}, {"value" => "CREATE_FAILED", "name" => "CREATE_FAILED"}, {"value" => "CREATE_STARTED", "name" => "CREATE_STARTED"}, {"value" => "DELETE_COMPLETE", "name" => "DELETE_COMPLETE"}, {"value" => "DELETE_FAILED", "name" => "DELETE_FAILED"}, {"value" => "DELETE_STARTED", "name" => "DELETE_STARTED"}]})
+    NetworkMigrationDeployedStacksList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mgn#NetworkMigrationDeployedStacksList", name: "NetworkMigrationDeployedStacksList", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}})
+    NetworkMigrationDeployerJobDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#NetworkMigrationDeployerJobDetails", name: "NetworkMigrationDeployerJobDetails")
+    NetworkMigrationDeployerJobList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mgn#NetworkMigrationDeployerJobList", name: "NetworkMigrationDeployerJobList", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}})
+    NetworkMigrationExecution = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#NetworkMigrationExecution", name: "NetworkMigrationExecution")
+    NetworkMigrationExecutionID = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#NetworkMigrationExecutionID", name: "NetworkMigrationExecutionID", traits: {"smithy.api#length" => {"min" => 36, "max" => 36}, "smithy.api#pattern" => "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"})
+    NetworkMigrationExecutionIDsFilter = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mgn#NetworkMigrationExecutionIDsFilter", name: "NetworkMigrationExecutionIDsFilter", traits: {"smithy.api#length" => {"min" => 0, "max" => 20}})
+    NetworkMigrationExecutionStatusesFilter = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mgn#NetworkMigrationExecutionStatusesFilter", name: "NetworkMigrationExecutionStatusesFilter", traits: {"smithy.api#length" => {"min" => 0, "max" => 20}})
+    NetworkMigrationExecutionsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mgn#NetworkMigrationExecutionsList", name: "NetworkMigrationExecutionsList")
+    NetworkMigrationFailedResourceDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#NetworkMigrationFailedResourceDetails", name: "NetworkMigrationFailedResourceDetails")
+    NetworkMigrationFailedResourceStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#NetworkMigrationFailedResourceStatus", name: "NetworkMigrationFailedResourceStatus", traits: {"smithy.api#enum" => [{"value" => "CREATE_FAILED", "name" => "CREATE_FAILED"}, {"value" => "DELETE_FAILED", "name" => "DELETE_FAILED"}]})
+    NetworkMigrationFailedResourcesList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mgn#NetworkMigrationFailedResourcesList", name: "NetworkMigrationFailedResourcesList", traits: {"smithy.api#length" => {"min" => 0, "max" => 5}})
+    NetworkMigrationJobID = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#NetworkMigrationJobID", name: "NetworkMigrationJobID", traits: {"smithy.api#length" => {"min" => 36, "max" => 36}, "smithy.api#pattern" => "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"})
+    NetworkMigrationJobStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#NetworkMigrationJobStatus", name: "NetworkMigrationJobStatus", traits: {"smithy.api#enum" => [{"value" => "PENDING", "name" => "PENDING"}, {"value" => "STARTED", "name" => "STARTED"}, {"value" => "SUCCEEDED", "name" => "SUCCEEDED"}, {"value" => "FAILED", "name" => "FAILED"}]})
+    NetworkMigrationMapperSegment = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#NetworkMigrationMapperSegment", name: "NetworkMigrationMapperSegment")
+    NetworkMigrationMapperSegmentConstruct = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#NetworkMigrationMapperSegmentConstruct", name: "NetworkMigrationMapperSegmentConstruct")
+    NetworkMigrationMapperSegmentConstructType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#NetworkMigrationMapperSegmentConstructType", name: "NetworkMigrationMapperSegmentConstructType", traits: {"smithy.api#length" => {"min" => 0, "max" => 24}, "smithy.api#pattern" => "^AWS::([A-Z\\d]){2,10}::[a-zA-Z\\d]{2,30}$"})
+    NetworkMigrationMapperSegmentConstructs = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mgn#NetworkMigrationMapperSegmentConstructs", name: "NetworkMigrationMapperSegmentConstructs", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}})
+    NetworkMigrationMapperSegmentType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#NetworkMigrationMapperSegmentType", name: "NetworkMigrationMapperSegmentType", traits: {"smithy.api#enum" => [{"value" => "WORKLOAD", "name" => "WORKLOAD"}, {"value" => "APPLIANCE", "name" => "APPLIANCE"}]})
+    NetworkMigrationMapperSegmentsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mgn#NetworkMigrationMapperSegmentsList", name: "NetworkMigrationMapperSegmentsList", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}})
+    NetworkMigrationMappingJobDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#NetworkMigrationMappingJobDetails", name: "NetworkMigrationMappingJobDetails")
+    NetworkMigrationMappingUpdateJobDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#NetworkMigrationMappingUpdateJobDetails", name: "NetworkMigrationMappingUpdateJobDetails")
+    NetworkMigrationMappingUpdatesList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mgn#NetworkMigrationMappingUpdatesList", name: "NetworkMigrationMappingUpdatesList", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}})
+    NetworkMigrationMappingsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mgn#NetworkMigrationMappingsList", name: "NetworkMigrationMappingsList", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}})
     OS = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#OS", name: "OS")
     OperatingSystemString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#OperatingSystemString", name: "OperatingSystemString", traits: {"smithy.api#pattern" => "^(linux|windows)$"})
+    OperationUnion = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.mgn#OperationUnion", name: "OperationUnion")
     OrderType = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.mgn#OrderType", name: "OrderType", traits: {"smithy.api#range" => {"min" => 1001, "max" => 10000}})
     PaginationToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#PaginationToken", name: "PaginationToken", traits: {"smithy.api#length" => {"min" => 0, "max" => 2048}})
     ParticipatingServer = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ParticipatingServer", name: "ParticipatingServer")
     ParticipatingServers = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mgn#ParticipatingServers", name: "ParticipatingServers")
     PauseReplicationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#PauseReplicationOutput", name: "PauseReplicationOutput", traits: {"smithy.api#references" => [{"resource" => "com.amazonaws.mgn#SourceServerResource"}]})
     PauseReplicationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#PauseReplicationRequest", name: "PauseReplicationRequest")
+    PhysicalID = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#PhysicalID", name: "PhysicalID", traits: {"smithy.api#length" => {"min" => 86, "max" => 128}, "smithy.api#pattern" => "^arn:aws:cloudformation:[a-z0-9-]+:[0-9]{12}:stack/[a-zA-Z0-9-]+/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"})
     PositiveInteger = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.mgn#PositiveInteger", name: "PositiveInteger", traits: {"smithy.api#default" => 0, "smithy.api#range" => {"min" => 0}})
     PostLaunchActionExecutionStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#PostLaunchActionExecutionStatus", name: "PostLaunchActionExecutionStatus", traits: {"smithy.api#enum" => [{"value" => "IN_PROGRESS", "name" => "IN_PROGRESS"}, {"value" => "SUCCESS", "name" => "SUCCESS"}, {"value" => "FAILED", "name" => "FAILED"}]})
     PostLaunchActions = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#PostLaunchActions", name: "PostLaunchActions")
@@ -249,7 +395,7 @@ module Aws::Mgn
     ReplicationConfigurationDefaultLargeStagingDiskType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#ReplicationConfigurationDefaultLargeStagingDiskType", name: "ReplicationConfigurationDefaultLargeStagingDiskType", traits: {"smithy.api#enum" => [{"value" => "GP2", "name" => "GP2"}, {"value" => "ST1", "name" => "ST1"}, {"value" => "GP3", "name" => "GP3"}]})
     ReplicationConfigurationEbsEncryption = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#ReplicationConfigurationEbsEncryption", name: "ReplicationConfigurationEbsEncryption", traits: {"smithy.api#enum" => [{"value" => "DEFAULT", "name" => "DEFAULT"}, {"value" => "CUSTOM", "name" => "CUSTOM"}]})
     ReplicationConfigurationReplicatedDisk = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ReplicationConfigurationReplicatedDisk", name: "ReplicationConfigurationReplicatedDisk")
-    ReplicationConfigurationReplicatedDiskStagingDiskType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#ReplicationConfigurationReplicatedDiskStagingDiskType", name: "ReplicationConfigurationReplicatedDiskStagingDiskType", traits: {"smithy.api#enum" => [{"value" => "AUTO", "name" => "AUTO"}, {"value" => "GP2", "name" => "GP2"}, {"value" => "IO1", "name" => "IO1"}, {"value" => "SC1", "name" => "SC1"}, {"value" => "ST1", "name" => "ST1"}, {"value" => "STANDARD", "name" => "STANDARD"}, {"value" => "GP3", "name" => "GP3"}, {"value" => "IO2", "name" => "IO2"}]})
+    ReplicationConfigurationReplicatedDiskStagingDiskType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#ReplicationConfigurationReplicatedDiskStagingDiskType", name: "ReplicationConfigurationReplicatedDiskStagingDiskType", traits: {"smithy.api#enum" => [{"value" => "AUTO", "name" => "AUTO"}, {"value" => "GP2", "name" => "GP2"}, {"value" => "IO1", "name" => "IO1"}, {"value" => "SC1", "name" => "SC1"}, {"value" => "ST1", "name" => "ST1"}, {"value" => "STANDARD", "name" => "STANDARD"}, {"value" => "GP3", "name" => "GP3"}, {"value" => "IO2", "name" => "IO2"}, {"value" => "FSX_ONTAP", "name" => "FSX_ONTAP"}]})
     ReplicationConfigurationReplicatedDisks = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mgn#ReplicationConfigurationReplicatedDisks", name: "ReplicationConfigurationReplicatedDisks", traits: {"smithy.api#length" => {"min" => 0, "max" => 60}})
     ReplicationConfigurationTemplate = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ReplicationConfigurationTemplate", name: "ReplicationConfigurationTemplate")
     ReplicationConfigurationTemplateID = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#ReplicationConfigurationTemplateID", name: "ReplicationConfigurationTemplateID", traits: {"smithy.api#length" => {"min" => 21, "max" => 21}, "smithy.api#pattern" => "^rct-[0-9a-zA-Z]{17}$"})
@@ -258,6 +404,7 @@ module Aws::Mgn
     ReplicationServersSecurityGroupsIDs = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mgn#ReplicationServersSecurityGroupsIDs", name: "ReplicationServersSecurityGroupsIDs", traits: {"smithy.api#length" => {"min" => 0, "max" => 32}})
     ReplicationType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#ReplicationType", name: "ReplicationType", traits: {"smithy.api#enum" => [{"name" => "AGENT_BASED", "value" => "AGENT_BASED"}, {"name" => "SNAPSHOT_SHIPPING", "value" => "SNAPSHOT_SHIPPING"}]})
     ReplicationTypes = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mgn#ReplicationTypes", name: "ReplicationTypes", traits: {"smithy.api#length" => {"min" => 0, "max" => 2}})
+    ReplicatorID = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#ReplicatorID", name: "ReplicatorID", traits: {"smithy.api#length" => {"min" => 19, "max" => 19}, "smithy.api#pattern" => "^i-[0-9a-zA-Z]{17}$"})
     ResourceNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ResourceNotFoundException", name: "ResourceNotFoundException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 404})
     ResumeReplicationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ResumeReplicationOutput", name: "ResumeReplicationOutput", traits: {"smithy.api#references" => [{"resource" => "com.amazonaws.mgn#SourceServerResource"}]})
     ResumeReplicationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ResumeReplicationRequest", name: "ResumeReplicationRequest")
@@ -265,13 +412,28 @@ module Aws::Mgn
     RetryDataReplicationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#RetryDataReplicationOutput", name: "RetryDataReplicationOutput", traits: {"smithy.api#references" => [{"resource" => "com.amazonaws.mgn#SourceServerResource"}]})
     S3BucketName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#S3BucketName", name: "S3BucketName", traits: {"smithy.api#pattern" => "^[a-zA-Z0-9.\\-_]{1,255}$"})
     S3BucketSource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#S3BucketSource", name: "S3BucketSource")
+    S3Configuration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#S3Configuration", name: "S3Configuration")
     S3Key = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#S3Key", name: "S3Key", traits: {"smithy.api#pattern" => "^[^\\x00]{1,1020}\\.csv$"})
+    S3KeyName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#S3KeyName", name: "S3KeyName", traits: {"smithy.api#pattern" => "^[^\\x00]{1,1024}$"})
     S3LogBucketName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#S3LogBucketName", name: "S3LogBucketName", traits: {"smithy.api#length" => {"min" => 3, "max" => 63}})
-    SecretArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#SecretArn", name: "SecretArn", traits: {"smithy.api#length" => {"min" => 20, "max" => 100}, "smithy.api#pattern" => "^arn:[\\w-]+:secretsmanager:([a-z]{2}-(gov-)?[a-z]+-\\d{1})?:(\\d{12})?:secret:(.+)$"})
+    ScopeTagKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#ScopeTagKey", name: "ScopeTagKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^(?!aws:)[a-zA-Z0-9\\s+\\-=._:/@]*$"})
+    ScopeTagValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#ScopeTagValue", name: "ScopeTagValue", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#pattern" => "^[a-zA-Z0-9\\s+\\-=._:/@]*$"})
+    ScopeTagsMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.mgn#ScopeTagsMap", name: "ScopeTagsMap", traits: {"smithy.api#length" => {"min" => 0, "max" => 40}, "smithy.api#sensitive" => {}})
+    SecretArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#SecretArn", name: "SecretArn", traits: {"smithy.api#length" => {"min" => 20, "max" => 256}, "smithy.api#pattern" => "^arn:[\\w-]+:secretsmanager:([a-z]{2}-(gov-)?[a-z]+-\\d{1})?:(\\d{12})?:secret:(.+)$"})
     SecurityGroupID = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#SecurityGroupID", name: "SecurityGroupID", traits: {"smithy.api#length" => {"min" => 0, "max" => 255}, "smithy.api#pattern" => "^sg-[0-9a-fA-F]{8,}$"})
+    SecurityGroupMappingStrategy = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#SecurityGroupMappingStrategy", name: "SecurityGroupMappingStrategy", traits: {"smithy.api#enum" => [{"value" => "MAP", "name" => "MAP"}, {"value" => "SKIP", "name" => "SKIP"}, {"value" => "MAP_DHCP", "name" => "MAP_DHCP"}]})
+    SegmentConstructDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#SegmentConstructDescription", name: "SegmentConstructDescription", traits: {"smithy.api#length" => {"min" => 0, "max" => 600}, "smithy.api#pattern" => "^[^\\x00]*$"})
+    SegmentConstructName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#SegmentConstructName", name: "SegmentConstructName", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[^\\s\\x00]( *[^\\s\\x00])*$"})
+    SegmentDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#SegmentDescription", name: "SegmentDescription", traits: {"smithy.api#length" => {"min" => 0, "max" => 600}, "smithy.api#pattern" => "^[^\\x00]*$"})
+    SegmentID = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#SegmentID", name: "SegmentID", traits: {"smithy.api#length" => {"min" => 36, "max" => 36}, "smithy.api#pattern" => "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"})
+    SegmentName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#SegmentName", name: "SegmentName", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[^\\s\\x00]( *[^\\s\\x00])*$"})
     ServiceQuotaExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ServiceQuotaExceededException", name: "ServiceQuotaExceededException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 402})
     SmallBoundedString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#SmallBoundedString", name: "SmallBoundedString", traits: {"smithy.api#length" => {"min" => 0, "max" => 128}})
+    SourceConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#SourceConfiguration", name: "SourceConfiguration")
+    SourceConfigurationList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mgn#SourceConfigurationList", name: "SourceConfigurationList", traits: {"smithy.api#length" => {"min" => 0, "max" => 2}})
+    SourceEnvironment = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#SourceEnvironment", name: "SourceEnvironment", traits: {"smithy.api#enum" => [{"name" => "NSX", "value" => "NSX"}, {"name" => "VSPHERE", "value" => "VSPHERE"}, {"name" => "FORTIGATE_FIREWALL", "value" => "FORTIGATE_FIREWALL"}, {"name" => "PALO_ALTO_FIREWALL", "value" => "PALO_ALTO_FIREWALL"}, {"name" => "CISCO_ACI", "value" => "CISCO_ACI"}, {"name" => "LOGICAL_MODEL", "value" => "LOGICAL_MODEL"}, {"name" => "MODELIZE_IT", "value" => "MODELIZE_IT"}, {"name" => "AWS_DISCOVERY_COLLECTOR", "value" => "AWS_DISCOVERY_COLLECTOR"}]})
     SourceProperties = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#SourceProperties", name: "SourceProperties")
+    SourceS3Configuration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#SourceS3Configuration", name: "SourceS3Configuration")
     SourceServer = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#SourceServer", name: "SourceServer", traits: {"smithy.api#references" => [{"resource" => "com.amazonaws.mgn#SourceServerResource"}]})
     SourceServerActionDocument = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#SourceServerActionDocument", name: "SourceServerActionDocument")
     SourceServerActionDocuments = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mgn#SourceServerActionDocuments", name: "SourceServerActionDocuments", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}})
@@ -279,6 +441,9 @@ module Aws::Mgn
     SourceServerConnectorAction = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#SourceServerConnectorAction", name: "SourceServerConnectorAction")
     SourceServerID = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#SourceServerID", name: "SourceServerID", traits: {"smithy.api#length" => {"min" => 19, "max" => 19}, "smithy.api#pattern" => "^s-[0-9a-zA-Z]{17}$"})
     SourceServersList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mgn#SourceServersList", name: "SourceServersList")
+    SplitConstruct = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#SplitConstruct", name: "SplitConstruct")
+    SplitConstructs = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mgn#SplitConstructs", name: "SplitConstructs", traits: {"smithy.api#length" => {"min" => 2, "max" => 2}})
+    SplitOperation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#SplitOperation", name: "SplitOperation")
     SsmDocument = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#SsmDocument", name: "SsmDocument")
     SsmDocumentExternalParameters = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.mgn#SsmDocumentExternalParameters", name: "SsmDocumentExternalParameters", traits: {"smithy.api#length" => {"min" => 0, "max" => 20}})
     SsmDocumentName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#SsmDocumentName", name: "SsmDocumentName", traits: {"smithy.api#length" => {"min" => 3, "max" => 172}, "smithy.api#pattern" => "^([A-Za-z0-9/:_\\.-])+$"})
@@ -290,15 +455,31 @@ module Aws::Mgn
     SsmInstanceID = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#SsmInstanceID", name: "SsmInstanceID", traits: {"smithy.api#length" => {"min" => 19, "max" => 20}, "smithy.api#pattern" => "(^i-[0-9a-zA-Z]{17}$)|(^mi-[0-9a-zA-Z]{17}$)"})
     SsmParameterStoreParameter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#SsmParameterStoreParameter", name: "SsmParameterStoreParameter")
     SsmParameterStoreParameterName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#SsmParameterStoreParameterName", name: "SsmParameterStoreParameterName", traits: {"smithy.api#length" => {"min" => 1, "max" => 1011}, "smithy.api#pattern" => "^([A-Za-z0-9_\\.-])+$"})
-    SsmParameterStoreParameterType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#SsmParameterStoreParameterType", name: "SsmParameterStoreParameterType", traits: {"smithy.api#enum" => [{"name" => "STRING", "value" => "STRING"}]})
+    SsmParameterStoreParameterType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#SsmParameterStoreParameterType", name: "SsmParameterStoreParameterType", traits: {"smithy.api#enum" => [{"name" => "STRING", "value" => "STRING"}, {"name" => "SECURE_STRING", "value" => "SECURE_STRING"}]})
     SsmParameterStoreParameters = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mgn#SsmParameterStoreParameters", name: "SsmParameterStoreParameters", traits: {"smithy.api#length" => {"min" => 0, "max" => 10}})
     StartCutoverInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#StartCutoverInput", name: "StartCutoverInput")
     StartCutoverOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#StartCutoverOutput", name: "StartCutoverOutput")
     StartCutoverRequestSourceServerIDs = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mgn#StartCutoverRequestSourceServerIDs", name: "StartCutoverRequestSourceServerIDs", traits: {"smithy.api#length" => {"min" => 1, "max" => 200}})
     StartExportInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#StartExportInput", name: "StartExportInput")
     StartExportOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#StartExportOutput", name: "StartExportOutput")
+    StartImportFileEnrichmentRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#StartImportFileEnrichmentRequest", name: "StartImportFileEnrichmentRequest")
+    StartImportFileEnrichmentResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#StartImportFileEnrichmentResponse", name: "StartImportFileEnrichmentResponse")
     StartImportInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#StartImportInput", name: "StartImportInput")
     StartImportOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#StartImportOutput", name: "StartImportOutput")
+    StartNetworkMigrationAnalysisRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#StartNetworkMigrationAnalysisRequest", name: "StartNetworkMigrationAnalysisRequest")
+    StartNetworkMigrationAnalysisResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#StartNetworkMigrationAnalysisResponse", name: "StartNetworkMigrationAnalysisResponse")
+    StartNetworkMigrationCodeGenerationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#StartNetworkMigrationCodeGenerationRequest", name: "StartNetworkMigrationCodeGenerationRequest")
+    StartNetworkMigrationCodeGenerationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#StartNetworkMigrationCodeGenerationResponse", name: "StartNetworkMigrationCodeGenerationResponse")
+    StartNetworkMigrationDeploymentOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#StartNetworkMigrationDeploymentOutput", name: "StartNetworkMigrationDeploymentOutput")
+    StartNetworkMigrationDeploymentRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#StartNetworkMigrationDeploymentRequest", name: "StartNetworkMigrationDeploymentRequest")
+    StartNetworkMigrationMappingRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#StartNetworkMigrationMappingRequest", name: "StartNetworkMigrationMappingRequest")
+    StartNetworkMigrationMappingResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#StartNetworkMigrationMappingResponse", name: "StartNetworkMigrationMappingResponse")
+    StartNetworkMigrationMappingUpdateConstruct = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#StartNetworkMigrationMappingUpdateConstruct", name: "StartNetworkMigrationMappingUpdateConstruct")
+    StartNetworkMigrationMappingUpdateConstructs = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mgn#StartNetworkMigrationMappingUpdateConstructs", name: "StartNetworkMigrationMappingUpdateConstructs", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}})
+    StartNetworkMigrationMappingUpdateRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#StartNetworkMigrationMappingUpdateRequest", name: "StartNetworkMigrationMappingUpdateRequest")
+    StartNetworkMigrationMappingUpdateResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#StartNetworkMigrationMappingUpdateResponse", name: "StartNetworkMigrationMappingUpdateResponse")
+    StartNetworkMigrationMappingUpdateSegment = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#StartNetworkMigrationMappingUpdateSegment", name: "StartNetworkMigrationMappingUpdateSegment")
+    StartNetworkMigrationMappingUpdateSegments = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mgn#StartNetworkMigrationMappingUpdateSegments", name: "StartNetworkMigrationMappingUpdateSegments", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}})
     StartReplicationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#StartReplicationInput", name: "StartReplicationInput")
     StartReplicationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#StartReplicationOutput", name: "StartReplicationOutput", traits: {"smithy.api#references" => [{"resource" => "com.amazonaws.mgn#SourceServerResource"}]})
     StartTestInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#StartTestInput", name: "StartTestInput")
@@ -306,6 +487,9 @@ module Aws::Mgn
     StartTestRequestSourceServerIDs = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mgn#StartTestRequestSourceServerIDs", name: "StartTestRequestSourceServerIDs", traits: {"smithy.api#length" => {"min" => 1, "max" => 200}})
     StopReplicationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#StopReplicationOutput", name: "StopReplicationOutput", traits: {"smithy.api#references" => [{"resource" => "com.amazonaws.mgn#SourceServerResource"}]})
     StopReplicationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#StopReplicationRequest", name: "StopReplicationRequest")
+    StorageConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#StorageConfiguration", name: "StorageConfiguration")
+    StorageType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#StorageType", name: "StorageType", traits: {"smithy.api#enum" => [{"name" => "EBS", "value" => "EBS"}, {"name" => "FSX_ONTAP", "value" => "FSX_ONTAP"}]})
+    StorageVirtualMachineId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#StorageVirtualMachineId", name: "StorageVirtualMachineId", traits: {"smithy.api#length" => {"min" => 21, "max" => 21}, "smithy.api#pattern" => "^(svm-[0-9a-f]{17,})$"})
     StrictlyPositiveInteger = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.mgn#StrictlyPositiveInteger", name: "StrictlyPositiveInteger", traits: {"smithy.api#range" => {"min" => 1}})
     SubnetID = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#SubnetID", name: "SubnetID", traits: {"smithy.api#length" => {"min" => 0, "max" => 255}, "smithy.api#pattern" => "^subnet-[0-9a-fA-F]{8,}$"})
     TagKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#TagKey", name: "TagKey", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}})
@@ -313,7 +497,13 @@ module Aws::Mgn
     TagResourceInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#TagResourceInput", name: "TagResourceInput")
     TagValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#TagValue", name: "TagValue", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}})
     TagsMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.mgn#TagsMap", name: "TagsMap", traits: {"smithy.api#length" => {"min" => 0, "max" => 50}, "smithy.api#sensitive" => {}})
+    TargetDeployment = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#TargetDeployment", name: "TargetDeployment", traits: {"smithy.api#enum" => [{"name" => "SINGLE_ACCOUNT", "value" => "SINGLE_ACCOUNT"}, {"name" => "MULTI_ACCOUNT", "value" => "MULTI_ACCOUNT"}]})
     TargetInstanceTypeRightSizingMethod = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#TargetInstanceTypeRightSizingMethod", name: "TargetInstanceTypeRightSizingMethod", traits: {"smithy.api#enum" => [{"name" => "NONE", "value" => "NONE"}, {"name" => "BASIC", "value" => "BASIC"}]})
+    TargetNetwork = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#TargetNetwork", name: "TargetNetwork")
+    TargetNetworkTopology = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#TargetNetworkTopology", name: "TargetNetworkTopology", traits: {"smithy.api#enum" => [{"name" => "ISOLATED_VPC", "value" => "ISOLATED_VPC"}, {"name" => "HUB_AND_SPOKE", "value" => "HUB_AND_SPOKE"}]})
+    TargetNetworkUpdate = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#TargetNetworkUpdate", name: "TargetNetworkUpdate")
+    TargetS3Configuration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#TargetS3Configuration", name: "TargetS3Configuration")
+    TargetS3ConfigurationUpdate = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#TargetS3ConfigurationUpdate", name: "TargetS3ConfigurationUpdate")
     TemplateActionDocument = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#TemplateActionDocument", name: "TemplateActionDocument")
     TemplateActionDocuments = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mgn#TemplateActionDocuments", name: "TemplateActionDocuments", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}})
     TemplateActionsRequestFilters = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#TemplateActionsRequestFilters", name: "TemplateActionsRequestFilters")
@@ -321,7 +511,7 @@ module Aws::Mgn
     TerminateTargetInstancesOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#TerminateTargetInstancesOutput", name: "TerminateTargetInstancesOutput")
     TerminateTargetInstancesRequestSourceServerIDs = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mgn#TerminateTargetInstancesRequestSourceServerIDs", name: "TerminateTargetInstancesRequestSourceServerIDs", traits: {"smithy.api#length" => {"min" => 1, "max" => 200}})
     ThrottlingException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ThrottlingException", name: "ThrottlingException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 429})
-    Throughput = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.mgn#Throughput", name: "Throughput", traits: {"smithy.api#range" => {"min" => 125, "max" => 1000}})
+    Throughput = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.mgn#Throughput", name: "Throughput", traits: {"smithy.api#range" => {"min" => 125, "max" => 2000}})
     UnarchiveApplicationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#UnarchiveApplicationInput", name: "UnarchiveApplicationInput")
     UnarchiveApplicationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#UnarchiveApplicationOutput", name: "UnarchiveApplicationOutput", traits: {"smithy.api#references" => [{"resource" => "com.amazonaws.mgn#ApplicationResource"}]})
     UnarchiveWaveInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#UnarchiveWaveInput", name: "UnarchiveWaveInput")
@@ -336,6 +526,11 @@ module Aws::Mgn
     UpdateLaunchConfigurationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#UpdateLaunchConfigurationOutput", name: "UpdateLaunchConfigurationOutput")
     UpdateLaunchConfigurationTemplateInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#UpdateLaunchConfigurationTemplateInput", name: "UpdateLaunchConfigurationTemplateInput")
     UpdateLaunchConfigurationTemplateOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#UpdateLaunchConfigurationTemplateOutput", name: "UpdateLaunchConfigurationTemplateOutput")
+    UpdateNetworkMigrationDefinitionOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#UpdateNetworkMigrationDefinitionOutput", name: "UpdateNetworkMigrationDefinitionOutput", traits: {"smithy.api#references" => [{"resource" => "com.amazonaws.mgn#NetworkMigrationDefinitionResource"}]})
+    UpdateNetworkMigrationDefinitionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#UpdateNetworkMigrationDefinitionRequest", name: "UpdateNetworkMigrationDefinitionRequest")
+    UpdateNetworkMigrationMapperSegmentOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#UpdateNetworkMigrationMapperSegmentOutput", name: "UpdateNetworkMigrationMapperSegmentOutput")
+    UpdateNetworkMigrationMapperSegmentRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#UpdateNetworkMigrationMapperSegmentRequest", name: "UpdateNetworkMigrationMapperSegmentRequest")
+    UpdateOperation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#UpdateOperation", name: "UpdateOperation")
     UpdateReplicationConfigurationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#UpdateReplicationConfigurationInput", name: "UpdateReplicationConfigurationInput")
     UpdateReplicationConfigurationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#UpdateReplicationConfigurationOutput", name: "UpdateReplicationConfigurationOutput")
     UpdateReplicationConfigurationTemplateInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#UpdateReplicationConfigurationTemplateInput", name: "UpdateReplicationConfigurationTemplateInput")
@@ -346,6 +541,7 @@ module Aws::Mgn
     UpdateSourceServerRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#UpdateSourceServerRequest", name: "UpdateSourceServerRequest")
     UpdateWaveInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#UpdateWaveInput", name: "UpdateWaveInput")
     UpdateWaveOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#UpdateWaveOutput", name: "UpdateWaveOutput", traits: {"smithy.api#references" => [{"resource" => "com.amazonaws.mgn#WaveResource"}]})
+    UserProvidedId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#UserProvidedId", name: "UserProvidedId", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[^\\s\\x00]( *[^\\s\\x00])*$"})
     ValidationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ValidationException", name: "ValidationException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     ValidationExceptionField = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#ValidationExceptionField", name: "ValidationExceptionField")
     ValidationExceptionFieldList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mgn#ValidationExceptionFieldList", name: "ValidationExceptionFieldList")
@@ -353,7 +549,11 @@ module Aws::Mgn
     VcenterClient = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#VcenterClient", name: "VcenterClient")
     VcenterClientID = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#VcenterClientID", name: "VcenterClientID", traits: {"smithy.api#length" => {"min" => 21, "max" => 21}, "smithy.api#pattern" => "^vcc-[0-9a-zA-Z]{17}$"})
     VcenterClientList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mgn#VcenterClientList", name: "VcenterClientList")
+    VolumeInitializationRate = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.mgn#VolumeInitializationRate", name: "VolumeInitializationRate", traits: {"smithy.api#range" => {"min" => 100, "max" => 300}})
     VolumeType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#VolumeType", name: "VolumeType", traits: {"smithy.api#enum" => [{"name" => "io1", "value" => "io1"}, {"name" => "io2", "value" => "io2"}, {"name" => "gp3", "value" => "gp3"}, {"name" => "gp2", "value" => "gp2"}, {"name" => "st1", "value" => "st1"}, {"name" => "sc1", "value" => "sc1"}, {"name" => "standard", "value" => "standard"}]})
+    VpcID = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#VpcID", name: "VpcID", traits: {"smithy.api#pattern" => "^vpc-([0-9a-f]){8}(([0-9a-f]){9})?$"})
+    VpcIDsFilter = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mgn#VpcIDsFilter", name: "VpcIDsFilter", traits: {"smithy.api#length" => {"min" => 0, "max" => 10}})
+    VpcProvisioningStrategy = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#VpcProvisioningStrategy", name: "VpcProvisioningStrategy", traits: {"smithy.api#enum" => [{"name" => "CREATE_NEW", "value" => "CREATE_NEW"}, {"name" => "USE_EXISTING", "value" => "USE_EXISTING"}]})
     Wave = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#Wave", name: "Wave", traits: {"smithy.api#references" => [{"resource" => "com.amazonaws.mgn#WaveResource"}]})
     WaveAggregatedStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mgn#WaveAggregatedStatus", name: "WaveAggregatedStatus")
     WaveDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#WaveDescription", name: "WaveDescription", traits: {"smithy.api#length" => {"min" => 0, "max" => 600}, "smithy.api#pattern" => "^[^\\x00]*$"})
@@ -363,6 +563,7 @@ module Aws::Mgn
     WaveName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#WaveName", name: "WaveName", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[^\\s\\x00]( *[^\\s\\x00])*$"})
     WaveProgressStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mgn#WaveProgressStatus", name: "WaveProgressStatus", traits: {"smithy.api#enum" => [{"name" => "NOT_STARTED", "value" => "NOT_STARTED"}, {"name" => "IN_PROGRESS", "value" => "IN_PROGRESS"}, {"name" => "COMPLETED", "value" => "COMPLETED"}]})
     WavesList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mgn#WavesList", name: "WavesList")
+    ReferencedSegmentsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mgn#referencedSegmentsList", name: "ReferencedSegmentsList")
 
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: LargeBoundedString, name: "message"))
     AccessDeniedException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: LargeBoundedString, name: "code"))
@@ -443,12 +644,25 @@ module Aws::Mgn
     ChangeServerLifeCycleStateOutput.add_member(:replication_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationType, name: "replicationType"))
     ChangeServerLifeCycleStateOutput.add_member(:vcenter_client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VcenterClientID, name: "vcenterClientID"))
     ChangeServerLifeCycleStateOutput.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationID, name: "applicationID"))
-    ChangeServerLifeCycleStateOutput.add_member(:user_provided_id, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedString, name: "userProvidedID"))
+    ChangeServerLifeCycleStateOutput.add_member(:user_provided_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserProvidedId, name: "userProvidedID"))
     ChangeServerLifeCycleStateOutput.add_member(:fqdn_for_action_framework, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedString, name: "fqdnForActionFramework"))
     ChangeServerLifeCycleStateOutput.add_member(:connector_action, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceServerConnectorAction, name: "connectorAction"))
     ChangeServerLifeCycleStateOutput.type = Types::ChangeServerLifeCycleStateOutput
     ChangeServerLifeCycleStateSourceServerLifecycle.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeServerLifeCycleStateSourceServerLifecycleState, name: "state", traits: {"smithy.api#required" => {}}))
     ChangeServerLifeCycleStateSourceServerLifecycle.type = Types::ChangeServerLifeCycleStateSourceServerLifecycle
+    Checksum.add_member(:encryption_algorithm, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionAlgorithm, name: "encryptionAlgorithm"))
+    Checksum.add_member(:hash, ::Smithy::Schema::Shapes::MemberShape.new(target: Hash, name: "hash"))
+    Checksum.type = Types::Checksum
+    CidrMapping.add_member(:original_cidr, ::Smithy::Schema::Shapes::MemberShape.new(target: Cidr, name: "originalCidr", traits: {"smithy.api#required" => {}}))
+    CidrMapping.add_member(:updated_cidr, ::Smithy::Schema::Shapes::MemberShape.new(target: Cidr, name: "updatedCidr", traits: {"smithy.api#required" => {}}))
+    CidrMapping.type = Types::CidrMapping
+    CidrMappingsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CidrMapping, name: "member"))
+    CodeGenerationOutputFormatStatusDetails.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: CodeGenerationOutputFormatStatus, name: "status"))
+    CodeGenerationOutputFormatStatusDetails.add_member(:status_detail_list, ::Smithy::Schema::Shapes::MemberShape.new(target: LargeBoundedString, name: "statusDetailList"))
+    CodeGenerationOutputFormatStatusDetails.type = Types::CodeGenerationOutputFormatStatusDetails
+    CodeGenerationOutputFormatStatusDetailsMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: CodeGenerationOutputFormatType, name: "key"))
+    CodeGenerationOutputFormatStatusDetailsMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: CodeGenerationOutputFormatStatusDetails, name: "value"))
+    CodeGenerationOutputFormatTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CodeGenerationOutputFormatType, name: "member"))
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: LargeBoundedString, name: "message"))
     ConflictException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: LargeBoundedString, name: "code"))
     ConflictException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LargeBoundedString, name: "resourceId"))
@@ -470,6 +684,8 @@ module Aws::Mgn
     ConnectorSsmCommandConfig.add_member(:cloud_watch_log_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudWatchLogGroupName, name: "cloudWatchLogGroupName"))
     ConnectorSsmCommandConfig.type = Types::ConnectorSsmCommandConfig
     ConnectorsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Connector, name: "member"))
+    ConstructProperties.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstructPropertyKey, name: "key"))
+    ConstructProperties.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: MarshalledResourceDefinition, name: "value"))
     Cpus.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CPU, name: "member"))
     CreateApplicationInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationName, name: "name", traits: {"smithy.api#required" => {}}))
     CreateApplicationInput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationDescription, name: "description"))
@@ -513,6 +729,8 @@ module Aws::Mgn
     CreateLaunchConfigurationTemplateInput.add_member(:small_volume_max_size, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveInteger, name: "smallVolumeMaxSize", traits: {"smithy.api#default" => 0}))
     CreateLaunchConfigurationTemplateInput.add_member(:small_volume_conf, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchTemplateDiskConf, name: "smallVolumeConf"))
     CreateLaunchConfigurationTemplateInput.add_member(:large_volume_conf, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchTemplateDiskConf, name: "largeVolumeConf"))
+    CreateLaunchConfigurationTemplateInput.add_member(:enable_parameters_encryption, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "enableParametersEncryption"))
+    CreateLaunchConfigurationTemplateInput.add_member(:parameters_encryption_key, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyArn, name: "parametersEncryptionKey"))
     CreateLaunchConfigurationTemplateInput.type = Types::CreateLaunchConfigurationTemplateInput
     CreateLaunchConfigurationTemplateOutput.add_member(:launch_configuration_template_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchConfigurationTemplateID, name: "launchConfigurationTemplateID", traits: {"smithy.api#required" => {}}))
     CreateLaunchConfigurationTemplateOutput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "arn"))
@@ -531,7 +749,35 @@ module Aws::Mgn
     CreateLaunchConfigurationTemplateOutput.add_member(:small_volume_max_size, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveInteger, name: "smallVolumeMaxSize", traits: {"smithy.api#default" => 0}))
     CreateLaunchConfigurationTemplateOutput.add_member(:small_volume_conf, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchTemplateDiskConf, name: "smallVolumeConf"))
     CreateLaunchConfigurationTemplateOutput.add_member(:large_volume_conf, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchTemplateDiskConf, name: "largeVolumeConf"))
+    CreateLaunchConfigurationTemplateOutput.add_member(:enable_parameters_encryption, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "enableParametersEncryption"))
+    CreateLaunchConfigurationTemplateOutput.add_member(:parameters_encryption_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "parametersEncryptionKey"))
     CreateLaunchConfigurationTemplateOutput.type = Types::CreateLaunchConfigurationTemplateOutput
+    CreateNetworkMigrationDefinitionOutput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "arn"))
+    CreateNetworkMigrationDefinitionOutput.add_member(:network_migration_definition_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationDefinitionID, name: "networkMigrationDefinitionID"))
+    CreateNetworkMigrationDefinitionOutput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationDefinitionName, name: "name"))
+    CreateNetworkMigrationDefinitionOutput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationDefinitionDescription, name: "description"))
+    CreateNetworkMigrationDefinitionOutput.add_member(:source_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceConfigurationList, name: "sourceConfigurations"))
+    CreateNetworkMigrationDefinitionOutput.add_member(:target_s3_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetS3Configuration, name: "targetS3Configuration"))
+    CreateNetworkMigrationDefinitionOutput.add_member(:target_network, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetNetwork, name: "targetNetwork"))
+    CreateNetworkMigrationDefinitionOutput.add_member(:target_deployment, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetDeployment, name: "targetDeployment"))
+    CreateNetworkMigrationDefinitionOutput.add_member(:vpc_provisioning_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcProvisioningStrategy, name: "vpcProvisioningStrategy"))
+    CreateNetworkMigrationDefinitionOutput.add_member(:cidr_mappings, ::Smithy::Schema::Shapes::MemberShape.new(target: CidrMappingsList, name: "cidrMappings"))
+    CreateNetworkMigrationDefinitionOutput.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAt"))
+    CreateNetworkMigrationDefinitionOutput.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "updatedAt"))
+    CreateNetworkMigrationDefinitionOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "tags"))
+    CreateNetworkMigrationDefinitionOutput.add_member(:scope_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ScopeTagsMap, name: "scopeTags"))
+    CreateNetworkMigrationDefinitionOutput.type = Types::CreateNetworkMigrationDefinitionOutput
+    CreateNetworkMigrationDefinitionRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationDefinitionName, name: "name", traits: {"smithy.api#required" => {}}))
+    CreateNetworkMigrationDefinitionRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationDefinitionDescription, name: "description"))
+    CreateNetworkMigrationDefinitionRequest.add_member(:source_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceConfigurationList, name: "sourceConfigurations"))
+    CreateNetworkMigrationDefinitionRequest.add_member(:target_s3_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetS3Configuration, name: "targetS3Configuration", traits: {"smithy.api#required" => {}}))
+    CreateNetworkMigrationDefinitionRequest.add_member(:target_network, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetNetwork, name: "targetNetwork", traits: {"smithy.api#required" => {}}))
+    CreateNetworkMigrationDefinitionRequest.add_member(:target_deployment, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetDeployment, name: "targetDeployment"))
+    CreateNetworkMigrationDefinitionRequest.add_member(:vpc_provisioning_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcProvisioningStrategy, name: "vpcProvisioningStrategy"))
+    CreateNetworkMigrationDefinitionRequest.add_member(:cidr_mappings, ::Smithy::Schema::Shapes::MemberShape.new(target: CidrMappingsList, name: "cidrMappings"))
+    CreateNetworkMigrationDefinitionRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "tags"))
+    CreateNetworkMigrationDefinitionRequest.add_member(:scope_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ScopeTagsMap, name: "scopeTags"))
+    CreateNetworkMigrationDefinitionRequest.type = Types::CreateNetworkMigrationDefinitionRequest
     CreateReplicationConfigurationTemplateInput.add_member(:staging_area_subnet_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetID, name: "stagingAreaSubnetId", traits: {"smithy.api#required" => {}}))
     CreateReplicationConfigurationTemplateInput.add_member(:associate_default_security_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "associateDefaultSecurityGroup", traits: {"smithy.api#required" => {}}))
     CreateReplicationConfigurationTemplateInput.add_member(:replication_servers_security_groups_i_ds, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationServersSecurityGroupsIDs, name: "replicationServersSecurityGroupsIDs", traits: {"smithy.api#required" => {}}))
@@ -546,6 +792,9 @@ module Aws::Mgn
     CreateReplicationConfigurationTemplateInput.add_member(:staging_area_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "stagingAreaTags", traits: {"smithy.api#required" => {}}))
     CreateReplicationConfigurationTemplateInput.add_member(:use_fips_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "useFipsEndpoint"))
     CreateReplicationConfigurationTemplateInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "tags"))
+    CreateReplicationConfigurationTemplateInput.add_member(:internet_protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: InternetProtocol, name: "internetProtocol"))
+    CreateReplicationConfigurationTemplateInput.add_member(:store_snapshot_on_local_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "storeSnapshotOnLocalZone"))
+    CreateReplicationConfigurationTemplateInput.add_member(:storage_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageConfiguration, name: "storageConfiguration"))
     CreateReplicationConfigurationTemplateInput.type = Types::CreateReplicationConfigurationTemplateInput
     CreateReplicationConfigurationTemplateOutput.add_member(:replication_configuration_template_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationConfigurationTemplateID, name: "replicationConfigurationTemplateID", traits: {"smithy.api#required" => {}}))
     CreateReplicationConfigurationTemplateOutput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "arn"))
@@ -563,6 +812,9 @@ module Aws::Mgn
     CreateReplicationConfigurationTemplateOutput.add_member(:staging_area_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "stagingAreaTags"))
     CreateReplicationConfigurationTemplateOutput.add_member(:use_fips_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "useFipsEndpoint"))
     CreateReplicationConfigurationTemplateOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "tags"))
+    CreateReplicationConfigurationTemplateOutput.add_member(:internet_protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: InternetProtocol, name: "internetProtocol"))
+    CreateReplicationConfigurationTemplateOutput.add_member(:store_snapshot_on_local_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "storeSnapshotOnLocalZone"))
+    CreateReplicationConfigurationTemplateOutput.add_member(:storage_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageConfiguration, name: "storageConfiguration"))
     CreateReplicationConfigurationTemplateOutput.type = Types::CreateReplicationConfigurationTemplateOutput
     CreateWaveInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: WaveName, name: "name", traits: {"smithy.api#required" => {}}))
     CreateWaveInput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: WaveDescription, name: "description"))
@@ -589,6 +841,7 @@ module Aws::Mgn
     DataReplicationInfo.add_member(:data_replication_initiation, ::Smithy::Schema::Shapes::MemberShape.new(target: DataReplicationInitiation, name: "dataReplicationInitiation"))
     DataReplicationInfo.add_member(:data_replication_error, ::Smithy::Schema::Shapes::MemberShape.new(target: DataReplicationError, name: "dataReplicationError"))
     DataReplicationInfo.add_member(:last_snapshot_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ISO8601DatetimeString, name: "lastSnapshotDateTime"))
+    DataReplicationInfo.add_member(:replicator_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicatorID, name: "replicatorId"))
     DataReplicationInfo.type = Types::DataReplicationInfo
     DataReplicationInfoReplicatedDisk.add_member(:device_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedString, name: "deviceName"))
     DataReplicationInfoReplicatedDisk.add_member(:total_storage_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveInteger, name: "totalStorageBytes", traits: {"smithy.api#default" => 0}))
@@ -618,6 +871,10 @@ module Aws::Mgn
     DeleteLaunchConfigurationTemplateInput.add_member(:launch_configuration_template_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchConfigurationTemplateID, name: "launchConfigurationTemplateID", traits: {"smithy.api#required" => {}}))
     DeleteLaunchConfigurationTemplateInput.type = Types::DeleteLaunchConfigurationTemplateInput
     DeleteLaunchConfigurationTemplateOutput.type = Types::DeleteLaunchConfigurationTemplateOutput
+    DeleteNetworkMigrationDefinitionRequest.add_member(:network_migration_definition_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationDefinitionID, name: "networkMigrationDefinitionID", traits: {"smithy.api#required" => {}}))
+    DeleteNetworkMigrationDefinitionRequest.type = Types::DeleteNetworkMigrationDefinitionRequest
+    DeleteNetworkMigrationDefinitionResponse.type = Types::DeleteNetworkMigrationDefinitionResponse
+    DeleteOperation.type = Types::DeleteOperation
     DeleteReplicationConfigurationTemplateInput.add_member(:replication_configuration_template_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationConfigurationTemplateID, name: "replicationConfigurationTemplateID", traits: {"smithy.api#required" => {}}))
     DeleteReplicationConfigurationTemplateInput.type = Types::DeleteReplicationConfigurationTemplateInput
     DeleteReplicationConfigurationTemplateOutput.type = Types::DeleteReplicationConfigurationTemplateOutput
@@ -713,7 +970,7 @@ module Aws::Mgn
     DisconnectFromServiceOutput.add_member(:replication_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationType, name: "replicationType"))
     DisconnectFromServiceOutput.add_member(:vcenter_client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VcenterClientID, name: "vcenterClientID"))
     DisconnectFromServiceOutput.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationID, name: "applicationID"))
-    DisconnectFromServiceOutput.add_member(:user_provided_id, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedString, name: "userProvidedID"))
+    DisconnectFromServiceOutput.add_member(:user_provided_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserProvidedId, name: "userProvidedID"))
     DisconnectFromServiceOutput.add_member(:fqdn_for_action_framework, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedString, name: "fqdnForActionFramework"))
     DisconnectFromServiceOutput.add_member(:connector_action, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceServerConnectorAction, name: "connectorAction"))
     DisconnectFromServiceOutput.type = Types::DisconnectFromServiceOutput
@@ -721,6 +978,14 @@ module Aws::Mgn
     Disk.add_member(:bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveInteger, name: "bytes", traits: {"smithy.api#default" => 0}))
     Disk.type = Types::Disk
     Disks.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Disk, name: "member"))
+    EnrichmentSourceS3Configuration.add_member(:s3_bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: S3BucketName, name: "s3Bucket", traits: {"smithy.api#required" => {}}))
+    EnrichmentSourceS3Configuration.add_member(:s3_bucket_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountID, name: "s3BucketOwner", traits: {"smithy.api#required" => {}}))
+    EnrichmentSourceS3Configuration.add_member(:s3_key, ::Smithy::Schema::Shapes::MemberShape.new(target: S3KeyName, name: "s3Key", traits: {"smithy.api#required" => {}}))
+    EnrichmentSourceS3Configuration.type = Types::EnrichmentSourceS3Configuration
+    EnrichmentTargetS3Configuration.add_member(:s3_bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: S3BucketName, name: "s3Bucket", traits: {"smithy.api#required" => {}}))
+    EnrichmentTargetS3Configuration.add_member(:s3_bucket_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountID, name: "s3BucketOwner", traits: {"smithy.api#required" => {}}))
+    EnrichmentTargetS3Configuration.add_member(:s3_key, ::Smithy::Schema::Shapes::MemberShape.new(target: S3KeyName, name: "s3Key", traits: {"smithy.api#required" => {}}))
+    EnrichmentTargetS3Configuration.type = Types::EnrichmentTargetS3Configuration
     ErrorDetails.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: LargeBoundedString, name: "message"))
     ErrorDetails.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedString, name: "code"))
     ErrorDetails.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LargeBoundedString, name: "resourceId"))
@@ -730,6 +995,7 @@ module Aws::Mgn
     ExportErrorData.type = Types::ExportErrorData
     ExportErrors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportTaskError, name: "member"))
     ExportTask.add_member(:export_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportID, name: "exportID"))
+    ExportTask.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "arn"))
     ExportTask.add_member(:s3_bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: S3BucketName, name: "s3Bucket"))
     ExportTask.add_member(:s3_key, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Key, name: "s3Key"))
     ExportTask.add_member(:s3_bucket_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountID, name: "s3BucketOwner"))
@@ -738,6 +1004,7 @@ module Aws::Mgn
     ExportTask.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportStatus, name: "status"))
     ExportTask.add_member(:progress_percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Float, name: "progressPercentage"))
     ExportTask.add_member(:summary, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportTaskSummary, name: "summary"))
+    ExportTask.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "tags"))
     ExportTask.type = Types::ExportTask
     ExportTaskError.add_member(:error_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ISO8601DatetimeString, name: "errorDateTime"))
     ExportTaskError.add_member(:error_data, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportErrorData, name: "errorData"))
@@ -761,10 +1028,13 @@ module Aws::Mgn
     FinalizeCutoverOutput.add_member(:replication_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationType, name: "replicationType"))
     FinalizeCutoverOutput.add_member(:vcenter_client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VcenterClientID, name: "vcenterClientID"))
     FinalizeCutoverOutput.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationID, name: "applicationID"))
-    FinalizeCutoverOutput.add_member(:user_provided_id, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedString, name: "userProvidedID"))
+    FinalizeCutoverOutput.add_member(:user_provided_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserProvidedId, name: "userProvidedID"))
     FinalizeCutoverOutput.add_member(:fqdn_for_action_framework, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedString, name: "fqdnForActionFramework"))
     FinalizeCutoverOutput.add_member(:connector_action, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceServerConnectorAction, name: "connectorAction"))
     FinalizeCutoverOutput.type = Types::FinalizeCutoverOutput
+    FsxOntapConfiguration.add_member(:storage_virtual_machine_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageVirtualMachineId, name: "storageVirtualMachineId", traits: {"smithy.api#required" => {}}))
+    FsxOntapConfiguration.add_member(:credentials_secret_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretArn, name: "credentialsSecretArn", traits: {"smithy.api#required" => {}}))
+    FsxOntapConfiguration.type = Types::FsxOntapConfiguration
     GetLaunchConfigurationInput.add_member(:source_server_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceServerID, name: "sourceServerID", traits: {"smithy.api#required" => {}}))
     GetLaunchConfigurationInput.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountID, name: "accountID"))
     GetLaunchConfigurationInput.type = Types::GetLaunchConfigurationInput
@@ -781,6 +1051,30 @@ module Aws::Mgn
     GetLaunchConfigurationOutput.add_member(:enable_map_auto_tagging, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "enableMapAutoTagging"))
     GetLaunchConfigurationOutput.add_member(:map_auto_tagging_mpe_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "mapAutoTaggingMpeID"))
     GetLaunchConfigurationOutput.type = Types::GetLaunchConfigurationOutput
+    GetNetworkMigrationDefinitionOutput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "arn"))
+    GetNetworkMigrationDefinitionOutput.add_member(:network_migration_definition_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationDefinitionID, name: "networkMigrationDefinitionID"))
+    GetNetworkMigrationDefinitionOutput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationDefinitionName, name: "name"))
+    GetNetworkMigrationDefinitionOutput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationDefinitionDescription, name: "description"))
+    GetNetworkMigrationDefinitionOutput.add_member(:source_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceConfigurationList, name: "sourceConfigurations"))
+    GetNetworkMigrationDefinitionOutput.add_member(:target_s3_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetS3Configuration, name: "targetS3Configuration"))
+    GetNetworkMigrationDefinitionOutput.add_member(:target_network, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetNetwork, name: "targetNetwork"))
+    GetNetworkMigrationDefinitionOutput.add_member(:target_deployment, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetDeployment, name: "targetDeployment"))
+    GetNetworkMigrationDefinitionOutput.add_member(:vpc_provisioning_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcProvisioningStrategy, name: "vpcProvisioningStrategy"))
+    GetNetworkMigrationDefinitionOutput.add_member(:cidr_mappings, ::Smithy::Schema::Shapes::MemberShape.new(target: CidrMappingsList, name: "cidrMappings"))
+    GetNetworkMigrationDefinitionOutput.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAt"))
+    GetNetworkMigrationDefinitionOutput.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "updatedAt"))
+    GetNetworkMigrationDefinitionOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "tags"))
+    GetNetworkMigrationDefinitionOutput.add_member(:scope_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ScopeTagsMap, name: "scopeTags"))
+    GetNetworkMigrationDefinitionOutput.type = Types::GetNetworkMigrationDefinitionOutput
+    GetNetworkMigrationDefinitionRequest.add_member(:network_migration_definition_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationDefinitionID, name: "networkMigrationDefinitionID", traits: {"smithy.api#required" => {}}))
+    GetNetworkMigrationDefinitionRequest.type = Types::GetNetworkMigrationDefinitionRequest
+    GetNetworkMigrationMapperSegmentConstructRequest.add_member(:network_migration_definition_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationDefinitionID, name: "networkMigrationDefinitionID", traits: {"smithy.api#required" => {}}))
+    GetNetworkMigrationMapperSegmentConstructRequest.add_member(:network_migration_execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationExecutionID, name: "networkMigrationExecutionID", traits: {"smithy.api#required" => {}}))
+    GetNetworkMigrationMapperSegmentConstructRequest.add_member(:segment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentID, name: "segmentID", traits: {"smithy.api#required" => {}}))
+    GetNetworkMigrationMapperSegmentConstructRequest.add_member(:construct_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstructID, name: "constructID", traits: {"smithy.api#required" => {}}))
+    GetNetworkMigrationMapperSegmentConstructRequest.type = Types::GetNetworkMigrationMapperSegmentConstructRequest
+    GetNetworkMigrationMapperSegmentConstructResponse.add_member(:construct, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationMapperSegmentConstruct, name: "construct"))
+    GetNetworkMigrationMapperSegmentConstructResponse.type = Types::GetNetworkMigrationMapperSegmentConstructResponse
     GetReplicationConfigurationInput.add_member(:source_server_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceServerID, name: "sourceServerID", traits: {"smithy.api#required" => {}}))
     GetReplicationConfigurationInput.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountID, name: "accountID"))
     GetReplicationConfigurationInput.type = Types::GetReplicationConfigurationInput
@@ -800,6 +1094,9 @@ module Aws::Mgn
     GetReplicationConfigurationOutput.add_member(:create_public_ip, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "createPublicIP"))
     GetReplicationConfigurationOutput.add_member(:staging_area_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "stagingAreaTags"))
     GetReplicationConfigurationOutput.add_member(:use_fips_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "useFipsEndpoint"))
+    GetReplicationConfigurationOutput.add_member(:internet_protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: InternetProtocol, name: "internetProtocol"))
+    GetReplicationConfigurationOutput.add_member(:store_snapshot_on_local_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "storeSnapshotOnLocalZone"))
+    GetReplicationConfigurationOutput.add_member(:storage_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageConfiguration, name: "storageConfiguration"))
     GetReplicationConfigurationOutput.type = Types::GetReplicationConfigurationOutput
     IPsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedString, name: "member"))
     IdentificationHints.add_member(:fqdn, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedString, name: "fqdn"))
@@ -817,15 +1114,27 @@ module Aws::Mgn
     ImportErrorData.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountID, name: "accountID"))
     ImportErrorData.type = Types::ImportErrorData
     ImportErrors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportTaskError, name: "member"))
+    ImportFileEnrichment.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportFileEnrichmentJobID, name: "jobID"))
+    ImportFileEnrichment.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAt"))
+    ImportFileEnrichment.add_member(:ended_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "endedAt"))
+    ImportFileEnrichment.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportFileEnrichmentStatus, name: "status"))
+    ImportFileEnrichment.add_member(:status_details, ::Smithy::Schema::Shapes::MemberShape.new(target: LargeBoundedString, name: "statusDetails"))
+    ImportFileEnrichment.add_member(:checksum, ::Smithy::Schema::Shapes::MemberShape.new(target: Checksum, name: "checksum"))
+    ImportFileEnrichment.add_member(:s3_bucket_target, ::Smithy::Schema::Shapes::MemberShape.new(target: EnrichmentTargetS3Configuration, name: "s3BucketTarget"))
+    ImportFileEnrichment.type = Types::ImportFileEnrichment
+    ImportFileEnrichmentsIDsFilter.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportFileEnrichmentJobID, name: "member"))
+    ImportFileEnrichmentsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportFileEnrichment, name: "member"))
     ImportIDsFilter.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportID, name: "member"))
     ImportList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportTask, name: "member"))
     ImportTask.add_member(:import_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportID, name: "importID"))
+    ImportTask.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "arn"))
     ImportTask.add_member(:s3_bucket_source, ::Smithy::Schema::Shapes::MemberShape.new(target: S3BucketSource, name: "s3BucketSource"))
     ImportTask.add_member(:creation_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ISO8601DatetimeString, name: "creationDateTime"))
     ImportTask.add_member(:end_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ISO8601DatetimeString, name: "endDateTime"))
     ImportTask.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportStatus, name: "status"))
     ImportTask.add_member(:progress_percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Float, name: "progressPercentage"))
     ImportTask.add_member(:summary, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportTaskSummary, name: "summary"))
+    ImportTask.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "tags"))
     ImportTask.type = Types::ImportTask
     ImportTaskError.add_member(:error_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ISO8601DatetimeString, name: "errorDateTime"))
     ImportTaskError.add_member(:error_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportErrorType, name: "errorType"))
@@ -867,6 +1176,8 @@ module Aws::Mgn
     JobLogEventData.add_member(:conversion_server_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EC2InstanceID, name: "conversionServerID"))
     JobLogEventData.add_member(:target_instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EC2InstanceID, name: "targetInstanceID"))
     JobLogEventData.add_member(:raw_error, ::Smithy::Schema::Shapes::MemberShape.new(target: LargeBoundedString, name: "rawError"))
+    JobLogEventData.add_member(:attempt_count, ::Smithy::Schema::Shapes::MemberShape.new(target: StrictlyPositiveInteger, name: "attemptCount"))
+    JobLogEventData.add_member(:max_attempts_count, ::Smithy::Schema::Shapes::MemberShape.new(target: StrictlyPositiveInteger, name: "maxAttemptsCount"))
     JobLogEventData.type = Types::JobLogEventData
     JobLogs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: JobLog, name: "member"))
     JobPostLaunchActionsLaunchStatus.add_member(:ssm_document, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmDocument, name: "ssmDocument"))
@@ -876,6 +1187,13 @@ module Aws::Mgn
     JobPostLaunchActionsLaunchStatus.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedString, name: "failureReason"))
     JobPostLaunchActionsLaunchStatus.type = Types::JobPostLaunchActionsLaunchStatus
     JobsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Job, name: "member"))
+    LastKnownCheck.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: LastKnownCheckType, name: "type"))
+    LastKnownCheck.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedString, name: "name"))
+    LastKnownCheck.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: LastKnownCheckStatus, name: "status"))
+    LastKnownCheck.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedString, name: "error"))
+    LastKnownCheck.add_member(:checked_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "checkedAt"))
+    LastKnownCheck.type = Types::LastKnownCheck
+    LastKnownChecksList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LastKnownCheck, name: "member"))
     LaunchConfigurationTemplate.add_member(:launch_configuration_template_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchConfigurationTemplateID, name: "launchConfigurationTemplateID", traits: {"smithy.api#required" => {}}))
     LaunchConfigurationTemplate.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "arn"))
     LaunchConfigurationTemplate.add_member(:post_launch_actions, ::Smithy::Schema::Shapes::MemberShape.new(target: PostLaunchActions, name: "postLaunchActions"))
@@ -893,16 +1211,22 @@ module Aws::Mgn
     LaunchConfigurationTemplate.add_member(:small_volume_max_size, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveInteger, name: "smallVolumeMaxSize", traits: {"smithy.api#default" => 0}))
     LaunchConfigurationTemplate.add_member(:small_volume_conf, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchTemplateDiskConf, name: "smallVolumeConf"))
     LaunchConfigurationTemplate.add_member(:large_volume_conf, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchTemplateDiskConf, name: "largeVolumeConf"))
+    LaunchConfigurationTemplate.add_member(:enable_parameters_encryption, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "enableParametersEncryption"))
+    LaunchConfigurationTemplate.add_member(:parameters_encryption_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "parametersEncryptionKey"))
     LaunchConfigurationTemplate.type = Types::LaunchConfigurationTemplate
     LaunchConfigurationTemplateIDs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchConfigurationTemplateID, name: "member"))
     LaunchConfigurationTemplates.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchConfigurationTemplate, name: "member"))
     LaunchTemplateDiskConf.add_member(:volume_type, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeType, name: "volumeType"))
     LaunchTemplateDiskConf.add_member(:iops, ::Smithy::Schema::Shapes::MemberShape.new(target: Iops, name: "iops"))
     LaunchTemplateDiskConf.add_member(:throughput, ::Smithy::Schema::Shapes::MemberShape.new(target: Throughput, name: "throughput"))
+    LaunchTemplateDiskConf.add_member(:volume_initialization_rate, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeInitializationRate, name: "volumeInitializationRate"))
+    LaunchTemplateDiskConf.add_member(:delete_on_termination, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "deleteOnTermination"))
     LaunchTemplateDiskConf.type = Types::LaunchTemplateDiskConf
     LaunchedInstance.add_member(:ec2_instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EC2InstanceID, name: "ec2InstanceID"))
     LaunchedInstance.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobID, name: "jobID"))
     LaunchedInstance.add_member(:first_boot, ::Smithy::Schema::Shapes::MemberShape.new(target: FirstBoot, name: "firstBoot"))
+    LaunchedInstance.add_member(:last_known_checks, ::Smithy::Schema::Shapes::MemberShape.new(target: LastKnownChecksList, name: "lastKnownChecks"))
+    LaunchedInstance.add_member(:last_known_fsx_checks_status, ::Smithy::Schema::Shapes::MemberShape.new(target: LastKnownCheckStatus, name: "lastKnownFsxChecksStatus"))
     LaunchedInstance.type = Types::LaunchedInstance
     Licensing.add_member(:os_byol, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "osByol"))
     Licensing.type = Types::Licensing
@@ -982,6 +1306,15 @@ module Aws::Mgn
     ListImportErrorsOutput.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportErrors, name: "items"))
     ListImportErrorsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
     ListImportErrorsOutput.type = Types::ListImportErrorsOutput
+    ListImportFileEnrichmentsFilters.add_member(:job_i_ds, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportFileEnrichmentsIDsFilter, name: "jobIDs"))
+    ListImportFileEnrichmentsFilters.type = Types::ListImportFileEnrichmentsFilters
+    ListImportFileEnrichmentsRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ListImportFileEnrichmentsFilters, name: "filters"))
+    ListImportFileEnrichmentsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResultsType, name: "maxResults"))
+    ListImportFileEnrichmentsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
+    ListImportFileEnrichmentsRequest.type = Types::ListImportFileEnrichmentsRequest
+    ListImportFileEnrichmentsResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportFileEnrichmentsList, name: "items"))
+    ListImportFileEnrichmentsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
+    ListImportFileEnrichmentsResponse.type = Types::ListImportFileEnrichmentsResponse
     ListImportsInput.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ListImportsRequestFilters, name: "filters"))
     ListImportsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResultsType, name: "maxResults"))
     ListImportsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
@@ -997,6 +1330,144 @@ module Aws::Mgn
     ListManagedAccountsResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedAccounts, name: "items", traits: {"smithy.api#required" => {}}))
     ListManagedAccountsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
     ListManagedAccountsResponse.type = Types::ListManagedAccountsResponse
+    ListNetworkMigrationAnalysesFilters.add_member(:job_i_ds, ::Smithy::Schema::Shapes::MemberShape.new(target: ListNetworkMigrationAnalysesIDsFilter, name: "jobIDs"))
+    ListNetworkMigrationAnalysesFilters.type = Types::ListNetworkMigrationAnalysesFilters
+    ListNetworkMigrationAnalysesIDsFilter.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationJobID, name: "member"))
+    ListNetworkMigrationAnalysesRequest.add_member(:network_migration_execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationExecutionID, name: "networkMigrationExecutionID", traits: {"smithy.api#required" => {}}))
+    ListNetworkMigrationAnalysesRequest.add_member(:network_migration_definition_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationDefinitionID, name: "networkMigrationDefinitionID", traits: {"smithy.api#required" => {}}))
+    ListNetworkMigrationAnalysesRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ListNetworkMigrationAnalysesFilters, name: "filters"))
+    ListNetworkMigrationAnalysesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResultsType, name: "maxResults"))
+    ListNetworkMigrationAnalysesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
+    ListNetworkMigrationAnalysesRequest.type = Types::ListNetworkMigrationAnalysesRequest
+    ListNetworkMigrationAnalysesResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationAnalysesList, name: "items"))
+    ListNetworkMigrationAnalysesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
+    ListNetworkMigrationAnalysesResponse.type = Types::ListNetworkMigrationAnalysesResponse
+    ListNetworkMigrationAnalysisResultsFilters.add_member(:vpc_i_ds, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcIDsFilter, name: "vpcIDs"))
+    ListNetworkMigrationAnalysisResultsFilters.type = Types::ListNetworkMigrationAnalysisResultsFilters
+    ListNetworkMigrationAnalysisResultsRequest.add_member(:network_migration_execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationExecutionID, name: "networkMigrationExecutionID", traits: {"smithy.api#required" => {}}))
+    ListNetworkMigrationAnalysisResultsRequest.add_member(:network_migration_definition_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationDefinitionID, name: "networkMigrationDefinitionID", traits: {"smithy.api#required" => {}}))
+    ListNetworkMigrationAnalysisResultsRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ListNetworkMigrationAnalysisResultsFilters, name: "filters"))
+    ListNetworkMigrationAnalysisResultsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResultsType, name: "maxResults"))
+    ListNetworkMigrationAnalysisResultsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
+    ListNetworkMigrationAnalysisResultsRequest.type = Types::ListNetworkMigrationAnalysisResultsRequest
+    ListNetworkMigrationAnalysisResultsResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationAnalysisResultsList, name: "items"))
+    ListNetworkMigrationAnalysisResultsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
+    ListNetworkMigrationAnalysisResultsResponse.type = Types::ListNetworkMigrationAnalysisResultsResponse
+    ListNetworkMigrationCodeGenerationSegmentsFilters.add_member(:segment_i_ds, ::Smithy::Schema::Shapes::MemberShape.new(target: ListNetworkMigrationCodeGenerationSegmentsIDsFilter, name: "segmentIDs"))
+    ListNetworkMigrationCodeGenerationSegmentsFilters.type = Types::ListNetworkMigrationCodeGenerationSegmentsFilters
+    ListNetworkMigrationCodeGenerationSegmentsIDsFilter.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentID, name: "member"))
+    ListNetworkMigrationCodeGenerationSegmentsRequest.add_member(:network_migration_execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationExecutionID, name: "networkMigrationExecutionID", traits: {"smithy.api#required" => {}}))
+    ListNetworkMigrationCodeGenerationSegmentsRequest.add_member(:network_migration_definition_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationDefinitionID, name: "networkMigrationDefinitionID", traits: {"smithy.api#required" => {}}))
+    ListNetworkMigrationCodeGenerationSegmentsRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ListNetworkMigrationCodeGenerationSegmentsFilters, name: "filters"))
+    ListNetworkMigrationCodeGenerationSegmentsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResultsType, name: "maxResults"))
+    ListNetworkMigrationCodeGenerationSegmentsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
+    ListNetworkMigrationCodeGenerationSegmentsRequest.type = Types::ListNetworkMigrationCodeGenerationSegmentsRequest
+    ListNetworkMigrationCodeGenerationSegmentsResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationCodeGenerationSegmentsList, name: "items"))
+    ListNetworkMigrationCodeGenerationSegmentsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
+    ListNetworkMigrationCodeGenerationSegmentsResponse.type = Types::ListNetworkMigrationCodeGenerationSegmentsResponse
+    ListNetworkMigrationCodeGenerationsFilters.add_member(:job_i_ds, ::Smithy::Schema::Shapes::MemberShape.new(target: ListNetworkMigrationCodeGenerationsIDsFilter, name: "jobIDs"))
+    ListNetworkMigrationCodeGenerationsFilters.type = Types::ListNetworkMigrationCodeGenerationsFilters
+    ListNetworkMigrationCodeGenerationsIDsFilter.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationJobID, name: "member"))
+    ListNetworkMigrationCodeGenerationsRequest.add_member(:network_migration_execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationExecutionID, name: "networkMigrationExecutionID", traits: {"smithy.api#required" => {}}))
+    ListNetworkMigrationCodeGenerationsRequest.add_member(:network_migration_definition_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationDefinitionID, name: "networkMigrationDefinitionID", traits: {"smithy.api#required" => {}}))
+    ListNetworkMigrationCodeGenerationsRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ListNetworkMigrationCodeGenerationsFilters, name: "filters"))
+    ListNetworkMigrationCodeGenerationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResultsType, name: "maxResults"))
+    ListNetworkMigrationCodeGenerationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
+    ListNetworkMigrationCodeGenerationsRequest.type = Types::ListNetworkMigrationCodeGenerationsRequest
+    ListNetworkMigrationCodeGenerationsResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationCodeGenerationsList, name: "items"))
+    ListNetworkMigrationCodeGenerationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
+    ListNetworkMigrationCodeGenerationsResponse.type = Types::ListNetworkMigrationCodeGenerationsResponse
+    ListNetworkMigrationDefinitionsRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ListNetworkMigrationDefinitionsRequestFilters, name: "filters"))
+    ListNetworkMigrationDefinitionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
+    ListNetworkMigrationDefinitionsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResultsType, name: "maxResults"))
+    ListNetworkMigrationDefinitionsRequest.type = Types::ListNetworkMigrationDefinitionsRequest
+    ListNetworkMigrationDefinitionsRequestFilters.add_member(:network_migration_definition_i_ds, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationDefintionsIDsFilter, name: "networkMigrationDefinitionIDs"))
+    ListNetworkMigrationDefinitionsRequestFilters.type = Types::ListNetworkMigrationDefinitionsRequestFilters
+    ListNetworkMigrationDefinitionsResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationDefinitionSummariesList, name: "items"))
+    ListNetworkMigrationDefinitionsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
+    ListNetworkMigrationDefinitionsResponse.type = Types::ListNetworkMigrationDefinitionsResponse
+    ListNetworkMigrationDeployedStacksRequest.add_member(:network_migration_execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationExecutionID, name: "networkMigrationExecutionID", traits: {"smithy.api#required" => {}}))
+    ListNetworkMigrationDeployedStacksRequest.add_member(:network_migration_definition_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationDefinitionID, name: "networkMigrationDefinitionID", traits: {"smithy.api#required" => {}}))
+    ListNetworkMigrationDeployedStacksRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResultsType, name: "maxResults"))
+    ListNetworkMigrationDeployedStacksRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
+    ListNetworkMigrationDeployedStacksRequest.type = Types::ListNetworkMigrationDeployedStacksRequest
+    ListNetworkMigrationDeployedStacksResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationDeployedStacksList, name: "items"))
+    ListNetworkMigrationDeployedStacksResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
+    ListNetworkMigrationDeployedStacksResponse.type = Types::ListNetworkMigrationDeployedStacksResponse
+    ListNetworkMigrationDeployerJobFilters.add_member(:job_i_ds, ::Smithy::Schema::Shapes::MemberShape.new(target: ListNetworkMigrationDeployerJobIDsFilters, name: "jobIDs"))
+    ListNetworkMigrationDeployerJobFilters.type = Types::ListNetworkMigrationDeployerJobFilters
+    ListNetworkMigrationDeployerJobIDsFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationJobID, name: "member"))
+    ListNetworkMigrationDeploymentsOutput.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationDeployerJobList, name: "items"))
+    ListNetworkMigrationDeploymentsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
+    ListNetworkMigrationDeploymentsOutput.type = Types::ListNetworkMigrationDeploymentsOutput
+    ListNetworkMigrationDeploymentsRequest.add_member(:network_migration_execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationExecutionID, name: "networkMigrationExecutionID", traits: {"smithy.api#required" => {}}))
+    ListNetworkMigrationDeploymentsRequest.add_member(:network_migration_definition_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationDefinitionID, name: "networkMigrationDefinitionID", traits: {"smithy.api#required" => {}}))
+    ListNetworkMigrationDeploymentsRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ListNetworkMigrationDeployerJobFilters, name: "filters"))
+    ListNetworkMigrationDeploymentsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResultsType, name: "maxResults"))
+    ListNetworkMigrationDeploymentsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
+    ListNetworkMigrationDeploymentsRequest.type = Types::ListNetworkMigrationDeploymentsRequest
+    ListNetworkMigrationExecutionRequestFilters.add_member(:network_migration_execution_i_ds, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationExecutionIDsFilter, name: "networkMigrationExecutionIDs"))
+    ListNetworkMigrationExecutionRequestFilters.add_member(:network_migration_execution_statuses, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationExecutionStatusesFilter, name: "networkMigrationExecutionStatuses"))
+    ListNetworkMigrationExecutionRequestFilters.type = Types::ListNetworkMigrationExecutionRequestFilters
+    ListNetworkMigrationExecutionsRequest.add_member(:network_migration_definition_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationDefinitionID, name: "networkMigrationDefinitionID", traits: {"smithy.api#required" => {}}))
+    ListNetworkMigrationExecutionsRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ListNetworkMigrationExecutionRequestFilters, name: "filters"))
+    ListNetworkMigrationExecutionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
+    ListNetworkMigrationExecutionsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResultsType, name: "maxResults"))
+    ListNetworkMigrationExecutionsRequest.type = Types::ListNetworkMigrationExecutionsRequest
+    ListNetworkMigrationExecutionsResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationExecutionsList, name: "items"))
+    ListNetworkMigrationExecutionsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
+    ListNetworkMigrationExecutionsResponse.type = Types::ListNetworkMigrationExecutionsResponse
+    ListNetworkMigrationMapperSegmentConstructTypesFilter.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationMapperSegmentConstructType, name: "member"))
+    ListNetworkMigrationMapperSegmentConstructsFilters.add_member(:construct_i_ds, ::Smithy::Schema::Shapes::MemberShape.new(target: ListNetworkMigrationMapperSegmentConstructsIDsFilter, name: "constructIDs"))
+    ListNetworkMigrationMapperSegmentConstructsFilters.add_member(:construct_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ListNetworkMigrationMapperSegmentConstructTypesFilter, name: "constructTypes"))
+    ListNetworkMigrationMapperSegmentConstructsFilters.type = Types::ListNetworkMigrationMapperSegmentConstructsFilters
+    ListNetworkMigrationMapperSegmentConstructsIDsFilter.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstructID, name: "member"))
+    ListNetworkMigrationMapperSegmentConstructsRequest.add_member(:network_migration_execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationExecutionID, name: "networkMigrationExecutionID", traits: {"smithy.api#required" => {}}))
+    ListNetworkMigrationMapperSegmentConstructsRequest.add_member(:network_migration_definition_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationDefinitionID, name: "networkMigrationDefinitionID", traits: {"smithy.api#required" => {}}))
+    ListNetworkMigrationMapperSegmentConstructsRequest.add_member(:segment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentID, name: "segmentID", traits: {"smithy.api#required" => {}}))
+    ListNetworkMigrationMapperSegmentConstructsRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ListNetworkMigrationMapperSegmentConstructsFilters, name: "filters"))
+    ListNetworkMigrationMapperSegmentConstructsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResultsType, name: "maxResults"))
+    ListNetworkMigrationMapperSegmentConstructsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
+    ListNetworkMigrationMapperSegmentConstructsRequest.type = Types::ListNetworkMigrationMapperSegmentConstructsRequest
+    ListNetworkMigrationMapperSegmentConstructsResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationMapperSegmentConstructs, name: "items"))
+    ListNetworkMigrationMapperSegmentConstructsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
+    ListNetworkMigrationMapperSegmentConstructsResponse.type = Types::ListNetworkMigrationMapperSegmentConstructsResponse
+    ListNetworkMigrationMapperSegmentsFilters.add_member(:segment_i_ds, ::Smithy::Schema::Shapes::MemberShape.new(target: ListNetworkMigrationMapperSegmentsIDsFilter, name: "segmentIDs"))
+    ListNetworkMigrationMapperSegmentsFilters.type = Types::ListNetworkMigrationMapperSegmentsFilters
+    ListNetworkMigrationMapperSegmentsIDsFilter.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentID, name: "member"))
+    ListNetworkMigrationMapperSegmentsRequest.add_member(:network_migration_execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationExecutionID, name: "networkMigrationExecutionID", traits: {"smithy.api#required" => {}}))
+    ListNetworkMigrationMapperSegmentsRequest.add_member(:network_migration_definition_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationDefinitionID, name: "networkMigrationDefinitionID", traits: {"smithy.api#required" => {}}))
+    ListNetworkMigrationMapperSegmentsRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ListNetworkMigrationMapperSegmentsFilters, name: "filters"))
+    ListNetworkMigrationMapperSegmentsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResultsType, name: "maxResults"))
+    ListNetworkMigrationMapperSegmentsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
+    ListNetworkMigrationMapperSegmentsRequest.type = Types::ListNetworkMigrationMapperSegmentsRequest
+    ListNetworkMigrationMapperSegmentsResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationMapperSegmentsList, name: "items"))
+    ListNetworkMigrationMapperSegmentsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
+    ListNetworkMigrationMapperSegmentsResponse.type = Types::ListNetworkMigrationMapperSegmentsResponse
+    ListNetworkMigrationMappingUpdatesFilters.add_member(:job_i_ds, ::Smithy::Schema::Shapes::MemberShape.new(target: ListNetworkMigrationMappingUpdatesIDsFilter, name: "jobIDs"))
+    ListNetworkMigrationMappingUpdatesFilters.type = Types::ListNetworkMigrationMappingUpdatesFilters
+    ListNetworkMigrationMappingUpdatesIDsFilter.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationJobID, name: "member"))
+    ListNetworkMigrationMappingUpdatesRequest.add_member(:network_migration_execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationExecutionID, name: "networkMigrationExecutionID", traits: {"smithy.api#required" => {}}))
+    ListNetworkMigrationMappingUpdatesRequest.add_member(:network_migration_definition_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationDefinitionID, name: "networkMigrationDefinitionID", traits: {"smithy.api#required" => {}}))
+    ListNetworkMigrationMappingUpdatesRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ListNetworkMigrationMappingUpdatesFilters, name: "filters"))
+    ListNetworkMigrationMappingUpdatesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResultsType, name: "maxResults"))
+    ListNetworkMigrationMappingUpdatesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
+    ListNetworkMigrationMappingUpdatesRequest.type = Types::ListNetworkMigrationMappingUpdatesRequest
+    ListNetworkMigrationMappingUpdatesResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationMappingUpdatesList, name: "items"))
+    ListNetworkMigrationMappingUpdatesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
+    ListNetworkMigrationMappingUpdatesResponse.type = Types::ListNetworkMigrationMappingUpdatesResponse
+    ListNetworkMigrationMappingsFilters.add_member(:job_i_ds, ::Smithy::Schema::Shapes::MemberShape.new(target: ListNetworkMigrationMappingsIDsFilter, name: "jobIDs"))
+    ListNetworkMigrationMappingsFilters.type = Types::ListNetworkMigrationMappingsFilters
+    ListNetworkMigrationMappingsIDsFilter.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationJobID, name: "member"))
+    ListNetworkMigrationMappingsRequest.add_member(:network_migration_execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationExecutionID, name: "networkMigrationExecutionID", traits: {"smithy.api#required" => {}}))
+    ListNetworkMigrationMappingsRequest.add_member(:network_migration_definition_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationDefinitionID, name: "networkMigrationDefinitionID", traits: {"smithy.api#required" => {}}))
+    ListNetworkMigrationMappingsRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ListNetworkMigrationMappingsFilters, name: "filters"))
+    ListNetworkMigrationMappingsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResultsType, name: "maxResults"))
+    ListNetworkMigrationMappingsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
+    ListNetworkMigrationMappingsRequest.type = Types::ListNetworkMigrationMappingsRequest
+    ListNetworkMigrationMappingsResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationMappingsList, name: "items"))
+    ListNetworkMigrationMappingsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
+    ListNetworkMigrationMappingsResponse.type = Types::ListNetworkMigrationMappingsResponse
     ListSourceServerActionsInput.add_member(:source_server_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceServerID, name: "sourceServerID", traits: {"smithy.api#required" => {}}))
     ListSourceServerActionsInput.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceServerActionsRequestFilters, name: "filters"))
     ListSourceServerActionsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResultsType, name: "maxResults"))
@@ -1046,17 +1517,174 @@ module Aws::Mgn
     MarkAsArchivedOutput.add_member(:replication_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationType, name: "replicationType"))
     MarkAsArchivedOutput.add_member(:vcenter_client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VcenterClientID, name: "vcenterClientID"))
     MarkAsArchivedOutput.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationID, name: "applicationID"))
-    MarkAsArchivedOutput.add_member(:user_provided_id, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedString, name: "userProvidedID"))
+    MarkAsArchivedOutput.add_member(:user_provided_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserProvidedId, name: "userProvidedID"))
     MarkAsArchivedOutput.add_member(:fqdn_for_action_framework, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedString, name: "fqdnForActionFramework"))
     MarkAsArchivedOutput.add_member(:connector_action, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceServerConnectorAction, name: "connectorAction"))
     MarkAsArchivedOutput.type = Types::MarkAsArchivedOutput
+    MergeConstruct.add_member(:segment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentID, name: "segmentID"))
+    MergeConstruct.add_member(:construct_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstructID, name: "constructID"))
+    MergeConstruct.type = Types::MergeConstruct
+    MergeConstructs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MergeConstruct, name: "member"))
+    MergeOperation.add_member(:merge_constructs, ::Smithy::Schema::Shapes::MemberShape.new(target: MergeConstructs, name: "mergeConstructs"))
+    MergeOperation.type = Types::MergeOperation
     NetworkInterface.add_member(:mac_address, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedString, name: "macAddress"))
     NetworkInterface.add_member(:ips, ::Smithy::Schema::Shapes::MemberShape.new(target: IPsList, name: "ips"))
     NetworkInterface.add_member(:is_primary, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "isPrimary"))
     NetworkInterface.type = Types::NetworkInterface
     NetworkInterfaces.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkInterface, name: "member"))
+    NetworkMigrationAnalysesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationAnalysisJobDetails, name: "member"))
+    NetworkMigrationAnalysisJobDetails.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationJobID, name: "jobID"))
+    NetworkMigrationAnalysisJobDetails.add_member(:network_migration_execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationExecutionID, name: "networkMigrationExecutionID"))
+    NetworkMigrationAnalysisJobDetails.add_member(:network_migration_definition_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationDefinitionID, name: "networkMigrationDefinitionID"))
+    NetworkMigrationAnalysisJobDetails.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAt"))
+    NetworkMigrationAnalysisJobDetails.add_member(:ended_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "endedAt"))
+    NetworkMigrationAnalysisJobDetails.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationJobStatus, name: "status"))
+    NetworkMigrationAnalysisJobDetails.add_member(:status_details, ::Smithy::Schema::Shapes::MemberShape.new(target: LargeBoundedString, name: "statusDetails"))
+    NetworkMigrationAnalysisJobDetails.type = Types::NetworkMigrationAnalysisJobDetails
+    NetworkMigrationAnalysisResult.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationJobID, name: "jobID"))
+    NetworkMigrationAnalysisResult.add_member(:network_migration_execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationExecutionID, name: "networkMigrationExecutionID"))
+    NetworkMigrationAnalysisResult.add_member(:network_migration_definition_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationDefinitionID, name: "networkMigrationDefinitionID"))
+    NetworkMigrationAnalysisResult.add_member(:analyzer_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyzerType, name: "analyzerType"))
+    NetworkMigrationAnalysisResult.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationAnalysisResultSource, name: "source"))
+    NetworkMigrationAnalysisResult.add_member(:target, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationAnalysisResultTarget, name: "target"))
+    NetworkMigrationAnalysisResult.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationAnalysisResultStatus, name: "status"))
+    NetworkMigrationAnalysisResult.add_member(:analysis_result, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "analysisResult"))
+    NetworkMigrationAnalysisResult.type = Types::NetworkMigrationAnalysisResult
+    NetworkMigrationAnalysisResultSource.add_member(:vpc_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcID, name: "vpcID"))
+    NetworkMigrationAnalysisResultSource.add_member(:subnet_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetID, name: "subnetID"))
+    NetworkMigrationAnalysisResultSource.type = Types::NetworkMigrationAnalysisResultSource
+    NetworkMigrationAnalysisResultTarget.add_member(:vpc_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcID, name: "vpcID"))
+    NetworkMigrationAnalysisResultTarget.add_member(:subnet_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetID, name: "subnetID"))
+    NetworkMigrationAnalysisResultTarget.type = Types::NetworkMigrationAnalysisResultTarget
+    NetworkMigrationAnalysisResultsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationAnalysisResult, name: "member"))
+    NetworkMigrationCodeGenerationArtifact.add_member(:artifact_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationCodeGenerationArtifactID, name: "artifactID"))
+    NetworkMigrationCodeGenerationArtifact.add_member(:artifact_type, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationCodeGenerationArtifactType, name: "artifactType"))
+    NetworkMigrationCodeGenerationArtifact.add_member(:artifact_sub_type, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationCodeGenerationArtifactSubType, name: "artifactSubType"))
+    NetworkMigrationCodeGenerationArtifact.add_member(:logical_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LogicalID, name: "logicalID"))
+    NetworkMigrationCodeGenerationArtifact.add_member(:output_s3_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Configuration, name: "outputS3Configuration"))
+    NetworkMigrationCodeGenerationArtifact.add_member(:checksum, ::Smithy::Schema::Shapes::MemberShape.new(target: Checksum, name: "checksum"))
+    NetworkMigrationCodeGenerationArtifact.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAt"))
+    NetworkMigrationCodeGenerationArtifact.type = Types::NetworkMigrationCodeGenerationArtifact
+    NetworkMigrationCodeGenerationArtifacts.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationCodeGenerationArtifact, name: "member"))
+    NetworkMigrationCodeGenerationJobDetails.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationJobID, name: "jobID"))
+    NetworkMigrationCodeGenerationJobDetails.add_member(:network_migration_execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationExecutionID, name: "networkMigrationExecutionID"))
+    NetworkMigrationCodeGenerationJobDetails.add_member(:network_migration_definition_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationDefinitionID, name: "networkMigrationDefinitionID"))
+    NetworkMigrationCodeGenerationJobDetails.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAt"))
+    NetworkMigrationCodeGenerationJobDetails.add_member(:ended_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "endedAt"))
+    NetworkMigrationCodeGenerationJobDetails.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationJobStatus, name: "status"))
+    NetworkMigrationCodeGenerationJobDetails.add_member(:status_details, ::Smithy::Schema::Shapes::MemberShape.new(target: LargeBoundedString, name: "statusDetails"))
+    NetworkMigrationCodeGenerationJobDetails.add_member(:code_generation_output_format_status_details_map, ::Smithy::Schema::Shapes::MemberShape.new(target: CodeGenerationOutputFormatStatusDetailsMap, name: "codeGenerationOutputFormatStatusDetailsMap"))
+    NetworkMigrationCodeGenerationJobDetails.type = Types::NetworkMigrationCodeGenerationJobDetails
+    NetworkMigrationCodeGenerationSegment.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationJobID, name: "jobID"))
+    NetworkMigrationCodeGenerationSegment.add_member(:network_migration_execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationExecutionID, name: "networkMigrationExecutionID"))
+    NetworkMigrationCodeGenerationSegment.add_member(:network_migration_definition_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationDefinitionID, name: "networkMigrationDefinitionID"))
+    NetworkMigrationCodeGenerationSegment.add_member(:segment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentID, name: "segmentID"))
+    NetworkMigrationCodeGenerationSegment.add_member(:segment_type, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationCodeGenerationSegmentType, name: "segmentType"))
+    NetworkMigrationCodeGenerationSegment.add_member(:logical_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LogicalID, name: "logicalID"))
+    NetworkMigrationCodeGenerationSegment.add_member(:mapper_segment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentID, name: "mapperSegmentID"))
+    NetworkMigrationCodeGenerationSegment.add_member(:artifacts, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationCodeGenerationArtifacts, name: "artifacts"))
+    NetworkMigrationCodeGenerationSegment.add_member(:referenced_segments, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferencedSegmentsList, name: "referencedSegments"))
+    NetworkMigrationCodeGenerationSegment.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAt"))
+    NetworkMigrationCodeGenerationSegment.type = Types::NetworkMigrationCodeGenerationSegment
+    NetworkMigrationCodeGenerationSegmentsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationCodeGenerationSegment, name: "member"))
+    NetworkMigrationCodeGenerationsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationCodeGenerationJobDetails, name: "member"))
+    NetworkMigrationDefinitionSummariesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationDefinitionSummary, name: "member"))
+    NetworkMigrationDefinitionSummary.add_member(:network_migration_definition_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationDefinitionID, name: "networkMigrationDefinitionID"))
+    NetworkMigrationDefinitionSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationDefinitionName, name: "name"))
+    NetworkMigrationDefinitionSummary.add_member(:source_environment, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceEnvironment, name: "sourceEnvironment"))
+    NetworkMigrationDefinitionSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "arn"))
+    NetworkMigrationDefinitionSummary.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "tags"))
+    NetworkMigrationDefinitionSummary.add_member(:scope_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ScopeTagsMap, name: "scopeTags"))
+    NetworkMigrationDefinitionSummary.type = Types::NetworkMigrationDefinitionSummary
+    NetworkMigrationDefintionsIDsFilter.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationDefinitionID, name: "member"))
+    NetworkMigrationDeployedStackDetails.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationDeployedStackStatus, name: "status"))
+    NetworkMigrationDeployedStackDetails.add_member(:stack_physical_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PhysicalID, name: "stackPhysicalID"))
+    NetworkMigrationDeployedStackDetails.add_member(:stack_logical_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LogicalID, name: "stackLogicalID"))
+    NetworkMigrationDeployedStackDetails.add_member(:segment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentID, name: "segmentID"))
+    NetworkMigrationDeployedStackDetails.add_member(:target_account, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountID, name: "targetAccount"))
+    NetworkMigrationDeployedStackDetails.add_member(:failed_resources, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationFailedResourcesList, name: "failedResources"))
+    NetworkMigrationDeployedStackDetails.type = Types::NetworkMigrationDeployedStackDetails
+    NetworkMigrationDeployedStacksList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationDeployedStackDetails, name: "member"))
+    NetworkMigrationDeployerJobDetails.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationJobID, name: "jobID"))
+    NetworkMigrationDeployerJobDetails.add_member(:network_migration_execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationExecutionID, name: "networkMigrationExecutionID"))
+    NetworkMigrationDeployerJobDetails.add_member(:network_migration_definition_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationDefinitionID, name: "networkMigrationDefinitionID"))
+    NetworkMigrationDeployerJobDetails.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAt"))
+    NetworkMigrationDeployerJobDetails.add_member(:ended_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "endedAt"))
+    NetworkMigrationDeployerJobDetails.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationJobStatus, name: "status"))
+    NetworkMigrationDeployerJobDetails.add_member(:status_details, ::Smithy::Schema::Shapes::MemberShape.new(target: LargeBoundedString, name: "statusDetails"))
+    NetworkMigrationDeployerJobDetails.type = Types::NetworkMigrationDeployerJobDetails
+    NetworkMigrationDeployerJobList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationDeployerJobDetails, name: "member"))
+    NetworkMigrationExecution.add_member(:network_migration_definition_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationDefinitionID, name: "networkMigrationDefinitionID"))
+    NetworkMigrationExecution.add_member(:network_migration_execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationExecutionID, name: "networkMigrationExecutionID"))
+    NetworkMigrationExecution.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionStatus, name: "status"))
+    NetworkMigrationExecution.add_member(:stage, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionStage, name: "stage"))
+    NetworkMigrationExecution.add_member(:activity, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionStageActivity, name: "activity"))
+    NetworkMigrationExecution.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAt"))
+    NetworkMigrationExecution.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "updatedAt"))
+    NetworkMigrationExecution.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "tags"))
+    NetworkMigrationExecution.type = Types::NetworkMigrationExecution
+    NetworkMigrationExecutionIDsFilter.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationExecutionID, name: "member"))
+    NetworkMigrationExecutionStatusesFilter.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionStatus, name: "member"))
+    NetworkMigrationExecutionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationExecution, name: "member"))
+    NetworkMigrationFailedResourceDetails.add_member(:logical_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LogicalID, name: "logicalID"))
+    NetworkMigrationFailedResourceDetails.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationFailedResourceStatus, name: "status"))
+    NetworkMigrationFailedResourceDetails.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: LargeBoundedString, name: "statusReason"))
+    NetworkMigrationFailedResourceDetails.type = Types::NetworkMigrationFailedResourceDetails
+    NetworkMigrationFailedResourcesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationFailedResourceDetails, name: "member"))
+    NetworkMigrationMapperSegment.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationJobID, name: "jobID"))
+    NetworkMigrationMapperSegment.add_member(:network_migration_execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationExecutionID, name: "networkMigrationExecutionID"))
+    NetworkMigrationMapperSegment.add_member(:network_migration_definition_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationDefinitionID, name: "networkMigrationDefinitionID"))
+    NetworkMigrationMapperSegment.add_member(:segment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentID, name: "segmentID"))
+    NetworkMigrationMapperSegment.add_member(:segment_type, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationMapperSegmentType, name: "segmentType"))
+    NetworkMigrationMapperSegment.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentName, name: "name"))
+    NetworkMigrationMapperSegment.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentDescription, name: "description"))
+    NetworkMigrationMapperSegment.add_member(:logical_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LogicalID, name: "logicalID"))
+    NetworkMigrationMapperSegment.add_member(:checksum, ::Smithy::Schema::Shapes::MemberShape.new(target: Checksum, name: "checksum"))
+    NetworkMigrationMapperSegment.add_member(:output_s3_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Configuration, name: "outputS3Configuration"))
+    NetworkMigrationMapperSegment.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAt"))
+    NetworkMigrationMapperSegment.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "updatedAt"))
+    NetworkMigrationMapperSegment.add_member(:scope_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ScopeTagsMap, name: "scopeTags"))
+    NetworkMigrationMapperSegment.add_member(:target_account, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountID, name: "targetAccount"))
+    NetworkMigrationMapperSegment.add_member(:referenced_segments, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferencedSegmentsList, name: "referencedSegments"))
+    NetworkMigrationMapperSegment.type = Types::NetworkMigrationMapperSegment
+    NetworkMigrationMapperSegmentConstruct.add_member(:construct_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstructID, name: "constructID"))
+    NetworkMigrationMapperSegmentConstruct.add_member(:construct_type, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationMapperSegmentConstructType, name: "constructType"))
+    NetworkMigrationMapperSegmentConstruct.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentConstructName, name: "name"))
+    NetworkMigrationMapperSegmentConstruct.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentConstructDescription, name: "description"))
+    NetworkMigrationMapperSegmentConstruct.add_member(:logical_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LogicalID, name: "logicalID"))
+    NetworkMigrationMapperSegmentConstruct.add_member(:excluded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "excluded"))
+    NetworkMigrationMapperSegmentConstruct.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAt"))
+    NetworkMigrationMapperSegmentConstruct.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "updatedAt"))
+    NetworkMigrationMapperSegmentConstruct.add_member(:properties, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstructProperties, name: "properties"))
+    NetworkMigrationMapperSegmentConstruct.type = Types::NetworkMigrationMapperSegmentConstruct
+    NetworkMigrationMapperSegmentConstructs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationMapperSegmentConstruct, name: "member"))
+    NetworkMigrationMapperSegmentsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationMapperSegment, name: "member"))
+    NetworkMigrationMappingJobDetails.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationJobID, name: "jobID"))
+    NetworkMigrationMappingJobDetails.add_member(:network_migration_execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationExecutionID, name: "networkMigrationExecutionID"))
+    NetworkMigrationMappingJobDetails.add_member(:network_migration_definition_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationDefinitionID, name: "networkMigrationDefinitionID"))
+    NetworkMigrationMappingJobDetails.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAt"))
+    NetworkMigrationMappingJobDetails.add_member(:ended_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "endedAt"))
+    NetworkMigrationMappingJobDetails.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationJobStatus, name: "status"))
+    NetworkMigrationMappingJobDetails.add_member(:status_details, ::Smithy::Schema::Shapes::MemberShape.new(target: LargeBoundedString, name: "statusDetails"))
+    NetworkMigrationMappingJobDetails.type = Types::NetworkMigrationMappingJobDetails
+    NetworkMigrationMappingUpdateJobDetails.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationJobID, name: "jobID"))
+    NetworkMigrationMappingUpdateJobDetails.add_member(:network_migration_execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationExecutionID, name: "networkMigrationExecutionID"))
+    NetworkMigrationMappingUpdateJobDetails.add_member(:network_migration_definition_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationDefinitionID, name: "networkMigrationDefinitionID"))
+    NetworkMigrationMappingUpdateJobDetails.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAt"))
+    NetworkMigrationMappingUpdateJobDetails.add_member(:ended_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "endedAt"))
+    NetworkMigrationMappingUpdateJobDetails.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationJobStatus, name: "status"))
+    NetworkMigrationMappingUpdateJobDetails.add_member(:status_details, ::Smithy::Schema::Shapes::MemberShape.new(target: LargeBoundedString, name: "statusDetails"))
+    NetworkMigrationMappingUpdateJobDetails.type = Types::NetworkMigrationMappingUpdateJobDetails
+    NetworkMigrationMappingUpdatesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationMappingUpdateJobDetails, name: "member"))
+    NetworkMigrationMappingsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationMappingJobDetails, name: "member"))
     OS.add_member(:full_string, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedString, name: "fullString"))
     OS.type = Types::OS
+    OperationUnion.add_member(:merge, Types::OperationUnion::Merge, ::Smithy::Schema::Shapes::MemberShape.new(target: MergeOperation, name: "merge"))
+    OperationUnion.add_member(:split, Types::OperationUnion::Split, ::Smithy::Schema::Shapes::MemberShape.new(target: SplitOperation, name: "split"))
+    OperationUnion.add_member(:delete, Types::OperationUnion::Delete, ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteOperation, name: "delete"))
+    OperationUnion.add_member(:update, Types::OperationUnion::Update, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateOperation, name: "update"))
+    OperationUnion.add_member(:unknown, Types::OperationUnion::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    OperationUnion.type = Types::OperationUnion
     ParticipatingServer.add_member(:source_server_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceServerID, name: "sourceServerID", traits: {"smithy.api#required" => {}}))
     ParticipatingServer.add_member(:launch_status, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchStatus, name: "launchStatus"))
     ParticipatingServer.add_member(:launched_ec2_instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EC2InstanceID, name: "launchedEc2InstanceID"))
@@ -1074,7 +1702,7 @@ module Aws::Mgn
     PauseReplicationOutput.add_member(:replication_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationType, name: "replicationType"))
     PauseReplicationOutput.add_member(:vcenter_client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VcenterClientID, name: "vcenterClientID"))
     PauseReplicationOutput.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationID, name: "applicationID"))
-    PauseReplicationOutput.add_member(:user_provided_id, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedString, name: "userProvidedID"))
+    PauseReplicationOutput.add_member(:user_provided_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserProvidedId, name: "userProvidedID"))
     PauseReplicationOutput.add_member(:fqdn_for_action_framework, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedString, name: "fqdnForActionFramework"))
     PauseReplicationOutput.add_member(:connector_action, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceServerConnectorAction, name: "connectorAction"))
     PauseReplicationOutput.type = Types::PauseReplicationOutput
@@ -1180,6 +1808,9 @@ module Aws::Mgn
     ReplicationConfigurationTemplate.add_member(:staging_area_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "stagingAreaTags"))
     ReplicationConfigurationTemplate.add_member(:use_fips_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "useFipsEndpoint"))
     ReplicationConfigurationTemplate.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "tags"))
+    ReplicationConfigurationTemplate.add_member(:internet_protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: InternetProtocol, name: "internetProtocol"))
+    ReplicationConfigurationTemplate.add_member(:store_snapshot_on_local_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "storeSnapshotOnLocalZone"))
+    ReplicationConfigurationTemplate.add_member(:storage_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageConfiguration, name: "storageConfiguration"))
     ReplicationConfigurationTemplate.type = Types::ReplicationConfigurationTemplate
     ReplicationConfigurationTemplateIDs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationConfigurationTemplateID, name: "member"))
     ReplicationConfigurationTemplates.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationConfigurationTemplate, name: "member"))
@@ -1201,7 +1832,7 @@ module Aws::Mgn
     ResumeReplicationOutput.add_member(:replication_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationType, name: "replicationType"))
     ResumeReplicationOutput.add_member(:vcenter_client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VcenterClientID, name: "vcenterClientID"))
     ResumeReplicationOutput.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationID, name: "applicationID"))
-    ResumeReplicationOutput.add_member(:user_provided_id, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedString, name: "userProvidedID"))
+    ResumeReplicationOutput.add_member(:user_provided_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserProvidedId, name: "userProvidedID"))
     ResumeReplicationOutput.add_member(:fqdn_for_action_framework, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedString, name: "fqdnForActionFramework"))
     ResumeReplicationOutput.add_member(:connector_action, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceServerConnectorAction, name: "connectorAction"))
     ResumeReplicationOutput.type = Types::ResumeReplicationOutput
@@ -1222,7 +1853,7 @@ module Aws::Mgn
     RetryDataReplicationOutput.add_member(:replication_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationType, name: "replicationType"))
     RetryDataReplicationOutput.add_member(:vcenter_client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VcenterClientID, name: "vcenterClientID"))
     RetryDataReplicationOutput.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationID, name: "applicationID"))
-    RetryDataReplicationOutput.add_member(:user_provided_id, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedString, name: "userProvidedID"))
+    RetryDataReplicationOutput.add_member(:user_provided_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserProvidedId, name: "userProvidedID"))
     RetryDataReplicationOutput.add_member(:fqdn_for_action_framework, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedString, name: "fqdnForActionFramework"))
     RetryDataReplicationOutput.add_member(:connector_action, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceServerConnectorAction, name: "connectorAction"))
     RetryDataReplicationOutput.type = Types::RetryDataReplicationOutput
@@ -1230,6 +1861,12 @@ module Aws::Mgn
     S3BucketSource.add_member(:s3_key, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Key, name: "s3Key", traits: {"smithy.api#required" => {}}))
     S3BucketSource.add_member(:s3_bucket_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountID, name: "s3BucketOwner"))
     S3BucketSource.type = Types::S3BucketSource
+    S3Configuration.add_member(:s3_bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: S3BucketName, name: "s3Bucket"))
+    S3Configuration.add_member(:s3_bucket_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountID, name: "s3BucketOwner"))
+    S3Configuration.add_member(:s3_key, ::Smithy::Schema::Shapes::MemberShape.new(target: S3KeyName, name: "s3Key"))
+    S3Configuration.type = Types::S3Configuration
+    ScopeTagsMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ScopeTagKey, name: "key"))
+    ScopeTagsMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ScopeTagValue, name: "value"))
     ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: LargeBoundedString, name: "message"))
     ServiceQuotaExceededException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: LargeBoundedString, name: "code"))
     ServiceQuotaExceededException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LargeBoundedString, name: "resourceId"))
@@ -1238,6 +1875,10 @@ module Aws::Mgn
     ServiceQuotaExceededException.add_member(:quota_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LargeBoundedString, name: "quotaCode"))
     ServiceQuotaExceededException.add_member(:quota_value, ::Smithy::Schema::Shapes::MemberShape.new(target: StrictlyPositiveInteger, name: "quotaValue"))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
+    SourceConfiguration.add_member(:source_environment, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceEnvironment, name: "sourceEnvironment", traits: {"smithy.api#required" => {}}))
+    SourceConfiguration.add_member(:source_s3_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceS3Configuration, name: "sourceS3Configuration", traits: {"smithy.api#required" => {}}))
+    SourceConfiguration.type = Types::SourceConfiguration
+    SourceConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceConfiguration, name: "member"))
     SourceProperties.add_member(:last_updated_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ISO8601DatetimeString, name: "lastUpdatedDateTime"))
     SourceProperties.add_member(:recommended_instance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EC2InstanceType, name: "recommendedInstanceType"))
     SourceProperties.add_member(:identification_hints, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentificationHints, name: "identificationHints"))
@@ -1247,6 +1888,10 @@ module Aws::Mgn
     SourceProperties.add_member(:ram_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveInteger, name: "ramBytes", traits: {"smithy.api#default" => 0}))
     SourceProperties.add_member(:os, ::Smithy::Schema::Shapes::MemberShape.new(target: OS, name: "os"))
     SourceProperties.type = Types::SourceProperties
+    SourceS3Configuration.add_member(:s3_bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: S3BucketName, name: "s3Bucket", traits: {"smithy.api#required" => {}}))
+    SourceS3Configuration.add_member(:s3_bucket_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountID, name: "s3BucketOwner", traits: {"smithy.api#required" => {}}))
+    SourceS3Configuration.add_member(:s3_key, ::Smithy::Schema::Shapes::MemberShape.new(target: S3KeyName, name: "s3Key", traits: {"smithy.api#required" => {}}))
+    SourceS3Configuration.type = Types::SourceS3Configuration
     SourceServer.add_member(:source_server_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceServerID, name: "sourceServerID"))
     SourceServer.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "arn"))
     SourceServer.add_member(:is_archived, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "isArchived"))
@@ -1258,7 +1903,7 @@ module Aws::Mgn
     SourceServer.add_member(:replication_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationType, name: "replicationType"))
     SourceServer.add_member(:vcenter_client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VcenterClientID, name: "vcenterClientID"))
     SourceServer.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationID, name: "applicationID"))
-    SourceServer.add_member(:user_provided_id, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedString, name: "userProvidedID"))
+    SourceServer.add_member(:user_provided_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserProvidedId, name: "userProvidedID"))
     SourceServer.add_member(:fqdn_for_action_framework, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedString, name: "fqdnForActionFramework"))
     SourceServer.add_member(:connector_action, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceServerConnectorAction, name: "connectorAction"))
     SourceServer.type = Types::SourceServer
@@ -1282,6 +1927,11 @@ module Aws::Mgn
     SourceServerConnectorAction.add_member(:connector_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorArn, name: "connectorArn"))
     SourceServerConnectorAction.type = Types::SourceServerConnectorAction
     SourceServersList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceServer, name: "member"))
+    SplitConstruct.add_member(:cidr_block, ::Smithy::Schema::Shapes::MemberShape.new(target: CidrBlock, name: "cidrBlock"))
+    SplitConstruct.type = Types::SplitConstruct
+    SplitConstructs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SplitConstruct, name: "member"))
+    SplitOperation.add_member(:split_constructs, ::Smithy::Schema::Shapes::MemberShape.new(target: SplitConstructs, name: "splitConstructs"))
+    SplitOperation.type = Types::SplitOperation
     SsmDocument.add_member(:action_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedString, name: "actionName", traits: {"smithy.api#required" => {}}))
     SsmDocument.add_member(:ssm_document_name, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmDocumentName, name: "ssmDocumentName", traits: {"smithy.api#required" => {}}))
     SsmDocument.add_member(:timeout_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: StrictlyPositiveInteger, name: "timeoutSeconds"))
@@ -1311,14 +1961,63 @@ module Aws::Mgn
     StartExportInput.add_member(:s3_bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: S3BucketName, name: "s3Bucket", traits: {"smithy.api#required" => {}}))
     StartExportInput.add_member(:s3_key, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Key, name: "s3Key", traits: {"smithy.api#required" => {}}))
     StartExportInput.add_member(:s3_bucket_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountID, name: "s3BucketOwner"))
+    StartExportInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "tags"))
     StartExportInput.type = Types::StartExportInput
     StartExportOutput.add_member(:export_task, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportTask, name: "exportTask"))
     StartExportOutput.type = Types::StartExportOutput
+    StartImportFileEnrichmentRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientIdempotencyToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    StartImportFileEnrichmentRequest.add_member(:s3_bucket_source, ::Smithy::Schema::Shapes::MemberShape.new(target: EnrichmentSourceS3Configuration, name: "s3BucketSource", traits: {"smithy.api#required" => {}}))
+    StartImportFileEnrichmentRequest.add_member(:s3_bucket_target, ::Smithy::Schema::Shapes::MemberShape.new(target: EnrichmentTargetS3Configuration, name: "s3BucketTarget", traits: {"smithy.api#required" => {}}))
+    StartImportFileEnrichmentRequest.add_member(:ip_assignment_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: IpAssignmentStrategy, name: "ipAssignmentStrategy"))
+    StartImportFileEnrichmentRequest.type = Types::StartImportFileEnrichmentRequest
+    StartImportFileEnrichmentResponse.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportFileEnrichmentJobID, name: "jobID"))
+    StartImportFileEnrichmentResponse.type = Types::StartImportFileEnrichmentResponse
     StartImportInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientIdempotencyToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     StartImportInput.add_member(:s3_bucket_source, ::Smithy::Schema::Shapes::MemberShape.new(target: S3BucketSource, name: "s3BucketSource", traits: {"smithy.api#required" => {}}))
+    StartImportInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "tags"))
     StartImportInput.type = Types::StartImportInput
     StartImportOutput.add_member(:import_task, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportTask, name: "importTask"))
     StartImportOutput.type = Types::StartImportOutput
+    StartNetworkMigrationAnalysisRequest.add_member(:network_migration_execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationExecutionID, name: "networkMigrationExecutionID", traits: {"smithy.api#required" => {}}))
+    StartNetworkMigrationAnalysisRequest.add_member(:network_migration_definition_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationDefinitionID, name: "networkMigrationDefinitionID", traits: {"smithy.api#required" => {}}))
+    StartNetworkMigrationAnalysisRequest.type = Types::StartNetworkMigrationAnalysisRequest
+    StartNetworkMigrationAnalysisResponse.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationJobID, name: "jobID"))
+    StartNetworkMigrationAnalysisResponse.type = Types::StartNetworkMigrationAnalysisResponse
+    StartNetworkMigrationCodeGenerationRequest.add_member(:network_migration_execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationExecutionID, name: "networkMigrationExecutionID", traits: {"smithy.api#required" => {}}))
+    StartNetworkMigrationCodeGenerationRequest.add_member(:network_migration_definition_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationDefinitionID, name: "networkMigrationDefinitionID", traits: {"smithy.api#required" => {}}))
+    StartNetworkMigrationCodeGenerationRequest.add_member(:code_generation_output_format_types, ::Smithy::Schema::Shapes::MemberShape.new(target: CodeGenerationOutputFormatTypes, name: "codeGenerationOutputFormatTypes"))
+    StartNetworkMigrationCodeGenerationRequest.type = Types::StartNetworkMigrationCodeGenerationRequest
+    StartNetworkMigrationCodeGenerationResponse.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationJobID, name: "jobID"))
+    StartNetworkMigrationCodeGenerationResponse.type = Types::StartNetworkMigrationCodeGenerationResponse
+    StartNetworkMigrationDeploymentOutput.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationJobID, name: "jobID"))
+    StartNetworkMigrationDeploymentOutput.type = Types::StartNetworkMigrationDeploymentOutput
+    StartNetworkMigrationDeploymentRequest.add_member(:network_migration_execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationExecutionID, name: "networkMigrationExecutionID", traits: {"smithy.api#required" => {}}))
+    StartNetworkMigrationDeploymentRequest.add_member(:network_migration_definition_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationDefinitionID, name: "networkMigrationDefinitionID", traits: {"smithy.api#required" => {}}))
+    StartNetworkMigrationDeploymentRequest.type = Types::StartNetworkMigrationDeploymentRequest
+    StartNetworkMigrationMappingRequest.add_member(:network_migration_execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationExecutionID, name: "networkMigrationExecutionID", traits: {"smithy.api#required" => {}}))
+    StartNetworkMigrationMappingRequest.add_member(:network_migration_definition_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationDefinitionID, name: "networkMigrationDefinitionID", traits: {"smithy.api#required" => {}}))
+    StartNetworkMigrationMappingRequest.add_member(:security_group_mapping_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupMappingStrategy, name: "securityGroupMappingStrategy"))
+    StartNetworkMigrationMappingRequest.type = Types::StartNetworkMigrationMappingRequest
+    StartNetworkMigrationMappingResponse.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationJobID, name: "jobID"))
+    StartNetworkMigrationMappingResponse.type = Types::StartNetworkMigrationMappingResponse
+    StartNetworkMigrationMappingUpdateConstruct.add_member(:segment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentID, name: "segmentID", traits: {"smithy.api#required" => {}}))
+    StartNetworkMigrationMappingUpdateConstruct.add_member(:construct_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstructID, name: "constructID", traits: {"smithy.api#required" => {}}))
+    StartNetworkMigrationMappingUpdateConstruct.add_member(:construct_type, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationMapperSegmentConstructType, name: "constructType", traits: {"smithy.api#required" => {}}))
+    StartNetworkMigrationMappingUpdateConstruct.add_member(:operation, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationUnion, name: "operation"))
+    StartNetworkMigrationMappingUpdateConstruct.type = Types::StartNetworkMigrationMappingUpdateConstruct
+    StartNetworkMigrationMappingUpdateConstructs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StartNetworkMigrationMappingUpdateConstruct, name: "member"))
+    StartNetworkMigrationMappingUpdateRequest.add_member(:network_migration_execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationExecutionID, name: "networkMigrationExecutionID", traits: {"smithy.api#required" => {}}))
+    StartNetworkMigrationMappingUpdateRequest.add_member(:network_migration_definition_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationDefinitionID, name: "networkMigrationDefinitionID", traits: {"smithy.api#required" => {}}))
+    StartNetworkMigrationMappingUpdateRequest.add_member(:constructs, ::Smithy::Schema::Shapes::MemberShape.new(target: StartNetworkMigrationMappingUpdateConstructs, name: "constructs"))
+    StartNetworkMigrationMappingUpdateRequest.add_member(:segments, ::Smithy::Schema::Shapes::MemberShape.new(target: StartNetworkMigrationMappingUpdateSegments, name: "segments"))
+    StartNetworkMigrationMappingUpdateRequest.type = Types::StartNetworkMigrationMappingUpdateRequest
+    StartNetworkMigrationMappingUpdateResponse.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationJobID, name: "jobID"))
+    StartNetworkMigrationMappingUpdateResponse.type = Types::StartNetworkMigrationMappingUpdateResponse
+    StartNetworkMigrationMappingUpdateSegment.add_member(:segment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentID, name: "segmentID", traits: {"smithy.api#required" => {}}))
+    StartNetworkMigrationMappingUpdateSegment.add_member(:target_account, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountID, name: "targetAccount"))
+    StartNetworkMigrationMappingUpdateSegment.add_member(:scope_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ScopeTagsMap, name: "scopeTags"))
+    StartNetworkMigrationMappingUpdateSegment.type = Types::StartNetworkMigrationMappingUpdateSegment
+    StartNetworkMigrationMappingUpdateSegments.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StartNetworkMigrationMappingUpdateSegment, name: "member"))
     StartReplicationInput.add_member(:source_server_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceServerID, name: "sourceServerID", traits: {"smithy.api#required" => {}}))
     StartReplicationInput.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountID, name: "accountID"))
     StartReplicationInput.type = Types::StartReplicationInput
@@ -1333,7 +2032,7 @@ module Aws::Mgn
     StartReplicationOutput.add_member(:replication_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationType, name: "replicationType"))
     StartReplicationOutput.add_member(:vcenter_client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VcenterClientID, name: "vcenterClientID"))
     StartReplicationOutput.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationID, name: "applicationID"))
-    StartReplicationOutput.add_member(:user_provided_id, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedString, name: "userProvidedID"))
+    StartReplicationOutput.add_member(:user_provided_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserProvidedId, name: "userProvidedID"))
     StartReplicationOutput.add_member(:fqdn_for_action_framework, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedString, name: "fqdnForActionFramework"))
     StartReplicationOutput.add_member(:connector_action, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceServerConnectorAction, name: "connectorAction"))
     StartReplicationOutput.type = Types::StartReplicationOutput
@@ -1355,19 +2054,38 @@ module Aws::Mgn
     StopReplicationOutput.add_member(:replication_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationType, name: "replicationType"))
     StopReplicationOutput.add_member(:vcenter_client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VcenterClientID, name: "vcenterClientID"))
     StopReplicationOutput.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationID, name: "applicationID"))
-    StopReplicationOutput.add_member(:user_provided_id, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedString, name: "userProvidedID"))
+    StopReplicationOutput.add_member(:user_provided_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserProvidedId, name: "userProvidedID"))
     StopReplicationOutput.add_member(:fqdn_for_action_framework, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedString, name: "fqdnForActionFramework"))
     StopReplicationOutput.add_member(:connector_action, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceServerConnectorAction, name: "connectorAction"))
     StopReplicationOutput.type = Types::StopReplicationOutput
     StopReplicationRequest.add_member(:source_server_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceServerID, name: "sourceServerID", traits: {"smithy.api#required" => {}}))
     StopReplicationRequest.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountID, name: "accountID"))
     StopReplicationRequest.type = Types::StopReplicationRequest
+    StorageConfiguration.add_member(:storage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageType, name: "storageType", traits: {"smithy.api#required" => {}}))
+    StorageConfiguration.add_member(:fsx_ontap_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: FsxOntapConfiguration, name: "fsxOntapConfiguration"))
+    StorageConfiguration.type = Types::StorageConfiguration
     TagKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
     TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput
     TagsMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
     TagsMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
+    TargetNetwork.add_member(:topology, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetNetworkTopology, name: "topology", traits: {"smithy.api#required" => {}}))
+    TargetNetwork.add_member(:inbound_cidr, ::Smithy::Schema::Shapes::MemberShape.new(target: Cidr, name: "inboundCidr"))
+    TargetNetwork.add_member(:outbound_cidr, ::Smithy::Schema::Shapes::MemberShape.new(target: Cidr, name: "outboundCidr"))
+    TargetNetwork.add_member(:inspection_cidr, ::Smithy::Schema::Shapes::MemberShape.new(target: Cidr, name: "inspectionCidr"))
+    TargetNetwork.type = Types::TargetNetwork
+    TargetNetworkUpdate.add_member(:topology, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetNetworkTopology, name: "topology"))
+    TargetNetworkUpdate.add_member(:inbound_cidr, ::Smithy::Schema::Shapes::MemberShape.new(target: Cidr, name: "inboundCidr"))
+    TargetNetworkUpdate.add_member(:outbound_cidr, ::Smithy::Schema::Shapes::MemberShape.new(target: Cidr, name: "outboundCidr"))
+    TargetNetworkUpdate.add_member(:inspection_cidr, ::Smithy::Schema::Shapes::MemberShape.new(target: Cidr, name: "inspectionCidr"))
+    TargetNetworkUpdate.type = Types::TargetNetworkUpdate
+    TargetS3Configuration.add_member(:s3_bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: S3BucketName, name: "s3Bucket", traits: {"smithy.api#required" => {}}))
+    TargetS3Configuration.add_member(:s3_bucket_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountID, name: "s3BucketOwner", traits: {"smithy.api#required" => {}}))
+    TargetS3Configuration.type = Types::TargetS3Configuration
+    TargetS3ConfigurationUpdate.add_member(:s3_bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: S3BucketName, name: "s3Bucket"))
+    TargetS3ConfigurationUpdate.add_member(:s3_bucket_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountID, name: "s3BucketOwner"))
+    TargetS3ConfigurationUpdate.type = Types::TargetS3ConfigurationUpdate
     TemplateActionDocument.add_member(:action_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionID, name: "actionID"))
     TemplateActionDocument.add_member(:action_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedString, name: "actionName"))
     TemplateActionDocument.add_member(:document_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedString, name: "documentIdentifier"))
@@ -1497,6 +2215,8 @@ module Aws::Mgn
     UpdateLaunchConfigurationTemplateInput.add_member(:small_volume_max_size, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveInteger, name: "smallVolumeMaxSize", traits: {"smithy.api#default" => 0}))
     UpdateLaunchConfigurationTemplateInput.add_member(:small_volume_conf, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchTemplateDiskConf, name: "smallVolumeConf"))
     UpdateLaunchConfigurationTemplateInput.add_member(:large_volume_conf, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchTemplateDiskConf, name: "largeVolumeConf"))
+    UpdateLaunchConfigurationTemplateInput.add_member(:enable_parameters_encryption, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "enableParametersEncryption"))
+    UpdateLaunchConfigurationTemplateInput.add_member(:parameters_encryption_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "parametersEncryptionKey"))
     UpdateLaunchConfigurationTemplateInput.type = Types::UpdateLaunchConfigurationTemplateInput
     UpdateLaunchConfigurationTemplateOutput.add_member(:launch_configuration_template_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchConfigurationTemplateID, name: "launchConfigurationTemplateID", traits: {"smithy.api#required" => {}}))
     UpdateLaunchConfigurationTemplateOutput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "arn"))
@@ -1515,7 +2235,60 @@ module Aws::Mgn
     UpdateLaunchConfigurationTemplateOutput.add_member(:small_volume_max_size, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveInteger, name: "smallVolumeMaxSize", traits: {"smithy.api#default" => 0}))
     UpdateLaunchConfigurationTemplateOutput.add_member(:small_volume_conf, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchTemplateDiskConf, name: "smallVolumeConf"))
     UpdateLaunchConfigurationTemplateOutput.add_member(:large_volume_conf, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchTemplateDiskConf, name: "largeVolumeConf"))
+    UpdateLaunchConfigurationTemplateOutput.add_member(:enable_parameters_encryption, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "enableParametersEncryption"))
+    UpdateLaunchConfigurationTemplateOutput.add_member(:parameters_encryption_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "parametersEncryptionKey"))
     UpdateLaunchConfigurationTemplateOutput.type = Types::UpdateLaunchConfigurationTemplateOutput
+    UpdateNetworkMigrationDefinitionOutput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "arn"))
+    UpdateNetworkMigrationDefinitionOutput.add_member(:network_migration_definition_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationDefinitionID, name: "networkMigrationDefinitionID"))
+    UpdateNetworkMigrationDefinitionOutput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationDefinitionName, name: "name"))
+    UpdateNetworkMigrationDefinitionOutput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationDefinitionDescription, name: "description"))
+    UpdateNetworkMigrationDefinitionOutput.add_member(:source_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceConfigurationList, name: "sourceConfigurations"))
+    UpdateNetworkMigrationDefinitionOutput.add_member(:target_s3_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetS3Configuration, name: "targetS3Configuration"))
+    UpdateNetworkMigrationDefinitionOutput.add_member(:target_network, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetNetwork, name: "targetNetwork"))
+    UpdateNetworkMigrationDefinitionOutput.add_member(:target_deployment, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetDeployment, name: "targetDeployment"))
+    UpdateNetworkMigrationDefinitionOutput.add_member(:vpc_provisioning_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcProvisioningStrategy, name: "vpcProvisioningStrategy"))
+    UpdateNetworkMigrationDefinitionOutput.add_member(:cidr_mappings, ::Smithy::Schema::Shapes::MemberShape.new(target: CidrMappingsList, name: "cidrMappings"))
+    UpdateNetworkMigrationDefinitionOutput.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAt"))
+    UpdateNetworkMigrationDefinitionOutput.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "updatedAt"))
+    UpdateNetworkMigrationDefinitionOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "tags"))
+    UpdateNetworkMigrationDefinitionOutput.add_member(:scope_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ScopeTagsMap, name: "scopeTags"))
+    UpdateNetworkMigrationDefinitionOutput.type = Types::UpdateNetworkMigrationDefinitionOutput
+    UpdateNetworkMigrationDefinitionRequest.add_member(:network_migration_definition_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationDefinitionID, name: "networkMigrationDefinitionID", traits: {"smithy.api#required" => {}}))
+    UpdateNetworkMigrationDefinitionRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationDefinitionName, name: "name"))
+    UpdateNetworkMigrationDefinitionRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationDefinitionDescription, name: "description"))
+    UpdateNetworkMigrationDefinitionRequest.add_member(:source_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceConfigurationList, name: "sourceConfigurations"))
+    UpdateNetworkMigrationDefinitionRequest.add_member(:target_s3_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetS3ConfigurationUpdate, name: "targetS3Configuration"))
+    UpdateNetworkMigrationDefinitionRequest.add_member(:target_network, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetNetworkUpdate, name: "targetNetwork"))
+    UpdateNetworkMigrationDefinitionRequest.add_member(:target_deployment, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetDeployment, name: "targetDeployment"))
+    UpdateNetworkMigrationDefinitionRequest.add_member(:vpc_provisioning_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcProvisioningStrategy, name: "vpcProvisioningStrategy"))
+    UpdateNetworkMigrationDefinitionRequest.add_member(:cidr_mappings, ::Smithy::Schema::Shapes::MemberShape.new(target: CidrMappingsList, name: "cidrMappings"))
+    UpdateNetworkMigrationDefinitionRequest.add_member(:scope_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ScopeTagsMap, name: "scopeTags"))
+    UpdateNetworkMigrationDefinitionRequest.type = Types::UpdateNetworkMigrationDefinitionRequest
+    UpdateNetworkMigrationMapperSegmentOutput.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationJobID, name: "jobID"))
+    UpdateNetworkMigrationMapperSegmentOutput.add_member(:network_migration_execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationExecutionID, name: "networkMigrationExecutionID"))
+    UpdateNetworkMigrationMapperSegmentOutput.add_member(:network_migration_definition_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationDefinitionID, name: "networkMigrationDefinitionID"))
+    UpdateNetworkMigrationMapperSegmentOutput.add_member(:segment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentID, name: "segmentID"))
+    UpdateNetworkMigrationMapperSegmentOutput.add_member(:segment_type, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationMapperSegmentType, name: "segmentType"))
+    UpdateNetworkMigrationMapperSegmentOutput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentName, name: "name"))
+    UpdateNetworkMigrationMapperSegmentOutput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentDescription, name: "description"))
+    UpdateNetworkMigrationMapperSegmentOutput.add_member(:logical_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LogicalID, name: "logicalID"))
+    UpdateNetworkMigrationMapperSegmentOutput.add_member(:checksum, ::Smithy::Schema::Shapes::MemberShape.new(target: Checksum, name: "checksum"))
+    UpdateNetworkMigrationMapperSegmentOutput.add_member(:output_s3_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Configuration, name: "outputS3Configuration"))
+    UpdateNetworkMigrationMapperSegmentOutput.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAt"))
+    UpdateNetworkMigrationMapperSegmentOutput.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "updatedAt"))
+    UpdateNetworkMigrationMapperSegmentOutput.add_member(:scope_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ScopeTagsMap, name: "scopeTags"))
+    UpdateNetworkMigrationMapperSegmentOutput.add_member(:target_account, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountID, name: "targetAccount"))
+    UpdateNetworkMigrationMapperSegmentOutput.add_member(:referenced_segments, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferencedSegmentsList, name: "referencedSegments"))
+    UpdateNetworkMigrationMapperSegmentOutput.type = Types::UpdateNetworkMigrationMapperSegmentOutput
+    UpdateNetworkMigrationMapperSegmentRequest.add_member(:network_migration_definition_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationDefinitionID, name: "networkMigrationDefinitionID", traits: {"smithy.api#required" => {}}))
+    UpdateNetworkMigrationMapperSegmentRequest.add_member(:network_migration_execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMigrationExecutionID, name: "networkMigrationExecutionID", traits: {"smithy.api#required" => {}}))
+    UpdateNetworkMigrationMapperSegmentRequest.add_member(:segment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentID, name: "segmentID", traits: {"smithy.api#required" => {}}))
+    UpdateNetworkMigrationMapperSegmentRequest.add_member(:scope_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ScopeTagsMap, name: "scopeTags"))
+    UpdateNetworkMigrationMapperSegmentRequest.type = Types::UpdateNetworkMigrationMapperSegmentRequest
+    UpdateOperation.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentConstructName, name: "name"))
+    UpdateOperation.add_member(:excluded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "excluded"))
+    UpdateOperation.add_member(:properties, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstructProperties, name: "properties"))
+    UpdateOperation.type = Types::UpdateOperation
     UpdateReplicationConfigurationInput.add_member(:source_server_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceServerID, name: "sourceServerID", traits: {"smithy.api#required" => {}}))
     UpdateReplicationConfigurationInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SmallBoundedString, name: "name"))
     UpdateReplicationConfigurationInput.add_member(:staging_area_subnet_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetID, name: "stagingAreaSubnetId"))
@@ -1533,6 +2306,9 @@ module Aws::Mgn
     UpdateReplicationConfigurationInput.add_member(:staging_area_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "stagingAreaTags"))
     UpdateReplicationConfigurationInput.add_member(:use_fips_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "useFipsEndpoint"))
     UpdateReplicationConfigurationInput.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountID, name: "accountID"))
+    UpdateReplicationConfigurationInput.add_member(:internet_protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: InternetProtocol, name: "internetProtocol"))
+    UpdateReplicationConfigurationInput.add_member(:store_snapshot_on_local_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "storeSnapshotOnLocalZone"))
+    UpdateReplicationConfigurationInput.add_member(:storage_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageConfiguration, name: "storageConfiguration"))
     UpdateReplicationConfigurationInput.type = Types::UpdateReplicationConfigurationInput
     UpdateReplicationConfigurationOutput.add_member(:source_server_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceServerID, name: "sourceServerID"))
     UpdateReplicationConfigurationOutput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SmallBoundedString, name: "name"))
@@ -1550,6 +2326,9 @@ module Aws::Mgn
     UpdateReplicationConfigurationOutput.add_member(:create_public_ip, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "createPublicIP"))
     UpdateReplicationConfigurationOutput.add_member(:staging_area_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "stagingAreaTags"))
     UpdateReplicationConfigurationOutput.add_member(:use_fips_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "useFipsEndpoint"))
+    UpdateReplicationConfigurationOutput.add_member(:internet_protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: InternetProtocol, name: "internetProtocol"))
+    UpdateReplicationConfigurationOutput.add_member(:store_snapshot_on_local_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "storeSnapshotOnLocalZone"))
+    UpdateReplicationConfigurationOutput.add_member(:storage_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageConfiguration, name: "storageConfiguration"))
     UpdateReplicationConfigurationOutput.type = Types::UpdateReplicationConfigurationOutput
     UpdateReplicationConfigurationTemplateInput.add_member(:replication_configuration_template_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationConfigurationTemplateID, name: "replicationConfigurationTemplateID", traits: {"smithy.api#required" => {}}))
     UpdateReplicationConfigurationTemplateInput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "arn"))
@@ -1566,6 +2345,9 @@ module Aws::Mgn
     UpdateReplicationConfigurationTemplateInput.add_member(:create_public_ip, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "createPublicIP"))
     UpdateReplicationConfigurationTemplateInput.add_member(:staging_area_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "stagingAreaTags"))
     UpdateReplicationConfigurationTemplateInput.add_member(:use_fips_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "useFipsEndpoint"))
+    UpdateReplicationConfigurationTemplateInput.add_member(:internet_protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: InternetProtocol, name: "internetProtocol"))
+    UpdateReplicationConfigurationTemplateInput.add_member(:store_snapshot_on_local_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "storeSnapshotOnLocalZone"))
+    UpdateReplicationConfigurationTemplateInput.add_member(:storage_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageConfiguration, name: "storageConfiguration"))
     UpdateReplicationConfigurationTemplateInput.type = Types::UpdateReplicationConfigurationTemplateInput
     UpdateReplicationConfigurationTemplateOutput.add_member(:replication_configuration_template_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationConfigurationTemplateID, name: "replicationConfigurationTemplateID", traits: {"smithy.api#required" => {}}))
     UpdateReplicationConfigurationTemplateOutput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "arn"))
@@ -1583,6 +2365,9 @@ module Aws::Mgn
     UpdateReplicationConfigurationTemplateOutput.add_member(:staging_area_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "stagingAreaTags"))
     UpdateReplicationConfigurationTemplateOutput.add_member(:use_fips_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "useFipsEndpoint"))
     UpdateReplicationConfigurationTemplateOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "tags"))
+    UpdateReplicationConfigurationTemplateOutput.add_member(:internet_protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: InternetProtocol, name: "internetProtocol"))
+    UpdateReplicationConfigurationTemplateOutput.add_member(:store_snapshot_on_local_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "storeSnapshotOnLocalZone"))
+    UpdateReplicationConfigurationTemplateOutput.add_member(:storage_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageConfiguration, name: "storageConfiguration"))
     UpdateReplicationConfigurationTemplateOutput.type = Types::UpdateReplicationConfigurationTemplateOutput
     UpdateSourceServerOutput.add_member(:source_server_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceServerID, name: "sourceServerID"))
     UpdateSourceServerOutput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "arn"))
@@ -1595,7 +2380,7 @@ module Aws::Mgn
     UpdateSourceServerOutput.add_member(:replication_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationType, name: "replicationType"))
     UpdateSourceServerOutput.add_member(:vcenter_client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VcenterClientID, name: "vcenterClientID"))
     UpdateSourceServerOutput.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationID, name: "applicationID"))
-    UpdateSourceServerOutput.add_member(:user_provided_id, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedString, name: "userProvidedID"))
+    UpdateSourceServerOutput.add_member(:user_provided_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserProvidedId, name: "userProvidedID"))
     UpdateSourceServerOutput.add_member(:fqdn_for_action_framework, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedString, name: "fqdnForActionFramework"))
     UpdateSourceServerOutput.add_member(:connector_action, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceServerConnectorAction, name: "connectorAction"))
     UpdateSourceServerOutput.type = Types::UpdateSourceServerOutput
@@ -1614,13 +2399,16 @@ module Aws::Mgn
     UpdateSourceServerReplicationTypeOutput.add_member(:replication_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationType, name: "replicationType"))
     UpdateSourceServerReplicationTypeOutput.add_member(:vcenter_client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VcenterClientID, name: "vcenterClientID"))
     UpdateSourceServerReplicationTypeOutput.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationID, name: "applicationID"))
-    UpdateSourceServerReplicationTypeOutput.add_member(:user_provided_id, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedString, name: "userProvidedID"))
+    UpdateSourceServerReplicationTypeOutput.add_member(:user_provided_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserProvidedId, name: "userProvidedID"))
     UpdateSourceServerReplicationTypeOutput.add_member(:fqdn_for_action_framework, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedString, name: "fqdnForActionFramework"))
     UpdateSourceServerReplicationTypeOutput.add_member(:connector_action, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceServerConnectorAction, name: "connectorAction"))
     UpdateSourceServerReplicationTypeOutput.type = Types::UpdateSourceServerReplicationTypeOutput
     UpdateSourceServerRequest.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountID, name: "accountID"))
     UpdateSourceServerRequest.add_member(:source_server_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceServerID, name: "sourceServerID", traits: {"smithy.api#required" => {}}))
     UpdateSourceServerRequest.add_member(:connector_action, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceServerConnectorAction, name: "connectorAction"))
+    UpdateSourceServerRequest.add_member(:user_provided_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserProvidedId, name: "userProvidedID"))
+    UpdateSourceServerRequest.add_member(:fqdn_for_action_framework, ::Smithy::Schema::Shapes::MemberShape.new(target: FqdnForActionFramework, name: "fqdnForActionFramework"))
+    UpdateSourceServerRequest.add_member(:platform, ::Smithy::Schema::Shapes::MemberShape.new(target: OperatingSystemString, name: "platform"))
     UpdateSourceServerRequest.type = Types::UpdateSourceServerRequest
     UpdateWaveInput.add_member(:wave_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WaveID, name: "waveID", traits: {"smithy.api#required" => {}}))
     UpdateWaveInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: WaveName, name: "name"))
@@ -1656,6 +2444,7 @@ module Aws::Mgn
     VcenterClient.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "tags"))
     VcenterClient.type = Types::VcenterClient
     VcenterClientList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VcenterClient, name: "member"))
+    VpcIDsFilter.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcID, name: "member"))
     Wave.add_member(:wave_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WaveID, name: "waveID"))
     Wave.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "arn"))
     Wave.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: WaveName, name: "name"))
@@ -1674,12 +2463,13 @@ module Aws::Mgn
     WaveAggregatedStatus.type = Types::WaveAggregatedStatus
     WaveIDsFilter.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WaveID, name: "member"))
     WavesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Wave, name: "member"))
+    ReferencedSegmentsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentID, name: "member"))
 
     ApplicationMigrationService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.mgn#ApplicationMigrationService"
       service.name = "ApplicationMigrationService"
       service.version = "2020-02-26"
-      service.traits = {"aws.api#service" => {"sdkId" => "mgn", "arnNamespace" => "mgn", "awsProductName" => "mgn", "cloudTrailEventSource" => "mgn.amazonaws.com"}, "aws.auth#sigv4" => {"name" => "mgn"}, "aws.protocols#restJson1" => {}, "smithy.api#cors" => {"additionalAllowedHeaders" => ["content-type", "x-amz-content-sha256", "x-amz-user-agent", "x-amzn-trace-id"], "additionalExposedHeaders" => ["x-amzn-errortype", "x-amzn-requestid", "x-amzn-trace-id", "x-amz-apigw-id"]}, "smithy.api#title" => "Application Migration Service"}
+      service.traits = {"aws.api#service" => {"sdkId" => "mgn", "arnNamespace" => "mgn", "awsProductName" => "mgn", "cloudTrailEventSource" => "mgn.amazonaws.com"}, "aws.auth#sigv4" => {"name" => "mgn"}, "aws.protocols#restJson1" => {}, "smithy.api#cors" => {"additionalAllowedHeaders" => ["content-type", "x-amz-content-sha256", "x-amz-user-agent", "x-amzn-trace-id"], "additionalExposedHeaders" => ["x-amzn-errortype", "x-amzn-requestid", "x-amzn-trace-id", "x-amz-apigw-id"]}, "smithy.api#title" => "Application Migration Service", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://mgn-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://mgn-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://mgn.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://mgn.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
       service.add_operation(:archive_application, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mgn#ArchiveApplication"
         operation.name = "ArchiveApplication"
@@ -1764,6 +2554,15 @@ module Aws::Mgn
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/CreateLaunchConfigurationTemplate", "method" => "POST", "code" => 201}}
       end)
+      service.add_operation(:create_network_migration_definition, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.mgn#CreateNetworkMigrationDefinition"
+        operation.name = "CreateNetworkMigrationDefinition"
+        operation.input = CreateNetworkMigrationDefinitionRequest
+        operation.output = CreateNetworkMigrationDefinitionOutput
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"uri" => "/network-migration/CreateNetworkMigrationDefinition", "method" => "POST", "code" => 201}, "smithy.api#idempotent" => {}}
+      end)
       service.add_operation(:create_replication_configuration_template, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mgn#CreateReplicationConfigurationTemplate"
         operation.name = "CreateReplicationConfigurationTemplate"
@@ -1823,6 +2622,16 @@ module Aws::Mgn
         operation.errors << ResourceNotFoundException
         operation.errors << UninitializedAccountException
         operation.traits = {"smithy.api#http" => {"uri" => "/DeleteLaunchConfigurationTemplate", "method" => "POST", "code" => 204}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:delete_network_migration_definition, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.mgn#DeleteNetworkMigrationDefinition"
+        operation.name = "DeleteNetworkMigrationDefinition"
+        operation.input = DeleteNetworkMigrationDefinitionRequest
+        operation.output = DeleteNetworkMigrationDefinitionResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << ResourceNotFoundException
+        operation.traits = {"smithy.api#http" => {"uri" => "/network-migration/DeleteNetworkMigrationDefinition", "method" => "POST", "code" => 204}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_replication_configuration_template, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mgn#DeleteReplicationConfigurationTemplate"
@@ -1977,6 +2786,25 @@ module Aws::Mgn
         operation.errors << UninitializedAccountException
         operation.traits = {"smithy.api#http" => {"uri" => "/GetLaunchConfiguration", "method" => "POST", "code" => 200}, "smithy.api#readonly" => {}}
       end)
+      service.add_operation(:get_network_migration_definition, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.mgn#GetNetworkMigrationDefinition"
+        operation.name = "GetNetworkMigrationDefinition"
+        operation.input = GetNetworkMigrationDefinitionRequest
+        operation.output = GetNetworkMigrationDefinitionOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ResourceNotFoundException
+        operation.traits = {"smithy.api#http" => {"uri" => "/network-migration/GetNetworkMigrationDefinition", "method" => "POST", "code" => 200}, "smithy.api#readonly" => {}}
+      end)
+      service.add_operation(:get_network_migration_mapper_segment_construct, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.mgn#GetNetworkMigrationMapperSegmentConstruct"
+        operation.name = "GetNetworkMigrationMapperSegmentConstruct"
+        operation.input = GetNetworkMigrationMapperSegmentConstructRequest
+        operation.output = GetNetworkMigrationMapperSegmentConstructResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"uri" => "/network-migration/GetNetworkMigrationMapperSegmentConstruct", "method" => "POST", "code" => 200}, "smithy.api#readonly" => {}}
+      end)
       service.add_operation(:get_replication_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mgn#GetReplicationConfiguration"
         operation.name = "GetReplicationConfiguration"
@@ -2043,6 +2871,15 @@ module Aws::Mgn
         operation.traits = {"smithy.api#http" => {"uri" => "/ListImportErrors", "method" => "POST", "code" => 200}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListImportErrors.new
       end)
+      service.add_operation(:list_import_file_enrichments, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.mgn#ListImportFileEnrichments"
+        operation.name = "ListImportFileEnrichments"
+        operation.input = ListImportFileEnrichmentsRequest
+        operation.output = ListImportFileEnrichmentsResponse
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"uri" => "/network-migration/ListImportFileEnrichments", "method" => "POST", "code" => 200}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListImportFileEnrichments.new
+      end)
       service.add_operation(:list_imports, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mgn#ListImports"
         operation.name = "ListImports"
@@ -2062,6 +2899,145 @@ module Aws::Mgn
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/ListManagedAccounts", "method" => "POST", "code" => 200}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListManagedAccounts.new
+      end)
+      service.add_operation(:list_network_migration_analyses, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.mgn#ListNetworkMigrationAnalyses"
+        operation.name = "ListNetworkMigrationAnalyses"
+        operation.input = ListNetworkMigrationAnalysesRequest
+        operation.output = ListNetworkMigrationAnalysesResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"uri" => "/network-migration/ListNetworkMigrationAnalyses", "method" => "POST", "code" => 200}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListNetworkMigrationAnalyses.new
+      end)
+      service.add_operation(:list_network_migration_analysis_results, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.mgn#ListNetworkMigrationAnalysisResults"
+        operation.name = "ListNetworkMigrationAnalysisResults"
+        operation.input = ListNetworkMigrationAnalysisResultsRequest
+        operation.output = ListNetworkMigrationAnalysisResultsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"uri" => "/network-migration/ListNetworkMigrationAnalysisResults", "method" => "POST", "code" => 200}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListNetworkMigrationAnalysisResults.new
+      end)
+      service.add_operation(:list_network_migration_code_generation_segments, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.mgn#ListNetworkMigrationCodeGenerationSegments"
+        operation.name = "ListNetworkMigrationCodeGenerationSegments"
+        operation.input = ListNetworkMigrationCodeGenerationSegmentsRequest
+        operation.output = ListNetworkMigrationCodeGenerationSegmentsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"uri" => "/network-migration/ListNetworkMigrationCodeGenerationSegments", "method" => "POST", "code" => 200}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListNetworkMigrationCodeGenerationSegments.new
+      end)
+      service.add_operation(:list_network_migration_code_generations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.mgn#ListNetworkMigrationCodeGenerations"
+        operation.name = "ListNetworkMigrationCodeGenerations"
+        operation.input = ListNetworkMigrationCodeGenerationsRequest
+        operation.output = ListNetworkMigrationCodeGenerationsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"uri" => "/network-migration/ListNetworkMigrationCodeGenerations", "method" => "POST", "code" => 200}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListNetworkMigrationCodeGenerations.new
+      end)
+      service.add_operation(:list_network_migration_definitions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.mgn#ListNetworkMigrationDefinitions"
+        operation.name = "ListNetworkMigrationDefinitions"
+        operation.input = ListNetworkMigrationDefinitionsRequest
+        operation.output = ListNetworkMigrationDefinitionsResponse
+        operation.errors << AccessDeniedException
+        operation.traits = {"smithy.api#http" => {"uri" => "/network-migration/ListNetworkMigrationDefinitions", "method" => "POST", "code" => 200}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListNetworkMigrationDefinitions.new
+      end)
+      service.add_operation(:list_network_migration_deployed_stacks, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.mgn#ListNetworkMigrationDeployedStacks"
+        operation.name = "ListNetworkMigrationDeployedStacks"
+        operation.input = ListNetworkMigrationDeployedStacksRequest
+        operation.output = ListNetworkMigrationDeployedStacksResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"uri" => "/network-migration/ListNetworkMigrationDeployedStacks", "method" => "POST", "code" => 200}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListNetworkMigrationDeployedStacks.new
+      end)
+      service.add_operation(:list_network_migration_deployments, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.mgn#ListNetworkMigrationDeployments"
+        operation.name = "ListNetworkMigrationDeployments"
+        operation.input = ListNetworkMigrationDeploymentsRequest
+        operation.output = ListNetworkMigrationDeploymentsOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"uri" => "/network-migration/ListNetworkMigrationDeployments", "method" => "POST", "code" => 200}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListNetworkMigrationDeployments.new
+      end)
+      service.add_operation(:list_network_migration_executions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.mgn#ListNetworkMigrationExecutions"
+        operation.name = "ListNetworkMigrationExecutions"
+        operation.input = ListNetworkMigrationExecutionsRequest
+        operation.output = ListNetworkMigrationExecutionsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ResourceNotFoundException
+        operation.traits = {"smithy.api#http" => {"uri" => "/network-migration/ListNetworkMigrationExecutions", "method" => "POST", "code" => 200}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListNetworkMigrationExecutions.new
+      end)
+      service.add_operation(:list_network_migration_mapper_segment_constructs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.mgn#ListNetworkMigrationMapperSegmentConstructs"
+        operation.name = "ListNetworkMigrationMapperSegmentConstructs"
+        operation.input = ListNetworkMigrationMapperSegmentConstructsRequest
+        operation.output = ListNetworkMigrationMapperSegmentConstructsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"uri" => "/network-migration/ListNetworkMigrationMapperSegmentConstructs", "method" => "POST", "code" => 200}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListNetworkMigrationMapperSegmentConstructs.new
+      end)
+      service.add_operation(:list_network_migration_mapper_segments, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.mgn#ListNetworkMigrationMapperSegments"
+        operation.name = "ListNetworkMigrationMapperSegments"
+        operation.input = ListNetworkMigrationMapperSegmentsRequest
+        operation.output = ListNetworkMigrationMapperSegmentsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"uri" => "/network-migration/ListNetworkMigrationMapperSegments", "method" => "POST", "code" => 200}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListNetworkMigrationMapperSegments.new
+      end)
+      service.add_operation(:list_network_migration_mapping_updates, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.mgn#ListNetworkMigrationMappingUpdates"
+        operation.name = "ListNetworkMigrationMappingUpdates"
+        operation.input = ListNetworkMigrationMappingUpdatesRequest
+        operation.output = ListNetworkMigrationMappingUpdatesResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"uri" => "/network-migration/ListNetworkMigrationMappingUpdates", "method" => "POST", "code" => 200}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListNetworkMigrationMappingUpdates.new
+      end)
+      service.add_operation(:list_network_migration_mappings, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.mgn#ListNetworkMigrationMappings"
+        operation.name = "ListNetworkMigrationMappings"
+        operation.input = ListNetworkMigrationMappingsRequest
+        operation.output = ListNetworkMigrationMappingsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"uri" => "/network-migration/ListNetworkMigrationMappings", "method" => "POST", "code" => 200}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListNetworkMigrationMappings.new
       end)
       service.add_operation(:list_source_server_actions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mgn#ListSourceServerActions"
@@ -2222,6 +3198,83 @@ module Aws::Mgn
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/StartImport", "method" => "POST", "code" => 202}}
       end)
+      service.add_operation(:start_import_file_enrichment, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.mgn#StartImportFileEnrichment"
+        operation.name = "StartImportFileEnrichment"
+        operation.input = StartImportFileEnrichmentRequest
+        operation.output = StartImportFileEnrichmentResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"uri" => "/network-migration/StartImportFileEnrichment", "method" => "POST", "code" => 202}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:start_network_migration_analysis, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.mgn#StartNetworkMigrationAnalysis"
+        operation.name = "StartNetworkMigrationAnalysis"
+        operation.input = StartNetworkMigrationAnalysisRequest
+        operation.output = StartNetworkMigrationAnalysisResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"uri" => "/network-migration/StartNetworkMigrationAnalysis", "method" => "POST", "code" => 202}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:start_network_migration_code_generation, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.mgn#StartNetworkMigrationCodeGeneration"
+        operation.name = "StartNetworkMigrationCodeGeneration"
+        operation.input = StartNetworkMigrationCodeGenerationRequest
+        operation.output = StartNetworkMigrationCodeGenerationResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"uri" => "/network-migration/StartNetworkMigrationCodeGeneration", "method" => "POST", "code" => 202}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:start_network_migration_deployment, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.mgn#StartNetworkMigrationDeployment"
+        operation.name = "StartNetworkMigrationDeployment"
+        operation.input = StartNetworkMigrationDeploymentRequest
+        operation.output = StartNetworkMigrationDeploymentOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"uri" => "/network-migration/StartNetworkMigrationDeployment", "method" => "POST", "code" => 202}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:start_network_migration_mapping, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.mgn#StartNetworkMigrationMapping"
+        operation.name = "StartNetworkMigrationMapping"
+        operation.input = StartNetworkMigrationMappingRequest
+        operation.output = StartNetworkMigrationMappingResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"uri" => "/network-migration/StartNetworkMigrationMapping", "method" => "POST", "code" => 202}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:start_network_migration_mapping_update, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.mgn#StartNetworkMigrationMappingUpdate"
+        operation.name = "StartNetworkMigrationMappingUpdate"
+        operation.input = StartNetworkMigrationMappingUpdateRequest
+        operation.output = StartNetworkMigrationMappingUpdateResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"uri" => "/network-migration/StartNetworkMigrationMappingUpdate", "method" => "POST", "code" => 202}, "smithy.api#idempotent" => {}}
+      end)
       service.add_operation(:start_replication, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mgn#StartReplication"
         operation.name = "StartReplication"
@@ -2351,6 +3404,26 @@ module Aws::Mgn
         operation.errors << UninitializedAccountException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/UpdateLaunchConfigurationTemplate", "method" => "POST", "code" => 200}}
+      end)
+      service.add_operation(:update_network_migration_definition, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.mgn#UpdateNetworkMigrationDefinition"
+        operation.name = "UpdateNetworkMigrationDefinition"
+        operation.input = UpdateNetworkMigrationDefinitionRequest
+        operation.output = UpdateNetworkMigrationDefinitionOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"uri" => "/network-migration/UpdateNetworkMigrationDefinition", "method" => "POST", "code" => 200}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:update_network_migration_mapper_segment, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.mgn#UpdateNetworkMigrationMapperSegment"
+        operation.name = "UpdateNetworkMigrationMapperSegment"
+        operation.input = UpdateNetworkMigrationMapperSegmentRequest
+        operation.output = UpdateNetworkMigrationMapperSegmentOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"uri" => "/network-migration/UpdateNetworkMigrationMapperSegment", "method" => "POST", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:update_replication_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mgn#UpdateReplicationConfiguration"

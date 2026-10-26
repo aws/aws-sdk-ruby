@@ -6,6 +6,9 @@ module Aws::SocialMessaging
     class AccessDeniedException < Smithy::Client::ServiceError
       def message: () -> String?
     end
+    class ConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
     class DependencyException < Smithy::Client::ServiceError
       def message: () -> String?
       def retryable?: () -> true

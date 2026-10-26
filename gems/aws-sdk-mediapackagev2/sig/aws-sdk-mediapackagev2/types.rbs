@@ -93,6 +93,9 @@ module Aws::MediaPackageV2
         ?modified_at: Time,
         ?description: String,
         ?input_type: String,
+        ?output_locking_mode: String,
+        ?multiview_configuration: Types::MultiviewConfiguration,
+        ?attached_multiview_channels: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -103,6 +106,9 @@ module Aws::MediaPackageV2
       attr_accessor modified_at: Time?
       attr_accessor description: String?
       attr_accessor input_type: String?
+      attr_accessor output_locking_mode: String?
+      attr_accessor multiview_configuration: Types::MultiviewConfiguration?
+      attr_accessor attached_multiview_channels: Array[String]?
     end
 
     module CmafEncryptionMethod
@@ -134,6 +140,23 @@ module Aws::MediaPackageV2
       TS: String
       CMAF: String
       ISM: String
+    end
+
+    class ContentKeyPeriodConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content_key_period_timing: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content_key_period_timing: String?
+    end
+
+    module ContentKeyPeriodTiming
+      INDEX_ONLY: String
+      START_END_ONLY: String
+      INDEX_WITH_START_END: String
     end
 
     class CreateChannelGroupRequest
@@ -189,6 +212,8 @@ module Aws::MediaPackageV2
         ?description: String,
         ?input_switch_configuration: Types::InputSwitchConfiguration,
         ?output_header_configuration: Types::OutputHeaderConfiguration,
+        ?multiview_configuration: Types::MultiviewConfiguration,
+        ?output_locking_mode: String,
         ?tags: Hash[String, String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -200,6 +225,8 @@ module Aws::MediaPackageV2
       attr_accessor description: String?
       attr_accessor input_switch_configuration: Types::InputSwitchConfiguration?
       attr_accessor output_header_configuration: Types::OutputHeaderConfiguration?
+      attr_accessor multiview_configuration: Types::MultiviewConfiguration?
+      attr_accessor output_locking_mode: String?
       attr_accessor tags: Hash[String, String]?
     end
 
@@ -207,6 +234,8 @@ module Aws::MediaPackageV2
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?multiview_configuration: Types::MultiviewConfiguration,
+        ?attached_multiview_channels: Array[String],
         ?arn: String,
         ?channel_name: String,
         ?channel_group_name: String,
@@ -219,9 +248,12 @@ module Aws::MediaPackageV2
         ?tags: Hash[String, String],
         ?input_switch_configuration: Types::InputSwitchConfiguration,
         ?output_header_configuration: Types::OutputHeaderConfiguration,
+        ?output_locking_mode: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor multiview_configuration: Types::MultiviewConfiguration?
+      attr_accessor attached_multiview_channels: Array[String]?
       attr_accessor arn: String?
       attr_accessor channel_name: String?
       attr_accessor channel_group_name: String?
@@ -234,6 +266,7 @@ module Aws::MediaPackageV2
       attr_accessor tags: Hash[String, String]?
       attr_accessor input_switch_configuration: Types::InputSwitchConfiguration?
       attr_accessor output_header_configuration: Types::OutputHeaderConfiguration?
+      attr_accessor output_locking_mode: String?
     end
 
     class CreateDashManifestConfiguration
@@ -256,7 +289,10 @@ module Aws::MediaPackageV2
         ?program_information: Types::DashProgramInformation,
         ?dvb_settings: Types::DashDvbSettings,
         ?compactness: String,
+        ?audio_timeline_pattern: String,
         ?subtitle_configuration: Types::DashSubtitleConfiguration,
+        ?uri_path_type: String,
+        ?availability_start_time_configuration: Types::DashAvailabilityStartTimeConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -276,7 +312,10 @@ module Aws::MediaPackageV2
       attr_accessor program_information: Types::DashProgramInformation?
       attr_accessor dvb_settings: Types::DashDvbSettings?
       attr_accessor compactness: String?
+      attr_accessor audio_timeline_pattern: String?
       attr_accessor subtitle_configuration: Types::DashSubtitleConfiguration?
+      attr_accessor uri_path_type: String?
+      attr_accessor availability_start_time_configuration: Types::DashAvailabilityStartTimeConfiguration?
     end
 
     class CreateHarvestJobRequest
@@ -359,6 +398,7 @@ module Aws::MediaPackageV2
         ?program_date_time_interval_seconds: Integer,
         ?filter_configuration: Types::FilterConfiguration,
         ?url_encode_child_manifest: bool,
+        ?uri_path_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -370,6 +410,7 @@ module Aws::MediaPackageV2
       attr_accessor program_date_time_interval_seconds: Integer?
       attr_accessor filter_configuration: Types::FilterConfiguration?
       attr_accessor url_encode_child_manifest: bool?
+      attr_accessor uri_path_type: String?
     end
 
     class CreateLowLatencyHlsManifestConfiguration
@@ -384,6 +425,7 @@ module Aws::MediaPackageV2
         ?program_date_time_interval_seconds: Integer,
         ?filter_configuration: Types::FilterConfiguration,
         ?url_encode_child_manifest: bool,
+        ?uri_path_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -395,6 +437,7 @@ module Aws::MediaPackageV2
       attr_accessor program_date_time_interval_seconds: Integer?
       attr_accessor filter_configuration: Types::FilterConfiguration?
       attr_accessor url_encode_child_manifest: bool?
+      attr_accessor uri_path_type: String?
     end
 
     class CreateMssManifestConfiguration
@@ -431,6 +474,8 @@ module Aws::MediaPackageV2
         ?dash_manifests: Array[Types::CreateDashManifestConfiguration],
         ?mss_manifests: Array[Types::CreateMssManifestConfiguration],
         ?force_endpoint_error_configuration: Types::ForceEndpointErrorConfiguration,
+        ?uri_separator: String,
+        ?stream_name_output_mode: String,
         ?tags: Hash[String, String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -448,6 +493,8 @@ module Aws::MediaPackageV2
       attr_accessor dash_manifests: Array[Types::CreateDashManifestConfiguration]?
       attr_accessor mss_manifests: Array[Types::CreateMssManifestConfiguration]?
       attr_accessor force_endpoint_error_configuration: Types::ForceEndpointErrorConfiguration?
+      attr_accessor uri_separator: String?
+      attr_accessor stream_name_output_mode: String?
       attr_accessor tags: Hash[String, String]?
     end
 
@@ -470,6 +517,8 @@ module Aws::MediaPackageV2
         ?dash_manifests: Array[Types::GetDashManifestConfiguration],
         ?mss_manifests: Array[Types::GetMssManifestConfiguration],
         ?force_endpoint_error_configuration: Types::ForceEndpointErrorConfiguration,
+        ?uri_separator: String,
+        ?stream_name_output_mode: String,
         ?e_tag: String,
         ?tags: Hash[String, String],
       ) -> void
@@ -490,8 +539,39 @@ module Aws::MediaPackageV2
       attr_accessor dash_manifests: Array[Types::GetDashManifestConfiguration]?
       attr_accessor mss_manifests: Array[Types::GetMssManifestConfiguration]?
       attr_accessor force_endpoint_error_configuration: Types::ForceEndpointErrorConfiguration?
+      attr_accessor uri_separator: String?
+      attr_accessor stream_name_output_mode: String?
       attr_accessor e_tag: String?
       attr_accessor tags: Hash[String, String]?
+    end
+
+    module CustomAdType
+      PROGRAM: String
+      CHAPTER: String
+      UNSCHEDULED_EVENT: String
+      ALTERNATE_CONTENT_OPPORTUNITY: String
+      NETWORK: String
+    end
+
+    module DashAudioTimelinePattern
+      NONE: String
+      PATTERNED: String
+    end
+
+    class DashAvailabilityStartTimeConfiguration
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?fixed_availability_start_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fixed_availability_start_time: Time?
+
+      class FixedAvailabilityStartTime < DashAvailabilityStartTimeConfiguration
+      end
+      class Unknown < DashAvailabilityStartTimeConfiguration
+      end
     end
 
     class DashBaseUrl
@@ -834,18 +914,22 @@ module Aws::MediaPackageV2
 
       def initialize: (
         ?manifest_filter: String,
+        ?drm_settings: String,
         ?start: Time,
         ?end: Time,
         ?time_delay_seconds: Integer,
         ?clip_start_time: Time,
+        ?multiview: Types::MultiviewFilterConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor manifest_filter: String?
+      attr_accessor drm_settings: String?
       attr_accessor start: Time?
       attr_accessor end: Time?
       attr_accessor time_delay_seconds: Integer?
       attr_accessor clip_start_time: Time?
+      attr_accessor multiview: Types::MultiviewFilterConfiguration?
     end
 
     class ForceEndpointErrorConfiguration
@@ -940,6 +1024,8 @@ module Aws::MediaPackageV2
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?multiview_configuration: Types::MultiviewConfiguration,
+        ?attached_multiview_channels: Array[String],
         ?arn: String,
         ?channel_name: String,
         ?channel_group_name: String,
@@ -953,9 +1039,12 @@ module Aws::MediaPackageV2
         ?tags: Hash[String, String],
         ?input_switch_configuration: Types::InputSwitchConfiguration,
         ?output_header_configuration: Types::OutputHeaderConfiguration,
+        ?output_locking_mode: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor multiview_configuration: Types::MultiviewConfiguration?
+      attr_accessor attached_multiview_channels: Array[String]?
       attr_accessor arn: String?
       attr_accessor channel_name: String?
       attr_accessor channel_group_name: String?
@@ -969,6 +1058,7 @@ module Aws::MediaPackageV2
       attr_accessor tags: Hash[String, String]?
       attr_accessor input_switch_configuration: Types::InputSwitchConfiguration?
       attr_accessor output_header_configuration: Types::OutputHeaderConfiguration?
+      attr_accessor output_locking_mode: String?
     end
 
     class GetDashManifestConfiguration
@@ -992,7 +1082,10 @@ module Aws::MediaPackageV2
         ?program_information: Types::DashProgramInformation,
         ?dvb_settings: Types::DashDvbSettings,
         ?compactness: String,
+        ?audio_timeline_pattern: String,
         ?subtitle_configuration: Types::DashSubtitleConfiguration,
+        ?uri_path_type: String,
+        ?availability_start_time_configuration: Types::DashAvailabilityStartTimeConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1013,7 +1106,10 @@ module Aws::MediaPackageV2
       attr_accessor program_information: Types::DashProgramInformation?
       attr_accessor dvb_settings: Types::DashDvbSettings?
       attr_accessor compactness: String?
+      attr_accessor audio_timeline_pattern: String?
       attr_accessor subtitle_configuration: Types::DashSubtitleConfiguration?
+      attr_accessor uri_path_type: String?
+      attr_accessor availability_start_time_configuration: Types::DashAvailabilityStartTimeConfiguration?
     end
 
     class GetHarvestJobRequest
@@ -1085,6 +1181,7 @@ module Aws::MediaPackageV2
         ?filter_configuration: Types::FilterConfiguration,
         ?start_tag: Types::StartTag,
         ?url_encode_child_manifest: bool,
+        ?uri_path_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1097,6 +1194,7 @@ module Aws::MediaPackageV2
       attr_accessor filter_configuration: Types::FilterConfiguration?
       attr_accessor start_tag: Types::StartTag?
       attr_accessor url_encode_child_manifest: bool?
+      attr_accessor uri_path_type: String?
     end
 
     class GetLowLatencyHlsManifestConfiguration
@@ -1112,6 +1210,7 @@ module Aws::MediaPackageV2
         ?filter_configuration: Types::FilterConfiguration,
         ?start_tag: Types::StartTag,
         ?url_encode_child_manifest: bool,
+        ?uri_path_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1124,6 +1223,7 @@ module Aws::MediaPackageV2
       attr_accessor filter_configuration: Types::FilterConfiguration?
       attr_accessor start_tag: Types::StartTag?
       attr_accessor url_encode_child_manifest: bool?
+      attr_accessor uri_path_type: String?
     end
 
     class GetMssManifestConfiguration
@@ -1214,6 +1314,8 @@ module Aws::MediaPackageV2
         ?dash_manifests: Array[Types::GetDashManifestConfiguration],
         ?mss_manifests: Array[Types::GetMssManifestConfiguration],
         ?force_endpoint_error_configuration: Types::ForceEndpointErrorConfiguration,
+        ?uri_separator: String,
+        ?stream_name_output_mode: String,
         ?e_tag: String,
         ?tags: Hash[String, String],
       ) -> void
@@ -1235,6 +1337,8 @@ module Aws::MediaPackageV2
       attr_accessor dash_manifests: Array[Types::GetDashManifestConfiguration]?
       attr_accessor mss_manifests: Array[Types::GetMssManifestConfiguration]?
       attr_accessor force_endpoint_error_configuration: Types::ForceEndpointErrorConfiguration?
+      attr_accessor uri_separator: String?
+      attr_accessor stream_name_output_mode: String?
       attr_accessor e_tag: String?
       attr_accessor tags: Hash[String, String]?
     end
@@ -1374,6 +1478,7 @@ module Aws::MediaPackageV2
     module InputType
       HLS: String
       CMAF: String
+      MULTIVIEW: String
     end
 
     class InternalServerException
@@ -1592,6 +1697,41 @@ module Aws::MediaPackageV2
       COMPACT: String
     end
 
+    class MultiviewConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?available_sources: Array[String],
+        ?available_layouts: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor available_sources: Array[String]?
+      attr_accessor available_layouts: Array[String]?
+    end
+
+    class MultiviewFilterConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?layout: String,
+        ?sources: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor layout: String?
+      attr_accessor sources: Array[String]?
+    end
+
+    module MultiviewLayoutType
+      LAYOUT_2EH: String
+      LAYOUT_2PL: String
+      LAYOUT_3EL: String
+      LAYOUT_3PL: String
+      LAYOUT_4E: String
+      LAYOUT_4PL: String
+    end
+
     class OriginEndpointListConfiguration
       include Smithy::Schema::Structure
 
@@ -1609,6 +1749,8 @@ module Aws::MediaPackageV2
         ?dash_manifests: Array[Types::ListDashManifestConfiguration],
         ?mss_manifests: Array[Types::ListMssManifestConfiguration],
         ?force_endpoint_error_configuration: Types::ForceEndpointErrorConfiguration,
+        ?uri_separator: String,
+        ?stream_name_output_mode: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1625,6 +1767,8 @@ module Aws::MediaPackageV2
       attr_accessor dash_manifests: Array[Types::ListDashManifestConfiguration]?
       attr_accessor mss_manifests: Array[Types::ListMssManifestConfiguration]?
       attr_accessor force_endpoint_error_configuration: Types::ForceEndpointErrorConfiguration?
+      attr_accessor uri_separator: String?
+      attr_accessor stream_name_output_mode: String?
     end
 
     class OutputHeaderConfiguration
@@ -1636,6 +1780,16 @@ module Aws::MediaPackageV2
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor publish_mqcs: bool?
+    end
+
+    module OutputLockingMode
+      EPOCH_LOCKED: String
+      NON_EPOCH_LOCKED: String
+    end
+
+    module OutputTimestampMode
+      PASSTHROUGH: String
+      REBASED_TO_CHANNEL_START: String
     end
 
     module PresetSpeke20Audio
@@ -1813,10 +1967,14 @@ module Aws::MediaPackageV2
 
       def initialize: (
         ?scte_filter: Array[String],
+        ?scte_in_segments: String,
+        ?custom_ad_types: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor scte_filter: Array[String]?
+      attr_accessor scte_in_segments: String?
+      attr_accessor custom_ad_types: Array[String]?
     end
 
     class ScteDash
@@ -1824,10 +1982,12 @@ module Aws::MediaPackageV2
 
       def initialize: (
         ?ad_marker_dash: String,
+        ?scte_in_manifests: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor ad_marker_dash: String?
+      attr_accessor scte_in_manifests: String?
     end
 
     module ScteFilter
@@ -1840,6 +2000,16 @@ module Aws::MediaPackageV2
       PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY: String
       DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY: String
       PROGRAM: String
+      CHAPTER: String
+      UNSCHEDULED_EVENT: String
+      ALTERNATE_CONTENT_OPPORTUNITY: String
+      NETWORK: String
+      PROVIDER_PROMO: String
+      DISTRIBUTOR_PROMO: String
+      PROVIDER_AD_BLOCK: String
+      DISTRIBUTOR_AD_BLOCK: String
+      CONTENT_IDENTIFICATION: String
+      CALL_AD_SERVER: String
     end
 
     class ScteHls
@@ -1847,10 +2017,23 @@ module Aws::MediaPackageV2
 
       def initialize: (
         ?ad_marker_hls: String,
+        ?scte_in_manifests: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor ad_marker_hls: String?
+      attr_accessor scte_in_manifests: String?
+    end
+
+    module ScteInManifests
+      ALL: String
+      MATCHES_FILTER: String
+    end
+
+    module ScteInSegments
+      NONE: String
+      ALL: String
+      MATCHES_FILTER: String
     end
 
     class Segment
@@ -1864,6 +2047,7 @@ module Aws::MediaPackageV2
         ?ts_include_dvb_subtitles: bool,
         ?scte: Types::Scte,
         ?encryption: Types::Encryption,
+        ?output_timestamp_mode: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1874,6 +2058,7 @@ module Aws::MediaPackageV2
       attr_accessor ts_include_dvb_subtitles: bool?
       attr_accessor scte: Types::Scte?
       attr_accessor encryption: Types::Encryption?
+      attr_accessor output_timestamp_mode: String?
     end
 
     class ServiceQuotaExceededException
@@ -1896,6 +2081,9 @@ module Aws::MediaPackageV2
         ?drm_systems: Array[String],
         ?role_arn: String,
         ?url: String,
+        ?certificate_arn: String,
+        ?speke_version: String,
+        ?content_key_period_configuration: Types::ContentKeyPeriodConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1904,6 +2092,14 @@ module Aws::MediaPackageV2
       attr_accessor drm_systems: Array[String]?
       attr_accessor role_arn: String?
       attr_accessor url: String?
+      attr_accessor certificate_arn: String?
+      attr_accessor speke_version: String?
+      attr_accessor content_key_period_configuration: Types::ContentKeyPeriodConfiguration?
+    end
+
+    module SpekeVersion
+      V2_0: String
+      V2_1: String
     end
 
     class StartTag
@@ -1917,6 +2113,11 @@ module Aws::MediaPackageV2
 
       attr_accessor time_offset: Float?
       attr_accessor precise: bool?
+    end
+
+    module StreamNameOutputMode
+      INDEX: String
+      PASSTHROUGH_NAME: String
     end
 
     class TagResourceRequest
@@ -2011,6 +2212,7 @@ module Aws::MediaPackageV2
         ?description: String,
         ?input_switch_configuration: Types::InputSwitchConfiguration,
         ?output_header_configuration: Types::OutputHeaderConfiguration,
+        ?multiview_configuration: Types::MultiviewConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2020,12 +2222,15 @@ module Aws::MediaPackageV2
       attr_accessor description: String?
       attr_accessor input_switch_configuration: Types::InputSwitchConfiguration?
       attr_accessor output_header_configuration: Types::OutputHeaderConfiguration?
+      attr_accessor multiview_configuration: Types::MultiviewConfiguration?
     end
 
     class UpdateChannelResponse
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?multiview_configuration: Types::MultiviewConfiguration,
+        ?attached_multiview_channels: Array[String],
         ?arn: String,
         ?channel_name: String,
         ?channel_group_name: String,
@@ -2038,9 +2243,12 @@ module Aws::MediaPackageV2
         ?tags: Hash[String, String],
         ?input_switch_configuration: Types::InputSwitchConfiguration,
         ?output_header_configuration: Types::OutputHeaderConfiguration,
+        ?output_locking_mode: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor multiview_configuration: Types::MultiviewConfiguration?
+      attr_accessor attached_multiview_channels: Array[String]?
       attr_accessor arn: String?
       attr_accessor channel_name: String?
       attr_accessor channel_group_name: String?
@@ -2053,6 +2261,7 @@ module Aws::MediaPackageV2
       attr_accessor tags: Hash[String, String]?
       attr_accessor input_switch_configuration: Types::InputSwitchConfiguration?
       attr_accessor output_header_configuration: Types::OutputHeaderConfiguration?
+      attr_accessor output_locking_mode: String?
     end
 
     class UpdateOriginEndpointRequest
@@ -2071,6 +2280,8 @@ module Aws::MediaPackageV2
         ?dash_manifests: Array[Types::CreateDashManifestConfiguration],
         ?mss_manifests: Array[Types::CreateMssManifestConfiguration],
         ?force_endpoint_error_configuration: Types::ForceEndpointErrorConfiguration,
+        ?uri_separator: String,
+        ?stream_name_output_mode: String,
         ?e_tag: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -2087,6 +2298,8 @@ module Aws::MediaPackageV2
       attr_accessor dash_manifests: Array[Types::CreateDashManifestConfiguration]?
       attr_accessor mss_manifests: Array[Types::CreateMssManifestConfiguration]?
       attr_accessor force_endpoint_error_configuration: Types::ForceEndpointErrorConfiguration?
+      attr_accessor uri_separator: String?
+      attr_accessor stream_name_output_mode: String?
       attr_accessor e_tag: String?
     end
 
@@ -2108,6 +2321,8 @@ module Aws::MediaPackageV2
         ?low_latency_hls_manifests: Array[Types::GetLowLatencyHlsManifestConfiguration],
         ?mss_manifests: Array[Types::GetMssManifestConfiguration],
         ?force_endpoint_error_configuration: Types::ForceEndpointErrorConfiguration,
+        ?uri_separator: String,
+        ?stream_name_output_mode: String,
         ?e_tag: String,
         ?tags: Hash[String, String],
         ?dash_manifests: Array[Types::GetDashManifestConfiguration],
@@ -2128,9 +2343,21 @@ module Aws::MediaPackageV2
       attr_accessor low_latency_hls_manifests: Array[Types::GetLowLatencyHlsManifestConfiguration]?
       attr_accessor mss_manifests: Array[Types::GetMssManifestConfiguration]?
       attr_accessor force_endpoint_error_configuration: Types::ForceEndpointErrorConfiguration?
+      attr_accessor uri_separator: String?
+      attr_accessor stream_name_output_mode: String?
       attr_accessor e_tag: String?
       attr_accessor tags: Hash[String, String]?
       attr_accessor dash_manifests: Array[Types::GetDashManifestConfiguration]?
+    end
+
+    module UriPathType
+      LEAF: String
+      ROOT: String
+    end
+
+    module UriSeparator
+      UNDERSCORE: String
+      HYPHEN: String
     end
 
     class ValidationException
@@ -2184,6 +2411,7 @@ module Aws::MediaPackageV2
       MEMBER_INVALID_ENUM_VALUE: String
       MEMBER_DOES_NOT_MATCH_PATTERN: String
       INVALID_MANIFEST_FILTER: String
+      INVALID_DRM_SETTINGS: String
       INVALID_TIME_DELAY_SECONDS: String
       END_TIME_EARLIER_THAN_START_TIME: String
       TS_CONTAINER_TYPE_WITH_DASH_MANIFEST: String
@@ -2235,6 +2463,55 @@ module Aws::MediaPackageV2
       SECRET_FROM_DIFFERENT_ACCOUNT: String
       SECRET_FROM_DIFFERENT_REGION: String
       INVALID_SECRET: String
+      RESOURCE_NOT_IN_SAME_REGION: String
+      CERTIFICATE_RESOURCE_NOT_FOUND: String
+      CERTIFICATE_ACCESS_DENIED: String
+      DESCRIBE_CERTIFICATE_FAILED: String
+      INVALID_CERTIFICATE_STATUS: String
+      INVALID_CERTIFICATE_KEY_ALGORITHM: String
+      INVALID_CERTIFICATE_SIGNATURE_ALGORITHM: String
+      MISSING_CERTIFICATE_DOMAIN_NAME: String
+      INVALID_ARN: String
+      SCTE_IN_MANIFESTS_INVALID_CONFIGURATION: String
+      CUSTOM_AD_TYPES_INVALID_CONFIGURATION: String
+      ONLY_CMAF_INPUT_TYPE_ALLOW_OUTPUT_LOCKING_MODE: String
+      ONLY_NON_EPOCH_LOCKED_ALLOW_OUTPUT_TIMESTAMP_MODE: String
+      OUTPUT_TIMESTAMP_MODE_IMMUTABLE: String
+      NON_EPOCH_LOCKED_WITH_FORCE_ENDPOINT_ERROR_CONFIGURATION: String
+      ONLY_HLS_INPUT_TYPE_ALLOW_STREAM_NAME_OUTPUT_MODE: String
+      STREAM_NAME_OUTPUT_MODE_IMMUTABLE: String
+      MULTIVIEW_CONFIGURATION_REQUIRED: String
+      MULTIVIEW_CONFIGURATION_NOT_ALLOWED: String
+      MULTIVIEW_SOURCE_NOT_FOUND: String
+      MULTIVIEW_SOURCE_INVALID_INPUT_TYPE: String
+      MULTIVIEW_CHANNEL_POLICY_NOT_ALLOWED: String
+      MULTIVIEW_INPUT_TYPE_WITH_LL_HLS_MANIFEST: String
+      MULTIVIEW_INPUT_TYPE_WITH_MSS_MANIFEST: String
+      MULTIVIEW_INPUT_TYPE_WITH_ISM_CONTAINER: String
+      MULTIVIEW_INPUT_TYPE_WITH_FILTER_CONFIGURATION: String
+      MULTIVIEW_INPUT_TYPE_WITH_START_TAG: String
+      MULTIVIEW_INPUT_TYPE_WITH_HARVEST_JOB: String
+      MULTIVIEW_RESET_NOT_ALLOWED: String
+      MULTIVIEW_DUPLICATE_SOURCE: String
+      MULTIVIEW_DUPLICATE_LAYOUT: String
+      MULTIVIEW_INPUT_SWITCH_NOT_ALLOWED: String
+      MULTIVIEW_OUTPUT_HEADER_NOT_ALLOWED: String
+      MULTIVIEW_STARTOVER_WINDOW_NOT_ALLOWED: String
+      MULTIVIEW_INVALID_TIME_DELAY_SECONDS: String
+      MULTIVIEW_MANIFEST_WINDOW_TOO_LONG: String
+      MULTIVIEW_INPUT_TYPE_WITH_IFRAME_ONLY_STREAMS: String
+      MULTIVIEW_INPUT_TYPE_WITH_NON_EPOCH_LOCKED: String
+      MULTIVIEW_INPUT_TYPE_WITH_SEGMENT_DURATION: String
+      MULTIVIEW_SOURCE_NON_EPOCH_LOCKED: String
+      MULTIVIEW_SCTE_REQUIRES_AVAILS_PERIOD_TRIGGER: String
+      CONTENT_KEY_PERIOD_TIMING_WITHOUT_KEY_ROTATION: String
+      CONTENT_KEY_PERIOD_TIMING_REQUIRES_SPEKE_V2_1: String
+      MULTIVIEW_FILTER_CONFIGURATION_NOT_ALLOWED: String
+      MULTIVIEW_FILTER_LAYOUT_NOT_AVAILABLE: String
+      MULTIVIEW_FILTER_SOURCE_NOT_AVAILABLE: String
+      MULTIVIEW_FILTER_SOURCE_COUNT_MISMATCH: String
+      MULTIVIEW_SOURCE_CHANNEL_LIMIT_EXCEEDED: String
+      MULTIVIEW_TS_USE_AUDIO_RENDITION_GROUP_DISABLED: String
     end
   end
 end

@@ -11,8 +11,7 @@ Object.const_set('Aws', Module.new) unless Object.const_defined?('Aws')
 Aws.const_set('EKSAuth', Module.new) unless Aws.const_defined?('EKSAuth')
 
 # @title Amazon EKS Auth
-# <p>The Amazon EKS Auth API and the <code>AssumeRoleForPodIdentity</code> action are only
-#             used by the EKS Pod Identity Agent.</p>
+# <p>The Amazon EKS Auth API and the <code>AssumeRoleForPodIdentity</code> action are only used by the EKS Pod Identity Agent.</p>
 module Aws::EKSAuth
   VERSION = '2.0.0.pre0'
 end

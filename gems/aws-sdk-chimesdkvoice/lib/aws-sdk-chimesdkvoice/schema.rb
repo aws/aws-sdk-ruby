@@ -25,6 +25,7 @@ module Aws::ChimeSDKVoice
     BatchUpdatePhoneNumberResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.chimesdkvoice#BatchUpdatePhoneNumberResponse", name: "BatchUpdatePhoneNumberResponse")
     Boolean = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.chimesdkvoice#Boolean", name: "Boolean")
     CallDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.chimesdkvoice#CallDetails", name: "CallDetails")
+    CallDistributionType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.chimesdkvoice#CallDistributionType", name: "CallDistributionType")
     CallLegType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.chimesdkvoice#CallLegType", name: "CallLegType")
     CallingName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.chimesdkvoice#CallingName", name: "CallingName", traits: {"smithy.api#pattern" => "^$|^[a-zA-Z0-9 ]{2,15}$", "smithy.api#sensitive" => {}})
     CallingNameStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.chimesdkvoice#CallingNameStatus", name: "CallingNameStatus")
@@ -241,6 +242,7 @@ module Aws::ChimeSDKVoice
     RestorePhoneNumberRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.chimesdkvoice#RestorePhoneNumberRequest", name: "RestorePhoneNumberRequest")
     RestorePhoneNumberResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.chimesdkvoice#RestorePhoneNumberResponse", name: "RestorePhoneNumberResponse")
     ResultMax = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.chimesdkvoice#ResultMax", name: "ResultMax", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}})
+    S3BucketName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.chimesdkvoice#S3BucketName", name: "S3BucketName", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^(?!(^xn--|.+-s3alias$))^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"})
     SMACreateCallArgumentsMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.chimesdkvoice#SMACreateCallArgumentsMap", name: "SMACreateCallArgumentsMap", traits: {"smithy.api#length" => {"min" => 0, "max" => 20}})
     SMAUpdateCallArgumentsMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.chimesdkvoice#SMAUpdateCallArgumentsMap", name: "SMAUpdateCallArgumentsMap", traits: {"smithy.api#length" => {"min" => 0, "max" => 20}})
     SearchAvailablePhoneNumbersRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.chimesdkvoice#SearchAvailablePhoneNumbersRequest", name: "SearchAvailablePhoneNumbersRequest")
@@ -329,6 +331,7 @@ module Aws::ChimeSDKVoice
     VoiceConnectorGroup = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.chimesdkvoice#VoiceConnectorGroup", name: "VoiceConnectorGroup")
     VoiceConnectorGroupList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.chimesdkvoice#VoiceConnectorGroupList", name: "VoiceConnectorGroupList")
     VoiceConnectorGroupName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.chimesdkvoice#VoiceConnectorGroupName", name: "VoiceConnectorGroupName", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[a-zA-Z0-9 _.-]+$"})
+    VoiceConnectorId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.chimesdkvoice#VoiceConnectorId", name: "VoiceConnectorId", traits: {"smithy.api#pattern" => "^([a-z0-9]{21,22}|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$"})
     VoiceConnectorIntegrationType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.chimesdkvoice#VoiceConnectorIntegrationType", name: "VoiceConnectorIntegrationType")
     VoiceConnectorItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.chimesdkvoice#VoiceConnectorItem", name: "VoiceConnectorItem")
     VoiceConnectorItemList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.chimesdkvoice#VoiceConnectorItemList", name: "VoiceConnectorItemList")
@@ -369,7 +372,7 @@ module Aws::ChimeSDKVoice
     AssociatePhoneNumbersWithVoiceConnectorGroupRequest.type = Types::AssociatePhoneNumbersWithVoiceConnectorGroupRequest
     AssociatePhoneNumbersWithVoiceConnectorGroupResponse.add_member(:phone_number_errors, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberErrorList, name: "PhoneNumberErrors"))
     AssociatePhoneNumbersWithVoiceConnectorGroupResponse.type = Types::AssociatePhoneNumbersWithVoiceConnectorGroupResponse
-    AssociatePhoneNumbersWithVoiceConnectorRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    AssociatePhoneNumbersWithVoiceConnectorRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorId, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     AssociatePhoneNumbersWithVoiceConnectorRequest.add_member(:e164_phone_numbers, ::Smithy::Schema::Shapes::MemberShape.new(target: E164PhoneNumberList, name: "E164PhoneNumbers", traits: {"smithy.api#required" => {}}))
     AssociatePhoneNumbersWithVoiceConnectorRequest.add_member(:force_associate, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "ForceAssociate"))
     AssociatePhoneNumbersWithVoiceConnectorRequest.type = Types::AssociatePhoneNumbersWithVoiceConnectorRequest
@@ -386,10 +389,12 @@ module Aws::ChimeSDKVoice
     BatchUpdatePhoneNumberRequest.type = Types::BatchUpdatePhoneNumberRequest
     BatchUpdatePhoneNumberResponse.add_member(:phone_number_errors, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberErrorList, name: "PhoneNumberErrors"))
     BatchUpdatePhoneNumberResponse.type = Types::BatchUpdatePhoneNumberResponse
-    CallDetails.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString128, name: "VoiceConnectorId"))
+    CallDetails.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorId, name: "VoiceConnectorId"))
     CallDetails.add_member(:transaction_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString256, name: "TransactionId"))
     CallDetails.add_member(:is_caller, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "IsCaller"))
     CallDetails.type = Types::CallDetails
+    CallDistributionType.add_member(:priority_weighted_distribution, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PriorityWeightedDistribution", traits: {"smithy.api#enumValue" => "PriorityWeightedDistribution"}))
+    CallDistributionType.add_member(:load_balanced_distribution, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LoadBalancedDistribution", traits: {"smithy.api#enumValue" => "LoadBalancedDistribution"}))
     CallLegType.add_member(:caller, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CALLER", traits: {"smithy.api#enumValue" => "Caller"}))
     CallLegType.add_member(:callee, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CALLEE", traits: {"smithy.api#enumValue" => "Callee"}))
     CallingNameStatus.add_member(:unassigned, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Unassigned", traits: {"smithy.api#enumValue" => "Unassigned"}))
@@ -424,7 +429,7 @@ module Aws::ChimeSDKVoice
     CreatePhoneNumberOrderRequest.type = Types::CreatePhoneNumberOrderRequest
     CreatePhoneNumberOrderResponse.add_member(:phone_number_order, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberOrder, name: "PhoneNumberOrder"))
     CreatePhoneNumberOrderResponse.type = Types::CreatePhoneNumberOrderResponse
-    CreateProxySessionRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString128, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CreateProxySessionRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorId, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     CreateProxySessionRequest.add_member(:participant_phone_numbers, ::Smithy::Schema::Shapes::MemberShape.new(target: ParticipantPhoneNumberList, name: "ParticipantPhoneNumbers", traits: {"smithy.api#required" => {}}))
     CreateProxySessionRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProxySessionNameString, name: "Name"))
     CreateProxySessionRequest.add_member(:expiry_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveInteger, name: "ExpiryMinutes"))
@@ -454,12 +459,13 @@ module Aws::ChimeSDKVoice
     CreateSipRuleRequest.add_member(:trigger_type, ::Smithy::Schema::Shapes::MemberShape.new(target: SipRuleTriggerType, name: "TriggerType", traits: {"smithy.api#required" => {}}))
     CreateSipRuleRequest.add_member(:trigger_value, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "TriggerValue", traits: {"smithy.api#required" => {}}))
     CreateSipRuleRequest.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "Disabled"))
-    CreateSipRuleRequest.add_member(:target_applications, ::Smithy::Schema::Shapes::MemberShape.new(target: SipRuleTargetApplicationList, name: "TargetApplications"))
+    CreateSipRuleRequest.add_member(:target_applications, ::Smithy::Schema::Shapes::MemberShape.new(target: SipRuleTargetApplicationList, name: "TargetApplications", traits: {"smithy.api#required" => {}}))
     CreateSipRuleRequest.type = Types::CreateSipRuleRequest
     CreateSipRuleResponse.add_member(:sip_rule, ::Smithy::Schema::Shapes::MemberShape.new(target: SipRule, name: "SipRule"))
     CreateSipRuleResponse.type = Types::CreateSipRuleResponse
     CreateVoiceConnectorGroupRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorGroupName, name: "Name", traits: {"smithy.api#required" => {}}))
     CreateVoiceConnectorGroupRequest.add_member(:voice_connector_items, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorItemList, name: "VoiceConnectorItems"))
+    CreateVoiceConnectorGroupRequest.add_member(:call_distribution_type, ::Smithy::Schema::Shapes::MemberShape.new(target: CallDistributionType, name: "CallDistributionType"))
     CreateVoiceConnectorGroupRequest.type = Types::CreateVoiceConnectorGroupRequest
     CreateVoiceConnectorGroupResponse.add_member(:voice_connector_group, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorGroup, name: "VoiceConnectorGroup"))
     CreateVoiceConnectorGroupResponse.type = Types::CreateVoiceConnectorGroupResponse
@@ -495,31 +501,31 @@ module Aws::ChimeSDKVoice
     DNISEmergencyCallingConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DNISEmergencyCallingConfiguration, name: "member"))
     DeletePhoneNumberRequest.add_member(:phone_number_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveNonEmptyString, name: "PhoneNumberId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeletePhoneNumberRequest.type = Types::DeletePhoneNumberRequest
-    DeleteProxySessionRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString128, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteProxySessionRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorId, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteProxySessionRequest.add_member(:proxy_session_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString128, name: "ProxySessionId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteProxySessionRequest.type = Types::DeleteProxySessionRequest
     DeleteSipMediaApplicationRequest.add_member(:sip_media_application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "SipMediaApplicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteSipMediaApplicationRequest.type = Types::DeleteSipMediaApplicationRequest
     DeleteSipRuleRequest.add_member(:sip_rule_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "SipRuleId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteSipRuleRequest.type = Types::DeleteSipRuleRequest
-    DeleteVoiceConnectorEmergencyCallingConfigurationRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteVoiceConnectorEmergencyCallingConfigurationRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorId, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteVoiceConnectorEmergencyCallingConfigurationRequest.type = Types::DeleteVoiceConnectorEmergencyCallingConfigurationRequest
-    DeleteVoiceConnectorExternalSystemsConfigurationRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteVoiceConnectorExternalSystemsConfigurationRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorId, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteVoiceConnectorExternalSystemsConfigurationRequest.type = Types::DeleteVoiceConnectorExternalSystemsConfigurationRequest
     DeleteVoiceConnectorGroupRequest.add_member(:voice_connector_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "VoiceConnectorGroupId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteVoiceConnectorGroupRequest.type = Types::DeleteVoiceConnectorGroupRequest
-    DeleteVoiceConnectorOriginationRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteVoiceConnectorOriginationRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorId, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteVoiceConnectorOriginationRequest.type = Types::DeleteVoiceConnectorOriginationRequest
-    DeleteVoiceConnectorProxyRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString128, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteVoiceConnectorProxyRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorId, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteVoiceConnectorProxyRequest.type = Types::DeleteVoiceConnectorProxyRequest
-    DeleteVoiceConnectorRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteVoiceConnectorRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorId, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteVoiceConnectorRequest.type = Types::DeleteVoiceConnectorRequest
-    DeleteVoiceConnectorStreamingConfigurationRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteVoiceConnectorStreamingConfigurationRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorId, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteVoiceConnectorStreamingConfigurationRequest.type = Types::DeleteVoiceConnectorStreamingConfigurationRequest
-    DeleteVoiceConnectorTerminationCredentialsRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteVoiceConnectorTerminationCredentialsRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorId, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteVoiceConnectorTerminationCredentialsRequest.add_member(:usernames, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveStringList, name: "Usernames", traits: {"smithy.api#required" => {}}))
     DeleteVoiceConnectorTerminationCredentialsRequest.type = Types::DeleteVoiceConnectorTerminationCredentialsRequest
-    DeleteVoiceConnectorTerminationRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteVoiceConnectorTerminationRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorId, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteVoiceConnectorTerminationRequest.type = Types::DeleteVoiceConnectorTerminationRequest
     DeleteVoiceProfileDomainRequest.add_member(:voice_profile_domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString256, name: "VoiceProfileDomainId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteVoiceProfileDomainRequest.type = Types::DeleteVoiceProfileDomainRequest
@@ -530,7 +536,7 @@ module Aws::ChimeSDKVoice
     DisassociatePhoneNumbersFromVoiceConnectorGroupRequest.type = Types::DisassociatePhoneNumbersFromVoiceConnectorGroupRequest
     DisassociatePhoneNumbersFromVoiceConnectorGroupResponse.add_member(:phone_number_errors, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberErrorList, name: "PhoneNumberErrors"))
     DisassociatePhoneNumbersFromVoiceConnectorGroupResponse.type = Types::DisassociatePhoneNumbersFromVoiceConnectorGroupResponse
-    DisassociatePhoneNumbersFromVoiceConnectorRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DisassociatePhoneNumbersFromVoiceConnectorRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorId, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DisassociatePhoneNumbersFromVoiceConnectorRequest.add_member(:e164_phone_numbers, ::Smithy::Schema::Shapes::MemberShape.new(target: E164PhoneNumberList, name: "E164PhoneNumbers", traits: {"smithy.api#required" => {}}))
     DisassociatePhoneNumbersFromVoiceConnectorRequest.type = Types::DisassociatePhoneNumbersFromVoiceConnectorRequest
     DisassociatePhoneNumbersFromVoiceConnectorResponse.add_member(:phone_number_errors, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberErrorList, name: "PhoneNumberErrors"))
@@ -554,6 +560,7 @@ module Aws::ChimeSDKVoice
     ErrorCode.add_member(:voice_connector_group_associations_exist, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VoiceConnectorGroupAssociationsExist", traits: {"smithy.api#enumValue" => "VoiceConnectorGroupAssociationsExist"}))
     ErrorCode.add_member(:phone_number_associations_exist, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PhoneNumberAssociationsExist", traits: {"smithy.api#enumValue" => "PhoneNumberAssociationsExist"}))
     ErrorCode.add_member(:gone, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Gone", traits: {"smithy.api#enumValue" => "Gone"}))
+    ErrorCode.add_member(:validation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Validation", traits: {"smithy.api#enumValue" => "Validation"}))
     ExternalSystemsConfiguration.add_member(:session_border_controller_types, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionBorderControllerTypeList, name: "SessionBorderControllerTypes"))
     ExternalSystemsConfiguration.add_member(:contact_center_system_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactCenterSystemTypeList, name: "ContactCenterSystemTypes"))
     ExternalSystemsConfiguration.type = Types::ExternalSystemsConfiguration
@@ -578,7 +585,7 @@ module Aws::ChimeSDKVoice
     GetPhoneNumberSettingsResponse.add_member(:calling_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CallingName, name: "CallingName"))
     GetPhoneNumberSettingsResponse.add_member(:calling_name_updated_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601Timestamp, name: "CallingNameUpdatedTimestamp"))
     GetPhoneNumberSettingsResponse.type = Types::GetPhoneNumberSettingsResponse
-    GetProxySessionRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString128, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetProxySessionRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorId, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetProxySessionRequest.add_member(:proxy_session_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString128, name: "ProxySessionId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetProxySessionRequest.type = Types::GetProxySessionRequest
     GetProxySessionResponse.add_member(:proxy_session, ::Smithy::Schema::Shapes::MemberShape.new(target: ProxySession, name: "ProxySession"))
@@ -599,16 +606,16 @@ module Aws::ChimeSDKVoice
     GetSipRuleRequest.type = Types::GetSipRuleRequest
     GetSipRuleResponse.add_member(:sip_rule, ::Smithy::Schema::Shapes::MemberShape.new(target: SipRule, name: "SipRule"))
     GetSipRuleResponse.type = Types::GetSipRuleResponse
-    GetSpeakerSearchTaskRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString128, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetSpeakerSearchTaskRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorId, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetSpeakerSearchTaskRequest.add_member(:speaker_search_task_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString256, name: "SpeakerSearchTaskId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetSpeakerSearchTaskRequest.type = Types::GetSpeakerSearchTaskRequest
     GetSpeakerSearchTaskResponse.add_member(:speaker_search_task, ::Smithy::Schema::Shapes::MemberShape.new(target: SpeakerSearchTask, name: "SpeakerSearchTask"))
     GetSpeakerSearchTaskResponse.type = Types::GetSpeakerSearchTaskResponse
-    GetVoiceConnectorEmergencyCallingConfigurationRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetVoiceConnectorEmergencyCallingConfigurationRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorId, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetVoiceConnectorEmergencyCallingConfigurationRequest.type = Types::GetVoiceConnectorEmergencyCallingConfigurationRequest
     GetVoiceConnectorEmergencyCallingConfigurationResponse.add_member(:emergency_calling_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: EmergencyCallingConfiguration, name: "EmergencyCallingConfiguration"))
     GetVoiceConnectorEmergencyCallingConfigurationResponse.type = Types::GetVoiceConnectorEmergencyCallingConfigurationResponse
-    GetVoiceConnectorExternalSystemsConfigurationRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetVoiceConnectorExternalSystemsConfigurationRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorId, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetVoiceConnectorExternalSystemsConfigurationRequest.type = Types::GetVoiceConnectorExternalSystemsConfigurationRequest
     GetVoiceConnectorExternalSystemsConfigurationResponse.add_member(:external_systems_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalSystemsConfiguration, name: "ExternalSystemsConfiguration"))
     GetVoiceConnectorExternalSystemsConfigurationResponse.type = Types::GetVoiceConnectorExternalSystemsConfigurationResponse
@@ -616,31 +623,31 @@ module Aws::ChimeSDKVoice
     GetVoiceConnectorGroupRequest.type = Types::GetVoiceConnectorGroupRequest
     GetVoiceConnectorGroupResponse.add_member(:voice_connector_group, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorGroup, name: "VoiceConnectorGroup"))
     GetVoiceConnectorGroupResponse.type = Types::GetVoiceConnectorGroupResponse
-    GetVoiceConnectorLoggingConfigurationRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetVoiceConnectorLoggingConfigurationRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorId, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetVoiceConnectorLoggingConfigurationRequest.type = Types::GetVoiceConnectorLoggingConfigurationRequest
     GetVoiceConnectorLoggingConfigurationResponse.add_member(:logging_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: LoggingConfiguration, name: "LoggingConfiguration"))
     GetVoiceConnectorLoggingConfigurationResponse.type = Types::GetVoiceConnectorLoggingConfigurationResponse
-    GetVoiceConnectorOriginationRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetVoiceConnectorOriginationRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorId, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetVoiceConnectorOriginationRequest.type = Types::GetVoiceConnectorOriginationRequest
     GetVoiceConnectorOriginationResponse.add_member(:origination, ::Smithy::Schema::Shapes::MemberShape.new(target: Origination, name: "Origination"))
     GetVoiceConnectorOriginationResponse.type = Types::GetVoiceConnectorOriginationResponse
-    GetVoiceConnectorProxyRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString128, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetVoiceConnectorProxyRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorId, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetVoiceConnectorProxyRequest.type = Types::GetVoiceConnectorProxyRequest
     GetVoiceConnectorProxyResponse.add_member(:proxy, ::Smithy::Schema::Shapes::MemberShape.new(target: Proxy, name: "Proxy"))
     GetVoiceConnectorProxyResponse.type = Types::GetVoiceConnectorProxyResponse
-    GetVoiceConnectorRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetVoiceConnectorRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorId, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetVoiceConnectorRequest.type = Types::GetVoiceConnectorRequest
     GetVoiceConnectorResponse.add_member(:voice_connector, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnector, name: "VoiceConnector"))
     GetVoiceConnectorResponse.type = Types::GetVoiceConnectorResponse
-    GetVoiceConnectorStreamingConfigurationRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetVoiceConnectorStreamingConfigurationRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorId, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetVoiceConnectorStreamingConfigurationRequest.type = Types::GetVoiceConnectorStreamingConfigurationRequest
     GetVoiceConnectorStreamingConfigurationResponse.add_member(:streaming_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamingConfiguration, name: "StreamingConfiguration"))
     GetVoiceConnectorStreamingConfigurationResponse.type = Types::GetVoiceConnectorStreamingConfigurationResponse
-    GetVoiceConnectorTerminationHealthRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetVoiceConnectorTerminationHealthRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorId, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetVoiceConnectorTerminationHealthRequest.type = Types::GetVoiceConnectorTerminationHealthRequest
     GetVoiceConnectorTerminationHealthResponse.add_member(:termination_health, ::Smithy::Schema::Shapes::MemberShape.new(target: TerminationHealth, name: "TerminationHealth"))
     GetVoiceConnectorTerminationHealthResponse.type = Types::GetVoiceConnectorTerminationHealthResponse
-    GetVoiceConnectorTerminationRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetVoiceConnectorTerminationRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorId, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetVoiceConnectorTerminationRequest.type = Types::GetVoiceConnectorTerminationRequest
     GetVoiceConnectorTerminationResponse.add_member(:termination, ::Smithy::Schema::Shapes::MemberShape.new(target: Termination, name: "Termination"))
     GetVoiceConnectorTerminationResponse.type = Types::GetVoiceConnectorTerminationResponse
@@ -652,7 +659,7 @@ module Aws::ChimeSDKVoice
     GetVoiceProfileRequest.type = Types::GetVoiceProfileRequest
     GetVoiceProfileResponse.add_member(:voice_profile, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceProfile, name: "VoiceProfile"))
     GetVoiceProfileResponse.type = Types::GetVoiceProfileResponse
-    GetVoiceToneAnalysisTaskRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString128, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetVoiceToneAnalysisTaskRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorId, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetVoiceToneAnalysisTaskRequest.add_member(:voice_tone_analysis_task_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString256, name: "VoiceToneAnalysisTaskId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetVoiceToneAnalysisTaskRequest.add_member(:is_caller, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "IsCaller", traits: {"smithy.api#httpQuery" => "isCaller", "smithy.api#required" => {}}))
     GetVoiceToneAnalysisTaskRequest.type = Types::GetVoiceToneAnalysisTaskRequest
@@ -664,7 +671,7 @@ module Aws::ChimeSDKVoice
     LanguageCode.add_member(:en_us, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EN_US", traits: {"smithy.api#enumValue" => "en-US"}))
     ListAvailableVoiceConnectorRegionsResponse.add_member(:voice_connector_regions, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorAwsRegionList, name: "VoiceConnectorRegions"))
     ListAvailableVoiceConnectorRegionsResponse.type = Types::ListAvailableVoiceConnectorRegionsResponse
-    ListPhoneNumberOrdersRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken", traits: {"smithy.api#httpQuery" => "next-token"}))
+    ListPhoneNumberOrdersRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextTokenString, name: "NextToken", traits: {"smithy.api#httpQuery" => "next-token"}))
     ListPhoneNumberOrdersRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ResultMax, name: "MaxResults", traits: {"smithy.api#httpQuery" => "max-results"}))
     ListPhoneNumberOrdersRequest.type = Types::ListPhoneNumberOrdersRequest
     ListPhoneNumberOrdersResponse.add_member(:phone_number_orders, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberOrderList, name: "PhoneNumberOrders"))
@@ -680,7 +687,7 @@ module Aws::ChimeSDKVoice
     ListPhoneNumbersResponse.add_member(:phone_numbers, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberList, name: "PhoneNumbers"))
     ListPhoneNumbersResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken"))
     ListPhoneNumbersResponse.type = Types::ListPhoneNumbersResponse
-    ListProxySessionsRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString128, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListProxySessionsRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorId, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListProxySessionsRequest.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ProxySessionStatus, name: "Status", traits: {"smithy.api#httpQuery" => "status"}))
     ListProxySessionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextTokenString, name: "NextToken", traits: {"smithy.api#httpQuery" => "next-token"}))
     ListProxySessionsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ResultMax, name: "MaxResults", traits: {"smithy.api#httpQuery" => "max-results"}))
@@ -715,7 +722,7 @@ module Aws::ChimeSDKVoice
     ListVoiceConnectorGroupsResponse.add_member(:voice_connector_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorGroupList, name: "VoiceConnectorGroups"))
     ListVoiceConnectorGroupsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken"))
     ListVoiceConnectorGroupsResponse.type = Types::ListVoiceConnectorGroupsResponse
-    ListVoiceConnectorTerminationCredentialsRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListVoiceConnectorTerminationCredentialsRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorId, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListVoiceConnectorTerminationCredentialsRequest.type = Types::ListVoiceConnectorTerminationCredentialsRequest
     ListVoiceConnectorTerminationCredentialsResponse.add_member(:usernames, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveStringList, name: "Usernames"))
     ListVoiceConnectorTerminationCredentialsResponse.type = Types::ListVoiceConnectorTerminationCredentialsResponse
@@ -781,6 +788,7 @@ module Aws::ChimeSDKVoice
     Participants.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Participant, name: "member"))
     PhoneNumber.add_member(:phone_number_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveNonEmptyString, name: "PhoneNumberId"))
     PhoneNumber.add_member(:e164_phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: E164PhoneNumber, name: "E164PhoneNumber"))
+    PhoneNumber.add_member(:phone_number_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "PhoneNumberArn"))
     PhoneNumber.add_member(:country, ::Smithy::Schema::Shapes::MemberShape.new(target: Alpha2CountryCode, name: "Country"))
     PhoneNumber.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberType, name: "Type"))
     PhoneNumber.add_member(:product_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberProductType, name: "ProductType"))
@@ -827,7 +835,7 @@ module Aws::ChimeSDKVoice
     PhoneNumberOrder.add_member(:ordered_phone_numbers, ::Smithy::Schema::Shapes::MemberShape.new(target: OrderedPhoneNumberList, name: "OrderedPhoneNumbers"))
     PhoneNumberOrder.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601Timestamp, name: "CreatedTimestamp"))
     PhoneNumberOrder.add_member(:updated_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601Timestamp, name: "UpdatedTimestamp"))
-    PhoneNumberOrder.add_member(:foc_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601Timestamp, name: "FocDate"))
+    PhoneNumberOrder.add_member(:foc_date, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "FocDate"))
     PhoneNumberOrder.type = Types::PhoneNumberOrder
     PhoneNumberOrderList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberOrder, name: "member"))
     PhoneNumberOrderStatus.add_member(:processing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Processing", traits: {"smithy.api#enumValue" => "Processing"}))
@@ -864,7 +872,7 @@ module Aws::ChimeSDKVoice
     Proxy.add_member(:fall_back_phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: E164PhoneNumber, name: "FallBackPhoneNumber"))
     Proxy.add_member(:phone_number_countries, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "PhoneNumberCountries"))
     Proxy.type = Types::Proxy
-    ProxySession.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString128, name: "VoiceConnectorId"))
+    ProxySession.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorId, name: "VoiceConnectorId"))
     ProxySession.add_member(:proxy_session_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString128, name: "ProxySessionId"))
     ProxySession.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String128, name: "Name"))
     ProxySession.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ProxySessionStatus, name: "Status"))
@@ -892,28 +900,28 @@ module Aws::ChimeSDKVoice
     PutSipMediaApplicationLoggingConfigurationRequest.type = Types::PutSipMediaApplicationLoggingConfigurationRequest
     PutSipMediaApplicationLoggingConfigurationResponse.add_member(:sip_media_application_logging_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SipMediaApplicationLoggingConfiguration, name: "SipMediaApplicationLoggingConfiguration"))
     PutSipMediaApplicationLoggingConfigurationResponse.type = Types::PutSipMediaApplicationLoggingConfigurationResponse
-    PutVoiceConnectorEmergencyCallingConfigurationRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    PutVoiceConnectorEmergencyCallingConfigurationRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorId, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     PutVoiceConnectorEmergencyCallingConfigurationRequest.add_member(:emergency_calling_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: EmergencyCallingConfiguration, name: "EmergencyCallingConfiguration", traits: {"smithy.api#required" => {}}))
     PutVoiceConnectorEmergencyCallingConfigurationRequest.type = Types::PutVoiceConnectorEmergencyCallingConfigurationRequest
     PutVoiceConnectorEmergencyCallingConfigurationResponse.add_member(:emergency_calling_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: EmergencyCallingConfiguration, name: "EmergencyCallingConfiguration"))
     PutVoiceConnectorEmergencyCallingConfigurationResponse.type = Types::PutVoiceConnectorEmergencyCallingConfigurationResponse
-    PutVoiceConnectorExternalSystemsConfigurationRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString128, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    PutVoiceConnectorExternalSystemsConfigurationRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorId, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     PutVoiceConnectorExternalSystemsConfigurationRequest.add_member(:session_border_controller_types, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionBorderControllerTypeList, name: "SessionBorderControllerTypes"))
     PutVoiceConnectorExternalSystemsConfigurationRequest.add_member(:contact_center_system_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactCenterSystemTypeList, name: "ContactCenterSystemTypes"))
     PutVoiceConnectorExternalSystemsConfigurationRequest.type = Types::PutVoiceConnectorExternalSystemsConfigurationRequest
     PutVoiceConnectorExternalSystemsConfigurationResponse.add_member(:external_systems_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalSystemsConfiguration, name: "ExternalSystemsConfiguration"))
     PutVoiceConnectorExternalSystemsConfigurationResponse.type = Types::PutVoiceConnectorExternalSystemsConfigurationResponse
-    PutVoiceConnectorLoggingConfigurationRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    PutVoiceConnectorLoggingConfigurationRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorId, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     PutVoiceConnectorLoggingConfigurationRequest.add_member(:logging_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: LoggingConfiguration, name: "LoggingConfiguration", traits: {"smithy.api#required" => {}}))
     PutVoiceConnectorLoggingConfigurationRequest.type = Types::PutVoiceConnectorLoggingConfigurationRequest
     PutVoiceConnectorLoggingConfigurationResponse.add_member(:logging_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: LoggingConfiguration, name: "LoggingConfiguration"))
     PutVoiceConnectorLoggingConfigurationResponse.type = Types::PutVoiceConnectorLoggingConfigurationResponse
-    PutVoiceConnectorOriginationRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    PutVoiceConnectorOriginationRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorId, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     PutVoiceConnectorOriginationRequest.add_member(:origination, ::Smithy::Schema::Shapes::MemberShape.new(target: Origination, name: "Origination", traits: {"smithy.api#required" => {}}))
     PutVoiceConnectorOriginationRequest.type = Types::PutVoiceConnectorOriginationRequest
     PutVoiceConnectorOriginationResponse.add_member(:origination, ::Smithy::Schema::Shapes::MemberShape.new(target: Origination, name: "Origination"))
     PutVoiceConnectorOriginationResponse.type = Types::PutVoiceConnectorOriginationResponse
-    PutVoiceConnectorProxyRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString128, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    PutVoiceConnectorProxyRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorId, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     PutVoiceConnectorProxyRequest.add_member(:default_session_expiry_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "DefaultSessionExpiryMinutes", traits: {"smithy.api#required" => {}}))
     PutVoiceConnectorProxyRequest.add_member(:phone_number_pool_countries, ::Smithy::Schema::Shapes::MemberShape.new(target: CountryList, name: "PhoneNumberPoolCountries", traits: {"smithy.api#required" => {}}))
     PutVoiceConnectorProxyRequest.add_member(:fall_back_phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: E164PhoneNumber, name: "FallBackPhoneNumber"))
@@ -921,15 +929,15 @@ module Aws::ChimeSDKVoice
     PutVoiceConnectorProxyRequest.type = Types::PutVoiceConnectorProxyRequest
     PutVoiceConnectorProxyResponse.add_member(:proxy, ::Smithy::Schema::Shapes::MemberShape.new(target: Proxy, name: "Proxy"))
     PutVoiceConnectorProxyResponse.type = Types::PutVoiceConnectorProxyResponse
-    PutVoiceConnectorStreamingConfigurationRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    PutVoiceConnectorStreamingConfigurationRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorId, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     PutVoiceConnectorStreamingConfigurationRequest.add_member(:streaming_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamingConfiguration, name: "StreamingConfiguration", traits: {"smithy.api#required" => {}}))
     PutVoiceConnectorStreamingConfigurationRequest.type = Types::PutVoiceConnectorStreamingConfigurationRequest
     PutVoiceConnectorStreamingConfigurationResponse.add_member(:streaming_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamingConfiguration, name: "StreamingConfiguration"))
     PutVoiceConnectorStreamingConfigurationResponse.type = Types::PutVoiceConnectorStreamingConfigurationResponse
-    PutVoiceConnectorTerminationCredentialsRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    PutVoiceConnectorTerminationCredentialsRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorId, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     PutVoiceConnectorTerminationCredentialsRequest.add_member(:credentials, ::Smithy::Schema::Shapes::MemberShape.new(target: CredentialList, name: "Credentials"))
     PutVoiceConnectorTerminationCredentialsRequest.type = Types::PutVoiceConnectorTerminationCredentialsRequest
-    PutVoiceConnectorTerminationRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    PutVoiceConnectorTerminationRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorId, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     PutVoiceConnectorTerminationRequest.add_member(:termination, ::Smithy::Schema::Shapes::MemberShape.new(target: Termination, name: "Termination", traits: {"smithy.api#required" => {}}))
     PutVoiceConnectorTerminationRequest.type = Types::PutVoiceConnectorTerminationRequest
     PutVoiceConnectorTerminationResponse.add_member(:termination, ::Smithy::Schema::Shapes::MemberShape.new(target: Termination, name: "Termination"))
@@ -1026,7 +1034,7 @@ module Aws::ChimeSDKVoice
     SpeakerSearchTask.add_member(:started_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601Timestamp, name: "StartedTimestamp"))
     SpeakerSearchTask.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "StatusMessage"))
     SpeakerSearchTask.type = Types::SpeakerSearchTask
-    StartSpeakerSearchTaskRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString128, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    StartSpeakerSearchTaskRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorId, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     StartSpeakerSearchTaskRequest.add_member(:transaction_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString256, name: "TransactionId", traits: {"smithy.api#required" => {}}))
     StartSpeakerSearchTaskRequest.add_member(:voice_profile_domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString256, name: "VoiceProfileDomainId", traits: {"smithy.api#required" => {}}))
     StartSpeakerSearchTaskRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestId, name: "ClientRequestToken"))
@@ -1034,17 +1042,17 @@ module Aws::ChimeSDKVoice
     StartSpeakerSearchTaskRequest.type = Types::StartSpeakerSearchTaskRequest
     StartSpeakerSearchTaskResponse.add_member(:speaker_search_task, ::Smithy::Schema::Shapes::MemberShape.new(target: SpeakerSearchTask, name: "SpeakerSearchTask"))
     StartSpeakerSearchTaskResponse.type = Types::StartSpeakerSearchTaskResponse
-    StartVoiceToneAnalysisTaskRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString128, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    StartVoiceToneAnalysisTaskRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorId, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     StartVoiceToneAnalysisTaskRequest.add_member(:transaction_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString256, name: "TransactionId", traits: {"smithy.api#required" => {}}))
     StartVoiceToneAnalysisTaskRequest.add_member(:language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCode, name: "LanguageCode", traits: {"smithy.api#required" => {}}))
     StartVoiceToneAnalysisTaskRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestId, name: "ClientRequestToken"))
     StartVoiceToneAnalysisTaskRequest.type = Types::StartVoiceToneAnalysisTaskRequest
     StartVoiceToneAnalysisTaskResponse.add_member(:voice_tone_analysis_task, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceToneAnalysisTask, name: "VoiceToneAnalysisTask"))
     StartVoiceToneAnalysisTaskResponse.type = Types::StartVoiceToneAnalysisTaskResponse
-    StopSpeakerSearchTaskRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString128, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    StopSpeakerSearchTaskRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorId, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     StopSpeakerSearchTaskRequest.add_member(:speaker_search_task_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString256, name: "SpeakerSearchTaskId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     StopSpeakerSearchTaskRequest.type = Types::StopSpeakerSearchTaskRequest
-    StopVoiceToneAnalysisTaskRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString128, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    StopVoiceToneAnalysisTaskRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorId, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     StopVoiceToneAnalysisTaskRequest.add_member(:voice_tone_analysis_task_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString256, name: "VoiceToneAnalysisTaskId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     StopVoiceToneAnalysisTaskRequest.type = Types::StopVoiceToneAnalysisTaskRequest
     StreamingConfiguration.add_member(:data_retention_in_hours, ::Smithy::Schema::Shapes::MemberShape.new(target: DataRetentionInHours, name: "DataRetentionInHours", traits: {"smithy.api#required" => {}}))
@@ -1085,7 +1093,7 @@ module Aws::ChimeSDKVoice
     UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "ResourceARN", traits: {"smithy.api#required" => {}}))
     UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, name: "TagKeys", traits: {"smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
-    UpdateGlobalSettingsRequest.add_member(:voice_connector, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorSettings, name: "VoiceConnector"))
+    UpdateGlobalSettingsRequest.add_member(:voice_connector, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorSettings, name: "VoiceConnector", traits: {"smithy.api#required" => {}}))
     UpdateGlobalSettingsRequest.type = Types::UpdateGlobalSettingsRequest
     UpdatePhoneNumberRequest.add_member(:phone_number_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveNonEmptyString, name: "PhoneNumberId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdatePhoneNumberRequest.add_member(:product_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberProductType, name: "ProductType"))
@@ -1102,7 +1110,7 @@ module Aws::ChimeSDKVoice
     UpdatePhoneNumberResponse.type = Types::UpdatePhoneNumberResponse
     UpdatePhoneNumberSettingsRequest.add_member(:calling_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CallingName, name: "CallingName", traits: {"smithy.api#required" => {}}))
     UpdatePhoneNumberSettingsRequest.type = Types::UpdatePhoneNumberSettingsRequest
-    UpdateProxySessionRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString128, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateProxySessionRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorId, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdateProxySessionRequest.add_member(:proxy_session_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString128, name: "ProxySessionId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdateProxySessionRequest.add_member(:capabilities, ::Smithy::Schema::Shapes::MemberShape.new(target: CapabilityList, name: "Capabilities", traits: {"smithy.api#required" => {}}))
     UpdateProxySessionRequest.add_member(:expiry_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveInteger, name: "ExpiryMinutes"))
@@ -1131,10 +1139,11 @@ module Aws::ChimeSDKVoice
     UpdateVoiceConnectorGroupRequest.add_member(:voice_connector_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "VoiceConnectorGroupId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdateVoiceConnectorGroupRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorGroupName, name: "Name", traits: {"smithy.api#required" => {}}))
     UpdateVoiceConnectorGroupRequest.add_member(:voice_connector_items, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorItemList, name: "VoiceConnectorItems", traits: {"smithy.api#required" => {}}))
+    UpdateVoiceConnectorGroupRequest.add_member(:call_distribution_type, ::Smithy::Schema::Shapes::MemberShape.new(target: CallDistributionType, name: "CallDistributionType"))
     UpdateVoiceConnectorGroupRequest.type = Types::UpdateVoiceConnectorGroupRequest
     UpdateVoiceConnectorGroupResponse.add_member(:voice_connector_group, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorGroup, name: "VoiceConnectorGroup"))
     UpdateVoiceConnectorGroupResponse.type = Types::UpdateVoiceConnectorGroupResponse
-    UpdateVoiceConnectorRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateVoiceConnectorRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorId, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdateVoiceConnectorRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorName, name: "Name", traits: {"smithy.api#required" => {}}))
     UpdateVoiceConnectorRequest.add_member(:require_encryption, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "RequireEncryption", traits: {"smithy.api#required" => {}}))
     UpdateVoiceConnectorRequest.type = Types::UpdateVoiceConnectorRequest
@@ -1164,7 +1173,7 @@ module Aws::ChimeSDKVoice
     ValidateE911AddressResponse.add_member(:address, ::Smithy::Schema::Shapes::MemberShape.new(target: Address, name: "Address"))
     ValidateE911AddressResponse.add_member(:candidate_address_list, ::Smithy::Schema::Shapes::MemberShape.new(target: CandidateAddressList, name: "CandidateAddressList"))
     ValidateE911AddressResponse.type = Types::ValidateE911AddressResponse
-    VoiceConnector.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "VoiceConnectorId"))
+    VoiceConnector.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorId, name: "VoiceConnectorId"))
     VoiceConnector.add_member(:aws_region, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorAwsRegion, name: "AwsRegion"))
     VoiceConnector.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorName, name: "Name"))
     VoiceConnector.add_member(:outbound_host_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "OutboundHostName"))
@@ -1192,16 +1201,17 @@ module Aws::ChimeSDKVoice
     VoiceConnectorGroup.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601Timestamp, name: "CreatedTimestamp"))
     VoiceConnectorGroup.add_member(:updated_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601Timestamp, name: "UpdatedTimestamp"))
     VoiceConnectorGroup.add_member(:voice_connector_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "VoiceConnectorGroupArn"))
+    VoiceConnectorGroup.add_member(:call_distribution_type, ::Smithy::Schema::Shapes::MemberShape.new(target: CallDistributionType, name: "CallDistributionType"))
     VoiceConnectorGroup.type = Types::VoiceConnectorGroup
     VoiceConnectorGroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorGroup, name: "member"))
     VoiceConnectorIntegrationType.add_member(:connect_call_transfer_connector, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONNECT_CALL_TRANSFER_CONNECTOR", traits: {"smithy.api#enumValue" => "CONNECT_CALL_TRANSFER_CONNECTOR"}))
     VoiceConnectorIntegrationType.add_member(:connect_analytics_connector, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONNECT_ANALYTICS_CONNECTOR", traits: {"smithy.api#enumValue" => "CONNECT_ANALYTICS_CONNECTOR"}))
-    VoiceConnectorItem.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "VoiceConnectorId", traits: {"smithy.api#required" => {}}))
-    VoiceConnectorItem.add_member(:priority, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorItemPriority, name: "Priority", traits: {"smithy.api#required" => {}}))
+    VoiceConnectorItem.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorId, name: "VoiceConnectorId", traits: {"smithy.api#required" => {}}))
+    VoiceConnectorItem.add_member(:priority, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorItemPriority, name: "Priority", traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => 1}))
     VoiceConnectorItem.type = Types::VoiceConnectorItem
     VoiceConnectorItemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorItem, name: "member"))
     VoiceConnectorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnector, name: "member"))
-    VoiceConnectorSettings.add_member(:cdr_bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CdrBucket"))
+    VoiceConnectorSettings.add_member(:cdr_bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: S3BucketName, name: "CdrBucket"))
     VoiceConnectorSettings.type = Types::VoiceConnectorSettings
     VoiceProfile.add_member(:voice_profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString256, name: "VoiceProfileId"))
     VoiceProfile.add_member(:voice_profile_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "VoiceProfileArn"))
@@ -1247,7 +1257,7 @@ module Aws::ChimeSDKVoice
       service.id = "com.amazonaws.chimesdkvoice#ChimeSDKTelephonyService"
       service.name = "ChimeSDKTelephonyService"
       service.version = "2022-08-03"
-      service.traits = {"aws.api#service" => {"sdkId" => "Chime SDK Voice", "arnNamespace" => "chime", "cloudFormationName" => "ChimeSDKVoice", "cloudTrailEventSource" => "chimesdkvoice.amazonaws.com", "endpointPrefix" => "voice-chime"}, "aws.auth#sigv4" => {"name" => "chime"}, "aws.protocols#restJson1" => {}, "smithy.api#title" => "Amazon Chime SDK Voice"}
+      service.traits = {"aws.api#service" => {"sdkId" => "Chime SDK Voice", "arnNamespace" => "chime", "cloudFormationName" => "ChimeSDKVoice", "cloudTrailEventSource" => "chimesdkvoice.amazonaws.com", "endpointPrefix" => "voice-chime"}, "aws.auth#sigv4" => {"name" => "chime"}, "aws.protocols#restJson1" => {}, "smithy.api#title" => "Amazon Chime SDK Voice", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://voice-chime-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://voice-chime-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://voice-chime.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://voice-chime.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
       service.add_operation(:associate_phone_numbers_with_voice_connector, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chimesdkvoice#AssociatePhoneNumbersWithVoiceConnector"
         operation.name = "AssociatePhoneNumbersWithVoiceConnector"
@@ -1333,7 +1343,7 @@ module Aws::ChimeSDKVoice
         operation.errors << ServiceUnavailableException
         operation.errors << ThrottledClientException
         operation.errors << UnauthorizedClientException
-        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/voice-connectors/{VoiceConnectorId}/proxy-sessions", "code" => 201}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "2026-04-07", "message" => "End of support notice: On April 7, 2026, AWS ended support for Amazon Chime SDK proxy sessions. For more information, refer to https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_CreateProxySession.html"}, "smithy.api#http" => {"method" => "POST", "uri" => "/voice-connectors/{VoiceConnectorId}/proxy-sessions", "code" => 201}}
       end)
       service.add_operation(:create_sip_media_application, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chimesdkvoice#CreateSipMediaApplication"
@@ -1405,6 +1415,7 @@ module Aws::ChimeSDKVoice
         operation.errors << AccessDeniedException
         operation.errors << BadRequestException
         operation.errors << ForbiddenException
+        operation.errors << NotFoundException
         operation.errors << ResourceLimitExceededException
         operation.errors << ServiceFailureException
         operation.errors << ServiceUnavailableException
@@ -1472,7 +1483,7 @@ module Aws::ChimeSDKVoice
         operation.errors << ServiceUnavailableException
         operation.errors << ThrottledClientException
         operation.errors << UnauthorizedClientException
-        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/voice-connectors/{VoiceConnectorId}/proxy-sessions/{ProxySessionId}", "code" => 204}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "2026-04-07", "message" => "End of support notice: On April 7, 2026, AWS ended support for Amazon Chime SDK proxy sessions. For more information, refer to https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_DeleteProxySession.html"}, "smithy.api#http" => {"method" => "DELETE", "uri" => "/voice-connectors/{VoiceConnectorId}/proxy-sessions/{ProxySessionId}", "code" => 204}}
       end)
       service.add_operation(:delete_sip_media_application, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chimesdkvoice#DeleteSipMediaApplication"
@@ -1588,7 +1599,7 @@ module Aws::ChimeSDKVoice
         operation.errors << ServiceUnavailableException
         operation.errors << ThrottledClientException
         operation.errors << UnauthorizedClientException
-        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/voice-connectors/{VoiceConnectorId}/programmable-numbers/proxy", "code" => 204}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "2026-04-07", "message" => "End of support notice: On April 7, 2026, AWS ended support for Amazon Chime SDK proxy sessions. For more information, refer to https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_DeleteVoiceConnectorProxy.html"}, "smithy.api#http" => {"method" => "DELETE", "uri" => "/voice-connectors/{VoiceConnectorId}/programmable-numbers/proxy", "code" => 204}}
       end)
       service.add_operation(:delete_voice_connector_streaming_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chimesdkvoice#DeleteVoiceConnectorStreamingConfiguration"
@@ -1758,7 +1769,7 @@ module Aws::ChimeSDKVoice
         operation.errors << ServiceUnavailableException
         operation.errors << ThrottledClientException
         operation.errors << UnauthorizedClientException
-        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/voice-connectors/{VoiceConnectorId}/proxy-sessions/{ProxySessionId}", "code" => 200}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "2026-04-07", "message" => "End of support notice: On April 7, 2026, AWS ended support for Amazon Chime SDK proxy sessions. For more information, refer to https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_GetProxySession.html"}, "smithy.api#http" => {"method" => "GET", "uri" => "/voice-connectors/{VoiceConnectorId}/proxy-sessions/{ProxySessionId}", "code" => 200}}
       end)
       service.add_operation(:get_sip_media_application, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chimesdkvoice#GetSipMediaApplication"
@@ -1781,6 +1792,7 @@ module Aws::ChimeSDKVoice
         operation.output = GetSipMediaApplicationAlexaSkillConfigurationResponse
         operation.errors << BadRequestException
         operation.errors << ForbiddenException
+        operation.errors << GoneException
         operation.errors << NotFoundException
         operation.errors << ServiceFailureException
         operation.errors << ServiceUnavailableException
@@ -1928,7 +1940,7 @@ module Aws::ChimeSDKVoice
         operation.errors << ServiceUnavailableException
         operation.errors << ThrottledClientException
         operation.errors << UnauthorizedClientException
-        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/voice-connectors/{VoiceConnectorId}/programmable-numbers/proxy", "code" => 200}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "2026-04-07", "message" => "End of support notice: On April 7, 2026, AWS ended support for Amazon Chime SDK proxy sessions. For more information, refer to https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_GetVoiceConnectorProxy.html"}, "smithy.api#http" => {"method" => "GET", "uri" => "/voice-connectors/{VoiceConnectorId}/programmable-numbers/proxy", "code" => 200}}
       end)
       service.add_operation(:get_voice_connector_streaming_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chimesdkvoice#GetVoiceConnectorStreamingConfiguration"
@@ -2072,7 +2084,7 @@ module Aws::ChimeSDKVoice
         operation.errors << ServiceUnavailableException
         operation.errors << ThrottledClientException
         operation.errors << UnauthorizedClientException
-        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/voice-connectors/{VoiceConnectorId}/proxy-sessions", "code" => 200}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "2026-04-07", "message" => "End of support notice: On April 7, 2026, AWS ended support for Amazon Chime SDK proxy sessions. For more information, refer to https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_ListProxySessions.html"}, "smithy.api#http" => {"method" => "GET", "uri" => "/voice-connectors/{VoiceConnectorId}/proxy-sessions", "code" => 200}}
         operation[:paginator] = Paginators::ListProxySessions.new
       end)
       service.add_operation(:list_sip_media_applications, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -2096,6 +2108,7 @@ module Aws::ChimeSDKVoice
         operation.output = ListSipRulesResponse
         operation.errors << BadRequestException
         operation.errors << ForbiddenException
+        operation.errors << NotFoundException
         operation.errors << ServiceFailureException
         operation.errors << ServiceUnavailableException
         operation.errors << ThrottledClientException
@@ -2209,6 +2222,7 @@ module Aws::ChimeSDKVoice
         operation.output = PutSipMediaApplicationAlexaSkillConfigurationResponse
         operation.errors << BadRequestException
         operation.errors << ForbiddenException
+        operation.errors << GoneException
         operation.errors << NotFoundException
         operation.errors << ServiceFailureException
         operation.errors << ServiceUnavailableException
@@ -2278,6 +2292,7 @@ module Aws::ChimeSDKVoice
         operation.name = "PutVoiceConnectorOrigination"
         operation.input = PutVoiceConnectorOriginationRequest
         operation.output = PutVoiceConnectorOriginationResponse
+        operation.errors << AccessDeniedException
         operation.errors << BadRequestException
         operation.errors << ForbiddenException
         operation.errors << NotFoundException
@@ -2300,7 +2315,7 @@ module Aws::ChimeSDKVoice
         operation.errors << ServiceUnavailableException
         operation.errors << ThrottledClientException
         operation.errors << UnauthorizedClientException
-        operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/voice-connectors/{VoiceConnectorId}/programmable-numbers/proxy", "code" => 200}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "2026-04-07", "message" => "End of support notice: On April 7, 2026, AWS ended support for Amazon Chime SDK proxy sessions. For more information, refer to https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_PutVoiceConnectorProxy.html"}, "smithy.api#http" => {"method" => "PUT", "uri" => "/voice-connectors/{VoiceConnectorId}/programmable-numbers/proxy", "code" => 200}}
       end)
       service.add_operation(:put_voice_connector_streaming_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chimesdkvoice#PutVoiceConnectorStreamingConfiguration"
@@ -2527,7 +2542,7 @@ module Aws::ChimeSDKVoice
         operation.errors << ServiceUnavailableException
         operation.errors << ThrottledClientException
         operation.errors << UnauthorizedClientException
-        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/voice-connectors/{VoiceConnectorId}/proxy-sessions/{ProxySessionId}", "code" => 201}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "2026-04-07", "message" => "End of support notice: On April 7, 2026, AWS ended support for Amazon Chime SDK proxy sessions. For more information, refer to https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_UpdateProxySession.html"}, "smithy.api#http" => {"method" => "POST", "uri" => "/voice-connectors/{VoiceConnectorId}/proxy-sessions/{ProxySessionId}", "code" => 201}}
       end)
       service.add_operation(:update_sip_media_application, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.chimesdkvoice#UpdateSipMediaApplication"

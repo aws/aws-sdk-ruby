@@ -23,6 +23,7 @@ module Aws::Route53Domains
     CheckDomainTransferabilityResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53domains#CheckDomainTransferabilityResponse", name: "CheckDomainTransferabilityResponse")
     City = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.route53domains#City", name: "City", traits: {"smithy.api#length" => {"min" => 0, "max" => 255}, "smithy.api#sensitive" => {}})
     Consent = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53domains#Consent", name: "Consent")
+    ConsentPrice = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.route53domains#ConsentPrice", name: "ConsentPrice", traits: {"smithy.api#default" => 0, "smithy.api#range" => {"min" => 0.0, "max" => 2000000000.0}})
     ContactDetail = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53domains#ContactDetail", name: "ContactDetail", traits: {"smithy.api#sensitive" => {}})
     ContactName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.route53domains#ContactName", name: "ContactName", traits: {"smithy.api#length" => {"min" => 0, "max" => 255}, "smithy.api#sensitive" => {}})
     ContactNumber = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.route53domains#ContactNumber", name: "ContactNumber", traits: {"smithy.api#length" => {"min" => 0, "max" => 30}, "smithy.api#sensitive" => {}})
@@ -79,6 +80,8 @@ module Aws::Route53Domains
     GetContactReachabilityStatusResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53domains#GetContactReachabilityStatusResponse", name: "GetContactReachabilityStatusResponse")
     GetDomainDetailRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53domains#GetDomainDetailRequest", name: "GetDomainDetailRequest")
     GetDomainDetailResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53domains#GetDomainDetailResponse", name: "GetDomainDetailResponse")
+    GetDomainPricesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53domains#GetDomainPricesRequest", name: "GetDomainPricesRequest")
+    GetDomainPricesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53domains#GetDomainPricesResponse", name: "GetDomainPricesResponse")
     GetDomainSuggestionsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53domains#GetDomainSuggestionsRequest", name: "GetDomainSuggestionsRequest")
     GetDomainSuggestionsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53domains#GetDomainSuggestionsResponse", name: "GetDomainSuggestionsResponse")
     GetOperationDetailRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53domains#GetOperationDetailRequest", name: "GetOperationDetailRequest")
@@ -90,7 +93,7 @@ module Aws::Route53Domains
     InvalidInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53domains#InvalidInput", name: "InvalidInput", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     InvoiceId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.route53domains#InvoiceId", name: "InvoiceId")
     Label = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.route53domains#Label", name: "Label", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}})
-    LangCode = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.route53domains#LangCode", name: "LangCode", traits: {"smithy.api#pattern" => "^|[A-Za-z]{2,3}$"})
+    LangCode = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.route53domains#LangCode", name: "LangCode", traits: {"smithy.api#pattern" => "^(|[A-Za-z]{2,3})$"})
     ListDomainsAttributeName = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.route53domains#ListDomainsAttributeName", name: "ListDomainsAttributeName")
     ListDomainsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53domains#ListDomainsRequest", name: "ListDomainsRequest")
     ListDomainsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53domains#ListDomainsResponse", name: "ListDomainsResponse")
@@ -119,6 +122,7 @@ module Aws::Route53Domains
     PageMaxItems = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.route53domains#PageMaxItems", name: "PageMaxItems", traits: {"smithy.api#range" => {"max" => 100}})
     Password = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.route53domains#Password", name: "Password", traits: {"smithy.api#sensitive" => {}})
     Price = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.route53domains#Price", name: "Price", traits: {"smithy.api#default" => 0, "smithy.api#range" => {"min" => 0.0}})
+    PriceType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.route53domains#PriceType", name: "PriceType")
     PriceWithCurrency = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53domains#PriceWithCurrency", name: "PriceWithCurrency")
     PushDomainRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53domains#PushDomainRequest", name: "PushDomainRequest")
     ReachabilityStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.route53domains#ReachabilityStatus", name: "ReachabilityStatus")
@@ -144,6 +148,7 @@ module Aws::Route53Domains
     State = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.route53domains#State", name: "State", traits: {"smithy.api#length" => {"min" => 0, "max" => 255}, "smithy.api#sensitive" => {}})
     StatusFlag = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.route53domains#StatusFlag", name: "StatusFlag")
     String = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.route53domains#String", name: "String")
+    TLDInMaintenance = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53domains#TLDInMaintenance", name: "TLDInMaintenance", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     TLDRulesViolation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53domains#TLDRulesViolation", name: "TLDRulesViolation", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     Tag = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53domains#Tag", name: "Tag")
     TagKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.route53domains#TagKey", name: "TagKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}})
@@ -197,14 +202,16 @@ module Aws::Route53Domains
     CheckDomainAvailabilityRequest.add_member(:idn_lang_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LangCode, name: "IdnLangCode"))
     CheckDomainAvailabilityRequest.type = Types::CheckDomainAvailabilityRequest
     CheckDomainAvailabilityResponse.add_member(:availability, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainAvailability, name: "Availability"))
+    CheckDomainAvailabilityResponse.add_member(:price, ::Smithy::Schema::Shapes::MemberShape.new(target: PriceWithCurrency, name: "Price"))
     CheckDomainAvailabilityResponse.type = Types::CheckDomainAvailabilityResponse
     CheckDomainTransferabilityRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "DomainName", traits: {"smithy.api#required" => {}}))
     CheckDomainTransferabilityRequest.add_member(:auth_code, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainAuthCode, name: "AuthCode"))
     CheckDomainTransferabilityRequest.type = Types::CheckDomainTransferabilityRequest
     CheckDomainTransferabilityResponse.add_member(:transferability, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainTransferability, name: "Transferability"))
     CheckDomainTransferabilityResponse.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message"))
+    CheckDomainTransferabilityResponse.add_member(:price, ::Smithy::Schema::Shapes::MemberShape.new(target: PriceWithCurrency, name: "Price"))
     CheckDomainTransferabilityResponse.type = Types::CheckDomainTransferabilityResponse
-    Consent.add_member(:max_price, ::Smithy::Schema::Shapes::MemberShape.new(target: Price, name: "MaxPrice", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    Consent.add_member(:max_price, ::Smithy::Schema::Shapes::MemberShape.new(target: ConsentPrice, name: "MaxPrice", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     Consent.add_member(:currency, ::Smithy::Schema::Shapes::MemberShape.new(target: Currency, name: "Currency", traits: {"smithy.api#required" => {}}))
     Consent.type = Types::Consent
     ContactDetail.add_member(:first_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactName, name: "FirstName"))
@@ -499,8 +506,8 @@ module Aws::Route53Domains
     DisassociateDelegationSignerFromDomainResponse.add_member(:operation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationId, name: "OperationId"))
     DisassociateDelegationSignerFromDomainResponse.type = Types::DisassociateDelegationSignerFromDomainResponse
     DnssecKey.add_member(:algorithm, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableInteger, name: "Algorithm"))
-    DnssecKey.add_member(:flags, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableInteger, name: "Flags"))
-    DnssecKey.add_member(:public_key, ::Smithy::Schema::Shapes::MemberShape.new(target: DnssecPublicKey, name: "PublicKey"))
+    DnssecKey.add_member(:flags, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableInteger, name: "Flags", traits: {"smithy.api#deprecated" => {"since" => "2026-10-01", "message" => "The DnssecKey response no longer returns the flags."}}))
+    DnssecKey.add_member(:public_key, ::Smithy::Schema::Shapes::MemberShape.new(target: DnssecPublicKey, name: "PublicKey", traits: {"smithy.api#deprecated" => {"since" => "2026-10-01", "message" => "The DnssecKey response no longer returns the public key."}}))
     DnssecKey.add_member(:digest_type, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableInteger, name: "DigestType"))
     DnssecKey.add_member(:digest, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Digest"))
     DnssecKey.add_member(:key_tag, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableInteger, name: "KeyTag"))
@@ -536,6 +543,7 @@ module Aws::Route53Domains
     DomainStatusList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainStatus, name: "member"))
     DomainSuggestion.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "DomainName"))
     DomainSuggestion.add_member(:availability, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Availability"))
+    DomainSuggestion.add_member(:price, ::Smithy::Schema::Shapes::MemberShape.new(target: PriceWithCurrency, name: "Price"))
     DomainSuggestion.type = Types::DomainSuggestion
     DomainSuggestionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainSuggestion, name: "member"))
     DomainSummary.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "DomainName"))
@@ -631,9 +639,14 @@ module Aws::Route53Domains
     GetDomainDetailResponse.add_member(:billing_contact, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactDetail, name: "BillingContact"))
     GetDomainDetailResponse.add_member(:billing_privacy, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "BillingPrivacy"))
     GetDomainDetailResponse.type = Types::GetDomainDetailResponse
+    GetDomainPricesRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "DomainName", traits: {"smithy.api#required" => {}}))
+    GetDomainPricesRequest.type = Types::GetDomainPricesRequest
+    GetDomainPricesResponse.add_member(:domain_price, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainPrice, name: "DomainPrice"))
+    GetDomainPricesResponse.type = Types::GetDomainPricesResponse
     GetDomainSuggestionsRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "DomainName", traits: {"smithy.api#required" => {}}))
     GetDomainSuggestionsRequest.add_member(:suggestion_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "SuggestionCount", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     GetDomainSuggestionsRequest.add_member(:only_available, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "OnlyAvailable", traits: {"smithy.api#required" => {}}))
+    GetDomainSuggestionsRequest.add_member(:only_standard_prices, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "OnlyStandardPrices"))
     GetDomainSuggestionsRequest.type = Types::GetDomainSuggestionsRequest
     GetDomainSuggestionsResponse.add_member(:suggestions_list, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainSuggestionsList, name: "SuggestionsList"))
     GetDomainSuggestionsResponse.type = Types::GetDomainSuggestionsResponse
@@ -731,8 +744,11 @@ module Aws::Route53Domains
     Operator.add_member(:le, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LE", traits: {"smithy.api#enumValue" => "LE"}))
     Operator.add_member(:ge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GE", traits: {"smithy.api#enumValue" => "GE"}))
     Operator.add_member(:begins_with, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BEGINS_WITH", traits: {"smithy.api#enumValue" => "BEGINS_WITH"}))
+    PriceType.add_member(:standard, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STANDARD", traits: {"smithy.api#enumValue" => "STANDARD"}))
+    PriceType.add_member(:registry_premium, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REGISTRY_PREMIUM", traits: {"smithy.api#enumValue" => "REGISTRY_PREMIUM"}))
     PriceWithCurrency.add_member(:price, ::Smithy::Schema::Shapes::MemberShape.new(target: Price, name: "Price", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     PriceWithCurrency.add_member(:currency, ::Smithy::Schema::Shapes::MemberShape.new(target: Currency, name: "Currency", traits: {"smithy.api#required" => {}}))
+    PriceWithCurrency.add_member(:price_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PriceType, name: "PriceType"))
     PriceWithCurrency.type = Types::PriceWithCurrency
     PushDomainRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "DomainName", traits: {"smithy.api#required" => {}}))
     PushDomainRequest.add_member(:target, ::Smithy::Schema::Shapes::MemberShape.new(target: Label, name: "Target", traits: {"smithy.api#required" => {}}))
@@ -752,6 +768,7 @@ module Aws::Route53Domains
     RegisterDomainRequest.add_member(:privacy_protect_tech_contact, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "PrivacyProtectTechContact"))
     RegisterDomainRequest.add_member(:billing_contact, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactDetail, name: "BillingContact"))
     RegisterDomainRequest.add_member(:privacy_protect_billing_contact, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "PrivacyProtectBillingContact"))
+    RegisterDomainRequest.add_member(:consent, ::Smithy::Schema::Shapes::MemberShape.new(target: Consent, name: "Consent"))
     RegisterDomainRequest.type = Types::RegisterDomainRequest
     RegisterDomainResponse.add_member(:operation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationId, name: "OperationId"))
     RegisterDomainResponse.type = Types::RegisterDomainResponse
@@ -762,6 +779,7 @@ module Aws::Route53Domains
     RenewDomainRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "DomainName", traits: {"smithy.api#required" => {}}))
     RenewDomainRequest.add_member(:duration_in_years, ::Smithy::Schema::Shapes::MemberShape.new(target: DurationInYears, name: "DurationInYears"))
     RenewDomainRequest.add_member(:current_expiry_year, ::Smithy::Schema::Shapes::MemberShape.new(target: CurrentExpiryYear, name: "CurrentExpiryYear", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    RenewDomainRequest.add_member(:consent, ::Smithy::Schema::Shapes::MemberShape.new(target: Consent, name: "Consent"))
     RenewDomainRequest.type = Types::RenewDomainRequest
     RenewDomainResponse.add_member(:operation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationId, name: "OperationId"))
     RenewDomainResponse.type = Types::RenewDomainResponse
@@ -787,6 +805,9 @@ module Aws::Route53Domains
     StatusFlag.add_member(:pending_authorization, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING_AUTHORIZATION", traits: {"smithy.api#enumValue" => "PENDING_AUTHORIZATION"}))
     StatusFlag.add_member(:pending_payment_verification, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING_PAYMENT_VERIFICATION", traits: {"smithy.api#enumValue" => "PENDING_PAYMENT_VERIFICATION"}))
     StatusFlag.add_member(:pending_support_case, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING_SUPPORT_CASE", traits: {"smithy.api#enumValue" => "PENDING_SUPPORT_CASE"}))
+    TLDInMaintenance.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
+    TLDInMaintenance.add_member(:tld, ::Smithy::Schema::Shapes::MemberShape.new(target: TldName, name: "tld"))
+    TLDInMaintenance.type = Types::TLDInMaintenance
     TLDRulesViolation.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     TLDRulesViolation.type = Types::TLDRulesViolation
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key"))
@@ -796,7 +817,7 @@ module Aws::Route53Domains
     TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TransferDomainRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "DomainName", traits: {"smithy.api#required" => {}}))
     TransferDomainRequest.add_member(:idn_lang_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LangCode, name: "IdnLangCode"))
-    TransferDomainRequest.add_member(:duration_in_years, ::Smithy::Schema::Shapes::MemberShape.new(target: DurationInYears, name: "DurationInYears", traits: {"smithy.api#required" => {}}))
+    TransferDomainRequest.add_member(:duration_in_years, ::Smithy::Schema::Shapes::MemberShape.new(target: DurationInYears, name: "DurationInYears"))
     TransferDomainRequest.add_member(:nameservers, ::Smithy::Schema::Shapes::MemberShape.new(target: NameserverList, name: "Nameservers"))
     TransferDomainRequest.add_member(:auth_code, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainAuthCode, name: "AuthCode"))
     TransferDomainRequest.add_member(:auto_renew, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "AutoRenew"))
@@ -808,6 +829,7 @@ module Aws::Route53Domains
     TransferDomainRequest.add_member(:privacy_protect_tech_contact, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "PrivacyProtectTechContact"))
     TransferDomainRequest.add_member(:billing_contact, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactDetail, name: "BillingContact"))
     TransferDomainRequest.add_member(:privacy_protect_billing_contact, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "PrivacyProtectBillingContact"))
+    TransferDomainRequest.add_member(:consent, ::Smithy::Schema::Shapes::MemberShape.new(target: Consent, name: "Consent"))
     TransferDomainRequest.type = Types::TransferDomainRequest
     TransferDomainResponse.add_member(:operation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationId, name: "OperationId"))
     TransferDomainResponse.type = Types::TransferDomainResponse
@@ -823,6 +845,7 @@ module Aws::Route53Domains
     Transferable.add_member(:domain_in_own_account, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DOMAIN_IN_OWN_ACCOUNT", traits: {"smithy.api#enumValue" => "DOMAIN_IN_OWN_ACCOUNT"}))
     Transferable.add_member(:domain_in_another_account, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DOMAIN_IN_ANOTHER_ACCOUNT", traits: {"smithy.api#enumValue" => "DOMAIN_IN_ANOTHER_ACCOUNT"}))
     Transferable.add_member(:premium_domain, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PREMIUM_DOMAIN", traits: {"smithy.api#enumValue" => "PREMIUM_DOMAIN"}))
+    Transferable.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
     UnsupportedTLD.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     UnsupportedTLD.type = Types::UnsupportedTLD
     UpdateDomainContactPrivacyRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "DomainName", traits: {"smithy.api#required" => {}}))
@@ -866,7 +889,7 @@ module Aws::Route53Domains
       service.id = "com.amazonaws.route53domains#Route53Domains_v20140515"
       service.name = "Route53DomainsV20140515"
       service.version = "2014-05-15"
-      service.traits = {"aws.api#service" => {"sdkId" => "Route 53 Domains", "arnNamespace" => "route53domains", "cloudFormationName" => "Route53Domains", "cloudTrailEventSource" => "route53domains.amazonaws.com", "docId" => "route53domains-2014-05-15", "endpointPrefix" => "route53domains"}, "aws.auth#sigv4" => {"name" => "route53domains"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "Amazon Route 53 Domains", "smithy.api#xmlNamespace" => {"uri" => "https://route53domains.amazonaws.com/doc/2014-05-15/"}}
+      service.traits = {"aws.api#service" => {"sdkId" => "Route 53 Domains", "arnNamespace" => "route53domains", "cloudFormationName" => "Route53Domains", "cloudTrailEventSource" => "route53domains.amazonaws.com", "docId" => "route53domains-2014-05-15", "endpointPrefix" => "route53domains"}, "aws.auth#sigv4" => {"name" => "route53domains"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "Amazon Route 53 Domains", "smithy.api#xmlNamespace" => {"uri" => "https://route53domains.amazonaws.com/doc/2014-05-15/"}, "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://route53domains-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://route53domains-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://route53domains.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://route53domains.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
       service.add_operation(:accept_domain_transfer_from_another_aws_account, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.route53domains#AcceptDomainTransferFromAnotherAwsAccount"
         operation.name = "AcceptDomainTransferFromAnotherAwsAccount"
@@ -907,6 +930,7 @@ module Aws::Route53Domains
         operation.input = CheckDomainAvailabilityRequest
         operation.output = CheckDomainAvailabilityResponse
         operation.errors << InvalidInput
+        operation.errors << TLDInMaintenance
         operation.errors << UnsupportedTLD
         operation.traits = {}
       end)
@@ -916,6 +940,7 @@ module Aws::Route53Domains
         operation.input = CheckDomainTransferabilityRequest
         operation.output = CheckDomainTransferabilityResponse
         operation.errors << InvalidInput
+        operation.errors << TLDInMaintenance
         operation.errors << UnsupportedTLD
         operation.traits = {}
       end)
@@ -1014,12 +1039,23 @@ module Aws::Route53Domains
         operation.errors << UnsupportedTLD
         operation.traits = {"smithy.test#smokeTests" => [{"id" => "GetDomainDetailFailure", "params" => {"DomainName" => "fake-domain-name"}, "vendorParams" => {"region" => "us-east-1"}, "vendorParamsShape" => "aws.test#AwsVendorParams", "expect" => {"failure" => {}}}]}
       end)
+      service.add_operation(:get_domain_prices, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.route53domains#GetDomainPrices"
+        operation.name = "GetDomainPrices"
+        operation.input = GetDomainPricesRequest
+        operation.output = GetDomainPricesResponse
+        operation.errors << InvalidInput
+        operation.errors << TLDInMaintenance
+        operation.errors << UnsupportedTLD
+        operation.traits = {"smithy.api#readonly" => {}}
+      end)
       service.add_operation(:get_domain_suggestions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.route53domains#GetDomainSuggestions"
         operation.name = "GetDomainSuggestions"
         operation.input = GetDomainSuggestionsRequest
         operation.output = GetDomainSuggestionsResponse
         operation.errors << InvalidInput
+        operation.errors << TLDInMaintenance
         operation.errors << UnsupportedTLD
         operation.traits = {}
       end)
@@ -1076,6 +1112,7 @@ module Aws::Route53Domains
         operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
         operation.errors << InvalidInput
         operation.errors << OperationLimitExceeded
+        operation.errors << TLDInMaintenance
         operation.errors << UnsupportedTLD
         operation.traits = {}
       end)
@@ -1121,6 +1158,7 @@ module Aws::Route53Domains
         operation.output = ResendContactReachabilityEmailResponse
         operation.errors << InvalidInput
         operation.errors << OperationLimitExceeded
+        operation.errors << TLDInMaintenance
         operation.errors << UnsupportedTLD
         operation.traits = {}
       end)
@@ -1130,6 +1168,7 @@ module Aws::Route53Domains
         operation.input = ResendOperationAuthorizationRequest
         operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
         operation.errors << InvalidInput
+        operation.errors << TLDInMaintenance
         operation.traits = {}
       end)
       service.add_operation(:retrieve_domain_auth_code, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -1138,6 +1177,7 @@ module Aws::Route53Domains
         operation.input = RetrieveDomainAuthCodeRequest
         operation.output = RetrieveDomainAuthCodeResponse
         operation.errors << InvalidInput
+        operation.errors << TLDInMaintenance
         operation.errors << UnsupportedTLD
         operation.traits = {}
       end)

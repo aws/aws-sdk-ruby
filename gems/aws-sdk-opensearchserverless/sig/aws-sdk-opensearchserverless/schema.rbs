@@ -9,6 +9,9 @@ module Aws::OpenSearchServerless
     AccessPolicyType: StringShape
     AccountSettingsDetail: StructureShape
     Arn: StringShape
+    AutoscalingStatus: StringShape
+    BatchGetCollectionGroupRequest: StructureShape
+    BatchGetCollectionGroupResponse: StructureShape
     BatchGetCollectionInput: StructureShape
     BatchGetCollectionOutput: StructureShape
     BatchGetEffectiveLifecyclePolicyRequest: StructureShape
@@ -17,6 +20,7 @@ module Aws::OpenSearchServerless
     BatchGetLifecyclePolicyResponse: StructureShape
     BatchGetVpcEndpointInput: StructureShape
     BatchGetVpcEndpointOutput: StructureShape
+    CapacityDetails: StructureShape
     CapacityLimits: StructureShape
     ClientToken: StringShape
     CollectionDetail: StructureShape
@@ -24,6 +28,21 @@ module Aws::OpenSearchServerless
     CollectionErrorDetail: StructureShape
     CollectionErrorDetails: ListShape
     CollectionFilters: StructureShape
+    CollectionGroupCapacityLimits: StructureShape
+    CollectionGroupDetail: StructureShape
+    CollectionGroupDetails: ListShape
+    CollectionGroupErrorDetail: StructureShape
+    CollectionGroupErrorDetails: ListShape
+    CollectionGroupId: StringShape
+    CollectionGroupIds: ListShape
+    CollectionGroupMaxIndexingCapacityValue: FloatShape
+    CollectionGroupMaxSearchCapacityValue: FloatShape
+    CollectionGroupMinIndexingCapacityValue: FloatShape
+    CollectionGroupMinSearchCapacityValue: FloatShape
+    CollectionGroupName: StringShape
+    CollectionGroupNames: ListShape
+    CollectionGroupSummaries: ListShape
+    CollectionGroupSummary: StructureShape
     CollectionId: StringShape
     CollectionIds: ListShape
     CollectionName: StringShape
@@ -38,6 +57,9 @@ module Aws::OpenSearchServerless
     CreateAccessPolicyInput: StructureShape
     CreateAccessPolicyOutput: StructureShape
     CreateCollectionDetail: StructureShape
+    CreateCollectionGroupDetail: StructureShape
+    CreateCollectionGroupRequest: StructureShape
+    CreateCollectionGroupResponse: StructureShape
     CreateCollectionInput: StructureShape
     CreateCollectionOutput: StructureShape
     CreateIamIdentityCenterConfigOptions: StructureShape
@@ -52,9 +74,12 @@ module Aws::OpenSearchServerless
     CreateVpcEndpointDetail: StructureShape
     CreateVpcEndpointInput: StructureShape
     CreateVpcEndpointOutput: StructureShape
+    CurrentCapacity: StructureShape
     DeleteAccessPolicyInput: StructureShape
     DeleteAccessPolicyOutput: StructureShape
     DeleteCollectionDetail: StructureShape
+    DeleteCollectionGroupRequest: StructureShape
+    DeleteCollectionGroupResponse: StructureShape
     DeleteCollectionInput: StructureShape
     DeleteCollectionOutput: StructureShape
     DeleteIndexRequest: StructureShape
@@ -68,10 +93,12 @@ module Aws::OpenSearchServerless
     DeleteVpcEndpointDetail: StructureShape
     DeleteVpcEndpointInput: StructureShape
     DeleteVpcEndpointOutput: StructureShape
+    DeletionProtection: StringShape
     EffectiveLifecyclePolicyDetail: StructureShape
     EffectiveLifecyclePolicyDetails: ListShape
     EffectiveLifecyclePolicyErrorDetail: StructureShape
     EffectiveLifecyclePolicyErrorDetails: ListShape
+    EncryptionConfig: StructureShape
     FipsEndpoints: StructureShape
     GetAccessPolicyInput: StructureShape
     GetAccessPolicyOutput: StructureShape
@@ -111,6 +138,8 @@ module Aws::OpenSearchServerless
     LifecycleResourceFilter: ListShape
     ListAccessPoliciesInput: StructureShape
     ListAccessPoliciesOutput: StructureShape
+    ListCollectionGroupsRequest: StructureShape
+    ListCollectionGroupsResponse: StructureShape
     ListCollectionsInput: StructureShape
     ListCollectionsOutput: StructureShape
     ListLifecyclePoliciesRequest: StructureShape
@@ -148,6 +177,8 @@ module Aws::OpenSearchServerless
     SecurityPolicySummaries: ListShape
     SecurityPolicySummary: StructureShape
     SecurityPolicyType: StringShape
+    ServerlessGeneration: StringShape
+    ServerlessVectorAccelerationStatus: StringShape
     ServiceQuotaExceededException: StructureShape
     StandbyReplicas: StringShape
     SubnetId: StringShape
@@ -166,6 +197,9 @@ module Aws::OpenSearchServerless
     UpdateAccountSettingsInput: StructureShape
     UpdateAccountSettingsOutput: StructureShape
     UpdateCollectionDetail: StructureShape
+    UpdateCollectionGroupDetail: StructureShape
+    UpdateCollectionGroupRequest: StructureShape
+    UpdateCollectionGroupResponse: StructureShape
     UpdateCollectionInput: StructureShape
     UpdateCollectionOutput: StructureShape
     UpdateIamIdentityCenterConfigOptions: StructureShape
@@ -181,6 +215,7 @@ module Aws::OpenSearchServerless
     UpdateVpcEndpointInput: StructureShape
     UpdateVpcEndpointOutput: StructureShape
     ValidationException: StructureShape
+    VectorOptions: StructureShape
     VpcEndpointDetail: StructureShape
     VpcEndpointDetails: ListShape
     VpcEndpointErrorDetail: StructureShape

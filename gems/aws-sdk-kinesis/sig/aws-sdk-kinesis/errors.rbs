@@ -3,6 +3,9 @@ module Aws::Kinesis
     class AccessDeniedException < Smithy::Client::ServiceError
       def message: () -> String?
     end
+    class DryRunOperationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
     class ExpiredIteratorException < Smithy::Client::ServiceError
       def message: () -> String?
     end

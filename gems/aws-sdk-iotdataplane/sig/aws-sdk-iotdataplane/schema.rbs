@@ -4,24 +4,34 @@ module Aws::IoTDataPlane
 
     CleanSession: BooleanShape
     ClientId: StringShape
+    Confirmation: BooleanShape
     ConflictException: StructureShape
+    Connected: BooleanShape
     ContentType: StringShape
     CorrelationData: StringShape
     DeleteConnectionRequest: StructureShape
     DeleteThingShadowRequest: StructureShape
     DeleteThingShadowResponse: StructureShape
+    DisconnectReason: StringShape
     ForbiddenException: StructureShape
+    GatewayTimeoutException: StructureShape
+    GetConnectionRequest: StructureShape
+    GetConnectionResponse: StructureShape
     GetRetainedMessageRequest: StructureShape
     GetRetainedMessageResponse: StructureShape
     GetThingShadowRequest: StructureShape
     GetThingShadowResponse: StructureShape
+    IncludeSocketInformation: BooleanShape
     InternalFailureException: StructureShape
     InvalidRequestException: StructureShape
     JsonDocument: BlobShape
+    KeepAliveDuration: IntegerShape
     ListNamedShadowsForThingRequest: StructureShape
     ListNamedShadowsForThingResponse: StructureShape
     ListRetainedMessagesRequest: StructureShape
     ListRetainedMessagesResponse: StructureShape
+    ListSubscriptionsRequest: StructureShape
+    ListSubscriptionsResponse: StructureShape
     MaxResults: IntegerShape
     MessageExpiry: IntegerShape
     MethodNotAllowedException: StructureShape
@@ -36,22 +46,36 @@ module Aws::IoTDataPlane
     Qos: IntegerShape
     RequestEntityTooLargeException: StructureShape
     ResourceNotFoundException: StructureShape
+    ResponseMessage: StringShape
     ResponseTopic: StringShape
     Retain: BooleanShape
     RetainedMessageList: ListShape
     RetainedMessageSummary: StructureShape
+    SendDirectMessageRequest: StructureShape
+    SendDirectMessageResponse: StructureShape
     ServiceUnavailableException: StructureShape
+    SessionExpiry: IntegerShape
     ShadowName: StringShape
+    SourceIp: StringShape
+    SourcePort: IntegerShape
+    SubscriptionList: ListShape
+    SubscriptionSummary: StructureShape
     SynthesizedJsonUserProperties: StringShape
+    TargetIp: StringShape
+    TargetPort: IntegerShape
     ThingName: StringShape
     ThrottlingException: StructureShape
+    TimeoutInSeconds: IntegerShape
     Timestamp: IntegerShape
     Topic: StringShape
+    TopicFilter: StringShape
+    TraceId: StringShape
     UnauthorizedException: StructureShape
     UnsupportedDocumentEncodingException: StructureShape
     UpdateThingShadowRequest: StructureShape
     UpdateThingShadowResponse: StructureShape
     UserPropertiesBlob: BlobShape
+    VpcEndpointId: StringShape
     ErrorMessage: StringShape
 
     IotMoonrakerService: ServiceShape

@@ -44,6 +44,16 @@ module Aws::ECS
       ?validate_params: bool,
     ) -> void | (?Hash[Symbol, untyped]) -> void
 
+    interface _ContinueServiceDeploymentResponse
+      include Smithy::Client::_Response[Types::ContinueServiceDeploymentResponse]
+      def service_deployment_arn: () -> String?
+    end
+    def continue_service_deployment: (
+      ?service_deployment_arn: String,
+      ?hook_id: String,
+      ?action: String
+    ) -> _ContinueServiceDeploymentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ContinueServiceDeploymentResponse
+
     interface _CreateCapacityProviderResponse
       include Smithy::Client::_Response[Types::CreateCapacityProviderResponse]
       def capacity_provider: () -> Types::CapacityProvider?
@@ -74,7 +84,12 @@ module Aws::ECS
           storage_configuration: {
             storage_size_gi_b: Integer
           },
+          local_storage_configuration: {
+            use_local_storage: bool
+          },
           monitoring: String,
+          capacity_option_type: String,
+          instance_metadata_tags_propagation: bool,
           instance_requirements: {
             v_cpu_count: {
               min: Integer,
@@ -95,7 +110,7 @@ module Aws::ECS
             on_demand_max_price_percentage_over_lowest_price: untyped,
             bare_metal: String,
             burstable_performance: String,
-            require_hibernate_support: bool,
+            require_hibernate_support: untyped,
             network_interface_count: {
               min: untyped,
               max: untyped
@@ -127,9 +142,20 @@ module Aws::ECS
             },
             allowed_instance_types: Array[String],
             max_spot_price_as_percentage_of_optimal_on_demand_price: untyped
+          },
+          fips_enabled: untyped,
+          capacity_reservations: {
+            reservation_group_arn: untyped,
+            reservation_preference: String
           }
         },
-        propagate_tags: String
+        propagate_tags: String,
+        infrastructure_optimization: {
+          scale_in_after: untyped
+        },
+        auto_repair_configuration: {
+          actions_status: String
+        }
       },
       ?tags: Array[
         {
@@ -187,6 +213,96 @@ module Aws::ECS
       }
     ) -> _CreateClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateClusterResponse
 
+    interface _CreateDaemonResponse
+      include Smithy::Client::_Response[Types::CreateDaemonResponse]
+      def daemon_arn: () -> String?
+      def status: () -> String?
+      def created_at: () -> Time?
+      def deployment_arn: () -> String?
+    end
+    def create_daemon: (
+      ?daemon_name: String,
+      ?cluster_arn: String,
+      ?daemon_task_definition_arn: String,
+      ?capacity_provider_arns: Array[String],
+      ?deployment_configuration: {
+        drain_percent: Float,
+        alarms: {
+          alarm_names: Array[String],
+          enable: bool
+        },
+        bake_time_in_minutes: Integer
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?propagate_tags: String,
+      ?enable_ecs_managed_tags: bool,
+      ?enable_execute_command: bool,
+      ?client_token: String,
+      ?critical: bool
+    ) -> _CreateDaemonResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDaemonResponse
+
+    interface _CreateExpressGatewayServiceResponse
+      include Smithy::Client::_Response[Types::CreateExpressGatewayServiceResponse]
+      def service: () -> Types::ECSExpressGatewayService?
+    end
+    def create_express_gateway_service: (
+      ?execution_role_arn: String,
+      ?infrastructure_role_arn: String,
+      ?service_name: String,
+      ?cluster: String,
+      ?health_check_path: String,
+      ?primary_container: {
+        image: String,
+        container_port: Integer,
+        aws_logs_configuration: {
+          log_group: untyped,
+          log_stream_prefix: untyped
+        },
+        repository_credentials: {
+          credentials_parameter: untyped
+        },
+        command: Array[String],
+        environment: Array[
+          {
+            name: untyped,
+            value: untyped
+          }
+        ],
+        secrets: Array[
+          {
+            name: untyped,
+            value_from: untyped
+          }
+        ]
+      },
+      ?task_role_arn: String,
+      ?network_configuration: {
+        security_groups: Array[String],
+        subnets: untyped
+      },
+      ?cpu: String,
+      ?memory: String,
+      ?cpu_architecture: String,
+      ?scaling_target: {
+        min_task_count: Integer,
+        max_task_count: untyped,
+        auto_scaling_metric: String,
+        auto_scaling_target_value: untyped
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?task_definition_arn: String
+    ) -> _CreateExpressGatewayServiceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateExpressGatewayServiceResponse
+
     interface _CreateServiceResponse
       include Smithy::Client::_Response[Types::CreateServiceResponse]
       def service: () -> Types::Service?
@@ -233,7 +349,12 @@ module Aws::ECS
       ?deployment_configuration: {
         deployment_circuit_breaker: {
           enable: bool,
-          rollback: untyped
+          rollback: untyped,
+          reset_on_healthy_task: bool,
+          threshold_configuration: {
+            type: String,
+            value: Integer
+          }
         },
         maximum_percent: Integer,
         minimum_healthy_percent: untyped,
@@ -246,12 +367,30 @@ module Aws::ECS
         bake_time_in_minutes: untyped,
         lifecycle_hooks: Array[
           {
+            target_type: String,
             hook_target_arn: String,
             role_arn: String,
             lifecycle_stages: Array[String],
-            hook_details: Smithy::Schema::document
+            hook_details: Smithy::Schema::document,
+            timeout_configuration: {
+              timeout_in_minutes: Integer,
+              action: String
+            }
           }
-        ]
+        ],
+        linear_configuration: {
+          step_percent: Float,
+          step_bake_time_in_minutes: untyped
+        },
+        canary_configuration: {
+          canary_percent: untyped,
+          canary_bake_time_in_minutes: untyped
+        },
+        early_success_criteria: {
+          enable: untyped,
+          healthy_percent: Integer,
+          source_service_revision_cleanup: String
+        }
       },
       ?placement_constraints: Array[
         {
@@ -330,6 +469,10 @@ module Aws::ECS
               value_from: untyped
             }
           ]
+        },
+        access_log_configuration: {
+          format: String,
+          include_query_parameters: String
         }
       },
       ?volume_configurations: Array[
@@ -365,9 +508,22 @@ module Aws::ECS
         {
           role_arn: String,
           target_group_arn: String,
-          port_name: untyped
+          port_name: untyped,
+          advanced_configuration: {
+            alternate_target_group_arn: untyped,
+            production_listener_rule: untyped,
+            test_listener_rule: untyped
+          }
         }
-      ]
+      ],
+      ?monitoring: {
+        metric_configurations: Array[
+          {
+            metric_names: Array[String],
+            resolution_seconds: Integer
+          }
+        ]
+      }
     ) -> _CreateServiceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateServiceResponse
 
     interface _CreateTaskSetResponse
@@ -472,6 +628,34 @@ module Aws::ECS
       ?cluster: String
     ) -> _DeleteClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteClusterResponse
 
+    interface _DeleteDaemonResponse
+      include Smithy::Client::_Response[Types::DeleteDaemonResponse]
+      def daemon_arn: () -> String?
+      def status: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def deployment_arn: () -> String?
+    end
+    def delete_daemon: (
+      ?daemon_arn: String
+    ) -> _DeleteDaemonResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDaemonResponse
+
+    interface _DeleteDaemonTaskDefinitionResponse
+      include Smithy::Client::_Response[Types::DeleteDaemonTaskDefinitionResponse]
+      def daemon_task_definition_arn: () -> String?
+    end
+    def delete_daemon_task_definition: (
+      ?daemon_task_definition: String
+    ) -> _DeleteDaemonTaskDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDaemonTaskDefinitionResponse
+
+    interface _DeleteExpressGatewayServiceResponse
+      include Smithy::Client::_Response[Types::DeleteExpressGatewayServiceResponse]
+      def service: () -> Types::ECSExpressGatewayService?
+    end
+    def delete_express_gateway_service: (
+      ?service_arn: String
+    ) -> _DeleteExpressGatewayServiceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteExpressGatewayServiceResponse
+
     interface _DeleteServiceResponse
       include Smithy::Client::_Response[Types::DeleteServiceResponse]
       def service: () -> Types::Service?
@@ -554,6 +738,49 @@ module Aws::ECS
       ?container_instances: Array[String],
       ?include: Array[String]
     ) -> _DescribeContainerInstancesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeContainerInstancesResponse
+
+    interface _DescribeDaemonResponse
+      include Smithy::Client::_Response[Types::DescribeDaemonResponse]
+      def daemon: () -> Types::DaemonDetail?
+    end
+    def describe_daemon: (
+      ?daemon_arn: String
+    ) -> _DescribeDaemonResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDaemonResponse
+
+    interface _DescribeDaemonDeploymentsResponse
+      include Smithy::Client::_Response[Types::DescribeDaemonDeploymentsResponse]
+      def failures: () -> Array[Types::Failure]?
+      def daemon_deployments: () -> Array[Types::DaemonDeployment]?
+    end
+    def describe_daemon_deployments: (
+      ?daemon_deployment_arns: Array[String]
+    ) -> _DescribeDaemonDeploymentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDaemonDeploymentsResponse
+
+    interface _DescribeDaemonRevisionsResponse
+      include Smithy::Client::_Response[Types::DescribeDaemonRevisionsResponse]
+      def daemon_revisions: () -> Array[Types::DaemonRevision]?
+      def failures: () -> Array[Types::Failure]?
+    end
+    def describe_daemon_revisions: (
+      ?daemon_revision_arns: Array[String]
+    ) -> _DescribeDaemonRevisionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDaemonRevisionsResponse
+
+    interface _DescribeDaemonTaskDefinitionResponse
+      include Smithy::Client::_Response[Types::DescribeDaemonTaskDefinitionResponse]
+      def daemon_task_definition: () -> Types::DaemonTaskDefinition?
+    end
+    def describe_daemon_task_definition: (
+      ?daemon_task_definition: String
+    ) -> _DescribeDaemonTaskDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDaemonTaskDefinitionResponse
+
+    interface _DescribeExpressGatewayServiceResponse
+      include Smithy::Client::_Response[Types::DescribeExpressGatewayServiceResponse]
+      def service: () -> Types::ECSExpressGatewayService?
+    end
+    def describe_express_gateway_service: (
+      ?service_arn: String,
+      ?include: Array[String]
+    ) -> _DescribeExpressGatewayServiceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeExpressGatewayServiceResponse
 
     interface _DescribeServiceDeploymentsResponse
       include Smithy::Client::_Response[Types::DescribeServiceDeploymentsResponse]
@@ -706,6 +933,49 @@ module Aws::ECS
       ?status: String
     ) -> _ListContainerInstancesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListContainerInstancesResponse
 
+    interface _ListDaemonDeploymentsResponse
+      include Smithy::Client::_Response[Types::ListDaemonDeploymentsResponse]
+      def next_token: () -> String?
+      def daemon_deployments: () -> Array[Types::DaemonDeploymentSummary]?
+    end
+    def list_daemon_deployments: (
+      ?daemon_arn: String,
+      ?status: Array[String],
+      ?created_at: {
+        before: Time,
+        after: untyped
+      },
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListDaemonDeploymentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDaemonDeploymentsResponse
+
+    interface _ListDaemonTaskDefinitionsResponse
+      include Smithy::Client::_Response[Types::ListDaemonTaskDefinitionsResponse]
+      def daemon_task_definitions: () -> Array[Types::DaemonTaskDefinitionSummary]?
+      def next_token: () -> String?
+    end
+    def list_daemon_task_definitions: (
+      ?family_prefix: String,
+      ?family: String,
+      ?revision: String,
+      ?status: String,
+      ?sort: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDaemonTaskDefinitionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDaemonTaskDefinitionsResponse
+
+    interface _ListDaemonsResponse
+      include Smithy::Client::_Response[Types::ListDaemonsResponse]
+      def daemon_summaries_list: () -> Array[Types::DaemonSummary]?
+      def next_token: () -> String?
+    end
+    def list_daemons: (
+      ?cluster_arn: String,
+      ?capacity_provider_arns: Array[String],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListDaemonsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDaemonsResponse
+
     interface _ListServiceDeploymentsResponse
       include Smithy::Client::_Response[Types::ListServiceDeploymentsResponse]
       def service_deployments: () -> Array[Types::ServiceDeploymentBrief]?
@@ -733,7 +1003,8 @@ module Aws::ECS
       ?next_token: String,
       ?max_results: Integer,
       ?launch_type: String,
-      ?scheduling_strategy: String
+      ?scheduling_strategy: String,
+      ?resource_management_type: String
     ) -> _ListServicesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListServicesResponse
 
     interface _ListServicesByNamespaceResponse
@@ -794,7 +1065,8 @@ module Aws::ECS
       ?started_by: String,
       ?service_name: String,
       ?desired_status: String,
-      ?launch_type: String
+      ?launch_type: String,
+      ?daemon_name: String
     ) -> _ListTasksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTasksResponse
 
     interface _PutAccountSettingResponse
@@ -893,6 +1165,143 @@ module Aws::ECS
         }
       ]
     ) -> _RegisterContainerInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterContainerInstanceResponse
+
+    interface _RegisterDaemonTaskDefinitionResponse
+      include Smithy::Client::_Response[Types::RegisterDaemonTaskDefinitionResponse]
+      def daemon_task_definition_arn: () -> String?
+    end
+    def register_daemon_task_definition: (
+      ?family: String,
+      ?task_role_arn: String,
+      ?execution_role_arn: String,
+      ?container_definitions: Array[
+        {
+          name: String,
+          image: untyped,
+          memory: Integer,
+          memory_reservation: untyped,
+          repository_credentials: {
+            credentials_parameter: untyped
+          },
+          health_check: {
+            command: Array[String],
+            interval: untyped,
+            timeout: untyped,
+            retries: untyped,
+            start_period: untyped
+          },
+          cpu: Integer,
+          essential: bool,
+          entry_point: untyped,
+          command: untyped,
+          working_directory: untyped,
+          environment_files: Array[
+            {
+              value: untyped,
+              type: String
+            }
+          ],
+          environment: Array[
+            {
+              name: untyped,
+              value: untyped
+            }
+          ],
+          secrets: Array[
+            {
+              name: untyped,
+              value_from: untyped
+            }
+          ],
+          readonly_root_filesystem: untyped,
+          mount_points: Array[
+            {
+              source_volume: untyped,
+              container_path: untyped,
+              read_only: untyped
+            }
+          ],
+          log_configuration: {
+            log_driver: String,
+            options: Hash[String, String],
+            secret_options: untyped
+          },
+          firelens_configuration: {
+            type: String,
+            options: Hash[String, String]
+          },
+          privileged: untyped,
+          user: untyped,
+          ulimits: Array[
+            {
+              name: String,
+              soft_limit: untyped,
+              hard_limit: untyped
+            }
+          ],
+          linux_parameters: {
+            capabilities: {
+              add: untyped,
+              drop: untyped
+            },
+            devices: Array[
+              {
+                host_path: untyped,
+                container_path: untyped,
+                permissions: Array[String]
+              }
+            ],
+            init_process_enabled: untyped,
+            tmpfs: Array[
+              {
+                container_path: untyped,
+                size: untyped,
+                mount_options: untyped
+              }
+            ]
+          },
+          depends_on: Array[
+            {
+              container_name: untyped,
+              condition: String
+            }
+          ],
+          start_timeout: untyped,
+          stop_timeout: untyped,
+          system_controls: Array[
+            {
+              namespace: untyped,
+              value: untyped
+            }
+          ],
+          interactive: untyped,
+          pseudo_terminal: untyped,
+          restart_policy: {
+            enabled: untyped,
+            ignored_exit_codes: Array[Integer],
+            restart_attempt_period: untyped
+          }
+        }
+      ],
+      ?cpu: String,
+      ?memory: String,
+      ?volumes: Array[
+        {
+          name: String,
+          host: {
+            source_path: untyped
+          }
+        }
+      ],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?pid_mode: String,
+      ?ipc_mode: String
+    ) -> _RegisterDaemonTaskDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterDaemonTaskDefinitionResponse
 
     interface _RegisterTaskDefinitionResponse
       include Smithy::Client::_Response[Types::RegisterTaskDefinitionResponse]
@@ -1075,6 +1484,12 @@ module Aws::ECS
               access_point_id: untyped,
               iam: String
             }
+          },
+          s3files_volume_configuration: {
+            file_system_arn: untyped,
+            root_directory: untyped,
+            transit_encryption_port: untyped,
+            access_point_arn: untyped
           },
           fsx_windows_file_server_volume_configuration: {
             file_system_id: untyped,
@@ -1515,6 +1930,10 @@ module Aws::ECS
           storage_configuration: {
             storage_size_gi_b: Integer
           },
+          instance_metadata_tags_propagation: bool,
+          local_storage_configuration: {
+            use_local_storage: bool
+          },
           monitoring: String,
           instance_requirements: {
             v_cpu_count: {
@@ -1536,7 +1955,7 @@ module Aws::ECS
             on_demand_max_price_percentage_over_lowest_price: untyped,
             bare_metal: String,
             burstable_performance: String,
-            require_hibernate_support: bool,
+            require_hibernate_support: untyped,
             network_interface_count: {
               min: untyped,
               max: untyped
@@ -1568,9 +1987,19 @@ module Aws::ECS
             },
             allowed_instance_types: Array[String],
             max_spot_price_as_percentage_of_optimal_on_demand_price: untyped
+          },
+          capacity_reservations: {
+            reservation_group_arn: untyped,
+            reservation_preference: String
           }
         },
-        propagate_tags: String
+        propagate_tags: String,
+        infrastructure_optimization: {
+          scale_in_after: untyped
+        },
+        auto_repair_configuration: {
+          actions_status: String
+        }
       }
     ) -> _UpdateCapacityProviderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCapacityProviderResponse
 
@@ -1642,6 +2071,81 @@ module Aws::ECS
       ?status: String
     ) -> _UpdateContainerInstancesStateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateContainerInstancesStateResponse
 
+    interface _UpdateDaemonResponse
+      include Smithy::Client::_Response[Types::UpdateDaemonResponse]
+      def daemon_arn: () -> String?
+      def status: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def deployment_arn: () -> String?
+    end
+    def update_daemon: (
+      ?daemon_arn: String,
+      ?daemon_task_definition_arn: String,
+      ?capacity_provider_arns: Array[String],
+      ?deployment_configuration: {
+        drain_percent: Float,
+        alarms: {
+          alarm_names: Array[String],
+          enable: bool
+        },
+        bake_time_in_minutes: Integer
+      },
+      ?propagate_tags: String,
+      ?enable_ecs_managed_tags: bool,
+      ?enable_execute_command: bool,
+      ?critical: bool
+    ) -> _UpdateDaemonResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDaemonResponse
+
+    interface _UpdateExpressGatewayServiceResponse
+      include Smithy::Client::_Response[Types::UpdateExpressGatewayServiceResponse]
+      def service: () -> Types::UpdatedExpressGatewayService?
+    end
+    def update_express_gateway_service: (
+      ?service_arn: String,
+      ?execution_role_arn: String,
+      ?health_check_path: String,
+      ?primary_container: {
+        image: String,
+        container_port: Integer,
+        aws_logs_configuration: {
+          log_group: untyped,
+          log_stream_prefix: untyped
+        },
+        repository_credentials: {
+          credentials_parameter: untyped
+        },
+        command: Array[String],
+        environment: Array[
+          {
+            name: untyped,
+            value: untyped
+          }
+        ],
+        secrets: Array[
+          {
+            name: untyped,
+            value_from: untyped
+          }
+        ]
+      },
+      ?task_role_arn: String,
+      ?network_configuration: {
+        security_groups: Array[String],
+        subnets: untyped
+      },
+      ?cpu: String,
+      ?memory: String,
+      ?cpu_architecture: String,
+      ?scaling_target: {
+        min_task_count: Integer,
+        max_task_count: untyped,
+        auto_scaling_metric: String,
+        auto_scaling_target_value: untyped
+      },
+      ?task_definition_arn: String
+    ) -> _UpdateExpressGatewayServiceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateExpressGatewayServiceResponse
+
     interface _UpdateServiceResponse
       include Smithy::Client::_Response[Types::UpdateServiceResponse]
       def service: () -> Types::Service?
@@ -1661,7 +2165,12 @@ module Aws::ECS
       ?deployment_configuration: {
         deployment_circuit_breaker: {
           enable: bool,
-          rollback: untyped
+          rollback: untyped,
+          reset_on_healthy_task: bool,
+          threshold_configuration: {
+            type: String,
+            value: Integer
+          }
         },
         maximum_percent: Integer,
         minimum_healthy_percent: untyped,
@@ -1674,12 +2183,30 @@ module Aws::ECS
         bake_time_in_minutes: untyped,
         lifecycle_hooks: Array[
           {
+            target_type: String,
             hook_target_arn: String,
             role_arn: String,
             lifecycle_stages: Array[String],
-            hook_details: Smithy::Schema::document
+            hook_details: Smithy::Schema::document,
+            timeout_configuration: {
+              timeout_in_minutes: Integer,
+              action: String
+            }
           }
-        ]
+        ],
+        linear_configuration: {
+          step_percent: Float,
+          step_bake_time_in_minutes: untyped
+        },
+        canary_configuration: {
+          canary_percent: untyped,
+          canary_bake_time_in_minutes: untyped
+        },
+        early_success_criteria: {
+          enable: untyped,
+          healthy_percent: Integer,
+          source_service_revision_cleanup: String
+        }
       },
       ?availability_zone_rebalancing: String,
       ?network_configuration: {
@@ -1776,6 +2303,10 @@ module Aws::ECS
               value_from: untyped
             }
           ]
+        },
+        access_log_configuration: {
+          format: String,
+          include_query_parameters: String
         }
       },
       ?volume_configurations: Array[
@@ -1811,9 +2342,22 @@ module Aws::ECS
         {
           role_arn: String,
           target_group_arn: String,
-          port_name: untyped
+          port_name: untyped,
+          advanced_configuration: {
+            alternate_target_group_arn: untyped,
+            production_listener_rule: untyped,
+            test_listener_rule: untyped
+          }
         }
-      ]
+      ],
+      ?monitoring: {
+        metric_configurations: Array[
+          {
+            metric_names: Array[String],
+            resolution_seconds: Integer
+          }
+        ]
+      }
     ) -> _UpdateServiceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateServiceResponse
 
     interface _UpdateServicePrimaryTaskSetResponse

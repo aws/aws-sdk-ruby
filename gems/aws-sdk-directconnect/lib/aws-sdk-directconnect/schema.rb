@@ -23,8 +23,14 @@ module Aws::DirectConnect
     AllocateTransitVirtualInterfaceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#AllocateTransitVirtualInterfaceRequest", name: "AllocateTransitVirtualInterfaceRequest")
     AllocateTransitVirtualInterfaceResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#AllocateTransitVirtualInterfaceResult", name: "AllocateTransitVirtualInterfaceResult")
     AmazonAddress = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.directconnect#AmazonAddress", name: "AmazonAddress")
+    AsPathList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.directconnect#AsPathList", name: "AsPathList")
+    AsPathSegment = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#AsPathSegment", name: "AsPathSegment")
+    AsPathSegmentList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.directconnect#AsPathSegmentList", name: "AsPathSegmentList")
+    AsPathType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.directconnect#AsPathType", name: "AsPathType")
     AssociateConnectionWithLagOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#AssociateConnectionWithLagOutput", name: "AssociateConnectionWithLagOutput")
     AssociateConnectionWithLagRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#AssociateConnectionWithLagRequest", name: "AssociateConnectionWithLagRequest")
+    AssociateConnectionsToResiliencyGroupRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#AssociateConnectionsToResiliencyGroupRequest", name: "AssociateConnectionsToResiliencyGroupRequest")
+    AssociateConnectionsToResiliencyGroupResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#AssociateConnectionsToResiliencyGroupResult", name: "AssociateConnectionsToResiliencyGroupResult")
     AssociateHostedConnectionOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#AssociateHostedConnectionOutput", name: "AssociateHostedConnectionOutput")
     AssociateHostedConnectionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#AssociateHostedConnectionRequest", name: "AssociateHostedConnectionRequest")
     AssociateMacSecKeyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#AssociateMacSecKeyRequest", name: "AssociateMacSecKeyRequest")
@@ -34,6 +40,8 @@ module Aws::DirectConnect
     AssociatedCoreNetwork = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#AssociatedCoreNetwork", name: "AssociatedCoreNetwork")
     AssociatedGateway = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#AssociatedGateway", name: "AssociatedGateway")
     AssociatedGatewayId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.directconnect#AssociatedGatewayId", name: "AssociatedGatewayId")
+    AvailableBillingMode = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#AvailableBillingMode", name: "AvailableBillingMode")
+    AvailableBillingModeList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.directconnect#AvailableBillingModeList", name: "AvailableBillingModeList")
     AvailableMacSecPortSpeeds = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.directconnect#AvailableMacSecPortSpeeds", name: "AvailableMacSecPortSpeeds")
     AvailablePortSpeeds = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.directconnect#AvailablePortSpeeds", name: "AvailablePortSpeeds")
     AwsDevice = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.directconnect#AwsDevice", name: "AwsDevice", traits: {"smithy.api#deprecated" => {}})
@@ -47,10 +55,13 @@ module Aws::DirectConnect
     BGPPeerState = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.directconnect#BGPPeerState", name: "BGPPeerState")
     BGPStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.directconnect#BGPStatus", name: "BGPStatus")
     Bandwidth = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.directconnect#Bandwidth", name: "Bandwidth")
+    BillingMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.directconnect#BillingMode", name: "BillingMode")
     BooleanFlag = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.directconnect#BooleanFlag", name: "BooleanFlag", traits: {"smithy.api#default" => false})
     CIDR = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.directconnect#CIDR", name: "CIDR")
     Cak = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.directconnect#Cak", name: "Cak")
     Ckn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.directconnect#Ckn", name: "Ckn")
+    CommunityEntry = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.directconnect#CommunityEntry", name: "CommunityEntry")
+    CommunityList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.directconnect#CommunityList", name: "CommunityList")
     ConfirmConnectionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#ConfirmConnectionRequest", name: "ConfirmConnectionRequest")
     ConfirmConnectionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#ConfirmConnectionResponse", name: "ConfirmConnectionResponse")
     ConfirmCustomerAgreementRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#ConfirmCustomerAgreementRequest", name: "ConfirmCustomerAgreementRequest")
@@ -62,7 +73,11 @@ module Aws::DirectConnect
     ConfirmTransitVirtualInterfaceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#ConfirmTransitVirtualInterfaceRequest", name: "ConfirmTransitVirtualInterfaceRequest")
     ConfirmTransitVirtualInterfaceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#ConfirmTransitVirtualInterfaceResponse", name: "ConfirmTransitVirtualInterfaceResponse")
     Connection = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#Connection", name: "Connection")
+    ConnectionArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.directconnect#ConnectionArn", name: "ConnectionArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}})
     ConnectionId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.directconnect#ConnectionId", name: "ConnectionId")
+    ConnectionIdList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.directconnect#ConnectionIdList", name: "ConnectionIdList", traits: {"smithy.api#length" => {"min" => 1, "max" => 200}})
+    ConnectionIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.directconnect#ConnectionIdentifier", name: "ConnectionIdentifier", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}})
+    ConnectionIdentifierList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.directconnect#ConnectionIdentifierList", name: "ConnectionIdentifierList", traits: {"smithy.api#length" => {"min" => 1, "max" => 50}})
     ConnectionList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.directconnect#ConnectionList", name: "ConnectionList")
     ConnectionName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.directconnect#ConnectionName", name: "ConnectionName")
     ConnectionState = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.directconnect#ConnectionState", name: "ConnectionState")
@@ -87,6 +102,8 @@ module Aws::DirectConnect
     CreatePrivateVirtualInterfaceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#CreatePrivateVirtualInterfaceRequest", name: "CreatePrivateVirtualInterfaceRequest")
     CreatePublicVirtualInterfaceOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#CreatePublicVirtualInterfaceOutput", name: "CreatePublicVirtualInterfaceOutput")
     CreatePublicVirtualInterfaceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#CreatePublicVirtualInterfaceRequest", name: "CreatePublicVirtualInterfaceRequest")
+    CreateResiliencyGroupRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#CreateResiliencyGroupRequest", name: "CreateResiliencyGroupRequest")
+    CreateResiliencyGroupResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#CreateResiliencyGroupResult", name: "CreateResiliencyGroupResult")
     CreateTransitVirtualInterfaceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#CreateTransitVirtualInterfaceRequest", name: "CreateTransitVirtualInterfaceRequest")
     CreateTransitVirtualInterfaceResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#CreateTransitVirtualInterfaceResult", name: "CreateTransitVirtualInterfaceResult")
     CustomerAddress = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.directconnect#CustomerAddress", name: "CustomerAddress")
@@ -105,6 +122,8 @@ module Aws::DirectConnect
     DeleteInterconnectResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#DeleteInterconnectResponse", name: "DeleteInterconnectResponse")
     DeleteLagOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#DeleteLagOutput", name: "DeleteLagOutput")
     DeleteLagRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#DeleteLagRequest", name: "DeleteLagRequest")
+    DeleteResiliencyGroupRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#DeleteResiliencyGroupRequest", name: "DeleteResiliencyGroupRequest")
+    DeleteResiliencyGroupResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#DeleteResiliencyGroupResult", name: "DeleteResiliencyGroupResult")
     DeleteVirtualInterfaceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#DeleteVirtualInterfaceRequest", name: "DeleteVirtualInterfaceRequest")
     DeleteVirtualInterfaceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#DeleteVirtualInterfaceResponse", name: "DeleteVirtualInterfaceResponse")
     DescribeConnectionLoaRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#DescribeConnectionLoaRequest", name: "DescribeConnectionLoaRequest")
@@ -161,6 +180,8 @@ module Aws::DirectConnect
     DirectConnectServerException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#DirectConnectServerException", name: "DirectConnectServerException", traits: {"smithy.api#error" => "server", "smithy.api#httpError" => 500})
     DisassociateConnectionFromLagOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#DisassociateConnectionFromLagOutput", name: "DisassociateConnectionFromLagOutput")
     DisassociateConnectionFromLagRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#DisassociateConnectionFromLagRequest", name: "DisassociateConnectionFromLagRequest")
+    DisassociateConnectionsFromResiliencyGroupRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#DisassociateConnectionsFromResiliencyGroupRequest", name: "DisassociateConnectionsFromResiliencyGroupRequest")
+    DisassociateConnectionsFromResiliencyGroupResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#DisassociateConnectionsFromResiliencyGroupResult", name: "DisassociateConnectionsFromResiliencyGroupResult")
     DisassociateMacSecKeyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#DisassociateMacSecKeyRequest", name: "DisassociateMacSecKeyRequest")
     DisassociateMacSecKeyResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#DisassociateMacSecKeyResponse", name: "DisassociateMacSecKeyResponse")
     DuplicateTagKeysException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#DuplicateTagKeysException", name: "DuplicateTagKeysException", traits: {"smithy.api#error" => "client"})
@@ -172,7 +193,11 @@ module Aws::DirectConnect
     GatewayIdToAssociate = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.directconnect#GatewayIdToAssociate", name: "GatewayIdToAssociate")
     GatewayIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.directconnect#GatewayIdentifier", name: "GatewayIdentifier")
     GatewayType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.directconnect#GatewayType", name: "GatewayType")
+    GetResiliencyGroupRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#GetResiliencyGroupRequest", name: "GetResiliencyGroupRequest")
+    GetResiliencyGroupResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#GetResiliencyGroupResult", name: "GetResiliencyGroupResult")
     HasLogicalRedundancy = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.directconnect#HasLogicalRedundancy", name: "HasLogicalRedundancy")
+    IdempotencyToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.directconnect#IdempotencyToken", name: "IdempotencyToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}})
+    IncludedRegionList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.directconnect#IncludedRegionList", name: "IncludedRegionList")
     Interconnect = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#Interconnect", name: "Interconnect")
     InterconnectId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.directconnect#InterconnectId", name: "InterconnectId")
     InterconnectList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.directconnect#InterconnectList", name: "InterconnectList")
@@ -184,6 +209,13 @@ module Aws::DirectConnect
     LagList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.directconnect#LagList", name: "LagList")
     LagName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.directconnect#LagName", name: "LagName")
     LagState = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.directconnect#LagState", name: "LagState")
+    LimitExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#LimitExceededException", name: "LimitExceededException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
+    ListResiliencyGroupAssociationsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#ListResiliencyGroupAssociationsRequest", name: "ListResiliencyGroupAssociationsRequest")
+    ListResiliencyGroupAssociationsResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#ListResiliencyGroupAssociationsResult", name: "ListResiliencyGroupAssociationsResult")
+    ListResiliencyGroupsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#ListResiliencyGroupsRequest", name: "ListResiliencyGroupsRequest")
+    ListResiliencyGroupsResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#ListResiliencyGroupsResult", name: "ListResiliencyGroupsResult")
+    ListVirtualInterfaceRoutesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#ListVirtualInterfaceRoutesRequest", name: "ListVirtualInterfaceRoutesRequest")
+    ListVirtualInterfaceRoutesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#ListVirtualInterfaceRoutesResponse", name: "ListVirtualInterfaceRoutesResponse")
     ListVirtualInterfaceTestHistoryRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#ListVirtualInterfaceTestHistoryRequest", name: "ListVirtualInterfaceTestHistoryRequest")
     ListVirtualInterfaceTestHistoryResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#ListVirtualInterfaceTestHistoryResponse", name: "ListVirtualInterfaceTestHistoryResponse")
     Loa = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#Loa", name: "Loa")
@@ -215,16 +247,42 @@ module Aws::DirectConnect
     Platform = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.directconnect#Platform", name: "Platform")
     PortEncryptionStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.directconnect#PortEncryptionStatus", name: "PortEncryptionStatus")
     PortSpeed = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.directconnect#PortSpeed", name: "PortSpeed")
+    PrefixPoolAllocatedCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.directconnect#PrefixPoolAllocatedCount", name: "PrefixPoolAllocatedCount", traits: {"smithy.api#range" => {"min" => 0}})
+    PrefixPoolSize = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.directconnect#PrefixPoolSize", name: "PrefixPoolSize", traits: {"smithy.api#range" => {"min" => 0}})
+    PrefixPoolUnallocatedCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.directconnect#PrefixPoolUnallocatedCount", name: "PrefixPoolUnallocatedCount", traits: {"smithy.api#range" => {"min" => 0}})
     ProviderList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.directconnect#ProviderList", name: "ProviderList")
     ProviderName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.directconnect#ProviderName", name: "ProviderName")
+    RateLimit = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.directconnect#RateLimit", name: "RateLimit")
+    RateLimiterStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#RateLimiterStatus", name: "RateLimiterStatus")
     Region = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.directconnect#Region", name: "Region")
+    RequestBillingMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.directconnect#RequestBillingMode", name: "RequestBillingMode")
     RequestMACSec = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.directconnect#RequestMACSec", name: "RequestMACSec")
+    ResiliencyGroup = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#ResiliencyGroup", name: "ResiliencyGroup")
+    ResiliencyGroupArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.directconnect#ResiliencyGroupArn", name: "ResiliencyGroupArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => "^arn:(aws|aws-cn|aws-us-gov):directconnect::[0-9]{12}:dx-resiliency-group/dxrg-[0-9a-z]{17}$"})
+    ResiliencyGroupAssociation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#ResiliencyGroupAssociation", name: "ResiliencyGroupAssociation")
+    ResiliencyGroupAssociationList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.directconnect#ResiliencyGroupAssociationList", name: "ResiliencyGroupAssociationList")
+    ResiliencyGroupAssociationState = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.directconnect#ResiliencyGroupAssociationState", name: "ResiliencyGroupAssociationState")
+    ResiliencyGroupId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.directconnect#ResiliencyGroupId", name: "ResiliencyGroupId", traits: {"smithy.api#length" => {"min" => 22, "max" => 22}, "smithy.api#pattern" => "^(dxrg|DXRG)-[0-9a-zA-Z]{17}$"})
+    ResiliencyGroupName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.directconnect#ResiliencyGroupName", name: "ResiliencyGroupName", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => "^[a-zA-Z0-9_\\-]+$"})
+    ResiliencyGroupState = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.directconnect#ResiliencyGroupState", name: "ResiliencyGroupState")
+    ResiliencyGroupSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#ResiliencyGroupSummary", name: "ResiliencyGroupSummary")
+    ResiliencyGroupSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.directconnect#ResiliencyGroupSummaryList", name: "ResiliencyGroupSummaryList")
+    ResiliencyGroupType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.directconnect#ResiliencyGroupType", name: "ResiliencyGroupType")
+    ResiliencyModel = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.directconnect#ResiliencyModel", name: "ResiliencyModel")
     ResourceArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.directconnect#ResourceArn", name: "ResourceArn")
     ResourceArnList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.directconnect#ResourceArnList", name: "ResourceArnList")
     ResourceTag = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#ResourceTag", name: "ResourceTag")
     ResourceTagList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.directconnect#ResourceTagList", name: "ResourceTagList")
+    Route = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#Route", name: "Route")
+    RouteCidr = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.directconnect#RouteCidr", name: "RouteCidr")
+    RouteDirection = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.directconnect#RouteDirection", name: "RouteDirection")
+    RouteFilterCidrString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.directconnect#RouteFilterCidrString", name: "RouteFilterCidrString")
+    RouteFilterCidrStringList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.directconnect#RouteFilterCidrStringList", name: "RouteFilterCidrStringList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
     RouteFilterPrefix = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#RouteFilterPrefix", name: "RouteFilterPrefix")
     RouteFilterPrefixList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.directconnect#RouteFilterPrefixList", name: "RouteFilterPrefixList")
+    RouteFilters = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#RouteFilters", name: "RouteFilters")
+    RouteInstalledAt = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.directconnect#RouteInstalledAt", name: "RouteInstalledAt")
+    RouteList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.directconnect#RouteList", name: "RouteList")
     RouterConfig = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.directconnect#RouterConfig", name: "RouterConfig")
     RouterType = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#RouterType", name: "RouterType")
     RouterTypeIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.directconnect#RouterTypeIdentifier", name: "RouterTypeIdentifier")
@@ -254,12 +312,16 @@ module Aws::DirectConnect
     UntagResourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#UntagResourceResponse", name: "UntagResourceResponse")
     UpdateConnectionOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#UpdateConnectionOutput", name: "UpdateConnectionOutput")
     UpdateConnectionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#UpdateConnectionRequest", name: "UpdateConnectionRequest")
+    UpdateConnectionsBillingModeRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#UpdateConnectionsBillingModeRequest", name: "UpdateConnectionsBillingModeRequest")
+    UpdateConnectionsBillingModeResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#UpdateConnectionsBillingModeResponse", name: "UpdateConnectionsBillingModeResponse")
     UpdateDirectConnectGatewayAssociationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#UpdateDirectConnectGatewayAssociationRequest", name: "UpdateDirectConnectGatewayAssociationRequest")
     UpdateDirectConnectGatewayAssociationResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#UpdateDirectConnectGatewayAssociationResult", name: "UpdateDirectConnectGatewayAssociationResult")
     UpdateDirectConnectGatewayRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#UpdateDirectConnectGatewayRequest", name: "UpdateDirectConnectGatewayRequest")
     UpdateDirectConnectGatewayResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#UpdateDirectConnectGatewayResponse", name: "UpdateDirectConnectGatewayResponse")
     UpdateLagOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#UpdateLagOutput", name: "UpdateLagOutput")
     UpdateLagRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#UpdateLagRequest", name: "UpdateLagRequest")
+    UpdateResiliencyGroupRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#UpdateResiliencyGroupRequest", name: "UpdateResiliencyGroupRequest")
+    UpdateResiliencyGroupResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#UpdateResiliencyGroupResult", name: "UpdateResiliencyGroupResult")
     UpdateVirtualInterfaceAttributesOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#UpdateVirtualInterfaceAttributesOutput", name: "UpdateVirtualInterfaceAttributesOutput")
     UpdateVirtualInterfaceAttributesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.directconnect#UpdateVirtualInterfaceAttributesRequest", name: "UpdateVirtualInterfaceAttributesRequest")
     VLAN = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.directconnect#VLAN", name: "VLAN", traits: {"smithy.api#default" => 0})
@@ -313,7 +375,13 @@ module Aws::DirectConnect
     AllocateConnectionOnInterconnectOutput.add_member(:port_encryption_status, ::Smithy::Schema::Shapes::MemberShape.new(target: PortEncryptionStatus, name: "portEncryptionStatus"))
     AllocateConnectionOnInterconnectOutput.add_member(:encryption_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionMode, name: "encryptionMode"))
     AllocateConnectionOnInterconnectOutput.add_member(:mac_sec_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: MacSecKeyList, name: "macSecKeys"))
+    AllocateConnectionOnInterconnectOutput.add_member(:rate_limiter_status, ::Smithy::Schema::Shapes::MemberShape.new(target: RateLimiterStatus, name: "rateLimiterStatus"))
     AllocateConnectionOnInterconnectOutput.add_member(:partner_interconnect_mac_sec_capable, ::Smithy::Schema::Shapes::MemberShape.new(target: PartnerInterconnectMacSecCapable, name: "partnerInterconnectMacSecCapable"))
+    AllocateConnectionOnInterconnectOutput.add_member(:prefix_pool_size_ipv4, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolSize, name: "prefixPoolSizeIpv4"))
+    AllocateConnectionOnInterconnectOutput.add_member(:prefix_pool_size_ipv6, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolSize, name: "prefixPoolSizeIpv6"))
+    AllocateConnectionOnInterconnectOutput.add_member(:prefix_pool_unallocated_count_ipv4, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolUnallocatedCount, name: "prefixPoolUnallocatedCountIpv4"))
+    AllocateConnectionOnInterconnectOutput.add_member(:prefix_pool_unallocated_count_ipv6, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolUnallocatedCount, name: "prefixPoolUnallocatedCountIpv6"))
+    AllocateConnectionOnInterconnectOutput.add_member(:billing_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingMode, name: "billingMode"))
     AllocateConnectionOnInterconnectOutput.type = Types::AllocateConnectionOnInterconnectOutput
     AllocateConnectionOnInterconnectRequest.add_member(:bandwidth, ::Smithy::Schema::Shapes::MemberShape.new(target: Bandwidth, name: "bandwidth", traits: {"smithy.api#required" => {}}))
     AllocateConnectionOnInterconnectRequest.add_member(:connection_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionName, name: "connectionName", traits: {"smithy.api#required" => {}}))
@@ -343,7 +411,13 @@ module Aws::DirectConnect
     AllocateHostedConnectionOutput.add_member(:port_encryption_status, ::Smithy::Schema::Shapes::MemberShape.new(target: PortEncryptionStatus, name: "portEncryptionStatus"))
     AllocateHostedConnectionOutput.add_member(:encryption_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionMode, name: "encryptionMode"))
     AllocateHostedConnectionOutput.add_member(:mac_sec_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: MacSecKeyList, name: "macSecKeys"))
+    AllocateHostedConnectionOutput.add_member(:rate_limiter_status, ::Smithy::Schema::Shapes::MemberShape.new(target: RateLimiterStatus, name: "rateLimiterStatus"))
     AllocateHostedConnectionOutput.add_member(:partner_interconnect_mac_sec_capable, ::Smithy::Schema::Shapes::MemberShape.new(target: PartnerInterconnectMacSecCapable, name: "partnerInterconnectMacSecCapable"))
+    AllocateHostedConnectionOutput.add_member(:prefix_pool_size_ipv4, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolSize, name: "prefixPoolSizeIpv4"))
+    AllocateHostedConnectionOutput.add_member(:prefix_pool_size_ipv6, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolSize, name: "prefixPoolSizeIpv6"))
+    AllocateHostedConnectionOutput.add_member(:prefix_pool_unallocated_count_ipv4, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolUnallocatedCount, name: "prefixPoolUnallocatedCountIpv4"))
+    AllocateHostedConnectionOutput.add_member(:prefix_pool_unallocated_count_ipv6, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolUnallocatedCount, name: "prefixPoolUnallocatedCountIpv6"))
+    AllocateHostedConnectionOutput.add_member(:billing_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingMode, name: "billingMode"))
     AllocateHostedConnectionOutput.type = Types::AllocateHostedConnectionOutput
     AllocateHostedConnectionRequest.add_member(:connection_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionId, name: "connectionId", traits: {"smithy.api#required" => {}}))
     AllocateHostedConnectionRequest.add_member(:owner_account, ::Smithy::Schema::Shapes::MemberShape.new(target: OwnerAccount, name: "ownerAccount", traits: {"smithy.api#required" => {}}))
@@ -379,6 +453,9 @@ module Aws::DirectConnect
     AllocatePrivateVirtualInterfaceOutput.add_member(:aws_logical_device_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsLogicalDeviceId, name: "awsLogicalDeviceId"))
     AllocatePrivateVirtualInterfaceOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tags"))
     AllocatePrivateVirtualInterfaceOutput.add_member(:site_link_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: SiteLinkEnabled, name: "siteLinkEnabled"))
+    AllocatePrivateVirtualInterfaceOutput.add_member(:prefix_pool_allocated_count_ipv4, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolAllocatedCount, name: "prefixPoolAllocatedCountIpv4"))
+    AllocatePrivateVirtualInterfaceOutput.add_member(:prefix_pool_allocated_count_ipv6, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolAllocatedCount, name: "prefixPoolAllocatedCountIpv6"))
+    AllocatePrivateVirtualInterfaceOutput.add_member(:rate_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: RateLimit, name: "rateLimit"))
     AllocatePrivateVirtualInterfaceOutput.type = Types::AllocatePrivateVirtualInterfaceOutput
     AllocatePrivateVirtualInterfaceRequest.add_member(:connection_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionId, name: "connectionId", traits: {"smithy.api#required" => {}}))
     AllocatePrivateVirtualInterfaceRequest.add_member(:owner_account, ::Smithy::Schema::Shapes::MemberShape.new(target: OwnerAccount, name: "ownerAccount", traits: {"smithy.api#required" => {}}))
@@ -411,6 +488,9 @@ module Aws::DirectConnect
     AllocatePublicVirtualInterfaceOutput.add_member(:aws_logical_device_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsLogicalDeviceId, name: "awsLogicalDeviceId"))
     AllocatePublicVirtualInterfaceOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tags"))
     AllocatePublicVirtualInterfaceOutput.add_member(:site_link_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: SiteLinkEnabled, name: "siteLinkEnabled"))
+    AllocatePublicVirtualInterfaceOutput.add_member(:prefix_pool_allocated_count_ipv4, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolAllocatedCount, name: "prefixPoolAllocatedCountIpv4"))
+    AllocatePublicVirtualInterfaceOutput.add_member(:prefix_pool_allocated_count_ipv6, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolAllocatedCount, name: "prefixPoolAllocatedCountIpv6"))
+    AllocatePublicVirtualInterfaceOutput.add_member(:rate_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: RateLimit, name: "rateLimit"))
     AllocatePublicVirtualInterfaceOutput.type = Types::AllocatePublicVirtualInterfaceOutput
     AllocatePublicVirtualInterfaceRequest.add_member(:connection_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionId, name: "connectionId", traits: {"smithy.api#required" => {}}))
     AllocatePublicVirtualInterfaceRequest.add_member(:owner_account, ::Smithy::Schema::Shapes::MemberShape.new(target: OwnerAccount, name: "ownerAccount", traits: {"smithy.api#required" => {}}))
@@ -422,6 +502,13 @@ module Aws::DirectConnect
     AllocateTransitVirtualInterfaceRequest.type = Types::AllocateTransitVirtualInterfaceRequest
     AllocateTransitVirtualInterfaceResult.add_member(:virtual_interface, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualInterface, name: "virtualInterface"))
     AllocateTransitVirtualInterfaceResult.type = Types::AllocateTransitVirtualInterfaceResult
+    AsPathList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LongAsn, name: "member"))
+    AsPathSegment.add_member(:path_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AsPathType, name: "pathType"))
+    AsPathSegment.add_member(:path, ::Smithy::Schema::Shapes::MemberShape.new(target: AsPathList, name: "path"))
+    AsPathSegment.type = Types::AsPathSegment
+    AsPathSegmentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AsPathSegment, name: "member"))
+    AsPathType.add_member(:seq, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Seq", traits: {"smithy.api#enumValue" => "seq"}))
+    AsPathType.add_member(:set, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Set", traits: {"smithy.api#enumValue" => "set"}))
     AssociateConnectionWithLagOutput.add_member(:owner_account, ::Smithy::Schema::Shapes::MemberShape.new(target: OwnerAccount, name: "ownerAccount"))
     AssociateConnectionWithLagOutput.add_member(:connection_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionId, name: "connectionId"))
     AssociateConnectionWithLagOutput.add_member(:connection_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionName, name: "connectionName"))
@@ -444,11 +531,23 @@ module Aws::DirectConnect
     AssociateConnectionWithLagOutput.add_member(:port_encryption_status, ::Smithy::Schema::Shapes::MemberShape.new(target: PortEncryptionStatus, name: "portEncryptionStatus"))
     AssociateConnectionWithLagOutput.add_member(:encryption_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionMode, name: "encryptionMode"))
     AssociateConnectionWithLagOutput.add_member(:mac_sec_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: MacSecKeyList, name: "macSecKeys"))
+    AssociateConnectionWithLagOutput.add_member(:rate_limiter_status, ::Smithy::Schema::Shapes::MemberShape.new(target: RateLimiterStatus, name: "rateLimiterStatus"))
     AssociateConnectionWithLagOutput.add_member(:partner_interconnect_mac_sec_capable, ::Smithy::Schema::Shapes::MemberShape.new(target: PartnerInterconnectMacSecCapable, name: "partnerInterconnectMacSecCapable"))
+    AssociateConnectionWithLagOutput.add_member(:prefix_pool_size_ipv4, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolSize, name: "prefixPoolSizeIpv4"))
+    AssociateConnectionWithLagOutput.add_member(:prefix_pool_size_ipv6, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolSize, name: "prefixPoolSizeIpv6"))
+    AssociateConnectionWithLagOutput.add_member(:prefix_pool_unallocated_count_ipv4, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolUnallocatedCount, name: "prefixPoolUnallocatedCountIpv4"))
+    AssociateConnectionWithLagOutput.add_member(:prefix_pool_unallocated_count_ipv6, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolUnallocatedCount, name: "prefixPoolUnallocatedCountIpv6"))
+    AssociateConnectionWithLagOutput.add_member(:billing_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingMode, name: "billingMode"))
     AssociateConnectionWithLagOutput.type = Types::AssociateConnectionWithLagOutput
     AssociateConnectionWithLagRequest.add_member(:connection_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionId, name: "connectionId", traits: {"smithy.api#required" => {}}))
     AssociateConnectionWithLagRequest.add_member(:lag_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LagId, name: "lagId", traits: {"smithy.api#required" => {}}))
     AssociateConnectionWithLagRequest.type = Types::AssociateConnectionWithLagRequest
+    AssociateConnectionsToResiliencyGroupRequest.add_member(:connection_identifiers, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionIdentifierList, name: "connectionIdentifiers", traits: {"smithy.api#required" => {}}))
+    AssociateConnectionsToResiliencyGroupRequest.add_member(:resiliency_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResiliencyGroupId, name: "resiliencyGroupId", traits: {"smithy.api#required" => {}}))
+    AssociateConnectionsToResiliencyGroupRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: IdempotencyToken, name: "clientToken"))
+    AssociateConnectionsToResiliencyGroupRequest.type = Types::AssociateConnectionsToResiliencyGroupRequest
+    AssociateConnectionsToResiliencyGroupResult.add_member(:resiliency_group_associations, ::Smithy::Schema::Shapes::MemberShape.new(target: ResiliencyGroupAssociationList, name: "resiliencyGroupAssociations"))
+    AssociateConnectionsToResiliencyGroupResult.type = Types::AssociateConnectionsToResiliencyGroupResult
     AssociateHostedConnectionOutput.add_member(:owner_account, ::Smithy::Schema::Shapes::MemberShape.new(target: OwnerAccount, name: "ownerAccount"))
     AssociateHostedConnectionOutput.add_member(:connection_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionId, name: "connectionId"))
     AssociateHostedConnectionOutput.add_member(:connection_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionName, name: "connectionName"))
@@ -471,7 +570,13 @@ module Aws::DirectConnect
     AssociateHostedConnectionOutput.add_member(:port_encryption_status, ::Smithy::Schema::Shapes::MemberShape.new(target: PortEncryptionStatus, name: "portEncryptionStatus"))
     AssociateHostedConnectionOutput.add_member(:encryption_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionMode, name: "encryptionMode"))
     AssociateHostedConnectionOutput.add_member(:mac_sec_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: MacSecKeyList, name: "macSecKeys"))
+    AssociateHostedConnectionOutput.add_member(:rate_limiter_status, ::Smithy::Schema::Shapes::MemberShape.new(target: RateLimiterStatus, name: "rateLimiterStatus"))
     AssociateHostedConnectionOutput.add_member(:partner_interconnect_mac_sec_capable, ::Smithy::Schema::Shapes::MemberShape.new(target: PartnerInterconnectMacSecCapable, name: "partnerInterconnectMacSecCapable"))
+    AssociateHostedConnectionOutput.add_member(:prefix_pool_size_ipv4, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolSize, name: "prefixPoolSizeIpv4"))
+    AssociateHostedConnectionOutput.add_member(:prefix_pool_size_ipv6, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolSize, name: "prefixPoolSizeIpv6"))
+    AssociateHostedConnectionOutput.add_member(:prefix_pool_unallocated_count_ipv4, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolUnallocatedCount, name: "prefixPoolUnallocatedCountIpv4"))
+    AssociateHostedConnectionOutput.add_member(:prefix_pool_unallocated_count_ipv6, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolUnallocatedCount, name: "prefixPoolUnallocatedCountIpv6"))
+    AssociateHostedConnectionOutput.add_member(:billing_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingMode, name: "billingMode"))
     AssociateHostedConnectionOutput.type = Types::AssociateHostedConnectionOutput
     AssociateHostedConnectionRequest.add_member(:connection_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionId, name: "connectionId", traits: {"smithy.api#required" => {}}))
     AssociateHostedConnectionRequest.add_member(:parent_connection_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionId, name: "parentConnectionId", traits: {"smithy.api#required" => {}}))
@@ -511,6 +616,9 @@ module Aws::DirectConnect
     AssociateVirtualInterfaceOutput.add_member(:aws_logical_device_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsLogicalDeviceId, name: "awsLogicalDeviceId"))
     AssociateVirtualInterfaceOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tags"))
     AssociateVirtualInterfaceOutput.add_member(:site_link_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: SiteLinkEnabled, name: "siteLinkEnabled"))
+    AssociateVirtualInterfaceOutput.add_member(:prefix_pool_allocated_count_ipv4, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolAllocatedCount, name: "prefixPoolAllocatedCountIpv4"))
+    AssociateVirtualInterfaceOutput.add_member(:prefix_pool_allocated_count_ipv6, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolAllocatedCount, name: "prefixPoolAllocatedCountIpv6"))
+    AssociateVirtualInterfaceOutput.add_member(:rate_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: RateLimit, name: "rateLimit"))
     AssociateVirtualInterfaceOutput.type = Types::AssociateVirtualInterfaceOutput
     AssociateVirtualInterfaceRequest.add_member(:virtual_interface_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualInterfaceId, name: "virtualInterfaceId", traits: {"smithy.api#required" => {}}))
     AssociateVirtualInterfaceRequest.add_member(:connection_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionId, name: "connectionId", traits: {"smithy.api#required" => {}}))
@@ -524,6 +632,11 @@ module Aws::DirectConnect
     AssociatedGateway.add_member(:owner_account, ::Smithy::Schema::Shapes::MemberShape.new(target: OwnerAccount, name: "ownerAccount"))
     AssociatedGateway.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "region"))
     AssociatedGateway.type = Types::AssociatedGateway
+    AvailableBillingMode.add_member(:billing_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingMode, name: "billingMode"))
+    AvailableBillingMode.add_member(:available_port_speeds, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailablePortSpeeds, name: "availablePortSpeeds"))
+    AvailableBillingMode.add_member(:included_regions, ::Smithy::Schema::Shapes::MemberShape.new(target: IncludedRegionList, name: "includedRegions"))
+    AvailableBillingMode.type = Types::AvailableBillingMode
+    AvailableBillingModeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailableBillingMode, name: "member"))
     AvailableMacSecPortSpeeds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PortSpeed, name: "member"))
     AvailablePortSpeeds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PortSpeed, name: "member"))
     BGPPeer.add_member(:bgp_peer_id, ::Smithy::Schema::Shapes::MemberShape.new(target: BGPPeerId, name: "bgpPeerId"))
@@ -548,6 +661,18 @@ module Aws::DirectConnect
     BGPStatus.add_member(:up, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Up", traits: {"smithy.api#enumValue" => "up"}))
     BGPStatus.add_member(:down, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Down", traits: {"smithy.api#enumValue" => "down"}))
     BGPStatus.add_member(:unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Unknown", traits: {"smithy.api#enumValue" => "unknown"}))
+    BillingMode.add_member(:pay_as_you_go, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PayAsYouGo", traits: {"smithy.api#enumValue" => "PayAsYouGo"}))
+    BillingMode.add_member(:flat_rate_tier1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FlatRateTier1", traits: {"smithy.api#enumValue" => "FlatRateTier1"}))
+    BillingMode.add_member(:flat_rate_tier2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FlatRateTier2", traits: {"smithy.api#enumValue" => "FlatRateTier2"}))
+    BillingMode.add_member(:flat_rate_tier3, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FlatRateTier3", traits: {"smithy.api#enumValue" => "FlatRateTier3"}))
+    BillingMode.add_member(:flat_rate_tier4, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FlatRateTier4", traits: {"smithy.api#enumValue" => "FlatRateTier4"}))
+    BillingMode.add_member(:flat_rate_tier5, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FlatRateTier5", traits: {"smithy.api#enumValue" => "FlatRateTier5"}))
+    BillingMode.add_member(:port_pair_flat_rate_tier1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PortPairFlatRateTier1", traits: {"smithy.api#enumValue" => "PortPairFlatRateTier1"}))
+    BillingMode.add_member(:port_pair_flat_rate_tier2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PortPairFlatRateTier2", traits: {"smithy.api#enumValue" => "PortPairFlatRateTier2"}))
+    BillingMode.add_member(:port_pair_flat_rate_tier3, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PortPairFlatRateTier3", traits: {"smithy.api#enumValue" => "PortPairFlatRateTier3"}))
+    BillingMode.add_member(:port_pair_flat_rate_tier4, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PortPairFlatRateTier4", traits: {"smithy.api#enumValue" => "PortPairFlatRateTier4"}))
+    BillingMode.add_member(:port_pair_flat_rate_tier5, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PortPairFlatRateTier5", traits: {"smithy.api#enumValue" => "PortPairFlatRateTier5"}))
+    CommunityList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CommunityEntry, name: "member"))
     ConfirmConnectionRequest.add_member(:connection_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionId, name: "connectionId", traits: {"smithy.api#required" => {}}))
     ConfirmConnectionRequest.type = Types::ConfirmConnectionRequest
     ConfirmConnectionResponse.add_member(:connection_state, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionState, name: "connectionState"))
@@ -593,8 +718,16 @@ module Aws::DirectConnect
     Connection.add_member(:port_encryption_status, ::Smithy::Schema::Shapes::MemberShape.new(target: PortEncryptionStatus, name: "portEncryptionStatus"))
     Connection.add_member(:encryption_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionMode, name: "encryptionMode"))
     Connection.add_member(:mac_sec_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: MacSecKeyList, name: "macSecKeys"))
+    Connection.add_member(:rate_limiter_status, ::Smithy::Schema::Shapes::MemberShape.new(target: RateLimiterStatus, name: "rateLimiterStatus"))
     Connection.add_member(:partner_interconnect_mac_sec_capable, ::Smithy::Schema::Shapes::MemberShape.new(target: PartnerInterconnectMacSecCapable, name: "partnerInterconnectMacSecCapable"))
+    Connection.add_member(:prefix_pool_size_ipv4, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolSize, name: "prefixPoolSizeIpv4"))
+    Connection.add_member(:prefix_pool_size_ipv6, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolSize, name: "prefixPoolSizeIpv6"))
+    Connection.add_member(:prefix_pool_unallocated_count_ipv4, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolUnallocatedCount, name: "prefixPoolUnallocatedCountIpv4"))
+    Connection.add_member(:prefix_pool_unallocated_count_ipv6, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolUnallocatedCount, name: "prefixPoolUnallocatedCountIpv6"))
+    Connection.add_member(:billing_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingMode, name: "billingMode"))
     Connection.type = Types::Connection
+    ConnectionIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionId, name: "member"))
+    ConnectionIdentifierList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionIdentifier, name: "member"))
     ConnectionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Connection, name: "member"))
     ConnectionState.add_member(:ordering, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ordering", traits: {"smithy.api#enumValue" => "ordering"}))
     ConnectionState.add_member(:requested, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "requested", traits: {"smithy.api#enumValue" => "requested"}))
@@ -632,7 +765,13 @@ module Aws::DirectConnect
     CreateConnectionOutput.add_member(:port_encryption_status, ::Smithy::Schema::Shapes::MemberShape.new(target: PortEncryptionStatus, name: "portEncryptionStatus"))
     CreateConnectionOutput.add_member(:encryption_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionMode, name: "encryptionMode"))
     CreateConnectionOutput.add_member(:mac_sec_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: MacSecKeyList, name: "macSecKeys"))
+    CreateConnectionOutput.add_member(:rate_limiter_status, ::Smithy::Schema::Shapes::MemberShape.new(target: RateLimiterStatus, name: "rateLimiterStatus"))
     CreateConnectionOutput.add_member(:partner_interconnect_mac_sec_capable, ::Smithy::Schema::Shapes::MemberShape.new(target: PartnerInterconnectMacSecCapable, name: "partnerInterconnectMacSecCapable"))
+    CreateConnectionOutput.add_member(:prefix_pool_size_ipv4, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolSize, name: "prefixPoolSizeIpv4"))
+    CreateConnectionOutput.add_member(:prefix_pool_size_ipv6, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolSize, name: "prefixPoolSizeIpv6"))
+    CreateConnectionOutput.add_member(:prefix_pool_unallocated_count_ipv4, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolUnallocatedCount, name: "prefixPoolUnallocatedCountIpv4"))
+    CreateConnectionOutput.add_member(:prefix_pool_unallocated_count_ipv6, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolUnallocatedCount, name: "prefixPoolUnallocatedCountIpv6"))
+    CreateConnectionOutput.add_member(:billing_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingMode, name: "billingMode"))
     CreateConnectionOutput.type = Types::CreateConnectionOutput
     CreateConnectionRequest.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationCode, name: "location", traits: {"smithy.api#required" => {}}))
     CreateConnectionRequest.add_member(:bandwidth, ::Smithy::Schema::Shapes::MemberShape.new(target: Bandwidth, name: "bandwidth", traits: {"smithy.api#required" => {}}))
@@ -641,6 +780,7 @@ module Aws::DirectConnect
     CreateConnectionRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tags"))
     CreateConnectionRequest.add_member(:provider_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderName, name: "providerName"))
     CreateConnectionRequest.add_member(:request_mac_sec, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestMACSec, name: "requestMACSec"))
+    CreateConnectionRequest.add_member(:billing_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestBillingMode, name: "billingMode"))
     CreateConnectionRequest.type = Types::CreateConnectionRequest
     CreateDirectConnectGatewayAssociationProposalRequest.add_member(:direct_connect_gateway_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectConnectGatewayId, name: "directConnectGatewayId", traits: {"smithy.api#required" => {}}))
     CreateDirectConnectGatewayAssociationProposalRequest.add_member(:direct_connect_gateway_owner_account, ::Smithy::Schema::Shapes::MemberShape.new(target: OwnerAccount, name: "directConnectGatewayOwnerAccount", traits: {"smithy.api#required" => {}}))
@@ -712,6 +852,12 @@ module Aws::DirectConnect
     CreateLagOutput.add_member(:mac_sec_capable, ::Smithy::Schema::Shapes::MemberShape.new(target: MacSecCapable, name: "macSecCapable"))
     CreateLagOutput.add_member(:encryption_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionMode, name: "encryptionMode"))
     CreateLagOutput.add_member(:mac_sec_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: MacSecKeyList, name: "macSecKeys"))
+    CreateLagOutput.add_member(:prefix_pool_size_ipv4, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolSize, name: "prefixPoolSizeIpv4"))
+    CreateLagOutput.add_member(:prefix_pool_size_ipv6, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolSize, name: "prefixPoolSizeIpv6"))
+    CreateLagOutput.add_member(:prefix_pool_unallocated_count_ipv4, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolUnallocatedCount, name: "prefixPoolUnallocatedCountIpv4"))
+    CreateLagOutput.add_member(:prefix_pool_unallocated_count_ipv6, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolUnallocatedCount, name: "prefixPoolUnallocatedCountIpv6"))
+    CreateLagOutput.add_member(:rate_limiter_status, ::Smithy::Schema::Shapes::MemberShape.new(target: RateLimiterStatus, name: "rateLimiterStatus"))
+    CreateLagOutput.add_member(:billing_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingMode, name: "billingMode"))
     CreateLagOutput.type = Types::CreateLagOutput
     CreateLagRequest.add_member(:number_of_connections, ::Smithy::Schema::Shapes::MemberShape.new(target: Count, name: "numberOfConnections", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     CreateLagRequest.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationCode, name: "location", traits: {"smithy.api#required" => {}}))
@@ -722,6 +868,7 @@ module Aws::DirectConnect
     CreateLagRequest.add_member(:child_connection_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "childConnectionTags"))
     CreateLagRequest.add_member(:provider_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderName, name: "providerName"))
     CreateLagRequest.add_member(:request_mac_sec, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestMACSec, name: "requestMACSec"))
+    CreateLagRequest.add_member(:billing_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestBillingMode, name: "billingMode"))
     CreateLagRequest.type = Types::CreateLagRequest
     CreatePrivateVirtualInterfaceOutput.add_member(:owner_account, ::Smithy::Schema::Shapes::MemberShape.new(target: OwnerAccount, name: "ownerAccount"))
     CreatePrivateVirtualInterfaceOutput.add_member(:virtual_interface_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualInterfaceId, name: "virtualInterfaceId"))
@@ -750,6 +897,9 @@ module Aws::DirectConnect
     CreatePrivateVirtualInterfaceOutput.add_member(:aws_logical_device_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsLogicalDeviceId, name: "awsLogicalDeviceId"))
     CreatePrivateVirtualInterfaceOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tags"))
     CreatePrivateVirtualInterfaceOutput.add_member(:site_link_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: SiteLinkEnabled, name: "siteLinkEnabled"))
+    CreatePrivateVirtualInterfaceOutput.add_member(:prefix_pool_allocated_count_ipv4, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolAllocatedCount, name: "prefixPoolAllocatedCountIpv4"))
+    CreatePrivateVirtualInterfaceOutput.add_member(:prefix_pool_allocated_count_ipv6, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolAllocatedCount, name: "prefixPoolAllocatedCountIpv6"))
+    CreatePrivateVirtualInterfaceOutput.add_member(:rate_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: RateLimit, name: "rateLimit"))
     CreatePrivateVirtualInterfaceOutput.type = Types::CreatePrivateVirtualInterfaceOutput
     CreatePrivateVirtualInterfaceRequest.add_member(:connection_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionId, name: "connectionId", traits: {"smithy.api#required" => {}}))
     CreatePrivateVirtualInterfaceRequest.add_member(:new_private_virtual_interface, ::Smithy::Schema::Shapes::MemberShape.new(target: NewPrivateVirtualInterface, name: "newPrivateVirtualInterface", traits: {"smithy.api#required" => {}}))
@@ -781,10 +931,20 @@ module Aws::DirectConnect
     CreatePublicVirtualInterfaceOutput.add_member(:aws_logical_device_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsLogicalDeviceId, name: "awsLogicalDeviceId"))
     CreatePublicVirtualInterfaceOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tags"))
     CreatePublicVirtualInterfaceOutput.add_member(:site_link_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: SiteLinkEnabled, name: "siteLinkEnabled"))
+    CreatePublicVirtualInterfaceOutput.add_member(:prefix_pool_allocated_count_ipv4, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolAllocatedCount, name: "prefixPoolAllocatedCountIpv4"))
+    CreatePublicVirtualInterfaceOutput.add_member(:prefix_pool_allocated_count_ipv6, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolAllocatedCount, name: "prefixPoolAllocatedCountIpv6"))
+    CreatePublicVirtualInterfaceOutput.add_member(:rate_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: RateLimit, name: "rateLimit"))
     CreatePublicVirtualInterfaceOutput.type = Types::CreatePublicVirtualInterfaceOutput
     CreatePublicVirtualInterfaceRequest.add_member(:connection_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionId, name: "connectionId", traits: {"smithy.api#required" => {}}))
     CreatePublicVirtualInterfaceRequest.add_member(:new_public_virtual_interface, ::Smithy::Schema::Shapes::MemberShape.new(target: NewPublicVirtualInterface, name: "newPublicVirtualInterface", traits: {"smithy.api#required" => {}}))
     CreatePublicVirtualInterfaceRequest.type = Types::CreatePublicVirtualInterfaceRequest
+    CreateResiliencyGroupRequest.add_member(:resiliency_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResiliencyGroupName, name: "resiliencyGroupName", traits: {"smithy.api#required" => {}}))
+    CreateResiliencyGroupRequest.add_member(:intended_resiliency_model, ::Smithy::Schema::Shapes::MemberShape.new(target: ResiliencyModel, name: "intendedResiliencyModel", traits: {"smithy.api#required" => {}}))
+    CreateResiliencyGroupRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: IdempotencyToken, name: "clientToken"))
+    CreateResiliencyGroupRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tags"))
+    CreateResiliencyGroupRequest.type = Types::CreateResiliencyGroupRequest
+    CreateResiliencyGroupResult.add_member(:resiliency_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ResiliencyGroup, name: "resiliencyGroup"))
+    CreateResiliencyGroupResult.type = Types::CreateResiliencyGroupResult
     CreateTransitVirtualInterfaceRequest.add_member(:connection_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionId, name: "connectionId", traits: {"smithy.api#required" => {}}))
     CreateTransitVirtualInterfaceRequest.add_member(:new_transit_virtual_interface, ::Smithy::Schema::Shapes::MemberShape.new(target: NewTransitVirtualInterface, name: "newTransitVirtualInterface", traits: {"smithy.api#required" => {}}))
     CreateTransitVirtualInterfaceRequest.type = Types::CreateTransitVirtualInterfaceRequest
@@ -823,7 +983,13 @@ module Aws::DirectConnect
     DeleteConnectionOutput.add_member(:port_encryption_status, ::Smithy::Schema::Shapes::MemberShape.new(target: PortEncryptionStatus, name: "portEncryptionStatus"))
     DeleteConnectionOutput.add_member(:encryption_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionMode, name: "encryptionMode"))
     DeleteConnectionOutput.add_member(:mac_sec_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: MacSecKeyList, name: "macSecKeys"))
+    DeleteConnectionOutput.add_member(:rate_limiter_status, ::Smithy::Schema::Shapes::MemberShape.new(target: RateLimiterStatus, name: "rateLimiterStatus"))
     DeleteConnectionOutput.add_member(:partner_interconnect_mac_sec_capable, ::Smithy::Schema::Shapes::MemberShape.new(target: PartnerInterconnectMacSecCapable, name: "partnerInterconnectMacSecCapable"))
+    DeleteConnectionOutput.add_member(:prefix_pool_size_ipv4, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolSize, name: "prefixPoolSizeIpv4"))
+    DeleteConnectionOutput.add_member(:prefix_pool_size_ipv6, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolSize, name: "prefixPoolSizeIpv6"))
+    DeleteConnectionOutput.add_member(:prefix_pool_unallocated_count_ipv4, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolUnallocatedCount, name: "prefixPoolUnallocatedCountIpv4"))
+    DeleteConnectionOutput.add_member(:prefix_pool_unallocated_count_ipv6, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolUnallocatedCount, name: "prefixPoolUnallocatedCountIpv6"))
+    DeleteConnectionOutput.add_member(:billing_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingMode, name: "billingMode"))
     DeleteConnectionOutput.type = Types::DeleteConnectionOutput
     DeleteConnectionRequest.add_member(:connection_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionId, name: "connectionId", traits: {"smithy.api#required" => {}}))
     DeleteConnectionRequest.type = Types::DeleteConnectionRequest
@@ -866,9 +1032,19 @@ module Aws::DirectConnect
     DeleteLagOutput.add_member(:mac_sec_capable, ::Smithy::Schema::Shapes::MemberShape.new(target: MacSecCapable, name: "macSecCapable"))
     DeleteLagOutput.add_member(:encryption_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionMode, name: "encryptionMode"))
     DeleteLagOutput.add_member(:mac_sec_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: MacSecKeyList, name: "macSecKeys"))
+    DeleteLagOutput.add_member(:prefix_pool_size_ipv4, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolSize, name: "prefixPoolSizeIpv4"))
+    DeleteLagOutput.add_member(:prefix_pool_size_ipv6, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolSize, name: "prefixPoolSizeIpv6"))
+    DeleteLagOutput.add_member(:prefix_pool_unallocated_count_ipv4, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolUnallocatedCount, name: "prefixPoolUnallocatedCountIpv4"))
+    DeleteLagOutput.add_member(:prefix_pool_unallocated_count_ipv6, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolUnallocatedCount, name: "prefixPoolUnallocatedCountIpv6"))
+    DeleteLagOutput.add_member(:rate_limiter_status, ::Smithy::Schema::Shapes::MemberShape.new(target: RateLimiterStatus, name: "rateLimiterStatus"))
+    DeleteLagOutput.add_member(:billing_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingMode, name: "billingMode"))
     DeleteLagOutput.type = Types::DeleteLagOutput
     DeleteLagRequest.add_member(:lag_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LagId, name: "lagId", traits: {"smithy.api#required" => {}}))
     DeleteLagRequest.type = Types::DeleteLagRequest
+    DeleteResiliencyGroupRequest.add_member(:resiliency_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResiliencyGroupId, name: "resiliencyGroupId", traits: {"smithy.api#required" => {}}))
+    DeleteResiliencyGroupRequest.type = Types::DeleteResiliencyGroupRequest
+    DeleteResiliencyGroupResult.add_member(:resiliency_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ResiliencyGroup, name: "resiliencyGroup"))
+    DeleteResiliencyGroupResult.type = Types::DeleteResiliencyGroupResult
     DeleteVirtualInterfaceRequest.add_member(:virtual_interface_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualInterfaceId, name: "virtualInterfaceId", traits: {"smithy.api#required" => {}}))
     DeleteVirtualInterfaceRequest.type = Types::DeleteVirtualInterfaceRequest
     DeleteVirtualInterfaceResponse.add_member(:virtual_interface_state, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualInterfaceState, name: "virtualInterfaceState"))
@@ -994,6 +1170,7 @@ module Aws::DirectConnect
     DirectConnectGateway.add_member(:owner_account, ::Smithy::Schema::Shapes::MemberShape.new(target: OwnerAccount, name: "ownerAccount"))
     DirectConnectGateway.add_member(:direct_connect_gateway_state, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectConnectGatewayState, name: "directConnectGatewayState"))
     DirectConnectGateway.add_member(:state_change_error, ::Smithy::Schema::Shapes::MemberShape.new(target: StateChangeError, name: "stateChangeError"))
+    DirectConnectGateway.add_member(:total_prefix_pool_allocations, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolAllocatedCount, name: "totalPrefixPoolAllocations"))
     DirectConnectGateway.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tags"))
     DirectConnectGateway.type = Types::DirectConnectGateway
     DirectConnectGatewayAssociation.add_member(:direct_connect_gateway_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectConnectGatewayId, name: "directConnectGatewayId"))
@@ -1070,11 +1247,23 @@ module Aws::DirectConnect
     DisassociateConnectionFromLagOutput.add_member(:port_encryption_status, ::Smithy::Schema::Shapes::MemberShape.new(target: PortEncryptionStatus, name: "portEncryptionStatus"))
     DisassociateConnectionFromLagOutput.add_member(:encryption_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionMode, name: "encryptionMode"))
     DisassociateConnectionFromLagOutput.add_member(:mac_sec_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: MacSecKeyList, name: "macSecKeys"))
+    DisassociateConnectionFromLagOutput.add_member(:rate_limiter_status, ::Smithy::Schema::Shapes::MemberShape.new(target: RateLimiterStatus, name: "rateLimiterStatus"))
     DisassociateConnectionFromLagOutput.add_member(:partner_interconnect_mac_sec_capable, ::Smithy::Schema::Shapes::MemberShape.new(target: PartnerInterconnectMacSecCapable, name: "partnerInterconnectMacSecCapable"))
+    DisassociateConnectionFromLagOutput.add_member(:prefix_pool_size_ipv4, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolSize, name: "prefixPoolSizeIpv4"))
+    DisassociateConnectionFromLagOutput.add_member(:prefix_pool_size_ipv6, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolSize, name: "prefixPoolSizeIpv6"))
+    DisassociateConnectionFromLagOutput.add_member(:prefix_pool_unallocated_count_ipv4, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolUnallocatedCount, name: "prefixPoolUnallocatedCountIpv4"))
+    DisassociateConnectionFromLagOutput.add_member(:prefix_pool_unallocated_count_ipv6, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolUnallocatedCount, name: "prefixPoolUnallocatedCountIpv6"))
+    DisassociateConnectionFromLagOutput.add_member(:billing_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingMode, name: "billingMode"))
     DisassociateConnectionFromLagOutput.type = Types::DisassociateConnectionFromLagOutput
     DisassociateConnectionFromLagRequest.add_member(:connection_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionId, name: "connectionId", traits: {"smithy.api#required" => {}}))
     DisassociateConnectionFromLagRequest.add_member(:lag_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LagId, name: "lagId", traits: {"smithy.api#required" => {}}))
     DisassociateConnectionFromLagRequest.type = Types::DisassociateConnectionFromLagRequest
+    DisassociateConnectionsFromResiliencyGroupRequest.add_member(:connection_identifiers, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionIdentifierList, name: "connectionIdentifiers", traits: {"smithy.api#required" => {}}))
+    DisassociateConnectionsFromResiliencyGroupRequest.add_member(:resiliency_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResiliencyGroupId, name: "resiliencyGroupId", traits: {"smithy.api#required" => {}}))
+    DisassociateConnectionsFromResiliencyGroupRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: IdempotencyToken, name: "clientToken"))
+    DisassociateConnectionsFromResiliencyGroupRequest.type = Types::DisassociateConnectionsFromResiliencyGroupRequest
+    DisassociateConnectionsFromResiliencyGroupResult.add_member(:resiliency_group_associations, ::Smithy::Schema::Shapes::MemberShape.new(target: ResiliencyGroupAssociationList, name: "resiliencyGroupAssociations"))
+    DisassociateConnectionsFromResiliencyGroupResult.type = Types::DisassociateConnectionsFromResiliencyGroupResult
     DisassociateMacSecKeyRequest.add_member(:connection_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionId, name: "connectionId", traits: {"smithy.api#required" => {}}))
     DisassociateMacSecKeyRequest.add_member(:secret_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretARN, name: "secretARN", traits: {"smithy.api#required" => {}}))
     DisassociateMacSecKeyRequest.type = Types::DisassociateMacSecKeyRequest
@@ -1085,9 +1274,14 @@ module Aws::DirectConnect
     DuplicateTagKeysException.type = Types::DuplicateTagKeysException
     GatewayType.add_member(:virtual_private_gateway, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VirtualPrivateGateway", traits: {"smithy.api#enumValue" => "virtualPrivateGateway"}))
     GatewayType.add_member(:transit_gateway, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TransitGateway", traits: {"smithy.api#enumValue" => "transitGateway"}))
+    GetResiliencyGroupRequest.add_member(:resiliency_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResiliencyGroupId, name: "resiliencyGroupId", traits: {"smithy.api#required" => {}}))
+    GetResiliencyGroupRequest.type = Types::GetResiliencyGroupRequest
+    GetResiliencyGroupResult.add_member(:resiliency_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ResiliencyGroup, name: "resiliencyGroup"))
+    GetResiliencyGroupResult.type = Types::GetResiliencyGroupResult
     HasLogicalRedundancy.add_member(:unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Unknown", traits: {"smithy.api#enumValue" => "unknown"}))
     HasLogicalRedundancy.add_member(:yes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Yes", traits: {"smithy.api#enumValue" => "yes"}))
     HasLogicalRedundancy.add_member(:no, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "No", traits: {"smithy.api#enumValue" => "no"}))
+    IncludedRegionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "member"))
     Interconnect.add_member(:interconnect_id, ::Smithy::Schema::Shapes::MemberShape.new(target: InterconnectId, name: "interconnectId"))
     Interconnect.add_member(:interconnect_name, ::Smithy::Schema::Shapes::MemberShape.new(target: InterconnectName, name: "interconnectName"))
     Interconnect.add_member(:interconnect_state, ::Smithy::Schema::Shapes::MemberShape.new(target: InterconnectState, name: "interconnectState"))
@@ -1137,6 +1331,12 @@ module Aws::DirectConnect
     Lag.add_member(:mac_sec_capable, ::Smithy::Schema::Shapes::MemberShape.new(target: MacSecCapable, name: "macSecCapable"))
     Lag.add_member(:encryption_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionMode, name: "encryptionMode"))
     Lag.add_member(:mac_sec_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: MacSecKeyList, name: "macSecKeys"))
+    Lag.add_member(:prefix_pool_size_ipv4, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolSize, name: "prefixPoolSizeIpv4"))
+    Lag.add_member(:prefix_pool_size_ipv6, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolSize, name: "prefixPoolSizeIpv6"))
+    Lag.add_member(:prefix_pool_unallocated_count_ipv4, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolUnallocatedCount, name: "prefixPoolUnallocatedCountIpv4"))
+    Lag.add_member(:prefix_pool_unallocated_count_ipv6, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolUnallocatedCount, name: "prefixPoolUnallocatedCountIpv6"))
+    Lag.add_member(:rate_limiter_status, ::Smithy::Schema::Shapes::MemberShape.new(target: RateLimiterStatus, name: "rateLimiterStatus"))
+    Lag.add_member(:billing_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingMode, name: "billingMode"))
     Lag.type = Types::Lag
     LagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Lag, name: "member"))
     LagState.add_member(:requested, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "requested", traits: {"smithy.api#enumValue" => "requested"}))
@@ -1146,6 +1346,30 @@ module Aws::DirectConnect
     LagState.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "deleting", traits: {"smithy.api#enumValue" => "deleting"}))
     LagState.add_member(:deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "deleted", traits: {"smithy.api#enumValue" => "deleted"}))
     LagState.add_member(:unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "unknown", traits: {"smithy.api#enumValue" => "unknown"}))
+    LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
+    LimitExceededException.type = Types::LimitExceededException
+    ListResiliencyGroupAssociationsRequest.add_member(:resiliency_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResiliencyGroupId, name: "resiliencyGroupId", traits: {"smithy.api#required" => {}}))
+    ListResiliencyGroupAssociationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResultSetSize, name: "maxResults"))
+    ListResiliencyGroupAssociationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
+    ListResiliencyGroupAssociationsRequest.type = Types::ListResiliencyGroupAssociationsRequest
+    ListResiliencyGroupAssociationsResult.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: ResiliencyGroupAssociationList, name: "items"))
+    ListResiliencyGroupAssociationsResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
+    ListResiliencyGroupAssociationsResult.type = Types::ListResiliencyGroupAssociationsResult
+    ListResiliencyGroupsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResultSetSize, name: "maxResults"))
+    ListResiliencyGroupsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
+    ListResiliencyGroupsRequest.type = Types::ListResiliencyGroupsRequest
+    ListResiliencyGroupsResult.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: ResiliencyGroupSummaryList, name: "items"))
+    ListResiliencyGroupsResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
+    ListResiliencyGroupsResult.type = Types::ListResiliencyGroupsResult
+    ListVirtualInterfaceRoutesRequest.add_member(:virtual_interface_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualInterfaceId, name: "virtualInterfaceId"))
+    ListVirtualInterfaceRoutesRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteFilters, name: "filters"))
+    ListVirtualInterfaceRoutesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResultSetSize, name: "maxResults"))
+    ListVirtualInterfaceRoutesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
+    ListVirtualInterfaceRoutesRequest.type = Types::ListVirtualInterfaceRoutesRequest
+    ListVirtualInterfaceRoutesResponse.add_member(:virtual_interface_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualInterfaceId, name: "virtualInterfaceId"))
+    ListVirtualInterfaceRoutesResponse.add_member(:routes, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteList, name: "routes"))
+    ListVirtualInterfaceRoutesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
+    ListVirtualInterfaceRoutesResponse.type = Types::ListVirtualInterfaceRoutesResponse
     ListVirtualInterfaceTestHistoryRequest.add_member(:test_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TestId, name: "testId"))
     ListVirtualInterfaceTestHistoryRequest.add_member(:virtual_interface_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualInterfaceId, name: "virtualInterfaceId"))
     ListVirtualInterfaceTestHistoryRequest.add_member(:bgp_peers, ::Smithy::Schema::Shapes::MemberShape.new(target: BGPPeerIdList, name: "bgpPeers"))
@@ -1166,6 +1390,7 @@ module Aws::DirectConnect
     Location.add_member(:available_port_speeds, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailablePortSpeeds, name: "availablePortSpeeds"))
     Location.add_member(:available_providers, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderList, name: "availableProviders"))
     Location.add_member(:available_mac_sec_port_speeds, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailableMacSecPortSpeeds, name: "availableMacSecPortSpeeds"))
+    Location.add_member(:available_billing_modes, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailableBillingModeList, name: "availableBillingModes"))
     Location.type = Types::Location
     LocationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Location, name: "member"))
     MacSecKey.add_member(:secret_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretARN, name: "secretARN"))
@@ -1194,6 +1419,9 @@ module Aws::DirectConnect
     NewPrivateVirtualInterface.add_member(:direct_connect_gateway_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectConnectGatewayId, name: "directConnectGatewayId"))
     NewPrivateVirtualInterface.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tags"))
     NewPrivateVirtualInterface.add_member(:enable_site_link, ::Smithy::Schema::Shapes::MemberShape.new(target: EnableSiteLink, name: "enableSiteLink"))
+    NewPrivateVirtualInterface.add_member(:prefix_pool_allocated_count_ipv4, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolAllocatedCount, name: "prefixPoolAllocatedCountIpv4"))
+    NewPrivateVirtualInterface.add_member(:prefix_pool_allocated_count_ipv6, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolAllocatedCount, name: "prefixPoolAllocatedCountIpv6"))
+    NewPrivateVirtualInterface.add_member(:rate_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: RateLimit, name: "rateLimit"))
     NewPrivateVirtualInterface.type = Types::NewPrivateVirtualInterface
     NewPrivateVirtualInterfaceAllocation.add_member(:virtual_interface_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualInterfaceName, name: "virtualInterfaceName", traits: {"smithy.api#required" => {}}))
     NewPrivateVirtualInterfaceAllocation.add_member(:vlan, ::Smithy::Schema::Shapes::MemberShape.new(target: VLAN, name: "vlan", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
@@ -1205,6 +1433,7 @@ module Aws::DirectConnect
     NewPrivateVirtualInterfaceAllocation.add_member(:address_family, ::Smithy::Schema::Shapes::MemberShape.new(target: AddressFamily, name: "addressFamily"))
     NewPrivateVirtualInterfaceAllocation.add_member(:customer_address, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerAddress, name: "customerAddress"))
     NewPrivateVirtualInterfaceAllocation.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tags"))
+    NewPrivateVirtualInterfaceAllocation.add_member(:rate_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: RateLimit, name: "rateLimit"))
     NewPrivateVirtualInterfaceAllocation.type = Types::NewPrivateVirtualInterfaceAllocation
     NewPublicVirtualInterface.add_member(:virtual_interface_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualInterfaceName, name: "virtualInterfaceName", traits: {"smithy.api#required" => {}}))
     NewPublicVirtualInterface.add_member(:vlan, ::Smithy::Schema::Shapes::MemberShape.new(target: VLAN, name: "vlan", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
@@ -1216,6 +1445,7 @@ module Aws::DirectConnect
     NewPublicVirtualInterface.add_member(:address_family, ::Smithy::Schema::Shapes::MemberShape.new(target: AddressFamily, name: "addressFamily"))
     NewPublicVirtualInterface.add_member(:route_filter_prefixes, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteFilterPrefixList, name: "routeFilterPrefixes"))
     NewPublicVirtualInterface.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tags"))
+    NewPublicVirtualInterface.add_member(:rate_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: RateLimit, name: "rateLimit"))
     NewPublicVirtualInterface.type = Types::NewPublicVirtualInterface
     NewPublicVirtualInterfaceAllocation.add_member(:virtual_interface_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualInterfaceName, name: "virtualInterfaceName", traits: {"smithy.api#required" => {}}))
     NewPublicVirtualInterfaceAllocation.add_member(:vlan, ::Smithy::Schema::Shapes::MemberShape.new(target: VLAN, name: "vlan", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
@@ -1227,6 +1457,7 @@ module Aws::DirectConnect
     NewPublicVirtualInterfaceAllocation.add_member(:address_family, ::Smithy::Schema::Shapes::MemberShape.new(target: AddressFamily, name: "addressFamily"))
     NewPublicVirtualInterfaceAllocation.add_member(:route_filter_prefixes, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteFilterPrefixList, name: "routeFilterPrefixes"))
     NewPublicVirtualInterfaceAllocation.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tags"))
+    NewPublicVirtualInterfaceAllocation.add_member(:rate_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: RateLimit, name: "rateLimit"))
     NewPublicVirtualInterfaceAllocation.type = Types::NewPublicVirtualInterfaceAllocation
     NewTransitVirtualInterface.add_member(:virtual_interface_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualInterfaceName, name: "virtualInterfaceName"))
     NewTransitVirtualInterface.add_member(:vlan, ::Smithy::Schema::Shapes::MemberShape.new(target: VLAN, name: "vlan", traits: {"smithy.api#default" => 0}))
@@ -1240,6 +1471,9 @@ module Aws::DirectConnect
     NewTransitVirtualInterface.add_member(:direct_connect_gateway_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectConnectGatewayId, name: "directConnectGatewayId"))
     NewTransitVirtualInterface.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tags"))
     NewTransitVirtualInterface.add_member(:enable_site_link, ::Smithy::Schema::Shapes::MemberShape.new(target: EnableSiteLink, name: "enableSiteLink"))
+    NewTransitVirtualInterface.add_member(:prefix_pool_allocated_count_ipv4, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolAllocatedCount, name: "prefixPoolAllocatedCountIpv4"))
+    NewTransitVirtualInterface.add_member(:prefix_pool_allocated_count_ipv6, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolAllocatedCount, name: "prefixPoolAllocatedCountIpv6"))
+    NewTransitVirtualInterface.add_member(:rate_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: RateLimit, name: "rateLimit"))
     NewTransitVirtualInterface.type = Types::NewTransitVirtualInterface
     NewTransitVirtualInterfaceAllocation.add_member(:virtual_interface_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualInterfaceName, name: "virtualInterfaceName"))
     NewTransitVirtualInterfaceAllocation.add_member(:vlan, ::Smithy::Schema::Shapes::MemberShape.new(target: VLAN, name: "vlan", traits: {"smithy.api#default" => 0}))
@@ -1251,19 +1485,82 @@ module Aws::DirectConnect
     NewTransitVirtualInterfaceAllocation.add_member(:customer_address, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerAddress, name: "customerAddress"))
     NewTransitVirtualInterfaceAllocation.add_member(:address_family, ::Smithy::Schema::Shapes::MemberShape.new(target: AddressFamily, name: "addressFamily"))
     NewTransitVirtualInterfaceAllocation.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tags"))
+    NewTransitVirtualInterfaceAllocation.add_member(:rate_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: RateLimit, name: "rateLimit"))
     NewTransitVirtualInterfaceAllocation.type = Types::NewTransitVirtualInterfaceAllocation
     NniPartnerType.add_member(:v1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "V1", traits: {"smithy.api#enumValue" => "v1"}))
     NniPartnerType.add_member(:v2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "V2", traits: {"smithy.api#enumValue" => "v2"}))
     NniPartnerType.add_member(:non_partner, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NonPartner", traits: {"smithy.api#enumValue" => "nonPartner"}))
     ProviderList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderName, name: "member"))
+    RateLimiterStatus.add_member(:max_allowed, ::Smithy::Schema::Shapes::MemberShape.new(target: Count, name: "maxAllowed", traits: {"smithy.api#default" => 0}))
+    RateLimiterStatus.add_member(:in_use, ::Smithy::Schema::Shapes::MemberShape.new(target: Count, name: "inUse", traits: {"smithy.api#default" => 0}))
+    RateLimiterStatus.add_member(:remaining, ::Smithy::Schema::Shapes::MemberShape.new(target: Count, name: "remaining", traits: {"smithy.api#default" => 0}))
+    RateLimiterStatus.add_member(:total_bandwidth, ::Smithy::Schema::Shapes::MemberShape.new(target: Bandwidth, name: "totalBandwidth"))
+    RateLimiterStatus.type = Types::RateLimiterStatus
+    RequestBillingMode.add_member(:pay_as_you_go, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PayAsYouGo", traits: {"smithy.api#enumValue" => "PayAsYouGo"}))
+    RequestBillingMode.add_member(:flat_rate_tier1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FlatRateTier1", traits: {"smithy.api#enumValue" => "FlatRateTier1"}))
+    RequestBillingMode.add_member(:flat_rate_tier2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FlatRateTier2", traits: {"smithy.api#enumValue" => "FlatRateTier2"}))
+    RequestBillingMode.add_member(:flat_rate_tier3, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FlatRateTier3", traits: {"smithy.api#enumValue" => "FlatRateTier3"}))
+    RequestBillingMode.add_member(:flat_rate_tier4, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FlatRateTier4", traits: {"smithy.api#enumValue" => "FlatRateTier4"}))
+    RequestBillingMode.add_member(:flat_rate_tier5, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FlatRateTier5", traits: {"smithy.api#enumValue" => "FlatRateTier5"}))
+    ResiliencyGroup.add_member(:resiliency_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResiliencyGroupId, name: "resiliencyGroupId"))
+    ResiliencyGroup.add_member(:resiliency_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResiliencyGroupArn, name: "resiliencyGroupArn"))
+    ResiliencyGroup.add_member(:resiliency_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResiliencyGroupName, name: "resiliencyGroupName"))
+    ResiliencyGroup.add_member(:resiliency_group_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResiliencyGroupType, name: "resiliencyGroupType"))
+    ResiliencyGroup.add_member(:owner_account, ::Smithy::Schema::Shapes::MemberShape.new(target: OwnerAccount, name: "ownerAccount"))
+    ResiliencyGroup.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ResiliencyGroupState, name: "state"))
+    ResiliencyGroup.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tags"))
+    ResiliencyGroup.type = Types::ResiliencyGroup
+    ResiliencyGroupAssociation.add_member(:resiliency_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResiliencyGroupId, name: "resiliencyGroupId"))
+    ResiliencyGroupAssociation.add_member(:connection_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionArn, name: "connectionArn"))
+    ResiliencyGroupAssociation.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ResiliencyGroupAssociationState, name: "state"))
+    ResiliencyGroupAssociation.type = Types::ResiliencyGroupAssociation
+    ResiliencyGroupAssociationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResiliencyGroupAssociation, name: "member"))
+    ResiliencyGroupAssociationState.add_member(:associating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Associating", traits: {"smithy.api#enumValue" => "associating"}))
+    ResiliencyGroupAssociationState.add_member(:associated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Associated", traits: {"smithy.api#enumValue" => "associated"}))
+    ResiliencyGroupAssociationState.add_member(:disassociating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Disassociating", traits: {"smithy.api#enumValue" => "disassociating"}))
+    ResiliencyGroupAssociationState.add_member(:disassociated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Disassociated", traits: {"smithy.api#enumValue" => "disassociated"}))
+    ResiliencyGroupState.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Pending", traits: {"smithy.api#enumValue" => "pending"}))
+    ResiliencyGroupState.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Available", traits: {"smithy.api#enumValue" => "available"}))
+    ResiliencyGroupState.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Deleting", traits: {"smithy.api#enumValue" => "deleting"}))
+    ResiliencyGroupState.add_member(:deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Deleted", traits: {"smithy.api#enumValue" => "deleted"}))
+    ResiliencyGroupSummary.add_member(:resiliency_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResiliencyGroupId, name: "resiliencyGroupId"))
+    ResiliencyGroupSummary.add_member(:resiliency_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResiliencyGroupArn, name: "resiliencyGroupArn"))
+    ResiliencyGroupSummary.add_member(:resiliency_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResiliencyGroupName, name: "resiliencyGroupName"))
+    ResiliencyGroupSummary.add_member(:resiliency_group_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResiliencyGroupType, name: "resiliencyGroupType"))
+    ResiliencyGroupSummary.add_member(:owner_account, ::Smithy::Schema::Shapes::MemberShape.new(target: OwnerAccount, name: "ownerAccount"))
+    ResiliencyGroupSummary.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ResiliencyGroupState, name: "state"))
+    ResiliencyGroupSummary.type = Types::ResiliencyGroupSummary
+    ResiliencyGroupSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResiliencyGroupSummary, name: "member"))
+    ResiliencyGroupType.add_member(:managed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Managed", traits: {"smithy.api#enumValue" => "Managed"}))
+    ResiliencyModel.add_member(:maximum_resiliency, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MaximumResiliency", traits: {"smithy.api#enumValue" => "maximum-resiliency"}))
+    ResiliencyModel.add_member(:high_resiliency, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HighResiliency", traits: {"smithy.api#enumValue" => "high-resiliency"}))
+    ResiliencyModel.add_member(:basic_resiliency, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BasicResiliency", traits: {"smithy.api#enumValue" => "basic-resiliency"}))
     ResourceArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "member"))
     ResourceTag.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "resourceArn"))
     ResourceTag.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tags"))
     ResourceTag.type = Types::ResourceTag
     ResourceTagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTag, name: "member"))
+    Route.add_member(:cidr, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteCidr, name: "cidr"))
+    Route.add_member(:route_direction, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteDirection, name: "routeDirection"))
+    Route.add_member(:address_family, ::Smithy::Schema::Shapes::MemberShape.new(target: AddressFamily, name: "addressFamily"))
+    Route.add_member(:as_path, ::Smithy::Schema::Shapes::MemberShape.new(target: AsPathSegmentList, name: "asPath"))
+    Route.add_member(:communities, ::Smithy::Schema::Shapes::MemberShape.new(target: CommunityList, name: "communities"))
+    Route.add_member(:aws_logical_device_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsLogicalDeviceId, name: "awsLogicalDeviceId"))
+    Route.add_member(:route_installed_at, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteInstalledAt, name: "routeInstalledAt"))
+    Route.type = Types::Route
+    RouteDirection.add_member(:accepted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Accepted", traits: {"smithy.api#enumValue" => "accepted"}))
+    RouteDirection.add_member(:advertised, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Advertised", traits: {"smithy.api#enumValue" => "advertised"}))
+    RouteFilterCidrStringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteFilterCidrString, name: "member"))
     RouteFilterPrefix.add_member(:cidr, ::Smithy::Schema::Shapes::MemberShape.new(target: CIDR, name: "cidr"))
     RouteFilterPrefix.type = Types::RouteFilterPrefix
     RouteFilterPrefixList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteFilterPrefix, name: "member"))
+    RouteFilters.add_member(:route_direction, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteDirection, name: "routeDirection"))
+    RouteFilters.add_member(:address_family, ::Smithy::Schema::Shapes::MemberShape.new(target: AddressFamily, name: "addressFamily"))
+    RouteFilters.add_member(:cidrs, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteFilterCidrStringList, name: "cidrs"))
+    RouteFilters.add_member(:as_path, ::Smithy::Schema::Shapes::MemberShape.new(target: AsPathList, name: "asPath"))
+    RouteFilters.add_member(:communities, ::Smithy::Schema::Shapes::MemberShape.new(target: CommunityList, name: "communities"))
+    RouteFilters.type = Types::RouteFilters
+    RouteList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Route, name: "member"))
     RouterType.add_member(:vendor, ::Smithy::Schema::Shapes::MemberShape.new(target: Vendor, name: "vendor"))
     RouterType.add_member(:platform, ::Smithy::Schema::Shapes::MemberShape.new(target: Platform, name: "platform"))
     RouterType.add_member(:software, ::Smithy::Schema::Shapes::MemberShape.new(target: Software, name: "software"))
@@ -1318,12 +1615,24 @@ module Aws::DirectConnect
     UpdateConnectionOutput.add_member(:port_encryption_status, ::Smithy::Schema::Shapes::MemberShape.new(target: PortEncryptionStatus, name: "portEncryptionStatus"))
     UpdateConnectionOutput.add_member(:encryption_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionMode, name: "encryptionMode"))
     UpdateConnectionOutput.add_member(:mac_sec_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: MacSecKeyList, name: "macSecKeys"))
+    UpdateConnectionOutput.add_member(:rate_limiter_status, ::Smithy::Schema::Shapes::MemberShape.new(target: RateLimiterStatus, name: "rateLimiterStatus"))
     UpdateConnectionOutput.add_member(:partner_interconnect_mac_sec_capable, ::Smithy::Schema::Shapes::MemberShape.new(target: PartnerInterconnectMacSecCapable, name: "partnerInterconnectMacSecCapable"))
+    UpdateConnectionOutput.add_member(:prefix_pool_size_ipv4, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolSize, name: "prefixPoolSizeIpv4"))
+    UpdateConnectionOutput.add_member(:prefix_pool_size_ipv6, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolSize, name: "prefixPoolSizeIpv6"))
+    UpdateConnectionOutput.add_member(:prefix_pool_unallocated_count_ipv4, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolUnallocatedCount, name: "prefixPoolUnallocatedCountIpv4"))
+    UpdateConnectionOutput.add_member(:prefix_pool_unallocated_count_ipv6, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolUnallocatedCount, name: "prefixPoolUnallocatedCountIpv6"))
+    UpdateConnectionOutput.add_member(:billing_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingMode, name: "billingMode"))
     UpdateConnectionOutput.type = Types::UpdateConnectionOutput
     UpdateConnectionRequest.add_member(:connection_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionId, name: "connectionId", traits: {"smithy.api#required" => {}}))
     UpdateConnectionRequest.add_member(:connection_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionName, name: "connectionName"))
     UpdateConnectionRequest.add_member(:encryption_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionMode, name: "encryptionMode"))
     UpdateConnectionRequest.type = Types::UpdateConnectionRequest
+    UpdateConnectionsBillingModeRequest.add_member(:connection_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionIdList, name: "connectionIds", traits: {"smithy.api#required" => {}}))
+    UpdateConnectionsBillingModeRequest.add_member(:billing_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestBillingMode, name: "billingMode", traits: {"smithy.api#required" => {}}))
+    UpdateConnectionsBillingModeRequest.type = Types::UpdateConnectionsBillingModeRequest
+    UpdateConnectionsBillingModeResponse.add_member(:billing_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingMode, name: "billingMode"))
+    UpdateConnectionsBillingModeResponse.add_member(:connections, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionList, name: "connections"))
+    UpdateConnectionsBillingModeResponse.type = Types::UpdateConnectionsBillingModeResponse
     UpdateDirectConnectGatewayAssociationRequest.add_member(:association_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectConnectGatewayAssociationId, name: "associationId"))
     UpdateDirectConnectGatewayAssociationRequest.add_member(:add_allowed_prefixes_to_direct_connect_gateway, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteFilterPrefixList, name: "addAllowedPrefixesToDirectConnectGateway"))
     UpdateDirectConnectGatewayAssociationRequest.add_member(:remove_allowed_prefixes_to_direct_connect_gateway, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteFilterPrefixList, name: "removeAllowedPrefixesToDirectConnectGateway"))
@@ -1356,12 +1665,24 @@ module Aws::DirectConnect
     UpdateLagOutput.add_member(:mac_sec_capable, ::Smithy::Schema::Shapes::MemberShape.new(target: MacSecCapable, name: "macSecCapable"))
     UpdateLagOutput.add_member(:encryption_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionMode, name: "encryptionMode"))
     UpdateLagOutput.add_member(:mac_sec_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: MacSecKeyList, name: "macSecKeys"))
+    UpdateLagOutput.add_member(:prefix_pool_size_ipv4, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolSize, name: "prefixPoolSizeIpv4"))
+    UpdateLagOutput.add_member(:prefix_pool_size_ipv6, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolSize, name: "prefixPoolSizeIpv6"))
+    UpdateLagOutput.add_member(:prefix_pool_unallocated_count_ipv4, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolUnallocatedCount, name: "prefixPoolUnallocatedCountIpv4"))
+    UpdateLagOutput.add_member(:prefix_pool_unallocated_count_ipv6, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolUnallocatedCount, name: "prefixPoolUnallocatedCountIpv6"))
+    UpdateLagOutput.add_member(:rate_limiter_status, ::Smithy::Schema::Shapes::MemberShape.new(target: RateLimiterStatus, name: "rateLimiterStatus"))
+    UpdateLagOutput.add_member(:billing_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingMode, name: "billingMode"))
     UpdateLagOutput.type = Types::UpdateLagOutput
     UpdateLagRequest.add_member(:lag_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LagId, name: "lagId", traits: {"smithy.api#required" => {}}))
     UpdateLagRequest.add_member(:lag_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LagName, name: "lagName"))
     UpdateLagRequest.add_member(:minimum_links, ::Smithy::Schema::Shapes::MemberShape.new(target: Count, name: "minimumLinks", traits: {"smithy.api#default" => 0}))
     UpdateLagRequest.add_member(:encryption_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionMode, name: "encryptionMode"))
     UpdateLagRequest.type = Types::UpdateLagRequest
+    UpdateResiliencyGroupRequest.add_member(:resiliency_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResiliencyGroupId, name: "resiliencyGroupId", traits: {"smithy.api#required" => {}}))
+    UpdateResiliencyGroupRequest.add_member(:resiliency_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResiliencyGroupName, name: "resiliencyGroupName", traits: {"smithy.api#required" => {}}))
+    UpdateResiliencyGroupRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: IdempotencyToken, name: "clientToken"))
+    UpdateResiliencyGroupRequest.type = Types::UpdateResiliencyGroupRequest
+    UpdateResiliencyGroupResult.add_member(:resiliency_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ResiliencyGroup, name: "resiliencyGroup"))
+    UpdateResiliencyGroupResult.type = Types::UpdateResiliencyGroupResult
     UpdateVirtualInterfaceAttributesOutput.add_member(:owner_account, ::Smithy::Schema::Shapes::MemberShape.new(target: OwnerAccount, name: "ownerAccount"))
     UpdateVirtualInterfaceAttributesOutput.add_member(:virtual_interface_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualInterfaceId, name: "virtualInterfaceId"))
     UpdateVirtualInterfaceAttributesOutput.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationCode, name: "location"))
@@ -1389,11 +1710,17 @@ module Aws::DirectConnect
     UpdateVirtualInterfaceAttributesOutput.add_member(:aws_logical_device_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsLogicalDeviceId, name: "awsLogicalDeviceId"))
     UpdateVirtualInterfaceAttributesOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tags"))
     UpdateVirtualInterfaceAttributesOutput.add_member(:site_link_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: SiteLinkEnabled, name: "siteLinkEnabled"))
+    UpdateVirtualInterfaceAttributesOutput.add_member(:prefix_pool_allocated_count_ipv4, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolAllocatedCount, name: "prefixPoolAllocatedCountIpv4"))
+    UpdateVirtualInterfaceAttributesOutput.add_member(:prefix_pool_allocated_count_ipv6, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolAllocatedCount, name: "prefixPoolAllocatedCountIpv6"))
+    UpdateVirtualInterfaceAttributesOutput.add_member(:rate_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: RateLimit, name: "rateLimit"))
     UpdateVirtualInterfaceAttributesOutput.type = Types::UpdateVirtualInterfaceAttributesOutput
     UpdateVirtualInterfaceAttributesRequest.add_member(:virtual_interface_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualInterfaceId, name: "virtualInterfaceId", traits: {"smithy.api#required" => {}}))
     UpdateVirtualInterfaceAttributesRequest.add_member(:mtu, ::Smithy::Schema::Shapes::MemberShape.new(target: MTU, name: "mtu"))
     UpdateVirtualInterfaceAttributesRequest.add_member(:enable_site_link, ::Smithy::Schema::Shapes::MemberShape.new(target: EnableSiteLink, name: "enableSiteLink"))
     UpdateVirtualInterfaceAttributesRequest.add_member(:virtual_interface_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualInterfaceName, name: "virtualInterfaceName"))
+    UpdateVirtualInterfaceAttributesRequest.add_member(:prefix_pool_allocated_count_ipv4, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolAllocatedCount, name: "prefixPoolAllocatedCountIpv4"))
+    UpdateVirtualInterfaceAttributesRequest.add_member(:prefix_pool_allocated_count_ipv6, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolAllocatedCount, name: "prefixPoolAllocatedCountIpv6"))
+    UpdateVirtualInterfaceAttributesRequest.add_member(:rate_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: RateLimit, name: "rateLimit"))
     UpdateVirtualInterfaceAttributesRequest.type = Types::UpdateVirtualInterfaceAttributesRequest
     VirtualGateway.add_member(:virtual_gateway_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGatewayId, name: "virtualGatewayId"))
     VirtualGateway.add_member(:virtual_gateway_state, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGatewayState, name: "virtualGatewayState"))
@@ -1426,6 +1753,9 @@ module Aws::DirectConnect
     VirtualInterface.add_member(:aws_logical_device_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsLogicalDeviceId, name: "awsLogicalDeviceId"))
     VirtualInterface.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tags"))
     VirtualInterface.add_member(:site_link_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: SiteLinkEnabled, name: "siteLinkEnabled"))
+    VirtualInterface.add_member(:prefix_pool_allocated_count_ipv4, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolAllocatedCount, name: "prefixPoolAllocatedCountIpv4"))
+    VirtualInterface.add_member(:prefix_pool_allocated_count_ipv6, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixPoolAllocatedCount, name: "prefixPoolAllocatedCountIpv6"))
+    VirtualInterface.add_member(:rate_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: RateLimit, name: "rateLimit"))
     VirtualInterface.type = Types::VirtualInterface
     VirtualInterfaceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualInterface, name: "member"))
     VirtualInterfaceState.add_member(:confirming, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "confirming", traits: {"smithy.api#enumValue" => "confirming"}))
@@ -1453,7 +1783,7 @@ module Aws::DirectConnect
       service.id = "com.amazonaws.directconnect#OvertureService"
       service.name = "OvertureService"
       service.version = "2012-10-25"
-      service.traits = {"aws.api#service" => {"sdkId" => "Direct Connect", "arnNamespace" => "directconnect", "cloudFormationName" => "DirectConnect", "cloudTrailEventSource" => "directconnect.amazonaws.com", "docId" => "directconnect-2012-10-25", "endpointPrefix" => "directconnect"}, "aws.auth#sigv4" => {"name" => "directconnect"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "AWS Direct Connect", "smithy.api#xmlNamespace" => {"uri" => "http://directconnect.amazonaws.com/doc/2012-10-25/"}}
+      service.traits = {"aws.api#service" => {"sdkId" => "Direct Connect", "arnNamespace" => "directconnect", "cloudFormationName" => "DirectConnect", "cloudTrailEventSource" => "directconnect.amazonaws.com", "docId" => "directconnect-2012-10-25", "endpointPrefix" => "directconnect"}, "aws.auth#sigv4" => {"name" => "directconnect"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "AWS Direct Connect", "smithy.api#xmlNamespace" => {"uri" => "http://directconnect.amazonaws.com/doc/2012-10-25/"}, "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://directconnect-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://directconnect-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://directconnect.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://directconnect.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
       service.add_operation(:accept_direct_connect_gateway_association_proposal, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directconnect#AcceptDirectConnectGatewayAssociationProposal"
         operation.name = "AcceptDirectConnectGatewayAssociationProposal"
@@ -1491,6 +1821,7 @@ module Aws::DirectConnect
         operation.errors << DirectConnectClientException
         operation.errors << DirectConnectServerException
         operation.errors << DuplicateTagKeysException
+        operation.errors << LimitExceededException
         operation.errors << TooManyTagsException
         operation.traits = {}
       end)
@@ -1502,6 +1833,7 @@ module Aws::DirectConnect
         operation.errors << DirectConnectClientException
         operation.errors << DirectConnectServerException
         operation.errors << DuplicateTagKeysException
+        operation.errors << LimitExceededException
         operation.errors << TooManyTagsException
         operation.traits = {}
       end)
@@ -1513,6 +1845,7 @@ module Aws::DirectConnect
         operation.errors << DirectConnectClientException
         operation.errors << DirectConnectServerException
         operation.errors << DuplicateTagKeysException
+        operation.errors << LimitExceededException
         operation.errors << TooManyTagsException
         operation.traits = {}
       end)
@@ -1523,6 +1856,17 @@ module Aws::DirectConnect
         operation.output = AssociateConnectionWithLagOutput
         operation.errors << DirectConnectClientException
         operation.errors << DirectConnectServerException
+        operation.errors << LimitExceededException
+        operation.traits = {}
+      end)
+      service.add_operation(:associate_connections_to_resiliency_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.directconnect#AssociateConnectionsToResiliencyGroup"
+        operation.name = "AssociateConnectionsToResiliencyGroup"
+        operation.input = AssociateConnectionsToResiliencyGroupRequest
+        operation.output = AssociateConnectionsToResiliencyGroupResult
+        operation.errors << DirectConnectClientException
+        operation.errors << DirectConnectServerException
+        operation.errors << LimitExceededException
         operation.traits = {}
       end)
       service.add_operation(:associate_hosted_connection, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -1674,6 +2018,7 @@ module Aws::DirectConnect
         operation.errors << DirectConnectClientException
         operation.errors << DirectConnectServerException
         operation.errors << DuplicateTagKeysException
+        operation.errors << LimitExceededException
         operation.errors << TooManyTagsException
         operation.traits = {}
       end)
@@ -1685,6 +2030,19 @@ module Aws::DirectConnect
         operation.errors << DirectConnectClientException
         operation.errors << DirectConnectServerException
         operation.errors << DuplicateTagKeysException
+        operation.errors << LimitExceededException
+        operation.errors << TooManyTagsException
+        operation.traits = {}
+      end)
+      service.add_operation(:create_resiliency_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.directconnect#CreateResiliencyGroup"
+        operation.name = "CreateResiliencyGroup"
+        operation.input = CreateResiliencyGroupRequest
+        operation.output = CreateResiliencyGroupResult
+        operation.errors << DirectConnectClientException
+        operation.errors << DirectConnectServerException
+        operation.errors << DuplicateTagKeysException
+        operation.errors << LimitExceededException
         operation.errors << TooManyTagsException
         operation.traits = {}
       end)
@@ -1696,6 +2054,7 @@ module Aws::DirectConnect
         operation.errors << DirectConnectClientException
         operation.errors << DirectConnectServerException
         operation.errors << DuplicateTagKeysException
+        operation.errors << LimitExceededException
         operation.errors << TooManyTagsException
         operation.traits = {}
       end)
@@ -1758,6 +2117,15 @@ module Aws::DirectConnect
         operation.name = "DeleteLag"
         operation.input = DeleteLagRequest
         operation.output = DeleteLagOutput
+        operation.errors << DirectConnectClientException
+        operation.errors << DirectConnectServerException
+        operation.traits = {}
+      end)
+      service.add_operation(:delete_resiliency_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.directconnect#DeleteResiliencyGroup"
+        operation.name = "DeleteResiliencyGroup"
+        operation.input = DeleteResiliencyGroupRequest
+        operation.output = DeleteResiliencyGroupResult
         operation.errors << DirectConnectClientException
         operation.errors << DirectConnectServerException
         operation.traits = {}
@@ -1942,11 +2310,56 @@ module Aws::DirectConnect
         operation.errors << DirectConnectServerException
         operation.traits = {}
       end)
+      service.add_operation(:disassociate_connections_from_resiliency_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.directconnect#DisassociateConnectionsFromResiliencyGroup"
+        operation.name = "DisassociateConnectionsFromResiliencyGroup"
+        operation.input = DisassociateConnectionsFromResiliencyGroupRequest
+        operation.output = DisassociateConnectionsFromResiliencyGroupResult
+        operation.errors << DirectConnectClientException
+        operation.errors << DirectConnectServerException
+        operation.traits = {}
+      end)
       service.add_operation(:disassociate_mac_sec_key, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directconnect#DisassociateMacSecKey"
         operation.name = "DisassociateMacSecKey"
         operation.input = DisassociateMacSecKeyRequest
         operation.output = DisassociateMacSecKeyResponse
+        operation.errors << DirectConnectClientException
+        operation.errors << DirectConnectServerException
+        operation.traits = {}
+      end)
+      service.add_operation(:get_resiliency_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.directconnect#GetResiliencyGroup"
+        operation.name = "GetResiliencyGroup"
+        operation.input = GetResiliencyGroupRequest
+        operation.output = GetResiliencyGroupResult
+        operation.errors << DirectConnectClientException
+        operation.errors << DirectConnectServerException
+        operation.traits = {}
+      end)
+      service.add_operation(:list_resiliency_group_associations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.directconnect#ListResiliencyGroupAssociations"
+        operation.name = "ListResiliencyGroupAssociations"
+        operation.input = ListResiliencyGroupAssociationsRequest
+        operation.output = ListResiliencyGroupAssociationsResult
+        operation.errors << DirectConnectClientException
+        operation.errors << DirectConnectServerException
+        operation.traits = {}
+      end)
+      service.add_operation(:list_resiliency_groups, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.directconnect#ListResiliencyGroups"
+        operation.name = "ListResiliencyGroups"
+        operation.input = ListResiliencyGroupsRequest
+        operation.output = ListResiliencyGroupsResult
+        operation.errors << DirectConnectClientException
+        operation.errors << DirectConnectServerException
+        operation.traits = {}
+      end)
+      service.add_operation(:list_virtual_interface_routes, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.directconnect#ListVirtualInterfaceRoutes"
+        operation.name = "ListVirtualInterfaceRoutes"
+        operation.input = ListVirtualInterfaceRoutesRequest
+        operation.output = ListVirtualInterfaceRoutesResponse
         operation.errors << DirectConnectClientException
         operation.errors << DirectConnectServerException
         operation.traits = {}
@@ -2007,6 +2420,15 @@ module Aws::DirectConnect
         operation.errors << DirectConnectServerException
         operation.traits = {}
       end)
+      service.add_operation(:update_connections_billing_mode, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.directconnect#UpdateConnectionsBillingMode"
+        operation.name = "UpdateConnectionsBillingMode"
+        operation.input = UpdateConnectionsBillingModeRequest
+        operation.output = UpdateConnectionsBillingModeResponse
+        operation.errors << DirectConnectClientException
+        operation.errors << DirectConnectServerException
+        operation.traits = {}
+      end)
       service.add_operation(:update_direct_connect_gateway, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.directconnect#UpdateDirectConnectGateway"
         operation.name = "UpdateDirectConnectGateway"
@@ -2030,6 +2452,15 @@ module Aws::DirectConnect
         operation.name = "UpdateLag"
         operation.input = UpdateLagRequest
         operation.output = UpdateLagOutput
+        operation.errors << DirectConnectClientException
+        operation.errors << DirectConnectServerException
+        operation.traits = {}
+      end)
+      service.add_operation(:update_resiliency_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.directconnect#UpdateResiliencyGroup"
+        operation.name = "UpdateResiliencyGroup"
+        operation.input = UpdateResiliencyGroupRequest
+        operation.output = UpdateResiliencyGroupResult
         operation.errors << DirectConnectClientException
         operation.errors << DirectConnectServerException
         operation.traits = {}

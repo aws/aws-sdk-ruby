@@ -111,6 +111,18 @@ module Aws::Connect
       ?vocabulary_id: String
     ) -> _AssociateDefaultVocabularyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateDefaultVocabularyResponse
 
+    interface _AssociateEmailAddressAliasResponse
+      include Smithy::Client::_Response[Types::AssociateEmailAddressAliasResponse]
+    end
+    def associate_email_address_alias: (
+      ?email_address_id: String,
+      ?instance_id: String,
+      ?alias_configuration: {
+        email_address_id: String
+      },
+      ?client_token: String
+    ) -> _AssociateEmailAddressAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateEmailAddressAliasResponse
+
     interface _AssociateFlowResponse
       include Smithy::Client::_Response[Types::AssociateFlowResponse]
     end
@@ -120,6 +132,19 @@ module Aws::Connect
       ?flow_id: String,
       ?resource_type: String
     ) -> _AssociateFlowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateFlowResponse
+
+    interface _AssociateHoursOfOperationsResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def associate_hours_of_operations: (
+      ?instance_id: String,
+      ?hours_of_operation_id: String,
+      ?parent_hours_of_operation_configs: Array[
+        {
+          hours_of_operation_id: String
+        }
+      ]
+    ) -> _AssociateHoursOfOperationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateHoursOfOperationsResponse
 
     interface _AssociateInstanceStorageConfigResponse
       include Smithy::Client::_Response[Types::AssociateInstanceStorageConfigResponse]
@@ -184,6 +209,20 @@ module Aws::Connect
       ?contact_flow_id: String
     ) -> _AssociatePhoneNumberContactFlowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociatePhoneNumberContactFlowResponse
 
+    interface _AssociateQueueEmailAddressesResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def associate_queue_email_addresses: (
+      ?instance_id: String,
+      ?queue_id: String,
+      ?email_addresses_config: Array[
+        {
+          email_address_id: String
+        }
+      ],
+      ?client_token: String
+    ) -> _AssociateQueueEmailAddressesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateQueueEmailAddressesResponse
+
     interface _AssociateQueueQuickConnectsResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
     end
@@ -229,6 +268,20 @@ module Aws::Connect
       ?client_token: String
     ) -> _AssociateSecurityKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateSecurityKeyResponse
 
+    interface _AssociateSecurityProfilesResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def associate_security_profiles: (
+      ?instance_id: String,
+      ?security_profiles: Array[
+        {
+          id: String
+        }
+      ],
+      ?entity_type: String,
+      ?entity_arn: String
+    ) -> _AssociateSecurityProfilesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateSecurityProfilesResponse
+
     interface _AssociateTrafficDistributionGroupUserResponse
       include Smithy::Client::_Response[Types::AssociateTrafficDistributionGroupUserResponse]
     end
@@ -253,6 +306,17 @@ module Aws::Connect
       ]
     ) -> _AssociateUserProficienciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateUserProficienciesResponse
 
+    interface _AssociateWorkspaceResponse
+      include Smithy::Client::_Response[Types::AssociateWorkspaceResponse]
+      def successful_list: () -> Array[Types::SuccessfulBatchAssociationSummary]?
+      def failed_list: () -> Array[Types::FailedBatchAssociationSummary]?
+    end
+    def associate_workspace: (
+      ?instance_id: String,
+      ?workspace_id: String,
+      ?resource_arns: Array[String]
+    ) -> _AssociateWorkspaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateWorkspaceResponse
+
     interface _BatchAssociateAnalyticsDataSetResponse
       include Smithy::Client::_Response[Types::BatchAssociateAnalyticsDataSetResponse]
       def created: () -> Array[Types::AnalyticsDataAssociationResult]?
@@ -263,6 +327,84 @@ module Aws::Connect
       ?data_set_ids: Array[String],
       ?target_account_id: String
     ) -> _BatchAssociateAnalyticsDataSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchAssociateAnalyticsDataSetResponse
+
+    interface _BatchCreateDataTableValueResponse
+      include Smithy::Client::_Response[Types::BatchCreateDataTableValueResponse]
+      def successful: () -> Array[Types::BatchCreateDataTableValueSuccessResult]?
+      def failed: () -> Array[Types::BatchCreateDataTableValueFailureResult]?
+    end
+    def batch_create_data_table_value: (
+      ?instance_id: String,
+      ?data_table_id: String,
+      ?values: Array[
+        {
+          primary_values: Array[
+            {
+              attribute_name: String,
+              value: String
+            }
+          ],
+          attribute_name: untyped,
+          value: untyped,
+          lock_version: {
+            data_table: untyped,
+            attribute: untyped,
+            primary_values: untyped,
+            value: untyped
+          },
+          last_modified_time: Time,
+          last_modified_region: String
+        }
+      ]
+    ) -> _BatchCreateDataTableValueResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchCreateDataTableValueResponse
+
+    interface _BatchDeleteDataTableValueResponse
+      include Smithy::Client::_Response[Types::BatchDeleteDataTableValueResponse]
+      def successful: () -> Array[Types::BatchDeleteDataTableValueSuccessResult]?
+      def failed: () -> Array[Types::BatchDeleteDataTableValueFailureResult]?
+    end
+    def batch_delete_data_table_value: (
+      ?instance_id: String,
+      ?data_table_id: String,
+      ?values: Array[
+        {
+          primary_values: Array[
+            {
+              attribute_name: String,
+              value: String
+            }
+          ],
+          attribute_name: untyped,
+          lock_version: {
+            data_table: untyped,
+            attribute: untyped,
+            primary_values: untyped,
+            value: untyped
+          }
+        }
+      ]
+    ) -> _BatchDeleteDataTableValueResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchDeleteDataTableValueResponse
+
+    interface _BatchDescribeDataTableValueResponse
+      include Smithy::Client::_Response[Types::BatchDescribeDataTableValueResponse]
+      def successful: () -> Array[Types::BatchDescribeDataTableValueSuccessResult]?
+      def failed: () -> Array[Types::BatchDescribeDataTableValueFailureResult]?
+    end
+    def batch_describe_data_table_value: (
+      ?instance_id: String,
+      ?data_table_id: String,
+      ?values: Array[
+        {
+          primary_values: Array[
+            {
+              attribute_name: String,
+              value: String
+            }
+          ],
+          attribute_name: untyped
+        }
+      ]
+    ) -> _BatchDescribeDataTableValueResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchDescribeDataTableValueResponse
 
     interface _BatchDisassociateAnalyticsDataSetResponse
       include Smithy::Client::_Response[Types::BatchDisassociateAnalyticsDataSetResponse]
@@ -316,10 +458,53 @@ module Aws::Connect
           attributes: Hash[String, String],
           campaign: {
             campaign_id: String
+          },
+          outbound_strategy: {
+            type: String,
+            config: {
+              agent_first: {
+                preview: {
+                  post_accept_timeout_config: {
+                    duration_in_seconds: Integer
+                  },
+                  allowed_user_actions: Array[String]
+                }
+              }
+            }
           }
         }
       ]
     ) -> _BatchPutContactResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchPutContactResponse
+
+    interface _BatchUpdateDataTableValueResponse
+      include Smithy::Client::_Response[Types::BatchUpdateDataTableValueResponse]
+      def successful: () -> Array[Types::BatchUpdateDataTableValueSuccessResult]?
+      def failed: () -> Array[Types::BatchUpdateDataTableValueFailureResult]?
+    end
+    def batch_update_data_table_value: (
+      ?instance_id: String,
+      ?data_table_id: String,
+      ?values: Array[
+        {
+          primary_values: Array[
+            {
+              attribute_name: String,
+              value: String
+            }
+          ],
+          attribute_name: untyped,
+          value: untyped,
+          lock_version: {
+            data_table: untyped,
+            attribute: untyped,
+            primary_values: untyped,
+            value: untyped
+          },
+          last_modified_time: Time,
+          last_modified_region: String
+        }
+      ]
+    ) -> _BatchUpdateDataTableValueResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchUpdateDataTableValueResponse
 
     interface _ClaimPhoneNumberResponse
       include Smithy::Client::_Response[Types::ClaimPhoneNumberResponse]
@@ -357,6 +542,41 @@ module Aws::Connect
       ?display_order: Integer,
       ?tags: Hash[String, String]
     ) -> _CreateAgentStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAgentStatusResponse
+
+    interface _CreateAttachedFileResponse
+      include Smithy::Client::_Response[Types::CreateAttachedFileResponse]
+      def file_arn: () -> String?
+      def file_id: () -> String?
+      def creation_time: () -> String?
+      def file_status: () -> String?
+    end
+    def create_attached_file: (
+      ?client_token: String,
+      ?instance_id: String,
+      ?file_use_case_type: String,
+      ?file_source_uri: String,
+      ?associated_resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateAttachedFileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAttachedFileResponse
+
+    interface _CreateAuthCodeResponse
+      include Smithy::Client::_Response[Types::CreateAuthCodeResponse]
+      def auth_code: () -> String?
+      def session_id: () -> String?
+      def entity_type: () -> String?
+      def entity_id: () -> String?
+    end
+    def create_auth_code: (
+      ?instance_id: String,
+      ?scope: {
+        security_profile_ids: Array[String],
+        entity_type: String,
+        entity_id: String,
+        domain_name: String
+      },
+      ?max_session_duration_minutes: Integer,
+      ?session_inactivity_duration_minutes: Integer
+    ) -> _CreateAuthCodeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAuthCodeResponse
 
     interface _CreateContactResponse
       include Smithy::Client::_Response[Types::CreateContactResponse]
@@ -430,6 +650,19 @@ module Aws::Connect
       ?tags: Hash[String, String]
     ) -> _CreateContactFlowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateContactFlowResponse
 
+    interface _CreateContactFlowAliasResponse
+      include Smithy::Client::_Response[Types::CreateContactFlowAliasResponse]
+      def contact_flow_arn: () -> String?
+      def id: () -> String?
+    end
+    def create_contact_flow_alias: (
+      ?instance_id: String,
+      ?description: String,
+      ?contact_flow_id: String,
+      ?contact_flow_version: Integer,
+      ?alias_name: String
+    ) -> _CreateContactFlowAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateContactFlowAliasResponse
+
     interface _CreateContactFlowModuleResponse
       include Smithy::Client::_Response[Types::CreateContactFlowModuleResponse]
       def id: () -> String?
@@ -441,8 +674,37 @@ module Aws::Connect
       ?description: String,
       ?content: String,
       ?tags: Hash[String, String],
-      ?client_token: String
+      ?client_token: String,
+      ?settings: String,
+      ?external_invocation_configuration: {
+        enabled: bool
+      }
     ) -> _CreateContactFlowModuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateContactFlowModuleResponse
+
+    interface _CreateContactFlowModuleAliasResponse
+      include Smithy::Client::_Response[Types::CreateContactFlowModuleAliasResponse]
+      def contact_flow_module_arn: () -> String?
+      def id: () -> String?
+    end
+    def create_contact_flow_module_alias: (
+      ?instance_id: String,
+      ?description: String,
+      ?contact_flow_module_id: String,
+      ?contact_flow_module_version: Integer,
+      ?alias_name: String
+    ) -> _CreateContactFlowModuleAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateContactFlowModuleAliasResponse
+
+    interface _CreateContactFlowModuleVersionResponse
+      include Smithy::Client::_Response[Types::CreateContactFlowModuleVersionResponse]
+      def contact_flow_module_arn: () -> String?
+      def version: () -> Integer?
+    end
+    def create_contact_flow_module_version: (
+      ?instance_id: String,
+      ?description: String,
+      ?contact_flow_module_id: String,
+      ?flow_module_content_sha256: String
+    ) -> _CreateContactFlowModuleVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateContactFlowModuleVersionResponse
 
     interface _CreateContactFlowVersionResponse
       include Smithy::Client::_Response[Types::CreateContactFlowVersionResponse]
@@ -458,6 +720,53 @@ module Aws::Connect
       ?last_modified_time: Time,
       ?last_modified_region: String
     ) -> _CreateContactFlowVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateContactFlowVersionResponse
+
+    interface _CreateDataTableResponse
+      include Smithy::Client::_Response[Types::CreateDataTableResponse]
+      def id: () -> String?
+      def arn: () -> String?
+      def lock_version: () -> Types::DataTableLockVersion?
+    end
+    def create_data_table: (
+      ?instance_id: String,
+      ?name: String,
+      ?description: String,
+      ?time_zone: String,
+      ?value_lock_level: String,
+      ?status: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateDataTableResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDataTableResponse
+
+    interface _CreateDataTableAttributeResponse
+      include Smithy::Client::_Response[Types::CreateDataTableAttributeResponse]
+      def name: () -> String?
+      def attribute_id: () -> String?
+      def lock_version: () -> Types::DataTableLockVersion?
+    end
+    def create_data_table_attribute: (
+      ?instance_id: String,
+      ?data_table_id: String,
+      ?name: String,
+      ?value_type: String,
+      ?description: String,
+      ?primary: bool,
+      ?validation: {
+        min_length: Integer,
+        max_length: untyped,
+        min_values: Integer,
+        max_values: untyped,
+        ignore_case: bool,
+        minimum: Float,
+        maximum: untyped,
+        exclusive_minimum: untyped,
+        exclusive_maximum: untyped,
+        multiple_of: Float,
+        enum: {
+          strict: untyped,
+          values: Array[String]
+        }
+      }
+    ) -> _CreateDataTableAttributeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDataTableAttributeResponse
 
     interface _CreateEmailAddressResponse
       include Smithy::Client::_Response[Types::CreateEmailAddressResponse]
@@ -489,13 +798,21 @@ module Aws::Connect
             ref_id: String,
             instructions: String,
             items: untyped,
-            weight: Float
+            weight: Float,
+            is_excluded_from_scoring: bool,
+            score_thresholds: Array[
+              {
+                performance_category: String,
+                min_score_percentage: Float,
+                max_score_percentage: untyped
+              }
+            ]
           },
           question: {
             title: String,
             instructions: untyped,
             ref_id: untyped,
-            not_applicable_enabled: bool,
+            not_applicable_enabled: untyped,
             question_type: String,
             question_type_properties: {
               numeric: {
@@ -506,12 +823,22 @@ module Aws::Connect
                     min_value: untyped,
                     max_value: untyped,
                     score: Integer,
-                    automatic_fail: untyped
+                    automatic_fail: untyped,
+                    automatic_fail_configuration: {
+                      target_section: untyped
+                    },
+                    points_configuration: {
+                      point_value: Integer,
+                      is_bonus: untyped
+                    }
                   }
                 ],
                 automation: {
                   property_value: {
                     label: String
+                  },
+                  answer_source: {
+                    source_type: String
                   }
                 }
               },
@@ -521,7 +848,9 @@ module Aws::Connect
                     ref_id: untyped,
                     text: String,
                     score: untyped,
-                    automatic_fail: untyped
+                    automatic_fail: untyped,
+                    automatic_fail_configuration: untyped,
+                    points_configuration: untyped
                   }
                 ],
                 display_as: String,
@@ -535,20 +864,142 @@ module Aws::Connect
                       }
                     }
                   ],
-                  default_option_ref_id: untyped
+                  default_option_ref_id: untyped,
+                  answer_source: untyped
+                }
+              },
+              text: {
+                automation: {
+                  answer_source: untyped
+                }
+              },
+              multi_select: {
+                options: Array[
+                  {
+                    ref_id: untyped,
+                    text: String,
+                    score: untyped,
+                    automatic_fail: untyped,
+                    automatic_fail_configuration: untyped,
+                    points_configuration: untyped
+                  }
+                ],
+                display_as: String,
+                automation: {
+                  options: Array[
+                    {
+                      rule_category: {
+                        category: String,
+                        condition: String,
+                        option_ref_ids: Array[String]
+                      }
+                    }
+                  ],
+                  default_option_ref_ids: untyped,
+                  answer_source: untyped
                 }
               }
             },
-            weight: untyped
+            enablement: {
+              condition: {
+                operands: Array[
+                  {
+                    expression: {
+                      source: {
+                        type: String,
+                        ref_id: untyped
+                      },
+                      values: Array[
+                        {
+                          type: String,
+                          ref_id: untyped
+                        }
+                      ],
+                      comparator: String
+                    },
+                    condition: untyped
+                  }
+                ],
+                operator: String
+              },
+              action: String,
+              default_action: untyped
+            },
+            weight: untyped,
+            scoring_configuration: {
+              points_configuration: {
+                max_point_value: untyped,
+                min_point_value: untyped,
+                is_bonus: untyped
+              },
+              is_excluded_from_scoring: untyped,
+              score_thresholds: untyped
+            },
+            metric_configuration: {
+              metric_type: String,
+              metric_name: String
+            }
           }
         }
       ],
       ?scoring_strategy: {
         mode: String,
-        status: String
+        status: String,
+        score_thresholds: Array[
+          {
+            performance_category: String,
+            min_score_percentage: Float,
+            max_score_percentage: untyped
+          }
+        ]
       },
-      ?client_token: String
+      ?auto_evaluation_configuration: {
+        enabled: bool
+      },
+      ?client_token: String,
+      ?as_draft: bool,
+      ?tags: Hash[String, String],
+      ?review_configuration: {
+        review_notification_recipients: Array[
+          {
+            type: String,
+            value: {
+              user_id: String
+            }
+          }
+        ],
+        eligibility_days: Integer
+      },
+      ?target_configuration: {
+        contact_interaction_type: String
+      },
+      ?language_configuration: {
+        form_language: String
+      },
+      ?ai_version: String
     ) -> _CreateEvaluationFormResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateEvaluationFormResponse
+
+    interface _CreateExtractionDefinitionResponse
+      include Smithy::Client::_Response[Types::CreateExtractionDefinitionResponse]
+      def extraction_definition_arn: () -> String?
+      def extraction_definition_id: () -> String?
+    end
+    def create_extraction_definition: (
+      ?client_token: String,
+      ?instance_id: String,
+      ?name: String,
+      ?extraction_configuration: {
+        prompt_hint: String,
+        not_found_behavior: {
+          behavior: String,
+          default_value: String
+        }
+      },
+      ?display: {
+        label: String
+      },
+      ?tags: Hash[String, String]
+    ) -> _CreateExtractionDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateExtractionDefinitionResponse
 
     interface _CreateHoursOfOperationResponse
       include Smithy::Client::_Response[Types::CreateHoursOfOperationResponse]
@@ -568,6 +1019,11 @@ module Aws::Connect
             minutes: Integer
           },
           end_time: untyped
+        }
+      ],
+      ?parent_hours_of_operation_configs: Array[
+        {
+          hours_of_operation_id: String
         }
       ],
       ?tags: Hash[String, String]
@@ -593,7 +1049,17 @@ module Aws::Connect
         }
       ],
       ?effective_from: String,
-      ?effective_till: String
+      ?effective_till: String,
+      ?recurrence_config: {
+        recurrence_pattern: {
+          frequency: String,
+          interval: Integer,
+          by_month: Array[Integer],
+          by_month_day: Array[Integer],
+          by_weekday_occurrence: Array[Integer]
+        }
+      },
+      ?override_type: String
     ) -> _CreateHoursOfOperationOverrideResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateHoursOfOperationOverrideResponse
 
     interface _CreateInstanceResponse
@@ -625,6 +1091,65 @@ module Aws::Connect
       ?source_type: String,
       ?tags: Hash[String, String]
     ) -> _CreateIntegrationAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateIntegrationAssociationResponse
+
+    interface _CreateMetricResponse
+      include Smithy::Client::_Response[Types::CreateMetricResponse]
+      def metric_arn: () -> String?
+      def metric_id: () -> String?
+    end
+    def create_metric: (
+      ?instance_id: String,
+      ?name: String,
+      ?metric_calculation: {
+        calculation_components: Array[
+          {
+            alias: String,
+            metric_name: String,
+            metric_id: String,
+            metric_filters: Array[
+              {
+                metric_filter_key: String,
+                negate: bool,
+                number_condition: {
+                  comparison: String,
+                  values: Array[Float]
+                },
+                string_condition: {
+                  comparison: String,
+                  values: Array[String]
+                },
+                boolean_condition: {
+                  comparison: String
+                }
+              }
+            ]
+          }
+        ],
+        calculation: String
+      },
+      ?unit: String,
+      ?status: String,
+      ?client_token: String,
+      ?description: String,
+      ?positive_trend_indicator: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateMetricResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateMetricResponse
+
+    interface _CreateNotificationResponse
+      include Smithy::Client::_Response[Types::CreateNotificationResponse]
+      def notification_id: () -> String?
+      def notification_arn: () -> String?
+    end
+    def create_notification: (
+      ?instance_id: String,
+      ?expires_at: Time,
+      ?recipients: Array[String],
+      ?priority: String,
+      ?content: Hash[String, String],
+      ?tags: Hash[String, String],
+      ?predefined_notification_id: String,
+      ?client_token: String
+    ) -> _CreateNotificationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateNotificationResponse
 
     interface _CreateParticipantResponse
       include Smithy::Client::_Response[Types::CreateParticipantResponse]
@@ -722,6 +1247,11 @@ module Aws::Connect
       ?hours_of_operation_id: String,
       ?max_contacts: Integer,
       ?quick_connect_ids: Array[String],
+      ?email_addresses_config: Array[
+        {
+          email_address_id: String
+        }
+      ],
       ?tags: Hash[String, String]
     ) -> _CreateQueueResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateQueueResponse
 
@@ -746,6 +1276,9 @@ module Aws::Connect
         },
         phone_config: {
           phone_number: String
+        },
+        flow_config: {
+          contact_flow_id: untyped
         }
       },
       ?tags: Hash[String, String]
@@ -785,7 +1318,16 @@ module Aws::Connect
           concurrency: Integer,
           cross_channel_behavior: {
             behavior_type: String
-          }
+          },
+          workload_type_concurrencies: Array[
+            {
+              workload_type: String,
+              concurrency: Integer,
+              cross_channel_workload_behavior: {
+                channel_workload_behavior_type: String
+              }
+            }
+          ]
         }
       ],
       ?tags: Hash[String, String],
@@ -835,7 +1377,8 @@ module Aws::Connect
             recipient: {
               user_tags: Hash[String, String],
               user_ids: Array[String]
-            }
+            },
+            exclusion: untyped
           },
           create_case_action: {
             fields: Array[
@@ -876,11 +1419,36 @@ module Aws::Connect
           },
           submit_auto_evaluation_action: {
             evaluation_form_id: String
+          },
+          extract_information_action: {
+            rules_extraction_definitions: Array[
+              {
+                identifier: String
+              }
+            ]
+          },
+          send_in_app_notification_action: {
+            content: Hash[String, String],
+            recipient: untyped,
+            exclusion: untyped,
+            priority: String
           }
         }
       ],
       ?publish_status: String,
-      ?client_token: String
+      ?pre_evaluation_filters: {
+        and_conditions: Array[
+          {
+            resource_type: String,
+            filter_type: String,
+            filter_key: String,
+            filter_value: untyped,
+            operator: String
+          }
+        ]
+      },
+      ?client_token: String,
+      ?tags: Hash[String, String]
     ) -> _CreateRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRuleResponse
 
     interface _CreateSecurityProfileResponse
@@ -899,11 +1467,37 @@ module Aws::Connect
       ?applications: Array[
         {
           namespace: String,
-          application_permissions: Array[String]
+          application_permissions: Array[String],
+          type: String
         }
       ],
       ?hierarchy_restricted_resources: Array[String],
-      ?allowed_access_control_hierarchy_group_id: String
+      ?allowed_access_control_hierarchy_group_id: String,
+      ?allowed_flow_modules: Array[
+        {
+          type: String,
+          flow_module_id: String
+        }
+      ],
+      ?allowed_ai_agents: Array[
+        {
+          arn: String,
+          type: String
+        }
+      ],
+      ?granular_access_control_configuration: {
+        data_table_access_control_configuration: {
+          primary_attribute_access_control_configuration: {
+            primary_attribute_values: Array[
+              {
+                access_type: String,
+                attribute_name: String,
+                values: Array[String]
+              }
+            ]
+          }
+        }
+      }
     ) -> _CreateSecurityProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSecurityProfileResponse
 
     interface _CreateTaskTemplateResponse
@@ -960,6 +1554,35 @@ module Aws::Connect
       ?client_token: String
     ) -> _CreateTaskTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTaskTemplateResponse
 
+    interface _CreateTestCaseResponse
+      include Smithy::Client::_Response[Types::CreateTestCaseResponse]
+      def test_case_id: () -> String?
+      def test_case_arn: () -> String?
+    end
+    def create_test_case: (
+      ?instance_id: String,
+      ?name: String,
+      ?description: String,
+      ?content: String,
+      ?entry_point: {
+        type: String,
+        voice_call_entry_point_parameters: {
+          source_phone_number: String,
+          destination_phone_number: untyped,
+          flow_id: String
+        },
+        chat_entry_point_parameters: {
+          flow_id: untyped
+        }
+      },
+      ?initialization_data: String,
+      ?status: String,
+      ?test_case_id: String,
+      ?tags: Hash[String, String],
+      ?last_modified_time: Time,
+      ?last_modified_region: String
+    ) -> _CreateTestCaseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTestCaseResponse
+
     interface _CreateTrafficDistributionGroupResponse
       include Smithy::Client::_Response[Types::CreateTrafficDistributionGroupResponse]
       def id: () -> String?
@@ -1012,6 +1635,41 @@ module Aws::Connect
       ?routing_profile_id: String,
       ?hierarchy_group_id: String,
       ?instance_id: String,
+      ?auto_accept_configs: Array[
+        {
+          channel: String,
+          auto_accept: bool,
+          agent_first_callback_auto_accept: bool
+        }
+      ],
+      ?after_contact_work_configs: Array[
+        {
+          channel: String,
+          after_contact_work_config: {
+            after_contact_work_time_limit: Integer
+          },
+          agent_first_callback_after_contact_work_config: untyped
+        }
+      ],
+      ?phone_number_configs: Array[
+        {
+          channel: String,
+          phone_type: String,
+          phone_number: String
+        }
+      ],
+      ?persistent_connection_configs: Array[
+        {
+          channel: String,
+          persistent_connection: bool
+        }
+      ],
+      ?voice_enhancement_configs: Array[
+        {
+          channel: String,
+          voice_enhancement_mode: String
+        }
+      ],
       ?tags: Hash[String, String]
     ) -> _CreateUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateUserResponse
 
@@ -1070,6 +1728,74 @@ module Aws::Connect
       ?tags: Hash[String, String]
     ) -> _CreateVocabularyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateVocabularyResponse
 
+    interface _CreateWorkspaceResponse
+      include Smithy::Client::_Response[Types::CreateWorkspaceResponse]
+      def workspace_id: () -> String?
+      def workspace_arn: () -> String?
+    end
+    def create_workspace: (
+      ?instance_id: String,
+      ?name: String,
+      ?description: String,
+      ?theme: {
+        light: {
+          palette: {
+            header: {
+              background: String,
+              text: untyped,
+              text_hover: untyped,
+              invert_actions_colors: bool
+            },
+            navigation: {
+              background: untyped,
+              text_background_hover: untyped,
+              text_background_active: untyped,
+              text: untyped,
+              text_hover: untyped,
+              text_active: untyped,
+              invert_actions_colors: untyped
+            },
+            canvas: {
+              container_background: untyped,
+              page_background: untyped,
+              active_background: untyped
+            },
+            primary: {
+              default: untyped,
+              active: untyped,
+              contrast_text: untyped
+            }
+          },
+          images: {
+            logo: {
+              default: String,
+              favicon: untyped
+            }
+          },
+          typography: {
+            font_family: {
+              default: String
+            }
+          }
+        },
+        dark: untyped
+      },
+      ?title: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateWorkspaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWorkspaceResponse
+
+    interface _CreateWorkspacePageResponse
+      include Smithy::Client::_Response[Types::CreateWorkspacePageResponse]
+    end
+    def create_workspace_page: (
+      ?instance_id: String,
+      ?workspace_id: String,
+      ?resource_arn: String,
+      ?page: String,
+      ?slug: String,
+      ?input_data: String
+    ) -> _CreateWorkspacePageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWorkspacePageResponse
+
     interface _DeactivateEvaluationFormResponse
       include Smithy::Client::_Response[Types::DeactivateEvaluationFormResponse]
       def evaluation_form_id: () -> String?
@@ -1091,6 +1817,15 @@ module Aws::Connect
       ?associated_resource_arn: String
     ) -> _DeleteAttachedFileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAttachedFileResponse
 
+    interface _DeleteContactDataResponse
+      include Smithy::Client::_Response[Types::DeleteContactDataResponse]
+    end
+    def delete_contact_data: (
+      ?instance_id: String,
+      ?contact_id: String,
+      ?contact_fields: Array[String]
+    ) -> _DeleteContactDataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteContactDataResponse
+
     interface _DeleteContactEvaluationResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
     end
@@ -1107,6 +1842,15 @@ module Aws::Connect
       ?contact_flow_id: String
     ) -> _DeleteContactFlowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteContactFlowResponse
 
+    interface _DeleteContactFlowAliasResponse
+      include Smithy::Client::_Response[Types::DeleteContactFlowAliasResponse]
+    end
+    def delete_contact_flow_alias: (
+      ?instance_id: String,
+      ?contact_flow_id: String,
+      ?alias_id: String
+    ) -> _DeleteContactFlowAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteContactFlowAliasResponse
+
     interface _DeleteContactFlowModuleResponse
       include Smithy::Client::_Response[Types::DeleteContactFlowModuleResponse]
     end
@@ -1114,6 +1858,24 @@ module Aws::Connect
       ?instance_id: String,
       ?contact_flow_module_id: String
     ) -> _DeleteContactFlowModuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteContactFlowModuleResponse
+
+    interface _DeleteContactFlowModuleAliasResponse
+      include Smithy::Client::_Response[Types::DeleteContactFlowModuleAliasResponse]
+    end
+    def delete_contact_flow_module_alias: (
+      ?instance_id: String,
+      ?contact_flow_module_id: String,
+      ?alias_id: String
+    ) -> _DeleteContactFlowModuleAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteContactFlowModuleAliasResponse
+
+    interface _DeleteContactFlowModuleVersionResponse
+      include Smithy::Client::_Response[Types::DeleteContactFlowModuleVersionResponse]
+    end
+    def delete_contact_flow_module_version: (
+      ?instance_id: String,
+      ?contact_flow_module_id: String,
+      ?contact_flow_module_version: Integer
+    ) -> _DeleteContactFlowModuleVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteContactFlowModuleVersionResponse
 
     interface _DeleteContactFlowVersionResponse
       include Smithy::Client::_Response[Types::DeleteContactFlowVersionResponse]
@@ -1123,6 +1885,24 @@ module Aws::Connect
       ?contact_flow_id: String,
       ?contact_flow_version: Integer
     ) -> _DeleteContactFlowVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteContactFlowVersionResponse
+
+    interface _DeleteDataTableResponse
+      include Smithy::Client::_Response[Types::DeleteDataTableResponse]
+    end
+    def delete_data_table: (
+      ?instance_id: String,
+      ?data_table_id: String
+    ) -> _DeleteDataTableResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDataTableResponse
+
+    interface _DeleteDataTableAttributeResponse
+      include Smithy::Client::_Response[Types::DeleteDataTableAttributeResponse]
+      def lock_version: () -> Types::DataTableLockVersion?
+    end
+    def delete_data_table_attribute: (
+      ?instance_id: String,
+      ?data_table_id: String,
+      ?attribute_name: String
+    ) -> _DeleteDataTableAttributeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDataTableAttributeResponse
 
     interface _DeleteEmailAddressResponse
       include Smithy::Client::_Response[Types::DeleteEmailAddressResponse]
@@ -1140,6 +1920,14 @@ module Aws::Connect
       ?evaluation_form_id: String,
       ?evaluation_form_version: Integer
     ) -> _DeleteEvaluationFormResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEvaluationFormResponse
+
+    interface _DeleteExtractionDefinitionResponse
+      include Smithy::Client::_Response[Types::DeleteExtractionDefinitionResponse]
+    end
+    def delete_extraction_definition: (
+      ?instance_id: String,
+      ?extraction_definition_id: String
+    ) -> _DeleteExtractionDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteExtractionDefinitionResponse
 
     interface _DeleteHoursOfOperationResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
@@ -1173,6 +1961,22 @@ module Aws::Connect
       ?instance_id: String,
       ?integration_association_id: String
     ) -> _DeleteIntegrationAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteIntegrationAssociationResponse
+
+    interface _DeleteMetricResponse
+      include Smithy::Client::_Response[Types::DeleteMetricResponse]
+    end
+    def delete_metric: (
+      ?instance_id: String,
+      ?metric_id: String
+    ) -> _DeleteMetricResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteMetricResponse
+
+    interface _DeleteNotificationResponse
+      include Smithy::Client::_Response[Types::DeleteNotificationResponse]
+    end
+    def delete_notification: (
+      ?instance_id: String,
+      ?notification_id: String
+    ) -> _DeleteNotificationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteNotificationResponse
 
     interface _DeletePredefinedAttributeResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
@@ -1239,6 +2043,14 @@ module Aws::Connect
       ?security_profile_id: String
     ) -> _DeleteSecurityProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSecurityProfileResponse
 
+    interface _DeleteSessionResponse
+      include Smithy::Client::_Response[Types::DeleteSessionResponse]
+    end
+    def delete_session: (
+      ?instance_id: String,
+      ?session_id: String
+    ) -> _DeleteSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSessionResponse
+
     interface _DeleteTaskTemplateResponse
       include Smithy::Client::_Response[Types::DeleteTaskTemplateResponse]
     end
@@ -1246,6 +2058,14 @@ module Aws::Connect
       ?instance_id: String,
       ?task_template_id: String
     ) -> _DeleteTaskTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTaskTemplateResponse
+
+    interface _DeleteTestCaseResponse
+      include Smithy::Client::_Response[Types::DeleteTestCaseResponse]
+    end
+    def delete_test_case: (
+      ?instance_id: String,
+      ?test_case_id: String
+    ) -> _DeleteTestCaseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTestCaseResponse
 
     interface _DeleteTrafficDistributionGroupResponse
       include Smithy::Client::_Response[Types::DeleteTrafficDistributionGroupResponse]
@@ -1307,6 +2127,32 @@ module Aws::Connect
       ?vocabulary_id: String
     ) -> _DeleteVocabularyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteVocabularyResponse
 
+    interface _DeleteWorkspaceResponse
+      include Smithy::Client::_Response[Types::DeleteWorkspaceResponse]
+    end
+    def delete_workspace: (
+      ?instance_id: String,
+      ?workspace_id: String
+    ) -> _DeleteWorkspaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteWorkspaceResponse
+
+    interface _DeleteWorkspaceMediaResponse
+      include Smithy::Client::_Response[Types::DeleteWorkspaceMediaResponse]
+    end
+    def delete_workspace_media: (
+      ?instance_id: String,
+      ?workspace_id: String,
+      ?media_type: String
+    ) -> _DeleteWorkspaceMediaResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteWorkspaceMediaResponse
+
+    interface _DeleteWorkspacePageResponse
+      include Smithy::Client::_Response[Types::DeleteWorkspacePageResponse]
+    end
+    def delete_workspace_page: (
+      ?instance_id: String,
+      ?workspace_id: String,
+      ?page: String
+    ) -> _DeleteWorkspacePageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteWorkspacePageResponse
+
     interface _DescribeAgentStatusResponse
       include Smithy::Client::_Response[Types::DescribeAgentStatusResponse]
       def agent_status: () -> Types::AgentStatus?
@@ -1315,6 +2161,15 @@ module Aws::Connect
       ?instance_id: String,
       ?agent_status_id: String
     ) -> _DescribeAgentStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAgentStatusResponse
+
+    interface _DescribeAttachedFilesConfigurationResponse
+      include Smithy::Client::_Response[Types::DescribeAttachedFilesConfigurationResponse]
+      def attached_files_configuration: () -> Types::AttachedFilesConfiguration?
+    end
+    def describe_attached_files_configuration: (
+      ?instance_id: String,
+      ?attachment_scope: String
+    ) -> _DescribeAttachedFilesConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAttachedFilesConfigurationResponse
 
     interface _DescribeAuthenticationProfileResponse
       include Smithy::Client::_Response[Types::DescribeAuthenticationProfileResponse]
@@ -1353,6 +2208,16 @@ module Aws::Connect
       ?contact_flow_id: String
     ) -> _DescribeContactFlowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeContactFlowResponse
 
+    interface _DescribeContactFlowAliasResponse
+      include Smithy::Client::_Response[Types::DescribeContactFlowAliasResponse]
+      def contact_flow_alias: () -> Types::ContactFlowAliasInfo?
+    end
+    def describe_contact_flow_alias: (
+      ?instance_id: String,
+      ?contact_flow_id: String,
+      ?alias_id: String
+    ) -> _DescribeContactFlowAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeContactFlowAliasResponse
+
     interface _DescribeContactFlowModuleResponse
       include Smithy::Client::_Response[Types::DescribeContactFlowModuleResponse]
       def contact_flow_module: () -> Types::ContactFlowModule?
@@ -1361,6 +2226,35 @@ module Aws::Connect
       ?instance_id: String,
       ?contact_flow_module_id: String
     ) -> _DescribeContactFlowModuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeContactFlowModuleResponse
+
+    interface _DescribeContactFlowModuleAliasResponse
+      include Smithy::Client::_Response[Types::DescribeContactFlowModuleAliasResponse]
+      def contact_flow_module_alias: () -> Types::ContactFlowModuleAliasInfo?
+    end
+    def describe_contact_flow_module_alias: (
+      ?instance_id: String,
+      ?contact_flow_module_id: String,
+      ?alias_id: String
+    ) -> _DescribeContactFlowModuleAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeContactFlowModuleAliasResponse
+
+    interface _DescribeDataTableResponse
+      include Smithy::Client::_Response[Types::DescribeDataTableResponse]
+      def data_table: () -> Types::DataTable?
+    end
+    def describe_data_table: (
+      ?instance_id: String,
+      ?data_table_id: String
+    ) -> _DescribeDataTableResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDataTableResponse
+
+    interface _DescribeDataTableAttributeResponse
+      include Smithy::Client::_Response[Types::DescribeDataTableAttributeResponse]
+      def attribute: () -> Types::DataTableAttribute?
+    end
+    def describe_data_table_attribute: (
+      ?instance_id: String,
+      ?data_table_id: String,
+      ?attribute_name: String
+    ) -> _DescribeDataTableAttributeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDataTableAttributeResponse
 
     interface _DescribeEmailAddressResponse
       include Smithy::Client::_Response[Types::DescribeEmailAddressResponse]
@@ -1371,6 +2265,7 @@ module Aws::Connect
       def description: () -> String?
       def create_timestamp: () -> String?
       def modified_timestamp: () -> String?
+      def alias_configurations: () -> Array[Types::AliasConfiguration]?
       def tags: () -> Hash[String, String]?
     end
     def describe_email_address: (
@@ -1387,6 +2282,15 @@ module Aws::Connect
       ?evaluation_form_id: String,
       ?evaluation_form_version: Integer
     ) -> _DescribeEvaluationFormResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeEvaluationFormResponse
+
+    interface _DescribeExtractionDefinitionResponse
+      include Smithy::Client::_Response[Types::DescribeExtractionDefinitionResponse]
+      def extraction_definition: () -> Types::ExtractionDefinition?
+    end
+    def describe_extraction_definition: (
+      ?instance_id: String,
+      ?extraction_definition_id: String
+    ) -> _DescribeExtractionDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeExtractionDefinitionResponse
 
     interface _DescribeHoursOfOperationResponse
       include Smithy::Client::_Response[Types::DescribeHoursOfOperationResponse]
@@ -1434,6 +2338,24 @@ module Aws::Connect
       ?association_id: String,
       ?resource_type: String
     ) -> _DescribeInstanceStorageConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeInstanceStorageConfigResponse
+
+    interface _DescribeMetricResponse
+      include Smithy::Client::_Response[Types::DescribeMetricResponse]
+      def metric: () -> Types::MetricDefinition?
+    end
+    def describe_metric: (
+      ?instance_id: String,
+      ?metric_id: String
+    ) -> _DescribeMetricResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeMetricResponse
+
+    interface _DescribeNotificationResponse
+      include Smithy::Client::_Response[Types::DescribeNotificationResponse]
+      def notification: () -> Types::Notification?
+    end
+    def describe_notification: (
+      ?instance_id: String,
+      ?notification_id: String
+    ) -> _DescribeNotificationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeNotificationResponse
 
     interface _DescribePhoneNumberResponse
       include Smithy::Client::_Response[Types::DescribePhoneNumberResponse]
@@ -1506,6 +2428,16 @@ module Aws::Connect
       ?instance_id: String
     ) -> _DescribeSecurityProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeSecurityProfileResponse
 
+    interface _DescribeTestCaseResponse
+      include Smithy::Client::_Response[Types::DescribeTestCaseResponse]
+      def test_case: () -> Types::TestCase?
+    end
+    def describe_test_case: (
+      ?instance_id: String,
+      ?test_case_id: String,
+      ?status: String
+    ) -> _DescribeTestCaseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeTestCaseResponse
+
     interface _DescribeTrafficDistributionGroupResponse
       include Smithy::Client::_Response[Types::DescribeTrafficDistributionGroupResponse]
       def traffic_distribution_group: () -> Types::TrafficDistributionGroup?
@@ -1558,6 +2490,15 @@ module Aws::Connect
       ?vocabulary_id: String
     ) -> _DescribeVocabularyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeVocabularyResponse
 
+    interface _DescribeWorkspaceResponse
+      include Smithy::Client::_Response[Types::DescribeWorkspaceResponse]
+      def workspace: () -> Types::Workspace?
+    end
+    def describe_workspace: (
+      ?instance_id: String,
+      ?workspace_id: String
+    ) -> _DescribeWorkspaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeWorkspaceResponse
+
     interface _DisassociateAnalyticsDataSetResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
     end
@@ -1591,6 +2532,18 @@ module Aws::Connect
       ?client_token: String
     ) -> _DisassociateBotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateBotResponse
 
+    interface _DisassociateEmailAddressAliasResponse
+      include Smithy::Client::_Response[Types::DisassociateEmailAddressAliasResponse]
+    end
+    def disassociate_email_address_alias: (
+      ?email_address_id: String,
+      ?instance_id: String,
+      ?alias_configuration: {
+        email_address_id: String
+      },
+      ?client_token: String
+    ) -> _DisassociateEmailAddressAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateEmailAddressAliasResponse
+
     interface _DisassociateFlowResponse
       include Smithy::Client::_Response[Types::DisassociateFlowResponse]
     end
@@ -1599,6 +2552,15 @@ module Aws::Connect
       ?resource_id: String,
       ?resource_type: String
     ) -> _DisassociateFlowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateFlowResponse
+
+    interface _DisassociateHoursOfOperationsResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def disassociate_hours_of_operations: (
+      ?instance_id: String,
+      ?hours_of_operation_id: String,
+      ?parent_hours_of_operation_ids: Array[String]
+    ) -> _DisassociateHoursOfOperationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateHoursOfOperationsResponse
 
     interface _DisassociateInstanceStorageConfigResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
@@ -1636,6 +2598,16 @@ module Aws::Connect
       ?phone_number_id: String,
       ?instance_id: String
     ) -> _DisassociatePhoneNumberContactFlowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociatePhoneNumberContactFlowResponse
+
+    interface _DisassociateQueueEmailAddressesResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def disassociate_queue_email_addresses: (
+      ?instance_id: String,
+      ?queue_id: String,
+      ?email_addresses_id: Array[String],
+      ?client_token: String
+    ) -> _DisassociateQueueEmailAddressesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateQueueEmailAddressesResponse
 
     interface _DisassociateQueueQuickConnectsResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
@@ -1675,6 +2647,20 @@ module Aws::Connect
       ?client_token: String
     ) -> _DisassociateSecurityKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateSecurityKeyResponse
 
+    interface _DisassociateSecurityProfilesResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def disassociate_security_profiles: (
+      ?instance_id: String,
+      ?security_profiles: Array[
+        {
+          id: String
+        }
+      ],
+      ?entity_type: String,
+      ?entity_arn: String
+    ) -> _DisassociateSecurityProfilesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateSecurityProfilesResponse
+
     interface _DisassociateTrafficDistributionGroupUserResponse
       include Smithy::Client::_Response[Types::DisassociateTrafficDistributionGroupUserResponse]
     end
@@ -1698,6 +2684,17 @@ module Aws::Connect
       ]
     ) -> _DisassociateUserProficienciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateUserProficienciesResponse
 
+    interface _DisassociateWorkspaceResponse
+      include Smithy::Client::_Response[Types::DisassociateWorkspaceResponse]
+      def successful_list: () -> Array[Types::SuccessfulBatchAssociationSummary]?
+      def failed_list: () -> Array[Types::FailedBatchAssociationSummary]?
+    end
+    def disassociate_workspace: (
+      ?instance_id: String,
+      ?workspace_id: String,
+      ?resource_arns: Array[String]
+    ) -> _DisassociateWorkspaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateWorkspaceResponse
+
     interface _DismissUserContactResponse
       include Smithy::Client::_Response[Types::DismissUserContactResponse]
     end
@@ -1706,6 +2703,30 @@ module Aws::Connect
       ?instance_id: String,
       ?contact_id: String
     ) -> _DismissUserContactResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DismissUserContactResponse
+
+    interface _EvaluateDataTableValuesResponse
+      include Smithy::Client::_Response[Types::EvaluateDataTableValuesResponse]
+      def values: () -> Array[Types::DataTableEvaluatedValue]?
+      def next_token: () -> String?
+    end
+    def evaluate_data_table_values: (
+      ?instance_id: String,
+      ?data_table_id: String,
+      ?values: Array[
+        {
+          primary_values: Array[
+            {
+              attribute_name: String,
+              value: String
+            }
+          ],
+          attribute_names: Array[String]
+        }
+      ],
+      ?time_zone: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _EvaluateDataTableValuesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EvaluateDataTableValuesResponse
 
     interface _GetAttachedFileResponse
       include Smithy::Client::_Response[Types::GetAttachedFileResponse]
@@ -1753,6 +2774,14 @@ module Aws::Connect
       ]
     ) -> _GetContactMetricsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetContactMetricsResponse
 
+    interface _GetCrossRegionRoutingResponse
+      include Smithy::Client::_Response[Types::GetCrossRegionRoutingResponse]
+      def isolated_regions: () -> Array[String]?
+    end
+    def get_cross_region_routing: (
+      ?instance_id: String
+    ) -> _GetCrossRegionRoutingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCrossRegionRoutingResponse
+
     interface _GetCurrentMetricDataResponse
       include Smithy::Client::_Response[Types::GetCurrentMetricDataResponse]
       def next_token: () -> String?
@@ -1767,12 +2796,15 @@ module Aws::Connect
         channels: Array[String],
         routing_profiles: Array[String],
         routing_step_expressions: Array[String],
-        agent_statuses: Array[String]
+        agent_statuses: Array[String],
+        subtypes: Array[String],
+        validation_test_types: Array[String]
       },
       ?groupings: Array[String],
       ?current_metrics: Array[
         {
           name: String,
+          metric_id: String,
           unit: String
         }
       ],
@@ -1810,6 +2842,7 @@ module Aws::Connect
     interface _GetEffectiveHoursOfOperationsResponse
       include Smithy::Client::_Response[Types::GetEffectiveHoursOfOperationsResponse]
       def effective_hours_of_operation_list: () -> Array[Types::EffectiveHoursOfOperations]?
+      def effective_override_hours_list: () -> Array[Types::EffectiveOverrideHours]?
       def time_zone: () -> String?
     end
     def get_effective_hours_of_operations: (
@@ -1819,12 +2852,27 @@ module Aws::Connect
       ?to_date: String
     ) -> _GetEffectiveHoursOfOperationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEffectiveHoursOfOperationsResponse
 
+    interface _GetEvaluationFormValidationResponse
+      include Smithy::Client::_Response[Types::GetEvaluationFormValidationResponse]
+      def status: () -> String?
+      def failure_reason: () -> String?
+      def evaluation_form_id: () -> String?
+      def evaluation_form_version: () -> Integer?
+      def started_time: () -> Time?
+      def findings: () -> Array[Types::EvaluationFormValidationFinding]?
+    end
+    def get_evaluation_form_validation: (
+      ?instance_id: String,
+      ?evaluation_form_id: String,
+      ?evaluation_form_version: Integer
+    ) -> _GetEvaluationFormValidationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEvaluationFormValidationResponse
+
     interface _GetFederationTokenResponse
       include Smithy::Client::_Response[Types::GetFederationTokenResponse]
+      def user_id: () -> String?
+      def user_arn: () -> String?
       def credentials: () -> Types::Credentials?
       def sign_in_url: () -> String?
-      def user_arn: () -> String?
-      def user_id: () -> String?
     end
     def get_federation_token: (
       ?instance_id: String
@@ -1856,7 +2904,9 @@ module Aws::Connect
         channels: Array[String],
         routing_profiles: Array[String],
         routing_step_expressions: Array[String],
-        agent_statuses: Array[String]
+        agent_statuses: Array[String],
+        subtypes: Array[String],
+        validation_test_types: Array[String]
       },
       ?groupings: Array[String],
       ?historical_metrics: Array[
@@ -1890,7 +2940,10 @@ module Aws::Connect
       ?filters: Array[
         {
           filter_key: String,
-          filter_values: Array[String]
+          filter_values: Array[String],
+          string_condition: {
+            comparison: String
+          }
         }
       ],
       ?groupings: Array[String],
@@ -1903,6 +2956,7 @@ module Aws::Connect
               threshold_value: Float
             }
           ],
+          metric_id: String,
           metric_filters: Array[
             {
               metric_filter_key: String,
@@ -1950,6 +3004,19 @@ module Aws::Connect
       ?snapshot_version: String
     ) -> _GetTaskTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTaskTemplateResponse
 
+    interface _GetTestCaseExecutionSummaryResponse
+      include Smithy::Client::_Response[Types::GetTestCaseExecutionSummaryResponse]
+      def start_time: () -> Time?
+      def end_time: () -> Time?
+      def status: () -> String?
+      def observation_summary: () -> Types::ObservationSummary?
+    end
+    def get_test_case_execution_summary: (
+      ?instance_id: String,
+      ?test_case_id: String,
+      ?test_case_execution_id: String
+    ) -> _GetTestCaseExecutionSummaryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTestCaseExecutionSummaryResponse
+
     interface _GetTrafficDistributionResponse
       include Smithy::Client::_Response[Types::GetTrafficDistributionResponse]
       def telephony_config: () -> Types::TelephonyConfig?
@@ -1974,6 +3041,16 @@ module Aws::Connect
       ?tags: Hash[String, String],
       ?client_token: String
     ) -> _ImportPhoneNumberResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ImportPhoneNumberResponse
+
+    interface _ImportWorkspaceMediaResponse
+      include Smithy::Client::_Response[Types::ImportWorkspaceMediaResponse]
+    end
+    def import_workspace_media: (
+      ?instance_id: String,
+      ?workspace_id: String,
+      ?media_type: String,
+      ?media_source: String
+    ) -> _ImportWorkspaceMediaResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ImportWorkspaceMediaResponse
 
     interface _ListAgentStatusesResponse
       include Smithy::Client::_Response[Types::ListAgentStatusResponse]
@@ -2033,6 +3110,17 @@ module Aws::Connect
       ?next_token: String
     ) -> _ListAssociatedContactsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAssociatedContactsResponse
 
+    interface _ListAttachedFilesConfigurationsResponse
+      include Smithy::Client::_Response[Types::ListAttachedFilesConfigurationsResponse]
+      def attached_files_configurations: () -> Array[Types::AttachedFilesConfigurationSummary]?
+      def next_token: () -> String?
+    end
+    def list_attached_files_configurations: (
+      ?instance_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAttachedFilesConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAttachedFilesConfigurationsResponse
+
     interface _ListAuthenticationProfilesResponse
       include Smithy::Client::_Response[Types::ListAuthenticationProfilesResponse]
       def authentication_profile_summary_list: () -> Array[Types::AuthenticationProfileSummary]?
@@ -2056,6 +3144,20 @@ module Aws::Connect
       ?lex_version: String
     ) -> _ListBotsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBotsResponse
 
+    interface _ListChildHoursOfOperationsResponse
+      include Smithy::Client::_Response[Types::ListChildHoursOfOperationsResponse]
+      def next_token: () -> String?
+      def child_hours_of_operations_summary_list: () -> Array[Types::HoursOfOperationsIdentifier]?
+      def last_modified_time: () -> Time?
+      def last_modified_region: () -> String?
+    end
+    def list_child_hours_of_operations: (
+      ?instance_id: String,
+      ?hours_of_operation_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListChildHoursOfOperationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListChildHoursOfOperationsResponse
+
     interface _ListContactEvaluationsResponse
       include Smithy::Client::_Response[Types::ListContactEvaluationsResponse]
       def evaluation_summary_list: () -> Array[Types::EvaluationSummary]?
@@ -2066,6 +3168,42 @@ module Aws::Connect
       ?contact_id: String,
       ?next_token: String
     ) -> _ListContactEvaluationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListContactEvaluationsResponse
+
+    interface _ListContactFlowAliasesResponse
+      include Smithy::Client::_Response[Types::ListContactFlowAliasesResponse]
+      def contact_flow_alias_summary_list: () -> Array[Types::ContactFlowAliasSummary]?
+      def next_token: () -> String?
+    end
+    def list_contact_flow_aliases: (
+      ?instance_id: String,
+      ?contact_flow_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListContactFlowAliasesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListContactFlowAliasesResponse
+
+    interface _ListContactFlowModuleAliasesResponse
+      include Smithy::Client::_Response[Types::ListContactFlowModuleAliasesResponse]
+      def contact_flow_module_alias_summary_list: () -> Array[Types::ContactFlowModuleAliasSummary]?
+      def next_token: () -> String?
+    end
+    def list_contact_flow_module_aliases: (
+      ?instance_id: String,
+      ?contact_flow_module_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListContactFlowModuleAliasesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListContactFlowModuleAliasesResponse
+
+    interface _ListContactFlowModuleVersionsResponse
+      include Smithy::Client::_Response[Types::ListContactFlowModuleVersionsResponse]
+      def contact_flow_module_version_summary_list: () -> Array[Types::ContactFlowModuleVersionSummary]?
+      def next_token: () -> String?
+    end
+    def list_contact_flow_module_versions: (
+      ?instance_id: String,
+      ?contact_flow_module_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListContactFlowModuleVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListContactFlowModuleVersionsResponse
 
     interface _ListContactFlowModulesResponse
       include Smithy::Client::_Response[Types::ListContactFlowModulesResponse]
@@ -2115,6 +3253,68 @@ module Aws::Connect
       ?next_token: String
     ) -> _ListContactReferencesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListContactReferencesResponse
 
+    interface _ListDataTableAttributesResponse
+      include Smithy::Client::_Response[Types::ListDataTableAttributesResponse]
+      def next_token: () -> String?
+      def attributes: () -> Array[Types::DataTableAttribute]?
+    end
+    def list_data_table_attributes: (
+      ?instance_id: String,
+      ?data_table_id: String,
+      ?attribute_ids: Array[String],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDataTableAttributesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDataTableAttributesResponse
+
+    interface _ListDataTablePrimaryValuesResponse
+      include Smithy::Client::_Response[Types::ListDataTablePrimaryValuesResponse]
+      def next_token: () -> String?
+      def primary_values_list: () -> Array[Types::RecordPrimaryValue]?
+    end
+    def list_data_table_primary_values: (
+      ?instance_id: String,
+      ?data_table_id: String,
+      ?record_ids: Array[String],
+      ?primary_attribute_values: Array[
+        {
+          attribute_name: String,
+          values: Array[String]
+        }
+      ],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDataTablePrimaryValuesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDataTablePrimaryValuesResponse
+
+    interface _ListDataTableValuesResponse
+      include Smithy::Client::_Response[Types::ListDataTableValuesResponse]
+      def next_token: () -> String?
+      def values: () -> Array[Types::DataTableValueSummary]?
+    end
+    def list_data_table_values: (
+      ?instance_id: String,
+      ?data_table_id: String,
+      ?record_ids: Array[String],
+      ?primary_attribute_values: Array[
+        {
+          attribute_name: String,
+          values: Array[String]
+        }
+      ],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDataTableValuesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDataTableValuesResponse
+
+    interface _ListDataTablesResponse
+      include Smithy::Client::_Response[Types::ListDataTablesResponse]
+      def next_token: () -> String?
+      def data_table_summary_list: () -> Array[Types::DataTableSummary]?
+    end
+    def list_data_tables: (
+      ?instance_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDataTablesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDataTablesResponse
+
     interface _ListDefaultVocabulariesResponse
       include Smithy::Client::_Response[Types::ListDefaultVocabulariesResponse]
       def default_vocabulary_list: () -> Array[Types::DefaultVocabulary]?
@@ -2126,6 +3326,31 @@ module Aws::Connect
       ?max_results: Integer,
       ?next_token: String
     ) -> _ListDefaultVocabulariesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDefaultVocabulariesResponse
+
+    interface _ListEntitySecurityProfilesResponse
+      include Smithy::Client::_Response[Types::ListEntitySecurityProfilesResponse]
+      def security_profiles: () -> Array[Types::SecurityProfileItem]?
+      def next_token: () -> String?
+    end
+    def list_entity_security_profiles: (
+      ?instance_id: String,
+      ?entity_type: String,
+      ?entity_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListEntitySecurityProfilesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEntitySecurityProfilesResponse
+
+    interface _ListEvaluationFormAIVersionsResponse
+      include Smithy::Client::_Response[Types::ListEvaluationFormAIVersionsResponse]
+      def ai_version_summaries: () -> Array[Types::EvaluationFormAIVersionSummary]?
+      def next_token: () -> String?
+    end
+    def list_evaluation_form_ai_versions: (
+      ?instance_id: String,
+      ?contact_interaction_type: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListEvaluationFormAIVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEvaluationFormAIVersionsResponse
 
     interface _ListEvaluationFormVersionsResponse
       include Smithy::Client::_Response[Types::ListEvaluationFormVersionsResponse]
@@ -2149,6 +3374,17 @@ module Aws::Connect
       ?max_results: Integer,
       ?next_token: String
     ) -> _ListEvaluationFormsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEvaluationFormsResponse
+
+    interface _ListExtractionDefinitionsResponse
+      include Smithy::Client::_Response[Types::ListExtractionDefinitionsResponse]
+      def extraction_definition_summary_list: () -> Array[Types::ExtractionDefinitionSummary]?
+      def next_token: () -> String?
+    end
+    def list_extraction_definitions: (
+      ?instance_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListExtractionDefinitionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListExtractionDefinitionsResponse
 
     interface _ListFlowAssociationsResponse
       include Smithy::Client::_Response[Types::ListFlowAssociationsResponse]
@@ -2255,6 +3491,29 @@ module Aws::Connect
       ?max_results: Integer
     ) -> _ListLexBotsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListLexBotsResponse
 
+    interface _ListMetricsResponse
+      include Smithy::Client::_Response[Types::ListMetricsResponse]
+      def metric_summary_list: () -> Array[Types::MetricSummary]?
+      def next_token: () -> String?
+    end
+    def list_metrics: (
+      ?instance_id: String,
+      ?type: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListMetricsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMetricsResponse
+
+    interface _ListNotificationsResponse
+      include Smithy::Client::_Response[Types::ListNotificationsResponse]
+      def next_token: () -> String?
+      def notification_summary_list: () -> Array[Types::Notification]?
+    end
+    def list_notifications: (
+      ?instance_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListNotificationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListNotificationsResponse
+
     interface _ListPhoneNumbersResponse
       include Smithy::Client::_Response[Types::ListPhoneNumbersResponse]
       def phone_number_summary_list: () -> Array[Types::PhoneNumberSummary]?
@@ -2304,6 +3563,20 @@ module Aws::Connect
       ?next_token: String,
       ?max_results: Integer
     ) -> _ListPromptsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPromptsResponse
+
+    interface _ListQueueEmailAddressesResponse
+      include Smithy::Client::_Response[Types::ListQueueEmailAddressesResponse]
+      def next_token: () -> String?
+      def email_address_metadata_list: () -> Array[Types::EmailAddressSummary]?
+      def last_modified_time: () -> Time?
+      def last_modified_region: () -> String?
+    end
+    def list_queue_email_addresses: (
+      ?instance_id: String,
+      ?queue_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListQueueEmailAddressesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListQueueEmailAddressesResponse
 
     interface _ListQueueQuickConnectsResponse
       include Smithy::Client::_Response[Types::ListQueueQuickConnectsResponse]
@@ -2422,6 +3695,20 @@ module Aws::Connect
       ?max_results: Integer
     ) -> _ListSecurityKeysResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSecurityKeysResponse
 
+    interface _ListSecurityProfileAIAgentsResponse
+      include Smithy::Client::_Response[Types::ListSecurityProfileAIAgentsResponse]
+      def allowed_ai_agents: () -> Array[Types::AIAgent]?
+      def next_token: () -> String?
+      def last_modified_time: () -> Time?
+      def last_modified_region: () -> String?
+    end
+    def list_security_profile_ai_agents: (
+      ?security_profile_id: String,
+      ?instance_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListSecurityProfileAIAgentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSecurityProfileAIAgentsResponse
+
     interface _ListSecurityProfileApplicationsResponse
       include Smithy::Client::_Response[Types::ListSecurityProfileApplicationsResponse]
       def applications: () -> Array[Types::Application]?
@@ -2435,6 +3722,20 @@ module Aws::Connect
       ?next_token: String,
       ?max_results: Integer
     ) -> _ListSecurityProfileApplicationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSecurityProfileApplicationsResponse
+
+    interface _ListSecurityProfileFlowModulesResponse
+      include Smithy::Client::_Response[Types::ListSecurityProfileFlowModulesResponse]
+      def allowed_flow_modules: () -> Array[Types::FlowModule]?
+      def next_token: () -> String?
+      def last_modified_time: () -> Time?
+      def last_modified_region: () -> String?
+    end
+    def list_security_profile_flow_modules: (
+      ?security_profile_id: String,
+      ?instance_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListSecurityProfileFlowModulesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSecurityProfileFlowModulesResponse
 
     interface _ListSecurityProfilePermissionsResponse
       include Smithy::Client::_Response[Types::ListSecurityProfilePermissionsResponse]
@@ -2482,6 +3783,47 @@ module Aws::Connect
       ?name: String
     ) -> _ListTaskTemplatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTaskTemplatesResponse
 
+    interface _ListTestCaseExecutionRecordsResponse
+      include Smithy::Client::_Response[Types::ListTestCaseExecutionRecordsResponse]
+      def execution_records: () -> Array[Types::ExecutionRecord]?
+      def next_token: () -> String?
+    end
+    def list_test_case_execution_records: (
+      ?instance_id: String,
+      ?test_case_id: String,
+      ?test_case_execution_id: String,
+      ?status: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListTestCaseExecutionRecordsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTestCaseExecutionRecordsResponse
+
+    interface _ListTestCaseExecutionsResponse
+      include Smithy::Client::_Response[Types::ListTestCaseExecutionsResponse]
+      def test_case_executions: () -> Array[Types::TestCaseExecution]?
+      def next_token: () -> String?
+    end
+    def list_test_case_executions: (
+      ?instance_id: String,
+      ?test_case_id: String,
+      ?test_case_name: String,
+      ?start_time: Integer,
+      ?end_time: Integer,
+      ?status: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListTestCaseExecutionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTestCaseExecutionsResponse
+
+    interface _ListTestCasesResponse
+      include Smithy::Client::_Response[Types::ListTestCasesResponse]
+      def test_case_summary_list: () -> Array[Types::TestCaseSummary]?
+      def next_token: () -> String?
+    end
+    def list_test_cases: (
+      ?instance_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListTestCasesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTestCasesResponse
+
     interface _ListTrafficDistributionGroupUsersResponse
       include Smithy::Client::_Response[Types::ListTrafficDistributionGroupUsersResponse]
       def next_token: () -> String?
@@ -2526,6 +3868,18 @@ module Aws::Connect
       ?next_token: String,
       ?max_results: Integer
     ) -> _ListUserHierarchyGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListUserHierarchyGroupsResponse
+
+    interface _ListUserNotificationsResponse
+      include Smithy::Client::_Response[Types::ListUserNotificationsResponse]
+      def user_notifications: () -> Array[Types::UserNotificationSummary]?
+      def next_token: () -> String?
+    end
+    def list_user_notifications: (
+      ?instance_id: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?user_id: String
+    ) -> _ListUserNotificationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListUserNotificationsResponse
 
     interface _ListUserProficienciesResponse
       include Smithy::Client::_Response[Types::ListUserProficienciesResponse]
@@ -2575,6 +3929,38 @@ module Aws::Connect
       ?next_token: String,
       ?max_results: Integer
     ) -> _ListViewsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListViewsResponse
+
+    interface _ListWorkspaceMediaResponse
+      include Smithy::Client::_Response[Types::ListWorkspaceMediaResponse]
+      def media: () -> Array[Types::MediaItem]?
+    end
+    def list_workspace_media: (
+      ?instance_id: String,
+      ?workspace_id: String
+    ) -> _ListWorkspaceMediaResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListWorkspaceMediaResponse
+
+    interface _ListWorkspacePagesResponse
+      include Smithy::Client::_Response[Types::ListWorkspacePagesResponse]
+      def next_token: () -> String?
+      def workspace_page_list: () -> Array[Types::WorkspacePage]?
+    end
+    def list_workspace_pages: (
+      ?instance_id: String,
+      ?workspace_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListWorkspacePagesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListWorkspacePagesResponse
+
+    interface _ListWorkspacesResponse
+      include Smithy::Client::_Response[Types::ListWorkspacesResponse]
+      def next_token: () -> String?
+      def workspace_summary_list: () -> Array[Types::WorkspaceSummary]?
+    end
+    def list_workspaces: (
+      ?instance_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListWorkspacesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListWorkspacesResponse
 
     interface _MonitorContactResponse
       include Smithy::Client::_Response[Types::MonitorContactResponse]
@@ -2709,6 +4095,106 @@ module Aws::Connect
       ?next_token: String
     ) -> _SearchAvailablePhoneNumbersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchAvailablePhoneNumbersResponse
 
+    interface _SearchContactEvaluationsResponse
+      include Smithy::Client::_Response[Types::SearchContactEvaluationsResponse]
+      def evaluation_search_summary_list: () -> Array[Types::EvaluationSearchSummary]?
+      def next_token: () -> String?
+      def approximate_total_count: () -> Integer?
+    end
+    def search_contact_evaluations: (
+      ?instance_id: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?search_criteria: {
+        or_conditions: Array[
+          {
+            or_conditions: untyped,
+            and_conditions: untyped,
+            string_condition: {
+              field_name: String,
+              value: untyped,
+              comparison_type: String
+            },
+            number_condition: {
+              field_name: untyped,
+              min_value: Integer,
+              max_value: untyped,
+              comparison_type: String
+            },
+            boolean_condition: {
+              field_name: untyped,
+              comparison_type: String
+            },
+            date_time_condition: {
+              field_name: untyped,
+              min_value: String,
+              max_value: untyped,
+              comparison_type: String
+            },
+            decimal_condition: {
+              field_name: untyped,
+              min_value: Float,
+              max_value: untyped,
+              comparison_type: String
+            }
+          }
+        ],
+        and_conditions: untyped,
+        string_condition: untyped,
+        number_condition: untyped,
+        boolean_condition: untyped,
+        date_time_condition: untyped,
+        decimal_condition: untyped
+      },
+      ?search_filter: {
+        attribute_filter: {
+          or_conditions: Array[
+            {
+              tag_conditions: Array[
+                {
+                  tag_key: String,
+                  tag_value: untyped
+                }
+              ]
+            }
+          ],
+          and_condition: {
+            tag_conditions: untyped
+          },
+          tag_condition: {
+            tag_key: untyped,
+            tag_value: untyped
+          }
+        },
+        contact_evaluation_attribute_filter: {
+          or_conditions: Array[
+            {
+              tag_conditions: untyped,
+              attribute_conditions: Array[
+                {
+                  attribute_key: String,
+                  attribute_value: {
+                    string_value: untyped
+                  },
+                  comparison_type: String
+                }
+              ]
+            }
+          ],
+          and_condition: {
+            tag_conditions: untyped,
+            attribute_conditions: untyped
+          },
+          tag_condition: untyped,
+          contact_evaluation_attribute_condition: {
+            attribute_key: untyped,
+            attribute_value: untyped,
+            comparison_type: untyped
+          }
+        }
+      }
+    ) -> _SearchContactEvaluationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchContactEvaluationsResponse
+
     interface _SearchContactFlowModulesResponse
       include Smithy::Client::_Response[Types::SearchContactFlowModulesResponse]
       def contact_flow_modules: () -> Array[Types::ContactFlowModule]?
@@ -2792,6 +4278,22 @@ module Aws::Connect
             tag_key: untyped,
             tag_value: untyped
           }
+        },
+        flow_attribute_filter: {
+          or_conditions: Array[
+            {
+              tag_conditions: untyped,
+              contact_flow_type_condition: {
+                contact_flow_type: String
+              }
+            }
+          ],
+          and_condition: {
+            tag_conditions: untyped,
+            contact_flow_type_condition: untyped
+          },
+          tag_condition: untyped,
+          contact_flow_type_condition: untyped
         }
       },
       ?search_criteria: {
@@ -2901,6 +4403,37 @@ module Aws::Connect
             }
           ],
           match_type: untyped
+        },
+        active_regions: Array[String],
+        contact_tags: {
+          or_conditions: Array[
+            Array[
+              {
+                tag_key: String,
+                tag_value: untyped
+              }
+            ]
+          ],
+          and_conditions: Array[
+            {
+              tag_key: untyped,
+              tag_value: untyped
+            }
+          ],
+          tag_condition: {
+            tag_key: untyped,
+            tag_value: untyped
+          }
+        },
+        ai_agents: {
+          criteria: Array[
+            {
+              id: String,
+              version_number: Integer,
+              ai_agent_escalated: bool,
+              ai_use_case: String
+            }
+          ]
         }
       },
       ?max_results: Integer,
@@ -2910,6 +4443,54 @@ module Aws::Connect
         order: String
       }
     ) -> _SearchContactsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchContactsResponse
+
+    interface _SearchDataTablesResponse
+      include Smithy::Client::_Response[Types::SearchDataTablesResponse]
+      def data_tables: () -> Array[Types::DataTable]?
+      def next_token: () -> String?
+      def approximate_total_count: () -> Integer?
+    end
+    def search_data_tables: (
+      ?instance_id: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?search_filter: {
+        attribute_filter: {
+          or_conditions: Array[
+            {
+              tag_conditions: Array[
+                {
+                  tag_key: String,
+                  tag_value: untyped
+                }
+              ]
+            }
+          ],
+          and_condition: {
+            tag_conditions: untyped
+          },
+          tag_condition: {
+            tag_key: untyped,
+            tag_value: untyped
+          }
+        }
+      },
+      ?search_criteria: {
+        or_conditions: Array[
+          {
+            or_conditions: untyped,
+            and_conditions: untyped,
+            string_condition: {
+              field_name: String,
+              value: untyped,
+              comparison_type: String
+            }
+          }
+        ],
+        and_conditions: untyped,
+        string_condition: untyped
+      }
+    ) -> _SearchDataTablesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchDataTablesResponse
 
     interface _SearchEmailAddressesResponse
       include Smithy::Client::_Response[Types::SearchEmailAddressesResponse]
@@ -2959,6 +4540,73 @@ module Aws::Connect
         }
       }
     ) -> _SearchEmailAddressesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchEmailAddressesResponse
+
+    interface _SearchEvaluationFormsResponse
+      include Smithy::Client::_Response[Types::SearchEvaluationFormsResponse]
+      def evaluation_form_search_summary_list: () -> Array[Types::EvaluationFormSearchSummary]?
+      def next_token: () -> String?
+      def approximate_total_count: () -> Integer?
+    end
+    def search_evaluation_forms: (
+      ?instance_id: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?search_criteria: {
+        or_conditions: Array[
+          {
+            or_conditions: untyped,
+            and_conditions: untyped,
+            string_condition: {
+              field_name: String,
+              value: untyped,
+              comparison_type: String
+            },
+            number_condition: {
+              field_name: untyped,
+              min_value: Integer,
+              max_value: untyped,
+              comparison_type: String
+            },
+            boolean_condition: {
+              field_name: untyped,
+              comparison_type: String
+            },
+            date_time_condition: {
+              field_name: untyped,
+              min_value: String,
+              max_value: untyped,
+              comparison_type: String
+            }
+          }
+        ],
+        and_conditions: untyped,
+        string_condition: untyped,
+        number_condition: untyped,
+        boolean_condition: untyped,
+        date_time_condition: untyped
+      },
+      ?search_filter: {
+        attribute_filter: {
+          or_conditions: Array[
+            {
+              tag_conditions: Array[
+                {
+                  tag_key: String,
+                  tag_value: untyped
+                }
+              ]
+            }
+          ],
+          and_condition: {
+            tag_conditions: untyped
+          },
+          tag_condition: {
+            tag_key: untyped,
+            tag_value: untyped
+          }
+        }
+      }
+    ) -> _SearchEvaluationFormsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchEvaluationFormsResponse
 
     interface _SearchHoursOfOperationOverridesResponse
       include Smithy::Client::_Response[Types::SearchHoursOfOperationOverridesResponse]
@@ -3063,6 +4711,108 @@ module Aws::Connect
         string_condition: untyped
       }
     ) -> _SearchHoursOfOperationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchHoursOfOperationsResponse
+
+    interface _SearchMetricsResponse
+      include Smithy::Client::_Response[Types::SearchMetricsResponse]
+      def metrics: () -> Array[Types::MetricDefinition]?
+      def next_token: () -> String?
+      def approximate_total_count: () -> Integer?
+    end
+    def search_metrics: (
+      ?instance_id: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?search_filter: {
+        tag_filter: {
+          or_conditions: Array[
+            Array[
+              {
+                tag_key: String,
+                tag_value: untyped
+              }
+            ]
+          ],
+          and_conditions: Array[
+            {
+              tag_key: untyped,
+              tag_value: untyped
+            }
+          ],
+          tag_condition: {
+            tag_key: untyped,
+            tag_value: untyped
+          }
+        }
+      },
+      ?search_criteria: {
+        or_conditions: Array[
+          {
+            or_conditions: untyped,
+            and_conditions: untyped,
+            string_condition: {
+              field_name: String,
+              value: untyped,
+              comparison_type: String
+            },
+            boolean_condition: {
+              field_name: untyped,
+              comparison_type: String
+            }
+          }
+        ],
+        and_conditions: untyped,
+        string_condition: untyped,
+        boolean_condition: untyped
+      }
+    ) -> _SearchMetricsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchMetricsResponse
+
+    interface _SearchNotificationsResponse
+      include Smithy::Client::_Response[Types::SearchNotificationsResponse]
+      def notifications: () -> Array[Types::NotificationSearchSummary]?
+      def next_token: () -> String?
+      def approximate_total_count: () -> Integer?
+    end
+    def search_notifications: (
+      ?instance_id: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?search_filter: {
+        attribute_filter: {
+          or_conditions: Array[
+            {
+              tag_conditions: Array[
+                {
+                  tag_key: String,
+                  tag_value: untyped
+                }
+              ]
+            }
+          ],
+          and_condition: {
+            tag_conditions: untyped
+          },
+          tag_condition: {
+            tag_key: untyped,
+            tag_value: untyped
+          }
+        }
+      },
+      ?search_criteria: {
+        or_conditions: Array[
+          {
+            or_conditions: untyped,
+            and_conditions: untyped,
+            string_condition: {
+              field_name: String,
+              value: untyped,
+              comparison_type: String
+            }
+          }
+        ],
+        and_conditions: untyped,
+        string_condition: untyped
+      }
+    ) -> _SearchNotificationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchNotificationsResponse
 
     interface _SearchPredefinedAttributesResponse
       include Smithy::Client::_Response[Types::SearchPredefinedAttributesResponse]
@@ -3309,6 +5059,54 @@ module Aws::Connect
       }
     ) -> _SearchRoutingProfilesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchRoutingProfilesResponse
 
+    interface _SearchRulesResponse
+      include Smithy::Client::_Response[Types::SearchRulesResponse]
+      def rules: () -> Array[Types::RuleSearchSummary]?
+      def approximate_total_count: () -> Integer?
+      def next_token: () -> String?
+    end
+    def search_rules: (
+      ?instance_id: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?search_criteria: {
+        or_conditions: Array[
+          {
+            or_conditions: untyped,
+            and_conditions: untyped,
+            string_condition: {
+              field_name: String,
+              value: untyped,
+              comparison_type: String
+            }
+          }
+        ],
+        and_conditions: untyped,
+        string_condition: untyped
+      },
+      ?search_filter: {
+        attribute_filter: {
+          or_conditions: Array[
+            {
+              tag_conditions: Array[
+                {
+                  tag_key: String,
+                  tag_value: untyped
+                }
+              ]
+            }
+          ],
+          and_condition: {
+            tag_conditions: untyped
+          },
+          tag_condition: {
+            tag_key: untyped,
+            tag_value: untyped
+          }
+        }
+      }
+    ) -> _SearchRulesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchRulesResponse
+
     interface _SearchSecurityProfilesResponse
       include Smithy::Client::_Response[Types::SearchSecurityProfilesResponse]
       def security_profiles: () -> Array[Types::SecurityProfileSearchSummary]?
@@ -3357,6 +5155,57 @@ module Aws::Connect
         }
       }
     ) -> _SearchSecurityProfilesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchSecurityProfilesResponse
+
+    interface _SearchTestCasesResponse
+      include Smithy::Client::_Response[Types::SearchTestCasesResponse]
+      def test_cases: () -> Array[Types::TestCase]?
+      def next_token: () -> String?
+      def approximate_total_count: () -> Integer?
+    end
+    def search_test_cases: (
+      ?instance_id: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?search_filter: {
+        tag_filter: {
+          or_conditions: Array[
+            Array[
+              {
+                tag_key: String,
+                tag_value: untyped
+              }
+            ]
+          ],
+          and_conditions: Array[
+            {
+              tag_key: untyped,
+              tag_value: untyped
+            }
+          ],
+          tag_condition: {
+            tag_key: untyped,
+            tag_value: untyped
+          }
+        }
+      },
+      ?search_criteria: {
+        or_conditions: Array[
+          {
+            or_conditions: untyped,
+            and_conditions: untyped,
+            string_condition: {
+              field_name: String,
+              value: untyped,
+              comparison_type: String
+            },
+            status_condition: String
+          }
+        ],
+        and_conditions: untyped,
+        string_condition: untyped,
+        status_condition: untyped
+      }
+    ) -> _SearchTestCasesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchTestCasesResponse
 
     interface _SearchUserHierarchyGroupsResponse
       include Smithy::Client::_Response[Types::SearchUserHierarchyGroupsResponse]
@@ -3492,6 +5341,58 @@ module Aws::Connect
       }
     ) -> _SearchUsersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchUsersResponse
 
+    interface _SearchViewsResponse
+      include Smithy::Client::_Response[Types::SearchViewsResponse]
+      def views: () -> Array[Types::View]?
+      def next_token: () -> String?
+      def approximate_total_count: () -> Integer?
+    end
+    def search_views: (
+      ?instance_id: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?search_filter: {
+        attribute_filter: {
+          or_conditions: Array[
+            {
+              tag_conditions: Array[
+                {
+                  tag_key: String,
+                  tag_value: untyped
+                }
+              ]
+            }
+          ],
+          and_condition: {
+            tag_conditions: untyped
+          },
+          tag_condition: {
+            tag_key: untyped,
+            tag_value: untyped
+          }
+        }
+      },
+      ?search_criteria: {
+        or_conditions: Array[
+          {
+            or_conditions: untyped,
+            and_conditions: untyped,
+            string_condition: {
+              field_name: String,
+              value: untyped,
+              comparison_type: String
+            },
+            view_type_condition: String,
+            view_status_condition: String
+          }
+        ],
+        and_conditions: untyped,
+        string_condition: untyped,
+        view_type_condition: untyped,
+        view_status_condition: untyped
+      }
+    ) -> _SearchViewsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchViewsResponse
+
     interface _SearchVocabulariesResponse
       include Smithy::Client::_Response[Types::SearchVocabulariesResponse]
       def vocabulary_summary_list: () -> Array[Types::VocabularySummary]?
@@ -3505,6 +5406,102 @@ module Aws::Connect
       ?name_starts_with: String,
       ?language_code: String
     ) -> _SearchVocabulariesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchVocabulariesResponse
+
+    interface _SearchWorkspaceAssociationsResponse
+      include Smithy::Client::_Response[Types::SearchWorkspaceAssociationsResponse]
+      def next_token: () -> String?
+      def workspace_associations: () -> Array[Types::WorkspaceAssociationSearchSummary]?
+      def approximate_total_count: () -> Integer?
+    end
+    def search_workspace_associations: (
+      ?instance_id: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?search_filter: {
+        attribute_filter: {
+          or_conditions: Array[
+            {
+              tag_conditions: Array[
+                {
+                  tag_key: String,
+                  tag_value: untyped
+                }
+              ]
+            }
+          ],
+          and_condition: {
+            tag_conditions: untyped
+          },
+          tag_condition: {
+            tag_key: untyped,
+            tag_value: untyped
+          }
+        }
+      },
+      ?search_criteria: {
+        or_conditions: Array[
+          {
+            or_conditions: untyped,
+            and_conditions: untyped,
+            string_condition: {
+              field_name: String,
+              value: untyped,
+              comparison_type: String
+            }
+          }
+        ],
+        and_conditions: untyped,
+        string_condition: untyped
+      }
+    ) -> _SearchWorkspaceAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchWorkspaceAssociationsResponse
+
+    interface _SearchWorkspacesResponse
+      include Smithy::Client::_Response[Types::SearchWorkspacesResponse]
+      def next_token: () -> String?
+      def workspaces: () -> Array[Types::WorkspaceSearchSummary]?
+      def approximate_total_count: () -> Integer?
+    end
+    def search_workspaces: (
+      ?instance_id: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?search_filter: {
+        attribute_filter: {
+          or_conditions: Array[
+            {
+              tag_conditions: Array[
+                {
+                  tag_key: String,
+                  tag_value: untyped
+                }
+              ]
+            }
+          ],
+          and_condition: {
+            tag_conditions: untyped
+          },
+          tag_condition: {
+            tag_key: untyped,
+            tag_value: untyped
+          }
+        }
+      },
+      ?search_criteria: {
+        or_conditions: Array[
+          {
+            or_conditions: untyped,
+            and_conditions: untyped,
+            string_condition: {
+              field_name: String,
+              value: untyped,
+              comparison_type: String
+            }
+          }
+        ],
+        and_conditions: untyped,
+        string_condition: untyped
+      }
+    ) -> _SearchWorkspacesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchWorkspacesResponse
 
     interface _SendChatIntegrationEventResponse
       include Smithy::Client::_Response[Types::SendChatIntegrationEventResponse]
@@ -3577,6 +5574,66 @@ module Aws::Connect
       ?client_token: String
     ) -> _SendOutboundEmailResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SendOutboundEmailResponse
 
+    interface _SendOutboundWebNotificationResponse
+      include Smithy::Client::_Response[Types::SendOutboundWebNotificationResponse]
+    end
+    def send_outbound_web_notification: (
+      ?instance_id: String,
+      ?client_token: String,
+      ?browser_id: String,
+      ?session_id: String,
+      ?expires_at: Time,
+      ?source: {
+        source_campaign: {
+          campaign_id: String,
+          outbound_request_id: String
+        }
+      },
+      ?destination: {
+        widget_id: String,
+        profile_id: String
+      },
+      ?content: {
+        type: String,
+        view_arn: String,
+        attributes: {
+          recommender_config: {
+            domain_name: String,
+            recommender_name: String,
+            context: Hash[String, String]
+          }
+        }
+      }
+    ) -> _SendOutboundWebNotificationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SendOutboundWebNotificationResponse
+
+    interface _StartAssistantContactResponse
+      include Smithy::Client::_Response[Types::StartAssistantContactResponse]
+      def contact_id: () -> String?
+      def participant_id: () -> String?
+      def participant_token: () -> String?
+      def continued_from_contact_id: () -> String?
+    end
+    def start_assistant_contact: (
+      ?instance_id: String,
+      ?ai_agent: {
+        ai_agent_id: String
+      },
+      ?participant_details: {
+        display_name: String
+      },
+      ?initial_message: {
+        content_type: String,
+        content: String
+      },
+      ?attributes: Hash[String, String],
+      ?client_token: String,
+      ?persistent_chat: {
+        rehydration_type: String,
+        source_contact_id: String
+      },
+      ?related_contact_id: String
+    ) -> _StartAssistantContactResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartAssistantContactResponse
+
     interface _StartAttachedFileUploadResponse
       include Smithy::Client::_Response[Types::StartAttachedFileUploadResponse]
       def file_arn: () -> String?
@@ -3607,6 +5664,9 @@ module Aws::Connect
       def participant_id: () -> String?
       def participant_token: () -> String?
       def continued_from_contact_id: () -> String?
+      def connection_credentials: () -> Types::ConnectionCredentials?
+      def websocket: () -> Types::Websocket?
+      def streaming_id: () -> String?
     end
     def start_chat_contact: (
       ?instance_id: String,
@@ -3614,6 +5674,9 @@ module Aws::Connect
       ?attributes: Hash[String, String],
       ?participant_details: {
         display_name: String
+      },
+      ?participant_configuration: {
+        response_mode: String
       },
       ?initial_message: {
         content_type: String,
@@ -3652,8 +5715,45 @@ module Aws::Connect
           value_arn: untyped
         }
       ],
-      ?customer_id: String
+      ?customer_id: String,
+      ?disconnect_on_customer_exit: Array[String],
+      ?connection_types: Array[String],
+      ?chat_streaming_configuration: {
+        streaming_endpoint_arn: String
+      }
     ) -> _StartChatContactResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartChatContactResponse
+
+    interface _StartContactConversationalAnalyticsJobResponse
+      include Smithy::Client::_Response[Types::StartContactConversationalAnalyticsJobResponse]
+      def instance_id: () -> String?
+      def contact_id: () -> String?
+    end
+    def start_contact_conversational_analytics_job: (
+      ?instance_id: String,
+      ?contact_id: String,
+      ?analytics_modes: Array[String],
+      ?analytics_configuration: {
+        language_configuration: {
+          language_locale: String
+        },
+        redaction_configuration: {
+          behavior: String,
+          policy: String,
+          entities: Array[String],
+          mask_mode: String
+        },
+        sentiment_configuration: {
+          behavior: untyped
+        },
+        summary_configuration: {
+          summary_modes: Array[String]
+        },
+        rules_configuration: {
+          behavior: untyped
+        }
+      },
+      ?client_token: String
+    ) -> _StartContactConversationalAnalyticsJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartContactConversationalAnalyticsJobResponse
 
     interface _StartContactEvaluationResponse
       include Smithy::Client::_Response[Types::StartContactEvaluationResponse]
@@ -3664,8 +5764,22 @@ module Aws::Connect
       ?instance_id: String,
       ?contact_id: String,
       ?evaluation_form_id: String,
-      ?client_token: String
+      ?auto_evaluation_configuration: {
+        enabled: bool
+      },
+      ?client_token: String,
+      ?tags: Hash[String, String]
     ) -> _StartContactEvaluationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartContactEvaluationResponse
+
+    interface _StartContactMediaProcessingResponse
+      include Smithy::Client::_Response[Types::StartContactMediaProcessingResponse]
+    end
+    def start_contact_media_processing: (
+      ?instance_id: String,
+      ?contact_id: String,
+      ?processor_arn: String,
+      ?failure_mode: String
+    ) -> _StartContactMediaProcessingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartContactMediaProcessingResponse
 
     interface _StartContactRecordingResponse
       include Smithy::Client::_Response[Types::StartContactRecordingResponse]
@@ -3770,6 +5884,18 @@ module Aws::Connect
       ?client_token: String
     ) -> _StartEmailContactResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartEmailContactResponse
 
+    interface _StartEvaluationFormValidationResponse
+      include Smithy::Client::_Response[Types::StartEvaluationFormValidationResponse]
+      def evaluation_form_id: () -> String?
+      def evaluation_form_arn: () -> String?
+      def evaluation_form_version: () -> Integer?
+    end
+    def start_evaluation_form_validation: (
+      ?instance_id: String,
+      ?evaluation_form_id: String,
+      ?evaluation_form_version: Integer
+    ) -> _StartEvaluationFormValidationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartEvaluationFormValidationResponse
+
     interface _StartOutboundChatContactResponse
       include Smithy::Client::_Response[Types::StartOutboundChatContactResponse]
       def contact_id: () -> String?
@@ -3818,6 +5944,14 @@ module Aws::Connect
       ?initial_system_message: {
         content_type: String,
         content: String
+      },
+      ?initial_templated_system_message: {
+        knowledge_base_id: String,
+        message_template_id: String,
+        template_attributes: {
+          custom_attributes: Hash[String, String],
+          customer_profile_attributes: String
+        }
       },
       ?related_contact_id: String,
       ?supported_messaging_content_types: Array[String],
@@ -3895,7 +6029,21 @@ module Aws::Connect
         await_answer_machine_prompt: untyped
       },
       ?campaign_id: String,
-      ?traffic_type: String
+      ?traffic_type: String,
+      ?outbound_strategy: {
+        type: String,
+        config: {
+          agent_first: {
+            preview: {
+              post_accept_timeout_config: {
+                duration_in_seconds: Integer
+              },
+              allowed_user_actions: Array[String]
+            }
+          }
+        }
+      },
+      ?ring_timeout_in_seconds: Integer
     ) -> _StartOutboundVoiceContactResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartOutboundVoiceContactResponse
 
     interface _StartScreenSharingResponse
@@ -3956,8 +6104,26 @@ module Aws::Connect
           value_list: untyped,
           value_arn: untyped
         }
+      ],
+      ?attachments: Array[
+        {
+          file_name: String,
+          s3_url: String
+        }
       ]
     ) -> _StartTaskContactResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartTaskContactResponse
+
+    interface _StartTestCaseExecutionResponse
+      include Smithy::Client::_Response[Types::StartTestCaseExecutionResponse]
+      def test_case_execution_id: () -> String?
+      def test_case_id: () -> String?
+      def status: () -> String?
+    end
+    def start_test_case_execution: (
+      ?instance_id: String,
+      ?test_case_id: String,
+      ?client_token: String
+    ) -> _StartTestCaseExecutionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartTestCaseExecutionResponse
 
     interface _StartWebRTCContactResponse
       include Smithy::Client::_Response[Types::StartWebRTCContactResponse]
@@ -3991,7 +6157,32 @@ module Aws::Connect
           status_reason: String
         }
       ],
-      ?description: String
+      ?description: String,
+      ?segment_attributes: Hash[String,
+        {
+          value_string: String,
+          value_map: Hash[String,
+            {
+              value_string: untyped,
+              value_map: untyped,
+              value_integer: Integer,
+              value_list: Array[
+                {
+                  value_string: untyped,
+                  value_map: untyped,
+                  value_integer: untyped,
+                  value_list: untyped,
+                  value_arn: untyped
+                }
+              ],
+              value_arn: untyped
+            }
+          ],
+          value_integer: untyped,
+          value_list: untyped,
+          value_arn: untyped
+        }
+      ]
     ) -> _StartWebRTCContactResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartWebRTCContactResponse
 
     interface _StopContactResponse
@@ -4004,6 +6195,14 @@ module Aws::Connect
         code: String
       }
     ) -> _StopContactResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopContactResponse
+
+    interface _StopContactMediaProcessingResponse
+      include Smithy::Client::_Response[Types::StopContactMediaProcessingResponse]
+    end
+    def stop_contact_media_processing: (
+      ?instance_id: String,
+      ?contact_id: String
+    ) -> _StopContactMediaProcessingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopContactMediaProcessingResponse
 
     interface _StopContactRecordingResponse
       include Smithy::Client::_Response[Types::StopContactRecordingResponse]
@@ -4024,6 +6223,16 @@ module Aws::Connect
       ?streaming_id: String
     ) -> _StopContactStreamingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopContactStreamingResponse
 
+    interface _StopTestCaseExecutionResponse
+      include Smithy::Client::_Response[Types::StopTestCaseExecutionResponse]
+    end
+    def stop_test_case_execution: (
+      ?instance_id: String,
+      ?test_case_execution_id: String,
+      ?test_case_id: String,
+      ?client_token: String
+    ) -> _StopTestCaseExecutionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopTestCaseExecutionResponse
+
     interface _SubmitContactEvaluationResponse
       include Smithy::Client::_Response[Types::SubmitContactEvaluationResponse]
       def evaluation_id: () -> String?
@@ -4037,6 +6246,8 @@ module Aws::Connect
           value: {
             string_value: String,
             numeric_value: Float,
+            string_values: Array[String],
+            date_time_value: String,
             not_applicable: bool
           }
         }
@@ -4045,7 +6256,10 @@ module Aws::Connect
         {
           value: String
         }
-      ]
+      ],
+      ?submitted_by: {
+        connect_user_arn: String
+      }
     ) -> _SubmitContactEvaluationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SubmitContactEvaluationResponse
 
     interface _SuspendContactRecordingResponse
@@ -4119,6 +6333,27 @@ module Aws::Connect
       ?reset_order_number: bool
     ) -> _UpdateAgentStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAgentStatusResponse
 
+    interface _UpdateAttachedFilesConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateAttachedFilesConfigurationResponse]
+      def instance_id: () -> String?
+      def attachment_scope: () -> String?
+      def maximum_size_limit_in_bytes: () -> Integer?
+      def extension_configuration: () -> Types::ExtensionConfiguration?
+      def last_modified_time: () -> Time?
+    end
+    def update_attached_files_configuration: (
+      ?instance_id: String,
+      ?attachment_scope: String,
+      ?maximum_size_limit_in_bytes: Integer,
+      ?extension_configuration: {
+        allowed_extensions: Array[
+          {
+            extension: String
+          }
+        ]
+      }
+    ) -> _UpdateAttachedFilesConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAttachedFilesConfigurationResponse
+
     interface _UpdateAuthenticationProfileResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
     end
@@ -4129,7 +6364,9 @@ module Aws::Connect
       ?description: String,
       ?allowed_ips: Array[String],
       ?blocked_ips: Array[String],
-      ?periodic_session_duration: Integer
+      ?periodic_session_duration: Integer,
+      ?session_inactivity_duration: Integer,
+      ?session_inactivity_handling_enabled: bool
     ) -> _UpdateAuthenticationProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAuthenticationProfileResponse
 
     interface _UpdateContactResponse
@@ -4212,6 +6449,8 @@ module Aws::Connect
           value: {
             string_value: String,
             numeric_value: Float,
+            string_values: Array[String],
+            date_time_value: String,
             not_applicable: bool
           }
         }
@@ -4220,8 +6459,23 @@ module Aws::Connect
         {
           value: String
         }
-      ]
+      ],
+      ?updated_by: {
+        connect_user_arn: String
+      }
     ) -> _UpdateContactEvaluationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateContactEvaluationResponse
+
+    interface _UpdateContactFlowAliasResponse
+      include Smithy::Client::_Response[Types::UpdateContactFlowAliasResponse]
+    end
+    def update_contact_flow_alias: (
+      ?instance_id: String,
+      ?contact_flow_id: String,
+      ?alias_id: String,
+      ?name: String,
+      ?description: String,
+      ?contact_flow_version: Integer
+    ) -> _UpdateContactFlowAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateContactFlowAliasResponse
 
     interface _UpdateContactFlowContentResponse
       include Smithy::Client::_Response[Types::UpdateContactFlowContentResponse]
@@ -4243,13 +6497,26 @@ module Aws::Connect
       ?contact_flow_state: String
     ) -> _UpdateContactFlowMetadataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateContactFlowMetadataResponse
 
+    interface _UpdateContactFlowModuleAliasResponse
+      include Smithy::Client::_Response[Types::UpdateContactFlowModuleAliasResponse]
+    end
+    def update_contact_flow_module_alias: (
+      ?instance_id: String,
+      ?contact_flow_module_id: String,
+      ?alias_id: String,
+      ?name: String,
+      ?description: String,
+      ?contact_flow_module_version: Integer
+    ) -> _UpdateContactFlowModuleAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateContactFlowModuleAliasResponse
+
     interface _UpdateContactFlowModuleContentResponse
       include Smithy::Client::_Response[Types::UpdateContactFlowModuleContentResponse]
     end
     def update_contact_flow_module_content: (
       ?instance_id: String,
       ?contact_flow_module_id: String,
-      ?content: String
+      ?content: String,
+      ?settings: String
     ) -> _UpdateContactFlowModuleContentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateContactFlowModuleContentResponse
 
     interface _UpdateContactFlowModuleMetadataResponse
@@ -4328,6 +6595,94 @@ module Aws::Connect
       ?scheduled_time: Time
     ) -> _UpdateContactScheduleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateContactScheduleResponse
 
+    interface _UpdateContactTaskTemplateResponse
+      include Smithy::Client::_Response[Types::UpdateContactTaskTemplateResponse]
+    end
+    def update_contact_task_template: (
+      ?instance_id: String,
+      ?task_template_id: String,
+      ?contact_id: String
+    ) -> _UpdateContactTaskTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateContactTaskTemplateResponse
+
+    interface _UpdateCrossRegionRoutingResponse
+      include Smithy::Client::_Response[Types::UpdateCrossRegionRoutingResponse]
+    end
+    def update_cross_region_routing: (
+      ?instance_id: String,
+      ?isolated_all: bool
+    ) -> _UpdateCrossRegionRoutingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCrossRegionRoutingResponse
+
+    interface _UpdateDataTableAttributeResponse
+      include Smithy::Client::_Response[Types::UpdateDataTableAttributeResponse]
+      def name: () -> String?
+      def lock_version: () -> Types::DataTableLockVersion?
+    end
+    def update_data_table_attribute: (
+      ?instance_id: String,
+      ?data_table_id: String,
+      ?attribute_name: String,
+      ?name: String,
+      ?value_type: String,
+      ?description: String,
+      ?primary: bool,
+      ?validation: {
+        min_length: Integer,
+        max_length: untyped,
+        min_values: Integer,
+        max_values: untyped,
+        ignore_case: bool,
+        minimum: Float,
+        maximum: untyped,
+        exclusive_minimum: untyped,
+        exclusive_maximum: untyped,
+        multiple_of: Float,
+        enum: {
+          strict: untyped,
+          values: Array[String]
+        }
+      }
+    ) -> _UpdateDataTableAttributeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDataTableAttributeResponse
+
+    interface _UpdateDataTableMetadataResponse
+      include Smithy::Client::_Response[Types::UpdateDataTableMetadataResponse]
+      def lock_version: () -> Types::DataTableLockVersion?
+    end
+    def update_data_table_metadata: (
+      ?instance_id: String,
+      ?data_table_id: String,
+      ?name: String,
+      ?description: String,
+      ?value_lock_level: String,
+      ?time_zone: String
+    ) -> _UpdateDataTableMetadataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDataTableMetadataResponse
+
+    interface _UpdateDataTablePrimaryValuesResponse
+      include Smithy::Client::_Response[Types::UpdateDataTablePrimaryValuesResponse]
+      def lock_version: () -> Types::DataTableLockVersion?
+    end
+    def update_data_table_primary_values: (
+      ?instance_id: String,
+      ?data_table_id: String,
+      ?primary_values: Array[
+        {
+          attribute_name: String,
+          value: String
+        }
+      ],
+      ?new_primary_values: Array[
+        {
+          attribute_name: String,
+          value: String
+        }
+      ],
+      ?lock_version: {
+        data_table: String,
+        attribute: untyped,
+        primary_values: untyped,
+        value: untyped
+      }
+    ) -> _UpdateDataTablePrimaryValuesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDataTablePrimaryValuesResponse
+
     interface _UpdateEmailAddressMetadataResponse
       include Smithy::Client::_Response[Types::UpdateEmailAddressMetadataResponse]
       def email_address_id: () -> String?
@@ -4361,13 +6716,21 @@ module Aws::Connect
             ref_id: String,
             instructions: String,
             items: untyped,
-            weight: Float
+            weight: Float,
+            is_excluded_from_scoring: bool,
+            score_thresholds: Array[
+              {
+                performance_category: String,
+                min_score_percentage: Float,
+                max_score_percentage: untyped
+              }
+            ]
           },
           question: {
             title: String,
             instructions: untyped,
             ref_id: untyped,
-            not_applicable_enabled: bool,
+            not_applicable_enabled: untyped,
             question_type: String,
             question_type_properties: {
               numeric: {
@@ -4378,12 +6741,22 @@ module Aws::Connect
                     min_value: untyped,
                     max_value: untyped,
                     score: Integer,
-                    automatic_fail: untyped
+                    automatic_fail: untyped,
+                    automatic_fail_configuration: {
+                      target_section: untyped
+                    },
+                    points_configuration: {
+                      point_value: Integer,
+                      is_bonus: untyped
+                    }
                   }
                 ],
                 automation: {
                   property_value: {
                     label: String
+                  },
+                  answer_source: {
+                    source_type: String
                   }
                 }
               },
@@ -4393,7 +6766,9 @@ module Aws::Connect
                     ref_id: untyped,
                     text: String,
                     score: untyped,
-                    automatic_fail: untyped
+                    automatic_fail: untyped,
+                    automatic_fail_configuration: untyped,
+                    points_configuration: untyped
                   }
                 ],
                 display_as: String,
@@ -4407,20 +6782,139 @@ module Aws::Connect
                       }
                     }
                   ],
-                  default_option_ref_id: untyped
+                  default_option_ref_id: untyped,
+                  answer_source: untyped
+                }
+              },
+              text: {
+                automation: {
+                  answer_source: untyped
+                }
+              },
+              multi_select: {
+                options: Array[
+                  {
+                    ref_id: untyped,
+                    text: String,
+                    score: untyped,
+                    automatic_fail: untyped,
+                    automatic_fail_configuration: untyped,
+                    points_configuration: untyped
+                  }
+                ],
+                display_as: String,
+                automation: {
+                  options: Array[
+                    {
+                      rule_category: {
+                        category: String,
+                        condition: String,
+                        option_ref_ids: Array[String]
+                      }
+                    }
+                  ],
+                  default_option_ref_ids: untyped,
+                  answer_source: untyped
                 }
               }
             },
-            weight: untyped
+            enablement: {
+              condition: {
+                operands: Array[
+                  {
+                    expression: {
+                      source: {
+                        type: String,
+                        ref_id: untyped
+                      },
+                      values: Array[
+                        {
+                          type: String,
+                          ref_id: untyped
+                        }
+                      ],
+                      comparator: String
+                    },
+                    condition: untyped
+                  }
+                ],
+                operator: String
+              },
+              action: String,
+              default_action: untyped
+            },
+            weight: untyped,
+            scoring_configuration: {
+              points_configuration: {
+                max_point_value: untyped,
+                min_point_value: untyped,
+                is_bonus: untyped
+              },
+              is_excluded_from_scoring: untyped,
+              score_thresholds: untyped
+            },
+            metric_configuration: {
+              metric_type: String,
+              metric_name: String
+            }
           }
         }
       ],
       ?scoring_strategy: {
         mode: String,
-        status: String
+        status: String,
+        score_thresholds: Array[
+          {
+            performance_category: String,
+            min_score_percentage: Float,
+            max_score_percentage: untyped
+          }
+        ]
       },
-      ?client_token: String
+      ?auto_evaluation_configuration: {
+        enabled: bool
+      },
+      ?review_configuration: {
+        review_notification_recipients: Array[
+          {
+            type: String,
+            value: {
+              user_id: String
+            }
+          }
+        ],
+        eligibility_days: Integer
+      },
+      ?as_draft: bool,
+      ?client_token: String,
+      ?target_configuration: {
+        contact_interaction_type: String
+      },
+      ?language_configuration: {
+        form_language: String
+      },
+      ?ai_version: String
     ) -> _UpdateEvaluationFormResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateEvaluationFormResponse
+
+    interface _UpdateExtractionDefinitionResponse
+      include Smithy::Client::_Response[Types::UpdateExtractionDefinitionResponse]
+    end
+    def update_extraction_definition: (
+      ?client_token: String,
+      ?extraction_definition_id: String,
+      ?instance_id: String,
+      ?name: String,
+      ?extraction_configuration: {
+        prompt_hint: String,
+        not_found_behavior: {
+          behavior: String,
+          default_value: String
+        }
+      },
+      ?display: {
+        label: String
+      }
+    ) -> _UpdateExtractionDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateExtractionDefinitionResponse
 
     interface _UpdateHoursOfOperationResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
@@ -4463,7 +6957,17 @@ module Aws::Connect
         }
       ],
       ?effective_from: String,
-      ?effective_till: String
+      ?effective_till: String,
+      ?recurrence_config: {
+        recurrence_pattern: {
+          frequency: String,
+          interval: Integer,
+          by_month: Array[Integer],
+          by_month_day: Array[Integer],
+          by_weekday_occurrence: Array[Integer]
+        }
+      },
+      ?override_type: String
     ) -> _UpdateHoursOfOperationOverrideResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateHoursOfOperationOverrideResponse
 
     interface _UpdateInstanceAttributeResponse
@@ -4508,6 +7012,62 @@ module Aws::Connect
       },
       ?client_token: String
     ) -> _UpdateInstanceStorageConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateInstanceStorageConfigResponse
+
+    interface _UpdateMetricContentResponse
+      include Smithy::Client::_Response[Types::UpdateMetricContentResponse]
+    end
+    def update_metric_content: (
+      ?instance_id: String,
+      ?metric_id: String,
+      ?metric_calculation: {
+        calculation_components: Array[
+          {
+            alias: String,
+            metric_name: String,
+            metric_id: String,
+            metric_filters: Array[
+              {
+                metric_filter_key: String,
+                negate: bool,
+                number_condition: {
+                  comparison: String,
+                  values: Array[Float]
+                },
+                string_condition: {
+                  comparison: String,
+                  values: Array[String]
+                },
+                boolean_condition: {
+                  comparison: String
+                }
+              }
+            ]
+          }
+        ],
+        calculation: String
+      },
+      ?unit: String,
+      ?positive_trend_indicator: String
+    ) -> _UpdateMetricContentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateMetricContentResponse
+
+    interface _UpdateMetricMetadataResponse
+      include Smithy::Client::_Response[Types::UpdateMetricMetadataResponse]
+    end
+    def update_metric_metadata: (
+      ?instance_id: String,
+      ?metric_id: String,
+      ?name: String,
+      ?description: String
+    ) -> _UpdateMetricMetadataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateMetricMetadataResponse
+
+    interface _UpdateNotificationContentResponse
+      include Smithy::Client::_Response[Types::UpdateNotificationContentResponse]
+    end
+    def update_notification_content: (
+      ?instance_id: String,
+      ?notification_id: String,
+      ?content: Hash[String, String]
+    ) -> _UpdateNotificationContentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateNotificationContentResponse
 
     interface _UpdateParticipantAuthenticationResponse
       include Smithy::Client::_Response[Types::UpdateParticipantAuthenticationResponse]
@@ -4670,6 +7230,9 @@ module Aws::Connect
         },
         phone_config: {
           phone_number: String
+        },
+        flow_config: {
+          contact_flow_id: untyped
         }
       }
     ) -> _UpdateQuickConnectConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateQuickConnectConfigResponse
@@ -4705,7 +7268,16 @@ module Aws::Connect
           concurrency: Integer,
           cross_channel_behavior: {
             behavior_type: String
-          }
+          },
+          workload_type_concurrencies: Array[
+            {
+              workload_type: String,
+              concurrency: Integer,
+              cross_channel_workload_behavior: {
+                channel_workload_behavior_type: String
+              }
+            }
+          ]
         }
       ]
     ) -> _UpdateRoutingProfileConcurrencyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRoutingProfileConcurrencyResponse
@@ -4785,7 +7357,8 @@ module Aws::Connect
             recipient: {
               user_tags: Hash[String, String],
               user_ids: Array[String]
-            }
+            },
+            exclusion: untyped
           },
           create_case_action: {
             fields: Array[
@@ -4826,10 +7399,34 @@ module Aws::Connect
           },
           submit_auto_evaluation_action: {
             evaluation_form_id: String
+          },
+          extract_information_action: {
+            rules_extraction_definitions: Array[
+              {
+                identifier: String
+              }
+            ]
+          },
+          send_in_app_notification_action: {
+            content: Hash[String, String],
+            recipient: untyped,
+            exclusion: untyped,
+            priority: String
           }
         }
       ],
-      ?publish_status: String
+      ?publish_status: String,
+      ?pre_evaluation_filters: {
+        and_conditions: Array[
+          {
+            resource_type: String,
+            filter_type: String,
+            filter_key: String,
+            filter_value: untyped,
+            operator: String
+          }
+        ]
+      }
     ) -> _UpdateRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRuleResponse
 
     interface _UpdateSecurityProfileResponse
@@ -4845,11 +7442,37 @@ module Aws::Connect
       ?applications: Array[
         {
           namespace: String,
-          application_permissions: Array[String]
+          application_permissions: Array[String],
+          type: String
         }
       ],
       ?hierarchy_restricted_resources: Array[String],
-      ?allowed_access_control_hierarchy_group_id: String
+      ?allowed_access_control_hierarchy_group_id: String,
+      ?allowed_flow_modules: Array[
+        {
+          type: String,
+          flow_module_id: String
+        }
+      ],
+      ?allowed_ai_agents: Array[
+        {
+          arn: String,
+          type: String
+        }
+      ],
+      ?granular_access_control_configuration: {
+        data_table_access_control_configuration: {
+          primary_attribute_access_control_configuration: {
+            primary_attribute_values: Array[
+              {
+                access_type: String,
+                attribute_name: String,
+                values: Array[String]
+              }
+            ]
+          }
+        }
+      }
     ) -> _UpdateSecurityProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSecurityProfileResponse
 
     interface _UpdateTaskTemplateResponse
@@ -4917,6 +7540,32 @@ module Aws::Connect
       ]
     ) -> _UpdateTaskTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateTaskTemplateResponse
 
+    interface _UpdateTestCaseResponse
+      include Smithy::Client::_Response[Types::UpdateTestCaseResponse]
+    end
+    def update_test_case: (
+      ?instance_id: String,
+      ?test_case_id: String,
+      ?content: String,
+      ?entry_point: {
+        type: String,
+        voice_call_entry_point_parameters: {
+          source_phone_number: String,
+          destination_phone_number: untyped,
+          flow_id: String
+        },
+        chat_entry_point_parameters: {
+          flow_id: untyped
+        }
+      },
+      ?initialization_data: String,
+      ?name: String,
+      ?description: String,
+      ?status: String,
+      ?last_modified_time: Time,
+      ?last_modified_region: String
+    ) -> _UpdateTestCaseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateTestCaseResponse
+
     interface _UpdateTrafficDistributionResponse
       include Smithy::Client::_Response[Types::UpdateTrafficDistributionResponse]
     end
@@ -4947,6 +7596,49 @@ module Aws::Connect
         ]
       }
     ) -> _UpdateTrafficDistributionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateTrafficDistributionResponse
+
+    interface _UpdateUserConfigResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_user_config: (
+      ?auto_accept_configs: Array[
+        {
+          channel: String,
+          auto_accept: bool,
+          agent_first_callback_auto_accept: bool
+        }
+      ],
+      ?after_contact_work_configs: Array[
+        {
+          channel: String,
+          after_contact_work_config: {
+            after_contact_work_time_limit: Integer
+          },
+          agent_first_callback_after_contact_work_config: untyped
+        }
+      ],
+      ?phone_number_configs: Array[
+        {
+          channel: String,
+          phone_type: String,
+          phone_number: String
+        }
+      ],
+      ?persistent_connection_configs: Array[
+        {
+          channel: String,
+          persistent_connection: bool
+        }
+      ],
+      ?voice_enhancement_configs: Array[
+        {
+          channel: String,
+          voice_enhancement_mode: String
+        }
+      ],
+      ?user_id: String,
+      ?instance_id: String
+    ) -> _UpdateUserConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateUserConfigResponse
 
     interface _UpdateUserHierarchyResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
@@ -4996,6 +7688,18 @@ module Aws::Connect
       ?user_id: String,
       ?instance_id: String
     ) -> _UpdateUserIdentityInfoResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateUserIdentityInfoResponse
+
+    interface _UpdateUserNotificationStatusResponse
+      include Smithy::Client::_Response[Types::UpdateUserNotificationStatusResponse]
+    end
+    def update_user_notification_status: (
+      ?instance_id: String,
+      ?notification_id: String,
+      ?user_id: String,
+      ?status: String,
+      ?last_modified_time: Time,
+      ?last_modified_region: String
+    ) -> _UpdateUserNotificationStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateUserNotificationStatusResponse
 
     interface _UpdateUserPhoneConfigResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
@@ -5068,5 +7772,89 @@ module Aws::Connect
       ?name: String,
       ?description: String
     ) -> _UpdateViewMetadataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateViewMetadataResponse
+
+    interface _UpdateWorkspaceMetadataResponse
+      include Smithy::Client::_Response[Types::UpdateWorkspaceMetadataResponse]
+    end
+    def update_workspace_metadata: (
+      ?instance_id: String,
+      ?workspace_id: String,
+      ?name: String,
+      ?description: String,
+      ?title: String
+    ) -> _UpdateWorkspaceMetadataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateWorkspaceMetadataResponse
+
+    interface _UpdateWorkspacePageResponse
+      include Smithy::Client::_Response[Types::UpdateWorkspacePageResponse]
+    end
+    def update_workspace_page: (
+      ?instance_id: String,
+      ?workspace_id: String,
+      ?page: String,
+      ?new_page: String,
+      ?resource_arn: String,
+      ?slug: String,
+      ?input_data: String
+    ) -> _UpdateWorkspacePageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateWorkspacePageResponse
+
+    interface _UpdateWorkspaceThemeResponse
+      include Smithy::Client::_Response[Types::UpdateWorkspaceThemeResponse]
+    end
+    def update_workspace_theme: (
+      ?instance_id: String,
+      ?workspace_id: String,
+      ?theme: {
+        light: {
+          palette: {
+            header: {
+              background: String,
+              text: untyped,
+              text_hover: untyped,
+              invert_actions_colors: bool
+            },
+            navigation: {
+              background: untyped,
+              text_background_hover: untyped,
+              text_background_active: untyped,
+              text: untyped,
+              text_hover: untyped,
+              text_active: untyped,
+              invert_actions_colors: untyped
+            },
+            canvas: {
+              container_background: untyped,
+              page_background: untyped,
+              active_background: untyped
+            },
+            primary: {
+              default: untyped,
+              active: untyped,
+              contrast_text: untyped
+            }
+          },
+          images: {
+            logo: {
+              default: String,
+              favicon: untyped
+            }
+          },
+          typography: {
+            font_family: {
+              default: String
+            }
+          }
+        },
+        dark: untyped
+      }
+    ) -> _UpdateWorkspaceThemeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateWorkspaceThemeResponse
+
+    interface _UpdateWorkspaceVisibilityResponse
+      include Smithy::Client::_Response[Types::UpdateWorkspaceVisibilityResponse]
+    end
+    def update_workspace_visibility: (
+      ?instance_id: String,
+      ?workspace_id: String,
+      ?visibility: String
+    ) -> _UpdateWorkspaceVisibilityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateWorkspaceVisibilityResponse
   end
 end

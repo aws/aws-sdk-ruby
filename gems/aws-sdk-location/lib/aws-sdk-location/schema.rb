@@ -7,11 +7,17 @@ module Aws::Location
   module Schema
 
     AccessDeniedException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.location#AccessDeniedException", name: "AccessDeniedException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 403})
+    AndroidApp = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.location#AndroidApp", name: "AndroidApp")
+    AndroidAppList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.location#AndroidAppList", name: "AndroidAppList")
+    AndroidPackageName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.location#AndroidPackageName", name: "AndroidPackageName", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => "^([A-Za-z][A-Za-z\\d_]*\\.)+[A-Za-z][A-Za-z\\d_]*$"})
     ApiKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.location#ApiKey", name: "ApiKey", traits: {"smithy.api#externalDocumentation" => {"Implementation Guide" => "https://github.com/paseto-standard/paseto-spec/blob/master/docs/02-Implementation-Guide/03-Algorithm-Lucidity.md"}, "smithy.api#length" => {"max" => 1000}, "smithy.api#sensitive" => {}})
     ApiKeyAction = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.location#ApiKeyAction", name: "ApiKeyAction", traits: {"smithy.api#length" => {"min" => 5, "max" => 200}, "smithy.api#pattern" => "^(geo|geo-routes|geo-places|geo-maps):\\w*\\*?$"})
     ApiKeyActionList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.location#ApiKeyActionList", name: "ApiKeyActionList")
     ApiKeyFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.location#ApiKeyFilter", name: "ApiKeyFilter")
     ApiKeyRestrictions = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.location#ApiKeyRestrictions", name: "ApiKeyRestrictions")
+    AppleApp = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.location#AppleApp", name: "AppleApp")
+    AppleAppList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.location#AppleAppList", name: "AppleAppList")
+    AppleBundleId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.location#AppleBundleId", name: "AppleBundleId", traits: {"smithy.api#length" => {"min" => 1, "max" => 155}, "smithy.api#pattern" => "^[A-Za-z0-9\\-]+(\\.[A-Za-z0-9\\-]+)+$"})
     Arn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.location#Arn", name: "Arn", traits: {"aws.api#arnReference" => {}, "smithy.api#length" => {"max" => 1600}, "smithy.api#pattern" => "^arn(:[a-z0-9]+([.-][a-z0-9]+)*){2}(:([a-z0-9]+([.-][a-z0-9]+)*)?){2}:([^/].*)?$"})
     ArnList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.location#ArnList", name: "ArnList")
     AssociateTrackerConsumerInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.location#AssociateTrackerConsumerInput", name: "AssociateTrackerConsumerInput")
@@ -56,8 +62,11 @@ module Aws::Location
     CalculateRouteOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.location#CalculateRouteOutput", name: "CalculateRouteOutput")
     CalculateRouteSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.location#CalculateRouteSummary", name: "CalculateRouteSummary")
     CalculateRouteTruckModeOptions = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.location#CalculateRouteTruckModeOptions", name: "CalculateRouteTruckModeOptions")
+    CancelJobRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.location#CancelJobRequest", name: "CancelJobRequest")
+    CancelJobResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.location#CancelJobResponse", name: "CancelJobResponse")
     CellSignals = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.location#CellSignals", name: "CellSignals")
     Circle = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.location#Circle", name: "Circle", traits: {"smithy.api#sensitive" => {}})
+    ClientToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.location#ClientToken", name: "ClientToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[!-~]+$"})
     ConflictException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.location#ConflictException", name: "ConflictException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 409})
     CountryCode3 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.location#CountryCode3", name: "CountryCode3", traits: {"smithy.api#length" => {"min" => 3, "max" => 3}, "smithy.api#pattern" => "^[A-Z]{3}$", "smithy.api#sensitive" => {}})
     CountryCode3OrEmpty = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.location#CountryCode3OrEmpty", name: "CountryCode3OrEmpty", traits: {"smithy.api#length" => {"min" => 0, "max" => 3}, "smithy.api#pattern" => "^[A-Z]{3}$|^$", "smithy.api#sensitive" => {}})
@@ -130,6 +139,8 @@ module Aws::Location
     GetDevicePositionOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.location#GetDevicePositionOutput", name: "GetDevicePositionOutput")
     GetGeofenceInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.location#GetGeofenceInput", name: "GetGeofenceInput")
     GetGeofenceOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.location#GetGeofenceOutput", name: "GetGeofenceOutput")
+    GetJobRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.location#GetJobRequest", name: "GetJobRequest")
+    GetJobResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.location#GetJobResponse", name: "GetJobResponse")
     GetMapGlyphsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.location#GetMapGlyphsInput", name: "GetMapGlyphsInput")
     GetMapGlyphsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.location#GetMapGlyphsOutput", name: "GetMapGlyphsOutput", traits: {"smithy.api#externalDocumentation" => {"Documentation" => "https://github.com/mapbox/node-fontnik"}})
     GetMapSpritesInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.location#GetMapSpritesInput", name: "GetMapSpritesInput")
@@ -140,11 +151,27 @@ module Aws::Location
     GetMapTileOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.location#GetMapTileOutput", name: "GetMapTileOutput")
     GetPlaceInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.location#GetPlaceInput", name: "GetPlaceInput")
     GetPlaceOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.location#GetPlaceOutput", name: "GetPlaceOutput")
+    IamRoleArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.location#IamRoleArn", name: "IamRoleArn", traits: {"aws.api#arnReference" => {"type" => "AWS::IAM::Role"}})
     Id = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.location#Id", name: "Id", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#pattern" => "^[-._\\p{L}\\p{N}]+$"})
     IdList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.location#IdList", name: "IdList")
     InferredState = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.location#InferredState", name: "InferredState")
     IntendedUse = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.location#IntendedUse", name: "IntendedUse", traits: {"smithy.api#enum" => [{"value" => "SingleUse", "documentation" => "Indicates that results of the operation are for single use, e.g., displaying results on a map or presenting options to users."}, {"value" => "Storage", "documentation" => "Indicates that results of the operation may be stored locally."}]})
     InternalServerException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.location#InternalServerException", name: "InternalServerException", traits: {"smithy.api#error" => "server", "smithy.api#httpError" => 500, "smithy.api#retryable" => {}})
+    JobAction = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.location#JobAction", name: "JobAction", traits: {"smithy.api#enum" => [{"name" => "VALIDATE_ADDRESS", "value" => "ValidateAddress", "documentation" => "The job will perform address validation over the job's input."}]})
+    JobActionOptions = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.location#JobActionOptions", name: "JobActionOptions")
+    JobError = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.location#JobError", name: "JobError")
+    JobErrorCode = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.location#JobErrorCode", name: "JobErrorCode", traits: {"smithy.api#enum" => [{"name" => "VALIDATION_ERROR", "value" => "ValidationError"}, {"name" => "INTERNAL_SERVER_ERROR", "value" => "InternalServerError"}]})
+    JobErrorMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.location#JobErrorMessage", name: "JobErrorMessage", traits: {"smithy.api#length" => {"min" => 1, "max" => 200}})
+    JobErrorMessagesList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.location#JobErrorMessagesList", name: "JobErrorMessagesList", traits: {"smithy.api#length" => {"min" => 1, "max" => 4}})
+    JobId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.location#JobId", name: "JobId", traits: {"smithy.api#length" => {"min" => 1, "max" => 200}, "smithy.api#pattern" => "^[-._\\w]+$"})
+    JobInputFormat = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.location#JobInputFormat", name: "JobInputFormat", traits: {"smithy.api#enum" => [{"name" => "PARQUET", "value" => "Parquet"}]})
+    JobInputLocation = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.location#JobInputLocation", name: "JobInputLocation", traits: {"smithy.api#length" => {"max" => 300}, "smithy.api#pattern" => "^(arn:aws(-[a-z]+)*:[a-z0-9-]+:[a-z0-9-]*:(\\d{12})?:[\\w/+=,.-]+|s3://[a-z0-9][a-z0-9._-]{2,254}(/[^/]+)*/?)$"})
+    JobInputOptions = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.location#JobInputOptions", name: "JobInputOptions")
+    JobOutputFormat = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.location#JobOutputFormat", name: "JobOutputFormat", traits: {"smithy.api#enum" => [{"name" => "PARQUET", "value" => "Parquet"}]})
+    JobOutputLocation = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.location#JobOutputLocation", name: "JobOutputLocation", traits: {"smithy.api#length" => {"max" => 300}, "smithy.api#pattern" => "^(arn:aws(-[a-z]+)*:[a-z0-9-]+:[a-z0-9-]*:(\\d{12})?:[\\w/+=,.-]+|s3://[a-z0-9][a-z0-9._-]{2,254}(/[^/]+)*/)$"})
+    JobOutputOptions = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.location#JobOutputOptions", name: "JobOutputOptions")
+    JobStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.location#JobStatus", name: "JobStatus", traits: {"smithy.api#enum" => [{"name" => "PENDING", "value" => "Pending", "documentation" => "The job has not yet started."}, {"name" => "RUNNING", "value" => "Running", "documentation" => "The job is currently running."}, {"name" => "COMPLETED", "value" => "Completed", "documentation" => "The job has processed all records and is complete."}, {"name" => "FAILED", "value" => "Failed", "documentation" => "The job has failed to process all records."}, {"name" => "CANCELLING", "value" => "Cancelling", "documentation" => "The job is being cancelled."}, {"name" => "CANCELLED", "value" => "Cancelled", "documentation" => "The job has been cancelled and cannot be resumed."}]})
+    JobsFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.location#JobsFilter", name: "JobsFilter")
     KmsKeyId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.location#KmsKeyId", name: "KmsKeyId", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}})
     LanguageTag = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.location#LanguageTag", name: "LanguageTag", traits: {"smithy.api#length" => {"min" => 2, "max" => 35}})
     LargeToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.location#LargeToken", name: "LargeToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 60000}})
@@ -166,6 +193,10 @@ module Aws::Location
     ListGeofenceResponseEntryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.location#ListGeofenceResponseEntryList", name: "ListGeofenceResponseEntryList")
     ListGeofencesInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.location#ListGeofencesInput", name: "ListGeofencesInput")
     ListGeofencesOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.location#ListGeofencesOutput", name: "ListGeofencesOutput")
+    ListJobsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.location#ListJobsRequest", name: "ListJobsRequest")
+    ListJobsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.location#ListJobsResponse", name: "ListJobsResponse")
+    ListJobsResponseEntry = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.location#ListJobsResponseEntry", name: "ListJobsResponseEntry")
+    ListJobsResponseEntryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.location#ListJobsResponseEntryList", name: "ListJobsResponseEntryList")
     ListKeysInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.location#ListKeysInput", name: "ListKeysInput")
     ListKeysOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.location#ListKeysOutput", name: "ListKeysOutput")
     ListKeysResponseEntry = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.location#ListKeysResponseEntry", name: "ListKeysResponseEntry")
@@ -203,12 +234,12 @@ module Aws::Location
     OptimizationMode = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.location#OptimizationMode", name: "OptimizationMode", traits: {"smithy.api#enum" => [{"value" => "FastestRoute"}, {"value" => "ShortestRoute"}]})
     Pci = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.location#Pci", name: "Pci", traits: {"smithy.api#default" => 0, "smithy.api#range" => {"min" => 0, "max" => 503}})
     Place = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.location#Place", name: "Place")
-    PlaceCategory = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.location#PlaceCategory", name: "PlaceCategory", traits: {"smithy.api#length" => {"max" => 35}})
+    PlaceCategory = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.location#PlaceCategory", name: "PlaceCategory", traits: {"smithy.api#length" => {"max" => 35}, "smithy.api#sensitive" => {}})
     PlaceCategoryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.location#PlaceCategoryList", name: "PlaceCategoryList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
     PlaceGeometry = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.location#PlaceGeometry", name: "PlaceGeometry")
-    PlaceId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.location#PlaceId", name: "PlaceId")
+    PlaceId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.location#PlaceId", name: "PlaceId", traits: {"smithy.api#sensitive" => {}})
     PlaceIndexSearchResultLimit = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.location#PlaceIndexSearchResultLimit", name: "PlaceIndexSearchResultLimit", traits: {"smithy.api#range" => {"min" => 1, "max" => 50}})
-    PlaceSupplementalCategory = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.location#PlaceSupplementalCategory", name: "PlaceSupplementalCategory", traits: {"smithy.api#length" => {"max" => 35}})
+    PlaceSupplementalCategory = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.location#PlaceSupplementalCategory", name: "PlaceSupplementalCategory", traits: {"smithy.api#length" => {"max" => 35}, "smithy.api#sensitive" => {}})
     PlaceSupplementalCategoryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.location#PlaceSupplementalCategoryList", name: "PlaceSupplementalCategoryList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
     Position = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.location#Position", name: "Position", traits: {"smithy.api#externalDocumentation" => {"Documentation" => "https://tools.ietf.org/html/rfc7946#section-3.1.1"}, "smithy.api#length" => {"min" => 2, "max" => 2}, "smithy.api#sensitive" => {}})
     PositionFiltering = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.location#PositionFiltering", name: "PositionFiltering", traits: {"smithy.api#enum" => [{"value" => "TimeBased", "documentation" => "Filters device position updates according to their sample time"}, {"value" => "DistanceBased", "documentation" => "Filters device position updates according to the distance between them"}, {"value" => "AccuracyBased", "documentation" => "Filters device position updates according to their accuracy"}]})
@@ -219,7 +250,7 @@ module Aws::Location
     PropertyMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.location#PropertyMap", name: "PropertyMap", traits: {"smithy.api#length" => {"min" => 0, "max" => 3}, "smithy.api#sensitive" => {}})
     PutGeofenceInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.location#PutGeofenceInput", name: "PutGeofenceInput")
     PutGeofenceOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.location#PutGeofenceOutput", name: "PutGeofenceOutput")
-    RefererPattern = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.location#RefererPattern", name: "RefererPattern", traits: {"smithy.api#length" => {"max" => 253}, "smithy.api#pattern" => "^([$\\-._+!*\\x{60}(),;/?:@=&\\w]|%([0-9a-fA-F?]{2}|[0-9a-fA-F?]?[*]))+$", "smithy.api#sensitive" => {}})
+    RefererPattern = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.location#RefererPattern", name: "RefererPattern", traits: {"smithy.api#length" => {"max" => 253}, "smithy.api#pattern" => "^([\\w!$&()*+,./:;=?@\\x{60}-]|%([\\dA-Fa-f]{2}|[\\dA-Fa-f]?\\*))+$", "smithy.api#sensitive" => {}})
     RefererPatternList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.location#RefererPatternList", name: "RefererPatternList")
     ResourceDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.location#ResourceDescription", name: "ResourceDescription", traits: {"smithy.api#length" => {"min" => 0, "max" => 1000}})
     ResourceName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.location#ResourceName", name: "ResourceName", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#pattern" => "^[-._\\w]+$"})
@@ -246,10 +277,15 @@ module Aws::Location
     SearchPlaceIndexForTextInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.location#SearchPlaceIndexForTextInput", name: "SearchPlaceIndexForTextInput")
     SearchPlaceIndexForTextOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.location#SearchPlaceIndexForTextOutput", name: "SearchPlaceIndexForTextOutput")
     SearchPlaceIndexForTextSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.location#SearchPlaceIndexForTextSummary", name: "SearchPlaceIndexForTextSummary")
+    SensitiveBoolean = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.location#SensitiveBoolean", name: "SensitiveBoolean", traits: {"smithy.api#sensitive" => {}})
     SensitiveDouble = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.location#SensitiveDouble", name: "SensitiveDouble", traits: {"smithy.api#sensitive" => {}})
+    SensitiveInteger = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.location#SensitiveInteger", name: "SensitiveInteger", traits: {"smithy.api#sensitive" => {}})
     SensitiveString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.location#SensitiveString", name: "SensitiveString", traits: {"smithy.api#sensitive" => {}})
     ServiceQuotaExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.location#ServiceQuotaExceededException", name: "ServiceQuotaExceededException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 402})
+    Sha1CertificateFingerprint = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.location#Sha1CertificateFingerprint", name: "Sha1CertificateFingerprint", traits: {"smithy.api#length" => {"min" => 59, "max" => 59}, "smithy.api#pattern" => "^([A-Fa-f0-9]{2}:){19}[A-Fa-f0-9]{2}$"})
     SpeedUnit = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.location#SpeedUnit", name: "SpeedUnit", traits: {"smithy.api#enum" => [{"value" => "KilometersPerHour"}, {"value" => "MilesPerHour"}]})
+    StartJobRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.location#StartJobRequest", name: "StartJobRequest")
+    StartJobResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.location#StartJobResponse", name: "StartJobResponse")
     Status = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.location#Status", name: "Status", traits: {"smithy.api#enum" => [{"value" => "Active", "documentation" => "List all active API keys."}, {"value" => "Expired", "documentation" => "List all expired API keys."}]})
     Step = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.location#Step", name: "Step")
     StepList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.location#StepList", name: "StepList")
@@ -282,6 +318,9 @@ module Aws::Location
     UpdateTrackerInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.location#UpdateTrackerInput", name: "UpdateTrackerInput")
     UpdateTrackerOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.location#UpdateTrackerOutput", name: "UpdateTrackerOutput")
     Uuid = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.location#Uuid", name: "Uuid", traits: {"smithy.api#pattern" => "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"})
+    ValidateAddressActionOptions = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.location#ValidateAddressActionOptions", name: "ValidateAddressActionOptions")
+    ValidateAddressAdditionalFeature = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.location#ValidateAddressAdditionalFeature", name: "ValidateAddressAdditionalFeature", traits: {"smithy.api#enum" => [{"name" => "POSITION", "value" => "Position"}, {"name" => "COUNTRY_SPECIFIC_ATTRIBUTES", "value" => "CountrySpecificAttributes"}]})
+    ValidateAddressAdditionalFeatureList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.location#ValidateAddressAdditionalFeatureList", name: "ValidateAddressAdditionalFeatureList", traits: {"smithy.api#length" => {"min" => 1, "max" => 2}, "smithy.api#uniqueItems" => {}})
     ValidationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.location#ValidationException", name: "ValidationException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     ValidationExceptionField = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.location#ValidationExceptionField", name: "ValidationExceptionField")
     ValidationExceptionFieldList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.location#ValidationExceptionFieldList", name: "ValidationExceptionFieldList")
@@ -295,13 +334,22 @@ module Aws::Location
 
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Message", traits: {"smithy.api#jsonName" => "message", "smithy.api#required" => {}}))
     AccessDeniedException.type = Types::AccessDeniedException
+    AndroidApp.add_member(:package, ::Smithy::Schema::Shapes::MemberShape.new(target: AndroidPackageName, name: "Package", traits: {"smithy.api#required" => {}}))
+    AndroidApp.add_member(:certificate_fingerprint, ::Smithy::Schema::Shapes::MemberShape.new(target: Sha1CertificateFingerprint, name: "CertificateFingerprint", traits: {"smithy.api#required" => {}}))
+    AndroidApp.type = Types::AndroidApp
+    AndroidAppList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AndroidApp, name: "member"))
     ApiKeyActionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ApiKeyAction, name: "member"))
     ApiKeyFilter.add_member(:key_status, ::Smithy::Schema::Shapes::MemberShape.new(target: Status, name: "KeyStatus"))
     ApiKeyFilter.type = Types::ApiKeyFilter
     ApiKeyRestrictions.add_member(:allow_actions, ::Smithy::Schema::Shapes::MemberShape.new(target: ApiKeyActionList, name: "AllowActions", traits: {"smithy.api#length" => {"min" => 1, "max" => 24}, "smithy.api#required" => {}}))
     ApiKeyRestrictions.add_member(:allow_resources, ::Smithy::Schema::Shapes::MemberShape.new(target: GeoArnList, name: "AllowResources", traits: {"smithy.api#length" => {"min" => 1, "max" => 8}, "smithy.api#required" => {}}))
-    ApiKeyRestrictions.add_member(:allow_referers, ::Smithy::Schema::Shapes::MemberShape.new(target: RefererPatternList, name: "AllowReferers", traits: {"smithy.api#length" => {"min" => 1, "max" => 5}}))
+    ApiKeyRestrictions.add_member(:allow_referers, ::Smithy::Schema::Shapes::MemberShape.new(target: RefererPatternList, name: "AllowReferers", traits: {"smithy.api#length" => {"min" => 0, "max" => 5}}))
+    ApiKeyRestrictions.add_member(:allow_android_apps, ::Smithy::Schema::Shapes::MemberShape.new(target: AndroidAppList, name: "AllowAndroidApps", traits: {"smithy.api#length" => {"min" => 0, "max" => 5}}))
+    ApiKeyRestrictions.add_member(:allow_apple_apps, ::Smithy::Schema::Shapes::MemberShape.new(target: AppleAppList, name: "AllowAppleApps", traits: {"smithy.api#length" => {"min" => 0, "max" => 5}}))
     ApiKeyRestrictions.type = Types::ApiKeyRestrictions
+    AppleApp.add_member(:bundle_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AppleBundleId, name: "BundleId", traits: {"smithy.api#required" => {}}))
+    AppleApp.type = Types::AppleApp
+    AppleAppList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AppleApp, name: "member"))
     ArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member"))
     AssociateTrackerConsumerInput.add_member(:tracker_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "TrackerName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     AssociateTrackerConsumerInput.add_member(:consumer_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "ConsumerArn", traits: {"smithy.api#required" => {}}))
@@ -379,8 +427,8 @@ module Aws::Location
     BatchUpdateDevicePositionOutput.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchUpdateDevicePositionErrorList, name: "Errors", traits: {"smithy.api#required" => {}}))
     BatchUpdateDevicePositionOutput.type = Types::BatchUpdateDevicePositionOutput
     BoundingBox.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "member"))
-    CalculateRouteCarModeOptions.add_member(:avoid_ferries, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "AvoidFerries"))
-    CalculateRouteCarModeOptions.add_member(:avoid_tolls, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "AvoidTolls"))
+    CalculateRouteCarModeOptions.add_member(:avoid_ferries, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveBoolean, name: "AvoidFerries"))
+    CalculateRouteCarModeOptions.add_member(:avoid_tolls, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveBoolean, name: "AvoidTolls"))
     CalculateRouteCarModeOptions.type = Types::CalculateRouteCarModeOptions
     CalculateRouteInput.add_member(:calculator_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "CalculatorName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     CalculateRouteInput.add_member(:departure_position, ::Smithy::Schema::Shapes::MemberShape.new(target: Position, name: "DeparturePosition", traits: {"smithy.api#required" => {}}))
@@ -388,9 +436,9 @@ module Aws::Location
     CalculateRouteInput.add_member(:waypoint_positions, ::Smithy::Schema::Shapes::MemberShape.new(target: WaypointPositionList, name: "WaypointPositions", traits: {"smithy.api#length" => {"max" => 23}}))
     CalculateRouteInput.add_member(:travel_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: TravelMode, name: "TravelMode"))
     CalculateRouteInput.add_member(:departure_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "DepartureTime"))
-    CalculateRouteInput.add_member(:depart_now, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "DepartNow"))
+    CalculateRouteInput.add_member(:depart_now, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveBoolean, name: "DepartNow"))
     CalculateRouteInput.add_member(:distance_unit, ::Smithy::Schema::Shapes::MemberShape.new(target: DistanceUnit, name: "DistanceUnit"))
-    CalculateRouteInput.add_member(:include_leg_geometry, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "IncludeLegGeometry"))
+    CalculateRouteInput.add_member(:include_leg_geometry, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveBoolean, name: "IncludeLegGeometry"))
     CalculateRouteInput.add_member(:car_mode_options, ::Smithy::Schema::Shapes::MemberShape.new(target: CalculateRouteCarModeOptions, name: "CarModeOptions"))
     CalculateRouteInput.add_member(:truck_mode_options, ::Smithy::Schema::Shapes::MemberShape.new(target: CalculateRouteTruckModeOptions, name: "TruckModeOptions"))
     CalculateRouteInput.add_member(:arrival_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "ArrivalTime"))
@@ -402,7 +450,7 @@ module Aws::Location
     CalculateRouteMatrixInput.add_member(:destination_positions, ::Smithy::Schema::Shapes::MemberShape.new(target: PositionList, name: "DestinationPositions", traits: {"smithy.api#length" => {"min" => 1, "max" => 350}, "smithy.api#required" => {}}))
     CalculateRouteMatrixInput.add_member(:travel_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: TravelMode, name: "TravelMode"))
     CalculateRouteMatrixInput.add_member(:departure_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "DepartureTime"))
-    CalculateRouteMatrixInput.add_member(:depart_now, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "DepartNow"))
+    CalculateRouteMatrixInput.add_member(:depart_now, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveBoolean, name: "DepartNow"))
     CalculateRouteMatrixInput.add_member(:distance_unit, ::Smithy::Schema::Shapes::MemberShape.new(target: DistanceUnit, name: "DistanceUnit"))
     CalculateRouteMatrixInput.add_member(:car_mode_options, ::Smithy::Schema::Shapes::MemberShape.new(target: CalculateRouteCarModeOptions, name: "CarModeOptions"))
     CalculateRouteMatrixInput.add_member(:truck_mode_options, ::Smithy::Schema::Shapes::MemberShape.new(target: CalculateRouteTruckModeOptions, name: "TruckModeOptions"))
@@ -423,15 +471,21 @@ module Aws::Location
     CalculateRouteOutput.type = Types::CalculateRouteOutput
     CalculateRouteSummary.add_member(:route_b_box, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundingBox, name: "RouteBBox", traits: {"smithy.api#required" => {}}))
     CalculateRouteSummary.add_member(:data_source, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "DataSource", traits: {"smithy.api#required" => {}}))
-    CalculateRouteSummary.add_member(:distance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "Distance", traits: {"smithy.api#range" => {"min" => 0}, "smithy.api#required" => {}}))
-    CalculateRouteSummary.add_member(:duration_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "DurationSeconds", traits: {"smithy.api#range" => {"min" => 0}, "smithy.api#required" => {}}))
+    CalculateRouteSummary.add_member(:distance, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveDouble, name: "Distance", traits: {"smithy.api#range" => {"min" => 0}, "smithy.api#required" => {}}))
+    CalculateRouteSummary.add_member(:duration_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveDouble, name: "DurationSeconds", traits: {"smithy.api#range" => {"min" => 0}, "smithy.api#required" => {}}))
     CalculateRouteSummary.add_member(:distance_unit, ::Smithy::Schema::Shapes::MemberShape.new(target: DistanceUnit, name: "DistanceUnit", traits: {"smithy.api#required" => {}}))
     CalculateRouteSummary.type = Types::CalculateRouteSummary
-    CalculateRouteTruckModeOptions.add_member(:avoid_ferries, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "AvoidFerries"))
-    CalculateRouteTruckModeOptions.add_member(:avoid_tolls, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "AvoidTolls"))
+    CalculateRouteTruckModeOptions.add_member(:avoid_ferries, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveBoolean, name: "AvoidFerries"))
+    CalculateRouteTruckModeOptions.add_member(:avoid_tolls, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveBoolean, name: "AvoidTolls"))
     CalculateRouteTruckModeOptions.add_member(:dimensions, ::Smithy::Schema::Shapes::MemberShape.new(target: TruckDimensions, name: "Dimensions"))
     CalculateRouteTruckModeOptions.add_member(:weight, ::Smithy::Schema::Shapes::MemberShape.new(target: TruckWeight, name: "Weight"))
     CalculateRouteTruckModeOptions.type = Types::CalculateRouteTruckModeOptions
+    CancelJobRequest.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, name: "JobId", traits: {"smithy.api#required" => {}}))
+    CancelJobRequest.type = Types::CancelJobRequest
+    CancelJobResponse.add_member(:job_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GeoArn, name: "JobArn", traits: {"smithy.api#required" => {}}))
+    CancelJobResponse.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, name: "JobId", traits: {"smithy.api#required" => {}}))
+    CancelJobResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, name: "Status", traits: {"smithy.api#required" => {}}))
+    CancelJobResponse.type = Types::CancelJobResponse
     CellSignals.add_member(:lte_cell_details, ::Smithy::Schema::Shapes::MemberShape.new(target: LteCellDetailsList, name: "LteCellDetails", traits: {"smithy.api#length" => {"min" => 1, "max" => 16}, "smithy.api#required" => {}}))
     CellSignals.type = Types::CellSignals
     Circle.add_member(:center, ::Smithy::Schema::Shapes::MemberShape.new(target: Position, name: "Center", traits: {"smithy.api#required" => {}}))
@@ -695,6 +749,23 @@ module Aws::Location
     GetGeofenceOutput.add_member(:update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "UpdateTime", traits: {"smithy.api#required" => {}}))
     GetGeofenceOutput.add_member(:geofence_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: PropertyMap, name: "GeofenceProperties"))
     GetGeofenceOutput.type = Types::GetGeofenceOutput
+    GetJobRequest.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, name: "JobId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetJobRequest.type = Types::GetJobRequest
+    GetJobResponse.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: JobAction, name: "Action", traits: {"smithy.api#required" => {}}))
+    GetJobResponse.add_member(:action_options, ::Smithy::Schema::Shapes::MemberShape.new(target: JobActionOptions, name: "ActionOptions"))
+    GetJobResponse.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedAt", traits: {"smithy.api#required" => {}}))
+    GetJobResponse.add_member(:ended_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "EndedAt"))
+    GetJobResponse.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: JobError, name: "Error"))
+    GetJobResponse.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, name: "ExecutionRoleArn", traits: {"smithy.api#required" => {}}))
+    GetJobResponse.add_member(:input_options, ::Smithy::Schema::Shapes::MemberShape.new(target: JobInputOptions, name: "InputOptions", traits: {"smithy.api#required" => {}}))
+    GetJobResponse.add_member(:job_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GeoArn, name: "JobArn", traits: {"smithy.api#required" => {}}))
+    GetJobResponse.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, name: "JobId", traits: {"smithy.api#required" => {}}))
+    GetJobResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "Name"))
+    GetJobResponse.add_member(:output_options, ::Smithy::Schema::Shapes::MemberShape.new(target: JobOutputOptions, name: "OutputOptions", traits: {"smithy.api#required" => {}}))
+    GetJobResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, name: "Status", traits: {"smithy.api#required" => {}}))
+    GetJobResponse.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "UpdatedAt", traits: {"smithy.api#required" => {}}))
+    GetJobResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags"))
+    GetJobResponse.type = Types::GetJobResponse
     GetMapGlyphsInput.add_member(:map_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "MapName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetMapGlyphsInput.add_member(:font_stack, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "FontStack", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetMapGlyphsInput.add_member(:font_unicode_range, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "FontUnicodeRange", traits: {"smithy.api#httpLabel" => {}, "smithy.api#pattern" => "^[0-9]+-[0-9]+\\.pbf$", "smithy.api#required" => {}}))
@@ -726,9 +797,9 @@ module Aws::Location
     GetMapStyleDescriptorOutput[:http_payload_member] = GetMapStyleDescriptorOutput.member(:blob)
     GetMapStyleDescriptorOutput.type = Types::GetMapStyleDescriptorOutput
     GetMapTileInput.add_member(:map_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "MapName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    GetMapTileInput.add_member(:z, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Z", traits: {"smithy.api#httpLabel" => {}, "smithy.api#pattern" => "\\d+", "smithy.api#required" => {}}))
-    GetMapTileInput.add_member(:x, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "X", traits: {"smithy.api#httpLabel" => {}, "smithy.api#pattern" => "\\d+", "smithy.api#required" => {}}))
-    GetMapTileInput.add_member(:y, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Y", traits: {"smithy.api#httpLabel" => {}, "smithy.api#pattern" => "\\d+", "smithy.api#required" => {}}))
+    GetMapTileInput.add_member(:z, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "Z", traits: {"smithy.api#httpLabel" => {}, "smithy.api#pattern" => "\\d+", "smithy.api#required" => {}}))
+    GetMapTileInput.add_member(:x, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "X", traits: {"smithy.api#httpLabel" => {}, "smithy.api#pattern" => "\\d+", "smithy.api#required" => {}}))
+    GetMapTileInput.add_member(:y, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "Y", traits: {"smithy.api#httpLabel" => {}, "smithy.api#pattern" => "\\d+", "smithy.api#required" => {}}))
     GetMapTileInput.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ApiKey, name: "Key", traits: {"smithy.api#httpQuery" => "key"}))
     GetMapTileInput.type = Types::GetMapTileInput
     GetMapTileOutput.add_member(:blob, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Blob, name: "Blob", traits: {"smithy.api#httpPayload" => {}}))
@@ -752,10 +823,24 @@ module Aws::Location
     InferredState.type = Types::InferredState
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Message", traits: {"smithy.api#jsonName" => "message", "smithy.api#required" => {}}))
     InternalServerException.type = Types::InternalServerException
+    JobActionOptions.add_member(:validate_address, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidateAddressActionOptions, name: "ValidateAddress"))
+    JobActionOptions.type = Types::JobActionOptions
+    JobError.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: JobErrorCode, name: "Code", traits: {"smithy.api#required" => {}}))
+    JobError.add_member(:messages, ::Smithy::Schema::Shapes::MemberShape.new(target: JobErrorMessagesList, name: "Messages"))
+    JobError.type = Types::JobError
+    JobErrorMessagesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: JobErrorMessage, name: "member"))
+    JobInputOptions.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: JobInputLocation, name: "Location", traits: {"smithy.api#required" => {}}))
+    JobInputOptions.add_member(:format, ::Smithy::Schema::Shapes::MemberShape.new(target: JobInputFormat, name: "Format", traits: {"smithy.api#required" => {}}))
+    JobInputOptions.type = Types::JobInputOptions
+    JobOutputOptions.add_member(:format, ::Smithy::Schema::Shapes::MemberShape.new(target: JobOutputFormat, name: "Format", traits: {"smithy.api#required" => {}}))
+    JobOutputOptions.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: JobOutputLocation, name: "Location", traits: {"smithy.api#required" => {}}))
+    JobOutputOptions.type = Types::JobOutputOptions
+    JobsFilter.add_member(:job_status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, name: "JobStatus"))
+    JobsFilter.type = Types::JobsFilter
     Leg.add_member(:start_position, ::Smithy::Schema::Shapes::MemberShape.new(target: Position, name: "StartPosition", traits: {"smithy.api#required" => {}}))
     Leg.add_member(:end_position, ::Smithy::Schema::Shapes::MemberShape.new(target: Position, name: "EndPosition", traits: {"smithy.api#required" => {}}))
-    Leg.add_member(:distance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "Distance", traits: {"smithy.api#range" => {"min" => 0}, "smithy.api#required" => {}}))
-    Leg.add_member(:duration_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "DurationSeconds", traits: {"smithy.api#range" => {"min" => 0}, "smithy.api#required" => {}}))
+    Leg.add_member(:distance, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveDouble, name: "Distance", traits: {"smithy.api#range" => {"min" => 0}, "smithy.api#required" => {}}))
+    Leg.add_member(:duration_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveDouble, name: "DurationSeconds", traits: {"smithy.api#range" => {"min" => 0}, "smithy.api#required" => {}}))
     Leg.add_member(:geometry, ::Smithy::Schema::Shapes::MemberShape.new(target: LegGeometry, name: "Geometry"))
     Leg.add_member(:steps, ::Smithy::Schema::Shapes::MemberShape.new(target: StepList, name: "Steps", traits: {"smithy.api#required" => {}}))
     Leg.type = Types::Leg
@@ -809,6 +894,28 @@ module Aws::Location
     ListGeofencesOutput.add_member(:entries, ::Smithy::Schema::Shapes::MemberShape.new(target: ListGeofenceResponseEntryList, name: "Entries", traits: {"smithy.api#required" => {}}))
     ListGeofencesOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: LargeToken, name: "NextToken"))
     ListGeofencesOutput.type = Types::ListGeofencesOutput
+    ListJobsRequest.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: JobsFilter, name: "Filter"))
+    ListJobsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "MaxResults", traits: {"smithy.api#default" => nil, "smithy.api#range" => {"min" => 1, "max" => 100}}))
+    ListJobsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: LargeToken, name: "NextToken"))
+    ListJobsRequest.type = Types::ListJobsRequest
+    ListJobsResponse.add_member(:entries, ::Smithy::Schema::Shapes::MemberShape.new(target: ListJobsResponseEntryList, name: "Entries", traits: {"smithy.api#required" => {}}))
+    ListJobsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: LargeToken, name: "NextToken"))
+    ListJobsResponse.type = Types::ListJobsResponse
+    ListJobsResponseEntry.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: JobAction, name: "Action", traits: {"smithy.api#required" => {}}))
+    ListJobsResponseEntry.add_member(:action_options, ::Smithy::Schema::Shapes::MemberShape.new(target: JobActionOptions, name: "ActionOptions"))
+    ListJobsResponseEntry.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedAt", traits: {"smithy.api#required" => {}}))
+    ListJobsResponseEntry.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, name: "ExecutionRoleArn", traits: {"smithy.api#required" => {}}))
+    ListJobsResponseEntry.add_member(:ended_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "EndedAt"))
+    ListJobsResponseEntry.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: JobError, name: "Error"))
+    ListJobsResponseEntry.add_member(:input_options, ::Smithy::Schema::Shapes::MemberShape.new(target: JobInputOptions, name: "InputOptions", traits: {"smithy.api#required" => {}}))
+    ListJobsResponseEntry.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, name: "JobId", traits: {"smithy.api#required" => {}}))
+    ListJobsResponseEntry.add_member(:job_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GeoArn, name: "JobArn", traits: {"smithy.api#required" => {}}))
+    ListJobsResponseEntry.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "Name"))
+    ListJobsResponseEntry.add_member(:output_options, ::Smithy::Schema::Shapes::MemberShape.new(target: JobOutputOptions, name: "OutputOptions", traits: {"smithy.api#required" => {}}))
+    ListJobsResponseEntry.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, name: "Status", traits: {"smithy.api#required" => {}}))
+    ListJobsResponseEntry.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "UpdatedAt", traits: {"smithy.api#required" => {}}))
+    ListJobsResponseEntry.type = Types::ListJobsResponseEntry
+    ListJobsResponseEntryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListJobsResponseEntry, name: "member"))
     ListKeysInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "MaxResults", traits: {"smithy.api#default" => nil, "smithy.api#range" => {"min" => 1, "max" => 100}}))
     ListKeysInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken"))
     ListKeysInput.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: ApiKeyFilter, name: "Filter"))
@@ -921,23 +1028,23 @@ module Aws::Location
     MapConfigurationUpdate.add_member(:custom_layers, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomLayerList, name: "CustomLayers"))
     MapConfigurationUpdate.type = Types::MapConfigurationUpdate
     MultiLinearRings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LinearRings, name: "member"))
-    Place.add_member(:label, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Label"))
+    Place.add_member(:label, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "Label"))
     Place.add_member(:geometry, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaceGeometry, name: "Geometry", traits: {"smithy.api#required" => {}}))
-    Place.add_member(:address_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "AddressNumber"))
-    Place.add_member(:street, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Street"))
-    Place.add_member(:neighborhood, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Neighborhood"))
-    Place.add_member(:municipality, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Municipality"))
-    Place.add_member(:sub_region, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "SubRegion"))
-    Place.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Region"))
-    Place.add_member(:country, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Country"))
-    Place.add_member(:postal_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "PostalCode"))
-    Place.add_member(:interpolated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "Interpolated"))
+    Place.add_member(:address_number, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "AddressNumber"))
+    Place.add_member(:street, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "Street"))
+    Place.add_member(:neighborhood, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "Neighborhood"))
+    Place.add_member(:municipality, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "Municipality"))
+    Place.add_member(:sub_region, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "SubRegion"))
+    Place.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "Region"))
+    Place.add_member(:country, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "Country"))
+    Place.add_member(:postal_code, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "PostalCode"))
+    Place.add_member(:interpolated, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveBoolean, name: "Interpolated"))
     Place.add_member(:time_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeZone, name: "TimeZone"))
-    Place.add_member(:unit_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "UnitType"))
-    Place.add_member(:unit_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "UnitNumber"))
+    Place.add_member(:unit_type, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "UnitType"))
+    Place.add_member(:unit_number, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "UnitNumber"))
     Place.add_member(:categories, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaceCategoryList, name: "Categories"))
     Place.add_member(:supplemental_categories, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaceSupplementalCategoryList, name: "SupplementalCategories"))
-    Place.add_member(:sub_municipality, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "SubMunicipality"))
+    Place.add_member(:sub_municipality, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "SubMunicipality"))
     Place.type = Types::Place
     PlaceCategoryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaceCategory, name: "member"))
     PlaceGeometry.add_member(:point, ::Smithy::Schema::Shapes::MemberShape.new(target: Position, name: "Point"))
@@ -964,8 +1071,8 @@ module Aws::Location
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Message", traits: {"smithy.api#jsonName" => "message", "smithy.api#required" => {}}))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
     RouteMatrix.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteMatrixRow, name: "member"))
-    RouteMatrixEntry.add_member(:distance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "Distance", traits: {"smithy.api#range" => {"min" => 0}}))
-    RouteMatrixEntry.add_member(:duration_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "DurationSeconds", traits: {"smithy.api#range" => {"min" => 0}}))
+    RouteMatrixEntry.add_member(:distance, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveDouble, name: "Distance", traits: {"smithy.api#range" => {"min" => 0}}))
+    RouteMatrixEntry.add_member(:duration_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveDouble, name: "DurationSeconds", traits: {"smithy.api#range" => {"min" => 0}}))
     RouteMatrixEntry.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteMatrixEntryError, name: "Error"))
     RouteMatrixEntry.type = Types::RouteMatrixEntry
     RouteMatrixEntryError.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteMatrixErrorCode, name: "Code", traits: {"smithy.api#required" => {}}))
@@ -973,19 +1080,19 @@ module Aws::Location
     RouteMatrixEntryError.type = Types::RouteMatrixEntryError
     RouteMatrixRow.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteMatrixEntry, name: "member"))
     SearchForPositionResult.add_member(:place, ::Smithy::Schema::Shapes::MemberShape.new(target: Place, name: "Place", traits: {"smithy.api#required" => {}}))
-    SearchForPositionResult.add_member(:distance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "Distance", traits: {"smithy.api#range" => {"min" => 0}, "smithy.api#required" => {}}))
+    SearchForPositionResult.add_member(:distance, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveDouble, name: "Distance", traits: {"smithy.api#range" => {"min" => 0}, "smithy.api#required" => {}}))
     SearchForPositionResult.add_member(:place_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaceId, name: "PlaceId"))
     SearchForPositionResult.type = Types::SearchForPositionResult
     SearchForPositionResultList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchForPositionResult, name: "member"))
-    SearchForSuggestionsResult.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Text", traits: {"smithy.api#required" => {}}))
+    SearchForSuggestionsResult.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "Text", traits: {"smithy.api#required" => {}}))
     SearchForSuggestionsResult.add_member(:place_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaceId, name: "PlaceId"))
     SearchForSuggestionsResult.add_member(:categories, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaceCategoryList, name: "Categories"))
     SearchForSuggestionsResult.add_member(:supplemental_categories, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaceSupplementalCategoryList, name: "SupplementalCategories"))
     SearchForSuggestionsResult.type = Types::SearchForSuggestionsResult
     SearchForSuggestionsResultList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchForSuggestionsResult, name: "member"))
     SearchForTextResult.add_member(:place, ::Smithy::Schema::Shapes::MemberShape.new(target: Place, name: "Place", traits: {"smithy.api#required" => {}}))
-    SearchForTextResult.add_member(:distance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "Distance", traits: {"smithy.api#range" => {"min" => 0}}))
-    SearchForTextResult.add_member(:relevance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "Relevance", traits: {"smithy.api#range" => {"min" => 0, "max" => 1}}))
+    SearchForTextResult.add_member(:distance, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveDouble, name: "Distance", traits: {"smithy.api#range" => {"min" => 0}}))
+    SearchForTextResult.add_member(:relevance, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveDouble, name: "Relevance", traits: {"smithy.api#range" => {"min" => 0, "max" => 1}}))
     SearchForTextResult.add_member(:place_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaceId, name: "PlaceId"))
     SearchForTextResult.type = Types::SearchForTextResult
     SearchForTextResultList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchForTextResult, name: "member"))
@@ -1050,10 +1157,24 @@ module Aws::Location
     SearchPlaceIndexForTextSummary.type = Types::SearchPlaceIndexForTextSummary
     ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Message", traits: {"smithy.api#jsonName" => "message", "smithy.api#required" => {}}))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
+    StartJobRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    StartJobRequest.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: JobAction, name: "Action", traits: {"smithy.api#required" => {}}))
+    StartJobRequest.add_member(:action_options, ::Smithy::Schema::Shapes::MemberShape.new(target: JobActionOptions, name: "ActionOptions"))
+    StartJobRequest.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, name: "ExecutionRoleArn", traits: {"smithy.api#required" => {}}))
+    StartJobRequest.add_member(:input_options, ::Smithy::Schema::Shapes::MemberShape.new(target: JobInputOptions, name: "InputOptions", traits: {"smithy.api#required" => {}}))
+    StartJobRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "Name"))
+    StartJobRequest.add_member(:output_options, ::Smithy::Schema::Shapes::MemberShape.new(target: JobOutputOptions, name: "OutputOptions", traits: {"smithy.api#required" => {}}))
+    StartJobRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags"))
+    StartJobRequest.type = Types::StartJobRequest
+    StartJobResponse.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedAt", traits: {"smithy.api#required" => {}}))
+    StartJobResponse.add_member(:job_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GeoArn, name: "JobArn", traits: {"smithy.api#required" => {}}))
+    StartJobResponse.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, name: "JobId", traits: {"smithy.api#required" => {}}))
+    StartJobResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, name: "Status", traits: {"smithy.api#required" => {}}))
+    StartJobResponse.type = Types::StartJobResponse
     Step.add_member(:start_position, ::Smithy::Schema::Shapes::MemberShape.new(target: Position, name: "StartPosition", traits: {"smithy.api#required" => {}}))
     Step.add_member(:end_position, ::Smithy::Schema::Shapes::MemberShape.new(target: Position, name: "EndPosition", traits: {"smithy.api#required" => {}}))
-    Step.add_member(:distance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "Distance", traits: {"smithy.api#range" => {"min" => 0}, "smithy.api#required" => {}}))
-    Step.add_member(:duration_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "DurationSeconds", traits: {"smithy.api#range" => {"min" => 0}, "smithy.api#required" => {}}))
+    Step.add_member(:distance, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveDouble, name: "Distance", traits: {"smithy.api#range" => {"min" => 0}, "smithy.api#required" => {}}))
+    Step.add_member(:duration_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveDouble, name: "DurationSeconds", traits: {"smithy.api#range" => {"min" => 0}, "smithy.api#required" => {}}))
     Step.add_member(:geometry_offset, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "GeometryOffset", traits: {"smithy.api#range" => {"min" => 0}}))
     Step.type = Types::Step
     StepList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Step, name: "member"))
@@ -1066,17 +1187,17 @@ module Aws::Location
     TagResourceOutput.type = Types::TagResourceOutput
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Message", traits: {"smithy.api#jsonName" => "message", "smithy.api#required" => {}}))
     ThrottlingException.type = Types::ThrottlingException
-    TimeZone.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Name", traits: {"smithy.api#required" => {}}))
-    TimeZone.add_member(:offset, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "Offset"))
+    TimeZone.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "Name", traits: {"smithy.api#required" => {}}))
+    TimeZone.add_member(:offset, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveInteger, name: "Offset"))
     TimeZone.type = Types::TimeZone
     TrackingFilterGeometry.add_member(:polygon, ::Smithy::Schema::Shapes::MemberShape.new(target: LinearRings, name: "Polygon"))
     TrackingFilterGeometry.type = Types::TrackingFilterGeometry
-    TruckDimensions.add_member(:length, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "Length", traits: {"smithy.api#range" => {"min" => 0}}))
-    TruckDimensions.add_member(:height, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "Height", traits: {"smithy.api#range" => {"min" => 0}}))
-    TruckDimensions.add_member(:width, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "Width", traits: {"smithy.api#range" => {"min" => 0}}))
+    TruckDimensions.add_member(:length, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveDouble, name: "Length", traits: {"smithy.api#range" => {"min" => 0}}))
+    TruckDimensions.add_member(:height, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveDouble, name: "Height", traits: {"smithy.api#range" => {"min" => 0}}))
+    TruckDimensions.add_member(:width, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveDouble, name: "Width", traits: {"smithy.api#range" => {"min" => 0}}))
     TruckDimensions.add_member(:unit, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionUnit, name: "Unit"))
     TruckDimensions.type = Types::TruckDimensions
-    TruckWeight.add_member(:total, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "Total", traits: {"smithy.api#range" => {"min" => 0}}))
+    TruckWeight.add_member(:total, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveDouble, name: "Total", traits: {"smithy.api#range" => {"min" => 0}}))
     TruckWeight.add_member(:unit, ::Smithy::Schema::Shapes::MemberShape.new(target: VehicleWeightUnit, name: "Unit"))
     TruckWeight.type = Types::TruckWeight
     UntagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -1141,6 +1262,9 @@ module Aws::Location
     UpdateTrackerOutput.add_member(:tracker_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "TrackerArn", traits: {"smithy.api#required" => {}}))
     UpdateTrackerOutput.add_member(:update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "UpdateTime", traits: {"smithy.api#required" => {}}))
     UpdateTrackerOutput.type = Types::UpdateTrackerOutput
+    ValidateAddressActionOptions.add_member(:additional_features, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidateAddressAdditionalFeatureList, name: "AdditionalFeatures"))
+    ValidateAddressActionOptions.type = Types::ValidateAddressActionOptions
+    ValidateAddressAdditionalFeatureList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidateAddressAdditionalFeature, name: "member"))
     ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Message", traits: {"smithy.api#jsonName" => "message", "smithy.api#required" => {}}))
     ValidationException.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionReason, name: "Reason", traits: {"smithy.api#jsonName" => "reason", "smithy.api#required" => {}}))
     ValidationException.add_member(:field_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionFieldList, name: "FieldList", traits: {"smithy.api#jsonName" => "fieldList", "smithy.api#required" => {}}))
@@ -1169,7 +1293,7 @@ module Aws::Location
       service.id = "com.amazonaws.location#LocationService"
       service.name = "LocationService"
       service.version = "2020-11-19"
-      service.traits = {"aws.api#service" => {"sdkId" => "Location", "arnNamespace" => "geo"}, "aws.auth#sigv4" => {"name" => "geo"}, "aws.protocols#restJson1" => {}, "smithy.api#title" => "Amazon Location Service"}
+      service.traits = {"aws.api#service" => {"sdkId" => "Location", "arnNamespace" => "geo"}, "aws.auth#sigv4" => {"name" => "geo"}, "aws.protocols#restJson1" => {}, "smithy.api#title" => "Amazon Location Service", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://geo-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://geo-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://geo.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://geo.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
       service.add_operation(:associate_tracker_consumer, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.location#AssociateTrackerConsumer"
         operation.name = "AssociateTrackerConsumer"
@@ -1279,6 +1403,17 @@ module Aws::Location
         operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "routes."}, "smithy.api#http" => {"uri" => "/routes/v0/calculators/{CalculatorName}/calculate/route-matrix", "method" => "POST"}, "smithy.api#readonly" => {}}
+      end)
+      service.add_operation(:cancel_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.location#CancelJob"
+        operation.name = "CancelJob"
+        operation.input = CancelJobRequest
+        operation.output = CancelJobResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "metadata."}, "smithy.api#http" => {"uri" => "/metadata/v0/jobs/cancel-job", "method" => "POST"}}
       end)
       service.add_operation(:create_geofence_collection, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.location#CreateGeofenceCollection"
@@ -1564,6 +1699,18 @@ module Aws::Location
         operation.errors << ValidationException
         operation.traits = {"aws.api#dataPlane" => {}, "smithy.api#endpoint" => {"hostPrefix" => "geofencing."}, "smithy.api#http" => {"uri" => "/geofencing/v0/collections/{CollectionName}/geofences/{GeofenceId}", "method" => "GET"}, "smithy.api#readonly" => {}}
       end)
+      service.add_operation(:get_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.location#GetJob"
+        operation.name = "GetJob"
+        operation.input = GetJobRequest
+        operation.output = GetJobResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "metadata."}, "smithy.api#http" => {"uri" => "/metadata/v0/jobs/{JobId}", "method" => "GET"}, "smithy.api#readonly" => {}}
+      end)
       service.add_operation(:get_map_glyphs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.location#GetMapGlyphs"
         operation.name = "GetMapGlyphs"
@@ -1660,6 +1807,18 @@ module Aws::Location
         operation.errors << ValidationException
         operation.traits = {"aws.api#dataPlane" => {}, "smithy.api#endpoint" => {"hostPrefix" => "geofencing."}, "smithy.api#http" => {"uri" => "/geofencing/v0/collections/{CollectionName}/list-geofences", "method" => "POST"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListGeofences.new
+      end)
+      service.add_operation(:list_jobs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.location#ListJobs"
+        operation.name = "ListJobs"
+        operation.input = ListJobsRequest
+        operation.output = ListJobsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "metadata."}, "smithy.api#http" => {"uri" => "/metadata/v0/jobs/list-jobs", "method" => "POST"}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListJobs.new
       end)
       service.add_operation(:list_keys, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.location#ListKeys"
@@ -1794,6 +1953,17 @@ module Aws::Location
         operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "places."}, "smithy.api#http" => {"uri" => "/places/v0/indexes/{IndexName}/search/text", "method" => "POST"}, "smithy.api#readonly" => {}}
+      end)
+      service.add_operation(:start_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.location#StartJob"
+        operation.name = "StartJob"
+        operation.input = StartJobRequest
+        operation.output = StartJobResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "metadata."}, "smithy.api#http" => {"uri" => "/metadata/v0/jobs", "method" => "POST"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.location#TagResource"

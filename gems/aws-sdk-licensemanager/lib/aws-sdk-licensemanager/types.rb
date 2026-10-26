@@ -47,6 +47,38 @@ module Aws::LicenseManager
       include ::Smithy::Schema::Structure
     end
 
+    # <p>AND rule statement.</p>
+    # @!attribute matching_rule_statements
+    #   <p>Matching rule statements.</p>
+    #   @return [Array<Types::MatchingRuleStatement>]
+    # @!attribute script_rule_statements
+    #   <p>Script rule statements.</p>
+    #   @return [Array<Types::ScriptRuleStatement>]
+    class AndRuleStatement < Struct.new(
+      nil,
+      :matching_rule_statements,
+      :script_rule_statements,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Asset.</p>
+    # @!attribute asset_arn
+    #   <p>Amazon Resource Name (ARN) of the asset.</p>
+    #   @return [String]
+    # @!attribute latest_asset_discovery_time
+    #   <p>Latest asset discovery time.</p>
+    #   @return [Time]
+    class Asset < Struct.new(
+      nil,
+      :asset_arn,
+      :latest_asset_discovery_time,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The Amazon Web Services user account does not have permission to perform the action. Check the IAM
     #          policy associated with this account.</p>
     # @!attribute message
@@ -431,6 +463,94 @@ module Aws::LicenseManager
     end
 
     # @!attribute name
+    #   <p>License asset group name.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>License asset group description.</p>
+    #   @return [String]
+    # @!attribute license_asset_group_configurations
+    #   <p>License asset group configurations.</p>
+    #   @return [Array<Types::LicenseAssetGroupConfiguration>]
+    # @!attribute associated_license_asset_ruleset_ar_ns
+    #   <p>ARNs of associated license asset rulesets.</p>
+    #   @return [Array<String>]
+    # @!attribute properties
+    #   <p>License asset group properties.</p>
+    #   @return [Array<Types::LicenseAssetGroupProperty>]
+    # @!attribute tags
+    #   <p>Tags to add to the license asset group.</p>
+    #   @return [Array<Types::Tag>]
+    # @!attribute client_token
+    #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+    #   @return [String]
+    class CreateLicenseAssetGroupRequest < Struct.new(
+      nil,
+      :name,
+      :description,
+      :license_asset_group_configurations,
+      :associated_license_asset_ruleset_ar_ns,
+      :properties,
+      :tags,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute license_asset_group_arn
+    #   <p>Amazon Resource Name (ARN) of the license asset group.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>License asset group status.</p>
+    #   @return [String]
+    class CreateLicenseAssetGroupResponse < Struct.new(
+      nil,
+      :license_asset_group_arn,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute name
+    #   <p>License asset ruleset name.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>License asset ruleset description.</p>
+    #   @return [String]
+    # @!attribute rules
+    #   <p>License asset rules.</p>
+    #   @return [Array<Types::LicenseAssetRule>]
+    # @!attribute tags
+    #   <p>Tags to add to the license asset ruleset.</p>
+    #   @return [Array<Types::Tag>]
+    # @!attribute client_token
+    #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+    #   @return [String]
+    class CreateLicenseAssetRulesetRequest < Struct.new(
+      nil,
+      :name,
+      :description,
+      :rules,
+      :tags,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute license_asset_ruleset_arn
+    #   <p>Amazon Resource Name (ARN) of the license asset ruleset.</p>
+    #   @return [String]
+    class CreateLicenseAssetRulesetResponse < Struct.new(
+      nil,
+      :license_asset_ruleset_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute name
     #   <p>Name of the license configuration.</p>
     #   @return [String]
     # @!attribute description
@@ -447,7 +567,7 @@ module Aws::LicenseManager
     #            blocks the launch of new instances.</p>
     #   @return [Boolean]
     # @!attribute license_rules
-    #   <p>License rules. The syntax is #name=value (for example, #allowedTenancy=EC2-DedicatedHost). The available rules 
+    #   <p>License rules. The syntax is #name=value (for example, #allowedTenancy=EC2-DedicatedHost). The available rules
     #            vary by dimension, as follows.</p>
     #            <ul>
     #               <li>
@@ -459,28 +579,28 @@ module Aws::LicenseManager
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>Instances</code> dimension: <code>allowedTenancy</code> | 
+    #                     <code>Instances</code> dimension: <code>allowedTenancy</code> |
     #                  <code>maximumVcpus</code> | <code>minimumVcpus</code>
     #                  </p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>Sockets</code> dimension: <code>allowedTenancy</code> | 
+    #                     <code>Sockets</code> dimension: <code>allowedTenancy</code> |
     #                  <code>licenseAffinityToHost</code> |
     #                  <code>maximumSockets</code> | <code>minimumSockets</code>
     #                  </p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>vCPUs</code> dimension: <code>allowedTenancy</code> | 
-    #                  <code>honorVcpuOptimization</code> | 
+    #                     <code>vCPUs</code> dimension: <code>allowedTenancy</code> |
+    #                  <code>honorVcpuOptimization</code> |
     #                  <code>maximumVcpus</code> | <code>minimumVcpus</code>
     #                  </p>
     #               </li>
     #            </ul>
-    #            <p>The unit for <code>licenseAffinityToHost</code> is days and the range is 1 to 180. The possible 
-    #            values for <code>allowedTenancy</code> are <code>EC2-Default</code>, <code>EC2-DedicatedHost</code>, and 
-    #            <code>EC2-DedicatedInstance</code>. The possible values for <code>honorVcpuOptimization</code> are 
+    #            <p>The unit for <code>licenseAffinityToHost</code> is days and the range is 1 to 180. The possible
+    #            values for <code>allowedTenancy</code> are <code>EC2-Default</code>, <code>EC2-DedicatedHost</code>, and
+    #            <code>EC2-DedicatedInstance</code>. The possible values for <code>honorVcpuOptimization</code> are
     #            <code>True</code> and <code>False</code>.</p>
     #   @return [Array<String>]
     # @!attribute tags
@@ -492,6 +612,9 @@ module Aws::LicenseManager
     # @!attribute product_information_list
     #   <p>Product information.</p>
     #   @return [Array<Types::ProductInformation>]
+    # @!attribute license_expiry
+    #   <p>License configuration expiry.</p>
+    #   @return [Integer]
     class CreateLicenseConfigurationRequest < Struct.new(
       nil,
       :name,
@@ -503,6 +626,7 @@ module Aws::LicenseManager
       :tags,
       :disassociate_when_not_found,
       :product_information_list,
+      :license_expiry,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -523,8 +647,8 @@ module Aws::LicenseManager
     #   <p>Amazon Resource Name (ARN) of the resource you are converting the license type for.</p>
     #   @return [String]
     # @!attribute source_license_context
-    #   <p>Information that identifies the license type you are converting from. 
-    #   
+    #   <p>Information that identifies the license type you are converting from.
+    #
     #            For the structure of the source license, see <a href="https://docs.aws.amazon.com/license-manager/latest/userguide/conversion-procedures.html#conversion-cli">Convert a license type using the CLI </a> in the <i>License Manager User Guide</i>.</p>
     #   @return [Types::LicenseConversionContext]
     # @!attribute destination_license_context
@@ -720,6 +844,9 @@ module Aws::LicenseManager
     # @!attribute source_version
     #   <p>Current version of the license.</p>
     #   @return [String]
+    # @!attribute reset_usage
+    #   <p>Specifies whether to reset the license usage for the new license version. If you don't specify a value, the license usage is not reset.</p>
+    #   @return [Boolean]
     class CreateLicenseVersionRequest < Struct.new(
       nil,
       :license_arn,
@@ -734,6 +861,7 @@ module Aws::LicenseManager
       :status,
       :client_token,
       :source_version,
+      :reset_usage,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -763,7 +891,7 @@ module Aws::LicenseManager
     #             JWT token.</p>
     #   @return [String]
     # @!attribute role_arns
-    #   <p>Amazon Resource Name (ARN) of the IAM roles to embed in the token. 
+    #   <p>Amazon Resource Name (ARN) of the IAM roles to embed in the token.
     #            License Manager does not check whether the roles are in use.</p>
     #   @return [Array<String>]
     # @!attribute expiration_in_days
@@ -802,6 +930,30 @@ module Aws::LicenseManager
       :token_id,
       :token_type,
       :token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Status information for cross-account discovery service.</p>
+    # @!attribute message
+    #   <p>Status message for cross-account discovery service.</p>
+    #   @return [String]
+    class CrossAccountDiscoveryServiceStatus < Struct.new(
+      nil,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Status information for cross-region discovery.</p>
+    # @!attribute message
+    #   <p>Map of region status messages for cross-region discovery.</p>
+    #   @return [Hash<String, Types::RegionStatus>]
+    class CrossRegionDiscoveryStatus < Struct.new(
+      nil,
+      :message,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -856,6 +1008,46 @@ module Aws::LicenseManager
       :grant_arn,
       :status,
       :version,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute license_asset_group_arn
+    #   <p>Amazon Resource Name (ARN) of the license asset group.</p>
+    #   @return [String]
+    class DeleteLicenseAssetGroupRequest < Struct.new(
+      nil,
+      :license_asset_group_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute status
+    #   <p>License asset group status.</p>
+    #   @return [String]
+    class DeleteLicenseAssetGroupResponse < Struct.new(
+      nil,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute license_asset_ruleset_arn
+    #   <p>Amazon Resource Name (ARN) of the license asset ruleset.</p>
+    #   @return [String]
+    class DeleteLicenseAssetRulesetRequest < Struct.new(
+      nil,
+      :license_asset_ruleset_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class DeleteLicenseAssetRulesetResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1157,6 +1349,50 @@ module Aws::LicenseManager
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute license_asset_group_arn
+    #   <p>Amazon Resource Name (ARN) of the license asset group.</p>
+    #   @return [String]
+    class GetLicenseAssetGroupRequest < Struct.new(
+      nil,
+      :license_asset_group_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute license_asset_group
+    #   <p>License asset group.</p>
+    #   @return [Types::LicenseAssetGroup]
+    class GetLicenseAssetGroupResponse < Struct.new(
+      nil,
+      :license_asset_group,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute license_asset_ruleset_arn
+    #   <p>Amazon Resource Name (ARN) of the license asset ruleset.</p>
+    #   @return [String]
+    class GetLicenseAssetRulesetRequest < Struct.new(
+      nil,
+      :license_asset_ruleset_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute license_asset_ruleset
+    #   <p>License asset ruleset.</p>
+    #   @return [Types::LicenseAssetRuleset]
+    class GetLicenseAssetRulesetResponse < Struct.new(
+      nil,
+      :license_asset_ruleset,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute license_configuration_arn
     #   <p>Amazon Resource Name (ARN) of the license configuration.</p>
     #   @return [String]
@@ -1219,6 +1455,9 @@ module Aws::LicenseManager
     # @!attribute disassociate_when_not_found
     #   <p>When true, disassociates a resource when software is uninstalled.</p>
     #   @return [Boolean]
+    # @!attribute license_expiry
+    #   <p>License Expiry.</p>
+    #   @return [Integer]
     class GetLicenseConfigurationResponse < Struct.new(
       nil,
       :license_configuration_id,
@@ -1238,6 +1477,7 @@ module Aws::LicenseManager
       :product_information_list,
       :automated_discovery_information,
       :disassociate_when_not_found,
+      :license_expiry,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1389,9 +1629,18 @@ module Aws::LicenseManager
     #   <p>Indicates whether cross-account discovery is enabled.</p>
     #   @return [Boolean]
     # @!attribute license_manager_resource_share_arn
-    #   <p>Amazon Resource Name (ARN) of the resource share. The License Manager management account 
+    #   <p>Amazon Resource Name (ARN) of the resource share. The License Manager management account
     #            provides member accounts with access to this share.</p>
     #   @return [String]
+    # @!attribute cross_region_discovery_home_region
+    #   <p>Cross region discovery home region.</p>
+    #   @return [String]
+    # @!attribute cross_region_discovery_source_regions
+    #   <p>Cross region discovery source regions.</p>
+    #   @return [Array<String>]
+    # @!attribute service_status
+    #   <p>Service status.</p>
+    #   @return [Types::ServiceStatus]
     class GetServiceSettingsResponse < Struct.new(
       nil,
       :s3_bucket_arn,
@@ -1399,6 +1648,9 @@ module Aws::LicenseManager
       :organization_configuration,
       :enable_cross_accounts_discovery,
       :license_manager_resource_share_arn,
+      :cross_region_discovery_home_region,
+      :cross_region_discovery_source_regions,
+      :service_status,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1524,6 +1776,30 @@ module Aws::LicenseManager
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Instance rule statement.</p>
+    # @!attribute and_rule_statement
+    #   <p>AND rule statement.</p>
+    #   @return [Types::AndRuleStatement]
+    # @!attribute or_rule_statement
+    #   <p>OR rule statement.</p>
+    #   @return [Types::OrRuleStatement]
+    # @!attribute matching_rule_statement
+    #   <p>Matching rule statement.</p>
+    #   @return [Types::MatchingRuleStatement]
+    # @!attribute script_rule_statement
+    #   <p>Script rule statement.</p>
+    #   @return [Types::ScriptRuleStatement]
+    class InstanceRuleStatement < Struct.new(
+      nil,
+      :and_rule_statement,
+      :or_rule_statement,
+      :matching_rule_statement,
+      :script_rule_statement,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>One or more parameter values are not valid.</p>
     # @!attribute message
     #   @return [String]
@@ -1573,7 +1849,7 @@ module Aws::LicenseManager
     #   <p>Issuer name.</p>
     #   @return [String]
     # @!attribute sign_key
-    #   <p>Asymmetric KMS key from Key Management Service. The KMS key must have a key usage of sign and verify, 
+    #   <p>Asymmetric KMS key from Key Management Service. The KMS key must have a key usage of sign and verify,
     #            and support the RSASSA-PSS SHA-256 signing algorithm.</p>
     #   @return [String]
     class Issuer < Struct.new(
@@ -1590,7 +1866,7 @@ module Aws::LicenseManager
     #   <p>Issuer name.</p>
     #   @return [String]
     # @!attribute sign_key
-    #   <p>Asymmetric KMS key from Key Management Service. The KMS key must have a key usage of sign and verify, 
+    #   <p>Asymmetric KMS key from Key Management Service. The KMS key must have a key usage of sign and verify,
     #            and support the RSASSA-PSS SHA-256 signing algorithm.</p>
     #   @return [String]
     # @!attribute key_fingerprint
@@ -1670,9 +1946,121 @@ module Aws::LicenseManager
       include ::Smithy::Schema::Structure
     end
 
+    # <p>License asset group.</p>
+    # @!attribute name
+    #   <p>License asset group name.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>License asset group description.</p>
+    #   @return [String]
+    # @!attribute license_asset_group_configurations
+    #   <p>License asset group configurations.</p>
+    #   @return [Array<Types::LicenseAssetGroupConfiguration>]
+    # @!attribute associated_license_asset_ruleset_ar_ns
+    #   <p>ARNs of associated license asset rulesets.</p>
+    #   @return [Array<String>]
+    # @!attribute properties
+    #   <p>License asset group properties.</p>
+    #   @return [Array<Types::LicenseAssetGroupProperty>]
+    # @!attribute license_asset_group_arn
+    #   <p>Amazon Resource Name (ARN) of the license asset group.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>License asset group status.</p>
+    #   @return [String]
+    # @!attribute status_message
+    #   <p>License asset group status message.</p>
+    #   @return [String]
+    # @!attribute latest_usage_analysis_time
+    #   <p>Latest usage analysis time.</p>
+    #   @return [Time]
+    # @!attribute latest_resource_discovery_time
+    #   <p>Latest resource discovery time.</p>
+    #   @return [Time]
+    class LicenseAssetGroup < Struct.new(
+      nil,
+      :name,
+      :description,
+      :license_asset_group_configurations,
+      :associated_license_asset_ruleset_ar_ns,
+      :properties,
+      :license_asset_group_arn,
+      :status,
+      :status_message,
+      :latest_usage_analysis_time,
+      :latest_resource_discovery_time,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>License asset group configuration.</p>
+    # @!attribute usage_dimension
+    #   <p>License Asset Group Configuration Usage dimension.</p>
+    #   @return [String]
+    class LicenseAssetGroupConfiguration < Struct.new(
+      nil,
+      :usage_dimension,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>License asset group property.</p>
+    # @!attribute key
+    #   <p>Property key.</p>
+    #   @return [String]
+    # @!attribute value
+    #   <p>Property value.</p>
+    #   @return [String]
+    class LicenseAssetGroupProperty < Struct.new(
+      nil,
+      :key,
+      :value,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>License asset rule.</p>
+    # @!attribute rule_statement
+    #   <p>Rule statement.</p>
+    #   @return [Types::RuleStatement]
+    class LicenseAssetRule < Struct.new(
+      nil,
+      :rule_statement,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>License asset ruleset.</p>
+    # @!attribute name
+    #   <p>License asset ruleset name.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>License asset ruleset description.</p>
+    #   @return [String]
+    # @!attribute rules
+    #   <p>License asset rules.</p>
+    #   @return [Array<Types::LicenseAssetRule>]
+    # @!attribute license_asset_ruleset_arn
+    #   <p>Amazon Resource Name (ARN) of the license asset ruleset.</p>
+    #   @return [String]
+    class LicenseAssetRuleset < Struct.new(
+      nil,
+      :name,
+      :description,
+      :rules,
+      :license_asset_ruleset_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>A license configuration is an abstraction of a customer license agreement that can be
     #          consumed and enforced by License Manager. Components include specifications for the license
-    #          type (licensing by instance, socket, CPU, or vCPU), allowed tenancy (shared tenancy, 
+    #          type (licensing by instance, socket, CPU, or vCPU), allowed tenancy (shared tenancy,
     #          Dedicated Instance, Dedicated Host, or all of these), host affinity (how long a VM
     #          must be associated with a host), and the number of licenses purchased and used.</p>
     # @!attribute license_configuration_id
@@ -1723,6 +2111,9 @@ module Aws::LicenseManager
     # @!attribute automated_discovery_information
     #   <p>Automated discovery information.</p>
     #   @return [Types::AutomatedDiscoveryInformation]
+    # @!attribute license_expiry
+    #   <p>License configuration expiry time in Unix timestamp format.</p>
+    #   @return [Integer]
     class LicenseConfiguration < Struct.new(
       nil,
       :license_configuration_id,
@@ -1741,6 +2132,7 @@ module Aws::LicenseManager
       :managed_resource_summary_list,
       :product_information_list,
       :automated_discovery_information,
+      :license_expiry,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1769,6 +2161,26 @@ module Aws::LicenseManager
       :resource_owner_id,
       :association_time,
       :ami_association_scope,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>License configuration rule statement.</p>
+    # @!attribute and_rule_statement
+    #   <p>AND rule statement.</p>
+    #   @return [Types::AndRuleStatement]
+    # @!attribute or_rule_statement
+    #   <p>OR rule statement.</p>
+    #   @return [Types::OrRuleStatement]
+    # @!attribute matching_rule_statement
+    #   <p>Matching rule statement.</p>
+    #   @return [Types::MatchingRuleStatement]
+    class LicenseConfigurationRuleStatement < Struct.new(
+      nil,
+      :and_rule_statement,
+      :or_rule_statement,
+      :matching_rule_statement,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1909,6 +2321,26 @@ module Aws::LicenseManager
       include ::Smithy::Schema::Structure
     end
 
+    # <p>License rule statement.</p>
+    # @!attribute and_rule_statement
+    #   <p>AND rule statement.</p>
+    #   @return [Types::AndRuleStatement]
+    # @!attribute or_rule_statement
+    #   <p>OR rule statement.</p>
+    #   @return [Types::OrRuleStatement]
+    # @!attribute matching_rule_statement
+    #   <p>Matching rule statement.</p>
+    #   @return [Types::MatchingRuleStatement]
+    class LicenseRuleStatement < Struct.new(
+      nil,
+      :and_rule_statement,
+      :or_rule_statement,
+      :matching_rule_statement,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Details for associating a license configuration with a resource.</p>
     # @!attribute license_configuration_arn
     #   <p>Amazon Resource Name (ARN) of the license configuration.</p>
@@ -1943,6 +2375,44 @@ module Aws::LicenseManager
     class LicenseUsageException < Struct.new(
       nil,
       :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute license_asset_group_arn
+    #   <p>Amazon Resource Name (ARN) of the license asset group.</p>
+    #   @return [String]
+    # @!attribute asset_type
+    #   <p>Asset type. The possible values are <code>Instance</code> | <code>License</code> | <code>LicenseConfiguration</code>.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>Maximum number of results to return in a single call.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>Token for the next set of results.</p>
+    #   @return [String]
+    class ListAssetsForLicenseAssetGroupRequest < Struct.new(
+      nil,
+      :license_asset_group_arn,
+      :asset_type,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute assets
+    #   <p>Assets.</p>
+    #   @return [Array<Types::Asset>]
+    # @!attribute next_token
+    #   <p>Token for the next set of results.</p>
+    #   @return [String]
+    class ListAssetsForLicenseAssetGroupResponse < Struct.new(
+      nil,
+      :assets,
+      :next_token,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2075,6 +2545,130 @@ module Aws::LicenseManager
     class ListFailuresForLicenseConfigurationOperationsResponse < Struct.new(
       nil,
       :license_operation_failure_list,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute filters
+    #   <p>Filters to scope the results. Following filters are supported</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>LicenseAssetRulesetArn</code>
+    #                  </p>
+    #               </li>
+    #            </ul>
+    #   @return [Array<Types::Filter>]
+    # @!attribute max_results
+    #   <p>Maximum number of results to return in a single call.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>Token for the next set of results.</p>
+    #   @return [String]
+    class ListLicenseAssetGroupsRequest < Struct.new(
+      nil,
+      :filters,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute license_asset_groups
+    #   <p>License asset groups.</p>
+    #   @return [Array<Types::LicenseAssetGroup>]
+    # @!attribute next_token
+    #   <p>Token for the next set of results.</p>
+    #   @return [String]
+    class ListLicenseAssetGroupsResponse < Struct.new(
+      nil,
+      :license_asset_groups,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute filters
+    #   <p>Filters to scope the results. Following filters are supported</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>Name</code>
+    #                  </p>
+    #               </li>
+    #            </ul>
+    #   @return [Array<Types::Filter>]
+    # @!attribute show_aws_managed_license_asset_rulesets
+    #   <p>Specifies whether to show License Manager managed license asset rulesets.</p>
+    #   @return [Boolean]
+    # @!attribute max_results
+    #   <p>Maximum number of results to return in a single call.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>Token for the next set of results.</p>
+    #   @return [String]
+    class ListLicenseAssetRulesetsRequest < Struct.new(
+      nil,
+      :filters,
+      :show_aws_managed_license_asset_rulesets,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute license_asset_rulesets
+    #   <p>License asset rulesets.</p>
+    #   @return [Array<Types::LicenseAssetRuleset>]
+    # @!attribute next_token
+    #   <p>Token for the next set of results.</p>
+    #   @return [String]
+    class ListLicenseAssetRulesetsResponse < Struct.new(
+      nil,
+      :license_asset_rulesets,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute license_configuration_arns
+    #   <p>License configuration ARNs.</p>
+    #   @return [Array<String>]
+    # @!attribute max_results
+    #   <p>Maximum number of results to return in a single call.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>Token for the next set of results.</p>
+    #   @return [String]
+    # @!attribute filters
+    #   <p>Filters to scope the results.</p>
+    #   @return [Array<Types::Filter>]
+    class ListLicenseConfigurationsForOrganizationRequest < Struct.new(
+      nil,
+      :license_configuration_arns,
+      :max_results,
+      :next_token,
+      :filters,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute license_configurations
+    #   <p>License configurations.</p>
+    #   @return [Array<Types::LicenseConfiguration>]
+    # @!attribute next_token
+    #   <p>Token for the next set of results.</p>
+    #   @return [String]
+    class ListLicenseConfigurationsForOrganizationResponse < Struct.new(
+      nil,
+      :license_configurations,
       :next_token,
       keyword_init: true
     )
@@ -2583,16 +3177,16 @@ module Aws::LicenseManager
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>application_name</code> - The name of the application. 
+    #                     <code>application_name</code> - The name of the application.
     #                  Logical operators are <code>EQUALS</code> | <code>BEGINS_WITH</code>.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>license_included</code> - The type of license included. 
+    #                     <code>license_included</code> - The type of license included.
     #                  Logical operators are <code>EQUALS</code> | <code>NOT_EQUALS</code>.
-    #                  Possible values are <code>sql-server-enterprise</code> | 
-    #                  <code>sql-server-standard</code> | 
-    #                  <code>sql-server-web</code> |  
+    #                  Possible values are <code>sql-server-enterprise</code> |
+    #                  <code>sql-server-standard</code> |
+    #                  <code>sql-server-web</code> |
     #                  <code>windows-server-datacenter</code>.</p>
     #               </li>
     #               <li>
@@ -2602,12 +3196,12 @@ module Aws::LicenseManager
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>resource_id</code> - The ID of the resource. 
+    #                     <code>resource_id</code> - The ID of the resource.
     #                  Logical operators are <code>EQUALS</code> | <code>NOT_EQUALS</code>.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>tag:<key></code> - The key/value combination of a tag assigned 
+    #                     <code>tag:<key></code> - The key/value combination of a tag assigned
     #                  to the resource. Logical operators are <code>EQUALS</code> (single account) or
     #                  <code>EQUALS</code> | <code>NOT_EQUALS</code> (cross account).</p>
     #               </li>
@@ -2724,7 +3318,7 @@ module Aws::LicenseManager
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>resourceType</code> - The resource type (<code>EC2_INSTANCE</code> | 
+    #                     <code>resourceType</code> - The resource type (<code>EC2_INSTANCE</code> |
     #               	<code>EC2_HOST</code> | <code>EC2_AMI</code> | <code>SYSTEMS_MANAGER_MANAGED_INSTANCE</code>).</p>
     #               </li>
     #               <li>
@@ -2770,6 +3364,146 @@ module Aws::LicenseManager
       nil,
       :resource_type,
       :association_count,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Matching rule statement.</p>
+    # @!attribute key_to_match
+    #   <p>Key to match.</p>
+    #            <p>The following keys and are supported when the RuleStatement type
+    #            is <code>Instance</code>:
+    #         </p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>Platform</code> - The name of the platform.
+    #                  Logical operators are <code>EQUALS</code> and <code>NOT_EQUALS</code>.
+    #               </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>EC2BillingProduct</code> - The billing product code.
+    #                  Logical operators are <code>EQUALS</code> and <code>NOT_EQUALS</code>.
+    #                  Possible values are: <code>windows-server-enterprise</code> |
+    #                  <code>windows-byol</code> |
+    #                  <code>rhel</code> |
+    #                  <code>rhel-byol</code> |
+    #                  <code>rhel-high-availability</code> |
+    #                  <code>ubuntu-pro</code> |
+    #                  <code>suse-linux</code> |
+    #                  <code>sql-server-standard</code> |
+    #                  <code>sql-server-enterprise</code>.
+    #               </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>MarketPlaceProductCode</code> - The Marketplace product code.
+    #                  Logical operators are <code>EQUALS</code> and <code>NOT_EQUALS</code>.
+    #               </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>AMIId</code> - The ID of the AMI.
+    #                  Logical operators are <code>EQUALS</code> and <code>NOT_EQUALS</code>.
+    #               </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>InstanceType</code> - The instance type.
+    #                  Logical operators are <code>EQUALS</code> and <code>NOT_EQUALS</code>.
+    #               </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>InstanceId</code> - The ID of the instance.
+    #                  Logical operators are <code>EQUALS</code> and <code>NOT_EQUALS</code>.
+    #               </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>HostId</code> - The ID of the host.
+    #                  Logical operators are <code>EQUALS</code> and <code>NOT_EQUALS</code>.
+    #               </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>AccountId</code> - The ID of the account.
+    #                  Logical operators are <code>EQUALS</code> and <code>NOT_EQUALS</code>.
+    #               </p>
+    #               </li>
+    #            </ul>
+    #            <p>The following keys and are supported when the RuleStatement type
+    #            is <code>License</code>:
+    #         </p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>LicenseArn</code> - The ARN of a Managed Entitlement License.
+    #                  Logical operators are <code>EQUALS</code> and <code>NOT_EQUALS</code>.
+    #               </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ProductSKU</code> - The productSKU of the license.
+    #                  Logical operators are <code>EQUALS</code> and <code>NOT_EQUALS</code>.
+    #               </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>Issuer</code> - The issuer of the license.
+    #                  Logical operators are <code>EQUALS</code> and <code>NOT_EQUALS</code>.
+    #               </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>Beneficiary</code> - The beneficiary of the license.
+    #                  Logical operators are <code>EQUALS</code> and <code>NOT_EQUALS</code>.
+    #               </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>LicenseStatus</code> - The status of the license.
+    #                  Logical operators are <code>EQUALS</code> and <code>NOT_EQUALS</code>.
+    #               </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>HomeRegion</code> - The home region of the license.
+    #                  Logical operators are <code>EQUALS</code> and <code>NOT_EQUALS</code>.
+    #               </p>
+    #               </li>
+    #            </ul>
+    #            <p>The following keys and are supported when the RuleStatement type
+    #            is <code>License Configuration</code>:
+    #         </p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>LicenseConfigurationArn</code> - The ARN of a self-managed license configuration.
+    #                  Logical operators are <code>EQUALS</code> and <code>NOT_EQUALS</code>.
+    #               </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>AccountId</code> - The account of the license configuration.
+    #                  Logical operators are <code>EQUALS</code> and <code>NOT_EQUALS</code>.
+    #               </p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute constraint
+    #   <p>Constraint.</p>
+    #   @return [String]
+    # @!attribute value_to_match
+    #   <p>Value to match.</p>
+    #   @return [Array<String>]
+    class MatchingRuleStatement < Struct.new(
+      nil,
+      :key_to_match,
+      :constraint,
+      :value_to_match,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2846,6 +3580,22 @@ module Aws::LicenseManager
       include ::Smithy::Schema::Structure
     end
 
+    # <p>OR rule statement.</p>
+    # @!attribute matching_rule_statements
+    #   <p>Matching rule statements.</p>
+    #   @return [Array<Types::MatchingRuleStatement>]
+    # @!attribute script_rule_statements
+    #   <p>Script rule statements.</p>
+    #   @return [Array<Types::ScriptRuleStatement>]
+    class OrRuleStatement < Struct.new(
+      nil,
+      :matching_rule_statements,
+      :script_rule_statements,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Configuration information for Organizations.</p>
     # @!attribute enable_integration
     #   <p>Enables Organizations integration.</p>
@@ -2886,7 +3636,7 @@ module Aws::LicenseManager
     # @!attribute product_information_filter_list
     #   <p>A Product information filter consists of a <code>ProductInformationFilterComparator</code> which is a logical operator, a <code>ProductInformationFilterName</code> which specifies the type of filter being declared, and a <code>ProductInformationFilterValue</code> that specifies the value to filter on. </p>
     #            <p>Accepted values for <code>ProductInformationFilterName</code> are listed here along with descriptions and valid options for <code>ProductInformationFilterComparator</code>. </p>
-    #            <p>The following filters and are supported when the resource type 
+    #            <p>The following filters and are supported when the resource type
     #            is <code>SSM_MANAGED</code>:</p>
     #            <ul>
     #               <li>
@@ -2928,9 +3678,9 @@ module Aws::LicenseManager
     #                  <p>
     #                     <code>License Included</code> - The type of license included.
     #                  Logical operators are <code>EQUALS</code> and <code>NOT_EQUALS</code>.
-    #                  Possible values are: <code>sql-server-enterprise</code> | 
-    #                  <code>sql-server-standard</code> | 
-    #                  <code>sql-server-web</code> |  
+    #                  Possible values are: <code>sql-server-enterprise</code> |
+    #                  <code>sql-server-standard</code> |
+    #                  <code>sql-server-web</code> |
     #                  <code>windows-server-datacenter</code>.</p>
     #               </li>
     #            </ul>
@@ -2941,17 +3691,17 @@ module Aws::LicenseManager
     #                  <p>
     #                     <code>Engine Edition</code> - The edition of the database engine.
     #                  Logical operator is <code>EQUALS</code>.
-    #                  Possible values are: <code>oracle-ee</code> | <code>oracle-se</code> | <code>oracle-se1</code> | <code>oracle-se2</code> 
+    #                  Possible values are: <code>oracle-ee</code> | <code>oracle-se</code> | <code>oracle-se1</code> | <code>oracle-se2</code>
     #               	| <code>db2-se</code> | <code>db2-ae</code>.</p>
     #               </li>
     #               <li>
     #                  <p>
     #                     <code>License Pack</code> - The license pack.
     #                  Logical operator is <code>EQUALS</code>.
-    #                  Possible values are: <code>data guard</code> | 
-    #                  <code>diagnostic pack sqlt</code> | 
-    #                  <code>tuning pack sqlt</code> | 
-    #                  <code>ols</code> | 
+    #                  Possible values are: <code>data guard</code> |
+    #                  <code>diagnostic pack sqlt</code> |
+    #                  <code>tuning pack sqlt</code> |
+    #                  <code>ols</code> |
     #                  <code>olap</code>.</p>
     #               </li>
     #            </ul>
@@ -3042,6 +3792,18 @@ module Aws::LicenseManager
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Status information for a specific region.</p>
+    # @!attribute status
+    #   <p>Status value for the region.</p>
+    #   @return [String]
+    class RegionStatus < Struct.new(
+      nil,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute grant_arn
     #   <p>Amazon Resource Name (ARN) of the grant.</p>
     #   @return [String]
@@ -3076,17 +3838,34 @@ module Aws::LicenseManager
     # @!attribute license_configuration_arns
     #   <p>Amazon Resource Name (ARN) of the license configuration that this generator reports on.</p>
     #   @return [Array<String>]
+    # @!attribute license_asset_group_arns
+    #   <p>Amazon Resource Names (ARNs) of the license asset groups to include in the report.</p>
+    #   @return [Array<String>]
+    # @!attribute report_start_date
+    #   <p>Start date for the report data collection period.</p>
+    #   @return [Time]
+    # @!attribute report_end_date
+    #   <p>End date for the report data collection period.</p>
+    #   @return [Time]
     class ReportContext < Struct.new(
       nil,
       :license_configuration_arns,
+      :license_asset_group_arns,
+      :report_start_date,
+      :report_end_date,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:license_configuration_arns] = [] unless options.key?(:license_configuration_arns)
+        super
+      end
     end
 
     # <p>Details about how frequently reports are generated.</p>
     # @!attribute value
-    #   <p>Number of times within the frequency period that a report is generated.  
+    #   <p>Number of times within the frequency period that a report is generated.
     #            The only supported value is <code>1</code>.</p>
     #   @return [Integer]
     # @!attribute period
@@ -3180,6 +3959,24 @@ module Aws::LicenseManager
     # @!attribute resource_owning_account_id
     #   <p>ID of the account that owns the resource.</p>
     #   @return [String]
+    # @!attribute marketplace_product_codes
+    #   <p>List of Marketplace product codes associated with the resource.</p>
+    #   @return [Array<String>]
+    # @!attribute usage_operation
+    #   <p>Usage operation value that corresponds to the license type for billing purposes.</p>
+    #   @return [String]
+    # @!attribute ami_id
+    #   <p>Amazon Machine Image (AMI) ID associated with the resource.</p>
+    #   @return [String]
+    # @!attribute host_id
+    #   <p>Dedicated Host ID where the resource is running.</p>
+    #   @return [String]
+    # @!attribute region
+    #   <p>Region where the resource is located.</p>
+    #   @return [String]
+    # @!attribute instance_type
+    #   <p>EC2 instance type of the resource.</p>
+    #   @return [String]
     class ResourceInventory < Struct.new(
       nil,
       :resource_id,
@@ -3188,6 +3985,12 @@ module Aws::LicenseManager
       :platform,
       :platform_version,
       :resource_owning_account_id,
+      :marketplace_product_codes,
+      :usage_operation,
+      :ami_id,
+      :host_id,
+      :region,
+      :instance_type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3215,6 +4018,26 @@ module Aws::LicenseManager
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Rule statement.</p>
+    # @!attribute license_configuration_rule_statement
+    #   <p>License configuration rule statement.</p>
+    #   @return [Types::LicenseConfigurationRuleStatement]
+    # @!attribute license_rule_statement
+    #   <p>License rule statement.</p>
+    #   @return [Types::LicenseRuleStatement]
+    # @!attribute instance_rule_statement
+    #   <p>Instance rule statement.</p>
+    #   @return [Types::InstanceRuleStatement]
+    class RuleStatement < Struct.new(
+      nil,
+      :license_configuration_rule_statement,
+      :license_rule_statement,
+      :instance_rule_statement,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Details of the S3 bucket that report generator reports are published to.</p>
     # @!attribute bucket
     #   <p>Name of the S3 bucket reports are published to.</p>
@@ -3231,12 +4054,44 @@ module Aws::LicenseManager
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Rule statement that uses a script to evaluate license asset conditions.</p>
+    # @!attribute key_to_match
+    #   <p>Key name to match against in the script rule evaluation.</p>
+    #   @return [String]
+    # @!attribute script
+    #   <p>Script code used to evaluate the rule condition.</p>
+    #   @return [String]
+    class ScriptRuleStatement < Struct.new(
+      nil,
+      :key_to_match,
+      :script,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The server experienced an internal error. Try again.</p>
     # @!attribute message
     #   @return [String]
     class ServerInternalException < Struct.new(
       nil,
       :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Overall service status information for License Manager.</p>
+    # @!attribute cross_account_discovery
+    #   <p>Status of cross-account discovery service.</p>
+    #   @return [Types::CrossAccountDiscoveryServiceStatus]
+    # @!attribute cross_region_discovery
+    #   <p>Status of cross-region discovery service.</p>
+    #   @return [Types::CrossRegionDiscoveryStatus]
+    class ServiceStatus < Struct.new(
+      nil,
+      :cross_account_discovery,
+      :cross_region_discovery,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3373,6 +4228,98 @@ module Aws::LicenseManager
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute name
+    #   <p>License asset group name.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>License asset group description.</p>
+    #   @return [String]
+    # @!attribute license_asset_group_configurations
+    #   <p>License asset group configurations.</p>
+    #   @return [Array<Types::LicenseAssetGroupConfiguration>]
+    # @!attribute associated_license_asset_ruleset_ar_ns
+    #   <p>ARNs of associated license asset rulesets.</p>
+    #   @return [Array<String>]
+    # @!attribute properties
+    #   <p>License asset group properties.</p>
+    #   @return [Array<Types::LicenseAssetGroupProperty>]
+    # @!attribute license_asset_group_arn
+    #   <p>Amazon Resource Name (ARN) of the license asset group.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>License asset group status. The possible values are <code>ACTIVE</code> | <code>DISABLED</code>.</p>
+    #   @return [String]
+    # @!attribute client_token
+    #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+    #   @return [String]
+    class UpdateLicenseAssetGroupRequest < Struct.new(
+      nil,
+      :name,
+      :description,
+      :license_asset_group_configurations,
+      :associated_license_asset_ruleset_ar_ns,
+      :properties,
+      :license_asset_group_arn,
+      :status,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute license_asset_group_arn
+    #   <p>Amazon Resource Name (ARN) of the license asset group.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>License asset group status.</p>
+    #   @return [String]
+    class UpdateLicenseAssetGroupResponse < Struct.new(
+      nil,
+      :license_asset_group_arn,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute name
+    #   <p>License asset ruleset name.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>License asset ruleset description.</p>
+    #   @return [String]
+    # @!attribute rules
+    #   <p>License asset rules.</p>
+    #   @return [Array<Types::LicenseAssetRule>]
+    # @!attribute license_asset_ruleset_arn
+    #   <p>Amazon Resource Name (ARN) of the license asset ruleset.</p>
+    #   @return [String]
+    # @!attribute client_token
+    #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+    #   @return [String]
+    class UpdateLicenseAssetRulesetRequest < Struct.new(
+      nil,
+      :name,
+      :description,
+      :rules,
+      :license_asset_ruleset_arn,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute license_asset_ruleset_arn
+    #   <p>Amazon Resource Name (ARN) of the license asset ruleset.</p>
+    #   @return [String]
+    class UpdateLicenseAssetRulesetResponse < Struct.new(
+      nil,
+      :license_asset_ruleset_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute license_configuration_arn
     #   <p>Amazon Resource Name (ARN) of the license configuration.</p>
     #   @return [String]
@@ -3401,6 +4348,9 @@ module Aws::LicenseManager
     # @!attribute disassociate_when_not_found
     #   <p>When true, disassociates a resource when software is uninstalled.</p>
     #   @return [Boolean]
+    # @!attribute license_expiry
+    #   <p>License configuration expiry time.</p>
+    #   @return [Integer]
     class UpdateLicenseConfigurationRequest < Struct.new(
       nil,
       :license_configuration_arn,
@@ -3412,6 +4362,7 @@ module Aws::LicenseManager
       :description,
       :product_information_list,
       :disassociate_when_not_found,
+      :license_expiry,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3512,12 +4463,16 @@ module Aws::LicenseManager
     # @!attribute enable_cross_accounts_discovery
     #   <p>Activates cross-account discovery.</p>
     #   @return [Boolean]
+    # @!attribute enabled_discovery_source_regions
+    #   <p>Cross region discovery enabled source regions.</p>
+    #   @return [Array<String>]
     class UpdateServiceSettingsRequest < Struct.new(
       nil,
       :s3_bucket_arn,
       :sns_topic_arn,
       :organization_configuration,
       :enable_cross_accounts_discovery,
+      :enabled_discovery_source_regions,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

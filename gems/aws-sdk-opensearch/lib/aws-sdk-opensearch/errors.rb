@@ -33,7 +33,9 @@ module Aws::OpenSearch
   # * {LimitExceededException}
   # * {ResourceAlreadyExistsException}
   # * {ResourceNotFoundException}
+  # * {ServiceQuotaExceededException}
   # * {SlotNotAvailableException}
+  # * {ThrottlingException}
   # * {ValidationException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
@@ -195,6 +197,20 @@ module Aws::OpenSearch
       end
     end
 
+    # <p>An exception for when a request would cause a service quota to be exceeded.</p>
+    class ServiceQuotaExceededException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::OpenSearch::Types::ServiceQuotaExceededException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      # <p>A description of the error.</p>
+      def message
+        @data[:message]
+      end
+    end
+
     # <p>An exception for attempting to schedule a domain action during an unavailable time slot.</p>
     class SlotNotAvailableException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
@@ -206,6 +222,20 @@ module Aws::OpenSearch
       # <p>Alternate time slots during which OpenSearch Service has available capacity to schedule a domain action.</p>
       def slot_suggestions
         @data[:slot_suggestions]
+      end
+
+      # <p>A description of the error.</p>
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>The request was denied due to request throttling. Reduce the frequency of your requests and try again.</p>
+    class ThrottlingException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::OpenSearch::Types::ThrottlingException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
       end
 
       # <p>A description of the error.</p>

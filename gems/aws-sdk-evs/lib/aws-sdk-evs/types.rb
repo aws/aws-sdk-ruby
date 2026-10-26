@@ -6,6 +6,22 @@ module Aws::Evs
   # This module contains the types returned by client operations.
   module Types
 
+    # <p>A regional account-level EVS setting, represented as a name and value pair.</p>
+    # @!attribute name
+    #   <p>The name of the EVS setting. Valid values are:</p> <ul> <li> <p> <code>vcfPortedCoreCount</code> (type: numeric string) - The total number of VCF license cores ported to Amazon EVS for the account in that Region. The maximum value is 1,000,000 cores. This setting value is shared with Broadcom for record-keeping.</p> </li> </ul>
+    #   @return [String]
+    # @!attribute value
+    #   <p>The value of the EVS setting.</p>
+    #   @return [String]
+    class AccountSetting < Struct.new(
+      nil,
+      :name,
+      :value,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute client_token
     #   <note> <p>This parameter is not used in Amazon EVS currently. If you supply input for this parameter, it will have no effect.</p> </note> <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the environment creation request. If you do not specify a client token, a randomly generated token is used for the request to ensure idempotency.</p>
     #   @return [String]
@@ -42,7 +58,10 @@ module Aws::Evs
 
     # <p>A check on the environment to identify environment health and validate VMware VCF licensing compliance.</p>
     # @!attribute type
-    #   <p>The check type. Amazon EVS performs the following checks.</p> <ul> <li> <p> <code>KEY_REUSE</code>: checks that the VCF license key is not used by another Amazon EVS environment. This check fails if a used license is added to the environment.</p> </li> <li> <p> <code>KEY_COVERAGE</code>: checks that your VCF license key allocates sufficient vCPU cores for all deployed hosts. The check fails when any assigned hosts in the EVS environment are not covered by license keys, or when any unassigned hosts cannot be covered by available vCPU cores in keys.</p> </li> <li> <p> <code>REACHABILITY</code>: checks that the Amazon EVS control plane has a persistent connection to SDDC Manager. If Amazon EVS cannot reach the environment, this check fails.</p> </li> <li> <p> <code>HOST_COUNT</code>: Checks that your environment has a minimum of 4 hosts, which is a requirement for VCF 5.2.1.</p> <p>If this check fails, you will need to add hosts so that your environment meets this minimum requirement. Amazon EVS only supports environments with 4-16 hosts.</p> </li> </ul>
+    #   <p>The check type. Amazon EVS performs the following checks:</p> <ul> <li> <p> <code>KEY_REUSE</code>: Verifies that the VCF license key is not used by another Amazon EVS environment.</p> </li> <li> <p> <code>KEY_COVERAGE</code>: Verifies that the VCF license key allocates sufficient vCPU cores for all deployed hosts.</p> </li> <li> <p> <code>REACHABILITY</code>: Verifies that the Amazon EVS control plane has a persistent connection to SDDC Manager.</p> </li> <li> <p> <code>HOST_COUNT</code>: Verifies that the environment meets the minimum host count.</p> </li> <li> <p> <code>VCENTER_REACHABILITY</code>: Verifies vCenter Server reachability through the vCenter connector.</p> </li> <li> <p> <code>VCENTER_VM_SYNC</code>: Verifies that the vCenter connector can synchronize VM inventory from vCenter Server.</p> </li> <li> <p> <code>VCENTER_VM_EVENT</code>: Verifies that the vCenter connector can receive VM lifecycle events from vCenter Server.</p> </li> <li> <p> <code>OPERATIONS_MANAGER_REACHABILITY</code>: Verifies Operations Manager reachability through the Operations Manager connector.</p> </li> <li> <p> <code>SDDC_MANAGER_REACHABILITY</code>: Verifies SDDC Manager reachability through the SDDC Manager connector.</p> </li> <li> <p> <code>SDDC_MANAGER_HOST_COUNT</code>: Verifies that the host count reported by SDDC Manager meets Amazon EVS minimum requirements.</p> </li> <li> <p> <code>SDDC_MANAGER_KEY_COVERAGE</code>: Verifies that the VCF license key configured in SDDC Manager covers all deployed hosts.</p> </li> <li> <p> <code>SDDC_MANAGER_KEY_REUSE</code>: Verifies that the VCF license key configured in SDDC Manager is not used by another Amazon EVS environment.</p> </li> <li> <p> <code>CONNECTOR_HEALTH</code>: Aggregate health across all connectors in the environment.</p> </li> </ul>
+    #   @return [String]
+    # @!attribute id
+    #   <p>A unique ID for the check.</p>
     #   @return [String]
     # @!attribute result
     #   <p> The check result.</p>
@@ -53,6 +72,7 @@ module Aws::Evs
     class Check < Struct.new(
       nil,
       :type,
+      :id,
       :result,
       :impaired_since,
       keyword_init: true
@@ -60,13 +80,165 @@ module Aws::Evs
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The connectivity configuration for the environment. Amazon EVS requires that you specify two route server peer IDs. During environment creation, the route server endpoints peer with the NSX uplink VLAN for connectivity to the NSX overlay network.</p>
+    # <p>The connectivity configuration for the environment. Amazon EVS requires that you specify two route server peer IDs. During environment creation, the route server endpoints peer with the NSX uplink VLAN for connectivity to the NSX overlay network.</p> <note> <p>Not supported when <code>vcfVersion</code> is <code>SELF_DEPLOYED</code>.</p> </note>
     # @!attribute private_route_server_peerings
     #   <p>The unique IDs for private route server peers.</p>
     #   @return [Array<String>]
     class ConnectivityInfo < Struct.new(
       nil,
       :private_route_server_peerings,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>An object that represents a connector for an Amazon EVS environment. A connector establishes a connection to the given appliance type using the credentials stored in Amazon Web Services Secrets Manager.</p>
+    # @!attribute environment_id
+    #   <p>The unique ID of the environment that the connector belongs to.</p>
+    #   @return [String]
+    # @!attribute connector_id
+    #   <p>The unique ID of the connector.</p>
+    #   @return [String]
+    # @!attribute type
+    #   <p>The type of the connector.</p>
+    #   @return [String]
+    # @!attribute appliance_fqdn
+    #   <p>The fully qualified domain name (FQDN) of the VCF appliance that the connector connects to.</p>
+    #   @return [String]
+    # @!attribute secret_arn
+    #   <p>The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager secret that stores the credentials for the VCF appliance.</p>
+    #   @return [String]
+    # @!attribute state
+    #   <p>The state of the connector.</p>
+    #   @return [String]
+    # @!attribute state_details
+    #   <p>A detailed description of the connector state.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status of the connector.</p>
+    #   @return [String]
+    # @!attribute checks
+    #   <p>A list of checks that are run on the connector.</p>
+    #   @return [Array<Types::ConnectorCheck>]
+    # @!attribute created_at
+    #   <p>The date and time that the connector was created.</p>
+    #   @return [Time]
+    # @!attribute modified_at
+    #   <p>The date and time that the connector was modified.</p>
+    #   @return [Time]
+    class Connector < Struct.new(
+      nil,
+      :environment_id,
+      :connector_id,
+      :type,
+      :appliance_fqdn,
+      :secret_arn,
+      :state,
+      :state_details,
+      :status,
+      :checks,
+      :created_at,
+      :modified_at,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A check on a connector to identify connectivity health.</p>
+    # @!attribute type
+    #   <p>The check type.</p>
+    #   @return [String]
+    # @!attribute result
+    #   <p>The check result.</p>
+    #   @return [String]
+    # @!attribute last_check_attempt
+    #   <p>The date and time of the last check attempt.</p>
+    #   @return [Time]
+    # @!attribute impaired_since
+    #   <p>The time when connector health began to be impaired.</p>
+    #   @return [Time]
+    class ConnectorCheck < Struct.new(
+      nil,
+      :type,
+      :result,
+      :last_check_attempt,
+      :impaired_since,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute client_token
+    #   <note> <p>This parameter is not used in Amazon EVS currently. If you supply input for this parameter, it will have no effect.</p> </note> <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the entitlement creation request. If you do not specify a client token, a randomly generated token is used for the request to ensure idempotency.</p>
+    #   @return [String]
+    # @!attribute environment_id
+    #   <p>A unique ID for the environment to create the entitlement in.</p>
+    #   @return [String]
+    # @!attribute connector_id
+    #   <p>A unique ID for the connector associated with the entitlement.</p>
+    #   @return [String]
+    # @!attribute entitlement_type
+    #   <p>The type of entitlement to create.</p>
+    #   @return [String]
+    # @!attribute vm_ids
+    #   <p>The list of VMware vSphere virtual machine managed object IDs to create entitlements for.</p>
+    #   @return [Array<String>]
+    class CreateEntitlementRequest < Struct.new(
+      nil,
+      :client_token,
+      :environment_id,
+      :connector_id,
+      :entitlement_type,
+      :vm_ids,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute entitlements
+    #   <p>A list of the created entitlements.</p>
+    #   @return [Array<Types::VmEntitlement>]
+    class CreateEntitlementResponse < Struct.new(
+      nil,
+      :entitlements,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute client_token
+    #   <note> <p>This parameter is not used in Amazon EVS currently. If you supply input for this parameter, it will have no effect.</p> </note> <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the connector creation request. If you do not specify a client token, a randomly generated token is used for the request to ensure idempotency.</p>
+    #   @return [String]
+    # @!attribute environment_id
+    #   <p>A unique ID for the environment to create the connector in.</p>
+    #   @return [String]
+    # @!attribute type
+    #   <p>The type of connector to create.</p> <ul> <li> <p> <code>OPERATIONS_MANAGER</code>: Connector to an Operations Manager appliance. Required for VCF 9x environments.</p> </li> <li> <p> <code>SDDC_MANAGER</code>: Connector to an SDDC Manager appliance. Required for VCF 5.x environments.</p> </li> <li> <p> <code>VCENTER</code>: Connector to a vCenter Server appliance. Required for features that depend on vCenter, such as Windows Server license-included.</p> </li> </ul>
+    #   @return [String]
+    # @!attribute appliance_fqdn
+    #   <p>The fully qualified domain name (FQDN) of the VCF appliance that the connector targets.</p>
+    #   @return [String]
+    # @!attribute secret_identifier
+    #   <p>The ARN or name of the Amazon Web Services Secrets Manager secret that stores the credentials for the VCF appliance. <code>SDDC_MANAGER</code> requires an <code>apiKey</code> field; <code>OPERATIONS_MANAGER</code> and <code>VCENTER</code> require <code>username</code> and <code>password</code> fields.</p> <important> <p>Do not use credentials with Administrator privileges. We recommend using a service account with read-only permissions.</p> </important>
+    #   @return [String]
+    class CreateEnvironmentConnectorRequest < Struct.new(
+      nil,
+      :client_token,
+      :environment_id,
+      :type,
+      :appliance_fqdn,
+      :secret_identifier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute connector
+    #   <p>A description of the created connector.</p>
+    #   @return [Types::Connector]
+    class CreateEnvironmentConnectorResponse < Struct.new(
+      nil,
+      :connector,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -81,11 +253,15 @@ module Aws::Evs
     # @!attribute host
     #   <p>The host that is created and added to the environment.</p>
     #   @return [Types::HostInfoForCreate]
+    # @!attribute esx_version
+    #   <p>The ESX version to use for the host.</p>
+    #   @return [String]
     class CreateEnvironmentHostRequest < Struct.new(
       nil,
       :client_token,
       :environment_id,
       :host,
+      :esx_version,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -122,34 +298,34 @@ module Aws::Evs
     #   <p>The security group that controls communication between the Amazon EVS control plane and VPC. The default security group is used if a custom security group isn't specified.</p> <p>The security group should allow access to the following.</p> <ul> <li> <p>TCP/UDP access to the DNS servers</p> </li> <li> <p>HTTPS/SSH access to the host management VLAN subnet</p> </li> <li> <p>HTTPS/SSH access to the Management VM VLAN subnet</p> </li> </ul> <p>You should avoid modifying the security group rules after deployment, as this can break the persistent connection between the Amazon EVS control plane and VPC. This can cause future environment actions like adding or removing hosts to fail.</p>
     #   @return [Types::ServiceAccessSecurityGroups]
     # @!attribute vpc_id
-    #   <p>A unique ID for the VPC that the environment is deployed inside.</p> <p>Amazon EVS requires that all VPC subnets exist in a single Availability Zone in a Region where the service is available.</p> <p>The VPC that you specify must have a valid DHCP option set with domain name, at least two DNS servers, and an NTP server. These settings are used to configure your VCF appliances and hosts. The VPC cannot be used with any other deployed Amazon EVS environment. Amazon EVS does not provide multi-VPC support for environments at this time.</p> <p>Amazon EVS does not support the following Amazon Web Services networking options for NSX overlay connectivity: cross-Region VPC peering, Amazon S3 gateway endpoints, or Amazon Web Services Direct Connect virtual private gateway associations.</p> <note> <p>Ensure that you specify a VPC that is adequately sized to accommodate the {evws} subnets.</p> </note>
+    #   <p>A unique ID for the VPC that the environment is deployed inside.</p> <p>Amazon EVS requires that all VPC subnets exist in a single Availability Zone in a Region where the service is available.</p> <p>The VPC that you specify must have a valid DHCP option set with domain name, at least two DNS servers, and an NTP server. These settings are used to configure your VCF appliances and hosts. The VPC cannot be used with any other deployed Amazon EVS environment. Amazon EVS does not provide multi-VPC support for environments at this time.</p> <p>Amazon EVS does not support the following Amazon Web Services networking options for NSX overlay connectivity: cross-Region VPC peering, Amazon S3 gateway endpoints, or Amazon Web Services Direct Connect virtual private gateway associations.</p> <note> <p>Ensure that you specify a VPC that is adequately sized to accommodate the Amazon EVS subnets.</p> </note>
     #   @return [String]
     # @!attribute service_access_subnet_id
-    #   <p>The subnet that is used to establish connectivity between the Amazon EVS control plane and VPC. Amazon EVS uses this subnet to validate mandatory DNS records for your VCF appliances and hosts and create the environment.</p>
+    #   <p>The subnet that is used to establish connectivity between the Amazon EVS control plane and VPC. The Amazon EVS control plane uses this subnet to interface with your environment. This includes validating DNS records and enabling Amazon EVS Connectors.</p>
     #   @return [String]
     # @!attribute vcf_version
-    #   <p> The VCF version to use for the environment. Amazon EVS only supports VCF version 5.2.1 at this time.</p>
+    #   <p>The VCF version to use for the environment.</p> <ul> <li> <p> <code>SELF_DEPLOYED</code>: You install VCF yourself. The <code>licenseInfo</code>, <code>hosts</code>, <code>vcfHostnames</code>, <code>siteId</code>, and <code>connectivityInfo</code> parameters are not supported.</p> </li> <li> <p>Any other valid value: Amazon EVS installs and configures VCF for you in the version you specify.</p> </li> </ul>
     #   @return [String]
     # @!attribute terms_accepted
-    #   <p>Customer confirmation that the customer has purchased and will continue to maintain the required number of VCF software licenses to cover all physical processor cores in the Amazon EVS environment. Information about your VCF software in Amazon EVS will be shared with Broadcom to verify license compliance. Amazon EVS does not validate license keys. To validate license keys, visit the Broadcom support portal.</p>
+    #   <p>Confirmation that the customer has purchased and will continue to maintain the required number of VCF software licenses to cover all physical processor cores in the Amazon EVS environment. Information about your VCF software in Amazon EVS will be shared with Broadcom to verify license compliance. Amazon EVS does not validate license keys. To validate license keys, visit the Broadcom support portal.</p>
     #   @return [Boolean]
-    # @!attribute license_info
-    #   <p>The license information that Amazon EVS requires to create an environment. Amazon EVS requires two license keys: a VCF solution key and a vSAN license key. The VCF solution key must cover a minimum of 256 cores. The vSAN license key must provide at least 110 TiB of vSAN capacity.</p> <p>VCF licenses can be used for only one Amazon EVS environment. Amazon EVS does not support reuse of VCF licenses for multiple environments.</p> <p>VCF license information can be retrieved from the Broadcom portal.</p>
-    #   @return [Array<Types::LicenseInfo>]
     # @!attribute initial_vlans
     #   <p>The initial VLAN subnets for the Amazon EVS environment.</p> <note> <p>For each Amazon EVS VLAN subnet, you must specify a non-overlapping CIDR block. Amazon EVS VLAN subnets have a minimum CIDR block size of /28 and a maximum size of /24.</p> </note>
     #   @return [Types::InitialVlans]
-    # @!attribute hosts
-    #   <p>The ESXi hosts to add to the environment. Amazon EVS requires that you provide details for a minimum of 4 hosts during environment creation.</p> <p>For each host, you must provide the desired hostname, EC2 SSH keypair name, and EC2 instance type. Optionally, you can also provide a partition or cluster placement group to use, or use Amazon EC2 Dedicated Hosts.</p>
-    #   @return [Array<Types::HostInfoForCreate>]
     # @!attribute connectivity_info
-    #   <p> The connectivity configuration for the environment. Amazon EVS requires that you specify two route server peer IDs. During environment creation, the route server endpoints peer with the NSX edges over the NSX uplink subnet, providing BGP-based dynamic routing for overlay networks.</p>
+    #   <p>The connectivity configuration for the environment. Amazon EVS requires that you specify two route server peer IDs. During environment creation, the route server endpoints peer with the NSX edges over the NSX uplink subnet, providing BGP-based dynamic routing for overlay networks.</p> <note> <p>Not supported when <code>vcfVersion</code> is <code>SELF_DEPLOYED</code>.</p> </note>
     #   @return [Types::ConnectivityInfo]
+    # @!attribute license_info
+    #   <p>The license information that Amazon EVS requires to create an environment. Amazon EVS requires two license keys: a VCF solution key and a vSAN license key. The VCF solution key must meet minimum core requirements, and the vSAN license key must meet minimum capacity requirements for your selected instance type.</p> <p>For information about minimum license requirements, see <a href="https://docs.aws.amazon.com/evs/latest/userguide/vcf-license-mgmt.html">the VCF subscriptions section</a> in the <i>Amazon EVS User Guide</i>.</p> <p>VCF licenses can be used for only one Amazon EVS environment. Amazon EVS does not support reuse of VCF licenses for multiple environments.</p> <p>VCF license information can be retrieved from the Broadcom portal.</p> <note> <p>Not supported when <code>vcfVersion</code> is <code>SELF_DEPLOYED</code>.</p> </note>
+    #   @return [Array<Types::LicenseInfo>]
+    # @!attribute hosts
+    #   <p>The ESX hosts to add to the environment. For each host, provide the desired hostname, EC2 SSH keypair name, and EC2 instance type. Optionally, provide a partition or cluster placement group, or use Amazon EC2 Dedicated Hosts.</p> <note> <p>Not supported when <code>vcfVersion</code> is <code>SELF_DEPLOYED</code>. In that case, you can add hosts using <code>CreateEnvironmentHost</code> after the environment is created.</p> </note>
+    #   @return [Array<Types::HostInfoForCreate>]
     # @!attribute vcf_hostnames
-    #   <p>The DNS hostnames for the virtual machines that host the VCF management appliances. Amazon EVS requires that you provide DNS hostnames for the following appliances: vCenter, NSX Manager, SDDC Manager, and Cloud Builder.</p>
+    #   <p>The DNS hostnames for the virtual machines that host the VCF management appliances. Provide hostnames for vCenter, NSX Manager, SDDC Manager, and Cloud Builder.</p> <note> <p>Not supported when <code>vcfVersion</code> is <code>SELF_DEPLOYED</code>.</p> </note>
     #   @return [Types::VcfHostnames]
     # @!attribute site_id
-    #   <p>The Broadcom Site ID that is allocated to you as part of your electronic software delivery. This ID allows customer access to the Broadcom portal, and is provided to you by Broadcom at the close of your software contract or contract renewal. Amazon EVS uses the Broadcom Site ID that you provide to meet Broadcom VCF license usage reporting requirements for Amazon EVS.</p>
+    #   <p>The Broadcom Site ID that is allocated to you as part of your electronic software delivery. This ID allows customer access to the Broadcom portal, and is provided to you by Broadcom at the close of your software contract or contract renewal. Amazon EVS uses the Broadcom Site ID that you provide to meet Broadcom VCF license usage reporting requirements for Amazon EVS.</p> <note> <p>Not supported when <code>vcfVersion</code> is <code>SELF_DEPLOYED</code>.</p> </note>
     #   @return [String]
     class CreateEnvironmentRequest < Struct.new(
       nil,
@@ -162,10 +338,10 @@ module Aws::Evs
       :service_access_subnet_id,
       :vcf_version,
       :terms_accepted,
-      :license_info,
       :initial_vlans,
-      :hosts,
       :connectivity_info,
+      :license_info,
+      :hosts,
       :vcf_hostnames,
       :site_id,
       keyword_init: true
@@ -179,6 +355,78 @@ module Aws::Evs
     class CreateEnvironmentResponse < Struct.new(
       nil,
       :environment,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute client_token
+    #   <note> <p>This parameter is not used in Amazon EVS currently. If you supply input for this parameter, it will have no effect.</p> </note> <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the entitlement deletion request. If you do not specify a client token, a randomly generated token is used for the request to ensure idempotency.</p>
+    #   @return [String]
+    # @!attribute environment_id
+    #   <p>A unique ID for the environment that the entitlement belongs to.</p>
+    #   @return [String]
+    # @!attribute connector_id
+    #   <p>A unique ID for the connector associated with the entitlement.</p>
+    #   @return [String]
+    # @!attribute entitlement_type
+    #   <p>The type of entitlement to delete.</p>
+    #   @return [String]
+    # @!attribute vm_ids
+    #   <p>The list of VMware vSphere virtual machine managed object IDs to delete entitlements for.</p>
+    #   @return [Array<String>]
+    class DeleteEntitlementRequest < Struct.new(
+      nil,
+      :client_token,
+      :environment_id,
+      :connector_id,
+      :entitlement_type,
+      :vm_ids,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute entitlements
+    #   <p>A list of the deleted entitlements.</p>
+    #   @return [Array<Types::VmEntitlement>]
+    class DeleteEntitlementResponse < Struct.new(
+      nil,
+      :entitlements,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute client_token
+    #   <note> <p>This parameter is not used in Amazon EVS currently. If you supply input for this parameter, it will have no effect.</p> </note> <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the connector deletion request. If you do not specify a client token, a randomly generated token is used for the request to ensure idempotency.</p>
+    #   @return [String]
+    # @!attribute environment_id
+    #   <p>A unique ID for the environment that the connector belongs to.</p>
+    #   @return [String]
+    # @!attribute connector_id
+    #   <p>A unique ID for the connector to be deleted.</p>
+    #   @return [String]
+    class DeleteEnvironmentConnectorRequest < Struct.new(
+      nil,
+      :client_token,
+      :environment_id,
+      :connector_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute connector
+    #   <p>A description of the deleted connector.</p>
+    #   @return [Types::Connector]
+    # @!attribute environment_summary
+    #   <p>A summary of the environment that the connector was deleted from.</p>
+    #   @return [Types::EnvironmentSummary]
+    class DeleteEnvironmentConnectorResponse < Struct.new(
+      nil,
+      :connector,
+      :environment_summary,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -333,7 +581,7 @@ module Aws::Evs
     #   <p>Customer confirmation that the customer has purchased and will continue to maintain the required number of VCF software licenses to cover all physical processor cores in the Amazon EVS environment. Information about your VCF software in Amazon EVS will be shared with Broadcom to verify license compliance. Amazon EVS does not validate license keys. To validate license keys, visit the Broadcom support portal. </p>
     #   @return [Boolean]
     # @!attribute license_info
-    #   <p> The license information that Amazon EVS requires to create an environment. Amazon EVS requires two license keys: a VCF solution key and a vSAN license key. The VCF solution key must cover a minimum of 256 cores. The vSAN license key must provide at least 110 TiB of vSAN capacity.</p>
+    #   <p> The license information that Amazon EVS requires to create an environment. Amazon EVS requires two license keys: a VCF solution key and a vSAN license key. The VCF solution key must meet minimum core requirements, and the vSAN license key must meet minimum capacity requirements for your selected instance type.</p> <p>For information about minimum license requirements, see <a href="https://docs.aws.amazon.com/evs/latest/userguide/vcf-license-mgmt.html">the VCF subscriptions section</a> in the <i>Amazon EVS User Guide</i>.</p>
     #   @return [Array<Types::LicenseInfo>]
     # @!attribute site_id
     #   <p>The Broadcom Site ID that is associated with your Amazon EVS environment. Amazon EVS uses the Broadcom Site ID that you provide to meet Broadcom VCF license usage reporting requirements for Amazon EVS.</p>
@@ -342,7 +590,7 @@ module Aws::Evs
     #   <p>Reports impaired functionality that stems from issues internal to the environment, such as impaired reachability.</p>
     #   @return [String]
     # @!attribute checks
-    #   <p>A check on the environment to identify instance health and VMware VCF licensing issues.</p>
+    #   <p>A check on the environment to identify connector health.</p>
     #   @return [Array<Types::Check>]
     # @!attribute connectivity_info
     #   <p>The connectivity configuration for the environment. Amazon EVS requires that you specify two route server peer IDs. During environment creation, the route server endpoints peer with the NSX uplink VLAN for connectivity to the NSX overlay network.</p>
@@ -426,6 +674,72 @@ module Aws::Evs
       include ::Smithy::Schema::Structure
     end
 
+    # <p>An object that contains error details for an entitlement.</p>
+    # @!attribute error_code
+    #   <p>The error code.</p>
+    #   @return [String]
+    # @!attribute error_message
+    #   <p>The error message.</p>
+    #   @return [String]
+    class ErrorDetail < Struct.new(
+      nil,
+      :error_code,
+      :error_message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The request for the GetAccountSettings operation.</p>
+    class GetAccountSettingsRequest < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The response for the GetAccountSettings operation.</p>
+    # @!attribute settings
+    #   <p>A list of regional account-level EVS settings for the account. EVS settings that have never been explicitly set are omitted from the response.</p>
+    #   @return [Array<Types::AccountSetting>]
+    class GetAccountSettingsResponse < Struct.new(
+      nil,
+      :settings,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute environment_id
+    #   <p>The unique ID of the Amazon EVS environment to get the depot URL for.</p>
+    #   @return [String]
+    # @!attribute rotate
+    #   <p>Revokes the current authentication token and returns a new depot URL with a new token. Previously issued depot URLs will stop working within 5 minutes of rotation.</p>
+    #   @return [Boolean]
+    class GetDepotUrlRequest < Struct.new(
+      nil,
+      :environment_id,
+      :rotate,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute depot_url
+    #   <p>The URL for accessing the Amazon EVS Custom Addon depot. This URL includes the authentication token as a path component.</p>
+    #   @return [String]
+    # @!attribute token
+    #   <p>The authentication token for depot access. This token is included in the depot URL and is used to authenticate requests.</p>
+    #   @return [String]
+    class GetDepotUrlResponse < Struct.new(
+      nil,
+      :depot_url,
+      :token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute environment_id
     #   <p>A unique ID for the environment.</p>
     #   @return [String]
@@ -448,7 +762,29 @@ module Aws::Evs
       include ::Smithy::Schema::Structure
     end
 
-    # <p>An ESXi host that runs on an Amazon EC2 bare metal instance. Four hosts are created in an Amazon EVS environment during environment creation. You can add hosts to an environment using the <code>CreateEnvironmentHost</code> operation. Amazon EVS supports 4-16 hosts per environment.</p>
+    class GetVersionsRequest < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute vcf_versions
+    #   <p>A list of VCF versions with their availability status, default ESX version, and instance types.</p>
+    #   @return [Array<Types::VcfVersionInfo>]
+    # @!attribute instance_type_esx_versions
+    #   <p>A list of EC2 instance types and their available ESX versions.</p>
+    #   @return [Array<Types::InstanceTypeEsxVersionsInfo>]
+    class GetVersionsResponse < Struct.new(
+      nil,
+      :vcf_versions,
+      :instance_type_esx_versions,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>An ESX host that runs on an Amazon EC2 bare metal instance.</p>
     # @!attribute host_name
     #   <p>The DNS hostname of the host. DNS hostnames for hosts must be unique across Amazon EVS environments and within VCF.</p>
     #   @return [String]
@@ -546,7 +882,7 @@ module Aws::Evs
 
     # <p>The initial VLAN subnets for the environment. Amazon EVS VLAN subnets have a minimum CIDR block size of /28 and a maximum size of /24. Amazon EVS VLAN subnet CIDR blocks must not overlap with other subnets in the VPC.</p>
     # @!attribute vmk_management
-    #   <p> The host VMkernel management VLAN subnet. This VLAN subnet carries traffic for managing ESXi hosts and communicating with VMware vCenter Server.</p>
+    #   <p> The host VMkernel management VLAN subnet. This VLAN subnet carries traffic for managing ESX hosts and communicating with VMware vCenter Server.</p>
     #   @return [Types::InitialVlanInfo]
     # @!attribute vm_management
     #   <p>The VM management VLAN subnet. This VLAN subnet carries traffic for vSphere virtual machines.</p>
@@ -555,7 +891,7 @@ module Aws::Evs
     #   <p> The vMotion VLAN subnet. This VLAN subnet carries traffic for vSphere vMotion.</p>
     #   @return [Types::InitialVlanInfo]
     # @!attribute v_san
-    #   <p> The vSAN VLAN subnet. This VLAN subnet carries the communication between ESXi hosts to implement a vSAN shared storage pool.</p>
+    #   <p> The vSAN VLAN subnet. This VLAN subnet carries the communication between ESX hosts to implement a vSAN shared storage pool.</p>
     #   @return [Types::InitialVlanInfo]
     # @!attribute v_tep
     #   <p> The VTEP VLAN subnet. This VLAN subnet handles internal network traffic between virtual machines within a VCF instance.</p>
@@ -567,7 +903,7 @@ module Aws::Evs
     #   <p> The NSX uplink VLAN subnet. This VLAN subnet allows connectivity to the NSX overlay network.</p>
     #   @return [Types::InitialVlanInfo]
     # @!attribute hcx
-    #   <p>The HCX VLAN subnet. This VLAN subnet allows the HCX Interconnnect (IX) and HCX Network Extension (NE) to reach their peers and enable HCX Service Mesh creation.</p> <p>If you plan to use a public HCX VLAN subnet, the following requirements must be met:</p> <ul> <li> <p>Must have a /28 netmask and be allocated from the IPAM public pool. Required for HCX internet access configuration.</p> </li> <li> <p>The HCX public VLAN CIDR block must be added to the VPC as a secondary CIDR block.</p> </li> <li> <p>Must have at least three Elastic IP addresses to be allocated from the public IPAM pool for HCX components.</p> </li> </ul>
+    #   <p>The HCX VLAN subnet. This VLAN subnet allows the HCX Interconnnect (IX) and HCX Network Extension (NE) to reach their peers and enable HCX Service Mesh creation.</p> <p>If you plan to use a public HCX VLAN subnet, the following requirements must be met:</p> <ul> <li> <p>Must have a /28 netmask and be allocated from the IPAM public pool. Required for HCX internet access configuration.</p> </li> <li> <p>The HCX public VLAN CIDR block must be added to the VPC as a secondary CIDR block.</p> </li> <li> <p>Must have at least two Elastic IP addresses to be allocated from the public IPAM pool for HCX components.</p> </li> </ul>
     #   @return [Types::InitialVlanInfo]
     # @!attribute expansion_vlan1
     #   <p>An additional VLAN subnet that can be used to extend VCF capabilities once configured. For example, you can configure an expansion VLAN subnet to use NSX Federation for centralized management and synchronization of multiple NSX deployments across different locations.</p>
@@ -605,17 +941,79 @@ module Aws::Evs
       end
     end
 
+    # <p>Information about ESX versions offered for each EC2 instance type.</p>
+    # @!attribute instance_type
+    #   <p>The EC2 instance type.</p>
+    #   @return [String]
+    # @!attribute esx_versions
+    #   <p>The list of ESX versions offered for this instance type.</p>
+    #   @return [Array<String>]
+    class InstanceTypeEsxVersionsInfo < Struct.new(
+      nil,
+      :instance_type,
+      :esx_versions,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>An internal server error occurred. Retry your request.</p>
+    # @!attribute message
+    #   <p>Describes the error encountered.</p>
+    #   @return [String]
+    class InternalServerException < Struct.new(
+      nil,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p> The license information that Amazon EVS requires to create an environment. Amazon EVS requires two license keys: a VCF solution key and a vSAN license key.</p>
     # @!attribute solution_key
-    #   <p> The VCF solution key. This license unlocks VMware VCF product features, including vSphere, NSX, SDDC Manager, and vCenter Server. The VCF solution key must cover a minimum of 256 cores.</p>
+    #   <p> The VCF solution key. This license unlocks VMware VCF product features, including vSphere, NSX, SDDC Manager, and vCenter Server. The VCF solution key must meet the instance-type-specific minimum core requirements.</p>
     #   @return [String]
     # @!attribute vsan_key
-    #   <p> The VSAN license key. This license unlocks vSAN features. The vSAN license key must provide at least 110 TiB of vSAN capacity.</p>
+    #   <p> The VSAN license key. This license unlocks vSAN features. The vSAN license key must meet the instance-type-specific minimum capacity requirements.</p>
     #   @return [String]
     class LicenseInfo < Struct.new(
       nil,
       :solution_key,
       :vsan_key,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute next_token
+    #   <p>A unique pagination token for each page. If <code>nextToken</code> is returned, there are more results available. Make the call again using the returned token with all other arguments unchanged to retrieve the next page. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return. If you specify <code>MaxResults</code> in the request, the response includes information up to the limit specified.</p>
+    #   @return [Integer]
+    # @!attribute environment_id
+    #   <p>A unique ID for the environment.</p>
+    #   @return [String]
+    class ListEnvironmentConnectorsRequest < Struct.new(
+      nil,
+      :next_token,
+      :max_results,
+      :environment_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute next_token
+    #   <p>A unique pagination token for next page results. Make the call again using this token to retrieve the next page.</p>
+    #   @return [String]
+    # @!attribute connectors
+    #   <p>A list of connectors in the environment.</p>
+    #   @return [Array<Types::Connector>]
+    class ListEnvironmentConnectorsResponse < Struct.new(
+      nil,
+      :next_token,
+      :connectors,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -745,6 +1143,48 @@ module Aws::Evs
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute next_token
+    #   <p>A unique pagination token for each page. If <code>nextToken</code> is returned, there are more results available. Make the call again using the returned token with all other arguments unchanged to retrieve the next page. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return. If you specify <code>MaxResults</code> in the request, the response includes information up to the limit specified.</p>
+    #   @return [Integer]
+    # @!attribute environment_id
+    #   <p>A unique ID for the environment.</p>
+    #   @return [String]
+    # @!attribute connector_id
+    #   <p>A unique ID for the connector.</p>
+    #   @return [String]
+    # @!attribute entitlement_type
+    #   <p>The type of entitlement to list.</p>
+    #   @return [String]
+    class ListVmEntitlementsRequest < Struct.new(
+      nil,
+      :next_token,
+      :max_results,
+      :environment_id,
+      :connector_id,
+      :entitlement_type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute next_token
+    #   <p>A unique pagination token for next page results. Make the call again using this token to retrieve the next page.</p>
+    #   @return [String]
+    # @!attribute entitlements
+    #   <p>A list of entitlements for virtual machines in the environment.</p>
+    #   @return [Array<Types::VmEntitlement>]
+    class ListVmEntitlementsResponse < Struct.new(
+      nil,
+      :next_token,
+      :entitlements,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>An elastic network interface (ENI) that connects hosts to the VLAN subnets. Amazon EVS provisions two identically configured ENIs in the VMkernel management subnet during host creation. One ENI is active, and the other is in standby mode for automatic switchover during a failure scenario.</p>
     # @!attribute network_interface_id
     #   <p>The unique ID of the elastic network interface.</p>
@@ -752,6 +1192,30 @@ module Aws::Evs
     class NetworkInterface < Struct.new(
       nil,
       :network_interface_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The request for the PutAccountSettings operation.</p>
+    # @!attribute settings
+    #   <p>A list of regional account-level EVS settings to create or update. Only the settings included in this list are modified.</p>
+    #   @return [Array<Types::AccountSetting>]
+    class PutAccountSettingsRequest < Struct.new(
+      nil,
+      :settings,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The response for the PutAccountSettings operation.</p>
+    # @!attribute settings
+    #   <p>A list of regional account-level EVS settings, and their values, that were modified in this request.</p>
+    #   @return [Array<Types::AccountSetting>]
+    class PutAccountSettingsResponse < Struct.new(
+      nil,
+      :settings,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -847,7 +1311,7 @@ module Aws::Evs
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The operation couldn't be performed because the service is throttling requests. This exception is thrown when there are too many requests accepted concurrently from the service endpoint.</p>
+    # <p>The operation could not be performed because the service is throttling requests. This exception is thrown when the service endpoint receives too many concurrent requests.</p>
     # @!attribute message
     #   <p>Describes the error encountered.</p>
     #   @return [String]
@@ -897,6 +1361,44 @@ module Aws::Evs
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute client_token
+    #   <note> <p>This parameter is not used in Amazon EVS currently. If you supply input for this parameter, it will have no effect.</p> </note> <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the connector update request. If you do not specify a client token, a randomly generated token is used for the request to ensure idempotency.</p>
+    #   @return [String]
+    # @!attribute environment_id
+    #   <p>A unique ID for the environment that the connector belongs to.</p>
+    #   @return [String]
+    # @!attribute connector_id
+    #   <p>A unique ID for the connector to update.</p>
+    #   @return [String]
+    # @!attribute appliance_fqdn
+    #   <p>The new fully qualified domain name (FQDN) of the VCF appliance that the connector connects to.</p>
+    #   @return [String]
+    # @!attribute secret_identifier
+    #   <p>The new ARN or name of the Amazon Web Services Secrets Manager secret that stores the credentials for the VCF appliance.</p>
+    #   @return [String]
+    class UpdateEnvironmentConnectorRequest < Struct.new(
+      nil,
+      :client_token,
+      :environment_id,
+      :connector_id,
+      :appliance_fqdn,
+      :secret_identifier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute connector
+    #   <p>A description of the updated connector.</p>
+    #   @return [Types::Connector]
+    class UpdateEnvironmentConnectorResponse < Struct.new(
+      nil,
+      :connector,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The input fails to satisfy the specified constraints. You will see this exception if invalid inputs are provided for any of the Amazon EVS environment operations, or if a list operation is performed on an environment resource that is still initializing.</p>
     # @!attribute message
     #   <p>Describes the error encountered.</p>
@@ -933,12 +1435,12 @@ module Aws::Evs
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The DNS hostnames that Amazon EVS uses to install VMware vCenter Server, NSX, SDDC Manager, and Cloud Builder. Each hostname must be unique, and resolve to a domain name that you've registered in your DNS service of choice. Hostnames cannot be changed.</p> <p>VMware VCF requires the deployment of two NSX Edge nodes, and three NSX Manager virtual machines.</p>
+    # <p>The DNS hostnames that Amazon EVS uses to install VMware vCenter Server, NSX, SDDC Manager, and Cloud Builder. Each hostname must be unique, and resolve to a domain name that you've registered in your DNS service of choice. Hostnames cannot be changed.</p> <p>VMware VCF requires the deployment of two NSX Edge nodes, and three NSX Manager virtual machines.</p> <note> <p>Not supported when <code>vcfVersion</code> is <code>SELF_DEPLOYED</code>.</p> </note>
     # @!attribute v_center
     #   <p>The VMware vCenter hostname.</p>
     #   @return [String]
     # @!attribute nsx
-    #   <p>The VMware NSX hostname.</p>
+    #   <p>The VMware NSX Virtual IP (VIP) hostname.</p>
     #   @return [String]
     # @!attribute nsx_manager1
     #   <p>The hostname for the first VMware NSX Manager virtual machine (VM).</p>
@@ -972,6 +1474,30 @@ module Aws::Evs
       :nsx_edge2,
       :sddc_manager,
       :cloud_builder,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Information about a VCF versions provided by Amazon EVS, including its status, default ESX version, and EC2 instance types.</p>
+    # @!attribute vcf_version
+    #   <p>The VCF version number.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status for this VCF version. Valid values are:</p> <ul> <li> <p> <code>AVAILABLE</code> - This VCF version is available to you.</p> </li> <li> <p> <code>RESTRICTED</code> - This VCF version has limited availability.</p> </li> </ul> <note> <p> If the version you need shows RESTRICTED, and you require, check out <a href="https://docs.aws.amazon.com/evs/latest/userguide/versions-provided.html">VCF versions and EC2 instance types provided by Amazon EVS</a> for more information. </p> </note>
+    #   @return [String]
+    # @!attribute default_esx_version
+    #   <p>The default ESX version for this VCF version. It is based on Broadcom's Bill Of Materials (BOM).</p>
+    #   @return [String]
+    # @!attribute instance_types
+    #   <p>EC2 instance types provided by Amazon EVS for this VCF version for creating environments.</p>
+    #   @return [Array<String>]
+    class VcfVersionInfo < Struct.new(
+      nil,
+      :vcf_version,
+      :status,
+      :default_esx_version,
+      :instance_types,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1028,6 +1554,54 @@ module Aws::Evs
       :eip_associations,
       :is_public,
       :network_acl_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>An object that represents a Windows Server License entitlement for a virtual machine in an Amazon EVS environment.</p>
+    # @!attribute vm_id
+    #   <p>The unique ID of the virtual machine.</p>
+    #   @return [String]
+    # @!attribute environment_id
+    #   <p>The unique ID of the environment.</p>
+    #   @return [String]
+    # @!attribute connector_id
+    #   <p>The unique ID of the connector associated with the entitlement.</p>
+    #   @return [String]
+    # @!attribute vm_name
+    #   <p>The name of the virtual machine.</p>
+    #   @return [String]
+    # @!attribute type
+    #   <p>The type of entitlement.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status of the entitlement.</p>
+    #   @return [String]
+    # @!attribute last_synced_at
+    #   <p>The date and time that the entitlement was last synced.</p>
+    #   @return [Time]
+    # @!attribute started_at
+    #   <p>The date and time that the entitlement started.</p>
+    #   @return [Time]
+    # @!attribute stopped_at
+    #   <p>The date and time that the entitlement stopped.</p>
+    #   @return [Time]
+    # @!attribute error_detail
+    #   <p>The error details associated with the entitlement, if applicable.</p>
+    #   @return [Types::ErrorDetail]
+    class VmEntitlement < Struct.new(
+      nil,
+      :vm_id,
+      :environment_id,
+      :connector_id,
+      :vm_name,
+      :type,
+      :status,
+      :last_synced_at,
+      :started_at,
+      :stopped_at,
+      :error_detail,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

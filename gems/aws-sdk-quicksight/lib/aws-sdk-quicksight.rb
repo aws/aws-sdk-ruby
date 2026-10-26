@@ -11,11 +11,11 @@ Object.const_set('Aws', Module.new) unless Object.const_defined?('Aws')
 Aws.const_set('QuickSight', Module.new) unless Aws.const_defined?('QuickSight')
 
 # @title Amazon QuickSight
-# <fullname>Amazon QuickSight API Reference</fullname>
-#          <p>Amazon QuickSight is a fully managed, serverless business intelligence service for the
+# <fullname>Amazon Quick API Reference</fullname>
+#          <p>Amazon Quick Sight is a fully managed, serverless business intelligence service for the
 #             Amazon Web Services Cloud that makes it easy to extend data and insights to every user in your
 #             organization. This API reference contains documentation for a programming interface that
-#             you can use to manage Amazon QuickSight. </p>
+#             you can use to manage Amazon Quick Sight. </p>
 module Aws::QuickSight
   VERSION = '2.0.0.pre0'
 end

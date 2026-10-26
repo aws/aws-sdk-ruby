@@ -3,6 +3,13 @@ module Aws::MarketplaceAgreement
     class AccessDeniedException < Smithy::Client::ServiceError
       def request_id: () -> String?
       def message: () -> String?
+      def reason: () -> String?
+    end
+    class ConflictException < Smithy::Client::ServiceError
+      def request_id: () -> String?
+      def message: () -> String?
+      def resource_id: () -> String?
+      def resource_type: () -> String?
     end
     class InternalServerException < Smithy::Client::ServiceError
       def request_id: () -> String?
@@ -13,6 +20,14 @@ module Aws::MarketplaceAgreement
       def message: () -> String?
       def resource_id: () -> String?
       def resource_type: () -> String?
+    end
+    class ServiceQuotaExceededException < Smithy::Client::ServiceError
+      def request_id: () -> String?
+      def message: () -> String?
+      def quota_code: () -> String?
+      def service_code: () -> String?
+      def resource_type: () -> String?
+      def resource_id: () -> String?
     end
     class ThrottlingException < Smithy::Client::ServiceError
       def request_id: () -> String?

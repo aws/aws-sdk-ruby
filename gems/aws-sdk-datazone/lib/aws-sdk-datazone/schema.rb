@@ -32,6 +32,7 @@ module Aws::DataZone
     AddPolicyGrantInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#AddPolicyGrantInput", name: "AddPolicyGrantInput")
     AddPolicyGrantOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#AddPolicyGrantOutput", name: "AddPolicyGrantOutput")
     AddToProjectMemberPoolPolicyGrantDetail = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#AddToProjectMemberPoolPolicyGrantDetail", name: "AddToProjectMemberPoolPolicyGrantDetail")
+    AdditionalAttributes = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#AdditionalAttributes", name: "AdditionalAttributes")
     AggregationAttributeDisplayValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#AggregationAttributeDisplayValue", name: "AggregationAttributeDisplayValue")
     AggregationAttributeValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#AggregationAttributeValue", name: "AggregationAttributeValue")
     AggregationDisplayValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#AggregationDisplayValue", name: "AggregationDisplayValue", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
@@ -43,6 +44,9 @@ module Aws::DataZone
     AggregationOutputList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#AggregationOutputList", name: "AggregationOutputList")
     AllDomainUnitsGrantFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#AllDomainUnitsGrantFilter", name: "AllDomainUnitsGrantFilter")
     AllUsersGrantFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#AllUsersGrantFilter", name: "AllUsersGrantFilter")
+    AmazonQPropertiesInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#AmazonQPropertiesInput", name: "AmazonQPropertiesInput")
+    AmazonQPropertiesOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#AmazonQPropertiesOutput", name: "AmazonQPropertiesOutput")
+    AmazonQPropertiesPatch = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#AmazonQPropertiesPatch", name: "AmazonQPropertiesPatch")
     ApplicableAssetTypes = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#ApplicableAssetTypes", name: "ApplicableAssetTypes")
     AssetFilterConfiguration = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.datazone#AssetFilterConfiguration", name: "AssetFilterConfiguration")
     AssetFilterSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#AssetFilterSummary", name: "AssetFilterSummary")
@@ -58,6 +62,8 @@ module Aws::DataZone
     AssetListingItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#AssetListingItem", name: "AssetListingItem")
     AssetListingItemAdditionalAttributes = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#AssetListingItemAdditionalAttributes", name: "AssetListingItemAdditionalAttributes")
     AssetName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#AssetName", name: "AssetName", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#sensitive" => {}})
+    AssetPermission = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#AssetPermission", name: "AssetPermission")
+    AssetPermissions = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#AssetPermissions", name: "AssetPermissions")
     AssetRevision = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#AssetRevision", name: "AssetRevision")
     AssetRevisions = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#AssetRevisions", name: "AssetRevisions")
     AssetScope = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#AssetScope", name: "AssetScope")
@@ -75,6 +81,13 @@ module Aws::DataZone
     AthenaPropertiesOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#AthenaPropertiesOutput", name: "AthenaPropertiesOutput")
     AthenaPropertiesPatch = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#AthenaPropertiesPatch", name: "AthenaPropertiesPatch")
     Attribute = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#Attribute", name: "Attribute", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}})
+    AttributeEntityType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.datazone#AttributeEntityType", name: "AttributeEntityType")
+    AttributeError = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#AttributeError", name: "AttributeError")
+    AttributeIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#AttributeIdentifier", name: "AttributeIdentifier", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}})
+    AttributeInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#AttributeInput", name: "AttributeInput")
+    Attributes = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#Attributes", name: "Attributes", traits: {"smithy.api#length" => {"max" => 5}})
+    AttributesErrors = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#AttributesErrors", name: "AttributesErrors")
+    AttributesList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#AttributesList", name: "AttributesList", traits: {"smithy.api#length" => {"min" => 1, "max" => 5}})
     AuthType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.datazone#AuthType", name: "AuthType")
     AuthenticationConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#AuthenticationConfiguration", name: "AuthenticationConfiguration")
     AuthenticationConfigurationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#AuthenticationConfigurationInput", name: "AuthenticationConfigurationInput")
@@ -91,22 +104,41 @@ module Aws::DataZone
     AwsRegion = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#AwsRegion", name: "AwsRegion", traits: {"smithy.api#pattern" => "^[a-z]{2}-[a-z]{4,10}-\\d$"})
     AwsRegionList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#AwsRegionList", name: "AwsRegionList", traits: {"smithy.api#length" => {"min" => 1, "max" => 3}})
     BasicAuthenticationCredentials = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#BasicAuthenticationCredentials", name: "BasicAuthenticationCredentials", traits: {"smithy.api#sensitive" => {}})
+    BatchGetAttributeItems = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#BatchGetAttributeItems", name: "BatchGetAttributeItems")
+    BatchGetAttributeOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#BatchGetAttributeOutput", name: "BatchGetAttributeOutput")
+    BatchGetAttributesMetadataInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#BatchGetAttributesMetadataInput", name: "BatchGetAttributesMetadataInput")
+    BatchGetAttributesMetadataOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#BatchGetAttributesMetadataOutput", name: "BatchGetAttributesMetadataOutput")
+    BatchPutAttributeItems = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#BatchPutAttributeItems", name: "BatchPutAttributeItems")
+    BatchPutAttributeOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#BatchPutAttributeOutput", name: "BatchPutAttributeOutput")
+    BatchPutAttributesMetadataInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#BatchPutAttributesMetadataInput", name: "BatchPutAttributesMetadataInput")
+    BatchPutAttributesMetadataOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#BatchPutAttributesMetadataOutput", name: "BatchPutAttributesMetadataOutput")
+    BlueprintCategory = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.datazone#BlueprintCategory", name: "BlueprintCategory")
     BusinessNameGenerationConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#BusinessNameGenerationConfiguration", name: "BusinessNameGenerationConfiguration")
     CancelMetadataGenerationRunInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#CancelMetadataGenerationRunInput", name: "CancelMetadataGenerationRunInput")
     CancelMetadataGenerationRunOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#CancelMetadataGenerationRunOutput", name: "CancelMetadataGenerationRunOutput")
     CancelSubscriptionInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#CancelSubscriptionInput", name: "CancelSubscriptionInput")
     CancelSubscriptionOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#CancelSubscriptionOutput", name: "CancelSubscriptionOutput")
+    CellInformation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#CellInformation", name: "CellInformation")
+    CellOrder = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#CellOrder", name: "CellOrder", traits: {"smithy.api#length" => {"min" => 0, "max" => 200}})
     ChangeAction = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.datazone#ChangeAction", name: "ChangeAction")
     ClientToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#ClientToken", name: "ClientToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[\\x21-\\x7E]+$"})
     CloudFormationProperties = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#CloudFormationProperties", name: "CloudFormationProperties")
     ColumnFilterConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#ColumnFilterConfiguration", name: "ColumnFilterConfiguration")
     ColumnNameList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#ColumnNameList", name: "ColumnNameList")
+    CommitHash = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#CommitHash", name: "CommitHash", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[a-zA-Z0-9]+$"})
+    CommitMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#CommitMessage", name: "CommitMessage", traits: {"smithy.api#length" => {"min" => 0, "max" => 2048}, "smithy.api#sensitive" => {}})
+    CompletedAt = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.datazone#CompletedAt", name: "CompletedAt")
+    ComputeConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#ComputeConfig", name: "ComputeConfig")
     ComputeEnvironments = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.datazone#ComputeEnvironments", name: "ComputeEnvironments")
     ComputeEnvironmentsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#ComputeEnvironmentsList", name: "ComputeEnvironmentsList", traits: {"smithy.api#length" => {"min" => 1, "max" => 50}})
+    ComputeId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#ComputeId", name: "ComputeId", traits: {"smithy.api#length" => {"max" => 64}})
     ConfigurableActionParameter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#ConfigurableActionParameter", name: "ConfigurableActionParameter")
     ConfigurableActionParameterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#ConfigurableActionParameterList", name: "ConfigurableActionParameterList")
     ConfigurableActionTypeAuthorization = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.datazone#ConfigurableActionTypeAuthorization", name: "ConfigurableActionTypeAuthorization")
     ConfigurableEnvironmentAction = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#ConfigurableEnvironmentAction", name: "ConfigurableEnvironmentAction")
+    Configuration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#Configuration", name: "Configuration")
+    ConfigurationStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.datazone#ConfigurationStatus", name: "ConfigurationStatus")
+    Configurations = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#Configurations", name: "Configurations")
     ConflictException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#ConflictException", name: "ConflictException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 409})
     ConnectionCredentials = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#ConnectionCredentials", name: "ConnectionCredentials", traits: {"smithy.api#sensitive" => {}})
     ConnectionId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#ConnectionId", name: "ConnectionId", traits: {"smithy.api#length" => {"max" => 128}})
@@ -115,10 +147,13 @@ module Aws::DataZone
     ConnectionPropertiesInput = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.datazone#ConnectionPropertiesInput", name: "ConnectionPropertiesInput")
     ConnectionPropertiesOutput = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.datazone#ConnectionPropertiesOutput", name: "ConnectionPropertiesOutput")
     ConnectionPropertiesPatch = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.datazone#ConnectionPropertiesPatch", name: "ConnectionPropertiesPatch")
+    ConnectionScope = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.datazone#ConnectionScope", name: "ConnectionScope")
     ConnectionStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.datazone#ConnectionStatus", name: "ConnectionStatus")
     ConnectionSummaries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#ConnectionSummaries", name: "ConnectionSummaries")
     ConnectionSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#ConnectionSummary", name: "ConnectionSummary")
     ConnectionType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.datazone#ConnectionType", name: "ConnectionType")
+    ConnectivityProperties = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#ConnectivityProperties", name: "ConnectivityProperties")
+    ConnectivityPropertiesPatch = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#ConnectivityPropertiesPatch", name: "ConnectivityPropertiesPatch")
     CreateAccountPoolInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#CreateAccountPoolInput", name: "CreateAccountPoolInput")
     CreateAccountPoolOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#CreateAccountPoolOutput", name: "CreateAccountPoolOutput")
     CreateAssetFilterInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#CreateAssetFilterInput", name: "CreateAssetFilterInput")
@@ -164,6 +199,8 @@ module Aws::DataZone
     CreateGroupProfileOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#CreateGroupProfileOutput", name: "CreateGroupProfileOutput")
     CreateListingChangeSetInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#CreateListingChangeSetInput", name: "CreateListingChangeSetInput")
     CreateListingChangeSetOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#CreateListingChangeSetOutput", name: "CreateListingChangeSetOutput")
+    CreateNotebookInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#CreateNotebookInput", name: "CreateNotebookInput")
+    CreateNotebookOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#CreateNotebookOutput", name: "CreateNotebookOutput")
     CreateProjectFromProjectProfilePolicyGrantDetail = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#CreateProjectFromProjectProfilePolicyGrantDetail", name: "CreateProjectFromProjectProfilePolicyGrantDetail")
     CreateProjectInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#CreateProjectInput", name: "CreateProjectInput")
     CreateProjectMembershipInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#CreateProjectMembershipInput", name: "CreateProjectMembershipInput")
@@ -234,6 +271,8 @@ module Aws::DataZone
     DeleteAssetTypeOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#DeleteAssetTypeOutput", name: "DeleteAssetTypeOutput")
     DeleteConnectionInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#DeleteConnectionInput", name: "DeleteConnectionInput")
     DeleteConnectionOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#DeleteConnectionOutput", name: "DeleteConnectionOutput")
+    DeleteDataExportConfigurationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#DeleteDataExportConfigurationInput", name: "DeleteDataExportConfigurationInput")
+    DeleteDataExportConfigurationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#DeleteDataExportConfigurationOutput", name: "DeleteDataExportConfigurationOutput")
     DeleteDataProductInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#DeleteDataProductInput", name: "DeleteDataProductInput")
     DeleteDataProductOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#DeleteDataProductOutput", name: "DeleteDataProductOutput")
     DeleteDataSourceInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#DeleteDataSourceInput", name: "DeleteDataSourceInput")
@@ -254,8 +293,13 @@ module Aws::DataZone
     DeleteGlossaryOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#DeleteGlossaryOutput", name: "DeleteGlossaryOutput")
     DeleteGlossaryTermInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#DeleteGlossaryTermInput", name: "DeleteGlossaryTermInput")
     DeleteGlossaryTermOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#DeleteGlossaryTermOutput", name: "DeleteGlossaryTermOutput")
+    DeleteLineageEventInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#DeleteLineageEventInput", name: "DeleteLineageEventInput")
+    DeleteLineageEventOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#DeleteLineageEventOutput", name: "DeleteLineageEventOutput")
     DeleteListingInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#DeleteListingInput", name: "DeleteListingInput")
     DeleteListingOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#DeleteListingOutput", name: "DeleteListingOutput")
+    DeleteNotebookInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#DeleteNotebookInput", name: "DeleteNotebookInput")
+    DeleteNotebookOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#DeleteNotebookOutput", name: "DeleteNotebookOutput")
+    DeleteProgress = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#DeleteProgress", name: "DeleteProgress")
     DeleteProjectInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#DeleteProjectInput", name: "DeleteProjectInput")
     DeleteProjectMembershipInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#DeleteProjectMembershipInput", name: "DeleteProjectMembershipInput")
     DeleteProjectMembershipOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#DeleteProjectMembershipOutput", name: "DeleteProjectMembershipOutput")
@@ -311,9 +355,11 @@ module Aws::DataZone
     EditedValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#EditedValue", name: "EditedValue", traits: {"smithy.api#length" => {"min" => 1, "max" => 5000}, "smithy.api#sensitive" => {}})
     EnableSetting = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.datazone#EnableSetting", name: "EnableSetting")
     EnabledRegionList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#EnabledRegionList", name: "EnabledRegionList", traits: {"smithy.api#length" => {"min" => 0}})
+    EncryptionConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#EncryptionConfiguration", name: "EncryptionConfiguration")
     EntityId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#EntityId", name: "EntityId", traits: {"smithy.api#pattern" => "^[a-zA-Z0-9_-]{1,36}$"})
     EntityIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#EntityIdentifier", name: "EntityIdentifier", traits: {"smithy.api#pattern" => "^[a-zA-Z0-9_-]{1,36}$"})
     EntityOwners = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#EntityOwners", name: "EntityOwners")
+    EntityPattern = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#EntityPattern", name: "EntityPattern")
     EntityType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.datazone#EntityType", name: "EntityType")
     EnvironmentActionId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#EnvironmentActionId", name: "EnvironmentActionId", traits: {"smithy.api#pattern" => "^[a-zA-Z0-9_-]{1,36}$"})
     EnvironmentActionList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#EnvironmentActionList", name: "EnvironmentActionList")
@@ -324,6 +370,7 @@ module Aws::DataZone
     EnvironmentBlueprintName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#EnvironmentBlueprintName", name: "EnvironmentBlueprintName", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[\\w -]+$"})
     EnvironmentBlueprintSummaries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#EnvironmentBlueprintSummaries", name: "EnvironmentBlueprintSummaries")
     EnvironmentBlueprintSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#EnvironmentBlueprintSummary", name: "EnvironmentBlueprintSummary")
+    EnvironmentConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#EnvironmentConfig", name: "EnvironmentConfig")
     EnvironmentConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#EnvironmentConfiguration", name: "EnvironmentConfiguration")
     EnvironmentConfigurationId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#EnvironmentConfigurationId", name: "EnvironmentConfigurationId", traits: {"smithy.api#pattern" => "^[a-zA-Z0-9_-]{1,36}$", "smithy.api#sensitive" => {}})
     EnvironmentConfigurationName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#EnvironmentConfigurationName", name: "EnvironmentConfigurationName", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[\\w -]+$", "smithy.api#sensitive" => {}})
@@ -353,10 +400,15 @@ module Aws::DataZone
     EqualToExpression = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#EqualToExpression", name: "EqualToExpression")
     ErrorMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#ErrorMessage", name: "ErrorMessage")
     EventSummary = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.datazone#EventSummary", name: "EventSummary")
+    ExportId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#ExportId", name: "ExportId", traits: {"smithy.api#pattern" => "^[a-zA-Z0-9_-]{1,36}$"})
     ExternalIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#ExternalIdentifier", name: "ExternalIdentifier", traits: {"smithy.api#length" => {"min" => 1, "max" => 600}})
     FailedQueryProcessingErrorMessages = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#FailedQueryProcessingErrorMessages", name: "FailedQueryProcessingErrorMessages", traits: {"smithy.api#length" => {"max" => 10}})
     FailureCause = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#FailureCause", name: "FailureCause")
+    FailureReason = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#FailureReason", name: "FailureReason")
     FailureReasons = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#FailureReasons", name: "FailureReasons")
+    FailureReasonsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#FailureReasonsList", name: "FailureReasonsList")
+    FileFormat = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.datazone#FileFormat", name: "FileFormat")
+    FileName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#FileName", name: "FileName", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}})
     Filter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#Filter", name: "Filter")
     FilterClause = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.datazone#FilterClause", name: "FilterClause")
     FilterExpression = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#FilterExpression", name: "FilterExpression")
@@ -366,6 +418,7 @@ module Aws::DataZone
     FilterIds = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#FilterIds", name: "FilterIds")
     FilterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#FilterList", name: "FilterList", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
     FilterName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#FilterName", name: "FilterName", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[\\w -]+$", "smithy.api#sensitive" => {}})
+    FilterOperator = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.datazone#FilterOperator", name: "FilterOperator")
     FilterStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.datazone#FilterStatus", name: "FilterStatus")
     FirstName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#FirstName", name: "FirstName", traits: {"smithy.api#sensitive" => {}})
     FormEntryInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#FormEntryInput", name: "FormEntryInput")
@@ -373,6 +426,7 @@ module Aws::DataZone
     FormInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#FormInput", name: "FormInput", traits: {"smithy.api#sensitive" => {}})
     FormInputList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#FormInputList", name: "FormInputList", traits: {"smithy.api#length" => {"min" => 0, "max" => 10}, "smithy.api#sensitive" => {}})
     FormName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#FormName", name: "FormName", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^(?![0-9_])\\w+$|^_\\w*[a-zA-Z0-9]\\w*$"})
+    FormNameList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#FormNameList", name: "FormNameList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
     FormOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#FormOutput", name: "FormOutput")
     FormOutputList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#FormOutputList", name: "FormOutputList", traits: {"smithy.api#length" => {"min" => 0, "max" => 10}})
     FormTypeData = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#FormTypeData", name: "FormTypeData")
@@ -392,6 +446,8 @@ module Aws::DataZone
     GetAssetTypeOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#GetAssetTypeOutput", name: "GetAssetTypeOutput")
     GetConnectionInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#GetConnectionInput", name: "GetConnectionInput")
     GetConnectionOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#GetConnectionOutput", name: "GetConnectionOutput")
+    GetDataExportConfigurationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#GetDataExportConfigurationInput", name: "GetDataExportConfigurationInput")
+    GetDataExportConfigurationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#GetDataExportConfigurationOutput", name: "GetDataExportConfigurationOutput")
     GetDataProductInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#GetDataProductInput", name: "GetDataProductInput")
     GetDataProductOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#GetDataProductOutput", name: "GetDataProductOutput")
     GetDataSourceInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#GetDataSourceInput", name: "GetDataSourceInput")
@@ -434,6 +490,12 @@ module Aws::DataZone
     GetListingOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#GetListingOutput", name: "GetListingOutput")
     GetMetadataGenerationRunInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#GetMetadataGenerationRunInput", name: "GetMetadataGenerationRunInput")
     GetMetadataGenerationRunOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#GetMetadataGenerationRunOutput", name: "GetMetadataGenerationRunOutput")
+    GetNotebookExportInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#GetNotebookExportInput", name: "GetNotebookExportInput")
+    GetNotebookExportOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#GetNotebookExportOutput", name: "GetNotebookExportOutput")
+    GetNotebookInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#GetNotebookInput", name: "GetNotebookInput")
+    GetNotebookOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#GetNotebookOutput", name: "GetNotebookOutput")
+    GetNotebookRunInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#GetNotebookRunInput", name: "GetNotebookRunInput")
+    GetNotebookRunOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#GetNotebookRunOutput", name: "GetNotebookRunOutput")
     GetProjectInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#GetProjectInput", name: "GetProjectInput")
     GetProjectOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#GetProjectOutput", name: "GetProjectOutput")
     GetProjectProfileInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#GetProjectProfileInput", name: "GetProjectProfileInput")
@@ -452,6 +514,13 @@ module Aws::DataZone
     GetTimeSeriesDataPointOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#GetTimeSeriesDataPointOutput", name: "GetTimeSeriesDataPointOutput")
     GetUserProfileInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#GetUserProfileInput", name: "GetUserProfileInput")
     GetUserProfileOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#GetUserProfileOutput", name: "GetUserProfileOutput")
+    GitBranch = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#GitBranch", name: "GitBranch", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#sensitive" => {}})
+    GitConnectionId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#GitConnectionId", name: "GitConnectionId", traits: {"smithy.api#length" => {"min" => 1, "max" => 40}, "smithy.api#pattern" => "^[a-zA-Z0-9_-]+$"})
+    GitMetadata = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#GitMetadata", name: "GitMetadata")
+    GitPropertiesInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#GitPropertiesInput", name: "GitPropertiesInput")
+    GitPropertiesOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#GitPropertiesOutput", name: "GitPropertiesOutput")
+    GitPropertiesPatch = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#GitPropertiesPatch", name: "GitPropertiesPatch")
+    GitRepository = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#GitRepository", name: "GitRepository", traits: {"smithy.api#length" => {"min" => 1, "max" => 512}, "smithy.api#sensitive" => {}})
     GlobalParameterMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.datazone#GlobalParameterMap", name: "GlobalParameterMap")
     GlossaryDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#GlossaryDescription", name: "GlossaryDescription", traits: {"smithy.api#length" => {"max" => 4096}, "smithy.api#sensitive" => {}})
     GlossaryId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#GlossaryId", name: "GlossaryId", traits: {"smithy.api#pattern" => "^[a-zA-Z0-9_-]{1,36}$"})
@@ -459,7 +528,9 @@ module Aws::DataZone
     GlossaryItemAdditionalAttributes = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#GlossaryItemAdditionalAttributes", name: "GlossaryItemAdditionalAttributes")
     GlossaryName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#GlossaryName", name: "GlossaryName", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#sensitive" => {}})
     GlossaryStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.datazone#GlossaryStatus", name: "GlossaryStatus")
+    GlossaryTermEnforcementDetail = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#GlossaryTermEnforcementDetail", name: "GlossaryTermEnforcementDetail")
     GlossaryTermId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#GlossaryTermId", name: "GlossaryTermId", traits: {"smithy.api#pattern" => "^[a-zA-Z0-9_-]{1,36}$"})
+    GlossaryTermIdentifiers = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#GlossaryTermIdentifiers", name: "GlossaryTermIdentifiers", traits: {"smithy.api#length" => {"min" => 1, "max" => 5}})
     GlossaryTermItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#GlossaryTermItem", name: "GlossaryTermItem")
     GlossaryTermItemAdditionalAttributes = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#GlossaryTermItemAdditionalAttributes", name: "GlossaryTermItemAdditionalAttributes")
     GlossaryTermName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#GlossaryTermName", name: "GlossaryTermName", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#sensitive" => {}})
@@ -469,6 +540,8 @@ module Aws::DataZone
     GlossaryUsageRestrictions = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#GlossaryUsageRestrictions", name: "GlossaryUsageRestrictions", traits: {"smithy.api#length" => {"min" => 1, "max" => 1}})
     GlueConnection = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#GlueConnection", name: "GlueConnection")
     GlueConnectionInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#GlueConnectionInput", name: "GlueConnectionInput")
+    GlueConnectionName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#GlueConnectionName", name: "GlueConnectionName", traits: {"smithy.api#length" => {"max" => 64}})
+    GlueConnectionNames = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#GlueConnectionNames", name: "GlueConnectionNames", traits: {"smithy.api#length" => {"min" => 1, "max" => 16}})
     GlueConnectionPatch = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#GlueConnectionPatch", name: "GlueConnectionPatch")
     GlueConnectionType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.datazone#GlueConnectionType", name: "GlueConnectionType")
     GlueOAuth2Credentials = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#GlueOAuth2Credentials", name: "GlueOAuth2Credentials", traits: {"smithy.api#sensitive" => {}})
@@ -484,6 +557,7 @@ module Aws::DataZone
     GrantIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#GrantIdentifier", name: "GrantIdentifier", traits: {"smithy.api#pattern" => "^[A-Za-z0-9+/]{10}$"})
     GrantedEntity = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.datazone#GrantedEntity", name: "GrantedEntity")
     GrantedEntityInput = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.datazone#GrantedEntityInput", name: "GrantedEntityInput")
+    GraphEntityType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.datazone#GraphEntityType", name: "GraphEntityType")
     GreaterThanExpression = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#GreaterThanExpression", name: "GreaterThanExpression")
     GreaterThanOrEqualToExpression = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#GreaterThanOrEqualToExpression", name: "GreaterThanOrEqualToExpression")
     GroupDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#GroupDetails", name: "GroupDetails")
@@ -499,14 +573,17 @@ module Aws::DataZone
     HyperPodOrchestrator = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.datazone#HyperPodOrchestrator", name: "HyperPodOrchestrator")
     HyperPodPropertiesInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#HyperPodPropertiesInput", name: "HyperPodPropertiesInput")
     HyperPodPropertiesOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#HyperPodPropertiesOutput", name: "HyperPodPropertiesOutput")
+    IamPrincipalArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#IamPrincipalArn", name: "IamPrincipalArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => "^arn:aws[^:]*:iam::\\d{12}:(role|user)(/[\\w+=,.@-]*)*/[\\w+=,.@-]+$"})
     IamPropertiesInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#IamPropertiesInput", name: "IamPropertiesInput")
     IamPropertiesOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#IamPropertiesOutput", name: "IamPropertiesOutput")
     IamPropertiesPatch = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#IamPropertiesPatch", name: "IamPropertiesPatch")
     IamRoleArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#IamRoleArn", name: "IamRoleArn", traits: {"smithy.api#pattern" => "^arn:aws(|-cn|-us-gov):iam::\\d{12}:(role|role/service-role)/[\\w+=,.@-]*$"})
     IamUserProfileDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#IamUserProfileDetails", name: "IamUserProfileDetails")
+    IdentityMapping = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#IdentityMapping", name: "IdentityMapping")
     Import = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#Import", name: "Import")
     ImportList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#ImportList", name: "ImportList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
     InExpression = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#InExpression", name: "InExpression")
+    InstanceType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#InstanceType", name: "InstanceType", traits: {"smithy.api#pattern" => "^(ml|sc)\\.[a-z][0-9]+[a-z]*\\.[a-z0-9]+$"})
     InternalServerException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#InternalServerException", name: "InternalServerException", traits: {"smithy.api#error" => "server", "smithy.api#httpError" => 500, "smithy.api#retryable" => {}})
     InventorySearchScope = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.datazone#InventorySearchScope", name: "InventorySearchScope")
     IsNotNullExpression = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#IsNotNullExpression", name: "IsNotNullExpression")
@@ -521,6 +598,9 @@ module Aws::DataZone
     JobType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.datazone#JobType", name: "JobType")
     KmsKeyArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#KmsKeyArn", name: "KmsKeyArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => "^arn:aws(|-cn|-us-gov):kms:[a-zA-Z0-9-]*:[0-9]{12}:key/[a-zA-Z0-9-]{36}$"})
     LakeFormationConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#LakeFormationConfiguration", name: "LakeFormationConfiguration")
+    LakehousePropertiesInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#LakehousePropertiesInput", name: "LakehousePropertiesInput")
+    LakehousePropertiesOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#LakehousePropertiesOutput", name: "LakehousePropertiesOutput")
+    LakehousePropertiesPatch = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#LakehousePropertiesPatch", name: "LakehousePropertiesPatch")
     LambdaExecutionRoleArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#LambdaExecutionRoleArn", name: "LambdaExecutionRoleArn", traits: {"smithy.api#pattern" => "^arn:aws[^:]*:iam::\\d{12}:(role|role/service-role)/[\\w+=,.@-]*$"})
     LambdaFunctionArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#LambdaFunctionArn", name: "LambdaFunctionArn", traits: {"smithy.api#pattern" => "^arn:(?:aws|aws-cn|aws-us-gov):lambda:(?:[a-z]{2}(?:-gov)?-[a-z]+-\\d{1,}):(\\d{12}):function:[a-zA-Z0-9-_]+(?::[a-zA-Z0-9-_]+)?(?:\\$[\\w-]+)?$"})
     LastName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#LastName", name: "LastName", traits: {"smithy.api#sensitive" => {}})
@@ -537,6 +617,8 @@ module Aws::DataZone
     LineageInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#LineageInfo", name: "LineageInfo")
     LineageNodeId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#LineageNodeId", name: "LineageNodeId", traits: {"smithy.api#pattern" => "^[a-zA-Z0-9_-]{1,36}$"})
     LineageNodeIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#LineageNodeIdentifier", name: "LineageNodeIdentifier", traits: {"smithy.api#length" => {"min" => 1, "max" => 2086}})
+    LineageNodeIds = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#LineageNodeIds", name: "LineageNodeIds")
+    LineageNodeItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#LineageNodeItem", name: "LineageNodeItem")
     LineageNodeReference = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#LineageNodeReference", name: "LineageNodeReference")
     LineageNodeReferenceList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#LineageNodeReferenceList", name: "LineageNodeReferenceList", traits: {"smithy.api#length" => {"max" => 100}})
     LineageNodeSummaries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#LineageNodeSummaries", name: "LineageNodeSummaries")
@@ -544,7 +626,10 @@ module Aws::DataZone
     LineageNodeTypeItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#LineageNodeTypeItem", name: "LineageNodeTypeItem")
     LineageRunDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#LineageRunDetails", name: "LineageRunDetails")
     LineageSqlQueryRunDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#LineageSqlQueryRunDetails", name: "LineageSqlQueryRunDetails")
+    LineageSyncInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#LineageSyncInput", name: "LineageSyncInput")
+    LineageSyncOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#LineageSyncOutput", name: "LineageSyncOutput")
     LineageSyncSchedule = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#LineageSyncSchedule", name: "LineageSyncSchedule")
+    LineageSyncScheduleCronString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#LineageSyncScheduleCronString", name: "LineageSyncScheduleCronString", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^cron\\((\\b[0-5]?[0-9]\\b) ([*]|\\b2[0-3]\\b|\\b[0-1]?[0-9]\\b) ([-?*,/\\dLW]){1,83} ([-*,/\\d]|[a-zA-Z]{3}){1,23} ([-?#*,/\\dL]|[a-zA-Z]{3}){1,13} ([^\\)]+)\\)$"})
     ListAccountPoolsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#ListAccountPoolsInput", name: "ListAccountPoolsInput")
     ListAccountPoolsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#ListAccountPoolsOutput", name: "ListAccountPoolsOutput")
     ListAccountsInAccountPoolInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#ListAccountsInAccountPoolInput", name: "ListAccountsInAccountPoolInput")
@@ -588,6 +673,10 @@ module Aws::DataZone
     ListLineageNodeHistoryOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#ListLineageNodeHistoryOutput", name: "ListLineageNodeHistoryOutput")
     ListMetadataGenerationRunsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#ListMetadataGenerationRunsInput", name: "ListMetadataGenerationRunsInput")
     ListMetadataGenerationRunsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#ListMetadataGenerationRunsOutput", name: "ListMetadataGenerationRunsOutput")
+    ListNotebookRunsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#ListNotebookRunsInput", name: "ListNotebookRunsInput")
+    ListNotebookRunsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#ListNotebookRunsOutput", name: "ListNotebookRunsOutput")
+    ListNotebooksInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#ListNotebooksInput", name: "ListNotebooksInput")
+    ListNotebooksOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#ListNotebooksOutput", name: "ListNotebooksOutput")
     ListNotificationsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#ListNotificationsInput", name: "ListNotificationsInput")
     ListNotificationsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#ListNotificationsOutput", name: "ListNotificationsOutput")
     ListPolicyGrantsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#ListPolicyGrantsInput", name: "ListPolicyGrantsInput")
@@ -625,6 +714,8 @@ module Aws::DataZone
     LongDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#LongDescription", name: "LongDescription", traits: {"smithy.api#length" => {"max" => 4096}, "smithy.api#sensitive" => {}})
     ManagedEndpointCredentials = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#ManagedEndpointCredentials", name: "ManagedEndpointCredentials", traits: {"smithy.api#sensitive" => {}})
     ManagedPolicyType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.datazone#ManagedPolicyType", name: "ManagedPolicyType")
+    MatchClause = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.datazone#MatchClause", name: "MatchClause")
+    MatchClauses = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#MatchClauses", name: "MatchClauses", traits: {"smithy.api#length" => {"min" => 2, "max" => 2}})
     MatchCriteria = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#MatchCriteria", name: "MatchCriteria", traits: {"smithy.api#length" => {"min" => 0, "max" => 10}})
     MatchOffset = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#MatchOffset", name: "MatchOffset")
     MatchOffsets = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#MatchOffsets", name: "MatchOffsets")
@@ -635,6 +726,7 @@ module Aws::DataZone
     Member = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.datazone#Member", name: "Member")
     MemberDetails = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.datazone#MemberDetails", name: "MemberDetails")
     Message = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#Message", name: "Message", traits: {"smithy.api#length" => {"max" => 16384}, "smithy.api#sensitive" => {}})
+    Metadata = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.datazone#Metadata", name: "Metadata", traits: {"smithy.api#length" => {"max" => 50}})
     MetadataFormEnforcementDetail = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#MetadataFormEnforcementDetail", name: "MetadataFormEnforcementDetail")
     MetadataFormInputs = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#MetadataFormInputs", name: "MetadataFormInputs")
     MetadataFormReference = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#MetadataFormReference", name: "MetadataFormReference")
@@ -646,16 +738,42 @@ module Aws::DataZone
     MetadataGenerationRunStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.datazone#MetadataGenerationRunStatus", name: "MetadataGenerationRunStatus")
     MetadataGenerationRunTarget = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#MetadataGenerationRunTarget", name: "MetadataGenerationRunTarget")
     MetadataGenerationRunType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.datazone#MetadataGenerationRunType", name: "MetadataGenerationRunType")
+    MetadataGenerationRunTypeStat = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#MetadataGenerationRunTypeStat", name: "MetadataGenerationRunTypeStat")
+    MetadataGenerationRunTypeStats = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#MetadataGenerationRunTypeStats", name: "MetadataGenerationRunTypeStats")
+    MetadataGenerationRunTypes = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#MetadataGenerationRunTypes", name: "MetadataGenerationRunTypes", traits: {"smithy.api#length" => {"min" => 1, "max" => 2}})
     MetadataGenerationRuns = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#MetadataGenerationRuns", name: "MetadataGenerationRuns")
     MetadataGenerationTargetType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.datazone#MetadataGenerationTargetType", name: "MetadataGenerationTargetType")
+    MetadataKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#MetadataKey", name: "MetadataKey", traits: {"smithy.api#length" => {"max" => 128}})
     MetadataMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.datazone#MetadataMap", name: "MetadataMap")
+    MetadataValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#MetadataValue", name: "MetadataValue", traits: {"smithy.api#length" => {"max" => 1024}, "smithy.api#sensitive" => {}})
+    MlflowPropertiesInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#MlflowPropertiesInput", name: "MlflowPropertiesInput")
+    MlflowPropertiesOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#MlflowPropertiesOutput", name: "MlflowPropertiesOutput")
+    MlflowPropertiesPatch = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#MlflowPropertiesPatch", name: "MlflowPropertiesPatch")
     Model = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.datazone#Model", name: "Model", traits: {"smithy.api#sensitive" => {}})
     Name = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#Name", name: "Name", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#sensitive" => {}})
     NameIdentifier = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#NameIdentifier", name: "NameIdentifier")
     NameIdentifiers = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#NameIdentifiers", name: "NameIdentifiers")
+    NetworkAccessType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.datazone#NetworkAccessType", name: "NetworkAccessType")
+    NetworkConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#NetworkConfig", name: "NetworkConfig")
     NotEqualToExpression = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#NotEqualToExpression", name: "NotEqualToExpression")
     NotInExpression = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#NotInExpression", name: "NotInExpression")
     NotLikeExpression = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#NotLikeExpression", name: "NotLikeExpression")
+    NotebookError = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#NotebookError", name: "NotebookError")
+    NotebookExportError = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#NotebookExportError", name: "NotebookExportError")
+    NotebookExportStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.datazone#NotebookExportStatus", name: "NotebookExportStatus")
+    NotebookId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#NotebookId", name: "NotebookId", traits: {"smithy.api#pattern" => "^[a-zA-Z0-9_-]{1,36}$"})
+    NotebookName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#NotebookName", name: "NotebookName", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#sensitive" => {}})
+    NotebookRunError = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#NotebookRunError", name: "NotebookRunError")
+    NotebookRunId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#NotebookRunId", name: "NotebookRunId", traits: {"smithy.api#pattern" => "^[a-zA-Z0-9_-]{1,36}$"})
+    NotebookRunStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.datazone#NotebookRunStatus", name: "NotebookRunStatus")
+    NotebookRunSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#NotebookRunSummary", name: "NotebookRunSummary")
+    NotebookRunSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#NotebookRunSummaryList", name: "NotebookRunSummaryList")
+    NotebookS3Uri = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#NotebookS3Uri", name: "NotebookS3Uri", traits: {"smithy.api#length" => {"min" => 6, "max" => 1024}, "smithy.api#pattern" => "^s3://.+$", "smithy.api#sensitive" => {}})
+    NotebookStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.datazone#NotebookStatus", name: "NotebookStatus")
+    NotebookSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#NotebookSummary", name: "NotebookSummary")
+    NotebookSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#NotebookSummaryList", name: "NotebookSummaryList")
+    NotebookType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.datazone#NotebookType", name: "NotebookType")
+    NotificationConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#NotificationConfig", name: "NotificationConfig")
     NotificationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#NotificationOutput", name: "NotificationOutput")
     NotificationResource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#NotificationResource", name: "NotificationResource")
     NotificationResourceType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.datazone#NotificationResourceType", name: "NotificationResourceType")
@@ -663,11 +781,14 @@ module Aws::DataZone
     NotificationSubjects = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#NotificationSubjects", name: "NotificationSubjects")
     NotificationType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.datazone#NotificationType", name: "NotificationType")
     NotificationsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#NotificationsList", name: "NotificationsList")
+    NotifyOnState = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.datazone#NotifyOnState", name: "NotifyOnState")
+    NotifyOnStates = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#NotifyOnStates", name: "NotifyOnStates", traits: {"smithy.api#length" => {"min" => 0, "max" => 7}, "smithy.api#uniqueItems" => {}})
     OAuth2ClientApplication = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#OAuth2ClientApplication", name: "OAuth2ClientApplication")
     OAuth2GrantType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.datazone#OAuth2GrantType", name: "OAuth2GrantType")
     OAuth2Properties = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#OAuth2Properties", name: "OAuth2Properties")
     OpenLineageRunEventSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#OpenLineageRunEventSummary", name: "OpenLineageRunEventSummary")
     OpenLineageRunState = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.datazone#OpenLineageRunState", name: "OpenLineageRunState")
+    OutputLocation = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.datazone#OutputLocation", name: "OutputLocation")
     OverallDeploymentStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.datazone#OverallDeploymentStatus", name: "OverallDeploymentStatus")
     OverrideDomainUnitOwnersPolicyGrantDetail = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#OverrideDomainUnitOwnersPolicyGrantDetail", name: "OverrideDomainUnitOwnersPolicyGrantDetail")
     OverrideProjectOwnersPolicyGrantDetail = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#OverrideProjectOwnersPolicyGrantDetail", name: "OverrideProjectOwnersPolicyGrantDetail")
@@ -677,9 +798,15 @@ module Aws::DataZone
     OwnerPropertiesOutput = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.datazone#OwnerPropertiesOutput", name: "OwnerPropertiesOutput")
     OwnerUserProperties = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#OwnerUserProperties", name: "OwnerUserProperties")
     OwnerUserPropertiesOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#OwnerUserPropertiesOutput", name: "OwnerUserPropertiesOutput")
+    PackageConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#PackageConfig", name: "PackageConfig")
+    PackageManager = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.datazone#PackageManager", name: "PackageManager")
     PaginationToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#PaginationToken", name: "PaginationToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 8192}})
+    ParameterKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#ParameterKey", name: "ParameterKey", traits: {"smithy.api#length" => {"max" => 128}})
     ParameterStorePath = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#ParameterStorePath", name: "ParameterStorePath", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}})
+    ParameterValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#ParameterValue", name: "ParameterValue", traits: {"smithy.api#length" => {"max" => 1024}})
+    Parameters = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.datazone#Parameters", name: "Parameters", traits: {"smithy.api#length" => {"max" => 50}, "smithy.api#sensitive" => {}})
     Password = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#Password", name: "Password", traits: {"smithy.api#length" => {"max" => 64}, "smithy.api#sensitive" => {}})
+    Permissions = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.datazone#Permissions", name: "Permissions")
     PhysicalConnectionRequirements = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#PhysicalConnectionRequirements", name: "PhysicalConnectionRequirements")
     PhysicalEndpoint = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#PhysicalEndpoint", name: "PhysicalEndpoint")
     PhysicalEndpoints = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#PhysicalEndpoints", name: "PhysicalEndpoints")
@@ -701,6 +828,8 @@ module Aws::DataZone
     ProjectIds = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#ProjectIds", name: "ProjectIds")
     ProjectMember = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#ProjectMember", name: "ProjectMember")
     ProjectMembers = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#ProjectMembers", name: "ProjectMembers")
+    ProjectMembershipAssignment = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#ProjectMembershipAssignment", name: "ProjectMembershipAssignment")
+    ProjectMembershipAssignments = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#ProjectMembershipAssignments", name: "ProjectMembershipAssignments")
     ProjectName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#ProjectName", name: "ProjectName", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[\\w -]+$", "smithy.api#sensitive" => {}})
     ProjectPolicyGrantPrincipal = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#ProjectPolicyGrantPrincipal", name: "ProjectPolicyGrantPrincipal")
     ProjectProfileId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#ProjectProfileId", name: "ProjectProfileId", traits: {"smithy.api#pattern" => "^[a-zA-Z0-9_-]{1,36}$"})
@@ -708,6 +837,7 @@ module Aws::DataZone
     ProjectProfileName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#ProjectProfileName", name: "ProjectProfileName", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[\\w -]+$", "smithy.api#sensitive" => {}})
     ProjectProfileSummaries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#ProjectProfileSummaries", name: "ProjectProfileSummaries")
     ProjectProfileSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#ProjectProfileSummary", name: "ProjectProfileSummary")
+    ProjectResourceTagParameters = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#ProjectResourceTagParameters", name: "ProjectResourceTagParameters", traits: {"smithy.api#length" => {"max" => 25}})
     ProjectStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.datazone#ProjectStatus", name: "ProjectStatus")
     ProjectSummaries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#ProjectSummaries", name: "ProjectSummaries")
     ProjectSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#ProjectSummary", name: "ProjectSummary")
@@ -717,8 +847,14 @@ module Aws::DataZone
     ProvisioningConfiguration = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.datazone#ProvisioningConfiguration", name: "ProvisioningConfiguration")
     ProvisioningConfigurationList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#ProvisioningConfigurationList", name: "ProvisioningConfigurationList")
     ProvisioningProperties = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.datazone#ProvisioningProperties", name: "ProvisioningProperties")
+    PutDataExportConfigurationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#PutDataExportConfigurationInput", name: "PutDataExportConfigurationInput")
+    PutDataExportConfigurationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#PutDataExportConfigurationOutput", name: "PutDataExportConfigurationOutput")
     PutEnvironmentBlueprintConfigurationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#PutEnvironmentBlueprintConfigurationInput", name: "PutEnvironmentBlueprintConfigurationInput")
     PutEnvironmentBlueprintConfigurationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#PutEnvironmentBlueprintConfigurationOutput", name: "PutEnvironmentBlueprintConfigurationOutput")
+    PutResourceConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#PutResourceConfiguration", name: "PutResourceConfiguration")
+    PutResourceConfigurations = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#PutResourceConfigurations", name: "PutResourceConfigurations", traits: {"smithy.api#length" => {"min" => 0, "max" => 10}})
+    QueryGraphInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#QueryGraphInput", name: "QueryGraphInput")
+    QueryGraphOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#QueryGraphOutput", name: "QueryGraphOutput")
     RecommendationConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#RecommendationConfiguration", name: "RecommendationConfiguration")
     RedshiftClusterStorage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#RedshiftClusterStorage", name: "RedshiftClusterStorage")
     RedshiftCredentialConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#RedshiftCredentialConfiguration", name: "RedshiftCredentialConfiguration")
@@ -746,6 +882,9 @@ module Aws::DataZone
     RejectRuleBehavior = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.datazone#RejectRuleBehavior", name: "RejectRuleBehavior")
     RejectSubscriptionRequestInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#RejectSubscriptionRequestInput", name: "RejectSubscriptionRequestInput")
     RejectSubscriptionRequestOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#RejectSubscriptionRequestOutput", name: "RejectSubscriptionRequestOutput")
+    RelationDirection = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.datazone#RelationDirection", name: "RelationDirection")
+    RelationPattern = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#RelationPattern", name: "RelationPattern")
+    RelationType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.datazone#RelationType", name: "RelationType")
     RelationalFilterConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#RelationalFilterConfiguration", name: "RelationalFilterConfiguration")
     RelationalFilterConfigurations = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#RelationalFilterConfigurations", name: "RelationalFilterConfigurations")
     RemoveEntityOwnerInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#RemoveEntityOwnerInput", name: "RemoveEntityOwnerInput")
@@ -756,13 +895,22 @@ module Aws::DataZone
     RequiredMetadataFormList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#RequiredMetadataFormList", name: "RequiredMetadataFormList", traits: {"smithy.api#length" => {"min" => 1, "max" => 5}})
     ResolutionStrategy = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.datazone#ResolutionStrategy", name: "ResolutionStrategy")
     Resource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#Resource", name: "Resource")
+    ResourceConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#ResourceConfiguration", name: "ResourceConfiguration")
+    ResourceConfigurationParameterMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.datazone#ResourceConfigurationParameterMap", name: "ResourceConfigurationParameterMap")
+    ResourceConfigurations = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#ResourceConfigurations", name: "ResourceConfigurations", traits: {"smithy.api#length" => {"min" => 0, "max" => 10}})
     ResourceList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#ResourceList", name: "ResourceList")
     ResourceNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#ResourceNotFoundException", name: "ResourceNotFoundException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 404})
+    ResourceTag = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#ResourceTag", name: "ResourceTag")
+    ResourceTagParameter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#ResourceTagParameter", name: "ResourceTagParameter")
+    ResourceTagSource = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.datazone#ResourceTagSource", name: "ResourceTagSource")
+    ResourceTags = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#ResourceTags", name: "ResourceTags", traits: {"smithy.api#length" => {"max" => 25}})
+    ResultItem = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.datazone#ResultItem", name: "ResultItem")
+    ResultItemList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#ResultItemList", name: "ResultItemList")
     Revision = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#Revision", name: "Revision", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}})
     RevisionInput = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#RevisionInput", name: "RevisionInput", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[a-zA-Z0-9_-]+$"})
     RevokeSubscriptionInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#RevokeSubscriptionInput", name: "RevokeSubscriptionInput")
     RevokeSubscriptionOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#RevokeSubscriptionOutput", name: "RevokeSubscriptionOutput")
-    RoleArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#RoleArn", name: "RoleArn", traits: {"smithy.api#pattern" => "^arn:aws[^:]*:iam::\\d{12}:(role|role/service-role)/[\\w+=,.@-]*$"})
+    RoleArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#RoleArn", name: "RoleArn", traits: {"smithy.api#pattern" => "^arn:aws[^:]*:iam::\\d{12}:role(/[a-zA-Z0-9+=,.@_-]+)*/[a-zA-Z0-9+=,.@_-]+$"})
     RowFilter = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.datazone#RowFilter", name: "RowFilter")
     RowFilterConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#RowFilterConfiguration", name: "RowFilterConfiguration")
     RowFilterExpression = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.datazone#RowFilterExpression", name: "RowFilterExpression")
@@ -783,17 +931,28 @@ module Aws::DataZone
     RunIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#RunIdentifier", name: "RunIdentifier", traits: {"smithy.api#pattern" => "^[a-zA-Z0-9_-]{1,36}$"})
     RunStatisticsForAssets = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#RunStatisticsForAssets", name: "RunStatisticsForAssets")
     S3AccessGrantLocationId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#S3AccessGrantLocationId", name: "S3AccessGrantLocationId", traits: {"smithy.api#length" => {"max" => 64}, "smithy.api#pattern" => "^[a-zA-Z0-9\\-]+$"})
+    S3BucketName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#S3BucketName", name: "S3BucketName", traits: {"smithy.api#length" => {"min" => 3, "max" => 63}, "smithy.api#pattern" => "^[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]$", "smithy.api#sensitive" => {}})
+    S3Destination = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#S3Destination", name: "S3Destination")
+    S3File = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#S3File", name: "S3File")
+    S3FileList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#S3FileList", name: "S3FileList", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
+    S3FilesLocation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#S3FilesLocation", name: "S3FilesLocation")
     S3Location = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#S3Location", name: "S3Location", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => "^s3://.+$"})
     S3LocationList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#S3LocationList", name: "S3LocationList", traits: {"smithy.api#length" => {"min" => 0, "max" => 20}})
+    S3ObjectKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#S3ObjectKey", name: "S3ObjectKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#sensitive" => {}})
+    S3Path = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#S3Path", name: "S3Path", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => "^s3://.+$"})
+    S3Permission = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.datazone#S3Permission", name: "S3Permission")
+    S3Permissions = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#S3Permissions", name: "S3Permissions")
     S3PropertiesInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#S3PropertiesInput", name: "S3PropertiesInput")
     S3PropertiesOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#S3PropertiesOutput", name: "S3PropertiesOutput")
     S3PropertiesPatch = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#S3PropertiesPatch", name: "S3PropertiesPatch")
+    S3SourceLocation = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#S3SourceLocation", name: "S3SourceLocation", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => "^s3://.+$", "smithy.api#sensitive" => {}})
     S3Uri = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#S3Uri", name: "S3Uri", traits: {"smithy.api#length" => {"max" => 2048}, "smithy.api#pattern" => "^s3://.+$"})
     SageMakerAssetType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#SageMakerAssetType", name: "SageMakerAssetType", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}})
     SageMakerResourceArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#SageMakerResourceArn", name: "SageMakerResourceArn", traits: {"smithy.api#pattern" => "^arn:aws[^:]*:sagemaker:[a-z]{2}-?(iso|gov)?-{1}[a-z]*-{1}[0-9]:\\d{12}:[\\w+=,.@-]{1,128}/[\\w+=,.@-]{1,256}$"})
     SageMakerRunConfigurationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#SageMakerRunConfigurationInput", name: "SageMakerRunConfigurationInput")
     SageMakerRunConfigurationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#SageMakerRunConfigurationOutput", name: "SageMakerRunConfigurationOutput")
     ScheduleConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#ScheduleConfiguration", name: "ScheduleConfiguration", traits: {"smithy.api#sensitive" => {}})
+    ScheduleId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#ScheduleId", name: "ScheduleId", traits: {"smithy.api#pattern" => "^[a-zA-Z0-9_-]{1,36}$"})
     SearchGroupProfilesInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#SearchGroupProfilesInput", name: "SearchGroupProfilesInput")
     SearchGroupProfilesOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#SearchGroupProfilesOutput", name: "SearchGroupProfilesOutput")
     SearchInItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#SearchInItem", name: "SearchInItem")
@@ -816,7 +975,9 @@ module Aws::DataZone
     SearchTypesResultItems = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#SearchTypesResultItems", name: "SearchTypesResultItems")
     SearchUserProfilesInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#SearchUserProfilesInput", name: "SearchUserProfilesInput")
     SearchUserProfilesOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#SearchUserProfilesOutput", name: "SearchUserProfilesOutput")
+    SecurityGroupId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#SecurityGroupId", name: "SecurityGroupId", traits: {"smithy.api#length" => {"max" => 32}, "smithy.api#pattern" => "^sg-[a-z0-9]+$"})
     SecurityGroupIdList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#SecurityGroupIdList", name: "SecurityGroupIdList", traits: {"smithy.api#length" => {"min" => 0, "max" => 50}})
+    SecurityGroupIds = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#SecurityGroupIds", name: "SecurityGroupIds", traits: {"smithy.api#length" => {"max" => 5}})
     SelfGrantStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.datazone#SelfGrantStatus", name: "SelfGrantStatus")
     SelfGrantStatusDetail = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#SelfGrantStatusDetail", name: "SelfGrantStatusDetail")
     SelfGrantStatusDetails = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#SelfGrantStatusDetails", name: "SelfGrantStatusDetails")
@@ -825,11 +986,16 @@ module Aws::DataZone
     ShortDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#ShortDescription", name: "ShortDescription", traits: {"smithy.api#length" => {"max" => 1024}, "smithy.api#sensitive" => {}})
     SingleSignOn = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#SingleSignOn", name: "SingleSignOn")
     Smithy = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#Smithy", name: "Smithy", traits: {"smithy.api#length" => {"min" => 1, "max" => 100000}})
+    SnowflakePropertiesInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#SnowflakePropertiesInput", name: "SnowflakePropertiesInput")
+    SnowflakePropertiesOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#SnowflakePropertiesOutput", name: "SnowflakePropertiesOutput")
+    SnowflakePropertiesPatch = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#SnowflakePropertiesPatch", name: "SnowflakePropertiesPatch")
+    SnowflakeRole = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#SnowflakeRole", name: "SnowflakeRole", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => "^[a-zA-Z0-9_$]+$"})
     SortFieldAccountPool = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.datazone#SortFieldAccountPool", name: "SortFieldAccountPool")
     SortFieldConnection = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.datazone#SortFieldConnection", name: "SortFieldConnection")
     SortFieldProject = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.datazone#SortFieldProject", name: "SortFieldProject")
     SortKey = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.datazone#SortKey", name: "SortKey")
     SortOrder = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.datazone#SortOrder", name: "SortOrder")
+    SourceLocation = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.datazone#SourceLocation", name: "SourceLocation")
     SparkEmrPropertiesInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#SparkEmrPropertiesInput", name: "SparkEmrPropertiesInput")
     SparkEmrPropertiesOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#SparkEmrPropertiesOutput", name: "SparkEmrPropertiesOutput")
     SparkEmrPropertiesPatch = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#SparkEmrPropertiesPatch", name: "SparkEmrPropertiesPatch")
@@ -841,13 +1007,29 @@ module Aws::DataZone
     StartDataSourceRunOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#StartDataSourceRunOutput", name: "StartDataSourceRunOutput")
     StartMetadataGenerationRunInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#StartMetadataGenerationRunInput", name: "StartMetadataGenerationRunInput")
     StartMetadataGenerationRunOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#StartMetadataGenerationRunOutput", name: "StartMetadataGenerationRunOutput")
+    StartNotebookExportInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#StartNotebookExportInput", name: "StartNotebookExportInput")
+    StartNotebookExportOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#StartNotebookExportOutput", name: "StartNotebookExportOutput")
+    StartNotebookImportInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#StartNotebookImportInput", name: "StartNotebookImportInput")
+    StartNotebookImportOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#StartNotebookImportOutput", name: "StartNotebookImportOutput")
+    StartNotebookRunInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#StartNotebookRunInput", name: "StartNotebookRunInput")
+    StartNotebookRunOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#StartNotebookRunOutput", name: "StartNotebookRunOutput")
+    StartNotebookSyncInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#StartNotebookSyncInput", name: "StartNotebookSyncInput")
+    StartNotebookSyncOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#StartNotebookSyncOutput", name: "StartNotebookSyncOutput")
     Status = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.datazone#Status", name: "Status")
+    StopNotebookRunInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#StopNotebookRunInput", name: "StopNotebookRunInput")
+    StopNotebookRunOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#StopNotebookRunOutput", name: "StopNotebookRunOutput")
+    StorageConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#StorageConfig", name: "StorageConfig")
     StringList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#StringList", name: "StringList")
     SubnetId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#SubnetId", name: "SubnetId", traits: {"smithy.api#length" => {"max" => 32}, "smithy.api#pattern" => "^subnet-[a-z0-9]+$"})
     SubnetIdList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#SubnetIdList", name: "SubnetIdList", traits: {"smithy.api#length" => {"min" => 1, "max" => 50}})
+    SubnetIds = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#SubnetIds", name: "SubnetIds", traits: {"smithy.api#length" => {"max" => 10}})
     SubscribedAsset = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#SubscribedAsset", name: "SubscribedAsset")
     SubscribedAssetListing = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#SubscribedAssetListing", name: "SubscribedAssetListing")
     SubscribedAssets = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#SubscribedAssets", name: "SubscribedAssets")
+    SubscribedGroup = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#SubscribedGroup", name: "SubscribedGroup")
+    SubscribedGroupInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#SubscribedGroupInput", name: "SubscribedGroupInput")
+    SubscribedIamPrincipal = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#SubscribedIamPrincipal", name: "SubscribedIamPrincipal")
+    SubscribedIamPrincipalInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#SubscribedIamPrincipalInput", name: "SubscribedIamPrincipalInput")
     SubscribedListing = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#SubscribedListing", name: "SubscribedListing")
     SubscribedListingInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#SubscribedListingInput", name: "SubscribedListingInput")
     SubscribedListingInputs = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#SubscribedListingInputs", name: "SubscribedListingInputs", traits: {"smithy.api#length" => {"min" => 1, "max" => 1}})
@@ -860,6 +1042,9 @@ module Aws::DataZone
     SubscribedProductListing = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#SubscribedProductListing", name: "SubscribedProductListing")
     SubscribedProject = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#SubscribedProject", name: "SubscribedProject")
     SubscribedProjectInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#SubscribedProjectInput", name: "SubscribedProjectInput")
+    SubscribedUser = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#SubscribedUser", name: "SubscribedUser")
+    SubscribedUserInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#SubscribedUserInput", name: "SubscribedUserInput")
+    SubscriptionGrantCreationMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.datazone#SubscriptionGrantCreationMode", name: "SubscriptionGrantCreationMode")
     SubscriptionGrantId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#SubscriptionGrantId", name: "SubscriptionGrantId", traits: {"smithy.api#pattern" => "^[a-zA-Z0-9_-]{1,36}$"})
     SubscriptionGrantOverallStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.datazone#SubscriptionGrantOverallStatus", name: "SubscriptionGrantOverallStatus")
     SubscriptionGrantStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.datazone#SubscriptionGrantStatus", name: "SubscriptionGrantStatus")
@@ -901,12 +1086,15 @@ module Aws::DataZone
     TimeSeriesDataPointSummaryFormOutputList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#TimeSeriesDataPointSummaryFormOutputList", name: "TimeSeriesDataPointSummaryFormOutputList")
     TimeSeriesEntityType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.datazone#TimeSeriesEntityType", name: "TimeSeriesEntityType")
     TimeSeriesFormName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#TimeSeriesFormName", name: "TimeSeriesFormName", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}})
+    TimeoutConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#TimeoutConfig", name: "TimeoutConfig")
     Timezone = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.datazone#Timezone", name: "Timezone")
     Title = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#Title", name: "Title", traits: {"smithy.api#length" => {"max" => 1000}, "smithy.api#sensitive" => {}})
     TokenUrlParametersMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.datazone#TokenUrlParametersMap", name: "TokenUrlParametersMap")
     Topic = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#Topic", name: "Topic")
     TrackingAssetArns = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#TrackingAssetArns", name: "TrackingAssetArns", traits: {"smithy.api#length" => {"min" => 0, "max" => 500}})
     TrackingAssets = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.datazone#TrackingAssets", name: "TrackingAssets", traits: {"smithy.api#length" => {"min" => 1, "max" => 1}})
+    TriggerSource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#TriggerSource", name: "TriggerSource")
+    TriggerSourceType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.datazone#TriggerSourceType", name: "TriggerSourceType")
     TypeName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#TypeName", name: "TypeName", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[^\\.]*"})
     TypesSearchScope = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.datazone#TypesSearchScope", name: "TypesSearchScope")
     UnauthorizedException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#UnauthorizedException", name: "UnauthorizedException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 401})
@@ -939,10 +1127,14 @@ module Aws::DataZone
     UpdateGlossaryTermOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#UpdateGlossaryTermOutput", name: "UpdateGlossaryTermOutput")
     UpdateGroupProfileInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#UpdateGroupProfileInput", name: "UpdateGroupProfileInput")
     UpdateGroupProfileOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#UpdateGroupProfileOutput", name: "UpdateGroupProfileOutput")
+    UpdateNotebookInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#UpdateNotebookInput", name: "UpdateNotebookInput")
+    UpdateNotebookOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#UpdateNotebookOutput", name: "UpdateNotebookOutput")
     UpdateProjectInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#UpdateProjectInput", name: "UpdateProjectInput")
     UpdateProjectOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#UpdateProjectOutput", name: "UpdateProjectOutput")
     UpdateProjectProfileInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#UpdateProjectProfileInput", name: "UpdateProjectProfileInput")
     UpdateProjectProfileOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#UpdateProjectProfileOutput", name: "UpdateProjectProfileOutput")
+    UpdateRootDomainUnitOwnerInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#UpdateRootDomainUnitOwnerInput", name: "UpdateRootDomainUnitOwnerInput")
+    UpdateRootDomainUnitOwnerOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#UpdateRootDomainUnitOwnerOutput", name: "UpdateRootDomainUnitOwnerOutput")
     UpdateRuleInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#UpdateRuleInput", name: "UpdateRuleInput")
     UpdateRuleOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#UpdateRuleOutput", name: "UpdateRuleOutput")
     UpdateSubscriptionGrantStatusInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#UpdateSubscriptionGrantStatusInput", name: "UpdateSubscriptionGrantStatusInput")
@@ -974,6 +1166,15 @@ module Aws::DataZone
     Username = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#Username", name: "Username", traits: {"smithy.api#length" => {"max" => 64}})
     UsernamePassword = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#UsernamePassword", name: "UsernamePassword", traits: {"smithy.api#sensitive" => {}})
     ValidationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#ValidationException", name: "ValidationException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
+    VpcConnectionSubnetIdList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.datazone#VpcConnectionSubnetIdList", name: "VpcConnectionSubnetIdList", traits: {"smithy.api#length" => {"min" => 1, "max" => 16}})
+    VpcId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datazone#VpcId", name: "VpcId", traits: {"smithy.api#length" => {"max" => 32}, "smithy.api#pattern" => "^vpc-[a-z0-9]+$"})
+    VpcPropertiesInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#VpcPropertiesInput", name: "VpcPropertiesInput")
+    VpcPropertiesOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#VpcPropertiesOutput", name: "VpcPropertiesOutput")
+    VpcPropertiesPatch = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#VpcPropertiesPatch", name: "VpcPropertiesPatch")
+    WorkflowsMwaaPropertiesInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#WorkflowsMwaaPropertiesInput", name: "WorkflowsMwaaPropertiesInput")
+    WorkflowsMwaaPropertiesOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#WorkflowsMwaaPropertiesOutput", name: "WorkflowsMwaaPropertiesOutput")
+    WorkflowsServerlessPropertiesInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#WorkflowsServerlessPropertiesInput", name: "WorkflowsServerlessPropertiesInput")
+    WorkflowsServerlessPropertiesOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.datazone#WorkflowsServerlessPropertiesOutput", name: "WorkflowsServerlessPropertiesOutput")
 
     AcceptChoice.add_member(:prediction_target, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "predictionTarget", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     AcceptChoice.add_member(:prediction_choice, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "predictionChoice"))
@@ -1000,6 +1201,7 @@ module Aws::DataZone
     AcceptSubscriptionRequestInput.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionRequestId, name: "identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     AcceptSubscriptionRequestInput.add_member(:decision_comment, ::Smithy::Schema::Shapes::MemberShape.new(target: DecisionComment, name: "decisionComment"))
     AcceptSubscriptionRequestInput.add_member(:asset_scopes, ::Smithy::Schema::Shapes::MemberShape.new(target: AcceptedAssetScopes, name: "assetScopes"))
+    AcceptSubscriptionRequestInput.add_member(:asset_permissions, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetPermissions, name: "assetPermissions"))
     AcceptSubscriptionRequestInput.type = Types::AcceptSubscriptionRequestInput
     AcceptSubscriptionRequestOutput.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionRequestId, name: "id", traits: {"smithy.api#required" => {}}))
     AcceptSubscriptionRequestOutput.add_member(:created_by, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedBy, name: "createdBy", traits: {"smithy.api#required" => {}}))
@@ -1063,6 +1265,8 @@ module Aws::DataZone
     AddPolicyGrantOutput.type = Types::AddPolicyGrantOutput
     AddToProjectMemberPoolPolicyGrantDetail.add_member(:include_child_domain_units, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "includeChildDomainUnits"))
     AddToProjectMemberPoolPolicyGrantDetail.type = Types::AddToProjectMemberPoolPolicyGrantDetail
+    AdditionalAttributes.add_member(:form_names, ::Smithy::Schema::Shapes::MemberShape.new(target: FormNameList, name: "formNames"))
+    AdditionalAttributes.type = Types::AdditionalAttributes
     AggregationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregationListItem, name: "member"))
     AggregationListItem.add_member(:attribute, ::Smithy::Schema::Shapes::MemberShape.new(target: Attribute, name: "attribute", traits: {"smithy.api#required" => {}}))
     AggregationListItem.add_member(:display_value, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregationDisplayValue, name: "displayValue"))
@@ -1079,6 +1283,18 @@ module Aws::DataZone
     AggregationOutputList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregationOutput, name: "member"))
     AllDomainUnitsGrantFilter.type = Types::AllDomainUnitsGrantFilter
     AllUsersGrantFilter.type = Types::AllUsersGrantFilter
+    AmazonQPropertiesInput.add_member(:is_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "isEnabled", traits: {"smithy.api#required" => {}}))
+    AmazonQPropertiesInput.add_member(:profile_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "profileArn", traits: {"smithy.api#length" => {"max" => 2048}, "smithy.api#pattern" => "^arn:aws[a-z\\-]*:[a-z0-9\\-]+:[a-z0-9\\-]*:[0-9]*:.*"}))
+    AmazonQPropertiesInput.add_member(:auth_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "authMode", traits: {"smithy.api#length" => {"max" => 128}}))
+    AmazonQPropertiesInput.type = Types::AmazonQPropertiesInput
+    AmazonQPropertiesOutput.add_member(:is_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "isEnabled", traits: {"smithy.api#required" => {}}))
+    AmazonQPropertiesOutput.add_member(:profile_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "profileArn", traits: {"smithy.api#length" => {"max" => 2048}, "smithy.api#pattern" => "^arn:aws[a-z\\-]*:[a-z0-9\\-]+:[a-z0-9\\-]*:[0-9]*:.*"}))
+    AmazonQPropertiesOutput.add_member(:auth_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "authMode", traits: {"smithy.api#length" => {"max" => 128}}))
+    AmazonQPropertiesOutput.type = Types::AmazonQPropertiesOutput
+    AmazonQPropertiesPatch.add_member(:is_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "isEnabled", traits: {"smithy.api#required" => {}}))
+    AmazonQPropertiesPatch.add_member(:profile_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "profileArn", traits: {"smithy.api#length" => {"max" => 2048}, "smithy.api#pattern" => "^arn:aws[a-z\\-]*:[a-z0-9\\-]+:[a-z0-9\\-]*:[0-9]*:.*"}))
+    AmazonQPropertiesPatch.add_member(:auth_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "authMode", traits: {"smithy.api#length" => {"max" => 128}}))
+    AmazonQPropertiesPatch.type = Types::AmazonQPropertiesPatch
     ApplicableAssetTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TypeName, name: "member"))
     AssetFilterConfiguration.add_member(:column_configuration, Types::AssetFilterConfiguration::ColumnConfiguration, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnFilterConfiguration, name: "columnConfiguration"))
     AssetFilterConfiguration.add_member(:row_configuration, Types::AssetFilterConfiguration::RowConfiguration, ::Smithy::Schema::Shapes::MemberShape.new(target: RowFilterConfiguration, name: "rowConfiguration"))
@@ -1154,6 +1370,10 @@ module Aws::DataZone
     AssetListingItemAdditionalAttributes.add_member(:match_rationale, ::Smithy::Schema::Shapes::MemberShape.new(target: MatchRationale, name: "matchRationale"))
     AssetListingItemAdditionalAttributes.add_member(:latest_time_series_data_point_forms, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeSeriesDataPointSummaryFormOutputList, name: "latestTimeSeriesDataPointForms"))
     AssetListingItemAdditionalAttributes.type = Types::AssetListingItemAdditionalAttributes
+    AssetPermission.add_member(:asset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetId, name: "assetId", traits: {"smithy.api#required" => {}}))
+    AssetPermission.add_member(:permissions, ::Smithy::Schema::Shapes::MemberShape.new(target: Permissions, name: "permissions", traits: {"smithy.api#required" => {}}))
+    AssetPermission.type = Types::AssetPermission
+    AssetPermissions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetPermission, name: "member"))
     AssetRevision.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainId"))
     AssetRevision.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetId, name: "id"))
     AssetRevision.add_member(:revision, ::Smithy::Schema::Shapes::MemberShape.new(target: Revision, name: "revision"))
@@ -1164,6 +1384,7 @@ module Aws::DataZone
     AssetScope.add_member(:asset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetId, name: "assetId", traits: {"smithy.api#required" => {}}))
     AssetScope.add_member(:filter_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterIds, name: "filterIds", traits: {"smithy.api#required" => {}}))
     AssetScope.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "status", traits: {"smithy.api#required" => {}}))
+    AssetScope.add_member(:scope_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "scopeName"))
     AssetScope.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "errorMessage"))
     AssetScope.type = Types::AssetScope
     AssetTargetNameMap.add_member(:asset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetId, name: "assetId", traits: {"smithy.api#required" => {}}))
@@ -1204,6 +1425,18 @@ module Aws::DataZone
     AthenaPropertiesOutput.type = Types::AthenaPropertiesOutput
     AthenaPropertiesPatch.add_member(:workgroup_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "workgroupName", traits: {"smithy.api#length" => {"max" => 64}}))
     AthenaPropertiesPatch.type = Types::AthenaPropertiesPatch
+    AttributeEntityType.add_member(:asset, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ASSET", traits: {"smithy.api#enumValue" => "ASSET"}))
+    AttributeEntityType.add_member(:listing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LISTING", traits: {"smithy.api#enumValue" => "LISTING"}))
+    AttributeError.add_member(:attribute_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeIdentifier, name: "attributeIdentifier", traits: {"smithy.api#required" => {}}))
+    AttributeError.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "code", traits: {"smithy.api#required" => {}}))
+    AttributeError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
+    AttributeError.type = Types::AttributeError
+    AttributeInput.add_member(:attribute_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeIdentifier, name: "attributeIdentifier", traits: {"smithy.api#required" => {}}))
+    AttributeInput.add_member(:forms, ::Smithy::Schema::Shapes::MemberShape.new(target: FormInputList, name: "forms", traits: {"smithy.api#required" => {}}))
+    AttributeInput.type = Types::AttributeInput
+    Attributes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeInput, name: "member"))
+    AttributesErrors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeError, name: "member"))
+    AttributesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeIdentifier, name: "member"))
     AuthType.add_member(:iam_idc, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IAM_IDC", traits: {"smithy.api#enumValue" => "IAM_IDC"}))
     AuthType.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
     AuthenticationConfiguration.add_member(:authentication_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthenticationType, name: "authenticationType"))
@@ -1242,6 +1475,32 @@ module Aws::DataZone
     BasicAuthenticationCredentials.add_member(:user_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "userName", traits: {"smithy.api#length" => {"max" => 512}, "smithy.api#pattern" => "^\\S+$"}))
     BasicAuthenticationCredentials.add_member(:password, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "password", traits: {"smithy.api#length" => {"max" => 512}, "smithy.api#pattern" => "^.*$"}))
     BasicAuthenticationCredentials.type = Types::BasicAuthenticationCredentials
+    BatchGetAttributeItems.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetAttributeOutput, name: "member"))
+    BatchGetAttributeOutput.add_member(:attribute_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeIdentifier, name: "attributeIdentifier", traits: {"smithy.api#required" => {}}))
+    BatchGetAttributeOutput.add_member(:forms, ::Smithy::Schema::Shapes::MemberShape.new(target: FormOutputList, name: "forms"))
+    BatchGetAttributeOutput.type = Types::BatchGetAttributeOutput
+    BatchGetAttributesMetadataInput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    BatchGetAttributesMetadataInput.add_member(:entity_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeEntityType, name: "entityType", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    BatchGetAttributesMetadataInput.add_member(:entity_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, name: "entityIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    BatchGetAttributesMetadataInput.add_member(:entity_revision, ::Smithy::Schema::Shapes::MemberShape.new(target: Revision, name: "entityRevision", traits: {"smithy.api#httpQuery" => "entityRevision"}))
+    BatchGetAttributesMetadataInput.add_member(:attribute_identifiers, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributesList, name: "attributeIdentifiers", traits: {"smithy.api#httpQuery" => "attributeIdentifier", "smithy.api#required" => {}}))
+    BatchGetAttributesMetadataInput.type = Types::BatchGetAttributesMetadataInput
+    BatchGetAttributesMetadataOutput.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetAttributeItems, name: "attributes"))
+    BatchGetAttributesMetadataOutput.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributesErrors, name: "errors", traits: {"smithy.api#required" => {}}))
+    BatchGetAttributesMetadataOutput.type = Types::BatchGetAttributesMetadataOutput
+    BatchPutAttributeItems.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchPutAttributeOutput, name: "member"))
+    BatchPutAttributeOutput.add_member(:attribute_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeIdentifier, name: "attributeIdentifier", traits: {"smithy.api#required" => {}}))
+    BatchPutAttributeOutput.type = Types::BatchPutAttributeOutput
+    BatchPutAttributesMetadataInput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    BatchPutAttributesMetadataInput.add_member(:entity_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeEntityType, name: "entityType", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    BatchPutAttributesMetadataInput.add_member(:entity_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, name: "entityIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    BatchPutAttributesMetadataInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    BatchPutAttributesMetadataInput.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: Attributes, name: "attributes", traits: {"smithy.api#required" => {}}))
+    BatchPutAttributesMetadataInput.type = Types::BatchPutAttributesMetadataInput
+    BatchPutAttributesMetadataOutput.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributesErrors, name: "errors"))
+    BatchPutAttributesMetadataOutput.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchPutAttributeItems, name: "attributes"))
+    BatchPutAttributesMetadataOutput.type = Types::BatchPutAttributesMetadataOutput
+    BlueprintCategory.add_member(:tooling, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TOOLING", traits: {"smithy.api#enumValue" => "TOOLING"}))
     BusinessNameGenerationConfiguration.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "enabled"))
     BusinessNameGenerationConfiguration.type = Types::BusinessNameGenerationConfiguration
     CancelMetadataGenerationRunInput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -1263,6 +1522,8 @@ module Aws::DataZone
     CancelSubscriptionOutput.add_member(:subscription_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionRequestId, name: "subscriptionRequestId"))
     CancelSubscriptionOutput.add_member(:retain_permissions, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "retainPermissions"))
     CancelSubscriptionOutput.type = Types::CancelSubscriptionOutput
+    CellInformation.type = Types::CellInformation
+    CellOrder.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CellInformation, name: "member"))
     ChangeAction.add_member(:publish, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PUBLISH", traits: {"smithy.api#enumValue" => "PUBLISH"}))
     ChangeAction.add_member(:unpublish, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNPUBLISH", traits: {"smithy.api#enumValue" => "UNPUBLISH"}))
     CloudFormationProperties.add_member(:template_url, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "templateUrl", traits: {"smithy.api#required" => {}}))
@@ -1270,6 +1531,9 @@ module Aws::DataZone
     ColumnFilterConfiguration.add_member(:included_column_names, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnNameList, name: "includedColumnNames"))
     ColumnFilterConfiguration.type = Types::ColumnFilterConfiguration
     ColumnNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
+    ComputeConfig.add_member(:instance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceType, name: "instanceType"))
+    ComputeConfig.add_member(:environment_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "environmentVersion"))
+    ComputeConfig.type = Types::ComputeConfig
     ComputeEnvironments.add_member(:spark, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SPARK", traits: {"smithy.api#enumValue" => "SPARK"}))
     ComputeEnvironments.add_member(:athena, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ATHENA", traits: {"smithy.api#enumValue" => "ATHENA"}))
     ComputeEnvironments.add_member(:python, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PYTHON", traits: {"smithy.api#enumValue" => "PYTHON"}))
@@ -1284,6 +1548,12 @@ module Aws::DataZone
     ConfigurableEnvironmentAction.add_member(:auth, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurableActionTypeAuthorization, name: "auth"))
     ConfigurableEnvironmentAction.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurableActionParameterList, name: "parameters", traits: {"smithy.api#required" => {}}))
     ConfigurableEnvironmentAction.type = Types::ConfigurableEnvironmentAction
+    Configuration.add_member(:classification, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "classification", traits: {"smithy.api#length" => {"max" => 64}, "smithy.api#pattern" => "^[\\w][\\w\\.\\-\\_]*$"}))
+    Configuration.add_member(:properties, ::Smithy::Schema::Shapes::MemberShape.new(target: PropertyMap, name: "properties"))
+    Configuration.type = Types::Configuration
+    ConfigurationStatus.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
+    ConfigurationStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    Configurations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Configuration, name: "member"))
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message", traits: {"smithy.api#required" => {}}))
     ConflictException.type = Types::ConflictException
     ConnectionCredentials.add_member(:access_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "accessKeyId"))
@@ -1301,6 +1571,14 @@ module Aws::DataZone
     ConnectionPropertiesInput.add_member(:spark_emr_properties, Types::ConnectionPropertiesInput::SparkEmrProperties, ::Smithy::Schema::Shapes::MemberShape.new(target: SparkEmrPropertiesInput, name: "sparkEmrProperties"))
     ConnectionPropertiesInput.add_member(:spark_glue_properties, Types::ConnectionPropertiesInput::SparkGlueProperties, ::Smithy::Schema::Shapes::MemberShape.new(target: SparkGluePropertiesInput, name: "sparkGlueProperties"))
     ConnectionPropertiesInput.add_member(:s3_properties, Types::ConnectionPropertiesInput::S3Properties, ::Smithy::Schema::Shapes::MemberShape.new(target: S3PropertiesInput, name: "s3Properties"))
+    ConnectionPropertiesInput.add_member(:snowflake_properties, Types::ConnectionPropertiesInput::SnowflakeProperties, ::Smithy::Schema::Shapes::MemberShape.new(target: SnowflakePropertiesInput, name: "snowflakeProperties"))
+    ConnectionPropertiesInput.add_member(:amazon_q_properties, Types::ConnectionPropertiesInput::AmazonQProperties, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonQPropertiesInput, name: "amazonQProperties"))
+    ConnectionPropertiesInput.add_member(:mlflow_properties, Types::ConnectionPropertiesInput::MlflowProperties, ::Smithy::Schema::Shapes::MemberShape.new(target: MlflowPropertiesInput, name: "mlflowProperties"))
+    ConnectionPropertiesInput.add_member(:workflows_mwaa_properties, Types::ConnectionPropertiesInput::WorkflowsMwaaProperties, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowsMwaaPropertiesInput, name: "workflowsMwaaProperties"))
+    ConnectionPropertiesInput.add_member(:workflows_serverless_properties, Types::ConnectionPropertiesInput::WorkflowsServerlessProperties, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowsServerlessPropertiesInput, name: "workflowsServerlessProperties"))
+    ConnectionPropertiesInput.add_member(:lakehouse_properties, Types::ConnectionPropertiesInput::LakehouseProperties, ::Smithy::Schema::Shapes::MemberShape.new(target: LakehousePropertiesInput, name: "lakehouseProperties"))
+    ConnectionPropertiesInput.add_member(:vpc_properties, Types::ConnectionPropertiesInput::VpcProperties, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcPropertiesInput, name: "vpcProperties"))
+    ConnectionPropertiesInput.add_member(:git_properties, Types::ConnectionPropertiesInput::GitProperties, ::Smithy::Schema::Shapes::MemberShape.new(target: GitPropertiesInput, name: "gitProperties"))
     ConnectionPropertiesInput.add_member(:unknown, Types::ConnectionPropertiesInput::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     ConnectionPropertiesInput.type = Types::ConnectionPropertiesInput
     ConnectionPropertiesOutput.add_member(:athena_properties, Types::ConnectionPropertiesOutput::AthenaProperties, ::Smithy::Schema::Shapes::MemberShape.new(target: AthenaPropertiesOutput, name: "athenaProperties"))
@@ -1311,6 +1589,14 @@ module Aws::DataZone
     ConnectionPropertiesOutput.add_member(:spark_emr_properties, Types::ConnectionPropertiesOutput::SparkEmrProperties, ::Smithy::Schema::Shapes::MemberShape.new(target: SparkEmrPropertiesOutput, name: "sparkEmrProperties"))
     ConnectionPropertiesOutput.add_member(:spark_glue_properties, Types::ConnectionPropertiesOutput::SparkGlueProperties, ::Smithy::Schema::Shapes::MemberShape.new(target: SparkGluePropertiesOutput, name: "sparkGlueProperties"))
     ConnectionPropertiesOutput.add_member(:s3_properties, Types::ConnectionPropertiesOutput::S3Properties, ::Smithy::Schema::Shapes::MemberShape.new(target: S3PropertiesOutput, name: "s3Properties"))
+    ConnectionPropertiesOutput.add_member(:snowflake_properties, Types::ConnectionPropertiesOutput::SnowflakeProperties, ::Smithy::Schema::Shapes::MemberShape.new(target: SnowflakePropertiesOutput, name: "snowflakeProperties"))
+    ConnectionPropertiesOutput.add_member(:amazon_q_properties, Types::ConnectionPropertiesOutput::AmazonQProperties, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonQPropertiesOutput, name: "amazonQProperties"))
+    ConnectionPropertiesOutput.add_member(:mlflow_properties, Types::ConnectionPropertiesOutput::MlflowProperties, ::Smithy::Schema::Shapes::MemberShape.new(target: MlflowPropertiesOutput, name: "mlflowProperties"))
+    ConnectionPropertiesOutput.add_member(:workflows_mwaa_properties, Types::ConnectionPropertiesOutput::WorkflowsMwaaProperties, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowsMwaaPropertiesOutput, name: "workflowsMwaaProperties"))
+    ConnectionPropertiesOutput.add_member(:workflows_serverless_properties, Types::ConnectionPropertiesOutput::WorkflowsServerlessProperties, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowsServerlessPropertiesOutput, name: "workflowsServerlessProperties"))
+    ConnectionPropertiesOutput.add_member(:lakehouse_properties, Types::ConnectionPropertiesOutput::LakehouseProperties, ::Smithy::Schema::Shapes::MemberShape.new(target: LakehousePropertiesOutput, name: "lakehouseProperties"))
+    ConnectionPropertiesOutput.add_member(:vpc_properties, Types::ConnectionPropertiesOutput::VpcProperties, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcPropertiesOutput, name: "vpcProperties"))
+    ConnectionPropertiesOutput.add_member(:git_properties, Types::ConnectionPropertiesOutput::GitProperties, ::Smithy::Schema::Shapes::MemberShape.new(target: GitPropertiesOutput, name: "gitProperties"))
     ConnectionPropertiesOutput.add_member(:unknown, Types::ConnectionPropertiesOutput::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     ConnectionPropertiesOutput.type = Types::ConnectionPropertiesOutput
     ConnectionPropertiesPatch.add_member(:athena_properties, Types::ConnectionPropertiesPatch::AthenaProperties, ::Smithy::Schema::Shapes::MemberShape.new(target: AthenaPropertiesPatch, name: "athenaProperties"))
@@ -1319,8 +1605,16 @@ module Aws::DataZone
     ConnectionPropertiesPatch.add_member(:redshift_properties, Types::ConnectionPropertiesPatch::RedshiftProperties, ::Smithy::Schema::Shapes::MemberShape.new(target: RedshiftPropertiesPatch, name: "redshiftProperties"))
     ConnectionPropertiesPatch.add_member(:spark_emr_properties, Types::ConnectionPropertiesPatch::SparkEmrProperties, ::Smithy::Schema::Shapes::MemberShape.new(target: SparkEmrPropertiesPatch, name: "sparkEmrProperties"))
     ConnectionPropertiesPatch.add_member(:s3_properties, Types::ConnectionPropertiesPatch::S3Properties, ::Smithy::Schema::Shapes::MemberShape.new(target: S3PropertiesPatch, name: "s3Properties"))
+    ConnectionPropertiesPatch.add_member(:snowflake_properties, Types::ConnectionPropertiesPatch::SnowflakeProperties, ::Smithy::Schema::Shapes::MemberShape.new(target: SnowflakePropertiesPatch, name: "snowflakeProperties"))
+    ConnectionPropertiesPatch.add_member(:amazon_q_properties, Types::ConnectionPropertiesPatch::AmazonQProperties, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonQPropertiesPatch, name: "amazonQProperties"))
+    ConnectionPropertiesPatch.add_member(:mlflow_properties, Types::ConnectionPropertiesPatch::MlflowProperties, ::Smithy::Schema::Shapes::MemberShape.new(target: MlflowPropertiesPatch, name: "mlflowProperties"))
+    ConnectionPropertiesPatch.add_member(:lakehouse_properties, Types::ConnectionPropertiesPatch::LakehouseProperties, ::Smithy::Schema::Shapes::MemberShape.new(target: LakehousePropertiesPatch, name: "lakehouseProperties"))
+    ConnectionPropertiesPatch.add_member(:vpc_properties, Types::ConnectionPropertiesPatch::VpcProperties, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcPropertiesPatch, name: "vpcProperties"))
+    ConnectionPropertiesPatch.add_member(:git_properties, Types::ConnectionPropertiesPatch::GitProperties, ::Smithy::Schema::Shapes::MemberShape.new(target: GitPropertiesPatch, name: "gitProperties"))
     ConnectionPropertiesPatch.add_member(:unknown, Types::ConnectionPropertiesPatch::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     ConnectionPropertiesPatch.type = Types::ConnectionPropertiesPatch
+    ConnectionScope.add_member(:domain, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DOMAIN", traits: {"smithy.api#enumValue" => "DOMAIN"}))
+    ConnectionScope.add_member(:project, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PROJECT", traits: {"smithy.api#enumValue" => "PROJECT"}))
     ConnectionStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
     ConnectionStatus.add_member(:create_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATE_FAILED", traits: {"smithy.api#enumValue" => "CREATE_FAILED"}))
     ConnectionStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
@@ -1330,6 +1624,7 @@ module Aws::DataZone
     ConnectionStatus.add_member(:update_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATE_FAILED", traits: {"smithy.api#enumValue" => "UPDATE_FAILED"}))
     ConnectionStatus.add_member(:deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETED", traits: {"smithy.api#enumValue" => "DELETED"}))
     ConnectionSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionSummary, name: "member"))
+    ConnectionSummary.add_member(:configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: Configurations, name: "configurations"))
     ConnectionSummary.add_member(:connection_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionId, name: "connectionId", traits: {"smithy.api#required" => {}}))
     ConnectionSummary.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainId", traits: {"smithy.api#required" => {}}))
     ConnectionSummary.add_member(:domain_unit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainUnitId, name: "domainUnitId", traits: {"smithy.api#required" => {}}))
@@ -1339,6 +1634,7 @@ module Aws::DataZone
     ConnectionSummary.add_member(:project_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectId, name: "projectId"))
     ConnectionSummary.add_member(:props, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionPropertiesOutput, name: "props"))
     ConnectionSummary.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionType, name: "type", traits: {"smithy.api#required" => {}}))
+    ConnectionSummary.add_member(:scope, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionScope, name: "scope"))
     ConnectionSummary.type = Types::ConnectionSummary
     ConnectionType.add_member(:athena, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ATHENA", traits: {"smithy.api#enumValue" => "ATHENA"}))
     ConnectionType.add_member(:bigquery, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BIGQUERY", traits: {"smithy.api#enumValue" => "BIGQUERY"}))
@@ -1360,6 +1656,25 @@ module Aws::DataZone
     ConnectionType.add_member(:teradata, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TERADATA", traits: {"smithy.api#enumValue" => "TERADATA"}))
     ConnectionType.add_member(:vertica, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VERTICA", traits: {"smithy.api#enumValue" => "VERTICA"}))
     ConnectionType.add_member(:workflows_mwaa, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WORKFLOWS_MWAA", traits: {"smithy.api#enumValue" => "WORKFLOWS_MWAA"}))
+    ConnectionType.add_member(:amazon_q, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AMAZON_Q", traits: {"smithy.api#enumValue" => "AMAZON_Q"}))
+    ConnectionType.add_member(:mlflow, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MLFLOW", traits: {"smithy.api#enumValue" => "MLFLOW"}))
+    ConnectionType.add_member(:vpc, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VPC", traits: {"smithy.api#enumValue" => "VPC"}))
+    ConnectionType.add_member(:git, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GIT", traits: {"smithy.api#enumValue" => "GIT"}))
+    ConnectivityProperties.add_member(:connection_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionProperties, name: "connectionProperties"))
+    ConnectivityProperties.add_member(:physical_connection_requirements, ::Smithy::Schema::Shapes::MemberShape.new(target: PhysicalConnectionRequirements, name: "physicalConnectionRequirements"))
+    ConnectivityProperties.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "name", traits: {"smithy.api#length" => {"min" => 1, "max" => 41}, "smithy.api#pattern" => "^[\\u0020-\\uD7FF\\uE000-\\uFFFF\\t]*$"}))
+    ConnectivityProperties.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "description", traits: {"smithy.api#length" => {"max" => 2048}, "smithy.api#pattern" => "^[\\u0020-\\uD7FF\\uE000-\\uFFFF\\r\\n\\t]*$"}))
+    ConnectivityProperties.add_member(:validate_credentials, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "validateCredentials"))
+    ConnectivityProperties.add_member(:validate_for_compute_environments, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputeEnvironmentsList, name: "validateForComputeEnvironments"))
+    ConnectivityProperties.add_member(:spark_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: PropertyMap, name: "sparkProperties"))
+    ConnectivityProperties.add_member(:athena_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: PropertyMap, name: "athenaProperties"))
+    ConnectivityProperties.add_member(:python_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: PropertyMap, name: "pythonProperties"))
+    ConnectivityProperties.add_member(:authentication_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthenticationConfigurationInput, name: "authenticationConfiguration"))
+    ConnectivityProperties.type = Types::ConnectivityProperties
+    ConnectivityPropertiesPatch.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "description", traits: {"smithy.api#length" => {"max" => 2048}, "smithy.api#pattern" => "^[\\S\\s]*$"}))
+    ConnectivityPropertiesPatch.add_member(:connection_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionProperties, name: "connectionProperties"))
+    ConnectivityPropertiesPatch.add_member(:authentication_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthenticationConfigurationPatch, name: "authenticationConfiguration"))
+    ConnectivityPropertiesPatch.type = Types::ConnectivityPropertiesPatch
     CreateAccountPoolInput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     CreateAccountPoolInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountPoolName, name: "name", traits: {"smithy.api#required" => {}}))
     CreateAccountPoolInput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
@@ -1484,13 +1799,17 @@ module Aws::DataZone
     CreateAssetTypePolicyGrantDetail.type = Types::CreateAssetTypePolicyGrantDetail
     CreateConnectionInput.add_member(:aws_location, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsLocation, name: "awsLocation"))
     CreateConnectionInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateConnectionInput.add_member(:configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: Configurations, name: "configurations"))
     CreateConnectionInput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description", traits: {"smithy.api#length" => {"max" => 128}}))
     CreateConnectionInput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    CreateConnectionInput.add_member(:environment_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentId, name: "environmentIdentifier", traits: {"smithy.api#required" => {}}))
+    CreateConnectionInput.add_member(:environment_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentId, name: "environmentIdentifier"))
     CreateConnectionInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionName, name: "name", traits: {"smithy.api#required" => {}}))
     CreateConnectionInput.add_member(:props, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionPropertiesInput, name: "props"))
+    CreateConnectionInput.add_member(:enable_trusted_identity_propagation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "enableTrustedIdentityPropagation"))
+    CreateConnectionInput.add_member(:scope, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionScope, name: "scope"))
     CreateConnectionInput.type = Types::CreateConnectionInput
     CreateConnectionOutput.add_member(:connection_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionId, name: "connectionId", traits: {"smithy.api#required" => {}}))
+    CreateConnectionOutput.add_member(:configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: Configurations, name: "configurations"))
     CreateConnectionOutput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
     CreateConnectionOutput.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainId", traits: {"smithy.api#required" => {}}))
     CreateConnectionOutput.add_member(:domain_unit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainUnitId, name: "domainUnitId", traits: {"smithy.api#required" => {}}))
@@ -1500,6 +1819,7 @@ module Aws::DataZone
     CreateConnectionOutput.add_member(:project_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectId, name: "projectId"))
     CreateConnectionOutput.add_member(:props, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionPropertiesOutput, name: "props"))
     CreateConnectionOutput.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionType, name: "type", traits: {"smithy.api#required" => {}}))
+    CreateConnectionOutput.add_member(:scope, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionScope, name: "scope"))
     CreateConnectionOutput.type = Types::CreateConnectionOutput
     CreateDataProductInput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     CreateDataProductInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: DataProductName, name: "name", traits: {"smithy.api#required" => {}}))
@@ -1589,7 +1909,7 @@ module Aws::DataZone
     CreateDomainInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "name", traits: {"smithy.api#required" => {}}))
     CreateDomainInput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "description"))
     CreateDomainInput.add_member(:single_sign_on, ::Smithy::Schema::Shapes::MemberShape.new(target: SingleSignOn, name: "singleSignOn"))
-    CreateDomainInput.add_member(:domain_execution_role, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "domainExecutionRole", traits: {"smithy.api#required" => {}}))
+    CreateDomainInput.add_member(:domain_execution_role, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "domainExecutionRole"))
     CreateDomainInput.add_member(:kms_key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyArn, name: "kmsKeyIdentifier"))
     CreateDomainInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags"))
     CreateDomainInput.add_member(:domain_version, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainVersion, name: "domainVersion"))
@@ -1646,6 +1966,7 @@ module Aws::DataZone
     CreateEnvironmentBlueprintInput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
     CreateEnvironmentBlueprintInput.add_member(:provisioning_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: ProvisioningProperties, name: "provisioningProperties", traits: {"smithy.api#required" => {}}))
     CreateEnvironmentBlueprintInput.add_member(:user_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomParameterList, name: "userParameters"))
+    CreateEnvironmentBlueprintInput.add_member(:blueprint_category, ::Smithy::Schema::Shapes::MemberShape.new(target: BlueprintCategory, name: "blueprintCategory"))
     CreateEnvironmentBlueprintInput.type = Types::CreateEnvironmentBlueprintInput
     CreateEnvironmentBlueprintOutput.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentBlueprintId, name: "id", traits: {"smithy.api#required" => {}}))
     CreateEnvironmentBlueprintOutput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentBlueprintName, name: "name", traits: {"smithy.api#required" => {}}))
@@ -1655,6 +1976,7 @@ module Aws::DataZone
     CreateEnvironmentBlueprintOutput.add_member(:deployment_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentProperties, name: "deploymentProperties"))
     CreateEnvironmentBlueprintOutput.add_member(:user_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomParameterList, name: "userParameters"))
     CreateEnvironmentBlueprintOutput.add_member(:glossary_terms, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryTerms, name: "glossaryTerms"))
+    CreateEnvironmentBlueprintOutput.add_member(:blueprint_category, ::Smithy::Schema::Shapes::MemberShape.new(target: BlueprintCategory, name: "blueprintCategory"))
     CreateEnvironmentBlueprintOutput.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
     CreateEnvironmentBlueprintOutput.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "updatedAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
     CreateEnvironmentBlueprintOutput.type = Types::CreateEnvironmentBlueprintOutput
@@ -1670,6 +1992,7 @@ module Aws::DataZone
     CreateEnvironmentInput.add_member(:environment_blueprint_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "environmentBlueprintIdentifier"))
     CreateEnvironmentInput.add_member(:deployment_order, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "deploymentOrder"))
     CreateEnvironmentInput.add_member(:environment_configuration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "environmentConfigurationId"))
+    CreateEnvironmentInput.add_member(:environment_configuration_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentConfigurationName, name: "environmentConfigurationName"))
     CreateEnvironmentInput.type = Types::CreateEnvironmentInput
     CreateEnvironmentOutput.add_member(:project_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectId, name: "projectId", traits: {"smithy.api#required" => {}}))
     CreateEnvironmentOutput.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentId, name: "id"))
@@ -1693,6 +2016,7 @@ module Aws::DataZone
     CreateEnvironmentOutput.add_member(:deployment_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentProperties, name: "deploymentProperties"))
     CreateEnvironmentOutput.add_member(:environment_blueprint_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentBlueprintId, name: "environmentBlueprintId"))
     CreateEnvironmentOutput.add_member(:environment_configuration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentConfigurationId, name: "environmentConfigurationId"))
+    CreateEnvironmentOutput.add_member(:environment_configuration_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentConfigurationName, name: "environmentConfigurationName"))
     CreateEnvironmentOutput.type = Types::CreateEnvironmentOutput
     CreateEnvironmentProfileInput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     CreateEnvironmentProfileInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentProfileName, name: "name", traits: {"smithy.api#required" => {}}))
@@ -1773,13 +2097,16 @@ module Aws::DataZone
     CreateGlossaryTermOutput.add_member(:usage_restrictions, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryUsageRestrictions, name: "usageRestrictions"))
     CreateGlossaryTermOutput.type = Types::CreateGlossaryTermOutput
     CreateGroupProfileInput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    CreateGroupProfileInput.add_member(:group_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupIdentifier, name: "groupIdentifier", traits: {"smithy.api#required" => {}}))
+    CreateGroupProfileInput.add_member(:group_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupIdentifier, name: "groupIdentifier"))
+    CreateGroupProfileInput.add_member(:role_principal_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "rolePrincipalArn"))
     CreateGroupProfileInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     CreateGroupProfileInput.type = Types::CreateGroupProfileInput
     CreateGroupProfileOutput.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainId"))
     CreateGroupProfileOutput.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupProfileId, name: "id"))
     CreateGroupProfileOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupProfileStatus, name: "status"))
     CreateGroupProfileOutput.add_member(:group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupProfileName, name: "groupName"))
+    CreateGroupProfileOutput.add_member(:role_principal_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "rolePrincipalArn"))
+    CreateGroupProfileOutput.add_member(:role_principal_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "rolePrincipalId"))
     CreateGroupProfileOutput.type = Types::CreateGroupProfileOutput
     CreateListingChangeSetInput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     CreateListingChangeSetInput.add_member(:entity_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityIdentifier, name: "entityIdentifier", traits: {"smithy.api#required" => {}}))
@@ -1792,16 +2119,51 @@ module Aws::DataZone
     CreateListingChangeSetOutput.add_member(:listing_revision, ::Smithy::Schema::Shapes::MemberShape.new(target: Revision, name: "listingRevision", traits: {"smithy.api#required" => {}}))
     CreateListingChangeSetOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ListingStatus, name: "status", traits: {"smithy.api#required" => {}}))
     CreateListingChangeSetOutput.type = Types::CreateListingChangeSetOutput
+    CreateNotebookInput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CreateNotebookInput.add_member(:owning_project_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectId, name: "owningProjectIdentifier", traits: {"smithy.api#required" => {}}))
+    CreateNotebookInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookName, name: "name", traits: {"smithy.api#required" => {}}))
+    CreateNotebookInput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
+    CreateNotebookInput.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookType, name: "type"))
+    CreateNotebookInput.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: Metadata, name: "metadata"))
+    CreateNotebookInput.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: Parameters, name: "parameters"))
+    CreateNotebookInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateNotebookInput.type = Types::CreateNotebookInput
+    CreateNotebookOutput.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookId, name: "id", traits: {"smithy.api#required" => {}}))
+    CreateNotebookOutput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookName, name: "name", traits: {"smithy.api#required" => {}}))
+    CreateNotebookOutput.add_member(:owning_project_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectId, name: "owningProjectId", traits: {"smithy.api#required" => {}}))
+    CreateNotebookOutput.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainId", traits: {"smithy.api#required" => {}}))
+    CreateNotebookOutput.add_member(:cell_order, ::Smithy::Schema::Shapes::MemberShape.new(target: CellOrder, name: "cellOrder", traits: {"smithy.api#required" => {}}))
+    CreateNotebookOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    CreateNotebookOutput.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookType, name: "type"))
+    CreateNotebookOutput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
+    CreateNotebookOutput.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedAt, name: "createdAt"))
+    CreateNotebookOutput.add_member(:created_by, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedBy, name: "createdBy"))
+    CreateNotebookOutput.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdatedAt, name: "updatedAt"))
+    CreateNotebookOutput.add_member(:updated_by, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdatedBy, name: "updatedBy"))
+    CreateNotebookOutput.add_member(:locked_by, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "lockedBy"))
+    CreateNotebookOutput.add_member(:locked_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "lockedAt"))
+    CreateNotebookOutput.add_member(:lock_expires_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "lockExpiresAt"))
+    CreateNotebookOutput.add_member(:compute_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputeId, name: "computeId"))
+    CreateNotebookOutput.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: Metadata, name: "metadata"))
+    CreateNotebookOutput.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: Parameters, name: "parameters"))
+    CreateNotebookOutput.add_member(:environment_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentConfig, name: "environmentConfiguration"))
+    CreateNotebookOutput.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookError, name: "error"))
+    CreateNotebookOutput.add_member(:git_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: GitMetadata, name: "gitMetadata"))
+    CreateNotebookOutput.type = Types::CreateNotebookOutput
     CreateProjectFromProjectProfilePolicyGrantDetail.add_member(:include_child_domain_units, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "includeChildDomainUnits"))
     CreateProjectFromProjectProfilePolicyGrantDetail.add_member(:project_profiles, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectProfileList, name: "projectProfiles"))
     CreateProjectFromProjectProfilePolicyGrantDetail.type = Types::CreateProjectFromProjectProfilePolicyGrantDetail
     CreateProjectInput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     CreateProjectInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectName, name: "name", traits: {"smithy.api#required" => {}}))
     CreateProjectInput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
+    CreateProjectInput.add_member(:resource_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "resourceTags", traits: {"smithy.api#length" => {"max" => 25}}))
     CreateProjectInput.add_member(:glossary_terms, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryTerms, name: "glossaryTerms"))
     CreateProjectInput.add_member(:domain_unit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainUnitId, name: "domainUnitId"))
     CreateProjectInput.add_member(:project_profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectProfileId, name: "projectProfileId"))
     CreateProjectInput.add_member(:user_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentConfigurationUserParametersList, name: "userParameters"))
+    CreateProjectInput.add_member(:project_category, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "projectCategory"))
+    CreateProjectInput.add_member(:project_execution_role, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "projectExecutionRole"))
+    CreateProjectInput.add_member(:membership_assignments, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectMembershipAssignments, name: "membershipAssignments"))
     CreateProjectInput.type = Types::CreateProjectInput
     CreateProjectMembershipInput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     CreateProjectMembershipInput.add_member(:project_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectId, name: "projectIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -1818,11 +2180,13 @@ module Aws::DataZone
     CreateProjectOutput.add_member(:created_by, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedBy, name: "createdBy", traits: {"smithy.api#required" => {}}))
     CreateProjectOutput.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
     CreateProjectOutput.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "lastUpdatedAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    CreateProjectOutput.add_member(:resource_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTags, name: "resourceTags"))
     CreateProjectOutput.add_member(:glossary_terms, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryTerms, name: "glossaryTerms"))
     CreateProjectOutput.add_member(:domain_unit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainUnitId, name: "domainUnitId"))
     CreateProjectOutput.add_member(:project_profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectProfileId, name: "projectProfileId"))
     CreateProjectOutput.add_member(:user_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentConfigurationUserParametersList, name: "userParameters"))
     CreateProjectOutput.add_member(:environment_deployment_details, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentDeploymentDetails, name: "environmentDeploymentDetails"))
+    CreateProjectOutput.add_member(:project_category, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "projectCategory"))
     CreateProjectOutput.type = Types::CreateProjectOutput
     CreateProjectPolicyGrantDetail.add_member(:include_child_domain_units, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "includeChildDomainUnits"))
     CreateProjectPolicyGrantDetail.type = Types::CreateProjectPolicyGrantDetail
@@ -1830,6 +2194,9 @@ module Aws::DataZone
     CreateProjectProfileInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectProfileName, name: "name", traits: {"smithy.api#required" => {}}))
     CreateProjectProfileInput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
     CreateProjectProfileInput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: Status, name: "status"))
+    CreateProjectProfileInput.add_member(:project_resource_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectResourceTagParameters, name: "projectResourceTags"))
+    CreateProjectProfileInput.add_member(:allow_custom_project_resource_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "allowCustomProjectResourceTags"))
+    CreateProjectProfileInput.add_member(:project_resource_tags_description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "projectResourceTagsDescription"))
     CreateProjectProfileInput.add_member(:environment_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentConfigurationsList, name: "environmentConfigurations"))
     CreateProjectProfileInput.add_member(:domain_unit_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainUnitId, name: "domainUnitIdentifier"))
     CreateProjectProfileInput.type = Types::CreateProjectProfileInput
@@ -1838,6 +2205,9 @@ module Aws::DataZone
     CreateProjectProfileOutput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectProfileName, name: "name", traits: {"smithy.api#required" => {}}))
     CreateProjectProfileOutput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
     CreateProjectProfileOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: Status, name: "status"))
+    CreateProjectProfileOutput.add_member(:project_resource_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectResourceTagParameters, name: "projectResourceTags"))
+    CreateProjectProfileOutput.add_member(:allow_custom_project_resource_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "allowCustomProjectResourceTags"))
+    CreateProjectProfileOutput.add_member(:project_resource_tags_description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "projectResourceTagsDescription"))
     CreateProjectProfileOutput.add_member(:environment_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentConfigurationsList, name: "environmentConfigurations"))
     CreateProjectProfileOutput.add_member(:created_by, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedBy, name: "createdBy", traits: {"smithy.api#required" => {}}))
     CreateProjectProfileOutput.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
@@ -1878,6 +2248,7 @@ module Aws::DataZone
     CreateSubscriptionGrantOutput.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainId", traits: {"smithy.api#required" => {}}))
     CreateSubscriptionGrantOutput.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedAt, name: "createdAt", traits: {"smithy.api#required" => {}}))
     CreateSubscriptionGrantOutput.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdatedAt, name: "updatedAt", traits: {"smithy.api#required" => {}}))
+    CreateSubscriptionGrantOutput.add_member(:environment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentId, name: "environmentId"))
     CreateSubscriptionGrantOutput.add_member(:subscription_target_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionTargetId, name: "subscriptionTargetId", traits: {"smithy.api#required" => {}}))
     CreateSubscriptionGrantOutput.add_member(:granted_entity, ::Smithy::Schema::Shapes::MemberShape.new(target: GrantedEntity, name: "grantedEntity", traits: {"smithy.api#required" => {}}))
     CreateSubscriptionGrantOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionGrantOverallStatus, name: "status", traits: {"smithy.api#required" => {}}))
@@ -1890,6 +2261,8 @@ module Aws::DataZone
     CreateSubscriptionRequestInput.add_member(:request_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestReason, name: "requestReason", traits: {"smithy.api#required" => {}}))
     CreateSubscriptionRequestInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     CreateSubscriptionRequestInput.add_member(:metadata_forms, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataFormInputs, name: "metadataForms"))
+    CreateSubscriptionRequestInput.add_member(:asset_permissions, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetPermissions, name: "assetPermissions"))
+    CreateSubscriptionRequestInput.add_member(:asset_scopes, ::Smithy::Schema::Shapes::MemberShape.new(target: AcceptedAssetScopes, name: "assetScopes"))
     CreateSubscriptionRequestInput.type = Types::CreateSubscriptionRequestInput
     CreateSubscriptionRequestOutput.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionRequestId, name: "id", traits: {"smithy.api#required" => {}}))
     CreateSubscriptionRequestOutput.add_member(:created_by, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedBy, name: "createdBy", traits: {"smithy.api#required" => {}}))
@@ -1916,6 +2289,7 @@ module Aws::DataZone
     CreateSubscriptionTargetInput.add_member(:applicable_asset_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicableAssetTypes, name: "applicableAssetTypes", traits: {"smithy.api#required" => {}}))
     CreateSubscriptionTargetInput.add_member(:provider, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "provider"))
     CreateSubscriptionTargetInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateSubscriptionTargetInput.add_member(:subscription_grant_creation_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionGrantCreationMode, name: "subscriptionGrantCreationMode"))
     CreateSubscriptionTargetInput.type = Types::CreateSubscriptionTargetInput
     CreateSubscriptionTargetOutput.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionTargetId, name: "id", traits: {"smithy.api#required" => {}}))
     CreateSubscriptionTargetOutput.add_member(:authorized_principals, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthorizedPrincipalIdentifiers, name: "authorizedPrincipals", traits: {"smithy.api#required" => {}}))
@@ -1932,10 +2306,12 @@ module Aws::DataZone
     CreateSubscriptionTargetOutput.add_member(:applicable_asset_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicableAssetTypes, name: "applicableAssetTypes", traits: {"smithy.api#required" => {}}))
     CreateSubscriptionTargetOutput.add_member(:subscription_target_config, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionTargetForms, name: "subscriptionTargetConfig", traits: {"smithy.api#required" => {}}))
     CreateSubscriptionTargetOutput.add_member(:provider, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "provider", traits: {"smithy.api#required" => {}}))
+    CreateSubscriptionTargetOutput.add_member(:subscription_grant_creation_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionGrantCreationMode, name: "subscriptionGrantCreationMode"))
     CreateSubscriptionTargetOutput.type = Types::CreateSubscriptionTargetOutput
     CreateUserProfileInput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     CreateUserProfileInput.add_member(:user_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: UserIdentifier, name: "userIdentifier", traits: {"smithy.api#required" => {}}))
     CreateUserProfileInput.add_member(:user_type, ::Smithy::Schema::Shapes::MemberShape.new(target: UserType, name: "userType"))
+    CreateUserProfileInput.add_member(:session_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "sessionName", traits: {"smithy.api#length" => {"min" => 2, "max" => 64}}))
     CreateUserProfileInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     CreateUserProfileInput.type = Types::CreateUserProfileInput
     CreateUserProfileOutput.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainId"))
@@ -2126,6 +2502,9 @@ module Aws::DataZone
     DeleteConnectionInput.type = Types::DeleteConnectionInput
     DeleteConnectionOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "status"))
     DeleteConnectionOutput.type = Types::DeleteConnectionOutput
+    DeleteDataExportConfigurationInput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteDataExportConfigurationInput.type = Types::DeleteDataExportConfigurationInput
+    DeleteDataExportConfigurationOutput.type = Types::DeleteDataExportConfigurationOutput
     DeleteDataProductInput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteDataProductInput.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DataProductId, name: "identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteDataProductInput.type = Types::DeleteDataProductInput
@@ -2161,6 +2540,7 @@ module Aws::DataZone
     DeleteDomainInput.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteDomainInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "clientToken", traits: {"smithy.api#httpQuery" => "clientToken", "smithy.api#idempotencyToken" => {}}))
     DeleteDomainInput.add_member(:skip_deletion_check, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "skipDeletionCheck", traits: {"smithy.api#httpQuery" => "skipDeletionCheck", "smithy.api#notProperty" => {}}))
+    DeleteDomainInput.add_member(:cascade_delete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "cascadeDelete", traits: {"smithy.api#httpQuery" => "cascadeDelete", "smithy.api#notProperty" => {}}))
     DeleteDomainInput.type = Types::DeleteDomainInput
     DeleteDomainOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainStatus, name: "status", traits: {"smithy.api#required" => {}}))
     DeleteDomainOutput.type = Types::DeleteDomainOutput
@@ -2197,10 +2577,23 @@ module Aws::DataZone
     DeleteGlossaryTermInput.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryTermId, name: "identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteGlossaryTermInput.type = Types::DeleteGlossaryTermInput
     DeleteGlossaryTermOutput.type = Types::DeleteGlossaryTermOutput
+    DeleteLineageEventInput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteLineageEventInput.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: LineageEventIdentifier, name: "identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteLineageEventInput.type = Types::DeleteLineageEventInput
+    DeleteLineageEventOutput.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: LineageEventIdentifier, name: "id"))
+    DeleteLineageEventOutput.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainId"))
+    DeleteLineageEventOutput.add_member(:processing_status, ::Smithy::Schema::Shapes::MemberShape.new(target: LineageEventProcessingStatus, name: "processingStatus"))
+    DeleteLineageEventOutput.type = Types::DeleteLineageEventOutput
     DeleteListingInput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteListingInput.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ListingId, name: "identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteListingInput.type = Types::DeleteListingInput
     DeleteListingOutput.type = Types::DeleteListingOutput
+    DeleteNotebookInput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteNotebookInput.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookId, name: "identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteNotebookInput.type = Types::DeleteNotebookInput
+    DeleteNotebookOutput.type = Types::DeleteNotebookOutput
+    DeleteProgress.add_member(:successfully_deleted_project_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "successfullyDeletedProjectCount"))
+    DeleteProgress.type = Types::DeleteProgress
     DeleteProjectInput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteProjectInput.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectId, name: "identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteProjectInput.add_member(:skip_deletion_check, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "skipDeletionCheck", traits: {"smithy.api#httpQuery" => "skipDeletionCheck", "smithy.api#notProperty" => {}}))
@@ -2228,6 +2621,7 @@ module Aws::DataZone
     DeleteSubscriptionGrantOutput.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainId", traits: {"smithy.api#required" => {}}))
     DeleteSubscriptionGrantOutput.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedAt, name: "createdAt", traits: {"smithy.api#required" => {}}))
     DeleteSubscriptionGrantOutput.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdatedAt, name: "updatedAt", traits: {"smithy.api#required" => {}}))
+    DeleteSubscriptionGrantOutput.add_member(:environment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentId, name: "environmentId"))
     DeleteSubscriptionGrantOutput.add_member(:subscription_target_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionTargetId, name: "subscriptionTargetId", traits: {"smithy.api#required" => {}}))
     DeleteSubscriptionGrantOutput.add_member(:granted_entity, ::Smithy::Schema::Shapes::MemberShape.new(target: GrantedEntity, name: "grantedEntity", traits: {"smithy.api#required" => {}}))
     DeleteSubscriptionGrantOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionGrantOverallStatus, name: "status", traits: {"smithy.api#required" => {}}))
@@ -2336,7 +2730,14 @@ module Aws::DataZone
     EnableSetting.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     EnableSetting.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
     EnabledRegionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionName, name: "member"))
+    EncryptionConfiguration.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "kmsKeyArn"))
+    EncryptionConfiguration.add_member(:sse_algorithm, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "sseAlgorithm"))
+    EncryptionConfiguration.type = Types::EncryptionConfiguration
     EntityOwners.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OwnerPropertiesOutput, name: "member"))
+    EntityPattern.add_member(:entity_type, ::Smithy::Schema::Shapes::MemberShape.new(target: GraphEntityType, name: "entityType", traits: {"smithy.api#required" => {}}))
+    EntityPattern.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "identifier", traits: {"smithy.api#length" => {"min" => 1, "max" => 2086}, "smithy.api#required" => {}}))
+    EntityPattern.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterClause, name: "filters"))
+    EntityPattern.type = Types::EntityPattern
     EntityType.add_member(:asset, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ASSET", traits: {"smithy.api#enumValue" => "ASSET"}))
     EntityType.add_member(:data_product, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DATA_PRODUCT", traits: {"smithy.api#enumValue" => "DATA_PRODUCT"}))
     EnvironmentActionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurableEnvironmentAction, name: "member"))
@@ -2354,8 +2755,10 @@ module Aws::DataZone
     EnvironmentBlueprintConfigurationItem.add_member(:manage_access_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "manageAccessRoleArn"))
     EnvironmentBlueprintConfigurationItem.add_member(:enabled_regions, ::Smithy::Schema::Shapes::MemberShape.new(target: EnabledRegionList, name: "enabledRegions"))
     EnvironmentBlueprintConfigurationItem.add_member(:regional_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionalParameterMap, name: "regionalParameters"))
+    EnvironmentBlueprintConfigurationItem.add_member(:allow_user_provided_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "allowUserProvidedConfigurations"))
     EnvironmentBlueprintConfigurationItem.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
     EnvironmentBlueprintConfigurationItem.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "updatedAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    EnvironmentBlueprintConfigurationItem.add_member(:resource_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceConfigurations, name: "resourceConfigurations"))
     EnvironmentBlueprintConfigurationItem.add_member(:provisioning_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: ProvisioningConfigurationList, name: "provisioningConfigurations"))
     EnvironmentBlueprintConfigurationItem.type = Types::EnvironmentBlueprintConfigurationItem
     EnvironmentBlueprintConfigurations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentBlueprintConfigurationItem, name: "member"))
@@ -2367,7 +2770,11 @@ module Aws::DataZone
     EnvironmentBlueprintSummary.add_member(:provisioning_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: ProvisioningProperties, name: "provisioningProperties", traits: {"smithy.api#required" => {}}))
     EnvironmentBlueprintSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
     EnvironmentBlueprintSummary.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "updatedAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    EnvironmentBlueprintSummary.add_member(:blueprint_category, ::Smithy::Schema::Shapes::MemberShape.new(target: BlueprintCategory, name: "blueprintCategory"))
     EnvironmentBlueprintSummary.type = Types::EnvironmentBlueprintSummary
+    EnvironmentConfig.add_member(:image_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "imageVersion"))
+    EnvironmentConfig.add_member(:package_config, ::Smithy::Schema::Shapes::MemberShape.new(target: PackageConfig, name: "packageConfig"))
+    EnvironmentConfig.type = Types::EnvironmentConfig
     EnvironmentConfiguration.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentConfigurationName, name: "name", traits: {"smithy.api#required" => {}}))
     EnvironmentConfiguration.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentConfigurationId, name: "id"))
     EnvironmentConfiguration.add_member(:environment_blueprint_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentBlueprintId, name: "environmentBlueprintId", traits: {"smithy.api#required" => {}}))
@@ -2453,6 +2860,7 @@ module Aws::DataZone
     EnvironmentSummary.add_member(:provider, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "provider", traits: {"smithy.api#required" => {}}))
     EnvironmentSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentStatus, name: "status"))
     EnvironmentSummary.add_member(:environment_configuration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentConfigurationId, name: "environmentConfigurationId"))
+    EnvironmentSummary.add_member(:environment_configuration_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentConfigurationName, name: "environmentConfigurationName"))
     EnvironmentSummary.type = Types::EnvironmentSummary
     EqualToExpression.add_member(:column_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "columnName", traits: {"smithy.api#required" => {}}))
     EqualToExpression.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value", traits: {"smithy.api#required" => {}}))
@@ -2463,9 +2871,17 @@ module Aws::DataZone
     FailedQueryProcessingErrorMessages.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
     FailureCause.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     FailureCause.type = Types::FailureCause
+    FailureReason.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "id"))
+    FailureReason.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
+    FailureReason.type = Types::FailureReason
     FailureReasons.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectDeletionError, name: "member"))
+    FailureReasonsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureReason, name: "member"))
+    FileFormat.add_member(:pdf, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PDF", traits: {"smithy.api#enumValue" => "PDF"}))
+    FileFormat.add_member(:ipynb, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IPYNB", traits: {"smithy.api#enumValue" => "IPYNB"}))
     Filter.add_member(:attribute, ::Smithy::Schema::Shapes::MemberShape.new(target: Attribute, name: "attribute", traits: {"smithy.api#required" => {}}))
-    Filter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#required" => {}}))
+    Filter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value", traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => "", "smithy.api#length" => {"max" => 128}}))
+    Filter.add_member(:int_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "intValue"))
+    Filter.add_member(:operator, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterOperator, name: "operator", traits: {"smithy.api#default" => "EQ"}))
     Filter.type = Types::Filter
     FilterClause.add_member(:filter, Types::FilterClause::Filter, ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, name: "filter"))
     FilterClause.add_member(:and, Types::FilterClause::And, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterList, name: "and"))
@@ -2480,6 +2896,12 @@ module Aws::DataZone
     FilterExpressions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterExpression, name: "member"))
     FilterIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterId, name: "member"))
     FilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterClause, name: "member"))
+    FilterOperator.add_member(:eq, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EQ", traits: {"smithy.api#enumValue" => "EQ"}))
+    FilterOperator.add_member(:le, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LE", traits: {"smithy.api#enumValue" => "LE"}))
+    FilterOperator.add_member(:lt, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LT", traits: {"smithy.api#enumValue" => "LT"}))
+    FilterOperator.add_member(:ge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GE", traits: {"smithy.api#enumValue" => "GE"}))
+    FilterOperator.add_member(:gt, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GT", traits: {"smithy.api#enumValue" => "GT"}))
+    FilterOperator.add_member(:text_search, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TEXT_SEARCH", traits: {"smithy.api#enumValue" => "TEXT_SEARCH"}))
     FilterStatus.add_member(:valid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VALID", traits: {"smithy.api#enumValue" => "VALID"}))
     FilterStatus.add_member(:invalid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INVALID", traits: {"smithy.api#enumValue" => "INVALID"}))
     FormEntryInput.add_member(:type_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: FormTypeIdentifier, name: "typeIdentifier", traits: {"smithy.api#required" => {}}))
@@ -2496,6 +2918,7 @@ module Aws::DataZone
     FormInput.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "content", traits: {"smithy.api#length" => {"max" => 300000}}))
     FormInput.type = Types::FormInput
     FormInputList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FormInput, name: "member"))
+    FormNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FormName, name: "member"))
     FormOutput.add_member(:form_name, ::Smithy::Schema::Shapes::MemberShape.new(target: FormName, name: "formName", traits: {"smithy.api#required" => {}}))
     FormOutput.add_member(:type_name, ::Smithy::Schema::Shapes::MemberShape.new(target: FormTypeName, name: "typeName"))
     FormOutput.add_member(:type_revision, ::Smithy::Schema::Shapes::MemberShape.new(target: Revision, name: "typeRevision"))
@@ -2598,6 +3021,7 @@ module Aws::DataZone
     GetConnectionInput.add_member(:with_secret, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "withSecret", traits: {"smithy.api#httpQuery" => "withSecret"}))
     GetConnectionInput.type = Types::GetConnectionInput
     GetConnectionOutput.add_member(:connection_credentials, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionCredentials, name: "connectionCredentials"))
+    GetConnectionOutput.add_member(:configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: Configurations, name: "configurations"))
     GetConnectionOutput.add_member(:connection_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionId, name: "connectionId", traits: {"smithy.api#required" => {}}))
     GetConnectionOutput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
     GetConnectionOutput.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainId", traits: {"smithy.api#required" => {}}))
@@ -2609,7 +3033,17 @@ module Aws::DataZone
     GetConnectionOutput.add_member(:project_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectId, name: "projectId"))
     GetConnectionOutput.add_member(:props, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionPropertiesOutput, name: "props"))
     GetConnectionOutput.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionType, name: "type", traits: {"smithy.api#required" => {}}))
+    GetConnectionOutput.add_member(:scope, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionScope, name: "scope"))
     GetConnectionOutput.type = Types::GetConnectionOutput
+    GetDataExportConfigurationInput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetDataExportConfigurationInput.type = Types::GetDataExportConfigurationInput
+    GetDataExportConfigurationOutput.add_member(:is_export_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "isExportEnabled"))
+    GetDataExportConfigurationOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationStatus, name: "status"))
+    GetDataExportConfigurationOutput.add_member(:encryption_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionConfiguration, name: "encryptionConfiguration"))
+    GetDataExportConfigurationOutput.add_member(:s3_table_bucket_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "s3TableBucketArn"))
+    GetDataExportConfigurationOutput.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedAt, name: "createdAt"))
+    GetDataExportConfigurationOutput.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdatedAt, name: "updatedAt"))
+    GetDataExportConfigurationOutput.type = Types::GetDataExportConfigurationOutput
     GetDataProductInput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetDataProductInput.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DataProductId, name: "identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetDataProductInput.add_member(:revision, ::Smithy::Schema::Shapes::MemberShape.new(target: Revision, name: "revision", traits: {"smithy.api#httpQuery" => "revision"}))
@@ -2691,6 +3125,8 @@ module Aws::DataZone
     GetDomainOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags"))
     GetDomainOutput.add_member(:domain_version, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainVersion, name: "domainVersion"))
     GetDomainOutput.add_member(:service_role, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "serviceRole"))
+    GetDomainOutput.add_member(:failure_reasons, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureReasonsList, name: "failureReasons"))
+    GetDomainOutput.add_member(:delete_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteProgress, name: "deleteProgress"))
     GetDomainOutput.type = Types::GetDomainOutput
     GetDomainUnitInput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetDomainUnitInput.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainUnitId, name: "identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -2727,8 +3163,10 @@ module Aws::DataZone
     GetEnvironmentBlueprintConfigurationOutput.add_member(:manage_access_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "manageAccessRoleArn"))
     GetEnvironmentBlueprintConfigurationOutput.add_member(:enabled_regions, ::Smithy::Schema::Shapes::MemberShape.new(target: EnabledRegionList, name: "enabledRegions"))
     GetEnvironmentBlueprintConfigurationOutput.add_member(:regional_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionalParameterMap, name: "regionalParameters"))
+    GetEnvironmentBlueprintConfigurationOutput.add_member(:allow_user_provided_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "allowUserProvidedConfigurations"))
     GetEnvironmentBlueprintConfigurationOutput.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
     GetEnvironmentBlueprintConfigurationOutput.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "updatedAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    GetEnvironmentBlueprintConfigurationOutput.add_member(:resource_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceConfigurations, name: "resourceConfigurations", traits: {"smithy.api#notProperty" => {}}))
     GetEnvironmentBlueprintConfigurationOutput.add_member(:provisioning_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: ProvisioningConfigurationList, name: "provisioningConfigurations", traits: {"smithy.api#notProperty" => {}}))
     GetEnvironmentBlueprintConfigurationOutput.type = Types::GetEnvironmentBlueprintConfigurationOutput
     GetEnvironmentBlueprintInput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -2742,6 +3180,7 @@ module Aws::DataZone
     GetEnvironmentBlueprintOutput.add_member(:deployment_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentProperties, name: "deploymentProperties"))
     GetEnvironmentBlueprintOutput.add_member(:user_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomParameterList, name: "userParameters"))
     GetEnvironmentBlueprintOutput.add_member(:glossary_terms, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryTerms, name: "glossaryTerms"))
+    GetEnvironmentBlueprintOutput.add_member(:blueprint_category, ::Smithy::Schema::Shapes::MemberShape.new(target: BlueprintCategory, name: "blueprintCategory"))
     GetEnvironmentBlueprintOutput.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
     GetEnvironmentBlueprintOutput.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "updatedAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
     GetEnvironmentBlueprintOutput.type = Types::GetEnvironmentBlueprintOutput
@@ -2778,6 +3217,7 @@ module Aws::DataZone
     GetEnvironmentOutput.add_member(:deployment_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentProperties, name: "deploymentProperties"))
     GetEnvironmentOutput.add_member(:environment_blueprint_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentBlueprintId, name: "environmentBlueprintId"))
     GetEnvironmentOutput.add_member(:environment_configuration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentConfigurationId, name: "environmentConfigurationId"))
+    GetEnvironmentOutput.add_member(:environment_configuration_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentConfigurationName, name: "environmentConfigurationName"))
     GetEnvironmentOutput.type = Types::GetEnvironmentOutput
     GetEnvironmentProfileInput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetEnvironmentProfileInput.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentProfileId, name: "identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -2851,6 +3291,8 @@ module Aws::DataZone
     GetGroupProfileOutput.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupProfileId, name: "id"))
     GetGroupProfileOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupProfileStatus, name: "status"))
     GetGroupProfileOutput.add_member(:group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupProfileName, name: "groupName"))
+    GetGroupProfileOutput.add_member(:role_principal_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "rolePrincipalArn"))
+    GetGroupProfileOutput.add_member(:role_principal_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "rolePrincipalId"))
     GetGroupProfileOutput.type = Types::GetGroupProfileOutput
     GetIamPortalLoginUrlInput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetIamPortalLoginUrlInput.type = Types::GetIamPortalLoginUrlInput
@@ -2924,16 +3366,86 @@ module Aws::DataZone
     GetListingOutput.type = Types::GetListingOutput
     GetMetadataGenerationRunInput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetMetadataGenerationRunInput.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataGenerationRunIdentifier, name: "identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetMetadataGenerationRunInput.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataGenerationRunType, name: "type", traits: {"smithy.api#httpQuery" => "type"}))
     GetMetadataGenerationRunInput.type = Types::GetMetadataGenerationRunInput
     GetMetadataGenerationRunOutput.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainId", traits: {"smithy.api#required" => {}}))
     GetMetadataGenerationRunOutput.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataGenerationRunIdentifier, name: "id", traits: {"smithy.api#required" => {}}))
     GetMetadataGenerationRunOutput.add_member(:target, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataGenerationRunTarget, name: "target"))
     GetMetadataGenerationRunOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataGenerationRunStatus, name: "status"))
-    GetMetadataGenerationRunOutput.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataGenerationRunType, name: "type"))
+    GetMetadataGenerationRunOutput.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataGenerationRunType, name: "type", traits: {"smithy.api#deprecated" => {"message" => "This field is going to be deprecated, please use the 'types' field to provide the MetadataGenerationRun types", "since" => "2025-11-21"}}))
+    GetMetadataGenerationRunOutput.add_member(:types, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataGenerationRunTypes, name: "types"))
     GetMetadataGenerationRunOutput.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedAt, name: "createdAt"))
     GetMetadataGenerationRunOutput.add_member(:created_by, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedBy, name: "createdBy"))
     GetMetadataGenerationRunOutput.add_member(:owning_project_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectId, name: "owningProjectId", traits: {"smithy.api#required" => {}}))
+    GetMetadataGenerationRunOutput.add_member(:type_stats, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataGenerationRunTypeStats, name: "typeStats", traits: {"smithy.api#notProperty" => {}}))
     GetMetadataGenerationRunOutput.type = Types::GetMetadataGenerationRunOutput
+    GetNotebookExportInput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetNotebookExportInput.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportId, name: "identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetNotebookExportInput.type = Types::GetNotebookExportInput
+    GetNotebookExportOutput.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportId, name: "id", traits: {"smithy.api#required" => {}}))
+    GetNotebookExportOutput.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainId", traits: {"smithy.api#required" => {}}))
+    GetNotebookExportOutput.add_member(:owning_project_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectId, name: "owningProjectId", traits: {"smithy.api#required" => {}}))
+    GetNotebookExportOutput.add_member(:notebook_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookId, name: "notebookId", traits: {"smithy.api#required" => {}}))
+    GetNotebookExportOutput.add_member(:file_format, ::Smithy::Schema::Shapes::MemberShape.new(target: FileFormat, name: "fileFormat", traits: {"smithy.api#required" => {}}))
+    GetNotebookExportOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookExportStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    GetNotebookExportOutput.add_member(:output_location, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputLocation, name: "outputLocation"))
+    GetNotebookExportOutput.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookExportError, name: "error"))
+    GetNotebookExportOutput.add_member(:completed_at, ::Smithy::Schema::Shapes::MemberShape.new(target: CompletedAt, name: "completedAt"))
+    GetNotebookExportOutput.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedAt, name: "createdAt"))
+    GetNotebookExportOutput.add_member(:created_by, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedBy, name: "createdBy"))
+    GetNotebookExportOutput.type = Types::GetNotebookExportOutput
+    GetNotebookInput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetNotebookInput.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookId, name: "identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetNotebookInput.type = Types::GetNotebookInput
+    GetNotebookOutput.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookId, name: "id", traits: {"smithy.api#required" => {}}))
+    GetNotebookOutput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookName, name: "name", traits: {"smithy.api#required" => {}}))
+    GetNotebookOutput.add_member(:owning_project_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectId, name: "owningProjectId", traits: {"smithy.api#required" => {}}))
+    GetNotebookOutput.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainId", traits: {"smithy.api#required" => {}}))
+    GetNotebookOutput.add_member(:cell_order, ::Smithy::Schema::Shapes::MemberShape.new(target: CellOrder, name: "cellOrder", traits: {"smithy.api#required" => {}}))
+    GetNotebookOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    GetNotebookOutput.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookType, name: "type"))
+    GetNotebookOutput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
+    GetNotebookOutput.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedAt, name: "createdAt"))
+    GetNotebookOutput.add_member(:created_by, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedBy, name: "createdBy"))
+    GetNotebookOutput.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdatedAt, name: "updatedAt"))
+    GetNotebookOutput.add_member(:updated_by, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdatedBy, name: "updatedBy"))
+    GetNotebookOutput.add_member(:locked_by, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "lockedBy"))
+    GetNotebookOutput.add_member(:locked_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "lockedAt"))
+    GetNotebookOutput.add_member(:lock_expires_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "lockExpiresAt"))
+    GetNotebookOutput.add_member(:compute_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputeId, name: "computeId"))
+    GetNotebookOutput.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: Metadata, name: "metadata"))
+    GetNotebookOutput.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: Parameters, name: "parameters"))
+    GetNotebookOutput.add_member(:environment_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentConfig, name: "environmentConfiguration"))
+    GetNotebookOutput.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookError, name: "error"))
+    GetNotebookOutput.add_member(:git_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: GitMetadata, name: "gitMetadata"))
+    GetNotebookOutput.type = Types::GetNotebookOutput
+    GetNotebookRunInput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetNotebookRunInput.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookRunId, name: "identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetNotebookRunInput.type = Types::GetNotebookRunInput
+    GetNotebookRunOutput.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookRunId, name: "id", traits: {"smithy.api#required" => {}}))
+    GetNotebookRunOutput.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainId", traits: {"smithy.api#required" => {}}))
+    GetNotebookRunOutput.add_member(:owning_project_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectId, name: "owningProjectId", traits: {"smithy.api#required" => {}}))
+    GetNotebookRunOutput.add_member(:notebook_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookId, name: "notebookId", traits: {"smithy.api#required" => {}}))
+    GetNotebookRunOutput.add_member(:schedule_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleId, name: "scheduleId"))
+    GetNotebookRunOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookRunStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    GetNotebookRunOutput.add_member(:cell_order, ::Smithy::Schema::Shapes::MemberShape.new(target: CellOrder, name: "cellOrder"))
+    GetNotebookRunOutput.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: Metadata, name: "metadata"))
+    GetNotebookRunOutput.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: Parameters, name: "parameters"))
+    GetNotebookRunOutput.add_member(:compute_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputeConfig, name: "computeConfiguration"))
+    GetNotebookRunOutput.add_member(:network_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkConfig, name: "networkConfiguration"))
+    GetNotebookRunOutput.add_member(:timeout_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeoutConfig, name: "timeoutConfiguration"))
+    GetNotebookRunOutput.add_member(:environment_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentConfig, name: "environmentConfiguration"))
+    GetNotebookRunOutput.add_member(:storage_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageConfig, name: "storageConfiguration"))
+    GetNotebookRunOutput.add_member(:notification_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationConfig, name: "notificationConfiguration"))
+    GetNotebookRunOutput.add_member(:trigger_source, ::Smithy::Schema::Shapes::MemberShape.new(target: TriggerSource, name: "triggerSource"))
+    GetNotebookRunOutput.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookRunError, name: "error"))
+    GetNotebookRunOutput.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedAt, name: "createdAt"))
+    GetNotebookRunOutput.add_member(:created_by, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedBy, name: "createdBy"))
+    GetNotebookRunOutput.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdatedAt, name: "updatedAt"))
+    GetNotebookRunOutput.add_member(:updated_by, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdatedBy, name: "updatedBy"))
+    GetNotebookRunOutput.add_member(:started_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "startedAt"))
+    GetNotebookRunOutput.add_member(:completed_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "completedAt"))
+    GetNotebookRunOutput.type = Types::GetNotebookRunOutput
     GetProjectInput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetProjectInput.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectId, name: "identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetProjectInput.type = Types::GetProjectInput
@@ -2946,11 +3458,13 @@ module Aws::DataZone
     GetProjectOutput.add_member(:created_by, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedBy, name: "createdBy", traits: {"smithy.api#required" => {}}))
     GetProjectOutput.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
     GetProjectOutput.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "lastUpdatedAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    GetProjectOutput.add_member(:resource_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTags, name: "resourceTags"))
     GetProjectOutput.add_member(:glossary_terms, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryTerms, name: "glossaryTerms"))
     GetProjectOutput.add_member(:domain_unit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainUnitId, name: "domainUnitId"))
     GetProjectOutput.add_member(:project_profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectProfileId, name: "projectProfileId"))
     GetProjectOutput.add_member(:user_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentConfigurationUserParametersList, name: "userParameters"))
     GetProjectOutput.add_member(:environment_deployment_details, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentDeploymentDetails, name: "environmentDeploymentDetails"))
+    GetProjectOutput.add_member(:project_category, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "projectCategory"))
     GetProjectOutput.type = Types::GetProjectOutput
     GetProjectProfileInput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetProjectProfileInput.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectProfileId, name: "identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -2960,6 +3474,9 @@ module Aws::DataZone
     GetProjectProfileOutput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectProfileName, name: "name", traits: {"smithy.api#required" => {}}))
     GetProjectProfileOutput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
     GetProjectProfileOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: Status, name: "status"))
+    GetProjectProfileOutput.add_member(:project_resource_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectResourceTagParameters, name: "projectResourceTags"))
+    GetProjectProfileOutput.add_member(:allow_custom_project_resource_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "allowCustomProjectResourceTags"))
+    GetProjectProfileOutput.add_member(:project_resource_tags_description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "projectResourceTagsDescription"))
     GetProjectProfileOutput.add_member(:environment_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentConfigurationsList, name: "environmentConfigurations"))
     GetProjectProfileOutput.add_member(:created_by, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedBy, name: "createdBy", traits: {"smithy.api#required" => {}}))
     GetProjectProfileOutput.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
@@ -2994,6 +3511,7 @@ module Aws::DataZone
     GetSubscriptionGrantOutput.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainId", traits: {"smithy.api#required" => {}}))
     GetSubscriptionGrantOutput.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedAt, name: "createdAt", traits: {"smithy.api#required" => {}}))
     GetSubscriptionGrantOutput.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdatedAt, name: "updatedAt", traits: {"smithy.api#required" => {}}))
+    GetSubscriptionGrantOutput.add_member(:environment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentId, name: "environmentId"))
     GetSubscriptionGrantOutput.add_member(:subscription_target_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionTargetId, name: "subscriptionTargetId", traits: {"smithy.api#required" => {}}))
     GetSubscriptionGrantOutput.add_member(:granted_entity, ::Smithy::Schema::Shapes::MemberShape.new(target: GrantedEntity, name: "grantedEntity", traits: {"smithy.api#required" => {}}))
     GetSubscriptionGrantOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionGrantOverallStatus, name: "status", traits: {"smithy.api#required" => {}}))
@@ -3052,6 +3570,7 @@ module Aws::DataZone
     GetSubscriptionTargetOutput.add_member(:applicable_asset_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicableAssetTypes, name: "applicableAssetTypes", traits: {"smithy.api#required" => {}}))
     GetSubscriptionTargetOutput.add_member(:subscription_target_config, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionTargetForms, name: "subscriptionTargetConfig", traits: {"smithy.api#required" => {}}))
     GetSubscriptionTargetOutput.add_member(:provider, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "provider", traits: {"smithy.api#required" => {}}))
+    GetSubscriptionTargetOutput.add_member(:subscription_grant_creation_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionGrantCreationMode, name: "subscriptionGrantCreationMode"))
     GetSubscriptionTargetOutput.type = Types::GetSubscriptionTargetOutput
     GetTimeSeriesDataPointInput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetTimeSeriesDataPointInput.add_member(:entity_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityIdentifier, name: "entityIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -3068,6 +3587,7 @@ module Aws::DataZone
     GetUserProfileInput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetUserProfileInput.add_member(:user_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: UserIdentifier, name: "userIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetUserProfileInput.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: UserProfileType, name: "type", traits: {"smithy.api#httpQuery" => "type"}))
+    GetUserProfileInput.add_member(:session_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "sessionName", traits: {"smithy.api#httpQuery" => "sessionName", "smithy.api#length" => {"min" => 2, "max" => 64}}))
     GetUserProfileInput.type = Types::GetUserProfileInput
     GetUserProfileOutput.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainId"))
     GetUserProfileOutput.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserProfileId, name: "id"))
@@ -3075,6 +3595,27 @@ module Aws::DataZone
     GetUserProfileOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: UserProfileStatus, name: "status"))
     GetUserProfileOutput.add_member(:details, ::Smithy::Schema::Shapes::MemberShape.new(target: UserProfileDetails, name: "details"))
     GetUserProfileOutput.type = Types::GetUserProfileOutput
+    GitMetadata.add_member(:connection_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GitConnectionId, name: "connectionId", traits: {"smithy.api#required" => {}}))
+    GitMetadata.add_member(:repository, ::Smithy::Schema::Shapes::MemberShape.new(target: GitRepository, name: "repository", traits: {"smithy.api#required" => {}}))
+    GitMetadata.add_member(:branch, ::Smithy::Schema::Shapes::MemberShape.new(target: GitBranch, name: "branch", traits: {"smithy.api#required" => {}}))
+    GitMetadata.add_member(:commit_hash, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitHash, name: "commitHash", traits: {"smithy.api#required" => {}}))
+    GitMetadata.add_member(:file_name, ::Smithy::Schema::Shapes::MemberShape.new(target: FileName, name: "fileName"))
+    GitMetadata.add_member(:committed_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "committedAt"))
+    GitMetadata.add_member(:commit_message, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitMessage, name: "commitMessage"))
+    GitMetadata.type = Types::GitMetadata
+    GitPropertiesInput.add_member(:code_connection_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "codeConnectionArn", traits: {"smithy.api#length" => {"max" => 256}, "smithy.api#pattern" => "^arn:aws[^:]*:(codeconnections|codestar-connections):[a-z0-9\\-]+:\\d{12}:connection/[a-f0-9\\-]+$", "smithy.api#required" => {}}))
+    GitPropertiesInput.add_member(:repository_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "repositoryId", traits: {"smithy.api#length" => {"max" => 256}, "smithy.api#pattern" => "^[a-zA-Z0-9._\\-]+(/[a-zA-Z0-9._\\-]+)+$", "smithy.api#required" => {}}))
+    GitPropertiesInput.add_member(:default_branch, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "defaultBranch", traits: {"smithy.api#length" => {"max" => 256}, "smithy.api#pattern" => "^[a-zA-Z0-9._\\-/]+$", "smithy.api#required" => {}}))
+    GitPropertiesInput.type = Types::GitPropertiesInput
+    GitPropertiesOutput.add_member(:code_connection_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "codeConnectionArn", traits: {"smithy.api#length" => {"max" => 256}, "smithy.api#pattern" => "^arn:aws[^:]*:(codeconnections|codestar-connections):[a-z0-9\\-]+:\\d{12}:connection/[a-f0-9\\-]+$", "smithy.api#required" => {}}))
+    GitPropertiesOutput.add_member(:repository_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "repositoryId", traits: {"smithy.api#length" => {"max" => 256}, "smithy.api#pattern" => "^[a-zA-Z0-9._\\-]+(/[a-zA-Z0-9._\\-]+)+$", "smithy.api#required" => {}}))
+    GitPropertiesOutput.add_member(:default_branch, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "defaultBranch", traits: {"smithy.api#length" => {"max" => 256}, "smithy.api#pattern" => "^[a-zA-Z0-9._\\-/]+$", "smithy.api#required" => {}}))
+    GitPropertiesOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionStatus, name: "status"))
+    GitPropertiesOutput.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "errorMessage"))
+    GitPropertiesOutput.type = Types::GitPropertiesOutput
+    GitPropertiesPatch.add_member(:code_connection_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "codeConnectionArn", traits: {"smithy.api#length" => {"max" => 256}, "smithy.api#pattern" => "^arn:aws[^:]*:(codeconnections|codestar-connections):[a-z0-9\\-]+:\\d{12}:connection/[a-f0-9\\-]+$"}))
+    GitPropertiesPatch.add_member(:default_branch, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "defaultBranch", traits: {"smithy.api#length" => {"max" => 256}, "smithy.api#pattern" => "^[a-zA-Z0-9._\\-/]+$"}))
+    GitPropertiesPatch.type = Types::GitPropertiesPatch
     GlobalParameterMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
     GlobalParameterMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value"))
     GlossaryItem.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainId", traits: {"smithy.api#required" => {}}))
@@ -3094,6 +3635,9 @@ module Aws::DataZone
     GlossaryItemAdditionalAttributes.type = Types::GlossaryItemAdditionalAttributes
     GlossaryStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
     GlossaryStatus.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
+    GlossaryTermEnforcementDetail.add_member(:required_glossary_term_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryTermIdentifiers, name: "requiredGlossaryTermIds"))
+    GlossaryTermEnforcementDetail.type = Types::GlossaryTermEnforcementDetail
+    GlossaryTermIdentifiers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryTermId, name: "member"))
     GlossaryTermItem.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainId", traits: {"smithy.api#required" => {}}))
     GlossaryTermItem.add_member(:glossary_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryId, name: "glossaryId", traits: {"smithy.api#required" => {}}))
     GlossaryTermItem.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryTermId, name: "id", traits: {"smithy.api#required" => {}}))
@@ -3148,6 +3692,7 @@ module Aws::DataZone
     GlueConnectionInput.add_member(:python_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: PropertyMap, name: "pythonProperties"))
     GlueConnectionInput.add_member(:authentication_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthenticationConfigurationInput, name: "authenticationConfiguration"))
     GlueConnectionInput.type = Types::GlueConnectionInput
+    GlueConnectionNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GlueConnectionName, name: "member"))
     GlueConnectionPatch.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "description"))
     GlueConnectionPatch.add_member(:connection_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionProperties, name: "connectionProperties"))
     GlueConnectionPatch.add_member(:authentication_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthenticationConfigurationPatch, name: "authenticationConfiguration"))
@@ -3201,6 +3746,7 @@ module Aws::DataZone
     GrantedEntityInput.add_member(:listing, Types::GrantedEntityInput::Listing, ::Smithy::Schema::Shapes::MemberShape.new(target: ListingRevisionInput, name: "listing"))
     GrantedEntityInput.add_member(:unknown, Types::GrantedEntityInput::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     GrantedEntityInput.type = Types::GrantedEntityInput
+    GraphEntityType.add_member(:lineage_node, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LINEAGE_NODE", traits: {"smithy.api#enumValue" => "LINEAGE_NODE"}))
     GreaterThanExpression.add_member(:column_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "columnName", traits: {"smithy.api#required" => {}}))
     GreaterThanExpression.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value", traits: {"smithy.api#required" => {}}))
     GreaterThanExpression.type = Types::GreaterThanExpression
@@ -3219,9 +3765,12 @@ module Aws::DataZone
     GroupProfileSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupProfileId, name: "id"))
     GroupProfileSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupProfileStatus, name: "status"))
     GroupProfileSummary.add_member(:group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupProfileName, name: "groupName"))
+    GroupProfileSummary.add_member(:role_principal_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "rolePrincipalArn"))
+    GroupProfileSummary.add_member(:role_principal_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "rolePrincipalId"))
     GroupProfileSummary.type = Types::GroupProfileSummary
     GroupSearchType.add_member(:sso_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SSO_GROUP", traits: {"smithy.api#enumValue" => "SSO_GROUP"}))
     GroupSearchType.add_member(:datazone_sso_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DATAZONE_SSO_GROUP", traits: {"smithy.api#enumValue" => "DATAZONE_SSO_GROUP"}))
+    GroupSearchType.add_member(:iam_role_session_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IAM_ROLE_SESSION_GROUP", traits: {"smithy.api#enumValue" => "IAM_ROLE_SESSION_GROUP"}))
     HyperPodOrchestrator.add_member(:eks, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EKS", traits: {"smithy.api#enumValue" => "EKS"}))
     HyperPodOrchestrator.add_member(:slurm, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SLURM", traits: {"smithy.api#enumValue" => "SLURM"}))
     HyperPodPropertiesInput.add_member(:cluster_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "clusterName", traits: {"smithy.api#length" => {"max" => 256}, "smithy.api#required" => {}}))
@@ -3231,6 +3780,7 @@ module Aws::DataZone
     HyperPodPropertiesOutput.add_member(:orchestrator, ::Smithy::Schema::Shapes::MemberShape.new(target: HyperPodOrchestrator, name: "orchestrator"))
     HyperPodPropertiesOutput.type = Types::HyperPodPropertiesOutput
     IamPropertiesInput.add_member(:glue_lineage_sync_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "glueLineageSyncEnabled"))
+    IamPropertiesInput.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "roleArn"))
     IamPropertiesInput.type = Types::IamPropertiesInput
     IamPropertiesOutput.add_member(:environment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "environmentId"))
     IamPropertiesOutput.add_member(:glue_lineage_sync_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "glueLineageSyncEnabled"))
@@ -3239,7 +3789,12 @@ module Aws::DataZone
     IamPropertiesPatch.type = Types::IamPropertiesPatch
     IamUserProfileDetails.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "arn"))
     IamUserProfileDetails.add_member(:principal_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "principalId"))
+    IamUserProfileDetails.add_member(:session_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "sessionName"))
+    IamUserProfileDetails.add_member(:group_profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "groupProfileId"))
     IamUserProfileDetails.type = Types::IamUserProfileDetails
+    IdentityMapping.add_member(:username_attribute, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "usernameAttribute", traits: {"smithy.api#required" => {}}))
+    IdentityMapping.add_member(:prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "prefix"))
+    IdentityMapping.type = Types::IdentityMapping
     Import.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: FormTypeName, name: "name", traits: {"smithy.api#required" => {}}))
     Import.add_member(:revision, ::Smithy::Schema::Shapes::MemberShape.new(target: Revision, name: "revision", traits: {"smithy.api#required" => {}}))
     Import.type = Types::Import
@@ -3290,6 +3845,12 @@ module Aws::DataZone
     LakeFormationConfiguration.add_member(:location_registration_role, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "locationRegistrationRole"))
     LakeFormationConfiguration.add_member(:location_registration_exclude_s3_locations, ::Smithy::Schema::Shapes::MemberShape.new(target: S3LocationList, name: "locationRegistrationExcludeS3Locations"))
     LakeFormationConfiguration.type = Types::LakeFormationConfiguration
+    LakehousePropertiesInput.add_member(:glue_lineage_sync_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "glueLineageSyncEnabled"))
+    LakehousePropertiesInput.type = Types::LakehousePropertiesInput
+    LakehousePropertiesOutput.add_member(:glue_lineage_sync_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "glueLineageSyncEnabled"))
+    LakehousePropertiesOutput.type = Types::LakehousePropertiesOutput
+    LakehousePropertiesPatch.add_member(:glue_lineage_sync_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "glueLineageSyncEnabled"))
+    LakehousePropertiesPatch.type = Types::LakehousePropertiesPatch
     LessThanExpression.add_member(:column_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "columnName", traits: {"smithy.api#required" => {}}))
     LessThanExpression.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value", traits: {"smithy.api#required" => {}}))
     LessThanExpression.type = Types::LessThanExpression
@@ -3320,6 +3881,23 @@ module Aws::DataZone
     LineageInfo.add_member(:event_status, ::Smithy::Schema::Shapes::MemberShape.new(target: LineageEventProcessingStatus, name: "eventStatus"))
     LineageInfo.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: LineageEventErrorMessage, name: "errorMessage"))
     LineageInfo.type = Types::LineageInfo
+    LineageNodeIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LineageNodeId, name: "member"))
+    LineageNodeItem.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainId", traits: {"smithy.api#required" => {}}))
+    LineageNodeItem.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "name"))
+    LineageNodeItem.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "description"))
+    LineageNodeItem.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedAt, name: "createdAt"))
+    LineageNodeItem.add_member(:created_by, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedBy, name: "createdBy"))
+    LineageNodeItem.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdatedAt, name: "updatedAt"))
+    LineageNodeItem.add_member(:updated_by, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdatedBy, name: "updatedBy"))
+    LineageNodeItem.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: LineageNodeId, name: "id", traits: {"smithy.api#required" => {}}))
+    LineageNodeItem.add_member(:type_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "typeName", traits: {"smithy.api#required" => {}}))
+    LineageNodeItem.add_member(:type_revision, ::Smithy::Schema::Shapes::MemberShape.new(target: Revision, name: "typeRevision"))
+    LineageNodeItem.add_member(:source_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "sourceIdentifier"))
+    LineageNodeItem.add_member(:event_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "eventTimestamp"))
+    LineageNodeItem.add_member(:forms_output, ::Smithy::Schema::Shapes::MemberShape.new(target: FormOutputList, name: "formsOutput"))
+    LineageNodeItem.add_member(:upstream_lineage_node_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: LineageNodeIds, name: "upstreamLineageNodeIds"))
+    LineageNodeItem.add_member(:downstream_lineage_node_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: LineageNodeIds, name: "downstreamLineageNodeIds"))
+    LineageNodeItem.type = Types::LineageNodeItem
     LineageNodeReference.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: LineageNodeId, name: "id"))
     LineageNodeReference.add_member(:event_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "eventTimestamp"))
     LineageNodeReference.type = Types::LineageNodeReference
@@ -3356,6 +3934,15 @@ module Aws::DataZone
     LineageSqlQueryRunDetails.add_member(:num_queries_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "numQueriesFailed"))
     LineageSqlQueryRunDetails.add_member(:error_messages, ::Smithy::Schema::Shapes::MemberShape.new(target: FailedQueryProcessingErrorMessages, name: "errorMessages"))
     LineageSqlQueryRunDetails.type = Types::LineageSqlQueryRunDetails
+    LineageSyncInput.add_member(:timezone, ::Smithy::Schema::Shapes::MemberShape.new(target: Timezone, name: "timezone"))
+    LineageSyncInput.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "enabled", traits: {"smithy.api#required" => {}}))
+    LineageSyncInput.add_member(:schedule, ::Smithy::Schema::Shapes::MemberShape.new(target: LineageSyncScheduleCronString, name: "schedule"))
+    LineageSyncInput.type = Types::LineageSyncInput
+    LineageSyncOutput.add_member(:lineage_job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "lineageJobId"))
+    LineageSyncOutput.add_member(:timezone, ::Smithy::Schema::Shapes::MemberShape.new(target: Timezone, name: "timezone"))
+    LineageSyncOutput.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "enabled"))
+    LineageSyncOutput.add_member(:schedule, ::Smithy::Schema::Shapes::MemberShape.new(target: LineageSyncScheduleCronString, name: "schedule"))
+    LineageSyncOutput.type = Types::LineageSyncOutput
     LineageSyncSchedule.add_member(:schedule, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "schedule", traits: {"smithy.api#pattern" => "^cron\\((\\b[0-5]?[0-9]\\b) (\\b2[0-3]\\b|\\b[0-1]?[0-9]\\b) ([-?*,/\\dLW]){1,83} ([-*,/\\d]|[a-zA-Z]{3}){1,23} ([-?#*,/\\dL]|[a-zA-Z]{3}){1,13} ([^\\)]+)\\)$"}))
     LineageSyncSchedule.type = Types::LineageSyncSchedule
     ListAccountPoolsInput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -3400,8 +3987,9 @@ module Aws::DataZone
     ListConnectionsInput.add_member(:sort_order, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrder, name: "sortOrder", traits: {"smithy.api#httpQuery" => "sortOrder"}))
     ListConnectionsInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionName, name: "name", traits: {"smithy.api#httpQuery" => "name"}))
     ListConnectionsInput.add_member(:environment_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentId, name: "environmentIdentifier", traits: {"smithy.api#httpQuery" => "environmentIdentifier"}))
-    ListConnectionsInput.add_member(:project_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectId, name: "projectIdentifier", traits: {"smithy.api#httpQuery" => "projectIdentifier", "smithy.api#required" => {}}))
+    ListConnectionsInput.add_member(:project_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectId, name: "projectIdentifier", traits: {"smithy.api#httpQuery" => "projectIdentifier"}))
     ListConnectionsInput.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionType, name: "type", traits: {"smithy.api#httpQuery" => "type"}))
+    ListConnectionsInput.add_member(:scope, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionScope, name: "scope", traits: {"smithy.api#httpQuery" => "scope"}))
     ListConnectionsInput.type = Types::ListConnectionsInput
     ListConnectionsOutput.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionSummaries, name: "items", traits: {"smithy.api#required" => {}}))
     ListConnectionsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
@@ -3559,10 +4147,35 @@ module Aws::DataZone
     ListMetadataGenerationRunsInput.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataGenerationRunType, name: "type", traits: {"smithy.api#httpQuery" => "type"}))
     ListMetadataGenerationRunsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
     ListMetadataGenerationRunsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListMetadataGenerationRunsInput.add_member(:target_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, name: "targetIdentifier", traits: {"smithy.api#httpQuery" => "targetIdentifier"}))
     ListMetadataGenerationRunsInput.type = Types::ListMetadataGenerationRunsInput
     ListMetadataGenerationRunsOutput.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataGenerationRuns, name: "items"))
     ListMetadataGenerationRunsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
     ListMetadataGenerationRunsOutput.type = Types::ListMetadataGenerationRunsOutput
+    ListNotebookRunsInput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListNotebookRunsInput.add_member(:owning_project_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectId, name: "owningProjectIdentifier", traits: {"smithy.api#httpQuery" => "owningProjectIdentifier", "smithy.api#required" => {}}))
+    ListNotebookRunsInput.add_member(:notebook_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookId, name: "notebookIdentifier", traits: {"smithy.api#httpQuery" => "notebookIdentifier"}))
+    ListNotebookRunsInput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookRunStatus, name: "status", traits: {"smithy.api#httpQuery" => "status"}))
+    ListNotebookRunsInput.add_member(:schedule_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleId, name: "scheduleIdentifier", traits: {"smithy.api#httpQuery" => "scheduleIdentifier"}))
+    ListNotebookRunsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListNotebookRunsInput.add_member(:sort_order, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrder, name: "sortOrder", traits: {"smithy.api#httpQuery" => "sortOrder"}))
+    ListNotebookRunsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListNotebookRunsInput.type = Types::ListNotebookRunsInput
+    ListNotebookRunsOutput.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookRunSummaryList, name: "items"))
+    ListNotebookRunsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
+    ListNotebookRunsOutput.type = Types::ListNotebookRunsOutput
+    ListNotebooksInput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListNotebooksInput.add_member(:owning_project_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectId, name: "owningProjectIdentifier", traits: {"smithy.api#httpQuery" => "owningProjectIdentifier", "smithy.api#required" => {}}))
+    ListNotebooksInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListNotebooksInput.add_member(:sort_order, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrder, name: "sortOrder", traits: {"smithy.api#httpQuery" => "sortOrder"}))
+    ListNotebooksInput.add_member(:sort_by, ::Smithy::Schema::Shapes::MemberShape.new(target: SortKey, name: "sortBy", traits: {"smithy.api#httpQuery" => "sortBy"}))
+    ListNotebooksInput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookStatus, name: "status", traits: {"smithy.api#httpQuery" => "status"}))
+    ListNotebooksInput.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookType, name: "type", traits: {"smithy.api#httpQuery" => "type"}))
+    ListNotebooksInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListNotebooksInput.type = Types::ListNotebooksInput
+    ListNotebooksOutput.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookSummaryList, name: "items"))
+    ListNotebooksOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
+    ListNotebooksOutput.type = Types::ListNotebooksOutput
     ListNotificationsInput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListNotificationsInput.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationType, name: "type", traits: {"smithy.api#httpQuery" => "type", "smithy.api#required" => {}}))
     ListNotificationsInput.add_member(:after_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "afterTimestamp", traits: {"smithy.api#httpQuery" => "afterTimestamp"}))
@@ -3609,6 +4222,7 @@ module Aws::DataZone
     ListProjectsInput.add_member(:user_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "userIdentifier", traits: {"smithy.api#httpQuery" => "userIdentifier"}))
     ListProjectsInput.add_member(:group_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "groupIdentifier", traits: {"smithy.api#httpQuery" => "groupIdentifier"}))
     ListProjectsInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectName, name: "name", traits: {"smithy.api#httpQuery" => "name"}))
+    ListProjectsInput.add_member(:project_category, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "projectCategory", traits: {"smithy.api#httpQuery" => "projectCategory"}))
     ListProjectsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
     ListProjectsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
     ListProjectsInput.type = Types::ListProjectsInput
@@ -3636,7 +4250,10 @@ module Aws::DataZone
     ListSubscriptionGrantsInput.add_member(:subscribed_listing_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ListingId, name: "subscribedListingId", traits: {"smithy.api#httpQuery" => "subscribedListingId"}))
     ListSubscriptionGrantsInput.add_member(:subscription_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionId, name: "subscriptionId", traits: {"smithy.api#httpQuery" => "subscriptionId"}))
     ListSubscriptionGrantsInput.add_member(:owning_project_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectId, name: "owningProjectId", traits: {"smithy.api#httpQuery" => "owningProjectId"}))
-    ListSubscriptionGrantsInput.add_member(:sort_by, ::Smithy::Schema::Shapes::MemberShape.new(target: SortKey, name: "sortBy", traits: {"smithy.api#httpQuery" => "sortBy"}))
+    ListSubscriptionGrantsInput.add_member(:owning_iam_principal_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamPrincipalArn, name: "owningIamPrincipalArn", traits: {"smithy.api#httpQuery" => "owningIamPrincipalArn"}))
+    ListSubscriptionGrantsInput.add_member(:owning_user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserProfileId, name: "owningUserId", traits: {"smithy.api#httpQuery" => "owningUserId"}))
+    ListSubscriptionGrantsInput.add_member(:owning_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupProfileId, name: "owningGroupId", traits: {"smithy.api#httpQuery" => "owningGroupId"}))
+    ListSubscriptionGrantsInput.add_member(:sort_by, ::Smithy::Schema::Shapes::MemberShape.new(target: SortKey, name: "sortBy", traits: {"smithy.api#deprecated" => {"message" => "Results are always sorted by updatedAt", "since" => "Jan 31 2026"}, "smithy.api#httpQuery" => "sortBy"}))
     ListSubscriptionGrantsInput.add_member(:sort_order, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrder, name: "sortOrder", traits: {"smithy.api#httpQuery" => "sortOrder"}))
     ListSubscriptionGrantsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
     ListSubscriptionGrantsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
@@ -3648,8 +4265,11 @@ module Aws::DataZone
     ListSubscriptionRequestsInput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionRequestStatus, name: "status", traits: {"smithy.api#httpQuery" => "status"}))
     ListSubscriptionRequestsInput.add_member(:subscribed_listing_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ListingId, name: "subscribedListingId", traits: {"smithy.api#httpQuery" => "subscribedListingId"}))
     ListSubscriptionRequestsInput.add_member(:owning_project_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectId, name: "owningProjectId", traits: {"smithy.api#httpQuery" => "owningProjectId"}))
+    ListSubscriptionRequestsInput.add_member(:owning_iam_principal_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamPrincipalArn, name: "owningIamPrincipalArn", traits: {"smithy.api#httpQuery" => "owningIamPrincipalArn"}))
     ListSubscriptionRequestsInput.add_member(:approver_project_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectId, name: "approverProjectId", traits: {"smithy.api#httpQuery" => "approverProjectId"}))
-    ListSubscriptionRequestsInput.add_member(:sort_by, ::Smithy::Schema::Shapes::MemberShape.new(target: SortKey, name: "sortBy", traits: {"smithy.api#httpQuery" => "sortBy"}))
+    ListSubscriptionRequestsInput.add_member(:owning_user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserProfileId, name: "owningUserId", traits: {"smithy.api#httpQuery" => "owningUserId"}))
+    ListSubscriptionRequestsInput.add_member(:owning_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupProfileId, name: "owningGroupId", traits: {"smithy.api#httpQuery" => "owningGroupId"}))
+    ListSubscriptionRequestsInput.add_member(:sort_by, ::Smithy::Schema::Shapes::MemberShape.new(target: SortKey, name: "sortBy", traits: {"smithy.api#deprecated" => {"message" => "Results are always sorted by updatedAt", "since" => "Jan 31 2026"}, "smithy.api#httpQuery" => "sortBy"}))
     ListSubscriptionRequestsInput.add_member(:sort_order, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrder, name: "sortOrder", traits: {"smithy.api#httpQuery" => "sortOrder"}))
     ListSubscriptionRequestsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
     ListSubscriptionRequestsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
@@ -3672,8 +4292,11 @@ module Aws::DataZone
     ListSubscriptionsInput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionStatus, name: "status", traits: {"smithy.api#httpQuery" => "status"}))
     ListSubscriptionsInput.add_member(:subscribed_listing_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ListingId, name: "subscribedListingId", traits: {"smithy.api#httpQuery" => "subscribedListingId"}))
     ListSubscriptionsInput.add_member(:owning_project_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectId, name: "owningProjectId", traits: {"smithy.api#httpQuery" => "owningProjectId"}))
+    ListSubscriptionsInput.add_member(:owning_iam_principal_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamPrincipalArn, name: "owningIamPrincipalArn", traits: {"smithy.api#httpQuery" => "owningIamPrincipalArn"}))
+    ListSubscriptionsInput.add_member(:owning_user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserProfileId, name: "owningUserId", traits: {"smithy.api#httpQuery" => "owningUserId"}))
+    ListSubscriptionsInput.add_member(:owning_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupProfileId, name: "owningGroupId", traits: {"smithy.api#httpQuery" => "owningGroupId"}))
     ListSubscriptionsInput.add_member(:approver_project_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectId, name: "approverProjectId", traits: {"smithy.api#httpQuery" => "approverProjectId"}))
-    ListSubscriptionsInput.add_member(:sort_by, ::Smithy::Schema::Shapes::MemberShape.new(target: SortKey, name: "sortBy", traits: {"smithy.api#httpQuery" => "sortBy"}))
+    ListSubscriptionsInput.add_member(:sort_by, ::Smithy::Schema::Shapes::MemberShape.new(target: SortKey, name: "sortBy", traits: {"smithy.api#deprecated" => {"message" => "Results are always sorted by updatedAt", "since" => "Jan 31 2026"}, "smithy.api#httpQuery" => "sortBy"}))
     ListSubscriptionsInput.add_member(:sort_order, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrder, name: "sortOrder", traits: {"smithy.api#httpQuery" => "sortOrder"}))
     ListSubscriptionsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
     ListSubscriptionsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
@@ -3737,6 +4360,11 @@ module Aws::DataZone
     ManagedPolicyType.add_member(:create_environment_from_blueprint, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATE_ENVIRONMENT_FROM_BLUEPRINT", traits: {"smithy.api#enumValue" => "CREATE_ENVIRONMENT_FROM_BLUEPRINT"}))
     ManagedPolicyType.add_member(:create_project_from_project_profile, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATE_PROJECT_FROM_PROJECT_PROFILE", traits: {"smithy.api#enumValue" => "CREATE_PROJECT_FROM_PROJECT_PROFILE"}))
     ManagedPolicyType.add_member(:use_asset_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "USE_ASSET_TYPE", traits: {"smithy.api#enumValue" => "USE_ASSET_TYPE"}))
+    MatchClause.add_member(:relation_pattern, Types::MatchClause::RelationPattern, ::Smithy::Schema::Shapes::MemberShape.new(target: RelationPattern, name: "relationPattern"))
+    MatchClause.add_member(:entity_pattern, Types::MatchClause::EntityPattern, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityPattern, name: "entityPattern"))
+    MatchClause.add_member(:unknown, Types::MatchClause::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    MatchClause.type = Types::MatchClause
+    MatchClauses.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MatchClause, name: "member"))
     MatchCriteria.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
     MatchOffset.add_member(:start_offset, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "startOffset"))
     MatchOffset.add_member(:end_offset, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "endOffset"))
@@ -3754,6 +4382,8 @@ module Aws::DataZone
     MemberDetails.add_member(:group, Types::MemberDetails::Group, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupDetails, name: "group"))
     MemberDetails.add_member(:unknown, Types::MemberDetails::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     MemberDetails.type = Types::MemberDetails
+    Metadata.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataKey, name: "key"))
+    Metadata.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataValue, name: "value"))
     MetadataFormEnforcementDetail.add_member(:required_metadata_forms, ::Smithy::Schema::Shapes::MemberShape.new(target: RequiredMetadataFormList, name: "requiredMetadataForms"))
     MetadataFormEnforcementDetail.type = Types::MetadataFormEnforcementDetail
     MetadataFormInputs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FormInput, name: "member"))
@@ -3770,25 +4400,41 @@ module Aws::DataZone
     MetadataGenerationRunItem.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataGenerationRunIdentifier, name: "id", traits: {"smithy.api#required" => {}}))
     MetadataGenerationRunItem.add_member(:target, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataGenerationRunTarget, name: "target"))
     MetadataGenerationRunItem.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataGenerationRunStatus, name: "status"))
-    MetadataGenerationRunItem.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataGenerationRunType, name: "type"))
+    MetadataGenerationRunItem.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataGenerationRunType, name: "type", traits: {"smithy.api#deprecated" => {"message" => "This field is going to be deprecated, please use the 'types' field to provide the MetadataGenerationRun types", "since" => "2025-11-21"}}))
+    MetadataGenerationRunItem.add_member(:types, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataGenerationRunTypes, name: "types"))
     MetadataGenerationRunItem.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedAt, name: "createdAt"))
     MetadataGenerationRunItem.add_member(:created_by, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedBy, name: "createdBy"))
     MetadataGenerationRunItem.add_member(:owning_project_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectId, name: "owningProjectId", traits: {"smithy.api#required" => {}}))
     MetadataGenerationRunItem.type = Types::MetadataGenerationRunItem
-    MetadataGenerationRunStatus.add_member(:submitted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUBMITTED", traits: {"smithy.api#enumValue" => "SUBMITTED"}))
+    MetadataGenerationRunStatus.add_member(:submitted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUBMITTED", traits: {"smithy.api#deprecated" => {"message" => "This metadata generation run status is going to be deprecated", "since" => "2025-11-21"}, "smithy.api#enumValue" => "SUBMITTED"}))
     MetadataGenerationRunStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
     MetadataGenerationRunStatus.add_member(:canceled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANCELED", traits: {"smithy.api#enumValue" => "CANCELED"}))
     MetadataGenerationRunStatus.add_member(:succeeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCEEDED", traits: {"smithy.api#enumValue" => "SUCCEEDED"}))
     MetadataGenerationRunStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    MetadataGenerationRunStatus.add_member(:partially_succeeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PARTIALLY_SUCCEEDED", traits: {"smithy.api#enumValue" => "PARTIALLY_SUCCEEDED"}))
     MetadataGenerationRunTarget.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataGenerationTargetType, name: "type", traits: {"smithy.api#required" => {}}))
     MetadataGenerationRunTarget.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "identifier", traits: {"smithy.api#required" => {}}))
     MetadataGenerationRunTarget.add_member(:revision, ::Smithy::Schema::Shapes::MemberShape.new(target: Revision, name: "revision"))
     MetadataGenerationRunTarget.type = Types::MetadataGenerationRunTarget
     MetadataGenerationRunType.add_member(:business_descriptions, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BUSINESS_DESCRIPTIONS", traits: {"smithy.api#enumValue" => "BUSINESS_DESCRIPTIONS"}))
+    MetadataGenerationRunType.add_member(:business_names, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BUSINESS_NAMES", traits: {"smithy.api#enumValue" => "BUSINESS_NAMES"}))
+    MetadataGenerationRunType.add_member(:business_glossary_associations, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BUSINESS_GLOSSARY_ASSOCIATIONS", traits: {"smithy.api#enumValue" => "BUSINESS_GLOSSARY_ASSOCIATIONS"}))
+    MetadataGenerationRunTypeStat.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataGenerationRunType, name: "type", traits: {"smithy.api#required" => {}}))
+    MetadataGenerationRunTypeStat.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataGenerationRunStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    MetadataGenerationRunTypeStat.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "errorMessage"))
+    MetadataGenerationRunTypeStat.type = Types::MetadataGenerationRunTypeStat
+    MetadataGenerationRunTypeStats.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataGenerationRunTypeStat, name: "member"))
+    MetadataGenerationRunTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataGenerationRunType, name: "member"))
     MetadataGenerationRuns.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataGenerationRunItem, name: "member"))
     MetadataGenerationTargetType.add_member(:asset, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ASSET", traits: {"smithy.api#enumValue" => "ASSET"}))
     MetadataMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
     MetadataMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value"))
+    MlflowPropertiesInput.add_member(:tracking_server_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "trackingServerArn"))
+    MlflowPropertiesInput.type = Types::MlflowPropertiesInput
+    MlflowPropertiesOutput.add_member(:tracking_server_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "trackingServerArn"))
+    MlflowPropertiesOutput.type = Types::MlflowPropertiesOutput
+    MlflowPropertiesPatch.add_member(:tracking_server_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "trackingServerArn"))
+    MlflowPropertiesPatch.type = Types::MlflowPropertiesPatch
     Model.add_member(:smithy, Types::Model::Smithy, ::Smithy::Schema::Shapes::MemberShape.new(target: Smithy, name: "smithy"))
     Model.add_member(:unknown, Types::Model::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     Model.type = Types::Model
@@ -3796,6 +4442,13 @@ module Aws::DataZone
     NameIdentifier.add_member(:namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "namespace"))
     NameIdentifier.type = Types::NameIdentifier
     NameIdentifiers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NameIdentifier, name: "member"))
+    NetworkAccessType.add_member(:public_internet_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PUBLIC_INTERNET_ONLY", traits: {"smithy.api#enumValue" => "PUBLIC_INTERNET_ONLY"}))
+    NetworkAccessType.add_member(:vpc_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VPC_ONLY", traits: {"smithy.api#enumValue" => "VPC_ONLY"}))
+    NetworkConfig.add_member(:network_access_type, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkAccessType, name: "networkAccessType", traits: {"smithy.api#required" => {}}))
+    NetworkConfig.add_member(:vpc_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "vpcId"))
+    NetworkConfig.add_member(:subnet_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetIds, name: "subnetIds"))
+    NetworkConfig.add_member(:security_group_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupIds, name: "securityGroupIds"))
+    NetworkConfig.type = Types::NetworkConfig
     NotEqualToExpression.add_member(:column_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "columnName", traits: {"smithy.api#required" => {}}))
     NotEqualToExpression.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value", traits: {"smithy.api#required" => {}}))
     NotEqualToExpression.type = Types::NotEqualToExpression
@@ -3805,6 +4458,58 @@ module Aws::DataZone
     NotLikeExpression.add_member(:column_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "columnName", traits: {"smithy.api#required" => {}}))
     NotLikeExpression.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value", traits: {"smithy.api#required" => {}}))
     NotLikeExpression.type = Types::NotLikeExpression
+    NotebookError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#length" => {"max" => 256}, "smithy.api#required" => {}}))
+    NotebookError.type = Types::NotebookError
+    NotebookExportError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#length" => {"max" => 256}, "smithy.api#required" => {}}))
+    NotebookExportError.type = Types::NotebookExportError
+    NotebookExportStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
+    NotebookExportStatus.add_member(:succeeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCEEDED", traits: {"smithy.api#enumValue" => "SUCCEEDED"}))
+    NotebookExportStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    NotebookRunError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#length" => {"max" => 1024}, "smithy.api#required" => {}}))
+    NotebookRunError.type = Types::NotebookRunError
+    NotebookRunStatus.add_member(:queued, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "QUEUED", traits: {"smithy.api#enumValue" => "QUEUED"}))
+    NotebookRunStatus.add_member(:starting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STARTING", traits: {"smithy.api#enumValue" => "STARTING"}))
+    NotebookRunStatus.add_member(:running, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RUNNING", traits: {"smithy.api#enumValue" => "RUNNING"}))
+    NotebookRunStatus.add_member(:stopping, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STOPPING", traits: {"smithy.api#enumValue" => "STOPPING"}))
+    NotebookRunStatus.add_member(:stopped, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STOPPED", traits: {"smithy.api#enumValue" => "STOPPED"}))
+    NotebookRunStatus.add_member(:succeeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCEEDED", traits: {"smithy.api#enumValue" => "SUCCEEDED"}))
+    NotebookRunStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    NotebookRunSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookRunId, name: "id", traits: {"smithy.api#required" => {}}))
+    NotebookRunSummary.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainId", traits: {"smithy.api#required" => {}}))
+    NotebookRunSummary.add_member(:owning_project_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectId, name: "owningProjectId", traits: {"smithy.api#required" => {}}))
+    NotebookRunSummary.add_member(:notebook_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookId, name: "notebookId", traits: {"smithy.api#required" => {}}))
+    NotebookRunSummary.add_member(:schedule_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleId, name: "scheduleId"))
+    NotebookRunSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookRunStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    NotebookRunSummary.add_member(:trigger_source, ::Smithy::Schema::Shapes::MemberShape.new(target: TriggerSource, name: "triggerSource"))
+    NotebookRunSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedAt, name: "createdAt"))
+    NotebookRunSummary.add_member(:created_by, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedBy, name: "createdBy"))
+    NotebookRunSummary.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdatedAt, name: "updatedAt"))
+    NotebookRunSummary.add_member(:updated_by, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdatedBy, name: "updatedBy"))
+    NotebookRunSummary.add_member(:started_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "startedAt"))
+    NotebookRunSummary.add_member(:completed_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "completedAt"))
+    NotebookRunSummary.type = Types::NotebookRunSummary
+    NotebookRunSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookRunSummary, name: "member"))
+    NotebookStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
+    NotebookStatus.add_member(:archived, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ARCHIVED", traits: {"smithy.api#enumValue" => "ARCHIVED"}))
+    NotebookStatus.add_member(:sync_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SYNC_IN_PROGRESS", traits: {"smithy.api#enumValue" => "SYNC_IN_PROGRESS"}))
+    NotebookStatus.add_member(:sync_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SYNC_FAILED", traits: {"smithy.api#enumValue" => "SYNC_FAILED"}))
+    NotebookSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookId, name: "id", traits: {"smithy.api#required" => {}}))
+    NotebookSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookName, name: "name", traits: {"smithy.api#required" => {}}))
+    NotebookSummary.add_member(:owning_project_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectId, name: "owningProjectId", traits: {"smithy.api#required" => {}}))
+    NotebookSummary.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainId", traits: {"smithy.api#required" => {}}))
+    NotebookSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    NotebookSummary.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookType, name: "type"))
+    NotebookSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
+    NotebookSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedAt, name: "createdAt"))
+    NotebookSummary.add_member(:created_by, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedBy, name: "createdBy"))
+    NotebookSummary.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdatedAt, name: "updatedAt"))
+    NotebookSummary.add_member(:updated_by, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdatedBy, name: "updatedBy"))
+    NotebookSummary.type = Types::NotebookSummary
+    NotebookSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookSummary, name: "member"))
+    NotebookType.add_member(:data, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DATA", traits: {"smithy.api#enumValue" => "DATA"}))
+    NotebookType.add_member(:sql, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SQL", traits: {"smithy.api#enumValue" => "SQL"}))
+    NotificationConfig.add_member(:notify_on, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyOnStates, name: "notifyOn", traits: {"smithy.api#required" => {}}))
+    NotificationConfig.type = Types::NotificationConfig
     NotificationOutput.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskId, name: "identifier", traits: {"smithy.api#required" => {}}))
     NotificationOutput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainIdentifier", traits: {"smithy.api#required" => {}}))
     NotificationOutput.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationType, name: "type", traits: {"smithy.api#required" => {}}))
@@ -3831,6 +4536,14 @@ module Aws::DataZone
     NotificationType.add_member(:task, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TASK", traits: {"smithy.api#enumValue" => "TASK"}))
     NotificationType.add_member(:event, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EVENT", traits: {"smithy.api#enumValue" => "EVENT"}))
     NotificationsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationOutput, name: "member"))
+    NotifyOnState.add_member(:succeeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCEEDED", traits: {"smithy.api#enumValue" => "SUCCEEDED"}))
+    NotifyOnState.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    NotifyOnState.add_member(:stopped, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STOPPED", traits: {"smithy.api#enumValue" => "STOPPED"}))
+    NotifyOnState.add_member(:queued, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "QUEUED", traits: {"smithy.api#enumValue" => "QUEUED"}))
+    NotifyOnState.add_member(:starting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STARTING", traits: {"smithy.api#enumValue" => "STARTING"}))
+    NotifyOnState.add_member(:running, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RUNNING", traits: {"smithy.api#enumValue" => "RUNNING"}))
+    NotifyOnState.add_member(:stopping, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STOPPING", traits: {"smithy.api#enumValue" => "STOPPING"}))
+    NotifyOnStates.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyOnState, name: "member"))
     OAuth2ClientApplication.add_member(:user_managed_client_application_client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "userManagedClientApplicationClientId", traits: {"smithy.api#length" => {"max" => 2048}, "smithy.api#pattern" => "^\\S+$"}))
     OAuth2ClientApplication.add_member(:a_ws_managed_client_application_reference, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "aWSManagedClientApplicationReference", traits: {"smithy.api#length" => {"max" => 2048}, "smithy.api#pattern" => "^\\S+$"}))
     OAuth2ClientApplication.type = Types::OAuth2ClientApplication
@@ -3856,6 +4569,9 @@ module Aws::DataZone
     OpenLineageRunState.add_member(:abort, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ABORT", traits: {"smithy.api#enumValue" => "ABORT"}))
     OpenLineageRunState.add_member(:fail, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAIL", traits: {"smithy.api#enumValue" => "FAIL"}))
     OpenLineageRunState.add_member(:other, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OTHER", traits: {"smithy.api#enumValue" => "OTHER"}))
+    OutputLocation.add_member(:s3, Types::OutputLocation::S3, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Destination, name: "s3"))
+    OutputLocation.add_member(:unknown, Types::OutputLocation::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    OutputLocation.type = Types::OutputLocation
     OverallDeploymentStatus.add_member(:pending_deployment, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING_DEPLOYMENT", traits: {"smithy.api#enumValue" => "PENDING_DEPLOYMENT"}))
     OverallDeploymentStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
     OverallDeploymentStatus.add_member(:successful, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCESSFUL", traits: {"smithy.api#enumValue" => "SUCCESSFUL"}))
@@ -3881,6 +4597,15 @@ module Aws::DataZone
     OwnerUserProperties.type = Types::OwnerUserProperties
     OwnerUserPropertiesOutput.add_member(:user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "userId"))
     OwnerUserPropertiesOutput.type = Types::OwnerUserPropertiesOutput
+    PackageConfig.add_member(:package_manager, ::Smithy::Schema::Shapes::MemberShape.new(target: PackageManager, name: "packageManager", traits: {"smithy.api#default" => "UV", "smithy.api#required" => {}}))
+    PackageConfig.add_member(:package_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "packageSpecification", traits: {"smithy.api#length" => {"max" => 10240}}))
+    PackageConfig.type = Types::PackageConfig
+    PackageManager.add_member(:uv, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UV", traits: {"smithy.api#enumValue" => "UV"}))
+    Parameters.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterKey, name: "key"))
+    Parameters.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterValue, name: "value"))
+    Permissions.add_member(:s3, Types::Permissions::S3, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Permissions, name: "s3"))
+    Permissions.add_member(:unknown, Types::Permissions::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    Permissions.type = Types::Permissions
     PhysicalConnectionRequirements.add_member(:subnet_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, name: "subnetId"))
     PhysicalConnectionRequirements.add_member(:subnet_id_list, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetIdList, name: "subnetIdList"))
     PhysicalConnectionRequirements.add_member(:security_group_id_list, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupIdList, name: "securityGroupIdList"))
@@ -3888,7 +4613,9 @@ module Aws::DataZone
     PhysicalConnectionRequirements.type = Types::PhysicalConnectionRequirements
     PhysicalEndpoint.add_member(:aws_location, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsLocation, name: "awsLocation"))
     PhysicalEndpoint.add_member(:glue_connection_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "glueConnectionName"))
+    PhysicalEndpoint.add_member(:glue_connection_names, ::Smithy::Schema::Shapes::MemberShape.new(target: GlueConnectionNames, name: "glueConnectionNames"))
     PhysicalEndpoint.add_member(:glue_connection, ::Smithy::Schema::Shapes::MemberShape.new(target: GlueConnection, name: "glueConnection"))
+    PhysicalEndpoint.add_member(:enable_trusted_identity_propagation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "enableTrustedIdentityPropagation"))
     PhysicalEndpoint.add_member(:host, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "host"))
     PhysicalEndpoint.add_member(:port, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "port"))
     PhysicalEndpoint.add_member(:protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: Protocol, name: "protocol"))
@@ -3961,6 +4688,10 @@ module Aws::DataZone
     ProjectMember.add_member(:designation, ::Smithy::Schema::Shapes::MemberShape.new(target: UserDesignation, name: "designation", traits: {"smithy.api#required" => {}}))
     ProjectMember.type = Types::ProjectMember
     ProjectMembers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectMember, name: "member"))
+    ProjectMembershipAssignment.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Member, name: "member", traits: {"smithy.api#required" => {}}))
+    ProjectMembershipAssignment.add_member(:designation, ::Smithy::Schema::Shapes::MemberShape.new(target: UserDesignation, name: "designation", traits: {"smithy.api#required" => {}}))
+    ProjectMembershipAssignment.type = Types::ProjectMembershipAssignment
+    ProjectMembershipAssignments.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectMembershipAssignment, name: "member"))
     ProjectPolicyGrantPrincipal.add_member(:project_designation, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectDesignation, name: "projectDesignation", traits: {"smithy.api#required" => {}}))
     ProjectPolicyGrantPrincipal.add_member(:project_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectId, name: "projectIdentifier"))
     ProjectPolicyGrantPrincipal.add_member(:project_grant_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectGrantFilter, name: "projectGrantFilter"))
@@ -3977,6 +4708,7 @@ module Aws::DataZone
     ProjectProfileSummary.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "lastUpdatedAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
     ProjectProfileSummary.add_member(:domain_unit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainUnitId, name: "domainUnitId"))
     ProjectProfileSummary.type = Types::ProjectProfileSummary
+    ProjectResourceTagParameters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTagParameter, name: "member"))
     ProjectStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     ProjectStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
     ProjectStatus.add_member(:delete_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETE_FAILED", traits: {"smithy.api#enumValue" => "DELETE_FAILED"}))
@@ -3994,6 +4726,7 @@ module Aws::DataZone
     ProjectSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
     ProjectSummary.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "updatedAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
     ProjectSummary.add_member(:domain_unit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainUnitId, name: "domainUnitId"))
+    ProjectSummary.add_member(:project_category, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "projectCategory"))
     ProjectSummary.type = Types::ProjectSummary
     ProjectsForRule.add_member(:selection_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleScopeSelectionMode, name: "selectionMode", traits: {"smithy.api#required" => {}}))
     ProjectsForRule.add_member(:specific_projects, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleProjectIdentifierList, name: "specificProjects"))
@@ -4014,6 +4747,12 @@ module Aws::DataZone
     ProvisioningProperties.add_member(:cloud_formation, Types::ProvisioningProperties::CloudFormation, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudFormationProperties, name: "cloudFormation"))
     ProvisioningProperties.add_member(:unknown, Types::ProvisioningProperties::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     ProvisioningProperties.type = Types::ProvisioningProperties
+    PutDataExportConfigurationInput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    PutDataExportConfigurationInput.add_member(:enable_export, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "enableExport", traits: {"smithy.api#required" => {}}))
+    PutDataExportConfigurationInput.add_member(:encryption_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionConfiguration, name: "encryptionConfiguration"))
+    PutDataExportConfigurationInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    PutDataExportConfigurationInput.type = Types::PutDataExportConfigurationInput
+    PutDataExportConfigurationOutput.type = Types::PutDataExportConfigurationOutput
     PutEnvironmentBlueprintConfigurationInput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     PutEnvironmentBlueprintConfigurationInput.add_member(:environment_blueprint_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentBlueprintId, name: "environmentBlueprintIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     PutEnvironmentBlueprintConfigurationInput.add_member(:provisioning_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "provisioningRoleArn"))
@@ -4021,6 +4760,8 @@ module Aws::DataZone
     PutEnvironmentBlueprintConfigurationInput.add_member(:environment_role_permission_boundary, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyArn, name: "environmentRolePermissionBoundary"))
     PutEnvironmentBlueprintConfigurationInput.add_member(:enabled_regions, ::Smithy::Schema::Shapes::MemberShape.new(target: EnabledRegionList, name: "enabledRegions", traits: {"smithy.api#required" => {}}))
     PutEnvironmentBlueprintConfigurationInput.add_member(:regional_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionalParameterMap, name: "regionalParameters"))
+    PutEnvironmentBlueprintConfigurationInput.add_member(:resource_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: PutResourceConfigurations, name: "resourceConfigurations", traits: {"smithy.api#notProperty" => {}}))
+    PutEnvironmentBlueprintConfigurationInput.add_member(:allow_user_provided_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "allowUserProvidedConfigurations"))
     PutEnvironmentBlueprintConfigurationInput.add_member(:global_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalParameterMap, name: "globalParameters", traits: {"smithy.api#notProperty" => {}}))
     PutEnvironmentBlueprintConfigurationInput.add_member(:provisioning_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: ProvisioningConfigurationList, name: "provisioningConfigurations", traits: {"smithy.api#notProperty" => {}}))
     PutEnvironmentBlueprintConfigurationInput.type = Types::PutEnvironmentBlueprintConfigurationInput
@@ -4031,10 +4772,27 @@ module Aws::DataZone
     PutEnvironmentBlueprintConfigurationOutput.add_member(:manage_access_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "manageAccessRoleArn"))
     PutEnvironmentBlueprintConfigurationOutput.add_member(:enabled_regions, ::Smithy::Schema::Shapes::MemberShape.new(target: EnabledRegionList, name: "enabledRegions"))
     PutEnvironmentBlueprintConfigurationOutput.add_member(:regional_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionalParameterMap, name: "regionalParameters"))
+    PutEnvironmentBlueprintConfigurationOutput.add_member(:allow_user_provided_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "allowUserProvidedConfigurations"))
     PutEnvironmentBlueprintConfigurationOutput.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
     PutEnvironmentBlueprintConfigurationOutput.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "updatedAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    PutEnvironmentBlueprintConfigurationOutput.add_member(:resource_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceConfigurations, name: "resourceConfigurations", traits: {"smithy.api#notProperty" => {}}))
     PutEnvironmentBlueprintConfigurationOutput.add_member(:provisioning_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: ProvisioningConfigurationList, name: "provisioningConfigurations", traits: {"smithy.api#notProperty" => {}}))
     PutEnvironmentBlueprintConfigurationOutput.type = Types::PutEnvironmentBlueprintConfigurationOutput
+    PutResourceConfiguration.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "name", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#required" => {}}))
+    PutResourceConfiguration.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "description"))
+    PutResourceConfiguration.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionName, name: "region", traits: {"smithy.api#required" => {}}))
+    PutResourceConfiguration.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceConfigurationParameterMap, name: "parameters", traits: {"smithy.api#required" => {}}))
+    PutResourceConfiguration.type = Types::PutResourceConfiguration
+    PutResourceConfigurations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PutResourceConfiguration, name: "member"))
+    QueryGraphInput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    QueryGraphInput.add_member(:match, ::Smithy::Schema::Shapes::MemberShape.new(target: MatchClauses, name: "match", traits: {"smithy.api#required" => {}}))
+    QueryGraphInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    QueryGraphInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    QueryGraphInput.add_member(:additional_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalAttributes, name: "additionalAttributes"))
+    QueryGraphInput.type = Types::QueryGraphInput
+    QueryGraphOutput.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: ResultItemList, name: "items"))
+    QueryGraphOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
+    QueryGraphOutput.type = Types::QueryGraphOutput
     RecommendationConfiguration.add_member(:enable_business_name_generation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "enableBusinessNameGeneration"))
     RecommendationConfiguration.type = Types::RecommendationConfiguration
     RedshiftClusterStorage.add_member(:cluster_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "clusterName", traits: {"smithy.api#length" => {"min" => 1, "max" => 63}, "smithy.api#pattern" => "^[0-9a-z].[a-z0-9\\-]*$", "smithy.api#required" => {}}))
@@ -4147,6 +4905,13 @@ module Aws::DataZone
     RejectSubscriptionRequestOutput.add_member(:existing_subscription_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionId, name: "existingSubscriptionId"))
     RejectSubscriptionRequestOutput.add_member(:metadata_forms, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataForms, name: "metadataForms"))
     RejectSubscriptionRequestOutput.type = Types::RejectSubscriptionRequestOutput
+    RelationDirection.add_member(:in, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN", traits: {"smithy.api#enumValue" => "IN"}))
+    RelationDirection.add_member(:out, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OUT", traits: {"smithy.api#enumValue" => "OUT"}))
+    RelationPattern.add_member(:relation_type, ::Smithy::Schema::Shapes::MemberShape.new(target: RelationType, name: "relationType", traits: {"smithy.api#required" => {}}))
+    RelationPattern.add_member(:relation_direction, ::Smithy::Schema::Shapes::MemberShape.new(target: RelationDirection, name: "relationDirection", traits: {"smithy.api#required" => {}}))
+    RelationPattern.add_member(:max_path_length, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "maxPathLength", traits: {"smithy.api#range" => {"min" => 1, "max" => 5}}))
+    RelationPattern.type = Types::RelationPattern
+    RelationType.add_member(:lineage, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LINEAGE", traits: {"smithy.api#enumValue" => "LINEAGE"}))
     RelationalFilterConfiguration.add_member(:database_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "databaseName", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#required" => {}}))
     RelationalFilterConfiguration.add_member(:schema_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "schemaName", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}}))
     RelationalFilterConfiguration.add_member(:filter_expressions, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterExpressions, name: "filterExpressions"))
@@ -4175,9 +4940,33 @@ module Aws::DataZone
     Resource.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value", traits: {"smithy.api#required" => {}}))
     Resource.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "type", traits: {"smithy.api#required" => {}}))
     Resource.type = Types::Resource
+    ResourceConfiguration.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "identifier", traits: {"smithy.api#required" => {}}))
+    ResourceConfiguration.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "name", traits: {"smithy.api#required" => {}}))
+    ResourceConfiguration.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "description"))
+    ResourceConfiguration.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionName, name: "region", traits: {"smithy.api#required" => {}}))
+    ResourceConfiguration.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceConfigurationParameterMap, name: "parameters", traits: {"smithy.api#required" => {}}))
+    ResourceConfiguration.type = Types::ResourceConfiguration
+    ResourceConfigurationParameterMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    ResourceConfigurationParameterMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value"))
+    ResourceConfigurations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceConfiguration, name: "member"))
     ResourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Resource, name: "member"))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
+    ResourceTag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key", traits: {"smithy.api#required" => {}}))
+    ResourceTag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value", traits: {"smithy.api#required" => {}}))
+    ResourceTag.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTagSource, name: "source", traits: {"smithy.api#required" => {}}))
+    ResourceTag.type = Types::ResourceTag
+    ResourceTagParameter.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key", traits: {"smithy.api#required" => {}}))
+    ResourceTagParameter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value", traits: {"smithy.api#required" => {}}))
+    ResourceTagParameter.add_member(:is_value_editable, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "isValueEditable", traits: {"smithy.api#required" => {}}))
+    ResourceTagParameter.type = Types::ResourceTagParameter
+    ResourceTagSource.add_member(:project, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PROJECT", traits: {"smithy.api#enumValue" => "PROJECT"}))
+    ResourceTagSource.add_member(:project_profile, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PROJECT_PROFILE", traits: {"smithy.api#enumValue" => "PROJECT_PROFILE"}))
+    ResourceTags.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTag, name: "member"))
+    ResultItem.add_member(:lineage_node, Types::ResultItem::LineageNode, ::Smithy::Schema::Shapes::MemberShape.new(target: LineageNodeItem, name: "lineageNode"))
+    ResultItem.add_member(:unknown, Types::ResultItem::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    ResultItem.type = Types::ResultItem
+    ResultItemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResultItem, name: "member"))
     RevokeSubscriptionInput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     RevokeSubscriptionInput.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionId, name: "identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     RevokeSubscriptionInput.add_member(:retain_permissions, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "retainPermissions"))
@@ -4221,6 +5010,7 @@ module Aws::DataZone
     RuleAction.add_member(:create_subscription_request, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATE_SUBSCRIPTION_REQUEST", traits: {"smithy.api#enumValue" => "CREATE_SUBSCRIPTION_REQUEST"}))
     RuleAssetTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetTypeIdentifier, name: "member"))
     RuleDetail.add_member(:metadata_form_enforcement_detail, Types::RuleDetail::MetadataFormEnforcementDetail, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataFormEnforcementDetail, name: "metadataFormEnforcementDetail"))
+    RuleDetail.add_member(:glossary_term_enforcement_detail, Types::RuleDetail::GlossaryTermEnforcementDetail, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryTermEnforcementDetail, name: "glossaryTermEnforcementDetail"))
     RuleDetail.add_member(:unknown, Types::RuleDetail::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     RuleDetail.type = Types::RuleDetail
     RuleProjectIdentifierList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectId, name: "member"))
@@ -4247,23 +5037,38 @@ module Aws::DataZone
     RuleTarget.type = Types::RuleTarget
     RuleTargetType.add_member(:domain_unit, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DOMAIN_UNIT", traits: {"smithy.api#enumValue" => "DOMAIN_UNIT"}))
     RuleType.add_member(:metadata_form_enforcement, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "METADATA_FORM_ENFORCEMENT", traits: {"smithy.api#enumValue" => "METADATA_FORM_ENFORCEMENT"}))
+    RuleType.add_member(:glossary_term_enforcement, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GLOSSARY_TERM_ENFORCEMENT", traits: {"smithy.api#enumValue" => "GLOSSARY_TERM_ENFORCEMENT"}))
     RunStatisticsForAssets.add_member(:added, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "added"))
     RunStatisticsForAssets.add_member(:updated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "updated"))
     RunStatisticsForAssets.add_member(:unchanged, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "unchanged"))
     RunStatisticsForAssets.add_member(:skipped, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "skipped"))
     RunStatisticsForAssets.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "failed"))
     RunStatisticsForAssets.type = Types::RunStatisticsForAssets
+    S3Destination.add_member(:uri, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookS3Uri, name: "uri"))
+    S3Destination.type = Types::S3Destination
+    S3File.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: S3ObjectKey, name: "key", traits: {"smithy.api#required" => {}}))
+    S3File.type = Types::S3File
+    S3FileList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: S3File, name: "member"))
+    S3FilesLocation.add_member(:bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: S3BucketName, name: "bucket", traits: {"smithy.api#required" => {}}))
+    S3FilesLocation.add_member(:file_list, ::Smithy::Schema::Shapes::MemberShape.new(target: S3FileList, name: "fileList", traits: {"smithy.api#required" => {}}))
+    S3FilesLocation.type = Types::S3FilesLocation
     S3LocationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Location, name: "member"))
+    S3Permission.add_member(:read, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "READ", traits: {"smithy.api#enumValue" => "READ"}))
+    S3Permission.add_member(:write, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WRITE", traits: {"smithy.api#enumValue" => "WRITE"}))
+    S3Permissions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Permission, name: "member"))
     S3PropertiesInput.add_member(:s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, name: "s3Uri", traits: {"smithy.api#required" => {}}))
     S3PropertiesInput.add_member(:s3_access_grant_location_id, ::Smithy::Schema::Shapes::MemberShape.new(target: S3AccessGrantLocationId, name: "s3AccessGrantLocationId"))
+    S3PropertiesInput.add_member(:register_s3_access_grant_location, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "registerS3AccessGrantLocation"))
     S3PropertiesInput.type = Types::S3PropertiesInput
     S3PropertiesOutput.add_member(:s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, name: "s3Uri", traits: {"smithy.api#required" => {}}))
     S3PropertiesOutput.add_member(:s3_access_grant_location_id, ::Smithy::Schema::Shapes::MemberShape.new(target: S3AccessGrantLocationId, name: "s3AccessGrantLocationId"))
+    S3PropertiesOutput.add_member(:register_s3_access_grant_location, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "registerS3AccessGrantLocation"))
     S3PropertiesOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionStatus, name: "status"))
     S3PropertiesOutput.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "errorMessage"))
     S3PropertiesOutput.type = Types::S3PropertiesOutput
     S3PropertiesPatch.add_member(:s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, name: "s3Uri", traits: {"smithy.api#required" => {}}))
     S3PropertiesPatch.add_member(:s3_access_grant_location_id, ::Smithy::Schema::Shapes::MemberShape.new(target: S3AccessGrantLocationId, name: "s3AccessGrantLocationId"))
+    S3PropertiesPatch.add_member(:register_s3_access_grant_location, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "registerS3AccessGrantLocation"))
     S3PropertiesPatch.type = Types::S3PropertiesPatch
     SageMakerRunConfigurationInput.add_member(:tracking_assets, ::Smithy::Schema::Shapes::MemberShape.new(target: TrackingAssets, name: "trackingAssets", traits: {"smithy.api#required" => {}}))
     SageMakerRunConfigurationInput.type = Types::SageMakerRunConfigurationInput
@@ -4365,6 +5170,7 @@ module Aws::DataZone
     SearchUserProfilesOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
     SearchUserProfilesOutput.type = Types::SearchUserProfilesOutput
     SecurityGroupIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}}))
+    SecurityGroupIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
     SelfGrantStatus.add_member(:grant_pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GRANT_PENDING", traits: {"smithy.api#enumValue" => "GRANT_PENDING"}))
     SelfGrantStatus.add_member(:revoke_pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REVOKE_PENDING", traits: {"smithy.api#enumValue" => "REVOKE_PENDING"}))
     SelfGrantStatus.add_member(:grant_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GRANT_IN_PROGRESS", traits: {"smithy.api#enumValue" => "GRANT_IN_PROGRESS"}))
@@ -4388,6 +5194,21 @@ module Aws::DataZone
     SingleSignOn.add_member(:user_assignment, ::Smithy::Schema::Shapes::MemberShape.new(target: UserAssignment, name: "userAssignment"))
     SingleSignOn.add_member(:idc_instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "idcInstanceArn", traits: {"smithy.api#pattern" => "arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}"}))
     SingleSignOn.type = Types::SingleSignOn
+    SnowflakePropertiesInput.add_member(:connectivity_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectivityProperties, name: "connectivityProperties"))
+    SnowflakePropertiesInput.add_member(:snowflake_role, ::Smithy::Schema::Shapes::MemberShape.new(target: SnowflakeRole, name: "snowflakeRole", traits: {"smithy.api#required" => {}}))
+    SnowflakePropertiesInput.add_member(:identity_mapping, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityMapping, name: "identityMapping", traits: {"smithy.api#required" => {}}))
+    SnowflakePropertiesInput.add_member(:lineage_sync, ::Smithy::Schema::Shapes::MemberShape.new(target: LineageSyncInput, name: "lineageSync"))
+    SnowflakePropertiesInput.type = Types::SnowflakePropertiesInput
+    SnowflakePropertiesOutput.add_member(:snowflake_role, ::Smithy::Schema::Shapes::MemberShape.new(target: SnowflakeRole, name: "snowflakeRole", traits: {"smithy.api#required" => {}}))
+    SnowflakePropertiesOutput.add_member(:identity_mapping, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityMapping, name: "identityMapping", traits: {"smithy.api#required" => {}}))
+    SnowflakePropertiesOutput.add_member(:lineage_sync, ::Smithy::Schema::Shapes::MemberShape.new(target: LineageSyncOutput, name: "lineageSync", traits: {"smithy.api#required" => {}}))
+    SnowflakePropertiesOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    SnowflakePropertiesOutput.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "errorMessage"))
+    SnowflakePropertiesOutput.type = Types::SnowflakePropertiesOutput
+    SnowflakePropertiesPatch.add_member(:connectivity_properties_patch, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectivityPropertiesPatch, name: "connectivityPropertiesPatch"))
+    SnowflakePropertiesPatch.add_member(:snowflake_role, ::Smithy::Schema::Shapes::MemberShape.new(target: SnowflakeRole, name: "snowflakeRole"))
+    SnowflakePropertiesPatch.add_member(:lineage_sync, ::Smithy::Schema::Shapes::MemberShape.new(target: LineageSyncInput, name: "lineageSync"))
+    SnowflakePropertiesPatch.type = Types::SnowflakePropertiesPatch
     SortFieldAccountPool.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NAME", traits: {"smithy.api#enumValue" => "NAME"}))
     SortFieldConnection.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NAME", traits: {"smithy.api#enumValue" => "NAME"}))
     SortFieldProject.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NAME", traits: {"smithy.api#enumValue" => "NAME"}))
@@ -4395,6 +5216,10 @@ module Aws::DataZone
     SortKey.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATED_AT", traits: {"smithy.api#enumValue" => "UPDATED_AT"}))
     SortOrder.add_member(:ascending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ASCENDING", traits: {"smithy.api#enumValue" => "ASCENDING"}))
     SortOrder.add_member(:descending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DESCENDING", traits: {"smithy.api#enumValue" => "DESCENDING"}))
+    SourceLocation.add_member(:s3, Types::SourceLocation::S3, ::Smithy::Schema::Shapes::MemberShape.new(target: S3SourceLocation, name: "s3"))
+    SourceLocation.add_member(:s3_files, Types::SourceLocation::S3Files, ::Smithy::Schema::Shapes::MemberShape.new(target: S3FilesLocation, name: "s3Files"))
+    SourceLocation.add_member(:unknown, Types::SourceLocation::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    SourceLocation.type = Types::SourceLocation
     SparkEmrPropertiesInput.add_member(:compute_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "computeArn", traits: {"smithy.api#length" => {"max" => 2048}, "smithy.api#pattern" => "^arn:aws(-(cn|us-gov|iso(-[bef])?))?:(elasticmapreduce|emr-serverless|emr-containers):.*"}))
     SparkEmrPropertiesInput.add_member(:instance_profile_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "instanceProfileArn", traits: {"smithy.api#length" => {"max" => 256}}))
     SparkEmrPropertiesInput.add_member(:java_virtual_env, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "javaVirtualEnv", traits: {"smithy.api#length" => {"max" => 256}}))
@@ -4432,6 +5257,7 @@ module Aws::DataZone
     SparkGlueArgs.type = Types::SparkGlueArgs
     SparkGluePropertiesInput.add_member(:additional_args, ::Smithy::Schema::Shapes::MemberShape.new(target: SparkGlueArgs, name: "additionalArgs"))
     SparkGluePropertiesInput.add_member(:glue_connection_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "glueConnectionName", traits: {"smithy.api#length" => {"max" => 256}}))
+    SparkGluePropertiesInput.add_member(:glue_connection_names, ::Smithy::Schema::Shapes::MemberShape.new(target: GlueConnectionNames, name: "glueConnectionNames"))
     SparkGluePropertiesInput.add_member(:glue_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "glueVersion", traits: {"smithy.api#length" => {"max" => 256}}))
     SparkGluePropertiesInput.add_member(:idle_timeout, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "idleTimeout"))
     SparkGluePropertiesInput.add_member(:java_virtual_env, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "javaVirtualEnv", traits: {"smithy.api#length" => {"max" => 256}}))
@@ -4441,6 +5267,7 @@ module Aws::DataZone
     SparkGluePropertiesInput.type = Types::SparkGluePropertiesInput
     SparkGluePropertiesOutput.add_member(:additional_args, ::Smithy::Schema::Shapes::MemberShape.new(target: SparkGlueArgs, name: "additionalArgs"))
     SparkGluePropertiesOutput.add_member(:glue_connection_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "glueConnectionName"))
+    SparkGluePropertiesOutput.add_member(:glue_connection_names, ::Smithy::Schema::Shapes::MemberShape.new(target: GlueConnectionNames, name: "glueConnectionNames"))
     SparkGluePropertiesOutput.add_member(:glue_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "glueVersion"))
     SparkGluePropertiesOutput.add_member(:idle_timeout, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "idleTimeout"))
     SparkGluePropertiesOutput.add_member(:java_virtual_env, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "javaVirtualEnv"))
@@ -4471,7 +5298,8 @@ module Aws::DataZone
     StartDataSourceRunOutput.add_member(:stopped_at, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "stoppedAt"))
     StartDataSourceRunOutput.type = Types::StartDataSourceRunOutput
     StartMetadataGenerationRunInput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    StartMetadataGenerationRunInput.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataGenerationRunType, name: "type", traits: {"smithy.api#required" => {}}))
+    StartMetadataGenerationRunInput.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataGenerationRunType, name: "type", traits: {"smithy.api#deprecated" => {"message" => "This field is going to be deprecated, please use the 'types' field to provide the MetadataGenerationRun types", "since" => "2025-11-21"}}))
+    StartMetadataGenerationRunInput.add_member(:types, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataGenerationRunTypes, name: "types"))
     StartMetadataGenerationRunInput.add_member(:target, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataGenerationRunTarget, name: "target", traits: {"smithy.api#required" => {}}))
     StartMetadataGenerationRunInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     StartMetadataGenerationRunInput.add_member(:owning_project_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectId, name: "owningProjectIdentifier", traits: {"smithy.api#required" => {}}))
@@ -4479,15 +5307,120 @@ module Aws::DataZone
     StartMetadataGenerationRunOutput.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainId", traits: {"smithy.api#required" => {}}))
     StartMetadataGenerationRunOutput.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataGenerationRunIdentifier, name: "id", traits: {"smithy.api#required" => {}}))
     StartMetadataGenerationRunOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataGenerationRunStatus, name: "status"))
-    StartMetadataGenerationRunOutput.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataGenerationRunType, name: "type"))
+    StartMetadataGenerationRunOutput.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataGenerationRunType, name: "type", traits: {"smithy.api#deprecated" => {"message" => "This field is going to be deprecated, please use the 'types' field to provide the MetadataGenerationRun types", "since" => "2025-11-21"}}))
+    StartMetadataGenerationRunOutput.add_member(:types, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataGenerationRunTypes, name: "types"))
     StartMetadataGenerationRunOutput.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedAt, name: "createdAt"))
     StartMetadataGenerationRunOutput.add_member(:created_by, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedBy, name: "createdBy"))
     StartMetadataGenerationRunOutput.add_member(:owning_project_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectId, name: "owningProjectId"))
     StartMetadataGenerationRunOutput.type = Types::StartMetadataGenerationRunOutput
+    StartNotebookExportInput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    StartNotebookExportInput.add_member(:notebook_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookId, name: "notebookIdentifier", traits: {"smithy.api#required" => {}}))
+    StartNotebookExportInput.add_member(:owning_project_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectId, name: "owningProjectIdentifier", traits: {"smithy.api#required" => {}}))
+    StartNotebookExportInput.add_member(:file_format, ::Smithy::Schema::Shapes::MemberShape.new(target: FileFormat, name: "fileFormat", traits: {"smithy.api#required" => {}}))
+    StartNotebookExportInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    StartNotebookExportInput.type = Types::StartNotebookExportInput
+    StartNotebookExportOutput.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportId, name: "id", traits: {"smithy.api#required" => {}}))
+    StartNotebookExportOutput.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainId", traits: {"smithy.api#required" => {}}))
+    StartNotebookExportOutput.add_member(:owning_project_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectId, name: "owningProjectId", traits: {"smithy.api#required" => {}}))
+    StartNotebookExportOutput.add_member(:notebook_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookId, name: "notebookId", traits: {"smithy.api#required" => {}}))
+    StartNotebookExportOutput.add_member(:file_format, ::Smithy::Schema::Shapes::MemberShape.new(target: FileFormat, name: "fileFormat", traits: {"smithy.api#required" => {}}))
+    StartNotebookExportOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookExportStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    StartNotebookExportOutput.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedAt, name: "createdAt"))
+    StartNotebookExportOutput.add_member(:created_by, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedBy, name: "createdBy"))
+    StartNotebookExportOutput.type = Types::StartNotebookExportOutput
+    StartNotebookImportInput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    StartNotebookImportInput.add_member(:owning_project_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectId, name: "owningProjectIdentifier", traits: {"smithy.api#required" => {}}))
+    StartNotebookImportInput.add_member(:source_location, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceLocation, name: "sourceLocation", traits: {"smithy.api#required" => {}}))
+    StartNotebookImportInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookName, name: "name", traits: {"smithy.api#required" => {}}))
+    StartNotebookImportInput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
+    StartNotebookImportInput.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookType, name: "type"))
+    StartNotebookImportInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    StartNotebookImportInput.type = Types::StartNotebookImportInput
+    StartNotebookImportOutput.add_member(:notebook_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookId, name: "notebookId"))
+    StartNotebookImportOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookStatus, name: "status"))
+    StartNotebookImportOutput.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainId"))
+    StartNotebookImportOutput.add_member(:owning_project_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectId, name: "owningProjectId"))
+    StartNotebookImportOutput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookName, name: "name"))
+    StartNotebookImportOutput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
+    StartNotebookImportOutput.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookType, name: "type"))
+    StartNotebookImportOutput.add_member(:source_location, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceLocation, name: "sourceLocation"))
+    StartNotebookImportOutput.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedAt, name: "createdAt"))
+    StartNotebookImportOutput.add_member(:created_by, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedBy, name: "createdBy"))
+    StartNotebookImportOutput.type = Types::StartNotebookImportOutput
+    StartNotebookRunInput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    StartNotebookRunInput.add_member(:owning_project_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectId, name: "owningProjectIdentifier", traits: {"smithy.api#required" => {}}))
+    StartNotebookRunInput.add_member(:notebook_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookId, name: "notebookIdentifier", traits: {"smithy.api#required" => {}}))
+    StartNotebookRunInput.add_member(:schedule_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleId, name: "scheduleIdentifier"))
+    StartNotebookRunInput.add_member(:compute_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputeConfig, name: "computeConfiguration"))
+    StartNotebookRunInput.add_member(:network_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkConfig, name: "networkConfiguration"))
+    StartNotebookRunInput.add_member(:timeout_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeoutConfig, name: "timeoutConfiguration"))
+    StartNotebookRunInput.add_member(:notification_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationConfig, name: "notificationConfiguration"))
+    StartNotebookRunInput.add_member(:trigger_source, ::Smithy::Schema::Shapes::MemberShape.new(target: TriggerSource, name: "triggerSource"))
+    StartNotebookRunInput.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: Metadata, name: "metadata"))
+    StartNotebookRunInput.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: Parameters, name: "parameters"))
+    StartNotebookRunInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    StartNotebookRunInput.type = Types::StartNotebookRunInput
+    StartNotebookRunOutput.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookRunId, name: "id", traits: {"smithy.api#required" => {}}))
+    StartNotebookRunOutput.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainId", traits: {"smithy.api#required" => {}}))
+    StartNotebookRunOutput.add_member(:owning_project_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectId, name: "owningProjectId", traits: {"smithy.api#required" => {}}))
+    StartNotebookRunOutput.add_member(:notebook_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookId, name: "notebookId", traits: {"smithy.api#required" => {}}))
+    StartNotebookRunOutput.add_member(:schedule_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleId, name: "scheduleId"))
+    StartNotebookRunOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookRunStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    StartNotebookRunOutput.add_member(:cell_order, ::Smithy::Schema::Shapes::MemberShape.new(target: CellOrder, name: "cellOrder"))
+    StartNotebookRunOutput.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: Metadata, name: "metadata"))
+    StartNotebookRunOutput.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: Parameters, name: "parameters"))
+    StartNotebookRunOutput.add_member(:compute_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputeConfig, name: "computeConfiguration"))
+    StartNotebookRunOutput.add_member(:network_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkConfig, name: "networkConfiguration"))
+    StartNotebookRunOutput.add_member(:timeout_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeoutConfig, name: "timeoutConfiguration"))
+    StartNotebookRunOutput.add_member(:environment_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentConfig, name: "environmentConfiguration"))
+    StartNotebookRunOutput.add_member(:storage_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageConfig, name: "storageConfiguration"))
+    StartNotebookRunOutput.add_member(:notification_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationConfig, name: "notificationConfiguration"))
+    StartNotebookRunOutput.add_member(:trigger_source, ::Smithy::Schema::Shapes::MemberShape.new(target: TriggerSource, name: "triggerSource"))
+    StartNotebookRunOutput.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookRunError, name: "error"))
+    StartNotebookRunOutput.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedAt, name: "createdAt"))
+    StartNotebookRunOutput.add_member(:created_by, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedBy, name: "createdBy"))
+    StartNotebookRunOutput.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdatedAt, name: "updatedAt"))
+    StartNotebookRunOutput.add_member(:updated_by, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdatedBy, name: "updatedBy"))
+    StartNotebookRunOutput.add_member(:started_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "startedAt"))
+    StartNotebookRunOutput.add_member(:completed_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "completedAt"))
+    StartNotebookRunOutput.type = Types::StartNotebookRunOutput
+    StartNotebookSyncInput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    StartNotebookSyncInput.add_member(:owning_project_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectId, name: "owningProjectIdentifier", traits: {"smithy.api#required" => {}}))
+    StartNotebookSyncInput.add_member(:source_location, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceLocation, name: "sourceLocation", traits: {"smithy.api#required" => {}}))
+    StartNotebookSyncInput.add_member(:git_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: GitMetadata, name: "gitMetadata"))
+    StartNotebookSyncInput.add_member(:notebook_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookId, name: "notebookId"))
+    StartNotebookSyncInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookName, name: "name"))
+    StartNotebookSyncInput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
+    StartNotebookSyncInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    StartNotebookSyncInput.type = Types::StartNotebookSyncInput
+    StartNotebookSyncOutput.add_member(:notebook_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookId, name: "notebookId"))
+    StartNotebookSyncOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookStatus, name: "status"))
+    StartNotebookSyncOutput.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainId"))
+    StartNotebookSyncOutput.add_member(:owning_project_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectId, name: "owningProjectId"))
+    StartNotebookSyncOutput.add_member(:source_location, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceLocation, name: "sourceLocation"))
+    StartNotebookSyncOutput.add_member(:git_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: GitMetadata, name: "gitMetadata"))
+    StartNotebookSyncOutput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookName, name: "name"))
+    StartNotebookSyncOutput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
+    StartNotebookSyncOutput.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedAt, name: "createdAt"))
+    StartNotebookSyncOutput.add_member(:created_by, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedBy, name: "createdBy"))
+    StartNotebookSyncOutput.type = Types::StartNotebookSyncOutput
     Status.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     Status.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
+    StopNotebookRunInput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    StopNotebookRunInput.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookRunId, name: "identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    StopNotebookRunInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    StopNotebookRunInput.type = Types::StopNotebookRunInput
+    StopNotebookRunOutput.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookRunId, name: "id", traits: {"smithy.api#required" => {}}))
+    StopNotebookRunOutput.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainId", traits: {"smithy.api#required" => {}}))
+    StopNotebookRunOutput.add_member(:owning_project_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectId, name: "owningProjectId", traits: {"smithy.api#required" => {}}))
+    StopNotebookRunOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookRunStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    StopNotebookRunOutput.type = Types::StopNotebookRunOutput
+    StorageConfig.add_member(:project_s3_path, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Path, name: "projectS3Path"))
+    StorageConfig.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyArn, name: "kmsKeyArn"))
+    StorageConfig.type = Types::StorageConfig
     StringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
     SubnetIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, name: "member"))
+    SubnetIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
     SubscribedAsset.add_member(:asset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetId, name: "assetId", traits: {"smithy.api#required" => {}}))
     SubscribedAsset.add_member(:asset_revision, ::Smithy::Schema::Shapes::MemberShape.new(target: Revision, name: "assetRevision", traits: {"smithy.api#required" => {}}))
     SubscribedAsset.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionGrantStatus, name: "status", traits: {"smithy.api#required" => {}}))
@@ -4496,6 +5429,7 @@ module Aws::DataZone
     SubscribedAsset.add_member(:granted_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "grantedTimestamp"))
     SubscribedAsset.add_member(:failure_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "failureTimestamp"))
     SubscribedAsset.add_member(:asset_scope, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetScope, name: "assetScope"))
+    SubscribedAsset.add_member(:permissions, ::Smithy::Schema::Shapes::MemberShape.new(target: Permissions, name: "permissions"))
     SubscribedAsset.type = Types::SubscribedAsset
     SubscribedAssetListing.add_member(:entity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetId, name: "entityId"))
     SubscribedAssetListing.add_member(:entity_revision, ::Smithy::Schema::Shapes::MemberShape.new(target: Revision, name: "entityRevision"))
@@ -4503,8 +5437,18 @@ module Aws::DataZone
     SubscribedAssetListing.add_member(:forms, ::Smithy::Schema::Shapes::MemberShape.new(target: Forms, name: "forms"))
     SubscribedAssetListing.add_member(:glossary_terms, ::Smithy::Schema::Shapes::MemberShape.new(target: DetailedGlossaryTerms, name: "glossaryTerms"))
     SubscribedAssetListing.add_member(:asset_scope, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetScope, name: "assetScope"))
+    SubscribedAssetListing.add_member(:permissions, ::Smithy::Schema::Shapes::MemberShape.new(target: Permissions, name: "permissions"))
     SubscribedAssetListing.type = Types::SubscribedAssetListing
     SubscribedAssets.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscribedAsset, name: "member"))
+    SubscribedGroup.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupProfileId, name: "id"))
+    SubscribedGroup.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupProfileName, name: "name"))
+    SubscribedGroup.type = Types::SubscribedGroup
+    SubscribedGroupInput.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupProfileId, name: "identifier"))
+    SubscribedGroupInput.type = Types::SubscribedGroupInput
+    SubscribedIamPrincipal.add_member(:principal_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamPrincipalArn, name: "principalArn"))
+    SubscribedIamPrincipal.type = Types::SubscribedIamPrincipal
+    SubscribedIamPrincipalInput.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: IamPrincipalArn, name: "identifier"))
+    SubscribedIamPrincipalInput.type = Types::SubscribedIamPrincipalInput
     SubscribedListing.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ListingId, name: "id", traits: {"smithy.api#required" => {}}))
     SubscribedListing.add_member(:revision, ::Smithy::Schema::Shapes::MemberShape.new(target: Revision, name: "revision"))
     SubscribedListing.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ListingName, name: "name", traits: {"smithy.api#required" => {}}))
@@ -4522,9 +5466,15 @@ module Aws::DataZone
     SubscribedListingItem.type = Types::SubscribedListingItem
     SubscribedListings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscribedListing, name: "member"))
     SubscribedPrincipal.add_member(:project, Types::SubscribedPrincipal::Project, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscribedProject, name: "project"))
+    SubscribedPrincipal.add_member(:user, Types::SubscribedPrincipal::User, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscribedUser, name: "user"))
+    SubscribedPrincipal.add_member(:group, Types::SubscribedPrincipal::Group, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscribedGroup, name: "group"))
+    SubscribedPrincipal.add_member(:iam, Types::SubscribedPrincipal::Iam, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscribedIamPrincipal, name: "iam"))
     SubscribedPrincipal.add_member(:unknown, Types::SubscribedPrincipal::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     SubscribedPrincipal.type = Types::SubscribedPrincipal
     SubscribedPrincipalInput.add_member(:project, Types::SubscribedPrincipalInput::Project, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscribedProjectInput, name: "project"))
+    SubscribedPrincipalInput.add_member(:user, Types::SubscribedPrincipalInput::User, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscribedUserInput, name: "user"))
+    SubscribedPrincipalInput.add_member(:group, Types::SubscribedPrincipalInput::Group, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscribedGroupInput, name: "group"))
+    SubscribedPrincipalInput.add_member(:iam, Types::SubscribedPrincipalInput::Iam, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscribedIamPrincipalInput, name: "iam"))
     SubscribedPrincipalInput.add_member(:unknown, Types::SubscribedPrincipalInput::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     SubscribedPrincipalInput.type = Types::SubscribedPrincipalInput
     SubscribedPrincipalInputs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscribedPrincipalInput, name: "member"))
@@ -4541,6 +5491,13 @@ module Aws::DataZone
     SubscribedProject.type = Types::SubscribedProject
     SubscribedProjectInput.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectId, name: "identifier"))
     SubscribedProjectInput.type = Types::SubscribedProjectInput
+    SubscribedUser.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserProfileId, name: "id"))
+    SubscribedUser.add_member(:details, ::Smithy::Schema::Shapes::MemberShape.new(target: UserProfileDetails, name: "details"))
+    SubscribedUser.type = Types::SubscribedUser
+    SubscribedUserInput.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: UserProfileId, name: "identifier"))
+    SubscribedUserInput.type = Types::SubscribedUserInput
+    SubscriptionGrantCreationMode.add_member(:automatic, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AUTOMATIC", traits: {"smithy.api#enumValue" => "AUTOMATIC"}))
+    SubscriptionGrantCreationMode.add_member(:manual, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MANUAL", traits: {"smithy.api#enumValue" => "MANUAL"}))
     SubscriptionGrantOverallStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
     SubscriptionGrantOverallStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
     SubscriptionGrantOverallStatus.add_member(:grant_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GRANT_FAILED", traits: {"smithy.api#enumValue" => "GRANT_FAILED"}))
@@ -4562,6 +5519,7 @@ module Aws::DataZone
     SubscriptionGrantSummary.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainId", traits: {"smithy.api#required" => {}}))
     SubscriptionGrantSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedAt, name: "createdAt", traits: {"smithy.api#required" => {}}))
     SubscriptionGrantSummary.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdatedAt, name: "updatedAt", traits: {"smithy.api#required" => {}}))
+    SubscriptionGrantSummary.add_member(:environment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentId, name: "environmentId"))
     SubscriptionGrantSummary.add_member(:subscription_target_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionTargetId, name: "subscriptionTargetId", traits: {"smithy.api#required" => {}}))
     SubscriptionGrantSummary.add_member(:granted_entity, ::Smithy::Schema::Shapes::MemberShape.new(target: GrantedEntity, name: "grantedEntity", traits: {"smithy.api#required" => {}}))
     SubscriptionGrantSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionGrantOverallStatus, name: "status", traits: {"smithy.api#required" => {}}))
@@ -4622,6 +5580,7 @@ module Aws::DataZone
     SubscriptionTargetSummary.add_member(:applicable_asset_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicableAssetTypes, name: "applicableAssetTypes", traits: {"smithy.api#required" => {}}))
     SubscriptionTargetSummary.add_member(:subscription_target_config, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionTargetForms, name: "subscriptionTargetConfig", traits: {"smithy.api#required" => {}}))
     SubscriptionTargetSummary.add_member(:provider, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "provider", traits: {"smithy.api#required" => {}}))
+    SubscriptionTargetSummary.add_member(:subscription_grant_creation_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionGrantCreationMode, name: "subscriptionGrantCreationMode"))
     SubscriptionTargetSummary.type = Types::SubscriptionTargetSummary
     SubscriptionTargets.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionTargetSummary, name: "member"))
     Subscriptions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionSummary, name: "member"))
@@ -4673,6 +5632,8 @@ module Aws::DataZone
     TimeSeriesDataPointSummaryFormOutputList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeSeriesDataPointSummaryFormOutput, name: "member"))
     TimeSeriesEntityType.add_member(:asset, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ASSET", traits: {"smithy.api#enumValue" => "ASSET"}))
     TimeSeriesEntityType.add_member(:listing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LISTING", traits: {"smithy.api#enumValue" => "LISTING"}))
+    TimeoutConfig.add_member(:run_timeout_in_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "runTimeoutInMinutes", traits: {"smithy.api#range" => {"min" => 60, "max" => 1440}}))
+    TimeoutConfig.type = Types::TimeoutConfig
     Timezone.add_member(:utc, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UTC", traits: {"smithy.api#enumValue" => "UTC"}))
     Timezone.add_member(:africa_johannesburg, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AFRICA_JOHANNESBURG", traits: {"smithy.api#enumValue" => "AFRICA_JOHANNESBURG"}))
     Timezone.add_member(:america_montreal, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AMERICA_MONTREAL", traits: {"smithy.api#enumValue" => "AMERICA_MONTREAL"}))
@@ -4746,6 +5707,12 @@ module Aws::DataZone
     TrackingAssetArns.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SageMakerResourceArn, name: "member"))
     TrackingAssets.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: SageMakerAssetType, name: "key"))
     TrackingAssets.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TrackingAssetArns, name: "value"))
+    TriggerSource.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: TriggerSourceType, name: "type"))
+    TriggerSource.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "name"))
+    TriggerSource.type = Types::TriggerSource
+    TriggerSourceType.add_member(:manual, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MANUAL", traits: {"smithy.api#enumValue" => "MANUAL"}))
+    TriggerSourceType.add_member(:scheduled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SCHEDULED", traits: {"smithy.api#enumValue" => "SCHEDULED"}))
+    TriggerSourceType.add_member(:workflow, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WORKFLOW", traits: {"smithy.api#enumValue" => "WORKFLOW"}))
     TypesSearchScope.add_member(:asset_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ASSET_TYPE", traits: {"smithy.api#enumValue" => "ASSET_TYPE"}))
     TypesSearchScope.add_member(:form_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FORM_TYPE", traits: {"smithy.api#enumValue" => "FORM_TYPE"}))
     TypesSearchScope.add_member(:lineage_node_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LINEAGE_NODE_TYPE", traits: {"smithy.api#enumValue" => "LINEAGE_NODE_TYPE"}))
@@ -4794,12 +5761,14 @@ module Aws::DataZone
     UpdateAssetFilterOutput.add_member(:effective_column_names, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnNameList, name: "effectiveColumnNames"))
     UpdateAssetFilterOutput.add_member(:effective_row_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "effectiveRowFilter"))
     UpdateAssetFilterOutput.type = Types::UpdateAssetFilterOutput
+    UpdateConnectionInput.add_member(:configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: Configurations, name: "configurations"))
     UpdateConnectionInput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdateConnectionInput.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionId, name: "identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdateConnectionInput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}}))
     UpdateConnectionInput.add_member(:aws_location, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsLocation, name: "awsLocation"))
     UpdateConnectionInput.add_member(:props, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionPropertiesPatch, name: "props"))
     UpdateConnectionInput.type = Types::UpdateConnectionInput
+    UpdateConnectionOutput.add_member(:configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: Configurations, name: "configurations"))
     UpdateConnectionOutput.add_member(:connection_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionId, name: "connectionId", traits: {"smithy.api#required" => {}}))
     UpdateConnectionOutput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
     UpdateConnectionOutput.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainId", traits: {"smithy.api#required" => {}}))
@@ -4810,6 +5779,7 @@ module Aws::DataZone
     UpdateConnectionOutput.add_member(:project_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectId, name: "projectId"))
     UpdateConnectionOutput.add_member(:props, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionPropertiesOutput, name: "props"))
     UpdateConnectionOutput.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionType, name: "type", traits: {"smithy.api#required" => {}}))
+    UpdateConnectionOutput.add_member(:scope, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionScope, name: "scope"))
     UpdateConnectionOutput.type = Types::UpdateConnectionOutput
     UpdateDataSourceInput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdateDataSourceInput.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceId, name: "identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -4899,6 +5869,7 @@ module Aws::DataZone
     UpdateEnvironmentBlueprintInput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "description"))
     UpdateEnvironmentBlueprintInput.add_member(:provisioning_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: ProvisioningProperties, name: "provisioningProperties"))
     UpdateEnvironmentBlueprintInput.add_member(:user_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomParameterList, name: "userParameters"))
+    UpdateEnvironmentBlueprintInput.add_member(:blueprint_category, ::Smithy::Schema::Shapes::MemberShape.new(target: BlueprintCategory, name: "blueprintCategory"))
     UpdateEnvironmentBlueprintInput.type = Types::UpdateEnvironmentBlueprintInput
     UpdateEnvironmentBlueprintOutput.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentBlueprintId, name: "id", traits: {"smithy.api#required" => {}}))
     UpdateEnvironmentBlueprintOutput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentBlueprintName, name: "name", traits: {"smithy.api#required" => {}}))
@@ -4908,6 +5879,7 @@ module Aws::DataZone
     UpdateEnvironmentBlueprintOutput.add_member(:deployment_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentProperties, name: "deploymentProperties"))
     UpdateEnvironmentBlueprintOutput.add_member(:user_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomParameterList, name: "userParameters"))
     UpdateEnvironmentBlueprintOutput.add_member(:glossary_terms, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryTerms, name: "glossaryTerms"))
+    UpdateEnvironmentBlueprintOutput.add_member(:blueprint_category, ::Smithy::Schema::Shapes::MemberShape.new(target: BlueprintCategory, name: "blueprintCategory"))
     UpdateEnvironmentBlueprintOutput.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
     UpdateEnvironmentBlueprintOutput.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "updatedAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
     UpdateEnvironmentBlueprintOutput.type = Types::UpdateEnvironmentBlueprintOutput
@@ -4918,6 +5890,7 @@ module Aws::DataZone
     UpdateEnvironmentInput.add_member(:glossary_terms, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryTerms, name: "glossaryTerms"))
     UpdateEnvironmentInput.add_member(:blueprint_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "blueprintVersion"))
     UpdateEnvironmentInput.add_member(:user_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentParametersList, name: "userParameters"))
+    UpdateEnvironmentInput.add_member(:environment_configuration_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentConfigurationName, name: "environmentConfigurationName"))
     UpdateEnvironmentInput.type = Types::UpdateEnvironmentInput
     UpdateEnvironmentOutput.add_member(:project_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectId, name: "projectId", traits: {"smithy.api#required" => {}}))
     UpdateEnvironmentOutput.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentId, name: "id"))
@@ -4941,6 +5914,7 @@ module Aws::DataZone
     UpdateEnvironmentOutput.add_member(:deployment_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentProperties, name: "deploymentProperties"))
     UpdateEnvironmentOutput.add_member(:environment_blueprint_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentBlueprintId, name: "environmentBlueprintId"))
     UpdateEnvironmentOutput.add_member(:environment_configuration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentConfigurationId, name: "environmentConfigurationId"))
+    UpdateEnvironmentOutput.add_member(:environment_configuration_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentConfigurationName, name: "environmentConfigurationName"))
     UpdateEnvironmentOutput.type = Types::UpdateEnvironmentOutput
     UpdateEnvironmentProfileInput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdateEnvironmentProfileInput.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentProfileId, name: "identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -5005,11 +5979,48 @@ module Aws::DataZone
     UpdateGroupProfileOutput.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupProfileId, name: "id"))
     UpdateGroupProfileOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupProfileStatus, name: "status"))
     UpdateGroupProfileOutput.add_member(:group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupProfileName, name: "groupName"))
+    UpdateGroupProfileOutput.add_member(:role_principal_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "rolePrincipalArn"))
+    UpdateGroupProfileOutput.add_member(:role_principal_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "rolePrincipalId"))
     UpdateGroupProfileOutput.type = Types::UpdateGroupProfileOutput
+    UpdateNotebookInput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateNotebookInput.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookId, name: "identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateNotebookInput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
+    UpdateNotebookInput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookStatus, name: "status"))
+    UpdateNotebookInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookName, name: "name"))
+    UpdateNotebookInput.add_member(:cell_order, ::Smithy::Schema::Shapes::MemberShape.new(target: CellOrder, name: "cellOrder"))
+    UpdateNotebookInput.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookType, name: "type"))
+    UpdateNotebookInput.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: Metadata, name: "metadata"))
+    UpdateNotebookInput.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: Parameters, name: "parameters"))
+    UpdateNotebookInput.add_member(:environment_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentConfig, name: "environmentConfiguration"))
+    UpdateNotebookInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    UpdateNotebookInput.type = Types::UpdateNotebookInput
+    UpdateNotebookOutput.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookId, name: "id", traits: {"smithy.api#required" => {}}))
+    UpdateNotebookOutput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookName, name: "name", traits: {"smithy.api#required" => {}}))
+    UpdateNotebookOutput.add_member(:owning_project_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectId, name: "owningProjectId", traits: {"smithy.api#required" => {}}))
+    UpdateNotebookOutput.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainId", traits: {"smithy.api#required" => {}}))
+    UpdateNotebookOutput.add_member(:cell_order, ::Smithy::Schema::Shapes::MemberShape.new(target: CellOrder, name: "cellOrder", traits: {"smithy.api#required" => {}}))
+    UpdateNotebookOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    UpdateNotebookOutput.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookType, name: "type"))
+    UpdateNotebookOutput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
+    UpdateNotebookOutput.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedAt, name: "createdAt"))
+    UpdateNotebookOutput.add_member(:created_by, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedBy, name: "createdBy"))
+    UpdateNotebookOutput.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdatedAt, name: "updatedAt"))
+    UpdateNotebookOutput.add_member(:updated_by, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdatedBy, name: "updatedBy"))
+    UpdateNotebookOutput.add_member(:locked_by, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "lockedBy"))
+    UpdateNotebookOutput.add_member(:locked_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "lockedAt"))
+    UpdateNotebookOutput.add_member(:lock_expires_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "lockExpiresAt"))
+    UpdateNotebookOutput.add_member(:compute_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputeId, name: "computeId"))
+    UpdateNotebookOutput.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: Metadata, name: "metadata"))
+    UpdateNotebookOutput.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: Parameters, name: "parameters"))
+    UpdateNotebookOutput.add_member(:environment_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentConfig, name: "environmentConfiguration"))
+    UpdateNotebookOutput.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookError, name: "error"))
+    UpdateNotebookOutput.add_member(:git_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: GitMetadata, name: "gitMetadata"))
+    UpdateNotebookOutput.type = Types::UpdateNotebookOutput
     UpdateProjectInput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdateProjectInput.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectId, name: "identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdateProjectInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectName, name: "name"))
     UpdateProjectInput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
+    UpdateProjectInput.add_member(:resource_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "resourceTags", traits: {"smithy.api#length" => {"max" => 25}}))
     UpdateProjectInput.add_member(:glossary_terms, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryTerms, name: "glossaryTerms"))
     UpdateProjectInput.add_member(:domain_unit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainUnitId, name: "domainUnitId"))
     UpdateProjectInput.add_member(:environment_deployment_details, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentDeploymentDetails, name: "environmentDeploymentDetails"))
@@ -5025,17 +6036,22 @@ module Aws::DataZone
     UpdateProjectOutput.add_member(:created_by, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedBy, name: "createdBy", traits: {"smithy.api#required" => {}}))
     UpdateProjectOutput.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
     UpdateProjectOutput.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "lastUpdatedAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    UpdateProjectOutput.add_member(:resource_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTags, name: "resourceTags"))
     UpdateProjectOutput.add_member(:glossary_terms, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryTerms, name: "glossaryTerms"))
     UpdateProjectOutput.add_member(:domain_unit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainUnitId, name: "domainUnitId"))
     UpdateProjectOutput.add_member(:project_profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectProfileId, name: "projectProfileId"))
     UpdateProjectOutput.add_member(:user_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentConfigurationUserParametersList, name: "userParameters"))
     UpdateProjectOutput.add_member(:environment_deployment_details, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentDeploymentDetails, name: "environmentDeploymentDetails"))
+    UpdateProjectOutput.add_member(:project_category, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "projectCategory"))
     UpdateProjectOutput.type = Types::UpdateProjectOutput
     UpdateProjectProfileInput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdateProjectProfileInput.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectProfileId, name: "identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdateProjectProfileInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectProfileName, name: "name"))
     UpdateProjectProfileInput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
     UpdateProjectProfileInput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: Status, name: "status"))
+    UpdateProjectProfileInput.add_member(:project_resource_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectResourceTagParameters, name: "projectResourceTags"))
+    UpdateProjectProfileInput.add_member(:allow_custom_project_resource_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "allowCustomProjectResourceTags"))
+    UpdateProjectProfileInput.add_member(:project_resource_tags_description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "projectResourceTagsDescription"))
     UpdateProjectProfileInput.add_member(:environment_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentConfigurationsList, name: "environmentConfigurations"))
     UpdateProjectProfileInput.add_member(:domain_unit_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainUnitId, name: "domainUnitIdentifier"))
     UpdateProjectProfileInput.type = Types::UpdateProjectProfileInput
@@ -5044,12 +6060,21 @@ module Aws::DataZone
     UpdateProjectProfileOutput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectProfileName, name: "name", traits: {"smithy.api#required" => {}}))
     UpdateProjectProfileOutput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
     UpdateProjectProfileOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: Status, name: "status"))
+    UpdateProjectProfileOutput.add_member(:project_resource_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectResourceTagParameters, name: "projectResourceTags"))
+    UpdateProjectProfileOutput.add_member(:allow_custom_project_resource_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "allowCustomProjectResourceTags"))
+    UpdateProjectProfileOutput.add_member(:project_resource_tags_description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "projectResourceTagsDescription"))
     UpdateProjectProfileOutput.add_member(:environment_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentConfigurationsList, name: "environmentConfigurations"))
     UpdateProjectProfileOutput.add_member(:created_by, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedBy, name: "createdBy", traits: {"smithy.api#required" => {}}))
     UpdateProjectProfileOutput.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
     UpdateProjectProfileOutput.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "lastUpdatedAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
     UpdateProjectProfileOutput.add_member(:domain_unit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainUnitId, name: "domainUnitId"))
     UpdateProjectProfileOutput.type = Types::UpdateProjectProfileOutput
+    UpdateRootDomainUnitOwnerInput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateRootDomainUnitOwnerInput.add_member(:current_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: UserIdentifier, name: "currentOwner", traits: {"smithy.api#required" => {}}))
+    UpdateRootDomainUnitOwnerInput.add_member(:new_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "newOwner", traits: {"smithy.api#required" => {}}))
+    UpdateRootDomainUnitOwnerInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    UpdateRootDomainUnitOwnerInput.type = Types::UpdateRootDomainUnitOwnerInput
+    UpdateRootDomainUnitOwnerOutput.type = Types::UpdateRootDomainUnitOwnerOutput
     UpdateRuleInput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdateRuleInput.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleId, name: "identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdateRuleInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleName, name: "name"))
@@ -5085,6 +6110,7 @@ module Aws::DataZone
     UpdateSubscriptionGrantStatusOutput.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainId", traits: {"smithy.api#required" => {}}))
     UpdateSubscriptionGrantStatusOutput.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedAt, name: "createdAt", traits: {"smithy.api#required" => {}}))
     UpdateSubscriptionGrantStatusOutput.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdatedAt, name: "updatedAt", traits: {"smithy.api#required" => {}}))
+    UpdateSubscriptionGrantStatusOutput.add_member(:environment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentId, name: "environmentId"))
     UpdateSubscriptionGrantStatusOutput.add_member(:subscription_target_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionTargetId, name: "subscriptionTargetId", traits: {"smithy.api#required" => {}}))
     UpdateSubscriptionGrantStatusOutput.add_member(:granted_entity, ::Smithy::Schema::Shapes::MemberShape.new(target: GrantedEntity, name: "grantedEntity", traits: {"smithy.api#required" => {}}))
     UpdateSubscriptionGrantStatusOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionGrantOverallStatus, name: "status", traits: {"smithy.api#required" => {}}))
@@ -5119,6 +6145,7 @@ module Aws::DataZone
     UpdateSubscriptionTargetInput.add_member(:subscription_target_config, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionTargetForms, name: "subscriptionTargetConfig"))
     UpdateSubscriptionTargetInput.add_member(:manage_access_role, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, name: "manageAccessRole"))
     UpdateSubscriptionTargetInput.add_member(:provider, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "provider"))
+    UpdateSubscriptionTargetInput.add_member(:subscription_grant_creation_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionGrantCreationMode, name: "subscriptionGrantCreationMode"))
     UpdateSubscriptionTargetInput.type = Types::UpdateSubscriptionTargetInput
     UpdateSubscriptionTargetOutput.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionTargetId, name: "id", traits: {"smithy.api#required" => {}}))
     UpdateSubscriptionTargetOutput.add_member(:authorized_principals, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthorizedPrincipalIdentifiers, name: "authorizedPrincipals", traits: {"smithy.api#required" => {}}))
@@ -5135,11 +6162,13 @@ module Aws::DataZone
     UpdateSubscriptionTargetOutput.add_member(:applicable_asset_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicableAssetTypes, name: "applicableAssetTypes", traits: {"smithy.api#required" => {}}))
     UpdateSubscriptionTargetOutput.add_member(:subscription_target_config, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionTargetForms, name: "subscriptionTargetConfig", traits: {"smithy.api#required" => {}}))
     UpdateSubscriptionTargetOutput.add_member(:provider, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "provider", traits: {"smithy.api#required" => {}}))
+    UpdateSubscriptionTargetOutput.add_member(:subscription_grant_creation_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionGrantCreationMode, name: "subscriptionGrantCreationMode"))
     UpdateSubscriptionTargetOutput.type = Types::UpdateSubscriptionTargetOutput
     UpdateUserProfileInput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdateUserProfileInput.add_member(:user_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: UserIdentifier, name: "userIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdateUserProfileInput.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: UserProfileType, name: "type"))
     UpdateUserProfileInput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: UserProfileStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    UpdateUserProfileInput.add_member(:session_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "sessionName", traits: {"smithy.api#length" => {"min" => 2, "max" => 64}}))
     UpdateUserProfileInput.type = Types::UpdateUserProfileInput
     UpdateUserProfileOutput.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "domainId"))
     UpdateUserProfileOutput.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserProfileId, name: "id"))
@@ -5186,17 +6215,39 @@ module Aws::DataZone
     UserType.add_member(:iam_user, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IAM_USER", traits: {"smithy.api#enumValue" => "IAM_USER"}))
     UserType.add_member(:iam_role, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IAM_ROLE", traits: {"smithy.api#enumValue" => "IAM_ROLE"}))
     UserType.add_member(:sso_user, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SSO_USER", traits: {"smithy.api#enumValue" => "SSO_USER"}))
+    UserType.add_member(:iam_role_session, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IAM_ROLE_SESSION", traits: {"smithy.api#enumValue" => "IAM_ROLE_SESSION"}))
     UsernamePassword.add_member(:password, ::Smithy::Schema::Shapes::MemberShape.new(target: Password, name: "password", traits: {"smithy.api#required" => {}}))
     UsernamePassword.add_member(:username, ::Smithy::Schema::Shapes::MemberShape.new(target: Username, name: "username", traits: {"smithy.api#required" => {}}))
     UsernamePassword.type = Types::UsernamePassword
     ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message", traits: {"smithy.api#required" => {}}))
     ValidationException.type = Types::ValidationException
+    VpcConnectionSubnetIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, name: "member"))
+    VpcPropertiesInput.add_member(:vpc_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcId, name: "vpcId", traits: {"smithy.api#required" => {}}))
+    VpcPropertiesInput.add_member(:subnet_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcConnectionSubnetIdList, name: "subnetIds", traits: {"smithy.api#required" => {}}))
+    VpcPropertiesInput.add_member(:security_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId, name: "securityGroupId"))
+    VpcPropertiesInput.type = Types::VpcPropertiesInput
+    VpcPropertiesOutput.add_member(:vpc_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcId, name: "vpcId", traits: {"smithy.api#required" => {}}))
+    VpcPropertiesOutput.add_member(:subnet_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcConnectionSubnetIdList, name: "subnetIds", traits: {"smithy.api#required" => {}}))
+    VpcPropertiesOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    VpcPropertiesOutput.add_member(:security_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId, name: "securityGroupId"))
+    VpcPropertiesOutput.add_member(:glue_connection_names, ::Smithy::Schema::Shapes::MemberShape.new(target: GlueConnectionNames, name: "glueConnectionNames"))
+    VpcPropertiesOutput.type = Types::VpcPropertiesOutput
+    VpcPropertiesPatch.add_member(:vpc_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcId, name: "vpcId"))
+    VpcPropertiesPatch.add_member(:subnet_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcConnectionSubnetIdList, name: "subnetIds"))
+    VpcPropertiesPatch.add_member(:security_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId, name: "securityGroupId"))
+    VpcPropertiesPatch.type = Types::VpcPropertiesPatch
+    WorkflowsMwaaPropertiesInput.add_member(:mwaa_environment_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "mwaaEnvironmentName"))
+    WorkflowsMwaaPropertiesInput.type = Types::WorkflowsMwaaPropertiesInput
+    WorkflowsMwaaPropertiesOutput.add_member(:mwaa_environment_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "mwaaEnvironmentName"))
+    WorkflowsMwaaPropertiesOutput.type = Types::WorkflowsMwaaPropertiesOutput
+    WorkflowsServerlessPropertiesInput.type = Types::WorkflowsServerlessPropertiesInput
+    WorkflowsServerlessPropertiesOutput.type = Types::WorkflowsServerlessPropertiesOutput
 
     DataZone = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.datazone#DataZone"
       service.name = "DataZone"
       service.version = "2018-05-10"
-      service.traits = {"aws.api#service" => {"sdkId" => "DataZone", "arnNamespace" => "datazone", "serviceName" => "datazone", "cloudTrailEventSource" => "datazone.amazonaws.com"}, "aws.auth#sigv4" => {"name" => "datazone"}, "aws.protocols#restJson1" => {}, "smithy.api#cors" => {"origin" => "*", "additionalAllowedHeaders" => ["*", "Authorization", "Date", "X-Amz-Date", "X-Amz-Security-Token", "X-Amz-Target", "content-type", "x-amz-content-sha256", "x-amz-user-agent", "x-amzn-platform-id", "x-amzn-trace-id"], "additionalExposedHeaders" => ["x-amzn-errortype", "x-amzn-requestid", "x-amzn-errormessage", "x-amzn-trace-id", "x-amzn-requestid", "x-amz-apigw-id", "date"], "maxAge" => 86400}, "smithy.api#title" => "Amazon DataZone"}
+      service.traits = {"aws.api#service" => {"sdkId" => "DataZone", "arnNamespace" => "datazone", "serviceName" => "datazone", "cloudTrailEventSource" => "datazone.amazonaws.com"}, "aws.auth#sigv4" => {"name" => "datazone"}, "aws.protocols#restJson1" => {}, "smithy.api#cors" => {"origin" => "*", "additionalAllowedHeaders" => ["*", "Authorization", "Date", "X-Amz-Date", "X-Amz-Security-Token", "X-Amz-Target", "content-type", "x-amz-content-sha256", "x-amz-user-agent", "x-amzn-platform-id", "x-amzn-trace-id"], "additionalExposedHeaders" => ["x-amzn-errortype", "x-amzn-requestid", "x-amzn-errormessage", "x-amzn-trace-id", "x-amzn-requestid", "x-amz-apigw-id", "date"], "maxAge" => 86400}, "smithy.api#title" => "Amazon DataZone", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://datazone-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://datazone.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://datazone-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://datazone.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 9, "nodes" => "/////wAAAAH/////AAAAAAAAAAkAAAADAAAAAQAAAAQF9eEIAAAAAgAAAAUF9eEIAAAAAwAAAAcAAAAGAAAABQX14QUF9eEHAAAABAAAAAgF9eEEAAAABQX14QMF9eEGAAAAAwX14QEF9eEC"}}
       service.add_operation(:accept_predictions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datazone#AcceptPredictions"
         operation.name = "AcceptPredictions"
@@ -5222,6 +6273,7 @@ module Aws::DataZone
         operation.errors << ConflictException
         operation.errors << InternalServerException
         operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "PUT", "uri" => "/v2/domains/{domainIdentifier}/subscription-requests/{identifier}/accept"}, "smithy.api#idempotent" => {}}
       end)
@@ -5281,6 +6333,33 @@ module Aws::DataZone
         operation.errors << ResourceNotFoundException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "PATCH", "uri" => "/v2/domains/{domainIdentifier}/entities/{entityType}/{entityIdentifier}/associate-governed-terms"}}
+      end)
+      service.add_operation(:batch_get_attributes_metadata, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.datazone#BatchGetAttributesMetadata"
+        operation.name = "BatchGetAttributesMetadata"
+        operation.input = BatchGetAttributesMetadataInput
+        operation.output = BatchGetAttributesMetadataOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ThrottlingException
+        operation.errors << UnauthorizedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/v2/domains/{domainIdentifier}/entities/{entityType}/{entityIdentifier}/attributes-metadata"}, "smithy.api#readonly" => {}}
+      end)
+      service.add_operation(:batch_put_attributes_metadata, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.datazone#BatchPutAttributesMetadata"
+        operation.name = "BatchPutAttributesMetadata"
+        operation.input = BatchPutAttributesMetadataInput
+        operation.output = BatchPutAttributesMetadataOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ThrottlingException
+        operation.errors << UnauthorizedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "PUT", "uri" => "/v2/domains/{domainIdentifier}/entities/{entityType}/{entityIdentifier}/attributes-metadata"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:cancel_metadata_generation_run, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datazone#CancelMetadataGenerationRun"
@@ -5600,6 +6679,21 @@ module Aws::DataZone
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/v2/domains/{domainIdentifier}/listings/change-set"}}
       end)
+      service.add_operation(:create_notebook, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.datazone#CreateNotebook"
+        operation.name = "CreateNotebook"
+        operation.input = CreateNotebookInput
+        operation.output = CreateNotebookOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ThrottlingException
+        operation.errors << UnauthorizedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"code" => 201, "method" => "POST", "uri" => "/v2/domains/{domainIdentifier}/notebooks"}, "smithy.api#idempotent" => {}}
+      end)
       service.add_operation(:create_project, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datazone#CreateProject"
         operation.name = "CreateProject"
@@ -5683,6 +6777,7 @@ module Aws::DataZone
         operation.errors << ConflictException
         operation.errors << InternalServerException
         operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/v2/domains/{domainIdentifier}/subscription-requests"}}
       end)
@@ -5780,6 +6875,20 @@ module Aws::DataZone
         operation.errors << ResourceNotFoundException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 202, "method" => "DELETE", "uri" => "/v2/domains/{domainIdentifier}/connections/{identifier}"}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:delete_data_export_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.datazone#DeleteDataExportConfiguration"
+        operation.name = "DeleteDataExportConfiguration"
+        operation.input = DeleteDataExportConfigurationInput
+        operation.output = DeleteDataExportConfigurationOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ThrottlingException
+        operation.errors << UnauthorizedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"code" => 204, "method" => "DELETE", "uri" => "/v2/domains/{domainIdentifier}/data-export-configuration"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_data_product, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datazone#DeleteDataProduct"
@@ -5946,6 +7055,19 @@ module Aws::DataZone
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 204, "method" => "DELETE", "uri" => "/v2/domains/{domainIdentifier}/glossary-terms/{identifier}"}, "smithy.api#idempotent" => {}}
       end)
+      service.add_operation(:delete_lineage_event, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.datazone#DeleteLineageEvent"
+        operation.name = "DeleteLineageEvent"
+        operation.input = DeleteLineageEventInput
+        operation.output = DeleteLineageEventOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ThrottlingException
+        operation.errors << UnauthorizedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "DELETE", "uri" => "/v2/domains/{domainIdentifier}/lineage/events/{identifier}"}, "smithy.api#idempotent" => {}}
+      end)
       service.add_operation(:delete_listing, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datazone#DeleteListing"
         operation.name = "DeleteListing"
@@ -5959,6 +7081,19 @@ module Aws::DataZone
         operation.errors << ResourceNotFoundException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 204, "method" => "DELETE", "uri" => "/v2/domains/{domainIdentifier}/listings/{identifier}"}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:delete_notebook, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.datazone#DeleteNotebook"
+        operation.name = "DeleteNotebook"
+        operation.input = DeleteNotebookInput
+        operation.output = DeleteNotebookOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ThrottlingException
+        operation.errors << UnauthorizedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "DELETE", "uri" => "/v2/domains/{domainIdentifier}/notebooks/{identifier}"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_project, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datazone#DeleteProject"
@@ -6161,6 +7296,19 @@ module Aws::DataZone
         operation.errors << ResourceNotFoundException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/v2/domains/{domainIdentifier}/connections/{identifier}"}, "smithy.api#readonly" => {}}
+      end)
+      service.add_operation(:get_data_export_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.datazone#GetDataExportConfiguration"
+        operation.name = "GetDataExportConfiguration"
+        operation.input = GetDataExportConfigurationInput
+        operation.output = GetDataExportConfigurationOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ThrottlingException
+        operation.errors << UnauthorizedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/v2/domains/{domainIdentifier}/data-export-configuration"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_data_product, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datazone#GetDataProduct"
@@ -6440,6 +7588,45 @@ module Aws::DataZone
         operation.errors << ResourceNotFoundException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/v2/domains/{domainIdentifier}/metadata-generation-runs/{identifier}"}, "smithy.api#readonly" => {}}
+      end)
+      service.add_operation(:get_notebook, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.datazone#GetNotebook"
+        operation.name = "GetNotebook"
+        operation.input = GetNotebookInput
+        operation.output = GetNotebookOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ThrottlingException
+        operation.errors << UnauthorizedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/v2/domains/{domainIdentifier}/notebooks/{identifier}"}, "smithy.api#readonly" => {}}
+      end)
+      service.add_operation(:get_notebook_export, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.datazone#GetNotebookExport"
+        operation.name = "GetNotebookExport"
+        operation.input = GetNotebookExportInput
+        operation.output = GetNotebookExportOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ThrottlingException
+        operation.errors << UnauthorizedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/v2/domains/{domainIdentifier}/notebook-exports/{identifier}"}, "smithy.api#readonly" => {}}
+      end)
+      service.add_operation(:get_notebook_run, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.datazone#GetNotebookRun"
+        operation.name = "GetNotebookRun"
+        operation.input = GetNotebookRunInput
+        operation.output = GetNotebookRunOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ThrottlingException
+        operation.errors << UnauthorizedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/v2/domains/{domainIdentifier}/notebook-runs/{identifier}"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_project, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datazone#GetProject"
@@ -6852,6 +8039,32 @@ module Aws::DataZone
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/v2/domains/{domainIdentifier}/metadata-generation-runs"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListMetadataGenerationRuns.new
       end)
+      service.add_operation(:list_notebook_runs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.datazone#ListNotebookRuns"
+        operation.name = "ListNotebookRuns"
+        operation.input = ListNotebookRunsInput
+        operation.output = ListNotebookRunsOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ThrottlingException
+        operation.errors << UnauthorizedException
+        operation.errors << InternalServerException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/v2/domains/{domainIdentifier}/notebook-runs"}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListNotebookRuns.new
+      end)
+      service.add_operation(:list_notebooks, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.datazone#ListNotebooks"
+        operation.name = "ListNotebooks"
+        operation.input = ListNotebooksInput
+        operation.output = ListNotebooksOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ThrottlingException
+        operation.errors << UnauthorizedException
+        operation.errors << InternalServerException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/v2/domains/{domainIdentifier}/notebooks"}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListNotebooks.new
+      end)
       service.add_operation(:list_notifications, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datazone#ListNotifications"
         operation.name = "ListNotifications"
@@ -7046,6 +8259,21 @@ module Aws::DataZone
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 201, "method" => "POST", "uri" => "/v2/domains/{domainIdentifier}/entities/{entityType}/{entityIdentifier}/time-series-data-points"}, "smithy.api#idempotent" => {}}
       end)
+      service.add_operation(:put_data_export_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.datazone#PutDataExportConfiguration"
+        operation.name = "PutDataExportConfiguration"
+        operation.input = PutDataExportConfigurationInput
+        operation.output = PutDataExportConfigurationOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ThrottlingException
+        operation.errors << UnauthorizedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/v2/domains/{domainIdentifier}/data-export-configuration"}, "smithy.api#idempotent" => {}}
+      end)
       service.add_operation(:put_environment_blueprint_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datazone#PutEnvironmentBlueprintConfiguration"
         operation.name = "PutEnvironmentBlueprintConfiguration"
@@ -7059,6 +8287,19 @@ module Aws::DataZone
         operation.errors << ResourceNotFoundException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "PUT", "uri" => "/v2/domains/{domainIdentifier}/environment-blueprint-configurations/{environmentBlueprintIdentifier}"}, "smithy.api#idempotent" => {}, "smithy.api#tags" => ["Administration"]}
+      end)
+      service.add_operation(:query_graph, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.datazone#QueryGraph"
+        operation.name = "QueryGraph"
+        operation.input = QueryGraphInput
+        operation.output = QueryGraphOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ThrottlingException
+        operation.errors << UnauthorizedException
+        operation.errors << InternalServerException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/v2/domains/{domainIdentifier}/graph/query"}}
+        operation[:paginator] = Paginators::QueryGraph.new
       end)
       service.add_operation(:reject_predictions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datazone#RejectPredictions"
@@ -7223,6 +8464,80 @@ module Aws::DataZone
         operation.errors << ServiceQuotaExceededException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/v2/domains/{domainIdentifier}/metadata-generation-runs"}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:start_notebook_export, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.datazone#StartNotebookExport"
+        operation.name = "StartNotebookExport"
+        operation.input = StartNotebookExportInput
+        operation.output = StartNotebookExportOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ThrottlingException
+        operation.errors << UnauthorizedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"code" => 201, "method" => "POST", "uri" => "/v2/domains/{domainIdentifier}/notebook-exports"}}
+      end)
+      service.add_operation(:start_notebook_import, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.datazone#StartNotebookImport"
+        operation.name = "StartNotebookImport"
+        operation.input = StartNotebookImportInput
+        operation.output = StartNotebookImportOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ThrottlingException
+        operation.errors << UnauthorizedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"code" => 201, "method" => "POST", "uri" => "/v2/domains/{domainIdentifier}/notebook-imports"}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:start_notebook_run, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.datazone#StartNotebookRun"
+        operation.name = "StartNotebookRun"
+        operation.input = StartNotebookRunInput
+        operation.output = StartNotebookRunOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ThrottlingException
+        operation.errors << UnauthorizedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"code" => 201, "method" => "POST", "uri" => "/v2/domains/{domainIdentifier}/notebook-runs"}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:start_notebook_sync, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.datazone#StartNotebookSync"
+        operation.name = "StartNotebookSync"
+        operation.input = StartNotebookSyncInput
+        operation.output = StartNotebookSyncOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ThrottlingException
+        operation.errors << UnauthorizedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"code" => 201, "method" => "POST", "uri" => "/v2/domains/{domainIdentifier}/notebook-syncs"}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:stop_notebook_run, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.datazone#StopNotebookRun"
+        operation.name = "StopNotebookRun"
+        operation.input = StopNotebookRunInput
+        operation.output = StopNotebookRunOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ThrottlingException
+        operation.errors << UnauthorizedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "PUT", "uri" => "/v2/domains/{domainIdentifier}/notebook-runs/{identifier}/stop"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datazone#TagResource"
@@ -7436,6 +8751,20 @@ module Aws::DataZone
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "PUT", "uri" => "/v2/domains/{domainIdentifier}/group-profiles/{groupIdentifier}"}, "smithy.api#tags" => ["Administration"]}
       end)
+      service.add_operation(:update_notebook, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.datazone#UpdateNotebook"
+        operation.name = "UpdateNotebook"
+        operation.input = UpdateNotebookInput
+        operation.output = UpdateNotebookOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ThrottlingException
+        operation.errors << UnauthorizedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "PATCH", "uri" => "/v2/domains/{domainIdentifier}/notebooks/{identifier}"}, "smithy.api#idempotent" => {}}
+      end)
       service.add_operation(:update_project, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datazone#UpdateProject"
         operation.name = "UpdateProject"
@@ -7465,6 +8794,20 @@ module Aws::DataZone
         operation.errors << ServiceQuotaExceededException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "PATCH", "uri" => "/v2/domains/{domainIdentifier}/project-profiles/{identifier}"}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:update_root_domain_unit_owner, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.datazone#UpdateRootDomainUnitOwner"
+        operation.name = "UpdateRootDomainUnitOwner"
+        operation.input = UpdateRootDomainUnitOwnerInput
+        operation.output = UpdateRootDomainUnitOwnerOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ThrottlingException
+        operation.errors << UnauthorizedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"code" => 204, "method" => "PATCH", "uri" => "/v2/domains/{domainIdentifier}/root-domain-unit-owner"}, "smithy.api#idempotent" => {}, "smithy.api#tags" => ["Administration"]}
       end)
       service.add_operation(:update_rule, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datazone#UpdateRule"

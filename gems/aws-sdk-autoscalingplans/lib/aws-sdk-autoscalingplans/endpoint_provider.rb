@@ -28,6 +28,12 @@ module Aws::AutoScalingPlans
           end
           if Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, true)
             if Smithy::Client::EndpointRules.boolean_equals?(Smithy::Client::EndpointRules.attr(partition_result, "supportsFIPS"), true)
+              if Smithy::Client::EndpointRules.string_equals?(parameters.region, "us-gov-east-1")
+                return Smithy::Client::EndpointRules::Endpoint.new(url: "https://autoscaling-plans.us-gov-east-1.amazonaws.com", headers: {}, properties: {})
+              end
+              if Smithy::Client::EndpointRules.string_equals?(parameters.region, "us-gov-west-1")
+                return Smithy::Client::EndpointRules::Endpoint.new(url: "https://autoscaling-plans.us-gov-west-1.amazonaws.com", headers: {}, properties: {})
+              end
               return Smithy::Client::EndpointRules::Endpoint.new(url: "https://autoscaling-plans-fips.#{parameters.region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
             end
             raise ArgumentError, "FIPS is enabled but this partition does not support FIPS"

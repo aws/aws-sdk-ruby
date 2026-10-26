@@ -155,18 +155,18 @@ module Aws::BedrockRuntime
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -631,6 +631,13 @@ module Aws::BedrockRuntime
     #               total: 1
     #             }
     #           }
+    #         },
+    #         applied_guardrail_details: {
+    #           guardrail_id: "GuardrailId",
+    #           guardrail_version: "GuardrailVersion",
+    #           guardrail_arn: "GuardrailArn",
+    #           guardrail_origin: ["REQUEST" # One of: ["REQUEST", "ACCOUNT_ENFORCED", "ORGANIZATION_ENFORCED"]],
+    #           guardrail_ownership: "SELF" # One of: ["SELF", "CROSS_ACCOUNT"]
     #         }
     #       }
     #     ],
@@ -675,12 +682,16 @@ module Aws::BedrockRuntime
     #   <p>Key-value pairs that you can use to filter invocation logs.</p>
     # @option params [Types::PerformanceConfiguration] :performance_config
     #   <p>Model performance settings for the request.</p>
+    # @option params [Types::ServiceTier] :service_tier
+    #   <p>Specifies the processing tier configuration used for serving the request.</p>
+    # @option params [Types::OutputConfig] :output_config
+    #   <p>Output configuration for a model response.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     model_id: "ConversationalModelId", # required
     #     messages: [
     #       {
-    #         role: "user" # One of: ["user", "assistant"], # required
+    #         role: "user" # One of: ["user", "assistant", "system"], # required
     #         content: [{ # required
     #           # One of:
     #           text: "String",
@@ -693,6 +704,9 @@ module Aws::BedrockRuntime
     #                 uri: "S3Uri", # required
     #                 bucket_owner: "AccountId"
     #               }
+    #             },
+    #             error: {
+    #               message: "String"
     #             }
     #           },
     #           document: {
@@ -727,10 +741,25 @@ module Aws::BedrockRuntime
     #               }
     #             }
     #           },
+    #           audio: {
+    #             format: "mp3" # One of: ["mp3", "opus", "wav", "aac", "flac", "mp4", "ogg", "mkv", "mka", "x-aac", "m4a", "mpeg", "mpga", "pcm", "webm"], # required
+    #             source: { # required
+    #               # One of:
+    #               bytes: "data",
+    #               s3_location: {
+    #                 uri: "S3Uri", # required
+    #                 bucket_owner: "AccountId"
+    #               }
+    #             },
+    #             error: {
+    #               message: "String"
+    #             }
+    #           },
     #           tool_use: {
     #             tool_use_id: "ToolUseId", # required
     #             name: "ToolName", # required
     #             input: ""null"", # required
+    #             type: "server_tool_use" # One of: ["server_tool_use"]
     #           },
     #           tool_result: {
     #             tool_use_id: "ToolUseId", # required
@@ -747,6 +776,9 @@ module Aws::BedrockRuntime
     #                     uri: "S3Uri", # required
     #                     bucket_owner: "AccountId"
     #                   }
+    #                 },
+    #                 error: {
+    #                   message: "String"
     #                 }
     #               },
     #               document: {
@@ -780,9 +812,22 @@ module Aws::BedrockRuntime
     #                     bucket_owner: "AccountId"
     #                   }
     #                 }
+    #               },
+    #               search_result: {
+    #                 source: "String", # required
+    #                 title: "String", # required
+    #                 content: [ # required
+    #                   {
+    #                     text: "String", # required
+    #                   }
+    #                 ],
+    #                 citations: {
+    #                   enabled: false, # required
+    #                 }
     #               }
     #             }],
-    #             status: "success" # One of: ["success", "error"]
+    #             status: "success" # One of: ["success", "error"],
+    #             type: "String"
     #           },
     #           guard_content: {
     #             # One of:
@@ -800,6 +845,7 @@ module Aws::BedrockRuntime
     #           },
     #           cache_point: {
     #             type: "default" # One of: ["default"], # required
+    #             ttl: "5m" # One of: ["5m", "1h"]
     #           },
     #           reasoning_content: {
     #             # One of:
@@ -817,12 +863,17 @@ module Aws::BedrockRuntime
     #             citations: [
     #               {
     #                 title: "String",
+    #                 source: "String",
     #                 source_content: [{
     #                   # One of:
     #                   text: "String"
     #                 }],
     #                 location: {
     #                   # One of:
+    #                   web: {
+    #                     url: "String",
+    #                     domain: "String"
+    #                   },
     #                   document_char: {
     #                     document_index: 1,
     #                     start: 1,
@@ -837,10 +888,41 @@ module Aws::BedrockRuntime
     #                     document_index: 1,
     #                     start: 1,
     #                     end: 1
+    #                   },
+    #                   search_result_location: {
+    #                     search_result_index: 1,
+    #                     start: 1,
+    #                     end: 1
     #                   }
     #                 }
     #               }
     #             ]
+    #           },
+    #           search_result: {
+    #             source: "String", # required
+    #             title: "String", # required
+    #             content: [ # required
+    #               {
+    #                 text: "String", # required
+    #               }
+    #             ],
+    #             citations: {
+    #               enabled: false, # required
+    #             }
+    #           },
+    #           tool_addition: {
+    #             tool: { # required
+    #               type: "String",
+    #               name: "String",
+    #               server_name: "String"
+    #             }
+    #           },
+    #           tool_removal: {
+    #             tool: { # required
+    #               type: "String",
+    #               name: "String",
+    #               server_name: "String"
+    #             }
     #           }
     #         }]
     #       }
@@ -864,6 +946,7 @@ module Aws::BedrockRuntime
     #       },
     #       cache_point: {
     #         type: "default" # One of: ["default"], # required
+    #         ttl: "5m" # One of: ["5m", "1h"]
     #       }
     #     }],
     #     inference_config: {
@@ -881,10 +964,15 @@ module Aws::BedrockRuntime
     #           input_schema: { # required
     #             # One of:
     #             json: ""null""
-    #           }
+    #           },
+    #           strict: false
+    #         },
+    #         system_tool: {
+    #           name: "ToolName", # required
     #         },
     #         cache_point: {
     #           type: "default" # One of: ["default"], # required
+    #           ttl: "5m" # One of: ["5m", "1h"]
     #         }
     #       }],
     #       tool_choice: {
@@ -899,8 +987,8 @@ module Aws::BedrockRuntime
     #       }
     #     },
     #     guardrail_config: {
-    #       guardrail_identifier: "GuardrailIdentifier", # required
-    #       guardrail_version: "GuardrailVersion", # required
+    #       guardrail_identifier: "GuardrailIdentifier",
+    #       guardrail_version: "GuardrailVersion",
     #       trace: "enabled" # One of: ["enabled", "disabled", "enabled_full"]
     #     },
     #     additional_model_request_fields: ""null"",
@@ -916,6 +1004,23 @@ module Aws::BedrockRuntime
     #     },
     #     performance_config: {
     #       latency: "standard" # One of: ["standard", "optimized"]
+    #     },
+    #     service_tier: {
+    #       type: "priority" # One of: ["priority", "default", "flex", "reserved"], # required
+    #     },
+    #     output_config: {
+    #       text_format: {
+    #         type: "json_schema" # One of: ["json_schema"], # required
+    #         structure: { # required
+    #           # One of:
+    #           json_schema: {
+    #             schema: "String", # required
+    #             name: "String",
+    #             description: "String"
+    #           }
+    #         }
+    #       },
+    #       effort: "String"
     #     }
     #   }
     #   options = {}
@@ -926,7 +1031,7 @@ module Aws::BedrockRuntime
     #     output: { # required
     #       # One of:
     #       message: {
-    #         role: "user" # One of: ["user", "assistant"], # required
+    #         role: "user" # One of: ["user", "assistant", "system"], # required
     #         content: [{ # required
     #           # One of:
     #           text: "String",
@@ -939,6 +1044,9 @@ module Aws::BedrockRuntime
     #                 uri: "S3Uri", # required
     #                 bucket_owner: "AccountId"
     #               }
+    #             },
+    #             error: {
+    #               message: "String"
     #             }
     #           },
     #           document: {
@@ -973,10 +1081,25 @@ module Aws::BedrockRuntime
     #               }
     #             }
     #           },
+    #           audio: {
+    #             format: "mp3" # One of: ["mp3", "opus", "wav", "aac", "flac", "mp4", "ogg", "mkv", "mka", "x-aac", "m4a", "mpeg", "mpga", "pcm", "webm"], # required
+    #             source: { # required
+    #               # One of:
+    #               bytes: "data",
+    #               s3_location: {
+    #                 uri: "S3Uri", # required
+    #                 bucket_owner: "AccountId"
+    #               }
+    #             },
+    #             error: {
+    #               message: "String"
+    #             }
+    #           },
     #           tool_use: {
     #             tool_use_id: "ToolUseId", # required
     #             name: "ToolName", # required
     #             input: ""null"", # required
+    #             type: "server_tool_use" # One of: ["server_tool_use"]
     #           },
     #           tool_result: {
     #             tool_use_id: "ToolUseId", # required
@@ -993,6 +1116,9 @@ module Aws::BedrockRuntime
     #                     uri: "S3Uri", # required
     #                     bucket_owner: "AccountId"
     #                   }
+    #                 },
+    #                 error: {
+    #                   message: "String"
     #                 }
     #               },
     #               document: {
@@ -1026,9 +1152,22 @@ module Aws::BedrockRuntime
     #                     bucket_owner: "AccountId"
     #                   }
     #                 }
+    #               },
+    #               search_result: {
+    #                 source: "String", # required
+    #                 title: "String", # required
+    #                 content: [ # required
+    #                   {
+    #                     text: "String", # required
+    #                   }
+    #                 ],
+    #                 citations: {
+    #                   enabled: false, # required
+    #                 }
     #               }
     #             }],
-    #             status: "success" # One of: ["success", "error"]
+    #             status: "success" # One of: ["success", "error"],
+    #             type: "String"
     #           },
     #           guard_content: {
     #             # One of:
@@ -1046,6 +1185,7 @@ module Aws::BedrockRuntime
     #           },
     #           cache_point: {
     #             type: "default" # One of: ["default"], # required
+    #             ttl: "5m" # One of: ["5m", "1h"]
     #           },
     #           reasoning_content: {
     #             # One of:
@@ -1063,12 +1203,17 @@ module Aws::BedrockRuntime
     #             citations: [
     #               {
     #                 title: "String",
+    #                 source: "String",
     #                 source_content: [{
     #                   # One of:
     #                   text: "String"
     #                 }],
     #                 location: {
     #                   # One of:
+    #                   web: {
+    #                     url: "String",
+    #                     domain: "String"
+    #                   },
     #                   document_char: {
     #                     document_index: 1,
     #                     start: 1,
@@ -1083,21 +1228,58 @@ module Aws::BedrockRuntime
     #                     document_index: 1,
     #                     start: 1,
     #                     end: 1
+    #                   },
+    #                   search_result_location: {
+    #                     search_result_index: 1,
+    #                     start: 1,
+    #                     end: 1
     #                   }
     #                 }
     #               }
     #             ]
+    #           },
+    #           search_result: {
+    #             source: "String", # required
+    #             title: "String", # required
+    #             content: [ # required
+    #               {
+    #                 text: "String", # required
+    #               }
+    #             ],
+    #             citations: {
+    #               enabled: false, # required
+    #             }
+    #           },
+    #           tool_addition: {
+    #             tool: { # required
+    #               type: "String",
+    #               name: "String",
+    #               server_name: "String"
+    #             }
+    #           },
+    #           tool_removal: {
+    #             tool: { # required
+    #               type: "String",
+    #               name: "String",
+    #               server_name: "String"
+    #             }
     #           }
     #         }]
     #       }
     #     },
-    #     stop_reason: "end_turn" # One of: ["end_turn", "tool_use", "max_tokens", "stop_sequence", "guardrail_intervened", "content_filtered", "model_context_window_exceeded"], # required
+    #     stop_reason: "end_turn" # One of: ["end_turn", "tool_use", "max_tokens", "stop_sequence", "guardrail_intervened", "content_filtered", "malformed_model_output", "malformed_tool_use", "model_context_window_exceeded"], # required
     #     usage: { # required
     #       input_tokens: 1, # required
     #       output_tokens: 1, # required
     #       total_tokens: 1, # required
     #       cache_read_input_tokens: 1,
-    #       cache_write_input_tokens: 1
+    #       cache_write_input_tokens: 1,
+    #       cache_details: [
+    #         {
+    #           ttl: "5m" # One of: ["5m", "1h"], # required
+    #           input_tokens: 1, # required
+    #         }
+    #       ]
     #     },
     #     metrics: { # required
     #       latency_ms: 1, # required
@@ -1461,6 +1643,13 @@ module Aws::BedrockRuntime
     #                   total: 1
     #                 }
     #               }
+    #             },
+    #             applied_guardrail_details: {
+    #               guardrail_id: "GuardrailId",
+    #               guardrail_version: "GuardrailVersion",
+    #               guardrail_arn: "GuardrailArn",
+    #               guardrail_origin: ["REQUEST" # One of: ["REQUEST", "ACCOUNT_ENFORCED", "ORGANIZATION_ENFORCED"]],
+    #               guardrail_ownership: "SELF" # One of: ["SELF", "CROSS_ACCOUNT"]
     #             }
     #           }
     #         },
@@ -1820,6 +2009,13 @@ module Aws::BedrockRuntime
     #                     total: 1
     #                   }
     #                 }
+    #               },
+    #               applied_guardrail_details: {
+    #                 guardrail_id: "GuardrailId",
+    #                 guardrail_version: "GuardrailVersion",
+    #                 guardrail_arn: "GuardrailArn",
+    #                 guardrail_origin: ["REQUEST" # One of: ["REQUEST", "ACCOUNT_ENFORCED", "ORGANIZATION_ENFORCED"]],
+    #                 guardrail_ownership: "SELF" # One of: ["SELF", "CROSS_ACCOUNT"]
     #               }
     #             }
     #           ]
@@ -1832,6 +2028,9 @@ module Aws::BedrockRuntime
     #     },
     #     performance_config: {
     #       latency: "standard" # One of: ["standard", "optimized"]
+    #     },
+    #     service_tier: {
+    #       type: "priority" # One of: ["priority", "default", "flex", "reserved"], # required
     #     }
     #   }
     # @return [Types::ConverseResponse]
@@ -1864,12 +2063,16 @@ module Aws::BedrockRuntime
     #   <p>Key-value pairs that you can use to filter invocation logs.</p>
     # @option params [Types::PerformanceConfiguration] :performance_config
     #   <p>Model performance settings for the request.</p>
+    # @option params [Types::ServiceTier] :service_tier
+    #   <p>Specifies the processing tier configuration used for serving the request.</p>
+    # @option params [Types::OutputConfig] :output_config
+    #   <p>Output configuration for a model response.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     model_id: "ConversationalModelId", # required
     #     messages: [
     #       {
-    #         role: "user" # One of: ["user", "assistant"], # required
+    #         role: "user" # One of: ["user", "assistant", "system"], # required
     #         content: [{ # required
     #           # One of:
     #           text: "String",
@@ -1882,6 +2085,9 @@ module Aws::BedrockRuntime
     #                 uri: "S3Uri", # required
     #                 bucket_owner: "AccountId"
     #               }
+    #             },
+    #             error: {
+    #               message: "String"
     #             }
     #           },
     #           document: {
@@ -1916,10 +2122,25 @@ module Aws::BedrockRuntime
     #               }
     #             }
     #           },
+    #           audio: {
+    #             format: "mp3" # One of: ["mp3", "opus", "wav", "aac", "flac", "mp4", "ogg", "mkv", "mka", "x-aac", "m4a", "mpeg", "mpga", "pcm", "webm"], # required
+    #             source: { # required
+    #               # One of:
+    #               bytes: "data",
+    #               s3_location: {
+    #                 uri: "S3Uri", # required
+    #                 bucket_owner: "AccountId"
+    #               }
+    #             },
+    #             error: {
+    #               message: "String"
+    #             }
+    #           },
     #           tool_use: {
     #             tool_use_id: "ToolUseId", # required
     #             name: "ToolName", # required
     #             input: ""null"", # required
+    #             type: "server_tool_use" # One of: ["server_tool_use"]
     #           },
     #           tool_result: {
     #             tool_use_id: "ToolUseId", # required
@@ -1936,6 +2157,9 @@ module Aws::BedrockRuntime
     #                     uri: "S3Uri", # required
     #                     bucket_owner: "AccountId"
     #                   }
+    #                 },
+    #                 error: {
+    #                   message: "String"
     #                 }
     #               },
     #               document: {
@@ -1969,9 +2193,22 @@ module Aws::BedrockRuntime
     #                     bucket_owner: "AccountId"
     #                   }
     #                 }
+    #               },
+    #               search_result: {
+    #                 source: "String", # required
+    #                 title: "String", # required
+    #                 content: [ # required
+    #                   {
+    #                     text: "String", # required
+    #                   }
+    #                 ],
+    #                 citations: {
+    #                   enabled: false, # required
+    #                 }
     #               }
     #             }],
-    #             status: "success" # One of: ["success", "error"]
+    #             status: "success" # One of: ["success", "error"],
+    #             type: "String"
     #           },
     #           guard_content: {
     #             # One of:
@@ -1989,6 +2226,7 @@ module Aws::BedrockRuntime
     #           },
     #           cache_point: {
     #             type: "default" # One of: ["default"], # required
+    #             ttl: "5m" # One of: ["5m", "1h"]
     #           },
     #           reasoning_content: {
     #             # One of:
@@ -2006,12 +2244,17 @@ module Aws::BedrockRuntime
     #             citations: [
     #               {
     #                 title: "String",
+    #                 source: "String",
     #                 source_content: [{
     #                   # One of:
     #                   text: "String"
     #                 }],
     #                 location: {
     #                   # One of:
+    #                   web: {
+    #                     url: "String",
+    #                     domain: "String"
+    #                   },
     #                   document_char: {
     #                     document_index: 1,
     #                     start: 1,
@@ -2026,10 +2269,41 @@ module Aws::BedrockRuntime
     #                     document_index: 1,
     #                     start: 1,
     #                     end: 1
+    #                   },
+    #                   search_result_location: {
+    #                     search_result_index: 1,
+    #                     start: 1,
+    #                     end: 1
     #                   }
     #                 }
     #               }
     #             ]
+    #           },
+    #           search_result: {
+    #             source: "String", # required
+    #             title: "String", # required
+    #             content: [ # required
+    #               {
+    #                 text: "String", # required
+    #               }
+    #             ],
+    #             citations: {
+    #               enabled: false, # required
+    #             }
+    #           },
+    #           tool_addition: {
+    #             tool: { # required
+    #               type: "String",
+    #               name: "String",
+    #               server_name: "String"
+    #             }
+    #           },
+    #           tool_removal: {
+    #             tool: { # required
+    #               type: "String",
+    #               name: "String",
+    #               server_name: "String"
+    #             }
     #           }
     #         }]
     #       }
@@ -2053,6 +2327,7 @@ module Aws::BedrockRuntime
     #       },
     #       cache_point: {
     #         type: "default" # One of: ["default"], # required
+    #         ttl: "5m" # One of: ["5m", "1h"]
     #       }
     #     }],
     #     inference_config: {
@@ -2070,10 +2345,15 @@ module Aws::BedrockRuntime
     #           input_schema: { # required
     #             # One of:
     #             json: ""null""
-    #           }
+    #           },
+    #           strict: false
+    #         },
+    #         system_tool: {
+    #           name: "ToolName", # required
     #         },
     #         cache_point: {
     #           type: "default" # One of: ["default"], # required
+    #           ttl: "5m" # One of: ["5m", "1h"]
     #         }
     #       }],
     #       tool_choice: {
@@ -2088,8 +2368,8 @@ module Aws::BedrockRuntime
     #       }
     #     },
     #     guardrail_config: {
-    #       guardrail_identifier: "GuardrailIdentifier", # required
-    #       guardrail_version: "GuardrailVersion", # required
+    #       guardrail_identifier: "GuardrailIdentifier",
+    #       guardrail_version: "GuardrailVersion",
     #       trace: "enabled" # One of: ["enabled", "disabled", "enabled_full"],
     #       stream_processing_mode: "sync" # One of: ["sync", "async"]
     #     },
@@ -2106,6 +2386,23 @@ module Aws::BedrockRuntime
     #     },
     #     performance_config: {
     #       latency: "standard" # One of: ["standard", "optimized"]
+    #     },
+    #     service_tier: {
+    #       type: "priority" # One of: ["priority", "default", "flex", "reserved"], # required
+    #     },
+    #     output_config: {
+    #       text_format: {
+    #         type: "json_schema" # One of: ["json_schema"], # required
+    #         structure: { # required
+    #           # One of:
+    #           json_schema: {
+    #             schema: "String", # required
+    #             name: "String",
+    #             description: "String"
+    #           }
+    #         }
+    #       },
+    #       effort: "String"
     #     }
     #   }
     #   options = {}
@@ -2116,7 +2413,7 @@ module Aws::BedrockRuntime
     #     stream: {
     #       # One of:
     #       message_start: {
-    #         role: "user" # One of: ["user", "assistant"], # required
+    #         role: "user" # One of: ["user", "assistant", "system"], # required
     #       },
     #       content_block_start: {
     #         start: { # required
@@ -2124,6 +2421,15 @@ module Aws::BedrockRuntime
     #           tool_use: {
     #             tool_use_id: "ToolUseId", # required
     #             name: "ToolName", # required
+    #             type: "server_tool_use" # One of: ["server_tool_use"]
+    #           },
+    #           tool_result: {
+    #             tool_use_id: "ToolUseId", # required
+    #             type: "String",
+    #             status: "success" # One of: ["success", "error"]
+    #           },
+    #           image: {
+    #             format: "png" # One of: ["png", "jpeg", "gif", "webp"], # required
     #           }
     #         },
     #         content_block_index: 1, # required
@@ -2135,6 +2441,11 @@ module Aws::BedrockRuntime
     #           tool_use: {
     #             input: "String", # required
     #           },
+    #           tool_result: [{
+    #             # One of:
+    #             text: "String",
+    #             json: ""null""
+    #           }],
     #           reasoning_content: {
     #             # One of:
     #             text: "String",
@@ -2143,6 +2454,7 @@ module Aws::BedrockRuntime
     #           },
     #           citation: {
     #             title: "String",
+    #             source: "String",
     #             source_content: [
     #               {
     #                 text: "String"
@@ -2150,6 +2462,10 @@ module Aws::BedrockRuntime
     #             ],
     #             location: {
     #               # One of:
+    #               web: {
+    #                 url: "String",
+    #                 domain: "String"
+    #               },
     #               document_char: {
     #                 document_index: 1,
     #                 start: 1,
@@ -2164,7 +2480,25 @@ module Aws::BedrockRuntime
     #                 document_index: 1,
     #                 start: 1,
     #                 end: 1
+    #               },
+    #               search_result_location: {
+    #                 search_result_index: 1,
+    #                 start: 1,
+    #                 end: 1
     #               }
+    #             }
+    #           },
+    #           image: {
+    #             source: {
+    #               # One of:
+    #               bytes: "data",
+    #               s3_location: {
+    #                 uri: "S3Uri", # required
+    #                 bucket_owner: "AccountId"
+    #               }
+    #             },
+    #             error: {
+    #               message: "String"
     #             }
     #           }
     #         },
@@ -2174,7 +2508,7 @@ module Aws::BedrockRuntime
     #         content_block_index: 1, # required
     #       },
     #       message_stop: {
-    #         stop_reason: "end_turn" # One of: ["end_turn", "tool_use", "max_tokens", "stop_sequence", "guardrail_intervened", "content_filtered", "model_context_window_exceeded"], # required
+    #         stop_reason: "end_turn" # One of: ["end_turn", "tool_use", "max_tokens", "stop_sequence", "guardrail_intervened", "content_filtered", "malformed_model_output", "malformed_tool_use", "model_context_window_exceeded"], # required
     #         additional_model_response_fields: ""null""
     #       },
     #       metadata: {
@@ -2183,7 +2517,13 @@ module Aws::BedrockRuntime
     #           output_tokens: 1, # required
     #           total_tokens: 1, # required
     #           cache_read_input_tokens: 1,
-    #           cache_write_input_tokens: 1
+    #           cache_write_input_tokens: 1,
+    #           cache_details: [
+    #             {
+    #               ttl: "5m" # One of: ["5m", "1h"], # required
+    #               input_tokens: 1, # required
+    #             }
+    #           ]
     #         },
     #         metrics: { # required
     #           latency_ms: 1, # required
@@ -2546,6 +2886,13 @@ module Aws::BedrockRuntime
     #                       total: 1
     #                     }
     #                   }
+    #                 },
+    #                 applied_guardrail_details: {
+    #                   guardrail_id: "GuardrailId",
+    #                   guardrail_version: "GuardrailVersion",
+    #                   guardrail_arn: "GuardrailArn",
+    #                   guardrail_origin: ["REQUEST" # One of: ["REQUEST", "ACCOUNT_ENFORCED", "ORGANIZATION_ENFORCED"]],
+    #                   guardrail_ownership: "SELF" # One of: ["SELF", "CROSS_ACCOUNT"]
     #                 }
     #               }
     #             },
@@ -2905,6 +3252,13 @@ module Aws::BedrockRuntime
     #                         total: 1
     #                       }
     #                     }
+    #                   },
+    #                   applied_guardrail_details: {
+    #                     guardrail_id: "GuardrailId",
+    #                     guardrail_version: "GuardrailVersion",
+    #                     guardrail_arn: "GuardrailArn",
+    #                     guardrail_origin: ["REQUEST" # One of: ["REQUEST", "ACCOUNT_ENFORCED", "ORGANIZATION_ENFORCED"]],
+    #                     guardrail_ownership: "SELF" # One of: ["SELF", "CROSS_ACCOUNT"]
     #                   }
     #                 }
     #               ]
@@ -2917,6 +3271,9 @@ module Aws::BedrockRuntime
     #         },
     #         performance_config: {
     #           latency: "standard" # One of: ["standard", "optimized"]
+    #         },
+    #         service_tier: {
+    #           type: "priority" # One of: ["priority", "default", "flex", "reserved"], # required
     #         }
     #       },
     #       internal_server_exception: {
@@ -2961,7 +3318,7 @@ module Aws::BedrockRuntime
     #       converse: {
     #         messages: [
     #           {
-    #             role: "user" # One of: ["user", "assistant"], # required
+    #             role: "user" # One of: ["user", "assistant", "system"], # required
     #             content: [{ # required
     #               # One of:
     #               text: "String",
@@ -2974,6 +3331,9 @@ module Aws::BedrockRuntime
     #                     uri: "S3Uri", # required
     #                     bucket_owner: "AccountId"
     #                   }
+    #                 },
+    #                 error: {
+    #                   message: "String"
     #                 }
     #               },
     #               document: {
@@ -3008,10 +3368,25 @@ module Aws::BedrockRuntime
     #                   }
     #                 }
     #               },
+    #               audio: {
+    #                 format: "mp3" # One of: ["mp3", "opus", "wav", "aac", "flac", "mp4", "ogg", "mkv", "mka", "x-aac", "m4a", "mpeg", "mpga", "pcm", "webm"], # required
+    #                 source: { # required
+    #                   # One of:
+    #                   bytes: "data",
+    #                   s3_location: {
+    #                     uri: "S3Uri", # required
+    #                     bucket_owner: "AccountId"
+    #                   }
+    #                 },
+    #                 error: {
+    #                   message: "String"
+    #                 }
+    #               },
     #               tool_use: {
     #                 tool_use_id: "ToolUseId", # required
     #                 name: "ToolName", # required
     #                 input: ""null"", # required
+    #                 type: "server_tool_use" # One of: ["server_tool_use"]
     #               },
     #               tool_result: {
     #                 tool_use_id: "ToolUseId", # required
@@ -3028,6 +3403,9 @@ module Aws::BedrockRuntime
     #                         uri: "S3Uri", # required
     #                         bucket_owner: "AccountId"
     #                       }
+    #                     },
+    #                     error: {
+    #                       message: "String"
     #                     }
     #                   },
     #                   document: {
@@ -3061,9 +3439,22 @@ module Aws::BedrockRuntime
     #                         bucket_owner: "AccountId"
     #                       }
     #                     }
+    #                   },
+    #                   search_result: {
+    #                     source: "String", # required
+    #                     title: "String", # required
+    #                     content: [ # required
+    #                       {
+    #                         text: "String", # required
+    #                       }
+    #                     ],
+    #                     citations: {
+    #                       enabled: false, # required
+    #                     }
     #                   }
     #                 }],
-    #                 status: "success" # One of: ["success", "error"]
+    #                 status: "success" # One of: ["success", "error"],
+    #                 type: "String"
     #               },
     #               guard_content: {
     #                 # One of:
@@ -3081,6 +3472,7 @@ module Aws::BedrockRuntime
     #               },
     #               cache_point: {
     #                 type: "default" # One of: ["default"], # required
+    #                 ttl: "5m" # One of: ["5m", "1h"]
     #               },
     #               reasoning_content: {
     #                 # One of:
@@ -3098,12 +3490,17 @@ module Aws::BedrockRuntime
     #                 citations: [
     #                   {
     #                     title: "String",
+    #                     source: "String",
     #                     source_content: [{
     #                       # One of:
     #                       text: "String"
     #                     }],
     #                     location: {
     #                       # One of:
+    #                       web: {
+    #                         url: "String",
+    #                         domain: "String"
+    #                       },
     #                       document_char: {
     #                         document_index: 1,
     #                         start: 1,
@@ -3118,10 +3515,41 @@ module Aws::BedrockRuntime
     #                         document_index: 1,
     #                         start: 1,
     #                         end: 1
+    #                       },
+    #                       search_result_location: {
+    #                         search_result_index: 1,
+    #                         start: 1,
+    #                         end: 1
     #                       }
     #                     }
     #                   }
     #                 ]
+    #               },
+    #               search_result: {
+    #                 source: "String", # required
+    #                 title: "String", # required
+    #                 content: [ # required
+    #                   {
+    #                     text: "String", # required
+    #                   }
+    #                 ],
+    #                 citations: {
+    #                   enabled: false, # required
+    #                 }
+    #               },
+    #               tool_addition: {
+    #                 tool: { # required
+    #                   type: "String",
+    #                   name: "String",
+    #                   server_name: "String"
+    #                 }
+    #               },
+    #               tool_removal: {
+    #                 tool: { # required
+    #                   type: "String",
+    #                   name: "String",
+    #                   server_name: "String"
+    #                 }
     #               }
     #             }]
     #           }
@@ -3145,8 +3573,41 @@ module Aws::BedrockRuntime
     #           },
     #           cache_point: {
     #             type: "default" # One of: ["default"], # required
+    #             ttl: "5m" # One of: ["5m", "1h"]
     #           }
-    #         }]
+    #         }],
+    #         tool_config: {
+    #           tools: [{ # required
+    #             # One of:
+    #             tool_spec: {
+    #               name: "ToolName", # required
+    #               description: "NonEmptyString",
+    #               input_schema: { # required
+    #                 # One of:
+    #                 json: ""null""
+    #               },
+    #               strict: false
+    #             },
+    #             system_tool: {
+    #               name: "ToolName", # required
+    #             },
+    #             cache_point: {
+    #               type: "default" # One of: ["default"], # required
+    #               ttl: "5m" # One of: ["5m", "1h"]
+    #             }
+    #           }],
+    #           tool_choice: {
+    #             # One of:
+    #             auto: {
+    #             },
+    #             any: {
+    #             },
+    #             tool: {
+    #               name: "ToolName", # required
+    #             }
+    #           }
+    #         },
+    #         additional_model_request_fields: ""null""
     #       }
     #     }
     #   }
@@ -3199,6 +3660,101 @@ module Aws::BedrockRuntime
       request.send_request(options)
     end
 
+    # <p>Evaluates messages against inline guardrail checks. You specify the check configurations directly in the request, and Amazon Bedrock returns per-check results with severity or confidence scores.</p>
+    # @param [Hash, Types::InvokeGuardrailChecksRequest] params
+    # @option params [Array<Types::GuardrailChecksMessage>] :messages
+    #   <p>The messages to evaluate against the specified guardrail checks. Each message includes a role and one or more content blocks.</p>
+    # @option params [Types::GuardrailChecksConfig] :checks
+    #   <p>The inline check configurations that specify which guardrail checks to run against the messages.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     messages: [ # required
+    #       {
+    #         role: "user" # One of: ["user", "assistant", "system"], # required
+    #         content: [{ # required
+    #           # One of:
+    #           text: "GuardrailChecksTextContent"
+    #         }]
+    #       }
+    #     ],
+    #     checks: { # required
+    #       content_filter: {
+    #         categories: [ # required
+    #           {
+    #             category: "VIOLENCE" # One of: ["VIOLENCE", "HATE", "SEXUAL", "MISCONDUCT", "INSULTS"], # required
+    #           }
+    #         ]
+    #       },
+    #       prompt_attack: {
+    #         categories: [ # required
+    #           {
+    #             category: "JAILBREAK" # One of: ["JAILBREAK", "PROMPT_INJECTION", "PROMPT_LEAKAGE"], # required
+    #           }
+    #         ]
+    #       },
+    #       sensitive_information: {
+    #         entities: [ # required
+    #           {
+    #             type: "ADDRESS" # One of: ["ADDRESS", "AGE", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "CA_HEALTH_NUMBER", "CA_SOCIAL_INSURANCE_NUMBER", "CREDIT_DEBIT_CARD_CVV", "CREDIT_DEBIT_CARD_EXPIRY", "CREDIT_DEBIT_CARD_NUMBER", "DRIVER_ID", "EMAIL", "INTERNATIONAL_BANK_ACCOUNT_NUMBER", "IP_ADDRESS", "LICENSE_PLATE", "MAC_ADDRESS", "NAME", "PASSWORD", "PHONE", "PIN", "SWIFT_CODE", "UK_NATIONAL_HEALTH_SERVICE_NUMBER", "UK_NATIONAL_INSURANCE_NUMBER", "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER", "URL", "USERNAME", "US_BANK_ACCOUNT_NUMBER", "US_BANK_ROUTING_NUMBER", "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", "US_PASSPORT_NUMBER", "US_SOCIAL_SECURITY_NUMBER", "VEHICLE_IDENTIFICATION_NUMBER"], # required
+    #           }
+    #         ]
+    #       }
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.invoke_guardrail_checks(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     results: { # required
+    #       content_filter: {
+    #         results: [ # required
+    #           {
+    #             category: "VIOLENCE" # One of: ["VIOLENCE", "HATE", "SEXUAL", "MISCONDUCT", "INSULTS"], # required
+    #             severity_score: 1.0, # required
+    #           }
+    #         ]
+    #       },
+    #       prompt_attack: {
+    #         results: [ # required
+    #           {
+    #             category: "JAILBREAK" # One of: ["JAILBREAK", "PROMPT_INJECTION", "PROMPT_LEAKAGE"], # required
+    #             severity_score: 1.0, # required
+    #           }
+    #         ]
+    #       },
+    #       sensitive_information: {
+    #         results: [ # required
+    #           {
+    #             type: "ADDRESS" # One of: ["ADDRESS", "AGE", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "CA_HEALTH_NUMBER", "CA_SOCIAL_INSURANCE_NUMBER", "CREDIT_DEBIT_CARD_CVV", "CREDIT_DEBIT_CARD_EXPIRY", "CREDIT_DEBIT_CARD_NUMBER", "DRIVER_ID", "EMAIL", "INTERNATIONAL_BANK_ACCOUNT_NUMBER", "IP_ADDRESS", "LICENSE_PLATE", "MAC_ADDRESS", "NAME", "PASSWORD", "PHONE", "PIN", "SWIFT_CODE", "UK_NATIONAL_HEALTH_SERVICE_NUMBER", "UK_NATIONAL_INSURANCE_NUMBER", "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER", "URL", "USERNAME", "US_BANK_ACCOUNT_NUMBER", "US_BANK_ROUTING_NUMBER", "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", "US_PASSPORT_NUMBER", "US_SOCIAL_SECURITY_NUMBER", "VEHICLE_IDENTIFICATION_NUMBER"], # required
+    #             confidence_score: 1.0, # required
+    #             begin_offset: 1, # required
+    #             end_offset: 1, # required
+    #             message_index: 1, # required
+    #             content_index: 1, # required
+    #           }
+    #         ],
+    #         truncated: false
+    #       }
+    #     },
+    #     usage: { # required
+    #       content_filter: {
+    #         text_units: 1, # required
+    #       },
+    #       prompt_attack: {
+    #         text_units: 1, # required
+    #       },
+    #       sensitive_information: {
+    #         text_units: 1, # required
+    #       }
+    #     }
+    #   }
+    # @return [Types::InvokeGuardrailChecksResponse]
+    def invoke_guardrail_checks(params = {}, options = {})
+      request = build_request(:invoke_guardrail_checks, params)
+      request.send_request(options)
+    end
+
     # <p>Invokes the specified Amazon Bedrock model to run inference using the prompt and inference parameters provided in the request body. You use model inference to generate text, images, and embeddings.</p> <p>For example code, see <i>Invoke model code examples</i> in the <i>Amazon Bedrock User Guide</i>. </p> <p>This operation requires permission for the <code>bedrock:InvokeModel</code> action.</p> <important> <p>To deny all inference access to resources that you specify in the modelId field, you need to deny access to the <code>bedrock:InvokeModel</code> and <code>bedrock:InvokeModelWithResponseStream</code> actions. Doing this also denies access to the resource through the Converse API actions (<a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html">Converse</a> and <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html">ConverseStream</a>). For more information see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/security_iam_id-based-policy-examples.html#security_iam_id-based-policy-examples-deny-inference">Deny access for inference on specific models</a>. </p> </important> <p>For troubleshooting some of the common errors you might encounter when using the <code>InvokeModel</code> API, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html">Troubleshooting Amazon Bedrock API Error Codes</a> in the Amazon Bedrock User Guide</p>
     # @param [Hash, Types::InvokeModelRequest] params
     # @option params [String] :body
@@ -3217,6 +3773,10 @@ module Aws::BedrockRuntime
     #   <p>The version number for the guardrail. The value can also be <code>DRAFT</code>.</p>
     # @option params [String] :performance_config_latency
     #   <p>Model performance settings for the request.</p>
+    # @option params [String] :service_tier
+    #   <p>Specifies the processing tier type used for serving the request.</p>
+    # @option params [String] :request_metadata
+    #   <p>Key-value pairs that you can use to filter invocation logs.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     body: "data",
@@ -3226,7 +3786,9 @@ module Aws::BedrockRuntime
     #     trace: "ENABLED" # One of: ["ENABLED", "DISABLED", "ENABLED_FULL"],
     #     guardrail_identifier: "GuardrailIdentifier",
     #     guardrail_version: "GuardrailVersion",
-    #     performance_config_latency: "standard" # One of: ["standard", "optimized"]
+    #     performance_config_latency: "standard" # One of: ["standard", "optimized"],
+    #     service_tier: "priority" # One of: ["priority", "default", "flex", "reserved"],
+    #     request_metadata: "RequestMetadataJson"
     #   }
     #   options = {}
     #   response = client.invoke_model(params, options)
@@ -3235,7 +3797,8 @@ module Aws::BedrockRuntime
     #   {
     #     body: "data", # required
     #     content_type: "MimeType", # required
-    #     performance_config_latency: "standard" # One of: ["standard", "optimized"]
+    #     performance_config_latency: "standard" # One of: ["standard", "optimized"],
+    #     service_tier: "priority" # One of: ["priority", "default", "flex", "reserved"]
     #   }
     # @return [Types::InvokeModelResponse]
     def invoke_model(params = {}, options = {})
@@ -3315,6 +3878,10 @@ module Aws::BedrockRuntime
     #   <p>The version number for the guardrail. The value can also be <code>DRAFT</code>.</p>
     # @option params [String] :performance_config_latency
     #   <p>Model performance settings for the request.</p>
+    # @option params [String] :service_tier
+    #   <p>Specifies the processing tier type used for serving the request.</p>
+    # @option params [String] :request_metadata
+    #   <p>Key-value pairs that you can use to filter invocation logs.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     body: "data",
@@ -3324,7 +3891,9 @@ module Aws::BedrockRuntime
     #     trace: "ENABLED" # One of: ["ENABLED", "DISABLED", "ENABLED_FULL"],
     #     guardrail_identifier: "GuardrailIdentifier",
     #     guardrail_version: "GuardrailVersion",
-    #     performance_config_latency: "standard" # One of: ["standard", "optimized"]
+    #     performance_config_latency: "standard" # One of: ["standard", "optimized"],
+    #     service_tier: "priority" # One of: ["priority", "default", "flex", "reserved"],
+    #     request_metadata: "RequestMetadataJson"
     #   }
     #   options = {}
     #   response = client.invoke_model_with_response_stream(params, options)
@@ -3358,7 +3927,8 @@ module Aws::BedrockRuntime
     #       }
     #     },
     #     content_type: "MimeType", # required
-    #     performance_config_latency: "standard" # One of: ["standard", "optimized"]
+    #     performance_config_latency: "standard" # One of: ["standard", "optimized"],
+    #     service_tier: "priority" # One of: ["priority", "default", "flex", "reserved"]
     #   }
     # @return [Types::InvokeModelWithResponseStreamResponse]
     def invoke_model_with_response_stream(params = {}, options = {})

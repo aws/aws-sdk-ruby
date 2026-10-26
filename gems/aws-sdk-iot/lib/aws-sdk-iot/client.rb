@@ -144,18 +144,18 @@ module Aws::IoT
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -460,7 +460,10 @@ module Aws::IoT
       request.send_request(options)
     end
 
-    # <p>Associates a Device Defender security profile with a thing group or this account. Each 
+    # <note>
+    #             <p>The IoT Device Defender detect feature will no longer be available to new customers starting August 31, 2026. If you would like to use the detect feature, sign up prior to August 31, 2026. To learn about alternatives to IoT Device Defender detect, see IoT Device Defender detect feature availability change in the IoT Device Defender Developer Guide. There is no change to IoT Device Defender audit availability.</p>
+    #          </note>
+    #          <p>Associates a Device Defender security profile with a thing group or this account. Each
     #         thing group or account can have up to five security profiles associated with it.</p>
     #          <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">AttachSecurityProfile</a> action.</p>
     # @param [Hash, Types::AttachSecurityProfileRequest] params
@@ -498,7 +501,7 @@ module Aws::IoT
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>EXCLUSIVE_THING</code> - Attaches the specified principal to the specified thing, exclusively. 
+    #                     <code>EXCLUSIVE_THING</code> - Attaches the specified principal to the specified thing, exclusively.
     #   						The thing will be the only thing that’s attached to the principal.</p>
     #               </li>
     #            </ul>
@@ -597,7 +600,10 @@ module Aws::IoT
       request.send_request(options)
     end
 
-    # <p>
+    # <note>
+    #             <p>The IoT Device Defender detect feature will no longer be available to new customers starting August 31, 2026. If you would like to use the detect feature, sign up prior to August 31, 2026. To learn about alternatives to IoT Device Defender detect, see IoT Device Defender detect feature availability change in the IoT Device Defender Developer Guide. There is no change to IoT Device Defender audit availability.</p>
+    #          </note>
+    #          <p>
     #         Cancels a Device Defender ML Detect mitigation action.
     #       </p>
     #          <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">CancelDetectMitigationActionsTask</a> action.</p>
@@ -753,9 +759,9 @@ module Aws::IoT
     #          <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">CreateAuditSuppression</a> action.</p>
     # @param [Hash, Types::CreateAuditSuppressionRequest] params
     # @option params [String] :check_name
-    #   <p>An audit check name. Checks must be enabled 
+    #   <p>An audit check name. Checks must be enabled
     #           for your account. (Use <code>DescribeAccountAuditConfiguration</code> to see the list
-    #           of all checks, including those that are enabled or use <code>UpdateAccountAuditConfiguration</code> 
+    #           of all checks, including those that are enabled or use <code>UpdateAccountAuditConfiguration</code>
     #           to select which checks are enabled.)</p>
     # @option params [Types::ResourceIdentifier] :resource_identifier
     #   <p>Information that identifies the noncompliant resource.</p>
@@ -1008,10 +1014,10 @@ module Aws::IoT
     # @option params [String] :lambda_function_arn
     #   <p>The ARN of the Lambda function that defines the authentication logic.</p>
     # @option params [Array<String>] :account_default_for_operations
-    #   <p>A list of the operations that the certificate provider will use to generate certificates. 
+    #   <p>A list of the operations that the certificate provider will use to generate certificates.
     #            Valid value: <code>CreateCertificateFromCsr</code>.</p>
     # @option params [String] :client_token
-    #   <p>A string that you can optionally pass in the <code>CreateCertificateProvider</code> request to make sure 
+    #   <p>A string that you can optionally pass in the <code>CreateCertificateProvider</code> request to make sure
     #            the request is idempotent.</p>
     # @option params [Array<Types::Tag>] :tags
     #   <p>Metadata which can be used to manage the certificate provider.</p>
@@ -1057,21 +1063,31 @@ module Aws::IoT
     # @option params [String] :description
     #   <p>A short text decription of the command.</p>
     # @option params [Types::CommandPayload] :payload
-    #   <p>The payload object for the command. You must specify this information when using
-    #           the <code>AWS-IoT</code> namespace.</p>
-    #            <p>You can upload a static payload file from your local storage that contains the 
+    #   <p>The payload object for the static command.</p>
+    #            <p>You can upload a static payload file from your local storage that contains the
     #           instructions for the device to process. The payload file can use any format. To
     #           make sure that the device correctly interprets the payload, we recommend you to
     #           specify the payload content type.</p>
+    # @option params [String] :payload_template
+    #   <p>The payload template for the dynamic command.</p>
+    #            <note>
+    #               <p>This parameter is required for dynamic commands where the
+    #                   command execution placeholders are supplied either from <code>mandatoryParameters</code> or when
+    #                       <code>StartCommandExecution</code> is invoked.</p>
+    #            </note>
+    # @option params [Types::CommandPreprocessor] :preprocessor
+    #   <p>Configuration that determines how <code>payloadTemplate</code> is processed to generate command execution payload.</p>
+    #            <note>
+    #               <p>This parameter is required for dynamic commands, along with <code>payloadTemplate</code>,
+    #                   and <code>mandatoryParameters</code>.</p>
+    #            </note>
     # @option params [Array<Types::CommandParameter>] :mandatory_parameters
-    #   <p>A list of parameters that are required by the <code>StartCommandExecution</code> API.
-    #               These parameters need to be specified only when using the <code>AWS-IoT-FleetWise</code>
-    #               namespace. You can either specify them here or when running the command using the
-    #                   <code>StartCommandExecution</code> API.</p>
+    #   <p>A list of parameters that are used by <code>StartCommandExecution</code> API for
+    #               execution payload generation.</p>
     # @option params [String] :role_arn
     #   <p>The IAM role that you must provide when using the <code>AWS-IoT-FleetWise</code> namespace.
-    #           The role grants IoT Device Management the permission to access IoT FleetWise resources 
-    #           for generating the payload for the command. This field is not required when you use the
+    #           The role grants IoT Device Management the permission to access IoT FleetWise resources
+    #           for generating the payload for the command. This field is not supported when you use the
     #           <code>AWS-IoT</code> namespace.</p>
     # @option params [Array<Types::Tag>] :tags
     #   <p>Name-value pairs that are used as metadata to manage a command.</p>
@@ -1085,9 +1101,16 @@ module Aws::IoT
     #       content: "data",
     #       content_type: "MimeType"
     #     },
+    #     payload_template: "CommandPayloadTemplateString",
+    #     preprocessor: {
+    #       aws_json_substitution: {
+    #         output_format: "JSON" # One of: ["JSON", "CBOR"], # required
+    #       }
+    #     },
     #     mandatory_parameters: [
     #       {
     #         name: "CommandParameterName", # required
+    #         type: "STRING" # One of: ["STRING", "INTEGER", "DOUBLE", "LONG", "UNSIGNEDLONG", "BOOLEAN", "BINARY"],
     #         value: {
     #           s: "StringParameterValue",
     #           b: false,
@@ -1106,6 +1129,21 @@ module Aws::IoT
     #           bin: "data",
     #           ul: "UnsignedLongParameterValue"
     #         },
+    #         value_conditions: [
+    #           {
+    #             comparison_operator: "EQUALS" # One of: ["EQUALS", "NOT_EQUALS", "LESS_THAN", "LESS_THAN_EQUALS", "GREATER_THAN", "GREATER_THAN_EQUALS", "IN_SET", "NOT_IN_SET", "IN_RANGE", "NOT_IN_RANGE"], # required
+    #             operand: { # required
+    #               number: "StringParameterValue",
+    #               numbers: ["StringParameterValue"],
+    #               string: "StringParameterValue",
+    #               strings: ["StringParameterValue"],
+    #               number_range: {
+    #                 min: "StringParameterValue", # required
+    #                 max: "StringParameterValue", # required
+    #               }
+    #             }
+    #           }
+    #         ],
     #         description: "CommandParameterDescription"
     #       }
     #     ],
@@ -1131,7 +1169,10 @@ module Aws::IoT
       request.send_request(options)
     end
 
-    # <p> Use this API to define a
+    # <note>
+    #             <p>The IoT Device Defender detect feature will no longer be available to new customers starting August 31, 2026. If you would like to use the detect feature, sign up prior to August 31, 2026. To learn about alternatives to IoT Device Defender detect, see IoT Device Defender detect feature availability change in the IoT Device Defender Developer Guide. There is no change to IoT Device Defender audit availability.</p>
+    #          </note>
+    #          <p> Use this API to define a
     #       Custom
     #       Metric
     #       published by your devices to Device Defender. </p>
@@ -1189,7 +1230,10 @@ module Aws::IoT
       request.send_request(options)
     end
 
-    # <p>Create a dimension that you can use to limit the scope of a metric used in a security profile for IoT Device Defender. 
+    # <note>
+    #             <p>The IoT Device Defender detect feature will no longer be available to new customers starting August 31, 2026. If you would like to use the detect feature, sign up prior to August 31, 2026. To learn about alternatives to IoT Device Defender detect, see IoT Device Defender detect feature availability change in the IoT Device Defender Developer Guide. There is no change to IoT Device Defender audit availability.</p>
+    #          </note>
+    #          <p>Create a dimension that you can use to limit the scope of a metric used in a security profile for IoT Device Defender.
     #       For example, using a <code>TOPIC_FILTER</code> dimension, you can narrow down the scope of the metric only to MQTT topics whose name match the pattern specified in the dimension.</p>
     #          <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">CreateDimension</a> action.</p>
     # @param [Hash, Types::CreateDimensionRequest] params
@@ -1203,7 +1247,7 @@ module Aws::IoT
     # @option params [Array<Types::Tag>] :tags
     #   <p>Metadata that can be used to manage the dimension.</p>
     # @option params [String] :client_request_token
-    #   <p>Each dimension must have a unique client request token. If you try to create a new dimension with the same token as a dimension that already exists, an exception occurs. 
+    #   <p>Each dimension must have a unique client request token. If you try to create a new dimension with the same token as a dimension that already exists, an exception occurs.
     #         If you omit this value, Amazon Web Services SDKs will automatically generate a unique client request.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -1240,10 +1284,10 @@ module Aws::IoT
     # @option params [String] :domain_name
     #   <p>The name of the domain.</p>
     # @option params [Array<String>] :server_certificate_arns
-    #   <p>The ARNs of the certificates that IoT passes to the device during the TLS handshake. Currently you can specify only one certificate ARN. 
+    #   <p>The ARNs of the certificates that IoT passes to the device during the TLS handshake. Currently you can specify only one certificate ARN.
     #         This value is not required for Amazon Web Services-managed domains.</p>
     # @option params [String] :validation_certificate_arn
-    #   <p>The certificate used to validate the server certificate and prove domain name ownership. This certificate must be signed by a public certificate authority. 
+    #   <p>The certificate used to validate the server certificate and prove domain name ownership. This certificate must be signed by a public certificate authority.
     #            This value is not required for Amazon Web Services-managed domains.</p>
     # @option params [Types::AuthorizerConfig] :authorizer_config
     #   <p>An object that specifies the authorization service for a domain.</p>
@@ -1323,7 +1367,7 @@ module Aws::IoT
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>DEFAULT</code> - Use a combination of port and Application Layer Protocol Negotiation (ALPN) to specify application_layer protocol. 
+    #                     <code>DEFAULT</code> - Use a combination of port and Application Layer Protocol Negotiation (ALPN) to specify application_layer protocol.
     #                  For more information, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/protocols.html">Device communication protocols</a>.</p>
     #               </li>
     #            </ul>
@@ -1809,7 +1853,7 @@ module Aws::IoT
       request.send_request(options)
     end
 
-    # <p>Defines an action that can be applied to audit findings by using StartAuditMitigationActionsTask. Only certain types of mitigation actions can be applied to specific check names. 
+    # <p>Defines an action that can be applied to audit findings by using StartAuditMitigationActionsTask. Only certain types of mitigation actions can be applied to specific check names.
     #       For more information, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/device-defender-mitigation-actions.html">Mitigation actions</a>. Each mitigation action can apply only one type of change.</p>
     #          <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">CreateMitigationAction</a> action.</p>
     # @param [Hash, Types::CreateMitigationActionRequest] params
@@ -1893,17 +1937,17 @@ module Aws::IoT
     # @option params [Types::AwsJobAbortConfig] :aws_job_abort_config
     #   <p>The criteria that determine when and how a job abort takes place.</p>
     # @option params [Types::AwsJobTimeoutConfig] :aws_job_timeout_config
-    #   <p>Specifies the amount of time each device has to finish its execution of the job.  A timer is 
-    #               started when the job execution status is set to <code>IN_PROGRESS</code>. If the job execution 
-    #               status is not set to another terminal state before the timer expires, it will be automatically 
+    #   <p>Specifies the amount of time each device has to finish its execution of the job.  A timer is
+    #               started when the job execution status is set to <code>IN_PROGRESS</code>. If the job execution
+    #               status is not set to another terminal state before the timer expires, it will be automatically
     #               set to <code>TIMED_OUT</code>.</p>
     # @option params [Array<Types::OTAUpdateFile>] :files
     #   <p>The files to be streamed by the OTA update.</p>
     # @option params [String] :role_arn
-    #   <p>The IAM role that grants Amazon Web Services IoT Core access to the Amazon S3, IoT jobs and Amazon Web Services Code Signing resources 
+    #   <p>The IAM role that grants Amazon Web Services IoT Core access to the Amazon S3, IoT jobs and Amazon Web Services Code Signing resources
     #               to create an OTA update job.</p>
     # @option params [Hash<String, String>] :additional_parameters
-    #   <p>A list of additional OTA update parameters, which are name-value pairs. 
+    #   <p>A list of additional OTA update parameters, which are name-value pairs.
     #               They won't be sent to devices as a part of the Job document.</p>
     # @option params [Array<Types::Tag>] :tags
     #   <p>Metadata which can be used to manage updates.</p>
@@ -2028,7 +2072,7 @@ module Aws::IoT
     # @option params [Hash<String, String>] :tags
     #   <p>Metadata that can be used to manage the package.</p>
     # @option params [String] :client_token
-    #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. 
+    #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
     #         Don't reuse this client token if a new idempotent request is required.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -2075,7 +2119,7 @@ module Aws::IoT
     # @option params [Hash<String, String>] :tags
     #   <p>Metadata that can be used to manage the package version.</p>
     # @option params [String] :client_token
-    #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. 
+    #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
     #         Don't reuse this client token if a new idempotent request is required.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -2336,8 +2380,8 @@ module Aws::IoT
     #          <important>
     #             <p>The value of <a href="https://docs.aws.amazon.com/iot/latest/apireference/API_CreateRoleAlias.html#iot-CreateRoleAlias-request-credentialDurationSeconds">
     #                   <code>credentialDurationSeconds</code>
-    #                </a> must be less than or equal to the maximum session 
-    #             duration of the IAM role that the role alias references. For more information, see 
+    #                </a> must be less than or equal to the maximum session
+    #             duration of the IAM role that the role alias references. For more information, see
     #             <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/roles-managingrole-editing-api.html#roles-modify_max-session-duration-api">
     #                Modifying a role maximum session duration (Amazon Web Services API)</a> from the Amazon Web Services Identity and Access Management User Guide.</p>
     #          </important>
@@ -2386,7 +2430,7 @@ module Aws::IoT
       request.send_request(options)
     end
 
-    # <p>Creates a scheduled audit that is run at a specified 
+    # <p>Creates a scheduled audit that is run at a specified
     #           time interval.</p>
     #          <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">CreateScheduledAudit</a> action.</p>
     # @param [Hash, Types::CreateScheduledAuditRequest] params
@@ -2413,9 +2457,9 @@ module Aws::IoT
     #         <code>MON</code>, <code>TUE</code>, <code>WED</code>, <code>THU</code>, <code>FRI</code>, or <code>SAT</code>. This field is required if the <code>frequency</code>
     #         parameter is set to <code>WEEKLY</code> or <code>BIWEEKLY</code>.</p>
     # @option params [Array<String>] :target_check_names
-    #   <p>Which checks are performed during the scheduled audit. Checks must be enabled 
+    #   <p>Which checks are performed during the scheduled audit. Checks must be enabled
     #               for your account. (Use <code>DescribeAccountAuditConfiguration</code> to see the list
-    #               of all checks, including those that are enabled or use <code>UpdateAccountAuditConfiguration</code> 
+    #               of all checks, including those that are enabled or use <code>UpdateAccountAuditConfiguration</code>
     #               to select which checks are enabled.)</p>
     # @option params [String] :scheduled_audit_name
     #   <p>The name you want to give to the scheduled audit. (Max. 128 chars)</p>
@@ -2448,7 +2492,10 @@ module Aws::IoT
       request.send_request(options)
     end
 
-    # <p>Creates a Device Defender security profile.</p>
+    # <note>
+    #             <p>The IoT Device Defender detect feature will no longer be available to new customers starting August 31, 2026. If you would like to use the detect feature, sign up prior to August 31, 2026. To learn about alternatives to IoT Device Defender detect, see IoT Device Defender detect feature availability change in the IoT Device Defender Developer Guide. There is no change to IoT Device Defender audit availability.</p>
+    #          </note>
+    #          <p>Creates a Device Defender security profile.</p>
     #          <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">CreateSecurityProfile</a> action.</p>
     # @param [Hash, Types::CreateSecurityProfileRequest] params
     # @option params [String] :security_profile_name
@@ -2458,14 +2505,14 @@ module Aws::IoT
     # @option params [Array<Types::Behavior>] :behaviors
     #   <p>Specifies the behaviors that, when violated by a device (thing), cause an alert.</p>
     # @option params [Hash<String, Types::AlertTarget>] :alert_targets
-    #   <p>Specifies the destinations to which alerts are sent. (Alerts are always sent to the 
+    #   <p>Specifies the destinations to which alerts are sent. (Alerts are always sent to the
     #           console.) Alerts are generated when a device (thing) violates a behavior.</p>
     # @option params [Array<String>] :additional_metrics_to_retain
     #   <p>
     #               <i>Please use <a>CreateSecurityProfileRequest$additionalMetricsToRetainV2</a> instead.</i>
     #            </p>
-    #            <p>A list of metrics whose data is retained (stored). By default, data is retained 
-    #           for any metric used in the profile's <code>behaviors</code>, but it is also retained for 
+    #            <p>A list of metrics whose data is retained (stored). By default, data is retained
+    #           for any metric used in the profile's <code>behaviors</code>, but it is also retained for
     #           any metric specified here. Can be used with custom metrics; cannot be used with dimensions.</p>
     # @option params [Array<Types::MetricToRetain>] :additional_metrics_to_retain_v2
     #   <p>A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's <code>behaviors</code>, but it is also retained for any metric specified here. Can be used with custom metrics; cannot be used with dimensions.</p>
@@ -2955,6 +3002,13 @@ module Aws::IoT
     #                 service_name: "ServiceName", # required
     #                 role_arn: "AwsArn", # required
     #               }
+    #             },
+    #             enable_batching: false,
+    #             batch_config: {
+    #               max_batch_open_ms: 1,
+    #               max_batch_size: 1,
+    #               max_batch_size_bytes: 1,
+    #               batch_across_topics: false
     #             }
     #           },
     #           kafka: {
@@ -2989,6 +3043,23 @@ module Aws::IoT
     #             },
     #             latitude: "String", # required
     #             longitude: "String", # required
+    #           },
+    #           influx_db: {
+    #             destination_arn: "AwsArn", # required
+    #             role_arn: "AwsArn", # required
+    #             database_name: "InfluxDBDatabaseName", # required
+    #             table_name: "InfluxDBTableName", # required
+    #             organization: "InfluxDBOrganization",
+    #             tags: {
+    #               "InfluxDBTagName" => "InfluxDBTagValue"
+    #             },
+    #             timestamp_unit: "s" # One of: ["s", "ms", "us", "ns"],
+    #             batch_config: {
+    #               max_batch_size: 1,
+    #               max_batch_open_ms: 1,
+    #               max_batch_size_bytes: 1,
+    #               batch_across_topics: false
+    #             }
     #           }
     #         }
     #       ],
@@ -3165,6 +3236,13 @@ module Aws::IoT
     #               service_name: "ServiceName", # required
     #               role_arn: "AwsArn", # required
     #             }
+    #           },
+    #           enable_batching: false,
+    #           batch_config: {
+    #             max_batch_open_ms: 1,
+    #             max_batch_size: 1,
+    #             max_batch_size_bytes: 1,
+    #             batch_across_topics: false
     #           }
     #         },
     #         kafka: {
@@ -3199,6 +3277,23 @@ module Aws::IoT
     #           },
     #           latitude: "String", # required
     #           longitude: "String", # required
+    #         },
+    #         influx_db: {
+    #           destination_arn: "AwsArn", # required
+    #           role_arn: "AwsArn", # required
+    #           database_name: "InfluxDBDatabaseName", # required
+    #           table_name: "InfluxDBTableName", # required
+    #           organization: "InfluxDBOrganization",
+    #           tags: {
+    #             "InfluxDBTagName" => "InfluxDBTagValue"
+    #           },
+    #           timestamp_unit: "s" # One of: ["s", "ms", "us", "ns"],
+    #           batch_config: {
+    #             max_batch_size: 1,
+    #             max_batch_open_ms: 1,
+    #             max_batch_size_bytes: 1,
+    #             batch_across_topics: false
+    #           }
     #         }
     #       }
     #     },
@@ -3231,6 +3326,13 @@ module Aws::IoT
     #         security_groups: ["SecurityGroupId"],
     #         vpc_id: "VpcId", # required
     #         role_arn: "AwsArn", # required
+    #       },
+    #       influx_db_configuration: {
+    #         endpoint: "Url", # required
+    #         influx_db_version: "V2" # One of: ["V2", "V3"], # required
+    #         secret_id: "InfluxDBSecretId", # required
+    #         secret_type: "SecretString" # One of: ["SecretString", "SecretBinary"],
+    #         secret_key: "InfluxDBSecretKey"
     #       }
     #     }
     #   }
@@ -3253,6 +3355,13 @@ module Aws::IoT
     #         security_groups: ["SecurityGroupId"],
     #         vpc_id: "VpcId",
     #         role_arn: "AwsArn"
+    #       },
+    #       influx_db_properties: {
+    #         endpoint: "Url",
+    #         influx_db_version: "V2" # One of: ["V2", "V3"],
+    #         secret_id: "InfluxDBSecretId",
+    #         secret_type: "SecretString" # One of: ["SecretString", "SecretBinary"],
+    #         secret_key: "InfluxDBSecretKey"
     #       }
     #     }
     #   }
@@ -3263,7 +3372,7 @@ module Aws::IoT
     end
 
     # <p>Restores the default settings for Device Defender audits for this account. Any
-    #           configuration data you entered is deleted and all audit checks are reset to 
+    #           configuration data you entered is deleted and all audit checks are reset to
     #           disabled.  </p>
     #          <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">DeleteAccountAuditConfiguration</a> action.</p>
     # @param [Hash, Types::DeleteAccountAuditConfigurationRequest] params
@@ -3290,9 +3399,9 @@ module Aws::IoT
     #          <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">DeleteAuditSuppression</a> action.</p>
     # @param [Hash, Types::DeleteAuditSuppressionRequest] params
     # @option params [String] :check_name
-    #   <p>An audit check name. Checks must be enabled 
+    #   <p>An audit check name. Checks must be enabled
     #           for your account. (Use <code>DescribeAccountAuditConfiguration</code> to see the list
-    #           of all checks, including those that are enabled or use <code>UpdateAccountAuditConfiguration</code> 
+    #           of all checks, including those that are enabled or use <code>UpdateAccountAuditConfiguration</code>
     #           to select which checks are enabled.)</p>
     # @option params [Types::ResourceIdentifier] :resource_identifier
     #   <p>Information that identifies the noncompliant resource.</p>
@@ -3498,7 +3607,10 @@ module Aws::IoT
       request.send_request(options)
     end
 
-    # <p>
+    # <note>
+    #             <p>The IoT Device Defender detect feature will no longer be available to new customers starting August 31, 2026. If you would like to use the detect feature, sign up prior to August 31, 2026. To learn about alternatives to IoT Device Defender detect, see IoT Device Defender detect feature availability change in the IoT Device Defender Developer Guide. There is no change to IoT Device Defender audit availability.</p>
+    #          </note>
+    #          <p>
     #       Deletes a Device Defender detect custom metric.
     #     </p>
     #          <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">DeleteCustomMetric</a> action.</p>
@@ -3530,7 +3642,10 @@ module Aws::IoT
       request.send_request(options)
     end
 
-    # <p>Removes the specified dimension from your Amazon Web Services accounts.</p>
+    # <note>
+    #             <p>The IoT Device Defender detect feature will no longer be available to new customers starting August 31, 2026. If you would like to use the detect feature, sign up prior to August 31, 2026. To learn about alternatives to IoT Device Defender detect, see IoT Device Defender detect feature availability change in the IoT Device Defender Developer Guide. There is no change to IoT Device Defender audit availability.</p>
+    #          </note>
+    #          <p>Removes the specified dimension from your Amazon Web Services accounts.</p>
     #          <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">DeleteDimension</a> action.</p>
     # @param [Hash, Types::DeleteDimensionRequest] params
     # @option params [String] :name
@@ -3593,7 +3708,7 @@ module Aws::IoT
       request.send_request(options)
     end
 
-    # <p>Deletes the specified fleet metric. 
+    # <p>Deletes the specified fleet metric.
     #         Returns successfully with no error if the deletion is successful or you specify a fleet metric that doesn't exist.</p>
     #          <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">DeleteFleetMetric</a> action.</p>
     # @param [Hash, Types::DeleteFleetMetricRequest] params
@@ -3771,7 +3886,7 @@ module Aws::IoT
     #   <p>When true, the stream created by the OTAUpdate process is deleted when the OTA update is deleted.
     #               Ignored if the stream specified in the OTAUpdate is supplied by the user.</p>
     # @option params [Boolean] :force_delete_aws_job
-    #   <p>When true, deletes the IoT job created by the OTAUpdate process even if it is "IN_PROGRESS". Otherwise, if the 
+    #   <p>When true, deletes the IoT job created by the OTAUpdate process even if it is "IN_PROGRESS". Otherwise, if the
     #               job is not in a terminal state ("COMPLETED" or "CANCELED") an exception will occur. The default is false.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -3798,7 +3913,7 @@ module Aws::IoT
     # @option params [String] :package_name
     #   <p>The name of the target software package.</p>
     # @option params [String] :client_token
-    #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. 
+    #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
     #         Don't reuse this client token if a new idempotent request is required.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -3825,7 +3940,7 @@ module Aws::IoT
     # @option params [String] :version_name
     #   <p>The name of the target package version.</p>
     # @option params [String] :client_token
-    #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. 
+    #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
     #         Don't reuse this client token if a new idempotent request is required.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -3999,7 +4114,10 @@ module Aws::IoT
       request.send_request(options)
     end
 
-    # <p>Deletes a Device Defender security profile.</p>
+    # <note>
+    #             <p>The IoT Device Defender detect feature will no longer be available to new customers starting August 31, 2026. If you would like to use the detect feature, sign up prior to August 31, 2026. To learn about alternatives to IoT Device Defender detect, see IoT Device Defender detect feature availability change in the IoT Device Defender Developer Guide. There is no change to IoT Device Defender audit availability.</p>
+    #          </note>
+    #          <p>Deletes a Device Defender security profile.</p>
     #          <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">DeleteSecurityProfile</a> action.</p>
     # @param [Hash, Types::DeleteSecurityProfileRequest] params
     # @option params [String] :security_profile_name
@@ -4161,7 +4279,8 @@ module Aws::IoT
     # @param [Hash, Types::DeleteV2LoggingLevelRequest] params
     # @option params [String] :target_type
     #   <p>The type of resource for which you are configuring logging. Must be
-    #               <code>THING_Group</code>.</p>
+    #               <code>DEFAULT</code>, <code>THING_GROUP</code>, <code>CLIENT_ID</code>,
+    #               <code>SOURCE_IP</code>, or <code>PRINCIPAL_ID</code>.</p>
     # @option params [String] :target_name
     #   <p>The name of the resource for which you are configuring logging.</p>
     # @example Request syntax with placeholder values
@@ -4404,9 +4523,9 @@ module Aws::IoT
     #     </p>
     # @param [Hash, Types::DescribeAuditSuppressionRequest] params
     # @option params [String] :check_name
-    #   <p>An audit check name. Checks must be enabled 
+    #   <p>An audit check name. Checks must be enabled
     #           for your account. (Use <code>DescribeAccountAuditConfiguration</code> to see the list
-    #           of all checks, including those that are enabled or use <code>UpdateAccountAuditConfiguration</code> 
+    #           of all checks, including those that are enabled or use <code>UpdateAccountAuditConfiguration</code>
     #           to select which checks are enabled.)</p>
     # @option params [Types::ResourceIdentifier] :resource_identifier
     #   <p>Information that identifies the noncompliant resource.</p>
@@ -4697,7 +4816,10 @@ module Aws::IoT
       request.send_request(options)
     end
 
-    # <p>
+    # <note>
+    #             <p>The IoT Device Defender detect feature will no longer be available to new customers starting August 31, 2026. If you would like to use the detect feature, sign up prior to August 31, 2026. To learn about alternatives to IoT Device Defender detect, see IoT Device Defender detect feature availability change in the IoT Device Defender Developer Guide. There is no change to IoT Device Defender audit availability.</p>
+    #          </note>
+    #          <p>
     #       Gets information about a Device Defender detect custom metric.
     #     </p>
     #          <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">DescribeCustomMetric</a> action.</p>
@@ -4759,7 +4881,10 @@ module Aws::IoT
       request.send_request(options)
     end
 
-    # <p>
+    # <note>
+    #             <p>The IoT Device Defender detect feature will no longer be available to new customers starting August 31, 2026. If you would like to use the detect feature, sign up prior to August 31, 2026. To learn about alternatives to IoT Device Defender detect, see IoT Device Defender detect feature availability change in the IoT Device Defender Developer Guide. There is no change to IoT Device Defender audit availability.</p>
+    #          </note>
+    #          <p>
     #       Gets information about a Device Defender ML Detect mitigation action.
     #     </p>
     #          <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">DescribeDetectMitigationActionsTask</a> action.</p>
@@ -4835,7 +4960,10 @@ module Aws::IoT
       request.send_request(options)
     end
 
-    # <p>Provides details about a dimension that is defined in your Amazon Web Services accounts.</p>
+    # <note>
+    #             <p>The IoT Device Defender detect feature will no longer be available to new customers starting August 31, 2026. If you would like to use the detect feature, sign up prior to August 31, 2026. To learn about alternatives to IoT Device Defender detect, see IoT Device Defender detect feature availability change in the IoT Device Defender Developer Guide. There is no change to IoT Device Defender audit availability.</p>
+    #          </note>
+    #          <p>Provides details about a dimension that is defined in your Amazon Web Services accounts.</p>
     #          <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">DescribeDimension</a> action.</p>
     # @param [Hash, Types::DescribeDimensionRequest] params
     # @option params [String] :name
@@ -4915,7 +5043,7 @@ module Aws::IoT
     end
 
     # <p>Retrieves the encryption configuration for resources and data of your Amazon Web Services account in
-    #          Amazon Web Services IoT Core. For more information, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/key-management.html">Key management in IoT</a> from
+    #          Amazon Web Services IoT Core. For more information, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/encryption-at-rest.html">Data encryption at rest</a> in
     #          the <i>Amazon Web Services IoT Core Developer Guide</i>.</p>
     # @param [Hash, Types::DescribeEncryptionConfigurationRequest] params
     # @example Request syntax with placeholder values
@@ -4976,7 +5104,7 @@ module Aws::IoT
     #                  endpoint.</p>
     #               </li>
     #            </ul>
-    #            <p>We strongly recommend that customers use the newer <code>iot:Data-ATS</code> endpoint type to avoid 
+    #            <p>We strongly recommend that customers use the newer <code>iot:Data-ATS</code> endpoint type to avoid
     #            issues related to the widespread distrust of Symantec certificate authorities. ATS Signed Certificates
     #            are more secure and are trusted by most popular browsers.</p>
     # @example Request syntax with placeholder values
@@ -5513,7 +5641,10 @@ module Aws::IoT
       request.send_request(options)
     end
 
-    # <p>Gets information about a Device Defender security profile.</p>
+    # <note>
+    #             <p>The IoT Device Defender detect feature will no longer be available to new customers starting August 31, 2026. If you would like to use the detect feature, sign up prior to August 31, 2026. To learn about alternatives to IoT Device Defender detect, see IoT Device Defender detect feature availability change in the IoT Device Defender Developer Guide. There is no change to IoT Device Defender audit availability.</p>
+    #          </note>
+    #          <p>Gets information about a Device Defender security profile.</p>
     #          <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">DescribeSecurityProfile</a> action.</p>
     # @param [Hash, Types::DescribeSecurityProfileRequest] params
     # @option params [String] :security_profile_name
@@ -5843,7 +5974,10 @@ module Aws::IoT
       request.send_request(options)
     end
 
-    # <p>Disassociates a Device Defender security profile from a thing group or from this account.</p>
+    # <note>
+    #             <p>The IoT Device Defender detect feature will no longer be available to new customers starting August 31, 2026. If you would like to use the detect feature, sign up prior to August 31, 2026. To learn about alternatives to IoT Device Defender detect, see IoT Device Defender detect feature availability change in the IoT Device Defender Developer Guide. There is no change to IoT Device Defender audit availability.</p>
+    #          </note>
+    #          <p>Disassociates a Device Defender security profile from a thing group or from this account.</p>
     #          <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">DetachSecurityProfile</a> action.</p>
     # @param [Hash, Types::DetachSecurityProfileRequest] params
     # @option params [String] :security_profile_name
@@ -5963,7 +6097,10 @@ module Aws::IoT
       request.send_request(options)
     end
 
-    # <p>
+    # <note>
+    #             <p>The IoT Device Defender detect feature will no longer be available to new customers starting August 31, 2026. If you would like to use the detect feature, sign up prior to August 31, 2026. To learn about alternatives to IoT Device Defender detect, see IoT Device Defender detect feature availability change in the IoT Device Defender Developer Guide. There is no change to IoT Device Defender audit availability.</p>
+    #          </note>
+    #          <p>
     #       Returns a Device Defender's ML Detect Security Profile training model's status.
     #     </p>
     #          <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">GetBehaviorModelTrainingSummaries</a> action.</p>
@@ -6106,6 +6243,7 @@ module Aws::IoT
     #     mandatory_parameters: [
     #       {
     #         name: "CommandParameterName", # required
+    #         type: "STRING" # One of: ["STRING", "INTEGER", "DOUBLE", "LONG", "UNSIGNEDLONG", "BOOLEAN", "BINARY"],
     #         value: {
     #           s: "StringParameterValue",
     #           b: false,
@@ -6124,12 +6262,33 @@ module Aws::IoT
     #           bin: "data",
     #           ul: "UnsignedLongParameterValue"
     #         },
+    #         value_conditions: [
+    #           {
+    #             comparison_operator: "EQUALS" # One of: ["EQUALS", "NOT_EQUALS", "LESS_THAN", "LESS_THAN_EQUALS", "GREATER_THAN", "GREATER_THAN_EQUALS", "IN_SET", "NOT_IN_SET", "IN_RANGE", "NOT_IN_RANGE"], # required
+    #             operand: { # required
+    #               number: "StringParameterValue",
+    #               numbers: ["StringParameterValue"],
+    #               string: "StringParameterValue",
+    #               strings: ["StringParameterValue"],
+    #               number_range: {
+    #                 min: "StringParameterValue", # required
+    #                 max: "StringParameterValue", # required
+    #               }
+    #             }
+    #           }
+    #         ],
     #         description: "CommandParameterDescription"
     #       }
     #     ],
     #     payload: {
     #       content: "data",
     #       content_type: "MimeType"
+    #     },
+    #     payload_template: "CommandPayloadTemplateString",
+    #     preprocessor: {
+    #       aws_json_substitution: {
+    #         output_format: "JSON" # One of: ["JSON", "CBOR"], # required
+    #       }
     #     },
     #     role_arn: "RoleArn",
     #     created_at: Time.now,
@@ -6275,7 +6434,10 @@ module Aws::IoT
     #             name: "TargetFieldName",
     #             order: "LatLon" # One of: ["LatLon", "LonLat"]
     #           }
-    #         ]
+    #         ],
+    #         connectivity: {
+    #           include_socket_information: ["GET_THING_CONNECTIVITY_DATA" # One of: ["GET_THING_CONNECTIVITY_DATA"]]
+    #         }
     #       }
     #     },
     #     thing_group_indexing_configuration: {
@@ -6549,14 +6711,14 @@ module Aws::IoT
       request.send_request(options)
     end
 
-    # <p>Groups the aggregated values that match the query into percentile groupings. The default 
-    #         percentile groupings are: 1,5,25,50,75,95,99, although you can specify your own 
-    #         when you call <code>GetPercentiles</code>. This function returns a value for each 
-    #         percentile group specified (or the default percentile groupings). The percentile group 
-    #         "1" contains the aggregated field value that occurs in approximately one percent of the 
-    #         values that match the query. The percentile group "5" contains the aggregated field value 
-    #         that occurs in approximately five percent of the values that match the query, and so on. 
-    #         The result is an approximation, the more values that match the query, the more accurate 
+    # <p>Groups the aggregated values that match the query into percentile groupings. The default
+    #         percentile groupings are: 1,5,25,50,75,95,99, although you can specify your own
+    #         when you call <code>GetPercentiles</code>. This function returns a value for each
+    #         percentile group specified (or the default percentile groupings). The percentile group
+    #         "1" contains the aggregated field value that occurs in approximately one percent of the
+    #         values that match the query. The percentile group "5" contains the aggregated field value
+    #         that occurs in approximately five percent of the values that match the query, and so on.
+    #         The result is an approximation, the more values that match the query, the more accurate
     #         the percentile values.</p>
     #          <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">GetPercentiles</a> action.</p>
     # @param [Hash, Types::GetPercentilesRequest] params
@@ -6721,13 +6883,16 @@ module Aws::IoT
       request.send_request(options)
     end
 
-    # <p>Retrieves the live connectivity status per device.</p>
+    # <p>Retrieves the live connectivity status per device. If a device has never connected to IoT Core or was disconnected for more than 1 hour before fleet indexing's <code>thingConnectivityIndexingMode</code> was enabled, the response will have the <code>connected</code> field set to <code>false</code> with no additional session details.</p>
     # @param [Hash, Types::GetThingConnectivityDataRequest] params
     # @option params [String] :thing_name
     #   <p>The name of your IoT thing.</p>
+    # @option params [Boolean] :include_socket_information
+    #   <p>Specifies if socket information (sourcePort, targetPort, sourceIp, targetIp, vpcEndpointId) should be included in the GetThingConnectivityData response. Set to <code>true</code> to include socket information. Set to <code>false</code> to omit socket information. By default, this is set to <code>false</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     thing_name: "ConnectivityApiThingName", # required
+    #     include_socket_information: false
     #   }
     #   options = {}
     #   response = client.get_thing_connectivity_data(params, options)
@@ -6737,7 +6902,16 @@ module Aws::IoT
     #     thing_name: "ConnectivityApiThingName",
     #     connected: false,
     #     timestamp: Time.now,
-    #     disconnect_reason: "AUTH_ERROR" # One of: ["AUTH_ERROR", "CLIENT_INITIATED_DISCONNECT", "CLIENT_ERROR", "CONNECTION_LOST", "DUPLICATE_CLIENTID", "FORBIDDEN_ACCESS", "MQTT_KEEP_ALIVE_TIMEOUT", "SERVER_ERROR", "SERVER_INITIATED_DISCONNECT", "THROTTLED", "WEBSOCKET_TTL_EXPIRATION", "CUSTOMAUTH_TTL_EXPIRATION", "UNKNOWN", "NONE"]
+    #     disconnect_reason: "AUTH_ERROR" # One of: ["AUTH_ERROR", "CLIENT_INITIATED_DISCONNECT", "CLIENT_ERROR", "CONNECTION_LOST", "DUPLICATE_CLIENTID", "FORBIDDEN_ACCESS", "MQTT_KEEP_ALIVE_TIMEOUT", "SERVER_ERROR", "SERVER_INITIATED_DISCONNECT", "API_INITIATED_DISCONNECT", "THROTTLED", "WEBSOCKET_TTL_EXPIRATION", "CUSTOMAUTH_TTL_EXPIRATION", "UNKNOWN", "NONE"],
+    #     source_ip: "SourceIp",
+    #     source_port: 1,
+    #     target_ip: "TargetIp",
+    #     target_port: 1,
+    #     vpc_endpoint_id: "VpcEndpointId",
+    #     keep_alive_duration: 1,
+    #     clean_session: false,
+    #     session_expiry: 1,
+    #     client_id: "ClientId"
     #   }
     # @return [Types::GetThingConnectivityDataResponse]
     def get_thing_connectivity_data(params = {}, options = {})
@@ -6937,6 +7111,13 @@ module Aws::IoT
     #                 service_name: "ServiceName", # required
     #                 role_arn: "AwsArn", # required
     #               }
+    #             },
+    #             enable_batching: false,
+    #             batch_config: {
+    #               max_batch_open_ms: 1,
+    #               max_batch_size: 1,
+    #               max_batch_size_bytes: 1,
+    #               batch_across_topics: false
     #             }
     #           },
     #           kafka: {
@@ -6971,6 +7152,23 @@ module Aws::IoT
     #             },
     #             latitude: "String", # required
     #             longitude: "String", # required
+    #           },
+    #           influx_db: {
+    #             destination_arn: "AwsArn", # required
+    #             role_arn: "AwsArn", # required
+    #             database_name: "InfluxDBDatabaseName", # required
+    #             table_name: "InfluxDBTableName", # required
+    #             organization: "InfluxDBOrganization",
+    #             tags: {
+    #               "InfluxDBTagName" => "InfluxDBTagValue"
+    #             },
+    #             timestamp_unit: "s" # One of: ["s", "ms", "us", "ns"],
+    #             batch_config: {
+    #               max_batch_size: 1,
+    #               max_batch_open_ms: 1,
+    #               max_batch_size_bytes: 1,
+    #               batch_across_topics: false
+    #             }
     #           }
     #         }
     #       ],
@@ -7147,6 +7345,13 @@ module Aws::IoT
     #               service_name: "ServiceName", # required
     #               role_arn: "AwsArn", # required
     #             }
+    #           },
+    #           enable_batching: false,
+    #           batch_config: {
+    #             max_batch_open_ms: 1,
+    #             max_batch_size: 1,
+    #             max_batch_size_bytes: 1,
+    #             batch_across_topics: false
     #           }
     #         },
     #         kafka: {
@@ -7181,6 +7386,23 @@ module Aws::IoT
     #           },
     #           latitude: "String", # required
     #           longitude: "String", # required
+    #         },
+    #         influx_db: {
+    #           destination_arn: "AwsArn", # required
+    #           role_arn: "AwsArn", # required
+    #           database_name: "InfluxDBDatabaseName", # required
+    #           table_name: "InfluxDBTableName", # required
+    #           organization: "InfluxDBOrganization",
+    #           tags: {
+    #             "InfluxDBTagName" => "InfluxDBTagValue"
+    #           },
+    #           timestamp_unit: "s" # One of: ["s", "ms", "us", "ns"],
+    #           batch_config: {
+    #             max_batch_size: 1,
+    #             max_batch_open_ms: 1,
+    #             max_batch_size_bytes: 1,
+    #             batch_across_topics: false
+    #           }
     #         }
     #       }
     #     }
@@ -7219,6 +7441,13 @@ module Aws::IoT
     #         security_groups: ["SecurityGroupId"],
     #         vpc_id: "VpcId",
     #         role_arn: "AwsArn"
+    #       },
+    #       influx_db_properties: {
+    #         endpoint: "Url",
+    #         influx_db_version: "V2" # One of: ["V2", "V3"],
+    #         secret_id: "InfluxDBSecretId",
+    #         secret_type: "SecretString" # One of: ["SecretString", "SecretBinary"],
+    #         secret_key: "InfluxDBSecretKey"
     #       }
     #     }
     #   }
@@ -7231,8 +7460,14 @@ module Aws::IoT
     # <p>Gets the fine grained logging options.</p>
     #          <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">GetV2LoggingOptions</a> action.</p>
     # @param [Hash, Types::GetV2LoggingOptionsRequest] params
+    # @option params [Boolean] :verbose
+    #   <p>
+    #            The flag is used to get all the event types and their respective configuration that event-based logging supports.
+    #         </p>
     # @example Request syntax with placeholder values
-    #   params = {}
+    #   params = {
+    #     verbose: false
+    #   }
     #   options = {}
     #   response = client.get_v2_logging_options(params, options)
     # @example Response structure with placeholder values
@@ -7240,7 +7475,14 @@ module Aws::IoT
     #   {
     #     role_arn: "AwsArn",
     #     default_log_level: "DEBUG" # One of: ["DEBUG", "INFO", "ERROR", "WARN", "DISABLED"],
-    #     disable_all_logs: false
+    #     disable_all_logs: false,
+    #     event_configurations: [
+    #       {
+    #         event_type: "LogEventType", # required
+    #         log_level: "DEBUG" # One of: ["DEBUG", "INFO", "ERROR", "WARN", "DISABLED"],
+    #         log_destination: "LogDestination"
+    #       }
+    #     ]
     #   }
     # @return [Types::GetV2LoggingOptionsResponse]
     def get_v2_logging_options(params = {}, options = {})
@@ -7248,7 +7490,10 @@ module Aws::IoT
       request.send_request(options)
     end
 
-    # <p>Lists the active violations for a given Device Defender security profile.</p>
+    # <note>
+    #             <p>The IoT Device Defender detect feature will no longer be available to new customers starting August 31, 2026. If you would like to use the detect feature, sign up prior to August 31, 2026. To learn about alternatives to IoT Device Defender detect, see IoT Device Defender detect feature availability change in the IoT Device Defender Developer Guide. There is no change to IoT Device Defender audit availability.</p>
+    #          </note>
+    #          <p>Lists the active violations for a given Device Defender security profile.</p>
     #          <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">ListActiveViolations</a> action.</p>
     # @param [Hash, Types::ListActiveViolationsRequest] params
     # @option params [String] :thing_name
@@ -7614,9 +7859,9 @@ module Aws::IoT
     #          <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">ListAuditSuppressions</a> action.</p>
     # @param [Hash, Types::ListAuditSuppressionsRequest] params
     # @option params [String] :check_name
-    #   <p>An audit check name. Checks must be enabled 
+    #   <p>An audit check name. Checks must be enabled
     #           for your account. (Use <code>DescribeAccountAuditConfiguration</code> to see the list
-    #           of all checks, including those that are enabled or use <code>UpdateAccountAuditConfiguration</code> 
+    #           of all checks, including those that are enabled or use <code>UpdateAccountAuditConfiguration</code>
     #           to select which checks are enabled.)</p>
     # @option params [Types::ResourceIdentifier] :resource_identifier
     #   <p>Information that identifies the noncompliant resource.</p>
@@ -7703,8 +7948,8 @@ module Aws::IoT
     #          <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">ListAuditTasks</a> action.</p>
     # @param [Hash, Types::ListAuditTasksRequest] params
     # @option params [Time] :start_time
-    #   <p>The beginning of the time period. Audit information is retained for a 
-    #                 limited time (90 days). Requesting a start time prior to what is retained 
+    #   <p>The beginning of the time period. Audit information is retained for a
+    #                 limited time (90 days). Requesting a start time prior to what is retained
     #                 results in an "InvalidRequestException".</p>
     # @option params [Time] :end_time
     #   <p>The end of the time period.</p>
@@ -7979,16 +8224,16 @@ module Aws::IoT
     #          <important>
     #             <ul>
     #                <li>
-    #                   <p>You must provide only the <code>startedTimeFilter</code> or 
-    #                     the <code>completedTimeFilter</code> information. If you provide 
-    #                     both time filters, the API will generate an error. You can use 
-    #                     this information to retrieve a list of command executions 
+    #                   <p>You must provide only the <code>startedTimeFilter</code> or
+    #                     the <code>completedTimeFilter</code> information. If you provide
+    #                     both time filters, the API will generate an error. You can use
+    #                     this information to retrieve a list of command executions
     #                     within a specific timeframe.</p>
     #                </li>
     #                <li>
-    #                   <p>You must provide only the <code>commandArn</code> or 
+    #                   <p>You must provide only the <code>commandArn</code> or
     #                     the <code>thingArn</code> information depending on whether you want
-    #                     to list executions for a specific command or an IoT thing. If you provide 
+    #                     to list executions for a specific command or an IoT thing. If you provide
     #                     both fields, the API will generate an error.</p>
     #                </li>
     #             </ul>
@@ -8123,7 +8368,10 @@ module Aws::IoT
       request.send_request(options)
     end
 
-    # <p>
+    # <note>
+    #             <p>The IoT Device Defender detect feature will no longer be available to new customers starting August 31, 2026. If you would like to use the detect feature, sign up prior to August 31, 2026. To learn about alternatives to IoT Device Defender detect, see IoT Device Defender detect feature availability change in the IoT Device Defender Developer Guide. There is no change to IoT Device Defender audit availability.</p>
+    #          </note>
+    #          <p>
     #       Lists your Device Defender detect custom metrics.
     #     </p>
     #          <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">ListCustomMetrics</a> action.</p>
@@ -8155,7 +8403,10 @@ module Aws::IoT
       request.send_request(options)
     end
 
-    # <p>
+    # <note>
+    #             <p>The IoT Device Defender detect feature will no longer be available to new customers starting August 31, 2026. If you would like to use the detect feature, sign up prior to August 31, 2026. To learn about alternatives to IoT Device Defender detect, see IoT Device Defender detect feature availability change in the IoT Device Defender Developer Guide. There is no change to IoT Device Defender audit availability.</p>
+    #          </note>
+    #          <p>
     #       Lists mitigation actions executions for a Device Defender ML Detect Security Profile.
     #     </p>
     #          <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">ListDetectMitigationActionsExecutions</a> action.</p>
@@ -8225,7 +8476,10 @@ module Aws::IoT
       request.send_request(options)
     end
 
-    # <p>
+    # <note>
+    #             <p>The IoT Device Defender detect feature will no longer be available to new customers starting August 31, 2026. If you would like to use the detect feature, sign up prior to August 31, 2026. To learn about alternatives to IoT Device Defender detect, see IoT Device Defender detect feature availability change in the IoT Device Defender Developer Guide. There is no change to IoT Device Defender audit availability.</p>
+    #          </note>
+    #          <p>
     #       List of Device Defender ML Detect mitigation actions tasks.
     #     </p>
     #          <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">ListDetectMitigationActionsTasks</a> action.</p>
@@ -8318,7 +8572,10 @@ module Aws::IoT
       request.send_request(options)
     end
 
-    # <p>List the set of dimensions that are defined for your Amazon Web Services accounts.</p>
+    # <note>
+    #             <p>The IoT Device Defender detect feature will no longer be available to new customers starting August 31, 2026. If you would like to use the detect feature, sign up prior to August 31, 2026. To learn about alternatives to IoT Device Defender detect, see IoT Device Defender detect feature availability change in the IoT Device Defender Developer Guide. There is no change to IoT Device Defender audit availability.</p>
+    #          </note>
+    #          <p>List the set of dimensions that are defined for your Amazon Web Services accounts.</p>
     #          <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">ListDimensions</a> action.</p>
     # @param [Hash, Types::ListDimensionsRequest] params
     # @option params [String] :next_token
@@ -8384,7 +8641,7 @@ module Aws::IoT
     #          <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">ListFleetMetrics</a> action.</p>
     # @param [Hash, Types::ListFleetMetricsRequest] params
     # @option params [String] :next_token
-    #   <p>To retrieve the next set of results, the <code>nextToken</code> value from a previous response; 
+    #   <p>To retrieve the next set of results, the <code>nextToken</code> value from a previous response;
     #          otherwise <code>null</code> to receive the first set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return in this operation.</p>
@@ -8687,7 +8944,7 @@ module Aws::IoT
       request.send_request(options)
     end
 
-    # <p>Lists the values reported for an IoT Device Defender metric (device-side metric, cloud-side metric, or custom metric) 
+    # <p>Lists the values reported for an IoT Device Defender metric (device-side metric, cloud-side metric, or custom metric)
     #       by the given thing during the specified time period.</p>
     # @param [Hash, Types::ListMetricValuesRequest] params
     # @option params [String] :thing_name
@@ -9122,7 +9379,7 @@ module Aws::IoT
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>EXCLUSIVE_THING</code> - Attaches the specified principal to the specified thing, exclusively. 
+    #                     <code>EXCLUSIVE_THING</code> - Attaches the specified principal to the specified thing, exclusively.
     #   						The thing will be the only thing that’s attached to the principal.</p>
     #               </li>
     #            </ul>
@@ -9230,7 +9487,7 @@ module Aws::IoT
       request.send_request(options)
     end
 
-    # <p>The related resources of an Audit finding. 
+    # <p>The related resources of an Audit finding.
     #       The following resources can be returned from calling this API:</p>
     #          <ul>
     #             <li>
@@ -9262,16 +9519,16 @@ module Aws::IoT
     #             </li>
     #          </ul>
     #          <note>
-    #             <p>This API is similar to DescribeAuditFinding's <a href="https://docs.aws.amazon.com/iot/latest/apireference/API_DescribeAuditFinding.html">RelatedResources</a>    
-    #       but provides pagination and is not limited to 10 resources. 
-    #       When calling <a href="https://docs.aws.amazon.com/iot/latest/apireference/API_DescribeAuditFinding.html">DescribeAuditFinding</a> for the intermediate CA revoked for 
+    #             <p>This API is similar to DescribeAuditFinding's <a href="https://docs.aws.amazon.com/iot/latest/apireference/API_DescribeAuditFinding.html">RelatedResources</a>
+    #       but provides pagination and is not limited to 10 resources.
+    #       When calling <a href="https://docs.aws.amazon.com/iot/latest/apireference/API_DescribeAuditFinding.html">DescribeAuditFinding</a> for the intermediate CA revoked for
     #       active device certificates check, RelatedResources will not be populated. You must use this API, ListRelatedResourcesForAuditFinding, to list the certificates.</p>
     #          </note>
     # @param [Hash, Types::ListRelatedResourcesForAuditFindingRequest] params
     # @option params [String] :finding_id
     #   <p>The finding Id.</p>
     # @option params [String] :next_token
-    #   <p>A token that can be used to retrieve the next set of results, 
+    #   <p>A token that can be used to retrieve the next set of results,
     #         or <code>null</code> if there are no additional results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return at one time.</p>
@@ -9426,7 +9683,10 @@ module Aws::IoT
       request.send_request(options)
     end
 
-    # <p>Lists the Device Defender security profiles
+    # <note>
+    #             <p>The IoT Device Defender detect feature will no longer be available to new customers starting August 31, 2026. If you would like to use the detect feature, sign up prior to August 31, 2026. To learn about alternatives to IoT Device Defender detect, see IoT Device Defender detect feature availability change in the IoT Device Defender Developer Guide. There is no change to IoT Device Defender audit availability.</p>
+    #          </note>
+    #          <p>Lists the Device Defender security profiles
     #       you've
     #       created. You can filter security profiles by dimension or custom metric.</p>
     #          <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">ListSecurityProfiles</a> action.</p>
@@ -9472,7 +9732,10 @@ module Aws::IoT
       request.send_request(options)
     end
 
-    # <p>Lists the Device Defender security profiles attached to a target (thing group).</p>
+    # <note>
+    #             <p>The IoT Device Defender detect feature will no longer be available to new customers starting August 31, 2026. If you would like to use the detect feature, sign up prior to August 31, 2026. To learn about alternatives to IoT Device Defender detect, see IoT Device Defender detect feature availability change in the IoT Device Defender Developer Guide. There is no change to IoT Device Defender audit availability.</p>
+    #          </note>
+    #          <p>Lists the Device Defender security profiles attached to a target (thing group).</p>
     #          <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">ListSecurityProfilesForTarget</a> action.</p>
     # @param [Hash, Types::ListSecurityProfilesForTargetRequest] params
     # @option params [String] :next_token
@@ -9612,7 +9875,10 @@ module Aws::IoT
       request.send_request(options)
     end
 
-    # <p>Lists the targets (thing groups) associated with a given Device Defender security profile.</p>
+    # <note>
+    #             <p>The IoT Device Defender detect feature will no longer be available to new customers starting August 31, 2026. If you would like to use the detect feature, sign up prior to August 31, 2026. To learn about alternatives to IoT Device Defender detect, see IoT Device Defender detect feature availability change in the IoT Device Defender Developer Guide. There is no change to IoT Device Defender audit availability.</p>
+    #          </note>
+    #          <p>Lists the targets (thing groups) associated with a given Device Defender security profile.</p>
     #          <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">ListTargetsForSecurityProfile</a> action.</p>
     # @param [Hash, Types::ListTargetsForSecurityProfileRequest] params
     # @option params [String] :security_profile_name
@@ -9776,7 +10042,7 @@ module Aws::IoT
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>EXCLUSIVE_THING</code> - Attaches the specified principal to the specified thing, exclusively. 
+    #                     <code>EXCLUSIVE_THING</code> - Attaches the specified principal to the specified thing, exclusively.
     #   						The thing will be the only thing that’s attached to the principal.</p>
     #               </li>
     #            </ul>
@@ -10093,6 +10359,13 @@ module Aws::IoT
     #           security_groups: ["SecurityGroupId"],
     #           vpc_id: "VpcId",
     #           role_arn: "AwsArn"
+    #         },
+    #         influx_db_summary: {
+    #           endpoint: "Url",
+    #           influx_db_version: "V2" # One of: ["V2", "V3"],
+    #           secret_id: "InfluxDBSecretId",
+    #           secret_type: "SecretString" # One of: ["SecretString", "SecretBinary"],
+    #           secret_key: "InfluxDBSecretKey"
     #         }
     #       }
     #     ],
@@ -10151,7 +10424,8 @@ module Aws::IoT
     # @param [Hash, Types::ListV2LoggingLevelsRequest] params
     # @option params [String] :target_type
     #   <p>The type of resource for which you are configuring logging. Must be
-    #               <code>THING_Group</code>.</p>
+    #               <code>DEFAULT</code>, <code>THING_GROUP</code>, <code>CLIENT_ID</code>,
+    #               <code>SOURCE_IP</code>, or <code>PRINCIPAL_ID</code>.</p>
     # @option params [String] :next_token
     #   <p>To retrieve the next set of results, the <code>nextToken</code>
     #            value from a previous response; otherwise <b>null</b> to receive
@@ -10186,8 +10460,11 @@ module Aws::IoT
       request.send_request(options)
     end
 
-    # <p>Lists the Device Defender security profile violations discovered during the given time period. 
-    #       You can use filters to limit the results to those alerts issued for a particular security profile, 
+    # <note>
+    #             <p>The IoT Device Defender detect feature will no longer be available to new customers starting August 31, 2026. If you would like to use the detect feature, sign up prior to August 31, 2026. To learn about alternatives to IoT Device Defender detect, see IoT Device Defender detect feature availability change in the IoT Device Defender Developer Guide. There is no change to IoT Device Defender audit availability.</p>
+    #          </note>
+    #          <p>Lists the Device Defender security profile violations discovered during the given time period.
+    #       You can use filters to limit the results to those alerts issued for a particular security profile,
     #       behavior, or thing (device).</p>
     #          <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">ListViolationEvents</a> action.</p>
     # @param [Hash, Types::ListViolationEventsRequest] params
@@ -10290,7 +10567,10 @@ module Aws::IoT
       request.send_request(options)
     end
 
-    # <p>Set a verification state and provide a description of that verification state on a violation (detect alarm).</p>
+    # <note>
+    #             <p>The IoT Device Defender detect feature will no longer be available to new customers starting August 31, 2026. If you would like to use the detect feature, sign up prior to August 31, 2026. To learn about alternatives to IoT Device Defender detect, see IoT Device Defender detect feature availability change in the IoT Device Defender Developer Guide. There is no change to IoT Device Defender audit availability.</p>
+    #          </note>
+    #          <p>Set a verification state and provide a description of that verification state on a violation (detect alarm).</p>
     # @param [Hash, Types::PutVerificationStateOnViolationRequest] params
     # @option params [String] :violation_id
     #   <p>The violation ID.</p>
@@ -10351,7 +10631,7 @@ module Aws::IoT
     #            If the <code>verificationCertificate</code> field is provided, set <code>certificateMode</code> to be <code>DEFAULT</code>.
     #            When <code>certificateMode</code> is not provided, it defaults to <code>DEFAULT</code>.
     #            All the device certificates that are registered using this CA will be registered in the same certificate mode as the CA.
-    #            For more information about certificate mode for device certificates, see 
+    #            For more information about certificate mode for device certificates, see
     #            <a href="https://docs.aws.amazon.com/iot/latest/apireference/API_CertificateDescription.html#iot-Type-CertificateDescription-certificateMode">
     #               certificate mode</a>.
     #         </p>
@@ -10402,7 +10682,7 @@ module Aws::IoT
     #            <p>Valid values: <code>ACTIVE | INACTIVE</code>
     #            </p>
     # @option params [String] :status
-    #   <p>The status of the register certificate request. Valid values that you can use include 
+    #   <p>The status of the register certificate request. Valid values that you can use include
     #            <code>ACTIVE</code>, <code>INACTIVE</code>, and <code>REVOKED</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -10425,7 +10705,7 @@ module Aws::IoT
       request.send_request(options)
     end
 
-    # <p>Register a certificate that does not have a certificate authority (CA). 
+    # <p>Register a certificate that does not have a certificate authority (CA).
     #          For supported certificates, consult <a href="https://docs.aws.amazon.com/iot/latest/developerguide/x509-client-certs.html#x509-cert-algorithms">
     #          Certificate signing algorithms supported by IoT</a>.
     #       </p>
@@ -10769,6 +11049,13 @@ module Aws::IoT
     #                 service_name: "ServiceName", # required
     #                 role_arn: "AwsArn", # required
     #               }
+    #             },
+    #             enable_batching: false,
+    #             batch_config: {
+    #               max_batch_open_ms: 1,
+    #               max_batch_size: 1,
+    #               max_batch_size_bytes: 1,
+    #               batch_across_topics: false
     #             }
     #           },
     #           kafka: {
@@ -10803,6 +11090,23 @@ module Aws::IoT
     #             },
     #             latitude: "String", # required
     #             longitude: "String", # required
+    #           },
+    #           influx_db: {
+    #             destination_arn: "AwsArn", # required
+    #             role_arn: "AwsArn", # required
+    #             database_name: "InfluxDBDatabaseName", # required
+    #             table_name: "InfluxDBTableName", # required
+    #             organization: "InfluxDBOrganization",
+    #             tags: {
+    #               "InfluxDBTagName" => "InfluxDBTagValue"
+    #             },
+    #             timestamp_unit: "s" # One of: ["s", "ms", "us", "ns"],
+    #             batch_config: {
+    #               max_batch_size: 1,
+    #               max_batch_open_ms: 1,
+    #               max_batch_size_bytes: 1,
+    #               batch_across_topics: false
+    #             }
     #           }
     #         }
     #       ],
@@ -10979,6 +11283,13 @@ module Aws::IoT
     #               service_name: "ServiceName", # required
     #               role_arn: "AwsArn", # required
     #             }
+    #           },
+    #           enable_batching: false,
+    #           batch_config: {
+    #             max_batch_open_ms: 1,
+    #             max_batch_size: 1,
+    #             max_batch_size_bytes: 1,
+    #             batch_across_topics: false
     #           }
     #         },
     #         kafka: {
@@ -11013,6 +11324,23 @@ module Aws::IoT
     #           },
     #           latitude: "String", # required
     #           longitude: "String", # required
+    #         },
+    #         influx_db: {
+    #           destination_arn: "AwsArn", # required
+    #           role_arn: "AwsArn", # required
+    #           database_name: "InfluxDBDatabaseName", # required
+    #           table_name: "InfluxDBTableName", # required
+    #           organization: "InfluxDBOrganization",
+    #           tags: {
+    #             "InfluxDBTagName" => "InfluxDBTagValue"
+    #           },
+    #           timestamp_unit: "s" # One of: ["s", "ms", "us", "ns"],
+    #           batch_config: {
+    #             max_batch_size: 1,
+    #             max_batch_open_ms: 1,
+    #             max_batch_size_bytes: 1,
+    #             batch_across_topics: false
+    #           }
     #         }
     #       }
     #     }
@@ -11028,7 +11356,8 @@ module Aws::IoT
       request.send_request(options)
     end
 
-    # <p>The query search index.</p>
+    # <p>Searches the specified index.</p>
+    #          <p>If a device has never connected to IoT Core or was disconnected for more than 1 hour before fleet indexing's <code>thingConnectivityIndexingMode</code> was enabled, the <code>connectivity</code> object for this device in the response will have the <code>connected</code> field set to <code>false</code> with no additional session details.</p>
     #          <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">SearchIndex</a> action.</p>
     # @param [Hash, Types::SearchIndexRequest] params
     # @option params [String] :index_name
@@ -11076,7 +11405,11 @@ module Aws::IoT
     #         connectivity: {
     #           connected: false,
     #           timestamp: 1,
-    #           disconnect_reason: "DisconnectReason"
+    #           disconnect_reason: "DisconnectReason",
+    #           keep_alive_duration: 1,
+    #           clean_session: false,
+    #           session_expiry: 1,
+    #           client_id: "ClientId"
     #         }
     #       }
     #     ],
@@ -11208,11 +11541,22 @@ module Aws::IoT
     #   <p>The default logging level.</p>
     # @option params [Boolean] :disable_all_logs
     #   <p>If true all logs are disabled. The default is false.</p>
+    # @option params [Array<Types::LogEventConfiguration>] :event_configurations
+    #   <p>
+    #            The list of event configurations that override account-level logging.
+    #         </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     role_arn: "AwsArn",
     #     default_log_level: "DEBUG" # One of: ["DEBUG", "INFO", "ERROR", "WARN", "DISABLED"],
-    #     disable_all_logs: false
+    #     disable_all_logs: false,
+    #     event_configurations: [
+    #       {
+    #         event_type: "LogEventType", # required
+    #         log_level: "DEBUG" # One of: ["DEBUG", "INFO", "ERROR", "WARN", "DISABLED"],
+    #         log_destination: "LogDestination"
+    #       }
+    #     ]
     #   }
     #   options = {}
     #   response = client.set_v2_logging_options(params, options)
@@ -11267,7 +11611,10 @@ module Aws::IoT
       request.send_request(options)
     end
 
-    # <p>
+    # <note>
+    #             <p>The IoT Device Defender detect feature will no longer be available to new customers starting August 31, 2026. If you would like to use the detect feature, sign up prior to August 31, 2026. To learn about alternatives to IoT Device Defender detect, see IoT Device Defender detect feature availability change in the IoT Device Defender Developer Guide. There is no change to IoT Device Defender audit availability.</p>
+    #          </note>
+    #          <p>
     #       Starts a Device Defender ML Detect mitigation actions task.
     #     </p>
     #          <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">StartDetectMitigationActionsTask</a> action.</p>
@@ -11334,9 +11681,9 @@ module Aws::IoT
     #          <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">StartOnDemandAuditTask</a> action.</p>
     # @param [Hash, Types::StartOnDemandAuditTaskRequest] params
     # @option params [Array<String>] :target_check_names
-    #   <p>Which checks are performed during the audit. The checks you specify must be enabled 
-    #               for your account or an exception occurs. Use <code>DescribeAccountAuditConfiguration</code> 
-    #               to see the list of all checks, including those that are enabled or 
+    #   <p>Which checks are performed during the audit. The checks you specify must be enabled
+    #               for your account or an exception occurs. Use <code>DescribeAccountAuditConfiguration</code>
+    #               to see the list of all checks, including those that are enabled or
     #               <code>UpdateAccountAuditConfiguration</code> to select which checks are enabled.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -11443,7 +11790,7 @@ module Aws::IoT
     #          <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">TestAuthorization</a> action.</p>
     # @param [Hash, Types::TestAuthorizationRequest] params
     # @option params [String] :principal
-    #   <p>The principal. Valid principals are CertificateArn (arn:aws:iot:<i>region</i>:<i>accountId</i>:cert/<i>certificateId</i>), thingGroupArn (arn:aws:iot:<i>region</i>:<i>accountId</i>:thinggroup/<i>groupName</i>) and CognitoId (<i>region</i>:<i>id</i>).</p>
+    #   <p>The principal. Valid principals are CertificateArn (arn:aws:iot:<i>region</i>:<i>accountId</i>:cert/<i>certificateId</i>) and CognitoId (<i>region</i>:<i>id</i>).</p>
     # @option params [String] :cognito_identity_pool_id
     #   <p>The Cognito identity pool ID.</p>
     # @option params [Array<Types::AuthInfo>] :auth_infos
@@ -11576,24 +11923,23 @@ module Aws::IoT
 
     # <p>Transfers the specified certificate to the specified Amazon Web Services account.</p>
     #          <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">TransferCertificate</a> action.</p>
-    #          <p>You can cancel the transfer until it is acknowledged by the recipient.</p>
-    #          <p>No notification is sent to the transfer destination's account. It's up to the caller
-    #          to notify the transfer target.</p>
+    #          <p>You can cancel the transfer until it is accepted by the recipient.</p>
+    #          <p>No notification is sent to the transfer destination's account. The caller is responsible for notifying the transfer target.</p>
     #          <p>The certificate being transferred must not be in the <code>ACTIVE</code> state. You can use the
     #          <a>UpdateCertificate</a> action to deactivate it.</p>
     #          <p>The certificate must not have any policies attached to it. You can use the
     #          <a>DetachPolicy</a> action to detach them.</p>
     #          <p>
-    #             <b>Customer managed key behavior:</b> When you use a customer managed key to secure your data and then transfer
-    #          the key to a customer in a different account using the <a>TransferCertificate</a> operation, the certificates will no longer be protected by their 
-    #          customer managed key configuration. During the transfer process, certificates are encrypted using IoT owned keys.</p>
-    #          <p>While a certificate is in the <b>PENDING_TRANSFER</b> state, it's always protected by IoT owned keys, regardless of the customer managed key configuration of either the source or destination account. </p>
+    #             <b>Customer managed key behavior:</b> When you use a customer managed key to encrypt your data and then transfer
+    #          the certificate to a customer in a different account using the <code>TransferCertificate</code> operation, the certificates will no longer be encrypted by their
+    #          customer managed key configuration. During the transfer process, certificates are encrypted using Amazon Web Services IoT Core owned keys.</p>
+    #          <p>While a certificate is in the <b>PENDING_TRANSFER</b> state, it's always protected by Amazon Web Services IoT Core owned keys, regardless of the customer managed key configuration of either the source or destination account. </p>
     #          <p>Once the transfer is completed through <a>AcceptCertificateTransfer</a>, <a>RejectCertificateTransfer</a>, or
     #          <a>CancelCertificateTransfer</a>, the certificate will be protected by the customer managed key configuration of the account that owns
     #          the certificate after the transfer operation:</p>
     #          <ul>
     #             <li>
-    #                <p>If the transfer is accepted: The certificate is protected by the destination account's customer managed key configuration.</p>
+    #                <p>If the transfer is accepted: The certificate is encrypted by the target account's customer managed key configuration.</p>
     #             </li>
     #             <li>
     #                <p>If the transfer is rejected or cancelled: The certificate is protected by the source account's customer managed key configuration.</p>
@@ -11666,10 +12012,10 @@ module Aws::IoT
     # @option params [Hash<String, Types::AuditNotificationTarget>] :audit_notification_target_configurations
     #   <p>Information about the targets to which audit notifications are sent.</p>
     # @option params [Hash<String, Types::AuditCheckConfiguration>] :audit_check_configurations
-    #   <p>Specifies which audit checks are enabled and disabled for this account. Use 
-    #               <code>DescribeAccountAuditConfiguration</code> to see the list of all checks, including those 
+    #   <p>Specifies which audit checks are enabled and disabled for this account. Use
+    #               <code>DescribeAccountAuditConfiguration</code> to see the list of all checks, including those
     #               that are currently enabled.</p>
-    #            <p>Some data collection might start immediately when certain checks are enabled. 
+    #            <p>Some data collection might start immediately when certain checks are enabled.
     #               When a check is disabled, any data collected so far in relation to the check is deleted.</p>
     #            <p>You
     #         cannot
@@ -11714,9 +12060,9 @@ module Aws::IoT
     #     </p>
     # @param [Hash, Types::UpdateAuditSuppressionRequest] params
     # @option params [String] :check_name
-    #   <p>An audit check name. Checks must be enabled 
+    #   <p>An audit check name. Checks must be enabled
     #           for your account. (Use <code>DescribeAccountAuditConfiguration</code> to see the list
-    #           of all checks, including those that are enabled or use <code>UpdateAccountAuditConfiguration</code> 
+    #           of all checks, including those that are enabled or use <code>UpdateAccountAuditConfiguration</code>
     #           to select which checks are enabled.)</p>
     # @option params [Types::ResourceIdentifier] :resource_identifier
     #   <p>Information that identifies the noncompliant resource.</p>
@@ -11900,7 +12246,7 @@ module Aws::IoT
     #   <p>The new status.</p>
     #            <p>
     #               <b>Note:</b> Setting the status to PENDING_TRANSFER  or PENDING_ACTIVATION will result
-    #            in an exception being thrown. PENDING_TRANSFER and PENDING_ACTIVATION are statuses used internally by IoT. They 
+    #            in an exception being thrown. PENDING_TRANSFER and PENDING_ACTIVATION are statuses used internally by IoT. They
     #            are not intended for developer use.</p>
     #            <p>
     #               <b>Note:</b> The status value REGISTER_INACTIVE is deprecated and
@@ -11930,7 +12276,7 @@ module Aws::IoT
     # @option params [String] :lambda_function_arn
     #   <p>The Lambda function ARN that's associated with the certificate provider.</p>
     # @option params [Array<String>] :account_default_for_operations
-    #   <p>A list of the operations that the certificate provider will use to generate certificates. 
+    #   <p>A list of the operations that the certificate provider will use to generate certificates.
     #            Valid value: <code>CreateCertificateFromCsr</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -11986,7 +12332,10 @@ module Aws::IoT
       request.send_request(options)
     end
 
-    # <p>Updates a
+    # <note>
+    #             <p>The IoT Device Defender detect feature will no longer be available to new customers starting August 31, 2026. If you would like to use the detect feature, sign up prior to August 31, 2026. To learn about alternatives to IoT Device Defender detect, see IoT Device Defender detect feature availability change in the IoT Device Defender Developer Guide. There is no change to IoT Device Defender audit availability.</p>
+    #          </note>
+    #          <p>Updates a
     #       Device Defender detect custom metric. </p>
     #          <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">UpdateCustomMetric</a> action.</p>
     # @param [Hash, Types::UpdateCustomMetricRequest] params
@@ -12025,7 +12374,10 @@ module Aws::IoT
       request.send_request(options)
     end
 
-    # <p>Updates the definition for a dimension. You
+    # <note>
+    #             <p>The IoT Device Defender detect feature will no longer be available to new customers starting August 31, 2026. If you would like to use the detect feature, sign up prior to August 31, 2026. To learn about alternatives to IoT Device Defender detect, see IoT Device Defender detect feature availability change in the IoT Device Defender Developer Guide. There is no change to IoT Device Defender audit availability.</p>
+    #          </note>
+    #          <p>Updates the definition for a dimension. You
     #       cannot
     #       change the type of a dimension after
     #       it is created (you can delete it and
@@ -12134,7 +12486,7 @@ module Aws::IoT
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>DEFAULT</code> - Use a combination of port and Application Layer Protocol Negotiation (ALPN) to specify application_layer protocol. 
+    #                     <code>DEFAULT</code> - Use a combination of port and Application Layer Protocol Negotiation (ALPN) to specify application_layer protocol.
     #                  For more information, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/protocols.html">Device communication protocols</a>.</p>
     #               </li>
     #            </ul>
@@ -12229,21 +12581,20 @@ module Aws::IoT
       request.send_request(options)
     end
 
-    # <p>Updates the encryption configuration. By default, all Amazon Web Services IoT Core data at rest is
-    #          encrypted using Amazon Web Services owned keys. Amazon Web Services IoT Core also supports symmetric customer managed keys
-    #          from Amazon Web Services Key Management Service (KMS). With customer managed keys, you create, own, and
-    #          manage the KMS keys in your Amazon Web Services account. For more information, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/data-encryption.html">Data
-    #             encryption</a> in the <i>Amazon Web Services IoT Core Developer Guide</i>.</p>
+    # <p>Updates the encryption configuration. By default, Amazon Web Services IoT Core encrypts your data at rest using Amazon Web Services owned keys. Amazon Web Services IoT Core also supports symmetric customer managed keys
+    #          from Key Management Service (KMS). With customer managed keys, you create, own, and
+    #          manage the KMS keys in your Amazon Web Services account. </p>
+    #          <p>Before using this API, you must set up permissions for Amazon Web Services IoT Core to access KMS. For more information, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/encryption-at-rest.html">Data encryption at rest</a> in the <i>Amazon Web Services IoT Core Developer Guide</i>.</p>
     # @param [Hash, Types::UpdateEncryptionConfigurationRequest] params
     # @option params [String] :encryption_type
-    #   <p>The type of the Amazon Web Services Key Management Service (KMS) key.</p>
+    #   <p>The type of the KMS key.</p>
     # @option params [String] :kms_key_arn
-    #   <p>The ARN of the customer-managed KMS key.</p>
+    #   <p>The ARN of the customer managedKMS key.</p>
     # @option params [String] :kms_access_role_arn
     #   <p>The Amazon Resource Name (ARN) of the IAM role assumed by Amazon Web Services IoT Core to call KMS on
     #            behalf of the customer.</p>
     # @example UpdateEncryptionConfiguration example
-    #   # This operation updates the encryption configuration. 
+    #   # This operation updates the encryption configuration.
     #   params = {
     #     encryption_type: CUSTOMER_MANAGED_KMS_KEY,
     #     kms_key_arn: "arn:aws:iam:us-west-2:111122223333:role/myrole",
@@ -12378,7 +12729,10 @@ module Aws::IoT
     #             name: "TargetFieldName",
     #             order: "LatLon" # One of: ["LatLon", "LonLat"]
     #           }
-    #         ]
+    #         ],
+    #         connectivity: {
+    #           include_socket_information: ["GET_THING_CONNECTIVITY_DATA" # One of: ["GET_THING_CONNECTIVITY_DATA"]]
+    #         }
     #       }
     #     },
     #     thing_group_indexing_configuration: {
@@ -12559,13 +12913,13 @@ module Aws::IoT
     #               <b>Note:</b> You cannot name a <code>defaultVersion</code>
     #          and set <code>unsetDefaultVersion</code> equal to <code>true</code> at the same time.</p>
     # @option params [Boolean] :unset_default_version
-    #   <p>Indicates whether you want to remove the named default package version from the software package. 
+    #   <p>Indicates whether you want to remove the named default package version from the software package.
     #         Set as <code>true</code> to remove the default package version. </p>
     #            <p>
     #               <b>Note:</b> You cannot name a <code>defaultVersion</code>
     #          and set <code>unsetDefaultVersion</code> equal to <code>true</code> at the same time.</p>
     # @option params [String] :client_token
-    #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. 
+    #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
     #         Don't reuse this client token if a new idempotent request is required.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -12592,7 +12946,7 @@ module Aws::IoT
     # @option params [Types::VersionUpdateByJobsConfig] :version_update_by_jobs_config
     #   <p>Configuration to manage job's package version reporting. This updates the thing's reserved named shadow that the job targets.</p>
     # @option params [String] :client_token
-    #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. 
+    #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
     #         Don't reuse this client token if a new idempotent request is required.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -12636,7 +12990,7 @@ module Aws::IoT
     #   <p>The inline job document associated with a software package version used for a quick job
     #            deployment.</p>
     # @option params [String] :client_token
-    #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. 
+    #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
     #         Don't reuse this client token if a new idempotent request is required.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -12775,9 +13129,9 @@ module Aws::IoT
     #         be one of <code>SUN</code>, <code>MON</code>, <code>TUE</code>, <code>WED</code>, <code>THU</code>, <code>FRI</code>, or <code>SAT</code>. This field is required if the
     #               "frequency" parameter is set to <code>WEEKLY</code> or <code>BIWEEKLY</code>.</p>
     # @option params [Array<String>] :target_check_names
-    #   <p>Which checks are performed during the scheduled audit. Checks must be enabled 
+    #   <p>Which checks are performed during the scheduled audit. Checks must be enabled
     #               for your account. (Use <code>DescribeAccountAuditConfiguration</code> to see the list
-    #               of all checks, including those that are enabled or use <code>UpdateAccountAuditConfiguration</code> 
+    #               of all checks, including those that are enabled or use <code>UpdateAccountAuditConfiguration</code>
     #               to select which checks are enabled.)</p>
     # @option params [String] :scheduled_audit_name
     #   <p>The name of the scheduled audit. (Max. 128 chars)</p>
@@ -12802,7 +13156,10 @@ module Aws::IoT
       request.send_request(options)
     end
 
-    # <p>Updates a Device Defender security profile.</p>
+    # <note>
+    #             <p>The IoT Device Defender detect feature will no longer be available to new customers starting August 31, 2026. If you would like to use the detect feature, sign up prior to August 31, 2026. To learn about alternatives to IoT Device Defender detect, see IoT Device Defender detect feature availability change in the IoT Device Defender Developer Guide. There is no change to IoT Device Defender audit availability.</p>
+    #          </note>
+    #          <p>Updates a Device Defender security profile.</p>
     #          <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">UpdateSecurityProfile</a> action.</p>
     # @param [Hash, Types::UpdateSecurityProfileRequest] params
     # @option params [String] :security_profile_name
@@ -12827,14 +13184,14 @@ module Aws::IoT
     # @option params [Array<Types::MetricToRetain>] :additional_metrics_to_retain_v2
     #   <p>A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's behaviors, but it is also retained for any metric specified here. Can be used with custom metrics; cannot be used with dimensions.</p>
     # @option params [Boolean] :delete_behaviors
-    #   <p>If true, delete all <code>behaviors</code> defined for this security profile. 
+    #   <p>If true, delete all <code>behaviors</code> defined for this security profile.
     #           If any <code>behaviors</code> are defined in the current invocation, an exception occurs.</p>
     # @option params [Boolean] :delete_alert_targets
-    #   <p>If true, delete all <code>alertTargets</code> defined for this security profile. 
+    #   <p>If true, delete all <code>alertTargets</code> defined for this security profile.
     #           If any <code>alertTargets</code> are defined in the current invocation, an exception occurs.</p>
     # @option params [Boolean] :delete_additional_metrics_to_retain
-    #   <p>If true, delete all <code>additionalMetricsToRetain</code> defined for this 
-    #           security profile. If any <code>additionalMetricsToRetain</code> are defined in the current 
+    #   <p>If true, delete all <code>additionalMetricsToRetain</code> defined for this
+    #           security profile. If any <code>additionalMetricsToRetain</code> are defined in the current
     #           invocation, an exception occurs.</p>
     # @option params [Integer] :expected_version
     #   <p>The expected version of the security profile. A new version is generated whenever
@@ -13228,7 +13585,10 @@ module Aws::IoT
       request.send_request(options)
     end
 
-    # <p>Validates a Device Defender security profile behaviors specification.</p>
+    # <note>
+    #             <p>The IoT Device Defender detect feature will no longer be available to new customers starting August 31, 2026. If you would like to use the detect feature, sign up prior to August 31, 2026. To learn about alternatives to IoT Device Defender detect, see IoT Device Defender detect feature availability change in the IoT Device Defender Developer Guide. There is no change to IoT Device Defender audit availability.</p>
+    #          </note>
+    #          <p>Validates a Device Defender security profile behaviors specification.</p>
     #          <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">ValidateSecurityProfileBehaviors</a> action.</p>
     # @param [Hash, Types::ValidateSecurityProfileBehaviorsRequest] params
     # @option params [Array<Types::Behavior>] :behaviors

@@ -71,6 +71,10 @@ module Aws::Billing
           key: String,
           values: untyped
         },
+        cost_categories: {
+          key: String,
+          values: untyped
+        },
         time_range: {
           begin_date_inclusive: Time,
           end_date_inclusive: untyped
@@ -103,6 +107,23 @@ module Aws::Billing
       ?source_views: Array[String]
     ) -> _DisassociateSourceViewsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateSourceViewsResponse
 
+    interface _GetBillingPreferencesResponse
+      include Smithy::Client::_Response[Types::GetBillingPreferencesResponse]
+      def billing_preferences: () -> Array[Types::BillingPreferenceSummary]?
+      def next_token: () -> String?
+    end
+    def get_billing_preferences: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?features: Array[String],
+      ?filters: Array[
+        {
+          name: String,
+          value: Array[String]
+        }
+      ]
+    ) -> _GetBillingPreferencesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBillingPreferencesResponse
+
     interface _GetBillingViewResponse
       include Smithy::Client::_Response[Types::GetBillingViewResponse]
       def billing_view: () -> Types::BillingViewElement?
@@ -110,6 +131,74 @@ module Aws::Billing
     def get_billing_view: (
       ?arn: String
     ) -> _GetBillingViewResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBillingViewResponse
+
+    interface _GetCreditAllocationHistoryResponse
+      include Smithy::Client::_Response[Types::GetCreditAllocationHistoryResponse]
+      def credit_allocation_history_list: () -> Array[Types::CreditAllocationHistoryEntry]?
+      def partial_results: () -> bool?
+      def failed_months: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def get_credit_allocation_history: (
+      ?account_id: String,
+      ?credit_id: Integer,
+      ?start_date: Time,
+      ?end_date: Time,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _GetCreditAllocationHistoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCreditAllocationHistoryResponse
+
+    interface _GetCreditsResponse
+      include Smithy::Client::_Response[Types::GetCreditsResponse]
+      def credits: () -> Array[Types::CreditData]?
+    end
+    def get_credits: (
+      ?account_id: String,
+      ?start_date: Time,
+      ?end_date: Time,
+      ?payer_account_flag: bool
+    ) -> _GetCreditsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCreditsResponse
+
+    interface _GetEnterpriseSupportChargeSummaryResponse
+      include Smithy::Client::_Response[Types::GetEnterpriseSupportChargeSummaryResponse]
+      def payer_account_id: () -> String?
+      def billing_month: () -> String?
+      def billing_period_start_date: () -> Time?
+      def billing_period_end_date: () -> Time?
+      def is_estimated: () -> bool?
+      def bill_date: () -> Time?
+      def support_charge: () -> String?
+      def total_support_charge: () -> String?
+      def support_discount: () -> String?
+      def total_support_eligible_spend: () -> String?
+      def total_support_eligible_usage_spend: () -> String?
+      def total_support_eligible_reserved_instance_spend: () -> String?
+      def total_support_eligible_savings_plan_spend: () -> String?
+      def support_charge_percentage: () -> String?
+      def support_effective_pricing_plan: () -> Types::PricingPlan?
+    end
+    def get_enterprise_support_charge_summary: (
+      ?billing_month: String
+    ) -> _GetEnterpriseSupportChargeSummaryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEnterpriseSupportChargeSummaryResponse
+
+    interface _GetEnterpriseSupportContractDetailsResponse
+      include Smithy::Client::_Response[Types::GetEnterpriseSupportContractDetailsResponse]
+      def is_contract_active: () -> bool?
+      def support_allocation_method: () -> String?
+      def support_reserved_instance_amortization_start_date: () -> Time?
+      def support_reserved_instance_treatment_method: () -> String?
+      def support_savings_plans_amortization_start_date: () -> Time?
+      def support_savings_plans_treatment_method: () -> String?
+      def support_prorate_start_date: () -> Time?
+      def contract_payer_account_ids: () -> Array[Types::ContractAccount]?
+      def charged_payer_account_ids: () -> Array[Types::ChargeAccount]?
+      def additional_support_charge: () -> Array[Types::AdditionalCharge]?
+      def additional_support_eligible_usage_spend: () -> Array[Types::AdditionalCharge]?
+      def pricing_plans: () -> Array[Types::PricingPlan]?
+    end
+    def get_enterprise_support_contract_details: (
+      ?billing_month: String
+    ) -> _GetEnterpriseSupportContractDetailsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEnterpriseSupportContractDetailsResponse
 
     interface _GetResourcePolicyResponse
       include Smithy::Client::_Response[Types::GetResourcePolicyResponse]
@@ -119,6 +208,21 @@ module Aws::Billing
     def get_resource_policy: (
       ?resource_arn: String
     ) -> _GetResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResourcePolicyResponse
+
+    interface _ListBillingViewSegmentsResponse
+      include Smithy::Client::_Response[Types::ListBillingViewSegmentsResponse]
+      def items: () -> Array[Types::BillingViewSegmentsListElement]?
+      def next_token: () -> String?
+    end
+    def list_billing_view_segments: (
+      ?time_range: {
+        begin_date_inclusive: Time,
+        end_date_exclusive: untyped
+      },
+      ?arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListBillingViewSegmentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBillingViewSegmentsResponse
 
     interface _ListBillingViewsResponse
       include Smithy::Client::_Response[Types::ListBillingViewsResponse]
@@ -132,11 +236,60 @@ module Aws::Billing
       },
       ?arns: Array[String],
       ?billing_view_types: Array[String],
+      ?names: Array[
+        {
+          search_option: String,
+          search_value: String
+        }
+      ],
       ?owner_account_id: String,
       ?source_account_id: String,
       ?max_results: Integer,
       ?next_token: String
     ) -> _ListBillingViewsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBillingViewsResponse
+
+    interface _ListBusinessSupportAccountChargesResponse
+      include Smithy::Client::_Response[Types::ListBusinessSupportAccountChargesResponse]
+      def billing_month: () -> String?
+      def is_estimated: () -> bool?
+      def total_support_charge: () -> String?
+      def total_support_eligible_spend: () -> String?
+      def account_count: () -> Integer?
+      def account_charges: () -> Array[Types::BusinessSupportAccountCharge]?
+      def next_token: () -> String?
+    end
+    def list_business_support_account_charges: (
+      ?billing_month: String,
+      ?account_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListBusinessSupportAccountChargesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBusinessSupportAccountChargesResponse
+
+    interface _ListBusinessSupportSubscriptionHistoryResponse
+      include Smithy::Client::_Response[Types::ListBusinessSupportSubscriptionHistoryResponse]
+      def subscription_contracts: () -> Array[Types::BusinessSupportSubscriptionContract]?
+      def next_token: () -> String?
+    end
+    def list_business_support_subscription_history: (
+      ?billing_month: String,
+      ?account_id: String,
+      ?start_date: Time,
+      ?end_date: Time,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListBusinessSupportSubscriptionHistoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBusinessSupportSubscriptionHistoryResponse
+
+    interface _ListEnterpriseSupportLinkedAccountChargesResponse
+      include Smithy::Client::_Response[Types::ListEnterpriseSupportLinkedAccountChargesResponse]
+      def linked_account: () -> Array[Types::LinkedAccountCharge]?
+      def next_token: () -> String?
+    end
+    def list_enterprise_support_linked_account_charges: (
+      ?billing_month: String,
+      ?account_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListEnterpriseSupportLinkedAccountChargesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEnterpriseSupportLinkedAccountChargesResponse
 
     interface _ListSourceViewsForBillingViewResponse
       include Smithy::Client::_Response[Types::ListSourceViewsForBillingViewResponse]
@@ -156,6 +309,13 @@ module Aws::Billing
     def list_tags_for_resource: (
       ?resource_arn: String
     ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _RedeemCreditsResponse
+      include Smithy::Client::_Response[Types::RedeemCreditsResponse]
+    end
+    def redeem_credits: (
+      ?promo_code: String
+    ) -> _RedeemCreditsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RedeemCreditsResponse
 
     interface _TagResourceResponse
       include Smithy::Client::_Response[Types::TagResourceResponse]
@@ -178,6 +338,19 @@ module Aws::Billing
       ?resource_tag_keys: Array[String]
     ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
 
+    interface _UpdateBillingPreferencesResponse
+      include Smithy::Client::_Response[Types::UpdateBillingPreferencesResponse]
+    end
+    def update_billing_preferences: (
+      ?feature: String,
+      ?billing_preferences_per_key: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _UpdateBillingPreferencesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateBillingPreferencesResponse
+
     interface _UpdateBillingViewResponse
       include Smithy::Client::_Response[Types::UpdateBillingViewResponse]
       def arn: () -> String?
@@ -193,6 +366,10 @@ module Aws::Billing
           values: Array[String]
         },
         tags: {
+          key: String,
+          values: untyped
+        },
+        cost_categories: {
           key: String,
           values: untyped
         },

@@ -85,6 +85,33 @@ module Aws::ServiceQuotas
     end
     def get_association_for_service_quota_template: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAssociationForServiceQuotaTemplateResponse
 
+    interface _GetAutoManagementConfigurationResponse
+      include Smithy::Client::_Response[Types::GetAutoManagementConfigurationResponse]
+      def opt_in_level: () -> String?
+      def opt_in_type: () -> String?
+      def notification_arn: () -> String?
+      def opt_in_status: () -> String?
+      def exclusion_list: () -> Hash[String, Array[Types::QuotaInfo]]?
+    end
+    def get_auto_management_configuration: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAutoManagementConfigurationResponse
+
+    interface _GetQuotaUtilizationReportResponse
+      include Smithy::Client::_Response[Types::GetQuotaUtilizationReportResponse]
+      def report_id: () -> String?
+      def status: () -> String?
+      def generated_at: () -> Time?
+      def total_count: () -> Integer?
+      def quotas: () -> Array[Types::QuotaUtilizationInfo]?
+      def next_token: () -> String?
+      def error_code: () -> String?
+      def error_message: () -> String?
+    end
+    def get_quota_utilization_report: (
+      ?report_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _GetQuotaUtilizationReportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetQuotaUtilizationReportResponse
+
     interface _GetRequestedServiceQuotaChangeResponse
       include Smithy::Client::_Response[Types::GetRequestedServiceQuotaChangeResponse]
       def requested_quota: () -> Types::RequestedServiceQuotaChange?
@@ -217,6 +244,31 @@ module Aws::ServiceQuotas
       ?support_case_allowed: bool
     ) -> _RequestServiceQuotaIncreaseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RequestServiceQuotaIncreaseResponse
 
+    interface _StartAutoManagementResponse
+      include Smithy::Client::_Response[Types::StartAutoManagementResponse]
+    end
+    def start_auto_management: (
+      ?opt_in_level: String,
+      ?opt_in_type: String,
+      ?notification_arn: String,
+      ?exclusion_list: Hash[String,
+        Array[String]
+      ]
+    ) -> _StartAutoManagementResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartAutoManagementResponse
+
+    interface _StartQuotaUtilizationReportResponse
+      include Smithy::Client::_Response[Types::StartQuotaUtilizationReportResponse]
+      def report_id: () -> String?
+      def status: () -> String?
+      def message: () -> String?
+    end
+    def start_quota_utilization_report: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartQuotaUtilizationReportResponse
+
+    interface _StopAutoManagementResponse
+      include Smithy::Client::_Response[Types::StopAutoManagementResponse]
+    end
+    def stop_auto_management: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopAutoManagementResponse
+
     interface _TagResourceResponse
       include Smithy::Client::_Response[Types::TagResourceResponse]
     end
@@ -237,5 +289,16 @@ module Aws::ServiceQuotas
       ?resource_arn: String,
       ?tag_keys: Array[String]
     ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateAutoManagementResponse
+      include Smithy::Client::_Response[Types::UpdateAutoManagementResponse]
+    end
+    def update_auto_management: (
+      ?opt_in_type: String,
+      ?notification_arn: String,
+      ?exclusion_list: Hash[String,
+        Array[String]
+      ]
+    ) -> _UpdateAutoManagementResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAutoManagementResponse
   end
 end

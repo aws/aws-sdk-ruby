@@ -182,6 +182,46 @@ module Aws::IoTSiteWise
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The annotation format configuration for bulk import files.</p>
+    class Annotation < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Summary of an application for list operations</p>
+    # @!attribute arn
+    #   <p>ARN of the application</p>
+    #   @return [String]
+    # @!attribute id
+    #   <p>Unique identifier of the application</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>Name of the application</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>Current status of the application</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>Timestamp when the application was created</p>
+    #   @return [Time]
+    # @!attribute workspace_name
+    #   <p>Name of the workspace this application belongs to</p>
+    #   @return [String]
+    class ApplicationSummary < Struct.new(
+      nil,
+      :arn,
+      :id,
+      :name,
+      :status,
+      :created_at,
+      :workspace_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>A filter used to match data bindings based on a specific asset. This filter identifies all
     #       computation models referencing a particular asset in their data bindings.</p>
     # @!attribute asset_id
@@ -593,6 +633,7 @@ module Aws::IoTSiteWise
     #   @return [String]
     # @!attribute data_type
     #   <p>The data type of the asset model property.</p>
+    #            <p>The <code>VIDEO</code>, <code>ANNOTATION</code>, and <code>JSON</code> data types aren't supported for asset model properties. These types are used only by time series that store data for datasets in a workspace.</p>
     #            <p>If you specify <code>STRUCT</code>, you must also specify <code>dataTypeSpec</code> to
     #         identify the type of the structure for this property.</p>
     #   @return [String]
@@ -677,6 +718,7 @@ module Aws::IoTSiteWise
     #   @return [String]
     # @!attribute data_type
     #   <p>The data type of the property definition.</p>
+    #            <p>The <code>VIDEO</code>, <code>ANNOTATION</code>, and <code>JSON</code> data types aren't supported for asset model properties. These types are used only by time series that store data for datasets in a workspace.</p>
     #            <p>If you specify <code>STRUCT</code>, you must also specify <code>dataTypeSpec</code> to
     #         identify the type of the structure for this property.</p>
     #   @return [String]
@@ -1145,6 +1187,30 @@ module Aws::IoTSiteWise
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Contains information about a data segment entry to associate with a dataset.</p>
+    # @!attribute source_dataset_id
+    #   <p>The ID of the source dataset that contains the data segment.</p>
+    #   @return [String]
+    # @!attribute time_series_id
+    #   <p>The ID of the time series.</p>
+    #   @return [String]
+    # @!attribute start_timestamp
+    #   <p>The nanosecond-precision start time of the data segment to associate.</p>
+    #   @return [Types::TimeInNanos]
+    # @!attribute end_timestamp
+    #   <p>The nanosecond-precision end time of the data segment to associate.</p>
+    #   @return [Types::TimeInNanos]
+    class AssociateDataSegmentEntry < Struct.new(
+      nil,
+      :source_dataset_id,
+      :time_series_id,
+      :start_timestamp,
+      :end_timestamp,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute alias
     #   <p>The alias that identifies the time series.</p>
     #   @return [String]
@@ -1237,6 +1303,50 @@ module Aws::IoTSiteWise
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute dataset_id
+    #   <p>The ID of the curated dataset to associate data segments with.</p>
+    #   @return [String]
+    # @!attribute workspace_name
+    #   <p>The name of the workspace that contains the dataset.</p>
+    #   @return [String]
+    # @!attribute associate_data_segment_entries
+    #   <p>The list of data segment entries to associate with the dataset.</p>
+    #   @return [Array<Types::AssociateDataSegmentEntry>]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure that the request is
+    #         idempotent. If you retry a request that completed successfully using the same client token,
+    #         the retry succeeds without performing any further actions.</p>
+    #   @return [String]
+    class BatchAssociateDataSegmentsToDatasetRequest < Struct.new(
+      nil,
+      :dataset_id,
+      :workspace_name,
+      :associate_data_segment_entries,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute dataset_id
+    #   <p>The ID of the dataset.</p>
+    #   @return [String]
+    # @!attribute dataset_version
+    #   <p>The version of the dataset after association.</p>
+    #   @return [String]
+    # @!attribute failed_associations
+    #   <p>A list of data segment associations that failed.</p>
+    #   @return [Array<Types::FailedDataSegmentAssociation>]
+    class BatchAssociateDataSegmentsToDatasetResponse < Struct.new(
+      nil,
+      :dataset_id,
+      :dataset_version,
+      :failed_associations,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute project_id
     #   <p>The ID of the project to which to associate the assets.</p>
     #   @return [String]
@@ -1262,6 +1372,94 @@ module Aws::IoTSiteWise
     class BatchAssociateProjectAssetsResponse < Struct.new(
       nil,
       :errors,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute dataset_id
+    #   <p>The ID of the session dataset from which to delete data segments.</p>
+    #   @return [String]
+    # @!attribute workspace_name
+    #   <p>The name of the workspace that contains the dataset.</p>
+    #   @return [String]
+    # @!attribute delete_data_segment_entries
+    #   <p>The list of data segment entries to delete.</p>
+    #   @return [Array<Types::DeleteDataSegmentEntry>]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure that the request is
+    #         idempotent. If you retry a request that completed successfully using the same client token,
+    #         the retry succeeds without performing any further actions.</p>
+    #   @return [String]
+    class BatchDeleteDatasetDataSegmentsRequest < Struct.new(
+      nil,
+      :dataset_id,
+      :workspace_name,
+      :delete_data_segment_entries,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute dataset_id
+    #   <p>The ID of the dataset.</p>
+    #   @return [String]
+    # @!attribute dataset_version
+    #   <p>The version of the dataset after deletion.</p>
+    #   @return [String]
+    # @!attribute errors
+    #   <p>A list of data segment deletions that failed.</p>
+    #   @return [Array<Types::FailedDataSegmentDeletion>]
+    class BatchDeleteDatasetDataSegmentsResponse < Struct.new(
+      nil,
+      :dataset_id,
+      :dataset_version,
+      :errors,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute dataset_id
+    #   <p>The ID of the curated dataset to disassociate data segments from.</p>
+    #   @return [String]
+    # @!attribute workspace_name
+    #   <p>The name of the workspace that contains the dataset.</p>
+    #   @return [String]
+    # @!attribute disassociate_data_segment_entries
+    #   <p>The list of data segment entries to disassociate from the dataset.</p>
+    #   @return [Array<Types::DisassociateDataSegmentEntry>]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure that the request is
+    #         idempotent. If you retry a request that completed successfully using the same client token,
+    #         the retry succeeds without performing any further actions.</p>
+    #   @return [String]
+    class BatchDisassociateDataSegmentsFromDatasetRequest < Struct.new(
+      nil,
+      :dataset_id,
+      :workspace_name,
+      :disassociate_data_segment_entries,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute dataset_id
+    #   <p>The ID of the dataset.</p>
+    #   @return [String]
+    # @!attribute dataset_version
+    #   <p>The version of the dataset after disassociation.</p>
+    #   @return [String]
+    # @!attribute failed_disassociations
+    #   <p>A list of data segment disassociations that failed.</p>
+    #   @return [Array<Types::FailedDataSegmentDisassociation>]
+    class BatchDisassociateDataSegmentsFromDatasetResponse < Struct.new(
+      nil,
+      :dataset_id,
+      :dataset_version,
+      :failed_disassociations,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1899,7 +2097,105 @@ module Aws::IoTSiteWise
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Contains text content to which the SiteWise Assistant refers to, and generate the final response. 
+    # @!attribute workspace_name
+    #   <p>The name of the IoT SiteWise workspace containing the enrichment job to cancel.</p>
+    #   @return [String]
+    # @!attribute job_id
+    #   <p>The unique identifier of the enrichment job to cancel. This is the jobId returned by CreateEnrichmentJob.</p>
+    #   @return [String]
+    class CancelEnrichmentJobRequest < Struct.new(
+      nil,
+      :workspace_name,
+      :job_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute job_id
+    #   <p>The unique identifier of the cancelled enrichment job.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status of the enrichment job after cancellation. This will be CANCELLED, indicating the job
+    #   was successfully cancelled or was already in CANCELLED state (idempotent behavior).</p>
+    #   @return [String]
+    class CancelEnrichmentJobResponse < Struct.new(
+      nil,
+      :job_id,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Request structure for CancelPipelineExecution operation.</p>
+    # @!attribute workspace_name
+    #   <p>The name of the workspace.</p>
+    #   @return [String]
+    # @!attribute pipeline_name
+    #   <p>The name of the pipeline.</p>
+    #   @return [String]
+    # @!attribute pipeline_execution_id
+    #   <p>The unique identifier of the pipeline execution.</p>
+    #   @return [String]
+    # @!attribute reason
+    #   <p>A message describing why the pipeline execution is being cancelled.</p>
+    #   @return [String]
+    class CancelPipelineExecutionRequest < Struct.new(
+      nil,
+      :workspace_name,
+      :pipeline_name,
+      :pipeline_execution_id,
+      :reason,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Response structure for CancelPipelineExecution operation.</p>
+    # @!attribute state
+    #   <p>The current execution state of the pipeline. Can only be CANCELLING or CANCELLED.</p>
+    #   @return [String]
+    class CancelPipelineExecutionResponse < Struct.new(
+      nil,
+      :state,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute workspace_name
+    #   <p>The name of the workspace associated with the query.</p>
+    #   @return [String]
+    # @!attribute query_id
+    #   <p>The unique identifier for the query execution to cancel.</p>
+    #   @return [String]
+    class CancelQueryRequest < Struct.new(
+      nil,
+      :workspace_name,
+      :query_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the response for the CancelQuery operation.</p>
+    # @!attribute query_id
+    #   <p>The unique identifier for the cancelled query.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current query status.</p>
+    #   @return [String]
+    class CancelQueryResponse < Struct.new(
+      nil,
+      :query_id,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains text content to which the SiteWise Assistant refers to, and generate the final response.
     #   It also contains information about the source.</p>
     # @!attribute reference
     #   <p>Contains information about the data source.</p>
@@ -1924,6 +2220,22 @@ module Aws::IoTSiteWise
     #   <p>The type of the column description.</p>
     #   @return [Types::ColumnType]
     class ColumnInfo < Struct.new(
+      nil,
+      :name,
+      :type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains metadata about a column in the query results.</p>
+    # @!attribute name
+    #   <p>The name of the column.</p>
+    #   @return [String]
+    # @!attribute type
+    #   <p>The data type of the column. Valid values are STRING, DOUBLE, BOOLEAN, INTEGER, TIMESTAMP, and VARIANT.</p>
+    #   @return [String]
+    class ColumnInformation < Struct.new(
       nil,
       :name,
       :type,
@@ -2167,6 +2479,117 @@ module Aws::IoTSiteWise
       include ::Smithy::Schema::Structure
     end
 
+    # <p>A single compute node in a pipeline DAG. Each compute node references a task and can declare dependencies on other nodes.</p>
+    # @!attribute compute_node_name
+    #   <p>The unique name for this compute node within the pipeline.</p>
+    #   @return [String]
+    # @!attribute task_name
+    #   <p>The name of the task to execute for this compute node.</p>
+    #   @return [String]
+    # @!attribute environment_variables
+    #   <p>Environment variables specific to this compute node. These override pipeline-level environment variables with the same key.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute depends_on
+    #   <p>A list of compute node names that must complete successfully before this node can start.</p>
+    #   @return [Array<String>]
+    class ComputeNode < Struct.new(
+      nil,
+      :compute_node_name,
+      :task_name,
+      :environment_variables,
+      :depends_on,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains detailed execution information for a compute node within a pipeline execution.</p>
+    # @!attribute compute_node_name
+    #   <p>The name of the compute node.</p>
+    #   @return [String]
+    # @!attribute task_name
+    #   <p>The name of the task executed for this compute node.</p>
+    #   @return [String]
+    # @!attribute task_arn
+    #   <p>The ARN of the task.</p>
+    #   @return [String]
+    # @!attribute task_version
+    #   <p>The task version that executed for this compute node.</p>
+    #   @return [String]
+    # @!attribute depends_on
+    #   <p>A list of compute node names that this node depends on.</p>
+    #   @return [Array<String>]
+    # @!attribute status
+    #   <p>The current execution status of the compute node.</p>
+    #   @return [Types::ComputeNodeExecutionStatus]
+    # @!attribute start_time
+    #   <p>The time the compute node execution started, in Unix epoch time.</p>
+    #   @return [Time]
+    # @!attribute end_time
+    #   <p>The time the compute node execution completed, in Unix epoch time.</p>
+    #   @return [Time]
+    # @!attribute execution_environment_variables
+    #   <p>The fully resolved environment variables used for this compute node execution.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute execution_mounts
+    #   <p>The fully resolved mounts used for this compute node execution, after merging
+    #   task-defined mounts with any execution-level mount overrides. Each mount attaches an
+    #   external data source to the container filesystem at a relative path under the
+    #   service-owned mount root.</p>
+    #   @return [Array<Types::Mount>]
+    class ComputeNodeExecutionDetails < Struct.new(
+      nil,
+      :compute_node_name,
+      :task_name,
+      :task_arn,
+      :task_version,
+      :depends_on,
+      :status,
+      :start_time,
+      :end_time,
+      :execution_environment_variables,
+      :execution_mounts,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Additional information about a compute node that has failed.</p>
+    # @!attribute code
+    #   <p>Classification of the failure.</p>
+    #   @return [String]
+    # @!attribute message
+    #   <p>Human-readable description of why the compute node failed.</p>
+    #   @return [String]
+    # @!attribute details
+    #   <p>Detailed error entries to help diagnose the failure.</p>
+    #   @return [Array<Types::DetailedPipelineError>]
+    class ComputeNodeExecutionStateDetails < Struct.new(
+      nil,
+      :code,
+      :message,
+      :details,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Current execution status of a compute node within a pipeline execution.</p>
+    # @!attribute state
+    #   <p>Current state of the compute node execution.</p>
+    #   @return [String]
+    # @!attribute state_details
+    #   <p>Additional information about the compute node's failure. Populated when the compute node has failed.</p>
+    #   @return [Types::ComputeNodeExecutionStateDetails]
+    class ComputeNodeExecutionStatus < Struct.new(
+      nil,
+      :state,
+      :state_details,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Contains the details of an IoT SiteWise configuration error.</p>
     # @!attribute code
     #   <p>The error code.</p>
@@ -2214,6 +2637,53 @@ module Aws::IoTSiteWise
       :message,
       :resource_id,
       :resource_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration for a container task, including the container image, IAM role, and compute settings.</p>
+    # @!attribute ecr_uri
+    #   <p>The Amazon ECR image URI for the task container.</p>
+    #   @return [String]
+    # @!attribute task_execution_role
+    #   <p>The ARN of the IAM role that grants the containerized workload permissions to access AWS resources.</p>
+    #   @return [String]
+    # @!attribute processing_type
+    #   <p>The processing type for compute resources.</p>
+    #   @return [String]
+    # @!attribute processing_unit
+    #   <p>The processing unit allocation that determines the vCPU, memory, and GPU resources.</p>
+    #   @return [String]
+    # @!attribute ephemeral_storage_configuration
+    #   <p>Ephemeral storage configuration for the container task.</p>
+    #   @return [Types::EphemeralStorageConfiguration]
+    # @!attribute command
+    #   <p>The command to execute in the container.</p>
+    #   @return [Array<String>]
+    # @!attribute timeout_seconds
+    #   <p>The timeout in seconds for task execution. Default: 3600 (1 hour).</p>
+    #   @return [Integer]
+    # @!attribute environment_variables
+    #   <p>Environment variables passed to the container at runtime.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute mounts
+    #   <p>Mounts attached to the container filesystem. Each mount exposes an external
+    #   data source as a local directory inside the container. The service assigns each mount
+    #   a container path based on the mount name. The container reads files through that path
+    #   as if the data were on the local filesystem.</p>
+    #   @return [Array<Types::Mount>]
+    class ContainerTaskConfiguration < Struct.new(
+      nil,
+      :ecr_uri,
+      :task_execution_role,
+      :processing_type,
+      :processing_unit,
+      :ephemeral_storage_configuration,
+      :command,
+      :timeout_seconds,
+      :environment_variables,
+      :mounts,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2278,6 +2748,64 @@ module Aws::IoTSiteWise
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute client_token
+    #   <p>Unique client token for idempotent request handling</p>
+    #   @return [String]
+    # @!attribute idc_instance_arn
+    #   <p>Identity Center Instance ARN to create the application in</p>
+    #   @return [String]
+    # @!attribute workspace_name
+    #   <p>Name of the workspace to associate with the underlying Application</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>Name of the application</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>Description of the application</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>A list of key-value pairs that contain metadata for the application.</p>
+    #   @return [Hash<String, String>]
+    class CreateApplicationRequest < Struct.new(
+      nil,
+      :client_token,
+      :idc_instance_arn,
+      :workspace_name,
+      :name,
+      :description,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>ARN of the application</p>
+    #   @return [String]
+    # @!attribute id
+    #   <p>Unique identifier of the application</p>
+    #   @return [String]
+    # @!attribute dns_subdomain
+    #   <p>DNS subdomain for the application</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>Name of the application</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>Current status of the application</p>
+    #   @return [String]
+    class CreateApplicationResponse < Struct.new(
+      nil,
+      :arn,
+      :id,
+      :dns_subdomain,
+      :name,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute asset_model_id
     #   <p>The ID of the asset model this composite model is a part of.</p>
     #   @return [String]
@@ -2318,17 +2846,17 @@ module Aws::IoTSiteWise
     #         information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html">Quotas</a> in the <i>IoT SiteWise User Guide</i>.</p>
     #   @return [Array<Types::AssetModelPropertyDefinition>]
     # @!attribute if_match
-    #   <p>The expected current entity tag (ETag) for the asset model’s latest or active version (specified using <code>matchForVersionType</code>).   
+    #   <p>The expected current entity tag (ETag) for the asset model’s latest or active version (specified using <code>matchForVersionType</code>).
     #       The create request is rejected if the tag does not match the latest or active version's current entity tag.
     #       See <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/opt-locking-for-model.html">Optimistic locking for asset model writes</a>
     #       in the <i>IoT SiteWise User Guide</i>.</p>
     #   @return [String]
     # @!attribute if_none_match
-    #   <p>Accepts <b>*</b> to reject the create request if an active version 
+    #   <p>Accepts <b>*</b> to reject the create request if an active version
     #       (specified using <code>matchForVersionType</code> as <code>ACTIVE</code>) already exists for the asset model.</p>
     #   @return [String]
     # @!attribute match_for_version_type
-    #   <p>Specifies the asset model version type (<code>LATEST</code> or <code>ACTIVE</code>) used in 
+    #   <p>Specifies the asset model version type (<code>LATEST</code> or <code>ACTIVE</code>) used in
     #     conjunction with <code>If-Match</code> or <code>If-None-Match</code> headers to determine the target ETag for the create operation.</p>
     #   @return [String]
     class CreateAssetModelCompositeModelRequest < Struct.new(
@@ -2362,11 +2890,15 @@ module Aws::IoTSiteWise
     #   <p>Contains current status information for an asset model. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-and-model-states.html">Asset and model
     #           states</a> in the <i>IoT SiteWise User Guide</i>.</p>
     #   @return [Types::AssetModelStatus]
+    # @!attribute asset_model_id
+    #   <p>The ID of the asset model.</p>
+    #   @return [String]
     class CreateAssetModelCompositeModelResponse < Struct.new(
       nil,
       :asset_model_composite_model_id,
       :asset_model_composite_model_path,
       :asset_model_status,
+      :asset_model_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2544,7 +3076,15 @@ module Aws::IoTSiteWise
     #   <p>The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the IAM role that allows IoT SiteWise to read Amazon S3 data.</p>
     #   @return [String]
     # @!attribute files
-    #   <p>The files in the specified Amazon S3 bucket that contain your data.</p>
+    #   <p>The files in the specified Amazon S3 bucket that contain your data. You can specify up to 100 files for each bulk import job. Each file supports the following size limits:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>Parquet files – Up to 256 MiB.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Other file formats – Up to 5 GiB.</p>
+    #               </li>
+    #            </ul>
     #   @return [Array<Types::File>]
     # @!attribute error_report_location
     #   <p>The Amazon S3 destination where errors associated with the job creation request are saved.</p>
@@ -2553,12 +3093,20 @@ module Aws::IoTSiteWise
     #   <p>Contains the configuration information of a job, such as the file format used to save data in Amazon S3.</p>
     #   @return [Types::JobConfiguration]
     # @!attribute adaptive_ingestion
-    #   <p>If set to true, ingest new data into IoT SiteWise storage. Measurements with notifications, metrics and transforms are 
+    #   <p>If set to true, ingest new data into IoT SiteWise storage. Measurements with notifications, metrics and transforms are
     #      computed. If set to false, historical data is ingested into IoT SiteWise as is.</p>
     #   @return [Boolean]
     # @!attribute delete_files_after_import
     #   <p>If set to true, your data files is deleted from S3, after ingestion into IoT SiteWise storage.</p>
     #   @return [Boolean]
+    # @!attribute dataset_id
+    #   <p>The ID of the session dataset to ingest data into. Specify this field, together with
+    #         <code>workspaceName</code>, to ingest data into a session dataset in a workspace.</p>
+    #   @return [String]
+    # @!attribute workspace_name
+    #   <p>The name of the workspace that contains the session dataset. Specify this field together
+    #         with <code>datasetId</code>.</p>
+    #   @return [String]
     class CreateBulkImportJobRequest < Struct.new(
       nil,
       :job_name,
@@ -2568,6 +3116,8 @@ module Aws::IoTSiteWise
       :job_configuration,
       :adaptive_ingestion,
       :delete_files_after_import,
+      :dataset_id,
+      :workspace_name,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2630,7 +3180,7 @@ module Aws::IoTSiteWise
     #   <p>The configuration for the computation model.</p>
     #   @return [Types::ComputationModelConfiguration]
     # @!attribute computation_model_data_binding
-    #   <p>The data binding for the computation model. Key is a variable name defined in configuration. 
+    #   <p>The data binding for the computation model. Key is a variable name defined in configuration.
     #     Value is a <code>ComputationModelDataBindingValue</code> referenced by the variable.</p>
     #   @return [Hash<String, Types::ComputationModelDataBindingValue>]
     # @!attribute client_token
@@ -2740,6 +3290,51 @@ module Aws::IoTSiteWise
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Request to create a dataset export job.</p>
+    # @!attribute workspace_name
+    #   <p>The name of the workspace in which to create the dataset export job.</p>
+    #   @return [String]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+    #   The AWS SDKs and CLI populate this automatically.</p>
+    #   @return [String]
+    # @!attribute destination_s3_uri
+    #   <p>The S3 URI where output clips will be written.</p>
+    #   @return [String]
+    # @!attribute input
+    #   <p>The processing input source.</p>
+    #   @return [Types::ProcessingInput]
+    # @!attribute error_report_location
+    #   <p>The location where the error report will be written on failure.</p>
+    #   @return [Types::ExportErrorReportLocation]
+    class CreateDatasetExportJobRequest < Struct.new(
+      nil,
+      :workspace_name,
+      :client_token,
+      :destination_s3_uri,
+      :input,
+      :error_report_location,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Response for create dataset export job request.</p>
+    # @!attribute job_id
+    #   <p>The unique identifier for the dataset export job.</p>
+    #   @return [String]
+    # @!attribute workspace_name
+    #   <p>The name of the workspace in which the dataset export job was created.</p>
+    #   @return [String]
+    class CreateDatasetExportJobResponse < Struct.new(
+      nil,
+      :job_id,
+      :workspace_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute dataset_id
     #   <p>The ID of the dataset.</p>
     #   @return [String]
@@ -2749,6 +3344,20 @@ module Aws::IoTSiteWise
     # @!attribute dataset_description
     #   <p>A description about the dataset, and its functionality.</p>
     #   @return [String]
+    # @!attribute dataset_type
+    #   <p>The type of dataset: a session dataset, a curated dataset, or a connection to an external
+    #         datasource.</p>
+    #   @return [String]
+    # @!attribute dataset_config
+    #   <p>The configuration for the dataset.</p>
+    #   @return [Types::DatasetConfig]
+    # @!attribute workspace_name
+    #   <p>The name of the workspace that contains the dataset. Required for session and curated
+    #         datasets. Omit this field for datasets that connect to an external datasource.</p>
+    #   @return [String]
+    # @!attribute metadata
+    #   <p>The metadata for the dataset, provided as key-value pairs.</p>
+    #   @return [Hash<String, String>]
     # @!attribute dataset_source
     #   <p>The data source for the dataset.</p>
     #   @return [Types::DatasetSource]
@@ -2765,6 +3374,10 @@ module Aws::IoTSiteWise
       :dataset_id,
       :dataset_name,
       :dataset_description,
+      :dataset_type,
+      :dataset_config,
+      :workspace_name,
+      :metadata,
       :dataset_source,
       :client_token,
       :tags,
@@ -2777,12 +3390,12 @@ module Aws::IoTSiteWise
     #   <p>The ID of the dataset.</p>
     #   @return [String]
     # @!attribute dataset_arn
-    #   <p>The <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html">ARN</a> of the dataset. 
+    #   <p>The <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html">ARN</a> of the dataset.
     #     The format is <code>arn:${Partition}:iotsitewise:${Region}:${Account}:dataset/${DatasetId}</code>.</p>
     #   @return [String]
     # @!attribute dataset_status
-    #   <p>The status of the dataset. This contains the state and any error messages. 
-    #     State is <code>CREATING</code> after a successfull call to this API, and any associated error message. The state is 
+    #   <p>The status of the dataset. This contains the state and any error messages.
+    #     State is <code>CREATING</code> after a successfull call to this API, and any associated error message. The state is
     #     <code>ACTIVE</code> when ready to use.</p>
     #   @return [Types::DatasetStatus]
     class CreateDatasetResponse < Struct.new(
@@ -2790,6 +3403,50 @@ module Aws::IoTSiteWise
       :dataset_id,
       :dataset_arn,
       :dataset_status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute workspace_name
+    #   <p>The name of the IoT SiteWise workspace containing the video data to analyze.</p>
+    #   @return [String]
+    # @!attribute job_configuration
+    #   <p>Configuration defining the type of enrichment analysis to perform and which video data to analyze.
+    #   Currently supports eventDetection for generating embeddings from video data for semantic search.</p>
+    #   @return [Types::EnrichmentJobConfiguration]
+    # @!attribute client_token
+    #   <p>Optional unique token that makes the operation idempotent. If you submit the same request with the
+    #   same token within the idempotency window, the service returns the original job without creating a
+    #   duplicate. Use a UUID or timestamp-based token for each unique request.</p>
+    #   @return [String]
+    class CreateEnrichmentJobRequest < Struct.new(
+      nil,
+      :workspace_name,
+      :job_configuration,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute job_id
+    #   <p>Unique identifier for the enrichment job. Use this ID with DescribeEnrichmentJob to monitor
+    #   progress or with CancelEnrichmentJob to cancel the job.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>Initial status of the enrichment job, typically PENDING. The job will transition to RUNNING when
+    #   processing begins, then to a terminal state (COMPLETED, FAILED, TIMED_OUT, or CANCELLED).
+    #   Use DescribeEnrichmentJob to track status changes.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>Timestamp when the enrichment job was created in ISO 8601 format.</p>
+    #   @return [Time]
+    class CreateEnrichmentJobResponse < Struct.new(
+      nil,
+      :job_id,
+      :status,
+      :created_at,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2843,6 +3500,68 @@ module Aws::IoTSiteWise
       nil,
       :gateway_id,
       :gateway_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Request structure for CreatePipeline operation.</p>
+    # @!attribute workspace_name
+    #   <p>The name of the workspace.</p>
+    #   @return [String]
+    # @!attribute pipeline_name
+    #   <p>The name of the pipeline to create. Must be unique within the workspace.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>A description of the pipeline.</p>
+    #   @return [String]
+    # @!attribute environment_variables
+    #   <p>Environment variables shared across all compute nodes in the pipeline. Individual compute nodes can override these values with their own environment variables.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute computations
+    #   <p>The list of compute nodes that form the pipeline DAG. Each compute node references a task and can declare dependencies on other nodes.</p>
+    #   @return [Array<Types::ComputeNode>]
+    # @!attribute tags
+    #   <p>A list of key-value pairs that contain metadata for the pipeline. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html">Tagging your AWS IoT SiteWise resources</a> in the AWS IoT SiteWise User Guide.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+    #   If you retry a request that completed successfully using the same client token, the server returns the
+    #   cached result from the original successful request without performing the operation again.</p>
+    #   @return [String]
+    class CreatePipelineRequest < Struct.new(
+      nil,
+      :workspace_name,
+      :pipeline_name,
+      :description,
+      :environment_variables,
+      :computations,
+      :tags,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Response structure for CreatePipeline operation.</p>
+    # @!attribute pipeline_name
+    #   <p>The name of the created pipeline.</p>
+    #   @return [String]
+    # @!attribute pipeline_arn
+    #   <p>The ARN of the created pipeline.</p>
+    #   @return [String]
+    # @!attribute version
+    #   <p>The version of the newly created pipeline.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current lifecycle status of the pipeline.</p>
+    #   @return [Types::ResourceStatus]
+    class CreatePipelineResponse < Struct.new(
+      nil,
+      :pipeline_name,
+      :pipeline_arn,
+      :version,
+      :status,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3014,6 +3733,115 @@ module Aws::IoTSiteWise
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Request structure for CreateTask operation.</p>
+    # @!attribute workspace_name
+    #   <p>The name of the workspace.</p>
+    #   @return [String]
+    # @!attribute task_name
+    #   <p>The name of the task to create. Must be unique within the workspace.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>A description of the task.</p>
+    #   @return [String]
+    # @!attribute task_configuration
+    #   <p>The task execution configuration. Specify a <a href="https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_ContainerTaskConfiguration.html">containerTaskConfiguration</a> for custom container workloads.</p>
+    #   @return [Types::TaskConfiguration]
+    # @!attribute tags
+    #   <p>A list of key-value pairs that contain metadata for the task. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html">Tagging your AWS IoT SiteWise resources</a> in the AWS IoT SiteWise User Guide.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+    #   If you retry a request that completed successfully using the same client token, the server returns the
+    #   cached result from the original successful request without performing the operation again.</p>
+    #   @return [String]
+    class CreateTaskRequest < Struct.new(
+      nil,
+      :workspace_name,
+      :task_name,
+      :description,
+      :task_configuration,
+      :tags,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Response structure for CreateTask operation.</p>
+    # @!attribute task_name
+    #   <p>The name of the created task.</p>
+    #   @return [String]
+    # @!attribute task_arn
+    #   <p>The ARN of the created task.</p>
+    #   @return [String]
+    # @!attribute version
+    #   <p>The version of the newly created task.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current lifecycle status of the task.</p>
+    #   @return [Types::ResourceStatus]
+    class CreateTaskResponse < Struct.new(
+      nil,
+      :task_name,
+      :task_arn,
+      :version,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute workspace_name
+    #   <p>The name of the workspace to create.</p>
+    #   @return [String]
+    # @!attribute workspace_description
+    #   <p>A description for the workspace.</p>
+    #   @return [String]
+    # @!attribute encryption_configuration
+    #   <p>The encryption configuration for the workspace.</p>
+    #   @return [Types::WorkspaceEncryptionConfiguration]
+    # @!attribute tags
+    #   <p>A list of key-value pairs that contain metadata for the workspace. For more information,
+    #         see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html">Tagging your IoT SiteWise
+    #           resources</a> in the <i>IoT SiteWise User Guide</i>.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure that the request is
+    #         idempotent. If you retry a request that completed successfully using the same client token,
+    #         the retry succeeds without performing any further actions.</p>
+    #   @return [String]
+    class CreateWorkspaceRequest < Struct.new(
+      nil,
+      :workspace_name,
+      :workspace_description,
+      :encryption_configuration,
+      :tags,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute workspace_name
+    #   <p>The name of the workspace.</p>
+    #   @return [String]
+    # @!attribute workspace_arn
+    #   <p>The ARN of the workspace.</p>
+    #   @return [String]
+    # @!attribute workspace_status
+    #   <p>The status of the workspace, which is <code>CREATING</code> when the operation
+    #         returns.</p>
+    #   @return [Types::WorkspaceStatus]
+    class CreateWorkspaceResponse < Struct.new(
+      nil,
+      :workspace_name,
+      :workspace_arn,
+      :workspace_status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>A .CSV file.</p>
     # @!attribute column_names
     #   <p>The column names specified in the .csv file.</p>
@@ -3119,9 +3947,92 @@ module Aws::IoTSiteWise
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Contains enrichment status information for a data segment.</p>
+    # @!attribute status
+    #   <p>The enrichment status of the data segment.</p>
+    #   @return [String]
+    # @!attribute last_enriched_at
+    #   <p>The date the data segment was last enriched, in Unix epoch time.</p>
+    #   @return [Time]
+    class DataSegmentEnrichment < Struct.new(
+      nil,
+      :status,
+      :last_enriched_at,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains summary information about a data segment relationship between a source session
+    #       dataset that contains the data and a curated dataset that references it, including the time
+    #       series and timestamp range.</p>
+    # @!attribute target_dataset_id
+    #   <p>The ID of the curated dataset that references the data segment.</p>
+    #   @return [String]
+    # @!attribute source_dataset_id
+    #   <p>The ID of the source session dataset that contains the data segment.</p>
+    #   @return [String]
+    # @!attribute time_series_id
+    #   <p>The ID of the time series.</p>
+    #   @return [String]
+    # @!attribute start_timestamp
+    #   <p>The nanosecond-precision start time of the data segment.</p>
+    #   @return [Types::TimeInNanos]
+    # @!attribute end_timestamp
+    #   <p>The nanosecond-precision end time of the data segment.</p>
+    #   @return [Types::TimeInNanos]
+    class DataSegmentRelationshipSummary < Struct.new(
+      nil,
+      :target_dataset_id,
+      :source_dataset_id,
+      :time_series_id,
+      :start_timestamp,
+      :end_timestamp,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains summary information about a data segment, including its source dataset, time
+    #       series, timestamp range, and enrichment status.</p>
+    # @!attribute source_dataset_id
+    #   <p>The ID of the source dataset that contains the data segment.</p>
+    #   @return [String]
+    # @!attribute time_series_id
+    #   <p>The ID of the time series.</p>
+    #   @return [String]
+    # @!attribute start_timestamp
+    #   <p>The nanosecond-precision start time of the data segment.</p>
+    #   @return [Types::TimeInNanos]
+    # @!attribute end_timestamp
+    #   <p>The nanosecond-precision end time of the data segment.</p>
+    #   @return [Types::TimeInNanos]
+    # @!attribute alias
+    #   <p>The alias of the time series.</p>
+    #   @return [String]
+    # @!attribute data_type
+    #   <p>The data type of the time series.</p>
+    #   @return [String]
+    # @!attribute enrichment
+    #   <p>The enrichment information for the data segment.</p>
+    #   @return [Types::DataSegmentEnrichment]
+    class DataSegmentSummary < Struct.new(
+      nil,
+      :source_dataset_id,
+      :time_series_id,
+      :start_timestamp,
+      :end_timestamp,
+      :alias,
+      :data_type,
+      :enrichment,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Contains information about the dataset use and it's source.</p>
     # @!attribute dataset_arn
-    #   <p>The <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html">ARN</a> of the dataset. 
+    #   <p>The <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html">ARN</a> of the dataset.
     #     The format is <code>arn:${Partition}:iotsitewise:${Region}:${Account}:dataset/${DatasetId}</code>.</p>
     #   @return [String]
     # @!attribute source
@@ -3131,6 +4042,66 @@ module Aws::IoTSiteWise
       nil,
       :dataset_arn,
       :source,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the configuration for a dataset.</p>
+    # @!attribute session
+    #   <p>The session configuration for a session-type dataset.</p>
+    #   @return [Types::SessionConfig]
+    class DatasetConfig < Struct.new(
+      nil,
+      :session,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the enrichment status information for a dataset across data types.</p>
+    # @!attribute video
+    #   <p>The enrichment status for video data in the dataset.</p>
+    #   @return [Types::DatasetEnrichmentEntry]
+    class DatasetEnrichment < Struct.new(
+      nil,
+      :video,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains enrichment status information for a specific data type in a dataset.</p>
+    # @!attribute status
+    #   <p>The enrichment status of the data type in the dataset.</p>
+    #   @return [String]
+    # @!attribute last_enriched_at
+    #   <p>The date the data was last enriched, in Unix epoch time.</p>
+    #   @return [Time]
+    class DatasetEnrichmentEntry < Struct.new(
+      nil,
+      :status,
+      :last_enriched_at,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A dataset to process.</p>
+    # @!attribute dataset_id
+    #   <p>The unique identifier for the dataset.</p>
+    #   @return [String]
+    # @!attribute trim_settings
+    #   <p>The trim settings applied to all items in the dataset. When omitted, the full dataset time range is used.</p>
+    #   @return [Types::TrimSettings]
+    # @!attribute export_data_types
+    #   <p>The optional subset of data types to export. If omitted, all data types are exported.</p>
+    #   @return [Array<String>]
+    class DatasetItem < Struct.new(
+      nil,
+      :dataset_id,
+      :trim_settings,
+      :export_data_types,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3156,7 +4127,7 @@ module Aws::IoTSiteWise
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The status of the dataset. This contains the state and any error messages. The state is 
+    # <p>The status of the dataset. This contains the state and any error messages. The state is
     #   <code>ACTIVE</code> when ready to use.</p>
     # @!attribute state
     #   <p>The current status of the dataset.</p>
@@ -3178,7 +4149,7 @@ module Aws::IoTSiteWise
     #   <p>The ID of the dataset.</p>
     #   @return [String]
     # @!attribute arn
-    #   <p>The <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html">ARN</a> of the dataset. 
+    #   <p>The <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html">ARN</a> of the dataset.
     #     The format is <code>arn:${Partition}:iotsitewise:${Region}:${Account}:dataset/${DatasetId}</code>.</p>
     #   @return [String]
     # @!attribute name
@@ -3187,6 +4158,13 @@ module Aws::IoTSiteWise
     # @!attribute description
     #   <p>A description about the dataset, and its functionality.</p>
     #   @return [String]
+    # @!attribute source_type
+    #   <p>The data source type of the dataset.</p>
+    #   @return [String]
+    # @!attribute dataset_type
+    #   <p>The type of dataset: a session dataset, a curated dataset, or a connection to an external
+    #         datasource.</p>
+    #   @return [String]
     # @!attribute creation_date
     #   <p>The dataset creation date, in Unix epoch time.</p>
     #   @return [Time]
@@ -3194,18 +4172,24 @@ module Aws::IoTSiteWise
     #   <p>The date the dataset was last updated, in Unix epoch time.</p>
     #   @return [Time]
     # @!attribute status
-    #   <p>The status of the dataset. This contains the state and any error messages. The state is 
+    #   <p>The status of the dataset. This contains the state and any error messages. The state is
     #     <code>ACTIVE</code> when ready to use.</p>
     #   @return [Types::DatasetStatus]
+    # @!attribute enrichment_status
+    #   <p>The enrichment status of the dataset.</p>
+    #   @return [Types::DatasetEnrichment]
     class DatasetSummary < Struct.new(
       nil,
       :id,
       :arn,
       :name,
       :description,
+      :source_type,
+      :dataset_type,
       :creation_date,
       :last_update_date,
       :status,
+      :enrichment_status,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3258,6 +4242,28 @@ module Aws::IoTSiteWise
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute workspace_name
+    #   <p>Name of the workspace to associate with the underlying Application</p>
+    #   @return [String]
+    # @!attribute id
+    #   <p>ID of the Application to delete</p>
+    #   @return [String]
+    class DeleteApplicationRequest < Struct.new(
+      nil,
+      :workspace_name,
+      :id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class DeleteApplicationResponse < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute asset_model_id
     #   <p>The ID of the asset model, in UUID format.</p>
     #   @return [String]
@@ -3268,17 +4274,17 @@ module Aws::IoTSiteWise
     #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>
     #   @return [String]
     # @!attribute if_match
-    #   <p>The expected current entity tag (ETag) for the asset model’s latest or active version (specified using <code>matchForVersionType</code>).   
+    #   <p>The expected current entity tag (ETag) for the asset model’s latest or active version (specified using <code>matchForVersionType</code>).
     #       The delete request is rejected if the tag does not match the latest or active version's current entity tag.
     #       See <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/opt-locking-for-model.html">Optimistic locking for asset model writes</a>
     #       in the <i>IoT SiteWise User Guide</i>.</p>
     #   @return [String]
     # @!attribute if_none_match
-    #   <p>Accepts <b>*</b> to reject the delete request if an active version 
+    #   <p>Accepts <b>*</b> to reject the delete request if an active version
     #       (specified using <code>matchForVersionType</code> as <code>ACTIVE</code>) already exists for the asset model.</p>
     #   @return [String]
     # @!attribute match_for_version_type
-    #   <p>Specifies the asset model version type (<code>LATEST</code> or <code>ACTIVE</code>) used in 
+    #   <p>Specifies the asset model version type (<code>LATEST</code> or <code>ACTIVE</code>) used in
     #     conjunction with <code>If-Match</code> or <code>If-None-Match</code> headers to determine the target ETag for the delete operation.</p>
     #   @return [String]
     class DeleteAssetModelCompositeModelRequest < Struct.new(
@@ -3298,9 +4304,13 @@ module Aws::IoTSiteWise
     #   <p>Contains current status information for an asset model. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-and-model-states.html">Asset and model
     #           states</a> in the <i>IoT SiteWise User Guide</i>.</p>
     #   @return [Types::AssetModelStatus]
+    # @!attribute asset_model_id
+    #   <p>The ID of the asset model.</p>
+    #   @return [String]
     class DeleteAssetModelCompositeModelResponse < Struct.new(
       nil,
       :asset_model_status,
+      :asset_model_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3362,17 +4372,17 @@ module Aws::IoTSiteWise
     #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>
     #   @return [String]
     # @!attribute if_match
-    #   <p>The expected current entity tag (ETag) for the asset model’s latest or active version (specified using <code>matchForVersionType</code>).   
+    #   <p>The expected current entity tag (ETag) for the asset model’s latest or active version (specified using <code>matchForVersionType</code>).
     #       The delete request is rejected if the tag does not match the latest or active version's current entity tag.
     #       See <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/opt-locking-for-model.html">Optimistic locking for asset model writes</a>
     #       in the <i>IoT SiteWise User Guide</i>.</p>
     #   @return [String]
     # @!attribute if_none_match
-    #   <p>Accepts <b>*</b> to reject the delete request if an active version 
+    #   <p>Accepts <b>*</b> to reject the delete request if an active version
     #       (specified using <code>matchForVersionType</code> as <code>ACTIVE</code>) already exists for the asset model.</p>
     #   @return [String]
     # @!attribute match_for_version_type
-    #   <p>Specifies the asset model version type (<code>LATEST</code> or <code>ACTIVE</code>) used in 
+    #   <p>Specifies the asset model version type (<code>LATEST</code> or <code>ACTIVE</code>) used in
     #     conjunction with <code>If-Match</code> or <code>If-None-Match</code> headers to determine the target ETag for the delete operation.</p>
     #   @return [String]
     class DeleteAssetModelRequest < Struct.new(
@@ -3387,12 +4397,16 @@ module Aws::IoTSiteWise
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute asset_model_id
+    #   <p>The ID of the asset model.</p>
+    #   @return [String]
     # @!attribute asset_model_status
     #   <p>The status of the asset model, which contains a state (<code>DELETING</code> after
     #         successfully calling this operation) and any error message.</p>
     #   @return [Types::AssetModelStatus]
     class DeleteAssetModelResponse < Struct.new(
       nil,
+      :asset_model_id,
       :asset_model_status,
       keyword_init: true
     )
@@ -3415,12 +4429,16 @@ module Aws::IoTSiteWise
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute asset_id
+    #   <p>The ID of the asset.</p>
+    #   @return [String]
     # @!attribute asset_status
     #   <p>The status of the asset, which contains a state (<code>DELETING</code> after successfully
     #         calling this operation) and any error message.</p>
     #   @return [Types::AssetStatus]
     class DeleteAssetResponse < Struct.new(
       nil,
+      :asset_id,
       :asset_status,
       keyword_init: true
     )
@@ -3476,8 +4494,31 @@ module Aws::IoTSiteWise
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Contains information about a data segment entry to delete.</p>
+    # @!attribute time_series_id
+    #   <p>The ID of the time series.</p>
+    #   @return [String]
+    # @!attribute start_timestamp
+    #   <p>The nanosecond-precision start time of the data segment to delete.</p>
+    #   @return [Types::TimeInNanos]
+    # @!attribute end_timestamp
+    #   <p>The nanosecond-precision end time of the data segment to delete.</p>
+    #   @return [Types::TimeInNanos]
+    class DeleteDataSegmentEntry < Struct.new(
+      nil,
+      :time_series_id,
+      :start_timestamp,
+      :end_timestamp,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute dataset_id
     #   <p>The ID of the dataset.</p>
+    #   @return [String]
+    # @!attribute workspace_name
+    #   <p>The name of the workspace that contains the dataset.</p>
     #   @return [String]
     # @!attribute client_token
     #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>
@@ -3485,6 +4526,7 @@ module Aws::IoTSiteWise
     class DeleteDatasetRequest < Struct.new(
       nil,
       :dataset_id,
+      :workspace_name,
       :client_token,
       keyword_init: true
     )
@@ -3492,7 +4534,7 @@ module Aws::IoTSiteWise
     end
 
     # @!attribute dataset_status
-    #   <p>The status of the dataset. This contains the state and any error messages. 
+    #   <p>The status of the dataset. This contains the state and any error messages.
     #     State is <code>DELETING</code> after a successfull call to this API, and any associated error message.</p>
     #   @return [Types::DatasetStatus]
     class DeleteDatasetResponse < Struct.new(
@@ -3509,6 +4551,34 @@ module Aws::IoTSiteWise
     class DeleteGatewayRequest < Struct.new(
       nil,
       :gateway_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Request structure for DeletePipeline operation.</p>
+    # @!attribute workspace_name
+    #   <p>The name of the workspace.</p>
+    #   @return [String]
+    # @!attribute pipeline_name
+    #   <p>The name of the pipeline to delete.</p>
+    #   @return [String]
+    class DeletePipelineRequest < Struct.new(
+      nil,
+      :workspace_name,
+      :pipeline_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Response structure for DeletePipeline operation.</p>
+    # @!attribute status
+    #   <p>The current lifecycle status of the pipeline.</p>
+    #   @return [Types::ResourceStatus]
+    class DeletePipelineResponse < Struct.new(
+      nil,
+      :status,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3563,6 +4633,34 @@ module Aws::IoTSiteWise
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Request structure for DeleteTask operation.</p>
+    # @!attribute workspace_name
+    #   <p>The name of the workspace.</p>
+    #   @return [String]
+    # @!attribute task_name
+    #   <p>The name of the task to delete.</p>
+    #   @return [String]
+    class DeleteTaskRequest < Struct.new(
+      nil,
+      :workspace_name,
+      :task_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Response structure for DeleteTask operation.</p>
+    # @!attribute status
+    #   <p>The current lifecycle status of the task.</p>
+    #   @return [Types::ResourceStatus]
+    class DeleteTaskResponse < Struct.new(
+      nil,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute alias
     #   <p>The alias that identifies the time series.</p>
     #   @return [String]
@@ -3577,12 +4675,44 @@ module Aws::IoTSiteWise
     # @!attribute client_token
     #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>
     #   @return [String]
+    # @!attribute workspace_name
+    #   <p>The name of the workspace.</p>
+    #   @return [String]
     class DeleteTimeSeriesRequest < Struct.new(
       nil,
       :alias,
       :asset_id,
       :property_id,
       :client_token,
+      :workspace_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute workspace_name
+    #   <p>The name of the workspace to delete.</p>
+    #   @return [String]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure that the request is
+    #         idempotent. If you retry a request that completed successfully using the same client token,
+    #         the retry succeeds without performing any further actions.</p>
+    #   @return [String]
+    class DeleteWorkspaceRequest < Struct.new(
+      nil,
+      :workspace_name,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute workspace_status
+    #   <p>The status of the workspace after the deletion request, which is <code>DELETING</code> when the operation returns.</p>
+    #   @return [Types::WorkspaceStatus]
+    class DeleteWorkspaceResponse < Struct.new(
+      nil,
+      :workspace_status,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3682,6 +4812,68 @@ module Aws::IoTSiteWise
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute workspace_name
+    #   <p>Name of the workspace to associate with the underlying Application</p>
+    #   @return [String]
+    # @!attribute id
+    #   <p>ID of the Application</p>
+    #   @return [String]
+    class DescribeApplicationRequest < Struct.new(
+      nil,
+      :workspace_name,
+      :id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>ARN of the application</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>Timestamp when the application was created</p>
+    #   @return [Time]
+    # @!attribute dns_subdomain
+    #   <p>DNS subdomain for the application</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>Description of the application</p>
+    #   @return [String]
+    # @!attribute id
+    #   <p>Unique identifier of the application</p>
+    #   @return [String]
+    # @!attribute idc_application_arn
+    #   <p>Identity Center Application ARN associated with this application</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>Name of the application</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>Current status of the application</p>
+    #   @return [String]
+    # @!attribute updated_at
+    #   <p>Timestamp when the application was last updated</p>
+    #   @return [Time]
+    # @!attribute workspace_name
+    #   <p>Name of the workspace this application belongs to</p>
+    #   @return [String]
+    class DescribeApplicationResponse < Struct.new(
+      nil,
+      :arn,
+      :created_at,
+      :dns_subdomain,
+      :description,
+      :id,
+      :idc_application_arn,
+      :name,
+      :status,
+      :updated_at,
+      :workspace_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute asset_id
     #   <p>The ID of the asset. This can be either the actual ID in UUID format, or else <code>externalId:</code> followed by the external ID, if it has one.
     #       For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references">Referencing objects with external IDs</a> in the <i>IoT SiteWise User Guide</i>.</p>
@@ -3761,7 +4953,7 @@ module Aws::IoTSiteWise
     #       For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references">Referencing objects with external IDs</a> in the <i>IoT SiteWise User Guide</i>.</p>
     #   @return [String]
     # @!attribute asset_model_version
-    #   <p>The version alias that specifies the latest or active version of the asset model. 
+    #   <p>The version alias that specifies the latest or active version of the asset model.
     #             The details are returned in the response. The default value is <code>LATEST</code>. See <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/model-active-version.html">
     #             Asset model versions</a> in the <i>IoT SiteWise User Guide</i>.</p>
     #   @return [String]
@@ -3881,7 +5073,7 @@ module Aws::IoTSiteWise
     #   <p> Whether or not to exclude asset model properties from the response. </p>
     #   @return [Boolean]
     # @!attribute asset_model_version
-    #   <p>The version alias that specifies the latest or active version of the asset model. 
+    #   <p>The version alias that specifies the latest or active version of the asset model.
     #             The details are returned in the response. The default value is <code>LATEST</code>. See <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/model-active-version.html">
     #             Asset model versions</a> in the <i>IoT SiteWise User Guide</i>.</p>
     #   @return [String]
@@ -4130,9 +5322,13 @@ module Aws::IoTSiteWise
     # @!attribute job_id
     #   <p>The ID of the job.</p>
     #   @return [String]
+    # @!attribute workspace_name
+    #   <p>The name of the workspace.</p>
+    #   @return [String]
     class DescribeBulkImportJobRequest < Struct.new(
       nil,
       :job_id,
+      :workspace_name,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4179,7 +5375,15 @@ module Aws::IoTSiteWise
     #   <p>The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the IAM role that allows IoT SiteWise to read Amazon S3 data.</p>
     #   @return [String]
     # @!attribute files
-    #   <p>The files in the specified Amazon S3 bucket that contain your data.</p>
+    #   <p>The files in the specified Amazon S3 bucket that contain your data. You can specify up to 100 files for each bulk import job. Each file supports the following size limits:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>Parquet files – Up to 256 MiB.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Other file formats – Up to 5 GiB.</p>
+    #               </li>
+    #            </ul>
     #   @return [Array<Types::File>]
     # @!attribute error_report_location
     #   <p>The Amazon S3 destination where errors associated with the job creation request are saved.</p>
@@ -4194,12 +5398,18 @@ module Aws::IoTSiteWise
     #   <p>The date the job was last updated, in Unix epoch time.</p>
     #   @return [Time]
     # @!attribute adaptive_ingestion
-    #   <p>If set to true, ingest new data into IoT SiteWise storage. Measurements with notifications, metrics and transforms are 
+    #   <p>If set to true, ingest new data into IoT SiteWise storage. Measurements with notifications, metrics and transforms are
     #      computed. If set to false, historical data is ingested into IoT SiteWise as is.</p>
     #   @return [Boolean]
     # @!attribute delete_files_after_import
     #   <p>If set to true, your data files is deleted from S3, after ingestion into IoT SiteWise storage.</p>
     #   @return [Boolean]
+    # @!attribute dataset_id
+    #   <p>The ID of the dataset.</p>
+    #   @return [String]
+    # @!attribute workspace_name
+    #   <p>The name of the workspace.</p>
+    #   @return [String]
     class DescribeBulkImportJobResponse < Struct.new(
       nil,
       :job_id,
@@ -4213,6 +5423,8 @@ module Aws::IoTSiteWise
       :job_last_update_date,
       :adaptive_ingestion,
       :delete_files_after_import,
+      :dataset_id,
+      :workspace_name,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4290,7 +5502,7 @@ module Aws::IoTSiteWise
     #   <p>The configuration for the computation model.</p>
     #   @return [Types::ComputationModelConfiguration]
     # @!attribute computation_model_data_binding
-    #   <p>The data binding for the computation model. Key is a variable name defined in configuration. 
+    #   <p>The data binding for the computation model. Key is a variable name defined in configuration.
     #     Value is a <code>ComputationModelDataBindingValue</code> referenced by the variable.</p>
     #   @return [Hash<String, Types::ComputationModelDataBindingValue>]
     # @!attribute computation_model_creation_date
@@ -4381,12 +5593,76 @@ module Aws::IoTSiteWise
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Request to describe a dataset export job.</p>
+    # @!attribute workspace_name
+    #   <p>The name of the workspace that contains the dataset export job.</p>
+    #   @return [String]
+    # @!attribute job_id
+    #   <p>The unique identifier for the dataset export job.</p>
+    #   @return [String]
+    class DescribeDatasetExportJobRequest < Struct.new(
+      nil,
+      :workspace_name,
+      :job_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Response for describe dataset export job request.</p>
+    # @!attribute job_id
+    #   <p>The unique identifier for the dataset export job.</p>
+    #   @return [String]
+    # @!attribute workspace_name
+    #   <p>The name of the workspace that contains the dataset export job.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the dataset export job.</p>
+    #   @return [String]
+    # @!attribute started_at
+    #   <p>The timestamp when the job started processing.</p>
+    #   @return [Time]
+    # @!attribute completed_at
+    #   <p>The timestamp when the job completed, or null if the job is still running.</p>
+    #   @return [Time]
+    # @!attribute destination_s3_uri
+    #   <p>The S3 URI where output clips are written.</p>
+    #   @return [String]
+    # @!attribute error_report_location
+    #   <p>The location where the error report will be written on failure.</p>
+    #   @return [Types::ExportErrorReportLocation]
+    # @!attribute input
+    #   <p>The processing input that was provided in the CreateDatasetExportJob request.</p>
+    #   @return [Types::ProcessingInput]
+    class DescribeDatasetExportJobResponse < Struct.new(
+      nil,
+      :job_id,
+      :workspace_name,
+      :status,
+      :started_at,
+      :completed_at,
+      :destination_s3_uri,
+      :error_report_location,
+      :input,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute dataset_id
     #   <p>The ID of the dataset.</p>
+    #   @return [String]
+    # @!attribute workspace_name
+    #   <p>The name of the workspace that contains the dataset.</p>
+    #   @return [String]
+    # @!attribute dataset_version
+    #   <p>The version of the dataset.</p>
     #   @return [String]
     class DescribeDatasetRequest < Struct.new(
       nil,
       :dataset_id,
+      :workspace_name,
+      :dataset_version,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4396,7 +5672,7 @@ module Aws::IoTSiteWise
     #   <p>The ID of the dataset.</p>
     #   @return [String]
     # @!attribute dataset_arn
-    #   <p>The <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html">ARN</a> of the dataset. 
+    #   <p>The <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html">ARN</a> of the dataset.
     #     The format is <code>arn:${Partition}:iotsitewise:${Region}:${Account}:dataset/${DatasetId}</code>.</p>
     #   @return [String]
     # @!attribute dataset_name
@@ -4405,12 +5681,25 @@ module Aws::IoTSiteWise
     # @!attribute dataset_description
     #   <p>A description about the dataset, and its functionality.</p>
     #   @return [String]
+    # @!attribute dataset_type
+    #   <p>The type of dataset: a session dataset, a curated dataset, or a connection to an external
+    #         datasource.</p>
+    #   @return [String]
+    # @!attribute dataset_config
+    #   <p>The configuration for the dataset.</p>
+    #   @return [Types::DatasetConfig]
+    # @!attribute workspace_name
+    #   <p>The name of the workspace that contains the dataset.</p>
+    #   @return [String]
+    # @!attribute metadata
+    #   <p>The metadata for the dataset.</p>
+    #   @return [Hash<String, String>]
     # @!attribute dataset_source
     #   <p>The data source for the dataset.</p>
     #   @return [Types::DatasetSource]
     # @!attribute dataset_status
-    #   <p>The status of the dataset. This contains the state and any error messages. 
-    #     State is <code>CREATING</code> after a successfull call to this API, and any associated error message. The state is 
+    #   <p>The status of the dataset. This contains the state and any error messages.
+    #     State is <code>CREATING</code> after a successfull call to this API, and any associated error message. The state is
     #     <code>ACTIVE</code> when ready to use.</p>
     #   @return [Types::DatasetStatus]
     # @!attribute dataset_creation_date
@@ -4422,17 +5711,25 @@ module Aws::IoTSiteWise
     # @!attribute dataset_version
     #   <p>The version of the dataset.</p>
     #   @return [String]
+    # @!attribute enrichment_status
+    #   <p>The enrichment status of the dataset.</p>
+    #   @return [Types::DatasetEnrichment]
     class DescribeDatasetResponse < Struct.new(
       nil,
       :dataset_id,
       :dataset_arn,
       :dataset_name,
       :dataset_description,
+      :dataset_type,
+      :dataset_config,
+      :workspace_name,
+      :metadata,
       :dataset_source,
       :dataset_status,
       :dataset_creation_date,
       :dataset_last_update_date,
       :dataset_version,
+      :enrichment_status,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4462,6 +5759,79 @@ module Aws::IoTSiteWise
       :encryption_type,
       :kms_key_arn,
       :configuration_status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute workspace_name
+    #   <p>The name of the IoT SiteWise workspace containing the enrichment job.</p>
+    #   @return [String]
+    # @!attribute job_id
+    #   <p>The unique identifier of the enrichment job to retrieve. This is the jobId returned by CreateEnrichmentJob.</p>
+    #   @return [String]
+    class DescribeEnrichmentJobRequest < Struct.new(
+      nil,
+      :workspace_name,
+      :job_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute job_id
+    #   <p>The unique identifier of the enrichment job.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>Current status of the enrichment job. Possible values:</p>
+    #   <ul>
+    #   <li>PENDING: Job is waiting to start processing</li>
+    #   <li>RUNNING: Job is actively processing video data</li>
+    #   <li>COMPLETED: Job finished successfully; embeddings available in IoT SiteWise</li>
+    #   <li>FAILED: Job encountered an error; see failureMessage for details</li>
+    #   <li>TIMED_OUT: Job exceeded maximum processing time limit</li>
+    #   <li>CANCELLED: Job was cancelled by user request</li>
+    #   </ul>
+    #   @return [String]
+    # @!attribute workspace_name
+    #   <p>The name of the IoT SiteWise workspace containing the job.</p>
+    #   @return [String]
+    # @!attribute job_type
+    #   <p>The type of enrichment job, derived from the job configuration. Currently EVENT_DETECTION is the only supported type.</p>
+    #   @return [String]
+    # @!attribute job_configuration
+    #   <p>The complete job configuration as originally submitted, including the analysis type and parameters.
+    #   For event detection jobs, this includes the dataset ID, time series identifier, and trim settings
+    #   defining the analysis time range.</p>
+    #   @return [Types::EnrichmentJobConfiguration]
+    # @!attribute created_at
+    #   <p>Timestamp when the enrichment job was created in ISO 8601 format.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>Timestamp when the job status was last updated in ISO 8601 format. Useful for tracking recent activity.</p>
+    #   @return [Time]
+    # @!attribute completed_at
+    #   <p>Timestamp when the job completed successfully in ISO 8601 format. Only present if status is COMPLETED.</p>
+    #   @return [Time]
+    # @!attribute cancelled_at
+    #   <p>Timestamp when the job was cancelled in ISO 8601 format. Only present if status is CANCELLED.</p>
+    #   @return [Time]
+    # @!attribute failure_message
+    #   <p>Human-readable error message explaining why the job failed. Only present if status is FAILED.
+    #   Use this information to diagnose configuration issues, permission problems, or data processing errors.</p>
+    #   @return [String]
+    class DescribeEnrichmentJobResponse < Struct.new(
+      nil,
+      :job_id,
+      :status,
+      :workspace_name,
+      :job_type,
+      :job_configuration,
+      :created_at,
+      :updated_at,
+      :completed_at,
+      :cancelled_at,
+      :failure_message,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4663,8 +6033,12 @@ module Aws::IoTSiteWise
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute workspace_name
+    #   <p>The name of the workspace.</p>
+    #   @return [String]
     class DescribeLoggingOptionsRequest < Struct.new(
       nil,
+      :workspace_name,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4676,6 +6050,158 @@ module Aws::IoTSiteWise
     class DescribeLoggingOptionsResponse < Struct.new(
       nil,
       :logging_options,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Request structure for DescribePipelineExecution operation.</p>
+    # @!attribute workspace_name
+    #   <p>The name of the workspace.</p>
+    #   @return [String]
+    # @!attribute pipeline_name
+    #   <p>The name of the pipeline.</p>
+    #   @return [String]
+    # @!attribute pipeline_execution_id
+    #   <p>The unique identifier of the pipeline execution.</p>
+    #   @return [String]
+    # @!attribute next_token
+    #   <p>The token to be used for the next set of paginated results.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of compute nodes to return per request. This is an upper bound; the actual number of results may be less. Default: 50.</p>
+    #   @return [Integer]
+    class DescribePipelineExecutionRequest < Struct.new(
+      nil,
+      :workspace_name,
+      :pipeline_name,
+      :pipeline_execution_id,
+      :next_token,
+      :max_results,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Response structure for DescribePipelineExecution operation.</p>
+    # @!attribute pipeline_execution_id
+    #   <p>The unique identifier of the pipeline execution.</p>
+    #   @return [String]
+    # @!attribute pipeline_name
+    #   <p>The name of the pipeline.</p>
+    #   @return [String]
+    # @!attribute workspace_name
+    #   <p>The name of the workspace.</p>
+    #   @return [String]
+    # @!attribute pipeline_version
+    #   <p>The pipeline version this execution ran against.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current execution status of the pipeline.</p>
+    #   @return [Types::PipelineExecutionStatus]
+    # @!attribute start_time
+    #   <p>The time the pipeline execution started, in Unix epoch time.</p>
+    #   @return [Time]
+    # @!attribute end_time
+    #   <p>The time the pipeline execution completed, in Unix epoch time.</p>
+    #   @return [Time]
+    # @!attribute request_environment_variables
+    #   <p>The environment variables provided as input for the pipeline execution.</p>
+    #   @return [Types::ExecutionEnvironmentVariables]
+    # @!attribute request_mount_overrides
+    #   <p>The mount overrides provided as input for the pipeline execution. Present when mount overrides were supplied at execution time.</p>
+    #   @return [Types::MountOverrides]
+    # @!attribute execution_priority
+    #   <p>Scheduling priority for the execution. When not specified, defaults to lowest priority.</p>
+    #   @return [Integer]
+    # @!attribute compute_node_execution_details
+    #   <p>A list of compute node execution details within this pipeline execution.</p>
+    #   @return [Array<Types::ComputeNodeExecutionDetails>]
+    # @!attribute next_token
+    #   <p>The token to be used for the next set of paginated results.</p>
+    #   @return [String]
+    class DescribePipelineExecutionResponse < Struct.new(
+      nil,
+      :pipeline_execution_id,
+      :pipeline_name,
+      :workspace_name,
+      :pipeline_version,
+      :status,
+      :start_time,
+      :end_time,
+      :request_environment_variables,
+      :request_mount_overrides,
+      :execution_priority,
+      :compute_node_execution_details,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Request structure for DescribePipeline operation.</p>
+    # @!attribute workspace_name
+    #   <p>The name of the workspace.</p>
+    #   @return [String]
+    # @!attribute pipeline_name
+    #   <p>The name of the pipeline.</p>
+    #   @return [String]
+    # @!attribute pipeline_version
+    #   <p>The version number of the pipeline to retrieve. If not specified, returns the latest version.</p>
+    #   @return [String]
+    class DescribePipelineRequest < Struct.new(
+      nil,
+      :workspace_name,
+      :pipeline_name,
+      :pipeline_version,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Response structure for DescribePipeline operation.</p>
+    # @!attribute pipeline_name
+    #   <p>A unique name of the pipeline within the workspace.</p>
+    #   @return [String]
+    # @!attribute workspace_name
+    #   <p>The name of the workspace.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>The description of the pipeline.</p>
+    #   @return [String]
+    # @!attribute pipeline_arn
+    #   <p>The ARN of the pipeline.</p>
+    #   @return [String]
+    # @!attribute version
+    #   <p>The version of the pipeline.</p>
+    #   @return [String]
+    # @!attribute environment_variables
+    #   <p>The environment variables shared across all compute nodes in the pipeline.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute computations
+    #   <p>The list of compute nodes that form the pipeline DAG.</p>
+    #   @return [Array<Types::ComputeNode>]
+    # @!attribute status
+    #   <p>The current lifecycle status of the pipeline.</p>
+    #   @return [Types::ResourceStatus]
+    # @!attribute created_at
+    #   <p>The time the pipeline was created, in Unix epoch time.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The time the pipeline was last updated, in Unix epoch time.</p>
+    #   @return [Time]
+    class DescribePipelineResponse < Struct.new(
+      nil,
+      :pipeline_name,
+      :workspace_name,
+      :description,
+      :pipeline_arn,
+      :version,
+      :environment_variables,
+      :computations,
+      :status,
+      :created_at,
+      :updated_at,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4824,6 +6350,109 @@ module Aws::IoTSiteWise
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute workspace_name
+    #   <p>The name of the workspace associated with the query.</p>
+    #   @return [String]
+    # @!attribute query_id
+    #   <p>The unique identifier for the query execution.</p>
+    #   @return [String]
+    class DescribeQueryRequest < Struct.new(
+      nil,
+      :workspace_name,
+      :query_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the response for the DescribeQuery operation.</p>
+    # @!attribute query_id
+    #   <p>The unique identifier for the query execution.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current query status.</p>
+    #   @return [String]
+    # @!attribute submitted_at
+    #   <p>The date and time when the query was submitted, in Unix epoch time.</p>
+    #   @return [Time]
+    # @!attribute completed_at
+    #   <p>The date and time when the query reached a terminal state, in Unix epoch time. This field is present when the query status is COMPLETED, FAILED, or CANCELED.</p>
+    #   @return [Time]
+    # @!attribute statistics
+    #   <p>The query execution statistics. This field is present when the query status is COMPLETED.</p>
+    #   @return [Types::QueryStatistics]
+    # @!attribute error_message
+    #   <p>A human-readable error description. This field is present when the query status is FAILED.</p>
+    #   @return [String]
+    class DescribeQueryResponse < Struct.new(
+      nil,
+      :query_id,
+      :status,
+      :submitted_at,
+      :completed_at,
+      :statistics,
+      :error_message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Input for the DescribeSearch operation.</p>
+    # @!attribute workspace_name
+    #   <p>The name of the workspace the search belongs to.</p>
+    #   @return [String]
+    # @!attribute search_id
+    #   <p>The identifier of the search to describe.</p>
+    #   @return [String]
+    class DescribeSearchRequest < Struct.new(
+      nil,
+      :workspace_name,
+      :search_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Output of the DescribeSearch operation.</p>
+    # @!attribute search_id
+    #   <p>The unique identifier of the search.</p>
+    #   @return [String]
+    # @!attribute workspace_name
+    #   <p>The name of the workspace the search runs against.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the search.</p>
+    #   @return [String]
+    # @!attribute query_statement
+    #   <p>The natural-language query that was submitted for the search.</p>
+    #   @return [String]
+    # @!attribute search_type
+    #   <p>The search strategy used for the search.</p>
+    #   @return [String]
+    # @!attribute status_reason
+    #   <p>A human-readable explanation of the current status. Populated when the search has <code>FAILED</code>.</p>
+    #   @return [String]
+    # @!attribute started_at
+    #   <p>The time at which the search was started.</p>
+    #   @return [Time]
+    # @!attribute group_id
+    #   <p>The group identifier associated with the search, if one was supplied on the request.</p>
+    #   @return [String]
+    class DescribeSearchResponse < Struct.new(
+      nil,
+      :search_id,
+      :workspace_name,
+      :status,
+      :query_statement,
+      :search_type,
+      :status_reason,
+      :started_at,
+      :group_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     class DescribeStorageConfigurationRequest < Struct.new(
       nil,
       keyword_init: true
@@ -4904,6 +6533,70 @@ module Aws::IoTSiteWise
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Request structure for DescribeTask operation.</p>
+    # @!attribute workspace_name
+    #   <p>The name of the workspace.</p>
+    #   @return [String]
+    # @!attribute task_name
+    #   <p>The name of the task.</p>
+    #   @return [String]
+    # @!attribute task_version
+    #   <p>The version number of the task to retrieve. If not specified, returns the latest version.</p>
+    #   @return [String]
+    class DescribeTaskRequest < Struct.new(
+      nil,
+      :workspace_name,
+      :task_name,
+      :task_version,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Response structure for DescribeTask operation.</p>
+    # @!attribute workspace_name
+    #   <p>The name of the workspace.</p>
+    #   @return [String]
+    # @!attribute task_name
+    #   <p>The name of the task.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>The description of the task.</p>
+    #   @return [String]
+    # @!attribute task_arn
+    #   <p>The ARN of the task.</p>
+    #   @return [String]
+    # @!attribute version
+    #   <p>The version of the task.</p>
+    #   @return [String]
+    # @!attribute task_configuration
+    #   <p>The task execution configuration. Contains a <a href="https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_ContainerTaskConfiguration.html">containerTaskConfiguration</a> for custom container workloads.</p>
+    #   @return [Types::TaskConfiguration]
+    # @!attribute status
+    #   <p>The current lifecycle status of the task.</p>
+    #   @return [Types::ResourceStatus]
+    # @!attribute created_at
+    #   <p>The time the task was created, in Unix epoch time.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The time the task was last updated, in Unix epoch time.</p>
+    #   @return [Time]
+    class DescribeTaskResponse < Struct.new(
+      nil,
+      :workspace_name,
+      :task_name,
+      :description,
+      :task_arn,
+      :version,
+      :task_configuration,
+      :status,
+      :created_at,
+      :updated_at,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute alias
     #   <p>The alias that identifies the time series.</p>
     #   @return [String]
@@ -4915,11 +6608,15 @@ module Aws::IoTSiteWise
     #   <p>The ID of the asset property. This can be either the actual ID in UUID format, or else <code>externalId:</code> followed by the external ID, if it has one.
     #       For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references">Referencing objects with external IDs</a> in the <i>IoT SiteWise User Guide</i>.</p>
     #   @return [String]
+    # @!attribute workspace_name
+    #   <p>The name of the workspace.</p>
+    #   @return [String]
     class DescribeTimeSeriesRequest < Struct.new(
       nil,
       :alias,
       :asset_id,
       :property_id,
+      :workspace_name,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4960,6 +6657,9 @@ module Aws::IoTSiteWise
     #               <code>arn:${Partition}:iotsitewise:${Region}:${Account}:time-series/${TimeSeriesId}</code>
     #            </p>
     #   @return [String]
+    # @!attribute workspace_name
+    #   <p>The name of the workspace.</p>
+    #   @return [String]
     class DescribeTimeSeriesResponse < Struct.new(
       nil,
       :asset_id,
@@ -4971,6 +6671,53 @@ module Aws::IoTSiteWise
       :time_series_creation_date,
       :time_series_last_update_date,
       :time_series_arn,
+      :workspace_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute workspace_name
+    #   <p>The name of the workspace.</p>
+    #   @return [String]
+    class DescribeWorkspaceRequest < Struct.new(
+      nil,
+      :workspace_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute workspace_arn
+    #   <p>The ARN of the workspace.</p>
+    #   @return [String]
+    # @!attribute workspace_name
+    #   <p>The name of the workspace.</p>
+    #   @return [String]
+    # @!attribute workspace_description
+    #   <p>The description of the workspace.</p>
+    #   @return [String]
+    # @!attribute workspace_status
+    #   <p>The status of the workspace, which contains the state and any error message.</p>
+    #   @return [Types::WorkspaceStatus]
+    # @!attribute encryption_configuration
+    #   <p>The encryption configuration information for the workspace.</p>
+    #   @return [Types::WorkspaceEncryptionConfigurationInfo]
+    # @!attribute created_at
+    #   <p>The date the workspace was created, in Unix epoch time.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The date the workspace was last updated, in Unix epoch time.</p>
+    #   @return [Time]
+    class DescribeWorkspaceResponse < Struct.new(
+      nil,
+      :workspace_arn,
+      :workspace_name,
+      :workspace_description,
+      :workspace_status,
+      :encryption_configuration,
+      :created_at,
+      :updated_at,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4984,6 +6731,22 @@ module Aws::IoTSiteWise
     #   <p>The error message. </p>
     #   @return [String]
     class DetailedError < Struct.new(
+      nil,
+      :code,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains a detailed error entry for granular troubleshooting of pipeline failures.</p>
+    # @!attribute code
+    #   <p>The error code.</p>
+    #   @return [String]
+    # @!attribute message
+    #   <p>The associated error message.</p>
+    #   @return [String]
+    class DetailedPipelineError < Struct.new(
       nil,
       :code,
       :message,
@@ -5022,6 +6785,30 @@ module Aws::IoTSiteWise
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Contains information about a data segment entry to disassociate from a dataset.</p>
+    # @!attribute source_dataset_id
+    #   <p>The ID of the source dataset that contains the data segment.</p>
+    #   @return [String]
+    # @!attribute time_series_id
+    #   <p>The ID of the time series.</p>
+    #   @return [String]
+    # @!attribute start_timestamp
+    #   <p>The nanosecond-precision start time of the data segment to disassociate.</p>
+    #   @return [Types::TimeInNanos]
+    # @!attribute end_timestamp
+    #   <p>The nanosecond-precision end time of the data segment to disassociate.</p>
+    #   @return [Types::TimeInNanos]
+    class DisassociateDataSegmentEntry < Struct.new(
+      nil,
+      :source_dataset_id,
+      :time_series_id,
+      :start_timestamp,
+      :end_timestamp,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute alias
     #   <p>The alias that identifies the time series.</p>
     #   @return [String]
@@ -5042,6 +6829,133 @@ module Aws::IoTSiteWise
       :asset_id,
       :property_id,
       :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration for the enrichment job defining which analysis type to perform on video time-series data.
+    # Currently supports event detection enrichment. Exactly one member must be specified.</p>
+    # @!attribute event_detection
+    #   <p>Event detection configuration that generates embeddings from video time-series data enabling
+    #   natural language similarity search on events. The service processes video data and creates
+    #   embeddings stored in IoT SiteWise for semantic querying.</p>
+    #   @return [Types::EventDetection]
+    class EnrichmentJobConfiguration < Struct.new(
+      :event_detection,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class EventDetection < EnrichmentJobConfiguration; end
+      class Unknown < EnrichmentJobConfiguration; end
+    end
+
+    # <p>Summary information for an enrichment job returned by ListEnrichmentJobs. This lightweight
+    # representation includes identifiers, status, and key metadata without the full job configuration.</p>
+    # <p>Use DescribeEnrichmentJob to retrieve:</p>
+    # <ul>
+    # <li>Complete job configuration (trim settings, full parameters)</li>
+    # <li>Detailed timestamps (completedAt, cancelledAt)</li>
+    # <li>Failure messages for failed jobs</li>
+    # </ul>
+    # <p>The summary is optimized for display in lists and dashboards, providing enough information to
+    # identify and filter jobs without the overhead of full configuration details.</p>
+    # @!attribute job_id
+    #   <p>Unique identifier for the enrichment job.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>Current status of the job: PENDING, RUNNING, COMPLETED, FAILED, TIMED_OUT, or CANCELLED.
+    #   Use this to quickly identify active jobs or jobs requiring attention.</p>
+    #   @return [String]
+    # @!attribute workspace_name
+    #   <p>The name of the IoT SiteWise workspace containing this job.</p>
+    #   @return [String]
+    # @!attribute job_type
+    #   <p>The type of enrichment job. Currently EVENT_DETECTION is the only supported type.</p>
+    #   @return [String]
+    # @!attribute dataset_id
+    #   <p>The dataset being enriched. Useful for filtering and identifying jobs without fetching the full
+    #   configuration. This allows you to quickly find all jobs related to a specific dataset.</p>
+    #   @return [String]
+    # @!attribute property_alias
+    #   <p>The property alias (human-readable sensor name) of the time series being enriched.
+    #   Present when the job was created using a propertyAlias. Use this to identify which sensor the job analyzes.</p>
+    #   @return [String]
+    # @!attribute time_series_id
+    #   <p>The system identifier of the time series being enriched.
+    #   Present when the job was created using a timeSeriesId. Use this to identify which time series the job analyzes.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>Timestamp when the job was created in ISO 8601 format.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>Timestamp of the last job status change in ISO 8601 format. Use this to track recent activity
+    #   and identify stale jobs. For active jobs, this shows the last time the job transitioned to a new status.</p>
+    #   @return [Time]
+    class EnrichmentJobSummary < Struct.new(
+      nil,
+      :job_id,
+      :status,
+      :workspace_name,
+      :job_type,
+      :dataset_id,
+      :property_alias,
+      :time_series_id,
+      :created_at,
+      :updated_at,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Time range settings for extracting a specific window of video time-series data to process.</p>
+    # <p>Trim settings define the time bounds for enrichment and must satisfy:</p>
+    # <ul>
+    # <li>Start and end times must be within the dataset's time bounds</li>
+    # <li>Trim settings retrieve fully contained data segments within the specified time range</li>
+    # <li>endTime must be greater than startTime</li>
+    # <li>Both times should represent valid data ranges in the dataset</li>
+    # </ul>
+    # <p>Trim settings are required to:</p>
+    # <ul>
+    # <li>Prevent accidentally analyzing unbounded datasets</li>
+    # <li>Ensure predictable processing time and costs</li>
+    # <li>Allow focused analysis on specific time periods of interest</li>
+    # </ul>
+    # @!attribute start_time
+    #   <p>Start time for the video analysis time range in nanoseconds since Unix epoch (TimeInNanos format).
+    #   Data segments at or after this time are included in the enrichment.
+    #   Must be within the dataset's time bounds.</p>
+    #   <p>Example (JavaScript): Date.parse('2024-01-01T00:00:00Z') * 1000000
+    #   Example (Python): int(datetime.timestamp() * 1e9)</p>
+    #   @return [Types::TimeInNanos]
+    # @!attribute end_time
+    #   <p>End time for the video analysis time range in nanoseconds since Unix epoch (TimeInNanos format).
+    #   Data segments at or before this time are included in the enrichment.
+    #   Must be greater than startTime and within the dataset's time bounds.</p>
+    #   @return [Types::TimeInNanos]
+    class EnrichmentTrimSettings < Struct.new(
+      nil,
+      :start_time,
+      :end_time,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration for ephemeral storage attached to the container task.</p>
+    # @!attribute storage_class
+    #   <p>Storage type that determines I/O performance family and level.</p>
+    #   @return [String]
+    # @!attribute storage_size_in_gi_b
+    #   <p>Storage volume size in GiB.</p>
+    #   @return [Integer]
+    class EphemeralStorageConfiguration < Struct.new(
+      nil,
+      :storage_class,
+      :storage_size_in_gi_b,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5082,6 +6996,46 @@ module Aws::IoTSiteWise
       nil,
       :bucket,
       :prefix,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration for event detection enrichment on video time-series data.</p>
+    # <p>Event detection generates embeddings from video data enabling natural language similarity search
+    # on events. This allows customers to:</p>
+    # <ul>
+    # <li>Query video events using semantic search after enrichment completes</li>
+    # <li>Find relevant video segments through natural language queries</li>
+    # <li>Search across video time-series data stored in IoT SiteWise</li>
+    # </ul>
+    # <p>You must specify the dataset, exactly one time-series identifier (timeSeriesId OR propertyAlias),
+    # and trim settings defining the video time window to process.</p>
+    # @!attribute dataset_id
+    #   <p>The IoT SiteWise dataset ID containing the video time-series data to analyze.
+    #   Query IoT SiteWise to discover available datasets in your workspace.</p>
+    #   @return [String]
+    # @!attribute time_series_id
+    #   <p>Unique system identifier for the video time series to analyze.
+    #   Specify either timeSeriesId or propertyAlias, but not both.
+    #   Use this when you have the system-generated time series identifier from IoT SiteWise.</p>
+    #   @return [String]
+    # @!attribute property_alias
+    #   <p>Human-readable alias for the video time series to analyze (e.g., /camera/warehouse/zone-a).
+    #   Specify either propertyAlias or timeSeriesId, but not both.
+    #   Use this when you have configured friendly aliases in IoT SiteWise for better readability.</p>
+    #   @return [String]
+    # @!attribute trim_settings
+    #   <p>Time range settings defining which portion of the video time-series data to process.
+    #   Required to ensure predictable processing time and prevent analyzing unbounded datasets.
+    #   Start and end times must be within the dataset's time bounds.</p>
+    #   @return [Types::EnrichmentTrimSettings]
+    class EventDetection < Struct.new(
+      nil,
+      :dataset_id,
+      :time_series_id,
+      :property_alias,
+      :trim_settings,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5178,6 +7132,23 @@ module Aws::IoTSiteWise
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Environment variables provided as input for a pipeline execution.</p>
+    # @note This shape contains sensitive data and should be treated as such.
+    # @!attribute global
+    #   <p>Global environment variables that apply to all compute nodes in the pipeline execution.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute compute_nodes
+    #   <p>Per-compute-node environment variable overrides. Each entry maps a compute node name to its environment variable overrides.</p>
+    #   @return [Hash<String, Hash<String, String>>]
+    class ExecutionEnvironmentVariables < Struct.new(
+      nil,
+      :global,
+      :compute_nodes,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The status of the execution.</p>
     # @!attribute state
     #   <p>The current state of the computation model.</p>
@@ -5235,6 +7206,46 @@ module Aws::IoTSiteWise
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Contains the location where error reports will be written on failure.</p>
+    # @!attribute s3_uri
+    #   <p>The S3 URI prefix for the error report.</p>
+    #   @return [String]
+    class ExportErrorReportLocation < Struct.new(
+      nil,
+      :s3_uri,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains summary information about a dataset export job.</p>
+    # @!attribute job_id
+    #   <p>The unique identifier for the dataset export job.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the dataset export job.</p>
+    #   @return [String]
+    # @!attribute started_at
+    #   <p>The timestamp when the job started processing.</p>
+    #   @return [Time]
+    # @!attribute completed_at
+    #   <p>The timestamp when the job completed, or null if the job is still running.</p>
+    #   @return [Time]
+    # @!attribute destination_s3_uri
+    #   <p>The S3 URI where output clips are written.</p>
+    #   @return [String]
+    class ExportJobSummary < Struct.new(
+      nil,
+      :job_id,
+      :status,
+      :started_at,
+      :completed_at,
+      :destination_s3_uri,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Contains expression variable information.</p>
     # @!attribute name
     #   <p>The friendly name of the variable to be used in the expression.</p>
@@ -5246,6 +7257,98 @@ module Aws::IoTSiteWise
       nil,
       :name,
       :value,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains error information for a data segment association that failed.</p>
+    # @!attribute source_dataset_id
+    #   <p>The ID of the source dataset.</p>
+    #   @return [String]
+    # @!attribute time_series_id
+    #   <p>The ID of the time series.</p>
+    #   @return [String]
+    # @!attribute start_timestamp
+    #   <p>The nanosecond-precision start time of the data segment.</p>
+    #   @return [Types::TimeInNanos]
+    # @!attribute end_timestamp
+    #   <p>The nanosecond-precision end time of the data segment.</p>
+    #   @return [Types::TimeInNanos]
+    # @!attribute error_code
+    #   <p>The error code for the failed association.</p>
+    #   @return [String]
+    # @!attribute error_message
+    #   <p>The error message for the failed association.</p>
+    #   @return [String]
+    class FailedDataSegmentAssociation < Struct.new(
+      nil,
+      :source_dataset_id,
+      :time_series_id,
+      :start_timestamp,
+      :end_timestamp,
+      :error_code,
+      :error_message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains error information for a data segment deletion that failed.</p>
+    # @!attribute time_series_id
+    #   <p>The ID of the time series.</p>
+    #   @return [String]
+    # @!attribute start_timestamp
+    #   <p>The nanosecond-precision start time of the data segment.</p>
+    #   @return [Types::TimeInNanos]
+    # @!attribute end_timestamp
+    #   <p>The nanosecond-precision end time of the data segment.</p>
+    #   @return [Types::TimeInNanos]
+    # @!attribute error_code
+    #   <p>The error code for the failed deletion.</p>
+    #   @return [String]
+    # @!attribute error_message
+    #   <p>The error message for the failed deletion.</p>
+    #   @return [String]
+    class FailedDataSegmentDeletion < Struct.new(
+      nil,
+      :time_series_id,
+      :start_timestamp,
+      :end_timestamp,
+      :error_code,
+      :error_message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains error information for a data segment disassociation that failed.</p>
+    # @!attribute source_dataset_id
+    #   <p>The ID of the source dataset.</p>
+    #   @return [String]
+    # @!attribute time_series_id
+    #   <p>The ID of the time series.</p>
+    #   @return [String]
+    # @!attribute start_timestamp
+    #   <p>The nanosecond-precision start time of the data segment.</p>
+    #   @return [Types::TimeInNanos]
+    # @!attribute end_timestamp
+    #   <p>The nanosecond-precision end time of the data segment.</p>
+    #   @return [Types::TimeInNanos]
+    # @!attribute error_code
+    #   <p>The error code for the failed disassociation.</p>
+    #   @return [String]
+    # @!attribute error_message
+    #   <p>The error message for the failed disassociation.</p>
+    #   @return [String]
+    class FailedDataSegmentDisassociation < Struct.new(
+      nil,
+      :source_dataset_id,
+      :time_series_id,
+      :start_timestamp,
+      :end_timestamp,
+      :error_code,
+      :error_message,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5263,11 +7366,23 @@ module Aws::IoTSiteWise
     #   <p>The version ID to identify a specific version of the Amazon S3 object that contains your
     #         data.</p>
     #   @return [String]
+    # @!attribute alias
+    #   <p>The alias associated with the file's time series.</p>
+    #   @return [String]
+    # @!attribute start_time
+    #   <p>The nanosecond-precision start time for the file data.</p>
+    #   @return [Types::TimeInNanos]
+    # @!attribute file_format
+    #   <p>The file format of the data in S3.</p>
+    #   @return [Types::FileFormat]
     class File < Struct.new(
       nil,
       :bucket,
       :key,
       :version_id,
+      :alias,
+      :start_time,
+      :file_format,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5280,10 +7395,38 @@ module Aws::IoTSiteWise
     # @!attribute parquet
     #   <p>The file is in parquet format.</p>
     #   @return [Types::Parquet]
+    # @!attribute mp4
+    #   <p>The MP4 format configuration.</p>
+    #   @return [Types::Mp4]
+    # @!attribute annotation
+    #   <p>The annotation format configuration.</p>
+    #   @return [Types::Annotation]
     class FileFormat < Struct.new(
       nil,
       :csv,
       :parquet,
+      :mp4,
+      :annotation,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the output format configuration for video processing.</p>
+    # @!attribute frames_per_second
+    #   <p>The target frame rate for the output.</p>
+    #   @return [Integer]
+    # @!attribute width_in_pixels
+    #   <p>The target width of the output, in pixels.</p>
+    #   @return [Integer]
+    # @!attribute height_in_pixels
+    #   <p>The target height of the output, in pixels.</p>
+    #   @return [Integer]
+    class FormatSettings < Struct.new(
+      nil,
+      :frames_per_second,
+      :width_in_pixels,
+      :height_in_pixels,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5604,6 +7747,70 @@ module Aws::IoTSiteWise
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Request to retrieve video data for a specific time range. Exactly one of timeSeriesId or propertyAlias must be provided.</p>
+    # @!attribute workspace_name
+    #   <p>The name of the workspace that contains the capture source.</p>
+    #   @return [String]
+    # @!attribute start_time
+    #   <p>The start time for the video data range.</p>
+    #   @return [Types::TimeInNanos]
+    # @!attribute end_time
+    #   <p>The end time for the video data range. Must be greater than startTime.</p>
+    #   @return [Types::TimeInNanos]
+    # @!attribute time_series_id
+    #   <p>The time series ID that identifies the capture source. Mutually exclusive with propertyAlias.</p>
+    #   @return [String]
+    # @!attribute property_alias
+    #   <p>The property alias that identifies the capture source. Mutually exclusive with timeSeriesId.</p>
+    #   @return [String]
+    # @!attribute format_settings
+    #   <p>The optional format settings for the output.</p>
+    #   @return [Types::FormatSettings]
+    # @!attribute next_token
+    #   <p>The token from a previous response used to continue retrieving data.</p>
+    #   @return [String]
+    class GetCaptureDataRequest < Struct.new(
+      nil,
+      :workspace_name,
+      :start_time,
+      :end_time,
+      :time_series_id,
+      :property_alias,
+      :format_settings,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Response containing the video data.</p>
+    # @!attribute data
+    #   <p>The binary video data.</p>
+    #   @return [String]
+    # @!attribute start_time
+    #   <p>The actual start time of the returned data.</p>
+    #   @return [Types::TimeInNanos]
+    # @!attribute end_time
+    #   <p>The actual end time of the returned data.</p>
+    #   @return [Types::TimeInNanos]
+    # @!attribute data_type
+    #   <p>The type of the returned data.</p>
+    #   @return [String]
+    # @!attribute next_token
+    #   <p>The token used to retrieve the next chunk. Absent if no more data is available.</p>
+    #   @return [String]
+    class GetCaptureDataResponse < Struct.new(
+      nil,
+      :data,
+      :start_time,
+      :end_time,
+      :data_type,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute asset_id
     #   <p>The ID of the asset, in UUID format.</p>
     #   @return [String]
@@ -5728,6 +7935,92 @@ module Aws::IoTSiteWise
     class GetInterpolatedAssetPropertyValuesResponse < Struct.new(
       nil,
       :interpolated_asset_property_values,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute workspace_name
+    #   <p>The name of the workspace associated with the query.</p>
+    #   @return [String]
+    # @!attribute query_id
+    #   <p>The unique identifier for the query execution.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return for each paginated request.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The token to be used for the next set of paginated results.</p>
+    #   @return [String]
+    class GetQueryResultsRequest < Struct.new(
+      nil,
+      :workspace_name,
+      :query_id,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the response for the GetQueryResults operation.</p>
+    # @!attribute column_info
+    #   <p>A list of column metadata for the query results. Each entry contains the column name and data type. Present when the query status is COMPLETED.</p>
+    #   @return [Array<Types::ColumnInformation>]
+    # @!attribute rows
+    #   <p>The result rows. Each row is a list of string column values, positional to match the columnInfo order. Present when the query status is COMPLETED.</p>
+    #   @return [Array<Array<String>>]
+    # @!attribute next_token
+    #   <p>The token for the next set of results, or null if there are no additional results.</p>
+    #   @return [String]
+    class GetQueryResultsResponse < Struct.new(
+      nil,
+      :column_info,
+      :rows,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Input for the GetSearchResults operation.</p>
+    # @!attribute search_id
+    #   <p>The identifier of the search whose results are retrieved.</p>
+    #   @return [String]
+    # @!attribute workspace_name
+    #   <p>The name of the workspace the search belongs to.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return in a single page. Valid range is 1 to 10,000; if
+    #   omitted, a service-defined default is used.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The pagination token returned by a previous GetSearchResults call. Provide it to retrieve the
+    #   next page of results; omit it to retrieve the first page.</p>
+    #   @return [String]
+    class GetSearchResultsRequest < Struct.new(
+      nil,
+      :search_id,
+      :workspace_name,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Output of the GetSearchResults operation.</p>
+    # @!attribute search_results
+    #   <p>A page of search results, ordered by descending relevance score.</p>
+    #   @return [Array<Types::SearchResult>]
+    # @!attribute next_token
+    #   <p>The pagination token to use in a subsequent GetSearchResults call to retrieve the next page.
+    #   Absent when there are no more results.</p>
+    #   @return [String]
+    class GetSearchResultsResponse < Struct.new(
+      nil,
+      :search_results,
       :next_token,
       keyword_init: true
     )
@@ -6022,14 +8315,14 @@ module Aws::IoTSiteWise
     end
 
     # @!attribute conversation_id
-    #   <p>The ID assigned to a conversation. IoT SiteWise automatically generates a unique ID for you, and this parameter is never required. 
+    #   <p>The ID assigned to a conversation. IoT SiteWise automatically generates a unique ID for you, and this parameter is never required.
     #     However, if you prefer to have your own ID, you must specify it here in UUID format. If you specify your own ID, it must be globally unique.</p>
     #   @return [String]
     # @!attribute message
     #   <p>A text message sent to the SiteWise Assistant by the user.</p>
     #   @return [String]
     # @!attribute enable_trace
-    #   <p>Specifies if to turn trace on or not. It is used to track the SiteWise Assistant's 
+    #   <p>Specifies if to turn trace on or not. It is used to track the SiteWise Assistant's
     #     reasoning, and data access process.</p>
     #   @return [Boolean]
     class InvokeAssistantRequest < Struct.new(
@@ -6250,6 +8543,36 @@ module Aws::IoTSiteWise
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute max_results
+    #   <p>Maximum number of results to return</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>Next Page Token</p>
+    #   @return [String]
+    class ListApplicationsRequest < Struct.new(
+      nil,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute next_token
+    #   <p>Next Page Token</p>
+    #   @return [String]
+    # @!attribute applications
+    #   <p>List of applications</p>
+    #   @return [Array<Types::ApplicationSummary>]
+    class ListApplicationsResponse < Struct.new(
+      nil,
+      :next_token,
+      :applications,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute asset_model_id
     #   <p>The ID of the asset model. This can be either the actual ID in UUID format, or else <code>externalId:</code> followed by the external ID, if it has one.
     #       For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references">Referencing objects with external IDs</a> in the <i>IoT SiteWise User Guide</i>.</p>
@@ -6262,7 +8585,7 @@ module Aws::IoTSiteWise
     #            <p>Default: 50</p>
     #   @return [Integer]
     # @!attribute asset_model_version
-    #   <p>The version alias that specifies the latest or active version of the asset model. 
+    #   <p>The version alias that specifies the latest or active version of the asset model.
     #             The details are returned in the response. The default value is <code>LATEST</code>. See <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/model-active-version.html">
     #             Asset model versions</a> in the <i>IoT SiteWise User Guide</i>.</p>
     #   @return [String]
@@ -6321,7 +8644,7 @@ module Aws::IoTSiteWise
     #            </p>
     #   @return [String]
     # @!attribute asset_model_version
-    #   <p>The version alias that specifies the latest or active version of the asset model. 
+    #   <p>The version alias that specifies the latest or active version of the asset model.
     #             The details are returned in the response. The default value is <code>LATEST</code>. See <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/model-active-version.html">
     #             Asset model versions</a> in the <i>IoT SiteWise User Guide</i>.</p>
     #   @return [String]
@@ -6382,7 +8705,7 @@ module Aws::IoTSiteWise
     #            <p>Default: 50</p>
     #   @return [Integer]
     # @!attribute asset_model_version
-    #   <p>The version alias that specifies the latest or active version of the asset model. 
+    #   <p>The version alias that specifies the latest or active version of the asset model.
     #             The details are returned in the response. The default value is <code>LATEST</code>. See <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/model-active-version.html">
     #             Asset model versions</a> in the <i>IoT SiteWise User Guide</i>.</p>
     #   @return [String]
@@ -6641,11 +8964,15 @@ module Aws::IoTSiteWise
     # @!attribute filter
     #   <p>You can use a filter to select the bulk import jobs that you want to retrieve.</p>
     #   @return [String]
+    # @!attribute workspace_name
+    #   <p>The name of the workspace.</p>
+    #   @return [String]
     class ListBulkImportJobsRequest < Struct.new(
       nil,
       :next_token,
       :max_results,
       :filter,
+      :workspace_name,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6846,8 +9173,135 @@ module Aws::IoTSiteWise
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute dataset_id
+    #   <p>The ID of the session dataset to list data segment relationships for.</p>
+    #   @return [String]
+    # @!attribute workspace_name
+    #   <p>The name of the workspace that contains the dataset.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return for each paginated request. Default: 50.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The token to be used for the next set of paginated results.</p>
+    #   @return [String]
+    class ListDatasetDataSegmentRelationshipsRequest < Struct.new(
+      nil,
+      :dataset_id,
+      :workspace_name,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute data_segment_relationship_summaries
+    #   <p>A list that summarizes each data segment relationship.</p>
+    #   @return [Array<Types::DataSegmentRelationshipSummary>]
+    # @!attribute next_token
+    #   <p>The token for the next set of results, or null if there are no additional results.</p>
+    #   @return [String]
+    class ListDatasetDataSegmentRelationshipsResponse < Struct.new(
+      nil,
+      :data_segment_relationship_summaries,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute dataset_id
+    #   <p>The ID of the dataset.</p>
+    #   @return [String]
+    # @!attribute workspace_name
+    #   <p>The name of the workspace that contains the dataset.</p>
+    #   @return [String]
+    # @!attribute dataset_version
+    #   <p>The version of the dataset to list data segments for.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return for each paginated request. Default: 50.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The token to be used for the next set of paginated results.</p>
+    #   @return [String]
+    class ListDatasetDataSegmentsRequest < Struct.new(
+      nil,
+      :dataset_id,
+      :workspace_name,
+      :dataset_version,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute data_segments
+    #   <p>A list that summarizes each data segment.</p>
+    #   @return [Array<Types::DataSegmentSummary>]
+    # @!attribute next_token
+    #   <p>The token for the next set of results, or null if there are no additional results.</p>
+    #   @return [String]
+    class ListDatasetDataSegmentsResponse < Struct.new(
+      nil,
+      :data_segments,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Request to list dataset export jobs for a workspace.</p>
+    # @!attribute workspace_name
+    #   <p>The name of the workspace whose dataset export jobs should be listed.</p>
+    #   @return [String]
+    # @!attribute filter
+    #   <p>The optional filter that returns only jobs matching the given filter value. Defaults to ALL.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return for each paginated request.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The token to be used for the next set of paginated results.</p>
+    #   @return [String]
+    class ListDatasetExportJobsRequest < Struct.new(
+      nil,
+      :workspace_name,
+      :filter,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Response for list dataset export jobs request.</p>
+    # @!attribute jobs
+    #   <p>A list of dataset export job summaries.</p>
+    #   @return [Array<Types::ExportJobSummary>]
+    # @!attribute next_token
+    #   <p>The token for the next set of results, or null if there are no additional results.</p>
+    #   @return [String]
+    class ListDatasetExportJobsResponse < Struct.new(
+      nil,
+      :jobs,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute source_type
     #   <p>The type of data source for the dataset.</p>
+    #   @return [String]
+    # @!attribute workspace_name
+    #   <p>The name of the workspace to filter datasets by.</p>
+    #   @return [String]
+    # @!attribute dataset_type
+    #   <p>The type of dataset to filter by: a session dataset, a curated dataset, or a connection
+    #         to an external datasource.</p>
     #   @return [String]
     # @!attribute next_token
     #   <p>The token for the next set of results, or null if there are no additional results.</p>
@@ -6858,6 +9312,8 @@ module Aws::IoTSiteWise
     class ListDatasetsRequest < Struct.new(
       nil,
       :source_type,
+      :workspace_name,
+      :dataset_type,
       :next_token,
       :max_results,
       keyword_init: true
@@ -6871,9 +9327,87 @@ module Aws::IoTSiteWise
     # @!attribute next_token
     #   <p>The token for the next set of results, or null if there are no additional results.</p>
     #   @return [String]
+    # @!attribute workspace_name
+    #   <p>The name of the workspace.</p>
+    #   @return [String]
     class ListDatasetsResponse < Struct.new(
       nil,
       :dataset_summaries,
+      :next_token,
+      :workspace_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute workspace_name
+    #   <p>The name of the IoT SiteWise workspace to list enrichment jobs from.</p>
+    #   @return [String]
+    # @!attribute dataset_id
+    #   <p>Filter jobs by dataset ID. Returns only jobs analyzing data from the specified dataset.</p>
+    #   @return [String]
+    # @!attribute property_alias
+    #   <p>Filter by property alias (human-readable sensor name). Specify either propertyAlias or timeSeriesId,
+    #   but not both. Returns only jobs analyzing the specified property alias.</p>
+    #   @return [String]
+    # @!attribute time_series_id
+    #   <p>Filter by time series ID (system identifier). Specify either timeSeriesId or propertyAlias, but not
+    #   both. Returns only jobs analyzing the specified time series.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>Filter by job status. Returns only jobs in the specified status.
+    #   Use RUNNING to find active jobs, or FAILED to identify jobs requiring attention.</p>
+    #   @return [String]
+    # @!attribute job_type
+    #   <p>Filter by enrichment job type. Currently only EVENT_DETECTION is supported.
+    #   Use this filter to future-proof queries when additional job types are added.</p>
+    #   @return [String]
+    # @!attribute start_date
+    #   <p>The exclusive start of the date range for filtering jobs by creation time. Jobs created after this
+    #   timestamp are included. Use ISO 8601 format (e.g., 2024-01-01T00:00:00Z).</p>
+    #   @return [Time]
+    # @!attribute end_date
+    #   <p>The inclusive end of the date range for filtering jobs by creation time. Jobs created on or before
+    #   this timestamp are included. Use ISO 8601 format (e.g., 2024-01-31T23:59:59Z).</p>
+    #   @return [Time]
+    # @!attribute max_results
+    #   <p>Maximum number of jobs to return per page. Defaults to 50 if not specified.
+    #   Use smaller values for faster responses, larger values to reduce API calls.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>Pagination token from a previous ListEnrichmentJobs response. Include this token to retrieve the
+    #   next page of results. Omit for the first request.</p>
+    #   @return [String]
+    class ListEnrichmentJobsRequest < Struct.new(
+      nil,
+      :workspace_name,
+      :dataset_id,
+      :property_alias,
+      :time_series_id,
+      :status,
+      :job_type,
+      :start_date,
+      :end_date,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute jobs
+    #   <p>Array of job summaries matching the filter criteria, ordered by creation time descending (newest first).
+    #   Each summary includes key identifiers (jobId, datasetId, propertyAlias/timeSeriesId) and status
+    #   information without the full job configuration. Use DescribeEnrichmentJob to retrieve complete details.</p>
+    #   @return [Array<Types::EnrichmentJobSummary>]
+    # @!attribute next_token
+    #   <p>Pagination token to retrieve the next page of results. If present, more jobs exist that match the
+    #   filter criteria. Include this token in a subsequent ListEnrichmentJobs request to retrieve the next
+    #   page. If absent, you have retrieved all matching jobs.</p>
+    #   @return [String]
+    class ListEnrichmentJobsResponse < Struct.new(
+      nil,
+      :jobs,
       :next_token,
       keyword_init: true
     )
@@ -6996,6 +9530,114 @@ module Aws::IoTSiteWise
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Request structure for ListPipelineExecutions operation.</p>
+    # @!attribute workspace_name
+    #   <p>The name of the workspace.</p>
+    #   @return [String]
+    # @!attribute pipeline_name
+    #   <p>The name of the pipeline.</p>
+    #   @return [String]
+    # @!attribute next_token
+    #   <p>The token to be used for the next set of paginated results.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return per request.
+    #   This is an upper bound; the actual number of results may be less. Default: 50.</p>
+    #   @return [Integer]
+    # @!attribute state
+    #   <p>Filter by execution state.
+    #   If not specified, executions in all states are returned.</p>
+    #   @return [String]
+    # @!attribute start_time_after
+    #   <p>Inclusive lower bound on execution start time (ISO-8601).
+    #   Only executions with startTime &gt;= startTimeAfter are returned.
+    #   Cannot be combined with endTimeAfter or endTimeBefore.</p>
+    #   @return [Time]
+    # @!attribute start_time_before
+    #   <p>Exclusive upper bound on execution start time (ISO-8601).
+    #   Only executions with startTime &lt; startTimeBefore are returned.
+    #   Cannot be combined with endTimeAfter or endTimeBefore.</p>
+    #   @return [Time]
+    # @!attribute end_time_after
+    #   <p>Inclusive lower bound on execution end time (ISO-8601).
+    #   Only executions with endTime &gt;= endTimeAfter are returned.
+    #   Cannot be combined with startTimeAfter or startTimeBefore.
+    #   Only matches executions in terminal states.</p>
+    #   @return [Time]
+    # @!attribute end_time_before
+    #   <p>Exclusive upper bound on execution end time (ISO-8601).
+    #   Only executions with endTime &lt; endTimeBefore are returned.
+    #   Cannot be combined with startTimeAfter or startTimeBefore.
+    #   Only matches executions in terminal states.</p>
+    #   @return [Time]
+    class ListPipelineExecutionsRequest < Struct.new(
+      nil,
+      :workspace_name,
+      :pipeline_name,
+      :next_token,
+      :max_results,
+      :state,
+      :start_time_after,
+      :start_time_before,
+      :end_time_after,
+      :end_time_before,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Response structure for ListPipelineExecutions operation.</p>
+    # @!attribute pipeline_execution_summaries
+    #   <p>A list that summarizes each pipeline execution.</p>
+    #   @return [Array<Types::PipelineExecutionSummary>]
+    # @!attribute next_token
+    #   <p>The token to be used for the next set of paginated results.</p>
+    #   @return [String]
+    class ListPipelineExecutionsResponse < Struct.new(
+      nil,
+      :pipeline_execution_summaries,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Request structure for ListPipelines operation.</p>
+    # @!attribute workspace_name
+    #   <p>The name of the workspace.</p>
+    #   @return [String]
+    # @!attribute next_token
+    #   <p>The token to be used for the next set of paginated results.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return for each paginated request. Default: 50.</p>
+    #   @return [Integer]
+    class ListPipelinesRequest < Struct.new(
+      nil,
+      :workspace_name,
+      :next_token,
+      :max_results,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Response structure for ListPipelines operation.</p>
+    # @!attribute pipeline_summaries
+    #   <p>A list that summarizes each pipeline in the workspace.</p>
+    #   @return [Array<Types::PipelineSummary>]
+    # @!attribute next_token
+    #   <p>The token to be used for the next set of paginated results.</p>
+    #   @return [String]
+    class ListPipelinesResponse < Struct.new(
+      nil,
+      :pipeline_summaries,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute next_token
     #   <p>The token to be used for the next set of paginated results.</p>
     #   @return [String]
@@ -7097,6 +9739,116 @@ module Aws::IoTSiteWise
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute workspace_name
+    #   <p>The name of the workspace to list queries for.</p>
+    #   @return [String]
+    # @!attribute filter
+    #   <p>An optional filter to return only queries with the specified status. The value must be one of the supported query statuses: SUBMITTED, RUNNING, COMPLETED, FAILED, CANCELED, or CANCELING.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return for each paginated request.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The token to be used for the next set of paginated results.</p>
+    #   @return [String]
+    class ListQueriesRequest < Struct.new(
+      nil,
+      :workspace_name,
+      :filter,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the response for the ListQueries operation.</p>
+    # @!attribute queries
+    #   <p>A list of query summaries for the workspace.</p>
+    #   @return [Array<Types::QuerySummary>]
+    # @!attribute next_token
+    #   <p>The token for the next set of results, or null if there are no additional results.</p>
+    #   @return [String]
+    class ListQueriesResponse < Struct.new(
+      nil,
+      :queries,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Optional filters for ListSearches. When multiple filters are set, a search must match all of them.</p>
+    # @!attribute status_filter
+    #   <p>Returns only searches whose status is one of the listed values.</p>
+    #   @return [Array<String>]
+    # @!attribute started_after
+    #   <p>Returns only searches started at or after this time.</p>
+    #   @return [Time]
+    # @!attribute started_before
+    #   <p>Returns only searches started at or before this time.</p>
+    #   @return [Time]
+    # @!attribute group_id_filter
+    #   <p>Returns only searches whose <code>groupId</code> is one of the listed values.</p>
+    #   @return [Array<String>]
+    # @!attribute search_type_filter
+    #   <p>Returns only searches whose <code>searchType</code> is one of the listed values.</p>
+    #   @return [Array<String>]
+    class ListSearchesFilters < Struct.new(
+      nil,
+      :status_filter,
+      :started_after,
+      :started_before,
+      :group_id_filter,
+      :search_type_filter,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Input for the ListSearches operation.</p>
+    # @!attribute workspace_name
+    #   <p>The name of the workspace whose searches are listed.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of searches to return in a single page. Valid range is 1 to 1,000; if
+    #   omitted, a service-defined default is used.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The pagination token returned by a previous ListSearches call. Provide it to retrieve the next
+    #   page; omit it to retrieve the first page.</p>
+    #   @return [String]
+    # @!attribute list_searches_filters
+    #   <p>Optional filters that restrict which searches are returned.</p>
+    #   @return [Types::ListSearchesFilters]
+    class ListSearchesRequest < Struct.new(
+      nil,
+      :workspace_name,
+      :max_results,
+      :next_token,
+      :list_searches_filters,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Output of the ListSearches operation.</p>
+    # @!attribute search_summaries
+    #   <p>A page of search summaries, most recently started first.</p>
+    #   @return [Array<Types::SearchSummary>]
+    # @!attribute next_token
+    #   <p>The pagination token to use in a subsequent ListSearches call to retrieve the next page. Absent
+    #   when there are no more searches.</p>
+    #   @return [String]
+    class ListSearchesResponse < Struct.new(
+      nil,
+      :search_summaries,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute resource_arn
     #   <p>The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the resource.</p>
     #   @return [String]
@@ -7116,6 +9868,42 @@ module Aws::IoTSiteWise
     class ListTagsForResourceResponse < Struct.new(
       nil,
       :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Request structure for ListTasks operation.</p>
+    # @!attribute workspace_name
+    #   <p>The name of the workspace.</p>
+    #   @return [String]
+    # @!attribute next_token
+    #   <p>The token to be used for the next set of paginated results.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return for each paginated request. Default: 50.</p>
+    #   @return [Integer]
+    class ListTasksRequest < Struct.new(
+      nil,
+      :workspace_name,
+      :next_token,
+      :max_results,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Response structure for ListTasks operation.</p>
+    # @!attribute task_summaries
+    #   <p>A list that summarizes each task in the workspace.</p>
+    #   @return [Array<Types::TaskSummary>]
+    # @!attribute next_token
+    #   <p>The token to be used for the next set of paginated results.</p>
+    #   @return [String]
+    class ListTasksResponse < Struct.new(
+      nil,
+      :task_summaries,
+      :next_token,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7150,6 +9938,9 @@ module Aws::IoTSiteWise
     #               </li>
     #            </ul>
     #   @return [String]
+    # @!attribute workspace_name
+    #   <p>The name of the workspace.</p>
+    #   @return [String]
     class ListTimeSeriesRequest < Struct.new(
       nil,
       :next_token,
@@ -7157,6 +9948,7 @@ module Aws::IoTSiteWise
       :asset_id,
       :alias_prefix,
       :time_series_type,
+      :workspace_name,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7168,9 +9960,43 @@ module Aws::IoTSiteWise
     # @!attribute next_token
     #   <p>The token for the next set of results, or null if there are no additional results.</p>
     #   @return [String]
+    # @!attribute workspace_name
+    #   <p>The name of the workspace.</p>
+    #   @return [String]
     class ListTimeSeriesResponse < Struct.new(
       nil,
       :time_series_summaries,
+      :next_token,
+      :workspace_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute next_token
+    #   <p>The token to be used for the next set of paginated results.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return for each paginated request. Default: 50.</p>
+    #   @return [Integer]
+    class ListWorkspacesRequest < Struct.new(
+      nil,
+      :next_token,
+      :max_results,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute workspace_summaries
+    #   <p>A list that summarizes each workspace.</p>
+    #   @return [Array<Types::WorkspaceSummary>]
+    # @!attribute next_token
+    #   <p>The token for the next set of results, or null if there are no additional results.</p>
+    #   @return [String]
+    class ListWorkspacesResponse < Struct.new(
+      nil,
+      :workspace_summaries,
       :next_token,
       keyword_init: true
     )
@@ -7329,6 +10155,65 @@ module Aws::IoTSiteWise
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Attaches a data source to the container filesystem for a task at a customer-supplied relative path under the service-owned mount root.</p>
+    # @!attribute name
+    #   <p>A unique name for the mount within the task.</p>
+    #   @return [String]
+    # @!attribute relative_path
+    #   <p>The relative path under the service-owned mount root where this mount is attached inside the container.</p>
+    #   @return [String]
+    # @!attribute source
+    #   <p>The data source for the mount.</p>
+    #   @return [Types::MountSource]
+    # @!attribute storage_type
+    #   <p>The type of storage used for the mount.</p>
+    #   @return [String]
+    class Mount < Struct.new(
+      nil,
+      :name,
+      :relative_path,
+      :source,
+      :storage_type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Runtime mount overrides applied to a single pipeline execution. Overrides are transient — they do not modify the stored task configuration.</p>
+    # @!attribute compute_nodes
+    #   <p>The mount overrides for each compute node, keyed by compute node name.</p>
+    #   @return [Hash<String, Array<Types::Mount>>]
+    class MountOverrides < Struct.new(
+      nil,
+      :compute_nodes,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The data source configuration for a mount. Specify exactly one of the following.</p>
+    # @!attribute s3_access_point
+    #   <p>Configuration for a mount that reads from an Amazon S3 access point.</p>
+    #   @return [Types::S3AccessPointSource]
+    class MountSource < Struct.new(
+      :s3_access_point,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class S3AccessPoint < MountSource; end
+      class Unknown < MountSource; end
+    end
+
+    # <p>The MP4 video format configuration for bulk import files.</p>
+    class Mp4 < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Contains information about the storage destination.</p>
     # @!attribute customer_managed_s3_storage
     #   <p>Contains information about a customer managed Amazon S3 bucket.</p>
@@ -7344,6 +10229,110 @@ module Aws::IoTSiteWise
     # <p>A parquet file.</p>
     class Parquet < Struct.new(
       nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Additional information about the current execution status. Populated when the execution has terminated.</p>
+    # @!attribute code
+    #   <p>Classification of the failure. Present when the execution failed.</p>
+    #   @return [String]
+    # @!attribute message
+    #   <p>Human-readable description of the outcome. For a failed execution, this describes why it failed; for a cancelled execution, this is the reason you supplied when calling CancelPipelineExecution.</p>
+    #   @return [String]
+    # @!attribute details
+    #   <p>Per-step error entries to help diagnose a failed execution. Present when the execution failed.</p>
+    #   @return [Array<Types::DetailedPipelineError>]
+    class PipelineExecutionStateDetails < Struct.new(
+      nil,
+      :code,
+      :message,
+      :details,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Current execution status of a pipeline.</p>
+    # @!attribute state
+    #   <p>Current state of the pipeline execution.</p>
+    #   @return [String]
+    # @!attribute state_details
+    #   <p>Additional information about the execution outcome. Populated when the execution has terminated (failed or cancelled).</p>
+    #   @return [Types::PipelineExecutionStateDetails]
+    class PipelineExecutionStatus < Struct.new(
+      nil,
+      :state,
+      :state_details,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains summary information about a pipeline execution.</p>
+    # @!attribute pipeline_execution_id
+    #   <p>The unique identifier of the pipeline execution.</p>
+    #   @return [String]
+    # @!attribute pipeline_version
+    #   <p>The pipeline version this execution ran against.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current execution status of the pipeline.</p>
+    #   @return [Types::PipelineExecutionStatus]
+    # @!attribute execution_priority
+    #   <p>Scheduling priority for the execution. When not specified, defaults to lowest priority.</p>
+    #   @return [Integer]
+    # @!attribute start_time
+    #   <p>The time the pipeline execution started, in Unix epoch time.</p>
+    #   @return [Time]
+    # @!attribute end_time
+    #   <p>The time the pipeline execution completed, in Unix epoch time.</p>
+    #   @return [Time]
+    class PipelineExecutionSummary < Struct.new(
+      nil,
+      :pipeline_execution_id,
+      :pipeline_version,
+      :status,
+      :execution_priority,
+      :start_time,
+      :end_time,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains summary information about a pipeline.</p>
+    # @!attribute pipeline_name
+    #   <p>The name of the pipeline.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>The description of the pipeline.</p>
+    #   @return [String]
+    # @!attribute pipeline_arn
+    #   <p>The ARN of the pipeline.</p>
+    #   @return [String]
+    # @!attribute version
+    #   <p>The version of the pipeline.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current lifecycle status of the pipeline.</p>
+    #   @return [Types::ResourceStatus]
+    # @!attribute created_at
+    #   <p>The time the pipeline was created, in Unix epoch time.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The time the pipeline was last updated, in Unix epoch time.</p>
+    #   @return [Time]
+    class PipelineSummary < Struct.new(
+      nil,
+      :pipeline_name,
+      :description,
+      :pipeline_arn,
+      :version,
+      :status,
+      :created_at,
+      :updated_at,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7425,7 +10414,7 @@ module Aws::IoTSiteWise
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The configuration entry associated with the specific portal type. The <code>portalTypeConfiguration</code> is a map of the <code>portalTypeKey</code> to the 
+    # <p>The configuration entry associated with the specific portal type. The <code>portalTypeConfiguration</code> is a map of the <code>portalTypeKey</code> to the
     #       <code>PortalTypeEntry</code>.</p>
     # @!attribute portal_tools
     #   <p>The array of tools associated with the specified portal type. The possible values are <code>ASSISTANT</code> and <code>DASHBOARD</code>.</p>
@@ -7456,6 +10445,26 @@ module Aws::IoTSiteWise
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+    end
+
+    # <p>Input source for processing. Specify exactly one option.</p>
+    # @!attribute timeseries
+    #   <p>List of individual timeseries items to process.</p>
+    #   @return [Array<Types::TimeseriesItem>]
+    # @!attribute dataset
+    #   <p>A dataset containing multiple items to process.</p>
+    #   @return [Types::DatasetItem]
+    class ProcessingInput < Struct.new(
+      :timeseries,
+      :dataset,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class Timeseries < ProcessingInput; end
+      class Dataset < ProcessingInput; end
+      class Unknown < ProcessingInput; end
     end
 
     # <p>Identifies a specific IoT SiteWise Monitor project.</p>
@@ -7782,9 +10791,13 @@ module Aws::IoTSiteWise
     # @!attribute logging_options
     #   <p>The logging options to set.</p>
     #   @return [Types::LoggingOptions]
+    # @!attribute workspace_name
+    #   <p>The name of the workspace.</p>
+    #   @return [String]
     class PutLoggingOptionsRequest < Struct.new(
       nil,
       :logging_options,
+      :workspace_name,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7932,6 +10945,50 @@ module Aws::IoTSiteWise
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Contains statistics about a completed query execution.</p>
+    # @!attribute row_count
+    #   <p>The total number of rows returned by the query.</p>
+    #   @return [Integer]
+    # @!attribute bytes_scanned
+    #   <p>The total number of bytes scanned during query execution.</p>
+    #   @return [Integer]
+    # @!attribute execution_time_in_millis
+    #   <p>The total query execution time, in milliseconds.</p>
+    #   @return [Integer]
+    class QueryStatistics < Struct.new(
+      nil,
+      :row_count,
+      :bytes_scanned,
+      :execution_time_in_millis,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains summary information about a query.</p>
+    # @!attribute query_id
+    #   <p>The unique identifier for the query execution.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current query status.</p>
+    #   @return [String]
+    # @!attribute submitted_at
+    #   <p>The date and time when the query was submitted, in Unix epoch time.</p>
+    #   @return [Time]
+    # @!attribute completed_at
+    #   <p>The date and time when the query reached a terminal state, in Unix epoch time.</p>
+    #   @return [Time]
+    class QuerySummary < Struct.new(
+      nil,
+      :query_id,
+      :status,
+      :submitted_at,
+      :completed_at,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The query timed out.</p>
     # @!attribute message
     #   @return [String]
@@ -8002,12 +11059,44 @@ module Aws::IoTSiteWise
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Contains the details of a resource error.</p>
+    # @!attribute code
+    #   <p>The error code.</p>
+    #   @return [String]
+    # @!attribute message
+    #   <p>The error message.</p>
+    #   @return [String]
+    class ResourceError < Struct.new(
+      nil,
+      :code,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The requested resource can't be found.</p>
     # @!attribute message
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       nil,
       :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains information about the current status of a resource.</p>
+    # @!attribute error
+    #   <p>Contains associated error information, if any.</p>
+    #   @return [Types::ResourceError]
+    # @!attribute state
+    #   <p>The current status of the resource.</p>
+    #   @return [String]
+    class ResourceStatus < Struct.new(
+      nil,
+      :error,
+      :state,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8112,12 +11201,145 @@ module Aws::IoTSiteWise
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Configures a mount that reads from an Amazon S3 access point.</p>
+    # @!attribute access_point_arn
+    #   <p>The Amazon Resource Name (ARN) of the S3 access point.</p>
+    #   @return [String]
+    # @!attribute prefix
+    #   <p>An optional key prefix to scope the mount to a subset of objects at the access point.</p>
+    #   @return [String]
+    class S3AccessPointSource < Struct.new(
+      nil,
+      :access_point_arn,
+      :prefix,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Optional filters that restrict a search to a subset of the workspace's data.</p>
+    # @!attribute time_series_ids
+    #   <p>Restricts the search to these time series.</p>
+    #   @return [Array<String>]
+    # @!attribute dataset_ids
+    #   <p>Restricts the search to these datasets.</p>
+    #   @return [Array<String>]
+    # @!attribute time_intervals
+    #   <p>Restricts the search to these time intervals.</p>
+    #   @return [Array<Types::TimeInterval>]
+    class SearchFilters < Struct.new(
+      nil,
+      :time_series_ids,
+      :dataset_ids,
+      :time_intervals,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A single matching segment of time-series data returned by a search.</p>
+    # @!attribute search_id
+    #   <p>The identifier of the search that produced this result.</p>
+    #   @return [String]
+    # @!attribute workspace_name
+    #   <p>The name of the workspace the search ran against.</p>
+    #   @return [String]
+    # @!attribute dataset_id
+    #   <p>The identifier of the dataset that contains the matching data.</p>
+    #   @return [String]
+    # @!attribute time_series_id
+    #   <p>The identifier of the time series that contains the matching data.</p>
+    #   @return [String]
+    # @!attribute start_timestamp
+    #   <p>The start of the matching time-series segment, in nanoseconds since the Unix epoch.</p>
+    #   @return [Types::TimeInNanos]
+    # @!attribute end_timestamp
+    #   <p>The end of the matching time-series segment, in nanoseconds since the Unix epoch.</p>
+    #   @return [Types::TimeInNanos]
+    # @!attribute top_timestamp
+    #   <p>The timestamp of the most relevant point within the matching segment, in nanoseconds since the
+    #   Unix epoch.</p>
+    #   @return [Types::TimeInNanos]
+    # @!attribute score
+    #   <p>The relevance score of this result. Higher scores indicate a stronger match.</p>
+    #   @return [Float]
+    class SearchResult < Struct.new(
+      nil,
+      :search_id,
+      :workspace_name,
+      :dataset_id,
+      :time_series_id,
+      :start_timestamp,
+      :end_timestamp,
+      :top_timestamp,
+      :score,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A summary of a single search as returned by ListSearches.</p>
+    # @!attribute search_id
+    #   <p>The unique identifier of the search.</p>
+    #   @return [String]
+    # @!attribute workspace_name
+    #   <p>The name of the workspace the search runs against.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the search.</p>
+    #   @return [String]
+    # @!attribute query_statement
+    #   <p>The natural-language query that was submitted for the search.</p>
+    #   @return [String]
+    # @!attribute search_type
+    #   <p>The search strategy used for the search.</p>
+    #   @return [String]
+    # @!attribute status_reason
+    #   <p>A human-readable explanation of the current status. Populated when the search has <code>FAILED</code>.</p>
+    #   @return [String]
+    # @!attribute started_at
+    #   <p>The time at which the search was started.</p>
+    #   @return [Time]
+    # @!attribute group_id
+    #   <p>The group identifier associated with the search, if one was supplied on the request.</p>
+    #   @return [String]
+    class SearchSummary < Struct.new(
+      nil,
+      :search_id,
+      :workspace_name,
+      :status,
+      :query_statement,
+      :search_type,
+      :status_reason,
+      :started_at,
+      :group_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The requested service is unavailable.</p>
     # @!attribute message
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
       nil,
       :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the session configuration for a session-type dataset.</p>
+    # @!attribute session_start_timestamp
+    #   <p>The nanosecond-precision start time of the session.</p>
+    #   @return [Types::TimeInNanos]
+    # @!attribute session_end_timestamp
+    #   <p>The nanosecond-precision end time of the session.</p>
+    #   @return [Types::TimeInNanos]
+    class SessionConfig < Struct.new(
+      nil,
+      :session_start_timestamp,
+      :session_end_timestamp,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8141,7 +11363,7 @@ module Aws::IoTSiteWise
     #   <p>Contains the ARN of the dataset. If the source is Kendra, it's the ARN of the Kendra index.</p>
     #   @return [String]
     # @!attribute location
-    #   <p>Contains the location information where the cited text is originally stored. 
+    #   <p>Contains the location information where the cited text is originally stored.
     #     For example, if the data source is Kendra, and the text synchronized is from an S3 bucket, then the location refers to an S3 object.</p>
     #   @return [Types::Location]
     class Source < Struct.new(
@@ -8160,6 +11382,150 @@ module Aws::IoTSiteWise
     class SourceDetail < Struct.new(
       nil,
       :kendra,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Request structure for StartPipelineExecution operation.</p>
+    # @!attribute workspace_name
+    #   <p>The name of the workspace containing the pipeline.</p>
+    #   @return [String]
+    # @!attribute pipeline_name
+    #   <p>The name of the pipeline to execute.</p>
+    #   @return [String]
+    # @!attribute execution_environment_variable_overrides
+    #   <p>Runtime environment variable overrides for the execution. Includes global variables
+    #   that apply to all compute nodes and computeNodes for per-node overrides. These take the highest
+    #   priority in the environment variable hierarchy.</p>
+    #   @return [Types::ExecutionEnvironmentVariables]
+    # @!attribute execution_mount_overrides
+    #   <p>Runtime mount overrides for the execution. Overrides are merged by mount name into
+    #   each listed compute node's task-defined mounts: a matching name replaces the task-defined
+    #   mount, a new name adds a mount, and task-defined mounts not referenced remain unchanged.
+    #   Compute nodes not listed use their task-defined mounts as-is.</p>
+    #   @return [Types::MountOverrides]
+    # @!attribute execution_priority
+    #   <p>Scheduling priority for the execution. Lower values indicate higher priority. Defaults to 2 when not specified.</p>
+    #   @return [Integer]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+    #   If you retry a request that completed successfully using the same client token, the server returns the
+    #   cached result from the original successful request without performing the operation again.</p>
+    #   @return [String]
+    class StartPipelineExecutionRequest < Struct.new(
+      nil,
+      :workspace_name,
+      :pipeline_name,
+      :execution_environment_variable_overrides,
+      :execution_mount_overrides,
+      :execution_priority,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Response structure for StartPipelineExecution operation.</p>
+    # @!attribute pipeline_execution_id
+    #   <p>The unique identifier of the created pipeline execution.</p>
+    #   @return [String]
+    class StartPipelineExecutionResponse < Struct.new(
+      nil,
+      :pipeline_execution_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute client_token
+    #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>
+    #   @return [String]
+    # @!attribute workspace_name
+    #   <p>The name of the workspace to query.</p>
+    #   @return [String]
+    # @!attribute query_statement
+    #   <p>The SQL query to execute against the workspace telemetry, annotations, data segment, and dataset data.</p>
+    #   @return [String]
+    class StartQueryRequest < Struct.new(
+      nil,
+      :client_token,
+      :workspace_name,
+      :query_statement,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the response for the StartQuery operation.</p>
+    # @!attribute query_id
+    #   <p>The unique identifier for the query execution.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The initial query status. The value is always SUBMITTED upon creation.</p>
+    #   @return [String]
+    class StartQueryResponse < Struct.new(
+      nil,
+      :query_id,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Input for the StartSearch operation.</p>
+    # @!attribute workspace_name
+    #   <p>The name of the workspace whose data is searched.</p>
+    #   @return [String]
+    # @!attribute query_statement
+    #   <p>The natural-language query describing the data to search for.</p>
+    #   @return [String]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier you provide to ensure the request is idempotent. Repeating
+    #   a StartSearch call with the same <code>clientToken</code> returns the original search rather than starting
+    #   a new one. If omitted, the SDK autogenerates one.</p>
+    #   @return [String]
+    # @!attribute search_type
+    #   <p>The search strategy to use. Defaults to <code>QUICK</code> when omitted.</p>
+    #   @return [String]
+    # @!attribute search_filters
+    #   <p>Optional filters that restrict the search to a subset of the workspace's data.</p>
+    #   @return [Types::SearchFilters]
+    # @!attribute group_id
+    #   <p>An optional caller-supplied identifier used to group related searches together.</p>
+    #   @return [String]
+    class StartSearchRequest < Struct.new(
+      nil,
+      :workspace_name,
+      :query_statement,
+      :client_token,
+      :search_type,
+      :search_filters,
+      :group_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Output of the StartSearch operation.</p>
+    # @!attribute search_id
+    #   <p>The unique identifier assigned to the newly started search.</p>
+    #   @return [String]
+    # @!attribute workspace_name
+    #   <p>The name of the workspace the search runs against.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The initial status of the search. A newly started search is <code>QUEUED</code>.</p>
+    #   @return [String]
+    # @!attribute group_id
+    #   <p>The group identifier associated with the search, if one was supplied on the request.</p>
+    #   @return [String]
+    class StartSearchResponse < Struct.new(
+      nil,
+      :search_id,
+      :workspace_name,
+      :status,
+      :group_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8206,6 +11572,57 @@ module Aws::IoTSiteWise
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The task execution configuration. Specify a <a href="https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_ContainerTaskConfiguration.html">containerTaskConfiguration</a> for a custom container workload.</p>
+    # @!attribute container_task_configuration
+    #   <p>Configuration for running a custom container image on managed compute.</p>
+    #   @return [Types::ContainerTaskConfiguration]
+    class TaskConfiguration < Struct.new(
+      :container_task_configuration,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class ContainerTaskConfiguration < TaskConfiguration; end
+      class Unknown < TaskConfiguration; end
+    end
+
+    # <p>Contains summary information about a task.</p>
+    # @!attribute task_name
+    #   <p>The name of the task.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>The description of the task.</p>
+    #   @return [String]
+    # @!attribute task_arn
+    #   <p>The ARN of the task.</p>
+    #   @return [String]
+    # @!attribute version
+    #   <p>The version of the task.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current lifecycle status of the task.</p>
+    #   @return [Types::ResourceStatus]
+    # @!attribute created_at
+    #   <p>The time the task was created, in Unix epoch time.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The time the task was last updated, in Unix epoch time.</p>
+    #   @return [Time]
+    class TaskSummary < Struct.new(
+      nil,
+      :task_name,
+      :description,
+      :task_arn,
+      :version,
+      :status,
+      :created_at,
+      :updated_at,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Your request exceeded a rate limit. For example, you might have exceeded the number of
     #       IoT SiteWise assets that can be created per second, the allowed number of messages per second, and so
     #       on.</p>
@@ -8232,6 +11649,22 @@ module Aws::IoTSiteWise
       nil,
       :time_in_seconds,
       :offset_in_nanos,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains a time interval with a start time and an end time. Use a time interval to restrict an operation, such as a search, to a specific time range.</p>
+    # @!attribute start_time
+    #   <p>The start of the time interval.</p>
+    #   @return [Types::TimeInNanos]
+    # @!attribute end_time
+    #   <p>The end of the time interval.</p>
+    #   @return [Types::TimeInNanos]
+    class TimeInterval < Struct.new(
+      nil,
+      :start_time,
+      :end_time,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8284,6 +11717,30 @@ module Aws::IoTSiteWise
       :time_series_creation_date,
       :time_series_last_update_date,
       :time_series_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A single timeseries item to process. Exactly one of timeSeriesId or propertyAlias must be provided.</p>
+    # @!attribute time_series_id
+    #   <p>The unique identifier for the timeseries. Mutually exclusive with propertyAlias.</p>
+    #   @return [String]
+    # @!attribute property_alias
+    #   <p>The customer-friendly alias for the timeseries. Mutually exclusive with timeSeriesId.</p>
+    #   @return [String]
+    # @!attribute trim_settings
+    #   <p>The trim settings for the time range to export. Required for VIDEO and TELEMETRY data types; optional for ANNOTATION data types.</p>
+    #   @return [Types::TrimSettings]
+    # @!attribute format_settings
+    #   <p>The optional format settings for the output.</p>
+    #   @return [Types::FormatSettings]
+    class TimeseriesItem < Struct.new(
+      nil,
+      :time_series_id,
+      :property_alias,
+      :trim_settings,
+      :format_settings,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8361,6 +11818,22 @@ module Aws::IoTSiteWise
       nil,
       :compute_location,
       :forwarding_config,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains settings for trimming content to a specific time range.</p>
+    # @!attribute start_time
+    #   <p>The start time for the trim range.</p>
+    #   @return [Types::TimeInNanos]
+    # @!attribute end_time
+    #   <p>The end time for the trim range. Must be greater than startTime.</p>
+    #   @return [Types::TimeInNanos]
+    class TrimSettings < Struct.new(
+      nil,
+      :start_time,
+      :end_time,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8550,17 +12023,17 @@ module Aws::IoTSiteWise
     #         information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html">Quotas</a> in the <i>IoT SiteWise User Guide</i>.</p>
     #   @return [Array<Types::AssetModelProperty>]
     # @!attribute if_match
-    #   <p>The expected current entity tag (ETag) for the asset model’s latest or active version (specified using <code>matchForVersionType</code>).   
+    #   <p>The expected current entity tag (ETag) for the asset model’s latest or active version (specified using <code>matchForVersionType</code>).
     #       The update request is rejected if the tag does not match the latest or active version's current entity tag.
     #       See <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/opt-locking-for-model.html">Optimistic locking for asset model writes</a>
     #       in the <i>IoT SiteWise User Guide</i>.</p>
     #   @return [String]
     # @!attribute if_none_match
-    #   <p>Accepts <b>*</b> to reject the update request if an active version 
+    #   <p>Accepts <b>*</b> to reject the update request if an active version
     #       (specified using <code>matchForVersionType</code> as <code>ACTIVE</code>) already exists for the asset model.</p>
     #   @return [String]
     # @!attribute match_for_version_type
-    #   <p>Specifies the asset model version type (<code>LATEST</code> or <code>ACTIVE</code>) used in 
+    #   <p>Specifies the asset model version type (<code>LATEST</code> or <code>ACTIVE</code>) used in
     #     conjunction with <code>If-Match</code> or <code>If-None-Match</code> headers to determine the target ETag for the update operation.</p>
     #   @return [String]
     class UpdateAssetModelCompositeModelRequest < Struct.new(
@@ -8587,10 +12060,14 @@ module Aws::IoTSiteWise
     #   <p>Contains current status information for an asset model. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-and-model-states.html">Asset and model
     #           states</a> in the <i>IoT SiteWise User Guide</i>.</p>
     #   @return [Types::AssetModelStatus]
+    # @!attribute asset_model_id
+    #   <p>The ID of the asset model.</p>
+    #   @return [String]
     class UpdateAssetModelCompositeModelResponse < Struct.new(
       nil,
       :asset_model_composite_model_path,
       :asset_model_status,
+      :asset_model_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8638,17 +12115,17 @@ module Aws::IoTSiteWise
     #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>
     #   @return [String]
     # @!attribute if_match
-    #   <p>The expected current entity tag (ETag) for the asset model’s latest or active version (specified using <code>matchForVersionType</code>).   
+    #   <p>The expected current entity tag (ETag) for the asset model’s latest or active version (specified using <code>matchForVersionType</code>).
     #       The update request is rejected if the tag does not match the latest or active version's current entity tag.
     #       See <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/opt-locking-for-model.html">Optimistic locking for asset model writes</a>
     #       in the <i>IoT SiteWise User Guide</i>.</p>
     #   @return [String]
     # @!attribute if_none_match
-    #   <p>Accepts <b>*</b> to reject the update request if an active version 
+    #   <p>Accepts <b>*</b> to reject the update request if an active version
     #       (specified using <code>matchForVersionType</code> as <code>ACTIVE</code>) already exists for the asset model.</p>
     #   @return [String]
     # @!attribute match_for_version_type
-    #   <p>Specifies the asset model version type (<code>LATEST</code> or <code>ACTIVE</code>) used in 
+    #   <p>Specifies the asset model version type (<code>LATEST</code> or <code>ACTIVE</code>) used in
     #     conjunction with <code>If-Match</code> or <code>If-None-Match</code> headers to determine the target ETag for the update operation.</p>
     #   @return [String]
     class UpdateAssetModelRequest < Struct.new(
@@ -8669,12 +12146,16 @@ module Aws::IoTSiteWise
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute asset_model_id
+    #   <p>The ID of the asset model.</p>
+    #   @return [String]
     # @!attribute asset_model_status
     #   <p>The status of the asset model, which contains a state (<code>UPDATING</code> after
     #         successfully calling this operation) and any error message.</p>
     #   @return [Types::AssetModelStatus]
     class UpdateAssetModelResponse < Struct.new(
       nil,
+      :asset_model_id,
       :asset_model_status,
       keyword_init: true
     )
@@ -8752,12 +12233,16 @@ module Aws::IoTSiteWise
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute asset_id
+    #   <p>The ID of the asset.</p>
+    #   @return [String]
     # @!attribute asset_status
     #   <p>The status of the asset, which contains a state (<code>UPDATING</code> after successfully
     #         calling this operation) and any error message.</p>
     #   @return [Types::AssetStatus]
     class UpdateAssetResponse < Struct.new(
       nil,
+      :asset_id,
       :asset_status,
       keyword_init: true
     )
@@ -8777,7 +12262,7 @@ module Aws::IoTSiteWise
     #   <p>The configuration for the computation model.</p>
     #   @return [Types::ComputationModelConfiguration]
     # @!attribute computation_model_data_binding
-    #   <p>The data binding for the computation model. Key is a variable name defined in configuration. 
+    #   <p>The data binding for the computation model. Key is a variable name defined in configuration.
     #     Value is a <code>ComputationModelDataBindingValue</code> referenced by the variable.</p>
     #   @return [Hash<String, Types::ComputationModelDataBindingValue>]
     # @!attribute client_token
@@ -8858,12 +12343,21 @@ module Aws::IoTSiteWise
     # @!attribute dataset_id
     #   <p>The ID of the dataset.</p>
     #   @return [String]
+    # @!attribute workspace_name
+    #   <p>The name of the workspace that contains the dataset.</p>
+    #   @return [String]
     # @!attribute dataset_name
     #   <p>The name of the dataset.</p>
     #   @return [String]
     # @!attribute dataset_description
     #   <p>A description about the dataset, and its functionality.</p>
     #   @return [String]
+    # @!attribute dataset_config
+    #   <p>The updated configuration for the dataset.</p>
+    #   @return [Types::DatasetConfig]
+    # @!attribute metadata
+    #   <p>The updated metadata for the dataset.</p>
+    #   @return [Hash<String, String>]
     # @!attribute dataset_source
     #   <p>The data source for the dataset.</p>
     #   @return [Types::DatasetSource]
@@ -8873,8 +12367,11 @@ module Aws::IoTSiteWise
     class UpdateDatasetRequest < Struct.new(
       nil,
       :dataset_id,
+      :workspace_name,
       :dataset_name,
       :dataset_description,
+      :dataset_config,
+      :metadata,
       :dataset_source,
       :client_token,
       keyword_init: true
@@ -8886,12 +12383,12 @@ module Aws::IoTSiteWise
     #   <p>The ID of the dataset.</p>
     #   @return [String]
     # @!attribute dataset_arn
-    #   <p>The <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html">ARN</a> of the dataset. 
+    #   <p>The <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html">ARN</a> of the dataset.
     #     The format is <code>arn:${Partition}:iotsitewise:${Region}:${Account}:dataset/${DatasetId}</code>.</p>
     #   @return [String]
     # @!attribute dataset_status
-    #   <p>The status of the dataset. This contains the state and any error messages. 
-    #     State is <code>UPDATING</code> after a successfull call to this API, and any associated error message. The state is 
+    #   <p>The status of the dataset. This contains the state and any error messages.
+    #     State is <code>UPDATING</code> after a successfull call to this API, and any associated error message. The state is
     #     <code>ACTIVE</code> when ready to use.</p>
     #   @return [Types::DatasetStatus]
     class UpdateDatasetResponse < Struct.new(
@@ -8976,6 +12473,50 @@ module Aws::IoTSiteWise
       nil,
       :gateway_id,
       :gateway_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Request structure for UpdatePipeline operation.</p>
+    # @!attribute workspace_name
+    #   <p>The name of the workspace.</p>
+    #   @return [String]
+    # @!attribute pipeline_name
+    #   <p>The name of the pipeline to update.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>A new description for the pipeline.</p>
+    #   @return [String]
+    # @!attribute environment_variables
+    #   <p>Updated environment variables shared across all compute nodes.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute computations
+    #   <p>Updated list of compute nodes forming the pipeline DAG.</p>
+    #   @return [Array<Types::ComputeNode>]
+    class UpdatePipelineRequest < Struct.new(
+      nil,
+      :workspace_name,
+      :pipeline_name,
+      :description,
+      :environment_variables,
+      :computations,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Response structure for UpdatePipeline operation.</p>
+    # @!attribute version
+    #   <p>The new version of the pipeline created by this update.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current lifecycle status of the pipeline.</p>
+    #   @return [Types::ResourceStatus]
+    class UpdatePipelineResponse < Struct.new(
+      nil,
+      :version,
+      :status,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -9086,6 +12627,85 @@ module Aws::IoTSiteWise
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Request structure for UpdateTask operation.</p>
+    # @!attribute workspace_name
+    #   <p>The name of the workspace.</p>
+    #   @return [String]
+    # @!attribute task_name
+    #   <p>The name of the task to update.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>A new description for the task.</p>
+    #   @return [String]
+    # @!attribute task_configuration
+    #   <p>The updated task execution configuration.</p>
+    #   @return [Types::TaskConfiguration]
+    class UpdateTaskRequest < Struct.new(
+      nil,
+      :workspace_name,
+      :task_name,
+      :description,
+      :task_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Response structure for UpdateTask operation.</p>
+    # @!attribute version
+    #   <p>The new version of the task created by this update.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current lifecycle status of the task.</p>
+    #   @return [Types::ResourceStatus]
+    class UpdateTaskResponse < Struct.new(
+      nil,
+      :version,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute workspace_name
+    #   <p>The name of the workspace to update.</p>
+    #   @return [String]
+    # @!attribute workspace_description
+    #   <p>A new description for the workspace.</p>
+    #   @return [String]
+    # @!attribute encryption_configuration
+    #   <p>The encryption configuration for the workspace. Omit this field to leave encryption
+    #         unchanged. After a customer managed key configuration becomes active, the key can't be
+    #         changed; supplying the same key is accepted.</p>
+    #   @return [Types::WorkspaceEncryptionConfiguration]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure that the request is
+    #         idempotent. If you retry a request that completed successfully using the same client token,
+    #         the retry succeeds without performing any further actions.</p>
+    #   @return [String]
+    class UpdateWorkspaceRequest < Struct.new(
+      nil,
+      :workspace_name,
+      :workspace_description,
+      :encryption_configuration,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute workspace_status
+    #   <p>The status of the workspace after the update, which is <code>UPDATING</code> when the
+    #         operation returns.</p>
+    #   @return [Types::WorkspaceStatus]
+    class UpdateWorkspaceResponse < Struct.new(
+      nil,
+      :workspace_status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Contains information for a user identity in an access policy.</p>
     # @!attribute id
     #   <p>The IAM Identity Center ID of the user.</p>
@@ -9178,6 +12798,106 @@ module Aws::IoTSiteWise
       nil,
       :number_of_days,
       :unlimited,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the encryption configuration for a workspace.</p>
+    # @!attribute encryption_type
+    #   <p>The encryption scheme for the workspace. <code>SITEWISE_DEFAULT_ENCRYPTION</code>
+    #         encrypts data with the IoT SiteWise default key. <code>KMS_BASED_ENCRYPTION</code> encrypts data
+    #         with the customer managed KMS key identified by <code>kmsKeyId</code>.</p>
+    #   @return [String]
+    # @!attribute kms_key_id
+    #   <p>The customer managed KMS key used when <code>encryptionType</code> is
+    #         <code>KMS_BASED_ENCRYPTION</code>. Accepts a key ID, key ARN, or key alias. Required for
+    #         <code>KMS_BASED_ENCRYPTION</code>; must be omitted for
+    #         <code>SITEWISE_DEFAULT_ENCRYPTION</code>. After a workspace's customer managed key
+    #         configuration becomes active, the key can't be changed.</p>
+    #   @return [String]
+    class WorkspaceEncryptionConfiguration < Struct.new(
+      nil,
+      :encryption_type,
+      :kms_key_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the encryption configuration information for a workspace.</p>
+    # @!attribute encryption_type
+    #   <p>The type of encryption used for the workspace.</p>
+    #   @return [String]
+    # @!attribute kms_key_arn
+    #   <p>The key ARN of the KMS key used for KMS encryption if <code>encryptionType</code>
+    #         is <code>KMS_BASED_ENCRYPTION</code>.</p>
+    #   @return [String]
+    class WorkspaceEncryptionConfigurationInfo < Struct.new(
+      nil,
+      :encryption_type,
+      :kms_key_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the details of an error associated with a workspace.</p>
+    # @!attribute code
+    #   <p>The error code.</p>
+    #   @return [String]
+    # @!attribute message
+    #   <p>The error message.</p>
+    #   @return [String]
+    class WorkspaceErrorDetails < Struct.new(
+      nil,
+      :code,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains information about the current status of a workspace.</p>
+    # @!attribute state
+    #   <p>The current state of the workspace.</p>
+    #   @return [String]
+    # @!attribute error
+    #   <p>Contains associated error information, if any.</p>
+    #   @return [Types::WorkspaceErrorDetails]
+    class WorkspaceStatus < Struct.new(
+      nil,
+      :state,
+      :error,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains summary information about a workspace, including its name, ARN, status, and
+    #       creation and update timestamps.</p>
+    # @!attribute name
+    #   <p>The name of the workspace.</p>
+    #   @return [String]
+    # @!attribute arn
+    #   <p>The ARN of the workspace.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status of the workspace.</p>
+    #   @return [Types::WorkspaceStatus]
+    # @!attribute created_at
+    #   <p>The date the workspace was created, in Unix epoch time.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The date the workspace was last updated, in Unix epoch time.</p>
+    #   @return [Time]
+    class WorkspaceSummary < Struct.new(
+      nil,
+      :name,
+      :arn,
+      :status,
+      :created_at,
+      :updated_at,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

@@ -6,6 +6,9 @@ module Aws::IoTDataPlane
     class ForbiddenException < Smithy::Client::ServiceError
       def message: () -> String?
     end
+    class GatewayTimeoutException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
     class InternalFailureException < Smithy::Client::ServiceError
       def message: () -> String?
     end

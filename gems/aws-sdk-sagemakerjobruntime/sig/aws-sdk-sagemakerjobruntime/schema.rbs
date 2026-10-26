@@ -1,0 +1,31 @@
+module Aws::SagemakerJobRuntime
+  module Schema
+    include Smithy::Schema::Shapes
+
+    AccessDeniedException: StructureShape
+    CompleteRolloutRequest: StructureShape
+    CompleteRolloutResponse: StructureShape
+    CompletionStatus: EnumShape
+    ConflictException: StructureShape
+    DoubleList: ListShape
+    FailureReason: StringShape
+    InferenceRequestBody: BlobShape
+    InferenceResponseBody: BlobShape
+    InternalServiceError: StructureShape
+    JobArn: StringShape
+    ResourceNotFoundException: StructureShape
+    ResponseStream: BlobShape
+    SampleRequest: StructureShape
+    SampleResponse: StructureShape
+    SampleWithResponseStreamRequest: StructureShape
+    SampleWithResponseStreamResponse: StructureShape
+    ServiceQuotaExceededException: StructureShape
+    ThrottlingException: StructureShape
+    TrajectoryId: StringShape
+    UpdateRewardRequest: StructureShape
+    UpdateRewardResponse: StructureShape
+    ValidationException: StructureShape
+
+    AgenticRFTRuntimeService: ServiceShape
+  end
+end

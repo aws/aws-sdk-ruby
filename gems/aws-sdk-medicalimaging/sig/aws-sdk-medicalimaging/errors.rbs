@@ -3,10 +3,16 @@ module Aws::MedicalImaging
     class AccessDeniedException < Smithy::Client::ServiceError
       def message: () -> String?
     end
+    class BadRequestException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
     class ConflictException < Smithy::Client::ServiceError
       def message: () -> String?
     end
     class InternalServerException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NotAcceptableException < Smithy::Client::ServiceError
       def message: () -> String?
     end
     class ResourceNotFoundException < Smithy::Client::ServiceError

@@ -76,6 +76,17 @@ module Aws::VPCLattice
       attr_accessor unsuccessful: Array[Types::RuleUpdateFailure]?
     end
 
+    class CidrResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cidr_ranges: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cidr_ranges: Array[String]?
+    end
+
     class ConflictException
       include Smithy::Schema::Structure
 
@@ -191,6 +202,9 @@ module Aws::VPCLattice
         ?resource_configuration_group_identifier: String,
         ?resource_configuration_definition: Types::ResourceConfigurationDefinition,
         ?allow_association_to_shareable_service_network: bool,
+        ?custom_domain_name: String,
+        ?group_domain: String,
+        ?domain_verification_identifier: String,
         ?client_token: String,
         ?tags: Hash[String, String],
       ) -> void
@@ -204,6 +218,9 @@ module Aws::VPCLattice
       attr_accessor resource_configuration_group_identifier: String?
       attr_accessor resource_configuration_definition: Types::ResourceConfigurationDefinition?
       attr_accessor allow_association_to_shareable_service_network: bool?
+      attr_accessor custom_domain_name: String?
+      attr_accessor group_domain: String?
+      attr_accessor domain_verification_identifier: String?
       attr_accessor client_token: String?
       attr_accessor tags: Hash[String, String]?
     end
@@ -225,6 +242,10 @@ module Aws::VPCLattice
         ?allow_association_to_shareable_service_network: bool,
         ?created_at: Time,
         ?failure_reason: String,
+        ?custom_domain_name: String,
+        ?domain_verification_id: String,
+        ?group_domain: String,
+        ?domain_verification_arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -241,6 +262,10 @@ module Aws::VPCLattice
       attr_accessor allow_association_to_shareable_service_network: bool?
       attr_accessor created_at: Time?
       attr_accessor failure_reason: String?
+      attr_accessor custom_domain_name: String?
+      attr_accessor domain_verification_id: String?
+      attr_accessor group_domain: String?
+      attr_accessor domain_verification_arn: String?
     end
 
     class CreateResourceGatewayRequest
@@ -254,6 +279,7 @@ module Aws::VPCLattice
         ?security_group_ids: Array[String],
         ?ip_address_type: String,
         ?ipv4_addresses_per_eni: Integer,
+        ?resource_config_dns_resolution: String,
         ?tags: Hash[String, String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -265,6 +291,7 @@ module Aws::VPCLattice
       attr_accessor security_group_ids: Array[String]?
       attr_accessor ip_address_type: String?
       attr_accessor ipv4_addresses_per_eni: Integer?
+      attr_accessor resource_config_dns_resolution: String?
       attr_accessor tags: Hash[String, String]?
     end
 
@@ -281,6 +308,7 @@ module Aws::VPCLattice
         ?security_group_ids: Array[String],
         ?ip_address_type: String,
         ?ipv4_addresses_per_eni: Integer,
+        ?resource_config_dns_resolution: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -293,6 +321,7 @@ module Aws::VPCLattice
       attr_accessor security_group_ids: Array[String]?
       attr_accessor ip_address_type: String?
       attr_accessor ipv4_addresses_per_eni: Integer?
+      attr_accessor resource_config_dns_resolution: String?
     end
 
     class CreateRuleInput
@@ -351,6 +380,7 @@ module Aws::VPCLattice
         ?custom_domain_name: String,
         ?certificate_arn: String,
         ?auth_type: String,
+        ?idle_timeout_seconds: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -360,6 +390,7 @@ module Aws::VPCLattice
       attr_accessor custom_domain_name: String?
       attr_accessor certificate_arn: String?
       attr_accessor auth_type: String?
+      attr_accessor idle_timeout_seconds: Integer?
     end
 
     class CreateServiceNetworkInput
@@ -407,6 +438,7 @@ module Aws::VPCLattice
         ?client_token: String,
         ?resource_configuration_identifier: String,
         ?service_network_identifier: String,
+        ?private_dns_enabled: bool,
         ?tags: Hash[String, String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -414,6 +446,7 @@ module Aws::VPCLattice
       attr_accessor client_token: String?
       attr_accessor resource_configuration_identifier: String?
       attr_accessor service_network_identifier: String?
+      attr_accessor private_dns_enabled: bool?
       attr_accessor tags: Hash[String, String]?
     end
 
@@ -425,6 +458,7 @@ module Aws::VPCLattice
         ?arn: String,
         ?status: String,
         ?created_by: String,
+        ?private_dns_enabled: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -432,6 +466,7 @@ module Aws::VPCLattice
       attr_accessor arn: String?
       attr_accessor status: String?
       attr_accessor created_by: String?
+      attr_accessor private_dns_enabled: bool?
     end
 
     class CreateServiceNetworkServiceAssociationInput
@@ -479,16 +514,20 @@ module Aws::VPCLattice
         ?client_token: String,
         ?service_network_identifier: String,
         ?vpc_identifier: String,
+        ?private_dns_enabled: bool,
         ?security_group_ids: Array[String],
         ?tags: Hash[String, String],
+        ?dns_options: Types::DnsOptions,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor client_token: String?
       attr_accessor service_network_identifier: String?
       attr_accessor vpc_identifier: String?
+      attr_accessor private_dns_enabled: bool?
       attr_accessor security_group_ids: Array[String]?
       attr_accessor tags: Hash[String, String]?
+      attr_accessor dns_options: Types::DnsOptions?
     end
 
     class CreateServiceNetworkVpcAssociationOutput
@@ -500,6 +539,8 @@ module Aws::VPCLattice
         ?arn: String,
         ?created_by: String,
         ?security_group_ids: Array[String],
+        ?private_dns_enabled: bool,
+        ?dns_options: Types::DnsOptions,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -508,6 +549,8 @@ module Aws::VPCLattice
       attr_accessor arn: String?
       attr_accessor created_by: String?
       attr_accessor security_group_ids: Array[String]?
+      attr_accessor private_dns_enabled: bool?
+      attr_accessor dns_options: Types::DnsOptions?
     end
 
     class CreateServiceOutput
@@ -521,6 +564,7 @@ module Aws::VPCLattice
         ?certificate_arn: String,
         ?status: String,
         ?auth_type: String,
+        ?idle_timeout_seconds: Integer,
         ?dns_entry: Types::DnsEntry,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -532,6 +576,7 @@ module Aws::VPCLattice
       attr_accessor certificate_arn: String?
       attr_accessor status: String?
       attr_accessor auth_type: String?
+      attr_accessor idle_timeout_seconds: Integer?
       attr_accessor dns_entry: Types::DnsEntry?
     end
 
@@ -607,6 +652,26 @@ module Aws::VPCLattice
     end
 
     class DeleteAuthPolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteDomainVerificationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_verification_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_verification_identifier: String?
+    end
+
+    class DeleteDomainVerificationResponse
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -950,6 +1015,19 @@ module Aws::VPCLattice
       attr_accessor hosted_zone_id: String?
     end
 
+    class DnsOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?private_dns_preference: String,
+        ?private_dns_specified_domains: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor private_dns_preference: String?
+      attr_accessor private_dns_specified_domains: Array[String]?
+    end
+
     class DnsResource
       include Smithy::Schema::Structure
 
@@ -961,6 +1039,31 @@ module Aws::VPCLattice
 
       attr_accessor domain_name: String?
       attr_accessor ip_address_type: String?
+    end
+
+    class DomainVerificationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?domain_name: String,
+        ?status: String,
+        ?txt_method_config: Types::TxtMethodConfig,
+        ?created_at: Time,
+        ?last_verified_time: Time,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor domain_name: String?
+      attr_accessor status: String?
+      attr_accessor txt_method_config: Types::TxtMethodConfig?
+      attr_accessor created_at: Time?
+      attr_accessor last_verified_time: Time?
+      attr_accessor tags: Hash[String, String]?
     end
 
     class FixedResponseAction
@@ -1049,6 +1152,42 @@ module Aws::VPCLattice
       attr_accessor last_updated_at: Time?
     end
 
+    class GetDomainVerificationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_verification_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_verification_identifier: String?
+    end
+
+    class GetDomainVerificationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?domain_name: String,
+        ?status: String,
+        ?txt_method_config: Types::TxtMethodConfig,
+        ?created_at: Time,
+        ?last_verified_time: Time,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor domain_name: String?
+      attr_accessor status: String?
+      attr_accessor txt_method_config: Types::TxtMethodConfig?
+      attr_accessor created_at: Time?
+      attr_accessor last_verified_time: Time?
+      attr_accessor tags: Hash[String, String]?
+    end
+
     class GetListenerInput
       include Smithy::Schema::Structure
 
@@ -1122,6 +1261,10 @@ module Aws::VPCLattice
         ?amazon_managed: bool,
         ?failure_reason: String,
         ?last_updated_at: Time,
+        ?domain_verification_id: String,
+        ?domain_verification_arn: String,
+        ?domain_verification_status: String,
+        ?group_domain: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1141,6 +1284,10 @@ module Aws::VPCLattice
       attr_accessor amazon_managed: bool?
       attr_accessor failure_reason: String?
       attr_accessor last_updated_at: Time?
+      attr_accessor domain_verification_id: String?
+      attr_accessor domain_verification_arn: String?
+      attr_accessor domain_verification_status: String?
+      attr_accessor group_domain: String?
     end
 
     class GetResourceGatewayRequest
@@ -1164,9 +1311,12 @@ module Aws::VPCLattice
         ?status: String,
         ?vpc_id: String,
         ?subnet_ids: Array[String],
+        ?service_managed: bool,
+        ?managed_by: String,
         ?security_group_ids: Array[String],
         ?ip_address_type: String,
         ?ipv4_addresses_per_eni: Integer,
+        ?resource_config_dns_resolution: String,
         ?created_at: Time,
         ?last_updated_at: Time,
       ) -> void
@@ -1178,9 +1328,12 @@ module Aws::VPCLattice
       attr_accessor status: String?
       attr_accessor vpc_id: String?
       attr_accessor subnet_ids: Array[String]?
+      attr_accessor service_managed: bool?
+      attr_accessor managed_by: String?
       attr_accessor security_group_ids: Array[String]?
       attr_accessor ip_address_type: String?
       attr_accessor ipv4_addresses_per_eni: Integer?
+      attr_accessor resource_config_dns_resolution: String?
       attr_accessor created_at: Time?
       attr_accessor last_updated_at: Time?
     end
@@ -1328,8 +1481,10 @@ module Aws::VPCLattice
         ?failure_code: String,
         ?last_updated_at: Time,
         ?private_dns_entry: Types::DnsEntry,
+        ?private_dns_enabled: bool,
         ?dns_entry: Types::DnsEntry,
         ?is_managed_association: bool,
+        ?domain_verification_status: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1348,8 +1503,10 @@ module Aws::VPCLattice
       attr_accessor failure_code: String?
       attr_accessor last_updated_at: Time?
       attr_accessor private_dns_entry: Types::DnsEntry?
+      attr_accessor private_dns_enabled: bool?
       attr_accessor dns_entry: Types::DnsEntry?
       attr_accessor is_managed_association: bool?
+      attr_accessor domain_verification_status: String?
     end
 
     class GetServiceNetworkServiceAssociationInput
@@ -1427,9 +1584,11 @@ module Aws::VPCLattice
         ?service_network_arn: String,
         ?vpc_id: String,
         ?security_group_ids: Array[String],
+        ?private_dns_enabled: bool,
         ?failure_message: String,
         ?failure_code: String,
         ?last_updated_at: Time,
+        ?dns_options: Types::DnsOptions,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1443,9 +1602,11 @@ module Aws::VPCLattice
       attr_accessor service_network_arn: String?
       attr_accessor vpc_id: String?
       attr_accessor security_group_ids: Array[String]?
+      attr_accessor private_dns_enabled: bool?
       attr_accessor failure_message: String?
       attr_accessor failure_code: String?
       attr_accessor last_updated_at: Time?
+      attr_accessor dns_options: Types::DnsOptions?
     end
 
     class GetServiceOutput
@@ -1462,6 +1623,7 @@ module Aws::VPCLattice
         ?certificate_arn: String,
         ?status: String,
         ?auth_type: String,
+        ?idle_timeout_seconds: Integer,
         ?failure_code: String,
         ?failure_message: String,
       ) -> void
@@ -1477,6 +1639,7 @@ module Aws::VPCLattice
       attr_accessor certificate_arn: String?
       attr_accessor status: String?
       attr_accessor auth_type: String?
+      attr_accessor idle_timeout_seconds: Integer?
       attr_accessor failure_code: String?
       attr_accessor failure_message: String?
     end
@@ -1658,6 +1821,32 @@ module Aws::VPCLattice
       attr_accessor next_token: String?
     end
 
+    class ListDomainVerificationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListDomainVerificationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::DomainVerificationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::DomainVerificationSummary]?
+      attr_accessor next_token: String?
+    end
+
     class ListListenersInput
       include Smithy::Schema::Structure
 
@@ -1692,6 +1881,7 @@ module Aws::VPCLattice
       def initialize: (
         ?resource_gateway_identifier: String,
         ?resource_configuration_group_identifier: String,
+        ?domain_verification_identifier: String,
         ?max_results: Integer,
         ?next_token: String,
       ) -> void
@@ -1699,6 +1889,7 @@ module Aws::VPCLattice
 
       attr_accessor resource_gateway_identifier: String?
       attr_accessor resource_configuration_group_identifier: String?
+      attr_accessor domain_verification_identifier: String?
       attr_accessor max_results: Integer?
       attr_accessor next_token: String?
     end
@@ -2132,6 +2323,33 @@ module Aws::VPCLattice
       end
     end
 
+    class PayerResponsibilityEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scope: String,
+        ?payer_responsibility_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scope: String?
+      attr_accessor payer_responsibility_type: String?
+    end
+
+    module PayerResponsibilityPayer
+      VpcEndpointAccount: String
+      ResourceGatewayAccount: String
+    end
+
+    module PayerResponsibilityScope
+      ResourceGatewayCharges: String
+    end
+
+    module ProtocolType
+      TCP: String
+      TCP_UDP: String
+    end
+
     class PutAuthPolicyInput
       include Smithy::Schema::Structure
 
@@ -2213,18 +2431,22 @@ module Aws::VPCLattice
         ?dns_resource: Types::DnsResource,
         ?ip_resource: Types::IpResource,
         ?arn_resource: Types::ArnResource,
+        ?cidr_resource: Types::CidrResource,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor dns_resource: Types::DnsResource?
       attr_accessor ip_resource: Types::IpResource?
       attr_accessor arn_resource: Types::ArnResource?
+      attr_accessor cidr_resource: Types::CidrResource?
 
       class DnsResource < ResourceConfigurationDefinition
       end
       class IpResource < ResourceConfigurationDefinition
       end
       class ArnResource < ResourceConfigurationDefinition
+      end
+      class CidrResource < ResourceConfigurationDefinition
       end
       class Unknown < ResourceConfigurationDefinition
       end
@@ -2244,6 +2466,9 @@ module Aws::VPCLattice
         ?amazon_managed: bool,
         ?created_at: Time,
         ?last_updated_at: Time,
+        ?custom_domain_name: String,
+        ?domain_verification_id: String,
+        ?group_domain: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2257,6 +2482,17 @@ module Aws::VPCLattice
       attr_accessor amazon_managed: bool?
       attr_accessor created_at: Time?
       attr_accessor last_updated_at: Time?
+      attr_accessor custom_domain_name: String?
+      attr_accessor domain_verification_id: String?
+      attr_accessor group_domain: String?
+    end
+
+    module ResourceConfigurationType
+      GROUP: String
+      CHILD: String
+      SINGLE: String
+      ARN: String
+      CIDR: String
     end
 
     class ResourceEndpointAssociationSummary
@@ -2272,6 +2508,7 @@ module Aws::VPCLattice
         ?vpc_endpoint_owner: String,
         ?created_by: String,
         ?created_at: Time,
+        ?payer_responsibility: Array[Types::PayerResponsibilityEntry],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2284,6 +2521,7 @@ module Aws::VPCLattice
       attr_accessor vpc_endpoint_owner: String?
       attr_accessor created_by: String?
       attr_accessor created_at: Time?
+      attr_accessor payer_responsibility: Array[Types::PayerResponsibilityEntry]?
     end
 
     class ResourceGatewaySummary
@@ -2299,6 +2537,7 @@ module Aws::VPCLattice
         ?security_group_ids: Array[String],
         ?ip_address_type: String,
         ?ipv4_addresses_per_eni: Integer,
+        ?resource_config_dns_resolution: String,
         ?created_at: Time,
         ?last_updated_at: Time,
       ) -> void
@@ -2313,6 +2552,7 @@ module Aws::VPCLattice
       attr_accessor security_group_ids: Array[String]?
       attr_accessor ip_address_type: String?
       attr_accessor ipv4_addresses_per_eni: Integer?
+      attr_accessor resource_config_dns_resolution: String?
       attr_accessor created_at: Time?
       attr_accessor last_updated_at: Time?
     end
@@ -2488,6 +2728,7 @@ module Aws::VPCLattice
         ?private_dns_entry: Types::DnsEntry,
         ?is_managed_association: bool,
         ?failure_code: String,
+        ?private_dns_enabled: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2506,6 +2747,7 @@ module Aws::VPCLattice
       attr_accessor private_dns_entry: Types::DnsEntry?
       attr_accessor is_managed_association: bool?
       attr_accessor failure_code: String?
+      attr_accessor private_dns_enabled: bool?
     end
 
     class ServiceNetworkServiceAssociationSummary
@@ -2580,6 +2822,8 @@ module Aws::VPCLattice
         ?service_network_id: String,
         ?service_network_name: String,
         ?service_network_arn: String,
+        ?private_dns_enabled: bool,
+        ?dns_options: Types::DnsOptions,
         ?vpc_id: String,
         ?last_updated_at: Time,
       ) -> void
@@ -2593,6 +2837,8 @@ module Aws::VPCLattice
       attr_accessor service_network_id: String?
       attr_accessor service_network_name: String?
       attr_accessor service_network_arn: String?
+      attr_accessor private_dns_enabled: bool?
+      attr_accessor dns_options: Types::DnsOptions?
       attr_accessor vpc_id: String?
       attr_accessor last_updated_at: Time?
     end
@@ -2650,6 +2896,40 @@ module Aws::VPCLattice
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor enabled: bool?
+    end
+
+    class StartDomainVerificationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?domain_name: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor domain_name: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class StartDomainVerificationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?domain_name: String,
+        ?status: String,
+        ?txt_method_config: Types::TxtMethodConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor domain_name: String?
+      attr_accessor status: String?
+      attr_accessor txt_method_config: Types::TxtMethodConfig?
     end
 
     class TagResourceInput
@@ -2794,6 +3074,19 @@ module Aws::VPCLattice
       attr_accessor service_code: String?
       attr_accessor quota_code: String?
       attr_accessor retry_after_seconds: Integer?
+    end
+
+    class TxtMethodConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: String?
+      attr_accessor name: String?
     end
 
     class UntagResourceInput
@@ -3027,12 +3320,14 @@ module Aws::VPCLattice
         ?service_identifier: String,
         ?certificate_arn: String,
         ?auth_type: String,
+        ?idle_timeout_seconds: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor service_identifier: String?
       attr_accessor certificate_arn: String?
       attr_accessor auth_type: String?
+      attr_accessor idle_timeout_seconds: Integer?
     end
 
     class UpdateServiceNetworkInput
@@ -3071,11 +3366,15 @@ module Aws::VPCLattice
       def initialize: (
         ?service_network_vpc_association_identifier: String,
         ?security_group_ids: Array[String],
+        ?private_dns_enabled: bool,
+        ?dns_options: Types::DnsOptions,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor service_network_vpc_association_identifier: String?
       attr_accessor security_group_ids: Array[String]?
+      attr_accessor private_dns_enabled: bool?
+      attr_accessor dns_options: Types::DnsOptions?
     end
 
     class UpdateServiceNetworkVpcAssociationOutput
@@ -3087,6 +3386,8 @@ module Aws::VPCLattice
         ?status: String,
         ?created_by: String,
         ?security_group_ids: Array[String],
+        ?private_dns_enabled: bool,
+        ?dns_options: Types::DnsOptions,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3095,6 +3396,8 @@ module Aws::VPCLattice
       attr_accessor status: String?
       attr_accessor created_by: String?
       attr_accessor security_group_ids: Array[String]?
+      attr_accessor private_dns_enabled: bool?
+      attr_accessor dns_options: Types::DnsOptions?
     end
 
     class UpdateServiceOutput
@@ -3107,6 +3410,7 @@ module Aws::VPCLattice
         ?custom_domain_name: String,
         ?certificate_arn: String,
         ?auth_type: String,
+        ?idle_timeout_seconds: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3116,6 +3420,7 @@ module Aws::VPCLattice
       attr_accessor custom_domain_name: String?
       attr_accessor certificate_arn: String?
       attr_accessor auth_type: String?
+      attr_accessor idle_timeout_seconds: Integer?
     end
 
     class UpdateTargetGroupInput

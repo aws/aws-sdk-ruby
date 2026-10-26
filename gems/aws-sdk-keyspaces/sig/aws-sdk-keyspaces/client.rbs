@@ -166,6 +166,10 @@ module Aws::Keyspaces
           }
         ],
         propagate_tags: String
+      },
+      ?warm_throughput_specification: {
+        read_units_per_second: Integer,
+        write_units_per_second: untyped
       }
     ) -> _CreateTableResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTableResponse
 
@@ -240,6 +244,7 @@ module Aws::Keyspaces
       def replica_specifications: () -> Array[Types::ReplicaSpecificationSummary]?
       def latest_stream_arn: () -> String?
       def cdc_specification: () -> Types::CdcSpecificationSummary?
+      def warm_throughput_specification: () -> Types::WarmThroughputSpecificationSummary?
     end
     def get_table: (
       ?keyspace_name: String,
@@ -502,6 +507,10 @@ module Aws::Keyspaces
           }
         ],
         propagate_tags: String
+      },
+      ?warm_throughput_specification: {
+        read_units_per_second: Integer,
+        write_units_per_second: untyped
       }
     ) -> _UpdateTableResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateTableResponse
   end

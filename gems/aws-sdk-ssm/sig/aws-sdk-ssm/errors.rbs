@@ -42,6 +42,9 @@ module Aws::SSM
     class ComplianceTypeCountLimitExceededException < Smithy::Client::ServiceError
       def message: () -> String?
     end
+    class ConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
     class CustomSchemaCountLimitExceededException < Smithy::Client::ServiceError
       def message: () -> String?
     end
@@ -244,6 +247,9 @@ module Aws::SSM
       def message: () -> String?
     end
     class MaxDocumentSizeExceeded < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NoLongerSupportedException < Smithy::Client::ServiceError
       def message: () -> String?
     end
     class OpsItemAccessDeniedException < Smithy::Client::ServiceError

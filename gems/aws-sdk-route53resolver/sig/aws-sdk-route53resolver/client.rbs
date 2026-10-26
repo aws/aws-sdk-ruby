@@ -96,6 +96,104 @@ module Aws::Route53Resolver
       ?vpc_id: String
     ) -> _AssociateResolverRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateResolverRuleResponse
 
+    interface _BatchCreateFirewallRuleResponse
+      include Smithy::Client::_Response[Types::BatchCreateFirewallRuleResponse]
+      def created_firewall_rules: () -> Array[Types::FirewallRule]?
+      def create_errors: () -> Array[Types::BatchCreateFirewallRuleError]?
+    end
+    def batch_create_firewall_rule: (
+      ?create_firewall_rule_entries: Array[
+        {
+          creator_request_id: String,
+          firewall_rule_group_id: String,
+          firewall_domain_list_id: untyped,
+          priority: Integer,
+          action: String,
+          block_response: String,
+          block_override_domain: String,
+          block_override_dns_type: String,
+          block_override_ttl: Integer,
+          name: String,
+          firewall_domain_redirection_action: String,
+          qtype: String,
+          dns_threat_protection: String,
+          confidence_threshold: String,
+          firewall_rule_type: {
+            partner_threat_protection: {
+              partner: String
+            },
+            firewall_advanced_content_category: {
+              category: String
+            },
+            firewall_advanced_threat_category: {
+              category: String
+            },
+            dns_threat_protection: {
+              value: String,
+              confidence_threshold: untyped
+            }
+          }
+        }
+      ]
+    ) -> _BatchCreateFirewallRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchCreateFirewallRuleResponse
+
+    interface _BatchDeleteFirewallRuleResponse
+      include Smithy::Client::_Response[Types::BatchDeleteFirewallRuleResponse]
+      def deleted_firewall_rules: () -> Array[Types::FirewallRule]?
+      def delete_errors: () -> Array[Types::BatchDeleteFirewallRuleError]?
+    end
+    def batch_delete_firewall_rule: (
+      ?delete_firewall_rule_entries: Array[
+        {
+          firewall_rule_group_id: String,
+          firewall_domain_list_id: untyped,
+          firewall_threat_protection_id: untyped,
+          qtype: String
+        }
+      ]
+    ) -> _BatchDeleteFirewallRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchDeleteFirewallRuleResponse
+
+    interface _BatchUpdateFirewallRuleResponse
+      include Smithy::Client::_Response[Types::BatchUpdateFirewallRuleResponse]
+      def updated_firewall_rules: () -> Array[Types::FirewallRule]?
+      def update_errors: () -> Array[Types::BatchUpdateFirewallRuleError]?
+    end
+    def batch_update_firewall_rule: (
+      ?update_firewall_rule_entries: Array[
+        {
+          firewall_rule_group_id: String,
+          firewall_domain_list_id: untyped,
+          firewall_threat_protection_id: untyped,
+          priority: Integer,
+          action: String,
+          block_response: String,
+          block_override_domain: String,
+          block_override_dns_type: String,
+          block_override_ttl: Integer,
+          name: String,
+          firewall_domain_redirection_action: String,
+          qtype: String,
+          dns_threat_protection: String,
+          confidence_threshold: String,
+          firewall_rule_type: {
+            partner_threat_protection: {
+              partner: String
+            },
+            firewall_advanced_content_category: {
+              category: String
+            },
+            firewall_advanced_threat_category: {
+              category: String
+            },
+            dns_threat_protection: {
+              value: String,
+              confidence_threshold: untyped
+            }
+          }
+        }
+      ]
+    ) -> _BatchUpdateFirewallRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchUpdateFirewallRuleResponse
+
     interface _CreateFirewallDomainListResponse
       include Smithy::Client::_Response[Types::CreateFirewallDomainListResponse]
       def firewall_domain_list: () -> Types::FirewallDomainList?
@@ -129,7 +227,22 @@ module Aws::Route53Resolver
       ?firewall_domain_redirection_action: String,
       ?qtype: String,
       ?dns_threat_protection: String,
-      ?confidence_threshold: String
+      ?confidence_threshold: String,
+      ?firewall_rule_type: {
+        partner_threat_protection: {
+          partner: String
+        },
+        firewall_advanced_content_category: {
+          category: String
+        },
+        firewall_advanced_threat_category: {
+          category: String
+        },
+        dns_threat_protection: {
+          value: String,
+          confidence_threshold: String
+        }
+      }
     ) -> _CreateFirewallRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateFirewallRuleResponse
 
     interface _CreateFirewallRuleGroupResponse
@@ -190,7 +303,11 @@ module Aws::Route53Resolver
         }
       ],
       ?resolver_endpoint_type: String,
-      ?protocols: Array[String]
+      ?protocols: Array[String],
+      ?rni_enhanced_metrics_enabled: bool,
+      ?target_name_server_metrics_enabled: bool,
+      ?dns64_enabled: bool,
+      ?ipv6_internet_access_enabled: bool
     ) -> _CreateResolverEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateResolverEndpointResponse
 
     interface _CreateResolverQueryLogConfigResponse
@@ -524,6 +641,17 @@ module Aws::Route53Resolver
       ?next_token: String
     ) -> _ListFirewallRuleGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFirewallRuleGroupsResponse
 
+    interface _ListFirewallRuleTypesResponse
+      include Smithy::Client::_Response[Types::ListFirewallRuleTypesResponse]
+      def firewall_rule_types: () -> Array[Types::FirewallRuleTypeDefinition]?
+      def next_token: () -> String?
+    end
+    def list_firewall_rule_types: (
+      ?rule_type: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListFirewallRuleTypesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFirewallRuleTypesResponse
+
     interface _ListFirewallRulesResponse
       include Smithy::Client::_Response[Types::ListFirewallRulesResponse]
       def next_token: () -> String?
@@ -776,7 +904,22 @@ module Aws::Route53Resolver
       ?firewall_domain_redirection_action: String,
       ?qtype: String,
       ?dns_threat_protection: String,
-      ?confidence_threshold: String
+      ?confidence_threshold: String,
+      ?firewall_rule_type: {
+        partner_threat_protection: {
+          partner: String
+        },
+        firewall_advanced_content_category: {
+          category: String
+        },
+        firewall_advanced_threat_category: {
+          category: String
+        },
+        dns_threat_protection: {
+          value: String,
+          confidence_threshold: String
+        }
+      }
     ) -> _UpdateFirewallRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFirewallRuleResponse
 
     interface _UpdateFirewallRuleGroupAssociationResponse
@@ -833,7 +976,11 @@ module Aws::Route53Resolver
           ipv6: String
         }
       ],
-      ?protocols: Array[String]
+      ?protocols: Array[String],
+      ?rni_enhanced_metrics_enabled: bool,
+      ?target_name_server_metrics_enabled: bool,
+      ?dns64_enabled: bool,
+      ?ipv6_internet_access_enabled: bool
     ) -> _UpdateResolverEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateResolverEndpointResponse
 
     interface _UpdateResolverRuleResponse

@@ -69,6 +69,7 @@ module Aws::Imagebuilder
       def request_id: () -> String?
       def client_token: () -> String?
       def component_build_version_arn: () -> String?
+      def latest_version_references: () -> Types::LatestVersionReferences?
     end
     def create_component: (
       ?name: String,
@@ -81,7 +82,8 @@ module Aws::Imagebuilder
       ?uri: String,
       ?kms_key_id: String,
       ?tags: Hash[String, String],
-      ?client_token: String
+      ?client_token: String,
+      ?dry_run: bool
     ) -> _CreateComponentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateComponentResponse
 
     interface _CreateContainerRecipeResponse
@@ -89,6 +91,7 @@ module Aws::Imagebuilder
       def request_id: () -> String?
       def client_token: () -> String?
       def container_recipe_arn: () -> String?
+      def latest_version_references: () -> Types::LatestVersionReferences?
     end
     def create_container_recipe: (
       ?container_type: String,
@@ -138,7 +141,8 @@ module Aws::Imagebuilder
         repository_name: String
       },
       ?kms_key_id: String,
-      ?client_token: String
+      ?client_token: String,
+      ?dry_run: bool
     ) -> _CreateContainerRecipeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateContainerRecipeResponse
 
     interface _CreateDistributionConfigurationResponse
@@ -213,7 +217,8 @@ module Aws::Imagebuilder
         }
       ],
       ?tags: Hash[String, String],
-      ?client_token: String
+      ?client_token: String,
+      ?dry_run: bool
     ) -> _CreateDistributionConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDistributionConfigurationResponse
 
     interface _CreateImageResponse
@@ -221,6 +226,7 @@ module Aws::Imagebuilder
       def request_id: () -> String?
       def client_token: () -> String?
       def image_build_version_arn: () -> String?
+      def latest_version_references: () -> Types::LatestVersionReferences?
     end
     def create_image: (
       ?image_recipe_arn: String,
@@ -288,6 +294,7 @@ module Aws::Imagebuilder
       },
       ?status: String,
       ?tags: Hash[String, String],
+      ?image_tags: Hash[String, String],
       ?client_token: String,
       ?image_scanning_configuration: {
         image_scanning_enabled: bool,
@@ -313,7 +320,8 @@ module Aws::Imagebuilder
       ?logging_configuration: {
         image_log_group_name: String,
         pipeline_log_group_name: untyped
-      }
+      },
+      ?dry_run: bool
     ) -> _CreateImagePipelineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateImagePipelineResponse
 
     interface _CreateImageRecipeResponse
@@ -321,6 +329,7 @@ module Aws::Imagebuilder
       def request_id: () -> String?
       def client_token: () -> String?
       def image_recipe_arn: () -> String?
+      def latest_version_references: () -> Types::LatestVersionReferences?
     end
     def create_image_recipe: (
       ?name: String,
@@ -364,7 +373,9 @@ module Aws::Imagebuilder
         user_data_override: String
       },
       ?ami_tags: Hash[String, String],
-      ?client_token: String
+      ?ami_watermarks: Array[String],
+      ?client_token: String,
+      ?dry_run: bool
     ) -> _CreateImageRecipeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateImageRecipeResponse
 
     interface _CreateInfrastructureConfigurationResponse
@@ -388,6 +399,7 @@ module Aws::Imagebuilder
       },
       ?key_pair: String,
       ?terminate_instance_on_failure: bool,
+      ?terminate_instance_on_completion: bool,
       ?sns_topic_arn: String,
       ?resource_tags: Hash[String, String],
       ?instance_metadata_options: {
@@ -401,7 +413,14 @@ module Aws::Imagebuilder
         host_id: untyped,
         host_resource_group_arn: untyped
       },
-      ?client_token: String
+      ?parent_instance: {
+        auto_scaling_group: {
+          name: String,
+          capacity_wait_timeout_seconds: Integer
+        }
+      },
+      ?client_token: String,
+      ?dry_run: bool
     ) -> _CreateInfrastructureConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateInfrastructureConfigurationResponse
 
     interface _CreateLifecyclePolicyResponse
@@ -456,13 +475,15 @@ module Aws::Imagebuilder
         tag_map: Hash[String, String]
       },
       ?tags: Hash[String, String],
-      ?client_token: String
+      ?client_token: String,
+      ?dry_run: bool
     ) -> _CreateLifecyclePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLifecyclePolicyResponse
 
     interface _CreateWorkflowResponse
       include Smithy::Client::_Response[Types::CreateWorkflowResponse]
       def client_token: () -> String?
       def workflow_build_version_arn: () -> String?
+      def latest_version_references: () -> Types::LatestVersionReferences?
     end
     def create_workflow: (
       ?name: String,
@@ -474,7 +495,8 @@ module Aws::Imagebuilder
       ?kms_key_id: String,
       ?tags: Hash[String, String],
       ?client_token: String,
-      ?type: String
+      ?type: String,
+      ?dry_run: bool
     ) -> _CreateWorkflowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWorkflowResponse
 
     interface _DeleteComponentResponse
@@ -556,10 +578,27 @@ module Aws::Imagebuilder
       ?workflow_build_version_arn: String
     ) -> _DeleteWorkflowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteWorkflowResponse
 
+    interface _DistributeImageResponse
+      include Smithy::Client::_Response[Types::DistributeImageResponse]
+      def client_token: () -> String?
+      def image_build_version_arn: () -> String?
+    end
+    def distribute_image: (
+      ?source_image: String,
+      ?distribution_configuration_arn: String,
+      ?execution_role: String,
+      ?tags: Hash[String, String],
+      ?client_token: String,
+      ?logging_configuration: {
+        log_group_name: String
+      }
+    ) -> _DistributeImageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DistributeImageResponse
+
     interface _GetComponentResponse
       include Smithy::Client::_Response[Types::GetComponentResponse]
       def request_id: () -> String?
       def component: () -> Types::Component?
+      def latest_version_references: () -> Types::LatestVersionReferences?
     end
     def get_component: (
       ?component_build_version_arn: String
@@ -578,6 +617,7 @@ module Aws::Imagebuilder
       include Smithy::Client::_Response[Types::GetContainerRecipeResponse]
       def request_id: () -> String?
       def container_recipe: () -> Types::ContainerRecipe?
+      def latest_version_references: () -> Types::LatestVersionReferences?
     end
     def get_container_recipe: (
       ?container_recipe_arn: String
@@ -605,6 +645,7 @@ module Aws::Imagebuilder
       include Smithy::Client::_Response[Types::GetImageResponse]
       def request_id: () -> String?
       def image: () -> Types::Image?
+      def latest_version_references: () -> Types::LatestVersionReferences?
     end
     def get_image: (
       ?image_build_version_arn: String
@@ -632,6 +673,7 @@ module Aws::Imagebuilder
       include Smithy::Client::_Response[Types::GetImageRecipeResponse]
       def request_id: () -> String?
       def image_recipe: () -> Types::ImageRecipe?
+      def latest_version_references: () -> Types::LatestVersionReferences?
     end
     def get_image_recipe: (
       ?image_recipe_arn: String
@@ -686,6 +728,7 @@ module Aws::Imagebuilder
     interface _GetWorkflowResponse
       include Smithy::Client::_Response[Types::GetWorkflowResponse]
       def workflow: () -> Types::Workflow?
+      def latest_version_references: () -> Types::LatestVersionReferences?
     end
     def get_workflow: (
       ?workflow_build_version_arn: String
@@ -731,6 +774,8 @@ module Aws::Imagebuilder
       def end_time: () -> String?
       def on_failure: () -> String?
       def timeout_seconds: () -> Integer?
+      def attempt_number: () -> Integer?
+      def max_attempts: () -> Integer?
     end
     def get_workflow_step_execution: (
       ?step_execution_id: String
@@ -775,6 +820,13 @@ module Aws::Imagebuilder
         log_group_name: String
       },
       ?tags: Hash[String, String],
+      ?register_image_options: {
+        secure_boot_enabled: bool,
+        uefi_data: String
+      },
+      ?windows_configuration: {
+        image_index: Integer
+      },
       ?client_token: String
     ) -> _ImportDiskImageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ImportDiskImageResponse
 
@@ -1174,6 +1226,16 @@ module Aws::Imagebuilder
       ?policy: String
     ) -> _PutImageRecipePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutImageRecipePolicyResponse
 
+    interface _RetryImageResponse
+      include Smithy::Client::_Response[Types::RetryImageResponse]
+      def client_token: () -> String?
+      def image_build_version_arn: () -> String?
+    end
+    def retry_image: (
+      ?image_build_version_arn: String,
+      ?client_token: String
+    ) -> _RetryImageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RetryImageResponse
+
     interface _SendWorkflowStepActionResponse
       include Smithy::Client::_Response[Types::SendWorkflowStepActionResponse]
       def step_execution_id: () -> String?
@@ -1374,7 +1436,8 @@ module Aws::Imagebuilder
         image_log_group_name: String,
         pipeline_log_group_name: untyped
       },
-      ?execution_role: String
+      ?execution_role: String,
+      ?image_tags: Hash[String, String]
     ) -> _UpdateImagePipelineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateImagePipelineResponse
 
     interface _UpdateInfrastructureConfigurationResponse
@@ -1398,6 +1461,7 @@ module Aws::Imagebuilder
       },
       ?key_pair: String,
       ?terminate_instance_on_failure: bool,
+      ?terminate_instance_on_completion: bool,
       ?sns_topic_arn: String,
       ?resource_tags: Hash[String, String],
       ?instance_metadata_options: {
@@ -1409,6 +1473,12 @@ module Aws::Imagebuilder
         tenancy: String,
         host_id: untyped,
         host_resource_group_arn: untyped
+      },
+      ?parent_instance: {
+        auto_scaling_group: {
+          name: String,
+          capacity_wait_timeout_seconds: Integer
+        }
       },
       ?client_token: String
     ) -> _UpdateInfrastructureConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateInfrastructureConfigurationResponse

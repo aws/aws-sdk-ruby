@@ -77,6 +77,7 @@ module Aws::Route53Domains
     interface _CheckDomainAvailabilityResponse
       include Smithy::Client::_Response[Types::CheckDomainAvailabilityResponse]
       def availability: () -> String?
+      def price: () -> Types::PriceWithCurrency?
     end
     def check_domain_availability: (
       ?domain_name: String,
@@ -87,6 +88,7 @@ module Aws::Route53Domains
       include Smithy::Client::_Response[Types::CheckDomainTransferabilityResponse]
       def transferability: () -> Types::DomainTransferability?
       def message: () -> String?
+      def price: () -> Types::PriceWithCurrency?
     end
     def check_domain_transferability: (
       ?domain_name: String,
@@ -188,6 +190,14 @@ module Aws::Route53Domains
       ?domain_name: String
     ) -> _GetDomainDetailResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDomainDetailResponse
 
+    interface _GetDomainPricesResponse
+      include Smithy::Client::_Response[Types::GetDomainPricesResponse]
+      def domain_price: () -> Types::DomainPrice?
+    end
+    def get_domain_prices: (
+      ?domain_name: String
+    ) -> _GetDomainPricesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDomainPricesResponse
+
     interface _GetDomainSuggestionsResponse
       include Smithy::Client::_Response[Types::GetDomainSuggestionsResponse]
       def suggestions_list: () -> Array[Types::DomainSuggestion]?
@@ -195,7 +205,8 @@ module Aws::Route53Domains
     def get_domain_suggestions: (
       ?domain_name: String,
       ?suggestion_count: Integer,
-      ?only_available: bool
+      ?only_available: bool,
+      ?only_standard_prices: bool
     ) -> _GetDomainSuggestionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDomainSuggestionsResponse
 
     interface _GetOperationDetailResponse
@@ -372,7 +383,11 @@ module Aws::Route53Domains
           }
         ]
       },
-      ?privacy_protect_billing_contact: bool
+      ?privacy_protect_billing_contact: bool,
+      ?consent: {
+        max_price: Float,
+        currency: String
+      }
     ) -> _RegisterDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterDomainResponse
 
     interface _RejectDomainTransferFromAnotherAwsAccountResponse
@@ -390,7 +405,11 @@ module Aws::Route53Domains
     def renew_domain: (
       ?domain_name: String,
       ?duration_in_years: Integer,
-      ?current_expiry_year: Integer
+      ?current_expiry_year: Integer,
+      ?consent: {
+        max_price: Float,
+        currency: String
+      }
     ) -> _RenewDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RenewDomainResponse
 
     interface _ResendContactReachabilityEmailResponse
@@ -521,7 +540,11 @@ module Aws::Route53Domains
           }
         ]
       },
-      ?privacy_protect_billing_contact: bool
+      ?privacy_protect_billing_contact: bool,
+      ?consent: {
+        max_price: Float,
+        currency: String
+      }
     ) -> _TransferDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TransferDomainResponse
 
     interface _TransferDomainToAnotherAwsAccountResponse

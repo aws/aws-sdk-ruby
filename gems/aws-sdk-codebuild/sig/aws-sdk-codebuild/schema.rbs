@@ -141,6 +141,7 @@ module Aws::CodeBuild
     GetResourcePolicyOutput: StructureShape
     GitCloneDepth: IntegerShape
     GitSubmodulesConfig: StructureShape
+    HostKernel: EnumShape
     Identifiers: ListShape
     ImagePullCredentialsType: EnumShape
     ImageVersions: ListShape

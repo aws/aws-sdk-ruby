@@ -48,6 +48,7 @@ module Aws::SocialMessaging
       include Smithy::Client::_Response[Types::AssociateWhatsAppBusinessAccountOutput]
       def signup_callback_result: () -> Types::WhatsAppSignupCallbackResult?
       def status_code: () -> Integer?
+      def linked_whats_app_business_account_id: () -> String?
     end
     def associate_whats_app_business_account: (
       ?signup_callback: {
@@ -82,6 +83,29 @@ module Aws::SocialMessaging
         }
       }
     ) -> _AssociateWhatsAppBusinessAccountResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateWhatsAppBusinessAccountResponse
+
+    interface _CreateWhatsAppDatasetResponse
+      include Smithy::Client::_Response[Types::CreateWhatsAppDatasetOutput]
+      def dataset_id: () -> String?
+    end
+    def create_whats_app_dataset: (
+      ?id: String
+    ) -> _CreateWhatsAppDatasetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWhatsAppDatasetResponse
+
+    interface _CreateWhatsAppFlowResponse
+      include Smithy::Client::_Response[Types::CreateWhatsAppFlowOutput]
+      def flow_id: () -> String?
+      def validation_errors: () -> Array[String]?
+    end
+    def create_whats_app_flow: (
+      ?id: String,
+      ?flow_name: String,
+      ?categories: Array[String],
+      ?flow_json: String,
+      ?publish: bool,
+      ?clone_flow_id: String,
+      ?endpoint_uri: String
+    ) -> _CreateWhatsAppFlowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWhatsAppFlowResponse
 
     interface _CreateWhatsAppMessageTemplateResponse
       include Smithy::Client::_Response[Types::CreateWhatsAppMessageTemplateOutput]
@@ -141,6 +165,14 @@ module Aws::SocialMessaging
       }
     ) -> _CreateWhatsAppMessageTemplateMediaResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWhatsAppMessageTemplateMediaResponse
 
+    interface _DeleteWhatsAppFlowResponse
+      include Smithy::Client::_Response[Types::DeleteWhatsAppFlowOutput]
+    end
+    def delete_whats_app_flow: (
+      ?id: String,
+      ?flow_id: String
+    ) -> _DeleteWhatsAppFlowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteWhatsAppFlowResponse
+
     interface _DeleteWhatsAppMessageMediaResponse
       include Smithy::Client::_Response[Types::DeleteWhatsAppMessageMediaOutput]
       def success: () -> bool?
@@ -159,6 +191,14 @@ module Aws::SocialMessaging
       ?id: String,
       ?template_name: String
     ) -> _DeleteWhatsAppMessageTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteWhatsAppMessageTemplateResponse
+
+    interface _DeprecateWhatsAppFlowResponse
+      include Smithy::Client::_Response[Types::DeprecateWhatsAppFlowOutput]
+    end
+    def deprecate_whats_app_flow: (
+      ?id: String,
+      ?flow_id: String
+    ) -> _DeprecateWhatsAppFlowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeprecateWhatsAppFlowResponse
 
     interface _DisassociateWhatsAppBusinessAccountResponse
       include Smithy::Client::_Response[Types::DisassociateWhatsAppBusinessAccountOutput]
@@ -179,10 +219,62 @@ module Aws::SocialMessaging
       include Smithy::Client::_Response[Types::GetLinkedWhatsAppBusinessAccountPhoneNumberOutput]
       def phone_number: () -> Types::WhatsAppPhoneNumberDetail?
       def linked_whats_app_business_account_id: () -> String?
+      def call_settings: () -> Types::WhatsAppCallSettings?
     end
     def get_linked_whats_app_business_account_phone_number: (
       ?id: String
     ) -> _GetLinkedWhatsAppBusinessAccountPhoneNumberResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLinkedWhatsAppBusinessAccountPhoneNumberResponse
+
+    interface _GetWhatsAppBusinessPublicKeyResponse
+      include Smithy::Client::_Response[Types::GetWhatsAppBusinessPublicKeyOutput]
+      def business_public_key: () -> String?
+      def business_public_key_signature_status: () -> String?
+    end
+    def get_whats_app_business_public_key: (
+      ?origination_phone_number_id: String
+    ) -> _GetWhatsAppBusinessPublicKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetWhatsAppBusinessPublicKeyResponse
+
+    interface _GetWhatsAppCallPermissionResponse
+      include Smithy::Client::_Response[Types::GetWhatsAppCallPermissionOutput]
+      def permission: () -> Types::WhatsAppCallPermission?
+      def actions: () -> Array[Types::WhatsAppCallPermissionAction]?
+    end
+    def get_whats_app_call_permission: (
+      ?origination_phone_number_id: String,
+      ?destination_phone_number: String,
+      ?end_user_bsuid: String
+    ) -> _GetWhatsAppCallPermissionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetWhatsAppCallPermissionResponse
+
+    interface _GetWhatsAppFlowResponse
+      include Smithy::Client::_Response[Types::GetWhatsAppFlowOutput]
+      def flow_id: () -> String?
+      def flow_name: () -> String?
+      def flow_status: () -> String?
+      def categories: () -> Array[String]?
+      def validation_errors: () -> Array[String]?
+      def json_version: () -> String?
+      def data_api_version: () -> String?
+      def endpoint_uri: () -> String?
+      def preview: () -> Types::MetaFlowPreviewInfo?
+      def whats_app_business_account: () -> Types::MetaFlowWhatsAppBusinessAccountInfo?
+      def application: () -> Types::MetaFlowApplicationInfo?
+      def health_status: () -> Types::MetaFlowHealthStatus?
+    end
+    def get_whats_app_flow: (
+      ?id: String,
+      ?flow_id: String
+    ) -> _GetWhatsAppFlowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetWhatsAppFlowResponse
+
+    interface _GetWhatsAppFlowPreviewResponse
+      include Smithy::Client::_Response[Types::GetWhatsAppFlowPreviewOutput]
+      def flow_id: () -> String?
+      def preview: () -> Types::MetaFlowPreviewInfo?
+    end
+    def get_whats_app_flow_preview: (
+      ?id: String,
+      ?flow_id: String,
+      ?invalidate: bool
+    ) -> _GetWhatsAppFlowPreviewResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetWhatsAppFlowPreviewResponse
 
     interface _GetWhatsAppMessageMediaResponse
       include Smithy::Client::_Response[Types::GetWhatsAppMessageMediaOutput]
@@ -209,7 +301,9 @@ module Aws::SocialMessaging
     end
     def get_whats_app_message_template: (
       ?meta_template_id: String,
-      ?id: String
+      ?id: String,
+      ?template_name: String,
+      ?template_language_code: String
     ) -> _GetWhatsAppMessageTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetWhatsAppMessageTemplateResponse
 
     interface _ListLinkedWhatsAppBusinessAccountsResponse
@@ -230,6 +324,29 @@ module Aws::SocialMessaging
     def list_tags_for_resource: (
       ?resource_arn: String
     ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListWhatsAppFlowAssetsResponse
+      include Smithy::Client::_Response[Types::ListWhatsAppFlowAssetsOutput]
+      def flow_assets: () -> Array[Types::MetaFlowAsset]?
+      def next_token: () -> String?
+    end
+    def list_whats_app_flow_assets: (
+      ?id: String,
+      ?flow_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListWhatsAppFlowAssetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListWhatsAppFlowAssetsResponse
+
+    interface _ListWhatsAppFlowsResponse
+      include Smithy::Client::_Response[Types::ListWhatsAppFlowsOutput]
+      def flows: () -> Array[Types::MetaFlowSummary]?
+      def next_token: () -> String?
+    end
+    def list_whats_app_flows: (
+      ?id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListWhatsAppFlowsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListWhatsAppFlowsResponse
 
     interface _ListWhatsAppMessageTemplatesResponse
       include Smithy::Client::_Response[Types::ListWhatsAppMessageTemplatesOutput]
@@ -270,6 +387,14 @@ module Aws::SocialMessaging
       }
     ) -> _PostWhatsAppMessageMediaResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PostWhatsAppMessageMediaResponse
 
+    interface _PublishWhatsAppFlowResponse
+      include Smithy::Client::_Response[Types::PublishWhatsAppFlowOutput]
+    end
+    def publish_whats_app_flow: (
+      ?id: String,
+      ?flow_id: String
+    ) -> _PublishWhatsAppFlowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PublishWhatsAppFlowResponse
+
     interface _PutWhatsAppBusinessAccountEventDestinationsResponse
       include Smithy::Client::_Response[Types::PutWhatsAppBusinessAccountEventDestinationsOutput]
     end
@@ -282,6 +407,35 @@ module Aws::SocialMessaging
         }
       ]
     ) -> _PutWhatsAppBusinessAccountEventDestinationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutWhatsAppBusinessAccountEventDestinationsResponse
+
+    interface _PutWhatsAppBusinessPublicKeyResponse
+      include Smithy::Client::_Response[Types::PutWhatsAppBusinessPublicKeyOutput]
+    end
+    def put_whats_app_business_public_key: (
+      ?origination_phone_number_id: String,
+      ?business_public_key: String,
+      ?kms_key_arn: String
+    ) -> _PutWhatsAppBusinessPublicKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutWhatsAppBusinessPublicKeyResponse
+
+    interface _SendWhatsAppCallEventResponse
+      include Smithy::Client::_Response[Types::SendWhatsAppCallEventOutput]
+      def call_id: () -> String?
+    end
+    def send_whats_app_call_event: (
+      ?origination_phone_number_id: String,
+      ?meta_api_version: String,
+      ?call_event: String
+    ) -> _SendWhatsAppCallEventResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SendWhatsAppCallEventResponse
+
+    interface _SendWhatsAppConversionEventResponse
+      include Smithy::Client::_Response[Types::SendWhatsAppConversionEventOutput]
+      def request_id: () -> String?
+    end
+    def send_whats_app_conversion_event: (
+      ?id: String,
+      ?dataset_id: String,
+      ?event_data: String
+    ) -> _SendWhatsAppConversionEventResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SendWhatsAppConversionEventResponse
 
     interface _SendWhatsAppMessageResponse
       include Smithy::Client::_Response[Types::SendWhatsAppMessageOutput]
@@ -316,14 +470,74 @@ module Aws::SocialMessaging
       ?tag_keys: Array[String]
     ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
 
+    interface _UpdateLinkedWhatsAppBusinessAccountPhoneNumberResponse
+      include Smithy::Client::_Response[Types::UpdateLinkedWhatsAppBusinessAccountPhoneNumberOutput]
+      def phone_number_id: () -> String?
+    end
+    def update_linked_whats_app_business_account_phone_number: (
+      ?id: String,
+      ?call_settings: {
+        call_enabled: bool,
+        call_hours: {
+          enabled: untyped,
+          timezone: String,
+          weekly_operating_hours: Array[
+            {
+              day_of_week: String,
+              open_time: {
+                hours: Integer,
+                minutes: untyped
+              },
+              close_time: untyped
+            }
+          ],
+          holiday_schedule: Array[
+            {
+              date: String,
+              start_time: untyped,
+              end_time: untyped
+            }
+          ]
+        },
+        call_icon_visibility: String,
+        callback_permission_status: String
+      }
+    ) -> _UpdateLinkedWhatsAppBusinessAccountPhoneNumberResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateLinkedWhatsAppBusinessAccountPhoneNumberResponse
+
+    interface _UpdateWhatsAppFlowResponse
+      include Smithy::Client::_Response[Types::UpdateWhatsAppFlowOutput]
+    end
+    def update_whats_app_flow: (
+      ?id: String,
+      ?flow_id: String,
+      ?flow_name: String,
+      ?categories: Array[String],
+      ?endpoint_uri: String,
+      ?meta_app_id: String
+    ) -> _UpdateWhatsAppFlowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateWhatsAppFlowResponse
+
+    interface _UpdateWhatsAppFlowAssetsResponse
+      include Smithy::Client::_Response[Types::UpdateWhatsAppFlowAssetsOutput]
+      def validation_errors: () -> Array[String]?
+    end
+    def update_whats_app_flow_assets: (
+      ?id: String,
+      ?flow_id: String,
+      ?flow_json: String
+    ) -> _UpdateWhatsAppFlowAssetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateWhatsAppFlowAssetsResponse
+
     interface _UpdateWhatsAppMessageTemplateResponse
       include Smithy::Client::_Response[Types::UpdateWhatsAppMessageTemplateOutput]
     end
     def update_whats_app_message_template: (
       ?id: String,
       ?meta_template_id: String,
+      ?template_name: String,
+      ?template_language_code: String,
+      ?parameter_format: String,
       ?template_category: String,
-      ?template_components: String
+      ?template_components: String,
+      ?cta_url_link_tracking_opted_out: bool
     ) -> _UpdateWhatsAppMessageTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateWhatsAppMessageTemplateResponse
   end
 end

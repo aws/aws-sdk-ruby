@@ -62,6 +62,19 @@ module Aws::Backup
       ?retain_record_in_days: Integer
     ) -> _CancelLegalHoldResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelLegalHoldResponse
 
+    interface _CreateBackupAccessPointResponse
+      include Smithy::Client::_Response[Types::CreateBackupAccessPointResponse]
+      def access_point_arn: () -> String?
+      def status: () -> String?
+    end
+    def create_backup_access_point: (
+      ?access_point_metadata: Hash[String, String],
+      ?access_point_policy: String,
+      ?name: String,
+      ?recovery_point_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateBackupAccessPointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateBackupAccessPointResponse
+
     interface _CreateBackupPlanResponse
       include Smithy::Client::_Response[Types::CreateBackupPlanOutput]
       def backup_plan_id: () -> String?
@@ -77,19 +90,21 @@ module Aws::Backup
           {
             rule_name: String,
             target_backup_vault_name: String,
+            target_logically_air_gapped_backup_vault_arn: String,
             schedule_expression: String,
             start_window_minutes: Integer,
             completion_window_minutes: untyped,
             lifecycle: {
               move_to_cold_storage_after_days: Integer,
               delete_after_days: untyped,
-              opt_in_to_archive_for_supported_resources: bool
+              opt_in_to_archive_for_supported_resources: bool,
+              delete_after_event: String
             },
             recovery_point_tags: Hash[String, String],
             copy_actions: Array[
               {
                 lifecycle: untyped,
-                destination_backup_vault_arn: String
+                destination_backup_vault_arn: untyped
               }
             ],
             enable_continuous_backup: untyped,
@@ -98,6 +113,12 @@ module Aws::Backup
               {
                 resource_types: Array[String]
               }
+            ],
+            scan_actions: Array[
+              {
+                malware_scanner: String,
+                scan_mode: String
+              }
             ]
           }
         ],
@@ -105,6 +126,13 @@ module Aws::Backup
           {
             resource_type: String,
             backup_options: Hash[String, String]
+          }
+        ],
+        scan_settings: Array[
+          {
+            malware_scanner: untyped,
+            resource_types: untyped,
+            scanner_role_arn: String
           }
         ]
       },
@@ -225,7 +253,8 @@ module Aws::Backup
       ?backup_vault_tags: Hash[String, String],
       ?creator_request_id: String,
       ?min_retention_days: Integer,
-      ?max_retention_days: Integer
+      ?max_retention_days: Integer,
+      ?encryption_key_arn: String
     ) -> _CreateLogicallyAirGappedBackupVaultResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLogicallyAirGappedBackupVaultResponse
 
     interface _CreateReportPlanResponse
@@ -322,6 +351,35 @@ module Aws::Backup
       }
     ) -> _CreateRestoreTestingSelectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRestoreTestingSelectionResponse
 
+    interface _CreateTieringConfigurationResponse
+      include Smithy::Client::_Response[Types::CreateTieringConfigurationOutput]
+      def tiering_configuration_arn: () -> String?
+      def tiering_configuration_name: () -> String?
+      def creation_time: () -> Time?
+    end
+    def create_tiering_configuration: (
+      ?tiering_configuration: {
+        tiering_configuration_name: String,
+        backup_vault_name: String,
+        resource_selection: Array[
+          {
+            resources: Array[String],
+            tiering_down_settings_in_days: Integer,
+            resource_type: String
+          }
+        ]
+      },
+      ?tiering_configuration_tags: Hash[String, String],
+      ?creator_request_id: String
+    ) -> _CreateTieringConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTieringConfigurationResponse
+
+    interface _DeleteBackupAccessPointResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_backup_access_point: (
+      ?access_point_arn: String
+    ) -> _DeleteBackupAccessPointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBackupAccessPointResponse
+
     interface _DeleteBackupPlanResponse
       include Smithy::Client::_Response[Types::DeleteBackupPlanOutput]
       def backup_plan_id: () -> String?
@@ -406,13 +464,43 @@ module Aws::Backup
       ?restore_testing_selection_name: String
     ) -> _DeleteRestoreTestingSelectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRestoreTestingSelectionResponse
 
+    interface _DeleteTieringConfigurationResponse
+      include Smithy::Client::_Response[Types::DeleteTieringConfigurationOutput]
+    end
+    def delete_tiering_configuration: (
+      ?tiering_configuration_name: String
+    ) -> _DeleteTieringConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTieringConfigurationResponse
+
+    interface _DescribeBackupAccessPointResponse
+      include Smithy::Client::_Response[Types::DescribeBackupAccessPointResponse]
+      def access_point_arn: () -> String?
+      def access_point_metadata: () -> Hash[String, String]?
+      def backup_vault_arn: () -> String?
+      def backup_vault_name: () -> String?
+      def creation_time: () -> Time?
+      def name: () -> String?
+      def recovery_point_arn: () -> String?
+      def resource_arn: () -> String?
+      def resource_type: () -> String?
+      def status: () -> String?
+      def status_message: () -> String?
+    end
+    def describe_backup_access_point: (
+      ?access_point_arn: String
+    ) -> _DescribeBackupAccessPointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeBackupAccessPointResponse
+
     interface _DescribeBackupJobResponse
       include Smithy::Client::_Response[Types::DescribeBackupJobOutput]
       def account_id: () -> String?
       def backup_job_id: () -> String?
       def backup_vault_name: () -> String?
+      def recovery_point_lifecycle: () -> Types::Lifecycle?
       def backup_vault_arn: () -> String?
+      def vault_type: () -> String?
+      def vault_lock_state: () -> String?
       def recovery_point_arn: () -> String?
+      def encryption_key_arn: () -> String?
+      def is_encrypted: () -> bool?
       def resource_arn: () -> String?
       def creation_date: () -> Time?
       def completion_date: () -> Time?
@@ -458,6 +546,7 @@ module Aws::Backup
       def mpa_approval_team_arn: () -> String?
       def mpa_session_arn: () -> String?
       def latest_mpa_approval_team_update: () -> Types::LatestMpaApprovalTeamUpdate?
+      def encryption_key_type: () -> String?
     end
     def describe_backup_vault: (
       ?backup_vault_name: String,
@@ -539,6 +628,8 @@ module Aws::Backup
       def vault_type: () -> String?
       def index_status: () -> String?
       def index_status_message: () -> String?
+      def encryption_key_type: () -> String?
+      def scan_results: () -> Array[Types::ScanResult]?
     end
     def describe_recovery_point: (
       ?backup_vault_name: String,
@@ -574,6 +665,8 @@ module Aws::Backup
       def account_id: () -> String?
       def restore_job_id: () -> String?
       def recovery_point_arn: () -> String?
+      def source_resource_arn: () -> String?
+      def backup_vault_arn: () -> String?
       def creation_date: () -> Time?
       def completion_date: () -> Time?
       def status: () -> String?
@@ -590,10 +683,41 @@ module Aws::Backup
       def validation_status_message: () -> String?
       def deletion_status: () -> String?
       def deletion_status_message: () -> String?
+      def is_parent: () -> bool?
+      def parent_job_id: () -> String?
     end
     def describe_restore_job: (
       ?restore_job_id: String
     ) -> _DescribeRestoreJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeRestoreJobResponse
+
+    interface _DescribeScanJobResponse
+      include Smithy::Client::_Response[Types::DescribeScanJobOutput]
+      def account_id: () -> String?
+      def backup_vault_arn: () -> String?
+      def backup_vault_name: () -> String?
+      def completion_date: () -> Time?
+      def continuous_scan_end_time: () -> Time?
+      def continuous_scan_start_time: () -> Time?
+      def created_by: () -> Types::ScanJobCreator?
+      def creation_date: () -> Time?
+      def iam_role_arn: () -> String?
+      def malware_scanner: () -> String?
+      def recovery_point_arn: () -> String?
+      def resource_arn: () -> String?
+      def resource_name: () -> String?
+      def resource_type: () -> String?
+      def scan_base_recovery_point_arn: () -> String?
+      def scan_id: () -> String?
+      def scan_job_id: () -> String?
+      def scan_mode: () -> String?
+      def scan_result: () -> Types::ScanResultInfo?
+      def scanner_role_arn: () -> String?
+      def state: () -> String?
+      def status_message: () -> String?
+    end
+    def describe_scan_job: (
+      ?scan_job_id: String
+    ) -> _DescribeScanJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeScanJobResponse
 
     interface _DisassociateBackupVaultMpaApprovalTeamResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
@@ -638,10 +762,12 @@ module Aws::Backup
       def deletion_date: () -> Time?
       def last_execution_date: () -> Time?
       def advanced_backup_settings: () -> Array[Types::AdvancedBackupSetting]?
+      def scheduled_runs_preview: () -> Array[Types::ScheduledPlanExecutionMember]?
     end
     def get_backup_plan: (
       ?backup_plan_id: String,
-      ?version_id: String
+      ?version_id: String,
+      ?max_scheduled_runs_preview: Integer
     ) -> _GetBackupPlanResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBackupPlanResponse
 
     interface _GetBackupPlanFromJSONResponse
@@ -710,6 +836,21 @@ module Aws::Backup
     def get_legal_hold: (
       ?legal_hold_id: String
     ) -> _GetLegalHoldResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLegalHoldResponse
+
+    interface _GetPITRMalwareScanResultsResponse
+      include Smithy::Client::_Response[Types::GetPITRMalwareScanResultsOutput]
+      def scan_end_time: () -> Time?
+      def scan_result: () -> Types::ScanResultInfo?
+      def last_scan_job_time: () -> Time?
+      def scan_id: () -> String?
+      def scan_mode: () -> String?
+    end
+    def get_pitr_malware_scan_results: (
+      ?recovery_point_arn: String,
+      ?backup_vault_name: String,
+      ?scan_end_time: Time,
+      ?malware_scanner: String
+    ) -> _GetPITRMalwareScanResultsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPITRMalwareScanResultsResponse
 
     interface _GetRecoveryPointIndexDetailsResponse
       include Smithy::Client::_Response[Types::GetRecoveryPointIndexDetailsOutput]
@@ -782,6 +923,46 @@ module Aws::Backup
       def resource_types: () -> Array[String]?
     end
     def get_supported_resource_types: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSupportedResourceTypesResponse
+
+    interface _GetTieringConfigurationResponse
+      include Smithy::Client::_Response[Types::GetTieringConfigurationOutput]
+      def tiering_configuration: () -> Types::TieringConfiguration?
+    end
+    def get_tiering_configuration: (
+      ?tiering_configuration_name: String
+    ) -> _GetTieringConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTieringConfigurationResponse
+
+    interface _ListBackupAccessPointsResponse
+      include Smithy::Client::_Response[Types::ListBackupAccessPointsResponse]
+      def backup_access_points: () -> Array[Types::ListAccessPointsMember]?
+      def next_token: () -> String?
+    end
+    def list_backup_access_points: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListBackupAccessPointsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBackupAccessPointsResponse
+
+    interface _ListBackupAccessPointsByRecoveryPointResponse
+      include Smithy::Client::_Response[Types::ListBackupAccessPointsByRecoveryPointResponse]
+      def backup_access_points: () -> Array[Types::ListAccessPointsMember]?
+      def next_token: () -> String?
+    end
+    def list_backup_access_points_by_recovery_point: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?recovery_point_arn: String
+    ) -> _ListBackupAccessPointsByRecoveryPointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBackupAccessPointsByRecoveryPointResponse
+
+    interface _ListBackupAccessPointsByResourceResponse
+      include Smithy::Client::_Response[Types::ListBackupAccessPointsByResourceResponse]
+      def backup_access_points: () -> Array[Types::ListAccessPointsMember]?
+      def next_token: () -> String?
+    end
+    def list_backup_access_points_by_resource: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?resource_arn: String
+    ) -> _ListBackupAccessPointsByResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBackupAccessPointsByResourceResponse
 
     interface _ListBackupJobSummariesResponse
       include Smithy::Client::_Response[Types::ListBackupJobSummariesOutput]
@@ -909,7 +1090,8 @@ module Aws::Backup
       ?by_complete_before: Time,
       ?by_complete_after: Time,
       ?by_parent_job_id: String,
-      ?by_message_category: String
+      ?by_message_category: String,
+      ?by_source_recovery_point_arn: String
     ) -> _ListCopyJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCopyJobsResponse
 
     interface _ListFrameworksResponse
@@ -1075,7 +1257,8 @@ module Aws::Backup
       ?by_status: String,
       ?by_complete_before: Time,
       ?by_complete_after: Time,
-      ?by_restore_testing_plan_arn: String
+      ?by_restore_testing_plan_arn: String,
+      ?by_parent_job_id: String
     ) -> _ListRestoreJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRestoreJobsResponse
 
     interface _ListRestoreJobsByProtectedResourceResponse
@@ -1113,6 +1296,43 @@ module Aws::Backup
       ?restore_testing_plan_name: String
     ) -> _ListRestoreTestingSelectionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRestoreTestingSelectionsResponse
 
+    interface _ListScanJobSummariesResponse
+      include Smithy::Client::_Response[Types::ListScanJobSummariesOutput]
+      def scan_job_summaries: () -> Array[Types::ScanJobSummary]?
+      def aggregation_period: () -> String?
+      def next_token: () -> String?
+    end
+    def list_scan_job_summaries: (
+      ?account_id: String,
+      ?resource_type: String,
+      ?malware_scanner: String,
+      ?scan_result_status: String,
+      ?state: String,
+      ?aggregation_period: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListScanJobSummariesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListScanJobSummariesResponse
+
+    interface _ListScanJobsResponse
+      include Smithy::Client::_Response[Types::ListScanJobsOutput]
+      def next_token: () -> String?
+      def scan_jobs: () -> Array[Types::ScanJob]?
+    end
+    def list_scan_jobs: (
+      ?by_account_id: String,
+      ?by_backup_vault_name: String,
+      ?by_complete_after: Time,
+      ?by_complete_before: Time,
+      ?by_malware_scanner: String,
+      ?by_recovery_point_arn: String,
+      ?by_resource_arn: String,
+      ?by_resource_type: String,
+      ?by_scan_result_status: String,
+      ?by_state: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListScanJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListScanJobsResponse
+
     interface _ListTagsResponse
       include Smithy::Client::_Response[Types::ListTagsOutput]
       def next_token: () -> String?
@@ -1123,6 +1343,16 @@ module Aws::Backup
       ?next_token: String,
       ?max_results: Integer
     ) -> _ListTagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsResponse
+
+    interface _ListTieringConfigurationsResponse
+      include Smithy::Client::_Response[Types::ListTieringConfigurationsOutput]
+      def tiering_configurations: () -> Array[Types::TieringConfigurationsListMember]?
+      def next_token: () -> String?
+    end
+    def list_tiering_configurations: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListTieringConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTieringConfigurationsResponse
 
     interface _PutBackupVaultAccessPolicyResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
@@ -1178,6 +1408,7 @@ module Aws::Backup
     end
     def start_backup_job: (
       ?backup_vault_name: String,
+      ?logically_air_gapped_backup_vault_arn: String,
       ?resource_arn: String,
       ?iam_role_arn: String,
       ?idempotency_token: String,
@@ -1186,7 +1417,8 @@ module Aws::Backup
       ?lifecycle: {
         move_to_cold_storage_after_days: Integer,
         delete_after_days: untyped,
-        opt_in_to_archive_for_supported_resources: bool
+        opt_in_to_archive_for_supported_resources: bool,
+        delete_after_event: String
       },
       ?recovery_point_tags: Hash[String, String],
       ?backup_options: Hash[String, String],
@@ -1208,7 +1440,8 @@ module Aws::Backup
       ?lifecycle: {
         move_to_cold_storage_after_days: Integer,
         delete_after_days: untyped,
-        opt_in_to_archive_for_supported_resources: bool
+        opt_in_to_archive_for_supported_resources: bool,
+        delete_after_event: String
       }
     ) -> _StartCopyJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartCopyJobResponse
 
@@ -1233,6 +1466,23 @@ module Aws::Backup
       ?resource_type: String,
       ?copy_source_tags_to_restored_resource: bool
     ) -> _StartRestoreJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartRestoreJobResponse
+
+    interface _StartScanJobResponse
+      include Smithy::Client::_Response[Types::StartScanJobOutput]
+      def creation_date: () -> Time?
+      def scan_job_id: () -> String?
+    end
+    def start_scan_job: (
+      ?backup_vault_name: String,
+      ?continuous_scan_end_time: Time,
+      ?iam_role_arn: String,
+      ?idempotency_token: String,
+      ?malware_scanner: String,
+      ?recovery_point_arn: String,
+      ?scan_base_recovery_point_arn: String,
+      ?scan_mode: String,
+      ?scanner_role_arn: String
+    ) -> _StartScanJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartScanJobResponse
 
     interface _StopBackupJobResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
@@ -1264,6 +1514,7 @@ module Aws::Backup
       def creation_date: () -> Time?
       def version_id: () -> String?
       def advanced_backup_settings: () -> Array[Types::AdvancedBackupSetting]?
+      def scan_settings: () -> Array[Types::ScanSetting]?
     end
     def update_backup_plan: (
       ?backup_plan_id: String,
@@ -1273,19 +1524,21 @@ module Aws::Backup
           {
             rule_name: String,
             target_backup_vault_name: String,
+            target_logically_air_gapped_backup_vault_arn: String,
             schedule_expression: String,
             start_window_minutes: Integer,
             completion_window_minutes: untyped,
             lifecycle: {
               move_to_cold_storage_after_days: Integer,
               delete_after_days: untyped,
-              opt_in_to_archive_for_supported_resources: bool
+              opt_in_to_archive_for_supported_resources: bool,
+              delete_after_event: String
             },
             recovery_point_tags: Hash[String, String],
             copy_actions: Array[
               {
                 lifecycle: untyped,
-                destination_backup_vault_arn: String
+                destination_backup_vault_arn: untyped
               }
             ],
             enable_continuous_backup: untyped,
@@ -1294,6 +1547,12 @@ module Aws::Backup
               {
                 resource_types: Array[String]
               }
+            ],
+            scan_actions: Array[
+              {
+                malware_scanner: String,
+                scan_mode: String
+              }
             ]
           }
         ],
@@ -1301,6 +1560,13 @@ module Aws::Backup
           {
             resource_type: String,
             backup_options: Hash[String, String]
+          }
+        ],
+        scan_settings: Array[
+          {
+            malware_scanner: untyped,
+            resource_types: untyped,
+            scanner_role_arn: String
           }
         ]
       }
@@ -1368,7 +1634,8 @@ module Aws::Backup
       ?lifecycle: {
         move_to_cold_storage_after_days: Integer,
         delete_after_days: untyped,
-        opt_in_to_archive_for_supported_resources: bool
+        opt_in_to_archive_for_supported_resources: bool,
+        delete_after_event: String
       }
     ) -> _UpdateRecoveryPointLifecycleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRecoveryPointLifecycleResponse
 
@@ -1455,5 +1722,26 @@ module Aws::Backup
       },
       ?restore_testing_selection_name: String
     ) -> _UpdateRestoreTestingSelectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRestoreTestingSelectionResponse
+
+    interface _UpdateTieringConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateTieringConfigurationOutput]
+      def tiering_configuration_arn: () -> String?
+      def tiering_configuration_name: () -> String?
+      def creation_time: () -> Time?
+      def last_updated_time: () -> Time?
+    end
+    def update_tiering_configuration: (
+      ?tiering_configuration_name: String,
+      ?tiering_configuration: {
+        resource_selection: Array[
+          {
+            resources: Array[String],
+            tiering_down_settings_in_days: Integer,
+            resource_type: String
+          }
+        ],
+        backup_vault_name: String
+      }
+    ) -> _UpdateTieringConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateTieringConfigurationResponse
   end
 end

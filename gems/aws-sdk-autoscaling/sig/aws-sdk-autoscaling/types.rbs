@@ -236,6 +236,7 @@ module Aws::AutoScaling
         ?predicted_capacity: Integer,
         ?default_cooldown: Integer,
         ?availability_zones: Array[String],
+        ?availability_zone_ids: Array[String],
         ?load_balancer_names: Array[String],
         ?target_group_ar_ns: Array[String],
         ?health_check_type: String,
@@ -260,9 +261,12 @@ module Aws::AutoScaling
         ?default_instance_warmup: Integer,
         ?traffic_sources: Array[Types::TrafficSourceIdentifier],
         ?instance_maintenance_policy: Types::InstanceMaintenancePolicy,
+        ?deletion_protection: String,
         ?availability_zone_distribution: Types::AvailabilityZoneDistribution,
         ?availability_zone_impairment_policy: Types::AvailabilityZoneImpairmentPolicy,
         ?capacity_reservation_specification: Types::CapacityReservationSpecification,
+        ?instance_lifecycle_policy: Types::InstanceLifecyclePolicy,
+        ?operator: Types::Operator,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -277,6 +281,7 @@ module Aws::AutoScaling
       attr_accessor predicted_capacity: Integer?
       attr_accessor default_cooldown: Integer?
       attr_accessor availability_zones: Array[String]?
+      attr_accessor availability_zone_ids: Array[String]?
       attr_accessor load_balancer_names: Array[String]?
       attr_accessor target_group_ar_ns: Array[String]?
       attr_accessor health_check_type: String?
@@ -301,9 +306,12 @@ module Aws::AutoScaling
       attr_accessor default_instance_warmup: Integer?
       attr_accessor traffic_sources: Array[Types::TrafficSourceIdentifier]?
       attr_accessor instance_maintenance_policy: Types::InstanceMaintenancePolicy?
+      attr_accessor deletion_protection: String?
       attr_accessor availability_zone_distribution: Types::AvailabilityZoneDistribution?
       attr_accessor availability_zone_impairment_policy: Types::AvailabilityZoneImpairmentPolicy?
       attr_accessor capacity_reservation_specification: Types::CapacityReservationSpecification?
+      attr_accessor instance_lifecycle_policy: Types::InstanceLifecyclePolicy?
+      attr_accessor operator: Types::Operator?
     end
 
     class AutoScalingInstanceDetails
@@ -314,10 +322,12 @@ module Aws::AutoScaling
         ?instance_type: String,
         ?auto_scaling_group_name: String,
         ?availability_zone: String,
+        ?availability_zone_id: String,
         ?lifecycle_state: String,
         ?health_status: String,
         ?launch_configuration_name: String,
         ?launch_template: Types::LaunchTemplateSpecification,
+        ?image_id: String,
         ?protected_from_scale_in: bool,
         ?weighted_capacity: String,
       ) -> void
@@ -327,10 +337,12 @@ module Aws::AutoScaling
       attr_accessor instance_type: String?
       attr_accessor auto_scaling_group_name: String?
       attr_accessor availability_zone: String?
+      attr_accessor availability_zone_id: String?
       attr_accessor lifecycle_state: String?
       attr_accessor health_status: String?
       attr_accessor launch_configuration_name: String?
       attr_accessor launch_template: Types::LaunchTemplateSpecification?
+      attr_accessor image_id: String?
       attr_accessor protected_from_scale_in: bool?
       attr_accessor weighted_capacity: String?
     end
@@ -487,6 +499,7 @@ module Aws::AutoScaling
     module CapacityDistributionStrategy
       BALANCED_ONLY: String
       BALANCED_BEST_EFFORT: String
+      RESERVATIONS_THEN_BALANCED: String
     end
 
     class CapacityForecast
@@ -595,6 +608,7 @@ module Aws::AutoScaling
         ?desired_capacity: Integer,
         ?default_cooldown: Integer,
         ?availability_zones: Array[String],
+        ?availability_zone_ids: Array[String],
         ?load_balancer_names: Array[String],
         ?target_group_ar_ns: Array[String],
         ?health_check_type: String,
@@ -605,6 +619,7 @@ module Aws::AutoScaling
         ?new_instances_protected_from_scale_in: bool,
         ?capacity_rebalance: bool,
         ?lifecycle_hook_specification_list: Array[Types::LifecycleHookSpecification],
+        ?deletion_protection: String,
         ?tags: Array[Types::Tag],
         ?service_linked_role_arn: String,
         ?max_instance_lifetime: Integer,
@@ -617,6 +632,8 @@ module Aws::AutoScaling
         ?availability_zone_impairment_policy: Types::AvailabilityZoneImpairmentPolicy,
         ?skip_zonal_shift_validation: bool,
         ?capacity_reservation_specification: Types::CapacityReservationSpecification,
+        ?instance_lifecycle_policy: Types::InstanceLifecyclePolicy,
+        ?operator: Types::Operator,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -630,6 +647,7 @@ module Aws::AutoScaling
       attr_accessor desired_capacity: Integer?
       attr_accessor default_cooldown: Integer?
       attr_accessor availability_zones: Array[String]?
+      attr_accessor availability_zone_ids: Array[String]?
       attr_accessor load_balancer_names: Array[String]?
       attr_accessor target_group_ar_ns: Array[String]?
       attr_accessor health_check_type: String?
@@ -640,6 +658,7 @@ module Aws::AutoScaling
       attr_accessor new_instances_protected_from_scale_in: bool?
       attr_accessor capacity_rebalance: bool?
       attr_accessor lifecycle_hook_specification_list: Array[Types::LifecycleHookSpecification]?
+      attr_accessor deletion_protection: String?
       attr_accessor tags: Array[Types::Tag]?
       attr_accessor service_linked_role_arn: String?
       attr_accessor max_instance_lifetime: Integer?
@@ -652,6 +671,8 @@ module Aws::AutoScaling
       attr_accessor availability_zone_impairment_policy: Types::AvailabilityZoneImpairmentPolicy?
       attr_accessor skip_zonal_shift_validation: bool?
       attr_accessor capacity_reservation_specification: Types::CapacityReservationSpecification?
+      attr_accessor instance_lifecycle_policy: Types::InstanceLifecyclePolicy?
+      attr_accessor operator: Types::Operator?
     end
 
     class CreateLaunchConfigurationInput
@@ -851,6 +872,12 @@ module Aws::AutoScaling
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+    end
+
+    module DeletionProtection
+      None: String
+      PreventForceDeletion: String
+      PreventAllDeletion: String
     end
 
     class DescribeAccountLimitsOutput
@@ -1183,6 +1210,7 @@ module Aws::AutoScaling
         ?include_deleted_groups: bool,
         ?max_records: Integer,
         ?next_token: String,
+        ?filters: Array[Types::Filter],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1191,6 +1219,7 @@ module Aws::AutoScaling
       attr_accessor include_deleted_groups: bool?
       attr_accessor max_records: Integer?
       attr_accessor next_token: String?
+      attr_accessor filters: Array[Types::Filter]?
     end
 
     class DescribeScalingActivitiesOutput
@@ -1468,6 +1497,17 @@ module Aws::AutoScaling
       attr_accessor metrics: Array[String]?
     end
 
+    class DistributionSegment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_capacity_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_capacity_types: Array[String]?
+    end
+
     class Ebs
       include Smithy::Schema::Structure
 
@@ -1648,6 +1688,28 @@ module Aws::AutoScaling
       attr_accessor update_time: Time?
     end
 
+    class IdempotentCallInProgressFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class IdempotentParameterMismatchError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
     module ImpairedZoneHealthCheckBehavior
       ReplaceUnhealthy: String
       IgnoreUnhealthy: String
@@ -1660,10 +1722,12 @@ module Aws::AutoScaling
         ?instance_id: String,
         ?instance_type: String,
         ?availability_zone: String,
+        ?availability_zone_id: String,
         ?lifecycle_state: String,
         ?health_status: String,
         ?launch_configuration_name: String,
         ?launch_template: Types::LaunchTemplateSpecification,
+        ?image_id: String,
         ?protected_from_scale_in: bool,
         ?weighted_capacity: String,
       ) -> void
@@ -1672,17 +1736,51 @@ module Aws::AutoScaling
       attr_accessor instance_id: String?
       attr_accessor instance_type: String?
       attr_accessor availability_zone: String?
+      attr_accessor availability_zone_id: String?
       attr_accessor lifecycle_state: String?
       attr_accessor health_status: String?
       attr_accessor launch_configuration_name: String?
       attr_accessor launch_template: Types::LaunchTemplateSpecification?
+      attr_accessor image_id: String?
       attr_accessor protected_from_scale_in: bool?
       attr_accessor weighted_capacity: String?
+    end
+
+    class InstanceCollection
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_type: String,
+        ?market_type: String,
+        ?subnet_id: String,
+        ?availability_zone: String,
+        ?availability_zone_id: String,
+        ?instance_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_type: String?
+      attr_accessor market_type: String?
+      attr_accessor subnet_id: String?
+      attr_accessor availability_zone: String?
+      attr_accessor availability_zone_id: String?
+      attr_accessor instance_ids: Array[String]?
     end
 
     module InstanceGeneration
       CURRENT: String
       PREVIOUS: String
+    end
+
+    class InstanceLifecyclePolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?retention_triggers: Types::RetentionTriggers,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor retention_triggers: Types::RetentionTriggers?
     end
 
     class InstanceMaintenancePolicy
@@ -1750,6 +1848,7 @@ module Aws::AutoScaling
         ?preferences: Types::RefreshPreferences,
         ?desired_configuration: Types::DesiredConfiguration,
         ?rollback_details: Types::RollbackDetails,
+        ?strategy: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1765,6 +1864,7 @@ module Aws::AutoScaling
       attr_accessor preferences: Types::RefreshPreferences?
       attr_accessor desired_configuration: Types::DesiredConfiguration?
       attr_accessor rollback_details: Types::RollbackDetails?
+      attr_accessor strategy: String?
     end
 
     class InstanceRefreshInProgressFault
@@ -1910,6 +2010,7 @@ module Aws::AutoScaling
         ?spot_allocation_strategy: String,
         ?spot_instance_pools: Integer,
         ?spot_max_price: String,
+        ?distribution_segments: Array[Types::DistributionSegment],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1919,6 +2020,7 @@ module Aws::AutoScaling
       attr_accessor spot_allocation_strategy: String?
       attr_accessor spot_instance_pools: Integer?
       attr_accessor spot_max_price: String?
+      attr_accessor distribution_segments: Array[Types::DistributionSegment]?
     end
 
     class InvalidNextToken
@@ -1992,6 +2094,69 @@ module Aws::AutoScaling
       attr_accessor metadata_options: Types::InstanceMetadataOptions?
     end
 
+    class LaunchInstancesError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_type: String,
+        ?market_type: String,
+        ?subnet_id: String,
+        ?availability_zone: String,
+        ?availability_zone_id: String,
+        ?error_code: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_type: String?
+      attr_accessor market_type: String?
+      attr_accessor subnet_id: String?
+      attr_accessor availability_zone: String?
+      attr_accessor availability_zone_id: String?
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+    end
+
+    class LaunchInstancesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_scaling_group_name: String,
+        ?requested_capacity: Integer,
+        ?client_token: String,
+        ?availability_zones: Array[String],
+        ?availability_zone_ids: Array[String],
+        ?subnet_ids: Array[String],
+        ?retry_strategy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_scaling_group_name: String?
+      attr_accessor requested_capacity: Integer?
+      attr_accessor client_token: String?
+      attr_accessor availability_zones: Array[String]?
+      attr_accessor availability_zone_ids: Array[String]?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor retry_strategy: String?
+    end
+
+    class LaunchInstancesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_scaling_group_name: String,
+        ?client_token: String,
+        ?instances: Array[Types::InstanceCollection],
+        ?errors: Array[Types::LaunchInstancesError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_scaling_group_name: String?
+      attr_accessor client_token: String?
+      attr_accessor instances: Array[Types::InstanceCollection]?
+      attr_accessor errors: Array[Types::LaunchInstancesError]?
+    end
+
     class LaunchTemplate
       include Smithy::Schema::Structure
 
@@ -2013,6 +2178,7 @@ module Aws::AutoScaling
         ?weighted_capacity: String,
         ?launch_template_specification: Types::LaunchTemplateSpecification,
         ?instance_requirements: Types::InstanceRequirements,
+        ?image_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2020,6 +2186,7 @@ module Aws::AutoScaling
       attr_accessor weighted_capacity: String?
       attr_accessor launch_template_specification: Types::LaunchTemplateSpecification?
       attr_accessor instance_requirements: Types::InstanceRequirements?
+      attr_accessor image_id: String?
     end
 
     class LaunchTemplateSpecification
@@ -2096,17 +2263,24 @@ module Aws::AutoScaling
       TERMINATING: String
       TERMINATING_WAIT: String
       TERMINATING_PROCEED: String
+      TERMINATING_RETAINED: String
       TERMINATED: String
       DETACHING: String
       DETACHED: String
       ENTERING_STANDBY: String
       STANDBY: String
+      REPLACING_ROOT_VOLUME: String
+      REPLACING_ROOT_VOLUME_WAIT: String
+      REPLACING_ROOT_VOLUME_PROCEED: String
+      ROOT_VOLUME_REPLACED: String
       WARMED_PENDING: String
       WARMED_PENDING_WAIT: String
       WARMED_PENDING_PROCEED: String
+      WARMED_PENDING_RETAINED: String
       WARMED_TERMINATING: String
       WARMED_TERMINATING_WAIT: String
       WARMED_TERMINATING_PROCEED: String
+      WARMED_TERMINATING_RETAINED: String
       WARMED_TERMINATED: String
       WARMED_STOPPED: String
       WARMED_RUNNING: String
@@ -2353,6 +2527,17 @@ module Aws::AutoScaling
       attr_accessor auto_scaling_group_name: String?
       attr_accessor topic_arn: String?
       attr_accessor notification_type: String?
+    end
+
+    class Operator
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?principal: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor principal: String?
     end
 
     class PerformanceFactorReferenceRequest
@@ -2750,6 +2935,7 @@ module Aws::AutoScaling
 
     module RefreshStrategy
       Rolling: String
+      ReplaceRootVolume: String
     end
 
     class ResourceContentionFault
@@ -2785,6 +2971,27 @@ module Aws::AutoScaling
 
       attr_accessor auto_scaling_group_name: String?
       attr_accessor scaling_processes: Array[String]?
+    end
+
+    module RetentionAction
+      Retain: String
+      Terminate: String
+    end
+
+    class RetentionTriggers
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?terminate_hook_abandon: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor terminate_hook_abandon: String?
+    end
+
+    module RetryStrategy
+      RETRY_WITH_GROUP_CONFIGURATION: String
+      NONE: String
     end
 
     class RollbackDetails
@@ -2859,6 +3066,9 @@ module Aws::AutoScaling
       Failed: String
       Cancelled: String
       WaitingForConnectionDraining: String
+      WaitingForInPlaceUpdateToStart: String
+      WaitingForInPlaceUpdateToFinalize: String
+      InPlaceUpdateInProgress: String
     end
 
     class ScalingPolicy
@@ -3136,6 +3346,13 @@ module Aws::AutoScaling
       attr_accessor propagate_at_launch: bool?
     end
 
+    module TargetCapacityType
+      ON_DEMAND_CAPACITY_RESERVATION: String
+      CAPACITY_BLOCK: String
+      INTERRUPTIBLE_CAPACITY_RESERVATION: String
+      ON_DEMAND: String
+    end
+
     class TargetTrackingConfiguration
       include Smithy::Schema::Structure
 
@@ -3196,11 +3413,15 @@ module Aws::AutoScaling
 
       def initialize: (
         ?instance_id: String,
+        ?instance_ids: Array[String],
+        ?auto_scaling_group_name: String,
         ?should_decrement_desired_capacity: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor instance_id: String?
+      attr_accessor instance_ids: Array[String]?
+      attr_accessor auto_scaling_group_name: String?
       attr_accessor should_decrement_desired_capacity: bool?
     end
 
@@ -3209,10 +3430,12 @@ module Aws::AutoScaling
 
       def initialize: (
         ?activity: Types::Activity,
+        ?activities: Array[Types::Activity],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor activity: Types::Activity?
+      attr_accessor activities: Array[Types::Activity]?
     end
 
     class TotalLocalStorageGBRequest
@@ -3271,6 +3494,7 @@ module Aws::AutoScaling
         ?desired_capacity: Integer,
         ?default_cooldown: Integer,
         ?availability_zones: Array[String],
+        ?availability_zone_ids: Array[String],
         ?health_check_type: String,
         ?health_check_grace_period: Integer,
         ?placement_group: String,
@@ -3288,6 +3512,8 @@ module Aws::AutoScaling
         ?availability_zone_impairment_policy: Types::AvailabilityZoneImpairmentPolicy,
         ?skip_zonal_shift_validation: bool,
         ?capacity_reservation_specification: Types::CapacityReservationSpecification,
+        ?instance_lifecycle_policy: Types::InstanceLifecyclePolicy,
+        ?deletion_protection: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3300,6 +3526,7 @@ module Aws::AutoScaling
       attr_accessor desired_capacity: Integer?
       attr_accessor default_cooldown: Integer?
       attr_accessor availability_zones: Array[String]?
+      attr_accessor availability_zone_ids: Array[String]?
       attr_accessor health_check_type: String?
       attr_accessor health_check_grace_period: Integer?
       attr_accessor placement_group: String?
@@ -3317,6 +3544,8 @@ module Aws::AutoScaling
       attr_accessor availability_zone_impairment_policy: Types::AvailabilityZoneImpairmentPolicy?
       attr_accessor skip_zonal_shift_validation: bool?
       attr_accessor capacity_reservation_specification: Types::CapacityReservationSpecification?
+      attr_accessor instance_lifecycle_policy: Types::InstanceLifecyclePolicy?
+      attr_accessor deletion_protection: String?
     end
 
     class VCpuCountRequest

@@ -144,18 +144,18 @@ module Aws::BedrockDataAutomation
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -207,6 +207,34 @@ module Aws::BedrockDataAutomation
     #  When `true`, request parameters are validated before sending the request.
     def initialize(*options)
       super
+    end
+
+    # Copies a Blueprint from one stage to another
+    # @param [Hash, Types::CopyBlueprintStageRequest] params
+    # @option params [String] :blueprint_arn
+    #   Blueprint to be copied
+    # @option params [String] :source_stage
+    #   Source stage to copy from
+    # @option params [String] :target_stage
+    #   Target stage to copy to
+    # @option params [String] :client_token
+    #   Client token for idempotency
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     blueprint_arn: "BlueprintArn", # required
+    #     source_stage: "DEVELOPMENT" # One of: ["DEVELOPMENT", "LIVE"], # required
+    #     target_stage: "DEVELOPMENT" # One of: ["DEVELOPMENT", "LIVE"], # required
+    #     client_token: "ClientToken"
+    #   }
+    #   options = {}
+    #   response = client.copy_blueprint_stage(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::CopyBlueprintStageResponse]
+    def copy_blueprint_stage(params = {}, options = {})
+      request = build_request(:copy_blueprint_stage, params)
+      request.send_request(options)
     end
 
     # Creates an Amazon Bedrock Data Automation Blueprint
@@ -262,7 +290,20 @@ module Aws::BedrockDataAutomation
     #       kms_key_id: "KmsKeyId",
     #       kms_encryption_context: {
     #         "EncryptionContextKey" => "EncryptionContextValue"
-    #       }
+    #       },
+    #       optimization_samples: [
+    #         {
+    #           asset_s3_object: { # required
+    #             s3_uri: "S3Uri", # required
+    #             version: "S3ObjectVersion"
+    #           },
+    #           ground_truth_s3_object: { # required
+    #             s3_uri: "S3Uri", # required
+    #             version: "S3ObjectVersion"
+    #           }
+    #         }
+    #       ],
+    #       optimization_time: Time.now
     #     }
     #   }
     # @return [Types::CreateBlueprintResponse]
@@ -299,12 +340,69 @@ module Aws::BedrockDataAutomation
     #       kms_key_id: "KmsKeyId",
     #       kms_encryption_context: {
     #         "EncryptionContextKey" => "EncryptionContextValue"
-    #       }
+    #       },
+    #       optimization_samples: [
+    #         {
+    #           asset_s3_object: { # required
+    #             s3_uri: "S3Uri", # required
+    #             version: "S3ObjectVersion"
+    #           },
+    #           ground_truth_s3_object: { # required
+    #             s3_uri: "S3Uri", # required
+    #             version: "S3ObjectVersion"
+    #           }
+    #         }
+    #       ],
+    #       optimization_time: Time.now
     #     }
     #   }
     # @return [Types::CreateBlueprintVersionResponse]
     def create_blueprint_version(params = {}, options = {})
       request = build_request(:create_blueprint_version, params)
+      request.send_request(options)
+    end
+
+    # Creates an Amazon Bedrock Data Automation Library
+    # @param [Hash, Types::CreateDataAutomationLibraryRequest] params
+    # @option params [String] :library_name
+    #   Name of the DataAutomationLibrary
+    # @option params [String] :library_description
+    #   Description of the DataAutomationLibrary
+    # @option params [String] :client_token
+    #   Client specified token used for idempotency checks
+    # @option params [Types::EncryptionConfiguration] :encryption_configuration
+    #   KMS Encryption Configuration
+    # @option params [Array<Types::Tag>] :tags
+    #   List of tags
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     library_name: "DataAutomationLibraryName", # required
+    #     library_description: "DataAutomationLibraryDescription",
+    #     client_token: "ClientToken",
+    #     encryption_configuration: {
+    #       kms_key_id: "KmsKeyId", # required
+    #       kms_encryption_context: {
+    #         "EncryptionContextKey" => "EncryptionContextValue"
+    #       }
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       }
+    #     ]
+    #   }
+    #   options = {}
+    #   response = client.create_data_automation_library(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     library_arn: "DataAutomationLibraryArn",
+    #     status: "ACTIVE" # One of: ["ACTIVE", "DELETING"]
+    #   }
+    # @return [Types::CreateDataAutomationLibraryResponse]
+    def create_data_automation_library(params = {}, options = {})
+      request = build_request(:create_data_automation_library, params)
       request.send_request(options)
     end
 
@@ -316,12 +414,16 @@ module Aws::BedrockDataAutomation
     #   Description of the DataAutomationProject
     # @option params [String] :project_stage
     #   Stage of the Project
+    # @option params [String] :project_type
+    #   Type of the DataAutomationProject
     # @option params [Types::StandardOutputConfiguration] :standard_output_configuration
     #   Standard output configuration
     # @option params [Types::CustomOutputConfiguration] :custom_output_configuration
     #   Custom output configuration
     # @option params [Types::OverrideConfiguration] :override_configuration
     #   Override configuration
+    # @option params [Types::DataAutomationLibraryConfiguration] :data_automation_library_configuration
+    #   DataAutomation Library configuration
     # @option params [String] :client_token
     #   Client specified token used for idempotency checks
     # @option params [Types::EncryptionConfiguration] :encryption_configuration
@@ -333,6 +435,7 @@ module Aws::BedrockDataAutomation
     #     project_name: "DataAutomationProjectName", # required
     #     project_description: "DataAutomationProjectDescription",
     #     project_stage: "DEVELOPMENT" # One of: ["DEVELOPMENT", "LIVE"],
+    #     project_type: "ASYNC" # One of: ["ASYNC", "SYNC"],
     #     standard_output_configuration: { # required
     #       document: {
     #         extraction: {
@@ -415,7 +518,16 @@ module Aws::BedrockDataAutomation
     #           blueprint_version: "BlueprintVersion",
     #           blueprint_stage: "DEVELOPMENT" # One of: ["DEVELOPMENT", "LIVE"]
     #         }
-    #       ]
+    #       ],
+    #       document: {
+    #         fallback_blueprints: [
+    #           {
+    #             blueprint_arn: "BlueprintArn", # required
+    #             blueprint_version: "BlueprintVersion",
+    #             blueprint_stage: "DEVELOPMENT" # One of: ["DEVELOPMENT", "LIVE"]
+    #           }
+    #         ]
+    #       }
     #     },
     #     override_configuration: {
     #       document: {
@@ -424,21 +536,58 @@ module Aws::BedrockDataAutomation
     #         },
     #         modality_processing: {
     #           state: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #         },
+    #         sensitive_data_configuration: {
+    #           detection_mode: "DETECTION" # One of: ["DETECTION", "DETECTION_AND_REDACTION"], # required
+    #           detection_scope: ["STANDARD" # One of: ["STANDARD", "CUSTOM"]],
+    #           pii_entities_configuration: {
+    #             pii_entity_types: ["ALL" # One of: ["ALL", "ADDRESS", "AGE", "NAME", "EMAIL", "PHONE", "USERNAME", "PASSWORD", "DRIVER_ID", "LICENSE_PLATE", "VEHICLE_IDENTIFICATION_NUMBER", "CREDIT_DEBIT_CARD_CVV", "CREDIT_DEBIT_CARD_EXPIRY", "CREDIT_DEBIT_CARD_NUMBER", "PIN", "INTERNATIONAL_BANK_ACCOUNT_NUMBER", "SWIFT_CODE", "IP_ADDRESS", "MAC_ADDRESS", "URL", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "US_BANK_ACCOUNT_NUMBER", "US_BANK_ROUTING_NUMBER", "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", "US_PASSPORT_NUMBER", "US_SOCIAL_SECURITY_NUMBER", "CA_HEALTH_NUMBER", "CA_SOCIAL_INSURANCE_NUMBER", "UK_NATIONAL_HEALTH_SERVICE_NUMBER", "UK_NATIONAL_INSURANCE_NUMBER", "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER"]],
+    #             redaction_mask_mode: "PII" # One of: ["PII", "ENTITY_TYPE"]
+    #           }
     #         }
     #       },
     #       image: {
     #         modality_processing: {
     #           state: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #         },
+    #         sensitive_data_configuration: {
+    #           detection_mode: "DETECTION" # One of: ["DETECTION", "DETECTION_AND_REDACTION"], # required
+    #           detection_scope: ["STANDARD" # One of: ["STANDARD", "CUSTOM"]],
+    #           pii_entities_configuration: {
+    #             pii_entity_types: ["ALL" # One of: ["ALL", "ADDRESS", "AGE", "NAME", "EMAIL", "PHONE", "USERNAME", "PASSWORD", "DRIVER_ID", "LICENSE_PLATE", "VEHICLE_IDENTIFICATION_NUMBER", "CREDIT_DEBIT_CARD_CVV", "CREDIT_DEBIT_CARD_EXPIRY", "CREDIT_DEBIT_CARD_NUMBER", "PIN", "INTERNATIONAL_BANK_ACCOUNT_NUMBER", "SWIFT_CODE", "IP_ADDRESS", "MAC_ADDRESS", "URL", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "US_BANK_ACCOUNT_NUMBER", "US_BANK_ROUTING_NUMBER", "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", "US_PASSPORT_NUMBER", "US_SOCIAL_SECURITY_NUMBER", "CA_HEALTH_NUMBER", "CA_SOCIAL_INSURANCE_NUMBER", "UK_NATIONAL_HEALTH_SERVICE_NUMBER", "UK_NATIONAL_INSURANCE_NUMBER", "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER"]],
+    #             redaction_mask_mode: "PII" # One of: ["PII", "ENTITY_TYPE"]
+    #           }
     #         }
     #       },
     #       video: {
     #         modality_processing: {
     #           state: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #         },
+    #         sensitive_data_configuration: {
+    #           detection_mode: "DETECTION" # One of: ["DETECTION", "DETECTION_AND_REDACTION"], # required
+    #           detection_scope: ["STANDARD" # One of: ["STANDARD", "CUSTOM"]],
+    #           pii_entities_configuration: {
+    #             pii_entity_types: ["ALL" # One of: ["ALL", "ADDRESS", "AGE", "NAME", "EMAIL", "PHONE", "USERNAME", "PASSWORD", "DRIVER_ID", "LICENSE_PLATE", "VEHICLE_IDENTIFICATION_NUMBER", "CREDIT_DEBIT_CARD_CVV", "CREDIT_DEBIT_CARD_EXPIRY", "CREDIT_DEBIT_CARD_NUMBER", "PIN", "INTERNATIONAL_BANK_ACCOUNT_NUMBER", "SWIFT_CODE", "IP_ADDRESS", "MAC_ADDRESS", "URL", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "US_BANK_ACCOUNT_NUMBER", "US_BANK_ROUTING_NUMBER", "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", "US_PASSPORT_NUMBER", "US_SOCIAL_SECURITY_NUMBER", "CA_HEALTH_NUMBER", "CA_SOCIAL_INSURANCE_NUMBER", "UK_NATIONAL_HEALTH_SERVICE_NUMBER", "UK_NATIONAL_INSURANCE_NUMBER", "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER"]],
+    #             redaction_mask_mode: "PII" # One of: ["PII", "ENTITY_TYPE"]
+    #           }
     #         }
     #       },
     #       audio: {
     #         modality_processing: {
     #           state: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #         },
+    #         language_configuration: {
+    #           input_languages: ["EN" # One of: ["EN", "DE", "ES", "FR", "IT", "PT", "JA", "KO", "CN", "TW", "HK"]],
+    #           generative_output_language: "DEFAULT" # One of: ["DEFAULT", "EN"],
+    #           identify_multiple_languages: false
+    #         },
+    #         sensitive_data_configuration: {
+    #           detection_mode: "DETECTION" # One of: ["DETECTION", "DETECTION_AND_REDACTION"], # required
+    #           detection_scope: ["STANDARD" # One of: ["STANDARD", "CUSTOM"]],
+    #           pii_entities_configuration: {
+    #             pii_entity_types: ["ALL" # One of: ["ALL", "ADDRESS", "AGE", "NAME", "EMAIL", "PHONE", "USERNAME", "PASSWORD", "DRIVER_ID", "LICENSE_PLATE", "VEHICLE_IDENTIFICATION_NUMBER", "CREDIT_DEBIT_CARD_CVV", "CREDIT_DEBIT_CARD_EXPIRY", "CREDIT_DEBIT_CARD_NUMBER", "PIN", "INTERNATIONAL_BANK_ACCOUNT_NUMBER", "SWIFT_CODE", "IP_ADDRESS", "MAC_ADDRESS", "URL", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "US_BANK_ACCOUNT_NUMBER", "US_BANK_ROUTING_NUMBER", "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", "US_PASSPORT_NUMBER", "US_SOCIAL_SECURITY_NUMBER", "CA_HEALTH_NUMBER", "CA_SOCIAL_INSURANCE_NUMBER", "UK_NATIONAL_HEALTH_SERVICE_NUMBER", "UK_NATIONAL_INSURANCE_NUMBER", "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER"]],
+    #             redaction_mask_mode: "PII" # One of: ["PII", "ENTITY_TYPE"]
+    #           }
     #         }
     #       },
     #       modality_routing: {
@@ -447,6 +596,13 @@ module Aws::BedrockDataAutomation
     #         mp4: "IMAGE" # One of: ["IMAGE", "DOCUMENT", "AUDIO", "VIDEO"],
     #         mov: "IMAGE" # One of: ["IMAGE", "DOCUMENT", "AUDIO", "VIDEO"]
     #       }
+    #     },
+    #     data_automation_library_configuration: {
+    #       libraries: [
+    #         {
+    #           library_arn: "DataAutomationLibraryArn", # required
+    #         }
+    #       ]
     #     },
     #     client_token: "ClientToken",
     #     encryption_configuration: {
@@ -496,6 +652,28 @@ module Aws::BedrockDataAutomation
     # @return [Types::DeleteBlueprintResponse]
     def delete_blueprint(params = {}, options = {})
       request = build_request(:delete_blueprint, params)
+      request.send_request(options)
+    end
+
+    # Deletes an existing Amazon Bedrock Data Automation Library
+    # @param [Hash, Types::DeleteDataAutomationLibraryRequest] params
+    # @option params [String] :library_arn
+    #   ARN generated at the server side when a DataAutomationLibrary is created
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     library_arn: "DataAutomationLibraryArn", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_data_automation_library(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     library_arn: "DataAutomationLibraryArn",
+    #     status: "ACTIVE" # One of: ["ACTIVE", "DELETING"]
+    #   }
+    # @return [Types::DeleteDataAutomationLibraryResponse]
+    def delete_data_automation_library(params = {}, options = {})
+      request = build_request(:delete_data_automation_library, params)
       request.send_request(options)
     end
 
@@ -552,12 +730,168 @@ module Aws::BedrockDataAutomation
     #       kms_key_id: "KmsKeyId",
     #       kms_encryption_context: {
     #         "EncryptionContextKey" => "EncryptionContextValue"
-    #       }
+    #       },
+    #       optimization_samples: [
+    #         {
+    #           asset_s3_object: { # required
+    #             s3_uri: "S3Uri", # required
+    #             version: "S3ObjectVersion"
+    #           },
+    #           ground_truth_s3_object: { # required
+    #             s3_uri: "S3Uri", # required
+    #             version: "S3ObjectVersion"
+    #           }
+    #         }
+    #       ],
+    #       optimization_time: Time.now
     #     }
     #   }
     # @return [Types::GetBlueprintResponse]
     def get_blueprint(params = {}, options = {})
       request = build_request(:get_blueprint, params)
+      request.send_request(options)
+    end
+
+    # API used to get blueprint optimization status.
+    # @param [Hash, Types::GetBlueprintOptimizationStatusRequest] params
+    # @option params [String] :invocation_arn
+    #   Invocation arn.
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     invocation_arn: "BlueprintOptimizationInvocationArn", # required
+    #   }
+    #   options = {}
+    #   response = client.get_blueprint_optimization_status(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     status: "Created" # One of: ["Created", "InProgress", "Success", "ServiceError", "ClientError"],
+    #     error_type: "String",
+    #     error_message: "String",
+    #     output_configuration: {
+    #       s3_object: { # required
+    #         s3_uri: "S3Uri", # required
+    #         version: "S3ObjectVersion"
+    #       }
+    #     }
+    #   }
+    # @return [Types::GetBlueprintOptimizationStatusResponse]
+    def get_blueprint_optimization_status(params = {}, options = {})
+      request = build_request(:get_blueprint_optimization_status, params)
+      request.send_request(options)
+    end
+
+    # Gets an existing Amazon Bedrock Data Automation Library
+    # @param [Hash, Types::GetDataAutomationLibraryRequest] params
+    # @option params [String] :library_arn
+    #   ARN generated at the server side when a DataAutomationLibrary is created
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     library_arn: "DataAutomationLibraryArn", # required
+    #   }
+    #   options = {}
+    #   response = client.get_data_automation_library(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     library: {
+    #       library_arn: "DataAutomationLibraryArn", # required
+    #       creation_time: Time.now, # required
+    #       library_name: "DataAutomationLibraryName", # required
+    #       library_description: "DataAutomationLibraryDescription",
+    #       status: "ACTIVE" # One of: ["ACTIVE", "DELETING"], # required
+    #       entity_types: [
+    #         {
+    #           entity_type: "VOCABULARY" # One of: ["VOCABULARY"], # required
+    #           entity_metadata: "EntityMetadata"
+    #         }
+    #       ],
+    #       kms_key_id: "KmsKeyId",
+    #       kms_encryption_context: {
+    #         "EncryptionContextKey" => "EncryptionContextValue"
+    #       }
+    #     }
+    #   }
+    # @return [Types::GetDataAutomationLibraryResponse]
+    def get_data_automation_library(params = {}, options = {})
+      request = build_request(:get_data_automation_library, params)
+      request.send_request(options)
+    end
+
+    # Gets an existing entity based on entity type from the library
+    # @param [Hash, Types::GetDataAutomationLibraryEntityRequest] params
+    # @option params [String] :library_arn
+    #   ARN generated at the server side when a DataAutomationLibrary is created
+    # @option params [String] :entity_type
+    #   The entity type for which the entity is requested
+    # @option params [String] :entity_id
+    #   Unique identifier for the entity
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     library_arn: "DataAutomationLibraryArn", # required
+    #     entity_type: "VOCABULARY" # One of: ["VOCABULARY"], # required
+    #     entity_id: "EntityId", # required
+    #   }
+    #   options = {}
+    #   response = client.get_data_automation_library_entity(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     entity: {
+    #       # One of:
+    #       vocabulary: {
+    #         entity_id: "EntityId",
+    #         description: "EntityDescription",
+    #         language: "EN" # One of: ["EN", "DE", "ES", "FR", "IT", "PT", "JA", "KO", "CN", "TW", "HK"],
+    #         phrases: [
+    #           {
+    #             text: "PhraseText", # required
+    #             display_as_text: "PhraseDisplayAsText"
+    #           }
+    #         ],
+    #         last_modified_time: Time.now
+    #       }
+    #     }
+    #   }
+    # @return [Types::GetDataAutomationLibraryEntityResponse]
+    def get_data_automation_library_entity(params = {}, options = {})
+      request = build_request(:get_data_automation_library_entity, params)
+      request.send_request(options)
+    end
+
+    # API used to get status of data automation library ingestion job
+    # @param [Hash, Types::GetDataAutomationLibraryIngestionJobRequest] params
+    # @option params [String] :library_arn
+    #   ARN generated at the server side when a DataAutomationLibrary is created
+    # @option params [String] :job_arn
+    #   ARN of the DataAutomationLibraryIngestionJob
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     library_arn: "DataAutomationLibraryArn", # required
+    #     job_arn: "DataAutomationLibraryIngestionJobArn", # required
+    #   }
+    #   options = {}
+    #   response = client.get_data_automation_library_ingestion_job(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     job: {
+    #       job_arn: "DataAutomationLibraryIngestionJobArn", # required
+    #       creation_time: Time.now, # required
+    #       entity_type: "VOCABULARY" # One of: ["VOCABULARY"], # required
+    #       operation_type: "UPSERT" # One of: ["UPSERT", "DELETE"], # required
+    #       job_status: "IN_PROGRESS" # One of: ["IN_PROGRESS", "COMPLETED", "COMPLETED_WITH_ERRORS", "FAILED"], # required
+    #       output_configuration: { # required
+    #         s3_uri: "S3Uri", # required
+    #       },
+    #       completion_time: Time.now,
+    #       error_message: "String",
+    #       error_type: "String"
+    #     }
+    #   }
+    # @return [Types::GetDataAutomationLibraryIngestionJobResponse]
+    def get_data_automation_library_ingestion_job(params = {}, options = {})
+      request = build_request(:get_data_automation_library_ingestion_job, params)
       request.send_request(options)
     end
 
@@ -583,6 +917,7 @@ module Aws::BedrockDataAutomation
     #       last_modified_time: Time.now, # required
     #       project_name: "DataAutomationProjectName", # required
     #       project_stage: "DEVELOPMENT" # One of: ["DEVELOPMENT", "LIVE"],
+    #       project_type: "ASYNC" # One of: ["ASYNC", "SYNC"],
     #       project_description: "DataAutomationProjectDescription",
     #       standard_output_configuration: {
     #         document: {
@@ -666,7 +1001,16 @@ module Aws::BedrockDataAutomation
     #             blueprint_version: "BlueprintVersion",
     #             blueprint_stage: "DEVELOPMENT" # One of: ["DEVELOPMENT", "LIVE"]
     #           }
-    #         ]
+    #         ],
+    #         document: {
+    #           fallback_blueprints: [
+    #             {
+    #               blueprint_arn: "BlueprintArn", # required
+    #               blueprint_version: "BlueprintVersion",
+    #               blueprint_stage: "DEVELOPMENT" # One of: ["DEVELOPMENT", "LIVE"]
+    #             }
+    #           ]
+    #         }
     #       },
     #       override_configuration: {
     #         document: {
@@ -675,21 +1019,58 @@ module Aws::BedrockDataAutomation
     #           },
     #           modality_processing: {
     #             state: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #           },
+    #           sensitive_data_configuration: {
+    #             detection_mode: "DETECTION" # One of: ["DETECTION", "DETECTION_AND_REDACTION"], # required
+    #             detection_scope: ["STANDARD" # One of: ["STANDARD", "CUSTOM"]],
+    #             pii_entities_configuration: {
+    #               pii_entity_types: ["ALL" # One of: ["ALL", "ADDRESS", "AGE", "NAME", "EMAIL", "PHONE", "USERNAME", "PASSWORD", "DRIVER_ID", "LICENSE_PLATE", "VEHICLE_IDENTIFICATION_NUMBER", "CREDIT_DEBIT_CARD_CVV", "CREDIT_DEBIT_CARD_EXPIRY", "CREDIT_DEBIT_CARD_NUMBER", "PIN", "INTERNATIONAL_BANK_ACCOUNT_NUMBER", "SWIFT_CODE", "IP_ADDRESS", "MAC_ADDRESS", "URL", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "US_BANK_ACCOUNT_NUMBER", "US_BANK_ROUTING_NUMBER", "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", "US_PASSPORT_NUMBER", "US_SOCIAL_SECURITY_NUMBER", "CA_HEALTH_NUMBER", "CA_SOCIAL_INSURANCE_NUMBER", "UK_NATIONAL_HEALTH_SERVICE_NUMBER", "UK_NATIONAL_INSURANCE_NUMBER", "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER"]],
+    #               redaction_mask_mode: "PII" # One of: ["PII", "ENTITY_TYPE"]
+    #             }
     #           }
     #         },
     #         image: {
     #           modality_processing: {
     #             state: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #           },
+    #           sensitive_data_configuration: {
+    #             detection_mode: "DETECTION" # One of: ["DETECTION", "DETECTION_AND_REDACTION"], # required
+    #             detection_scope: ["STANDARD" # One of: ["STANDARD", "CUSTOM"]],
+    #             pii_entities_configuration: {
+    #               pii_entity_types: ["ALL" # One of: ["ALL", "ADDRESS", "AGE", "NAME", "EMAIL", "PHONE", "USERNAME", "PASSWORD", "DRIVER_ID", "LICENSE_PLATE", "VEHICLE_IDENTIFICATION_NUMBER", "CREDIT_DEBIT_CARD_CVV", "CREDIT_DEBIT_CARD_EXPIRY", "CREDIT_DEBIT_CARD_NUMBER", "PIN", "INTERNATIONAL_BANK_ACCOUNT_NUMBER", "SWIFT_CODE", "IP_ADDRESS", "MAC_ADDRESS", "URL", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "US_BANK_ACCOUNT_NUMBER", "US_BANK_ROUTING_NUMBER", "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", "US_PASSPORT_NUMBER", "US_SOCIAL_SECURITY_NUMBER", "CA_HEALTH_NUMBER", "CA_SOCIAL_INSURANCE_NUMBER", "UK_NATIONAL_HEALTH_SERVICE_NUMBER", "UK_NATIONAL_INSURANCE_NUMBER", "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER"]],
+    #               redaction_mask_mode: "PII" # One of: ["PII", "ENTITY_TYPE"]
+    #             }
     #           }
     #         },
     #         video: {
     #           modality_processing: {
     #             state: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #           },
+    #           sensitive_data_configuration: {
+    #             detection_mode: "DETECTION" # One of: ["DETECTION", "DETECTION_AND_REDACTION"], # required
+    #             detection_scope: ["STANDARD" # One of: ["STANDARD", "CUSTOM"]],
+    #             pii_entities_configuration: {
+    #               pii_entity_types: ["ALL" # One of: ["ALL", "ADDRESS", "AGE", "NAME", "EMAIL", "PHONE", "USERNAME", "PASSWORD", "DRIVER_ID", "LICENSE_PLATE", "VEHICLE_IDENTIFICATION_NUMBER", "CREDIT_DEBIT_CARD_CVV", "CREDIT_DEBIT_CARD_EXPIRY", "CREDIT_DEBIT_CARD_NUMBER", "PIN", "INTERNATIONAL_BANK_ACCOUNT_NUMBER", "SWIFT_CODE", "IP_ADDRESS", "MAC_ADDRESS", "URL", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "US_BANK_ACCOUNT_NUMBER", "US_BANK_ROUTING_NUMBER", "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", "US_PASSPORT_NUMBER", "US_SOCIAL_SECURITY_NUMBER", "CA_HEALTH_NUMBER", "CA_SOCIAL_INSURANCE_NUMBER", "UK_NATIONAL_HEALTH_SERVICE_NUMBER", "UK_NATIONAL_INSURANCE_NUMBER", "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER"]],
+    #               redaction_mask_mode: "PII" # One of: ["PII", "ENTITY_TYPE"]
+    #             }
     #           }
     #         },
     #         audio: {
     #           modality_processing: {
     #             state: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #           },
+    #           language_configuration: {
+    #             input_languages: ["EN" # One of: ["EN", "DE", "ES", "FR", "IT", "PT", "JA", "KO", "CN", "TW", "HK"]],
+    #             generative_output_language: "DEFAULT" # One of: ["DEFAULT", "EN"],
+    #             identify_multiple_languages: false
+    #           },
+    #           sensitive_data_configuration: {
+    #             detection_mode: "DETECTION" # One of: ["DETECTION", "DETECTION_AND_REDACTION"], # required
+    #             detection_scope: ["STANDARD" # One of: ["STANDARD", "CUSTOM"]],
+    #             pii_entities_configuration: {
+    #               pii_entity_types: ["ALL" # One of: ["ALL", "ADDRESS", "AGE", "NAME", "EMAIL", "PHONE", "USERNAME", "PASSWORD", "DRIVER_ID", "LICENSE_PLATE", "VEHICLE_IDENTIFICATION_NUMBER", "CREDIT_DEBIT_CARD_CVV", "CREDIT_DEBIT_CARD_EXPIRY", "CREDIT_DEBIT_CARD_NUMBER", "PIN", "INTERNATIONAL_BANK_ACCOUNT_NUMBER", "SWIFT_CODE", "IP_ADDRESS", "MAC_ADDRESS", "URL", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "US_BANK_ACCOUNT_NUMBER", "US_BANK_ROUTING_NUMBER", "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", "US_PASSPORT_NUMBER", "US_SOCIAL_SECURITY_NUMBER", "CA_HEALTH_NUMBER", "CA_SOCIAL_INSURANCE_NUMBER", "UK_NATIONAL_HEALTH_SERVICE_NUMBER", "UK_NATIONAL_INSURANCE_NUMBER", "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER"]],
+    #               redaction_mask_mode: "PII" # One of: ["PII", "ENTITY_TYPE"]
+    #             }
     #           }
     #         },
     #         modality_routing: {
@@ -698,6 +1079,13 @@ module Aws::BedrockDataAutomation
     #           mp4: "IMAGE" # One of: ["IMAGE", "DOCUMENT", "AUDIO", "VIDEO"],
     #           mov: "IMAGE" # One of: ["IMAGE", "DOCUMENT", "AUDIO", "VIDEO"]
     #         }
+    #       },
+    #       data_automation_library_configuration: {
+    #         libraries: [
+    #           {
+    #             library_arn: "DataAutomationLibraryArn", # required
+    #           }
+    #         ]
     #       },
     #       status: "COMPLETED" # One of: ["COMPLETED", "IN_PROGRESS", "FAILED"], # required
     #       kms_key_id: "KmsKeyId",
@@ -709,6 +1097,149 @@ module Aws::BedrockDataAutomation
     # @return [Types::GetDataAutomationProjectResponse]
     def get_data_automation_project(params = {}, options = {})
       request = build_request(:get_data_automation_project, params)
+      request.send_request(options)
+    end
+
+    # Invoke an async job to perform Blueprint Optimization
+    # @param [Hash, Types::InvokeBlueprintOptimizationAsyncRequest] params
+    # @option params [Types::BlueprintOptimizationObject] :blueprint
+    #   Blueprint to be optimized
+    # @option params [Array<Types::BlueprintOptimizationSample>] :samples
+    #   List of Blueprint Optimization Samples
+    # @option params [Types::BlueprintOptimizationOutputConfiguration] :output_configuration
+    #   Output configuration where the results should be placed
+    # @option params [String] :data_automation_profile_arn
+    #   Data automation profile ARN
+    # @option params [Types::EncryptionConfiguration] :encryption_configuration
+    #   Encryption configuration.
+    # @option params [Array<Types::Tag>] :tags
+    #   List of tags.
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     blueprint: { # required
+    #       blueprint_arn: "BlueprintArn", # required
+    #       stage: "DEVELOPMENT" # One of: ["DEVELOPMENT", "LIVE"]
+    #     },
+    #     samples: [ # required
+    #       {
+    #         asset_s3_object: { # required
+    #           s3_uri: "S3Uri", # required
+    #           version: "S3ObjectVersion"
+    #         },
+    #         ground_truth_s3_object: { # required
+    #           s3_uri: "S3Uri", # required
+    #           version: "S3ObjectVersion"
+    #         }
+    #       }
+    #     ],
+    #     output_configuration: { # required
+    #       s3_object: { # required
+    #         s3_uri: "S3Uri", # required
+    #         version: "S3ObjectVersion"
+    #       }
+    #     },
+    #     data_automation_profile_arn: "DataAutomationProfileArn", # required
+    #     encryption_configuration: {
+    #       kms_key_id: "KmsKeyId", # required
+    #       kms_encryption_context: {
+    #         "EncryptionContextKey" => "EncryptionContextValue"
+    #       }
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       }
+    #     ]
+    #   }
+    #   options = {}
+    #   response = client.invoke_blueprint_optimization_async(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     invocation_arn: "BlueprintOptimizationInvocationArn", # required
+    #   }
+    # @return [Types::InvokeBlueprintOptimizationAsyncResponse]
+    def invoke_blueprint_optimization_async(params = {}, options = {})
+      request = build_request(:invoke_blueprint_optimization_async, params)
+      request.send_request(options)
+    end
+
+    # Async API: Invoke data automation library ingestion job
+    # @param [Hash, Types::InvokeDataAutomationLibraryIngestionJobRequest] params
+    # @option params [String] :library_arn
+    #   ARN generated at the server side when a DataAutomationLibrary is created
+    # @option params [String] :client_token
+    #   Idempotency token
+    # @option params [Types::InputConfiguration] :input_configuration
+    #   Input configuration of DataAutomationLibraryIngestionJob request
+    # @option params [String] :entity_type
+    #   The entity type for which DataAutomationLibraryIngestionJob is being run
+    # @option params [String] :operation_type
+    #   The operation to be performed by DataAutomationLibraryIngestionJob
+    # @option params [Types::OutputConfiguration] :output_configuration
+    #   Output configuration of DataAutomationLibraryIngestionJob
+    # @option params [Types::NotificationConfiguration] :notification_configuration
+    #   Notification configuration.
+    # @option params [Array<Types::Tag>] :tags
+    #   List of tags
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     library_arn: "DataAutomationLibraryArn", # required
+    #     client_token: "ClientToken",
+    #     input_configuration: { # required
+    #       s3_object: {
+    #         s3_uri: "S3Uri", # required
+    #         version: "S3ObjectVersion"
+    #       },
+    #       inline_payload: {
+    #         # One of:
+    #         upsert_entities_info: [{
+    #           # One of:
+    #           vocabulary: {
+    #             entity_id: "EntityId",
+    #             description: "EntityDescription",
+    #             language: "EN" # One of: ["EN", "DE", "ES", "FR", "IT", "PT", "JA", "KO", "CN", "TW", "HK"], # required
+    #             phrases: [ # required
+    #               {
+    #                 text: "PhraseText", # required
+    #                 display_as_text: "PhraseDisplayAsText"
+    #               }
+    #             ]
+    #           }
+    #         }],
+    #         delete_entities_info: {
+    #           entity_ids: ["EntityId"], # required
+    #         }
+    #       }
+    #     },
+    #     entity_type: "VOCABULARY" # One of: ["VOCABULARY"], # required
+    #     operation_type: "UPSERT" # One of: ["UPSERT", "DELETE"], # required
+    #     output_configuration: { # required
+    #       s3_uri: "S3Uri", # required
+    #     },
+    #     notification_configuration: {
+    #       event_bridge_configuration: { # required
+    #         event_bridge_enabled: false, # required
+    #       }
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       }
+    #     ]
+    #   }
+    #   options = {}
+    #   response = client.invoke_data_automation_library_ingestion_job(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     job_arn: "DataAutomationLibraryIngestionJobArn"
+    #   }
+    # @return [Types::InvokeDataAutomationLibraryIngestionJobResponse]
+    def invoke_data_automation_library_ingestion_job(params = {}, options = {})
+      request = build_request(:invoke_data_automation_library_ingestion_job, params)
       request.send_request(options)
     end
 
@@ -761,6 +1292,120 @@ module Aws::BedrockDataAutomation
       request.send_request(options)
     end
 
+    # Lists all existing Amazon Bedrock Data Automation Libraries
+    # @param [Hash, Types::ListDataAutomationLibrariesRequest] params
+    # @option params [Integer] :max_results
+    #   Max Results
+    # @option params [String] :next_token
+    #   Pagination token
+    # @option params [Types::DataAutomationProjectFilter] :project_filter
+    #   Data Automation Project Filter
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     project_filter: {
+    #       project_arn: "DataAutomationProjectArn", # required
+    #       project_stage: "DEVELOPMENT" # One of: ["DEVELOPMENT", "LIVE"]
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.list_data_automation_libraries(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     libraries: [
+    #       {
+    #         library_arn: "DataAutomationLibraryArn", # required
+    #         library_name: "DataAutomationLibraryName",
+    #         creation_time: Time.now, # required
+    #       }
+    #     ],
+    #     next_token: "NextToken"
+    #   }
+    # @return [Types::ListDataAutomationLibrariesResponse]
+    def list_data_automation_libraries(params = {}, options = {})
+      request = build_request(:list_data_automation_libraries, params)
+      request.send_request(options)
+    end
+
+    # Lists all stored entities in the library
+    # @param [Hash, Types::ListDataAutomationLibraryEntitiesRequest] params
+    # @option params [String] :library_arn
+    #   ARN generated at the server side when a DataAutomationLibrary is created
+    # @option params [String] :entity_type
+    #   The entity type for which the entity list is requested
+    # @option params [Integer] :max_results
+    #   Max Results
+    # @option params [String] :next_token
+    #   Pagination token for retrieving the next set of results
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     library_arn: "DataAutomationLibraryArn", # required
+    #     entity_type: "VOCABULARY" # One of: ["VOCABULARY"], # required
+    #     max_results: 1,
+    #     next_token: "NextToken"
+    #   }
+    #   options = {}
+    #   response = client.list_data_automation_library_entities(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     entities: [{
+    #       # One of:
+    #       vocabulary: {
+    #         entity_id: "EntityId",
+    #         description: "EntityDescription",
+    #         language: "EN" # One of: ["EN", "DE", "ES", "FR", "IT", "PT", "JA", "KO", "CN", "TW", "HK"],
+    #         num_of_phrases: 1,
+    #         last_modified_time: Time.now
+    #       }
+    #     }],
+    #     next_token: "NextToken"
+    #   }
+    # @return [Types::ListDataAutomationLibraryEntitiesResponse]
+    def list_data_automation_library_entities(params = {}, options = {})
+      request = build_request(:list_data_automation_library_entities, params)
+      request.send_request(options)
+    end
+
+    # Lists all data automation library ingestion jobs
+    # @param [Hash, Types::ListDataAutomationLibraryIngestionJobsRequest] params
+    # @option params [String] :library_arn
+    #   ARN generated at the server side when a DataAutomationLibrary is created
+    # @option params [Integer] :max_results
+    #   Max Results
+    # @option params [String] :next_token
+    #   Pagination token for retrieving the next set of results
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     library_arn: "DataAutomationLibraryArn", # required
+    #     max_results: 1,
+    #     next_token: "NextToken"
+    #   }
+    #   options = {}
+    #   response = client.list_data_automation_library_ingestion_jobs(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     jobs: [
+    #       {
+    #         job_arn: "DataAutomationLibraryIngestionJobArn", # required
+    #         job_status: "IN_PROGRESS" # One of: ["IN_PROGRESS", "COMPLETED", "COMPLETED_WITH_ERRORS", "FAILED"], # required
+    #         entity_type: "VOCABULARY" # One of: ["VOCABULARY"], # required
+    #         operation_type: "UPSERT" # One of: ["UPSERT", "DELETE"], # required
+    #         creation_time: Time.now, # required
+    #         completion_time: Time.now
+    #       }
+    #     ],
+    #     next_token: "NextToken"
+    #   }
+    # @return [Types::ListDataAutomationLibraryIngestionJobsResponse]
+    def list_data_automation_library_ingestion_jobs(params = {}, options = {})
+      request = build_request(:list_data_automation_library_ingestion_jobs, params)
+      request.send_request(options)
+    end
+
     # Lists all existing Amazon Bedrock Data Automation Projects
     # @param [Hash, Types::ListDataAutomationProjectsRequest] params
     # @option params [Integer] :max_results
@@ -773,6 +1418,8 @@ module Aws::BedrockDataAutomation
     #   Blueprint Filter
     # @option params [String] :resource_owner
     #   Resource Owner
+    # @option params [Types::DataAutomationLibraryFilter] :library_filter
+    #   Data Automation Library Filter
     # @example Request syntax with placeholder values
     #   params = {
     #     max_results: 1,
@@ -783,7 +1430,10 @@ module Aws::BedrockDataAutomation
     #       blueprint_version: "BlueprintVersion",
     #       blueprint_stage: "DEVELOPMENT" # One of: ["DEVELOPMENT", "LIVE"]
     #     },
-    #     resource_owner: "SERVICE" # One of: ["SERVICE", "ACCOUNT"]
+    #     resource_owner: "SERVICE" # One of: ["SERVICE", "ACCOUNT"],
+    #     library_filter: {
+    #       library_arn: "DataAutomationLibraryArn", # required
+    #     }
     #   }
     #   options = {}
     #   response = client.list_data_automation_projects(params, options)
@@ -794,6 +1444,7 @@ module Aws::BedrockDataAutomation
     #       {
     #         project_arn: "DataAutomationProjectArn", # required
     #         project_stage: "DEVELOPMENT" # One of: ["DEVELOPMENT", "LIVE"],
+    #         project_type: "ASYNC" # One of: ["ASYNC", "SYNC"],
     #         project_name: "DataAutomationProjectName",
     #         creation_time: Time.now, # required
     #       }
@@ -920,12 +1571,53 @@ module Aws::BedrockDataAutomation
     #       kms_key_id: "KmsKeyId",
     #       kms_encryption_context: {
     #         "EncryptionContextKey" => "EncryptionContextValue"
-    #       }
+    #       },
+    #       optimization_samples: [
+    #         {
+    #           asset_s3_object: { # required
+    #             s3_uri: "S3Uri", # required
+    #             version: "S3ObjectVersion"
+    #           },
+    #           ground_truth_s3_object: { # required
+    #             s3_uri: "S3Uri", # required
+    #             version: "S3ObjectVersion"
+    #           }
+    #         }
+    #       ],
+    #       optimization_time: Time.now
     #     }
     #   }
     # @return [Types::UpdateBlueprintResponse]
     def update_blueprint(params = {}, options = {})
       request = build_request(:update_blueprint, params)
+      request.send_request(options)
+    end
+
+    # Updates an existing Amazon Bedrock Data Automation Library
+    # @param [Hash, Types::UpdateDataAutomationLibraryRequest] params
+    # @option params [String] :library_arn
+    #   ARN generated at the server side when a DataAutomationLibrary is created
+    # @option params [String] :library_description
+    #   Description of the DataAutomationLibrary
+    # @option params [String] :client_token
+    #   Client specified token used for idempotency checks
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     library_arn: "DataAutomationLibraryArn", # required
+    #     library_description: "DataAutomationLibraryDescription",
+    #     client_token: "ClientToken"
+    #   }
+    #   options = {}
+    #   response = client.update_data_automation_library(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     library_arn: "DataAutomationLibraryArn",
+    #     status: "ACTIVE" # One of: ["ACTIVE", "DELETING"]
+    #   }
+    # @return [Types::UpdateDataAutomationLibraryResponse]
+    def update_data_automation_library(params = {}, options = {})
+      request = build_request(:update_data_automation_library, params)
       request.send_request(options)
     end
 
@@ -943,6 +1635,8 @@ module Aws::BedrockDataAutomation
     #   Custom output configuration
     # @option params [Types::OverrideConfiguration] :override_configuration
     #   Override configuration
+    # @option params [Types::DataAutomationLibraryConfiguration] :data_automation_library_configuration
+    #   DataAutomation Library configuration
     # @option params [Types::EncryptionConfiguration] :encryption_configuration
     #   KMS Encryption Configuration
     # @example Request syntax with placeholder values
@@ -1032,7 +1726,16 @@ module Aws::BedrockDataAutomation
     #           blueprint_version: "BlueprintVersion",
     #           blueprint_stage: "DEVELOPMENT" # One of: ["DEVELOPMENT", "LIVE"]
     #         }
-    #       ]
+    #       ],
+    #       document: {
+    #         fallback_blueprints: [
+    #           {
+    #             blueprint_arn: "BlueprintArn", # required
+    #             blueprint_version: "BlueprintVersion",
+    #             blueprint_stage: "DEVELOPMENT" # One of: ["DEVELOPMENT", "LIVE"]
+    #           }
+    #         ]
+    #       }
     #     },
     #     override_configuration: {
     #       document: {
@@ -1041,21 +1744,58 @@ module Aws::BedrockDataAutomation
     #         },
     #         modality_processing: {
     #           state: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #         },
+    #         sensitive_data_configuration: {
+    #           detection_mode: "DETECTION" # One of: ["DETECTION", "DETECTION_AND_REDACTION"], # required
+    #           detection_scope: ["STANDARD" # One of: ["STANDARD", "CUSTOM"]],
+    #           pii_entities_configuration: {
+    #             pii_entity_types: ["ALL" # One of: ["ALL", "ADDRESS", "AGE", "NAME", "EMAIL", "PHONE", "USERNAME", "PASSWORD", "DRIVER_ID", "LICENSE_PLATE", "VEHICLE_IDENTIFICATION_NUMBER", "CREDIT_DEBIT_CARD_CVV", "CREDIT_DEBIT_CARD_EXPIRY", "CREDIT_DEBIT_CARD_NUMBER", "PIN", "INTERNATIONAL_BANK_ACCOUNT_NUMBER", "SWIFT_CODE", "IP_ADDRESS", "MAC_ADDRESS", "URL", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "US_BANK_ACCOUNT_NUMBER", "US_BANK_ROUTING_NUMBER", "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", "US_PASSPORT_NUMBER", "US_SOCIAL_SECURITY_NUMBER", "CA_HEALTH_NUMBER", "CA_SOCIAL_INSURANCE_NUMBER", "UK_NATIONAL_HEALTH_SERVICE_NUMBER", "UK_NATIONAL_INSURANCE_NUMBER", "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER"]],
+    #             redaction_mask_mode: "PII" # One of: ["PII", "ENTITY_TYPE"]
+    #           }
     #         }
     #       },
     #       image: {
     #         modality_processing: {
     #           state: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #         },
+    #         sensitive_data_configuration: {
+    #           detection_mode: "DETECTION" # One of: ["DETECTION", "DETECTION_AND_REDACTION"], # required
+    #           detection_scope: ["STANDARD" # One of: ["STANDARD", "CUSTOM"]],
+    #           pii_entities_configuration: {
+    #             pii_entity_types: ["ALL" # One of: ["ALL", "ADDRESS", "AGE", "NAME", "EMAIL", "PHONE", "USERNAME", "PASSWORD", "DRIVER_ID", "LICENSE_PLATE", "VEHICLE_IDENTIFICATION_NUMBER", "CREDIT_DEBIT_CARD_CVV", "CREDIT_DEBIT_CARD_EXPIRY", "CREDIT_DEBIT_CARD_NUMBER", "PIN", "INTERNATIONAL_BANK_ACCOUNT_NUMBER", "SWIFT_CODE", "IP_ADDRESS", "MAC_ADDRESS", "URL", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "US_BANK_ACCOUNT_NUMBER", "US_BANK_ROUTING_NUMBER", "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", "US_PASSPORT_NUMBER", "US_SOCIAL_SECURITY_NUMBER", "CA_HEALTH_NUMBER", "CA_SOCIAL_INSURANCE_NUMBER", "UK_NATIONAL_HEALTH_SERVICE_NUMBER", "UK_NATIONAL_INSURANCE_NUMBER", "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER"]],
+    #             redaction_mask_mode: "PII" # One of: ["PII", "ENTITY_TYPE"]
+    #           }
     #         }
     #       },
     #       video: {
     #         modality_processing: {
     #           state: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #         },
+    #         sensitive_data_configuration: {
+    #           detection_mode: "DETECTION" # One of: ["DETECTION", "DETECTION_AND_REDACTION"], # required
+    #           detection_scope: ["STANDARD" # One of: ["STANDARD", "CUSTOM"]],
+    #           pii_entities_configuration: {
+    #             pii_entity_types: ["ALL" # One of: ["ALL", "ADDRESS", "AGE", "NAME", "EMAIL", "PHONE", "USERNAME", "PASSWORD", "DRIVER_ID", "LICENSE_PLATE", "VEHICLE_IDENTIFICATION_NUMBER", "CREDIT_DEBIT_CARD_CVV", "CREDIT_DEBIT_CARD_EXPIRY", "CREDIT_DEBIT_CARD_NUMBER", "PIN", "INTERNATIONAL_BANK_ACCOUNT_NUMBER", "SWIFT_CODE", "IP_ADDRESS", "MAC_ADDRESS", "URL", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "US_BANK_ACCOUNT_NUMBER", "US_BANK_ROUTING_NUMBER", "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", "US_PASSPORT_NUMBER", "US_SOCIAL_SECURITY_NUMBER", "CA_HEALTH_NUMBER", "CA_SOCIAL_INSURANCE_NUMBER", "UK_NATIONAL_HEALTH_SERVICE_NUMBER", "UK_NATIONAL_INSURANCE_NUMBER", "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER"]],
+    #             redaction_mask_mode: "PII" # One of: ["PII", "ENTITY_TYPE"]
+    #           }
     #         }
     #       },
     #       audio: {
     #         modality_processing: {
     #           state: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #         },
+    #         language_configuration: {
+    #           input_languages: ["EN" # One of: ["EN", "DE", "ES", "FR", "IT", "PT", "JA", "KO", "CN", "TW", "HK"]],
+    #           generative_output_language: "DEFAULT" # One of: ["DEFAULT", "EN"],
+    #           identify_multiple_languages: false
+    #         },
+    #         sensitive_data_configuration: {
+    #           detection_mode: "DETECTION" # One of: ["DETECTION", "DETECTION_AND_REDACTION"], # required
+    #           detection_scope: ["STANDARD" # One of: ["STANDARD", "CUSTOM"]],
+    #           pii_entities_configuration: {
+    #             pii_entity_types: ["ALL" # One of: ["ALL", "ADDRESS", "AGE", "NAME", "EMAIL", "PHONE", "USERNAME", "PASSWORD", "DRIVER_ID", "LICENSE_PLATE", "VEHICLE_IDENTIFICATION_NUMBER", "CREDIT_DEBIT_CARD_CVV", "CREDIT_DEBIT_CARD_EXPIRY", "CREDIT_DEBIT_CARD_NUMBER", "PIN", "INTERNATIONAL_BANK_ACCOUNT_NUMBER", "SWIFT_CODE", "IP_ADDRESS", "MAC_ADDRESS", "URL", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "US_BANK_ACCOUNT_NUMBER", "US_BANK_ROUTING_NUMBER", "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", "US_PASSPORT_NUMBER", "US_SOCIAL_SECURITY_NUMBER", "CA_HEALTH_NUMBER", "CA_SOCIAL_INSURANCE_NUMBER", "UK_NATIONAL_HEALTH_SERVICE_NUMBER", "UK_NATIONAL_INSURANCE_NUMBER", "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER"]],
+    #             redaction_mask_mode: "PII" # One of: ["PII", "ENTITY_TYPE"]
+    #           }
     #         }
     #       },
     #       modality_routing: {
@@ -1064,6 +1804,13 @@ module Aws::BedrockDataAutomation
     #         mp4: "IMAGE" # One of: ["IMAGE", "DOCUMENT", "AUDIO", "VIDEO"],
     #         mov: "IMAGE" # One of: ["IMAGE", "DOCUMENT", "AUDIO", "VIDEO"]
     #       }
+    #     },
+    #     data_automation_library_configuration: {
+    #       libraries: [
+    #         {
+    #           library_arn: "DataAutomationLibraryArn", # required
+    #         }
+    #       ]
     #     },
     #     encryption_configuration: {
     #       kms_key_id: "KmsKeyId", # required

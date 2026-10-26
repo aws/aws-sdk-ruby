@@ -39,7 +39,8 @@ module Aws::S3Vectors
     GetVectorsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3vectors#GetVectorsOutput", name: "GetVectorsOutput")
     GetVectorsOutputList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.s3vectors#GetVectorsOutputList", name: "GetVectorsOutputList")
     Index = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3vectors#Index", name: "Index")
-    IndexArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3vectors#IndexArn", name: "IndexArn", traits: {"aws.api#arnReference" => {}})
+    IndexArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3vectors#IndexArn", name: "IndexArn", traits: {"aws.api#arnReference" => {}, "smithy.api#pattern" => "^arn:aws[-a-z0-9]*:s3vectors:[a-z0-9-]+:[0-9]{12}:bucket/[a-z0-9][a-z0-9-.]{1,61}[a-z0-9]/index/[a-z0-9][a-z0-9-.]{1,61}[a-z0-9]$"})
+    IndexMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3vectors#IndexMode", name: "IndexMode")
     IndexName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3vectors#IndexName", name: "IndexName", traits: {"smithy.api#length" => {"min" => 3, "max" => 63}})
     IndexSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3vectors#IndexSummary", name: "IndexSummary")
     InternalServerException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3vectors#InternalServerException", name: "InternalServerException", traits: {"smithy.api#error" => "server", "smithy.api#httpError" => 500, "smithy.api#retryable" => {}})
@@ -55,6 +56,8 @@ module Aws::S3Vectors
     ListIndexesOutputList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.s3vectors#ListIndexesOutputList", name: "ListIndexesOutputList")
     ListIndexesPrefix = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3vectors#ListIndexesPrefix", name: "ListIndexesPrefix", traits: {"smithy.api#length" => {"min" => 1, "max" => 63}})
     ListOutputVector = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3vectors#ListOutputVector", name: "ListOutputVector")
+    ListTagsForResourceInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3vectors#ListTagsForResourceInput", name: "ListTagsForResourceInput")
+    ListTagsForResourceOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3vectors#ListTagsForResourceOutput", name: "ListTagsForResourceOutput")
     ListVectorBucketsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3vectors#ListVectorBucketsInput", name: "ListVectorBucketsInput")
     ListVectorBucketsMaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.s3vectors#ListVectorBucketsMaxResults", name: "ListVectorBucketsMaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 500}})
     ListVectorBucketsNextToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3vectors#ListVectorBucketsNextToken", name: "ListVectorBucketsNextToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 512}})
@@ -73,6 +76,8 @@ module Aws::S3Vectors
     NonFilterableMetadataKeys = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.s3vectors#NonFilterableMetadataKeys", name: "NonFilterableMetadataKeys", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
     NotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3vectors#NotFoundException", name: "NotFoundException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 404})
     PutInputVector = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3vectors#PutInputVector", name: "PutInputVector")
+    PutVectorBucketDefaultIndexModeInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3vectors#PutVectorBucketDefaultIndexModeInput", name: "PutVectorBucketDefaultIndexModeInput")
+    PutVectorBucketDefaultIndexModeOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3vectors#PutVectorBucketDefaultIndexModeOutput", name: "PutVectorBucketDefaultIndexModeOutput")
     PutVectorBucketPolicyInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3vectors#PutVectorBucketPolicyInput", name: "PutVectorBucketPolicyInput")
     PutVectorBucketPolicyOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3vectors#PutVectorBucketPolicyOutput", name: "PutVectorBucketPolicyOutput")
     PutVectorsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3vectors#PutVectorsInput", name: "PutVectorsInput")
@@ -80,18 +85,31 @@ module Aws::S3Vectors
     PutVectorsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3vectors#PutVectorsOutput", name: "PutVectorsOutput")
     QueryOutputVector = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3vectors#QueryOutputVector", name: "QueryOutputVector")
     QueryVectorsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3vectors#QueryVectorsInput", name: "QueryVectorsInput")
+    QueryVectorsNextToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3vectors#QueryVectorsNextToken", name: "QueryVectorsNextToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 4096}})
     QueryVectorsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3vectors#QueryVectorsOutput", name: "QueryVectorsOutput")
     QueryVectorsOutputList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.s3vectors#QueryVectorsOutputList", name: "QueryVectorsOutputList")
+    RequestTimeoutException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3vectors#RequestTimeoutException", name: "RequestTimeoutException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 408, "smithy.api#retryable" => {}})
+    ResourceARN = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3vectors#ResourceARN", name: "ResourceARN", traits: {"aws.api#arnReference" => {}, "smithy.api#length" => {"max" => 1011}})
     ServiceQuotaExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3vectors#ServiceQuotaExceededException", name: "ServiceQuotaExceededException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 402})
     ServiceUnavailableException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3vectors#ServiceUnavailableException", name: "ServiceUnavailableException", traits: {"smithy.api#error" => "server", "smithy.api#httpError" => 503, "smithy.api#retryable" => {}})
     SseType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.s3vectors#SseType", name: "SseType")
+    TagKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3vectors#TagKey", name: "TagKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"})
+    TagKeyList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.s3vectors#TagKeyList", name: "TagKeyList")
+    TagResourceInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3vectors#TagResourceInput", name: "TagResourceInput")
+    TagResourceOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3vectors#TagResourceOutput", name: "TagResourceOutput")
+    TagValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3vectors#TagValue", name: "TagValue", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#pattern" => "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"})
+    TagsMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.s3vectors#TagsMap", name: "TagsMap")
     TooManyRequestsException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3vectors#TooManyRequestsException", name: "TooManyRequestsException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 429, "smithy.api#retryable" => {"throttling" => true}})
     TopK = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.s3vectors#TopK", name: "TopK", traits: {"smithy.api#range" => {"min" => 1}})
+    UntagResourceInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3vectors#UntagResourceInput", name: "UntagResourceInput")
+    UntagResourceOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3vectors#UntagResourceOutput", name: "UntagResourceOutput")
+    UpdateIndexModeInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3vectors#UpdateIndexModeInput", name: "UpdateIndexModeInput")
+    UpdateIndexModeOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3vectors#UpdateIndexModeOutput", name: "UpdateIndexModeOutput")
     ValidationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3vectors#ValidationException", name: "ValidationException", traits: {"smithy.api#error" => "client"})
     ValidationExceptionField = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3vectors#ValidationExceptionField", name: "ValidationExceptionField")
     ValidationExceptionFieldList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.s3vectors#ValidationExceptionFieldList", name: "ValidationExceptionFieldList")
     VectorBucket = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3vectors#VectorBucket", name: "VectorBucket")
-    VectorBucketArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3vectors#VectorBucketArn", name: "VectorBucketArn", traits: {"aws.api#arnReference" => {}})
+    VectorBucketArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3vectors#VectorBucketArn", name: "VectorBucketArn", traits: {"aws.api#arnReference" => {}, "smithy.api#pattern" => "^arn:aws[-a-z0-9]*:s3vectors:[a-z0-9-]+:[0-9]{12}:bucket/[a-z0-9][a-z0-9-.]{1,61}[a-z0-9]$"})
     VectorBucketName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3vectors#VectorBucketName", name: "VectorBucketName", traits: {"smithy.api#length" => {"min" => 3, "max" => 63}})
     VectorBucketPolicy = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.s3vectors#VectorBucketPolicy", name: "VectorBucketPolicy")
     VectorBucketSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.s3vectors#VectorBucketSummary", name: "VectorBucketSummary")
@@ -110,11 +128,16 @@ module Aws::S3Vectors
     CreateIndexInput.add_member(:dimension, ::Smithy::Schema::Shapes::MemberShape.new(target: Dimension, name: "dimension", traits: {"smithy.api#required" => {}}))
     CreateIndexInput.add_member(:distance_metric, ::Smithy::Schema::Shapes::MemberShape.new(target: DistanceMetric, name: "distanceMetric", traits: {"smithy.api#required" => {}}))
     CreateIndexInput.add_member(:metadata_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataConfiguration, name: "metadataConfiguration"))
+    CreateIndexInput.add_member(:encryption_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionConfiguration, name: "encryptionConfiguration"))
+    CreateIndexInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "tags"))
     CreateIndexInput.type = Types::CreateIndexInput
+    CreateIndexOutput.add_member(:index_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexArn, name: "indexArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreateIndexOutput.type = Types::CreateIndexOutput
     CreateVectorBucketInput.add_member(:vector_bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorBucketName, name: "vectorBucketName", traits: {"smithy.api#required" => {}}))
     CreateVectorBucketInput.add_member(:encryption_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionConfiguration, name: "encryptionConfiguration"))
+    CreateVectorBucketInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "tags"))
     CreateVectorBucketInput.type = Types::CreateVectorBucketInput
+    CreateVectorBucketOutput.add_member(:vector_bucket_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorBucketArn, name: "vectorBucketArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreateVectorBucketOutput.type = Types::CreateVectorBucketOutput
     DataType.add_member(:float32, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FLOAT32", traits: {"smithy.api#enumValue" => "float32"}))
     DeleteIndexInput.add_member(:vector_bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorBucketName, name: "vectorBucketName"))
@@ -182,7 +205,11 @@ module Aws::S3Vectors
     Index.add_member(:dimension, ::Smithy::Schema::Shapes::MemberShape.new(target: Dimension, name: "dimension", traits: {"smithy.api#required" => {}}))
     Index.add_member(:distance_metric, ::Smithy::Schema::Shapes::MemberShape.new(target: DistanceMetric, name: "distanceMetric", traits: {"smithy.api#required" => {}}))
     Index.add_member(:metadata_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataConfiguration, name: "metadataConfiguration"))
+    Index.add_member(:encryption_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionConfiguration, name: "encryptionConfiguration"))
+    Index.add_member(:index_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexMode, name: "indexMode"))
     Index.type = Types::Index
+    IndexMode.add_member(:classic, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLASSIC", traits: {"smithy.api#enumValue" => "CLASSIC"}))
+    IndexMode.add_member(:enhanced, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENHANCED", traits: {"smithy.api#enumValue" => "ENHANCED"}))
     IndexSummary.add_member(:vector_bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorBucketName, name: "vectorBucketName", traits: {"smithy.api#required" => {}}))
     IndexSummary.add_member(:index_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexName, name: "indexName", traits: {"smithy.api#required" => {}}))
     IndexSummary.add_member(:index_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexArn, name: "indexArn", traits: {"smithy.api#required" => {}}))
@@ -212,6 +239,10 @@ module Aws::S3Vectors
     ListOutputVector.add_member(:data, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorData, name: "data"))
     ListOutputVector.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorMetadata, name: "metadata"))
     ListOutputVector.type = Types::ListOutputVector
+    ListTagsForResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListTagsForResourceInput.type = Types::ListTagsForResourceInput
+    ListTagsForResourceOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "tags", traits: {"smithy.api#required" => {}}))
+    ListTagsForResourceOutput.type = Types::ListTagsForResourceOutput
     ListVectorBucketsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ListVectorBucketsMaxResults, name: "maxResults"))
     ListVectorBucketsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ListVectorBucketsNextToken, name: "nextToken"))
     ListVectorBucketsInput.add_member(:prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: ListVectorBucketsPrefix, name: "prefix"))
@@ -243,6 +274,11 @@ module Aws::S3Vectors
     PutInputVector.add_member(:data, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorData, name: "data", traits: {"smithy.api#required" => {}}))
     PutInputVector.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorMetadata, name: "metadata", traits: {"smithy.api#default" => {}}))
     PutInputVector.type = Types::PutInputVector
+    PutVectorBucketDefaultIndexModeInput.add_member(:vector_bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorBucketName, name: "vectorBucketName"))
+    PutVectorBucketDefaultIndexModeInput.add_member(:vector_bucket_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorBucketArn, name: "vectorBucketArn"))
+    PutVectorBucketDefaultIndexModeInput.add_member(:default_index_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexMode, name: "defaultIndexMode", traits: {"smithy.api#required" => {}}))
+    PutVectorBucketDefaultIndexModeInput.type = Types::PutVectorBucketDefaultIndexModeInput
+    PutVectorBucketDefaultIndexModeOutput.type = Types::PutVectorBucketDefaultIndexModeOutput
     PutVectorBucketPolicyInput.add_member(:vector_bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorBucketName, name: "vectorBucketName"))
     PutVectorBucketPolicyInput.add_member(:vector_bucket_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorBucketArn, name: "vectorBucketArn"))
     PutVectorBucketPolicyInput.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorBucketPolicy, name: "policy", traits: {"smithy.api#required" => {}}))
@@ -255,10 +291,9 @@ module Aws::S3Vectors
     PutVectorsInput.type = Types::PutVectorsInput
     PutVectorsInputList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PutInputVector, name: "member"))
     PutVectorsOutput.type = Types::PutVectorsOutput
-    QueryOutputVector.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorKey, name: "key", traits: {"smithy.api#required" => {}}))
-    QueryOutputVector.add_member(:data, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorData, name: "data"))
-    QueryOutputVector.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorMetadata, name: "metadata"))
     QueryOutputVector.add_member(:distance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Float, name: "distance"))
+    QueryOutputVector.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorKey, name: "key", traits: {"smithy.api#required" => {}}))
+    QueryOutputVector.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorMetadata, name: "metadata"))
     QueryOutputVector.type = Types::QueryOutputVector
     QueryVectorsInput.add_member(:vector_bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorBucketName, name: "vectorBucketName"))
     QueryVectorsInput.add_member(:index_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexName, name: "indexName"))
@@ -266,20 +301,43 @@ module Aws::S3Vectors
     QueryVectorsInput.add_member(:top_k, ::Smithy::Schema::Shapes::MemberShape.new(target: TopK, name: "topK", traits: {"smithy.api#required" => {}}))
     QueryVectorsInput.add_member(:query_vector, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorData, name: "queryVector", traits: {"smithy.api#required" => {}}))
     QueryVectorsInput.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Document, name: "filter"))
+    QueryVectorsInput.add_member(:query_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexMode, name: "queryMode"))
     QueryVectorsInput.add_member(:return_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "returnMetadata", traits: {"smithy.api#default" => false}))
     QueryVectorsInput.add_member(:return_distance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "returnDistance", traits: {"smithy.api#default" => false}))
+    QueryVectorsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryVectorsNextToken, name: "nextToken"))
     QueryVectorsInput.type = Types::QueryVectorsInput
     QueryVectorsOutput.add_member(:vectors, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryVectorsOutputList, name: "vectors", traits: {"smithy.api#required" => {}}))
+    QueryVectorsOutput.add_member(:distance_metric, ::Smithy::Schema::Shapes::MemberShape.new(target: DistanceMetric, name: "distanceMetric", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    QueryVectorsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryVectorsNextToken, name: "nextToken"))
     QueryVectorsOutput.type = Types::QueryVectorsOutput
     QueryVectorsOutputList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryOutputVector, name: "member"))
+    RequestTimeoutException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message", traits: {"smithy.api#required" => {}}))
+    RequestTimeoutException.type = Types::RequestTimeoutException
     ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message", traits: {"smithy.api#required" => {}}))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
     ServiceUnavailableException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message", traits: {"smithy.api#required" => {}}))
     ServiceUnavailableException.type = Types::ServiceUnavailableException
     SseType.add_member(:aes256, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AES256", traits: {"smithy.api#enumValue" => "AES256"}))
     SseType.add_member(:aws_kms, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_KMS", traits: {"smithy.api#enumValue" => "aws:kms"}))
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "tags", traits: {"smithy.api#required" => {}}))
+    TagResourceInput.type = Types::TagResourceInput
+    TagResourceOutput.type = Types::TagResourceOutput
+    TagsMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    TagsMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TooManyRequestsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message", traits: {"smithy.api#required" => {}}))
     TooManyRequestsException.type = Types::TooManyRequestsException
+    UntagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UntagResourceInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, name: "tagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
+    UntagResourceInput.type = Types::UntagResourceInput
+    UntagResourceOutput.type = Types::UntagResourceOutput
+    UpdateIndexModeInput.add_member(:vector_bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorBucketName, name: "vectorBucketName"))
+    UpdateIndexModeInput.add_member(:index_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexName, name: "indexName"))
+    UpdateIndexModeInput.add_member(:index_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexArn, name: "indexArn"))
+    UpdateIndexModeInput.add_member(:index_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexMode, name: "indexMode", traits: {"smithy.api#required" => {}}))
+    UpdateIndexModeInput.type = Types::UpdateIndexModeInput
+    UpdateIndexModeOutput.type = Types::UpdateIndexModeOutput
     ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ValidationException.add_member(:field_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionFieldList, name: "fieldList"))
     ValidationException.type = Types::ValidationException
@@ -291,6 +349,7 @@ module Aws::S3Vectors
     VectorBucket.add_member(:vector_bucket_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorBucketArn, name: "vectorBucketArn", traits: {"smithy.api#required" => {}}))
     VectorBucket.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "creationTime", traits: {"smithy.api#required" => {}}))
     VectorBucket.add_member(:encryption_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionConfiguration, name: "encryptionConfiguration"))
+    VectorBucket.add_member(:default_index_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexMode, name: "defaultIndexMode"))
     VectorBucket.type = Types::VectorBucket
     VectorBucketSummary.add_member(:vector_bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorBucketName, name: "vectorBucketName", traits: {"smithy.api#required" => {}}))
     VectorBucketSummary.add_member(:vector_bucket_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorBucketArn, name: "vectorBucketArn", traits: {"smithy.api#required" => {}}))
@@ -304,7 +363,7 @@ module Aws::S3Vectors
       service.id = "com.amazonaws.s3vectors#S3Vectors"
       service.name = "S3Vectors"
       service.version = "2025-07-15"
-      service.traits = {"aws.api#service" => {"sdkId" => "S3Vectors", "arnNamespace" => "s3vectors", "endpointPrefix" => "s3vectors"}, "aws.auth#sigv4" => {"name" => "s3vectors"}, "aws.endpoints#dualStackOnlyEndpoints" => {}, "aws.endpoints#standardRegionalEndpoints" => {}, "aws.protocols#restJson1" => {}, "smithy.api#title" => "Amazon S3 Vectors"}
+      service.traits = {"aws.api#service" => {"sdkId" => "S3Vectors", "arnNamespace" => "s3vectors", "endpointPrefix" => "s3vectors"}, "aws.auth#sigv4" => {"name" => "s3vectors"}, "aws.endpoints#dualStackOnlyEndpoints" => {}, "aws.endpoints#standardRegionalEndpoints" => {}, "aws.protocols#restJson1" => {}, "smithy.api#title" => "Amazon S3 Vectors", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}, "Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://s3vectors-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://s3vectors.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 6, "nodes" => "/////wAAAAH/////AAAAAAAAAAYAAAADAAAAAQAAAAQF9eEFAAAAAgAAAAUF9eEFAAAAAwX14QMF9eEEAAAAAwX14QEF9eEC"}}
       service.add_operation(:create_index, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.s3vectors#CreateIndex"
         operation.name = "CreateIndex"
@@ -312,13 +371,14 @@ module Aws::S3Vectors
         operation.output = CreateIndexOutput
         operation.errors << AccessDeniedException
         operation.errors << InternalServerException
-        operation.errors << ServiceQuotaExceededException
+        operation.errors << RequestTimeoutException
         operation.errors << TooManyRequestsException
         operation.errors << ValidationException
         operation.errors << ConflictException
         operation.errors << NotFoundException
+        operation.errors << ServiceQuotaExceededException
         operation.errors << ServiceUnavailableException
-        operation.traits = {"smithy.api#http" => {"uri" => "/CreateIndex", "method" => "POST"}, "smithy.api#idempotent" => {}}
+        operation.traits = {"smithy.api#http" => {"uri" => "/CreateIndex", "method" => "POST"}}
       end)
       service.add_operation(:create_vector_bucket, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.s3vectors#CreateVectorBucket"
@@ -327,12 +387,13 @@ module Aws::S3Vectors
         operation.output = CreateVectorBucketOutput
         operation.errors << AccessDeniedException
         operation.errors << InternalServerException
-        operation.errors << ServiceQuotaExceededException
+        operation.errors << RequestTimeoutException
         operation.errors << TooManyRequestsException
         operation.errors << ValidationException
         operation.errors << ConflictException
+        operation.errors << ServiceQuotaExceededException
         operation.errors << ServiceUnavailableException
-        operation.traits = {"smithy.api#http" => {"uri" => "/CreateVectorBucket", "method" => "POST"}, "smithy.api#idempotent" => {}}
+        operation.traits = {"smithy.api#http" => {"uri" => "/CreateVectorBucket", "method" => "POST"}}
       end)
       service.add_operation(:delete_index, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.s3vectors#DeleteIndex"
@@ -341,11 +402,12 @@ module Aws::S3Vectors
         operation.output = DeleteIndexOutput
         operation.errors << AccessDeniedException
         operation.errors << InternalServerException
-        operation.errors << ServiceQuotaExceededException
+        operation.errors << RequestTimeoutException
         operation.errors << TooManyRequestsException
         operation.errors << ValidationException
+        operation.errors << NotFoundException
         operation.errors << ServiceUnavailableException
-        operation.traits = {"smithy.api#http" => {"uri" => "/DeleteIndex", "method" => "POST"}, "smithy.api#idempotent" => {}}
+        operation.traits = {"smithy.api#http" => {"uri" => "/DeleteIndex", "method" => "POST"}}
       end)
       service.add_operation(:delete_vector_bucket, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.s3vectors#DeleteVectorBucket"
@@ -354,12 +416,13 @@ module Aws::S3Vectors
         operation.output = DeleteVectorBucketOutput
         operation.errors << AccessDeniedException
         operation.errors << InternalServerException
-        operation.errors << ServiceQuotaExceededException
+        operation.errors << RequestTimeoutException
         operation.errors << TooManyRequestsException
         operation.errors << ValidationException
         operation.errors << ConflictException
+        operation.errors << NotFoundException
         operation.errors << ServiceUnavailableException
-        operation.traits = {"smithy.api#http" => {"uri" => "/DeleteVectorBucket", "method" => "POST"}, "smithy.api#idempotent" => {}}
+        operation.traits = {"smithy.api#http" => {"uri" => "/DeleteVectorBucket", "method" => "POST"}}
       end)
       service.add_operation(:delete_vector_bucket_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.s3vectors#DeleteVectorBucketPolicy"
@@ -368,7 +431,7 @@ module Aws::S3Vectors
         operation.output = DeleteVectorBucketPolicyOutput
         operation.errors << AccessDeniedException
         operation.errors << InternalServerException
-        operation.errors << ServiceQuotaExceededException
+        operation.errors << RequestTimeoutException
         operation.errors << TooManyRequestsException
         operation.errors << ValidationException
         operation.errors << NotFoundException
@@ -382,7 +445,7 @@ module Aws::S3Vectors
         operation.output = DeleteVectorsOutput
         operation.errors << AccessDeniedException
         operation.errors << InternalServerException
-        operation.errors << ServiceQuotaExceededException
+        operation.errors << RequestTimeoutException
         operation.errors << TooManyRequestsException
         operation.errors << ValidationException
         operation.errors << KmsDisabledException
@@ -400,7 +463,7 @@ module Aws::S3Vectors
         operation.output = GetIndexOutput
         operation.errors << AccessDeniedException
         operation.errors << InternalServerException
-        operation.errors << ServiceQuotaExceededException
+        operation.errors << RequestTimeoutException
         operation.errors << TooManyRequestsException
         operation.errors << ValidationException
         operation.errors << NotFoundException
@@ -414,7 +477,7 @@ module Aws::S3Vectors
         operation.output = GetVectorBucketOutput
         operation.errors << AccessDeniedException
         operation.errors << InternalServerException
-        operation.errors << ServiceQuotaExceededException
+        operation.errors << RequestTimeoutException
         operation.errors << TooManyRequestsException
         operation.errors << ValidationException
         operation.errors << NotFoundException
@@ -428,7 +491,7 @@ module Aws::S3Vectors
         operation.output = GetVectorBucketPolicyOutput
         operation.errors << AccessDeniedException
         operation.errors << InternalServerException
-        operation.errors << ServiceQuotaExceededException
+        operation.errors << RequestTimeoutException
         operation.errors << TooManyRequestsException
         operation.errors << ValidationException
         operation.errors << NotFoundException
@@ -442,7 +505,7 @@ module Aws::S3Vectors
         operation.output = GetVectorsOutput
         operation.errors << AccessDeniedException
         operation.errors << InternalServerException
-        operation.errors << ServiceQuotaExceededException
+        operation.errors << RequestTimeoutException
         operation.errors << TooManyRequestsException
         operation.errors << ValidationException
         operation.errors << KmsDisabledException
@@ -460,13 +523,27 @@ module Aws::S3Vectors
         operation.output = ListIndexesOutput
         operation.errors << AccessDeniedException
         operation.errors << InternalServerException
-        operation.errors << ServiceQuotaExceededException
+        operation.errors << RequestTimeoutException
         operation.errors << TooManyRequestsException
         operation.errors << ValidationException
         operation.errors << NotFoundException
         operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"uri" => "/ListIndexes", "method" => "POST"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListIndexes.new
+      end)
+      service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3vectors#ListTagsForResource"
+        operation.name = "ListTagsForResource"
+        operation.input = ListTagsForResourceInput
+        operation.output = ListTagsForResourceOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << TooManyRequestsException
+        operation.errors << ValidationException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.traits = {"smithy.api#http" => {"uri" => "/tags/{resourceArn}", "method" => "GET"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:list_vector_buckets, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.s3vectors#ListVectorBuckets"
@@ -475,7 +552,7 @@ module Aws::S3Vectors
         operation.output = ListVectorBucketsOutput
         operation.errors << AccessDeniedException
         operation.errors << InternalServerException
-        operation.errors << ServiceQuotaExceededException
+        operation.errors << RequestTimeoutException
         operation.errors << TooManyRequestsException
         operation.errors << ValidationException
         operation.errors << ServiceUnavailableException
@@ -489,13 +566,27 @@ module Aws::S3Vectors
         operation.output = ListVectorsOutput
         operation.errors << AccessDeniedException
         operation.errors << InternalServerException
-        operation.errors << ServiceQuotaExceededException
+        operation.errors << RequestTimeoutException
         operation.errors << TooManyRequestsException
         operation.errors << ValidationException
         operation.errors << NotFoundException
         operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"uri" => "/ListVectors", "method" => "POST"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListVectors.new
+      end)
+      service.add_operation(:put_vector_bucket_default_index_mode, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3vectors#PutVectorBucketDefaultIndexMode"
+        operation.name = "PutVectorBucketDefaultIndexMode"
+        operation.input = PutVectorBucketDefaultIndexModeInput
+        operation.output = PutVectorBucketDefaultIndexModeOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << TooManyRequestsException
+        operation.errors << ValidationException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.traits = {"smithy.api#http" => {"uri" => "/PutVectorBucketDefaultIndexMode", "method" => "POST"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:put_vector_bucket_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.s3vectors#PutVectorBucketPolicy"
@@ -504,7 +595,7 @@ module Aws::S3Vectors
         operation.output = PutVectorBucketPolicyOutput
         operation.errors << AccessDeniedException
         operation.errors << InternalServerException
-        operation.errors << ServiceQuotaExceededException
+        operation.errors << RequestTimeoutException
         operation.errors << TooManyRequestsException
         operation.errors << ValidationException
         operation.errors << NotFoundException
@@ -518,7 +609,7 @@ module Aws::S3Vectors
         operation.output = PutVectorsOutput
         operation.errors << AccessDeniedException
         operation.errors << InternalServerException
-        operation.errors << ServiceQuotaExceededException
+        operation.errors << RequestTimeoutException
         operation.errors << TooManyRequestsException
         operation.errors << ValidationException
         operation.errors << KmsDisabledException
@@ -526,6 +617,7 @@ module Aws::S3Vectors
         operation.errors << KmsInvalidStateException
         operation.errors << KmsNotFoundException
         operation.errors << NotFoundException
+        operation.errors << ServiceQuotaExceededException
         operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"uri" => "/PutVectors", "method" => "POST"}, "smithy.api#idempotent" => {}}
       end)
@@ -536,7 +628,7 @@ module Aws::S3Vectors
         operation.output = QueryVectorsOutput
         operation.errors << AccessDeniedException
         operation.errors << InternalServerException
-        operation.errors << ServiceQuotaExceededException
+        operation.errors << RequestTimeoutException
         operation.errors << TooManyRequestsException
         operation.errors << ValidationException
         operation.errors << KmsDisabledException
@@ -546,6 +638,51 @@ module Aws::S3Vectors
         operation.errors << NotFoundException
         operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"uri" => "/QueryVectors", "method" => "POST"}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::QueryVectors.new
+      end)
+      service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3vectors#TagResource"
+        operation.name = "TagResource"
+        operation.input = TagResourceInput
+        operation.output = TagResourceOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << TooManyRequestsException
+        operation.errors << ValidationException
+        operation.errors << ConflictException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.traits = {"smithy.api#http" => {"uri" => "/tags/{resourceArn}", "method" => "POST"}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3vectors#UntagResource"
+        operation.name = "UntagResource"
+        operation.input = UntagResourceInput
+        operation.output = UntagResourceOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << TooManyRequestsException
+        operation.errors << ValidationException
+        operation.errors << ConflictException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.traits = {"smithy.api#http" => {"uri" => "/tags/{resourceArn}", "method" => "DELETE"}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:update_index_mode, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.s3vectors#UpdateIndexMode"
+        operation.name = "UpdateIndexMode"
+        operation.input = UpdateIndexModeInput
+        operation.output = UpdateIndexModeOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << TooManyRequestsException
+        operation.errors << ValidationException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.traits = {"smithy.api#http" => {"uri" => "/UpdateIndexMode", "method" => "POST"}, "smithy.api#idempotent" => {}}
       end)
     end
 

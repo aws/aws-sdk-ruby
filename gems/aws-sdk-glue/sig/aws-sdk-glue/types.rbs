@@ -248,6 +248,79 @@ module Aws::Glue
       attr_accessor mapping: Array[Types::Mapping]?
     end
 
+    class AssetFormEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?form_type_id: String,
+        ?content: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor form_type_id: String?
+      attr_accessor content: String?
+    end
+
+    class AssetTypeFormReference
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?form_type_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor form_type_identifier: String?
+    end
+
+    class AssetTypeItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+    end
+
+    class AssociateGlossaryTermsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_identifier: String,
+        ?iterable_form_name: String,
+        ?item_identifier: String,
+        ?glossary_term_identifiers: Array[String],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_identifier: String?
+      attr_accessor iterable_form_name: String?
+      attr_accessor item_identifier: String?
+      attr_accessor glossary_term_identifiers: Array[String]?
+      attr_accessor client_token: String?
+    end
+
+    class AssociateGlossaryTermsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_identifier: String,
+        ?iterable_form_name: String,
+        ?item_identifier: String,
+        ?glossary_terms: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_identifier: String?
+      attr_accessor iterable_form_name: String?
+      attr_accessor item_identifier: String?
+      attr_accessor glossary_terms: Array[String]?
+    end
+
     class AthenaConnectorSource
       include Smithy::Schema::Structure
 
@@ -408,6 +481,19 @@ module Aws::Glue
 
       attr_accessor username: String?
       attr_accessor password: String?
+    end
+
+    class BasicAuthenticationProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?username: Types::ConnectorProperty,
+        ?password: Types::ConnectorProperty,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor username: Types::ConnectorProperty?
+      attr_accessor password: Types::ConnectorProperty?
     end
 
     class BasicCatalogTarget
@@ -667,6 +753,54 @@ module Aws::Glue
       attr_accessor results_not_found: Array[String]?
     end
 
+    class BatchGetDataQualityResultV2Request
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?result_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor result_ids: Array[String]?
+    end
+
+    class BatchGetDataQualityResultV2Response
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?results: Array[Types::DataQualityResultV2Item],
+        ?results_not_found: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor results: Array[Types::DataQualityResultV2Item]?
+      attr_accessor results_not_found: Array[String]?
+    end
+
+    class BatchGetDataQualityRulesetEvaluationRunRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?run_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor run_ids: Array[String]?
+    end
+
+    class BatchGetDataQualityRulesetEvaluationRunResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?runs: Array[Types::DataQualityRulesetEvaluationRun],
+        ?runs_not_found: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor runs: Array[Types::DataQualityRulesetEvaluationRun]?
+      attr_accessor runs_not_found: Array[String]?
+    end
+
     class BatchGetDevEndpointsRequest
       include Smithy::Schema::Structure
 
@@ -689,6 +823,34 @@ module Aws::Glue
 
       attr_accessor dev_endpoints: Array[Types::DevEndpoint]?
       attr_accessor dev_endpoints_not_found: Array[String]?
+    end
+
+    class BatchGetIterableFormsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_identifier: String,
+        ?iterable_form_name: String,
+        ?item_identifiers: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_identifier: String?
+      attr_accessor iterable_form_name: String?
+      attr_accessor item_identifiers: Array[String]?
+    end
+
+    class BatchGetIterableFormsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::IterableFormItem],
+        ?errors: Array[Types::ItemError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::IterableFormItem]?
+      attr_accessor errors: Array[Types::ItemError]?
     end
 
     class BatchGetJobsRequest
@@ -723,6 +885,8 @@ module Aws::Glue
         ?database_name: String,
         ?table_name: String,
         ?partitions_to_get: Array[Types::PartitionValueList],
+        ?audit_context: Types::AuditContext,
+        ?query_session_context: Types::QuerySessionContext,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -730,6 +894,8 @@ module Aws::Glue
       attr_accessor database_name: String?
       attr_accessor table_name: String?
       attr_accessor partitions_to_get: Array[Types::PartitionValueList]?
+      attr_accessor audit_context: Types::AuditContext?
+      attr_accessor query_session_context: Types::QuerySessionContext?
     end
 
     class BatchGetPartitionResponse
@@ -1002,6 +1168,21 @@ module Aws::Glue
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor errors: Array[Types::BatchUpdatePartitionFailureEntry]?
+    end
+
+    class BetweenConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?low_bound_key: String,
+        ?high_bound_key: String,
+        ?template: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor low_bound_key: String?
+      attr_accessor high_bound_key: String?
+      attr_accessor template: String?
     end
 
     class BinaryColumnStatisticsData
@@ -1364,6 +1545,7 @@ module Aws::Glue
         ?create_table_default_permissions: Array[Types::PrincipalPermissions],
         ?create_database_default_permissions: Array[Types::PrincipalPermissions],
         ?allow_full_table_external_data_access: String,
+        ?overwrite_child_resource_permissions_with_default: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1375,6 +1557,7 @@ module Aws::Glue
       attr_accessor create_table_default_permissions: Array[Types::PrincipalPermissions]?
       attr_accessor create_database_default_permissions: Array[Types::PrincipalPermissions]?
       attr_accessor allow_full_table_external_data_access: String?
+      attr_accessor overwrite_child_resource_permissions_with_default: String?
     end
 
     class CatalogKafkaSource
@@ -1485,6 +1668,23 @@ module Aws::Glue
       attr_accessor output_schemas: Array[Types::GlueSchema]?
     end
 
+    class CatalogTableConfigOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?database_name: String,
+        ?table_name: String,
+        ?s3_location: String,
+        ?catalog_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor database_name: String?
+      attr_accessor table_name: String?
+      attr_accessor s3_location: String?
+      attr_accessor catalog_id: String?
+    end
+
     class CatalogTarget
       include Smithy::Schema::Structure
 
@@ -1545,6 +1745,29 @@ module Aws::Glue
       attr_accessor xml_classifier: Types::XMLClassifier?
       attr_accessor json_classifier: Types::JsonClassifier?
       attr_accessor csv_classifier: Types::CsvClassifier?
+    end
+
+    class ClientCredentialsProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?token_url: Types::ConnectorProperty,
+        ?request_method: String,
+        ?content_type: String,
+        ?client_id: Types::ConnectorProperty,
+        ?client_secret: Types::ConnectorProperty,
+        ?scope: Types::ConnectorProperty,
+        ?token_url_parameters: Array[Types::ConnectorProperty],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor token_url: Types::ConnectorProperty?
+      attr_accessor request_method: String?
+      attr_accessor content_type: String?
+      attr_accessor client_id: Types::ConnectorProperty?
+      attr_accessor client_secret: Types::ConnectorProperty?
+      attr_accessor scope: Types::ConnectorProperty?
+      attr_accessor token_url_parameters: Array[Types::ConnectorProperty]?
     end
 
     class CloudWatchEncryption
@@ -2317,6 +2540,19 @@ module Aws::Glue
       attr_accessor aws_kms_key_id: String?
     end
 
+    class ConnectionPropertiesConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?url: Types::ConnectorProperty,
+        ?additional_request_parameters: Array[Types::ConnectorProperty],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor url: Types::ConnectorProperty?
+      attr_accessor additional_request_parameters: Array[Types::ConnectorProperty]?
+    end
+
     module ConnectionPropertyKey
       HOST: String
       PORT: String
@@ -2523,6 +2759,54 @@ module Aws::Glue
       attr_accessor connections: Array[String]?
     end
 
+    class ConnectorAuthenticationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authentication_types: Array[String],
+        ?o_auth2_properties: Types::ConnectorOAuth2Properties,
+        ?basic_authentication_properties: Types::BasicAuthenticationProperties,
+        ?custom_authentication_properties: Types::CustomAuthenticationProperties,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authentication_types: Array[String]?
+      attr_accessor o_auth2_properties: Types::ConnectorOAuth2Properties?
+      attr_accessor basic_authentication_properties: Types::BasicAuthenticationProperties?
+      attr_accessor custom_authentication_properties: Types::CustomAuthenticationProperties?
+    end
+
+    class ConnectorAuthorizationCodeProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authorization_code_url: Types::ConnectorProperty,
+        ?authorization_code: Types::ConnectorProperty,
+        ?redirect_uri: Types::ConnectorProperty,
+        ?token_url: Types::ConnectorProperty,
+        ?request_method: String,
+        ?content_type: String,
+        ?client_id: Types::ConnectorProperty,
+        ?client_secret: Types::ConnectorProperty,
+        ?scope: Types::ConnectorProperty,
+        ?prompt: Types::ConnectorProperty,
+        ?token_url_parameters: Array[Types::ConnectorProperty],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authorization_code_url: Types::ConnectorProperty?
+      attr_accessor authorization_code: Types::ConnectorProperty?
+      attr_accessor redirect_uri: Types::ConnectorProperty?
+      attr_accessor token_url: Types::ConnectorProperty?
+      attr_accessor request_method: String?
+      attr_accessor content_type: String?
+      attr_accessor client_id: Types::ConnectorProperty?
+      attr_accessor client_secret: Types::ConnectorProperty?
+      attr_accessor scope: Types::ConnectorProperty?
+      attr_accessor prompt: Types::ConnectorProperty?
+      attr_accessor token_url_parameters: Array[Types::ConnectorProperty]?
+    end
+
     class ConnectorDataSource
       include Smithy::Schema::Structure
 
@@ -2555,6 +2839,59 @@ module Aws::Glue
       attr_accessor connection_type: String?
       attr_accessor data: Hash[String, String]?
       attr_accessor inputs: Array[String]?
+    end
+
+    module ConnectorOAuth2GrantType
+      CLIENT_CREDENTIALS: String
+      JWT_BEARER: String
+      AUTHORIZATION_CODE: String
+    end
+
+    class ConnectorOAuth2Properties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?o_auth2_grant_type: String,
+        ?client_credentials_properties: Types::ClientCredentialsProperties,
+        ?jwt_bearer_properties: Types::JWTBearerProperties,
+        ?authorization_code_properties: Types::ConnectorAuthorizationCodeProperties,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor o_auth2_grant_type: String?
+      attr_accessor client_credentials_properties: Types::ClientCredentialsProperties?
+      attr_accessor jwt_bearer_properties: Types::JWTBearerProperties?
+      attr_accessor authorization_code_properties: Types::ConnectorAuthorizationCodeProperties?
+    end
+
+    class ConnectorProperty
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?key_override: String,
+        ?required: bool,
+        ?default_value: String,
+        ?allowed_values: Array[String],
+        ?property_location: String,
+        ?property_type: String,
+        ?format: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor key_override: String?
+      attr_accessor required: bool?
+      attr_accessor default_value: String?
+      attr_accessor allowed_values: Array[String]?
+      attr_accessor property_location: String?
+      attr_accessor property_type: String?
+      attr_accessor format: String?
+    end
+
+    module ContentType
+      APPLICATION_JSON: String
+      URL_ENCODED: String
     end
 
     class Crawl
@@ -2611,6 +2948,7 @@ module Aws::Glue
         ?configuration: String,
         ?crawler_security_configuration: String,
         ?lake_formation_configuration: Types::LakeFormationConfiguration,
+        ?catalog_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2634,6 +2972,7 @@ module Aws::Glue
       attr_accessor configuration: String?
       attr_accessor crawler_security_configuration: String?
       attr_accessor lake_formation_configuration: Types::LakeFormationConfiguration?
+      attr_accessor catalog_id: String?
     end
 
     class CrawlerHistory
@@ -2951,6 +3290,7 @@ module Aws::Glue
         ?configuration: String,
         ?crawler_security_configuration: String,
         ?tags: Hash[String, String],
+        ?catalog_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2969,6 +3309,7 @@ module Aws::Glue
       attr_accessor configuration: String?
       attr_accessor crawler_security_configuration: String?
       attr_accessor tags: Hash[String, String]?
+      attr_accessor catalog_id: String?
     end
 
     class CreateCrawlerResponse
@@ -3181,17 +3522,87 @@ module Aws::Glue
       attr_accessor arguments: Hash[String, String]?
     end
 
+    class CreateGlossaryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor client_token: String?
+    end
+
+    class CreateGlossaryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+    end
+
+    class CreateGlossaryTermRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?glossary_identifier: String,
+        ?name: String,
+        ?short_description: String,
+        ?long_description: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor glossary_identifier: String?
+      attr_accessor name: String?
+      attr_accessor short_description: String?
+      attr_accessor long_description: String?
+      attr_accessor client_token: String?
+    end
+
+    class CreateGlossaryTermResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?glossary_id: String,
+        ?name: String,
+        ?short_description: String,
+        ?long_description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor glossary_id: String?
+      attr_accessor name: String?
+      attr_accessor short_description: String?
+      attr_accessor long_description: String?
+    end
+
     class CreateGlueIdentityCenterConfigurationRequest
       include Smithy::Schema::Structure
 
       def initialize: (
         ?instance_arn: String,
         ?scopes: Array[String],
+        ?user_background_sessions_enabled: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor instance_arn: String?
       attr_accessor scopes: Array[String]?
+      attr_accessor user_background_sessions_enabled: bool?
     end
 
     class CreateGlueIdentityCenterConfigurationResponse
@@ -3275,12 +3686,14 @@ module Aws::Glue
         ?resource_arn: String,
         ?source_processing_properties: Types::SourceProcessingProperties,
         ?target_processing_properties: Types::TargetProcessingProperties,
+        ?tags: Array[Types::Tag],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor resource_arn: String?
       attr_accessor source_processing_properties: Types::SourceProcessingProperties?
       attr_accessor target_processing_properties: Types::TargetProcessingProperties?
+      attr_accessor tags: Array[Types::Tag]?
     end
 
     class CreateIntegrationResourcePropertyResponse
@@ -3288,12 +3701,14 @@ module Aws::Glue
 
       def initialize: (
         ?resource_arn: String,
+        ?resource_property_arn: String,
         ?source_processing_properties: Types::SourceProcessingProperties,
         ?target_processing_properties: Types::TargetProcessingProperties,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor resource_arn: String?
+      attr_accessor resource_property_arn: String?
       attr_accessor source_processing_properties: Types::SourceProcessingProperties?
       attr_accessor target_processing_properties: Types::TargetProcessingProperties?
     end
@@ -3705,6 +4120,7 @@ module Aws::Glue
         ?glue_version: String,
         ?tags: Hash[String, String],
         ?request_origin: String,
+        ?session_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3723,6 +4139,7 @@ module Aws::Glue
       attr_accessor glue_version: String?
       attr_accessor tags: Hash[String, String]?
       attr_accessor request_origin: String?
+      attr_accessor session_type: String?
     end
 
     class CreateSessionResponse
@@ -3980,6 +4397,30 @@ module Aws::Glue
       None: String
     end
 
+    class CursorConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_page: Types::ExtractedParameter,
+        ?limit_parameter: Types::ExtractedParameter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_page: Types::ExtractedParameter?
+      attr_accessor limit_parameter: Types::ExtractedParameter?
+    end
+
+    class CustomAuthenticationProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authentication_parameters: Array[Types::ConnectorProperty],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authentication_parameters: Array[Types::ConnectorProperty]?
+    end
+
     class CustomCode
       include Smithy::Schema::Structure
 
@@ -4199,6 +4640,7 @@ module Aws::Glue
         ?description: String,
         ?evaluation_message: String,
         ?evaluated_metrics: Hash[String, Float],
+        ?evaluated_distributions: Hash[String, Types::DistributionData],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4206,6 +4648,20 @@ module Aws::Glue
       attr_accessor description: String?
       attr_accessor evaluation_message: String?
       attr_accessor evaluated_metrics: Hash[String, Float]?
+      attr_accessor evaluated_distributions: Hash[String, Types::DistributionData]?
+    end
+
+    class DataQualityConfigurationV2
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?observations_enabled: String,
+        ?observation_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor observations_enabled: String?
+      attr_accessor observation_mode: String?
     end
 
     class DataQualityEncryption
@@ -4226,6 +4682,11 @@ module Aws::Glue
       SSEKMS: String
     end
 
+    module DataQualityEngine
+      SPARK: String
+      PYTHON: String
+    end
+
     class DataQualityEvaluationRunAdditionalRunOptions
       include Smithy::Schema::Structure
 
@@ -4233,12 +4694,26 @@ module Aws::Glue
         ?cloud_watch_metrics_enabled: bool,
         ?results_s3_prefix: String,
         ?composite_rule_evaluation_method: String,
+        ?custom_log_group_prefix: String,
+        ?row_level_results: Types::RowLevelResultsOptions,
+        ?profiling_results: Types::ProfilingResultsOptions,
+        ?observation_scope: String,
+        ?observation_mode: String,
+        ?data_quality_rule_results: Types::DataQualityRuleResultsOptions,
+        ?observation_results: Types::ObservationResultsOptions,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor cloud_watch_metrics_enabled: bool?
       attr_accessor results_s3_prefix: String?
       attr_accessor composite_rule_evaluation_method: String?
+      attr_accessor custom_log_group_prefix: String?
+      attr_accessor row_level_results: Types::RowLevelResultsOptions?
+      attr_accessor profiling_results: Types::ProfilingResultsOptions?
+      attr_accessor observation_scope: String?
+      attr_accessor observation_mode: String?
+      attr_accessor data_quality_rule_results: Types::DataQualityRuleResultsOptions?
+      attr_accessor observation_results: Types::ObservationResultsOptions?
     end
 
     class DataQualityGlueTable
@@ -4375,6 +4850,96 @@ module Aws::Glue
       attr_accessor started_before: Time?
     end
 
+    class DataQualityResultV2Item
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?result_id: String,
+        ?data_source: Types::DataSource,
+        ?dimensions: Hash[String, String],
+        ?tags: Hash[String, String],
+        ?execution_started_on: Time,
+        ?execution_completed_on: Time,
+        ?result_published_on: Time,
+        ?score: Float,
+        ?rule_results: Array[Types::DataQualityRuleResult],
+        ?analyzer_results: Array[Types::DataQualityAnalyzerResult],
+        ?observations: Array[Types::DataQualityObservation],
+        ?evaluation_context: String,
+        ?descriptors: Hash[String, String],
+        ?aggregated_metrics: Types::DataQualityAggregatedMetrics,
+        ?ruleset_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor result_id: String?
+      attr_accessor data_source: Types::DataSource?
+      attr_accessor dimensions: Hash[String, String]?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor execution_started_on: Time?
+      attr_accessor execution_completed_on: Time?
+      attr_accessor result_published_on: Time?
+      attr_accessor score: Float?
+      attr_accessor rule_results: Array[Types::DataQualityRuleResult]?
+      attr_accessor analyzer_results: Array[Types::DataQualityAnalyzerResult]?
+      attr_accessor observations: Array[Types::DataQualityObservation]?
+      attr_accessor evaluation_context: String?
+      attr_accessor descriptors: Hash[String, String]?
+      attr_accessor aggregated_metrics: Types::DataQualityAggregatedMetrics?
+      attr_accessor ruleset_name: String?
+    end
+
+    class DataQualityResultsV2Description
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?result_id: String,
+        ?data_source: Types::DataSource,
+        ?result_published_on: Time,
+        ?dimensions: Hash[String, String],
+        ?evaluation_context: String,
+        ?descriptors: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor result_id: String?
+      attr_accessor data_source: Types::DataSource?
+      attr_accessor result_published_on: Time?
+      attr_accessor dimensions: Hash[String, String]?
+      attr_accessor evaluation_context: String?
+      attr_accessor descriptors: Hash[String, String]?
+    end
+
+    class DataQualityResultsV2FilterCriteria
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_source: Types::DataSource,
+        ?published_after: Time,
+        ?published_before: Time,
+        ?dimensions: Hash[String, String],
+        ?evaluation_context: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_source: Types::DataSource?
+      attr_accessor published_after: Time?
+      attr_accessor published_before: Time?
+      attr_accessor dimensions: Hash[String, String]?
+      attr_accessor evaluation_context: String?
+    end
+
+    class DataQualityRuleRecommendationRunAdditionalRunOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?custom_log_group_prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor custom_log_group_prefix: String?
+    end
+
     class DataQualityRuleRecommendationRunDescription
       include Smithy::Schema::Structure
 
@@ -4383,6 +4948,8 @@ module Aws::Glue
         ?status: String,
         ?started_on: Time,
         ?data_source: Types::DataSource,
+        ?created_ruleset_name: String,
+        ?recommendation_mode: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4390,6 +4957,8 @@ module Aws::Glue
       attr_accessor status: String?
       attr_accessor started_on: Time?
       attr_accessor data_source: Types::DataSource?
+      attr_accessor created_ruleset_name: String?
+      attr_accessor recommendation_mode: String?
     end
 
     class DataQualityRuleRecommendationRunFilter
@@ -4418,6 +4987,7 @@ module Aws::Glue
         ?evaluated_metrics: Hash[String, Float],
         ?evaluated_rule: String,
         ?rule_metrics: Hash[String, Float],
+        ?labels: Hash[String, String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4428,12 +4998,65 @@ module Aws::Glue
       attr_accessor evaluated_metrics: Hash[String, Float]?
       attr_accessor evaluated_rule: String?
       attr_accessor rule_metrics: Hash[String, Float]?
+      attr_accessor labels: Hash[String, String]?
     end
 
     module DataQualityRuleResultStatus
       PASS: String
       FAIL: String
       ERROR: String
+    end
+
+    class DataQualityRuleResultsOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?write_data_quality_rule_results_enabled: bool,
+        ?catalog_table_config: Types::CatalogTableConfigOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor write_data_quality_rule_results_enabled: bool?
+      attr_accessor catalog_table_config: Types::CatalogTableConfigOptions?
+    end
+
+    class DataQualityRulesetEvaluationRun
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?run_id: String,
+        ?data_source: Types::DataSource,
+        ?role: String,
+        ?number_of_workers: Integer,
+        ?timeout: Integer,
+        ?additional_run_options: Types::DataQualityEvaluationRunAdditionalRunOptions,
+        ?status: String,
+        ?error_string: String,
+        ?started_on: Time,
+        ?last_modified_on: Time,
+        ?completed_on: Time,
+        ?execution_time: Integer,
+        ?ruleset_names: Array[String],
+        ?result_ids: Array[String],
+        ?additional_data_sources: Hash[String, Types::DataSource],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor run_id: String?
+      attr_accessor data_source: Types::DataSource?
+      attr_accessor role: String?
+      attr_accessor number_of_workers: Integer?
+      attr_accessor timeout: Integer?
+      attr_accessor additional_run_options: Types::DataQualityEvaluationRunAdditionalRunOptions?
+      attr_accessor status: String?
+      attr_accessor error_string: String?
+      attr_accessor started_on: Time?
+      attr_accessor last_modified_on: Time?
+      attr_accessor completed_on: Time?
+      attr_accessor execution_time: Integer?
+      attr_accessor ruleset_names: Array[String]?
+      attr_accessor result_ids: Array[String]?
+      attr_accessor additional_data_sources: Hash[String, Types::DataSource]?
     end
 
     class DataQualityRulesetEvaluationRunDescription
@@ -4460,12 +5083,14 @@ module Aws::Glue
         ?data_source: Types::DataSource,
         ?started_before: Time,
         ?started_after: Time,
+        ?ruleset_name: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor data_source: Types::DataSource?
       attr_accessor started_before: Time?
       attr_accessor started_after: Time?
+      attr_accessor ruleset_name: String?
     end
 
     class DataQualityRulesetFilterCriteria
@@ -4527,6 +5152,27 @@ module Aws::Glue
       attr_accessor table_name: String?
       attr_accessor database_name: String?
       attr_accessor catalog_id: String?
+    end
+
+    class DataQualityTelemetry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vcpu_hours: Float,
+        ?flags_enabled: Hash[String, String],
+        ?library_version: String,
+        ?spark_version: String,
+        ?host_runtime_version: String,
+        ?engine: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vcpu_hours: Float?
+      attr_accessor flags_enabled: Hash[String, String]?
+      attr_accessor library_version: String?
+      attr_accessor spark_version: String?
+      attr_accessor host_runtime_version: String?
+      attr_accessor engine: String?
     end
 
     class DataSource
@@ -4692,6 +5338,78 @@ module Aws::Glue
       attr_accessor scale: Integer?
     end
 
+    class DeleteAssetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+    end
+
+    class DeleteAssetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteAssetTypeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+    end
+
+    class DeleteAssetTypeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteAttachmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_identifier: String,
+        ?iterable_form_name: String,
+        ?item_identifier: String,
+        ?attachment_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_identifier: String?
+      attr_accessor iterable_form_name: String?
+      attr_accessor item_identifier: String?
+      attr_accessor attachment_name: String?
+    end
+
+    class DeleteAttachmentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_identifier: String,
+        ?iterable_form_name: String,
+        ?item_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_identifier: String?
+      attr_accessor iterable_form_name: String?
+      attr_accessor item_identifier: String?
+    end
+
     module DeleteBehavior
       LOG: String
       DELETE_FROM_DATABASE: String
@@ -4820,11 +5538,13 @@ module Aws::Glue
       def initialize: (
         ?database_name: String,
         ?table_name: String,
+        ?catalog_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor database_name: String?
       attr_accessor table_name: String?
+      attr_accessor catalog_id: String?
     end
 
     class DeleteColumnStatisticsTaskSettingsResponse
@@ -4850,6 +5570,26 @@ module Aws::Glue
     end
 
     class DeleteConnectionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteConnectionTypeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_type: String?
+    end
+
+    class DeleteConnectionTypeResponse
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -4962,6 +5702,66 @@ module Aws::Glue
 
     end
 
+    class DeleteFormTypeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+    end
+
+    class DeleteFormTypeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteGlossaryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+    end
+
+    class DeleteGlossaryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteGlossaryTermRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+    end
+
+    class DeleteGlossaryTermResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
     class DeleteGlueIdentityCenterConfigurationRequest
       include Smithy::Schema::Structure
 
@@ -4989,6 +5789,26 @@ module Aws::Glue
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor integration_identifier: String?
+    end
+
+    class DeleteIntegrationResourcePropertyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class DeleteIntegrationResourcePropertyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
     end
 
     class DeleteIntegrationResponse
@@ -5498,6 +6318,7 @@ module Aws::Glue
         ?athena_connection_properties: Hash[String, Types::Property],
         ?python_connection_properties: Hash[String, Types::Property],
         ?spark_connection_properties: Hash[String, Types::Property],
+        ?rest_configuration: Types::RestConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -5512,6 +6333,7 @@ module Aws::Glue
       attr_accessor athena_connection_properties: Hash[String, Types::Property]?
       attr_accessor python_connection_properties: Hash[String, Types::Property]?
       attr_accessor spark_connection_properties: Hash[String, Types::Property]?
+      attr_accessor rest_configuration: Types::RestConfiguration?
     end
 
     class DescribeEntityRequest
@@ -5756,6 +6578,70 @@ module Aws::Glue
       attr_accessor database: String?
     end
 
+    class DisassociateGlossaryTermsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_identifier: String,
+        ?iterable_form_name: String,
+        ?item_identifier: String,
+        ?glossary_term_identifiers: Array[String],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_identifier: String?
+      attr_accessor iterable_form_name: String?
+      attr_accessor item_identifier: String?
+      attr_accessor glossary_term_identifiers: Array[String]?
+      attr_accessor client_token: String?
+    end
+
+    class DisassociateGlossaryTermsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_identifier: String,
+        ?iterable_form_name: String,
+        ?item_identifier: String,
+        ?glossary_terms: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_identifier: String?
+      attr_accessor iterable_form_name: String?
+      attr_accessor item_identifier: String?
+      attr_accessor glossary_terms: Array[String]?
+    end
+
+    class DistributionData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bin_edges: Array[String],
+        ?count: Array[Integer],
+        ?data_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bin_edges: Array[String]?
+      attr_accessor count: Array[Integer]?
+      attr_accessor data_type: String?
+    end
+
+    class DistributionResultsOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?write_distribution_results_enabled: bool,
+        ?catalog_table_config: Types::CatalogTableConfigOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor write_distribution_results_enabled: bool?
+      attr_accessor catalog_table_config: Types::CatalogTableConfigOptions?
+    end
+
     class DoubleColumnStatisticsData
       include Smithy::Schema::Structure
 
@@ -5965,6 +6851,19 @@ module Aws::Glue
       attr_accessor custom_properties: Hash[String, String]?
     end
 
+    class EntityConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_configuration: Types::SourceConfiguration,
+        ?schema: Hash[String, Types::FieldDefinition],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_configuration: Types::SourceConfiguration?
+      attr_accessor schema: Hash[String, Types::FieldDefinition]?
+    end
+
     class EntityNotFoundException
       include Smithy::Schema::Structure
 
@@ -6118,6 +7017,19 @@ module Aws::Glue
       NONE: String
     end
 
+    class ExportEncryptionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sse_algorithm: String,
+        ?kms_key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sse_algorithm: String?
+      attr_accessor kms_key_arn: String?
+    end
+
     class ExportLabelsTaskRunProperties
       include Smithy::Schema::Structure
 
@@ -6127,6 +7039,36 @@ module Aws::Glue
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor output_s3_path: String?
+    end
+
+    module ExportSetting
+      ENABLED: String
+      DISABLED: String
+    end
+
+    module ExportStatus
+      ENABLING: String
+      ENABLED: String
+      DISABLING: String
+      DISABLED: String
+      FAILED: String
+    end
+
+    class ExtractedParameter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?default_value: String,
+        ?property_location: String,
+        ?value: Types::ResponseExtractionMapping,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor default_value: String?
+      attr_accessor property_location: String?
+      attr_accessor value: Types::ResponseExtractionMapping?
     end
 
     class FederatedCatalog
@@ -6288,6 +7230,33 @@ module Aws::Glue
       SHORT: String
       DOUBLE: String
       STRUCT: String
+      BINARY: String
+      UNION: String
+    end
+
+    class FieldDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?field_data_type: String,
+        ?response_date_format: String,
+        ?is_partitionable: bool,
+        ?is_nullable: bool,
+        ?is_queryable: bool,
+        ?is_orderable: bool,
+        ?filter_overrides: Types::FilterOverrides,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor field_data_type: String?
+      attr_accessor response_date_format: String?
+      attr_accessor is_partitionable: bool?
+      attr_accessor is_nullable: bool?
+      attr_accessor is_queryable: bool?
+      attr_accessor is_orderable: bool?
+      attr_accessor filter_overrides: Types::FilterOverrides?
     end
 
     module FieldFilterOperator
@@ -6344,6 +7313,27 @@ module Aws::Glue
       attr_accessor filters: Array[Types::FilterExpression]?
     end
 
+    class FilterConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filter_mode: String,
+        ?operator_mappings: Hash[String, String],
+        ?date_time_format: String,
+        ?strip_quotes: bool,
+        ?between_configuration: Types::BetweenConfiguration,
+        ?filter_string_configuration: Types::FilterStringConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filter_mode: String?
+      attr_accessor operator_mappings: Hash[String, String]?
+      attr_accessor date_time_format: String?
+      attr_accessor strip_quotes: bool?
+      attr_accessor between_configuration: Types::BetweenConfiguration?
+      attr_accessor filter_string_configuration: Types::FilterStringConfiguration?
+    end
+
     class FilterExpression
       include Smithy::Schema::Structure
 
@@ -6364,6 +7354,11 @@ module Aws::Glue
       OR: String
     end
 
+    module FilterMode
+      QUERY_PARAMS: String
+      FILTER_STRING: String
+    end
+
     module FilterOperation
       EQ: String
       LT: String
@@ -6381,6 +7376,38 @@ module Aws::Glue
       LE: String
       EQ: String
       NE: String
+    end
+
+    class FilterOverrides
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?field_name: String,
+        ?operator_mappings: Hash[String, String],
+        ?between_configuration: Types::BetweenConfiguration,
+        ?date_time_format: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor field_name: String?
+      attr_accessor operator_mappings: Hash[String, String]?
+      attr_accessor between_configuration: Types::BetweenConfiguration?
+      attr_accessor date_time_format: String?
+    end
+
+    class FilterStringConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_parameter_name: String,
+        ?quote_string_values: bool,
+        ?quote_character: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_parameter_name: String?
+      attr_accessor quote_string_values: bool?
+      attr_accessor quote_character: String?
     end
 
     class FilterValue
@@ -6452,6 +7479,91 @@ module Aws::Glue
       attr_accessor job_id: String?
       attr_accessor job_name: String?
       attr_accessor job_run_id: String?
+    end
+
+    class FormTypeItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+    end
+
+    module FunctionType
+      REGULAR_FUNCTION: String
+      AGGREGATE_FUNCTION: String
+      STORED_PROCEDURE: String
+    end
+
+    class GetAssetInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+    end
+
+    class GetAssetOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?description: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?asset_type_id: String,
+        ?glossary_terms: Array[String],
+        ?forms: Hash[String, Types::AssetFormEntry],
+        ?attachments: Hash[String, Types::AssetFormEntry],
+        ?iterable_forms: Hash[String, Types::IterableFormEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor asset_type_id: String?
+      attr_accessor glossary_terms: Array[String]?
+      attr_accessor forms: Hash[String, Types::AssetFormEntry]?
+      attr_accessor attachments: Hash[String, Types::AssetFormEntry]?
+      attr_accessor iterable_forms: Hash[String, Types::IterableFormEntry]?
+    end
+
+    class GetAssetTypeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+    end
+
+    class GetAssetTypeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?forms: Hash[String, Types::AssetTypeFormReference],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor forms: Hash[String, Types::AssetTypeFormReference]?
     end
 
     class GetBlueprintRequest
@@ -6585,6 +7697,7 @@ module Aws::Glue
         ?max_results: Integer,
         ?recursive: bool,
         ?include_root: bool,
+        ?has_databases: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -6593,6 +7706,7 @@ module Aws::Glue
       attr_accessor max_results: Integer?
       attr_accessor recursive: bool?
       attr_accessor include_root: bool?
+      attr_accessor has_databases: bool?
     end
 
     class GetCatalogsResponse
@@ -6748,6 +7862,7 @@ module Aws::Glue
         ?table_name: String,
         ?max_results: Integer,
         ?next_token: String,
+        ?catalog_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -6755,6 +7870,7 @@ module Aws::Glue
       attr_accessor table_name: String?
       attr_accessor max_results: Integer?
       attr_accessor next_token: String?
+      attr_accessor catalog_id: String?
     end
 
     class GetColumnStatisticsTaskRunsResponse
@@ -6776,11 +7892,13 @@ module Aws::Glue
       def initialize: (
         ?database_name: String,
         ?table_name: String,
+        ?catalog_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor database_name: String?
       attr_accessor table_name: String?
+      attr_accessor catalog_id: String?
     end
 
     class GetColumnStatisticsTaskSettingsResponse
@@ -6971,6 +8089,32 @@ module Aws::Glue
       attr_accessor context_words: Array[String]?
     end
 
+    class GetDashboardUrlRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_id: String,
+        ?resource_type: String,
+        ?request_origin: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor request_origin: String?
+    end
+
+    class GetDashboardUrlResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor url: String?
+    end
+
     class GetDataCatalogEncryptionSettingsRequest
       include Smithy::Schema::Structure
 
@@ -6991,6 +8135,36 @@ module Aws::Glue
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor data_catalog_encryption_settings: Types::DataCatalogEncryptionSettings?
+    end
+
+    class GetDataCatalogExportConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetDataCatalogExportConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?export_setting: String,
+        ?status: String,
+        ?encryption_configuration: Types::ExportEncryptionConfiguration,
+        ?s3_table_bucket_arn: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor export_setting: String?
+      attr_accessor status: String?
+      attr_accessor encryption_configuration: Types::ExportEncryptionConfiguration?
+      attr_accessor s3_table_bucket_arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
     end
 
     class GetDataQualityModelRequest
@@ -7099,6 +8273,58 @@ module Aws::Glue
       attr_accessor aggregated_metrics: Types::DataQualityAggregatedMetrics?
     end
 
+    class GetDataQualityResultV2Request
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?result_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor result_id: String?
+    end
+
+    class GetDataQualityResultV2Response
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?result_id: String,
+        ?data_source: Types::DataSource,
+        ?profile_id: String,
+        ?dimensions: Hash[String, String],
+        ?tags: Hash[String, String],
+        ?execution_started_on: Time,
+        ?execution_completed_on: Time,
+        ?result_published_on: Time,
+        ?score: Float,
+        ?rule_results: Array[Types::DataQualityRuleResult],
+        ?analyzer_results: Array[Types::DataQualityAnalyzerResult],
+        ?observations: Array[Types::DataQualityObservation],
+        ?evaluation_context: String,
+        ?descriptors: Hash[String, String],
+        ?aggregated_metrics: Types::DataQualityAggregatedMetrics,
+        ?ruleset_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor result_id: String?
+      attr_accessor data_source: Types::DataSource?
+      attr_accessor profile_id: String?
+      attr_accessor dimensions: Hash[String, String]?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor execution_started_on: Time?
+      attr_accessor execution_completed_on: Time?
+      attr_accessor result_published_on: Time?
+      attr_accessor score: Float?
+      attr_accessor rule_results: Array[Types::DataQualityRuleResult]?
+      attr_accessor analyzer_results: Array[Types::DataQualityAnalyzerResult]?
+      attr_accessor observations: Array[Types::DataQualityObservation]?
+      attr_accessor evaluation_context: String?
+      attr_accessor descriptors: Hash[String, String]?
+      attr_accessor aggregated_metrics: Types::DataQualityAggregatedMetrics?
+      attr_accessor ruleset_name: String?
+    end
+
     class GetDataQualityRuleRecommendationRunRequest
       include Smithy::Schema::Structure
 
@@ -7128,6 +8354,8 @@ module Aws::Glue
         ?recommended_ruleset: String,
         ?created_ruleset_name: String,
         ?data_quality_security_configuration: String,
+        ?additional_run_options: Types::DataQualityRuleRecommendationRunAdditionalRunOptions,
+        ?recommendation_mode: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -7145,6 +8373,8 @@ module Aws::Glue
       attr_accessor recommended_ruleset: String?
       attr_accessor created_ruleset_name: String?
       attr_accessor data_quality_security_configuration: String?
+      attr_accessor additional_run_options: Types::DataQualityRuleRecommendationRunAdditionalRunOptions?
+      attr_accessor recommendation_mode: String?
     end
 
     class GetDataQualityRulesetEvaluationRunRequest
@@ -7403,6 +8633,88 @@ module Aws::Glue
       attr_accessor next_token: String?
     end
 
+    class GetFormTypeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+    end
+
+    class GetFormTypeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?schema: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor schema: String?
+    end
+
+    class GetGlossaryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+    end
+
+    class GetGlossaryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+    end
+
+    class GetGlossaryTermRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+    end
+
+    class GetGlossaryTermResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?glossary_id: String,
+        ?name: String,
+        ?short_description: String,
+        ?long_description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor glossary_id: String?
+      attr_accessor name: String?
+      attr_accessor short_description: String?
+      attr_accessor long_description: String?
+    end
+
     class GetGlueIdentityCenterConfigurationRequest
       include Smithy::Schema::Structure
 
@@ -7419,12 +8731,14 @@ module Aws::Glue
         ?application_arn: String,
         ?instance_arn: String,
         ?scopes: Array[String],
+        ?user_background_sessions_enabled: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor application_arn: String?
       attr_accessor instance_arn: String?
       attr_accessor scopes: Array[String]?
+      attr_accessor user_background_sessions_enabled: bool?
     end
 
     class GetIntegrationResourcePropertyRequest
@@ -7443,12 +8757,14 @@ module Aws::Glue
 
       def initialize: (
         ?resource_arn: String,
+        ?resource_property_arn: String,
         ?source_processing_properties: Types::SourceProcessingProperties,
         ?target_processing_properties: Types::TargetProcessingProperties,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor resource_arn: String?
+      attr_accessor resource_property_arn: String?
       attr_accessor source_processing_properties: Types::SourceProcessingProperties?
       attr_accessor target_processing_properties: Types::TargetProcessingProperties?
     end
@@ -7797,6 +9113,30 @@ module Aws::Glue
       attr_accessor mapping: Array[Types::MappingEntry]?
     end
 
+    class GetMaterializedViewRefreshTaskRunRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog_id: String,
+        ?materialized_view_refresh_task_run_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog_id: String?
+      attr_accessor materialized_view_refresh_task_run_id: String?
+    end
+
+    class GetMaterializedViewRefreshTaskRunResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?materialized_view_refresh_task_run: Types::MaterializedViewRefreshTaskRun,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor materialized_view_refresh_task_run: Types::MaterializedViewRefreshTaskRun?
+    end
+
     class GetPartitionIndexesRequest
       include Smithy::Schema::Structure
 
@@ -7835,6 +9175,7 @@ module Aws::Glue
         ?database_name: String,
         ?table_name: String,
         ?partition_values: Array[String],
+        ?audit_context: Types::AuditContext,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -7842,6 +9183,7 @@ module Aws::Glue
       attr_accessor database_name: String?
       attr_accessor table_name: String?
       attr_accessor partition_values: Array[String]?
+      attr_accessor audit_context: Types::AuditContext?
     end
 
     class GetPartitionResponse
@@ -7869,6 +9211,7 @@ module Aws::Glue
         ?exclude_column_schema: bool,
         ?transaction_id: String,
         ?query_as_of_time: Time,
+        ?audit_context: Types::AuditContext,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -7882,6 +9225,7 @@ module Aws::Glue
       attr_accessor exclude_column_schema: bool?
       attr_accessor transaction_id: String?
       attr_accessor query_as_of_time: Time?
+      attr_accessor audit_context: Types::AuditContext?
     end
 
     class GetPartitionsResponse
@@ -8209,6 +9553,28 @@ module Aws::Glue
       attr_accessor next_token: String?
     end
 
+    class GetSessionEndpointRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_id: String?
+    end
+
+    class GetSessionEndpointResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?spark_connect: Types::SessionEndpoint,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor spark_connect: Types::SessionEndpoint?
+    end
+
     class GetSessionRequest
       include Smithy::Schema::Structure
 
@@ -8259,6 +9625,52 @@ module Aws::Glue
       attr_accessor statement: Types::Statement?
     end
 
+    class GetSystemLogsForJobRunRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_name: String,
+        ?run_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_name: String?
+      attr_accessor run_id: String?
+    end
+
+    class GetSystemLogsForJobRunResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?system_logs_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor system_logs_url: String?
+    end
+
+    class GetSystemLogsForSessionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class GetSystemLogsForSessionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?system_logs_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor system_logs_url: String?
+    end
+
     class GetTableOptimizerRequest
       include Smithy::Schema::Structure
 
@@ -8302,7 +9714,9 @@ module Aws::Glue
         ?name: String,
         ?transaction_id: String,
         ?query_as_of_time: Time,
+        ?audit_context: Types::AuditContext,
         ?include_status_details: bool,
+        ?attributes_to_get: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -8311,7 +9725,9 @@ module Aws::Glue
       attr_accessor name: String?
       attr_accessor transaction_id: String?
       attr_accessor query_as_of_time: Time?
+      attr_accessor audit_context: Types::AuditContext?
       attr_accessor include_status_details: bool?
+      attr_accessor attributes_to_get: Array[String]?
     end
 
     class GetTableResponse
@@ -8333,6 +9749,7 @@ module Aws::Glue
         ?database_name: String,
         ?table_name: String,
         ?version_id: String,
+        ?audit_context: Types::AuditContext,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -8340,6 +9757,7 @@ module Aws::Glue
       attr_accessor database_name: String?
       attr_accessor table_name: String?
       attr_accessor version_id: String?
+      attr_accessor audit_context: Types::AuditContext?
     end
 
     class GetTableVersionResponse
@@ -8362,6 +9780,7 @@ module Aws::Glue
         ?table_name: String,
         ?next_token: String,
         ?max_results: Integer,
+        ?audit_context: Types::AuditContext,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -8370,6 +9789,7 @@ module Aws::Glue
       attr_accessor table_name: String?
       attr_accessor next_token: String?
       attr_accessor max_results: Integer?
+      attr_accessor audit_context: Types::AuditContext?
     end
 
     class GetTableVersionsResponse
@@ -8396,6 +9816,8 @@ module Aws::Glue
         ?max_results: Integer,
         ?transaction_id: String,
         ?query_as_of_time: Time,
+        ?audit_context: Types::AuditContext,
+        ?resource_share_type: String,
         ?include_status_details: bool,
         ?attributes_to_get: Array[String],
       ) -> void
@@ -8408,6 +9830,8 @@ module Aws::Glue
       attr_accessor max_results: Integer?
       attr_accessor transaction_id: String?
       attr_accessor query_as_of_time: Time?
+      attr_accessor audit_context: Types::AuditContext?
+      attr_accessor resource_share_type: String?
       attr_accessor include_status_details: bool?
       attr_accessor attributes_to_get: Array[String]?
     end
@@ -8622,6 +10046,7 @@ module Aws::Glue
         ?cell_filters: Array[Types::ColumnRowFilter],
         ?query_authorization_id: String,
         ?is_multi_dialect_view: bool,
+        ?is_materialized_view: bool,
         ?resource_arn: String,
         ?is_protected: bool,
         ?permissions: Array[String],
@@ -8635,6 +10060,7 @@ module Aws::Glue
       attr_accessor cell_filters: Array[Types::ColumnRowFilter]?
       attr_accessor query_authorization_id: String?
       attr_accessor is_multi_dialect_view: bool?
+      attr_accessor is_materialized_view: bool?
       attr_accessor resource_arn: String?
       attr_accessor is_protected: bool?
       attr_accessor permissions: Array[String]?
@@ -8704,6 +10130,7 @@ module Aws::Glue
         ?catalog_id: String,
         ?database_name: String,
         ?pattern: String,
+        ?function_type: String,
         ?next_token: String,
         ?max_results: Integer,
       ) -> void
@@ -8712,6 +10139,7 @@ module Aws::Glue
       attr_accessor catalog_id: String?
       attr_accessor database_name: String?
       attr_accessor pattern: String?
+      attr_accessor function_type: String?
       attr_accessor next_token: String?
       attr_accessor max_results: Integer?
     end
@@ -8833,6 +10261,36 @@ module Aws::Glue
       attr_accessor next_token: String?
     end
 
+    class GlossaryItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+    end
+
+    class GlossaryTermItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?short_description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor short_description: String?
+    end
+
     class GlueEncryptionException
       include Smithy::Schema::Structure
 
@@ -8872,6 +10330,11 @@ module Aws::Glue
       BYTE: String
       SHORT: String
       DOUBLE: String
+    end
+
+    module GlueResourceType
+      JOB: String
+      SESSION: String
     end
 
     class GlueSchema
@@ -8997,6 +10460,11 @@ module Aws::Glue
       attr_accessor logical_operator: String?
     end
 
+    module HTTPMethod
+      GET: String
+      POST: String
+    end
+
     class HudiTarget
       include Smithy::Schema::Structure
 
@@ -9057,6 +10525,23 @@ module Aws::Glue
       attr_accessor dpu_hours: Float?
       attr_accessor number_of_dpus: Integer?
       attr_accessor job_duration_in_hour: Float?
+    end
+
+    class IcebergEncryptedKey
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_id: String,
+        ?encrypted_key_metadata: String,
+        ?encrypted_by_id: String,
+        ?properties: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_id: String?
+      attr_accessor encrypted_key_metadata: String?
+      attr_accessor encrypted_by_id: String?
+      attr_accessor properties: Hash[String, String]?
     end
 
     class IcebergInput
@@ -9276,6 +10761,8 @@ module Aws::Glue
         ?type: Smithy::Schema::document,
         ?required: bool,
         ?doc: String,
+        ?initial_default: Smithy::Schema::document,
+        ?write_default: Smithy::Schema::document,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -9284,10 +10771,45 @@ module Aws::Glue
       attr_accessor type: Smithy::Schema::document?
       attr_accessor required: bool?
       attr_accessor doc: String?
+      attr_accessor initial_default: Smithy::Schema::document?
+      attr_accessor write_default: Smithy::Schema::document?
     end
 
     module IcebergStructTypeEnum
       STRUCT: String
+    end
+
+    class IcebergTableMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?format_version: String,
+        ?table_uuid: String,
+        ?location: String,
+        ?properties: Hash[String, String],
+        ?schemas: Array[Types::IcebergSchema],
+        ?current_schema_id: Integer,
+        ?last_column_id: Integer,
+        ?partition_specs: Array[Types::IcebergPartitionSpec],
+        ?default_spec_id: Integer,
+        ?last_partition_id: Integer,
+        ?sort_orders: Array[Types::IcebergSortOrder],
+        ?default_sort_order_id: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor format_version: String?
+      attr_accessor table_uuid: String?
+      attr_accessor location: String?
+      attr_accessor properties: Hash[String, String]?
+      attr_accessor schemas: Array[Types::IcebergSchema]?
+      attr_accessor current_schema_id: Integer?
+      attr_accessor last_column_id: Integer?
+      attr_accessor partition_specs: Array[Types::IcebergPartitionSpec]?
+      attr_accessor default_spec_id: Integer?
+      attr_accessor last_partition_id: Integer?
+      attr_accessor sort_orders: Array[Types::IcebergSortOrder]?
+      attr_accessor default_sort_order_id: Integer?
     end
 
     class IcebergTableUpdate
@@ -9299,6 +10821,9 @@ module Aws::Glue
         ?sort_order: Types::IcebergSortOrder,
         ?location: String,
         ?properties: Hash[String, String],
+        ?action: String,
+        ?encryption_key: Types::IcebergEncryptedKey,
+        ?key_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -9307,6 +10832,9 @@ module Aws::Glue
       attr_accessor sort_order: Types::IcebergSortOrder?
       attr_accessor location: String?
       attr_accessor properties: Hash[String, String]?
+      attr_accessor action: String?
+      attr_accessor encryption_key: Types::IcebergEncryptedKey?
+      attr_accessor key_id: String?
     end
 
     class IcebergTarget
@@ -9331,6 +10859,20 @@ module Aws::Glue
       LZO: String
       UNCOMPRESSED: String
       SNAPPY: String
+    end
+
+    module IcebergUpdateAction
+      ADD_SCHEMA: String
+      SET_CURRENT_SCHEMA: String
+      ADD_SPEC: String
+      SET_DEFAULT_SPEC: String
+      ADD_SORT_ORDER: String
+      SET_DEFAULT_SORT_ORDER: String
+      SET_LOCATION: String
+      SET_PROPERTIES: String
+      REMOVE_PROPERTIES: String
+      ADD_ENCRYPTION_KEY: String
+      REMOVE_ENCRYPTION_KEY: String
     end
 
     class IdempotentParameterMismatchException
@@ -9480,12 +11022,14 @@ module Aws::Glue
         ?refresh_interval: String,
         ?source_properties: Hash[String, String],
         ?continuous_sync: bool,
+        ?target_namespace: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor refresh_interval: String?
       attr_accessor source_properties: Hash[String, String]?
       attr_accessor continuous_sync: bool?
+      attr_accessor target_namespace: String?
     end
 
     class IntegrationConflictOperationFault
@@ -9562,6 +11106,36 @@ module Aws::Glue
       attr_accessor message: String?
     end
 
+    class IntegrationResourceProperty
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?resource_property_arn: String,
+        ?source_processing_properties: Types::SourceProcessingProperties,
+        ?target_processing_properties: Types::TargetProcessingProperties,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor resource_property_arn: String?
+      attr_accessor source_processing_properties: Types::SourceProcessingProperties?
+      attr_accessor target_processing_properties: Types::TargetProcessingProperties?
+    end
+
+    class IntegrationResourcePropertyFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
     module IntegrationStatus
       CREATING: String
       ACTIVE: String
@@ -9570,6 +11144,40 @@ module Aws::Glue
       DELETING: String
       SYNCING: String
       NEEDS_ATTENTION: String
+    end
+
+    class IntegrationTableProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?table_name: String,
+        ?source_table_config: Types::SourceTableConfig,
+        ?target_table_config: Types::TargetTableConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor table_name: String?
+      attr_accessor source_table_config: Types::SourceTableConfig?
+      attr_accessor target_table_config: Types::TargetTableConfig?
+    end
+
+    class IntegrationTablePropertiesFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    module IntegrationType
+      REST: String
     end
 
     class InternalServerException
@@ -9627,6 +11235,68 @@ module Aws::Glue
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    class ItemError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?item_identifier: String,
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor item_identifier: String?
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class IterableFormEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?form_type_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor form_type_id: String?
+    end
+
+    class IterableFormItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?item_id: String,
+        ?item_name: String,
+        ?glossary_terms: Array[String],
+        ?forms: Hash[String, Types::AssetFormEntry],
+        ?attachments: Hash[String, Types::AssetFormEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor item_id: String?
+      attr_accessor item_name: String?
+      attr_accessor glossary_terms: Array[String]?
+      attr_accessor forms: Hash[String, Types::AssetFormEntry]?
+      attr_accessor attachments: Hash[String, Types::AssetFormEntry]?
+    end
+
+    class IterableFormListItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?item_id: String,
+        ?item_name: String,
+        ?description: String,
+        ?glossary_terms: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor item_id: String?
+      attr_accessor item_name: String?
+      attr_accessor description: String?
+      attr_accessor glossary_terms: Array[String]?
     end
 
     module JDBCConnectionType
@@ -9752,6 +11422,25 @@ module Aws::Glue
       TINYINT: String
       VARBINARY: String
       VARCHAR: String
+    end
+
+    class JWTBearerProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?token_url: Types::ConnectorProperty,
+        ?request_method: String,
+        ?content_type: String,
+        ?jwt_token: Types::ConnectorProperty,
+        ?token_url_parameters: Array[Types::ConnectorProperty],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor token_url: Types::ConnectorProperty?
+      attr_accessor request_method: String?
+      attr_accessor content_type: String?
+      attr_accessor jwt_token: Types::ConnectorProperty?
+      attr_accessor token_url_parameters: Array[Types::ConnectorProperty]?
     end
 
     module JdbcMetadataEntry
@@ -10308,6 +11997,11 @@ module Aws::Glue
       FAILED: String
     end
 
+    module LastRefreshType
+      FULL: String
+      INCREMENTAL: String
+    end
+
     class LineageConfiguration
       include Smithy::Schema::Structure
 
@@ -10317,6 +12011,32 @@ module Aws::Glue
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor crawler_lineage_settings: String?
+    end
+
+    class ListAssetTypesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListAssetTypesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::AssetTypeItem],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::AssetTypeItem]?
+      attr_accessor next_token: String?
     end
 
     class ListBlueprintsRequest
@@ -10513,6 +12233,34 @@ module Aws::Glue
       attr_accessor next_token: String?
     end
 
+    class ListDataQualityResultsV2Request
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filter: Types::DataQualityResultsV2FilterCriteria,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filter: Types::DataQualityResultsV2FilterCriteria?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListDataQualityResultsV2Response
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?results: Array[Types::DataQualityResultsV2Description],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor results: Array[Types::DataQualityResultsV2Description]?
+      attr_accessor next_token: String?
+    end
+
     class ListDataQualityRuleRecommendationRunsRequest
       include Smithy::Schema::Structure
 
@@ -10520,12 +12268,14 @@ module Aws::Glue
         ?filter: Types::DataQualityRuleRecommendationRunFilter,
         ?next_token: String,
         ?max_results: Integer,
+        ?tags: Hash[String, String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor filter: Types::DataQualityRuleRecommendationRunFilter?
       attr_accessor next_token: String?
       attr_accessor max_results: Integer?
+      attr_accessor tags: Hash[String, String]?
     end
 
     class ListDataQualityRuleRecommendationRunsResponse
@@ -10723,6 +12473,172 @@ module Aws::Glue
       attr_accessor next_token: String?
     end
 
+    class ListFormTypesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListFormTypesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::FormTypeItem],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::FormTypeItem]?
+      attr_accessor next_token: String?
+    end
+
+    class ListGlossariesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListGlossariesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::GlossaryItem],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::GlossaryItem]?
+      attr_accessor next_token: String?
+    end
+
+    class ListGlossaryTermsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?glossary_identifier: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor glossary_identifier: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListGlossaryTermsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::GlossaryTermItem],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::GlossaryTermItem]?
+      attr_accessor next_token: String?
+    end
+
+    class ListIntegrationResourcePropertiesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?marker: String,
+        ?filters: Array[Types::IntegrationResourcePropertyFilter],
+        ?max_records: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor marker: String?
+      attr_accessor filters: Array[Types::IntegrationResourcePropertyFilter]?
+      attr_accessor max_records: Integer?
+    end
+
+    class ListIntegrationResourcePropertiesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?integration_resource_property_list: Array[Types::IntegrationResourceProperty],
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor integration_resource_property_list: Array[Types::IntegrationResourceProperty]?
+      attr_accessor marker: String?
+    end
+
+    class ListIntegrationTablePropertiesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?marker: String,
+        ?filters: Array[Types::IntegrationTablePropertiesFilter],
+        ?max_records: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor marker: String?
+      attr_accessor filters: Array[Types::IntegrationTablePropertiesFilter]?
+      attr_accessor max_records: Integer?
+    end
+
+    class ListIntegrationTablePropertiesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?integration_table_properties_list: Array[Types::IntegrationTableProperties],
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor integration_table_properties_list: Array[Types::IntegrationTableProperties]?
+      attr_accessor marker: String?
+    end
+
+    class ListIterableFormsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_identifier: String,
+        ?iterable_form_name: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_identifier: String?
+      attr_accessor iterable_form_name: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListIterableFormsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::IterableFormListItem],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::IterableFormListItem]?
+      attr_accessor next_token: String?
+    end
+
     class ListJobsRequest
       include Smithy::Schema::Structure
 
@@ -10780,6 +12696,38 @@ module Aws::Glue
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor transform_ids: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListMaterializedViewRefreshTaskRunsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog_id: String,
+        ?database_name: String,
+        ?table_name: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog_id: String?
+      attr_accessor database_name: String?
+      attr_accessor table_name: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListMaterializedViewRefreshTaskRunsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?materialized_view_refresh_task_runs: Array[Types::MaterializedViewRefreshTaskRun],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor materialized_view_refresh_task_runs: Array[Types::MaterializedViewRefreshTaskRun]?
       attr_accessor next_token: String?
     end
 
@@ -11206,6 +13154,91 @@ module Aws::Glue
       attr_accessor target_type: String?
     end
 
+    module MaterializedViewRefreshState
+      STARTING: String
+      RUNNING: String
+      SUCCEEDED: String
+      FAILED: String
+      STOPPED: String
+    end
+
+    class MaterializedViewRefreshTaskNotRunningException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class MaterializedViewRefreshTaskRun
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?customer_id: String,
+        ?materialized_view_refresh_task_run_id: String,
+        ?database_name: String,
+        ?table_name: String,
+        ?catalog_id: String,
+        ?role: String,
+        ?status: String,
+        ?creation_time: Time,
+        ?last_updated: Time,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?error_message: String,
+        ?dpu_seconds: Float,
+        ?refresh_type: String,
+        ?processed_bytes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor customer_id: String?
+      attr_accessor materialized_view_refresh_task_run_id: String?
+      attr_accessor database_name: String?
+      attr_accessor table_name: String?
+      attr_accessor catalog_id: String?
+      attr_accessor role: String?
+      attr_accessor status: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_updated: Time?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor error_message: String?
+      attr_accessor dpu_seconds: Float?
+      attr_accessor refresh_type: String?
+      attr_accessor processed_bytes: Integer?
+    end
+
+    class MaterializedViewRefreshTaskRunningException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class MaterializedViewRefreshTaskStoppingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module MaterializedViewRefreshType
+      FULL: String
+      INCREMENTAL: String
+    end
+
     class Merge
       include Smithy::Schema::Structure
 
@@ -11516,6 +13549,7 @@ module Aws::Glue
       AUTHORIZATION_CODE: String
       CLIENT_CREDENTIALS: String
       JWT_BEARER: String
+      REFRESH_TOKEN: String
     end
 
     class OAuth2Properties
@@ -11554,6 +13588,42 @@ module Aws::Glue
       attr_accessor token_url_parameters_map: Hash[String, String]?
       attr_accessor authorization_code_properties: Types::AuthorizationCodeProperties?
       attr_accessor o_auth2_credentials: Types::OAuth2Credentials?
+    end
+
+    module ObservationConfiguration
+      ALL: String
+      NONE: String
+    end
+
+    module ObservationMode
+      SCHEDULED: String
+      FIXED: String
+    end
+
+    class ObservationResultsOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?write_observation_results_enabled: bool,
+        ?catalog_table_config: Types::CatalogTableConfigOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor write_observation_results_enabled: bool?
+      attr_accessor catalog_table_config: Types::CatalogTableConfigOptions?
+    end
+
+    class OffsetConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?offset_parameter: Types::ExtractedParameter,
+        ?limit_parameter: Types::ExtractedParameter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor offset_parameter: Types::ExtractedParameter?
+      attr_accessor limit_parameter: Types::ExtractedParameter?
     end
 
     class OpenTableFormatInput
@@ -11684,6 +13754,11 @@ module Aws::Glue
       attr_accessor created_time: String?
     end
 
+    module OverwriteChildResourcePermissionsWithDefaultEnum
+      Accept: String
+      Deny: String
+    end
+
     class PIIDetection
       include Smithy::Schema::Structure
 
@@ -11721,6 +13796,19 @@ module Aws::Glue
       attr_accessor num_right_chars_to_exclude: Integer?
       attr_accessor detection_parameters: String?
       attr_accessor detection_sensitivity: String?
+    end
+
+    class PaginationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cursor_configuration: Types::CursorConfiguration,
+        ?offset_configuration: Types::OffsetConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cursor_configuration: Types::CursorConfiguration?
+      attr_accessor offset_configuration: Types::OffsetConfiguration?
     end
 
     module ParamType
@@ -11995,6 +14083,21 @@ module Aws::Glue
       attr_accessor job_configuration: Hash[String, Types::ConfigurationObject]?
     end
 
+    class ProfilingResultsOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?write_profiling_results_enabled: bool,
+        ?catalog_table_config: Types::CatalogTableConfigOptions,
+        ?distribution_results: Types::DistributionResultsOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor write_profiling_results_enabled: bool?
+      attr_accessor catalog_table_config: Types::CatalogTableConfigOptions?
+      attr_accessor distribution_results: Types::DistributionResultsOptions?
+    end
+
     class Property
       include Smithy::Schema::Structure
 
@@ -12006,6 +14109,8 @@ module Aws::Glue
         ?property_types: Array[String],
         ?allowed_values: Array[Types::AllowedValue],
         ?data_operation_scopes: Array[String],
+        ?key_override: String,
+        ?property_location: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -12016,6 +14121,15 @@ module Aws::Glue
       attr_accessor property_types: Array[String]?
       attr_accessor allowed_values: Array[Types::AllowedValue]?
       attr_accessor data_operation_scopes: Array[String]?
+      attr_accessor key_override: String?
+      attr_accessor property_location: String?
+    end
+
+    module PropertyLocation
+      HEADER: String
+      BODY: String
+      QUERY_PARAM: String
+      PATH: String
     end
 
     class PropertyPredicate
@@ -12041,6 +14155,172 @@ module Aws::Glue
       SECRET_OR_USER_INPUT: String
     end
 
+    class PublishDataQualityResultV2Request
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dimensions: Hash[String, String],
+        ?tags: Hash[String, String],
+        ?execution_started_on: Time,
+        ?execution_completed_on: Time,
+        ?score: Float,
+        ?rule_results: Array[Types::DataQualityRuleResult],
+        ?analyzer_results: Array[Types::DataQualityAnalyzerResult],
+        ?observations: Array[Types::DataQualityObservation],
+        ?aggregated_metrics: Types::DataQualityAggregatedMetrics,
+        ?statistics: Array[Types::StatisticSummary],
+        ?run_configuration: Types::DataQualityConfigurationV2,
+        ?client_token: String,
+        ?evaluation_context: String,
+        ?descriptors: Hash[String, String],
+        ?ruleset_name: String,
+        ?data_quality_security_configuration: String,
+        ?telemetry: Types::DataQualityTelemetry,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dimensions: Hash[String, String]?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor execution_started_on: Time?
+      attr_accessor execution_completed_on: Time?
+      attr_accessor score: Float?
+      attr_accessor rule_results: Array[Types::DataQualityRuleResult]?
+      attr_accessor analyzer_results: Array[Types::DataQualityAnalyzerResult]?
+      attr_accessor observations: Array[Types::DataQualityObservation]?
+      attr_accessor aggregated_metrics: Types::DataQualityAggregatedMetrics?
+      attr_accessor statistics: Array[Types::StatisticSummary]?
+      attr_accessor run_configuration: Types::DataQualityConfigurationV2?
+      attr_accessor client_token: String?
+      attr_accessor evaluation_context: String?
+      attr_accessor descriptors: Hash[String, String]?
+      attr_accessor ruleset_name: String?
+      attr_accessor data_quality_security_configuration: String?
+      attr_accessor telemetry: Types::DataQualityTelemetry?
+    end
+
+    class PublishDataQualityResultV2Response
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?result_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor result_id: String?
+    end
+
+    class PutAssetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_type_id: String,
+        ?identifier: String,
+        ?name: String,
+        ?description: String,
+        ?forms: Hash[String, Types::AssetFormEntry],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_type_id: String?
+      attr_accessor identifier: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor forms: Hash[String, Types::AssetFormEntry]?
+      attr_accessor client_token: String?
+    end
+
+    class PutAssetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?description: String,
+        ?created_at: Time,
+        ?forms: Hash[String, Types::AssetFormEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor created_at: Time?
+      attr_accessor forms: Hash[String, Types::AssetFormEntry]?
+    end
+
+    class PutAssetTypeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?forms: Hash[String, Types::AssetTypeFormReference],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor forms: Hash[String, Types::AssetTypeFormReference]?
+      attr_accessor client_token: String?
+    end
+
+    class PutAssetTypeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?forms: Hash[String, Types::AssetTypeFormReference],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor forms: Hash[String, Types::AssetTypeFormReference]?
+    end
+
+    class PutAttachmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_identifier: String,
+        ?iterable_form_name: String,
+        ?item_identifier: String,
+        ?attachment_name: String,
+        ?content: String,
+        ?form_type_id: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_identifier: String?
+      attr_accessor iterable_form_name: String?
+      attr_accessor item_identifier: String?
+      attr_accessor attachment_name: String?
+      attr_accessor content: String?
+      attr_accessor form_type_id: String?
+      attr_accessor client_token: String?
+    end
+
+    class PutAttachmentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_identifier: String,
+        ?iterable_form_name: String,
+        ?item_identifier: String,
+        ?attachment_name: String,
+        ?form_type_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_identifier: String?
+      attr_accessor iterable_form_name: String?
+      attr_accessor item_identifier: String?
+      attr_accessor attachment_name: String?
+      attr_accessor form_type_id: String?
+    end
+
     class PutDataCatalogEncryptionSettingsRequest
       include Smithy::Schema::Structure
 
@@ -12063,6 +14343,34 @@ module Aws::Glue
 
     end
 
+    class PutDataCatalogExportConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?export_setting: String,
+        ?encryption_configuration: Types::ExportEncryptionConfiguration,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor export_setting: String?
+      attr_accessor encryption_configuration: Types::ExportEncryptionConfiguration?
+      attr_accessor client_token: String?
+    end
+
+    class PutDataCatalogExportConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?export_setting: String,
+        ?encryption_configuration: Types::ExportEncryptionConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor export_setting: String?
+      attr_accessor encryption_configuration: Types::ExportEncryptionConfiguration?
+    end
+
     class PutDataQualityProfileAnnotationRequest
       include Smithy::Schema::Structure
 
@@ -12083,6 +14391,36 @@ module Aws::Glue
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+    end
+
+    class PutFormTypeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?schema: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor schema: String?
+      attr_accessor client_token: String?
+    end
+
+    class PutFormTypeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?schema: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor schema: String?
     end
 
     class PutResourcePolicyRequest
@@ -12243,6 +14581,17 @@ module Aws::Glue
       DISABLED: String
     end
 
+    class RLSProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?default_rls_policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor default_rls_policy: String?
+    end
+
     class Recipe
       include Smithy::Schema::Structure
 
@@ -12297,6 +14646,11 @@ module Aws::Glue
 
       attr_accessor action: Types::RecipeAction?
       attr_accessor condition_expressions: Array[Types::ConditionExpression]?
+    end
+
+    module RecommendationMode
+      BASIC: String
+      ADVANCED: String
     end
 
     module RecrawlBehavior
@@ -12356,6 +14710,40 @@ module Aws::Glue
       attr_accessor redshift_tmp_dir: String?
       attr_accessor tmp_dir_iam_role: String?
       attr_accessor upsert_redshift_options: Types::UpsertRedshiftTargetOptions?
+    end
+
+    class RegisterConnectionTypeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_type: String,
+        ?integration_type: String,
+        ?description: String,
+        ?connection_properties: Types::ConnectionPropertiesConfiguration,
+        ?connector_authentication_configuration: Types::ConnectorAuthenticationConfiguration,
+        ?rest_configuration: Types::RestConfiguration,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_type: String?
+      attr_accessor integration_type: String?
+      attr_accessor description: String?
+      attr_accessor connection_properties: Types::ConnectionPropertiesConfiguration?
+      attr_accessor connector_authentication_configuration: Types::ConnectorAuthenticationConfiguration?
+      attr_accessor rest_configuration: Types::RestConfiguration?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class RegisterConnectionTypeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_type_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_type_arn: String?
     end
 
     class RegisterSchemaVersionInput
@@ -12594,6 +14982,53 @@ module Aws::Glue
       attr_accessor uri: String?
     end
 
+    class ResponseConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?result_path: String,
+        ?error_path: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor result_path: String?
+      attr_accessor error_path: String?
+    end
+
+    class ResponseExtractionMapping
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content_path: String,
+        ?header_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content_path: String?
+      attr_accessor header_key: String?
+    end
+
+    class RestConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_source_configuration: Types::SourceConfiguration,
+        ?validation_endpoint_configuration: Types::SourceConfiguration,
+        ?entity_configurations: Hash[String, Types::EntityConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_source_configuration: Types::SourceConfiguration?
+      attr_accessor validation_endpoint_configuration: Types::SourceConfiguration?
+      attr_accessor entity_configurations: Hash[String, Types::EntityConfiguration]?
+    end
+
+    module ResultTypeEnum
+      ALL: String
+      PASSED_ONLY: String
+      FAILED_ONLY: String
+    end
+
     class ResumeWorkflowRunRequest
       include Smithy::Schema::Structure
 
@@ -12657,6 +15092,21 @@ module Aws::Glue
       attr_accessor name: String?
       attr_accessor inputs: Array[String]?
       attr_accessor group_filters_list: Array[Types::GroupFilters]?
+    end
+
+    class RowLevelResultsOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_rows_to_write: Integer,
+        ?result_type: String,
+        ?catalog_table_config: Types::CatalogTableConfigOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_rows_to_write: Integer?
+      attr_accessor result_type: String?
+      attr_accessor catalog_table_config: Types::CatalogTableConfigOptions?
     end
 
     class RunIdentifier
@@ -13517,6 +15967,178 @@ module Aws::Glue
       DELETING: String
     end
 
+    class SearchAssetsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?search_text: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?sort: Types::SearchSort,
+        ?filter_clause: Types::SearchFilterClause,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor search_text: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor sort: Types::SearchSort?
+      attr_accessor filter_clause: Types::SearchFilterClause?
+    end
+
+    class SearchAssetsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::SearchResultItem],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::SearchResultItem]?
+      attr_accessor next_token: String?
+    end
+
+    class SearchAttributeFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attribute: String,
+        ?operator: String,
+        ?value: Types::SearchFilterValue,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute: String?
+      attr_accessor operator: String?
+      attr_accessor value: Types::SearchFilterValue?
+    end
+
+    class SearchFilterClause
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?and_all_filters: Array[Types::SearchFilterClause],
+        ?or_any_filters: Array[Types::SearchFilterClause],
+        ?attribute_filter: Types::SearchAttributeFilter,
+        ?map_filter: Types::SearchMapFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor and_all_filters: Array[Types::SearchFilterClause]?
+      attr_accessor or_any_filters: Array[Types::SearchFilterClause]?
+      attr_accessor attribute_filter: Types::SearchAttributeFilter?
+      attr_accessor map_filter: Types::SearchMapFilter?
+
+      class AndAllFilters < SearchFilterClause
+      end
+      class OrAnyFilters < SearchFilterClause
+      end
+      class AttributeFilter < SearchFilterClause
+      end
+      class MapFilter < SearchFilterClause
+      end
+      class Unknown < SearchFilterClause
+      end
+    end
+
+    module SearchFilterOperator
+      equals: String
+      greaterThan: String
+      greaterThanOrEquals: String
+      lessThan: String
+      lessThanOrEquals: String
+      notExists: String
+    end
+
+    class SearchFilterValue
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?string_value: String,
+        ?long_value: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor string_value: String?
+      attr_accessor long_value: Integer?
+
+      class StringValue < SearchFilterValue
+      end
+      class LongValue < SearchFilterValue
+      end
+      class Unknown < SearchFilterValue
+      end
+    end
+
+    class SearchMapFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attribute: String,
+        ?key: String,
+        ?value: Types::SearchMapFilterValue,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute: String?
+      attr_accessor key: String?
+      attr_accessor value: Types::SearchMapFilterValue?
+    end
+
+    class SearchMapFilterValue
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?string_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor string_value: String?
+
+      class StringValue < SearchMapFilterValue
+      end
+      class Unknown < SearchMapFilterValue
+      end
+    end
+
+    class SearchResultItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?asset_name: String,
+        ?asset_description: String,
+        ?updated_at: Time,
+        ?asset_type_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor asset_name: String?
+      attr_accessor asset_description: String?
+      attr_accessor updated_at: Time?
+      attr_accessor asset_type_id: String?
+    end
+
+    class SearchSort
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attribute: String,
+        ?order: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute: String?
+      attr_accessor order: String?
+    end
+
+    module SearchSortOrder
+      ASCENDING: String
+      DESCENDING: String
+    end
+
     class SearchTablesRequest
       include Smithy::Schema::Structure
 
@@ -13660,6 +16282,7 @@ module Aws::Glue
         ?dpu_seconds: Float,
         ?idle_timeout: Integer,
         ?profile_name: String,
+        ?session_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -13683,6 +16306,18 @@ module Aws::Glue
       attr_accessor dpu_seconds: Float?
       attr_accessor idle_timeout: Integer?
       attr_accessor profile_name: String?
+      attr_accessor session_type: String?
+    end
+
+    class SessionBusyException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
     end
 
     class SessionCommand
@@ -13698,6 +16333,21 @@ module Aws::Glue
       attr_accessor python_version: String?
     end
 
+    class SessionEndpoint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?url: String,
+        ?auth_token: String,
+        ?auth_token_expiration_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor url: String?
+      attr_accessor auth_token: String?
+      attr_accessor auth_token_expiration_time: Time?
+    end
+
     module SessionStatus
       PROVISIONING: String
       READY: String
@@ -13705,6 +16355,11 @@ module Aws::Glue
       TIMEOUT: String
       STOPPING: String
       STOPPED: String
+    end
+
+    module SessionType
+      LIVY: String
+      SPARK_CONNECT: String
     end
 
     module SettingSource
@@ -13829,6 +16484,27 @@ module Aws::Glue
     module SortDirectionType
       DESCENDING: String
       ASCENDING: String
+    end
+
+    class SourceConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?request_method: String,
+        ?request_path: String,
+        ?request_parameters: Array[Types::ConnectorProperty],
+        ?response_configuration: Types::ResponseConfiguration,
+        ?pagination_configuration: Types::PaginationConfiguration,
+        ?filter_configuration: Types::FilterConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor request_method: String?
+      attr_accessor request_path: String?
+      attr_accessor request_parameters: Array[Types::ConnectorProperty]?
+      attr_accessor response_configuration: Types::ResponseConfiguration?
+      attr_accessor pagination_configuration: Types::PaginationConfiguration?
+      attr_accessor filter_configuration: Types::FilterConfiguration?
     end
 
     module SourceControlAuthStrategy
@@ -14072,11 +16748,13 @@ module Aws::Glue
       def initialize: (
         ?database_name: String,
         ?table_name: String,
+        ?catalog_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor database_name: String?
       attr_accessor table_name: String?
+      attr_accessor catalog_id: String?
     end
 
     class StartColumnStatisticsTaskRunScheduleResponse
@@ -14139,6 +16817,8 @@ module Aws::Glue
         ?created_ruleset_name: String,
         ?data_quality_security_configuration: String,
         ?client_token: String,
+        ?additional_run_options: Types::DataQualityRuleRecommendationRunAdditionalRunOptions,
+        ?recommendation_mode: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -14149,6 +16829,8 @@ module Aws::Glue
       attr_accessor created_ruleset_name: String?
       attr_accessor data_quality_security_configuration: String?
       attr_accessor client_token: String?
+      attr_accessor additional_run_options: Types::DataQualityRuleRecommendationRunAdditionalRunOptions?
+      attr_accessor recommendation_mode: String?
     end
 
     class StartDataQualityRuleRecommendationRunResponse
@@ -14340,6 +17022,34 @@ module Aws::Glue
       attr_accessor task_run_id: String?
     end
 
+    class StartMaterializedViewRefreshTaskRunRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog_id: String,
+        ?database_name: String,
+        ?table_name: String,
+        ?full_refresh: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog_id: String?
+      attr_accessor database_name: String?
+      attr_accessor table_name: String?
+      attr_accessor full_refresh: bool?
+    end
+
+    class StartMaterializedViewRefreshTaskRunResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?materialized_view_refresh_task_run_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor materialized_view_refresh_task_run_id: String?
+    end
+
     class StartTriggerRequest
       include Smithy::Schema::Structure
 
@@ -14523,6 +17233,7 @@ module Aws::Glue
         ?run_identifier: Types::RunIdentifier,
         ?statistic_name: String,
         ?double_value: Float,
+        ?distribution_value: Types::DistributionData,
         ?evaluation_level: String,
         ?columns_referenced: Array[String],
         ?referenced_datasets: Array[String],
@@ -14537,6 +17248,7 @@ module Aws::Glue
       attr_accessor run_identifier: Types::RunIdentifier?
       attr_accessor statistic_name: String?
       attr_accessor double_value: Float?
+      attr_accessor distribution_value: Types::DistributionData?
       attr_accessor evaluation_level: String?
       attr_accessor columns_referenced: Array[String]?
       attr_accessor referenced_datasets: Array[String]?
@@ -14564,11 +17276,13 @@ module Aws::Glue
       def initialize: (
         ?database_name: String,
         ?table_name: String,
+        ?catalog_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor database_name: String?
       attr_accessor table_name: String?
+      attr_accessor catalog_id: String?
     end
 
     class StopColumnStatisticsTaskRunResponse
@@ -14586,11 +17300,13 @@ module Aws::Glue
       def initialize: (
         ?database_name: String,
         ?table_name: String,
+        ?catalog_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor database_name: String?
       attr_accessor table_name: String?
+      attr_accessor catalog_id: String?
     end
 
     class StopColumnStatisticsTaskRunScheduleResponse
@@ -14634,6 +17350,30 @@ module Aws::Glue
     end
 
     class StopCrawlerScheduleResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class StopMaterializedViewRefreshTaskRunRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog_id: String,
+        ?database_name: String,
+        ?table_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog_id: String?
+      attr_accessor database_name: String?
+      attr_accessor table_name: String?
+    end
+
+    class StopMaterializedViewRefreshTaskRunResponse
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -14777,6 +17517,34 @@ module Aws::Glue
       attr_accessor number_of_distinct_values: Integer?
     end
 
+    module SubObjectSourceType
+      HIVE_PARQUET: String
+      HIVE_ORC: String
+      HIVE_CSV: String
+      HIVE_JSON: String
+      PLAIN_PARQUET: String
+      ICEBERG: String
+    end
+
+    class SubObjectStatistics
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_type: String,
+        ?glue_version_id: String,
+        ?partition_count: Integer,
+        ?file_count: Integer,
+        ?total_file_bytes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_type: String?
+      attr_accessor glue_version_id: String?
+      attr_accessor partition_count: Integer?
+      attr_accessor file_count: Integer?
+      attr_accessor total_file_bytes: Integer?
+    end
+
     class SupportedDialect
       include Smithy::Schema::Structure
 
@@ -14817,7 +17585,10 @@ module Aws::Glue
         ?federated_table: Types::FederatedTable,
         ?view_definition: Types::ViewDefinition,
         ?is_multi_dialect_view: bool,
+        ?is_materialized_view: bool,
+        ?iceberg_table_metadata: Types::IcebergTableMetadata,
         ?status: Types::TableStatus,
+        ?rls_properties: Types::RLSProperties,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -14844,12 +17615,17 @@ module Aws::Glue
       attr_accessor federated_table: Types::FederatedTable?
       attr_accessor view_definition: Types::ViewDefinition?
       attr_accessor is_multi_dialect_view: bool?
+      attr_accessor is_materialized_view: bool?
+      attr_accessor iceberg_table_metadata: Types::IcebergTableMetadata?
       attr_accessor status: Types::TableStatus?
+      attr_accessor rls_properties: Types::RLSProperties?
     end
 
     module TableAttributes
       NAME: String
       TABLE_TYPE: String
+      DEFAULT: String
+      LATEST_ICEBERG_METADATA: String
     end
 
     class TableError
@@ -14899,6 +17675,7 @@ module Aws::Glue
         ?table_type: String,
         ?parameters: Hash[String, String],
         ?target_table: Types::TableIdentifier,
+        ?federated_table: Types::FederatedTable,
         ?view_definition: Types::ViewDefinitionInput,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -14916,6 +17693,7 @@ module Aws::Glue
       attr_accessor table_type: String?
       attr_accessor parameters: Hash[String, String]?
       attr_accessor target_table: Types::TableIdentifier?
+      attr_accessor federated_table: Types::FederatedTable?
       attr_accessor view_definition: Types::ViewDefinitionInput?
     end
 
@@ -15011,6 +17789,11 @@ module Aws::Glue
       end
       class Unknown < TableOptimizerVpcConfiguration
       end
+    end
+
+    module TableResourceShareType
+      FEDERATED: String
+      ALL: String
     end
 
     class TableStatus
@@ -15160,12 +17943,14 @@ module Aws::Glue
         ?unnest_spec: String,
         ?partition_spec: Array[Types::IntegrationPartition],
         ?target_table_name: String,
+        ?integration_arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor unnest_spec: String?
       attr_accessor partition_spec: Array[Types::IntegrationPartition]?
       attr_accessor target_table_name: String?
+      attr_accessor integration_arn: String?
     end
 
     class TaskRun
@@ -15595,6 +18380,40 @@ module Aws::Glue
 
     end
 
+    class UpdateAssetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?name: String,
+        ?description: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor client_token: String?
+    end
+
+    class UpdateAssetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?description: String,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor updated_at: Time?
+    end
+
     module UpdateBehavior
       LOG: String
       UPDATE_IN_DATABASE: String
@@ -15813,6 +18632,7 @@ module Aws::Glue
         ?lake_formation_configuration: Types::LakeFormationConfiguration,
         ?configuration: String,
         ?crawler_security_configuration: String,
+        ?catalog_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -15830,6 +18650,7 @@ module Aws::Glue
       attr_accessor lake_formation_configuration: Types::LakeFormationConfiguration?
       attr_accessor configuration: String?
       attr_accessor crawler_security_configuration: String?
+      attr_accessor catalog_id: String?
     end
 
     class UpdateCrawlerResponse
@@ -15980,15 +18801,87 @@ module Aws::Glue
 
     end
 
+    class UpdateGlossaryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?name: String,
+        ?description: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor client_token: String?
+    end
+
+    class UpdateGlossaryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+    end
+
+    class UpdateGlossaryTermRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?name: String,
+        ?short_description: String,
+        ?long_description: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor name: String?
+      attr_accessor short_description: String?
+      attr_accessor long_description: String?
+      attr_accessor client_token: String?
+    end
+
+    class UpdateGlossaryTermResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?glossary_id: String,
+        ?name: String,
+        ?short_description: String,
+        ?long_description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor glossary_id: String?
+      attr_accessor name: String?
+      attr_accessor short_description: String?
+      attr_accessor long_description: String?
+    end
+
     class UpdateGlueIdentityCenterConfigurationRequest
       include Smithy::Schema::Structure
 
       def initialize: (
         ?scopes: Array[String],
+        ?user_background_sessions_enabled: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor scopes: Array[String]?
+      attr_accessor user_background_sessions_enabled: bool?
     end
 
     class UpdateGlueIdentityCenterConfigurationResponse
@@ -16059,12 +18952,14 @@ module Aws::Glue
 
       def initialize: (
         ?resource_arn: String,
+        ?resource_property_arn: String,
         ?source_processing_properties: Types::SourceProcessingProperties,
         ?target_processing_properties: Types::TargetProcessingProperties,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor resource_arn: String?
+      attr_accessor resource_property_arn: String?
       attr_accessor source_processing_properties: Types::SourceProcessingProperties?
       attr_accessor target_processing_properties: Types::TargetProcessingProperties?
     end
@@ -16572,6 +19467,7 @@ module Aws::Glue
         ?database_name: String,
         ?class_name: String,
         ?owner_name: String,
+        ?function_type: String,
         ?owner_type: String,
         ?create_time: Time,
         ?resource_uris: Array[Types::ResourceUri],
@@ -16583,6 +19479,7 @@ module Aws::Glue
       attr_accessor database_name: String?
       attr_accessor class_name: String?
       attr_accessor owner_name: String?
+      attr_accessor function_type: String?
       attr_accessor owner_type: String?
       attr_accessor create_time: Time?
       attr_accessor resource_uris: Array[Types::ResourceUri]?
@@ -16596,6 +19493,7 @@ module Aws::Glue
         ?function_name: String,
         ?class_name: String,
         ?owner_name: String,
+        ?function_type: String,
         ?owner_type: String,
         ?resource_uris: Array[Types::ResourceUri],
       ) -> void
@@ -16604,6 +19502,7 @@ module Aws::Glue
       attr_accessor function_name: String?
       attr_accessor class_name: String?
       attr_accessor owner_name: String?
+      attr_accessor function_type: String?
       attr_accessor owner_type: String?
       attr_accessor resource_uris: Array[Types::ResourceUri]?
     end
@@ -16635,16 +19534,32 @@ module Aws::Glue
 
       def initialize: (
         ?is_protected: bool,
+        ?is_managed: bool,
         ?definer: String,
+        ?view_version_id: Integer,
+        ?view_version_token: String,
+        ?refresh_seconds: Integer,
+        ?last_refresh_type: String,
         ?sub_objects: Array[String],
+        ?sub_object_version_ids: Array[Integer],
+        ?sub_objects_statistics: Array[Types::SubObjectStatistics],
         ?representations: Array[Types::ViewRepresentation],
+        ?spark_pipeline_info: Hash[String, String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor is_protected: bool?
+      attr_accessor is_managed: bool?
       attr_accessor definer: String?
+      attr_accessor view_version_id: Integer?
+      attr_accessor view_version_token: String?
+      attr_accessor refresh_seconds: Integer?
+      attr_accessor last_refresh_type: String?
       attr_accessor sub_objects: Array[String]?
+      attr_accessor sub_object_version_ids: Array[Integer]?
+      attr_accessor sub_objects_statistics: Array[Types::SubObjectStatistics]?
       attr_accessor representations: Array[Types::ViewRepresentation]?
+      attr_accessor spark_pipeline_info: Hash[String, String]?
     end
 
     class ViewDefinitionInput
@@ -16652,16 +19567,32 @@ module Aws::Glue
 
       def initialize: (
         ?is_protected: bool,
+        ?is_managed: bool,
         ?definer: String,
         ?representations: Array[Types::ViewRepresentationInput],
+        ?view_version_id: Integer,
+        ?view_version_token: String,
+        ?refresh_seconds: Integer,
+        ?last_refresh_type: String,
         ?sub_objects: Array[String],
+        ?sub_object_version_ids: Array[Integer],
+        ?sub_objects_statistics: Array[Types::SubObjectStatistics],
+        ?spark_pipeline_info: Hash[String, String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor is_protected: bool?
+      attr_accessor is_managed: bool?
       attr_accessor definer: String?
       attr_accessor representations: Array[Types::ViewRepresentationInput]?
+      attr_accessor view_version_id: Integer?
+      attr_accessor view_version_token: String?
+      attr_accessor refresh_seconds: Integer?
+      attr_accessor last_refresh_type: String?
       attr_accessor sub_objects: Array[String]?
+      attr_accessor sub_object_version_ids: Array[Integer]?
+      attr_accessor sub_objects_statistics: Array[Types::SubObjectStatistics]?
+      attr_accessor spark_pipeline_info: Hash[String, String]?
     end
 
     module ViewDialect

@@ -24,10 +24,17 @@ module Aws::Support
     class DescribeAttachmentLimitExceeded < Smithy::Client::ServiceError
       def message: () -> String?
     end
+    class DryRunOperationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
     class InternalServerError < Smithy::Client::ServiceError
       def message: () -> String?
     end
     class ThrottlingException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def throttling_reasons: () -> Array[Types::ThrottlingReason]?
+    end
+    class UploadIdNotFound < Smithy::Client::ServiceError
       def message: () -> String?
     end
   end

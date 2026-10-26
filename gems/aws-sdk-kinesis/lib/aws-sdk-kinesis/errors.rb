@@ -23,6 +23,7 @@ module Aws::Kinesis
   # ## Error Classes
   #
   # * {AccessDeniedException}
+  # * {DryRunOperationException}
   # * {ExpiredIteratorException}
   # * {ExpiredNextTokenException}
   # * {InternalFailureException}
@@ -49,6 +50,19 @@ module Aws::Kinesis
     class AccessDeniedException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Kinesis::Types::AccessDeniedException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>The request was rejected because the DryRun parameter was specified.</p>
+    class DryRunOperationException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::Kinesis::Types::DryRunOperationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
         super
       end

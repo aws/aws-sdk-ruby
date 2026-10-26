@@ -12,28 +12,37 @@ module Aws::Transfer
     AgreementId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.transfer#AgreementId", name: "AgreementId", traits: {"smithy.api#length" => {"min" => 19, "max" => 19}, "smithy.api#pattern" => "^a-([0-9a-f]{17})$"})
     AgreementStatusType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.transfer#AgreementStatusType", name: "AgreementStatusType")
     Arn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.transfer#Arn", name: "Arn", traits: {"smithy.api#length" => {"min" => 20, "max" => 1600}, "smithy.api#pattern" => "^arn:\\S+$"})
+    As2AsyncMdnConnectorConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.transfer#As2AsyncMdnConnectorConfig", name: "As2AsyncMdnConnectorConfig")
+    As2AsyncMdnServerIds = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.transfer#As2AsyncMdnServerIds", name: "As2AsyncMdnServerIds", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
     As2ConnectorConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.transfer#As2ConnectorConfig", name: "As2ConnectorConfig")
     As2ConnectorSecretId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.transfer#As2ConnectorSecretId", name: "As2ConnectorSecretId", traits: {"smithy.api#length" => {"min" => 0, "max" => 2048}})
-    As2Id = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.transfer#As2Id", name: "As2Id", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[\\p{Print}\\s]*$"})
+    As2Id = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.transfer#As2Id", name: "As2Id", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[\\u0020-\\u007E\\s]*$"})
     As2Transport = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.transfer#As2Transport", name: "As2Transport")
     As2Transports = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.transfer#As2Transports", name: "As2Transports", traits: {"smithy.api#length" => {"min" => 1, "max" => 1}})
     CallbackToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.transfer#CallbackToken", name: "CallbackToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^\\w+$"})
     CertDate = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.transfer#CertDate", name: "CertDate")
-    CertSerial = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.transfer#CertSerial", name: "CertSerial", traits: {"smithy.api#length" => {"min" => 0, "max" => 48}, "smithy.api#pattern" => "^[\\p{XDigit}{2}:?]*$"})
+    CertSerial = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.transfer#CertSerial", name: "CertSerial", traits: {"smithy.api#length" => {"min" => 0, "max" => 48}, "smithy.api#pattern" => "^[0-9a-fA-F{}:?]*$"})
     Certificate = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.transfer#Certificate", name: "Certificate", traits: {"smithy.api#length" => {"min" => 0, "max" => 1600}})
-    CertificateBodyType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.transfer#CertificateBodyType", name: "CertificateBodyType", traits: {"smithy.api#length" => {"min" => 1, "max" => 16384}, "smithy.api#pattern" => "^[\\u0009\\u000A\\u000D\\u0020-\\u00FF]*$", "smithy.api#sensitive" => {}})
-    CertificateChainType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.transfer#CertificateChainType", name: "CertificateChainType", traits: {"smithy.api#length" => {"min" => 1, "max" => 2097152}, "smithy.api#pattern" => "^[\\u0009\\u000A\\u000D\\u0020-\\u00FF]*$", "smithy.api#sensitive" => {}})
+    CertificateBodyType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.transfer#CertificateBodyType", name: "CertificateBodyType", traits: {"smithy.api#length" => {"min" => 1, "max" => 16384}, "smithy.api#pattern" => "^[\\t\\n\\r\\u0020-\\u00FF]+$", "smithy.api#sensitive" => {}})
+    CertificateChainType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.transfer#CertificateChainType", name: "CertificateChainType", traits: {"smithy.api#length" => {"min" => 1, "max" => 2097152}, "smithy.api#pattern" => "^[\\t\\n\\r\\u0020-\\u00FF]+$", "smithy.api#sensitive" => {}})
     CertificateId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.transfer#CertificateId", name: "CertificateId", traits: {"smithy.api#length" => {"min" => 22, "max" => 22}, "smithy.api#pattern" => "^cert-([0-9a-f]{17})$"})
     CertificateIds = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.transfer#CertificateIds", name: "CertificateIds")
     CertificateStatusType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.transfer#CertificateStatusType", name: "CertificateStatusType")
     CertificateType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.transfer#CertificateType", name: "CertificateType")
     CertificateUsageType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.transfer#CertificateUsageType", name: "CertificateUsageType")
+    CommunicationMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.transfer#CommunicationMode", name: "CommunicationMode")
     CompressionEnum = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.transfer#CompressionEnum", name: "CompressionEnum")
     ConflictException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.transfer#ConflictException", name: "ConflictException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 409})
+    ConnectorEgressConfig = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.transfer#ConnectorEgressConfig", name: "ConnectorEgressConfig")
+    ConnectorEgressType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.transfer#ConnectorEgressType", name: "ConnectorEgressType")
+    ConnectorErrorMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.transfer#ConnectorErrorMessage", name: "ConnectorErrorMessage")
     ConnectorFileTransferResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.transfer#ConnectorFileTransferResult", name: "ConnectorFileTransferResult")
     ConnectorFileTransferResults = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.transfer#ConnectorFileTransferResults", name: "ConnectorFileTransferResults", traits: {"smithy.api#length" => {"min" => 0, "max" => 1000}})
     ConnectorId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.transfer#ConnectorId", name: "ConnectorId", traits: {"smithy.api#length" => {"min" => 19, "max" => 19}, "smithy.api#pattern" => "^c-([0-9a-f]{17})$"})
     ConnectorSecurityPolicyName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.transfer#ConnectorSecurityPolicyName", name: "ConnectorSecurityPolicyName", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}, "smithy.api#pattern" => "^TransferSFTPConnectorSecurityPolicy-[A-Za-z0-9-]+$"})
+    ConnectorStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.transfer#ConnectorStatus", name: "ConnectorStatus")
+    ConnectorVpcLatticeEgressConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.transfer#ConnectorVpcLatticeEgressConfig", name: "ConnectorVpcLatticeEgressConfig")
+    ConnectorsIpAddressType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.transfer#ConnectorsIpAddressType", name: "ConnectorsIpAddressType")
     CopyStepDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.transfer#CopyStepDetails", name: "CopyStepDetails")
     CreateAccessRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.transfer#CreateAccessRequest", name: "CreateAccessRequest")
     CreateAccessResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.transfer#CreateAccessResponse", name: "CreateAccessResponse")
@@ -52,6 +61,10 @@ module Aws::Transfer
     CreateWorkflowRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.transfer#CreateWorkflowRequest", name: "CreateWorkflowRequest")
     CreateWorkflowResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.transfer#CreateWorkflowResponse", name: "CreateWorkflowResponse")
     CustomDirectoriesType = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.transfer#CustomDirectoriesType", name: "CustomDirectoriesType")
+    CustomHttpHeader = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.transfer#CustomHttpHeader", name: "CustomHttpHeader", traits: {"smithy.api#sensitive" => {}})
+    CustomHttpHeaderKeyType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.transfer#CustomHttpHeaderKeyType", name: "CustomHttpHeaderKeyType", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[a-zA-Z0-9-]+$", "smithy.api#sensitive" => {}})
+    CustomHttpHeaderValueType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.transfer#CustomHttpHeaderValueType", name: "CustomHttpHeaderValueType", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#pattern" => "^[a-zA-Z0-9 +\\-./:=@_]*$", "smithy.api#sensitive" => {}})
+    CustomHttpHeaders = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.transfer#CustomHttpHeaders", name: "CustomHttpHeaders")
     CustomStepDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.transfer#CustomStepDetails", name: "CustomStepDetails")
     CustomStepStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.transfer#CustomStepStatus", name: "CustomStepStatus")
     CustomStepTarget = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.transfer#CustomStepTarget", name: "CustomStepTarget", traits: {"smithy.api#length" => {"min" => 0, "max" => 170}, "smithy.api#pattern" => "^arn:[a-z-]+:lambda:.*$"})
@@ -102,6 +115,8 @@ module Aws::Transfer
     DescribedAgreement = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.transfer#DescribedAgreement", name: "DescribedAgreement")
     DescribedCertificate = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.transfer#DescribedCertificate", name: "DescribedCertificate")
     DescribedConnector = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.transfer#DescribedConnector", name: "DescribedConnector")
+    DescribedConnectorEgressConfig = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.transfer#DescribedConnectorEgressConfig", name: "DescribedConnectorEgressConfig")
+    DescribedConnectorVpcLatticeEgressConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.transfer#DescribedConnectorVpcLatticeEgressConfig", name: "DescribedConnectorVpcLatticeEgressConfig")
     DescribedExecution = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.transfer#DescribedExecution", name: "DescribedExecution")
     DescribedHostKey = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.transfer#DescribedHostKey", name: "DescribedHostKey")
     DescribedIdentityCenterConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.transfer#DescribedIdentityCenterConfig", name: "DescribedIdentityCenterConfig")
@@ -111,9 +126,11 @@ module Aws::Transfer
     DescribedUser = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.transfer#DescribedUser", name: "DescribedUser")
     DescribedWebApp = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.transfer#DescribedWebApp", name: "DescribedWebApp")
     DescribedWebAppCustomization = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.transfer#DescribedWebAppCustomization", name: "DescribedWebAppCustomization", traits: {"smithy.api#references" => [{"resource" => "com.amazonaws.transfer#WebAppResource"}]})
+    DescribedWebAppEndpointDetails = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.transfer#DescribedWebAppEndpointDetails", name: "DescribedWebAppEndpointDetails")
     DescribedWebAppIdentityProviderDetails = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.transfer#DescribedWebAppIdentityProviderDetails", name: "DescribedWebAppIdentityProviderDetails")
+    DescribedWebAppVpcConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.transfer#DescribedWebAppVpcConfig", name: "DescribedWebAppVpcConfig")
     DescribedWorkflow = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.transfer#DescribedWorkflow", name: "DescribedWorkflow")
-    Description = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.transfer#Description", name: "Description", traits: {"smithy.api#length" => {"min" => 1, "max" => 200}, "smithy.api#pattern" => "^[\\p{Graph}]+$"})
+    Description = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.transfer#Description", name: "Description", traits: {"smithy.api#length" => {"min" => 1, "max" => 200}, "smithy.api#pattern" => "^[\\u0021-\\u007E]+$"})
     DirectoryId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.transfer#DirectoryId", name: "DirectoryId", traits: {"smithy.api#length" => {"min" => 12, "max" => 12}, "smithy.api#pattern" => "^d-[0-9a-f]{10}$"})
     DirectoryListingOptimization = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.transfer#DirectoryListingOptimization", name: "DirectoryListingOptimization")
     Domain = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.transfer#Domain", name: "Domain")
@@ -148,6 +165,7 @@ module Aws::Transfer
     HostKeyDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.transfer#HostKeyDescription", name: "HostKeyDescription", traits: {"smithy.api#length" => {"min" => 0, "max" => 200}, "smithy.api#pattern" => "^[\\p{Print}]*$"})
     HostKeyFingerprint = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.transfer#HostKeyFingerprint", name: "HostKeyFingerprint")
     HostKeyId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.transfer#HostKeyId", name: "HostKeyId", traits: {"smithy.api#length" => {"min" => 25, "max" => 25}, "smithy.api#pattern" => "^hostkey-[0-9a-f]{17}$"})
+    HostKeyStorageType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.transfer#HostKeyStorageType", name: "HostKeyStorageType")
     HostKeyType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.transfer#HostKeyType", name: "HostKeyType")
     IdentityCenterApplicationArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.transfer#IdentityCenterApplicationArn", name: "IdentityCenterApplicationArn", traits: {"smithy.api#length" => {"min" => 10, "max" => 1224}, "smithy.api#pattern" => "^arn:[\\w-]+:sso::\\d{12}:application/(sso)?ins-[a-zA-Z0-9-.]{16}/apl-[a-zA-Z0-9]{16}$"})
     IdentityCenterConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.transfer#IdentityCenterConfig", name: "IdentityCenterConfig")
@@ -165,6 +183,7 @@ module Aws::Transfer
     InvalidNextTokenException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.transfer#InvalidNextTokenException", name: "InvalidNextTokenException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     InvalidRequestException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.transfer#InvalidRequestException", name: "InvalidRequestException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     IpAddressType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.transfer#IpAddressType", name: "IpAddressType")
+    KmsKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.transfer#KmsKey", name: "KmsKey", traits: {"smithy.api#length" => {"min" => 20, "max" => 1600}, "smithy.api#pattern" => "^arn:\\S+$"})
     ListAccessesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.transfer#ListAccessesRequest", name: "ListAccessesRequest")
     ListAccessesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.transfer#ListAccessesResponse", name: "ListAccessesResponse")
     ListAgreementsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.transfer#ListAgreementsRequest", name: "ListAgreementsRequest")
@@ -222,12 +241,12 @@ module Aws::Transfer
     MapTarget = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.transfer#MapTarget", name: "MapTarget", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}, "smithy.api#pattern" => "^/.*$"})
     MapType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.transfer#MapType", name: "MapType")
     MaxConcurrentConnections = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.transfer#MaxConcurrentConnections", name: "MaxConcurrentConnections", traits: {"smithy.api#default" => 1, "smithy.api#range" => {"min" => 1}})
-    MaxItems = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.transfer#MaxItems", name: "MaxItems", traits: {"smithy.api#range" => {"min" => 1, "max" => 10000}})
+    MaxItems = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.transfer#MaxItems", name: "MaxItems", traits: {"smithy.api#range" => {"min" => 1}})
     MaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.transfer#MaxResults", name: "MaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 1000}})
     MdnResponse = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.transfer#MdnResponse", name: "MdnResponse")
     MdnSigningAlg = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.transfer#MdnSigningAlg", name: "MdnSigningAlg")
     Message = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.transfer#Message", name: "Message")
-    MessageSubject = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.transfer#MessageSubject", name: "MessageSubject", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => "^[\\p{Print}\\p{Blank}]+$"})
+    MessageSubject = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.transfer#MessageSubject", name: "MessageSubject", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => "^[\\u0020-\\u007E\\t]+$", "smithy.api#sensitive" => {}})
     MoveId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.transfer#MoveId", name: "MoveId", traits: {"smithy.api#length" => {"min" => 1, "max" => 512}, "smithy.api#pattern" => "^[0-9a-zA-Z./-]+$"})
     NextToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.transfer#NextToken", name: "NextToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 6144}})
     NullableRole = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.transfer#NullableRole", name: "NullableRole", traits: {"smithy.api#length" => {"min" => 0, "max" => 2048}, "smithy.api#pattern" => "^(|arn:.*role/\\S+)$"})
@@ -243,12 +262,14 @@ module Aws::Transfer
     PreAuthenticationLoginBanner = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.transfer#PreAuthenticationLoginBanner", name: "PreAuthenticationLoginBanner", traits: {"smithy.api#length" => {"min" => 0, "max" => 4096}, "smithy.api#pattern" => "^[\\x09-\\x0D\\x20-\\x7E]*$"})
     PreserveContentType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.transfer#PreserveContentType", name: "PreserveContentType")
     PreserveFilenameType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.transfer#PreserveFilenameType", name: "PreserveFilenameType")
-    PrivateKeyType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.transfer#PrivateKeyType", name: "PrivateKeyType", traits: {"smithy.api#length" => {"min" => 1, "max" => 16384}, "smithy.api#pattern" => "^[\\u0009\\u000A\\u000D\\u0020-\\u00FF]*$", "smithy.api#sensitive" => {}})
+    PrivateKeyType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.transfer#PrivateKeyType", name: "PrivateKeyType", traits: {"smithy.api#length" => {"min" => 1, "max" => 16384}, "smithy.api#pattern" => "^[\\t\\n\\r\\u0020-\\u00FF]+$", "smithy.api#sensitive" => {}})
     ProfileId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.transfer#ProfileId", name: "ProfileId", traits: {"smithy.api#length" => {"min" => 19, "max" => 19}, "smithy.api#pattern" => "^p-([0-9a-f]{17})$"})
     ProfileType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.transfer#ProfileType", name: "ProfileType")
     Protocol = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.transfer#Protocol", name: "Protocol")
     ProtocolDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.transfer#ProtocolDetails", name: "ProtocolDetails")
     Protocols = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.transfer#Protocols", name: "Protocols", traits: {"smithy.api#length" => {"min" => 1, "max" => 4}})
+    ProxyConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.transfer#ProxyConfig", name: "ProxyConfig")
+    ProxyMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.transfer#ProxyMode", name: "ProxyMode")
     Resource = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.transfer#Resource", name: "Resource")
     ResourceExistsException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.transfer#ResourceExistsException", name: "ResourceExistsException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 409})
     ResourceNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.transfer#ResourceNotFoundException", name: "ResourceNotFoundException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 404})
@@ -269,6 +290,8 @@ module Aws::Transfer
     S3VersionId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.transfer#S3VersionId", name: "S3VersionId", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => "^.+$"})
     SecondaryGids = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.transfer#SecondaryGids", name: "SecondaryGids", traits: {"smithy.api#length" => {"min" => 0, "max" => 16}})
     SecretId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.transfer#SecretId", name: "SecretId", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}})
+    SecretVersionStage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.transfer#SecretVersionStage", name: "SecretVersionStage", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}})
+    SecretVersionStageList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.transfer#SecretVersionStageList", name: "SecretVersionStageList", traits: {"smithy.api#length" => {"min" => 1, "max" => 2}, "smithy.api#uniqueItems" => {}})
     SecurityGroupId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.transfer#SecurityGroupId", name: "SecurityGroupId", traits: {"smithy.api#length" => {"min" => 11, "max" => 20}, "smithy.api#pattern" => "^sg-[0-9a-f]{8,17}$"})
     SecurityGroupIds = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.transfer#SecurityGroupIds", name: "SecurityGroupIds")
     SecurityPolicyName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.transfer#SecurityPolicyName", name: "SecurityPolicyName", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}, "smithy.api#pattern" => "^Transfer[A-Za-z0-9]*SecurityPolicy-[A-Za-z0-9-]+$"})
@@ -294,6 +317,9 @@ module Aws::Transfer
     SftpConnectorHostKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.transfer#SftpConnectorHostKey", name: "SftpConnectorHostKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}})
     SftpConnectorTrustedHostKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.transfer#SftpConnectorTrustedHostKey", name: "SftpConnectorTrustedHostKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}})
     SftpConnectorTrustedHostKeyList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.transfer#SftpConnectorTrustedHostKeyList", name: "SftpConnectorTrustedHostKeyList", traits: {"smithy.api#length" => {"min" => 0, "max" => 10}})
+    SftpPort = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.transfer#SftpPort", name: "SftpPort", traits: {"smithy.api#range" => {"min" => 1, "max" => 65535}})
+    SftpPortWithOptions = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.transfer#SftpPortWithOptions", name: "SftpPortWithOptions")
+    SftpPorts = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.transfer#SftpPorts", name: "SftpPorts", traits: {"smithy.api#length" => {"min" => 0, "max" => 3}})
     SigningAlg = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.transfer#SigningAlg", name: "SigningAlg")
     SourceFileLocation = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.transfer#SourceFileLocation", name: "SourceFileLocation", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#pattern" => "^\\$\\{(\\w+.)+\\w+\\}$"})
     SourceIp = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.transfer#SourceIp", name: "SourceIp", traits: {"smithy.api#length" => {"min" => 0, "max" => 32}, "smithy.api#pattern" => "^[0-9a-fA-F\\.\\:]+$"})
@@ -341,8 +367,10 @@ module Aws::Transfer
     UpdateAgreementResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.transfer#UpdateAgreementResponse", name: "UpdateAgreementResponse")
     UpdateCertificateRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.transfer#UpdateCertificateRequest", name: "UpdateCertificateRequest")
     UpdateCertificateResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.transfer#UpdateCertificateResponse", name: "UpdateCertificateResponse")
+    UpdateConnectorEgressConfig = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.transfer#UpdateConnectorEgressConfig", name: "UpdateConnectorEgressConfig")
     UpdateConnectorRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.transfer#UpdateConnectorRequest", name: "UpdateConnectorRequest")
     UpdateConnectorResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.transfer#UpdateConnectorResponse", name: "UpdateConnectorResponse")
+    UpdateConnectorVpcLatticeEgressConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.transfer#UpdateConnectorVpcLatticeEgressConfig", name: "UpdateConnectorVpcLatticeEgressConfig")
     UpdateHostKeyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.transfer#UpdateHostKeyRequest", name: "UpdateHostKeyRequest")
     UpdateHostKeyResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.transfer#UpdateHostKeyResponse", name: "UpdateHostKeyResponse")
     UpdateProfileRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.transfer#UpdateProfileRequest", name: "UpdateProfileRequest")
@@ -353,10 +381,12 @@ module Aws::Transfer
     UpdateUserResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.transfer#UpdateUserResponse", name: "UpdateUserResponse")
     UpdateWebAppCustomizationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.transfer#UpdateWebAppCustomizationRequest", name: "UpdateWebAppCustomizationRequest", traits: {"smithy.api#references" => [{"resource" => "com.amazonaws.transfer#WebAppResource"}]})
     UpdateWebAppCustomizationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.transfer#UpdateWebAppCustomizationResponse", name: "UpdateWebAppCustomizationResponse", traits: {"smithy.api#references" => [{"resource" => "com.amazonaws.transfer#WebAppResource"}]})
+    UpdateWebAppEndpointDetails = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.transfer#UpdateWebAppEndpointDetails", name: "UpdateWebAppEndpointDetails")
     UpdateWebAppIdentityCenterConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.transfer#UpdateWebAppIdentityCenterConfig", name: "UpdateWebAppIdentityCenterConfig")
     UpdateWebAppIdentityProviderDetails = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.transfer#UpdateWebAppIdentityProviderDetails", name: "UpdateWebAppIdentityProviderDetails")
     UpdateWebAppRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.transfer#UpdateWebAppRequest", name: "UpdateWebAppRequest")
     UpdateWebAppResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.transfer#UpdateWebAppResponse", name: "UpdateWebAppResponse")
+    UpdateWebAppVpcConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.transfer#UpdateWebAppVpcConfig", name: "UpdateWebAppVpcConfig")
     Url = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.transfer#Url", name: "Url", traits: {"smithy.api#length" => {"min" => 0, "max" => 255}})
     UserCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.transfer#UserCount", name: "UserCount")
     UserDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.transfer#UserDetails", name: "UserDetails")
@@ -364,9 +394,12 @@ module Aws::Transfer
     UserPassword = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.transfer#UserPassword", name: "UserPassword", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}, "smithy.api#sensitive" => {}})
     VpcEndpointId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.transfer#VpcEndpointId", name: "VpcEndpointId", traits: {"smithy.api#length" => {"min" => 22, "max" => 22}, "smithy.api#pattern" => "^vpce-[0-9a-f]{17}$"})
     VpcId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.transfer#VpcId", name: "VpcId")
+    VpcLatticeResourceConfigurationArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.transfer#VpcLatticeResourceConfigurationArn", name: "VpcLatticeResourceConfigurationArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#pattern" => "^arn:[a-z0-9\\-]+:vpc-lattice:[a-zA-Z0-9\\-]+:\\d{12}:resourceconfiguration/rcfg-[0-9a-z]{17}$"})
     WebAppAccessEndpoint = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.transfer#WebAppAccessEndpoint", name: "WebAppAccessEndpoint", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}})
     WebAppEndpoint = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.transfer#WebAppEndpoint", name: "WebAppEndpoint", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}})
+    WebAppEndpointDetails = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.transfer#WebAppEndpointDetails", name: "WebAppEndpointDetails")
     WebAppEndpointPolicy = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.transfer#WebAppEndpointPolicy", name: "WebAppEndpointPolicy")
+    WebAppEndpointType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.transfer#WebAppEndpointType", name: "WebAppEndpointType")
     WebAppFaviconFile = ::Smithy::Schema::Shapes::BlobShape.new(id: "com.amazonaws.transfer#WebAppFaviconFile", name: "WebAppFaviconFile", traits: {"smithy.api#length" => {"min" => 1, "max" => 20960}, "smithy.api#sensitive" => {}})
     WebAppId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.transfer#WebAppId", name: "WebAppId", traits: {"smithy.api#length" => {"min" => 24, "max" => 24}, "smithy.api#pattern" => "^webapp-[0-9a-f]{17}$"})
     WebAppIdentityProviderDetails = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.transfer#WebAppIdentityProviderDetails", name: "WebAppIdentityProviderDetails")
@@ -374,6 +407,8 @@ module Aws::Transfer
     WebAppTitle = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.transfer#WebAppTitle", name: "WebAppTitle", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}})
     WebAppUnitCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.transfer#WebAppUnitCount", name: "WebAppUnitCount", traits: {"smithy.api#range" => {"min" => 1}})
     WebAppUnits = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.transfer#WebAppUnits", name: "WebAppUnits")
+    WebAppVpcConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.transfer#WebAppVpcConfig", name: "WebAppVpcConfig")
+    WebAppVpcEndpointIpAddressType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.transfer#WebAppVpcEndpointIpAddressType", name: "WebAppVpcEndpointIpAddressType")
     WorkflowDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.transfer#WorkflowDescription", name: "WorkflowDescription", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#pattern" => "^[\\w- ]*$"})
     WorkflowDetail = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.transfer#WorkflowDetail", name: "WorkflowDetail")
     WorkflowDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.transfer#WorkflowDetails", name: "WorkflowDetails")
@@ -388,6 +423,10 @@ module Aws::Transfer
     AddressAllocationIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AddressAllocationId, name: "member"))
     AgreementStatusType.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     AgreementStatusType.add_member(:inactive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INACTIVE", traits: {"smithy.api#enumValue" => "INACTIVE"}))
+    As2AsyncMdnConnectorConfig.add_member(:url, ::Smithy::Schema::Shapes::MemberShape.new(target: Url, name: "Url"))
+    As2AsyncMdnConnectorConfig.add_member(:server_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: As2AsyncMdnServerIds, name: "ServerIds"))
+    As2AsyncMdnConnectorConfig.type = Types::As2AsyncMdnConnectorConfig
+    As2AsyncMdnServerIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerId, name: "member"))
     As2ConnectorConfig.add_member(:local_profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfileId, name: "LocalProfileId"))
     As2ConnectorConfig.add_member(:partner_profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfileId, name: "PartnerProfileId"))
     As2ConnectorConfig.add_member(:message_subject, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageSubject, name: "MessageSubject"))
@@ -398,6 +437,7 @@ module Aws::Transfer
     As2ConnectorConfig.add_member(:mdn_response, ::Smithy::Schema::Shapes::MemberShape.new(target: MdnResponse, name: "MdnResponse"))
     As2ConnectorConfig.add_member(:basic_auth_secret_id, ::Smithy::Schema::Shapes::MemberShape.new(target: As2ConnectorSecretId, name: "BasicAuthSecretId"))
     As2ConnectorConfig.add_member(:preserve_content_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PreserveContentType, name: "PreserveContentType"))
+    As2ConnectorConfig.add_member(:async_mdn_config, ::Smithy::Schema::Shapes::MemberShape.new(target: As2AsyncMdnConnectorConfig, name: "AsyncMdnConfig"))
     As2ConnectorConfig.type = Types::As2ConnectorConfig
     As2Transport.add_member(:http, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HTTP", traits: {"smithy.api#enumValue" => "HTTP"}))
     As2Transports.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: As2Transport, name: "member"))
@@ -410,16 +450,31 @@ module Aws::Transfer
     CertificateUsageType.add_member(:signing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SIGNING", traits: {"smithy.api#enumValue" => "SIGNING"}))
     CertificateUsageType.add_member(:encryption, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENCRYPTION", traits: {"smithy.api#enumValue" => "ENCRYPTION"}))
     CertificateUsageType.add_member(:tls, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TLS", traits: {"smithy.api#enumValue" => "TLS"}))
+    CommunicationMode.add_member(:client_talk_first, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLIENT_TALK_FIRST", traits: {"smithy.api#enumValue" => "CLIENT_TALK_FIRST"}))
+    CommunicationMode.add_member(:server_talk_first, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SERVER_TALK_FIRST", traits: {"smithy.api#enumValue" => "SERVER_TALK_FIRST"}))
     CompressionEnum.add_member(:zlib, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ZLIB", traits: {"smithy.api#enumValue" => "ZLIB"}))
     CompressionEnum.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message", traits: {"smithy.api#required" => {}}))
     ConflictException.type = Types::ConflictException
+    ConnectorEgressConfig.add_member(:vpc_lattice, Types::ConnectorEgressConfig::VpcLattice, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorVpcLatticeEgressConfig, name: "VpcLattice"))
+    ConnectorEgressConfig.add_member(:unknown, Types::ConnectorEgressConfig::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    ConnectorEgressConfig.type = Types::ConnectorEgressConfig
+    ConnectorEgressType.add_member(:service_managed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SERVICE_MANAGED", traits: {"smithy.api#enumValue" => "SERVICE_MANAGED"}))
+    ConnectorEgressType.add_member(:vpc_lattice, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VPC_LATTICE", traits: {"smithy.api#enumValue" => "VPC_LATTICE"}))
     ConnectorFileTransferResult.add_member(:file_path, ::Smithy::Schema::Shapes::MemberShape.new(target: FilePath, name: "FilePath", traits: {"smithy.api#required" => {}}))
     ConnectorFileTransferResult.add_member(:status_code, ::Smithy::Schema::Shapes::MemberShape.new(target: TransferTableStatus, name: "StatusCode", traits: {"smithy.api#required" => {}}))
     ConnectorFileTransferResult.add_member(:failure_code, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureCode, name: "FailureCode"))
     ConnectorFileTransferResult.add_member(:failure_message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "FailureMessage"))
     ConnectorFileTransferResult.type = Types::ConnectorFileTransferResult
     ConnectorFileTransferResults.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorFileTransferResult, name: "member"))
+    ConnectorStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
+    ConnectorStatus.add_member(:errored, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ERRORED", traits: {"smithy.api#enumValue" => "ERRORED"}))
+    ConnectorStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
+    ConnectorVpcLatticeEgressConfig.add_member(:resource_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcLatticeResourceConfigurationArn, name: "ResourceConfigurationArn", traits: {"smithy.api#required" => {}}))
+    ConnectorVpcLatticeEgressConfig.add_member(:port_number, ::Smithy::Schema::Shapes::MemberShape.new(target: SftpPort, name: "PortNumber"))
+    ConnectorVpcLatticeEgressConfig.type = Types::ConnectorVpcLatticeEgressConfig
+    ConnectorsIpAddressType.add_member(:ipv4, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IPV4", traits: {"smithy.api#enumValue" => "IPV4"}))
+    ConnectorsIpAddressType.add_member(:dualstack, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DUALSTACK", traits: {"smithy.api#enumValue" => "DUALSTACK"}))
     CopyStepDetails.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowStepName, name: "Name"))
     CopyStepDetails.add_member(:destination_file_location, ::Smithy::Schema::Shapes::MemberShape.new(target: InputFileLocation, name: "DestinationFileLocation"))
     CopyStepDetails.add_member(:overwrite_existing, ::Smithy::Schema::Shapes::MemberShape.new(target: OverwriteExisting, name: "OverwriteExisting"))
@@ -451,13 +506,15 @@ module Aws::Transfer
     CreateAgreementRequest.type = Types::CreateAgreementRequest
     CreateAgreementResponse.add_member(:agreement_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AgreementId, name: "AgreementId", traits: {"smithy.api#required" => {}}))
     CreateAgreementResponse.type = Types::CreateAgreementResponse
-    CreateConnectorRequest.add_member(:url, ::Smithy::Schema::Shapes::MemberShape.new(target: Url, name: "Url", traits: {"smithy.api#required" => {}}))
+    CreateConnectorRequest.add_member(:url, ::Smithy::Schema::Shapes::MemberShape.new(target: Url, name: "Url"))
     CreateConnectorRequest.add_member(:as2_config, ::Smithy::Schema::Shapes::MemberShape.new(target: As2ConnectorConfig, name: "As2Config"))
     CreateConnectorRequest.add_member(:access_role, ::Smithy::Schema::Shapes::MemberShape.new(target: Role, name: "AccessRole", traits: {"smithy.api#required" => {}}))
     CreateConnectorRequest.add_member(:logging_role, ::Smithy::Schema::Shapes::MemberShape.new(target: Role, name: "LoggingRole"))
     CreateConnectorRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "Tags"))
     CreateConnectorRequest.add_member(:sftp_config, ::Smithy::Schema::Shapes::MemberShape.new(target: SftpConnectorConfig, name: "SftpConfig"))
     CreateConnectorRequest.add_member(:security_policy_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorSecurityPolicyName, name: "SecurityPolicyName"))
+    CreateConnectorRequest.add_member(:egress_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorEgressConfig, name: "EgressConfig"))
+    CreateConnectorRequest.add_member(:ip_address_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorsIpAddressType, name: "IpAddressType"))
     CreateConnectorRequest.type = Types::CreateConnectorRequest
     CreateConnectorResponse.add_member(:connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorId, name: "ConnectorId", traits: {"smithy.api#required" => {}}))
     CreateConnectorResponse.type = Types::CreateConnectorResponse
@@ -486,6 +543,7 @@ module Aws::Transfer
     CreateServerRequest.add_member(:structured_log_destinations, ::Smithy::Schema::Shapes::MemberShape.new(target: StructuredLogDestinations, name: "StructuredLogDestinations"))
     CreateServerRequest.add_member(:s3_storage_options, ::Smithy::Schema::Shapes::MemberShape.new(target: S3StorageOptions, name: "S3StorageOptions"))
     CreateServerRequest.add_member(:ip_address_type, ::Smithy::Schema::Shapes::MemberShape.new(target: IpAddressType, name: "IpAddressType"))
+    CreateServerRequest.add_member(:host_key_storage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: HostKeyStorageType, name: "HostKeyStorageType"))
     CreateServerRequest.type = Types::CreateServerRequest
     CreateServerResponse.add_member(:server_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerId, name: "ServerId", traits: {"smithy.api#required" => {}}))
     CreateServerResponse.type = Types::CreateServerResponse
@@ -508,6 +566,7 @@ module Aws::Transfer
     CreateWebAppRequest.add_member(:web_app_units, ::Smithy::Schema::Shapes::MemberShape.new(target: WebAppUnits, name: "WebAppUnits"))
     CreateWebAppRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "Tags"))
     CreateWebAppRequest.add_member(:web_app_endpoint_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: WebAppEndpointPolicy, name: "WebAppEndpointPolicy"))
+    CreateWebAppRequest.add_member(:endpoint_details, ::Smithy::Schema::Shapes::MemberShape.new(target: WebAppEndpointDetails, name: "EndpointDetails"))
     CreateWebAppRequest.type = Types::CreateWebAppRequest
     CreateWebAppResponse.add_member(:web_app_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WebAppId, name: "WebAppId", traits: {"smithy.api#required" => {}}))
     CreateWebAppResponse.type = Types::CreateWebAppResponse
@@ -515,6 +574,7 @@ module Aws::Transfer
     CreateWorkflowRequest.add_member(:steps, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowSteps, name: "Steps", traits: {"smithy.api#required" => {}}))
     CreateWorkflowRequest.add_member(:on_exception_steps, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowSteps, name: "OnExceptionSteps"))
     CreateWorkflowRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "Tags"))
+    CreateWorkflowRequest.add_member(:structured_log_destinations, ::Smithy::Schema::Shapes::MemberShape.new(target: StructuredLogDestinations, name: "StructuredLogDestinations"))
     CreateWorkflowRequest.type = Types::CreateWorkflowRequest
     CreateWorkflowResponse.add_member(:workflow_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowId, name: "WorkflowId", traits: {"smithy.api#required" => {}}))
     CreateWorkflowResponse.type = Types::CreateWorkflowResponse
@@ -524,6 +584,10 @@ module Aws::Transfer
     CustomDirectoriesType.add_member(:status_files_directory, ::Smithy::Schema::Shapes::MemberShape.new(target: HomeDirectory, name: "StatusFilesDirectory", traits: {"smithy.api#required" => {}}))
     CustomDirectoriesType.add_member(:temporary_files_directory, ::Smithy::Schema::Shapes::MemberShape.new(target: HomeDirectory, name: "TemporaryFilesDirectory", traits: {"smithy.api#required" => {}}))
     CustomDirectoriesType.type = Types::CustomDirectoriesType
+    CustomHttpHeader.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomHttpHeaderKeyType, name: "Key"))
+    CustomHttpHeader.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomHttpHeaderValueType, name: "Value"))
+    CustomHttpHeader.type = Types::CustomHttpHeader
+    CustomHttpHeaders.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomHttpHeader, name: "member"))
     CustomStepDetails.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowStepName, name: "Name"))
     CustomStepDetails.add_member(:target, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomStepTarget, name: "Target"))
     CustomStepDetails.add_member(:timeout_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomStepTimeoutSeconds, name: "TimeoutSeconds"))
@@ -677,7 +741,18 @@ module Aws::Transfer
     DescribedConnector.add_member(:sftp_config, ::Smithy::Schema::Shapes::MemberShape.new(target: SftpConnectorConfig, name: "SftpConfig"))
     DescribedConnector.add_member(:service_managed_egress_ip_addresses, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceManagedEgressIpAddresses, name: "ServiceManagedEgressIpAddresses"))
     DescribedConnector.add_member(:security_policy_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorSecurityPolicyName, name: "SecurityPolicyName"))
+    DescribedConnector.add_member(:egress_config, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribedConnectorEgressConfig, name: "EgressConfig", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
+    DescribedConnector.add_member(:egress_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorEgressType, name: "EgressType", traits: {"smithy.api#default" => "SERVICE_MANAGED", "smithy.api#required" => {}}))
+    DescribedConnector.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorErrorMessage, name: "ErrorMessage"))
+    DescribedConnector.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorStatus, name: "Status", traits: {"smithy.api#default" => "ACTIVE", "smithy.api#required" => {}}))
+    DescribedConnector.add_member(:ip_address_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorsIpAddressType, name: "IpAddressType"))
     DescribedConnector.type = Types::DescribedConnector
+    DescribedConnectorEgressConfig.add_member(:vpc_lattice, Types::DescribedConnectorEgressConfig::VpcLattice, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribedConnectorVpcLatticeEgressConfig, name: "VpcLattice"))
+    DescribedConnectorEgressConfig.add_member(:unknown, Types::DescribedConnectorEgressConfig::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    DescribedConnectorEgressConfig.type = Types::DescribedConnectorEgressConfig
+    DescribedConnectorVpcLatticeEgressConfig.add_member(:resource_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcLatticeResourceConfigurationArn, name: "ResourceConfigurationArn", traits: {"smithy.api#required" => {}}))
+    DescribedConnectorVpcLatticeEgressConfig.add_member(:port_number, ::Smithy::Schema::Shapes::MemberShape.new(target: SftpPort, name: "PortNumber"))
+    DescribedConnectorVpcLatticeEgressConfig.type = Types::DescribedConnectorVpcLatticeEgressConfig
     DescribedExecution.add_member(:execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionId, name: "ExecutionId"))
     DescribedExecution.add_member(:initial_file_location, ::Smithy::Schema::Shapes::MemberShape.new(target: FileLocation, name: "InitialFileLocation"))
     DescribedExecution.add_member(:service_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceMetadata, name: "ServiceMetadata"))
@@ -694,6 +769,8 @@ module Aws::Transfer
     DescribedHostKey.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: HostKeyType, name: "Type"))
     DescribedHostKey.add_member(:date_imported, ::Smithy::Schema::Shapes::MemberShape.new(target: DateImported, name: "DateImported"))
     DescribedHostKey.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "Tags"))
+    DescribedHostKey.add_member(:storage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: HostKeyStorageType, name: "StorageType"))
+    DescribedHostKey.add_member(:secret_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretId, name: "SecretId"))
     DescribedHostKey.type = Types::DescribedHostKey
     DescribedIdentityCenterConfig.add_member(:application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityCenterApplicationArn, name: "ApplicationArn"))
     DescribedIdentityCenterConfig.add_member(:instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityCenterInstanceArn, name: "InstanceArn"))
@@ -759,6 +836,8 @@ module Aws::Transfer
     DescribedWebApp.add_member(:web_app_units, ::Smithy::Schema::Shapes::MemberShape.new(target: WebAppUnits, name: "WebAppUnits"))
     DescribedWebApp.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "Tags"))
     DescribedWebApp.add_member(:web_app_endpoint_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: WebAppEndpointPolicy, name: "WebAppEndpointPolicy"))
+    DescribedWebApp.add_member(:endpoint_type, ::Smithy::Schema::Shapes::MemberShape.new(target: WebAppEndpointType, name: "EndpointType"))
+    DescribedWebApp.add_member(:described_endpoint_details, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribedWebAppEndpointDetails, name: "DescribedEndpointDetails"))
     DescribedWebApp.type = Types::DescribedWebApp
     DescribedWebAppCustomization.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "Arn", traits: {"smithy.api#required" => {}}))
     DescribedWebAppCustomization.add_member(:web_app_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WebAppId, name: "WebAppId", traits: {"smithy.api#required" => {}}))
@@ -766,15 +845,23 @@ module Aws::Transfer
     DescribedWebAppCustomization.add_member(:logo_file, ::Smithy::Schema::Shapes::MemberShape.new(target: WebAppLogoFile, name: "LogoFile"))
     DescribedWebAppCustomization.add_member(:favicon_file, ::Smithy::Schema::Shapes::MemberShape.new(target: WebAppFaviconFile, name: "FaviconFile"))
     DescribedWebAppCustomization.type = Types::DescribedWebAppCustomization
+    DescribedWebAppEndpointDetails.add_member(:vpc, Types::DescribedWebAppEndpointDetails::Vpc, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribedWebAppVpcConfig, name: "Vpc"))
+    DescribedWebAppEndpointDetails.add_member(:unknown, Types::DescribedWebAppEndpointDetails::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    DescribedWebAppEndpointDetails.type = Types::DescribedWebAppEndpointDetails
     DescribedWebAppIdentityProviderDetails.add_member(:identity_center_config, Types::DescribedWebAppIdentityProviderDetails::IdentityCenterConfig, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribedIdentityCenterConfig, name: "IdentityCenterConfig"))
     DescribedWebAppIdentityProviderDetails.add_member(:unknown, Types::DescribedWebAppIdentityProviderDetails::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     DescribedWebAppIdentityProviderDetails.type = Types::DescribedWebAppIdentityProviderDetails
+    DescribedWebAppVpcConfig.add_member(:subnet_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetIds, name: "SubnetIds"))
+    DescribedWebAppVpcConfig.add_member(:vpc_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcId, name: "VpcId"))
+    DescribedWebAppVpcConfig.add_member(:vpc_endpoint_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcEndpointId, name: "VpcEndpointId"))
+    DescribedWebAppVpcConfig.type = Types::DescribedWebAppVpcConfig
     DescribedWorkflow.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "Arn", traits: {"aws.cloudformation#cfnMutability" => "read", "smithy.api#required" => {}}))
     DescribedWorkflow.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowDescription, name: "Description"))
     DescribedWorkflow.add_member(:steps, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowSteps, name: "Steps"))
     DescribedWorkflow.add_member(:on_exception_steps, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowSteps, name: "OnExceptionSteps"))
     DescribedWorkflow.add_member(:workflow_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowId, name: "WorkflowId"))
     DescribedWorkflow.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "Tags"))
+    DescribedWorkflow.add_member(:structured_log_destinations, ::Smithy::Schema::Shapes::MemberShape.new(target: StructuredLogDestinations, name: "StructuredLogDestinations"))
     DescribedWorkflow.type = Types::DescribedWorkflow
     DirectoryListingOptimization.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     DirectoryListingOptimization.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
@@ -834,6 +921,8 @@ module Aws::Transfer
     HomeDirectoryMappings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HomeDirectoryMapEntry, name: "member"))
     HomeDirectoryType.add_member(:path, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PATH", traits: {"smithy.api#enumValue" => "PATH"}))
     HomeDirectoryType.add_member(:logical, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOGICAL", traits: {"smithy.api#enumValue" => "LOGICAL"}))
+    HostKeyStorageType.add_member(:service_managed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SERVICE_MANAGED", traits: {"smithy.api#enumValue" => "SERVICE_MANAGED"}))
+    HostKeyStorageType.add_member(:secrets_manager, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SECRETS_MANAGER", traits: {"smithy.api#enumValue" => "SECRETS_MANAGER"}))
     IdentityCenterConfig.add_member(:instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityCenterInstanceArn, name: "InstanceArn"))
     IdentityCenterConfig.add_member(:role, ::Smithy::Schema::Shapes::MemberShape.new(target: Role, name: "Role"))
     IdentityCenterConfig.type = Types::IdentityCenterConfig
@@ -862,6 +951,8 @@ module Aws::Transfer
     ImportHostKeyRequest.add_member(:host_key_body, ::Smithy::Schema::Shapes::MemberShape.new(target: HostKey, name: "HostKeyBody", traits: {"smithy.api#required" => {}}))
     ImportHostKeyRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: HostKeyDescription, name: "Description"))
     ImportHostKeyRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "Tags"))
+    ImportHostKeyRequest.add_member(:storage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: HostKeyStorageType, name: "StorageType"))
+    ImportHostKeyRequest.add_member(:kms_key, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKey, name: "KmsKey"))
     ImportHostKeyRequest.type = Types::ImportHostKeyRequest
     ImportHostKeyResponse.add_member(:server_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerId, name: "ServerId", traits: {"smithy.api#required" => {}}))
     ImportHostKeyResponse.add_member(:host_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: HostKeyId, name: "HostKeyId", traits: {"smithy.api#required" => {}}))
@@ -1025,6 +1116,8 @@ module Aws::Transfer
     ListedHostKey.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: HostKeyDescription, name: "Description"))
     ListedHostKey.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: HostKeyType, name: "Type"))
     ListedHostKey.add_member(:date_imported, ::Smithy::Schema::Shapes::MemberShape.new(target: DateImported, name: "DateImported"))
+    ListedHostKey.add_member(:storage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: HostKeyStorageType, name: "StorageType"))
+    ListedHostKey.add_member(:secret_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretId, name: "SecretId"))
     ListedHostKey.type = Types::ListedHostKey
     ListedHostKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListedHostKey, name: "member"))
     ListedProfile.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "Arn"))
@@ -1055,6 +1148,7 @@ module Aws::Transfer
     ListedWebApp.add_member(:web_app_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WebAppId, name: "WebAppId", traits: {"smithy.api#required" => {}}))
     ListedWebApp.add_member(:access_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: WebAppAccessEndpoint, name: "AccessEndpoint"))
     ListedWebApp.add_member(:web_app_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: WebAppEndpoint, name: "WebAppEndpoint"))
+    ListedWebApp.add_member(:endpoint_type, ::Smithy::Schema::Shapes::MemberShape.new(target: WebAppEndpointType, name: "EndpointType"))
     ListedWebApp.type = Types::ListedWebApp
     ListedWebApps.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListedWebApp, name: "member"))
     ListedWorkflow.add_member(:workflow_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowId, name: "WorkflowId"))
@@ -1069,6 +1163,7 @@ module Aws::Transfer
     MapType.add_member(:directory, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DIRECTORY", traits: {"smithy.api#enumValue" => "DIRECTORY"}))
     MdnResponse.add_member(:sync, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SYNC", traits: {"smithy.api#enumValue" => "SYNC"}))
     MdnResponse.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
+    MdnResponse.add_member(:async, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ASYNC", traits: {"smithy.api#enumValue" => "ASYNC"}))
     MdnSigningAlg.add_member(:sha256, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SHA256", traits: {"smithy.api#enumValue" => "SHA256"}))
     MdnSigningAlg.add_member(:sha384, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SHA384", traits: {"smithy.api#enumValue" => "SHA384"}))
     MdnSigningAlg.add_member(:sha512, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SHA512", traits: {"smithy.api#enumValue" => "SHA512"}))
@@ -1096,9 +1191,15 @@ module Aws::Transfer
     ProtocolDetails.add_member(:passive_ip, ::Smithy::Schema::Shapes::MemberShape.new(target: PassiveIp, name: "PassiveIp"))
     ProtocolDetails.add_member(:tls_session_resumption_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: TlsSessionResumptionMode, name: "TlsSessionResumptionMode"))
     ProtocolDetails.add_member(:set_stat_option, ::Smithy::Schema::Shapes::MemberShape.new(target: SetStatOption, name: "SetStatOption"))
+    ProtocolDetails.add_member(:sftp_ports, ::Smithy::Schema::Shapes::MemberShape.new(target: SftpPorts, name: "SftpPorts"))
     ProtocolDetails.add_member(:as2_transports, ::Smithy::Schema::Shapes::MemberShape.new(target: As2Transports, name: "As2Transports"))
+    ProtocolDetails.add_member(:proxy_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ProxyConfig, name: "ProxyConfig"))
     ProtocolDetails.type = Types::ProtocolDetails
     Protocols.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Protocol, name: "member"))
+    ProxyConfig.add_member(:sftp_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ProxyMode, name: "SftpMode"))
+    ProxyConfig.type = Types::ProxyConfig
+    ProxyMode.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
+    ProxyMode.add_member(:proxy_protocol_v2_enforced, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PROXY_PROTOCOL_V2_ENFORCED", traits: {"smithy.api#enumValue" => "PROXY_PROTOCOL_V2_ENFORCED"}))
     ResourceExistsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message", traits: {"smithy.api#required" => {}}))
     ResourceExistsException.add_member(:resource, ::Smithy::Schema::Shapes::MemberShape.new(target: Resource, name: "Resource", traits: {"smithy.api#required" => {}}))
     ResourceExistsException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "ResourceType", traits: {"smithy.api#required" => {}}))
@@ -1122,6 +1223,7 @@ module Aws::Transfer
     S3Tag.type = Types::S3Tag
     S3Tags.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Tag, name: "member"))
     SecondaryGids.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PosixId, name: "member"))
+    SecretVersionStageList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretVersionStage, name: "member"))
     SecurityGroupIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId, name: "member"))
     SecurityPolicyNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityPolicyName, name: "member"))
     SecurityPolicyOptions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityPolicyOption, name: "member"))
@@ -1150,10 +1252,15 @@ module Aws::Transfer
     SftpConnectorConfig.add_member(:user_secret_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretId, name: "UserSecretId"))
     SftpConnectorConfig.add_member(:trusted_host_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: SftpConnectorTrustedHostKeyList, name: "TrustedHostKeys"))
     SftpConnectorConfig.add_member(:max_concurrent_connections, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxConcurrentConnections, name: "MaxConcurrentConnections", traits: {"smithy.api#default" => 1}))
+    SftpConnectorConfig.add_member(:ordered_user_secret_version_stages, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretVersionStageList, name: "OrderedUserSecretVersionStages"))
     SftpConnectorConfig.type = Types::SftpConnectorConfig
     SftpConnectorConnectionDetails.add_member(:host_key, ::Smithy::Schema::Shapes::MemberShape.new(target: SftpConnectorHostKey, name: "HostKey"))
     SftpConnectorConnectionDetails.type = Types::SftpConnectorConnectionDetails
     SftpConnectorTrustedHostKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SftpConnectorTrustedHostKey, name: "member"))
+    SftpPortWithOptions.add_member(:sftp_port, ::Smithy::Schema::Shapes::MemberShape.new(target: SftpPort, name: "SftpPort", traits: {"smithy.api#required" => {}}))
+    SftpPortWithOptions.add_member(:communication_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: CommunicationMode, name: "CommunicationMode"))
+    SftpPortWithOptions.type = Types::SftpPortWithOptions
+    SftpPorts.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SftpPortWithOptions, name: "member"))
     SigningAlg.add_member(:sha256, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SHA256", traits: {"smithy.api#enumValue" => "SHA256"}))
     SigningAlg.add_member(:sha384, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SHA384", traits: {"smithy.api#enumValue" => "SHA384"}))
     SigningAlg.add_member(:sha512, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SHA512", traits: {"smithy.api#enumValue" => "SHA512"}))
@@ -1177,6 +1284,7 @@ module Aws::Transfer
     StartFileTransferRequest.add_member(:retrieve_file_paths, ::Smithy::Schema::Shapes::MemberShape.new(target: FilePaths, name: "RetrieveFilePaths"))
     StartFileTransferRequest.add_member(:local_directory_path, ::Smithy::Schema::Shapes::MemberShape.new(target: FilePath, name: "LocalDirectoryPath"))
     StartFileTransferRequest.add_member(:remote_directory_path, ::Smithy::Schema::Shapes::MemberShape.new(target: FilePath, name: "RemoteDirectoryPath"))
+    StartFileTransferRequest.add_member(:custom_http_headers, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomHttpHeaders, name: "CustomHttpHeaders"))
     StartFileTransferRequest.type = Types::StartFileTransferRequest
     StartFileTransferResponse.add_member(:transfer_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TransferId, name: "TransferId", traits: {"smithy.api#required" => {}}))
     StartFileTransferResponse.type = Types::StartFileTransferResponse
@@ -1278,6 +1386,9 @@ module Aws::Transfer
     UpdateCertificateRequest.type = Types::UpdateCertificateRequest
     UpdateCertificateResponse.add_member(:certificate_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateId, name: "CertificateId", traits: {"smithy.api#required" => {}}))
     UpdateCertificateResponse.type = Types::UpdateCertificateResponse
+    UpdateConnectorEgressConfig.add_member(:vpc_lattice, Types::UpdateConnectorEgressConfig::VpcLattice, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateConnectorVpcLatticeEgressConfig, name: "VpcLattice"))
+    UpdateConnectorEgressConfig.add_member(:unknown, Types::UpdateConnectorEgressConfig::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    UpdateConnectorEgressConfig.type = Types::UpdateConnectorEgressConfig
     UpdateConnectorRequest.add_member(:connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorId, name: "ConnectorId", traits: {"smithy.api#required" => {}}))
     UpdateConnectorRequest.add_member(:url, ::Smithy::Schema::Shapes::MemberShape.new(target: Url, name: "Url"))
     UpdateConnectorRequest.add_member(:as2_config, ::Smithy::Schema::Shapes::MemberShape.new(target: As2ConnectorConfig, name: "As2Config"))
@@ -1285,12 +1396,19 @@ module Aws::Transfer
     UpdateConnectorRequest.add_member(:logging_role, ::Smithy::Schema::Shapes::MemberShape.new(target: Role, name: "LoggingRole"))
     UpdateConnectorRequest.add_member(:sftp_config, ::Smithy::Schema::Shapes::MemberShape.new(target: SftpConnectorConfig, name: "SftpConfig"))
     UpdateConnectorRequest.add_member(:security_policy_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorSecurityPolicyName, name: "SecurityPolicyName"))
+    UpdateConnectorRequest.add_member(:egress_config, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateConnectorEgressConfig, name: "EgressConfig", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
+    UpdateConnectorRequest.add_member(:ip_address_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorsIpAddressType, name: "IpAddressType"))
     UpdateConnectorRequest.type = Types::UpdateConnectorRequest
     UpdateConnectorResponse.add_member(:connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorId, name: "ConnectorId", traits: {"smithy.api#required" => {}}))
     UpdateConnectorResponse.type = Types::UpdateConnectorResponse
+    UpdateConnectorVpcLatticeEgressConfig.add_member(:resource_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcLatticeResourceConfigurationArn, name: "ResourceConfigurationArn"))
+    UpdateConnectorVpcLatticeEgressConfig.add_member(:port_number, ::Smithy::Schema::Shapes::MemberShape.new(target: SftpPort, name: "PortNumber"))
+    UpdateConnectorVpcLatticeEgressConfig.type = Types::UpdateConnectorVpcLatticeEgressConfig
     UpdateHostKeyRequest.add_member(:server_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerId, name: "ServerId", traits: {"smithy.api#required" => {}}))
     UpdateHostKeyRequest.add_member(:host_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: HostKeyId, name: "HostKeyId", traits: {"smithy.api#required" => {}}))
-    UpdateHostKeyRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: HostKeyDescription, name: "Description", traits: {"smithy.api#required" => {}}))
+    UpdateHostKeyRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: HostKeyDescription, name: "Description"))
+    UpdateHostKeyRequest.add_member(:storage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: HostKeyStorageType, name: "StorageType"))
+    UpdateHostKeyRequest.add_member(:kms_key, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKey, name: "KmsKey"))
     UpdateHostKeyRequest.type = Types::UpdateHostKeyRequest
     UpdateHostKeyResponse.add_member(:server_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerId, name: "ServerId", traits: {"smithy.api#required" => {}}))
     UpdateHostKeyResponse.add_member(:host_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: HostKeyId, name: "HostKeyId", traits: {"smithy.api#required" => {}}))
@@ -1339,6 +1457,9 @@ module Aws::Transfer
     UpdateWebAppCustomizationRequest.type = Types::UpdateWebAppCustomizationRequest
     UpdateWebAppCustomizationResponse.add_member(:web_app_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WebAppId, name: "WebAppId", traits: {"smithy.api#required" => {}}))
     UpdateWebAppCustomizationResponse.type = Types::UpdateWebAppCustomizationResponse
+    UpdateWebAppEndpointDetails.add_member(:vpc, Types::UpdateWebAppEndpointDetails::Vpc, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateWebAppVpcConfig, name: "Vpc"))
+    UpdateWebAppEndpointDetails.add_member(:unknown, Types::UpdateWebAppEndpointDetails::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    UpdateWebAppEndpointDetails.type = Types::UpdateWebAppEndpointDetails
     UpdateWebAppIdentityCenterConfig.add_member(:role, ::Smithy::Schema::Shapes::MemberShape.new(target: Role, name: "Role"))
     UpdateWebAppIdentityCenterConfig.type = Types::UpdateWebAppIdentityCenterConfig
     UpdateWebAppIdentityProviderDetails.add_member(:identity_center_config, Types::UpdateWebAppIdentityProviderDetails::IdentityCenterConfig, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateWebAppIdentityCenterConfig, name: "IdentityCenterConfig"))
@@ -1348,21 +1469,37 @@ module Aws::Transfer
     UpdateWebAppRequest.add_member(:identity_provider_details, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateWebAppIdentityProviderDetails, name: "IdentityProviderDetails", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
     UpdateWebAppRequest.add_member(:access_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: WebAppAccessEndpoint, name: "AccessEndpoint"))
     UpdateWebAppRequest.add_member(:web_app_units, ::Smithy::Schema::Shapes::MemberShape.new(target: WebAppUnits, name: "WebAppUnits"))
+    UpdateWebAppRequest.add_member(:endpoint_details, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateWebAppEndpointDetails, name: "EndpointDetails", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
     UpdateWebAppRequest.type = Types::UpdateWebAppRequest
     UpdateWebAppResponse.add_member(:web_app_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WebAppId, name: "WebAppId", traits: {"smithy.api#required" => {}}))
     UpdateWebAppResponse.type = Types::UpdateWebAppResponse
+    UpdateWebAppVpcConfig.add_member(:subnet_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetIds, name: "SubnetIds"))
+    UpdateWebAppVpcConfig.add_member(:ip_address_type, ::Smithy::Schema::Shapes::MemberShape.new(target: WebAppVpcEndpointIpAddressType, name: "IpAddressType"))
+    UpdateWebAppVpcConfig.type = Types::UpdateWebAppVpcConfig
     UserDetails.add_member(:user_name, ::Smithy::Schema::Shapes::MemberShape.new(target: UserName, name: "UserName", traits: {"smithy.api#required" => {}}))
     UserDetails.add_member(:server_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerId, name: "ServerId", traits: {"smithy.api#required" => {}}))
     UserDetails.add_member(:session_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionId, name: "SessionId"))
     UserDetails.type = Types::UserDetails
+    WebAppEndpointDetails.add_member(:vpc, Types::WebAppEndpointDetails::Vpc, ::Smithy::Schema::Shapes::MemberShape.new(target: WebAppVpcConfig, name: "Vpc"))
+    WebAppEndpointDetails.add_member(:unknown, Types::WebAppEndpointDetails::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    WebAppEndpointDetails.type = Types::WebAppEndpointDetails
     WebAppEndpointPolicy.add_member(:fips, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FIPS", traits: {"smithy.api#enumValue" => "FIPS"}))
     WebAppEndpointPolicy.add_member(:standard, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STANDARD", traits: {"smithy.api#enumValue" => "STANDARD"}))
+    WebAppEndpointType.add_member(:public, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PUBLIC", traits: {"smithy.api#enumValue" => "PUBLIC"}))
+    WebAppEndpointType.add_member(:vpc, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VPC", traits: {"smithy.api#enumValue" => "VPC"}))
     WebAppIdentityProviderDetails.add_member(:identity_center_config, Types::WebAppIdentityProviderDetails::IdentityCenterConfig, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityCenterConfig, name: "IdentityCenterConfig"))
     WebAppIdentityProviderDetails.add_member(:unknown, Types::WebAppIdentityProviderDetails::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     WebAppIdentityProviderDetails.type = Types::WebAppIdentityProviderDetails
     WebAppUnits.add_member(:provisioned, Types::WebAppUnits::Provisioned, ::Smithy::Schema::Shapes::MemberShape.new(target: WebAppUnitCount, name: "Provisioned"))
     WebAppUnits.add_member(:unknown, Types::WebAppUnits::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     WebAppUnits.type = Types::WebAppUnits
+    WebAppVpcConfig.add_member(:subnet_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetIds, name: "SubnetIds"))
+    WebAppVpcConfig.add_member(:vpc_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcId, name: "VpcId"))
+    WebAppVpcConfig.add_member(:security_group_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupIds, name: "SecurityGroupIds"))
+    WebAppVpcConfig.add_member(:ip_address_type, ::Smithy::Schema::Shapes::MemberShape.new(target: WebAppVpcEndpointIpAddressType, name: "IpAddressType"))
+    WebAppVpcConfig.type = Types::WebAppVpcConfig
+    WebAppVpcEndpointIpAddressType.add_member(:ipv4, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IPV4", traits: {"smithy.api#enumValue" => "IPV4"}))
+    WebAppVpcEndpointIpAddressType.add_member(:dualstack, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DUALSTACK", traits: {"smithy.api#enumValue" => "DUALSTACK"}))
     WorkflowDetail.add_member(:workflow_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowId, name: "WorkflowId", traits: {"smithy.api#required" => {}}))
     WorkflowDetail.add_member(:execution_role, ::Smithy::Schema::Shapes::MemberShape.new(target: Role, name: "ExecutionRole", traits: {"smithy.api#required" => {}}))
     WorkflowDetail.type = Types::WorkflowDetail
@@ -1387,7 +1524,7 @@ module Aws::Transfer
       service.id = "com.amazonaws.transfer#TransferService"
       service.name = "TransferService"
       service.version = "2018-11-05"
-      service.traits = {"aws.api#service" => {"sdkId" => "Transfer", "arnNamespace" => "transfer", "cloudFormationName" => "Transfer", "cloudTrailEventSource" => "transfer.amazonaws.com", "endpointPrefix" => "transfer"}, "aws.api#tagEnabled" => {}, "aws.auth#sigv4" => {"name" => "transfer"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "AWS Transfer Family"}
+      service.traits = {"aws.api#service" => {"sdkId" => "Transfer", "arnNamespace" => "transfer", "cloudFormationName" => "Transfer", "cloudTrailEventSource" => "transfer.amazonaws.com", "endpointPrefix" => "transfer"}, "aws.api#tagEnabled" => {}, "aws.auth#sigv4" => {"name" => "transfer"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "AWS Transfer Family", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://transfer-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://transfer-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://transfer.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://transfer.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
       service.add_operation(:create_access, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.transfer#CreateAccess"
         operation.name = "CreateAccess"

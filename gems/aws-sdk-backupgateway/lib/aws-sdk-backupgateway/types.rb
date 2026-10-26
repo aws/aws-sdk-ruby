@@ -22,8 +22,7 @@ module Aws::BackupGateway
     end
 
     # @!attribute gateway_arn
-    #   <p>The Amazon Resource Name (ARN) of the gateway. Use the <code>ListGateways</code> operation
-    #         to return a list of gateways for your account and Amazon Web Services Region.</p>
+    #   <p>The Amazon Resource Name (ARN) of the gateway. Use the <code>ListGateways</code> operation to return a list of gateways for your account and Amazon Web Services Region.</p>
     #   @return [String]
     # @!attribute server_arn
     #   <p>The Amazon Resource Name (ARN) of the server that hosts your virtual machines.</p>
@@ -48,18 +47,9 @@ module Aws::BackupGateway
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Describes a bandwidth rate limit interval for a gateway. A bandwidth 
-    #       rate limit schedule consists of one or more bandwidth rate limit intervals. 
-    #       A bandwidth rate limit interval defines a period of time on one or more days 
-    #       of the week, during which bandwidth rate limits are specified for uploading, 
-    #       downloading, or both.</p>
+    # <p>Describes a bandwidth rate limit interval for a gateway. A bandwidth rate limit schedule consists of one or more bandwidth rate limit intervals. A bandwidth rate limit interval defines a period of time on one or more days of the week, during which bandwidth rate limits are specified for uploading, downloading, or both.</p>
     # @!attribute average_upload_rate_limit_in_bits_per_sec
-    #   <p>The average upload rate limit component of the bandwidth rate limit 
-    #         interval, in bits per second. This field does not appear in the response if 
-    #         the upload rate limit is not set.</p>
-    #            <note>
-    #               <p>For Backup Gateway, the minimum value is <code>(Value)</code>.</p>
-    #            </note>
+    #   <p>The average upload rate limit component of the bandwidth rate limit interval, in bits per second. This field does not appear in the response if the upload rate limit is not set.</p>
     #   @return [Integer]
     # @!attribute start_hour_of_day
     #   <p>The hour of the day to start the bandwidth rate limit interval.</p>
@@ -68,21 +58,13 @@ module Aws::BackupGateway
     #   <p>The hour of the day to end the bandwidth rate limit interval.</p>
     #   @return [Integer]
     # @!attribute start_minute_of_hour
-    #   <p>The minute of the hour to start the bandwidth rate limit interval. The 
-    #         interval begins at the start of that minute. To begin an interval exactly at 
-    #         the start of the hour, use the value <code>0</code>.</p>
+    #   <p>The minute of the hour to start the bandwidth rate limit interval. The interval begins at the start of that minute. To begin an interval exactly at the start of the hour, use the value <code>0</code>.</p>
     #   @return [Integer]
     # @!attribute end_minute_of_hour
-    #   <p>The minute of the hour to end the bandwidth rate limit interval.</p>
-    #            <important>
-    #               <p>The bandwidth rate limit interval ends at the end of the minute. 
-    #         To end an interval at the end of an hour, use the value <code>59</code>.</p>
-    #            </important>
+    #   <p>The minute of the hour to end the bandwidth rate limit interval.</p> <important> <p>The bandwidth rate limit interval ends at the end of the minute. To end an interval at the end of an hour, use the value <code>59</code>.</p> </important>
     #   @return [Integer]
     # @!attribute days_of_week
-    #   <p>The days of the week component of the bandwidth rate limit interval, 
-    #         represented as ordinal numbers from 0 to 6, where 0 represents Sunday and 6 represents 
-    #         Saturday.</p>
+    #   <p>The days of the week component of the bandwidth rate limit interval, represented as ordinal numbers from 0 to 6, where 0 represents Sunday and 6 represents Saturday.</p>
     #   @return [Array<Integer>]
     class BandwidthRateLimitInterval < Struct.new(
       nil,
@@ -212,11 +194,9 @@ module Aws::BackupGateway
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A gateway is an Backup Gateway appliance that runs on the customer's network
-    #       to provide seamless connectivity to backup storage in the Amazon Web Services Cloud.</p>
+    # <p>A gateway is an Backup Gateway appliance that runs on the customer's network to provide seamless connectivity to backup storage in the Amazon Web Services Cloud.</p>
     # @!attribute gateway_arn
-    #   <p>The Amazon Resource Name (ARN) of the gateway. Use the <code>ListGateways</code> operation
-    #         to return a list of gateways for your account and Amazon Web Services Region.</p>
+    #   <p>The Amazon Resource Name (ARN) of the gateway. Use the <code>ListGateways</code> operation to return a list of gateways for your account and Amazon Web Services Region.</p>
     #   @return [String]
     # @!attribute gateway_display_name
     #   <p>The display name of the gateway.</p>
@@ -228,8 +208,7 @@ module Aws::BackupGateway
     #   <p>The hypervisor ID of the gateway.</p>
     #   @return [String]
     # @!attribute last_seen_time
-    #   <p>The last time Backup gateway communicated with the gateway, in Unix format and
-    #         UTC time.</p>
+    #   <p>The last time Backup gateway communicated with the gateway, in Unix format and UTC time.</p>
     #   @return [Time]
     class Gateway < Struct.new(
       nil,
@@ -245,10 +224,7 @@ module Aws::BackupGateway
 
     # <p>The details of gateway.</p>
     # @!attribute gateway_arn
-    #   <p>The Amazon Resource Name (ARN) of the 
-    #         gateway. Use the <code>ListGateways</code> operation
-    #         to return a list of gateways for your account and 
-    #         Amazon Web Services Region.</p>
+    #   <p>The Amazon Resource Name (ARN) of the gateway. Use the <code>ListGateways</code> operation to return a list of gateways for your account and Amazon Web Services Region.</p>
     #   @return [String]
     # @!attribute gateway_display_name
     #   <p>The display name of the gateway.</p>
@@ -260,20 +236,22 @@ module Aws::BackupGateway
     #   <p>The hypervisor ID of the gateway.</p>
     #   @return [String]
     # @!attribute last_seen_time
-    #   <p>Details showing the last time Backup gateway communicated
-    #         with the cloud, in Unix format and UTC time.</p>
+    #   <p>Details showing the last time Backup gateway communicated with the cloud, in Unix format and UTC time.</p>
     #   @return [Time]
     # @!attribute maintenance_start_time
-    #   <p>Returns your gateway's weekly maintenance start time including the day and time of the week. 
-    #         Note that values are in terms of the gateway's time zone. Can be weekly or monthly.</p>
+    #   <p>Returns your gateway's weekly maintenance start time including the day and time of the week. Note that values are in terms of the gateway's time zone. Can be weekly or monthly.</p>
     #   @return [Types::MaintenanceStartTime]
     # @!attribute next_update_availability_time
-    #   <p>Details showing the next update availability time of the 
-    #         gateway.</p>
+    #   <p>Details showing the next update availability time of the gateway.</p>
     #   @return [Time]
     # @!attribute vpc_endpoint
-    #   <p>The DNS name for the virtual private cloud (VPC) endpoint the gateway 
-    #         uses to connect to the cloud for backup gateway.</p>
+    #   <p>The DNS name for the virtual private cloud (VPC) endpoint the gateway uses to connect to the cloud for backup gateway.</p>
+    #   @return [String]
+    # @!attribute deprecation_date
+    #   <p>Date after which this gateway will not receive software updates for new features and bug fixes.</p>
+    #   @return [Time]
+    # @!attribute software_version
+    #   <p>The version number of the software running on the gateway appliance.</p>
     #   @return [String]
     class GatewayDetails < Struct.new(
       nil,
@@ -285,17 +263,15 @@ module Aws::BackupGateway
       :maintenance_start_time,
       :next_update_availability_time,
       :vpc_endpoint,
+      :deprecation_date,
+      :software_version,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_arn
-    #   <p>The Amazon Resource Name (ARN) of the gateway. Use the 
-    #         <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_ListGateways.html">
-    #                  <code>ListGateways</code>
-    #               </a> operation to return a list of gateways 
-    #         for your account and Amazon Web Services Region.</p>
+    #   <p>The Amazon Resource Name (ARN) of the gateway. Use the <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_ListGateways.html"> <code>ListGateways</code> </a> operation to return a list of gateways for your account and Amazon Web Services Region.</p>
     #   @return [String]
     class GetBandwidthRateLimitScheduleOperationInput < Struct.new(
       nil,
@@ -306,15 +282,10 @@ module Aws::BackupGateway
     end
 
     # @!attribute gateway_arn
-    #   <p>The Amazon Resource Name (ARN) of the gateway. Use the 
-    #         <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_ListGateways.html">
-    #                  <code>ListGateways</code>
-    #               </a> operation to return a list of gateways 
-    #         for your account and Amazon Web Services Region.</p>
+    #   <p>The Amazon Resource Name (ARN) of the gateway. Use the <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_ListGateways.html"> <code>ListGateways</code> </a> operation to return a list of gateways for your account and Amazon Web Services Region.</p>
     #   @return [String]
     # @!attribute bandwidth_rate_limit_intervals
-    #   <p>An array containing bandwidth rate limit schedule intervals for a gateway. 
-    #         When no bandwidth rate limit intervals have been scheduled, the array is empty.</p>
+    #   <p>An array containing bandwidth rate limit schedule intervals for a gateway. When no bandwidth rate limit intervals have been scheduled, the array is empty.</p>
     #   @return [Array<Types::BandwidthRateLimitInterval>]
     class GetBandwidthRateLimitScheduleOperationOutput < Struct.new(
       nil,
@@ -337,8 +308,7 @@ module Aws::BackupGateway
     end
 
     # @!attribute gateway
-    #   <p>By providing the ARN (Amazon Resource Name), this
-    #         API returns the gateway.</p>
+    #   <p>By providing the ARN (Amazon Resource Name), this API returns the gateway.</p>
     #   @return [Types::GatewayDetails]
     class GetGatewayOperationOutput < Struct.new(
       nil,
@@ -385,8 +355,7 @@ module Aws::BackupGateway
     #   <p>The Amazon Resource Name (ARN) of the hypervisor.</p>
     #   @return [String]
     # @!attribute vmware_to_aws_tag_mappings
-    #   <p>This is a display of the mappings of on-premises VMware tags to the 
-    #         Amazon Web Services tags.</p>
+    #   <p>This is a display of the mappings of VMware tags to the Amazon Web Services tags.</p>
     #   @return [Array<Types::VmwareToAwsTagMapping>]
     # @!attribute iam_role_arn
     #   <p>The Amazon Resource Name (ARN) of the IAM role.</p>
@@ -413,9 +382,7 @@ module Aws::BackupGateway
     end
 
     # @!attribute virtual_machine
-    #   <p>This object contains the basic attributes of <code>VirtualMachine</code> contained by the output of 
-    #         <code>GetVirtualMachine</code>
-    #            </p>
+    #   <p>This object contains the basic attributes of <code>VirtualMachine</code> contained by the output of <code>GetVirtualMachine</code> </p>
     #   @return [Types::VirtualMachineDetails]
     class GetVirtualMachineOperationOutput < Struct.new(
       nil,
@@ -425,19 +392,15 @@ module Aws::BackupGateway
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Represents the hypervisor's permissions to which the gateway will connect.</p>
-    #          <p>A hypervisor is hardware, software, or firmware that creates and manages virtual machines,
-    #       and allocates resources to them.</p>
+    # <p>Represents the hypervisor's permissions to which the gateway will connect.</p> <p>A hypervisor is hardware, software, or firmware that creates and manages virtual machines, and allocates resources to them.</p>
     # @!attribute host
-    #   <p>The server host of the hypervisor. This can be either an IP address or a fully-qualified
-    #         domain name (FQDN).</p>
+    #   <p>The server host of the hypervisor. This can be either an IP address or a fully-qualified domain name (FQDN).</p>
     #   @return [String]
     # @!attribute hypervisor_arn
     #   <p>The Amazon Resource Name (ARN) of the hypervisor.</p>
     #   @return [String]
     # @!attribute kms_key_arn
-    #   <p>The Amazon Resource Name (ARN) of the Key Management Service used to encrypt the
-    #         hypervisor.</p>
+    #   <p>The Amazon Resource Name (ARN) of the Key Management Service used to encrypt the hypervisor.</p>
     #   @return [String]
     # @!attribute name
     #   <p>The name of the hypervisor.</p>
@@ -457,35 +420,27 @@ module Aws::BackupGateway
       include ::Smithy::Schema::Structure
     end
 
-    # <p>These are the details of the specified hypervisor. A hypervisor is hardware, 
-    #       software, or firmware that creates and manages virtual machines, and allocates 
-    #       resources to them.</p>
+    # <p>These are the details of the specified hypervisor. A hypervisor is hardware, software, or firmware that creates and manages virtual machines, and allocates resources to them.</p>
     # @!attribute host
-    #   <p>The server host of the hypervisor. This can be either an IP address or 
-    #         a fully-qualified domain name (FQDN).</p>
+    #   <p>The server host of the hypervisor. This can be either an IP address or a fully-qualified domain name (FQDN).</p>
     #   @return [String]
     # @!attribute hypervisor_arn
     #   <p>The Amazon Resource Name (ARN) of the hypervisor.</p>
     #   @return [String]
     # @!attribute kms_key_arn
-    #   <p>The Amazon Resource Name (ARN) of the KMS  
-    #         used to encrypt the hypervisor.</p>
+    #   <p>The Amazon Resource Name (ARN) of the KMS used to encrypt the hypervisor.</p>
     #   @return [String]
     # @!attribute name
     #   <p>This is the name of the specified hypervisor.</p>
     #   @return [String]
     # @!attribute log_group_arn
-    #   <p>The Amazon Resource Name (ARN) of the group of gateways within 
-    #         the requested log.</p>
+    #   <p>The Amazon Resource Name (ARN) of the group of gateways within the requested log.</p>
     #   @return [String]
     # @!attribute state
-    #   <p>This is the current state of the specified hypervisor.</p>
-    #            <p>The possible states are <code>PENDING</code>, <code>ONLINE</code>, 
-    #         <code>OFFLINE</code>, or <code>ERROR</code>.</p>
+    #   <p>This is the current state of the specified hypervisor.</p> <p>The possible states are <code>PENDING</code>, <code>ONLINE</code>, <code>OFFLINE</code>, or <code>ERROR</code>.</p>
     #   @return [String]
     # @!attribute last_successful_metadata_sync_time
-    #   <p>This is the time when the most recent successful sync 
-    #         of metadata occurred.</p>
+    #   <p>This is the time when the most recent successful sync of metadata occurred.</p>
     #   @return [Time]
     # @!attribute latest_metadata_sync_status_message
     #   <p>This is the most recent status for the indicated metadata sync.</p>
@@ -513,8 +468,7 @@ module Aws::BackupGateway
     #   <p>The name of the hypervisor.</p>
     #   @return [String]
     # @!attribute host
-    #   <p>The server host of the hypervisor. This can be either an IP address or a fully-qualified
-    #         domain name (FQDN).</p>
+    #   <p>The server host of the hypervisor. This can be either an IP address or a fully-qualified domain name (FQDN).</p>
     #   @return [String]
     # @!attribute username
     #   <p>The username for the hypervisor.</p>
@@ -571,10 +525,7 @@ module Aws::BackupGateway
     #   <p>The maximum number of gateways to list.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>The next item following a partial list of returned resources. For example, if a request is
-    #         made to return <code>MaxResults</code> number of resources, <code>NextToken</code> allows you
-    #         to return more items in your list starting at the location pointed to by the next
-    #         token.</p>
+    #   <p>The next item following a partial list of returned resources. For example, if a request is made to return <code>MaxResults</code> number of resources, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.</p>
     #   @return [String]
     class ListGatewaysOperationInput < Struct.new(
       nil,
@@ -589,10 +540,7 @@ module Aws::BackupGateway
     #   <p>A list of your gateways.</p>
     #   @return [Array<Types::Gateway>]
     # @!attribute next_token
-    #   <p>The next item following a partial list of returned resources. For example, if a request is
-    #         made to return <code>maxResults</code> number of resources, <code>NextToken</code> allows you
-    #         to return more items in your list starting at the location pointed to by the next
-    #         token.</p>
+    #   <p>The next item following a partial list of returned resources. For example, if a request is made to return <code>maxResults</code> number of resources, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.</p>
     #   @return [String]
     class ListGatewaysOperationOutput < Struct.new(
       nil,
@@ -607,10 +555,7 @@ module Aws::BackupGateway
     #   <p>The maximum number of hypervisors to list.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>The next item following a partial list of returned resources. For example, if a request is
-    #         made to return <code>maxResults</code> number of resources, <code>NextToken</code> allows you
-    #         to return more items in your list starting at the location pointed to by the next
-    #         token.</p>
+    #   <p>The next item following a partial list of returned resources. For example, if a request is made to return <code>maxResults</code> number of resources, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.</p>
     #   @return [String]
     class ListHypervisorsOperationInput < Struct.new(
       nil,
@@ -622,14 +567,10 @@ module Aws::BackupGateway
     end
 
     # @!attribute hypervisors
-    #   <p>A list of your <code>Hypervisor</code> objects, ordered by their Amazon Resource Names
-    #         (ARNs).</p>
+    #   <p>A list of your <code>Hypervisor</code> objects, ordered by their Amazon Resource Names (ARNs).</p>
     #   @return [Array<Types::Hypervisor>]
     # @!attribute next_token
-    #   <p>The next item following a partial list of returned resources. For example, if a request is
-    #         made to return <code>maxResults</code> number of resources, <code>NextToken</code> allows you
-    #         to return more items in your list starting at the location pointed to by the next
-    #         token.</p>
+    #   <p>The next item following a partial list of returned resources. For example, if a request is made to return <code>maxResults</code> number of resources, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.</p>
     #   @return [String]
     class ListHypervisorsOperationOutput < Struct.new(
       nil,
@@ -673,10 +614,7 @@ module Aws::BackupGateway
     #   <p>The maximum number of virtual machines to list.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>The next item following a partial list of returned resources. For example, if a request is
-    #         made to return <code>maxResults</code> number of resources, <code>NextToken</code> allows you
-    #         to return more items in your list starting at the location pointed to by the next
-    #         token.</p>
+    #   <p>The next item following a partial list of returned resources. For example, if a request is made to return <code>maxResults</code> number of resources, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.</p>
     #   @return [String]
     class ListVirtualMachinesOperationInput < Struct.new(
       nil,
@@ -689,14 +627,10 @@ module Aws::BackupGateway
     end
 
     # @!attribute virtual_machines
-    #   <p>A list of your <code>VirtualMachine</code> objects, ordered by their Amazon Resource Names
-    #         (ARNs).</p>
+    #   <p>A list of your <code>VirtualMachine</code> objects, ordered by their Amazon Resource Names (ARNs).</p>
     #   @return [Array<Types::VirtualMachine>]
     # @!attribute next_token
-    #   <p>The next item following a partial list of returned resources. For example, if a request is
-    #         made to return <code>maxResults</code> number of resources, <code>NextToken</code> allows you
-    #         to return more items in your list starting at the location pointed to by the next
-    #         token.</p>
+    #   <p>The next item following a partial list of returned resources. For example, if a request is made to return <code>maxResults</code> number of resources, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.</p>
     #   @return [String]
     class ListVirtualMachinesOperationOutput < Struct.new(
       nil,
@@ -707,23 +641,18 @@ module Aws::BackupGateway
       include ::Smithy::Schema::Structure
     end
 
-    # <p>This is your gateway's weekly maintenance start time including the day and time of the week. 
-    #       Note that values are in terms of the gateway's time zone. Can be weekly or monthly.</p>
+    # <p>This is your gateway's weekly maintenance start time including the day and time of the week. Note that values are in terms of the gateway's time zone. Can be weekly or monthly.</p>
     # @!attribute day_of_month
-    #   <p>The day of the month component of the maintenance start time represented as an ordinal number from 
-    #         1 to 28, where 1 represents the first day of the month and 28 represents the last day of the month.</p>
+    #   <p>The day of the month component of the maintenance start time represented as an ordinal number from 1 to 28, where 1 represents the first day of the month and 28 represents the last day of the month.</p>
     #   @return [Integer]
     # @!attribute day_of_week
-    #   <p>An ordinal number between 0 and 6 that represents the day of the week, where 0 represents Sunday 
-    #         and 6 represents Saturday. The day of week is in the time zone of the gateway.</p>
+    #   <p>An ordinal number between 0 and 6 that represents the day of the week, where 0 represents Sunday and 6 represents Saturday. The day of week is in the time zone of the gateway.</p>
     #   @return [Integer]
     # @!attribute hour_of_day
-    #   <p>The hour component of the maintenance start time represented as <i>hh</i>, 
-    #         where <i>hh</i> is the hour (0 to 23). The hour of the day is in the time zone of the gateway.</p>
+    #   <p>The hour component of the maintenance start time represented as <i>hh</i>, where <i>hh</i> is the hour (0 to 23). The hour of the day is in the time zone of the gateway.</p>
     #   @return [Integer]
     # @!attribute minute_of_hour
-    #   <p>The minute component of the maintenance start time represented as <i>mm</i>, where 
-    #         <i>mm</i> is the minute (0 to 59). The minute of the hour is in the time zone of the gateway.</p>
+    #   <p>The minute component of the maintenance start time represented as <i>mm</i>, where <i>mm</i> is the minute (0 to 59). The minute of the hour is in the time zone of the gateway.</p>
     #   @return [Integer]
     class MaintenanceStartTime < Struct.new(
       nil,
@@ -737,15 +666,10 @@ module Aws::BackupGateway
     end
 
     # @!attribute gateway_arn
-    #   <p>The Amazon Resource Name (ARN) of the gateway. Use the 
-    #         <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_ListGateways.html">
-    #                  <code>ListGateways</code>
-    #               </a> operation to return a list of gateways 
-    #         for your account and Amazon Web Services Region.</p>
+    #   <p>The Amazon Resource Name (ARN) of the gateway. Use the <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_ListGateways.html"> <code>ListGateways</code> </a> operation to return a list of gateways for your account and Amazon Web Services Region.</p>
     #   @return [String]
     # @!attribute bandwidth_rate_limit_intervals
-    #   <p>An array containing bandwidth rate limit schedule intervals for a gateway. 
-    #         When no bandwidth rate limit intervals have been scheduled, the array is empty.</p>
+    #   <p>An array containing bandwidth rate limit schedule intervals for a gateway. When no bandwidth rate limit intervals have been scheduled, the array is empty.</p>
     #   @return [Array<Types::BandwidthRateLimitInterval>]
     class PutBandwidthRateLimitScheduleOperationInput < Struct.new(
       nil,
@@ -757,11 +681,7 @@ module Aws::BackupGateway
     end
 
     # @!attribute gateway_arn
-    #   <p>The Amazon Resource Name (ARN) of the gateway. Use the 
-    #         <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_ListGateways.html">
-    #                  <code>ListGateways</code>
-    #               </a> operation to return a list of gateways 
-    #         for your account and Amazon Web Services Region.</p>
+    #   <p>The Amazon Resource Name (ARN) of the gateway. Use the <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_ListGateways.html"> <code>ListGateways</code> </a> operation to return a list of gateways for your account and Amazon Web Services Region.</p>
     #   @return [String]
     class PutBandwidthRateLimitScheduleOperationOutput < Struct.new(
       nil,
@@ -775,8 +695,7 @@ module Aws::BackupGateway
     #   <p>The Amazon Resource Name (ARN) of the hypervisor.</p>
     #   @return [String]
     # @!attribute vmware_to_aws_tag_mappings
-    #   <p>This action requests the mappings of on-premises VMware tags to the 
-    #         Amazon Web Services tags.</p>
+    #   <p>This action requests the mappings of VMware tags to the Amazon Web Services tags.</p>
     #   @return [Array<Types::VmwareToAwsTagMapping>]
     # @!attribute iam_role_arn
     #   <p>The Amazon Resource Name (ARN) of the IAM role.</p>
@@ -803,8 +722,7 @@ module Aws::BackupGateway
     end
 
     # @!attribute gateway_arn
-    #   <p>The Amazon Resource Name (ARN) for the gateway, used to specify its maintenance start
-    #         time.</p>
+    #   <p>The Amazon Resource Name (ARN) for the gateway, used to specify its maintenance start time.</p>
     #   @return [String]
     # @!attribute hour_of_day
     #   <p>The hour of the day to start maintenance on a gateway.</p>
@@ -816,8 +734,7 @@ module Aws::BackupGateway
     #   <p>The day of the week to start maintenance on a gateway.</p>
     #   @return [Integer]
     # @!attribute day_of_month
-    #   <p>The day of the month start maintenance on a gateway.</p>
-    #            <p>Valid values range from <code>Sunday</code> to <code>Saturday</code>.</p>
+    #   <p>The day of the month start maintenance on a gateway.</p> <p>Valid values range from <code>Sunday</code> to <code>Saturday</code>.</p>
     #   @return [Integer]
     class PutMaintenanceStartTimeOperationInput < Struct.new(
       nil,
@@ -832,8 +749,7 @@ module Aws::BackupGateway
     end
 
     # @!attribute gateway_arn
-    #   <p>The Amazon Resource Name (ARN) of a gateway for which you set the maintenance start
-    #         time.</p>
+    #   <p>The Amazon Resource Name (ARN) of a gateway for which you set the maintenance start time.</p>
     #   @return [String]
     class PutMaintenanceStartTimeOperationOutput < Struct.new(
       nil,
@@ -880,9 +796,7 @@ module Aws::BackupGateway
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A key-value pair you can use to manage, filter, and search for your resources. Allowed
-    #       characters include UTF-8 letters, numbers, spaces, and the following characters: + - = . _ :
-    #       /.</p>
+    # <p>A key-value pair you can use to manage, filter, and search for your resources. Allowed characters include UTF-8 letters, numbers, and the following characters: + - = . _ : /. Spaces are not allowed in tag values.</p>
     # @!attribute key
     #   <p>The key part of a tag's key-value pair. The key can't start with <code>aws:</code>.</p>
     #   @return [String]
@@ -928,8 +842,7 @@ module Aws::BackupGateway
     #   <p>The Amazon Resource Name (ARN) of the gateway to the hypervisor to test.</p>
     #   @return [String]
     # @!attribute host
-    #   <p>The server host of the hypervisor. This can be either an IP address or a fully-qualified
-    #         domain name (FQDN).</p>
+    #   <p>The server host of the hypervisor. This can be either an IP address or a fully-qualified domain name (FQDN).</p>
     #   @return [String]
     # @!attribute username
     #   <p>The username for the hypervisor.</p>
@@ -955,11 +868,9 @@ module Aws::BackupGateway
       include ::Smithy::Schema::Structure
     end
 
-    # <p>TPS has been limited to protect against intentional or unintentional 
-    #     high request volumes.</p>
+    # <p>TPS has been limited to protect against intentional or unintentional high request volumes.</p>
     # @!attribute error_code
-    #   <p>Error: TPS has been limited to protect against intentional or unintentional 
-    #         high request volumes.</p>
+    #   <p>Error: TPS has been limited to protect against intentional or unintentional high request volumes.</p>
     #   @return [String]
     # @!attribute message
     #   @return [String]
@@ -1025,8 +936,7 @@ module Aws::BackupGateway
     end
 
     # @!attribute gateway_arn
-    #   <p>The Amazon Resource Name (ARN) of the gateway
-    #         to be updated.</p>
+    #   <p>The Amazon Resource Name (ARN) of the gateway to be updated.</p>
     #   @return [String]
     class UpdateGatewaySoftwareNowOperationInput < Struct.new(
       nil,
@@ -1037,8 +947,7 @@ module Aws::BackupGateway
     end
 
     # @!attribute gateway_arn
-    #   <p>The Amazon Resource Name (ARN) of the gateway
-    #         you updated.</p>
+    #   <p>The Amazon Resource Name (ARN) of the gateway you updated.</p>
     #   @return [String]
     class UpdateGatewaySoftwareNowOperationOutput < Struct.new(
       nil,
@@ -1052,8 +961,7 @@ module Aws::BackupGateway
     #   <p>The Amazon Resource Name (ARN) of the hypervisor to update.</p>
     #   @return [String]
     # @!attribute host
-    #   <p>The updated host of the hypervisor. This can be either an IP address or a fully-qualified
-    #         domain name (FQDN).</p>
+    #   <p>The updated host of the hypervisor. This can be either an IP address or a fully-qualified domain name (FQDN).</p>
     #   @return [String]
     # @!attribute username
     #   <p>The updated username for the hypervisor.</p>
@@ -1120,8 +1028,7 @@ module Aws::BackupGateway
     #   <p>The path of the virtual machine.</p>
     #   @return [String]
     # @!attribute resource_arn
-    #   <p>The Amazon Resource Name (ARN) of the virtual machine. For example,
-    #           <code>arn:aws:backup-gateway:us-west-1:0000000000000:vm/vm-0000ABCDEFGIJKL</code>.</p>
+    #   <p>The Amazon Resource Name (ARN) of the virtual machine. For example, <code>arn:aws:backup-gateway:us-west-1:0000000000000:vm/vm-0000ABCDEFGIJKL</code>.</p>
     #   @return [String]
     # @!attribute last_backup_date
     #   <p>The most recent date a virtual machine was backed up, in Unix format and UTC time.</p>
@@ -1153,15 +1060,13 @@ module Aws::BackupGateway
     #   <p>The path of the virtual machine.</p>
     #   @return [String]
     # @!attribute resource_arn
-    #   <p>The Amazon Resource Name (ARN) of the virtual machine. For example, 
-    #         <code>arn:aws:backup-gateway:us-west-1:0000000000000:vm/vm-0000ABCDEFGIJKL</code>.</p>
+    #   <p>The Amazon Resource Name (ARN) of the virtual machine. For example, <code>arn:aws:backup-gateway:us-west-1:0000000000000:vm/vm-0000ABCDEFGIJKL</code>.</p>
     #   @return [String]
     # @!attribute last_backup_date
     #   <p>The most recent date a virtual machine was backed up, in Unix format and UTC time.</p>
     #   @return [Time]
     # @!attribute vmware_tags
-    #   <p>These are the details of the VMware tags associated with the specified 
-    #         virtual machine.</p>
+    #   <p>These are the details of the VMware tags associated with the specified virtual machine.</p>
     #   @return [Array<Types::VmwareTag>]
     class VirtualMachineDetails < Struct.new(
       nil,
@@ -1177,10 +1082,7 @@ module Aws::BackupGateway
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A VMware tag is a tag attached to a specific virtual machine.
-    #       A <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_Tag.html">tag</a> 
-    #       is a key-value pair you can use to manage, filter, and search for your resources.</p>
-    #          <p>The content of VMware tags can be matched to Amazon Web Services tags.</p>
+    # <p>A VMware tag is a tag attached to a specific virtual machine. A <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_Tag.html">tag</a> is a key-value pair you can use to manage, filter, and search for your resources.</p> <p>The content of VMware tags can be matched to Amazon Web Services tags.</p>
     # @!attribute vmware_category
     #   <p>The is the category of VMware.</p>
     #   @return [String]
@@ -1200,8 +1102,7 @@ module Aws::BackupGateway
       include ::Smithy::Schema::Structure
     end
 
-    # <p>This displays the mapping of on-premises VMware tags to the 
-    #       corresponding Amazon Web Services tags.</p>
+    # <p>This displays the mapping of VMware tags to the corresponding Amazon Web Services tags.</p>
     # @!attribute vmware_category
     #   <p>The is the category of VMware.</p>
     #   @return [String]

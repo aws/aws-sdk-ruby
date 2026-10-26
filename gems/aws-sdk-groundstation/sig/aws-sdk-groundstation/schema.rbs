@@ -11,19 +11,30 @@ module Aws::GroundStation
     AntennaDemodDecodeDetails: StructureShape
     AntennaDownlinkConfig: StructureShape
     AntennaDownlinkDemodDecodeConfig: StructureShape
+    AntennaList: ListShape
+    AntennaListItem: StructureShape
+    AntennaName: StringShape
     AntennaUplinkConfig: StructureShape
     AnyArn: StringShape
     AuditResults: EnumShape
     AwsGroundStationAgentEndpoint: StructureShape
+    AzElEphemeris: StructureShape
+    AzElEphemerisFilter: StructureShape
+    AzElProgramTrackSettings: StructureShape
+    AzElSegment: StructureShape
+    AzElSegmentList: ListShape
+    AzElSegments: StructureShape
+    AzElSegmentsData: UnionShape
     BandwidthUnits: EnumShape
     BucketArn: StringShape
-    CancelContactInput: StructureShape
     CancelContactOutput: StructureShape
+    CancelContactRequest: StructureShape
     CapabilityArn: StringShape
     CapabilityArnList: ListShape
     CapabilityHealth: EnumShape
     CapabilityHealthReason: EnumShape
     CapabilityHealthReasonList: ListShape
+    ClientToken: StringShape
     ComponentStatusData: StructureShape
     ComponentStatusList: ListShape
     ComponentTypeString: StringShape
@@ -38,15 +49,22 @@ module Aws::GroundStation
     ConnectionDetails: StructureShape
     ContactData: StructureShape
     ContactList: ListShape
+    ContactReservationDetails: StructureShape
     ContactStatus: EnumShape
-    CreateConfigInput: StructureShape
+    ContactVersion: StructureShape
+    ContactVersionsList: ListShape
     CreateConfigOutput: StructureShape
-    CreateDataflowEndpointGroupInput: StructureShape
+    CreateConfigRequest: StructureShape
     CreateDataflowEndpointGroupOutput: StructureShape
-    CreateEphemerisInput: StructureShape
+    CreateDataflowEndpointGroupRequest: StructureShape
+    CreateDataflowEndpointGroupV2Request: StructureShape
+    CreateDataflowEndpointGroupV2Response: StructureShape
+    CreateEndpointDetails: UnionShape
+    CreateEndpointDetailsList: ListShape
     CreateEphemerisOutput: StructureShape
-    CreateMissionProfileInput: StructureShape
+    CreateEphemerisRequest: StructureShape
     CreateMissionProfileOutput: StructureShape
+    CreateMissionProfileRequest: StructureShape
     Criticality: EnumShape
     CustomerEphemerisPriority: IntegerShape
     DataflowDetail: StructureShape
@@ -60,22 +78,28 @@ module Aws::GroundStation
     DataflowEndpointListItem: StructureShape
     DataflowList: ListShape
     DecodeConfig: StructureShape
-    DeleteConfigInput: StructureShape
     DeleteConfigOutput: StructureShape
-    DeleteDataflowEndpointGroupInput: StructureShape
+    DeleteConfigRequest: StructureShape
     DeleteDataflowEndpointGroupOutput: StructureShape
-    DeleteEphemerisInput: StructureShape
+    DeleteDataflowEndpointGroupRequest: StructureShape
     DeleteEphemerisOutput: StructureShape
-    DeleteMissionProfileInput: StructureShape
+    DeleteEphemerisRequest: StructureShape
     DeleteMissionProfileOutput: StructureShape
+    DeleteMissionProfileRequest: StructureShape
     DemodulationConfig: StructureShape
     DependencyException: StructureShape
-    DescribeContactInput: StructureShape
-    DescribeContactOutput: StructureShape
-    DescribeEphemerisInput: StructureShape
-    DescribeEphemerisOutput: StructureShape
+    DescribeContactRequest: StructureShape
+    DescribeContactResponse: StructureShape
+    DescribeContactVersionRequest: StructureShape
+    DescribeContactVersionResponse: StructureShape
+    DescribeEphemerisRequest: StructureShape
+    DescribeEphemerisResponse: StructureShape
     Destination: StructureShape
     DiscoveryData: StructureShape
+    DownlinkAwsGroundStationAgentEndpoint: StructureShape
+    DownlinkAwsGroundStationAgentEndpointDetails: StructureShape
+    DownlinkConnectionDetails: StructureShape
+    DownlinkDataflowDetails: UnionShape
     DurationInSeconds: IntegerShape
     Eirp: StructureShape
     EirpUnits: EnumShape
@@ -86,33 +110,45 @@ module Aws::GroundStation
     EphemeridesList: ListShape
     EphemerisData: UnionShape
     EphemerisDescription: StructureShape
+    EphemerisErrorCode: EnumShape
+    EphemerisErrorReason: StructureShape
+    EphemerisErrorReasonList: ListShape
+    EphemerisFilter: UnionShape
     EphemerisInvalidReason: EnumShape
     EphemerisItem: StructureShape
     EphemerisMetaData: StructureShape
     EphemerisPriority: IntegerShape
+    EphemerisResponseData: StructureShape
     EphemerisSource: EnumShape
     EphemerisStatus: EnumShape
     EphemerisStatusList: ListShape
+    EphemerisType: EnumShape
     EphemerisTypeDescription: UnionShape
+    ErrorString: StringShape
     Frequency: StructureShape
     FrequencyBandwidth: StructureShape
     FrequencyUnits: EnumShape
-    GetAgentConfigurationInput: StructureShape
-    GetAgentConfigurationOutput: StructureShape
-    GetConfigInput: StructureShape
-    GetConfigOutput: StructureShape
-    GetDataflowEndpointGroupInput: StructureShape
-    GetDataflowEndpointGroupOutput: StructureShape
-    GetMinuteUsageInput: StructureShape
-    GetMinuteUsageOutput: StructureShape
-    GetMissionProfileInput: StructureShape
-    GetMissionProfileOutput: StructureShape
-    GetSatelliteInput: StructureShape
+    GetAgentConfigurationRequest: StructureShape
+    GetAgentConfigurationResponse: StructureShape
+    GetAgentTaskResponseUrlRequest: StructureShape
+    GetAgentTaskResponseUrlResponse: StructureShape
+    GetConfigRequest: StructureShape
+    GetConfigResponse: StructureShape
+    GetDataflowEndpointGroupRequest: StructureShape
+    GetDataflowEndpointGroupResponse: StructureShape
+    GetMinuteUsageRequest: StructureShape
+    GetMinuteUsageResponse: StructureShape
+    GetMissionProfileRequest: StructureShape
+    GetMissionProfileResponse: StructureShape
     GetSatelliteOutput: StructureShape
+    GetSatelliteRequest: StructureShape
     GroundStationData: StructureShape
     GroundStationIdList: ListShape
     GroundStationList: ListShape
     GroundStationName: StringShape
+    GroundStationReservationList: ListShape
+    GroundStationReservationListItem: StructureShape
+    ISO8601TimeRange: StructureShape
     InstanceId: StringShape
     InstanceType: StringShape
     IntegerRange: StructureShape
@@ -123,38 +159,54 @@ module Aws::GroundStation
     KeyAliasArn: StringShape
     KeyAliasName: StringShape
     KeyArn: StringShape
+    KinesisDataStreamArn: StringShape
+    KinesisDataStreamData: StructureShape
     KmsKey: UnionShape
-    ListConfigsInput: StructureShape
-    ListConfigsOutput: StructureShape
-    ListContactsInput: StructureShape
-    ListContactsOutput: StructureShape
-    ListDataflowEndpointGroupsInput: StructureShape
-    ListDataflowEndpointGroupsOutput: StructureShape
-    ListEphemeridesInput: StructureShape
-    ListEphemeridesOutput: StructureShape
+    ListAntennasRequest: StructureShape
+    ListAntennasResponse: StructureShape
+    ListConfigsRequest: StructureShape
+    ListConfigsResponse: StructureShape
+    ListContactVersionsRequest: StructureShape
+    ListContactVersionsResponse: StructureShape
+    ListContactsRequest: StructureShape
+    ListContactsResponse: StructureShape
+    ListDataflowEndpointGroupsRequest: StructureShape
+    ListDataflowEndpointGroupsResponse: StructureShape
+    ListEphemeridesRequest: StructureShape
+    ListEphemeridesResponse: StructureShape
+    ListGroundStationReservationsRequest: StructureShape
+    ListGroundStationReservationsResponse: StructureShape
     ListGroundStationsInput: StructureShape
-    ListGroundStationsOutput: StructureShape
-    ListMissionProfilesInput: StructureShape
-    ListMissionProfilesOutput: StructureShape
-    ListSatellitesInput: StructureShape
-    ListSatellitesOutput: StructureShape
-    ListTagsForResourceInput: StructureShape
-    ListTagsForResourceOutput: StructureShape
+    ListGroundStationsResponse: StructureShape
+    ListMissionProfilesRequest: StructureShape
+    ListMissionProfilesResponse: StructureShape
+    ListSatellitesRequest: StructureShape
+    ListSatellitesResponse: StructureShape
+    ListTagsForResourceRequest: StructureShape
+    ListTagsForResourceResponse: StructureShape
+    MaintenanceReservationDetails: StructureShape
+    MaintenanceType: EnumShape
     MissionProfileArn: StringShape
     MissionProfileList: ListShape
     MissionProfileListItem: StructureShape
     Month: IntegerShape
     OEMEphemeris: StructureShape
+    OemProgramTrackSettings: StructureShape
     PaginationMaxResults: IntegerShape
     PaginationToken: StringShape
     Polarization: EnumShape
     PositiveDurationInSeconds: IntegerShape
+    ProgramTrackSettings: UnionShape
     RangedConnectionDetails: StructureShape
     RangedSocketAddress: StructureShape
-    RegisterAgentInput: StructureShape
-    RegisterAgentOutput: StructureShape
-    ReserveContactInput: StructureShape
+    RegisterAgentRequest: StructureShape
+    RegisterAgentResponse: StructureShape
+    ReservationDetails: UnionShape
+    ReservationType: EnumShape
+    ReservationTypeFilterList: ListShape
     ReserveContactOutput: StructureShape
+    ReserveContactRequest: StructureShape
+    ResourceInUseException: StructureShape
     ResourceLimitExceededException: StructureShape
     ResourceNotFoundException: StructureShape
     RoleArn: StringShape
@@ -170,6 +222,7 @@ module Aws::GroundStation
     SatelliteListItem: StructureShape
     SecurityDetails: StructureShape
     SecurityGroupIdList: ListShape
+    ServiceQuotaExceededException: StructureShape
     SignatureMap: MapShape
     SocketAddress: StructureShape
     Source: StructureShape
@@ -180,27 +233,44 @@ module Aws::GroundStation
     TLEDataList: ListShape
     TLEEphemeris: StructureShape
     TagKeys: ListShape
-    TagResourceInput: StructureShape
-    TagResourceOutput: StructureShape
+    TagResourceRequest: StructureShape
+    TagResourceResponse: StructureShape
     TagsMap: MapShape
+    TelemetrySinkConfig: StructureShape
+    TelemetrySinkData: UnionShape
+    TelemetrySinkType: EnumShape
+    TimeAzEl: StructureShape
+    TimeAzElList: ListShape
     TimeRange: StructureShape
     TleLineOne: StringShape
     TleLineTwo: StringShape
+    TleProgramTrackSettings: StructureShape
     TrackingConfig: StructureShape
+    TrackingOverrides: StructureShape
     UnboundedString: StringShape
-    UntagResourceInput: StructureShape
-    UntagResourceOutput: StructureShape
-    UpdateAgentStatusInput: StructureShape
-    UpdateAgentStatusOutput: StructureShape
-    UpdateConfigInput: StructureShape
+    UntagResourceRequest: StructureShape
+    UntagResourceResponse: StructureShape
+    UpdateAgentStatusRequest: StructureShape
+    UpdateAgentStatusResponse: StructureShape
     UpdateConfigOutput: StructureShape
-    UpdateEphemerisInput: StructureShape
+    UpdateConfigRequest: StructureShape
+    UpdateContactRequest: StructureShape
+    UpdateContactResponse: StructureShape
     UpdateEphemerisOutput: StructureShape
-    UpdateMissionProfileInput: StructureShape
+    UpdateEphemerisRequest: StructureShape
     UpdateMissionProfileOutput: StructureShape
+    UpdateMissionProfileRequest: StructureShape
+    UplinkAwsGroundStationAgentEndpoint: StructureShape
+    UplinkAwsGroundStationAgentEndpointDetails: StructureShape
+    UplinkConnectionDetails: StructureShape
+    UplinkDataflowDetails: UnionShape
     UplinkEchoConfig: StructureShape
     UplinkSpectrumConfig: StructureShape
     Uuid: StringShape
+    VersionFailureReasonCode: EnumShape
+    VersionFailureReasonCodes: ListShape
+    VersionId: IntegerShape
+    VersionStatus: EnumShape
     VersionString: StringShape
     VersionStringList: ListShape
     Year: IntegerShape

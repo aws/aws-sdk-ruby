@@ -26,6 +26,7 @@ module Aws::ElasticBeanstalk
     ApplicationVersionStatus: EnumShape
     ApplyEnvironmentManagedActionRequest: StructureShape
     ApplyEnvironmentManagedActionResult: StructureShape
+    ArchitectureType: EnumShape
     AssociateEnvironmentOperationsRoleMessage: StructureShape
     AutoCreateApplication: BooleanShape
     AutoScalingGroup: StructureShape
@@ -43,6 +44,7 @@ module Aws::ElasticBeanstalk
     Causes: ListShape
     CheckDNSAvailabilityMessage: StructureShape
     CheckDNSAvailabilityResultMessage: StructureShape
+    Cluster: StructureShape
     CnameAvailability: BooleanShape
     CodeBuildNotInServiceRegionException: StructureShape
     ComposeEnvironmentsMessage: StructureShape
@@ -147,7 +149,11 @@ module Aws::ElasticBeanstalk
     FileTypeExtension: StringShape
     ForceTerminate: BooleanShape
     GroupName: StringShape
+    ImageBuildConfiguration: StructureShape
+    ImageBuildType: EnumShape
+    ImageConfiguration: StructureShape
     ImageId: StringShape
+    ImageSource: StructureShape
     IncludeDeleted: BooleanShape
     IncludeDeletedBackTo: TimestampShape
     Instance: StructureShape

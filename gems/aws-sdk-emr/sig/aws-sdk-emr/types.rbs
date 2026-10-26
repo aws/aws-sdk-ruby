@@ -96,11 +96,13 @@ module Aws::EMR
       def initialize: (
         ?resource_id: String,
         ?tags: Array[Types::Tag],
+        ?cluster_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor resource_id: String?
       attr_accessor tags: Array[Types::Tag]?
+      attr_accessor cluster_id: String?
     end
 
     class AddTagsOutput
@@ -349,6 +351,25 @@ module Aws::EMR
       attr_accessor dimensions: Array[Types::MetricDimension]?
     end
 
+    class CloudWatchLogConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?log_group_name: String,
+        ?log_stream_name_prefix: String,
+        ?encryption_key_arn: String,
+        ?log_types: Hash[String, Array[String]],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor log_group_name: String?
+      attr_accessor log_stream_name_prefix: String?
+      attr_accessor encryption_key_arn: String?
+      attr_accessor log_types: Hash[String, Array[String]]?
+    end
+
     class Cluster
       include Smithy::Schema::Structure
 
@@ -388,6 +409,8 @@ module Aws::EMR
         ?ebs_root_volume_iops: Integer,
         ?ebs_root_volume_throughput: Integer,
         ?extended_support: bool,
+        ?monitoring_configuration: Types::MonitoringConfiguration,
+        ?session_enabled: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -426,6 +449,8 @@ module Aws::EMR
       attr_accessor ebs_root_volume_iops: Integer?
       attr_accessor ebs_root_volume_throughput: Integer?
       attr_accessor extended_support: bool?
+      attr_accessor monitoring_configuration: Types::MonitoringConfiguration?
+      attr_accessor session_enabled: bool?
     end
 
     module ClusterState
@@ -1273,6 +1298,60 @@ module Aws::EMR
       attr_accessor presigned_url: String?
     end
 
+    class GetSessionEndpointInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_id: String,
+        ?session_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_id: String?
+      attr_accessor session_id: String?
+    end
+
+    class GetSessionEndpointOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint: String,
+        ?auth_token: String,
+        ?auth_token_expiration_time: Time,
+        ?credentials: Types::Credentials,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint: String?
+      attr_accessor auth_token: String?
+      attr_accessor auth_token_expiration_time: Time?
+      attr_accessor credentials: Types::Credentials?
+    end
+
+    class GetSessionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_id: String,
+        ?session_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_id: String?
+      attr_accessor session_id: String?
+    end
+
+    class GetSessionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session: Types::Session,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session: Types::Session?
+    end
+
     class GetStudioSessionMappingInput
       include Smithy::Schema::Structure
 
@@ -1493,6 +1572,7 @@ module Aws::EMR
       BOOTSTRAPPING: String
       RUNNING: String
       RESIZING: String
+      RECONFIGURING: String
       SUSPENDED: String
       TERMINATING: String
       TERMINATED: String
@@ -2338,6 +2418,36 @@ module Aws::EMR
       attr_accessor marker: String?
     end
 
+    class ListSessionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_id: String,
+        ?session_states: Array[String],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_id: String?
+      attr_accessor session_states: Array[String]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListSessionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sessions: Array[Types::Session],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sessions: Array[Types::Session]?
+      attr_accessor next_token: String?
+    end
+
     class ListStepsInput
       include Smithy::Schema::Structure
 
@@ -2446,6 +2556,18 @@ module Aws::EMR
       attr_accessor marker: String?
     end
 
+    module LogType
+      SYSTEM_LOGS: String
+      APPLICATION_LOGS: String
+      PERSISTENT_UI_LOGS: String
+    end
+
+    module LogUploadPolicyValue
+      EMR_MANAGED: String
+      ON_CUSTOMER_S3ONLY: String
+      DISABLED: String
+    end
+
     class ManagedScalingPolicy
       include Smithy::Schema::Structure
 
@@ -2531,6 +2653,19 @@ module Aws::EMR
 
       attr_accessor cluster_id: String?
       attr_accessor instance_groups: Array[Types::InstanceGroupModifyConfig]?
+    end
+
+    class MonitoringConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cloud_watch_log_configuration: Types::CloudWatchLogConfiguration,
+        ?s3_logging_configuration: Types::S3LoggingConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_watch_log_configuration: Types::CloudWatchLogConfiguration?
+      attr_accessor s3_logging_configuration: Types::S3LoggingConfiguration?
     end
 
     class NotebookExecution
@@ -3012,11 +3147,13 @@ module Aws::EMR
       def initialize: (
         ?resource_id: String,
         ?tag_keys: Array[String],
+        ?cluster_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor resource_id: String?
       attr_accessor tag_keys: Array[String]?
+      attr_accessor cluster_id: String?
     end
 
     class RemoveTagsOutput
@@ -3045,6 +3182,7 @@ module Aws::EMR
         ?release_label: String,
         ?instances: Types::JobFlowInstancesConfig,
         ?steps: Array[Types::StepConfig],
+        ?step_execution_role_arn: String,
         ?bootstrap_actions: Array[Types::BootstrapActionConfig],
         ?supported_products: Array[String],
         ?new_supported_products: Array[Types::SupportedProductConfig],
@@ -3069,6 +3207,8 @@ module Aws::EMR
         ?ebs_root_volume_iops: Integer,
         ?ebs_root_volume_throughput: Integer,
         ?extended_support: bool,
+        ?monitoring_configuration: Types::MonitoringConfiguration,
+        ?session_enabled: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3080,6 +3220,7 @@ module Aws::EMR
       attr_accessor release_label: String?
       attr_accessor instances: Types::JobFlowInstancesConfig?
       attr_accessor steps: Array[Types::StepConfig]?
+      attr_accessor step_execution_role_arn: String?
       attr_accessor bootstrap_actions: Array[Types::BootstrapActionConfig]?
       attr_accessor supported_products: Array[String]?
       attr_accessor new_supported_products: Array[Types::SupportedProductConfig]?
@@ -3104,6 +3245,8 @@ module Aws::EMR
       attr_accessor ebs_root_volume_iops: Integer?
       attr_accessor ebs_root_volume_throughput: Integer?
       attr_accessor extended_support: bool?
+      attr_accessor monitoring_configuration: Types::MonitoringConfiguration?
+      attr_accessor session_enabled: bool?
     end
 
     class RunJobFlowOutput
@@ -3117,6 +3260,30 @@ module Aws::EMR
 
       attr_accessor job_flow_id: String?
       attr_accessor cluster_arn: String?
+    end
+
+    class S3LoggingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_type_upload_policy: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_type_upload_policy: Hash[String, String]?
+    end
+
+    class S3MonitoringConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_uri: String,
+        ?encryption_key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_uri: String?
+      attr_accessor encryption_key_arn: String?
     end
 
     module ScaleDownBehavior
@@ -3209,6 +3376,85 @@ module Aws::EMR
       attr_accessor creation_date_time: Time?
     end
 
+    class Session
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?cluster_id: String,
+        ?name: String,
+        ?arn: String,
+        ?state: String,
+        ?state_change_reason: String,
+        ?release_label: String,
+        ?execution_role_arn: String,
+        ?account_id: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?started_at: Time,
+        ?ended_at: Time,
+        ?idle_since: Time,
+        ?engine_configurations: Array[Types::Configuration],
+        ?monitoring_configuration: Types::SessionMonitoringConfiguration,
+        ?session_idle_timeout_in_minutes: Integer,
+        ?server_url: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor cluster_id: String?
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor state: String?
+      attr_accessor state_change_reason: String?
+      attr_accessor release_label: String?
+      attr_accessor execution_role_arn: String?
+      attr_accessor account_id: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor started_at: Time?
+      attr_accessor ended_at: Time?
+      attr_accessor idle_since: Time?
+      attr_accessor engine_configurations: Array[Types::Configuration]?
+      attr_accessor monitoring_configuration: Types::SessionMonitoringConfiguration?
+      attr_accessor session_idle_timeout_in_minutes: Integer?
+      attr_accessor server_url: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class SessionCloudWatchLoggingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?log_group: String,
+        ?log_stream_name_prefix: String,
+        ?encryption_key_arn: String,
+        ?log_types: Hash[String, Array[String]],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor log_group: String?
+      attr_accessor log_stream_name_prefix: String?
+      attr_accessor encryption_key_arn: String?
+      attr_accessor log_types: Hash[String, Array[String]]?
+    end
+
+    class SessionManagedLoggingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?encryption_key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor encryption_key_arn: String?
+    end
+
     class SessionMappingDetail
       include Smithy::Schema::Structure
 
@@ -3251,6 +3497,49 @@ module Aws::EMR
       attr_accessor identity_type: String?
       attr_accessor session_policy_arn: String?
       attr_accessor creation_time: Time?
+    end
+
+    class SessionMonitoringConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cloud_watch_logging_configuration: Types::SessionCloudWatchLoggingConfiguration,
+        ?managed_logging_configuration: Types::SessionManagedLoggingConfiguration,
+        ?s3_logging_configuration: Types::SessionS3LoggingConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_watch_logging_configuration: Types::SessionCloudWatchLoggingConfiguration?
+      attr_accessor managed_logging_configuration: Types::SessionManagedLoggingConfiguration?
+      attr_accessor s3_logging_configuration: Types::SessionS3LoggingConfiguration?
+    end
+
+    class SessionS3LoggingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?log_uri: String,
+        ?encryption_key_arn: String,
+        ?log_types: Hash[String, Array[String]],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor log_uri: String?
+      attr_accessor encryption_key_arn: String?
+      attr_accessor log_types: Hash[String, Array[String]]?
+    end
+
+    module SessionState
+      SUBMITTED: String
+      STARTING: String
+      STARTED: String
+      IDLE: String
+      BUSY: String
+      TERMINATING: String
+      TERMINATED: String
+      FAILED: String
     end
 
     class SetKeepJobFlowAliveWhenNoStepsInput
@@ -3433,6 +3722,50 @@ module Aws::EMR
       attr_accessor notebook_execution_id: String?
     end
 
+    class StartSessionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?cluster_id: String,
+        ?execution_role_arn: String,
+        ?engine_configurations: Array[Types::Configuration],
+        ?monitoring_configuration: Types::SessionMonitoringConfiguration,
+        ?session_idle_timeout_in_minutes: Integer,
+        ?client_request_token: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor cluster_id: String?
+      attr_accessor execution_role_arn: String?
+      attr_accessor engine_configurations: Array[Types::Configuration]?
+      attr_accessor monitoring_configuration: Types::SessionMonitoringConfiguration?
+      attr_accessor session_idle_timeout_in_minutes: Integer?
+      attr_accessor client_request_token: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class StartSessionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?cluster_id: String,
+        ?arn: String,
+        ?account_id: String,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor cluster_id: String?
+      attr_accessor arn: String?
+      attr_accessor account_id: String?
+      attr_accessor state: String?
+    end
+
     module Statistic
       SAMPLE_COUNT: String
       AVERAGE: String
@@ -3451,6 +3784,8 @@ module Aws::EMR
         ?action_on_failure: String,
         ?status: Types::StepStatus,
         ?execution_role_arn: String,
+        ?log_uri: String,
+        ?encryption_key_arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3460,6 +3795,8 @@ module Aws::EMR
       attr_accessor action_on_failure: String?
       attr_accessor status: Types::StepStatus?
       attr_accessor execution_role_arn: String?
+      attr_accessor log_uri: String?
+      attr_accessor encryption_key_arn: String?
     end
 
     module StepCancellationOption
@@ -3474,12 +3811,14 @@ module Aws::EMR
         ?name: String,
         ?action_on_failure: String,
         ?hadoop_jar_step: Types::HadoopJarStepConfig,
+        ?step_monitoring_configuration: Types::StepMonitoringConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor name: String?
       attr_accessor action_on_failure: String?
       attr_accessor hadoop_jar_step: Types::HadoopJarStepConfig?
+      attr_accessor step_monitoring_configuration: Types::StepMonitoringConfiguration?
     end
 
     class StepDetail
@@ -3522,6 +3861,17 @@ module Aws::EMR
       attr_accessor start_date_time: Time?
       attr_accessor end_date_time: Time?
       attr_accessor last_state_change_reason: String?
+    end
+
+    class StepMonitoringConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_monitoring_configuration: Types::S3MonitoringConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_monitoring_configuration: Types::S3MonitoringConfiguration?
     end
 
     module StepState
@@ -3577,6 +3927,8 @@ module Aws::EMR
         ?config: Types::HadoopStepConfig,
         ?action_on_failure: String,
         ?status: Types::StepStatus,
+        ?log_uri: String,
+        ?encryption_key_arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3585,6 +3937,8 @@ module Aws::EMR
       attr_accessor config: Types::HadoopStepConfig?
       attr_accessor action_on_failure: String?
       attr_accessor status: Types::StepStatus?
+      attr_accessor log_uri: String?
+      attr_accessor encryption_key_arn: String?
     end
 
     class StepTimeline
@@ -3753,6 +4107,34 @@ module Aws::EMR
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor job_flow_ids: Array[String]?
+    end
+
+    class TerminateSessionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_id: String,
+        ?session_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_id: String?
+      attr_accessor session_id: String?
+    end
+
+    class TerminateSessionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_id: String,
+        ?session_id: String,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_id: String?
+      attr_accessor session_id: String?
+      attr_accessor state: String?
     end
 
     module Unit

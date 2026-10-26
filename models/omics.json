@@ -516,7 +516,7 @@
                 "target": "com.amazonaws.omics#ListAnnotationStores"
             },
             "traits": {
-                "smithy.api#documentation": "Represents a resource that stores annotation data"
+                "smithy.api#documentation": "<p>Represents a resource that stores annotation data.</p>"
             }
         },
         "com.amazonaws.omics#AnnotationStoreItem": {
@@ -811,6 +811,19 @@
                 "smithy.api#pattern": "^[0-9]+$"
             }
         },
+        "com.amazonaws.omics#BatchArn": {
+            "type": "string",
+            "traits": {
+                "aws.api#arnReference": {
+                    "type": "AWS::Omics::RunBatch"
+                },
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^arn:.+$"
+            }
+        },
         "com.amazonaws.omics#BatchDeleteReadSet": {
             "type": "operation",
             "input": {
@@ -889,6 +902,177 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.omics#BatchId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 18
+                },
+                "smithy.api#pattern": "^[0-9]+$"
+            }
+        },
+        "com.amazonaws.omics#BatchList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.omics#BatchListItem"
+            }
+        },
+        "com.amazonaws.omics#BatchListItem": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.omics#BatchId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The batch identifier.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.omics#BatchName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The batch name.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.omics#BatchStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current batch status.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.omics#BatchTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the batch was created.</p>"
+                    }
+                },
+                "totalRuns": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of runs in the batch.</p>"
+                    }
+                },
+                "workflowId": {
+                    "target": "com.amazonaws.omics#WorkflowId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the workflow used for the batch.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of a batch returned by <code>ListBatch</code>.</p>"
+            }
+        },
+        "com.amazonaws.omics#BatchName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$"
+            }
+        },
+        "com.amazonaws.omics#BatchRequestId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$"
+            }
+        },
+        "com.amazonaws.omics#BatchRunSettings": {
+            "type": "union",
+            "members": {
+                "inlineSettings": {
+                    "target": "com.amazonaws.omics#InlineSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of per-run configurations provided inline in the request. Each entry must include a unique <code>runSettingId</code>. Supports up to 100 entries. For batches with more than 100 runs, use <code>s3UriSettings</code>.</p>"
+                    }
+                },
+                "s3UriSettings": {
+                    "target": "com.amazonaws.omics#S3UriSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An Amazon S3 URI pointing to a JSON file containing per-run configurations. The file must be a JSON array in the same format as <code>inlineSettings</code>. Supports up to 100,000 run configurations. The maximum file size is 6 GB.</p> <p>The IAM service role in <code>roleArn</code> must have read access to this S3 object. HealthOmics validates access to the file during the synchronous API call and records the file's ETag. If the file is modified after submission, the batch fails.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A union type representing per-run configurations for the batch. Specify exactly one of the following members.</p>"
+            }
+        },
+        "com.amazonaws.omics#BatchStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "CREATING",
+                        "value": "CREATING"
+                    },
+                    {
+                        "name": "PENDING",
+                        "value": "PENDING"
+                    },
+                    {
+                        "name": "SUBMITTING",
+                        "value": "SUBMITTING"
+                    },
+                    {
+                        "name": "INPROGRESS",
+                        "value": "INPROGRESS"
+                    },
+                    {
+                        "name": "STOPPING",
+                        "value": "STOPPING"
+                    },
+                    {
+                        "name": "CANCELLED",
+                        "value": "CANCELLED"
+                    },
+                    {
+                        "name": "FAILED",
+                        "value": "FAILED"
+                    },
+                    {
+                        "name": "PROCESSED",
+                        "value": "PROCESSED"
+                    },
+                    {
+                        "name": "RUNS_DELETING",
+                        "value": "RUNS_DELETING"
+                    },
+                    {
+                        "name": "RUNS_DELETE_FAILED",
+                        "value": "RUNS_DELETE_FAILED"
+                    },
+                    {
+                        "name": "RUNS_DELETED",
+                        "value": "RUNS_DELETED"
+                    }
+                ],
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                }
+            }
+        },
+        "com.amazonaws.omics#BatchTimestamp": {
+            "type": "timestamp",
+            "traits": {
+                "smithy.api#timestampFormat": "date-time"
+            }
+        },
+        "com.amazonaws.omics#BatchUuid": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$"
+            }
+        },
         "com.amazonaws.omics#CacheBehavior": {
             "type": "string",
             "traits": {
@@ -934,7 +1118,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Cancels an annotation import job.</p>",
+                "smithy.api#documentation": "<important> <p>Amazon Web Services HealthOmics variant stores and annotation stores are no longer open to new customers. Existing customers can continue to use the service as normal. For more information, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html\"> Amazon Web Services HealthOmics variant store and annotation store availability change</a>.</p> </important> <p>Cancels an annotation import job.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "analytics-"
                 },
@@ -1015,6 +1199,74 @@
                 }
             }
         },
+        "com.amazonaws.omics#CancelRunBatch": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.omics#CancelRunBatchRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.omics#CancelRunBatchResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.omics#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.omics#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.omics#RequestTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Cancels all runs within a specified batch. This operation prevents not-yet-submitted runs from starting and submits <code>CancelRun</code> requests for runs that have already started.</p> <p>Cancel is only allowed on batches in <code>PENDING</code>, <code>SUBMITTING</code>, or <code>INPROGRESS</code> state. Cancel operations are non-atomic and may be partially successful. Use <code>GetBatch</code> to review <code>successfulCancelSubmissionCount</code> and <code>failedCancelSubmissionCount</code> in the <code>submissionSummary</code>. Only one cancel or delete operation per batch is allowed at a time.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "workflows-"
+                },
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/runBatch/cancel",
+                    "code": 202
+                }
+            }
+        },
+        "com.amazonaws.omics#CancelRunBatchRequest": {
+            "type": "structure",
+            "members": {
+                "batchId": {
+                    "target": "com.amazonaws.omics#BatchId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier portion of the run batch ARN.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.omics#CancelRunBatchResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.omics#CancelRunRequest": {
             "type": "structure",
             "members": {
@@ -1057,7 +1309,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Cancels a variant import job.</p>",
+                "smithy.api#documentation": "<important> <p>Amazon Web Services HealthOmics variant stores and annotation stores are no longer open to new customers. Existing customers can continue to use the service as normal. For more information, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html\"> Amazon Web Services HealthOmics variant store and annotation store availability change</a>.</p> </important> <p>Cancels a variant import job.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "analytics-"
                 },
@@ -1253,6 +1505,208 @@
                 "smithy.api#timestampFormat": "date-time"
             }
         },
+        "com.amazonaws.omics#ConfigurationArn": {
+            "type": "string",
+            "traits": {
+                "aws.api#arnReference": {
+                    "type": "AWS::Omics::Configuration"
+                },
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 190
+                },
+                "smithy.api#pattern": "^arn:.+$"
+            }
+        },
+        "com.amazonaws.omics#ConfigurationDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$"
+            }
+        },
+        "com.amazonaws.omics#ConfigurationDetails": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.omics#ConfigurationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>User-friendly name for the configuration.</p>"
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.omics#ConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique resource identifier for the configuration.</p>"
+                    }
+                },
+                "uuid": {
+                    "target": "com.amazonaws.omics#ConfigurationUuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique identifier for the configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Minimal details for a configuration resource.</p>"
+            }
+        },
+        "com.amazonaws.omics#ConfigurationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.omics#ConfigurationListItem"
+            }
+        },
+        "com.amazonaws.omics#ConfigurationListItem": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.omics#ConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique resource identifier for the configuration.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.omics#ConfigurationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>User-friendly name for the configuration.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.omics#ConfigurationDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Description for the configuration.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.omics#ConfigurationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Current configuration status.</p>"
+                    }
+                },
+                "creationTime": {
+                    "target": "com.amazonaws.omics#ConfigurationTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration creation timestamp.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration list item with summary information.</p>"
+            }
+        },
+        "com.amazonaws.omics#ConfigurationListToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$"
+            }
+        },
+        "com.amazonaws.omics#ConfigurationName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9][A-Za-z0-9\\-\\._]*$"
+            }
+        },
+        "com.amazonaws.omics#ConfigurationRequestId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$"
+            }
+        },
+        "com.amazonaws.omics#ConfigurationResource": {
+            "type": "resource",
+            "identifiers": {
+                "name": {
+                    "target": "com.amazonaws.omics#ConfigurationName"
+                }
+            },
+            "put": {
+                "target": "com.amazonaws.omics#CreateConfiguration"
+            },
+            "read": {
+                "target": "com.amazonaws.omics#GetConfiguration"
+            },
+            "delete": {
+                "target": "com.amazonaws.omics#DeleteConfiguration"
+            },
+            "list": {
+                "target": "com.amazonaws.omics#ListConfigurations"
+            },
+            "traits": {
+                "aws.api#arn": {
+                    "template": "configuration/{name}"
+                },
+                "aws.iam#conditionKeys": [
+                    "aws:ResourceTag/${TagKey}"
+                ],
+                "aws.iam#disableConditionKeyInference": {},
+                "aws.iam#iamResource": {
+                    "name": "configuration"
+                }
+            }
+        },
+        "com.amazonaws.omics#ConfigurationStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "CREATING",
+                        "value": "CREATING"
+                    },
+                    {
+                        "name": "ACTIVE",
+                        "value": "ACTIVE"
+                    },
+                    {
+                        "name": "UPDATING",
+                        "value": "UPDATING"
+                    },
+                    {
+                        "name": "DELETING",
+                        "value": "DELETING"
+                    },
+                    {
+                        "name": "DELETED",
+                        "value": "DELETED"
+                    },
+                    {
+                        "name": "FAILED",
+                        "value": "FAILED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.omics#ConfigurationTimestamp": {
+            "type": "timestamp",
+            "traits": {
+                "smithy.api#timestampFormat": "date-time"
+            }
+        },
+        "com.amazonaws.omics#ConfigurationUuid": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$"
+            }
+        },
         "com.amazonaws.omics#ConflictException": {
             "type": "structure",
             "members": {
@@ -1296,7 +1750,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Use a container registry map to specify mappings between the ECR private repository and one or more upstream registries. For more information, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/workflows-ecr.html\">Container images</a> in the <i>Amazon Web Services HealthOmics User Guide</i>. </p>"
+                "smithy.api#documentation": "<p>Use a container registry map to specify mappings between the ECR private repository and one or more upstream registries. For more information, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/workflows-ecr.html\">Container images</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>"
             }
         },
         "com.amazonaws.omics#CreateAnnotationStore": {
@@ -1334,7 +1788,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to create an Annotation Store"
                 },
-                "smithy.api#documentation": "<p>Creates an annotation store.</p>",
+                "smithy.api#documentation": "<important> <p>Amazon Web Services HealthOmics variant stores and annotation stores are no longer open to new customers. Existing customers can continue to use the service as normal. For more information, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html\"> Amazon Web Services HealthOmics variant store and annotation store availability change</a>.</p> </important> <p>Creates an annotation store.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "analytics-"
                 },
@@ -1596,6 +2050,151 @@
                     "traits": {
                         "smithy.api#documentation": "<p> The time stamp for the creation of an annotation store version. </p>",
                         "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.omics#CreateConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.omics#CreateConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.omics#CreateConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.omics#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.omics#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.omics#RequestTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Create a new configuration.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "workflows-"
+                },
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/configuration",
+                    "code": 201
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.omics#CreateConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.omics#ConfigurationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>User-friendly name for the configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.omics#ConfigurationDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional description for the configuration.</p>"
+                    }
+                },
+                "runConfigurations": {
+                    "target": "com.amazonaws.omics#RunConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Required run-specific configurations.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.omics#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional tags for the configuration.</p>"
+                    }
+                },
+                "requestId": {
+                    "target": "com.amazonaws.omics#ConfigurationRequestId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional request idempotency token. If not specified, a universally unique identifier (UUID) will be automatically generated for the request.</p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.omics#CreateConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.omics#ConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique resource identifier for the configuration.</p>"
+                    }
+                },
+                "uuid": {
+                    "target": "com.amazonaws.omics#ConfigurationUuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique identifier for the configuration.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.omics#ConfigurationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>User-friendly name for the configuration.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.omics#ConfigurationDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Description for the configuration.</p>"
+                    }
+                },
+                "runConfigurations": {
+                    "target": "com.amazonaws.omics#RunConfigurationsResponse",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Run-specific configurations.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.omics#ConfigurationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Current configuration status.</p>"
+                    }
+                },
+                "creationTime": {
+                    "target": "com.amazonaws.omics#ConfigurationTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration creation timestamp.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.omics#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags for the configuration.</p>"
                     }
                 }
             },
@@ -2428,7 +3027,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a cross-account shared resource. The resource owner makes an offer to share the resource with the principal subscriber (an AWS user with a different account than the resource owner).</p> <p>The following resources support cross-account sharing:</p> <ul> <li> <p>HealthOmics variant stores</p> </li> <li> <p>HealthOmics annotation stores</p> </li> <li> <p>Private workflows</p> </li> </ul>",
+                "smithy.api#documentation": "<p>Creates a cross-account shared resource. The resource owner makes an offer to share the resource with the principal subscriber (an Amazon Web Services user with a different account than the resource owner).</p> <p>The following resources support cross-account sharing:</p> <ul> <li> <p>HealthOmics variant stores</p> </li> <li> <p>HealthOmics annotation stores</p> </li> <li> <p>Private workflows</p> </li> </ul>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "analytics-"
                 },
@@ -2528,7 +3127,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to create a Variant Store"
                 },
-                "smithy.api#documentation": "<p>Creates a variant store.</p>",
+                "smithy.api#documentation": "<important> <p>Amazon Web Services HealthOmics variant stores and annotation stores are no longer open to new customers. Existing customers can continue to use the service as normal. For more information, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html\"> Amazon Web Services HealthOmics variant store and annotation store availability change</a>.</p> </important> <p>Creates a variant store.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "analytics-"
                 },
@@ -2655,7 +3254,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a private workflow. Before you create a private workflow, you must create and configure these required resources:</p> <ul> <li> <p> <i>Workflow definition files</i>: Define your workflow in one or more workflow definition files, written in WDL, Nextflow, or CWL. The workflow definition specifies the inputs and outputs for runs that use the workflow. It also includes specifications for the runs and run tasks for your workflow, including compute and memory requirements. The workflow definition file must be in .zip format.</p> </li> <li> <p>(Optional) <i>Parameter template</i>: You can create a parameter template file that defines the run parameters, or Amazon Web Services HealthOmics can generate the parameter template for you.</p> </li> <li> <p> <i>ECR container images</i>: Create container images for the workflow in a private ECR repository, or synchronize images from a supported upstream registry with your Amazon ECR private repository.</p> </li> <li> <p>(Optional) <i>Sentieon licenses</i>: Request a Sentieon license if using the Sentieon software in a private workflow.</p> </li> </ul> <p>For more information, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/creating-private-workflows.html\">Creating or updating a private workflow in Amazon Web Services HealthOmics</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Creates a private workflow. Before you create a private workflow, you must create and configure these required resources:</p> <ul> <li> <p> <i>Workflow definition file:</i> A workflow definition file written in WDL, Nextflow, or CWL. The workflow definition specifies the inputs and outputs for runs that use the workflow. It also includes specifications for the runs and run tasks for your workflow, including compute and memory requirements. The workflow definition file must be in <code>.zip</code> format. For more information, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/workflow-definition-files.html\">Workflow definition files</a> in Amazon Web Services HealthOmics.</p> <ul> <li> <p>You can use Amazon Q CLI to build and validate your workflow definition files in WDL, Nextflow, and CWL. For more information, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/getting-started.html#omics-q-prompts\">Example prompts for Amazon Q CLI</a> and the <a href=\"https://github.com/aws-samples/aws-healthomics-tutorials/tree/main/generative-ai\">Amazon Web Services HealthOmics Agentic generative AI tutorial</a> on GitHub.</p> </li> </ul> </li> <li> <p> <i>(Optional) Parameter template file:</i> A parameter template file written in JSON. Create the file to define the run parameters, or Amazon Web Services HealthOmics generates the parameter template for you. For more information, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/parameter-templates.html\">Parameter template files for HealthOmics workflows</a>. </p> </li> <li> <p> <i>ECR container images:</i> Create container images for the workflow in a private ECR repository, or synchronize images from a supported upstream registry with your Amazon ECR private repository.</p> </li> <li> <p> <i>(Optional) Sentieon licenses:</i> Request a Sentieon license to use the Sentieon software in private workflows.</p> </li> </ul> <p>For more information, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/creating-private-workflows.html\">Creating or updating a private workflow in Amazon Web Services HealthOmics</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "workflows-"
                 },
@@ -2684,7 +3283,7 @@
                 "engine": {
                     "target": "com.amazonaws.omics#WorkflowEngine",
                     "traits": {
-                        "smithy.api#documentation": "<p>The workflow engine for the workflow. This is only required if you have workflow definition files from more than one engine in your zip file. Otherwise, the service can detect the engine automatically from your workflow definition.</p>"
+                        "smithy.api#documentation": "<p>The workflow engine for the workflow. By default, Amazon Web Services HealthOmics detects the engine automatically from your workflow definition. Provide a value if you have workflow definition files from more than one engine in your zip file, or to use WDL lenient.</p> <p>WDL lenient is designed to handle workflows migrated from Cromwell. It supports customer Cromwell directives and some non-conformant logic. For details, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/workflow-wdl-type-conversion.html\">Implicit type conversion in WDL lenient</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>"
                     }
                 },
                 "definitionZip": {
@@ -2751,7 +3350,7 @@
                 "containerRegistryMap": {
                     "target": "com.amazonaws.omics#ContainerRegistryMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Optional) Use a container registry map to specify mappings between the ECR private repository and one or more upstream registries. For more information, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/workflows-ecr.html\">Container images</a> in the <i>Amazon Web Services HealthOmics User Guide</i>. </p>"
+                        "smithy.api#documentation": "<p>(Optional) Use a container registry map to specify mappings between the ECR private repository and one or more upstream registries. For more information, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/workflows-ecr.html\">Container images</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>"
                     }
                 },
                 "containerRegistryMapUri": {
@@ -2987,7 +3586,7 @@
                 "containerRegistryMap": {
                     "target": "com.amazonaws.omics#ContainerRegistryMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Optional) Use a container registry map to specify mappings between the ECR private repository and one or more upstream registries. For more information, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/workflows-ecr.html\">Container images</a> in the <i>Amazon Web Services HealthOmics User Guide</i>. </p>"
+                        "smithy.api#documentation": "<p>(Optional) Use a container registry map to specify mappings between the ECR private repository and one or more upstream registries. For more information, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/workflows-ecr.html\">Container images</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>"
                     }
                 },
                 "containerRegistryMapUri": {
@@ -3106,6 +3705,162 @@
                 ]
             }
         },
+        "com.amazonaws.omics#DefaultRunSetting": {
+            "type": "structure",
+            "members": {
+                "workflowId": {
+                    "target": "com.amazonaws.omics#WorkflowId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the workflow to run.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "workflowType": {
+                    "target": "com.amazonaws.omics#WorkflowType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the originating workflow. Batch runs are not supported with <code>READY2RUN</code> workflows.</p>"
+                    }
+                },
+                "roleArn": {
+                    "target": "com.amazonaws.omics#RunRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IAM role ARN that grants HealthOmics permissions to access required Amazon Web Services resources such as Amazon S3 and CloudWatch. The role must have the same permissions required for individual <code>StartRun</code> calls.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.omics#RunName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional user-friendly name applied to each workflow run. Can be overridden per run.</p>"
+                    }
+                },
+                "cacheId": {
+                    "target": "com.amazonaws.omics#NumericIdInArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the run cache to associate with the runs.</p>"
+                    }
+                },
+                "cacheBehavior": {
+                    "target": "com.amazonaws.omics#CacheBehavior",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cache behavior for the runs. Requires <code>cacheId</code> to be set.</p>"
+                    }
+                },
+                "runGroupId": {
+                    "target": "com.amazonaws.omics#RunGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the run group to contain all workflow runs in the batch.</p>"
+                    }
+                },
+                "priority": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An integer priority for the workflow runs. Higher values correspond to higher priority. A value of 0 corresponds to the lowest priority. Can be overridden per run.</p>",
+                        "smithy.api#range": {
+                            "min": 0,
+                            "max": 100000
+                        }
+                    }
+                },
+                "parameters": {
+                    "target": "com.amazonaws.omics#RunParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Workflow parameter names and values shared across all runs. Merged with per-run parameters; run-specific values take precedence when keys overlap. Can be overridden per run.</p>"
+                    }
+                },
+                "storageCapacity": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filesystem size in gibibytes (GiB) provisioned for each workflow run and shared by all tasks in that run. Defaults to 1200 GiB if not specified.</p>",
+                        "smithy.api#range": {
+                            "min": 0,
+                            "max": 100000
+                        }
+                    }
+                },
+                "outputUri": {
+                    "target": "com.amazonaws.omics#RunOutputUri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination S3 URI for workflow outputs. Must begin with <code>s3://</code>. The <code>roleArn</code> must grant write permissions to this bucket. Can be overridden per run.</p>"
+                    }
+                },
+                "logLevel": {
+                    "target": "com.amazonaws.omics#RunLogLevel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The verbosity level for CloudWatch Logs emitted during each run.</p>"
+                    }
+                },
+                "runTags": {
+                    "target": "com.amazonaws.omics#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Amazon Web Services tags to associate with each workflow run. Merged with per-run <code>runTags</code>; run-specific values take precedence when keys overlap.</p>"
+                    }
+                },
+                "retentionMode": {
+                    "target": "com.amazonaws.omics#RunRetentionMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The retention behavior for runs after completion.</p>"
+                    }
+                },
+                "storageType": {
+                    "target": "com.amazonaws.omics#StorageType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The storage type for the workflow runs.</p>"
+                    }
+                },
+                "workflowOwnerId": {
+                    "target": "com.amazonaws.omics#WorkflowOwnerId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID of the workflow owner, used for cross-account workflow sharing.</p>"
+                    }
+                },
+                "outputBucketOwnerId": {
+                    "target": "com.amazonaws.omics#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The expected Amazon Web Services account ID of the owner of the output S3 bucket. Can be overridden per run.</p>"
+                    }
+                },
+                "workflowVersionName": {
+                    "target": "com.amazonaws.omics#WorkflowVersionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version name of the specified workflow.</p>"
+                    }
+                },
+                "networkingMode": {
+                    "target": "com.amazonaws.omics#NetworkingMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional configuration for run networking behavior. If not specified, this will default to RESTRICTED.</p>"
+                    }
+                },
+                "configurationName": {
+                    "target": "com.amazonaws.omics#ConfigurationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional configuration name to use for the workflow run.</p>"
+                    }
+                },
+                "sessionPolicy": {
+                    "target": "com.amazonaws.omics#SessionPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional inline policy json for scoping down permissions via a session policy on the IAM role provided in the roleArn parameter.</p>"
+                    }
+                },
+                "engineSettings": {
+                    "target": "com.amazonaws.omics#EngineSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Engine-specific settings for the workflow run. Use this field to specify configuration options that are specific to the workflow engine (for example, Nextflow profiles).</p>"
+                    }
+                },
+                "scratchStorageMode": {
+                    "target": "com.amazonaws.omics#ScratchStorageMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional configuration for enabling scratch ephemeral storage mounted at /tmp. If not specified, this will default to SHARED. This configuration is applicable only for CPU tasks. For tasks using GPUs, scratch storage is always LOCAL.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Shared configuration applied to all runs in a batch. Fields specified in a per-run <code>InlineSetting</code> entry override the corresponding fields in this object for that run. The <code>parameters</code> and <code>runTags</code> fields are merged rather than replaced — run-specific values take precedence when keys overlap.</p>"
+            }
+        },
         "com.amazonaws.omics#DefinitionRepository": {
             "type": "structure",
             "members": {
@@ -3210,7 +3965,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to delete an Annotation Store"
                 },
-                "smithy.api#documentation": "<p>Deletes an annotation store.</p>",
+                "smithy.api#documentation": "<important> <p>Amazon Web Services HealthOmics variant stores and annotation stores are no longer open to new customers. Existing customers can continue to use the service as normal. For more information, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html\"> Amazon Web Services HealthOmics variant store and annotation store availability change</a>.</p> </important> <p>Deletes an annotation store.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "analytics-"
                 },
@@ -3345,6 +4100,132 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.omics#DeleteBatch": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.omics#DeleteBatchRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.omics#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.omics#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.omics#RequestTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a run batch resource and its associated metadata. This operation does not delete the individual workflow runs. To delete the runs, call <code>DeleteRunBatch</code> before calling <code>DeleteBatch</code>.</p> <p> <code>DeleteBatch</code> requires the batch to be in a terminal state: <code>PROCESSED</code>, <code>FAILED</code>, <code>CANCELLED</code>, <code>RUNS_DELETE_FAILED</code>, or <code>RUNS_DELETED</code>. After <code>DeleteBatch</code> completes, the batch metadata is no longer accessible. You cannot call <code>GetBatch</code>, <code>ListRunsInBatch</code>, <code>DeleteRunBatch</code>, or <code>CancelRunBatch</code> on a deleted batch.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "workflows-"
+                },
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/runBatch/{batchId}",
+                    "code": 202
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.omics#DeleteBatchRequest": {
+            "type": "structure",
+            "members": {
+                "batchId": {
+                    "target": "com.amazonaws.omics#BatchId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier portion of the run batch ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.omics#DeleteConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.omics#DeleteConfigurationRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.omics#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.omics#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.omics#RequestTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Delete an existing configuration.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "workflows-"
+                },
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/configuration/{name}",
+                    "code": 202
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.omics#DeleteConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.omics#ConfigurationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration name to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.omics#DeleteReference": {
@@ -3536,6 +4417,74 @@
                     "code": 202
                 },
                 "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.omics#DeleteRunBatch": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.omics#DeleteRunBatchRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.omics#DeleteRunBatchResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.omics#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.omics#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.omics#RequestTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the individual workflow runs within a batch. This operation is separate from <code>DeleteBatch</code>, which removes the batch metadata.</p> <p>Delete is only allowed on batches in <code>PROCESSED</code> or <code>CANCELLED</code> state. Delete operations are non-atomic and may be partially successful. Use <code>GetBatch</code> to review <code>successfulDeleteSubmissionCount</code> and <code>failedDeleteSubmissionCount</code> in the <code>submissionSummary</code>. Only one cancel or delete operation per batch is allowed at a time.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "workflows-"
+                },
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/runBatch/delete",
+                    "code": 202
+                }
+            }
+        },
+        "com.amazonaws.omics#DeleteRunBatchRequest": {
+            "type": "structure",
+            "members": {
+                "batchId": {
+                    "target": "com.amazonaws.omics#BatchId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier portion of the run batch ARN.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.omics#DeleteRunBatchResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.omics#DeleteRunCache": {
@@ -3923,7 +4872,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to delete a Variant Store"
                 },
-                "smithy.api#documentation": "<p>Deletes a variant store.</p>",
+                "smithy.api#documentation": "<important> <p>Amazon Web Services HealthOmics variant stores and annotation stores are no longer open to new customers. Existing customers can continue to use the service as normal. For more information, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html\"> Amazon Web Services HealthOmics variant store and annotation store availability change</a>.</p> </important> <p>Deletes a variant store.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "analytics-"
                 },
@@ -4242,6 +5191,9 @@
             "traits": {
                 "smithy.api#pattern": "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$"
             }
+        },
+        "com.amazonaws.omics#EngineSettings": {
+            "type": "document"
         },
         "com.amazonaws.omics#EngineVersion": {
             "type": "string",
@@ -4634,7 +5586,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets information about an annotation import job.</p>",
+                "smithy.api#documentation": "<important> <p>Amazon Web Services HealthOmics variant stores and annotation stores are no longer open to new customers. Existing customers can continue to use the service as normal. For more information, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html\"> Amazon Web Services HealthOmics variant store and annotation store availability change</a>.</p> </important> <p>Gets information about an annotation import job.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "analytics-"
                 },
@@ -4848,7 +5800,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to get detailed information about an Annotation Store"
                 },
-                "smithy.api#documentation": "<p>Gets information about an annotation store.</p>",
+                "smithy.api#documentation": "<important> <p>Amazon Web Services HealthOmics variant stores and annotation stores are no longer open to new customers. Existing customers can continue to use the service as normal. For more information, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html\"> Amazon Web Services HealthOmics variant store and annotation store availability change</a>.</p> </important> <p>Gets information about an annotation store.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "analytics-"
                 },
@@ -5304,6 +6256,280 @@
                     "traits": {
                         "smithy.api#documentation": "<p> The size of the annotation store version in Bytes. </p>",
                         "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.omics#GetBatch": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.omics#GetBatchRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.omics#GetBatchResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.omics#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.omics#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.omics#RequestTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves details and current status for a specific run batch, including submission progress and run execution counts.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "workflows-"
+                },
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/runBatch/{batchId}",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.omics#GetBatchRequest": {
+            "type": "structure",
+            "members": {
+                "batchId": {
+                    "target": "com.amazonaws.omics#BatchId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier portion of the run batch ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.omics#GetBatchResponse": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.omics#BatchId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier portion of the run batch ARN.</p>"
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.omics#BatchArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ARN of the run batch.</p>"
+                    }
+                },
+                "uuid": {
+                    "target": "com.amazonaws.omics#BatchUuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The universally unique identifier (UUID) for the run batch.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.omics#BatchName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The optional user-friendly name of the batch.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.omics#BatchStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the run batch. Possible values: <code>CREATING</code> (initial setup), <code>PENDING</code> (ready to submit runs), <code>SUBMITTING</code> (submitting runs), <code>INPROGRESS</code> (runs executing), <code>STOPPING</code> (cancellation in progress), <code>PROCESSED</code> (all runs completed), <code>CANCELLED</code> (batch cancelled), <code>FAILED</code> (batch failed), <code>RUNS_DELETING</code> (deleting runs), <code>RUNS_DELETE_FAILED</code> (run deletion failed for some or all runs), <code>RUNS_DELETED</code> (runs deleted).</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.omics#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Amazon Web Services tags associated with the run batch.</p>"
+                    }
+                },
+                "totalRuns": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of runs in the batch.</p>"
+                    }
+                },
+                "defaultRunSetting": {
+                    "target": "com.amazonaws.omics#DefaultRunSetting",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The shared configuration applied to all runs in the batch. See <code>DefaultRunSetting</code>.</p>"
+                    }
+                },
+                "submissionSummary": {
+                    "target": "com.amazonaws.omics#SubmissionSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A summary of run submission outcomes. See <code>SubmissionSummary</code>.</p>"
+                    }
+                },
+                "runSummary": {
+                    "target": "com.amazonaws.omics#RunSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A summary of run execution states. Run execution counts are eventually consistent and may lag behind actual run states. Final counts are accurate once the batch reaches <code>PROCESSED</code> status. See <code>RunSummary</code>.</p>"
+                    }
+                },
+                "creationTime": {
+                    "target": "com.amazonaws.omics#BatchTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the batch was created.</p>"
+                    }
+                },
+                "submittedTime": {
+                    "target": "com.amazonaws.omics#BatchTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when all run submissions completed.</p>"
+                    }
+                },
+                "processedTime": {
+                    "target": "com.amazonaws.omics#BatchTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when all run executions completed.</p>"
+                    }
+                },
+                "failedTime": {
+                    "target": "com.amazonaws.omics#BatchTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the batch transitioned to a <code>FAILED</code> status.</p>"
+                    }
+                },
+                "failureReason": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the batch failure. Present only when status is <code>FAILED</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.omics#GetConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.omics#GetConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.omics#GetConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.omics#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.omics#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.omics#RequestTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieve configuration details for specified name.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "workflows-"
+                },
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/configuration/{name}",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.omics#GetConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.omics#ConfigurationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration name to retrieve.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.omics#GetConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.omics#ConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique resource identifier for the configuration.</p>"
+                    }
+                },
+                "uuid": {
+                    "target": "com.amazonaws.omics#ConfigurationUuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique identifier for the configuration.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.omics#ConfigurationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>User-friendly name for the configuration.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.omics#ConfigurationDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Description for the configuration.</p>"
+                    }
+                },
+                "runConfigurations": {
+                    "target": "com.amazonaws.omics#RunConfigurationsResponse",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Run-specific configurations.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.omics#ConfigurationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Current configuration status.</p>"
+                    }
+                },
+                "creationTime": {
+                    "target": "com.amazonaws.omics#ConfigurationTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration creation timestamp.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.omics#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags for the configuration.</p>"
                     }
                 }
             },
@@ -7338,6 +8564,12 @@
                         "smithy.api#documentation": "<p>The run's group ID.</p>"
                     }
                 },
+                "batchId": {
+                    "target": "com.amazonaws.omics#BatchId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The run's batch ID.</p>"
+                    }
+                },
                 "priority": {
                     "target": "smithy.api#Integer",
                     "traits": {
@@ -7488,6 +8720,42 @@
                     "target": "com.amazonaws.omics#WorkflowUuid",
                     "traits": {
                         "smithy.api#documentation": "<p>The universally unique identifier (UUID) value for the workflow.</p>"
+                    }
+                },
+                "networkingMode": {
+                    "target": "com.amazonaws.omics#NetworkingMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for run networking behavior. If absent, this will default to RESTRICTED.</p>"
+                    }
+                },
+                "scratchStorageMode": {
+                    "target": "com.amazonaws.omics#ScratchStorageMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional configuration for enabling scratch ephemeral storage mounted at /tmp. If absent, this will default to SHARED. This configuration is applicable only for CPU tasks. For tasks using GPUs, scratch storage is always LOCAL.</p>"
+                    }
+                },
+                "configuration": {
+                    "target": "com.amazonaws.omics#ConfigurationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration details for the workflow run.</p>"
+                    }
+                },
+                "vpcConfig": {
+                    "target": "com.amazonaws.omics#VpcConfigResponse",
+                    "traits": {
+                        "smithy.api#documentation": "<p>VPC configuration for the workflow run.</p>"
+                    }
+                },
+                "engineSettings": {
+                    "target": "com.amazonaws.omics#EngineSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The engine-specific settings for the workflow run.</p>"
+                    }
+                },
+                "sessionPolicy": {
+                    "target": "com.amazonaws.omics#SessionPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Inline policy json for scoping down permissions via a session policy on the IAM role.</p>"
                     }
                 }
             },
@@ -7798,6 +9066,12 @@
                     "target": "com.amazonaws.omics#ImageDetails",
                     "traits": {
                         "smithy.api#documentation": "<p>Details about the container image that this task uses.</p>"
+                    }
+                },
+                "uuid": {
+                    "target": "com.amazonaws.omics#TaskUuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The universally unique identifier (UUID) for the workflow task.</p>"
                     }
                 }
             },
@@ -8159,7 +9433,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets information about a variant import job.</p>",
+                "smithy.api#documentation": "<important> <p>Amazon Web Services HealthOmics variant stores and annotation stores are no longer open to new customers. Existing customers can continue to use the service as normal. For more information, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html\"> Amazon Web Services HealthOmics variant store and annotation store availability change</a>.</p> </important> <p>Gets information about a variant import job.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "analytics-"
                 },
@@ -8359,7 +9633,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to get detailed information about a Variant Store"
                 },
-                "smithy.api#documentation": "<p>Gets information about a variant store.</p>",
+                "smithy.api#documentation": "<important> <p>Amazon Web Services HealthOmics variant stores and annotation stores are no longer open to new customers. Existing customers can continue to use the service as normal. For more information, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html\"> Amazon Web Services HealthOmics variant store and annotation store availability change</a>.</p> </important> <p>Gets information about a variant store.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "analytics-"
                 },
@@ -8842,6 +10116,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The path to the workflow README markdown file within the repository. This file provides documentation and usage information for the workflow. If not specified, the <code>README.md</code> file from the root directory of the repository will be used.</p>"
                     }
+                },
+                "profiles": {
+                    "target": "com.amazonaws.omics#WorkflowProfileList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of Nextflow profiles that are available for this workflow. Profiles allow you to select predefined configuration settings at runtime.</p>"
+                    }
+                },
+                "profileParameterTemplates": {
+                    "target": "com.amazonaws.omics#WorkflowProfileParameterTemplates",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A mapping of profile names to their parameter templates. Each profile defines its own set of parameters that you can use when starting a run with that profile.</p>"
+                    }
                 }
             },
             "traits": {
@@ -9143,6 +10429,18 @@
                     "target": "com.amazonaws.omics#ReadmePath",
                     "traits": {
                         "smithy.api#documentation": "<p>The path to the workflow version README markdown file within the repository. This file provides documentation and usage information for the workflow. If not specified, the <code>README.md</code> file from the root directory of the repository will be used.</p>"
+                    }
+                },
+                "profiles": {
+                    "target": "com.amazonaws.omics#WorkflowProfileList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of Nextflow profiles that are available for this workflow version. Profiles allow you to select predefined configuration settings at runtime.</p>"
+                    }
+                },
+                "profileParameterTemplates": {
+                    "target": "com.amazonaws.omics#WorkflowProfileParameterTemplates",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A mapping of profile names to their parameter templates. Each profile defines its own set of parameters that you can use when starting a run with that profile.</p>"
                     }
                 }
             },
@@ -9542,6 +10840,79 @@
                 "target": "com.amazonaws.omics#ImportReferenceSourceItem"
             }
         },
+        "com.amazonaws.omics#InlineSetting": {
+            "type": "structure",
+            "members": {
+                "runSettingId": {
+                    "target": "com.amazonaws.omics#RunSettingId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A customer-provided unique identifier for this run configuration within the batch. After submission, use <code>ListRunsInBatch</code> to map each <code>runSettingId</code> to the HealthOmics-generated <code>runId</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.omics#RunName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional user-friendly name for this run.</p>"
+                    }
+                },
+                "outputUri": {
+                    "target": "com.amazonaws.omics#RunOutputUri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Override the destination S3 URI for this run's outputs.</p>"
+                    }
+                },
+                "priority": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Override the priority for this run.</p>",
+                        "smithy.api#range": {
+                            "min": 0,
+                            "max": 100000
+                        }
+                    }
+                },
+                "parameters": {
+                    "target": "com.amazonaws.omics#RunParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Per-run workflow parameters. Merged with <code>defaultRunSetting.parameters</code>; values in this object take precedence when keys overlap.</p>"
+                    }
+                },
+                "outputBucketOwnerId": {
+                    "target": "com.amazonaws.omics#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The expected Amazon Web Services account ID of the owner of the output S3 bucket for this run.</p>"
+                    }
+                },
+                "runTags": {
+                    "target": "com.amazonaws.omics#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Per-run Amazon Web Services tags. Merged with <code>defaultRunSetting.runTags</code>; values in this object take precedence when keys overlap.</p>"
+                    }
+                },
+                "engineSettings": {
+                    "target": "com.amazonaws.omics#EngineSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Per-run engine-specific settings. Use this field to specify configuration options that are specific to the workflow engine (for example, Nextflow profiles). Overrides <code>defaultRunSetting.engineSettings</code> for this run.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A per-run configuration that overrides or merges with fields from <code>DefaultRunSetting</code> for a specific run.</p>"
+            }
+        },
+        "com.amazonaws.omics#InlineSettings": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.omics#InlineSetting"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
         "com.amazonaws.omics#InternalServerException": {
             "type": "structure",
             "members": {
@@ -9644,7 +11015,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves a list of annotation import jobs.</p>",
+                "smithy.api#documentation": "<important> <p>Amazon Web Services HealthOmics variant stores and annotation stores are no longer open to new customers. Existing customers can continue to use the service as normal. For more information, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html\"> Amazon Web Services HealthOmics variant store and annotation store availability change</a>.</p> </important> <p>Retrieves a list of annotation import jobs.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "analytics-"
                 },
@@ -9899,7 +11270,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to retrieve a list of information about Annotation Stores"
                 },
-                "smithy.api#documentation": "<p>Retrieves a list of annotation stores.</p>",
+                "smithy.api#documentation": "<important> <p>Amazon Web Services HealthOmics variant stores and annotation stores are no longer open to new customers. Existing customers can continue to use the service as normal. For more information, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html\"> Amazon Web Services HealthOmics variant store and annotation store availability change</a>.</p> </important> <p>Retrieves a list of annotation stores.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "analytics-"
                 },
@@ -9990,6 +11361,216 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#documentation": "<p>A pagination token that's included if more results are available.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.omics#ListBatch": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.omics#ListBatchRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.omics#ListBatchResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.omics#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.omics#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.omics#RequestTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of run batches in your account, with optional filtering by status, name, or run group. Results are paginated. Only one filter per call is supported.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "workflows-"
+                },
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/runBatch",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "startingToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxItems",
+                    "items": "items"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.omics#ListBatchRequest": {
+            "type": "structure",
+            "members": {
+                "maxItems": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of batches to return. If not specified, defaults to 100.</p>",
+                        "smithy.api#httpQuery": "maxItems",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                },
+                "startingToken": {
+                    "target": "com.amazonaws.omics#ListToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token returned from a prior <code>ListBatch</code> call.</p>",
+                        "smithy.api#httpQuery": "startingToken"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.omics#BatchStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter batches by status.</p>",
+                        "smithy.api#httpQuery": "status"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.omics#BatchName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter batches by name.</p>",
+                        "smithy.api#httpQuery": "name"
+                    }
+                },
+                "runGroupId": {
+                    "target": "com.amazonaws.omics#RunGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter batches by run group ID.</p>",
+                        "smithy.api#httpQuery": "runGroupId"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.omics#ListBatchResponse": {
+            "type": "structure",
+            "members": {
+                "items": {
+                    "target": "com.amazonaws.omics#BatchList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of batch summary objects. See <code>BatchListItem</code>.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.omics#ListToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token to retrieve the next page of results. Absent when no further results are available.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.omics#ListConfigurations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.omics#ListConfigurationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.omics#ListConfigurationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.omics#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.omics#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.omics#RequestTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List all configurations for the account.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "workflows-"
+                },
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/configuration",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "startingToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "items"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.omics#ListConfigurationsRequest": {
+            "type": "structure",
+            "members": {
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Maximum number of results to return.</p>",
+                        "smithy.api#httpQuery": "maxResults",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 10
+                        }
+                    }
+                },
+                "startingToken": {
+                    "target": "com.amazonaws.omics#ConfigurationListToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Pagination token for retrieving next page of results.</p>",
+                        "smithy.api#httpQuery": "startingToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.omics#ListConfigurationsResponse": {
+            "type": "structure",
+            "members": {
+                "items": {
+                    "target": "com.amazonaws.omics#ConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of configuration items.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.omics#ConfigurationListToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Token for retrieving next page of results.</p>"
                     }
                 }
             },
@@ -11345,6 +12926,134 @@
                 "smithy.api#readonly": {}
             }
         },
+        "com.amazonaws.omics#ListRunsInBatch": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.omics#ListRunsInBatchRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.omics#ListRunsInBatchResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.omics#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.omics#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.omics#RequestTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a paginated list of individual workflow runs within a specific batch. Use this operation to map each <code>runSettingId</code> to its HealthOmics-generated <code>runId</code>, and to check the submission status of each run. Only one filter per call is supported.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "workflows-"
+                },
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/runBatch/{batchId}/run",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "startingToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxItems",
+                    "items": "runs"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.omics#ListRunsInBatchRequest": {
+            "type": "structure",
+            "members": {
+                "batchId": {
+                    "target": "com.amazonaws.omics#BatchId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier portion of the run batch ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxItems": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of runs to return.</p>",
+                        "smithy.api#httpQuery": "maxItems",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                },
+                "startingToken": {
+                    "target": "com.amazonaws.omics#ListToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token returned from a prior <code>ListRunsInBatch</code> call.</p>",
+                        "smithy.api#httpQuery": "startingToken"
+                    }
+                },
+                "submissionStatus": {
+                    "target": "com.amazonaws.omics#SubmissionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter runs by submission status.</p>",
+                        "smithy.api#httpQuery": "submissionStatus"
+                    }
+                },
+                "runSettingId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter runs by the customer-provided run setting ID.</p>",
+                        "smithy.api#httpQuery": "runSettingId"
+                    }
+                },
+                "runId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter runs by the HealthOmics-generated run ID.</p>",
+                        "smithy.api#httpQuery": "runId"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.omics#ListRunsInBatchResponse": {
+            "type": "structure",
+            "members": {
+                "runs": {
+                    "target": "com.amazonaws.omics#RunBatchList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of run entries in the batch. See <code>RunBatchListItem</code>.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.omics#ListToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token to retrieve the next page of results. Absent when the last run has been returned.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.omics#ListRunsRequest": {
             "type": "structure",
             "members": {
@@ -11360,6 +13069,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Filter the list by run group ID.</p>",
                         "smithy.api#httpQuery": "runGroupId"
+                    }
+                },
+                "batchId": {
+                    "target": "com.amazonaws.omics#BatchId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter by batch ID.</p>",
+                        "smithy.api#httpQuery": "batchId"
                     }
                 },
                 "startingToken": {
@@ -11729,7 +13445,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves a list of variant import jobs.</p>",
+                "smithy.api#documentation": "<important> <p>Amazon Web Services HealthOmics variant stores and annotation stores are no longer open to new customers. Existing customers can continue to use the service as normal. For more information, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html\"> Amazon Web Services HealthOmics variant store and annotation store availability change</a>.</p> </important> <p>Retrieves a list of variant import jobs.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "analytics-"
                 },
@@ -11862,7 +13578,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to retrieve a list of metadata for Variant Stores"
                 },
-                "smithy.api#documentation": "<p>Retrieves a list of variant stores.</p>",
+                "smithy.api#documentation": "<important> <p>Amazon Web Services HealthOmics variant stores and annotation stores are no longer open to new customers. Existing customers can continue to use the service as normal. For more information, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html\"> Amazon Web Services HealthOmics variant store and annotation store availability change</a>.</p> </important> <p>Retrieves a list of variant stores.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "analytics-"
                 },
@@ -12294,6 +14010,21 @@
                 "smithy.api#documentation": "<p> Part of the response to ListMultipartReadSetUploads, excluding completed and aborted multipart uploads. </p>"
             }
         },
+        "com.amazonaws.omics#NetworkingMode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "RESTRICTED",
+                        "value": "RESTRICTED"
+                    },
+                    {
+                        "name": "VPC",
+                        "value": "VPC"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.omics#NextToken": {
             "type": "string",
             "traits": {
@@ -12355,7 +14086,13 @@
                     "target": "com.amazonaws.omics#AnnotationStoreVersion"
                 },
                 {
+                    "target": "com.amazonaws.omics#ConfigurationResource"
+                },
+                {
                     "target": "com.amazonaws.omics#ReferenceStoreResource"
+                },
+                {
+                    "target": "com.amazonaws.omics#RunBatchResource"
                 },
                 {
                     "target": "com.amazonaws.omics#RunCacheResource"
@@ -12420,6 +14157,194 @@
                 "aws.protocols#restJson1": {},
                 "smithy.api#documentation": "<p>Amazon Web Services HealthOmics is a service that helps users such as bioinformaticians, researchers, and scientists to store, query, analyze, and generate insights from genomics and other biological data. It simplifies and accelerates the process of storing and analyzing genomic information for Amazon Web Services.</p> <p>For an introduction to the service, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/what-is-healthomics.html\">What is Amazon Web Services HealthOmics?</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>",
                 "smithy.api#title": "Amazon Omics",
+                "smithy.rules#endpointBdd": {
+                    "version": "1.1",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        }
+                    },
+                    "conditions": [
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.partition",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ],
+                            "assign": "PartitionResult"
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseDualStack"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsDualStack"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsFIPS"
+                                    ]
+                                },
+                                true
+                            ]
+                        }
+                    ],
+                    "results": [
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://omics-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://omics-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://omics.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://omics.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ],
+                    "root": 2,
+                    "nodeCount": 13,
+                    "nodes": "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"
+                },
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {
@@ -12427,27 +14352,27 @@
                             "builtIn": "AWS::Region",
                             "required": false,
                             "documentation": "The AWS region used to dispatch the request.",
-                            "type": "String"
+                            "type": "string"
                         },
                         "UseDualStack": {
                             "builtIn": "AWS::UseDualStack",
                             "required": true,
                             "default": false,
                             "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "UseFIPS": {
                             "builtIn": "AWS::UseFIPS",
                             "required": true,
                             "default": false,
                             "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "Endpoint": {
                             "builtIn": "SDK::Endpoint",
                             "required": false,
                             "documentation": "Override the endpoint used to send this request",
-                            "type": "String"
+                            "type": "string"
                         }
                     },
                     "rules": [
@@ -13805,7 +15730,7 @@
                 "aws.iam#iamResource": {
                     "name": "readSet"
                 },
-                "smithy.api#documentation": "Represents a resource that stores a single genomic sequence file"
+                "smithy.api#documentation": "<p>Represents a resource that stores a single genomic sequence file.</p>"
             }
         },
         "com.amazonaws.omics#ReadSetS3Access": {
@@ -14301,7 +16226,7 @@
                 "aws.iam#iamResource": {
                     "name": "reference"
                 },
-                "smithy.api#documentation": "Represents a resource that stores a single genomic reference file"
+                "smithy.api#documentation": "<p>Represents a resource that stores a single genomic reference file.</p>"
             }
         },
         "com.amazonaws.omics#ReferenceStatus": {
@@ -14494,7 +16419,7 @@
                 "aws.iam#iamResource": {
                     "name": "referenceStore"
                 },
-                "smithy.api#documentation": "Represents a resource that stores genomic reference data"
+                "smithy.api#documentation": "<p>Represents a resource that stores genomic reference data.</p>"
             }
         },
         "com.amazonaws.omics#ReferenceStreamingBlob": {
@@ -14509,13 +16434,17 @@
                 "upstreamRegistryUrl": {
                     "target": "com.amazonaws.omics#Uri",
                     "traits": {
-                        "smithy.api#documentation": "<p>The URI of the upstream registry.</p>"
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The URI of the upstream registry.</p>",
+                        "smithy.api#required": {}
                     }
                 },
                 "ecrRepositoryPrefix": {
                     "target": "com.amazonaws.omics#EcrRepositoryPrefix",
                     "traits": {
-                        "smithy.api#documentation": "<p>The repository prefix to use in the ECR private repository.</p>"
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The repository prefix to use in the ECR private repository.</p>",
+                        "smithy.api#required": {}
                     }
                 },
                 "upstreamRepositoryPrefix": {
@@ -14528,6 +16457,12 @@
                     "target": "com.amazonaws.omics#AwsAccountId",
                     "traits": {
                         "smithy.api#documentation": "<p>Account ID of the account that owns the upstream container image.</p>"
+                    }
+                },
+                "credentialArn": {
+                    "target": "com.amazonaws.omics#SecretArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager secret that holds the credentials for the upstream registry. You must specify this value when Amazon Elastic Container Registry (Amazon ECR) doesn't support pull through cache for the upstream registry. HealthOmics supports only some of these registries. The workflow role must have permission to call the <code>secretsmanager:GetSecretValue</code> operation on the secret. For more information about the supported registries, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/workflows-ecr.html\">Container images</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>"
                     }
                 }
             },
@@ -14623,6 +16558,105 @@
                     "max": 128
                 },
                 "smithy.api#pattern": "^arn:.+$"
+            }
+        },
+        "com.amazonaws.omics#RunBatchList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.omics#RunBatchListItem"
+            }
+        },
+        "com.amazonaws.omics#RunBatchListItem": {
+            "type": "structure",
+            "members": {
+                "runSettingId": {
+                    "target": "com.amazonaws.omics#RunSettingId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer-provided identifier for the run configuration. Use this to correlate results back to the input configuration provided in <code>inlineSettings</code> or <code>s3UriSettings</code>.</p>"
+                    }
+                },
+                "runId": {
+                    "target": "com.amazonaws.omics#RunId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The HealthOmics-generated identifier for the workflow run. Empty if submission failed.</p>"
+                    }
+                },
+                "runInternalUuid": {
+                    "target": "com.amazonaws.omics#RunUuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The universally unique identifier (UUID) for the run.</p>"
+                    }
+                },
+                "runArn": {
+                    "target": "com.amazonaws.omics#RunArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ARN of the workflow run.</p>"
+                    }
+                },
+                "submissionStatus": {
+                    "target": "com.amazonaws.omics#SubmissionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The submission outcome for this run.</p>"
+                    }
+                },
+                "submissionFailureReason": {
+                    "target": "com.amazonaws.omics#SubmissionFailureReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error category for a failed submission. See the run-level failure table in the HealthOmics User Guide for details on each value.</p>"
+                    }
+                },
+                "submissionFailureMessage": {
+                    "target": "com.amazonaws.omics#SubmissionFailureMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A detailed message describing the submission failure.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A single run entry returned by <code>ListRunsInBatch</code>.</p>"
+            }
+        },
+        "com.amazonaws.omics#RunBatchResource": {
+            "type": "resource",
+            "identifiers": {
+                "batchId": {
+                    "target": "com.amazonaws.omics#BatchId"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.omics#StartRunBatch"
+            },
+            "read": {
+                "target": "com.amazonaws.omics#GetBatch"
+            },
+            "delete": {
+                "target": "com.amazonaws.omics#DeleteBatch"
+            },
+            "list": {
+                "target": "com.amazonaws.omics#ListBatch"
+            },
+            "operations": [
+                {
+                    "target": "com.amazonaws.omics#CancelRunBatch"
+                },
+                {
+                    "target": "com.amazonaws.omics#DeleteRunBatch"
+                },
+                {
+                    "target": "com.amazonaws.omics#ListRunsInBatch"
+                }
+            ],
+            "traits": {
+                "aws.api#arn": {
+                    "template": "runBatch/{batchId}"
+                },
+                "aws.iam#conditionKeys": [
+                    "aws:ResourceTag/${TagKey}"
+                ],
+                "aws.iam#disableConditionKeyInference": {},
+                "aws.iam#iamResource": {
+                    "name": "runBatch"
+                }
             }
         },
         "com.amazonaws.omics#RunCacheArn": {
@@ -14776,6 +16810,34 @@
             "type": "timestamp",
             "traits": {
                 "smithy.api#timestampFormat": "date-time"
+            }
+        },
+        "com.amazonaws.omics#RunConfigurations": {
+            "type": "structure",
+            "members": {
+                "vpcConfig": {
+                    "target": "com.amazonaws.omics#VpcConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>VPC configuration for workflow runs.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Run-specific configuration settings.</p>"
+            }
+        },
+        "com.amazonaws.omics#RunConfigurationsResponse": {
+            "type": "structure",
+            "members": {
+                "vpcConfig": {
+                    "target": "com.amazonaws.omics#VpcConfigResponse",
+                    "traits": {
+                        "smithy.api#documentation": "<p>VPC configuration for workflow runs with computed VPC ID.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Run-specific configuration settings with computed values.</p>"
             }
         },
         "com.amazonaws.omics#RunExport": {
@@ -15036,6 +17098,12 @@
                         "smithy.api#documentation": "<p>The run's workflow ID.</p>"
                     }
                 },
+                "batchId": {
+                    "target": "com.amazonaws.omics#BatchId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The run's batch ID.</p>"
+                    }
+                },
                 "name": {
                     "target": "com.amazonaws.omics#RunName",
                     "traits": {
@@ -15090,6 +17158,12 @@
                     "target": "com.amazonaws.omics#WorkflowVersionName",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the workflow version.</p>"
+                    }
+                },
+                "workflowName": {
+                    "target": "com.amazonaws.omics#WorkflowName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the workflow.</p>"
                     }
                 }
             },
@@ -15293,6 +17367,16 @@
                 "smithy.api#pattern": "^arn:.+$"
             }
         },
+        "com.amazonaws.omics#RunSettingId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$"
+            }
+        },
         "com.amazonaws.omics#RunStartedBy": {
             "type": "string",
             "traits": {
@@ -15349,6 +17433,62 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$"
+            }
+        },
+        "com.amazonaws.omics#RunSummary": {
+            "type": "structure",
+            "members": {
+                "pendingRunCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of pending runs.</p>"
+                    }
+                },
+                "startingRunCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of starting runs.</p>"
+                    }
+                },
+                "runningRunCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of running runs.</p>"
+                    }
+                },
+                "stoppingRunCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of stopping runs.</p>"
+                    }
+                },
+                "completedRunCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of completed runs.</p>"
+                    }
+                },
+                "deletedRunCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of deleted runs.</p>"
+                    }
+                },
+                "failedRunCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of failed runs.</p>"
+                    }
+                },
+                "cancelledRunCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of cancelled runs.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of the runs in a batch.</p>"
             }
         },
         "com.amazonaws.omics#RunTimestamp": {
@@ -15426,6 +17566,16 @@
                 "smithy.api#pattern": "^s3://([a-z0-9][a-z0-9-.]{1,61}[a-z0-9])/((.{1,1024}))$"
             }
         },
+        "com.amazonaws.omics#S3UriSettings": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 750
+                },
+                "smithy.api#pattern": "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$"
+            }
+        },
         "com.amazonaws.omics#SampleId": {
             "type": "string",
             "traits": {
@@ -15495,6 +17645,51 @@
                         "documentation": "BOOLEAN type"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.omics#ScratchStorageMode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "LOCAL",
+                        "value": "LOCAL"
+                    },
+                    {
+                        "name": "SHARED",
+                        "value": "SHARED"
+                    }
+                ],
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                }
+            }
+        },
+        "com.amazonaws.omics#SecretArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws(-\\w+)*:secretsmanager:[a-z0-9-]+:[0-9]{12}:secret:[a-zA-Z0-9\\/_+=.@-]+$"
+            }
+        },
+        "com.amazonaws.omics#SecurityGroupId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 4,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^sg-[0-9a-f]+$"
+            }
+        },
+        "com.amazonaws.omics#SecurityGroupIds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.omics#SecurityGroupId"
             }
         },
         "com.amazonaws.omics#Separator": {
@@ -15799,7 +17994,7 @@
                 "aws.iam#iamResource": {
                     "name": "sequenceStore"
                 },
-                "smithy.api#documentation": "Represents a resource that stores genomic sequence data"
+                "smithy.api#documentation": "<p>Represents a resource that stores genomic sequence data.</p>"
             }
         },
         "com.amazonaws.omics#SequenceStoreS3Access": {
@@ -15879,6 +18074,16 @@
                 "smithy.api#documentation": "<p>The request exceeds a service quota.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.omics#SessionPolicy": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^[\\p{L}\\p{M}\\p{Z}\\p{S}\\p{N}\\p{P}\\t\\n\\r]+$"
             }
         },
         "com.amazonaws.omics#Share": {
@@ -16167,7 +18372,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts an annotation import job.</p>",
+                "smithy.api#documentation": "<important> <p>Amazon Web Services HealthOmics variant stores and annotation stores are no longer open to new customers. Existing customers can continue to use the service as normal. For more information, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html\"> Amazon Web Services HealthOmics variant store and annotation store availability change</a>.</p> </important> <p>Starts an annotation import job.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "analytics-"
                 },
@@ -16280,7 +18485,7 @@
             ],
             "traits": {
                 "aws.iam#actionPermissionDescription": "Grants permission to start a Read Set activation job from the given Sequence Store",
-                "smithy.api#documentation": "<p>Activates an archived read set and returns its metadata in a JSON formatted output. AWS HealthOmics automatically archives unused read sets after 30 days. To monitor the status of your read set activation job, use the <code>GetReadSetActivationJob</code> operation.</p> <p>To learn more, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/activating-read-sets.html\">Activating read sets</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Activates an archived read set and returns its metadata in a JSON formatted output. Amazon Web Services HealthOmics automatically archives unused read sets after 30 days. To monitor the status of your read set activation job, use the <code>GetReadSetActivationJob</code> operation.</p> <p>To learn more, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/activating-read-sets.html\">Activating read sets</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "control-storage-"
                 },
@@ -16916,7 +19121,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts a new run and returns details about the run, or duplicates an existing run. A run is a single invocation of a workflow. If you provide request IDs, Amazon Web Services HealthOmics identifies duplicate requests and starts the run only once. Monitor the progress of the run by calling the <code>GetRun</code> API operation.</p> <p>To start a new run, the following inputs are required:</p> <ul> <li> <p>A service role ARN (<code>roleArn</code>).</p> </li> <li> <p>The run's workflow ID (<code>workflowId</code>, not the <code>uuid</code> or <code>runId</code>).</p> </li> <li> <p>An Amazon S3 location (<code>outputUri</code>) where the run outputs will be saved.</p> </li> <li> <p>All required workflow parameters (<code>parameter</code>), which can include optional parameters from the parameter template. The run cannot include any parameters that are not defined in the parameter template. To see all possible parameters, use the <code>GetRun</code> API operation. </p> </li> <li> <p>For runs with a <code>STATIC</code> (default) storage type, specify the required storage capacity (in gibibytes). A storage capacity value is not required for runs that use <code>DYNAMIC</code> storage.</p> </li> </ul> <p> <code>StartRun</code> can also duplicate an existing run using the run's default values. You can modify these default values and/or add other optional inputs. To duplicate a run, the following inputs are required:</p> <ul> <li> <p>A service role ARN (<code>roleArn</code>).</p> </li> <li> <p>The ID of the run to duplicate (<code>runId</code>).</p> </li> <li> <p>An Amazon S3 location where the run outputs will be saved (<code>outputUri</code>).</p> </li> </ul> <p>To learn more about the optional parameters for <code>StartRun</code>, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/starting-a-run.html\">Starting a run</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p> <p>Use the <code>retentionMode</code> input to control how long the metadata for each run is stored in CloudWatch. There are two retention modes:</p> <ul> <li> <p>Specify <code>REMOVE</code> to automatically remove the oldest runs when you reach the maximum service retention limit for runs. It is recommended that you use the <code>REMOVE</code> mode to initiate major run requests so that your runs do not fail when you reach the limit.</p> </li> <li> <p>The <code>retentionMode</code> is set to the <code>RETAIN</code> mode by default, which allows you to manually remove runs after reaching the maximum service retention limit. Under this setting, you cannot create additional runs until you remove the excess runs.</p> </li> </ul> <p>To learn more about the retention modes, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/run-retention.html\">Run retention mode</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Starts a new run and returns details about the run, or duplicates an existing run. A run is a single invocation of a workflow. If you provide request IDs, Amazon Web Services HealthOmics identifies duplicate requests and starts the run only once. Monitor the progress of the run by calling the <code>GetRun</code> API operation.</p> <p>To start a new run, the following inputs are required:</p> <ul> <li> <p>A service role ARN (<code>roleArn</code>).</p> </li> <li> <p>The run's workflow ID (<code>workflowId</code>, not the <code>uuid</code> or <code>runId</code>).</p> </li> <li> <p>An Amazon S3 location (<code>outputUri</code>) where the run outputs will be saved.</p> </li> <li> <p>All required workflow parameters (<code>parameter</code>), which can include optional parameters from the parameter template. The run cannot include any parameters that are not defined in the parameter template. To see all possible parameters, use the <code>GetRun</code> API operation. </p> </li> <li> <p>For runs with a <code>STATIC</code> (default) storage type, specify the required storage capacity (in gibibytes). A storage capacity value is not required for runs that use <code>DYNAMIC</code> storage.</p> </li> </ul> <p> <code>StartRun</code> can also duplicate an existing run using the run's default values. You can modify these default values and/or add other optional inputs. To duplicate a run, the following inputs are required:</p> <ul> <li> <p>A service role ARN (<code>roleArn</code>).</p> </li> <li> <p>The ID of the run to duplicate (<code>runId</code>).</p> </li> <li> <p>An Amazon S3 location where the run outputs will be saved (<code>outputUri</code>).</p> </li> </ul> <p>To learn more about the optional parameters for <code>StartRun</code>, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/starting-a-run.html\">Starting a run</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p> <p>Use the <code>retentionMode</code> input to control how long the metadata for each run is stored in CloudWatch. There are two retention modes:</p> <ul> <li> <p>Specify <code>REMOVE</code> to automatically remove the oldest runs when you reach the maximum service retention limit for runs. It is recommended that you use the <code>REMOVE</code> mode to initiate major run requests so that your runs do not fail when you reach the limit.</p> </li> <li> <p>The <code>retentionMode</code> is set to the <code>RETAIN</code> mode by default, which allows you to manually remove runs after reaching the maximum service retention limit. Under this setting, you cannot create additional runs until you remove the excess runs.</p> </li> </ul> <p>To learn more about the retention modes, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/run-retention.html\">Run retention mode</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p> <p>You can use Amazon Q CLI to analyze run logs and make performance optimization recommendations. To get started, see the <a href=\"https://github.com/awslabs/mcp/tree/main/src/aws-healthomics-mcp-server\">Amazon Web Services HealthOmics MCP server</a> on GitHub.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "workflows-"
                 },
@@ -16925,6 +19130,132 @@
                     "uri": "/run",
                     "code": 201
                 }
+            }
+        },
+        "com.amazonaws.omics#StartRunBatch": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.omics#StartRunBatchRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.omics#StartRunBatchResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.omics#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.omics#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.omics#RequestTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Starts a batch of workflow runs. You can group up to 100,000 runs into a single batch that share a common configuration defined in <code>defaultRunSetting</code>. Per-run overrides can be provided either inline via <code>inlineSettings</code> (up to 100 runs) or via a JSON file stored in Amazon S3 via <code>s3UriSettings</code> (up to 100,000 runs).</p> <p> <code>StartRunBatch</code> validates common fields synchronously and returns immediately with a batch ID and status <code>CREATING</code>. The batch transitions to <code>PENDING</code> once initial setup completes. Runs are then submitted gradually and asynchronously at a rate governed by your <code>StartRun</code> throughput quota.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "workflows-"
+                },
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/runBatch",
+                    "code": 201
+                }
+            }
+        },
+        "com.amazonaws.omics#StartRunBatchRequest": {
+            "type": "structure",
+            "members": {
+                "batchName": {
+                    "target": "com.amazonaws.omics#BatchName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional user-friendly name for the run batch.</p>"
+                    }
+                },
+                "requestId": {
+                    "target": "com.amazonaws.omics#BatchRequestId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A client token used to deduplicate retry requests and prevent duplicate batches from being created.</p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.omics#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Amazon Web Services tags to associate with the batch resource. These tags are not inherited by individual runs. To tag individual runs, use <code>defaultRunSetting.runTags</code>.</p>"
+                    }
+                },
+                "defaultRunSetting": {
+                    "target": "com.amazonaws.omics#DefaultRunSetting",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Shared configuration applied to all runs in the batch. See <code>DefaultRunSetting</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "batchRunSettings": {
+                    "target": "com.amazonaws.omics#BatchRunSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The individual run configurations. Specify exactly one of <code>inlineSettings</code> or <code>s3UriSettings</code>. See <code>BatchRunSettings</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.omics#StartRunBatchResponse": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.omics#BatchId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier portion of the run batch ARN.</p>"
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.omics#BatchArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ARN of the run batch.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.omics#BatchStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The initial status of the run batch. Returns <code>CREATING</code> while the batch is being initialized.</p>"
+                    }
+                },
+                "uuid": {
+                    "target": "com.amazonaws.omics#BatchUuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The universally unique identifier (UUID) for the run batch.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.omics#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Amazon Web Services tags associated with the run batch.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.omics#StartRunRequest": {
@@ -16951,7 +19282,7 @@
                 "roleArn": {
                     "target": "com.amazonaws.omics#RunRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>A service role for the run. The <code>roleArn</code> requires access to Amazon Web Services HealthOmics, S3, Cloudwatch logs, and EC2. An example <code>roleArn</code> is <code>arn:aws:iam::123456789012:role/omics-service-role-serviceRole-W8O1XMPL7QZ</code>. In this example, the AWS account ID is <code>123456789012</code> and the role name is <code>omics-service-role-serviceRole-W8O1XMPL7QZ</code>.</p>",
+                        "smithy.api#documentation": "<p>A service role for the run. The <code>roleArn</code> requires access to Amazon Web Services HealthOmics, S3, Cloudwatch logs, and EC2. An example <code>roleArn</code> is <code>arn:aws:iam::123456789012:role/omics-service-role-serviceRole-W8O1XMPL7QZ</code>. In this example, the Amazon Web Services account ID is <code>123456789012</code> and the role name is <code>omics-service-role-serviceRole-W8O1XMPL7QZ</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -17055,6 +19386,36 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the workflow version. Use workflow versions to track and organize changes to the workflow. If your workflow has multiple versions, the run uses the default version unless you specify a version name. To learn more, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/workflow-versions.html\">Workflow versioning</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>"
                     }
+                },
+                "networkingMode": {
+                    "target": "com.amazonaws.omics#NetworkingMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional configuration for run networking behavior. If not specified, this will default to RESTRICTED.</p>"
+                    }
+                },
+                "scratchStorageMode": {
+                    "target": "com.amazonaws.omics#ScratchStorageMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional configuration for enabling scratch ephemeral storage mounted at /tmp. If not specified, this will default to SHARED. This configuration is applicable only for CPU tasks. For tasks using GPUs, scratch storage is always LOCAL.</p>"
+                    }
+                },
+                "configurationName": {
+                    "target": "com.amazonaws.omics#ConfigurationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional configuration name to use for the workflow run.</p>"
+                    }
+                },
+                "sessionPolicy": {
+                    "target": "com.amazonaws.omics#SessionPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional inline policy json for scoping down permissions via a session policy on the IAM role provided in the roleArn parameter.</p>"
+                    }
+                },
+                "engineSettings": {
+                    "target": "com.amazonaws.omics#EngineSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Engine-specific settings for the workflow run. Use this field to specify configuration options that are specific to the workflow engine (for example, Nextflow profiles).</p>"
+                    }
                 }
             },
             "traits": {
@@ -17099,6 +19460,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The destination for workflow outputs.</p>"
                     }
+                },
+                "configuration": {
+                    "target": "com.amazonaws.omics#ConfigurationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration details for the workflow run.</p>"
+                    }
+                },
+                "networkingMode": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Networking mode for the workflow run.</p>"
+                    }
                 }
             },
             "traits": {
@@ -17134,7 +19507,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts a variant import job.</p>",
+                "smithy.api#documentation": "<important> <p>Amazon Web Services HealthOmics variant stores and annotation stores are no longer open to new customers. Existing customers can continue to use the service as normal. For more information, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html\"> Amazon Web Services HealthOmics variant store and annotation store availability change</a>.</p> </important> <p>Starts a variant import job.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "analytics-"
                 },
@@ -17356,6 +19729,123 @@
                     "max": 127
                 },
                 "smithy.api#pattern": "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$"
+            }
+        },
+        "com.amazonaws.omics#SubmissionFailureMessage": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$"
+            }
+        },
+        "com.amazonaws.omics#SubmissionFailureReason": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$"
+            }
+        },
+        "com.amazonaws.omics#SubmissionStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "SUCCESS",
+                        "value": "SUCCESS"
+                    },
+                    {
+                        "name": "FAILED",
+                        "value": "FAILED"
+                    },
+                    {
+                        "name": "CANCEL_SUCCESS",
+                        "value": "CANCEL_SUCCESS"
+                    },
+                    {
+                        "name": "CANCEL_FAILED",
+                        "value": "CANCEL_FAILED"
+                    },
+                    {
+                        "name": "DELETE_SUCCESS",
+                        "value": "DELETE_SUCCESS"
+                    },
+                    {
+                        "name": "DELETE_FAILED",
+                        "value": "DELETE_FAILED"
+                    }
+                ],
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                }
+            }
+        },
+        "com.amazonaws.omics#SubmissionSummary": {
+            "type": "structure",
+            "members": {
+                "successfulStartSubmissionCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of successful start submissions.</p>"
+                    }
+                },
+                "failedStartSubmissionCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of failed start submissions.</p>"
+                    }
+                },
+                "pendingStartSubmissionCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of pending start submissions.</p>"
+                    }
+                },
+                "successfulCancelSubmissionCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of successful cancel submissions.</p>"
+                    }
+                },
+                "failedCancelSubmissionCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of failed cancel submissions.</p>"
+                    }
+                },
+                "successfulDeleteSubmissionCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of successful delete submissions.</p>"
+                    }
+                },
+                "failedDeleteSubmissionCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of failed delete submissions.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of the submissions in a batch.</p>"
+            }
+        },
+        "com.amazonaws.omics#SubnetId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 8,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^subnet-[0-9a-f]+$"
+            }
+        },
+        "com.amazonaws.omics#SubnetIds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.omics#SubnetId"
             }
         },
         "com.amazonaws.omics#TagArn": {
@@ -17637,6 +20127,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p> The instance type for a task.</p>"
                     }
+                },
+                "uuid": {
+                    "target": "com.amazonaws.omics#TaskUuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The universally unique identifier (UUID) for the workflow task.</p>"
+                    }
                 }
             },
             "traits": {
@@ -17737,6 +20233,16 @@
             "type": "timestamp",
             "traits": {
                 "smithy.api#timestampFormat": "date-time"
+            }
+        },
+        "com.amazonaws.omics#TaskUuid": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$"
             }
         },
         "com.amazonaws.omics#ThrottlingException": {
@@ -17952,7 +20458,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to update information about the Annotation Store"
                 },
-                "smithy.api#documentation": "<p>Updates an annotation store.</p>",
+                "smithy.api#documentation": "<important> <p>Amazon Web Services HealthOmics variant stores and annotation stores are no longer open to new customers. Existing customers can continue to use the service as normal. For more information, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html\"> Amazon Web Services HealthOmics variant store and annotation store availability change</a>.</p> </important> <p>Updates an annotation store.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "analytics-"
                 },
@@ -18589,7 +21095,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to update metadata about the Variant Store"
                 },
-                "smithy.api#documentation": "<p>Updates a variant store.</p>",
+                "smithy.api#documentation": "<important> <p>Amazon Web Services HealthOmics variant stores and annotation stores are no longer open to new customers. Existing customers can continue to use the service as normal. For more information, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html\"> Amazon Web Services HealthOmics variant store and annotation store availability change</a>.</p> </important> <p>Updates a variant store.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "analytics-"
                 },
@@ -19049,7 +21555,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The input fails to satisfy the constraints specified by an AWS service.</p>",
+                "smithy.api#documentation": "<p>The input fails to satisfy the constraints specified by an Amazon Web Services service.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -19237,7 +21743,7 @@
                 "target": "com.amazonaws.omics#ListVariantStores"
             },
             "traits": {
-                "smithy.api#documentation": "Represents a resource that stores variant data"
+                "smithy.api#documentation": "<p>Represents a resource that stores variant data.</p>"
             }
         },
         "com.amazonaws.omics#VariantStoreItem": {
@@ -19447,6 +21953,80 @@
                 ]
             }
         },
+        "com.amazonaws.omics#VpcConfig": {
+            "type": "structure",
+            "members": {
+                "securityGroupIds": {
+                    "target": "com.amazonaws.omics#SecurityGroupIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of security group IDs. Maximum of 5 security groups allowed.</p>",
+                        "smithy.api#length": {
+                            "max": 5
+                        }
+                    }
+                },
+                "subnetIds": {
+                    "target": "com.amazonaws.omics#SubnetIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of subnet IDs. Maximum of 16 subnets allowed.</p>",
+                        "smithy.api#length": {
+                            "max": 16
+                        }
+                    }
+                },
+                "vpcOwnerAccountId": {
+                    "target": "com.amazonaws.omics#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID of the cross-account VPC owner for RAM-shared VPC configurations.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>VPC configuration for workflow runs.</p>"
+            }
+        },
+        "com.amazonaws.omics#VpcConfigResponse": {
+            "type": "structure",
+            "members": {
+                "securityGroupIds": {
+                    "target": "com.amazonaws.omics#SecurityGroupIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of security group IDs.</p>"
+                    }
+                },
+                "subnetIds": {
+                    "target": "com.amazonaws.omics#SubnetIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of subnet IDs.</p>"
+                    }
+                },
+                "vpcId": {
+                    "target": "com.amazonaws.omics#VpcId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>VPC ID computed from the provided subnet IDs.</p>"
+                    }
+                },
+                "vpcOwnerAccountId": {
+                    "target": "com.amazonaws.omics#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID of the cross-account VPC owner for RAM-shared VPC configurations.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>VPC configuration for workflow runs with computed VPC ID.</p>"
+            }
+        },
+        "com.amazonaws.omics#VpcId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 5,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^vpc-[0-9a-f]+$"
+            }
+        },
         "com.amazonaws.omics#WorkflowArn": {
             "type": "string",
             "traits": {
@@ -19507,6 +22087,10 @@
                     {
                         "name": "CWL",
                         "value": "CWL"
+                    },
+                    {
+                        "name": "WDL_LENIENT",
+                        "value": "WDL_LENIENT"
                     }
                 ],
                 "smithy.api#length": {
@@ -19732,8 +22316,26 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 1000
+                    "max": 2000
                 }
+            }
+        },
+        "com.amazonaws.omics#WorkflowProfileList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.omics#WorkflowProfileName"
+            }
+        },
+        "com.amazonaws.omics#WorkflowProfileName": {
+            "type": "string"
+        },
+        "com.amazonaws.omics#WorkflowProfileParameterTemplates": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.omics#WorkflowProfileName"
+            },
+            "value": {
+                "target": "com.amazonaws.omics#WorkflowParameterTemplate"
             }
         },
         "com.amazonaws.omics#WorkflowRequestId": {

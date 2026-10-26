@@ -25,7 +25,7 @@ module Aws::MarketplaceEntitlementService
     #   @return [String]
     # @!attribute customer_aws_account_id
     #   <p>
-    #         The <code>CustomerAWSAccountID</code> parameter specifies the AWS account ID of the buyer.
+    #         The <code>CustomerAWSAccountId</code> parameter specifies the AWS account ID of the buyer.
     #       </p>
     #   @return [String]
     # @!attribute value
@@ -38,6 +38,9 @@ module Aws::MarketplaceEntitlementService
     #      is the date at which the customer will renew or cancel their contract. Customers who are opting
     #      to renew their contract will still have entitlements with an expiration date.</p>
     #   @return [Time]
+    # @!attribute license_arn
+    #   <p>The <code>LicenseArn</code> is a unique identifier for a specific granted license. These are used for software purchased through AWS Marketplace.</p>
+    #   @return [String]
     class Entitlement < Struct.new(
       nil,
       :product_code,
@@ -46,6 +49,7 @@ module Aws::MarketplaceEntitlementService
       :customer_aws_account_id,
       :value,
       :expiration_date,
+      :license_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -92,8 +96,11 @@ module Aws::MarketplaceEntitlementService
     #           <i>unioned</i> for each value in the value list, and then
     #           <i>intersected</i> for each filter key.</p>
     #            <p>
-    #               <code>CustomerIdentifier</code> and <code>CustomerAWSAccountID</code> are mutually exclusive. You can't specify both in the same request.
+    #               <code>CustomerIdentifier</code> and <code>CustomerAWSAccountId</code> are mutually exclusive parameters. You must use one or the other, but not both in the same request.
     #      </p>
+    #            <note>
+    #               <p>If you're migrating an existing integration, use <a href="https://docs.aws.amazon.com/marketplace/latest/userguide/data-feed-account.html">Account Feeds</a> to map <code>CustomerIdentifier</code> to <code>CustomerAWSAccountId</code>, and <a href="https://docs.aws.amazon.com/marketplace/latest/userguide/data-feed-agreements.html">Agreements Feeds</a> to map <code>CustomerAWSAccountId</code> and <code>LicenseArn</code>.</p>
+    #            </note>
     #   @return [Hash<String, Array<String>>]
     # @!attribute next_token
     #   <p>For paginated calls to GetEntitlements, pass the NextToken from the previous

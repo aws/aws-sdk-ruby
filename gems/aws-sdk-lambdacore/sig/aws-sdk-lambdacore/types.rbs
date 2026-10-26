@@ -1,0 +1,469 @@
+module Aws::LambdaCore
+  module Types
+
+    module ComputeResourceType
+      MicroVm: String
+      WebFunction: String
+    end
+
+    class CreateNetworkConnectorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?configuration: Types::NetworkConnectorConfiguration,
+        ?operator_role: String,
+        ?client_token: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor configuration: Types::NetworkConnectorConfiguration?
+      attr_accessor operator_role: String?
+      attr_accessor client_token: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateNetworkConnectorResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?id: String,
+        ?version_arn: String,
+        ?version: Integer,
+        ?configuration: Types::NetworkConnectorConfiguration,
+        ?operator_role: String,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor id: String?
+      attr_accessor version_arn: String?
+      attr_accessor version: Integer?
+      attr_accessor configuration: Types::NetworkConnectorConfiguration?
+      attr_accessor operator_role: String?
+      attr_accessor state: String?
+    end
+
+    class DeleteNetworkConnectorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+    end
+
+    class DeleteNetworkConnectorResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?id: String,
+        ?version_arn: String,
+        ?version: Integer,
+        ?configuration: Types::NetworkConnectorConfiguration,
+        ?operator_role: String,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor id: String?
+      attr_accessor version_arn: String?
+      attr_accessor version: Integer?
+      attr_accessor configuration: Types::NetworkConnectorConfiguration?
+      attr_accessor operator_role: String?
+      attr_accessor state: String?
+    end
+
+    class GetNetworkConnectorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+    end
+
+    class GetNetworkConnectorResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?id: String,
+        ?version_arn: String,
+        ?version: Integer,
+        ?latest_version_arn: String,
+        ?latest_version: Integer,
+        ?configuration: Types::NetworkConnectorConfiguration,
+        ?operator_role: String,
+        ?state: String,
+        ?state_reason: String,
+        ?state_reason_code: String,
+        ?last_update_status: String,
+        ?last_update_status_reason: String,
+        ?last_update_status_reason_code: String,
+        ?last_modified: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor id: String?
+      attr_accessor version_arn: String?
+      attr_accessor version: Integer?
+      attr_accessor latest_version_arn: String?
+      attr_accessor latest_version: Integer?
+      attr_accessor configuration: Types::NetworkConnectorConfiguration?
+      attr_accessor operator_role: String?
+      attr_accessor state: String?
+      attr_accessor state_reason: String?
+      attr_accessor state_reason_code: String?
+      attr_accessor last_update_status: String?
+      attr_accessor last_update_status_reason: String?
+      attr_accessor last_update_status_reason_code: String?
+      attr_accessor last_modified: Time?
+    end
+
+    class InvalidParameterValueException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
+    end
+
+    class ListNetworkConnectorVersionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?state: String,
+        ?marker: String,
+        ?max_items: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor state: String?
+      attr_accessor marker: String?
+      attr_accessor max_items: Integer?
+    end
+
+    class ListNetworkConnectorVersionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_connector_versions: Array[Types::NetworkConnectorVersionSummary],
+        ?next_marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_connector_versions: Array[Types::NetworkConnectorVersionSummary]?
+      attr_accessor next_marker: String?
+    end
+
+    class ListNetworkConnectorsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state: String,
+        ?marker: String,
+        ?max_items: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state: String?
+      attr_accessor marker: String?
+      attr_accessor max_items: Integer?
+    end
+
+    class ListNetworkConnectorsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_connectors: Array[Types::NetworkConnectorSummary],
+        ?next_marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_connectors: Array[Types::NetworkConnectorSummary]?
+      attr_accessor next_marker: String?
+    end
+
+    class NetworkConnectorConfiguration
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?vpc_egress_configuration: Types::NetworkConnectorVpcEgressConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_egress_configuration: Types::NetworkConnectorVpcEgressConfiguration?
+
+      class VpcEgressConfiguration < NetworkConnectorConfiguration
+      end
+      class Unknown < NetworkConnectorConfiguration
+      end
+    end
+
+    module NetworkConnectorLastUpdateStatus
+      Successful: String
+      Failed: String
+      InProgress: String
+    end
+
+    module NetworkConnectorLastUpdateStatusReasonCode
+      DisallowedByVpcEncryptionControl: String
+      Ec2RequestLimitExceeded: String
+      InsufficientRolePermissions: String
+      InternalError: String
+      InvalidSecurityGroup: String
+      InvalidSubnet: String
+      SecurityGroupsPerInterfaceLimitExceeded: String
+      SubnetOutOfIPAddresses: String
+    end
+
+    class NetworkConnectorLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
+    end
+
+    module NetworkConnectorState
+      PENDING: String
+      ACTIVE: String
+      INACTIVE: String
+      FAILED: String
+      DELETING: String
+      DELETE_FAILED: String
+    end
+
+    module NetworkConnectorStateReasonCode
+      DisallowedByVpcEncryptionControl: String
+      Ec2RequestLimitExceeded: String
+      InsufficientRolePermissions: String
+      InternalError: String
+      InvalidSecurityGroup: String
+      InvalidSubnet: String
+      SecurityGroupsPerInterfaceLimitExceeded: String
+      SubnetOutOfIPAddresses: String
+    end
+
+    class NetworkConnectorSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?id: String,
+        ?type: String,
+        ?state: String,
+        ?last_modified: Time,
+        ?latest_version_arn: String,
+        ?latest_version: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor id: String?
+      attr_accessor type: String?
+      attr_accessor state: String?
+      attr_accessor last_modified: Time?
+      attr_accessor latest_version_arn: String?
+      attr_accessor latest_version: Integer?
+    end
+
+    module NetworkConnectorType
+      VPC_EGRESS: String
+    end
+
+    class NetworkConnectorVersionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?version_arn: String,
+        ?name: String,
+        ?id: String,
+        ?version: Integer,
+        ?state: String,
+        ?state_reason: String,
+        ?state_reason_code: String,
+        ?last_modified: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor version_arn: String?
+      attr_accessor name: String?
+      attr_accessor id: String?
+      attr_accessor version: Integer?
+      attr_accessor state: String?
+      attr_accessor state_reason: String?
+      attr_accessor state_reason_code: String?
+      attr_accessor last_modified: Time?
+    end
+
+    class NetworkConnectorVpcEgressConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subnet_ids: Array[String],
+        ?security_group_ids: Array[String],
+        ?network_protocol: String,
+        ?associated_compute_resource_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor security_group_ids: Array[String]?
+      attr_accessor network_protocol: String?
+      attr_accessor associated_compute_resource_types: Array[String]?
+    end
+
+    module NetworkProtocol
+      IPv4: String
+      DualStack: String
+    end
+
+    class ResourceConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
+    end
+
+    class ServiceException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
+    end
+
+    module ThrottleReason
+      ConcurrentInvocationLimitExceeded: String
+      FunctionInvocationRateLimitExceeded: String
+      ReservedFunctionConcurrentInvocationLimitExceeded: String
+      ReservedFunctionInvocationRateLimitExceeded: String
+      CallerRateLimitExceeded: String
+      ConcurrentSnapshotCreateLimitExceeded: String
+    end
+
+    class TooManyRequestsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?retry_after_seconds: String,
+        ?type: String,
+        ?message: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor retry_after_seconds: String?
+      attr_accessor type: String?
+      attr_accessor message: String?
+      attr_accessor reason: String?
+    end
+
+    class UpdateNetworkConnectorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?configuration: Types::NetworkConnectorConfiguration,
+        ?operator_role: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor configuration: Types::NetworkConnectorConfiguration?
+      attr_accessor operator_role: String?
+      attr_accessor client_token: String?
+    end
+
+    class UpdateNetworkConnectorResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?id: String,
+        ?version_arn: String,
+        ?version: Integer,
+        ?operator_role: String,
+        ?configuration: Types::NetworkConnectorConfiguration,
+        ?state: String,
+        ?last_update_status: String,
+        ?last_update_status_reason: String,
+        ?last_modified: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor id: String?
+      attr_accessor version_arn: String?
+      attr_accessor version: Integer?
+      attr_accessor operator_role: String?
+      attr_accessor configuration: Types::NetworkConnectorConfiguration?
+      attr_accessor state: String?
+      attr_accessor last_update_status: String?
+      attr_accessor last_update_status_reason: String?
+      attr_accessor last_modified: Time?
+    end
+  end
+end

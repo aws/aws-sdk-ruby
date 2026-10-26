@@ -144,18 +144,18 @@ module Aws::TranscribeStreaming
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -272,7 +272,7 @@ module Aws::TranscribeStreaming
       request.send_request(options)
     end
 
-    # <p>Starts a bidirectional HTTP/2 or WebSocket stream where audio is streamed to 
+    # <p>Starts a bidirectional HTTP/2 or WebSocket stream where audio is streamed to
     #       Amazon Transcribe and the transcription results are streamed to your application. Use this operation
     #       for <a href="https://docs.aws.amazon.com/transcribe/latest/dg/call-analytics.html">Call Analytics</a> transcriptions.</p>
     #          <p>The following parameters are required:</p>
@@ -297,8 +297,8 @@ module Aws::TranscribeStreaming
     # @param [Hash, Types::StartCallAnalyticsStreamTranscriptionRequest] params
     # @option params [String] :language_code
     #   <p>Specify the language code that represents the language spoken in your audio.</p>
-    #            <p>For a list of languages supported with real-time Call Analytics, refer to the 
-    #         <a href="https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html">Supported 
+    #            <p>For a list of languages supported with real-time Call Analytics, refer to the
+    #         <a href="https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html">Supported
     #           languages</a> table.</p>
     # @option params [Integer] :media_sample_rate_hertz
     #   <p>The sample rate of the input audio (in hertz). Low-quality audio, such as telephone audio,
@@ -328,7 +328,7 @@ module Aws::TranscribeStreaming
     #   <p>Specify a name for your Call Analytics transcription session. If you don't include this parameter
     #         in your request, Amazon Transcribe generates an ID and returns it in the response.</p>
     # @option params [Types::AudioStream] :audio_stream
-    #   <p>An encoded stream of audio blobs. Audio streams are encoded as either HTTP/2 or WebSocket 
+    #   <p>An encoded stream of audio blobs. Audio streams are encoded as either HTTP/2 or WebSocket
     #         data frames.</p>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html">Transcribing streaming audio</a>.</p>
     # @option params [String] :vocabulary_filter_name
@@ -336,7 +336,7 @@ module Aws::TranscribeStreaming
     #         transcription. Note that vocabulary filter names are case sensitive.</p>
     #            <p>If the language of the specified custom vocabulary filter doesn't match the language identified in
     #         your media, the vocabulary filter is not applied to your transcription.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/vocabulary-filtering.html">Using vocabulary filtering with unwanted 
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/vocabulary-filtering.html">Using vocabulary filtering with unwanted
     #         words</a>.</p>
     # @option params [String] :vocabulary_filter_method
     #   <p>Specify how you want your vocabulary filter applied to your transcript.</p>
@@ -347,35 +347,35 @@ module Aws::TranscribeStreaming
     #   <p>Specify the name of the custom language model that you want to use when processing your
     #         transcription. Note that language model names are case sensitive.</p>
     #            <p>The language of the specified language model must match the language code you specify
-    #         in your transcription request. If the languages don't match, the custom language model isn't applied. 
+    #         in your transcription request. If the languages don't match, the custom language model isn't applied.
     #         There are no errors or warnings associated with a language mismatch.</p>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/custom-language-models.html">Custom language models</a>.</p>
     # @option params [Boolean] :identify_language
     #   <p>Enables automatic language identification for your Call Analytics transcription.</p>
     #            <p>If you include <code>IdentifyLanguage</code>, you must include a list of
-    #         language codes, using <code>LanguageOptions</code>, that you think may be present in 
+    #         language codes, using <code>LanguageOptions</code>, that you think may be present in
     #         your audio stream. You must provide a minimum of two language selections.</p>
-    #            <p>You can also include a preferred language using <code>PreferredLanguage</code>. Adding a 
-    #         preferred language can help Amazon Transcribe identify the language faster than if you omit this 
+    #            <p>You can also include a preferred language using <code>PreferredLanguage</code>. Adding a
+    #         preferred language can help Amazon Transcribe identify the language faster than if you omit this
     #         parameter.</p>
-    #            <p>Note that you must include either <code>LanguageCode</code> or 
+    #            <p>Note that you must include either <code>LanguageCode</code> or
     #         <code>IdentifyLanguage</code> in your request. If you include both parameters, your transcription job
     #         fails.</p>
     # @option params [String] :language_options
-    #   <p>Specify two or more language codes that represent the languages you think may be present 
+    #   <p>Specify two or more language codes that represent the languages you think may be present
     #         in your media.</p>
     #            <p>Including language options can improve the accuracy of language identification.</p>
-    #            <p>If you include <code>LanguageOptions</code> in your request, you must also include 
+    #            <p>If you include <code>LanguageOptions</code> in your request, you must also include
     #         <code>IdentifyLanguage</code>.</p>
-    #            <p>For a list of languages supported with Call Analytics streaming, refer to the 
-    #         <a href="https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html">Supported 
+    #            <p>For a list of languages supported with Call Analytics streaming, refer to the
+    #         <a href="https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html">Supported
     #           languages</a> table.</p>
     #            <important>
     #               <p>You can only include one language dialect per language per stream. For example, you
     #           cannot include <code>en-US</code> and <code>en-AU</code> in the same request.</p>
     #            </important>
     # @option params [String] :preferred_language
-    #   <p>Specify a preferred language from the subset of languages codes you specified in 
+    #   <p>Specify a preferred language from the subset of languages codes you specified in
     #         <code>LanguageOptions</code>.</p>
     #            <p>You can only use this parameter if you've included <code>IdentifyLanguage</code> and
     #           <code>LanguageOptions</code> in your request.</p>
@@ -395,28 +395,28 @@ module Aws::TranscribeStreaming
     #         your Call Analytics transcription. Note that vocabulary filter names are case sensitive.</p>
     #            <p>These filters serve to customize the transcript output.</p>
     #            <important>
-    #               <p>This parameter is only intended for use <b>with</b> 
-    #           the <code>IdentifyLanguage</code> parameter. If you're <b>not</b> 
-    #           including <code>IdentifyLanguage</code> in your request and want to use a custom vocabulary filter 
+    #               <p>This parameter is only intended for use <b>with</b>
+    #           the <code>IdentifyLanguage</code> parameter. If you're <b>not</b>
+    #           including <code>IdentifyLanguage</code> in your request and want to use a custom vocabulary filter
     #           with your transcription, use the <code>VocabularyFilterName</code> parameter instead.</p>
     #            </important>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/vocabulary-filtering.html">Using vocabulary filtering with unwanted 
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/vocabulary-filtering.html">Using vocabulary filtering with unwanted
     #         words</a>.</p>
     # @option params [Boolean] :enable_partial_results_stabilization
     #   <p>Enables partial result stabilization for your transcription. Partial result stabilization can reduce
-    #         latency in your output, but may impact accuracy. For more information, see 
-    #         <a href="https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html#streaming-partial-result-stabilization">Partial-result 
+    #         latency in your output, but may impact accuracy. For more information, see
+    #         <a href="https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html#streaming-partial-result-stabilization">Partial-result
     #           stabilization</a>.</p>
     # @option params [String] :partial_results_stability
-    #   <p>Specify the level of stability to use when you enable partial results stabilization 
+    #   <p>Specify the level of stability to use when you enable partial results stabilization
     #         (<code>EnablePartialResultsStabilization</code>).</p>
     #            <p>Low stability provides the highest accuracy. High stability transcribes faster, but with slightly
     #         lower accuracy.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html#streaming-partial-result-stabilization">Partial-result 
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html#streaming-partial-result-stabilization">Partial-result
     #         stabilization</a>.</p>
     # @option params [String] :content_identification_type
     #   <p>Labels all personally identifiable information (PII) identified in your transcript.</p>
-    #            <p>Content identification is performed at the segment level; PII specified in 
+    #            <p>Content identification is performed at the segment level; PII specified in
     #         <code>PiiEntityTypes</code> is flagged upon complete transcription of an audio segment. If you don't
     #         include <code>PiiEntityTypes</code> in your request, all PII is identified.</p>
     #            <p>You can’t set <code>ContentIdentificationType</code> and <code>ContentRedactionType</code>
@@ -426,7 +426,7 @@ module Aws::TranscribeStreaming
     #         information</a>.</p>
     # @option params [String] :content_redaction_type
     #   <p>Redacts all personally identifiable information (PII) identified in your transcript.</p>
-    #            <p>Content redaction is performed at the segment level; PII specified in 
+    #            <p>Content redaction is performed at the segment level; PII specified in
     #         <code>PiiEntityTypes</code> is redacted upon complete transcription of an audio segment. If you don't
     #         include <code>PiiEntityTypes</code> in your request, all PII is redacted.</p>
     #            <p>You can’t set <code>ContentRedactionType</code> and <code>ContentIdentificationType</code>
@@ -434,25 +434,25 @@ module Aws::TranscribeStreaming
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/pii-redaction.html">Redacting or identifying personally identifiable
     #         information</a>.</p>
     # @option params [String] :pii_entity_types
-    #   <p>Specify which types of personally identifiable information (PII) you want to redact in your 
-    #         transcript. You can include as many types as you'd like, or you can select 
+    #   <p>Specify which types of personally identifiable information (PII) you want to redact in your
+    #         transcript. You can include as many types as you'd like, or you can select
     #         <code>ALL</code>.</p>
-    #            <p>Values must be comma-separated and can include: <code>ADDRESS</code>, 
+    #            <p>Values must be comma-separated and can include: <code>ADDRESS</code>,
     #         <code>BANK_ACCOUNT_NUMBER</code>, <code>BANK_ROUTING</code>,
     #         <code>CREDIT_DEBIT_CVV</code>, <code>CREDIT_DEBIT_EXPIRY</code>,
-    #         <code>CREDIT_DEBIT_NUMBER</code>, <code>EMAIL</code>, 
-    #         <code>NAME</code>, <code>PHONE</code>, <code>PIN</code>, 
+    #         <code>CREDIT_DEBIT_NUMBER</code>, <code>EMAIL</code>,
+    #         <code>NAME</code>, <code>PHONE</code>, <code>PIN</code>,
     #         <code>SSN</code>, or <code>ALL</code>.</p>
-    #            <p>Note that if you include <code>PiiEntityTypes</code> in your request, you must also include 
+    #            <p>Note that if you include <code>PiiEntityTypes</code> in your request, you must also include
     #         <code>ContentIdentificationType</code> or <code>ContentRedactionType</code>.</p>
-    #            <p>If you include <code>ContentRedactionType</code> or 
-    #         <code>ContentIdentificationType</code> in your request, but do not include 
+    #            <p>If you include <code>ContentRedactionType</code> or
+    #         <code>ContentIdentificationType</code> in your request, but do not include
     #         <code>PiiEntityTypes</code>, all PII is redacted or identified.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     language_code: "en-US" # One of: ["en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR"],
     #     media_sample_rate_hertz: 1, # required
-    #     media_encoding: "pcm" # One of: ["pcm", "ogg-opus", "flac"], # required
+    #     media_encoding: "pcm" # One of: ["pcm", "ogg-opus", "flac", "g711-alaw", "g711-ulaw", "g729"], # required
     #     vocabulary_name: "VocabularyName",
     #     session_id: "SessionId",
     #     audio_stream: { # required
@@ -497,7 +497,7 @@ module Aws::TranscribeStreaming
     #     request_id: "RequestId",
     #     language_code: "en-US" # One of: ["en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR"],
     #     media_sample_rate_hertz: 1,
-    #     media_encoding: "pcm" # One of: ["pcm", "ogg-opus", "flac"],
+    #     media_encoding: "pcm" # One of: ["pcm", "ogg-opus", "flac", "g711-alaw", "g711-ulaw", "g729"],
     #     vocabulary_name: "VocabularyName",
     #     session_id: "SessionId",
     #     call_analytics_transcript_result_stream: {
@@ -599,13 +599,13 @@ module Aws::TranscribeStreaming
     # <p>Starts a bidirectional HTTP/2 stream, where audio is streamed to
     #       Amazon Web Services HealthScribe
     #       and the transcription results are streamed to your application.</p>
-    #          <p>When you start a stream, you first specify the stream configuration in a <code>MedicalScribeConfigurationEvent</code>. 
+    #          <p>When you start a stream, you first specify the stream configuration in a <code>MedicalScribeConfigurationEvent</code>.
     #       This event includes channel definitions, encryption settings, medical scribe context, and post-stream analytics settings, such as the output configuration for aggregated transcript and clinical note generation. These are additional
-    #       streaming session configurations beyond those provided in your initial start request headers. Whether you are starting a new session or resuming an existing session, 
+    #       streaming session configurations beyond those provided in your initial start request headers. Whether you are starting a new session or resuming an existing session,
     #       your first event must be a <code>MedicalScribeConfigurationEvent</code>. </p>
     #          <p>
-    #       After you send a <code>MedicalScribeConfigurationEvent</code>, you start <code>AudioEvents</code> and Amazon Web Services HealthScribe 
-    #       responds with real-time transcription results. When you are finished, to start processing the results with the post-stream analytics, send a <code>MedicalScribeSessionControlEvent</code> with a <code>Type</code> of 
+    #       After you send a <code>MedicalScribeConfigurationEvent</code>, you start <code>AudioEvents</code> and Amazon Web Services HealthScribe
+    #       responds with real-time transcription results. When you are finished, to start processing the results with the post-stream analytics, send a <code>MedicalScribeSessionControlEvent</code> with a <code>Type</code> of
     #       <code>END_OF_SESSION</code> and Amazon Web Services HealthScribe starts the analytics.
     #     </p>
     #          <p>You can pause or resume streaming.
@@ -772,7 +772,7 @@ module Aws::TranscribeStreaming
       request.send_request(options)
     end
 
-    # <p>Starts a bidirectional HTTP/2 or WebSocket stream where audio is streamed to 
+    # <p>Starts a bidirectional HTTP/2 or WebSocket stream where audio is streamed to
     #             Amazon Transcribe Medical and the transcription results are streamed to your
     #             application.</p>
     #          <p>The following parameters are required:</p>
@@ -793,7 +793,7 @@ module Aws::TranscribeStreaming
     #                </p>
     #             </li>
     #          </ul>
-    #          <p>For more information on streaming with Amazon Transcribe Medical, see 
+    #          <p>For more information on streaming with Amazon Transcribe Medical, see
     #             <a href="https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html">Transcribing
     #                 streaming audio</a>.</p>
     # @param [Hash, Types::StartMedicalStreamTranscriptionRequest] params
@@ -827,7 +827,7 @@ module Aws::TranscribeStreaming
     # @option params [String] :specialty
     #   <p>Specify the medical specialty contained in your audio.</p>
     # @option params [String] :type
-    #   <p>Specify the type of input audio. For example, choose <code>DICTATION</code> for a 
+    #   <p>Specify the type of input audio. For example, choose <code>DICTATION</code> for a
     #               provider dictating patient notes and <code>CONVERSATION</code> for a dialogue between a
     #               patient and a medical professional.</p>
     # @option params [Boolean] :show_speaker_label
@@ -835,27 +835,27 @@ module Aws::TranscribeStreaming
     #               partitioning labels the speech from individual speakers in your media file.</p>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/diarization.html">Partitioning speakers (diarization)</a>.</p>
     # @option params [String] :session_id
-    #   <p>Specify a name for your transcription session. If you don't include this parameter in 
+    #   <p>Specify a name for your transcription session. If you don't include this parameter in
     #               your request, Amazon Transcribe Medical generates an ID and returns it in the
     #               response.</p>
     # @option params [Types::AudioStream] :audio_stream
-    #   <p>An encoded stream of audio blobs. Audio streams are encoded as either HTTP/2 or WebSocket 
+    #   <p>An encoded stream of audio blobs. Audio streams are encoded as either HTTP/2 or WebSocket
     #         data frames.</p>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html">Transcribing streaming audio</a>.</p>
     # @option params [Boolean] :enable_channel_identification
     #   <p>Enables channel identification in multi-channel audio.</p>
     #            <p>Channel identification transcribes the audio on each channel independently, then appends
     #               the output for each channel into one transcript.</p>
-    #            <p>If you have multi-channel audio and do not enable channel identification, your audio is 
+    #            <p>If you have multi-channel audio and do not enable channel identification, your audio is
     #               transcribed in a continuous manner and your transcript is not separated by channel.</p>
-    #            <p>If you include <code>EnableChannelIdentification</code> in your request, you must also 
+    #            <p>If you include <code>EnableChannelIdentification</code> in your request, you must also
     #               include <code>NumberOfChannels</code>.</p>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/channel-id.html">Transcribing multi-channel audio</a>.</p>
     # @option params [Integer] :number_of_channels
-    #   <p>Specify the number of channels in your audio stream. This value must be 
-    #               <code>2</code>, as only two channels are supported. If your audio doesn't contain 
+    #   <p>Specify the number of channels in your audio stream. This value must be
+    #               <code>2</code>, as only two channels are supported. If your audio doesn't contain
     #               multiple channels, do not include this parameter in your request.</p>
-    #            <p>If you include <code>NumberOfChannels</code> in your request, you must also 
+    #            <p>If you include <code>NumberOfChannels</code> in your request, you must also
     #               include <code>EnableChannelIdentification</code>.</p>
     # @option params [String] :content_identification_type
     #   <p>Labels all personal health information (PHI) identified in your transcript.</p>
@@ -865,9 +865,9 @@ module Aws::TranscribeStreaming
     #               transcription</a>.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     language_code: "en-US" # One of: ["en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR", "ja-JP", "ko-KR", "zh-CN", "th-TH", "es-ES", "ar-SA", "pt-PT", "ca-ES", "ar-AE", "hi-IN", "zh-HK", "nl-NL", "no-NO", "sv-SE", "pl-PL", "fi-FI", "zh-TW", "en-IN", "en-IE", "en-NZ", "en-AB", "en-ZA", "en-WL", "de-CH", "af-ZA", "eu-ES", "hr-HR", "cs-CZ", "da-DK", "fa-IR", "gl-ES", "el-GR", "he-IL", "id-ID", "lv-LV", "ms-MY", "ro-RO", "ru-RU", "sr-RS", "sk-SK", "so-SO", "tl-PH", "uk-UA", "vi-VN", "zu-ZA"], # required
+    #     language_code: "en-US" # One of: ["en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR", "ja-JP", "ko-KR", "zh-CN", "th-TH", "es-ES", "ar-SA", "pt-PT", "ca-ES", "ar-AE", "hi-IN", "zh-HK", "nl-NL", "no-NO", "sv-SE", "pl-PL", "fi-FI", "zh-TW", "en-IN", "en-IE", "en-NZ", "en-AB", "en-ZA", "en-WL", "de-CH", "af-ZA", "eu-ES", "hr-HR", "cs-CZ", "da-DK", "fa-IR", "gl-ES", "el-GR", "he-IL", "id-ID", "lv-LV", "ms-MY", "ro-RO", "ru-RU", "sr-RS", "sk-SK", "so-SO", "tl-PH", "uk-UA", "vi-VN", "zu-ZA", "am-ET", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ckb-IQ", "ckb-IR", "cy-WL", "es-MX", "et-ET", "fa-AF", "gu-IN", "ht-HT", "hu-HU", "hy-AM", "is-IS", "jv-ID", "ka-GE", "kab-DZ", "kk-KZ", "km-KH", "kn-IN", "lg-IN", "lt-LT", "mk-MK", "ml-IN", "mr-IN", "my-MM", "ne-NP", "or-IN", "pa-IN", "ps-AF", "si-LK", "sl-SI", "sq-AL", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "ta-IN", "te-IN", "tr-TR", "uz-UZ"], # required
     #     media_sample_rate_hertz: 1, # required
-    #     media_encoding: "pcm" # One of: ["pcm", "ogg-opus", "flac"], # required
+    #     media_encoding: "pcm" # One of: ["pcm", "ogg-opus", "flac", "g711-alaw", "g711-ulaw", "g729"], # required
     #     vocabulary_name: "VocabularyName",
     #     specialty: "PRIMARYCARE" # One of: ["PRIMARYCARE", "CARDIOLOGY", "NEUROLOGY", "ONCOLOGY", "RADIOLOGY", "UROLOGY"], # required
     #     type: "CONVERSATION" # One of: ["CONVERSATION", "DICTATION"], # required
@@ -903,9 +903,9 @@ module Aws::TranscribeStreaming
     #   response.to_h #=>
     #   {
     #     request_id: "RequestId",
-    #     language_code: "en-US" # One of: ["en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR", "ja-JP", "ko-KR", "zh-CN", "th-TH", "es-ES", "ar-SA", "pt-PT", "ca-ES", "ar-AE", "hi-IN", "zh-HK", "nl-NL", "no-NO", "sv-SE", "pl-PL", "fi-FI", "zh-TW", "en-IN", "en-IE", "en-NZ", "en-AB", "en-ZA", "en-WL", "de-CH", "af-ZA", "eu-ES", "hr-HR", "cs-CZ", "da-DK", "fa-IR", "gl-ES", "el-GR", "he-IL", "id-ID", "lv-LV", "ms-MY", "ro-RO", "ru-RU", "sr-RS", "sk-SK", "so-SO", "tl-PH", "uk-UA", "vi-VN", "zu-ZA"],
+    #     language_code: "en-US" # One of: ["en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR", "ja-JP", "ko-KR", "zh-CN", "th-TH", "es-ES", "ar-SA", "pt-PT", "ca-ES", "ar-AE", "hi-IN", "zh-HK", "nl-NL", "no-NO", "sv-SE", "pl-PL", "fi-FI", "zh-TW", "en-IN", "en-IE", "en-NZ", "en-AB", "en-ZA", "en-WL", "de-CH", "af-ZA", "eu-ES", "hr-HR", "cs-CZ", "da-DK", "fa-IR", "gl-ES", "el-GR", "he-IL", "id-ID", "lv-LV", "ms-MY", "ro-RO", "ru-RU", "sr-RS", "sk-SK", "so-SO", "tl-PH", "uk-UA", "vi-VN", "zu-ZA", "am-ET", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ckb-IQ", "ckb-IR", "cy-WL", "es-MX", "et-ET", "fa-AF", "gu-IN", "ht-HT", "hu-HU", "hy-AM", "is-IS", "jv-ID", "ka-GE", "kab-DZ", "kk-KZ", "km-KH", "kn-IN", "lg-IN", "lt-LT", "mk-MK", "ml-IN", "mr-IN", "my-MM", "ne-NP", "or-IN", "pa-IN", "ps-AF", "si-LK", "sl-SI", "sq-AL", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "ta-IN", "te-IN", "tr-TR", "uz-UZ"],
     #     media_sample_rate_hertz: 1,
-    #     media_encoding: "pcm" # One of: ["pcm", "ogg-opus", "flac"],
+    #     media_encoding: "pcm" # One of: ["pcm", "ogg-opus", "flac", "g711-alaw", "g711-ulaw", "g729"],
     #     vocabulary_name: "VocabularyName",
     #     specialty: "PRIMARYCARE" # One of: ["PRIMARYCARE", "CARDIOLOGY", "NEUROLOGY", "ONCOLOGY", "RADIOLOGY", "UROLOGY"],
     #     type: "CONVERSATION" # One of: ["CONVERSATION", "DICTATION"],
@@ -976,7 +976,7 @@ module Aws::TranscribeStreaming
       request.send_request(options)
     end
 
-    # <p>Starts a bidirectional HTTP/2 or WebSocket stream where audio is streamed to 
+    # <p>Starts a bidirectional HTTP/2 or WebSocket stream where audio is streamed to
     #       Amazon Transcribe and the transcription results are streamed to your application.</p>
     #          <p>The following parameters are required:</p>
     #          <ul>
@@ -1000,10 +1000,10 @@ module Aws::TranscribeStreaming
     # @param [Hash, Types::StartStreamTranscriptionRequest] params
     # @option params [String] :language_code
     #   <p>Specify the language code that represents the language spoken in your audio.</p>
-    #            <p>If you're unsure of the language spoken in your audio, consider using 
+    #            <p>If you're unsure of the language spoken in your audio, consider using
     #         <code>IdentifyLanguage</code> to enable automatic language identification.</p>
-    #            <p>For a list of languages supported with Amazon Transcribe streaming, refer to the 
-    #         <a href="https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html">Supported 
+    #            <p>For a list of languages supported with Amazon Transcribe streaming, refer to the
+    #         <a href="https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html">Supported
     #           languages</a> table.</p>
     # @option params [Integer] :media_sample_rate_hertz
     #   <p>The sample rate of the input audio (in hertz). Low-quality audio, such as telephone audio,
@@ -1036,10 +1036,10 @@ module Aws::TranscribeStreaming
     #            </important>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary.html">Custom vocabularies</a>.</p>
     # @option params [String] :session_id
-    #   <p>Specify a name for your transcription session. If you don't include this parameter in your request, 
+    #   <p>Specify a name for your transcription session. If you don't include this parameter in your request,
     #         Amazon Transcribe generates an ID and returns it in the response.</p>
     # @option params [Types::AudioStream] :audio_stream
-    #   <p>An encoded stream of audio blobs. Audio streams are encoded as either HTTP/2 or WebSocket 
+    #   <p>An encoded stream of audio blobs. Audio streams are encoded as either HTTP/2 or WebSocket
     #         data frames.</p>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html">Transcribing streaming audio</a>.</p>
     # @option params [String] :vocabulary_filter_name
@@ -1053,7 +1053,7 @@ module Aws::TranscribeStreaming
     #           in your request and want to use one or more vocabulary filters with your transcription, use
     #           the <code>VocabularyFilterNames</code> parameter instead.</p>
     #            </important>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/vocabulary-filtering.html">Using vocabulary filtering with unwanted 
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/vocabulary-filtering.html">Using vocabulary filtering with unwanted
     #         words</a>.</p>
     # @option params [String] :vocabulary_filter_method
     #   <p>Specify how you want your vocabulary filter applied to your transcript.</p>
@@ -1061,39 +1061,39 @@ module Aws::TranscribeStreaming
     #            <p>To delete words, choose <code>remove</code>.</p>
     #            <p>To flag words without changing them, choose <code>tag</code>.</p>
     # @option params [Boolean] :show_speaker_label
-    #   <p>Enables speaker partitioning (diarization) in your transcription output. Speaker partitioning 
+    #   <p>Enables speaker partitioning (diarization) in your transcription output. Speaker partitioning
     #         labels the speech from individual speakers in your media file.</p>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/diarization.html">Partitioning speakers (diarization)</a>.</p>
     # @option params [Boolean] :enable_channel_identification
     #   <p>Enables channel identification in multi-channel audio.</p>
-    #            <p>Channel identification transcribes the audio on each channel independently, then appends the 
+    #            <p>Channel identification transcribes the audio on each channel independently, then appends the
     #         output for each channel into one transcript.</p>
-    #            <p>If you have multi-channel audio and do not enable channel identification, your audio is 
+    #            <p>If you have multi-channel audio and do not enable channel identification, your audio is
     #         transcribed in a continuous manner and your transcript is not separated by channel.</p>
-    #            <p>If you include <code>EnableChannelIdentification</code> in your request, you must also 
+    #            <p>If you include <code>EnableChannelIdentification</code> in your request, you must also
     #         include <code>NumberOfChannels</code>.</p>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/channel-id.html">Transcribing multi-channel audio</a>.</p>
     # @option params [Integer] :number_of_channels
-    #   <p>Specify the number of channels in your audio stream. This value must be 
-    #         <code>2</code>, as only two channels are supported. If your audio doesn't contain 
+    #   <p>Specify the number of channels in your audio stream. This value must be
+    #         <code>2</code>, as only two channels are supported. If your audio doesn't contain
     #         multiple channels, do not include this parameter in your request.</p>
-    #            <p>If you include <code>NumberOfChannels</code> in your request, you must also 
+    #            <p>If you include <code>NumberOfChannels</code> in your request, you must also
     #         include <code>EnableChannelIdentification</code>.</p>
     # @option params [Boolean] :enable_partial_results_stabilization
     #   <p>Enables partial result stabilization for your transcription. Partial result stabilization can reduce
-    #         latency in your output, but may impact accuracy. For more information, see 
-    #         <a href="https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html#streaming-partial-result-stabilization">Partial-result 
+    #         latency in your output, but may impact accuracy. For more information, see
+    #         <a href="https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html#streaming-partial-result-stabilization">Partial-result
     #         stabilization</a>.</p>
     # @option params [String] :partial_results_stability
-    #   <p>Specify the level of stability to use when you enable partial results stabilization 
+    #   <p>Specify the level of stability to use when you enable partial results stabilization
     #         (<code>EnablePartialResultsStabilization</code>).</p>
     #            <p>Low stability provides the highest accuracy. High stability transcribes faster, but with slightly
     #         lower accuracy.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html#streaming-partial-result-stabilization">Partial-result 
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html#streaming-partial-result-stabilization">Partial-result
     #         stabilization</a>.</p>
     # @option params [String] :content_identification_type
     #   <p>Labels all personally identifiable information (PII) identified in your transcript.</p>
-    #            <p>Content identification is performed at the segment level; PII specified in 
+    #            <p>Content identification is performed at the segment level; PII specified in
     #         <code>PiiEntityTypes</code> is flagged upon complete transcription of an audio segment. If you don't
     #         include <code>PiiEntityTypes</code> in your request, all PII is identified.</p>
     #            <p>You can’t set <code>ContentIdentificationType</code> and <code>ContentRedactionType</code>
@@ -1103,7 +1103,7 @@ module Aws::TranscribeStreaming
     #         information</a>.</p>
     # @option params [String] :content_redaction_type
     #   <p>Redacts all personally identifiable information (PII) identified in your transcript.</p>
-    #            <p>Content redaction is performed at the segment level; PII specified in 
+    #            <p>Content redaction is performed at the segment level; PII specified in
     #         <code>PiiEntityTypes</code> is redacted upon complete transcription of an audio segment. If you don't
     #         include <code>PiiEntityTypes</code> in your request, all PII is redacted.</p>
     #            <p>You can’t set <code>ContentRedactionType</code> and <code>ContentIdentificationType</code>
@@ -1111,58 +1111,60 @@ module Aws::TranscribeStreaming
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/pii-redaction.html">Redacting or identifying personally identifiable
     #         information</a>.</p>
     # @option params [String] :pii_entity_types
-    #   <p>Specify which types of personally identifiable information (PII) you want to redact in your 
-    #         transcript. You can include as many types as you'd like, or you can select 
+    #   <p>Specify which types of personally identifiable information (PII) you want to redact in your
+    #         transcript. You can include as many types as you'd like, or you can select
     #         <code>ALL</code>.</p>
-    #            <p>Values must be comma-separated and can include: <code>ADDRESS</code>, 
+    #            <p>Values must be comma-separated and can include: <code>ADDRESS</code>,
     #         <code>BANK_ACCOUNT_NUMBER</code>, <code>BANK_ROUTING</code>,
     #         <code>CREDIT_DEBIT_CVV</code>, <code>CREDIT_DEBIT_EXPIRY</code>,
-    #         <code>CREDIT_DEBIT_NUMBER</code>, <code>EMAIL</code>, 
-    #         <code>NAME</code>, <code>PHONE</code>, <code>PIN</code>, 
-    #         <code>SSN</code>, or <code>ALL</code>.</p>
-    #            <p>Note that if you include <code>PiiEntityTypes</code> in your request, you must also include 
+    #         <code>CREDIT_DEBIT_NUMBER</code>, <code>EMAIL</code>,
+    #         <code>NAME</code>, <code>PHONE</code>, <code>PIN</code>,
+    #         <code>SSN</code>, <code>AGE</code>, <code>DATE_TIME</code>,
+    #         <code>LICENSE_PLATE</code>, <code>PASSPORT_NUMBER</code>,
+    #         <code>PASSWORD</code>, <code>USERNAME</code>, <code>VEHICLE_IDENTIFICATION_NUMBER</code>, or <code>ALL</code>.</p>
+    #            <p>Note that if you include <code>PiiEntityTypes</code> in your request, you must also include
     #         <code>ContentIdentificationType</code> or <code>ContentRedactionType</code>.</p>
-    #            <p>If you include <code>ContentRedactionType</code> or 
-    #         <code>ContentIdentificationType</code> in your request, but do not include 
+    #            <p>If you include <code>ContentRedactionType</code> or
+    #         <code>ContentIdentificationType</code> in your request, but do not include
     #         <code>PiiEntityTypes</code>, all PII is redacted or identified.</p>
     # @option params [String] :language_model_name
     #   <p>Specify the name of the custom language model that you want to use when processing your
     #         transcription. Note that language model names are case sensitive.</p>
     #            <p>The language of the specified language model must match the language code you specify
-    #         in your transcription request. If the languages don't match, the custom language model isn't applied. 
+    #         in your transcription request. If the languages don't match, the custom language model isn't applied.
     #         There are no errors or warnings associated with a language mismatch.</p>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/custom-language-models.html">Custom language models</a>.</p>
     # @option params [Boolean] :identify_language
     #   <p>Enables automatic language identification for your transcription.</p>
     #            <p>If you include <code>IdentifyLanguage</code>, you must include a list of
-    #         language codes, using <code>LanguageOptions</code>, that you think may be present in 
+    #         language codes, using <code>LanguageOptions</code>, that you think may be present in
     #         your audio stream. </p>
-    #            <p>You can also include a preferred language using <code>PreferredLanguage</code>. Adding a 
-    #         preferred language can help Amazon Transcribe identify the language faster than if you omit this 
+    #            <p>You can also include a preferred language using <code>PreferredLanguage</code>. Adding a
+    #         preferred language can help Amazon Transcribe identify the language faster than if you omit this
     #         parameter.</p>
-    #            <p>If you have multi-channel audio that contains different languages on each channel, and you've 
-    #         enabled channel identification, automatic language identification identifies the dominant language on 
+    #            <p>If you have multi-channel audio that contains different languages on each channel, and you've
+    #         enabled channel identification, automatic language identification identifies the dominant language on
     #         each audio channel.</p>
-    #            <p>Note that you must include either <code>LanguageCode</code> or 
+    #            <p>Note that you must include either <code>LanguageCode</code> or
     #         <code>IdentifyLanguage</code> or <code>IdentifyMultipleLanguages</code> in your request. If you include more than one of these parameters, your transcription job
     #         fails.</p>
-    #            <p>Streaming language identification can't be combined with custom language models or 
+    #            <p>Streaming language identification can't be combined with custom language models or
     #         redaction.</p>
     # @option params [String] :language_options
-    #   <p>Specify two or more language codes that represent the languages you think may be present 
+    #   <p>Specify two or more language codes that represent the languages you think may be present
     #         in your media; including more than five is not recommended.</p>
     #            <p>Including language options can improve the accuracy of language identification.</p>
-    #            <p>If you include <code>LanguageOptions</code> in your request, you must also include 
+    #            <p>If you include <code>LanguageOptions</code> in your request, you must also include
     #         <code>IdentifyLanguage</code> or <code>IdentifyMultipleLanguages</code>.</p>
-    #            <p>For a list of languages supported with Amazon Transcribe streaming, refer to the 
-    #         <a href="https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html">Supported 
+    #            <p>For a list of languages supported with Amazon Transcribe streaming, refer to the
+    #         <a href="https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html">Supported
     #           languages</a> table.</p>
     #            <important>
     #               <p>You can only include one language dialect per language per stream. For example, you
     #           cannot include <code>en-US</code> and <code>en-AU</code> in the same request.</p>
     #            </important>
     # @option params [String] :preferred_language
-    #   <p>Specify a preferred language from the subset of languages codes you specified in 
+    #   <p>Specify a preferred language from the subset of languages codes you specified in
     #         <code>LanguageOptions</code>.</p>
     #            <p>You can only use this parameter if you've included <code>IdentifyLanguage</code> and
     #           <code>LanguageOptions</code> in your request.</p>
@@ -1174,7 +1176,7 @@ module Aws::TranscribeStreaming
     # @option params [String] :vocabulary_names
     #   <p>Specify the names of the custom vocabularies that you want to use when processing your
     #         transcription. Note that vocabulary names are case sensitive.</p>
-    #            <p>If none of the languages of the specified custom vocabularies match the language identified in 
+    #            <p>If none of the languages of the specified custom vocabularies match the language identified in
     #         your media, your job fails.</p>
     #            <important>
     #               <p>This parameter is only intended for use <b>with</b> the
@@ -1189,18 +1191,40 @@ module Aws::TranscribeStreaming
     #            <p>If none of the languages of the specified custom vocabulary filters match the language identified
     #         in your media, your job fails.</p>
     #            <important>
-    #               <p>This parameter is only intended for use <b>with</b> 
-    #           the <code>IdentifyLanguage</code> parameter. If you're <b>not</b> 
-    #           including <code>IdentifyLanguage</code> in your request and want to use a custom vocabulary filter 
+    #               <p>This parameter is only intended for use <b>with</b>
+    #           the <code>IdentifyLanguage</code> parameter. If you're <b>not</b>
+    #           including <code>IdentifyLanguage</code> in your request and want to use a custom vocabulary filter
     #           with your transcription, use the <code>VocabularyFilterName</code> parameter instead.</p>
     #            </important>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/vocabulary-filtering.html">Using vocabulary filtering with unwanted 
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/vocabulary-filtering.html">Using vocabulary filtering with unwanted
     #         words</a>.</p>
+    # @option params [Integer] :session_resume_window
+    #   <p>Specify the time window, in minutes, during which your transcription session can be resumed,
+    #          measured from the stream start time. This optional parameter accepts integer values from 1 to 300 (5 hours).</p>
+    #            <p> For example, if your stream starts at 1 PM and you specify a <code>SessionResumeWindow</code> of 30 minutes,
+    #         you can reconnect to the session as many times as you want until 1:30 PM. </p>
+    # @option params [String] :transcript_format
+    #   <p>Specify how numbers, dates, and other alphanumeric entities are rendered in your
+    #         transcription results.</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>WRITTEN</code> renders these entities in their standard written form
+    #           (for example, <code>$50</code>, <code>10:30 AM</code>, and <code>101</code>).</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>SPOKEN</code> renders these entities as words, exactly as they were
+    #           spoken (for example, <code>fifty dollars</code>, <code>ten thirty a m</code>, and
+    #           <code>one oh one</code>).</p>
+    #               </li>
+    #            </ul>
+    #            <p>If you don't specify a value, Amazon Transcribe uses <code>WRITTEN</code> by default.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     language_code: "en-US" # One of: ["en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR", "ja-JP", "ko-KR", "zh-CN", "th-TH", "es-ES", "ar-SA", "pt-PT", "ca-ES", "ar-AE", "hi-IN", "zh-HK", "nl-NL", "no-NO", "sv-SE", "pl-PL", "fi-FI", "zh-TW", "en-IN", "en-IE", "en-NZ", "en-AB", "en-ZA", "en-WL", "de-CH", "af-ZA", "eu-ES", "hr-HR", "cs-CZ", "da-DK", "fa-IR", "gl-ES", "el-GR", "he-IL", "id-ID", "lv-LV", "ms-MY", "ro-RO", "ru-RU", "sr-RS", "sk-SK", "so-SO", "tl-PH", "uk-UA", "vi-VN", "zu-ZA"],
+    #     language_code: "en-US" # One of: ["en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR", "ja-JP", "ko-KR", "zh-CN", "th-TH", "es-ES", "ar-SA", "pt-PT", "ca-ES", "ar-AE", "hi-IN", "zh-HK", "nl-NL", "no-NO", "sv-SE", "pl-PL", "fi-FI", "zh-TW", "en-IN", "en-IE", "en-NZ", "en-AB", "en-ZA", "en-WL", "de-CH", "af-ZA", "eu-ES", "hr-HR", "cs-CZ", "da-DK", "fa-IR", "gl-ES", "el-GR", "he-IL", "id-ID", "lv-LV", "ms-MY", "ro-RO", "ru-RU", "sr-RS", "sk-SK", "so-SO", "tl-PH", "uk-UA", "vi-VN", "zu-ZA", "am-ET", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ckb-IQ", "ckb-IR", "cy-WL", "es-MX", "et-ET", "fa-AF", "gu-IN", "ht-HT", "hu-HU", "hy-AM", "is-IS", "jv-ID", "ka-GE", "kab-DZ", "kk-KZ", "km-KH", "kn-IN", "lg-IN", "lt-LT", "mk-MK", "ml-IN", "mr-IN", "my-MM", "ne-NP", "or-IN", "pa-IN", "ps-AF", "si-LK", "sl-SI", "sq-AL", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "ta-IN", "te-IN", "tr-TR", "uz-UZ"],
     #     media_sample_rate_hertz: 1, # required
-    #     media_encoding: "pcm" # One of: ["pcm", "ogg-opus", "flac"], # required
+    #     media_encoding: "pcm" # One of: ["pcm", "ogg-opus", "flac", "g711-alaw", "g711-ulaw", "g729"], # required
     #     vocabulary_name: "VocabularyName",
     #     session_id: "SessionId",
     #     audio_stream: { # required
@@ -1236,10 +1260,12 @@ module Aws::TranscribeStreaming
     #     language_model_name: "ModelName",
     #     identify_language: false,
     #     language_options: "LanguageOptions",
-    #     preferred_language: "en-US" # One of: ["en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR", "ja-JP", "ko-KR", "zh-CN", "th-TH", "es-ES", "ar-SA", "pt-PT", "ca-ES", "ar-AE", "hi-IN", "zh-HK", "nl-NL", "no-NO", "sv-SE", "pl-PL", "fi-FI", "zh-TW", "en-IN", "en-IE", "en-NZ", "en-AB", "en-ZA", "en-WL", "de-CH", "af-ZA", "eu-ES", "hr-HR", "cs-CZ", "da-DK", "fa-IR", "gl-ES", "el-GR", "he-IL", "id-ID", "lv-LV", "ms-MY", "ro-RO", "ru-RU", "sr-RS", "sk-SK", "so-SO", "tl-PH", "uk-UA", "vi-VN", "zu-ZA"],
+    #     preferred_language: "en-US" # One of: ["en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR", "ja-JP", "ko-KR", "zh-CN", "th-TH", "es-ES", "ar-SA", "pt-PT", "ca-ES", "ar-AE", "hi-IN", "zh-HK", "nl-NL", "no-NO", "sv-SE", "pl-PL", "fi-FI", "zh-TW", "en-IN", "en-IE", "en-NZ", "en-AB", "en-ZA", "en-WL", "de-CH", "af-ZA", "eu-ES", "hr-HR", "cs-CZ", "da-DK", "fa-IR", "gl-ES", "el-GR", "he-IL", "id-ID", "lv-LV", "ms-MY", "ro-RO", "ru-RU", "sr-RS", "sk-SK", "so-SO", "tl-PH", "uk-UA", "vi-VN", "zu-ZA", "am-ET", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ckb-IQ", "ckb-IR", "cy-WL", "es-MX", "et-ET", "fa-AF", "gu-IN", "ht-HT", "hu-HU", "hy-AM", "is-IS", "jv-ID", "ka-GE", "kab-DZ", "kk-KZ", "km-KH", "kn-IN", "lg-IN", "lt-LT", "mk-MK", "ml-IN", "mr-IN", "my-MM", "ne-NP", "or-IN", "pa-IN", "ps-AF", "si-LK", "sl-SI", "sq-AL", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "ta-IN", "te-IN", "tr-TR", "uz-UZ"],
     #     identify_multiple_languages: false,
     #     vocabulary_names: "VocabularyNames",
-    #     vocabulary_filter_names: "VocabularyFilterNames"
+    #     vocabulary_filter_names: "VocabularyFilterNames",
+    #     session_resume_window: 1,
+    #     transcript_format: "spoken" # One of: ["spoken", "written"]
     #   }
     #   options = {}
     #   response = client.start_stream_transcription(params, options)
@@ -1247,9 +1273,9 @@ module Aws::TranscribeStreaming
     #   response.to_h #=>
     #   {
     #     request_id: "RequestId",
-    #     language_code: "en-US" # One of: ["en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR", "ja-JP", "ko-KR", "zh-CN", "th-TH", "es-ES", "ar-SA", "pt-PT", "ca-ES", "ar-AE", "hi-IN", "zh-HK", "nl-NL", "no-NO", "sv-SE", "pl-PL", "fi-FI", "zh-TW", "en-IN", "en-IE", "en-NZ", "en-AB", "en-ZA", "en-WL", "de-CH", "af-ZA", "eu-ES", "hr-HR", "cs-CZ", "da-DK", "fa-IR", "gl-ES", "el-GR", "he-IL", "id-ID", "lv-LV", "ms-MY", "ro-RO", "ru-RU", "sr-RS", "sk-SK", "so-SO", "tl-PH", "uk-UA", "vi-VN", "zu-ZA"],
+    #     language_code: "en-US" # One of: ["en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR", "ja-JP", "ko-KR", "zh-CN", "th-TH", "es-ES", "ar-SA", "pt-PT", "ca-ES", "ar-AE", "hi-IN", "zh-HK", "nl-NL", "no-NO", "sv-SE", "pl-PL", "fi-FI", "zh-TW", "en-IN", "en-IE", "en-NZ", "en-AB", "en-ZA", "en-WL", "de-CH", "af-ZA", "eu-ES", "hr-HR", "cs-CZ", "da-DK", "fa-IR", "gl-ES", "el-GR", "he-IL", "id-ID", "lv-LV", "ms-MY", "ro-RO", "ru-RU", "sr-RS", "sk-SK", "so-SO", "tl-PH", "uk-UA", "vi-VN", "zu-ZA", "am-ET", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ckb-IQ", "ckb-IR", "cy-WL", "es-MX", "et-ET", "fa-AF", "gu-IN", "ht-HT", "hu-HU", "hy-AM", "is-IS", "jv-ID", "ka-GE", "kab-DZ", "kk-KZ", "km-KH", "kn-IN", "lg-IN", "lt-LT", "mk-MK", "ml-IN", "mr-IN", "my-MM", "ne-NP", "or-IN", "pa-IN", "ps-AF", "si-LK", "sl-SI", "sq-AL", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "ta-IN", "te-IN", "tr-TR", "uz-UZ"],
     #     media_sample_rate_hertz: 1,
-    #     media_encoding: "pcm" # One of: ["pcm", "ogg-opus", "flac"],
+    #     media_encoding: "pcm" # One of: ["pcm", "ogg-opus", "flac", "g711-alaw", "g711-ulaw", "g729"],
     #     vocabulary_name: "VocabularyName",
     #     session_id: "SessionId",
     #     transcript_result_stream: {
@@ -1290,10 +1316,10 @@ module Aws::TranscribeStreaming
     #                 }
     #               ],
     #               channel_id: "String",
-    #               language_code: "en-US" # One of: ["en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR", "ja-JP", "ko-KR", "zh-CN", "th-TH", "es-ES", "ar-SA", "pt-PT", "ca-ES", "ar-AE", "hi-IN", "zh-HK", "nl-NL", "no-NO", "sv-SE", "pl-PL", "fi-FI", "zh-TW", "en-IN", "en-IE", "en-NZ", "en-AB", "en-ZA", "en-WL", "de-CH", "af-ZA", "eu-ES", "hr-HR", "cs-CZ", "da-DK", "fa-IR", "gl-ES", "el-GR", "he-IL", "id-ID", "lv-LV", "ms-MY", "ro-RO", "ru-RU", "sr-RS", "sk-SK", "so-SO", "tl-PH", "uk-UA", "vi-VN", "zu-ZA"],
+    #               language_code: "en-US" # One of: ["en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR", "ja-JP", "ko-KR", "zh-CN", "th-TH", "es-ES", "ar-SA", "pt-PT", "ca-ES", "ar-AE", "hi-IN", "zh-HK", "nl-NL", "no-NO", "sv-SE", "pl-PL", "fi-FI", "zh-TW", "en-IN", "en-IE", "en-NZ", "en-AB", "en-ZA", "en-WL", "de-CH", "af-ZA", "eu-ES", "hr-HR", "cs-CZ", "da-DK", "fa-IR", "gl-ES", "el-GR", "he-IL", "id-ID", "lv-LV", "ms-MY", "ro-RO", "ru-RU", "sr-RS", "sk-SK", "so-SO", "tl-PH", "uk-UA", "vi-VN", "zu-ZA", "am-ET", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ckb-IQ", "ckb-IR", "cy-WL", "es-MX", "et-ET", "fa-AF", "gu-IN", "ht-HT", "hu-HU", "hy-AM", "is-IS", "jv-ID", "ka-GE", "kab-DZ", "kk-KZ", "km-KH", "kn-IN", "lg-IN", "lt-LT", "mk-MK", "ml-IN", "mr-IN", "my-MM", "ne-NP", "or-IN", "pa-IN", "ps-AF", "si-LK", "sl-SI", "sq-AL", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "ta-IN", "te-IN", "tr-TR", "uz-UZ"],
     #               language_identification: [
     #                 {
-    #                   language_code: "en-US" # One of: ["en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR", "ja-JP", "ko-KR", "zh-CN", "th-TH", "es-ES", "ar-SA", "pt-PT", "ca-ES", "ar-AE", "hi-IN", "zh-HK", "nl-NL", "no-NO", "sv-SE", "pl-PL", "fi-FI", "zh-TW", "en-IN", "en-IE", "en-NZ", "en-AB", "en-ZA", "en-WL", "de-CH", "af-ZA", "eu-ES", "hr-HR", "cs-CZ", "da-DK", "fa-IR", "gl-ES", "el-GR", "he-IL", "id-ID", "lv-LV", "ms-MY", "ro-RO", "ru-RU", "sr-RS", "sk-SK", "so-SO", "tl-PH", "uk-UA", "vi-VN", "zu-ZA"],
+    #                   language_code: "en-US" # One of: ["en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR", "ja-JP", "ko-KR", "zh-CN", "th-TH", "es-ES", "ar-SA", "pt-PT", "ca-ES", "ar-AE", "hi-IN", "zh-HK", "nl-NL", "no-NO", "sv-SE", "pl-PL", "fi-FI", "zh-TW", "en-IN", "en-IE", "en-NZ", "en-AB", "en-ZA", "en-WL", "de-CH", "af-ZA", "eu-ES", "hr-HR", "cs-CZ", "da-DK", "fa-IR", "gl-ES", "el-GR", "he-IL", "id-ID", "lv-LV", "ms-MY", "ro-RO", "ru-RU", "sr-RS", "sk-SK", "so-SO", "tl-PH", "uk-UA", "vi-VN", "zu-ZA", "am-ET", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ckb-IQ", "ckb-IR", "cy-WL", "es-MX", "et-ET", "fa-AF", "gu-IN", "ht-HT", "hu-HU", "hy-AM", "is-IS", "jv-ID", "ka-GE", "kab-DZ", "kk-KZ", "km-KH", "kn-IN", "lg-IN", "lt-LT", "mk-MK", "ml-IN", "mr-IN", "my-MM", "ne-NP", "or-IN", "pa-IN", "ps-AF", "si-LK", "sl-SI", "sq-AL", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "ta-IN", "te-IN", "tr-TR", "uz-UZ"],
     #                   score: 1.0
     #                 }
     #               ]
@@ -1330,10 +1356,12 @@ module Aws::TranscribeStreaming
     #     language_model_name: "ModelName",
     #     identify_language: false,
     #     language_options: "LanguageOptions",
-    #     preferred_language: "en-US" # One of: ["en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR", "ja-JP", "ko-KR", "zh-CN", "th-TH", "es-ES", "ar-SA", "pt-PT", "ca-ES", "ar-AE", "hi-IN", "zh-HK", "nl-NL", "no-NO", "sv-SE", "pl-PL", "fi-FI", "zh-TW", "en-IN", "en-IE", "en-NZ", "en-AB", "en-ZA", "en-WL", "de-CH", "af-ZA", "eu-ES", "hr-HR", "cs-CZ", "da-DK", "fa-IR", "gl-ES", "el-GR", "he-IL", "id-ID", "lv-LV", "ms-MY", "ro-RO", "ru-RU", "sr-RS", "sk-SK", "so-SO", "tl-PH", "uk-UA", "vi-VN", "zu-ZA"],
+    #     preferred_language: "en-US" # One of: ["en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR", "ja-JP", "ko-KR", "zh-CN", "th-TH", "es-ES", "ar-SA", "pt-PT", "ca-ES", "ar-AE", "hi-IN", "zh-HK", "nl-NL", "no-NO", "sv-SE", "pl-PL", "fi-FI", "zh-TW", "en-IN", "en-IE", "en-NZ", "en-AB", "en-ZA", "en-WL", "de-CH", "af-ZA", "eu-ES", "hr-HR", "cs-CZ", "da-DK", "fa-IR", "gl-ES", "el-GR", "he-IL", "id-ID", "lv-LV", "ms-MY", "ro-RO", "ru-RU", "sr-RS", "sk-SK", "so-SO", "tl-PH", "uk-UA", "vi-VN", "zu-ZA", "am-ET", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ckb-IQ", "ckb-IR", "cy-WL", "es-MX", "et-ET", "fa-AF", "gu-IN", "ht-HT", "hu-HU", "hy-AM", "is-IS", "jv-ID", "ka-GE", "kab-DZ", "kk-KZ", "km-KH", "kn-IN", "lg-IN", "lt-LT", "mk-MK", "ml-IN", "mr-IN", "my-MM", "ne-NP", "or-IN", "pa-IN", "ps-AF", "si-LK", "sl-SI", "sq-AL", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "ta-IN", "te-IN", "tr-TR", "uz-UZ"],
     #     identify_multiple_languages: false,
     #     vocabulary_names: "VocabularyNames",
-    #     vocabulary_filter_names: "VocabularyFilterNames"
+    #     vocabulary_filter_names: "VocabularyFilterNames",
+    #     session_resume_window: 1,
+    #     transcript_format: "spoken" # One of: ["spoken", "written"]
     #   }
     # @return [Types::StartStreamTranscriptionResponse]
     def start_stream_transcription(params = {}, options = {})

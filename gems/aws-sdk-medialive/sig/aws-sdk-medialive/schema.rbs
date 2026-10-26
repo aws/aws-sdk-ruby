@@ -10,6 +10,9 @@ module Aws::MediaLive
     AacSettings: StructureShape
     AacSpec: EnumShape
     AacVbrQuality: EnumShape
+    AbWatermarkerIdLength: EnumShape
+    AbWatermarkingCustomProfile: StructureShape
+    AbWatermarkingProfile: EnumShape
     Ac3AttenuationControl: EnumShape
     Ac3BitstreamMode: EnumShape
     Ac3CodingMode: EnumShape
@@ -40,16 +43,20 @@ module Aws::MediaLive
     AudioDescriptionAudioTypeControl: EnumShape
     AudioDescriptionLanguageCodeControl: EnumShape
     AudioDolbyEDecode: StructureShape
+    AudioFeedInput: StructureShape
     AudioHlsRenditionSelection: StructureShape
     AudioLanguageSelection: StructureShape
     AudioLanguageSelectionPolicy: EnumShape
     AudioNormalizationAlgorithm: EnumShape
     AudioNormalizationAlgorithmControl: EnumShape
+    AudioNormalizationPeakCalculation: EnumShape
     AudioNormalizationSettings: StructureShape
     AudioOnlyHlsSegmentType: EnumShape
     AudioOnlyHlsSettings: StructureShape
     AudioOnlyHlsTrackType: EnumShape
+    AudioPid: StructureShape
     AudioPidSelection: StructureShape
+    AudioPreMixerSettings: StructureShape
     AudioSelector: StructureShape
     AudioSelectorSettings: StructureShape
     AudioSilenceFailoverSettings: StructureShape
@@ -59,6 +66,7 @@ module Aws::MediaLive
     AudioWatermarkSettings: StructureShape
     AuthenticationScheme: EnumShape
     AutomaticInputFailoverSettings: StructureShape
+    Av1BitDepth: EnumShape
     Av1ColorSpaceSettings: StructureShape
     Av1GopSizeUnits: EnumShape
     Av1Level: EnumShape
@@ -66,6 +74,9 @@ module Aws::MediaLive
     Av1RateControlMode: EnumShape
     Av1SceneChangeDetect: EnumShape
     Av1Settings: StructureShape
+    Av1SpatialAq: EnumShape
+    Av1TemporalAq: EnumShape
+    Av1TimecodeInsertionBehavior: EnumShape
     AvailBlanking: StructureShape
     AvailBlankingState: EnumShape
     AvailConfiguration: StructureShape
@@ -108,9 +119,12 @@ module Aws::MediaLive
     CaptionRectangle: StructureShape
     CaptionSelector: StructureShape
     CaptionSelectorSettings: StructureShape
+    CaptionSynchronizationMode: EnumShape
     CdiInputResolution: EnumShape
     CdiInputSpecification: StructureShape
     Channel: StructureShape
+    ChannelAlert: StructureShape
+    ChannelAlertState: EnumShape
     ChannelClass: EnumShape
     ChannelEgressEndpoint: StructureShape
     ChannelEngineVersionRequest: StructureShape
@@ -127,16 +141,20 @@ module Aws::MediaLive
     CloudWatchAlarmTemplateSummary: StructureShape
     CloudWatchAlarmTemplateTargetResourceType: EnumShape
     CloudWatchAlarmTemplateTreatMissingData: EnumShape
+    ClusterAlert: StructureShape
+    ClusterAlertState: EnumShape
     ClusterNetworkSettings: StructureShape
     ClusterNetworkSettingsCreateRequest: StructureShape
     ClusterNetworkSettingsUpdateRequest: StructureShape
     ClusterState: EnumShape
     ClusterType: EnumShape
     CmafId3Behavior: EnumShape
+    CmafIngestAbWatermarkerIrdetoSettings: StructureShape
     CmafIngestCaptionLanguageMapping: StructureShape
     CmafIngestGroupSettings: StructureShape
     CmafIngestOutputSettings: StructureShape
     CmafIngestSegmentLengthUnits: EnumShape
+    CmafIngestWatermarkingSettings: StructureShape
     CmafKLVBehavior: EnumShape
     CmafNielsenId3Behavior: EnumShape
     CmafTimedMetadataId3Frame: EnumShape
@@ -146,6 +164,7 @@ module Aws::MediaLive
     ColorSpace: EnumShape
     ColorSpacePassthroughSettings: StructureShape
     ConflictException: StructureShape
+    ConnectionMode: EnumShape
     ContentType: EnumShape
     CreateChannelPlacementGroupRequest: StructureShape
     CreateChannelPlacementGroupResponse: StructureShape
@@ -225,6 +244,8 @@ module Aws::MediaLive
     DescribeClusterRequest: StructureShape
     DescribeClusterResponse: StructureShape
     DescribeClusterSummary: StructureShape
+    DescribeFollowerChannelSettings: StructureShape
+    DescribeInferenceSettings: StructureShape
     DescribeInputDeviceRequest: StructureShape
     DescribeInputDeviceResponse: StructureShape
     DescribeInputDeviceThumbnailRequest: StructureShape
@@ -233,6 +254,7 @@ module Aws::MediaLive
     DescribeInputResponse: StructureShape
     DescribeInputSecurityGroupRequest: StructureShape
     DescribeInputSecurityGroupResponse: StructureShape
+    DescribeLinkedChannelSettings: StructureShape
     DescribeMultiplexProgramRequest: StructureShape
     DescribeMultiplexProgramResponse: StructureShape
     DescribeMultiplexRequest: StructureShape
@@ -245,6 +267,7 @@ module Aws::MediaLive
     DescribeNodeSummary: StructureShape
     DescribeOfferingRequest: StructureShape
     DescribeOfferingResponse: StructureShape
+    DescribePrimaryChannelSettings: StructureShape
     DescribeReservationRequest: StructureShape
     DescribeReservationResponse: StructureShape
     DescribeScheduleRequest: StructureShape
@@ -255,6 +278,7 @@ module Aws::MediaLive
     DescribeThumbnailsResponse: StructureShape
     DeviceSettingsSyncState: EnumShape
     DeviceUpdateStatus: EnumShape
+    DisabledLockingSettings: StructureShape
     DolbyEProgramSelection: EnumShape
     DolbyVision81Settings: StructureShape
     DvbDashAccessibility: EnumShape
@@ -294,12 +318,15 @@ module Aws::MediaLive
     EbuTtDDestinationSettings: StructureShape
     EbuTtDDestinationStyleControl: EnumShape
     EbuTtDFillLineGapControl: EnumShape
+    EmbeddedCaptionPositionSettings: StructureShape
     EmbeddedConvert608To708: EnumShape
     EmbeddedDestinationSettings: StructureShape
+    EmbeddedDestinationStyleControl: EnumShape
     EmbeddedPlusScte20DestinationSettings: StructureShape
     EmbeddedScte20Detection: EnumShape
     EmbeddedSourceSettings: StructureShape
     EncoderSettings: StructureShape
+    EnrichmentMethod: EnumShape
     EpochLockingSettings: StructureShape
     Esam: StructureShape
     EventBridgeRuleTemplateEventType: EnumShape
@@ -321,6 +348,7 @@ module Aws::MediaLive
     Fmp4TimedMetadataBehavior: EnumShape
     FollowModeScheduleActionStartSettings: StructureShape
     FollowPoint: EnumShape
+    FollowerChannelSettings: StructureShape
     ForbiddenException: StructureShape
     FrameCaptureCdnSettings: StructureShape
     FrameCaptureGroupSettings: StructureShape
@@ -393,6 +421,7 @@ module Aws::MediaLive
     H265TimecodeInsertionBehavior: EnumShape
     H265TreeblockSize: EnumShape
     Hdr10Settings: StructureShape
+    Hlg2020Settings: StructureShape
     HlsAdMarkers: EnumShape
     HlsAkamaiHttpTransferMode: EnumShape
     HlsAkamaiSettings: StructureShape
@@ -439,6 +468,7 @@ module Aws::MediaLive
     Id3SegmentTaggingScheduleActionSettings: StructureShape
     ImmediateModeScheduleActionStartSettings: StructureShape
     IncludeFillerNalUnits: EnumShape
+    InferenceSettings: StructureShape
     Input: StructureShape
     InputAttachment: StructureShape
     InputChannelLevel: StructureShape
@@ -516,6 +546,10 @@ module Aws::MediaLive
     IpPoolUpdateRequest: StructureShape
     KeyProviderSettings: StructureShape
     LastFrameClippingBehavior: EnumShape
+    LinkedChannelSettings: StructureShape
+    LinkedChannelType: EnumShape
+    ListAlertsRequest: StructureShape
+    ListAlertsResponse: StructureShape
     ListChannelPlacementGroupsRequest: StructureShape
     ListChannelPlacementGroupsResponse: StructureShape
     ListChannelsRequest: StructureShape
@@ -524,6 +558,8 @@ module Aws::MediaLive
     ListCloudWatchAlarmTemplateGroupsResponse: StructureShape
     ListCloudWatchAlarmTemplatesRequest: StructureShape
     ListCloudWatchAlarmTemplatesResponse: StructureShape
+    ListClusterAlertsRequest: StructureShape
+    ListClusterAlertsResponse: StructureShape
     ListClustersRequest: StructureShape
     ListClustersResponse: StructureShape
     ListEventBridgeRuleTemplateGroupsRequest: StructureShape
@@ -538,6 +574,8 @@ module Aws::MediaLive
     ListInputSecurityGroupsResponse: StructureShape
     ListInputsRequest: StructureShape
     ListInputsResponse: StructureShape
+    ListMultiplexAlertsRequest: StructureShape
+    ListMultiplexAlertsResponse: StructureShape
     ListMultiplexProgramsRequest: StructureShape
     ListMultiplexProgramsResponse: StructureShape
     ListMultiplexesRequest: StructureShape
@@ -592,11 +630,22 @@ module Aws::MediaLive
     MaxResults: IntegerShape
     MediaConnectFlow: StructureShape
     MediaConnectFlowRequest: StructureShape
+    MediaConnectRouterContainerSettings: StructureShape
+    MediaConnectRouterGroupSettings: StructureShape
+    MediaConnectRouterOutputConnection: StructureShape
+    MediaConnectRouterOutputConnectionMap: StructureShape
+    MediaConnectRouterOutputConnections: MapShape
+    MediaConnectRouterOutputDestinationSettings: StructureShape
+    MediaConnectRouterOutputEncryptionType: EnumShape
+    MediaConnectRouterOutputSettings: StructureShape
+    MediaPackageAdditionalDestinations: StructureShape
     MediaPackageGroupSettings: StructureShape
     MediaPackageOutputDestinationSettings: StructureShape
     MediaPackageOutputSettings: StructureShape
+    MediaPackageV2AbWatermarkerIrdetoSettings: StructureShape
     MediaPackageV2DestinationSettings: StructureShape
     MediaPackageV2GroupSettings: StructureShape
+    MediaPackageV2WatermarkingSettings: StructureShape
     MediaResource: StructureShape
     MediaResourceMap: MapShape
     MediaResourceNeighbor: StructureShape
@@ -629,6 +678,8 @@ module Aws::MediaLive
     MulticastSourceCreateRequest: StructureShape
     MulticastSourceUpdateRequest: StructureShape
     Multiplex: StructureShape
+    MultiplexAlert: StructureShape
+    MultiplexAlertState: EnumShape
     MultiplexContainerSettings: StructureShape
     MultiplexGroupSettings: StructureShape
     MultiplexM2tsSettings: StructureShape
@@ -656,6 +707,7 @@ module Aws::MediaLive
     NielsenCBET: StructureShape
     NielsenConfiguration: StructureShape
     NielsenNaesIiNw: StructureShape
+    NielsenNwOnly: StructureShape
     NielsenPcmToId3TaggingState: EnumShape
     NielsenWatermarkTimezones: EnumShape
     NielsenWatermarksCbetStepaside: EnumShape
@@ -678,13 +730,16 @@ module Aws::MediaLive
     OutputLocationRef: StructureShape
     OutputLockingSettings: StructureShape
     OutputSettings: StructureShape
+    OutputUsage: EnumShape
     PassThroughSettings: StructureShape
     PauseStateScheduleActionSettings: StructureShape
     PipelineDetail: StructureShape
     PipelineId: EnumShape
+    PipelineLockingMethod: EnumShape
     PipelineLockingSettings: StructureShape
     PipelinePauseStateSettings: StructureShape
     PreferredChannelPipeline: EnumShape
+    PrimaryChannelSettings: StructureShape
     PurchaseOfferingRequest: StructureShape
     PurchaseOfferingResponse: StructureShape
     RawSettings: StructureShape
@@ -713,6 +768,11 @@ module Aws::MediaLive
     Route: StructureShape
     RouteCreateRequest: StructureShape
     RouteUpdateRequest: StructureShape
+    RouterDestination: StructureShape
+    RouterDestinationSettings: StructureShape
+    RouterEncryptionType: EnumShape
+    RouterInputSettings: StructureShape
+    RouterSettings: StructureShape
     RtmpAdMarkers: EnumShape
     RtmpCacheFullBehavior: EnumShape
     RtmpCaptionData: EnumShape
@@ -764,6 +824,7 @@ module Aws::MediaLive
     SignalMapMonitorDeploymentStatus: EnumShape
     SignalMapStatus: EnumShape
     SignalMapSummary: StructureShape
+    SmartSubtitleSourceSettings: StructureShape
     SmoothGroupAudioOnlyTimecodeControl: EnumShape
     SmoothGroupCertificateMode: EnumShape
     SmoothGroupEventIdMode: EnumShape
@@ -777,12 +838,17 @@ module Aws::MediaLive
     Smpte2110ReceiverGroupSdpSettings: StructureShape
     Smpte2110ReceiverGroupSettings: StructureShape
     SmpteTtDestinationSettings: StructureShape
+    SpecialRouterSettings: StructureShape
     SrtCallerDecryption: StructureShape
     SrtCallerDecryptionRequest: StructureShape
     SrtCallerSource: StructureShape
     SrtCallerSourceRequest: StructureShape
     SrtEncryptionType: EnumShape
     SrtGroupSettings: StructureShape
+    SrtListenerDecryption: StructureShape
+    SrtListenerDecryptionRequest: StructureShape
+    SrtListenerSettings: StructureShape
+    SrtListenerSettingsRequest: StructureShape
     SrtOutputDestinationSettings: StructureShape
     SrtOutputSettings: StructureShape
     SrtSettings: StructureShape
@@ -823,6 +889,7 @@ module Aws::MediaLive
     TemporalFilterPostFilterSharpening: EnumShape
     TemporalFilterSettings: StructureShape
     TemporalFilterStrength: EnumShape
+    TextCaptionPositionSettings: StructureShape
     Thumbnail: StructureShape
     ThumbnailConfiguration: StructureShape
     ThumbnailDetail: StructureShape
@@ -890,6 +957,7 @@ module Aws::MediaLive
     VideoDescription: StructureShape
     VideoDescriptionRespondToAfd: EnumShape
     VideoDescriptionScalingBehavior: EnumShape
+    VideoPositionRectangle: StructureShape
     VideoSelector: StructureShape
     VideoSelectorColorSpace: EnumShape
     VideoSelectorColorSpaceSettings: StructureShape
@@ -911,7 +979,12 @@ module Aws::MediaLive
     Doublemin0max5000: FloatShape
     Doublemin1: FloatShape
     Doublemin1max65535: FloatShape
+    Doublemin250max5000: FloatShape
+    Doublemin32max46: FloatShape
+    Doubleminnegative1max5: FloatShape
     Doubleminnegative59max0: FloatShape
+    Doubleminnegative60max60: FloatShape
+    Doubleminnegative8max0: FloatShape
     Integer: IntegerShape
     Integermax5: IntegerShape
     Integermin0: IntegerShape
@@ -936,6 +1009,7 @@ module Aws::MediaLive
     Integermin0max65536: IntegerShape
     Integermin0max7: IntegerShape
     Integermin0max8000000: IntegerShape
+    Integermin0max8190: IntegerShape
     Integermin0max8191: IntegerShape
     Integermin1: IntegerShape
     Integermin100: IntegerShape
@@ -947,7 +1021,9 @@ module Aws::MediaLive
     Integermin1000max30000: IntegerShape
     Integermin10max86400: IntegerShape
     Integermin1max10: IntegerShape
+    Integermin1max1000: IntegerShape
     Integermin1max1000000: IntegerShape
+    Integermin1max15: IntegerShape
     Integermin1max16: IntegerShape
     Integermin1max20: IntegerShape
     Integermin1max3003: IntegerShape
@@ -957,12 +1033,15 @@ module Aws::MediaLive
     Integermin1max4: IntegerShape
     Integermin1max5: IntegerShape
     Integermin1max51: IntegerShape
+    Integermin1max511: IntegerShape
     Integermin1max6: IntegerShape
+    Integermin1max65535: IntegerShape
     Integermin1max8: IntegerShape
     Integermin1max800: IntegerShape
     Integermin256max3840: IntegerShape
     Integermin25max10000: IntegerShape
     Integermin25max2000: IntegerShape
+    Integermin2max8192: IntegerShape
     Integermin3: IntegerShape
     Integermin30: IntegerShape
     Integermin32max8191: IntegerShape
@@ -981,6 +1060,8 @@ module Aws::MediaLive
     Listofadditionaldestinations: ListShape
     Listofaudiochannelmapping: ListShape
     Listofaudiodescription: ListShape
+    Listofaudiofeedinput: ListShape
+    Listofaudiopid: ListShape
     Listofaudioselector: ListShape
     Listofaudiotrack: ListShape
     Listofbatchfailedresultmodel: ListShape
@@ -988,12 +1069,14 @@ module Aws::MediaLive
     Listofcaptiondescription: ListShape
     Listofcaptionlanguagemapping: ListShape
     Listofcaptionselector: ListShape
+    Listofchannelalert: ListShape
     Listofchannelegressendpoint: ListShape
     Listofchannelengineversionresponse: ListShape
     Listofchannelpipelineidtorestart: ListShape
     Listofchannelsummary: ListShape
     Listofcloudwatchalarmtemplategroupsummary: ListShape
     Listofcloudwatchalarmtemplatesummary: ListShape
+    Listofclusteralert: ListShape
     Listofcmafingestcaptionlanguagemapping: ListShape
     Listofcolorcorrection: ListShape
     Listofdashroleaudio: ListShape
@@ -1002,6 +1085,7 @@ module Aws::MediaLive
     Listofdescribeclustersummary: ListShape
     Listofdescribenetworksummary: ListShape
     Listofdescribenodesummary: ListShape
+    Listofenrichmentmethod: ListShape
     Listofeventbridgeruletemplategroupsummary: ListShape
     Listofeventbridgeruletemplatesummary: ListShape
     Listofeventbridgeruletemplatetarget: ListShape
@@ -1033,11 +1117,14 @@ module Aws::MediaLive
     Listofippoolupdaterequest: ListShape
     Listofmediaconnectflow: ListShape
     Listofmediaconnectflowrequest: ListShape
+    Listofmediaconnectrouteroutputdestinationsettings: ListShape
+    Listofmediapackageadditionaldestinations: ListShape
     Listofmediapackageoutputdestinationsettings: ListShape
     Listofmediaresourceneighbor: ListShape
     Listofmulticastsource: ListShape
     Listofmulticastsourcecreaterequest: ListShape
     Listofmulticastsourceupdaterequest: ListShape
+    Listofmultiplexalert: ListShape
     Listofmultiplexoutputdestination: ListShape
     Listofmultiplexprogrampipelinedetail: ListShape
     Listofmultiplexprogramsummary: ListShape
@@ -1049,12 +1136,16 @@ module Aws::MediaLive
     Listofoutputdestination: ListShape
     Listofoutputdestinationsettings: ListShape
     Listofoutputgroup: ListShape
+    Listofoutputlocationref: ListShape
+    Listofoutputusage: ListShape
     Listofpipelinedetail: ListShape
     Listofpipelinepausestatesettings: ListShape
     Listofreservation: ListShape
     Listofroute: ListShape
     Listofroutecreaterequest: ListShape
     Listofrouteupdaterequest: ListShape
+    Listofrouterdestination: ListShape
+    Listofrouterdestinationsettings: ListShape
     Listofrtmpadmarkers: ListShape
     Listofscheduleaction: ListShape
     Listofscte35descriptor: ListShape

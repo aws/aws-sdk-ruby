@@ -208,14 +208,18 @@ module Aws::Personalize
 
     # <p>The configuration details of a batch inference job.</p>
     # @!attribute item_exploration_config
-    #   <p>A string to string map specifying the exploration configuration hyperparameters, including <code>explorationWeight</code> and 
+    #   <p>A string to string map specifying the exploration configuration hyperparameters, including <code>explorationWeight</code> and
     #         <code>explorationItemAgeCutOff</code>, you want to use to configure the amount of item exploration Amazon Personalize uses when
-    #         recommending items. 
+    #         recommending items.
     #         See <a href="https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-new-item-USER_PERSONALIZATION.html">User-Personalization</a>.</p>
     #   @return [Hash<String, String>]
+    # @!attribute ranking_influence
+    #   <p>A map of ranking influence values for POPULARITY and FRESHNESS. For each key, specify a numerical value between 0.0 and 1.0 that determines how much influence that ranking factor has on the final recommendations. A value closer to 1.0 gives more weight to the factor, while a value closer to 0.0 reduces its influence.</p>
+    #   @return [Hash<String, Float>]
     class BatchInferenceJobConfig < Struct.new(
       nil,
       :item_exploration_config,
+      :ranking_influence,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -246,7 +250,7 @@ module Aws::Personalize
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A truncated version of the <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_BatchInferenceJob.html">BatchInferenceJob</a>. The 
+    # <p>A truncated version of the <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_BatchInferenceJob.html">BatchInferenceJob</a>. The
     #       <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_ListBatchInferenceJobs.html">ListBatchInferenceJobs</a> operation returns a list of batch inference job
     #       summaries.</p>
     # @!attribute batch_inference_job_arn
@@ -396,7 +400,7 @@ module Aws::Personalize
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A truncated version of the <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_BatchSegmentJob.html">BatchSegmentJob</a> datatype. 
+    # <p>A truncated version of the <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_BatchSegmentJob.html">BatchSegmentJob</a> datatype.
     #       <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_ListBatchSegmentJobs.html">ListBatchSegmentJobs</a> operation returns a list of batch segment job
     #       summaries.</p>
     # @!attribute batch_segment_job_arn
@@ -489,8 +493,11 @@ module Aws::Personalize
     #   <p>The date and time (in Unix format) that the campaign was last updated.</p>
     #   @return [Time]
     # @!attribute latest_campaign_update
-    #   <p>Provides a summary of the properties of a campaign update. For a complete listing, call the
-    #         <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeCampaign.html">DescribeCampaign</a> API.</p>
+    #   <p>Provides a summary of the properties of a campaign update. For a complete listing, call the <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeCampaign.html">DescribeCampaign</a> API.</p>
+    #            <note>
+    #               <p>The <code>latestCampaignUpdate</code> field is only returned when the campaign has had
+    #           at least one <code>UpdateCampaign</code> call. </p>
+    #            </note>
     #   @return [Types::CampaignUpdateSummary]
     class Campaign < Struct.new(
       nil,
@@ -511,13 +518,13 @@ module Aws::Personalize
 
     # <p>The configuration details of a campaign.</p>
     # @!attribute item_exploration_config
-    #   <p>Specifies the exploration configuration hyperparameters, including <code>explorationWeight</code> and 
+    #   <p>Specifies the exploration configuration hyperparameters, including <code>explorationWeight</code> and
     #         <code>explorationItemAgeCutOff</code>, you want to use to configure the amount of item exploration Amazon Personalize uses when
     #         recommending items. Provide <code>itemExplorationConfig</code> data only if your solution uses the
     #         <a href="https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-new-item-USER_PERSONALIZATION.html">User-Personalization</a> recipe.</p>
     #   @return [Hash<String, String>]
     # @!attribute enable_metadata_with_recommendations
-    #   <p>Whether metadata with recommendations is enabled for the campaign. 
+    #   <p>Whether metadata with recommendations is enabled for the campaign.
     #         If enabled, you can specify the columns from your Items dataset in your request for recommendations. Amazon Personalize returns this data for each item in the recommendation response.
     #       For information about enabling metadata for a campaign, see <a href="https://docs.aws.amazon.com/personalize/latest/dg/campaigns.html#create-campaign-return-metadata">Enabling metadata in recommendations for a campaign</a>.</p>
     #            <p>
@@ -525,20 +532,24 @@ module Aws::Personalize
     #       </p>
     #   @return [Boolean]
     # @!attribute sync_with_latest_solution_version
-    #   <p>Whether the campaign automatically updates to use the latest solution version (trained model) of a solution. If you specify <code>True</code>, 
+    #   <p>Whether the campaign automatically updates to use the latest solution version (trained model) of a solution. If you specify <code>True</code>,
     #         you must specify the ARN of your <i>solution</i> for the <code>SolutionVersionArn</code> parameter. It must be in <code>SolutionArn/$LATEST</code> format.
-    #         The default is <code>False</code> and you must manually update the campaign to deploy the latest solution version. 
+    #         The default is <code>False</code> and you must manually update the campaign to deploy the latest solution version.
     #       </p>
     #            <p>
-    #         For more information about automatic campaign updates, see 
+    #         For more information about automatic campaign updates, see
     #         <a href="https://docs.aws.amazon.com/personalize/latest/dg/campaigns.html#create-campaign-automatic-latest-sv-update">Enabling automatic campaign updates</a>.
     #       </p>
     #   @return [Boolean]
+    # @!attribute ranking_influence
+    #   <p>A map of ranking influence values for POPULARITY and FRESHNESS. For each key, specify a numerical value between 0.0 and 1.0 that determines how much influence that ranking factor has on the final recommendations. A value closer to 1.0 gives more weight to the factor, while a value closer to 0.0 reduces its influence. </p>
+    #   @return [Hash<String, Float>]
     class CampaignConfig < Struct.new(
       nil,
       :item_exploration_config,
       :enable_metadata_with_recommendations,
       :sync_with_latest_solution_version,
+      :ranking_influence,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -804,16 +815,16 @@ module Aws::Personalize
     #   <p>A name for the new campaign. The campaign name must be unique within your account.</p>
     #   @return [String]
     # @!attribute solution_version_arn
-    #   <p>The Amazon Resource Name (ARN) of the trained model to deploy with the campaign. To specify the latest solution version of your solution, 
+    #   <p>The Amazon Resource Name (ARN) of the trained model to deploy with the campaign. To specify the latest solution version of your solution,
     #         specify the ARN of your <i>solution</i> in <code>SolutionArn/$LATEST</code> format.
-    #         You must use this format if you set <code>syncWithLatestSolutionVersion</code> to <code>True</code> in the 
+    #         You must use this format if you set <code>syncWithLatestSolutionVersion</code> to <code>True</code> in the
     #         <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_CampaignConfig.html">CampaignConfig</a>.
     #       </p>
     #            <p>
     #         To deploy a model that isn't the latest solution version of your solution, specify the ARN of the solution version.
     #       </p>
     #            <p>
-    #         For more information about automatic campaign updates, see 
+    #         For more information about automatic campaign updates, see
     #         <a href="https://docs.aws.amazon.com/personalize/latest/dg/campaigns.html#create-campaign-automatic-latest-sv-update">Enabling automatic campaign updates</a>.
     #       </p>
     #   @return [String]
@@ -1149,7 +1160,7 @@ module Aws::Personalize
     #   <p>The ARN of the dataset group that the filter will belong to.</p>
     #   @return [String]
     # @!attribute filter_expression
-    #   <p>The filter expression defines which items are included or excluded from recommendations. Filter expression must follow specific format rules. 
+    #   <p>The filter expression defines which items are included or excluded from recommendations. Filter expression must follow specific format rules.
     #               For information about filter expression structure and syntax, see
     #               <a href="https://docs.aws.amazon.com/personalize/latest/dg/filter-expressions.html">Filter expressions</a>.</p>
     #   @return [String]
@@ -1186,7 +1197,7 @@ module Aws::Personalize
     #   @return [String]
     # @!attribute metrics
     #   <p>A list of metric attributes for the metric attribution. Each metric attribute specifies an event type to track and a function.
-    #         Available functions are <code>SUM()</code> or <code>SAMPLECOUNT()</code>. For SUM() functions, provide the 
+    #         Available functions are <code>SUM()</code> or <code>SAMPLECOUNT()</code>. For SUM() functions, provide the
     #         dataset type (either Interactions or Items) and column to sum as a parameter. For example SUM(Items.PRICE).</p>
     #   @return [Array<Types::MetricAttribute>]
     # @!attribute metrics_output_config
@@ -1296,7 +1307,7 @@ module Aws::Personalize
     #   @return [Boolean]
     # @!attribute perform_auto_ml
     #   <important>
-    #               <p>We don't recommend enabling automated machine learning. Instead, match your use case to the available Amazon Personalize 
+    #               <p>We don't recommend enabling automated machine learning. Instead, match your use case to the available Amazon Personalize
     #           recipes. For more information, see <a href="https://docs.aws.amazon.com/personalize/latest/dg/working-with-predefined-recipes.html">Choosing a recipe</a>.</p>
     #            </important>
     #            <p>Whether to perform automated machine learning (AutoML). The default is <code>false</code>.
@@ -1319,13 +1330,16 @@ module Aws::Personalize
     #       </p>
     #            <p>
     #         After training starts, you can
-    #         get the solution version's Amazon Resource Name (ARN) with the <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_ListSolutionVersions.html">ListSolutionVersions</a> API operation. 
+    #         get the solution version's Amazon Resource Name (ARN) with the <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_ListSolutionVersions.html">ListSolutionVersions</a> API operation.
     #         To get its status, use the <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolutionVersion.html">DescribeSolutionVersion</a>.
     #       </p>
     #   @return [Boolean]
+    # @!attribute perform_incremental_update
+    #   <p>Whether to perform incremental training updates on your model. When enabled, this allows the model to learn from new data more frequently without requiring full retraining, which enables near real-time personalization. This parameter is supported only for solutions that use the semantic-similarity recipe.</p>
+    #   @return [Boolean]
     # @!attribute recipe_arn
     #   <p>The Amazon Resource Name (ARN) of the recipe to use for model training. This is required when
-    #         <code>performAutoML</code> is false. For information about different Amazon Personalize recipes and their ARNs, 
+    #         <code>performAutoML</code> is false. For information about different Amazon Personalize recipes and their ARNs,
     #         see <a href="https://docs.aws.amazon.com/personalize/latest/dg/working-with-predefined-recipes.html">Choosing a recipe</a>.
     #       </p>
     #   @return [String]
@@ -1344,7 +1358,7 @@ module Aws::Personalize
     #         true, Amazon Personalize only evaluates the <code>autoMLConfig</code> section
     #         of the solution configuration.</p>
     #            <note>
-    #               <p>Amazon Personalize doesn't support configuring the <code>hpoObjective</code> 
+    #               <p>Amazon Personalize doesn't support configuring the <code>hpoObjective</code>
     #           at this time.</p>
     #            </note>
     #   @return [Types::SolutionConfig]
@@ -1357,6 +1371,7 @@ module Aws::Personalize
       :perform_hpo,
       :perform_auto_ml,
       :perform_auto_training,
+      :perform_incremental_update,
       :recipe_arn,
       :dataset_group_arn,
       :event_type,
@@ -1386,8 +1401,8 @@ module Aws::Personalize
     #         information.</p>
     #   @return [String]
     # @!attribute training_mode
-    #   <p>The scope of training to be performed when creating the solution version. 
-    #         The default is <code>FULL</code>. This creates a completely new model based on the entirety 
+    #   <p>The scope of training to be performed when creating the solution version.
+    #         The default is <code>FULL</code>. This creates a completely new model based on the entirety
     #         of the training data from the datasets in your dataset group.
     #       </p>
     #            <p>If you use
@@ -1395,13 +1410,13 @@ module Aws::Personalize
     #         you can specify a training mode of <code>UPDATE</code>. This updates the model to consider new items for recommendations. It is not a full
     #           retraining. You should still complete a full retraining weekly.
     #           If you specify <code>UPDATE</code>, Amazon Personalize will stop automatic updates for the solution version. To resume updates, create a new solution with training mode set to <code>FULL</code>
-    #           and deploy it in a campaign. 
-    #           For more information about automatic updates, see 
+    #           and deploy it in a campaign.
+    #           For more information about automatic updates, see
     #           <a href="https://docs.aws.amazon.com/personalize/latest/dg/use-case-recipe-features.html#maintaining-with-automatic-updates">Automatic updates</a>.
     #         </p>
     #            <p>The <code>UPDATE</code> option can only be used when you already have an active solution
     #           version created from the input solution using the <code>FULL</code> option and the input
-    #           solution was trained with the 
+    #           solution was trained with the
     #           <a href="https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-new-item-USER_PERSONALIZATION.html">User-Personalization</a>
     #           recipe or the legacy
     #           <a href="https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-hrnn-coldstart.html">HRNN-Coldstart</a> recipe.</p>
@@ -1432,7 +1447,7 @@ module Aws::Personalize
     end
 
     # <p>Describes a job that deletes all
-    #       references to specific users from an Amazon Personalize dataset group in batches. For information about creating a data deletion job, 
+    #       references to specific users from an Amazon Personalize dataset group in batches. For information about creating a data deletion job,
     #       see <a href="https://docs.aws.amazon.com/personalize/latest/dg/delete-records.html">Deleting users</a>.</p>
     # @!attribute job_name
     #   <p>The name of the data deletion job.</p>
@@ -1444,7 +1459,7 @@ module Aws::Personalize
     #   <p>The Amazon Resource Name (ARN) of the dataset group the job deletes records from.</p>
     #   @return [String]
     # @!attribute data_source
-    #   <p>Describes the data source that contains the data to upload to a dataset, or the list of 
+    #   <p>Describes the data source that contains the data to upload to a dataset, or the list of
     #         records to delete from Amazon Personalize.</p>
     #   @return [Types::DataSource]
     # @!attribute role_arn
@@ -1534,7 +1549,7 @@ module Aws::Personalize
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Describes the data source that contains the data to upload to a dataset, or the list of 
+    # <p>Describes the data source that contains the data to upload to a dataset, or the list of
     #       records to delete from Amazon Personalize.</p>
     # @!attribute data_location
     #   <p>For dataset import jobs, the path to the Amazon S3 bucket where the data that you want to upload to
@@ -1617,7 +1632,7 @@ module Aws::Personalize
     #   <p>Describes the latest update to the dataset.</p>
     #   @return [Types::DatasetUpdateSummary]
     # @!attribute tracking_id
-    #   <p>The ID of the event tracker for an Action interactions dataset. 
+    #   <p>The ID of the event tracker for an Action interactions dataset.
     #         You specify the tracker's ID in the <code>PutActionInteractions</code> API operation. Amazon Personalize uses it to direct new data to the Action interactions dataset in your dataset group.</p>
     #   @return [String]
     class Dataset < Struct.new(
@@ -1970,7 +1985,7 @@ module Aws::Personalize
     #   <p>If a dataset import job fails, the reason behind the failure.</p>
     #   @return [String]
     # @!attribute import_mode
-    #   <p>The import mode the dataset import job used to update the data in the dataset. 
+    #   <p>The import mode the dataset import job used to update the data in the dataset.
     #         For more information see <a href="https://docs.aws.amazon.com/personalize/latest/dg/updating-existing-bulk-data.html">Updating existing bulk
     #         data</a>.
     #       </p>
@@ -2426,7 +2441,15 @@ module Aws::Personalize
     end
 
     # @!attribute campaign
-    #   <p>The properties of the campaign.</p>
+    #   <note>
+    #               <p>The <code>latestCampaignUpdate</code> field is only returned when the campaign has had
+    #           at least one <code>UpdateCampaign</code> call. </p>
+    #            </note>
+    #            <p>The properties of the campaign.</p>
+    #            <note>
+    #               <p>The <code>latestCampaignUpdate</code> field is only returned when the campaign has had
+    #           at least one <code>UpdateCampaign</code> call.</p>
+    #            </note>
     #   @return [Types::Campaign]
     class DescribeCampaignResponse < Struct.new(
       nil,
@@ -3075,7 +3098,7 @@ module Aws::Personalize
     # @!attribute hpo_objective
     #   <p>The metric to optimize during HPO.</p>
     #            <note>
-    #               <p>Amazon Personalize doesn't support configuring the <code>hpoObjective</code> 
+    #               <p>Amazon Personalize doesn't support configuring the <code>hpoObjective</code>
     #           at this time.</p>
     #            </note>
     #   @return [Types::HPOObjective]
@@ -3097,7 +3120,7 @@ module Aws::Personalize
 
     # <p>The metric to optimize during hyperparameter optimization (HPO).</p>
     #          <note>
-    #             <p>Amazon Personalize doesn't support configuring the <code>hpoObjective</code> 
+    #             <p>Amazon Personalize doesn't support configuring the <code>hpoObjective</code>
     #         at this time.</p>
     #          </note>
     # @!attribute type
@@ -3864,7 +3887,7 @@ module Aws::Personalize
     #   <p>The metric's name. The name helps you identify the metric in Amazon CloudWatch or Amazon S3.</p>
     #   @return [String]
     # @!attribute expression
-    #   <p>The attribute's expression. Available functions are <code>SUM()</code> or <code>SAMPLECOUNT()</code>. For SUM() functions, provide the 
+    #   <p>The attribute's expression. Available functions are <code>SUM()</code> or <code>SAMPLECOUNT()</code>. For SUM() functions, provide the
     #         dataset type (either Interactions or Items) and column to sum as a parameter. For example SUM(Items.PRICE).</p>
     #   @return [String]
     class MetricAttribute < Struct.new(
@@ -3877,7 +3900,7 @@ module Aws::Personalize
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Contains information on a metric attribution. A metric attribution creates reports on the data that you import into Amazon Personalize. 
+    # <p>Contains information on a metric attribution. A metric attribution creates reports on the data that you import into Amazon Personalize.
     #       Depending on how you import the data, you can view reports in Amazon CloudWatch or Amazon S3.
     #       For more information, see <a href="https://docs.aws.amazon.com/personalize/latest/dg/measuring-recommendation-impact.html">Measuring impact of recommendations</a>.</p>
     # @!attribute name
@@ -3967,7 +3990,7 @@ module Aws::Personalize
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Describes the additional objective for the solution, such as maximizing streaming 
+    # <p>Describes the additional objective for the solution, such as maximizing streaming
     #       minutes or increasing revenue. For more information see <a href="https://docs.aws.amazon.com/personalize/latest/dg/optimizing-solution-for-objective.html">Optimizing a solution</a>.</p>
     # @!attribute item_attribute
     #   <p>The numerical metadata column in an Items dataset related to the optimization objective. For example, VIDEO_LENGTH (to maximize streaming minutes), or PRICE (to maximize revenue).</p>
@@ -4146,7 +4169,7 @@ module Aws::Personalize
 
     # <p>The configuration details of the recommender.</p>
     # @!attribute item_exploration_config
-    #   <p>Specifies the exploration configuration hyperparameters, including <code>explorationWeight</code> and 
+    #   <p>Specifies the exploration configuration hyperparameters, including <code>explorationWeight</code> and
     #         <code>explorationItemAgeCutOff</code>, you want to use to configure the amount of item exploration Amazon Personalize uses when
     #         recommending items. Provide <code>itemExplorationConfig</code> data only if your recommenders generate personalized recommendations for a user
     #         (not popular items or similar items).</p>
@@ -4163,8 +4186,8 @@ module Aws::Personalize
     #       </p>
     #   @return [Types::TrainingDataConfig]
     # @!attribute enable_metadata_with_recommendations
-    #   <p>Whether metadata with recommendations is enabled for the recommender. 
-    #         If enabled, you can specify the columns from your Items dataset in your request for recommendations. Amazon Personalize returns this data for each item in the recommendation response. 
+    #   <p>Whether metadata with recommendations is enabled for the recommender.
+    #         If enabled, you can specify the columns from your Items dataset in your request for recommendations. Amazon Personalize returns this data for each item in the recommendation response.
     #         For information about enabling metadata for a recommender, see <a href="https://docs.aws.amazon.com/personalize/latest/dg/creating-recommenders.html#create-recommender-return-metadata">Enabling metadata in recommendations for a recommender</a>.</p>
     #            <p>
     #         If you enable metadata in recommendations, you will incur additional costs. For more information, see <a href="https://aws.amazon.com/personalize/pricing/">Amazon Personalize pricing</a>.
@@ -4314,8 +4337,8 @@ module Aws::Personalize
 
     # <important>
     #             <p>By default, all new solutions use automatic training. With automatic training, you incur training costs while
-    #            your solution is active. To avoid unnecessary costs, when you are finished you can 
-    #            <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_UpdateSolution.html">update the solution</a> to turn off automatic training. 
+    #            your solution is active. To avoid unnecessary costs, when you are finished you can
+    #            <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_UpdateSolution.html">update the solution</a> to turn off automatic training.
     #            For information about training
     #   costs, see <a href="https://aws.amazon.com/personalize/pricing/">Amazon Personalize pricing</a>.</p>
     #          </important>
@@ -4335,7 +4358,7 @@ module Aws::Personalize
     #   @return [Boolean]
     # @!attribute perform_auto_ml
     #   <important>
-    #               <p>We don't recommend enabling automated machine learning. Instead, match your use case to the available Amazon Personalize 
+    #               <p>We don't recommend enabling automated machine learning. Instead, match your use case to the available Amazon Personalize
     #           recipes. For more information, see <a href="https://docs.aws.amazon.com/personalize/latest/dg/determining-use-case.html">Determining your use case.</a>
     #               </p>
     #            </important>
@@ -4348,6 +4371,9 @@ module Aws::Personalize
     #         and the solution automatically creates new solution versions every 7 days.</p>
     #            <p>For more information about auto training, see <a href="https://docs.aws.amazon.com/personalize/latest/dg/customizing-solution-config.html">Creating and configuring a solution</a>.</p>
     #   @return [Boolean]
+    # @!attribute perform_incremental_update
+    #   <p>A Boolean value that indicates whether incremental training updates are performed on the model. When enabled, this allows the model to learn from new data more frequently without requiring full retraining, which enables near real-time personalization. This parameter is supported only for solutions that use the semantic-similarity recipe</p>
+    #   @return [Boolean]
     # @!attribute recipe_arn
     #   <p>The ARN of the recipe used to create the solution. This is required when
     #         <code>performAutoML</code> is false.</p>
@@ -4356,7 +4382,7 @@ module Aws::Personalize
     #   <p>The Amazon Resource Name (ARN) of the dataset group that provides the training data.</p>
     #   @return [String]
     # @!attribute event_type
-    #   <p>The event type (for example, 'click' or 'like') that is used for training the model. 
+    #   <p>The event type (for example, 'click' or 'like') that is used for training the model.
     #         If no <code>eventType</code> is provided, Amazon Personalize uses all interactions for training with
     #         equal weight regardless of type.</p>
     #   @return [String]
@@ -4397,6 +4423,7 @@ module Aws::Personalize
       :perform_hpo,
       :perform_auto_ml,
       :perform_auto_training,
+      :perform_incremental_update,
       :recipe_arn,
       :dataset_group_arn,
       :event_type,
@@ -4440,7 +4467,7 @@ module Aws::Personalize
     #   <p>Describes the configuration of an event, which includes a list of event parameters. You can specify up to 10 event parameters. Events are used in solution creation.</p>
     #   @return [Types::EventsConfig]
     # @!attribute optimization_objective
-    #   <p>Describes the additional objective for the solution, such as maximizing streaming 
+    #   <p>Describes the additional objective for the solution, such as maximizing streaming
     #         minutes or increasing revenue. For more information see <a href="https://docs.aws.amazon.com/personalize/latest/dg/optimizing-solution-for-objective.html">Optimizing a solution</a>.</p>
     #   @return [Types::OptimizationObjective]
     # @!attribute training_data_config
@@ -4537,6 +4564,9 @@ module Aws::Personalize
     # @!attribute perform_auto_training
     #   <p>Whether the solution automatically creates solution versions.</p>
     #   @return [Boolean]
+    # @!attribute perform_incremental_update
+    #   <p>A Boolean value that indicates whether incremental training updates are performed on the model. When enabled, this allows the model to learn from new data more frequently without requiring full retraining, which enables near real-time personalization. This parameter is supported only for solutions that use the semantic-similarity recipe.</p>
+    #   @return [Boolean]
     # @!attribute creation_date_time
     #   <p>The date and time (in Unix format) that the solution update was created.</p>
     #   @return [Time]
@@ -4551,6 +4581,7 @@ module Aws::Personalize
       :solution_update_config,
       :status,
       :perform_auto_training,
+      :perform_incremental_update,
       :creation_date_time,
       :last_updated_date_time,
       :failure_reason,
@@ -4576,6 +4607,12 @@ module Aws::Personalize
     # @!attribute perform_auto_ml
     #   <p>When true, Amazon Personalize searches for the most optimal recipe according to the solution
     #         configuration. When false (the default), Amazon Personalize uses <code>recipeArn</code>.</p>
+    #   @return [Boolean]
+    # @!attribute perform_incremental_update
+    #   <p>Whether the solution version should perform an incremental update. When set to true,
+    #         the training will process only the data that has changed since the latest training, similar
+    #         to when trainingMode is set to UPDATE. This can only be used with solution versions that
+    #         use the User-Personalization recipe.</p>
     #   @return [Boolean]
     # @!attribute recipe_arn
     #   <p>The ARN of the recipe used in the solution.</p>
@@ -4653,6 +4690,7 @@ module Aws::Personalize
       :solution_arn,
       :perform_hpo,
       :perform_auto_ml,
+      :perform_incremental_update,
       :recipe_arn,
       :event_type,
       :dataset_group_arn,
@@ -4862,9 +4900,13 @@ module Aws::Personalize
     #         exclude this column from training and Amazon Personalize considers it only when filtering.
     #       </p>
     #   @return [Hash<String, Array<String>>]
+    # @!attribute included_dataset_columns
+    #   <p>A map that specifies which columns to include from each dataset during training. The map can contain up to 3 entries, where each key is a dataset name (maximum length of 256 characters, must contain only letters and underscores) and each value is an array of up to 50 column names. Column names can be up to 150 characters long, must start with a letter or underscore, and can contain only letters, numbers, and underscores.</p>
+    #   @return [Hash<String, Array<String>>]
     class TrainingDataConfig < Struct.new(
       nil,
       :excluded_dataset_columns,
+      :included_dataset_columns,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4909,16 +4951,16 @@ module Aws::Personalize
     #   <p>The Amazon Resource Name (ARN) of the campaign.</p>
     #   @return [String]
     # @!attribute solution_version_arn
-    #   <p>The Amazon Resource Name (ARN) of a new model to deploy. To specify the latest solution version of your solution, 
+    #   <p>The Amazon Resource Name (ARN) of a new model to deploy. To specify the latest solution version of your solution,
     #         specify the ARN of your <i>solution</i> in <code>SolutionArn/$LATEST</code> format.
-    #         You must use this format if you set <code>syncWithLatestSolutionVersion</code> to <code>True</code> in the 
+    #         You must use this format if you set <code>syncWithLatestSolutionVersion</code> to <code>True</code> in the
     #         <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_CampaignConfig.html">CampaignConfig</a>.
     #       </p>
     #            <p>
     #         To deploy a model that isn't the latest solution version of your solution, specify the ARN of the solution version.
     #       </p>
     #            <p>
-    #         For more information about automatic campaign updates, see 
+    #         For more information about automatic campaign updates, see
     #         <a href="https://docs.aws.amazon.com/personalize/latest/dg/campaigns.html#create-campaign-automatic-latest-sv-update">Enabling automatic campaign updates</a>.
     #       </p>
     #   @return [String]
@@ -5048,15 +5090,18 @@ module Aws::Personalize
     #         configuration. </p>
     #            <p>
     #         If you turn on automatic training, the first automatic training starts within one hour after the solution update
-    #         completes. If you manually create a solution version within the hour, the solution skips the first automatic training. 
+    #         completes. If you manually create a solution version within the hour, the solution skips the first automatic training.
     #         For more information about automatic training,
     #         see <a href="https://docs.aws.amazon.com/personalize/latest/dg/solution-config-auto-training.html">Configuring automatic training</a>.
     #       </p>
     #            <p>
     #         After training starts, you can
-    #         get the solution version's Amazon Resource Name (ARN) with the <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_ListSolutionVersions.html">ListSolutionVersions</a> API operation. 
+    #         get the solution version's Amazon Resource Name (ARN) with the <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_ListSolutionVersions.html">ListSolutionVersions</a> API operation.
     #         To get its status, use the <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolutionVersion.html">DescribeSolutionVersion</a>.
     #       </p>
+    #   @return [Boolean]
+    # @!attribute perform_incremental_update
+    #   <p>Whether to perform incremental training updates on your model. When enabled, this allows the model to learn from new data more frequently without requiring full retraining, which enables near real-time personalization. This parameter is supported only for solutions that use the semantic-similarity recipe.</p>
     #   @return [Boolean]
     # @!attribute solution_update_config
     #   <p>The new configuration details of the solution.</p>
@@ -5065,6 +5110,7 @@ module Aws::Personalize
       nil,
       :solution_arn,
       :perform_auto_training,
+      :perform_incremental_update,
       :solution_update_config,
       keyword_init: true
     )

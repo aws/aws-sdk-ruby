@@ -66,10 +66,10 @@ module Aws::RDSData
               string_value: String,
               blob_value: String,
               array_value: {
-                boolean_values: Array[bool],
-                long_values: Array[Integer],
-                double_values: Array[Float],
-                string_values: Array[String],
+                boolean_values: Array[bool?],
+                long_values: Array[Integer?],
+                double_values: Array[Float?],
+                string_values: Array[String?],
                 array_values: Array[
                   {
                     boolean_values: untyped,
@@ -146,10 +146,10 @@ module Aws::RDSData
             string_value: String,
             blob_value: String,
             array_value: {
-              boolean_values: Array[bool],
-              long_values: Array[Integer],
-              double_values: Array[Float],
-              string_values: Array[String],
+              boolean_values: Array[bool?],
+              long_values: Array[Integer?],
+              double_values: Array[Float?],
+              string_values: Array[String?],
               array_values: Array[
                 {
                   boolean_values: untyped,

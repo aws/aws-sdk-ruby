@@ -1,0 +1,38 @@
+module Aws::DevOpsAgent
+  module Errors
+    class AccessDeniedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ContentSizeExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class IdentityCenterServiceException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def underlying_error_code: () -> String?
+    end
+    class InternalServerException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def retryable?: () -> true
+    end
+    class InvalidParameterException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ServiceQuotaExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ThrottlingException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def retryable?: () -> true
+    end
+    class ValidationException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def field_list: () -> Array[Types::ValidationExceptionField]?
+    end
+  end
+end

@@ -53,6 +53,7 @@ module Aws::DSQL
       def multi_region_properties: () -> Types::MultiRegionProperties?
       def encryption_details: () -> Types::EncryptionDetails?
       def deletion_protection_enabled: () -> bool?
+      def endpoint: () -> String?
     end
     def create_cluster: (
       ?deletion_protection_enabled: bool,
@@ -62,8 +63,34 @@ module Aws::DSQL
       ?multi_region_properties: {
         witness_region: String,
         clusters: Array[String]
-      }
+      },
+      ?policy: String,
+      ?bypass_policy_lockout_safety_check: bool
     ) -> _CreateClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateClusterResponse
+
+    interface _CreateStreamResponse
+      include Smithy::Client::_Response[Types::CreateStreamOutput]
+      def cluster_identifier: () -> String?
+      def stream_identifier: () -> String?
+      def arn: () -> String?
+      def status: () -> String?
+      def creation_time: () -> Time?
+      def ordering: () -> String?
+      def format: () -> String?
+    end
+    def create_stream: (
+      ?cluster_identifier: String,
+      ?target_definition: {
+        kinesis: {
+          stream_arn: String,
+          role_arn: String
+        }
+      },
+      ?ordering: String,
+      ?format: String,
+      ?tags: Hash[String, String],
+      ?client_token: String
+    ) -> _CreateStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateStreamResponse
 
     interface _DeleteClusterResponse
       include Smithy::Client::_Response[Types::DeleteClusterOutput]
@@ -77,6 +104,30 @@ module Aws::DSQL
       ?client_token: String
     ) -> _DeleteClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteClusterResponse
 
+    interface _DeleteClusterPolicyResponse
+      include Smithy::Client::_Response[Types::DeleteClusterPolicyOutput]
+      def policy_version: () -> String?
+    end
+    def delete_cluster_policy: (
+      ?identifier: String,
+      ?expected_policy_version: String,
+      ?client_token: String
+    ) -> _DeleteClusterPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteClusterPolicyResponse
+
+    interface _DeleteStreamResponse
+      include Smithy::Client::_Response[Types::DeleteStreamOutput]
+      def cluster_identifier: () -> String?
+      def stream_identifier: () -> String?
+      def arn: () -> String?
+      def status: () -> String?
+      def creation_time: () -> Time?
+    end
+    def delete_stream: (
+      ?cluster_identifier: String,
+      ?stream_identifier: String,
+      ?client_token: String
+    ) -> _DeleteStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteStreamResponse
+
     interface _GetClusterResponse
       include Smithy::Client::_Response[Types::GetClusterOutput]
       def identifier: () -> String?
@@ -87,14 +138,43 @@ module Aws::DSQL
       def multi_region_properties: () -> Types::MultiRegionProperties?
       def tags: () -> Hash[String, String]?
       def encryption_details: () -> Types::EncryptionDetails?
+      def endpoint: () -> String?
     end
     def get_cluster: (
       ?identifier: String
     ) -> _GetClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetClusterResponse
 
+    interface _GetClusterPolicyResponse
+      include Smithy::Client::_Response[Types::GetClusterPolicyOutput]
+      def policy: () -> String?
+      def policy_version: () -> String?
+    end
+    def get_cluster_policy: (
+      ?identifier: String
+    ) -> _GetClusterPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetClusterPolicyResponse
+
+    interface _GetStreamResponse
+      include Smithy::Client::_Response[Types::GetStreamOutput]
+      def cluster_identifier: () -> String?
+      def stream_identifier: () -> String?
+      def arn: () -> String?
+      def status: () -> String?
+      def creation_time: () -> Time?
+      def ordering: () -> String?
+      def format: () -> String?
+      def target_definition: () -> Types::TargetDefinition?
+      def status_reason: () -> Types::StatusReason?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_stream: (
+      ?cluster_identifier: String,
+      ?stream_identifier: String
+    ) -> _GetStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetStreamResponse
+
     interface _GetVpcEndpointServiceNameResponse
       include Smithy::Client::_Response[Types::GetVpcEndpointServiceNameOutput]
       def service_name: () -> String?
+      def cluster_vpc_endpoint: () -> String?
     end
     def get_vpc_endpoint_service_name: (
       ?identifier: String
@@ -110,6 +190,17 @@ module Aws::DSQL
       ?next_token: String
     ) -> _ListClustersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListClustersResponse
 
+    interface _ListStreamsResponse
+      include Smithy::Client::_Response[Types::ListStreamsOutput]
+      def next_token: () -> String?
+      def streams: () -> Array[Types::StreamSummary]?
+    end
+    def list_streams: (
+      ?cluster_identifier: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListStreamsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListStreamsResponse
+
     interface _ListTagsForResourceResponse
       include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
       def tags: () -> Hash[String, String]?
@@ -117,6 +208,18 @@ module Aws::DSQL
     def list_tags_for_resource: (
       ?resource_arn: String
     ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _PutClusterPolicyResponse
+      include Smithy::Client::_Response[Types::PutClusterPolicyOutput]
+      def policy_version: () -> String?
+    end
+    def put_cluster_policy: (
+      ?identifier: String,
+      ?policy: String,
+      ?bypass_policy_lockout_safety_check: bool,
+      ?expected_policy_version: String,
+      ?client_token: String
+    ) -> _PutClusterPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutClusterPolicyResponse
 
     interface _TagResourceResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]

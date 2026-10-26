@@ -32,6 +32,9 @@ module Aws::MediaConnect
   # * {GrantFlowEntitlements420Exception}
   # * {InternalServerErrorException}
   # * {NotFoundException}
+  # * {RouterInputServiceQuotaExceededException}
+  # * {RouterNetworkInterfaceServiceQuotaExceededException}
+  # * {RouterOutputServiceQuotaExceededException}
   # * {ServiceUnavailableException}
   # * {TooManyRequestsException}
   #
@@ -169,6 +172,45 @@ module Aws::MediaConnect
     class NotFoundException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MediaConnect::Types::NotFoundException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>The request to create a new router input would exceed the service quotas for the account. </p>
+    class RouterInputServiceQuotaExceededException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::MediaConnect::Types::RouterInputServiceQuotaExceededException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>The request to create a new router network interface would exceed the service quotas (limits) set for the account. </p>
+    class RouterNetworkInterfaceServiceQuotaExceededException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::MediaConnect::Types::RouterNetworkInterfaceServiceQuotaExceededException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>The request to create a new router output would exceed the service quotas (limits) set for the account. </p>
+    class RouterOutputServiceQuotaExceededException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::MediaConnect::Types::RouterOutputServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
         super
       end

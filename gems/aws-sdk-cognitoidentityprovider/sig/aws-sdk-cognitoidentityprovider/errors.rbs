@@ -1,5 +1,8 @@
 module Aws::CognitoIdentityProvider
   module Errors
+    class AccessDeniedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
     class AliasExistsException < Smithy::Client::ServiceError
       def message: () -> String?
     end
@@ -34,6 +37,9 @@ module Aws::CognitoIdentityProvider
       def message: () -> String?
     end
     class InternalErrorException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InternalServerException < Smithy::Client::ServiceError
       def message: () -> String?
     end
     class InvalidEmailRoleAccessPolicyException < Smithy::Client::ServiceError
@@ -73,6 +79,9 @@ module Aws::CognitoIdentityProvider
     class NotAuthorizedException < Smithy::Client::ServiceError
       def message: () -> String?
     end
+    class OperationNotEnabledException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
     class PasswordHistoryPolicyViolationException < Smithy::Client::ServiceError
       def message: () -> String?
     end
@@ -89,6 +98,9 @@ module Aws::CognitoIdentityProvider
       def message: () -> String?
     end
     class ScopeDoesNotExistException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ServiceQuotaExceededException < Smithy::Client::ServiceError
       def message: () -> String?
     end
     class SoftwareTokenMFANotFoundException < Smithy::Client::ServiceError

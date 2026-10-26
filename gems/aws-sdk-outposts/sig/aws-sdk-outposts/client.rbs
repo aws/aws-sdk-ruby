@@ -65,6 +65,8 @@ module Aws::Outposts
     end
     def create_order: (
       ?outpost_identifier: String,
+      ?quote_identifier: String,
+      ?quote_option_identifier: String,
       ?line_items: Array[
         {
           catalog_item_id: String,
@@ -88,6 +90,63 @@ module Aws::Outposts
       ?tags: Hash[String, String],
       ?supported_hardware_type: String
     ) -> _CreateOutpostResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateOutpostResponse
+
+    interface _CreatePrivateConnectivityConfigResponse
+      include Smithy::Client::_Response[Types::CreatePrivateConnectivityConfigOutput]
+      def private_connectivity_config: () -> Types::PrivateConnectivityConfig?
+      def outpost_id: () -> String?
+    end
+    def create_private_connectivity_config: (
+      ?outpost_id: String,
+      ?vpc_information_list: Array[
+        {
+          vpc_id: String,
+          subnet_ids: Array[String],
+          vpc_endpoint_id: String
+        }
+      ]
+    ) -> _CreatePrivateConnectivityConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePrivateConnectivityConfigResponse
+
+    interface _CreateQuoteResponse
+      include Smithy::Client::_Response[Types::CreateQuoteOutput]
+      def quote: () -> Types::Quote?
+    end
+    def create_quote: (
+      ?outpost_identifier: String,
+      ?country_code: String,
+      ?requested_capacities: Array[
+        {
+          quote_capacity_type: String,
+          unit: String,
+          quantity: Float
+        }
+      ],
+      ?requested_constraints: Array[
+        {
+          quote_constraint_type: String,
+          value: String
+        }
+      ],
+      ?requested_payment_options: Array[String],
+      ?requested_payment_terms: Array[String],
+      ?description: String
+    ) -> _CreateQuoteResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateQuoteResponse
+
+    interface _CreateRenewalResponse
+      include Smithy::Client::_Response[Types::CreateRenewalOutput]
+      def payment_option: () -> String?
+      def payment_term: () -> String?
+      def outpost_id: () -> String?
+      def upfront_price: () -> Float?
+      def monthly_recurring_price: () -> Float?
+      def currency: () -> String?
+    end
+    def create_renewal: (
+      ?payment_option: String,
+      ?payment_term: String,
+      ?outpost_identifier: String,
+      ?client_token: String
+    ) -> _CreateRenewalResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRenewalResponse
 
     interface _CreateSiteResponse
       include Smithy::Client::_Response[Types::CreateSiteOutput]
@@ -143,6 +202,13 @@ module Aws::Outposts
     def delete_outpost: (
       ?outpost_id: String
     ) -> _DeleteOutpostResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteOutpostResponse
+
+    interface _DeleteQuoteResponse
+      include Smithy::Client::_Response[Types::DeleteQuoteOutput]
+    end
+    def delete_quote: (
+      ?quote_identifier: String
+    ) -> _DeleteQuoteResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteQuoteResponse
 
     interface _DeleteSiteResponse
       include Smithy::Client::_Response[Types::DeleteSiteOutput]
@@ -210,6 +276,8 @@ module Aws::Outposts
       def next_token: () -> String?
       def subscriptions: () -> Array[Types::Subscription]?
       def contract_end_date: () -> String?
+      def payment_term: () -> String?
+      def payment_option: () -> String?
     end
     def get_outpost_billing_information: (
       ?next_token: String,
@@ -242,6 +310,31 @@ module Aws::Outposts
       ?max_results: Integer,
       ?next_token: String
     ) -> _GetOutpostSupportedInstanceTypesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetOutpostSupportedInstanceTypesResponse
+
+    interface _GetPrivateConnectivityConfigResponse
+      include Smithy::Client::_Response[Types::GetPrivateConnectivityConfigOutput]
+      def private_connectivity_config: () -> Types::PrivateConnectivityConfig?
+    end
+    def get_private_connectivity_config: (
+      ?outpost_id: String
+    ) -> _GetPrivateConnectivityConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPrivateConnectivityConfigResponse
+
+    interface _GetQuoteResponse
+      include Smithy::Client::_Response[Types::GetQuoteOutput]
+      def quote: () -> Types::Quote?
+    end
+    def get_quote: (
+      ?quote_identifier: String
+    ) -> _GetQuoteResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetQuoteResponse
+
+    interface _GetRenewalPricingResponse
+      include Smithy::Client::_Response[Types::GetRenewalPricingOutput]
+      def pricing_result: () -> String?
+      def pricing_options: () -> Array[Types::PricingOption]?
+    end
+    def get_renewal_pricing: (
+      ?outpost_identifier: String
+    ) -> _GetRenewalPricingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRenewalPricingResponse
 
     interface _GetSiteResponse
       include Smithy::Client::_Response[Types::GetSiteOutput]
@@ -287,7 +380,8 @@ module Aws::Outposts
       ?host_id_filter: Array[String],
       ?max_results: Integer,
       ?next_token: String,
-      ?status_filter: Array[String]
+      ?status_filter: Array[String],
+      ?asset_type_filter: Array[String]
     ) -> _ListAssetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAssetsResponse
 
     interface _ListBlockingInstancesForCapacityTaskResponse
@@ -327,6 +421,17 @@ module Aws::Outposts
       ?ec2_family_filter: Array[String]
     ) -> _ListCatalogItemsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCatalogItemsResponse
 
+    interface _ListOrderableInstanceTypesResponse
+      include Smithy::Client::_Response[Types::ListOrderableInstanceTypesOutput]
+      def instance_types: () -> Array[Types::DetailedInstanceTypeItem]?
+      def next_token: () -> String?
+    end
+    def list_orderable_instance_types: (
+      ?outpost_generation_filter: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListOrderableInstanceTypesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListOrderableInstanceTypesResponse
+
     interface _ListOrdersResponse
       include Smithy::Client::_Response[Types::ListOrdersOutput]
       def orders: () -> Array[Types::OrderSummary]?
@@ -350,6 +455,16 @@ module Aws::Outposts
       ?availability_zone_filter: Array[String],
       ?availability_zone_id_filter: Array[String]
     ) -> _ListOutpostsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListOutpostsResponse
+
+    interface _ListQuotesResponse
+      include Smithy::Client::_Response[Types::ListQuotesOutput]
+      def quotes: () -> Array[Types::QuoteSummary]?
+      def next_token: () -> String?
+    end
+    def list_quotes: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListQuotesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListQuotesResponse
 
     interface _ListSitesResponse
       include Smithy::Client::_Response[Types::ListSitesOutput]
@@ -419,6 +534,16 @@ module Aws::Outposts
       ?network_interface_device_index: Integer
     ) -> _StartConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartConnectionResponse
 
+    interface _StartOutpostDecommissionResponse
+      include Smithy::Client::_Response[Types::StartOutpostDecommissionOutput]
+      def status: () -> String?
+      def blocking_resource_types: () -> Array[String]?
+    end
+    def start_outpost_decommission: (
+      ?outpost_identifier: String,
+      ?validate_only: bool
+    ) -> _StartOutpostDecommissionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartOutpostDecommissionResponse
+
     interface _TagResourceResponse
       include Smithy::Client::_Response[Types::TagResourceResponse]
     end
@@ -445,6 +570,32 @@ module Aws::Outposts
       ?description: String,
       ?supported_hardware_type: String
     ) -> _UpdateOutpostResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateOutpostResponse
+
+    interface _UpdateQuoteResponse
+      include Smithy::Client::_Response[Types::UpdateQuoteOutput]
+      def quote: () -> Types::Quote?
+    end
+    def update_quote: (
+      ?quote_identifier: String,
+      ?outpost_identifier: String,
+      ?country_code: String,
+      ?requested_capacities: Array[
+        {
+          quote_capacity_type: String,
+          unit: String,
+          quantity: Float
+        }
+      ],
+      ?requested_constraints: Array[
+        {
+          quote_constraint_type: String,
+          value: String
+        }
+      ],
+      ?requested_payment_options: Array[String],
+      ?requested_payment_terms: Array[String],
+      ?description: String
+    ) -> _UpdateQuoteResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateQuoteResponse
 
     interface _UpdateSiteResponse
       include Smithy::Client::_Response[Types::UpdateSiteOutput]

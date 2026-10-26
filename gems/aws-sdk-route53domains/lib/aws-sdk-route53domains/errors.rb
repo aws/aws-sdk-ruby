@@ -27,6 +27,7 @@ module Aws::Route53Domains
   # * {DuplicateRequest}
   # * {InvalidInput}
   # * {OperationLimitExceeded}
+  # * {TLDInMaintenance}
   # * {TLDRulesViolation}
   # * {UnsupportedTLD}
   #
@@ -115,6 +116,25 @@ module Aws::Route53Domains
       # 			account.</p>
       def message
         @data[:message]
+      end
+    end
+
+    # <p>The top-level domain is currently undergoing maintenance and the request cannot be processed. Try again later.</p>
+    class TLDInMaintenance < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::Route53Domains::Types::TLDInMaintenance] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      # <p>The top-level domain is currently undergoing maintenance and the request cannot be processed. Try again later.</p>
+      def message
+        @data[:message]
+      end
+
+      # <p>The top-level domain that is currently undergoing maintenance.</p>
+      def tld
+        @data[:tld]
       end
     end
 

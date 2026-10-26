@@ -27,6 +27,7 @@ module Aws::KinesisVideo
     DataEndpoint = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.kinesisvideo#DataEndpoint", name: "DataEndpoint")
     DataRetentionChangeInHours = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.kinesisvideo#DataRetentionChangeInHours", name: "DataRetentionChangeInHours", traits: {"smithy.api#range" => {"min" => 1}})
     DataRetentionInHours = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.kinesisvideo#DataRetentionInHours", name: "DataRetentionInHours", traits: {"smithy.api#range" => {"min" => 0}})
+    DefaultStorageTier = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.kinesisvideo#DefaultStorageTier", name: "DefaultStorageTier")
     DeleteAfterUpload = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.kinesisvideo#DeleteAfterUpload", name: "DeleteAfterUpload")
     DeleteEdgeConfigurationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kinesisvideo#DeleteEdgeConfigurationInput", name: "DeleteEdgeConfigurationInput")
     DeleteEdgeConfigurationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kinesisvideo#DeleteEdgeConfigurationOutput", name: "DeleteEdgeConfigurationOutput")
@@ -49,6 +50,8 @@ module Aws::KinesisVideo
     DescribeSignalingChannelOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kinesisvideo#DescribeSignalingChannelOutput", name: "DescribeSignalingChannelOutput")
     DescribeStreamInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kinesisvideo#DescribeStreamInput", name: "DescribeStreamInput")
     DescribeStreamOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kinesisvideo#DescribeStreamOutput", name: "DescribeStreamOutput")
+    DescribeStreamStorageConfigurationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kinesisvideo#DescribeStreamStorageConfigurationInput", name: "DescribeStreamStorageConfigurationInput")
+    DescribeStreamStorageConfigurationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kinesisvideo#DescribeStreamStorageConfigurationOutput", name: "DescribeStreamStorageConfigurationOutput")
     DestinationRegion = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.kinesisvideo#DestinationRegion", name: "DestinationRegion", traits: {"smithy.api#length" => {"min" => 9, "max" => 14}, "smithy.api#pattern" => "^[a-z]+(-[a-z]+)?-[a-z]+-[0-9]$"})
     DestinationUri = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.kinesisvideo#DestinationUri", name: "DestinationUri", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => "^[a-zA-Z_0-9]+:(//)?([^/]+)/?([^*]*)$"})
     DeviceName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.kinesisvideo#DeviceName", name: "DeviceName", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[a-zA-Z0-9_.-]+$"})
@@ -134,6 +137,7 @@ module Aws::KinesisVideo
     StreamInfoList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.kinesisvideo#StreamInfoList", name: "StreamInfoList")
     StreamName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.kinesisvideo#StreamName", name: "StreamName", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[a-zA-Z0-9_.-]+$"})
     StreamNameCondition = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kinesisvideo#StreamNameCondition", name: "StreamNameCondition")
+    StreamStorageConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kinesisvideo#StreamStorageConfiguration", name: "StreamStorageConfiguration")
     SyncStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.kinesisvideo#SyncStatus", name: "SyncStatus")
     Tag = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kinesisvideo#Tag", name: "Tag")
     TagKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.kinesisvideo#TagKey", name: "TagKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"})
@@ -165,6 +169,8 @@ module Aws::KinesisVideo
     UpdateSignalingChannelOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kinesisvideo#UpdateSignalingChannelOutput", name: "UpdateSignalingChannelOutput")
     UpdateStreamInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kinesisvideo#UpdateStreamInput", name: "UpdateStreamInput")
     UpdateStreamOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kinesisvideo#UpdateStreamOutput", name: "UpdateStreamOutput")
+    UpdateStreamStorageConfigurationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kinesisvideo#UpdateStreamStorageConfigurationInput", name: "UpdateStreamStorageConfigurationInput")
+    UpdateStreamStorageConfigurationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kinesisvideo#UpdateStreamStorageConfigurationOutput", name: "UpdateStreamStorageConfigurationOutput")
     UploaderConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kinesisvideo#UploaderConfig", name: "UploaderConfig")
     UploaderStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.kinesisvideo#UploaderStatus", name: "UploaderStatus")
     Version = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.kinesisvideo#Version", name: "Version", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[a-zA-Z0-9]+$"})
@@ -222,9 +228,12 @@ module Aws::KinesisVideo
     CreateStreamInput.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, name: "KmsKeyId"))
     CreateStreamInput.add_member(:data_retention_in_hours, ::Smithy::Schema::Shapes::MemberShape.new(target: DataRetentionInHours, name: "DataRetentionInHours"))
     CreateStreamInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTags, name: "Tags"))
+    CreateStreamInput.add_member(:stream_storage_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamStorageConfiguration, name: "StreamStorageConfiguration"))
     CreateStreamInput.type = Types::CreateStreamInput
     CreateStreamOutput.add_member(:stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, name: "StreamARN"))
     CreateStreamOutput.type = Types::CreateStreamOutput
+    DefaultStorageTier.add_member(:hot, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HOT", traits: {"smithy.api#enumValue" => "HOT"}))
+    DefaultStorageTier.add_member(:warm, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WARM", traits: {"smithy.api#enumValue" => "WARM"}))
     DeleteEdgeConfigurationInput.add_member(:stream_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamName, name: "StreamName"))
     DeleteEdgeConfigurationInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, name: "StreamARN"))
     DeleteEdgeConfigurationInput.type = Types::DeleteEdgeConfigurationInput
@@ -286,6 +295,13 @@ module Aws::KinesisVideo
     DescribeStreamInput.type = Types::DescribeStreamInput
     DescribeStreamOutput.add_member(:stream_info, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamInfo, name: "StreamInfo"))
     DescribeStreamOutput.type = Types::DescribeStreamOutput
+    DescribeStreamStorageConfigurationInput.add_member(:stream_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamName, name: "StreamName"))
+    DescribeStreamStorageConfigurationInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, name: "StreamARN"))
+    DescribeStreamStorageConfigurationInput.type = Types::DescribeStreamStorageConfigurationInput
+    DescribeStreamStorageConfigurationOutput.add_member(:stream_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamName, name: "StreamName"))
+    DescribeStreamStorageConfigurationOutput.add_member(:stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, name: "StreamARN"))
+    DescribeStreamStorageConfigurationOutput.add_member(:stream_storage_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamStorageConfiguration, name: "StreamStorageConfiguration"))
+    DescribeStreamStorageConfigurationOutput.type = Types::DescribeStreamStorageConfigurationOutput
     DeviceStreamLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     DeviceStreamLimitExceededException.type = Types::DeviceStreamLimitExceededException
     EdgeAgentStatus.add_member(:last_recorder_status, ::Smithy::Schema::Shapes::MemberShape.new(target: LastRecorderStatus, name: "LastRecorderStatus"))
@@ -470,6 +486,8 @@ module Aws::KinesisVideo
     StreamNameCondition.add_member(:comparison_operator, ::Smithy::Schema::Shapes::MemberShape.new(target: ComparisonOperator, name: "ComparisonOperator"))
     StreamNameCondition.add_member(:comparison_value, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamName, name: "ComparisonValue"))
     StreamNameCondition.type = Types::StreamNameCondition
+    StreamStorageConfiguration.add_member(:default_storage_tier, ::Smithy::Schema::Shapes::MemberShape.new(target: DefaultStorageTier, name: "DefaultStorageTier", traits: {"smithy.api#required" => {}}))
+    StreamStorageConfiguration.type = Types::StreamStorageConfiguration
     SyncStatus.add_member(:syncing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SYNCING", traits: {"smithy.api#enumValue" => "SYNCING"}))
     SyncStatus.add_member(:acknowledged, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACKNOWLEDGED", traits: {"smithy.api#enumValue" => "ACKNOWLEDGED"}))
     SyncStatus.add_member(:in_sync, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_SYNC", traits: {"smithy.api#enumValue" => "IN_SYNC"}))
@@ -538,6 +556,12 @@ module Aws::KinesisVideo
     UpdateStreamInput.add_member(:media_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MediaType, name: "MediaType"))
     UpdateStreamInput.type = Types::UpdateStreamInput
     UpdateStreamOutput.type = Types::UpdateStreamOutput
+    UpdateStreamStorageConfigurationInput.add_member(:stream_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamName, name: "StreamName"))
+    UpdateStreamStorageConfigurationInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, name: "StreamARN"))
+    UpdateStreamStorageConfigurationInput.add_member(:current_version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, name: "CurrentVersion", traits: {"smithy.api#required" => {}}))
+    UpdateStreamStorageConfigurationInput.add_member(:stream_storage_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamStorageConfiguration, name: "StreamStorageConfiguration", traits: {"smithy.api#required" => {}}))
+    UpdateStreamStorageConfigurationInput.type = Types::UpdateStreamStorageConfigurationInput
+    UpdateStreamStorageConfigurationOutput.type = Types::UpdateStreamStorageConfigurationOutput
     UploaderConfig.add_member(:schedule_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleConfig, name: "ScheduleConfig", traits: {"smithy.api#required" => {}}))
     UploaderConfig.type = Types::UploaderConfig
     UploaderStatus.add_member(:success, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCESS", traits: {"smithy.api#enumValue" => "SUCCESS"}))
@@ -550,7 +574,7 @@ module Aws::KinesisVideo
       service.id = "com.amazonaws.kinesisvideo#KinesisVideo_20170930"
       service.name = "KinesisVideo20170930"
       service.version = "2017-09-30"
-      service.traits = {"aws.api#service" => {"sdkId" => "Kinesis Video", "arnNamespace" => "kinesisvideo", "cloudFormationName" => "KinesisVideo", "cloudTrailEventSource" => "kinesisvideo.amazonaws.com", "docId" => "kinesisvideo-2017-09-30", "endpointPrefix" => "kinesisvideo"}, "aws.auth#sigv4" => {"name" => "kinesisvideo"}, "aws.protocols#restJson1" => {}, "smithy.api#title" => "Amazon Kinesis Video Streams", "smithy.api#xmlNamespace" => {"uri" => "https://kinesisvideo.amazonaws.com/doc/2017-09-30/"}}
+      service.traits = {"aws.api#service" => {"sdkId" => "Kinesis Video", "arnNamespace" => "kinesisvideo", "cloudFormationName" => "KinesisVideo", "cloudTrailEventSource" => "kinesisvideo.amazonaws.com", "docId" => "kinesisvideo-2017-09-30", "endpointPrefix" => "kinesisvideo"}, "aws.auth#sigv4" => {"name" => "kinesisvideo"}, "aws.protocols#restJson1" => {}, "smithy.api#title" => "Amazon Kinesis Video Streams", "smithy.api#xmlNamespace" => {"uri" => "https://kinesisvideo.amazonaws.com/doc/2017-09-30/"}, "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://kinesisvideo-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://kinesisvideo-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://kinesisvideo.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://kinesisvideo.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
       service.add_operation(:create_signaling_channel, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kinesisvideo#CreateSignalingChannel"
         operation.name = "CreateSignalingChannel"
@@ -694,6 +718,17 @@ module Aws::KinesisVideo
         operation.errors << NotAuthorizedException
         operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/describeStream", "code" => 200}}
+      end)
+      service.add_operation(:describe_stream_storage_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.kinesisvideo#DescribeStreamStorageConfiguration"
+        operation.name = "DescribeStreamStorageConfiguration"
+        operation.input = DescribeStreamStorageConfigurationInput
+        operation.output = DescribeStreamStorageConfigurationOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ClientLimitExceededException
+        operation.errors << InvalidArgumentException
+        operation.errors << ResourceNotFoundException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/describeStreamStorageConfiguration", "code" => 200}}
       end)
       service.add_operation(:get_data_endpoint, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kinesisvideo#GetDataEndpoint"
@@ -911,6 +946,19 @@ module Aws::KinesisVideo
         operation.errors << ResourceNotFoundException
         operation.errors << VersionMismatchException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/updateStream", "code" => 200}}
+      end)
+      service.add_operation(:update_stream_storage_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.kinesisvideo#UpdateStreamStorageConfiguration"
+        operation.name = "UpdateStreamStorageConfiguration"
+        operation.input = UpdateStreamStorageConfigurationInput
+        operation.output = UpdateStreamStorageConfigurationOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ClientLimitExceededException
+        operation.errors << InvalidArgumentException
+        operation.errors << ResourceInUseException
+        operation.errors << ResourceNotFoundException
+        operation.errors << VersionMismatchException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/updateStreamStorageConfiguration", "code" => 200}}
       end)
     end
 

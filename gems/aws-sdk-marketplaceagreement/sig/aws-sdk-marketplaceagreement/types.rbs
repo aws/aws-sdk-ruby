@@ -1,6 +1,108 @@
 module Aws::MarketplaceAgreement
   module Types
 
+    class AcceptAgreementCancellationRequestInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agreement_id: String,
+        ?agreement_cancellation_request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agreement_id: String?
+      attr_accessor agreement_cancellation_request_id: String?
+    end
+
+    class AcceptAgreementCancellationRequestOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agreement_id: String,
+        ?agreement_cancellation_request_id: String,
+        ?status: String,
+        ?reason_code: String,
+        ?description: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agreement_id: String?
+      attr_accessor agreement_cancellation_request_id: String?
+      attr_accessor status: String?
+      attr_accessor reason_code: String?
+      attr_accessor description: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class AcceptAgreementPaymentRequestInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?payment_request_id: String,
+        ?agreement_id: String,
+        ?purchase_order_reference: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor payment_request_id: String?
+      attr_accessor agreement_id: String?
+      attr_accessor purchase_order_reference: String?
+    end
+
+    class AcceptAgreementPaymentRequestOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?payment_request_id: String,
+        ?agreement_id: String,
+        ?status: String,
+        ?name: String,
+        ?description: String,
+        ?charge_amount: String,
+        ?currency_code: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor payment_request_id: String?
+      attr_accessor agreement_id: String?
+      attr_accessor status: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor charge_amount: String?
+      attr_accessor currency_code: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class AcceptAgreementRequestInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agreement_request_id: String,
+        ?purchase_orders: Array[Types::PurchaseOrder],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agreement_request_id: String?
+      attr_accessor purchase_orders: Array[Types::PurchaseOrder]?
+    end
+
+    class AcceptAgreementRequestOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agreement_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agreement_id: String?
+    end
+
     class AcceptedTerm
       include Smithy::Schema::Union
 
@@ -16,6 +118,8 @@ module Aws::MarketplaceAgreement
         ?payment_schedule_term: Types::PaymentScheduleTerm,
         ?free_trial_pricing_term: Types::FreeTrialPricingTerm,
         ?fixed_upfront_pricing_term: Types::FixedUpfrontPricingTerm,
+        ?variable_payment_term: Types::VariablePaymentTerm,
+        ?net_payment_term: Types::NetPaymentTerm,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -30,6 +134,8 @@ module Aws::MarketplaceAgreement
       attr_accessor payment_schedule_term: Types::PaymentScheduleTerm?
       attr_accessor free_trial_pricing_term: Types::FreeTrialPricingTerm?
       attr_accessor fixed_upfront_pricing_term: Types::FixedUpfrontPricingTerm?
+      attr_accessor variable_payment_term: Types::VariablePaymentTerm?
+      attr_accessor net_payment_term: Types::NetPaymentTerm?
 
       class LegalTerm < AcceptedTerm
       end
@@ -53,6 +159,10 @@ module Aws::MarketplaceAgreement
       end
       class FixedUpfrontPricingTerm < AcceptedTerm
       end
+      class VariablePaymentTerm < AcceptedTerm
+      end
+      class NetPaymentTerm < AcceptedTerm
+      end
       class Unknown < AcceptedTerm
       end
     end
@@ -74,11 +184,129 @@ module Aws::MarketplaceAgreement
       def initialize: (
         ?request_id: String,
         ?message: String,
+        ?reason: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor request_id: String?
       attr_accessor message: String?
+      attr_accessor reason: String?
+    end
+
+    module AccessDeniedExceptionReason
+      INVALID_ACCOUNT_STATE: String
+      DENIED_BY_PRIVATE_MARKETPLACE_POLICY: String
+      FAILED_KYC_COMPLIANCE: String
+      MISSING_MFA: String
+      INVALID_ACCESS: String
+    end
+
+    module AgreementCancellationRequestReasonCode
+      INCORRECT_TERMS_ACCEPTED: String
+      REPLACING_AGREEMENT: String
+      TEST_AGREEMENT: String
+      ALTERNATIVE_PROCUREMENT_CHANNEL: String
+      PRODUCT_DISCONTINUED: String
+      UNINTENDED_RENEWAL: String
+      BUYER_DISSATISFACTION: String
+      OTHER: String
+    end
+
+    module AgreementCancellationRequestStatus
+      PENDING_APPROVAL: String
+      APPROVED: String
+      REJECTED: String
+      CANCELLED: String
+      VALIDATION_FAILED: String
+    end
+
+    class AgreementCancellationRequestSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agreement_cancellation_request_id: String,
+        ?agreement_id: String,
+        ?status: String,
+        ?reason_code: String,
+        ?agreement_type: String,
+        ?catalog: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agreement_cancellation_request_id: String?
+      attr_accessor agreement_id: String?
+      attr_accessor status: String?
+      attr_accessor reason_code: String?
+      attr_accessor agreement_type: String?
+      attr_accessor catalog: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class AgreementEntitlement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource: Types::Resource,
+        ?type: String,
+        ?registration_token: String,
+        ?status: String,
+        ?status_reason_code: String,
+        ?license_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource: Types::Resource?
+      attr_accessor type: String?
+      attr_accessor registration_token: String?
+      attr_accessor status: String?
+      attr_accessor status_reason_code: String?
+      attr_accessor license_arn: String?
+    end
+
+    module AgreementEntitlementStatus
+      PROVISIONED: String
+      SCHEDULED: String
+      PENDING: String
+      FAILED: String
+      DEPROVISIONED: String
+    end
+
+    module AgreementEntitlementStatusReasonCode
+      PROVISIONING_IN_PROGRESS: String
+      FUTURE_START_DATE: String
+      INVALID_PAYMENT_INSTRUMENT: String
+      INCOMPATIBLE_CURRENCY: String
+      ACCOUNT_SUSPENDED: String
+      UNSUPPORTED_OPERATION: String
+      AGREEMENT_INACTIVE: String
+      AGREEMENT_ACTIVE: String
+      PRODUCT_RESTRICTED: String
+    end
+
+    class AgreementInvoiceLineItemGroupSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agreement_id: String,
+        ?invoice_id: String,
+        ?pricing_currency_amount: Types::PricingCurrencyAmount,
+        ?invoice_billing_period: Types::InvoiceBillingPeriod,
+        ?issued_time: Time,
+        ?invoice_type: String,
+        ?invoicing_entity: Types::InvoicingEntity,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agreement_id: String?
+      attr_accessor invoice_id: String?
+      attr_accessor pricing_currency_amount: Types::PricingCurrencyAmount?
+      attr_accessor invoice_billing_period: Types::InvoiceBillingPeriod?
+      attr_accessor issued_time: Time?
+      attr_accessor invoice_type: String?
+      attr_accessor invoicing_entity: Types::InvoicingEntity?
     end
 
     module AgreementStatus
@@ -101,11 +329,16 @@ module Aws::MarketplaceAgreement
         ?acceptance_time: Time,
         ?start_time: Time,
         ?end_time: Time,
+        ?last_update_time: Time,
         ?agreement_type: String,
         ?acceptor: Types::Acceptor,
         ?proposer: Types::Proposer,
         ?proposal_summary: Types::ProposalSummary,
         ?status: String,
+        ?entitlements: Array[Types::Entitlement],
+        ?initial_agreement_id: String,
+        ?end_time_behavior_type: String,
+        ?end_time_behavior_reason_code: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -113,11 +346,143 @@ module Aws::MarketplaceAgreement
       attr_accessor acceptance_time: Time?
       attr_accessor start_time: Time?
       attr_accessor end_time: Time?
+      attr_accessor last_update_time: Time?
       attr_accessor agreement_type: String?
       attr_accessor acceptor: Types::Acceptor?
       attr_accessor proposer: Types::Proposer?
       attr_accessor proposal_summary: Types::ProposalSummary?
       attr_accessor status: String?
+      attr_accessor entitlements: Array[Types::Entitlement]?
+      attr_accessor initial_agreement_id: String?
+      attr_accessor end_time_behavior_type: String?
+      attr_accessor end_time_behavior_reason_code: String?
+    end
+
+    class BatchCreateBillingAdjustmentError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+      attr_accessor client_token: String?
+    end
+
+    class BatchCreateBillingAdjustmentItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?billing_adjustment_request_id: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor billing_adjustment_request_id: String?
+      attr_accessor client_token: String?
+    end
+
+    class BatchCreateBillingAdjustmentRequestEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agreement_id: String,
+        ?original_invoice_id: String,
+        ?adjustment_amount: String,
+        ?currency_code: String,
+        ?adjustment_reason_code: String,
+        ?description: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agreement_id: String?
+      attr_accessor original_invoice_id: String?
+      attr_accessor adjustment_amount: String?
+      attr_accessor currency_code: String?
+      attr_accessor adjustment_reason_code: String?
+      attr_accessor description: String?
+      attr_accessor client_token: String?
+    end
+
+    class BatchCreateBillingAdjustmentRequestInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?billing_adjustment_request_entries: Array[Types::BatchCreateBillingAdjustmentRequestEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor billing_adjustment_request_entries: Array[Types::BatchCreateBillingAdjustmentRequestEntry]?
+    end
+
+    class BatchCreateBillingAdjustmentRequestOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::BatchCreateBillingAdjustmentItem],
+        ?errors: Array[Types::BatchCreateBillingAdjustmentError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::BatchCreateBillingAdjustmentItem]?
+      attr_accessor errors: Array[Types::BatchCreateBillingAdjustmentError]?
+    end
+
+    module BillingAdjustmentErrorCode
+      CONFLICT_EXCEPTION: String
+      VALIDATION_EXCEPTION: String
+      RESOURCE_NOT_FOUND_EXCEPTION: String
+      INTERNAL_FAILURE: String
+    end
+
+    module BillingAdjustmentReasonCode
+      INCORRECT_TERMS_ACCEPTED: String
+      INCORRECT_METERING: String
+      TEST_ENVIRONMENT_CHARGES: String
+      ALTERNATIVE_PROCUREMENT_CHANNEL: String
+      UNINTENDED_RENEWAL: String
+      BUYER_DISSATISFACTION: String
+      OTHER: String
+    end
+
+    module BillingAdjustmentStatus
+      PENDING: String
+      VALIDATION_FAILED: String
+      COMPLETED: String
+    end
+
+    class BillingAdjustmentSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?billing_adjustment_request_id: String,
+        ?original_invoice_id: String,
+        ?adjustment_amount: String,
+        ?currency_code: String,
+        ?status: String,
+        ?agreement_id: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?agreement_type: String,
+        ?catalog: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor billing_adjustment_request_id: String?
+      attr_accessor original_invoice_id: String?
+      attr_accessor adjustment_amount: String?
+      attr_accessor currency_code: String?
+      attr_accessor status: String?
+      attr_accessor agreement_id: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor agreement_type: String?
+      attr_accessor catalog: String?
     end
 
     class ByolPricingTerm
@@ -125,10 +490,160 @@ module Aws::MarketplaceAgreement
 
       def initialize: (
         ?type: String,
+        ?id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor type: String?
+      attr_accessor id: String?
+    end
+
+    class CancelAgreementCancellationRequestInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agreement_id: String,
+        ?agreement_cancellation_request_id: String,
+        ?cancellation_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agreement_id: String?
+      attr_accessor agreement_cancellation_request_id: String?
+      attr_accessor cancellation_reason: String?
+    end
+
+    class CancelAgreementCancellationRequestOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agreement_cancellation_request_id: String,
+        ?agreement_id: String,
+        ?reason_code: String,
+        ?description: String,
+        ?status: String,
+        ?status_message: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agreement_cancellation_request_id: String?
+      attr_accessor agreement_id: String?
+      attr_accessor reason_code: String?
+      attr_accessor description: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class CancelAgreementInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agreement_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agreement_id: String?
+    end
+
+    class CancelAgreementOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CancelAgreementPaymentRequestInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?payment_request_id: String,
+        ?agreement_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor payment_request_id: String?
+      attr_accessor agreement_id: String?
+    end
+
+    class CancelAgreementPaymentRequestOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?payment_request_id: String,
+        ?agreement_id: String,
+        ?status: String,
+        ?name: String,
+        ?description: String,
+        ?charge_amount: String,
+        ?currency_code: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor payment_request_id: String?
+      attr_accessor agreement_id: String?
+      attr_accessor status: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor charge_amount: String?
+      attr_accessor currency_code: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class Charge
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?revision: Integer,
+        ?agreement_id: String,
+        ?agreement_type: String,
+        ?purchase_order_reference: String,
+        ?currency_code: String,
+        ?amount: String,
+        ?time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor revision: Integer?
+      attr_accessor agreement_id: String?
+      attr_accessor agreement_type: String?
+      attr_accessor purchase_order_reference: String?
+      attr_accessor currency_code: String?
+      attr_accessor amount: String?
+      attr_accessor time: Time?
+    end
+
+    class ChargeSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?currency_code: String,
+        ?new_agreement_value: String,
+        ?new_agreement_value_after_tax: String,
+        ?expected_charges: Array[Types::ExpectedCharge],
+        ?estimated_taxes: Types::EstimatedTaxes,
+        ?itemized_charges: Array[Types::ItemizedCharge],
+        ?invoicing_entity: Types::InvoicingEntity,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor currency_code: String?
+      attr_accessor new_agreement_value: String?
+      attr_accessor new_agreement_value_after_tax: String?
+      attr_accessor expected_charges: Array[Types::ExpectedCharge]?
+      attr_accessor estimated_taxes: Types::EstimatedTaxes?
+      attr_accessor itemized_charges: Array[Types::ItemizedCharge]?
+      attr_accessor invoicing_entity: Types::InvoicingEntity?
     end
 
     class ConfigurableUpfrontPricingTerm
@@ -136,6 +651,7 @@ module Aws::MarketplaceAgreement
 
       def initialize: (
         ?type: String,
+        ?id: String,
         ?currency_code: String,
         ?rate_cards: Array[Types::ConfigurableUpfrontRateCardItem],
         ?configuration: Types::ConfigurableUpfrontPricingTermConfiguration,
@@ -143,6 +659,7 @@ module Aws::MarketplaceAgreement
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor type: String?
+      attr_accessor id: String?
       attr_accessor currency_code: String?
       attr_accessor rate_cards: Array[Types::ConfigurableUpfrontRateCardItem]?
       attr_accessor configuration: Types::ConfigurableUpfrontPricingTermConfiguration?
@@ -176,6 +693,23 @@ module Aws::MarketplaceAgreement
       attr_accessor rate_card: Array[Types::RateCardItem]?
     end
 
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?request_id: String,
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor request_id: String?
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
     class Constraints
       include Smithy::Schema::Structure
 
@@ -187,6 +721,40 @@ module Aws::MarketplaceAgreement
 
       attr_accessor multiple_dimension_selection: String?
       attr_accessor quantity_configuration: String?
+    end
+
+    class CreateAgreementRequestInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?intent: String,
+        ?requested_terms: Array[Types::RequestedTerm],
+        ?source_agreement_identifier: String,
+        ?agreement_proposal_identifier: String,
+        ?tax_configuration: Types::TaxConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor intent: String?
+      attr_accessor requested_terms: Array[Types::RequestedTerm]?
+      attr_accessor source_agreement_identifier: String?
+      attr_accessor agreement_proposal_identifier: String?
+      attr_accessor tax_configuration: Types::TaxConfiguration?
+    end
+
+    class CreateAgreementRequestOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agreement_request_id: String,
+        ?charge_summary: Types::ChargeSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agreement_request_id: String?
+      attr_accessor charge_summary: Types::ChargeSummary?
     end
 
     class DescribeAgreementInput
@@ -214,6 +782,8 @@ module Aws::MarketplaceAgreement
         ?estimated_charges: Types::EstimatedCharges,
         ?proposal_summary: Types::ProposalSummary,
         ?status: String,
+        ?initial_agreement_id: String,
+        ?end_time_behavior: Types::EndTimeBehavior,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -227,6 +797,8 @@ module Aws::MarketplaceAgreement
       attr_accessor estimated_charges: Types::EstimatedCharges?
       attr_accessor proposal_summary: Types::ProposalSummary?
       attr_accessor status: String?
+      attr_accessor initial_agreement_id: String?
+      attr_accessor end_time_behavior: Types::EndTimeBehavior?
     end
 
     class Dimension
@@ -257,6 +829,45 @@ module Aws::MarketplaceAgreement
       attr_accessor version: String?
     end
 
+    class EndTimeBehavior
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?reason_code: String,
+        ?renewal_summary: Types::RenewalSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor reason_code: String?
+      attr_accessor renewal_summary: Types::RenewalSummary?
+    end
+
+    module EndTimeBehaviorReasonCode
+      PROPOSER_RENEW_OPTED_OUT: String
+      ACCEPTOR_RENEW_OPTED_OUT: String
+      NO_RENEWAL_TERM: String
+      RENEWAL_LIMIT_EXHAUSTED: String
+    end
+
+    module EndTimeBehaviorType
+      RENEW: String
+      REPLACE: String
+      EXPIRE: String
+    end
+
+    class Entitlement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_arn: String?
+    end
+
     class EstimatedCharges
       include Smithy::Schema::Structure
 
@@ -268,6 +879,40 @@ module Aws::MarketplaceAgreement
 
       attr_accessor currency_code: String?
       attr_accessor agreement_value: String?
+    end
+
+    class EstimatedTaxes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?breakdown: Array[Types::TaxBreakdownItem],
+        ?total_amount: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor breakdown: Array[Types::TaxBreakdownItem]?
+      attr_accessor total_amount: String?
+    end
+
+    class ExpectedCharge
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?time: Time,
+        ?amount: String,
+        ?amount_after_tax: String,
+        ?timing: String,
+        ?estimated_taxes: Types::EstimatedTaxes,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor time: Time?
+      attr_accessor amount: String?
+      attr_accessor amount_after_tax: String?
+      attr_accessor timing: String?
+      attr_accessor estimated_taxes: Types::EstimatedTaxes?
     end
 
     class Filter
@@ -283,11 +928,23 @@ module Aws::MarketplaceAgreement
       attr_accessor values: Array[String]?
     end
 
+    class FixedPercentage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: String?
+    end
+
     class FixedUpfrontPricingTerm
       include Smithy::Schema::Structure
 
       def initialize: (
         ?type: String,
+        ?id: String,
         ?currency_code: String,
         ?duration: String,
         ?price: String,
@@ -296,6 +953,7 @@ module Aws::MarketplaceAgreement
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor type: String?
+      attr_accessor id: String?
       attr_accessor currency_code: String?
       attr_accessor duration: String?
       attr_accessor price: String?
@@ -307,14 +965,126 @@ module Aws::MarketplaceAgreement
 
       def initialize: (
         ?type: String,
+        ?id: String,
         ?duration: String,
         ?grants: Array[Types::GrantItem],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor type: String?
+      attr_accessor id: String?
       attr_accessor duration: String?
       attr_accessor grants: Array[Types::GrantItem]?
+    end
+
+    class GetAgreementCancellationRequestInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agreement_cancellation_request_id: String,
+        ?agreement_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agreement_cancellation_request_id: String?
+      attr_accessor agreement_id: String?
+    end
+
+    class GetAgreementCancellationRequestOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agreement_cancellation_request_id: String,
+        ?agreement_id: String,
+        ?reason_code: String,
+        ?description: String,
+        ?status: String,
+        ?status_message: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agreement_cancellation_request_id: String?
+      attr_accessor agreement_id: String?
+      attr_accessor reason_code: String?
+      attr_accessor description: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class GetAgreementEntitlementsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agreement_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agreement_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class GetAgreementEntitlementsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agreement_entitlements: Array[Types::AgreementEntitlement],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agreement_entitlements: Array[Types::AgreementEntitlement]?
+      attr_accessor next_token: String?
+    end
+
+    class GetAgreementPaymentRequestInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?payment_request_id: String,
+        ?agreement_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor payment_request_id: String?
+      attr_accessor agreement_id: String?
+    end
+
+    class GetAgreementPaymentRequestOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?payment_request_id: String,
+        ?agreement_id: String,
+        ?status: String,
+        ?status_message: String,
+        ?name: String,
+        ?description: String,
+        ?charge_id: String,
+        ?charge_amount: String,
+        ?currency_code: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor payment_request_id: String?
+      attr_accessor agreement_id: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor charge_id: String?
+      attr_accessor charge_amount: String?
+      attr_accessor currency_code: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
     end
 
     class GetAgreementTermsInput
@@ -345,6 +1115,50 @@ module Aws::MarketplaceAgreement
       attr_accessor next_token: String?
     end
 
+    class GetBillingAdjustmentRequestInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agreement_id: String,
+        ?billing_adjustment_request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agreement_id: String?
+      attr_accessor billing_adjustment_request_id: String?
+    end
+
+    class GetBillingAdjustmentRequestOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?billing_adjustment_request_id: String,
+        ?agreement_id: String,
+        ?adjustment_reason_code: String,
+        ?description: String,
+        ?original_invoice_id: String,
+        ?adjustment_amount: String,
+        ?currency_code: String,
+        ?status: String,
+        ?status_message: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor billing_adjustment_request_id: String?
+      attr_accessor agreement_id: String?
+      attr_accessor adjustment_reason_code: String?
+      attr_accessor description: String?
+      attr_accessor original_invoice_id: String?
+      attr_accessor adjustment_amount: String?
+      attr_accessor currency_code: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
     class GrantItem
       include Smithy::Schema::Structure
 
@@ -356,6 +1170,12 @@ module Aws::MarketplaceAgreement
 
       attr_accessor dimension_key: String?
       attr_accessor max_quantity: Integer?
+    end
+
+    module Intent
+      NEW: String
+      AMEND: String
+      REPLACE: String
     end
 
     class InternalServerException
@@ -371,17 +1191,326 @@ module Aws::MarketplaceAgreement
       attr_accessor message: String?
     end
 
+    class InvoiceBillingPeriod
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?month: Integer,
+        ?year: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor month: Integer?
+      attr_accessor year: Integer?
+    end
+
+    module InvoiceType
+      INVOICE: String
+      CREDIT_MEMO: String
+    end
+
+    class InvoicingEntity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?legal_name: String,
+        ?branch_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor legal_name: String?
+      attr_accessor branch_name: String?
+    end
+
+    class ItemizedCharge
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dimension_key: String,
+        ?new_quantity: Integer,
+        ?old_quantity: Integer,
+        ?charge_reference: String,
+        ?incremental_charge_amount: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dimension_key: String?
+      attr_accessor new_quantity: Integer?
+      attr_accessor old_quantity: Integer?
+      attr_accessor charge_reference: String?
+      attr_accessor incremental_charge_amount: String?
+    end
+
     class LegalTerm
       include Smithy::Schema::Structure
 
       def initialize: (
         ?type: String,
+        ?id: String,
         ?documents: Array[Types::DocumentItem],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor type: String?
+      attr_accessor id: String?
       attr_accessor documents: Array[Types::DocumentItem]?
+    end
+
+    module LineItemGroupBy
+      INVOICE_ID: String
+    end
+
+    class ListAgreementCancellationRequestsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?party_type: String,
+        ?agreement_id: String,
+        ?status: String,
+        ?agreement_type: String,
+        ?catalog: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor party_type: String?
+      attr_accessor agreement_id: String?
+      attr_accessor status: String?
+      attr_accessor agreement_type: String?
+      attr_accessor catalog: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListAgreementCancellationRequestsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?items: Array[Types::AgreementCancellationRequestSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor items: Array[Types::AgreementCancellationRequestSummary]?
+    end
+
+    class ListAgreementChargesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?agreement_id: String,
+        ?agreement_type: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor agreement_id: String?
+      attr_accessor agreement_type: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListAgreementChargesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::Charge],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::Charge]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAgreementInvoiceLineItemsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agreement_id: String,
+        ?group_by: String,
+        ?invoice_id: String,
+        ?invoice_type: String,
+        ?invoice_billing_period: Types::InvoiceBillingPeriod,
+        ?before_issued_time: Time,
+        ?after_issued_time: Time,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agreement_id: String?
+      attr_accessor group_by: String?
+      attr_accessor invoice_id: String?
+      attr_accessor invoice_type: String?
+      attr_accessor invoice_billing_period: Types::InvoiceBillingPeriod?
+      attr_accessor before_issued_time: Time?
+      attr_accessor after_issued_time: Time?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListAgreementInvoiceLineItemsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agreement_invoice_line_item_group_summaries: Array[Types::AgreementInvoiceLineItemGroupSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agreement_invoice_line_item_group_summaries: Array[Types::AgreementInvoiceLineItemGroupSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAgreementPaymentRequestsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?party_type: String,
+        ?agreement_type: String,
+        ?catalog: String,
+        ?agreement_id: String,
+        ?status: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor party_type: String?
+      attr_accessor agreement_type: String?
+      attr_accessor catalog: String?
+      attr_accessor agreement_id: String?
+      attr_accessor status: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListAgreementPaymentRequestsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?items: Array[Types::PaymentRequestSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor items: Array[Types::PaymentRequestSummary]?
+    end
+
+    class ListBillingAdjustmentRequestsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agreement_id: String,
+        ?status: String,
+        ?created_after: Time,
+        ?created_before: Time,
+        ?max_results: Integer,
+        ?catalog: String,
+        ?agreement_type: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agreement_id: String?
+      attr_accessor status: String?
+      attr_accessor created_after: Time?
+      attr_accessor created_before: Time?
+      attr_accessor max_results: Integer?
+      attr_accessor catalog: String?
+      attr_accessor agreement_type: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListBillingAdjustmentRequestsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?items: Array[Types::BillingAdjustmentSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor items: Array[Types::BillingAdjustmentSummary]?
+    end
+
+    class NetPaymentTerm
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?id: String,
+        ?payment_due_period: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor id: String?
+      attr_accessor payment_due_period: String?
+    end
+
+    module PaymentRequestApprovalStrategy
+      AUTO_APPROVE_ON_EXPIRATION: String
+      WAIT_FOR_APPROVAL: String
+    end
+
+    module PaymentRequestStatus
+      VALIDATING: String
+      VALIDATION_FAILED: String
+      PENDING_APPROVAL: String
+      APPROVED: String
+      REJECTED: String
+      CANCELLED: String
+    end
+
+    class PaymentRequestSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?payment_request_id: String,
+        ?agreement_id: String,
+        ?status: String,
+        ?name: String,
+        ?charge_id: String,
+        ?charge_amount: String,
+        ?currency_code: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor payment_request_id: String?
+      attr_accessor agreement_id: String?
+      attr_accessor status: String?
+      attr_accessor name: String?
+      attr_accessor charge_id: String?
+      attr_accessor charge_amount: String?
+      attr_accessor currency_code: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class PaymentScheduleEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?charge_date_offset: String,
+        ?charge_percentage: String,
+        ?day_of_month: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor charge_date_offset: String?
+      attr_accessor charge_percentage: String?
+      attr_accessor day_of_month: Integer?
     end
 
     class PaymentScheduleTerm
@@ -389,14 +1518,77 @@ module Aws::MarketplaceAgreement
 
       def initialize: (
         ?type: String,
+        ?id: String,
         ?currency_code: String,
         ?schedule: Array[Types::ScheduleItem],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor type: String?
+      attr_accessor id: String?
       attr_accessor currency_code: String?
       attr_accessor schedule: Array[Types::ScheduleItem]?
+    end
+
+    class PaymentScheduleTermTemplate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schedule: Array[Types::PaymentScheduleEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schedule: Array[Types::PaymentScheduleEntry]?
+    end
+
+    class PercentageRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?min_value: String,
+        ?max_value: String,
+        ?default_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor min_value: String?
+      attr_accessor max_value: String?
+      attr_accessor default_value: String?
+    end
+
+    class PriceIncrease
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?fixed_percentage: Types::FixedPercentage,
+        ?percentage_range: Types::PercentageRange,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fixed_percentage: Types::FixedPercentage?
+      attr_accessor percentage_range: Types::PercentageRange?
+
+      class FixedPercentage < PriceIncrease
+      end
+      class PercentageRange < PriceIncrease
+      end
+      class Unknown < PriceIncrease
+      end
+    end
+
+    class PricingCurrencyAmount
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?amount: String,
+        ?max_adjustment_amount: String,
+        ?currency_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor amount: String?
+      attr_accessor max_adjustment_amount: String?
+      attr_accessor currency_code: String?
     end
 
     class ProposalSummary
@@ -405,11 +1597,13 @@ module Aws::MarketplaceAgreement
       def initialize: (
         ?resources: Array[Types::Resource],
         ?offer_id: String,
+        ?offer_set_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor resources: Array[Types::Resource]?
       attr_accessor offer_id: String?
+      attr_accessor offer_set_id: String?
     end
 
     class Proposer
@@ -421,6 +1615,23 @@ module Aws::MarketplaceAgreement
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor account_id: String?
+    end
+
+    class PurchaseOrder
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?charge_id: String,
+        ?charge_revision: Integer,
+        ?agreement_id: String,
+        ?purchase_order_reference: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor charge_id: String?
+      attr_accessor charge_revision: Integer?
+      attr_accessor agreement_id: String?
+      attr_accessor purchase_order_reference: String?
     end
 
     class RateCardItem
@@ -441,6 +1652,7 @@ module Aws::MarketplaceAgreement
 
       def initialize: (
         ?type: String,
+        ?id: String,
         ?currency_code: String,
         ?billing_period: String,
         ?price: String,
@@ -448,9 +1660,105 @@ module Aws::MarketplaceAgreement
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor type: String?
+      attr_accessor id: String?
       attr_accessor currency_code: String?
       attr_accessor billing_period: String?
       attr_accessor price: String?
+    end
+
+    class RejectAgreementCancellationRequestInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agreement_id: String,
+        ?agreement_cancellation_request_id: String,
+        ?rejection_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agreement_id: String?
+      attr_accessor agreement_cancellation_request_id: String?
+      attr_accessor rejection_reason: String?
+    end
+
+    class RejectAgreementCancellationRequestOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agreement_id: String,
+        ?agreement_cancellation_request_id: String,
+        ?status: String,
+        ?status_message: String,
+        ?reason_code: String,
+        ?description: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agreement_id: String?
+      attr_accessor agreement_cancellation_request_id: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor reason_code: String?
+      attr_accessor description: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class RejectAgreementPaymentRequestInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?payment_request_id: String,
+        ?agreement_id: String,
+        ?rejection_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor payment_request_id: String?
+      attr_accessor agreement_id: String?
+      attr_accessor rejection_reason: String?
+    end
+
+    class RejectAgreementPaymentRequestOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?payment_request_id: String,
+        ?agreement_id: String,
+        ?status: String,
+        ?status_message: String,
+        ?name: String,
+        ?description: String,
+        ?charge_amount: String,
+        ?currency_code: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor payment_request_id: String?
+      attr_accessor agreement_id: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor charge_amount: String?
+      attr_accessor currency_code: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class RenewalSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?offer_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor offer_id: String?
     end
 
     class RenewalTerm
@@ -458,12 +1766,24 @@ module Aws::MarketplaceAgreement
 
       def initialize: (
         ?type: String,
+        ?id: String,
         ?configuration: Types::RenewalTermConfiguration,
+        ?lockout_period: String,
+        ?max_renewals: Integer,
+        ?adjustment_deadline: String,
+        ?price_increase: Types::PriceIncrease,
+        ?term_templates: Array[Types::TermTemplate],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor type: String?
+      attr_accessor id: String?
       attr_accessor configuration: Types::RenewalTermConfiguration?
+      attr_accessor lockout_period: String?
+      attr_accessor max_renewals: Integer?
+      attr_accessor adjustment_deadline: String?
+      attr_accessor price_increase: Types::PriceIncrease?
+      attr_accessor term_templates: Array[Types::TermTemplate]?
     end
 
     class RenewalTermConfiguration
@@ -475,6 +1795,43 @@ module Aws::MarketplaceAgreement
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor enable_auto_renew: bool?
+    end
+
+    class RequestedTerm
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?configuration: Types::RequestedTermConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor configuration: Types::RequestedTermConfiguration?
+    end
+
+    class RequestedTermConfiguration
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?configurable_upfront_pricing_term_configuration: Types::ConfigurableUpfrontPricingTermConfiguration,
+        ?renewal_term_configuration: Types::RenewalTermConfiguration,
+        ?variable_payment_term_configuration: Types::VariablePaymentTermConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configurable_upfront_pricing_term_configuration: Types::ConfigurableUpfrontPricingTermConfiguration?
+      attr_accessor renewal_term_configuration: Types::RenewalTermConfiguration?
+      attr_accessor variable_payment_term_configuration: Types::VariablePaymentTermConfiguration?
+
+      class ConfigurableUpfrontPricingTermConfiguration < RequestedTermConfiguration
+      end
+      class RenewalTermConfiguration < RequestedTermConfiguration
+      end
+      class VariablePaymentTermConfiguration < RequestedTermConfiguration
+      end
+      class Unknown < RequestedTermConfiguration
+      end
     end
 
     class Resource
@@ -509,6 +1866,13 @@ module Aws::MarketplaceAgreement
 
     module ResourceType
       AGREEMENT: String
+      AGREEMENT_REQUEST: String
+      AGREEMENT_PROPOSAL: String
+      CHARGE: String
+      PAYMENT_REQUEST: String
+      INVOICE: String
+      AGREEMENT_CANCELLATION_REQUEST: String
+      BILLING_ADJUSTMENT_REQUEST: String
     end
 
     class ScheduleItem
@@ -569,6 +1933,113 @@ module Aws::MarketplaceAgreement
       attr_accessor value: String?
     end
 
+    class SendAgreementCancellationRequestInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agreement_id: String,
+        ?reason_code: String,
+        ?client_token: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agreement_id: String?
+      attr_accessor reason_code: String?
+      attr_accessor client_token: String?
+      attr_accessor description: String?
+    end
+
+    class SendAgreementCancellationRequestOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agreement_id: String,
+        ?agreement_cancellation_request_id: String,
+        ?status: String,
+        ?reason_code: String,
+        ?description: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agreement_id: String?
+      attr_accessor agreement_cancellation_request_id: String?
+      attr_accessor status: String?
+      attr_accessor reason_code: String?
+      attr_accessor description: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class SendAgreementPaymentRequestInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?agreement_id: String,
+        ?term_id: String,
+        ?name: String,
+        ?charge_amount: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor agreement_id: String?
+      attr_accessor term_id: String?
+      attr_accessor name: String?
+      attr_accessor charge_amount: String?
+      attr_accessor description: String?
+    end
+
+    class SendAgreementPaymentRequestOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?payment_request_id: String,
+        ?agreement_id: String,
+        ?status: String,
+        ?name: String,
+        ?description: String,
+        ?charge_amount: String,
+        ?currency_code: String,
+        ?created_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor payment_request_id: String?
+      attr_accessor agreement_id: String?
+      attr_accessor status: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor charge_amount: String?
+      attr_accessor currency_code: String?
+      attr_accessor created_at: Time?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?request_id: String,
+        ?message: String,
+        ?quota_code: String,
+        ?service_code: String,
+        ?resource_type: String,
+        ?resource_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor request_id: String?
+      attr_accessor message: String?
+      attr_accessor quota_code: String?
+      attr_accessor service_code: String?
+      attr_accessor resource_type: String?
+      attr_accessor resource_id: String?
+    end
+
     class Sort
       include Smithy::Schema::Structure
 
@@ -592,12 +2063,61 @@ module Aws::MarketplaceAgreement
 
       def initialize: (
         ?type: String,
+        ?id: String,
         ?refund_policy: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor type: String?
+      attr_accessor id: String?
       attr_accessor refund_policy: String?
+    end
+
+    class TaxBreakdownItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?amount: String,
+        ?rate: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor amount: String?
+      attr_accessor rate: String?
+      attr_accessor type: String?
+    end
+
+    class TaxConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tax_estimation: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tax_estimation: String?
+    end
+
+    module TaxEstimation
+      DISABLED: String
+      ENABLED: String
+    end
+
+    class TermTemplate
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?payment_schedule_term_template: Types::PaymentScheduleTermTemplate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor payment_schedule_term_template: Types::PaymentScheduleTermTemplate?
+
+      class PaymentScheduleTermTemplate < TermTemplate
+      end
+      class Unknown < TermTemplate
+      end
     end
 
     class ThrottlingException
@@ -613,17 +2133,45 @@ module Aws::MarketplaceAgreement
       attr_accessor message: String?
     end
 
+    module Timing
+      ON_ACCEPTANCE: String
+      SCHEDULED: String
+      BILLING_PERIOD: String
+    end
+
+    class UpdatePurchaseOrdersInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?purchase_orders: Array[Types::PurchaseOrder],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor purchase_orders: Array[Types::PurchaseOrder]?
+    end
+
+    class UpdatePurchaseOrdersOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
     class UsageBasedPricingTerm
       include Smithy::Schema::Structure
 
       def initialize: (
         ?type: String,
+        ?id: String,
         ?currency_code: String,
         ?rate_cards: Array[Types::UsageBasedRateCardItem],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor type: String?
+      attr_accessor id: String?
       attr_accessor currency_code: String?
       attr_accessor rate_cards: Array[Types::UsageBasedRateCardItem]?
     end
@@ -670,17 +2218,88 @@ module Aws::MarketplaceAgreement
     end
 
     module ValidationExceptionReason
+      MISSING_BILLING_ADJUSTMENTS: String
+      BILLING_ADJUSTMENTS_LIMIT_EXCEEDED: String
+      MISSING_INVOICE_ID: String
+      INVALID_ADJUSTMENT_AMOUNT: String
+      MISSING_ADJUSTMENT_AMOUNT: String
+      INVALID_REASON_CODE: String
+      MISSING_REASON_CODE: String
+      MISSING_DESCRIPTION: String
+      INVALID_INVOICE_ADJUSTMENT_PERIOD: String
+      INVALID_CURRENCY_CODE: String
+      MISSING_CURRENCY_CODE: String
+      EXCEEDED_MAXIMUM_ADJUSTMENT_AMOUNT: String
+      MISSING_BILLING_ADJUSTMENT_REQUEST_ENTRY: String
+      MULTIPLE_AGREEMENT_IDS: String
+      INVALID_AGREEMENT_CANCELLATION_REQUEST_ID: String
+      MISSING_AGREEMENT_CANCELLATION_REQUEST_ID: String
+      MISSING_REASON: String
+      INVALID_REASON: String
+      INVALID_STATUS: String
       INVALID_AGREEMENT_ID: String
       MISSING_AGREEMENT_ID: String
       INVALID_CATALOG: String
+      INVALID_FILTERS: String
       INVALID_FILTER_NAME: String
+      MISSING_FILTER_NAME: String
       INVALID_FILTER_VALUES: String
+      MISSING_FILTER_VALUES: String
       INVALID_SORT_BY: String
       INVALID_SORT_ORDER: String
       INVALID_NEXT_TOKEN: String
       INVALID_MAX_RESULTS: String
+      INVALID_TERM_ID: String
+      MISSING_TERM_ID: String
+      MISSING_NAME: String
+      INVALID_NAME: String
+      INVALID_DESCRIPTION: String
+      MISSING_CHARGE_AMOUNT: String
+      INVALID_CHARGE_AMOUNT: String
+      MISSING_PAYMENT_REQUEST_ID: String
+      INVALID_PAYMENT_REQUEST_ID: String
+      MISSING_PARTY_TYPE: String
+      INVALID_PARTY_TYPE: String
       UNSUPPORTED_FILTERS: String
+      INVALID_CLIENT_TOKEN: String
+      INVALID_INTENT: String
+      MISSING_INTENT: String
+      INVALID_SOURCE_AGREEMENT_IDENTIFIER: String
+      MISSING_SOURCE_AGREEMENT_IDENTIFIER: String
+      INVALID_AGREEMENT_PROPOSAL_IDENTIFIER: String
+      MISSING_AGREEMENT_PROPOSAL_IDENTIFIER: String
+      INVALID_REQUESTED_TERMS: String
+      MISSING_REQUESTED_TERMS: String
+      INVALID_REQUESTED_TERM_ID: String
+      MISSING_REQUESTED_TERM_ID: String
+      INVALID_REQUESTED_TERM_CONFIGURATION: String
+      MISSING_REQUESTED_TERM_CONFIGURATION: String
+      INVALID_AGREEMENT_REQUEST_ID: String
+      MISSING_AGREEMENT_REQUEST_ID: String
+      INVALID_PURCHASE_ORDERS: String
+      MISSING_PURCHASE_ORDERS: String
+      INVALID_CHARGE_ID: String
+      MISSING_CHARGE_ID: String
+      INVALID_CHARGE_REVISION: String
+      MISSING_CHARGE_REVISION: String
+      INVALID_AGREEMENT_TYPE: String
+      INVALID_PURCHASE_ORDER_REFERENCE: String
+      INACTIVE_AGREEMENT: String
+      SUPERSEDED_AGREEMENT_PROPOSAL: String
+      EXPIRED_AGREEMENT_PROPOSAL: String
+      MISSING_MANDATORY_TERMS: String
+      INCOMPATIBLE_TERMS: String
+      MISSING_USAGE_AGREEMENT: String
+      INVALID_INCREMENTAL_CHARGE: String
+      MISSING_ACCOUNT_ADDRESS: String
+      UNSUPPORTED_ACTION: String
+      INVALID_REJECTION_REASON: String
+      INVALID_PAYMENT_REQUEST_STATUS: String
       OTHER: String
+      DUPLICATE_CHARGES: String
+      UNSUPPORTED_ACCOUNT_PLAN: String
+      DUPLICATE_AGREEMENT_IN_ORGANIZATION: String
+      MISSING_PURCHASE_ORDER_REFERENCE: String
     end
 
     class ValidityTerm
@@ -688,6 +2307,7 @@ module Aws::MarketplaceAgreement
 
       def initialize: (
         ?type: String,
+        ?id: String,
         ?agreement_duration: String,
         ?agreement_start_date: Time,
         ?agreement_end_date: Time,
@@ -695,9 +2315,42 @@ module Aws::MarketplaceAgreement
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor type: String?
+      attr_accessor id: String?
       attr_accessor agreement_duration: String?
       attr_accessor agreement_start_date: Time?
       attr_accessor agreement_end_date: Time?
+    end
+
+    class VariablePaymentTerm
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?id: String,
+        ?currency_code: String,
+        ?max_total_charge_amount: String,
+        ?configuration: Types::VariablePaymentTermConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor id: String?
+      attr_accessor currency_code: String?
+      attr_accessor max_total_charge_amount: String?
+      attr_accessor configuration: Types::VariablePaymentTermConfiguration?
+    end
+
+    class VariablePaymentTermConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?payment_request_approval_strategy: String,
+        ?expiration_duration: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor payment_request_approval_strategy: String?
+      attr_accessor expiration_duration: String?
     end
   end
 end

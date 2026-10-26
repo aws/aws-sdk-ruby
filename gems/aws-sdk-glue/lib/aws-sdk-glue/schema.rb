@@ -39,7 +39,23 @@ module Aws::Glue
     ApplicationArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#ApplicationArn", name: "ApplicationArn", traits: {"smithy.api#length" => {"min" => 10, "max" => 1224}})
     ApplyMapping = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#ApplyMapping", name: "ApplyMapping")
     ArnString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#ArnString", name: "ArnString", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}})
+    AssetDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#AssetDescription", name: "AssetDescription")
+    AssetFormEntry = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#AssetFormEntry", name: "AssetFormEntry")
+    AssetFormKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#AssetFormKey", name: "AssetFormKey")
+    AssetFormMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.glue#AssetFormMap", name: "AssetFormMap")
+    AssetId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#AssetId", name: "AssetId", traits: {"smithy.api#length" => {"min" => 1, "max" => 1087}, "smithy.api#pattern" => "^[a-zA-Z0-9\\-\\:\\/\\.\\_\\*]+$"})
+    AssetName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#AssetName", name: "AssetName")
+    AssetTypeFormKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#AssetTypeFormKey", name: "AssetTypeFormKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^(?![0-9_])\\w+$|^_\\w*[a-zA-Z0-9]\\w*$"})
+    AssetTypeFormReference = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#AssetTypeFormReference", name: "AssetTypeFormReference")
+    AssetTypeFormsMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.glue#AssetTypeFormsMap", name: "AssetTypeFormsMap", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
+    AssetTypeId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#AssetTypeId", name: "AssetTypeId", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}})
+    AssetTypeItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#AssetTypeItem", name: "AssetTypeItem")
+    AssetTypeItemList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#AssetTypeItemList", name: "AssetTypeItemList")
+    AssetTypeName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#AssetTypeName", name: "AssetTypeName", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^(?![0-9_])\\w+$|^_\\w*[a-zA-Z0-9]\\w*$"})
+    AssociateGlossaryTermsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#AssociateGlossaryTermsRequest", name: "AssociateGlossaryTermsRequest")
+    AssociateGlossaryTermsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#AssociateGlossaryTermsResponse", name: "AssociateGlossaryTermsResponse")
     AthenaConnectorSource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#AthenaConnectorSource", name: "AthenaConnectorSource")
+    AttachmentName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#AttachmentName", name: "AttachmentName", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[a-zA-Z][a-zA-Z0-9_]*$"})
     AttemptCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.glue#AttemptCount", name: "AttemptCount", traits: {"smithy.api#default" => 0})
     AuditColumnNamesList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#AuditColumnNamesList", name: "AuditColumnNamesList")
     AuditContext = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#AuditContext", name: "AuditContext")
@@ -58,6 +74,7 @@ module Aws::Glue
     BackfillErroredPartitionsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#BackfillErroredPartitionsList", name: "BackfillErroredPartitionsList")
     BackfillErrors = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#BackfillErrors", name: "BackfillErrors")
     BasicAuthenticationCredentials = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#BasicAuthenticationCredentials", name: "BasicAuthenticationCredentials")
+    BasicAuthenticationProperties = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#BasicAuthenticationProperties", name: "BasicAuthenticationProperties")
     BasicCatalogTarget = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#BasicCatalogTarget", name: "BasicCatalogTarget")
     BatchCreatePartitionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#BatchCreatePartitionRequest", name: "BatchCreatePartitionRequest")
     BatchCreatePartitionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#BatchCreatePartitionResponse", name: "BatchCreatePartitionResponse")
@@ -81,8 +98,14 @@ module Aws::Glue
     BatchGetCustomEntityTypesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#BatchGetCustomEntityTypesResponse", name: "BatchGetCustomEntityTypesResponse")
     BatchGetDataQualityResultRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#BatchGetDataQualityResultRequest", name: "BatchGetDataQualityResultRequest")
     BatchGetDataQualityResultResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#BatchGetDataQualityResultResponse", name: "BatchGetDataQualityResultResponse")
+    BatchGetDataQualityResultV2Request = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#BatchGetDataQualityResultV2Request", name: "BatchGetDataQualityResultV2Request")
+    BatchGetDataQualityResultV2Response = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#BatchGetDataQualityResultV2Response", name: "BatchGetDataQualityResultV2Response")
+    BatchGetDataQualityRulesetEvaluationRunRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#BatchGetDataQualityRulesetEvaluationRunRequest", name: "BatchGetDataQualityRulesetEvaluationRunRequest")
+    BatchGetDataQualityRulesetEvaluationRunResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#BatchGetDataQualityRulesetEvaluationRunResponse", name: "BatchGetDataQualityRulesetEvaluationRunResponse")
     BatchGetDevEndpointsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#BatchGetDevEndpointsRequest", name: "BatchGetDevEndpointsRequest")
     BatchGetDevEndpointsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#BatchGetDevEndpointsResponse", name: "BatchGetDevEndpointsResponse")
+    BatchGetIterableFormsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#BatchGetIterableFormsRequest", name: "BatchGetIterableFormsRequest")
+    BatchGetIterableFormsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#BatchGetIterableFormsResponse", name: "BatchGetIterableFormsResponse")
     BatchGetJobsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#BatchGetJobsRequest", name: "BatchGetJobsRequest")
     BatchGetJobsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#BatchGetJobsResponse", name: "BatchGetJobsResponse")
     BatchGetPartitionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#BatchGetPartitionRequest", name: "BatchGetPartitionRequest")
@@ -117,6 +140,8 @@ module Aws::Glue
     BatchUpdatePartitionRequestEntryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#BatchUpdatePartitionRequestEntryList", name: "BatchUpdatePartitionRequestEntryList", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
     BatchUpdatePartitionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#BatchUpdatePartitionResponse", name: "BatchUpdatePartitionResponse")
     BatchWindow = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.glue#BatchWindow", name: "BatchWindow", traits: {"smithy.api#range" => {"min" => 1, "max" => 900}})
+    BetweenConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#BetweenConfiguration", name: "BetweenConfiguration")
+    BinEdges = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#BinEdges", name: "BinEdges")
     BinaryColumnStatisticsData = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#BinaryColumnStatisticsData", name: "BinaryColumnStatisticsData")
     Blob = ::Smithy::Schema::Shapes::BlobShape.new(id: "com.amazonaws.glue#Blob", name: "Blob")
     Blueprint = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#Blueprint", name: "Blueprint")
@@ -141,6 +166,7 @@ module Aws::Glue
     BoxedNonNegativeInt = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.glue#BoxedNonNegativeInt", name: "BoxedNonNegativeInt", traits: {"smithy.api#range" => {"min" => 0}})
     BoxedNonNegativeLong = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.glue#BoxedNonNegativeLong", name: "BoxedNonNegativeLong", traits: {"smithy.api#range" => {"min" => 0}})
     BoxedPositiveInt = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.glue#BoxedPositiveInt", name: "BoxedPositiveInt", traits: {"smithy.api#range" => {"min" => 0}})
+    ByteCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.glue#ByteCount", name: "ByteCount", traits: {"smithy.api#range" => {"min" => 0}})
     CancelDataQualityRuleRecommendationRunRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#CancelDataQualityRuleRecommendationRunRequest", name: "CancelDataQualityRuleRecommendationRunRequest")
     CancelDataQualityRuleRecommendationRunResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#CancelDataQualityRuleRecommendationRunResponse", name: "CancelDataQualityRuleRecommendationRunResponse")
     CancelDataQualityRulesetEvaluationRunRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#CancelDataQualityRulesetEvaluationRunRequest", name: "CancelDataQualityRulesetEvaluationRunRequest")
@@ -169,6 +195,7 @@ module Aws::Glue
     CatalogPropertiesOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#CatalogPropertiesOutput", name: "CatalogPropertiesOutput")
     CatalogSchemaChangePolicy = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#CatalogSchemaChangePolicy", name: "CatalogSchemaChangePolicy")
     CatalogSource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#CatalogSource", name: "CatalogSource")
+    CatalogTableConfigOptions = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#CatalogTableConfigOptions", name: "CatalogTableConfigOptions")
     CatalogTablesList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#CatalogTablesList", name: "CatalogTablesList", traits: {"smithy.api#length" => {"min" => 1}})
     CatalogTarget = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#CatalogTarget", name: "CatalogTarget")
     CatalogTargetList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#CatalogTargetList", name: "CatalogTargetList")
@@ -179,6 +206,8 @@ module Aws::Glue
     Classifier = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#Classifier", name: "Classifier")
     ClassifierList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#ClassifierList", name: "ClassifierList")
     ClassifierNameList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#ClassifierNameList", name: "ClassifierNameList")
+    ClientCredentialsProperties = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#ClientCredentialsProperties", name: "ClientCredentialsProperties")
+    ClientTokenString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#ClientTokenString", name: "ClientTokenString", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[a-zA-Z0-9_-]+$"})
     CloudWatchEncryption = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#CloudWatchEncryption", name: "CloudWatchEncryption")
     CloudWatchEncryptionMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#CloudWatchEncryptionMode", name: "CloudWatchEncryptionMode")
     CodeGenArgName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#CodeGenArgName", name: "CodeGenArgName")
@@ -254,24 +283,35 @@ module Aws::Glue
     ConnectionOptions = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.glue#ConnectionOptions", name: "ConnectionOptions", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}})
     ConnectionPasswordEncryption = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#ConnectionPasswordEncryption", name: "ConnectionPasswordEncryption")
     ConnectionProperties = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.glue#ConnectionProperties", name: "ConnectionProperties", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}})
+    ConnectionPropertiesConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#ConnectionPropertiesConfiguration", name: "ConnectionPropertiesConfiguration")
     ConnectionPropertyKey = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#ConnectionPropertyKey", name: "ConnectionPropertyKey")
     ConnectionSchemaVersion = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.glue#ConnectionSchemaVersion", name: "ConnectionSchemaVersion", traits: {"smithy.api#range" => {"min" => 1, "max" => 2}})
     ConnectionStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#ConnectionStatus", name: "ConnectionStatus")
     ConnectionString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#ConnectionString", name: "ConnectionString", traits: {"smithy.api#length" => {"min" => 0, "max" => 255}})
     ConnectionStringList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#ConnectionStringList", name: "ConnectionStringList", traits: {"smithy.api#length" => {"min" => 0, "max" => 1000}})
+    ConnectionStringToStringMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.glue#ConnectionStringToStringMap", name: "ConnectionStringToStringMap")
     ConnectionType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#ConnectionType", name: "ConnectionType")
     ConnectionTypeBrief = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#ConnectionTypeBrief", name: "ConnectionTypeBrief")
     ConnectionTypeList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#ConnectionTypeList", name: "ConnectionTypeList")
     ConnectionTypeVariant = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#ConnectionTypeVariant", name: "ConnectionTypeVariant")
     ConnectionTypeVariantList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#ConnectionTypeVariantList", name: "ConnectionTypeVariantList")
     ConnectionsList = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#ConnectionsList", name: "ConnectionsList")
+    ConnectorAuthenticationConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#ConnectorAuthenticationConfiguration", name: "ConnectorAuthenticationConfiguration")
+    ConnectorAuthorizationCodeProperties = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#ConnectorAuthorizationCodeProperties", name: "ConnectorAuthorizationCodeProperties")
     ConnectorDataSource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#ConnectorDataSource", name: "ConnectorDataSource")
     ConnectorDataTarget = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#ConnectorDataTarget", name: "ConnectorDataTarget")
+    ConnectorOAuth2GrantType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#ConnectorOAuth2GrantType", name: "ConnectorOAuth2GrantType")
+    ConnectorOAuth2Properties = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#ConnectorOAuth2Properties", name: "ConnectorOAuth2Properties")
     ConnectorOptions = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.glue#ConnectorOptions", name: "ConnectorOptions")
+    ConnectorProperty = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#ConnectorProperty", name: "ConnectorProperty")
+    ConnectorPropertyKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#ConnectorPropertyKey", name: "ConnectorPropertyKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[a-zA-Z0-9_-]+$"})
+    ConnectorPropertyList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#ConnectorPropertyList", name: "ConnectorPropertyList")
+    ContentType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#ContentType", name: "ContentType")
     ContextKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#ContextKey", name: "ContextKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}})
     ContextValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#ContextValue", name: "ContextValue", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}})
     ContextWords = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#ContextWords", name: "ContextWords", traits: {"smithy.api#length" => {"min" => 1, "max" => 20}})
     ContinuousSync = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.glue#ContinuousSync", name: "ContinuousSync")
+    Count = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#Count", name: "Count")
     Crawl = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#Crawl", name: "Crawl")
     CrawlId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#CrawlId", name: "CrawlId")
     CrawlList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#CrawlList", name: "CrawlList")
@@ -316,6 +356,10 @@ module Aws::Glue
     CreateDatabaseResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#CreateDatabaseResponse", name: "CreateDatabaseResponse")
     CreateDevEndpointRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#CreateDevEndpointRequest", name: "CreateDevEndpointRequest")
     CreateDevEndpointResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#CreateDevEndpointResponse", name: "CreateDevEndpointResponse")
+    CreateGlossaryRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#CreateGlossaryRequest", name: "CreateGlossaryRequest")
+    CreateGlossaryResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#CreateGlossaryResponse", name: "CreateGlossaryResponse")
+    CreateGlossaryTermRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#CreateGlossaryTermRequest", name: "CreateGlossaryTermRequest")
+    CreateGlossaryTermResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#CreateGlossaryTermResponse", name: "CreateGlossaryTermResponse")
     CreateGlueIdentityCenterConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#CreateGlueIdentityCenterConfigurationRequest", name: "CreateGlueIdentityCenterConfigurationRequest")
     CreateGlueIdentityCenterConfigurationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#CreateGlueIdentityCenterConfigurationResponse", name: "CreateGlueIdentityCenterConfigurationResponse")
     CreateGrokClassifierRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#CreateGrokClassifierRequest", name: "CreateGrokClassifierRequest")
@@ -358,6 +402,7 @@ module Aws::Glue
     CreateWorkflowRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#CreateWorkflowRequest", name: "CreateWorkflowRequest")
     CreateWorkflowResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#CreateWorkflowResponse", name: "CreateWorkflowResponse")
     CreateXMLClassifierRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#CreateXMLClassifierRequest", name: "CreateXMLClassifierRequest")
+    CreatedAt = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.glue#CreatedAt", name: "CreatedAt")
     CreatedTimestamp = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#CreatedTimestamp", name: "CreatedTimestamp")
     CredentialKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#CredentialKey", name: "CredentialKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}})
     CredentialMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.glue#CredentialMap", name: "CredentialMap", traits: {"smithy.api#sensitive" => {}})
@@ -369,6 +414,8 @@ module Aws::Glue
     CsvHeaderOption = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#CsvHeaderOption", name: "CsvHeaderOption")
     CsvQuoteSymbol = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#CsvQuoteSymbol", name: "CsvQuoteSymbol", traits: {"smithy.api#length" => {"min" => 1, "max" => 1}, "smithy.api#pattern" => "^[^\\r\\n]$"})
     CsvSerdeOption = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#CsvSerdeOption", name: "CsvSerdeOption")
+    CursorConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#CursorConfiguration", name: "CursorConfiguration")
+    CustomAuthenticationProperties = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#CustomAuthenticationProperties", name: "CustomAuthenticationProperties")
     CustomCode = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#CustomCode", name: "CustomCode")
     CustomDatatypes = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#CustomDatatypes", name: "CustomDatatypes")
     CustomEntityType = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#CustomEntityType", name: "CustomEntityType")
@@ -399,9 +446,12 @@ module Aws::Glue
     DataQualityAggregatedMetrics = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#DataQualityAggregatedMetrics", name: "DataQualityAggregatedMetrics")
     DataQualityAnalyzerResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#DataQualityAnalyzerResult", name: "DataQualityAnalyzerResult")
     DataQualityAnalyzerResults = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#DataQualityAnalyzerResults", name: "DataQualityAnalyzerResults", traits: {"smithy.api#length" => {"min" => 0, "max" => 2000}})
+    DataQualityConfigurationV2 = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#DataQualityConfigurationV2", name: "DataQualityConfigurationV2")
     DataQualityEncryption = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#DataQualityEncryption", name: "DataQualityEncryption")
     DataQualityEncryptionMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#DataQualityEncryptionMode", name: "DataQualityEncryptionMode")
+    DataQualityEngine = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#DataQualityEngine", name: "DataQualityEngine")
     DataQualityEvaluationRunAdditionalRunOptions = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#DataQualityEvaluationRunAdditionalRunOptions", name: "DataQualityEvaluationRunAdditionalRunOptions")
+    DataQualityFlagsEnabled = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.glue#DataQualityFlagsEnabled", name: "DataQualityFlagsEnabled", traits: {"smithy.api#length" => {"min" => 0, "max" => 30}})
     DataQualityGlueTable = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#DataQualityGlueTable", name: "DataQualityGlueTable")
     DataQualityMetricValues = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#DataQualityMetricValues", name: "DataQualityMetricValues")
     DataQualityModelStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#DataQualityModelStatus", name: "DataQualityModelStatus")
@@ -414,7 +464,14 @@ module Aws::Glue
     DataQualityResultFilterCriteria = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#DataQualityResultFilterCriteria", name: "DataQualityResultFilterCriteria")
     DataQualityResultIdList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#DataQualityResultIdList", name: "DataQualityResultIdList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
     DataQualityResultIds = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#DataQualityResultIds", name: "DataQualityResultIds", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
+    DataQualityResultV2IdList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#DataQualityResultV2IdList", name: "DataQualityResultV2IdList", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
+    DataQualityResultV2Item = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#DataQualityResultV2Item", name: "DataQualityResultV2Item")
+    DataQualityResultV2List = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#DataQualityResultV2List", name: "DataQualityResultV2List", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}})
     DataQualityResultsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#DataQualityResultsList", name: "DataQualityResultsList")
+    DataQualityResultsV2Description = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#DataQualityResultsV2Description", name: "DataQualityResultsV2Description")
+    DataQualityResultsV2DescriptionList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#DataQualityResultsV2DescriptionList", name: "DataQualityResultsV2DescriptionList", traits: {"smithy.api#length" => {"min" => 0, "max" => 1000}})
+    DataQualityResultsV2FilterCriteria = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#DataQualityResultsV2FilterCriteria", name: "DataQualityResultsV2FilterCriteria")
+    DataQualityRuleRecommendationRunAdditionalRunOptions = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#DataQualityRuleRecommendationRunAdditionalRunOptions", name: "DataQualityRuleRecommendationRunAdditionalRunOptions")
     DataQualityRuleRecommendationRunDescription = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#DataQualityRuleRecommendationRunDescription", name: "DataQualityRuleRecommendationRunDescription")
     DataQualityRuleRecommendationRunFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#DataQualityRuleRecommendationRunFilter", name: "DataQualityRuleRecommendationRunFilter")
     DataQualityRuleRecommendationRunList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#DataQualityRuleRecommendationRunList", name: "DataQualityRuleRecommendationRunList")
@@ -422,14 +479,19 @@ module Aws::Glue
     DataQualityRuleResultDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#DataQualityRuleResultDescription", name: "DataQualityRuleResultDescription", traits: {"smithy.api#length" => {"min" => 0, "max" => 2048}, "smithy.api#pattern" => "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*$", "smithy.api#sensitive" => {}})
     DataQualityRuleResultStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#DataQualityRuleResultStatus", name: "DataQualityRuleResultStatus")
     DataQualityRuleResults = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#DataQualityRuleResults", name: "DataQualityRuleResults", traits: {"smithy.api#length" => {"min" => 0, "max" => 2000}})
+    DataQualityRuleResultsOptions = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#DataQualityRuleResultsOptions", name: "DataQualityRuleResultsOptions")
+    DataQualityRulesetEvaluationRun = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#DataQualityRulesetEvaluationRun", name: "DataQualityRulesetEvaluationRun")
     DataQualityRulesetEvaluationRunDescription = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#DataQualityRulesetEvaluationRunDescription", name: "DataQualityRulesetEvaluationRunDescription")
     DataQualityRulesetEvaluationRunFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#DataQualityRulesetEvaluationRunFilter", name: "DataQualityRulesetEvaluationRunFilter")
+    DataQualityRulesetEvaluationRunIdList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#DataQualityRulesetEvaluationRunIdList", name: "DataQualityRulesetEvaluationRunIdList", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
     DataQualityRulesetEvaluationRunList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#DataQualityRulesetEvaluationRunList", name: "DataQualityRulesetEvaluationRunList")
+    DataQualityRulesetEvaluationRunsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#DataQualityRulesetEvaluationRunsList", name: "DataQualityRulesetEvaluationRunsList")
     DataQualityRulesetFilterCriteria = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#DataQualityRulesetFilterCriteria", name: "DataQualityRulesetFilterCriteria")
     DataQualityRulesetList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#DataQualityRulesetList", name: "DataQualityRulesetList")
     DataQualityRulesetListDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#DataQualityRulesetListDetails", name: "DataQualityRulesetListDetails")
     DataQualityRulesetString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#DataQualityRulesetString", name: "DataQualityRulesetString", traits: {"smithy.api#length" => {"min" => 1, "max" => 65536}})
     DataQualityTargetTable = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#DataQualityTargetTable", name: "DataQualityTargetTable")
+    DataQualityTelemetry = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#DataQualityTelemetry", name: "DataQualityTelemetry")
     DataSource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#DataSource", name: "DataSource")
     DataSourceMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.glue#DataSourceMap", name: "DataSourceMap")
     Database = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#Database", name: "Database")
@@ -447,6 +509,13 @@ module Aws::Glue
     DdbExportType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#DdbExportType", name: "DdbExportType")
     DecimalColumnStatisticsData = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#DecimalColumnStatisticsData", name: "DecimalColumnStatisticsData")
     DecimalNumber = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#DecimalNumber", name: "DecimalNumber")
+    DefaultValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#DefaultValue", name: "DefaultValue", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => "[^<>&'\"]"})
+    DeleteAssetRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#DeleteAssetRequest", name: "DeleteAssetRequest")
+    DeleteAssetResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#DeleteAssetResponse", name: "DeleteAssetResponse")
+    DeleteAssetTypeRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#DeleteAssetTypeRequest", name: "DeleteAssetTypeRequest")
+    DeleteAssetTypeResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#DeleteAssetTypeResponse", name: "DeleteAssetTypeResponse")
+    DeleteAttachmentRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#DeleteAttachmentRequest", name: "DeleteAttachmentRequest")
+    DeleteAttachmentResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#DeleteAttachmentResponse", name: "DeleteAttachmentResponse")
     DeleteBehavior = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#DeleteBehavior", name: "DeleteBehavior")
     DeleteBlueprintRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#DeleteBlueprintRequest", name: "DeleteBlueprintRequest")
     DeleteBlueprintResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#DeleteBlueprintResponse", name: "DeleteBlueprintResponse")
@@ -463,6 +532,8 @@ module Aws::Glue
     DeleteConnectionNameList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#DeleteConnectionNameList", name: "DeleteConnectionNameList", traits: {"smithy.api#length" => {"min" => 0, "max" => 25}})
     DeleteConnectionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#DeleteConnectionRequest", name: "DeleteConnectionRequest")
     DeleteConnectionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#DeleteConnectionResponse", name: "DeleteConnectionResponse")
+    DeleteConnectionTypeRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#DeleteConnectionTypeRequest", name: "DeleteConnectionTypeRequest")
+    DeleteConnectionTypeResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#DeleteConnectionTypeResponse", name: "DeleteConnectionTypeResponse")
     DeleteCrawlerRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#DeleteCrawlerRequest", name: "DeleteCrawlerRequest")
     DeleteCrawlerResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#DeleteCrawlerResponse", name: "DeleteCrawlerResponse")
     DeleteCustomEntityTypeRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#DeleteCustomEntityTypeRequest", name: "DeleteCustomEntityTypeRequest")
@@ -473,9 +544,17 @@ module Aws::Glue
     DeleteDatabaseResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#DeleteDatabaseResponse", name: "DeleteDatabaseResponse")
     DeleteDevEndpointRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#DeleteDevEndpointRequest", name: "DeleteDevEndpointRequest")
     DeleteDevEndpointResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#DeleteDevEndpointResponse", name: "DeleteDevEndpointResponse")
+    DeleteFormTypeRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#DeleteFormTypeRequest", name: "DeleteFormTypeRequest")
+    DeleteFormTypeResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#DeleteFormTypeResponse", name: "DeleteFormTypeResponse")
+    DeleteGlossaryRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#DeleteGlossaryRequest", name: "DeleteGlossaryRequest")
+    DeleteGlossaryResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#DeleteGlossaryResponse", name: "DeleteGlossaryResponse")
+    DeleteGlossaryTermRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#DeleteGlossaryTermRequest", name: "DeleteGlossaryTermRequest")
+    DeleteGlossaryTermResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#DeleteGlossaryTermResponse", name: "DeleteGlossaryTermResponse")
     DeleteGlueIdentityCenterConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#DeleteGlueIdentityCenterConfigurationRequest", name: "DeleteGlueIdentityCenterConfigurationRequest")
     DeleteGlueIdentityCenterConfigurationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#DeleteGlueIdentityCenterConfigurationResponse", name: "DeleteGlueIdentityCenterConfigurationResponse")
     DeleteIntegrationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#DeleteIntegrationRequest", name: "DeleteIntegrationRequest")
+    DeleteIntegrationResourcePropertyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#DeleteIntegrationResourcePropertyRequest", name: "DeleteIntegrationResourcePropertyRequest")
+    DeleteIntegrationResourcePropertyResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#DeleteIntegrationResourcePropertyResponse", name: "DeleteIntegrationResourcePropertyResponse")
     DeleteIntegrationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#DeleteIntegrationResponse", name: "DeleteIntegrationResponse")
     DeleteIntegrationTablePropertiesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#DeleteIntegrationTablePropertiesRequest", name: "DeleteIntegrationTablePropertiesRequest")
     DeleteIntegrationTablePropertiesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#DeleteIntegrationTablePropertiesResponse", name: "DeleteIntegrationTablePropertiesResponse")
@@ -536,7 +615,11 @@ module Aws::Glue
     DirectKafkaSource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#DirectKafkaSource", name: "DirectKafkaSource")
     DirectKinesisSource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#DirectKinesisSource", name: "DirectKinesisSource")
     DirectSchemaChangePolicy = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#DirectSchemaChangePolicy", name: "DirectSchemaChangePolicy")
+    DisassociateGlossaryTermsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#DisassociateGlossaryTermsRequest", name: "DisassociateGlossaryTermsRequest")
+    DisassociateGlossaryTermsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#DisassociateGlossaryTermsResponse", name: "DisassociateGlossaryTermsResponse")
     DisplayName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#DisplayName", name: "DisplayName", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}})
+    DistributionData = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#DistributionData", name: "DistributionData")
+    DistributionResultsOptions = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#DistributionResultsOptions", name: "DistributionResultsOptions")
     Double = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.glue#Double", name: "Double", traits: {"smithy.api#default" => 0})
     DoubleColumnStatisticsData = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#DoubleColumnStatisticsData", name: "DoubleColumnStatisticsData")
     DoubleValue = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.glue#DoubleValue", name: "DoubleValue", traits: {"smithy.api#default" => 0})
@@ -556,9 +639,14 @@ module Aws::Glue
     EnclosedInStringPropertiesMinOne = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#EnclosedInStringPropertiesMinOne", name: "EnclosedInStringPropertiesMinOne")
     EnclosedInStringProperty = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#EnclosedInStringProperty", name: "EnclosedInStringProperty", traits: {"smithy.api#pattern" => "^([\\u0009\\u000B\\u000C\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF])*$"})
     EnclosedInStringPropertyWithQuote = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#EnclosedInStringPropertyWithQuote", name: "EnclosedInStringPropertyWithQuote", traits: {"smithy.api#pattern" => "^([\\u0009\\u000B\\u000C\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF])*$"})
+    EncryptedKeyMetadataString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#EncryptedKeyMetadataString", name: "EncryptedKeyMetadataString", traits: {"smithy.api#length" => {"min" => 0, "max" => 2056}, "smithy.api#pattern" => "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*$"})
     EncryptionAtRest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#EncryptionAtRest", name: "EncryptionAtRest")
     EncryptionConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#EncryptionConfiguration", name: "EncryptionConfiguration")
+    EncryptionKeyIdString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#EncryptionKeyIdString", name: "EncryptionKeyIdString", traits: {"smithy.api#length" => {"min" => 0, "max" => 2056}, "smithy.api#pattern" => "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*$"})
     Entity = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#Entity", name: "Entity")
+    EntityConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#EntityConfiguration", name: "EntityConfiguration")
+    EntityConfigurationMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.glue#EntityConfigurationMap", name: "EntityConfigurationMap")
+    EntityConfigurationMapKeyString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#EntityConfigurationMapKeyString", name: "EntityConfigurationMapKeyString", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[a-zA-Z0-9_ -]+$"})
     EntityDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#EntityDescription", name: "EntityDescription")
     EntityFieldName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#EntityFieldName", name: "EntityFieldName")
     EntityLabel = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#EntityLabel", name: "EntityLabel")
@@ -573,6 +661,7 @@ module Aws::Glue
     ErrorString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#ErrorString", name: "ErrorString")
     EvaluateDataQuality = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#EvaluateDataQuality", name: "EvaluateDataQuality")
     EvaluateDataQualityMultiFrame = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#EvaluateDataQualityMultiFrame", name: "EvaluateDataQualityMultiFrame")
+    EvaluatedDistributionsMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.glue#EvaluatedDistributionsMap", name: "EvaluatedDistributionsMap", traits: {"smithy.api#sensitive" => {}})
     EvaluatedMetricsMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.glue#EvaluatedMetricsMap", name: "EvaluatedMetricsMap", traits: {"smithy.api#sensitive" => {}})
     EvaluationMetrics = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#EvaluationMetrics", name: "EvaluationMetrics")
     EventBatchingCondition = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#EventBatchingCondition", name: "EventBatchingCondition")
@@ -583,8 +672,12 @@ module Aws::Glue
     ExecutionStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#ExecutionStatus", name: "ExecutionStatus")
     ExecutionTime = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.glue#ExecutionTime", name: "ExecutionTime", traits: {"smithy.api#default" => 0})
     ExistCondition = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#ExistCondition", name: "ExistCondition")
+    ExportEncryptionConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#ExportEncryptionConfiguration", name: "ExportEncryptionConfiguration")
     ExportLabelsTaskRunProperties = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#ExportLabelsTaskRunProperties", name: "ExportLabelsTaskRunProperties")
+    ExportSetting = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#ExportSetting", name: "ExportSetting")
+    ExportStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#ExportStatus", name: "ExportStatus")
     ExtendedString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#ExtendedString", name: "ExtendedString", traits: {"smithy.api#pattern" => "^[\\s\\S]*$"})
+    ExtractedParameter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#ExtractedParameter", name: "ExtractedParameter")
     FederatedCatalog = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#FederatedCatalog", name: "FederatedCatalog")
     FederatedDatabase = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#FederatedDatabase", name: "FederatedDatabase")
     FederatedResourceAlreadyExistsException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#FederatedResourceAlreadyExistsException", name: "FederatedResourceAlreadyExistsException", traits: {"smithy.api#error" => "client"})
@@ -595,6 +688,9 @@ module Aws::Glue
     FederationSourceRetryableException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#FederationSourceRetryableException", name: "FederationSourceRetryableException", traits: {"smithy.api#error" => "client"})
     Field = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#Field", name: "Field")
     FieldDataType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#FieldDataType", name: "FieldDataType")
+    FieldDefinition = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#FieldDefinition", name: "FieldDefinition")
+    FieldDefinitionMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.glue#FieldDefinitionMap", name: "FieldDefinitionMap")
+    FieldDefinitionMapKeyString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#FieldDefinitionMapKeyString", name: "FieldDefinitionMapKeyString", traits: {"smithy.api#length" => {"min" => 1}})
     FieldDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#FieldDescription", name: "FieldDescription")
     FieldFilterOperator = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#FieldFilterOperator", name: "FieldFilterOperator")
     FieldFilterOperatorsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#FieldFilterOperatorsList", name: "FieldFilterOperatorsList")
@@ -604,25 +700,40 @@ module Aws::Glue
     FieldsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#FieldsList", name: "FieldsList")
     FillMissingValues = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#FillMissingValues", name: "FillMissingValues")
     Filter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#Filter", name: "Filter")
+    FilterConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#FilterConfiguration", name: "FilterConfiguration")
     FilterExpression = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#FilterExpression", name: "FilterExpression")
     FilterExpressions = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#FilterExpressions", name: "FilterExpressions")
     FilterLogicalOperator = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#FilterLogicalOperator", name: "FilterLogicalOperator")
+    FilterMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#FilterMode", name: "FilterMode")
     FilterOperation = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#FilterOperation", name: "FilterOperation")
     FilterOperator = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#FilterOperator", name: "FilterOperator")
+    FilterOverrides = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#FilterOverrides", name: "FilterOverrides")
     FilterPredicate = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#FilterPredicate", name: "FilterPredicate", traits: {"smithy.api#length" => {"min" => 1, "max" => 100000}})
     FilterString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#FilterString", name: "FilterString", traits: {"smithy.api#length" => {"min" => 0, "max" => 2048}, "smithy.api#pattern" => "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$"})
+    FilterStringConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#FilterStringConfiguration", name: "FilterStringConfiguration")
     FilterValue = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#FilterValue", name: "FilterValue")
     FilterValueType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#FilterValueType", name: "FilterValueType")
     FilterValues = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#FilterValues", name: "FilterValues")
     FindMatchesMetrics = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#FindMatchesMetrics", name: "FindMatchesMetrics")
     FindMatchesParameters = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#FindMatchesParameters", name: "FindMatchesParameters")
     FindMatchesTaskRunProperties = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#FindMatchesTaskRunProperties", name: "FindMatchesTaskRunProperties")
+    FormContent = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#FormContent", name: "FormContent")
+    FormTypeId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#FormTypeId", name: "FormTypeId", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}})
+    FormTypeItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#FormTypeItem", name: "FormTypeItem")
+    FormTypeItemList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#FormTypeItemList", name: "FormTypeItemList")
+    FormTypeName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#FormTypeName", name: "FormTypeName", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[A-Z]\\w*$"})
+    FormTypeSchema = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#FormTypeSchema", name: "FormTypeSchema", traits: {"smithy.api#length" => {"min" => 1, "max" => 100000}})
     FormatString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#FormatString", name: "FormatString", traits: {"smithy.api#length" => {"min" => 0, "max" => 128}, "smithy.api#pattern" => "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$"})
+    FunctionType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#FunctionType", name: "FunctionType")
     Generic512CharString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#Generic512CharString", name: "Generic512CharString", traits: {"smithy.api#length" => {"min" => 1, "max" => 512}})
     GenericBoundedDouble = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.glue#GenericBoundedDouble", name: "GenericBoundedDouble", traits: {"smithy.api#range" => {"min" => 0.0, "max" => 1.0}})
     GenericLimitedString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#GenericLimitedString", name: "GenericLimitedString", traits: {"smithy.api#pattern" => "^[A-Za-z0-9_-]*$"})
     GenericMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.glue#GenericMap", name: "GenericMap")
     GenericString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#GenericString", name: "GenericString")
+    GetAssetInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GetAssetInput", name: "GetAssetInput")
+    GetAssetOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GetAssetOutput", name: "GetAssetOutput")
+    GetAssetTypeRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GetAssetTypeRequest", name: "GetAssetTypeRequest")
+    GetAssetTypeResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GetAssetTypeResponse", name: "GetAssetTypeResponse")
     GetBlueprintRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GetBlueprintRequest", name: "GetBlueprintRequest")
     GetBlueprintResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GetBlueprintResponse", name: "GetBlueprintResponse")
     GetBlueprintRunRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GetBlueprintRunRequest", name: "GetBlueprintRunRequest")
@@ -663,14 +774,20 @@ module Aws::Glue
     GetCrawlersResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GetCrawlersResponse", name: "GetCrawlersResponse")
     GetCustomEntityTypeRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GetCustomEntityTypeRequest", name: "GetCustomEntityTypeRequest")
     GetCustomEntityTypeResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GetCustomEntityTypeResponse", name: "GetCustomEntityTypeResponse")
+    GetDashboardUrlRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GetDashboardUrlRequest", name: "GetDashboardUrlRequest")
+    GetDashboardUrlResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GetDashboardUrlResponse", name: "GetDashboardUrlResponse")
     GetDataCatalogEncryptionSettingsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GetDataCatalogEncryptionSettingsRequest", name: "GetDataCatalogEncryptionSettingsRequest")
     GetDataCatalogEncryptionSettingsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GetDataCatalogEncryptionSettingsResponse", name: "GetDataCatalogEncryptionSettingsResponse")
+    GetDataCatalogExportConfigurationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GetDataCatalogExportConfigurationInput", name: "GetDataCatalogExportConfigurationInput")
+    GetDataCatalogExportConfigurationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GetDataCatalogExportConfigurationOutput", name: "GetDataCatalogExportConfigurationOutput")
     GetDataQualityModelRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GetDataQualityModelRequest", name: "GetDataQualityModelRequest")
     GetDataQualityModelResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GetDataQualityModelResponse", name: "GetDataQualityModelResponse")
     GetDataQualityModelResultRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GetDataQualityModelResultRequest", name: "GetDataQualityModelResultRequest")
     GetDataQualityModelResultResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GetDataQualityModelResultResponse", name: "GetDataQualityModelResultResponse")
     GetDataQualityResultRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GetDataQualityResultRequest", name: "GetDataQualityResultRequest")
     GetDataQualityResultResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GetDataQualityResultResponse", name: "GetDataQualityResultResponse")
+    GetDataQualityResultV2Request = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GetDataQualityResultV2Request", name: "GetDataQualityResultV2Request")
+    GetDataQualityResultV2Response = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GetDataQualityResultV2Response", name: "GetDataQualityResultV2Response")
     GetDataQualityRuleRecommendationRunRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GetDataQualityRuleRecommendationRunRequest", name: "GetDataQualityRuleRecommendationRunRequest")
     GetDataQualityRuleRecommendationRunResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GetDataQualityRuleRecommendationRunResponse", name: "GetDataQualityRuleRecommendationRunResponse")
     GetDataQualityRulesetEvaluationRunRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GetDataQualityRulesetEvaluationRunRequest", name: "GetDataQualityRulesetEvaluationRunRequest")
@@ -689,6 +806,12 @@ module Aws::Glue
     GetDevEndpointsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GetDevEndpointsResponse", name: "GetDevEndpointsResponse")
     GetEntityRecordsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GetEntityRecordsRequest", name: "GetEntityRecordsRequest")
     GetEntityRecordsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GetEntityRecordsResponse", name: "GetEntityRecordsResponse")
+    GetFormTypeRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GetFormTypeRequest", name: "GetFormTypeRequest")
+    GetFormTypeResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GetFormTypeResponse", name: "GetFormTypeResponse")
+    GetGlossaryRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GetGlossaryRequest", name: "GetGlossaryRequest")
+    GetGlossaryResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GetGlossaryResponse", name: "GetGlossaryResponse")
+    GetGlossaryTermRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GetGlossaryTermRequest", name: "GetGlossaryTermRequest")
+    GetGlossaryTermResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GetGlossaryTermResponse", name: "GetGlossaryTermResponse")
     GetGlueIdentityCenterConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GetGlueIdentityCenterConfigurationRequest", name: "GetGlueIdentityCenterConfigurationRequest")
     GetGlueIdentityCenterConfigurationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GetGlueIdentityCenterConfigurationResponse", name: "GetGlueIdentityCenterConfigurationResponse")
     GetIntegrationResourcePropertyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GetIntegrationResourcePropertyRequest", name: "GetIntegrationResourcePropertyRequest")
@@ -715,6 +838,8 @@ module Aws::Glue
     GetMLTransformsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GetMLTransformsResponse", name: "GetMLTransformsResponse")
     GetMappingRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GetMappingRequest", name: "GetMappingRequest")
     GetMappingResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GetMappingResponse", name: "GetMappingResponse")
+    GetMaterializedViewRefreshTaskRunRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GetMaterializedViewRefreshTaskRunRequest", name: "GetMaterializedViewRefreshTaskRunRequest")
+    GetMaterializedViewRefreshTaskRunResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GetMaterializedViewRefreshTaskRunResponse", name: "GetMaterializedViewRefreshTaskRunResponse")
     GetPartitionIndexesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GetPartitionIndexesRequest", name: "GetPartitionIndexesRequest")
     GetPartitionIndexesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GetPartitionIndexesResponse", name: "GetPartitionIndexesResponse")
     GetPartitionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GetPartitionRequest", name: "GetPartitionRequest")
@@ -742,10 +867,16 @@ module Aws::Glue
     GetSecurityConfigurationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GetSecurityConfigurationResponse", name: "GetSecurityConfigurationResponse")
     GetSecurityConfigurationsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GetSecurityConfigurationsRequest", name: "GetSecurityConfigurationsRequest")
     GetSecurityConfigurationsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GetSecurityConfigurationsResponse", name: "GetSecurityConfigurationsResponse")
+    GetSessionEndpointRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GetSessionEndpointRequest", name: "GetSessionEndpointRequest")
+    GetSessionEndpointResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GetSessionEndpointResponse", name: "GetSessionEndpointResponse")
     GetSessionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GetSessionRequest", name: "GetSessionRequest")
     GetSessionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GetSessionResponse", name: "GetSessionResponse")
     GetStatementRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GetStatementRequest", name: "GetStatementRequest")
     GetStatementResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GetStatementResponse", name: "GetStatementResponse")
+    GetSystemLogsForJobRunRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GetSystemLogsForJobRunRequest", name: "GetSystemLogsForJobRunRequest")
+    GetSystemLogsForJobRunResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GetSystemLogsForJobRunResponse", name: "GetSystemLogsForJobRunResponse")
+    GetSystemLogsForSessionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GetSystemLogsForSessionRequest", name: "GetSystemLogsForSessionRequest")
+    GetSystemLogsForSessionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GetSystemLogsForSessionResponse", name: "GetSystemLogsForSessionResponse")
     GetTableOptimizerRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GetTableOptimizerRequest", name: "GetTableOptimizerRequest")
     GetTableOptimizerResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GetTableOptimizerResponse", name: "GetTableOptimizerResponse")
     GetTableRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GetTableRequest", name: "GetTableRequest")
@@ -783,10 +914,22 @@ module Aws::Glue
     GetWorkflowRunResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GetWorkflowRunResponse", name: "GetWorkflowRunResponse")
     GetWorkflowRunsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GetWorkflowRunsRequest", name: "GetWorkflowRunsRequest")
     GetWorkflowRunsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GetWorkflowRunsResponse", name: "GetWorkflowRunsResponse")
+    GlossaryId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#GlossaryId", name: "GlossaryId")
+    GlossaryItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GlossaryItem", name: "GlossaryItem")
+    GlossaryItemList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#GlossaryItemList", name: "GlossaryItemList")
+    GlossaryLongDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#GlossaryLongDescription", name: "GlossaryLongDescription", traits: {"smithy.api#length" => {"min" => 1, "max" => 4096}})
+    GlossaryName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#GlossaryName", name: "GlossaryName", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}})
+    GlossaryShortDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#GlossaryShortDescription", name: "GlossaryShortDescription", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}})
+    GlossaryTermId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#GlossaryTermId", name: "GlossaryTermId")
+    GlossaryTermIdList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#GlossaryTermIdList", name: "GlossaryTermIdList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
+    GlossaryTermItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GlossaryTermItem", name: "GlossaryTermItem")
+    GlossaryTermItemList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#GlossaryTermItemList", name: "GlossaryTermItemList")
+    GlossaryTermName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#GlossaryTermName", name: "GlossaryTermName", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}})
     GlueEncryptionException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GlueEncryptionException", name: "GlueEncryptionException", traits: {"smithy.api#error" => "client"})
     GluePolicy = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GluePolicy", name: "GluePolicy")
     GlueRecordType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#GlueRecordType", name: "GlueRecordType")
     GlueResourceArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#GlueResourceArn", name: "GlueResourceArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 10240}, "smithy.api#pattern" => "^arn:aws(-(cn|us-gov|iso(-[bef])?))?:glue:"})
+    GlueResourceType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#GlueResourceType", name: "GlueResourceType")
     GlueSchema = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GlueSchema", name: "GlueSchema")
     GlueSchemas = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#GlueSchemas", name: "GlueSchemas")
     GlueStudioColumnNameString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#GlueStudioColumnNameString", name: "GlueStudioColumnNameString", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}, "smithy.api#pattern" => "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$"})
@@ -803,6 +946,7 @@ module Aws::Glue
     GrokPattern = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#GrokPattern", name: "GrokPattern", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#pattern" => "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\t]*$"})
     GroupFilters = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#GroupFilters", name: "GroupFilters")
     GroupFiltersList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#GroupFiltersList", name: "GroupFiltersList")
+    HTTPMethod = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#HTTPMethod", name: "HTTPMethod")
     HashString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#HashString", name: "HashString", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$"})
     HudiTarget = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#HudiTarget", name: "HudiTarget")
     HudiTargetCompressionType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#HudiTargetCompressionType", name: "HudiTargetCompressionType")
@@ -812,6 +956,7 @@ module Aws::Glue
     IcebergCompactionConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#IcebergCompactionConfiguration", name: "IcebergCompactionConfiguration")
     IcebergCompactionMetrics = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#IcebergCompactionMetrics", name: "IcebergCompactionMetrics")
     IcebergDocument = ::Smithy::Schema::Shapes::DocumentShape.new(id: "com.amazonaws.glue#IcebergDocument", name: "IcebergDocument")
+    IcebergEncryptedKey = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#IcebergEncryptedKey", name: "IcebergEncryptedKey")
     IcebergInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#IcebergInput", name: "IcebergInput")
     IcebergNullOrder = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#IcebergNullOrder", name: "IcebergNullOrder")
     IcebergOptimizationProperties = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#IcebergOptimizationProperties", name: "IcebergOptimizationProperties")
@@ -821,22 +966,27 @@ module Aws::Glue
     IcebergPartitionField = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#IcebergPartitionField", name: "IcebergPartitionField")
     IcebergPartitionSpec = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#IcebergPartitionSpec", name: "IcebergPartitionSpec")
     IcebergPartitionSpecFieldList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#IcebergPartitionSpecFieldList", name: "IcebergPartitionSpecFieldList")
+    IcebergPartitionSpecList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#IcebergPartitionSpecList", name: "IcebergPartitionSpecList")
     IcebergRetentionConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#IcebergRetentionConfiguration", name: "IcebergRetentionConfiguration")
     IcebergRetentionMetrics = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#IcebergRetentionMetrics", name: "IcebergRetentionMetrics")
     IcebergSchema = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#IcebergSchema", name: "IcebergSchema")
+    IcebergSchemaList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#IcebergSchemaList", name: "IcebergSchemaList")
     IcebergSortDirection = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#IcebergSortDirection", name: "IcebergSortDirection")
     IcebergSortField = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#IcebergSortField", name: "IcebergSortField")
     IcebergSortOrder = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#IcebergSortOrder", name: "IcebergSortOrder")
     IcebergSortOrderFieldList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#IcebergSortOrderFieldList", name: "IcebergSortOrderFieldList")
+    IcebergSortOrderList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#IcebergSortOrderList", name: "IcebergSortOrderList")
     IcebergStructField = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#IcebergStructField", name: "IcebergStructField")
     IcebergStructFieldList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#IcebergStructFieldList", name: "IcebergStructFieldList")
     IcebergStructTypeEnum = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#IcebergStructTypeEnum", name: "IcebergStructTypeEnum")
+    IcebergTableMetadata = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#IcebergTableMetadata", name: "IcebergTableMetadata")
     IcebergTableUpdate = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#IcebergTableUpdate", name: "IcebergTableUpdate")
     IcebergTableUpdateList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#IcebergTableUpdateList", name: "IcebergTableUpdateList")
     IcebergTarget = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#IcebergTarget", name: "IcebergTarget")
     IcebergTargetCompressionType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#IcebergTargetCompressionType", name: "IcebergTargetCompressionType")
     IcebergTargetList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#IcebergTargetList", name: "IcebergTargetList")
     IcebergTransformString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#IcebergTransformString", name: "IcebergTransformString")
+    IcebergUpdateAction = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#IcebergUpdateAction", name: "IcebergUpdateAction")
     IdString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#IdString", name: "IdString", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$"})
     IdempotentParameterMismatchException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#IdempotentParameterMismatchException", name: "IdempotentParameterMismatchException", traits: {"smithy.api#error" => "client"})
     IdentityCenterInstanceArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#IdentityCenterInstanceArn", name: "IdentityCenterInstanceArn", traits: {"smithy.api#length" => {"min" => 10, "max" => 1224}})
@@ -873,11 +1023,22 @@ module Aws::Glue
     IntegrationPartition = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#IntegrationPartition", name: "IntegrationPartition")
     IntegrationPartitionSpecList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#IntegrationPartitionSpecList", name: "IntegrationPartitionSpecList")
     IntegrationQuotaExceededFault = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#IntegrationQuotaExceededFault", name: "IntegrationQuotaExceededFault", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 402})
+    IntegrationResourceProperty = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#IntegrationResourceProperty", name: "IntegrationResourceProperty")
+    IntegrationResourcePropertyFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#IntegrationResourcePropertyFilter", name: "IntegrationResourcePropertyFilter")
+    IntegrationResourcePropertyFilterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#IntegrationResourcePropertyFilterList", name: "IntegrationResourcePropertyFilterList")
+    IntegrationResourcePropertyFilterValues = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#IntegrationResourcePropertyFilterValues", name: "IntegrationResourcePropertyFilterValues")
+    IntegrationResourcePropertyList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#IntegrationResourcePropertyList", name: "IntegrationResourcePropertyList")
     IntegrationSourcePropertiesMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.glue#IntegrationSourcePropertiesMap", name: "IntegrationSourcePropertiesMap")
     IntegrationStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#IntegrationStatus", name: "IntegrationStatus")
     IntegrationString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#IntegrationString", name: "IntegrationString")
+    IntegrationTableProperties = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#IntegrationTableProperties", name: "IntegrationTableProperties")
+    IntegrationTablePropertiesFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#IntegrationTablePropertiesFilter", name: "IntegrationTablePropertiesFilter")
+    IntegrationTablePropertiesFilterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#IntegrationTablePropertiesFilterList", name: "IntegrationTablePropertiesFilterList")
+    IntegrationTablePropertiesFilterValues = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#IntegrationTablePropertiesFilterValues", name: "IntegrationTablePropertiesFilterValues")
+    IntegrationTablePropertiesList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#IntegrationTablePropertiesList", name: "IntegrationTablePropertiesList")
     IntegrationTagsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#IntegrationTagsList", name: "IntegrationTagsList")
     IntegrationTimestamp = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.glue#IntegrationTimestamp", name: "IntegrationTimestamp")
+    IntegrationType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#IntegrationType", name: "IntegrationType")
     IntegrationsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#IntegrationsList", name: "IntegrationsList")
     InternalServerException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#InternalServerException", name: "InternalServerException", traits: {"smithy.api#error" => "server", "smithy.api#httpError" => 500})
     InternalServiceException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#InternalServiceException", name: "InternalServiceException", traits: {"smithy.api#error" => "server"})
@@ -887,12 +1048,30 @@ module Aws::Glue
     IsParentEntity = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.glue#IsParentEntity", name: "IsParentEntity")
     IsVersionValid = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.glue#IsVersionValid", name: "IsVersionValid", traits: {"smithy.api#default" => false})
     Iso8601DateTime = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.glue#Iso8601DateTime", name: "Iso8601DateTime", traits: {"smithy.api#timestampFormat" => "date-time"})
+    ItemDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#ItemDescription", name: "ItemDescription")
+    ItemError = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#ItemError", name: "ItemError")
+    ItemErrorCode = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#ItemErrorCode", name: "ItemErrorCode")
+    ItemErrorList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#ItemErrorList", name: "ItemErrorList")
+    ItemErrorMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#ItemErrorMessage", name: "ItemErrorMessage")
+    ItemId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#ItemId", name: "ItemId")
+    ItemIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#ItemIdentifier", name: "ItemIdentifier", traits: {"smithy.api#length" => {"min" => 1, "max" => 1087}})
+    ItemIdentifierList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#ItemIdentifierList", name: "ItemIdentifierList", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
+    ItemName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#ItemName", name: "ItemName")
+    IterableFormEntry = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#IterableFormEntry", name: "IterableFormEntry")
+    IterableFormItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#IterableFormItem", name: "IterableFormItem")
+    IterableFormItemList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#IterableFormItemList", name: "IterableFormItemList")
+    IterableFormKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#IterableFormKey", name: "IterableFormKey")
+    IterableFormListItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#IterableFormListItem", name: "IterableFormListItem")
+    IterableFormListItemList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#IterableFormListItemList", name: "IterableFormListItemList")
+    IterableFormMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.glue#IterableFormMap", name: "IterableFormMap")
+    IterableFormName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#IterableFormName", name: "IterableFormName", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[a-zA-Z][a-zA-Z0-9_]*(::[a-zA-Z][a-zA-Z0-9_]*)?$"})
     JDBCConnectionType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#JDBCConnectionType", name: "JDBCConnectionType")
     JDBCConnectorOptions = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#JDBCConnectorOptions", name: "JDBCConnectorOptions")
     JDBCConnectorSource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#JDBCConnectorSource", name: "JDBCConnectorSource")
     JDBCConnectorTarget = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#JDBCConnectorTarget", name: "JDBCConnectorTarget")
     JDBCDataType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#JDBCDataType", name: "JDBCDataType")
     JDBCDataTypeMapping = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.glue#JDBCDataTypeMapping", name: "JDBCDataTypeMapping")
+    JWTBearerProperties = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#JWTBearerProperties", name: "JWTBearerProperties")
     JdbcMetadataEntry = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#JdbcMetadataEntry", name: "JdbcMetadataEntry")
     JdbcTarget = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#JdbcTarget", name: "JdbcTarget")
     JdbcTargetList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#JdbcTargetList", name: "JdbcTargetList")
@@ -916,6 +1095,7 @@ module Aws::Glue
     JoinType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#JoinType", name: "JoinType")
     JsonClassifier = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#JsonClassifier", name: "JsonClassifier")
     JsonPath = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#JsonPath", name: "JsonPath")
+    JsonPathString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#JsonPathString", name: "JsonPathString", traits: {"smithy.api#length" => {"min" => 1, "max" => 512}, "smithy.api#pattern" => "^\\$(\\.[a-zA-Z0-9_.@\\[\\]\\(\\)-]+)*$"})
     JsonValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#JsonValue", name: "JsonValue")
     JwtToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#JwtToken", name: "JwtToken", traits: {"smithy.api#length" => {"min" => 0, "max" => 8000}, "smithy.api#pattern" => "^([a-zA-Z0-9_=]+)\\.([a-zA-Z0-9_=]+)\\.([a-zA-Z0-9_\\-\\+\\/=]*)$", "smithy.api#sensitive" => {}})
     KMSKeyNotAccessibleFault = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#KMSKeyNotAccessibleFault", name: "KMSKeyNotAccessibleFault", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
@@ -925,19 +1105,24 @@ module Aws::Glue
     KeySchemaElementList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#KeySchemaElementList", name: "KeySchemaElementList", traits: {"smithy.api#length" => {"min" => 1}})
     KeyString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#KeyString", name: "KeyString", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$"})
     KinesisStreamingSourceOptions = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#KinesisStreamingSourceOptions", name: "KinesisStreamingSourceOptions")
-    KmsKeyArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#KmsKeyArn", name: "KmsKeyArn", traits: {"smithy.api#pattern" => "^arn:aws:kms:"})
+    KmsKeyArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#KmsKeyArn", name: "KmsKeyArn", traits: {"smithy.api#pattern" => "^$|arn:aws[a-z0-9-]*:kms:"})
+    KmsKeyArnString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#KmsKeyArnString", name: "KmsKeyArnString", traits: {"smithy.api#pattern" => "^arn:aws[-a-z0-9]*:kms:[-a-z0-9]*:[0-9]{12}:key/.+$"})
     LabelCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.glue#LabelCount", name: "LabelCount", traits: {"smithy.api#default" => 0})
     LabelingSetGenerationTaskRunProperties = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#LabelingSetGenerationTaskRunProperties", name: "LabelingSetGenerationTaskRunProperties")
+    Labels = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.glue#Labels", name: "Labels")
     LakeFormationConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#LakeFormationConfiguration", name: "LakeFormationConfiguration")
     Language = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#Language", name: "Language")
     LastActiveDefinition = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#LastActiveDefinition", name: "LastActiveDefinition")
     LastCrawlInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#LastCrawlInfo", name: "LastCrawlInfo")
     LastCrawlStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#LastCrawlStatus", name: "LastCrawlStatus")
+    LastRefreshType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#LastRefreshType", name: "LastRefreshType")
     LatestSchemaVersionBoolean = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.glue#LatestSchemaVersionBoolean", name: "LatestSchemaVersionBoolean", traits: {"smithy.api#default" => false})
     Limit = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.glue#Limit", name: "Limit", traits: {"smithy.api#range" => {"min" => 1, "max" => 1000}})
     LimitedPathList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#LimitedPathList", name: "LimitedPathList")
     LimitedStringList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#LimitedStringList", name: "LimitedStringList")
     LineageConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#LineageConfiguration", name: "LineageConfiguration")
+    ListAssetTypesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#ListAssetTypesRequest", name: "ListAssetTypesRequest")
+    ListAssetTypesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#ListAssetTypesResponse", name: "ListAssetTypesResponse")
     ListBlueprintsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#ListBlueprintsRequest", name: "ListBlueprintsRequest")
     ListBlueprintsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#ListBlueprintsResponse", name: "ListBlueprintsResponse")
     ListColumnStatisticsTaskRunsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#ListColumnStatisticsTaskRunsRequest", name: "ListColumnStatisticsTaskRunsRequest")
@@ -952,6 +1137,8 @@ module Aws::Glue
     ListCustomEntityTypesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#ListCustomEntityTypesResponse", name: "ListCustomEntityTypesResponse")
     ListDataQualityResultsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#ListDataQualityResultsRequest", name: "ListDataQualityResultsRequest")
     ListDataQualityResultsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#ListDataQualityResultsResponse", name: "ListDataQualityResultsResponse")
+    ListDataQualityResultsV2Request = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#ListDataQualityResultsV2Request", name: "ListDataQualityResultsV2Request")
+    ListDataQualityResultsV2Response = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#ListDataQualityResultsV2Response", name: "ListDataQualityResultsV2Response")
     ListDataQualityRuleRecommendationRunsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#ListDataQualityRuleRecommendationRunsRequest", name: "ListDataQualityRuleRecommendationRunsRequest")
     ListDataQualityRuleRecommendationRunsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#ListDataQualityRuleRecommendationRunsResponse", name: "ListDataQualityRuleRecommendationRunsResponse")
     ListDataQualityRulesetEvaluationRunsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#ListDataQualityRulesetEvaluationRunsRequest", name: "ListDataQualityRulesetEvaluationRunsRequest")
@@ -966,10 +1153,24 @@ module Aws::Glue
     ListDevEndpointsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#ListDevEndpointsResponse", name: "ListDevEndpointsResponse")
     ListEntitiesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#ListEntitiesRequest", name: "ListEntitiesRequest")
     ListEntitiesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#ListEntitiesResponse", name: "ListEntitiesResponse")
+    ListFormTypesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#ListFormTypesRequest", name: "ListFormTypesRequest")
+    ListFormTypesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#ListFormTypesResponse", name: "ListFormTypesResponse")
+    ListGlossariesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#ListGlossariesRequest", name: "ListGlossariesRequest")
+    ListGlossariesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#ListGlossariesResponse", name: "ListGlossariesResponse")
+    ListGlossaryTermsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#ListGlossaryTermsRequest", name: "ListGlossaryTermsRequest")
+    ListGlossaryTermsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#ListGlossaryTermsResponse", name: "ListGlossaryTermsResponse")
+    ListIntegrationResourcePropertiesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#ListIntegrationResourcePropertiesRequest", name: "ListIntegrationResourcePropertiesRequest")
+    ListIntegrationResourcePropertiesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#ListIntegrationResourcePropertiesResponse", name: "ListIntegrationResourcePropertiesResponse")
+    ListIntegrationTablePropertiesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#ListIntegrationTablePropertiesRequest", name: "ListIntegrationTablePropertiesRequest")
+    ListIntegrationTablePropertiesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#ListIntegrationTablePropertiesResponse", name: "ListIntegrationTablePropertiesResponse")
+    ListIterableFormsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#ListIterableFormsRequest", name: "ListIterableFormsRequest")
+    ListIterableFormsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#ListIterableFormsResponse", name: "ListIterableFormsResponse")
     ListJobsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#ListJobsRequest", name: "ListJobsRequest")
     ListJobsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#ListJobsResponse", name: "ListJobsResponse")
     ListMLTransformsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#ListMLTransformsRequest", name: "ListMLTransformsRequest")
     ListMLTransformsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#ListMLTransformsResponse", name: "ListMLTransformsResponse")
+    ListMaterializedViewRefreshTaskRunsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#ListMaterializedViewRefreshTaskRunsRequest", name: "ListMaterializedViewRefreshTaskRunsRequest")
+    ListMaterializedViewRefreshTaskRunsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#ListMaterializedViewRefreshTaskRunsResponse", name: "ListMaterializedViewRefreshTaskRunsResponse")
     ListOfString = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#ListOfString", name: "ListOfString")
     ListRegistriesInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#ListRegistriesInput", name: "ListRegistriesInput")
     ListRegistriesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#ListRegistriesResponse", name: "ListRegistriesResponse")
@@ -1015,6 +1216,13 @@ module Aws::Glue
     Mappings = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#Mappings", name: "Mappings")
     MaskValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#MaskValue", name: "MaskValue", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#pattern" => "^[*A-Za-z0-9_-]*$"})
     MatchCriteria = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#MatchCriteria", name: "MatchCriteria", traits: {"smithy.api#length" => {"min" => 0, "max" => 10}})
+    MaterializedViewRefreshState = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#MaterializedViewRefreshState", name: "MaterializedViewRefreshState")
+    MaterializedViewRefreshTaskNotRunningException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#MaterializedViewRefreshTaskNotRunningException", name: "MaterializedViewRefreshTaskNotRunningException", traits: {"smithy.api#error" => "client"})
+    MaterializedViewRefreshTaskRun = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#MaterializedViewRefreshTaskRun", name: "MaterializedViewRefreshTaskRun")
+    MaterializedViewRefreshTaskRunningException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#MaterializedViewRefreshTaskRunningException", name: "MaterializedViewRefreshTaskRunningException", traits: {"smithy.api#error" => "client"})
+    MaterializedViewRefreshTaskRunsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#MaterializedViewRefreshTaskRunsList", name: "MaterializedViewRefreshTaskRunsList")
+    MaterializedViewRefreshTaskStoppingException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#MaterializedViewRefreshTaskStoppingException", name: "MaterializedViewRefreshTaskStoppingException", traits: {"smithy.api#error" => "client"})
+    MaterializedViewRefreshType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#MaterializedViewRefreshType", name: "MaterializedViewRefreshType")
     MaxConcurrentRuns = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.glue#MaxConcurrentRuns", name: "MaxConcurrentRuns", traits: {"smithy.api#default" => 0})
     MaxListTableOptimizerRunsTokenResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.glue#MaxListTableOptimizerRunsTokenResults", name: "MaxListTableOptimizerRunsTokenResults", traits: {"smithy.api#default" => 0})
     MaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.glue#MaxResults", name: "MaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}})
@@ -1023,6 +1231,7 @@ module Aws::Glue
     Merge = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#Merge", name: "Merge")
     MessagePrefix = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#MessagePrefix", name: "MessagePrefix", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$"})
     MessageString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#MessageString", name: "MessageString")
+    MetadataDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#MetadataDescription", name: "MetadataDescription", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}})
     MetadataInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#MetadataInfo", name: "MetadataInfo")
     MetadataInfoMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.glue#MetadataInfoMap", name: "MetadataInfoMap")
     MetadataKeyString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#MetadataKeyString", name: "MetadataKeyString", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[a-zA-Z0-9+-=._./@]+$"})
@@ -1063,6 +1272,7 @@ module Aws::Glue
     NullableBoolean = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.glue#NullableBoolean", name: "NullableBoolean")
     NullableDouble = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.glue#NullableDouble", name: "NullableDouble")
     NullableInteger = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.glue#NullableInteger", name: "NullableInteger")
+    NullableLong = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.glue#NullableLong", name: "NullableLong")
     NullableString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#NullableString", name: "NullableString")
     NumberTargetPartitionsString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#NumberTargetPartitionsString", name: "NumberTargetPartitionsString")
     OAuth2ClientApplication = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#OAuth2ClientApplication", name: "OAuth2ClientApplication")
@@ -1070,6 +1280,10 @@ module Aws::Glue
     OAuth2GrantType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#OAuth2GrantType", name: "OAuth2GrantType")
     OAuth2Properties = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#OAuth2Properties", name: "OAuth2Properties")
     OAuth2PropertiesInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#OAuth2PropertiesInput", name: "OAuth2PropertiesInput")
+    ObservationConfiguration = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#ObservationConfiguration", name: "ObservationConfiguration")
+    ObservationMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#ObservationMode", name: "ObservationMode")
+    ObservationResultsOptions = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#ObservationResultsOptions", name: "ObservationResultsOptions")
+    OffsetConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#OffsetConfiguration", name: "OffsetConfiguration")
     OneInput = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#OneInput", name: "OneInput", traits: {"smithy.api#length" => {"min" => 1, "max" => 1}})
     OpenTableFormatInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#OpenTableFormatInput", name: "OpenTableFormatInput")
     Operation = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#Operation", name: "Operation", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[A-Z\\_]+$"})
@@ -1100,8 +1314,10 @@ module Aws::Glue
     OrphanFileDeletionMetrics = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#OrphanFileDeletionMetrics", name: "OrphanFileDeletionMetrics")
     OtherMetadataValueList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#OtherMetadataValueList", name: "OtherMetadataValueList")
     OtherMetadataValueListItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#OtherMetadataValueListItem", name: "OtherMetadataValueListItem")
+    OverwriteChildResourcePermissionsWithDefaultEnum = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#OverwriteChildResourcePermissionsWithDefaultEnum", name: "OverwriteChildResourcePermissionsWithDefaultEnum")
     PIIDetection = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#PIIDetection", name: "PIIDetection")
     PageSize = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.glue#PageSize", name: "PageSize", traits: {"smithy.api#range" => {"min" => 1, "max" => 1000}})
+    PaginationConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#PaginationConfiguration", name: "PaginationConfiguration")
     PaginationToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#PaginationToken", name: "PaginationToken")
     ParamType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#ParamType", name: "ParamType")
     ParameterMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.glue#ParameterMap", name: "ParameterMap")
@@ -1116,7 +1332,7 @@ module Aws::Glue
     PartitionIndex = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#PartitionIndex", name: "PartitionIndex")
     PartitionIndexDescriptor = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#PartitionIndexDescriptor", name: "PartitionIndexDescriptor")
     PartitionIndexDescriptorList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#PartitionIndexDescriptorList", name: "PartitionIndexDescriptorList")
-    PartitionIndexList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#PartitionIndexList", name: "PartitionIndexList", traits: {"smithy.api#length" => {"min" => 0, "max" => 3}})
+    PartitionIndexList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#PartitionIndexList", name: "PartitionIndexList")
     PartitionIndexStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#PartitionIndexStatus", name: "PartitionIndexStatus")
     PartitionInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#PartitionInput", name: "PartitionInput")
     PartitionInputList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#PartitionInputList", name: "PartitionInputList", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}})
@@ -1125,6 +1341,7 @@ module Aws::Glue
     Password = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#Password", name: "Password", traits: {"smithy.api#length" => {"min" => 0, "max" => 512}, "smithy.api#pattern" => ".*", "smithy.api#sensitive" => {}})
     Path = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#Path", name: "Path")
     PathList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#PathList", name: "PathList")
+    PathString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#PathString", name: "PathString", traits: {"smithy.api#length" => {"min" => 1, "max" => 512}, "smithy.api#pattern" => "^/[a-zA-Z0-9._~:/?#\\[\\]@!$&'()*+,;={}-]*$"})
     Permission = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#Permission", name: "Permission")
     PermissionList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#PermissionList", name: "PermissionList")
     PermissionType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#PermissionType", name: "PermissionType")
@@ -1149,10 +1366,12 @@ module Aws::Glue
     PrincipalType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#PrincipalType", name: "PrincipalType")
     Prob = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.glue#Prob", name: "Prob", traits: {"smithy.api#range" => {"min" => 0, "max" => 1}})
     ProfileConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#ProfileConfiguration", name: "ProfileConfiguration")
+    ProfilingResultsOptions = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#ProfilingResultsOptions", name: "ProfilingResultsOptions")
     PropertiesMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.glue#PropertiesMap", name: "PropertiesMap")
     Property = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#Property", name: "Property")
     PropertyDescriptionString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#PropertyDescriptionString", name: "PropertyDescriptionString", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}})
     PropertyKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#PropertyKey", name: "PropertyKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}})
+    PropertyLocation = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#PropertyLocation", name: "PropertyLocation")
     PropertyMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.glue#PropertyMap", name: "PropertyMap")
     PropertyName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#PropertyName", name: "PropertyName", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}})
     PropertyNameOverrides = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.glue#PropertyNameOverrides", name: "PropertyNameOverrides")
@@ -1161,10 +1380,25 @@ module Aws::Glue
     PropertyTypes = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#PropertyTypes", name: "PropertyTypes")
     PropertyValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#PropertyValue", name: "PropertyValue", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}})
     PublicKeysList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#PublicKeysList", name: "PublicKeysList", traits: {"smithy.api#length" => {"min" => 0, "max" => 5}})
+    PublishDataQualityResultDescriptors = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.glue#PublishDataQualityResultDescriptors", name: "PublishDataQualityResultDescriptors", traits: {"smithy.api#length" => {"min" => 0, "max" => 10}})
+    PublishDataQualityResultDimensions = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.glue#PublishDataQualityResultDimensions", name: "PublishDataQualityResultDimensions", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
+    PublishDataQualityResultTags = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.glue#PublishDataQualityResultTags", name: "PublishDataQualityResultTags", traits: {"smithy.api#length" => {"min" => 1, "max" => 5}})
+    PublishDataQualityResultV2Request = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#PublishDataQualityResultV2Request", name: "PublishDataQualityResultV2Request")
+    PublishDataQualityResultV2Response = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#PublishDataQualityResultV2Response", name: "PublishDataQualityResultV2Response")
+    PutAssetRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#PutAssetRequest", name: "PutAssetRequest")
+    PutAssetResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#PutAssetResponse", name: "PutAssetResponse")
+    PutAssetTypeRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#PutAssetTypeRequest", name: "PutAssetTypeRequest")
+    PutAssetTypeResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#PutAssetTypeResponse", name: "PutAssetTypeResponse")
+    PutAttachmentRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#PutAttachmentRequest", name: "PutAttachmentRequest")
+    PutAttachmentResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#PutAttachmentResponse", name: "PutAttachmentResponse")
     PutDataCatalogEncryptionSettingsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#PutDataCatalogEncryptionSettingsRequest", name: "PutDataCatalogEncryptionSettingsRequest")
     PutDataCatalogEncryptionSettingsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#PutDataCatalogEncryptionSettingsResponse", name: "PutDataCatalogEncryptionSettingsResponse")
+    PutDataCatalogExportConfigurationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#PutDataCatalogExportConfigurationInput", name: "PutDataCatalogExportConfigurationInput")
+    PutDataCatalogExportConfigurationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#PutDataCatalogExportConfigurationOutput", name: "PutDataCatalogExportConfigurationOutput")
     PutDataQualityProfileAnnotationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#PutDataQualityProfileAnnotationRequest", name: "PutDataQualityProfileAnnotationRequest")
     PutDataQualityProfileAnnotationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#PutDataQualityProfileAnnotationResponse", name: "PutDataQualityProfileAnnotationResponse")
+    PutFormTypeRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#PutFormTypeRequest", name: "PutFormTypeRequest")
+    PutFormTypeResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#PutFormTypeResponse", name: "PutFormTypeResponse")
     PutResourcePolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#PutResourcePolicyRequest", name: "PutResourcePolicyRequest")
     PutResourcePolicyResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#PutResourcePolicyResponse", name: "PutResourcePolicyResponse")
     PutSchemaVersionMetadataInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#PutSchemaVersionMetadataInput", name: "PutSchemaVersionMetadataInput")
@@ -1178,12 +1412,14 @@ module Aws::Glue
     QuerySchemaVersionMetadataResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#QuerySchemaVersionMetadataResponse", name: "QuerySchemaVersionMetadataResponse")
     QuerySessionContext = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#QuerySessionContext", name: "QuerySessionContext")
     QuoteChar = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#QuoteChar", name: "QuoteChar")
+    RLSProperties = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#RLSProperties", name: "RLSProperties")
     Recipe = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#Recipe", name: "Recipe")
     RecipeAction = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#RecipeAction", name: "RecipeAction")
     RecipeReference = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#RecipeReference", name: "RecipeReference")
     RecipeStep = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#RecipeStep", name: "RecipeStep")
     RecipeSteps = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#RecipeSteps", name: "RecipeSteps")
     RecipeVersion = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#RecipeVersion", name: "RecipeVersion", traits: {"smithy.api#length" => {"min" => 1, "max" => 16}})
+    RecommendationMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#RecommendationMode", name: "RecommendationMode")
     Record = ::Smithy::Schema::Shapes::DocumentShape.new(id: "com.amazonaws.glue#Record", name: "Record", traits: {"smithy.api#sensitive" => {}})
     Records = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#Records", name: "Records", traits: {"smithy.api#sensitive" => {}})
     RecordsCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.glue#RecordsCount", name: "RecordsCount")
@@ -1193,7 +1429,10 @@ module Aws::Glue
     RedshiftSource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#RedshiftSource", name: "RedshiftSource")
     RedshiftTarget = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#RedshiftTarget", name: "RedshiftTarget")
     ReferenceDatasetsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#ReferenceDatasetsList", name: "ReferenceDatasetsList")
+    RefreshSeconds = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.glue#RefreshSeconds", name: "RefreshSeconds")
     RefreshToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#RefreshToken", name: "RefreshToken", traits: {"smithy.api#length" => {"min" => 0, "max" => 4096}, "smithy.api#pattern" => "^[\\x20-\\x7E]*$", "smithy.api#sensitive" => {}})
+    RegisterConnectionTypeRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#RegisterConnectionTypeRequest", name: "RegisterConnectionTypeRequest")
+    RegisterConnectionTypeResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#RegisterConnectionTypeResponse", name: "RegisterConnectionTypeResponse")
     RegisterSchemaVersionInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#RegisterSchemaVersionInput", name: "RegisterSchemaVersionInput")
     RegisterSchemaVersionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#RegisterSchemaVersionResponse", name: "RegisterSchemaVersionResponse")
     RegistryId = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#RegistryId", name: "RegistryId")
@@ -1217,6 +1456,10 @@ module Aws::Glue
     ResourceType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#ResourceType", name: "ResourceType")
     ResourceUri = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#ResourceUri", name: "ResourceUri")
     ResourceUriList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#ResourceUriList", name: "ResourceUriList", traits: {"smithy.api#length" => {"min" => 0, "max" => 1000}})
+    ResponseConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#ResponseConfiguration", name: "ResponseConfiguration")
+    ResponseExtractionMapping = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#ResponseExtractionMapping", name: "ResponseExtractionMapping")
+    RestConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#RestConfiguration", name: "RestConfiguration")
+    ResultTypeEnum = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#ResultTypeEnum", name: "ResultTypeEnum")
     ResumeWorkflowRunRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#ResumeWorkflowRunRequest", name: "ResumeWorkflowRunRequest")
     ResumeWorkflowRunResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#ResumeWorkflowRunResponse", name: "ResumeWorkflowRunResponse")
     RetentionConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#RetentionConfiguration", name: "RetentionConfiguration")
@@ -1225,6 +1468,7 @@ module Aws::Glue
     RoleArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#RoleArn", name: "RoleArn", traits: {"smithy.api#pattern" => "^arn:aws:iam::\\d{12}:role/"})
     RoleString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#RoleString", name: "RoleString")
     Route = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#Route", name: "Route")
+    RowLevelResultsOptions = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#RowLevelResultsOptions", name: "RowLevelResultsOptions")
     RowTag = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#RowTag", name: "RowTag")
     RuleMetricsMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.glue#RuleMetricsMap", name: "RuleMetricsMap", traits: {"smithy.api#sensitive" => {}})
     RulesetNames = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#RulesetNames", name: "RulesetNames", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
@@ -1259,6 +1503,7 @@ module Aws::Glue
     S3JsonSource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#S3JsonSource", name: "S3JsonSource")
     S3ParquetSource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#S3ParquetSource", name: "S3ParquetSource")
     S3SourceAdditionalOptions = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#S3SourceAdditionalOptions", name: "S3SourceAdditionalOptions")
+    S3TableBucketArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#S3TableBucketArn", name: "S3TableBucketArn")
     S3Target = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#S3Target", name: "S3Target")
     S3TargetList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#S3TargetList", name: "S3TargetList")
     SampleSizePercentage = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.glue#SampleSizePercentage", name: "SampleSizePercentage", traits: {"smithy.api#default" => 0, "smithy.api#range" => {"min" => 0, "max" => 100}})
@@ -1292,9 +1537,30 @@ module Aws::Glue
     SchemaVersionNumber = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#SchemaVersionNumber", name: "SchemaVersionNumber")
     SchemaVersionStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#SchemaVersionStatus", name: "SchemaVersionStatus")
     ScriptLocationString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#ScriptLocationString", name: "ScriptLocationString", traits: {"smithy.api#length" => {"min" => 0, "max" => 400000}})
+    SearchAssetsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#SearchAssetsInput", name: "SearchAssetsInput")
+    SearchAssetsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#SearchAssetsOutput", name: "SearchAssetsOutput")
+    SearchAttribute = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#SearchAttribute", name: "SearchAttribute", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}})
+    SearchAttributeFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#SearchAttributeFilter", name: "SearchAttributeFilter")
+    SearchFilterClause = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.glue#SearchFilterClause", name: "SearchFilterClause")
+    SearchFilterClauseList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#SearchFilterClauseList", name: "SearchFilterClauseList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
+    SearchFilterLongValue = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.glue#SearchFilterLongValue", name: "SearchFilterLongValue", traits: {"smithy.api#default" => 0})
+    SearchFilterOperator = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#SearchFilterOperator", name: "SearchFilterOperator")
+    SearchFilterStringValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#SearchFilterStringValue", name: "SearchFilterStringValue", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}})
+    SearchFilterValue = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.glue#SearchFilterValue", name: "SearchFilterValue")
+    SearchMapFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#SearchMapFilter", name: "SearchMapFilter")
+    SearchMapFilterValue = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.glue#SearchMapFilterValue", name: "SearchMapFilterValue")
+    SearchMapKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#SearchMapKey", name: "SearchMapKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}})
+    SearchMaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.glue#SearchMaxResults", name: "SearchMaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}})
+    SearchNextToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#SearchNextToken", name: "SearchNextToken")
     SearchPropertyPredicates = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#SearchPropertyPredicates", name: "SearchPropertyPredicates")
+    SearchResultItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#SearchResultItem", name: "SearchResultItem")
+    SearchResultItemList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#SearchResultItemList", name: "SearchResultItemList")
+    SearchResultName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#SearchResultName", name: "SearchResultName")
+    SearchSort = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#SearchSort", name: "SearchSort")
+    SearchSortOrder = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#SearchSortOrder", name: "SearchSortOrder")
     SearchTablesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#SearchTablesRequest", name: "SearchTablesRequest")
     SearchTablesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#SearchTablesResponse", name: "SearchTablesResponse")
+    SearchText = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#SearchText", name: "SearchText", traits: {"smithy.api#length" => {"min" => 1, "max" => 1000}})
     SecretArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#SecretArn", name: "SecretArn", traits: {"smithy.api#pattern" => "^arn:aws(-(cn|us-gov|iso(-[bef])?))?:secretsmanager:.*$"})
     SecurityConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#SecurityConfiguration", name: "SecurityConfiguration")
     SecurityConfigurationList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#SecurityConfigurationList", name: "SecurityConfigurationList")
@@ -1303,13 +1569,18 @@ module Aws::Glue
     SelectFields = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#SelectFields", name: "SelectFields")
     SelectFromCollection = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#SelectFromCollection", name: "SelectFromCollection")
     SelectedFields = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#SelectedFields", name: "SelectedFields", traits: {"smithy.api#length" => {"min" => 1, "max" => 1000}})
+    SensitiveString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#SensitiveString", name: "SensitiveString", traits: {"smithy.api#length" => {"min" => 0, "max" => 16384}, "smithy.api#sensitive" => {}})
+    SensitiveUrl = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#SensitiveUrl", name: "SensitiveUrl", traits: {"smithy.api#length" => {"min" => 0, "max" => 40000}, "smithy.api#sensitive" => {}})
     Separator = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#Separator", name: "Separator")
     SerDeInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#SerDeInfo", name: "SerDeInfo")
     Session = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#Session", name: "Session")
+    SessionBusyException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#SessionBusyException", name: "SessionBusyException", traits: {"smithy.api#error" => "client"})
     SessionCommand = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#SessionCommand", name: "SessionCommand")
+    SessionEndpoint = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#SessionEndpoint", name: "SessionEndpoint")
     SessionIdList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#SessionIdList", name: "SessionIdList")
     SessionList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#SessionList", name: "SessionList")
     SessionStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#SessionStatus", name: "SessionStatus")
+    SessionType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#SessionType", name: "SessionType")
     SettingSource = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#SettingSource", name: "SettingSource")
     SkewedInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#SkewedInfo", name: "SkewedInfo")
     SnowflakeNodeData = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#SnowflakeNodeData", name: "SnowflakeNodeData")
@@ -1319,20 +1590,26 @@ module Aws::Glue
     SortCriteria = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#SortCriteria", name: "SortCriteria", traits: {"smithy.api#length" => {"min" => 0, "max" => 1}})
     SortCriterion = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#SortCriterion", name: "SortCriterion")
     SortDirectionType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#SortDirectionType", name: "SortDirectionType")
+    SourceConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#SourceConfiguration", name: "SourceConfiguration")
     SourceControlAuthStrategy = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#SourceControlAuthStrategy", name: "SourceControlAuthStrategy")
     SourceControlDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#SourceControlDetails", name: "SourceControlDetails")
     SourceControlProvider = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#SourceControlProvider", name: "SourceControlProvider")
     SourceProcessingProperties = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#SourceProcessingProperties", name: "SourceProcessingProperties")
     SourceTableConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#SourceTableConfig", name: "SourceTableConfig")
     SourceTableFieldsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#SourceTableFieldsList", name: "SourceTableFieldsList")
+    SparkConnectEndpointUrl = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#SparkConnectEndpointUrl", name: "SparkConnectEndpointUrl", traits: {"smithy.api#length" => {"min" => 0, "max" => 2048}, "smithy.api#pattern" => "^sc://.*$"})
     SparkConnectorSource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#SparkConnectorSource", name: "SparkConnectorSource")
     SparkConnectorTarget = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#SparkConnectorTarget", name: "SparkConnectorTarget")
+    SparkPipelineInfoKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#SparkPipelineInfoKey", name: "SparkPipelineInfoKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}})
+    SparkPipelineInfoMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.glue#SparkPipelineInfoMap", name: "SparkPipelineInfoMap", traits: {"smithy.api#length" => {"min" => 0, "max" => 50}})
+    SparkPipelineInfoValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#SparkPipelineInfoValue", name: "SparkPipelineInfoValue", traits: {"smithy.api#length" => {"min" => 0, "max" => 2048}})
     SparkSQL = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#SparkSQL", name: "SparkSQL")
     Spigot = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#Spigot", name: "Spigot")
     SplitFields = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#SplitFields", name: "SplitFields")
     SqlAlias = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#SqlAlias", name: "SqlAlias")
     SqlAliases = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#SqlAliases", name: "SqlAliases")
     SqlQuery = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#SqlQuery", name: "SqlQuery", traits: {"smithy.api#pattern" => "^([\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\s])*$"})
+    SseAlgorithm = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#SseAlgorithm", name: "SseAlgorithm")
     StartBlueprintRunRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#StartBlueprintRunRequest", name: "StartBlueprintRunRequest")
     StartBlueprintRunResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#StartBlueprintRunResponse", name: "StartBlueprintRunResponse")
     StartColumnStatisticsTaskRunRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#StartColumnStatisticsTaskRunRequest", name: "StartColumnStatisticsTaskRunRequest")
@@ -1357,6 +1634,8 @@ module Aws::Glue
     StartMLEvaluationTaskRunResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#StartMLEvaluationTaskRunResponse", name: "StartMLEvaluationTaskRunResponse")
     StartMLLabelingSetGenerationTaskRunRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#StartMLLabelingSetGenerationTaskRunRequest", name: "StartMLLabelingSetGenerationTaskRunRequest")
     StartMLLabelingSetGenerationTaskRunResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#StartMLLabelingSetGenerationTaskRunResponse", name: "StartMLLabelingSetGenerationTaskRunResponse")
+    StartMaterializedViewRefreshTaskRunRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#StartMaterializedViewRefreshTaskRunRequest", name: "StartMaterializedViewRefreshTaskRunRequest")
+    StartMaterializedViewRefreshTaskRunResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#StartMaterializedViewRefreshTaskRunResponse", name: "StartMaterializedViewRefreshTaskRunResponse")
     StartTriggerRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#StartTriggerRequest", name: "StartTriggerRequest")
     StartTriggerResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#StartTriggerResponse", name: "StartTriggerResponse")
     StartWorkflowRunRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#StartWorkflowRunRequest", name: "StartWorkflowRunRequest")
@@ -1385,6 +1664,8 @@ module Aws::Glue
     StopCrawlerResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#StopCrawlerResponse", name: "StopCrawlerResponse")
     StopCrawlerScheduleRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#StopCrawlerScheduleRequest", name: "StopCrawlerScheduleRequest")
     StopCrawlerScheduleResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#StopCrawlerScheduleResponse", name: "StopCrawlerScheduleResponse")
+    StopMaterializedViewRefreshTaskRunRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#StopMaterializedViewRefreshTaskRunRequest", name: "StopMaterializedViewRefreshTaskRunRequest")
+    StopMaterializedViewRefreshTaskRunResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#StopMaterializedViewRefreshTaskRunResponse", name: "StopMaterializedViewRefreshTaskRunResponse")
     StopSessionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#StopSessionRequest", name: "StopSessionRequest")
     StopSessionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#StopSessionResponse", name: "StopSessionResponse")
     StopTriggerRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#StopTriggerRequest", name: "StopTriggerRequest")
@@ -1395,15 +1676,21 @@ module Aws::Glue
     StreamingDataPreviewOptions = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#StreamingDataPreviewOptions", name: "StreamingDataPreviewOptions")
     String128 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#String128", name: "String128", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}})
     String2048 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#String2048", name: "String2048", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}})
+    String4096 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#String4096", name: "String4096", traits: {"smithy.api#length" => {"min" => 1, "max" => 4096}})
+    String512 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#String512", name: "String512", traits: {"smithy.api#length" => {"min" => 1, "max" => 512}})
     StringColumnStatisticsData = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#StringColumnStatisticsData", name: "StringColumnStatisticsData")
     StringList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#StringList", name: "StringList")
     StringToStringMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.glue#StringToStringMap", name: "StringToStringMap")
+    SubObjectSourceType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#SubObjectSourceType", name: "SubObjectSourceType")
+    SubObjectStatistics = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#SubObjectStatistics", name: "SubObjectStatistics")
+    SubObjectsStatisticsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#SubObjectsStatisticsList", name: "SubObjectsStatisticsList", traits: {"smithy.api#length" => {"min" => 0, "max" => 250}})
     SupportedDialect = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#SupportedDialect", name: "SupportedDialect")
     Table = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#Table", name: "Table")
     TableAttributes = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#TableAttributes", name: "TableAttributes")
     TableAttributesList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#TableAttributesList", name: "TableAttributesList")
     TableError = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#TableError", name: "TableError")
     TableErrors = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#TableErrors", name: "TableErrors")
+    TableIdString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#TableIdString", name: "TableIdString", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}, "smithy.api#pattern" => "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$"})
     TableIdentifier = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#TableIdentifier", name: "TableIdentifier")
     TableInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#TableInput", name: "TableInput")
     TableList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#TableList", name: "TableList")
@@ -1417,11 +1704,13 @@ module Aws::Glue
     TableOptimizerType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#TableOptimizerType", name: "TableOptimizerType")
     TableOptimizerVpcConfiguration = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.glue#TableOptimizerVpcConfiguration", name: "TableOptimizerVpcConfiguration")
     TablePrefix = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#TablePrefix", name: "TablePrefix", traits: {"smithy.api#length" => {"min" => 0, "max" => 128}})
+    TableResourceShareType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#TableResourceShareType", name: "TableResourceShareType")
     TableStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#TableStatus", name: "TableStatus")
     TableTypeString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#TableTypeString", name: "TableTypeString", traits: {"smithy.api#length" => {"min" => 0, "max" => 255}})
     TableVersion = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#TableVersion", name: "TableVersion")
     TableVersionError = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#TableVersionError", name: "TableVersionError")
     TableVersionErrors = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#TableVersionErrors", name: "TableVersionErrors")
+    TableVersionId = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.glue#TableVersionId", name: "TableVersionId", traits: {"smithy.api#default" => 0, "smithy.api#range" => {"min" => -1}})
     Tag = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#Tag", name: "Tag")
     TagKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#TagKey", name: "TagKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}})
     TagKeysList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#TagKeysList", name: "TagKeysList", traits: {"smithy.api#length" => {"min" => 0, "max" => 50}})
@@ -1431,6 +1720,7 @@ module Aws::Glue
     TagsMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.glue#TagsMap", name: "TagsMap", traits: {"smithy.api#length" => {"min" => 0, "max" => 50}})
     TargetColumn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#TargetColumn", name: "TargetColumn", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}})
     TargetFormat = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#TargetFormat", name: "TargetFormat")
+    TargetNamespace = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#TargetNamespace", name: "TargetNamespace", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => "^[a-z0-9]([a-z0-9_]*[a-z0-9])?$"})
     TargetProcessingProperties = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#TargetProcessingProperties", name: "TargetProcessingProperties")
     TargetRedshiftCatalog = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#TargetRedshiftCatalog", name: "TargetRedshiftCatalog")
     TargetResourceNotFound = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#TargetResourceNotFound", name: "TargetResourceNotFound", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 404})
@@ -1482,6 +1772,7 @@ module Aws::Glue
     TwoInputs = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#TwoInputs", name: "TwoInputs", traits: {"smithy.api#length" => {"min" => 2, "max" => 2}})
     TypeString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#TypeString", name: "TypeString", traits: {"smithy.api#length" => {"min" => 0, "max" => 20000}, "smithy.api#pattern" => "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$"})
     URI = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#URI", name: "URI", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*$"})
+    UUIDv4 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#UUIDv4", name: "UUIDv4", traits: {"smithy.api#pattern" => "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"})
     UnfilteredPartition = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#UnfilteredPartition", name: "UnfilteredPartition")
     UnfilteredPartitionList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#UnfilteredPartitionList", name: "UnfilteredPartitionList")
     Union = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#Union", name: "Union")
@@ -1489,6 +1780,8 @@ module Aws::Glue
     UnnestSpec = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#UnnestSpec", name: "UnnestSpec")
     UntagResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#UntagResourceRequest", name: "UntagResourceRequest")
     UntagResourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#UntagResourceResponse", name: "UntagResourceResponse")
+    UpdateAssetRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#UpdateAssetRequest", name: "UpdateAssetRequest")
+    UpdateAssetResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#UpdateAssetResponse", name: "UpdateAssetResponse")
     UpdateBehavior = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#UpdateBehavior", name: "UpdateBehavior")
     UpdateBlueprintRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#UpdateBlueprintRequest", name: "UpdateBlueprintRequest")
     UpdateBlueprintResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#UpdateBlueprintResponse", name: "UpdateBlueprintResponse")
@@ -1517,6 +1810,10 @@ module Aws::Glue
     UpdateDatabaseResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#UpdateDatabaseResponse", name: "UpdateDatabaseResponse")
     UpdateDevEndpointRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#UpdateDevEndpointRequest", name: "UpdateDevEndpointRequest")
     UpdateDevEndpointResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#UpdateDevEndpointResponse", name: "UpdateDevEndpointResponse")
+    UpdateGlossaryRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#UpdateGlossaryRequest", name: "UpdateGlossaryRequest")
+    UpdateGlossaryResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#UpdateGlossaryResponse", name: "UpdateGlossaryResponse")
+    UpdateGlossaryTermRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#UpdateGlossaryTermRequest", name: "UpdateGlossaryTermRequest")
+    UpdateGlossaryTermResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#UpdateGlossaryTermResponse", name: "UpdateGlossaryTermResponse")
     UpdateGlueIdentityCenterConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#UpdateGlueIdentityCenterConfigurationRequest", name: "UpdateGlueIdentityCenterConfigurationRequest")
     UpdateGlueIdentityCenterConfigurationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#UpdateGlueIdentityCenterConfigurationResponse", name: "UpdateGlueIdentityCenterConfigurationResponse")
     UpdateGrokClassifierRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#UpdateGrokClassifierRequest", name: "UpdateGrokClassifierRequest")
@@ -1555,9 +1852,11 @@ module Aws::Glue
     UpdateWorkflowRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#UpdateWorkflowRequest", name: "UpdateWorkflowRequest")
     UpdateWorkflowResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#UpdateWorkflowResponse", name: "UpdateWorkflowResponse")
     UpdateXMLClassifierRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#UpdateXMLClassifierRequest", name: "UpdateXMLClassifierRequest")
+    UpdatedAt = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.glue#UpdatedAt", name: "UpdatedAt")
     UpdatedTimestamp = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#UpdatedTimestamp", name: "UpdatedTimestamp")
     UpsertRedshiftTargetOptions = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#UpsertRedshiftTargetOptions", name: "UpsertRedshiftTargetOptions")
     UriString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#UriString", name: "UriString")
+    Url = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#Url", name: "Url", traits: {"smithy.api#length" => {"min" => 0, "max" => 40000}})
     UrlString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#UrlString", name: "UrlString")
     UsageProfileDefinition = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#UsageProfileDefinition", name: "UsageProfileDefinition")
     UsageProfileDefinitionList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#UsageProfileDefinitionList", name: "UsageProfileDefinitionList")
@@ -1584,6 +1883,7 @@ module Aws::Glue
     ViewRepresentationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glue#ViewRepresentationInput", name: "ViewRepresentationInput")
     ViewRepresentationInputList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#ViewRepresentationInputList", name: "ViewRepresentationInputList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
     ViewRepresentationList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#ViewRepresentationList", name: "ViewRepresentationList", traits: {"smithy.api#length" => {"min" => 1, "max" => 1000}})
+    ViewSubObjectVersionIdsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#ViewSubObjectVersionIdsList", name: "ViewSubObjectVersionIdsList", traits: {"smithy.api#length" => {"min" => 0, "max" => 250}})
     ViewSubObjectsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glue#ViewSubObjectsList", name: "ViewSubObjectsList", traits: {"smithy.api#length" => {"min" => 0, "max" => 10}})
     ViewTextString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.glue#ViewTextString", name: "ViewTextString", traits: {"smithy.api#length" => {"min" => 0, "max" => 409600}})
     ViewUpdateAction = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.glue#ViewUpdateAction", name: "ViewUpdateAction")
@@ -1709,6 +2009,30 @@ module Aws::Glue
     ApplyMapping.add_member(:inputs, ::Smithy::Schema::Shapes::MemberShape.new(target: OneInput, name: "Inputs", traits: {"smithy.api#required" => {}}))
     ApplyMapping.add_member(:mapping, ::Smithy::Schema::Shapes::MemberShape.new(target: Mappings, name: "Mapping", traits: {"smithy.api#required" => {}}))
     ApplyMapping.type = Types::ApplyMapping
+    AssetFormEntry.add_member(:form_type_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FormTypeId, name: "FormTypeId"))
+    AssetFormEntry.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: FormContent, name: "Content"))
+    AssetFormEntry.type = Types::AssetFormEntry
+    AssetFormMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetFormKey, name: "key"))
+    AssetFormMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetFormEntry, name: "value"))
+    AssetTypeFormReference.add_member(:form_type_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: FormTypeId, name: "FormTypeIdentifier", traits: {"smithy.api#required" => {}}))
+    AssetTypeFormReference.type = Types::AssetTypeFormReference
+    AssetTypeFormsMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetTypeFormKey, name: "key"))
+    AssetTypeFormsMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetTypeFormReference, name: "value"))
+    AssetTypeItem.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetTypeId, name: "Id"))
+    AssetTypeItem.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetTypeName, name: "Name"))
+    AssetTypeItem.type = Types::AssetTypeItem
+    AssetTypeItemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetTypeItem, name: "member"))
+    AssociateGlossaryTermsRequest.add_member(:asset_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetId, name: "AssetIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    AssociateGlossaryTermsRequest.add_member(:iterable_form_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IterableFormName, name: "IterableFormName"))
+    AssociateGlossaryTermsRequest.add_member(:item_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ItemIdentifier, name: "ItemIdentifier"))
+    AssociateGlossaryTermsRequest.add_member(:glossary_term_identifiers, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryTermIdList, name: "GlossaryTermIdentifiers", traits: {"smithy.api#required" => {}}))
+    AssociateGlossaryTermsRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: HashString, name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    AssociateGlossaryTermsRequest.type = Types::AssociateGlossaryTermsRequest
+    AssociateGlossaryTermsResponse.add_member(:asset_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetId, name: "AssetIdentifier"))
+    AssociateGlossaryTermsResponse.add_member(:iterable_form_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IterableFormName, name: "IterableFormName"))
+    AssociateGlossaryTermsResponse.add_member(:item_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ItemIdentifier, name: "ItemIdentifier"))
+    AssociateGlossaryTermsResponse.add_member(:glossary_terms, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryTermIdList, name: "GlossaryTerms"))
+    AssociateGlossaryTermsResponse.type = Types::AssociateGlossaryTermsResponse
     AthenaConnectorSource.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NodeName, name: "Name", traits: {"smithy.api#required" => {}}))
     AthenaConnectorSource.add_member(:connection_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EnclosedInStringProperty, name: "ConnectionName", traits: {"smithy.api#required" => {}}))
     AthenaConnectorSource.add_member(:connector_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EnclosedInStringProperty, name: "ConnectorName", traits: {"smithy.api#required" => {}}))
@@ -1764,6 +2088,9 @@ module Aws::Glue
     BasicAuthenticationCredentials.add_member(:username, ::Smithy::Schema::Shapes::MemberShape.new(target: Username, name: "Username"))
     BasicAuthenticationCredentials.add_member(:password, ::Smithy::Schema::Shapes::MemberShape.new(target: Password, name: "Password"))
     BasicAuthenticationCredentials.type = Types::BasicAuthenticationCredentials
+    BasicAuthenticationProperties.add_member(:username, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorProperty, name: "Username"))
+    BasicAuthenticationProperties.add_member(:password, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorProperty, name: "Password"))
+    BasicAuthenticationProperties.type = Types::BasicAuthenticationProperties
     BasicCatalogTarget.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NodeName, name: "Name", traits: {"smithy.api#required" => {}}))
     BasicCatalogTarget.add_member(:inputs, ::Smithy::Schema::Shapes::MemberShape.new(target: OneInput, name: "Inputs", traits: {"smithy.api#required" => {}}))
     BasicCatalogTarget.add_member(:partition_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: GlueStudioPathList, name: "PartitionKeys"))
@@ -1830,11 +2157,28 @@ module Aws::Glue
     BatchGetDataQualityResultResponse.add_member(:results, ::Smithy::Schema::Shapes::MemberShape.new(target: DataQualityResultsList, name: "Results", traits: {"smithy.api#required" => {}}))
     BatchGetDataQualityResultResponse.add_member(:results_not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: DataQualityResultIds, name: "ResultsNotFound"))
     BatchGetDataQualityResultResponse.type = Types::BatchGetDataQualityResultResponse
+    BatchGetDataQualityResultV2Request.add_member(:result_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: DataQualityResultV2IdList, name: "ResultIds", traits: {"smithy.api#required" => {}}))
+    BatchGetDataQualityResultV2Request.type = Types::BatchGetDataQualityResultV2Request
+    BatchGetDataQualityResultV2Response.add_member(:results, ::Smithy::Schema::Shapes::MemberShape.new(target: DataQualityResultV2List, name: "Results", traits: {"smithy.api#required" => {}}))
+    BatchGetDataQualityResultV2Response.add_member(:results_not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: DataQualityResultV2IdList, name: "ResultsNotFound"))
+    BatchGetDataQualityResultV2Response.type = Types::BatchGetDataQualityResultV2Response
+    BatchGetDataQualityRulesetEvaluationRunRequest.add_member(:run_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: DataQualityRulesetEvaluationRunIdList, name: "RunIds", traits: {"smithy.api#required" => {}}))
+    BatchGetDataQualityRulesetEvaluationRunRequest.type = Types::BatchGetDataQualityRulesetEvaluationRunRequest
+    BatchGetDataQualityRulesetEvaluationRunResponse.add_member(:runs, ::Smithy::Schema::Shapes::MemberShape.new(target: DataQualityRulesetEvaluationRunsList, name: "Runs"))
+    BatchGetDataQualityRulesetEvaluationRunResponse.add_member(:runs_not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: DataQualityRulesetEvaluationRunIdList, name: "RunsNotFound"))
+    BatchGetDataQualityRulesetEvaluationRunResponse.type = Types::BatchGetDataQualityRulesetEvaluationRunResponse
     BatchGetDevEndpointsRequest.add_member(:dev_endpoint_names, ::Smithy::Schema::Shapes::MemberShape.new(target: DevEndpointNames, name: "DevEndpointNames", traits: {"smithy.api#required" => {}}))
     BatchGetDevEndpointsRequest.type = Types::BatchGetDevEndpointsRequest
     BatchGetDevEndpointsResponse.add_member(:dev_endpoints, ::Smithy::Schema::Shapes::MemberShape.new(target: DevEndpointList, name: "DevEndpoints"))
     BatchGetDevEndpointsResponse.add_member(:dev_endpoints_not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: DevEndpointNames, name: "DevEndpointsNotFound"))
     BatchGetDevEndpointsResponse.type = Types::BatchGetDevEndpointsResponse
+    BatchGetIterableFormsRequest.add_member(:asset_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetId, name: "AssetIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    BatchGetIterableFormsRequest.add_member(:iterable_form_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IterableFormName, name: "IterableFormName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    BatchGetIterableFormsRequest.add_member(:item_identifiers, ::Smithy::Schema::Shapes::MemberShape.new(target: ItemIdentifierList, name: "ItemIdentifiers", traits: {"smithy.api#required" => {}}))
+    BatchGetIterableFormsRequest.type = Types::BatchGetIterableFormsRequest
+    BatchGetIterableFormsResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: IterableFormItemList, name: "Items"))
+    BatchGetIterableFormsResponse.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: ItemErrorList, name: "Errors"))
+    BatchGetIterableFormsResponse.type = Types::BatchGetIterableFormsResponse
     BatchGetJobsRequest.add_member(:job_names, ::Smithy::Schema::Shapes::MemberShape.new(target: JobNameList, name: "JobNames", traits: {"smithy.api#required" => {}}))
     BatchGetJobsRequest.type = Types::BatchGetJobsRequest
     BatchGetJobsResponse.add_member(:jobs, ::Smithy::Schema::Shapes::MemberShape.new(target: JobList, name: "Jobs"))
@@ -1844,6 +2188,8 @@ module Aws::Glue
     BatchGetPartitionRequest.add_member(:database_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "DatabaseName", traits: {"smithy.api#required" => {}}))
     BatchGetPartitionRequest.add_member(:table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "TableName", traits: {"smithy.api#required" => {}}))
     BatchGetPartitionRequest.add_member(:partitions_to_get, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetPartitionValueList, name: "PartitionsToGet", traits: {"smithy.api#required" => {}}))
+    BatchGetPartitionRequest.add_member(:audit_context, ::Smithy::Schema::Shapes::MemberShape.new(target: AuditContext, name: "AuditContext"))
+    BatchGetPartitionRequest.add_member(:query_session_context, ::Smithy::Schema::Shapes::MemberShape.new(target: QuerySessionContext, name: "QuerySessionContext"))
     BatchGetPartitionRequest.type = Types::BatchGetPartitionRequest
     BatchGetPartitionResponse.add_member(:partitions, ::Smithy::Schema::Shapes::MemberShape.new(target: PartitionList, name: "Partitions"))
     BatchGetPartitionResponse.add_member(:unprocessed_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetPartitionValueList, name: "UnprocessedKeys"))
@@ -1920,6 +2266,11 @@ module Aws::Glue
     BatchUpdatePartitionRequestEntryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchUpdatePartitionRequestEntry, name: "member"))
     BatchUpdatePartitionResponse.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchUpdatePartitionFailureList, name: "Errors"))
     BatchUpdatePartitionResponse.type = Types::BatchUpdatePartitionResponse
+    BetweenConfiguration.add_member(:low_bound_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "LowBoundKey"))
+    BetweenConfiguration.add_member(:high_bound_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "HighBoundKey"))
+    BetweenConfiguration.add_member(:template, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Template"))
+    BetweenConfiguration.type = Types::BetweenConfiguration
+    BinEdges.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "member"))
     BinaryColumnStatisticsData.add_member(:maximum_length, ::Smithy::Schema::Shapes::MemberShape.new(target: NonNegativeLong, name: "MaximumLength", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     BinaryColumnStatisticsData.add_member(:average_length, ::Smithy::Schema::Shapes::MemberShape.new(target: NonNegativeDouble, name: "AverageLength", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     BinaryColumnStatisticsData.add_member(:number_of_nulls, ::Smithy::Schema::Shapes::MemberShape.new(target: NonNegativeLong, name: "NumberOfNulls", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
@@ -2038,6 +2389,7 @@ module Aws::Glue
     CatalogInput.add_member(:create_table_default_permissions, ::Smithy::Schema::Shapes::MemberShape.new(target: PrincipalPermissionsList, name: "CreateTableDefaultPermissions"))
     CatalogInput.add_member(:create_database_default_permissions, ::Smithy::Schema::Shapes::MemberShape.new(target: PrincipalPermissionsList, name: "CreateDatabaseDefaultPermissions"))
     CatalogInput.add_member(:allow_full_table_external_data_access, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowFullTableExternalDataAccessEnum, name: "AllowFullTableExternalDataAccess"))
+    CatalogInput.add_member(:overwrite_child_resource_permissions_with_default, ::Smithy::Schema::Shapes::MemberShape.new(target: OverwriteChildResourcePermissionsWithDefaultEnum, name: "OverwriteChildResourcePermissionsWithDefault"))
     CatalogInput.type = Types::CatalogInput
     CatalogKafkaSource.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NodeName, name: "Name", traits: {"smithy.api#required" => {}}))
     CatalogKafkaSource.add_member(:window_size, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedPositiveInt, name: "WindowSize"))
@@ -2073,6 +2425,11 @@ module Aws::Glue
     CatalogSource.add_member(:partition_predicate, ::Smithy::Schema::Shapes::MemberShape.new(target: EnclosedInStringProperty, name: "PartitionPredicate"))
     CatalogSource.add_member(:output_schemas, ::Smithy::Schema::Shapes::MemberShape.new(target: GlueSchemas, name: "OutputSchemas"))
     CatalogSource.type = Types::CatalogSource
+    CatalogTableConfigOptions.add_member(:database_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "DatabaseName"))
+    CatalogTableConfigOptions.add_member(:table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "TableName"))
+    CatalogTableConfigOptions.add_member(:s3_location, ::Smithy::Schema::Shapes::MemberShape.new(target: UriString, name: "S3Location"))
+    CatalogTableConfigOptions.add_member(:catalog_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "CatalogId"))
+    CatalogTableConfigOptions.type = Types::CatalogTableConfigOptions
     CatalogTablesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "member"))
     CatalogTarget.add_member(:database_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "DatabaseName", traits: {"smithy.api#required" => {}}))
     CatalogTarget.add_member(:tables, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogTablesList, name: "Tables", traits: {"smithy.api#required" => {}}))
@@ -2094,6 +2451,14 @@ module Aws::Glue
     Classifier.type = Types::Classifier
     ClassifierList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Classifier, name: "member"))
     ClassifierNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "member"))
+    ClientCredentialsProperties.add_member(:token_url, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorProperty, name: "TokenUrl"))
+    ClientCredentialsProperties.add_member(:request_method, ::Smithy::Schema::Shapes::MemberShape.new(target: HTTPMethod, name: "RequestMethod"))
+    ClientCredentialsProperties.add_member(:content_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ContentType, name: "ContentType"))
+    ClientCredentialsProperties.add_member(:client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorProperty, name: "ClientId"))
+    ClientCredentialsProperties.add_member(:client_secret, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorProperty, name: "ClientSecret"))
+    ClientCredentialsProperties.add_member(:scope, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorProperty, name: "Scope"))
+    ClientCredentialsProperties.add_member(:token_url_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorPropertyList, name: "TokenUrlParameters"))
+    ClientCredentialsProperties.type = Types::ClientCredentialsProperties
     CloudWatchEncryption.add_member(:cloud_watch_encryption_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudWatchEncryptionMode, name: "CloudWatchEncryptionMode"))
     CloudWatchEncryption.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyArn, name: "KmsKeyArn"))
     CloudWatchEncryption.type = Types::CloudWatchEncryption
@@ -2401,6 +2766,9 @@ module Aws::Glue
     ConnectionPasswordEncryption.type = Types::ConnectionPasswordEncryption
     ConnectionProperties.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionPropertyKey, name: "key"))
     ConnectionProperties.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ValueString, name: "value"))
+    ConnectionPropertiesConfiguration.add_member(:url, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorProperty, name: "Url"))
+    ConnectionPropertiesConfiguration.add_member(:additional_request_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorPropertyList, name: "AdditionalRequestParameters"))
+    ConnectionPropertiesConfiguration.type = Types::ConnectionPropertiesConfiguration
     ConnectionPropertyKey.add_member(:host, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HOST", traits: {"smithy.api#enumValue" => "HOST"}))
     ConnectionPropertyKey.add_member(:port, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PORT", traits: {"smithy.api#enumValue" => "PORT"}))
     ConnectionPropertyKey.add_member(:user_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "USER_NAME", traits: {"smithy.api#enumValue" => "USERNAME"}))
@@ -2454,6 +2822,8 @@ module Aws::Glue
     ConnectionStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
     ConnectionStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
     ConnectionStringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionString, name: "member"))
+    ConnectionStringToStringMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    ConnectionStringToStringMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value"))
     ConnectionType.add_member(:jdbc, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "JDBC", traits: {"smithy.api#enumValue" => "JDBC"}))
     ConnectionType.add_member(:sftp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SFTP", traits: {"smithy.api#enumValue" => "SFTP"}))
     ConnectionType.add_member(:mongodb, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MONGODB", traits: {"smithy.api#enumValue" => "MONGODB"}))
@@ -2564,6 +2934,23 @@ module Aws::Glue
     ConnectionTypeVariantList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionTypeVariant, name: "member"))
     ConnectionsList.add_member(:connections, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionStringList, name: "Connections"))
     ConnectionsList.type = Types::ConnectionsList
+    ConnectorAuthenticationConfiguration.add_member(:authentication_types, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthenticationTypes, name: "AuthenticationTypes", traits: {"smithy.api#required" => {}}))
+    ConnectorAuthenticationConfiguration.add_member(:o_auth2_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorOAuth2Properties, name: "OAuth2Properties"))
+    ConnectorAuthenticationConfiguration.add_member(:basic_authentication_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: BasicAuthenticationProperties, name: "BasicAuthenticationProperties"))
+    ConnectorAuthenticationConfiguration.add_member(:custom_authentication_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomAuthenticationProperties, name: "CustomAuthenticationProperties"))
+    ConnectorAuthenticationConfiguration.type = Types::ConnectorAuthenticationConfiguration
+    ConnectorAuthorizationCodeProperties.add_member(:authorization_code_url, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorProperty, name: "AuthorizationCodeUrl"))
+    ConnectorAuthorizationCodeProperties.add_member(:authorization_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorProperty, name: "AuthorizationCode"))
+    ConnectorAuthorizationCodeProperties.add_member(:redirect_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorProperty, name: "RedirectUri"))
+    ConnectorAuthorizationCodeProperties.add_member(:token_url, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorProperty, name: "TokenUrl"))
+    ConnectorAuthorizationCodeProperties.add_member(:request_method, ::Smithy::Schema::Shapes::MemberShape.new(target: HTTPMethod, name: "RequestMethod"))
+    ConnectorAuthorizationCodeProperties.add_member(:content_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ContentType, name: "ContentType"))
+    ConnectorAuthorizationCodeProperties.add_member(:client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorProperty, name: "ClientId"))
+    ConnectorAuthorizationCodeProperties.add_member(:client_secret, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorProperty, name: "ClientSecret"))
+    ConnectorAuthorizationCodeProperties.add_member(:scope, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorProperty, name: "Scope"))
+    ConnectorAuthorizationCodeProperties.add_member(:prompt, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorProperty, name: "Prompt"))
+    ConnectorAuthorizationCodeProperties.add_member(:token_url_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorPropertyList, name: "TokenUrlParameters"))
+    ConnectorAuthorizationCodeProperties.type = Types::ConnectorAuthorizationCodeProperties
     ConnectorDataSource.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NodeName, name: "Name", traits: {"smithy.api#required" => {}}))
     ConnectorDataSource.add_member(:connection_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EnclosedInStringProperty, name: "ConnectionType", traits: {"smithy.api#required" => {}}))
     ConnectorDataSource.add_member(:data, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorOptions, name: "Data", traits: {"smithy.api#required" => {}}))
@@ -2574,9 +2961,30 @@ module Aws::Glue
     ConnectorDataTarget.add_member(:data, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorOptions, name: "Data", traits: {"smithy.api#required" => {}}))
     ConnectorDataTarget.add_member(:inputs, ::Smithy::Schema::Shapes::MemberShape.new(target: OneInput, name: "Inputs"))
     ConnectorDataTarget.type = Types::ConnectorDataTarget
+    ConnectorOAuth2GrantType.add_member(:client_credentials, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLIENT_CREDENTIALS", traits: {"smithy.api#enumValue" => "CLIENT_CREDENTIALS"}))
+    ConnectorOAuth2GrantType.add_member(:jwt_bearer, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "JWT_BEARER", traits: {"smithy.api#enumValue" => "JWT_BEARER"}))
+    ConnectorOAuth2GrantType.add_member(:authorization_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AUTHORIZATION_CODE", traits: {"smithy.api#enumValue" => "AUTHORIZATION_CODE"}))
+    ConnectorOAuth2Properties.add_member(:o_auth2_grant_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorOAuth2GrantType, name: "OAuth2GrantType", traits: {"smithy.api#required" => {}}))
+    ConnectorOAuth2Properties.add_member(:client_credentials_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientCredentialsProperties, name: "ClientCredentialsProperties"))
+    ConnectorOAuth2Properties.add_member(:jwt_bearer_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: JWTBearerProperties, name: "JWTBearerProperties"))
+    ConnectorOAuth2Properties.add_member(:authorization_code_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorAuthorizationCodeProperties, name: "AuthorizationCodeProperties"))
+    ConnectorOAuth2Properties.type = Types::ConnectorOAuth2Properties
     ConnectorOptions.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "key"))
     ConnectorOptions.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "value"))
+    ConnectorProperty.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: PropertyName, name: "Name", traits: {"smithy.api#required" => {}}))
+    ConnectorProperty.add_member(:key_override, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorPropertyKey, name: "KeyOverride"))
+    ConnectorProperty.add_member(:required, ::Smithy::Schema::Shapes::MemberShape.new(target: Bool, name: "Required", traits: {"smithy.api#required" => {}}))
+    ConnectorProperty.add_member(:default_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "DefaultValue"))
+    ConnectorProperty.add_member(:allowed_values, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfString, name: "AllowedValues"))
+    ConnectorProperty.add_member(:property_location, ::Smithy::Schema::Shapes::MemberShape.new(target: PropertyLocation, name: "PropertyLocation"))
+    ConnectorProperty.add_member(:property_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PropertyType, name: "PropertyType", traits: {"smithy.api#required" => {}}))
+    ConnectorProperty.add_member(:format, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Format"))
+    ConnectorProperty.type = Types::ConnectorProperty
+    ConnectorPropertyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorProperty, name: "member"))
+    ContentType.add_member(:application_json, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "APPLICATION_JSON", traits: {"smithy.api#enumValue" => "APPLICATION_JSON"}))
+    ContentType.add_member(:url_encoded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "URL_ENCODED", traits: {"smithy.api#enumValue" => "URL_ENCODED"}))
     ContextWords.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "member"))
+    Count.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableInteger, name: "member"))
     Crawl.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: CrawlState, name: "State"))
     Crawl.add_member(:started_on, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampValue, name: "StartedOn"))
     Crawl.add_member(:completed_on, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampValue, name: "CompletedOn"))
@@ -2611,6 +3019,7 @@ module Aws::Glue
     Crawler.add_member(:configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: CrawlerConfiguration, name: "Configuration"))
     Crawler.add_member(:crawler_security_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: CrawlerSecurityConfiguration, name: "CrawlerSecurityConfiguration"))
     Crawler.add_member(:lake_formation_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: LakeFormationConfiguration, name: "LakeFormationConfiguration"))
+    Crawler.add_member(:catalog_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdString, name: "CatalogId"))
     Crawler.type = Types::Crawler
     CrawlerHistory.add_member(:crawl_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CrawlId, name: "CrawlId"))
     CrawlerHistory.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: CrawlerHistoryState, name: "State"))
@@ -2691,7 +3100,7 @@ module Aws::Glue
     CreateColumnStatisticsTaskSettingsRequest.add_member(:schedule, ::Smithy::Schema::Shapes::MemberShape.new(target: CronExpression, name: "Schedule"))
     CreateColumnStatisticsTaskSettingsRequest.add_member(:column_name_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnNameList, name: "ColumnNameList"))
     CreateColumnStatisticsTaskSettingsRequest.add_member(:sample_size, ::Smithy::Schema::Shapes::MemberShape.new(target: SampleSizePercentage, name: "SampleSize", traits: {"smithy.api#default" => 0}))
-    CreateColumnStatisticsTaskSettingsRequest.add_member(:catalog_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "CatalogID"))
+    CreateColumnStatisticsTaskSettingsRequest.add_member(:catalog_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdString, name: "CatalogID"))
     CreateColumnStatisticsTaskSettingsRequest.add_member(:security_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "SecurityConfiguration"))
     CreateColumnStatisticsTaskSettingsRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "Tags"))
     CreateColumnStatisticsTaskSettingsRequest.type = Types::CreateColumnStatisticsTaskSettingsRequest
@@ -2717,6 +3126,7 @@ module Aws::Glue
     CreateCrawlerRequest.add_member(:configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: CrawlerConfiguration, name: "Configuration"))
     CreateCrawlerRequest.add_member(:crawler_security_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: CrawlerSecurityConfiguration, name: "CrawlerSecurityConfiguration"))
     CreateCrawlerRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "Tags"))
+    CreateCrawlerRequest.add_member(:catalog_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdString, name: "CatalogId"))
     CreateCrawlerRequest.type = Types::CreateCrawlerRequest
     CreateCrawlerResponse.type = Types::CreateCrawlerResponse
     CreateCsvClassifierRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "Name", traits: {"smithy.api#required" => {}}))
@@ -2788,8 +3198,29 @@ module Aws::Glue
     CreateDevEndpointResponse.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampValue, name: "CreatedTimestamp"))
     CreateDevEndpointResponse.add_member(:arguments, ::Smithy::Schema::Shapes::MemberShape.new(target: MapValue, name: "Arguments"))
     CreateDevEndpointResponse.type = Types::CreateDevEndpointResponse
+    CreateGlossaryRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryName, name: "Name", traits: {"smithy.api#required" => {}}))
+    CreateGlossaryRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataDescription, name: "Description"))
+    CreateGlossaryRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: HashString, name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateGlossaryRequest.type = Types::CreateGlossaryRequest
+    CreateGlossaryResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryId, name: "Id"))
+    CreateGlossaryResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryName, name: "Name"))
+    CreateGlossaryResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataDescription, name: "Description"))
+    CreateGlossaryResponse.type = Types::CreateGlossaryResponse
+    CreateGlossaryTermRequest.add_member(:glossary_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryId, name: "GlossaryIdentifier", traits: {"smithy.api#required" => {}}))
+    CreateGlossaryTermRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryTermName, name: "Name", traits: {"smithy.api#required" => {}}))
+    CreateGlossaryTermRequest.add_member(:short_description, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryShortDescription, name: "ShortDescription"))
+    CreateGlossaryTermRequest.add_member(:long_description, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryLongDescription, name: "LongDescription"))
+    CreateGlossaryTermRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: HashString, name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateGlossaryTermRequest.type = Types::CreateGlossaryTermRequest
+    CreateGlossaryTermResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryTermId, name: "Id"))
+    CreateGlossaryTermResponse.add_member(:glossary_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryId, name: "GlossaryId"))
+    CreateGlossaryTermResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryTermName, name: "Name"))
+    CreateGlossaryTermResponse.add_member(:short_description, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryShortDescription, name: "ShortDescription"))
+    CreateGlossaryTermResponse.add_member(:long_description, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryLongDescription, name: "LongDescription"))
+    CreateGlossaryTermResponse.type = Types::CreateGlossaryTermResponse
     CreateGlueIdentityCenterConfigurationRequest.add_member(:instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityCenterInstanceArn, name: "InstanceArn", traits: {"smithy.api#required" => {}}))
     CreateGlueIdentityCenterConfigurationRequest.add_member(:scopes, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityCenterScopesList, name: "Scopes"))
+    CreateGlueIdentityCenterConfigurationRequest.add_member(:user_background_sessions_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "UserBackgroundSessionsEnabled"))
     CreateGlueIdentityCenterConfigurationRequest.type = Types::CreateGlueIdentityCenterConfigurationRequest
     CreateGlueIdentityCenterConfigurationResponse.add_member(:application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationArn, name: "ApplicationArn"))
     CreateGlueIdentityCenterConfigurationResponse.type = Types::CreateGlueIdentityCenterConfigurationResponse
@@ -2805,8 +3236,8 @@ module Aws::Glue
     CreateIcebergTableInput.add_member(:properties, ::Smithy::Schema::Shapes::MemberShape.new(target: StringToStringMap, name: "Properties"))
     CreateIcebergTableInput.type = Types::CreateIcebergTableInput
     CreateIntegrationRequest.add_member(:integration_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String128, name: "IntegrationName", traits: {"smithy.api#required" => {}}))
-    CreateIntegrationRequest.add_member(:source_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String128, name: "SourceArn", traits: {"smithy.api#required" => {}}))
-    CreateIntegrationRequest.add_member(:target_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String128, name: "TargetArn", traits: {"smithy.api#required" => {}}))
+    CreateIntegrationRequest.add_member(:source_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String512, name: "SourceArn", traits: {"smithy.api#required" => {}}))
+    CreateIntegrationRequest.add_member(:target_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String512, name: "TargetArn", traits: {"smithy.api#required" => {}}))
     CreateIntegrationRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegrationDescription, name: "Description"))
     CreateIntegrationRequest.add_member(:data_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: String2048, name: "DataFilter"))
     CreateIntegrationRequest.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String2048, name: "KmsKeyId"))
@@ -2814,16 +3245,18 @@ module Aws::Glue
     CreateIntegrationRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegrationTagsList, name: "Tags"))
     CreateIntegrationRequest.add_member(:integration_config, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegrationConfig, name: "IntegrationConfig"))
     CreateIntegrationRequest.type = Types::CreateIntegrationRequest
-    CreateIntegrationResourcePropertyRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String128, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    CreateIntegrationResourcePropertyRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String512, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
     CreateIntegrationResourcePropertyRequest.add_member(:source_processing_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceProcessingProperties, name: "SourceProcessingProperties"))
     CreateIntegrationResourcePropertyRequest.add_member(:target_processing_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetProcessingProperties, name: "TargetProcessingProperties"))
+    CreateIntegrationResourcePropertyRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegrationTagsList, name: "Tags"))
     CreateIntegrationResourcePropertyRequest.type = Types::CreateIntegrationResourcePropertyRequest
-    CreateIntegrationResourcePropertyResponse.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String128, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    CreateIntegrationResourcePropertyResponse.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String512, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    CreateIntegrationResourcePropertyResponse.add_member(:resource_property_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String512, name: "ResourcePropertyArn"))
     CreateIntegrationResourcePropertyResponse.add_member(:source_processing_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceProcessingProperties, name: "SourceProcessingProperties"))
     CreateIntegrationResourcePropertyResponse.add_member(:target_processing_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetProcessingProperties, name: "TargetProcessingProperties"))
     CreateIntegrationResourcePropertyResponse.type = Types::CreateIntegrationResourcePropertyResponse
-    CreateIntegrationResponse.add_member(:source_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String128, name: "SourceArn", traits: {"smithy.api#required" => {}}))
-    CreateIntegrationResponse.add_member(:target_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String128, name: "TargetArn", traits: {"smithy.api#required" => {}}))
+    CreateIntegrationResponse.add_member(:source_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String512, name: "SourceArn", traits: {"smithy.api#required" => {}}))
+    CreateIntegrationResponse.add_member(:target_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String512, name: "TargetArn", traits: {"smithy.api#required" => {}}))
     CreateIntegrationResponse.add_member(:integration_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String128, name: "IntegrationName", traits: {"smithy.api#required" => {}}))
     CreateIntegrationResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegrationDescription, name: "Description"))
     CreateIntegrationResponse.add_member(:integration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String128, name: "IntegrationArn", traits: {"smithy.api#required" => {}}))
@@ -2836,7 +3269,7 @@ module Aws::Glue
     CreateIntegrationResponse.add_member(:data_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: String2048, name: "DataFilter"))
     CreateIntegrationResponse.add_member(:integration_config, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegrationConfig, name: "IntegrationConfig"))
     CreateIntegrationResponse.type = Types::CreateIntegrationResponse
-    CreateIntegrationTablePropertiesRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String128, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    CreateIntegrationTablePropertiesRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String512, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
     CreateIntegrationTablePropertiesRequest.add_member(:table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String128, name: "TableName", traits: {"smithy.api#required" => {}}))
     CreateIntegrationTablePropertiesRequest.add_member(:source_table_config, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceTableConfig, name: "SourceTableConfig"))
     CreateIntegrationTablePropertiesRequest.add_member(:target_table_config, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetTableConfig, name: "TargetTableConfig"))
@@ -2961,6 +3394,7 @@ module Aws::Glue
     CreateSessionRequest.add_member(:glue_version, ::Smithy::Schema::Shapes::MemberShape.new(target: GlueVersionString, name: "GlueVersion"))
     CreateSessionRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "Tags"))
     CreateSessionRequest.add_member(:request_origin, ::Smithy::Schema::Shapes::MemberShape.new(target: OrchestrationNameString, name: "RequestOrigin"))
+    CreateSessionRequest.add_member(:session_type, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionType, name: "SessionType"))
     CreateSessionRequest.type = Types::CreateSessionRequest
     CreateSessionResponse.add_member(:session, ::Smithy::Schema::Shapes::MemberShape.new(target: Session, name: "Session"))
     CreateSessionResponse.type = Types::CreateSessionResponse
@@ -3040,6 +3474,11 @@ module Aws::Glue
     CsvSerdeOption.add_member(:open_csv_ser_de, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OpenCSVSerDe", traits: {"smithy.api#enumValue" => "OpenCSVSerDe"}))
     CsvSerdeOption.add_member(:lazy_simple_ser_de, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LazySimpleSerDe", traits: {"smithy.api#enumValue" => "LazySimpleSerDe"}))
     CsvSerdeOption.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "None", traits: {"smithy.api#enumValue" => "None"}))
+    CursorConfiguration.add_member(:next_page, ::Smithy::Schema::Shapes::MemberShape.new(target: ExtractedParameter, name: "NextPage", traits: {"smithy.api#required" => {}}))
+    CursorConfiguration.add_member(:limit_parameter, ::Smithy::Schema::Shapes::MemberShape.new(target: ExtractedParameter, name: "LimitParameter"))
+    CursorConfiguration.type = Types::CursorConfiguration
+    CustomAuthenticationProperties.add_member(:authentication_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorPropertyList, name: "AuthenticationParameters", traits: {"smithy.api#required" => {}}))
+    CustomAuthenticationProperties.type = Types::CustomAuthenticationProperties
     CustomCode.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NodeName, name: "Name", traits: {"smithy.api#required" => {}}))
     CustomCode.add_member(:inputs, ::Smithy::Schema::Shapes::MemberShape.new(target: ManyInputs, name: "Inputs", traits: {"smithy.api#required" => {}}))
     CustomCode.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ExtendedString, name: "Code", traits: {"smithy.api#required" => {}}))
@@ -3121,17 +3560,32 @@ module Aws::Glue
     DataQualityAnalyzerResult.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: DataQualityRuleResultDescription, name: "Description"))
     DataQualityAnalyzerResult.add_member(:evaluation_message, ::Smithy::Schema::Shapes::MemberShape.new(target: DataQualityRuleResultDescription, name: "EvaluationMessage"))
     DataQualityAnalyzerResult.add_member(:evaluated_metrics, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluatedMetricsMap, name: "EvaluatedMetrics"))
+    DataQualityAnalyzerResult.add_member(:evaluated_distributions, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluatedDistributionsMap, name: "EvaluatedDistributions"))
     DataQualityAnalyzerResult.type = Types::DataQualityAnalyzerResult
     DataQualityAnalyzerResults.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataQualityAnalyzerResult, name: "member"))
+    DataQualityConfigurationV2.add_member(:observations_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ObservationConfiguration, name: "ObservationsEnabled"))
+    DataQualityConfigurationV2.add_member(:observation_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ObservationMode, name: "ObservationMode"))
+    DataQualityConfigurationV2.type = Types::DataQualityConfigurationV2
     DataQualityEncryption.add_member(:data_quality_encryption_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: DataQualityEncryptionMode, name: "DataQualityEncryptionMode"))
     DataQualityEncryption.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyArn, name: "KmsKeyArn"))
     DataQualityEncryption.type = Types::DataQualityEncryption
     DataQualityEncryptionMode.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
     DataQualityEncryptionMode.add_member(:ssekms, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SSEKMS", traits: {"smithy.api#enumValue" => "SSE-KMS"}))
+    DataQualityEngine.add_member(:spark, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SPARK", traits: {"smithy.api#enumValue" => "SPARK"}))
+    DataQualityEngine.add_member(:python, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PYTHON", traits: {"smithy.api#enumValue" => "PYTHON"}))
     DataQualityEvaluationRunAdditionalRunOptions.add_member(:cloud_watch_metrics_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "CloudWatchMetricsEnabled"))
     DataQualityEvaluationRunAdditionalRunOptions.add_member(:results_s3_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: UriString, name: "ResultsS3Prefix"))
     DataQualityEvaluationRunAdditionalRunOptions.add_member(:composite_rule_evaluation_method, ::Smithy::Schema::Shapes::MemberShape.new(target: DQCompositeRuleEvaluationMethod, name: "CompositeRuleEvaluationMethod"))
+    DataQualityEvaluationRunAdditionalRunOptions.add_member(:custom_log_group_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "CustomLogGroupPrefix"))
+    DataQualityEvaluationRunAdditionalRunOptions.add_member(:row_level_results, ::Smithy::Schema::Shapes::MemberShape.new(target: RowLevelResultsOptions, name: "RowLevelResults"))
+    DataQualityEvaluationRunAdditionalRunOptions.add_member(:profiling_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfilingResultsOptions, name: "ProfilingResults"))
+    DataQualityEvaluationRunAdditionalRunOptions.add_member(:observation_scope, ::Smithy::Schema::Shapes::MemberShape.new(target: ObservationConfiguration, name: "ObservationScope"))
+    DataQualityEvaluationRunAdditionalRunOptions.add_member(:observation_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ObservationMode, name: "ObservationMode"))
+    DataQualityEvaluationRunAdditionalRunOptions.add_member(:data_quality_rule_results, ::Smithy::Schema::Shapes::MemberShape.new(target: DataQualityRuleResultsOptions, name: "DataQualityRuleResults"))
+    DataQualityEvaluationRunAdditionalRunOptions.add_member(:observation_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ObservationResultsOptions, name: "ObservationResults"))
     DataQualityEvaluationRunAdditionalRunOptions.type = Types::DataQualityEvaluationRunAdditionalRunOptions
+    DataQualityFlagsEnabled.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "key"))
+    DataQualityFlagsEnabled.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "value"))
     DataQualityGlueTable.add_member(:database_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "DatabaseName", traits: {"smithy.api#required" => {}}))
     DataQualityGlueTable.add_member(:table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "TableName", traits: {"smithy.api#required" => {}}))
     DataQualityGlueTable.add_member(:catalog_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "CatalogId"))
@@ -3182,11 +3636,47 @@ module Aws::Glue
     DataQualityResultFilterCriteria.type = Types::DataQualityResultFilterCriteria
     DataQualityResultIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HashString, name: "member"))
     DataQualityResultIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HashString, name: "member"))
+    DataQualityResultV2IdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HashString, name: "member"))
+    DataQualityResultV2Item.add_member(:result_id, ::Smithy::Schema::Shapes::MemberShape.new(target: HashString, name: "ResultId", traits: {"smithy.api#required" => {}}))
+    DataQualityResultV2Item.add_member(:data_source, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSource, name: "DataSource"))
+    DataQualityResultV2Item.add_member(:dimensions, ::Smithy::Schema::Shapes::MemberShape.new(target: PublishDataQualityResultDimensions, name: "Dimensions"))
+    DataQualityResultV2Item.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: PublishDataQualityResultTags, name: "Tags"))
+    DataQualityResultV2Item.add_member(:execution_started_on, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "ExecutionStartedOn"))
+    DataQualityResultV2Item.add_member(:execution_completed_on, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "ExecutionCompletedOn"))
+    DataQualityResultV2Item.add_member(:result_published_on, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "ResultPublishedOn"))
+    DataQualityResultV2Item.add_member(:score, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericBoundedDouble, name: "Score"))
+    DataQualityResultV2Item.add_member(:rule_results, ::Smithy::Schema::Shapes::MemberShape.new(target: DataQualityRuleResults, name: "RuleResults"))
+    DataQualityResultV2Item.add_member(:analyzer_results, ::Smithy::Schema::Shapes::MemberShape.new(target: DataQualityAnalyzerResults, name: "AnalyzerResults"))
+    DataQualityResultV2Item.add_member(:observations, ::Smithy::Schema::Shapes::MemberShape.new(target: DataQualityObservations, name: "Observations"))
+    DataQualityResultV2Item.add_member(:evaluation_context, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "EvaluationContext"))
+    DataQualityResultV2Item.add_member(:descriptors, ::Smithy::Schema::Shapes::MemberShape.new(target: PublishDataQualityResultDescriptors, name: "Descriptors"))
+    DataQualityResultV2Item.add_member(:aggregated_metrics, ::Smithy::Schema::Shapes::MemberShape.new(target: DataQualityAggregatedMetrics, name: "AggregatedMetrics"))
+    DataQualityResultV2Item.add_member(:ruleset_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "RulesetName"))
+    DataQualityResultV2Item.type = Types::DataQualityResultV2Item
+    DataQualityResultV2List.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataQualityResultV2Item, name: "member"))
     DataQualityResultsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataQualityResult, name: "member"))
+    DataQualityResultsV2Description.add_member(:result_id, ::Smithy::Schema::Shapes::MemberShape.new(target: HashString, name: "ResultId"))
+    DataQualityResultsV2Description.add_member(:data_source, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSource, name: "DataSource"))
+    DataQualityResultsV2Description.add_member(:result_published_on, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "ResultPublishedOn"))
+    DataQualityResultsV2Description.add_member(:dimensions, ::Smithy::Schema::Shapes::MemberShape.new(target: PublishDataQualityResultDimensions, name: "Dimensions"))
+    DataQualityResultsV2Description.add_member(:evaluation_context, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "EvaluationContext"))
+    DataQualityResultsV2Description.add_member(:descriptors, ::Smithy::Schema::Shapes::MemberShape.new(target: PublishDataQualityResultDescriptors, name: "Descriptors"))
+    DataQualityResultsV2Description.type = Types::DataQualityResultsV2Description
+    DataQualityResultsV2DescriptionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataQualityResultsV2Description, name: "member"))
+    DataQualityResultsV2FilterCriteria.add_member(:data_source, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSource, name: "DataSource"))
+    DataQualityResultsV2FilterCriteria.add_member(:published_after, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "PublishedAfter"))
+    DataQualityResultsV2FilterCriteria.add_member(:published_before, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "PublishedBefore"))
+    DataQualityResultsV2FilterCriteria.add_member(:dimensions, ::Smithy::Schema::Shapes::MemberShape.new(target: PublishDataQualityResultDimensions, name: "Dimensions"))
+    DataQualityResultsV2FilterCriteria.add_member(:evaluation_context, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "EvaluationContext"))
+    DataQualityResultsV2FilterCriteria.type = Types::DataQualityResultsV2FilterCriteria
+    DataQualityRuleRecommendationRunAdditionalRunOptions.add_member(:custom_log_group_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "CustomLogGroupPrefix"))
+    DataQualityRuleRecommendationRunAdditionalRunOptions.type = Types::DataQualityRuleRecommendationRunAdditionalRunOptions
     DataQualityRuleRecommendationRunDescription.add_member(:run_id, ::Smithy::Schema::Shapes::MemberShape.new(target: HashString, name: "RunId"))
     DataQualityRuleRecommendationRunDescription.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskStatusType, name: "Status"))
     DataQualityRuleRecommendationRunDescription.add_member(:started_on, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "StartedOn"))
     DataQualityRuleRecommendationRunDescription.add_member(:data_source, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSource, name: "DataSource"))
+    DataQualityRuleRecommendationRunDescription.add_member(:created_ruleset_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "CreatedRulesetName"))
+    DataQualityRuleRecommendationRunDescription.add_member(:recommendation_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationMode, name: "RecommendationMode"))
     DataQualityRuleRecommendationRunDescription.type = Types::DataQualityRuleRecommendationRunDescription
     DataQualityRuleRecommendationRunFilter.add_member(:data_source, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSource, name: "DataSource", traits: {"smithy.api#required" => {}}))
     DataQualityRuleRecommendationRunFilter.add_member(:started_before, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "StartedBefore"))
@@ -3200,11 +3690,31 @@ module Aws::Glue
     DataQualityRuleResult.add_member(:evaluated_metrics, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluatedMetricsMap, name: "EvaluatedMetrics"))
     DataQualityRuleResult.add_member(:evaluated_rule, ::Smithy::Schema::Shapes::MemberShape.new(target: DataQualityRuleResultDescription, name: "EvaluatedRule"))
     DataQualityRuleResult.add_member(:rule_metrics, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleMetricsMap, name: "RuleMetrics"))
+    DataQualityRuleResult.add_member(:labels, ::Smithy::Schema::Shapes::MemberShape.new(target: Labels, name: "Labels"))
     DataQualityRuleResult.type = Types::DataQualityRuleResult
     DataQualityRuleResultStatus.add_member(:pass, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PASS", traits: {"smithy.api#enumValue" => "PASS"}))
     DataQualityRuleResultStatus.add_member(:fail, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAIL", traits: {"smithy.api#enumValue" => "FAIL"}))
     DataQualityRuleResultStatus.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ERROR", traits: {"smithy.api#enumValue" => "ERROR"}))
     DataQualityRuleResults.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataQualityRuleResult, name: "member"))
+    DataQualityRuleResultsOptions.add_member(:write_data_quality_rule_results_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "WriteDataQualityRuleResultsEnabled"))
+    DataQualityRuleResultsOptions.add_member(:catalog_table_config, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogTableConfigOptions, name: "CatalogTableConfig"))
+    DataQualityRuleResultsOptions.type = Types::DataQualityRuleResultsOptions
+    DataQualityRulesetEvaluationRun.add_member(:run_id, ::Smithy::Schema::Shapes::MemberShape.new(target: HashString, name: "RunId"))
+    DataQualityRulesetEvaluationRun.add_member(:data_source, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSource, name: "DataSource"))
+    DataQualityRulesetEvaluationRun.add_member(:role, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleString, name: "Role"))
+    DataQualityRulesetEvaluationRun.add_member(:number_of_workers, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableInteger, name: "NumberOfWorkers"))
+    DataQualityRulesetEvaluationRun.add_member(:timeout, ::Smithy::Schema::Shapes::MemberShape.new(target: Timeout, name: "Timeout"))
+    DataQualityRulesetEvaluationRun.add_member(:additional_run_options, ::Smithy::Schema::Shapes::MemberShape.new(target: DataQualityEvaluationRunAdditionalRunOptions, name: "AdditionalRunOptions"))
+    DataQualityRulesetEvaluationRun.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskStatusType, name: "Status"))
+    DataQualityRulesetEvaluationRun.add_member(:error_string, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "ErrorString"))
+    DataQualityRulesetEvaluationRun.add_member(:started_on, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "StartedOn"))
+    DataQualityRulesetEvaluationRun.add_member(:last_modified_on, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastModifiedOn"))
+    DataQualityRulesetEvaluationRun.add_member(:completed_on, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CompletedOn"))
+    DataQualityRulesetEvaluationRun.add_member(:execution_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionTime, name: "ExecutionTime", traits: {"smithy.api#default" => 0}))
+    DataQualityRulesetEvaluationRun.add_member(:ruleset_names, ::Smithy::Schema::Shapes::MemberShape.new(target: RulesetNames, name: "RulesetNames"))
+    DataQualityRulesetEvaluationRun.add_member(:result_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: DataQualityResultIdList, name: "ResultIds"))
+    DataQualityRulesetEvaluationRun.add_member(:additional_data_sources, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceMap, name: "AdditionalDataSources"))
+    DataQualityRulesetEvaluationRun.type = Types::DataQualityRulesetEvaluationRun
     DataQualityRulesetEvaluationRunDescription.add_member(:run_id, ::Smithy::Schema::Shapes::MemberShape.new(target: HashString, name: "RunId"))
     DataQualityRulesetEvaluationRunDescription.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskStatusType, name: "Status"))
     DataQualityRulesetEvaluationRunDescription.add_member(:started_on, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "StartedOn"))
@@ -3213,8 +3723,11 @@ module Aws::Glue
     DataQualityRulesetEvaluationRunFilter.add_member(:data_source, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSource, name: "DataSource", traits: {"smithy.api#required" => {}}))
     DataQualityRulesetEvaluationRunFilter.add_member(:started_before, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "StartedBefore"))
     DataQualityRulesetEvaluationRunFilter.add_member(:started_after, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "StartedAfter"))
+    DataQualityRulesetEvaluationRunFilter.add_member(:ruleset_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "RulesetName"))
     DataQualityRulesetEvaluationRunFilter.type = Types::DataQualityRulesetEvaluationRunFilter
+    DataQualityRulesetEvaluationRunIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HashString, name: "member"))
     DataQualityRulesetEvaluationRunList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataQualityRulesetEvaluationRunDescription, name: "member"))
+    DataQualityRulesetEvaluationRunsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataQualityRulesetEvaluationRun, name: "member"))
     DataQualityRulesetFilterCriteria.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "Name"))
     DataQualityRulesetFilterCriteria.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: DescriptionString, name: "Description"))
     DataQualityRulesetFilterCriteria.add_member(:created_before, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedBefore"))
@@ -3236,6 +3749,13 @@ module Aws::Glue
     DataQualityTargetTable.add_member(:database_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "DatabaseName", traits: {"smithy.api#required" => {}}))
     DataQualityTargetTable.add_member(:catalog_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "CatalogId"))
     DataQualityTargetTable.type = Types::DataQualityTargetTable
+    DataQualityTelemetry.add_member(:vcpu_hours, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableDouble, name: "VcpuHours"))
+    DataQualityTelemetry.add_member(:flags_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: DataQualityFlagsEnabled, name: "FlagsEnabled"))
+    DataQualityTelemetry.add_member(:library_version, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "LibraryVersion"))
+    DataQualityTelemetry.add_member(:spark_version, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "SparkVersion"))
+    DataQualityTelemetry.add_member(:host_runtime_version, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "HostRuntimeVersion"))
+    DataQualityTelemetry.add_member(:engine, ::Smithy::Schema::Shapes::MemberShape.new(target: DataQualityEngine, name: "Engine"))
+    DataQualityTelemetry.type = Types::DataQualityTelemetry
     DataSource.add_member(:glue_table, ::Smithy::Schema::Shapes::MemberShape.new(target: GlueTable, name: "GlueTable"))
     DataSource.add_member(:data_quality_glue_table, ::Smithy::Schema::Shapes::MemberShape.new(target: DataQualityGlueTable, name: "DataQualityGlueTable"))
     DataSource.type = Types::DataSource
@@ -3289,6 +3809,21 @@ module Aws::Glue
     DecimalNumber.add_member(:unscaled_value, ::Smithy::Schema::Shapes::MemberShape.new(target: Blob, name: "UnscaledValue", traits: {"smithy.api#required" => {}}))
     DecimalNumber.add_member(:scale, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Scale", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     DecimalNumber.type = Types::DecimalNumber
+    DeleteAssetRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetId, name: "Identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteAssetRequest.type = Types::DeleteAssetRequest
+    DeleteAssetResponse.type = Types::DeleteAssetResponse
+    DeleteAssetTypeRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetTypeId, name: "Identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteAssetTypeRequest.type = Types::DeleteAssetTypeRequest
+    DeleteAssetTypeResponse.type = Types::DeleteAssetTypeResponse
+    DeleteAttachmentRequest.add_member(:asset_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetId, name: "AssetIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteAttachmentRequest.add_member(:iterable_form_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IterableFormName, name: "IterableFormName", traits: {"smithy.api#httpQuery" => "iterableFormName"}))
+    DeleteAttachmentRequest.add_member(:item_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ItemIdentifier, name: "ItemIdentifier", traits: {"smithy.api#httpQuery" => "itemIdentifier"}))
+    DeleteAttachmentRequest.add_member(:attachment_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AttachmentName, name: "AttachmentName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteAttachmentRequest.type = Types::DeleteAttachmentRequest
+    DeleteAttachmentResponse.add_member(:asset_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetId, name: "AssetIdentifier"))
+    DeleteAttachmentResponse.add_member(:iterable_form_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IterableFormName, name: "IterableFormName"))
+    DeleteAttachmentResponse.add_member(:item_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ItemIdentifier, name: "ItemIdentifier"))
+    DeleteAttachmentResponse.type = Types::DeleteAttachmentResponse
     DeleteBehavior.add_member(:log, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOG", traits: {"smithy.api#enumValue" => "LOG"}))
     DeleteBehavior.add_member(:delete_from_database, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETE_FROM_DATABASE", traits: {"smithy.api#enumValue" => "DELETE_FROM_DATABASE"}))
     DeleteBehavior.add_member(:deprecate_in_database, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEPRECATE_IN_DATABASE", traits: {"smithy.api#enumValue" => "DEPRECATE_IN_DATABASE"}))
@@ -3317,6 +3852,7 @@ module Aws::Glue
     DeleteColumnStatisticsForTableResponse.type = Types::DeleteColumnStatisticsForTableResponse
     DeleteColumnStatisticsTaskSettingsRequest.add_member(:database_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "DatabaseName", traits: {"smithy.api#required" => {}}))
     DeleteColumnStatisticsTaskSettingsRequest.add_member(:table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "TableName", traits: {"smithy.api#required" => {}}))
+    DeleteColumnStatisticsTaskSettingsRequest.add_member(:catalog_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdString, name: "CatalogID"))
     DeleteColumnStatisticsTaskSettingsRequest.type = Types::DeleteColumnStatisticsTaskSettingsRequest
     DeleteColumnStatisticsTaskSettingsResponse.type = Types::DeleteColumnStatisticsTaskSettingsResponse
     DeleteConnectionNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "member"))
@@ -3324,6 +3860,9 @@ module Aws::Glue
     DeleteConnectionRequest.add_member(:connection_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "ConnectionName", traits: {"smithy.api#required" => {}}))
     DeleteConnectionRequest.type = Types::DeleteConnectionRequest
     DeleteConnectionResponse.type = Types::DeleteConnectionResponse
+    DeleteConnectionTypeRequest.add_member(:connection_type, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "ConnectionType", traits: {"smithy.api#required" => {}}))
+    DeleteConnectionTypeRequest.type = Types::DeleteConnectionTypeRequest
+    DeleteConnectionTypeResponse.type = Types::DeleteConnectionTypeResponse
     DeleteCrawlerRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "Name", traits: {"smithy.api#required" => {}}))
     DeleteCrawlerRequest.type = Types::DeleteCrawlerRequest
     DeleteCrawlerResponse.type = Types::DeleteCrawlerResponse
@@ -3341,12 +3880,24 @@ module Aws::Glue
     DeleteDevEndpointRequest.add_member(:endpoint_name, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "EndpointName", traits: {"smithy.api#required" => {}}))
     DeleteDevEndpointRequest.type = Types::DeleteDevEndpointRequest
     DeleteDevEndpointResponse.type = Types::DeleteDevEndpointResponse
+    DeleteFormTypeRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: FormTypeId, name: "Identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteFormTypeRequest.type = Types::DeleteFormTypeRequest
+    DeleteFormTypeResponse.type = Types::DeleteFormTypeResponse
+    DeleteGlossaryRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryId, name: "Identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteGlossaryRequest.type = Types::DeleteGlossaryRequest
+    DeleteGlossaryResponse.type = Types::DeleteGlossaryResponse
+    DeleteGlossaryTermRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryTermId, name: "Identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteGlossaryTermRequest.type = Types::DeleteGlossaryTermRequest
+    DeleteGlossaryTermResponse.type = Types::DeleteGlossaryTermResponse
     DeleteGlueIdentityCenterConfigurationRequest.type = Types::DeleteGlueIdentityCenterConfigurationRequest
     DeleteGlueIdentityCenterConfigurationResponse.type = Types::DeleteGlueIdentityCenterConfigurationResponse
     DeleteIntegrationRequest.add_member(:integration_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String128, name: "IntegrationIdentifier", traits: {"smithy.api#required" => {}}))
     DeleteIntegrationRequest.type = Types::DeleteIntegrationRequest
-    DeleteIntegrationResponse.add_member(:source_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String128, name: "SourceArn", traits: {"smithy.api#required" => {}}))
-    DeleteIntegrationResponse.add_member(:target_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String128, name: "TargetArn", traits: {"smithy.api#required" => {}}))
+    DeleteIntegrationResourcePropertyRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String512, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    DeleteIntegrationResourcePropertyRequest.type = Types::DeleteIntegrationResourcePropertyRequest
+    DeleteIntegrationResourcePropertyResponse.type = Types::DeleteIntegrationResourcePropertyResponse
+    DeleteIntegrationResponse.add_member(:source_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String512, name: "SourceArn", traits: {"smithy.api#required" => {}}))
+    DeleteIntegrationResponse.add_member(:target_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String512, name: "TargetArn", traits: {"smithy.api#required" => {}}))
     DeleteIntegrationResponse.add_member(:integration_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String128, name: "IntegrationName", traits: {"smithy.api#required" => {}}))
     DeleteIntegrationResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegrationDescription, name: "Description"))
     DeleteIntegrationResponse.add_member(:integration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String128, name: "IntegrationArn", traits: {"smithy.api#required" => {}}))
@@ -3358,7 +3909,7 @@ module Aws::Glue
     DeleteIntegrationResponse.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegrationErrorList, name: "Errors"))
     DeleteIntegrationResponse.add_member(:data_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: String2048, name: "DataFilter"))
     DeleteIntegrationResponse.type = Types::DeleteIntegrationResponse
-    DeleteIntegrationTablePropertiesRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String128, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    DeleteIntegrationTablePropertiesRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String512, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
     DeleteIntegrationTablePropertiesRequest.add_member(:table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String128, name: "TableName", traits: {"smithy.api#required" => {}}))
     DeleteIntegrationTablePropertiesRequest.type = Types::DeleteIntegrationTablePropertiesRequest
     DeleteIntegrationTablePropertiesResponse.type = Types::DeleteIntegrationTablePropertiesResponse
@@ -3466,6 +4017,7 @@ module Aws::Glue
     DescribeConnectionTypeResponse.add_member(:athena_connection_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: PropertiesMap, name: "AthenaConnectionProperties"))
     DescribeConnectionTypeResponse.add_member(:python_connection_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: PropertiesMap, name: "PythonConnectionProperties"))
     DescribeConnectionTypeResponse.add_member(:spark_connection_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: PropertiesMap, name: "SparkConnectionProperties"))
+    DescribeConnectionTypeResponse.add_member(:rest_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: RestConfiguration, name: "RestConfiguration"))
     DescribeConnectionTypeResponse.type = Types::DescribeConnectionTypeResponse
     DescribeEntityRequest.add_member(:connection_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "ConnectionName", traits: {"smithy.api#required" => {}}))
     DescribeEntityRequest.add_member(:catalog_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdString, name: "CatalogId"))
@@ -3479,7 +4031,7 @@ module Aws::Glue
     DescribeInboundIntegrationsRequest.add_member(:integration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String128, name: "IntegrationArn"))
     DescribeInboundIntegrationsRequest.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String128, name: "Marker"))
     DescribeInboundIntegrationsRequest.add_member(:max_records, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegrationInteger, name: "MaxRecords"))
-    DescribeInboundIntegrationsRequest.add_member(:target_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String128, name: "TargetArn"))
+    DescribeInboundIntegrationsRequest.add_member(:target_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String512, name: "TargetArn"))
     DescribeInboundIntegrationsRequest.type = Types::DescribeInboundIntegrationsRequest
     DescribeInboundIntegrationsResponse.add_member(:inbound_integrations, ::Smithy::Schema::Shapes::MemberShape.new(target: InboundIntegrationsList, name: "InboundIntegrations"))
     DescribeInboundIntegrationsResponse.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String128, name: "Marker"))
@@ -3549,6 +4101,24 @@ module Aws::Glue
     DirectSchemaChangePolicy.add_member(:table, ::Smithy::Schema::Shapes::MemberShape.new(target: EnclosedInStringProperty, name: "Table"))
     DirectSchemaChangePolicy.add_member(:database, ::Smithy::Schema::Shapes::MemberShape.new(target: EnclosedInStringProperty, name: "Database"))
     DirectSchemaChangePolicy.type = Types::DirectSchemaChangePolicy
+    DisassociateGlossaryTermsRequest.add_member(:asset_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetId, name: "AssetIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DisassociateGlossaryTermsRequest.add_member(:iterable_form_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IterableFormName, name: "IterableFormName"))
+    DisassociateGlossaryTermsRequest.add_member(:item_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ItemIdentifier, name: "ItemIdentifier"))
+    DisassociateGlossaryTermsRequest.add_member(:glossary_term_identifiers, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryTermIdList, name: "GlossaryTermIdentifiers", traits: {"smithy.api#required" => {}}))
+    DisassociateGlossaryTermsRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: HashString, name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    DisassociateGlossaryTermsRequest.type = Types::DisassociateGlossaryTermsRequest
+    DisassociateGlossaryTermsResponse.add_member(:asset_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetId, name: "AssetIdentifier"))
+    DisassociateGlossaryTermsResponse.add_member(:iterable_form_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IterableFormName, name: "IterableFormName"))
+    DisassociateGlossaryTermsResponse.add_member(:item_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ItemIdentifier, name: "ItemIdentifier"))
+    DisassociateGlossaryTermsResponse.add_member(:glossary_terms, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryTermIdList, name: "GlossaryTerms"))
+    DisassociateGlossaryTermsResponse.type = Types::DisassociateGlossaryTermsResponse
+    DistributionData.add_member(:bin_edges, ::Smithy::Schema::Shapes::MemberShape.new(target: BinEdges, name: "BinEdges"))
+    DistributionData.add_member(:count, ::Smithy::Schema::Shapes::MemberShape.new(target: Count, name: "Count"))
+    DistributionData.add_member(:data_type, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "DataType"))
+    DistributionData.type = Types::DistributionData
+    DistributionResultsOptions.add_member(:write_distribution_results_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "WriteDistributionResultsEnabled"))
+    DistributionResultsOptions.add_member(:catalog_table_config, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogTableConfigOptions, name: "CatalogTableConfig"))
+    DistributionResultsOptions.type = Types::DistributionResultsOptions
     DoubleColumnStatisticsData.add_member(:minimum_value, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "MinimumValue", traits: {"smithy.api#default" => 0}))
     DoubleColumnStatisticsData.add_member(:maximum_value, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "MaximumValue", traits: {"smithy.api#default" => 0}))
     DoubleColumnStatisticsData.add_member(:number_of_nulls, ::Smithy::Schema::Shapes::MemberShape.new(target: NonNegativeLong, name: "NumberOfNulls", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
@@ -3616,6 +4186,11 @@ module Aws::Glue
     Entity.add_member(:category, ::Smithy::Schema::Shapes::MemberShape.new(target: Category, name: "Category"))
     Entity.add_member(:custom_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomProperties, name: "CustomProperties"))
     Entity.type = Types::Entity
+    EntityConfiguration.add_member(:source_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceConfiguration, name: "SourceConfiguration"))
+    EntityConfiguration.add_member(:schema, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldDefinitionMap, name: "Schema"))
+    EntityConfiguration.type = Types::EntityConfiguration
+    EntityConfigurationMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityConfigurationMapKeyString, name: "key"))
+    EntityConfigurationMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityConfiguration, name: "value"))
     EntityList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Entity, name: "member"))
     EntityNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageString, name: "Message"))
     EntityNotFoundException.add_member(:from_federation_source, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "FromFederationSource"))
@@ -3643,6 +4218,8 @@ module Aws::Glue
     EvaluateDataQualityMultiFrame.add_member(:additional_options, ::Smithy::Schema::Shapes::MemberShape.new(target: DQAdditionalOptions, name: "AdditionalOptions"))
     EvaluateDataQualityMultiFrame.add_member(:stop_job_on_failure_options, ::Smithy::Schema::Shapes::MemberShape.new(target: DQStopJobOnFailureOptions, name: "StopJobOnFailureOptions"))
     EvaluateDataQualityMultiFrame.type = Types::EvaluateDataQualityMultiFrame
+    EvaluatedDistributionsMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "key"))
+    EvaluatedDistributionsMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: DistributionData, name: "value"))
     EvaluatedMetricsMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "key"))
     EvaluatedMetricsMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableDouble, name: "value"))
     EvaluationMetrics.add_member(:transform_type, ::Smithy::Schema::Shapes::MemberShape.new(target: TransformType, name: "TransformType", traits: {"smithy.api#required" => {}}))
@@ -3665,8 +4242,23 @@ module Aws::Glue
     ExistCondition.add_member(:must_exist, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MUST_EXIST", traits: {"smithy.api#enumValue" => "MUST_EXIST"}))
     ExistCondition.add_member(:not_exist, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_EXIST", traits: {"smithy.api#enumValue" => "NOT_EXIST"}))
     ExistCondition.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
+    ExportEncryptionConfiguration.add_member(:sse_algorithm, ::Smithy::Schema::Shapes::MemberShape.new(target: SseAlgorithm, name: "SseAlgorithm"))
+    ExportEncryptionConfiguration.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyArnString, name: "KmsKeyArn"))
+    ExportEncryptionConfiguration.type = Types::ExportEncryptionConfiguration
     ExportLabelsTaskRunProperties.add_member(:output_s3_path, ::Smithy::Schema::Shapes::MemberShape.new(target: UriString, name: "OutputS3Path"))
     ExportLabelsTaskRunProperties.type = Types::ExportLabelsTaskRunProperties
+    ExportSetting.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
+    ExportSetting.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
+    ExportStatus.add_member(:enabling, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLING", traits: {"smithy.api#enumValue" => "ENABLING"}))
+    ExportStatus.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
+    ExportStatus.add_member(:disabling, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLING", traits: {"smithy.api#enumValue" => "DISABLING"}))
+    ExportStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
+    ExportStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    ExtractedParameter.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorPropertyKey, name: "Key"))
+    ExtractedParameter.add_member(:default_value, ::Smithy::Schema::Shapes::MemberShape.new(target: DefaultValue, name: "DefaultValue"))
+    ExtractedParameter.add_member(:property_location, ::Smithy::Schema::Shapes::MemberShape.new(target: PropertyLocation, name: "PropertyLocation"))
+    ExtractedParameter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseExtractionMapping, name: "Value"))
+    ExtractedParameter.type = Types::ExtractedParameter
     FederatedCatalog.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: FederationIdentifier, name: "Identifier"))
     FederatedCatalog.add_member(:connection_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "ConnectionName"))
     FederatedCatalog.add_member(:connection_type, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "ConnectionType"))
@@ -3733,6 +4325,19 @@ module Aws::Glue
     FieldDataType.add_member(:short, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SHORT", traits: {"smithy.api#enumValue" => "SHORT"}))
     FieldDataType.add_member(:double, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DOUBLE", traits: {"smithy.api#enumValue" => "DOUBLE"}))
     FieldDataType.add_member(:struct, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STRUCT", traits: {"smithy.api#enumValue" => "STRUCT"}))
+    FieldDataType.add_member(:binary, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BINARY", traits: {"smithy.api#enumValue" => "BINARY"}))
+    FieldDataType.add_member(:union, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNION", traits: {"smithy.api#enumValue" => "UNION"}))
+    FieldDefinition.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Name", traits: {"smithy.api#required" => {}}))
+    FieldDefinition.add_member(:field_data_type, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldDataType, name: "FieldDataType", traits: {"smithy.api#required" => {}}))
+    FieldDefinition.add_member(:response_date_format, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ResponseDateFormat"))
+    FieldDefinition.add_member(:is_partitionable, ::Smithy::Schema::Shapes::MemberShape.new(target: Bool, name: "IsPartitionable"))
+    FieldDefinition.add_member(:is_nullable, ::Smithy::Schema::Shapes::MemberShape.new(target: Bool, name: "IsNullable"))
+    FieldDefinition.add_member(:is_queryable, ::Smithy::Schema::Shapes::MemberShape.new(target: Bool, name: "IsQueryable"))
+    FieldDefinition.add_member(:is_orderable, ::Smithy::Schema::Shapes::MemberShape.new(target: Bool, name: "IsOrderable"))
+    FieldDefinition.add_member(:filter_overrides, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterOverrides, name: "FilterOverrides"))
+    FieldDefinition.type = Types::FieldDefinition
+    FieldDefinitionMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldDefinitionMapKeyString, name: "key"))
+    FieldDefinitionMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldDefinition, name: "value"))
     FieldFilterOperator.add_member(:less_than, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LESS_THAN", traits: {"smithy.api#enumValue" => "LESS_THAN"}))
     FieldFilterOperator.add_member(:greater_than, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GREATER_THAN", traits: {"smithy.api#enumValue" => "GREATER_THAN"}))
     FieldFilterOperator.add_member(:between, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BETWEEN", traits: {"smithy.api#enumValue" => "BETWEEN"}))
@@ -3759,6 +4364,13 @@ module Aws::Glue
     Filter.add_member(:logical_operator, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterLogicalOperator, name: "LogicalOperator", traits: {"smithy.api#required" => {}}))
     Filter.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterExpressions, name: "Filters", traits: {"smithy.api#required" => {}}))
     Filter.type = Types::Filter
+    FilterConfiguration.add_member(:filter_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterMode, name: "FilterMode", traits: {"smithy.api#required" => {}}))
+    FilterConfiguration.add_member(:operator_mappings, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionStringToStringMap, name: "OperatorMappings"))
+    FilterConfiguration.add_member(:date_time_format, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "DateTimeFormat"))
+    FilterConfiguration.add_member(:strip_quotes, ::Smithy::Schema::Shapes::MemberShape.new(target: Bool, name: "StripQuotes"))
+    FilterConfiguration.add_member(:between_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: BetweenConfiguration, name: "BetweenConfiguration"))
+    FilterConfiguration.add_member(:filter_string_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterStringConfiguration, name: "FilterStringConfiguration"))
+    FilterConfiguration.type = Types::FilterConfiguration
     FilterExpression.add_member(:operation, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterOperation, name: "Operation", traits: {"smithy.api#required" => {}}))
     FilterExpression.add_member(:negated, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedBoolean, name: "Negated"))
     FilterExpression.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValues, name: "Values", traits: {"smithy.api#required" => {}}))
@@ -3766,6 +4378,8 @@ module Aws::Glue
     FilterExpressions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterExpression, name: "member"))
     FilterLogicalOperator.add_member(:and, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AND", traits: {"smithy.api#enumValue" => "AND"}))
     FilterLogicalOperator.add_member(:or, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OR", traits: {"smithy.api#enumValue" => "OR"}))
+    FilterMode.add_member(:query_params, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "QUERY_PARAMS", traits: {"smithy.api#enumValue" => "QUERY_PARAMS"}))
+    FilterMode.add_member(:filter_string, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FILTER_STRING", traits: {"smithy.api#enumValue" => "FILTER_STRING"}))
     FilterOperation.add_member(:eq, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EQ", traits: {"smithy.api#enumValue" => "EQ"}))
     FilterOperation.add_member(:lt, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LT", traits: {"smithy.api#enumValue" => "LT"}))
     FilterOperation.add_member(:gt, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GT", traits: {"smithy.api#enumValue" => "GT"}))
@@ -3779,6 +4393,15 @@ module Aws::Glue
     FilterOperator.add_member(:le, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LE", traits: {"smithy.api#enumValue" => "LE"}))
     FilterOperator.add_member(:eq, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EQ", traits: {"smithy.api#enumValue" => "EQ"}))
     FilterOperator.add_member(:ne, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NE", traits: {"smithy.api#enumValue" => "NE"}))
+    FilterOverrides.add_member(:field_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "FieldName"))
+    FilterOverrides.add_member(:operator_mappings, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionStringToStringMap, name: "OperatorMappings"))
+    FilterOverrides.add_member(:between_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: BetweenConfiguration, name: "BetweenConfiguration"))
+    FilterOverrides.add_member(:date_time_format, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "DateTimeFormat"))
+    FilterOverrides.type = Types::FilterOverrides
+    FilterStringConfiguration.add_member(:query_parameter_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "QueryParameterName", traits: {"smithy.api#required" => {}}))
+    FilterStringConfiguration.add_member(:quote_string_values, ::Smithy::Schema::Shapes::MemberShape.new(target: Bool, name: "QuoteStringValues"))
+    FilterStringConfiguration.add_member(:quote_character, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "QuoteCharacter"))
+    FilterStringConfiguration.type = Types::FilterStringConfiguration
     FilterValue.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValueType, name: "Type", traits: {"smithy.api#required" => {}}))
     FilterValue.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: EnclosedInStringProperties, name: "Value", traits: {"smithy.api#required" => {}}))
     FilterValue.type = Types::FilterValue
@@ -3801,8 +4424,34 @@ module Aws::Glue
     FindMatchesTaskRunProperties.add_member(:job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "JobName"))
     FindMatchesTaskRunProperties.add_member(:job_run_id, ::Smithy::Schema::Shapes::MemberShape.new(target: HashString, name: "JobRunId"))
     FindMatchesTaskRunProperties.type = Types::FindMatchesTaskRunProperties
+    FormTypeItem.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: FormTypeId, name: "Id"))
+    FormTypeItem.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: FormTypeName, name: "Name"))
+    FormTypeItem.type = Types::FormTypeItem
+    FormTypeItemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FormTypeItem, name: "member"))
+    FunctionType.add_member(:regular_function, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REGULAR_FUNCTION", traits: {"smithy.api#enumValue" => "REGULAR_FUNCTION"}))
+    FunctionType.add_member(:aggregate_function, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AGGREGATE_FUNCTION", traits: {"smithy.api#enumValue" => "AGGREGATE_FUNCTION"}))
+    FunctionType.add_member(:stored_procedure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STORED_PROCEDURE", traits: {"smithy.api#enumValue" => "STORED_PROCEDURE"}))
     GenericMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "key"))
     GenericMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "value"))
+    GetAssetInput.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetId, name: "Identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetAssetInput.type = Types::GetAssetInput
+    GetAssetOutput.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetId, name: "Id", traits: {"smithy.api#required" => {}}))
+    GetAssetOutput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetName, name: "Name"))
+    GetAssetOutput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetDescription, name: "Description"))
+    GetAssetOutput.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedAt, name: "CreatedAt"))
+    GetAssetOutput.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdatedAt, name: "UpdatedAt"))
+    GetAssetOutput.add_member(:asset_type_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetTypeId, name: "AssetTypeId", traits: {"smithy.api#required" => {}}))
+    GetAssetOutput.add_member(:glossary_terms, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryTermIdList, name: "GlossaryTerms"))
+    GetAssetOutput.add_member(:forms, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetFormMap, name: "Forms"))
+    GetAssetOutput.add_member(:attachments, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetFormMap, name: "Attachments"))
+    GetAssetOutput.add_member(:iterable_forms, ::Smithy::Schema::Shapes::MemberShape.new(target: IterableFormMap, name: "IterableForms"))
+    GetAssetOutput.type = Types::GetAssetOutput
+    GetAssetTypeRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetTypeId, name: "Identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetAssetTypeRequest.type = Types::GetAssetTypeRequest
+    GetAssetTypeResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetTypeId, name: "Id"))
+    GetAssetTypeResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetTypeName, name: "Name"))
+    GetAssetTypeResponse.add_member(:forms, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetTypeFormsMap, name: "Forms"))
+    GetAssetTypeResponse.type = Types::GetAssetTypeResponse
     GetBlueprintRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "Name", traits: {"smithy.api#required" => {}}))
     GetBlueprintRequest.add_member(:include_blueprint, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "IncludeBlueprint"))
     GetBlueprintRequest.add_member(:include_parameter_spec, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "IncludeParameterSpec"))
@@ -3834,6 +4483,7 @@ module Aws::Glue
     GetCatalogsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: PageSize, name: "MaxResults"))
     GetCatalogsRequest.add_member(:recursive, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Recursive", traits: {"smithy.api#default" => false}))
     GetCatalogsRequest.add_member(:include_root, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "IncludeRoot"))
+    GetCatalogsRequest.add_member(:has_databases, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "HasDatabases"))
     GetCatalogsRequest.type = Types::GetCatalogsRequest
     GetCatalogsResponse.add_member(:catalog_list, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogList, name: "CatalogList", traits: {"smithy.api#required" => {}}))
     GetCatalogsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken"))
@@ -3874,12 +4524,14 @@ module Aws::Glue
     GetColumnStatisticsTaskRunsRequest.add_member(:table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "TableName", traits: {"smithy.api#required" => {}}))
     GetColumnStatisticsTaskRunsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: PageSize, name: "MaxResults"))
     GetColumnStatisticsTaskRunsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken"))
+    GetColumnStatisticsTaskRunsRequest.add_member(:catalog_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdString, name: "CatalogID"))
     GetColumnStatisticsTaskRunsRequest.type = Types::GetColumnStatisticsTaskRunsRequest
     GetColumnStatisticsTaskRunsResponse.add_member(:column_statistics_task_runs, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnStatisticsTaskRunsList, name: "ColumnStatisticsTaskRuns"))
     GetColumnStatisticsTaskRunsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken"))
     GetColumnStatisticsTaskRunsResponse.type = Types::GetColumnStatisticsTaskRunsResponse
     GetColumnStatisticsTaskSettingsRequest.add_member(:database_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "DatabaseName", traits: {"smithy.api#required" => {}}))
     GetColumnStatisticsTaskSettingsRequest.add_member(:table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "TableName", traits: {"smithy.api#required" => {}}))
+    GetColumnStatisticsTaskSettingsRequest.add_member(:catalog_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdString, name: "CatalogID"))
     GetColumnStatisticsTaskSettingsRequest.type = Types::GetColumnStatisticsTaskSettingsRequest
     GetColumnStatisticsTaskSettingsResponse.add_member(:column_statistics_task_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnStatisticsTaskSettings, name: "ColumnStatisticsTaskSettings"))
     GetColumnStatisticsTaskSettingsResponse.type = Types::GetColumnStatisticsTaskSettingsResponse
@@ -3926,10 +4578,24 @@ module Aws::Glue
     GetCustomEntityTypeResponse.add_member(:regex_string, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "RegexString"))
     GetCustomEntityTypeResponse.add_member(:context_words, ::Smithy::Schema::Shapes::MemberShape.new(target: ContextWords, name: "ContextWords"))
     GetCustomEntityTypeResponse.type = Types::GetCustomEntityTypeResponse
+    GetDashboardUrlRequest.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "ResourceId", traits: {"smithy.api#required" => {}}))
+    GetDashboardUrlRequest.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: GlueResourceType, name: "ResourceType", traits: {"smithy.api#required" => {}}))
+    GetDashboardUrlRequest.add_member(:request_origin, ::Smithy::Schema::Shapes::MemberShape.new(target: OrchestrationNameString, name: "RequestOrigin"))
+    GetDashboardUrlRequest.type = Types::GetDashboardUrlRequest
+    GetDashboardUrlResponse.add_member(:url, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveUrl, name: "Url", traits: {"smithy.api#required" => {}}))
+    GetDashboardUrlResponse.type = Types::GetDashboardUrlResponse
     GetDataCatalogEncryptionSettingsRequest.add_member(:catalog_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdString, name: "CatalogId"))
     GetDataCatalogEncryptionSettingsRequest.type = Types::GetDataCatalogEncryptionSettingsRequest
     GetDataCatalogEncryptionSettingsResponse.add_member(:data_catalog_encryption_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: DataCatalogEncryptionSettings, name: "DataCatalogEncryptionSettings"))
     GetDataCatalogEncryptionSettingsResponse.type = Types::GetDataCatalogEncryptionSettingsResponse
+    GetDataCatalogExportConfigurationInput.type = Types::GetDataCatalogExportConfigurationInput
+    GetDataCatalogExportConfigurationOutput.add_member(:export_setting, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportSetting, name: "ExportSetting"))
+    GetDataCatalogExportConfigurationOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportStatus, name: "Status"))
+    GetDataCatalogExportConfigurationOutput.add_member(:encryption_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportEncryptionConfiguration, name: "EncryptionConfiguration"))
+    GetDataCatalogExportConfigurationOutput.add_member(:s3_table_bucket_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: S3TableBucketArn, name: "S3TableBucketArn"))
+    GetDataCatalogExportConfigurationOutput.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedAt, name: "CreatedAt"))
+    GetDataCatalogExportConfigurationOutput.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdatedAt, name: "UpdatedAt"))
+    GetDataCatalogExportConfigurationOutput.type = Types::GetDataCatalogExportConfigurationOutput
     GetDataQualityModelRequest.add_member(:statistic_id, ::Smithy::Schema::Shapes::MemberShape.new(target: HashString, name: "StatisticId"))
     GetDataQualityModelRequest.add_member(:profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: HashString, name: "ProfileId", traits: {"smithy.api#required" => {}}))
     GetDataQualityModelRequest.type = Types::GetDataQualityModelRequest
@@ -3962,6 +4628,25 @@ module Aws::Glue
     GetDataQualityResultResponse.add_member(:observations, ::Smithy::Schema::Shapes::MemberShape.new(target: DataQualityObservations, name: "Observations"))
     GetDataQualityResultResponse.add_member(:aggregated_metrics, ::Smithy::Schema::Shapes::MemberShape.new(target: DataQualityAggregatedMetrics, name: "AggregatedMetrics"))
     GetDataQualityResultResponse.type = Types::GetDataQualityResultResponse
+    GetDataQualityResultV2Request.add_member(:result_id, ::Smithy::Schema::Shapes::MemberShape.new(target: HashString, name: "ResultId", traits: {"smithy.api#required" => {}}))
+    GetDataQualityResultV2Request.type = Types::GetDataQualityResultV2Request
+    GetDataQualityResultV2Response.add_member(:result_id, ::Smithy::Schema::Shapes::MemberShape.new(target: HashString, name: "ResultId"))
+    GetDataQualityResultV2Response.add_member(:data_source, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSource, name: "DataSource"))
+    GetDataQualityResultV2Response.add_member(:profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: HashString, name: "ProfileId"))
+    GetDataQualityResultV2Response.add_member(:dimensions, ::Smithy::Schema::Shapes::MemberShape.new(target: PublishDataQualityResultDimensions, name: "Dimensions"))
+    GetDataQualityResultV2Response.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: PublishDataQualityResultTags, name: "Tags"))
+    GetDataQualityResultV2Response.add_member(:execution_started_on, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "ExecutionStartedOn"))
+    GetDataQualityResultV2Response.add_member(:execution_completed_on, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "ExecutionCompletedOn"))
+    GetDataQualityResultV2Response.add_member(:result_published_on, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "ResultPublishedOn"))
+    GetDataQualityResultV2Response.add_member(:score, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericBoundedDouble, name: "Score"))
+    GetDataQualityResultV2Response.add_member(:rule_results, ::Smithy::Schema::Shapes::MemberShape.new(target: DataQualityRuleResults, name: "RuleResults"))
+    GetDataQualityResultV2Response.add_member(:analyzer_results, ::Smithy::Schema::Shapes::MemberShape.new(target: DataQualityAnalyzerResults, name: "AnalyzerResults"))
+    GetDataQualityResultV2Response.add_member(:observations, ::Smithy::Schema::Shapes::MemberShape.new(target: DataQualityObservations, name: "Observations"))
+    GetDataQualityResultV2Response.add_member(:evaluation_context, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "EvaluationContext"))
+    GetDataQualityResultV2Response.add_member(:descriptors, ::Smithy::Schema::Shapes::MemberShape.new(target: PublishDataQualityResultDescriptors, name: "Descriptors"))
+    GetDataQualityResultV2Response.add_member(:aggregated_metrics, ::Smithy::Schema::Shapes::MemberShape.new(target: DataQualityAggregatedMetrics, name: "AggregatedMetrics"))
+    GetDataQualityResultV2Response.add_member(:ruleset_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "RulesetName"))
+    GetDataQualityResultV2Response.type = Types::GetDataQualityResultV2Response
     GetDataQualityRuleRecommendationRunRequest.add_member(:run_id, ::Smithy::Schema::Shapes::MemberShape.new(target: HashString, name: "RunId", traits: {"smithy.api#required" => {}}))
     GetDataQualityRuleRecommendationRunRequest.type = Types::GetDataQualityRuleRecommendationRunRequest
     GetDataQualityRuleRecommendationRunResponse.add_member(:run_id, ::Smithy::Schema::Shapes::MemberShape.new(target: HashString, name: "RunId"))
@@ -3978,6 +4663,8 @@ module Aws::Glue
     GetDataQualityRuleRecommendationRunResponse.add_member(:recommended_ruleset, ::Smithy::Schema::Shapes::MemberShape.new(target: DataQualityRulesetString, name: "RecommendedRuleset"))
     GetDataQualityRuleRecommendationRunResponse.add_member(:created_ruleset_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "CreatedRulesetName"))
     GetDataQualityRuleRecommendationRunResponse.add_member(:data_quality_security_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "DataQualitySecurityConfiguration"))
+    GetDataQualityRuleRecommendationRunResponse.add_member(:additional_run_options, ::Smithy::Schema::Shapes::MemberShape.new(target: DataQualityRuleRecommendationRunAdditionalRunOptions, name: "AdditionalRunOptions"))
+    GetDataQualityRuleRecommendationRunResponse.add_member(:recommendation_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationMode, name: "RecommendationMode"))
     GetDataQualityRuleRecommendationRunResponse.type = Types::GetDataQualityRuleRecommendationRunResponse
     GetDataQualityRulesetEvaluationRunRequest.add_member(:run_id, ::Smithy::Schema::Shapes::MemberShape.new(target: HashString, name: "RunId", traits: {"smithy.api#required" => {}}))
     GetDataQualityRulesetEvaluationRunRequest.type = Types::GetDataQualityRulesetEvaluationRunRequest
@@ -4051,21 +4738,43 @@ module Aws::Glue
     GetEntityRecordsResponse.add_member(:records, ::Smithy::Schema::Shapes::MemberShape.new(target: Records, name: "Records"))
     GetEntityRecordsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     GetEntityRecordsResponse.type = Types::GetEntityRecordsResponse
+    GetFormTypeRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: FormTypeId, name: "Identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetFormTypeRequest.type = Types::GetFormTypeRequest
+    GetFormTypeResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: FormTypeId, name: "Id"))
+    GetFormTypeResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: FormTypeName, name: "Name"))
+    GetFormTypeResponse.add_member(:schema, ::Smithy::Schema::Shapes::MemberShape.new(target: FormTypeSchema, name: "Schema"))
+    GetFormTypeResponse.type = Types::GetFormTypeResponse
+    GetGlossaryRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryId, name: "Identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetGlossaryRequest.type = Types::GetGlossaryRequest
+    GetGlossaryResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryId, name: "Id"))
+    GetGlossaryResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryName, name: "Name"))
+    GetGlossaryResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataDescription, name: "Description"))
+    GetGlossaryResponse.type = Types::GetGlossaryResponse
+    GetGlossaryTermRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryTermId, name: "Identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetGlossaryTermRequest.type = Types::GetGlossaryTermRequest
+    GetGlossaryTermResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryTermId, name: "Id"))
+    GetGlossaryTermResponse.add_member(:glossary_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryId, name: "GlossaryId"))
+    GetGlossaryTermResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryTermName, name: "Name"))
+    GetGlossaryTermResponse.add_member(:short_description, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryShortDescription, name: "ShortDescription"))
+    GetGlossaryTermResponse.add_member(:long_description, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryLongDescription, name: "LongDescription"))
+    GetGlossaryTermResponse.type = Types::GetGlossaryTermResponse
     GetGlueIdentityCenterConfigurationRequest.type = Types::GetGlueIdentityCenterConfigurationRequest
     GetGlueIdentityCenterConfigurationResponse.add_member(:application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationArn, name: "ApplicationArn"))
     GetGlueIdentityCenterConfigurationResponse.add_member(:instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityCenterInstanceArn, name: "InstanceArn"))
     GetGlueIdentityCenterConfigurationResponse.add_member(:scopes, ::Smithy::Schema::Shapes::MemberShape.new(target: OrchestrationStringList, name: "Scopes"))
+    GetGlueIdentityCenterConfigurationResponse.add_member(:user_background_sessions_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "UserBackgroundSessionsEnabled"))
     GetGlueIdentityCenterConfigurationResponse.type = Types::GetGlueIdentityCenterConfigurationResponse
-    GetIntegrationResourcePropertyRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String128, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    GetIntegrationResourcePropertyRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String512, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
     GetIntegrationResourcePropertyRequest.type = Types::GetIntegrationResourcePropertyRequest
-    GetIntegrationResourcePropertyResponse.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String128, name: "ResourceArn"))
+    GetIntegrationResourcePropertyResponse.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String512, name: "ResourceArn"))
+    GetIntegrationResourcePropertyResponse.add_member(:resource_property_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String512, name: "ResourcePropertyArn"))
     GetIntegrationResourcePropertyResponse.add_member(:source_processing_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceProcessingProperties, name: "SourceProcessingProperties"))
     GetIntegrationResourcePropertyResponse.add_member(:target_processing_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetProcessingProperties, name: "TargetProcessingProperties"))
     GetIntegrationResourcePropertyResponse.type = Types::GetIntegrationResourcePropertyResponse
-    GetIntegrationTablePropertiesRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String128, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    GetIntegrationTablePropertiesRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String512, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
     GetIntegrationTablePropertiesRequest.add_member(:table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String128, name: "TableName", traits: {"smithy.api#required" => {}}))
     GetIntegrationTablePropertiesRequest.type = Types::GetIntegrationTablePropertiesRequest
-    GetIntegrationTablePropertiesResponse.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String128, name: "ResourceArn"))
+    GetIntegrationTablePropertiesResponse.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String512, name: "ResourceArn"))
     GetIntegrationTablePropertiesResponse.add_member(:table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String128, name: "TableName"))
     GetIntegrationTablePropertiesResponse.add_member(:source_table_config, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceTableConfig, name: "SourceTableConfig"))
     GetIntegrationTablePropertiesResponse.add_member(:target_table_config, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetTableConfig, name: "TargetTableConfig"))
@@ -4157,6 +4866,11 @@ module Aws::Glue
     GetMappingRequest.type = Types::GetMappingRequest
     GetMappingResponse.add_member(:mapping, ::Smithy::Schema::Shapes::MemberShape.new(target: MappingList, name: "Mapping", traits: {"smithy.api#required" => {}}))
     GetMappingResponse.type = Types::GetMappingResponse
+    GetMaterializedViewRefreshTaskRunRequest.add_member(:catalog_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdString, name: "CatalogId", traits: {"smithy.api#required" => {}}))
+    GetMaterializedViewRefreshTaskRunRequest.add_member(:materialized_view_refresh_task_run_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUIDv4, name: "MaterializedViewRefreshTaskRunId", traits: {"smithy.api#required" => {}}))
+    GetMaterializedViewRefreshTaskRunRequest.type = Types::GetMaterializedViewRefreshTaskRunRequest
+    GetMaterializedViewRefreshTaskRunResponse.add_member(:materialized_view_refresh_task_run, ::Smithy::Schema::Shapes::MemberShape.new(target: MaterializedViewRefreshTaskRun, name: "MaterializedViewRefreshTaskRun"))
+    GetMaterializedViewRefreshTaskRunResponse.type = Types::GetMaterializedViewRefreshTaskRunResponse
     GetPartitionIndexesRequest.add_member(:catalog_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdString, name: "CatalogId"))
     GetPartitionIndexesRequest.add_member(:database_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "DatabaseName", traits: {"smithy.api#required" => {}}))
     GetPartitionIndexesRequest.add_member(:table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "TableName", traits: {"smithy.api#required" => {}}))
@@ -4169,6 +4883,7 @@ module Aws::Glue
     GetPartitionRequest.add_member(:database_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "DatabaseName", traits: {"smithy.api#required" => {}}))
     GetPartitionRequest.add_member(:table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "TableName", traits: {"smithy.api#required" => {}}))
     GetPartitionRequest.add_member(:partition_values, ::Smithy::Schema::Shapes::MemberShape.new(target: ValueStringList, name: "PartitionValues", traits: {"smithy.api#required" => {}}))
+    GetPartitionRequest.add_member(:audit_context, ::Smithy::Schema::Shapes::MemberShape.new(target: AuditContext, name: "AuditContext"))
     GetPartitionRequest.type = Types::GetPartitionRequest
     GetPartitionResponse.add_member(:partition, ::Smithy::Schema::Shapes::MemberShape.new(target: Partition, name: "Partition"))
     GetPartitionResponse.type = Types::GetPartitionResponse
@@ -4182,6 +4897,7 @@ module Aws::Glue
     GetPartitionsRequest.add_member(:exclude_column_schema, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanNullable, name: "ExcludeColumnSchema"))
     GetPartitionsRequest.add_member(:transaction_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TransactionIdString, name: "TransactionId"))
     GetPartitionsRequest.add_member(:query_as_of_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "QueryAsOfTime"))
+    GetPartitionsRequest.add_member(:audit_context, ::Smithy::Schema::Shapes::MemberShape.new(target: AuditContext, name: "AuditContext"))
     GetPartitionsRequest.type = Types::GetPartitionsRequest
     GetPartitionsResponse.add_member(:partitions, ::Smithy::Schema::Shapes::MemberShape.new(target: PartitionList, name: "Partitions"))
     GetPartitionsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken"))
@@ -4273,6 +4989,10 @@ module Aws::Glue
     GetSecurityConfigurationsResponse.add_member(:security_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityConfigurationList, name: "SecurityConfigurations"))
     GetSecurityConfigurationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "NextToken"))
     GetSecurityConfigurationsResponse.type = Types::GetSecurityConfigurationsResponse
+    GetSessionEndpointRequest.add_member(:session_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "SessionId", traits: {"smithy.api#required" => {}}))
+    GetSessionEndpointRequest.type = Types::GetSessionEndpointRequest
+    GetSessionEndpointResponse.add_member(:spark_connect, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionEndpoint, name: "SparkConnect", traits: {"smithy.api#jsonName" => "SPARK_CONNECT", "smithy.api#required" => {}}))
+    GetSessionEndpointResponse.type = Types::GetSessionEndpointResponse
     GetSessionRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "Id", traits: {"smithy.api#required" => {}}))
     GetSessionRequest.add_member(:request_origin, ::Smithy::Schema::Shapes::MemberShape.new(target: OrchestrationNameString, name: "RequestOrigin"))
     GetSessionRequest.type = Types::GetSessionRequest
@@ -4284,6 +5004,15 @@ module Aws::Glue
     GetStatementRequest.type = Types::GetStatementRequest
     GetStatementResponse.add_member(:statement, ::Smithy::Schema::Shapes::MemberShape.new(target: Statement, name: "Statement"))
     GetStatementResponse.type = Types::GetStatementResponse
+    GetSystemLogsForJobRunRequest.add_member(:job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "JobName", traits: {"smithy.api#required" => {}}))
+    GetSystemLogsForJobRunRequest.add_member(:run_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IdString, name: "RunId", traits: {"smithy.api#required" => {}}))
+    GetSystemLogsForJobRunRequest.type = Types::GetSystemLogsForJobRunRequest
+    GetSystemLogsForJobRunResponse.add_member(:system_logs_url, ::Smithy::Schema::Shapes::MemberShape.new(target: Url, name: "SystemLogsUrl"))
+    GetSystemLogsForJobRunResponse.type = Types::GetSystemLogsForJobRunResponse
+    GetSystemLogsForSessionRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "Id", traits: {"smithy.api#required" => {}}))
+    GetSystemLogsForSessionRequest.type = Types::GetSystemLogsForSessionRequest
+    GetSystemLogsForSessionResponse.add_member(:system_logs_url, ::Smithy::Schema::Shapes::MemberShape.new(target: Url, name: "SystemLogsUrl"))
+    GetSystemLogsForSessionResponse.type = Types::GetSystemLogsForSessionResponse
     GetTableOptimizerRequest.add_member(:catalog_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdString, name: "CatalogId", traits: {"smithy.api#required" => {}}))
     GetTableOptimizerRequest.add_member(:database_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "DatabaseName", traits: {"smithy.api#required" => {}}))
     GetTableOptimizerRequest.add_member(:table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "TableName", traits: {"smithy.api#required" => {}}))
@@ -4299,7 +5028,9 @@ module Aws::Glue
     GetTableRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "Name", traits: {"smithy.api#required" => {}}))
     GetTableRequest.add_member(:transaction_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TransactionIdString, name: "TransactionId"))
     GetTableRequest.add_member(:query_as_of_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "QueryAsOfTime"))
+    GetTableRequest.add_member(:audit_context, ::Smithy::Schema::Shapes::MemberShape.new(target: AuditContext, name: "AuditContext"))
     GetTableRequest.add_member(:include_status_details, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanNullable, name: "IncludeStatusDetails"))
+    GetTableRequest.add_member(:attributes_to_get, ::Smithy::Schema::Shapes::MemberShape.new(target: TableAttributesList, name: "AttributesToGet"))
     GetTableRequest.type = Types::GetTableRequest
     GetTableResponse.add_member(:table, ::Smithy::Schema::Shapes::MemberShape.new(target: Table, name: "Table"))
     GetTableResponse.type = Types::GetTableResponse
@@ -4307,6 +5038,7 @@ module Aws::Glue
     GetTableVersionRequest.add_member(:database_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "DatabaseName", traits: {"smithy.api#required" => {}}))
     GetTableVersionRequest.add_member(:table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "TableName", traits: {"smithy.api#required" => {}}))
     GetTableVersionRequest.add_member(:version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionString, name: "VersionId"))
+    GetTableVersionRequest.add_member(:audit_context, ::Smithy::Schema::Shapes::MemberShape.new(target: AuditContext, name: "AuditContext"))
     GetTableVersionRequest.type = Types::GetTableVersionRequest
     GetTableVersionResponse.add_member(:table_version, ::Smithy::Schema::Shapes::MemberShape.new(target: TableVersion, name: "TableVersion"))
     GetTableVersionResponse.type = Types::GetTableVersionResponse
@@ -4316,6 +5048,7 @@ module Aws::Glue
     GetTableVersionsRequest.add_member(:table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "TableName", traits: {"smithy.api#required" => {}}))
     GetTableVersionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken"))
     GetTableVersionsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogGetterPageSize, name: "MaxResults"))
+    GetTableVersionsRequest.add_member(:audit_context, ::Smithy::Schema::Shapes::MemberShape.new(target: AuditContext, name: "AuditContext"))
     GetTableVersionsRequest.type = Types::GetTableVersionsRequest
     GetTableVersionsResponse.add_member(:table_versions, ::Smithy::Schema::Shapes::MemberShape.new(target: GetTableVersionsList, name: "TableVersions"))
     GetTableVersionsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken"))
@@ -4327,6 +5060,8 @@ module Aws::Glue
     GetTablesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogGetterPageSize, name: "MaxResults"))
     GetTablesRequest.add_member(:transaction_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TransactionIdString, name: "TransactionId"))
     GetTablesRequest.add_member(:query_as_of_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "QueryAsOfTime"))
+    GetTablesRequest.add_member(:audit_context, ::Smithy::Schema::Shapes::MemberShape.new(target: AuditContext, name: "AuditContext"))
+    GetTablesRequest.add_member(:resource_share_type, ::Smithy::Schema::Shapes::MemberShape.new(target: TableResourceShareType, name: "ResourceShareType"))
     GetTablesRequest.add_member(:include_status_details, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanNullable, name: "IncludeStatusDetails"))
     GetTablesRequest.add_member(:attributes_to_get, ::Smithy::Schema::Shapes::MemberShape.new(target: TableAttributesList, name: "AttributesToGet"))
     GetTablesRequest.type = Types::GetTablesRequest
@@ -4394,6 +5129,7 @@ module Aws::Glue
     GetUnfilteredTableMetadataResponse.add_member(:cell_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnRowFilterList, name: "CellFilters"))
     GetUnfilteredTableMetadataResponse.add_member(:query_authorization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: HashString, name: "QueryAuthorizationId"))
     GetUnfilteredTableMetadataResponse.add_member(:is_multi_dialect_view, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "IsMultiDialectView", traits: {"smithy.api#default" => false}))
+    GetUnfilteredTableMetadataResponse.add_member(:is_materialized_view, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "IsMaterializedView", traits: {"smithy.api#default" => false}))
     GetUnfilteredTableMetadataResponse.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnString, name: "ResourceArn"))
     GetUnfilteredTableMetadataResponse.add_member(:is_protected, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "IsProtected", traits: {"smithy.api#default" => false}))
     GetUnfilteredTableMetadataResponse.add_member(:permissions, ::Smithy::Schema::Shapes::MemberShape.new(target: PermissionList, name: "Permissions"))
@@ -4416,6 +5152,7 @@ module Aws::Glue
     GetUserDefinedFunctionsRequest.add_member(:catalog_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdString, name: "CatalogId"))
     GetUserDefinedFunctionsRequest.add_member(:database_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "DatabaseName"))
     GetUserDefinedFunctionsRequest.add_member(:pattern, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "Pattern", traits: {"smithy.api#required" => {}}))
+    GetUserDefinedFunctionsRequest.add_member(:function_type, ::Smithy::Schema::Shapes::MemberShape.new(target: FunctionType, name: "FunctionType"))
     GetUserDefinedFunctionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken"))
     GetUserDefinedFunctionsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogGetterPageSize, name: "MaxResults"))
     GetUserDefinedFunctionsRequest.type = Types::GetUserDefinedFunctionsRequest
@@ -4446,6 +5183,17 @@ module Aws::Glue
     GetWorkflowRunsResponse.add_member(:runs, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowRuns, name: "Runs"))
     GetWorkflowRunsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "NextToken"))
     GetWorkflowRunsResponse.type = Types::GetWorkflowRunsResponse
+    GlossaryItem.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryId, name: "Id"))
+    GlossaryItem.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryName, name: "Name"))
+    GlossaryItem.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataDescription, name: "Description"))
+    GlossaryItem.type = Types::GlossaryItem
+    GlossaryItemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryItem, name: "member"))
+    GlossaryTermIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryTermId, name: "member"))
+    GlossaryTermItem.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryTermId, name: "Id"))
+    GlossaryTermItem.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryTermName, name: "Name"))
+    GlossaryTermItem.add_member(:short_description, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryShortDescription, name: "ShortDescription"))
+    GlossaryTermItem.type = Types::GlossaryTermItem
+    GlossaryTermItemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryTermItem, name: "member"))
     GlueEncryptionException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageString, name: "Message"))
     GlueEncryptionException.type = Types::GlueEncryptionException
     GluePolicy.add_member(:policy_in_json, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyJsonString, name: "PolicyInJson"))
@@ -4463,6 +5211,8 @@ module Aws::Glue
     GlueRecordType.add_member(:byte, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BYTE", traits: {"smithy.api#enumValue" => "BYTE"}))
     GlueRecordType.add_member(:short, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SHORT", traits: {"smithy.api#enumValue" => "SHORT"}))
     GlueRecordType.add_member(:double, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DOUBLE", traits: {"smithy.api#enumValue" => "DOUBLE"}))
+    GlueResourceType.add_member(:job, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "JOB", traits: {"smithy.api#enumValue" => "JOB"}))
+    GlueResourceType.add_member(:session, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SESSION", traits: {"smithy.api#enumValue" => "SESSION"}))
     GlueSchema.add_member(:columns, ::Smithy::Schema::Shapes::MemberShape.new(target: GlueStudioSchemaColumnList, name: "Columns"))
     GlueSchema.type = Types::GlueSchema
     GlueSchemas.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GlueSchema, name: "member"))
@@ -4507,6 +5257,8 @@ module Aws::Glue
     GroupFilters.add_member(:logical_operator, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterLogicalOperator, name: "LogicalOperator", traits: {"smithy.api#required" => {}}))
     GroupFilters.type = Types::GroupFilters
     GroupFiltersList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupFilters, name: "member"))
+    HTTPMethod.add_member(:get, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GET", traits: {"smithy.api#enumValue" => "GET"}))
+    HTTPMethod.add_member(:post, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POST", traits: {"smithy.api#enumValue" => "POST"}))
     HudiTarget.add_member(:paths, ::Smithy::Schema::Shapes::MemberShape.new(target: PathList, name: "Paths"))
     HudiTarget.add_member(:connection_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionName, name: "ConnectionName"))
     HudiTarget.add_member(:exclusions, ::Smithy::Schema::Shapes::MemberShape.new(target: PathList, name: "Exclusions"))
@@ -4528,6 +5280,11 @@ module Aws::Glue
     IcebergCompactionMetrics.add_member(:number_of_dpus, ::Smithy::Schema::Shapes::MemberShape.new(target: DpuCounts, name: "NumberOfDpus", traits: {"smithy.api#default" => 0}))
     IcebergCompactionMetrics.add_member(:job_duration_in_hour, ::Smithy::Schema::Shapes::MemberShape.new(target: DpuDurationInHour, name: "JobDurationInHour", traits: {"smithy.api#default" => 0}))
     IcebergCompactionMetrics.type = Types::IcebergCompactionMetrics
+    IcebergEncryptedKey.add_member(:key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionKeyIdString, name: "KeyId", traits: {"smithy.api#required" => {}}))
+    IcebergEncryptedKey.add_member(:encrypted_key_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptedKeyMetadataString, name: "EncryptedKeyMetadata", traits: {"smithy.api#required" => {}}))
+    IcebergEncryptedKey.add_member(:encrypted_by_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionKeyIdString, name: "EncryptedById"))
+    IcebergEncryptedKey.add_member(:properties, ::Smithy::Schema::Shapes::MemberShape.new(target: StringToStringMap, name: "Properties"))
+    IcebergEncryptedKey.type = Types::IcebergEncryptedKey
     IcebergInput.add_member(:metadata_operation, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataOperation, name: "MetadataOperation", traits: {"smithy.api#required" => {}}))
     IcebergInput.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionString, name: "Version"))
     IcebergInput.add_member(:create_iceberg_table_input, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateIcebergTableInput, name: "CreateIcebergTableInput"))
@@ -4563,6 +5320,7 @@ module Aws::Glue
     IcebergPartitionSpec.add_member(:spec_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "SpecId", traits: {"smithy.api#default" => 0}))
     IcebergPartitionSpec.type = Types::IcebergPartitionSpec
     IcebergPartitionSpecFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IcebergPartitionField, name: "member"))
+    IcebergPartitionSpecList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IcebergPartitionSpec, name: "member"))
     IcebergRetentionConfiguration.add_member(:snapshot_retention_period_in_days, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableInteger, name: "snapshotRetentionPeriodInDays"))
     IcebergRetentionConfiguration.add_member(:number_of_snapshots_to_retain, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableInteger, name: "numberOfSnapshotsToRetain"))
     IcebergRetentionConfiguration.add_member(:clean_expired_files, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "cleanExpiredFiles"))
@@ -4580,6 +5338,7 @@ module Aws::Glue
     IcebergSchema.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: IcebergStructTypeEnum, name: "Type"))
     IcebergSchema.add_member(:fields, ::Smithy::Schema::Shapes::MemberShape.new(target: IcebergStructFieldList, name: "Fields", traits: {"smithy.api#required" => {}}))
     IcebergSchema.type = Types::IcebergSchema
+    IcebergSchemaList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IcebergSchema, name: "member"))
     IcebergSortDirection.add_member(:asc, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ASC", traits: {"smithy.api#enumValue" => "asc"}))
     IcebergSortDirection.add_member(:desc, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DESC", traits: {"smithy.api#enumValue" => "desc"}))
     IcebergSortField.add_member(:source_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "SourceId", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
@@ -4591,19 +5350,38 @@ module Aws::Glue
     IcebergSortOrder.add_member(:fields, ::Smithy::Schema::Shapes::MemberShape.new(target: IcebergSortOrderFieldList, name: "Fields", traits: {"smithy.api#required" => {}}))
     IcebergSortOrder.type = Types::IcebergSortOrder
     IcebergSortOrderFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IcebergSortField, name: "member"))
+    IcebergSortOrderList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IcebergSortOrder, name: "member"))
     IcebergStructField.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Id", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     IcebergStructField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnNameString, name: "Name", traits: {"smithy.api#required" => {}}))
     IcebergStructField.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: IcebergDocument, name: "Type", traits: {"smithy.api#required" => {}}))
     IcebergStructField.add_member(:required, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Required", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
     IcebergStructField.add_member(:doc, ::Smithy::Schema::Shapes::MemberShape.new(target: CommentString, name: "Doc"))
+    IcebergStructField.add_member(:initial_default, ::Smithy::Schema::Shapes::MemberShape.new(target: IcebergDocument, name: "InitialDefault"))
+    IcebergStructField.add_member(:write_default, ::Smithy::Schema::Shapes::MemberShape.new(target: IcebergDocument, name: "WriteDefault"))
     IcebergStructField.type = Types::IcebergStructField
     IcebergStructFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IcebergStructField, name: "member"))
     IcebergStructTypeEnum.add_member(:struct, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STRUCT", traits: {"smithy.api#enumValue" => "struct"}))
+    IcebergTableMetadata.add_member(:format_version, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionString, name: "FormatVersion"))
+    IcebergTableMetadata.add_member(:table_uuid, ::Smithy::Schema::Shapes::MemberShape.new(target: TableIdString, name: "TableUuid"))
+    IcebergTableMetadata.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationString, name: "Location"))
+    IcebergTableMetadata.add_member(:properties, ::Smithy::Schema::Shapes::MemberShape.new(target: StringToStringMap, name: "Properties"))
+    IcebergTableMetadata.add_member(:schemas, ::Smithy::Schema::Shapes::MemberShape.new(target: IcebergSchemaList, name: "Schemas"))
+    IcebergTableMetadata.add_member(:current_schema_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "CurrentSchemaId", traits: {"smithy.api#default" => 0}))
+    IcebergTableMetadata.add_member(:last_column_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "LastColumnId", traits: {"smithy.api#default" => 0}))
+    IcebergTableMetadata.add_member(:partition_specs, ::Smithy::Schema::Shapes::MemberShape.new(target: IcebergPartitionSpecList, name: "PartitionSpecs"))
+    IcebergTableMetadata.add_member(:default_spec_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "DefaultSpecId", traits: {"smithy.api#default" => 0}))
+    IcebergTableMetadata.add_member(:last_partition_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "LastPartitionId", traits: {"smithy.api#default" => 0}))
+    IcebergTableMetadata.add_member(:sort_orders, ::Smithy::Schema::Shapes::MemberShape.new(target: IcebergSortOrderList, name: "SortOrders"))
+    IcebergTableMetadata.add_member(:default_sort_order_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "DefaultSortOrderId", traits: {"smithy.api#default" => 0}))
+    IcebergTableMetadata.type = Types::IcebergTableMetadata
     IcebergTableUpdate.add_member(:schema, ::Smithy::Schema::Shapes::MemberShape.new(target: IcebergSchema, name: "Schema", traits: {"smithy.api#required" => {}}))
     IcebergTableUpdate.add_member(:partition_spec, ::Smithy::Schema::Shapes::MemberShape.new(target: IcebergPartitionSpec, name: "PartitionSpec"))
     IcebergTableUpdate.add_member(:sort_order, ::Smithy::Schema::Shapes::MemberShape.new(target: IcebergSortOrder, name: "SortOrder"))
     IcebergTableUpdate.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationString, name: "Location", traits: {"smithy.api#required" => {}}))
     IcebergTableUpdate.add_member(:properties, ::Smithy::Schema::Shapes::MemberShape.new(target: StringToStringMap, name: "Properties"))
+    IcebergTableUpdate.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: IcebergUpdateAction, name: "Action"))
+    IcebergTableUpdate.add_member(:encryption_key, ::Smithy::Schema::Shapes::MemberShape.new(target: IcebergEncryptedKey, name: "EncryptionKey"))
+    IcebergTableUpdate.add_member(:key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionKeyIdString, name: "KeyId"))
     IcebergTableUpdate.type = Types::IcebergTableUpdate
     IcebergTableUpdateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IcebergTableUpdate, name: "member"))
     IcebergTarget.add_member(:paths, ::Smithy::Schema::Shapes::MemberShape.new(target: PathList, name: "Paths"))
@@ -4616,6 +5394,17 @@ module Aws::Glue
     IcebergTargetCompressionType.add_member(:uncompressed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNCOMPRESSED", traits: {"smithy.api#enumValue" => "uncompressed"}))
     IcebergTargetCompressionType.add_member(:snappy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SNAPPY", traits: {"smithy.api#enumValue" => "snappy"}))
     IcebergTargetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IcebergTarget, name: "member"))
+    IcebergUpdateAction.add_member(:add_schema, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ADD_SCHEMA", traits: {"smithy.api#enumValue" => "add-schema"}))
+    IcebergUpdateAction.add_member(:set_current_schema, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SET_CURRENT_SCHEMA", traits: {"smithy.api#enumValue" => "set-current-schema"}))
+    IcebergUpdateAction.add_member(:add_spec, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ADD_SPEC", traits: {"smithy.api#enumValue" => "add-spec"}))
+    IcebergUpdateAction.add_member(:set_default_spec, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SET_DEFAULT_SPEC", traits: {"smithy.api#enumValue" => "set-default-spec"}))
+    IcebergUpdateAction.add_member(:add_sort_order, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ADD_SORT_ORDER", traits: {"smithy.api#enumValue" => "add-sort-order"}))
+    IcebergUpdateAction.add_member(:set_default_sort_order, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SET_DEFAULT_SORT_ORDER", traits: {"smithy.api#enumValue" => "set-default-sort-order"}))
+    IcebergUpdateAction.add_member(:set_location, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SET_LOCATION", traits: {"smithy.api#enumValue" => "set-location"}))
+    IcebergUpdateAction.add_member(:set_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SET_PROPERTIES", traits: {"smithy.api#enumValue" => "set-properties"}))
+    IcebergUpdateAction.add_member(:remove_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REMOVE_PROPERTIES", traits: {"smithy.api#enumValue" => "remove-properties"}))
+    IcebergUpdateAction.add_member(:add_encryption_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ADD_ENCRYPTION_KEY", traits: {"smithy.api#enumValue" => "add-encryption-key"}))
+    IcebergUpdateAction.add_member(:remove_encryption_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REMOVE_ENCRYPTION_KEY", traits: {"smithy.api#enumValue" => "remove-encryption-key"}))
     IdempotentParameterMismatchException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageString, name: "Message"))
     IdempotentParameterMismatchException.type = Types::IdempotentParameterMismatchException
     IdentityCenterScopesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityCenterScope, name: "member"))
@@ -4631,8 +5420,8 @@ module Aws::Glue
     ImportLabelsTaskRunProperties.add_member(:input_s3_path, ::Smithy::Schema::Shapes::MemberShape.new(target: UriString, name: "InputS3Path"))
     ImportLabelsTaskRunProperties.add_member(:replace, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplaceBoolean, name: "Replace", traits: {"smithy.api#default" => false}))
     ImportLabelsTaskRunProperties.type = Types::ImportLabelsTaskRunProperties
-    InboundIntegration.add_member(:source_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String128, name: "SourceArn", traits: {"smithy.api#required" => {}}))
-    InboundIntegration.add_member(:target_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String128, name: "TargetArn", traits: {"smithy.api#required" => {}}))
+    InboundIntegration.add_member(:source_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String512, name: "SourceArn", traits: {"smithy.api#required" => {}}))
+    InboundIntegration.add_member(:target_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String512, name: "TargetArn", traits: {"smithy.api#required" => {}}))
     InboundIntegration.add_member(:integration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String128, name: "IntegrationArn", traits: {"smithy.api#required" => {}}))
     InboundIntegration.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegrationStatus, name: "Status", traits: {"smithy.api#required" => {}}))
     InboundIntegration.add_member(:create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegrationTimestamp, name: "CreateTime", traits: {"smithy.api#required" => {}}))
@@ -4644,8 +5433,8 @@ module Aws::Glue
     InclusionAnnotationValue.add_member(:include, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INCLUDE", traits: {"smithy.api#enumValue" => "INCLUDE"}))
     InclusionAnnotationValue.add_member(:exclude, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXCLUDE", traits: {"smithy.api#enumValue" => "EXCLUDE"}))
     IntegerList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "member"))
-    Integration.add_member(:source_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String128, name: "SourceArn", traits: {"smithy.api#required" => {}}))
-    Integration.add_member(:target_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String128, name: "TargetArn", traits: {"smithy.api#required" => {}}))
+    Integration.add_member(:source_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String512, name: "SourceArn", traits: {"smithy.api#required" => {}}))
+    Integration.add_member(:target_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String512, name: "TargetArn", traits: {"smithy.api#required" => {}}))
     Integration.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegrationDescription, name: "Description"))
     Integration.add_member(:integration_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String128, name: "IntegrationName", traits: {"smithy.api#required" => {}}))
     Integration.add_member(:integration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String128, name: "IntegrationArn", traits: {"smithy.api#required" => {}}))
@@ -4663,6 +5452,7 @@ module Aws::Glue
     IntegrationConfig.add_member(:refresh_interval, ::Smithy::Schema::Shapes::MemberShape.new(target: String128, name: "RefreshInterval"))
     IntegrationConfig.add_member(:source_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegrationSourcePropertiesMap, name: "SourceProperties"))
     IntegrationConfig.add_member(:continuous_sync, ::Smithy::Schema::Shapes::MemberShape.new(target: ContinuousSync, name: "ContinuousSync"))
+    IntegrationConfig.add_member(:target_namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetNamespace, name: "TargetNamespace"))
     IntegrationConfig.type = Types::IntegrationConfig
     IntegrationConflictOperationFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegrationErrorMessage, name: "Message"))
     IntegrationConflictOperationFault.type = Types::IntegrationConflictOperationFault
@@ -4684,6 +5474,17 @@ module Aws::Glue
     IntegrationPartitionSpecList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegrationPartition, name: "member"))
     IntegrationQuotaExceededFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegrationErrorMessage, name: "Message"))
     IntegrationQuotaExceededFault.type = Types::IntegrationQuotaExceededFault
+    IntegrationResourceProperty.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String512, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    IntegrationResourceProperty.add_member(:resource_property_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String512, name: "ResourcePropertyArn"))
+    IntegrationResourceProperty.add_member(:source_processing_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceProcessingProperties, name: "SourceProcessingProperties"))
+    IntegrationResourceProperty.add_member(:target_processing_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetProcessingProperties, name: "TargetProcessingProperties"))
+    IntegrationResourceProperty.type = Types::IntegrationResourceProperty
+    IntegrationResourcePropertyFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String128, name: "Name"))
+    IntegrationResourcePropertyFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegrationResourcePropertyFilterValues, name: "Values"))
+    IntegrationResourcePropertyFilter.type = Types::IntegrationResourcePropertyFilter
+    IntegrationResourcePropertyFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegrationResourcePropertyFilter, name: "member"))
+    IntegrationResourcePropertyFilterValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String128, name: "member"))
+    IntegrationResourcePropertyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegrationResourceProperty, name: "member"))
     IntegrationSourcePropertiesMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegrationString, name: "key"))
     IntegrationSourcePropertiesMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegrationString, name: "value"))
     IntegrationStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
@@ -4693,7 +5494,19 @@ module Aws::Glue
     IntegrationStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
     IntegrationStatus.add_member(:syncing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SYNCING", traits: {"smithy.api#enumValue" => "SYNCING"}))
     IntegrationStatus.add_member(:needs_attention, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NEEDS_ATTENTION", traits: {"smithy.api#enumValue" => "NEEDS_ATTENTION"}))
+    IntegrationTableProperties.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String512, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    IntegrationTableProperties.add_member(:table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String128, name: "TableName", traits: {"smithy.api#required" => {}}))
+    IntegrationTableProperties.add_member(:source_table_config, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceTableConfig, name: "SourceTableConfig"))
+    IntegrationTableProperties.add_member(:target_table_config, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetTableConfig, name: "TargetTableConfig"))
+    IntegrationTableProperties.type = Types::IntegrationTableProperties
+    IntegrationTablePropertiesFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String128, name: "Name"))
+    IntegrationTablePropertiesFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegrationTablePropertiesFilterValues, name: "Values"))
+    IntegrationTablePropertiesFilter.type = Types::IntegrationTablePropertiesFilter
+    IntegrationTablePropertiesFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegrationTablePropertiesFilter, name: "member"))
+    IntegrationTablePropertiesFilterValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String128, name: "member"))
+    IntegrationTablePropertiesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegrationTableProperties, name: "member"))
     IntegrationTagsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
+    IntegrationType.add_member(:rest, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REST", traits: {"smithy.api#enumValue" => "REST"}))
     IntegrationsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Integration, name: "member"))
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegrationErrorMessage, name: "Message"))
     InternalServerException.type = Types::InternalServerException
@@ -4706,6 +5519,29 @@ module Aws::Glue
     InvalidIntegrationStateFault.type = Types::InvalidIntegrationStateFault
     InvalidStateException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageString, name: "Message"))
     InvalidStateException.type = Types::InvalidStateException
+    ItemError.add_member(:item_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ItemIdentifier, name: "ItemIdentifier"))
+    ItemError.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ItemErrorCode, name: "Code"))
+    ItemError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ItemErrorMessage, name: "Message"))
+    ItemError.type = Types::ItemError
+    ItemErrorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ItemError, name: "member"))
+    ItemIdentifierList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ItemIdentifier, name: "member"))
+    IterableFormEntry.add_member(:form_type_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FormTypeId, name: "FormTypeId"))
+    IterableFormEntry.type = Types::IterableFormEntry
+    IterableFormItem.add_member(:item_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ItemId, name: "ItemId"))
+    IterableFormItem.add_member(:item_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ItemName, name: "ItemName"))
+    IterableFormItem.add_member(:glossary_terms, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryTermIdList, name: "GlossaryTerms"))
+    IterableFormItem.add_member(:forms, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetFormMap, name: "Forms"))
+    IterableFormItem.add_member(:attachments, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetFormMap, name: "Attachments"))
+    IterableFormItem.type = Types::IterableFormItem
+    IterableFormItemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IterableFormItem, name: "member"))
+    IterableFormListItem.add_member(:item_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ItemId, name: "ItemId"))
+    IterableFormListItem.add_member(:item_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ItemName, name: "ItemName"))
+    IterableFormListItem.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ItemDescription, name: "Description"))
+    IterableFormListItem.add_member(:glossary_terms, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryTermIdList, name: "GlossaryTerms"))
+    IterableFormListItem.type = Types::IterableFormListItem
+    IterableFormListItemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IterableFormListItem, name: "member"))
+    IterableFormMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: IterableFormKey, name: "key"))
+    IterableFormMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: IterableFormEntry, name: "value"))
     JDBCConnectionType.add_member(:sqlserver, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "sqlserver", traits: {"smithy.api#enumValue" => "sqlserver"}))
     JDBCConnectionType.add_member(:mysql, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "mysql", traits: {"smithy.api#enumValue" => "mysql"}))
     JDBCConnectionType.add_member(:oracle, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "oracle", traits: {"smithy.api#enumValue" => "oracle"}))
@@ -4779,6 +5615,12 @@ module Aws::Glue
     JDBCDataType.add_member(:varchar, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VARCHAR", traits: {"smithy.api#enumValue" => "VARCHAR"}))
     JDBCDataTypeMapping.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: JDBCDataType, name: "key"))
     JDBCDataTypeMapping.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: GlueRecordType, name: "value"))
+    JWTBearerProperties.add_member(:token_url, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorProperty, name: "TokenUrl"))
+    JWTBearerProperties.add_member(:request_method, ::Smithy::Schema::Shapes::MemberShape.new(target: HTTPMethod, name: "RequestMethod"))
+    JWTBearerProperties.add_member(:content_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ContentType, name: "ContentType"))
+    JWTBearerProperties.add_member(:jwt_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorProperty, name: "JwtToken"))
+    JWTBearerProperties.add_member(:token_url_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorPropertyList, name: "TokenUrlParameters"))
+    JWTBearerProperties.type = Types::JWTBearerProperties
     JdbcMetadataEntry.add_member(:comments, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMMENTS", traits: {"smithy.api#enumValue" => "COMMENTS"}))
     JdbcMetadataEntry.add_member(:rawtypes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RAWTYPES", traits: {"smithy.api#enumValue" => "RAWTYPES"}))
     JdbcTarget.add_member(:connection_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionName, name: "ConnectionName"))
@@ -4979,6 +5821,8 @@ module Aws::Glue
     KinesisStreamingSourceOptions.type = Types::KinesisStreamingSourceOptions
     LabelingSetGenerationTaskRunProperties.add_member(:output_s3_path, ::Smithy::Schema::Shapes::MemberShape.new(target: UriString, name: "OutputS3Path"))
     LabelingSetGenerationTaskRunProperties.type = Types::LabelingSetGenerationTaskRunProperties
+    Labels.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "key"))
+    Labels.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "value"))
     LakeFormationConfiguration.add_member(:use_lake_formation_credentials, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "UseLakeFormationCredentials"))
     LakeFormationConfiguration.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "AccountId"))
     LakeFormationConfiguration.type = Types::LakeFormationConfiguration
@@ -5000,10 +5844,18 @@ module Aws::Glue
     LastCrawlStatus.add_member(:succeeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCEEDED", traits: {"smithy.api#enumValue" => "SUCCEEDED"}))
     LastCrawlStatus.add_member(:cancelled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANCELLED", traits: {"smithy.api#enumValue" => "CANCELLED"}))
     LastCrawlStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    LastRefreshType.add_member(:full, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FULL", traits: {"smithy.api#enumValue" => "FULL"}))
+    LastRefreshType.add_member(:incremental, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INCREMENTAL", traits: {"smithy.api#enumValue" => "INCREMENTAL"}))
     LimitedPathList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LimitedStringList, name: "member"))
     LimitedStringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericLimitedString, name: "member"))
     LineageConfiguration.add_member(:crawler_lineage_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: CrawlerLineageSettings, name: "CrawlerLineageSettings"))
     LineageConfiguration.type = Types::LineageConfiguration
+    ListAssetTypesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: PageSize, name: "MaxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListAssetTypesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListAssetTypesRequest.type = Types::ListAssetTypesRequest
+    ListAssetTypesResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetTypeItemList, name: "Items"))
+    ListAssetTypesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken"))
+    ListAssetTypesResponse.type = Types::ListAssetTypesResponse
     ListBlueprintsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "NextToken"))
     ListBlueprintsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: OrchestrationPageSize25, name: "MaxResults"))
     ListBlueprintsRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "Tags"))
@@ -5052,9 +5904,17 @@ module Aws::Glue
     ListDataQualityResultsResponse.add_member(:results, ::Smithy::Schema::Shapes::MemberShape.new(target: DataQualityResultDescriptionList, name: "Results", traits: {"smithy.api#required" => {}}))
     ListDataQualityResultsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "NextToken"))
     ListDataQualityResultsResponse.type = Types::ListDataQualityResultsResponse
+    ListDataQualityResultsV2Request.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: DataQualityResultsV2FilterCriteria, name: "Filter"))
+    ListDataQualityResultsV2Request.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "NextToken"))
+    ListDataQualityResultsV2Request.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: PageSize, name: "MaxResults"))
+    ListDataQualityResultsV2Request.type = Types::ListDataQualityResultsV2Request
+    ListDataQualityResultsV2Response.add_member(:results, ::Smithy::Schema::Shapes::MemberShape.new(target: DataQualityResultsV2DescriptionList, name: "Results", traits: {"smithy.api#required" => {}}))
+    ListDataQualityResultsV2Response.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "NextToken"))
+    ListDataQualityResultsV2Response.type = Types::ListDataQualityResultsV2Response
     ListDataQualityRuleRecommendationRunsRequest.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: DataQualityRuleRecommendationRunFilter, name: "Filter"))
     ListDataQualityRuleRecommendationRunsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "NextToken"))
     ListDataQualityRuleRecommendationRunsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: PageSize, name: "MaxResults"))
+    ListDataQualityRuleRecommendationRunsRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "Tags"))
     ListDataQualityRuleRecommendationRunsRequest.type = Types::ListDataQualityRuleRecommendationRunsRequest
     ListDataQualityRuleRecommendationRunsResponse.add_member(:runs, ::Smithy::Schema::Shapes::MemberShape.new(target: DataQualityRuleRecommendationRunList, name: "Runs"))
     ListDataQualityRuleRecommendationRunsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "NextToken"))
@@ -5108,6 +5968,47 @@ module Aws::Glue
     ListEntitiesResponse.add_member(:entities, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityList, name: "Entities"))
     ListEntitiesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     ListEntitiesResponse.type = Types::ListEntitiesResponse
+    ListFormTypesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: PageSize, name: "MaxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListFormTypesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListFormTypesRequest.type = Types::ListFormTypesRequest
+    ListFormTypesResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: FormTypeItemList, name: "Items", traits: {"smithy.api#required" => {}}))
+    ListFormTypesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken"))
+    ListFormTypesResponse.type = Types::ListFormTypesResponse
+    ListGlossariesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: PageSize, name: "MaxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListGlossariesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListGlossariesRequest.type = Types::ListGlossariesRequest
+    ListGlossariesResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryItemList, name: "Items"))
+    ListGlossariesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken"))
+    ListGlossariesResponse.type = Types::ListGlossariesResponse
+    ListGlossaryTermsRequest.add_member(:glossary_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryId, name: "GlossaryIdentifier", traits: {"smithy.api#httpQuery" => "glossaryIdentifier", "smithy.api#required" => {}}))
+    ListGlossaryTermsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: PageSize, name: "MaxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListGlossaryTermsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListGlossaryTermsRequest.type = Types::ListGlossaryTermsRequest
+    ListGlossaryTermsResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryTermItemList, name: "Items"))
+    ListGlossaryTermsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken"))
+    ListGlossaryTermsResponse.type = Types::ListGlossaryTermsResponse
+    ListIntegrationResourcePropertiesRequest.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String4096, name: "Marker"))
+    ListIntegrationResourcePropertiesRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegrationResourcePropertyFilterList, name: "Filters"))
+    ListIntegrationResourcePropertiesRequest.add_member(:max_records, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegrationInteger, name: "MaxRecords"))
+    ListIntegrationResourcePropertiesRequest.type = Types::ListIntegrationResourcePropertiesRequest
+    ListIntegrationResourcePropertiesResponse.add_member(:integration_resource_property_list, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegrationResourcePropertyList, name: "IntegrationResourcePropertyList"))
+    ListIntegrationResourcePropertiesResponse.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String4096, name: "Marker"))
+    ListIntegrationResourcePropertiesResponse.type = Types::ListIntegrationResourcePropertiesResponse
+    ListIntegrationTablePropertiesRequest.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String4096, name: "Marker"))
+    ListIntegrationTablePropertiesRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegrationTablePropertiesFilterList, name: "Filters"))
+    ListIntegrationTablePropertiesRequest.add_member(:max_records, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegrationInteger, name: "MaxRecords"))
+    ListIntegrationTablePropertiesRequest.type = Types::ListIntegrationTablePropertiesRequest
+    ListIntegrationTablePropertiesResponse.add_member(:integration_table_properties_list, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegrationTablePropertiesList, name: "IntegrationTablePropertiesList"))
+    ListIntegrationTablePropertiesResponse.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String4096, name: "Marker"))
+    ListIntegrationTablePropertiesResponse.type = Types::ListIntegrationTablePropertiesResponse
+    ListIterableFormsRequest.add_member(:asset_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetId, name: "AssetIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListIterableFormsRequest.add_member(:iterable_form_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IterableFormName, name: "IterableFormName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListIterableFormsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: PageSize, name: "MaxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListIterableFormsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListIterableFormsRequest.type = Types::ListIterableFormsRequest
+    ListIterableFormsResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: IterableFormListItemList, name: "Items"))
+    ListIterableFormsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken"))
+    ListIterableFormsResponse.type = Types::ListIterableFormsResponse
     ListJobsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "NextToken"))
     ListJobsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: PageSize, name: "MaxResults"))
     ListJobsRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "Tags"))
@@ -5124,6 +6025,15 @@ module Aws::Glue
     ListMLTransformsResponse.add_member(:transform_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: TransformIdList, name: "TransformIds", traits: {"smithy.api#required" => {}}))
     ListMLTransformsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "NextToken"))
     ListMLTransformsResponse.type = Types::ListMLTransformsResponse
+    ListMaterializedViewRefreshTaskRunsRequest.add_member(:catalog_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdString, name: "CatalogId", traits: {"smithy.api#required" => {}}))
+    ListMaterializedViewRefreshTaskRunsRequest.add_member(:database_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "DatabaseName"))
+    ListMaterializedViewRefreshTaskRunsRequest.add_member(:table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "TableName"))
+    ListMaterializedViewRefreshTaskRunsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: PageSize, name: "MaxResults"))
+    ListMaterializedViewRefreshTaskRunsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken"))
+    ListMaterializedViewRefreshTaskRunsRequest.type = Types::ListMaterializedViewRefreshTaskRunsRequest
+    ListMaterializedViewRefreshTaskRunsResponse.add_member(:materialized_view_refresh_task_runs, ::Smithy::Schema::Shapes::MemberShape.new(target: MaterializedViewRefreshTaskRunsList, name: "MaterializedViewRefreshTaskRuns"))
+    ListMaterializedViewRefreshTaskRunsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken"))
+    ListMaterializedViewRefreshTaskRunsResponse.type = Types::ListMaterializedViewRefreshTaskRunsResponse
     ListOfString.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
     ListRegistriesInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResultsNumber, name: "MaxResults"))
     ListRegistriesInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaRegistryTokenString, name: "NextToken"))
@@ -5256,6 +6166,36 @@ module Aws::Glue
     MappingList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MappingEntry, name: "member"))
     Mappings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Mapping, name: "member"))
     MatchCriteria.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "member"))
+    MaterializedViewRefreshState.add_member(:starting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STARTING", traits: {"smithy.api#enumValue" => "STARTING"}))
+    MaterializedViewRefreshState.add_member(:running, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RUNNING", traits: {"smithy.api#enumValue" => "RUNNING"}))
+    MaterializedViewRefreshState.add_member(:succeeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCEEDED", traits: {"smithy.api#enumValue" => "SUCCEEDED"}))
+    MaterializedViewRefreshState.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    MaterializedViewRefreshState.add_member(:stopped, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STOPPED", traits: {"smithy.api#enumValue" => "STOPPED"}))
+    MaterializedViewRefreshTaskNotRunningException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageString, name: "Message"))
+    MaterializedViewRefreshTaskNotRunningException.type = Types::MaterializedViewRefreshTaskNotRunningException
+    MaterializedViewRefreshTaskRun.add_member(:customer_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "CustomerId"))
+    MaterializedViewRefreshTaskRun.add_member(:materialized_view_refresh_task_run_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUIDv4, name: "MaterializedViewRefreshTaskRunId"))
+    MaterializedViewRefreshTaskRun.add_member(:database_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DatabaseName, name: "DatabaseName"))
+    MaterializedViewRefreshTaskRun.add_member(:table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TableName, name: "TableName"))
+    MaterializedViewRefreshTaskRun.add_member(:catalog_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdString, name: "CatalogId"))
+    MaterializedViewRefreshTaskRun.add_member(:role, ::Smithy::Schema::Shapes::MemberShape.new(target: Role, name: "Role"))
+    MaterializedViewRefreshTaskRun.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: MaterializedViewRefreshState, name: "Status"))
+    MaterializedViewRefreshTaskRun.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationTime"))
+    MaterializedViewRefreshTaskRun.add_member(:last_updated, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastUpdated"))
+    MaterializedViewRefreshTaskRun.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "StartTime"))
+    MaterializedViewRefreshTaskRun.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "EndTime"))
+    MaterializedViewRefreshTaskRun.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: DescriptionString, name: "ErrorMessage"))
+    MaterializedViewRefreshTaskRun.add_member(:dpu_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: NonNegativeDouble, name: "DPUSeconds", traits: {"smithy.api#default" => 0}))
+    MaterializedViewRefreshTaskRun.add_member(:refresh_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MaterializedViewRefreshType, name: "RefreshType"))
+    MaterializedViewRefreshTaskRun.add_member(:processed_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: ByteCount, name: "ProcessedBytes"))
+    MaterializedViewRefreshTaskRun.type = Types::MaterializedViewRefreshTaskRun
+    MaterializedViewRefreshTaskRunningException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageString, name: "Message"))
+    MaterializedViewRefreshTaskRunningException.type = Types::MaterializedViewRefreshTaskRunningException
+    MaterializedViewRefreshTaskRunsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MaterializedViewRefreshTaskRun, name: "member"))
+    MaterializedViewRefreshTaskStoppingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageString, name: "Message"))
+    MaterializedViewRefreshTaskStoppingException.type = Types::MaterializedViewRefreshTaskStoppingException
+    MaterializedViewRefreshType.add_member(:full, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FULL", traits: {"smithy.api#enumValue" => "FULL"}))
+    MaterializedViewRefreshType.add_member(:incremental, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INCREMENTAL", traits: {"smithy.api#enumValue" => "INCREMENTAL"}))
     Merge.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NodeName, name: "Name", traits: {"smithy.api#required" => {}}))
     Merge.add_member(:inputs, ::Smithy::Schema::Shapes::MemberShape.new(target: TwoInputs, name: "Inputs", traits: {"smithy.api#required" => {}}))
     Merge.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: NodeId, name: "Source", traits: {"smithy.api#required" => {}}))
@@ -5292,8 +6232,8 @@ module Aws::Glue
     ModifyIntegrationRequest.add_member(:integration_config, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegrationConfig, name: "IntegrationConfig"))
     ModifyIntegrationRequest.add_member(:integration_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String128, name: "IntegrationName"))
     ModifyIntegrationRequest.type = Types::ModifyIntegrationRequest
-    ModifyIntegrationResponse.add_member(:source_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String128, name: "SourceArn", traits: {"smithy.api#required" => {}}))
-    ModifyIntegrationResponse.add_member(:target_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String128, name: "TargetArn", traits: {"smithy.api#required" => {}}))
+    ModifyIntegrationResponse.add_member(:source_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String512, name: "SourceArn", traits: {"smithy.api#required" => {}}))
+    ModifyIntegrationResponse.add_member(:target_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String512, name: "TargetArn", traits: {"smithy.api#required" => {}}))
     ModifyIntegrationResponse.add_member(:integration_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String128, name: "IntegrationName", traits: {"smithy.api#required" => {}}))
     ModifyIntegrationResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegrationDescription, name: "Description"))
     ModifyIntegrationResponse.add_member(:integration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String128, name: "IntegrationArn", traits: {"smithy.api#required" => {}}))
@@ -5357,6 +6297,7 @@ module Aws::Glue
     OAuth2GrantType.add_member(:authorization_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AUTHORIZATION_CODE", traits: {"smithy.api#enumValue" => "AUTHORIZATION_CODE"}))
     OAuth2GrantType.add_member(:client_credentials, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLIENT_CREDENTIALS", traits: {"smithy.api#enumValue" => "CLIENT_CREDENTIALS"}))
     OAuth2GrantType.add_member(:jwt_bearer, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "JWT_BEARER", traits: {"smithy.api#enumValue" => "JWT_BEARER"}))
+    OAuth2GrantType.add_member(:refresh_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REFRESH_TOKEN", traits: {"smithy.api#enumValue" => "REFRESH_TOKEN"}))
     OAuth2Properties.add_member(:o_auth2_grant_type, ::Smithy::Schema::Shapes::MemberShape.new(target: OAuth2GrantType, name: "OAuth2GrantType"))
     OAuth2Properties.add_member(:o_auth2_client_application, ::Smithy::Schema::Shapes::MemberShape.new(target: OAuth2ClientApplication, name: "OAuth2ClientApplication"))
     OAuth2Properties.add_member(:token_url, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenUrl, name: "TokenUrl"))
@@ -5369,6 +6310,16 @@ module Aws::Glue
     OAuth2PropertiesInput.add_member(:authorization_code_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthorizationCodeProperties, name: "AuthorizationCodeProperties"))
     OAuth2PropertiesInput.add_member(:o_auth2_credentials, ::Smithy::Schema::Shapes::MemberShape.new(target: OAuth2Credentials, name: "OAuth2Credentials"))
     OAuth2PropertiesInput.type = Types::OAuth2PropertiesInput
+    ObservationConfiguration.add_member(:all, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALL", traits: {"smithy.api#enumValue" => "ALL"}))
+    ObservationConfiguration.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
+    ObservationMode.add_member(:scheduled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SCHEDULED", traits: {"smithy.api#enumValue" => "SCHEDULED"}))
+    ObservationMode.add_member(:fixed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FIXED", traits: {"smithy.api#enumValue" => "FIXED"}))
+    ObservationResultsOptions.add_member(:write_observation_results_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "WriteObservationResultsEnabled"))
+    ObservationResultsOptions.add_member(:catalog_table_config, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogTableConfigOptions, name: "CatalogTableConfig"))
+    ObservationResultsOptions.type = Types::ObservationResultsOptions
+    OffsetConfiguration.add_member(:offset_parameter, ::Smithy::Schema::Shapes::MemberShape.new(target: ExtractedParameter, name: "OffsetParameter", traits: {"smithy.api#required" => {}}))
+    OffsetConfiguration.add_member(:limit_parameter, ::Smithy::Schema::Shapes::MemberShape.new(target: ExtractedParameter, name: "LimitParameter", traits: {"smithy.api#required" => {}}))
+    OffsetConfiguration.type = Types::OffsetConfiguration
     OneInput.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NodeId, name: "member"))
     OpenTableFormatInput.add_member(:iceberg_input, ::Smithy::Schema::Shapes::MemberShape.new(target: IcebergInput, name: "IcebergInput"))
     OpenTableFormatInput.type = Types::OpenTableFormatInput
@@ -5405,6 +6356,8 @@ module Aws::Glue
     OtherMetadataValueListItem.add_member(:metadata_value, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataValueString, name: "MetadataValue"))
     OtherMetadataValueListItem.add_member(:created_time, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedTimestamp, name: "CreatedTime"))
     OtherMetadataValueListItem.type = Types::OtherMetadataValueListItem
+    OverwriteChildResourcePermissionsWithDefaultEnum.add_member(:accept, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Accept", traits: {"smithy.api#enumValue" => "Accept"}))
+    OverwriteChildResourcePermissionsWithDefaultEnum.add_member(:deny, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Deny", traits: {"smithy.api#enumValue" => "Deny"}))
     PIIDetection.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NodeName, name: "Name", traits: {"smithy.api#required" => {}}))
     PIIDetection.add_member(:inputs, ::Smithy::Schema::Shapes::MemberShape.new(target: OneInput, name: "Inputs", traits: {"smithy.api#required" => {}}))
     PIIDetection.add_member(:pii_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PiiType, name: "PiiType", traits: {"smithy.api#required" => {}}))
@@ -5421,6 +6374,9 @@ module Aws::Glue
     PIIDetection.add_member(:detection_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: EnclosedInStringProperty, name: "DetectionParameters"))
     PIIDetection.add_member(:detection_sensitivity, ::Smithy::Schema::Shapes::MemberShape.new(target: EnclosedInStringProperty, name: "DetectionSensitivity"))
     PIIDetection.type = Types::PIIDetection
+    PaginationConfiguration.add_member(:cursor_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: CursorConfiguration, name: "CursorConfiguration"))
+    PaginationConfiguration.add_member(:offset_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: OffsetConfiguration, name: "OffsetConfiguration"))
+    PaginationConfiguration.type = Types::PaginationConfiguration
     ParamType.add_member(:str, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STR", traits: {"smithy.api#enumValue" => "str"}))
     ParamType.add_member(:int, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INT", traits: {"smithy.api#enumValue" => "int"}))
     ParamType.add_member(:float, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FLOAT", traits: {"smithy.api#enumValue" => "float"}))
@@ -5533,6 +6489,10 @@ module Aws::Glue
     ProfileConfiguration.add_member(:session_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationMap, name: "SessionConfiguration"))
     ProfileConfiguration.add_member(:job_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationMap, name: "JobConfiguration"))
     ProfileConfiguration.type = Types::ProfileConfiguration
+    ProfilingResultsOptions.add_member(:write_profiling_results_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "WriteProfilingResultsEnabled"))
+    ProfilingResultsOptions.add_member(:catalog_table_config, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogTableConfigOptions, name: "CatalogTableConfig"))
+    ProfilingResultsOptions.add_member(:distribution_results, ::Smithy::Schema::Shapes::MemberShape.new(target: DistributionResultsOptions, name: "DistributionResults"))
+    ProfilingResultsOptions.type = Types::ProfilingResultsOptions
     PropertiesMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: PropertyName, name: "key"))
     PropertiesMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Property, name: "value"))
     Property.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: PropertyName, name: "Name", traits: {"smithy.api#required" => {}}))
@@ -5542,7 +6502,13 @@ module Aws::Glue
     Property.add_member(:property_types, ::Smithy::Schema::Shapes::MemberShape.new(target: PropertyTypes, name: "PropertyTypes", traits: {"smithy.api#default" => [], "smithy.api#required" => {}}))
     Property.add_member(:allowed_values, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedValues, name: "AllowedValues"))
     Property.add_member(:data_operation_scopes, ::Smithy::Schema::Shapes::MemberShape.new(target: DataOperations, name: "DataOperationScopes"))
+    Property.add_member(:key_override, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "KeyOverride"))
+    Property.add_member(:property_location, ::Smithy::Schema::Shapes::MemberShape.new(target: PropertyLocation, name: "PropertyLocation"))
     Property.type = Types::Property
+    PropertyLocation.add_member(:header, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HEADER", traits: {"smithy.api#enumValue" => "HEADER"}))
+    PropertyLocation.add_member(:body, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BODY", traits: {"smithy.api#enumValue" => "BODY"}))
+    PropertyLocation.add_member(:query_param, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "QUERY_PARAM", traits: {"smithy.api#enumValue" => "QUERY_PARAM"}))
+    PropertyLocation.add_member(:path, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PATH", traits: {"smithy.api#enumValue" => "PATH"}))
     PropertyMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: PropertyKey, name: "key"))
     PropertyMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: PropertyValue, name: "value"))
     PropertyNameOverrides.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: PropertyName, name: "key"))
@@ -5558,14 +6524,90 @@ module Aws::Glue
     PropertyType.add_member(:secret_or_user_input, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SECRET_OR_USER_INPUT", traits: {"smithy.api#enumValue" => "SECRET_OR_USER_INPUT"}))
     PropertyTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PropertyType, name: "member"))
     PublicKeysList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "member"))
+    PublishDataQualityResultDescriptors.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "key"))
+    PublishDataQualityResultDescriptors.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "value"))
+    PublishDataQualityResultDimensions.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "key"))
+    PublishDataQualityResultDimensions.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "value"))
+    PublishDataQualityResultTags.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "key"))
+    PublishDataQualityResultTags.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "value"))
+    PublishDataQualityResultV2Request.add_member(:dimensions, ::Smithy::Schema::Shapes::MemberShape.new(target: PublishDataQualityResultDimensions, name: "Dimensions", traits: {"smithy.api#required" => {}}))
+    PublishDataQualityResultV2Request.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: PublishDataQualityResultTags, name: "Tags"))
+    PublishDataQualityResultV2Request.add_member(:execution_started_on, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "ExecutionStartedOn"))
+    PublishDataQualityResultV2Request.add_member(:execution_completed_on, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "ExecutionCompletedOn"))
+    PublishDataQualityResultV2Request.add_member(:score, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericBoundedDouble, name: "Score", traits: {"smithy.api#required" => {}}))
+    PublishDataQualityResultV2Request.add_member(:rule_results, ::Smithy::Schema::Shapes::MemberShape.new(target: DataQualityRuleResults, name: "RuleResults", traits: {"smithy.api#required" => {}}))
+    PublishDataQualityResultV2Request.add_member(:analyzer_results, ::Smithy::Schema::Shapes::MemberShape.new(target: DataQualityAnalyzerResults, name: "AnalyzerResults"))
+    PublishDataQualityResultV2Request.add_member(:observations, ::Smithy::Schema::Shapes::MemberShape.new(target: DataQualityObservations, name: "Observations"))
+    PublishDataQualityResultV2Request.add_member(:aggregated_metrics, ::Smithy::Schema::Shapes::MemberShape.new(target: DataQualityAggregatedMetrics, name: "AggregatedMetrics"))
+    PublishDataQualityResultV2Request.add_member(:statistics, ::Smithy::Schema::Shapes::MemberShape.new(target: StatisticSummaryList, name: "Statistics"))
+    PublishDataQualityResultV2Request.add_member(:run_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: DataQualityConfigurationV2, name: "RunConfiguration"))
+    PublishDataQualityResultV2Request.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientTokenString, name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    PublishDataQualityResultV2Request.add_member(:evaluation_context, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "EvaluationContext", traits: {"smithy.api#required" => {}}))
+    PublishDataQualityResultV2Request.add_member(:descriptors, ::Smithy::Schema::Shapes::MemberShape.new(target: PublishDataQualityResultDescriptors, name: "Descriptors"))
+    PublishDataQualityResultV2Request.add_member(:ruleset_name, ::Smithy::Schema::Shapes::MemberShape.new(target: HashString, name: "RulesetName"))
+    PublishDataQualityResultV2Request.add_member(:data_quality_security_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "DataQualitySecurityConfiguration"))
+    PublishDataQualityResultV2Request.add_member(:telemetry, ::Smithy::Schema::Shapes::MemberShape.new(target: DataQualityTelemetry, name: "Telemetry"))
+    PublishDataQualityResultV2Request.type = Types::PublishDataQualityResultV2Request
+    PublishDataQualityResultV2Response.add_member(:result_id, ::Smithy::Schema::Shapes::MemberShape.new(target: HashString, name: "ResultId", traits: {"smithy.api#required" => {}}))
+    PublishDataQualityResultV2Response.type = Types::PublishDataQualityResultV2Response
+    PutAssetRequest.add_member(:asset_type_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetTypeId, name: "AssetTypeId", traits: {"smithy.api#required" => {}}))
+    PutAssetRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetId, name: "Identifier", traits: {"smithy.api#required" => {}}))
+    PutAssetRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetName, name: "Name", traits: {"smithy.api#required" => {}}))
+    PutAssetRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetDescription, name: "Description"))
+    PutAssetRequest.add_member(:forms, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetFormMap, name: "Forms", traits: {"smithy.api#required" => {}}))
+    PutAssetRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: HashString, name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    PutAssetRequest.type = Types::PutAssetRequest
+    PutAssetResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetId, name: "Id", traits: {"smithy.api#required" => {}}))
+    PutAssetResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetName, name: "Name", traits: {"smithy.api#required" => {}}))
+    PutAssetResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetDescription, name: "Description"))
+    PutAssetResponse.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedAt, name: "CreatedAt"))
+    PutAssetResponse.add_member(:forms, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetFormMap, name: "Forms"))
+    PutAssetResponse.type = Types::PutAssetResponse
+    PutAssetTypeRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetTypeName, name: "Name", traits: {"smithy.api#required" => {}}))
+    PutAssetTypeRequest.add_member(:forms, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetTypeFormsMap, name: "Forms", traits: {"smithy.api#required" => {}}))
+    PutAssetTypeRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: HashString, name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    PutAssetTypeRequest.type = Types::PutAssetTypeRequest
+    PutAssetTypeResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetTypeId, name: "Id"))
+    PutAssetTypeResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetTypeName, name: "Name"))
+    PutAssetTypeResponse.add_member(:forms, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetTypeFormsMap, name: "Forms"))
+    PutAssetTypeResponse.type = Types::PutAssetTypeResponse
+    PutAttachmentRequest.add_member(:asset_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetId, name: "AssetIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    PutAttachmentRequest.add_member(:iterable_form_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IterableFormName, name: "IterableFormName"))
+    PutAttachmentRequest.add_member(:item_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ItemIdentifier, name: "ItemIdentifier"))
+    PutAttachmentRequest.add_member(:attachment_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AttachmentName, name: "AttachmentName", traits: {"smithy.api#required" => {}}))
+    PutAttachmentRequest.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: FormContent, name: "Content", traits: {"smithy.api#required" => {}}))
+    PutAttachmentRequest.add_member(:form_type_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FormTypeId, name: "FormTypeId", traits: {"smithy.api#required" => {}}))
+    PutAttachmentRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: HashString, name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    PutAttachmentRequest.type = Types::PutAttachmentRequest
+    PutAttachmentResponse.add_member(:asset_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetId, name: "AssetIdentifier"))
+    PutAttachmentResponse.add_member(:iterable_form_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IterableFormName, name: "IterableFormName"))
+    PutAttachmentResponse.add_member(:item_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ItemIdentifier, name: "ItemIdentifier"))
+    PutAttachmentResponse.add_member(:attachment_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AttachmentName, name: "AttachmentName"))
+    PutAttachmentResponse.add_member(:form_type_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FormTypeId, name: "FormTypeId"))
+    PutAttachmentResponse.type = Types::PutAttachmentResponse
     PutDataCatalogEncryptionSettingsRequest.add_member(:catalog_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdString, name: "CatalogId"))
     PutDataCatalogEncryptionSettingsRequest.add_member(:data_catalog_encryption_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: DataCatalogEncryptionSettings, name: "DataCatalogEncryptionSettings", traits: {"smithy.api#required" => {}}))
     PutDataCatalogEncryptionSettingsRequest.type = Types::PutDataCatalogEncryptionSettingsRequest
     PutDataCatalogEncryptionSettingsResponse.type = Types::PutDataCatalogEncryptionSettingsResponse
+    PutDataCatalogExportConfigurationInput.add_member(:export_setting, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportSetting, name: "ExportSetting", traits: {"smithy.api#required" => {}}))
+    PutDataCatalogExportConfigurationInput.add_member(:encryption_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportEncryptionConfiguration, name: "EncryptionConfiguration"))
+    PutDataCatalogExportConfigurationInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: HashString, name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    PutDataCatalogExportConfigurationInput.type = Types::PutDataCatalogExportConfigurationInput
+    PutDataCatalogExportConfigurationOutput.add_member(:export_setting, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportSetting, name: "ExportSetting"))
+    PutDataCatalogExportConfigurationOutput.add_member(:encryption_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportEncryptionConfiguration, name: "EncryptionConfiguration"))
+    PutDataCatalogExportConfigurationOutput.type = Types::PutDataCatalogExportConfigurationOutput
     PutDataQualityProfileAnnotationRequest.add_member(:profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: HashString, name: "ProfileId", traits: {"smithy.api#required" => {}}))
     PutDataQualityProfileAnnotationRequest.add_member(:inclusion_annotation, ::Smithy::Schema::Shapes::MemberShape.new(target: InclusionAnnotationValue, name: "InclusionAnnotation", traits: {"smithy.api#required" => {}}))
     PutDataQualityProfileAnnotationRequest.type = Types::PutDataQualityProfileAnnotationRequest
     PutDataQualityProfileAnnotationResponse.type = Types::PutDataQualityProfileAnnotationResponse
+    PutFormTypeRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: FormTypeName, name: "Name", traits: {"smithy.api#required" => {}}))
+    PutFormTypeRequest.add_member(:schema, ::Smithy::Schema::Shapes::MemberShape.new(target: FormTypeSchema, name: "Schema", traits: {"smithy.api#required" => {}}))
+    PutFormTypeRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: HashString, name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    PutFormTypeRequest.type = Types::PutFormTypeRequest
+    PutFormTypeResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: FormTypeId, name: "Id"))
+    PutFormTypeResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: FormTypeName, name: "Name"))
+    PutFormTypeResponse.add_member(:schema, ::Smithy::Schema::Shapes::MemberShape.new(target: FormTypeSchema, name: "Schema"))
+    PutFormTypeResponse.type = Types::PutFormTypeResponse
     PutResourcePolicyRequest.add_member(:policy_in_json, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyJsonString, name: "PolicyInJson", traits: {"smithy.api#required" => {}}))
     PutResourcePolicyRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GlueResourceArn, name: "ResourceArn"))
     PutResourcePolicyRequest.add_member(:policy_hash_condition, ::Smithy::Schema::Shapes::MemberShape.new(target: HashString, name: "PolicyHashCondition"))
@@ -5614,6 +6656,8 @@ module Aws::Glue
     QuoteChar.add_member(:quillemet, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "QUILLEMET", traits: {"smithy.api#enumValue" => "quillemet"}))
     QuoteChar.add_member(:single_quote, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SINGLE_QUOTE", traits: {"smithy.api#enumValue" => "single_quote"}))
     QuoteChar.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "disabled"}))
+    RLSProperties.add_member(:default_rls_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "DefaultRLSPolicy"))
+    RLSProperties.type = Types::RLSProperties
     Recipe.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NodeName, name: "Name", traits: {"smithy.api#required" => {}}))
     Recipe.add_member(:inputs, ::Smithy::Schema::Shapes::MemberShape.new(target: OneInput, name: "Inputs", traits: {"smithy.api#required" => {}}))
     Recipe.add_member(:recipe_reference, ::Smithy::Schema::Shapes::MemberShape.new(target: RecipeReference, name: "RecipeReference"))
@@ -5629,6 +6673,8 @@ module Aws::Glue
     RecipeStep.add_member(:condition_expressions, ::Smithy::Schema::Shapes::MemberShape.new(target: ConditionExpressionList, name: "ConditionExpressions"))
     RecipeStep.type = Types::RecipeStep
     RecipeSteps.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecipeStep, name: "member"))
+    RecommendationMode.add_member(:basic, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BASIC", traits: {"smithy.api#enumValue" => "BASIC"}))
+    RecommendationMode.add_member(:advanced, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ADVANCED", traits: {"smithy.api#enumValue" => "ADVANCED"}))
     Records.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Record, name: "member"))
     RecrawlBehavior.add_member(:crawl_everything, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CRAWL_EVERYTHING", traits: {"smithy.api#enumValue" => "CRAWL_EVERYTHING"}))
     RecrawlBehavior.add_member(:crawl_new_folders_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CRAWL_NEW_FOLDERS_ONLY", traits: {"smithy.api#enumValue" => "CRAWL_NEW_FOLDERS_ONLY"}))
@@ -5650,6 +6696,16 @@ module Aws::Glue
     RedshiftTarget.add_member(:upsert_redshift_options, ::Smithy::Schema::Shapes::MemberShape.new(target: UpsertRedshiftTargetOptions, name: "UpsertRedshiftOptions"))
     RedshiftTarget.type = Types::RedshiftTarget
     ReferenceDatasetsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "member"))
+    RegisterConnectionTypeRequest.add_member(:connection_type, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "ConnectionType", traits: {"smithy.api#required" => {}}))
+    RegisterConnectionTypeRequest.add_member(:integration_type, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegrationType, name: "IntegrationType", traits: {"smithy.api#required" => {}}))
+    RegisterConnectionTypeRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "Description"))
+    RegisterConnectionTypeRequest.add_member(:connection_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionPropertiesConfiguration, name: "ConnectionProperties", traits: {"smithy.api#required" => {}}))
+    RegisterConnectionTypeRequest.add_member(:connector_authentication_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorAuthenticationConfiguration, name: "ConnectorAuthenticationConfiguration", traits: {"smithy.api#required" => {}}))
+    RegisterConnectionTypeRequest.add_member(:rest_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: RestConfiguration, name: "RestConfiguration", traits: {"smithy.api#required" => {}}))
+    RegisterConnectionTypeRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "Tags"))
+    RegisterConnectionTypeRequest.type = Types::RegisterConnectionTypeRequest
+    RegisterConnectionTypeResponse.add_member(:connection_type_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GlueResourceArn, name: "ConnectionTypeArn"))
+    RegisterConnectionTypeResponse.type = Types::RegisterConnectionTypeResponse
     RegisterSchemaVersionInput.add_member(:schema_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaId, name: "SchemaId", traits: {"smithy.api#required" => {}}))
     RegisterSchemaVersionInput.add_member(:schema_definition, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaDefinitionString, name: "SchemaDefinition", traits: {"smithy.api#required" => {}}))
     RegisterSchemaVersionInput.type = Types::RegisterSchemaVersionInput
@@ -5721,6 +6777,19 @@ module Aws::Glue
     ResourceUri.add_member(:uri, ::Smithy::Schema::Shapes::MemberShape.new(target: URI, name: "Uri"))
     ResourceUri.type = Types::ResourceUri
     ResourceUriList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceUri, name: "member"))
+    ResponseConfiguration.add_member(:result_path, ::Smithy::Schema::Shapes::MemberShape.new(target: JsonPathString, name: "ResultPath", traits: {"smithy.api#required" => {}}))
+    ResponseConfiguration.add_member(:error_path, ::Smithy::Schema::Shapes::MemberShape.new(target: JsonPathString, name: "ErrorPath"))
+    ResponseConfiguration.type = Types::ResponseConfiguration
+    ResponseExtractionMapping.add_member(:content_path, ::Smithy::Schema::Shapes::MemberShape.new(target: JsonPathString, name: "ContentPath"))
+    ResponseExtractionMapping.add_member(:header_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorPropertyKey, name: "HeaderKey"))
+    ResponseExtractionMapping.type = Types::ResponseExtractionMapping
+    RestConfiguration.add_member(:global_source_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceConfiguration, name: "GlobalSourceConfiguration"))
+    RestConfiguration.add_member(:validation_endpoint_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceConfiguration, name: "ValidationEndpointConfiguration"))
+    RestConfiguration.add_member(:entity_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityConfigurationMap, name: "EntityConfigurations"))
+    RestConfiguration.type = Types::RestConfiguration
+    ResultTypeEnum.add_member(:all, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALL", traits: {"smithy.api#enumValue" => "ALL"}))
+    ResultTypeEnum.add_member(:passed_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PASSED_ONLY", traits: {"smithy.api#enumValue" => "PASSED_ONLY"}))
+    ResultTypeEnum.add_member(:failed_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED_ONLY", traits: {"smithy.api#enumValue" => "FAILED_ONLY"}))
     ResumeWorkflowRunRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "Name", traits: {"smithy.api#required" => {}}))
     ResumeWorkflowRunRequest.add_member(:run_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IdString, name: "RunId", traits: {"smithy.api#required" => {}}))
     ResumeWorkflowRunRequest.add_member(:node_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: NodeIdList, name: "NodeIds", traits: {"smithy.api#required" => {}}))
@@ -5736,6 +6805,10 @@ module Aws::Glue
     Route.add_member(:inputs, ::Smithy::Schema::Shapes::MemberShape.new(target: OneInput, name: "Inputs", traits: {"smithy.api#required" => {}}))
     Route.add_member(:group_filters_list, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupFiltersList, name: "GroupFiltersList", traits: {"smithy.api#required" => {}}))
     Route.type = Types::Route
+    RowLevelResultsOptions.add_member(:max_rows_to_write, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableInteger, name: "MaxRowsToWrite"))
+    RowLevelResultsOptions.add_member(:result_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResultTypeEnum, name: "ResultType"))
+    RowLevelResultsOptions.add_member(:catalog_table_config, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogTableConfigOptions, name: "CatalogTableConfig"))
+    RowLevelResultsOptions.type = Types::RowLevelResultsOptions
     RuleMetricsMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "key"))
     RuleMetricsMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableDouble, name: "value"))
     RulesetNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "member"))
@@ -6032,7 +7105,56 @@ module Aws::Glue
     SchemaVersionStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
     SchemaVersionStatus.add_member(:failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILURE", traits: {"smithy.api#enumValue" => "FAILURE"}))
     SchemaVersionStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
+    SearchAssetsInput.add_member(:search_text, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchText, name: "SearchText"))
+    SearchAssetsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchMaxResults, name: "MaxResults"))
+    SearchAssetsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchNextToken, name: "NextToken"))
+    SearchAssetsInput.add_member(:sort, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchSort, name: "Sort"))
+    SearchAssetsInput.add_member(:filter_clause, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchFilterClause, name: "FilterClause"))
+    SearchAssetsInput.type = Types::SearchAssetsInput
+    SearchAssetsOutput.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchResultItemList, name: "Items"))
+    SearchAssetsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchNextToken, name: "NextToken"))
+    SearchAssetsOutput.type = Types::SearchAssetsOutput
+    SearchAttributeFilter.add_member(:attribute, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchAttribute, name: "Attribute", traits: {"smithy.api#required" => {}}))
+    SearchAttributeFilter.add_member(:operator, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchFilterOperator, name: "Operator", traits: {"smithy.api#required" => {}}))
+    SearchAttributeFilter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchFilterValue, name: "Value"))
+    SearchAttributeFilter.type = Types::SearchAttributeFilter
+    SearchFilterClause.add_member(:and_all_filters, Types::SearchFilterClause::AndAllFilters, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchFilterClauseList, name: "AndAllFilters"))
+    SearchFilterClause.add_member(:or_any_filters, Types::SearchFilterClause::OrAnyFilters, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchFilterClauseList, name: "OrAnyFilters"))
+    SearchFilterClause.add_member(:attribute_filter, Types::SearchFilterClause::AttributeFilter, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchAttributeFilter, name: "AttributeFilter"))
+    SearchFilterClause.add_member(:map_filter, Types::SearchFilterClause::MapFilter, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchMapFilter, name: "MapFilter"))
+    SearchFilterClause.add_member(:unknown, Types::SearchFilterClause::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    SearchFilterClause.type = Types::SearchFilterClause
+    SearchFilterClauseList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchFilterClause, name: "member"))
+    SearchFilterOperator.add_member(:equals, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "equals", traits: {"smithy.api#enumValue" => "equals"}))
+    SearchFilterOperator.add_member(:greater_than, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "greaterThan", traits: {"smithy.api#enumValue" => "greaterThan"}))
+    SearchFilterOperator.add_member(:greater_than_or_equals, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "greaterThanOrEquals", traits: {"smithy.api#enumValue" => "greaterThanOrEquals"}))
+    SearchFilterOperator.add_member(:less_than, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "lessThan", traits: {"smithy.api#enumValue" => "lessThan"}))
+    SearchFilterOperator.add_member(:less_than_or_equals, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "lessThanOrEquals", traits: {"smithy.api#enumValue" => "lessThanOrEquals"}))
+    SearchFilterOperator.add_member(:not_exists, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "notExists", traits: {"smithy.api#enumValue" => "notExists"}))
+    SearchFilterValue.add_member(:string_value, Types::SearchFilterValue::StringValue, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchFilterStringValue, name: "StringValue"))
+    SearchFilterValue.add_member(:long_value, Types::SearchFilterValue::LongValue, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchFilterLongValue, name: "LongValue"))
+    SearchFilterValue.add_member(:unknown, Types::SearchFilterValue::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    SearchFilterValue.type = Types::SearchFilterValue
+    SearchMapFilter.add_member(:attribute, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchAttribute, name: "Attribute", traits: {"smithy.api#required" => {}}))
+    SearchMapFilter.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchMapKey, name: "Key", traits: {"smithy.api#required" => {}}))
+    SearchMapFilter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchMapFilterValue, name: "Value", traits: {"smithy.api#required" => {}}))
+    SearchMapFilter.type = Types::SearchMapFilter
+    SearchMapFilterValue.add_member(:string_value, Types::SearchMapFilterValue::StringValue, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchFilterStringValue, name: "StringValue"))
+    SearchMapFilterValue.add_member(:unknown, Types::SearchMapFilterValue::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    SearchMapFilterValue.type = Types::SearchMapFilterValue
     SearchPropertyPredicates.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PropertyPredicate, name: "member"))
+    SearchResultItem.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetId, name: "Id"))
+    SearchResultItem.add_member(:asset_name, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchResultName, name: "AssetName"))
+    SearchResultItem.add_member(:asset_description, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetDescription, name: "AssetDescription"))
+    SearchResultItem.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdatedAt, name: "UpdatedAt"))
+    SearchResultItem.add_member(:asset_type_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetTypeId, name: "AssetTypeId"))
+    SearchResultItem.type = Types::SearchResultItem
+    SearchResultItemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchResultItem, name: "member"))
+    SearchSort.add_member(:attribute, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchAttribute, name: "Attribute", traits: {"smithy.api#required" => {}}))
+    SearchSort.add_member(:order, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchSortOrder, name: "Order"))
+    SearchSort.type = Types::SearchSort
+    SearchSortOrder.add_member(:ascending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ASCENDING", traits: {"smithy.api#enumValue" => "ASCENDING"}))
+    SearchSortOrder.add_member(:descending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DESCENDING", traits: {"smithy.api#enumValue" => "DESCENDING"}))
     SearchTablesRequest.add_member(:catalog_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdString, name: "CatalogId"))
     SearchTablesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken"))
     SearchTablesRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchPropertyPredicates, name: "Filters"))
@@ -6092,10 +7214,17 @@ module Aws::Glue
     Session.add_member(:dpu_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableDouble, name: "DPUSeconds"))
     Session.add_member(:idle_timeout, ::Smithy::Schema::Shapes::MemberShape.new(target: IdleTimeout, name: "IdleTimeout"))
     Session.add_member(:profile_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "ProfileName"))
+    Session.add_member(:session_type, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionType, name: "SessionType"))
     Session.type = Types::Session
+    SessionBusyException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: OrchestrationMessageString, name: "Message"))
+    SessionBusyException.type = Types::SessionBusyException
     SessionCommand.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "Name"))
     SessionCommand.add_member(:python_version, ::Smithy::Schema::Shapes::MemberShape.new(target: PythonVersionString, name: "PythonVersion"))
     SessionCommand.type = Types::SessionCommand
+    SessionEndpoint.add_member(:url, ::Smithy::Schema::Shapes::MemberShape.new(target: SparkConnectEndpointUrl, name: "Url", traits: {"smithy.api#required" => {}}))
+    SessionEndpoint.add_member(:auth_token, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "AuthToken", traits: {"smithy.api#required" => {}}))
+    SessionEndpoint.add_member(:auth_token_expiration_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampValue, name: "AuthTokenExpirationTime", traits: {"smithy.api#required" => {}}))
+    SessionEndpoint.type = Types::SessionEndpoint
     SessionIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "member"))
     SessionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Session, name: "member"))
     SessionStatus.add_member(:provisioning, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PROVISIONING", traits: {"smithy.api#enumValue" => "PROVISIONING"}))
@@ -6104,6 +7233,8 @@ module Aws::Glue
     SessionStatus.add_member(:timeout, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TIMEOUT", traits: {"smithy.api#enumValue" => "TIMEOUT"}))
     SessionStatus.add_member(:stopping, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STOPPING", traits: {"smithy.api#enumValue" => "STOPPING"}))
     SessionStatus.add_member(:stopped, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STOPPED", traits: {"smithy.api#enumValue" => "STOPPED"}))
+    SessionType.add_member(:livy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LIVY", traits: {"smithy.api#enumValue" => "LIVY"}))
+    SessionType.add_member(:spark_connect, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SPARK_CONNECT", traits: {"smithy.api#enumValue" => "SPARK_CONNECT"}))
     SettingSource.add_member(:catalog, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CATALOG", traits: {"smithy.api#enumValue" => "CATALOG"}))
     SettingSource.add_member(:table, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TABLE", traits: {"smithy.api#enumValue" => "TABLE"}))
     SkewedInfo.add_member(:skewed_column_names, ::Smithy::Schema::Shapes::MemberShape.new(target: NameStringList, name: "SkewedColumnNames"))
@@ -6148,6 +7279,13 @@ module Aws::Glue
     SortCriterion.type = Types::SortCriterion
     SortDirectionType.add_member(:descending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DESCENDING", traits: {"smithy.api#enumValue" => "DESCENDING"}))
     SortDirectionType.add_member(:ascending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ASCENDING", traits: {"smithy.api#enumValue" => "ASCENDING"}))
+    SourceConfiguration.add_member(:request_method, ::Smithy::Schema::Shapes::MemberShape.new(target: HTTPMethod, name: "RequestMethod"))
+    SourceConfiguration.add_member(:request_path, ::Smithy::Schema::Shapes::MemberShape.new(target: PathString, name: "RequestPath"))
+    SourceConfiguration.add_member(:request_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorPropertyList, name: "RequestParameters"))
+    SourceConfiguration.add_member(:response_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseConfiguration, name: "ResponseConfiguration"))
+    SourceConfiguration.add_member(:pagination_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationConfiguration, name: "PaginationConfiguration"))
+    SourceConfiguration.add_member(:filter_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterConfiguration, name: "FilterConfiguration"))
+    SourceConfiguration.type = Types::SourceConfiguration
     SourceControlAuthStrategy.add_member(:personal_access_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PERSONAL_ACCESS_TOKEN", traits: {"smithy.api#enumValue" => "PERSONAL_ACCESS_TOKEN"}))
     SourceControlAuthStrategy.add_member(:aws_secrets_manager, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_SECRETS_MANAGER", traits: {"smithy.api#enumValue" => "AWS_SECRETS_MANAGER"}))
     SourceControlDetails.add_member(:provider, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceControlProvider, name: "Provider"))
@@ -6186,6 +7324,8 @@ module Aws::Glue
     SparkConnectorTarget.add_member(:additional_options, ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalOptions, name: "AdditionalOptions"))
     SparkConnectorTarget.add_member(:output_schemas, ::Smithy::Schema::Shapes::MemberShape.new(target: GlueSchemas, name: "OutputSchemas"))
     SparkConnectorTarget.type = Types::SparkConnectorTarget
+    SparkPipelineInfoMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: SparkPipelineInfoKey, name: "key"))
+    SparkPipelineInfoMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: SparkPipelineInfoValue, name: "value"))
     SparkSQL.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NodeName, name: "Name", traits: {"smithy.api#required" => {}}))
     SparkSQL.add_member(:inputs, ::Smithy::Schema::Shapes::MemberShape.new(target: ManyInputs, name: "Inputs", traits: {"smithy.api#required" => {}}))
     SparkSQL.add_member(:sql_query, ::Smithy::Schema::Shapes::MemberShape.new(target: SqlQuery, name: "SqlQuery", traits: {"smithy.api#required" => {}}))
@@ -6217,13 +7357,14 @@ module Aws::Glue
     StartColumnStatisticsTaskRunRequest.add_member(:column_name_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnNameList, name: "ColumnNameList"))
     StartColumnStatisticsTaskRunRequest.add_member(:role, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "Role", traits: {"smithy.api#required" => {}}))
     StartColumnStatisticsTaskRunRequest.add_member(:sample_size, ::Smithy::Schema::Shapes::MemberShape.new(target: SampleSizePercentage, name: "SampleSize", traits: {"smithy.api#default" => 0}))
-    StartColumnStatisticsTaskRunRequest.add_member(:catalog_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "CatalogID"))
+    StartColumnStatisticsTaskRunRequest.add_member(:catalog_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdString, name: "CatalogID"))
     StartColumnStatisticsTaskRunRequest.add_member(:security_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "SecurityConfiguration"))
     StartColumnStatisticsTaskRunRequest.type = Types::StartColumnStatisticsTaskRunRequest
     StartColumnStatisticsTaskRunResponse.add_member(:column_statistics_task_run_id, ::Smithy::Schema::Shapes::MemberShape.new(target: HashString, name: "ColumnStatisticsTaskRunId"))
     StartColumnStatisticsTaskRunResponse.type = Types::StartColumnStatisticsTaskRunResponse
     StartColumnStatisticsTaskRunScheduleRequest.add_member(:database_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "DatabaseName", traits: {"smithy.api#required" => {}}))
     StartColumnStatisticsTaskRunScheduleRequest.add_member(:table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "TableName", traits: {"smithy.api#required" => {}}))
+    StartColumnStatisticsTaskRunScheduleRequest.add_member(:catalog_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdString, name: "CatalogID"))
     StartColumnStatisticsTaskRunScheduleRequest.type = Types::StartColumnStatisticsTaskRunScheduleRequest
     StartColumnStatisticsTaskRunScheduleResponse.type = Types::StartColumnStatisticsTaskRunScheduleResponse
     StartCrawlerRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "Name", traits: {"smithy.api#required" => {}}))
@@ -6239,6 +7380,8 @@ module Aws::Glue
     StartDataQualityRuleRecommendationRunRequest.add_member(:created_ruleset_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "CreatedRulesetName"))
     StartDataQualityRuleRecommendationRunRequest.add_member(:data_quality_security_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "DataQualitySecurityConfiguration"))
     StartDataQualityRuleRecommendationRunRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: HashString, name: "ClientToken"))
+    StartDataQualityRuleRecommendationRunRequest.add_member(:additional_run_options, ::Smithy::Schema::Shapes::MemberShape.new(target: DataQualityRuleRecommendationRunAdditionalRunOptions, name: "AdditionalRunOptions"))
+    StartDataQualityRuleRecommendationRunRequest.add_member(:recommendation_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationMode, name: "RecommendationMode"))
     StartDataQualityRuleRecommendationRunRequest.type = Types::StartDataQualityRuleRecommendationRunRequest
     StartDataQualityRuleRecommendationRunResponse.add_member(:run_id, ::Smithy::Schema::Shapes::MemberShape.new(target: HashString, name: "RunId"))
     StartDataQualityRuleRecommendationRunResponse.type = Types::StartDataQualityRuleRecommendationRunResponse
@@ -6289,6 +7432,13 @@ module Aws::Glue
     StartMLLabelingSetGenerationTaskRunRequest.type = Types::StartMLLabelingSetGenerationTaskRunRequest
     StartMLLabelingSetGenerationTaskRunResponse.add_member(:task_run_id, ::Smithy::Schema::Shapes::MemberShape.new(target: HashString, name: "TaskRunId"))
     StartMLLabelingSetGenerationTaskRunResponse.type = Types::StartMLLabelingSetGenerationTaskRunResponse
+    StartMaterializedViewRefreshTaskRunRequest.add_member(:catalog_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdString, name: "CatalogId", traits: {"smithy.api#required" => {}}))
+    StartMaterializedViewRefreshTaskRunRequest.add_member(:database_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "DatabaseName", traits: {"smithy.api#required" => {}}))
+    StartMaterializedViewRefreshTaskRunRequest.add_member(:table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "TableName", traits: {"smithy.api#required" => {}}))
+    StartMaterializedViewRefreshTaskRunRequest.add_member(:full_refresh, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "FullRefresh"))
+    StartMaterializedViewRefreshTaskRunRequest.type = Types::StartMaterializedViewRefreshTaskRunRequest
+    StartMaterializedViewRefreshTaskRunResponse.add_member(:materialized_view_refresh_task_run_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUIDv4, name: "MaterializedViewRefreshTaskRunId"))
+    StartMaterializedViewRefreshTaskRunResponse.type = Types::StartMaterializedViewRefreshTaskRunResponse
     StartTriggerRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "Name", traits: {"smithy.api#required" => {}}))
     StartTriggerRequest.type = Types::StartTriggerRequest
     StartTriggerResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "Name"))
@@ -6352,6 +7502,7 @@ module Aws::Glue
     StatisticSummary.add_member(:run_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: RunIdentifier, name: "RunIdentifier"))
     StatisticSummary.add_member(:statistic_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StatisticNameString, name: "StatisticName"))
     StatisticSummary.add_member(:double_value, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "DoubleValue", traits: {"smithy.api#default" => 0}))
+    StatisticSummary.add_member(:distribution_value, ::Smithy::Schema::Shapes::MemberShape.new(target: DistributionData, name: "DistributionValue"))
     StatisticSummary.add_member(:evaluation_level, ::Smithy::Schema::Shapes::MemberShape.new(target: StatisticEvaluationLevel, name: "EvaluationLevel"))
     StatisticSummary.add_member(:columns_referenced, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnNameList, name: "ColumnsReferenced"))
     StatisticSummary.add_member(:referenced_datasets, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceDatasetsList, name: "ReferencedDatasets"))
@@ -6365,10 +7516,12 @@ module Aws::Glue
     StatusDetails.type = Types::StatusDetails
     StopColumnStatisticsTaskRunRequest.add_member(:database_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DatabaseName, name: "DatabaseName", traits: {"smithy.api#required" => {}}))
     StopColumnStatisticsTaskRunRequest.add_member(:table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "TableName", traits: {"smithy.api#required" => {}}))
+    StopColumnStatisticsTaskRunRequest.add_member(:catalog_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdString, name: "CatalogID"))
     StopColumnStatisticsTaskRunRequest.type = Types::StopColumnStatisticsTaskRunRequest
     StopColumnStatisticsTaskRunResponse.type = Types::StopColumnStatisticsTaskRunResponse
     StopColumnStatisticsTaskRunScheduleRequest.add_member(:database_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "DatabaseName", traits: {"smithy.api#required" => {}}))
     StopColumnStatisticsTaskRunScheduleRequest.add_member(:table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "TableName", traits: {"smithy.api#required" => {}}))
+    StopColumnStatisticsTaskRunScheduleRequest.add_member(:catalog_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdString, name: "CatalogID"))
     StopColumnStatisticsTaskRunScheduleRequest.type = Types::StopColumnStatisticsTaskRunScheduleRequest
     StopColumnStatisticsTaskRunScheduleResponse.type = Types::StopColumnStatisticsTaskRunScheduleResponse
     StopCrawlerRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "Name", traits: {"smithy.api#required" => {}}))
@@ -6377,6 +7530,11 @@ module Aws::Glue
     StopCrawlerScheduleRequest.add_member(:crawler_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "CrawlerName", traits: {"smithy.api#required" => {}}))
     StopCrawlerScheduleRequest.type = Types::StopCrawlerScheduleRequest
     StopCrawlerScheduleResponse.type = Types::StopCrawlerScheduleResponse
+    StopMaterializedViewRefreshTaskRunRequest.add_member(:catalog_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdString, name: "CatalogId", traits: {"smithy.api#required" => {}}))
+    StopMaterializedViewRefreshTaskRunRequest.add_member(:database_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "DatabaseName", traits: {"smithy.api#required" => {}}))
+    StopMaterializedViewRefreshTaskRunRequest.add_member(:table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "TableName", traits: {"smithy.api#required" => {}}))
+    StopMaterializedViewRefreshTaskRunRequest.type = Types::StopMaterializedViewRefreshTaskRunRequest
+    StopMaterializedViewRefreshTaskRunResponse.type = Types::StopMaterializedViewRefreshTaskRunResponse
     StopSessionRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "Id", traits: {"smithy.api#required" => {}}))
     StopSessionRequest.add_member(:request_origin, ::Smithy::Schema::Shapes::MemberShape.new(target: OrchestrationNameString, name: "RequestOrigin"))
     StopSessionRequest.type = Types::StopSessionRequest
@@ -6416,6 +7574,19 @@ module Aws::Glue
     StringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "member"))
     StringToStringMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableString, name: "key"))
     StringToStringMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableString, name: "value"))
+    SubObjectSourceType.add_member(:hive_parquet, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HIVE_PARQUET", traits: {"smithy.api#enumValue" => "HIVE_PARQUET"}))
+    SubObjectSourceType.add_member(:hive_orc, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HIVE_ORC", traits: {"smithy.api#enumValue" => "HIVE_ORC"}))
+    SubObjectSourceType.add_member(:hive_csv, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HIVE_CSV", traits: {"smithy.api#enumValue" => "HIVE_CSV"}))
+    SubObjectSourceType.add_member(:hive_json, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HIVE_JSON", traits: {"smithy.api#enumValue" => "HIVE_JSON"}))
+    SubObjectSourceType.add_member(:plain_parquet, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PLAIN_PARQUET", traits: {"smithy.api#enumValue" => "PLAIN_PARQUET"}))
+    SubObjectSourceType.add_member(:iceberg, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ICEBERG", traits: {"smithy.api#enumValue" => "ICEBERG"}))
+    SubObjectStatistics.add_member(:source_type, ::Smithy::Schema::Shapes::MemberShape.new(target: SubObjectSourceType, name: "SourceType"))
+    SubObjectStatistics.add_member(:glue_version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableString, name: "GlueVersionId"))
+    SubObjectStatistics.add_member(:partition_count, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableLong, name: "PartitionCount"))
+    SubObjectStatistics.add_member(:file_count, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableLong, name: "FileCount"))
+    SubObjectStatistics.add_member(:total_file_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableLong, name: "TotalFileBytes"))
+    SubObjectStatistics.type = Types::SubObjectStatistics
+    SubObjectsStatisticsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SubObjectStatistics, name: "member"))
     SupportedDialect.add_member(:dialect, ::Smithy::Schema::Shapes::MemberShape.new(target: ViewDialect, name: "Dialect"))
     SupportedDialect.add_member(:dialect_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ViewDialectVersionString, name: "DialectVersion"))
     SupportedDialect.type = Types::SupportedDialect
@@ -6442,10 +7613,15 @@ module Aws::Glue
     Table.add_member(:federated_table, ::Smithy::Schema::Shapes::MemberShape.new(target: FederatedTable, name: "FederatedTable"))
     Table.add_member(:view_definition, ::Smithy::Schema::Shapes::MemberShape.new(target: ViewDefinition, name: "ViewDefinition"))
     Table.add_member(:is_multi_dialect_view, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "IsMultiDialectView"))
+    Table.add_member(:is_materialized_view, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "IsMaterializedView"))
+    Table.add_member(:iceberg_table_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: IcebergTableMetadata, name: "IcebergTableMetadata"))
     Table.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: TableStatus, name: "Status"))
+    Table.add_member(:rls_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: RLSProperties, name: "RLSProperties"))
     Table.type = Types::Table
     TableAttributes.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NAME", traits: {"smithy.api#enumValue" => "NAME"}))
     TableAttributes.add_member(:table_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TABLE_TYPE", traits: {"smithy.api#enumValue" => "TABLE_TYPE"}))
+    TableAttributes.add_member(:default, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEFAULT", traits: {"smithy.api#enumValue" => "DEFAULT"}))
+    TableAttributes.add_member(:latest_iceberg_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LATEST_ICEBERG_METADATA", traits: {"smithy.api#enumValue" => "LATEST_ICEBERG_METADATA"}))
     TableAttributesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TableAttributes, name: "member"))
     TableError.add_member(:table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "TableName"))
     TableError.add_member(:error_detail, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDetail, name: "ErrorDetail"))
@@ -6469,6 +7645,7 @@ module Aws::Glue
     TableInput.add_member(:table_type, ::Smithy::Schema::Shapes::MemberShape.new(target: TableTypeString, name: "TableType"))
     TableInput.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ParametersMap, name: "Parameters"))
     TableInput.add_member(:target_table, ::Smithy::Schema::Shapes::MemberShape.new(target: TableIdentifier, name: "TargetTable"))
+    TableInput.add_member(:federated_table, ::Smithy::Schema::Shapes::MemberShape.new(target: FederatedTable, name: "FederatedTable"))
     TableInput.add_member(:view_definition, ::Smithy::Schema::Shapes::MemberShape.new(target: ViewDefinitionInput, name: "ViewDefinition"))
     TableInput.type = Types::TableInput
     TableList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Table, name: "member"))
@@ -6505,6 +7682,8 @@ module Aws::Glue
     TableOptimizerVpcConfiguration.add_member(:glue_connection_name, Types::TableOptimizerVpcConfiguration::GlueConnectionName, ::Smithy::Schema::Shapes::MemberShape.new(target: GlueConnectionNameString, name: "glueConnectionName"))
     TableOptimizerVpcConfiguration.add_member(:unknown, Types::TableOptimizerVpcConfiguration::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     TableOptimizerVpcConfiguration.type = Types::TableOptimizerVpcConfiguration
+    TableResourceShareType.add_member(:federated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FEDERATED", traits: {"smithy.api#enumValue" => "FEDERATED"}))
+    TableResourceShareType.add_member(:all, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALL", traits: {"smithy.api#enumValue" => "ALL"}))
     TableStatus.add_member(:requested_by, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "RequestedBy"))
     TableStatus.add_member(:updated_by, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "UpdatedBy"))
     TableStatus.add_member(:request_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "RequestTime"))
@@ -6554,6 +7733,7 @@ module Aws::Glue
     TargetTableConfig.add_member(:unnest_spec, ::Smithy::Schema::Shapes::MemberShape.new(target: UnnestSpec, name: "UnnestSpec"))
     TargetTableConfig.add_member(:partition_spec, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegrationPartitionSpecList, name: "PartitionSpec"))
     TargetTableConfig.add_member(:target_table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String128, name: "TargetTableName"))
+    TargetTableConfig.add_member(:integration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String128, name: "IntegrationArn"))
     TargetTableConfig.type = Types::TargetTableConfig
     TaskRun.add_member(:transform_id, ::Smithy::Schema::Shapes::MemberShape.new(target: HashString, name: "TransformId"))
     TaskRun.add_member(:task_run_id, ::Smithy::Schema::Shapes::MemberShape.new(target: HashString, name: "TaskRunId"))
@@ -6708,6 +7888,16 @@ module Aws::Glue
     UntagResourceRequest.add_member(:tags_to_remove, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeysList, name: "TagsToRemove", traits: {"smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
     UntagResourceResponse.type = Types::UntagResourceResponse
+    UpdateAssetRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetId, name: "Identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateAssetRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetName, name: "Name"))
+    UpdateAssetRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetDescription, name: "Description"))
+    UpdateAssetRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: HashString, name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    UpdateAssetRequest.type = Types::UpdateAssetRequest
+    UpdateAssetResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetId, name: "Id", traits: {"smithy.api#required" => {}}))
+    UpdateAssetResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetName, name: "Name"))
+    UpdateAssetResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetDescription, name: "Description"))
+    UpdateAssetResponse.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdatedAt, name: "UpdatedAt"))
+    UpdateAssetResponse.type = Types::UpdateAssetResponse
     UpdateBehavior.add_member(:log, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOG", traits: {"smithy.api#enumValue" => "LOG"}))
     UpdateBehavior.add_member(:update_in_database, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATE_IN_DATABASE", traits: {"smithy.api#enumValue" => "UPDATE_IN_DATABASE"}))
     UpdateBlueprintRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: OrchestrationNameString, name: "Name", traits: {"smithy.api#required" => {}}))
@@ -6750,7 +7940,7 @@ module Aws::Glue
     UpdateColumnStatisticsTaskSettingsRequest.add_member(:schedule, ::Smithy::Schema::Shapes::MemberShape.new(target: CronExpression, name: "Schedule"))
     UpdateColumnStatisticsTaskSettingsRequest.add_member(:column_name_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnNameList, name: "ColumnNameList"))
     UpdateColumnStatisticsTaskSettingsRequest.add_member(:sample_size, ::Smithy::Schema::Shapes::MemberShape.new(target: SampleSizePercentage, name: "SampleSize", traits: {"smithy.api#default" => 0}))
-    UpdateColumnStatisticsTaskSettingsRequest.add_member(:catalog_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "CatalogID"))
+    UpdateColumnStatisticsTaskSettingsRequest.add_member(:catalog_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdString, name: "CatalogID"))
     UpdateColumnStatisticsTaskSettingsRequest.add_member(:security_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "SecurityConfiguration"))
     UpdateColumnStatisticsTaskSettingsRequest.type = Types::UpdateColumnStatisticsTaskSettingsRequest
     UpdateColumnStatisticsTaskSettingsResponse.type = Types::UpdateColumnStatisticsTaskSettingsResponse
@@ -6773,6 +7963,7 @@ module Aws::Glue
     UpdateCrawlerRequest.add_member(:lake_formation_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: LakeFormationConfiguration, name: "LakeFormationConfiguration"))
     UpdateCrawlerRequest.add_member(:configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: CrawlerConfiguration, name: "Configuration"))
     UpdateCrawlerRequest.add_member(:crawler_security_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: CrawlerSecurityConfiguration, name: "CrawlerSecurityConfiguration"))
+    UpdateCrawlerRequest.add_member(:catalog_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdString, name: "CatalogId"))
     UpdateCrawlerRequest.type = Types::UpdateCrawlerRequest
     UpdateCrawlerResponse.type = Types::UpdateCrawlerResponse
     UpdateCrawlerScheduleRequest.add_member(:crawler_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "CrawlerName", traits: {"smithy.api#required" => {}}))
@@ -6813,7 +8004,29 @@ module Aws::Glue
     UpdateDevEndpointRequest.add_member(:add_arguments, ::Smithy::Schema::Shapes::MemberShape.new(target: MapValue, name: "AddArguments"))
     UpdateDevEndpointRequest.type = Types::UpdateDevEndpointRequest
     UpdateDevEndpointResponse.type = Types::UpdateDevEndpointResponse
+    UpdateGlossaryRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryId, name: "Identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateGlossaryRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryName, name: "Name"))
+    UpdateGlossaryRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataDescription, name: "Description"))
+    UpdateGlossaryRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: HashString, name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    UpdateGlossaryRequest.type = Types::UpdateGlossaryRequest
+    UpdateGlossaryResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryId, name: "Id"))
+    UpdateGlossaryResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryName, name: "Name"))
+    UpdateGlossaryResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataDescription, name: "Description"))
+    UpdateGlossaryResponse.type = Types::UpdateGlossaryResponse
+    UpdateGlossaryTermRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryTermId, name: "Identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateGlossaryTermRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryTermName, name: "Name"))
+    UpdateGlossaryTermRequest.add_member(:short_description, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryShortDescription, name: "ShortDescription"))
+    UpdateGlossaryTermRequest.add_member(:long_description, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryLongDescription, name: "LongDescription"))
+    UpdateGlossaryTermRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: HashString, name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    UpdateGlossaryTermRequest.type = Types::UpdateGlossaryTermRequest
+    UpdateGlossaryTermResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryTermId, name: "Id"))
+    UpdateGlossaryTermResponse.add_member(:glossary_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryId, name: "GlossaryId"))
+    UpdateGlossaryTermResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryTermName, name: "Name"))
+    UpdateGlossaryTermResponse.add_member(:short_description, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryShortDescription, name: "ShortDescription"))
+    UpdateGlossaryTermResponse.add_member(:long_description, ::Smithy::Schema::Shapes::MemberShape.new(target: GlossaryLongDescription, name: "LongDescription"))
+    UpdateGlossaryTermResponse.type = Types::UpdateGlossaryTermResponse
     UpdateGlueIdentityCenterConfigurationRequest.add_member(:scopes, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityCenterScopesList, name: "Scopes"))
+    UpdateGlueIdentityCenterConfigurationRequest.add_member(:user_background_sessions_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "UserBackgroundSessionsEnabled"))
     UpdateGlueIdentityCenterConfigurationRequest.type = Types::UpdateGlueIdentityCenterConfigurationRequest
     UpdateGlueIdentityCenterConfigurationResponse.type = Types::UpdateGlueIdentityCenterConfigurationResponse
     UpdateGrokClassifierRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "Name", traits: {"smithy.api#required" => {}}))
@@ -6825,15 +8038,16 @@ module Aws::Glue
     UpdateIcebergInput.type = Types::UpdateIcebergInput
     UpdateIcebergTableInput.add_member(:updates, ::Smithy::Schema::Shapes::MemberShape.new(target: IcebergTableUpdateList, name: "Updates", traits: {"smithy.api#required" => {}}))
     UpdateIcebergTableInput.type = Types::UpdateIcebergTableInput
-    UpdateIntegrationResourcePropertyRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String128, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    UpdateIntegrationResourcePropertyRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String512, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
     UpdateIntegrationResourcePropertyRequest.add_member(:source_processing_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceProcessingProperties, name: "SourceProcessingProperties"))
     UpdateIntegrationResourcePropertyRequest.add_member(:target_processing_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetProcessingProperties, name: "TargetProcessingProperties"))
     UpdateIntegrationResourcePropertyRequest.type = Types::UpdateIntegrationResourcePropertyRequest
-    UpdateIntegrationResourcePropertyResponse.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String128, name: "ResourceArn"))
+    UpdateIntegrationResourcePropertyResponse.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String512, name: "ResourceArn"))
+    UpdateIntegrationResourcePropertyResponse.add_member(:resource_property_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String512, name: "ResourcePropertyArn"))
     UpdateIntegrationResourcePropertyResponse.add_member(:source_processing_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceProcessingProperties, name: "SourceProcessingProperties"))
     UpdateIntegrationResourcePropertyResponse.add_member(:target_processing_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetProcessingProperties, name: "TargetProcessingProperties"))
     UpdateIntegrationResourcePropertyResponse.type = Types::UpdateIntegrationResourcePropertyResponse
-    UpdateIntegrationTablePropertiesRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String128, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    UpdateIntegrationTablePropertiesRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String512, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
     UpdateIntegrationTablePropertiesRequest.add_member(:table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String128, name: "TableName", traits: {"smithy.api#required" => {}}))
     UpdateIntegrationTablePropertiesRequest.add_member(:source_table_config, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceTableConfig, name: "SourceTableConfig"))
     UpdateIntegrationTablePropertiesRequest.add_member(:target_table_config, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetTableConfig, name: "TargetTableConfig"))
@@ -6970,6 +8184,7 @@ module Aws::Glue
     UserDefinedFunction.add_member(:database_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "DatabaseName"))
     UserDefinedFunction.add_member(:class_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "ClassName"))
     UserDefinedFunction.add_member(:owner_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "OwnerName"))
+    UserDefinedFunction.add_member(:function_type, ::Smithy::Schema::Shapes::MemberShape.new(target: FunctionType, name: "FunctionType"))
     UserDefinedFunction.add_member(:owner_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PrincipalType, name: "OwnerType"))
     UserDefinedFunction.add_member(:create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreateTime"))
     UserDefinedFunction.add_member(:resource_uris, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceUriList, name: "ResourceUris"))
@@ -6978,6 +8193,7 @@ module Aws::Glue
     UserDefinedFunctionInput.add_member(:function_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "FunctionName"))
     UserDefinedFunctionInput.add_member(:class_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "ClassName"))
     UserDefinedFunctionInput.add_member(:owner_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "OwnerName"))
+    UserDefinedFunctionInput.add_member(:function_type, ::Smithy::Schema::Shapes::MemberShape.new(target: FunctionType, name: "FunctionType"))
     UserDefinedFunctionInput.add_member(:owner_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PrincipalType, name: "OwnerType"))
     UserDefinedFunctionInput.add_member(:resource_uris, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceUriList, name: "ResourceUris"))
     UserDefinedFunctionInput.type = Types::UserDefinedFunctionInput
@@ -6988,14 +8204,30 @@ module Aws::Glue
     VersionMismatchException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageString, name: "Message"))
     VersionMismatchException.type = Types::VersionMismatchException
     ViewDefinition.add_member(:is_protected, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "IsProtected"))
+    ViewDefinition.add_member(:is_managed, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "IsManaged"))
     ViewDefinition.add_member(:definer, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnString, name: "Definer"))
+    ViewDefinition.add_member(:view_version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TableVersionId, name: "ViewVersionId", traits: {"smithy.api#default" => 0}))
+    ViewDefinition.add_member(:view_version_token, ::Smithy::Schema::Shapes::MemberShape.new(target: HashString, name: "ViewVersionToken"))
+    ViewDefinition.add_member(:refresh_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: RefreshSeconds, name: "RefreshSeconds"))
+    ViewDefinition.add_member(:last_refresh_type, ::Smithy::Schema::Shapes::MemberShape.new(target: LastRefreshType, name: "LastRefreshType"))
     ViewDefinition.add_member(:sub_objects, ::Smithy::Schema::Shapes::MemberShape.new(target: ViewSubObjectsList, name: "SubObjects"))
+    ViewDefinition.add_member(:sub_object_version_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: ViewSubObjectVersionIdsList, name: "SubObjectVersionIds"))
+    ViewDefinition.add_member(:sub_objects_statistics, ::Smithy::Schema::Shapes::MemberShape.new(target: SubObjectsStatisticsList, name: "SubObjectsStatistics"))
     ViewDefinition.add_member(:representations, ::Smithy::Schema::Shapes::MemberShape.new(target: ViewRepresentationList, name: "Representations"))
+    ViewDefinition.add_member(:spark_pipeline_info, ::Smithy::Schema::Shapes::MemberShape.new(target: SparkPipelineInfoMap, name: "SparkPipelineInfo"))
     ViewDefinition.type = Types::ViewDefinition
     ViewDefinitionInput.add_member(:is_protected, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "IsProtected"))
+    ViewDefinitionInput.add_member(:is_managed, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "IsManaged"))
     ViewDefinitionInput.add_member(:definer, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnString, name: "Definer"))
     ViewDefinitionInput.add_member(:representations, ::Smithy::Schema::Shapes::MemberShape.new(target: ViewRepresentationInputList, name: "Representations"))
+    ViewDefinitionInput.add_member(:view_version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TableVersionId, name: "ViewVersionId", traits: {"smithy.api#default" => 0}))
+    ViewDefinitionInput.add_member(:view_version_token, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionString, name: "ViewVersionToken"))
+    ViewDefinitionInput.add_member(:refresh_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: RefreshSeconds, name: "RefreshSeconds"))
+    ViewDefinitionInput.add_member(:last_refresh_type, ::Smithy::Schema::Shapes::MemberShape.new(target: LastRefreshType, name: "LastRefreshType"))
     ViewDefinitionInput.add_member(:sub_objects, ::Smithy::Schema::Shapes::MemberShape.new(target: ViewSubObjectsList, name: "SubObjects"))
+    ViewDefinitionInput.add_member(:sub_object_version_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: ViewSubObjectVersionIdsList, name: "SubObjectVersionIds"))
+    ViewDefinitionInput.add_member(:sub_objects_statistics, ::Smithy::Schema::Shapes::MemberShape.new(target: SubObjectsStatisticsList, name: "SubObjectsStatistics"))
+    ViewDefinitionInput.add_member(:spark_pipeline_info, ::Smithy::Schema::Shapes::MemberShape.new(target: SparkPipelineInfoMap, name: "SparkPipelineInfo"))
     ViewDefinitionInput.type = Types::ViewDefinitionInput
     ViewDialect.add_member(:redshift, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REDSHIFT", traits: {"smithy.api#enumValue" => "REDSHIFT"}))
     ViewDialect.add_member(:athena, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ATHENA", traits: {"smithy.api#enumValue" => "ATHENA"}))
@@ -7015,6 +8247,7 @@ module Aws::Glue
     ViewRepresentationInput.type = Types::ViewRepresentationInput
     ViewRepresentationInputList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ViewRepresentationInput, name: "member"))
     ViewRepresentationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ViewRepresentation, name: "member"))
+    ViewSubObjectVersionIdsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TableVersionId, name: "member"))
     ViewSubObjectsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnString, name: "member"))
     ViewUpdateAction.add_member(:add, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ADD", traits: {"smithy.api#enumValue" => "ADD"}))
     ViewUpdateAction.add_member(:replace, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REPLACE", traits: {"smithy.api#enumValue" => "REPLACE"}))
@@ -7091,13 +8324,27 @@ module Aws::Glue
       service.id = "com.amazonaws.glue#AWSGlue"
       service.name = "AWSGlue"
       service.version = "2017-03-31"
-      service.traits = {"aws.api#service" => {"sdkId" => "Glue", "arnNamespace" => "glue", "cloudFormationName" => "Glue", "cloudTrailEventSource" => "glue.amazonaws.com", "endpointPrefix" => "glue"}, "aws.auth#sigv4" => {"name" => "glue"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "AWS Glue"}
+      service.traits = {"aws.api#service" => {"sdkId" => "Glue", "arnNamespace" => "glue", "cloudFormationName" => "Glue", "cloudTrailEventSource" => "glue.amazonaws.com", "endpointPrefix" => "glue"}, "aws.auth#sigv4" => {"name" => "glue"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "AWS Glue", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://glue-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://glue-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://glue.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://glue.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
+      service.add_operation(:associate_glossary_terms, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.glue#AssociateGlossaryTerms"
+        operation.name = "AssociateGlossaryTerms"
+        operation.input = AssociateGlossaryTermsRequest
+        operation.output = AssociateGlossaryTermsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConcurrentModificationException
+        operation.errors << EntityNotFoundException
+        operation.errors << InternalServiceException
+        operation.errors << InvalidInputException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/assets/{AssetIdentifier}/associate-glossary-terms", "code" => 200}}
+      end)
       service.add_operation(:batch_create_partition, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.glue#BatchCreatePartition"
         operation.name = "BatchCreatePartition"
         operation.input = BatchCreatePartitionRequest
         operation.output = BatchCreatePartitionResponse
         operation.errors << AlreadyExistsException
+        operation.errors << ConcurrentModificationException
         operation.errors << EntityNotFoundException
         operation.errors << GlueEncryptionException
         operation.errors << InternalServiceException
@@ -7120,6 +8367,7 @@ module Aws::Glue
         operation.name = "BatchDeletePartition"
         operation.input = BatchDeletePartitionRequest
         operation.output = BatchDeletePartitionResponse
+        operation.errors << ConcurrentModificationException
         operation.errors << EntityNotFoundException
         operation.errors << InternalServiceException
         operation.errors << InvalidInputException
@@ -7131,6 +8379,7 @@ module Aws::Glue
         operation.name = "BatchDeleteTable"
         operation.input = BatchDeleteTableRequest
         operation.output = BatchDeleteTableResponse
+        operation.errors << ConcurrentModificationException
         operation.errors << EntityNotFoundException
         operation.errors << GlueEncryptionException
         operation.errors << InternalServiceException
@@ -7189,6 +8438,26 @@ module Aws::Glue
         operation.errors << OperationTimeoutException
         operation.traits = {}
       end)
+      service.add_operation(:batch_get_data_quality_result_v2, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.glue#BatchGetDataQualityResultV2"
+        operation.name = "BatchGetDataQualityResultV2"
+        operation.input = BatchGetDataQualityResultV2Request
+        operation.output = BatchGetDataQualityResultV2Response
+        operation.errors << InternalServiceException
+        operation.errors << InvalidInputException
+        operation.errors << OperationTimeoutException
+        operation.traits = {}
+      end)
+      service.add_operation(:batch_get_data_quality_ruleset_evaluation_run, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.glue#BatchGetDataQualityRulesetEvaluationRun"
+        operation.name = "BatchGetDataQualityRulesetEvaluationRun"
+        operation.input = BatchGetDataQualityRulesetEvaluationRunRequest
+        operation.output = BatchGetDataQualityRulesetEvaluationRunResponse
+        operation.errors << InternalServiceException
+        operation.errors << InvalidInputException
+        operation.errors << OperationTimeoutException
+        operation.traits = {}
+      end)
       service.add_operation(:batch_get_dev_endpoints, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.glue#BatchGetDevEndpoints"
         operation.name = "BatchGetDevEndpoints"
@@ -7199,6 +8468,18 @@ module Aws::Glue
         operation.errors << InvalidInputException
         operation.errors << OperationTimeoutException
         operation.traits = {}
+      end)
+      service.add_operation(:batch_get_iterable_forms, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.glue#BatchGetIterableForms"
+        operation.name = "BatchGetIterableForms"
+        operation.input = BatchGetIterableFormsRequest
+        operation.output = BatchGetIterableFormsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << EntityNotFoundException
+        operation.errors << InternalServiceException
+        operation.errors << InvalidInputException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/assets/{AssetIdentifier}/iterable-forms/{IterableFormName}/batch-get", "code" => 200}}
       end)
       service.add_operation(:batch_get_jobs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.glue#BatchGetJobs"
@@ -7283,6 +8564,7 @@ module Aws::Glue
         operation.name = "BatchUpdatePartition"
         operation.input = BatchUpdatePartitionRequest
         operation.output = BatchUpdatePartitionResponse
+        operation.errors << ConcurrentModificationException
         operation.errors << EntityNotFoundException
         operation.errors << GlueEncryptionException
         operation.errors << InternalServiceException
@@ -7481,6 +8763,33 @@ module Aws::Glue
         operation.errors << ValidationException
         operation.traits = {}
       end)
+      service.add_operation(:create_glossary, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.glue#CreateGlossary"
+        operation.name = "CreateGlossary"
+        operation.input = CreateGlossaryRequest
+        operation.output = CreateGlossaryResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AlreadyExistsException
+        operation.errors << ConcurrentModificationException
+        operation.errors << InternalServiceException
+        operation.errors << InvalidInputException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/glossaries", "code" => 200}}
+      end)
+      service.add_operation(:create_glossary_term, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.glue#CreateGlossaryTerm"
+        operation.name = "CreateGlossaryTerm"
+        operation.input = CreateGlossaryTermRequest
+        operation.output = CreateGlossaryTermResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AlreadyExistsException
+        operation.errors << ConcurrentModificationException
+        operation.errors << EntityNotFoundException
+        operation.errors << InternalServiceException
+        operation.errors << InvalidInputException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/glossary-terms", "code" => 200}}
+      end)
       service.add_operation(:create_glue_identity_center_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.glue#CreateGlueIdentityCenterConfiguration"
         operation.name = "CreateGlueIdentityCenterConfiguration"
@@ -7657,6 +8966,7 @@ module Aws::Glue
         operation.errors << IdempotentParameterMismatchException
         operation.errors << InternalServiceException
         operation.errors << InvalidInputException
+        operation.errors << OperationNotSupportedException
         operation.errors << OperationTimeoutException
         operation.errors << ResourceNumberLimitExceededException
         operation.errors << ValidationException
@@ -7749,6 +9059,43 @@ module Aws::Glue
         operation.errors << ResourceNumberLimitExceededException
         operation.traits = {}
       end)
+      service.add_operation(:delete_asset, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.glue#DeleteAsset"
+        operation.name = "DeleteAsset"
+        operation.input = DeleteAssetRequest
+        operation.output = DeleteAssetResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConcurrentModificationException
+        operation.errors << InternalServiceException
+        operation.errors << InvalidInputException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/assets/{Identifier}", "code" => 200}}
+      end)
+      service.add_operation(:delete_asset_type, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.glue#DeleteAssetType"
+        operation.name = "DeleteAssetType"
+        operation.input = DeleteAssetTypeRequest
+        operation.output = DeleteAssetTypeResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConcurrentModificationException
+        operation.errors << InternalServiceException
+        operation.errors << InvalidInputException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/asset-types/{Identifier}", "code" => 200}}
+      end)
+      service.add_operation(:delete_attachment, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.glue#DeleteAttachment"
+        operation.name = "DeleteAttachment"
+        operation.input = DeleteAttachmentRequest
+        operation.output = DeleteAttachmentResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConcurrentModificationException
+        operation.errors << EntityNotFoundException
+        operation.errors << InternalServiceException
+        operation.errors << InvalidInputException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/assets/{AssetIdentifier}/attachments/{AttachmentName}", "code" => 200}}
+      end)
       service.add_operation(:delete_blueprint, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.glue#DeleteBlueprint"
         operation.name = "DeleteBlueprint"
@@ -7826,6 +9173,19 @@ module Aws::Glue
         operation.errors << OperationTimeoutException
         operation.traits = {}
       end)
+      service.add_operation(:delete_connection_type, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.glue#DeleteConnectionType"
+        operation.name = "DeleteConnectionType"
+        operation.input = DeleteConnectionTypeRequest
+        operation.output = DeleteConnectionTypeResponse
+        operation.errors << AccessDeniedException
+        operation.errors << EntityNotFoundException
+        operation.errors << InternalServiceException
+        operation.errors << InvalidInputException
+        operation.errors << OperationTimeoutException
+        operation.errors << ValidationException
+        operation.traits = {}
+      end)
       service.add_operation(:delete_crawler, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.glue#DeleteCrawler"
         operation.name = "DeleteCrawler"
@@ -7885,6 +9245,44 @@ module Aws::Glue
         operation.errors << OperationTimeoutException
         operation.traits = {}
       end)
+      service.add_operation(:delete_form_type, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.glue#DeleteFormType"
+        operation.name = "DeleteFormType"
+        operation.input = DeleteFormTypeRequest
+        operation.output = DeleteFormTypeResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConcurrentModificationException
+        operation.errors << ConflictException
+        operation.errors << InternalServiceException
+        operation.errors << InvalidInputException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/form-types/{Identifier}", "code" => 200}}
+      end)
+      service.add_operation(:delete_glossary, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.glue#DeleteGlossary"
+        operation.name = "DeleteGlossary"
+        operation.input = DeleteGlossaryRequest
+        operation.output = DeleteGlossaryResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConcurrentModificationException
+        operation.errors << ConflictException
+        operation.errors << InternalServiceException
+        operation.errors << InvalidInputException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/glossaries/{Identifier}", "code" => 200}}
+      end)
+      service.add_operation(:delete_glossary_term, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.glue#DeleteGlossaryTerm"
+        operation.name = "DeleteGlossaryTerm"
+        operation.input = DeleteGlossaryTermRequest
+        operation.output = DeleteGlossaryTermResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConcurrentModificationException
+        operation.errors << InternalServiceException
+        operation.errors << InvalidInputException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/glossary-terms/{Identifier}", "code" => 200}}
+      end)
       service.add_operation(:delete_glue_identity_center_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.glue#DeleteGlueIdentityCenterConfiguration"
         operation.name = "DeleteGlueIdentityCenterConfiguration"
@@ -7913,6 +9311,20 @@ module Aws::Glue
         operation.errors << InvalidInputException
         operation.errors << InvalidIntegrationStateFault
         operation.errors << InvalidStateException
+        operation.errors << ValidationException
+        operation.traits = {}
+      end)
+      service.add_operation(:delete_integration_resource_property, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.glue#DeleteIntegrationResourceProperty"
+        operation.name = "DeleteIntegrationResourceProperty"
+        operation.input = DeleteIntegrationResourcePropertyRequest
+        operation.output = DeleteIntegrationResourcePropertyResponse
+        operation.errors << AccessDeniedException
+        operation.errors << EntityNotFoundException
+        operation.errors << InternalServerException
+        operation.errors << InternalServiceException
+        operation.errors << InvalidInputException
+        operation.errors << ResourceNotFoundException
         operation.errors << ValidationException
         operation.traits = {}
       end)
@@ -8182,6 +9594,43 @@ module Aws::Glue
         operation.errors << ValidationException
         operation.traits = {}
       end)
+      service.add_operation(:disassociate_glossary_terms, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.glue#DisassociateGlossaryTerms"
+        operation.name = "DisassociateGlossaryTerms"
+        operation.input = DisassociateGlossaryTermsRequest
+        operation.output = DisassociateGlossaryTermsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConcurrentModificationException
+        operation.errors << EntityNotFoundException
+        operation.errors << InternalServiceException
+        operation.errors << InvalidInputException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/assets/{AssetIdentifier}/disassociate-glossary-terms", "code" => 200}}
+      end)
+      service.add_operation(:get_asset, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.glue#GetAsset"
+        operation.name = "GetAsset"
+        operation.input = GetAssetInput
+        operation.output = GetAssetOutput
+        operation.errors << AccessDeniedException
+        operation.errors << EntityNotFoundException
+        operation.errors << InternalServiceException
+        operation.errors << InvalidInputException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/assets/{Identifier}", "code" => 200}}
+      end)
+      service.add_operation(:get_asset_type, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.glue#GetAssetType"
+        operation.name = "GetAssetType"
+        operation.input = GetAssetTypeRequest
+        operation.output = GetAssetTypeResponse
+        operation.errors << AccessDeniedException
+        operation.errors << EntityNotFoundException
+        operation.errors << InternalServiceException
+        operation.errors << InvalidInputException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/asset-types/{Identifier}", "code" => 200}}
+      end)
       service.add_operation(:get_blueprint, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.glue#GetBlueprint"
         operation.name = "GetBlueprint"
@@ -8387,6 +9836,18 @@ module Aws::Glue
         operation.errors << OperationTimeoutException
         operation.traits = {}
       end)
+      service.add_operation(:get_dashboard_url, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.glue#GetDashboardUrl"
+        operation.name = "GetDashboardUrl"
+        operation.input = GetDashboardUrlRequest
+        operation.output = GetDashboardUrlResponse
+        operation.errors << AccessDeniedException
+        operation.errors << EntityNotFoundException
+        operation.errors << InternalServiceException
+        operation.errors << InvalidInputException
+        operation.errors << OperationNotSupportedException
+        operation.traits = {"smithy.api#readonly" => {}}
+      end)
       service.add_operation(:get_data_catalog_encryption_settings, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.glue#GetDataCatalogEncryptionSettings"
         operation.name = "GetDataCatalogEncryptionSettings"
@@ -8396,6 +9857,17 @@ module Aws::Glue
         operation.errors << InvalidInputException
         operation.errors << OperationTimeoutException
         operation.traits = {}
+      end)
+      service.add_operation(:get_data_catalog_export_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.glue#GetDataCatalogExportConfiguration"
+        operation.name = "GetDataCatalogExportConfiguration"
+        operation.input = GetDataCatalogExportConfigurationInput
+        operation.output = GetDataCatalogExportConfigurationOutput
+        operation.errors << EntityNotFoundException
+        operation.errors << InternalServiceException
+        operation.errors << InvalidInputException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/get-data-catalog-export-configuration", "code" => 200}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_data_quality_model, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.glue#GetDataQualityModel"
@@ -8424,6 +9896,17 @@ module Aws::Glue
         operation.name = "GetDataQualityResult"
         operation.input = GetDataQualityResultRequest
         operation.output = GetDataQualityResultResponse
+        operation.errors << EntityNotFoundException
+        operation.errors << InternalServiceException
+        operation.errors << InvalidInputException
+        operation.errors << OperationTimeoutException
+        operation.traits = {}
+      end)
+      service.add_operation(:get_data_quality_result_v2, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.glue#GetDataQualityResultV2"
+        operation.name = "GetDataQualityResultV2"
+        operation.input = GetDataQualityResultV2Request
+        operation.output = GetDataQualityResultV2Response
         operation.errors << EntityNotFoundException
         operation.errors << InternalServiceException
         operation.errors << InvalidInputException
@@ -8538,6 +10021,40 @@ module Aws::Glue
         operation.errors << OperationTimeoutException
         operation.errors << ValidationException
         operation.traits = {}
+      end)
+      service.add_operation(:get_form_type, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.glue#GetFormType"
+        operation.name = "GetFormType"
+        operation.input = GetFormTypeRequest
+        operation.output = GetFormTypeResponse
+        operation.errors << AccessDeniedException
+        operation.errors << EntityNotFoundException
+        operation.errors << InternalServiceException
+        operation.errors << InvalidInputException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/form-types/{Identifier}", "code" => 200}}
+      end)
+      service.add_operation(:get_glossary, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.glue#GetGlossary"
+        operation.name = "GetGlossary"
+        operation.input = GetGlossaryRequest
+        operation.output = GetGlossaryResponse
+        operation.errors << AccessDeniedException
+        operation.errors << EntityNotFoundException
+        operation.errors << InternalServiceException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/glossaries/{Identifier}", "code" => 200}}
+      end)
+      service.add_operation(:get_glossary_term, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.glue#GetGlossaryTerm"
+        operation.name = "GetGlossaryTerm"
+        operation.input = GetGlossaryTermRequest
+        operation.output = GetGlossaryTermResponse
+        operation.errors << AccessDeniedException
+        operation.errors << EntityNotFoundException
+        operation.errors << InternalServiceException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/glossary-terms/{Identifier}", "code" => 200}}
       end)
       service.add_operation(:get_glue_identity_center_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.glue#GetGlueIdentityCenterConfiguration"
@@ -8691,6 +10208,17 @@ module Aws::Glue
         operation.output = GetMappingResponse
         operation.errors << EntityNotFoundException
         operation.errors << InternalServiceException
+        operation.errors << InvalidInputException
+        operation.errors << OperationTimeoutException
+        operation.traits = {}
+      end)
+      service.add_operation(:get_materialized_view_refresh_task_run, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.glue#GetMaterializedViewRefreshTaskRun"
+        operation.name = "GetMaterializedViewRefreshTaskRun"
+        operation.input = GetMaterializedViewRefreshTaskRunRequest
+        operation.output = GetMaterializedViewRefreshTaskRunResponse
+        operation.errors << AccessDeniedException
+        operation.errors << EntityNotFoundException
         operation.errors << InvalidInputException
         operation.errors << OperationTimeoutException
         operation.traits = {}
@@ -8862,6 +10390,20 @@ module Aws::Glue
         operation.errors << OperationTimeoutException
         operation.traits = {}
       end)
+      service.add_operation(:get_session_endpoint, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.glue#GetSessionEndpoint"
+        operation.name = "GetSessionEndpoint"
+        operation.input = GetSessionEndpointRequest
+        operation.output = GetSessionEndpointResponse
+        operation.errors << AccessDeniedException
+        operation.errors << EntityNotFoundException
+        operation.errors << IllegalSessionStateException
+        operation.errors << InternalServiceException
+        operation.errors << InvalidInputException
+        operation.errors << OperationNotSupportedException
+        operation.errors << OperationTimeoutException
+        operation.traits = {"smithy.api#readonly" => {}}
+      end)
       service.add_operation(:get_statement, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.glue#GetStatement"
         operation.name = "GetStatement"
@@ -8874,6 +10416,29 @@ module Aws::Glue
         operation.errors << InvalidInputException
         operation.errors << OperationTimeoutException
         operation.traits = {}
+      end)
+      service.add_operation(:get_system_logs_for_job_run, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.glue#GetSystemLogsForJobRun"
+        operation.name = "GetSystemLogsForJobRun"
+        operation.input = GetSystemLogsForJobRunRequest
+        operation.output = GetSystemLogsForJobRunResponse
+        operation.errors << AccessDeniedException
+        operation.errors << EntityNotFoundException
+        operation.errors << InternalServiceException
+        operation.errors << InvalidInputException
+        operation.errors << OperationTimeoutException
+        operation.traits = {"smithy.api#readonly" => {}}
+      end)
+      service.add_operation(:get_system_logs_for_session, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.glue#GetSystemLogsForSession"
+        operation.name = "GetSystemLogsForSession"
+        operation.input = GetSystemLogsForSessionRequest
+        operation.output = GetSystemLogsForSessionResponse
+        operation.errors << AccessDeniedException
+        operation.errors << EntityNotFoundException
+        operation.errors << InternalServiceException
+        operation.errors << InvalidInputException
+        operation.traits = {"smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_table, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.glue#GetTable"
@@ -9113,6 +10678,18 @@ module Aws::Glue
         operation.errors << OperationTimeoutException
         operation.traits = {}
       end)
+      service.add_operation(:list_asset_types, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.glue#ListAssetTypes"
+        operation.name = "ListAssetTypes"
+        operation.input = ListAssetTypesRequest
+        operation.output = ListAssetTypesResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServiceException
+        operation.errors << InvalidInputException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/asset-types", "code" => 200}}
+        operation[:paginator] = Paginators::ListAssetTypes.new
+      end)
       service.add_operation(:list_blueprints, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.glue#ListBlueprints"
         operation.name = "ListBlueprints"
@@ -9183,6 +10760,17 @@ module Aws::Glue
         operation.errors << OperationTimeoutException
         operation.traits = {}
         operation[:paginator] = Paginators::ListDataQualityResults.new
+      end)
+      service.add_operation(:list_data_quality_results_v2, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.glue#ListDataQualityResultsV2"
+        operation.name = "ListDataQualityResultsV2"
+        operation.input = ListDataQualityResultsV2Request
+        operation.output = ListDataQualityResultsV2Response
+        operation.errors << InternalServiceException
+        operation.errors << InvalidInputException
+        operation.errors << OperationTimeoutException
+        operation.traits = {}
+        operation[:paginator] = Paginators::ListDataQualityResultsV2.new
       end)
       service.add_operation(:list_data_quality_rule_recommendation_runs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.glue#ListDataQualityRuleRecommendationRuns"
@@ -9264,6 +10852,83 @@ module Aws::Glue
         operation.traits = {}
         operation[:paginator] = Paginators::ListEntities.new
       end)
+      service.add_operation(:list_form_types, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.glue#ListFormTypes"
+        operation.name = "ListFormTypes"
+        operation.input = ListFormTypesRequest
+        operation.output = ListFormTypesResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServiceException
+        operation.errors << InvalidInputException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/form-types", "code" => 200}}
+        operation[:paginator] = Paginators::ListFormTypes.new
+      end)
+      service.add_operation(:list_glossaries, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.glue#ListGlossaries"
+        operation.name = "ListGlossaries"
+        operation.input = ListGlossariesRequest
+        operation.output = ListGlossariesResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServiceException
+        operation.errors << InvalidInputException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/glossaries", "code" => 200}}
+        operation[:paginator] = Paginators::ListGlossaries.new
+      end)
+      service.add_operation(:list_glossary_terms, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.glue#ListGlossaryTerms"
+        operation.name = "ListGlossaryTerms"
+        operation.input = ListGlossaryTermsRequest
+        operation.output = ListGlossaryTermsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServiceException
+        operation.errors << InvalidInputException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/glossary-terms", "code" => 200}}
+        operation[:paginator] = Paginators::ListGlossaryTerms.new
+      end)
+      service.add_operation(:list_integration_resource_properties, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.glue#ListIntegrationResourceProperties"
+        operation.name = "ListIntegrationResourceProperties"
+        operation.input = ListIntegrationResourcePropertiesRequest
+        operation.output = ListIntegrationResourcePropertiesResponse
+        operation.errors << AccessDeniedException
+        operation.errors << EntityNotFoundException
+        operation.errors << InternalServerException
+        operation.errors << InternalServiceException
+        operation.errors << InvalidInputException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
+        operation.traits = {}
+      end)
+      service.add_operation(:list_integration_table_properties, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.glue#ListIntegrationTableProperties"
+        operation.name = "ListIntegrationTableProperties"
+        operation.input = ListIntegrationTablePropertiesRequest
+        operation.output = ListIntegrationTablePropertiesResponse
+        operation.errors << AccessDeniedException
+        operation.errors << EntityNotFoundException
+        operation.errors << InternalServerException
+        operation.errors << InternalServiceException
+        operation.errors << InvalidInputException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
+        operation.traits = {}
+      end)
+      service.add_operation(:list_iterable_forms, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.glue#ListIterableForms"
+        operation.name = "ListIterableForms"
+        operation.input = ListIterableFormsRequest
+        operation.output = ListIterableFormsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << EntityNotFoundException
+        operation.errors << InternalServiceException
+        operation.errors << InvalidInputException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/assets/{AssetIdentifier}/iterable-forms/{IterableFormName}", "code" => 200}}
+        operation[:paginator] = Paginators::ListIterableForms.new
+      end)
       service.add_operation(:list_jobs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.glue#ListJobs"
         operation.name = "ListJobs"
@@ -9287,6 +10952,17 @@ module Aws::Glue
         operation.errors << OperationTimeoutException
         operation.traits = {}
         operation[:paginator] = Paginators::ListMLTransforms.new
+      end)
+      service.add_operation(:list_materialized_view_refresh_task_runs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.glue#ListMaterializedViewRefreshTaskRuns"
+        operation.name = "ListMaterializedViewRefreshTaskRuns"
+        operation.input = ListMaterializedViewRefreshTaskRunsRequest
+        operation.output = ListMaterializedViewRefreshTaskRunsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InvalidInputException
+        operation.errors << OperationTimeoutException
+        operation.traits = {}
+        operation[:paginator] = Paginators::ListMaterializedViewRefreshTaskRuns.new
       end)
       service.add_operation(:list_registries, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.glue#ListRegistries"
@@ -9415,6 +11091,57 @@ module Aws::Glue
         operation.errors << ValidationException
         operation.traits = {}
       end)
+      service.add_operation(:publish_data_quality_result_v2, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.glue#PublishDataQualityResultV2"
+        operation.name = "PublishDataQualityResultV2"
+        operation.input = PublishDataQualityResultV2Request
+        operation.output = PublishDataQualityResultV2Response
+        operation.errors << IdempotentParameterMismatchException
+        operation.errors << InternalServiceException
+        operation.errors << InvalidInputException
+        operation.errors << OperationTimeoutException
+        operation.errors << ResourceNumberLimitExceededException
+        operation.traits = {"smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:put_asset, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.glue#PutAsset"
+        operation.name = "PutAsset"
+        operation.input = PutAssetRequest
+        operation.output = PutAssetResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConcurrentModificationException
+        operation.errors << EntityNotFoundException
+        operation.errors << InternalServiceException
+        operation.errors << InvalidInputException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/assets", "code" => 200}}
+      end)
+      service.add_operation(:put_asset_type, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.glue#PutAssetType"
+        operation.name = "PutAssetType"
+        operation.input = PutAssetTypeRequest
+        operation.output = PutAssetTypeResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConcurrentModificationException
+        operation.errors << EntityNotFoundException
+        operation.errors << InternalServiceException
+        operation.errors << InvalidInputException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/asset-types", "code" => 200}}
+      end)
+      service.add_operation(:put_attachment, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.glue#PutAttachment"
+        operation.name = "PutAttachment"
+        operation.input = PutAttachmentRequest
+        operation.output = PutAttachmentResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConcurrentModificationException
+        operation.errors << EntityNotFoundException
+        operation.errors << InternalServiceException
+        operation.errors << InvalidInputException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/assets/{AssetIdentifier}/attachment", "code" => 200}}
+      end)
       service.add_operation(:put_data_catalog_encryption_settings, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.glue#PutDataCatalogEncryptionSettings"
         operation.name = "PutDataCatalogEncryptionSettings"
@@ -9425,6 +11152,18 @@ module Aws::Glue
         operation.errors << OperationTimeoutException
         operation.traits = {}
       end)
+      service.add_operation(:put_data_catalog_export_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.glue#PutDataCatalogExportConfiguration"
+        operation.name = "PutDataCatalogExportConfiguration"
+        operation.input = PutDataCatalogExportConfigurationInput
+        operation.output = PutDataCatalogExportConfigurationOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServiceException
+        operation.errors << InvalidInputException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/put-data-catalog-export-configuration", "code" => 200}}
+      end)
       service.add_operation(:put_data_quality_profile_annotation, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.glue#PutDataQualityProfileAnnotation"
         operation.name = "PutDataQualityProfileAnnotation"
@@ -9434,6 +11173,18 @@ module Aws::Glue
         operation.errors << InternalServiceException
         operation.errors << InvalidInputException
         operation.traits = {}
+      end)
+      service.add_operation(:put_form_type, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.glue#PutFormType"
+        operation.name = "PutFormType"
+        operation.input = PutFormTypeRequest
+        operation.output = PutFormTypeResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConcurrentModificationException
+        operation.errors << InternalServiceException
+        operation.errors << InvalidInputException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/form-types", "code" => 200}}
       end)
       service.add_operation(:put_resource_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.glue#PutResourcePolicy"
@@ -9481,6 +11232,19 @@ module Aws::Glue
         operation.errors << AccessDeniedException
         operation.errors << EntityNotFoundException
         operation.errors << InvalidInputException
+        operation.traits = {}
+      end)
+      service.add_operation(:register_connection_type, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.glue#RegisterConnectionType"
+        operation.name = "RegisterConnectionType"
+        operation.input = RegisterConnectionTypeRequest
+        operation.output = RegisterConnectionTypeResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServiceException
+        operation.errors << InvalidInputException
+        operation.errors << OperationTimeoutException
+        operation.errors << ResourceNumberLimitExceededException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:register_schema_version, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -9540,10 +11304,24 @@ module Aws::Glue
         operation.errors << IllegalSessionStateException
         operation.errors << InternalServiceException
         operation.errors << InvalidInputException
+        operation.errors << OperationNotSupportedException
         operation.errors << OperationTimeoutException
         operation.errors << ResourceNumberLimitExceededException
+        operation.errors << SessionBusyException
         operation.errors << ValidationException
         operation.traits = {}
+      end)
+      service.add_operation(:search_assets, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.glue#SearchAssets"
+        operation.name = "SearchAssets"
+        operation.input = SearchAssetsInput
+        operation.output = SearchAssetsOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServiceException
+        operation.errors << InvalidInputException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/search-assets", "code" => 200}}
+        operation[:paginator] = Paginators::SearchAssets.new
       end)
       service.add_operation(:search_tables, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.glue#SearchTables"
@@ -9699,6 +11477,19 @@ module Aws::Glue
         operation.errors << OperationTimeoutException
         operation.traits = {}
       end)
+      service.add_operation(:start_materialized_view_refresh_task_run, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.glue#StartMaterializedViewRefreshTaskRun"
+        operation.name = "StartMaterializedViewRefreshTaskRun"
+        operation.input = StartMaterializedViewRefreshTaskRunRequest
+        operation.output = StartMaterializedViewRefreshTaskRunResponse
+        operation.errors << AccessDeniedException
+        operation.errors << EntityNotFoundException
+        operation.errors << InvalidInputException
+        operation.errors << MaterializedViewRefreshTaskRunningException
+        operation.errors << OperationTimeoutException
+        operation.errors << ResourceNumberLimitExceededException
+        operation.traits = {}
+      end)
       service.add_operation(:start_trigger, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.glue#StartTrigger"
         operation.name = "StartTrigger"
@@ -9766,6 +11557,18 @@ module Aws::Glue
         operation.errors << OperationTimeoutException
         operation.errors << SchedulerNotRunningException
         operation.errors << SchedulerTransitioningException
+        operation.traits = {}
+      end)
+      service.add_operation(:stop_materialized_view_refresh_task_run, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.glue#StopMaterializedViewRefreshTaskRun"
+        operation.name = "StopMaterializedViewRefreshTaskRun"
+        operation.input = StopMaterializedViewRefreshTaskRunRequest
+        operation.output = StopMaterializedViewRefreshTaskRunResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InvalidInputException
+        operation.errors << MaterializedViewRefreshTaskNotRunningException
+        operation.errors << MaterializedViewRefreshTaskStoppingException
+        operation.errors << OperationTimeoutException
         operation.traits = {}
       end)
       service.add_operation(:stop_session, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -9842,6 +11645,19 @@ module Aws::Glue
         operation.errors << InvalidInputException
         operation.errors << OperationTimeoutException
         operation.traits = {}
+      end)
+      service.add_operation(:update_asset, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.glue#UpdateAsset"
+        operation.name = "UpdateAsset"
+        operation.input = UpdateAssetRequest
+        operation.output = UpdateAssetResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConcurrentModificationException
+        operation.errors << EntityNotFoundException
+        operation.errors << InternalServiceException
+        operation.errors << InvalidInputException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/assets/{Identifier}", "code" => 200}}
       end)
       service.add_operation(:update_blueprint, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.glue#UpdateBlueprint"
@@ -9994,6 +11810,34 @@ module Aws::Glue
         operation.errors << OperationTimeoutException
         operation.errors << ValidationException
         operation.traits = {}
+      end)
+      service.add_operation(:update_glossary, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.glue#UpdateGlossary"
+        operation.name = "UpdateGlossary"
+        operation.input = UpdateGlossaryRequest
+        operation.output = UpdateGlossaryResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AlreadyExistsException
+        operation.errors << ConcurrentModificationException
+        operation.errors << EntityNotFoundException
+        operation.errors << InternalServiceException
+        operation.errors << InvalidInputException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/glossaries/{Identifier}", "code" => 200}}
+      end)
+      service.add_operation(:update_glossary_term, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.glue#UpdateGlossaryTerm"
+        operation.name = "UpdateGlossaryTerm"
+        operation.input = UpdateGlossaryTermRequest
+        operation.output = UpdateGlossaryTermResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AlreadyExistsException
+        operation.errors << ConcurrentModificationException
+        operation.errors << EntityNotFoundException
+        operation.errors << InternalServiceException
+        operation.errors << InvalidInputException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/glossary-terms/{Identifier}", "code" => 200}}
       end)
       service.add_operation(:update_glue_identity_center_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.glue#UpdateGlueIdentityCenterConfiguration"

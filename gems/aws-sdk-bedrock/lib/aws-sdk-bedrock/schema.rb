@@ -8,11 +8,26 @@ module Aws::Bedrock
 
     AcceptEula = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.bedrock#AcceptEula", name: "AcceptEula", traits: {"smithy.api#default" => false})
     AccessDeniedException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#AccessDeniedException", name: "AccessDeniedException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 403})
+    AccountEnforcedGuardrailConfigurationId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#AccountEnforcedGuardrailConfigurationId", name: "AccountEnforcedGuardrailConfigurationId", traits: {"smithy.api#pattern" => "^[a-z0-9]+$"})
+    AccountEnforcedGuardrailInferenceInputConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#AccountEnforcedGuardrailInferenceInputConfiguration", name: "AccountEnforcedGuardrailInferenceInputConfiguration")
+    AccountEnforcedGuardrailOutputConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#AccountEnforcedGuardrailOutputConfiguration", name: "AccountEnforcedGuardrailOutputConfiguration")
+    AccountEnforcedGuardrailsOutputConfiguration = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrock#AccountEnforcedGuardrailsOutputConfiguration", name: "AccountEnforcedGuardrailsOutputConfiguration", traits: {"smithy.api#length" => {"min" => 0, "max" => 1}})
     AccountId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#AccountId", name: "AccountId", traits: {"smithy.api#pattern" => "^[0-9]{12}$"})
     AcknowledgementFormDataBody = ::Smithy::Schema::Shapes::BlobShape.new(id: "com.amazonaws.bedrock#AcknowledgementFormDataBody", name: "AcknowledgementFormDataBody", traits: {"smithy.api#length" => {"min" => 10, "max" => 16384}})
     AdditionalModelRequestFields = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.bedrock#AdditionalModelRequestFields", name: "AdditionalModelRequestFields")
     AdditionalModelRequestFieldsKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#AdditionalModelRequestFieldsKey", name: "AdditionalModelRequestFieldsKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
     AdditionalModelRequestFieldsValue = ::Smithy::Schema::Shapes::DocumentShape.new(id: "com.amazonaws.bedrock#AdditionalModelRequestFieldsValue", name: "AdditionalModelRequestFieldsValue")
+    AdvancedPromptOptimizationInputConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#AdvancedPromptOptimizationInputConfig", name: "AdvancedPromptOptimizationInputConfig")
+    AdvancedPromptOptimizationJobArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#AdvancedPromptOptimizationJobArn", name: "AdvancedPromptOptimizationJobArn", traits: {"smithy.api#length" => {"max" => 1011}, "smithy.api#pattern" => "^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:advanced-prompt-optimization-job/[a-z0-9]{12}$"})
+    AdvancedPromptOptimizationJobDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#AdvancedPromptOptimizationJobDescription", name: "AdvancedPromptOptimizationJobDescription", traits: {"smithy.api#length" => {"min" => 1, "max" => 500}})
+    AdvancedPromptOptimizationJobIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#AdvancedPromptOptimizationJobIdentifier", name: "AdvancedPromptOptimizationJobIdentifier", traits: {"smithy.api#length" => {"max" => 1011}, "smithy.api#pattern" => "^((arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:advanced-prompt-optimization-job/)?[a-z0-9]{12})$"})
+    AdvancedPromptOptimizationJobIdentifiers = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrock#AdvancedPromptOptimizationJobIdentifiers", name: "AdvancedPromptOptimizationJobIdentifiers", traits: {"smithy.api#length" => {"min" => 1, "max" => 25}})
+    AdvancedPromptOptimizationJobName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#AdvancedPromptOptimizationJobName", name: "AdvancedPromptOptimizationJobName", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#pattern" => "^[a-zA-Z0-9][a-zA-Z0-9.+-]*$"})
+    AdvancedPromptOptimizationJobStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrock#AdvancedPromptOptimizationJobStatus", name: "AdvancedPromptOptimizationJobStatus")
+    AdvancedPromptOptimizationJobSummaries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrock#AdvancedPromptOptimizationJobSummaries", name: "AdvancedPromptOptimizationJobSummaries")
+    AdvancedPromptOptimizationJobSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#AdvancedPromptOptimizationJobSummary", name: "AdvancedPromptOptimizationJobSummary")
+    AdvancedPromptOptimizationModelIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#AdvancedPromptOptimizationModelIdentifier", name: "AdvancedPromptOptimizationModelIdentifier", traits: {"smithy.api#length" => {"max" => 2048}, "smithy.api#pattern" => "^(([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([a-z0-9-]{1,63}[.]){0,2}[a-z0-9-]{1,63}([:][a-z0-9-]{1,63}){0,2}(/[a-z0-9]{12}|))|(arn:aws(|-us-gov|-cn|-iso|-iso-b|-iso-f):bedrock:[a-z0-9-]{1,20}:[0-9]{12}:application-inference-profile/[a-zA-Z0-9-:.]+)|(arn:aws(|-us-gov|-cn|-iso|-iso-b|-iso-f):bedrock:[a-z0-9-]{1,20}:([0-9]{12})?:inference-profile/[a-zA-Z0-9-:.]+)|(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}::foundation-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63})))$"})
+    AdvancedPromptOptimizationOutputConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#AdvancedPromptOptimizationOutputConfig", name: "AdvancedPromptOptimizationOutputConfig")
     AgreementAvailability = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#AgreementAvailability", name: "AgreementAvailability")
     AgreementStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrock#AgreementStatus", name: "AgreementStatus")
     ApplicationType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrock#ApplicationType", name: "ApplicationType")
@@ -51,6 +66,7 @@ module Aws::Bedrock
     AutomatedReasoningLogicStatementContent = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningLogicStatementContent", name: "AutomatedReasoningLogicStatementContent", traits: {"smithy.api#length" => {"max" => 1000}, "smithy.api#sensitive" => {}})
     AutomatedReasoningLogicStatementList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningLogicStatementList", name: "AutomatedReasoningLogicStatementList")
     AutomatedReasoningNaturalLanguageStatementContent = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningNaturalLanguageStatementContent", name: "AutomatedReasoningNaturalLanguageStatementContent", traits: {"smithy.api#length" => {"max" => 1000}, "smithy.api#sensitive" => {}})
+    AutomatedReasoningPolicyAccuracyScore = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyAccuracyScore", name: "AutomatedReasoningPolicyAccuracyScore", traits: {"smithy.api#range" => {"min" => 0.0, "max" => 1.0}})
     AutomatedReasoningPolicyAddRuleAnnotation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyAddRuleAnnotation", name: "AutomatedReasoningPolicyAddRuleAnnotation")
     AutomatedReasoningPolicyAddRuleFromNaturalLanguageAnnotation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyAddRuleFromNaturalLanguageAnnotation", name: "AutomatedReasoningPolicyAddRuleFromNaturalLanguageAnnotation")
     AutomatedReasoningPolicyAddRuleMutation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyAddRuleMutation", name: "AutomatedReasoningPolicyAddRuleMutation")
@@ -59,6 +75,11 @@ module Aws::Bedrock
     AutomatedReasoningPolicyAddTypeValue = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyAddTypeValue", name: "AutomatedReasoningPolicyAddTypeValue")
     AutomatedReasoningPolicyAddVariableAnnotation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyAddVariableAnnotation", name: "AutomatedReasoningPolicyAddVariableAnnotation")
     AutomatedReasoningPolicyAddVariableMutation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyAddVariableMutation", name: "AutomatedReasoningPolicyAddVariableMutation")
+    AutomatedReasoningPolicyAnnotatedChunk = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyAnnotatedChunk", name: "AutomatedReasoningPolicyAnnotatedChunk")
+    AutomatedReasoningPolicyAnnotatedChunkList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyAnnotatedChunkList", name: "AutomatedReasoningPolicyAnnotatedChunkList")
+    AutomatedReasoningPolicyAnnotatedContent = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyAnnotatedContent", name: "AutomatedReasoningPolicyAnnotatedContent")
+    AutomatedReasoningPolicyAnnotatedContentList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyAnnotatedContentList", name: "AutomatedReasoningPolicyAnnotatedContentList")
+    AutomatedReasoningPolicyAnnotatedLine = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyAnnotatedLine", name: "AutomatedReasoningPolicyAnnotatedLine")
     AutomatedReasoningPolicyAnnotation = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyAnnotation", name: "AutomatedReasoningPolicyAnnotation")
     AutomatedReasoningPolicyAnnotationFeedbackNaturalLanguage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyAnnotationFeedbackNaturalLanguage", name: "AutomatedReasoningPolicyAnnotationFeedbackNaturalLanguage", traits: {"smithy.api#length" => {"max" => 1024}, "smithy.api#pattern" => "^[\\s\\S]+$", "smithy.api#sensitive" => {}})
     AutomatedReasoningPolicyAnnotationIngestContent = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyAnnotationIngestContent", name: "AutomatedReasoningPolicyAnnotationIngestContent", traits: {"smithy.api#length" => {"max" => 4096}, "smithy.api#pattern" => "^[\\s\\S]+$", "smithy.api#sensitive" => {}})
@@ -67,14 +88,22 @@ module Aws::Bedrock
     AutomatedReasoningPolicyAnnotationStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyAnnotationStatus", name: "AutomatedReasoningPolicyAnnotationStatus")
     AutomatedReasoningPolicyArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyArn", name: "AutomatedReasoningPolicyArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#pattern" => "^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:automated-reasoning-policy/[a-z0-9]{12}(:([1-9][0-9]{0,11}))?$"})
     AutomatedReasoningPolicyArnList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyArnList", name: "AutomatedReasoningPolicyArnList")
+    AutomatedReasoningPolicyAtomicStatement = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyAtomicStatement", name: "AutomatedReasoningPolicyAtomicStatement")
+    AutomatedReasoningPolicyAtomicStatementList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyAtomicStatementList", name: "AutomatedReasoningPolicyAtomicStatementList")
     AutomatedReasoningPolicyBuildDocumentBlob = ::Smithy::Schema::Shapes::BlobShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyBuildDocumentBlob", name: "AutomatedReasoningPolicyBuildDocumentBlob", traits: {"smithy.api#length" => {"min" => 1, "max" => 5000000}, "smithy.api#sensitive" => {}})
     AutomatedReasoningPolicyBuildDocumentContentType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyBuildDocumentContentType", name: "AutomatedReasoningPolicyBuildDocumentContentType")
-    AutomatedReasoningPolicyBuildDocumentDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyBuildDocumentDescription", name: "AutomatedReasoningPolicyBuildDocumentDescription", traits: {"smithy.api#length" => {"max" => 2000}, "smithy.api#sensitive" => {}})
+    AutomatedReasoningPolicyBuildDocumentDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyBuildDocumentDescription", name: "AutomatedReasoningPolicyBuildDocumentDescription", traits: {"smithy.api#length" => {"max" => 4000}, "smithy.api#sensitive" => {}})
     AutomatedReasoningPolicyBuildDocumentName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyBuildDocumentName", name: "AutomatedReasoningPolicyBuildDocumentName", traits: {"smithy.api#length" => {"max" => 256}, "smithy.api#sensitive" => {}})
+    AutomatedReasoningPolicyBuildFeedback = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyBuildFeedback", name: "AutomatedReasoningPolicyBuildFeedback", traits: {"smithy.api#length" => {"max" => 4000}, "smithy.api#sensitive" => {}})
     AutomatedReasoningPolicyBuildLog = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyBuildLog", name: "AutomatedReasoningPolicyBuildLog")
     AutomatedReasoningPolicyBuildLogEntry = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyBuildLogEntry", name: "AutomatedReasoningPolicyBuildLogEntry")
     AutomatedReasoningPolicyBuildLogEntryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyBuildLogEntryList", name: "AutomatedReasoningPolicyBuildLogEntryList")
     AutomatedReasoningPolicyBuildMessageType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyBuildMessageType", name: "AutomatedReasoningPolicyBuildMessageType")
+    AutomatedReasoningPolicyBuildResultAssetId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyBuildResultAssetId", name: "AutomatedReasoningPolicyBuildResultAssetId", traits: {"smithy.api#length" => {"max" => 36}, "smithy.api#pattern" => "^[0-9a-fA-F\\-]+$"})
+    AutomatedReasoningPolicyBuildResultAssetManifest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyBuildResultAssetManifest", name: "AutomatedReasoningPolicyBuildResultAssetManifest")
+    AutomatedReasoningPolicyBuildResultAssetManifestEntry = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyBuildResultAssetManifestEntry", name: "AutomatedReasoningPolicyBuildResultAssetManifestEntry")
+    AutomatedReasoningPolicyBuildResultAssetManifestList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyBuildResultAssetManifestList", name: "AutomatedReasoningPolicyBuildResultAssetManifestList")
+    AutomatedReasoningPolicyBuildResultAssetName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyBuildResultAssetName", name: "AutomatedReasoningPolicyBuildResultAssetName", traits: {"smithy.api#length" => {"max" => 256}, "smithy.api#sensitive" => {}})
     AutomatedReasoningPolicyBuildResultAssetType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyBuildResultAssetType", name: "AutomatedReasoningPolicyBuildResultAssetType")
     AutomatedReasoningPolicyBuildResultAssets = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyBuildResultAssets", name: "AutomatedReasoningPolicyBuildResultAssets")
     AutomatedReasoningPolicyBuildStep = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyBuildStep", name: "AutomatedReasoningPolicyBuildStep")
@@ -92,6 +121,7 @@ module Aws::Bedrock
     AutomatedReasoningPolicyBuildWorkflowSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyBuildWorkflowSummary", name: "AutomatedReasoningPolicyBuildWorkflowSummary", traits: {"smithy.api#references" => [{"resource" => "com.amazonaws.bedrock#AutomatedReasoningPolicyResource"}]})
     AutomatedReasoningPolicyBuildWorkflowType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyBuildWorkflowType", name: "AutomatedReasoningPolicyBuildWorkflowType")
     AutomatedReasoningPolicyConflictedRuleIdList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyConflictedRuleIdList", name: "AutomatedReasoningPolicyConflictedRuleIdList", traits: {"smithy.api#length" => {"min" => 0, "max" => 500}})
+    AutomatedReasoningPolicyCoverageScore = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyCoverageScore", name: "AutomatedReasoningPolicyCoverageScore", traits: {"smithy.api#range" => {"min" => 0.0, "max" => 1.0}})
     AutomatedReasoningPolicyDefinition = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyDefinition", name: "AutomatedReasoningPolicyDefinition")
     AutomatedReasoningPolicyDefinitionElement = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyDefinitionElement", name: "AutomatedReasoningPolicyDefinitionElement")
     AutomatedReasoningPolicyDefinitionQualityReport = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyDefinitionQualityReport", name: "AutomatedReasoningPolicyDefinitionQualityReport")
@@ -104,18 +134,18 @@ module Aws::Bedrock
     AutomatedReasoningPolicyDefinitionType = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyDefinitionType", name: "AutomatedReasoningPolicyDefinitionType")
     AutomatedReasoningPolicyDefinitionTypeDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyDefinitionTypeDescription", name: "AutomatedReasoningPolicyDefinitionTypeDescription", traits: {"smithy.api#length" => {"max" => 1024}, "smithy.api#pattern" => "^[\\s\\S]+$", "smithy.api#sensitive" => {}})
     AutomatedReasoningPolicyDefinitionTypeList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyDefinitionTypeList", name: "AutomatedReasoningPolicyDefinitionTypeList", traits: {"smithy.api#length" => {"min" => 0, "max" => 150}})
-    AutomatedReasoningPolicyDefinitionTypeName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyDefinitionTypeName", name: "AutomatedReasoningPolicyDefinitionTypeName", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[A-Za-z][A-Za-z0-9_]*$", "smithy.api#sensitive" => {}})
+    AutomatedReasoningPolicyDefinitionTypeName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyDefinitionTypeName", name: "AutomatedReasoningPolicyDefinitionTypeName", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^\\p{L}[\\p{L}\\p{M}0-9_]*( [\\p{L}\\p{M}0-9_]+)*$", "smithy.api#sensitive" => {}})
     AutomatedReasoningPolicyDefinitionTypeNameList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyDefinitionTypeNameList", name: "AutomatedReasoningPolicyDefinitionTypeNameList", traits: {"smithy.api#length" => {"min" => 0, "max" => 150}})
     AutomatedReasoningPolicyDefinitionTypeValue = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyDefinitionTypeValue", name: "AutomatedReasoningPolicyDefinitionTypeValue")
     AutomatedReasoningPolicyDefinitionTypeValueDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyDefinitionTypeValueDescription", name: "AutomatedReasoningPolicyDefinitionTypeValueDescription", traits: {"smithy.api#length" => {"max" => 1024}, "smithy.api#pattern" => "^[\\s\\S]+$", "smithy.api#sensitive" => {}})
     AutomatedReasoningPolicyDefinitionTypeValueList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyDefinitionTypeValueList", name: "AutomatedReasoningPolicyDefinitionTypeValueList", traits: {"smithy.api#length" => {"min" => 1, "max" => 150}})
-    AutomatedReasoningPolicyDefinitionTypeValueName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyDefinitionTypeValueName", name: "AutomatedReasoningPolicyDefinitionTypeValueName", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[A-Za-z][A-Za-z0-9_]*$"})
+    AutomatedReasoningPolicyDefinitionTypeValueName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyDefinitionTypeValueName", name: "AutomatedReasoningPolicyDefinitionTypeValueName", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^\\p{L}[\\p{L}\\p{M}0-9_]*( [\\p{L}\\p{M}0-9_]+)*$"})
     AutomatedReasoningPolicyDefinitionTypeValuePair = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyDefinitionTypeValuePair", name: "AutomatedReasoningPolicyDefinitionTypeValuePair")
     AutomatedReasoningPolicyDefinitionTypeValuePairList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyDefinitionTypeValuePairList", name: "AutomatedReasoningPolicyDefinitionTypeValuePairList", traits: {"smithy.api#length" => {"min" => 1, "max" => 22500}})
     AutomatedReasoningPolicyDefinitionVariable = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyDefinitionVariable", name: "AutomatedReasoningPolicyDefinitionVariable")
     AutomatedReasoningPolicyDefinitionVariableDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyDefinitionVariableDescription", name: "AutomatedReasoningPolicyDefinitionVariableDescription", traits: {"smithy.api#length" => {"max" => 1024}, "smithy.api#pattern" => "^[\\s\\S]+$", "smithy.api#sensitive" => {}})
     AutomatedReasoningPolicyDefinitionVariableList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyDefinitionVariableList", name: "AutomatedReasoningPolicyDefinitionVariableList", traits: {"smithy.api#length" => {"min" => 0, "max" => 600}})
-    AutomatedReasoningPolicyDefinitionVariableName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyDefinitionVariableName", name: "AutomatedReasoningPolicyDefinitionVariableName", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[A-Za-z][A-Za-z0-9_]*$", "smithy.api#sensitive" => {}})
+    AutomatedReasoningPolicyDefinitionVariableName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyDefinitionVariableName", name: "AutomatedReasoningPolicyDefinitionVariableName", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^\\p{L}[\\p{L}\\p{M}0-9_]*( [\\p{L}\\p{M}0-9_]+)*$", "smithy.api#sensitive" => {}})
     AutomatedReasoningPolicyDefinitionVariableNameList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyDefinitionVariableNameList", name: "AutomatedReasoningPolicyDefinitionVariableNameList", traits: {"smithy.api#length" => {"min" => 0, "max" => 600}})
     AutomatedReasoningPolicyDeleteRuleAnnotation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyDeleteRuleAnnotation", name: "AutomatedReasoningPolicyDeleteRuleAnnotation")
     AutomatedReasoningPolicyDeleteRuleMutation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyDeleteRuleMutation", name: "AutomatedReasoningPolicyDeleteRuleMutation")
@@ -128,23 +158,49 @@ module Aws::Bedrock
     AutomatedReasoningPolicyDisjointRuleSet = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyDisjointRuleSet", name: "AutomatedReasoningPolicyDisjointRuleSet")
     AutomatedReasoningPolicyDisjointRuleSetList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyDisjointRuleSetList", name: "AutomatedReasoningPolicyDisjointRuleSetList")
     AutomatedReasoningPolicyDisjointedRuleIdList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyDisjointedRuleIdList", name: "AutomatedReasoningPolicyDisjointedRuleIdList", traits: {"smithy.api#length" => {"min" => 0, "max" => 500}})
+    AutomatedReasoningPolicyDocumentId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyDocumentId", name: "AutomatedReasoningPolicyDocumentId", traits: {"smithy.api#length" => {"max" => 8}, "smithy.api#pattern" => "^[a-zA-Z0-9]*$"})
+    AutomatedReasoningPolicyDocumentSha256 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyDocumentSha256", name: "AutomatedReasoningPolicyDocumentSha256", traits: {"smithy.api#length" => {"min" => 64, "max" => 64}})
+    AutomatedReasoningPolicyFidelityReport = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyFidelityReport", name: "AutomatedReasoningPolicyFidelityReport")
     AutomatedReasoningPolicyFormatVersion = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyFormatVersion", name: "AutomatedReasoningPolicyFormatVersion")
+    AutomatedReasoningPolicyGenerateFidelityReportContent = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyGenerateFidelityReportContent", name: "AutomatedReasoningPolicyGenerateFidelityReportContent")
+    AutomatedReasoningPolicyGenerateFidelityReportDocumentList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyGenerateFidelityReportDocumentList", name: "AutomatedReasoningPolicyGenerateFidelityReportDocumentList", traits: {"smithy.api#length" => {"min" => 0, "max" => 5}})
+    AutomatedReasoningPolicyGeneratedTestCase = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyGeneratedTestCase", name: "AutomatedReasoningPolicyGeneratedTestCase")
+    AutomatedReasoningPolicyGeneratedTestCaseList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyGeneratedTestCaseList", name: "AutomatedReasoningPolicyGeneratedTestCaseList")
+    AutomatedReasoningPolicyGeneratedTestCases = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyGeneratedTestCases", name: "AutomatedReasoningPolicyGeneratedTestCases")
     AutomatedReasoningPolicyHash = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyHash", name: "AutomatedReasoningPolicyHash", traits: {"smithy.api#length" => {"min" => 128, "max" => 128}, "smithy.api#pattern" => "^[0-9a-z]{128}$"})
     AutomatedReasoningPolicyId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyId", name: "AutomatedReasoningPolicyId", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#pattern" => "^[a-z0-9]{12}$"})
     AutomatedReasoningPolicyIngestContentAnnotation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyIngestContentAnnotation", name: "AutomatedReasoningPolicyIngestContentAnnotation")
+    AutomatedReasoningPolicyIterativeRefinementContent = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyIterativeRefinementContent", name: "AutomatedReasoningPolicyIterativeRefinementContent")
+    AutomatedReasoningPolicyIterativeRefinementDocumentList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyIterativeRefinementDocumentList", name: "AutomatedReasoningPolicyIterativeRefinementDocumentList", traits: {"smithy.api#length" => {"min" => 1, "max" => 5}})
+    AutomatedReasoningPolicyJustificationList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyJustificationList", name: "AutomatedReasoningPolicyJustificationList")
+    AutomatedReasoningPolicyJustificationText = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyJustificationText", name: "AutomatedReasoningPolicyJustificationText", traits: {"smithy.api#length" => {"max" => 1024}, "smithy.api#sensitive" => {}})
+    AutomatedReasoningPolicyLineNumberList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyLineNumberList", name: "AutomatedReasoningPolicyLineNumberList")
+    AutomatedReasoningPolicyLineText = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyLineText", name: "AutomatedReasoningPolicyLineText", traits: {"smithy.api#length" => {"max" => 256}, "smithy.api#sensitive" => {}})
     AutomatedReasoningPolicyMutation = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyMutation", name: "AutomatedReasoningPolicyMutation")
     AutomatedReasoningPolicyName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyName", name: "AutomatedReasoningPolicyName", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[0-9a-zA-Z-_ ]+$", "smithy.api#sensitive" => {}})
     AutomatedReasoningPolicyPlanning = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyPlanning", name: "AutomatedReasoningPolicyPlanning")
+    AutomatedReasoningPolicyReportSourceDocument = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyReportSourceDocument", name: "AutomatedReasoningPolicyReportSourceDocument")
+    AutomatedReasoningPolicyReportSourceDocumentList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyReportSourceDocumentList", name: "AutomatedReasoningPolicyReportSourceDocumentList")
+    AutomatedReasoningPolicyRuleReport = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyRuleReport", name: "AutomatedReasoningPolicyRuleReport")
+    AutomatedReasoningPolicyRuleReportMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyRuleReportMap", name: "AutomatedReasoningPolicyRuleReportMap")
     AutomatedReasoningPolicyScenario = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyScenario", name: "AutomatedReasoningPolicyScenario")
     AutomatedReasoningPolicyScenarioAlternateExpression = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyScenarioAlternateExpression", name: "AutomatedReasoningPolicyScenarioAlternateExpression", traits: {"smithy.api#length" => {"max" => 1024}, "smithy.api#sensitive" => {}})
     AutomatedReasoningPolicyScenarioExpression = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyScenarioExpression", name: "AutomatedReasoningPolicyScenarioExpression", traits: {"smithy.api#length" => {"max" => 1024}, "smithy.api#sensitive" => {}})
+    AutomatedReasoningPolicyScenarioList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyScenarioList", name: "AutomatedReasoningPolicyScenarioList")
+    AutomatedReasoningPolicyScenarios = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyScenarios", name: "AutomatedReasoningPolicyScenarios")
+    AutomatedReasoningPolicySourceDocument = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicySourceDocument", name: "AutomatedReasoningPolicySourceDocument")
+    AutomatedReasoningPolicyStatementId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyStatementId", name: "AutomatedReasoningPolicyStatementId", traits: {"smithy.api#length" => {"max" => 8}, "smithy.api#pattern" => "^[a-zA-Z0-9]*$"})
+    AutomatedReasoningPolicyStatementLocation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyStatementLocation", name: "AutomatedReasoningPolicyStatementLocation")
+    AutomatedReasoningPolicyStatementReference = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyStatementReference", name: "AutomatedReasoningPolicyStatementReference")
+    AutomatedReasoningPolicyStatementReferenceList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyStatementReferenceList", name: "AutomatedReasoningPolicyStatementReferenceList")
+    AutomatedReasoningPolicyStatementText = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyStatementText", name: "AutomatedReasoningPolicyStatementText", traits: {"smithy.api#length" => {"max" => 1024}, "smithy.api#sensitive" => {}})
     AutomatedReasoningPolicySummaries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicySummaries", name: "AutomatedReasoningPolicySummaries", traits: {"smithy.api#length" => {"min" => 0, "max" => 1000}})
     AutomatedReasoningPolicySummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicySummary", name: "AutomatedReasoningPolicySummary")
     AutomatedReasoningPolicyTestCase = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyTestCase", name: "AutomatedReasoningPolicyTestCase")
     AutomatedReasoningPolicyTestCaseId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyTestCaseId", name: "AutomatedReasoningPolicyTestCaseId", traits: {"smithy.api#length" => {"max" => 12}, "smithy.api#pattern" => "^[0-9A-Z]{12}$"})
     AutomatedReasoningPolicyTestCaseIdList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyTestCaseIdList", name: "AutomatedReasoningPolicyTestCaseIdList", traits: {"smithy.api#length" => {"min" => 1, "max" => 1}})
     AutomatedReasoningPolicyTestCaseList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyTestCaseList", name: "AutomatedReasoningPolicyTestCaseList", traits: {"smithy.api#length" => {"min" => 0, "max" => 1000}})
-    AutomatedReasoningPolicyTestGuardContent = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyTestGuardContent", name: "AutomatedReasoningPolicyTestGuardContent", traits: {"smithy.api#length" => {"max" => 1024}, "smithy.api#sensitive" => {}})
+    AutomatedReasoningPolicyTestGuardContent = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyTestGuardContent", name: "AutomatedReasoningPolicyTestGuardContent", traits: {"smithy.api#length" => {"max" => 2048}, "smithy.api#sensitive" => {}})
     AutomatedReasoningPolicyTestList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyTestList", name: "AutomatedReasoningPolicyTestList", traits: {"smithy.api#length" => {"min" => 0, "max" => 5000}})
     AutomatedReasoningPolicyTestQueryContent = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyTestQueryContent", name: "AutomatedReasoningPolicyTestQueryContent", traits: {"smithy.api#length" => {"max" => 1024}, "smithy.api#sensitive" => {}})
     AutomatedReasoningPolicyTestResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyTestResult", name: "AutomatedReasoningPolicyTestResult")
@@ -161,9 +217,17 @@ module Aws::Bedrock
     AutomatedReasoningPolicyUpdateTypeValue = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyUpdateTypeValue", name: "AutomatedReasoningPolicyUpdateTypeValue")
     AutomatedReasoningPolicyUpdateVariableAnnotation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyUpdateVariableAnnotation", name: "AutomatedReasoningPolicyUpdateVariableAnnotation")
     AutomatedReasoningPolicyUpdateVariableMutation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyUpdateVariableMutation", name: "AutomatedReasoningPolicyUpdateVariableMutation")
+    AutomatedReasoningPolicyVariableReport = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyVariableReport", name: "AutomatedReasoningPolicyVariableReport")
+    AutomatedReasoningPolicyVariableReportMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyVariableReportMap", name: "AutomatedReasoningPolicyVariableReportMap")
     AutomatedReasoningPolicyVersion = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyVersion", name: "AutomatedReasoningPolicyVersion", traits: {"smithy.api#length" => {"max" => 12}, "smithy.api#pattern" => "^([1-9][0-9]{0,11})$"})
     AutomatedReasoningPolicyWorkflowTypeContent = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.bedrock#AutomatedReasoningPolicyWorkflowTypeContent", name: "AutomatedReasoningPolicyWorkflowTypeContent")
     BaseModelIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#BaseModelIdentifier", name: "BaseModelIdentifier", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#pattern" => "^(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:(([0-9]{12}:custom-model/([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.]?[a-z0-9-]{1,63})([:][a-z0-9-]{1,63}){0,2})/[a-z0-9]{12})|(:foundation-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([:][a-z0-9-]{1,63}){0,2})))|([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.]?[a-z0-9-]{1,63})([:][a-z0-9-]{1,63}){0,2})|(([0-9a-zA-Z][_-]?)+)$"})
+    BatchDeleteAdvancedPromptOptimizationJobError = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#BatchDeleteAdvancedPromptOptimizationJobError", name: "BatchDeleteAdvancedPromptOptimizationJobError")
+    BatchDeleteAdvancedPromptOptimizationJobErrors = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrock#BatchDeleteAdvancedPromptOptimizationJobErrors", name: "BatchDeleteAdvancedPromptOptimizationJobErrors", traits: {"smithy.api#length" => {"min" => 0, "max" => 25}})
+    BatchDeleteAdvancedPromptOptimizationJobItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#BatchDeleteAdvancedPromptOptimizationJobItem", name: "BatchDeleteAdvancedPromptOptimizationJobItem")
+    BatchDeleteAdvancedPromptOptimizationJobItems = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrock#BatchDeleteAdvancedPromptOptimizationJobItems", name: "BatchDeleteAdvancedPromptOptimizationJobItems", traits: {"smithy.api#length" => {"min" => 0, "max" => 25}})
+    BatchDeleteAdvancedPromptOptimizationJobRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#BatchDeleteAdvancedPromptOptimizationJobRequest", name: "BatchDeleteAdvancedPromptOptimizationJobRequest")
+    BatchDeleteAdvancedPromptOptimizationJobResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#BatchDeleteAdvancedPromptOptimizationJobResponse", name: "BatchDeleteAdvancedPromptOptimizationJobResponse")
     BatchDeleteEvaluationJobError = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#BatchDeleteEvaluationJobError", name: "BatchDeleteEvaluationJobError")
     BatchDeleteEvaluationJobErrors = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrock#BatchDeleteEvaluationJobErrors", name: "BatchDeleteEvaluationJobErrors", traits: {"smithy.api#length" => {"min" => 0, "max" => 25}})
     BatchDeleteEvaluationJobItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#BatchDeleteEvaluationJobItem", name: "BatchDeleteEvaluationJobItem")
@@ -183,8 +247,11 @@ module Aws::Bedrock
     CancelAutomatedReasoningPolicyBuildWorkflowResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#CancelAutomatedReasoningPolicyBuildWorkflowResponse", name: "CancelAutomatedReasoningPolicyBuildWorkflowResponse")
     CloudWatchConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#CloudWatchConfig", name: "CloudWatchConfig")
     CommitmentDuration = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrock#CommitmentDuration", name: "CommitmentDuration")
+    ConfigurationOwner = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#ConfigurationOwner", name: "ConfigurationOwner", traits: {"smithy.api#enum" => [{"value" => "ACCOUNT", "name" => "ACCOUNT", "documentation" => "Configuration owned by the account"}]})
     ConflictException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#ConflictException", name: "ConflictException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     ContentType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#ContentType", name: "ContentType", traits: {"smithy.api#pattern" => "[a-z]{1,20}/.{1,20}"})
+    CreateAdvancedPromptOptimizationJobRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#CreateAdvancedPromptOptimizationJobRequest", name: "CreateAdvancedPromptOptimizationJobRequest")
+    CreateAdvancedPromptOptimizationJobResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#CreateAdvancedPromptOptimizationJobResponse", name: "CreateAdvancedPromptOptimizationJobResponse")
     CreateAutomatedReasoningPolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#CreateAutomatedReasoningPolicyRequest", name: "CreateAutomatedReasoningPolicyRequest")
     CreateAutomatedReasoningPolicyResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#CreateAutomatedReasoningPolicyResponse", name: "CreateAutomatedReasoningPolicyResponse")
     CreateAutomatedReasoningPolicyTestCaseRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#CreateAutomatedReasoningPolicyTestCaseRequest", name: "CreateAutomatedReasoningPolicyTestCaseRequest")
@@ -225,12 +292,15 @@ module Aws::Bedrock
     CustomMetricEvaluatorModelConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#CustomMetricEvaluatorModelConfig", name: "CustomMetricEvaluatorModelConfig")
     CustomMetricInstructions = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#CustomMetricInstructions", name: "CustomMetricInstructions", traits: {"smithy.api#length" => {"min" => 1, "max" => 5000}})
     CustomModelArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#CustomModelArn", name: "CustomModelArn", traits: {"smithy.api#length" => {"min" => 20, "max" => 1011}, "smithy.api#pattern" => "^arn:aws(|-us-gov|-cn|-iso|-iso-b):bedrock:[a-z0-9-]{1,20}:[0-9]{12}:custom-model/(imported|[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([a-z0-9-]{1,63}[.]){0,2}[a-z0-9-]{1,63}([:][a-z0-9-]{1,63}){0,2})/[a-z0-9]{12}$"})
+    CustomModelDataSource = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.bedrock#CustomModelDataSource", name: "CustomModelDataSource")
     CustomModelDeploymentArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#CustomModelDeploymentArn", name: "CustomModelDeploymentArn", traits: {"smithy.api#length" => {"max" => 1011}, "smithy.api#pattern" => "^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:custom-model-deployment/[a-z0-9]{12}$"})
     CustomModelDeploymentDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#CustomModelDeploymentDescription", name: "CustomModelDeploymentDescription", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#pattern" => "^.*$"})
     CustomModelDeploymentIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#CustomModelDeploymentIdentifier", name: "CustomModelDeploymentIdentifier", traits: {"smithy.api#length" => {"min" => 1, "max" => 93}, "smithy.api#pattern" => "^(arn:aws(|-us-gov|-cn|-iso|-iso-b):bedrock:[a-z0-9-]{1,20}:[0-9]{12}:custom-model-deployment/[a-z0-9]{12})|^([0-9a-zA-Z][_-]?){1,63}$"})
     CustomModelDeploymentStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrock#CustomModelDeploymentStatus", name: "CustomModelDeploymentStatus")
     CustomModelDeploymentSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#CustomModelDeploymentSummary", name: "CustomModelDeploymentSummary")
     CustomModelDeploymentSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrock#CustomModelDeploymentSummaryList", name: "CustomModelDeploymentSummaryList")
+    CustomModelDeploymentUpdateDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#CustomModelDeploymentUpdateDetails", name: "CustomModelDeploymentUpdateDetails")
+    CustomModelDeploymentUpdateStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrock#CustomModelDeploymentUpdateStatus", name: "CustomModelDeploymentUpdateStatus")
     CustomModelName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#CustomModelName", name: "CustomModelName", traits: {"smithy.api#length" => {"min" => 1, "max" => 63}, "smithy.api#pattern" => "^([0-9a-zA-Z][_-]?){1,63}$"})
     CustomModelSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#CustomModelSummary", name: "CustomModelSummary")
     CustomModelSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrock#CustomModelSummaryList", name: "CustomModelSummaryList")
@@ -239,6 +309,7 @@ module Aws::Bedrock
     CustomizationConfig = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.bedrock#CustomizationConfig", name: "CustomizationConfig")
     CustomizationType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrock#CustomizationType", name: "CustomizationType")
     DataProcessingDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#DataProcessingDetails", name: "DataProcessingDetails")
+    DataRetentionMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrock#DataRetentionMode", name: "DataRetentionMode")
     DeleteAutomatedReasoningPolicyBuildWorkflowRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#DeleteAutomatedReasoningPolicyBuildWorkflowRequest", name: "DeleteAutomatedReasoningPolicyBuildWorkflowRequest", traits: {"smithy.api#references" => [{"resource" => "com.amazonaws.bedrock#AutomatedReasoningPolicyResource"}]})
     DeleteAutomatedReasoningPolicyBuildWorkflowResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#DeleteAutomatedReasoningPolicyBuildWorkflowResponse", name: "DeleteAutomatedReasoningPolicyBuildWorkflowResponse")
     DeleteAutomatedReasoningPolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#DeleteAutomatedReasoningPolicyRequest", name: "DeleteAutomatedReasoningPolicyRequest")
@@ -249,6 +320,8 @@ module Aws::Bedrock
     DeleteCustomModelDeploymentResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#DeleteCustomModelDeploymentResponse", name: "DeleteCustomModelDeploymentResponse")
     DeleteCustomModelRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#DeleteCustomModelRequest", name: "DeleteCustomModelRequest")
     DeleteCustomModelResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#DeleteCustomModelResponse", name: "DeleteCustomModelResponse")
+    DeleteEnforcedGuardrailConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#DeleteEnforcedGuardrailConfigurationRequest", name: "DeleteEnforcedGuardrailConfigurationRequest")
+    DeleteEnforcedGuardrailConfigurationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#DeleteEnforcedGuardrailConfigurationResponse", name: "DeleteEnforcedGuardrailConfigurationResponse")
     DeleteFoundationModelAgreementRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#DeleteFoundationModelAgreementRequest", name: "DeleteFoundationModelAgreementRequest")
     DeleteFoundationModelAgreementResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#DeleteFoundationModelAgreementResponse", name: "DeleteFoundationModelAgreementResponse")
     DeleteGuardrailRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#DeleteGuardrailRequest", name: "DeleteGuardrailRequest")
@@ -265,6 +338,8 @@ module Aws::Bedrock
     DeletePromptRouterResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#DeletePromptRouterResponse", name: "DeletePromptRouterResponse")
     DeleteProvisionedModelThroughputRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#DeleteProvisionedModelThroughputRequest", name: "DeleteProvisionedModelThroughputRequest")
     DeleteProvisionedModelThroughputResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#DeleteProvisionedModelThroughputResponse", name: "DeleteProvisionedModelThroughputResponse")
+    DeleteResourcePolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#DeleteResourcePolicyRequest", name: "DeleteResourcePolicyRequest")
+    DeleteResourcePolicyResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#DeleteResourcePolicyResponse", name: "DeleteResourcePolicyResponse")
     DeregisterMarketplaceModelEndpointRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#DeregisterMarketplaceModelEndpointRequest", name: "DeregisterMarketplaceModelEndpointRequest")
     DeregisterMarketplaceModelEndpointResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#DeregisterMarketplaceModelEndpointResponse", name: "DeregisterMarketplaceModelEndpointResponse")
     DimensionalPriceRate = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#DimensionalPriceRate", name: "DimensionalPriceRate")
@@ -272,6 +347,7 @@ module Aws::Bedrock
     EndpointConfig = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.bedrock#EndpointConfig", name: "EndpointConfig")
     EndpointName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#EndpointName", name: "EndpointName", traits: {"smithy.api#length" => {"min" => 1, "max" => 30}})
     EntitlementAvailability = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrock#EntitlementAvailability", name: "EntitlementAvailability")
+    EpochCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.bedrock#EpochCount", name: "EpochCount", traits: {"smithy.api#range" => {"min" => 1, "max" => 50}})
     ErrorMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#ErrorMessage", name: "ErrorMessage", traits: {"smithy.api#length" => {"max" => 2048}})
     ErrorMessages = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrock#ErrorMessages", name: "ErrorMessages", traits: {"smithy.api#length" => {"max" => 20}})
     EvaluationBedrockKnowledgeBaseIdentifiers = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrock#EvaluationBedrockKnowledgeBaseIdentifiers", name: "EvaluationBedrockKnowledgeBaseIdentifiers", traits: {"smithy.api#length" => {"min" => 0, "max" => 1}})
@@ -318,6 +394,8 @@ module Aws::Bedrock
     EvaluatorModelConfig = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.bedrock#EvaluatorModelConfig", name: "EvaluatorModelConfig")
     EvaluatorModelIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#EvaluatorModelIdentifier", name: "EvaluatorModelIdentifier", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#pattern" => "^(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:((:foundation-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63}))|([0-9]{12}:inference-profile/(([a-z-]{2,8}.)[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63})))))$|(^[a-z0-9-]+[.][a-z0-9-]+([.][a-z0-9-]+)*(:[a-z0-9-]+)?$)|^[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([a-z0-9-]{1,63}[.]){0,2}[a-z0-9-]{1,63}([:][a-z0-9-]{1,63}){0,2}(/[a-z0-9]{12}|)$"})
     EvaluatorModelIdentifiers = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrock#EvaluatorModelIdentifiers", name: "EvaluatorModelIdentifiers", traits: {"smithy.api#length" => {"min" => 0, "max" => 1}})
+    ExcludedModelId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#ExcludedModelId", name: "ExcludedModelId", traits: {"smithy.api#pattern" => "^([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63})([:][a-z0-9-]{1,63}){0,2}(/[a-z0-9]{12}){0,1}$"})
+    ExcludedModelsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrock#ExcludedModelsList", name: "ExcludedModelsList", traits: {"smithy.api#length" => {"min" => 0}})
     ExportAutomatedReasoningPolicyVersionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#ExportAutomatedReasoningPolicyVersionRequest", name: "ExportAutomatedReasoningPolicyVersionRequest")
     ExportAutomatedReasoningPolicyVersionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#ExportAutomatedReasoningPolicyVersionResponse", name: "ExportAutomatedReasoningPolicyVersionResponse")
     ExternalSource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#ExternalSource", name: "ExternalSource")
@@ -338,6 +416,10 @@ module Aws::Bedrock
     FoundationModelSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#FoundationModelSummary", name: "FoundationModelSummary")
     FoundationModelSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrock#FoundationModelSummaryList", name: "FoundationModelSummaryList")
     GenerationConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#GenerationConfiguration", name: "GenerationConfiguration")
+    GetAccountDataRetentionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#GetAccountDataRetentionRequest", name: "GetAccountDataRetentionRequest")
+    GetAccountDataRetentionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#GetAccountDataRetentionResponse", name: "GetAccountDataRetentionResponse")
+    GetAdvancedPromptOptimizationJobRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#GetAdvancedPromptOptimizationJobRequest", name: "GetAdvancedPromptOptimizationJobRequest")
+    GetAdvancedPromptOptimizationJobResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#GetAdvancedPromptOptimizationJobResponse", name: "GetAdvancedPromptOptimizationJobResponse")
     GetAutomatedReasoningPolicyAnnotationsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#GetAutomatedReasoningPolicyAnnotationsRequest", name: "GetAutomatedReasoningPolicyAnnotationsRequest", traits: {"smithy.api#references" => [{"resource" => "com.amazonaws.bedrock#AutomatedReasoningPolicyResource"}]})
     GetAutomatedReasoningPolicyAnnotationsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#GetAutomatedReasoningPolicyAnnotationsResponse", name: "GetAutomatedReasoningPolicyAnnotationsResponse", traits: {"smithy.api#references" => [{"resource" => "com.amazonaws.bedrock#AutomatedReasoningPolicyResource"}]})
     GetAutomatedReasoningPolicyBuildWorkflowRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#GetAutomatedReasoningPolicyBuildWorkflowRequest", name: "GetAutomatedReasoningPolicyBuildWorkflowRequest", traits: {"smithy.api#references" => [{"resource" => "com.amazonaws.bedrock#AutomatedReasoningPolicyResource"}]})
@@ -385,8 +467,11 @@ module Aws::Bedrock
     GetPromptRouterResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#GetPromptRouterResponse", name: "GetPromptRouterResponse")
     GetProvisionedModelThroughputRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#GetProvisionedModelThroughputRequest", name: "GetProvisionedModelThroughputRequest")
     GetProvisionedModelThroughputResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#GetProvisionedModelThroughputResponse", name: "GetProvisionedModelThroughputResponse")
+    GetResourcePolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#GetResourcePolicyRequest", name: "GetResourcePolicyRequest")
+    GetResourcePolicyResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#GetResourcePolicyResponse", name: "GetResourcePolicyResponse")
     GetUseCaseForModelAccessRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#GetUseCaseForModelAccessRequest", name: "GetUseCaseForModelAccessRequest")
     GetUseCaseForModelAccessResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#GetUseCaseForModelAccessResponse", name: "GetUseCaseForModelAccessResponse")
+    GraderConfig = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.bedrock#GraderConfig", name: "GraderConfig")
     GuardrailArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#GuardrailArn", name: "GuardrailArn", traits: {"smithy.api#length" => {"max" => 2048}, "smithy.api#pattern" => "^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:guardrail/[a-z0-9]+$"})
     GuardrailAutomatedReasoningPolicy = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#GuardrailAutomatedReasoningPolicy", name: "GuardrailAutomatedReasoningPolicy")
     GuardrailAutomatedReasoningPolicyConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#GuardrailAutomatedReasoningPolicyConfig", name: "GuardrailAutomatedReasoningPolicyConfig")
@@ -485,6 +570,9 @@ module Aws::Bedrock
     ImportedModelName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#ImportedModelName", name: "ImportedModelName", traits: {"smithy.api#length" => {"min" => 1, "max" => 63}, "smithy.api#pattern" => "^([0-9a-zA-Z][_-]?)+$"})
     ImportedModelSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#ImportedModelSummary", name: "ImportedModelSummary")
     ImportedModelSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrock#ImportedModelSummaryList", name: "ImportedModelSummaryList")
+    IncludedModelId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#IncludedModelId", name: "IncludedModelId", traits: {"smithy.api#pattern" => "^(ALL|([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63})([:][a-z0-9-]{1,63}){0,2}(/[a-z0-9]{12}){0,1})$"})
+    IncludedModelsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrock#IncludedModelsList", name: "IncludedModelsList", traits: {"smithy.api#length" => {"min" => 1}})
+    InferenceConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#InferenceConfiguration", name: "InferenceConfiguration")
     InferenceProfileArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#InferenceProfileArn", name: "InferenceProfileArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#pattern" => "^arn:aws(|-us-gov|-cn|-iso|-iso-b):bedrock:(|[0-9a-z-]{0,20}):(|[0-9]{12}):(inference-profile|application-inference-profile)/[a-zA-Z0-9-:.]+$"})
     InferenceProfileDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#InferenceProfileDescription", name: "InferenceProfileDescription", traits: {"smithy.api#length" => {"min" => 1, "max" => 200}, "smithy.api#pattern" => "^([0-9a-zA-Z:.][ _-]?)+$", "smithy.api#sensitive" => {}})
     InferenceProfileId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#InferenceProfileId", name: "InferenceProfileId", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[a-zA-Z0-9-:.]+$"})
@@ -500,6 +588,7 @@ module Aws::Bedrock
     InferenceProfileType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrock#InferenceProfileType", name: "InferenceProfileType")
     InferenceType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrock#InferenceType", name: "InferenceType")
     InferenceTypeList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrock#InferenceTypeList", name: "InferenceTypeList")
+    InputTags = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrock#InputTags", name: "InputTags")
     InstanceCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.bedrock#InstanceCount", name: "InstanceCount", traits: {"smithy.api#range" => {"min" => 1}})
     InstanceType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#InstanceType", name: "InstanceType", traits: {"smithy.api#length" => {"min" => 1, "max" => 50}})
     InstructSupported = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.bedrock#InstructSupported", name: "InstructSupported")
@@ -517,7 +606,11 @@ module Aws::Bedrock
     KnowledgeBaseRetrievalConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#KnowledgeBaseRetrievalConfiguration", name: "KnowledgeBaseRetrievalConfiguration")
     KnowledgeBaseRetrieveAndGenerateConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#KnowledgeBaseRetrieveAndGenerateConfiguration", name: "KnowledgeBaseRetrieveAndGenerateConfiguration")
     KnowledgeBaseVectorSearchConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#KnowledgeBaseVectorSearchConfiguration", name: "KnowledgeBaseVectorSearchConfiguration")
+    LambdaArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#LambdaArn", name: "LambdaArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 512}, "smithy.api#pattern" => "^arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\\d{1}:\\d{12}:function:[a-zA-Z0-9-_\\.]+(:(\\$LATEST|[a-zA-Z0-9-_]+))?$"})
+    LambdaGraderConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#LambdaGraderConfig", name: "LambdaGraderConfig")
     LegalTerm = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#LegalTerm", name: "LegalTerm")
+    ListAdvancedPromptOptimizationJobsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#ListAdvancedPromptOptimizationJobsRequest", name: "ListAdvancedPromptOptimizationJobsRequest")
+    ListAdvancedPromptOptimizationJobsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#ListAdvancedPromptOptimizationJobsResponse", name: "ListAdvancedPromptOptimizationJobsResponse")
     ListAutomatedReasoningPoliciesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#ListAutomatedReasoningPoliciesRequest", name: "ListAutomatedReasoningPoliciesRequest")
     ListAutomatedReasoningPoliciesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#ListAutomatedReasoningPoliciesResponse", name: "ListAutomatedReasoningPoliciesResponse")
     ListAutomatedReasoningPolicyBuildWorkflowsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#ListAutomatedReasoningPolicyBuildWorkflowsRequest", name: "ListAutomatedReasoningPolicyBuildWorkflowsRequest", traits: {"smithy.api#references" => [{"resource" => "com.amazonaws.bedrock#AutomatedReasoningPolicyResource"}]})
@@ -530,6 +623,8 @@ module Aws::Bedrock
     ListCustomModelDeploymentsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#ListCustomModelDeploymentsResponse", name: "ListCustomModelDeploymentsResponse")
     ListCustomModelsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#ListCustomModelsRequest", name: "ListCustomModelsRequest")
     ListCustomModelsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#ListCustomModelsResponse", name: "ListCustomModelsResponse")
+    ListEnforcedGuardrailsConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#ListEnforcedGuardrailsConfigurationRequest", name: "ListEnforcedGuardrailsConfigurationRequest")
+    ListEnforcedGuardrailsConfigurationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#ListEnforcedGuardrailsConfigurationResponse", name: "ListEnforcedGuardrailsConfigurationResponse")
     ListEvaluationJobsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#ListEvaluationJobsRequest", name: "ListEvaluationJobsRequest")
     ListEvaluationJobsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#ListEvaluationJobsResponse", name: "ListEvaluationJobsResponse")
     ListFoundationModelAgreementOffersRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#ListFoundationModelAgreementOffersRequest", name: "ListFoundationModelAgreementOffersRequest")
@@ -573,6 +668,8 @@ module Aws::Bedrock
     MetricName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#MetricName", name: "MetricName", traits: {"smithy.api#length" => {"min" => 1, "max" => 63}, "smithy.api#pattern" => "^[0-9a-zA-Z-_.]+$", "smithy.api#sensitive" => {}})
     ModelArchitecture = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#ModelArchitecture", name: "ModelArchitecture")
     ModelArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#ModelArn", name: "ModelArn", traits: {"smithy.api#length" => {"min" => 20, "max" => 1011}, "smithy.api#pattern" => "^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:(([0-9]{12}:custom-model/((imported)|([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}))(([:][a-z0-9-]{1,63}){0,2})?/[a-z0-9]{12})|(:foundation-model/[a-z0-9-]{1,63}[.]{1}([a-z0-9-]{1,63}[.]){0,2}[a-z0-9-]{1,63}([:][a-z0-9-]{1,63}){0,2}))$"})
+    ModelConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#ModelConfiguration", name: "ModelConfiguration")
+    ModelConfigurations = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrock#ModelConfigurations", name: "ModelConfigurations", traits: {"smithy.api#length" => {"min" => 1, "max" => 5}})
     ModelCopyJobArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#ModelCopyJobArn", name: "ModelCopyJobArn", traits: {"smithy.api#length" => {"max" => 1011}, "smithy.api#pattern" => "^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:model-copy-job/[a-z0-9]{12}$"})
     ModelCopyJobStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrock#ModelCopyJobStatus", name: "ModelCopyJobStatus")
     ModelCopyJobSummaries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrock#ModelCopyJobSummaries", name: "ModelCopyJobSummaries")
@@ -587,6 +684,7 @@ module Aws::Bedrock
     ModelCustomizationList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrock#ModelCustomizationList", name: "ModelCustomizationList")
     ModelDataSource = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.bedrock#ModelDataSource", name: "ModelDataSource")
     ModelDeploymentName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#ModelDeploymentName", name: "ModelDeploymentName", traits: {"smithy.api#length" => {"min" => 1, "max" => 63}, "smithy.api#pattern" => "^([0-9a-zA-Z][_-]?){1,63}$"})
+    ModelEnforcement = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#ModelEnforcement", name: "ModelEnforcement")
     ModelId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#ModelId", name: "ModelId", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#pattern" => "^(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:(([0-9]{12}:custom-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-:]{1,63}/[a-z0-9]{12}$)|(:foundation-model/([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.]?[a-z0-9-]{1,63})([:][a-z0-9-]{1,63}){0,2})|(([0-9a-zA-Z][_-]?)+)$)|([0-9]{12}:(inference-profile|application-inference-profile)/[a-zA-Z0-9-:.]+$)))|([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.]?[a-z0-9-]{1,63})([:][a-z0-9-]{1,63}){0,2})|(([0-9a-zA-Z][_-]?)+)$"})
     ModelIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#ModelIdentifier", name: "ModelIdentifier", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#pattern" => "^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:(([0-9]{12}:custom-model/((imported)|([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}))(([:][a-z0-9-]{1,63}){0,2})?/[a-z0-9]{12})|(:foundation-model/([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.]?[a-z0-9-]{1,63})([:][a-z0-9-]{1,63}){0,2})))|(([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.]?[a-z0-9-]{1,63})([:][a-z0-9-]{1,63}){0,2}))|(([0-9a-zA-Z][_-]?)+)$"})
     ModelImportJobArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#ModelImportJobArn", name: "ModelImportJobArn", traits: {"smithy.api#length" => {"max" => 1011}, "smithy.api#pattern" => "^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:model-import-job/[a-z0-9]{12}$"})
@@ -606,12 +704,17 @@ module Aws::Bedrock
     ModelInvocationJobSummaries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrock#ModelInvocationJobSummaries", name: "ModelInvocationJobSummaries")
     ModelInvocationJobSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#ModelInvocationJobSummary", name: "ModelInvocationJobSummary")
     ModelInvocationJobTimeoutDurationInHours = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.bedrock#ModelInvocationJobTimeoutDurationInHours", name: "ModelInvocationJobTimeoutDurationInHours", traits: {"smithy.api#range" => {"min" => 24, "max" => 168}})
+    ModelInvocationType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrock#ModelInvocationType", name: "ModelInvocationType")
     ModelModality = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrock#ModelModality", name: "ModelModality")
     ModelModalityList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrock#ModelModalityList", name: "ModelModalityList")
     ModelName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#ModelName", name: "ModelName", traits: {"smithy.api#length" => {"min" => 1, "max" => 63}, "smithy.api#pattern" => "^([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63})$"})
+    ModelPackageArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#ModelPackageArn", name: "ModelPackageArn", traits: {"smithy.api#pattern" => "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]{9,16}:[0-9]{12}:model-package/[\\S]{1,2048}$"})
+    ModelPackageArnDataSource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#ModelPackageArnDataSource", name: "ModelPackageArnDataSource")
     ModelSourceIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#ModelSourceIdentifier", name: "ModelSourceIdentifier", traits: {"smithy.api#length" => {"max" => 2048}, "smithy.api#pattern" => "arn:aws:sagemaker:.*:hub-content/SageMakerPublicHub/Model/.*"})
     ModelStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrock#ModelStatus", name: "ModelStatus")
     NonBlankString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#NonBlankString", name: "NonBlankString", traits: {"smithy.api#pattern" => "^[\\s\\S]*$"})
+    NonEmptyStringList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrock#NonEmptyStringList", name: "NonEmptyStringList")
+    NonNegativeLong = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.bedrock#NonNegativeLong", name: "NonNegativeLong", traits: {"smithy.api#range" => {"min" => 0}})
     Offer = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#Offer", name: "Offer")
     OfferId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#OfferId", name: "OfferId")
     OfferToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#OfferToken", name: "OfferToken")
@@ -642,20 +745,35 @@ module Aws::Bedrock
     ProvisionedModelStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrock#ProvisionedModelStatus", name: "ProvisionedModelStatus")
     ProvisionedModelSummaries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrock#ProvisionedModelSummaries", name: "ProvisionedModelSummaries")
     ProvisionedModelSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#ProvisionedModelSummary", name: "ProvisionedModelSummary")
+    PutAccountDataRetentionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#PutAccountDataRetentionRequest", name: "PutAccountDataRetentionRequest")
+    PutAccountDataRetentionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#PutAccountDataRetentionResponse", name: "PutAccountDataRetentionResponse")
+    PutEnforcedGuardrailConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#PutEnforcedGuardrailConfigurationRequest", name: "PutEnforcedGuardrailConfigurationRequest")
+    PutEnforcedGuardrailConfigurationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#PutEnforcedGuardrailConfigurationResponse", name: "PutEnforcedGuardrailConfigurationResponse")
     PutModelInvocationLoggingConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#PutModelInvocationLoggingConfigurationRequest", name: "PutModelInvocationLoggingConfigurationRequest")
     PutModelInvocationLoggingConfigurationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#PutModelInvocationLoggingConfigurationResponse", name: "PutModelInvocationLoggingConfigurationResponse")
+    PutResourcePolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#PutResourcePolicyRequest", name: "PutResourcePolicyRequest")
+    PutResourcePolicyResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#PutResourcePolicyResponse", name: "PutResourcePolicyResponse")
     PutUseCaseForModelAccessRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#PutUseCaseForModelAccessRequest", name: "PutUseCaseForModelAccessRequest")
     PutUseCaseForModelAccessResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#PutUseCaseForModelAccessResponse", name: "PutUseCaseForModelAccessResponse")
     QueryTransformationConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#QueryTransformationConfiguration", name: "QueryTransformationConfiguration")
     QueryTransformationType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrock#QueryTransformationType", name: "QueryTransformationType")
     RAGConfig = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.bedrock#RAGConfig", name: "RAGConfig")
     RAGStopSequences = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrock#RAGStopSequences", name: "RAGStopSequences", traits: {"smithy.api#length" => {"min" => 0, "max" => 4}})
+    RFTBatchSize = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.bedrock#RFTBatchSize", name: "RFTBatchSize", traits: {"smithy.api#range" => {"min" => 16, "max" => 512}})
+    RFTConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#RFTConfig", name: "RFTConfig")
+    RFTEvalInterval = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.bedrock#RFTEvalInterval", name: "RFTEvalInterval", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}})
+    RFTHyperParameters = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#RFTHyperParameters", name: "RFTHyperParameters")
+    RFTInferenceMaxTokens = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.bedrock#RFTInferenceMaxTokens", name: "RFTInferenceMaxTokens")
+    RFTLearningRate = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.bedrock#RFTLearningRate", name: "RFTLearningRate", traits: {"smithy.api#range" => {"min" => 1.0e-07, "max" => 0.001}})
+    RFTMaxPromptLength = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.bedrock#RFTMaxPromptLength", name: "RFTMaxPromptLength")
+    RFTTrainingSamplePerPrompt = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.bedrock#RFTTrainingSamplePerPrompt", name: "RFTTrainingSamplePerPrompt", traits: {"smithy.api#range" => {"min" => 2, "max" => 16}})
     RagConfigs = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrock#RagConfigs", name: "RagConfigs", traits: {"smithy.api#length" => {"min" => 1, "max" => 1}})
     RateCard = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrock#RateCard", name: "RateCard")
     RatingScale = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrock#RatingScale", name: "RatingScale", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
     RatingScaleItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#RatingScaleItem", name: "RatingScaleItem")
     RatingScaleItemDefinition = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#RatingScaleItemDefinition", name: "RatingScaleItemDefinition", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
     RatingScaleItemValue = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.bedrock#RatingScaleItemValue", name: "RatingScaleItemValue")
+    ReasoningEffort = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrock#ReasoningEffort", name: "ReasoningEffort")
     RegionAvailability = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrock#RegionAvailability", name: "RegionAvailability")
     RegisterMarketplaceModelEndpointRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#RegisterMarketplaceModelEndpointRequest", name: "RegisterMarketplaceModelEndpointRequest")
     RegisterMarketplaceModelEndpointResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#RegisterMarketplaceModelEndpointResponse", name: "RegisterMarketplaceModelEndpointResponse")
@@ -667,6 +785,8 @@ module Aws::Bedrock
     RerankingMetadataSelectiveModeConfiguration = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.bedrock#RerankingMetadataSelectiveModeConfiguration", name: "RerankingMetadataSelectiveModeConfiguration")
     ResourceInUseException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#ResourceInUseException", name: "ResourceInUseException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     ResourceNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#ResourceNotFoundException", name: "ResourceNotFoundException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 404})
+    ResourcePolicyDocument = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#ResourcePolicyDocument", name: "ResourcePolicyDocument", traits: {"smithy.api#length" => {"min" => 1, "max" => 20480}, "smithy.api#pattern" => "^[\t\n\r -ÿ]+$"})
+    ResourcePolicyResourceArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#ResourcePolicyResourceArn", name: "ResourcePolicyResourceArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}})
     RetrievalFilter = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.bedrock#RetrievalFilter", name: "RetrievalFilter", traits: {"smithy.api#sensitive" => {}})
     RetrievalFilterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrock#RetrievalFilterList", name: "RetrievalFilterList", traits: {"smithy.api#length" => {"min" => 2}})
     RetrieveAndGenerateConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#RetrieveAndGenerateConfiguration", name: "RetrieveAndGenerateConfiguration")
@@ -679,11 +799,14 @@ module Aws::Bedrock
     S3InputFormat = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrock#S3InputFormat", name: "S3InputFormat")
     S3ObjectDoc = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#S3ObjectDoc", name: "S3ObjectDoc")
     S3Uri = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#S3Uri", name: "S3Uri", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => "^s3://[a-z0-9][-.a-z0-9]{1,61}[a-z0-9](?:/[-!_*'().a-z0-9A-Z]+(?:/[-!_*'().a-z0-9A-Z]+)*)?/?$"})
+    S3UriFolder = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#S3UriFolder", name: "S3UriFolder", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => "^s3://[a-z0-9][-.a-z0-9]{1,61}[a-z0-9](?:/[-!_*'().a-z0-9A-Z]+(?:/[-!_*'().a-z0-9A-Z]+)*)?/$"})
     SageMakerEndpoint = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#SageMakerEndpoint", name: "SageMakerEndpoint")
     SageMakerFlowDefinitionArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#SageMakerFlowDefinitionArn", name: "SageMakerFlowDefinitionArn", traits: {"smithy.api#length" => {"max" => 1024}, "smithy.api#pattern" => "^arn:aws(-[^:]+)?:sagemaker:[a-z0-9-]{1,20}:[0-9]{12}:flow-definition/.*$"})
     SearchType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrock#SearchType", name: "SearchType")
     SecurityGroupId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrock#SecurityGroupId", name: "SecurityGroupId", traits: {"smithy.api#length" => {"max" => 32}, "smithy.api#pattern" => "^[-0-9a-zA-Z]+$"})
     SecurityGroupIds = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrock#SecurityGroupIds", name: "SecurityGroupIds", traits: {"smithy.api#length" => {"min" => 1, "max" => 5}})
+    SelectiveContentGuarding = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#SelectiveContentGuarding", name: "SelectiveContentGuarding")
+    SelectiveGuardingMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrock#SelectiveGuardingMode", name: "SelectiveGuardingMode")
     ServiceQuotaExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#ServiceQuotaExceededException", name: "ServiceQuotaExceededException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     ServiceUnavailableException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#ServiceUnavailableException", name: "ServiceUnavailableException", traits: {"smithy.api#error" => "server", "smithy.api#httpError" => 503})
     SortByProvisionedModels = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrock#SortByProvisionedModels", name: "SortByProvisionedModels")
@@ -696,6 +819,8 @@ module Aws::Bedrock
     StartAutomatedReasoningPolicyTestWorkflowResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#StartAutomatedReasoningPolicyTestWorkflowResponse", name: "StartAutomatedReasoningPolicyTestWorkflowResponse")
     Status = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrock#Status", name: "Status")
     StatusDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#StatusDetails", name: "StatusDetails")
+    StopAdvancedPromptOptimizationJobRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#StopAdvancedPromptOptimizationJobRequest", name: "StopAdvancedPromptOptimizationJobRequest")
+    StopAdvancedPromptOptimizationJobResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#StopAdvancedPromptOptimizationJobResponse", name: "StopAdvancedPromptOptimizationJobResponse")
     StopEvaluationJobRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#StopEvaluationJobRequest", name: "StopEvaluationJobRequest")
     StopEvaluationJobResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#StopEvaluationJobResponse", name: "StopEvaluationJobResponse")
     StopModelCustomizationJobRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#StopModelCustomizationJobRequest", name: "StopModelCustomizationJobRequest")
@@ -734,6 +859,8 @@ module Aws::Bedrock
     UpdateAutomatedReasoningPolicyResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#UpdateAutomatedReasoningPolicyResponse", name: "UpdateAutomatedReasoningPolicyResponse")
     UpdateAutomatedReasoningPolicyTestCaseRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#UpdateAutomatedReasoningPolicyTestCaseRequest", name: "UpdateAutomatedReasoningPolicyTestCaseRequest")
     UpdateAutomatedReasoningPolicyTestCaseResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#UpdateAutomatedReasoningPolicyTestCaseResponse", name: "UpdateAutomatedReasoningPolicyTestCaseResponse")
+    UpdateCustomModelDeploymentRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#UpdateCustomModelDeploymentRequest", name: "UpdateCustomModelDeploymentRequest")
+    UpdateCustomModelDeploymentResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#UpdateCustomModelDeploymentResponse", name: "UpdateCustomModelDeploymentResponse")
     UpdateGuardrailRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#UpdateGuardrailRequest", name: "UpdateGuardrailRequest")
     UpdateGuardrailResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#UpdateGuardrailResponse", name: "UpdateGuardrailResponse")
     UpdateMarketplaceModelEndpointRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrock#UpdateMarketplaceModelEndpointRequest", name: "UpdateMarketplaceModelEndpointRequest")
@@ -758,8 +885,46 @@ module Aws::Bedrock
 
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonBlankString, name: "message"))
     AccessDeniedException.type = Types::AccessDeniedException
+    AccountEnforcedGuardrailInferenceInputConfiguration.add_member(:guardrail_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailIdentifier, name: "guardrailIdentifier", traits: {"smithy.api#required" => {}}))
+    AccountEnforcedGuardrailInferenceInputConfiguration.add_member(:guardrail_version, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailNumericalVersion, name: "guardrailVersion", traits: {"smithy.api#required" => {}}))
+    AccountEnforcedGuardrailInferenceInputConfiguration.add_member(:selective_content_guarding, ::Smithy::Schema::Shapes::MemberShape.new(target: SelectiveContentGuarding, name: "selectiveContentGuarding"))
+    AccountEnforcedGuardrailInferenceInputConfiguration.add_member(:model_enforcement, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelEnforcement, name: "modelEnforcement"))
+    AccountEnforcedGuardrailInferenceInputConfiguration.type = Types::AccountEnforcedGuardrailInferenceInputConfiguration
+    AccountEnforcedGuardrailOutputConfiguration.add_member(:config_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountEnforcedGuardrailConfigurationId, name: "configId"))
+    AccountEnforcedGuardrailOutputConfiguration.add_member(:guardrail_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailArn, name: "guardrailArn"))
+    AccountEnforcedGuardrailOutputConfiguration.add_member(:guardrail_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailId, name: "guardrailId"))
+    AccountEnforcedGuardrailOutputConfiguration.add_member(:input_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: InputTags, name: "inputTags", traits: {"smithy.api#deprecated" => {"message" => "This field is being deprecated and will be removed once customers transition their existing policies to the new schema.", "since" => "2026-04-03"}}))
+    AccountEnforcedGuardrailOutputConfiguration.add_member(:selective_content_guarding, ::Smithy::Schema::Shapes::MemberShape.new(target: SelectiveContentGuarding, name: "selectiveContentGuarding"))
+    AccountEnforcedGuardrailOutputConfiguration.add_member(:guardrail_version, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailNumericalVersion, name: "guardrailVersion"))
+    AccountEnforcedGuardrailOutputConfiguration.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "createdAt"))
+    AccountEnforcedGuardrailOutputConfiguration.add_member(:created_by, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "createdBy"))
+    AccountEnforcedGuardrailOutputConfiguration.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "updatedAt"))
+    AccountEnforcedGuardrailOutputConfiguration.add_member(:updated_by, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "updatedBy"))
+    AccountEnforcedGuardrailOutputConfiguration.add_member(:owner, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationOwner, name: "owner"))
+    AccountEnforcedGuardrailOutputConfiguration.add_member(:model_enforcement, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelEnforcement, name: "modelEnforcement"))
+    AccountEnforcedGuardrailOutputConfiguration.type = Types::AccountEnforcedGuardrailOutputConfiguration
+    AccountEnforcedGuardrailsOutputConfiguration.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountEnforcedGuardrailOutputConfiguration, name: "member"))
     AdditionalModelRequestFields.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalModelRequestFieldsKey, name: "key"))
     AdditionalModelRequestFields.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalModelRequestFieldsValue, name: "value"))
+    AdvancedPromptOptimizationInputConfig.add_member(:s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, name: "s3Uri", traits: {"smithy.api#required" => {}}))
+    AdvancedPromptOptimizationInputConfig.type = Types::AdvancedPromptOptimizationInputConfig
+    AdvancedPromptOptimizationJobIdentifiers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AdvancedPromptOptimizationJobIdentifier, name: "member"))
+    AdvancedPromptOptimizationJobStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "InProgress"}))
+    AdvancedPromptOptimizationJobStatus.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED", traits: {"smithy.api#enumValue" => "Completed"}))
+    AdvancedPromptOptimizationJobStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "Failed"}))
+    AdvancedPromptOptimizationJobStatus.add_member(:partially_completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PARTIALLY_COMPLETED", traits: {"smithy.api#enumValue" => "PartiallyCompleted"}))
+    AdvancedPromptOptimizationJobStatus.add_member(:stopping, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STOPPING", traits: {"smithy.api#enumValue" => "Stopping"}))
+    AdvancedPromptOptimizationJobStatus.add_member(:stopped, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STOPPED", traits: {"smithy.api#enumValue" => "Stopped"}))
+    AdvancedPromptOptimizationJobStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "Deleting"}))
+    AdvancedPromptOptimizationJobSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AdvancedPromptOptimizationJobSummary, name: "member"))
+    AdvancedPromptOptimizationJobSummary.add_member(:job_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AdvancedPromptOptimizationJobArn, name: "jobArn", traits: {"smithy.api#required" => {}}))
+    AdvancedPromptOptimizationJobSummary.add_member(:job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AdvancedPromptOptimizationJobName, name: "jobName", traits: {"smithy.api#required" => {}}))
+    AdvancedPromptOptimizationJobSummary.add_member(:job_status, ::Smithy::Schema::Shapes::MemberShape.new(target: AdvancedPromptOptimizationJobStatus, name: "jobStatus", traits: {"smithy.api#required" => {}}))
+    AdvancedPromptOptimizationJobSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "creationTime", traits: {"smithy.api#required" => {}}))
+    AdvancedPromptOptimizationJobSummary.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastModifiedTime"))
+    AdvancedPromptOptimizationJobSummary.type = Types::AdvancedPromptOptimizationJobSummary
+    AdvancedPromptOptimizationOutputConfig.add_member(:s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3UriFolder, name: "s3Uri", traits: {"smithy.api#required" => {}}))
+    AdvancedPromptOptimizationOutputConfig.type = Types::AdvancedPromptOptimizationOutputConfig
     AgreementAvailability.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: AgreementStatus, name: "status", traits: {"smithy.api#required" => {}}))
     AgreementAvailability.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "errorMessage"))
     AgreementAvailability.type = Types::AgreementAvailability
@@ -877,6 +1042,17 @@ module Aws::Bedrock
     AutomatedReasoningPolicyAddVariableAnnotation.type = Types::AutomatedReasoningPolicyAddVariableAnnotation
     AutomatedReasoningPolicyAddVariableMutation.add_member(:variable, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyDefinitionVariable, name: "variable", traits: {"smithy.api#required" => {}}))
     AutomatedReasoningPolicyAddVariableMutation.type = Types::AutomatedReasoningPolicyAddVariableMutation
+    AutomatedReasoningPolicyAnnotatedChunk.add_member(:page_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "pageNumber"))
+    AutomatedReasoningPolicyAnnotatedChunk.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyAnnotatedContentList, name: "content", traits: {"smithy.api#required" => {}}))
+    AutomatedReasoningPolicyAnnotatedChunk.type = Types::AutomatedReasoningPolicyAnnotatedChunk
+    AutomatedReasoningPolicyAnnotatedChunkList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyAnnotatedChunk, name: "member"))
+    AutomatedReasoningPolicyAnnotatedContent.add_member(:line, Types::AutomatedReasoningPolicyAnnotatedContent::Line, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyAnnotatedLine, name: "line"))
+    AutomatedReasoningPolicyAnnotatedContent.add_member(:unknown, Types::AutomatedReasoningPolicyAnnotatedContent::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    AutomatedReasoningPolicyAnnotatedContent.type = Types::AutomatedReasoningPolicyAnnotatedContent
+    AutomatedReasoningPolicyAnnotatedContentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyAnnotatedContent, name: "member"))
+    AutomatedReasoningPolicyAnnotatedLine.add_member(:line_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "lineNumber"))
+    AutomatedReasoningPolicyAnnotatedLine.add_member(:line_text, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyLineText, name: "lineText"))
+    AutomatedReasoningPolicyAnnotatedLine.type = Types::AutomatedReasoningPolicyAnnotatedLine
     AutomatedReasoningPolicyAnnotation.add_member(:add_type, Types::AutomatedReasoningPolicyAnnotation::AddType, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyAddTypeAnnotation, name: "addType"))
     AutomatedReasoningPolicyAnnotation.add_member(:update_type, Types::AutomatedReasoningPolicyAnnotation::UpdateType, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyUpdateTypeAnnotation, name: "updateType"))
     AutomatedReasoningPolicyAnnotation.add_member(:delete_type, Types::AutomatedReasoningPolicyAnnotation::DeleteType, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyDeleteTypeAnnotation, name: "deleteType"))
@@ -896,6 +1072,11 @@ module Aws::Bedrock
     AutomatedReasoningPolicyAnnotationStatus.add_member(:applied, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "APPLIED", traits: {"smithy.api#enumValue" => "APPLIED"}))
     AutomatedReasoningPolicyAnnotationStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
     AutomatedReasoningPolicyArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyArn, name: "member"))
+    AutomatedReasoningPolicyAtomicStatement.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyStatementId, name: "id", traits: {"smithy.api#required" => {}}))
+    AutomatedReasoningPolicyAtomicStatement.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyStatementText, name: "text", traits: {"smithy.api#required" => {}}))
+    AutomatedReasoningPolicyAtomicStatement.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyStatementLocation, name: "location", traits: {"smithy.api#required" => {}}))
+    AutomatedReasoningPolicyAtomicStatement.type = Types::AutomatedReasoningPolicyAtomicStatement
+    AutomatedReasoningPolicyAtomicStatementList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyAtomicStatement, name: "member"))
     AutomatedReasoningPolicyBuildDocumentContentType.add_member(:pdf, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PDF", traits: {"smithy.api#enumValue" => "pdf"}))
     AutomatedReasoningPolicyBuildDocumentContentType.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TEXT", traits: {"smithy.api#enumValue" => "txt"}))
     AutomatedReasoningPolicyBuildLog.add_member(:entries, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyBuildLogEntryList, name: "entries", traits: {"smithy.api#required" => {}}))
@@ -908,12 +1089,29 @@ module Aws::Bedrock
     AutomatedReasoningPolicyBuildMessageType.add_member(:info, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INFO", traits: {"smithy.api#enumValue" => "INFO"}))
     AutomatedReasoningPolicyBuildMessageType.add_member(:warning, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WARNING", traits: {"smithy.api#enumValue" => "WARNING"}))
     AutomatedReasoningPolicyBuildMessageType.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ERROR", traits: {"smithy.api#enumValue" => "ERROR"}))
+    AutomatedReasoningPolicyBuildResultAssetManifest.add_member(:entries, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyBuildResultAssetManifestList, name: "entries", traits: {"smithy.api#required" => {}}))
+    AutomatedReasoningPolicyBuildResultAssetManifest.type = Types::AutomatedReasoningPolicyBuildResultAssetManifest
+    AutomatedReasoningPolicyBuildResultAssetManifestEntry.add_member(:asset_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyBuildResultAssetType, name: "assetType", traits: {"smithy.api#required" => {}}))
+    AutomatedReasoningPolicyBuildResultAssetManifestEntry.add_member(:asset_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyBuildResultAssetName, name: "assetName"))
+    AutomatedReasoningPolicyBuildResultAssetManifestEntry.add_member(:asset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyBuildResultAssetId, name: "assetId"))
+    AutomatedReasoningPolicyBuildResultAssetManifestEntry.type = Types::AutomatedReasoningPolicyBuildResultAssetManifestEntry
+    AutomatedReasoningPolicyBuildResultAssetManifestList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyBuildResultAssetManifestEntry, name: "member"))
     AutomatedReasoningPolicyBuildResultAssetType.add_member(:build_log, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BUILD_LOG", traits: {"smithy.api#enumValue" => "BUILD_LOG"}))
     AutomatedReasoningPolicyBuildResultAssetType.add_member(:quality_report, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "QUALITY_REPORT", traits: {"smithy.api#enumValue" => "QUALITY_REPORT"}))
     AutomatedReasoningPolicyBuildResultAssetType.add_member(:policy_definition, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POLICY_DEFINITION", traits: {"smithy.api#enumValue" => "POLICY_DEFINITION"}))
+    AutomatedReasoningPolicyBuildResultAssetType.add_member(:generated_test_cases, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GENERATED_TEST_CASES", traits: {"smithy.api#enumValue" => "GENERATED_TEST_CASES"}))
+    AutomatedReasoningPolicyBuildResultAssetType.add_member(:policy_scenarios, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POLICY_SCENARIOS", traits: {"smithy.api#enumValue" => "POLICY_SCENARIOS"}))
+    AutomatedReasoningPolicyBuildResultAssetType.add_member(:fidelity_report, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FIDELITY_REPORT", traits: {"smithy.api#enumValue" => "FIDELITY_REPORT"}))
+    AutomatedReasoningPolicyBuildResultAssetType.add_member(:asset_manifest, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ASSET_MANIFEST", traits: {"smithy.api#enumValue" => "ASSET_MANIFEST"}))
+    AutomatedReasoningPolicyBuildResultAssetType.add_member(:source_document, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SOURCE_DOCUMENT", traits: {"smithy.api#enumValue" => "SOURCE_DOCUMENT"}))
     AutomatedReasoningPolicyBuildResultAssets.add_member(:policy_definition, Types::AutomatedReasoningPolicyBuildResultAssets::PolicyDefinition, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyDefinition, name: "policyDefinition"))
     AutomatedReasoningPolicyBuildResultAssets.add_member(:quality_report, Types::AutomatedReasoningPolicyBuildResultAssets::QualityReport, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyDefinitionQualityReport, name: "qualityReport"))
     AutomatedReasoningPolicyBuildResultAssets.add_member(:build_log, Types::AutomatedReasoningPolicyBuildResultAssets::BuildLog, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyBuildLog, name: "buildLog"))
+    AutomatedReasoningPolicyBuildResultAssets.add_member(:generated_test_cases, Types::AutomatedReasoningPolicyBuildResultAssets::GeneratedTestCases, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyGeneratedTestCases, name: "generatedTestCases"))
+    AutomatedReasoningPolicyBuildResultAssets.add_member(:policy_scenarios, Types::AutomatedReasoningPolicyBuildResultAssets::PolicyScenarios, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyScenarios, name: "policyScenarios"))
+    AutomatedReasoningPolicyBuildResultAssets.add_member(:asset_manifest, Types::AutomatedReasoningPolicyBuildResultAssets::AssetManifest, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyBuildResultAssetManifest, name: "assetManifest"))
+    AutomatedReasoningPolicyBuildResultAssets.add_member(:document, Types::AutomatedReasoningPolicyBuildResultAssets::Document, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicySourceDocument, name: "document"))
+    AutomatedReasoningPolicyBuildResultAssets.add_member(:fidelity_report, Types::AutomatedReasoningPolicyBuildResultAssets::FidelityReport, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyFidelityReport, name: "fidelityReport"))
     AutomatedReasoningPolicyBuildResultAssets.add_member(:unknown, Types::AutomatedReasoningPolicyBuildResultAssets::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     AutomatedReasoningPolicyBuildResultAssets.type = Types::AutomatedReasoningPolicyBuildResultAssets
     AutomatedReasoningPolicyBuildStep.add_member(:context, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyBuildStepContext, name: "context", traits: {"smithy.api#required" => {}}))
@@ -959,6 +1157,10 @@ module Aws::Bedrock
     AutomatedReasoningPolicyBuildWorkflowType.add_member(:ingest_content, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INGEST_CONTENT", traits: {"smithy.api#enumValue" => "INGEST_CONTENT"}))
     AutomatedReasoningPolicyBuildWorkflowType.add_member(:refine_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REFINE_POLICY", traits: {"smithy.api#enumValue" => "REFINE_POLICY"}))
     AutomatedReasoningPolicyBuildWorkflowType.add_member(:import_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IMPORT_POLICY", traits: {"smithy.api#enumValue" => "IMPORT_POLICY"}))
+    AutomatedReasoningPolicyBuildWorkflowType.add_member(:generate_fidelity_report, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GENERATE_FIDELITY_REPORT", traits: {"smithy.api#enumValue" => "GENERATE_FIDELITY_REPORT"}))
+    AutomatedReasoningPolicyBuildWorkflowType.add_member(:generate_policy_scenarios, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GENERATE_POLICY_SCENARIOS", traits: {"smithy.api#enumValue" => "GENERATE_POLICY_SCENARIOS"}))
+    AutomatedReasoningPolicyBuildWorkflowType.add_member(:resolve_policy_ambiguities, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOLVE_POLICY_AMBIGUITIES", traits: {"smithy.api#enumValue" => "RESOLVE_POLICY_AMBIGUITIES"}))
+    AutomatedReasoningPolicyBuildWorkflowType.add_member(:iteratively_refine_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ITERATIVELY_REFINE_POLICY", traits: {"smithy.api#enumValue" => "ITERATIVELY_REFINE_POLICY"}))
     AutomatedReasoningPolicyConflictedRuleIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyDefinitionRuleId, name: "member"))
     AutomatedReasoningPolicyDefinition.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyFormatVersion, name: "version", traits: {"smithy.api#default" => "1"}))
     AutomatedReasoningPolicyDefinition.add_member(:types, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyDefinitionTypeList, name: "types"))
@@ -1024,8 +1226,31 @@ module Aws::Bedrock
     AutomatedReasoningPolicyDisjointRuleSet.type = Types::AutomatedReasoningPolicyDisjointRuleSet
     AutomatedReasoningPolicyDisjointRuleSetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyDisjointRuleSet, name: "member"))
     AutomatedReasoningPolicyDisjointedRuleIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyDefinitionRuleId, name: "member"))
+    AutomatedReasoningPolicyFidelityReport.add_member(:coverage_score, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyCoverageScore, name: "coverageScore", traits: {"smithy.api#required" => {}}))
+    AutomatedReasoningPolicyFidelityReport.add_member(:accuracy_score, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyAccuracyScore, name: "accuracyScore", traits: {"smithy.api#required" => {}}))
+    AutomatedReasoningPolicyFidelityReport.add_member(:rule_reports, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyRuleReportMap, name: "ruleReports", traits: {"smithy.api#required" => {}}))
+    AutomatedReasoningPolicyFidelityReport.add_member(:variable_reports, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyVariableReportMap, name: "variableReports", traits: {"smithy.api#required" => {}}))
+    AutomatedReasoningPolicyFidelityReport.add_member(:document_sources, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyReportSourceDocumentList, name: "documentSources", traits: {"smithy.api#required" => {}}))
+    AutomatedReasoningPolicyFidelityReport.type = Types::AutomatedReasoningPolicyFidelityReport
+    AutomatedReasoningPolicyGenerateFidelityReportContent.add_member(:documents, Types::AutomatedReasoningPolicyGenerateFidelityReportContent::Documents, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyGenerateFidelityReportDocumentList, name: "documents"))
+    AutomatedReasoningPolicyGenerateFidelityReportContent.add_member(:unknown, Types::AutomatedReasoningPolicyGenerateFidelityReportContent::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    AutomatedReasoningPolicyGenerateFidelityReportContent.type = Types::AutomatedReasoningPolicyGenerateFidelityReportContent
+    AutomatedReasoningPolicyGenerateFidelityReportDocumentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyBuildWorkflowDocument, name: "member"))
+    AutomatedReasoningPolicyGeneratedTestCase.add_member(:query_content, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyTestQueryContent, name: "queryContent", traits: {"smithy.api#required" => {}}))
+    AutomatedReasoningPolicyGeneratedTestCase.add_member(:guard_content, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyTestGuardContent, name: "guardContent", traits: {"smithy.api#required" => {}}))
+    AutomatedReasoningPolicyGeneratedTestCase.add_member(:expected_aggregated_findings_result, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningCheckResult, name: "expectedAggregatedFindingsResult", traits: {"smithy.api#required" => {}}))
+    AutomatedReasoningPolicyGeneratedTestCase.type = Types::AutomatedReasoningPolicyGeneratedTestCase
+    AutomatedReasoningPolicyGeneratedTestCaseList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyGeneratedTestCase, name: "member"))
+    AutomatedReasoningPolicyGeneratedTestCases.add_member(:generated_test_cases, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyGeneratedTestCaseList, name: "generatedTestCases", traits: {"smithy.api#required" => {}}))
+    AutomatedReasoningPolicyGeneratedTestCases.type = Types::AutomatedReasoningPolicyGeneratedTestCases
     AutomatedReasoningPolicyIngestContentAnnotation.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyAnnotationIngestContent, name: "content", traits: {"smithy.api#required" => {}}))
     AutomatedReasoningPolicyIngestContentAnnotation.type = Types::AutomatedReasoningPolicyIngestContentAnnotation
+    AutomatedReasoningPolicyIterativeRefinementContent.add_member(:documents, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyIterativeRefinementDocumentList, name: "documents", traits: {"smithy.api#required" => {}}))
+    AutomatedReasoningPolicyIterativeRefinementContent.add_member(:feedback, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyBuildFeedback, name: "feedback"))
+    AutomatedReasoningPolicyIterativeRefinementContent.type = Types::AutomatedReasoningPolicyIterativeRefinementContent
+    AutomatedReasoningPolicyIterativeRefinementDocumentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyBuildWorkflowDocument, name: "member"))
+    AutomatedReasoningPolicyJustificationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyJustificationText, name: "member"))
+    AutomatedReasoningPolicyLineNumberList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "member"))
     AutomatedReasoningPolicyMutation.add_member(:add_type, Types::AutomatedReasoningPolicyMutation::AddType, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyAddTypeMutation, name: "addType"))
     AutomatedReasoningPolicyMutation.add_member(:update_type, Types::AutomatedReasoningPolicyMutation::UpdateType, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyUpdateTypeMutation, name: "updateType"))
     AutomatedReasoningPolicyMutation.add_member(:delete_type, Types::AutomatedReasoningPolicyMutation::DeleteType, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyDeleteTypeMutation, name: "deleteType"))
@@ -1038,11 +1263,41 @@ module Aws::Bedrock
     AutomatedReasoningPolicyMutation.add_member(:unknown, Types::AutomatedReasoningPolicyMutation::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     AutomatedReasoningPolicyMutation.type = Types::AutomatedReasoningPolicyMutation
     AutomatedReasoningPolicyPlanning.type = Types::AutomatedReasoningPolicyPlanning
+    AutomatedReasoningPolicyReportSourceDocument.add_member(:document_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyBuildDocumentName, name: "documentName", traits: {"smithy.api#required" => {}}))
+    AutomatedReasoningPolicyReportSourceDocument.add_member(:document_hash, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyDocumentSha256, name: "documentHash", traits: {"smithy.api#required" => {}}))
+    AutomatedReasoningPolicyReportSourceDocument.add_member(:document_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyDocumentId, name: "documentId", traits: {"smithy.api#required" => {}}))
+    AutomatedReasoningPolicyReportSourceDocument.add_member(:atomic_statements, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyAtomicStatementList, name: "atomicStatements", traits: {"smithy.api#required" => {}}))
+    AutomatedReasoningPolicyReportSourceDocument.add_member(:document_content, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyAnnotatedChunkList, name: "documentContent", traits: {"smithy.api#required" => {}}))
+    AutomatedReasoningPolicyReportSourceDocument.type = Types::AutomatedReasoningPolicyReportSourceDocument
+    AutomatedReasoningPolicyReportSourceDocumentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyReportSourceDocument, name: "member"))
+    AutomatedReasoningPolicyRuleReport.add_member(:rule, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyDefinitionRuleId, name: "rule", traits: {"smithy.api#required" => {}}))
+    AutomatedReasoningPolicyRuleReport.add_member(:grounding_statements, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyStatementReferenceList, name: "groundingStatements"))
+    AutomatedReasoningPolicyRuleReport.add_member(:grounding_justifications, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyJustificationList, name: "groundingJustifications"))
+    AutomatedReasoningPolicyRuleReport.add_member(:accuracy_score, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyAccuracyScore, name: "accuracyScore"))
+    AutomatedReasoningPolicyRuleReport.add_member(:accuracy_justification, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyJustificationText, name: "accuracyJustification"))
+    AutomatedReasoningPolicyRuleReport.type = Types::AutomatedReasoningPolicyRuleReport
+    AutomatedReasoningPolicyRuleReportMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyDefinitionRuleId, name: "key"))
+    AutomatedReasoningPolicyRuleReportMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyRuleReport, name: "value"))
     AutomatedReasoningPolicyScenario.add_member(:expression, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyScenarioExpression, name: "expression", traits: {"smithy.api#required" => {}}))
     AutomatedReasoningPolicyScenario.add_member(:alternate_expression, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyScenarioAlternateExpression, name: "alternateExpression", traits: {"smithy.api#required" => {}}))
-    AutomatedReasoningPolicyScenario.add_member(:rule_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyDefinitionRuleIdList, name: "ruleIds", traits: {"smithy.api#required" => {}}))
     AutomatedReasoningPolicyScenario.add_member(:expected_result, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningCheckResult, name: "expectedResult", traits: {"smithy.api#required" => {}}))
+    AutomatedReasoningPolicyScenario.add_member(:rule_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyDefinitionRuleIdList, name: "ruleIds", traits: {"smithy.api#required" => {}}))
     AutomatedReasoningPolicyScenario.type = Types::AutomatedReasoningPolicyScenario
+    AutomatedReasoningPolicyScenarioList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyScenario, name: "member"))
+    AutomatedReasoningPolicyScenarios.add_member(:policy_scenarios, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyScenarioList, name: "policyScenarios", traits: {"smithy.api#required" => {}}))
+    AutomatedReasoningPolicyScenarios.type = Types::AutomatedReasoningPolicyScenarios
+    AutomatedReasoningPolicySourceDocument.add_member(:document, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyBuildDocumentBlob, name: "document", traits: {"smithy.api#required" => {}}))
+    AutomatedReasoningPolicySourceDocument.add_member(:document_content_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyBuildDocumentContentType, name: "documentContentType", traits: {"smithy.api#required" => {}}))
+    AutomatedReasoningPolicySourceDocument.add_member(:document_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyBuildDocumentName, name: "documentName", traits: {"smithy.api#required" => {}}))
+    AutomatedReasoningPolicySourceDocument.add_member(:document_description, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyBuildDocumentDescription, name: "documentDescription"))
+    AutomatedReasoningPolicySourceDocument.add_member(:document_hash, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyDocumentSha256, name: "documentHash", traits: {"smithy.api#required" => {}}))
+    AutomatedReasoningPolicySourceDocument.type = Types::AutomatedReasoningPolicySourceDocument
+    AutomatedReasoningPolicyStatementLocation.add_member(:lines, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyLineNumberList, name: "lines", traits: {"smithy.api#required" => {}}))
+    AutomatedReasoningPolicyStatementLocation.type = Types::AutomatedReasoningPolicyStatementLocation
+    AutomatedReasoningPolicyStatementReference.add_member(:document_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyDocumentId, name: "documentId", traits: {"smithy.api#required" => {}}))
+    AutomatedReasoningPolicyStatementReference.add_member(:statement_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyStatementId, name: "statementId", traits: {"smithy.api#required" => {}}))
+    AutomatedReasoningPolicyStatementReference.type = Types::AutomatedReasoningPolicyStatementReference
+    AutomatedReasoningPolicyStatementReferenceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyStatementReference, name: "member"))
     AutomatedReasoningPolicySummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicySummary, name: "member"))
     AutomatedReasoningPolicySummary.add_member(:policy_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyArn, name: "policyArn", traits: {"smithy.api#required" => {}}))
     AutomatedReasoningPolicySummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyName, name: "name", traits: {"smithy.api#required" => {}}))
@@ -1113,10 +1368,34 @@ module Aws::Bedrock
     AutomatedReasoningPolicyUpdateVariableAnnotation.type = Types::AutomatedReasoningPolicyUpdateVariableAnnotation
     AutomatedReasoningPolicyUpdateVariableMutation.add_member(:variable, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyDefinitionVariable, name: "variable", traits: {"smithy.api#required" => {}}))
     AutomatedReasoningPolicyUpdateVariableMutation.type = Types::AutomatedReasoningPolicyUpdateVariableMutation
+    AutomatedReasoningPolicyVariableReport.add_member(:policy_variable, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyDefinitionVariableName, name: "policyVariable", traits: {"smithy.api#required" => {}}))
+    AutomatedReasoningPolicyVariableReport.add_member(:grounding_statements, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyStatementReferenceList, name: "groundingStatements"))
+    AutomatedReasoningPolicyVariableReport.add_member(:grounding_justifications, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyJustificationList, name: "groundingJustifications"))
+    AutomatedReasoningPolicyVariableReport.add_member(:accuracy_score, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyAccuracyScore, name: "accuracyScore"))
+    AutomatedReasoningPolicyVariableReport.add_member(:accuracy_justification, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyJustificationText, name: "accuracyJustification"))
+    AutomatedReasoningPolicyVariableReport.type = Types::AutomatedReasoningPolicyVariableReport
+    AutomatedReasoningPolicyVariableReportMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyDefinitionVariableName, name: "key"))
+    AutomatedReasoningPolicyVariableReportMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyVariableReport, name: "value"))
     AutomatedReasoningPolicyWorkflowTypeContent.add_member(:documents, Types::AutomatedReasoningPolicyWorkflowTypeContent::Documents, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyBuildWorkflowDocumentList, name: "documents"))
     AutomatedReasoningPolicyWorkflowTypeContent.add_member(:policy_repair_assets, Types::AutomatedReasoningPolicyWorkflowTypeContent::PolicyRepairAssets, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyBuildWorkflowRepairContent, name: "policyRepairAssets"))
+    AutomatedReasoningPolicyWorkflowTypeContent.add_member(:generate_fidelity_report_content, Types::AutomatedReasoningPolicyWorkflowTypeContent::GenerateFidelityReportContent, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyGenerateFidelityReportContent, name: "generateFidelityReportContent"))
+    AutomatedReasoningPolicyWorkflowTypeContent.add_member(:iterative_refinement_content, Types::AutomatedReasoningPolicyWorkflowTypeContent::IterativeRefinementContent, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyIterativeRefinementContent, name: "iterativeRefinementContent"))
     AutomatedReasoningPolicyWorkflowTypeContent.add_member(:unknown, Types::AutomatedReasoningPolicyWorkflowTypeContent::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     AutomatedReasoningPolicyWorkflowTypeContent.type = Types::AutomatedReasoningPolicyWorkflowTypeContent
+    BatchDeleteAdvancedPromptOptimizationJobError.add_member(:job_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: AdvancedPromptOptimizationJobIdentifier, name: "jobIdentifier", traits: {"smithy.api#required" => {}}))
+    BatchDeleteAdvancedPromptOptimizationJobError.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "code", traits: {"smithy.api#required" => {}}))
+    BatchDeleteAdvancedPromptOptimizationJobError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
+    BatchDeleteAdvancedPromptOptimizationJobError.type = Types::BatchDeleteAdvancedPromptOptimizationJobError
+    BatchDeleteAdvancedPromptOptimizationJobErrors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchDeleteAdvancedPromptOptimizationJobError, name: "member"))
+    BatchDeleteAdvancedPromptOptimizationJobItem.add_member(:job_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: AdvancedPromptOptimizationJobIdentifier, name: "jobIdentifier", traits: {"smithy.api#required" => {}}))
+    BatchDeleteAdvancedPromptOptimizationJobItem.add_member(:job_status, ::Smithy::Schema::Shapes::MemberShape.new(target: AdvancedPromptOptimizationJobStatus, name: "jobStatus", traits: {"smithy.api#required" => {}}))
+    BatchDeleteAdvancedPromptOptimizationJobItem.type = Types::BatchDeleteAdvancedPromptOptimizationJobItem
+    BatchDeleteAdvancedPromptOptimizationJobItems.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchDeleteAdvancedPromptOptimizationJobItem, name: "member"))
+    BatchDeleteAdvancedPromptOptimizationJobRequest.add_member(:job_identifiers, ::Smithy::Schema::Shapes::MemberShape.new(target: AdvancedPromptOptimizationJobIdentifiers, name: "jobIdentifiers", traits: {"smithy.api#required" => {}}))
+    BatchDeleteAdvancedPromptOptimizationJobRequest.type = Types::BatchDeleteAdvancedPromptOptimizationJobRequest
+    BatchDeleteAdvancedPromptOptimizationJobResponse.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchDeleteAdvancedPromptOptimizationJobErrors, name: "errors", traits: {"smithy.api#required" => {}}))
+    BatchDeleteAdvancedPromptOptimizationJobResponse.add_member(:advanced_prompt_optimization_jobs, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchDeleteAdvancedPromptOptimizationJobItems, name: "advancedPromptOptimizationJobs", traits: {"smithy.api#required" => {}}))
+    BatchDeleteAdvancedPromptOptimizationJobResponse.type = Types::BatchDeleteAdvancedPromptOptimizationJobResponse
     BatchDeleteEvaluationJobError.add_member(:job_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationJobIdentifier, name: "jobIdentifier", traits: {"smithy.api#required" => {}}))
     BatchDeleteEvaluationJobError.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "code", traits: {"smithy.api#required" => {}}))
     BatchDeleteEvaluationJobError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
@@ -1150,10 +1429,22 @@ module Aws::Bedrock
     CommitmentDuration.add_member(:six_months, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SIX_MONTHS", traits: {"smithy.api#enumValue" => "SixMonths"}))
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonBlankString, name: "message"))
     ConflictException.type = Types::ConflictException
+    CreateAdvancedPromptOptimizationJobRequest.add_member(:job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AdvancedPromptOptimizationJobName, name: "jobName", traits: {"smithy.api#required" => {}}))
+    CreateAdvancedPromptOptimizationJobRequest.add_member(:job_description, ::Smithy::Schema::Shapes::MemberShape.new(target: AdvancedPromptOptimizationJobDescription, name: "jobDescription"))
+    CreateAdvancedPromptOptimizationJobRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: IdempotencyToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateAdvancedPromptOptimizationJobRequest.add_member(:input_config, ::Smithy::Schema::Shapes::MemberShape.new(target: AdvancedPromptOptimizationInputConfig, name: "inputConfig", traits: {"smithy.api#required" => {}}))
+    CreateAdvancedPromptOptimizationJobRequest.add_member(:output_config, ::Smithy::Schema::Shapes::MemberShape.new(target: AdvancedPromptOptimizationOutputConfig, name: "outputConfig", traits: {"smithy.api#required" => {}}))
+    CreateAdvancedPromptOptimizationJobRequest.add_member(:encryption_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyArn, name: "encryptionKeyArn"))
+    CreateAdvancedPromptOptimizationJobRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tags"))
+    CreateAdvancedPromptOptimizationJobRequest.add_member(:model_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelConfigurations, name: "modelConfigurations", traits: {"smithy.api#required" => {}}))
+    CreateAdvancedPromptOptimizationJobRequest.type = Types::CreateAdvancedPromptOptimizationJobRequest
+    CreateAdvancedPromptOptimizationJobResponse.add_member(:job_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AdvancedPromptOptimizationJobArn, name: "jobArn", traits: {"smithy.api#required" => {}}))
+    CreateAdvancedPromptOptimizationJobResponse.type = Types::CreateAdvancedPromptOptimizationJobResponse
     CreateAutomatedReasoningPolicyRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyName, name: "name", traits: {"smithy.api#required" => {}}))
     CreateAutomatedReasoningPolicyRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyDescription, name: "description"))
     CreateAutomatedReasoningPolicyRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: IdempotencyToken, name: "clientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
     CreateAutomatedReasoningPolicyRequest.add_member(:policy_definition, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyDefinition, name: "policyDefinition"))
+    CreateAutomatedReasoningPolicyRequest.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, name: "kmsKeyId"))
     CreateAutomatedReasoningPolicyRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tags"))
     CreateAutomatedReasoningPolicyRequest.type = Types::CreateAutomatedReasoningPolicyRequest
     CreateAutomatedReasoningPolicyResponse.add_member(:policy_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyArn, name: "policyArn", traits: {"smithy.api#required" => {}}))
@@ -1195,7 +1486,8 @@ module Aws::Bedrock
     CreateCustomModelDeploymentResponse.add_member(:custom_model_deployment_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomModelDeploymentArn, name: "customModelDeploymentArn", traits: {"smithy.api#required" => {}}))
     CreateCustomModelDeploymentResponse.type = Types::CreateCustomModelDeploymentResponse
     CreateCustomModelRequest.add_member(:model_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomModelName, name: "modelName", traits: {"smithy.api#required" => {}}))
-    CreateCustomModelRequest.add_member(:model_source_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelDataSource, name: "modelSourceConfig", traits: {"smithy.api#required" => {}}))
+    CreateCustomModelRequest.add_member(:model_source_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelDataSource, name: "modelSourceConfig"))
+    CreateCustomModelRequest.add_member(:custom_model_data_source, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomModelDataSource, name: "customModelDataSource"))
     CreateCustomModelRequest.add_member(:model_kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyArn, name: "modelKmsKeyArn"))
     CreateCustomModelRequest.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "roleArn"))
     CreateCustomModelRequest.add_member(:model_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "modelTags"))
@@ -1313,6 +1605,7 @@ module Aws::Bedrock
     CreateModelInvocationJobRequest.add_member(:vpc_config, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcConfig, name: "vpcConfig"))
     CreateModelInvocationJobRequest.add_member(:timeout_duration_in_hours, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelInvocationJobTimeoutDurationInHours, name: "timeoutDurationInHours"))
     CreateModelInvocationJobRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tags"))
+    CreateModelInvocationJobRequest.add_member(:model_invocation_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelInvocationType, name: "modelInvocationType", traits: {"smithy.api#default" => "InvokeModel"}))
     CreateModelInvocationJobRequest.type = Types::CreateModelInvocationJobRequest
     CreateModelInvocationJobResponse.add_member(:job_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelInvocationJobArn, name: "jobArn", traits: {"smithy.api#required" => {}}))
     CreateModelInvocationJobResponse.type = Types::CreateModelInvocationJobResponse
@@ -1344,6 +1637,9 @@ module Aws::Bedrock
     CustomMetricDefinition.type = Types::CustomMetricDefinition
     CustomMetricEvaluatorModelConfig.add_member(:bedrock_evaluator_models, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomMetricBedrockEvaluatorModels, name: "bedrockEvaluatorModels", traits: {"smithy.api#required" => {}}))
     CustomMetricEvaluatorModelConfig.type = Types::CustomMetricEvaluatorModelConfig
+    CustomModelDataSource.add_member(:model_package_arn_data_source, Types::CustomModelDataSource::ModelPackageArnDataSource, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelPackageArnDataSource, name: "modelPackageArnDataSource"))
+    CustomModelDataSource.add_member(:unknown, Types::CustomModelDataSource::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    CustomModelDataSource.type = Types::CustomModelDataSource
     CustomModelDeploymentStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "Creating"}))
     CustomModelDeploymentStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "Active"}))
     CustomModelDeploymentStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "Failed"}))
@@ -1356,6 +1652,12 @@ module Aws::Bedrock
     CustomModelDeploymentSummary.add_member(:failure_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "failureMessage"))
     CustomModelDeploymentSummary.type = Types::CustomModelDeploymentSummary
     CustomModelDeploymentSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomModelDeploymentSummary, name: "member"))
+    CustomModelDeploymentUpdateDetails.add_member(:model_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelArn, name: "modelArn", traits: {"smithy.api#required" => {}}))
+    CustomModelDeploymentUpdateDetails.add_member(:update_status, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomModelDeploymentUpdateStatus, name: "updateStatus", traits: {"smithy.api#required" => {}}))
+    CustomModelDeploymentUpdateDetails.type = Types::CustomModelDeploymentUpdateDetails
+    CustomModelDeploymentUpdateStatus.add_member(:updating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATING", traits: {"smithy.api#enumValue" => "Updating"}))
+    CustomModelDeploymentUpdateStatus.add_member(:update_completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATE_COMPLETED", traits: {"smithy.api#enumValue" => "UpdateCompleted"}))
+    CustomModelDeploymentUpdateStatus.add_member(:update_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATE_FAILED", traits: {"smithy.api#enumValue" => "UpdateFailed"}))
     CustomModelSummary.add_member(:model_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomModelArn, name: "modelArn", traits: {"smithy.api#required" => {}}))
     CustomModelSummary.add_member(:model_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomModelName, name: "modelName", traits: {"smithy.api#required" => {}}))
     CustomModelSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "creationTime", traits: {"smithy.api#required" => {}}))
@@ -1370,22 +1672,30 @@ module Aws::Bedrock
     CustomModelUnits.add_member(:custom_model_units_version, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomModelUnitsVersion, name: "customModelUnitsVersion"))
     CustomModelUnits.type = Types::CustomModelUnits
     CustomizationConfig.add_member(:distillation_config, Types::CustomizationConfig::DistillationConfig, ::Smithy::Schema::Shapes::MemberShape.new(target: DistillationConfig, name: "distillationConfig"))
+    CustomizationConfig.add_member(:rft_config, Types::CustomizationConfig::RftConfig, ::Smithy::Schema::Shapes::MemberShape.new(target: RFTConfig, name: "rftConfig"))
     CustomizationConfig.add_member(:unknown, Types::CustomizationConfig::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     CustomizationConfig.type = Types::CustomizationConfig
     CustomizationType.add_member(:fine_tuning, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FINE_TUNING", traits: {"smithy.api#enumValue" => "FINE_TUNING"}))
     CustomizationType.add_member(:continued_pre_training, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONTINUED_PRE_TRAINING", traits: {"smithy.api#enumValue" => "CONTINUED_PRE_TRAINING"}))
     CustomizationType.add_member(:distillation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISTILLATION", traits: {"smithy.api#enumValue" => "DISTILLATION"}))
+    CustomizationType.add_member(:reinforcement_fine_tuning, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REINFORCEMENT_FINE_TUNING", traits: {"smithy.api#enumValue" => "REINFORCEMENT_FINE_TUNING"}))
     CustomizationType.add_member(:imported, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IMPORTED", traits: {"smithy.api#enumValue" => "IMPORTED"}))
     DataProcessingDetails.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatusDetails, name: "status"))
     DataProcessingDetails.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "creationTime"))
     DataProcessingDetails.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastModifiedTime"))
     DataProcessingDetails.type = Types::DataProcessingDetails
+    DataRetentionMode.add_member(:default, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEFAULT", traits: {"smithy.api#enumValue" => "default"}))
+    DataRetentionMode.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NONE", traits: {"smithy.api#enumValue" => "none"}))
+    DataRetentionMode.add_member(:aws_review, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_REVIEW", traits: {"smithy.api#enumValue" => "aws_review"}))
+    DataRetentionMode.add_member(:provider_data_share, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PROVIDER_DATA_SHARE", traits: {"smithy.api#enumValue" => "provider_data_share"}))
+    DataRetentionMode.add_member(:inherit, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INHERIT", traits: {"smithy.api#enumValue" => "inherit"}))
     DeleteAutomatedReasoningPolicyBuildWorkflowRequest.add_member(:policy_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyArn, name: "policyArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteAutomatedReasoningPolicyBuildWorkflowRequest.add_member(:build_workflow_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyBuildWorkflowId, name: "buildWorkflowId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteAutomatedReasoningPolicyBuildWorkflowRequest.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastUpdatedAt", traits: {"smithy.api#httpQuery" => "updatedAt", "smithy.api#required" => {}}))
     DeleteAutomatedReasoningPolicyBuildWorkflowRequest.type = Types::DeleteAutomatedReasoningPolicyBuildWorkflowRequest
     DeleteAutomatedReasoningPolicyBuildWorkflowResponse.type = Types::DeleteAutomatedReasoningPolicyBuildWorkflowResponse
     DeleteAutomatedReasoningPolicyRequest.add_member(:policy_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyArn, name: "policyArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteAutomatedReasoningPolicyRequest.add_member(:force, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "force", traits: {"smithy.api#default" => false, "smithy.api#httpQuery" => "force"}))
     DeleteAutomatedReasoningPolicyRequest.type = Types::DeleteAutomatedReasoningPolicyRequest
     DeleteAutomatedReasoningPolicyResponse.type = Types::DeleteAutomatedReasoningPolicyResponse
     DeleteAutomatedReasoningPolicyTestCaseRequest.add_member(:policy_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyArn, name: "policyArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -1399,6 +1709,9 @@ module Aws::Bedrock
     DeleteCustomModelRequest.add_member(:model_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelIdentifier, name: "modelIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteCustomModelRequest.type = Types::DeleteCustomModelRequest
     DeleteCustomModelResponse.type = Types::DeleteCustomModelResponse
+    DeleteEnforcedGuardrailConfigurationRequest.add_member(:config_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountEnforcedGuardrailConfigurationId, name: "configId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteEnforcedGuardrailConfigurationRequest.type = Types::DeleteEnforcedGuardrailConfigurationRequest
+    DeleteEnforcedGuardrailConfigurationResponse.type = Types::DeleteEnforcedGuardrailConfigurationResponse
     DeleteFoundationModelAgreementRequest.add_member(:model_id, ::Smithy::Schema::Shapes::MemberShape.new(target: BedrockModelId, name: "modelId", traits: {"smithy.api#required" => {}}))
     DeleteFoundationModelAgreementRequest.type = Types::DeleteFoundationModelAgreementRequest
     DeleteFoundationModelAgreementResponse.type = Types::DeleteFoundationModelAgreementResponse
@@ -1423,6 +1736,9 @@ module Aws::Bedrock
     DeleteProvisionedModelThroughputRequest.add_member(:provisioned_model_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProvisionedModelId, name: "provisionedModelId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteProvisionedModelThroughputRequest.type = Types::DeleteProvisionedModelThroughputRequest
     DeleteProvisionedModelThroughputResponse.type = Types::DeleteProvisionedModelThroughputResponse
+    DeleteResourcePolicyRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcePolicyResourceArn, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteResourcePolicyRequest.type = Types::DeleteResourcePolicyRequest
+    DeleteResourcePolicyResponse.type = Types::DeleteResourcePolicyResponse
     DeregisterMarketplaceModelEndpointRequest.add_member(:endpoint_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "endpointArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeregisterMarketplaceModelEndpointRequest.type = Types::DeregisterMarketplaceModelEndpointRequest
     DeregisterMarketplaceModelEndpointResponse.type = Types::DeregisterMarketplaceModelEndpointResponse
@@ -1526,6 +1842,7 @@ module Aws::Bedrock
     EvaluatorModelConfig.add_member(:unknown, Types::EvaluatorModelConfig::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     EvaluatorModelConfig.type = Types::EvaluatorModelConfig
     EvaluatorModelIdentifiers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluatorModelIdentifier, name: "member"))
+    ExcludedModelsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExcludedModelId, name: "member"))
     ExportAutomatedReasoningPolicyVersionRequest.add_member(:policy_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyArn, name: "policyArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ExportAutomatedReasoningPolicyVersionRequest.type = Types::ExportAutomatedReasoningPolicyVersionRequest
     ExportAutomatedReasoningPolicyVersionResponse.add_member(:policy_definition, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyDefinition, name: "policyDefinition", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
@@ -1571,6 +1888,10 @@ module Aws::Bedrock
     FoundationModelDetails.add_member(:model_lifecycle, ::Smithy::Schema::Shapes::MemberShape.new(target: FoundationModelLifecycle, name: "modelLifecycle"))
     FoundationModelDetails.type = Types::FoundationModelDetails
     FoundationModelLifecycle.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: FoundationModelLifecycleStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    FoundationModelLifecycle.add_member(:start_of_life_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "startOfLifeTime"))
+    FoundationModelLifecycle.add_member(:end_of_life_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "endOfLifeTime"))
+    FoundationModelLifecycle.add_member(:legacy_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "legacyTime"))
+    FoundationModelLifecycle.add_member(:public_extended_access_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "publicExtendedAccessTime"))
     FoundationModelLifecycle.type = Types::FoundationModelLifecycle
     FoundationModelLifecycleStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     FoundationModelLifecycleStatus.add_member(:legacy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LEGACY", traits: {"smithy.api#enumValue" => "LEGACY"}))
@@ -1591,6 +1912,24 @@ module Aws::Bedrock
     GenerationConfiguration.add_member(:kb_inference_config, ::Smithy::Schema::Shapes::MemberShape.new(target: KbInferenceConfig, name: "kbInferenceConfig"))
     GenerationConfiguration.add_member(:additional_model_request_fields, ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalModelRequestFields, name: "additionalModelRequestFields"))
     GenerationConfiguration.type = Types::GenerationConfiguration
+    GetAccountDataRetentionRequest.type = Types::GetAccountDataRetentionRequest
+    GetAccountDataRetentionResponse.add_member(:mode, ::Smithy::Schema::Shapes::MemberShape.new(target: DataRetentionMode, name: "mode", traits: {"smithy.api#required" => {}}))
+    GetAccountDataRetentionResponse.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "updatedAt"))
+    GetAccountDataRetentionResponse.type = Types::GetAccountDataRetentionResponse
+    GetAdvancedPromptOptimizationJobRequest.add_member(:job_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: AdvancedPromptOptimizationJobIdentifier, name: "jobIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetAdvancedPromptOptimizationJobRequest.type = Types::GetAdvancedPromptOptimizationJobRequest
+    GetAdvancedPromptOptimizationJobResponse.add_member(:job_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AdvancedPromptOptimizationJobArn, name: "jobArn", traits: {"smithy.api#required" => {}}))
+    GetAdvancedPromptOptimizationJobResponse.add_member(:job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AdvancedPromptOptimizationJobName, name: "jobName", traits: {"smithy.api#required" => {}}))
+    GetAdvancedPromptOptimizationJobResponse.add_member(:job_description, ::Smithy::Schema::Shapes::MemberShape.new(target: AdvancedPromptOptimizationJobDescription, name: "jobDescription"))
+    GetAdvancedPromptOptimizationJobResponse.add_member(:job_status, ::Smithy::Schema::Shapes::MemberShape.new(target: AdvancedPromptOptimizationJobStatus, name: "jobStatus", traits: {"smithy.api#required" => {}}))
+    GetAdvancedPromptOptimizationJobResponse.add_member(:input_config, ::Smithy::Schema::Shapes::MemberShape.new(target: AdvancedPromptOptimizationInputConfig, name: "inputConfig", traits: {"smithy.api#required" => {}}))
+    GetAdvancedPromptOptimizationJobResponse.add_member(:output_config, ::Smithy::Schema::Shapes::MemberShape.new(target: AdvancedPromptOptimizationOutputConfig, name: "outputConfig", traits: {"smithy.api#required" => {}}))
+    GetAdvancedPromptOptimizationJobResponse.add_member(:encryption_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyArn, name: "encryptionKeyArn"))
+    GetAdvancedPromptOptimizationJobResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "creationTime", traits: {"smithy.api#required" => {}}))
+    GetAdvancedPromptOptimizationJobResponse.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastModifiedTime"))
+    GetAdvancedPromptOptimizationJobResponse.add_member(:failure_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "failureMessage"))
+    GetAdvancedPromptOptimizationJobResponse.add_member(:model_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelConfigurations, name: "modelConfigurations", traits: {"smithy.api#required" => {}}))
+    GetAdvancedPromptOptimizationJobResponse.type = Types::GetAdvancedPromptOptimizationJobResponse
     GetAutomatedReasoningPolicyAnnotationsRequest.add_member(:policy_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyArn, name: "policyArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetAutomatedReasoningPolicyAnnotationsRequest.add_member(:build_workflow_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyBuildWorkflowId, name: "buildWorkflowId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetAutomatedReasoningPolicyAnnotationsRequest.type = Types::GetAutomatedReasoningPolicyAnnotationsRequest
@@ -1617,6 +1956,7 @@ module Aws::Bedrock
     GetAutomatedReasoningPolicyBuildWorkflowResultAssetsRequest.add_member(:policy_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyArn, name: "policyArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetAutomatedReasoningPolicyBuildWorkflowResultAssetsRequest.add_member(:build_workflow_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyBuildWorkflowId, name: "buildWorkflowId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetAutomatedReasoningPolicyBuildWorkflowResultAssetsRequest.add_member(:asset_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyBuildResultAssetType, name: "assetType", traits: {"smithy.api#httpQuery" => "assetType", "smithy.api#required" => {}}))
+    GetAutomatedReasoningPolicyBuildWorkflowResultAssetsRequest.add_member(:asset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyBuildResultAssetId, name: "assetId", traits: {"smithy.api#httpQuery" => "assetId"}))
     GetAutomatedReasoningPolicyBuildWorkflowResultAssetsRequest.type = Types::GetAutomatedReasoningPolicyBuildWorkflowResultAssetsRequest
     GetAutomatedReasoningPolicyBuildWorkflowResultAssetsResponse.add_member(:policy_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyArn, name: "policyArn", traits: {"smithy.api#required" => {}}))
     GetAutomatedReasoningPolicyBuildWorkflowResultAssetsResponse.add_member(:build_workflow_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyBuildWorkflowId, name: "buildWorkflowId", traits: {"smithy.api#required" => {}}))
@@ -1636,6 +1976,7 @@ module Aws::Bedrock
     GetAutomatedReasoningPolicyResponse.add_member(:policy_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyId, name: "policyId", traits: {"smithy.api#required" => {}}))
     GetAutomatedReasoningPolicyResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyDescription, name: "description"))
     GetAutomatedReasoningPolicyResponse.add_member(:definition_hash, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyHash, name: "definitionHash", traits: {"smithy.api#required" => {}}))
+    GetAutomatedReasoningPolicyResponse.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyArn, name: "kmsKeyArn"))
     GetAutomatedReasoningPolicyResponse.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "createdAt"))
     GetAutomatedReasoningPolicyResponse.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "updatedAt", traits: {"smithy.api#required" => {}}))
     GetAutomatedReasoningPolicyResponse.type = Types::GetAutomatedReasoningPolicyResponse
@@ -1659,6 +2000,7 @@ module Aws::Bedrock
     GetCustomModelDeploymentResponse.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "createdAt", traits: {"smithy.api#required" => {}}))
     GetCustomModelDeploymentResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomModelDeploymentStatus, name: "status", traits: {"smithy.api#required" => {}}))
     GetCustomModelDeploymentResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomModelDeploymentDescription, name: "description"))
+    GetCustomModelDeploymentResponse.add_member(:update_details, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomModelDeploymentUpdateDetails, name: "updateDetails"))
     GetCustomModelDeploymentResponse.add_member(:failure_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "failureMessage"))
     GetCustomModelDeploymentResponse.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastUpdatedAt"))
     GetCustomModelDeploymentResponse.type = Types::GetCustomModelDeploymentResponse
@@ -1837,6 +2179,11 @@ module Aws::Bedrock
     GetModelInvocationJobResponse.add_member(:vpc_config, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcConfig, name: "vpcConfig"))
     GetModelInvocationJobResponse.add_member(:timeout_duration_in_hours, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelInvocationJobTimeoutDurationInHours, name: "timeoutDurationInHours"))
     GetModelInvocationJobResponse.add_member(:job_expiration_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "jobExpirationTime"))
+    GetModelInvocationJobResponse.add_member(:model_invocation_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelInvocationType, name: "modelInvocationType"))
+    GetModelInvocationJobResponse.add_member(:total_record_count, ::Smithy::Schema::Shapes::MemberShape.new(target: NonNegativeLong, name: "totalRecordCount"))
+    GetModelInvocationJobResponse.add_member(:processed_record_count, ::Smithy::Schema::Shapes::MemberShape.new(target: NonNegativeLong, name: "processedRecordCount"))
+    GetModelInvocationJobResponse.add_member(:success_record_count, ::Smithy::Schema::Shapes::MemberShape.new(target: NonNegativeLong, name: "successRecordCount"))
+    GetModelInvocationJobResponse.add_member(:error_record_count, ::Smithy::Schema::Shapes::MemberShape.new(target: NonNegativeLong, name: "errorRecordCount"))
     GetModelInvocationJobResponse.type = Types::GetModelInvocationJobResponse
     GetModelInvocationLoggingConfigurationRequest.type = Types::GetModelInvocationLoggingConfigurationRequest
     GetModelInvocationLoggingConfigurationResponse.add_member(:logging_config, ::Smithy::Schema::Shapes::MemberShape.new(target: LoggingConfig, name: "loggingConfig"))
@@ -1870,9 +2217,16 @@ module Aws::Bedrock
     GetProvisionedModelThroughputResponse.add_member(:commitment_duration, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitmentDuration, name: "commitmentDuration"))
     GetProvisionedModelThroughputResponse.add_member(:commitment_expiration_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "commitmentExpirationTime"))
     GetProvisionedModelThroughputResponse.type = Types::GetProvisionedModelThroughputResponse
+    GetResourcePolicyRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcePolicyResourceArn, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetResourcePolicyRequest.type = Types::GetResourcePolicyRequest
+    GetResourcePolicyResponse.add_member(:resource_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcePolicyDocument, name: "resourcePolicy"))
+    GetResourcePolicyResponse.type = Types::GetResourcePolicyResponse
     GetUseCaseForModelAccessRequest.type = Types::GetUseCaseForModelAccessRequest
     GetUseCaseForModelAccessResponse.add_member(:form_data, ::Smithy::Schema::Shapes::MemberShape.new(target: AcknowledgementFormDataBody, name: "formData", traits: {"smithy.api#required" => {}}))
     GetUseCaseForModelAccessResponse.type = Types::GetUseCaseForModelAccessResponse
+    GraderConfig.add_member(:lambda_grader, Types::GraderConfig::LambdaGrader, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaGraderConfig, name: "lambdaGrader"))
+    GraderConfig.add_member(:unknown, Types::GraderConfig::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    GraderConfig.type = Types::GraderConfig
     GuardrailAutomatedReasoningPolicy.add_member(:policies, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyArnList, name: "policies", traits: {"smithy.api#length" => {"min" => 1, "max" => 2}, "smithy.api#required" => {}}))
     GuardrailAutomatedReasoningPolicy.add_member(:confidence_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningConfidenceFilterThreshold, name: "confidenceThreshold"))
     GuardrailAutomatedReasoningPolicy.type = Types::GuardrailAutomatedReasoningPolicy
@@ -2146,6 +2500,12 @@ module Aws::Bedrock
     ImportedModelSummary.add_member(:model_architecture, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelArchitecture, name: "modelArchitecture"))
     ImportedModelSummary.type = Types::ImportedModelSummary
     ImportedModelSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportedModelSummary, name: "member"))
+    IncludedModelsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IncludedModelId, name: "member"))
+    InferenceConfiguration.add_member(:max_tokens, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "maxTokens", traits: {"smithy.api#range" => {"min" => 1}}))
+    InferenceConfiguration.add_member(:temperature, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Float, name: "temperature", traits: {"smithy.api#range" => {"min" => 0, "max" => 1}}))
+    InferenceConfiguration.add_member(:top_p, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Float, name: "topP", traits: {"smithy.api#range" => {"min" => 0, "max" => 1}}))
+    InferenceConfiguration.add_member(:stop_sequences, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyStringList, name: "stopSequences", traits: {"smithy.api#length" => {"max" => 2500}}))
+    InferenceConfiguration.type = Types::InferenceConfiguration
     InferenceProfileModel.add_member(:model_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FoundationModelArn, name: "modelArn"))
     InferenceProfileModel.type = Types::InferenceProfileModel
     InferenceProfileModelSource.add_member(:copy_from, Types::InferenceProfileModelSource::CopyFrom, ::Smithy::Schema::Shapes::MemberShape.new(target: InferenceProfileModelSourceArn, name: "copyFrom"))
@@ -2169,6 +2529,8 @@ module Aws::Bedrock
     InferenceType.add_member(:on_demand, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ON_DEMAND", traits: {"smithy.api#enumValue" => "ON_DEMAND"}))
     InferenceType.add_member(:provisioned, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PROVISIONED", traits: {"smithy.api#enumValue" => "PROVISIONED"}))
     InferenceTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InferenceType, name: "member"))
+    InputTags.add_member(:honor, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HONOR", traits: {"smithy.api#enumValue" => "HONOR"}))
+    InputTags.add_member(:ignore, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IGNORE", traits: {"smithy.api#enumValue" => "IGNORE"}))
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonBlankString, name: "message"))
     InternalServerException.type = Types::InternalServerException
     InvocationLogSource.add_member(:s3_uri, Types::InvocationLogSource::S3Uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, name: "s3Uri"))
@@ -2204,8 +2566,18 @@ module Aws::Bedrock
     KnowledgeBaseVectorSearchConfiguration.add_member(:implicit_filter_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ImplicitFilterConfiguration, name: "implicitFilterConfiguration"))
     KnowledgeBaseVectorSearchConfiguration.add_member(:reranking_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorSearchRerankingConfiguration, name: "rerankingConfiguration"))
     KnowledgeBaseVectorSearchConfiguration.type = Types::KnowledgeBaseVectorSearchConfiguration
+    LambdaGraderConfig.add_member(:lambda_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaArn, name: "lambdaArn", traits: {"smithy.api#required" => {}}))
+    LambdaGraderConfig.type = Types::LambdaGraderConfig
     LegalTerm.add_member(:url, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "url"))
     LegalTerm.type = Types::LegalTerm
+    ListAdvancedPromptOptimizationJobsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListAdvancedPromptOptimizationJobsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListAdvancedPromptOptimizationJobsRequest.add_member(:sort_by, ::Smithy::Schema::Shapes::MemberShape.new(target: SortJobsBy, name: "sortBy", traits: {"smithy.api#httpQuery" => "sortBy"}))
+    ListAdvancedPromptOptimizationJobsRequest.add_member(:sort_order, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrder, name: "sortOrder", traits: {"smithy.api#httpQuery" => "sortOrder"}))
+    ListAdvancedPromptOptimizationJobsRequest.type = Types::ListAdvancedPromptOptimizationJobsRequest
+    ListAdvancedPromptOptimizationJobsResponse.add_member(:job_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: AdvancedPromptOptimizationJobSummaries, name: "jobSummaries"))
+    ListAdvancedPromptOptimizationJobsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
+    ListAdvancedPromptOptimizationJobsResponse.type = Types::ListAdvancedPromptOptimizationJobsResponse
     ListAutomatedReasoningPoliciesRequest.add_member(:policy_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyArn, name: "policyArn", traits: {"smithy.api#httpQuery" => "policyArn"}))
     ListAutomatedReasoningPoliciesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
     ListAutomatedReasoningPoliciesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "maxResults", traits: {"smithy.api#default" => 25, "smithy.api#httpQuery" => "maxResults"}))
@@ -2263,6 +2635,11 @@ module Aws::Bedrock
     ListCustomModelsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
     ListCustomModelsResponse.add_member(:model_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomModelSummaryList, name: "modelSummaries"))
     ListCustomModelsResponse.type = Types::ListCustomModelsResponse
+    ListEnforcedGuardrailsConfigurationRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListEnforcedGuardrailsConfigurationRequest.type = Types::ListEnforcedGuardrailsConfigurationRequest
+    ListEnforcedGuardrailsConfigurationResponse.add_member(:guardrails_config, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountEnforcedGuardrailsOutputConfiguration, name: "guardrailsConfig", traits: {"smithy.api#required" => {}}))
+    ListEnforcedGuardrailsConfigurationResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
+    ListEnforcedGuardrailsConfigurationResponse.type = Types::ListEnforcedGuardrailsConfigurationResponse
     ListEvaluationJobsRequest.add_member(:creation_time_after, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "creationTimeAfter", traits: {"smithy.api#httpQuery" => "creationTimeAfter"}))
     ListEvaluationJobsRequest.add_member(:creation_time_before, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "creationTimeBefore", traits: {"smithy.api#httpQuery" => "creationTimeBefore"}))
     ListEvaluationJobsRequest.add_member(:status_equals, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationJobStatus, name: "statusEquals", traits: {"smithy.api#httpQuery" => "statusEquals"}))
@@ -2401,6 +2778,7 @@ module Aws::Bedrock
     LoggingConfig.add_member(:image_data_delivery_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "imageDataDeliveryEnabled"))
     LoggingConfig.add_member(:embedding_data_delivery_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "embeddingDataDeliveryEnabled"))
     LoggingConfig.add_member(:video_data_delivery_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "videoDataDeliveryEnabled"))
+    LoggingConfig.add_member(:audio_data_delivery_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "audioDataDeliveryEnabled"))
     LoggingConfig.type = Types::LoggingConfig
     MarketplaceModelEndpoint.add_member(:endpoint_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "endpointArn", traits: {"smithy.api#required" => {}}))
     MarketplaceModelEndpoint.add_member(:model_source_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelSourceIdentifier, name: "modelSourceIdentifier", traits: {"smithy.api#required" => {}}))
@@ -2428,6 +2806,11 @@ module Aws::Bedrock
     MetadataConfigurationForReranking.add_member(:selection_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: RerankingMetadataSelectionMode, name: "selectionMode", traits: {"smithy.api#required" => {}}))
     MetadataConfigurationForReranking.add_member(:selective_mode_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: RerankingMetadataSelectiveModeConfiguration, name: "selectiveModeConfiguration"))
     MetadataConfigurationForReranking.type = Types::MetadataConfigurationForReranking
+    ModelConfiguration.add_member(:model_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AdvancedPromptOptimizationModelIdentifier, name: "modelId", traits: {"smithy.api#required" => {}}))
+    ModelConfiguration.add_member(:inference_config, ::Smithy::Schema::Shapes::MemberShape.new(target: InferenceConfiguration, name: "inferenceConfig"))
+    ModelConfiguration.add_member(:additional_model_request_fields, ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalModelRequestFields, name: "additionalModelRequestFields"))
+    ModelConfiguration.type = Types::ModelConfiguration
+    ModelConfigurations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelConfiguration, name: "member"))
     ModelCopyJobStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "InProgress"}))
     ModelCopyJobStatus.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED", traits: {"smithy.api#enumValue" => "Completed"}))
     ModelCopyJobStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "Failed"}))
@@ -2471,6 +2854,9 @@ module Aws::Bedrock
     ModelDataSource.add_member(:s3_data_source, Types::ModelDataSource::S3DataSource, ::Smithy::Schema::Shapes::MemberShape.new(target: S3DataSource, name: "s3DataSource"))
     ModelDataSource.add_member(:unknown, Types::ModelDataSource::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     ModelDataSource.type = Types::ModelDataSource
+    ModelEnforcement.add_member(:included_models, ::Smithy::Schema::Shapes::MemberShape.new(target: IncludedModelsList, name: "includedModels", traits: {"smithy.api#required" => {}}))
+    ModelEnforcement.add_member(:excluded_models, ::Smithy::Schema::Shapes::MemberShape.new(target: ExcludedModelsList, name: "excludedModels", traits: {"smithy.api#required" => {}}))
+    ModelEnforcement.type = Types::ModelEnforcement
     ModelImportJobStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "InProgress"}))
     ModelImportJobStatus.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED", traits: {"smithy.api#enumValue" => "Completed"}))
     ModelImportJobStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "Failed"}))
@@ -2524,14 +2910,24 @@ module Aws::Bedrock
     ModelInvocationJobSummary.add_member(:vpc_config, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcConfig, name: "vpcConfig"))
     ModelInvocationJobSummary.add_member(:timeout_duration_in_hours, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelInvocationJobTimeoutDurationInHours, name: "timeoutDurationInHours"))
     ModelInvocationJobSummary.add_member(:job_expiration_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "jobExpirationTime"))
+    ModelInvocationJobSummary.add_member(:model_invocation_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelInvocationType, name: "modelInvocationType"))
+    ModelInvocationJobSummary.add_member(:total_record_count, ::Smithy::Schema::Shapes::MemberShape.new(target: NonNegativeLong, name: "totalRecordCount"))
+    ModelInvocationJobSummary.add_member(:processed_record_count, ::Smithy::Schema::Shapes::MemberShape.new(target: NonNegativeLong, name: "processedRecordCount"))
+    ModelInvocationJobSummary.add_member(:success_record_count, ::Smithy::Schema::Shapes::MemberShape.new(target: NonNegativeLong, name: "successRecordCount"))
+    ModelInvocationJobSummary.add_member(:error_record_count, ::Smithy::Schema::Shapes::MemberShape.new(target: NonNegativeLong, name: "errorRecordCount"))
     ModelInvocationJobSummary.type = Types::ModelInvocationJobSummary
+    ModelInvocationType.add_member(:invoke_model, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "InvokeModel", traits: {"smithy.api#enumValue" => "InvokeModel"}))
+    ModelInvocationType.add_member(:converse, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Converse", traits: {"smithy.api#enumValue" => "Converse"}))
     ModelModality.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TEXT", traits: {"smithy.api#enumValue" => "TEXT"}))
     ModelModality.add_member(:image, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IMAGE", traits: {"smithy.api#enumValue" => "IMAGE"}))
     ModelModality.add_member(:embedding, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EMBEDDING", traits: {"smithy.api#enumValue" => "EMBEDDING"}))
     ModelModalityList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelModality, name: "member"))
+    ModelPackageArnDataSource.add_member(:model_package_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelPackageArn, name: "modelPackageArn", traits: {"smithy.api#required" => {}}))
+    ModelPackageArnDataSource.type = Types::ModelPackageArnDataSource
     ModelStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "Active"}))
     ModelStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "Creating"}))
     ModelStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "Failed"}))
+    NonEmptyStringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member", traits: {"smithy.api#length" => {"min" => 1}}))
     Offer.add_member(:offer_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferId, name: "offerId"))
     Offer.add_member(:offer_token, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferToken, name: "offerToken", traits: {"smithy.api#required" => {}}))
     Offer.add_member(:term_details, ::Smithy::Schema::Shapes::MemberShape.new(target: TermDetails, name: "termDetails", traits: {"smithy.api#required" => {}}))
@@ -2587,9 +2983,26 @@ module Aws::Bedrock
     ProvisionedModelSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "creationTime", traits: {"smithy.api#required" => {}}))
     ProvisionedModelSummary.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastModifiedTime", traits: {"smithy.api#required" => {}}))
     ProvisionedModelSummary.type = Types::ProvisionedModelSummary
+    PutAccountDataRetentionRequest.add_member(:mode, ::Smithy::Schema::Shapes::MemberShape.new(target: DataRetentionMode, name: "mode", traits: {"smithy.api#required" => {}}))
+    PutAccountDataRetentionRequest.type = Types::PutAccountDataRetentionRequest
+    PutAccountDataRetentionResponse.add_member(:mode, ::Smithy::Schema::Shapes::MemberShape.new(target: DataRetentionMode, name: "mode", traits: {"smithy.api#required" => {}}))
+    PutAccountDataRetentionResponse.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "updatedAt"))
+    PutAccountDataRetentionResponse.type = Types::PutAccountDataRetentionResponse
+    PutEnforcedGuardrailConfigurationRequest.add_member(:config_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountEnforcedGuardrailConfigurationId, name: "configId"))
+    PutEnforcedGuardrailConfigurationRequest.add_member(:guardrail_inference_config, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountEnforcedGuardrailInferenceInputConfiguration, name: "guardrailInferenceConfig", traits: {"smithy.api#required" => {}}))
+    PutEnforcedGuardrailConfigurationRequest.type = Types::PutEnforcedGuardrailConfigurationRequest
+    PutEnforcedGuardrailConfigurationResponse.add_member(:config_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountEnforcedGuardrailConfigurationId, name: "configId"))
+    PutEnforcedGuardrailConfigurationResponse.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "updatedAt"))
+    PutEnforcedGuardrailConfigurationResponse.add_member(:updated_by, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "updatedBy"))
+    PutEnforcedGuardrailConfigurationResponse.type = Types::PutEnforcedGuardrailConfigurationResponse
     PutModelInvocationLoggingConfigurationRequest.add_member(:logging_config, ::Smithy::Schema::Shapes::MemberShape.new(target: LoggingConfig, name: "loggingConfig", traits: {"smithy.api#required" => {}}))
     PutModelInvocationLoggingConfigurationRequest.type = Types::PutModelInvocationLoggingConfigurationRequest
     PutModelInvocationLoggingConfigurationResponse.type = Types::PutModelInvocationLoggingConfigurationResponse
+    PutResourcePolicyRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcePolicyResourceArn, name: "resourceArn", traits: {"smithy.api#required" => {}}))
+    PutResourcePolicyRequest.add_member(:resource_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcePolicyDocument, name: "resourcePolicy", traits: {"smithy.api#required" => {}}))
+    PutResourcePolicyRequest.type = Types::PutResourcePolicyRequest
+    PutResourcePolicyResponse.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcePolicyResourceArn, name: "resourceArn"))
+    PutResourcePolicyResponse.type = Types::PutResourcePolicyResponse
     PutUseCaseForModelAccessRequest.add_member(:form_data, ::Smithy::Schema::Shapes::MemberShape.new(target: AcknowledgementFormDataBody, name: "formData", traits: {"smithy.api#required" => {}}))
     PutUseCaseForModelAccessRequest.type = Types::PutUseCaseForModelAccessRequest
     PutUseCaseForModelAccessResponse.type = Types::PutUseCaseForModelAccessResponse
@@ -2601,6 +3014,18 @@ module Aws::Bedrock
     RAGConfig.add_member(:unknown, Types::RAGConfig::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     RAGConfig.type = Types::RAGConfig
     RAGStopSequences.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member", traits: {"smithy.api#length" => {"min" => 1, "max" => 1000}}))
+    RFTConfig.add_member(:grader_config, ::Smithy::Schema::Shapes::MemberShape.new(target: GraderConfig, name: "graderConfig"))
+    RFTConfig.add_member(:hyper_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: RFTHyperParameters, name: "hyperParameters"))
+    RFTConfig.type = Types::RFTConfig
+    RFTHyperParameters.add_member(:epoch_count, ::Smithy::Schema::Shapes::MemberShape.new(target: EpochCount, name: "epochCount"))
+    RFTHyperParameters.add_member(:batch_size, ::Smithy::Schema::Shapes::MemberShape.new(target: RFTBatchSize, name: "batchSize"))
+    RFTHyperParameters.add_member(:learning_rate, ::Smithy::Schema::Shapes::MemberShape.new(target: RFTLearningRate, name: "learningRate"))
+    RFTHyperParameters.add_member(:max_prompt_length, ::Smithy::Schema::Shapes::MemberShape.new(target: RFTMaxPromptLength, name: "maxPromptLength"))
+    RFTHyperParameters.add_member(:training_sample_per_prompt, ::Smithy::Schema::Shapes::MemberShape.new(target: RFTTrainingSamplePerPrompt, name: "trainingSamplePerPrompt"))
+    RFTHyperParameters.add_member(:inference_max_tokens, ::Smithy::Schema::Shapes::MemberShape.new(target: RFTInferenceMaxTokens, name: "inferenceMaxTokens"))
+    RFTHyperParameters.add_member(:reasoning_effort, ::Smithy::Schema::Shapes::MemberShape.new(target: ReasoningEffort, name: "reasoningEffort"))
+    RFTHyperParameters.add_member(:eval_interval, ::Smithy::Schema::Shapes::MemberShape.new(target: RFTEvalInterval, name: "evalInterval"))
+    RFTHyperParameters.type = Types::RFTHyperParameters
     RagConfigs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RAGConfig, name: "member"))
     RateCard.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionalPriceRate, name: "member"))
     RatingScale.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RatingScaleItem, name: "member"))
@@ -2611,6 +3036,9 @@ module Aws::Bedrock
     RatingScaleItemValue.add_member(:float_value, Types::RatingScaleItemValue::FloatValue, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Float, name: "floatValue"))
     RatingScaleItemValue.add_member(:unknown, Types::RatingScaleItemValue::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     RatingScaleItemValue.type = Types::RatingScaleItemValue
+    ReasoningEffort.add_member(:low, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOW", traits: {"smithy.api#enumValue" => "low"}))
+    ReasoningEffort.add_member(:medium, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MEDIUM", traits: {"smithy.api#enumValue" => "medium"}))
+    ReasoningEffort.add_member(:high, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HIGH", traits: {"smithy.api#enumValue" => "high"}))
     RegionAvailability.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AVAILABLE", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
     RegionAvailability.add_member(:not_available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_AVAILABLE", traits: {"smithy.api#enumValue" => "NOT_AVAILABLE"}))
     RegisterMarketplaceModelEndpointRequest.add_member(:endpoint_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "endpointIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -2684,6 +3112,11 @@ module Aws::Bedrock
     SearchType.add_member(:hybrid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HYBRID", traits: {"smithy.api#enumValue" => "HYBRID"}))
     SearchType.add_member(:semantic, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SEMANTIC", traits: {"smithy.api#enumValue" => "SEMANTIC"}))
     SecurityGroupIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId, name: "member"))
+    SelectiveContentGuarding.add_member(:system, ::Smithy::Schema::Shapes::MemberShape.new(target: SelectiveGuardingMode, name: "system"))
+    SelectiveContentGuarding.add_member(:messages, ::Smithy::Schema::Shapes::MemberShape.new(target: SelectiveGuardingMode, name: "messages"))
+    SelectiveContentGuarding.type = Types::SelectiveContentGuarding
+    SelectiveGuardingMode.add_member(:selective, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SELECTIVE", traits: {"smithy.api#enumValue" => "SELECTIVE"}))
+    SelectiveGuardingMode.add_member(:comprehensive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPREHENSIVE", traits: {"smithy.api#enumValue" => "COMPREHENSIVE"}))
     ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonBlankString, name: "message"))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
     ServiceUnavailableException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonBlankString, name: "message"))
@@ -2716,6 +3149,9 @@ module Aws::Bedrock
     StatusDetails.add_member(:data_processing_details, ::Smithy::Schema::Shapes::MemberShape.new(target: DataProcessingDetails, name: "dataProcessingDetails"))
     StatusDetails.add_member(:training_details, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingDetails, name: "trainingDetails"))
     StatusDetails.type = Types::StatusDetails
+    StopAdvancedPromptOptimizationJobRequest.add_member(:job_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: AdvancedPromptOptimizationJobIdentifier, name: "jobIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    StopAdvancedPromptOptimizationJobRequest.type = Types::StopAdvancedPromptOptimizationJobRequest
+    StopAdvancedPromptOptimizationJobResponse.type = Types::StopAdvancedPromptOptimizationJobResponse
     StopEvaluationJobRequest.add_member(:job_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationJobIdentifier, name: "jobIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     StopEvaluationJobRequest.type = Types::StopEvaluationJobRequest
     StopEvaluationJobResponse.type = Types::StopEvaluationJobResponse
@@ -2800,6 +3236,11 @@ module Aws::Bedrock
     UpdateAutomatedReasoningPolicyTestCaseResponse.add_member(:policy_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyArn, name: "policyArn", traits: {"smithy.api#required" => {}}))
     UpdateAutomatedReasoningPolicyTestCaseResponse.add_member(:test_case_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedReasoningPolicyTestCaseId, name: "testCaseId", traits: {"smithy.api#required" => {}}))
     UpdateAutomatedReasoningPolicyTestCaseResponse.type = Types::UpdateAutomatedReasoningPolicyTestCaseResponse
+    UpdateCustomModelDeploymentRequest.add_member(:model_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomModelArn, name: "modelArn", traits: {"smithy.api#required" => {}}))
+    UpdateCustomModelDeploymentRequest.add_member(:custom_model_deployment_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomModelDeploymentIdentifier, name: "customModelDeploymentIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateCustomModelDeploymentRequest.type = Types::UpdateCustomModelDeploymentRequest
+    UpdateCustomModelDeploymentResponse.add_member(:custom_model_deployment_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomModelDeploymentArn, name: "customModelDeploymentArn", traits: {"smithy.api#required" => {}}))
+    UpdateCustomModelDeploymentResponse.type = Types::UpdateCustomModelDeploymentResponse
     UpdateGuardrailRequest.add_member(:guardrail_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailIdentifier, name: "guardrailIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdateGuardrailRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailName, name: "name", traits: {"smithy.api#required" => {}}))
     UpdateGuardrailRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailDescription, name: "description"))
@@ -2865,7 +3306,18 @@ module Aws::Bedrock
       service.id = "com.amazonaws.bedrock#AmazonBedrockControlPlaneService"
       service.name = "AmazonBedrockControlPlaneService"
       service.version = "2023-04-20"
-      service.traits = {"aws.api#service" => {"sdkId" => "Bedrock", "endpointPrefix" => "bedrock"}, "aws.auth#sigv4" => {"name" => "bedrock"}, "aws.protocols#restJson1" => {}, "smithy.api#auth" => ["aws.auth#sigv4", "smithy.api#httpBearerAuth"], "smithy.api#httpBearerAuth" => {}, "smithy.api#title" => "Amazon Bedrock"}
+      service.traits = {"aws.api#service" => {"sdkId" => "Bedrock", "endpointPrefix" => "bedrock"}, "aws.auth#sigv4" => {"name" => "bedrock"}, "aws.protocols#restJson1" => {}, "smithy.api#auth" => ["aws.auth#sigv4", "smithy.api#httpBearerAuth"], "smithy.api#httpBearerAuth" => {}, "smithy.api#title" => "Amazon Bedrock", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://bedrock-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://bedrock-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://bedrock.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://bedrock.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
+      service.add_operation(:batch_delete_advanced_prompt_optimization_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.bedrock#BatchDeleteAdvancedPromptOptimizationJob"
+        operation.name = "BatchDeleteAdvancedPromptOptimizationJob"
+        operation.input = BatchDeleteAdvancedPromptOptimizationJobRequest
+        operation.output = BatchDeleteAdvancedPromptOptimizationJobResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"code" => 202, "method" => "POST", "uri" => "/advanced-prompt-optimization-job/batch-delete"}}
+      end)
       service.add_operation(:batch_delete_evaluation_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.bedrock#BatchDeleteEvaluationJob"
         operation.name = "BatchDeleteEvaluationJob"
@@ -2890,6 +3342,21 @@ module Aws::Bedrock
         operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 202, "method" => "POST", "uri" => "/automated-reasoning-policies/{policyArn}/build-workflows/{buildWorkflowId}/cancel"}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:create_advanced_prompt_optimization_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.bedrock#CreateAdvancedPromptOptimizationJob"
+        operation.name = "CreateAdvancedPromptOptimizationJob"
+        operation.input = CreateAdvancedPromptOptimizationJobRequest
+        operation.output = CreateAdvancedPromptOptimizationJobResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << TooManyTagsException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/advanced-prompt-optimization-jobs"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:create_automated_reasoning_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.bedrock#CreateAutomatedReasoningPolicy"
@@ -3139,7 +3606,9 @@ module Aws::Bedrock
         operation.input = DeleteAutomatedReasoningPolicyRequest
         operation.output = DeleteAutomatedReasoningPolicyResponse
         operation.errors << AccessDeniedException
+        operation.errors << ConflictException
         operation.errors << InternalServerException
+        operation.errors << ResourceInUseException
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
@@ -3199,6 +3668,18 @@ module Aws::Bedrock
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "DELETE", "uri" => "/model-customization/custom-model-deployments/{customModelDeploymentIdentifier}"}, "smithy.api#idempotent" => {}}
       end)
+      service.add_operation(:delete_enforced_guardrail_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.bedrock#DeleteEnforcedGuardrailConfiguration"
+        operation.name = "DeleteEnforcedGuardrailConfiguration"
+        operation.input = DeleteEnforcedGuardrailConfigurationRequest
+        operation.output = DeleteEnforcedGuardrailConfigurationResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "DELETE", "uri" => "/enforcedGuardrailsConfiguration/{configId}"}, "smithy.api#idempotent" => {}}
+      end)
       service.add_operation(:delete_foundation_model_agreement, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.bedrock#DeleteFoundationModelAgreement"
         operation.name = "DeleteFoundationModelAgreement"
@@ -3220,6 +3701,7 @@ module Aws::Bedrock
         operation.errors << AccessDeniedException
         operation.errors << ConflictException
         operation.errors << InternalServerException
+        operation.errors << ResourceInUseException
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
@@ -3298,6 +3780,18 @@ module Aws::Bedrock
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "DELETE", "uri" => "/provisioned-model-throughput/{provisionedModelId}"}, "smithy.api#idempotent" => {}}
       end)
+      service.add_operation(:delete_resource_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.bedrock#DeleteResourcePolicy"
+        operation.name = "DeleteResourcePolicy"
+        operation.input = DeleteResourcePolicyRequest
+        operation.output = DeleteResourcePolicyResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "DELETE", "uri" => "/resource-policy/{resourceArn}"}, "smithy.api#idempotent" => {}, "smithy.api#tags" => ["resource-policy"]}
+      end)
       service.add_operation(:deregister_marketplace_model_endpoint, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.bedrock#DeregisterMarketplaceModelEndpoint"
         operation.name = "DeregisterMarketplaceModelEndpoint"
@@ -3322,6 +3816,29 @@ module Aws::Bedrock
         operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/automated-reasoning-policies/{policyArn}/export"}, "smithy.api#readonly" => {}}
+      end)
+      service.add_operation(:get_account_data_retention, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.bedrock#GetAccountDataRetention"
+        operation.name = "GetAccountDataRetention"
+        operation.input = GetAccountDataRetentionRequest
+        operation.output = GetAccountDataRetentionResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/data-retention"}, "smithy.api#readonly" => {}}
+      end)
+      service.add_operation(:get_advanced_prompt_optimization_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.bedrock#GetAdvancedPromptOptimizationJob"
+        operation.name = "GetAdvancedPromptOptimizationJob"
+        operation.input = GetAdvancedPromptOptimizationJobRequest
+        operation.output = GetAdvancedPromptOptimizationJobResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/advanced-prompt-optimization-jobs/{jobIdentifier}"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_automated_reasoning_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.bedrock#GetAutomatedReasoningPolicy"
@@ -3597,6 +4114,18 @@ module Aws::Bedrock
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/provisioned-model-throughput/{provisionedModelId}"}, "smithy.api#readonly" => {}}
       end)
+      service.add_operation(:get_resource_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.bedrock#GetResourcePolicy"
+        operation.name = "GetResourcePolicy"
+        operation.input = GetResourcePolicyRequest
+        operation.output = GetResourcePolicyResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/resource-policy/{resourceArn}"}, "smithy.api#readonly" => {}, "smithy.api#tags" => ["resource-policy"]}
+      end)
       service.add_operation(:get_use_case_for_model_access, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.bedrock#GetUseCaseForModelAccess"
         operation.name = "GetUseCaseForModelAccess"
@@ -3607,6 +4136,18 @@ module Aws::Bedrock
         operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/use-case-for-model-access"}, "smithy.api#readonly" => {}}
+      end)
+      service.add_operation(:list_advanced_prompt_optimization_jobs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.bedrock#ListAdvancedPromptOptimizationJobs"
+        operation.name = "ListAdvancedPromptOptimizationJobs"
+        operation.input = ListAdvancedPromptOptimizationJobsRequest
+        operation.output = ListAdvancedPromptOptimizationJobsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/advanced-prompt-optimization-jobs"}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListAdvancedPromptOptimizationJobs.new
       end)
       service.add_operation(:list_automated_reasoning_policies, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.bedrock#ListAutomatedReasoningPolicies"
@@ -3684,6 +4225,19 @@ module Aws::Bedrock
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/custom-models"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListCustomModels.new
+      end)
+      service.add_operation(:list_enforced_guardrails_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.bedrock#ListEnforcedGuardrailsConfiguration"
+        operation.name = "ListEnforcedGuardrailsConfiguration"
+        operation.input = ListEnforcedGuardrailsConfigurationRequest
+        operation.output = ListEnforcedGuardrailsConfigurationResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/enforcedGuardrailsConfiguration"}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListEnforcedGuardrailsConfiguration.new
       end)
       service.add_operation(:list_evaluation_jobs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.bedrock#ListEvaluationJobs"
@@ -3855,6 +4409,30 @@ module Aws::Bedrock
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/listTagsForResource"}}
       end)
+      service.add_operation(:put_account_data_retention, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.bedrock#PutAccountDataRetention"
+        operation.name = "PutAccountDataRetention"
+        operation.input = PutAccountDataRetentionRequest
+        operation.output = PutAccountDataRetentionResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "PUT", "uri" => "/data-retention"}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:put_enforced_guardrail_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.bedrock#PutEnforcedGuardrailConfiguration"
+        operation.name = "PutEnforcedGuardrailConfiguration"
+        operation.input = PutEnforcedGuardrailConfigurationRequest
+        operation.output = PutEnforcedGuardrailConfigurationResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "PUT", "uri" => "/enforcedGuardrailsConfiguration"}, "smithy.api#idempotent" => {}}
+      end)
       service.add_operation(:put_model_invocation_logging_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.bedrock#PutModelInvocationLoggingConfiguration"
         operation.name = "PutModelInvocationLoggingConfiguration"
@@ -3865,6 +4443,18 @@ module Aws::Bedrock
         operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "PUT", "uri" => "/logging/modelinvocations"}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:put_resource_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.bedrock#PutResourcePolicy"
+        operation.name = "PutResourcePolicy"
+        operation.input = PutResourcePolicyRequest
+        operation.output = PutResourcePolicyResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"code" => 201, "method" => "POST", "uri" => "/resource-policy"}, "smithy.api#idempotent" => {}, "smithy.api#tags" => ["resource-policy", "resource-policy-internal"]}
       end)
       service.add_operation(:put_use_case_for_model_access, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.bedrock#PutUseCaseForModelAccess"
@@ -3917,6 +4507,19 @@ module Aws::Bedrock
         operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/automated-reasoning-policies/{policyArn}/build-workflows/{buildWorkflowId}/test-workflows"}}
+      end)
+      service.add_operation(:stop_advanced_prompt_optimization_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.bedrock#StopAdvancedPromptOptimizationJob"
+        operation.name = "StopAdvancedPromptOptimizationJob"
+        operation.input = StopAdvancedPromptOptimizationJobRequest
+        operation.output = StopAdvancedPromptOptimizationJobResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/advanced-prompt-optimization-jobs/{jobIdentifier}/stop"}}
       end)
       service.add_operation(:stop_evaluation_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.bedrock#StopEvaluationJob"
@@ -4022,6 +4625,18 @@ module Aws::Bedrock
         operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "PATCH", "uri" => "/automated-reasoning-policies/{policyArn}/test-cases/{testCaseId}"}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:update_custom_model_deployment, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.bedrock#UpdateCustomModelDeployment"
+        operation.name = "UpdateCustomModelDeployment"
+        operation.input = UpdateCustomModelDeploymentRequest
+        operation.output = UpdateCustomModelDeploymentResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"code" => 202, "method" => "PATCH", "uri" => "/model-customization/custom-model-deployments/{customModelDeploymentIdentifier}"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:update_guardrail, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.bedrock#UpdateGuardrail"

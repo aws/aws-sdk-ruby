@@ -12,6 +12,21 @@ module Aws::Synthetics
       attr_accessor message: String?
     end
 
+    class AddReplicaLocationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location: String,
+        ?vpc_config: Types::VpcConfigInput,
+        ?kms_key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location: String?
+      attr_accessor vpc_config: Types::VpcConfigInput?
+      attr_accessor kms_key_arn: String?
+    end
+
     class ArtifactConfigInput
       include Smithy::Schema::Structure
 
@@ -119,8 +134,10 @@ module Aws::Synthetics
         ?browser_configs: Array[Types::BrowserConfig],
         ?engine_configs: Array[Types::EngineConfig],
         ?visual_references: Array[Types::VisualReferenceOutput],
+        ?multi_location_config: Types::MultiLocationConfig,
         ?tags: Hash[String, String],
         ?artifact_config: Types::ArtifactConfigOutput,
+        ?kms_key_arn: String,
         ?dry_run_config: Types::DryRunConfigOutput,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -144,8 +161,10 @@ module Aws::Synthetics
       attr_accessor browser_configs: Array[Types::BrowserConfig]?
       attr_accessor engine_configs: Array[Types::EngineConfig]?
       attr_accessor visual_references: Array[Types::VisualReferenceOutput]?
+      attr_accessor multi_location_config: Types::MultiLocationConfig?
       attr_accessor tags: Hash[String, String]?
       attr_accessor artifact_config: Types::ArtifactConfigOutput?
+      attr_accessor kms_key_arn: String?
       attr_accessor dry_run_config: Types::DryRunConfigOutput?
     end
 
@@ -226,6 +245,7 @@ module Aws::Synthetics
         ?artifact_s3_location: String,
         ?dry_run_config: Types::CanaryDryRunConfigOutput,
         ?browser_type: String,
+        ?location: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -238,6 +258,7 @@ module Aws::Synthetics
       attr_accessor artifact_s3_location: String?
       attr_accessor dry_run_config: Types::CanaryDryRunConfigOutput?
       attr_accessor browser_type: String?
+      attr_accessor location: String?
     end
 
     class CanaryRunConfigInput
@@ -442,8 +463,10 @@ module Aws::Synthetics
         ?resources_to_replicate_tags: Array[String],
         ?provisioned_resource_cleanup: String,
         ?browser_configs: Array[Types::BrowserConfig],
+        ?add_replica_locations: Array[Types::AddReplicaLocationInput],
         ?tags: Hash[String, String],
         ?artifact_config: Types::ArtifactConfigInput,
+        ?kms_key_arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -460,8 +483,10 @@ module Aws::Synthetics
       attr_accessor resources_to_replicate_tags: Array[String]?
       attr_accessor provisioned_resource_cleanup: String?
       attr_accessor browser_configs: Array[Types::BrowserConfig]?
+      attr_accessor add_replica_locations: Array[Types::AddReplicaLocationInput]?
       attr_accessor tags: Hash[String, String]?
       attr_accessor artifact_config: Types::ArtifactConfigInput?
+      attr_accessor kms_key_arn: String?
     end
 
     class CreateCanaryResponse
@@ -935,6 +960,28 @@ module Aws::Synthetics
       attr_accessor tags: Hash[String, String]?
     end
 
+    module LocationType
+      Primary: String
+      Replica: String
+    end
+
+    class MultiLocationConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location_type: String,
+        ?primary_location: String,
+        ?replicas: Array[Types::Replica],
+        ?replication_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location_type: String?
+      attr_accessor primary_location: String?
+      attr_accessor replicas: Array[Types::Replica]?
+      attr_accessor replication_state: String?
+    end
+
     class NotFoundException
       include Smithy::Schema::Structure
 
@@ -949,6 +996,46 @@ module Aws::Synthetics
     module ProvisionedResourceCleanupSetting
       AUTOMATIC: String
       OFF: String
+    end
+
+    class Replica
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location: String,
+        ?replication_status: Types::ReplicationStatus,
+        ?canary_state: String,
+        ?last_modified: Time,
+        ?vpc_config: Types::VpcConfigOutput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location: String?
+      attr_accessor replication_status: Types::ReplicationStatus?
+      attr_accessor canary_state: String?
+      attr_accessor last_modified: Time?
+      attr_accessor vpc_config: Types::VpcConfigOutput?
+    end
+
+    module ReplicationState
+      InProgress: String
+      InSync: String
+      Inconsistent: String
+    end
+
+    class ReplicationStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state: String,
+        ?state_reason: String,
+        ?state_reason_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state: String?
+      attr_accessor state_reason: String?
+      attr_accessor state_reason_code: String?
     end
 
     class RequestEntityTooLargeException
@@ -1208,6 +1295,9 @@ module Aws::Synthetics
         ?dry_run_id: String,
         ?visual_references: Array[Types::VisualReferenceInput],
         ?browser_configs: Array[Types::BrowserConfig],
+        ?add_replica_locations: Array[Types::AddReplicaLocationInput],
+        ?remove_replica_locations: Array[String],
+        ?kms_key_arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1227,6 +1317,9 @@ module Aws::Synthetics
       attr_accessor dry_run_id: String?
       attr_accessor visual_references: Array[Types::VisualReferenceInput]?
       attr_accessor browser_configs: Array[Types::BrowserConfig]?
+      attr_accessor add_replica_locations: Array[Types::AddReplicaLocationInput]?
+      attr_accessor remove_replica_locations: Array[String]?
+      attr_accessor kms_key_arn: String?
     end
 
     class UpdateCanaryResponse

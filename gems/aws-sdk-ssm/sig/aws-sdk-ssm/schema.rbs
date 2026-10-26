@@ -44,6 +44,7 @@ module Aws::SSM
     AssociationComplianceSeverity: EnumShape
     AssociationDescription: StructureShape
     AssociationDescriptionList: ListShape
+    AssociationDispatchAssumeRoleArn: StringShape
     AssociationDoesNotExist: StructureShape
     AssociationExecution: StructureShape
     AssociationExecutionDoesNotExist: StructureShape
@@ -121,7 +122,19 @@ module Aws::SSM
     AutomationStepNotFoundException: StructureShape
     AutomationSubtype: EnumShape
     AutomationTargetParameterName: StringShape
+    AutomationTargets: ListShape
     AutomationType: EnumShape
+    AvailabilityZone: StringShape
+    AvailabilityZoneId: StringShape
+    AzureApplicationDisplayName: StringShape
+    AzureApplicationId: StringShape
+    AzureConfiguration: StructureShape
+    AzureSubscription: StructureShape
+    AzureSubscriptionDisplayName: StringShape
+    AzureSubscriptionId: StringShape
+    AzureSubscriptionList: ListShape
+    AzureTenantDisplayName: StringShape
+    AzureTenantId: StringShape
     BaselineDescription: StringShape
     BaselineId: StringShape
     BaselineName: StringShape
@@ -141,6 +154,19 @@ module Aws::SSM
     ChangeDetailsValue: StringShape
     ChangeRequestName: StringShape
     ClientToken: StringShape
+    CloudConnectorArn: StringShape
+    CloudConnectorConfiguration: UnionShape
+    CloudConnectorDescription: StringShape
+    CloudConnectorFilter: StructureShape
+    CloudConnectorFilterKey: EnumShape
+    CloudConnectorFilterList: ListShape
+    CloudConnectorFilterValue: StringShape
+    CloudConnectorFilterValues: ListShape
+    CloudConnectorIamRoleArn: StringShape
+    CloudConnectorId: StringShape
+    CloudConnectorMaxResults: IntegerShape
+    CloudConnectorSummary: StructureShape
+    CloudConnectorSummaryList: ListShape
     CloudWatchLogGroupName: StringShape
     CloudWatchOutputConfig: StructureShape
     CloudWatchOutputEnabled: BooleanShape
@@ -194,6 +220,9 @@ module Aws::SSM
     ComplianceUploadType: EnumShape
     CompliantSummary: StructureShape
     ComputerName: StringShape
+    ConfigConnectorArn: StringShape
+    ConfigurationTargets: UnionShape
+    ConflictException: StructureShape
     ConnectionStatus: EnumShape
     ContentLength: IntegerShape
     CreateActivationRequest: StructureShape
@@ -204,6 +233,8 @@ module Aws::SSM
     CreateAssociationBatchResult: StructureShape
     CreateAssociationRequest: StructureShape
     CreateAssociationResult: StructureShape
+    CreateCloudConnectorRequest: StructureShape
+    CreateCloudConnectorResult: StructureShape
     CreateDocumentRequest: StructureShape
     CreateDocumentResult: StructureShape
     CreateMaintenanceWindowRequest: StructureShape
@@ -226,6 +257,8 @@ module Aws::SSM
     DeleteActivationResult: StructureShape
     DeleteAssociationRequest: StructureShape
     DeleteAssociationResult: StructureShape
+    DeleteCloudConnectorRequest: StructureShape
+    DeleteCloudConnectorResult: StructureShape
     DeleteDocumentRequest: StructureShape
     DeleteDocumentResult: StructureShape
     DeleteInventoryRequest: StructureShape
@@ -246,6 +279,7 @@ module Aws::SSM
     DeleteResourceDataSyncResult: StructureShape
     DeleteResourcePolicyRequest: StructureShape
     DeleteResourcePolicyResponse: StructureShape
+    DeletionMode: EnumShape
     DeliveryTimedOutCount: IntegerShape
     DeregisterManagedInstanceRequest: StructureShape
     DeregisterManagedInstanceResult: StructureShape
@@ -328,6 +362,7 @@ module Aws::SSM
     DescriptionInDocument: StringShape
     DisassociateOpsItemRelatedItemRequest: StructureShape
     DisassociateOpsItemRelatedItemResponse: StructureShape
+    DisplayName: StringShape
     DocumentARN: StringShape
     DocumentAlreadyExists: StructureShape
     DocumentAuthor: StringShape
@@ -415,6 +450,8 @@ module Aws::SSM
     GetAutomationExecutionResult: StructureShape
     GetCalendarStateRequest: StructureShape
     GetCalendarStateResponse: StructureShape
+    GetCloudConnectorRequest: StructureShape
+    GetCloudConnectorResult: StructureShape
     GetCommandInvocationRequest: StructureShape
     GetCommandInvocationResult: StructureShape
     GetConnectionStatusRequest: StructureShape
@@ -642,6 +679,8 @@ module Aws::SSM
     ListAssociationVersionsResult: StructureShape
     ListAssociationsRequest: StructureShape
     ListAssociationsResult: StructureShape
+    ListCloudConnectorsRequest: StructureShape
+    ListCloudConnectorsResult: StructureShape
     ListCommandInvocationsRequest: StructureShape
     ListCommandInvocationsResult: StructureShape
     ListCommandsRequest: StructureShape
@@ -758,6 +797,7 @@ module Aws::SSM
     ModifyDocumentPermissionRequest: StructureShape
     ModifyDocumentPermissionResponse: StructureShape
     NextToken: StringShape
+    NoLongerSupportedException: StructureShape
     Node: StructureShape
     NodeAccountId: StringShape
     NodeAggregator: StructureShape
@@ -773,6 +813,7 @@ module Aws::SSM
     NodeFilterValueList: ListShape
     NodeId: StringShape
     NodeList: ListShape
+    NodeName: StringShape
     NodeOrganizationalUnitId: StringShape
     NodeOrganizationalUnitPath: StringShape
     NodeOwnerInfo: StructureShape
@@ -1175,6 +1216,7 @@ module Aws::SSM
     SnapshotDownloadUrl: StringShape
     SnapshotId: StringShape
     SourceId: StringShape
+    SourceLocation: StringShape
     SourceType: EnumShape
     StandardErrorContent: StringShape
     StandardOutputContent: StringShape
@@ -1260,6 +1302,8 @@ module Aws::SSM
     UpdateAssociationResult: StructureShape
     UpdateAssociationStatusRequest: StructureShape
     UpdateAssociationStatusResult: StructureShape
+    UpdateCloudConnectorRequest: StructureShape
+    UpdateCloudConnectorResult: StructureShape
     UpdateDocumentDefaultVersionRequest: StructureShape
     UpdateDocumentDefaultVersionResult: StructureShape
     UpdateDocumentMetadataRequest: StructureShape
@@ -1287,7 +1331,16 @@ module Aws::SSM
     Url: StringShape
     ValidNextStep: StringShape
     ValidNextStepList: ListShape
+    ValidateCloudConnectorMaxResults: IntegerShape
+    ValidateCloudConnectorRequest: StructureShape
+    ValidateCloudConnectorResult: StructureShape
     ValidationException: StructureShape
+    ValidationFinding: StructureShape
+    ValidationFindingCode: EnumShape
+    ValidationFindingList: ListShape
+    ValidationFindingScope: StructureShape
+    ValidationFindingScopeType: EnumShape
+    ValidationFindingType: EnumShape
     Version: StringShape
 
     AmazonSSM: ServiceShape

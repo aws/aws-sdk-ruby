@@ -79,6 +79,194 @@
                 },
                 "smithy.api#documentation": "<ul> <li> <p> <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_Operations_Amazon_Connect_Cases.html\">Cases actions</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_Types_Amazon_Connect_Cases.html\">Cases data types</a> </p> </li> </ul> <p>With Amazon Connect Cases, your agents can track and manage customer issues that require multiple interactions, follow-up tasks, and teams in your contact center. A case represents a customer issue. It records the issue, the steps and interactions taken to resolve the issue, and the outcome. For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/cases.html\">Amazon Connect Cases</a> in the <i>Amazon Connect Administrator Guide</i>.</p>",
                 "smithy.api#title": "Amazon Connect Cases",
+                "smithy.rules#endpointBdd": {
+                    "version": "1.1",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        }
+                    },
+                    "conditions": [
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.partition",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ],
+                            "assign": "PartitionResult"
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseDualStack"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsDualStack"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsFIPS"
+                                    ]
+                                },
+                                true
+                            ]
+                        }
+                    ],
+                    "results": [
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://cases-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://cases-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://cases.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://cases.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ],
+                    "root": 2,
+                    "nodeCount": 13,
+                    "nodes": "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"
+                },
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {
@@ -86,27 +274,27 @@
                             "builtIn": "AWS::Region",
                             "required": false,
                             "documentation": "The AWS region used to dispatch the request.",
-                            "type": "String"
+                            "type": "string"
                         },
                         "UseDualStack": {
                             "builtIn": "AWS::UseDualStack",
                             "required": true,
                             "default": false,
                             "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "UseFIPS": {
                             "builtIn": "AWS::UseFIPS",
                             "required": true,
                             "default": false,
                             "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "Endpoint": {
                             "builtIn": "SDK::Endpoint",
                             "required": false,
                             "documentation": "Override the endpoint used to send this request",
-                            "type": "String"
+                            "type": "string"
                         }
                     },
                     "rules": [
@@ -729,7 +917,7 @@
                 "type": {
                     "target": "com.amazonaws.connectcases#AuditEventType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Type of an audit history event.</p>",
+                        "smithy.api#documentation": "<p>The type of audit history event.</p> <p>Valid Values: <code>Case.Created</code> | <code>Case.Updated</code> | <code>RelatedItem.Created</code> | <code>RelatedItem.Updated</code> | <code>RelatedItem.Deleted</code> </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -824,7 +1012,7 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Can be either null, or have a String value type. Only one value can be provided.</p>",
                         "smithy.api#length": {
-                            "max": 500
+                            "max": 4100
                         }
                     }
                 },
@@ -896,6 +1084,14 @@
                     {
                         "value": "RelatedItem.Created",
                         "name": "RELATED_ITEM_CREATED"
+                    },
+                    {
+                        "value": "RelatedItem.Deleted",
+                        "name": "RELATED_ITEM_DELETED"
+                    },
+                    {
+                        "value": "RelatedItem.Updated",
+                        "name": "RELATED_ITEM_UPDATED"
                     }
                 ]
             }
@@ -989,7 +1185,7 @@
                 "caseRules": {
                     "target": "com.amazonaws.connectcases#CaseRuleIdentifierList",
                     "traits": {
-                        "smithy.api#documentation": "<p>List of case rule identifiers.</p>",
+                        "smithy.api#documentation": "<p>A list of case rule identifiers.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1004,7 +1200,7 @@
                 "caseRules": {
                     "target": "com.amazonaws.connectcases#BatchGetCaseRuleList",
                     "traits": {
-                        "smithy.api#documentation": "<p>List of detailed case rule information.</p>",
+                        "smithy.api#documentation": "<p>A list of detailed case rule information.</p>",
                         "smithy.api#length": {
                             "max": 50
                         },
@@ -1014,16 +1210,31 @@
                 "errors": {
                     "target": "com.amazonaws.connectcases#BatchGetCaseRuleErrorList",
                     "traits": {
-                        "smithy.api#documentation": "<p>List of case rule errors.</p>",
+                        "smithy.api#documentation": "<p>A list of case rule errors.</p>",
                         "smithy.api#length": {
                             "max": 50
                         },
                         "smithy.api#required": {}
                     }
+                },
+                "unprocessedCaseRules": {
+                    "target": "com.amazonaws.connectcases#BatchGetCaseRuleUnprocessedList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of unprocessed case rule identifiers.</p>",
+                        "smithy.api#length": {
+                            "max": 50
+                        }
+                    }
                 }
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.connectcases#BatchGetCaseRuleUnprocessedList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connectcases#CaseRuleId"
             }
         },
         "com.amazonaws.connectcases#BatchGetField": {
@@ -1225,6 +1436,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Tests that operandOne is not equal to operandTwo.</p>"
                     }
+                },
+                "andAll": {
+                    "target": "com.amazonaws.connectcases#CompoundCondition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Combines multiple conditions with AND operator. All conditions must be true for the compound condition to be true.</p>"
+                    }
+                },
+                "orAll": {
+                    "target": "com.amazonaws.connectcases#CompoundCondition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Combines multiple conditions with OR operator. At least one condition must be true for the compound condition to be true.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1334,7 +1557,7 @@
                     "traits": {
                         "smithy.api#documentation": "<p>List of field identifiers.</p>",
                         "smithy.api#length": {
-                            "max": 200
+                            "max": 400
                         },
                         "smithy.api#required": {}
                     }
@@ -1355,6 +1578,12 @@
                 },
                 "not": {
                     "target": "com.amazonaws.connectcases#CaseFilter"
+                },
+                "tag": {
+                    "target": "com.amazonaws.connectcases#TagFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tags to filter on.</p>"
+                    }
                 },
                 "andAll": {
                     "target": "com.amazonaws.connectcases#CaseFilterList",
@@ -1451,6 +1680,18 @@
                     "target": "com.amazonaws.connectcases#RequiredCaseRule",
                     "traits": {
                         "smithy.api#documentation": "<p>Required rule type, used to indicate whether a field is required.</p>"
+                    }
+                },
+                "fieldOptions": {
+                    "target": "com.amazonaws.connectcases#FieldOptionsCaseRule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Which options are available in a child field based on the selected value in a parent field.</p>"
+                    }
+                },
+                "hidden": {
+                    "target": "com.amazonaws.connectcases#HiddenCaseRule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether a field is visible, based on values in other fields.</p>"
                     }
                 }
             },
@@ -1672,6 +1913,43 @@
                 "smithy.api#documentation": "<p>A filter for related items of type <code>Comment</code>.</p>"
             }
         },
+        "com.amazonaws.connectcases#CommentUpdateContent": {
+            "type": "structure",
+            "members": {
+                "body": {
+                    "target": "com.amazonaws.connectcases#CommentBody",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updated text in the body of a <code>Comment</code> on a case.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "contentType": {
+                    "target": "com.amazonaws.connectcases#CommentBodyTextType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Type of the text in the box of a <code>Comment</code> on a case.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the updated content of a <code>Comment</code> related item.</p>"
+            }
+        },
+        "com.amazonaws.connectcases#CompoundCondition": {
+            "type": "structure",
+            "members": {
+                "conditions": {
+                    "target": "com.amazonaws.connectcases#BooleanConditionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of conditions to combine using the logical operator.</p> <note> <p>For API users: A case rule can have a maximum of 5 conditions, spread across a maximum of 2 levels of nesting.</p> </note>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A compound condition that combines multiple boolean conditions using logical operators. In the Amazon Connect admin website, case rules are known as <i>case field conditions</i>. For more information about case field conditions, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html\">Add case field conditions to a case template</a>.</p>"
+            }
+        },
         "com.amazonaws.connectcases#ConflictException": {
             "type": "structure",
             "members": {
@@ -1843,7 +2121,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<note> <p>If you provide a value for <code>PerformedBy.UserArn</code> you must also have <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeUser.html\">connect:DescribeUser</a> permission on the User ARN resource that you provide</p> </note> <p>Creates a case in the specified Cases domain. Case system and custom fields are taken as an array id/value pairs with a declared data types.</p> <p>The following fields are required when creating a case:</p> <ul> <li> <p> <code>customer_id</code> - You must provide the full customer profile ARN in this format: <code>arn:aws:profile:your_AWS_Region:your_AWS_account ID:domains/your_profiles_domain_name/profiles/profile_ID</code> </p> </li> <li> <p> <code>title</code> </p> </li> </ul>",
+                "smithy.api#documentation": "<note> <p>If you provide a value for <code>PerformedBy.UserArn</code> you must also have <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeUser.html\">connect:DescribeUser</a> permission on the User ARN resource that you provide</p> </note> <p>Creates a case in the specified Cases domain. Case system and custom fields are taken as an array id/value pairs with a declared data types.</p> <p>When creating a case from a template that has tag propagation configurations, the specified tags are automatically applied to the case.</p> <p>The following fields are required when creating a case:</p> <ul> <li> <p> <code>customer_id</code> - You must provide the full customer profile ARN in this format: <code>arn:aws:profile:your_AWS_Region:your_AWS_account ID:domains/your_profiles_domain_name/profiles/profile_ID</code> </p> </li> <li> <p> <code>title</code> </p> </li> </ul>",
                 "smithy.api#http": {
                     "uri": "/domains/{domainId}/cases",
                     "method": "POST"
@@ -1874,7 +2152,7 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An array of objects with field ID (matching ListFields/DescribeField) and value union data.</p>",
                         "smithy.api#length": {
-                            "max": 100
+                            "max": 220
                         },
                         "smithy.api#required": {}
                     }
@@ -1891,6 +2169,12 @@
                 },
                 "performedBy": {
                     "target": "com.amazonaws.connectcases#UserUnion"
+                },
+                "tags": {
+                    "target": "com.amazonaws.connectcases#MutableTags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of of key-value pairs that represent tags on a resource. Tags are used to organize, track, or control access for this resource.</p>"
+                    }
                 }
             }
         },
@@ -2156,6 +2440,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The description of the field.</p>"
                     }
+                },
+                "attributes": {
+                    "target": "com.amazonaws.connectcases#FieldAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Union of field attributes.</p>"
+                    }
                 }
             }
         },
@@ -2292,7 +2582,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a related item (comments, tasks, and contacts) and associates it with a case.</p> <note> <ul> <li> <p>A Related Item is a resource that is associated with a case. It may or may not have an external identifier linking it to an external resource (for example, a <code>contactArn</code>). All Related Items have their own internal identifier, the <code>relatedItemArn</code>. Examples of related items include <code>comments</code> and <code>contacts</code>.</p> </li> <li> <p>If you provide a value for <code>performedBy.userArn</code> you must also have <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeUser.html\">DescribeUser</a> permission on the ARN of the user that you provide.</p> </li> <li> <p>The <code>type</code> field is reserved for internal use only.</p> </li> </ul> </note>",
+                "smithy.api#documentation": "<p>Creates a related item (comments, tasks, and contacts) and associates it with a case.</p> <p>There's a quota for the number of fields allowed in a Custom type related item. See <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#cases-quotas\">Amazon Connect Cases quotas</a>.</p> <p> <b>Use cases</b> </p> <p>Following are examples of related items that you may want to associate with a case:</p> <ul> <li> <p>Related contacts, such as calls, chats, emails tasks</p> </li> <li> <p>Comments, for agent notes</p> </li> <li> <p>SLAs, to capture target resolution goals</p> </li> <li> <p>Cases, to capture related Amazon Connect Cases</p> </li> <li> <p>Files, such as policy documentation or customer-provided attachments</p> </li> <li> <p>Custom related items, which provide flexibility for you to define related items that such as bookings, orders, products, notices, and more</p> </li> </ul> <p> <b>Important things to know</b> </p> <ul> <li> <p>If you are associating a contact to a case by passing in <code>Contact</code> for a <code>type</code>, you must have <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeContact.html\">DescribeContact</a> permission on the ARN of the contact that you provide in <code>content.contact.contactArn</code>.</p> </li> <li> <p>A Related Item is a resource that is associated with a case. It may or may not have an external identifier linking it to an external resource (for example, a <code>contactArn</code>). All Related Items have their own internal identifier, the <code>relatedItemArn</code>. Examples of related items include <code>comments</code> and <code>contacts</code>.</p> </li> <li> <p>If you provide a value for <code>performedBy.userArn</code> you must also have <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeUser.html\">DescribeUser</a> permission on the ARN of the user that you provide.</p> </li> <li> <p>The <code>type</code> field is reserved for internal use only.</p> </li> </ul> <p> <b>Endpoints</b>: See <a href=\"https://docs.aws.amazon.com/general/latest/gr/connect_region.html\">Amazon Connect endpoints and quotas</a>.</p>",
                 "smithy.api#http": {
                     "uri": "/domains/{domainId}/cases/{caseId}/related-items/",
                     "method": "POST"
@@ -2447,6 +2737,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of case rules (also known as <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html\">case field conditions</a>) on a template. </p>"
                     }
+                },
+                "tagPropagationConfigurations": {
+                    "target": "com.amazonaws.connectcases#TagPropagationConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines tag propagation configuration for resources created within a domain. Tags specified here will be automatically applied to resources being created for the specified resource type.</p>"
+                    }
                 }
             }
         },
@@ -2573,6 +2869,25 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Represents the content of a <code>Custom</code> related item.</p>"
+            }
+        },
+        "com.amazonaws.connectcases#CustomUpdateContent": {
+            "type": "structure",
+            "members": {
+                "fields": {
+                    "target": "com.amazonaws.connectcases#FieldValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of updated field values for the <code>Custom</code> related item. All existing and new fields, and their associated values should be included. Fields not included as part of this request will be removed.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 50
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the updated content of a <code>Custom</code> related item.</p>"
             }
         },
         "com.amazonaws.connectcases#DeleteCase": {
@@ -2791,7 +3106,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a field from a cases template. You can delete up to 100 fields per domain.</p> <p>After a field is deleted:</p> <ul> <li> <p>You can still retrieve the field by calling <code>BatchGetField</code>.</p> </li> <li> <p>You cannot update a deleted field by calling <code>UpdateField</code>; it throws a <code>ValidationException</code>.</p> </li> <li> <p>Deleted fields are not included in the <code>ListFields</code> response.</p> </li> <li> <p>Calling <code>CreateCase</code> with a deleted field throws a <code>ValidationException</code> denoting which field IDs in the request have been deleted.</p> </li> <li> <p>Calling <code>GetCase</code> with a deleted field ID returns the deleted field's value if one exists.</p> </li> <li> <p>Calling <code>UpdateCase</code> with a deleted field ID throws a <code>ValidationException</code> if the case does not already contain a value for the deleted field. Otherwise it succeeds, allowing you to update or remove (using <code>emptyValue: {}</code>) the field's value from the case.</p> </li> <li> <p> <code>GetTemplate</code> does not return field IDs for deleted fields.</p> </li> <li> <p> <code>GetLayout</code> does not return field IDs for deleted fields.</p> </li> <li> <p>Calling <code>SearchCases</code> with the deleted field ID as a filter returns any cases that have a value for the deleted field that matches the filter criteria.</p> </li> <li> <p>Calling <code>SearchCases</code> with a <code>searchTerm</code> value that matches a deleted field's value on a case returns the case in the response.</p> </li> <li> <p>Calling <code>BatchPutFieldOptions</code> with a deleted field ID throw a <code>ValidationException</code>.</p> </li> <li> <p>Calling <code>GetCaseEventConfiguration</code> does not return field IDs for deleted fields.</p> </li> </ul>",
+                "smithy.api#documentation": "<p>Deletes a field from a cases template.</p> <p>After a field is deleted:</p> <ul> <li> <p>You can still retrieve the field by calling <code>BatchGetField</code>.</p> </li> <li> <p>You cannot update a deleted field by calling <code>UpdateField</code>; it throws a <code>ValidationException</code>.</p> </li> <li> <p>Deleted fields are not included in the <code>ListFields</code> response.</p> </li> <li> <p>Calling <code>CreateCase</code> with a deleted field throws a <code>ValidationException</code> denoting which field identifiers in the request have been deleted.</p> </li> <li> <p>Calling <code>GetCase</code> with a deleted field identifier returns the deleted field's value if one exists.</p> </li> <li> <p>Calling <code>UpdateCase</code> with a deleted field ID throws a <code>ValidationException</code> if the case does not already contain a value for the deleted field. Otherwise it succeeds, allowing you to update or remove (using <code>emptyValue: {}</code>) the field's value from the case.</p> </li> <li> <p> <code>GetTemplate</code> does not return field IDs for deleted fields.</p> </li> <li> <p> <code>GetLayout</code> does not return field IDs for deleted fields.</p> </li> <li> <p>Calling <code>SearchCases</code> with the deleted field ID as a filter returns any cases that have a value for the deleted field that matches the filter criteria.</p> </li> <li> <p>Calling <code>SearchCases</code> with a <code>searchTerm</code> value that matches a deleted field's value on a case returns the case in the response.</p> </li> <li> <p>Calling <code>BatchPutFieldOptions</code> with a deleted field ID throw a <code>ValidationException</code>.</p> </li> <li> <p>Calling <code>GetCaseEventConfiguration</code> does not return field IDs for deleted fields.</p> </li> </ul>",
                 "smithy.api#http": {
                     "uri": "/domains/{domainId}/fields/{fieldId}",
                     "method": "DELETE"
@@ -3268,6 +3583,20 @@
                 }
             }
         },
+        "com.amazonaws.connectcases#FieldAttributes": {
+            "type": "union",
+            "members": {
+                "text": {
+                    "target": "com.amazonaws.connectcases#TextAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Field attributes for Text field type.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Union of field attributes.</p>"
+            }
+        },
         "com.amazonaws.connectcases#FieldDescription": {
             "type": "string",
             "traits": {
@@ -3365,7 +3694,7 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Represents an ordered list containing field related information.</p>",
                         "smithy.api#length": {
-                            "max": 100
+                            "max": 220
                         },
                         "smithy.api#required": {}
                     }
@@ -3535,6 +3864,33 @@
                 "smithy.api#pattern": "^.*[\\S]$"
             }
         },
+        "com.amazonaws.connectcases#FieldOptionsCaseRule": {
+            "type": "structure",
+            "members": {
+                "parentFieldId": {
+                    "target": "com.amazonaws.connectcases#FieldId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the parent field that controls options.</p>"
+                    }
+                },
+                "childFieldId": {
+                    "target": "com.amazonaws.connectcases#FieldId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the child field whose options are controlled.</p>"
+                    }
+                },
+                "parentChildFieldOptionsMappings": {
+                    "target": "com.amazonaws.connectcases#ParentChildFieldOptionsMappingList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A mapping between a parent field option value and child field option values.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Rules that control which options are available in a child field based on the selected value in a parent field.</p>"
+            }
+        },
         "com.amazonaws.connectcases#FieldOptionsList": {
             "type": "list",
             "member": {
@@ -3577,6 +3933,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The namespace of a field.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "attributes": {
+                    "target": "com.amazonaws.connectcases#FieldAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Union of field attributes.</p>"
                     }
                 }
             },
@@ -3661,7 +4023,7 @@
                     "traits": {
                         "smithy.api#documentation": "<p>String value type.</p>",
                         "smithy.api#length": {
-                            "max": 3000
+                            "max": 4100
                         }
                     }
                 },
@@ -3691,7 +4053,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Object to store union of Field values.</p> <note> <p>The <code>Summary</code> system field accepts 3000 characters while all other fields accept 500 characters.</p> </note>"
+                "smithy.api#documentation": "<p>Object to store union of Field values.</p> <note> <p>The <code>Summary</code> system field accepts up to 3000 characters, while all other fields accept up to 4100 characters. If you use multi-byte characters, the effective character limit may be lower.</p> </note>"
             }
         },
         "com.amazonaws.connectcases#FileArn": {
@@ -3958,7 +4320,7 @@
                         "smithy.api#documentation": "<p>A list of unique field identifiers. </p>",
                         "smithy.api#length": {
                             "min": 1,
-                            "max": 100
+                            "max": 220
                         },
                         "smithy.api#required": {}
                     }
@@ -3979,7 +4341,7 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of detailed field information. </p>",
                         "smithy.api#length": {
-                            "max": 100
+                            "max": 220
                         },
                         "smithy.api#required": {}
                     }
@@ -4232,6 +4594,12 @@
                     "target": "com.amazonaws.connectcases#LastModifiedTime",
                     "traits": {
                         "smithy.api#documentation": "<p>Timestamp at which the resource was created or last modified.</p>"
+                    }
+                },
+                "attributes": {
+                    "target": "com.amazonaws.connectcases#FieldAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Union of field attributes.</p>"
                     }
                 }
             },
@@ -4486,7 +4854,35 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of case rules (also known as <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html\">case field conditions</a>) on a template. </p>"
                     }
+                },
+                "tagPropagationConfigurations": {
+                    "target": "com.amazonaws.connectcases#TagPropagationConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines tag propagation configuration for resources created within a domain. Tags specified here will be automatically applied to resources being created for the specified resource type.</p>"
+                    }
                 }
+            }
+        },
+        "com.amazonaws.connectcases#HiddenCaseRule": {
+            "type": "structure",
+            "members": {
+                "defaultValue": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the field is hidden when no conditions match.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "conditions": {
+                    "target": "com.amazonaws.connectcases#BooleanConditionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of conditions that determine field visibility.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A rule that controls field visibility based on conditions. Fields can be shown or hidden dynamically based on values in other fields.</p>"
             }
         },
         "com.amazonaws.connectcases#IamPrincipalArn": {
@@ -5360,6 +5756,31 @@
                 }
             }
         },
+        "com.amazonaws.connectcases#MutableTagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^(?![aA][wW][sS]:)[a-zA-Z0-9 _.:/=+\\-@]+$"
+            }
+        },
+        "com.amazonaws.connectcases#MutableTags": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.connectcases#MutableTagKey"
+            },
+            "value": {
+                "target": "com.amazonaws.connectcases#TagValueString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
         "com.amazonaws.connectcases#NextToken": {
             "type": "string",
             "traits": {
@@ -5432,6 +5853,59 @@
                         "name": "DESCENDING"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.connectcases#ParentChildFieldOptionValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^$|^.*[\\S]$"
+            }
+        },
+        "com.amazonaws.connectcases#ParentChildFieldOptionValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connectcases#ParentChildFieldOptionValue"
+            }
+        },
+        "com.amazonaws.connectcases#ParentChildFieldOptionsMapping": {
+            "type": "structure",
+            "members": {
+                "parentFieldOptionValue": {
+                    "target": "com.amazonaws.connectcases#ParentChildFieldOptionValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value in the parent field.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "childFieldOptionValues": {
+                    "target": "com.amazonaws.connectcases#ParentChildFieldOptionValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of allowed values in the child field.</p>",
+                        "smithy.api#length": {
+                            "max": 1500
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A mapping between a parent field option value and child field option values.</p>"
+            }
+        },
+        "com.amazonaws.connectcases#ParentChildFieldOptionsMappingList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connectcases#ParentChildFieldOptionsMapping"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
+                }
             }
         },
         "com.amazonaws.connectcases#PutCaseEventConfiguration": {
@@ -5509,6 +5983,9 @@
             },
             "create": {
                 "target": "com.amazonaws.connectcases#CreateRelatedItem"
+            },
+            "update": {
+                "target": "com.amazonaws.connectcases#UpdateRelatedItem"
             },
             "delete": {
                 "target": "com.amazonaws.connectcases#DeleteRelatedItem"
@@ -5724,6 +6201,20 @@
                 "smithy.api#documentation": "<p>The list of types of related items and their parameters to use for filtering.</p>"
             }
         },
+        "com.amazonaws.connectcases#RelatedItemUpdateContent": {
+            "type": "union",
+            "members": {
+                "comment": {
+                    "target": "com.amazonaws.connectcases#CommentUpdateContent"
+                },
+                "custom": {
+                    "target": "com.amazonaws.connectcases#CustomUpdateContent"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the content of a related item to be updated. This is a union type that can contain either comment content or custom content.</p>"
+            }
+        },
         "com.amazonaws.connectcases#RequiredCaseRule": {
             "type": "structure",
             "members": {
@@ -5809,6 +6300,14 @@
                     {
                         "name": "REQUIRED",
                         "value": "Required"
+                    },
+                    {
+                        "name": "HIDDEN",
+                        "value": "Hidden"
+                    },
+                    {
+                        "name": "FIELD_OPTIONS",
+                        "value": "FieldOptions"
                     }
                 ]
             }
@@ -5839,7 +6338,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Searches for related items across all cases within a domain. This is a global search operation that returns related items from multiple cases, unlike the case-specific <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_SearchRelatedItems.html\">SearchRelatedItems</a> API.</p> <p> <b>Use cases</b> </p> <p>Following are common uses cases for this API:</p> <ul> <li> <p>Find cases with similar issues across the domain. For example, search for all cases containing comments about \"product defect\" to identify patterns and existing solutions.</p> </li> <li> <p>Locate all cases associated with specific contacts or orders. For example, find all cases linked to a contactArn to understand the complete customer journey. </p> </li> <li> <p>Monitor SLA compliance across cases. For example, search for all cases with \"Active\" SLA status to prioritize remediation efforts.</p> </li> </ul> <p> <b>Important things to know</b> </p> <ul> <li> <p>This API returns case IDs, not complete case objects. To retrieve full case details, you must make additional calls to the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_GetCase.html\">GetCase</a> API for each returned case ID. </p> </li> <li> <p>This API searches across related items content, not case fields. Use the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_SearchCases.html\">SearchCases</a> API to search within case field values.</p> </li> </ul> <p> <b>Endpoints</b>: See <a href=\"https://docs.aws.amazon.com/general/latest/gr/connect_region.html\">Amazon Connect endpoints and quotas</a>.</p>",
+                "smithy.api#documentation": "<p>Searches for related items across all cases within a domain. This is a global search operation that returns related items from multiple cases, unlike the case-specific <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_SearchRelatedItems.html\">SearchRelatedItems</a> API.</p> <p> <b>Use cases</b> </p> <p>Following are common uses cases for this API:</p> <ul> <li> <p>Find cases with similar issues across the domain. For example, search for all cases containing comments about \"product defect\" to identify patterns and existing solutions.</p> </li> <li> <p>Locate all cases associated with specific contacts or orders. For example, find all cases linked to a contactArn to understand the complete customer journey. </p> </li> <li> <p>Monitor SLA compliance across cases. For example, search for all cases with \"Active\" SLA status to prioritize remediation efforts.</p> </li> </ul> <p> <b>Important things to know</b> </p> <ul> <li> <p>This API returns case identifiers, not complete case objects. To retrieve full case details, you must make additional calls to the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_GetCase.html\">GetCase</a> API for each returned case ID. </p> </li> <li> <p>This API searches across related items content, not case fields. Use the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_SearchCases.html\">SearchCases</a> API to search within case field values.</p> </li> </ul> <p> <b>Endpoints</b>: See <a href=\"https://docs.aws.amazon.com/general/latest/gr/connect_region.html\">Amazon Connect endpoints and quotas</a>.</p>",
                 "smithy.api#http": {
                     "uri": "/domains/{domainId}/related-items-search",
                     "method": "POST"
@@ -6139,7 +6638,7 @@
                         "smithy.api#documentation": "<p>The list of field identifiers to be returned as part of the response.</p>",
                         "smithy.api#length": {
                             "min": 0,
-                            "max": 10
+                            "max": 25
                         }
                     }
                 }
@@ -6162,6 +6661,13 @@
                             "max": 100
                         },
                         "smithy.api#required": {}
+                    }
+                },
+                "totalCount": {
+                    "target": "com.amazonaws.connectcases#TotalCount",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The total number of cases that matched the search criteria.</p>"
                     }
                 }
             }
@@ -6188,7 +6694,7 @@
                     "traits": {
                         "smithy.api#documentation": "<p>List of case field values.</p>",
                         "smithy.api#length": {
-                            "max": 10
+                            "max": 25
                         },
                         "smithy.api#required": {}
                     }
@@ -6377,6 +6883,16 @@
             },
             "traits": {
                 "smithy.api#sparse": {}
+            }
+        },
+        "com.amazonaws.connectcases#SearchTagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9 _.:/=+\\-@]+$"
             }
         },
         "com.amazonaws.connectcases#Section": {
@@ -6662,6 +7178,20 @@
                 "target": "com.amazonaws.connectcases#Sort"
             }
         },
+        "com.amazonaws.connectcases#TagFilter": {
+            "type": "union",
+            "members": {
+                "equalTo": {
+                    "target": "com.amazonaws.connectcases#TagValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Object containing tag key and value information.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A filter for tags. Only one value can be provided.</p>"
+            }
+        },
         "com.amazonaws.connectcases#TagKey": {
             "type": "string",
             "traits": {
@@ -6682,6 +7212,54 @@
                     "min": 0,
                     "max": 50
                 }
+            }
+        },
+        "com.amazonaws.connectcases#TagPropagationConfiguration": {
+            "type": "structure",
+            "members": {
+                "resourceType": {
+                    "target": "com.amazonaws.connectcases#TagPropagationResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Supported resource types for tag propagation. Determines which resources will receive automatically propagated tags.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tagMap": {
+                    "target": "com.amazonaws.connectcases#MutableTags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags that will be applied to the created resource.</p>",
+                        "smithy.api#length": {
+                            "max": 10
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines tag propagation configuration for resources created within a domain. Tags specified here will be automatically applied to resources being created for the specified resource type.</p>"
+            }
+        },
+        "com.amazonaws.connectcases#TagPropagationConfigurationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connectcases#TagPropagationConfiguration"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.connectcases#TagPropagationResourceType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Cases",
+                        "name": "CASES",
+                        "documentation": "Cases resources created within the domain"
+                    }
+                ]
             }
         },
         "com.amazonaws.connectcases#TagResource": {
@@ -6738,6 +7316,35 @@
                 }
             }
         },
+        "com.amazonaws.connectcases#TagValue": {
+            "type": "structure",
+            "members": {
+                "key": {
+                    "target": "com.amazonaws.connectcases#SearchTagKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag key in the tag filter value.</p>"
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.connectcases#TagValueString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag value in the tag filter value.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object for case tag filter values.</p>"
+            }
+        },
+        "com.amazonaws.connectcases#TagValueString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 256
+                },
+                "smithy.api#pattern": "^([a-zA-Z0-9 _.:/=+\\-@]*)$"
+            }
+        },
         "com.amazonaws.connectcases#Tags": {
             "type": "map",
             "key": {
@@ -6755,7 +7362,7 @@
             "traits": {
                 "smithy.api#range": {
                     "min": 1,
-                    "max": 129600
+                    "max": 1051200
                 }
             }
         },
@@ -6850,8 +7457,9 @@
                 "fieldId": {
                     "target": "com.amazonaws.connectcases#FieldId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Unique identifier of a field.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "NULL",
+                        "smithy.api#documentation": "<p>Unique identifier of a field.</p>"
                     }
                 }
             },
@@ -6864,12 +7472,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "Active",
-                        "name": "ACTIVE"
+                        "name": "ACTIVE",
+                        "value": "Active"
                     },
                     {
-                        "value": "Inactive",
-                        "name": "INACTIVE"
+                        "name": "INACTIVE",
+                        "value": "Inactive"
                     }
                 ]
             }
@@ -6917,6 +7525,12 @@
                         "smithy.api#documentation": "<p>The status of the template.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "tagPropagationConfigurations": {
+                    "target": "com.amazonaws.connectcases#TagPropagationConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines tag propagation configuration for resources created within a domain. Tags specified here will be automatically applied to resources being created for the specified resource type.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6927,6 +7541,21 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.connectcases#TemplateSummary"
+            }
+        },
+        "com.amazonaws.connectcases#TextAttributes": {
+            "type": "structure",
+            "members": {
+                "isMultiline": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Attribute that defines rendering component and validation.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Field attributes for Text field type.</p>"
             }
         },
         "com.amazonaws.connectcases#ThrottlingException": {
@@ -6944,6 +7573,15 @@
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 429,
                 "smithy.api#retryable": {}
+            }
+        },
+        "com.amazonaws.connectcases#TotalCount": {
+            "type": "long",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "min": 0
+                }
             }
         },
         "com.amazonaws.connectcases#UntagResource": {
@@ -7058,7 +7696,7 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An array of objects with <code>fieldId</code> (matching ListFields/DescribeField) and value union data, structured identical to <code>CreateCase</code>.</p>",
                         "smithy.api#length": {
-                            "max": 100
+                            "max": 220
                         },
                         "smithy.api#required": {}
                     }
@@ -7092,6 +7730,9 @@
                 },
                 {
                     "target": "com.amazonaws.connectcases#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ServiceQuotaExceededException"
                 },
                 {
                     "target": "com.amazonaws.connectcases#ThrottlingException"
@@ -7225,6 +7866,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The description of a field.</p>"
                     }
+                },
+                "attributes": {
+                    "target": "com.amazonaws.connectcases#FieldAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Union of field attributes.</p>"
+                    }
                 }
             }
         },
@@ -7309,6 +7956,149 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.connectcases#UpdateRelatedItem": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connectcases#UpdateRelatedItemRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connectcases#UpdateRelatedItemResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connectcases#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the content of a related item associated with a case. The following related item types are supported:</p> <ul> <li> <p> <b>Comment</b> - Update the text content of an existing comment</p> </li> <li> <p> <b>Custom</b> - Update the fields of a custom related item. You can add, modify, and remove fields from a custom related item. There's a quota for the number of fields allowed in a Custom type related item. See <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#cases-quotas\">Amazon Connect Cases quotas</a>.</p> </li> </ul> <p> <b>Important things to know</b> </p> <ul> <li> <p>When updating a Custom related item, all existing and new fields, and their associated values should be included in the request. Fields not included as part of this request will be removed.</p> </li> <li> <p>If you provide a value for <code>performedBy.userArn</code> you must also have <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeUser.html\">DescribeUser</a> permission on the ARN of the user that you provide.</p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/case-fields.html#system-case-fields\">System case fields</a> cannot be used in a custom related item.</p> </li> </ul> <p> <b>Endpoints</b>: See <a href=\"https://docs.aws.amazon.com/general/latest/gr/connect_region.html\">Amazon Connect endpoints and quotas</a>.</p>",
+                "smithy.api#http": {
+                    "uri": "/domains/{domainId}/cases/{caseId}/related-items/{relatedItemId}",
+                    "method": "PUT"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.connectcases#UpdateRelatedItemRequest": {
+            "type": "structure",
+            "members": {
+                "domainId": {
+                    "target": "com.amazonaws.connectcases#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Cases domain. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "caseId": {
+                    "target": "com.amazonaws.connectcases#CaseId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier of the case.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "relatedItemId": {
+                    "target": "com.amazonaws.connectcases#RelatedItemId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique identifier of a related item.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "content": {
+                    "target": "com.amazonaws.connectcases#RelatedItemUpdateContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content of a related item to be updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "performedBy": {
+                    "target": "com.amazonaws.connectcases#UserUnion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the user who performed the update of the related item.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connectcases#UpdateRelatedItemResponse": {
+            "type": "structure",
+            "members": {
+                "relatedItemId": {
+                    "target": "com.amazonaws.connectcases#RelatedItemId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the updated related item.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "relatedItemArn": {
+                    "target": "com.amazonaws.connectcases#RelatedItemArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the updated related item.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.connectcases#RelatedItemType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Type of the updated related item.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "content": {
+                    "target": "com.amazonaws.connectcases#RelatedItemContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the content of the updated related item.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "associationTime": {
+                    "target": "com.amazonaws.connectcases#AssociationTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Time at which the related item was associated with the case.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.connectcases#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of of key-value pairs that represent tags on a resource. Tags are used to organize, track, or control access for this resource.</p>"
+                    }
+                },
+                "lastUpdatedUser": {
+                    "target": "com.amazonaws.connectcases#UserUnion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the last user that updated the related item.</p>"
+                    }
+                },
+                "createdBy": {
+                    "target": "com.amazonaws.connectcases#UserUnion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the creator of the related item.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.connectcases#UpdateTemplate": {
             "type": "operation",
             "input": {
@@ -7329,6 +8119,9 @@
                 },
                 {
                     "target": "com.amazonaws.connectcases#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ServiceQuotaExceededException"
                 },
                 {
                     "target": "com.amazonaws.connectcases#ThrottlingException"
@@ -7399,6 +8192,12 @@
                     "target": "com.amazonaws.connectcases#TemplateCaseRuleList",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of case rules (also known as <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html\">case field conditions</a>) on a template.</p>"
+                    }
+                },
+                "tagPropagationConfigurations": {
+                    "target": "com.amazonaws.connectcases#TagPropagationConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines tag propagation configuration for resources created within a domain. Tags specified here will be automatically applied to resources being created for the specified resource type.</p>"
                     }
                 }
             }

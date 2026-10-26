@@ -29,6 +29,7 @@ require 'aws-sdk-core/plugins/retry_errors'
 require 'aws-sdk-core/plugins/stub_responses'
 require 'aws-sdk-core/plugins/regional_endpoints'
 require 'aws-sdk-core/plugins/sigv4'
+require 'smithy-client/rpc_v2_cbor'
 require 'aws-sdk-core/json_rpc'
 
 Aws::Core::Plugins::GlobalConfiguration.add_identifier(:keyspaces)
@@ -123,7 +124,7 @@ module Aws::Keyspaces
     #  at ~/.aws/config and ~/.aws/credentials, respectively.  When not specified, 'default' is used.
     # @option options [Symbol, Object] :protocol
     #  The protocol used for request serialization and response deserialization. Defaults to the service default protocol. May be a Symbol naming a supported protocol, or a custom object implementing the protocol interface.
-    #  Supported protocols: +:json_rpc+ (defaults to +:json_rpc+).
+    #  Supported protocols: +:rpc_v2_cbor+, +:json_rpc+ (defaults to +:rpc_v2_cbor+).
     # @option options [Boolean] :raise_response_errors (true)
     #  When `true`, response errors are raised. When `false`, the error is placed on the
     #  output in the {Smithy::Client::Response#error error accessor}.
@@ -144,18 +145,18 @@ module Aws::Keyspaces
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -274,6 +275,8 @@ module Aws::Keyspaces
     #   <p>The optional Amazon Web Services Region specific settings of a multi-Region table. These settings overwrite the general settings of the table for the specified Region. </p> <p>For a multi-Region table in provisioned capacity mode, you can configure the table's read capacity differently for each Region's replica. The write capacity, however, remains synchronized between all replicas to ensure that there's enough capacity to replicate writes across all Regions. To define the read capacity for a table replica in a specific Region, you can do so by configuring the following parameters.</p> <ul> <li> <p> <code>region</code>: The Region where these settings are applied. (Required)</p> </li> <li> <p> <code>readCapacityUnits</code>: The provisioned read capacity units. (Optional)</p> </li> <li> <p> <code>readCapacityAutoScaling</code>: The read capacity auto scaling settings for the table. (Optional) </p> </li> </ul>
     # @option params [Types::CdcSpecification] :cdc_specification
     #   <p>The CDC stream settings of the table.</p>
+    # @option params [Types::WarmThroughputSpecification] :warm_throughput_specification
+    #   <p>Specifies the warm throughput settings for the table. Pre-warming a table helps you avoid capacity exceeded exceptions by pre-provisioning read and write capacity units to reduce cold start latency when your table receives traffic.</p> <p>For more information about pre-warming in Amazon Keyspaces, see <a href="https://docs.aws.amazon.com/keyspaces/latest/devguide/warm-throughput.html">Pre-warm a table in Amazon Keyspaces</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     keyspace_name: "KeyspaceName", # required
@@ -387,6 +390,10 @@ module Aws::Keyspaces
     #         }
     #       ],
     #       propagate_tags: "CdcPropagateTags"
+    #     },
+    #     warm_throughput_specification: {
+    #       read_units_per_second: 1,
+    #       write_units_per_second: 1
     #     }
     #   }
     #   options = {}
@@ -610,6 +617,11 @@ module Aws::Keyspaces
     #           read_capacity_units: 1,
     #           write_capacity_units: 1,
     #           last_update_to_pay_per_request_timestamp: Time.now
+    #         },
+    #         warm_throughput_specification: {
+    #           read_units_per_second: 1, # required
+    #           write_units_per_second: 1, # required
+    #           status: "WarmThroughputStatus", # required
     #         }
     #       }
     #     ],
@@ -617,6 +629,11 @@ module Aws::Keyspaces
     #     cdc_specification: {
     #       status: "CdcStatus", # required
     #       view_type: "ViewType"
+    #     },
+    #     warm_throughput_specification: {
+    #       read_units_per_second: 1, # required
+    #       write_units_per_second: 1, # required
+    #       status: "WarmThroughputStatus", # required
     #     }
     #   }
     # @return [Types::GetTableOutput]
@@ -1098,6 +1115,8 @@ module Aws::Keyspaces
     #   <p>The Region specific settings of a multi-Regional table.</p>
     # @option params [Types::CdcSpecification] :cdc_specification
     #   <p>The CDC stream settings of the table.</p>
+    # @option params [Types::WarmThroughputSpecification] :warm_throughput_specification
+    #   <p>Modifies the warm throughput settings for the table. You can update the read and write capacity units to adjust the pre-provisioned throughput.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     keyspace_name: "KeyspaceName", # required
@@ -1184,6 +1203,10 @@ module Aws::Keyspaces
     #         }
     #       ],
     #       propagate_tags: "CdcPropagateTags"
+    #     },
+    #     warm_throughput_specification: {
+    #       read_units_per_second: 1,
+    #       write_units_per_second: 1
     #     }
     #   }
     #   options = {}
@@ -1307,6 +1330,7 @@ module Aws::Keyspaces
       # @api private
       def protocols
         {
+          rpc_v2_cbor: Smithy::Client::RpcV2Cbor,
           json_rpc: Aws::Core::JsonRpc
         }
       end

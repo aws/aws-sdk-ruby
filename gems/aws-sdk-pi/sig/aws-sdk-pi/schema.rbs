@@ -65,6 +65,8 @@ module Aws::PI
     ListAvailableResourceDimensionsResponse: StructureShape
     ListAvailableResourceMetricsRequest: StructureShape
     ListAvailableResourceMetricsResponse: StructureShape
+    ListPerformanceAnalysisReportRecommendationsRequest: StructureShape
+    ListPerformanceAnalysisReportRecommendationsResponse: StructureShape
     ListPerformanceAnalysisReportsRequest: StructureShape
     ListPerformanceAnalysisReportsResponse: StructureShape
     ListTagsForResourceRequest: StructureShape
@@ -85,6 +87,7 @@ module Aws::PI
     PerformanceInsightsMetric: StructureShape
     PeriodAlignment: EnumShape
     Recommendation: StructureShape
+    RecommendationIdList: ListShape
     RecommendationList: ListShape
     RequestString: StringShape
     RequestedDimensionList: ListShape

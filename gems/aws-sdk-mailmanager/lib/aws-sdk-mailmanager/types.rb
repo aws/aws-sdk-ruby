@@ -298,6 +298,42 @@ module Aws::MailManager
       class Unknown < ArchiveStringToEvaluate; end
     end
 
+    # <p>The action to send a bounce response for the email. When executed, this action generates a non-delivery report (bounce) back to the sender.</p>
+    # @!attribute action_failure_policy
+    #   <p>A policy that states what to do in the case of failure. The action will fail if there are configuration errors. For example, the caller does not have the permissions to call the SendBounce API.</p>
+    #   @return [String]
+    # @!attribute role_arn
+    #   <p>The Amazon Resource Name (ARN) of the IAM role to use to send the bounce message.</p>
+    #   @return [String]
+    # @!attribute sender
+    #   <p>The sender email address of the bounce message.</p>
+    #   @return [String]
+    # @!attribute status_code
+    #   <p>The enhanced status code for the bounce, in the format of x.y.z (e.g. 5.1.1).</p>
+    #   @return [String]
+    # @!attribute smtp_reply_code
+    #   <p>The SMTP reply code for the bounce, as defined by RFC 5321.</p>
+    #   @return [String]
+    # @!attribute diagnostic_message
+    #   <p>The diagnostic message included in the Diagnostic-Code header of the bounce.</p>
+    #   @return [String]
+    # @!attribute message
+    #   <p>The human-readable text to include in the bounce message.</p>
+    #   @return [String]
+    class BounceAction < Struct.new(
+      nil,
+      :action_failure_policy,
+      :role_arn,
+      :sender,
+      :status_code,
+      :smtp_reply_code,
+      :diagnostic_message,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The request configuration has conflicts. For details, see the accompanying error message.</p>
     # @!attribute message
     #   @return [String]
@@ -498,6 +534,9 @@ module Aws::MailManager
     # @!attribute network_configuration
     #   <p>Specifies the network configuration for the ingress point. This allows you to create an IPv4-only, Dual-Stack, or PrivateLink type of ingress point. If not specified, the default network type is IPv4-only. </p>
     #   @return [Types::NetworkConfiguration]
+    # @!attribute tls_policy
+    #   <p>The Transport Layer Security (TLS) policy for the ingress point. The FIPS value is only valid in US and Canada regions.</p>
+    #   @return [String]
     # @!attribute tags
     #   <p>The tags used to organize, track, or control access for the resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.</p>
     #   @return [Array<Types::Tag>]
@@ -510,6 +549,7 @@ module Aws::MailManager
       :traffic_policy_id,
       :ingress_point_configuration,
       :network_configuration,
+      :tls_policy,
       :tags,
       keyword_init: true
     )
@@ -1335,9 +1375,13 @@ module Aws::MailManager
     # @!attribute ingress_point_id
     #   <p>The identifier of an ingress endpoint.</p>
     #   @return [String]
+    # @!attribute include_trust_store_contents
+    #   <p>Whether to include the trust store contents in the response. Use INCLUDE to retrieve trust store certificate and CRL contents.</p>
+    #   @return [String]
     class GetIngressPointRequest < Struct.new(
       nil,
       :ingress_point_id,
+      :include_trust_store_contents,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1373,6 +1417,9 @@ module Aws::MailManager
     # @!attribute network_configuration
     #   <p>The network configuration for the ingress point.</p>
     #   @return [Types::NetworkConfiguration]
+    # @!attribute tls_policy
+    #   <p>The selected Transport Layer Security (TLS) policy of the ingress point.</p>
+    #   @return [String]
     # @!attribute created_timestamp
     #   <p>The timestamp of when the ingress endpoint was created.</p>
     #   @return [Time]
@@ -1391,6 +1438,7 @@ module Aws::MailManager
       :traffic_policy_id,
       :ingress_point_auth_configuration,
       :network_configuration,
+      :tls_policy,
       :created_timestamp,
       :last_updated_timestamp,
       keyword_init: true
@@ -1811,10 +1859,14 @@ module Aws::MailManager
     # @!attribute secret_arn
     #   <p>The ingress endpoint SecretsManager::Secret ARN configuration for the ingress endpoint resource.</p>
     #   @return [String]
+    # @!attribute tls_auth_configuration
+    #   <p>The mutual TLS authentication configuration for the ingress endpoint resource.</p>
+    #   @return [Types::TlsAuthConfiguration]
     class IngressPointAuthConfiguration < Struct.new(
       nil,
       :ingress_point_password_configuration,
       :secret_arn,
+      :tls_auth_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1827,9 +1879,13 @@ module Aws::MailManager
     # @!attribute secret_arn
     #   <p>The SecretsManager::Secret ARN of the ingress endpoint resource.</p>
     #   @return [String]
+    # @!attribute tls_auth_configuration
+    #   <p>The mutual TLS authentication configuration of the ingress endpoint resource.</p>
+    #   @return [Types::TlsAuthConfiguration]
     class IngressPointConfiguration < Struct.new(
       :smtp_password,
       :secret_arn,
+      :tls_auth_configuration,
       :unknown,
       keyword_init: true
     )
@@ -1837,6 +1893,7 @@ module Aws::MailManager
 
       class SmtpPassword < IngressPointConfiguration; end
       class SecretArn < IngressPointConfiguration; end
+      class TlsAuthConfiguration < IngressPointConfiguration; end
       class Unknown < IngressPointConfiguration; end
     end
 
@@ -1933,6 +1990,34 @@ module Aws::MailManager
 
       class Attribute < IngressTlsProtocolToEvaluate; end
       class Unknown < IngressTlsProtocolToEvaluate; end
+    end
+
+    # <p>The action to invoke an Amazon Web Services Lambda function for processing the email.</p>
+    # @!attribute action_failure_policy
+    #   <p>A policy that states what to do in the case of failure. The action will fail if there are configuration errors. For example, the Amazon Web Services Lambda function no longer exists.</p>
+    #   @return [String]
+    # @!attribute function_arn
+    #   <p>The Amazon Resource Name (ARN) of the Lambda function to invoke.</p>
+    #   @return [String]
+    # @!attribute invocation_type
+    #   <p>The invocation type of the Lambda function. Use EVENT for asynchronous invocation or REQUEST_RESPONSE for synchronous invocation.</p>
+    #   @return [String]
+    # @!attribute role_arn
+    #   <p>The Amazon Resource Name (ARN) of the IAM role to use to invoke the Lambda function.</p>
+    #   @return [String]
+    # @!attribute retry_time_minutes
+    #   <p>The maximum time in minutes that the email processing can be retried if the Lambda invocation fails. The maximum value is 2160 minutes (36 hours).</p>
+    #   @return [Integer]
+    class InvokeLambdaAction < Struct.new(
+      nil,
+      :action_failure_policy,
+      :function_arn,
+      :invocation_type,
+      :role_arn,
+      :retry_time_minutes,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2775,6 +2860,12 @@ module Aws::MailManager
     # @!attribute publish_to_sns
     #   <p>This action publishes the email content to an Amazon SNS topic.</p>
     #   @return [Types::SnsAction]
+    # @!attribute bounce
+    #   <p>This action sends a bounce response for the email.</p>
+    #   @return [Types::BounceAction]
+    # @!attribute invoke_lambda
+    #   <p>This action invokes an Amazon Web Services Lambda function to process the email.</p>
+    #   @return [Types::InvokeLambdaAction]
     class RuleAction < Struct.new(
       :drop,
       :relay,
@@ -2786,6 +2877,8 @@ module Aws::MailManager
       :deliver_to_mailbox,
       :deliver_to_q_business,
       :publish_to_sns,
+      :bounce,
+      :invoke_lambda,
       :unknown,
       keyword_init: true
     )
@@ -2801,6 +2894,8 @@ module Aws::MailManager
       class DeliverToMailbox < RuleAction; end
       class DeliverToQBusiness < RuleAction; end
       class PublishToSns < RuleAction; end
+      class Bounce < RuleAction; end
+      class InvokeLambda < RuleAction; end
       class Unknown < RuleAction; end
     end
 
@@ -3037,10 +3132,14 @@ module Aws::MailManager
     # @!attribute analysis
     #   <p>The Add On ARN and its returned value to evaluate in a string condition expression.</p>
     #   @return [Types::Analysis]
+    # @!attribute client_certificate_attribute
+    #   <p>The client certificate attribute to evaluate in a string condition expression.</p>
+    #   @return [String]
     class RuleStringToEvaluate < Struct.new(
       :attribute,
       :mime_header_attribute,
       :analysis,
+      :client_certificate_attribute,
       :unknown,
       keyword_init: true
     )
@@ -3049,6 +3148,7 @@ module Aws::MailManager
       class Attribute < RuleStringToEvaluate; end
       class MimeHeaderAttribute < RuleStringToEvaluate; end
       class Analysis < RuleStringToEvaluate; end
+      class ClientCertificateAttribute < RuleStringToEvaluate; end
       class Unknown < RuleStringToEvaluate; end
     end
 
@@ -3462,6 +3562,18 @@ module Aws::MailManager
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The mutual TLS authentication configuration for an ingress endpoint.</p>
+    # @!attribute trust_store
+    #   <p>The trust store configuration for mutual TLS authentication.</p>
+    #   @return [Types::TrustStore]
+    class TlsAuthConfiguration < Struct.new(
+      nil,
+      :trust_store,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The structure of a traffic policy resource which is a container for policy statements.</p>
     # @!attribute traffic_policy_name
     #   <p>A user-friendly name of the traffic policy resource.</p>
@@ -3477,6 +3589,26 @@ module Aws::MailManager
       :traffic_policy_name,
       :traffic_policy_id,
       :default_action,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The trust store used for mutual TLS authentication. It contains the certificate authority (CA) certificates and optional certificate revocation list (CRL).</p>
+    # @!attribute ca_content
+    #   <p>The PEM-encoded certificate authority (CA) certificates bundle for the trust store.</p>
+    #   @return [String]
+    # @!attribute crl_content
+    #   <p>The PEM-encoded certificate revocation lists (CRLs) for the trust store. There can be one CRL per certificate authority (CA) in the trust store.</p>
+    #   @return [String]
+    # @!attribute kms_key_arn
+    #   <p>The Amazon Resource Name (ARN) of the KMS key used to encrypt the trust store contents.</p>
+    #   @return [String]
+    class TrustStore < Struct.new(
+      nil,
+      :ca_content,
+      :crl_content,
+      :kms_key_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3550,6 +3682,9 @@ module Aws::MailManager
     # @!attribute ingress_point_configuration
     #   <p>If you choose an Authenticated ingress endpoint, you must configure either an SMTP password or a secret ARN.</p>
     #   @return [Types::IngressPointConfiguration]
+    # @!attribute tls_policy
+    #   <p>The Transport Layer Security (TLS) policy for the ingress point. Valid values are REQUIRED, OPTIONAL. Only ingress endpoints using REQUIRED or OPTIONAL as TlsPolicy can be updated.</p>
+    #   @return [String]
     class UpdateIngressPointRequest < Struct.new(
       nil,
       :ingress_point_id,
@@ -3558,6 +3693,7 @@ module Aws::MailManager
       :rule_set_id,
       :traffic_policy_id,
       :ingress_point_configuration,
+      :tls_policy,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

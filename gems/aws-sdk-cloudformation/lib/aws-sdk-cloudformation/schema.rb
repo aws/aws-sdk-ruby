@@ -22,9 +22,16 @@ module Aws::CloudFormation
     ActivateTypeOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudformation#ActivateTypeOutput", name: "ActivateTypeOutput")
     AfterContext = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudformation#AfterContext", name: "AfterContext")
     AfterValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudformation#AfterValue", name: "AfterValue")
+    AfterValueFrom = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudformation#AfterValueFrom", name: "AfterValueFrom")
     AllowedValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudformation#AllowedValue", name: "AllowedValue")
     AllowedValues = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudformation#AllowedValues", name: "AllowedValues")
     AlreadyExistsException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudformation#AlreadyExistsException", name: "AlreadyExistsException", traits: {"aws.protocols#awsQueryError" => {"code" => "AlreadyExistsException", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
+    Annotation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudformation#Annotation", name: "Annotation")
+    AnnotationList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudformation#AnnotationList", name: "AnnotationList")
+    AnnotationName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudformation#AnnotationName", name: "AnnotationName", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}})
+    AnnotationRemediationLink = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudformation#AnnotationRemediationLink", name: "AnnotationRemediationLink", traits: {"smithy.api#length" => {"min" => 1, "max" => 5120}})
+    AnnotationSeverityLevel = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudformation#AnnotationSeverityLevel", name: "AnnotationSeverityLevel")
+    AnnotationStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudformation#AnnotationStatus", name: "AnnotationStatus")
     Arn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudformation#Arn", name: "Arn")
     AttributeChangeType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudformation#AttributeChangeType", name: "AttributeChangeType")
     AutoDeployment = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudformation#AutoDeployment", name: "AutoDeployment")
@@ -34,8 +41,10 @@ module Aws::CloudFormation
     BatchDescribeTypeConfigurationsErrors = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudformation#BatchDescribeTypeConfigurationsErrors", name: "BatchDescribeTypeConfigurationsErrors")
     BatchDescribeTypeConfigurationsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudformation#BatchDescribeTypeConfigurationsInput", name: "BatchDescribeTypeConfigurationsInput")
     BatchDescribeTypeConfigurationsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudformation#BatchDescribeTypeConfigurationsOutput", name: "BatchDescribeTypeConfigurationsOutput")
+    BeaconStackOperationStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudformation#BeaconStackOperationStatus", name: "BeaconStackOperationStatus")
     BeforeContext = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudformation#BeforeContext", name: "BeforeContext")
     BeforeValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudformation#BeforeValue", name: "BeforeValue")
+    BeforeValueFrom = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudformation#BeforeValueFrom", name: "BeforeValueFrom")
     BoxedInteger = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.cloudformation#BoxedInteger", name: "BoxedInteger")
     BoxedMaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.cloudformation#BoxedMaxResults", name: "BoxedMaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}})
     CFNRegistryException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudformation#CFNRegistryException", name: "CFNRegistryException", traits: {"aws.protocols#awsQueryError" => {"code" => "CFNRegistryException", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
@@ -101,6 +110,9 @@ module Aws::CloudFormation
     DeleteStackSetOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudformation#DeleteStackSetOutput", name: "DeleteStackSetOutput")
     DeletionMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudformation#DeletionMode", name: "DeletionMode")
     DeletionTime = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.cloudformation#DeletionTime", name: "DeletionTime")
+    DeploymentConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudformation#DeploymentConfig", name: "DeploymentConfig")
+    DeploymentConfigMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudformation#DeploymentConfigMode", name: "DeploymentConfigMode")
+    DeploymentMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudformation#DeploymentMode", name: "DeploymentMode")
     DeploymentTargets = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudformation#DeploymentTargets", name: "DeploymentTargets")
     DeprecatedStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudformation#DeprecatedStatus", name: "DeprecatedStatus")
     DeregisterTypeInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudformation#DeregisterTypeInput", name: "DeregisterTypeInput")
@@ -111,6 +123,8 @@ module Aws::CloudFormation
     DescribeChangeSetHooksOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudformation#DescribeChangeSetHooksOutput", name: "DescribeChangeSetHooksOutput")
     DescribeChangeSetInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudformation#DescribeChangeSetInput", name: "DescribeChangeSetInput")
     DescribeChangeSetOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudformation#DescribeChangeSetOutput", name: "DescribeChangeSetOutput")
+    DescribeEventsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudformation#DescribeEventsInput", name: "DescribeEventsInput")
+    DescribeEventsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudformation#DescribeEventsOutput", name: "DescribeEventsOutput")
     DescribeGeneratedTemplateInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudformation#DescribeGeneratedTemplateInput", name: "DescribeGeneratedTemplateInput")
     DescribeGeneratedTemplateOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudformation#DescribeGeneratedTemplateOutput", name: "DescribeGeneratedTemplateOutput")
     DescribeOrganizationsAccessInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudformation#DescribeOrganizationsAccessInput", name: "DescribeOrganizationsAccessInput")
@@ -154,6 +168,8 @@ module Aws::CloudFormation
     DetectionReason = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudformation#DetectionReason", name: "DetectionReason")
     DifferenceType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudformation#DifferenceType", name: "DifferenceType")
     DisableRollback = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.cloudformation#DisableRollback", name: "DisableRollback")
+    DisableValidation = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.cloudformation#DisableValidation", name: "DisableValidation")
+    DriftIgnoredReason = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudformation#DriftIgnoredReason", name: "DriftIgnoredReason")
     DriftedStackInstancesCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.cloudformation#DriftedStackInstancesCount", name: "DriftedStackInstancesCount", traits: {"smithy.api#range" => {"min" => 0}})
     EnableStackCreation = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.cloudformation#EnableStackCreation", name: "EnableStackCreation")
     EnableTerminationProtection = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.cloudformation#EnableTerminationProtection", name: "EnableTerminationProtection")
@@ -162,7 +178,9 @@ module Aws::CloudFormation
     EstimateTemplateCostInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudformation#EstimateTemplateCostInput", name: "EstimateTemplateCostInput")
     EstimateTemplateCostOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudformation#EstimateTemplateCostOutput", name: "EstimateTemplateCostOutput")
     EvaluationType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudformation#EvaluationType", name: "EvaluationType")
+    EventFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudformation#EventFilter", name: "EventFilter")
     EventId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudformation#EventId", name: "EventId")
+    EventType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudformation#EventType", name: "EventType")
     ExecuteChangeSetInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudformation#ExecuteChangeSetInput", name: "ExecuteChangeSetInput")
     ExecuteChangeSetOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudformation#ExecuteChangeSetOutput", name: "ExecuteChangeSetOutput")
     ExecuteStackRefactorInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudformation#ExecuteStackRefactorInput", name: "ExecuteStackRefactorInput")
@@ -173,9 +191,11 @@ module Aws::CloudFormation
     ExportName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudformation#ExportName", name: "ExportName")
     ExportValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudformation#ExportValue", name: "ExportValue")
     Exports = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudformation#Exports", name: "Exports")
+    FailedEventsFilter = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.cloudformation#FailedEventsFilter", name: "FailedEventsFilter")
     FailedStackInstancesCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.cloudformation#FailedStackInstancesCount", name: "FailedStackInstancesCount", traits: {"smithy.api#range" => {"min" => 0}})
     FailureToleranceCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.cloudformation#FailureToleranceCount", name: "FailureToleranceCount", traits: {"smithy.api#range" => {"min" => 0}})
     FailureTolerancePercentage = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.cloudformation#FailureTolerancePercentage", name: "FailureTolerancePercentage", traits: {"smithy.api#range" => {"min" => 0, "max" => 100}})
+    ForceRollback = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.cloudformation#ForceRollback", name: "ForceRollback")
     GeneratedTemplateDeletionPolicy = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudformation#GeneratedTemplateDeletionPolicy", name: "GeneratedTemplateDeletionPolicy")
     GeneratedTemplateId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudformation#GeneratedTemplateId", name: "GeneratedTemplateId", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}})
     GeneratedTemplateName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudformation#GeneratedTemplateName", name: "GeneratedTemplateName", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}})
@@ -185,6 +205,8 @@ module Aws::CloudFormation
     GeneratedTemplateUpdateReplacePolicy = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudformation#GeneratedTemplateUpdateReplacePolicy", name: "GeneratedTemplateUpdateReplacePolicy")
     GetGeneratedTemplateInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudformation#GetGeneratedTemplateInput", name: "GetGeneratedTemplateInput")
     GetGeneratedTemplateOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudformation#GetGeneratedTemplateOutput", name: "GetGeneratedTemplateOutput")
+    GetHookResultInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudformation#GetHookResultInput", name: "GetHookResultInput")
+    GetHookResultOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudformation#GetHookResultOutput", name: "GetHookResultOutput")
     GetStackPolicyInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudformation#GetStackPolicyInput", name: "GetStackPolicyInput")
     GetStackPolicyOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudformation#GetStackPolicyOutput", name: "GetStackPolicyOutput")
     GetTemplateInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudformation#GetTemplateInput", name: "GetTemplateInput")
@@ -202,6 +224,9 @@ module Aws::CloudFormation
     HookResultSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudformation#HookResultSummary", name: "HookResultSummary")
     HookStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudformation#HookStatus", name: "HookStatus")
     HookStatusReason = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudformation#HookStatusReason", name: "HookStatusReason", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}})
+    HookTarget = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudformation#HookTarget", name: "HookTarget")
+    HookTargetAction = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudformation#HookTargetAction", name: "HookTargetAction")
+    HookTargetId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudformation#HookTargetId", name: "HookTargetId", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[^_]*$"})
     HookTargetType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudformation#HookTargetType", name: "HookTargetType")
     HookTargetTypeName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudformation#HookTargetTypeName", name: "HookTargetTypeName", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[a-zA-Z0-9]{2,64}::[a-zA-Z0-9]{2,64}::[a-zA-Z0-9]{2,64}$"})
     HookType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudformation#HookType", name: "HookType", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}})
@@ -230,6 +255,7 @@ module Aws::CloudFormation
     JazzResourceIdentifierPropertyKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudformation#JazzResourceIdentifierPropertyKey", name: "JazzResourceIdentifierPropertyKey")
     JazzResourceIdentifierPropertyValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudformation#JazzResourceIdentifierPropertyValue", name: "JazzResourceIdentifierPropertyValue")
     Key = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudformation#Key", name: "Key")
+    LastOperations = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudformation#LastOperations", name: "LastOperations")
     LastUpdatedTime = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.cloudformation#LastUpdatedTime", name: "LastUpdatedTime")
     LimitExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudformation#LimitExceededException", name: "LimitExceededException", traits: {"aws.protocols#awsQueryError" => {"code" => "LimitExceededException", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
     LimitName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudformation#LimitName", name: "LimitName")
@@ -277,6 +303,7 @@ module Aws::CloudFormation
     ListTypeVersionsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudformation#ListTypeVersionsOutput", name: "ListTypeVersionsOutput")
     ListTypesInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudformation#ListTypesInput", name: "ListTypesInput")
     ListTypesOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudformation#ListTypesOutput", name: "ListTypesOutput")
+    LiveResourceDrift = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudformation#LiveResourceDrift", name: "LiveResourceDrift")
     LogGroupName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudformation#LogGroupName", name: "LogGroupName", traits: {"smithy.api#length" => {"min" => 1, "max" => 512}, "smithy.api#pattern" => "^[\\.\\-_/#A-Za-z0-9]+$"})
     LoggingConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudformation#LoggingConfig", name: "LoggingConfig")
     LogicalIdHierarchy = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudformation#LogicalIdHierarchy", name: "LogicalIdHierarchy")
@@ -300,6 +327,10 @@ module Aws::CloudFormation
     NumberOfResources = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.cloudformation#NumberOfResources", name: "NumberOfResources", traits: {"smithy.api#range" => {"min" => 0}})
     OnFailure = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudformation#OnFailure", name: "OnFailure")
     OnStackFailure = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudformation#OnStackFailure", name: "OnStackFailure")
+    OperationEntry = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudformation#OperationEntry", name: "OperationEntry")
+    OperationEvent = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudformation#OperationEvent", name: "OperationEvent")
+    OperationEvents = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudformation#OperationEvents", name: "OperationEvents")
+    OperationId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudformation#OperationId", name: "OperationId")
     OperationIdAlreadyExistsException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudformation#OperationIdAlreadyExistsException", name: "OperationIdAlreadyExistsException", traits: {"aws.protocols#awsQueryError" => {"code" => "OperationIdAlreadyExistsException", "httpResponseCode" => 409}, "smithy.api#error" => "client", "smithy.api#httpError" => 409})
     OperationInProgressException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudformation#OperationInProgressException", name: "OperationInProgressException", traits: {"aws.protocols#awsQueryError" => {"code" => "OperationInProgressException", "httpResponseCode" => 409}, "smithy.api#error" => "client", "smithy.api#httpError" => 409})
     OperationNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudformation#OperationNotFoundException", name: "OperationNotFoundException", traits: {"aws.protocols#awsQueryError" => {"code" => "OperationNotFoundException", "httpResponseCode" => 404}, "smithy.api#error" => "client", "smithy.api#httpError" => 404})
@@ -309,6 +340,7 @@ module Aws::CloudFormation
     OperationResultFilters = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudformation#OperationResultFilters", name: "OperationResultFilters", traits: {"smithy.api#length" => {"min" => 0, "max" => 1}})
     OperationStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudformation#OperationStatus", name: "OperationStatus")
     OperationStatusCheckFailedException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudformation#OperationStatusCheckFailedException", name: "OperationStatusCheckFailedException", traits: {"aws.protocols#awsQueryError" => {"code" => "ConditionalCheckFailed", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
+    OperationType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudformation#OperationType", name: "OperationType")
     OptionalSecureUrl = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudformation#OptionalSecureUrl", name: "OptionalSecureUrl", traits: {"smithy.api#length" => {"min" => 0, "max" => 4096}})
     OrganizationStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudformation#OrganizationStatus", name: "OrganizationStatus")
     OrganizationalUnitId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudformation#OrganizationalUnitId", name: "OrganizationalUnitId", traits: {"smithy.api#pattern" => "^(ou-[a-z0-9]{4,32}-[a-z0-9]{8,32}|r-[a-z0-9]{4,32})$"})
@@ -331,6 +363,7 @@ module Aws::CloudFormation
     PhysicalResourceIdContext = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudformation#PhysicalResourceIdContext", name: "PhysicalResourceIdContext", traits: {"smithy.api#length" => {"min" => 0, "max" => 5}})
     PhysicalResourceIdContextKeyValuePair = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudformation#PhysicalResourceIdContextKeyValuePair", name: "PhysicalResourceIdContextKeyValuePair")
     PolicyAction = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudformation#PolicyAction", name: "PolicyAction")
+    PreviousDeploymentContext = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudformation#PreviousDeploymentContext", name: "PreviousDeploymentContext")
     PrivateTypeArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudformation#PrivateTypeArn", name: "PrivateTypeArn", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}, "smithy.api#pattern" => "^arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:[0-9]{12}:type/.+$"})
     Properties = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudformation#Properties", name: "Properties")
     PropertyDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudformation#PropertyDescription", name: "PropertyDescription")
@@ -363,6 +396,8 @@ module Aws::CloudFormation
     RegistrationTokenList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudformation#RegistrationTokenList", name: "RegistrationTokenList")
     RegistryType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudformation#RegistryType", name: "RegistryType")
     RelatedResources = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudformation#RelatedResources", name: "RelatedResources")
+    RemediationMessageRemediationMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudformation#RemediationMessageRemediationMessage", name: "RemediationMessageRemediationMessage", traits: {"smithy.api#length" => {"min" => 1, "max" => 16384}})
+    RemediationMessageStatusMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudformation#RemediationMessageStatusMessage", name: "RemediationMessageStatusMessage", traits: {"smithy.api#length" => {"min" => 1, "max" => 16384}})
     Replacement = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudformation#Replacement", name: "Replacement")
     RequestToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudformation#RequestToken", name: "RequestToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[a-zA-Z0-9][-a-zA-Z0-9]*$"})
     RequiredActivatedType = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudformation#RequiredActivatedType", name: "RequiredActivatedType")
@@ -377,6 +412,10 @@ module Aws::CloudFormation
     ResourceDefinitions = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudformation#ResourceDefinitions", name: "ResourceDefinitions", traits: {"smithy.api#length" => {"min" => 1, "max" => 500}})
     ResourceDetail = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudformation#ResourceDetail", name: "ResourceDetail")
     ResourceDetails = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudformation#ResourceDetails", name: "ResourceDetails", traits: {"smithy.api#length" => {"min" => 1, "max" => 500}})
+    ResourceDriftActualValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudformation#ResourceDriftActualValue", name: "ResourceDriftActualValue")
+    ResourceDriftIgnoredAttribute = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudformation#ResourceDriftIgnoredAttribute", name: "ResourceDriftIgnoredAttribute")
+    ResourceDriftIgnoredAttributes = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudformation#ResourceDriftIgnoredAttributes", name: "ResourceDriftIgnoredAttributes")
+    ResourceDriftPreviousValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudformation#ResourceDriftPreviousValue", name: "ResourceDriftPreviousValue")
     ResourceIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudformation#ResourceIdentifier", name: "ResourceIdentifier")
     ResourceIdentifierProperties = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.cloudformation#ResourceIdentifierProperties", name: "ResourceIdentifierProperties", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}})
     ResourceIdentifierPropertyKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudformation#ResourceIdentifierPropertyKey", name: "ResourceIdentifierPropertyKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}})
@@ -512,6 +551,7 @@ module Aws::CloudFormation
     StackResources = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudformation#StackResources", name: "StackResources")
     StackSet = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudformation#StackSet", name: "StackSet")
     StackSetARN = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudformation#StackSetARN", name: "StackSetARN")
+    StackSetARNList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudformation#StackSetARNList", name: "StackSetARNList")
     StackSetAutoDeploymentTargetSummaries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudformation#StackSetAutoDeploymentTargetSummaries", name: "StackSetAutoDeploymentTargetSummaries")
     StackSetAutoDeploymentTargetSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudformation#StackSetAutoDeploymentTargetSummary", name: "StackSetAutoDeploymentTargetSummary")
     StackSetDriftDetectionDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudformation#StackSetDriftDetectionDetails", name: "StackSetDriftDetectionDetails")
@@ -619,6 +659,10 @@ module Aws::CloudFormation
     UsePreviousValue = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.cloudformation#UsePreviousValue", name: "UsePreviousValue")
     ValidateTemplateInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudformation#ValidateTemplateInput", name: "ValidateTemplateInput")
     ValidateTemplateOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudformation#ValidateTemplateOutput", name: "ValidateTemplateOutput")
+    ValidationName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudformation#ValidationName", name: "ValidationName")
+    ValidationPath = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudformation#ValidationPath", name: "ValidationPath")
+    ValidationStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudformation#ValidationStatus", name: "ValidationStatus")
+    ValidationStatusReason = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudformation#ValidationStatusReason", name: "ValidationStatusReason")
     Value = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudformation#Value", name: "Value")
     Version = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudformation#Version", name: "Version")
     VersionBump = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudformation#VersionBump", name: "VersionBump")
@@ -660,14 +704,33 @@ module Aws::CloudFormation
     ActivateTypeInput.type = Types::ActivateTypeInput
     ActivateTypeOutput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PrivateTypeArn, name: "Arn"))
     ActivateTypeOutput.type = Types::ActivateTypeOutput
+    AfterValueFrom.add_member(:template, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TEMPLATE", traits: {"smithy.api#enumValue" => "TEMPLATE"}))
     AllowedValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedValue, name: "member"))
     AlreadyExistsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     AlreadyExistsException.type = Types::AlreadyExistsException
+    Annotation.add_member(:annotation_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AnnotationName, name: "AnnotationName"))
+    Annotation.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: AnnotationStatus, name: "Status"))
+    Annotation.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: RemediationMessageStatusMessage, name: "StatusMessage"))
+    Annotation.add_member(:remediation_message, ::Smithy::Schema::Shapes::MemberShape.new(target: RemediationMessageRemediationMessage, name: "RemediationMessage"))
+    Annotation.add_member(:remediation_link, ::Smithy::Schema::Shapes::MemberShape.new(target: AnnotationRemediationLink, name: "RemediationLink"))
+    Annotation.add_member(:severity_level, ::Smithy::Schema::Shapes::MemberShape.new(target: AnnotationSeverityLevel, name: "SeverityLevel"))
+    Annotation.type = Types::Annotation
+    AnnotationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Annotation, name: "member"))
+    AnnotationSeverityLevel.add_member(:informational, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INFORMATIONAL", traits: {"smithy.api#enumValue" => "INFORMATIONAL"}))
+    AnnotationSeverityLevel.add_member(:low, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOW", traits: {"smithy.api#enumValue" => "LOW"}))
+    AnnotationSeverityLevel.add_member(:medium, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MEDIUM", traits: {"smithy.api#enumValue" => "MEDIUM"}))
+    AnnotationSeverityLevel.add_member(:high, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HIGH", traits: {"smithy.api#enumValue" => "HIGH"}))
+    AnnotationSeverityLevel.add_member(:critical, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CRITICAL", traits: {"smithy.api#enumValue" => "CRITICAL"}))
+    AnnotationStatus.add_member(:passed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PASSED", traits: {"smithy.api#enumValue" => "PASSED"}))
+    AnnotationStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    AnnotationStatus.add_member(:skipped, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SKIPPED", traits: {"smithy.api#enumValue" => "SKIPPED"}))
     AttributeChangeType.add_member(:add, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Add", traits: {"smithy.api#enumValue" => "Add"}))
     AttributeChangeType.add_member(:remove, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Remove", traits: {"smithy.api#enumValue" => "Remove"}))
     AttributeChangeType.add_member(:modify, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Modify", traits: {"smithy.api#enumValue" => "Modify"}))
+    AttributeChangeType.add_member(:sync_with_actual, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SyncWithActual", traits: {"smithy.api#enumValue" => "SyncWithActual"}))
     AutoDeployment.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoDeploymentNullable, name: "Enabled"))
     AutoDeployment.add_member(:retain_stacks_on_account_removal, ::Smithy::Schema::Shapes::MemberShape.new(target: RetainStacksOnAccountRemovalNullable, name: "RetainStacksOnAccountRemoval"))
+    AutoDeployment.add_member(:depends_on, ::Smithy::Schema::Shapes::MemberShape.new(target: StackSetARNList, name: "DependsOn"))
     AutoDeployment.type = Types::AutoDeployment
     BatchDescribeTypeConfigurationsError.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "ErrorCode"))
     BatchDescribeTypeConfigurationsError.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "ErrorMessage"))
@@ -680,6 +743,11 @@ module Aws::CloudFormation
     BatchDescribeTypeConfigurationsOutput.add_member(:unprocessed_type_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: UnprocessedTypeConfigurations, name: "UnprocessedTypeConfigurations"))
     BatchDescribeTypeConfigurationsOutput.add_member(:type_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: TypeConfigurationDetailsList, name: "TypeConfigurations"))
     BatchDescribeTypeConfigurationsOutput.type = Types::BatchDescribeTypeConfigurationsOutput
+    BeaconStackOperationStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
+    BeaconStackOperationStatus.add_member(:succeeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCEEDED", traits: {"smithy.api#enumValue" => "SUCCEEDED"}))
+    BeaconStackOperationStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    BeforeValueFrom.add_member(:previous_deployment_state, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PREVIOUS_DEPLOYMENT_STATE", traits: {"smithy.api#enumValue" => "PREVIOUS_DEPLOYMENT_STATE"}))
+    BeforeValueFrom.add_member(:actual_state, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTUAL_STATE", traits: {"smithy.api#enumValue" => "ACTUAL_STATE"}))
     CFNRegistryException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     CFNRegistryException.type = Types::CFNRegistryException
     CallAs.add_member(:self, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SELF", traits: {"smithy.api#enumValue" => "SELF"}))
@@ -704,6 +772,7 @@ module Aws::CloudFormation
     ChangeAction.add_member(:remove, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Remove", traits: {"smithy.api#enumValue" => "Remove"}))
     ChangeAction.add_member(:import, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Import", traits: {"smithy.api#enumValue" => "Import"}))
     ChangeAction.add_member(:dynamic, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Dynamic", traits: {"smithy.api#enumValue" => "Dynamic"}))
+    ChangeAction.add_member(:sync_with_actual, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SyncWithActual", traits: {"smithy.api#enumValue" => "SyncWithActual"}))
     ChangeSetHook.add_member(:invocation_point, ::Smithy::Schema::Shapes::MemberShape.new(target: HookInvocationPoint, name: "InvocationPoint"))
     ChangeSetHook.add_member(:failure_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: HookFailureMode, name: "FailureMode"))
     ChangeSetHook.add_member(:type_name, ::Smithy::Schema::Shapes::MemberShape.new(target: HookTypeName, name: "TypeName"))
@@ -755,6 +824,7 @@ module Aws::CloudFormation
     ChangeSource.add_member(:resource_attribute, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ResourceAttribute", traits: {"smithy.api#enumValue" => "ResourceAttribute"}))
     ChangeSource.add_member(:direct_modification, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DirectModification", traits: {"smithy.api#enumValue" => "DirectModification"}))
     ChangeSource.add_member(:automatic, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Automatic", traits: {"smithy.api#enumValue" => "Automatic"}))
+    ChangeSource.add_member(:no_modification, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NoModification", traits: {"smithy.api#enumValue" => "NoModification"}))
     ChangeType.add_member(:resource, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Resource", traits: {"smithy.api#enumValue" => "Resource"}))
     Changes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Change, name: "member"))
     ConcurrencyMode.add_member(:strict_failure_tolerance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STRICT_FAILURE_TOLERANCE", traits: {"smithy.api#enumValue" => "STRICT_FAILURE_TOLERANCE"}))
@@ -765,6 +835,7 @@ module Aws::CloudFormation
     ContinueUpdateRollbackInput.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleARN, name: "RoleARN"))
     ContinueUpdateRollbackInput.add_member(:resources_to_skip, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcesToSkip, name: "ResourcesToSkip"))
     ContinueUpdateRollbackInput.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, name: "ClientRequestToken"))
+    ContinueUpdateRollbackInput.add_member(:force_rollback, ::Smithy::Schema::Shapes::MemberShape.new(target: ForceRollback, name: "ForceRollback"))
     ContinueUpdateRollbackInput.type = Types::ContinueUpdateRollbackInput
     ContinueUpdateRollbackOutput.type = Types::ContinueUpdateRollbackOutput
     CreateChangeSetInput.add_member(:stack_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StackNameOrId, name: "StackName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -786,6 +857,9 @@ module Aws::CloudFormation
     CreateChangeSetInput.add_member(:include_nested_stacks, ::Smithy::Schema::Shapes::MemberShape.new(target: IncludeNestedStacks, name: "IncludeNestedStacks"))
     CreateChangeSetInput.add_member(:on_stack_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: OnStackFailure, name: "OnStackFailure"))
     CreateChangeSetInput.add_member(:import_existing_resources, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportExistingResources, name: "ImportExistingResources"))
+    CreateChangeSetInput.add_member(:deployment_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentMode, name: "DeploymentMode"))
+    CreateChangeSetInput.add_member(:deployment_config, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentConfig, name: "DeploymentConfig"))
+    CreateChangeSetInput.add_member(:disable_validation, ::Smithy::Schema::Shapes::MemberShape.new(target: DisableValidation, name: "DisableValidation"))
     CreateChangeSetInput.type = Types::CreateChangeSetInput
     CreateChangeSetOutput.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeSetId, name: "Id"))
     CreateChangeSetOutput.add_member(:stack_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StackId, name: "StackId"))
@@ -815,6 +889,8 @@ module Aws::CloudFormation
     CreateStackInput.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, name: "ClientRequestToken"))
     CreateStackInput.add_member(:enable_termination_protection, ::Smithy::Schema::Shapes::MemberShape.new(target: EnableTerminationProtection, name: "EnableTerminationProtection"))
     CreateStackInput.add_member(:retain_except_on_create, ::Smithy::Schema::Shapes::MemberShape.new(target: RetainExceptOnCreate, name: "RetainExceptOnCreate"))
+    CreateStackInput.add_member(:deployment_config, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentConfig, name: "DeploymentConfig"))
+    CreateStackInput.add_member(:disable_validation, ::Smithy::Schema::Shapes::MemberShape.new(target: DisableValidation, name: "DisableValidation"))
     CreateStackInput.type = Types::CreateStackInput
     CreateStackInstancesInput.add_member(:stack_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StackSetName, name: "StackSetName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreateStackInstancesInput.add_member(:accounts, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountList, name: "Accounts"))
@@ -828,6 +904,7 @@ module Aws::CloudFormation
     CreateStackInstancesOutput.add_member(:operation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, name: "OperationId"))
     CreateStackInstancesOutput.type = Types::CreateStackInstancesOutput
     CreateStackOutput.add_member(:stack_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StackId, name: "StackId"))
+    CreateStackOutput.add_member(:operation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationId, name: "OperationId"))
     CreateStackOutput.type = Types::CreateStackOutput
     CreateStackRefactorInput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "Description"))
     CreateStackRefactorInput.add_member(:enable_stack_creation, ::Smithy::Schema::Shapes::MemberShape.new(target: EnableStackCreation, name: "EnableStackCreation"))
@@ -874,6 +951,7 @@ module Aws::CloudFormation
     DeleteStackInput.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleARN, name: "RoleARN"))
     DeleteStackInput.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, name: "ClientRequestToken"))
     DeleteStackInput.add_member(:deletion_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: DeletionMode, name: "DeletionMode"))
+    DeleteStackInput.add_member(:deployment_config, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentConfig, name: "DeploymentConfig"))
     DeleteStackInput.type = Types::DeleteStackInput
     DeleteStackInstancesInput.add_member(:stack_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StackSetName, name: "StackSetName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     DeleteStackInstancesInput.add_member(:accounts, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountList, name: "Accounts"))
@@ -892,6 +970,12 @@ module Aws::CloudFormation
     DeleteStackSetOutput.type = Types::DeleteStackSetOutput
     DeletionMode.add_member(:standard, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STANDARD", traits: {"smithy.api#enumValue" => "STANDARD"}))
     DeletionMode.add_member(:force_delete_stack, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FORCE_DELETE_STACK", traits: {"smithy.api#enumValue" => "FORCE_DELETE_STACK"}))
+    DeploymentConfig.add_member(:mode, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentConfigMode, name: "Mode"))
+    DeploymentConfig.add_member(:disable_rollback, ::Smithy::Schema::Shapes::MemberShape.new(target: DisableRollback, name: "DisableRollback"))
+    DeploymentConfig.type = Types::DeploymentConfig
+    DeploymentConfigMode.add_member(:standard, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STANDARD", traits: {"smithy.api#enumValue" => "STANDARD"}))
+    DeploymentConfigMode.add_member(:express, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXPRESS", traits: {"smithy.api#enumValue" => "EXPRESS"}))
+    DeploymentMode.add_member(:revert_drift, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REVERT_DRIFT", traits: {"smithy.api#enumValue" => "REVERT_DRIFT"}))
     DeploymentTargets.add_member(:accounts, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountList, name: "Accounts"))
     DeploymentTargets.add_member(:accounts_url, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountsUrl, name: "AccountsUrl"))
     DeploymentTargets.add_member(:organizational_unit_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationalUnitIdList, name: "OrganizationalUnitIds"))
@@ -938,6 +1022,7 @@ module Aws::CloudFormation
     DescribeChangeSetOutput.add_member(:execution_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionStatus, name: "ExecutionStatus"))
     DescribeChangeSetOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeSetStatus, name: "Status"))
     DescribeChangeSetOutput.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeSetStatusReason, name: "StatusReason"))
+    DescribeChangeSetOutput.add_member(:stack_drift_status, ::Smithy::Schema::Shapes::MemberShape.new(target: StackDriftStatus, name: "StackDriftStatus"))
     DescribeChangeSetOutput.add_member(:notification_ar_ns, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationARNs, name: "NotificationARNs"))
     DescribeChangeSetOutput.add_member(:rollback_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: RollbackConfiguration, name: "RollbackConfiguration"))
     DescribeChangeSetOutput.add_member(:capabilities, ::Smithy::Schema::Shapes::MemberShape.new(target: Capabilities, name: "Capabilities"))
@@ -949,7 +1034,18 @@ module Aws::CloudFormation
     DescribeChangeSetOutput.add_member(:root_change_set_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeSetId, name: "RootChangeSetId"))
     DescribeChangeSetOutput.add_member(:on_stack_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: OnStackFailure, name: "OnStackFailure"))
     DescribeChangeSetOutput.add_member(:import_existing_resources, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportExistingResources, name: "ImportExistingResources"))
+    DescribeChangeSetOutput.add_member(:deployment_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentMode, name: "DeploymentMode"))
+    DescribeChangeSetOutput.add_member(:deployment_config, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentConfig, name: "DeploymentConfig"))
     DescribeChangeSetOutput.type = Types::DescribeChangeSetOutput
+    DescribeEventsInput.add_member(:stack_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StackNameOrId, name: "StackName"))
+    DescribeEventsInput.add_member(:change_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeSetNameOrId, name: "ChangeSetName"))
+    DescribeEventsInput.add_member(:operation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationId, name: "OperationId"))
+    DescribeEventsInput.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: EventFilter, name: "Filters"))
+    DescribeEventsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    DescribeEventsInput.type = Types::DescribeEventsInput
+    DescribeEventsOutput.add_member(:operation_events, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationEvents, name: "OperationEvents"))
+    DescribeEventsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    DescribeEventsOutput.type = Types::DescribeEventsOutput
     DescribeGeneratedTemplateInput.add_member(:generated_template_name, ::Smithy::Schema::Shapes::MemberShape.new(target: GeneratedTemplateName, name: "GeneratedTemplateName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     DescribeGeneratedTemplateInput.type = Types::DescribeGeneratedTemplateInput
     DescribeGeneratedTemplateOutput.add_member(:generated_template_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GeneratedTemplateId, name: "GeneratedTemplateId"))
@@ -998,7 +1094,7 @@ module Aws::CloudFormation
     DescribeStackDriftDetectionStatusOutput.add_member(:drifted_stack_resource_count, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedInteger, name: "DriftedStackResourceCount"))
     DescribeStackDriftDetectionStatusOutput.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "Timestamp", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     DescribeStackDriftDetectionStatusOutput.type = Types::DescribeStackDriftDetectionStatusOutput
-    DescribeStackEventsInput.add_member(:stack_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StackName, name: "StackName"))
+    DescribeStackEventsInput.add_member(:stack_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StackName, name: "StackName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     DescribeStackEventsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     DescribeStackEventsInput.type = Types::DescribeStackEventsInput
     DescribeStackEventsOutput.add_member(:stack_events, ::Smithy::Schema::Shapes::MemberShape.new(target: StackEvents, name: "StackEvents"))
@@ -1121,6 +1217,9 @@ module Aws::CloudFormation
     DifferenceType.add_member(:add, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ADD", traits: {"smithy.api#enumValue" => "ADD"}))
     DifferenceType.add_member(:remove, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REMOVE", traits: {"smithy.api#enumValue" => "REMOVE"}))
     DifferenceType.add_member(:not_equal, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_EQUAL", traits: {"smithy.api#enumValue" => "NOT_EQUAL"}))
+    DriftIgnoredReason.add_member(:managed_by_aws, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MANAGED_BY_AWS", traits: {"smithy.api#enumValue" => "MANAGED_BY_AWS"}))
+    DriftIgnoredReason.add_member(:write_only_property, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WRITE_ONLY_PROPERTY", traits: {"smithy.api#enumValue" => "WRITE_ONLY_PROPERTY"}))
+    DriftIgnoredReason.add_member(:sensitive_property, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SENSITIVE_PROPERTY", traits: {"smithy.api#enumValue" => "SENSITIVE_PROPERTY"}))
     EstimateTemplateCostInput.add_member(:template_body, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateBody, name: "TemplateBody"))
     EstimateTemplateCostInput.add_member(:template_url, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateURL, name: "TemplateURL"))
     EstimateTemplateCostInput.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: Parameters, name: "Parameters"))
@@ -1129,6 +1228,13 @@ module Aws::CloudFormation
     EstimateTemplateCostOutput.type = Types::EstimateTemplateCostOutput
     EvaluationType.add_member(:static, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Static", traits: {"smithy.api#enumValue" => "Static"}))
     EvaluationType.add_member(:dynamic, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Dynamic", traits: {"smithy.api#enumValue" => "Dynamic"}))
+    EventFilter.add_member(:failed_events, ::Smithy::Schema::Shapes::MemberShape.new(target: FailedEventsFilter, name: "FailedEvents"))
+    EventFilter.type = Types::EventFilter
+    EventType.add_member(:stack_event, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STACK_EVENT", traits: {"smithy.api#enumValue" => "STACK_EVENT"}))
+    EventType.add_member(:progress_event, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PROGRESS_EVENT", traits: {"smithy.api#enumValue" => "PROGRESS_EVENT"}))
+    EventType.add_member(:validation_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VALIDATION_ERROR", traits: {"smithy.api#enumValue" => "VALIDATION_ERROR"}))
+    EventType.add_member(:provisioning_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PROVISIONING_ERROR", traits: {"smithy.api#enumValue" => "PROVISIONING_ERROR"}))
+    EventType.add_member(:hook_invocation_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HOOK_INVOCATION_ERROR", traits: {"smithy.api#enumValue" => "HOOK_INVOCATION_ERROR"}))
     ExecuteChangeSetInput.add_member(:change_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeSetNameOrId, name: "ChangeSetName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ExecuteChangeSetInput.add_member(:stack_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StackNameOrId, name: "StackName"))
     ExecuteChangeSetInput.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, name: "ClientRequestToken"))
@@ -1173,6 +1279,22 @@ module Aws::CloudFormation
     GetGeneratedTemplateOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: GeneratedTemplateStatus, name: "Status"))
     GetGeneratedTemplateOutput.add_member(:template_body, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateBody, name: "TemplateBody"))
     GetGeneratedTemplateOutput.type = Types::GetGeneratedTemplateOutput
+    GetHookResultInput.add_member(:hook_result_id, ::Smithy::Schema::Shapes::MemberShape.new(target: HookInvocationId, name: "HookResultId"))
+    GetHookResultInput.type = Types::GetHookResultInput
+    GetHookResultOutput.add_member(:hook_result_id, ::Smithy::Schema::Shapes::MemberShape.new(target: HookInvocationId, name: "HookResultId"))
+    GetHookResultOutput.add_member(:invocation_point, ::Smithy::Schema::Shapes::MemberShape.new(target: HookInvocationPoint, name: "InvocationPoint"))
+    GetHookResultOutput.add_member(:failure_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: HookFailureMode, name: "FailureMode"))
+    GetHookResultOutput.add_member(:type_name, ::Smithy::Schema::Shapes::MemberShape.new(target: HookTypeName, name: "TypeName"))
+    GetHookResultOutput.add_member(:original_type_name, ::Smithy::Schema::Shapes::MemberShape.new(target: HookTypeName, name: "OriginalTypeName"))
+    GetHookResultOutput.add_member(:type_version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: HookTypeVersionId, name: "TypeVersionId"))
+    GetHookResultOutput.add_member(:type_configuration_version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: HookTypeConfigurationVersionId, name: "TypeConfigurationVersionId"))
+    GetHookResultOutput.add_member(:type_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: HookTypeArn, name: "TypeArn"))
+    GetHookResultOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: HookStatus, name: "Status"))
+    GetHookResultOutput.add_member(:hook_status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: HookStatusReason, name: "HookStatusReason"))
+    GetHookResultOutput.add_member(:invoked_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "InvokedAt"))
+    GetHookResultOutput.add_member(:target, ::Smithy::Schema::Shapes::MemberShape.new(target: HookTarget, name: "Target"))
+    GetHookResultOutput.add_member(:annotations, ::Smithy::Schema::Shapes::MemberShape.new(target: AnnotationList, name: "Annotations"))
+    GetHookResultOutput.type = Types::GetHookResultOutput
     GetStackPolicyInput.add_member(:stack_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StackName, name: "StackName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     GetStackPolicyInput.type = Types::GetStackPolicyInput
     GetStackPolicyOutput.add_member(:stack_policy_body, ::Smithy::Schema::Shapes::MemberShape.new(target: StackPolicyBody, name: "StackPolicyBody"))
@@ -1245,6 +1367,15 @@ module Aws::CloudFormation
     HookStatus.add_member(:hook_complete_succeeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HOOK_COMPLETE_SUCCEEDED", traits: {"smithy.api#enumValue" => "HOOK_COMPLETE_SUCCEEDED"}))
     HookStatus.add_member(:hook_complete_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HOOK_COMPLETE_FAILED", traits: {"smithy.api#enumValue" => "HOOK_COMPLETE_FAILED"}))
     HookStatus.add_member(:hook_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HOOK_FAILED", traits: {"smithy.api#enumValue" => "HOOK_FAILED"}))
+    HookTarget.add_member(:target_type, ::Smithy::Schema::Shapes::MemberShape.new(target: HookTargetType, name: "TargetType", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    HookTarget.add_member(:target_type_name, ::Smithy::Schema::Shapes::MemberShape.new(target: HookTargetTypeName, name: "TargetTypeName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    HookTarget.add_member(:target_id, ::Smithy::Schema::Shapes::MemberShape.new(target: HookTargetId, name: "TargetId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    HookTarget.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: HookTargetAction, name: "Action", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    HookTarget.type = Types::HookTarget
+    HookTargetAction.add_member(:create, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATE", traits: {"smithy.api#enumValue" => "CREATE"}))
+    HookTargetAction.add_member(:update, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATE", traits: {"smithy.api#enumValue" => "UPDATE"}))
+    HookTargetAction.add_member(:delete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETE", traits: {"smithy.api#enumValue" => "DELETE"}))
+    HookTargetAction.add_member(:import, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IMPORT", traits: {"smithy.api#enumValue" => "IMPORT"}))
     HookTargetType.add_member(:resource, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE", traits: {"smithy.api#enumValue" => "RESOURCE"}))
     IdentityProvider.add_member(:aws_marketplace, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_Marketplace", traits: {"smithy.api#enumValue" => "AWS_Marketplace"}))
     IdentityProvider.add_member(:git_hub, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GitHub", traits: {"smithy.api#enumValue" => "GitHub"}))
@@ -1271,6 +1402,7 @@ module Aws::CloudFormation
     JazzLogicalResourceIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LogicalResourceId, name: "member"))
     JazzResourceIdentifierProperties.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: JazzResourceIdentifierPropertyKey, name: "key"))
     JazzResourceIdentifierProperties.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: JazzResourceIdentifierPropertyValue, name: "value"))
+    LastOperations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationEntry, name: "member"))
     LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     LimitExceededException.type = Types::LimitExceededException
     ListChangeSetsInput.add_member(:stack_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StackNameOrId, name: "StackName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -1452,6 +1584,10 @@ module Aws::CloudFormation
     ListTypesOutput.add_member(:type_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: TypeSummaries, name: "TypeSummaries"))
     ListTypesOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     ListTypesOutput.type = Types::ListTypesOutput
+    LiveResourceDrift.add_member(:previous_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceDriftPreviousValue, name: "PreviousValue"))
+    LiveResourceDrift.add_member(:actual_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceDriftActualValue, name: "ActualValue"))
+    LiveResourceDrift.add_member(:drift_detection_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "DriftDetectionTimestamp"))
+    LiveResourceDrift.type = Types::LiveResourceDrift
     LoggingConfig.add_member(:log_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleARN2, name: "LogRoleArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     LoggingConfig.add_member(:log_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupName, name: "LogGroupName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     LoggingConfig.type = Types::LoggingConfig
@@ -1470,6 +1606,38 @@ module Aws::CloudFormation
     OnStackFailure.add_member(:do_nothing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DO_NOTHING", traits: {"smithy.api#enumValue" => "DO_NOTHING"}))
     OnStackFailure.add_member(:rollback, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ROLLBACK", traits: {"smithy.api#enumValue" => "ROLLBACK"}))
     OnStackFailure.add_member(:delete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETE", traits: {"smithy.api#enumValue" => "DELETE"}))
+    OperationEntry.add_member(:operation_type, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationType, name: "OperationType"))
+    OperationEntry.add_member(:operation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationId, name: "OperationId"))
+    OperationEntry.type = Types::OperationEntry
+    OperationEvent.add_member(:event_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EventId, name: "EventId"))
+    OperationEvent.add_member(:stack_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StackId, name: "StackId"))
+    OperationEvent.add_member(:operation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationId, name: "OperationId"))
+    OperationEvent.add_member(:operation_type, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationType, name: "OperationType"))
+    OperationEvent.add_member(:operation_status, ::Smithy::Schema::Shapes::MemberShape.new(target: BeaconStackOperationStatus, name: "OperationStatus"))
+    OperationEvent.add_member(:event_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EventType, name: "EventType"))
+    OperationEvent.add_member(:logical_resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LogicalResourceId, name: "LogicalResourceId"))
+    OperationEvent.add_member(:physical_resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PhysicalResourceId, name: "PhysicalResourceId"))
+    OperationEvent.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "ResourceType"))
+    OperationEvent.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "Timestamp"))
+    OperationEvent.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "StartTime"))
+    OperationEvent.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "EndTime"))
+    OperationEvent.add_member(:resource_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceStatus, name: "ResourceStatus"))
+    OperationEvent.add_member(:resource_status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceStatusReason, name: "ResourceStatusReason"))
+    OperationEvent.add_member(:resource_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceProperties, name: "ResourceProperties"))
+    OperationEvent.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, name: "ClientRequestToken"))
+    OperationEvent.add_member(:hook_type, ::Smithy::Schema::Shapes::MemberShape.new(target: HookType, name: "HookType"))
+    OperationEvent.add_member(:hook_status, ::Smithy::Schema::Shapes::MemberShape.new(target: HookStatus, name: "HookStatus"))
+    OperationEvent.add_member(:hook_status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: HookStatusReason, name: "HookStatusReason"))
+    OperationEvent.add_member(:hook_invocation_point, ::Smithy::Schema::Shapes::MemberShape.new(target: HookInvocationPoint, name: "HookInvocationPoint"))
+    OperationEvent.add_member(:hook_failure_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: HookFailureMode, name: "HookFailureMode"))
+    OperationEvent.add_member(:detailed_status, ::Smithy::Schema::Shapes::MemberShape.new(target: DetailedStatus, name: "DetailedStatus"))
+    OperationEvent.add_member(:validation_failure_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: HookFailureMode, name: "ValidationFailureMode"))
+    OperationEvent.add_member(:validation_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationName, name: "ValidationName"))
+    OperationEvent.add_member(:validation_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationStatus, name: "ValidationStatus"))
+    OperationEvent.add_member(:validation_status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationStatusReason, name: "ValidationStatusReason"))
+    OperationEvent.add_member(:validation_path, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationPath, name: "ValidationPath"))
+    OperationEvent.type = Types::OperationEvent
+    OperationEvents.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationEvent, name: "member"))
     OperationIdAlreadyExistsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     OperationIdAlreadyExistsException.type = Types::OperationIdAlreadyExistsException
     OperationInProgressException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
@@ -1487,6 +1655,12 @@ module Aws::CloudFormation
     OperationStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
     OperationStatusCheckFailedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     OperationStatusCheckFailedException.type = Types::OperationStatusCheckFailedException
+    OperationType.add_member(:create_stack, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATE_STACK", traits: {"smithy.api#enumValue" => "CREATE_STACK"}))
+    OperationType.add_member(:update_stack, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATE_STACK", traits: {"smithy.api#enumValue" => "UPDATE_STACK"}))
+    OperationType.add_member(:delete_stack, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETE_STACK", traits: {"smithy.api#enumValue" => "DELETE_STACK"}))
+    OperationType.add_member(:continue_rollback, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONTINUE_ROLLBACK", traits: {"smithy.api#enumValue" => "CONTINUE_ROLLBACK"}))
+    OperationType.add_member(:rollback, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ROLLBACK", traits: {"smithy.api#enumValue" => "ROLLBACK"}))
+    OperationType.add_member(:create_changeset, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATE_CHANGESET", traits: {"smithy.api#enumValue" => "CREATE_CHANGESET"}))
     OrganizationStatus.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     OrganizationStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
     OrganizationStatus.add_member(:disabled_permanently, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED_PERMANENTLY", traits: {"smithy.api#enumValue" => "DISABLED_PERMANENTLY"}))
@@ -1603,11 +1777,14 @@ module Aws::CloudFormation
     ResourceChange.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "ResourceType"))
     ResourceChange.add_member(:replacement, ::Smithy::Schema::Shapes::MemberShape.new(target: Replacement, name: "Replacement"))
     ResourceChange.add_member(:scope, ::Smithy::Schema::Shapes::MemberShape.new(target: Scope, name: "Scope"))
+    ResourceChange.add_member(:resource_drift_status, ::Smithy::Schema::Shapes::MemberShape.new(target: StackResourceDriftStatus, name: "ResourceDriftStatus"))
+    ResourceChange.add_member(:resource_drift_ignored_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceDriftIgnoredAttributes, name: "ResourceDriftIgnoredAttributes"))
     ResourceChange.add_member(:details, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceChangeDetails, name: "Details"))
     ResourceChange.add_member(:change_set_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeSetId, name: "ChangeSetId"))
     ResourceChange.add_member(:module_info, ::Smithy::Schema::Shapes::MemberShape.new(target: ModuleInfo, name: "ModuleInfo"))
     ResourceChange.add_member(:before_context, ::Smithy::Schema::Shapes::MemberShape.new(target: BeforeContext, name: "BeforeContext"))
     ResourceChange.add_member(:after_context, ::Smithy::Schema::Shapes::MemberShape.new(target: AfterContext, name: "AfterContext"))
+    ResourceChange.add_member(:previous_deployment_context, ::Smithy::Schema::Shapes::MemberShape.new(target: PreviousDeploymentContext, name: "PreviousDeploymentContext"))
     ResourceChange.type = Types::ResourceChange
     ResourceChangeDetail.add_member(:target, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTargetDefinition, name: "Target"))
     ResourceChangeDetail.add_member(:evaluation, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationType, name: "Evaluation"))
@@ -1628,6 +1805,10 @@ module Aws::CloudFormation
     ResourceDetail.add_member(:warnings, ::Smithy::Schema::Shapes::MemberShape.new(target: WarningDetails, name: "Warnings"))
     ResourceDetail.type = Types::ResourceDetail
     ResourceDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceDetail, name: "member"))
+    ResourceDriftIgnoredAttribute.add_member(:path, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcePropertyPath, name: "Path"))
+    ResourceDriftIgnoredAttribute.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: DriftIgnoredReason, name: "Reason"))
+    ResourceDriftIgnoredAttribute.type = Types::ResourceDriftIgnoredAttribute
+    ResourceDriftIgnoredAttributes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceDriftIgnoredAttribute, name: "member"))
     ResourceIdentifierProperties.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdentifierPropertyKey, name: "key"))
     ResourceIdentifierProperties.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdentifierPropertyValue, name: "value"))
     ResourceIdentifierSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdentifierSummary, name: "member"))
@@ -1698,6 +1879,9 @@ module Aws::CloudFormation
     ResourceTargetDefinition.add_member(:path, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcePropertyPath, name: "Path"))
     ResourceTargetDefinition.add_member(:before_value, ::Smithy::Schema::Shapes::MemberShape.new(target: BeforeValue, name: "BeforeValue"))
     ResourceTargetDefinition.add_member(:after_value, ::Smithy::Schema::Shapes::MemberShape.new(target: AfterValue, name: "AfterValue"))
+    ResourceTargetDefinition.add_member(:before_value_from, ::Smithy::Schema::Shapes::MemberShape.new(target: BeforeValueFrom, name: "BeforeValueFrom"))
+    ResourceTargetDefinition.add_member(:after_value_from, ::Smithy::Schema::Shapes::MemberShape.new(target: AfterValueFrom, name: "AfterValueFrom"))
+    ResourceTargetDefinition.add_member(:drift, ::Smithy::Schema::Shapes::MemberShape.new(target: LiveResourceDrift, name: "Drift"))
     ResourceTargetDefinition.add_member(:attribute_change_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeChangeType, name: "AttributeChangeType"))
     ResourceTargetDefinition.type = Types::ResourceTargetDefinition
     ResourceToImport.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "ResourceType", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -1716,8 +1900,10 @@ module Aws::CloudFormation
     RollbackStackInput.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleARN, name: "RoleARN"))
     RollbackStackInput.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, name: "ClientRequestToken"))
     RollbackStackInput.add_member(:retain_except_on_create, ::Smithy::Schema::Shapes::MemberShape.new(target: RetainExceptOnCreate, name: "RetainExceptOnCreate"))
+    RollbackStackInput.add_member(:deployment_config, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentConfig, name: "DeploymentConfig"))
     RollbackStackInput.type = Types::RollbackStackInput
     RollbackStackOutput.add_member(:stack_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StackId, name: "StackId"))
+    RollbackStackOutput.add_member(:operation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationId, name: "OperationId"))
     RollbackStackOutput.type = Types::RollbackStackOutput
     RollbackTrigger.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "Arn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     RollbackTrigger.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: Type, name: "Type", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -1773,6 +1959,7 @@ module Aws::CloudFormation
     Stack.add_member(:stack_status, ::Smithy::Schema::Shapes::MemberShape.new(target: StackStatus, name: "StackStatus", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     Stack.add_member(:stack_status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: StackStatusReason, name: "StackStatusReason"))
     Stack.add_member(:disable_rollback, ::Smithy::Schema::Shapes::MemberShape.new(target: DisableRollback, name: "DisableRollback"))
+    Stack.add_member(:deployment_config, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentConfig, name: "DeploymentConfig"))
     Stack.add_member(:notification_ar_ns, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationARNs, name: "NotificationARNs"))
     Stack.add_member(:timeout_in_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeoutMinutes, name: "TimeoutInMinutes"))
     Stack.add_member(:capabilities, ::Smithy::Schema::Shapes::MemberShape.new(target: Capabilities, name: "Capabilities"))
@@ -1786,6 +1973,7 @@ module Aws::CloudFormation
     Stack.add_member(:retain_except_on_create, ::Smithy::Schema::Shapes::MemberShape.new(target: RetainExceptOnCreate, name: "RetainExceptOnCreate"))
     Stack.add_member(:deletion_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: DeletionMode, name: "DeletionMode"))
     Stack.add_member(:detailed_status, ::Smithy::Schema::Shapes::MemberShape.new(target: DetailedStatus, name: "DetailedStatus"))
+    Stack.add_member(:last_operations, ::Smithy::Schema::Shapes::MemberShape.new(target: LastOperations, name: "LastOperations"))
     Stack.type = Types::Stack
     StackDefinition.add_member(:stack_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StackName, name: "StackName"))
     StackDefinition.add_member(:template_body, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateBody, name: "TemplateBody"))
@@ -1808,6 +1996,7 @@ module Aws::CloudFormation
     StackEvent.add_member(:stack_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StackId, name: "StackId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     StackEvent.add_member(:event_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EventId, name: "EventId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     StackEvent.add_member(:stack_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StackName, name: "StackName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    StackEvent.add_member(:operation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationId, name: "OperationId"))
     StackEvent.add_member(:logical_resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LogicalResourceId, name: "LogicalResourceId"))
     StackEvent.add_member(:physical_resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PhysicalResourceId, name: "PhysicalResourceId"))
     StackEvent.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "ResourceType"))
@@ -1982,6 +2171,7 @@ module Aws::CloudFormation
     StackResourceDriftStatus.add_member(:deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETED", traits: {"smithy.api#enumValue" => "DELETED"}))
     StackResourceDriftStatus.add_member(:not_checked, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_CHECKED", traits: {"smithy.api#enumValue" => "NOT_CHECKED"}))
     StackResourceDriftStatus.add_member(:unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNKNOWN", traits: {"smithy.api#enumValue" => "UNKNOWN"}))
+    StackResourceDriftStatus.add_member(:unsupported, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNSUPPORTED", traits: {"smithy.api#enumValue" => "UNSUPPORTED"}))
     StackResourceDriftStatusFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StackResourceDriftStatus, name: "member"))
     StackResourceDrifts.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StackResourceDrift, name: "member"))
     StackResourceSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StackResourceSummary, name: "member"))
@@ -2013,6 +2203,7 @@ module Aws::CloudFormation
     StackSet.add_member(:managed_execution, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedExecution, name: "ManagedExecution"))
     StackSet.add_member(:regions, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionList, name: "Regions"))
     StackSet.type = Types::StackSet
+    StackSetARNList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StackSetARN, name: "member"))
     StackSetAutoDeploymentTargetSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StackSetAutoDeploymentTargetSummary, name: "member"))
     StackSetAutoDeploymentTargetSummary.add_member(:organizational_unit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationalUnitId, name: "OrganizationalUnitId"))
     StackSetAutoDeploymentTargetSummary.add_member(:regions, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionList, name: "Regions"))
@@ -2145,6 +2336,7 @@ module Aws::CloudFormation
     StackSummary.add_member(:parent_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StackId, name: "ParentId"))
     StackSummary.add_member(:root_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StackId, name: "RootId"))
     StackSummary.add_member(:drift_information, ::Smithy::Schema::Shapes::MemberShape.new(target: StackDriftInformationSummary, name: "DriftInformation"))
+    StackSummary.add_member(:last_operations, ::Smithy::Schema::Shapes::MemberShape.new(target: LastOperations, name: "LastOperations"))
     StackSummary.type = Types::StackSummary
     Stacks.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Stack, name: "member"))
     StageList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateStage, name: "member"))
@@ -2289,6 +2481,8 @@ module Aws::CloudFormation
     UpdateStackInput.add_member(:disable_rollback, ::Smithy::Schema::Shapes::MemberShape.new(target: DisableRollback, name: "DisableRollback"))
     UpdateStackInput.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, name: "ClientRequestToken"))
     UpdateStackInput.add_member(:retain_except_on_create, ::Smithy::Schema::Shapes::MemberShape.new(target: RetainExceptOnCreate, name: "RetainExceptOnCreate"))
+    UpdateStackInput.add_member(:deployment_config, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentConfig, name: "DeploymentConfig"))
+    UpdateStackInput.add_member(:disable_validation, ::Smithy::Schema::Shapes::MemberShape.new(target: DisableValidation, name: "DisableValidation"))
     UpdateStackInput.type = Types::UpdateStackInput
     UpdateStackInstancesInput.add_member(:stack_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StackSetNameOrId, name: "StackSetName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     UpdateStackInstancesInput.add_member(:accounts, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountList, name: "Accounts"))
@@ -2302,6 +2496,7 @@ module Aws::CloudFormation
     UpdateStackInstancesOutput.add_member(:operation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, name: "OperationId"))
     UpdateStackInstancesOutput.type = Types::UpdateStackInstancesOutput
     UpdateStackOutput.add_member(:stack_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StackId, name: "StackId"))
+    UpdateStackOutput.add_member(:operation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationId, name: "OperationId"))
     UpdateStackOutput.type = Types::UpdateStackOutput
     UpdateStackSetInput.add_member(:stack_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StackSetName, name: "StackSetName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     UpdateStackSetInput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "Description"))
@@ -2339,6 +2534,8 @@ module Aws::CloudFormation
     ValidateTemplateOutput.add_member(:capabilities_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: CapabilitiesReason, name: "CapabilitiesReason"))
     ValidateTemplateOutput.add_member(:declared_transforms, ::Smithy::Schema::Shapes::MemberShape.new(target: TransformsList, name: "DeclaredTransforms"))
     ValidateTemplateOutput.type = Types::ValidateTemplateOutput
+    ValidationStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    ValidationStatus.add_member(:skipped, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SKIPPED", traits: {"smithy.api#enumValue" => "SKIPPED"}))
     VersionBump.add_member(:major, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MAJOR", traits: {"smithy.api#enumValue" => "MAJOR"}))
     VersionBump.add_member(:minor, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MINOR", traits: {"smithy.api#enumValue" => "MINOR"}))
     Visibility.add_member(:public, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PUBLIC", traits: {"smithy.api#enumValue" => "PUBLIC"}))
@@ -2364,7 +2561,7 @@ module Aws::CloudFormation
       service.id = "com.amazonaws.cloudformation#CloudFormation"
       service.name = "CloudFormation"
       service.version = "2010-05-15"
-      service.traits = {"aws.api#service" => {"sdkId" => "CloudFormation", "arnNamespace" => "cloudformation", "cloudFormationName" => "CloudFormation", "cloudTrailEventSource" => "cloudformation.amazonaws.com", "endpointPrefix" => "cloudformation"}, "aws.auth#sigv4" => {"name" => "cloudformation"}, "aws.protocols#awsQuery" => {}, "smithy.api#title" => "AWS CloudFormation", "smithy.api#xmlNamespace" => {"uri" => "http://cloudformation.amazonaws.com/doc/2010-05-15/"}}
+      service.traits = {"aws.api#service" => {"sdkId" => "CloudFormation", "arnNamespace" => "cloudformation", "cloudFormationName" => "CloudFormation", "cloudTrailEventSource" => "cloudformation.amazonaws.com", "endpointPrefix" => "cloudformation"}, "aws.auth#sigv4" => {"name" => "cloudformation"}, "aws.protocols#awsQuery" => {}, "smithy.api#title" => "AWS CloudFormation", "smithy.api#xmlNamespace" => {"uri" => "http://cloudformation.amazonaws.com/doc/2010-05-15/"}, "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws-us-gov"]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://cloudformation-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://cloudformation.{Region}.amazonaws.com", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://cloudformation-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://cloudformation.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://cloudformation.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 14, "nodes" => "/////wAAAAH/////AAAAAAAAAA0AAAADAAAAAQAAAAQF9eEMAAAAAgAAAAUF9eEMAAAAAwAAAAgAAAAGAAAABAAAAAcF9eELAAAABQX14QkF9eEKAAAABAAAAAsAAAAJAAAABgAAAAoF9eEIAAAABwX14QYF9eEHAAAABQAAAAwF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAAOAAAABAX14QIF9eED"}}
       service.add_operation(:activate_organizations_access, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cloudformation#ActivateOrganizationsAccess"
         operation.name = "ActivateOrganizationsAccess"
@@ -2557,6 +2754,7 @@ module Aws::CloudFormation
         operation.output = DescribeChangeSetOutput
         operation.errors << ChangeSetNotFoundException
         operation.traits = {"smithy.api#suppress" => ["WaitableTraitInvalidErrorType"]}
+        operation[:paginator] = Paginators::DescribeChangeSet.new
       end)
       service.add_operation(:describe_change_set_hooks, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cloudformation#DescribeChangeSetHooks"
@@ -2565,6 +2763,14 @@ module Aws::CloudFormation
         operation.output = DescribeChangeSetHooksOutput
         operation.errors << ChangeSetNotFoundException
         operation.traits = {}
+      end)
+      service.add_operation(:describe_events, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cloudformation#DescribeEvents"
+        operation.name = "DescribeEvents"
+        operation.input = DescribeEventsInput
+        operation.output = DescribeEventsOutput
+        operation.traits = {}
+        operation[:paginator] = Paginators::DescribeEvents.new
       end)
       service.add_operation(:describe_generated_template, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cloudformation#DescribeGeneratedTemplate"
@@ -2750,6 +2956,14 @@ module Aws::CloudFormation
         operation.input = GetGeneratedTemplateInput
         operation.output = GetGeneratedTemplateOutput
         operation.errors << GeneratedTemplateNotFoundException
+        operation.traits = {}
+      end)
+      service.add_operation(:get_hook_result, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cloudformation#GetHookResult"
+        operation.name = "GetHookResult"
+        operation.input = GetHookResultInput
+        operation.output = GetHookResultOutput
+        operation.errors << HookResultNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:get_stack_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|

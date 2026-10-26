@@ -38,9 +38,12 @@ module Aws::WAFV2
     AttributeValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.wafv2#AttributeValue", name: "AttributeValue", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}})
     AttributeValues = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.wafv2#AttributeValues", name: "AttributeValues", traits: {"smithy.api#length" => {"min" => 1, "max" => 50}})
     BlockAction = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#BlockAction", name: "BlockAction")
+    BlockchainChain = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.wafv2#BlockchainChain", name: "BlockchainChain")
     Body = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#Body", name: "Body")
     BodyParsingFallbackBehavior = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.wafv2#BodyParsingFallbackBehavior", name: "BodyParsingFallbackBehavior")
     Boolean = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.wafv2#Boolean", name: "Boolean", traits: {"smithy.api#default" => false})
+    BotStatistics = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#BotStatistics", name: "BotStatistics")
+    BotStatisticsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.wafv2#BotStatisticsList", name: "BotStatisticsList")
     ByteMatchStatement = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#ByteMatchStatement", name: "ByteMatchStatement")
     CapacityUnit = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.wafv2#CapacityUnit", name: "CapacityUnit", traits: {"smithy.api#range" => {"min" => 1}})
     CaptchaAction = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#CaptchaAction", name: "CaptchaAction")
@@ -75,6 +78,10 @@ module Aws::WAFV2
     CreateWebACLRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#CreateWebACLRequest", name: "CreateWebACLRequest")
     CreateWebACLResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#CreateWebACLResponse", name: "CreateWebACLResponse")
     CreationPathString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.wafv2#CreationPathString", name: "CreationPathString", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "\\S"})
+    CryptoConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#CryptoConfig", name: "CryptoConfig")
+    CryptoCurrency = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.wafv2#CryptoCurrency", name: "CryptoCurrency")
+    Currency = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.wafv2#Currency", name: "Currency")
+    CurrencyMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.wafv2#CurrencyMode", name: "CurrencyMode")
     CustomHTTPHeader = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#CustomHTTPHeader", name: "CustomHTTPHeader")
     CustomHTTPHeaderName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.wafv2#CustomHTTPHeaderName", name: "CustomHTTPHeaderName", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[a-zA-Z0-9._$-]+$"})
     CustomHTTPHeaderValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.wafv2#CustomHTTPHeaderValue", name: "CustomHTTPHeaderValue", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => ".*"})
@@ -83,6 +90,8 @@ module Aws::WAFV2
     CustomResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#CustomResponse", name: "CustomResponse")
     CustomResponseBodies = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.wafv2#CustomResponseBodies", name: "CustomResponseBodies", traits: {"smithy.api#length" => {"min" => 1}})
     CustomResponseBody = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#CustomResponseBody", name: "CustomResponseBody")
+    DataPointEntry = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#DataPointEntry", name: "DataPointEntry")
+    DataPointsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.wafv2#DataPointsList", name: "DataPointsList")
     DataProtection = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#DataProtection", name: "DataProtection")
     DataProtectionAction = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.wafv2#DataProtectionAction", name: "DataProtectionAction")
     DataProtectionConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#DataProtectionConfig", name: "DataProtectionConfig")
@@ -110,6 +119,8 @@ module Aws::WAFV2
     DescribeManagedProductsByVendorResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#DescribeManagedProductsByVendorResponse", name: "DescribeManagedProductsByVendorResponse")
     DescribeManagedRuleGroupRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#DescribeManagedRuleGroupRequest", name: "DescribeManagedRuleGroupRequest")
     DescribeManagedRuleGroupResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#DescribeManagedRuleGroupResponse", name: "DescribeManagedRuleGroupResponse")
+    DisallowedFeature = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#DisallowedFeature", name: "DisallowedFeature")
+    DisallowedFeatures = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.wafv2#DisallowedFeatures", name: "DisallowedFeatures", traits: {"smithy.api#length" => {"min" => 1}})
     DisassociateWebACLRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#DisassociateWebACLRequest", name: "DisassociateWebACLRequest")
     DisassociateWebACLResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#DisassociateWebACLResponse", name: "DisassociateWebACLResponse")
     DownloadUrl = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.wafv2#DownloadUrl", name: "DownloadUrl")
@@ -137,6 +148,8 @@ module Aws::WAFV2
     Filter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#Filter", name: "Filter")
     FilterBehavior = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.wafv2#FilterBehavior", name: "FilterBehavior")
     FilterRequirement = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.wafv2#FilterRequirement", name: "FilterRequirement")
+    FilterSource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#FilterSource", name: "FilterSource")
+    FilterString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.wafv2#FilterString", name: "FilterString", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "\\S"})
     Filters = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.wafv2#Filters", name: "Filters", traits: {"smithy.api#length" => {"min" => 1}})
     FirewallManagerRuleGroup = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#FirewallManagerRuleGroup", name: "FirewallManagerRuleGroup")
     FirewallManagerRuleGroups = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.wafv2#FirewallManagerRuleGroups", name: "FirewallManagerRuleGroups")
@@ -163,14 +176,23 @@ module Aws::WAFV2
     GetRateBasedStatementManagedKeysResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#GetRateBasedStatementManagedKeysResponse", name: "GetRateBasedStatementManagedKeysResponse")
     GetRegexPatternSetRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#GetRegexPatternSetRequest", name: "GetRegexPatternSetRequest")
     GetRegexPatternSetResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#GetRegexPatternSetResponse", name: "GetRegexPatternSetResponse")
+    GetRevenueStatisticsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#GetRevenueStatisticsRequest", name: "GetRevenueStatisticsRequest")
+    GetRevenueStatisticsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#GetRevenueStatisticsResponse", name: "GetRevenueStatisticsResponse")
+    GetRevenueStatisticsSummaryRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#GetRevenueStatisticsSummaryRequest", name: "GetRevenueStatisticsSummaryRequest")
+    GetRevenueStatisticsSummaryResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#GetRevenueStatisticsSummaryResponse", name: "GetRevenueStatisticsSummaryResponse")
+    GetRevenueStatisticsTimeSeriesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#GetRevenueStatisticsTimeSeriesRequest", name: "GetRevenueStatisticsTimeSeriesRequest")
+    GetRevenueStatisticsTimeSeriesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#GetRevenueStatisticsTimeSeriesResponse", name: "GetRevenueStatisticsTimeSeriesResponse")
     GetRuleGroupRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#GetRuleGroupRequest", name: "GetRuleGroupRequest")
     GetRuleGroupResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#GetRuleGroupResponse", name: "GetRuleGroupResponse")
     GetSampledRequestsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#GetSampledRequestsRequest", name: "GetSampledRequestsRequest")
     GetSampledRequestsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#GetSampledRequestsResponse", name: "GetSampledRequestsResponse")
+    GetTopPathStatisticsByTrafficRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#GetTopPathStatisticsByTrafficRequest", name: "GetTopPathStatisticsByTrafficRequest")
+    GetTopPathStatisticsByTrafficResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#GetTopPathStatisticsByTrafficResponse", name: "GetTopPathStatisticsByTrafficResponse")
     GetWebACLForResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#GetWebACLForResourceRequest", name: "GetWebACLForResourceRequest")
     GetWebACLForResourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#GetWebACLForResourceResponse", name: "GetWebACLForResourceResponse")
     GetWebACLRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#GetWebACLRequest", name: "GetWebACLRequest")
     GetWebACLResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#GetWebACLResponse", name: "GetWebACLResponse")
+    GroupByType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.wafv2#GroupByType", name: "GroupByType")
     HTTPHeader = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#HTTPHeader", name: "HTTPHeader")
     HTTPHeaders = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.wafv2#HTTPHeaders", name: "HTTPHeaders")
     HTTPMethod = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.wafv2#HTTPMethod", name: "HTTPMethod")
@@ -193,6 +215,7 @@ module Aws::WAFV2
     IPString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.wafv2#IPString", name: "IPString")
     ImmunityTimeProperty = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#ImmunityTimeProperty", name: "ImmunityTimeProperty")
     InspectionLevel = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.wafv2#InspectionLevel", name: "InspectionLevel")
+    IntervalType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.wafv2#IntervalType", name: "IntervalType")
     JA3Fingerprint = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#JA3Fingerprint", name: "JA3Fingerprint")
     JA4Fingerprint = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#JA4Fingerprint", name: "JA4Fingerprint")
     JsonBody = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#JsonBody", name: "JsonBody")
@@ -231,6 +254,8 @@ module Aws::WAFV2
     ListResourcesForWebACLResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#ListResourcesForWebACLResponse", name: "ListResourcesForWebACLResponse")
     ListRuleGroupsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#ListRuleGroupsRequest", name: "ListRuleGroupsRequest")
     ListRuleGroupsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#ListRuleGroupsResponse", name: "ListRuleGroupsResponse")
+    ListSettlementRecordsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#ListSettlementRecordsRequest", name: "ListSettlementRecordsRequest")
+    ListSettlementRecordsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#ListSettlementRecordsResponse", name: "ListSettlementRecordsResponse")
     ListTagsForResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#ListTagsForResourceRequest", name: "ListTagsForResourceRequest")
     ListTagsForResourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#ListTagsForResourceResponse", name: "ListTagsForResourceResponse")
     ListWebACLsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#ListWebACLsRequest", name: "ListWebACLsRequest")
@@ -258,12 +283,22 @@ module Aws::WAFV2
     ManagedRuleSetSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#ManagedRuleSetSummary", name: "ManagedRuleSetSummary")
     ManagedRuleSetVersion = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#ManagedRuleSetVersion", name: "ManagedRuleSetVersion")
     MapMatchScope = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.wafv2#MapMatchScope", name: "MapMatchScope")
+    MaxDataPoints = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.wafv2#MaxDataPoints", name: "MaxDataPoints", traits: {"smithy.api#range" => {"min" => 1, "max" => 10000}})
     Method = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#Method", name: "Method")
     MetricName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.wafv2#MetricName", name: "MetricName", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => "^[\\w#:\\.\\-/]+$"})
     MobileSdkRelease = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#MobileSdkRelease", name: "MobileSdkRelease")
+    MonetizationAmountValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.wafv2#MonetizationAmountValue", name: "MonetizationAmountValue")
+    MonetizationConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#MonetizationConfig", name: "MonetizationConfig")
+    MonetizationFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#MonetizationFilter", name: "MonetizationFilter")
+    MonetizationFilterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.wafv2#MonetizationFilterList", name: "MonetizationFilterList", traits: {"smithy.api#length" => {"min" => 1, "max" => 20}})
+    MonetizationFilterName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.wafv2#MonetizationFilterName", name: "MonetizationFilterName", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}})
+    MonetizationFilterValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.wafv2#MonetizationFilterValue", name: "MonetizationFilterValue", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}})
+    MonetizationFilterValueList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.wafv2#MonetizationFilterValueList", name: "MonetizationFilterValueList", traits: {"smithy.api#length" => {"min" => 1, "max" => 20}})
+    MonetizeAction = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#MonetizeAction", name: "MonetizeAction")
     NextMarker = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.wafv2#NextMarker", name: "NextMarker", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "\\S"})
     NoneAction = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#NoneAction", name: "NoneAction")
     NotStatement = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#NotStatement", name: "NotStatement")
+    NumberOfTopTrafficBotsPerPath = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.wafv2#NumberOfTopTrafficBotsPerPath", name: "NumberOfTopTrafficBotsPerPath", traits: {"smithy.api#range" => {"min" => 1, "max" => 10}})
     OnSourceDDoSProtectionConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#OnSourceDDoSProtectionConfig", name: "OnSourceDDoSProtectionConfig")
     OrStatement = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#OrStatement", name: "OrStatement")
     OutputUrl = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.wafv2#OutputUrl", name: "OutputUrl")
@@ -273,13 +308,29 @@ module Aws::WAFV2
     ParameterExceptionField = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.wafv2#ParameterExceptionField", name: "ParameterExceptionField")
     ParameterExceptionParameter = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.wafv2#ParameterExceptionParameter", name: "ParameterExceptionParameter", traits: {"smithy.api#length" => {"min" => 1}})
     PasswordField = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#PasswordField", name: "PasswordField")
+    PathStatistics = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#PathStatistics", name: "PathStatistics")
+    PathStatisticsLimit = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.wafv2#PathStatisticsLimit", name: "PathStatisticsLimit", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}})
+    PathStatisticsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.wafv2#PathStatisticsList", name: "PathStatisticsList")
+    PathString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.wafv2#PathString", name: "PathString", traits: {"smithy.api#length" => {"min" => 1, "max" => 512}})
     PayloadType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.wafv2#PayloadType", name: "PayloadType")
+    PaymentNetwork = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#PaymentNetwork", name: "PaymentNetwork")
+    PaymentNetworks = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.wafv2#PaymentNetworks", name: "PaymentNetworks", traits: {"smithy.api#length" => {"min" => 1, "max" => 2}})
+    PercentageValue = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.wafv2#PercentageValue", name: "PercentageValue", traits: {"smithy.api#default" => 0, "smithy.api#range" => {"min" => 0.0, "max" => 100.0}})
     PhoneNumberField = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#PhoneNumberField", name: "PhoneNumberField")
     PhoneNumberFields = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.wafv2#PhoneNumberFields", name: "PhoneNumberFields")
     Platform = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.wafv2#Platform", name: "Platform")
     PolicyString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.wafv2#PolicyString", name: "PolicyString", traits: {"smithy.api#length" => {"min" => 1, "max" => 395000}, "smithy.api#pattern" => "\\S"})
     PopulationSize = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.wafv2#PopulationSize", name: "PopulationSize", traits: {"smithy.api#default" => 0})
     PositionalConstraint = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.wafv2#PositionalConstraint", name: "PositionalConstraint")
+    PreParseTextTransformation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#PreParseTextTransformation", name: "PreParseTextTransformation")
+    PreParseTextTransformationPriority = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.wafv2#PreParseTextTransformationPriority", name: "PreParseTextTransformationPriority", traits: {"smithy.api#default" => 0, "smithy.api#range" => {"min" => 0}})
+    PreParseTextTransformationType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.wafv2#PreParseTextTransformationType", name: "PreParseTextTransformationType")
+    PreParseTextTransformations = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.wafv2#PreParseTextTransformations", name: "PreParseTextTransformations")
+    Price = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#Price", name: "Price")
+    PriceAmount = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.wafv2#PriceAmount", name: "PriceAmount", traits: {"smithy.api#length" => {"min" => 1, "max" => 13}, "smithy.api#pattern" => "^([1-9][0-9]*(\\.[0-9]{1,3})?|0\\.([1-9][0-9]{0,2}|0[1-9][0-9]?|00[1-9]))$"})
+    PriceMultiplier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.wafv2#PriceMultiplier", name: "PriceMultiplier", traits: {"smithy.api#length" => {"min" => 1, "max" => 3}, "smithy.api#pattern" => "^([1-9][0-9]?|100)$"})
+    Prices = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.wafv2#Prices", name: "Prices", traits: {"smithy.api#length" => {"min" => 1, "max" => 1}})
+    PricingPlanFeatureName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.wafv2#PricingPlanFeatureName", name: "PricingPlanFeatureName", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[\\w\\-]+$"})
     ProductDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.wafv2#ProductDescription", name: "ProductDescription", traits: {"smithy.api#length" => {"min" => 1}, "smithy.api#pattern" => "\\S"})
     ProductId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.wafv2#ProductId", name: "ProductId", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "\\S"})
     ProductLink = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.wafv2#ProductLink", name: "ProductLink", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#pattern" => "\\S"})
@@ -292,6 +343,8 @@ module Aws::WAFV2
     PutPermissionPolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#PutPermissionPolicyRequest", name: "PutPermissionPolicyRequest")
     PutPermissionPolicyResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#PutPermissionPolicyResponse", name: "PutPermissionPolicyResponse")
     QueryString = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#QueryString", name: "QueryString")
+    RankingSortBy = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.wafv2#RankingSortBy", name: "RankingSortBy")
+    RankingStatisticType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.wafv2#RankingStatisticType", name: "RankingStatisticType")
     RateBasedStatement = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#RateBasedStatement", name: "RateBasedStatement")
     RateBasedStatementAggregateKeyType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.wafv2#RateBasedStatementAggregateKeyType", name: "RateBasedStatementAggregateKeyType")
     RateBasedStatementCustomKey = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#RateBasedStatementCustomKey", name: "RateBasedStatementCustomKey")
@@ -325,8 +378,10 @@ module Aws::WAFV2
     ReleaseSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#ReleaseSummary", name: "ReleaseSummary")
     RequestBody = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.wafv2#RequestBody", name: "RequestBody")
     RequestBodyAssociatedResourceTypeConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#RequestBodyAssociatedResourceTypeConfig", name: "RequestBodyAssociatedResourceTypeConfig")
+    RequestCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.wafv2#RequestCount", name: "RequestCount", traits: {"smithy.api#default" => 0, "smithy.api#range" => {"min" => 0}})
     RequestInspection = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#RequestInspection", name: "RequestInspection")
     RequestInspectionACFP = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#RequestInspectionACFP", name: "RequestInspectionACFP")
+    RequiredPricingPlanName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.wafv2#RequiredPricingPlanName", name: "RequiredPricingPlanName", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[\\w\\-]+$"})
     ResourceArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.wafv2#ResourceArn", name: "ResourceArn", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "\\S"})
     ResourceArns = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.wafv2#ResourceArns", name: "ResourceArns")
     ResourceType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.wafv2#ResourceType", name: "ResourceType")
@@ -348,6 +403,9 @@ module Aws::WAFV2
     ResponseInspectionStatusCodeFailureCodes = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.wafv2#ResponseInspectionStatusCodeFailureCodes", name: "ResponseInspectionStatusCodeFailureCodes", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
     ResponseInspectionStatusCodeSuccessCodes = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.wafv2#ResponseInspectionStatusCodeSuccessCodes", name: "ResponseInspectionStatusCodeSuccessCodes", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
     ResponseStatusCode = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.wafv2#ResponseStatusCode", name: "ResponseStatusCode", traits: {"smithy.api#range" => {"min" => 200, "max" => 599}})
+    RevenueBreakdown = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#RevenueBreakdown", name: "RevenueBreakdown")
+    RevenuePathStatistics = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#RevenuePathStatistics", name: "RevenuePathStatistics")
+    RevenuePathStatisticsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.wafv2#RevenuePathStatisticsList", name: "RevenuePathStatisticsList")
     Rule = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#Rule", name: "Rule")
     RuleAction = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#RuleAction", name: "RuleAction")
     RuleActionOverride = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#RuleActionOverride", name: "RuleActionOverride")
@@ -367,6 +425,13 @@ module Aws::WAFV2
     SearchString = ::Smithy::Schema::Shapes::BlobShape.new(id: "com.amazonaws.wafv2#SearchString", name: "SearchString")
     SensitivityLevel = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.wafv2#SensitivityLevel", name: "SensitivityLevel")
     SensitivityToAct = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.wafv2#SensitivityToAct", name: "SensitivityToAct")
+    SettlementFilterString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.wafv2#SettlementFilterString", name: "SettlementFilterString", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[a-zA-Z0-9:._\\-=+/]+$"})
+    SettlementIdString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.wafv2#SettlementIdString", name: "SettlementIdString", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}})
+    SettlementRecord = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#SettlementRecord", name: "SettlementRecord")
+    SettlementRecordLimit = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.wafv2#SettlementRecordLimit", name: "SettlementRecordLimit", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}})
+    SettlementRecordList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.wafv2#SettlementRecordList", name: "SettlementRecordList")
+    SettlementSortBy = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.wafv2#SettlementSortBy", name: "SettlementSortBy")
+    SettlementStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.wafv2#SettlementStatus", name: "SettlementStatus")
     SingleCookieName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.wafv2#SingleCookieName", name: "SingleCookieName", traits: {"smithy.api#length" => {"min" => 1, "max" => 60}, "smithy.api#pattern" => "\\S"})
     SingleHeader = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#SingleHeader", name: "SingleHeader")
     SingleQueryArgument = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#SingleQueryArgument", name: "SingleQueryArgument")
@@ -374,6 +439,9 @@ module Aws::WAFV2
     SizeConstraintStatement = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#SizeConstraintStatement", name: "SizeConstraintStatement")
     SizeInspectionLimit = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.wafv2#SizeInspectionLimit", name: "SizeInspectionLimit")
     SolveTimestamp = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.wafv2#SolveTimestamp", name: "SolveTimestamp")
+    SortOrder = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.wafv2#SortOrder", name: "SortOrder")
+    SourceStatistics = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#SourceStatistics", name: "SourceStatistics")
+    SourceStatisticsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.wafv2#SourceStatisticsList", name: "SourceStatisticsList")
     SourceType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.wafv2#SourceType", name: "SourceType")
     SqliMatchStatement = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#SqliMatchStatement", name: "SqliMatchStatement")
     Statement = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#Statement", name: "Statement")
@@ -393,6 +461,7 @@ module Aws::WAFV2
     TextTransformationPriority = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.wafv2#TextTransformationPriority", name: "TextTransformationPriority", traits: {"smithy.api#default" => 0, "smithy.api#range" => {"min" => 0}})
     TextTransformationType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.wafv2#TextTransformationType", name: "TextTransformationType")
     TextTransformations = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.wafv2#TextTransformations", name: "TextTransformations", traits: {"smithy.api#length" => {"min" => 1}})
+    TimeSeriesStatisticType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.wafv2#TimeSeriesStatisticType", name: "TimeSeriesStatisticType")
     TimeWindow = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#TimeWindow", name: "TimeWindow")
     TimeWindowDay = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.wafv2#TimeWindowDay", name: "TimeWindowDay", traits: {"smithy.api#range" => {"min" => 1}})
     TimeWindowSecond = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.wafv2#TimeWindowSecond", name: "TimeWindowSecond", traits: {"smithy.api#range" => {"min" => 60, "max" => 259200}})
@@ -414,9 +483,11 @@ module Aws::WAFV2
     UpdateWebACLResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#UpdateWebACLResponse", name: "UpdateWebACLResponse")
     UriFragment = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#UriFragment", name: "UriFragment")
     UriPath = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#UriPath", name: "UriPath")
+    UriPathPrefixString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.wafv2#UriPathPrefixString", name: "UriPathPrefixString", traits: {"smithy.api#length" => {"min" => 1, "max" => 512}, "smithy.api#pattern" => "^\\/[^ ]*$"})
     UsageOfAction = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.wafv2#UsageOfAction", name: "UsageOfAction")
     UsernameField = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#UsernameField", name: "UsernameField")
     VendorName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.wafv2#VendorName", name: "VendorName", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "\\S"})
+    VerifiedStatus = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.wafv2#VerifiedStatus", name: "VerifiedStatus", traits: {"smithy.api#default" => false})
     VersionKeyString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.wafv2#VersionKeyString", name: "VersionKeyString", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[\\w#:\\.\\-/]+$"})
     VersionToPublish = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#VersionToPublish", name: "VersionToPublish")
     VersionsToPublish = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.wafv2#VersionsToPublish", name: "VersionsToPublish")
@@ -425,6 +496,7 @@ module Aws::WAFV2
     WAFConfigurationWarningException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#WAFConfigurationWarningException", name: "WAFConfigurationWarningException", traits: {"smithy.api#error" => "client"})
     WAFDuplicateItemException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#WAFDuplicateItemException", name: "WAFDuplicateItemException", traits: {"smithy.api#error" => "client"})
     WAFExpiredManagedRuleGroupVersionException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#WAFExpiredManagedRuleGroupVersionException", name: "WAFExpiredManagedRuleGroupVersionException", traits: {"smithy.api#error" => "client"})
+    WAFFeatureNotIncludedInPricingPlanException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#WAFFeatureNotIncludedInPricingPlanException", name: "WAFFeatureNotIncludedInPricingPlanException", traits: {"smithy.api#error" => "client"})
     WAFInternalErrorException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#WAFInternalErrorException", name: "WAFInternalErrorException", traits: {"smithy.api#error" => "server"})
     WAFInvalidOperationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#WAFInvalidOperationException", name: "WAFInvalidOperationException", traits: {"smithy.api#error" => "client"})
     WAFInvalidParameterException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#WAFInvalidParameterException", name: "WAFInvalidParameterException", traits: {"smithy.api#error" => "client"})
@@ -440,6 +512,7 @@ module Aws::WAFV2
     WAFTagOperationInternalErrorException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#WAFTagOperationInternalErrorException", name: "WAFTagOperationInternalErrorException", traits: {"smithy.api#error" => "server"})
     WAFUnavailableEntityException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#WAFUnavailableEntityException", name: "WAFUnavailableEntityException", traits: {"smithy.api#error" => "client"})
     WAFUnsupportedAggregateKeyTypeException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#WAFUnsupportedAggregateKeyTypeException", name: "WAFUnsupportedAggregateKeyTypeException", traits: {"smithy.api#error" => "client"})
+    WalletAddress = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.wafv2#WalletAddress", name: "WalletAddress", traits: {"smithy.api#length" => {"min" => 26, "max" => 44}, "smithy.api#pattern" => "\\S"})
     WebACL = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#WebACL", name: "WebACL")
     WebACLSummaries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.wafv2#WebACLSummaries", name: "WebACLSummaries")
     WebACLSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#WebACLSummary", name: "WebACLSummary")
@@ -476,6 +549,7 @@ module Aws::WAFV2
     ActionValue.add_member(:count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COUNT", traits: {"smithy.api#enumValue" => "COUNT"}))
     ActionValue.add_member(:captcha, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CAPTCHA", traits: {"smithy.api#enumValue" => "CAPTCHA"}))
     ActionValue.add_member(:challenge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CHALLENGE", traits: {"smithy.api#enumValue" => "CHALLENGE"}))
+    ActionValue.add_member(:monetize, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MONETIZE", traits: {"smithy.api#enumValue" => "MONETIZE"}))
     ActionValue.add_member(:excluded_as_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXCLUDED_AS_COUNT", traits: {"smithy.api#enumValue" => "EXCLUDED_AS_COUNT"}))
     AddressField.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldIdentifier, name: "Identifier", traits: {"smithy.api#required" => {}}))
     AddressField.type = Types::AddressField
@@ -505,19 +579,30 @@ module Aws::WAFV2
     AssociatedResourceType.add_member(:cognito_user_pool, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COGNITO_USER_POOL", traits: {"smithy.api#enumValue" => "COGNITO_USER_POOL"}))
     AssociatedResourceType.add_member(:app_runner_service, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "APP_RUNNER_SERVICE", traits: {"smithy.api#enumValue" => "APP_RUNNER_SERVICE"}))
     AssociatedResourceType.add_member(:verified_access_instance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VERIFIED_ACCESS_INSTANCE", traits: {"smithy.api#enumValue" => "VERIFIED_ACCESS_INSTANCE"}))
+    AssociatedResourceType.add_member(:agentcore_gateway, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AGENTCORE_GATEWAY", traits: {"smithy.api#enumValue" => "AGENTCORE_GATEWAY"}))
     AssociationConfig.add_member(:request_body, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestBody, name: "RequestBody"))
     AssociationConfig.type = Types::AssociationConfig
     AttributeValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "member"))
     BlockAction.add_member(:custom_response, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomResponse, name: "CustomResponse"))
     BlockAction.type = Types::BlockAction
+    BlockchainChain.add_member(:base, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BASE", traits: {"smithy.api#enumValue" => "BASE"}))
+    BlockchainChain.add_member(:solana, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SOLANA", traits: {"smithy.api#enumValue" => "SOLANA"}))
+    BlockchainChain.add_member(:base_sepolia, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BASE_SEPOLIA", traits: {"smithy.api#enumValue" => "BASE_SEPOLIA"}))
+    BlockchainChain.add_member(:solana_devnet, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SOLANA_DEVNET", traits: {"smithy.api#enumValue" => "SOLANA_DEVNET"}))
     Body.add_member(:oversize_handling, ::Smithy::Schema::Shapes::MemberShape.new(target: OversizeHandling, name: "OversizeHandling"))
     Body.type = Types::Body
     BodyParsingFallbackBehavior.add_member(:match, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MATCH", traits: {"smithy.api#enumValue" => "MATCH"}))
     BodyParsingFallbackBehavior.add_member(:no_match, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NO_MATCH", traits: {"smithy.api#enumValue" => "NO_MATCH"}))
     BodyParsingFallbackBehavior.add_member(:evaluate_as_string, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EVALUATE_AS_STRING", traits: {"smithy.api#enumValue" => "EVALUATE_AS_STRING"}))
+    BotStatistics.add_member(:bot_name, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterString, name: "BotName", traits: {"smithy.api#required" => {}}))
+    BotStatistics.add_member(:request_count, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestCount, name: "RequestCount", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    BotStatistics.add_member(:percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: PercentageValue, name: "Percentage", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    BotStatistics.type = Types::BotStatistics
+    BotStatisticsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BotStatistics, name: "member"))
     ByteMatchStatement.add_member(:search_string, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchString, name: "SearchString", traits: {"smithy.api#required" => {}}))
     ByteMatchStatement.add_member(:field_to_match, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldToMatch, name: "FieldToMatch", traits: {"smithy.api#required" => {}}))
     ByteMatchStatement.add_member(:text_transformations, ::Smithy::Schema::Shapes::MemberShape.new(target: TextTransformations, name: "TextTransformations", traits: {"smithy.api#required" => {}}))
+    ByteMatchStatement.add_member(:pre_parse_text_transformations, ::Smithy::Schema::Shapes::MemberShape.new(target: PreParseTextTransformations, name: "PreParseTextTransformations"))
     ByteMatchStatement.add_member(:positional_constraint, ::Smithy::Schema::Shapes::MemberShape.new(target: PositionalConstraint, name: "PositionalConstraint", traits: {"smithy.api#required" => {}}))
     ByteMatchStatement.type = Types::ByteMatchStatement
     CaptchaAction.add_member(:custom_request_handling, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomRequestHandling, name: "CustomRequestHandling"))
@@ -849,6 +934,7 @@ module Aws::WAFV2
     CreateRuleGroupRequest.add_member(:visibility_config, ::Smithy::Schema::Shapes::MemberShape.new(target: VisibilityConfig, name: "VisibilityConfig", traits: {"smithy.api#required" => {}}))
     CreateRuleGroupRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     CreateRuleGroupRequest.add_member(:custom_response_bodies, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomResponseBodies, name: "CustomResponseBodies"))
+    CreateRuleGroupRequest.add_member(:monetization_config, ::Smithy::Schema::Shapes::MemberShape.new(target: MonetizationConfig, name: "MonetizationConfig"))
     CreateRuleGroupRequest.type = Types::CreateRuleGroupRequest
     CreateRuleGroupResponse.add_member(:summary, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleGroupSummary, name: "Summary"))
     CreateRuleGroupResponse.type = Types::CreateRuleGroupResponse
@@ -867,9 +953,16 @@ module Aws::WAFV2
     CreateWebACLRequest.add_member(:association_config, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociationConfig, name: "AssociationConfig"))
     CreateWebACLRequest.add_member(:on_source_d_do_s_protection_config, ::Smithy::Schema::Shapes::MemberShape.new(target: OnSourceDDoSProtectionConfig, name: "OnSourceDDoSProtectionConfig"))
     CreateWebACLRequest.add_member(:application_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationConfig, name: "ApplicationConfig"))
+    CreateWebACLRequest.add_member(:monetization_config, ::Smithy::Schema::Shapes::MemberShape.new(target: MonetizationConfig, name: "MonetizationConfig"))
     CreateWebACLRequest.type = Types::CreateWebACLRequest
     CreateWebACLResponse.add_member(:summary, ::Smithy::Schema::Shapes::MemberShape.new(target: WebACLSummary, name: "Summary"))
     CreateWebACLResponse.type = Types::CreateWebACLResponse
+    CryptoConfig.add_member(:payment_networks, ::Smithy::Schema::Shapes::MemberShape.new(target: PaymentNetworks, name: "PaymentNetworks", traits: {"smithy.api#required" => {}}))
+    CryptoConfig.type = Types::CryptoConfig
+    CryptoCurrency.add_member(:usdc, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "USDC", traits: {"smithy.api#enumValue" => "USDC"}))
+    Currency.add_member(:usdc, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "USDC", traits: {"smithy.api#enumValue" => "USDC"}))
+    CurrencyMode.add_member(:real, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REAL", traits: {"smithy.api#enumValue" => "REAL"}))
+    CurrencyMode.add_member(:test, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TEST", traits: {"smithy.api#enumValue" => "TEST"}))
     CustomHTTPHeader.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomHTTPHeaderName, name: "Name", traits: {"smithy.api#required" => {}}))
     CustomHTTPHeader.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomHTTPHeaderValue, name: "Value", traits: {"smithy.api#required" => {}}))
     CustomHTTPHeader.type = Types::CustomHTTPHeader
@@ -885,6 +978,15 @@ module Aws::WAFV2
     CustomResponseBody.add_member(:content_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseContentType, name: "ContentType", traits: {"smithy.api#required" => {}}))
     CustomResponseBody.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseContent, name: "Content", traits: {"smithy.api#required" => {}}))
     CustomResponseBody.type = Types::CustomResponseBody
+    DataPointEntry.add_member(:date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "Date"))
+    DataPointEntry.add_member(:monetize_served_count, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestCount, name: "MonetizeServedCount", traits: {"smithy.api#default" => 0}))
+    DataPointEntry.add_member(:settled_count, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestCount, name: "SettledCount", traits: {"smithy.api#default" => 0}))
+    DataPointEntry.add_member(:total_amount, ::Smithy::Schema::Shapes::MemberShape.new(target: MonetizationAmountValue, name: "TotalAmount"))
+    DataPointEntry.add_member(:category, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterString, name: "Category"))
+    DataPointEntry.add_member(:intent, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterString, name: "Intent"))
+    DataPointEntry.add_member(:group_by_value, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterString, name: "GroupByValue"))
+    DataPointEntry.type = Types::DataPointEntry
+    DataPointsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataPointEntry, name: "member"))
     DataProtection.add_member(:field, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldToProtect, name: "Field", traits: {"smithy.api#required" => {}}))
     DataProtection.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: DataProtectionAction, name: "Action", traits: {"smithy.api#required" => {}}))
     DataProtection.add_member(:exclude_rule_match_details, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "ExcludeRuleMatchDetails", traits: {"smithy.api#default" => false}))
@@ -961,6 +1063,10 @@ module Aws::WAFV2
     DescribeManagedRuleGroupResponse.add_member(:available_labels, ::Smithy::Schema::Shapes::MemberShape.new(target: LabelSummaries, name: "AvailableLabels"))
     DescribeManagedRuleGroupResponse.add_member(:consumed_labels, ::Smithy::Schema::Shapes::MemberShape.new(target: LabelSummaries, name: "ConsumedLabels"))
     DescribeManagedRuleGroupResponse.type = Types::DescribeManagedRuleGroupResponse
+    DisallowedFeature.add_member(:feature, ::Smithy::Schema::Shapes::MemberShape.new(target: PricingPlanFeatureName, name: "Feature"))
+    DisallowedFeature.add_member(:required_pricing_plan, ::Smithy::Schema::Shapes::MemberShape.new(target: RequiredPricingPlanName, name: "RequiredPricingPlan"))
+    DisallowedFeature.type = Types::DisallowedFeature
+    DisallowedFeatures.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DisallowedFeature, name: "member"))
     DisassociateWebACLRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
     DisassociateWebACLRequest.type = Types::DisassociateWebACLRequest
     DisassociateWebACLResponse.type = Types::DisassociateWebACLResponse
@@ -1007,6 +1113,10 @@ module Aws::WAFV2
     FilterBehavior.add_member(:drop, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DROP", traits: {"smithy.api#enumValue" => "DROP"}))
     FilterRequirement.add_member(:meets_all, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MEETS_ALL", traits: {"smithy.api#enumValue" => "MEETS_ALL"}))
     FilterRequirement.add_member(:meets_any, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MEETS_ANY", traits: {"smithy.api#enumValue" => "MEETS_ANY"}))
+    FilterSource.add_member(:bot_category, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterString, name: "BotCategory"))
+    FilterSource.add_member(:bot_organization, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterString, name: "BotOrganization"))
+    FilterSource.add_member(:bot_name, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterString, name: "BotName"))
+    FilterSource.type = Types::FilterSource
     Filters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, name: "member"))
     FirewallManagerRuleGroup.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, name: "Name", traits: {"smithy.api#required" => {}}))
     FirewallManagerRuleGroup.add_member(:priority, ::Smithy::Schema::Shapes::MemberShape.new(target: RulePriority, name: "Priority", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
@@ -1083,6 +1193,41 @@ module Aws::WAFV2
     GetRegexPatternSetResponse.add_member(:regex_pattern_set, ::Smithy::Schema::Shapes::MemberShape.new(target: RegexPatternSet, name: "RegexPatternSet"))
     GetRegexPatternSetResponse.add_member(:lock_token, ::Smithy::Schema::Shapes::MemberShape.new(target: LockToken, name: "LockToken"))
     GetRegexPatternSetResponse.type = Types::GetRegexPatternSetResponse
+    GetRevenueStatisticsRequest.add_member(:statistic_type, ::Smithy::Schema::Shapes::MemberShape.new(target: RankingStatisticType, name: "StatisticType", traits: {"smithy.api#required" => {}}))
+    GetRevenueStatisticsRequest.add_member(:time_window, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeWindow, name: "TimeWindow", traits: {"smithy.api#required" => {}}))
+    GetRevenueStatisticsRequest.add_member(:scope, ::Smithy::Schema::Shapes::MemberShape.new(target: Scope, name: "Scope", traits: {"smithy.api#required" => {}}))
+    GetRevenueStatisticsRequest.add_member(:currency, ::Smithy::Schema::Shapes::MemberShape.new(target: Currency, name: "Currency", traits: {"smithy.api#required" => {}}))
+    GetRevenueStatisticsRequest.add_member(:group_by, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupByType, name: "GroupBy"))
+    GetRevenueStatisticsRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: MonetizationFilterList, name: "Filters"))
+    GetRevenueStatisticsRequest.add_member(:next_marker, ::Smithy::Schema::Shapes::MemberShape.new(target: NextMarker, name: "NextMarker"))
+    GetRevenueStatisticsRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: PathStatisticsLimit, name: "Limit"))
+    GetRevenueStatisticsRequest.add_member(:sort_by, ::Smithy::Schema::Shapes::MemberShape.new(target: RankingSortBy, name: "SortBy"))
+    GetRevenueStatisticsRequest.add_member(:sort_order, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrder, name: "SortOrder"))
+    GetRevenueStatisticsRequest.type = Types::GetRevenueStatisticsRequest
+    GetRevenueStatisticsResponse.add_member(:source_statistics, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceStatisticsList, name: "SourceStatistics"))
+    GetRevenueStatisticsResponse.add_member(:revenue_path_statistics, ::Smithy::Schema::Shapes::MemberShape.new(target: RevenuePathStatisticsList, name: "RevenuePathStatistics"))
+    GetRevenueStatisticsResponse.add_member(:next_marker, ::Smithy::Schema::Shapes::MemberShape.new(target: NextMarker, name: "NextMarker"))
+    GetRevenueStatisticsResponse.type = Types::GetRevenueStatisticsResponse
+    GetRevenueStatisticsSummaryRequest.add_member(:time_window, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeWindow, name: "TimeWindow", traits: {"smithy.api#required" => {}}))
+    GetRevenueStatisticsSummaryRequest.add_member(:scope, ::Smithy::Schema::Shapes::MemberShape.new(target: Scope, name: "Scope", traits: {"smithy.api#required" => {}}))
+    GetRevenueStatisticsSummaryRequest.add_member(:currency, ::Smithy::Schema::Shapes::MemberShape.new(target: Currency, name: "Currency", traits: {"smithy.api#required" => {}}))
+    GetRevenueStatisticsSummaryRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: MonetizationFilterList, name: "Filters"))
+    GetRevenueStatisticsSummaryRequest.type = Types::GetRevenueStatisticsSummaryRequest
+    GetRevenueStatisticsSummaryResponse.add_member(:revenue_breakdown, ::Smithy::Schema::Shapes::MemberShape.new(target: RevenueBreakdown, name: "RevenueBreakdown"))
+    GetRevenueStatisticsSummaryResponse.type = Types::GetRevenueStatisticsSummaryResponse
+    GetRevenueStatisticsTimeSeriesRequest.add_member(:statistic_type, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeSeriesStatisticType, name: "StatisticType", traits: {"smithy.api#required" => {}}))
+    GetRevenueStatisticsTimeSeriesRequest.add_member(:time_window, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeWindow, name: "TimeWindow", traits: {"smithy.api#required" => {}}))
+    GetRevenueStatisticsTimeSeriesRequest.add_member(:scope, ::Smithy::Schema::Shapes::MemberShape.new(target: Scope, name: "Scope", traits: {"smithy.api#required" => {}}))
+    GetRevenueStatisticsTimeSeriesRequest.add_member(:interval, ::Smithy::Schema::Shapes::MemberShape.new(target: IntervalType, name: "Interval", traits: {"smithy.api#required" => {}}))
+    GetRevenueStatisticsTimeSeriesRequest.add_member(:currency, ::Smithy::Schema::Shapes::MemberShape.new(target: Currency, name: "Currency", traits: {"smithy.api#required" => {}}))
+    GetRevenueStatisticsTimeSeriesRequest.add_member(:group_by, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupByType, name: "GroupBy"))
+    GetRevenueStatisticsTimeSeriesRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: MonetizationFilterList, name: "Filters"))
+    GetRevenueStatisticsTimeSeriesRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxDataPoints, name: "Limit"))
+    GetRevenueStatisticsTimeSeriesRequest.add_member(:next_marker, ::Smithy::Schema::Shapes::MemberShape.new(target: NextMarker, name: "NextMarker"))
+    GetRevenueStatisticsTimeSeriesRequest.type = Types::GetRevenueStatisticsTimeSeriesRequest
+    GetRevenueStatisticsTimeSeriesResponse.add_member(:data_points, ::Smithy::Schema::Shapes::MemberShape.new(target: DataPointsList, name: "DataPoints"))
+    GetRevenueStatisticsTimeSeriesResponse.add_member(:next_marker, ::Smithy::Schema::Shapes::MemberShape.new(target: NextMarker, name: "NextMarker"))
+    GetRevenueStatisticsTimeSeriesResponse.type = Types::GetRevenueStatisticsTimeSeriesResponse
     GetRuleGroupRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, name: "Name"))
     GetRuleGroupRequest.add_member(:scope, ::Smithy::Schema::Shapes::MemberShape.new(target: Scope, name: "Scope"))
     GetRuleGroupRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, name: "Id"))
@@ -1101,6 +1246,22 @@ module Aws::WAFV2
     GetSampledRequestsResponse.add_member(:population_size, ::Smithy::Schema::Shapes::MemberShape.new(target: PopulationSize, name: "PopulationSize", traits: {"smithy.api#default" => 0}))
     GetSampledRequestsResponse.add_member(:time_window, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeWindow, name: "TimeWindow"))
     GetSampledRequestsResponse.type = Types::GetSampledRequestsResponse
+    GetTopPathStatisticsByTrafficRequest.add_member(:web_acl_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "WebAclArn", traits: {"smithy.api#required" => {}}))
+    GetTopPathStatisticsByTrafficRequest.add_member(:scope, ::Smithy::Schema::Shapes::MemberShape.new(target: Scope, name: "Scope", traits: {"smithy.api#required" => {}}))
+    GetTopPathStatisticsByTrafficRequest.add_member(:uri_path_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: UriPathPrefixString, name: "UriPathPrefix"))
+    GetTopPathStatisticsByTrafficRequest.add_member(:time_window, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeWindow, name: "TimeWindow", traits: {"smithy.api#required" => {}}))
+    GetTopPathStatisticsByTrafficRequest.add_member(:bot_category, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterString, name: "BotCategory"))
+    GetTopPathStatisticsByTrafficRequest.add_member(:bot_organization, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterString, name: "BotOrganization"))
+    GetTopPathStatisticsByTrafficRequest.add_member(:bot_name, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterString, name: "BotName"))
+    GetTopPathStatisticsByTrafficRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: PathStatisticsLimit, name: "Limit", traits: {"smithy.api#required" => {}}))
+    GetTopPathStatisticsByTrafficRequest.add_member(:number_of_top_traffic_bots_per_path, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberOfTopTrafficBotsPerPath, name: "NumberOfTopTrafficBotsPerPath", traits: {"smithy.api#required" => {}}))
+    GetTopPathStatisticsByTrafficRequest.add_member(:next_marker, ::Smithy::Schema::Shapes::MemberShape.new(target: NextMarker, name: "NextMarker"))
+    GetTopPathStatisticsByTrafficRequest.type = Types::GetTopPathStatisticsByTrafficRequest
+    GetTopPathStatisticsByTrafficResponse.add_member(:path_statistics, ::Smithy::Schema::Shapes::MemberShape.new(target: PathStatisticsList, name: "PathStatistics", traits: {"smithy.api#required" => {}}))
+    GetTopPathStatisticsByTrafficResponse.add_member(:total_request_count, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestCount, name: "TotalRequestCount", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    GetTopPathStatisticsByTrafficResponse.add_member(:next_marker, ::Smithy::Schema::Shapes::MemberShape.new(target: NextMarker, name: "NextMarker"))
+    GetTopPathStatisticsByTrafficResponse.add_member(:top_categories, ::Smithy::Schema::Shapes::MemberShape.new(target: PathStatisticsList, name: "TopCategories"))
+    GetTopPathStatisticsByTrafficResponse.type = Types::GetTopPathStatisticsByTrafficResponse
     GetWebACLForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
     GetWebACLForResourceRequest.type = Types::GetWebACLForResourceRequest
     GetWebACLForResourceResponse.add_member(:web_acl, ::Smithy::Schema::Shapes::MemberShape.new(target: WebACL, name: "WebACL"))
@@ -1114,6 +1275,11 @@ module Aws::WAFV2
     GetWebACLResponse.add_member(:lock_token, ::Smithy::Schema::Shapes::MemberShape.new(target: LockToken, name: "LockToken"))
     GetWebACLResponse.add_member(:application_integration_url, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputUrl, name: "ApplicationIntegrationURL"))
     GetWebACLResponse.type = Types::GetWebACLResponse
+    GroupByType.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NAME", traits: {"smithy.api#enumValue" => "NAME"}))
+    GroupByType.add_member(:category, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CATEGORY", traits: {"smithy.api#enumValue" => "CATEGORY"}))
+    GroupByType.add_member(:intent, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTENT", traits: {"smithy.api#enumValue" => "INTENT"}))
+    GroupByType.add_member(:organization, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ORGANIZATION", traits: {"smithy.api#enumValue" => "ORGANIZATION"}))
+    GroupByType.add_member(:webacl, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WEBACL", traits: {"smithy.api#enumValue" => "WEBACL"}))
     HTTPHeader.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderName, name: "Name"))
     HTTPHeader.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderValue, name: "Value"))
     HTTPHeader.type = Types::HTTPHeader
@@ -1164,6 +1330,10 @@ module Aws::WAFV2
     ImmunityTimeProperty.type = Types::ImmunityTimeProperty
     InspectionLevel.add_member(:common, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMMON", traits: {"smithy.api#enumValue" => "COMMON"}))
     InspectionLevel.add_member(:targeted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TARGETED", traits: {"smithy.api#enumValue" => "TARGETED"}))
+    IntervalType.add_member(:minutely, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MINUTELY", traits: {"smithy.api#enumValue" => "MINUTELY"}))
+    IntervalType.add_member(:five_minutely, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FIVE_MINUTELY", traits: {"smithy.api#enumValue" => "FIVE_MINUTELY"}))
+    IntervalType.add_member(:hourly, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HOURLY", traits: {"smithy.api#enumValue" => "HOURLY"}))
+    IntervalType.add_member(:daily, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DAILY", traits: {"smithy.api#enumValue" => "DAILY"}))
     JA3Fingerprint.add_member(:fallback_behavior, ::Smithy::Schema::Shapes::MemberShape.new(target: FallbackBehavior, name: "FallbackBehavior", traits: {"smithy.api#required" => {}}))
     JA3Fingerprint.type = Types::JA3Fingerprint
     JA4Fingerprint.add_member(:fallback_behavior, ::Smithy::Schema::Shapes::MemberShape.new(target: FallbackBehavior, name: "FallbackBehavior", traits: {"smithy.api#required" => {}}))
@@ -1266,6 +1436,18 @@ module Aws::WAFV2
     ListRuleGroupsResponse.add_member(:next_marker, ::Smithy::Schema::Shapes::MemberShape.new(target: NextMarker, name: "NextMarker"))
     ListRuleGroupsResponse.add_member(:rule_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleGroupSummaries, name: "RuleGroups"))
     ListRuleGroupsResponse.type = Types::ListRuleGroupsResponse
+    ListSettlementRecordsRequest.add_member(:time_window, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeWindow, name: "TimeWindow", traits: {"smithy.api#required" => {}}))
+    ListSettlementRecordsRequest.add_member(:scope, ::Smithy::Schema::Shapes::MemberShape.new(target: Scope, name: "Scope", traits: {"smithy.api#required" => {}}))
+    ListSettlementRecordsRequest.add_member(:currency, ::Smithy::Schema::Shapes::MemberShape.new(target: Currency, name: "Currency", traits: {"smithy.api#required" => {}}))
+    ListSettlementRecordsRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: MonetizationFilterList, name: "Filters"))
+    ListSettlementRecordsRequest.add_member(:sort_by, ::Smithy::Schema::Shapes::MemberShape.new(target: SettlementSortBy, name: "SortBy"))
+    ListSettlementRecordsRequest.add_member(:sort_order, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrder, name: "SortOrder"))
+    ListSettlementRecordsRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: SettlementRecordLimit, name: "Limit"))
+    ListSettlementRecordsRequest.add_member(:next_marker, ::Smithy::Schema::Shapes::MemberShape.new(target: NextMarker, name: "NextMarker"))
+    ListSettlementRecordsRequest.type = Types::ListSettlementRecordsRequest
+    ListSettlementRecordsResponse.add_member(:settlements, ::Smithy::Schema::Shapes::MemberShape.new(target: SettlementRecordList, name: "Settlements"))
+    ListSettlementRecordsResponse.add_member(:next_marker, ::Smithy::Schema::Shapes::MemberShape.new(target: NextMarker, name: "NextMarker"))
+    ListSettlementRecordsResponse.type = Types::ListSettlementRecordsResponse
     ListTagsForResourceRequest.add_member(:next_marker, ::Smithy::Schema::Shapes::MemberShape.new(target: NextMarker, name: "NextMarker"))
     ListTagsForResourceRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationLimit, name: "Limit"))
     ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "ResourceARN", traits: {"smithy.api#required" => {}}))
@@ -1283,6 +1465,7 @@ module Aws::WAFV2
     LogDestinationConfigs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "member"))
     LogScope.add_member(:customer, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOMER", traits: {"smithy.api#enumValue" => "CUSTOMER"}))
     LogScope.add_member(:security_lake, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SECURITY_LAKE", traits: {"smithy.api#enumValue" => "SECURITY_LAKE"}))
+    LogScope.add_member(:cloudwatch_telemetry_rule_managed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLOUDWATCH_TELEMETRY_RULE_MANAGED", traits: {"smithy.api#enumValue" => "CLOUDWATCH_TELEMETRY_RULE_MANAGED"}))
     LogType.add_member(:waf_logs, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WAF_LOGS", traits: {"smithy.api#enumValue" => "WAF_LOGS"}))
     LoggingConfiguration.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
     LoggingConfiguration.add_member(:log_destination_configs, ::Smithy::Schema::Shapes::MemberShape.new(target: LogDestinationConfigs, name: "LogDestinationConfigs", traits: {"smithy.api#required" => {}}))
@@ -1369,6 +1552,16 @@ module Aws::WAFV2
     MobileSdkRelease.add_member(:release_notes, ::Smithy::Schema::Shapes::MemberShape.new(target: ReleaseNotes, name: "ReleaseNotes"))
     MobileSdkRelease.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     MobileSdkRelease.type = Types::MobileSdkRelease
+    MonetizationConfig.add_member(:crypto_config, ::Smithy::Schema::Shapes::MemberShape.new(target: CryptoConfig, name: "CryptoConfig"))
+    MonetizationConfig.add_member(:currency_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: CurrencyMode, name: "CurrencyMode"))
+    MonetizationConfig.type = Types::MonetizationConfig
+    MonetizationFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: MonetizationFilterName, name: "Name", traits: {"smithy.api#required" => {}}))
+    MonetizationFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: MonetizationFilterValueList, name: "Values", traits: {"smithy.api#required" => {}}))
+    MonetizationFilter.type = Types::MonetizationFilter
+    MonetizationFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MonetizationFilter, name: "member"))
+    MonetizationFilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MonetizationFilterValue, name: "member"))
+    MonetizeAction.add_member(:price_multiplier, ::Smithy::Schema::Shapes::MemberShape.new(target: PriceMultiplier, name: "PriceMultiplier"))
+    MonetizeAction.type = Types::MonetizeAction
     NoneAction.type = Types::NoneAction
     NotStatement.add_member(:statement, ::Smithy::Schema::Shapes::MemberShape.new(target: Statement, name: "Statement", traits: {"smithy.api#required" => {}}))
     NotStatement.type = Types::NotStatement
@@ -1454,10 +1647,27 @@ module Aws::WAFV2
     ParameterExceptionField.add_member(:acp_rule_set_response_inspection, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACP_RULE_SET_RESPONSE_INSPECTION", traits: {"smithy.api#enumValue" => "ACP_RULE_SET_RESPONSE_INSPECTION"}))
     ParameterExceptionField.add_member(:data_protection_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DATA_PROTECTION_CONFIG", traits: {"smithy.api#enumValue" => "DATA_PROTECTION_CONFIG"}))
     ParameterExceptionField.add_member(:low_reputation_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOW_REPUTATION_MODE", traits: {"smithy.api#enumValue" => "LOW_REPUTATION_MODE"}))
+    ParameterExceptionField.add_member(:monetization_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MONETIZATION_CONFIG", traits: {"smithy.api#enumValue" => "MONETIZATION_CONFIG"}))
+    ParameterExceptionField.add_member(:wallet_address, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WALLET_ADDRESS", traits: {"smithy.api#enumValue" => "WALLET_ADDRESS"}))
+    ParameterExceptionField.add_member(:price_amount, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRICE_AMOUNT", traits: {"smithy.api#enumValue" => "PRICE_AMOUNT"}))
+    ParameterExceptionField.add_member(:payment_network, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PAYMENT_NETWORK", traits: {"smithy.api#enumValue" => "PAYMENT_NETWORK"}))
+    ParameterExceptionField.add_member(:pre_parse_text_transformation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRE_PARSE_TEXT_TRANSFORMATION", traits: {"smithy.api#enumValue" => "PRE_PARSE_TEXT_TRANSFORMATION"}))
     PasswordField.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldIdentifier, name: "Identifier", traits: {"smithy.api#required" => {}}))
     PasswordField.type = Types::PasswordField
+    PathStatistics.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterSource, name: "Source"))
+    PathStatistics.add_member(:path, ::Smithy::Schema::Shapes::MemberShape.new(target: PathString, name: "Path", traits: {"smithy.api#required" => {}}))
+    PathStatistics.add_member(:request_count, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestCount, name: "RequestCount", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    PathStatistics.add_member(:percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: PercentageValue, name: "Percentage", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    PathStatistics.add_member(:top_bots, ::Smithy::Schema::Shapes::MemberShape.new(target: BotStatisticsList, name: "TopBots"))
+    PathStatistics.type = Types::PathStatistics
+    PathStatisticsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PathStatistics, name: "member"))
     PayloadType.add_member(:json, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "JSON", traits: {"smithy.api#enumValue" => "JSON"}))
     PayloadType.add_member(:form_encoded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FORM_ENCODED", traits: {"smithy.api#enumValue" => "FORM_ENCODED"}))
+    PaymentNetwork.add_member(:chain, ::Smithy::Schema::Shapes::MemberShape.new(target: BlockchainChain, name: "Chain", traits: {"smithy.api#required" => {}}))
+    PaymentNetwork.add_member(:wallet_address, ::Smithy::Schema::Shapes::MemberShape.new(target: WalletAddress, name: "WalletAddress", traits: {"smithy.api#required" => {}}))
+    PaymentNetwork.add_member(:prices, ::Smithy::Schema::Shapes::MemberShape.new(target: Prices, name: "Prices", traits: {"smithy.api#required" => {}}))
+    PaymentNetwork.type = Types::PaymentNetwork
+    PaymentNetworks.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PaymentNetwork, name: "member"))
     PhoneNumberField.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldIdentifier, name: "Identifier", traits: {"smithy.api#required" => {}}))
     PhoneNumberField.type = Types::PhoneNumberField
     PhoneNumberFields.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberField, name: "member"))
@@ -1468,6 +1678,19 @@ module Aws::WAFV2
     PositionalConstraint.add_member(:ends_with, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENDS_WITH", traits: {"smithy.api#enumValue" => "ENDS_WITH"}))
     PositionalConstraint.add_member(:contains, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONTAINS", traits: {"smithy.api#enumValue" => "CONTAINS"}))
     PositionalConstraint.add_member(:contains_word, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONTAINS_WORD", traits: {"smithy.api#enumValue" => "CONTAINS_WORD"}))
+    PreParseTextTransformation.add_member(:priority, ::Smithy::Schema::Shapes::MemberShape.new(target: PreParseTextTransformationPriority, name: "Priority", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    PreParseTextTransformation.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: PreParseTextTransformationType, name: "Type", traits: {"smithy.api#required" => {}}))
+    PreParseTextTransformation.type = Types::PreParseTextTransformation
+    PreParseTextTransformationType.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
+    PreParseTextTransformationType.add_member(:url_decode, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "URL_DECODE", traits: {"smithy.api#enumValue" => "URL_DECODE"}))
+    PreParseTextTransformationType.add_member(:url_decode_uni, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "URL_DECODE_UNI", traits: {"smithy.api#enumValue" => "URL_DECODE_UNI"}))
+    PreParseTextTransformationType.add_member(:combine_duplicate_query_args_by_comma, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMBINE_DUPLICATE_QUERY_ARGS_BY_COMMA", traits: {"smithy.api#enumValue" => "COMBINE_DUPLICATE_QUERY_ARGS_BY_COMMA"}))
+    PreParseTextTransformationType.add_member(:replace_semicolons_with_ampersands, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REPLACE_SEMICOLONS_WITH_AMPERSANDS", traits: {"smithy.api#enumValue" => "REPLACE_SEMICOLONS_WITH_AMPERSANDS"}))
+    PreParseTextTransformations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PreParseTextTransformation, name: "member"))
+    Price.add_member(:amount, ::Smithy::Schema::Shapes::MemberShape.new(target: PriceAmount, name: "Amount", traits: {"smithy.api#required" => {}}))
+    Price.add_member(:currency, ::Smithy::Schema::Shapes::MemberShape.new(target: CryptoCurrency, name: "Currency", traits: {"smithy.api#required" => {}}))
+    Price.type = Types::Price
+    Prices.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Price, name: "member"))
     PublishedVersions.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionKeyString, name: "key"))
     PublishedVersions.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedRuleSetVersion, name: "value"))
     PutLoggingConfigurationRequest.add_member(:logging_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: LoggingConfiguration, name: "LoggingConfiguration", traits: {"smithy.api#required" => {}}))
@@ -1488,6 +1711,11 @@ module Aws::WAFV2
     PutPermissionPolicyRequest.type = Types::PutPermissionPolicyRequest
     PutPermissionPolicyResponse.type = Types::PutPermissionPolicyResponse
     QueryString.type = Types::QueryString
+    RankingSortBy.add_member(:revenue, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REVENUE", traits: {"smithy.api#enumValue" => "REVENUE"}))
+    RankingSortBy.add_member(:percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PERCENTAGE", traits: {"smithy.api#enumValue" => "PERCENTAGE"}))
+    RankingSortBy.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NAME", traits: {"smithy.api#enumValue" => "NAME"}))
+    RankingStatisticType.add_member(:top_sources_by_revenue, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TOP_SOURCES_BY_REVENUE", traits: {"smithy.api#enumValue" => "TOP_SOURCES_BY_REVENUE"}))
+    RankingStatisticType.add_member(:top_paths_by_revenue, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TOP_PATHS_BY_REVENUE", traits: {"smithy.api#enumValue" => "TOP_PATHS_BY_REVENUE"}))
     RateBasedStatement.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: RateLimit, name: "Limit", traits: {"smithy.api#required" => {}}))
     RateBasedStatement.add_member(:evaluation_window_sec, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationWindowSec, name: "EvaluationWindowSec", traits: {"smithy.api#default" => 0}))
     RateBasedStatement.add_member(:aggregate_key_type, ::Smithy::Schema::Shapes::MemberShape.new(target: RateBasedStatementAggregateKeyType, name: "AggregateKeyType", traits: {"smithy.api#required" => {}}))
@@ -1545,6 +1773,7 @@ module Aws::WAFV2
     RegexMatchStatement.add_member(:regex_string, ::Smithy::Schema::Shapes::MemberShape.new(target: RegexPatternString, name: "RegexString", traits: {"smithy.api#required" => {}}))
     RegexMatchStatement.add_member(:field_to_match, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldToMatch, name: "FieldToMatch", traits: {"smithy.api#required" => {}}))
     RegexMatchStatement.add_member(:text_transformations, ::Smithy::Schema::Shapes::MemberShape.new(target: TextTransformations, name: "TextTransformations", traits: {"smithy.api#required" => {}}))
+    RegexMatchStatement.add_member(:pre_parse_text_transformations, ::Smithy::Schema::Shapes::MemberShape.new(target: PreParseTextTransformations, name: "PreParseTextTransformations"))
     RegexMatchStatement.type = Types::RegexMatchStatement
     RegexPatternSet.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, name: "Name"))
     RegexPatternSet.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, name: "Id"))
@@ -1555,6 +1784,7 @@ module Aws::WAFV2
     RegexPatternSetReferenceStatement.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "ARN", traits: {"smithy.api#required" => {}}))
     RegexPatternSetReferenceStatement.add_member(:field_to_match, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldToMatch, name: "FieldToMatch", traits: {"smithy.api#required" => {}}))
     RegexPatternSetReferenceStatement.add_member(:text_transformations, ::Smithy::Schema::Shapes::MemberShape.new(target: TextTransformations, name: "TextTransformations", traits: {"smithy.api#required" => {}}))
+    RegexPatternSetReferenceStatement.add_member(:pre_parse_text_transformations, ::Smithy::Schema::Shapes::MemberShape.new(target: PreParseTextTransformations, name: "PreParseTextTransformations"))
     RegexPatternSetReferenceStatement.type = Types::RegexPatternSetReferenceStatement
     RegexPatternSetSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RegexPatternSetSummary, name: "member"))
     RegexPatternSetSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, name: "Name"))
@@ -1591,6 +1821,7 @@ module Aws::WAFV2
     ResourceType.add_member(:app_runner_service, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "APP_RUNNER_SERVICE", traits: {"smithy.api#enumValue" => "APP_RUNNER_SERVICE"}))
     ResourceType.add_member(:verified_access_instance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VERIFIED_ACCESS_INSTANCE", traits: {"smithy.api#enumValue" => "VERIFIED_ACCESS_INSTANCE"}))
     ResourceType.add_member(:amplify, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AMPLIFY", traits: {"smithy.api#enumValue" => "AMPLIFY"}))
+    ResourceType.add_member(:agentcore_gateway, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AGENTCORE_GATEWAY", traits: {"smithy.api#enumValue" => "AGENTCORE_GATEWAY"}))
     ResponseContentType.add_member(:text_plain, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TEXT_PLAIN", traits: {"smithy.api#enumValue" => "TEXT_PLAIN"}))
     ResponseContentType.add_member(:text_html, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TEXT_HTML", traits: {"smithy.api#enumValue" => "TEXT_HTML"}))
     ResponseContentType.add_member(:application_json, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "APPLICATION_JSON", traits: {"smithy.api#enumValue" => "APPLICATION_JSON"}))
@@ -1621,6 +1852,19 @@ module Aws::WAFV2
     ResponseInspectionStatusCode.type = Types::ResponseInspectionStatusCode
     ResponseInspectionStatusCodeFailureCodes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureCode, name: "member"))
     ResponseInspectionStatusCodeSuccessCodes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SuccessCode, name: "member"))
+    RevenueBreakdown.add_member(:total_amount, ::Smithy::Schema::Shapes::MemberShape.new(target: MonetizationAmountValue, name: "TotalAmount"))
+    RevenueBreakdown.add_member(:verified_amount, ::Smithy::Schema::Shapes::MemberShape.new(target: MonetizationAmountValue, name: "VerifiedAmount"))
+    RevenueBreakdown.add_member(:unverified_amount, ::Smithy::Schema::Shapes::MemberShape.new(target: MonetizationAmountValue, name: "UnverifiedAmount"))
+    RevenueBreakdown.add_member(:currency, ::Smithy::Schema::Shapes::MemberShape.new(target: Currency, name: "Currency"))
+    RevenueBreakdown.add_member(:total_settled, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestCount, name: "TotalSettled", traits: {"smithy.api#default" => 0}))
+    RevenueBreakdown.add_member(:total_monetize_served, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestCount, name: "TotalMonetizeServed", traits: {"smithy.api#default" => 0}))
+    RevenueBreakdown.type = Types::RevenueBreakdown
+    RevenuePathStatistics.add_member(:path, ::Smithy::Schema::Shapes::MemberShape.new(target: PathString, name: "Path", traits: {"smithy.api#required" => {}}))
+    RevenuePathStatistics.add_member(:percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: PercentageValue, name: "Percentage", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    RevenuePathStatistics.add_member(:amount, ::Smithy::Schema::Shapes::MemberShape.new(target: MonetizationAmountValue, name: "Amount", traits: {"smithy.api#required" => {}}))
+    RevenuePathStatistics.add_member(:request_count, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestCount, name: "RequestCount", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    RevenuePathStatistics.type = Types::RevenuePathStatistics
+    RevenuePathStatisticsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RevenuePathStatistics, name: "member"))
     Rule.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, name: "Name", traits: {"smithy.api#required" => {}}))
     Rule.add_member(:priority, ::Smithy::Schema::Shapes::MemberShape.new(target: RulePriority, name: "Priority", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     Rule.add_member(:statement, ::Smithy::Schema::Shapes::MemberShape.new(target: Statement, name: "Statement", traits: {"smithy.api#required" => {}}))
@@ -1636,6 +1880,7 @@ module Aws::WAFV2
     RuleAction.add_member(:count, ::Smithy::Schema::Shapes::MemberShape.new(target: CountAction, name: "Count"))
     RuleAction.add_member(:captcha, ::Smithy::Schema::Shapes::MemberShape.new(target: CaptchaAction, name: "Captcha"))
     RuleAction.add_member(:challenge, ::Smithy::Schema::Shapes::MemberShape.new(target: ChallengeAction, name: "Challenge"))
+    RuleAction.add_member(:monetize, ::Smithy::Schema::Shapes::MemberShape.new(target: MonetizeAction, name: "Monetize"))
     RuleAction.type = Types::RuleAction
     RuleActionOverride.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, name: "Name", traits: {"smithy.api#required" => {}}))
     RuleActionOverride.add_member(:action_to_use, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleAction, name: "ActionToUse", traits: {"smithy.api#required" => {}}))
@@ -1652,6 +1897,7 @@ module Aws::WAFV2
     RuleGroup.add_member(:custom_response_bodies, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomResponseBodies, name: "CustomResponseBodies"))
     RuleGroup.add_member(:available_labels, ::Smithy::Schema::Shapes::MemberShape.new(target: LabelSummaries, name: "AvailableLabels"))
     RuleGroup.add_member(:consumed_labels, ::Smithy::Schema::Shapes::MemberShape.new(target: LabelSummaries, name: "ConsumedLabels"))
+    RuleGroup.add_member(:monetization_config, ::Smithy::Schema::Shapes::MemberShape.new(target: MonetizationConfig, name: "MonetizationConfig"))
     RuleGroup.type = Types::RuleGroup
     RuleGroupReferenceStatement.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "ARN", traits: {"smithy.api#required" => {}}))
     RuleGroupReferenceStatement.add_member(:excluded_rules, ::Smithy::Schema::Shapes::MemberShape.new(target: ExcludedRules, name: "ExcludedRules"))
@@ -1689,6 +1935,35 @@ module Aws::WAFV2
     SensitivityToAct.add_member(:low, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOW", traits: {"smithy.api#enumValue" => "LOW"}))
     SensitivityToAct.add_member(:medium, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MEDIUM", traits: {"smithy.api#enumValue" => "MEDIUM"}))
     SensitivityToAct.add_member(:high, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HIGH", traits: {"smithy.api#enumValue" => "HIGH"}))
+    SettlementRecord.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "Timestamp", traits: {"smithy.api#required" => {}}))
+    SettlementRecord.add_member(:payer_address, ::Smithy::Schema::Shapes::MemberShape.new(target: SettlementFilterString, name: "PayerAddress"))
+    SettlementRecord.add_member(:wallet_address, ::Smithy::Schema::Shapes::MemberShape.new(target: SettlementFilterString, name: "WalletAddress"))
+    SettlementRecord.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: SettlementStatus, name: "Status", traits: {"smithy.api#required" => {}}))
+    SettlementRecord.add_member(:amount, ::Smithy::Schema::Shapes::MemberShape.new(target: MonetizationAmountValue, name: "Amount", traits: {"smithy.api#required" => {}}))
+    SettlementRecord.add_member(:currency, ::Smithy::Schema::Shapes::MemberShape.new(target: Currency, name: "Currency"))
+    SettlementRecord.add_member(:network, ::Smithy::Schema::Shapes::MemberShape.new(target: SettlementFilterString, name: "Network"))
+    SettlementRecord.add_member(:transaction_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SettlementIdString, name: "TransactionId"))
+    SettlementRecord.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SettlementFilterString, name: "RequestId"))
+    SettlementRecord.add_member(:source_name, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterString, name: "SourceName"))
+    SettlementRecord.add_member(:organization, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterString, name: "Organization"))
+    SettlementRecord.add_member(:source_category, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterString, name: "SourceCategory"))
+    SettlementRecord.add_member(:intent, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterString, name: "Intent"))
+    SettlementRecord.add_member(:verified, ::Smithy::Schema::Shapes::MemberShape.new(target: VerifiedStatus, name: "Verified", traits: {"smithy.api#default" => false}))
+    SettlementRecord.add_member(:content_path, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterString, name: "ContentPath"))
+    SettlementRecord.add_member(:web_acl_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "WebAclArn"))
+    SettlementRecord.add_member(:request_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "RequestTimestamp"))
+    SettlementRecord.type = Types::SettlementRecord
+    SettlementRecordList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SettlementRecord, name: "member"))
+    SettlementSortBy.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TIMESTAMP", traits: {"smithy.api#enumValue" => "TIMESTAMP"}))
+    SettlementSortBy.add_member(:amount, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AMOUNT", traits: {"smithy.api#enumValue" => "AMOUNT"}))
+    SettlementSortBy.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NAME", traits: {"smithy.api#enumValue" => "NAME"}))
+    SettlementSortBy.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STATUS", traits: {"smithy.api#enumValue" => "STATUS"}))
+    SettlementStatus.add_member(:settled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SETTLED", traits: {"smithy.api#enumValue" => "SETTLED"}))
+    SettlementStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
+    SettlementStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    SettlementStatus.add_member(:service_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SERVICE_ERROR", traits: {"smithy.api#enumValue" => "SERVICE_ERROR"}))
+    SettlementStatus.add_member(:skipped_origin_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SKIPPED_ORIGIN_ERROR", traits: {"smithy.api#enumValue" => "SKIPPED_ORIGIN_ERROR"}))
+    SettlementStatus.add_member(:duplicate, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DUPLICATE", traits: {"smithy.api#enumValue" => "DUPLICATE"}))
     SingleHeader.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldToMatchData, name: "Name", traits: {"smithy.api#required" => {}}))
     SingleHeader.type = Types::SingleHeader
     SingleQueryArgument.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldToMatchData, name: "Name", traits: {"smithy.api#required" => {}}))
@@ -1697,13 +1972,28 @@ module Aws::WAFV2
     SizeConstraintStatement.add_member(:comparison_operator, ::Smithy::Schema::Shapes::MemberShape.new(target: ComparisonOperator, name: "ComparisonOperator", traits: {"smithy.api#required" => {}}))
     SizeConstraintStatement.add_member(:size, ::Smithy::Schema::Shapes::MemberShape.new(target: Size, name: "Size", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     SizeConstraintStatement.add_member(:text_transformations, ::Smithy::Schema::Shapes::MemberShape.new(target: TextTransformations, name: "TextTransformations", traits: {"smithy.api#required" => {}}))
+    SizeConstraintStatement.add_member(:pre_parse_text_transformations, ::Smithy::Schema::Shapes::MemberShape.new(target: PreParseTextTransformations, name: "PreParseTextTransformations"))
     SizeConstraintStatement.type = Types::SizeConstraintStatement
     SizeInspectionLimit.add_member(:kb_16, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "KB_16", traits: {"smithy.api#enumValue" => "KB_16"}))
     SizeInspectionLimit.add_member(:kb_32, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "KB_32", traits: {"smithy.api#enumValue" => "KB_32"}))
     SizeInspectionLimit.add_member(:kb_48, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "KB_48", traits: {"smithy.api#enumValue" => "KB_48"}))
     SizeInspectionLimit.add_member(:kb_64, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "KB_64", traits: {"smithy.api#enumValue" => "KB_64"}))
+    SortOrder.add_member(:asc, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ASC", traits: {"smithy.api#enumValue" => "ASC"}))
+    SortOrder.add_member(:desc, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DESC", traits: {"smithy.api#enumValue" => "DESC"}))
+    SourceStatistics.add_member(:source_name, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterString, name: "SourceName", traits: {"smithy.api#required" => {}}))
+    SourceStatistics.add_member(:percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: PercentageValue, name: "Percentage", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    SourceStatistics.add_member(:amount, ::Smithy::Schema::Shapes::MemberShape.new(target: MonetizationAmountValue, name: "Amount", traits: {"smithy.api#required" => {}}))
+    SourceStatistics.add_member(:request_count, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestCount, name: "RequestCount", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    SourceStatistics.add_member(:source_category, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterString, name: "SourceCategory"))
+    SourceStatistics.add_member(:intent, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterString, name: "Intent"))
+    SourceStatistics.add_member(:organization, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterString, name: "Organization"))
+    SourceStatistics.add_member(:verified, ::Smithy::Schema::Shapes::MemberShape.new(target: VerifiedStatus, name: "Verified", traits: {"smithy.api#default" => false}))
+    SourceStatistics.add_member(:group_by_value, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterString, name: "GroupByValue"))
+    SourceStatistics.type = Types::SourceStatistics
+    SourceStatisticsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceStatistics, name: "member"))
     SqliMatchStatement.add_member(:field_to_match, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldToMatch, name: "FieldToMatch", traits: {"smithy.api#required" => {}}))
     SqliMatchStatement.add_member(:text_transformations, ::Smithy::Schema::Shapes::MemberShape.new(target: TextTransformations, name: "TextTransformations", traits: {"smithy.api#required" => {}}))
+    SqliMatchStatement.add_member(:pre_parse_text_transformations, ::Smithy::Schema::Shapes::MemberShape.new(target: PreParseTextTransformations, name: "PreParseTextTransformations"))
     SqliMatchStatement.add_member(:sensitivity_level, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitivityLevel, name: "SensitivityLevel"))
     SqliMatchStatement.type = Types::SqliMatchStatement
     Statement.add_member(:byte_match_statement, ::Smithy::Schema::Shapes::MemberShape.new(target: ByteMatchStatement, name: "ByteMatchStatement"))
@@ -1760,7 +2050,19 @@ module Aws::WAFV2
     TextTransformationType.add_member(:base64_decode_ext, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BASE64_DECODE_EXT", traits: {"smithy.api#enumValue" => "BASE64_DECODE_EXT"}))
     TextTransformationType.add_member(:url_decode_uni, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "URL_DECODE_UNI", traits: {"smithy.api#enumValue" => "URL_DECODE_UNI"}))
     TextTransformationType.add_member(:utf8_to_unicode, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UTF8_TO_UNICODE", traits: {"smithy.api#enumValue" => "UTF8_TO_UNICODE"}))
+    TextTransformationType.add_member(:remove_whitespace, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REMOVE_WHITESPACE", traits: {"smithy.api#enumValue" => "REMOVE_WHITESPACE"}))
+    TextTransformationType.add_member(:trim, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TRIM", traits: {"smithy.api#enumValue" => "TRIM"}))
+    TextTransformationType.add_member(:trim_left, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TRIM_LEFT", traits: {"smithy.api#enumValue" => "TRIM_LEFT"}))
+    TextTransformationType.add_member(:trim_right, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TRIM_RIGHT", traits: {"smithy.api#enumValue" => "TRIM_RIGHT"}))
+    TextTransformationType.add_member(:remove_comments_char, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REMOVE_COMMENTS_CHAR", traits: {"smithy.api#enumValue" => "REMOVE_COMMENTS_CHAR"}))
+    TextTransformationType.add_member(:uppercase, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPPERCASE", traits: {"smithy.api#enumValue" => "UPPERCASE"}))
+    TextTransformationType.add_member(:cmd_line_win, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CMD_LINE_WIN", traits: {"smithy.api#enumValue" => "CMD_LINE_WIN"}))
+    TextTransformationType.add_member(:cmd_line_unix, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CMD_LINE_UNIX", traits: {"smithy.api#enumValue" => "CMD_LINE_UNIX"}))
+    TextTransformationType.add_member(:js_decode_ext, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "JS_DECODE_EXT", traits: {"smithy.api#enumValue" => "JS_DECODE_EXT"}))
+    TextTransformationType.add_member(:sha256, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SHA256", traits: {"smithy.api#enumValue" => "SHA256"}))
     TextTransformations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TextTransformation, name: "member"))
+    TimeSeriesStatisticType.add_member(:date_histogram, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DATE_HISTOGRAM", traits: {"smithy.api#enumValue" => "DATE_HISTOGRAM"}))
+    TimeSeriesStatisticType.add_member(:payment_traffic, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PAYMENT_TRAFFIC", traits: {"smithy.api#enumValue" => "PAYMENT_TRAFFIC"}))
     TimeWindow.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "StartTime", traits: {"smithy.api#required" => {}}))
     TimeWindow.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "EndTime", traits: {"smithy.api#required" => {}}))
     TimeWindow.type = Types::TimeWindow
@@ -1806,6 +2108,7 @@ module Aws::WAFV2
     UpdateRuleGroupRequest.add_member(:visibility_config, ::Smithy::Schema::Shapes::MemberShape.new(target: VisibilityConfig, name: "VisibilityConfig", traits: {"smithy.api#required" => {}}))
     UpdateRuleGroupRequest.add_member(:lock_token, ::Smithy::Schema::Shapes::MemberShape.new(target: LockToken, name: "LockToken", traits: {"smithy.api#required" => {}}))
     UpdateRuleGroupRequest.add_member(:custom_response_bodies, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomResponseBodies, name: "CustomResponseBodies"))
+    UpdateRuleGroupRequest.add_member(:monetization_config, ::Smithy::Schema::Shapes::MemberShape.new(target: MonetizationConfig, name: "MonetizationConfig"))
     UpdateRuleGroupRequest.type = Types::UpdateRuleGroupRequest
     UpdateRuleGroupResponse.add_member(:next_lock_token, ::Smithy::Schema::Shapes::MemberShape.new(target: LockToken, name: "NextLockToken"))
     UpdateRuleGroupResponse.type = Types::UpdateRuleGroupResponse
@@ -1825,6 +2128,7 @@ module Aws::WAFV2
     UpdateWebACLRequest.add_member(:association_config, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociationConfig, name: "AssociationConfig"))
     UpdateWebACLRequest.add_member(:on_source_d_do_s_protection_config, ::Smithy::Schema::Shapes::MemberShape.new(target: OnSourceDDoSProtectionConfig, name: "OnSourceDDoSProtectionConfig"))
     UpdateWebACLRequest.add_member(:application_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationConfig, name: "ApplicationConfig"))
+    UpdateWebACLRequest.add_member(:monetization_config, ::Smithy::Schema::Shapes::MemberShape.new(target: MonetizationConfig, name: "MonetizationConfig"))
     UpdateWebACLRequest.type = Types::UpdateWebACLRequest
     UpdateWebACLResponse.add_member(:next_lock_token, ::Smithy::Schema::Shapes::MemberShape.new(target: LockToken, name: "NextLockToken"))
     UpdateWebACLResponse.type = Types::UpdateWebACLResponse
@@ -1852,6 +2156,9 @@ module Aws::WAFV2
     WAFDuplicateItemException.type = Types::WAFDuplicateItemException
     WAFExpiredManagedRuleGroupVersionException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     WAFExpiredManagedRuleGroupVersionException.type = Types::WAFExpiredManagedRuleGroupVersionException
+    WAFFeatureNotIncludedInPricingPlanException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
+    WAFFeatureNotIncludedInPricingPlanException.add_member(:disallowed_features, ::Smithy::Schema::Shapes::MemberShape.new(target: DisallowedFeatures, name: "DisallowedFeatures"))
+    WAFFeatureNotIncludedInPricingPlanException.type = Types::WAFFeatureNotIncludedInPricingPlanException
     WAFInternalErrorException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     WAFInternalErrorException.type = Types::WAFInternalErrorException
     WAFInvalidOperationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
@@ -1907,6 +2214,7 @@ module Aws::WAFV2
     WebACL.add_member(:retrofitted_by_firewall_manager, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "RetrofittedByFirewallManager", traits: {"smithy.api#default" => false}))
     WebACL.add_member(:on_source_d_do_s_protection_config, ::Smithy::Schema::Shapes::MemberShape.new(target: OnSourceDDoSProtectionConfig, name: "OnSourceDDoSProtectionConfig"))
     WebACL.add_member(:application_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationConfig, name: "ApplicationConfig"))
+    WebACL.add_member(:monetization_config, ::Smithy::Schema::Shapes::MemberShape.new(target: MonetizationConfig, name: "MonetizationConfig"))
     WebACL.type = Types::WebACL
     WebACLSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WebACLSummary, name: "member"))
     WebACLSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, name: "Name"))
@@ -1917,21 +2225,24 @@ module Aws::WAFV2
     WebACLSummary.type = Types::WebACLSummary
     XssMatchStatement.add_member(:field_to_match, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldToMatch, name: "FieldToMatch", traits: {"smithy.api#required" => {}}))
     XssMatchStatement.add_member(:text_transformations, ::Smithy::Schema::Shapes::MemberShape.new(target: TextTransformations, name: "TextTransformations", traits: {"smithy.api#required" => {}}))
+    XssMatchStatement.add_member(:pre_parse_text_transformations, ::Smithy::Schema::Shapes::MemberShape.new(target: PreParseTextTransformations, name: "PreParseTextTransformations"))
     XssMatchStatement.type = Types::XssMatchStatement
 
     AWSWAF20190729 = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.wafv2#AWSWAF_20190729"
       service.name = "AWSWAF20190729"
       service.version = "2019-07-29"
-      service.traits = {"aws.api#service" => {"sdkId" => "WAFV2", "arnNamespace" => "wafv2", "cloudFormationName" => "WAFv2", "cloudTrailEventSource" => "wafv2.amazonaws.com", "endpointPrefix" => "wafv2"}, "aws.auth#sigv4" => {"name" => "wafv2"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "AWS WAFV2", "smithy.api#xmlNamespace" => {"uri" => "http://waf.amazonaws.com/doc/2019-07-29/"}}
+      service.traits = {"aws.api#service" => {"sdkId" => "WAFV2", "arnNamespace" => "wafv2", "cloudFormationName" => "WAFv2", "cloudTrailEventSource" => "wafv2.amazonaws.com", "endpointPrefix" => "wafv2"}, "aws.auth#sigv4" => {"name" => "wafv2"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "AWS WAFV2", "smithy.api#xmlNamespace" => {"uri" => "http://waf.amazonaws.com/doc/2019-07-29/"}, "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://wafv2-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://wafv2-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://wafv2.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://wafv2.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
       service.add_operation(:associate_web_acl, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.wafv2#AssociateWebACL"
         operation.name = "AssociateWebACL"
         operation.input = AssociateWebACLRequest
         operation.output = AssociateWebACLResponse
+        operation.errors << WAFFeatureNotIncludedInPricingPlanException
         operation.errors << WAFInternalErrorException
         operation.errors << WAFInvalidOperationException
         operation.errors << WAFInvalidParameterException
+        operation.errors << WAFLimitsExceededException
         operation.errors << WAFNonexistentItemException
         operation.errors << WAFUnavailableEntityException
         operation.traits = {}
@@ -2282,6 +2593,39 @@ module Aws::WAFV2
         operation.errors << WAFNonexistentItemException
         operation.traits = {}
       end)
+      service.add_operation(:get_revenue_statistics, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.wafv2#GetRevenueStatistics"
+        operation.name = "GetRevenueStatistics"
+        operation.input = GetRevenueStatisticsRequest
+        operation.output = GetRevenueStatisticsResponse
+        operation.errors << WAFInternalErrorException
+        operation.errors << WAFInvalidOperationException
+        operation.errors << WAFInvalidParameterException
+        operation.errors << WAFNonexistentItemException
+        operation.traits = {}
+      end)
+      service.add_operation(:get_revenue_statistics_summary, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.wafv2#GetRevenueStatisticsSummary"
+        operation.name = "GetRevenueStatisticsSummary"
+        operation.input = GetRevenueStatisticsSummaryRequest
+        operation.output = GetRevenueStatisticsSummaryResponse
+        operation.errors << WAFInternalErrorException
+        operation.errors << WAFInvalidOperationException
+        operation.errors << WAFInvalidParameterException
+        operation.errors << WAFNonexistentItemException
+        operation.traits = {}
+      end)
+      service.add_operation(:get_revenue_statistics_time_series, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.wafv2#GetRevenueStatisticsTimeSeries"
+        operation.name = "GetRevenueStatisticsTimeSeries"
+        operation.input = GetRevenueStatisticsTimeSeriesRequest
+        operation.output = GetRevenueStatisticsTimeSeriesResponse
+        operation.errors << WAFInternalErrorException
+        operation.errors << WAFInvalidOperationException
+        operation.errors << WAFInvalidParameterException
+        operation.errors << WAFNonexistentItemException
+        operation.traits = {}
+      end)
       service.add_operation(:get_rule_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.wafv2#GetRuleGroup"
         operation.name = "GetRuleGroup"
@@ -2299,6 +2643,18 @@ module Aws::WAFV2
         operation.input = GetSampledRequestsRequest
         operation.output = GetSampledRequestsResponse
         operation.errors << WAFInternalErrorException
+        operation.errors << WAFInvalidParameterException
+        operation.errors << WAFNonexistentItemException
+        operation.traits = {}
+      end)
+      service.add_operation(:get_top_path_statistics_by_traffic, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.wafv2#GetTopPathStatisticsByTraffic"
+        operation.name = "GetTopPathStatisticsByTraffic"
+        operation.input = GetTopPathStatisticsByTrafficRequest
+        operation.output = GetTopPathStatisticsByTrafficResponse
+        operation.errors << WAFFeatureNotIncludedInPricingPlanException
+        operation.errors << WAFInternalErrorException
+        operation.errors << WAFInvalidOperationException
         operation.errors << WAFInvalidParameterException
         operation.errors << WAFNonexistentItemException
         operation.traits = {}
@@ -2429,6 +2785,17 @@ module Aws::WAFV2
         operation.errors << WAFInvalidParameterException
         operation.traits = {}
       end)
+      service.add_operation(:list_settlement_records, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.wafv2#ListSettlementRecords"
+        operation.name = "ListSettlementRecords"
+        operation.input = ListSettlementRecordsRequest
+        operation.output = ListSettlementRecordsResponse
+        operation.errors << WAFInternalErrorException
+        operation.errors << WAFInvalidOperationException
+        operation.errors << WAFInvalidParameterException
+        operation.errors << WAFNonexistentItemException
+        operation.traits = {}
+      end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.wafv2#ListTagsForResource"
         operation.name = "ListTagsForResource"
@@ -2457,6 +2824,7 @@ module Aws::WAFV2
         operation.name = "PutLoggingConfiguration"
         operation.input = PutLoggingConfigurationRequest
         operation.output = PutLoggingConfigurationResponse
+        operation.errors << WAFFeatureNotIncludedInPricingPlanException
         operation.errors << WAFInternalErrorException
         operation.errors << WAFInvalidOperationException
         operation.errors << WAFInvalidParameterException
@@ -2582,6 +2950,7 @@ module Aws::WAFV2
         operation.errors << WAFConfigurationWarningException
         operation.errors << WAFDuplicateItemException
         operation.errors << WAFExpiredManagedRuleGroupVersionException
+        operation.errors << WAFFeatureNotIncludedInPricingPlanException
         operation.errors << WAFInternalErrorException
         operation.errors << WAFInvalidOperationException
         operation.errors << WAFInvalidParameterException

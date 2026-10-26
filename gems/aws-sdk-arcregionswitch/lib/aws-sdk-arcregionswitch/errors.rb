@@ -23,6 +23,7 @@ module Aws::ARCRegionswitch
   # ## Error Classes
   #
   # * {AccessDeniedException}
+  # * {ConflictException}
   # * {IllegalArgumentException}
   # * {IllegalStateException}
   # * {InternalServerException}
@@ -43,6 +44,29 @@ module Aws::ARCRegionswitch
 
       def message
         @data[:message]
+      end
+    end
+
+    # <p>The client token was already used with different request parameters. A client token must map to the same parameters for every request. To retry this operation, provide a new client token.</p>
+    class ConflictException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::ARCRegionswitch::Types::ConflictException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+
+      # <p>The identifier of the resource involved in the client token conflict.</p>
+      def resource_id
+        @data[:resource_id]
+      end
+
+      # <p>The type of the resource involved in the client token conflict.</p>
+      def resource_type
+        @data[:resource_type]
       end
     end
 

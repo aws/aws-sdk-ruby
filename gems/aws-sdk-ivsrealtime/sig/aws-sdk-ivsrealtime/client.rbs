@@ -61,6 +61,13 @@ module Aws::IVSRealTime
 
     interface _CreateIngestConfigurationResponse
       include Smithy::Client::_Response[Types::CreateIngestConfigurationResponse]
+      def access_control_allow_origin: () -> String?
+      def access_control_expose_headers: () -> String?
+      def cache_control: () -> String?
+      def content_security_policy: () -> String?
+      def strict_transport_security: () -> String?
+      def x_content_type_options: () -> String?
+      def x_frame_options: () -> String?
       def ingest_configuration: () -> Types::IngestConfiguration?
     end
     def create_ingest_configuration: (
@@ -70,6 +77,7 @@ module Aws::IVSRealTime
       ?attributes: Hash[String, String],
       ?ingest_protocol: String,
       ?insecure_ingest: bool,
+      ?redundant_ingest: bool,
       ?tags: Hash[String, String]
     ) -> _CreateIngestConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateIngestConfigurationResponse
 
@@ -492,11 +500,19 @@ module Aws::IVSRealTime
 
     interface _UpdateIngestConfigurationResponse
       include Smithy::Client::_Response[Types::UpdateIngestConfigurationResponse]
+      def access_control_allow_origin: () -> String?
+      def access_control_expose_headers: () -> String?
+      def cache_control: () -> String?
+      def content_security_policy: () -> String?
+      def strict_transport_security: () -> String?
+      def x_content_type_options: () -> String?
+      def x_frame_options: () -> String?
       def ingest_configuration: () -> Types::IngestConfiguration?
     end
     def update_ingest_configuration: (
       ?arn: String,
-      ?stage_arn: String
+      ?stage_arn: String,
+      ?redundant_ingest: bool
     ) -> _UpdateIngestConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateIngestConfigurationResponse
 
     interface _UpdateStageResponse

@@ -6,7 +6,7 @@ module Aws::Mgn
   # This module contains the types returned by client operations.
   module Types
 
-    # <p>Operating denied due to a file permission or access check error.</p>
+    # <p>Operation denied due to a file permission or access check error.</p>
     # @!attribute message
     #   @return [String]
     # @!attribute code
@@ -383,6 +383,54 @@ module Aws::Mgn
       include ::Smithy::Schema::Structure
     end
 
+    # <p>A checksum structure used to verify data integrity.</p>
+    # @!attribute encryption_algorithm
+    #   <p>The encryption algorithm used to generate the checksum.</p>
+    #   @return [String]
+    # @!attribute hash
+    #   <p>The hash value of the checksum.</p>
+    #   @return [String]
+    class Checksum < Struct.new(
+      nil,
+      :encryption_algorithm,
+      :hash,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Maps a source CIDR range to the corresponding target CIDR range to use in the target network.</p>
+    # @!attribute original_cidr
+    #   <p>The original CIDR range in the source network.</p>
+    #   @return [String]
+    # @!attribute updated_cidr
+    #   <p>The updated CIDR range to use in the target network.</p>
+    #   @return [String]
+    class CidrMapping < Struct.new(
+      nil,
+      :original_cidr,
+      :updated_cidr,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Status details for a specific code generation output format.</p>
+    # @!attribute status
+    #   <p>The status of the code generation for this output format.</p>
+    #   @return [String]
+    # @!attribute status_detail_list
+    #   <p>A list of detailed status information for the code generation.</p>
+    #   @return [String]
+    class CodeGenerationOutputFormatStatusDetails < Struct.new(
+      nil,
+      :status,
+      :status_detail_list,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The request could not be completed due to a conflict with the current state of the target resource.</p>
     # @!attribute message
     #   @return [String]
@@ -630,6 +678,12 @@ module Aws::Mgn
     # @!attribute large_volume_conf
     #   <p>Large volume config.</p>
     #   @return [Types::LaunchTemplateDiskConf]
+    # @!attribute enable_parameters_encryption
+    #   <p>Enable parameters encryption.</p>
+    #   @return [Boolean]
+    # @!attribute parameters_encryption_key
+    #   <p>Parameters encryption key.</p>
+    #   @return [String]
     class CreateLaunchConfigurationTemplateInput < Struct.new(
       nil,
       :post_launch_actions,
@@ -646,6 +700,8 @@ module Aws::Mgn
       :small_volume_max_size,
       :small_volume_conf,
       :large_volume_conf,
+      :enable_parameters_encryption,
+      :parameters_encryption_key,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -702,6 +758,12 @@ module Aws::Mgn
     # @!attribute large_volume_conf
     #   <p>Large volume config.</p>
     #   @return [Types::LaunchTemplateDiskConf]
+    # @!attribute enable_parameters_encryption
+    #   <p>Enable parameters encryption.</p>
+    #   @return [Boolean]
+    # @!attribute parameters_encryption_key
+    #   <p>Parameters encryption key.</p>
+    #   @return [String]
     class CreateLaunchConfigurationTemplateOutput < Struct.new(
       nil,
       :launch_configuration_template_id,
@@ -721,6 +783,8 @@ module Aws::Mgn
       :small_volume_max_size,
       :small_volume_conf,
       :large_volume_conf,
+      :enable_parameters_encryption,
+      :parameters_encryption_key,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -729,6 +793,116 @@ module Aws::Mgn
         options[:small_volume_max_size] = 0 unless options.key?(:small_volume_max_size)
         super
       end
+    end
+
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the network migration definition.</p>
+    #   @return [String]
+    # @!attribute network_migration_definition_id
+    #   <p>The unique identifier of the network migration definition.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the network migration definition.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>A description of the network migration definition.</p>
+    #   @return [String]
+    # @!attribute source_configurations
+    #   <p>A list of source configurations for the network migration.</p>
+    #   @return [Array<Types::SourceConfiguration>]
+    # @!attribute target_s3_configuration
+    #   <p>The S3 configuration for storing the target network artifacts.</p>
+    #   @return [Types::TargetS3Configuration]
+    # @!attribute target_network
+    #   <p>The target network configuration including topology and CIDR ranges.</p>
+    #   @return [Types::TargetNetwork]
+    # @!attribute target_deployment
+    #   <p>The target deployment configuration for the migrated network.</p>
+    #   @return [String]
+    # @!attribute vpc_provisioning_strategy
+    #   <p>Indicates whether the migration creates new target VPCs or uses existing ones. <code>CREATE_NEW</code> provisions new target VPCs; <code>USE_EXISTING</code> migrates into existing VPCs in the target account.</p>
+    #   @return [String]
+    # @!attribute cidr_mappings
+    #   <p>A list of CIDR mappings that map original source CIDR ranges to updated target CIDR ranges. CIDR mappings apply only when <code>vpcProvisioningStrategy</code> is set to <code>USE_EXISTING</code>.</p>
+    #   @return [Array<Types::CidrMapping>]
+    # @!attribute created_at
+    #   <p>The timestamp when the network migration definition was created.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The timestamp when the network migration definition was last updated.</p>
+    #   @return [Time]
+    # @!attribute tags
+    #   <p>Tags assigned to the network migration definition.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute scope_tags
+    #   <p>Scope tags for the network migration definition.</p>
+    #   @return [Hash<String, String>]
+    class CreateNetworkMigrationDefinitionOutput < Struct.new(
+      nil,
+      :arn,
+      :network_migration_definition_id,
+      :name,
+      :description,
+      :source_configurations,
+      :target_s3_configuration,
+      :target_network,
+      :target_deployment,
+      :vpc_provisioning_strategy,
+      :cidr_mappings,
+      :created_at,
+      :updated_at,
+      :tags,
+      :scope_tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute name
+    #   <p>The name of the network migration definition.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>A description of the network migration definition.</p>
+    #   @return [String]
+    # @!attribute source_configurations
+    #   <p>A list of source configurations for the network migration.</p>
+    #   @return [Array<Types::SourceConfiguration>]
+    # @!attribute target_s3_configuration
+    #   <p>The S3 configuration for storing the target network artifacts.</p>
+    #   @return [Types::TargetS3Configuration]
+    # @!attribute target_network
+    #   <p>The target network configuration including topology and CIDR ranges.</p>
+    #   @return [Types::TargetNetwork]
+    # @!attribute target_deployment
+    #   <p>The target deployment configuration for the migrated network.</p>
+    #   @return [String]
+    # @!attribute vpc_provisioning_strategy
+    #   <p>Specifies whether to create new target VPCs or use existing ones. Set to <code>CREATE_NEW</code> to provision new target VPCs as part of the migration, or <code>USE_EXISTING</code> to migrate into existing VPCs in the target account.</p>
+    #   @return [String]
+    # @!attribute cidr_mappings
+    #   <p>A list of CIDR mappings that map original source CIDR ranges to updated target CIDR ranges. CIDR mappings can be provided only when <code>vpcProvisioningStrategy</code> is set to <code>USE_EXISTING</code>.</p>
+    #   @return [Array<Types::CidrMapping>]
+    # @!attribute tags
+    #   <p>Tags to assign to the network migration definition.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute scope_tags
+    #   <p>Scope tags for the network migration definition to control access and organization.</p>
+    #   @return [Hash<String, String>]
+    class CreateNetworkMigrationDefinitionRequest < Struct.new(
+      nil,
+      :name,
+      :description,
+      :source_configurations,
+      :target_s3_configuration,
+      :target_network,
+      :target_deployment,
+      :vpc_provisioning_strategy,
+      :cidr_mappings,
+      :tags,
+      :scope_tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute staging_area_subnet_id
@@ -759,7 +933,7 @@ module Aws::Mgn
     #   <p>Request to configure bandwidth throttling during Replication Settings template creation.</p>
     #   @return [Integer]
     # @!attribute data_plane_routing
-    #   <p>Request to configure  data plane routing during Replication Settings template creation.</p>
+    #   <p>Request to configure data plane routing during Replication Settings template creation.</p>
     #   @return [String]
     # @!attribute create_public_ip
     #   <p>Request to create Public IP during Replication Settings template creation.</p>
@@ -773,6 +947,15 @@ module Aws::Mgn
     # @!attribute tags
     #   <p>Request to configure tags during Replication Settings template creation.</p>
     #   @return [Hash<String, String>]
+    # @!attribute internet_protocol
+    #   <p>Request to configure the internet protocol to IPv4 or IPv6.</p>
+    #   @return [String]
+    # @!attribute store_snapshot_on_local_zone
+    #   <p>Request to store snapshot on local zone during Replication Settings template creation.</p>
+    #   @return [Boolean]
+    # @!attribute storage_configuration
+    #   <p>Request to configure storage during Replication Settings template creation.</p>
+    #   @return [Types::StorageConfiguration]
     class CreateReplicationConfigurationTemplateInput < Struct.new(
       nil,
       :staging_area_subnet_id,
@@ -789,6 +972,9 @@ module Aws::Mgn
       :staging_area_tags,
       :use_fips_endpoint,
       :tags,
+      :internet_protocol,
+      :store_snapshot_on_local_zone,
+      :storage_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -842,6 +1028,15 @@ module Aws::Mgn
     # @!attribute tags
     #   <p>Replication Configuration template Tags.</p>
     #   @return [Hash<String, String>]
+    # @!attribute internet_protocol
+    #   <p>Replication Configuration template internet protocol.</p>
+    #   @return [String]
+    # @!attribute store_snapshot_on_local_zone
+    #   <p>Replication Configuration template store snapshot on local zone.</p>
+    #   @return [Boolean]
+    # @!attribute storage_configuration
+    #   <p>Replication Configuration template storage configuration.</p>
+    #   @return [Types::StorageConfiguration]
     class CreateReplicationConfigurationTemplateOutput < Struct.new(
       nil,
       :replication_configuration_template_id,
@@ -860,6 +1055,9 @@ module Aws::Mgn
       :staging_area_tags,
       :use_fips_endpoint,
       :tags,
+      :internet_protocol,
+      :store_snapshot_on_local_zone,
+      :storage_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -974,6 +1172,9 @@ module Aws::Mgn
     # @!attribute last_snapshot_date_time
     #   <p>Request to query data replication last snapshot time.</p>
     #   @return [String]
+    # @!attribute replicator_id
+    #   <p>Replication server instance ID.</p>
+    #   @return [String]
     class DataReplicationInfo < Struct.new(
       nil,
       :lag_duration,
@@ -983,6 +1184,7 @@ module Aws::Mgn
       :data_replication_initiation,
       :data_replication_error,
       :last_snapshot_date_time,
+      :replicator_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1127,6 +1329,32 @@ module Aws::Mgn
     end
 
     class DeleteLaunchConfigurationTemplateOutput < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute network_migration_definition_id
+    #   <p>The unique identifier of the network migration definition to delete.</p>
+    #   @return [String]
+    class DeleteNetworkMigrationDefinitionRequest < Struct.new(
+      nil,
+      :network_migration_definition_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class DeleteNetworkMigrationDefinitionResponse < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>An operation that deletes a construct from the mapping.</p>
+    class DeleteOperation < Struct.new(
       nil,
       keyword_init: true
     )
@@ -1380,7 +1608,7 @@ module Aws::Mgn
     #   <p>Request to filter Source Servers list by next token.</p>
     #   @return [String]
     # @!attribute account_id
-    #   <p>Request to filter Source Servers list by Accoun ID.</p>
+    #   <p>Request to filter Source Servers list by Account ID.</p>
     #   @return [String]
     class DescribeSourceServersInput < Struct.new(
       nil,
@@ -1394,10 +1622,10 @@ module Aws::Mgn
     end
 
     # @!attribute items
-    #   <p>Request to filter Source Servers list by item.</p>
+    #   <p>The list of returned Source Servers.</p>
     #   @return [Array<Types::SourceServer>]
     # @!attribute next_token
-    #   <p>Request to filter Source Servers next token.</p>
+    #   <p>The token of the next Source Server to retrieve.</p>
     #   @return [String]
     class DescribeSourceServersOutput < Struct.new(
       nil,
@@ -1617,6 +1845,46 @@ module Aws::Mgn
       end
     end
 
+    # <p>S3 configuration for the source import file to be enriched.</p>
+    # @!attribute s3_bucket
+    #   <p>The name of the S3 bucket containing the source import file.</p>
+    #   @return [String]
+    # @!attribute s3_bucket_owner
+    #   <p>The AWS account ID of the S3 bucket owner.</p>
+    #   @return [String]
+    # @!attribute s3_key
+    #   <p>The S3 key (path) for the source import file.</p>
+    #   @return [String]
+    class EnrichmentSourceS3Configuration < Struct.new(
+      nil,
+      :s3_bucket,
+      :s3_bucket_owner,
+      :s3_key,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>S3 configuration for storing the enriched import file.</p>
+    # @!attribute s3_bucket
+    #   <p>The name of the S3 bucket where the enriched import file will be stored.</p>
+    #   @return [String]
+    # @!attribute s3_bucket_owner
+    #   <p>The AWS account ID of the target S3 bucket owner.</p>
+    #   @return [String]
+    # @!attribute s3_key
+    #   <p>The S3 key (path) where the enriched import file will be stored.</p>
+    #   @return [String]
+    class EnrichmentTargetS3Configuration < Struct.new(
+      nil,
+      :s3_bucket,
+      :s3_bucket_owner,
+      :s3_key,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Error details.</p>
     # @!attribute message
     #   <p>Error details message.</p>
@@ -1657,6 +1925,9 @@ module Aws::Mgn
     # @!attribute export_id
     #   <p>Export task id.</p>
     #   @return [String]
+    # @!attribute arn
+    #   <p>ExportTask arn.</p>
+    #   @return [String]
     # @!attribute s3_bucket
     #   <p>Export task s3 bucket.</p>
     #   @return [String]
@@ -1681,9 +1952,13 @@ module Aws::Mgn
     # @!attribute summary
     #   <p>Export task summary.</p>
     #   @return [Types::ExportTaskSummary]
+    # @!attribute tags
+    #   <p>Export task tags.</p>
+    #   @return [Hash<String, String>]
     class ExportTask < Struct.new(
       nil,
       :export_id,
+      :arn,
       :s3_bucket,
       :s3_key,
       :s3_bucket_owner,
@@ -1692,6 +1967,7 @@ module Aws::Mgn
       :status,
       :progress_percentage,
       :summary,
+      :tags,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1818,6 +2094,22 @@ module Aws::Mgn
       include ::Smithy::Schema::Structure
     end
 
+    # <p>FSx for ONTAP storage configuration.</p>
+    # @!attribute storage_virtual_machine_id
+    #   <p>FSx ONTAP configuration storage virtual machine ID.</p>
+    #   @return [String]
+    # @!attribute credentials_secret_arn
+    #   <p>FSx ONTAP configuration credentials secret ARN.</p>
+    #   @return [String]
+    class FsxOntapConfiguration < Struct.new(
+      nil,
+      :storage_virtual_machine_id,
+      :credentials_secret_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute source_server_id
     #   <p>Request to get Launch Configuration information by Source Server ID.</p>
     #   @return [String]
@@ -1861,7 +2153,7 @@ module Aws::Mgn
     #   <p>Launch configuration boot mode.</p>
     #   @return [String]
     # @!attribute post_launch_actions
-    #   <p>Post Launch Actions to executed on the Test or Cutover instance.</p>
+    #   <p>Post Launch Actions to be executed on the Test or Cutover instance.</p>
     #   @return [Types::PostLaunchActions]
     # @!attribute enable_map_auto_tagging
     #   <p>Enable map auto tagging.</p>
@@ -1883,6 +2175,114 @@ module Aws::Mgn
       :post_launch_actions,
       :enable_map_auto_tagging,
       :map_auto_tagging_mpe_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the network migration definition.</p>
+    #   @return [String]
+    # @!attribute network_migration_definition_id
+    #   <p>The unique identifier of the network migration definition.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the network migration definition.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>A description of the network migration definition.</p>
+    #   @return [String]
+    # @!attribute source_configurations
+    #   <p>A list of source configurations for the network migration.</p>
+    #   @return [Array<Types::SourceConfiguration>]
+    # @!attribute target_s3_configuration
+    #   <p>The S3 configuration for storing the target network artifacts.</p>
+    #   @return [Types::TargetS3Configuration]
+    # @!attribute target_network
+    #   <p>The target network configuration including topology and CIDR ranges.</p>
+    #   @return [Types::TargetNetwork]
+    # @!attribute target_deployment
+    #   <p>The target deployment configuration for the migrated network.</p>
+    #   @return [String]
+    # @!attribute vpc_provisioning_strategy
+    #   <p>Indicates whether the migration creates new target VPCs or uses existing ones. <code>CREATE_NEW</code> provisions new target VPCs; <code>USE_EXISTING</code> migrates into existing VPCs in the target account.</p>
+    #   @return [String]
+    # @!attribute cidr_mappings
+    #   <p>A list of CIDR mappings that map original source CIDR ranges to updated target CIDR ranges. CIDR mappings apply only when <code>vpcProvisioningStrategy</code> is set to <code>USE_EXISTING</code>.</p>
+    #   @return [Array<Types::CidrMapping>]
+    # @!attribute created_at
+    #   <p>The timestamp when the network migration definition was created.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The timestamp when the network migration definition was last updated.</p>
+    #   @return [Time]
+    # @!attribute tags
+    #   <p>Tags assigned to the network migration definition.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute scope_tags
+    #   <p>Scope tags for the network migration definition.</p>
+    #   @return [Hash<String, String>]
+    class GetNetworkMigrationDefinitionOutput < Struct.new(
+      nil,
+      :arn,
+      :network_migration_definition_id,
+      :name,
+      :description,
+      :source_configurations,
+      :target_s3_configuration,
+      :target_network,
+      :target_deployment,
+      :vpc_provisioning_strategy,
+      :cidr_mappings,
+      :created_at,
+      :updated_at,
+      :tags,
+      :scope_tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute network_migration_definition_id
+    #   <p>The unique identifier of the network migration definition to retrieve.</p>
+    #   @return [String]
+    class GetNetworkMigrationDefinitionRequest < Struct.new(
+      nil,
+      :network_migration_definition_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute network_migration_definition_id
+    #   <p>The unique identifier of the network migration definition.</p>
+    #   @return [String]
+    # @!attribute network_migration_execution_id
+    #   <p>The unique identifier of the network migration execution.</p>
+    #   @return [String]
+    # @!attribute segment_id
+    #   <p>The unique identifier of the mapper segment.</p>
+    #   @return [String]
+    # @!attribute construct_id
+    #   <p>The unique identifier of the construct within the segment.</p>
+    #   @return [String]
+    class GetNetworkMigrationMapperSegmentConstructRequest < Struct.new(
+      nil,
+      :network_migration_definition_id,
+      :network_migration_execution_id,
+      :segment_id,
+      :construct_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute construct
+    #   <p>The construct metadata including type, name, and configuration.</p>
+    #   @return [Types::NetworkMigrationMapperSegmentConstruct]
+    class GetNetworkMigrationMapperSegmentConstructResponse < Struct.new(
+      nil,
+      :construct,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1951,6 +2351,15 @@ module Aws::Mgn
     # @!attribute use_fips_endpoint
     #   <p>Replication Configuration use Fips Endpoint.</p>
     #   @return [Boolean]
+    # @!attribute internet_protocol
+    #   <p>Replication Configuration internet protocol.</p>
+    #   @return [String]
+    # @!attribute store_snapshot_on_local_zone
+    #   <p>Replication Configuration store snapshot on local zone.</p>
+    #   @return [Boolean]
+    # @!attribute storage_configuration
+    #   <p>Replication Configuration storage configuration.</p>
+    #   @return [Types::StorageConfiguration]
     class GetReplicationConfigurationOutput < Struct.new(
       nil,
       :source_server_id,
@@ -1969,6 +2378,9 @@ module Aws::Mgn
       :create_public_ip,
       :staging_area_tags,
       :use_fips_endpoint,
+      :internet_protocol,
+      :store_snapshot_on_local_zone,
+      :storage_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2048,9 +2460,48 @@ module Aws::Mgn
       end
     end
 
+    # <p>Details about an import file enrichment job.</p>
+    # @!attribute job_id
+    #   <p>The unique identifier of the import file enrichment job.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The timestamp when the enrichment job was created.</p>
+    #   @return [Time]
+    # @!attribute ended_at
+    #   <p>The timestamp when the enrichment job completed or failed.</p>
+    #   @return [Time]
+    # @!attribute status
+    #   <p>The current status of the import file enrichment job.</p>
+    #   @return [String]
+    # @!attribute status_details
+    #   <p>Detailed status information about the enrichment job.</p>
+    #   @return [String]
+    # @!attribute checksum
+    #   <p>The checksum of the enriched file for integrity verification.</p>
+    #   @return [Types::Checksum]
+    # @!attribute s3_bucket_target
+    #   <p>The target S3 configuration for the enriched import file.</p>
+    #   @return [Types::EnrichmentTargetS3Configuration]
+    class ImportFileEnrichment < Struct.new(
+      nil,
+      :job_id,
+      :created_at,
+      :ended_at,
+      :status,
+      :status_details,
+      :checksum,
+      :s3_bucket_target,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Import task.</p>
     # @!attribute import_id
     #   <p>Import task id.</p>
+    #   @return [String]
+    # @!attribute arn
+    #   <p>ImportTask arn.</p>
     #   @return [String]
     # @!attribute s3_bucket_source
     #   <p>Import task s3 bucket source.</p>
@@ -2070,15 +2521,20 @@ module Aws::Mgn
     # @!attribute summary
     #   <p>Import task summary.</p>
     #   @return [Types::ImportTaskSummary]
+    # @!attribute tags
+    #   <p>Import task tags.</p>
+    #   @return [Hash<String, String>]
     class ImportTask < Struct.new(
       nil,
       :import_id,
+      :arn,
       :s3_bucket_source,
       :creation_date_time,
       :end_date_time,
       :status,
       :progress_percentage,
       :summary,
+      :tags,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2168,12 +2624,12 @@ module Aws::Mgn
       end
     end
 
-    # <p>Import task summery waves.</p>
+    # <p>Import task summary waves.</p>
     # @!attribute created_count
-    #   <p>Import task summery waves created count.</p>
+    #   <p>Import task summary waves created count.</p>
     #   @return [Integer]
     # @!attribute modified_count
-    #   <p>Import task summery waves modified count.</p>
+    #   <p>Import task summary waves modified count.</p>
     #   @return [Integer]
     class ImportTaskSummaryWaves < Struct.new(
       nil,
@@ -2301,12 +2757,20 @@ module Aws::Mgn
     # @!attribute raw_error
     #   <p>Job error.</p>
     #   @return [String]
+    # @!attribute attempt_count
+    #   <p>Retries for this operation.</p>
+    #   @return [Integer]
+    # @!attribute max_attempts_count
+    #   <p>The maximum number of retries that will be attempted if this operation failed.</p>
+    #   @return [Integer]
     class JobLogEventData < Struct.new(
       nil,
       :source_server_id,
       :conversion_server_id,
       :target_instance_id,
       :raw_error,
+      :attempt_count,
+      :max_attempts_count,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2314,13 +2778,13 @@ module Aws::Mgn
 
     # <p>Launch Status of the Job Post Launch Actions.</p>
     # @!attribute ssm_document
-    #   <p>AWS Systems Manager's Document of the of the Job Post Launch Actions.</p>
+    #   <p>AWS Systems Manager's Document of the Job Post Launch Actions.</p>
     #   @return [Types::SsmDocument]
     # @!attribute ssm_document_type
     #   <p>AWS Systems Manager Document type.</p>
     #   @return [String]
     # @!attribute execution_id
-    #   <p>AWS Systems Manager Document's execution ID of the of the Job Post Launch Actions.</p>
+    #   <p>AWS Systems Manager Document's execution ID of the Job Post Launch Actions.</p>
     #   @return [String]
     # @!attribute execution_status
     #   <p>AWS Systems Manager Document's execution status.</p>
@@ -2335,6 +2799,34 @@ module Aws::Mgn
       :execution_id,
       :execution_status,
       :failure_reason,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Last known check performed on a launched instance.</p>
+    # @!attribute type
+    #   <p>Last known check type.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>Last known check name.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>Last known check status.</p>
+    #   @return [String]
+    # @!attribute error
+    #   <p>Last known check error.</p>
+    #   @return [String]
+    # @!attribute checked_at
+    #   <p>Last known check timestamp.</p>
+    #   @return [Time]
+    class LastKnownCheck < Struct.new(
+      nil,
+      :type,
+      :name,
+      :status,
+      :error,
+      :checked_at,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2391,6 +2883,12 @@ module Aws::Mgn
     # @!attribute large_volume_conf
     #   <p>Large volume config.</p>
     #   @return [Types::LaunchTemplateDiskConf]
+    # @!attribute enable_parameters_encryption
+    #   <p>Enable parameters encryption.</p>
+    #   @return [Boolean]
+    # @!attribute parameters_encryption_key
+    #   <p>Parameters encryption key.</p>
+    #   @return [String]
     class LaunchConfigurationTemplate < Struct.new(
       nil,
       :launch_configuration_template_id,
@@ -2410,6 +2908,8 @@ module Aws::Mgn
       :small_volume_max_size,
       :small_volume_conf,
       :large_volume_conf,
+      :enable_parameters_encryption,
+      :parameters_encryption_key,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2430,11 +2930,19 @@ module Aws::Mgn
     # @!attribute throughput
     #   <p>Launch template disk throughput configuration.</p>
     #   @return [Integer]
+    # @!attribute volume_initialization_rate
+    #   <p>Launch template disk volume initialization rate configuration.</p>
+    #   @return [Integer]
+    # @!attribute delete_on_termination
+    #   <p>Launch template disk delete on termination configuration.</p>
+    #   @return [Boolean]
     class LaunchTemplateDiskConf < Struct.new(
       nil,
       :volume_type,
       :iops,
       :throughput,
+      :volume_initialization_rate,
+      :delete_on_termination,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2450,11 +2958,19 @@ module Aws::Mgn
     # @!attribute first_boot
     #   <p>Launched instance first boot.</p>
     #   @return [String]
+    # @!attribute last_known_checks
+    #   <p>Launched instance last known checks.</p>
+    #   @return [Array<Types::LastKnownCheck>]
+    # @!attribute last_known_fsx_checks_status
+    #   <p>Launched instance last known FSx checks status.</p>
+    #   @return [String]
     class LaunchedInstance < Struct.new(
       nil,
       :ec2_instance_id,
       :job_id,
       :first_boot,
+      :last_known_checks,
+      :last_known_fsx_checks_status,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2474,7 +2990,7 @@ module Aws::Mgn
 
     # <p>Lifecycle.</p>
     # @!attribute added_to_service_date_time
-    #   <p>Lifecycle added to service data and time.</p>
+    #   <p>Lifecycle added to service date and time.</p>
     #   @return [String]
     # @!attribute first_byte_date_time
     #   <p>Lifecycle replication initiation date and time.</p>
@@ -2590,7 +3106,7 @@ module Aws::Mgn
 
     # <p>Lifecycle last Test finalized.</p>
     # @!attribute api_call_date_time
-    #   <p>Lifecycle Test failed API call date and time.</p>
+    #   <p>Lifecycle Test finalized API call date and time.</p>
     #   @return [String]
     class LifeCycleLastTestFinalized < Struct.new(
       nil,
@@ -2852,6 +3368,52 @@ module Aws::Mgn
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Filters for listing import file enrichment jobs.</p>
+    # @!attribute job_i_ds
+    #   <p>A list of job IDs to filter by.</p>
+    #   @return [Array<String>]
+    class ListImportFileEnrichmentsFilters < Struct.new(
+      nil,
+      :job_i_ds,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute filters
+    #   <p>Filters to apply when listing import file enrichment jobs.</p>
+    #   @return [Types::ListImportFileEnrichmentsFilters]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return in a single call.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The token for the next page of results.</p>
+    #   @return [String]
+    class ListImportFileEnrichmentsRequest < Struct.new(
+      nil,
+      :filters,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute items
+    #   <p>A list of import file enrichment jobs.</p>
+    #   @return [Array<Types::ImportFileEnrichment>]
+    # @!attribute next_token
+    #   <p>The token to use to retrieve the next page of results. This value is null when there are no more results to return.</p>
+    #   @return [String]
+    class ListImportFileEnrichmentsResponse < Struct.new(
+      nil,
+      :items,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>List imports request.</p>
     # @!attribute filters
     #   <p>List imports request filters.</p>
@@ -2924,6 +3486,638 @@ module Aws::Mgn
     #   <p>List managed accounts response next token.</p>
     #   @return [String]
     class ListManagedAccountsResponse < Struct.new(
+      nil,
+      :items,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Filters for listing network migration analysis jobs.</p>
+    # @!attribute job_i_ds
+    #   <p>A list of job IDs to filter by.</p>
+    #   @return [Array<String>]
+    class ListNetworkMigrationAnalysesFilters < Struct.new(
+      nil,
+      :job_i_ds,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute network_migration_execution_id
+    #   <p>The unique identifier of the network migration execution to list analyses for.</p>
+    #   @return [String]
+    # @!attribute network_migration_definition_id
+    #   <p>The unique identifier of the network migration definition.</p>
+    #   @return [String]
+    # @!attribute filters
+    #   <p>Filters to apply when listing analysis jobs.</p>
+    #   @return [Types::ListNetworkMigrationAnalysesFilters]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return in a single call.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The token for the next page of results.</p>
+    #   @return [String]
+    class ListNetworkMigrationAnalysesRequest < Struct.new(
+      nil,
+      :network_migration_execution_id,
+      :network_migration_definition_id,
+      :filters,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute items
+    #   <p>A list of network migration analysis job details.</p>
+    #   @return [Array<Types::NetworkMigrationAnalysisJobDetails>]
+    # @!attribute next_token
+    #   <p>The token to use to retrieve the next page of results. This value is null when there are no more results to return.</p>
+    #   @return [String]
+    class ListNetworkMigrationAnalysesResponse < Struct.new(
+      nil,
+      :items,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Filters for listing network migration analysis results.</p>
+    # @!attribute vpc_i_ds
+    #   <p>A list of VPC IDs to filter results by.</p>
+    #   @return [Array<String>]
+    class ListNetworkMigrationAnalysisResultsFilters < Struct.new(
+      nil,
+      :vpc_i_ds,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute network_migration_execution_id
+    #   <p>The unique identifier of the network migration execution.</p>
+    #   @return [String]
+    # @!attribute network_migration_definition_id
+    #   <p>The unique identifier of the network migration definition.</p>
+    #   @return [String]
+    # @!attribute filters
+    #   <p>Filters to apply when listing analysis results, such as VPC IDs.</p>
+    #   @return [Types::ListNetworkMigrationAnalysisResultsFilters]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return in a single call.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The token for the next page of results.</p>
+    #   @return [String]
+    class ListNetworkMigrationAnalysisResultsRequest < Struct.new(
+      nil,
+      :network_migration_execution_id,
+      :network_migration_definition_id,
+      :filters,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute items
+    #   <p>A list of network migration analysis results.</p>
+    #   @return [Array<Types::NetworkMigrationAnalysisResult>]
+    # @!attribute next_token
+    #   <p>The token to use to retrieve the next page of results. This value is null when there are no more results to return.</p>
+    #   @return [String]
+    class ListNetworkMigrationAnalysisResultsResponse < Struct.new(
+      nil,
+      :items,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Filters for listing code generation segments.</p>
+    # @!attribute segment_i_ds
+    #   <p>A list of segment IDs to filter by.</p>
+    #   @return [Array<String>]
+    class ListNetworkMigrationCodeGenerationSegmentsFilters < Struct.new(
+      nil,
+      :segment_i_ds,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute network_migration_execution_id
+    #   <p>The unique identifier of the network migration execution.</p>
+    #   @return [String]
+    # @!attribute network_migration_definition_id
+    #   <p>The unique identifier of the network migration definition.</p>
+    #   @return [String]
+    # @!attribute filters
+    #   <p>Filters to apply when listing code generation segments.</p>
+    #   @return [Types::ListNetworkMigrationCodeGenerationSegmentsFilters]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return in a single call.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The token for the next page of results.</p>
+    #   @return [String]
+    class ListNetworkMigrationCodeGenerationSegmentsRequest < Struct.new(
+      nil,
+      :network_migration_execution_id,
+      :network_migration_definition_id,
+      :filters,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute items
+    #   <p>A list of network migration code generation segments.</p>
+    #   @return [Array<Types::NetworkMigrationCodeGenerationSegment>]
+    # @!attribute next_token
+    #   <p>The token to use to retrieve the next page of results. This value is null when there are no more results to return.</p>
+    #   @return [String]
+    class ListNetworkMigrationCodeGenerationSegmentsResponse < Struct.new(
+      nil,
+      :items,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Filters for listing code generation jobs.</p>
+    # @!attribute job_i_ds
+    #   <p>A list of job IDs to filter by.</p>
+    #   @return [Array<String>]
+    class ListNetworkMigrationCodeGenerationsFilters < Struct.new(
+      nil,
+      :job_i_ds,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute network_migration_execution_id
+    #   <p>The unique identifier of the network migration execution.</p>
+    #   @return [String]
+    # @!attribute network_migration_definition_id
+    #   <p>The unique identifier of the network migration definition.</p>
+    #   @return [String]
+    # @!attribute filters
+    #   <p>Filters to apply when listing code generation jobs.</p>
+    #   @return [Types::ListNetworkMigrationCodeGenerationsFilters]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return in a single call.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The token for the next page of results.</p>
+    #   @return [String]
+    class ListNetworkMigrationCodeGenerationsRequest < Struct.new(
+      nil,
+      :network_migration_execution_id,
+      :network_migration_definition_id,
+      :filters,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute items
+    #   <p>A list of network migration code generation job details.</p>
+    #   @return [Array<Types::NetworkMigrationCodeGenerationJobDetails>]
+    # @!attribute next_token
+    #   <p>The token to use to retrieve the next page of results. This value is null when there are no more results to return.</p>
+    #   @return [String]
+    class ListNetworkMigrationCodeGenerationsResponse < Struct.new(
+      nil,
+      :items,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute filters
+    #   <p>Filters to apply when listing network migration definitions.</p>
+    #   @return [Types::ListNetworkMigrationDefinitionsRequestFilters]
+    # @!attribute next_token
+    #   <p>The token for the next page of results.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return in a single call.</p>
+    #   @return [Integer]
+    class ListNetworkMigrationDefinitionsRequest < Struct.new(
+      nil,
+      :filters,
+      :next_token,
+      :max_results,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Filters for listing network migration definitions.</p>
+    # @!attribute network_migration_definition_i_ds
+    #   <p>A list of definition IDs to filter by.</p>
+    #   @return [Array<String>]
+    class ListNetworkMigrationDefinitionsRequestFilters < Struct.new(
+      nil,
+      :network_migration_definition_i_ds,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute items
+    #   <p>A list of network migration definition summaries.</p>
+    #   @return [Array<Types::NetworkMigrationDefinitionSummary>]
+    # @!attribute next_token
+    #   <p>The token to use to retrieve the next page of results. This value is null when there are no more results to return.</p>
+    #   @return [String]
+    class ListNetworkMigrationDefinitionsResponse < Struct.new(
+      nil,
+      :items,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute network_migration_execution_id
+    #   <p>The unique identifier of the network migration execution.</p>
+    #   @return [String]
+    # @!attribute network_migration_definition_id
+    #   <p>The unique identifier of the network migration definition.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return in a single call.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The token for the next page of results.</p>
+    #   @return [String]
+    class ListNetworkMigrationDeployedStacksRequest < Struct.new(
+      nil,
+      :network_migration_execution_id,
+      :network_migration_definition_id,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute items
+    #   <p>A list of deployed stack details including status and resources.</p>
+    #   @return [Array<Types::NetworkMigrationDeployedStackDetails>]
+    # @!attribute next_token
+    #   <p>The token to use to retrieve the next page of results. This value is null when there are no more results to return.</p>
+    #   @return [String]
+    class ListNetworkMigrationDeployedStacksResponse < Struct.new(
+      nil,
+      :items,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Filters for listing deployer jobs.</p>
+    # @!attribute job_i_ds
+    #   <p>A list of job IDs to filter by.</p>
+    #   @return [Array<String>]
+    class ListNetworkMigrationDeployerJobFilters < Struct.new(
+      nil,
+      :job_i_ds,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute items
+    #   <p>A list of deployer job details.</p>
+    #   @return [Array<Types::NetworkMigrationDeployerJobDetails>]
+    # @!attribute next_token
+    #   <p>The token to use to retrieve the next page of results. This value is null when there are no more results to return.</p>
+    #   @return [String]
+    class ListNetworkMigrationDeploymentsOutput < Struct.new(
+      nil,
+      :items,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute network_migration_execution_id
+    #   <p>The unique identifier of the network migration execution.</p>
+    #   @return [String]
+    # @!attribute network_migration_definition_id
+    #   <p>The unique identifier of the network migration definition.</p>
+    #   @return [String]
+    # @!attribute filters
+    #   <p>Filters to apply when listing deployment jobs.</p>
+    #   @return [Types::ListNetworkMigrationDeployerJobFilters]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return in a single call.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The token for the next page of results.</p>
+    #   @return [String]
+    class ListNetworkMigrationDeploymentsRequest < Struct.new(
+      nil,
+      :network_migration_execution_id,
+      :network_migration_definition_id,
+      :filters,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Filters for listing network migration executions.</p>
+    # @!attribute network_migration_execution_i_ds
+    #   <p>A list of execution IDs to filter by.</p>
+    #   @return [Array<String>]
+    # @!attribute network_migration_execution_statuses
+    #   <p>A list of execution statuses to filter by.</p>
+    #   @return [Array<String>]
+    class ListNetworkMigrationExecutionRequestFilters < Struct.new(
+      nil,
+      :network_migration_execution_i_ds,
+      :network_migration_execution_statuses,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute network_migration_definition_id
+    #   <p>The unique identifier of the network migration definition to list executions for.</p>
+    #   @return [String]
+    # @!attribute filters
+    #   <p>Filters to apply when listing executions, such as status or execution ID.</p>
+    #   @return [Types::ListNetworkMigrationExecutionRequestFilters]
+    # @!attribute next_token
+    #   <p>The token for the next page of results.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return in a single call.</p>
+    #   @return [Integer]
+    class ListNetworkMigrationExecutionsRequest < Struct.new(
+      nil,
+      :network_migration_definition_id,
+      :filters,
+      :next_token,
+      :max_results,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute items
+    #   <p>A list of network migration execution details.</p>
+    #   @return [Array<Types::NetworkMigrationExecution>]
+    # @!attribute next_token
+    #   <p>The token to use to retrieve the next page of results. This value is null when there are no more results to return.</p>
+    #   @return [String]
+    class ListNetworkMigrationExecutionsResponse < Struct.new(
+      nil,
+      :items,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Filters for listing mapper segment constructs.</p>
+    # @!attribute construct_i_ds
+    #   <p>A list of construct IDs to filter by.</p>
+    #   @return [Array<String>]
+    # @!attribute construct_types
+    #   <p>A list of construct types to filter by.</p>
+    #   @return [Array<String>]
+    class ListNetworkMigrationMapperSegmentConstructsFilters < Struct.new(
+      nil,
+      :construct_i_ds,
+      :construct_types,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute network_migration_execution_id
+    #   <p>The unique identifier of the network migration execution.</p>
+    #   @return [String]
+    # @!attribute network_migration_definition_id
+    #   <p>The unique identifier of the network migration definition.</p>
+    #   @return [String]
+    # @!attribute segment_id
+    #   <p>The unique identifier of the segment to list constructs for.</p>
+    #   @return [String]
+    # @!attribute filters
+    #   <p>Filters to apply when listing constructs, such as construct type or ID.</p>
+    #   @return [Types::ListNetworkMigrationMapperSegmentConstructsFilters]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return in a single call.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The token for the next page of results.</p>
+    #   @return [String]
+    class ListNetworkMigrationMapperSegmentConstructsRequest < Struct.new(
+      nil,
+      :network_migration_execution_id,
+      :network_migration_definition_id,
+      :segment_id,
+      :filters,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute items
+    #   <p>A list of mapper segment constructs.</p>
+    #   @return [Array<Types::NetworkMigrationMapperSegmentConstruct>]
+    # @!attribute next_token
+    #   <p>The token to use to retrieve the next page of results. This value is null when there are no more results to return.</p>
+    #   @return [String]
+    class ListNetworkMigrationMapperSegmentConstructsResponse < Struct.new(
+      nil,
+      :items,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Filters for listing mapper segments.</p>
+    # @!attribute segment_i_ds
+    #   <p>A list of segment IDs to filter by.</p>
+    #   @return [Array<String>]
+    class ListNetworkMigrationMapperSegmentsFilters < Struct.new(
+      nil,
+      :segment_i_ds,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute network_migration_execution_id
+    #   <p>The unique identifier of the network migration execution.</p>
+    #   @return [String]
+    # @!attribute network_migration_definition_id
+    #   <p>The unique identifier of the network migration definition.</p>
+    #   @return [String]
+    # @!attribute filters
+    #   <p>Filters to apply when listing segments.</p>
+    #   @return [Types::ListNetworkMigrationMapperSegmentsFilters]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return in a single call.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The token for the next page of results.</p>
+    #   @return [String]
+    class ListNetworkMigrationMapperSegmentsRequest < Struct.new(
+      nil,
+      :network_migration_execution_id,
+      :network_migration_definition_id,
+      :filters,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute items
+    #   <p>A list of mapper segments.</p>
+    #   @return [Array<Types::NetworkMigrationMapperSegment>]
+    # @!attribute next_token
+    #   <p>The token to use to retrieve the next page of results. This value is null when there are no more results to return.</p>
+    #   @return [String]
+    class ListNetworkMigrationMapperSegmentsResponse < Struct.new(
+      nil,
+      :items,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Filters for listing mapping update jobs.</p>
+    # @!attribute job_i_ds
+    #   <p>A list of job IDs to filter by.</p>
+    #   @return [Array<String>]
+    class ListNetworkMigrationMappingUpdatesFilters < Struct.new(
+      nil,
+      :job_i_ds,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute network_migration_execution_id
+    #   <p>The unique identifier of the network migration execution.</p>
+    #   @return [String]
+    # @!attribute network_migration_definition_id
+    #   <p>The unique identifier of the network migration definition.</p>
+    #   @return [String]
+    # @!attribute filters
+    #   <p>Filters to apply when listing mapping update jobs.</p>
+    #   @return [Types::ListNetworkMigrationMappingUpdatesFilters]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return in a single call.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The token for the next page of results.</p>
+    #   @return [String]
+    class ListNetworkMigrationMappingUpdatesRequest < Struct.new(
+      nil,
+      :network_migration_execution_id,
+      :network_migration_definition_id,
+      :filters,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute items
+    #   <p>A list of mapping update job details.</p>
+    #   @return [Array<Types::NetworkMigrationMappingUpdateJobDetails>]
+    # @!attribute next_token
+    #   <p>The token to use to retrieve the next page of results. This value is null when there are no more results to return.</p>
+    #   @return [String]
+    class ListNetworkMigrationMappingUpdatesResponse < Struct.new(
+      nil,
+      :items,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Filters for listing network migration mapping jobs.</p>
+    # @!attribute job_i_ds
+    #   <p>A list of job IDs to filter by.</p>
+    #   @return [Array<String>]
+    class ListNetworkMigrationMappingsFilters < Struct.new(
+      nil,
+      :job_i_ds,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute network_migration_execution_id
+    #   <p>The unique identifier of the network migration execution.</p>
+    #   @return [String]
+    # @!attribute network_migration_definition_id
+    #   <p>The unique identifier of the network migration definition.</p>
+    #   @return [String]
+    # @!attribute filters
+    #   <p>Filters to apply when listing mapping jobs.</p>
+    #   @return [Types::ListNetworkMigrationMappingsFilters]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return in a single call.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The token for the next page of results.</p>
+    #   @return [String]
+    class ListNetworkMigrationMappingsRequest < Struct.new(
+      nil,
+      :network_migration_execution_id,
+      :network_migration_definition_id,
+      :filters,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute items
+    #   <p>A list of network migration mapping job details.</p>
+    #   @return [Array<Types::NetworkMigrationMappingJobDetails>]
+    # @!attribute next_token
+    #   <p>The token to use to retrieve the next page of results. This value is null when there are no more results to return.</p>
+    #   @return [String]
+    class ListNetworkMigrationMappingsResponse < Struct.new(
       nil,
       :items,
       :next_token,
@@ -3178,6 +4372,34 @@ module Aws::Mgn
       include ::Smithy::Schema::Structure
     end
 
+    # <p>A construct reference specifying the source segment and construct to merge.</p>
+    # @!attribute segment_id
+    #   <p>The segment ID of the construct to merge.</p>
+    #   @return [String]
+    # @!attribute construct_id
+    #   <p>The construct ID to merge.</p>
+    #   @return [String]
+    class MergeConstruct < Struct.new(
+      nil,
+      :segment_id,
+      :construct_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>An operation that merges constructs from different segments into the target construct.</p>
+    # @!attribute merge_constructs
+    #   <p>The list of constructs to merge into the target.</p>
+    #   @return [Array<Types::MergeConstruct>]
+    class MergeOperation < Struct.new(
+      nil,
+      :merge_constructs,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Network interface.</p>
     # @!attribute mac_address
     #   <p>Network interface Mac address.</p>
@@ -3198,6 +4420,581 @@ module Aws::Mgn
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Details about a network migration analysis job.</p>
+    # @!attribute job_id
+    #   <p>The unique identifier of the analysis job.</p>
+    #   @return [String]
+    # @!attribute network_migration_execution_id
+    #   <p>The unique identifier of the network migration execution.</p>
+    #   @return [String]
+    # @!attribute network_migration_definition_id
+    #   <p>The unique identifier of the network migration definition.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The timestamp when the job was created.</p>
+    #   @return [Time]
+    # @!attribute ended_at
+    #   <p>The timestamp when the job completed or failed.</p>
+    #   @return [Time]
+    # @!attribute status
+    #   <p>The current status of the analysis job.</p>
+    #   @return [String]
+    # @!attribute status_details
+    #   <p>Detailed status information about the job.</p>
+    #   @return [String]
+    class NetworkMigrationAnalysisJobDetails < Struct.new(
+      nil,
+      :job_id,
+      :network_migration_execution_id,
+      :network_migration_definition_id,
+      :created_at,
+      :ended_at,
+      :status,
+      :status_details,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The result of a network migration analysis operation.</p>
+    # @!attribute job_id
+    #   <p>The unique identifier of the analysis job that generated this result.</p>
+    #   @return [String]
+    # @!attribute network_migration_execution_id
+    #   <p>The unique identifier of the network migration execution.</p>
+    #   @return [String]
+    # @!attribute network_migration_definition_id
+    #   <p>The unique identifier of the network migration definition.</p>
+    #   @return [String]
+    # @!attribute analyzer_type
+    #   <p>The type of analyzer that generated this result.</p>
+    #   @return [String]
+    # @!attribute source
+    #   <p>The source resource that was analyzed.</p>
+    #   @return [Types::NetworkMigrationAnalysisResultSource]
+    # @!attribute target
+    #   <p>The target resource in the analysis.</p>
+    #   @return [Types::NetworkMigrationAnalysisResultTarget]
+    # @!attribute status
+    #   <p>The status of the analysis result.</p>
+    #   @return [String]
+    # @!attribute analysis_result
+    #   <p>The detailed analysis findings and recommendations.</p>
+    #   @return [String]
+    class NetworkMigrationAnalysisResult < Struct.new(
+      nil,
+      :job_id,
+      :network_migration_execution_id,
+      :network_migration_definition_id,
+      :analyzer_type,
+      :source,
+      :target,
+      :status,
+      :analysis_result,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The source resource information for an analysis result.</p>
+    # @!attribute vpc_id
+    #   <p>The VPC ID of the source resource.</p>
+    #   @return [String]
+    # @!attribute subnet_id
+    #   <p>The subnet ID of the source resource.</p>
+    #   @return [String]
+    class NetworkMigrationAnalysisResultSource < Struct.new(
+      nil,
+      :vpc_id,
+      :subnet_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The target resource information for an analysis result.</p>
+    # @!attribute vpc_id
+    #   <p>The VPC ID of the target resource.</p>
+    #   @return [String]
+    # @!attribute subnet_id
+    #   <p>The subnet ID of the target resource.</p>
+    #   @return [String]
+    class NetworkMigrationAnalysisResultTarget < Struct.new(
+      nil,
+      :vpc_id,
+      :subnet_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>An artifact generated during code generation, such as a CloudFormation template or Terraform file.</p>
+    # @!attribute artifact_id
+    #   <p>The unique identifier of the artifact.</p>
+    #   @return [String]
+    # @!attribute artifact_type
+    #   <p>The type of the generated artifact.</p>
+    #   @return [String]
+    # @!attribute artifact_sub_type
+    #   <p>The sub-type of the artifact for further classification.</p>
+    #   @return [String]
+    # @!attribute logical_id
+    #   <p>The logical identifier for the artifact.</p>
+    #   @return [String]
+    # @!attribute output_s3_configuration
+    #   <p>The S3 location where the artifact is stored.</p>
+    #   @return [Types::S3Configuration]
+    # @!attribute checksum
+    #   <p>The checksum of the artifact for integrity verification.</p>
+    #   @return [Types::Checksum]
+    # @!attribute created_at
+    #   <p>The timestamp when the artifact was created.</p>
+    #   @return [Time]
+    class NetworkMigrationCodeGenerationArtifact < Struct.new(
+      nil,
+      :artifact_id,
+      :artifact_type,
+      :artifact_sub_type,
+      :logical_id,
+      :output_s3_configuration,
+      :checksum,
+      :created_at,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Details about a network migration code generation job.</p>
+    # @!attribute job_id
+    #   <p>The unique identifier of the code generation job.</p>
+    #   @return [String]
+    # @!attribute network_migration_execution_id
+    #   <p>The unique identifier of the network migration execution.</p>
+    #   @return [String]
+    # @!attribute network_migration_definition_id
+    #   <p>The unique identifier of the network migration definition.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The timestamp when the job was created.</p>
+    #   @return [Time]
+    # @!attribute ended_at
+    #   <p>The timestamp when the job completed or failed.</p>
+    #   @return [Time]
+    # @!attribute status
+    #   <p>The current status of the code generation job.</p>
+    #   @return [String]
+    # @!attribute status_details
+    #   <p>Detailed status information about the job.</p>
+    #   @return [String]
+    # @!attribute code_generation_output_format_status_details_map
+    #   <p>A map of output format types to their status details.</p>
+    #   @return [Hash<String, Types::CodeGenerationOutputFormatStatusDetails>]
+    class NetworkMigrationCodeGenerationJobDetails < Struct.new(
+      nil,
+      :job_id,
+      :network_migration_execution_id,
+      :network_migration_definition_id,
+      :created_at,
+      :ended_at,
+      :status,
+      :status_details,
+      :code_generation_output_format_status_details_map,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A segment of generated code representing a logical grouping of infrastructure resources.</p>
+    # @!attribute job_id
+    #   <p>The unique identifier of the code generation job.</p>
+    #   @return [String]
+    # @!attribute network_migration_execution_id
+    #   <p>The unique identifier of the network migration execution.</p>
+    #   @return [String]
+    # @!attribute network_migration_definition_id
+    #   <p>The unique identifier of the network migration definition.</p>
+    #   @return [String]
+    # @!attribute segment_id
+    #   <p>The unique identifier of the segment.</p>
+    #   @return [String]
+    # @!attribute segment_type
+    #   <p>The type of the segment.</p>
+    #   @return [String]
+    # @!attribute logical_id
+    #   <p>The logical identifier for the segment.</p>
+    #   @return [String]
+    # @!attribute mapper_segment_id
+    #   <p>The ID of the mapper segment that this code generation segment was created from.</p>
+    #   @return [String]
+    # @!attribute artifacts
+    #   <p>A list of artifacts generated for this segment.</p>
+    #   @return [Array<Types::NetworkMigrationCodeGenerationArtifact>]
+    # @!attribute referenced_segments
+    #   <p>A list of other segments that this segment depends on or references.</p>
+    #   @return [Array<String>]
+    # @!attribute created_at
+    #   <p>The timestamp when the segment was created.</p>
+    #   @return [Time]
+    class NetworkMigrationCodeGenerationSegment < Struct.new(
+      nil,
+      :job_id,
+      :network_migration_execution_id,
+      :network_migration_definition_id,
+      :segment_id,
+      :segment_type,
+      :logical_id,
+      :mapper_segment_id,
+      :artifacts,
+      :referenced_segments,
+      :created_at,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A summary of a network migration definition.</p>
+    # @!attribute network_migration_definition_id
+    #   <p>The unique identifier of the network migration definition.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the network migration definition.</p>
+    #   @return [String]
+    # @!attribute source_environment
+    #   <p>The source environment configuration.</p>
+    #   @return [String]
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the network migration definition.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>Tags assigned to the network migration definition.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute scope_tags
+    #   <p>Scope tags for the network migration definition.</p>
+    #   @return [Hash<String, String>]
+    class NetworkMigrationDefinitionSummary < Struct.new(
+      nil,
+      :network_migration_definition_id,
+      :name,
+      :source_environment,
+      :arn,
+      :tags,
+      :scope_tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Details about a CloudFormation stack that has been deployed as part of the network migration.</p>
+    # @!attribute status
+    #   <p>The current status of the deployed stack.</p>
+    #   @return [String]
+    # @!attribute stack_physical_id
+    #   <p>The physical ID of the CloudFormation stack.</p>
+    #   @return [String]
+    # @!attribute stack_logical_id
+    #   <p>The logical ID of the stack.</p>
+    #   @return [String]
+    # @!attribute segment_id
+    #   <p>The ID of the segment that this stack was deployed for.</p>
+    #   @return [String]
+    # @!attribute target_account
+    #   <p>The target AWS account where the stack was deployed.</p>
+    #   @return [String]
+    # @!attribute failed_resources
+    #   <p>A list of resources that failed to deploy.</p>
+    #   @return [Array<Types::NetworkMigrationFailedResourceDetails>]
+    class NetworkMigrationDeployedStackDetails < Struct.new(
+      nil,
+      :status,
+      :stack_physical_id,
+      :stack_logical_id,
+      :segment_id,
+      :target_account,
+      :failed_resources,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Details about a network migration deployer job.</p>
+    # @!attribute job_id
+    #   <p>The unique identifier of the deployer job.</p>
+    #   @return [String]
+    # @!attribute network_migration_execution_id
+    #   <p>The unique identifier of the network migration execution.</p>
+    #   @return [String]
+    # @!attribute network_migration_definition_id
+    #   <p>The unique identifier of the network migration definition.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The timestamp when the job was created.</p>
+    #   @return [Time]
+    # @!attribute ended_at
+    #   <p>The timestamp when the job completed or failed.</p>
+    #   @return [Time]
+    # @!attribute status
+    #   <p>The current status of the deployer job.</p>
+    #   @return [String]
+    # @!attribute status_details
+    #   <p>Detailed status information about the job.</p>
+    #   @return [String]
+    class NetworkMigrationDeployerJobDetails < Struct.new(
+      nil,
+      :job_id,
+      :network_migration_execution_id,
+      :network_migration_definition_id,
+      :created_at,
+      :ended_at,
+      :status,
+      :status_details,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Details about a network migration execution instance.</p>
+    # @!attribute network_migration_definition_id
+    #   <p>The unique identifier of the network migration definition used by this execution.</p>
+    #   @return [String]
+    # @!attribute network_migration_execution_id
+    #   <p>The unique identifier of the execution.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the execution.</p>
+    #   @return [String]
+    # @!attribute stage
+    #   <p>The current stage of the execution in the migration workflow.</p>
+    #   @return [String]
+    # @!attribute activity
+    #   <p>The current activity being performed in the execution.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The timestamp when the execution was created.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The timestamp when the execution was last updated.</p>
+    #   @return [Time]
+    # @!attribute tags
+    #   <p>Tags assigned to the execution.</p>
+    #   @return [Hash<String, String>]
+    class NetworkMigrationExecution < Struct.new(
+      nil,
+      :network_migration_definition_id,
+      :network_migration_execution_id,
+      :status,
+      :stage,
+      :activity,
+      :created_at,
+      :updated_at,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Details about a resource that failed to deploy.</p>
+    # @!attribute logical_id
+    #   <p>The logical ID of the failed resource.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status of the failed resource.</p>
+    #   @return [String]
+    # @!attribute status_reason
+    #   <p>The reason why the resource failed.</p>
+    #   @return [String]
+    class NetworkMigrationFailedResourceDetails < Struct.new(
+      nil,
+      :logical_id,
+      :status,
+      :status_reason,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute job_id
+    #   <p>The unique identifier of the job that created this segment.</p>
+    #   @return [String]
+    # @!attribute network_migration_execution_id
+    #   <p>The unique identifier of the network migration execution.</p>
+    #   @return [String]
+    # @!attribute network_migration_definition_id
+    #   <p>The unique identifier of the network migration definition.</p>
+    #   @return [String]
+    # @!attribute segment_id
+    #   <p>The unique identifier of the segment.</p>
+    #   @return [String]
+    # @!attribute segment_type
+    #   <p>The category of the network migration segment. A segment groups the network constructs (such as VPCs, subnets, and security groups) that are migrated together. Valid values: <code>WORKLOAD</code>, <code>APPLIANCE</code>.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the segment.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>A description of the segment.</p>
+    #   @return [String]
+    # @!attribute logical_id
+    #   <p>The logical identifier for the segment in the infrastructure code.</p>
+    #   @return [String]
+    # @!attribute checksum
+    #   <p>The checksum of the segment data for integrity verification.</p>
+    #   @return [Types::Checksum]
+    # @!attribute output_s3_configuration
+    #   <p>The S3 location where segment artifacts are stored.</p>
+    #   @return [Types::S3Configuration]
+    # @!attribute created_at
+    #   <p>The timestamp when the segment was created.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The timestamp when the segment was last updated.</p>
+    #   @return [Time]
+    # @!attribute scope_tags
+    #   <p>Scope tags for the segment.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute target_account
+    #   <p>The target AWS account where this segment will be deployed.</p>
+    #   @return [String]
+    # @!attribute referenced_segments
+    #   <p>A list of other segments that this segment depends on or references.</p>
+    #   @return [Array<String>]
+    class NetworkMigrationMapperSegment < Struct.new(
+      nil,
+      :job_id,
+      :network_migration_execution_id,
+      :network_migration_definition_id,
+      :segment_id,
+      :segment_type,
+      :name,
+      :description,
+      :logical_id,
+      :checksum,
+      :output_s3_configuration,
+      :created_at,
+      :updated_at,
+      :scope_tags,
+      :target_account,
+      :referenced_segments,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Represents a construct within a mapper segment. A construct is an individual infrastructure component such as a VPC, subnet, security group, route table, or other network resource that is part of the network migration.</p>
+    # @!attribute construct_id
+    #   <p>The unique identifier of the construct.</p>
+    #   @return [String]
+    # @!attribute construct_type
+    #   <p>The type of the construct, such as VPC, subnet, security group, or route table.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the construct.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>A description of the construct.</p>
+    #   @return [String]
+    # @!attribute logical_id
+    #   <p>The logical identifier for the construct in the infrastructure code.</p>
+    #   @return [String]
+    # @!attribute excluded
+    #   <p>Whether this construct is excluded from the migration.</p>
+    #   @return [Boolean]
+    # @!attribute created_at
+    #   <p>The timestamp when the construct was created.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The timestamp when the construct was last updated.</p>
+    #   @return [Time]
+    # @!attribute properties
+    #   <p>The properties and configuration of the construct.</p>
+    #   @return [Hash<String, String>]
+    class NetworkMigrationMapperSegmentConstruct < Struct.new(
+      nil,
+      :construct_id,
+      :construct_type,
+      :name,
+      :description,
+      :logical_id,
+      :excluded,
+      :created_at,
+      :updated_at,
+      :properties,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Details about a network migration mapping job.</p>
+    # @!attribute job_id
+    #   <p>The unique identifier of the mapping job.</p>
+    #   @return [String]
+    # @!attribute network_migration_execution_id
+    #   <p>The unique identifier of the network migration execution.</p>
+    #   @return [String]
+    # @!attribute network_migration_definition_id
+    #   <p>The unique identifier of the network migration definition.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The timestamp when the job was created.</p>
+    #   @return [Time]
+    # @!attribute ended_at
+    #   <p>The timestamp when the job completed or failed.</p>
+    #   @return [Time]
+    # @!attribute status
+    #   <p>The current status of the mapping job.</p>
+    #   @return [String]
+    # @!attribute status_details
+    #   <p>Detailed status information about the job.</p>
+    #   @return [String]
+    class NetworkMigrationMappingJobDetails < Struct.new(
+      nil,
+      :job_id,
+      :network_migration_execution_id,
+      :network_migration_definition_id,
+      :created_at,
+      :ended_at,
+      :status,
+      :status_details,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Details about a network migration mapping update job.</p>
+    # @!attribute job_id
+    #   <p>The unique identifier of the mapping update job.</p>
+    #   @return [String]
+    # @!attribute network_migration_execution_id
+    #   <p>The unique identifier of the network migration execution.</p>
+    #   @return [String]
+    # @!attribute network_migration_definition_id
+    #   <p>The unique identifier of the network migration definition.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The timestamp when the job was created.</p>
+    #   @return [Time]
+    # @!attribute ended_at
+    #   <p>The timestamp when the job completed or failed.</p>
+    #   @return [Time]
+    # @!attribute status
+    #   <p>The current status of the mapping update job.</p>
+    #   @return [String]
+    # @!attribute status_details
+    #   <p>Detailed status information about the job.</p>
+    #   @return [String]
+    class NetworkMigrationMappingUpdateJobDetails < Struct.new(
+      nil,
+      :job_id,
+      :network_migration_execution_id,
+      :network_migration_definition_id,
+      :created_at,
+      :ended_at,
+      :status,
+      :status_details,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Operating System.</p>
     # @!attribute full_string
     #   <p>OS full string.</p>
@@ -3208,6 +5005,36 @@ module Aws::Mgn
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+    end
+
+    # <p>A union type representing the operation to perform on a construct during a mapping update.</p>
+    # @!attribute merge
+    #   <p>A merge operation to combine constructs from different segments.</p>
+    #   @return [Types::MergeOperation]
+    # @!attribute split
+    #   <p>A split operation to divide a construct into multiple constructs with specified CIDR blocks.</p>
+    #   @return [Types::SplitOperation]
+    # @!attribute delete
+    #   <p>A delete operation to remove a construct from the mapping.</p>
+    #   @return [Types::DeleteOperation]
+    # @!attribute update
+    #   <p>An update operation to modify construct properties.</p>
+    #   @return [Types::UpdateOperation]
+    class OperationUnion < Struct.new(
+      :merge,
+      :split,
+      :delete,
+      :update,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class Merge < OperationUnion; end
+      class Split < OperationUnion; end
+      class Delete < OperationUnion; end
+      class Update < OperationUnion; end
+      class Unknown < OperationUnion; end
     end
 
     # <p>Server participating in Job.</p>
@@ -3312,7 +5139,7 @@ module Aws::Mgn
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Post Launch Actions to executed on the Test or Cutover instance.</p>
+    # <p>Post Launch Actions to be executed on the Test or Cutover instance.</p>
     # @!attribute deployment
     #   <p>Deployment type in which AWS Systems Manager Documents will be executed.</p>
     #   @return [String]
@@ -3726,6 +5553,15 @@ module Aws::Mgn
     # @!attribute tags
     #   <p>Replication Configuration template Tags.</p>
     #   @return [Hash<String, String>]
+    # @!attribute internet_protocol
+    #   <p>Replication Configuration template internet protocol.</p>
+    #   @return [String]
+    # @!attribute store_snapshot_on_local_zone
+    #   <p>Replication Configuration template store snapshot on local zone.</p>
+    #   @return [Boolean]
+    # @!attribute storage_configuration
+    #   <p>Replication Configuration template storage configuration.</p>
+    #   @return [Types::StorageConfiguration]
     class ReplicationConfigurationTemplate < Struct.new(
       nil,
       :replication_configuration_template_id,
@@ -3744,6 +5580,9 @@ module Aws::Mgn
       :staging_area_tags,
       :use_fips_endpoint,
       :tags,
+      :internet_protocol,
+      :store_snapshot_on_local_zone,
+      :storage_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3952,7 +5791,27 @@ module Aws::Mgn
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The request could not be completed because its exceeded the service quota.</p>
+    # <p>Configuration for an S3 location.</p>
+    # @!attribute s3_bucket
+    #   <p>The name of the S3 bucket.</p>
+    #   @return [String]
+    # @!attribute s3_bucket_owner
+    #   <p>The AWS account ID of the S3 bucket owner.</p>
+    #   @return [String]
+    # @!attribute s3_key
+    #   <p>The S3 key (path) for the object.</p>
+    #   @return [String]
+    class S3Configuration < Struct.new(
+      nil,
+      :s3_bucket,
+      :s3_bucket_owner,
+      :s3_key,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The request could not be completed because it exceeded the service quota.</p>
     # @!attribute message
     #   @return [String]
     # @!attribute code
@@ -3981,6 +5840,22 @@ module Aws::Mgn
       :service_code,
       :quota_code,
       :quota_value,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration for a migration source environment.</p>
+    # @!attribute source_environment
+    #   <p>The source environment type.</p>
+    #   @return [String]
+    # @!attribute source_s3_configuration
+    #   <p>The S3 configuration for the source data.</p>
+    #   @return [Types::SourceS3Configuration]
+    class SourceConfiguration < Struct.new(
+      nil,
+      :source_environment,
+      :source_s3_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4029,6 +5904,26 @@ module Aws::Mgn
         options[:ram_bytes] = 0 unless options.key?(:ram_bytes)
         super
       end
+    end
+
+    # <p>S3 configuration for source network data.</p>
+    # @!attribute s3_bucket
+    #   <p>The name of the S3 bucket containing source data.</p>
+    #   @return [String]
+    # @!attribute s3_bucket_owner
+    #   <p>The AWS account ID of the S3 bucket owner.</p>
+    #   @return [String]
+    # @!attribute s3_key
+    #   <p>The S3 key (path) for the source data.</p>
+    #   @return [String]
+    class SourceS3Configuration < Struct.new(
+      nil,
+      :s3_bucket,
+      :s3_bucket_owner,
+      :s3_key,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_server_id
@@ -4177,6 +6072,30 @@ module Aws::Mgn
       include ::Smithy::Schema::Structure
     end
 
+    # <p>A split target specifying the CIDR block for the new construct.</p>
+    # @!attribute cidr_block
+    #   <p>The CIDR block for the split construct.</p>
+    #   @return [String]
+    class SplitConstruct < Struct.new(
+      nil,
+      :cidr_block,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>An operation that splits a construct into multiple constructs with different CIDR blocks.</p>
+    # @!attribute split_constructs
+    #   <p>The list of split targets with their CIDR blocks.</p>
+    #   @return [Array<Types::SplitConstruct>]
+    class SplitOperation < Struct.new(
+      nil,
+      :split_constructs,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>AWS Systems Manager Document.</p>
     # @!attribute action_name
     #   <p>User-friendly name for the AWS Systems Manager Document.</p>
@@ -4280,11 +6199,15 @@ module Aws::Mgn
     # @!attribute s3_bucket_owner
     #   <p>Start export request s3 bucket owner.</p>
     #   @return [String]
+    # @!attribute tags
+    #   <p>Start export request tags.</p>
+    #   @return [Hash<String, String>]
     class StartExportInput < Struct.new(
       nil,
       :s3_bucket,
       :s3_key,
       :s3_bucket_owner,
+      :tags,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4302,6 +6225,40 @@ module Aws::Mgn
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+    #   @return [String]
+    # @!attribute s3_bucket_source
+    #   <p>The S3 configuration specifying the source location of the import file to be enriched.</p>
+    #   @return [Types::EnrichmentSourceS3Configuration]
+    # @!attribute s3_bucket_target
+    #   <p>The S3 configuration specifying the target location where the enriched import file will be stored.</p>
+    #   @return [Types::EnrichmentTargetS3Configuration]
+    # @!attribute ip_assignment_strategy
+    #   <p>The IP assignment strategy to use when enriching the import file. Can be STATIC or DYNAMIC.</p>
+    #   @return [String]
+    class StartImportFileEnrichmentRequest < Struct.new(
+      nil,
+      :client_token,
+      :s3_bucket_source,
+      :s3_bucket_target,
+      :ip_assignment_strategy,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute job_id
+    #   <p>The unique identifier of the import file enrichment job that was started.</p>
+    #   @return [String]
+    class StartImportFileEnrichmentResponse < Struct.new(
+      nil,
+      :job_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Start import request.</p>
     # @!attribute client_token
     #   <p>Start import request client token.</p>
@@ -4309,10 +6266,14 @@ module Aws::Mgn
     # @!attribute s3_bucket_source
     #   <p>Start import request s3 bucket source.</p>
     #   @return [Types::S3BucketSource]
+    # @!attribute tags
+    #   <p>Start import request tags.</p>
+    #   @return [Hash<String, String>]
     class StartImportInput < Struct.new(
       nil,
       :client_token,
       :s3_bucket_source,
+      :tags,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4325,6 +6286,196 @@ module Aws::Mgn
     class StartImportOutput < Struct.new(
       nil,
       :import_task,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute network_migration_execution_id
+    #   <p>The unique identifier of the network migration execution to analyze.</p>
+    #   @return [String]
+    # @!attribute network_migration_definition_id
+    #   <p>The unique identifier of the network migration definition.</p>
+    #   @return [String]
+    class StartNetworkMigrationAnalysisRequest < Struct.new(
+      nil,
+      :network_migration_execution_id,
+      :network_migration_definition_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute job_id
+    #   <p>The unique identifier of the analysis job that was started.</p>
+    #   @return [String]
+    class StartNetworkMigrationAnalysisResponse < Struct.new(
+      nil,
+      :job_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute network_migration_execution_id
+    #   <p>The unique identifier of the network migration execution.</p>
+    #   @return [String]
+    # @!attribute network_migration_definition_id
+    #   <p>The unique identifier of the network migration definition.</p>
+    #   @return [String]
+    # @!attribute code_generation_output_format_types
+    #   <p>The output format types for code generation, such as CloudFormation or Terraform.</p>
+    #   @return [Array<String>]
+    class StartNetworkMigrationCodeGenerationRequest < Struct.new(
+      nil,
+      :network_migration_execution_id,
+      :network_migration_definition_id,
+      :code_generation_output_format_types,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute job_id
+    #   <p>The unique identifier of the code generation job that was started.</p>
+    #   @return [String]
+    class StartNetworkMigrationCodeGenerationResponse < Struct.new(
+      nil,
+      :job_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute job_id
+    #   <p>The unique identifier of the deployer job that was started.</p>
+    #   @return [String]
+    class StartNetworkMigrationDeploymentOutput < Struct.new(
+      nil,
+      :job_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute network_migration_execution_id
+    #   <p>The unique identifier of the network migration execution.</p>
+    #   @return [String]
+    # @!attribute network_migration_definition_id
+    #   <p>The unique identifier of the network migration definition.</p>
+    #   @return [String]
+    class StartNetworkMigrationDeploymentRequest < Struct.new(
+      nil,
+      :network_migration_execution_id,
+      :network_migration_definition_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute network_migration_execution_id
+    #   <p>The unique identifier of the network migration execution.</p>
+    #   @return [String]
+    # @!attribute network_migration_definition_id
+    #   <p>The unique identifier of the network migration definition.</p>
+    #   @return [String]
+    # @!attribute security_group_mapping_strategy
+    #   <p>The security group mapping strategy to use.</p>
+    #   @return [String]
+    class StartNetworkMigrationMappingRequest < Struct.new(
+      nil,
+      :network_migration_execution_id,
+      :network_migration_definition_id,
+      :security_group_mapping_strategy,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute job_id
+    #   <p>The unique identifier of the mapping job that was started.</p>
+    #   @return [String]
+    class StartNetworkMigrationMappingResponse < Struct.new(
+      nil,
+      :job_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A construct update to apply during a mapping update operation.</p>
+    # @!attribute segment_id
+    #   <p>The ID of the segment containing the construct.</p>
+    #   @return [String]
+    # @!attribute construct_id
+    #   <p>The ID of the construct to update.</p>
+    #   @return [String]
+    # @!attribute construct_type
+    #   <p>The type of the construct.</p>
+    #   @return [String]
+    # @!attribute operation
+    #   <p>The operation to perform on the construct.</p>
+    #   @return [Types::OperationUnion]
+    class StartNetworkMigrationMappingUpdateConstruct < Struct.new(
+      nil,
+      :segment_id,
+      :construct_id,
+      :construct_type,
+      :operation,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute network_migration_execution_id
+    #   <p>The unique identifier of the network migration execution.</p>
+    #   @return [String]
+    # @!attribute network_migration_definition_id
+    #   <p>The unique identifier of the network migration definition.</p>
+    #   @return [String]
+    # @!attribute constructs
+    #   <p>A list of construct updates to apply.</p>
+    #   @return [Array<Types::StartNetworkMigrationMappingUpdateConstruct>]
+    # @!attribute segments
+    #   <p>A list of segment updates to apply.</p>
+    #   @return [Array<Types::StartNetworkMigrationMappingUpdateSegment>]
+    class StartNetworkMigrationMappingUpdateRequest < Struct.new(
+      nil,
+      :network_migration_execution_id,
+      :network_migration_definition_id,
+      :constructs,
+      :segments,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute job_id
+    #   <p>The unique identifier of the mapping update job that was started.</p>
+    #   @return [String]
+    class StartNetworkMigrationMappingUpdateResponse < Struct.new(
+      nil,
+      :job_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A segment update to apply during a mapping update operation.</p>
+    # @!attribute segment_id
+    #   <p>The ID of the segment to update.</p>
+    #   @return [String]
+    # @!attribute target_account
+    #   <p>The updated target AWS account for the segment.</p>
+    #   @return [String]
+    # @!attribute scope_tags
+    #   <p>The updated scope tags for the segment.</p>
+    #   @return [Hash<String, String>]
+    class StartNetworkMigrationMappingUpdateSegment < Struct.new(
+      nil,
+      :segment_id,
+      :target_account,
+      :scope_tags,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4516,6 +6667,22 @@ module Aws::Mgn
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Storage configuration for replication.</p>
+    # @!attribute storage_type
+    #   <p>Storage configuration storage type.</p>
+    #   @return [String]
+    # @!attribute fsx_ontap_configuration
+    #   <p>Storage configuration FSx ONTAP configuration.</p>
+    #   @return [Types::FsxOntapConfiguration]
+    class StorageConfiguration < Struct.new(
+      nil,
+      :storage_type,
+      :fsx_ontap_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute resource_arn
     #   <p>Tag resource by ARN.</p>
     #   @return [String]
@@ -4526,6 +6693,86 @@ module Aws::Mgn
       nil,
       :resource_arn,
       :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration for the target network topology and addressing.</p>
+    # @!attribute topology
+    #   <p>The network topology type for the target environment.</p>
+    #   @return [String]
+    # @!attribute inbound_cidr
+    #   <p>The CIDR block for inbound traffic in the target network.</p>
+    #   @return [String]
+    # @!attribute outbound_cidr
+    #   <p>The CIDR block for outbound traffic in the target network.</p>
+    #   @return [String]
+    # @!attribute inspection_cidr
+    #   <p>The CIDR block for inspection traffic in the target network.</p>
+    #   @return [String]
+    class TargetNetwork < Struct.new(
+      nil,
+      :topology,
+      :inbound_cidr,
+      :outbound_cidr,
+      :inspection_cidr,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Updated configuration for the target network topology and addressing.</p>
+    # @!attribute topology
+    #   <p>The updated network topology type.</p>
+    #   @return [String]
+    # @!attribute inbound_cidr
+    #   <p>The updated CIDR block for inbound traffic.</p>
+    #   @return [String]
+    # @!attribute outbound_cidr
+    #   <p>The updated CIDR block for outbound traffic.</p>
+    #   @return [String]
+    # @!attribute inspection_cidr
+    #   <p>The updated CIDR block for inspection traffic.</p>
+    #   @return [String]
+    class TargetNetworkUpdate < Struct.new(
+      nil,
+      :topology,
+      :inbound_cidr,
+      :outbound_cidr,
+      :inspection_cidr,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>S3 configuration for storing target network artifacts.</p>
+    # @!attribute s3_bucket
+    #   <p>The name of the S3 bucket for target artifacts.</p>
+    #   @return [String]
+    # @!attribute s3_bucket_owner
+    #   <p>The AWS account ID of the S3 bucket owner.</p>
+    #   @return [String]
+    class TargetS3Configuration < Struct.new(
+      nil,
+      :s3_bucket,
+      :s3_bucket_owner,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Updated S3 configuration for storing target network artifacts.</p>
+    # @!attribute s3_bucket
+    #   <p>The updated name of the S3 bucket.</p>
+    #   @return [String]
+    # @!attribute s3_bucket_owner
+    #   <p>The updated AWS account ID of the S3 bucket owner.</p>
+    #   @return [String]
+    class TargetS3ConfigurationUpdate < Struct.new(
+      nil,
+      :s3_bucket,
+      :s3_bucket_owner,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4949,7 +7196,7 @@ module Aws::Mgn
     #   <p>Update Launch configuration boot mode request.</p>
     #   @return [String]
     # @!attribute post_launch_actions
-    #   <p>Post Launch Actions to executed on the Test or Cutover instance.</p>
+    #   <p>Post Launch Actions to be executed on the Test or Cutover instance.</p>
     #   @return [Types::PostLaunchActions]
     # @!attribute enable_map_auto_tagging
     #   <p>Enable map auto tagging.</p>
@@ -5007,7 +7254,7 @@ module Aws::Mgn
     #   <p>Launch configuration boot mode.</p>
     #   @return [String]
     # @!attribute post_launch_actions
-    #   <p>Post Launch Actions to executed on the Test or Cutover instance.</p>
+    #   <p>Post Launch Actions to be executed on the Test or Cutover instance.</p>
     #   @return [Types::PostLaunchActions]
     # @!attribute enable_map_auto_tagging
     #   <p>Enable map auto tagging.</p>
@@ -5076,6 +7323,12 @@ module Aws::Mgn
     # @!attribute large_volume_conf
     #   <p>Large volume config.</p>
     #   @return [Types::LaunchTemplateDiskConf]
+    # @!attribute enable_parameters_encryption
+    #   <p>Enable parameters encryption.</p>
+    #   @return [Boolean]
+    # @!attribute parameters_encryption_key
+    #   <p>Parameters encryption key.</p>
+    #   @return [String]
     class UpdateLaunchConfigurationTemplateInput < Struct.new(
       nil,
       :launch_configuration_template_id,
@@ -5092,6 +7345,8 @@ module Aws::Mgn
       :small_volume_max_size,
       :small_volume_conf,
       :large_volume_conf,
+      :enable_parameters_encryption,
+      :parameters_encryption_key,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5148,6 +7403,12 @@ module Aws::Mgn
     # @!attribute large_volume_conf
     #   <p>Large volume config.</p>
     #   @return [Types::LaunchTemplateDiskConf]
+    # @!attribute enable_parameters_encryption
+    #   <p>Enable parameters encryption.</p>
+    #   @return [Boolean]
+    # @!attribute parameters_encryption_key
+    #   <p>Parameters encryption key.</p>
+    #   @return [String]
     class UpdateLaunchConfigurationTemplateOutput < Struct.new(
       nil,
       :launch_configuration_template_id,
@@ -5167,6 +7428,8 @@ module Aws::Mgn
       :small_volume_max_size,
       :small_volume_conf,
       :large_volume_conf,
+      :enable_parameters_encryption,
+      :parameters_encryption_key,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5175,6 +7438,226 @@ module Aws::Mgn
         options[:small_volume_max_size] = 0 unless options.key?(:small_volume_max_size)
         super
       end
+    end
+
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the network migration definition.</p>
+    #   @return [String]
+    # @!attribute network_migration_definition_id
+    #   <p>The unique identifier of the network migration definition.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the network migration definition.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>A description of the network migration definition.</p>
+    #   @return [String]
+    # @!attribute source_configurations
+    #   <p>A list of source configurations for the network migration.</p>
+    #   @return [Array<Types::SourceConfiguration>]
+    # @!attribute target_s3_configuration
+    #   <p>The S3 configuration for storing the target network artifacts.</p>
+    #   @return [Types::TargetS3Configuration]
+    # @!attribute target_network
+    #   <p>The target network configuration including topology and CIDR ranges.</p>
+    #   @return [Types::TargetNetwork]
+    # @!attribute target_deployment
+    #   <p>The target deployment configuration for the migrated network.</p>
+    #   @return [String]
+    # @!attribute vpc_provisioning_strategy
+    #   <p>Indicates whether the migration creates new target VPCs or uses existing ones. <code>CREATE_NEW</code> provisions new target VPCs; <code>USE_EXISTING</code> migrates into existing VPCs in the target account.</p>
+    #   @return [String]
+    # @!attribute cidr_mappings
+    #   <p>A list of CIDR mappings that map original source CIDR ranges to updated target CIDR ranges. CIDR mappings apply only when <code>vpcProvisioningStrategy</code> is set to <code>USE_EXISTING</code>.</p>
+    #   @return [Array<Types::CidrMapping>]
+    # @!attribute created_at
+    #   <p>The timestamp when the network migration definition was created.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The timestamp when the network migration definition was last updated.</p>
+    #   @return [Time]
+    # @!attribute tags
+    #   <p>Tags assigned to the network migration definition.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute scope_tags
+    #   <p>Scope tags for the network migration definition.</p>
+    #   @return [Hash<String, String>]
+    class UpdateNetworkMigrationDefinitionOutput < Struct.new(
+      nil,
+      :arn,
+      :network_migration_definition_id,
+      :name,
+      :description,
+      :source_configurations,
+      :target_s3_configuration,
+      :target_network,
+      :target_deployment,
+      :vpc_provisioning_strategy,
+      :cidr_mappings,
+      :created_at,
+      :updated_at,
+      :tags,
+      :scope_tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute network_migration_definition_id
+    #   <p>The unique identifier of the network migration definition to update.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The updated name of the network migration definition.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>The updated description of the network migration definition.</p>
+    #   @return [String]
+    # @!attribute source_configurations
+    #   <p>The updated list of source configurations.</p>
+    #   @return [Array<Types::SourceConfiguration>]
+    # @!attribute target_s3_configuration
+    #   <p>The updated S3 configuration for storing the target network artifacts.</p>
+    #   @return [Types::TargetS3ConfigurationUpdate]
+    # @!attribute target_network
+    #   <p>The updated target network configuration.</p>
+    #   @return [Types::TargetNetworkUpdate]
+    # @!attribute target_deployment
+    #   <p>The updated target deployment configuration.</p>
+    #   @return [String]
+    # @!attribute vpc_provisioning_strategy
+    #   <p>Updates whether the migration creates new target VPCs or uses existing ones. Set to <code>USE_EXISTING</code> to migrate into existing VPCs in the target account, or to <code>CREATE_NEW</code> to provision new target VPCs.</p>
+    #   @return [String]
+    # @!attribute cidr_mappings
+    #   <p>The updated list of CIDR mappings that map original source CIDR ranges to updated target CIDR ranges. CIDR mappings can be provided only when <code>vpcProvisioningStrategy</code> is set to <code>USE_EXISTING</code>.</p>
+    #   @return [Array<Types::CidrMapping>]
+    # @!attribute scope_tags
+    #   <p>The updated scope tags for the network migration definition.</p>
+    #   @return [Hash<String, String>]
+    class UpdateNetworkMigrationDefinitionRequest < Struct.new(
+      nil,
+      :network_migration_definition_id,
+      :name,
+      :description,
+      :source_configurations,
+      :target_s3_configuration,
+      :target_network,
+      :target_deployment,
+      :vpc_provisioning_strategy,
+      :cidr_mappings,
+      :scope_tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute job_id
+    #   <p>The unique identifier of the job that created this segment.</p>
+    #   @return [String]
+    # @!attribute network_migration_execution_id
+    #   <p>The unique identifier of the network migration execution.</p>
+    #   @return [String]
+    # @!attribute network_migration_definition_id
+    #   <p>The unique identifier of the network migration definition.</p>
+    #   @return [String]
+    # @!attribute segment_id
+    #   <p>The unique identifier of the segment.</p>
+    #   @return [String]
+    # @!attribute segment_type
+    #   <p>The category of the network migration segment. A segment groups the network constructs (such as VPCs, subnets, and security groups) that are migrated together. Valid values: <code>WORKLOAD</code>, <code>APPLIANCE</code>.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the segment.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>A description of the segment.</p>
+    #   @return [String]
+    # @!attribute logical_id
+    #   <p>The logical identifier for the segment in the infrastructure code.</p>
+    #   @return [String]
+    # @!attribute checksum
+    #   <p>The checksum of the segment data for integrity verification.</p>
+    #   @return [Types::Checksum]
+    # @!attribute output_s3_configuration
+    #   <p>The S3 location where segment artifacts are stored.</p>
+    #   @return [Types::S3Configuration]
+    # @!attribute created_at
+    #   <p>The timestamp when the segment was created.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The timestamp when the segment was last updated.</p>
+    #   @return [Time]
+    # @!attribute scope_tags
+    #   <p>Scope tags for the segment.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute target_account
+    #   <p>The target AWS account where this segment will be deployed.</p>
+    #   @return [String]
+    # @!attribute referenced_segments
+    #   <p>A list of other segments that this segment depends on or references.</p>
+    #   @return [Array<String>]
+    class UpdateNetworkMigrationMapperSegmentOutput < Struct.new(
+      nil,
+      :job_id,
+      :network_migration_execution_id,
+      :network_migration_definition_id,
+      :segment_id,
+      :segment_type,
+      :name,
+      :description,
+      :logical_id,
+      :checksum,
+      :output_s3_configuration,
+      :created_at,
+      :updated_at,
+      :scope_tags,
+      :target_account,
+      :referenced_segments,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute network_migration_definition_id
+    #   <p>The unique identifier of the network migration definition.</p>
+    #   @return [String]
+    # @!attribute network_migration_execution_id
+    #   <p>The unique identifier of the network migration execution.</p>
+    #   @return [String]
+    # @!attribute segment_id
+    #   <p>The unique identifier of the segment to update.</p>
+    #   @return [String]
+    # @!attribute scope_tags
+    #   <p>The updated scope tags for the segment.</p>
+    #   @return [Hash<String, String>]
+    class UpdateNetworkMigrationMapperSegmentRequest < Struct.new(
+      nil,
+      :network_migration_definition_id,
+      :network_migration_execution_id,
+      :segment_id,
+      :scope_tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>An operation that updates the properties of a construct.</p>
+    # @!attribute name
+    #   <p>The updated name for the construct.</p>
+    #   @return [String]
+    # @!attribute excluded
+    #   <p>Whether to exclude this construct from the migration.</p>
+    #   @return [Boolean]
+    # @!attribute properties
+    #   <p>The properties to update on the construct.</p>
+    #   @return [Hash<String, String>]
+    class UpdateOperation < Struct.new(
+      nil,
+      :name,
+      :excluded,
+      :properties,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_server_id
@@ -5228,6 +7711,15 @@ module Aws::Mgn
     # @!attribute account_id
     #   <p>Update replication configuration Account ID request.</p>
     #   @return [String]
+    # @!attribute internet_protocol
+    #   <p>Update replication configuration internet protocol.</p>
+    #   @return [String]
+    # @!attribute store_snapshot_on_local_zone
+    #   <p>Update replication configuration store snapshot on local zone.</p>
+    #   @return [Boolean]
+    # @!attribute storage_configuration
+    #   <p>Update replication configuration storage configuration.</p>
+    #   @return [Types::StorageConfiguration]
     class UpdateReplicationConfigurationInput < Struct.new(
       nil,
       :source_server_id,
@@ -5247,6 +7739,9 @@ module Aws::Mgn
       :staging_area_tags,
       :use_fips_endpoint,
       :account_id,
+      :internet_protocol,
+      :store_snapshot_on_local_zone,
+      :storage_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5300,6 +7795,15 @@ module Aws::Mgn
     # @!attribute use_fips_endpoint
     #   <p>Replication Configuration use Fips Endpoint.</p>
     #   @return [Boolean]
+    # @!attribute internet_protocol
+    #   <p>Replication Configuration internet protocol.</p>
+    #   @return [String]
+    # @!attribute store_snapshot_on_local_zone
+    #   <p>Replication Configuration store snapshot on local zone.</p>
+    #   @return [Boolean]
+    # @!attribute storage_configuration
+    #   <p>Replication Configuration storage configuration.</p>
+    #   @return [Types::StorageConfiguration]
     class UpdateReplicationConfigurationOutput < Struct.new(
       nil,
       :source_server_id,
@@ -5318,6 +7822,9 @@ module Aws::Mgn
       :create_public_ip,
       :staging_area_tags,
       :use_fips_endpoint,
+      :internet_protocol,
+      :store_snapshot_on_local_zone,
+      :storage_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5373,6 +7880,15 @@ module Aws::Mgn
     # @!attribute use_fips_endpoint
     #   <p>Update replication configuration template use Fips Endpoint request.</p>
     #   @return [Boolean]
+    # @!attribute internet_protocol
+    #   <p>Update replication configuration template internet protocol request.</p>
+    #   @return [String]
+    # @!attribute store_snapshot_on_local_zone
+    #   <p>Update replication configuration template store snapshot on local zone request.</p>
+    #   @return [Boolean]
+    # @!attribute storage_configuration
+    #   <p>Update replication configuration template storage configuration request.</p>
+    #   @return [Types::StorageConfiguration]
     class UpdateReplicationConfigurationTemplateInput < Struct.new(
       nil,
       :replication_configuration_template_id,
@@ -5390,6 +7906,9 @@ module Aws::Mgn
       :create_public_ip,
       :staging_area_tags,
       :use_fips_endpoint,
+      :internet_protocol,
+      :store_snapshot_on_local_zone,
+      :storage_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5443,6 +7962,15 @@ module Aws::Mgn
     # @!attribute tags
     #   <p>Replication Configuration template Tags.</p>
     #   @return [Hash<String, String>]
+    # @!attribute internet_protocol
+    #   <p>Replication Configuration template internet protocol.</p>
+    #   @return [String]
+    # @!attribute store_snapshot_on_local_zone
+    #   <p>Replication Configuration template store snapshot on local zone.</p>
+    #   @return [Boolean]
+    # @!attribute storage_configuration
+    #   <p>Replication Configuration template storage configuration.</p>
+    #   @return [Types::StorageConfiguration]
     class UpdateReplicationConfigurationTemplateOutput < Struct.new(
       nil,
       :replication_configuration_template_id,
@@ -5461,6 +7989,9 @@ module Aws::Mgn
       :staging_area_tags,
       :use_fips_endpoint,
       :tags,
+      :internet_protocol,
+      :store_snapshot_on_local_zone,
+      :storage_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5625,11 +8156,23 @@ module Aws::Mgn
     # @!attribute connector_action
     #   <p>Update Source Server request connector action.</p>
     #   @return [Types::SourceServerConnectorAction]
+    # @!attribute user_provided_id
+    #   <p>Update Source Server request user provided ID.</p>
+    #   @return [String]
+    # @!attribute fqdn_for_action_framework
+    #   <p>Update Source Server request FQDN for action framework.</p>
+    #   @return [String]
+    # @!attribute platform
+    #   <p>Update Source Server request platform operating system.</p>
+    #   @return [String]
     class UpdateSourceServerRequest < Struct.new(
       nil,
       :account_id,
       :source_server_id,
       :connector_action,
+      :user_provided_id,
+      :fqdn_for_action_framework,
+      :platform,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

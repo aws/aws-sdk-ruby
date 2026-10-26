@@ -1,0 +1,40 @@
+module Aws::ComputeOptimizerAutomation
+  module Errors
+    class AccessDeniedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ForbiddenException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class IdempotencyTokenInUseException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class IdempotentParameterMismatchException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InternalServerException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidParameterValueException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NotManagementAccountException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class OptInRequiredException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ServiceQuotaExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ServiceUnavailableException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ThrottlingException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

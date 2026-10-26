@@ -93,7 +93,7 @@ module Aws::NeptuneGraph
     #   <p>A URL identifying to the location of the data to be imported. This can be an Amazon S3 path, or can point to a Neptune database endpoint or snapshot.</p>
     #   @return [String]
     # @!attribute format
-    #   <p>Specifies the format of S3 data to be imported. Valid values are <code>CSV</code>, which identifies the <a href="https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-gremlin.html">Gremlin CSV format</a> or <code>OPENCYPHER</code>, which identies the <a href="https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-opencypher.html">openCypher load format</a>.</p>
+    #   <p>Specifies the format of S3 data to be imported. Valid values are <code>CSV</code>, which identifies the <a href="https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-gremlin.html">Gremlin CSV format</a> or <code>OPENCYPHER</code>, which identifies the <a href="https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-opencypher.html">openCypher load format</a>.</p>
     #   @return [String]
     # @!attribute parquet_type
     #   <p>The parquet type of the cancelled import task.</p>
@@ -325,7 +325,7 @@ module Aws::NeptuneGraph
     #   <p>Specifies the number of dimensions for vector embeddings that will be loaded into the graph. The value is specified as <code>dimension=</code>value. Max = 65,535 </p>
     #   @return [Types::VectorSearchConfiguration]
     # @!attribute replica_count
-    #   <p>The number of replicas in other AZs to provision on the new graph after import. Default = 0, Min = 0, Max = 2.</p> <important> <p> Additional charges equivalent to the m-NCUs selected for the graph apply for each replica. </p> </important>
+    #   <p>The number of replicas in other AZs to provision on the new graph after import. Default = 1, Min = 0, Max = 2.</p> <important> <p> Additional charges equivalent to the m-NCUs selected for the graph apply for each replica. </p> </important>
     #   @return [Integer]
     # @!attribute deletion_protection
     #   <p>Indicates whether or not to enable deletion protection on the graph. The graph can’t be deleted when deletion protection is enabled. (<code>true</code> or <code>false</code>).</p>
@@ -429,7 +429,7 @@ module Aws::NeptuneGraph
     #   <p>Subnets in which private graph endpoint ENIs are created.</p>
     #   @return [Array<String>]
     # @!attribute vpc_security_group_ids
-    #   <p>Security groups to be attached to the private graph endpoint..</p>
+    #   <p>Security groups to be attached to the private graph endpoint.</p>
     #   @return [Array<String>]
     class CreatePrivateGraphEndpointInput < Struct.new(
       nil,
@@ -452,7 +452,7 @@ module Aws::NeptuneGraph
     #   <p>Status of the private graph endpoint.</p>
     #   @return [String]
     # @!attribute vpc_endpoint_id
-    #   <p>Endpoint ID of the prviate grpah endpoint.</p>
+    #   <p>Endpoint ID of the private graph endpoint.</p>
     #   @return [String]
     class CreatePrivateGraphEndpointOutput < Struct.new(
       nil,
@@ -709,7 +709,7 @@ module Aws::NeptuneGraph
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Specifies whihc properties of that label should be included in the export.</p>
+    # <p>Specifies which properties of that label should be included in the export.</p>
     # @!attribute properties
     #   <p>Each property is defined by a key-value pair, where the key is the desired output property name (e.g. "name"), and the value is an object.</p>
     #   @return [Hash<String, Types::ExportFilterPropertyAttributes>]
@@ -1059,7 +1059,7 @@ module Aws::NeptuneGraph
     #   <p>A URL identifying to the location of the data to be imported. This can be an Amazon S3 path, or can point to a Neptune database endpoint or snapshot</p>
     #   @return [String]
     # @!attribute format
-    #   <p>Specifies the format of S3 data to be imported. Valid values are <code>CSV</code>, which identifies the <a href="https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-gremlin.html">Gremlin CSV format</a> or <code>OPENCYPHER</code>, which identies the <a href="https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-opencypher.html">openCypher load format</a>.</p>
+    #   <p>Specifies the format of S3 data to be imported. Valid values are <code>CSV</code>, which identifies the <a href="https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-gremlin.html">Gremlin CSV format</a> or <code>OPENCYPHER</code>, which identifies the <a href="https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-opencypher.html">openCypher load format</a>.</p>
     #   @return [String]
     # @!attribute parquet_type
     #   <p>The parquet type of the import task.</p>
@@ -1529,6 +1529,9 @@ module Aws::NeptuneGraph
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute graph_identifier
+    #   <p>The unique identifier of the Neptune Analytics graph. When provided, the service returns only import tasks associated with this graph. If not specified, the service returns all import tasks.</p>
+    #   @return [String]
     # @!attribute next_token
     #   <p>Pagination token used to paginate output.</p> <p>When this value is provided as input, the service returns results from where the previous response left off. When this value is present in output, it indicates that there are more results to retrieve.</p>
     #   @return [String]
@@ -1537,6 +1540,7 @@ module Aws::NeptuneGraph
     #   @return [Integer]
     class ListImportTasksInput < Struct.new(
       nil,
+      :graph_identifier,
       :next_token,
       :max_results,
       keyword_init: true
@@ -2138,7 +2142,7 @@ module Aws::NeptuneGraph
     #   <p>A URL identifying the location of the data to be imported. This can be an Amazon S3 path, or can point to a Neptune database endpoint or snapshot.</p>
     #   @return [String]
     # @!attribute format
-    #   <p>Specifies the format of Amazon S3 data to be imported. Valid values are CSV, which identifies the Gremlin CSV format or OPENCYPHER, which identies the openCypher load format.</p>
+    #   <p>Specifies the format of Amazon S3 data to be imported. Valid values are CSV, which identifies the Gremlin CSV format or OPENCYPHER, which identifies the openCypher load format.</p>
     #   @return [String]
     # @!attribute parquet_type
     #   <p>The parquet type of the import task.</p>
@@ -2177,7 +2181,7 @@ module Aws::NeptuneGraph
     #   <p>A URL identifying the location of the data to be imported. This can be an Amazon S3 path, or can point to a Neptune database endpoint or snapshot.</p>
     #   @return [String]
     # @!attribute format
-    #   <p>Specifies the format of Amazon S3 data to be imported. Valid values are CSV, which identifies the Gremlin CSV format or OPENCYPHER, which identies the openCypher load format.</p>
+    #   <p>Specifies the format of Amazon S3 data to be imported. Valid values are CSV, which identifies the Gremlin CSV format or OPENCYPHER, which identifies the openCypher load format.</p>
     #   @return [String]
     # @!attribute parquet_type
     #   <p>The parquet type of the import task.</p>

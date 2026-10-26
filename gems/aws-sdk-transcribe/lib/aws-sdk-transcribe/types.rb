@@ -31,7 +31,7 @@ module Aws::Transcribe
     #               also include <code>StartTime</code>.</p>
     #   @return [Integer]
     # @!attribute first
-    #   <p>The time, in milliseconds, from the start of your media file until the specified value. 
+    #   <p>The time, in milliseconds, from the start of your media file until the specified value.
     #               Amazon Transcribe searches for your specified criteria in this time segment.</p>
     #   @return [Integer]
     # @!attribute last
@@ -169,14 +169,14 @@ module Aws::Transcribe
     #                  <p>
     #                     <code>Invalid file size: file size too large</code>.</p>
     #                  <p>The size of your media file is larger than what Amazon Transcribe can
-    #                       process. For more information, refer to <a href="https://docs.aws.amazon.com/general/latest/gr/transcribe.html#limits-amazon-transcribe">Service 
+    #                       process. For more information, refer to <a href="https://docs.aws.amazon.com/general/latest/gr/transcribe.html#limits-amazon-transcribe">Service
     #                           quotas</a>.</p>
     #               </li>
     #               <li>
     #                  <p>
     #                     <code>Invalid number of channels: number of channels too large</code>.</p>
     #                  <p>Your audio contains more channels than Amazon Transcribe is able to process.
-    #                       For more information, refer to <a href="https://docs.aws.amazon.com/general/latest/gr/transcribe.html#limits-amazon-transcribe">Service 
+    #                       For more information, refer to <a href="https://docs.aws.amazon.com/general/latest/gr/transcribe.html#limits-amazon-transcribe">Service
     #                           quotas</a>.</p>
     #               </li>
     #            </ul>
@@ -268,10 +268,10 @@ module Aws::Transcribe
     #               mismatch.</p>
     #   @return [String]
     # @!attribute content_redaction
-    #   <p>Makes it possible to redact or flag specified personally identifiable information (PII) in 
-    #               your transcript. If you use <code>ContentRedaction</code>, you must also include the 
-    #               sub-parameters: <code>RedactionOutput</code> and <code>RedactionType</code>. You can 
-    #               optionally include <code>PiiEntityTypes</code> to choose which types of PII you want to 
+    #   <p>Makes it possible to redact or flag specified personally identifiable information (PII) in
+    #               your transcript. If you use <code>ContentRedaction</code>, you must also include the
+    #               sub-parameters: <code>RedactionOutput</code> and <code>RedactionType</code>. You can
+    #               optionally include <code>PiiEntityTypes</code> to choose which types of PII you want to
     #               redact.</p>
     #   @return [Types::ContentRedaction]
     # @!attribute language_options
@@ -309,11 +309,11 @@ module Aws::Transcribe
     #               use automatic language identification, use instead the <code></code> parameter with the
     #                   <code>LanguageModelName</code>, <code>VocabularyName</code>, or
     #                   <code>VocabularyFilterName</code> sub-parameters.</p>
-    #            <p>For a list of languages supported with Call Analytics, refer to <a href="https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html">Supported languages and 
+    #            <p>For a list of languages supported with Call Analytics, refer to <a href="https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html">Supported languages and
     #               language-specific features</a>.</p>
     #   @return [Hash<String, Types::LanguageIdSettings>]
     # @!attribute summarization
-    #   <p>Contains <code>GenerateAbstractiveSummary</code>, which is a required parameter if you 
+    #   <p>Contains <code>GenerateAbstractiveSummary</code>, which is a required parameter if you
     #   	    want to enable Generative call summarization in your Call Analytics request.</p>
     #   @return [Types::Summarization]
     class CallAnalyticsJobSettings < Struct.new(
@@ -438,8 +438,8 @@ module Aws::Transcribe
     #               call analytics category.</p>
     #   @return [Array<Types::Tag>]
     # @!attribute input_type
-    #   <p>The input type associated with the specified category. <code>POST_CALL</code> 
-    #               refers to a category that is applied to batch transcriptions; <code>REAL_TIME</code> 
+    #   <p>The input type associated with the specified category. <code>POST_CALL</code>
+    #               refers to a category that is applied to batch transcriptions; <code>REAL_TIME</code>
     #               refers to a category that is applied to streaming transcriptions.</p>
     #   @return [String]
     class CategoryProperties < Struct.new(
@@ -529,15 +529,15 @@ module Aws::Transcribe
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Makes it possible to redact or flag specified personally identifiable information (PII) in 
-    #             your transcript. If you use <code>ContentRedaction</code>, you must also include the 
-    #             sub-parameters: <code>RedactionOutput</code> and <code>RedactionType</code>. You can 
-    #             optionally include <code>PiiEntityTypes</code> to choose which types of PII you want to 
+    # <p>Makes it possible to redact or flag specified personally identifiable information (PII) in
+    #             your transcript. If you use <code>ContentRedaction</code>, you must also include the
+    #             sub-parameters: <code>RedactionOutput</code> and <code>RedactionType</code>. You can
+    #             optionally include <code>PiiEntityTypes</code> to choose which types of PII you want to
     #             redact.</p>
     # @!attribute redaction_type
     #   <p>Specify the category of information you want to redact; <code>PII</code> (personally
-    #               identifiable information) is the only valid value. You can use <code>PiiEntityTypes</code> to 
-    #               choose which types of PII you want to redact. If you do not include <code>PiiEntityTypes</code> in 
+    #               identifiable information) is the only valid value. You can use <code>PiiEntityTypes</code> to
+    #               choose which types of PII you want to redact. If you do not include <code>PiiEntityTypes</code> in
     #               your request, all PII is redacted.</p>
     #   @return [String]
     # @!attribute redaction_output
@@ -552,7 +552,7 @@ module Aws::Transcribe
     # @!attribute pii_entity_types
     #   <p>Specify which types of personally identifiable information (PII) you want to redact in
     #               your transcript. You can include as many types as you'd like, or you can select
-    #               <code>ALL</code>. If you do not include <code>PiiEntityTypes</code> in your request, all PII is 
+    #               <code>ALL</code>. If you do not include <code>PiiEntityTypes</code> in your request, all PII is
     #               redacted.</p>
     #   @return [Array<String>]
     class ContentRedaction < Struct.new(
@@ -573,9 +573,9 @@ module Aws::Transcribe
     #            <p>Category names are case sensitive.</p>
     #   @return [String]
     # @!attribute rules
-    #   <p>Rules define a Call Analytics category. When creating a new category, you must create 
-    #               between 1 and 20 rules for that category. For each rule, you specify a filter you want 
-    #               applied to the attributes of a call. For example, you can choose a sentiment filter that 
+    #   <p>Rules define a Call Analytics category. When creating a new category, you must create
+    #               between 1 and 20 rules for that category. For each rule, you specify a filter you want
+    #               applied to the attributes of a call. For example, you can choose a sentiment filter that
     #               detects if a customer's sentiment was positive during the last 30 seconds of the call.</p>
     #   @return [Array<Types::Rule>]
     # @!attribute tags
@@ -585,14 +585,14 @@ module Aws::Transcribe
     #               resources</a>.</p>
     #   @return [Array<Types::Tag>]
     # @!attribute input_type
-    #   <p>Choose whether you want to create a real-time or a post-call category for your Call 
+    #   <p>Choose whether you want to create a real-time or a post-call category for your Call
     #               Analytics transcription.</p>
-    #            <p>Specifying <code>POST_CALL</code> assigns your category to post-call transcriptions; 
-    #               categories with this input type cannot be applied to streaming (real-time) 
+    #            <p>Specifying <code>POST_CALL</code> assigns your category to post-call transcriptions;
+    #               categories with this input type cannot be applied to streaming (real-time)
     #               transcriptions.</p>
-    #            <p>Specifying <code>REAL_TIME</code> assigns your category to streaming transcriptions; 
+    #            <p>Specifying <code>REAL_TIME</code> assigns your category to streaming transcriptions;
     #               categories with this input type cannot be applied to post-call transcriptions.</p>
-    #            <p>If you do not include <code>InputType</code>, your category is created as a post-call 
+    #            <p>If you do not include <code>InputType</code>, your category is created as a post-call
     #               category by default.</p>
     #   @return [String]
     class CreateCallAnalyticsCategoryRequest < Struct.new(
@@ -623,7 +623,7 @@ module Aws::Transcribe
     #               model must contain terms in only one language, and the language you select for your
     #               custom language model must match the language of your training and tuning data.</p>
     #            <p>For a list of supported languages and their associated language codes, refer to the
-    #                   <a href="https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html">Supported languages</a> table. Note that US English (<code>en-US</code>) is the 
+    #                   <a href="https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html">Supported languages</a> table. Note that US English (<code>en-US</code>) is the
     #               only language supported with Amazon Transcribe Medical.</p>
     #            <p>A custom language model can only be used to transcribe files in the same language as
     #               the model. For example, if you create a custom language model using US English
@@ -656,6 +656,9 @@ module Aws::Transcribe
     #               of your tuning data. If you specify different Amazon S3 locations for training
     #               and tuning data, the ARN you use must have permissions to access both locations.</p>
     #   @return [Types::InputDataConfig]
+    # @!attribute encryption_configuration
+    #   <p>Specifies the encryption configuration for your custom language model. Your model artifacts are encrypted with the specified KMS key or with an AWS-owned key if a key is not supplied.</p>
+    #   @return [Types::EncryptionConfiguration]
     # @!attribute tags
     #   <p>Adds one or more custom tags, each in the form of a key:value pair, to a new custom
     #               language model at the time you create this new model.</p>
@@ -668,6 +671,7 @@ module Aws::Transcribe
       :base_model_name,
       :model_name,
       :input_data_config,
+      :encryption_configuration,
       :tags,
       keyword_init: true
     )
@@ -826,14 +830,18 @@ module Aws::Transcribe
     # @!attribute data_access_role_arn
     #   <p>The Amazon Resource Name (ARN) of an IAM role that has permissions to
     #               access the Amazon S3 bucket that contains your input files (in this case, your custom
-    #               vocabulary filter). If the role that you specify doesn’t have the appropriate permissions to access
-    #               the specified Amazon S3 location, your request fails.</p>
+    #               vocabulary filter). If you include <code>EncryptionConfiguration</code> in your request, this role
+    #               must also have permissions to access the specified KMS key. If the role that
+    #               you specify doesn’t have the appropriate permissions, your request fails.</p>
     #            <p>IAM role ARNs have the format
     #               <code>arn:partition:iam::account:role/role-name-with-path</code>. For example:
     #               <code>arn:aws:iam::111122223333:role/Admin</code>.</p>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns">IAM
     #               ARNs</a>.</p>
     #   @return [String]
+    # @!attribute encryption_configuration
+    #   <p>Specifies the encryption configuration for your custom vocabulary filter. Your vocabulary filter artifacts are encrypted with the specified KMS key or with an AWS-owned key if a key is not supplied.</p>
+    #   @return [Types::EncryptionConfiguration]
     class CreateVocabularyFilterRequest < Struct.new(
       nil,
       :vocabulary_filter_name,
@@ -842,6 +850,7 @@ module Aws::Transcribe
       :vocabulary_filter_file_uri,
       :tags,
       :data_access_role_arn,
+      :encryption_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -918,14 +927,18 @@ module Aws::Transcribe
     # @!attribute data_access_role_arn
     #   <p>The Amazon Resource Name (ARN) of an IAM role that has permissions to
     #               access the Amazon S3 bucket that contains your input files (in this case, your custom
-    #               vocabulary). If the role that you specify doesn’t have the appropriate permissions to access
-    #               the specified Amazon S3 location, your request fails.</p>
+    #               vocabulary). If you include <code>EncryptionConfiguration</code> in your request, this role
+    #               must also have permissions to access the specified KMS key. If the role that
+    #               you specify doesn’t have the appropriate permissions, your request fails.</p>
     #            <p>IAM role ARNs have the format
     #               <code>arn:partition:iam::account:role/role-name-with-path</code>. For example:
     #               <code>arn:aws:iam::111122223333:role/Admin</code>.</p>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns">IAM
     #               ARNs</a>.</p>
     #   @return [String]
+    # @!attribute encryption_configuration
+    #   <p>Specifies the encryption configuration for your custom vocabulary. Your vocabulary artifacts are encrypted with the specified KMS key or with an AWS-owned key if a key is not supplied.</p>
+    #   @return [Types::EncryptionConfiguration]
     class CreateVocabularyRequest < Struct.new(
       nil,
       :vocabulary_name,
@@ -934,6 +947,7 @@ module Aws::Transcribe
       :vocabulary_file_uri,
       :tags,
       :data_access_role_arn,
+      :encryption_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1124,6 +1138,24 @@ module Aws::Transcribe
       include ::Smithy::Schema::Structure
     end
 
+    # Encryption configuration for the invocation
+    # @!attribute kms_encryption_context
+    #   <p>A map of plain text, non-secret key:value pairs, known as encryption context pairs, that provide an added layer of security for your data. For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/key-management.html#kms-context">KMS encryption context</a>.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute kms_key
+    #   <p>The Amazon Resource Name (ARN) of the KMS key you want to use to encrypt your resource artifacts. Only full KMS key ARN format is supported.</p>
+    #            <p>KMS key ARNs have the format <code>arn:partition:kms:region:account:key/key-id</code>. For example: <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN">KMS key ARNs</a>.</p>
+    #   @return [String]
+    class EncryptionConfiguration < Struct.new(
+      nil,
+      :kms_encryption_context,
+      :kms_key,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute category_name
     #   <p>The name of the Call Analytics category you want information about. Category names are
     #               case sensitive.</p>
@@ -1185,7 +1217,7 @@ module Aws::Transcribe
     end
 
     # @!attribute medical_scribe_job
-    #   <p>Provides detailed information about the specified Medical Scribe job, including 
+    #   <p>Provides detailed information about the specified Medical Scribe job, including
     #               job status and, if applicable, failure reason</p>
     #   @return [Types::MedicalScribeJob]
     class GetMedicalScribeJobResponse < Struct.new(
@@ -1325,12 +1357,22 @@ module Aws::Transcribe
     #   <p>The Amazon S3 location where the custom vocabulary filter is stored; use this
     #               URI to view or download the custom vocabulary filter.</p>
     #   @return [String]
+    # @!attribute data_access_role_arn
+    #   <p>The Amazon Resource Name (ARN) of the IAM role used to access the
+    #               Amazon S3 bucket that contains your input files and, if applicable, the
+    #               KMS key specified in <code>EncryptionConfiguration</code>.</p>
+    #   @return [String]
+    # @!attribute encryption_configuration
+    #   <p>The encryption configuration used for your custom vocabulary filter.</p>
+    #   @return [Types::EncryptionConfiguration]
     class GetVocabularyFilterResponse < Struct.new(
       nil,
       :vocabulary_filter_name,
       :language_code,
       :last_modified_time,
       :download_uri,
+      :data_access_role_arn,
+      :encryption_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1374,6 +1416,14 @@ module Aws::Transcribe
     #   <p>The Amazon S3 location where the custom vocabulary is stored; use this URI to view or
     #               download the custom vocabulary.</p>
     #   @return [String]
+    # @!attribute data_access_role_arn
+    #   <p>The Amazon Resource Name (ARN) of the IAM role used to access the
+    #               Amazon S3 bucket that contains your input files and, if applicable, the
+    #               KMS key specified in <code>EncryptionConfiguration</code>.</p>
+    #   @return [String]
+    # @!attribute encryption_configuration
+    #   <p>The encryption configuration used for your custom vocabulary.</p>
+    #   @return [Types::EncryptionConfiguration]
     class GetVocabularyResponse < Struct.new(
       nil,
       :vocabulary_name,
@@ -1382,6 +1432,8 @@ module Aws::Transcribe
       :last_modified_time,
       :failure_reason,
       :download_uri,
+      :data_access_role_arn,
+      :encryption_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1456,7 +1508,7 @@ module Aws::Transcribe
     #                <p>A lack of interruptions</p>
     #             </li>
     #          </ul>
-    #          <p>See <a href="https://docs.aws.amazon.com/transcribe/latest/dg/tca-categories-batch.html#tca-rules-batch">Rule criteria for post-call 
+    #          <p>See <a href="https://docs.aws.amazon.com/transcribe/latest/dg/tca-categories-batch.html#tca-rules-batch">Rule criteria for post-call
     #             categories</a> for usage examples.</p>
     # @!attribute threshold
     #   <p>Specify the duration of the interruptions in milliseconds. For example, you can flag
@@ -1509,7 +1561,7 @@ module Aws::Transcribe
     # @!attribute data_access_role_arn
     #   <p>The Amazon Resource Name (ARN) of an IAM role that has permissions to
     #               access the Amazon S3 bucket that contains your input files. If the role that you
-    #               specify doesn’t have the appropriate permissions to access the specified Amazon S3 
+    #               specify doesn’t have the appropriate permissions to access the specified Amazon S3
     #               location, your request fails.</p>
     #            <p>IAM role ARNs have the format
     #                   <code>arn:partition:iam::account:role/role-name-with-path</code>. For example:
@@ -1692,6 +1744,9 @@ module Aws::Transcribe
     #               language model, in addition to the data access role ARN (Amazon Resource Name) that has
     #               permissions to access these data.</p>
     #   @return [Types::InputDataConfig]
+    # @!attribute encryption_configuration
+    #   <p>The encryption configuration used for your custom language model.</p>
+    #   @return [Types::EncryptionConfiguration]
     class LanguageModel < Struct.new(
       nil,
       :model_name,
@@ -1703,6 +1758,7 @@ module Aws::Transcribe
       :upgrade_availability,
       :failure_reason,
       :input_data_config,
+      :encryption_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2235,8 +2291,8 @@ module Aws::Transcribe
 
     # <p>Describes the Amazon S3 location of the media file you want to use in your
     #             request.</p>
-    #          <p>For information on supported media formats, refer to the <code>MediaFormat</code> 
-    #             parameter or the <a href="https://docs.aws.amazon.com/transcribe/latest/dg/how-input.html#how-input-audio">Media formats</a> section 
+    #          <p>For information on supported media formats, refer to the <code>MediaFormat</code>
+    #             parameter or the <a href="https://docs.aws.amazon.com/transcribe/latest/dg/how-input.html#how-input-audio">Media formats</a> section
     #             in the Amazon S3 Developer Guide.</p>
     # @!attribute media_file_uri
     #   <p>The Amazon S3 location of the media file you want to transcribe. For
@@ -2277,7 +2333,7 @@ module Aws::Transcribe
     #               request.</p>
     #            <important>
     #               <p>
-    #                  <code>RedactedMediaFileUri</code> produces a redacted audio file in addition to a 
+    #                  <code>RedactedMediaFileUri</code> produces a redacted audio file in addition to a
     #                   redacted transcript. It is only supported for Call Analytics
     #                   (<code>StartCallAnalyticsJob</code>) transcription requests.</p>
     #            </important>
@@ -2291,14 +2347,14 @@ module Aws::Transcribe
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Indicates which speaker is on which channel. The options are 
+    # <p>Indicates which speaker is on which channel. The options are
     #       <code>CLINICIAN</code> and <code>PATIENT</code>
     #          </p>
     # @!attribute channel_id
     #   <p>Specify the audio channel you want to define.</p>
     #   @return [Integer]
     # @!attribute participant_role
-    #   <p>Specify the participant that you want to flag. 
+    #   <p>Specify the participant that you want to flag.
     #         The options are <code>CLINICIAN</code> and <code>PATIENT</code>
     #            </p>
     #   @return [String]
@@ -2354,13 +2410,13 @@ module Aws::Transcribe
     # @!attribute media
     #   <p>Describes the Amazon S3 location of the media file you want to use in your
     #               request.</p>
-    #            <p>For information on supported media formats, refer to the <code>MediaFormat</code> 
-    #               parameter or the <a href="https://docs.aws.amazon.com/transcribe/latest/dg/how-input.html#how-input-audio">Media formats</a> section 
+    #            <p>For information on supported media formats, refer to the <code>MediaFormat</code>
+    #               parameter or the <a href="https://docs.aws.amazon.com/transcribe/latest/dg/how-input.html#how-input-audio">Media formats</a> section
     #               in the Amazon S3 Developer Guide.</p>
     #   @return [Types::Media]
     # @!attribute medical_scribe_output
-    #   <p>The location of the output of your Medical Scribe job. 
-    #         <code>ClinicalDocumentUri</code> holds the Amazon S3 URI for the Clinical Document 
+    #   <p>The location of the output of your Medical Scribe job.
+    #         <code>ClinicalDocumentUri</code> holds the Amazon S3 URI for the Clinical Document
     #         and <code>TranscriptFileUri</code> holds the Amazon S3 URI for the Transcript.</p>
     #   @return [Types::MedicalScribeOutput]
     # @!attribute start_time
@@ -2388,18 +2444,18 @@ module Aws::Transcribe
     #   @return [String]
     # @!attribute settings
     #   <p>Makes it possible to control how your Medical Scribe job is processed using a
-    #               <code>MedicalScribeSettings</code> object. Specify <code>ChannelIdentification</code> if 
-    #               <code>ChannelDefinitions</code> are set. Enabled <code>ShowSpeakerLabels</code> if <code>ChannelIdentification</code> 
+    #               <code>MedicalScribeSettings</code> object. Specify <code>ChannelIdentification</code> if
+    #               <code>ChannelDefinitions</code> are set. Enabled <code>ShowSpeakerLabels</code> if <code>ChannelIdentification</code>
     #               and <code>ChannelDefinitions</code> are not set. One and only one of <code>ChannelIdentification</code> and <code>ShowSpeakerLabels</code>
     #               must be set. If <code>ShowSpeakerLabels</code> is set, <code>MaxSpeakerLabels</code> must also be set. Use <code>Settings</code>
-    #               to specify a vocabulary or vocabulary filter or both using <code>VocabularyName</code>, <code>VocabularyFilterName</code>. 
+    #               to specify a vocabulary or vocabulary filter or both using <code>VocabularyName</code>, <code>VocabularyFilterName</code>.
     #               <code>VocabularyFilterMethod</code> must be specified if <code>VocabularyFilterName</code> is set.
     #           </p>
     #   @return [Types::MedicalScribeSettings]
     # @!attribute data_access_role_arn
     #   <p>The Amazon Resource Name (ARN) of an IAM role that has permissions to
-    #               access the Amazon S3 bucket that contains your input files, 
-    #               write to the output bucket, and use your KMS key if supplied.  
+    #               access the Amazon S3 bucket that contains your input files,
+    #               write to the output bucket, and use your KMS key if supplied.
     #                If the role that you specify doesn’t have the appropriate permissions your request fails.</p>
     #            <p>IAM role ARNs have the format
     #               <code>arn:partition:iam::account:role/role-name-with-path</code>. For example:
@@ -2409,7 +2465,7 @@ module Aws::Transcribe
     #   @return [String]
     # @!attribute channel_definitions
     #   <p>Makes it possible to specify which speaker is on which channel. For example, if the clinician
-    #               is the first participant to speak, you would set <code>ChannelId</code> of the first <code>ChannelDefinition</code> 
+    #               is the first participant to speak, you would set <code>ChannelId</code> of the first <code>ChannelDefinition</code>
     #               in the list to <code>0</code> (to indicate the first channel) and <code>ParticipantRole</code> to
     #               <code>CLINICIAN</code> (to indicate that it's the clinician speaking).
     #               Then you would set the <code>ChannelId</code> of the second <code>ChannelDefinition</code> in the list to
@@ -2499,8 +2555,8 @@ module Aws::Transcribe
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The location of the output of your Medical Scribe job. 
-    #       <code>ClinicalDocumentUri</code> holds the Amazon S3 URI for the Clinical Document 
+    # <p>The location of the output of your Medical Scribe job.
+    #       <code>ClinicalDocumentUri</code> holds the Amazon S3 URI for the Clinical Document
     #       and <code>TranscriptFileUri</code> holds the Amazon S3 URI for the Transcript.</p>
     # @!attribute transcript_file_uri
     #   <p>Holds the Amazon S3 URI for the Transcript.</p>
@@ -2530,11 +2586,11 @@ module Aws::Transcribe
     end
 
     # <p>Makes it possible to control how your Medical Scribe job is processed using a
-    #             <code>MedicalScribeSettings</code> object. Specify <code>ChannelIdentification</code> if 
-    #             <code>ChannelDefinitions</code> are set. Enabled <code>ShowSpeakerLabels</code> if <code>ChannelIdentification</code> 
+    #             <code>MedicalScribeSettings</code> object. Specify <code>ChannelIdentification</code> if
+    #             <code>ChannelDefinitions</code> are set. Enabled <code>ShowSpeakerLabels</code> if <code>ChannelIdentification</code>
     #             and <code>ChannelDefinitions</code> are not set. One and only one of <code>ChannelIdentification</code> and <code>ShowSpeakerLabels</code>
     #             must be set. If <code>ShowSpeakerLabels</code> is set, <code>MaxSpeakerLabels</code> must also be set. Use <code>Settings</code>
-    #             to specify a vocabulary or vocabulary filter or both using <code>VocabularyName</code>, <code>VocabularyFilterName</code>. 
+    #             to specify a vocabulary or vocabulary filter or both using <code>VocabularyName</code>, <code>VocabularyFilterName</code>.
     #             <code>VocabularyFilterMethod</code> must be specified if <code>VocabularyFilterName</code> is set.
     #         </p>
     # @!attribute show_speaker_labels
@@ -2597,7 +2653,7 @@ module Aws::Transcribe
     # @!attribute transcript_file_uri
     #   <p>The Amazon S3 location of your transcript. You can use this URI to access or
     #               download your transcript.</p>
-    #            <p>Note that this is the Amazon S3 location you specified in your request using the 
+    #            <p>Note that this is the Amazon S3 location you specified in your request using the
     #               <code>OutputBucketName</code> parameter.</p>
     #   @return [String]
     class MedicalTranscript < Struct.new(
@@ -2640,8 +2696,8 @@ module Aws::Transcribe
     # @!attribute media
     #   <p>Describes the Amazon S3 location of the media file you want to use in your
     #               request.</p>
-    #            <p>For information on supported media formats, refer to the <code>MediaFormat</code> 
-    #               parameter or the <a href="https://docs.aws.amazon.com/transcribe/latest/dg/how-input.html#how-input-audio">Media formats</a> section 
+    #            <p>For information on supported media formats, refer to the <code>MediaFormat</code>
+    #               parameter or the <a href="https://docs.aws.amazon.com/transcribe/latest/dg/how-input.html#how-input-audio">Media formats</a> section
     #               in the Amazon S3 Developer Guide.</p>
     #   @return [Types::Media]
     # @!attribute transcript
@@ -2705,14 +2761,14 @@ module Aws::Transcribe
     #                  <p>
     #                     <code>Invalid file size: file size too large</code>.</p>
     #                  <p>The size of your media file is larger than what Amazon Transcribe can
-    #                       process. For more information, refer to <a href="https://docs.aws.amazon.com/general/latest/gr/transcribe.html#limits-amazon-transcribe">Service 
+    #                       process. For more information, refer to <a href="https://docs.aws.amazon.com/general/latest/gr/transcribe.html#limits-amazon-transcribe">Service
     #                           quotas</a>.</p>
     #               </li>
     #               <li>
     #                  <p>
     #                     <code>Invalid number of channels: number of channels too large</code>.</p>
     #                  <p>Your audio contains more channels than Amazon Transcribe is able to process.
-    #                       For more information, refer to <a href="https://docs.aws.amazon.com/general/latest/gr/transcribe.html#limits-amazon-transcribe">Service 
+    #                       For more information, refer to <a href="https://docs.aws.amazon.com/general/latest/gr/transcribe.html#limits-amazon-transcribe">Service
     #                           quotas</a>.</p>
     #               </li>
     #            </ul>
@@ -2941,7 +2997,7 @@ module Aws::Transcribe
     #                <p>The presence of speech at specified periods throughout the call</p>
     #             </li>
     #          </ul>
-    #          <p>See <a href="https://docs.aws.amazon.com/transcribe/latest/dg/tca-categories-batch.html#tca-rules-batch">Rule criteria for post-call 
+    #          <p>See <a href="https://docs.aws.amazon.com/transcribe/latest/dg/tca-categories-batch.html#tca-rules-batch">Rule criteria for post-call
     #             categories</a> for usage examples.</p>
     # @!attribute threshold
     #   <p>Specify the duration, in milliseconds, of the period of silence that you want to flag.
@@ -3005,7 +3061,7 @@ module Aws::Transcribe
     #               you must also include <code>StartPercentage</code>.</p>
     #   @return [Integer]
     # @!attribute first
-    #   <p>The time, in percentage, from the start of your media file until the specified value. 
+    #   <p>The time, in percentage, from the start of your media file until the specified value.
     #               Amazon Transcribe searches for your specified criteria in this time segment.</p>
     #   @return [Integer]
     # @!attribute last
@@ -3088,7 +3144,7 @@ module Aws::Transcribe
     #                     or both at specified points in the call</p>
     #             </li>
     #          </ul>
-    #          <p>See <a href="https://docs.aws.amazon.com/transcribe/latest/dg/tca-categories-batch.html#tca-rules-batch">Rule criteria for post-call 
+    #          <p>See <a href="https://docs.aws.amazon.com/transcribe/latest/dg/tca-categories-batch.html#tca-rules-batch">Rule criteria for post-call
     #             categories</a> for usage examples.</p>
     # @!attribute sentiments
     #   <p>Specify the sentiments that you want to flag.</p>
@@ -3122,7 +3178,7 @@ module Aws::Transcribe
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Allows additional optional settings in your  
+    # <p>Allows additional optional settings in your
     #             request, including channel identification, alternative transcriptions, and speaker
     #             partitioning. You can use that to apply custom vocabularies to your transcription
     #             job.</p>
@@ -3238,49 +3294,17 @@ module Aws::Transcribe
     #               transcript.</p>
     #   @return [String]
     # @!attribute output_encryption_kms_key_id
-    #   <p>The KMS key you want to use to encrypt your Call Analytics
-    #               output.</p>
-    #            <p>If using a key located in the <b>current</b>
-    #               Amazon Web Services account, you can specify your KMS key in one of four
-    #               ways:</p>
-    #            <ol>
-    #               <li>
-    #                  <p>Use the KMS key ID itself. For example,
-    #                           <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>Use an alias for the KMS key ID. For example,
-    #                           <code>alias/ExampleAlias</code>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>Use the Amazon Resource Name (ARN) for the KMS key ID. For
-    #                       example,
-    #                           <code>arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>Use the ARN for the KMS key alias. For example,
-    #                           <code>arn:aws:kms:region:account-ID:alias/ExampleAlias</code>.</p>
-    #               </li>
-    #            </ol>
-    #            <p>If using a key located in a <b>different</b>
-    #               Amazon Web Services account than the current Amazon Web Services account, you can specify
-    #               your KMS key in one of two ways:</p>
-    #            <ol>
-    #               <li>
-    #                  <p>Use the ARN for the KMS key ID. For example,
-    #                           <code>arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>Use the ARN for the KMS key alias. For example,
-    #                           <code>arn:aws:kms:region:account-ID:alias/ExampleAlias</code>.</p>
-    #               </li>
-    #            </ol>
+    #   <p>The Amazon Resource Name (ARN) of a KMS key that you want to use to
+    #               encrypt your Call Analytics output.</p>
+    #            <p>KMS key ARNs have the format <code>arn:partition:kms:region:account:key/key-id</code>. For example:
+    #       	<code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.
+    #               For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN">
+    #                   KMS key ARNs</a>.</p>
     #            <p>If you do not specify an encryption key, your output is encrypted with the default
-    #                   Amazon S3 key (SSE-S3).</p>
-    #            <p>If you specify a KMS key to encrypt your output, you must also specify
-    #               an output location using the <code>OutputLocation</code> parameter.</p>
-    #            <p>Note that the role making the  request must
-    #               have permission to use the specified KMS key.</p>
+    #               Amazon S3 key (SSE-S3).</p>
+    #            <p>Note that the role making the  request and the role specified in
+    #   		the <code>DataAccessRoleArn</code> request parameter (if present) must have permission to use the
+    #   		specified KMS key.</p>
     #   @return [String]
     # @!attribute data_access_role_arn
     #   <p>The Amazon Resource Name (ARN) of an IAM role that has permissions to
@@ -3344,60 +3368,30 @@ module Aws::Transcribe
     # @!attribute media
     #   <p>Describes the Amazon S3 location of the media file you want to use in your
     #               request.</p>
-    #            <p>For information on supported media formats, refer to the <code>MediaFormat</code> 
-    #               parameter or the <a href="https://docs.aws.amazon.com/transcribe/latest/dg/how-input.html#how-input-audio">Media formats</a> section 
+    #            <p>For information on supported media formats, refer to the <code>MediaFormat</code>
+    #               parameter or the <a href="https://docs.aws.amazon.com/transcribe/latest/dg/how-input.html#how-input-audio">Media formats</a> section
     #               in the Amazon S3 Developer Guide.</p>
     #   @return [Types::Media]
     # @!attribute output_bucket_name
     #   <p>The name of the Amazon S3 bucket where you want your Medical Scribe
     #               output stored. Do not include the <code>S3://</code> prefix of the specified
     #               bucket.</p>
-    #            <p>Note that the role specified in the <code>DataAccessRoleArn</code> request parameter 
+    #            <p>Note that the role specified in the <code>DataAccessRoleArn</code> request parameter
     #               must have permission to use the specified location. You
     #               can change Amazon S3 permissions using the <a href="https://console.aws.amazon.com/s3">Amazon Web Services Management Console</a>. See also <a href="https://docs.aws.amazon.com/transcribe/latest/dg/security_iam_id-based-policy-examples.html#auth-role-iam-user">Permissions Required for IAM User Roles</a>.</p>
     #   @return [String]
     # @!attribute output_encryption_kms_key_id
-    #   <p>The KMS key you want to use to encrypt your Medical Scribe
-    #               output.</p>
-    #            <p>If using a key located in the <b>current</b>
-    #               Amazon Web Services account, you can specify your KMS key in one of four
-    #               ways:</p>
-    #            <ol>
-    #               <li>
-    #                  <p>Use the KMS key ID itself. For example,
-    #                           <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>Use an alias for the KMS key ID. For example,
-    #                           <code>alias/ExampleAlias</code>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>Use the Amazon Resource Name (ARN) for the KMS key ID. For
-    #                       example,
-    #                           <code>arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>Use the ARN for the KMS key alias. For example,
-    #                           <code>arn:aws:kms:region:account-ID:alias/ExampleAlias</code>.</p>
-    #               </li>
-    #            </ol>
-    #            <p>If using a key located in a <b>different</b>
-    #               Amazon Web Services account than the current Amazon Web Services account, you can specify
-    #               your KMS key in one of two ways:</p>
-    #            <ol>
-    #               <li>
-    #                  <p>Use the ARN for the KMS key ID. For example,
-    #                           <code>arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>Use the ARN for the KMS key alias. For example,
-    #                           <code>arn:aws:kms:region:account-ID:alias/ExampleAlias</code>.</p>
-    #               </li>
-    #            </ol>
+    #   <p>The Amazon Resource Name (ARN) of a KMS key that you want to use to
+    #               encrypt your Medical Scribe output.</p>
+    #            <p>KMS key ARNs have the format <code>arn:partition:kms:region:account:key/key-id</code>. For example:
+    #   		<code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.
+    #               	For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN">
+    #                   KMS key ARNs</a>.</p>
     #            <p>If you do not specify an encryption key, your output is encrypted with the default
     #                   Amazon S3 key (SSE-S3).</p>
-    #            <p>Note that the role specified in the <code>DataAccessRoleArn</code> request parameter 
-    #               must have permission to use the specified KMS key.</p>
+    #            <p>Note that the role making the  request and the role specified in
+    #   		the <code>DataAccessRoleArn</code> request parameter (if present)
+    #   		must have permission to use the specified KMS key.</p>
     #   @return [String]
     # @!attribute kms_encryption_context
     #   <p>A map of plain text, non-secret key:value pairs, known as encryption context pairs,
@@ -3405,8 +3399,8 @@ module Aws::Transcribe
     #   @return [Hash<String, String>]
     # @!attribute data_access_role_arn
     #   <p>The Amazon Resource Name (ARN) of an IAM role that has permissions to
-    #               access the Amazon S3 bucket that contains your input files, 
-    #               write to the output bucket, and use your KMS key if supplied.  
+    #               access the Amazon S3 bucket that contains your input files,
+    #               write to the output bucket, and use your KMS key if supplied.
     #                If the role that you specify doesn’t have the appropriate permissions your request fails.</p>
     #            <p>IAM role ARNs have the format
     #               <code>arn:partition:iam::account:role/role-name-with-path</code>. For example:
@@ -3416,17 +3410,17 @@ module Aws::Transcribe
     #   @return [String]
     # @!attribute settings
     #   <p>Makes it possible to control how your Medical Scribe job is processed using a
-    #               <code>MedicalScribeSettings</code> object. Specify <code>ChannelIdentification</code> if 
-    #               <code>ChannelDefinitions</code> are set. Enabled <code>ShowSpeakerLabels</code> if <code>ChannelIdentification</code> 
+    #               <code>MedicalScribeSettings</code> object. Specify <code>ChannelIdentification</code> if
+    #               <code>ChannelDefinitions</code> are set. Enabled <code>ShowSpeakerLabels</code> if <code>ChannelIdentification</code>
     #               and <code>ChannelDefinitions</code> are not set. One and only one of <code>ChannelIdentification</code> and <code>ShowSpeakerLabels</code>
     #               must be set. If <code>ShowSpeakerLabels</code> is set, <code>MaxSpeakerLabels</code> must also be set. Use <code>Settings</code>
-    #               to specify a vocabulary or vocabulary filter or both using <code>VocabularyName</code>, <code>VocabularyFilterName</code>. 
+    #               to specify a vocabulary or vocabulary filter or both using <code>VocabularyName</code>, <code>VocabularyFilterName</code>.
     #               <code>VocabularyFilterMethod</code> must be specified if <code>VocabularyFilterName</code> is set.
     #           </p>
     #   @return [Types::MedicalScribeSettings]
     # @!attribute channel_definitions
     #   <p>Makes it possible to specify which speaker is on which channel. For example, if the clinician
-    #                is the first participant to speak, you would set <code>ChannelId</code> of the first <code>ChannelDefinition</code> 
+    #                is the first participant to speak, you would set <code>ChannelId</code> of the first <code>ChannelDefinition</code>
     #                in the list to <code>0</code> (to indicate the first channel) and <code>ParticipantRole</code> to
     #                   <code>CLINICIAN</code> (to indicate that it's the clinician speaking).
     #                   Then you would set the <code>ChannelId</code> of the second <code>ChannelDefinition</code> in the list to
@@ -3501,8 +3495,8 @@ module Aws::Transcribe
     # @!attribute media
     #   <p>Describes the Amazon S3 location of the media file you want to use in your
     #               request.</p>
-    #            <p>For information on supported media formats, refer to the <code>MediaFormat</code> 
-    #               parameter or the <a href="https://docs.aws.amazon.com/transcribe/latest/dg/how-input.html#how-input-audio">Media formats</a> section 
+    #            <p>For information on supported media formats, refer to the <code>MediaFormat</code>
+    #               parameter or the <a href="https://docs.aws.amazon.com/transcribe/latest/dg/how-input.html#how-input-audio">Media formats</a> section
     #               in the Amazon S3 Developer Guide.</p>
     #   @return [Types::Media]
     # @!attribute output_bucket_name
@@ -3557,49 +3551,17 @@ module Aws::Transcribe
     #               one is created for you.</p>
     #   @return [String]
     # @!attribute output_encryption_kms_key_id
-    #   <p>The KMS key you want to use to encrypt your medical transcription
-    #               output.</p>
-    #            <p>If using a key located in the <b>current</b>
-    #               Amazon Web Services account, you can specify your KMS key in one of four
-    #               ways:</p>
-    #            <ol>
-    #               <li>
-    #                  <p>Use the KMS key ID itself. For example,
-    #                           <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>Use an alias for the KMS key ID. For example,
-    #                           <code>alias/ExampleAlias</code>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>Use the Amazon Resource Name (ARN) for the KMS key ID. For
-    #                       example,
-    #                           <code>arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>Use the ARN for the KMS key alias. For example,
-    #                           <code>arn:aws:kms:region:account-ID:alias/ExampleAlias</code>.</p>
-    #               </li>
-    #            </ol>
-    #            <p>If using a key located in a <b>different</b>
-    #               Amazon Web Services account than the current Amazon Web Services account, you can specify
-    #               your KMS key in one of two ways:</p>
-    #            <ol>
-    #               <li>
-    #                  <p>Use the ARN for the KMS key ID. For example,
-    #                           <code>arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>Use the ARN for the KMS key alias. For example,
-    #                           <code>arn:aws:kms:region:account-ID:alias/ExampleAlias</code>.</p>
-    #               </li>
-    #            </ol>
+    #   <p>The Amazon Resource Name (ARN) of a KMS key that you want to use to
+    #               encrypt your medical transcription output.</p>
+    #            <p>KMS key ARNs have the format <code>arn:partition:kms:region:account:key/key-id</code>. For example:
+    #       	<code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.
+    #               For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN">
+    #                   KMS key ARNs</a>.</p>
     #            <p>If you do not specify an encryption key, your output is encrypted with the default
-    #                   Amazon S3 key (SSE-S3).</p>
-    #            <p>If you specify a KMS key to encrypt your output, you must also specify
-    #               an output location using the <code>OutputLocation</code> parameter.</p>
-    #            <p>Note that the role making the  request must
-    #               have permission to use the specified KMS key.</p>
+    #               Amazon S3 key (SSE-S3).</p>
+    #            <p>Note that the role making the  request and the role specified
+    #       		in the <code>DataAccessRoleArn</code> request parameter (if present) must have permission to use the
+    #   		specified KMS key.</p>
     #   @return [String]
     # @!attribute kms_encryption_context
     #   <p>A map of plain text, non-secret key:value pairs, known as encryption context pairs,
@@ -3758,56 +3720,24 @@ module Aws::Transcribe
     #               one is created for you.</p>
     #   @return [String]
     # @!attribute output_encryption_kms_key_id
-    #   <p>The KMS key you want to use to encrypt your transcription
-    #               output.</p>
-    #            <p>If using a key located in the <b>current</b>
-    #               Amazon Web Services account, you can specify your KMS key in one of four
-    #               ways:</p>
-    #            <ol>
-    #               <li>
-    #                  <p>Use the KMS key ID itself. For example,
-    #                           <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>Use an alias for the KMS key ID. For example,
-    #                           <code>alias/ExampleAlias</code>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>Use the Amazon Resource Name (ARN) for the KMS key ID. For
-    #                       example,
-    #                           <code>arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>Use the ARN for the KMS key alias. For example,
-    #                           <code>arn:aws:kms:region:account-ID:alias/ExampleAlias</code>.</p>
-    #               </li>
-    #            </ol>
-    #            <p>If using a key located in a <b>different</b>
-    #               Amazon Web Services account than the current Amazon Web Services account, you can specify
-    #               your KMS key in one of two ways:</p>
-    #            <ol>
-    #               <li>
-    #                  <p>Use the ARN for the KMS key ID. For example,
-    #                           <code>arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>Use the ARN for the KMS key alias. For example,
-    #                           <code>arn:aws:kms:region:account-ID:alias/ExampleAlias</code>.</p>
-    #               </li>
-    #            </ol>
+    #   <p>The Amazon Resource Name (ARN) of a KMS key that you want to use to
+    #               encrypt your transcription output.</p>
+    #            <p>KMS key ARNs have the format <code>arn:partition:kms:region:account:key/key-id</code>. For example:
+    #       	<code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.
+    #               For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN">
+    #                   KMS key ARNs</a>.</p>
     #            <p>If you do not specify an encryption key, your output is encrypted with the default
-    #                   Amazon S3 key (SSE-S3).</p>
-    #            <p>If you specify a KMS key to encrypt your output, you must also specify
-    #               an output location using the <code>OutputLocation</code> parameter.</p>
-    #            <p>Note that the role making the  request must
-    #               have permission to use the specified KMS key.</p>
+    #               Amazon S3 key (SSE-S3).</p>
+    #            <p>Note that the role making the  request and the role specified in the
+    #   		<code>DataAccessRoleArn</code> request parameter (if present) must have permission to use the specified
+    #   		KMS key.</p>
     #   @return [String]
     # @!attribute kms_encryption_context
     #   <p>A map of plain text, non-secret key:value pairs, known as encryption context pairs,
     #               that provide an added layer of security for your data. For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/key-management.html#kms-context">KMS encryption context</a> and <a href="https://docs.aws.amazon.com/transcribe/latest/dg/symmetric-asymmetric.html">Asymmetric keys in KMS</a>.</p>
     #   @return [Hash<String, String>]
     # @!attribute settings
-    #   <p>Specify additional optional settings in your  
+    #   <p>Specify additional optional settings in your
     #               request, including channel identification, alternative transcriptions, speaker
     #               partitioning. You can use that to apply custom vocabularies and vocabulary filters.</p>
     #            <p>If you want to include a custom vocabulary or a custom vocabulary filter (or both)
@@ -3836,9 +3766,9 @@ module Aws::Transcribe
     #                   <code>DataAccessRoleArn</code>.</p>
     #   @return [Types::JobExecutionSettings]
     # @!attribute content_redaction
-    #   <p>Makes it possible to redact or flag specified personally identifiable information (PII) in 
-    #               your transcript. If you use <code>ContentRedaction</code>, you must also include the 
-    #               sub-parameters: <code>RedactionOutput</code> and <code>RedactionType</code>. You can 
+    #   <p>Makes it possible to redact or flag specified personally identifiable information (PII) in
+    #               your transcript. If you use <code>ContentRedaction</code>, you must also include the
+    #               sub-parameters: <code>RedactionOutput</code> and <code>RedactionType</code>. You can
     #               optionally include <code>PiiEntityTypes</code> to choose which types of PII you want to redact.
     #               If you do not include <code>PiiEntityTypes</code> in your request, all PII is redacted.</p>
     #   @return [Types::ContentRedaction]
@@ -3933,10 +3863,10 @@ module Aws::Transcribe
     #               sub-parameter.</p>
     #   @return [Hash<String, Types::LanguageIdSettings>]
     # @!attribute toxicity_detection
-    #   <p>Enables toxic speech detection in your transcript. If you include 
+    #   <p>Enables toxic speech detection in your transcript. If you include
     #               <code>ToxicityDetection</code> in your request, you must also include
     #               <code>ToxicityCategories</code>.</p>
-    #            <p>For information on the types of toxic speech Amazon Transcribe can detect, see 
+    #            <p>For information on the types of toxic speech Amazon Transcribe can detect, see
     #               <a href="https://docs.aws.amazon.com/transcribe/latest/dg/toxic-language.html">Detecting toxic
     #                   speech</a>.</p>
     #   @return [Array<Types::ToxicityDetectionSettings>]
@@ -4051,7 +3981,7 @@ module Aws::Transcribe
     #   <p>Enables Generative call summarization in your Call Analytics request</p>
     #            <p>Generative call summarization provides a summary of the transcript including important
     #   	    components discussed in the conversation.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/tca-enable-summarization.html">Enabling generative call 
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/tca-enable-summarization.html">Enabling generative call
     #   	        summarization</a>.</p>
     #   @return [Boolean]
     class Summarization < Struct.new(
@@ -4119,12 +4049,12 @@ module Aws::Transcribe
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Contains <code>ToxicityCategories</code>, which is a required parameter if you 
-    #             want to enable toxicity detection (<code>ToxicityDetection</code>) in your transcription 
+    # <p>Contains <code>ToxicityCategories</code>, which is a required parameter if you
+    #             want to enable toxicity detection (<code>ToxicityDetection</code>) in your transcription
     #             request.</p>
     # @!attribute toxicity_categories
-    #   <p> If you include <code>ToxicityDetection</code> in your transcription request, you 
-    #               must also include <code>ToxicityCategories</code>. The only accepted value for this 
+    #   <p> If you include <code>ToxicityDetection</code> in your transcription request, you
+    #               must also include <code>ToxicityCategories</code>. The only accepted value for this
     #               parameter is <code>ALL</code>.</p>
     #   @return [Array<String>]
     class ToxicityDetectionSettings < Struct.new(
@@ -4195,8 +4125,8 @@ module Aws::Transcribe
     #                <p>Custom words or phrases that occur at a specific time frame</p>
     #             </li>
     #          </ul>
-    #          <p>See <a href="https://docs.aws.amazon.com/transcribe/latest/dg/tca-categories-batch.html#tca-rules-batch">Rule criteria for post-call 
-    #             categories</a> and <a href="https://docs.aws.amazon.com/transcribe/latest/dg/tca-categories-stream.html#tca-rules-stream">Rule criteria for 
+    #          <p>See <a href="https://docs.aws.amazon.com/transcribe/latest/dg/tca-categories-batch.html#tca-rules-batch">Rule criteria for post-call
+    #             categories</a> and <a href="https://docs.aws.amazon.com/transcribe/latest/dg/tca-categories-stream.html#tca-rules-stream">Rule criteria for
     #                 streaming categories</a> for usage examples.</p>
     # @!attribute transcript_filter_type
     #   <p>Flag the presence or absence of an exact match to the phrases that you specify. For
@@ -4336,14 +4266,14 @@ module Aws::Transcribe
     #                  <p>
     #                     <code>Invalid file size: file size too large</code>.</p>
     #                  <p>The size of your media file is larger than what Amazon Transcribe can
-    #                       process. For more information, refer to <a href="https://docs.aws.amazon.com/general/latest/gr/transcribe.html#limits-amazon-transcribe">Service 
+    #                       process. For more information, refer to <a href="https://docs.aws.amazon.com/general/latest/gr/transcribe.html#limits-amazon-transcribe">Service
     #                           quotas</a>.</p>
     #               </li>
     #               <li>
     #                  <p>
     #                     <code>Invalid number of channels: number of channels too large</code>.</p>
     #                  <p>Your audio contains more channels than Amazon Transcribe is able to process.
-    #                       For more information, refer to <a href="https://docs.aws.amazon.com/general/latest/gr/transcribe.html#limits-amazon-transcribe">Service 
+    #                       For more information, refer to <a href="https://docs.aws.amazon.com/general/latest/gr/transcribe.html#limits-amazon-transcribe">Service
     #                           quotas</a>.</p>
     #               </li>
     #            </ul>
@@ -4513,7 +4443,7 @@ module Aws::Transcribe
     #               of this parameter, <code>LanguageCode</code>, is present.</p>
     #   @return [Array<Types::LanguageCodeItem>]
     # @!attribute toxicity_detection
-    #   <p>Indicates whether toxicity detection was enabled for the specified transcription 
+    #   <p>Indicates whether toxicity detection was enabled for the specified transcription
     #               job.</p>
     #   @return [Array<Types::ToxicityDetectionSettings>]
     class TranscriptionJobSummary < Struct.new(
@@ -4577,7 +4507,7 @@ module Aws::Transcribe
     #               field replace the ones that are currently being used in the specified category.</p>
     #   @return [Array<Types::Rule>]
     # @!attribute input_type
-    #   <p>Choose whether you want to update a real-time or a post-call category. The 
+    #   <p>Choose whether you want to update a real-time or a post-call category. The
     #               input type you specify must match the input type specified when the category was created. For
     #               example, if you created a category with the <code>POST_CALL</code> input type, you must
     #               use <code>POST_CALL</code> as the input type when updating this category.</p>
@@ -4599,6 +4529,52 @@ module Aws::Transcribe
     class UpdateCallAnalyticsCategoryResponse < Struct.new(
       nil,
       :category_properties,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute model_name
+    #   <p>The name of the custom language model you want to update. Model names are case sensitive.</p>
+    #   @return [String]
+    # @!attribute data_access_role_arn
+    #   <p>The Amazon Resource Name (ARN) of an IAM role. If you include
+    #               <code>EncryptionConfiguration</code> in your request, this role must have permissions to
+    #               access the specified KMS key. If the role that you specify doesn't have
+    #               the appropriate permissions, your request fails.</p>
+    #            <p>IAM role ARNs have the format
+    #               <code>arn:partition:iam::account:role/role-name-with-path</code>. For example:
+    #               <code>arn:aws:iam::111122223333:role/Admin</code>.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns">IAM
+    #               ARNs</a>.</p>
+    #   @return [String]
+    # @!attribute encryption_configuration
+    #   <p>Specifies the new encryption configuration for your custom language model. The model artifacts are re-encrypted in place using the specified KMS key or with an AWS-owned key if a key is not supplied.</p>
+    #   @return [Types::EncryptionConfiguration]
+    class UpdateLanguageModelRequest < Struct.new(
+      nil,
+      :model_name,
+      :data_access_role_arn,
+      :encryption_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute model_name
+    #   <p>The name of the custom language model that was updated.</p>
+    #   @return [String]
+    # @!attribute model_status
+    #   <p>The status of the specified custom language model.</p>
+    #   @return [String]
+    # @!attribute last_modified_time
+    #   <p>The date and time the specified custom language model was last modified.</p>
+    #   @return [Time]
+    class UpdateLanguageModelResponse < Struct.new(
+      nil,
+      :model_name,
+      :model_status,
+      :last_modified_time,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4691,20 +4667,25 @@ module Aws::Transcribe
     # @!attribute data_access_role_arn
     #   <p>The Amazon Resource Name (ARN) of an IAM role that has permissions to
     #               access the Amazon S3 bucket that contains your input files (in this case, your custom
-    #               vocabulary filter). If the role that you specify doesn’t have the appropriate permissions to access
-    #               the specified Amazon S3 location, your request fails.</p>
+    #               vocabulary filter). If you include <code>EncryptionConfiguration</code> in your request, this role
+    #               must also have permissions to access the specified KMS key. If the role that
+    #               you specify doesn’t have the appropriate permissions, your request fails.</p>
     #            <p>IAM role ARNs have the format
     #               <code>arn:partition:iam::account:role/role-name-with-path</code>. For example:
     #               <code>arn:aws:iam::111122223333:role/Admin</code>.</p>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns">IAM
     #               ARNs</a>.</p>
     #   @return [String]
+    # @!attribute encryption_configuration
+    #   <p>Specifies the new encryption configuration for your custom vocabulary filter. The vocabulary filter artifacts are re-encrypted in place using the specified KMS key or with an AWS-owned key if a key is not supplied.</p>
+    #   @return [Types::EncryptionConfiguration]
     class UpdateVocabularyFilterRequest < Struct.new(
       nil,
       :vocabulary_filter_name,
       :words,
       :vocabulary_filter_file_uri,
       :data_access_role_arn,
+      :encryption_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4773,14 +4754,18 @@ module Aws::Transcribe
     # @!attribute data_access_role_arn
     #   <p>The Amazon Resource Name (ARN) of an IAM role that has permissions to
     #               access the Amazon S3 bucket that contains your input files (in this case, your custom
-    #               vocabulary). If the role that you specify doesn’t have the appropriate permissions to access
-    #               the specified Amazon S3 location, your request fails.</p>
+    #               vocabulary). If you include <code>EncryptionConfiguration</code> in your request, this role
+    #               must also have permissions to access the specified KMS key. If the role that
+    #               you specify doesn’t have the appropriate permissions, your request fails.</p>
     #            <p>IAM role ARNs have the format
     #               <code>arn:partition:iam::account:role/role-name-with-path</code>. For example:
     #               <code>arn:aws:iam::111122223333:role/Admin</code>.</p>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns">IAM
     #               ARNs</a>.</p>
     #   @return [String]
+    # @!attribute encryption_configuration
+    #   <p>Specifies the new encryption configuration for your custom vocabulary. The vocabulary artifacts are re-encrypted in place using the specified KMS key or with an AWS-owned key if a key is not supplied.</p>
+    #   @return [Types::EncryptionConfiguration]
     class UpdateVocabularyRequest < Struct.new(
       nil,
       :vocabulary_name,
@@ -4788,6 +4773,7 @@ module Aws::Transcribe
       :phrases,
       :vocabulary_file_uri,
       :data_access_role_arn,
+      :encryption_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

@@ -10,6 +10,8 @@ module Aws::MPA
     AccountId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mpa#AccountId", name: "AccountId", traits: {"aws.api#data" => "account", "smithy.api#length" => {"max" => 12}, "smithy.api#pattern" => "^\\d{12}$"})
     ActionCompletionStrategy = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.mpa#ActionCompletionStrategy", name: "ActionCompletionStrategy")
     ActionName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mpa#ActionName", name: "ActionName", traits: {"smithy.api#length" => {"max" => 500}})
+    AdditionalSecurityRequirement = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.mpa#AdditionalSecurityRequirement", name: "AdditionalSecurityRequirement")
+    AdditionalSecurityRequirements = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mpa#AdditionalSecurityRequirements", name: "AdditionalSecurityRequirements", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}})
     ApprovalStrategy = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.mpa#ApprovalStrategy", name: "ApprovalStrategy")
     ApprovalStrategyResponse = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.mpa#ApprovalStrategyResponse", name: "ApprovalStrategyResponse")
     ApprovalTeamArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mpa#ApprovalTeamArn", name: "ApprovalTeamArn", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "^arn:aws(-[^:]+)?:mpa:[a-z0-9-]{1,20}:[0-9]{12}:approval-team/[a-zA-Z0-9._-]+$"})
@@ -18,6 +20,7 @@ module Aws::MPA
     ApprovalTeamRequestApprovers = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mpa#ApprovalTeamRequestApprovers", name: "ApprovalTeamRequestApprovers", traits: {"aws.api#data" => "usage", "smithy.api#length" => {"min" => 1, "max" => 20}})
     ApprovalTeamStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.mpa#ApprovalTeamStatus", name: "ApprovalTeamStatus")
     ApprovalTeamStatusCode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.mpa#ApprovalTeamStatusCode", name: "ApprovalTeamStatusCode")
+    ApproverLastActivity = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.mpa#ApproverLastActivity", name: "ApproverLastActivity")
     CancelSessionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mpa#CancelSessionRequest", name: "CancelSessionRequest")
     CancelSessionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mpa#CancelSessionResponse", name: "CancelSessionResponse")
     ConflictException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mpa#ConflictException", name: "ConflictException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 409})
@@ -85,6 +88,10 @@ module Aws::MPA
     ListTagsForResourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mpa#ListTagsForResourceResponse", name: "ListTagsForResourceResponse")
     MaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.mpa#MaxResults", name: "MaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 20}})
     Message = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mpa#Message", name: "Message", traits: {"smithy.api#length" => {"max" => 500}})
+    MfaMethod = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mpa#MfaMethod", name: "MfaMethod")
+    MfaMethods = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mpa#MfaMethods", name: "MfaMethods", traits: {"smithy.api#length" => {"max" => 5}})
+    MfaSyncStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.mpa#MfaSyncStatus", name: "MfaSyncStatus")
+    MfaType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.mpa#MfaType", name: "MfaType")
     MofNApprovalStrategy = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mpa#MofNApprovalStrategy", name: "MofNApprovalStrategy")
     Operator = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.mpa#Operator", name: "Operator")
     ParticipantId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mpa#ParticipantId", name: "ParticipantId", traits: {"aws.api#data" => "usage", "smithy.api#length" => {"min" => 1, "max" => 100}})
@@ -117,6 +124,9 @@ module Aws::MPA
     SessionValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mpa#SessionValue", name: "SessionValue", traits: {"aws.api#data" => "usage", "smithy.api#length" => {"min" => 1, "max" => 200}, "smithy.api#pattern" => "^[a-zA-Z0-9\\p{P}]*$", "smithy.api#sensitive" => {}})
     StartActiveApprovalTeamDeletionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mpa#StartActiveApprovalTeamDeletionRequest", name: "StartActiveApprovalTeamDeletionRequest")
     StartActiveApprovalTeamDeletionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mpa#StartActiveApprovalTeamDeletionResponse", name: "StartActiveApprovalTeamDeletionResponse")
+    StartApprovalTeamBaselineApproverIds = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mpa#StartApprovalTeamBaselineApproverIds", name: "StartApprovalTeamBaselineApproverIds", traits: {"smithy.api#length" => {"max" => 20}})
+    StartApprovalTeamBaselineRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mpa#StartApprovalTeamBaselineRequest", name: "StartApprovalTeamBaselineRequest")
+    StartApprovalTeamBaselineResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mpa#StartApprovalTeamBaselineResponse", name: "StartApprovalTeamBaselineResponse")
     String = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mpa#String", name: "String", traits: {"smithy.api#length" => {"max" => 1000}})
     TagKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mpa#TagKey", name: "TagKey", traits: {"aws.api#data" => "tagging", "smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#sensitive" => {}})
     TagKeyList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mpa#TagKeyList", name: "TagKeyList", traits: {"aws.api#data" => "tagging", "smithy.api#length" => {"min" => 0, "max" => 50}, "smithy.api#sensitive" => {}})
@@ -130,6 +140,8 @@ module Aws::MPA
     UnqualifiedPolicyArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mpa#UnqualifiedPolicyArn", name: "UnqualifiedPolicyArn", traits: {"aws.api#data" => "usage", "smithy.api#length" => {"max" => 1224}, "smithy.api#pattern" => "^arn:.{1,63}:mpa:::aws:policy/[a-zA-Z0-9_\\.-]{1,1023}/[a-zA-Z0-9_\\.-]{1,1023}$"})
     UntagResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mpa#UntagResourceRequest", name: "UntagResourceRequest")
     UntagResourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mpa#UntagResourceResponse", name: "UntagResourceResponse")
+    UpdateAction = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.mpa#UpdateAction", name: "UpdateAction")
+    UpdateActions = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mpa#UpdateActions", name: "UpdateActions", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}})
     UpdateApprovalTeamRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mpa#UpdateApprovalTeamRequest", name: "UpdateApprovalTeamRequest")
     UpdateApprovalTeamResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mpa#UpdateApprovalTeamResponse", name: "UpdateApprovalTeamResponse")
     ValidationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mpa#ValidationException", name: "ValidationException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
@@ -137,6 +149,8 @@ module Aws::MPA
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message", traits: {"smithy.api#required" => {}}))
     AccessDeniedException.type = Types::AccessDeniedException
     ActionCompletionStrategy.add_member(:auto_completion_upon_approval, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AUTO_COMPLETION_UPON_APPROVAL", traits: {"smithy.api#enumValue" => "AUTO_COMPLETION_UPON_APPROVAL"}))
+    AdditionalSecurityRequirement.add_member(:approver_verification_required, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "APPROVER_VERIFICATION_REQUIRED", traits: {"smithy.api#enumValue" => "APPROVER_VERIFICATION_REQUIRED"}))
+    AdditionalSecurityRequirements.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalSecurityRequirement, name: "member"))
     ApprovalStrategy.add_member(:mof_n, Types::ApprovalStrategy::MofN, ::Smithy::Schema::Shapes::MemberShape.new(target: MofNApprovalStrategy, name: "MofN"))
     ApprovalStrategy.add_member(:unknown, Types::ApprovalStrategy::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     ApprovalStrategy.type = Types::ApprovalStrategy
@@ -163,6 +177,9 @@ module Aws::MPA
     ApprovalTeamStatusCode.add_member(:delete_pending_approval, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETE_PENDING_APPROVAL", traits: {"smithy.api#enumValue" => "DELETE_PENDING_APPROVAL"}))
     ApprovalTeamStatusCode.add_member(:delete_failed_approval, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETE_FAILED_APPROVAL", traits: {"smithy.api#enumValue" => "DELETE_FAILED_APPROVAL"}))
     ApprovalTeamStatusCode.add_member(:delete_failed_validation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETE_FAILED_VALIDATION", traits: {"smithy.api#enumValue" => "DELETE_FAILED_VALIDATION"}))
+    ApproverLastActivity.add_member(:voted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VOTED", traits: {"smithy.api#enumValue" => "VOTED"}))
+    ApproverLastActivity.add_member(:baselined, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BASELINED", traits: {"smithy.api#enumValue" => "BASELINED"}))
+    ApproverLastActivity.add_member(:responded_to_invitation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESPONDED_TO_INVITATION", traits: {"smithy.api#enumValue" => "RESPONDED_TO_INVITATION"}))
     CancelSessionRequest.add_member(:session_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionArn, name: "SessionArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     CancelSessionRequest.type = Types::CancelSessionRequest
     CancelSessionResponse.type = Types::CancelSessionResponse
@@ -229,6 +246,10 @@ module Aws::MPA
     GetApprovalTeamResponseApprover.add_member(:primary_identity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityId, name: "PrimaryIdentityId"))
     GetApprovalTeamResponseApprover.add_member(:primary_identity_source_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PrimaryIdentitySourceArn"))
     GetApprovalTeamResponseApprover.add_member(:primary_identity_status, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityStatus, name: "PrimaryIdentityStatus"))
+    GetApprovalTeamResponseApprover.add_member(:last_activity, ::Smithy::Schema::Shapes::MemberShape.new(target: ApproverLastActivity, name: "LastActivity"))
+    GetApprovalTeamResponseApprover.add_member(:last_activity_time, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoTimestamp, name: "LastActivityTime"))
+    GetApprovalTeamResponseApprover.add_member(:pending_baseline_session_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionArn, name: "PendingBaselineSessionArn"))
+    GetApprovalTeamResponseApprover.add_member(:mfa_methods, ::Smithy::Schema::Shapes::MemberShape.new(target: MfaMethods, name: "MfaMethods"))
     GetApprovalTeamResponseApprover.type = Types::GetApprovalTeamResponseApprover
     GetApprovalTeamResponseApprovers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GetApprovalTeamResponseApprover, name: "member"))
     GetIdentitySourceRequest.add_member(:identity_source_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "IdentitySourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -280,6 +301,7 @@ module Aws::MPA
     GetSessionResponse.add_member(:requester_comment, ::Smithy::Schema::Shapes::MemberShape.new(target: RequesterComment, name: "RequesterComment"))
     GetSessionResponse.add_member(:action_completion_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionCompletionStrategy, name: "ActionCompletionStrategy"))
     GetSessionResponse.add_member(:approver_responses, ::Smithy::Schema::Shapes::MemberShape.new(target: GetSessionResponseApproverResponses, name: "ApproverResponses"))
+    GetSessionResponse.add_member(:additional_security_requirements, ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalSecurityRequirements, name: "AdditionalSecurityRequirements"))
     GetSessionResponse.type = Types::GetSessionResponse
     GetSessionResponseApproverResponse.add_member(:approver_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ParticipantId, name: "ApproverId"))
     GetSessionResponseApproverResponse.add_member(:identity_source_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "IdentitySourceArn"))
@@ -406,12 +428,20 @@ module Aws::MPA
     ListSessionsResponseSession.add_member(:status_code, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionStatusCode, name: "StatusCode"))
     ListSessionsResponseSession.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "StatusMessage"))
     ListSessionsResponseSession.add_member(:action_completion_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionCompletionStrategy, name: "ActionCompletionStrategy"))
+    ListSessionsResponseSession.add_member(:additional_security_requirements, ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalSecurityRequirements, name: "AdditionalSecurityRequirements"))
     ListSessionsResponseSession.type = Types::ListSessionsResponseSession
     ListSessionsResponseSessions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListSessionsResponseSession, name: "member"))
     ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
     ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "Tags"))
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
+    MfaMethod.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: MfaType, name: "Type", traits: {"smithy.api#required" => {}}))
+    MfaMethod.add_member(:sync_status, ::Smithy::Schema::Shapes::MemberShape.new(target: MfaSyncStatus, name: "SyncStatus", traits: {"smithy.api#required" => {}}))
+    MfaMethod.type = Types::MfaMethod
+    MfaMethods.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MfaMethod, name: "member"))
+    MfaSyncStatus.add_member(:in_sync, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_SYNC", traits: {"smithy.api#enumValue" => "IN_SYNC"}))
+    MfaSyncStatus.add_member(:out_of_sync, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OUT_OF_SYNC", traits: {"smithy.api#enumValue" => "OUT_OF_SYNC"}))
+    MfaType.add_member(:email_otp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EMAIL_OTP", traits: {"smithy.api#enumValue" => "EMAIL_OTP"}))
     MofNApprovalStrategy.add_member(:min_approvals_required, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "MinApprovalsRequired", traits: {"smithy.api#range" => {"min" => 1}, "smithy.api#required" => {}}))
     MofNApprovalStrategy.type = Types::MofNApprovalStrategy
     Operator.add_member(:equals, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EQUALS", traits: {"smithy.api#enumValue" => "EQ"}))
@@ -488,12 +518,19 @@ module Aws::MPA
     SessionStatusCode.add_member(:rejected, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REJECTED", traits: {"smithy.api#enumValue" => "REJECTED"}))
     SessionStatusCode.add_member(:expired, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXPIRED", traits: {"smithy.api#enumValue" => "EXPIRED"}))
     SessionStatusCode.add_member(:configuration_changed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONFIGURATION_CHANGED", traits: {"smithy.api#enumValue" => "CONFIGURATION_CHANGED"}))
+    SessionStatusCode.add_member(:all_approvers_in_session, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALL_APPROVERS_IN_SESSION", traits: {"smithy.api#enumValue" => "ALL_APPROVERS_IN_SESSION"}))
     StartActiveApprovalTeamDeletionRequest.add_member(:pending_window_days, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "PendingWindowDays"))
     StartActiveApprovalTeamDeletionRequest.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalTeamArn, name: "Arn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     StartActiveApprovalTeamDeletionRequest.type = Types::StartActiveApprovalTeamDeletionRequest
     StartActiveApprovalTeamDeletionResponse.add_member(:deletion_completion_time, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoTimestamp, name: "DeletionCompletionTime"))
     StartActiveApprovalTeamDeletionResponse.add_member(:deletion_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoTimestamp, name: "DeletionStartTime"))
     StartActiveApprovalTeamDeletionResponse.type = Types::StartActiveApprovalTeamDeletionResponse
+    StartApprovalTeamBaselineApproverIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ParticipantId, name: "member"))
+    StartApprovalTeamBaselineRequest.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalTeamArn, name: "Arn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    StartApprovalTeamBaselineRequest.add_member(:approver_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: StartApprovalTeamBaselineApproverIds, name: "ApproverIds"))
+    StartApprovalTeamBaselineRequest.type = Types::StartApprovalTeamBaselineRequest
+    StartApprovalTeamBaselineResponse.add_member(:baseline_session_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionArn, name: "BaselineSessionArn"))
+    StartApprovalTeamBaselineResponse.type = Types::StartApprovalTeamBaselineResponse
     TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "Tags", traits: {"smithy.api#required" => {}}))
@@ -510,10 +547,13 @@ module Aws::MPA
     UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, name: "TagKeys", traits: {"smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
     UntagResourceResponse.type = Types::UntagResourceResponse
+    UpdateAction.add_member(:synchronize_mfa_devices, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SYNCHRONIZE_MFA_DEVICES", traits: {"smithy.api#enumValue" => "SYNCHRONIZE_MFA_DEVICES"}))
+    UpdateActions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateAction, name: "member"))
     UpdateApprovalTeamRequest.add_member(:approval_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalStrategy, name: "ApprovalStrategy"))
     UpdateApprovalTeamRequest.add_member(:approvers, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalTeamRequestApprovers, name: "Approvers"))
     UpdateApprovalTeamRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "Description"))
     UpdateApprovalTeamRequest.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalTeamArn, name: "Arn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateApprovalTeamRequest.add_member(:update_actions, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateActions, name: "UpdateActions"))
     UpdateApprovalTeamRequest.type = Types::UpdateApprovalTeamRequest
     UpdateApprovalTeamResponse.add_member(:version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "VersionId"))
     UpdateApprovalTeamResponse.type = Types::UpdateApprovalTeamResponse
@@ -524,7 +564,7 @@ module Aws::MPA
       service.id = "com.amazonaws.mpa#AWSFluffyCoreService"
       service.name = "AWSFluffyCoreService"
       service.version = "2022-07-26"
-      service.traits = {"aws.api#service" => {"sdkId" => "MPA", "arnNamespace" => "mpa"}, "aws.auth#sigv4" => {"name" => "mpa"}, "aws.endpoints#dualStackOnlyEndpoints" => {}, "aws.endpoints#standardRegionalEndpoints" => {}, "aws.iam#defineConditionKeys" => {"aws:ResourceTag/${TagKey}" => {"type" => "String", "documentation" => "Filters access by a tag key and value pair of a resource", "externalDocumentation" => "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-resourcetag"}, "aws:RequestTag/${TagKey}" => {"type" => "String", "documentation" => "Filters access by a tag key and value pair that is allowed in the request", "externalDocumentation" => "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-requesttag"}, "aws:TagKeys" => {"type" => "ArrayOfString", "documentation" => "Filters access by a list of tag keys that are allowed in the request", "externalDocumentation" => "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-tagkeys"}, "mpa:RequestedOperation" => {"type" => "String", "documentation" => "Filters access by the requested operation that requires team approval before it can be executed", "externalDocumentation" => "${DocHomeURL}mpa/latest/userguide/mpa-concepts.html"}, "mpa:ProtectedResourceAccount" => {"type" => "String", "documentation" => "Filters access by the account that owns the resource that is the target of the operation that requires approval", "externalDocumentation" => "${DocHomeURL}mpa/latest/userguide/mpa-concepts.html"}}, "aws.iam#disableConditionKeyInference" => {}, "aws.iam#supportedPrincipalTypes" => ["Root", "IAMUser", "IAMRole", "FederatedUser"], "aws.protocols#restJson1" => {}, "smithy.api#title" => "AWS Multi-party Approval"}
+      service.traits = {"aws.api#service" => {"sdkId" => "MPA", "arnNamespace" => "mpa"}, "aws.auth#sigv4" => {"name" => "mpa"}, "aws.endpoints#dualStackOnlyEndpoints" => {}, "aws.endpoints#standardRegionalEndpoints" => {}, "aws.iam#defineConditionKeys" => {"aws:ResourceTag/${TagKey}" => {"type" => "String", "documentation" => "Filters access by a tag key and value pair of a resource", "externalDocumentation" => "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-resourcetag"}, "aws:RequestTag/${TagKey}" => {"type" => "String", "documentation" => "Filters access by a tag key and value pair that is allowed in the request", "externalDocumentation" => "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-requesttag"}, "aws:TagKeys" => {"type" => "ArrayOfString", "documentation" => "Filters access by a list of tag keys that are allowed in the request", "externalDocumentation" => "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-tagkeys"}, "mpa:RequestedOperation" => {"type" => "String", "documentation" => "Filters access by the requested operation that requires team approval before it can be executed", "externalDocumentation" => "${DocHomeURL}mpa/latest/userguide/mpa-concepts.html"}, "mpa:ProtectedResourceAccount" => {"type" => "String", "documentation" => "Filters access by the account that owns the resource that is the target of the operation that requires approval", "externalDocumentation" => "${DocHomeURL}mpa/latest/userguide/mpa-concepts.html"}}, "aws.iam#disableConditionKeyInference" => {}, "aws.iam#supportedPrincipalTypes" => ["Root", "IAMUser", "IAMRole", "FederatedUser"], "aws.protocols#restJson1" => {}, "smithy.api#title" => "AWS Multi-party Approval", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}, "Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://mpa-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://mpa.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 6, "nodes" => "/////wAAAAH/////AAAAAAAAAAYAAAADAAAAAQAAAAQF9eEFAAAAAgAAAAUF9eEFAAAAAwX14QMF9eEEAAAAAwX14QEF9eEC"}}
       service.add_operation(:cancel_session, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mpa#CancelSession"
         operation.name = "CancelSession"
@@ -747,6 +787,18 @@ module Aws::MPA
         operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"aws.iam#conditionKeys" => ["aws:ResourceTag/${TagKey}"], "aws.iam#iamAction" => {"documentation" => "Grants permission to start the deletion process for an active approval team"}, "smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/approval-teams/{Arn}?Delete"}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:start_approval_team_baseline, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.mpa#StartApprovalTeamBaseline"
+        operation.name = "StartApprovalTeamBaseline"
+        operation.input = StartApprovalTeamBaselineRequest
+        operation.output = StartApprovalTeamBaselineResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"aws.iam#conditionKeys" => ["aws:ResourceTag/${TagKey}"], "aws.iam#iamAction" => {"documentation" => "Grants permission to start a baseline for an active approval team"}, "smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/approval-teams/{Arn}/baseline"}}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mpa#TagResource"

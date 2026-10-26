@@ -17,6 +17,10 @@ module Aws::Account
       def message: () -> String?
       def error_type: () -> String?
     end
+    class ResourceUnavailableException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def error_type: () -> String?
+    end
     class TooManyRequestsException < Smithy::Client::ServiceError
       def message: () -> String?
       def error_type: () -> String?

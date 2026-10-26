@@ -241,6 +241,7 @@ module Aws::AccessAnalyzer
         ?status: String,
         ?status_reason: Types::StatusReason,
         ?configuration: Types::AnalyzerConfiguration,
+        ?managed_by: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -254,6 +255,7 @@ module Aws::AccessAnalyzer
       attr_accessor status: String?
       attr_accessor status_reason: Types::StatusReason?
       attr_accessor configuration: Types::AnalyzerConfiguration?
+      attr_accessor managed_by: String?
     end
 
     class ApplyArchiveRuleInput
@@ -586,6 +588,34 @@ module Aws::AccessAnalyzer
       attr_accessor client_token: String?
     end
 
+    class CreateServiceLinkedAnalyzerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?archive_rules: Array[Types::InlineArchiveRule],
+        ?client_token: String,
+        ?configuration: Types::AnalyzerConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor archive_rules: Array[Types::InlineArchiveRule]?
+      attr_accessor client_token: String?
+      attr_accessor configuration: Types::AnalyzerConfiguration?
+    end
+
+    class CreateServiceLinkedAnalyzerResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
     class Criterion
       include Smithy::Schema::Structure
 
@@ -628,6 +658,19 @@ module Aws::AccessAnalyzer
 
       attr_accessor analyzer_name: String?
       attr_accessor rule_name: String?
+      attr_accessor client_token: String?
+    end
+
+    class DeleteServiceLinkedAnalyzerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?analyzer_name: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor analyzer_name: String?
       attr_accessor client_token: String?
     end
 
@@ -1969,11 +2012,13 @@ module Aws::AccessAnalyzer
       def initialize: (
         ?total_active_public: Integer,
         ?total_active_cross_account: Integer,
+        ?total_active_errors: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor total_active_public: Integer?
       attr_accessor total_active_cross_account: Integer?
+      attr_accessor total_active_errors: Integer?
     end
 
     class S3AccessPointConfiguration

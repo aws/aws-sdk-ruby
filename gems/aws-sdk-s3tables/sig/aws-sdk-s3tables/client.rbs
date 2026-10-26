@@ -69,18 +69,60 @@ module Aws::S3Tables
           schema: {
             fields: Array[
               {
+                id: Integer,
                 name: String,
                 type: untyped,
                 required: bool
               }
             ]
-          }
+          },
+          schema_v2: {
+            type: String,
+            fields: Array[
+              {
+                id: untyped,
+                name: untyped,
+                type: Smithy::Schema::document,
+                required: untyped,
+                doc: untyped
+              }
+            ],
+            schema_id: untyped,
+            identifier_field_ids: Array[Integer]
+          },
+          partition_spec: {
+            fields: Array[
+              {
+                source_id: untyped,
+                transform: untyped,
+                name: untyped,
+                field_id: untyped
+              }
+            ],
+            spec_id: untyped
+          },
+          write_order: {
+            order_id: untyped,
+            fields: Array[
+              {
+                source_id: untyped,
+                transform: untyped,
+                direction: String,
+                null_order: String
+              }
+            ]
+          },
+          properties: Hash[String, String]
         }
       },
       ?encryption_configuration: {
         sse_algorithm: String,
         kms_key_arn: String
-      }
+      },
+      ?storage_class_configuration: {
+        storage_class: String
+      },
+      ?tags: Hash[String, String]
     ) -> _CreateTableResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTableResponse
 
     interface _CreateTableBucketResponse
@@ -92,7 +134,11 @@ module Aws::S3Tables
       ?encryption_configuration: {
         sse_algorithm: String,
         kms_key_arn: String
-      }
+      },
+      ?storage_class_configuration: {
+        storage_class: String
+      },
+      ?tags: Hash[String, String]
     ) -> _CreateTableBucketResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTableBucketResponse
 
     interface _DeleteNamespaceResponse
@@ -127,12 +173,27 @@ module Aws::S3Tables
       ?table_bucket_arn: String
     ) -> _DeleteTableBucketEncryptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTableBucketEncryptionResponse
 
+    interface _DeleteTableBucketMetricsConfigurationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_table_bucket_metrics_configuration: (
+      ?table_bucket_arn: String
+    ) -> _DeleteTableBucketMetricsConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTableBucketMetricsConfigurationResponse
+
     interface _DeleteTableBucketPolicyResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
     end
     def delete_table_bucket_policy: (
       ?table_bucket_arn: String
     ) -> _DeleteTableBucketPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTableBucketPolicyResponse
+
+    interface _DeleteTableBucketReplicationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_table_bucket_replication: (
+      ?table_bucket_arn: String,
+      ?version_token: String
+    ) -> _DeleteTableBucketReplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTableBucketReplicationResponse
 
     interface _DeleteTablePolicyResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
@@ -142,6 +203,14 @@ module Aws::S3Tables
       ?namespace: String,
       ?name: String
     ) -> _DeleteTablePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTablePolicyResponse
+
+    interface _DeleteTableReplicationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_table_replication: (
+      ?table_arn: String,
+      ?version_token: String
+    ) -> _DeleteTableReplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTableReplicationResponse
 
     interface _GetNamespaceResponse
       include Smithy::Client::_Response[Types::GetNamespaceResponse]
@@ -175,6 +244,7 @@ module Aws::S3Tables
       def owner_account_id: () -> String?
       def format: () -> String?
       def table_bucket_id: () -> String?
+      def managed_table_information: () -> Types::ManagedTableInformation?
     end
     def get_table: (
       ?table_bucket_arn: String,
@@ -213,6 +283,15 @@ module Aws::S3Tables
       ?table_bucket_arn: String
     ) -> _GetTableBucketMaintenanceConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTableBucketMaintenanceConfigurationResponse
 
+    interface _GetTableBucketMetricsConfigurationResponse
+      include Smithy::Client::_Response[Types::GetTableBucketMetricsConfigurationResponse]
+      def table_bucket_arn: () -> String?
+      def id: () -> String?
+    end
+    def get_table_bucket_metrics_configuration: (
+      ?table_bucket_arn: String
+    ) -> _GetTableBucketMetricsConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTableBucketMetricsConfigurationResponse
+
     interface _GetTableBucketPolicyResponse
       include Smithy::Client::_Response[Types::GetTableBucketPolicyResponse]
       def resource_policy: () -> String?
@@ -220,6 +299,23 @@ module Aws::S3Tables
     def get_table_bucket_policy: (
       ?table_bucket_arn: String
     ) -> _GetTableBucketPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTableBucketPolicyResponse
+
+    interface _GetTableBucketReplicationResponse
+      include Smithy::Client::_Response[Types::GetTableBucketReplicationResponse]
+      def version_token: () -> String?
+      def configuration: () -> Types::TableBucketReplicationConfiguration?
+    end
+    def get_table_bucket_replication: (
+      ?table_bucket_arn: String
+    ) -> _GetTableBucketReplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTableBucketReplicationResponse
+
+    interface _GetTableBucketStorageClassResponse
+      include Smithy::Client::_Response[Types::GetTableBucketStorageClassResponse]
+      def storage_class_configuration: () -> Types::StorageClassConfiguration?
+    end
+    def get_table_bucket_storage_class: (
+      ?table_bucket_arn: String
+    ) -> _GetTableBucketStorageClassResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTableBucketStorageClassResponse
 
     interface _GetTableEncryptionResponse
       include Smithy::Client::_Response[Types::GetTableEncryptionResponse]
@@ -275,6 +371,53 @@ module Aws::S3Tables
       ?name: String
     ) -> _GetTablePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTablePolicyResponse
 
+    interface _GetTableRecordExpirationConfigurationResponse
+      include Smithy::Client::_Response[Types::GetTableRecordExpirationConfigurationResponse]
+      def configuration: () -> Types::TableRecordExpirationConfigurationValue?
+    end
+    def get_table_record_expiration_configuration: (
+      ?table_arn: String
+    ) -> _GetTableRecordExpirationConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTableRecordExpirationConfigurationResponse
+
+    interface _GetTableRecordExpirationJobStatusResponse
+      include Smithy::Client::_Response[Types::GetTableRecordExpirationJobStatusResponse]
+      def status: () -> String?
+      def last_run_timestamp: () -> Time?
+      def failure_message: () -> String?
+      def metrics: () -> Types::TableRecordExpirationJobMetrics?
+    end
+    def get_table_record_expiration_job_status: (
+      ?table_arn: String
+    ) -> _GetTableRecordExpirationJobStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTableRecordExpirationJobStatusResponse
+
+    interface _GetTableReplicationResponse
+      include Smithy::Client::_Response[Types::GetTableReplicationResponse]
+      def version_token: () -> String?
+      def configuration: () -> Types::TableReplicationConfiguration?
+    end
+    def get_table_replication: (
+      ?table_arn: String
+    ) -> _GetTableReplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTableReplicationResponse
+
+    interface _GetTableReplicationStatusResponse
+      include Smithy::Client::_Response[Types::GetTableReplicationStatusResponse]
+      def source_table_arn: () -> String?
+      def destinations: () -> Array[Types::ReplicationDestinationStatusModel]?
+    end
+    def get_table_replication_status: (
+      ?table_arn: String
+    ) -> _GetTableReplicationStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTableReplicationStatusResponse
+
+    interface _GetTableStorageClassResponse
+      include Smithy::Client::_Response[Types::GetTableStorageClassResponse]
+      def storage_class_configuration: () -> Types::StorageClassConfiguration?
+    end
+    def get_table_storage_class: (
+      ?table_bucket_arn: String,
+      ?namespace: String,
+      ?name: String
+    ) -> _GetTableStorageClassResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTableStorageClassResponse
+
     interface _ListNamespacesResponse
       include Smithy::Client::_Response[Types::ListNamespacesResponse]
       def namespaces: () -> Array[Types::NamespaceSummary]?
@@ -312,6 +455,14 @@ module Aws::S3Tables
       ?max_tables: Integer
     ) -> _ListTablesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTablesResponse
 
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
     interface _PutTableBucketEncryptionResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
     end
@@ -340,6 +491,13 @@ module Aws::S3Tables
       }
     ) -> _PutTableBucketMaintenanceConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutTableBucketMaintenanceConfigurationResponse
 
+    interface _PutTableBucketMetricsConfigurationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_table_bucket_metrics_configuration: (
+      ?table_bucket_arn: String
+    ) -> _PutTableBucketMetricsConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutTableBucketMetricsConfigurationResponse
+
     interface _PutTableBucketPolicyResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
     end
@@ -347,6 +505,38 @@ module Aws::S3Tables
       ?table_bucket_arn: String,
       ?resource_policy: String
     ) -> _PutTableBucketPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutTableBucketPolicyResponse
+
+    interface _PutTableBucketReplicationResponse
+      include Smithy::Client::_Response[Types::PutTableBucketReplicationResponse]
+      def version_token: () -> String?
+      def status: () -> String?
+    end
+    def put_table_bucket_replication: (
+      ?table_bucket_arn: String,
+      ?version_token: String,
+      ?configuration: {
+        role: String,
+        rules: Array[
+          {
+            destinations: Array[
+              {
+                destination_table_bucket_arn: String
+              }
+            ]
+          }
+        ]
+      }
+    ) -> _PutTableBucketReplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutTableBucketReplicationResponse
+
+    interface _PutTableBucketStorageClassResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_table_bucket_storage_class: (
+      ?table_bucket_arn: String,
+      ?storage_class_configuration: {
+        storage_class: String
+      }
+    ) -> _PutTableBucketStorageClassResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutTableBucketStorageClassResponse
 
     interface _PutTableMaintenanceConfigurationResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
@@ -381,6 +571,41 @@ module Aws::S3Tables
       ?resource_policy: String
     ) -> _PutTablePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutTablePolicyResponse
 
+    interface _PutTableRecordExpirationConfigurationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_table_record_expiration_configuration: (
+      ?table_arn: String,
+      ?value: {
+        status: String,
+        settings: {
+          days: Integer
+        }
+      }
+    ) -> _PutTableRecordExpirationConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutTableRecordExpirationConfigurationResponse
+
+    interface _PutTableReplicationResponse
+      include Smithy::Client::_Response[Types::PutTableReplicationResponse]
+      def version_token: () -> String?
+      def status: () -> String?
+    end
+    def put_table_replication: (
+      ?table_arn: String,
+      ?version_token: String,
+      ?configuration: {
+        role: String,
+        rules: Array[
+          {
+            destinations: Array[
+              {
+                destination_table_bucket_arn: String
+              }
+            ]
+          }
+        ]
+      }
+    ) -> _PutTableReplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutTableReplicationResponse
+
     interface _RenameTableResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
     end
@@ -392,6 +617,22 @@ module Aws::S3Tables
       ?new_name: String,
       ?version_token: String
     ) -> _RenameTableResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RenameTableResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
 
     interface _UpdateTableMetadataLocationResponse
       include Smithy::Client::_Response[Types::UpdateTableMetadataLocationResponse]

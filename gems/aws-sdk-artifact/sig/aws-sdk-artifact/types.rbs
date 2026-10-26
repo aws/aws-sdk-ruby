@@ -34,6 +34,21 @@ module Aws::Artifact
       MODIFIED: String
     end
 
+    class Citation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_label: String,
+        ?source_content: String,
+        ?source_link: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_label: String?
+      attr_accessor source_content: String?
+      attr_accessor source_link: String?
+    end
+
     class ConflictException
       include Smithy::Schema::Structure
 
@@ -47,6 +62,38 @@ module Aws::Artifact
       attr_accessor message: String?
       attr_accessor resource_id: String?
       attr_accessor resource_type: String?
+    end
+
+    class CreateComplianceInquiryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?inquiry_content: Types::InquiryContent,
+        ?client_token: String,
+        ?support_mode: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor inquiry_content: Types::InquiryContent?
+      attr_accessor client_token: String?
+      attr_accessor support_mode: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateComplianceInquiryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?compliance_inquiry_summary: Types::InquirySummary,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor compliance_inquiry_summary: Types::InquirySummary?
+      attr_accessor tags: Hash[String, String]?
     end
 
     module CustomerAgreementState
@@ -90,6 +137,45 @@ module Aws::Artifact
       attr_accessor type: String?
     end
 
+    class ExportComplianceInquiryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?compliance_inquiry_id: String,
+        ?query_identifiers: Array[Integer],
+        ?include_citations: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor compliance_inquiry_id: String?
+      attr_accessor query_identifiers: Array[Integer]?
+      attr_accessor include_citations: bool?
+    end
+
+    class ExportComplianceInquiryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?document_presigned_url: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor document_presigned_url: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    module FeedbackRating
+      THUMBS_UP: String
+      THUMBS_DOWN: String
+    end
+
+    module FeedbackReasonCode
+      OTHER: String
+      PARTIAL_RESPONSE: String
+      IRRELEVANT_RESPONSE: String
+    end
+
     class GetAccountSettingsRequest
       include Smithy::Schema::Structure
 
@@ -108,6 +194,30 @@ module Aws::Artifact
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor account_settings: Types::AccountSettings?
+    end
+
+    class GetComplianceInquiryMetadataRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?compliance_inquiry_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor compliance_inquiry_id: String?
+    end
+
+    class GetComplianceInquiryMetadataResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?compliance_inquiry_detail: Types::InquiryDetail,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor compliance_inquiry_detail: Types::InquiryDetail?
+      attr_accessor tags: Hash[String, String]?
     end
 
     class GetReportMetadataRequest
@@ -186,6 +296,115 @@ module Aws::Artifact
       attr_accessor term_token: String?
     end
 
+    module InputSource
+      TEXT: String
+      FILE: String
+    end
+
+    class InquiryContent
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?query: String,
+        ?file_content: Types::InquiryFileContent,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query: String?
+      attr_accessor file_content: Types::InquiryFileContent?
+
+      class Query < InquiryContent
+      end
+      class FileContent < InquiryContent
+      end
+      class Unknown < InquiryContent
+      end
+    end
+
+    class InquiryDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?id: String,
+        ?status: String,
+        ?status_message: String,
+        ?input_source: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?support_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor id: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor input_source: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor support_mode: String?
+    end
+
+    class InquiryFileContent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_sections: Array[String],
+        ?content: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_sections: Array[String]?
+      attr_accessor content: String?
+    end
+
+    module InquiryStatus
+      PROCESSING: String
+      HUMAN_REVIEW: String
+      COMPLETED: String
+      FAILED: String
+    end
+
+    module InquiryStatusMessage
+      SUCCESS: String
+      MALWARE_DETECTED_ERROR: String
+      IN_PROGRESS: String
+      INTERNAL_ERROR: String
+      HUMAN_REVIEW_IN_PROGRESS: String
+      COMPLETED_WITH_ERRORS: String
+    end
+
+    class InquirySummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?id: String,
+        ?status: String,
+        ?status_message: String,
+        ?input_source: String,
+        ?created_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor id: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor input_source: String?
+      attr_accessor created_at: Time?
+    end
+
+    module InquirySupportMode
+      AI_ONLY: String
+      FULL_SUPPORT: String
+    end
+
     class InternalServerException
       include Smithy::Schema::Structure
 
@@ -197,6 +416,60 @@ module Aws::Artifact
 
       attr_accessor message: String?
       attr_accessor retry_after_seconds: Integer?
+    end
+
+    class ListComplianceInquiriesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListComplianceInquiriesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?compliance_inquiries: Array[Types::InquirySummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor compliance_inquiries: Array[Types::InquirySummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListComplianceInquiryQueriesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?compliance_inquiry_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor compliance_inquiry_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListComplianceInquiryQueriesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?queries: Array[Types::QuerySummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor queries: Array[Types::QuerySummary]?
+      attr_accessor next_token: String?
     end
 
     class ListCustomerAgreementsRequest
@@ -225,6 +498,34 @@ module Aws::Artifact
       attr_accessor next_token: String?
     end
 
+    class ListReportVersionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?report_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor report_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListReportVersionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reports: Array[Types::ReportSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reports: Array[Types::ReportSummary]?
+      attr_accessor next_token: String?
+    end
+
     class ListReportsRequest
       include Smithy::Schema::Structure
 
@@ -249,6 +550,28 @@ module Aws::Artifact
 
       attr_accessor reports: Array[Types::ReportSummary]?
       attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
     end
 
     module NotificationSubscriptionStatus
@@ -281,6 +604,81 @@ module Aws::Artifact
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor account_settings: Types::AccountSettings?
+    end
+
+    class PutComplianceInquiryFeedbackRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?compliance_inquiry_id: String,
+        ?query_identifier: Integer,
+        ?rating: String,
+        ?response_revision_id: Integer,
+        ?reason_codes: Array[String],
+        ?comment: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor compliance_inquiry_id: String?
+      attr_accessor query_identifier: Integer?
+      attr_accessor rating: String?
+      attr_accessor response_revision_id: Integer?
+      attr_accessor reason_codes: Array[String]?
+      attr_accessor comment: String?
+      attr_accessor client_token: String?
+    end
+
+    class PutComplianceInquiryFeedbackResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?submitted_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor submitted_at: Time?
+    end
+
+    module QueryStatus
+      PROCESSING: String
+      COMPLETED: String
+      FAILED: String
+    end
+
+    module QueryStatusMessage
+      SUCCESS: String
+      IN_PROGRESS: String
+      INTERNAL_ERROR: String
+      PENDING_HUMAN_REVIEW: String
+      RESTRICTED: String
+    end
+
+    class QuerySummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_identifier: Integer,
+        ?query: String,
+        ?response: String,
+        ?review_type: String,
+        ?citations: Array[Types::Citation],
+        ?status: String,
+        ?status_message: String,
+        ?created_at: Time,
+        ?updated_response_versions: Array[Types::ResponseVersion],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_identifier: Integer?
+      attr_accessor query: String?
+      attr_accessor response: String?
+      attr_accessor review_type: String?
+      attr_accessor citations: Array[Types::Citation]?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_response_versions: Array[Types::ResponseVersion]?
     end
 
     class ReportDetail
@@ -386,6 +784,24 @@ module Aws::Artifact
       attr_accessor resource_type: String?
     end
 
+    class ResponseVersion
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?response_text: String,
+        ?timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor response_text: String?
+      attr_accessor timestamp: Time?
+    end
+
+    module ReviewType
+      HUMAN: String
+      AI: String
+    end
+
     class ServiceQuotaExceededException
       include Smithy::Schema::Structure
 
@@ -405,6 +821,28 @@ module Aws::Artifact
       attr_accessor quota_code: String?
     end
 
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
     class ThrottlingException
       include Smithy::Schema::Structure
 
@@ -420,6 +858,28 @@ module Aws::Artifact
       attr_accessor service_code: String?
       attr_accessor quota_code: String?
       attr_accessor retry_after_seconds: Integer?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
     end
 
     module UploadState

@@ -2,6 +2,7 @@ module Aws::S3
   module Schema
     include Smithy::Schema::Shapes
 
+    AbacStatus: StructureShape
     AbortDate: TimestampShape
     AbortIncompleteMultipartUpload: StructureShape
     AbortMultipartUploadOutput: StructureShape
@@ -11,6 +12,7 @@ module Aws::S3
     AcceptRanges: StringShape
     AccessControlPolicy: StructureShape
     AccessControlTranslation: StructureShape
+    AccessDenied: StructureShape
     AccessKeyIdValue: StringShape
     AccessPointAlias: BooleanShape
     AccessPointArn: StringShape
@@ -30,9 +32,23 @@ module Aws::S3
     AnalyticsId: StringShape
     AnalyticsS3BucketDestination: StructureShape
     AnalyticsS3ExportFileFormat: EnumShape
+    AnnotationConfigurationState: EnumShape
+    AnnotationCount: IntegerShape
+    AnnotationDirective: EnumShape
+    AnnotationEntry: StructureShape
+    AnnotationLimitExceeded: StructureShape
+    AnnotationList: ListShape
+    AnnotationName: StringShape
+    AnnotationNameTooLong: StructureShape
+    AnnotationPrefix: StringShape
+    AnnotationTableConfiguration: StructureShape
+    AnnotationTableConfigurationResult: StructureShape
+    AnnotationTableConfigurationUpdates: StructureShape
     ArchiveStatus: EnumShape
+    BlockedEncryptionTypes: StructureShape
     Body: BlobShape
     Bucket: StructureShape
+    BucketAbacStatus: EnumShape
     BucketAccelerateStatus: EnumShape
     BucketAlreadyExists: StructureShape
     BucketAlreadyOwnedByYou: StructureShape
@@ -45,6 +61,7 @@ module Aws::S3
     BucketLoggingStatus: StructureShape
     BucketLogsPermission: EnumShape
     BucketName: StringShape
+    BucketNamespace: EnumShape
     BucketRegion: StringShape
     BucketType: EnumShape
     BucketVersioningStatus: EnumShape
@@ -65,10 +82,15 @@ module Aws::S3
     ChecksumCRC32: StringShape
     ChecksumCRC32C: StringShape
     ChecksumCRC64NVME: StringShape
+    ChecksumMD5: StringShape
     ChecksumMode: EnumShape
     ChecksumSHA1: StringShape
     ChecksumSHA256: StringShape
+    ChecksumSHA512: StringShape
     ChecksumType: EnumShape
+    ChecksumXXHASH128: StringShape
+    ChecksumXXHASH3: StringShape
+    ChecksumXXHASH64: StringShape
     ClientToken: StringShape
     Code: StringShape
     Comments: StringShape
@@ -141,6 +163,8 @@ module Aws::S3
     DeleteMarkerReplicationStatus: EnumShape
     DeleteMarkerVersionId: StringShape
     DeleteMarkers: ListShape
+    DeleteObjectAnnotationOutput: StructureShape
+    DeleteObjectAnnotationRequest: StructureShape
     DeleteObjectOutput: StructureShape
     DeleteObjectRequest: StructureShape
     DeleteObjectTaggingOutput: StructureShape
@@ -162,6 +186,8 @@ module Aws::S3
     EncodingType: EnumShape
     Encryption: StructureShape
     EncryptionConfiguration: StructureShape
+    EncryptionType: EnumShape
+    EncryptionTypeList: ListShape
     EncryptionTypeMismatch: StructureShape
     End: IntegerShape
     EndEvent: StructureShape
@@ -173,6 +199,7 @@ module Aws::S3
     Errors: ListShape
     Event: EnumShape
     EventBridgeConfiguration: StructureShape
+    EventHoldDuration: StructureShape
     EventList: ListShape
     ExistingObjectReplication: StructureShape
     ExistingObjectReplicationStatus: EnumShape
@@ -192,6 +219,8 @@ module Aws::S3
     FilterRuleList: ListShape
     FilterRuleName: EnumShape
     FilterRuleValue: StringShape
+    GetBucketAbacOutput: StructureShape
+    GetBucketAbacRequest: StructureShape
     GetBucketAccelerateConfigurationOutput: StructureShape
     GetBucketAccelerateConfigurationRequest: StructureShape
     GetBucketAclOutput: StructureShape
@@ -240,6 +269,8 @@ module Aws::S3
     GetBucketWebsiteRequest: StructureShape
     GetObjectAclOutput: StructureShape
     GetObjectAclRequest: StructureShape
+    GetObjectAnnotationOutput: StructureShape
+    GetObjectAnnotationRequest: StructureShape
     GetObjectAttributesOutput: StructureShape
     GetObjectAttributesParts: StructureShape
     GetObjectAttributesRequest: StructureShape
@@ -295,7 +326,9 @@ module Aws::S3
     IntelligentTieringFilter: StructureShape
     IntelligentTieringId: StringShape
     IntelligentTieringStatus: EnumShape
+    InvalidAnnotationName: StructureShape
     InvalidObjectState: StructureShape
+    InvalidPrefix: StructureShape
     InvalidRequest: StructureShape
     InvalidWriteOffset: StructureShape
     InventoryConfiguration: StructureShape
@@ -355,6 +388,8 @@ module Aws::S3
     ListDirectoryBucketsRequest: StructureShape
     ListMultipartUploadsOutput: StructureShape
     ListMultipartUploadsRequest: StructureShape
+    ListObjectAnnotationsOutput: StructureShape
+    ListObjectAnnotationsRequest: StructureShape
     ListObjectVersionsOutput: StructureShape
     ListObjectVersionsRequest: StructureShape
     ListObjectsOutput: StructureShape
@@ -374,6 +409,7 @@ module Aws::S3
     MFADeleteStatus: EnumShape
     Marker: StringShape
     MaxAgeSeconds: IntegerShape
+    MaxAnnotationResults: IntegerShape
     MaxBuckets: IntegerShape
     MaxDirectoryBuckets: IntegerShape
     MaxKeys: IntegerShape
@@ -410,9 +446,11 @@ module Aws::S3
     NextToken: StringShape
     NextUploadIdMarker: StringShape
     NextVersionIdMarker: StringShape
+    NoSuchAnnotation: StructureShape
     NoSuchBucket: StructureShape
     NoSuchKey: StructureShape
     NoSuchUpload: StructureShape
+    NonEmptyKmsKeyArnString: StringShape
     NoncurrentVersionExpiration: StructureShape
     NoncurrentVersionTransition: StructureShape
     NoncurrentVersionTransitionList: ListShape
@@ -425,13 +463,18 @@ module Aws::S3
     ObjectAttributes: EnumShape
     ObjectAttributesList: ListShape
     ObjectCannedACL: EnumShape
+    ObjectEncryption: UnionShape
     ObjectIdentifier: StructureShape
     ObjectIdentifierList: ListShape
+    ObjectIfMatch: StringShape
     ObjectKey: StringShape
     ObjectList: ListShape
     ObjectLockConfiguration: StructureShape
     ObjectLockEnabled: EnumShape
     ObjectLockEnabledForBucket: BooleanShape
+    ObjectLockEventHold: EnumShape
+    ObjectLockEventHoldDurationDays: IntegerShape
+    ObjectLockEventHoldDurationYears: IntegerShape
     ObjectLockLegalHold: StructureShape
     ObjectLockLegalHoldStatus: EnumShape
     ObjectLockMode: EnumShape
@@ -479,6 +522,7 @@ module Aws::S3
     ProgressEvent: StructureShape
     Protocol: EnumShape
     PublicAccessBlockConfiguration: StructureShape
+    PutBucketAbacRequest: StructureShape
     PutBucketAccelerateConfigurationRequest: StructureShape
     PutBucketAclRequest: StructureShape
     PutBucketAnalyticsConfigurationRequest: StructureShape
@@ -500,6 +544,8 @@ module Aws::S3
     PutBucketWebsiteRequest: StructureShape
     PutObjectAclOutput: StructureShape
     PutObjectAclRequest: StructureShape
+    PutObjectAnnotationOutput: StructureShape
+    PutObjectAnnotationRequest: StructureShape
     PutObjectLegalHoldOutput: StructureShape
     PutObjectLegalHoldRequest: StructureShape
     PutObjectLockConfigurationOutput: StructureShape
@@ -585,6 +631,7 @@ module Aws::S3
     SSECustomerKey: StringShape
     SSECustomerKeyMD5: StringShape
     SSEKMS: StructureShape
+    SSEKMSEncryption: StructureShape
     SSEKMSEncryptionContext: StringShape
     SSEKMSKeyId: StringShape
     SSES3: StructureShape
@@ -645,8 +692,12 @@ module Aws::S3
     TransitionStorageClass: EnumShape
     Type: EnumShape
     URI: StringShape
+    UnsupportedMediaType: StructureShape
+    UpdateBucketMetadataAnnotationTableConfigurationRequest: StructureShape
     UpdateBucketMetadataInventoryTableConfigurationRequest: StructureShape
     UpdateBucketMetadataJournalTableConfigurationRequest: StructureShape
+    UpdateObjectEncryptionRequest: StructureShape
+    UpdateObjectEncryptionResponse: StructureShape
     UploadIdMarker: StringShape
     UploadPartCopyOutput: StructureShape
     UploadPartCopyRequest: StructureShape

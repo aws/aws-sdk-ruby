@@ -535,6 +535,17 @@ module Aws::MWAA
       attr_accessor rest_api_response: Smithy::Schema::document?
     end
 
+    class ServiceUnavailableException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
     class StatisticSet
       include Smithy::Schema::Structure
 

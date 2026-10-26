@@ -8,6 +8,8 @@ module Aws::DLM
     ArchiveRetainRule: StructureShape
     ArchiveRule: StructureShape
     AvailabilityZone: StringShape
+    AvailabilityZoneId: StringShape
+    AvailabilityZoneIdList: ListShape
     AvailabilityZoneList: ListShape
     AwsAccountId: StringShape
     CmkArn: StringShape

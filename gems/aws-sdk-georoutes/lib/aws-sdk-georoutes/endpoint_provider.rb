@@ -21,28 +21,28 @@ module Aws::GeoRoutes
       if Smithy::Client::EndpointRules.set?(parameters.region)
         if (partition_result = Aws::Core::EndpointRules.partition(parameters.region))
           if Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws") && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, false) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, false)
-            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://routes.geo.#{parameters.region}.#{partition_result['dnsSuffix']}/v2", headers: {}, properties: {})
+            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://routes.geo.#{parameters.region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
           end
           if Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws") && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, true) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, true)
-            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://routes.geo-fips.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}/v2", headers: {}, properties: {})
+            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://routes.geo-fips.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
           end
           if Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws") && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, true) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, false)
-            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://routes.geo-fips.#{parameters.region}.#{partition_result['dnsSuffix']}/v2", headers: {}, properties: {})
+            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://routes.geo-fips.#{parameters.region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
           end
           if Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws") && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, false) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, true)
-            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://routes.geo.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}/v2", headers: {}, properties: {})
+            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://routes.geo.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
           end
           if Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws-us-gov") && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, false) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, false)
-            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://routes.geo.#{parameters.region}.us-gov.#{partition_result['dnsSuffix']}/v2", headers: {}, properties: {})
+            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://routes.geo.#{parameters.region}.us-gov.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
           end
           if Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws-us-gov") && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, true) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, true)
-            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://routes.geo-fips.#{parameters.region}.us-gov.#{partition_result['dualStackDnsSuffix']}/v2", headers: {}, properties: {})
+            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://routes.geo-fips.#{parameters.region}.us-gov.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
           end
           if Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws-us-gov") && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, true) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, false)
-            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://routes.geo-fips.#{parameters.region}.us-gov.#{partition_result['dnsSuffix']}/v2", headers: {}, properties: {})
+            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://routes.geo-fips.#{parameters.region}.us-gov.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
           end
           if Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws-us-gov") && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, false) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, true)
-            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://routes.geo.#{parameters.region}.us-gov.#{partition_result['dualStackDnsSuffix']}/v2", headers: {}, properties: {})
+            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://routes.geo.#{parameters.region}.us-gov.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
           end
           if Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, true) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, true)
             if Smithy::Client::EndpointRules.boolean_equals?(true, Smithy::Client::EndpointRules.attr(partition_result, "supportsFIPS")) && Smithy::Client::EndpointRules.boolean_equals?(true, Smithy::Client::EndpointRules.attr(partition_result, "supportsDualStack"))

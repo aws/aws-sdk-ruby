@@ -37,6 +37,7 @@ module Aws::SSM
   # * {AutomationExecutionNotFoundException}
   # * {AutomationStepNotFoundException}
   # * {ComplianceTypeCountLimitExceededException}
+  # * {ConflictException}
   # * {CustomSchemaCountLimitExceededException}
   # * {DocumentAlreadyExists}
   # * {DocumentLimitExceeded}
@@ -107,6 +108,7 @@ module Aws::SSM
   # * {ItemSizeLimitExceededException}
   # * {MalformedResourcePolicyDocumentException}
   # * {MaxDocumentSizeExceeded}
+  # * {NoLongerSupportedException}
   # * {OpsItemAccessDeniedException}
   # * {OpsItemAlreadyExistsException}
   # * {OpsItemConflictException}
@@ -347,6 +349,20 @@ module Aws::SSM
     class ComplianceTypeCountLimitExceededException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::ComplianceTypeCountLimitExceededException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>An error occurred because of a conflict with a concurrent request or the current state of
+    #    the resource. Retry your request.</p>
+    class ConflictException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::SSM::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
         super
       end
@@ -1302,6 +1318,19 @@ module Aws::SSM
     class MaxDocumentSizeExceeded < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SSM::Types::MaxDocumentSizeExceeded] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>The requested operation is no longer supported by Systems Manager.</p>
+    class NoLongerSupportedException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::SSM::Types::NoLongerSupportedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
         super
       end

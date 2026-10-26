@@ -6,6 +6,7 @@ module Aws::IAM
   # This module contains a schema composed of shapes used by the client.
   module Schema
 
+    AcceptDelegationRequestRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#AcceptDelegationRequestRequest", name: "AcceptDelegationRequestRequest")
     AccessAdvisorUsageGranularityType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iam#AccessAdvisorUsageGranularityType", name: "AccessAdvisorUsageGranularityType")
     AccessDetail = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#AccessDetail", name: "AccessDetail")
     AccessDetails = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iam#AccessDetails", name: "AccessDetails")
@@ -13,17 +14,22 @@ module Aws::IAM
     AccessKeyLastUsed = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#AccessKeyLastUsed", name: "AccessKeyLastUsed")
     AccessKeyMetadata = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#AccessKeyMetadata", name: "AccessKeyMetadata")
     AccountNotManagementOrDelegatedAdministratorException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#AccountNotManagementOrDelegatedAdministratorException", name: "AccountNotManagementOrDelegatedAdministratorException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
+    AcquireRoleRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#AcquireRoleRequest", name: "AcquireRoleRequest")
+    AcquireRoleResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#AcquireRoleResponse", name: "AcquireRoleResponse")
     ActionNameListType = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iam#ActionNameListType", name: "ActionNameListType")
     ActionNameType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#ActionNameType", name: "ActionNameType", traits: {"smithy.api#length" => {"min" => 3, "max" => 128}})
     AddClientIDToOpenIDConnectProviderRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#AddClientIDToOpenIDConnectProviderRequest", name: "AddClientIDToOpenIDConnectProviderRequest")
     AddRoleToInstanceProfileRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#AddRoleToInstanceProfileRequest", name: "AddRoleToInstanceProfileRequest")
     AddUserToGroupRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#AddUserToGroupRequest", name: "AddUserToGroupRequest")
     ArnListType = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iam#ArnListType", name: "ArnListType")
+    AssociateDelegationRequestRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#AssociateDelegationRequestRequest", name: "AssociateDelegationRequestRequest")
     AttachGroupPolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#AttachGroupPolicyRequest", name: "AttachGroupPolicyRequest")
     AttachRolePolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#AttachRolePolicyRequest", name: "AttachRolePolicyRequest")
     AttachUserPolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#AttachUserPolicyRequest", name: "AttachUserPolicyRequest")
     AttachedPermissionsBoundary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#AttachedPermissionsBoundary", name: "AttachedPermissionsBoundary")
     AttachedPolicy = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#AttachedPolicy", name: "AttachedPolicy")
+    AttachmentName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#AttachmentName", name: "AttachmentName", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[\\w+=,.@-]+$"})
+    AttachmentType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iam#AttachmentType", name: "AttachmentType")
     BootstrapDatum = ::Smithy::Schema::Shapes::BlobShape.new(id: "com.amazonaws.iam#BootstrapDatum", name: "BootstrapDatum", traits: {"smithy.api#sensitive" => {}})
     CallerIsNotManagementAccountException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#CallerIsNotManagementAccountException", name: "CallerIsNotManagementAccountException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     CertificationKeyType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#CertificationKeyType", name: "CertificationKeyType", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[\\u0020-\\u00FF]+$"})
@@ -43,6 +49,8 @@ module Aws::IAM
     CreateAccessKeyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#CreateAccessKeyRequest", name: "CreateAccessKeyRequest")
     CreateAccessKeyResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#CreateAccessKeyResponse", name: "CreateAccessKeyResponse")
     CreateAccountAliasRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#CreateAccountAliasRequest", name: "CreateAccountAliasRequest")
+    CreateDelegationRequestRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#CreateDelegationRequestRequest", name: "CreateDelegationRequestRequest")
+    CreateDelegationRequestResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#CreateDelegationRequestResponse", name: "CreateDelegationRequestResponse")
     CreateGroupRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#CreateGroupRequest", name: "CreateGroupRequest")
     CreateGroupResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#CreateGroupResponse", name: "CreateGroupResponse")
     CreateInstanceProfileRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#CreateInstanceProfileRequest", name: "CreateInstanceProfileRequest")
@@ -71,6 +79,8 @@ module Aws::IAM
     CredentialReportNotPresentException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#CredentialReportNotPresentException", name: "CredentialReportNotPresentException", traits: {"aws.protocols#awsQueryError" => {"code" => "ReportNotPresent", "httpResponseCode" => 410}, "smithy.api#error" => "client", "smithy.api#httpError" => 410})
     CredentialReportNotReadyException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#CredentialReportNotReadyException", name: "CredentialReportNotReadyException", traits: {"aws.protocols#awsQueryError" => {"code" => "ReportInProgress", "httpResponseCode" => 404}, "smithy.api#error" => "client", "smithy.api#httpError" => 404})
     DeactivateMFADeviceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#DeactivateMFADeviceRequest", name: "DeactivateMFADeviceRequest")
+    DelegationPermission = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#DelegationPermission", name: "DelegationPermission")
+    DelegationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#DelegationRequest", name: "DelegationRequest")
     DeleteAccessKeyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#DeleteAccessKeyRequest", name: "DeleteAccessKeyRequest")
     DeleteAccountAliasRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#DeleteAccountAliasRequest", name: "DeleteAccountAliasRequest")
     DeleteConflictException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#DeleteConflictException", name: "DeleteConflictException", traits: {"aws.protocols#awsQueryError" => {"code" => "DeleteConflict", "httpResponseCode" => 409}, "smithy.api#error" => "client", "smithy.api#httpError" => 409})
@@ -112,6 +122,7 @@ module Aws::IAM
     EnableOrganizationsRootCredentialsManagementResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#EnableOrganizationsRootCredentialsManagementResponse", name: "EnableOrganizationsRootCredentialsManagementResponse")
     EnableOrganizationsRootSessionsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#EnableOrganizationsRootSessionsRequest", name: "EnableOrganizationsRootSessionsRequest")
     EnableOrganizationsRootSessionsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#EnableOrganizationsRootSessionsResponse", name: "EnableOrganizationsRootSessionsResponse")
+    EnableOutboundWebIdentityFederationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#EnableOutboundWebIdentityFederationResponse", name: "EnableOutboundWebIdentityFederationResponse")
     EntityAlreadyExistsException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#EntityAlreadyExistsException", name: "EntityAlreadyExistsException", traits: {"aws.protocols#awsQueryError" => {"code" => "EntityAlreadyExists", "httpResponseCode" => 409}, "smithy.api#error" => "client", "smithy.api#httpError" => 409})
     EntityDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#EntityDetails", name: "EntityDetails")
     EntityInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#EntityInfo", name: "EntityInfo")
@@ -123,6 +134,10 @@ module Aws::IAM
     EvaluationResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#EvaluationResult", name: "EvaluationResult")
     EvaluationResultsListType = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iam#EvaluationResultsListType", name: "EvaluationResultsListType")
     ExceptionMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#ExceptionMessage", name: "ExceptionMessage")
+    FeatureDisabledException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#FeatureDisabledException", name: "FeatureDisabledException", traits: {"aws.protocols#awsQueryError" => {"code" => "FeatureDisabled", "httpResponseCode" => 404}, "smithy.api#error" => "client", "smithy.api#httpError" => 404})
+    FeatureDisabledMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#FeatureDisabledMessage", name: "FeatureDisabledMessage")
+    FeatureEnabledException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#FeatureEnabledException", name: "FeatureEnabledException", traits: {"aws.protocols#awsQueryError" => {"code" => "FeatureEnabled", "httpResponseCode" => 409}, "smithy.api#error" => "client", "smithy.api#httpError" => 409})
+    FeatureEnabledMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#FeatureEnabledMessage", name: "FeatureEnabledMessage")
     FeatureType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iam#FeatureType", name: "FeatureType")
     FeaturesListType = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iam#FeaturesListType", name: "FeaturesListType")
     GenerateCredentialReportResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#GenerateCredentialReportResponse", name: "GenerateCredentialReportResponse")
@@ -135,16 +150,22 @@ module Aws::IAM
     GetAccountAuthorizationDetailsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#GetAccountAuthorizationDetailsRequest", name: "GetAccountAuthorizationDetailsRequest")
     GetAccountAuthorizationDetailsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#GetAccountAuthorizationDetailsResponse", name: "GetAccountAuthorizationDetailsResponse")
     GetAccountPasswordPolicyResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#GetAccountPasswordPolicyResponse", name: "GetAccountPasswordPolicyResponse")
+    GetAccountPropertiesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#GetAccountPropertiesRequest", name: "GetAccountPropertiesRequest")
+    GetAccountPropertiesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#GetAccountPropertiesResponse", name: "GetAccountPropertiesResponse")
     GetAccountSummaryResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#GetAccountSummaryResponse", name: "GetAccountSummaryResponse")
     GetContextKeysForCustomPolicyOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#GetContextKeysForCustomPolicyOutput", name: "GetContextKeysForCustomPolicyOutput")
     GetContextKeysForCustomPolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#GetContextKeysForCustomPolicyRequest", name: "GetContextKeysForCustomPolicyRequest")
     GetContextKeysForPrincipalPolicyOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#GetContextKeysForPrincipalPolicyOutput", name: "GetContextKeysForPrincipalPolicyOutput")
     GetContextKeysForPrincipalPolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#GetContextKeysForPrincipalPolicyRequest", name: "GetContextKeysForPrincipalPolicyRequest")
     GetCredentialReportResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#GetCredentialReportResponse", name: "GetCredentialReportResponse")
+    GetDelegationRequestRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#GetDelegationRequestRequest", name: "GetDelegationRequestRequest")
+    GetDelegationRequestResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#GetDelegationRequestResponse", name: "GetDelegationRequestResponse")
     GetGroupPolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#GetGroupPolicyRequest", name: "GetGroupPolicyRequest")
     GetGroupPolicyResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#GetGroupPolicyResponse", name: "GetGroupPolicyResponse")
     GetGroupRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#GetGroupRequest", name: "GetGroupRequest")
     GetGroupResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#GetGroupResponse", name: "GetGroupResponse")
+    GetHumanReadableSummaryRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#GetHumanReadableSummaryRequest", name: "GetHumanReadableSummaryRequest")
+    GetHumanReadableSummaryResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#GetHumanReadableSummaryResponse", name: "GetHumanReadableSummaryResponse")
     GetInstanceProfileRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#GetInstanceProfileRequest", name: "GetInstanceProfileRequest")
     GetInstanceProfileResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#GetInstanceProfileResponse", name: "GetInstanceProfileResponse")
     GetLoginProfileRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#GetLoginProfileRequest", name: "GetLoginProfileRequest")
@@ -155,6 +176,7 @@ module Aws::IAM
     GetOpenIDConnectProviderResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#GetOpenIDConnectProviderResponse", name: "GetOpenIDConnectProviderResponse")
     GetOrganizationsAccessReportRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#GetOrganizationsAccessReportRequest", name: "GetOrganizationsAccessReportRequest")
     GetOrganizationsAccessReportResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#GetOrganizationsAccessReportResponse", name: "GetOrganizationsAccessReportResponse")
+    GetOutboundWebIdentityFederationInfoResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#GetOutboundWebIdentityFederationInfoResponse", name: "GetOutboundWebIdentityFederationInfoResponse")
     GetPolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#GetPolicyRequest", name: "GetPolicyRequest")
     GetPolicyResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#GetPolicyResponse", name: "GetPolicyResponse")
     GetPolicyVersionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#GetPolicyVersionRequest", name: "GetPolicyVersionRequest")
@@ -163,6 +185,8 @@ module Aws::IAM
     GetRolePolicyResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#GetRolePolicyResponse", name: "GetRolePolicyResponse")
     GetRoleRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#GetRoleRequest", name: "GetRoleRequest")
     GetRoleResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#GetRoleResponse", name: "GetRoleResponse")
+    GetRoleTemplateVersionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#GetRoleTemplateVersionRequest", name: "GetRoleTemplateVersionRequest")
+    GetRoleTemplateVersionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#GetRoleTemplateVersionResponse", name: "GetRoleTemplateVersionResponse")
     GetSAMLProviderRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#GetSAMLProviderRequest", name: "GetSAMLProviderRequest")
     GetSAMLProviderResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#GetSAMLProviderResponse", name: "GetSAMLProviderResponse")
     GetSSHPublicKeyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#GetSSHPublicKeyRequest", name: "GetSSHPublicKeyRequest")
@@ -181,6 +205,8 @@ module Aws::IAM
     GetUserResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#GetUserResponse", name: "GetUserResponse")
     Group = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#Group", name: "Group")
     GroupDetail = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#GroupDetail", name: "GroupDetail")
+    InlinePolicy = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#InlinePolicy", name: "InlinePolicy")
+    InlinePolicyIdentifierType = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#InlinePolicyIdentifierType", name: "InlinePolicyIdentifierType")
     InstanceProfile = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#InstanceProfile", name: "InstanceProfile")
     InvalidAuthenticationCodeException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#InvalidAuthenticationCodeException", name: "InvalidAuthenticationCodeException", traits: {"aws.protocols#awsQueryError" => {"code" => "InvalidAuthenticationCode", "httpResponseCode" => 403}, "smithy.api#error" => "client", "smithy.api#httpError" => 403})
     InvalidCertificateException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#InvalidCertificateException", name: "InvalidCertificateException", traits: {"aws.protocols#awsQueryError" => {"code" => "InvalidCertificate", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
@@ -200,6 +226,8 @@ module Aws::IAM
     ListAttachedRolePoliciesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#ListAttachedRolePoliciesResponse", name: "ListAttachedRolePoliciesResponse")
     ListAttachedUserPoliciesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#ListAttachedUserPoliciesRequest", name: "ListAttachedUserPoliciesRequest")
     ListAttachedUserPoliciesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#ListAttachedUserPoliciesResponse", name: "ListAttachedUserPoliciesResponse")
+    ListDelegationRequestsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#ListDelegationRequestsRequest", name: "ListDelegationRequestsRequest")
+    ListDelegationRequestsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#ListDelegationRequestsResponse", name: "ListDelegationRequestsResponse")
     ListEntitiesForPolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#ListEntitiesForPolicyRequest", name: "ListEntitiesForPolicyRequest")
     ListEntitiesForPolicyResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#ListEntitiesForPolicyResponse", name: "ListEntitiesForPolicyResponse")
     ListGroupPoliciesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#ListGroupPoliciesRequest", name: "ListGroupPoliciesRequest")
@@ -267,15 +295,19 @@ module Aws::IAM
     MalformedPolicyDocumentException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#MalformedPolicyDocumentException", name: "MalformedPolicyDocumentException", traits: {"aws.protocols#awsQueryError" => {"code" => "MalformedPolicyDocument", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
     ManagedPolicyDetail = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#ManagedPolicyDetail", name: "ManagedPolicyDetail")
     ManagedPolicyDetailListType = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iam#ManagedPolicyDetailListType", name: "ManagedPolicyDetailListType")
+    NameConflictException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#NameConflictException", name: "NameConflictException", traits: {"aws.protocols#awsQueryError" => {"code" => "NameConflict", "httpResponseCode" => 409}, "smithy.api#error" => "client", "smithy.api#httpError" => 409})
     NoSuchEntityException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#NoSuchEntityException", name: "NoSuchEntityException", traits: {"aws.protocols#awsQueryError" => {"code" => "NoSuchEntity", "httpResponseCode" => 404}, "smithy.api#error" => "client", "smithy.api#httpError" => 404})
     OpenIDConnectProviderListEntry = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#OpenIDConnectProviderListEntry", name: "OpenIDConnectProviderListEntry")
     OpenIDConnectProviderListType = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iam#OpenIDConnectProviderListType", name: "OpenIDConnectProviderListType")
     OpenIDConnectProviderUrlType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#OpenIDConnectProviderUrlType", name: "OpenIDConnectProviderUrlType", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}})
     OpenIdIdpCommunicationErrorException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#OpenIdIdpCommunicationErrorException", name: "OpenIdIdpCommunicationErrorException", traits: {"aws.protocols#awsQueryError" => {"code" => "OpenIdIdpCommunicationError", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
+    OrderedOrganizationPolicyType = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#OrderedOrganizationPolicyType", name: "OrderedOrganizationPolicyType")
     OrganizationIdType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#OrganizationIdType", name: "OrganizationIdType", traits: {"smithy.api#length" => {"min" => 0, "max" => 34}, "smithy.api#pattern" => "^o-[a-z0-9]{10,32}$"})
     OrganizationNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#OrganizationNotFoundException", name: "OrganizationNotFoundException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     OrganizationNotInAllFeaturesModeException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#OrganizationNotInAllFeaturesModeException", name: "OrganizationNotInAllFeaturesModeException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
+    OrganizationPolicyListType = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iam#OrganizationPolicyListType", name: "OrganizationPolicyListType", traits: {"smithy.api#length" => {"min" => 0, "max" => 7}})
     OrganizationsDecisionDetail = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#OrganizationsDecisionDetail", name: "OrganizationsDecisionDetail")
+    ParameterDefinition = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#ParameterDefinition", name: "ParameterDefinition")
     PasswordPolicy = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#PasswordPolicy", name: "PasswordPolicy")
     PasswordPolicyViolationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#PasswordPolicyViolationException", name: "PasswordPolicyViolationException", traits: {"aws.protocols#awsQueryError" => {"code" => "PasswordPolicyViolation", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
     PermissionsBoundaryAttachmentType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iam#PermissionsBoundaryAttachmentType", name: "PermissionsBoundaryAttachmentType")
@@ -284,11 +316,16 @@ module Aws::IAM
     PolicyDetail = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#PolicyDetail", name: "PolicyDetail")
     PolicyEvaluationDecisionType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iam#PolicyEvaluationDecisionType", name: "PolicyEvaluationDecisionType")
     PolicyEvaluationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#PolicyEvaluationException", name: "PolicyEvaluationException", traits: {"aws.protocols#awsQueryError" => {"code" => "PolicyEvaluation", "httpResponseCode" => 500}, "smithy.api#error" => "server", "smithy.api#httpError" => 500})
+    PolicyExclusionsListType = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iam#PolicyExclusionsListType", name: "PolicyExclusionsListType", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}})
     PolicyGrantingServiceAccess = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#PolicyGrantingServiceAccess", name: "PolicyGrantingServiceAccess")
     PolicyGroup = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#PolicyGroup", name: "PolicyGroup")
     PolicyGroupListType = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iam#PolicyGroupListType", name: "PolicyGroupListType")
+    PolicyIdentifier = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.iam#PolicyIdentifier", name: "PolicyIdentifier")
+    PolicyIdentifierPolicyType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iam#PolicyIdentifierPolicyType", name: "PolicyIdentifierPolicyType")
     PolicyIdentifierType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#PolicyIdentifierType", name: "PolicyIdentifierType")
     PolicyNotAttachableException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#PolicyNotAttachableException", name: "PolicyNotAttachableException", traits: {"aws.protocols#awsQueryError" => {"code" => "PolicyNotAttachable", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
+    PolicyParameter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#PolicyParameter", name: "PolicyParameter")
+    PolicyParameterTypeEnum = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iam#PolicyParameterTypeEnum", name: "PolicyParameterTypeEnum")
     PolicyRole = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#PolicyRole", name: "PolicyRole")
     PolicyRoleListType = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iam#PolicyRoleListType", name: "PolicyRoleListType")
     PolicySourceType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iam#PolicySourceType", name: "PolicySourceType")
@@ -297,6 +334,8 @@ module Aws::IAM
     PolicyUserListType = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iam#PolicyUserListType", name: "PolicyUserListType")
     PolicyVersion = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#PolicyVersion", name: "PolicyVersion")
     Position = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#Position", name: "Position")
+    PutAccountPropertiesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#PutAccountPropertiesRequest", name: "PutAccountPropertiesRequest")
+    PutAccountPropertiesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#PutAccountPropertiesResponse", name: "PutAccountPropertiesResponse")
     PutGroupPolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#PutGroupPolicyRequest", name: "PutGroupPolicyRequest")
     PutRolePermissionsBoundaryRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#PutRolePermissionsBoundaryRequest", name: "PutRolePermissionsBoundaryRequest")
     PutRolePolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#PutRolePolicyRequest", name: "PutRolePolicyRequest")
@@ -304,9 +343,11 @@ module Aws::IAM
     PutUserPolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#PutUserPolicyRequest", name: "PutUserPolicyRequest")
     ReasonType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#ReasonType", name: "ReasonType", traits: {"smithy.api#length" => {"min" => 0, "max" => 1000}})
     RegionNameType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#RegionNameType", name: "RegionNameType", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
+    RejectDelegationRequestRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#RejectDelegationRequestRequest", name: "RejectDelegationRequestRequest")
     RemoveClientIDFromOpenIDConnectProviderRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#RemoveClientIDFromOpenIDConnectProviderRequest", name: "RemoveClientIDFromOpenIDConnectProviderRequest")
     RemoveRoleFromInstanceProfileRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#RemoveRoleFromInstanceProfileRequest", name: "RemoveRoleFromInstanceProfileRequest")
     RemoveUserFromGroupRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#RemoveUserFromGroupRequest", name: "RemoveUserFromGroupRequest")
+    ReplacementValueEntry = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#ReplacementValueEntry", name: "ReplacementValueEntry")
     ReportContentType = ::Smithy::Schema::Shapes::BlobShape.new(id: "com.amazonaws.iam#ReportContentType", name: "ReportContentType")
     ReportFormatType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iam#ReportFormatType", name: "ReportFormatType")
     ReportGenerationLimitExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#ReportGenerationLimitExceededException", name: "ReportGenerationLimitExceededException", traits: {"aws.protocols#awsQueryError" => {"code" => "ReportGenerationLimitExceeded", "httpResponseCode" => 409}, "smithy.api#error" => "client", "smithy.api#httpError" => 409})
@@ -323,6 +364,9 @@ module Aws::IAM
     Role = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#Role", name: "Role")
     RoleDetail = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#RoleDetail", name: "RoleDetail")
     RoleLastUsed = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#RoleLastUsed", name: "RoleLastUsed")
+    RoleModifiedException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#RoleModifiedException", name: "RoleModifiedException", traits: {"aws.protocols#awsQueryError" => {"code" => "RoleModified", "httpResponseCode" => 409}, "smithy.api#error" => "client", "smithy.api#httpError" => 409})
+    RoleTemplateDisabledException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#RoleTemplateDisabledException", name: "RoleTemplateDisabledException", traits: {"aws.protocols#awsQueryError" => {"code" => "RoleTemplateDisabled", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
+    RoleTemplateVersion = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#RoleTemplateVersion", name: "RoleTemplateVersion")
     RoleUsageListType = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iam#RoleUsageListType", name: "RoleUsageListType")
     RoleUsageType = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#RoleUsageType", name: "RoleUsageType")
     SAMLMetadataDocumentType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#SAMLMetadataDocumentType", name: "SAMLMetadataDocumentType", traits: {"smithy.api#length" => {"min" => 1000, "max" => 10000000}})
@@ -333,6 +377,7 @@ module Aws::IAM
     SSHPublicKey = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#SSHPublicKey", name: "SSHPublicKey")
     SSHPublicKeyListType = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iam#SSHPublicKeyListType", name: "SSHPublicKeyListType")
     SSHPublicKeyMetadata = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#SSHPublicKeyMetadata", name: "SSHPublicKeyMetadata")
+    SendDelegationTokenRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#SendDelegationTokenRequest", name: "SendDelegationTokenRequest")
     ServerCertificate = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#ServerCertificate", name: "ServerCertificate")
     ServerCertificateMetadata = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#ServerCertificateMetadata", name: "ServerCertificateMetadata")
     ServiceAccessNotEnabledException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#ServiceAccessNotEnabledException", name: "ServiceAccessNotEnabledException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
@@ -351,6 +396,7 @@ module Aws::IAM
     SimulatePrincipalPolicyOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#SimulatePrincipalPolicyOutput", name: "SimulatePrincipalPolicyOutput")
     SimulatePrincipalPolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#SimulatePrincipalPolicyRequest", name: "SimulatePrincipalPolicyRequest")
     SimulationPolicyListType = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iam#SimulationPolicyListType", name: "SimulationPolicyListType")
+    SourceRoleTemplate = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#SourceRoleTemplate", name: "SourceRoleTemplate")
     Statement = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#Statement", name: "Statement")
     StatementListType = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iam#StatementListType", name: "StatementListType")
     Tag = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#Tag", name: "Tag")
@@ -361,6 +407,7 @@ module Aws::IAM
     TagRoleRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#TagRoleRequest", name: "TagRoleRequest")
     TagSAMLProviderRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#TagSAMLProviderRequest", name: "TagSAMLProviderRequest")
     TagServerCertificateRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#TagServerCertificateRequest", name: "TagServerCertificateRequest")
+    TagTemplate = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#TagTemplate", name: "TagTemplate")
     TagUserRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#TagUserRequest", name: "TagUserRequest")
     TrackedActionLastAccessed = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#TrackedActionLastAccessed", name: "TrackedActionLastAccessed")
     TrackedActionsLastAccessed = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iam#TrackedActionsLastAccessed", name: "TrackedActionsLastAccessed")
@@ -377,6 +424,7 @@ module Aws::IAM
     UpdateAccessKeyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#UpdateAccessKeyRequest", name: "UpdateAccessKeyRequest")
     UpdateAccountPasswordPolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#UpdateAccountPasswordPolicyRequest", name: "UpdateAccountPasswordPolicyRequest")
     UpdateAssumeRolePolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#UpdateAssumeRolePolicyRequest", name: "UpdateAssumeRolePolicyRequest")
+    UpdateDelegationRequestRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#UpdateDelegationRequestRequest", name: "UpdateDelegationRequestRequest")
     UpdateGroupRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#UpdateGroupRequest", name: "UpdateGroupRequest")
     UpdateLoginProfileRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#UpdateLoginProfileRequest", name: "UpdateLoginProfileRequest")
     UpdateOpenIDConnectProviderThumbprintRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iam#UpdateOpenIDConnectProviderThumbprintRequest", name: "UpdateOpenIDConnectProviderThumbprintRequest")
@@ -405,6 +453,10 @@ module Aws::IAM
     AccessKeySecretType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#accessKeySecretType", name: "AccessKeySecretType", traits: {"smithy.api#sensitive" => {}})
     AccountAliasListType = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iam#accountAliasListType", name: "AccountAliasListType")
     AccountAliasType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#accountAliasType", name: "AccountAliasType", traits: {"smithy.api#length" => {"min" => 3, "max" => 63}, "smithy.api#pattern" => "^[a-z0-9]([a-z0-9]|-(?!-)){1,61}[a-z0-9]$"})
+    AccountIdType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#accountIdType", name: "AccountIdType", traits: {"smithy.api#pattern" => "^\\d{12}$"})
+    AccountPropertiesMapType = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.iam#accountPropertiesMapType", name: "AccountPropertiesMapType")
+    AccountPropertyKeyType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#accountPropertyKeyType", name: "AccountPropertyKeyType", traits: {"smithy.api#length" => {"min" => 1, "max" => 50}, "smithy.api#pattern" => "^[A-Za-z][A-Za-z0-9/_-]*$"})
+    AccountPropertyValueType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#accountPropertyValueType", name: "AccountPropertyValueType", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}})
     AllUsers = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.iam#allUsers", name: "AllUsers")
     ArnType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#arnType", name: "ArnType", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}})
     AssertionEncryptionModeType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iam#assertionEncryptionModeType", name: "AssertionEncryptionModeType")
@@ -420,12 +472,16 @@ module Aws::IAM
     CertificateListType = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iam#certificateListType", name: "CertificateListType")
     ClientIDListType = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iam#clientIDListType", name: "ClientIDListType")
     ClientIDType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#clientIDType", name: "ClientIDType", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}})
+    ConsoleDeepLinkType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#consoleDeepLinkType", name: "ConsoleDeepLinkType", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}})
     CredentialAgeDays = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.iam#credentialAgeDays", name: "CredentialAgeDays", traits: {"smithy.api#range" => {"min" => 1, "max" => 36600}})
     CredentialReportExpiredExceptionMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#credentialReportExpiredExceptionMessage", name: "CredentialReportExpiredExceptionMessage")
     CredentialReportNotPresentExceptionMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#credentialReportNotPresentExceptionMessage", name: "CredentialReportNotPresentExceptionMessage")
     CredentialReportNotReadyExceptionMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#credentialReportNotReadyExceptionMessage", name: "CredentialReportNotReadyExceptionMessage")
     CustomSuffixType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#customSuffixType", name: "CustomSuffixType", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[\\w+=,.@-]+$"})
     DateType = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.iam#dateType", name: "DateType")
+    DelegationRequestDescriptionType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#delegationRequestDescriptionType", name: "DelegationRequestDescriptionType", traits: {"smithy.api#length" => {"min" => 0, "max" => 1000}, "smithy.api#pattern" => "^[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u00A1-\\u00FF]*$"})
+    DelegationRequestIdType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#delegationRequestIdType", name: "DelegationRequestIdType", traits: {"smithy.api#length" => {"min" => 16, "max" => 128}, "smithy.api#pattern" => "^[\\w-]+$"})
+    DelegationRequestsListType = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iam#delegationRequestsListType", name: "DelegationRequestsListType")
     DeleteConflictMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#deleteConflictMessage", name: "DeleteConflictMessage")
     DuplicateCertificateMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#duplicateCertificateMessage", name: "DuplicateCertificateMessage")
     DuplicateSSHPublicKeyMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#duplicateSSHPublicKeyMessage", name: "DuplicateSSHPublicKeyMessage")
@@ -442,6 +498,7 @@ module Aws::IAM
     GroupNameListType = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iam#groupNameListType", name: "GroupNameListType")
     GroupNameType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#groupNameType", name: "GroupNameType", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[\\w+=,.@-]+$"})
     IdType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#idType", name: "IdType", traits: {"smithy.api#length" => {"min" => 16, "max" => 128}, "smithy.api#pattern" => "^[\\w]+$"})
+    InlinePolicyTemplateListType = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iam#inlinePolicyTemplateListType", name: "InlinePolicyTemplateListType")
     InstanceProfileListType = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iam#instanceProfileListType", name: "InstanceProfileListType")
     InstanceProfileNameType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#instanceProfileNameType", name: "InstanceProfileNameType", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[\\w+=,.@-]+$"})
     IntegerType = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.iam#integerType", name: "IntegerType")
@@ -455,22 +512,41 @@ module Aws::IAM
     KeyPairMismatchMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#keyPairMismatchMessage", name: "KeyPairMismatchMessage")
     LimitExceededMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#limitExceededMessage", name: "LimitExceededMessage")
     ListPolicyGrantingServiceAccessResponseListType = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iam#listPolicyGrantingServiceAccessResponseListType", name: "ListPolicyGrantingServiceAccessResponseListType")
+    LocaleType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#localeType", name: "LocaleType", traits: {"smithy.api#length" => {"min" => 2, "max" => 12}})
     MalformedCertificateMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#malformedCertificateMessage", name: "MalformedCertificateMessage")
     MalformedPolicyDocumentMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#malformedPolicyDocumentMessage", name: "MalformedPolicyDocumentMessage")
+    ManagedByTypeType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iam#managedByTypeType", name: "ManagedByTypeType")
+    ManagedByValueType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#managedByValueType", name: "ManagedByValueType", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}})
+    ManagedPolicyArnListType = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iam#managedPolicyArnListType", name: "ManagedPolicyArnListType")
+    MapStringReplacementValueEntry = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.iam#mapStringReplacementValueEntry", name: "MapStringReplacementValueEntry", traits: {"smithy.api#length" => {"min" => 0, "max" => 30}})
     MarkerType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#markerType", name: "MarkerType", traits: {"smithy.api#length" => {"min" => 1, "max" => 320}, "smithy.api#pattern" => "^[\\u0020-\\u00FF]+$"})
     MaxItemsType = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.iam#maxItemsType", name: "MaxItemsType", traits: {"smithy.api#range" => {"min" => 1, "max" => 1000}})
     MaxPasswordAgeType = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.iam#maxPasswordAgeType", name: "MaxPasswordAgeType", traits: {"smithy.api#range" => {"min" => 1, "max" => 1095}})
     MfaDeviceListType = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iam#mfaDeviceListType", name: "MfaDeviceListType")
     MinimumPasswordLengthType = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.iam#minimumPasswordLengthType", name: "MinimumPasswordLengthType", traits: {"smithy.api#range" => {"min" => 6, "max" => 128}})
+    MinorVersionType = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.iam#minorVersionType", name: "MinorVersionType")
+    NameConflictMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#nameConflictMessage", name: "NameConflictMessage")
     NoSuchEntityMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#noSuchEntityMessage", name: "NoSuchEntityMessage")
+    NotesType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#notesType", name: "NotesType", traits: {"smithy.api#length" => {"min" => 0, "max" => 500}, "smithy.api#pattern" => "^[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u00A1-\\u00FF]*$"})
+    NotificationChannelType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#notificationChannelType", name: "NotificationChannelType", traits: {"smithy.api#length" => {"min" => 2, "max" => 400}, "smithy.api#pattern" => "^[a-zA-Z0-9:_.-]+$"})
     OpenIdIdpCommunicationErrorExceptionMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#openIdIdpCommunicationErrorExceptionMessage", name: "OpenIdIdpCommunicationErrorExceptionMessage")
     OrganizationsEntityPathType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#organizationsEntityPathType", name: "OrganizationsEntityPathType", traits: {"smithy.api#length" => {"min" => 19, "max" => 427}, "smithy.api#pattern" => "^o-[0-9a-z]{10,32}\\/r-[0-9a-z]{4,32}[0-9a-z-\\/]*$"})
     OrganizationsPolicyIdType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#organizationsPolicyIdType", name: "OrganizationsPolicyIdType", traits: {"smithy.api#pattern" => "^p-[0-9a-zA-Z_]{8,128}$"})
+    OwnerIdType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#ownerIdType", name: "OwnerIdType", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "^[a-zA-Z0-9:/+=,.@_-]+$"})
+    ParameterDefaultValueType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#parameterDefaultValueType", name: "ParameterDefaultValueType", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}})
+    ParameterDescriptionType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#parameterDescriptionType", name: "ParameterDescriptionType", traits: {"smithy.api#length" => {"min" => 0, "max" => 1000}})
+    ParameterNameType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#parameterNameType", name: "ParameterNameType", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}})
+    ParameterSubTypeType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#parameterSubTypeType", name: "ParameterSubTypeType", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}})
+    ParameterTypeType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iam#parameterTypeType", name: "ParameterTypeType")
+    ParametersDefinitionListType = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iam#parametersDefinitionListType", name: "ParametersDefinitionListType")
     PasswordPolicyViolationMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#passwordPolicyViolationMessage", name: "PasswordPolicyViolationMessage")
     PasswordReusePreventionType = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.iam#passwordReusePreventionType", name: "PasswordReusePreventionType", traits: {"smithy.api#range" => {"min" => 1, "max" => 24}})
     PasswordType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#passwordType", name: "PasswordType", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+$", "smithy.api#sensitive" => {}})
     PathPrefixType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#pathPrefixType", name: "PathPrefixType", traits: {"smithy.api#length" => {"min" => 1, "max" => 512}, "smithy.api#pattern" => "^\\u002F[\\u0021-\\u007F]*$"})
     PathType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#pathType", name: "PathType", traits: {"smithy.api#length" => {"min" => 1, "max" => 512}, "smithy.api#pattern" => "^(\\u002F)|(\\u002F[\\u0021-\\u007E]+\\u002F)$"})
+    PermissionCheckResultType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iam#permissionCheckResultType", name: "PermissionCheckResultType")
+    PermissionCheckStatusType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iam#permissionCheckStatusType", name: "PermissionCheckStatusType")
+    PermissionType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#permissionType", name: "PermissionType")
     PolicyDescriptionType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#policyDescriptionType", name: "PolicyDescriptionType", traits: {"smithy.api#length" => {"min" => 0, "max" => 1000}})
     PolicyDetailListType = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iam#policyDetailListType", name: "PolicyDetailListType")
     PolicyDocumentType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#policyDocumentType", name: "PolicyDocumentType", traits: {"smithy.api#length" => {"min" => 1, "max" => 131072}, "smithy.api#pattern" => "^[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+$"})
@@ -482,6 +558,10 @@ module Aws::IAM
     PolicyNameType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#policyNameType", name: "PolicyNameType", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[\\w+=,.@-]+$"})
     PolicyNotAttachableMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#policyNotAttachableMessage", name: "PolicyNotAttachableMessage")
     PolicyOwnerEntityType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iam#policyOwnerEntityType", name: "PolicyOwnerEntityType")
+    PolicyParameterListType = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iam#policyParameterListType", name: "PolicyParameterListType", traits: {"smithy.api#length" => {"min" => 0, "max" => 50}})
+    PolicyParameterNameType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#policyParameterNameType", name: "PolicyParameterNameType", traits: {"smithy.api#length" => {"min" => 5, "max" => 256}, "smithy.api#pattern" => "^[ -~]+$"})
+    PolicyParameterValueType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#policyParameterValueType", name: "PolicyParameterValueType", traits: {"smithy.api#pattern" => "^[ -~]+$"})
+    PolicyParameterValuesListType = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iam#policyParameterValuesListType", name: "PolicyParameterValuesListType")
     PolicyPathType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#policyPathType", name: "PolicyPathType", traits: {"smithy.api#length" => {"min" => 1, "max" => 512}, "smithy.api#pattern" => "^((/[A-Za-z0-9\\.,\\+@=_-]+)*)/$"})
     PolicyScopeType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iam#policyScopeType", name: "PolicyScopeType")
     PolicyType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iam#policyType", name: "PolicyType")
@@ -492,13 +572,26 @@ module Aws::IAM
     PublicKeyFingerprintType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#publicKeyFingerprintType", name: "PublicKeyFingerprintType", traits: {"smithy.api#length" => {"min" => 48, "max" => 48}, "smithy.api#pattern" => "^[:\\w]+$"})
     PublicKeyIdType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#publicKeyIdType", name: "PublicKeyIdType", traits: {"smithy.api#length" => {"min" => 20, "max" => 128}, "smithy.api#pattern" => "^[\\w]+$"})
     PublicKeyMaterialType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#publicKeyMaterialType", name: "PublicKeyMaterialType", traits: {"smithy.api#length" => {"min" => 1, "max" => 16384}, "smithy.api#pattern" => "^[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+$"})
+    RedirectUrlType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#redirectUrlType", name: "RedirectUrlType", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => "^http(s?)://[a-zA-Z0-9._/-]*(\\?[a-zA-Z0-9._=&-]*)?(#[a-zA-Z0-9._/-]*)?$"})
+    ReplacementValueListType = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iam#replacementValueListType", name: "ReplacementValueListType", traits: {"smithy.api#length" => {"min" => 1, "max" => 20}})
     ReportGenerationLimitExceededMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#reportGenerationLimitExceededMessage", name: "ReportGenerationLimitExceededMessage")
+    RequestMessageType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#requestMessageType", name: "RequestMessageType", traits: {"smithy.api#length" => {"min" => 0, "max" => 200}, "smithy.api#pattern" => "^[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u00A1-\\u00FF]*$"})
+    RequestorNameType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#requestorNameType", name: "RequestorNameType", traits: {"smithy.api#length" => {"min" => 0, "max" => 30}, "smithy.api#pattern" => "^[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u00A1-\\u00FF]*$"})
+    RequestorWorkflowIdType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#requestorWorkflowIdType", name: "RequestorWorkflowIdType", traits: {"smithy.api#length" => {"min" => 5, "max" => 400}, "smithy.api#pattern" => "^[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u00A1-\\u00FF]+$"})
     ResponseMarkerType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#responseMarkerType", name: "ResponseMarkerType")
+    RoleDescriptionPatternType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#roleDescriptionPatternType", name: "RoleDescriptionPatternType", traits: {"smithy.api#length" => {"min" => 1, "max" => 512}})
     RoleDescriptionType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#roleDescriptionType", name: "RoleDescriptionType", traits: {"smithy.api#length" => {"min" => 0, "max" => 1000}, "smithy.api#pattern" => "^[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u00A1-\\u00FF]*$"})
     RoleDetailListType = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iam#roleDetailListType", name: "RoleDetailListType")
     RoleListType = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iam#roleListType", name: "RoleListType")
     RoleMaxSessionDurationType = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.iam#roleMaxSessionDurationType", name: "RoleMaxSessionDurationType", traits: {"smithy.api#range" => {"min" => 3600, "max" => 43200}})
+    RoleModifiedMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#roleModifiedMessage", name: "RoleModifiedMessage")
+    RoleNamePatternType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#roleNamePatternType", name: "RoleNamePatternType", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}})
     RoleNameType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#roleNameType", name: "RoleNameType", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[\\w+=,.@-]+$"})
+    RolePathPatternType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#rolePathPatternType", name: "RolePathPatternType", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^/[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u00A1-\\u00FF]*/$"})
+    RolePermissionRestrictionArnListType = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iam#rolePermissionRestrictionArnListType", name: "RolePermissionRestrictionArnListType")
+    RoleTemplateDescriptionType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#roleTemplateDescriptionType", name: "RoleTemplateDescriptionType", traits: {"smithy.api#length" => {"min" => 0, "max" => 512}, "smithy.api#pattern" => "^[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u00A1-\\u00FF]*$"})
+    RoleTemplateDisabledMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#roleTemplateDisabledMessage", name: "RoleTemplateDisabledMessage")
+    RoleTemplateNameType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#roleTemplateNameType", name: "RoleTemplateNameType", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[\\w+=,.\\-]+$"})
     SerialNumberType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#serialNumberType", name: "SerialNumberType", traits: {"smithy.api#length" => {"min" => 9, "max" => 256}, "smithy.api#pattern" => "^[\\w+=/:,.@-]+$"})
     ServerCertificateMetadataListType = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iam#serverCertificateMetadataListType", name: "ServerCertificateMetadataListType")
     ServerCertificateNameType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#serverCertificateNameType", name: "ServerCertificateNameType", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[\\w+=,.@-]+$"})
@@ -513,15 +606,22 @@ module Aws::IAM
     ServicePassword = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#servicePassword", name: "ServicePassword", traits: {"smithy.api#sensitive" => {}})
     ServiceSpecificCredentialId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#serviceSpecificCredentialId", name: "ServiceSpecificCredentialId", traits: {"smithy.api#length" => {"min" => 20, "max" => 128}, "smithy.api#pattern" => "^[\\w]+$"})
     ServiceUserName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#serviceUserName", name: "ServiceUserName", traits: {"smithy.api#length" => {"min" => 0, "max" => 200}, "smithy.api#pattern" => "^[\\w+=,.@-]*$"})
+    SessionDurationType = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.iam#sessionDurationType", name: "SessionDurationType", traits: {"smithy.api#range" => {"min" => 300, "max" => 43200}})
     SortKeyType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iam#sortKeyType", name: "SortKeyType")
+    StateType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iam#stateType", name: "StateType")
     StatusType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iam#statusType", name: "StatusType")
     StringType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#stringType", name: "StringType")
+    SummaryContentType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#summaryContentType", name: "SummaryContentType", traits: {"smithy.api#length" => {"min" => 0, "max" => 10000}})
     SummaryKeyType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iam#summaryKeyType", name: "SummaryKeyType")
     SummaryMapType = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.iam#summaryMapType", name: "SummaryMapType")
+    SummaryStateType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iam#summaryStateType", name: "SummaryStateType")
     SummaryValueType = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.iam#summaryValueType", name: "SummaryValueType")
     TagKeyListType = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iam#tagKeyListType", name: "TagKeyListType", traits: {"smithy.api#length" => {"min" => 0, "max" => 50}})
     TagKeyType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#tagKeyType", name: "TagKeyType", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]+$"})
     TagListType = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iam#tagListType", name: "TagListType", traits: {"smithy.api#length" => {"min" => 0, "max" => 50}})
+    TagTemplateKeyType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#tagTemplateKeyType", name: "TagTemplateKeyType", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[\\p{L}\\p{Z}\\p{N}_.:/=+\\-@{}]+$"})
+    TagTemplateListType = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iam#tagTemplateListType", name: "TagTemplateListType", traits: {"smithy.api#length" => {"min" => 0, "max" => 50}})
+    TagTemplateValueType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#tagTemplateValueType", name: "TagTemplateValueType", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#pattern" => "^[\\p{L}\\p{Z}\\p{N}_.:/=+\\-@{}]*$"})
     TagValueType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#tagValueType", name: "TagValueType", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#pattern" => "^[\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*$"})
     ThumbprintListType = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iam#thumbprintListType", name: "ThumbprintListType")
     ThumbprintType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#thumbprintType", name: "ThumbprintType", traits: {"smithy.api#length" => {"min" => 40, "max" => 40}})
@@ -533,6 +633,8 @@ module Aws::IAM
     VirtualMFADeviceListType = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iam#virtualMFADeviceListType", name: "VirtualMFADeviceListType")
     VirtualMFADeviceName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iam#virtualMFADeviceName", name: "VirtualMFADeviceName", traits: {"smithy.api#length" => {"min" => 1}, "smithy.api#pattern" => "^[\\w+=,.@-]+$"})
 
+    AcceptDelegationRequestRequest.add_member(:delegation_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DelegationRequestIdType, name: "DelegationRequestId", traits: {"smithy.api#required" => {}}))
+    AcceptDelegationRequestRequest.type = Types::AcceptDelegationRequestRequest
     AccessAdvisorUsageGranularityType.add_member(:service_level, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SERVICE_LEVEL", traits: {"smithy.api#enumValue" => "SERVICE_LEVEL"}))
     AccessAdvisorUsageGranularityType.add_member(:action_level, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTION_LEVEL", traits: {"smithy.api#enumValue" => "ACTION_LEVEL"}))
     AccessDetail.add_member(:service_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceNameType, name: "ServiceName", traits: {"smithy.api#required" => {}}))
@@ -560,6 +662,12 @@ module Aws::IAM
     AccessKeyMetadata.type = Types::AccessKeyMetadata
     AccountNotManagementOrDelegatedAdministratorException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))
     AccountNotManagementOrDelegatedAdministratorException.type = Types::AccountNotManagementOrDelegatedAdministratorException
+    AcquireRoleRequest.add_member(:template_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, name: "TemplateArn", traits: {"smithy.api#required" => {}}))
+    AcquireRoleRequest.add_member(:template_minor_version, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerType, name: "TemplateMinorVersion"))
+    AcquireRoleRequest.add_member(:replacement_values, ::Smithy::Schema::Shapes::MemberShape.new(target: MapStringReplacementValueEntry, name: "ReplacementValues"))
+    AcquireRoleRequest.type = Types::AcquireRoleRequest
+    AcquireRoleResponse.add_member(:role, ::Smithy::Schema::Shapes::MemberShape.new(target: Role, name: "Role", traits: {"smithy.api#required" => {}}))
+    AcquireRoleResponse.type = Types::AcquireRoleResponse
     ActionNameListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionNameType, name: "member"))
     AddClientIDToOpenIDConnectProviderRequest.add_member(:open_id_connect_provider_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, name: "OpenIDConnectProviderArn", traits: {"smithy.api#required" => {}}))
     AddClientIDToOpenIDConnectProviderRequest.add_member(:client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientIDType, name: "ClientID", traits: {"smithy.api#required" => {}}))
@@ -571,6 +679,8 @@ module Aws::IAM
     AddUserToGroupRequest.add_member(:user_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ExistingUserNameType, name: "UserName", traits: {"smithy.api#required" => {}}))
     AddUserToGroupRequest.type = Types::AddUserToGroupRequest
     ArnListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, name: "member"))
+    AssociateDelegationRequestRequest.add_member(:delegation_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DelegationRequestIdType, name: "DelegationRequestId", traits: {"smithy.api#required" => {}}))
+    AssociateDelegationRequestRequest.type = Types::AssociateDelegationRequestRequest
     AttachGroupPolicyRequest.add_member(:group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupNameType, name: "GroupName", traits: {"smithy.api#required" => {}}))
     AttachGroupPolicyRequest.add_member(:policy_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, name: "PolicyArn", traits: {"smithy.api#required" => {}}))
     AttachGroupPolicyRequest.type = Types::AttachGroupPolicyRequest
@@ -586,6 +696,9 @@ module Aws::IAM
     AttachedPolicy.add_member(:policy_name, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyNameType, name: "PolicyName"))
     AttachedPolicy.add_member(:policy_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, name: "PolicyArn"))
     AttachedPolicy.type = Types::AttachedPolicy
+    AttachmentType.add_member(:user, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "USER", traits: {"smithy.api#enumValue" => "user"}))
+    AttachmentType.add_member(:group, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GROUP", traits: {"smithy.api#enumValue" => "group"}))
+    AttachmentType.add_member(:role, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ROLE", traits: {"smithy.api#enumValue" => "role"}))
     CallerIsNotManagementAccountException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))
     CallerIsNotManagementAccountException.type = Types::CallerIsNotManagementAccountException
     CertificationMapType.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificationKeyType, name: "key"))
@@ -620,6 +733,19 @@ module Aws::IAM
     CreateAccessKeyResponse.type = Types::CreateAccessKeyResponse
     CreateAccountAliasRequest.add_member(:account_alias, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountAliasType, name: "AccountAlias", traits: {"smithy.api#required" => {}}))
     CreateAccountAliasRequest.type = Types::CreateAccountAliasRequest
+    CreateDelegationRequestRequest.add_member(:owner_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountIdType, name: "OwnerAccountId"))
+    CreateDelegationRequestRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: DelegationRequestDescriptionType, name: "Description", traits: {"smithy.api#required" => {}}))
+    CreateDelegationRequestRequest.add_member(:permissions, ::Smithy::Schema::Shapes::MemberShape.new(target: DelegationPermission, name: "Permissions", traits: {"smithy.api#required" => {}}))
+    CreateDelegationRequestRequest.add_member(:request_message, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestMessageType, name: "RequestMessage"))
+    CreateDelegationRequestRequest.add_member(:requestor_workflow_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestorWorkflowIdType, name: "RequestorWorkflowId", traits: {"smithy.api#required" => {}}))
+    CreateDelegationRequestRequest.add_member(:redirect_url, ::Smithy::Schema::Shapes::MemberShape.new(target: RedirectUrlType, name: "RedirectUrl"))
+    CreateDelegationRequestRequest.add_member(:notification_channel, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationChannelType, name: "NotificationChannel", traits: {"smithy.api#required" => {}}))
+    CreateDelegationRequestRequest.add_member(:session_duration, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionDurationType, name: "SessionDuration", traits: {"smithy.api#required" => {}}))
+    CreateDelegationRequestRequest.add_member(:only_send_by_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanType, name: "OnlySendByOwner", traits: {"smithy.api#default" => false}))
+    CreateDelegationRequestRequest.type = Types::CreateDelegationRequestRequest
+    CreateDelegationRequestResponse.add_member(:console_deep_link, ::Smithy::Schema::Shapes::MemberShape.new(target: ConsoleDeepLinkType, name: "ConsoleDeepLink"))
+    CreateDelegationRequestResponse.add_member(:delegation_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DelegationRequestIdType, name: "DelegationRequestId"))
+    CreateDelegationRequestResponse.type = Types::CreateDelegationRequestResponse
     CreateGroupRequest.add_member(:path, ::Smithy::Schema::Shapes::MemberShape.new(target: PathType, name: "Path"))
     CreateGroupRequest.add_member(:group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupNameType, name: "GroupName", traits: {"smithy.api#required" => {}}))
     CreateGroupRequest.type = Types::CreateGroupRequest
@@ -712,6 +838,30 @@ module Aws::IAM
     DeactivateMFADeviceRequest.add_member(:user_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ExistingUserNameType, name: "UserName"))
     DeactivateMFADeviceRequest.add_member(:serial_number, ::Smithy::Schema::Shapes::MemberShape.new(target: SerialNumberType, name: "SerialNumber", traits: {"smithy.api#required" => {}}))
     DeactivateMFADeviceRequest.type = Types::DeactivateMFADeviceRequest
+    DelegationPermission.add_member(:policy_template_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, name: "PolicyTemplateArn"))
+    DelegationPermission.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyParameterListType, name: "Parameters"))
+    DelegationPermission.type = Types::DelegationPermission
+    DelegationRequest.add_member(:delegation_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DelegationRequestIdType, name: "DelegationRequestId"))
+    DelegationRequest.add_member(:owner_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountIdType, name: "OwnerAccountId"))
+    DelegationRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: DelegationRequestDescriptionType, name: "Description"))
+    DelegationRequest.add_member(:request_message, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestMessageType, name: "RequestMessage"))
+    DelegationRequest.add_member(:permissions, ::Smithy::Schema::Shapes::MemberShape.new(target: DelegationPermission, name: "Permissions"))
+    DelegationRequest.add_member(:permission_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: PermissionType, name: "PermissionPolicy"))
+    DelegationRequest.add_member(:role_permission_restriction_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: RolePermissionRestrictionArnListType, name: "RolePermissionRestrictionArns"))
+    DelegationRequest.add_member(:owner_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OwnerIdType, name: "OwnerId"))
+    DelegationRequest.add_member(:approver_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, name: "ApproverId"))
+    DelegationRequest.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: StateType, name: "State"))
+    DelegationRequest.add_member(:expiration_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, name: "ExpirationTime"))
+    DelegationRequest.add_member(:requestor_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountIdType, name: "RequestorId"))
+    DelegationRequest.add_member(:requestor_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestorNameType, name: "RequestorName"))
+    DelegationRequest.add_member(:create_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, name: "CreateDate"))
+    DelegationRequest.add_member(:session_duration, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionDurationType, name: "SessionDuration"))
+    DelegationRequest.add_member(:redirect_url, ::Smithy::Schema::Shapes::MemberShape.new(target: RedirectUrlType, name: "RedirectUrl"))
+    DelegationRequest.add_member(:notes, ::Smithy::Schema::Shapes::MemberShape.new(target: NotesType, name: "Notes"))
+    DelegationRequest.add_member(:rejection_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: NotesType, name: "RejectionReason"))
+    DelegationRequest.add_member(:only_send_by_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanType, name: "OnlySendByOwner", traits: {"smithy.api#default" => false}))
+    DelegationRequest.add_member(:updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, name: "UpdatedTime"))
+    DelegationRequest.type = Types::DelegationRequest
     DeleteAccessKeyRequest.add_member(:user_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ExistingUserNameType, name: "UserName"))
     DeleteAccessKeyRequest.add_member(:access_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessKeyIdType, name: "AccessKeyId", traits: {"smithy.api#required" => {}}))
     DeleteAccessKeyRequest.type = Types::DeleteAccessKeyRequest
@@ -809,6 +959,8 @@ module Aws::IAM
     EnableOrganizationsRootSessionsResponse.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationIdType, name: "OrganizationId"))
     EnableOrganizationsRootSessionsResponse.add_member(:enabled_features, ::Smithy::Schema::Shapes::MemberShape.new(target: FeaturesListType, name: "EnabledFeatures"))
     EnableOrganizationsRootSessionsResponse.type = Types::EnableOrganizationsRootSessionsResponse
+    EnableOutboundWebIdentityFederationResponse.add_member(:issuer_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "IssuerIdentifier"))
+    EnableOutboundWebIdentityFederationResponse.type = Types::EnableOutboundWebIdentityFederationResponse
     EntityAlreadyExistsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityAlreadyExistsMessage, name: "message"))
     EntityAlreadyExistsException.type = Types::EntityAlreadyExistsException
     EntityDetails.add_member(:entity_info, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityInfo, name: "EntityInfo", traits: {"smithy.api#required" => {}}))
@@ -843,6 +995,10 @@ module Aws::IAM
     EvaluationResult.add_member(:resource_specific_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceSpecificResultListType, name: "ResourceSpecificResults"))
     EvaluationResult.type = Types::EvaluationResult
     EvaluationResultsListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationResult, name: "member"))
+    FeatureDisabledException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: FeatureDisabledMessage, name: "message"))
+    FeatureDisabledException.type = Types::FeatureDisabledException
+    FeatureEnabledException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: FeatureEnabledMessage, name: "message"))
+    FeatureEnabledException.type = Types::FeatureEnabledException
     FeatureType.add_member(:root_credentials_management, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ROOT_CREDENTIALS_MANAGEMENT", traits: {"smithy.api#enumValue" => "RootCredentialsManagement"}))
     FeatureType.add_member(:root_sessions, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ROOT_SESSIONS", traits: {"smithy.api#enumValue" => "RootSessions"}))
     FeaturesListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FeatureType, name: "member"))
@@ -877,6 +1033,9 @@ module Aws::IAM
     GetAccountAuthorizationDetailsResponse.type = Types::GetAccountAuthorizationDetailsResponse
     GetAccountPasswordPolicyResponse.add_member(:password_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: PasswordPolicy, name: "PasswordPolicy", traits: {"smithy.api#required" => {}}))
     GetAccountPasswordPolicyResponse.type = Types::GetAccountPasswordPolicyResponse
+    GetAccountPropertiesRequest.type = Types::GetAccountPropertiesRequest
+    GetAccountPropertiesResponse.add_member(:properties, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountPropertiesMapType, name: "Properties"))
+    GetAccountPropertiesResponse.type = Types::GetAccountPropertiesResponse
     GetAccountSummaryResponse.add_member(:summary_map, ::Smithy::Schema::Shapes::MemberShape.new(target: SummaryMapType, name: "SummaryMap"))
     GetAccountSummaryResponse.type = Types::GetAccountSummaryResponse
     GetContextKeysForCustomPolicyOutput.add_member(:context_key_names, ::Smithy::Schema::Shapes::MemberShape.new(target: ContextKeyNamesResultListType, name: "ContextKeyNames"))
@@ -892,6 +1051,13 @@ module Aws::IAM
     GetCredentialReportResponse.add_member(:report_format, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportFormatType, name: "ReportFormat"))
     GetCredentialReportResponse.add_member(:generated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, name: "GeneratedTime"))
     GetCredentialReportResponse.type = Types::GetCredentialReportResponse
+    GetDelegationRequestRequest.add_member(:delegation_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DelegationRequestIdType, name: "DelegationRequestId", traits: {"smithy.api#required" => {}}))
+    GetDelegationRequestRequest.add_member(:delegation_permission_check, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanType, name: "DelegationPermissionCheck", traits: {"smithy.api#default" => false}))
+    GetDelegationRequestRequest.type = Types::GetDelegationRequestRequest
+    GetDelegationRequestResponse.add_member(:delegation_request, ::Smithy::Schema::Shapes::MemberShape.new(target: DelegationRequest, name: "DelegationRequest"))
+    GetDelegationRequestResponse.add_member(:permission_check_status, ::Smithy::Schema::Shapes::MemberShape.new(target: PermissionCheckStatusType, name: "PermissionCheckStatus"))
+    GetDelegationRequestResponse.add_member(:permission_check_result, ::Smithy::Schema::Shapes::MemberShape.new(target: PermissionCheckResultType, name: "PermissionCheckResult"))
+    GetDelegationRequestResponse.type = Types::GetDelegationRequestResponse
     GetGroupPolicyRequest.add_member(:group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupNameType, name: "GroupName", traits: {"smithy.api#required" => {}}))
     GetGroupPolicyRequest.add_member(:policy_name, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyNameType, name: "PolicyName", traits: {"smithy.api#required" => {}}))
     GetGroupPolicyRequest.type = Types::GetGroupPolicyRequest
@@ -908,6 +1074,13 @@ module Aws::IAM
     GetGroupResponse.add_member(:is_truncated, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanType, name: "IsTruncated", traits: {"smithy.api#default" => false}))
     GetGroupResponse.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseMarkerType, name: "Marker"))
     GetGroupResponse.type = Types::GetGroupResponse
+    GetHumanReadableSummaryRequest.add_member(:entity_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, name: "EntityArn", traits: {"smithy.api#required" => {}}))
+    GetHumanReadableSummaryRequest.add_member(:locale, ::Smithy::Schema::Shapes::MemberShape.new(target: LocaleType, name: "Locale"))
+    GetHumanReadableSummaryRequest.type = Types::GetHumanReadableSummaryRequest
+    GetHumanReadableSummaryResponse.add_member(:summary_content, ::Smithy::Schema::Shapes::MemberShape.new(target: SummaryContentType, name: "SummaryContent"))
+    GetHumanReadableSummaryResponse.add_member(:locale, ::Smithy::Schema::Shapes::MemberShape.new(target: LocaleType, name: "Locale"))
+    GetHumanReadableSummaryResponse.add_member(:summary_state, ::Smithy::Schema::Shapes::MemberShape.new(target: SummaryStateType, name: "SummaryState"))
+    GetHumanReadableSummaryResponse.type = Types::GetHumanReadableSummaryResponse
     GetInstanceProfileRequest.add_member(:instance_profile_name, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceProfileNameType, name: "InstanceProfileName", traits: {"smithy.api#required" => {}}))
     GetInstanceProfileRequest.type = Types::GetInstanceProfileRequest
     GetInstanceProfileResponse.add_member(:instance_profile, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceProfile, name: "InstanceProfile", traits: {"smithy.api#required" => {}}))
@@ -947,6 +1120,9 @@ module Aws::IAM
     GetOrganizationsAccessReportResponse.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: MarkerType, name: "Marker"))
     GetOrganizationsAccessReportResponse.add_member(:error_details, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDetails, name: "ErrorDetails"))
     GetOrganizationsAccessReportResponse.type = Types::GetOrganizationsAccessReportResponse
+    GetOutboundWebIdentityFederationInfoResponse.add_member(:issuer_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "IssuerIdentifier"))
+    GetOutboundWebIdentityFederationInfoResponse.add_member(:jwt_vending_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanType, name: "JwtVendingEnabled", traits: {"smithy.api#default" => false}))
+    GetOutboundWebIdentityFederationInfoResponse.type = Types::GetOutboundWebIdentityFederationInfoResponse
     GetPolicyRequest.add_member(:policy_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, name: "PolicyArn", traits: {"smithy.api#required" => {}}))
     GetPolicyRequest.type = Types::GetPolicyRequest
     GetPolicyResponse.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: Policy, name: "Policy"))
@@ -967,6 +1143,11 @@ module Aws::IAM
     GetRoleRequest.type = Types::GetRoleRequest
     GetRoleResponse.add_member(:role, ::Smithy::Schema::Shapes::MemberShape.new(target: Role, name: "Role", traits: {"smithy.api#required" => {}}))
     GetRoleResponse.type = Types::GetRoleResponse
+    GetRoleTemplateVersionRequest.add_member(:template_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, name: "TemplateArn", traits: {"smithy.api#required" => {}}))
+    GetRoleTemplateVersionRequest.add_member(:minor_version, ::Smithy::Schema::Shapes::MemberShape.new(target: MinorVersionType, name: "MinorVersion"))
+    GetRoleTemplateVersionRequest.type = Types::GetRoleTemplateVersionRequest
+    GetRoleTemplateVersionResponse.add_member(:role_template_version, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleTemplateVersion, name: "RoleTemplateVersion", traits: {"smithy.api#required" => {}}))
+    GetRoleTemplateVersionResponse.type = Types::GetRoleTemplateVersionResponse
     GetSAMLProviderRequest.add_member(:saml_provider_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, name: "SAMLProviderArn", traits: {"smithy.api#required" => {}}))
     GetSAMLProviderRequest.type = Types::GetSAMLProviderRequest
     GetSAMLProviderResponse.add_member(:saml_provider_uuid, ::Smithy::Schema::Shapes::MemberShape.new(target: PrivateKeyIdType, name: "SAMLProviderUUID"))
@@ -1043,6 +1224,13 @@ module Aws::IAM
     GroupDetail.add_member(:group_policy_list, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyDetailListType, name: "GroupPolicyList"))
     GroupDetail.add_member(:attached_managed_policies, ::Smithy::Schema::Shapes::MemberShape.new(target: AttachedPoliciesListType, name: "AttachedManagedPolicies"))
     GroupDetail.type = Types::GroupDetail
+    InlinePolicy.add_member(:policy_name, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyNameType, name: "PolicyName", traits: {"smithy.api#required" => {}}))
+    InlinePolicy.add_member(:policy_document, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyDocumentType, name: "PolicyDocument", traits: {"smithy.api#required" => {}}))
+    InlinePolicy.type = Types::InlinePolicy
+    InlinePolicyIdentifierType.add_member(:policy_name, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyNameType, name: "PolicyName", traits: {"smithy.api#required" => {}}))
+    InlinePolicyIdentifierType.add_member(:attachment_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AttachmentType, name: "AttachmentType", traits: {"smithy.api#required" => {}}))
+    InlinePolicyIdentifierType.add_member(:attachment_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AttachmentName, name: "AttachmentName", traits: {"smithy.api#required" => {}}))
+    InlinePolicyIdentifierType.type = Types::InlinePolicyIdentifierType
     InstanceProfile.add_member(:path, ::Smithy::Schema::Shapes::MemberShape.new(target: PathType, name: "Path", traits: {"smithy.api#required" => {}}))
     InstanceProfile.add_member(:instance_profile_name, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceProfileNameType, name: "InstanceProfileName", traits: {"smithy.api#required" => {}}))
     InstanceProfile.add_member(:instance_profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IdType, name: "InstanceProfileId", traits: {"smithy.api#required" => {}}))
@@ -1107,6 +1295,14 @@ module Aws::IAM
     ListAttachedUserPoliciesResponse.add_member(:is_truncated, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanType, name: "IsTruncated", traits: {"smithy.api#default" => false}))
     ListAttachedUserPoliciesResponse.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseMarkerType, name: "Marker"))
     ListAttachedUserPoliciesResponse.type = Types::ListAttachedUserPoliciesResponse
+    ListDelegationRequestsRequest.add_member(:owner_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OwnerIdType, name: "OwnerId"))
+    ListDelegationRequestsRequest.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: MarkerType, name: "Marker"))
+    ListDelegationRequestsRequest.add_member(:max_items, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxItemsType, name: "MaxItems"))
+    ListDelegationRequestsRequest.type = Types::ListDelegationRequestsRequest
+    ListDelegationRequestsResponse.add_member(:delegation_requests, ::Smithy::Schema::Shapes::MemberShape.new(target: DelegationRequestsListType, name: "DelegationRequests"))
+    ListDelegationRequestsResponse.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: MarkerType, name: "Marker"))
+    ListDelegationRequestsResponse.add_member(:is_truncated, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanType, name: "isTruncated", traits: {"smithy.api#default" => false}))
+    ListDelegationRequestsResponse.type = Types::ListDelegationRequestsResponse
     ListEntitiesForPolicyRequest.add_member(:policy_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, name: "PolicyArn", traits: {"smithy.api#required" => {}}))
     ListEntitiesForPolicyRequest.add_member(:entity_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityType, name: "EntityFilter"))
     ListEntitiesForPolicyRequest.add_member(:path_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: PathType, name: "PathPrefix"))
@@ -1372,6 +1568,8 @@ module Aws::IAM
     ManagedPolicyDetail.add_member(:policy_version_list, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyDocumentVersionListType, name: "PolicyVersionList"))
     ManagedPolicyDetail.type = Types::ManagedPolicyDetail
     ManagedPolicyDetailListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedPolicyDetail, name: "member"))
+    NameConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NameConflictMessage, name: "message"))
+    NameConflictException.type = Types::NameConflictException
     NoSuchEntityException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NoSuchEntityMessage, name: "message"))
     NoSuchEntityException.type = Types::NoSuchEntityException
     OpenIDConnectProviderListEntry.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, name: "Arn"))
@@ -1379,12 +1577,23 @@ module Aws::IAM
     OpenIDConnectProviderListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OpenIDConnectProviderListEntry, name: "member"))
     OpenIdIdpCommunicationErrorException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: OpenIdIdpCommunicationErrorExceptionMessage, name: "message"))
     OpenIdIdpCommunicationErrorException.type = Types::OpenIdIdpCommunicationErrorException
+    OrderedOrganizationPolicyType.add_member(:service_control_policy_input_list, ::Smithy::Schema::Shapes::MemberShape.new(target: SimulationPolicyListType, name: "ServiceControlPolicyInputList"))
+    OrderedOrganizationPolicyType.type = Types::OrderedOrganizationPolicyType
     OrganizationNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))
     OrganizationNotFoundException.type = Types::OrganizationNotFoundException
     OrganizationNotInAllFeaturesModeException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))
     OrganizationNotInAllFeaturesModeException.type = Types::OrganizationNotInAllFeaturesModeException
+    OrganizationPolicyListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OrderedOrganizationPolicyType, name: "member"))
     OrganizationsDecisionDetail.add_member(:allowed_by_organizations, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanType, name: "AllowedByOrganizations", traits: {"smithy.api#default" => false}))
     OrganizationsDecisionDetail.type = Types::OrganizationsDecisionDetail
+    ParameterDefinition.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterNameType, name: "Name", traits: {"smithy.api#required" => {}}))
+    ParameterDefinition.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterTypeType, name: "Type", traits: {"smithy.api#required" => {}}))
+    ParameterDefinition.add_member(:sub_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterSubTypeType, name: "SubType"))
+    ParameterDefinition.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterDescriptionType, name: "Description"))
+    ParameterDefinition.add_member(:is_required, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanType, name: "IsRequired", traits: {"smithy.api#default" => false}))
+    ParameterDefinition.add_member(:default_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterDefaultValueType, name: "DefaultValue"))
+    ParameterDefinition.add_member(:immutable, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanType, name: "Immutable", traits: {"smithy.api#default" => false}))
+    ParameterDefinition.type = Types::ParameterDefinition
     PasswordPolicy.add_member(:minimum_password_length, ::Smithy::Schema::Shapes::MemberShape.new(target: MinimumPasswordLengthType, name: "MinimumPasswordLength"))
     PasswordPolicy.add_member(:require_symbols, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanType, name: "RequireSymbols", traits: {"smithy.api#default" => false}))
     PasswordPolicy.add_member(:require_numbers, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanType, name: "RequireNumbers", traits: {"smithy.api#default" => false}))
@@ -1422,6 +1631,7 @@ module Aws::IAM
     PolicyEvaluationDecisionType.add_member(:implicit_deny, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IMPLICIT_DENY", traits: {"smithy.api#enumValue" => "implicitDeny"}))
     PolicyEvaluationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyEvaluationErrorMessage, name: "message"))
     PolicyEvaluationException.type = Types::PolicyEvaluationException
+    PolicyExclusionsListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyIdentifier, name: "member"))
     PolicyGrantingServiceAccess.add_member(:policy_name, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyNameType, name: "PolicyName", traits: {"smithy.api#required" => {}}))
     PolicyGrantingServiceAccess.add_member(:policy_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyType, name: "PolicyType", traits: {"smithy.api#required" => {}}))
     PolicyGrantingServiceAccess.add_member(:policy_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, name: "PolicyArn"))
@@ -1432,8 +1642,25 @@ module Aws::IAM
     PolicyGroup.add_member(:group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IdType, name: "GroupId"))
     PolicyGroup.type = Types::PolicyGroup
     PolicyGroupListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyGroup, name: "member"))
+    PolicyIdentifier.add_member(:policy_type, Types::PolicyIdentifier::PolicyType, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyIdentifierPolicyType, name: "PolicyType"))
+    PolicyIdentifier.add_member(:policy_arn, Types::PolicyIdentifier::PolicyArn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, name: "PolicyArn"))
+    PolicyIdentifier.add_member(:inline_policy_identifier, Types::PolicyIdentifier::InlinePolicyIdentifier, ::Smithy::Schema::Shapes::MemberShape.new(target: InlinePolicyIdentifierType, name: "InlinePolicyIdentifier"))
+    PolicyIdentifier.add_member(:unknown, Types::PolicyIdentifier::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    PolicyIdentifier.type = Types::PolicyIdentifier
+    PolicyIdentifierPolicyType.add_member(:inline, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INLINE", traits: {"smithy.api#enumValue" => "inline"}))
+    PolicyIdentifierPolicyType.add_member(:aws_managed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_MANAGED", traits: {"smithy.api#enumValue" => "aws-managed"}))
+    PolicyIdentifierPolicyType.add_member(:user_managed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "USER_MANAGED", traits: {"smithy.api#enumValue" => "user-managed"}))
+    PolicyIdentifierPolicyType.add_member(:permission_boundary, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PERMISSION_BOUNDARY", traits: {"smithy.api#enumValue" => "permission-boundary"}))
+    PolicyIdentifierPolicyType.add_member(:scp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SCP", traits: {"smithy.api#enumValue" => "scp"}))
+    PolicyIdentifierPolicyType.add_member(:rcp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RCP", traits: {"smithy.api#enumValue" => "rcp"}))
     PolicyNotAttachableException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyNotAttachableMessage, name: "message"))
     PolicyNotAttachableException.type = Types::PolicyNotAttachableException
+    PolicyParameter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyParameterNameType, name: "Name"))
+    PolicyParameter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyParameterValuesListType, name: "Values"))
+    PolicyParameter.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyParameterTypeEnum, name: "Type"))
+    PolicyParameter.type = Types::PolicyParameter
+    PolicyParameterTypeEnum.add_member(:string, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STRING", traits: {"smithy.api#enumValue" => "string"}))
+    PolicyParameterTypeEnum.add_member(:string_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STRING_LIST", traits: {"smithy.api#enumValue" => "stringList"}))
     PolicyRole.add_member(:role_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleNameType, name: "RoleName"))
     PolicyRole.add_member(:role_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IdType, name: "RoleId"))
     PolicyRole.type = Types::PolicyRole
@@ -1459,6 +1686,9 @@ module Aws::IAM
     Position.add_member(:line, ::Smithy::Schema::Shapes::MemberShape.new(target: LineNumber, name: "Line", traits: {"smithy.api#default" => 0}))
     Position.add_member(:column, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnNumber, name: "Column", traits: {"smithy.api#default" => 0}))
     Position.type = Types::Position
+    PutAccountPropertiesRequest.add_member(:properties, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountPropertiesMapType, name: "Properties", traits: {"smithy.api#required" => {}}))
+    PutAccountPropertiesRequest.type = Types::PutAccountPropertiesRequest
+    PutAccountPropertiesResponse.type = Types::PutAccountPropertiesResponse
     PutGroupPolicyRequest.add_member(:group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupNameType, name: "GroupName", traits: {"smithy.api#required" => {}}))
     PutGroupPolicyRequest.add_member(:policy_name, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyNameType, name: "PolicyName", traits: {"smithy.api#required" => {}}))
     PutGroupPolicyRequest.add_member(:policy_document, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyDocumentType, name: "PolicyDocument", traits: {"smithy.api#required" => {}}))
@@ -1477,6 +1707,9 @@ module Aws::IAM
     PutUserPolicyRequest.add_member(:policy_name, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyNameType, name: "PolicyName", traits: {"smithy.api#required" => {}}))
     PutUserPolicyRequest.add_member(:policy_document, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyDocumentType, name: "PolicyDocument", traits: {"smithy.api#required" => {}}))
     PutUserPolicyRequest.type = Types::PutUserPolicyRequest
+    RejectDelegationRequestRequest.add_member(:delegation_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DelegationRequestIdType, name: "DelegationRequestId", traits: {"smithy.api#required" => {}}))
+    RejectDelegationRequestRequest.add_member(:notes, ::Smithy::Schema::Shapes::MemberShape.new(target: NotesType, name: "Notes"))
+    RejectDelegationRequestRequest.type = Types::RejectDelegationRequestRequest
     RemoveClientIDFromOpenIDConnectProviderRequest.add_member(:open_id_connect_provider_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, name: "OpenIDConnectProviderArn", traits: {"smithy.api#required" => {}}))
     RemoveClientIDFromOpenIDConnectProviderRequest.add_member(:client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientIDType, name: "ClientID", traits: {"smithy.api#required" => {}}))
     RemoveClientIDFromOpenIDConnectProviderRequest.type = Types::RemoveClientIDFromOpenIDConnectProviderRequest
@@ -1486,6 +1719,8 @@ module Aws::IAM
     RemoveUserFromGroupRequest.add_member(:group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupNameType, name: "GroupName", traits: {"smithy.api#required" => {}}))
     RemoveUserFromGroupRequest.add_member(:user_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ExistingUserNameType, name: "UserName", traits: {"smithy.api#required" => {}}))
     RemoveUserFromGroupRequest.type = Types::RemoveUserFromGroupRequest
+    ReplacementValueEntry.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplacementValueListType, name: "Values", traits: {"smithy.api#required" => {}}))
+    ReplacementValueEntry.type = Types::ReplacementValueEntry
     ReportFormatType.add_member(:text_csv, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "text_csv", traits: {"smithy.api#enumValue" => "text/csv"}))
     ReportGenerationLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportGenerationLimitExceededMessage, name: "message"))
     ReportGenerationLimitExceededException.type = Types::ReportGenerationLimitExceededException
@@ -1522,6 +1757,7 @@ module Aws::IAM
     Role.add_member(:permissions_boundary, ::Smithy::Schema::Shapes::MemberShape.new(target: AttachedPermissionsBoundary, name: "PermissionsBoundary"))
     Role.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagListType, name: "Tags"))
     Role.add_member(:role_last_used, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleLastUsed, name: "RoleLastUsed"))
+    Role.add_member(:source_role_template, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceRoleTemplate, name: "SourceRoleTemplate"))
     Role.type = Types::Role
     RoleDetail.add_member(:path, ::Smithy::Schema::Shapes::MemberShape.new(target: PathType, name: "Path"))
     RoleDetail.add_member(:role_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleNameType, name: "RoleName"))
@@ -1539,6 +1775,34 @@ module Aws::IAM
     RoleLastUsed.add_member(:last_used_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, name: "LastUsedDate"))
     RoleLastUsed.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "Region"))
     RoleLastUsed.type = Types::RoleLastUsed
+    RoleModifiedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleModifiedMessage, name: "message"))
+    RoleModifiedException.type = Types::RoleModifiedException
+    RoleTemplateDisabledException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleTemplateDisabledMessage, name: "message"))
+    RoleTemplateDisabledException.type = Types::RoleTemplateDisabledException
+    RoleTemplateVersion.add_member(:template_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, name: "TemplateArn"))
+    RoleTemplateVersion.add_member(:template_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleTemplateNameType, name: "TemplateName"))
+    RoleTemplateVersion.add_member(:template_version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IdType, name: "TemplateVersionId"))
+    RoleTemplateVersion.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleTemplateDescriptionType, name: "Description"))
+    RoleTemplateVersion.add_member(:major_version, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerType, name: "MajorVersion"))
+    RoleTemplateVersion.add_member(:default_minor_version, ::Smithy::Schema::Shapes::MemberShape.new(target: MinorVersionType, name: "DefaultMinorVersion"))
+    RoleTemplateVersion.add_member(:managed_by_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedByTypeType, name: "ManagedByType"))
+    RoleTemplateVersion.add_member(:managed_by_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedByValueType, name: "ManagedByValue"))
+    RoleTemplateVersion.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanType, name: "Enabled", traits: {"smithy.api#default" => false}))
+    RoleTemplateVersion.add_member(:minor_version, ::Smithy::Schema::Shapes::MemberShape.new(target: MinorVersionType, name: "MinorVersion"))
+    RoleTemplateVersion.add_member(:role_name_pattern, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleNamePatternType, name: "RoleNamePattern"))
+    RoleTemplateVersion.add_member(:role_path_pattern, ::Smithy::Schema::Shapes::MemberShape.new(target: RolePathPatternType, name: "RolePathPattern"))
+    RoleTemplateVersion.add_member(:role_description_pattern, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleDescriptionPatternType, name: "RoleDescriptionPattern"))
+    RoleTemplateVersion.add_member(:assume_role_policy_document_template, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyDocumentType, name: "AssumeRolePolicyDocumentTemplate"))
+    RoleTemplateVersion.add_member(:inline_policy_templates, ::Smithy::Schema::Shapes::MemberShape.new(target: InlinePolicyTemplateListType, name: "InlinePolicyTemplates"))
+    RoleTemplateVersion.add_member(:managed_policy_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedPolicyArnListType, name: "ManagedPolicyArns"))
+    RoleTemplateVersion.add_member(:permission_boundary_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, name: "PermissionBoundaryArn"))
+    RoleTemplateVersion.add_member(:parameters_definition, ::Smithy::Schema::Shapes::MemberShape.new(target: ParametersDefinitionListType, name: "ParametersDefinition"))
+    RoleTemplateVersion.add_member(:role_tags_template, ::Smithy::Schema::Shapes::MemberShape.new(target: TagTemplateListType, name: "RoleTagsTemplate"))
+    RoleTemplateVersion.add_member(:max_session_duration, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleMaxSessionDurationType, name: "MaxSessionDuration"))
+    RoleTemplateVersion.add_member(:version_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanType, name: "VersionEnabled", traits: {"smithy.api#default" => false}))
+    RoleTemplateVersion.add_member(:create_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, name: "CreateTimestamp"))
+    RoleTemplateVersion.add_member(:update_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, name: "UpdateTimestamp"))
+    RoleTemplateVersion.type = Types::RoleTemplateVersion
     RoleUsageListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleUsageType, name: "member"))
     RoleUsageType.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionNameType, name: "Region"))
     RoleUsageType.add_member(:resources, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnListType, name: "Resources"))
@@ -1564,6 +1828,8 @@ module Aws::IAM
     SSHPublicKeyMetadata.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusType, name: "Status", traits: {"smithy.api#required" => {}}))
     SSHPublicKeyMetadata.add_member(:upload_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, name: "UploadDate", traits: {"smithy.api#required" => {}}))
     SSHPublicKeyMetadata.type = Types::SSHPublicKeyMetadata
+    SendDelegationTokenRequest.add_member(:delegation_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DelegationRequestIdType, name: "DelegationRequestId", traits: {"smithy.api#required" => {}}))
+    SendDelegationTokenRequest.type = Types::SendDelegationTokenRequest
     ServerCertificate.add_member(:server_certificate_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerCertificateMetadata, name: "ServerCertificateMetadata", traits: {"smithy.api#required" => {}}))
     ServerCertificate.add_member(:certificate_body, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateBodyType, name: "CertificateBody", traits: {"smithy.api#required" => {}}))
     ServerCertificate.add_member(:certificate_chain, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateChainType, name: "CertificateChain"))
@@ -1629,6 +1895,7 @@ module Aws::IAM
     SimulateCustomPolicyOutput.type = Types::SimulateCustomPolicyOutput
     SimulateCustomPolicyRequest.add_member(:policy_input_list, ::Smithy::Schema::Shapes::MemberShape.new(target: SimulationPolicyListType, name: "PolicyInputList", traits: {"smithy.api#required" => {}}))
     SimulateCustomPolicyRequest.add_member(:permissions_boundary_policy_input_list, ::Smithy::Schema::Shapes::MemberShape.new(target: SimulationPolicyListType, name: "PermissionsBoundaryPolicyInputList"))
+    SimulateCustomPolicyRequest.add_member(:ordered_organization_policy_input_list, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationPolicyListType, name: "OrderedOrganizationPolicyInputList"))
     SimulateCustomPolicyRequest.add_member(:action_names, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionNameListType, name: "ActionNames", traits: {"smithy.api#required" => {}}))
     SimulateCustomPolicyRequest.add_member(:resource_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceNameListType, name: "ResourceArns"))
     SimulateCustomPolicyRequest.add_member(:resource_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyDocumentType, name: "ResourcePolicy"))
@@ -1646,6 +1913,7 @@ module Aws::IAM
     SimulatePrincipalPolicyRequest.add_member(:policy_source_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, name: "PolicySourceArn", traits: {"smithy.api#required" => {}}))
     SimulatePrincipalPolicyRequest.add_member(:policy_input_list, ::Smithy::Schema::Shapes::MemberShape.new(target: SimulationPolicyListType, name: "PolicyInputList"))
     SimulatePrincipalPolicyRequest.add_member(:permissions_boundary_policy_input_list, ::Smithy::Schema::Shapes::MemberShape.new(target: SimulationPolicyListType, name: "PermissionsBoundaryPolicyInputList"))
+    SimulatePrincipalPolicyRequest.add_member(:policy_exclusion_list, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyExclusionsListType, name: "PolicyExclusionList"))
     SimulatePrincipalPolicyRequest.add_member(:action_names, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionNameListType, name: "ActionNames", traits: {"smithy.api#required" => {}}))
     SimulatePrincipalPolicyRequest.add_member(:resource_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceNameListType, name: "ResourceArns"))
     SimulatePrincipalPolicyRequest.add_member(:resource_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyDocumentType, name: "ResourcePolicy"))
@@ -1657,6 +1925,9 @@ module Aws::IAM
     SimulatePrincipalPolicyRequest.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: MarkerType, name: "Marker"))
     SimulatePrincipalPolicyRequest.type = Types::SimulatePrincipalPolicyRequest
     SimulationPolicyListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyDocumentType, name: "member"))
+    SourceRoleTemplate.add_member(:template_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, name: "TemplateArn", traits: {"smithy.api#required" => {}}))
+    SourceRoleTemplate.add_member(:template_minor_version, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerType, name: "TemplateMinorVersion", traits: {"smithy.api#required" => {}}))
+    SourceRoleTemplate.type = Types::SourceRoleTemplate
     Statement.add_member(:source_policy_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyIdentifierType, name: "SourcePolicyId"))
     Statement.add_member(:source_policy_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicySourceType, name: "SourcePolicyType"))
     Statement.add_member(:start_position, ::Smithy::Schema::Shapes::MemberShape.new(target: Position, name: "StartPosition"))
@@ -1687,6 +1958,9 @@ module Aws::IAM
     TagServerCertificateRequest.add_member(:server_certificate_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerCertificateNameType, name: "ServerCertificateName", traits: {"smithy.api#required" => {}}))
     TagServerCertificateRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagListType, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagServerCertificateRequest.type = Types::TagServerCertificateRequest
+    TagTemplate.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagTemplateKeyType, name: "Key", traits: {"smithy.api#required" => {}}))
+    TagTemplate.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagTemplateValueType, name: "Value", traits: {"smithy.api#required" => {}}))
+    TagTemplate.type = Types::TagTemplate
     TagUserRequest.add_member(:user_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ExistingUserNameType, name: "UserName", traits: {"smithy.api#required" => {}}))
     TagUserRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagListType, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagUserRequest.type = Types::TagUserRequest
@@ -1741,6 +2015,9 @@ module Aws::IAM
     UpdateAssumeRolePolicyRequest.add_member(:role_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleNameType, name: "RoleName", traits: {"smithy.api#required" => {}}))
     UpdateAssumeRolePolicyRequest.add_member(:policy_document, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyDocumentType, name: "PolicyDocument", traits: {"smithy.api#required" => {}}))
     UpdateAssumeRolePolicyRequest.type = Types::UpdateAssumeRolePolicyRequest
+    UpdateDelegationRequestRequest.add_member(:delegation_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DelegationRequestIdType, name: "DelegationRequestId", traits: {"smithy.api#required" => {}}))
+    UpdateDelegationRequestRequest.add_member(:notes, ::Smithy::Schema::Shapes::MemberShape.new(target: NotesType, name: "Notes"))
+    UpdateDelegationRequestRequest.type = Types::UpdateDelegationRequestRequest
     UpdateGroupRequest.add_member(:group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupNameType, name: "GroupName", traits: {"smithy.api#required" => {}}))
     UpdateGroupRequest.add_member(:new_path, ::Smithy::Schema::Shapes::MemberShape.new(target: PathType, name: "NewPath"))
     UpdateGroupRequest.add_member(:new_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupNameType, name: "NewGroupName"))
@@ -1839,6 +2116,8 @@ module Aws::IAM
     VirtualMFADevice.type = Types::VirtualMFADevice
     AccessKeyMetadataListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessKeyMetadata, name: "member"))
     AccountAliasListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountAliasType, name: "member"))
+    AccountPropertiesMapType.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountPropertyKeyType, name: "key"))
+    AccountPropertiesMapType.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountPropertyValueType, name: "value"))
     AssertionEncryptionModeType.add_member(:required, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Required", traits: {"smithy.api#enumValue" => "Required"}))
     AssertionEncryptionModeType.add_member(:allowed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Allowed", traits: {"smithy.api#enumValue" => "Allowed"}))
     AssignmentStatusType.add_member(:assigned, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Assigned", traits: {"smithy.api#enumValue" => "Assigned"}))
@@ -1847,6 +2126,7 @@ module Aws::IAM
     AttachedPoliciesListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AttachedPolicy, name: "member"))
     CertificateListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SigningCertificate, name: "member"))
     ClientIDListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientIDType, name: "member"))
+    DelegationRequestsListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DelegationRequest, name: "member"))
     EncodingType.add_member(:ssh, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SSH", traits: {"smithy.api#enumValue" => "SSH"}))
     EncodingType.add_member(:pem, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PEM", traits: {"smithy.api#enumValue" => "PEM"}))
     EntityDetailsListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityDetails, name: "member"))
@@ -1856,12 +2136,30 @@ module Aws::IAM
     GroupDetailListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupDetail, name: "member"))
     GroupListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Group, name: "member"))
     GroupNameListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupNameType, name: "member"))
+    InlinePolicyTemplateListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InlinePolicy, name: "member"))
     InstanceProfileListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceProfile, name: "member"))
     JobStatusType.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
     JobStatusType.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
     JobStatusType.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
     ListPolicyGrantingServiceAccessResponseListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListPoliciesGrantingServiceAccessEntry, name: "member"))
+    ManagedByTypeType.add_member(:service, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Service", traits: {"smithy.api#enumValue" => "Service"}))
+    ManagedPolicyArnListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, name: "member"))
+    MapStringReplacementValueEntry.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "key"))
+    MapStringReplacementValueEntry.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplacementValueEntry, name: "value"))
     MfaDeviceListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MFADevice, name: "member"))
+    ParameterTypeType.add_member(:string, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "String", traits: {"smithy.api#enumValue" => "String"}))
+    ParameterTypeType.add_member(:string_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "StringList", traits: {"smithy.api#enumValue" => "StringList"}))
+    ParameterTypeType.add_member(:number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Number", traits: {"smithy.api#enumValue" => "Number"}))
+    ParameterTypeType.add_member(:number_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NumberList", traits: {"smithy.api#enumValue" => "NumberList"}))
+    ParameterTypeType.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Arn", traits: {"smithy.api#enumValue" => "Arn"}))
+    ParameterTypeType.add_member(:arn_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ArnList", traits: {"smithy.api#enumValue" => "ArnList"}))
+    ParametersDefinitionListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterDefinition, name: "member"))
+    PermissionCheckResultType.add_member(:allowed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALLOWED", traits: {"smithy.api#enumValue" => "ALLOWED"}))
+    PermissionCheckResultType.add_member(:denied, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DENIED", traits: {"smithy.api#enumValue" => "DENIED"}))
+    PermissionCheckResultType.add_member(:unsure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNSURE", traits: {"smithy.api#enumValue" => "UNSURE"}))
+    PermissionCheckStatusType.add_member(:complete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETE", traits: {"smithy.api#enumValue" => "COMPLETE"}))
+    PermissionCheckStatusType.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
+    PermissionCheckStatusType.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
     PolicyDetailListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyDetail, name: "member"))
     PolicyDocumentVersionListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyVersion, name: "member"))
     PolicyGrantingServiceAccessListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyGrantingServiceAccess, name: "member"))
@@ -1870,20 +2168,31 @@ module Aws::IAM
     PolicyOwnerEntityType.add_member(:user, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "USER", traits: {"smithy.api#enumValue" => "USER"}))
     PolicyOwnerEntityType.add_member(:role, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ROLE", traits: {"smithy.api#enumValue" => "ROLE"}))
     PolicyOwnerEntityType.add_member(:group, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GROUP", traits: {"smithy.api#enumValue" => "GROUP"}))
+    PolicyParameterListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyParameter, name: "member"))
+    PolicyParameterValuesListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyParameterValueType, name: "member"))
     PolicyScopeType.add_member(:all, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "All", traits: {"smithy.api#enumValue" => "All"}))
     PolicyScopeType.add_member(:aws, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS", traits: {"smithy.api#enumValue" => "AWS"}))
     PolicyScopeType.add_member(:local, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Local", traits: {"smithy.api#enumValue" => "Local"}))
     PolicyType.add_member(:inline, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INLINE", traits: {"smithy.api#enumValue" => "INLINE"}))
     PolicyType.add_member(:managed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MANAGED", traits: {"smithy.api#enumValue" => "MANAGED"}))
     PrivateKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SAMLPrivateKey, name: "member"))
+    ReplacementValueListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "member"))
     RoleDetailListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleDetail, name: "member"))
     RoleListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Role, name: "member"))
+    RolePermissionRestrictionArnListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, name: "member"))
     ServerCertificateMetadataListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerCertificateMetadata, name: "member"))
     ServiceNamespaceListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceNamespaceType, name: "member"))
     SortKeyType.add_member(:service_namespace_ascending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SERVICE_NAMESPACE_ASCENDING", traits: {"smithy.api#enumValue" => "SERVICE_NAMESPACE_ASCENDING"}))
     SortKeyType.add_member(:service_namespace_descending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SERVICE_NAMESPACE_DESCENDING", traits: {"smithy.api#enumValue" => "SERVICE_NAMESPACE_DESCENDING"}))
     SortKeyType.add_member(:last_authenticated_time_ascending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LAST_AUTHENTICATED_TIME_ASCENDING", traits: {"smithy.api#enumValue" => "LAST_AUTHENTICATED_TIME_ASCENDING"}))
     SortKeyType.add_member(:last_authenticated_time_descending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LAST_AUTHENTICATED_TIME_DESCENDING", traits: {"smithy.api#enumValue" => "LAST_AUTHENTICATED_TIME_DESCENDING"}))
+    StateType.add_member(:unassigned, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNASSIGNED", traits: {"smithy.api#enumValue" => "UNASSIGNED"}))
+    StateType.add_member(:assigned, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ASSIGNED", traits: {"smithy.api#enumValue" => "ASSIGNED"}))
+    StateType.add_member(:pending_approval, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING_APPROVAL", traits: {"smithy.api#enumValue" => "PENDING_APPROVAL"}))
+    StateType.add_member(:finalized, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FINALIZED", traits: {"smithy.api#enumValue" => "FINALIZED"}))
+    StateType.add_member(:accepted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCEPTED", traits: {"smithy.api#enumValue" => "ACCEPTED"}))
+    StateType.add_member(:rejected, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REJECTED", traits: {"smithy.api#enumValue" => "REJECTED"}))
+    StateType.add_member(:expired, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXPIRED", traits: {"smithy.api#enumValue" => "EXPIRED"}))
     StatusType.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Active", traits: {"smithy.api#enumValue" => "Active"}))
     StatusType.add_member(:inactive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Inactive", traits: {"smithy.api#enumValue" => "Inactive"}))
     StatusType.add_member(:expired, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Expired", traits: {"smithy.api#enumValue" => "Expired"}))
@@ -1914,10 +2223,22 @@ module Aws::IAM
     SummaryKeyType.add_member(:policy_versions_in_use_quota, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PolicyVersionsInUseQuota", traits: {"smithy.api#enumValue" => "PolicyVersionsInUseQuota"}))
     SummaryKeyType.add_member(:versions_per_policy_quota, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VersionsPerPolicyQuota", traits: {"smithy.api#enumValue" => "VersionsPerPolicyQuota"}))
     SummaryKeyType.add_member(:global_endpoint_token_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GlobalEndpointTokenVersion", traits: {"smithy.api#enumValue" => "GlobalEndpointTokenVersion"}))
+    SummaryKeyType.add_member(:assume_role_policy_size_quota, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AssumeRolePolicySizeQuota", traits: {"smithy.api#enumValue" => "AssumeRolePolicySizeQuota"}))
+    SummaryKeyType.add_member(:instance_profiles, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "InstanceProfiles", traits: {"smithy.api#enumValue" => "InstanceProfiles"}))
+    SummaryKeyType.add_member(:instance_profiles_quota, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "InstanceProfilesQuota", traits: {"smithy.api#enumValue" => "InstanceProfilesQuota"}))
+    SummaryKeyType.add_member(:providers, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Providers", traits: {"smithy.api#enumValue" => "Providers"}))
+    SummaryKeyType.add_member(:role_policy_size_quota, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RolePolicySizeQuota", traits: {"smithy.api#enumValue" => "RolePolicySizeQuota"}))
+    SummaryKeyType.add_member(:roles, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Roles", traits: {"smithy.api#enumValue" => "Roles"}))
+    SummaryKeyType.add_member(:roles_quota, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RolesQuota", traits: {"smithy.api#enumValue" => "RolesQuota"}))
     SummaryMapType.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: SummaryKeyType, name: "key"))
     SummaryMapType.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: SummaryValueType, name: "value"))
+    SummaryStateType.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AVAILABLE", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
+    SummaryStateType.add_member(:not_available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_AVAILABLE", traits: {"smithy.api#enumValue" => "NOT_AVAILABLE"}))
+    SummaryStateType.add_member(:not_supported, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_SUPPORTED", traits: {"smithy.api#enumValue" => "NOT_SUPPORTED"}))
+    SummaryStateType.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
     TagKeyListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyType, name: "member"))
     TagListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
+    TagTemplateListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagTemplate, name: "member"))
     ThumbprintListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ThumbprintType, name: "member"))
     UserDetailListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UserDetail, name: "member"))
     UserListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: User, name: "member"))
@@ -1927,12 +2248,40 @@ module Aws::IAM
       service.id = "com.amazonaws.iam#AWSIdentityManagementV20100508"
       service.name = "AWSIdentityManagementV20100508"
       service.version = "2010-05-08"
-      service.traits = {"aws.api#service" => {"sdkId" => "IAM", "arnNamespace" => "iam", "cloudFormationName" => "IAM", "cloudTrailEventSource" => "iam.amazonaws.com", "endpointPrefix" => "iam"}, "aws.auth#sigv4" => {"name" => "iam"}, "aws.protocols#awsQuery" => {}, "smithy.api#title" => "AWS Identity and Access Management", "smithy.api#xmlNamespace" => {"uri" => "https://iam.amazonaws.com/doc/2010-05-08/"}}
+      service.traits = {"aws.api#service" => {"sdkId" => "IAM", "arnNamespace" => "iam", "cloudFormationName" => "IAM", "cloudTrailEventSource" => "iam.amazonaws.com", "endpointPrefix" => "iam"}, "aws.auth#sigv4" => {"name" => "iam"}, "aws.protocols#awsQuery" => {}, "smithy.api#title" => "AWS Identity and Access Management", "smithy.api#xmlNamespace" => {"uri" => "https://iam.amazonaws.com/doc/2010-05-08/"}, "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}, "Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws"]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws-cn"]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws-us-gov"]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws-iso"]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws-iso-b"]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws-iso-e"]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws-iso-f"]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws-eusc"]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://iam.amazonaws.com", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "us-east-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://iam-fips.amazonaws.com", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "us-east-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://iam.global.api.aws", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "us-east-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://iam-fips.global.api.aws", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "us-east-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://iam.global.api.amazonwebservices.com.cn", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "cn-north-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://iam-fips.api.amazonwebservices.com.cn", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "cn-north-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://iam.cn-north-1.amazonaws.com.cn", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "cn-north-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://iam-fips.amazonaws.com.cn", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "cn-north-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://iam.us-gov.api.aws", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "us-gov-west-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://iam.us-gov.amazonaws.com", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "us-gov-west-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://iam.us-iso-east-1.c2s.ic.gov", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "us-iso-east-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://iam-fips.us-iso-east-1.c2s.ic.gov", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "us-iso-east-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://iam.api.aws.ic.gov", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "us-iso-east-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://iam-fips.api.aws.ic.gov", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "us-iso-east-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://iam.us-isob-east-1.sc2s.sgov.gov", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "us-isob-east-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://iam-fips.us-isob-east-1.sc2s.sgov.gov", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "us-isob-east-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://iam.api.aws.scloud", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "us-isob-east-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://iam-fips.api.aws.scloud", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "us-isob-east-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://iam.eu-isoe-west-1.cloud.adc-e.uk", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "eu-isoe-west-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://iam-fips.cloud.adc-e.uk", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "eu-isoe-west-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://iam.api.cloud-aws.adc-e.uk", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "eu-isoe-west-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://iam-fips.api.cloud-aws.adc-e.uk", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "eu-isoe-west-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://iam.us-isof-south-1.csp.hci.ic.gov", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "us-isof-south-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://iam-fips.csp.hci.ic.gov", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "us-isof-south-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://iam.api.aws.hci.ic.gov", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "us-isof-south-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://iam-fips.api.aws.hci.ic.gov", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "us-isof-south-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://iam.eusc-de-east-1.amazonaws.eu", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "eusc-de-east-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://iam-fips.amazonaws.eu", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "eusc-de-east-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://iam.global.api.amazonwebservices.eu", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "eusc-de-east-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://iam-fips.api.amazonwebservices.eu", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "eusc-de-east-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://iam-fips.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dualStackDnsSuffix}", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "{PartitionResult#implicitGlobalRegion}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://iam-fips.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dnsSuffix}", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "{PartitionResult#implicitGlobalRegion}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://iam.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dualStackDnsSuffix}", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "{PartitionResult#implicitGlobalRegion}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://iam.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dnsSuffix}", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "{PartitionResult#implicitGlobalRegion}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 43, "nodes" => "/////wAAAAH/////AAAAAAAAACoAAAADAAAAAQAAAAQF9eEpAAAAAgAAAAUF9eEpAAAAAwAAACcAAAAGAAAABAAAACQAAAAHAAAABQAAACMAAAAIAAAABgAAACAAAAAJAAAABwAAABQAAAAKAAAACAAAAA8AAAALAAAACQX14RIAAAAMAAAACgX14RYAAAANAAAACwX14RoAAAAOAAAADAX14R4F9eEoAAAACQX14RQAAAAQAAAACgX14RgAAAARAAAACwX14RwAAAASAAAADAX14SAAAAATAAAADQX14SYF9eEnAAAACAAAABoAAAAVAAAACQX14RMAAAAWAAAACgX14RcAAAAXAAAACwX14RsAAAAYAAAADAX14R8AAAAZAAAADgX14SQF9eElAAAACQX14RUAAAAbAAAACgX14RkAAAAcAAAACwX14R0AAAAdAAAADAX14SEAAAAeAAAADQAAAB8F9eEjAAAADgX14SIF9eEjAAAABwAAACIAAAAhAAAACAX14RAF9eEOAAAACAX14REF9eEPAAAACAX14QwF9eENAAAABwAAACYAAAAlAAAACAX14QgF9eEKAAAACAX14QkF9eELAAAABwAAACkAAAAoAAAACAX14QYF9eEEAAAACAX14QcF9eEFAAAABwX14QEAAAArAAAACAX14QIF9eED"}}
+      service.add_operation(:accept_delegation_request, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.iam#AcceptDelegationRequest"
+        operation.name = "AcceptDelegationRequest"
+        operation.input = AcceptDelegationRequestRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << ConcurrentModificationException
+        operation.errors << NoSuchEntityException
+        operation.errors << ServiceFailureException
+        operation.traits = {}
+      end)
+      service.add_operation(:acquire_role, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.iam#AcquireRole"
+        operation.name = "AcquireRole"
+        operation.input = AcquireRoleRequest
+        operation.output = AcquireRoleResponse
+        operation.errors << ConcurrentModificationException
+        operation.errors << EntityAlreadyExistsException
+        operation.errors << InvalidInputException
+        operation.errors << LimitExceededException
+        operation.errors << MalformedPolicyDocumentException
+        operation.errors << NameConflictException
+        operation.errors << NoSuchEntityException
+        operation.errors << RoleModifiedException
+        operation.errors << RoleTemplateDisabledException
+        operation.errors << ServiceFailureException
+        operation.traits = {}
+      end)
       service.add_operation(:add_client_id_to_open_id_connect_provider, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.iam#AddClientIDToOpenIDConnectProvider"
         operation.name = "AddClientIDToOpenIDConnectProvider"
         operation.input = AddClientIDToOpenIDConnectProviderRequest
         operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << ConcurrentModificationException
         operation.errors << InvalidInputException
         operation.errors << LimitExceededException
         operation.errors << NoSuchEntityException
@@ -1957,6 +2306,17 @@ module Aws::IAM
         operation.input = AddUserToGroupRequest
         operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
         operation.errors << LimitExceededException
+        operation.errors << NoSuchEntityException
+        operation.errors << ServiceFailureException
+        operation.traits = {}
+      end)
+      service.add_operation(:associate_delegation_request, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.iam#AssociateDelegationRequest"
+        operation.name = "AssociateDelegationRequest"
+        operation.input = AssociateDelegationRequestRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << ConcurrentModificationException
+        operation.errors << InvalidInputException
         operation.errors << NoSuchEntityException
         operation.errors << ServiceFailureException
         operation.traits = {}
@@ -2028,6 +2388,18 @@ module Aws::IAM
         operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
         operation.errors << ConcurrentModificationException
         operation.errors << EntityAlreadyExistsException
+        operation.errors << LimitExceededException
+        operation.errors << ServiceFailureException
+        operation.traits = {}
+      end)
+      service.add_operation(:create_delegation_request, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.iam#CreateDelegationRequest"
+        operation.name = "CreateDelegationRequest"
+        operation.input = CreateDelegationRequestRequest
+        operation.output = CreateDelegationRequestResponse
+        operation.errors << ConcurrentModificationException
+        operation.errors << EntityAlreadyExistsException
+        operation.errors << InvalidInputException
         operation.errors << LimitExceededException
         operation.errors << ServiceFailureException
         operation.traits = {}
@@ -2488,6 +2860,14 @@ module Aws::IAM
         operation.errors << ServiceAccessNotEnabledException
         operation.traits = {}
       end)
+      service.add_operation(:disable_outbound_web_identity_federation, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.iam#DisableOutboundWebIdentityFederation"
+        operation.name = "DisableOutboundWebIdentityFederation"
+        operation.input = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << FeatureDisabledException
+        operation.traits = {}
+      end)
       service.add_operation(:enable_mfa_device, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.iam#EnableMFADevice"
         operation.name = "EnableMFADevice"
@@ -2524,6 +2904,14 @@ module Aws::IAM
         operation.errors << OrganizationNotFoundException
         operation.errors << OrganizationNotInAllFeaturesModeException
         operation.errors << ServiceAccessNotEnabledException
+        operation.traits = {}
+      end)
+      service.add_operation(:enable_outbound_web_identity_federation, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.iam#EnableOutboundWebIdentityFederation"
+        operation.name = "EnableOutboundWebIdentityFederation"
+        operation.input = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.output = EnableOutboundWebIdentityFederationResponse
+        operation.errors << FeatureEnabledException
         operation.traits = {}
       end)
       service.add_operation(:generate_credential_report, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -2577,6 +2965,15 @@ module Aws::IAM
         operation.errors << ServiceFailureException
         operation.traits = {}
       end)
+      service.add_operation(:get_account_properties, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.iam#GetAccountProperties"
+        operation.name = "GetAccountProperties"
+        operation.input = GetAccountPropertiesRequest
+        operation.output = GetAccountPropertiesResponse
+        operation.errors << InvalidInputException
+        operation.errors << ServiceFailureException
+        operation.traits = {}
+      end)
       service.add_operation(:get_account_summary, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.iam#GetAccountSummary"
         operation.name = "GetAccountSummary"
@@ -2613,6 +3010,15 @@ module Aws::IAM
         operation.errors << ServiceFailureException
         operation.traits = {}
       end)
+      service.add_operation(:get_delegation_request, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.iam#GetDelegationRequest"
+        operation.name = "GetDelegationRequest"
+        operation.input = GetDelegationRequestRequest
+        operation.output = GetDelegationRequestResponse
+        operation.errors << NoSuchEntityException
+        operation.errors << ServiceFailureException
+        operation.traits = {}
+      end)
       service.add_operation(:get_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.iam#GetGroup"
         operation.name = "GetGroup"
@@ -2628,6 +3034,16 @@ module Aws::IAM
         operation.name = "GetGroupPolicy"
         operation.input = GetGroupPolicyRequest
         operation.output = GetGroupPolicyResponse
+        operation.errors << NoSuchEntityException
+        operation.errors << ServiceFailureException
+        operation.traits = {}
+      end)
+      service.add_operation(:get_human_readable_summary, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.iam#GetHumanReadableSummary"
+        operation.name = "GetHumanReadableSummary"
+        operation.input = GetHumanReadableSummaryRequest
+        operation.output = GetHumanReadableSummaryResponse
+        operation.errors << InvalidInputException
         operation.errors << NoSuchEntityException
         operation.errors << ServiceFailureException
         operation.traits = {}
@@ -2677,6 +3093,14 @@ module Aws::IAM
         operation.errors << NoSuchEntityException
         operation.traits = {}
       end)
+      service.add_operation(:get_outbound_web_identity_federation_info, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.iam#GetOutboundWebIdentityFederationInfo"
+        operation.name = "GetOutboundWebIdentityFederationInfo"
+        operation.input = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.output = GetOutboundWebIdentityFederationInfoResponse
+        operation.errors << FeatureDisabledException
+        operation.traits = {}
+      end)
       service.add_operation(:get_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.iam#GetPolicy"
         operation.name = "GetPolicy"
@@ -2711,6 +3135,16 @@ module Aws::IAM
         operation.name = "GetRolePolicy"
         operation.input = GetRolePolicyRequest
         operation.output = GetRolePolicyResponse
+        operation.errors << NoSuchEntityException
+        operation.errors << ServiceFailureException
+        operation.traits = {}
+      end)
+      service.add_operation(:get_role_template_version, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.iam#GetRoleTemplateVersion"
+        operation.name = "GetRoleTemplateVersion"
+        operation.input = GetRoleTemplateVersionRequest
+        operation.output = GetRoleTemplateVersionResponse
+        operation.errors << InvalidInputException
         operation.errors << NoSuchEntityException
         operation.errors << ServiceFailureException
         operation.traits = {}
@@ -2840,6 +3274,16 @@ module Aws::IAM
         operation.errors << ServiceFailureException
         operation.traits = {}
         operation[:paginator] = Paginators::ListAttachedUserPolicies.new
+      end)
+      service.add_operation(:list_delegation_requests, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.iam#ListDelegationRequests"
+        operation.name = "ListDelegationRequests"
+        operation.input = ListDelegationRequestsRequest
+        operation.output = ListDelegationRequestsResponse
+        operation.errors << InvalidInputException
+        operation.errors << NoSuchEntityException
+        operation.errors << ServiceFailureException
+        operation.traits = {}
       end)
       service.add_operation(:list_entities_for_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.iam#ListEntitiesForPolicy"
@@ -3133,6 +3577,16 @@ module Aws::IAM
         operation.traits = {}
         operation[:paginator] = Paginators::ListVirtualMFADevices.new
       end)
+      service.add_operation(:put_account_properties, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.iam#PutAccountProperties"
+        operation.name = "PutAccountProperties"
+        operation.input = PutAccountPropertiesRequest
+        operation.output = PutAccountPropertiesResponse
+        operation.errors << ConcurrentModificationException
+        operation.errors << InvalidInputException
+        operation.errors << ServiceFailureException
+        operation.traits = {}
+      end)
       service.add_operation(:put_group_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.iam#PutGroupPolicy"
         operation.name = "PutGroupPolicy"
@@ -3190,11 +3644,23 @@ module Aws::IAM
         operation.errors << ServiceFailureException
         operation.traits = {}
       end)
+      service.add_operation(:reject_delegation_request, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.iam#RejectDelegationRequest"
+        operation.name = "RejectDelegationRequest"
+        operation.input = RejectDelegationRequestRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << ConcurrentModificationException
+        operation.errors << InvalidInputException
+        operation.errors << NoSuchEntityException
+        operation.errors << ServiceFailureException
+        operation.traits = {}
+      end)
       service.add_operation(:remove_client_id_from_open_id_connect_provider, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.iam#RemoveClientIDFromOpenIDConnectProvider"
         operation.name = "RemoveClientIDFromOpenIDConnectProvider"
         operation.input = RemoveClientIDFromOpenIDConnectProviderRequest
         operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << ConcurrentModificationException
         operation.errors << InvalidInputException
         operation.errors << NoSuchEntityException
         operation.errors << ServiceFailureException
@@ -3237,6 +3703,17 @@ module Aws::IAM
         operation.errors << ConcurrentModificationException
         operation.errors << InvalidAuthenticationCodeException
         operation.errors << LimitExceededException
+        operation.errors << NoSuchEntityException
+        operation.errors << ServiceFailureException
+        operation.traits = {}
+      end)
+      service.add_operation(:send_delegation_token, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.iam#SendDelegationToken"
+        operation.name = "SendDelegationToken"
+        operation.input = SendDelegationTokenRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << ConcurrentModificationException
+        operation.errors << InvalidInputException
         operation.errors << NoSuchEntityException
         operation.errors << ServiceFailureException
         operation.traits = {}
@@ -3497,6 +3974,17 @@ module Aws::IAM
         operation.errors << UnmodifiableEntityException
         operation.traits = {}
       end)
+      service.add_operation(:update_delegation_request, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.iam#UpdateDelegationRequest"
+        operation.name = "UpdateDelegationRequest"
+        operation.input = UpdateDelegationRequestRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << ConcurrentModificationException
+        operation.errors << InvalidInputException
+        operation.errors << NoSuchEntityException
+        operation.errors << ServiceFailureException
+        operation.traits = {}
+      end)
       service.add_operation(:update_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.iam#UpdateGroup"
         operation.name = "UpdateGroup"
@@ -3525,6 +4013,7 @@ module Aws::IAM
         operation.name = "UpdateOpenIDConnectProviderThumbprint"
         operation.input = UpdateOpenIDConnectProviderThumbprintRequest
         operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << ConcurrentModificationException
         operation.errors << InvalidInputException
         operation.errors << NoSuchEntityException
         operation.errors << ServiceFailureException
@@ -3555,6 +4044,7 @@ module Aws::IAM
         operation.name = "UpdateSAMLProvider"
         operation.input = UpdateSAMLProviderRequest
         operation.output = UpdateSAMLProviderResponse
+        operation.errors << ConcurrentModificationException
         operation.errors << InvalidInputException
         operation.errors << LimitExceededException
         operation.errors << NoSuchEntityException

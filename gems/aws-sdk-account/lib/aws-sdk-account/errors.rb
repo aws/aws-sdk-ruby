@@ -26,6 +26,7 @@ module Aws::Account
   # * {ConflictException}
   # * {InternalServerException}
   # * {ResourceNotFoundException}
+  # * {ResourceUnavailableException}
   # * {TooManyRequestsException}
   # * {ValidationException}
   #
@@ -96,6 +97,24 @@ module Aws::Account
     class ResourceNotFoundException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Account::Types::ResourceNotFoundException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+
+      # <p>The value populated to the <code>x-amzn-ErrorType</code> response header by API Gateway.</p>
+      def error_type
+        @data[:error_type]
+      end
+    end
+
+    # <p>The operation failed because it specified a resource that is not currently available.</p>
+    class ResourceUnavailableException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::Account::Types::ResourceUnavailableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
         super
       end

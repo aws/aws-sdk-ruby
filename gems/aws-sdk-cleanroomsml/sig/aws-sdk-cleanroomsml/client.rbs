@@ -197,7 +197,10 @@ module Aws::CleanRoomsML
             compute_configuration: {
               worker: {
                 type: String,
-                number: Integer
+                number: Integer,
+                properties: {
+                  spark: Hash[String, String]
+                }
               }
             },
             result_format: String
@@ -209,7 +212,11 @@ module Aws::CleanRoomsML
       ?retention_in_days: Integer,
       ?description: String,
       ?kms_key_arn: String,
-      ?tags: Hash[String, String]
+      ?tags: Hash[String, String],
+      ?payer_configuration: {
+        compute_payer_account_id: String,
+        synthetic_data_payer_account_id: untyped
+      }
     ) -> _CreateMLInputChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateMLInputChannelResponse
 
     interface _CreateTrainedModelResponse
@@ -248,7 +255,8 @@ module Aws::CleanRoomsML
       ?training_input_mode: String,
       ?description: String,
       ?kms_key_arn: String,
-      ?tags: Hash[String, String]
+      ?tags: Hash[String, String],
+      ?ml_model_training_payer_account_id: String
     ) -> _CreateTrainedModelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTrainedModelResponse
 
     interface _CreateTrainingDatasetResponse
@@ -428,6 +436,8 @@ module Aws::CleanRoomsML
       def number_of_records: () -> Integer?
       def privacy_budgets: () -> Types::PrivacyBudgets?
       def description: () -> String?
+      def synthetic_data_configuration: () -> Types::SyntheticDataConfiguration?
+      def payer_configuration: () -> Types::PayerConfiguration?
       def create_time: () -> Time?
       def update_time: () -> Time?
       def creator_account_id: () -> String?
@@ -457,6 +467,7 @@ module Aws::CleanRoomsML
       def logs_status: () -> String?
       def logs_status_details: () -> String?
       def training_container_image_digest: () -> String?
+      def ml_model_training_payer_account_id: () -> String?
       def create_time: () -> Time?
       def update_time: () -> Time?
       def creator_account_id: () -> String?
@@ -556,6 +567,8 @@ module Aws::CleanRoomsML
       def number_of_records: () -> Integer?
       def privacy_budgets: () -> Types::PrivacyBudgets?
       def description: () -> String?
+      def synthetic_data_configuration: () -> Types::SyntheticDataConfiguration?
+      def payer_configuration: () -> Types::PayerConfiguration?
       def create_time: () -> Time?
       def update_time: () -> Time?
       def input_channel: () -> Types::InputChannel?
@@ -590,6 +603,7 @@ module Aws::CleanRoomsML
       def logs_status: () -> String?
       def logs_status_details: () -> String?
       def training_container_image_digest: () -> String?
+      def ml_model_training_payer_account_id: () -> String?
       def create_time: () -> Time?
       def update_time: () -> Time?
       def hyperparameters: () -> Hash[String, String]?
@@ -629,6 +643,7 @@ module Aws::CleanRoomsML
       def logs_status: () -> String?
       def logs_status_details: () -> String?
       def tags: () -> Hash[String, String]?
+      def ml_model_inference_payer_account_id: () -> String?
     end
     def get_trained_model_inference_job: (
       ?membership_identifier: String,
@@ -900,7 +915,10 @@ module Aws::CleanRoomsML
         sql_compute_configuration: {
           worker: {
             type: String,
-            number: Integer
+            number: Integer,
+            properties: {
+              spark: Hash[String, String]
+            }
           }
         }
       },
@@ -959,7 +977,8 @@ module Aws::CleanRoomsML
       },
       ?environment: Hash[String, String],
       ?kms_key_arn: String,
-      ?tags: Hash[String, String]
+      ?tags: Hash[String, String],
+      ?ml_model_inference_payer_account_id: String
     ) -> _StartTrainedModelInferenceJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartTrainedModelInferenceJobResponse
 
     interface _TagResourceResponse

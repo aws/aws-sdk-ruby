@@ -144,18 +144,18 @@ module Aws::SecurityHub
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -210,11 +210,11 @@ module Aws::SecurityHub
     end
 
     # <note>
-    #             <p>We recommend using Organizations instead of Security Hub invitations to manage your member accounts. 
-    #            For information, see <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-accounts-orgs.html">Managing Security Hub administrator and member accounts with Organizations</a> 
-    #            in the <i>Security Hub User Guide</i>.</p>
+    #             <p>We recommend using Organizations instead of Security Hub CSPM invitations to manage your member accounts.
+    #            For information, see <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-accounts-orgs.html">Managing Security Hub CSPM administrator and member accounts with Organizations</a>
+    #            in the <i>Security Hub CSPM User Guide</i>.</p>
     #          </note>
-    #          <p>Accepts the invitation to be a member account and be monitored by the Security Hub administrator
+    #          <p>Accepts the invitation to be a member account and be monitored by the Security Hub CSPM administrator
     #          account that the invitation was sent from.</p>
     #          <p>This operation is only used by member accounts that are not added through
     #          Organizations.</p>
@@ -222,9 +222,9 @@ module Aws::SecurityHub
     #          account to view findings generated in the member account.</p>
     # @param [Hash, Types::AcceptAdministratorInvitationRequest] params
     # @option params [String] :administrator_id
-    #   <p>The account ID of the Security Hub administrator account that sent the invitation.</p>
+    #   <p>The account ID of the Security Hub CSPM administrator account that sent the invitation.</p>
     # @option params [String] :invitation_id
-    #   <p>The identifier of the invitation sent from the Security Hub administrator account.</p>
+    #   <p>The identifier of the invitation sent from the Security Hub CSPM administrator account.</p>
     # @example To accept an invitation be a member account
     #   # The following example demonstrates how an account can accept an invitation from the Security Hub administrator account to be a member account. This operation is applicable only to member accounts that are not added through AWS Organizations.
     #   params = {
@@ -252,8 +252,8 @@ module Aws::SecurityHub
     end
 
     # <p>This method is deprecated. Instead, use <code>AcceptAdministratorInvitation</code>.</p>
-    #          <p>The Security Hub console continues to use <code>AcceptInvitation</code>. It will eventually change to use <code>AcceptAdministratorInvitation</code>. Any IAM policies that specifically control access to this function must continue to use <code>AcceptInvitation</code>. You should also add <code>AcceptAdministratorInvitation</code> to your policies to ensure that the correct permissions are in place after the console begins to use <code>AcceptAdministratorInvitation</code>.</p>
-    #          <p>Accepts the invitation to be a member account and be monitored by the Security Hub administrator
+    #          <p>The Security Hub CSPM console continues to use <code>AcceptInvitation</code>. It will eventually change to use <code>AcceptAdministratorInvitation</code>. Any IAM policies that specifically control access to this function must continue to use <code>AcceptInvitation</code>. You should also add <code>AcceptAdministratorInvitation</code> to your policies to ensure that the correct permissions are in place after the console begins to use <code>AcceptAdministratorInvitation</code>.</p>
+    #          <p>Accepts the invitation to be a member account and be monitored by the Security Hub CSPM administrator
     #          account that the invitation was sent from.</p>
     #          <p>This operation is only used by member accounts that are not added through
     #          Organizations.</p>
@@ -261,9 +261,9 @@ module Aws::SecurityHub
     #          account to view findings generated in the member account.</p>
     # @param [Hash, Types::AcceptInvitationRequest] params
     # @option params [String] :master_id
-    #   <p>The account ID of the Security Hub administrator account that sent the invitation.</p>
+    #   <p>The account ID of the Security Hub CSPM administrator account that sent the invitation.</p>
     # @option params [String] :invitation_id
-    #   <p>The identifier of the invitation sent from the Security Hub administrator account.</p>
+    #   <p>The identifier of the invitation sent from the Security Hub CSPM administrator account.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     master_id: "NonEmptyString", # required
@@ -339,7 +339,7 @@ module Aws::SecurityHub
 
     # <p>Disables the standards specified by the provided
     #          <code>StandardsSubscriptionArns</code>.</p>
-    #          <p>For more information, see <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards.html">Security Standards</a> section of the <i>Security Hub User
+    #          <p>For more information, see <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards.html">Security Standards</a> section of the <i>Security Hub CSPM User
     #          Guide</i>.</p>
     # @param [Hash, Types::BatchDisableStandardsRequest] params
     # @option params [Array<String>] :standards_subscription_arns
@@ -361,7 +361,9 @@ module Aws::SecurityHub
     #         standards_input: {
     #         },
     #         standards_status: DELETING,
-    #         standards_subscription_arn: "arn:aws:securityhub:us-west-1:123456789012:subscription/pci-dss/v/3.2.1"
+    #         standards_subscription_arn: "arn:aws:securityhub:us-west-1:123456789012:subscription/pci-dss/v/3.2.1",
+    #         standards_controls_updatable: NOT_READY_FOR_UPDATES,
+    #         provider: AWS
     #       }
     #     ]
     #   }
@@ -384,8 +386,9 @@ module Aws::SecurityHub
     #         standards_status: "PENDING" # One of: ["PENDING", "READY", "FAILED", "DELETING", "INCOMPLETE"], # required
     #         standards_controls_updatable: "READY_FOR_UPDATES" # One of: ["READY_FOR_UPDATES", "NOT_READY_FOR_UPDATES"],
     #         standards_status_reason: {
-    #           status_reason_code: "NO_AVAILABLE_CONFIGURATION_RECORDER" # One of: ["NO_AVAILABLE_CONFIGURATION_RECORDER", "MAXIMUM_NUMBER_OF_CONFIG_RULES_EXCEEDED", "INTERNAL_ERROR"], # required
-    #         }
+    #           status_reason_code: "NO_AVAILABLE_CONFIGURATION_RECORDER" # One of: ["NO_AVAILABLE_CONFIGURATION_RECORDER", "MAXIMUM_NUMBER_OF_CONFIG_RULES_EXCEEDED", "NO_AVAILABLE_MULTICLOUD_CONNECTOR", "INTERNAL_ERROR"], # required
+    #         },
+    #         provider: "AWS" # One of: ["AWS", "Azure"]
     #       }
     #     ]
     #   }
@@ -399,7 +402,7 @@ module Aws::SecurityHub
     #          ARN for a standard, use the <code>DescribeStandards</code>
     #          operation.</p>
     #          <p>For more information, see the <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards.html">Security Standards</a>
-    #          section of the <i>Security Hub User Guide</i>.</p>
+    #          section of the <i>Security Hub CSPM User Guide</i>.</p>
     # @param [Hash, Types::BatchEnableStandardsRequest] params
     # @option params [Array<Types::StandardsSubscriptionRequest>] :standards_subscription_requests
     #   <p>The list of standards checks to enable.</p>
@@ -422,7 +425,9 @@ module Aws::SecurityHub
     #         standards_input: {
     #         },
     #         standards_status: PENDING,
-    #         standards_subscription_arn: "arn:aws:securityhub:us-west-1:123456789012:subscription/pci-dss/v/3.2.1"
+    #         standards_subscription_arn: "arn:aws:securityhub:us-west-1:123456789012:subscription/pci-dss/v/3.2.1",
+    #         standards_controls_updatable: NOT_READY_FOR_UPDATES,
+    #         provider: AWS
     #       }
     #     ]
     #   }
@@ -452,8 +457,9 @@ module Aws::SecurityHub
     #         standards_status: "PENDING" # One of: ["PENDING", "READY", "FAILED", "DELETING", "INCOMPLETE"], # required
     #         standards_controls_updatable: "READY_FOR_UPDATES" # One of: ["READY_FOR_UPDATES", "NOT_READY_FOR_UPDATES"],
     #         standards_status_reason: {
-    #           status_reason_code: "NO_AVAILABLE_CONFIGURATION_RECORDER" # One of: ["NO_AVAILABLE_CONFIGURATION_RECORDER", "MAXIMUM_NUMBER_OF_CONFIG_RULES_EXCEEDED", "INTERNAL_ERROR"], # required
-    #         }
+    #           status_reason_code: "NO_AVAILABLE_CONFIGURATION_RECORDER" # One of: ["NO_AVAILABLE_CONFIGURATION_RECORDER", "MAXIMUM_NUMBER_OF_CONFIG_RULES_EXCEEDED", "NO_AVAILABLE_MULTICLOUD_CONNECTOR", "INTERNAL_ERROR"], # required
+    #         },
+    #         provider: "AWS" # One of: ["AWS", "Azure"]
     #       }
     #     ]
     #   }
@@ -464,7 +470,7 @@ module Aws::SecurityHub
     end
 
     # <p>
-    #          Retrieves a list of details for automation rules based on rule Amazon Resource Names 
+    #          Retrieves a list of details for automation rules based on rule Amazon Resource Names
     #          (ARNs).
     #       </p>
     # @param [Hash, Types::BatchGetAutomationRulesRequest] params
@@ -617,7 +623,8 @@ module Aws::SecurityHub
     #               end: "NonEmptyString",
     #               date_range: {
     #                 value: 1,
-    #                 unit: "DAYS" # One of: ["DAYS"]
+    #                 unit: "DAYS" # One of: ["DAYS"],
+    #                 comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #               }
     #             }
     #           ],
@@ -627,7 +634,8 @@ module Aws::SecurityHub
     #               end: "NonEmptyString",
     #               date_range: {
     #                 value: 1,
-    #                 unit: "DAYS" # One of: ["DAYS"]
+    #                 unit: "DAYS" # One of: ["DAYS"],
+    #                 comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #               }
     #             }
     #           ],
@@ -637,7 +645,8 @@ module Aws::SecurityHub
     #               end: "NonEmptyString",
     #               date_range: {
     #                 value: 1,
-    #                 unit: "DAYS" # One of: ["DAYS"]
+    #                 unit: "DAYS" # One of: ["DAYS"],
+    #                 comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #               }
     #             }
     #           ],
@@ -647,7 +656,8 @@ module Aws::SecurityHub
     #               end: "NonEmptyString",
     #               date_range: {
     #                 value: 1,
-    #                 unit: "DAYS" # One of: ["DAYS"]
+    #                 unit: "DAYS" # One of: ["DAYS"],
+    #                 comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #               }
     #             }
     #           ],
@@ -803,7 +813,8 @@ module Aws::SecurityHub
     #               end: "NonEmptyString",
     #               date_range: {
     #                 value: 1,
-    #                 unit: "DAYS" # One of: ["DAYS"]
+    #                 unit: "DAYS" # One of: ["DAYS"],
+    #                 comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #               }
     #             }
     #           ],
@@ -833,6 +844,24 @@ module Aws::SecurityHub
     #             }
     #           ],
     #           aws_account_name: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS" # One of: ["EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "CONTAINS_WORD"]
+    #             }
+    #           ],
+    #           resource_provider: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS" # One of: ["EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "CONTAINS_WORD"]
+    #             }
+    #           ],
+    #           resource_owner_account_id: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS" # One of: ["EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "CONTAINS_WORD"]
+    #             }
+    #           ],
+    #           resource_owner_org_id: [
     #             {
     #               value: "NonEmptyString",
     #               comparison: "EQUALS" # One of: ["EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "CONTAINS_WORD"]
@@ -891,14 +920,14 @@ module Aws::SecurityHub
     end
 
     # <p>
-    #             Returns associations between an Security Hub configuration and a batch of target accounts, organizational units, or the root. 
-    #             Only the Security Hub delegated administrator can invoke this operation from the home Region. A configuration 
+    #             Returns associations between an Security Hub CSPM configuration and a batch of target accounts, organizational units, or the root.
+    #             Only the Security Hub CSPM delegated administrator can invoke this operation from the home Region. A configuration
     #             can refer to a configuration policy or to a self-managed configuration.
     #         </p>
     # @param [Hash, Types::BatchGetConfigurationPolicyAssociationsRequest] params
     # @option params [Array<Types::ConfigurationPolicyAssociation>] :configuration_policy_association_identifiers
     #   <p>
-    #               Specifies one or more target account IDs, organizational unit (OU) IDs, or the root ID to retrieve associations for. 
+    #               Specifies one or more target account IDs, organizational unit (OU) IDs, or the root ID to retrieve associations for.
     #           </p>
     # @example To get configuration associations for a batch of targets
     #   # This operation provides details about configuration associations for a batch of target accounts, organizational units, or the root.
@@ -1001,7 +1030,7 @@ module Aws::SecurityHub
     #   <p> A list of security controls (identified with <code>SecurityControlId</code>,
     #               <code>SecurityControlArn</code>, or a mix of both parameters). The security control ID
     #            or Amazon Resource Name (ARN) is the same across standards. </p>
-    # @example To get security control details 
+    # @example To get security control details
     #   # The following example gets details for the specified controls in the current AWS account and AWS Region.
     #   params = {
     #     security_control_ids: [
@@ -1031,7 +1060,8 @@ module Aws::SecurityHub
     #   }
     #           }
     #         },
-    #         last_update_reason: "Stayed with default value"
+    #         last_update_reason: "Stayed with default value",
+    #         provider: AWS
     #       },
     #       {
     #         security_control_id: "APIGateway.1",
@@ -1050,7 +1080,8 @@ module Aws::SecurityHub
     #   }
     #           }
     #         },
-    #         last_update_reason: "Updated control parameters to comply with internal requirements"
+    #         last_update_reason: "Updated control parameters to comply with internal requirements",
+    #         provider: AWS
     #       }
     #     ]
     #   }
@@ -1089,7 +1120,8 @@ module Aws::SecurityHub
     #             }
     #           }
     #         },
-    #         last_update_reason: "AlphaNumericNonEmptyString"
+    #         last_update_reason: "AlphaNumericNonEmptyString",
+    #         provider: "AWS" # One of: ["AWS", "Azure"]
     #       }
     #     ],
     #     unprocessed_ids: [
@@ -1115,7 +1147,7 @@ module Aws::SecurityHub
     # @param [Hash, Types::BatchGetStandardsControlAssociationsRequest] params
     # @option params [Array<Types::StandardsControlAssociationId>] :standards_control_association_ids
     #   <p>
-    #            An array with one or more objects that includes a security control (identified with <code>SecurityControlId</code>, <code>SecurityControlArn</code>, or a mix of both parameters) and the Amazon Resource Name (ARN) of a standard. 
+    #            An array with one or more objects that includes a security control (identified with <code>SecurityControlId</code>, <code>SecurityControlArn</code>, or a mix of both parameters) and the Amazon Resource Name (ARN) of a standard.
     #            This field is used to query the enablement status of a control in a specified standard. The security control ID or ARN is the same across standards.
     #         </p>
     # @example Request syntax with placeholder values
@@ -1163,21 +1195,21 @@ module Aws::SecurityHub
       request.send_request(options)
     end
 
-    # <p>Imports security findings generated by a finding provider into Security Hub.
+    # <p>Imports security findings generated by a finding provider into Security Hub CSPM.
     #          This action is requested by the finding provider to import its findings into
-    #          Security Hub.</p>
+    #          Security Hub CSPM.</p>
     #          <p>
     #             <code>BatchImportFindings</code> must be called by one of the following:</p>
     #          <ul>
     #             <li>
     #                <p>The Amazon Web Services account that is associated with a finding if you are using
-    #                the <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-custom-providers.html#securityhub-custom-providers-bfi-reqs">default product ARN</a> 
-    #                or are a partner sending findings from within a customer's Amazon Web Services account. 
-    #                In these cases, the identifier of the account that you are calling <code>BatchImportFindings</code> 
+    #                the <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-custom-providers.html#securityhub-custom-providers-bfi-reqs">default product ARN</a>
+    #                or are a partner sending findings from within a customer's Amazon Web Services account.
+    #                In these cases, the identifier of the account that you are calling <code>BatchImportFindings</code>
     #                from needs to be the same as the <code>AwsAccountId</code> attribute for the finding.</p>
     #             </li>
     #             <li>
-    #                <p>An Amazon Web Services account that Security Hub has allow-listed for an official partner
+    #                <p>An Amazon Web Services account that Security Hub CSPM has allow-listed for an official partner
     #                integration. In this case, you can call <code>BatchImportFindings</code> from the allow-listed
     #                account and send findings from different customer accounts in the same batch.</p>
     #             </li>
@@ -1185,7 +1217,7 @@ module Aws::SecurityHub
     #          <p>The maximum allowed size for a finding is 240 Kb. An error is returned for any finding
     #          larger than 240 Kb.</p>
     #          <p>After a finding is created, <code>BatchImportFindings</code> cannot be used to update
-    #          the following finding fields and objects, which Security Hub customers use to manage their
+    #          the following finding fields and objects, which Security Hub CSPM customers use to manage their
     #          investigation workflow.</p>
     #          <ul>
     #             <li>
@@ -1435,8 +1467,17 @@ module Aws::SecurityHub
     #           {
     #             type: "NonEmptyString", # required
     #             id: "NonEmptyString", # required
-    #             partition: "aws" # One of: ["aws", "aws-cn", "aws-us-gov"],
+    #             partition: "aws" # One of: ["aws", "aws-cn", "aws-us-gov", "aws-us-iso", "aws-us-iso-b", "AzureCloud"],
     #             region: "NonEmptyString",
+    #             provider: "Azure" # One of: ["Azure", "AWS"],
+    #             owner: {
+    #               account: {
+    #                 id: "NonEmptyString"
+    #               },
+    #               org: {
+    #                 id: "NonEmptyString"
+    #               }
+    #             },
     #             resource_role: "NonEmptyString",
     #             tags: {
     #               "NonEmptyString" => "NonEmptyString"
@@ -5256,7 +5297,8 @@ module Aws::SecurityHub
     #                 provider_type: "NonEmptyString",
     #                 project_name: "NonEmptyString",
     #                 code_security_integration_arn: "NonEmptyString"
-    #               }
+    #               },
+    #               azure_resource: ""null""
     #             },
     #             application_name: "NonEmptyString",
     #             application_arn: "NonEmptyString"
@@ -5610,13 +5652,13 @@ module Aws::SecurityHub
     end
 
     # <p>
-    #          Updates one or more automation rules based on rule Amazon Resource Names (ARNs) 
+    #          Updates one or more automation rules based on rule Amazon Resource Names (ARNs)
     #          and input parameters.
     #       </p>
     # @param [Hash, Types::BatchUpdateAutomationRulesRequest] params
     # @option params [Array<Types::UpdateAutomationRulesRequestItem>] :update_automation_rules_request_items
     #   <p>
-    #            An array of ARNs for the rules that are to be updated. Optionally, you can also include 
+    #            An array of ARNs for the rules that are to be updated. Optionally, you can also include
     #            <code>RuleStatus</code> and <code>RuleOrder</code>.
     #         </p>
     # @example To update one ore more automation rules
@@ -5690,7 +5732,8 @@ module Aws::SecurityHub
     #               end: "NonEmptyString",
     #               date_range: {
     #                 value: 1,
-    #                 unit: "DAYS" # One of: ["DAYS"]
+    #                 unit: "DAYS" # One of: ["DAYS"],
+    #                 comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #               }
     #             }
     #           ],
@@ -5700,7 +5743,8 @@ module Aws::SecurityHub
     #               end: "NonEmptyString",
     #               date_range: {
     #                 value: 1,
-    #                 unit: "DAYS" # One of: ["DAYS"]
+    #                 unit: "DAYS" # One of: ["DAYS"],
+    #                 comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #               }
     #             }
     #           ],
@@ -5710,7 +5754,8 @@ module Aws::SecurityHub
     #               end: "NonEmptyString",
     #               date_range: {
     #                 value: 1,
-    #                 unit: "DAYS" # One of: ["DAYS"]
+    #                 unit: "DAYS" # One of: ["DAYS"],
+    #                 comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #               }
     #             }
     #           ],
@@ -5720,7 +5765,8 @@ module Aws::SecurityHub
     #               end: "NonEmptyString",
     #               date_range: {
     #                 value: 1,
-    #                 unit: "DAYS" # One of: ["DAYS"]
+    #                 unit: "DAYS" # One of: ["DAYS"],
+    #                 comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #               }
     #             }
     #           ],
@@ -5876,7 +5922,8 @@ module Aws::SecurityHub
     #               end: "NonEmptyString",
     #               date_range: {
     #                 value: 1,
-    #                 unit: "DAYS" # One of: ["DAYS"]
+    #                 unit: "DAYS" # One of: ["DAYS"],
+    #                 comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #               }
     #             }
     #           ],
@@ -5906,6 +5953,24 @@ module Aws::SecurityHub
     #             }
     #           ],
     #           aws_account_name: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS" # One of: ["EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "CONTAINS_WORD"]
+    #             }
+    #           ],
+    #           resource_provider: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS" # One of: ["EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "CONTAINS_WORD"]
+    #             }
+    #           ],
+    #           resource_owner_account_id: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS" # One of: ["EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "CONTAINS_WORD"]
+    #             }
+    #           ],
+    #           resource_owner_org_id: [
     #             {
     #               value: "NonEmptyString",
     #               comparison: "EQUALS" # One of: ["EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "CONTAINS_WORD"]
@@ -5968,9 +6033,9 @@ module Aws::SecurityHub
     end
 
     # <p>
-    #          Used by Security Hub customers to update information about their investigation into one or more findings.
-    #          Requested by administrator accounts or member accounts. 
-    #          Administrator accounts can update findings for their account and their member accounts. 
+    #          Used by Security Hub CSPM customers to update information about their investigation into one or more findings.
+    #          Requested by administrator accounts or member accounts.
+    #          Administrator accounts can update findings for their account and their member accounts.
     #          A member account can update findings only for their own account.
     #          Administrator and member accounts can use this operation to update the following fields and objects for one or more findings:
     #       </p>
@@ -6022,13 +6087,13 @@ module Aws::SecurityHub
     #             </li>
     #          </ul>
     #          <p>
-    #          If you use this operation to update a finding, your updates don’t affect the value for the <code>UpdatedAt</code> field of the finding. 
-    #          Also note that it can take several minutes for Security Hub to process your request and update each finding specified in the request. 
+    #          If you use this operation to update a finding, your updates don’t affect the value for the <code>UpdatedAt</code> field of the finding.
+    #          Also note that it can take several minutes for Security Hub CSPM to process your request and update each finding specified in the request.
     #       </p>
     #          <p>
-    #          You can configure IAM policies to restrict access to fields and field values. 
-    #          For example, you might not want member accounts to be able to suppress findings or change the finding severity. 
-    #          For more information see <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/finding-update-batchupdatefindings.html#batchupdatefindings-configure-access">Configuring access to BatchUpdateFindings</a> in the <i>Security Hub User Guide</i>.
+    #          You can configure IAM policies to restrict access to fields and field values.
+    #          For example, you might not want member accounts to be able to suppress findings or change the finding severity.
+    #          For more information see <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/finding-update-batchupdatefindings.html#batchupdatefindings-configure-access">Configuring access to BatchUpdateFindings</a> in the <i>Security Hub CSPM User Guide</i>.
     #       </p>
     # @param [Hash, Types::BatchUpdateFindingsRequest] params
     # @option params [Array<Types::AwsSecurityFindingIdentifier>] :finding_identifiers
@@ -6221,30 +6286,32 @@ module Aws::SecurityHub
       request.send_request(options)
     end
 
-    # <p>Used by customers to update information about their investigation into a finding. 
-    #          Requested by delegated administrator accounts or member accounts. 
-    #          Delegated administrator accounts can update findings for their account and their member accounts. 
-    #          Member accounts can update findings for their account. <code>BatchUpdateFindings</code> and <code>BatchUpdateFindingV2</code> both use <code>securityhub:BatchUpdateFindings</code> in the <code>Action</code> element of an IAM policy statement. 
-    #          You must have permission to perform the <code>securityhub:BatchUpdateFindings</code> action. 
-    #          Updates from <code>BatchUpdateFindingsV2</code> don't affect the value of f<code>inding_info.modified_time</code>, <code>finding_info.modified_time_dt</code>, <code>time</code>, <code>time_dt for a finding</code>. This API is in private preview and subject to change.</p>
+    # <p>Updates information about a customer's investigation into a finding. Delegated administrator accounts can update findings for their account and their member accounts. Member accounts can update findings for their own account.</p>
+    #          <p>
+    #             <code>BatchUpdateFindings</code> and <code>BatchUpdateFindingsV2</code> both use <code>securityhub:BatchUpdateFindings</code> in the <code>Action</code> element of an IAM policy statement.
+    #          You must have permission to perform the <code>securityhub:BatchUpdateFindings</code> action.
+    #          You can configure IAM policies to restrict access to specific finding fields or field values by using the <code>securityhub:OCSFSyntaxPath/<fieldName></code> condition key, where <code><fieldName></code> is one of the following supported fields: <code>SeverityId</code>, <code>StatusId</code>, or <code>Comment</code>.</p>
+    #          <p>To prevent a user from updating a specific field, use a <code>Null</code> condition with <code>securityhub:OCSFSyntaxPath/<fieldName></code> set to <code>"false"</code>.
+    #          To prevent a user from setting a field to a specific value, use a <code>StringEquals</code> condition with <code>securityhub:OCSFSyntaxPath/<fieldName></code> set to the disallowed value or list of values.</p>
+    #          <p>Updates from <code>BatchUpdateFindingsV2</code> don't affect the value of <code>finding_info.modified_time</code>, <code>finding_info.modified_time_dt</code>, <code>time</code>, or <code>time_dt</code> for a finding.</p>
     # @param [Hash, Types::BatchUpdateFindingsV2Request] params
     # @option params [Array<String>] :metadata_uids
-    #   <p>The list of finding <code>metadata.uid</code> to indicate findings to update. 
-    #            Finding <code>metadata.uid</code> is a globally unique identifier associated with the finding. 
+    #   <p>The list of finding <code>metadata.uid</code> to indicate findings to update.
+    #            Finding <code>metadata.uid</code> is a globally unique identifier associated with the finding.
     #            Customers cannot use <code>MetadataUids</code> together with <code>FindingIdentifiers</code>.</p>
     # @option params [Array<Types::OcsfFindingIdentifier>] :finding_identifiers
     #   <p>Provides information to identify a specific V2 finding.</p>
     # @option params [String] :comment
-    #   <p>The updated value for a user provided comment about the finding. 
-    #            Minimum character length 1. 
+    #   <p>The updated value for a user provided comment about the finding.
+    #            Minimum character length 1.
     #            Maximum character length 512.</p>
     # @option params [Integer] :severity_id
-    #   <p>The updated value for the normalized severity identifier. 
-    #            The severity ID is an integer with the allowed enum values [0, 1, 2, 3, 4, 5, 99]. 
+    #   <p>The updated value for the normalized severity identifier.
+    #            The severity ID is an integer with the allowed enum values [0, 1, 2, 3, 4, 5, 6, 99].
     #            When customer provides the updated severity ID, the string sibling severity will automatically be updated in the finding.</p>
     # @option params [Integer] :status_id
-    #   <p>The updated value for the normalized status identifier. 
-    #            The status ID is an integer with the allowed enum values [0, 1, 2, 3, 4, 5, 6, 99]. 
+    #   <p>The updated value for the normalized status identifier.
+    #            The status ID is an integer with the allowed enum values [0, 1, 2, 3, 4, 5, 99].
     #            When customer provides the updated status ID, the string sibling status will automatically be updated in the finding.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -6375,33 +6442,44 @@ module Aws::SecurityHub
       request.send_request(options)
     end
 
-    # <p>Grants permission to complete the authorization based on input parameters. This API is in preview release and subject to change.</p>
-    # @param [Hash, Types::ConnectorRegistrationsV2Request] params
-    # @option params [String] :auth_code
-    #   <p>The authCode retrieved from authUrl to complete the OAuth 2.0 authorization code flow.</p>
-    # @option params [String] :auth_state
-    #   <p>The authState retrieved from authUrl to complete the OAuth 2.0 authorization code flow.</p>
-    # @example Request syntax with placeholder values
+    # <p>Cancels a findings export job that is in progress. Security Hub transitions a running job to the <code>CANCELLED</code> state and returns the <code>ExportJobId</code> and its new <code>Status</code>. Canceling a job that is already in the <code>CANCELLED</code> state succeeds and returns the same result, so you can safely retry a cancel request.</p>
+    #          <p>You can't cancel an export job that has already reached a terminal <code>SUCCEEDED</code> or <code>FAILED</code> state; in that case, this operation returns a <code>ConflictException</code>. If no export job matches the <code>ExportJobId</code> that you provide, this operation returns a <code>ResourceNotFoundException</code>.</p>
+    #          <p>The <code>Status</code> value returned by this operation reflects the cancellation immediately, even though the job can take a short time to stop completely.</p>
+    # @param [Hash, Types::CancelExportJobV2Request] params
+    # @option params [String] :export_job_id
+    #   <p>The unique identifier of the export job to cancel. This is the value returned by <code>StartExportJobV2</code>.</p>
+    # @example Example – Canceling a running export job
+    #   # The following example cancels an export job that is in progress. Security Hub transitions the job to the CANCELLED state and returns its new status.
     #   params = {
-    #     auth_code: "NonEmptyString", # required
-    #     auth_state: "NonEmptyString", # required
+    #     export_job_id: "a1b2c3d4e5f6"
     #   }
     #   options = {}
-    #   response = client.connector_registrations_v2(params, options)
+    #   response = client.cancel_export_job_v2(params, options)
+    #   response.to_h #=>
+    #   {
+    #     export_job_id: "a1b2c3d4e5f6",
+    #     status: CANCELLED
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     export_job_id: "ExportJobId", # required
+    #   }
+    #   options = {}
+    #   response = client.cancel_export_job_v2(params, options)
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {
-    #     connector_arn: "NonEmptyString",
-    #     connector_id: "NonEmptyString", # required
+    #     export_job_id: "ExportJobId", # required
+    #     status: "RUNNING" # One of: ["RUNNING", "SUCCEEDED", "FAILED", "CANCELLED"], # required
     #   }
-    # @return [Types::ConnectorRegistrationsV2Response]
-    def connector_registrations_v2(params = {}, options = {})
-      request = build_request(:connector_registrations_v2, params)
+    # @return [Types::CancelExportJobV2Response]
+    def cancel_export_job_v2(params = {}, options = {})
+      request = build_request(:cancel_export_job_v2, params)
       request.send_request(options)
     end
 
-    # <p>Creates a custom action target in Security Hub.</p>
-    #          <p>You can use custom actions on findings and insights in Security Hub to trigger target actions
+    # <p>Creates a custom action target in Security Hub CSPM.</p>
+    #          <p>You can use custom actions on findings and insights in Security Hub CSPM to trigger target actions
     #          in Amazon CloudWatch Events.</p>
     # @param [Hash, Types::CreateActionTargetRequest] params
     # @option params [String] :name
@@ -6442,7 +6520,7 @@ module Aws::SecurityHub
       request.send_request(options)
     end
 
-    # <p>Enables aggregation across Amazon Web Services Regions. This API is in private preview and subject to change.</p>
+    # <p>Enables aggregation across Amazon Web Services Regions.</p>
     # @param [Hash, Types::CreateAggregatorV2Request] params
     # @option params [String] :region_linking_mode
     #   <p>Determines how Regions are linked to an Aggregator V2.</p>
@@ -6483,12 +6561,12 @@ module Aws::SecurityHub
     # @param [Hash, Types::CreateAutomationRuleRequest] params
     # @option params [Hash<String, String>] :tags
     #   <p>
-    #               User-defined tags associated with an automation rule. 
+    #               User-defined tags associated with an automation rule.
     #           </p>
     # @option params [String] :rule_status
     #   <p>
-    #            Whether the rule is active after it is created. If 
-    #            this parameter is equal to <code>ENABLED</code>, Security Hub starts applying the rule to findings 
+    #            Whether the rule is active after it is created. If
+    #            this parameter is equal to <code>ENABLED</code>, Security Hub CSPM starts applying the rule to findings
     #            and finding updates after the rule is created. To change the value of this
     #            parameter after creating a rule, use <a href="https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateAutomationRules.html">
     #                  <code>BatchUpdateAutomationRules</code>
@@ -6496,7 +6574,7 @@ module Aws::SecurityHub
     #         </p>
     # @option params [Integer] :rule_order
     #   <p>An integer ranging from 1 to 1000 that represents the order in which the rule action is
-    #            applied to findings. Security Hub applies rules with lower values for this parameter
+    #            applied to findings. Security Hub CSPM applies rules with lower values for this parameter
     #            first. </p>
     # @option params [String] :rule_name
     #   <p>
@@ -6507,20 +6585,20 @@ module Aws::SecurityHub
     #            A description of the rule.
     #         </p>
     # @option params [Boolean] :is_terminal
-    #   <p>Specifies whether a rule is the last to be applied with respect to a finding that matches the rule criteria. This is useful when a finding 
-    #               matches the criteria for multiple rules, and each rule has different actions. If a rule is terminal, Security Hub applies the rule action to a finding that matches 
+    #   <p>Specifies whether a rule is the last to be applied with respect to a finding that matches the rule criteria. This is useful when a finding
+    #               matches the criteria for multiple rules, and each rule has different actions. If a rule is terminal, Security Hub CSPM applies the rule action to a finding that matches
     #               the rule criteria and doesn't evaluate other rules for the finding. By default, a rule isn't terminal.
     #           </p>
     # @option params [Types::AutomationRulesFindingFilters] :criteria
     #   <p>
-    #            A set of ASFF finding field attributes and corresponding expected values that 
-    #            Security Hub uses to filter findings. If a rule is enabled and a finding matches the conditions specified in
-    #            this parameter, Security Hub applies the rule action to the finding.
+    #            A set of ASFF finding field attributes and corresponding expected values that
+    #            Security Hub CSPM uses to filter findings. If a rule is enabled and a finding matches the conditions specified in
+    #            this parameter, Security Hub CSPM applies the rule action to the finding.
     #         </p>
     # @option params [Array<Types::AutomationRulesAction>] :actions
     #   <p>
-    #            One or more actions to update finding fields if a finding matches the conditions 
-    #            specified in <code>Criteria</code>. 
+    #            One or more actions to update finding fields if a finding matches the conditions
+    #            specified in <code>Criteria</code>.
     #         </p>
     # @example To create an automation rule
     #   # The following example creates an automation rule.
@@ -6633,7 +6711,8 @@ module Aws::SecurityHub
     #           end: "NonEmptyString",
     #           date_range: {
     #             value: 1,
-    #             unit: "DAYS" # One of: ["DAYS"]
+    #             unit: "DAYS" # One of: ["DAYS"],
+    #             comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #           }
     #         }
     #       ],
@@ -6643,7 +6722,8 @@ module Aws::SecurityHub
     #           end: "NonEmptyString",
     #           date_range: {
     #             value: 1,
-    #             unit: "DAYS" # One of: ["DAYS"]
+    #             unit: "DAYS" # One of: ["DAYS"],
+    #             comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #           }
     #         }
     #       ],
@@ -6653,7 +6733,8 @@ module Aws::SecurityHub
     #           end: "NonEmptyString",
     #           date_range: {
     #             value: 1,
-    #             unit: "DAYS" # One of: ["DAYS"]
+    #             unit: "DAYS" # One of: ["DAYS"],
+    #             comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #           }
     #         }
     #       ],
@@ -6663,7 +6744,8 @@ module Aws::SecurityHub
     #           end: "NonEmptyString",
     #           date_range: {
     #             value: 1,
-    #             unit: "DAYS" # One of: ["DAYS"]
+    #             unit: "DAYS" # One of: ["DAYS"],
+    #             comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #           }
     #         }
     #       ],
@@ -6819,7 +6901,8 @@ module Aws::SecurityHub
     #           end: "NonEmptyString",
     #           date_range: {
     #             value: 1,
-    #             unit: "DAYS" # One of: ["DAYS"]
+    #             unit: "DAYS" # One of: ["DAYS"],
+    #             comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #           }
     #         }
     #       ],
@@ -6849,6 +6932,24 @@ module Aws::SecurityHub
     #         }
     #       ],
     #       aws_account_name: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS" # One of: ["EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "CONTAINS_WORD"]
+    #         }
+    #       ],
+    #       resource_provider: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS" # One of: ["EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "CONTAINS_WORD"]
+    #         }
+    #       ],
+    #       resource_owner_account_id: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS" # One of: ["EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "CONTAINS_WORD"]
+    #         }
+    #       ],
+    #       resource_owner_org_id: [
     #         {
     #           value: "NonEmptyString",
     #           comparison: "EQUALS" # One of: ["EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "CONTAINS_WORD"]
@@ -6901,7 +7002,7 @@ module Aws::SecurityHub
       request.send_request(options)
     end
 
-    # <p>Creates a V2 automation rule. This API is in private preview and subject to change.</p>
+    # <p>Creates a V2 automation rule.</p>
     # @param [Hash, Types::CreateAutomationRuleV2Request] params
     # @option params [String] :rule_name
     #   <p>The name of the V2 automation rule.</p>
@@ -6932,7 +7033,7 @@ module Aws::SecurityHub
     #           {
     #             string_filters: [
     #               {
-    #                 field_name: "metadata.uid" # One of: ["metadata.uid", "activity_name", "cloud.account.uid", "cloud.provider", "cloud.region", "compliance.assessments.category", "compliance.assessments.name", "compliance.control", "compliance.status", "compliance.standards", "finding_info.desc", "finding_info.src_url", "finding_info.title", "finding_info.types", "finding_info.uid", "finding_info.related_events.uid", "finding_info.related_events.product.uid", "finding_info.related_events.title", "metadata.product.name", "metadata.product.uid", "metadata.product.vendor_name", "remediation.desc", "remediation.references", "resources.cloud_partition", "resources.region", "resources.type", "resources.uid", "severity", "status", "comment", "vulnerabilities.fix_coverage", "class_name"],
+    #                 field_name: "metadata.uid" # One of: ["metadata.uid", "activity_name", "cloud.account.uid", "cloud.provider", "cloud.region", "compliance.assessments.category", "compliance.assessments.name", "compliance.control", "compliance.status", "compliance.standards", "finding_info.desc", "finding_info.src_url", "finding_info.title", "finding_info.types", "finding_info.uid", "finding_info.related_events.traits.category", "finding_info.related_events.uid", "finding_info.related_events.product.uid", "finding_info.related_events.title", "impact", "likelihood", "metadata.product.name", "metadata.product.uid", "metadata.product.vendor_name", "remediation.desc", "remediation.references", "resources.cloud_partition", "resources.criticality", "resources.name", "resources.owner.account.uid", "resources.owner.org.uid", "resources.owner.account.name", "resources.provider", "resources.region", "resources.type", "resources.uid", "severity", "status", "comment", "vulnerabilities.fix_coverage", "class_name", "databucket.encryption_details.algorithm", "databucket.encryption_details.key_uid", "databucket.file.data_classifications.classifier_details.type", "evidences.actor.user.account.uid", "evidences.api.operation", "evidences.api.response.error_message", "evidences.api.service.name", "evidences.connection_info.direction", "evidences.connection_info.protocol_name", "evidences.dst_endpoint.autonomous_system.name", "evidences.dst_endpoint.location.city", "evidences.dst_endpoint.location.country", "evidences.src_endpoint.autonomous_system.name", "evidences.src_endpoint.hostname", "evidences.src_endpoint.location.city", "evidences.src_endpoint.location.country", "finding_info.analytic.name", "malware.name", "malware_scan_info.uid", "malware.severity", "resources.cloud_function.layers.uid_alt", "resources.cloud_function.runtime", "resources.cloud_function.user.uid", "resources.device.encryption_details.key_uid", "resources.device.image.uid", "resources.image.architecture", "resources.image.registry_uid", "resources.image.repository_name", "resources.image.uid", "resources.subnet_info.uid", "resources.vpc_uid", "vulnerabilities.affected_code.file.path", "vulnerabilities.affected_packages.name", "vulnerabilities.cve.epss.score", "vulnerabilities.cve.uid", "vulnerabilities.related_vulnerabilities", "cloud.account.name", "vendor_attributes.severity"],
     #                 filter: {
     #                   value: "NonEmptyString",
     #                   comparison: "EQUALS" # One of: ["EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "CONTAINS_WORD"]
@@ -6941,13 +7042,14 @@ module Aws::SecurityHub
     #             ],
     #             date_filters: [
     #               {
-    #                 field_name: "finding_info.created_time_dt" # One of: ["finding_info.created_time_dt", "finding_info.first_seen_time_dt", "finding_info.last_seen_time_dt", "finding_info.modified_time_dt"],
+    #                 field_name: "finding_info.created_time_dt" # One of: ["finding_info.created_time_dt", "finding_info.first_seen_time_dt", "finding_info.last_seen_time_dt", "finding_info.modified_time_dt", "resources.image.created_time_dt", "resources.image.last_used_time_dt", "resources.modified_time_dt"],
     #                 filter: {
     #                   start: "NonEmptyString",
     #                   end: "NonEmptyString",
     #                   date_range: {
     #                     value: 1,
-    #                     unit: "DAYS" # One of: ["DAYS"]
+    #                     unit: "DAYS" # One of: ["DAYS"],
+    #                     comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #                   }
     #                 }
     #               }
@@ -6962,7 +7064,7 @@ module Aws::SecurityHub
     #             ],
     #             number_filters: [
     #               {
-    #                 field_name: "activity_id" # One of: ["activity_id", "compliance.status_id", "confidence_score", "severity_id", "status_id", "finding_info.related_events_count"],
+    #                 field_name: "activity_id" # One of: ["activity_id", "compliance.status_id", "confidence_score", "severity_id", "status_id", "finding_info.related_events_count", "evidences.api.response.code", "evidences.dst_endpoint.autonomous_system.number", "evidences.dst_endpoint.port", "evidences.src_endpoint.autonomous_system.number", "evidences.src_endpoint.port", "resources.image.in_use_count", "vulnerabilities.cve.cvss.base_score", "vendor_attributes.severity_id"],
     #                 filter: {
     #                   gte: 1.0,
     #                   lte: 1.0,
@@ -6974,7 +7076,7 @@ module Aws::SecurityHub
     #             ],
     #             map_filters: [
     #               {
-    #                 field_name: "resources.tags" # One of: ["resources.tags"],
+    #                 field_name: "resources.tags" # One of: ["resources.tags", "compliance.control_parameters", "databucket.tags", "finding_info.tags"],
     #                 filter: {
     #                   key: "NonEmptyString",
     #                   value: "NonEmptyString",
@@ -6982,6 +7084,73 @@ module Aws::SecurityHub
     #                 }
     #               }
     #             ],
+    #             ip_filters: [
+    #               {
+    #                 field_name: "evidences.dst_endpoint.ip" # One of: ["evidences.dst_endpoint.ip", "evidences.src_endpoint.ip"],
+    #                 filter: {
+    #                   cidr: "NonEmptyString"
+    #                 }
+    #               }
+    #             ],
+    #             nested_composite_filters: {
+    #               # recursive CompositeFilterList
+    #             },
+    #             operator: "AND" # One of: ["AND", "OR"]
+    #           }
+    #         ],
+    #         composite_operator: "AND" # One of: ["AND", "OR"]
+    #       },
+    #       resource_criteria: {
+    #         composite_filters: [
+    #           {
+    #             string_filters: [
+    #               {
+    #                 field_name: "ResourceGuid" # One of: ["ResourceGuid", "ResourceId", "AccountId", "AccountName", "Region", "ResourceProvider", "ResourceOwnerAccountId", "ResourceOwnerOrgId", "ResourceCloudPartition", "ResourceRegion", "ResourceCategory", "ResourceType", "ResourceName", "FindingsSummary.FindingType", "FindingsSummary.ProductName", "ResourceSubCategory", "DiscoveryType", "ResourceInfo.AIDetails.HostResourceGuid", "ResourceInfo.AIDetails.HostResourceType", "ResourceInfo.AIDetails.CanonicalId", "ResourceCriticality"],
+    #                 filter: {
+    #                   value: "NonEmptyString",
+    #                   comparison: "EQUALS" # One of: ["EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "CONTAINS_WORD"]
+    #                 }
+    #               }
+    #             ],
+    #             date_filters: [
+    #               {
+    #                 field_name: "ResourceDetailCaptureTime" # One of: ["ResourceDetailCaptureTime", "ResourceCreationTime"],
+    #                 filter: {
+    #                   start: "NonEmptyString",
+    #                   end: "NonEmptyString",
+    #                   date_range: {
+    #                     value: 1,
+    #                     unit: "DAYS" # One of: ["DAYS"],
+    #                     comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
+    #                   }
+    #                 }
+    #               }
+    #             ],
+    #             number_filters: [
+    #               {
+    #                 field_name: "FindingsSummary.TotalFindings" # One of: ["FindingsSummary.TotalFindings", "FindingsSummary.Severities.Other", "FindingsSummary.Severities.Fatal", "FindingsSummary.Severities.Critical", "FindingsSummary.Severities.High", "FindingsSummary.Severities.Medium", "FindingsSummary.Severities.Low", "FindingsSummary.Severities.Informational", "FindingsSummary.Severities.Unknown", "ResourceInfo.AIDetails.SelfHostedAIModelResourceCount", "ResourceInfo.AIDetails.SelfHostedAIAgentResourceCount", "ResourceInfo.AIDetails.SelfHostedAIModelServingResourceCount", "ResourceInfo.AIDetails.SelfHostedAIExternalEndpointResourceCount", "ResourceInfo.AIDetails.SelfHostedAIDevelopmentResourceCount", "ResourceInfo.AIDetails.SelfHostedAIAgentFrameworkResourceCount", "ResourceInfo.AIDetails.SelfHostedAIAgentToolsAndIdentityResourceCount", "ResourceInfo.AIDetails.SelfHostedTotalAIResourceCount"],
+    #                 filter: {
+    #                   gte: 1.0,
+    #                   lte: 1.0,
+    #                   eq: 1.0,
+    #                   gt: 1.0,
+    #                   lt: 1.0
+    #                 }
+    #               }
+    #             ],
+    #             map_filters: [
+    #               {
+    #                 field_name: "ResourceTags" # One of: ["ResourceTags"],
+    #                 filter: {
+    #                   key: "NonEmptyString",
+    #                   value: "NonEmptyString",
+    #                   comparison: "EQUALS" # One of: ["EQUALS", "NOT_EQUALS", "CONTAINS", "NOT_CONTAINS"]
+    #                 }
+    #               }
+    #             ],
+    #             nested_composite_filters: {
+    #               # recursive ResourcesCompositeFilterList
+    #             },
     #             operator: "AND" # One of: ["AND", "OR"]
     #           }
     #         ],
@@ -6990,7 +7159,7 @@ module Aws::SecurityHub
     #     },
     #     actions: [ # required
     #       {
-    #         type: "FINDING_FIELDS_UPDATE" # One of: ["FINDING_FIELDS_UPDATE", "EXTERNAL_INTEGRATION"], # required
+    #         type: "FINDING_FIELDS_UPDATE" # One of: ["FINDING_FIELDS_UPDATE", "EXTERNAL_INTEGRATION", "RESOURCE_FIELDS_UPDATE"], # required
     #         finding_fields_update: {
     #           severity_id: 1,
     #           comment: "NonEmptyString",
@@ -6998,6 +7167,9 @@ module Aws::SecurityHub
     #         },
     #         external_integration_configuration: {
     #           connector_arn: "NonEmptyString"
+    #         },
+    #         resource_fields_update: {
+    #           criticality: "Very High" # One of: ["Very High", "High", "Medium", "Low", "Unknown"], # required
     #         }
     #       }
     #     ],
@@ -7021,13 +7193,13 @@ module Aws::SecurityHub
     end
 
     # <p>
-    #             Creates a configuration policy with the defined configuration. Only the Security Hub delegated administrator 
+    #             Creates a configuration policy with the defined configuration. Only the Security Hub CSPM delegated administrator
     #             can invoke this operation from the home Region.
     #         </p>
     # @param [Hash, Types::CreateConfigurationPolicyRequest] params
     # @option params [String] :name
     #   <p>
-    #               The name of the configuration policy. Alphanumeric characters and the following ASCII characters are permitted: 
+    #               The name of the configuration policy. Alphanumeric characters and the following ASCII characters are permitted:
     #               <code>-, ., !, *, /</code>.
     #           </p>
     # @option params [String] :description
@@ -7036,17 +7208,17 @@ module Aws::SecurityHub
     #           </p>
     # @option params [Types::Policy] :configuration_policy
     #   <p>
-    #               An object that defines how Security Hub is configured. It includes whether Security Hub is enabled or 
-    #               disabled, a list of enabled security standards, a list of enabled or disabled security controls, and a list of custom parameter values for specified controls. 
-    #               If you provide a list of security controls that are enabled in the configuration policy, Security Hub disables all other controls (including newly 
-    #               released controls). If you provide a list of security controls that are disabled in the configuration policy, Security Hub 
+    #               An object that defines how Security Hub CSPM is configured. It includes whether Security Hub CSPM is enabled or
+    #               disabled, a list of enabled security standards, a list of enabled or disabled security controls, and a list of custom parameter values for specified controls.
+    #               If you provide a list of security controls that are enabled in the configuration policy, Security Hub CSPM disables all other controls (including newly
+    #               released controls). If you provide a list of security controls that are disabled in the configuration policy, Security Hub CSPM
     #               enables all other controls (including newly released controls).
     #           </p>
     # @option params [Hash<String, String>] :tags
     #   <p>
-    #               User-defined tags associated with a configuration policy. For more information, see 
-    #               <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/tagging-resources.html">Tagging Security Hub resources</a> 
-    #               in the <i>Security Hub user guide</i>.
+    #               User-defined tags associated with a configuration policy. For more information, see
+    #               <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/tagging-resources.html">Tagging Security Hub CSPM resources</a>
+    #               in the <i>Security Hub CSPM user guide</i>.
     #           </p>
     # @example To create a configuration policy
     #   # This operation creates a configuration policy in Security Hub.
@@ -7201,7 +7373,81 @@ module Aws::SecurityHub
       request.send_request(options)
     end
 
-    # <p>Grants permission to create a connectorV2 based on input parameters. This API is in preview release and subject to change.</p>
+    # <p>Creates a connector to a third-party cloud provider in Security Hub CSPM. A connector establishes a connection between Security Hub CSPM and a third-party cloud provider, enabling Security Hub CSPM to ingest security findings and resource data from the connected environment.</p>
+    # @param [Hash, Types::CreateConnectorRequest] params
+    # @option params [String] :name
+    #   <p>The name of the connector. Must be unique within the account.</p>
+    # @option params [String] :description
+    #   <p>The description of the connector.</p>
+    # @option params [Types::CspmProviderConfiguration] :provider
+    #   <p>The configuration for the cloud provider to connect to. Currently supports Azure.</p>
+    # @option params [Hash<String, String>] :tags
+    #   <p>The tags to add to the connector resource.</p>
+    # @option params [String] :client_token
+    #   <p>A unique identifier used to ensure idempotency of the request.</p>
+    # @example To create a CSPM connector
+    #   # This operation creates a CSPM connector to connect Security Hub to an Azure environment.
+    #   params = {
+    #     name: "MyAzureConnector",
+    #     description: "Connector for Azure tenant monitoring",
+    #     provider: {
+    #     "Azure" => {
+    #       "AWSConfigConnectorArn" => arn:aws:config:us-east-1:123456789012:connector/azure-connector-1234,
+    #       "ScopeConfiguration" => {
+    #         "ScopeType" => TENANT
+    #       },
+    #       "AzureRegions" => [
+    #         eastus,
+    #         westus2
+    #       ]
+    #     }
+    #   }
+    #   }
+    #   options = {}
+    #   response = client.create_connector(params, options)
+    #   response.to_h #=>
+    #   {
+    #     connector_arn: "arn:aws:securityhub:us-east-1:123456789012:connector/cspm-a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+    #     connector_id: "cspm-a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+    #     enablement_status: PENDING_ENABLEMENT
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     name: "NonEmptyString", # required
+    #     description: "NonEmptyString",
+    #     provider: { # required
+    #       # One of:
+    #       azure: {
+    #         aws_config_connector_arn: "NonEmptyString", # required
+    #         scope_configuration: { # required
+    #           scope_type: "TENANT" # One of: ["TENANT", "SUBSCRIPTION"], # required
+    #           scope_values: ["NonEmptyString"]
+    #         },
+    #         azure_regions: ["NonEmptyString"], # required
+    #       }
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue"
+    #     },
+    #     client_token: "ClientToken"
+    #   }
+    #   options = {}
+    #   response = client.create_connector(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     connector_arn: "NonEmptyString", # required
+    #     connector_id: "NonEmptyString", # required
+    #     connector_status: "CONNECTED" # One of: ["CONNECTED", "DEGRADED", "FAILED_TO_CONNECT", "UNKNOWN"],
+    #     enablement_status: "ENABLED" # One of: ["ENABLED", "PENDING_ENABLEMENT", "PENDING_UPDATE", "PENDING_DELETION"]
+    #   }
+    # @return [Types::CreateConnectorResponse]
+    def create_connector(params = {}, options = {})
+      request = build_request(:create_connector, params)
+      request.send_request(options)
+    end
+
+    # <p>Grants permission to create a connectorV2 based on input parameters.</p>
     # @param [Hash, Types::CreateConnectorV2Request] params
     # @option params [String] :name
     #   <p>The unique name of the connectorV2.</p>
@@ -7226,8 +7472,15 @@ module Aws::SecurityHub
     #       },
     #       service_now: {
     #         instance_name: "NonEmptyString", # required
-    #         client_id: "NonEmptyString", # required
-    #         client_secret: "SensitiveNonEmptyString", # required
+    #         secret_arn: "NonEmptyString", # required
+    #       },
+    #       azure: {
+    #         aws_config_connector_arn: "NonEmptyString", # required
+    #         scope_configuration: { # required
+    #           scope_type: "TENANT" # One of: ["TENANT", "SUBSCRIPTION"], # required
+    #           scope_values: ["NonEmptyString"]
+    #         },
+    #         azure_regions: ["NonEmptyString"], # required
     #       }
     #     },
     #     kms_key_arn: "NonEmptyString",
@@ -7241,9 +7494,11 @@ module Aws::SecurityHub
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {
-    #     connector_arn: "NonEmptyString",
+    #     connector_arn: "NonEmptyString", # required
     #     connector_id: "NonEmptyString", # required
-    #     auth_url: "NonEmptyString"
+    #     auth_url: "NonEmptyString",
+    #     connector_status: "CONNECTED" # One of: ["CONNECTED", "DEGRADED", "FAILED_TO_CONNECT", "PENDING_AUTHORIZATION", "PENDING_CONFIGURATION", "UNKNOWN"],
+    #     enablement_status: "ENABLED" # One of: ["ENABLED", "PENDING_ENABLEMENT", "FAILED_TO_ENABLE", "PENDING_UPDATE", "FAILED_TO_UPDATE", "PENDING_DELETION", "FAILED_TO_DELETE"]
     #   }
     # @return [Types::CreateConnectorV2Response]
     def create_connector_v2(params = {}, options = {})
@@ -7255,27 +7510,27 @@ module Aws::SecurityHub
     #             <p>The <i>aggregation Region</i> is now called the <i>home Region</i>.</p>
     #          </note>
     #          <p>Used to enable cross-Region aggregation. This operation can be invoked from the home Region only.</p>
-    #          <p>For information about how cross-Region aggregation works, see <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/finding-aggregation.html">Understanding cross-Region aggregation in Security Hub</a> in the <i>Security Hub User Guide</i>.
+    #          <p>For information about how cross-Region aggregation works, see <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/finding-aggregation.html">Understanding cross-Region aggregation in Security Hub CSPM</a> in the <i>Security Hub CSPM User Guide</i>.
     #       </p>
     # @param [Hash, Types::CreateFindingAggregatorRequest] params
     # @option params [String] :region_linking_mode
-    #   <p>Indicates whether to aggregate findings from all of the available Regions in the current partition. Also determines whether to automatically aggregate findings from new Regions as Security Hub supports them and you opt into them.</p>
+    #   <p>Indicates whether to aggregate findings from all of the available Regions in the current partition. Also determines whether to automatically aggregate findings from new Regions as Security Hub CSPM supports them and you opt into them.</p>
     #            <p>The selected option also determines how to use the Regions provided in the Regions list.</p>
     #            <p>The options are as follows:</p>
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>ALL_REGIONS</code> - Aggregates findings from all of the Regions where Security Hub is enabled. When you choose this option, Security Hub also automatically aggregates findings from new Regions as Security Hub supports them and you opt into them.
+    #                     <code>ALL_REGIONS</code> - Aggregates findings from all of the Regions where Security Hub CSPM is enabled. When you choose this option, Security Hub CSPM also automatically aggregates findings from new Regions as Security Hub CSPM supports them and you opt into them.
     #            </p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>ALL_REGIONS_EXCEPT_SPECIFIED</code> - Aggregates findings from all of the Regions where Security Hub is enabled, except for the Regions listed in the <code>Regions</code> parameter. When you choose this option, Security Hub also automatically aggregates findings from new Regions as Security Hub supports them and you opt into them.
+    #                     <code>ALL_REGIONS_EXCEPT_SPECIFIED</code> - Aggregates findings from all of the Regions where Security Hub CSPM is enabled, except for the Regions listed in the <code>Regions</code> parameter. When you choose this option, Security Hub CSPM also automatically aggregates findings from new Regions as Security Hub CSPM supports them and you opt into them.
     #            </p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>SPECIFIED_REGIONS</code> - Aggregates findings only from the Regions listed in the <code>Regions</code> parameter. Security Hub does not automatically aggregate findings from new Regions.
+    #                     <code>SPECIFIED_REGIONS</code> - Aggregates findings only from the Regions listed in the <code>Regions</code> parameter. Security Hub CSPM does not automatically aggregate findings from new Regions.
     #            </p>
     #               </li>
     #               <li>
@@ -7288,7 +7543,7 @@ module Aws::SecurityHub
     #   <p>If <code>RegionLinkingMode</code> is <code>ALL_REGIONS_EXCEPT_SPECIFIED</code>, then this is a space-separated list of Regions that don't replicate and send findings to the home Region.</p>
     #            <p>If <code>RegionLinkingMode</code> is <code>SPECIFIED_REGIONS</code>, then this is a space-separated list of Regions that do replicate and send findings to the home Region.
     #         </p>
-    #            <p>An <code>InvalidInputException</code> error results if you populate this field while <code>RegionLinkingMode</code> is 
+    #            <p>An <code>InvalidInputException</code> error results if you populate this field while <code>RegionLinkingMode</code> is
     #              <code>NO_REGIONS</code>.</p>
     # @example To enable cross-Region aggregation
     #   # The following example creates a finding aggregator. This is required to enable cross-Region aggregation.
@@ -7332,7 +7587,7 @@ module Aws::SecurityHub
       request.send_request(options)
     end
 
-    # <p>Creates a custom insight in Security Hub. An insight is a consolidation of findings that relate
+    # <p>Creates a custom insight in Security Hub CSPM. An insight is a consolidation of findings that relate
     #          to a security issue that requires attention or remediation.</p>
     #          <p>To group the related findings in the insight, use the
     #          <code>GroupByAttribute</code>.</p>
@@ -7419,7 +7674,8 @@ module Aws::SecurityHub
     #           end: "NonEmptyString",
     #           date_range: {
     #             value: 1,
-    #             unit: "DAYS" # One of: ["DAYS"]
+    #             unit: "DAYS" # One of: ["DAYS"],
+    #             comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #           }
     #         }
     #       ],
@@ -7429,7 +7685,8 @@ module Aws::SecurityHub
     #           end: "NonEmptyString",
     #           date_range: {
     #             value: 1,
-    #             unit: "DAYS" # One of: ["DAYS"]
+    #             unit: "DAYS" # One of: ["DAYS"],
+    #             comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #           }
     #         }
     #       ],
@@ -7439,7 +7696,8 @@ module Aws::SecurityHub
     #           end: "NonEmptyString",
     #           date_range: {
     #             value: 1,
-    #             unit: "DAYS" # One of: ["DAYS"]
+    #             unit: "DAYS" # One of: ["DAYS"],
+    #             comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #           }
     #         }
     #       ],
@@ -7449,7 +7707,8 @@ module Aws::SecurityHub
     #           end: "NonEmptyString",
     #           date_range: {
     #             value: 1,
-    #             unit: "DAYS" # One of: ["DAYS"]
+    #             unit: "DAYS" # One of: ["DAYS"],
+    #             comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #           }
     #         }
     #       ],
@@ -7673,7 +7932,8 @@ module Aws::SecurityHub
     #           end: "NonEmptyString",
     #           date_range: {
     #             value: 1,
-    #             unit: "DAYS" # One of: ["DAYS"]
+    #             unit: "DAYS" # One of: ["DAYS"],
+    #             comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #           }
     #         }
     #       ],
@@ -7683,7 +7943,8 @@ module Aws::SecurityHub
     #           end: "NonEmptyString",
     #           date_range: {
     #             value: 1,
-    #             unit: "DAYS" # One of: ["DAYS"]
+    #             unit: "DAYS" # One of: ["DAYS"],
+    #             comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #           }
     #         }
     #       ],
@@ -7711,7 +7972,8 @@ module Aws::SecurityHub
     #           end: "NonEmptyString",
     #           date_range: {
     #             value: 1,
-    #             unit: "DAYS" # One of: ["DAYS"]
+    #             unit: "DAYS" # One of: ["DAYS"],
+    #             comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #           }
     #         }
     #       ],
@@ -7810,7 +8072,8 @@ module Aws::SecurityHub
     #           end: "NonEmptyString",
     #           date_range: {
     #             value: 1,
-    #             unit: "DAYS" # One of: ["DAYS"]
+    #             unit: "DAYS" # One of: ["DAYS"],
+    #             comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #           }
     #         }
     #       ],
@@ -7850,7 +8113,8 @@ module Aws::SecurityHub
     #           end: "NonEmptyString",
     #           date_range: {
     #             value: 1,
-    #             unit: "DAYS" # One of: ["DAYS"]
+    #             unit: "DAYS" # One of: ["DAYS"],
+    #             comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #           }
     #         }
     #       ],
@@ -7884,7 +8148,8 @@ module Aws::SecurityHub
     #           end: "NonEmptyString",
     #           date_range: {
     #             value: 1,
-    #             unit: "DAYS" # One of: ["DAYS"]
+    #             unit: "DAYS" # One of: ["DAYS"],
+    #             comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #           }
     #         }
     #       ],
@@ -7949,7 +8214,8 @@ module Aws::SecurityHub
     #           end: "NonEmptyString",
     #           date_range: {
     #             value: 1,
-    #             unit: "DAYS" # One of: ["DAYS"]
+    #             unit: "DAYS" # One of: ["DAYS"],
+    #             comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #           }
     #         }
     #       ],
@@ -8070,6 +8336,24 @@ module Aws::SecurityHub
     #           value: "NonEmptyString",
     #           comparison: "EQUALS" # One of: ["EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "CONTAINS_WORD"]
     #         }
+    #       ],
+    #       resource_owner_account_id: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS" # One of: ["EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "CONTAINS_WORD"]
+    #         }
+    #       ],
+    #       resource_owner_org_id: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS" # One of: ["EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "CONTAINS_WORD"]
+    #         }
+    #       ],
+    #       resource_provider: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS" # One of: ["EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "CONTAINS_WORD"]
+    #         }
     #       ]
     #     },
     #     group_by_attribute: "NonEmptyString", # required
@@ -8087,7 +8371,7 @@ module Aws::SecurityHub
       request.send_request(options)
     end
 
-    # <p>Creates a member association in Security Hub between the specified accounts and the account
+    # <p>Creates a member association in Security Hub CSPM between the specified accounts and the account
     #          used to make the request, which is the administrator account. If you are integrated with
     #          Organizations, then the administrator account is designated by the organization management account.</p>
     #          <p>
@@ -8097,26 +8381,26 @@ module Aws::SecurityHub
     #          in the following cases:</p>
     #          <ul>
     #             <li>
-    #                <p>Security Hub is not configured to automatically add new organization accounts.</p>
+    #                <p>Security Hub CSPM is not configured to automatically add new organization accounts.</p>
     #             </li>
     #             <li>
-    #                <p>The account was disassociated or deleted in Security Hub.</p>
+    #                <p>The account was disassociated or deleted in Security Hub CSPM.</p>
     #             </li>
     #          </ul>
-    #          <p>This action can only be used by an account that has Security Hub enabled. To enable Security Hub, you
+    #          <p>This action can only be used by an account that has Security Hub CSPM enabled. To enable Security Hub CSPM, you
     #          can use the <code>EnableSecurityHub</code> operation.</p>
     #          <p>For accounts that are not organization members, you create the account association and
     #          then send an invitation to the member account. To send the invitation, you use the
     #                <code>InviteMembers</code> operation. If the account owner accepts
-    #          the invitation, the account becomes a member account in Security Hub.</p>
+    #          the invitation, the account becomes a member account in Security Hub CSPM.</p>
     #          <p>Accounts that are managed using Organizations don't receive an invitation. They
-    #          automatically become a member account in Security Hub.</p>
+    #          automatically become a member account in Security Hub CSPM.</p>
     #          <ul>
     #             <li>
-    #                <p>If the organization account does not have Security Hub enabled, then Security Hub and the default standards are automatically enabled. Note that Security Hub cannot be enabled automatically for the organization management account. The organization management account must enable Security Hub before the administrator account enables it as a member account.</p>
+    #                <p>If the organization account does not have Security Hub CSPM enabled, then Security Hub CSPM and the default standards are automatically enabled. Note that Security Hub CSPM cannot be enabled automatically for the organization management account. The organization management account must enable Security Hub CSPM before the administrator account enables it as a member account.</p>
     #             </li>
     #             <li>
-    #                <p>For organization accounts that already have Security Hub enabled, Security Hub does not make any other changes to those accounts. It does not change their enabled standards or controls.</p>
+    #                <p>For organization accounts that already have Security Hub CSPM enabled, Security Hub CSPM does not make any other changes to those accounts. It does not change their enabled standards or controls.</p>
     #             </li>
     #          </ul>
     #          <p>A permissions policy is added that permits the administrator account to view the findings
@@ -8124,7 +8408,7 @@ module Aws::SecurityHub
     #          <p>To remove the association between the administrator and member accounts, use the <code>DisassociateFromMasterAccount</code> or <code>DisassociateMembers</code> operation.</p>
     # @param [Hash, Types::CreateMembersRequest] params
     # @option params [Array<Types::AccountDetails>] :account_details
-    #   <p>The list of accounts to associate with the Security Hub administrator account. For each account, the
+    #   <p>The list of accounts to associate with the Security Hub CSPM administrator account. For each account, the
     #            list includes the account ID and optionally the email address.</p>
     # @example To add a member account
     #   # The following example creates a member association between the specified accounts and the administrator account (the account that makes the request). This operation is used to add accounts that aren't part of an organization.
@@ -8172,7 +8456,7 @@ module Aws::SecurityHub
       request.send_request(options)
     end
 
-    # <p>Grants permission to create a ticket in the chosen ITSM based on finding information for the provided finding metadata UID. This API is in preview release and subject to change.</p>
+    # <p>Grants permission to create a ticket in the chosen ITSM based on finding information for the provided finding metadata UID.</p>
     # @param [Hash, Types::CreateTicketV2Request] params
     # @option params [String] :connector_id
     #   <p>The UUID of the connectorV2 to identify connectorV2 resource.</p>
@@ -8180,11 +8464,14 @@ module Aws::SecurityHub
     #   <p>The the unique ID for the finding.</p>
     # @option params [String] :client_token
     #   <p>The client idempotency token.</p>
+    # @option params [String] :mode
+    #   <p>The mode for ticket creation. When set to DRYRUN, the ticket is created using a Security Hub owned template test finding to verify the integration is working correctly.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     connector_id: "NonEmptyString", # required
     #     finding_metadata_uid: "NonEmptyString", # required
-    #     client_token: "ClientToken"
+    #     client_token: "ClientToken",
+    #     mode: "DRYRUN" # One of: ["DRYRUN"]
     #   }
     #   options = {}
     #   response = client.create_ticket_v2(params, options)
@@ -8201,11 +8488,11 @@ module Aws::SecurityHub
     end
 
     # <note>
-    #             <p>We recommend using Organizations instead of Security Hub invitations to manage your member accounts. 
-    #            For information, see <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-accounts-orgs.html">Managing Security Hub administrator and member accounts with Organizations</a> 
-    #            in the <i>Security Hub User Guide</i>.</p>
+    #             <p>We recommend using Organizations instead of Security Hub CSPM invitations to manage your member accounts.
+    #            For information, see <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-accounts-orgs.html">Managing Security Hub CSPM administrator and member accounts with Organizations</a>
+    #            in the <i>Security Hub CSPM User Guide</i>.</p>
     #          </note>
-    #          <p>Declines invitations to become a Security Hub member account.</p>
+    #          <p>Declines invitations to become a Security Hub CSPM member account.</p>
     #          <p>A prospective member account uses this operation to decline an invitation to become a member.</p>
     #          <p>Only member accounts that aren't part of an Amazon Web Services organization should use this operation.
     #          Organization accounts don't receive invitations.</p>
@@ -8249,7 +8536,7 @@ module Aws::SecurityHub
       request.send_request(options)
     end
 
-    # <p>Deletes a custom action target from Security Hub.</p>
+    # <p>Deletes a custom action target from Security Hub CSPM.</p>
     #          <p>Deleting a custom action target does not affect any findings or insights that were
     #          already sent to Amazon CloudWatch Events using the custom action.</p>
     # @param [Hash, Types::DeleteActionTargetRequest] params
@@ -8283,7 +8570,7 @@ module Aws::SecurityHub
       request.send_request(options)
     end
 
-    # <p>Deletes the Aggregator V2. This API is in private preview and subject to change.</p>
+    # <p>Deletes the Aggregator V2.</p>
     # @param [Hash, Types::DeleteAggregatorV2Request] params
     # @option params [String] :aggregator_v2_arn
     #   <p>The ARN of the Aggregator V2.</p>
@@ -8302,7 +8589,7 @@ module Aws::SecurityHub
       request.send_request(options)
     end
 
-    # <p>Deletes a V2 automation rule. This API is in private preview and subject to change.</p>
+    # <p>Deletes a V2 automation rule.</p>
     # @param [Hash, Types::DeleteAutomationRuleV2Request] params
     # @option params [String] :identifier
     #   <p>The ARN of the V2 automation rule.</p>
@@ -8322,8 +8609,8 @@ module Aws::SecurityHub
     end
 
     # <p>
-    #             Deletes a configuration policy. Only the Security Hub delegated administrator can invoke this operation 
-    #             from the home Region. For the deletion to succeed, you must first disassociate a configuration policy from target accounts, 
+    #             Deletes a configuration policy. Only the Security Hub CSPM delegated administrator can invoke this operation
+    #             from the home Region. For the deletion to succeed, you must first disassociate a configuration policy from target accounts,
     #             organizational units, or the root by invoking the <code>StartConfigurationPolicyDisassociation</code> operation.
     #         </p>
     # @param [Hash, Types::DeleteConfigurationPolicyRequest] params
@@ -8355,7 +8642,39 @@ module Aws::SecurityHub
       request.send_request(options)
     end
 
-    # <p>Grants permission to delete a connectorV2. This API is in preview release and subject to change.</p>
+    # <p>Deletes a CSPM connector. When you delete a connector, Security Hub CSPM stops ingesting findings and resource data from the connected cloud provider environment.</p>
+    # @param [Hash, Types::DeleteConnectorRequest] params
+    # @option params [String] :connector_id
+    #   <p>The unique identifier of the connector to delete.</p>
+    # @example To delete a CSPM connector
+    #   # This operation deletes a CSPM connector.
+    #   params = {
+    #     connector_id: "cspm-a1b2c3d4-5678-90ab-cdef-EXAMPLE11111"
+    #   }
+    #   options = {}
+    #   response = client.delete_connector(params, options)
+    #   response.to_h #=>
+    #   {
+    #     enablement_status: PENDING_DELETION
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     connector_id: "NonEmptyString", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_connector(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     enablement_status: "ENABLED" # One of: ["ENABLED", "PENDING_ENABLEMENT", "PENDING_UPDATE", "PENDING_DELETION"]
+    #   }
+    # @return [Types::DeleteConnectorResponse]
+    def delete_connector(params = {}, options = {})
+      request = build_request(:delete_connector, params)
+      request.send_request(options)
+    end
+
+    # <p>Grants permission to delete a connectorV2.</p>
     # @param [Hash, Types::DeleteConnectorV2Request] params
     # @option params [String] :connector_id
     #   <p>The UUID of the connectorV2 to identify connectorV2 resource.</p>
@@ -8367,7 +8686,9 @@ module Aws::SecurityHub
     #   response = client.delete_connector_v2(params, options)
     # @example Response structure with placeholder values
     #   response.to_h #=>
-    #   {}
+    #   {
+    #     enablement_status: "ENABLED" # One of: ["ENABLED", "PENDING_ENABLEMENT", "FAILED_TO_ENABLE", "PENDING_UPDATE", "FAILED_TO_UPDATE", "PENDING_DELETION", "FAILED_TO_DELETE"]
+    #   }
     # @return [Types::DeleteConnectorV2Response]
     def delete_connector_v2(params = {}, options = {})
       request = build_request(:delete_connector_v2, params)
@@ -8377,9 +8698,9 @@ module Aws::SecurityHub
     # <note>
     #             <p>The <i>aggregation Region</i> is now called the <i>home Region</i>.</p>
     #          </note>
-    #          <p>Deletes a finding aggregator. When you delete the finding aggregator, you stop cross-Region aggregation. Finding replication stops 
+    #          <p>Deletes a finding aggregator. When you delete the finding aggregator, you stop cross-Region aggregation. Finding replication stops
     # occurring from the linked Regions to the home Region.</p>
-    #          <p>When you stop cross-Region aggregation, findings that were already replicated and sent to the home Region are still visible from 
+    #          <p>When you stop cross-Region aggregation, findings that were already replicated and sent to the home Region are still visible from
     #         the home Region. However, new findings and finding updates are no longer replicated and sent to the home Region.
     #       </p>
     # @param [Hash, Types::DeleteFindingAggregatorRequest] params
@@ -8442,12 +8763,12 @@ module Aws::SecurityHub
     end
 
     # <note>
-    #             <p>We recommend using Organizations instead of Security Hub invitations to manage your member accounts. 
-    #            For information, see <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-accounts-orgs.html">Managing Security Hub administrator and member accounts with Organizations</a> 
-    #            in the <i>Security Hub User Guide</i>.</p>
+    #             <p>We recommend using Organizations instead of Security Hub CSPM invitations to manage your member accounts.
+    #            For information, see <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-accounts-orgs.html">Managing Security Hub CSPM administrator and member accounts with Organizations</a>
+    #            in the <i>Security Hub CSPM User Guide</i>.</p>
     #          </note>
-    #          <p>Deletes invitations to become a Security Hub member account.</p>
-    #          <p>A Security Hub administrator account can use this operation to delete invitations sent to one or more prospective member accounts.</p>
+    #          <p>Deletes invitations to become a Security Hub CSPM member account.</p>
+    #          <p>A Security Hub CSPM administrator account can use this operation to delete invitations sent to one or more prospective member accounts.</p>
     #          <p>This operation is only used to delete invitations that are sent to prospective member accounts that aren't part of an Amazon Web Services organization.
     #          Organization accounts don't receive invitations.</p>
     # @param [Hash, Types::DeleteInvitationsRequest] params
@@ -8489,8 +8810,8 @@ module Aws::SecurityHub
       request.send_request(options)
     end
 
-    # <p>Deletes the specified member accounts from Security Hub.</p>
-    #          <p>You can invoke this API only to delete accounts that became members through invitation. You can't invoke this 
+    # <p>Deletes the specified member accounts from Security Hub CSPM.</p>
+    #          <p>You can invoke this API only to delete accounts that became members through invitation. You can't invoke this
     #         API to delete accounts that belong to an Organizations organization.</p>
     # @param [Hash, Types::DeleteMembersRequest] params
     # @option params [Array<String>] :account_ids
@@ -8532,7 +8853,7 @@ module Aws::SecurityHub
       request.send_request(options)
     end
 
-    # <p>Returns a list of the custom action targets in Security Hub in your account.</p>
+    # <p>Returns a list of the custom action targets in Security Hub CSPM in your account.</p>
     # @param [Hash, Types::DescribeActionTargetsRequest] params
     # @option params [Array<String>] :action_target_arns
     #   <p>A list of custom action target ARNs for the custom action targets to retrieve.</p>
@@ -8590,7 +8911,7 @@ module Aws::SecurityHub
     end
 
     # <p>Returns details about the Hub resource in your account, including the
-    #          <code>HubArn</code> and the time when you enabled Security Hub.</p>
+    #          <code>HubArn</code> and the time when you enabled Security Hub CSPM.</p>
     # @param [Hash, Types::DescribeHubRequest] params
     # @option params [String] :hub_arn
     #   <p>The ARN of the Hub resource to retrieve.</p>
@@ -8628,8 +8949,8 @@ module Aws::SecurityHub
       request.send_request(options)
     end
 
-    # <p>Returns information about the way your organization is configured in Security Hub. Only the 
-    #          Security Hub administrator account can invoke this operation.</p>
+    # <p>Returns information about the way your organization is configured in Security Hub CSPM. Only the
+    #          Security Hub CSPM administrator account can invoke this operation.</p>
     # @param [Hash, Types::DescribeOrganizationConfigurationRequest] params
     # @example To get information about organization configuration
     #   # This operation provides information about the way your organization is configured in Security Hub. Only a Security Hub administrator account can invoke this operation.
@@ -8668,7 +8989,7 @@ module Aws::SecurityHub
       request.send_request(options)
     end
 
-    # <p>Returns information about product integrations in Security Hub.</p>
+    # <p>Returns information about product integrations in Security Hub CSPM.</p>
     #          <p>You can optionally provide an integration ARN. If you provide an integration ARN, then
     #          the results only include that integration.</p>
     #          <p>If you don't provide an integration ARN, then the results include all of the available
@@ -8750,11 +9071,11 @@ module Aws::SecurityHub
       request.send_request(options)
     end
 
-    # <p>Gets information about the product integration. This API is in private preview and subject to change.</p>
+    # <p>Gets information about the product integration.</p>
     # @param [Hash, Types::DescribeProductsV2Request] params
     # @option params [String] :next_token
-    #   <p>The token required for pagination. 
-    #            On your first call, set the value of this parameter to <code>NULL</code>. 
+    #   <p>The token required for pagination.
+    #            On your first call, set the value of this parameter to <code>NULL</code>.
     #            For subsequent calls, to continue listing data, set the value of this parameter to the value returned in the previous response.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return.</p>
@@ -8774,9 +9095,10 @@ module Aws::SecurityHub
     #         company_name: "NonEmptyString",
     #         description: "NonEmptyString",
     #         categories: ["NonEmptyString"],
-    #         integration_v2_types: ["SEND_FINDINGS_TO_SECURITY_HUB" # One of: ["SEND_FINDINGS_TO_SECURITY_HUB", "RECEIVE_FINDINGS_FROM_SECURITY_HUB", "UPDATE_FINDINGS_IN_SECURITY_HUB"]],
+    #         integration_v2_types: ["SEND_FINDINGS_TO_SECURITY_HUB" # One of: ["SEND_FINDINGS_TO_SECURITY_HUB", "RECEIVE_FINDINGS_FROM_SECURITY_HUB", "UPDATE_FINDINGS_IN_SECURITY_HUB", "EXTENDED_PLAN"]],
     #         marketplace_url: "NonEmptyString",
-    #         activation_url: "NonEmptyString"
+    #         activation_url: "NonEmptyString",
+    #         marketplace_product_id: "NonEmptyString"
     #       }
     #     ],
     #     next_token: "NextToken"
@@ -8787,7 +9109,7 @@ module Aws::SecurityHub
       request.send_request(options)
     end
 
-    # <p>Returns details about the service resource in your account. This API is in private preview and subject to change.</p>
+    # <p>Returns details about the service resource in your account.</p>
     # @param [Hash, Types::DescribeSecurityHubV2Request] params
     # @example Request syntax with placeholder values
     #   params = {}
@@ -8797,7 +9119,13 @@ module Aws::SecurityHub
     #   response.to_h #=>
     #   {
     #     hub_v2_arn: "NonEmptyString",
-    #     subscribed_at: "NonEmptyString"
+    #     subscribed_at: "IsoString",
+    #     features: {
+    #       "FeatureNameKey" => {
+    #         feature_status: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #         updated_at: Time.now
+    #       }
+    #     }
     #   }
     # @return [Types::DescribeSecurityHubV2Response]
     def describe_security_hub_v2(params = {}, options = {})
@@ -8805,7 +9133,7 @@ module Aws::SecurityHub
       request.send_request(options)
     end
 
-    # <p>Returns a list of the available standards in Security Hub.</p>
+    # <p>Returns a list of the available standards in Security Hub CSPM.</p>
     #          <p>For each standard, the results include the standard ARN, the name, and a description. </p>
     # @param [Hash, Types::DescribeStandardsRequest] params
     # @option params [String] :next_token
@@ -8816,6 +9144,33 @@ module Aws::SecurityHub
     #            parameter to the value returned from the previous response.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of standards to return.</p>
+    # @option params [Array<String>] :providers
+    #   <p>A list of cloud providers to filter the standards by. For example, specify <code>Azure</code> to return only standards that evaluate Azure resources.</p>
+    # @example To get available Azure security standards
+    #   # The following example returns a list of available security standards from a specified provider.
+    #   params = {
+    #     providers: [
+    #       Azure
+    #     ]
+    #   }
+    #   options = {}
+    #   response = client.describe_standards(params, options)
+    #   response.to_h #=>
+    #   {
+    #     standards: [
+    #       {
+    #         standards_arn: "arn:aws:securityhub:us-west-1::standards/cis-azure-foundations-benchmark/v/4.0.0",
+    #         name: "CIS Azure Foundations Benchmark v4.0.0",
+    #         description: "The Center for Internet Security (CIS) Microsoft Azure Foundations Benchmark v4.0.0 is a set of security configuration best practices for Azure. This Security Hub standard automatically checks your compliance readiness against a subset of CIS requirements.",
+    #         enabled_by_default: false,
+    #         standards_managed_by: {
+    #           company: "AWS",
+    #           product: "Security Hub"
+    #         },
+    #         provider: Azure
+    #       }
+    #     ]
+    #   }
     # @example To get available Security Hub standards
     #   # The following example returns a list of available security standards in Security Hub.
     #   params = {}
@@ -8828,32 +9183,64 @@ module Aws::SecurityHub
     #         standards_arn: "arn:aws:securityhub:us-west-1::standards/aws-foundational-security-best-practices/v/1.0.0",
     #         name: "AWS Foundational Security Best Practices v1.0.0",
     #         description: "The AWS Foundational Security Best Practices standard is a set of automated security checks that detect when AWS accounts and deployed resources do not align to security best practices. The standard is defined by AWS security experts. This curated set of controls helps improve your security posture in AWS, and cover AWS's most popular and foundational services.",
-    #         enabled_by_default: true
+    #         enabled_by_default: true,
+    #         standards_managed_by: {
+    #           company: "AWS",
+    #           product: "Security Hub"
+    #         },
+    #         provider: AWS
     #       },
     #       {
     #         standards_arn: "arn:aws:securityhub:us-west-1::ruleset/cis-aws-foundations-benchmark/v/1.2.0",
     #         name: "CIS AWS Foundations Benchmark v1.2.0",
     #         description: "The Center for Internet Security (CIS) AWS Foundations Benchmark v1.2.0 is a set of security configuration best practices for AWS. This Security Hub standard automatically checks for your compliance readiness against a subset of CIS requirements.",
-    #         enabled_by_default: true
+    #         enabled_by_default: true,
+    #         standards_managed_by: {
+    #           company: "AWS",
+    #           product: "Security Hub"
+    #         },
+    #         provider: AWS
     #       },
     #       {
     #         standards_arn: "arn:aws::securityhub:us-west-1::standards/cis-aws-foundations-benchmark/v/1.4.0",
     #         name: "CIS AWS Foundations Benchmark v1.4.0",
     #         description: "The Center for Internet Security (CIS) AWS Foundations Benchmark v1.4.0 is a set of security configuration best practices for AWS. This Security Hub standard automatically checks for your compliance readiness against a subset of CIS requirements.",
-    #         enabled_by_default: false
+    #         enabled_by_default: false,
+    #         standards_managed_by: {
+    #           company: "AWS",
+    #           product: "Security Hub"
+    #         },
+    #         provider: AWS
     #       },
     #       {
     #         standards_arn: "arn:aws:securityhub:us-west-1::standards/pci-dss/v/3.2.1",
     #         name: "PCI DSS v3.2.1",
     #         description: "The Payment Card Industry Data Security Standard (PCI DSS) v3.2.1 is an information security standard for entities that store, process, and/or transmit cardholder data. This Security Hub standard automatically checks for your compliance readiness against a subset of PCI DSS requirements.",
-    #         enabled_by_default: false
+    #         enabled_by_default: false,
+    #         standards_managed_by: {
+    #           company: "AWS",
+    #           product: "Security Hub"
+    #         },
+    #         provider: AWS
+    #       },
+    #       {
+    #         standards_arn: "arn:aws:securityhub:us-west-1::standards/cis-azure-foundations-benchmark/v/4.0.0",
+    #         name: "CIS Azure Foundations Benchmark v4.0.0",
+    #         description: "The Center for Internet Security (CIS) Microsoft Azure Foundations Benchmark v4.0.0 is a set of security configuration best practices for Azure. This Security Hub standard automatically checks your compliance readiness against a subset of CIS requirements.",
+    #         enabled_by_default: false,
+    #         standards_managed_by: {
+    #           company: "AWS",
+    #           product: "Security Hub"
+    #         },
+    #         provider: Azure
     #       }
     #     ]
     #   }
     # @example Request syntax with placeholder values
     #   params = {
     #     next_token: "NextToken",
-    #     max_results: 1
+    #     max_results: 1,
+    #     providers: ["AWS" # One of: ["AWS", "Azure"]]
     #   }
     #   options = {}
     #   response = client.describe_standards(params, options)
@@ -8866,6 +9253,7 @@ module Aws::SecurityHub
     #         name: "NonEmptyString",
     #         description: "NonEmptyString",
     #         enabled_by_default: false,
+    #         provider: "AWS" # One of: ["AWS", "Azure"],
     #         standards_managed_by: {
     #           company: "NonEmptyString",
     #           product: "NonEmptyString"
@@ -8929,8 +9317,8 @@ module Aws::SecurityHub
       request.send_request(options)
     end
 
-    # <p>Disables the integration of the specified product with Security Hub. After the integration is
-    #          disabled, findings from that product are no longer sent to Security Hub.</p>
+    # <p>Disables the integration of the specified product with Security Hub CSPM. After the integration is
+    #          disabled, findings from that product are no longer sent to Security Hub CSPM.</p>
     # @param [Hash, Types::DisableImportFindingsForProductRequest] params
     # @option params [String] :product_subscription_arn
     #   <p>The ARN of the integrated product to disable the integration for.</p>
@@ -8958,14 +9346,14 @@ module Aws::SecurityHub
       request.send_request(options)
     end
 
-    # <p>Disables a Security Hub administrator account. Can only be called by the organization
+    # <p>Disables a Security Hub CSPM administrator account. Can only be called by the organization
     #          management account.</p>
     # @param [Hash, Types::DisableOrganizationAdminAccountRequest] params
     # @option params [String] :admin_account_id
-    #   <p>The Amazon Web Services account identifier of the Security Hub administrator account.</p>
+    #   <p>The Amazon Web Services account identifier of the Security Hub CSPM administrator account.</p>
     # @option params [String] :feature
-    #   <p>The feature for which the delegated admin account is disabled. 
-    #            Defaults to Security Hub if not specified.</p>
+    #   <p>The feature for which the delegated admin account is disabled.
+    #            Defaults to Security Hub CSPM if not specified.</p>
     # @example To remove a Security Hub administrator account
     #   # The following example removes the Security Hub administrator account in the Region from which the operation was executed. This operation doesn't remove the delegated administrator account in AWS Organizations.
     #   params = {
@@ -8991,14 +9379,14 @@ module Aws::SecurityHub
       request.send_request(options)
     end
 
-    # <p>Disables Security Hub in your account only in the current Amazon Web Services Region. To disable Security Hub in all
-    #          Regions, you must submit one request per Region where you have enabled Security Hub.</p>
-    #          <p>You can't disable Security Hub in an account that is currently the Security Hub administrator.</p>
-    #          <p>When you disable Security Hub, your existing findings and insights and any Security Hub configuration
+    # <p>Disables Security Hub CSPM in your account only in the current Amazon Web Services Region. To disable Security Hub CSPM in all
+    #          Regions, you must submit one request per Region where you have enabled Security Hub CSPM.</p>
+    #          <p>You can't disable Security Hub CSPM in an account that is currently the Security Hub CSPM administrator.</p>
+    #          <p>When you disable Security Hub CSPM, your existing findings and insights and any Security Hub CSPM configuration
     #          settings are deleted after 90 days and cannot be recovered. Any standards that were enabled
     #          are disabled, and your administrator and member account associations are removed.</p>
     #          <p>If you want to save your existing findings, you must export them before you disable
-    #          Security Hub.</p>
+    #          Security Hub CSPM.</p>
     # @param [Hash, Types::DisableSecurityHubRequest] params
     # @example To deactivate Security Hub
     #   # The following example deactivates Security Hub for the current account and Region.
@@ -9020,7 +9408,26 @@ module Aws::SecurityHub
       request.send_request(options)
     end
 
-    # <p>Disable the service for the current Amazon Web Services Region or specified Amazon Web Services Region. This API is in private preview and subject to change.</p>
+    # <p>Disables an opt-in feature for the calling account in the current Amazon Web Services Region. The operation is idempotent. If the feature is already disabled, no changes are made. You cannot disable a feature that is managed by an organization policy.</p>
+    # @param [Hash, Types::DisableSecurityHubFeatureV2Request] params
+    # @option params [String] :feature_name
+    #   <p>The name of the feature to disable.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     feature_name: "NETWORK_SCANNING" # One of: ["NETWORK_SCANNING"], # required
+    #   }
+    #   options = {}
+    #   response = client.disable_security_hub_feature_v2(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::DisableSecurityHubFeatureV2Response]
+    def disable_security_hub_feature_v2(params = {}, options = {})
+      request = build_request(:disable_security_hub_feature_v2, params)
+      request.send_request(options)
+    end
+
+    # <p>Disable the service for the current Amazon Web Services Region or specified Amazon Web Services Region. Disabling the service also disables all opt-in features that are currently enabled in that Region.</p>
     # @param [Hash, Types::DisableSecurityHubV2Request] params
     # @example Request syntax with placeholder values
     #   params = {}
@@ -9035,7 +9442,7 @@ module Aws::SecurityHub
       request.send_request(options)
     end
 
-    # <p>Disassociates the current Security Hub member account from the associated administrator
+    # <p>Disassociates the current Security Hub CSPM member account from the associated administrator
     #          account.</p>
     #          <p>This operation is only used by accounts that are not part of an organization. For
     #          organization accounts, only the administrator account can
@@ -9062,8 +9469,8 @@ module Aws::SecurityHub
     end
 
     # <p>This method is deprecated. Instead, use <code>DisassociateFromAdministratorAccount</code>.</p>
-    #          <p>The Security Hub console continues to use <code>DisassociateFromMasterAccount</code>. It will eventually change to use <code>DisassociateFromAdministratorAccount</code>. Any IAM policies that specifically control access to this function must continue to use <code>DisassociateFromMasterAccount</code>. You should also add <code>DisassociateFromAdministratorAccount</code> to your policies to ensure that the correct permissions are in place after the console begins to use <code>DisassociateFromAdministratorAccount</code>.</p>
-    #          <p>Disassociates the current Security Hub member account from the associated administrator
+    #          <p>The Security Hub CSPM console continues to use <code>DisassociateFromMasterAccount</code>. It will eventually change to use <code>DisassociateFromAdministratorAccount</code>. Any IAM policies that specifically control access to this function must continue to use <code>DisassociateFromMasterAccount</code>. You should also add <code>DisassociateFromAdministratorAccount</code> to your policies to ensure that the correct permissions are in place after the console begins to use <code>DisassociateFromAdministratorAccount</code>.</p>
+    #          <p>Disassociates the current Security Hub CSPM member account from the associated administrator
     #          account.</p>
     #          <p>This operation is only used by accounts that are not part of an organization. For
     #          organization accounts, only the administrator account can
@@ -9117,10 +9524,10 @@ module Aws::SecurityHub
       request.send_request(options)
     end
 
-    # <p>Enables the integration of a partner product with Security Hub. Integrated products send
-    #          findings to Security Hub.</p>
+    # <p>Enables the integration of a partner product with Security Hub CSPM. Integrated products send
+    #          findings to Security Hub CSPM.</p>
     #          <p>When you enable a product integration, a permissions policy that grants permission for
-    #          the product to send findings to Security Hub is applied.</p>
+    #          the product to send findings to Security Hub CSPM is applied.</p>
     # @param [Hash, Types::EnableImportFindingsForProductRequest] params
     # @option params [String] :product_arn
     #   <p>The ARN of the product to enable the integration for.</p>
@@ -9152,15 +9559,15 @@ module Aws::SecurityHub
       request.send_request(options)
     end
 
-    # <p>Designates the Security Hub administrator account for an organization. Can only be called by
+    # <p>Designates the Security Hub CSPM administrator account for an organization. Can only be called by
     #          the organization management account.</p>
     # @param [Hash, Types::EnableOrganizationAdminAccountRequest] params
     # @option params [String] :admin_account_id
-    #   <p>The Amazon Web Services account identifier of the account to designate as the Security Hub administrator
+    #   <p>The Amazon Web Services account identifier of the account to designate as the Security Hub CSPM administrator
     #            account.</p>
     # @option params [String] :feature
-    #   <p>The feature for which the delegated admin account is enabled. 
-    #            Defaults to Security Hub if not specified.</p>
+    #   <p>The feature for which the delegated admin account is enabled.
+    #            Defaults to Security Hub CSPM if not specified.</p>
     # @example To designate a Security Hub administrator
     #   # The following example designates the specified account as the Security Hub administrator account. The requesting account must be the organization management account.
     #   params = {
@@ -9189,11 +9596,11 @@ module Aws::SecurityHub
       request.send_request(options)
     end
 
-    # <p>Enables Security Hub for your account in the current Region or the Region you specify in the
+    # <p>Enables Security Hub CSPM for your account in the current Region or the Region you specify in the
     #          request.</p>
-    #          <p>When you enable Security Hub, you grant to Security Hub the permissions necessary to gather findings
-    #          from other services that are integrated with Security Hub.</p>
-    #          <p>When you use the <code>EnableSecurityHub</code> operation to enable Security Hub, you also
+    #          <p>When you enable Security Hub CSPM, you grant to Security Hub CSPM the permissions necessary to gather findings
+    #          from other services that are integrated with Security Hub CSPM.</p>
+    #          <p>When you use the <code>EnableSecurityHub</code> operation to enable Security Hub CSPM, you also
     #          automatically enable the following standards:</p>
     #          <ul>
     #             <li>
@@ -9206,27 +9613,27 @@ module Aws::SecurityHub
     #          <p>Other standards are not automatically enabled. </p>
     #          <p>To opt out of automatically enabled standards, set
     #             <code>EnableDefaultStandards</code> to <code>false</code>.</p>
-    #          <p>After you enable Security Hub, to enable a standard, use the <code>BatchEnableStandards</code> operation. To disable a standard, use the
+    #          <p>After you enable Security Hub CSPM, to enable a standard, use the <code>BatchEnableStandards</code> operation. To disable a standard, use the
     #                <code>BatchDisableStandards</code> operation.</p>
-    #          <p>To learn more, see the <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-settingup.html">setup information</a> in the <i>Security Hub User Guide</i>.</p>
+    #          <p>To learn more, see the <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-settingup.html">setup information</a> in the <i>Security Hub CSPM User Guide</i>.</p>
     # @param [Hash, Types::EnableSecurityHubRequest] params
     # @option params [Hash<String, String>] :tags
-    #   <p>The tags to add to the hub resource when you enable Security Hub.</p>
+    #   <p>The tags to add to the hub resource when you enable Security Hub CSPM.</p>
     # @option params [Boolean] :enable_default_standards
-    #   <p>Whether to enable the security standards that Security Hub has designated as automatically
+    #   <p>Whether to enable the security standards that Security Hub CSPM has designated as automatically
     #            enabled. If you don't provide a value for <code>EnableDefaultStandards</code>, it is set
     #            to <code>true</code>. To not enable the automatically enabled standards, set
     #               <code>EnableDefaultStandards</code> to <code>false</code>.</p>
     # @option params [String] :control_finding_generator
-    #   <p>This field, used when enabling Security Hub, specifies whether the calling account has consolidated control findings turned on. 
-    #         If the value for this field is set to 
-    #         <code>SECURITY_CONTROL</code>, Security Hub generates a single finding for a control check even when the check 
+    #   <p>This field, used when enabling Security Hub CSPM, specifies whether the calling account has consolidated control findings turned on.
+    #         If the value for this field is set to
+    #         <code>SECURITY_CONTROL</code>, Security Hub CSPM generates a single finding for a control check even when the check
     #         applies to multiple enabled standards.</p>
-    #            <p>If the value for this field is set to <code>STANDARD_CONTROL</code>, Security Hub generates separate findings 
+    #            <p>If the value for this field is set to <code>STANDARD_CONTROL</code>, Security Hub CSPM generates separate findings
     #         for a control check when the check applies to multiple enabled standards.</p>
     #            <p>The value for this field in a member account matches the value in the administrator
     #            account. For accounts that aren't part of an organization, the default value of this field
-    #            is <code>SECURITY_CONTROL</code> if you enabled Security Hub on or after February 23,
+    #            is <code>SECURITY_CONTROL</code> if you enabled Security Hub CSPM on or after February 23,
     #            2023.</p>
     # @example To activate Security Hub
     #   # The following example activates the Security Hub service in the requesting AWS account. The service is activated in the current AWS Region or the Region that you specify in the request. Some standards are automatically turned on in your account unless you opt out. To determine which standards are automatically turned on, see the Security Hub documentation.
@@ -9259,7 +9666,26 @@ module Aws::SecurityHub
       request.send_request(options)
     end
 
-    # <p>Enables the service in account for the current Amazon Web Services Region or specified Amazon Web Services Region. This API is in private preview and subject to change.</p>
+    # <p>Enables an opt-in feature for the calling account in the current Amazon Web Services Region. The service must be enabled before you can enable a feature. The operation is idempotent. If the feature is already enabled, no changes are made. You cannot enable a feature that is managed by an organization policy.</p>
+    # @param [Hash, Types::EnableSecurityHubFeatureV2Request] params
+    # @option params [String] :feature_name
+    #   <p>The name of the feature to enable.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     feature_name: "NETWORK_SCANNING" # One of: ["NETWORK_SCANNING"], # required
+    #   }
+    #   options = {}
+    #   response = client.enable_security_hub_feature_v2(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::EnableSecurityHubFeatureV2Response]
+    def enable_security_hub_feature_v2(params = {}, options = {})
+      request = build_request(:enable_security_hub_feature_v2, params)
+      request.send_request(options)
+    end
+
+    # <p>Enables the service in account for the current Amazon Web Services Region or specified Amazon Web Services Region.</p>
     # @param [Hash, Types::EnableSecurityHubV2Request] params
     # @option params [Hash<String, String>] :tags
     #   <p>The tags to add to the hub V2 resource when you enable Security Hub.</p>
@@ -9282,7 +9708,27 @@ module Aws::SecurityHub
       request.send_request(options)
     end
 
-    # <p>Provides the details for the Security Hub administrator account for the current member account.</p>
+    # <p>Begins the recommended policy generation to remediate a Security Hub finding.
+    #          <code>GenerateRecommendedPolicyV2</code> only supports findings for unused permissions.</p>
+    # @param [Hash, Types::GenerateRecommendedPolicyV2Request] params
+    # @option params [String] :metadata_uid
+    #   <p>The unique identifier (ID) of Security Hub OCSF findings found under the <code>metadata.uid</code> field of the finding.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     metadata_uid: "NonEmptyString", # required
+    #   }
+    #   options = {}
+    #   response = client.generate_recommended_policy_v2(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::GenerateRecommendedPolicyV2Response]
+    def generate_recommended_policy_v2(params = {}, options = {})
+      request = build_request(:generate_recommended_policy_v2, params)
+      request.send_request(options)
+    end
+
+    # <p>Provides the details for the Security Hub CSPM administrator account for the current member account.</p>
     #          <p>Can be used by both member accounts that are managed using Organizations and accounts that were
     #          invited manually.</p>
     # @param [Hash, Types::GetAdministratorAccountRequest] params
@@ -9306,7 +9752,7 @@ module Aws::SecurityHub
       request.send_request(options)
     end
 
-    # <p>Returns the configuration of the specified Aggregator V2. This API is in private preview and subject to change.</p>
+    # <p>Returns the configuration of the specified Aggregator V2.</p>
     # @param [Hash, Types::GetAggregatorV2Request] params
     # @option params [String] :aggregator_v2_arn
     #   <p>The ARN of the Aggregator V2.</p>
@@ -9330,7 +9776,7 @@ module Aws::SecurityHub
       request.send_request(options)
     end
 
-    # <p>Returns an automation rule for the V2 service. This API is in private preview and subject to change.</p>
+    # <p>Returns an automation rule for the V2 service.</p>
     # @param [Hash, Types::GetAutomationRuleV2Request] params
     # @option params [String] :identifier
     #   <p>The ARN of the V2 automation rule.</p>
@@ -9356,7 +9802,7 @@ module Aws::SecurityHub
     #           {
     #             string_filters: [
     #               {
-    #                 field_name: "metadata.uid" # One of: ["metadata.uid", "activity_name", "cloud.account.uid", "cloud.provider", "cloud.region", "compliance.assessments.category", "compliance.assessments.name", "compliance.control", "compliance.status", "compliance.standards", "finding_info.desc", "finding_info.src_url", "finding_info.title", "finding_info.types", "finding_info.uid", "finding_info.related_events.uid", "finding_info.related_events.product.uid", "finding_info.related_events.title", "metadata.product.name", "metadata.product.uid", "metadata.product.vendor_name", "remediation.desc", "remediation.references", "resources.cloud_partition", "resources.region", "resources.type", "resources.uid", "severity", "status", "comment", "vulnerabilities.fix_coverage", "class_name"],
+    #                 field_name: "metadata.uid" # One of: ["metadata.uid", "activity_name", "cloud.account.uid", "cloud.provider", "cloud.region", "compliance.assessments.category", "compliance.assessments.name", "compliance.control", "compliance.status", "compliance.standards", "finding_info.desc", "finding_info.src_url", "finding_info.title", "finding_info.types", "finding_info.uid", "finding_info.related_events.traits.category", "finding_info.related_events.uid", "finding_info.related_events.product.uid", "finding_info.related_events.title", "impact", "likelihood", "metadata.product.name", "metadata.product.uid", "metadata.product.vendor_name", "remediation.desc", "remediation.references", "resources.cloud_partition", "resources.criticality", "resources.name", "resources.owner.account.uid", "resources.owner.org.uid", "resources.owner.account.name", "resources.provider", "resources.region", "resources.type", "resources.uid", "severity", "status", "comment", "vulnerabilities.fix_coverage", "class_name", "databucket.encryption_details.algorithm", "databucket.encryption_details.key_uid", "databucket.file.data_classifications.classifier_details.type", "evidences.actor.user.account.uid", "evidences.api.operation", "evidences.api.response.error_message", "evidences.api.service.name", "evidences.connection_info.direction", "evidences.connection_info.protocol_name", "evidences.dst_endpoint.autonomous_system.name", "evidences.dst_endpoint.location.city", "evidences.dst_endpoint.location.country", "evidences.src_endpoint.autonomous_system.name", "evidences.src_endpoint.hostname", "evidences.src_endpoint.location.city", "evidences.src_endpoint.location.country", "finding_info.analytic.name", "malware.name", "malware_scan_info.uid", "malware.severity", "resources.cloud_function.layers.uid_alt", "resources.cloud_function.runtime", "resources.cloud_function.user.uid", "resources.device.encryption_details.key_uid", "resources.device.image.uid", "resources.image.architecture", "resources.image.registry_uid", "resources.image.repository_name", "resources.image.uid", "resources.subnet_info.uid", "resources.vpc_uid", "vulnerabilities.affected_code.file.path", "vulnerabilities.affected_packages.name", "vulnerabilities.cve.epss.score", "vulnerabilities.cve.uid", "vulnerabilities.related_vulnerabilities", "cloud.account.name", "vendor_attributes.severity"],
     #                 filter: {
     #                   value: "NonEmptyString",
     #                   comparison: "EQUALS" # One of: ["EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "CONTAINS_WORD"]
@@ -9365,13 +9811,14 @@ module Aws::SecurityHub
     #             ],
     #             date_filters: [
     #               {
-    #                 field_name: "finding_info.created_time_dt" # One of: ["finding_info.created_time_dt", "finding_info.first_seen_time_dt", "finding_info.last_seen_time_dt", "finding_info.modified_time_dt"],
+    #                 field_name: "finding_info.created_time_dt" # One of: ["finding_info.created_time_dt", "finding_info.first_seen_time_dt", "finding_info.last_seen_time_dt", "finding_info.modified_time_dt", "resources.image.created_time_dt", "resources.image.last_used_time_dt", "resources.modified_time_dt"],
     #                 filter: {
     #                   start: "NonEmptyString",
     #                   end: "NonEmptyString",
     #                   date_range: {
     #                     value: 1,
-    #                     unit: "DAYS" # One of: ["DAYS"]
+    #                     unit: "DAYS" # One of: ["DAYS"],
+    #                     comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #                   }
     #                 }
     #               }
@@ -9386,7 +9833,7 @@ module Aws::SecurityHub
     #             ],
     #             number_filters: [
     #               {
-    #                 field_name: "activity_id" # One of: ["activity_id", "compliance.status_id", "confidence_score", "severity_id", "status_id", "finding_info.related_events_count"],
+    #                 field_name: "activity_id" # One of: ["activity_id", "compliance.status_id", "confidence_score", "severity_id", "status_id", "finding_info.related_events_count", "evidences.api.response.code", "evidences.dst_endpoint.autonomous_system.number", "evidences.dst_endpoint.port", "evidences.src_endpoint.autonomous_system.number", "evidences.src_endpoint.port", "resources.image.in_use_count", "vulnerabilities.cve.cvss.base_score", "vendor_attributes.severity_id"],
     #                 filter: {
     #                   gte: 1.0,
     #                   lte: 1.0,
@@ -9398,7 +9845,7 @@ module Aws::SecurityHub
     #             ],
     #             map_filters: [
     #               {
-    #                 field_name: "resources.tags" # One of: ["resources.tags"],
+    #                 field_name: "resources.tags" # One of: ["resources.tags", "compliance.control_parameters", "databucket.tags", "finding_info.tags"],
     #                 filter: {
     #                   key: "NonEmptyString",
     #                   value: "NonEmptyString",
@@ -9406,6 +9853,73 @@ module Aws::SecurityHub
     #                 }
     #               }
     #             ],
+    #             ip_filters: [
+    #               {
+    #                 field_name: "evidences.dst_endpoint.ip" # One of: ["evidences.dst_endpoint.ip", "evidences.src_endpoint.ip"],
+    #                 filter: {
+    #                   cidr: "NonEmptyString"
+    #                 }
+    #               }
+    #             ],
+    #             nested_composite_filters: {
+    #               # recursive CompositeFilterList
+    #             },
+    #             operator: "AND" # One of: ["AND", "OR"]
+    #           }
+    #         ],
+    #         composite_operator: "AND" # One of: ["AND", "OR"]
+    #       },
+    #       resource_criteria: {
+    #         composite_filters: [
+    #           {
+    #             string_filters: [
+    #               {
+    #                 field_name: "ResourceGuid" # One of: ["ResourceGuid", "ResourceId", "AccountId", "AccountName", "Region", "ResourceProvider", "ResourceOwnerAccountId", "ResourceOwnerOrgId", "ResourceCloudPartition", "ResourceRegion", "ResourceCategory", "ResourceType", "ResourceName", "FindingsSummary.FindingType", "FindingsSummary.ProductName", "ResourceSubCategory", "DiscoveryType", "ResourceInfo.AIDetails.HostResourceGuid", "ResourceInfo.AIDetails.HostResourceType", "ResourceInfo.AIDetails.CanonicalId", "ResourceCriticality"],
+    #                 filter: {
+    #                   value: "NonEmptyString",
+    #                   comparison: "EQUALS" # One of: ["EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "CONTAINS_WORD"]
+    #                 }
+    #               }
+    #             ],
+    #             date_filters: [
+    #               {
+    #                 field_name: "ResourceDetailCaptureTime" # One of: ["ResourceDetailCaptureTime", "ResourceCreationTime"],
+    #                 filter: {
+    #                   start: "NonEmptyString",
+    #                   end: "NonEmptyString",
+    #                   date_range: {
+    #                     value: 1,
+    #                     unit: "DAYS" # One of: ["DAYS"],
+    #                     comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
+    #                   }
+    #                 }
+    #               }
+    #             ],
+    #             number_filters: [
+    #               {
+    #                 field_name: "FindingsSummary.TotalFindings" # One of: ["FindingsSummary.TotalFindings", "FindingsSummary.Severities.Other", "FindingsSummary.Severities.Fatal", "FindingsSummary.Severities.Critical", "FindingsSummary.Severities.High", "FindingsSummary.Severities.Medium", "FindingsSummary.Severities.Low", "FindingsSummary.Severities.Informational", "FindingsSummary.Severities.Unknown", "ResourceInfo.AIDetails.SelfHostedAIModelResourceCount", "ResourceInfo.AIDetails.SelfHostedAIAgentResourceCount", "ResourceInfo.AIDetails.SelfHostedAIModelServingResourceCount", "ResourceInfo.AIDetails.SelfHostedAIExternalEndpointResourceCount", "ResourceInfo.AIDetails.SelfHostedAIDevelopmentResourceCount", "ResourceInfo.AIDetails.SelfHostedAIAgentFrameworkResourceCount", "ResourceInfo.AIDetails.SelfHostedAIAgentToolsAndIdentityResourceCount", "ResourceInfo.AIDetails.SelfHostedTotalAIResourceCount"],
+    #                 filter: {
+    #                   gte: 1.0,
+    #                   lte: 1.0,
+    #                   eq: 1.0,
+    #                   gt: 1.0,
+    #                   lt: 1.0
+    #                 }
+    #               }
+    #             ],
+    #             map_filters: [
+    #               {
+    #                 field_name: "ResourceTags" # One of: ["ResourceTags"],
+    #                 filter: {
+    #                   key: "NonEmptyString",
+    #                   value: "NonEmptyString",
+    #                   comparison: "EQUALS" # One of: ["EQUALS", "NOT_EQUALS", "CONTAINS", "NOT_CONTAINS"]
+    #                 }
+    #               }
+    #             ],
+    #             nested_composite_filters: {
+    #               # recursive ResourcesCompositeFilterList
+    #             },
     #             operator: "AND" # One of: ["AND", "OR"]
     #           }
     #         ],
@@ -9414,7 +9928,7 @@ module Aws::SecurityHub
     #     },
     #     actions: [
     #       {
-    #         type: "FINDING_FIELDS_UPDATE" # One of: ["FINDING_FIELDS_UPDATE", "EXTERNAL_INTEGRATION"], # required
+    #         type: "FINDING_FIELDS_UPDATE" # One of: ["FINDING_FIELDS_UPDATE", "EXTERNAL_INTEGRATION", "RESOURCE_FIELDS_UPDATE"], # required
     #         finding_fields_update: {
     #           severity_id: 1,
     #           comment: "NonEmptyString",
@@ -9422,6 +9936,9 @@ module Aws::SecurityHub
     #         },
     #         external_integration_configuration: {
     #           connector_arn: "NonEmptyString"
+    #         },
+    #         resource_fields_update: {
+    #           criticality: "Very High" # One of: ["Very High", "High", "Medium", "Low", "Unknown"], # required
     #         }
     #       }
     #     ],
@@ -9435,7 +9952,7 @@ module Aws::SecurityHub
     end
 
     # <p>
-    #             Provides information about a configuration policy. Only the Security Hub delegated administrator can invoke 
+    #             Provides information about a configuration policy. Only the Security Hub CSPM delegated administrator can invoke
     #             this operation from the home Region.
     #         </p>
     # @param [Hash, Types::GetConfigurationPolicyRequest] params
@@ -9537,14 +10054,14 @@ module Aws::SecurityHub
     end
 
     # <p>
-    #             Returns the association between a configuration and a target account, organizational unit, or the root. The 
-    #             configuration can be a configuration policy or self-managed behavior. Only the Security Hub delegated administrator can 
+    #             Returns the association between a configuration and a target account, organizational unit, or the root. The
+    #             configuration can be a configuration policy or self-managed behavior. Only the Security Hub CSPM delegated administrator can
     #             invoke this operation from the home Region.
     #         </p>
     # @param [Hash, Types::GetConfigurationPolicyAssociationRequest] params
     # @option params [Types::Target] :target
     #   <p>
-    #               The target account ID, organizational unit ID, or the root ID to retrieve the association for. 
+    #               The target account ID, organizational unit ID, or the root ID to retrieve the association for.
     #           </p>
     # @example To get details about a configuration association
     #   # This operation provides details about configuration associations for a specific target account, organizational unit, or the root.
@@ -9593,7 +10110,90 @@ module Aws::SecurityHub
       request.send_request(options)
     end
 
-    # <p>Grants permission to retrieve details for a connectorV2 based on connector id. This API is in preview release and subject to change.</p>
+    # <p>Retrieves details for a CSPM connector based on the connector ID.</p>
+    # @param [Hash, Types::GetConnectorRequest] params
+    # @option params [String] :connector_id
+    #   <p>The unique identifier of the connector to retrieve.</p>
+    # @example To get details of a CSPM connector
+    #   # This operation retrieves details for a CSPM connector.
+    #   params = {
+    #     connector_id: "cspm-a1b2c3d4-5678-90ab-cdef-EXAMPLE11111"
+    #   }
+    #   options = {}
+    #   response = client.get_connector(params, options)
+    #   response.to_h #=>
+    #   {
+    #     connector_arn: "arn:aws:securityhub:us-east-1:123456789012:connector/cspm-a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+    #     connector_id: "cspm-a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+    #     name: "MyAzureConnector",
+    #     description: "Connector for Azure tenant monitoring",
+    #     created_at: Time.parse("2026-01-15T10:30:00.000Z"),
+    #     last_updated_at: Time.parse("2026-05-20T14:00:00.000Z"),
+    #     health: {
+    #       connector_status: CONNECTED,
+    #       last_checked_at: Time.parse("2026-05-20T14:00:00.000Z")
+    #     },
+    #     provider_detail: {
+    #     "Azure" => {
+    #       "AWSConfigConnectorArn" => arn:aws:config:us-east-1:123456789012:connector/azure-connector-1234,
+    #       "ScopeConfiguration" => {
+    #         "ScopeType" => TENANT
+    #       },
+    #       "AzureRegions" => [
+    #         eastus,
+    #         westus2
+    #       ]
+    #     }
+    #   },
+    #     created_by: "securityhub.amazonaws.com"
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     connector_id: "NonEmptyString", # required
+    #   }
+    #   options = {}
+    #   response = client.get_connector(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     connector_arn: "NonEmptyString",
+    #     connector_id: "NonEmptyString", # required
+    #     name: "NonEmptyString", # required
+    #     description: "NonEmptyString",
+    #     created_at: Time.now, # required
+    #     last_updated_at: Time.now, # required
+    #     health: { # required
+    #       connector_status: "CONNECTED" # One of: ["CONNECTED", "DEGRADED", "FAILED_TO_CONNECT", "UNKNOWN"], # required
+    #       message: "NonEmptyString",
+    #       last_checked_at: Time.now, # required
+    #       issues: [
+    #         {
+    #           code: "AUTHENTICATION_FAILURE" # One of: ["AUTHENTICATION_FAILURE", "STREAM_AUTHORIZATION_FAILURE", "DISCOVERY_FAILURE", "STREAM_LIMIT_EXCEEDED", "STREAM_DISCONNECTED", "RECORDING_FAILURE", "NO_HEALTH_DATA"], # required
+    #           message: "NonEmptyString", # required
+    #         }
+    #       ]
+    #     },
+    #     provider_detail: { # required
+    #       # One of:
+    #       azure: {
+    #         aws_config_connector_arn: "NonEmptyString", # required
+    #         scope_configuration: { # required
+    #           scope_type: "TENANT" # One of: ["TENANT", "SUBSCRIPTION"], # required
+    #           scope_values: ["NonEmptyString"]
+    #         },
+    #         azure_regions: ["NonEmptyString"], # required
+    #       }
+    #     },
+    #     created_by: "NonEmptyString",
+    #     enablement_status: "ENABLED" # One of: ["ENABLED", "PENDING_ENABLEMENT", "PENDING_UPDATE", "PENDING_DELETION"]
+    #   }
+    # @return [Types::GetConnectorResponse]
+    def get_connector(params = {}, options = {})
+      request = build_request(:get_connector, params)
+      request.send_request(options)
+    end
+
+    # <p>Grants permission to retrieve details for a connectorV2 based on connector id.</p>
     # @param [Hash, Types::GetConnectorV2Request] params
     # @option params [String] :connector_id
     #   <p>The UUID of the connectorV2 to identify connectorV2 resource.</p>
@@ -9614,9 +10214,15 @@ module Aws::SecurityHub
     #     created_at: Time.now, # required
     #     last_updated_at: Time.now, # required
     #     health: { # required
-    #       connector_status: "CONNECTED" # One of: ["CONNECTED", "FAILED_TO_CONNECT", "PENDING_CONFIGURATION", "PENDING_AUTHORIZATION"], # required
+    #       connector_status: "CONNECTED" # One of: ["CONNECTED", "DEGRADED", "FAILED_TO_CONNECT", "PENDING_AUTHORIZATION", "PENDING_CONFIGURATION", "UNKNOWN"], # required
     #       message: "NonEmptyString",
     #       last_checked_at: Time.now, # required
+    #       issues: [
+    #         {
+    #           code: "AUTHENTICATION_FAILURE" # One of: ["AUTHENTICATION_FAILURE", "STREAM_AUTHORIZATION_FAILURE", "DISCOVERY_FAILURE", "STREAM_LIMIT_EXCEEDED", "STREAM_DISCONNECTED", "RECORDING_FAILURE", "NO_HEALTH_DATA"], # required
+    #           message: "NonEmptyString", # required
+    #         }
+    #       ]
     #     },
     #     provider_detail: { # required
     #       # One of:
@@ -9629,10 +10235,20 @@ module Aws::SecurityHub
     #       },
     #       service_now: {
     #         instance_name: "NonEmptyString",
-    #         client_id: "NonEmptyString",
+    #         secret_arn: "NonEmptyString", # required
     #         auth_status: "ACTIVE" # One of: ["ACTIVE", "FAILED"], # required
+    #       },
+    #       azure: {
+    #         aws_config_connector_arn: "NonEmptyString", # required
+    #         scope_configuration: { # required
+    #           scope_type: "TENANT" # One of: ["TENANT", "SUBSCRIPTION"], # required
+    #           scope_values: ["NonEmptyString"]
+    #         },
+    #         azure_regions: ["NonEmptyString"], # required
     #       }
-    #     }
+    #     },
+    #     enablement_status: "ENABLED" # One of: ["ENABLED", "PENDING_ENABLEMENT", "FAILED_TO_ENABLE", "PENDING_UPDATE", "FAILED_TO_UPDATE", "PENDING_DELETION", "FAILED_TO_DELETE"],
+    #     enablement_status_reason: "NonEmptyString"
     #   }
     # @return [Types::GetConnectorV2Response]
     def get_connector_v2(params = {}, options = {})
@@ -9652,8 +10268,10 @@ module Aws::SecurityHub
     #            parameter to the value returned from the previous response.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return in the response.</p>
+    # @option params [Array<String>] :providers
+    #   <p>A list of cloud providers to filter the enabled standards by. For example, specify <code>Azure</code> to return only enabled standards that evaluate Azure resources.</p>
     # @example To return a list of enabled standards
-    #   # The following example returns a list of Security Hub standards that are currently enabled in your account.  
+    #   # The following example returns a list of Security Hub standards that are currently enabled in your account.
     #   params = {
     #     standards_subscription_arns: [
     #       "arn:aws:securityhub:us-west-1:123456789012:subscription/pci-dss/v/3.2.1"
@@ -9669,7 +10287,8 @@ module Aws::SecurityHub
     #         standards_input: {
     #         },
     #         standards_status: READY,
-    #         standards_subscription_arn: "arn:aws:securityhub:us-west-1:123456789012:subscription/pci-dss/v/3.2.1"
+    #         standards_subscription_arn: "arn:aws:securityhub:us-west-1:123456789012:subscription/pci-dss/v/3.2.1",
+    #         provider: AWS
     #       }
     #     ]
     #   }
@@ -9677,7 +10296,8 @@ module Aws::SecurityHub
     #   params = {
     #     standards_subscription_arns: ["NonEmptyString"],
     #     next_token: "NextToken",
-    #     max_results: 1
+    #     max_results: 1,
+    #     providers: ["AWS" # One of: ["AWS", "Azure"]]
     #   }
     #   options = {}
     #   response = client.get_enabled_standards(params, options)
@@ -9694,8 +10314,9 @@ module Aws::SecurityHub
     #         standards_status: "PENDING" # One of: ["PENDING", "READY", "FAILED", "DELETING", "INCOMPLETE"], # required
     #         standards_controls_updatable: "READY_FOR_UPDATES" # One of: ["READY_FOR_UPDATES", "NOT_READY_FOR_UPDATES"],
     #         standards_status_reason: {
-    #           status_reason_code: "NO_AVAILABLE_CONFIGURATION_RECORDER" # One of: ["NO_AVAILABLE_CONFIGURATION_RECORDER", "MAXIMUM_NUMBER_OF_CONFIG_RULES_EXCEEDED", "INTERNAL_ERROR"], # required
-    #         }
+    #           status_reason_code: "NO_AVAILABLE_CONFIGURATION_RECORDER" # One of: ["NO_AVAILABLE_CONFIGURATION_RECORDER", "MAXIMUM_NUMBER_OF_CONFIG_RULES_EXCEEDED", "NO_AVAILABLE_MULTICLOUD_CONNECTOR", "INTERNAL_ERROR"], # required
+    #         },
+    #         provider: "AWS" # One of: ["AWS", "Azure"]
     #       }
     #     ],
     #     next_token: "NextToken"
@@ -9706,16 +10327,248 @@ module Aws::SecurityHub
       request.send_request(options)
     end
 
+    # <p>Returns the details of a single findings export job, including its current <code>Status</code>, the <code>Destination</code> it writes to, the <code>OutputConfiguration</code> it was started with, and its <code>StartedAt</code> and <code>EndedAt</code> timestamps. Use this operation to poll an export job that you started with <code>StartExportJobV2</code> until it reaches a terminal state (<code>SUCCEEDED</code>, <code>FAILED</code>, or <code>CANCELLED</code>).</p>
+    #          <p>If the job failed, the response includes a <code>FailureCode</code> and <code>FailureMessage</code> that describe the reason. Input values such as <code>Scopes</code> and <code>Filters</code> are echoed back as they were submitted, with relative date ranges returned unresolved. If no export job matches the <code>ExportJobId</code> that you provide, this operation returns a <code>ResourceNotFoundException</code>.</p>
+    # @param [Hash, Types::GetExportJobV2Request] params
+    # @option params [String] :export_job_id
+    #   <p>The unique identifier of the export job to retrieve. This is the value returned by <code>StartExportJobV2</code>.</p>
+    # @example Example – Getting the details of a failed export job
+    #   # The following example retrieves an export job that failed because Security Hub couldn't write to the destination. The FailureCode and FailureMessage explain the cause.
+    #   params = {
+    #     export_job_id: "f6e5d4c3b2a1"
+    #   }
+    #   options = {}
+    #   response = client.get_export_job_v2(params, options)
+    #   response.to_h #=>
+    #   {
+    #     export_job_id: "f6e5d4c3b2a1",
+    #     status: FAILED,
+    #     data_type: FINDINGS,
+    #     output_configuration: {
+    #     "Findings" => {
+    #       "Format" => OCSF_JSON,
+    #       "Filters" => {
+    #         "CompositeOperator" => AND,
+    #         "CompositeFilters" => [{
+    #           "Operator" => AND,
+    #           "DateFilters" => [{
+    #             "FieldName" => finding_info.last_seen_time_dt,
+    #             "Filter" => {
+    #               "DateRange" => {
+    #                 "Value" => 30,
+    #                 "Unit" => DAYS,
+    #                 "Comparison" => WITHIN
+    #               }
+    #             }
+    #           }]
+    #         }]
+    #       }
+    #     }
+    #   },
+    #     scopes: {
+    #       aws_organizations: [
+    #         {
+    #           organizational_unit_id: "ou-1234-a1b2c3d4"
+    #         }
+    #       ]
+    #     },
+    #     destination: {
+    #     "S3" => {
+    #       "BucketArn" => arn:aws:s3:::amzn-s3-demo-bucket,
+    #       "KmsKeyArn" => arn:aws:kms:aa-example-1:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+    #     }
+    #   },
+    #     failure_code: ACCESS_DENIED,
+    #     failure_message: "Security Hub could not write to the destination bucket. Verify the bucket policy and KMS key policy.",
+    #     started_at: Time.parse("2026-03-27T18:04:11Z"),
+    #     ended_at: Time.parse("2026-03-27T18:05:03Z")
+    #   }
+    # @example Example – Getting the details of a completed export job
+    #   # The following example retrieves an export job that has finished successfully. The output is available in the destination bucket.
+    #   params = {
+    #     export_job_id: "a1b2c3d4e5f6"
+    #   }
+    #   options = {}
+    #   response = client.get_export_job_v2(params, options)
+    #   response.to_h #=>
+    #   {
+    #     export_job_id: "a1b2c3d4e5f6",
+    #     name: "quarterly-critical-findings",
+    #     status: SUCCEEDED,
+    #     data_type: FINDINGS,
+    #     output_configuration: {
+    #     "Findings" => {
+    #       "Format" => CSV,
+    #       "SelectedFields" => [
+    #         finding_info.title,
+    #         severity,
+    #         status,
+    #         cloud.account.uid,
+    #         resources.uid
+    #       ],
+    #       "Filters" => {
+    #         "CompositeOperator" => AND,
+    #         "CompositeFilters" => [{
+    #           "Operator" => AND,
+    #           "StringFilters" => [
+    #             {
+    #               "FieldName" => severity,
+    #               "Filter" => {
+    #                 "Value" => Critical,
+    #                 "Comparison" => EQUALS
+    #               }
+    #             },
+    #             {
+    #               "FieldName" => status,
+    #               "Filter" => {
+    #                 "Value" => New,
+    #                 "Comparison" => EQUALS
+    #               }
+    #             }
+    #           ]
+    #         }]
+    #       }
+    #     }
+    #   },
+    #     destination: {
+    #     "S3" => {
+    #       "BucketArn" => arn:aws:s3:::amzn-s3-demo-bucket,
+    #       "KmsKeyArn" => arn:aws:kms:aa-example-1:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab,
+    #       "ObjectPrefix" => security-hub-exports/2026-Q1
+    #     }
+    #   },
+    #     started_at: Time.parse("2026-03-27T18:04:11Z"),
+    #     ended_at: Time.parse("2026-03-27T18:09:52Z")
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     export_job_id: "ExportJobId", # required
+    #   }
+    #   options = {}
+    #   response = client.get_export_job_v2(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     export_job_id: "ExportJobId", # required
+    #     name: "ExportName",
+    #     status: "RUNNING" # One of: ["RUNNING", "SUCCEEDED", "FAILED", "CANCELLED"], # required
+    #     data_type: "FINDINGS" # One of: ["FINDINGS"], # required
+    #     output_configuration: {
+    #       # One of:
+    #       findings: {
+    #         format: "CSV" # One of: ["CSV", "OCSF_JSON"], # required
+    #         filters: {
+    #           composite_filters: [
+    #             {
+    #               string_filters: [
+    #                 {
+    #                   field_name: "metadata.uid" # One of: ["metadata.uid", "activity_name", "cloud.account.uid", "cloud.provider", "cloud.region", "compliance.assessments.category", "compliance.assessments.name", "compliance.control", "compliance.status", "compliance.standards", "finding_info.desc", "finding_info.src_url", "finding_info.title", "finding_info.types", "finding_info.uid", "finding_info.related_events.traits.category", "finding_info.related_events.uid", "finding_info.related_events.product.uid", "finding_info.related_events.title", "impact", "likelihood", "metadata.product.name", "metadata.product.uid", "metadata.product.vendor_name", "remediation.desc", "remediation.references", "resources.cloud_partition", "resources.criticality", "resources.name", "resources.owner.account.uid", "resources.owner.org.uid", "resources.owner.account.name", "resources.provider", "resources.region", "resources.type", "resources.uid", "severity", "status", "comment", "vulnerabilities.fix_coverage", "class_name", "databucket.encryption_details.algorithm", "databucket.encryption_details.key_uid", "databucket.file.data_classifications.classifier_details.type", "evidences.actor.user.account.uid", "evidences.api.operation", "evidences.api.response.error_message", "evidences.api.service.name", "evidences.connection_info.direction", "evidences.connection_info.protocol_name", "evidences.dst_endpoint.autonomous_system.name", "evidences.dst_endpoint.location.city", "evidences.dst_endpoint.location.country", "evidences.src_endpoint.autonomous_system.name", "evidences.src_endpoint.hostname", "evidences.src_endpoint.location.city", "evidences.src_endpoint.location.country", "finding_info.analytic.name", "malware.name", "malware_scan_info.uid", "malware.severity", "resources.cloud_function.layers.uid_alt", "resources.cloud_function.runtime", "resources.cloud_function.user.uid", "resources.device.encryption_details.key_uid", "resources.device.image.uid", "resources.image.architecture", "resources.image.registry_uid", "resources.image.repository_name", "resources.image.uid", "resources.subnet_info.uid", "resources.vpc_uid", "vulnerabilities.affected_code.file.path", "vulnerabilities.affected_packages.name", "vulnerabilities.cve.epss.score", "vulnerabilities.cve.uid", "vulnerabilities.related_vulnerabilities", "cloud.account.name", "vendor_attributes.severity"],
+    #                   filter: {
+    #                     value: "NonEmptyString",
+    #                     comparison: "EQUALS" # One of: ["EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "CONTAINS_WORD"]
+    #                   }
+    #                 }
+    #               ],
+    #               date_filters: [
+    #                 {
+    #                   field_name: "finding_info.created_time_dt" # One of: ["finding_info.created_time_dt", "finding_info.first_seen_time_dt", "finding_info.last_seen_time_dt", "finding_info.modified_time_dt", "resources.image.created_time_dt", "resources.image.last_used_time_dt", "resources.modified_time_dt"],
+    #                   filter: {
+    #                     start: "NonEmptyString",
+    #                     end: "NonEmptyString",
+    #                     date_range: {
+    #                       value: 1,
+    #                       unit: "DAYS" # One of: ["DAYS"],
+    #                       comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
+    #                     }
+    #                   }
+    #                 }
+    #               ],
+    #               boolean_filters: [
+    #                 {
+    #                   field_name: "compliance.assessments.meets_criteria" # One of: ["compliance.assessments.meets_criteria", "vulnerabilities.is_exploit_available", "vulnerabilities.is_fix_available"],
+    #                   filter: {
+    #                     value: false
+    #                   }
+    #                 }
+    #               ],
+    #               number_filters: [
+    #                 {
+    #                   field_name: "activity_id" # One of: ["activity_id", "compliance.status_id", "confidence_score", "severity_id", "status_id", "finding_info.related_events_count", "evidences.api.response.code", "evidences.dst_endpoint.autonomous_system.number", "evidences.dst_endpoint.port", "evidences.src_endpoint.autonomous_system.number", "evidences.src_endpoint.port", "resources.image.in_use_count", "vulnerabilities.cve.cvss.base_score", "vendor_attributes.severity_id"],
+    #                   filter: {
+    #                     gte: 1.0,
+    #                     lte: 1.0,
+    #                     eq: 1.0,
+    #                     gt: 1.0,
+    #                     lt: 1.0
+    #                   }
+    #                 }
+    #               ],
+    #               map_filters: [
+    #                 {
+    #                   field_name: "resources.tags" # One of: ["resources.tags", "compliance.control_parameters", "databucket.tags", "finding_info.tags"],
+    #                   filter: {
+    #                     key: "NonEmptyString",
+    #                     value: "NonEmptyString",
+    #                     comparison: "EQUALS" # One of: ["EQUALS", "NOT_EQUALS", "CONTAINS", "NOT_CONTAINS"]
+    #                   }
+    #                 }
+    #               ],
+    #               ip_filters: [
+    #                 {
+    #                   field_name: "evidences.dst_endpoint.ip" # One of: ["evidences.dst_endpoint.ip", "evidences.src_endpoint.ip"],
+    #                   filter: {
+    #                     cidr: "NonEmptyString"
+    #                   }
+    #                 }
+    #               ],
+    #               nested_composite_filters: {
+    #                 # recursive CompositeFilterList
+    #               },
+    #               operator: "AND" # One of: ["AND", "OR"]
+    #             }
+    #           ],
+    #           composite_operator: "AND" # One of: ["AND", "OR"]
+    #         },
+    #         selected_fields: ["metadata.uid" # One of: ["metadata.uid", "activity_name", "cloud.account.name", "cloud.account.uid", "cloud.provider", "cloud.region", "compliance.assessments.category", "compliance.assessments.name", "compliance.control", "compliance.status", "compliance.standards", "finding_info.desc", "finding_info.src_url", "finding_info.title", "finding_info.types", "finding_info.uid", "finding_info.related_events.traits.category", "finding_info.related_events.uid", "finding_info.related_events.product.uid", "finding_info.related_events.title", "metadata.product.feature.uid", "metadata.product.name", "metadata.product.uid", "metadata.product.vendor_name", "remediation.desc", "remediation.references", "resources.cloud_partition", "resources.name", "resources.owner.account.uid", "resources.owner.org.uid", "resources.owner.account.name", "resources.provider", "resources.region", "resources.type", "resources.uid", "severity", "status", "comment", "vulnerabilities.fix_coverage", "class_name", "databucket.encryption_details.algorithm", "databucket.encryption_details.key_uid", "databucket.file.data_classifications.classifier_details.type", "evidences.actor.user.account.uid", "evidences.api.operation", "evidences.api.response.error_message", "evidences.api.service.name", "evidences.connection_info.direction", "evidences.connection_info.protocol_name", "evidences.dst_endpoint.autonomous_system.name", "evidences.dst_endpoint.location.city", "evidences.dst_endpoint.location.country", "evidences.src_endpoint.autonomous_system.name", "evidences.src_endpoint.hostname", "evidences.src_endpoint.location.city", "evidences.src_endpoint.location.country", "finding_info.analytic.name", "malware.name", "malware_scan_info.uid", "malware.severity", "resources.cloud_function.layers.uid_alt", "resources.cloud_function.runtime", "resources.cloud_function.user.uid", "resources.device.encryption_details.key_uid", "resources.device.image.uid", "resources.image.architecture", "resources.image.registry_uid", "resources.image.repository_name", "resources.image.uid", "resources.subnet_info.uid", "resources.vpc_uid", "vulnerabilities.affected_code.file.path", "vulnerabilities.affected_packages.name", "vulnerabilities.cve.cvss.vendor_name", "vulnerabilities.cve.cvss.version", "vulnerabilities.cve.epss.score", "vulnerabilities.cve.uid", "vulnerabilities.related_vulnerabilities", "vendor_attributes.severity", "activity_id", "compliance.status_id", "confidence_score", "severity_id", "status_id", "finding_info.related_events_count", "evidences.api.response.code", "evidences.dst_endpoint.autonomous_system.number", "evidences.dst_endpoint.port", "evidences.src_endpoint.autonomous_system.number", "evidences.src_endpoint.port", "resources.image.in_use_count", "vulnerabilities.cve.cvss.base_score", "vendor_attributes.severity_id", "finding_info.created_time_dt", "finding_info.first_seen_time_dt", "finding_info.last_seen_time_dt", "finding_info.modified_time_dt", "resources.image.created_time_dt", "resources.image.last_used_time_dt", "resources.modified_time_dt", "compliance.assessments.meets_criteria", "vulnerabilities.is_exploit_available", "vulnerabilities.is_fix_available", "resources.tags", "compliance.control_parameters", "databucket.tags", "finding_info.tags", "evidences.dst_endpoint.ip", "evidences.src_endpoint.ip"]]
+    #       }
+    #     },
+    #     scopes: {
+    #       aws_organizations: [
+    #         {
+    #           organization_id: "NonEmptyString",
+    #           organizational_unit_id: "NonEmptyString"
+    #         }
+    #       ]
+    #     },
+    #     destination: { # required
+    #       # One of:
+    #       s3: {
+    #         bucket_arn: "NonEmptyString", # required
+    #         kms_key_arn: "NonEmptyString", # required
+    #         object_prefix: "S3ObjectPrefix"
+    #       }
+    #     },
+    #     failure_code: "ACCESS_DENIED" # One of: ["ACCESS_DENIED", "RESOURCE_NOT_FOUND", "INTERNAL_ERROR"],
+    #     failure_message: "NonEmptyString",
+    #     started_at: Time.now, # required
+    #     ended_at: Time.now
+    #   }
+    # @return [Types::GetExportJobV2Response]
+    def get_export_job_v2(params = {}, options = {})
+      request = build_request(:get_export_job_v2, params)
+      request.send_request(options)
+    end
+
     # <note>
     #             <p>The <i>aggregation Region</i> is now called the <i>home Region</i>.</p>
     #          </note>
-    #          <p>Returns the current configuration in the calling account for cross-Region aggregation. A finding aggregator is a resource that establishes 
+    #          <p>Returns the current configuration in the calling account for cross-Region aggregation. A finding aggregator is a resource that establishes
     # the home Region and any linked Regions.</p>
     # @param [Hash, Types::GetFindingAggregatorRequest] params
     # @option params [String] :finding_aggregator_arn
     #   <p>The ARN of the finding aggregator to return details for. To obtain the ARN, use <code>ListFindingAggregators</code>.</p>
     # @example To get cross-Region aggregation details
-    #   # The following example returns cross-Region aggregation details for the requesting account. 
+    #   # The following example returns cross-Region aggregation details for the requesting account.
     #   params = {
     #     finding_aggregator_arn: "arn:aws:securityhub:us-east-1:123456789012:finding-aggregator/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111"
     #   }
@@ -9752,14 +10605,14 @@ module Aws::SecurityHub
     end
 
     # <p>
-    #          Returns the history of a Security Hub finding. The history includes changes made to any fields in 
-    #          the Amazon Web Services Security Finding Format (ASFF) except top-level timestamp fields, such as the <code>CreatedAt</code> and 
+    #          Returns the history of a Security Hub CSPM finding. The history includes changes made to any fields in
+    #          the Amazon Web Services Security Finding Format (ASFF) except top-level timestamp fields, such as the <code>CreatedAt</code> and
     #          <code>UpdatedAt</code> fields.
     #       </p>
-    #          <p>This operation might return fewer results than the maximum number of results (<code>MaxResults</code>) specified in a request, even 
-    #          when more results are available. If this occurs, the response includes a <code>NextToken</code> value, which you should use to retrieve 
-    #          the next set of results in the response. The presence of a <code>NextToken</code> value in a response doesn't necessarily indicate 
-    #          that the results are incomplete. However, you should continue to specify a <code>NextToken</code> value until you receive a 
+    #          <p>This operation might return fewer results than the maximum number of results (<code>MaxResults</code>) specified in a request, even
+    #          when more results are available. If this occurs, the response includes a <code>NextToken</code> value, which you should use to retrieve
+    #          the next set of results in the response. The presence of a <code>NextToken</code> value in a response doesn't necessarily indicate
+    #          that the results are incomplete. However, you should continue to specify a <code>NextToken</code> value until you receive a
     #          response that doesn't include this value.</p>
     # @param [Hash, Types::GetFindingHistoryRequest] params
     # @option params [Types::AwsSecurityFindingIdentifier] :finding_identifier
@@ -9767,35 +10620,35 @@ module Aws::SecurityHub
     # @option params [Time] :start_time
     #   <p>A timestamp that indicates the start time of the requested finding history.</p>
     #            <p>If you provide values for both <code>StartTime</code> and <code>EndTime</code>,
-    #                   Security Hub returns finding history for the specified time period. If you
-    #               provide a value for <code>StartTime</code> but not for <code>EndTime</code>, Security Hub returns finding history from the <code>StartTime</code> to the time at
+    #                   Security Hub CSPM returns finding history for the specified time period. If you
+    #               provide a value for <code>StartTime</code> but not for <code>EndTime</code>, Security Hub CSPM returns finding history from the <code>StartTime</code> to the time at
     #               which the API is called. If you provide a value for <code>EndTime</code> but not for
-    #                   <code>StartTime</code>, Security Hub returns finding history from the <a href="https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AwsSecurityFindingFilters.html#securityhub-Type-AwsSecurityFindingFilters-CreatedAt">CreatedAt</a> timestamp of the finding to the <code>EndTime</code>. If you
-    #               provide neither <code>StartTime</code> nor <code>EndTime</code>, Security Hub
+    #                   <code>StartTime</code>, Security Hub CSPM returns finding history from the <a href="https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AwsSecurityFindingFilters.html#securityhub-Type-AwsSecurityFindingFilters-CreatedAt">CreatedAt</a> timestamp of the finding to the <code>EndTime</code>. If you
+    #               provide neither <code>StartTime</code> nor <code>EndTime</code>, Security Hub CSPM
     #               returns finding history from the <code>CreatedAt</code> timestamp of the finding to the time at which
     #               the API is called. In all of these scenarios, the response is limited to 100 results.</p>
-    #            <p>For more information about the validation and formatting of timestamp fields in Security Hub, see <a href="https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps">Timestamps</a>.</p>
+    #            <p>For more information about the validation and formatting of timestamp fields in Security Hub CSPM, see <a href="https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps">Timestamps</a>.</p>
     # @option params [Time] :end_time
     #   <p>
     #            An ISO 8601-formatted timestamp that indicates the end time of the requested finding history.</p>
     #            <p>If you provide values for both <code>StartTime</code> and <code>EndTime</code>,
-    #                   Security Hub returns finding history for the specified time period. If you
-    #               provide a value for <code>StartTime</code> but not for <code>EndTime</code>, Security Hub returns finding history from the <code>StartTime</code> to the time at
+    #                   Security Hub CSPM returns finding history for the specified time period. If you
+    #               provide a value for <code>StartTime</code> but not for <code>EndTime</code>, Security Hub CSPM returns finding history from the <code>StartTime</code> to the time at
     #               which the API is called. If you provide a value for <code>EndTime</code> but not for
-    #                   <code>StartTime</code>, Security Hub returns finding history from the <a href="https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AwsSecurityFindingFilters.html#securityhub-Type-AwsSecurityFindingFilters-CreatedAt">CreatedAt</a> timestamp of the finding to the <code>EndTime</code>. If you
-    #               provide neither <code>StartTime</code> nor <code>EndTime</code>, Security Hub
+    #                   <code>StartTime</code>, Security Hub CSPM returns finding history from the <a href="https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AwsSecurityFindingFilters.html#securityhub-Type-AwsSecurityFindingFilters-CreatedAt">CreatedAt</a> timestamp of the finding to the <code>EndTime</code>. If you
+    #               provide neither <code>StartTime</code> nor <code>EndTime</code>, Security Hub CSPM
     #               returns finding history from the <code>CreatedAt</code> timestamp of the finding to the time at which
     #               the API is called. In all of these scenarios, the response is limited to 100 results.</p>
-    #            <p>For more information about the validation and formatting of timestamp fields in Security Hub, see <a href="https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps">Timestamps</a>.</p>
+    #            <p>For more information about the validation and formatting of timestamp fields in Security Hub CSPM, see <a href="https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps">Timestamps</a>.</p>
     # @option params [String] :next_token
     #   <p>
-    #            A token for pagination purposes. Provide <code>NULL</code> as the initial value. In subsequent requests, provide the 
-    #            token included in the response to get up to an additional 100 results of finding history. If you don’t provide 
-    #            <code>NextToken</code>, Security Hub returns up to 100 results of finding history for each request.
+    #            A token for pagination purposes. Provide <code>NULL</code> as the initial value. In subsequent requests, provide the
+    #            token included in the response to get up to an additional 100 results of finding history. If you don’t provide
+    #            <code>NextToken</code>, Security Hub CSPM returns up to 100 results of finding history for each request.
     #         </p>
     # @option params [Integer] :max_results
     #   <p>
-    #            The maximum number of results to be returned. If you don’t provide it, Security Hub returns up to 100 results of finding history.
+    #            The maximum number of results to be returned. If you don’t provide it, Security Hub CSPM returns up to 100 results of finding history.
     #         </p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -9843,15 +10696,22 @@ module Aws::SecurityHub
       request.send_request(options)
     end
 
-    # <p>Returns aggregated statistical data about findings.
-    #          <code>GetFindingStatisticsV2</code> use <code>securityhub:GetAdhocInsightResults</code> in the <code>Action</code> element of an IAM policy statement. 
-    #          You must have permission to perform the <code>s</code> action. This API is in private preview and subject to change.</p>
+    # <p>Returns aggregated statistical data about findings.</p>
+    #          <p>You can use the <code>Scopes</code> parameter to define the data boundary for the query. Currently, <code>Scopes</code> supports <code>AwsOrganizations</code>, which lets you aggregate findings from your entire organization or from specific organizational units. Only the delegated administrator account can use <code>Scopes</code>.</p>
+    #          <p>
+    #             <code>GetFindingStatisticsV2</code> uses <code>securityhub:GetAdhocInsightResults</code> in the <code>Action</code> element of an IAM policy statement.
+    #          You must have permission to perform the <code>securityhub:GetAdhocInsightResults</code> action.</p>
     # @param [Hash, Types::GetFindingStatisticsV2Request] params
     # @option params [Array<Types::GroupByRule>] :group_by_rules
-    #   <p>Specifies how security findings should be aggregated and organized in the statistical analysis. 
+    #   <p>Specifies how security findings should be aggregated and organized in the statistical analysis.
     #         It can accept up to 5 <code>groupBy</code> fields in a single call.</p>
+    # @option params [Types::FindingScopes] :scopes
+    #   <p>Limits the results to findings from specific organizational units or from the delegated administrator's organization.
+    #            Only the delegated administrator account can use this parameter. Other accounts receive an <code>AccessDeniedException</code>.</p>
+    #            <p>This parameter is optional. If you omit it, the delegated administrator sees statistics from all accounts across the entire organization. Other accounts see only statistics for their own findings.</p>
+    #            <p>You can specify up to 10 entries in <code>Scopes.AwsOrganizations</code>. If multiple entries are specified, the entries are combined using OR logic.</p>
     # @option params [String] :sort_order
-    #   <p>Orders the aggregation count in descending or ascending order. 
+    #   <p>Orders the aggregation count in descending or ascending order.
     #            Descending order is the default.</p>
     # @option params [Integer] :max_statistic_results
     #   <p>The maximum number of results to be returned.</p>
@@ -9864,7 +10724,7 @@ module Aws::SecurityHub
     #             {
     #               string_filters: [
     #                 {
-    #                   field_name: "metadata.uid" # One of: ["metadata.uid", "activity_name", "cloud.account.uid", "cloud.provider", "cloud.region", "compliance.assessments.category", "compliance.assessments.name", "compliance.control", "compliance.status", "compliance.standards", "finding_info.desc", "finding_info.src_url", "finding_info.title", "finding_info.types", "finding_info.uid", "finding_info.related_events.uid", "finding_info.related_events.product.uid", "finding_info.related_events.title", "metadata.product.name", "metadata.product.uid", "metadata.product.vendor_name", "remediation.desc", "remediation.references", "resources.cloud_partition", "resources.region", "resources.type", "resources.uid", "severity", "status", "comment", "vulnerabilities.fix_coverage", "class_name"],
+    #                   field_name: "metadata.uid" # One of: ["metadata.uid", "activity_name", "cloud.account.uid", "cloud.provider", "cloud.region", "compliance.assessments.category", "compliance.assessments.name", "compliance.control", "compliance.status", "compliance.standards", "finding_info.desc", "finding_info.src_url", "finding_info.title", "finding_info.types", "finding_info.uid", "finding_info.related_events.traits.category", "finding_info.related_events.uid", "finding_info.related_events.product.uid", "finding_info.related_events.title", "impact", "likelihood", "metadata.product.name", "metadata.product.uid", "metadata.product.vendor_name", "remediation.desc", "remediation.references", "resources.cloud_partition", "resources.criticality", "resources.name", "resources.owner.account.uid", "resources.owner.org.uid", "resources.owner.account.name", "resources.provider", "resources.region", "resources.type", "resources.uid", "severity", "status", "comment", "vulnerabilities.fix_coverage", "class_name", "databucket.encryption_details.algorithm", "databucket.encryption_details.key_uid", "databucket.file.data_classifications.classifier_details.type", "evidences.actor.user.account.uid", "evidences.api.operation", "evidences.api.response.error_message", "evidences.api.service.name", "evidences.connection_info.direction", "evidences.connection_info.protocol_name", "evidences.dst_endpoint.autonomous_system.name", "evidences.dst_endpoint.location.city", "evidences.dst_endpoint.location.country", "evidences.src_endpoint.autonomous_system.name", "evidences.src_endpoint.hostname", "evidences.src_endpoint.location.city", "evidences.src_endpoint.location.country", "finding_info.analytic.name", "malware.name", "malware_scan_info.uid", "malware.severity", "resources.cloud_function.layers.uid_alt", "resources.cloud_function.runtime", "resources.cloud_function.user.uid", "resources.device.encryption_details.key_uid", "resources.device.image.uid", "resources.image.architecture", "resources.image.registry_uid", "resources.image.repository_name", "resources.image.uid", "resources.subnet_info.uid", "resources.vpc_uid", "vulnerabilities.affected_code.file.path", "vulnerabilities.affected_packages.name", "vulnerabilities.cve.epss.score", "vulnerabilities.cve.uid", "vulnerabilities.related_vulnerabilities", "cloud.account.name", "vendor_attributes.severity"],
     #                   filter: {
     #                     value: "NonEmptyString",
     #                     comparison: "EQUALS" # One of: ["EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "CONTAINS_WORD"]
@@ -9873,13 +10733,14 @@ module Aws::SecurityHub
     #               ],
     #               date_filters: [
     #                 {
-    #                   field_name: "finding_info.created_time_dt" # One of: ["finding_info.created_time_dt", "finding_info.first_seen_time_dt", "finding_info.last_seen_time_dt", "finding_info.modified_time_dt"],
+    #                   field_name: "finding_info.created_time_dt" # One of: ["finding_info.created_time_dt", "finding_info.first_seen_time_dt", "finding_info.last_seen_time_dt", "finding_info.modified_time_dt", "resources.image.created_time_dt", "resources.image.last_used_time_dt", "resources.modified_time_dt"],
     #                   filter: {
     #                     start: "NonEmptyString",
     #                     end: "NonEmptyString",
     #                     date_range: {
     #                       value: 1,
-    #                       unit: "DAYS" # One of: ["DAYS"]
+    #                       unit: "DAYS" # One of: ["DAYS"],
+    #                       comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #                     }
     #                   }
     #                 }
@@ -9894,7 +10755,7 @@ module Aws::SecurityHub
     #               ],
     #               number_filters: [
     #                 {
-    #                   field_name: "activity_id" # One of: ["activity_id", "compliance.status_id", "confidence_score", "severity_id", "status_id", "finding_info.related_events_count"],
+    #                   field_name: "activity_id" # One of: ["activity_id", "compliance.status_id", "confidence_score", "severity_id", "status_id", "finding_info.related_events_count", "evidences.api.response.code", "evidences.dst_endpoint.autonomous_system.number", "evidences.dst_endpoint.port", "evidences.src_endpoint.autonomous_system.number", "evidences.src_endpoint.port", "resources.image.in_use_count", "vulnerabilities.cve.cvss.base_score", "vendor_attributes.severity_id"],
     #                   filter: {
     #                     gte: 1.0,
     #                     lte: 1.0,
@@ -9906,7 +10767,7 @@ module Aws::SecurityHub
     #               ],
     #               map_filters: [
     #                 {
-    #                   field_name: "resources.tags" # One of: ["resources.tags"],
+    #                   field_name: "resources.tags" # One of: ["resources.tags", "compliance.control_parameters", "databucket.tags", "finding_info.tags"],
     #                   filter: {
     #                     key: "NonEmptyString",
     #                     value: "NonEmptyString",
@@ -9914,14 +10775,33 @@ module Aws::SecurityHub
     #                   }
     #                 }
     #               ],
+    #               ip_filters: [
+    #                 {
+    #                   field_name: "evidences.dst_endpoint.ip" # One of: ["evidences.dst_endpoint.ip", "evidences.src_endpoint.ip"],
+    #                   filter: {
+    #                     cidr: "NonEmptyString"
+    #                   }
+    #                 }
+    #               ],
+    #               nested_composite_filters: {
+    #                 # recursive CompositeFilterList
+    #               },
     #               operator: "AND" # One of: ["AND", "OR"]
     #             }
     #           ],
     #           composite_operator: "AND" # One of: ["AND", "OR"]
     #         },
-    #         group_by_field: "activity_name" # One of: ["activity_name", "cloud.account.uid", "cloud.provider", "cloud.region", "compliance.assessments.name", "compliance.status", "compliance.control", "finding_info.title", "finding_info.types", "metadata.product.name", "metadata.product.uid", "resources.type", "resources.uid", "severity", "status", "vulnerabilities.fix_coverage", "class_name"], # required
+    #         group_by_field: "activity_name" # One of: ["activity_name", "cloud.account.uid", "cloud.provider", "cloud.region", "compliance.assessments.name", "compliance.status", "compliance.control", "finding_info.title", "finding_info.related_events.traits.category", "finding_info.types", "impact", "likelihood", "metadata.product.name", "metadata.product.uid", "resources.type", "resources.cloud_partition", "resources.criticality", "resources.name", "resources.owner.account.uid", "resources.owner.org.uid", "resources.owner.account.name", "resources.provider", "resources.region", "resources.uid", "severity", "status", "vulnerabilities.fix_coverage", "class_name", "vulnerabilities.affected_packages.name", "finding_info.analytic.name", "compliance.standards", "cloud.account.name", "vendor_attributes.severity", "metadata.product.vendor_name"], # required
     #       }
     #     ],
+    #     scopes: {
+    #       aws_organizations: [
+    #         {
+    #           organization_id: "NonEmptyString",
+    #           organizational_unit_id: "NonEmptyString"
+    #         }
+    #       ]
+    #     },
     #     sort_order: "asc" # One of: ["asc", "desc"],
     #     max_statistic_results: 1
     #   }
@@ -10119,7 +10999,8 @@ module Aws::SecurityHub
     #           end: "NonEmptyString",
     #           date_range: {
     #             value: 1,
-    #             unit: "DAYS" # One of: ["DAYS"]
+    #             unit: "DAYS" # One of: ["DAYS"],
+    #             comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #           }
     #         }
     #       ],
@@ -10129,7 +11010,8 @@ module Aws::SecurityHub
     #           end: "NonEmptyString",
     #           date_range: {
     #             value: 1,
-    #             unit: "DAYS" # One of: ["DAYS"]
+    #             unit: "DAYS" # One of: ["DAYS"],
+    #             comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #           }
     #         }
     #       ],
@@ -10139,7 +11021,8 @@ module Aws::SecurityHub
     #           end: "NonEmptyString",
     #           date_range: {
     #             value: 1,
-    #             unit: "DAYS" # One of: ["DAYS"]
+    #             unit: "DAYS" # One of: ["DAYS"],
+    #             comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #           }
     #         }
     #       ],
@@ -10149,7 +11032,8 @@ module Aws::SecurityHub
     #           end: "NonEmptyString",
     #           date_range: {
     #             value: 1,
-    #             unit: "DAYS" # One of: ["DAYS"]
+    #             unit: "DAYS" # One of: ["DAYS"],
+    #             comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #           }
     #         }
     #       ],
@@ -10373,7 +11257,8 @@ module Aws::SecurityHub
     #           end: "NonEmptyString",
     #           date_range: {
     #             value: 1,
-    #             unit: "DAYS" # One of: ["DAYS"]
+    #             unit: "DAYS" # One of: ["DAYS"],
+    #             comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #           }
     #         }
     #       ],
@@ -10383,7 +11268,8 @@ module Aws::SecurityHub
     #           end: "NonEmptyString",
     #           date_range: {
     #             value: 1,
-    #             unit: "DAYS" # One of: ["DAYS"]
+    #             unit: "DAYS" # One of: ["DAYS"],
+    #             comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #           }
     #         }
     #       ],
@@ -10411,7 +11297,8 @@ module Aws::SecurityHub
     #           end: "NonEmptyString",
     #           date_range: {
     #             value: 1,
-    #             unit: "DAYS" # One of: ["DAYS"]
+    #             unit: "DAYS" # One of: ["DAYS"],
+    #             comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #           }
     #         }
     #       ],
@@ -10510,7 +11397,8 @@ module Aws::SecurityHub
     #           end: "NonEmptyString",
     #           date_range: {
     #             value: 1,
-    #             unit: "DAYS" # One of: ["DAYS"]
+    #             unit: "DAYS" # One of: ["DAYS"],
+    #             comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #           }
     #         }
     #       ],
@@ -10550,7 +11438,8 @@ module Aws::SecurityHub
     #           end: "NonEmptyString",
     #           date_range: {
     #             value: 1,
-    #             unit: "DAYS" # One of: ["DAYS"]
+    #             unit: "DAYS" # One of: ["DAYS"],
+    #             comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #           }
     #         }
     #       ],
@@ -10584,7 +11473,8 @@ module Aws::SecurityHub
     #           end: "NonEmptyString",
     #           date_range: {
     #             value: 1,
-    #             unit: "DAYS" # One of: ["DAYS"]
+    #             unit: "DAYS" # One of: ["DAYS"],
+    #             comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #           }
     #         }
     #       ],
@@ -10649,7 +11539,8 @@ module Aws::SecurityHub
     #           end: "NonEmptyString",
     #           date_range: {
     #             value: 1,
-    #             unit: "DAYS" # One of: ["DAYS"]
+    #             unit: "DAYS" # One of: ["DAYS"],
+    #             comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #           }
     #         }
     #       ],
@@ -10766,6 +11657,24 @@ module Aws::SecurityHub
     #         }
     #       ],
     #       resource_application_arn: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS" # One of: ["EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "CONTAINS_WORD"]
+    #         }
+    #       ],
+    #       resource_owner_account_id: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS" # One of: ["EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "CONTAINS_WORD"]
+    #         }
+    #       ],
+    #       resource_owner_org_id: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS" # One of: ["EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "CONTAINS_WORD"]
+    #         }
+    #       ],
+    #       resource_provider: [
     #         {
     #           value: "NonEmptyString",
     #           comparison: "EQUALS" # One of: ["EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "CONTAINS_WORD"]
@@ -10934,8 +11843,17 @@ module Aws::SecurityHub
     #           {
     #             type: "NonEmptyString", # required
     #             id: "NonEmptyString", # required
-    #             partition: "aws" # One of: ["aws", "aws-cn", "aws-us-gov"],
+    #             partition: "aws" # One of: ["aws", "aws-cn", "aws-us-gov", "aws-us-iso", "aws-us-iso-b", "AzureCloud"],
     #             region: "NonEmptyString",
+    #             provider: "Azure" # One of: ["Azure", "AWS"],
+    #             owner: {
+    #               account: {
+    #                 id: "NonEmptyString"
+    #               },
+    #               org: {
+    #                 id: "NonEmptyString"
+    #               }
+    #             },
     #             resource_role: "NonEmptyString",
     #             tags: {
     #               "NonEmptyString" => "NonEmptyString"
@@ -14755,7 +15673,8 @@ module Aws::SecurityHub
     #                 provider_type: "NonEmptyString",
     #                 project_name: "NonEmptyString",
     #                 code_security_integration_arn: "NonEmptyString"
-    #               }
+    #               },
+    #               azure_resource: ""null""
     #             },
     #             application_name: "NonEmptyString",
     #             application_arn: "NonEmptyString"
@@ -15094,20 +16013,98 @@ module Aws::SecurityHub
       request.send_request(options)
     end
 
-    # <p>Return a list of findings that match the specified criteria.
-    #       <code>GetFindings</code> and <code>GetFindingsV2</code> both use <code>securityhub:GetFindings</code> in the <code>Action</code> element of an IAM policy statement. 
-    #          You must have permission to perform the <code>securityhub:GetFindings</code> action. This API is in private preview and subject to change.</p>
+    # <p>Returns findings trend data based on the specified criteria. This operation helps you analyze patterns and changes in findings over time.</p>
+    # @param [Hash, Types::GetFindingsTrendsV2Request] params
+    # @option params [Types::FindingsTrendsFilters] :filters
+    #   <p>The filters to apply to the findings trend data.</p>
+    # @option params [Time] :start_time
+    #   <p>The starting timestamp for the time period to analyze findings trends, in ISO 8601 format.</p>
+    # @option params [Time] :end_time
+    #   <p>The ending timestamp for the time period to analyze findings trends, in ISO 8601 format.</p>
+    # @option params [String] :next_token
+    #   <p>The token to use for paginating results. This value is returned in the response if more results are available.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of trend data points to return in a single response.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     filters: {
+    #       composite_filters: [
+    #         {
+    #           string_filters: [
+    #             {
+    #               field_name: "account_id" # One of: ["account_id", "region", "finding_types", "finding_status", "finding_cve_ids", "finding_compliance_status", "finding_control_id", "finding_class_name", "finding_provider", "finding_activity_name", "resource_cloud_providers", "resource_regions", "resource_owner_ids", "resource_owner_organization_ids"],
+    #               filter: {
+    #                 value: "NonEmptyString",
+    #                 comparison: "EQUALS" # One of: ["EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "CONTAINS_WORD"]
+    #               }
+    #             }
+    #           ],
+    #           nested_composite_filters: {
+    #             # recursive FindingsTrendsCompositeFilterList
+    #           },
+    #           operator: "AND" # One of: ["AND", "OR"]
+    #         }
+    #       ],
+    #       composite_operator: "AND" # One of: ["AND", "OR"]
+    #     },
+    #     start_time: Time.now, # required
+    #     end_time: Time.now, # required
+    #     next_token: "NextToken",
+    #     max_results: 1
+    #   }
+    #   options = {}
+    #   response = client.get_findings_trends_v2(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     granularity: "Daily" # One of: ["Daily", "Weekly", "Monthly"], # required
+    #     trends_metrics: [ # required
+    #       {
+    #         timestamp: Time.now, # required
+    #         trends_values: { # required
+    #           severity_trends: { # required
+    #             unknown: 1, # required
+    #             informational: 1, # required
+    #             low: 1, # required
+    #             medium: 1, # required
+    #             high: 1, # required
+    #             critical: 1, # required
+    #             fatal: 1, # required
+    #             other: 1, # required
+    #           }
+    #         }
+    #       }
+    #     ],
+    #     next_token: "NextToken"
+    #   }
+    # @return [Types::GetFindingsTrendsV2Response]
+    def get_findings_trends_v2(params = {}, options = {})
+      request = build_request(:get_findings_trends_v2, params)
+      request.send_request(options)
+    end
+
+    # <p>Returns a list of findings that match the specified criteria.</p>
+    #          <p>You can use the <code>Scopes</code> parameter to define the data boundary for the query. Currently, <code>Scopes</code> supports <code>AwsOrganizations</code>, which lets you retrieve findings from your entire organization or from specific organizational units. Only the delegated administrator account can use <code>Scopes</code>.</p>
+    #          <p>You can use the <code>Filters</code> parameter to refine results based on finding attributes. You can use <code>Scopes</code> and <code>Filters</code> independently or together. When both are provided, <code>Scopes</code> narrows the data set first, and then <code>Filters</code> refines results within that scoped data set.</p>
+    #          <p>
+    #             <code>GetFindings</code> and <code>GetFindingsV2</code> both use <code>securityhub:GetFindings</code> in the <code>Action</code> element of an IAM policy statement.
+    #          You must have permission to perform the <code>securityhub:GetFindings</code> action.</p>
     # @param [Hash, Types::GetFindingsV2Request] params
     # @option params [Types::OcsfFindingFilters] :filters
-    #   <p>The finding attributes used to define a condition to filter the returned OCSF findings. 
-    #            You can filter up to 10 composite filters. 
+    #   <p>The finding attributes used to define a condition to filter the returned OCSF findings.
+    #            You can filter up to 10 composite filters.
     #            For each filter type inside of a composite filter, you can provide up to 20 filters.</p>
+    # @option params [Types::FindingScopes] :scopes
+    #   <p>Limits the results to findings from specific organizational units or from the delegated administrator's organization.
+    #            Only the delegated administrator account can use this parameter. Other accounts receive an <code>AccessDeniedException</code>.</p>
+    #            <p>This parameter is optional. If you omit it, the delegated administrator sees findings from all accounts across the entire organization. Other accounts see only their own findings.</p>
+    #            <p>You can specify up to 10 entries in <code>Scopes.AwsOrganizations</code>. If multiple entries are specified, the entries are combined using OR logic.</p>
     # @option params [Array<Types::SortCriterion>] :sort_criteria
     #   <p>The finding attributes used to sort the list of returned findings.</p>
     # @option params [String] :next_token
     #   <p>
-    #            The token required for pagination. 
-    #            On your first call, set the value of this parameter to <code>NULL</code>. 
+    #            The token required for pagination.
+    #            On your first call, set the value of this parameter to <code>NULL</code>.
     #            For subsequent calls, to continue listing data, set the value of this parameter to the value returned in the previous response.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return.</p>
@@ -15118,7 +16115,7 @@ module Aws::SecurityHub
     #         {
     #           string_filters: [
     #             {
-    #               field_name: "metadata.uid" # One of: ["metadata.uid", "activity_name", "cloud.account.uid", "cloud.provider", "cloud.region", "compliance.assessments.category", "compliance.assessments.name", "compliance.control", "compliance.status", "compliance.standards", "finding_info.desc", "finding_info.src_url", "finding_info.title", "finding_info.types", "finding_info.uid", "finding_info.related_events.uid", "finding_info.related_events.product.uid", "finding_info.related_events.title", "metadata.product.name", "metadata.product.uid", "metadata.product.vendor_name", "remediation.desc", "remediation.references", "resources.cloud_partition", "resources.region", "resources.type", "resources.uid", "severity", "status", "comment", "vulnerabilities.fix_coverage", "class_name"],
+    #               field_name: "metadata.uid" # One of: ["metadata.uid", "activity_name", "cloud.account.uid", "cloud.provider", "cloud.region", "compliance.assessments.category", "compliance.assessments.name", "compliance.control", "compliance.status", "compliance.standards", "finding_info.desc", "finding_info.src_url", "finding_info.title", "finding_info.types", "finding_info.uid", "finding_info.related_events.traits.category", "finding_info.related_events.uid", "finding_info.related_events.product.uid", "finding_info.related_events.title", "impact", "likelihood", "metadata.product.name", "metadata.product.uid", "metadata.product.vendor_name", "remediation.desc", "remediation.references", "resources.cloud_partition", "resources.criticality", "resources.name", "resources.owner.account.uid", "resources.owner.org.uid", "resources.owner.account.name", "resources.provider", "resources.region", "resources.type", "resources.uid", "severity", "status", "comment", "vulnerabilities.fix_coverage", "class_name", "databucket.encryption_details.algorithm", "databucket.encryption_details.key_uid", "databucket.file.data_classifications.classifier_details.type", "evidences.actor.user.account.uid", "evidences.api.operation", "evidences.api.response.error_message", "evidences.api.service.name", "evidences.connection_info.direction", "evidences.connection_info.protocol_name", "evidences.dst_endpoint.autonomous_system.name", "evidences.dst_endpoint.location.city", "evidences.dst_endpoint.location.country", "evidences.src_endpoint.autonomous_system.name", "evidences.src_endpoint.hostname", "evidences.src_endpoint.location.city", "evidences.src_endpoint.location.country", "finding_info.analytic.name", "malware.name", "malware_scan_info.uid", "malware.severity", "resources.cloud_function.layers.uid_alt", "resources.cloud_function.runtime", "resources.cloud_function.user.uid", "resources.device.encryption_details.key_uid", "resources.device.image.uid", "resources.image.architecture", "resources.image.registry_uid", "resources.image.repository_name", "resources.image.uid", "resources.subnet_info.uid", "resources.vpc_uid", "vulnerabilities.affected_code.file.path", "vulnerabilities.affected_packages.name", "vulnerabilities.cve.epss.score", "vulnerabilities.cve.uid", "vulnerabilities.related_vulnerabilities", "cloud.account.name", "vendor_attributes.severity"],
     #               filter: {
     #                 value: "NonEmptyString",
     #                 comparison: "EQUALS" # One of: ["EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "CONTAINS_WORD"]
@@ -15127,13 +16124,14 @@ module Aws::SecurityHub
     #           ],
     #           date_filters: [
     #             {
-    #               field_name: "finding_info.created_time_dt" # One of: ["finding_info.created_time_dt", "finding_info.first_seen_time_dt", "finding_info.last_seen_time_dt", "finding_info.modified_time_dt"],
+    #               field_name: "finding_info.created_time_dt" # One of: ["finding_info.created_time_dt", "finding_info.first_seen_time_dt", "finding_info.last_seen_time_dt", "finding_info.modified_time_dt", "resources.image.created_time_dt", "resources.image.last_used_time_dt", "resources.modified_time_dt"],
     #               filter: {
     #                 start: "NonEmptyString",
     #                 end: "NonEmptyString",
     #                 date_range: {
     #                   value: 1,
-    #                   unit: "DAYS" # One of: ["DAYS"]
+    #                   unit: "DAYS" # One of: ["DAYS"],
+    #                   comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #                 }
     #               }
     #             }
@@ -15148,7 +16146,7 @@ module Aws::SecurityHub
     #           ],
     #           number_filters: [
     #             {
-    #               field_name: "activity_id" # One of: ["activity_id", "compliance.status_id", "confidence_score", "severity_id", "status_id", "finding_info.related_events_count"],
+    #               field_name: "activity_id" # One of: ["activity_id", "compliance.status_id", "confidence_score", "severity_id", "status_id", "finding_info.related_events_count", "evidences.api.response.code", "evidences.dst_endpoint.autonomous_system.number", "evidences.dst_endpoint.port", "evidences.src_endpoint.autonomous_system.number", "evidences.src_endpoint.port", "resources.image.in_use_count", "vulnerabilities.cve.cvss.base_score", "vendor_attributes.severity_id"],
     #               filter: {
     #                 gte: 1.0,
     #                 lte: 1.0,
@@ -15160,7 +16158,7 @@ module Aws::SecurityHub
     #           ],
     #           map_filters: [
     #             {
-    #               field_name: "resources.tags" # One of: ["resources.tags"],
+    #               field_name: "resources.tags" # One of: ["resources.tags", "compliance.control_parameters", "databucket.tags", "finding_info.tags"],
     #               filter: {
     #                 key: "NonEmptyString",
     #                 value: "NonEmptyString",
@@ -15168,10 +16166,29 @@ module Aws::SecurityHub
     #               }
     #             }
     #           ],
+    #           ip_filters: [
+    #             {
+    #               field_name: "evidences.dst_endpoint.ip" # One of: ["evidences.dst_endpoint.ip", "evidences.src_endpoint.ip"],
+    #               filter: {
+    #                 cidr: "NonEmptyString"
+    #               }
+    #             }
+    #           ],
+    #           nested_composite_filters: {
+    #             # recursive CompositeFilterList
+    #           },
     #           operator: "AND" # One of: ["AND", "OR"]
     #         }
     #       ],
     #       composite_operator: "AND" # One of: ["AND", "OR"]
+    #     },
+    #     scopes: {
+    #       aws_organizations: [
+    #         {
+    #           organization_id: "NonEmptyString",
+    #           organizational_unit_id: "NonEmptyString"
+    #         }
+    #       ]
     #     },
     #     sort_criteria: [
     #       {
@@ -15196,7 +16213,7 @@ module Aws::SecurityHub
       request.send_request(options)
     end
 
-    # <p>Lists the results of the Security Hub insight specified by the insight ARN.</p>
+    # <p>Lists the results of the Security Hub CSPM insight specified by the insight ARN.</p>
     # @param [Hash, Types::GetInsightResultsRequest] params
     # @option params [String] :insight_arn
     #   <p>The ARN of the insight for which to return results.</p>
@@ -15355,7 +16372,8 @@ module Aws::SecurityHub
     #               end: "NonEmptyString",
     #               date_range: {
     #                 value: 1,
-    #                 unit: "DAYS" # One of: ["DAYS"]
+    #                 unit: "DAYS" # One of: ["DAYS"],
+    #                 comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #               }
     #             }
     #           ],
@@ -15365,7 +16383,8 @@ module Aws::SecurityHub
     #               end: "NonEmptyString",
     #               date_range: {
     #                 value: 1,
-    #                 unit: "DAYS" # One of: ["DAYS"]
+    #                 unit: "DAYS" # One of: ["DAYS"],
+    #                 comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #               }
     #             }
     #           ],
@@ -15375,7 +16394,8 @@ module Aws::SecurityHub
     #               end: "NonEmptyString",
     #               date_range: {
     #                 value: 1,
-    #                 unit: "DAYS" # One of: ["DAYS"]
+    #                 unit: "DAYS" # One of: ["DAYS"],
+    #                 comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #               }
     #             }
     #           ],
@@ -15385,7 +16405,8 @@ module Aws::SecurityHub
     #               end: "NonEmptyString",
     #               date_range: {
     #                 value: 1,
-    #                 unit: "DAYS" # One of: ["DAYS"]
+    #                 unit: "DAYS" # One of: ["DAYS"],
+    #                 comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #               }
     #             }
     #           ],
@@ -15609,7 +16630,8 @@ module Aws::SecurityHub
     #               end: "NonEmptyString",
     #               date_range: {
     #                 value: 1,
-    #                 unit: "DAYS" # One of: ["DAYS"]
+    #                 unit: "DAYS" # One of: ["DAYS"],
+    #                 comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #               }
     #             }
     #           ],
@@ -15619,7 +16641,8 @@ module Aws::SecurityHub
     #               end: "NonEmptyString",
     #               date_range: {
     #                 value: 1,
-    #                 unit: "DAYS" # One of: ["DAYS"]
+    #                 unit: "DAYS" # One of: ["DAYS"],
+    #                 comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #               }
     #             }
     #           ],
@@ -15647,7 +16670,8 @@ module Aws::SecurityHub
     #               end: "NonEmptyString",
     #               date_range: {
     #                 value: 1,
-    #                 unit: "DAYS" # One of: ["DAYS"]
+    #                 unit: "DAYS" # One of: ["DAYS"],
+    #                 comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #               }
     #             }
     #           ],
@@ -15746,7 +16770,8 @@ module Aws::SecurityHub
     #               end: "NonEmptyString",
     #               date_range: {
     #                 value: 1,
-    #                 unit: "DAYS" # One of: ["DAYS"]
+    #                 unit: "DAYS" # One of: ["DAYS"],
+    #                 comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #               }
     #             }
     #           ],
@@ -15786,7 +16811,8 @@ module Aws::SecurityHub
     #               end: "NonEmptyString",
     #               date_range: {
     #                 value: 1,
-    #                 unit: "DAYS" # One of: ["DAYS"]
+    #                 unit: "DAYS" # One of: ["DAYS"],
+    #                 comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #               }
     #             }
     #           ],
@@ -15820,7 +16846,8 @@ module Aws::SecurityHub
     #               end: "NonEmptyString",
     #               date_range: {
     #                 value: 1,
-    #                 unit: "DAYS" # One of: ["DAYS"]
+    #                 unit: "DAYS" # One of: ["DAYS"],
+    #                 comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #               }
     #             }
     #           ],
@@ -15885,7 +16912,8 @@ module Aws::SecurityHub
     #               end: "NonEmptyString",
     #               date_range: {
     #                 value: 1,
-    #                 unit: "DAYS" # One of: ["DAYS"]
+    #                 unit: "DAYS" # One of: ["DAYS"],
+    #                 comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #               }
     #             }
     #           ],
@@ -16006,6 +17034,24 @@ module Aws::SecurityHub
     #               value: "NonEmptyString",
     #               comparison: "EQUALS" # One of: ["EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "CONTAINS_WORD"]
     #             }
+    #           ],
+    #           resource_owner_account_id: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS" # One of: ["EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "CONTAINS_WORD"]
+    #             }
+    #           ],
+    #           resource_owner_org_id: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS" # One of: ["EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "CONTAINS_WORD"]
+    #             }
+    #           ],
+    #           resource_provider: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS" # One of: ["EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "CONTAINS_WORD"]
+    #             }
     #           ]
     #         },
     #         group_by_attribute: "NonEmptyString", # required
@@ -16020,11 +17066,11 @@ module Aws::SecurityHub
     end
 
     # <note>
-    #             <p>We recommend using Organizations instead of Security Hub invitations to manage your member accounts. 
-    #            For information, see <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-accounts-orgs.html">Managing Security Hub administrator and member accounts with Organizations</a> 
-    #            in the <i>Security Hub User Guide</i>.</p>
+    #             <p>We recommend using Organizations instead of Security Hub CSPM invitations to manage your member accounts.
+    #            For information, see <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-accounts-orgs.html">Managing Security Hub CSPM administrator and member accounts with Organizations</a>
+    #            in the <i>Security Hub CSPM User Guide</i>.</p>
     #          </note>
-    #          <p>Returns the count of all Security Hub membership invitations that were sent to the
+    #          <p>Returns the count of all Security Hub CSPM membership invitations that were sent to the
     #          calling member account, not including the currently accepted invitation. </p>
     # @param [Hash, Types::GetInvitationsCountRequest] params
     # @example To get a count of membership invitations
@@ -16052,8 +17098,8 @@ module Aws::SecurityHub
     end
 
     # <p>This method is deprecated. Instead, use <code>GetAdministratorAccount</code>.</p>
-    #          <p>The Security Hub console continues to use <code>GetMasterAccount</code>. It will eventually change to use <code>GetAdministratorAccount</code>. Any IAM policies that specifically control access to this function must continue to use <code>GetMasterAccount</code>. You should also add <code>GetAdministratorAccount</code> to your policies to ensure that the correct permissions are in place after the console begins to use <code>GetAdministratorAccount</code>.</p>
-    #          <p>Provides the details for the Security Hub administrator account for the current member account.</p>
+    #          <p>The Security Hub CSPM console continues to use <code>GetMasterAccount</code>. It will eventually change to use <code>GetAdministratorAccount</code>. Any IAM policies that specifically control access to this function must continue to use <code>GetMasterAccount</code>. You should also add <code>GetAdministratorAccount</code> to your policies to ensure that the correct permissions are in place after the console begins to use <code>GetAdministratorAccount</code>.</p>
+    #          <p>Provides the details for the Security Hub CSPM administrator account for the current member account.</p>
     #          <p>Can be used by both member accounts that are managed using Organizations and accounts that were
     #          invited manually.</p>
     # @param [Hash, Types::GetMasterAccountRequest] params
@@ -16079,14 +17125,14 @@ module Aws::SecurityHub
       request.send_request(options)
     end
 
-    # <p>Returns the details for the Security Hub member accounts for the specified account IDs.</p>
-    #          <p>An administrator account can be either the delegated Security Hub administrator account for an
-    #          organization or an administrator account that enabled Security Hub manually.</p>
+    # <p>Returns the details for the Security Hub CSPM member accounts for the specified account IDs.</p>
+    #          <p>An administrator account can be either the delegated Security Hub CSPM administrator account for an
+    #          organization or an administrator account that enabled Security Hub CSPM manually.</p>
     #          <p>The results include both member accounts that are managed using Organizations and accounts that
     #          were invited manually.</p>
     # @param [Hash, Types::GetMembersRequest] params
     # @option params [Array<String>] :account_ids
-    #   <p>The list of account IDs for the Security Hub member accounts to return the details for. </p>
+    #   <p>The list of account IDs for the Security Hub CSPM member accounts to return the details for. </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     account_ids: ["NonEmptyString"], # required
@@ -16120,10 +17166,231 @@ module Aws::SecurityHub
       request.send_request(options)
     end
 
-    # <p>Retrieves statistical information about Amazon Web Services resources and their associated security findings. This API is in private preview and subject to change.</p>
+    # <p>Retrieves the recommended policy to remediate a Security Hub finding.
+    #          <code>GetRecommendedPolicyV2</code> only supports findings for unused permissions.</p>
+    # @param [Hash, Types::GetRecommendedPolicyV2Request] params
+    # @option params [String] :metadata_uid
+    #   <p>The unique identifier (ID) of Security Hub OCSF findings found under the <code>metadata.uid</code> field of the finding.</p>
+    # @option params [String] :next_token
+    #   <p>The token used to paginate the <code>RecommendationSteps</code> list returned.
+    #              On your first call to <code>GetRecommendedPolicyV2</code>, omit this parameter or set it
+    #              to <code>NULL</code>. For subsequent calls, use the <code>NextToken</code> value returned in
+    #              the previous response to retrieve the next page of results.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of recommendation steps to return.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     metadata_uid: "NonEmptyString", # required
+    #     next_token: "NextToken",
+    #     max_results: 1
+    #   }
+    #   options = {}
+    #   response = client.get_recommended_policy_v2(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     next_token: "NextToken",
+    #     recommendation_type: "UNUSED_PERMISSION_RECOMMENDATION" # One of: ["UNUSED_PERMISSION_RECOMMENDATION"],
+    #     recommendation_steps: [{
+    #       # One of:
+    #       unused_permissions: {
+    #         recommended_action: "NonEmptyString",
+    #         existing_policy: "NonEmptyString",
+    #         existing_policy_id: "NonEmptyString",
+    #         policy_updated_at: Time.now,
+    #         recommended_policy: "NonEmptyString"
+    #       }
+    #     }],
+    #     error: {
+    #       code: "NonEmptyString",
+    #       message: "NonEmptyString"
+    #     },
+    #     status: "IN_PROGRESS" # One of: ["IN_PROGRESS", "SUCCEEDED", "FAILED"],
+    #     resource_arn: "NonEmptyString"
+    #   }
+    # @return [Types::GetRecommendedPolicyV2Response]
+    def get_recommended_policy_v2(params = {}, options = {})
+      request = build_request(:get_recommended_policy_v2, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves remediation targets for the account, or for all member accounts if the caller is
+    #          the delegated administrator. Results are sorted by priority, highest first, and are paginated.
+    #          Use <code>TargetUid</code> or <code>MetadataUid</code> to scope the request to a single target
+    #          or finding.</p>
+    # @param [Hash, Types::GetRemediationsV2Request] params
+    # @option params [String] :target_uid
+    #   <p>The unique identifier (ID) of an existing remediation target to return. Returns the single
+    #            matching target. You can't use <code>TargetUid</code> together with <code>MetadataUid</code>
+    #            or <code>Filters</code>.</p>
+    # @option params [String] :metadata_uid
+    #   <p>The unique identifier (ID) of the Security Hub exposure finding, found under the
+    #            <code>metadata.uid</code> field of the finding. Returns the remediation targets associated with
+    #            that finding. You can't use <code>MetadataUid</code> together with <code>TargetUid</code> or
+    #            <code>Filters</code>.</p>
+    # @option params [Types::RemediationFilters] :filters
+    #   <p>Filters remediation targets based on a set of criteria. You can't use <code>Filters</code>
+    #            together with <code>TargetUid</code> or <code>MetadataUid</code>.</p>
+    # @option params [Boolean] :show_guidance
+    #   <p>Specifies whether to show remediation target guidance.</p>
+    # @option params [String] :guidance_format
+    #   <p>The format of the remediation guidance examples to return. Valid values are <code>All</code>,
+    #            <code>AwsCli</code>, <code>Cli</code>, <code>Python</code>, <code>Terraform</code>,
+    #            <code>Cdk</code>, <code>CloudFormation</code>, <code>IaC</code>, and <code>Template</code>.
+    #            If you don't specify a value, all formats are returned. Applies only when
+    #            <code>ShowGuidance</code> is <code>true</code>.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return. Valid range is 1-100. If you don't specify a value,
+    #            the operation returns up to 25 results.</p>
+    # @option params [String] :next_token
+    #   <p>The token used to paginate the remediations target list returned.
+    #            On your first call to <code>GetRemediationsV2</code>, omit this parameter or set it
+    #            to <code>NULL</code>. For subsequent calls, use the <code>NextToken</code> value returned in
+    #            the previous response to retrieve the next page of results.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     target_uid: "RemediationStringUid",
+    #     metadata_uid: "RemediationStringUid",
+    #     filters: {
+    #       composite_filters: [
+    #         {
+    #           string_filters: [
+    #             {
+    #               field_name: "Resource.Type" # One of: ["Resource.Type", "Priority", "Status", "Resource.Id", "Resource.ResourceOwnerAccountId", "Resource.CloudProvider"], # required
+    #               filter: { # required
+    #                 value: "NonEmptyString", # required
+    #               }
+    #             }
+    #           ]
+    #         }
+    #       ]
+    #     },
+    #     show_guidance: false,
+    #     guidance_format: "All" # One of: ["All", "AwsCli", "Cli", "Python", "Terraform", "Cdk", "CloudFormation", "IaC", "Template"],
+    #     max_results: 1,
+    #     next_token: "NextToken"
+    #   }
+    #   options = {}
+    #   response = client.get_remediations_v2(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     items: [ # required
+    #       {
+    #         target_uid: "NonEmptyString", # required
+    #         outcome: { # required
+    #           resolved_findings_count: 1, # required
+    #           severity_reduction_findings_count: 1, # required
+    #           severity_unchanged_count: 1, # required
+    #         },
+    #         priority: "Critical" # One of: ["Critical", "High", "Medium", "Low"], # required
+    #         remediation_summary: { # required
+    #           action: "NonEmptyString", # required
+    #           description: "NonEmptyString",
+    #           is_immediate: false, # required
+    #           post_remediation_steps: ["NonEmptyString"],
+    #           kb_articles: [
+    #             {
+    #               title: "NonEmptyString", # required
+    #               url: "NonEmptyString", # required
+    #             }
+    #           ]
+    #         },
+    #         resource: { # required
+    #           account_id: "NonEmptyString", # required
+    #           region: "NonEmptyString", # required
+    #           resource_owner_account_id: "NonEmptyString",
+    #           resource_owner_org_id: "NonEmptyString",
+    #           type: "NonEmptyString", # required
+    #           name: "NonEmptyString",
+    #           id: "NonEmptyString", # required
+    #           resource_guid: "NonEmptyString",
+    #           resource_region: "NonEmptyString", # required
+    #           cloud_provider: "Azure" # One of: ["Azure", "AWS"], # required
+    #         },
+    #         status: "New" # One of: ["New", "Updated", "Resolved"], # required
+    #         trait: { # required
+    #           type: "NonEmptyString", # required
+    #           title: "NonEmptyString", # required
+    #         },
+    #         guidance: {
+    #           target_type_name: "NonEmptyString", # required
+    #           pattern: "NonEmptyString", # required
+    #           version: "NonEmptyString", # required
+    #           context: { # required
+    #             problem_statement: "NonEmptyString",
+    #             risk_assessment: "NonEmptyString",
+    #             affected_scope: "NonEmptyString",
+    #             prerequisites: ["NonEmptyString"]
+    #           },
+    #           specification: { # required
+    #             parameters: [
+    #               {
+    #                 name: "NonEmptyString", # required
+    #                 type: "NonEmptyString", # required
+    #                 description: "NonEmptyString", # required
+    #                 required: false
+    #               }
+    #             ],
+    #             steps: [
+    #               {
+    #                 phase: "NonEmptyString", # required
+    #                 description: "NonEmptyString", # required
+    #                 service: "NonEmptyString", # required
+    #                 action: "NonEmptyString", # required
+    #                 logic: "NonEmptyString",
+    #                 inverse: "NonEmptyString",
+    #                 verify_after: "NonEmptyString"
+    #               }
+    #             ],
+    #             expected_end_state: "NonEmptyString",
+    #             required_permissions: ["NonEmptyString"]
+    #           },
+    #           examples: { # required
+    #             aws_cli: "NonEmptyString",
+    #             cli: "NonEmptyString",
+    #             python: "NonEmptyString",
+    #             terraform: "NonEmptyString",
+    #             cdk: "NonEmptyString",
+    #             cloud_formation: "NonEmptyString",
+    #             ia_c: "NonEmptyString",
+    #             template: "NonEmptyString"
+    #           },
+    #           metadata: { # required
+    #             resource_type: "NonEmptyString", # required
+    #             exposure_type: "NonEmptyString", # required
+    #             trait_titles: ["NonEmptyString"], # required
+    #             reversibility: "NonEmptyString", # required
+    #             fix_effect: "NonEmptyString", # required
+    #             risk_level: "NonEmptyString", # required
+    #             automation_level: "NonEmptyString",
+    #             human_review_required: false,
+    #             generated_at: Time.now,
+    #             verification_status: "NonEmptyString"
+    #           }
+    #         },
+    #         updated_at: Time.now
+    #       }
+    #     ],
+    #     next_token: "NextToken"
+    #   }
+    # @return [Types::GetRemediationsV2Response]
+    def get_remediations_v2(params = {}, options = {})
+      request = build_request(:get_remediations_v2, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves statistical information about Amazon Web Services resources and their associated security findings.</p>
+    #          <p>You can use the <code>Scopes</code> parameter to define the data boundary for the query. Currently, <code>Scopes</code> supports <code>AwsOrganizations</code>, which lets you aggregate resources from your entire organization or from specific organizational units. Only the delegated administrator account can use <code>Scopes</code>.</p>
+    #          <p>If you set <code>GroupByField</code> to <code>ResourceSubCategory</code>, <code>ResourceInfo.AIDetails.HostResourceType</code>, or <code>ResourceInfo.AIDetails.CanonicalId</code>, you must include a <code>ResourceCategory</code> string filter with comparison set to <code>EQUALS</code> and value <code>AI/ML</code> in the corresponding <code>ResourceGroupByRule</code>.</p>
     # @param [Hash, Types::GetResourcesStatisticsV2Request] params
     # @option params [Array<Types::ResourceGroupByRule>] :group_by_rules
     #   <p>How resource statistics should be aggregated and organized in the response.</p>
+    # @option params [Types::ResourceScopes] :scopes
+    #   <p>Limits the results to resources from specific organizational units or from the delegated administrator's organization.
+    #            Only the delegated administrator account can use this parameter. Other accounts receive an <code>AccessDeniedException</code>.</p>
+    #            <p>This parameter is optional. If you omit it, the delegated administrator sees statistics from all accounts across the entire organization. Other accounts see only statistics for their own resources.</p>
+    #            <p>You can specify up to 10 entries in <code>Scopes.AwsOrganizations</code>. If multiple entries are specified, the entries are combined using OR logic.</p>
     # @option params [String] :sort_order
     #   <p>Sorts aggregated statistics.</p>
     # @option params [Integer] :max_statistic_results
@@ -16132,13 +17399,13 @@ module Aws::SecurityHub
     #   params = {
     #     group_by_rules: [ # required
     #       {
-    #         group_by_field: "account_id" # One of: ["account_id", "region", "resource_category", "resource_type", "resource_name", "findings_summary.finding_type"], # required
+    #         group_by_field: "AccountId" # One of: ["AccountId", "AccountName", "Region", "ResourceProvider", "ResourceOwnerAccountId", "ResourceOwnerOrgId", "ResourceCloudPartition", "ResourceRegion", "ResourceCategory", "ResourceType", "ResourceName", "FindingsSummary.FindingType", "ResourceSubCategory", "DiscoveryType", "ResourceInfo.AIDetails.HostResourceType", "ResourceInfo.AIDetails.CanonicalId", "ResourceCriticality"], # required
     #         filters: {
     #           composite_filters: [
     #             {
     #               string_filters: [
     #                 {
-    #                   field_name: "resource_arn" # One of: ["resource_arn", "resource_id", "account_id", "region", "resource_category", "resource_type", "resource_name", "findings_summary.finding_type", "findings_summary.product_name"],
+    #                   field_name: "ResourceGuid" # One of: ["ResourceGuid", "ResourceId", "AccountId", "AccountName", "Region", "ResourceProvider", "ResourceOwnerAccountId", "ResourceOwnerOrgId", "ResourceCloudPartition", "ResourceRegion", "ResourceCategory", "ResourceType", "ResourceName", "FindingsSummary.FindingType", "FindingsSummary.ProductName", "ResourceSubCategory", "DiscoveryType", "ResourceInfo.AIDetails.HostResourceGuid", "ResourceInfo.AIDetails.HostResourceType", "ResourceInfo.AIDetails.CanonicalId", "ResourceCriticality"],
     #                   filter: {
     #                     value: "NonEmptyString",
     #                     comparison: "EQUALS" # One of: ["EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "CONTAINS_WORD"]
@@ -16147,20 +17414,21 @@ module Aws::SecurityHub
     #               ],
     #               date_filters: [
     #                 {
-    #                   field_name: "resource_detail_capture_time_dt" # One of: ["resource_detail_capture_time_dt", "resource_creation_time_dt"],
+    #                   field_name: "ResourceDetailCaptureTime" # One of: ["ResourceDetailCaptureTime", "ResourceCreationTime"],
     #                   filter: {
     #                     start: "NonEmptyString",
     #                     end: "NonEmptyString",
     #                     date_range: {
     #                       value: 1,
-    #                       unit: "DAYS" # One of: ["DAYS"]
+    #                       unit: "DAYS" # One of: ["DAYS"],
+    #                       comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #                     }
     #                   }
     #                 }
     #               ],
     #               number_filters: [
     #                 {
-    #                   field_name: "findings_summary.total_findings" # One of: ["findings_summary.total_findings", "findings_summary.severities.other", "findings_summary.severities.fatal", "findings_summary.severities.critical", "findings_summary.severities.high", "findings_summary.severities.medium", "findings_summary.severities.low", "findings_summary.severities.informational", "findings_summary.severities.unknown"],
+    #                   field_name: "FindingsSummary.TotalFindings" # One of: ["FindingsSummary.TotalFindings", "FindingsSummary.Severities.Other", "FindingsSummary.Severities.Fatal", "FindingsSummary.Severities.Critical", "FindingsSummary.Severities.High", "FindingsSummary.Severities.Medium", "FindingsSummary.Severities.Low", "FindingsSummary.Severities.Informational", "FindingsSummary.Severities.Unknown", "ResourceInfo.AIDetails.SelfHostedAIModelResourceCount", "ResourceInfo.AIDetails.SelfHostedAIAgentResourceCount", "ResourceInfo.AIDetails.SelfHostedAIModelServingResourceCount", "ResourceInfo.AIDetails.SelfHostedAIExternalEndpointResourceCount", "ResourceInfo.AIDetails.SelfHostedAIDevelopmentResourceCount", "ResourceInfo.AIDetails.SelfHostedAIAgentFrameworkResourceCount", "ResourceInfo.AIDetails.SelfHostedAIAgentToolsAndIdentityResourceCount", "ResourceInfo.AIDetails.SelfHostedTotalAIResourceCount"],
     #                   filter: {
     #                     gte: 1.0,
     #                     lte: 1.0,
@@ -16172,7 +17440,7 @@ module Aws::SecurityHub
     #               ],
     #               map_filters: [
     #                 {
-    #                   field_name: "tags" # One of: ["tags"],
+    #                   field_name: "ResourceTags" # One of: ["ResourceTags"],
     #                   filter: {
     #                     key: "NonEmptyString",
     #                     value: "NonEmptyString",
@@ -16180,6 +17448,9 @@ module Aws::SecurityHub
     #                   }
     #                 }
     #               ],
+    #               nested_composite_filters: {
+    #                 # recursive ResourcesCompositeFilterList
+    #               },
     #               operator: "AND" # One of: ["AND", "OR"]
     #             }
     #           ],
@@ -16187,6 +17458,14 @@ module Aws::SecurityHub
     #         }
     #       }
     #     ],
+    #     scopes: {
+    #       aws_organizations: [
+    #         {
+    #           organization_id: "NonEmptyString",
+    #           organizational_unit_id: "NonEmptyString"
+    #         }
+    #       ]
+    #     },
     #     sort_order: "asc" # One of: ["asc", "desc"],
     #     max_statistic_results: 1
     #   }
@@ -16213,15 +17492,87 @@ module Aws::SecurityHub
       request.send_request(options)
     end
 
-    # <p>Returns a list of resources. This API is in private preview and subject to change.</p>
+    # <p>Returns resource trend data based on the specified criteria. This operation helps you analyze patterns and changes in resource compliance over time.</p>
+    # @param [Hash, Types::GetResourcesTrendsV2Request] params
+    # @option params [Types::ResourcesTrendsFilters] :filters
+    #   <p>The filters to apply to the resources trend data.</p>
+    # @option params [Time] :start_time
+    #   <p>The starting timestamp for the time period to analyze resources trends, in ISO 8601 format.</p>
+    # @option params [Time] :end_time
+    #   <p>The ending timestamp for the time period to analyze resources trends, in ISO 8601 format.</p>
+    # @option params [String] :next_token
+    #   <p>The token to use for paginating results. This value is returned in the response if more results are available.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of trend data points to return in a single response.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     filters: {
+    #       composite_filters: [
+    #         {
+    #           string_filters: [
+    #             {
+    #               field_name: "account_id" # One of: ["account_id", "region", "resource_type", "resource_category", "resource_cloud_provider", "resource_region", "resource_owner_id", "resource_owner_organization_id"],
+    #               filter: {
+    #                 value: "NonEmptyString",
+    #                 comparison: "EQUALS" # One of: ["EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "CONTAINS_WORD"]
+    #               }
+    #             }
+    #           ],
+    #           nested_composite_filters: {
+    #             # recursive ResourcesTrendsCompositeFilterList
+    #           },
+    #           operator: "AND" # One of: ["AND", "OR"]
+    #         }
+    #       ],
+    #       composite_operator: "AND" # One of: ["AND", "OR"]
+    #     },
+    #     start_time: Time.now, # required
+    #     end_time: Time.now, # required
+    #     next_token: "NextToken",
+    #     max_results: 1
+    #   }
+    #   options = {}
+    #   response = client.get_resources_trends_v2(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     granularity: "Daily" # One of: ["Daily", "Weekly", "Monthly"], # required
+    #     trends_metrics: [ # required
+    #       {
+    #         timestamp: Time.now, # required
+    #         trends_values: { # required
+    #           resources_count: { # required
+    #             all_resources: 1, # required
+    #           }
+    #         }
+    #       }
+    #     ],
+    #     next_token: "NextToken"
+    #   }
+    # @return [Types::GetResourcesTrendsV2Response]
+    def get_resources_trends_v2(params = {}, options = {})
+      request = build_request(:get_resources_trends_v2, params)
+      request.send_request(options)
+    end
+
+    # <p>Returns a list of resources.</p>
+    #          <p>You can use the <code>Scopes</code> parameter to define the data boundary for the query. Currently, <code>Scopes</code> supports <code>AwsOrganizations</code>, which lets you retrieve resources from your entire organization or from specific organizational units. Only the delegated administrator account can use <code>Scopes</code>.</p>
+    #          <p>You can use the <code>Filters</code> parameter to refine results based on resource attributes. You can use <code>Scopes</code> and <code>Filters</code> independently or together. When both are provided, <code>Scopes</code> narrows the data set first, and then <code>Filters</code> refines results within that scoped data set.</p>
+    #          <p>For AI/ML resources, the response includes the <code>ResourceSubCategory</code> field. For self-hosted AI resources and their host resources, the response also includes <code>ResourceInfo</code> with AI-specific details. Self-hosted AI resources use a <code>ResourceType</code> with the <code>SelfHosted::AI::</code> prefix, such as <code>SelfHosted::AI::Model</code>, <code>SelfHosted::AI::Agent</code>, <code>SelfHosted::AI::InferenceEndpoint</code>, and <code>SelfHosted::AI::ExternalEndpoint</code>.</p>
+    #          <p>If you filter by <code>ResourceSubCategory</code>, you must also include a <code>ResourceCategory</code> string filter with comparison set to <code>EQUALS</code> and value <code>AI/ML</code> in the same request.</p>
     # @param [Hash, Types::GetResourcesV2Request] params
     # @option params [Types::ResourcesFilters] :filters
     #   <p>Filters resources based on a set of criteria.</p>
+    # @option params [Types::ResourceScopes] :scopes
+    #   <p>Limits the results to resources from specific organizational units or from the delegated administrator's organization.
+    #            Only the delegated administrator account can use this parameter. Other accounts receive an <code>AccessDeniedException</code>.</p>
+    #            <p>This parameter is optional. If you omit it, the delegated administrator sees resources from all accounts across the entire organization. Other accounts see only their own resources.</p>
+    #            <p>You can specify up to 10 entries in <code>Scopes.AwsOrganizations</code>. If multiple entries are specified, the entries are combined using OR logic.</p>
     # @option params [Array<Types::SortCriterion>] :sort_criteria
-    #   <p>The finding attributes used to sort the list of returned findings.</p>
+    #   <p>The resource attributes used to sort the list of returned resources.</p>
     # @option params [String] :next_token
-    #   <p>The token required for pagination. 
-    #            On your first call, set the value of this parameter to <code>NULL</code>. 
+    #   <p>The token required for pagination.
+    #            On your first call, set the value of this parameter to <code>NULL</code>.
     #            For subsequent calls, to continue listing data, set the value of this parameter to the value returned in the previous response.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return.</p>
@@ -16232,7 +17583,7 @@ module Aws::SecurityHub
     #         {
     #           string_filters: [
     #             {
-    #               field_name: "resource_arn" # One of: ["resource_arn", "resource_id", "account_id", "region", "resource_category", "resource_type", "resource_name", "findings_summary.finding_type", "findings_summary.product_name"],
+    #               field_name: "ResourceGuid" # One of: ["ResourceGuid", "ResourceId", "AccountId", "AccountName", "Region", "ResourceProvider", "ResourceOwnerAccountId", "ResourceOwnerOrgId", "ResourceCloudPartition", "ResourceRegion", "ResourceCategory", "ResourceType", "ResourceName", "FindingsSummary.FindingType", "FindingsSummary.ProductName", "ResourceSubCategory", "DiscoveryType", "ResourceInfo.AIDetails.HostResourceGuid", "ResourceInfo.AIDetails.HostResourceType", "ResourceInfo.AIDetails.CanonicalId", "ResourceCriticality"],
     #               filter: {
     #                 value: "NonEmptyString",
     #                 comparison: "EQUALS" # One of: ["EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "CONTAINS_WORD"]
@@ -16241,20 +17592,21 @@ module Aws::SecurityHub
     #           ],
     #           date_filters: [
     #             {
-    #               field_name: "resource_detail_capture_time_dt" # One of: ["resource_detail_capture_time_dt", "resource_creation_time_dt"],
+    #               field_name: "ResourceDetailCaptureTime" # One of: ["ResourceDetailCaptureTime", "ResourceCreationTime"],
     #               filter: {
     #                 start: "NonEmptyString",
     #                 end: "NonEmptyString",
     #                 date_range: {
     #                   value: 1,
-    #                   unit: "DAYS" # One of: ["DAYS"]
+    #                   unit: "DAYS" # One of: ["DAYS"],
+    #                   comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #                 }
     #               }
     #             }
     #           ],
     #           number_filters: [
     #             {
-    #               field_name: "findings_summary.total_findings" # One of: ["findings_summary.total_findings", "findings_summary.severities.other", "findings_summary.severities.fatal", "findings_summary.severities.critical", "findings_summary.severities.high", "findings_summary.severities.medium", "findings_summary.severities.low", "findings_summary.severities.informational", "findings_summary.severities.unknown"],
+    #               field_name: "FindingsSummary.TotalFindings" # One of: ["FindingsSummary.TotalFindings", "FindingsSummary.Severities.Other", "FindingsSummary.Severities.Fatal", "FindingsSummary.Severities.Critical", "FindingsSummary.Severities.High", "FindingsSummary.Severities.Medium", "FindingsSummary.Severities.Low", "FindingsSummary.Severities.Informational", "FindingsSummary.Severities.Unknown", "ResourceInfo.AIDetails.SelfHostedAIModelResourceCount", "ResourceInfo.AIDetails.SelfHostedAIAgentResourceCount", "ResourceInfo.AIDetails.SelfHostedAIModelServingResourceCount", "ResourceInfo.AIDetails.SelfHostedAIExternalEndpointResourceCount", "ResourceInfo.AIDetails.SelfHostedAIDevelopmentResourceCount", "ResourceInfo.AIDetails.SelfHostedAIAgentFrameworkResourceCount", "ResourceInfo.AIDetails.SelfHostedAIAgentToolsAndIdentityResourceCount", "ResourceInfo.AIDetails.SelfHostedTotalAIResourceCount"],
     #               filter: {
     #                 gte: 1.0,
     #                 lte: 1.0,
@@ -16266,7 +17618,7 @@ module Aws::SecurityHub
     #           ],
     #           map_filters: [
     #             {
-    #               field_name: "tags" # One of: ["tags"],
+    #               field_name: "ResourceTags" # One of: ["ResourceTags"],
     #               filter: {
     #                 key: "NonEmptyString",
     #                 value: "NonEmptyString",
@@ -16274,10 +17626,21 @@ module Aws::SecurityHub
     #               }
     #             }
     #           ],
+    #           nested_composite_filters: {
+    #             # recursive ResourcesCompositeFilterList
+    #           },
     #           operator: "AND" # One of: ["AND", "OR"]
     #         }
     #       ],
     #       composite_operator: "AND" # One of: ["AND", "OR"]
+    #     },
+    #     scopes: {
+    #       aws_organizations: [
+    #         {
+    #           organization_id: "NonEmptyString",
+    #           organizational_unit_id: "NonEmptyString"
+    #         }
+    #       ]
     #     },
     #     sort_criteria: [
     #       {
@@ -16295,12 +17658,18 @@ module Aws::SecurityHub
     #   {
     #     resources: [ # required
     #       {
-    #         resource_arn: "NonEmptyString",
+    #         resource_guid: "NonEmptyString",
     #         resource_id: "NonEmptyString", # required
     #         account_id: "NonEmptyString", # required
+    #         account_name: "NonEmptyString",
     #         region: "NonEmptyString", # required
-    #         resource_category: "Compute" # One of: ["Compute", "Database", "Storage", "Code", "AI/ML", "Identity", "Network", "Other"],
-    #         resource_type: "NonEmptyString",
+    #         resource_provider: "NonEmptyString",
+    #         resource_owner_account_id: "NonEmptyString",
+    #         resource_owner_org_id: "NonEmptyString",
+    #         resource_cloud_partition: "NonEmptyString",
+    #         resource_region: "NonEmptyString",
+    #         resource_category: "Compute" # One of: ["Compute", "Database", "Storage", "Code", "AI/ML", "Identity", "Network", "Messaging", "Other"],
+    #         resource_type: "NonEmptyString", # required
     #         resource_name: "NonEmptyString",
     #         resource_creation_time_dt: "NonEmptyString",
     #         resource_detail_capture_time_dt: "NonEmptyString", # required
@@ -16328,6 +17697,30 @@ module Aws::SecurityHub
     #           }
     #         ],
     #         resource_config: ""null"", # required
+    #         resource_sub_category: "Model" # One of: ["Model", "ModelServing", "Agent", "AgentFramework", "AgentToolsAndIdentity", "SafetyAndGuardrail", "KnowledgeAndData", "OrchestrationAndPipeline", "ExternalEndpoint", "Development", "Other"],
+    #         discovery_type: "Managed" # One of: ["Managed", "SelfHosted"],
+    #         resource_info: {
+    #           ai_details: {
+    #             host_resource_guid: "NonEmptyString",
+    #             host_resource_type: "NonEmptyString",
+    #             canonical_id: "NonEmptyString",
+    #             self_hosted_ai_model_resource_count: 1,
+    #             self_hosted_ai_agent_resource_count: 1,
+    #             self_hosted_ai_model_serving_resource_count: 1,
+    #             self_hosted_ai_external_endpoint_resource_count: 1,
+    #             self_hosted_ai_development_resource_count: 1,
+    #             self_hosted_ai_agent_framework_resource_count: 1,
+    #             self_hosted_ai_agent_tools_and_identity_resource_count: 1,
+    #             self_hosted_total_ai_resource_count: 1
+    #           }
+    #         },
+    #         resource_criticality: "Very High" # One of: ["Very High", "High", "Medium", "Low", "Unknown"],
+    #         criticality_sources: [
+    #           {
+    #             source: "AutomationRule" # One of: ["AutomationRule", "ResourceName", "TagInference"], # required
+    #             reason: "NonEmptyString", # required
+    #           }
+    #         ]
     #       }
     #     ],
     #     next_token: "NextToken"
@@ -16373,7 +17766,8 @@ module Aws::SecurityHub
     #     }
     #   }
     #         }
-    #       }
+    #       },
+    #       provider: AWS
     #     }
     #   }
     # @example Request syntax with placeholder values
@@ -16439,7 +17833,8 @@ module Aws::SecurityHub
     #             }
     #           }
     #         }
-    #       }
+    #       },
+    #       provider: "AWS" # One of: ["AWS", "Azure"]
     #     }
     #   }
     # @return [Types::GetSecurityControlDefinitionResponse]
@@ -16449,20 +17844,20 @@ module Aws::SecurityHub
     end
 
     # <note>
-    #             <p>We recommend using Organizations instead of Security Hub invitations to manage your member accounts. 
-    #            For information, see <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-accounts-orgs.html">Managing Security Hub administrator and member accounts with Organizations</a> 
-    #            in the <i>Security Hub User Guide</i>.</p>
+    #             <p>We recommend using Organizations instead of Security Hub CSPM invitations to manage your member accounts.
+    #            For information, see <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-accounts-orgs.html">Managing Security Hub CSPM administrator and member accounts with Organizations</a>
+    #            in the <i>Security Hub CSPM User Guide</i>.</p>
     #          </note>
-    #          <p>Invites other Amazon Web Services accounts to become member accounts for the Security Hub administrator account that
+    #          <p>Invites other Amazon Web Services accounts to become member accounts for the Security Hub CSPM administrator account that
     #          the invitation is sent from.</p>
     #          <p>This operation is only used to invite accounts that don't belong to an Amazon Web Services organization.
     #          Organization accounts don't receive invitations.</p>
-    #          <p>Before you can use this action to invite a member, you must first use the <code>CreateMembers</code> action to create the member account in Security Hub.</p>
-    #          <p>When the account owner enables Security Hub and accepts the invitation to become a member
+    #          <p>Before you can use this action to invite a member, you must first use the <code>CreateMembers</code> action to create the member account in Security Hub CSPM.</p>
+    #          <p>When the account owner enables Security Hub CSPM and accepts the invitation to become a member
     #          account, the administrator account can view the findings generated in the member account.</p>
     # @param [Hash, Types::InviteMembersRequest] params
     # @option params [Array<String>] :account_ids
-    #   <p>The list of account IDs of the Amazon Web Services accounts to invite to Security Hub as members. </p>
+    #   <p>The list of account IDs of the Amazon Web Services accounts to invite to Security Hub CSPM as members. </p>
     # @example To invite accounts to become members
     #   # The following example invites the specified AWS accounts to become member accounts associated with the calling Security Hub administrator account. You only use this operation to invite accounts that don't belong to an AWS Organizations organization.
     #   params = {
@@ -16500,11 +17895,11 @@ module Aws::SecurityHub
       request.send_request(options)
     end
 
-    # <p>Retrieves a list of V2 aggregators. This API is in private preview and subject to change.</p>
+    # <p>Retrieves a list of V2 aggregators.</p>
     # @param [Hash, Types::ListAggregatorsV2Request] params
     # @option params [String] :next_token
-    #   <p>The token required for pagination. 
-    #            On your first call, set the value of this parameter to <code>NULL</code>. 
+    #   <p>The token required for pagination.
+    #            On your first call, set the value of this parameter to <code>NULL</code>.
     #            For subsequent calls, to continue listing data, set the value of this parameter to the value returned in the previous response.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return.</p>
@@ -16537,8 +17932,8 @@ module Aws::SecurityHub
     # @param [Hash, Types::ListAutomationRulesRequest] params
     # @option params [String] :next_token
     #   <p>
-    #            A token to specify where to start paginating the response. This is the <code>NextToken</code> 
-    #            from a previously truncated response. On your first call to the <code>ListAutomationRules</code> 
+    #            A token to specify where to start paginating the response. This is the <code>NextToken</code>
+    #            from a previously truncated response. On your first call to the <code>ListAutomationRules</code>
     #            API, set the value of this parameter to <code>NULL</code>.
     #         </p>
     # @option params [Integer] :max_results
@@ -16609,11 +18004,11 @@ module Aws::SecurityHub
       request.send_request(options)
     end
 
-    # <p>Returns a list of automation rules and metadata for the calling account. This API is in private preview and subject to change.</p>
+    # <p>Returns a list of automation rules and metadata for the calling account.</p>
     # @param [Hash, Types::ListAutomationRulesV2Request] params
     # @option params [String] :next_token
-    #   <p>The token required for pagination. 
-    #            On your first call, set the value of this parameter to <code>NULL</code>. 
+    #   <p>The token required for pagination.
+    #            On your first call, set the value of this parameter to <code>NULL</code>.
     #            For subsequent calls, to continue listing data, set the value of this parameter to the value returned in the previous response.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return.</p>
@@ -16637,7 +18032,7 @@ module Aws::SecurityHub
     #         description: "NonEmptyString",
     #         actions: [
     #           {
-    #             type: "FINDING_FIELDS_UPDATE" # One of: ["FINDING_FIELDS_UPDATE", "EXTERNAL_INTEGRATION"]
+    #             type: "FINDING_FIELDS_UPDATE" # One of: ["FINDING_FIELDS_UPDATE", "EXTERNAL_INTEGRATION", "RESOURCE_FIELDS_UPDATE"]
     #           }
     #         ],
     #         created_at: Time.now,
@@ -16653,24 +18048,24 @@ module Aws::SecurityHub
     end
 
     # <p>
-    #             Lists the configuration policies that the Security Hub delegated administrator has created for your 
+    #             Lists the configuration policies that the Security Hub CSPM delegated administrator has created for your
     #             organization. Only the delegated administrator can invoke this operation from the home Region.
     #         </p>
     # @param [Hash, Types::ListConfigurationPoliciesRequest] params
     # @option params [String] :next_token
     #   <p>
-    #               The NextToken value that's returned from a previous paginated <code>ListConfigurationPolicies</code> request where 
-    #               <code>MaxResults</code> was used but the results exceeded the value of that parameter. Pagination continues from the 
-    #               <code>MaxResults</code> was used but the results exceeded the value of that parameter. Pagination continues from the 
-    #               end of the previous response that returned the <code>NextToken</code> value. This value is <code>null</code> when 
+    #               The NextToken value that's returned from a previous paginated <code>ListConfigurationPolicies</code> request where
+    #               <code>MaxResults</code> was used but the results exceeded the value of that parameter. Pagination continues from the
+    #               <code>MaxResults</code> was used but the results exceeded the value of that parameter. Pagination continues from the
+    #               end of the previous response that returned the <code>NextToken</code> value. This value is <code>null</code> when
     #               there are no more results to return.
     #           </p>
     # @option params [Integer] :max_results
     #   <p>
-    #               The maximum number of results that's returned by <code>ListConfigurationPolicies</code> in each page of the response. 
-    #               When this parameter is used, <code>ListConfigurationPolicies</code> returns the specified number of results in a 
-    #               single page and a <code>NextToken</code> response element. You can see the remaining results of the initial request 
-    #               by sending another <code>ListConfigurationPolicies</code> request with the returned <code>NextToken</code> value. A 
+    #               The maximum number of results that's returned by <code>ListConfigurationPolicies</code> in each page of the response.
+    #               When this parameter is used, <code>ListConfigurationPolicies</code> returns the specified number of results in a
+    #               single page and a <code>NextToken</code> response element. You can see the remaining results of the initial request
+    #               by sending another <code>ListConfigurationPolicies</code> request with the returned <code>NextToken</code> value. A
     #               valid range for <code>MaxResults</code> is between 1 and 100.
     #           </p>
     # @example To view a list of configuration policies
@@ -16724,28 +18119,28 @@ module Aws::SecurityHub
     end
 
     # <p>
-    #             Provides information about the associations for your configuration policies and self-managed behavior. Only the 
-    #             Security Hub delegated administrator can invoke this operation from the home Region.
+    #             Provides information about the associations for your configuration policies and self-managed behavior. Only the
+    #             Security Hub CSPM delegated administrator can invoke this operation from the home Region.
     #         </p>
     # @param [Hash, Types::ListConfigurationPolicyAssociationsRequest] params
     # @option params [String] :next_token
     #   <p>
-    #               The <code>NextToken</code> value that's returned from a previous paginated <code>ListConfigurationPolicyAssociations</code> 
-    #               request where <code>MaxResults</code> was used but the results exceeded the value of that parameter. Pagination 
-    #               continues from the end of the previous response that returned the <code>NextToken</code> value. This value is <code>null</code> 
+    #               The <code>NextToken</code> value that's returned from a previous paginated <code>ListConfigurationPolicyAssociations</code>
+    #               request where <code>MaxResults</code> was used but the results exceeded the value of that parameter. Pagination
+    #               continues from the end of the previous response that returned the <code>NextToken</code> value. This value is <code>null</code>
     #               when there are no more results to return.
     #           </p>
     # @option params [Integer] :max_results
     #   <p>
-    #               The maximum number of results that's returned by <code>ListConfigurationPolicies</code> in each page of the response. 
-    #               When this parameter is used, <code>ListConfigurationPolicyAssociations</code> returns the specified number of results 
-    #               in a single page and a <code>NextToken</code> response element. You can see the remaining results of the initial 
-    #               request by sending another <code>ListConfigurationPolicyAssociations</code> request with the returned <code>NextToken</code> 
+    #               The maximum number of results that's returned by <code>ListConfigurationPolicies</code> in each page of the response.
+    #               When this parameter is used, <code>ListConfigurationPolicyAssociations</code> returns the specified number of results
+    #               in a single page and a <code>NextToken</code> response element. You can see the remaining results of the initial
+    #               request by sending another <code>ListConfigurationPolicyAssociations</code> request with the returned <code>NextToken</code>
     #               value. A valid range for <code>MaxResults</code> is between 1 and 100.
     #           </p>
     # @option params [Types::AssociationFilters] :filters
     #   <p>
-    #               Options for filtering the <code>ListConfigurationPolicyAssociations</code> response. You can filter by the Amazon Resource Name (ARN) or 
+    #               Options for filtering the <code>ListConfigurationPolicyAssociations</code> response. You can filter by the Amazon Resource Name (ARN) or
     #               universally unique identifier (UUID) of a configuration, <code>AssociationType</code>, or <code>AssociationStatus</code>.
     #           </p>
     # @example To list configuration associations
@@ -16807,7 +18202,88 @@ module Aws::SecurityHub
       request.send_request(options)
     end
 
-    # <p>Grants permission to retrieve a list of connectorsV2 and their metadata for the calling account. This API is in preview release and subject to change.</p>
+    # <p>Lists the CSPM connectors and their metadata for the calling account.</p>
+    # @param [Hash, Types::ListConnectorsRequest] params
+    # @option params [String] :next_token
+    #   <p>The pagination token to request the next page of results.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return.</p>
+    # @option params [String] :provider_name
+    #   <p>The name of the cloud provider to filter connectors by.</p>
+    # @option params [String] :connector_status
+    #   <p>The connectivity status to filter connectors by.</p>
+    # @option params [String] :enablement_status
+    #   <p>The enablement status to filter connectors by.</p>
+    # @example To list CSPM connectors
+    #   # This operation lists the CSPM connectors for the calling account.
+    #   params = {
+    #     max_results: 10
+    #   }
+    #   options = {}
+    #   response = client.list_connectors(params, options)
+    #   response.to_h #=>
+    #   {
+    #     connectors: [
+    #       {
+    #         connector_arn: "arn:aws:securityhub:us-east-1:123456789012:connector/cspm-a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+    #         connector_id: "cspm-a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+    #         name: "MyAzureConnector",
+    #         provider_summary: {
+    #           provider_name: AZURE,
+    #           connector_status: CONNECTED
+    #         },
+    #         created_at: Time.parse("2026-01-15T10:30:00.000Z")
+    #       }
+    #     ]
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     provider_name: "AZURE" # One of: ["AZURE"],
+    #     connector_status: "CONNECTED" # One of: ["CONNECTED", "DEGRADED", "FAILED_TO_CONNECT", "UNKNOWN"],
+    #     enablement_status: "ENABLED" # One of: ["ENABLED", "PENDING_ENABLEMENT", "PENDING_UPDATE", "PENDING_DELETION"]
+    #   }
+    #   options = {}
+    #   response = client.list_connectors(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     next_token: "NextToken",
+    #     connectors: [ # required
+    #       {
+    #         connector_arn: "NonEmptyString",
+    #         connector_id: "NonEmptyString",
+    #         name: "NonEmptyString",
+    #         description: "NonEmptyString",
+    #         provider_summary: {
+    #           provider_name: "AZURE" # One of: ["AZURE"],
+    #           connector_status: "CONNECTED" # One of: ["CONNECTED", "DEGRADED", "FAILED_TO_CONNECT", "UNKNOWN"],
+    #           provider_configuration: {
+    #             # One of:
+    #             azure: {
+    #               aws_config_connector_arn: "NonEmptyString", # required
+    #               scope_configuration: { # required
+    #                 scope_type: "TENANT" # One of: ["TENANT", "SUBSCRIPTION"], # required
+    #                 scope_values: ["NonEmptyString"]
+    #               },
+    #               azure_regions: ["NonEmptyString"], # required
+    #             }
+    #           }
+    #         },
+    #         created_at: Time.now,
+    #         created_by: "NonEmptyString",
+    #         enablement_status: "ENABLED" # One of: ["ENABLED", "PENDING_ENABLEMENT", "PENDING_UPDATE", "PENDING_DELETION"]
+    #       }
+    #     ]
+    #   }
+    # @return [Types::ListConnectorsResponse]
+    def list_connectors(params = {}, options = {})
+      request = build_request(:list_connectors, params)
+      request.send_request(options)
+    end
+
+    # <p>Grants permission to retrieve a list of connectorsV2 and their metadata for the calling account.</p>
     # @param [Hash, Types::ListConnectorsV2Request] params
     # @option params [String] :next_token
     #   <p>The pagination token per the Amazon Web Services Pagination standard</p>
@@ -16817,12 +18293,15 @@ module Aws::SecurityHub
     #   <p>The name of the third-party provider.</p>
     # @option params [String] :connector_status
     #   <p>The status for the connectorV2.</p>
+    # @option params [String] :enablement_status
+    #   <p>The enablement status to filter connectors by.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     next_token: "NextToken",
     #     max_results: 1,
-    #     provider_name: "JIRA_CLOUD" # One of: ["JIRA_CLOUD", "SERVICENOW"],
-    #     connector_status: "CONNECTED" # One of: ["CONNECTED", "FAILED_TO_CONNECT", "PENDING_CONFIGURATION", "PENDING_AUTHORIZATION"]
+    #     provider_name: "JIRA_CLOUD" # One of: ["JIRA_CLOUD", "SERVICENOW", "AZURE"],
+    #     connector_status: "CONNECTED" # One of: ["CONNECTED", "DEGRADED", "FAILED_TO_CONNECT", "PENDING_AUTHORIZATION", "PENDING_CONFIGURATION", "UNKNOWN"],
+    #     enablement_status: "ENABLED" # One of: ["ENABLED", "PENDING_ENABLEMENT", "FAILED_TO_ENABLE", "PENDING_UPDATE", "FAILED_TO_UPDATE", "PENDING_DELETION", "FAILED_TO_DELETE"]
     #   }
     #   options = {}
     #   response = client.list_connectors_v2(params, options)
@@ -16837,10 +18316,35 @@ module Aws::SecurityHub
     #         name: "NonEmptyString", # required
     #         description: "NonEmptyString",
     #         provider_summary: { # required
-    #           provider_name: "JIRA_CLOUD" # One of: ["JIRA_CLOUD", "SERVICENOW"],
-    #           connector_status: "CONNECTED" # One of: ["CONNECTED", "FAILED_TO_CONNECT", "PENDING_CONFIGURATION", "PENDING_AUTHORIZATION"]
+    #           provider_name: "JIRA_CLOUD" # One of: ["JIRA_CLOUD", "SERVICENOW", "AZURE"],
+    #           connector_status: "CONNECTED" # One of: ["CONNECTED", "DEGRADED", "FAILED_TO_CONNECT", "PENDING_AUTHORIZATION", "PENDING_CONFIGURATION", "UNKNOWN"],
+    #           provider_configuration: {
+    #             # One of:
+    #             jira_cloud: {
+    #               cloud_id: "NonEmptyString",
+    #               project_key: "NonEmptyString",
+    #               domain: "NonEmptyString",
+    #               auth_url: "NonEmptyString",
+    #               auth_status: "ACTIVE" # One of: ["ACTIVE", "FAILED"]
+    #             },
+    #             service_now: {
+    #               instance_name: "NonEmptyString",
+    #               secret_arn: "NonEmptyString", # required
+    #               auth_status: "ACTIVE" # One of: ["ACTIVE", "FAILED"], # required
+    #             },
+    #             azure: {
+    #               aws_config_connector_arn: "NonEmptyString", # required
+    #               scope_configuration: { # required
+    #                 scope_type: "TENANT" # One of: ["TENANT", "SUBSCRIPTION"], # required
+    #                 scope_values: ["NonEmptyString"]
+    #               },
+    #               azure_regions: ["NonEmptyString"], # required
+    #             }
+    #           }
     #         },
     #         created_at: Time.now, # required
+    #         enablement_status: "ENABLED" # One of: ["ENABLED", "PENDING_ENABLEMENT", "FAILED_TO_ENABLE", "PENDING_UPDATE", "FAILED_TO_UPDATE", "PENDING_DELETION", "FAILED_TO_DELETE"],
+    #         enablement_status_reason: "NonEmptyString"
     #       }
     #     ]
     #   }
@@ -16851,7 +18355,7 @@ module Aws::SecurityHub
     end
 
     # <p>Lists all findings-generating solutions (products) that you are subscribed to receive
-    #          findings from in Security Hub.</p>
+    #          findings from in Security Hub CSPM.</p>
     # @param [Hash, Types::ListEnabledProductsForImportRequest] params
     # @option params [String] :next_token
     #   <p>The token that is required for pagination. On your first call to the
@@ -16892,7 +18396,169 @@ module Aws::SecurityHub
       request.send_request(options)
     end
 
-    # <p>If cross-Region aggregation is enabled, then <code>ListFindingAggregators</code> returns the Amazon Resource Name (ARN) 
+    # <p>Returns the findings export jobs in your account as a paginated list of <code>ExportSummary</code> objects. You can filter the results by job <code>Status</code> or <code>DataType</code>.</p>
+    #          <p>To page through the results, use the <code>MaxResults</code> and <code>NextToken</code> parameters. If the response includes a <code>NextToken</code> value, pass it in a subsequent request to retrieve the next page of results.</p>
+    #          <p>Each <code>ExportSummary</code> reports the output <code>Format</code> of the job but not its full <code>OutputConfiguration</code>. To retrieve the filters and selected fields that a job was started with, call <code>GetExportJobV2</code>.</p>
+    # @param [Hash, Types::ListExportJobsV2Request] params
+    # @option params [String] :status
+    #   <p>Filters the results to export jobs that have the specified status.</p>
+    # @option params [String] :data_type
+    #   <p>Filters the results to export jobs that produce the specified data type.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return in a single call. Valid range is 1–20.</p>
+    # @option params [String] :next_token
+    #   <p>The token required for pagination.
+    #            On your first call, set the value of this parameter to <code>NULL</code>.
+    #            For subsequent calls, to continue listing data, set the value of this parameter to the value returned in the previous response.</p>
+    # @example Example – Listing successful findings export jobs
+    #   # The following example lists the findings export jobs in the account that have succeeded, returning up to 10 results per page.
+    #   params = {
+    #     status: SUCCEEDED,
+    #     data_type: FINDINGS,
+    #     max_results: 10
+    #   }
+    #   options = {}
+    #   response = client.list_export_jobs_v2(params, options)
+    #   response.to_h #=>
+    #   {
+    #     items: [
+    #       {
+    #         export_job_id: "a1b2c3d4e5f6",
+    #         name: "quarterly-critical-findings",
+    #         status: SUCCEEDED,
+    #         data_type: FINDINGS,
+    #         output_configuration: {
+    #     "Findings" => {
+    #       "Format" => CSV
+    #     }
+    #   },
+    #         destination: {
+    #     "S3" => {
+    #       "BucketArn" => arn:aws:s3:::amzn-s3-demo-bucket,
+    #       "KmsKeyArn" => arn:aws:kms:aa-example-1:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab,
+    #       "ObjectPrefix" => security-hub-exports/2026-Q1
+    #     }
+    #   },
+    #         started_at: Time.parse("2026-03-27T18:04:11Z"),
+    #         ended_at: Time.parse("2026-03-27T18:09:52Z")
+    #       }
+    #     ],
+    #     next_token: "U2VjdXJpdHlIdWJFeGFtcGxlUGFnaW5hdGlvblRva2Vu"
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     status: "RUNNING" # One of: ["RUNNING", "SUCCEEDED", "FAILED", "CANCELLED"],
+    #     data_type: "FINDINGS" # One of: ["FINDINGS"],
+    #     max_results: 1,
+    #     next_token: "NextToken"
+    #   }
+    #   options = {}
+    #   response = client.list_export_jobs_v2(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     items: [ # required
+    #       {
+    #         export_job_id: "ExportJobId", # required
+    #         name: "ExportName",
+    #         status: "RUNNING" # One of: ["RUNNING", "SUCCEEDED", "FAILED", "CANCELLED"], # required
+    #         data_type: "FINDINGS" # One of: ["FINDINGS"], # required
+    #         output_configuration: {
+    #           # One of:
+    #           findings: {
+    #             format: "CSV" # One of: ["CSV", "OCSF_JSON"], # required
+    #           }
+    #         },
+    #         scopes: {
+    #           aws_organizations: [
+    #             {
+    #               organization_id: "NonEmptyString",
+    #               organizational_unit_id: "NonEmptyString"
+    #             }
+    #           ]
+    #         },
+    #         destination: { # required
+    #           # One of:
+    #           s3: {
+    #             bucket_arn: "NonEmptyString", # required
+    #             kms_key_arn: "NonEmptyString", # required
+    #             object_prefix: "S3ObjectPrefix"
+    #           }
+    #         },
+    #         failure_code: "ACCESS_DENIED" # One of: ["ACCESS_DENIED", "RESOURCE_NOT_FOUND", "INTERNAL_ERROR"],
+    #         failure_message: "NonEmptyString",
+    #         started_at: Time.now, # required
+    #         ended_at: Time.now
+    #       }
+    #     ],
+    #     next_token: "NextToken"
+    #   }
+    # @return [Types::ListExportJobsV2Response]
+    def list_export_jobs_v2(params = {}, options = {})
+      request = build_request(:list_export_jobs_v2, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves the exposure findings tied to a specific remediation target. Results are sorted by
+    #          previous severity, highest first, and are paginated.</p>
+    # @param [Hash, Types::ListExposuresByRemediationV2Request] params
+    # @option params [String] :target_uid
+    #   <p>The unique identifier (ID) of an existing remediation target to list exposure findings for.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return. Valid range is 1-100. If you don't specify a value,
+    #            the operation returns up to 25 results.</p>
+    # @option params [String] :next_token
+    #   <p>The token used to paginate the exposures list returned.
+    #            On your first call to <code>ListExposuresByRemediationV2</code>, omit this parameter or set it
+    #            to <code>NULL</code>. For subsequent calls, use the <code>NextToken</code> value returned in
+    #            the previous response to retrieve the next page of results.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     target_uid: "RemediationStringUid", # required
+    #     max_results: 1,
+    #     next_token: "NextToken"
+    #   }
+    #   options = {}
+    #   response = client.list_exposures_by_remediation_v2(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     items: [ # required
+    #       {
+    #         metadata_uid: "NonEmptyString", # required
+    #         title: "NonEmptyString", # required
+    #         previous_severity: "Informational" # One of: ["Informational", "Low", "Medium", "High", "Critical"], # required
+    #         projected_severity: "Informational" # One of: ["Informational", "Low", "Medium", "High", "Critical"], # required
+    #         impact: "Reduces" # One of: ["Reduces", "Resolves", "Unchanged"], # required
+    #       }
+    #     ],
+    #     target_uid: "NonEmptyString", # required
+    #     resource: { # required
+    #       account_id: "NonEmptyString", # required
+    #       region: "NonEmptyString", # required
+    #       resource_owner_account_id: "NonEmptyString",
+    #       resource_owner_org_id: "NonEmptyString",
+    #       type: "NonEmptyString", # required
+    #       name: "NonEmptyString",
+    #       id: "NonEmptyString", # required
+    #       resource_guid: "NonEmptyString",
+    #       resource_region: "NonEmptyString", # required
+    #       cloud_provider: "Azure" # One of: ["Azure", "AWS"], # required
+    #     },
+    #     total_count: 1, # required
+    #     trait: { # required
+    #       type: "NonEmptyString", # required
+    #       title: "NonEmptyString", # required
+    #     },
+    #     next_token: "NextToken"
+    #   }
+    # @return [Types::ListExposuresByRemediationV2Response]
+    def list_exposures_by_remediation_v2(params = {}, options = {})
+      request = build_request(:list_exposures_by_remediation_v2, params)
+      request.send_request(options)
+    end
+
+    # <p>If cross-Region aggregation is enabled, then <code>ListFindingAggregators</code> returns the Amazon Resource Name (ARN)
     # of the finding aggregator. You can run this operation from any Amazon Web Services Region.</p>
     # @param [Hash, Types::ListFindingAggregatorsRequest] params
     # @option params [String] :next_token
@@ -16935,12 +18601,66 @@ module Aws::SecurityHub
       request.send_request(options)
     end
 
+    # <p>Lists the free trial status of Security Hub features. A delegated Security Hub administrator can list the status for accounts in its organization. Any other account can list the status only for itself. Free trial status remains available after a feature is disabled.</p>
+    # @param [Hash, Types::ListFreeTrialStatusesV2Request] params
+    # @option params [Array<String>] :account_ids
+    #   <p>The Amazon Web Services account identifiers to list free trial status for. You can specify accounts other than your own only if you are a delegated Security Hub administrator.</p>
+    # @option params [Array<String>] :statuses
+    #   <p>The free trial statuses to filter the results by. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>ACTIVE</code> returns only features with an ongoing free trial period.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>INACTIVE</code> returns only features whose free trial period has ended, or that never started.</p>
+    #               </li>
+    #            </ul>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return. If you don't specify a value, Security Hub returns up to 100 results.</p>
+    # @option params [String] :next_token
+    #   <p>The pagination token to request the next page of results.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     account_ids: ["FreeTrialAccountId"],
+    #     statuses: ["ACTIVE" # One of: ["ACTIVE", "INACTIVE"]],
+    #     max_results: 1,
+    #     next_token: "NextToken"
+    #   }
+    #   options = {}
+    #   response = client.list_free_trial_statuses_v2(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     account_free_trial_statuses: [ # required
+    #       {
+    #         account_id: "FreeTrialAccountId", # required
+    #         evaluated_at: Time.now, # required
+    #         free_trial_statuses: [ # required
+    #           {
+    #             feature_type: "SECURITY_HUB_V2" # One of: ["SECURITY_HUB_V2", "SECURITY_HUB_V2_MULTI_CLOUD_AZURE"], # required
+    #             status: "ACTIVE" # One of: ["ACTIVE", "INACTIVE"], # required
+    #             started_at: Time.now, # required
+    #             expires_at: Time.now, # required
+    #           }
+    #         ]
+    #       }
+    #     ],
+    #     next_token: "NextToken"
+    #   }
+    # @return [Types::ListFreeTrialStatusesV2Response]
+    def list_free_trial_statuses_v2(params = {}, options = {})
+      request = build_request(:list_free_trial_statuses_v2, params)
+      request.send_request(options)
+    end
+
     # <note>
-    #             <p>We recommend using Organizations instead of Security Hub invitations to manage your member accounts. 
-    #            For information, see <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-accounts-orgs.html">Managing Security Hub administrator and member accounts with Organizations</a> 
-    #            in the <i>Security Hub User Guide</i>.</p>
+    #             <p>We recommend using Organizations instead of Security Hub CSPM invitations to manage your member accounts.
+    #            For information, see <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-accounts-orgs.html">Managing Security Hub CSPM administrator and member accounts with Organizations</a>
+    #            in the <i>Security Hub CSPM User Guide</i>.</p>
     #          </note>
-    #          <p>Lists all Security Hub membership invitations that were sent to the calling account.</p>
+    #          <p>Lists all Security Hub CSPM membership invitations that were sent to the calling account.</p>
     #          <p>Only accounts that are managed by invitation can use this operation.
     #          Accounts that are managed using the integration with Organizations don't receive invitations.</p>
     # @param [Hash, Types::ListInvitationsRequest] params
@@ -16978,7 +18698,7 @@ module Aws::SecurityHub
       request.send_request(options)
     end
 
-    # <p>Lists details about all member accounts for the current Security Hub administrator
+    # <p>Lists details about all member accounts for the current Security Hub CSPM administrator
     #          account.</p>
     #          <p>The results include both member accounts that belong to an organization and member
     #          accounts that were invited manually.</p>
@@ -17028,7 +18748,7 @@ module Aws::SecurityHub
       request.send_request(options)
     end
 
-    # <p>Lists the Security Hub administrator accounts. Can only be called by the organization
+    # <p>Lists the Security Hub CSPM administrator accounts. Can only be called by the organization
     #          management account.</p>
     # @param [Hash, Types::ListOrganizationAdminAccountsRequest] params
     # @option params [Integer] :max_results
@@ -17039,8 +18759,8 @@ module Aws::SecurityHub
     #               <code>NULL</code>. For subsequent calls to the operation, to continue listing data, set
     #            the value of this parameter to the value returned from the previous response. </p>
     # @option params [String] :feature
-    #   <p>The feature where the delegated administrator account is listed. 
-    #            Defaults to Security Hub if not specified.</p>
+    #   <p>The feature where the delegated administrator account is listed.
+    #            Defaults to Security Hub CSPM if not specified.</p>
     # @example To list administrator acccounts for an organization
     #   # The following example lists the Security  Hub administrator accounts for an organization. Only the organization management account can call this operation.
     #   params = {}
@@ -17084,7 +18804,7 @@ module Aws::SecurityHub
     end
 
     # <p>
-    #          Lists all of the security controls that apply to a specified standard. 
+    #          Lists all of the security controls that apply to a specified standard.
     #       </p>
     # @param [Hash, Types::ListSecurityControlDefinitionsRequest] params
     # @option params [String] :standards_arn
@@ -17101,8 +18821,59 @@ module Aws::SecurityHub
     #            first 25 security controls that apply to the specified standard. The results also include a
     #               <code>NextToken</code> parameter that you can use in a subsequent API call to get the
     #            next 25 controls. This repeats until all controls for the standard are returned. </p>
+    # @option params [Array<String>] :providers
+    #   <p>A list of cloud providers to filter the security control definitions by. For example, specify <code>Azure</code> to return only controls that evaluate Azure resources.</p>
+    # @example To list Azure security control definitions
+    #   # The following example lists security control definitions for a specified provider.
+    #   params = {
+    #     providers: [
+    #       Azure
+    #     ],
+    #     max_results: 3
+    #   }
+    #   options = {}
+    #   response = client.list_security_control_definitions(params, options)
+    #   response.to_h #=>
+    #   {
+    #     security_control_definitions: [
+    #       {
+    #         security_control_id: "Azure.App.1",
+    #         title: "Azure Container Apps with managed identity enabled should follow least privilege",
+    #         description: "This control checks whether Azure Container Apps have managed identity enabled. The control fails if the Container App has a system-assigned or user-assigned managed identity enabled.",
+    #         remediation_url: "https://docs.aws.amazon.com/console/securityhub/Azure.App.1/remediation",
+    #         severity_rating: MEDIUM,
+    #         current_region_availability: AVAILABLE,
+    #         customizable_properties: [
+    #         ],
+    #         provider: Azure
+    #       },
+    #       {
+    #         security_control_id: "Azure.App.2",
+    #         title: "Azure Container Apps should not pass Azure SDK credentials as environment variables",
+    #         description: "This control checks whether an Azure Container App passes Azure SDK credentials as plain-text container environment variables. The control fails if any container (including initContainers) defines AZURE_CLIENT_SECRET, AZURE_CLIENT_CERTIFICATE_PASSWORD, or AZURE_PASSWORD as a plain-text environment variable instead of referencing a secret via secretRef.",
+    #         remediation_url: "https://docs.aws.amazon.com/console/securityhub/Azure.App.2/remediation",
+    #         severity_rating: CRITICAL,
+    #         current_region_availability: AVAILABLE,
+    #         customizable_properties: [
+    #         ],
+    #         provider: Azure
+    #       },
+    #       {
+    #         security_control_id: "Azure.App.3",
+    #         title: "Azure Container Apps should not have external ingress enabled",
+    #         description: "This control checks whether Azure Container Apps have external ingress configured. The control fails if the Container App ingress is set to accept traffic from anywhere (external).",
+    #         remediation_url: "https://docs.aws.amazon.com/console/securityhub/Azure.App.3/remediation",
+    #         severity_rating: HIGH,
+    #         current_region_availability: AVAILABLE,
+    #         customizable_properties: [
+    #         ],
+    #         provider: Azure
+    #       }
+    #     ],
+    #     next_token: "U2FsdGVkX1..."
+    #   }
     # @example To list security controls that apply to a standard
-    #   # The following example lists security controls that apply to a specified Security Hub standard. 
+    #   # The following example lists security controls that apply to a specified Security Hub standard.
     #   params = {
     #     standards_arn: "arn:aws:securityhub:::standards/aws-foundational-security-best-practices/v/1.0.0",
     #     next_token: "NULL",
@@ -17122,7 +18893,8 @@ module Aws::SecurityHub
     #         current_region_availability: AVAILABLE,
     #         customizable_properties: [
     #           Parameters
-    #         ]
+    #         ],
+    #         provider: AWS
     #       },
     #       {
     #         security_control_id: "APIGateway.1",
@@ -17133,7 +18905,8 @@ module Aws::SecurityHub
     #         current_region_availability: AVAILABLE,
     #         customizable_properties: [
     #           Parameters
-    #         ]
+    #         ],
+    #         provider: AWS
     #       },
     #       {
     #         security_control_id: "APIGateway.2",
@@ -17141,7 +18914,19 @@ module Aws::SecurityHub
     #         description: "This control checks whether Amazon API Gateway REST API stages have SSL certificates configured that backend systems can use to authenticate that incoming requests are from the API Gateway.",
     #         remediation_url: "https://docs.aws.amazon.com/console/securityhub/APIGateway.2/remediation",
     #         severity_rating: MEDIUM,
-    #         current_region_availability: AVAILABLE
+    #         current_region_availability: AVAILABLE,
+    #         provider: AWS
+    #       },
+    #       {
+    #         security_control_id: "Azure.App.1",
+    #         title: "Azure Container Apps with managed identity enabled should follow least privilege",
+    #         description: "This control checks whether Azure Container Apps have managed identity enabled. The control fails if the Container App has a system-assigned or user-assigned managed identity enabled.",
+    #         remediation_url: "https://docs.aws.amazon.com/console/securityhub/Azure.App.1/remediation",
+    #         severity_rating: MEDIUM,
+    #         current_region_availability: AVAILABLE,
+    #         customizable_properties: [
+    #         ],
+    #         provider: Azure
     #       }
     #     ],
     #     next_token: "U2FsdGVkX1..."
@@ -17150,7 +18935,8 @@ module Aws::SecurityHub
     #   params = {
     #     standards_arn: "NonEmptyString",
     #     next_token: "NextToken",
-    #     max_results: 1
+    #     max_results: 1,
+    #     providers: ["AWS" # One of: ["AWS", "Azure"]]
     #   }
     #   options = {}
     #   response = client.list_security_control_definitions(params, options)
@@ -17212,7 +18998,8 @@ module Aws::SecurityHub
     #               }
     #             }
     #           }
-    #         }
+    #         },
+    #         provider: "AWS" # One of: ["AWS", "Azure"]
     #       }
     #     ],
     #     next_token: "NextToken"
@@ -17230,8 +19017,8 @@ module Aws::SecurityHub
     # @param [Hash, Types::ListStandardsControlAssociationsRequest] params
     # @option params [String] :security_control_id
     #   <p>
-    #            The identifier of the control (identified with <code>SecurityControlId</code>, <code>SecurityControlArn</code>, or a mix of both parameters) that you 
-    #            want to determine the enablement status of in each enabled standard. 
+    #            The identifier of the control (identified with <code>SecurityControlId</code>, <code>SecurityControlArn</code>, or a mix of both parameters) that you
+    #            want to determine the enablement status of in each enabled standard.
     #         </p>
     # @option params [String] :next_token
     #   <p>
@@ -17243,7 +19030,7 @@ module Aws::SecurityHub
     #            first 25 standard and control associations. The results also include a
     #               <code>NextToken</code> parameter that you can use in a subsequent API call to get the
     #            next 25 associations. This repeats until all associations for the specified control are
-    #            returned. The number of results is limited by the number of supported Security Hub
+    #            returned. The number of results is limited by the number of supported Security Hub CSPM
     #            standards that you've enabled in the calling account. </p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -17314,15 +19101,40 @@ module Aws::SecurityHub
       request.send_request(options)
     end
 
+    # <p>Grants permission to complete the authorization based on input parameters.</p>
+    # @param [Hash, Types::RegisterConnectorV2Request] params
+    # @option params [String] :auth_code
+    #   <p>The authCode retrieved from authUrl to complete the OAuth 2.0 authorization code flow.</p>
+    # @option params [String] :auth_state
+    #   <p>The authState retrieved from authUrl to complete the OAuth 2.0 authorization code flow.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     auth_code: "NonEmptyString", # required
+    #     auth_state: "NonEmptyString", # required
+    #   }
+    #   options = {}
+    #   response = client.register_connector_v2(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     connector_arn: "NonEmptyString",
+    #     connector_id: "NonEmptyString", # required
+    #   }
+    # @return [Types::RegisterConnectorV2Response]
+    def register_connector_v2(params = {}, options = {})
+      request = build_request(:register_connector_v2, params)
+      request.send_request(options)
+    end
+
     # <p>
-    #             Associates a target account, organizational unit, or the root with a specified configuration. The target can be 
-    #             associated with a configuration policy or self-managed behavior. Only the Security Hub delegated administrator can 
+    #             Associates a target account, organizational unit, or the root with a specified configuration. The target can be
+    #             associated with a configuration policy or self-managed behavior. Only the Security Hub CSPM delegated administrator can
     #             invoke this operation from the home Region.
     #         </p>
     # @param [Hash, Types::StartConfigurationPolicyAssociationRequest] params
     # @option params [String] :configuration_policy_identifier
     #   <p>
-    #               The Amazon Resource Name (ARN) of a configuration policy, the universally unique identifier (UUID) of a 
+    #               The Amazon Resource Name (ARN) of a configuration policy, the universally unique identifier (UUID) of a
     #               configuration policy, or a value of <code>SELF_MANAGED_SECURITY_HUB</code> for a self-managed configuration.
     #           </p>
     # @option params [Types::Target] :target
@@ -17379,10 +19191,10 @@ module Aws::SecurityHub
     end
 
     # <p>
-    #             Disassociates a target account, organizational unit, or the root from a specified configuration. When you 
-    #             disassociate a configuration from its target, the target inherits the configuration of the closest parent. If there’s no 
-    #             configuration to inherit, the target retains its settings but becomes a self-managed account. A target can be disassociated from 
-    #             a configuration policy or self-managed behavior. Only the Security Hub delegated administrator can invoke this 
+    #             Disassociates a target account, organizational unit, or the root from a specified configuration. When you
+    #             disassociate a configuration from its target, the target inherits the configuration of the closest parent. If there’s no
+    #             configuration to inherit, the target retains its settings but becomes a self-managed account. A target can be disassociated from
+    #             a configuration policy or self-managed behavior. Only the Security Hub CSPM delegated administrator can invoke this
     #             operation from the home Region.
     #         </p>
     # @param [Hash, Types::StartConfigurationPolicyDisassociationRequest] params
@@ -17392,7 +19204,7 @@ module Aws::SecurityHub
     #           </p>
     # @option params [String] :configuration_policy_identifier
     #   <p>
-    #               The Amazon Resource Name (ARN) of a configuration policy, the universally unique identifier (UUID) of a 
+    #               The Amazon Resource Name (ARN) of a configuration policy, the universally unique identifier (UUID) of a
     #               configuration policy, or a value of <code>SELF_MANAGED_SECURITY_HUB</code> for a self-managed configuration.
     #           </p>
     # @example To disassociate a configuration from a target
@@ -17425,6 +19237,235 @@ module Aws::SecurityHub
     # @return [Types::StartConfigurationPolicyDisassociationResponse]
     def start_configuration_policy_disassociation(params = {}, options = {})
       request = build_request(:start_configuration_policy_disassociation, params)
+      request.send_request(options)
+    end
+
+    # <p>Starts an ad hoc export job that writes Security Hub findings to an Amazon Simple Storage Service (Amazon S3) bucket that you own. Because the export runs asynchronously, this operation returns only the <code>ExportJobId</code> of the new job; it doesn't wait for the export to finish. Use <code>GetExportJobV2</code> to poll the job, and <code>ListExportJobsV2</code> to view the export jobs in your account.</p>
+    #          <p>Security Hub allows only one export job in the <code>RUNNING</code> state per account at a time. If an export job is already running, this operation returns a <code>ServiceQuotaExceededException</code>. Wait for the running job to finish, or cancel it with <code>CancelExportJobV2</code>, before you start a new one.</p>
+    #          <p>Specify the destination bucket and Amazon Web Services Key Management Service (Amazon Web Services KMS) key in the <code>Destination</code> parameter, and the output format (<code>CSV</code> or <code>OCSF_JSON</code>), optional filters, and field selection in the <code>OutputConfiguration</code> parameter. Before you call this operation, you must grant Security Hub permission to write to your bucket and use your Amazon Web Services KMS key by adding the bucket policy and key policy statements shown in the Examples section.</p>
+    #          <p>Two identities use your Amazon Web Services KMS key, and each needs its own permission. Security Hub uses the key when it writes the export objects to your bucket. The IAM principal that calls <code>StartExportJobV2</code> must also have <code>kms:GenerateDataKey</code> and <code>kms:Decrypt</code> permissions on the key. The Examples section shows both grants.</p>
+    #          <p>A delegated administrator can use the optional <code>Scopes</code> parameter to export findings for specific organizations or organizational units (OUs).</p>
+    #          <p>To make the request idempotent, provide a <code>ClientToken</code>. If you retry a <code>StartExportJobV2</code> request with the same <code>ClientToken</code> and the same request parameters, Security Hub returns the <code>ExportJobId</code> of the original job instead of starting a new one. If you reuse a <code>ClientToken</code> with different request parameters, this operation returns a <code>ConflictException</code>.</p>
+    # @param [Hash, Types::StartExportJobV2Request] params
+    # @option params [String] :name
+    #   <p>An optional, user-provided name for the export job that helps you identify it in <code>ListExportJobsV2</code> results. The value can be 1–256 characters. Alphanumeric characters, spaces, and the following ASCII characters are permitted: <code>. _ , : ( ) / + -</code>.</p>
+    # @option params [Types::ExportDestination] :destination
+    #   <p>The destination that Security Hub writes the export to. You must specify exactly one destination type. Currently, the only supported type is Amazon S3.</p>
+    # @option params [Types::ExportOutput] :output_configuration
+    #   <p>Specifies what data to export and how to format it. You must specify exactly one output type. Currently, the only supported type is <code>Findings</code>.</p>
+    # @option params [Types::ExportScopes] :scopes
+    #   <p>Limits the export to findings from specific organizational units (OUs) or from the delegated administrator's organization. Only the delegated administrator account can use this parameter; other accounts that specify it receive an <code>AccessDeniedException</code>.</p>
+    #            <p>This parameter is optional. If you omit it, the delegated administrator exports findings from all accounts across the entire organization, and other accounts export only their own findings.</p>
+    #            <p>You can specify up to 10 entries in <code>Scopes.AwsOrganizations</code>. If you specify multiple entries, Security Hub combines them using OR logic.</p>
+    # @option params [String] :client_token
+    #   <p>A unique identifier used to ensure idempotency.</p>
+    # @example Example – Starting a CSV export of critical findings
+    #   # The following example starts an export that writes selected fields of new, critical findings to an Amazon S3 bucket in CSV format.
+    #   params = {
+    #     name: "quarterly-critical-findings",
+    #     destination: {
+    #     "S3" => {
+    #       "BucketArn" => arn:aws:s3:::amzn-s3-demo-bucket,
+    #       "KmsKeyArn" => arn:aws:kms:aa-example-1:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab,
+    #       "ObjectPrefix" => security-hub-exports/2026-Q1
+    #     }
+    #   },
+    #     output_configuration: {
+    #     "Findings" => {
+    #       "Format" => CSV,
+    #       "SelectedFields" => [
+    #         finding_info.title,
+    #         severity,
+    #         status,
+    #         cloud.account.uid,
+    #         resources.uid
+    #       ],
+    #       "Filters" => {
+    #         "CompositeOperator" => AND,
+    #         "CompositeFilters" => [{
+    #           "Operator" => AND,
+    #           "StringFilters" => [
+    #             {
+    #               "FieldName" => severity,
+    #               "Filter" => {
+    #                 "Value" => Critical,
+    #                 "Comparison" => EQUALS
+    #               }
+    #             },
+    #             {
+    #               "FieldName" => status,
+    #               "Filter" => {
+    #                 "Value" => New,
+    #                 "Comparison" => EQUALS
+    #               }
+    #             }
+    #           ]
+    #         }]
+    #       }
+    #     }
+    #   },
+    #     client_token: "b3d1f9a2-1c4e-4b9a-9f2e-EXAMPLE11111"
+    #   }
+    #   options = {}
+    #   response = client.start_export_job_v2(params, options)
+    #   response.to_h #=>
+    #   {
+    #     export_job_id: "a1b2c3d4e5f6"
+    #   }
+    # @example Example – Starting an OCSF JSON export scoped to an organizational unit
+    #   # The following example, run by a delegated administrator, starts an export of the last 30 days of findings for a specific organizational unit (OU) in OCSF JSON format.
+    #   params = {
+    #     destination: {
+    #     "S3" => {
+    #       "BucketArn" => arn:aws:s3:::amzn-s3-demo-bucket,
+    #       "KmsKeyArn" => arn:aws:kms:aa-example-1:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+    #     }
+    #   },
+    #     output_configuration: {
+    #     "Findings" => {
+    #       "Format" => OCSF_JSON,
+    #       "Filters" => {
+    #         "CompositeOperator" => AND,
+    #         "CompositeFilters" => [{
+    #           "Operator" => AND,
+    #           "DateFilters" => [{
+    #             "FieldName" => finding_info.last_seen_time_dt,
+    #             "Filter" => {
+    #               "DateRange" => {
+    #                 "Value" => 30,
+    #                 "Unit" => DAYS,
+    #                 "Comparison" => WITHIN
+    #               }
+    #             }
+    #           }]
+    #         }]
+    #       }
+    #     }
+    #   },
+    #     scopes: {
+    #       aws_organizations: [
+    #         {
+    #           organizational_unit_id: "ou-1234-a1b2c3d4"
+    #         }
+    #       ]
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.start_export_job_v2(params, options)
+    #   response.to_h #=>
+    #   {
+    #     export_job_id: "f6e5d4c3b2a1"
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     name: "ExportName",
+    #     destination: { # required
+    #       # One of:
+    #       s3: {
+    #         bucket_arn: "NonEmptyString", # required
+    #         kms_key_arn: "NonEmptyString", # required
+    #         object_prefix: "S3ObjectPrefix"
+    #       }
+    #     },
+    #     output_configuration: { # required
+    #       # One of:
+    #       findings: {
+    #         format: "CSV" # One of: ["CSV", "OCSF_JSON"], # required
+    #         filters: {
+    #           composite_filters: [
+    #             {
+    #               string_filters: [
+    #                 {
+    #                   field_name: "metadata.uid" # One of: ["metadata.uid", "activity_name", "cloud.account.uid", "cloud.provider", "cloud.region", "compliance.assessments.category", "compliance.assessments.name", "compliance.control", "compliance.status", "compliance.standards", "finding_info.desc", "finding_info.src_url", "finding_info.title", "finding_info.types", "finding_info.uid", "finding_info.related_events.traits.category", "finding_info.related_events.uid", "finding_info.related_events.product.uid", "finding_info.related_events.title", "impact", "likelihood", "metadata.product.name", "metadata.product.uid", "metadata.product.vendor_name", "remediation.desc", "remediation.references", "resources.cloud_partition", "resources.criticality", "resources.name", "resources.owner.account.uid", "resources.owner.org.uid", "resources.owner.account.name", "resources.provider", "resources.region", "resources.type", "resources.uid", "severity", "status", "comment", "vulnerabilities.fix_coverage", "class_name", "databucket.encryption_details.algorithm", "databucket.encryption_details.key_uid", "databucket.file.data_classifications.classifier_details.type", "evidences.actor.user.account.uid", "evidences.api.operation", "evidences.api.response.error_message", "evidences.api.service.name", "evidences.connection_info.direction", "evidences.connection_info.protocol_name", "evidences.dst_endpoint.autonomous_system.name", "evidences.dst_endpoint.location.city", "evidences.dst_endpoint.location.country", "evidences.src_endpoint.autonomous_system.name", "evidences.src_endpoint.hostname", "evidences.src_endpoint.location.city", "evidences.src_endpoint.location.country", "finding_info.analytic.name", "malware.name", "malware_scan_info.uid", "malware.severity", "resources.cloud_function.layers.uid_alt", "resources.cloud_function.runtime", "resources.cloud_function.user.uid", "resources.device.encryption_details.key_uid", "resources.device.image.uid", "resources.image.architecture", "resources.image.registry_uid", "resources.image.repository_name", "resources.image.uid", "resources.subnet_info.uid", "resources.vpc_uid", "vulnerabilities.affected_code.file.path", "vulnerabilities.affected_packages.name", "vulnerabilities.cve.epss.score", "vulnerabilities.cve.uid", "vulnerabilities.related_vulnerabilities", "cloud.account.name", "vendor_attributes.severity"],
+    #                   filter: {
+    #                     value: "NonEmptyString",
+    #                     comparison: "EQUALS" # One of: ["EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "CONTAINS_WORD"]
+    #                   }
+    #                 }
+    #               ],
+    #               date_filters: [
+    #                 {
+    #                   field_name: "finding_info.created_time_dt" # One of: ["finding_info.created_time_dt", "finding_info.first_seen_time_dt", "finding_info.last_seen_time_dt", "finding_info.modified_time_dt", "resources.image.created_time_dt", "resources.image.last_used_time_dt", "resources.modified_time_dt"],
+    #                   filter: {
+    #                     start: "NonEmptyString",
+    #                     end: "NonEmptyString",
+    #                     date_range: {
+    #                       value: 1,
+    #                       unit: "DAYS" # One of: ["DAYS"],
+    #                       comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
+    #                     }
+    #                   }
+    #                 }
+    #               ],
+    #               boolean_filters: [
+    #                 {
+    #                   field_name: "compliance.assessments.meets_criteria" # One of: ["compliance.assessments.meets_criteria", "vulnerabilities.is_exploit_available", "vulnerabilities.is_fix_available"],
+    #                   filter: {
+    #                     value: false
+    #                   }
+    #                 }
+    #               ],
+    #               number_filters: [
+    #                 {
+    #                   field_name: "activity_id" # One of: ["activity_id", "compliance.status_id", "confidence_score", "severity_id", "status_id", "finding_info.related_events_count", "evidences.api.response.code", "evidences.dst_endpoint.autonomous_system.number", "evidences.dst_endpoint.port", "evidences.src_endpoint.autonomous_system.number", "evidences.src_endpoint.port", "resources.image.in_use_count", "vulnerabilities.cve.cvss.base_score", "vendor_attributes.severity_id"],
+    #                   filter: {
+    #                     gte: 1.0,
+    #                     lte: 1.0,
+    #                     eq: 1.0,
+    #                     gt: 1.0,
+    #                     lt: 1.0
+    #                   }
+    #                 }
+    #               ],
+    #               map_filters: [
+    #                 {
+    #                   field_name: "resources.tags" # One of: ["resources.tags", "compliance.control_parameters", "databucket.tags", "finding_info.tags"],
+    #                   filter: {
+    #                     key: "NonEmptyString",
+    #                     value: "NonEmptyString",
+    #                     comparison: "EQUALS" # One of: ["EQUALS", "NOT_EQUALS", "CONTAINS", "NOT_CONTAINS"]
+    #                   }
+    #                 }
+    #               ],
+    #               ip_filters: [
+    #                 {
+    #                   field_name: "evidences.dst_endpoint.ip" # One of: ["evidences.dst_endpoint.ip", "evidences.src_endpoint.ip"],
+    #                   filter: {
+    #                     cidr: "NonEmptyString"
+    #                   }
+    #                 }
+    #               ],
+    #               nested_composite_filters: {
+    #                 # recursive CompositeFilterList
+    #               },
+    #               operator: "AND" # One of: ["AND", "OR"]
+    #             }
+    #           ],
+    #           composite_operator: "AND" # One of: ["AND", "OR"]
+    #         },
+    #         selected_fields: ["metadata.uid" # One of: ["metadata.uid", "activity_name", "cloud.account.name", "cloud.account.uid", "cloud.provider", "cloud.region", "compliance.assessments.category", "compliance.assessments.name", "compliance.control", "compliance.status", "compliance.standards", "finding_info.desc", "finding_info.src_url", "finding_info.title", "finding_info.types", "finding_info.uid", "finding_info.related_events.traits.category", "finding_info.related_events.uid", "finding_info.related_events.product.uid", "finding_info.related_events.title", "metadata.product.feature.uid", "metadata.product.name", "metadata.product.uid", "metadata.product.vendor_name", "remediation.desc", "remediation.references", "resources.cloud_partition", "resources.name", "resources.owner.account.uid", "resources.owner.org.uid", "resources.owner.account.name", "resources.provider", "resources.region", "resources.type", "resources.uid", "severity", "status", "comment", "vulnerabilities.fix_coverage", "class_name", "databucket.encryption_details.algorithm", "databucket.encryption_details.key_uid", "databucket.file.data_classifications.classifier_details.type", "evidences.actor.user.account.uid", "evidences.api.operation", "evidences.api.response.error_message", "evidences.api.service.name", "evidences.connection_info.direction", "evidences.connection_info.protocol_name", "evidences.dst_endpoint.autonomous_system.name", "evidences.dst_endpoint.location.city", "evidences.dst_endpoint.location.country", "evidences.src_endpoint.autonomous_system.name", "evidences.src_endpoint.hostname", "evidences.src_endpoint.location.city", "evidences.src_endpoint.location.country", "finding_info.analytic.name", "malware.name", "malware_scan_info.uid", "malware.severity", "resources.cloud_function.layers.uid_alt", "resources.cloud_function.runtime", "resources.cloud_function.user.uid", "resources.device.encryption_details.key_uid", "resources.device.image.uid", "resources.image.architecture", "resources.image.registry_uid", "resources.image.repository_name", "resources.image.uid", "resources.subnet_info.uid", "resources.vpc_uid", "vulnerabilities.affected_code.file.path", "vulnerabilities.affected_packages.name", "vulnerabilities.cve.cvss.vendor_name", "vulnerabilities.cve.cvss.version", "vulnerabilities.cve.epss.score", "vulnerabilities.cve.uid", "vulnerabilities.related_vulnerabilities", "vendor_attributes.severity", "activity_id", "compliance.status_id", "confidence_score", "severity_id", "status_id", "finding_info.related_events_count", "evidences.api.response.code", "evidences.dst_endpoint.autonomous_system.number", "evidences.dst_endpoint.port", "evidences.src_endpoint.autonomous_system.number", "evidences.src_endpoint.port", "resources.image.in_use_count", "vulnerabilities.cve.cvss.base_score", "vendor_attributes.severity_id", "finding_info.created_time_dt", "finding_info.first_seen_time_dt", "finding_info.last_seen_time_dt", "finding_info.modified_time_dt", "resources.image.created_time_dt", "resources.image.last_used_time_dt", "resources.modified_time_dt", "compliance.assessments.meets_criteria", "vulnerabilities.is_exploit_available", "vulnerabilities.is_fix_available", "resources.tags", "compliance.control_parameters", "databucket.tags", "finding_info.tags", "evidences.dst_endpoint.ip", "evidences.src_endpoint.ip"]]
+    #       }
+    #     },
+    #     scopes: {
+    #       aws_organizations: [
+    #         {
+    #           organization_id: "NonEmptyString",
+    #           organizational_unit_id: "NonEmptyString"
+    #         }
+    #       ]
+    #     },
+    #     client_token: "ClientToken"
+    #   }
+    #   options = {}
+    #   response = client.start_export_job_v2(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     export_job_id: "ExportJobId", # required
+    #   }
+    # @return [Types::StartExportJobV2Response]
+    def start_export_job_v2(params = {}, options = {})
+      request = build_request(:start_export_job_v2, params)
       request.send_request(options)
     end
 
@@ -17499,7 +19540,7 @@ module Aws::SecurityHub
       request.send_request(options)
     end
 
-    # <p>Updates the name and description of a custom action target in Security Hub.</p>
+    # <p>Updates the name and description of a custom action target in Security Hub CSPM.</p>
     # @param [Hash, Types::UpdateActionTargetRequest] params
     # @option params [String] :action_target_arn
     #   <p>The ARN of the custom action target to update.</p>
@@ -17508,7 +19549,7 @@ module Aws::SecurityHub
     # @option params [String] :description
     #   <p>The updated description for the custom action target.</p>
     # @example To update the name and description of a custom action target
-    #   # The following example updates the name and description of a custom action target in Security Hub. You can create custom actions to automatically respond to Security Hub findings using Amazon EventBridge. 
+    #   # The following example updates the name and description of a custom action target in Security Hub. You can create custom actions to automatically respond to Security Hub findings using Amazon EventBridge.
     #   params = {
     #     action_target_arn: "arn:aws:securityhub:us-west-1:123456789012:action/custom/Remediation",
     #     name: "Chat custom action",
@@ -17535,7 +19576,7 @@ module Aws::SecurityHub
       request.send_request(options)
     end
 
-    # <p>Udpates the configuration for the Aggregator V2. This API is in private preview and subject to change.</p>
+    # <p>Udpates the configuration for the Aggregator V2.</p>
     # @param [Hash, Types::UpdateAggregatorV2Request] params
     # @option params [String] :aggregator_v2_arn
     #   <p>The ARN of the Aggregator V2.</p>
@@ -17565,7 +19606,7 @@ module Aws::SecurityHub
       request.send_request(options)
     end
 
-    # <p>Updates a V2 automation rule. This API is in private preview and subject to change.</p>
+    # <p>Updates a V2 automation rule.</p>
     # @param [Hash, Types::UpdateAutomationRuleV2Request] params
     # @option params [String] :identifier
     #   <p>The ARN of the automation rule.</p>
@@ -17595,7 +19636,7 @@ module Aws::SecurityHub
     #           {
     #             string_filters: [
     #               {
-    #                 field_name: "metadata.uid" # One of: ["metadata.uid", "activity_name", "cloud.account.uid", "cloud.provider", "cloud.region", "compliance.assessments.category", "compliance.assessments.name", "compliance.control", "compliance.status", "compliance.standards", "finding_info.desc", "finding_info.src_url", "finding_info.title", "finding_info.types", "finding_info.uid", "finding_info.related_events.uid", "finding_info.related_events.product.uid", "finding_info.related_events.title", "metadata.product.name", "metadata.product.uid", "metadata.product.vendor_name", "remediation.desc", "remediation.references", "resources.cloud_partition", "resources.region", "resources.type", "resources.uid", "severity", "status", "comment", "vulnerabilities.fix_coverage", "class_name"],
+    #                 field_name: "metadata.uid" # One of: ["metadata.uid", "activity_name", "cloud.account.uid", "cloud.provider", "cloud.region", "compliance.assessments.category", "compliance.assessments.name", "compliance.control", "compliance.status", "compliance.standards", "finding_info.desc", "finding_info.src_url", "finding_info.title", "finding_info.types", "finding_info.uid", "finding_info.related_events.traits.category", "finding_info.related_events.uid", "finding_info.related_events.product.uid", "finding_info.related_events.title", "impact", "likelihood", "metadata.product.name", "metadata.product.uid", "metadata.product.vendor_name", "remediation.desc", "remediation.references", "resources.cloud_partition", "resources.criticality", "resources.name", "resources.owner.account.uid", "resources.owner.org.uid", "resources.owner.account.name", "resources.provider", "resources.region", "resources.type", "resources.uid", "severity", "status", "comment", "vulnerabilities.fix_coverage", "class_name", "databucket.encryption_details.algorithm", "databucket.encryption_details.key_uid", "databucket.file.data_classifications.classifier_details.type", "evidences.actor.user.account.uid", "evidences.api.operation", "evidences.api.response.error_message", "evidences.api.service.name", "evidences.connection_info.direction", "evidences.connection_info.protocol_name", "evidences.dst_endpoint.autonomous_system.name", "evidences.dst_endpoint.location.city", "evidences.dst_endpoint.location.country", "evidences.src_endpoint.autonomous_system.name", "evidences.src_endpoint.hostname", "evidences.src_endpoint.location.city", "evidences.src_endpoint.location.country", "finding_info.analytic.name", "malware.name", "malware_scan_info.uid", "malware.severity", "resources.cloud_function.layers.uid_alt", "resources.cloud_function.runtime", "resources.cloud_function.user.uid", "resources.device.encryption_details.key_uid", "resources.device.image.uid", "resources.image.architecture", "resources.image.registry_uid", "resources.image.repository_name", "resources.image.uid", "resources.subnet_info.uid", "resources.vpc_uid", "vulnerabilities.affected_code.file.path", "vulnerabilities.affected_packages.name", "vulnerabilities.cve.epss.score", "vulnerabilities.cve.uid", "vulnerabilities.related_vulnerabilities", "cloud.account.name", "vendor_attributes.severity"],
     #                 filter: {
     #                   value: "NonEmptyString",
     #                   comparison: "EQUALS" # One of: ["EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "CONTAINS_WORD"]
@@ -17604,13 +19645,14 @@ module Aws::SecurityHub
     #             ],
     #             date_filters: [
     #               {
-    #                 field_name: "finding_info.created_time_dt" # One of: ["finding_info.created_time_dt", "finding_info.first_seen_time_dt", "finding_info.last_seen_time_dt", "finding_info.modified_time_dt"],
+    #                 field_name: "finding_info.created_time_dt" # One of: ["finding_info.created_time_dt", "finding_info.first_seen_time_dt", "finding_info.last_seen_time_dt", "finding_info.modified_time_dt", "resources.image.created_time_dt", "resources.image.last_used_time_dt", "resources.modified_time_dt"],
     #                 filter: {
     #                   start: "NonEmptyString",
     #                   end: "NonEmptyString",
     #                   date_range: {
     #                     value: 1,
-    #                     unit: "DAYS" # One of: ["DAYS"]
+    #                     unit: "DAYS" # One of: ["DAYS"],
+    #                     comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #                   }
     #                 }
     #               }
@@ -17625,7 +19667,7 @@ module Aws::SecurityHub
     #             ],
     #             number_filters: [
     #               {
-    #                 field_name: "activity_id" # One of: ["activity_id", "compliance.status_id", "confidence_score", "severity_id", "status_id", "finding_info.related_events_count"],
+    #                 field_name: "activity_id" # One of: ["activity_id", "compliance.status_id", "confidence_score", "severity_id", "status_id", "finding_info.related_events_count", "evidences.api.response.code", "evidences.dst_endpoint.autonomous_system.number", "evidences.dst_endpoint.port", "evidences.src_endpoint.autonomous_system.number", "evidences.src_endpoint.port", "resources.image.in_use_count", "vulnerabilities.cve.cvss.base_score", "vendor_attributes.severity_id"],
     #                 filter: {
     #                   gte: 1.0,
     #                   lte: 1.0,
@@ -17637,7 +19679,7 @@ module Aws::SecurityHub
     #             ],
     #             map_filters: [
     #               {
-    #                 field_name: "resources.tags" # One of: ["resources.tags"],
+    #                 field_name: "resources.tags" # One of: ["resources.tags", "compliance.control_parameters", "databucket.tags", "finding_info.tags"],
     #                 filter: {
     #                   key: "NonEmptyString",
     #                   value: "NonEmptyString",
@@ -17645,6 +19687,73 @@ module Aws::SecurityHub
     #                 }
     #               }
     #             ],
+    #             ip_filters: [
+    #               {
+    #                 field_name: "evidences.dst_endpoint.ip" # One of: ["evidences.dst_endpoint.ip", "evidences.src_endpoint.ip"],
+    #                 filter: {
+    #                   cidr: "NonEmptyString"
+    #                 }
+    #               }
+    #             ],
+    #             nested_composite_filters: {
+    #               # recursive CompositeFilterList
+    #             },
+    #             operator: "AND" # One of: ["AND", "OR"]
+    #           }
+    #         ],
+    #         composite_operator: "AND" # One of: ["AND", "OR"]
+    #       },
+    #       resource_criteria: {
+    #         composite_filters: [
+    #           {
+    #             string_filters: [
+    #               {
+    #                 field_name: "ResourceGuid" # One of: ["ResourceGuid", "ResourceId", "AccountId", "AccountName", "Region", "ResourceProvider", "ResourceOwnerAccountId", "ResourceOwnerOrgId", "ResourceCloudPartition", "ResourceRegion", "ResourceCategory", "ResourceType", "ResourceName", "FindingsSummary.FindingType", "FindingsSummary.ProductName", "ResourceSubCategory", "DiscoveryType", "ResourceInfo.AIDetails.HostResourceGuid", "ResourceInfo.AIDetails.HostResourceType", "ResourceInfo.AIDetails.CanonicalId", "ResourceCriticality"],
+    #                 filter: {
+    #                   value: "NonEmptyString",
+    #                   comparison: "EQUALS" # One of: ["EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "CONTAINS_WORD"]
+    #                 }
+    #               }
+    #             ],
+    #             date_filters: [
+    #               {
+    #                 field_name: "ResourceDetailCaptureTime" # One of: ["ResourceDetailCaptureTime", "ResourceCreationTime"],
+    #                 filter: {
+    #                   start: "NonEmptyString",
+    #                   end: "NonEmptyString",
+    #                   date_range: {
+    #                     value: 1,
+    #                     unit: "DAYS" # One of: ["DAYS"],
+    #                     comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
+    #                   }
+    #                 }
+    #               }
+    #             ],
+    #             number_filters: [
+    #               {
+    #                 field_name: "FindingsSummary.TotalFindings" # One of: ["FindingsSummary.TotalFindings", "FindingsSummary.Severities.Other", "FindingsSummary.Severities.Fatal", "FindingsSummary.Severities.Critical", "FindingsSummary.Severities.High", "FindingsSummary.Severities.Medium", "FindingsSummary.Severities.Low", "FindingsSummary.Severities.Informational", "FindingsSummary.Severities.Unknown", "ResourceInfo.AIDetails.SelfHostedAIModelResourceCount", "ResourceInfo.AIDetails.SelfHostedAIAgentResourceCount", "ResourceInfo.AIDetails.SelfHostedAIModelServingResourceCount", "ResourceInfo.AIDetails.SelfHostedAIExternalEndpointResourceCount", "ResourceInfo.AIDetails.SelfHostedAIDevelopmentResourceCount", "ResourceInfo.AIDetails.SelfHostedAIAgentFrameworkResourceCount", "ResourceInfo.AIDetails.SelfHostedAIAgentToolsAndIdentityResourceCount", "ResourceInfo.AIDetails.SelfHostedTotalAIResourceCount"],
+    #                 filter: {
+    #                   gte: 1.0,
+    #                   lte: 1.0,
+    #                   eq: 1.0,
+    #                   gt: 1.0,
+    #                   lt: 1.0
+    #                 }
+    #               }
+    #             ],
+    #             map_filters: [
+    #               {
+    #                 field_name: "ResourceTags" # One of: ["ResourceTags"],
+    #                 filter: {
+    #                   key: "NonEmptyString",
+    #                   value: "NonEmptyString",
+    #                   comparison: "EQUALS" # One of: ["EQUALS", "NOT_EQUALS", "CONTAINS", "NOT_CONTAINS"]
+    #                 }
+    #               }
+    #             ],
+    #             nested_composite_filters: {
+    #               # recursive ResourcesCompositeFilterList
+    #             },
     #             operator: "AND" # One of: ["AND", "OR"]
     #           }
     #         ],
@@ -17653,7 +19762,7 @@ module Aws::SecurityHub
     #     },
     #     actions: [
     #       {
-    #         type: "FINDING_FIELDS_UPDATE" # One of: ["FINDING_FIELDS_UPDATE", "EXTERNAL_INTEGRATION"], # required
+    #         type: "FINDING_FIELDS_UPDATE" # One of: ["FINDING_FIELDS_UPDATE", "EXTERNAL_INTEGRATION", "RESOURCE_FIELDS_UPDATE"], # required
     #         finding_fields_update: {
     #           severity_id: 1,
     #           comment: "NonEmptyString",
@@ -17661,6 +19770,9 @@ module Aws::SecurityHub
     #         },
     #         external_integration_configuration: {
     #           connector_arn: "NonEmptyString"
+    #         },
+    #         resource_fields_update: {
+    #           criticality: "Very High" # One of: ["Very High", "High", "Medium", "Low", "Unknown"], # required
     #         }
     #       }
     #     ]
@@ -17677,7 +19789,7 @@ module Aws::SecurityHub
     end
 
     # <p>
-    #             Updates a configuration policy. Only the Security Hub delegated 
+    #             Updates a configuration policy. Only the Security Hub CSPM delegated
     #             administrator can invoke this operation from the home Region.
     #         </p>
     # @param [Hash, Types::UpdateConfigurationPolicyRequest] params
@@ -17687,7 +19799,7 @@ module Aws::SecurityHub
     #           </p>
     # @option params [String] :name
     #   <p>
-    #               The name of the configuration policy. Alphanumeric characters and the following ASCII characters are permitted: 
+    #               The name of the configuration policy. Alphanumeric characters and the following ASCII characters are permitted:
     #               <code>-, ., !, *, /</code>.
     #           </p>
     # @option params [String] :description
@@ -17700,13 +19812,13 @@ module Aws::SecurityHub
     #           </p>
     # @option params [Types::Policy] :configuration_policy
     #   <p>
-    #               An object that defines how Security Hub is configured. It includes whether Security Hub is enabled or 
-    #               disabled, a list of enabled security standards, a list of enabled or disabled security controls, and a list of custom parameter values for specified controls. 
-    #               If you provide a list of security controls that are enabled in the configuration policy, Security Hub disables all other controls (including newly 
-    #               released controls). If you provide a list of security controls that are disabled in the configuration policy, Security Hub 
+    #               An object that defines how Security Hub CSPM is configured. It includes whether Security Hub CSPM is enabled or
+    #               disabled, a list of enabled security standards, a list of enabled or disabled security controls, and a list of custom parameter values for specified controls.
+    #               If you provide a list of security controls that are enabled in the configuration policy, Security Hub CSPM disables all other controls (including newly
+    #               released controls). If you provide a list of security controls that are disabled in the configuration policy, Security Hub CSPM
     #               enables all other controls (including newly released controls).
     #           </p>
-    #            <p>When updating a configuration policy, provide a complete list of standards that you want to enable and a complete list 
+    #            <p>When updating a configuration policy, provide a complete list of standards that you want to enable and a complete list
     #               of controls that you want to enable or disable. The updated configuration replaces the current configuration.</p>
     # @example To update a configuration policy
     #   # This operation updates the specified configuration policy.
@@ -17868,12 +19980,76 @@ module Aws::SecurityHub
       request.send_request(options)
     end
 
-    # <p>Grants permission to update a connectorV2 based on its id and input parameters. This API is in preview release and subject to change.</p>
+    # <p>Updates a CSPM connector's configuration, such as the scope or regions for the connected cloud provider.</p>
+    # @param [Hash, Types::UpdateConnectorRequest] params
+    # @option params [String] :connector_id
+    #   <p>The unique identifier of the connector to update.</p>
+    # @option params [String] :description
+    #   <p>The updated description of the connector.</p>
+    # @option params [Types::CspmProviderUpdateConfiguration] :provider
+    #   <p>The updated cloud provider configuration for the connector.</p>
+    # @example To update a CSPM connector
+    #   # This operation updates the configuration of a CSPM connector.
+    #   params = {
+    #     connector_id: "cspm-a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+    #     description: "Updated connector description",
+    #     provider: {
+    #     "Azure" => {
+    #       "ScopeConfiguration" => {
+    #         "ScopeType" => SUBSCRIPTION,
+    #         "ScopeValues" => [
+    #           sub-1234-5678-abcd,
+    #           sub-9012-3456-efgh
+    #         ]
+    #       },
+    #       "AzureRegions" => [
+    #         eastus,
+    #         westus2,
+    #         northeurope
+    #       ]
+    #     }
+    #   }
+    #   }
+    #   options = {}
+    #   response = client.update_connector(params, options)
+    #   response.to_h #=>
+    #   {
+    #     connector_status: CONNECTED,
+    #     enablement_status: PENDING_UPDATE
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     connector_id: "NonEmptyString", # required
+    #     description: "NonEmptyString",
+    #     provider: {
+    #       # One of:
+    #       azure: {
+    #         scope_configuration: { # required
+    #           scope_type: "TENANT" # One of: ["TENANT", "SUBSCRIPTION"], # required
+    #           scope_values: ["NonEmptyString"]
+    #         },
+    #         azure_regions: ["NonEmptyString"], # required
+    #       }
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.update_connector(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     connector_status: "CONNECTED" # One of: ["CONNECTED", "DEGRADED", "FAILED_TO_CONNECT", "UNKNOWN"],
+    #     enablement_status: "ENABLED" # One of: ["ENABLED", "PENDING_ENABLEMENT", "PENDING_UPDATE", "PENDING_DELETION"]
+    #   }
+    # @return [Types::UpdateConnectorResponse]
+    def update_connector(params = {}, options = {})
+      request = build_request(:update_connector, params)
+      request.send_request(options)
+    end
+
+    # <p>Grants permission to update a connectorV2 based on its id and input parameters.</p>
     # @param [Hash, Types::UpdateConnectorV2Request] params
     # @option params [String] :connector_id
     #   <p>The UUID of the connectorV2 to identify connectorV2 resource.</p>
-    # @option params [String] :client_secret
-    #   <p>The clientSecret of ServiceNow.</p>
     # @option params [String] :description
     #   <p>The description of the connectorV2.</p>
     # @option params [Types::ProviderUpdateConfiguration] :provider
@@ -17881,12 +20057,21 @@ module Aws::SecurityHub
     # @example Request syntax with placeholder values
     #   params = {
     #     connector_id: "NonEmptyString", # required
-    #     client_secret: "SensitiveNonEmptyString",
     #     description: "NonEmptyString",
     #     provider: {
     #       # One of:
     #       jira_cloud: {
-    #         project_key: "NonEmptyString", # required
+    #         project_key: "NonEmptyString"
+    #       },
+    #       service_now: {
+    #         secret_arn: "NonEmptyString"
+    #       },
+    #       azure: {
+    #         scope_configuration: { # required
+    #           scope_type: "TENANT" # One of: ["TENANT", "SUBSCRIPTION"], # required
+    #           scope_values: ["NonEmptyString"]
+    #         },
+    #         azure_regions: ["NonEmptyString"], # required
     #       }
     #     }
     #   }
@@ -17894,7 +20079,10 @@ module Aws::SecurityHub
     #   response = client.update_connector_v2(params, options)
     # @example Response structure with placeholder values
     #   response.to_h #=>
-    #   {}
+    #   {
+    #     connector_status: "CONNECTED" # One of: ["CONNECTED", "DEGRADED", "FAILED_TO_CONNECT", "PENDING_AUTHORIZATION", "PENDING_CONFIGURATION", "UNKNOWN"],
+    #     enablement_status: "ENABLED" # One of: ["ENABLED", "PENDING_ENABLEMENT", "FAILED_TO_ENABLE", "PENDING_UPDATE", "FAILED_TO_UPDATE", "PENDING_DELETION", "FAILED_TO_DELETE"]
+    #   }
     # @return [Types::UpdateConnectorV2Response]
     def update_connector_v2(params = {}, options = {})
       request = build_request(:update_connector_v2, params)
@@ -17904,7 +20092,7 @@ module Aws::SecurityHub
     # <note>
     #             <p>The <i>aggregation Region</i> is now called the <i>home Region</i>.</p>
     #          </note>
-    #          <p>Updates cross-Region aggregation settings. You can use this operation to update the Region linking mode and the list 
+    #          <p>Updates cross-Region aggregation settings. You can use this operation to update the Region linking mode and the list
     #         of included or excluded Amazon Web Services Regions. However, you can't use this operation to change the home Region.</p>
     #          <p>You can invoke this operation from the current home Region only.
     #       </p>
@@ -17912,23 +20100,23 @@ module Aws::SecurityHub
     # @option params [String] :finding_aggregator_arn
     #   <p>The ARN of the finding aggregator. To obtain the ARN, use <code>ListFindingAggregators</code>.</p>
     # @option params [String] :region_linking_mode
-    #   <p>Indicates whether to aggregate findings from all of the available Regions in the current partition. Also determines whether to automatically aggregate findings from new Regions as Security Hub supports them and you opt into them.</p>
+    #   <p>Indicates whether to aggregate findings from all of the available Regions in the current partition. Also determines whether to automatically aggregate findings from new Regions as Security Hub CSPM supports them and you opt into them.</p>
     #            <p>The selected option also determines how to use the Regions provided in the Regions list.</p>
     #            <p>The options are as follows:</p>
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>ALL_REGIONS</code> - Aggregates findings from all of the Regions where Security Hub is enabled. When you choose this option, Security Hub also automatically aggregates findings from new Regions as Security Hub supports them and you opt into them.
+    #                     <code>ALL_REGIONS</code> - Aggregates findings from all of the Regions where Security Hub CSPM is enabled. When you choose this option, Security Hub CSPM also automatically aggregates findings from new Regions as Security Hub CSPM supports them and you opt into them.
     #            </p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>ALL_REGIONS_EXCEPT_SPECIFIED</code> - Aggregates findings from all of the Regions where Security Hub is enabled, except for the Regions listed in the <code>Regions</code> parameter. When you choose this option, Security Hub also automatically aggregates findings from new Regions as Security Hub supports them and you opt into them.
+    #                     <code>ALL_REGIONS_EXCEPT_SPECIFIED</code> - Aggregates findings from all of the Regions where Security Hub CSPM is enabled, except for the Regions listed in the <code>Regions</code> parameter. When you choose this option, Security Hub CSPM also automatically aggregates findings from new Regions as Security Hub CSPM supports them and you opt into them.
     #            </p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>SPECIFIED_REGIONS</code> - Aggregates findings only from the Regions listed in the <code>Regions</code> parameter. Security Hub does not automatically aggregate findings from new Regions.
+    #                     <code>SPECIFIED_REGIONS</code> - Aggregates findings only from the Regions listed in the <code>Regions</code> parameter. Security Hub CSPM does not automatically aggregate findings from new Regions.
     #            </p>
     #               </li>
     #               <li>
@@ -17940,7 +20128,7 @@ module Aws::SecurityHub
     # @option params [Array<String>] :regions
     #   <p>If <code>RegionLinkingMode</code> is <code>ALL_REGIONS_EXCEPT_SPECIFIED</code>, then this is a space-separated list of Regions that don't replicate and send findings to the home Region.</p>
     #            <p>If <code>RegionLinkingMode</code> is <code>SPECIFIED_REGIONS</code>, then this is a space-separated list of Regions that do replicate and send findings to the home Region.</p>
-    #            <p>An <code>InvalidInputException</code> error results if you populate this field while <code>RegionLinkingMode</code> is 
+    #            <p>An <code>InvalidInputException</code> error results if you populate this field while <code>RegionLinkingMode</code> is
     #           <code>NO_REGIONS</code>.</p>
     # @example To update cross-Region aggregation settings
     #   # The following example updates the cross-Region aggregation configuration. You use this operation to change the list of linked Regions and the treatment of new Regions. However, you cannot use this operation to change the aggregation Region.
@@ -17989,11 +20177,11 @@ module Aws::SecurityHub
     # <p>
     #             <code>UpdateFindings</code> is a deprecated operation. Instead of <code>UpdateFindings</code>, use
     #             the <code>BatchUpdateFindings</code> operation.</p>
-    #          <p>The <code>UpdateFindings</code> operation updates the <code>Note</code> and <code>RecordState</code> of the Security Hub aggregated
+    #          <p>The <code>UpdateFindings</code> operation updates the <code>Note</code> and <code>RecordState</code> of the Security Hub CSPM aggregated
     #          findings that the filter attributes specify. Any member account that can view the finding
     #          can also see the update to the finding.</p>
-    #          <p>Finding updates made with <code>UpdateFindings</code> aren't persisted if the same finding is later updated by the 
-    #             finding provider through the <code>BatchImportFindings</code> operation. In addition, Security Hub doesn't 
+    #          <p>Finding updates made with <code>UpdateFindings</code> aren't persisted if the same finding is later updated by the
+    #             finding provider through the <code>BatchImportFindings</code> operation. In addition, Security Hub CSPM doesn't
     #             record updates made with <code>UpdateFindings</code> in the finding history.</p>
     # @param [Hash, Types::UpdateFindingsRequest] params
     # @option params [Types::AwsSecurityFindingFilters] :filters
@@ -18047,7 +20235,8 @@ module Aws::SecurityHub
     #           end: "NonEmptyString",
     #           date_range: {
     #             value: 1,
-    #             unit: "DAYS" # One of: ["DAYS"]
+    #             unit: "DAYS" # One of: ["DAYS"],
+    #             comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #           }
     #         }
     #       ],
@@ -18057,7 +20246,8 @@ module Aws::SecurityHub
     #           end: "NonEmptyString",
     #           date_range: {
     #             value: 1,
-    #             unit: "DAYS" # One of: ["DAYS"]
+    #             unit: "DAYS" # One of: ["DAYS"],
+    #             comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #           }
     #         }
     #       ],
@@ -18067,7 +20257,8 @@ module Aws::SecurityHub
     #           end: "NonEmptyString",
     #           date_range: {
     #             value: 1,
-    #             unit: "DAYS" # One of: ["DAYS"]
+    #             unit: "DAYS" # One of: ["DAYS"],
+    #             comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #           }
     #         }
     #       ],
@@ -18077,7 +20268,8 @@ module Aws::SecurityHub
     #           end: "NonEmptyString",
     #           date_range: {
     #             value: 1,
-    #             unit: "DAYS" # One of: ["DAYS"]
+    #             unit: "DAYS" # One of: ["DAYS"],
+    #             comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #           }
     #         }
     #       ],
@@ -18301,7 +20493,8 @@ module Aws::SecurityHub
     #           end: "NonEmptyString",
     #           date_range: {
     #             value: 1,
-    #             unit: "DAYS" # One of: ["DAYS"]
+    #             unit: "DAYS" # One of: ["DAYS"],
+    #             comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #           }
     #         }
     #       ],
@@ -18311,7 +20504,8 @@ module Aws::SecurityHub
     #           end: "NonEmptyString",
     #           date_range: {
     #             value: 1,
-    #             unit: "DAYS" # One of: ["DAYS"]
+    #             unit: "DAYS" # One of: ["DAYS"],
+    #             comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #           }
     #         }
     #       ],
@@ -18339,7 +20533,8 @@ module Aws::SecurityHub
     #           end: "NonEmptyString",
     #           date_range: {
     #             value: 1,
-    #             unit: "DAYS" # One of: ["DAYS"]
+    #             unit: "DAYS" # One of: ["DAYS"],
+    #             comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #           }
     #         }
     #       ],
@@ -18438,7 +20633,8 @@ module Aws::SecurityHub
     #           end: "NonEmptyString",
     #           date_range: {
     #             value: 1,
-    #             unit: "DAYS" # One of: ["DAYS"]
+    #             unit: "DAYS" # One of: ["DAYS"],
+    #             comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #           }
     #         }
     #       ],
@@ -18478,7 +20674,8 @@ module Aws::SecurityHub
     #           end: "NonEmptyString",
     #           date_range: {
     #             value: 1,
-    #             unit: "DAYS" # One of: ["DAYS"]
+    #             unit: "DAYS" # One of: ["DAYS"],
+    #             comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #           }
     #         }
     #       ],
@@ -18512,7 +20709,8 @@ module Aws::SecurityHub
     #           end: "NonEmptyString",
     #           date_range: {
     #             value: 1,
-    #             unit: "DAYS" # One of: ["DAYS"]
+    #             unit: "DAYS" # One of: ["DAYS"],
+    #             comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #           }
     #         }
     #       ],
@@ -18577,7 +20775,8 @@ module Aws::SecurityHub
     #           end: "NonEmptyString",
     #           date_range: {
     #             value: 1,
-    #             unit: "DAYS" # One of: ["DAYS"]
+    #             unit: "DAYS" # One of: ["DAYS"],
+    #             comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #           }
     #         }
     #       ],
@@ -18698,6 +20897,24 @@ module Aws::SecurityHub
     #           value: "NonEmptyString",
     #           comparison: "EQUALS" # One of: ["EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "CONTAINS_WORD"]
     #         }
+    #       ],
+    #       resource_owner_account_id: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS" # One of: ["EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "CONTAINS_WORD"]
+    #         }
+    #       ],
+    #       resource_owner_org_id: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS" # One of: ["EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "CONTAINS_WORD"]
+    #         }
+    #       ],
+    #       resource_provider: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS" # One of: ["EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "CONTAINS_WORD"]
+    #         }
     #       ]
     #     },
     #     note: {
@@ -18717,7 +20934,7 @@ module Aws::SecurityHub
       request.send_request(options)
     end
 
-    # <p>Updates the Security Hub insight identified by the specified insight ARN.</p>
+    # <p>Updates the Security Hub CSPM insight identified by the specified insight ARN.</p>
     # @param [Hash, Types::UpdateInsightRequest] params
     # @option params [String] :insight_arn
     #   <p>The ARN of the insight that you want to update.</p>
@@ -18798,7 +21015,8 @@ module Aws::SecurityHub
     #           end: "NonEmptyString",
     #           date_range: {
     #             value: 1,
-    #             unit: "DAYS" # One of: ["DAYS"]
+    #             unit: "DAYS" # One of: ["DAYS"],
+    #             comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #           }
     #         }
     #       ],
@@ -18808,7 +21026,8 @@ module Aws::SecurityHub
     #           end: "NonEmptyString",
     #           date_range: {
     #             value: 1,
-    #             unit: "DAYS" # One of: ["DAYS"]
+    #             unit: "DAYS" # One of: ["DAYS"],
+    #             comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #           }
     #         }
     #       ],
@@ -18818,7 +21037,8 @@ module Aws::SecurityHub
     #           end: "NonEmptyString",
     #           date_range: {
     #             value: 1,
-    #             unit: "DAYS" # One of: ["DAYS"]
+    #             unit: "DAYS" # One of: ["DAYS"],
+    #             comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #           }
     #         }
     #       ],
@@ -18828,7 +21048,8 @@ module Aws::SecurityHub
     #           end: "NonEmptyString",
     #           date_range: {
     #             value: 1,
-    #             unit: "DAYS" # One of: ["DAYS"]
+    #             unit: "DAYS" # One of: ["DAYS"],
+    #             comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #           }
     #         }
     #       ],
@@ -19052,7 +21273,8 @@ module Aws::SecurityHub
     #           end: "NonEmptyString",
     #           date_range: {
     #             value: 1,
-    #             unit: "DAYS" # One of: ["DAYS"]
+    #             unit: "DAYS" # One of: ["DAYS"],
+    #             comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #           }
     #         }
     #       ],
@@ -19062,7 +21284,8 @@ module Aws::SecurityHub
     #           end: "NonEmptyString",
     #           date_range: {
     #             value: 1,
-    #             unit: "DAYS" # One of: ["DAYS"]
+    #             unit: "DAYS" # One of: ["DAYS"],
+    #             comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #           }
     #         }
     #       ],
@@ -19090,7 +21313,8 @@ module Aws::SecurityHub
     #           end: "NonEmptyString",
     #           date_range: {
     #             value: 1,
-    #             unit: "DAYS" # One of: ["DAYS"]
+    #             unit: "DAYS" # One of: ["DAYS"],
+    #             comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #           }
     #         }
     #       ],
@@ -19189,7 +21413,8 @@ module Aws::SecurityHub
     #           end: "NonEmptyString",
     #           date_range: {
     #             value: 1,
-    #             unit: "DAYS" # One of: ["DAYS"]
+    #             unit: "DAYS" # One of: ["DAYS"],
+    #             comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #           }
     #         }
     #       ],
@@ -19229,7 +21454,8 @@ module Aws::SecurityHub
     #           end: "NonEmptyString",
     #           date_range: {
     #             value: 1,
-    #             unit: "DAYS" # One of: ["DAYS"]
+    #             unit: "DAYS" # One of: ["DAYS"],
+    #             comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #           }
     #         }
     #       ],
@@ -19263,7 +21489,8 @@ module Aws::SecurityHub
     #           end: "NonEmptyString",
     #           date_range: {
     #             value: 1,
-    #             unit: "DAYS" # One of: ["DAYS"]
+    #             unit: "DAYS" # One of: ["DAYS"],
+    #             comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #           }
     #         }
     #       ],
@@ -19328,7 +21555,8 @@ module Aws::SecurityHub
     #           end: "NonEmptyString",
     #           date_range: {
     #             value: 1,
-    #             unit: "DAYS" # One of: ["DAYS"]
+    #             unit: "DAYS" # One of: ["DAYS"],
+    #             comparison: "WITHIN" # One of: ["WITHIN", "OLDER_THAN"]
     #           }
     #         }
     #       ],
@@ -19449,6 +21677,24 @@ module Aws::SecurityHub
     #           value: "NonEmptyString",
     #           comparison: "EQUALS" # One of: ["EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "CONTAINS_WORD"]
     #         }
+    #       ],
+    #       resource_owner_account_id: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS" # One of: ["EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "CONTAINS_WORD"]
+    #         }
+    #       ],
+    #       resource_owner_org_id: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS" # One of: ["EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "CONTAINS_WORD"]
+    #         }
+    #       ],
+    #       resource_provider: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS" # One of: ["EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "CONTAINS_WORD"]
+    #         }
     #       ]
     #     },
     #     group_by_attribute: "NonEmptyString"
@@ -19464,29 +21710,29 @@ module Aws::SecurityHub
       request.send_request(options)
     end
 
-    # <p>Updates the configuration of your organization in Security Hub. Only the
-    #          Security Hub administrator account can invoke this operation.</p>
+    # <p>Updates the configuration of your organization in Security Hub CSPM. Only the
+    #          Security Hub CSPM administrator account can invoke this operation.</p>
     # @param [Hash, Types::UpdateOrganizationConfigurationRequest] params
     # @option params [Boolean] :auto_enable
-    #   <p>Whether to automatically enable Security Hub in new member accounts when they join the organization.</p>
-    #            <p>If set to <code>true</code>, then Security Hub is automatically enabled in new accounts. If set to <code>false</code>,
-    #              then Security Hub isn't enabled in new accounts automatically. The default value is <code>false</code>.</p>
-    #            <p>If the <code>ConfigurationType</code> of your organization is set to <code>CENTRAL</code>, then this field is set 
-    #              to <code>false</code> and can't be changed in the home Region and linked Regions. However, in that case, the delegated administrator can create a configuration 
-    #               policy in which Security Hub is enabled and associate the policy with new organization accounts.</p>
+    #   <p>Whether to automatically enable Security Hub CSPM in new member accounts when they join the organization.</p>
+    #            <p>If set to <code>true</code>, then Security Hub CSPM is automatically enabled in new accounts. If set to <code>false</code>,
+    #              then Security Hub CSPM isn't enabled in new accounts automatically. The default value is <code>false</code>.</p>
+    #            <p>If the <code>ConfigurationType</code> of your organization is set to <code>CENTRAL</code>, then this field is set
+    #              to <code>false</code> and can't be changed in the home Region and linked Regions. However, in that case, the delegated administrator can create a configuration
+    #               policy in which Security Hub CSPM is enabled and associate the policy with new organization accounts.</p>
     # @option params [String] :auto_enable_standards
-    #   <p>Whether to automatically enable Security Hub <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards-enable-disable.html">default standards</a> 
+    #   <p>Whether to automatically enable Security Hub CSPM <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards-enable-disable.html">default standards</a>
     #              in new member accounts when they join the organization.</p>
     #            <p>The default value of this parameter is equal to <code>DEFAULT</code>.</p>
-    #            <p>If equal to <code>DEFAULT</code>, then Security Hub default standards are automatically enabled for new member 
-    #              accounts. If equal to <code>NONE</code>, then default standards are not automatically enabled for new member 
+    #            <p>If equal to <code>DEFAULT</code>, then Security Hub CSPM default standards are automatically enabled for new member
+    #              accounts. If equal to <code>NONE</code>, then default standards are not automatically enabled for new member
     #              accounts.</p>
-    #            <p>If the <code>ConfigurationType</code> of your organization is set to <code>CENTRAL</code>, then this field is set 
-    #              to <code>NONE</code> and can't be changed in the home Region and linked Regions. However, in that case, the delegated administrator can create a configuration 
+    #            <p>If the <code>ConfigurationType</code> of your organization is set to <code>CENTRAL</code>, then this field is set
+    #              to <code>NONE</code> and can't be changed in the home Region and linked Regions. However, in that case, the delegated administrator can create a configuration
     #               policy in which specific security standards are enabled and associate the policy with new organization accounts.</p>
     # @option params [Types::OrganizationConfiguration] :organization_configuration
     #   <p>
-    #               Provides information about the way an organization is configured in Security Hub.
+    #               Provides information about the way an organization is configured in Security Hub CSPM.
     #           </p>
     # @example To update organization configuration
     #   # This operation updates the way your organization is configured in Security Hub. Only a Security Hub administrator account can invoke this operation.
@@ -19523,12 +21769,12 @@ module Aws::SecurityHub
     end
 
     # <p>
-    #             Updates the properties of a security control. 
+    #             Updates the properties of a security control.
     #         </p>
     # @param [Hash, Types::UpdateSecurityControlRequest] params
     # @option params [String] :security_control_id
     #   <p>
-    #               The Amazon Resource Name (ARN) or ID of the control to update. 
+    #               The Amazon Resource Name (ARN) or ID of the control to update.
     #           </p>
     # @option params [Hash<String, Types::ParameterConfiguration>] :parameters
     #   <p>
@@ -19536,7 +21782,7 @@ module Aws::SecurityHub
     #           </p>
     # @option params [String] :last_update_reason
     #   <p>
-    #               The most recent reason for updating the properties of the security control. This field accepts alphanumeric 
+    #               The most recent reason for updating the properties of the security control. This field accepts alphanumeric
     #   characters in addition to white spaces, dashes, and underscores.
     #           </p>
     # @example To update security control properties
@@ -19589,7 +21835,7 @@ module Aws::SecurityHub
       request.send_request(options)
     end
 
-    # <p>Updates configuration options for Security Hub.</p>
+    # <p>Updates configuration options for Security Hub CSPM.</p>
     # @param [Hash, Types::UpdateSecurityHubConfigurationRequest] params
     # @option params [Boolean] :auto_enable_controls
     #   <p>Whether to automatically enable new controls when they are added to standards that are
@@ -19597,18 +21843,18 @@ module Aws::SecurityHub
     #            <p>By default, this is set to <code>true</code>, and new controls are enabled
     #            automatically. To not automatically enable new controls, set this to <code>false</code>.
     #         </p>
-    #            <p>When you automatically enable new controls, you can interact with the controls in 
-    #              the console and programmatically immediately after release. However, automatically enabled controls have a temporary default status of 
-    #              <code>DISABLED</code>. It can take up to several days for Security Hub to process the control release and designate the 
-    #              control as <code>ENABLED</code> in your account. During the processing period, you can manually enable or disable a 
-    #              control, and Security Hub will maintain that designation regardless of whether you have <code>AutoEnableControls</code> set to 
+    #            <p>When you automatically enable new controls, you can interact with the controls in
+    #              the console and programmatically immediately after release. However, automatically enabled controls have a temporary default status of
+    #              <code>DISABLED</code>. It can take up to several days for Security Hub CSPM to process the control release and designate the
+    #              control as <code>ENABLED</code> in your account. During the processing period, you can manually enable or disable a
+    #              control, and Security Hub CSPM will maintain that designation regardless of whether you have <code>AutoEnableControls</code> set to
     #              <code>true</code>.</p>
     # @option params [String] :control_finding_generator
-    #   <p>Updates whether the calling account has consolidated control findings turned on. 
-    #         If the value for this field is set to 
-    #         <code>SECURITY_CONTROL</code>, Security Hub generates a single finding for a control check even when the check 
+    #   <p>Updates whether the calling account has consolidated control findings turned on.
+    #         If the value for this field is set to
+    #         <code>SECURITY_CONTROL</code>, Security Hub CSPM generates a single finding for a control check even when the check
     #         applies to multiple enabled standards.</p>
-    #            <p>If the value for this field is set to <code>STANDARD_CONTROL</code>, Security Hub generates separate findings 
+    #            <p>If the value for this field is set to <code>STANDARD_CONTROL</code>, Security Hub CSPM generates separate findings
     #         for a control check when the check applies to multiple enabled standards.</p>
     #            <p>For accounts that are part of an organization, this value can only be updated in the administrator account.</p>
     # @example To update Security Hub settings

@@ -83,8 +83,8 @@ module Aws::DataSync
     end
 
     # <p>Specifies configuration information for a DataSync-managed secret, such as an
-    #       authentication token or secret key that DataSync uses to access a specific storage
-    #       location, with a customer-managed KMS key.</p>
+    #       authentication token, secret key, password, or Kerberos keytab that DataSync uses
+    #       to access a specific storage location, with a customer-managed KMS key.</p>
     #          <note>
     #             <p>You can use either <code>CmkSecretConfig</code> or <code>CustomSecretConfig</code> to
     #         provide credentials for a <code>CreateLocation</code> request. Do not provide both
@@ -127,14 +127,24 @@ module Aws::DataSync
     #               <p>The VPC service endpoint you use must include the DataSync service name (for
     #           example, <code>com.amazonaws.us-east-2.datasync</code>).</p>
     #            </important>
+    #            <p>The endpoint ID is informational. DataSync doesn't verify it or use it to connect
+    #         to your agent. For more information, see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/choose-service-endpoint.html#vpc-endpoint-multiple-subnets">Using a single VPC service endpoint across multiple subnets</a>.</p>
     #   @return [String]
     # @!attribute subnet_arns
-    #   <p>Specifies the ARN of the subnet where your VPC service endpoint is located. You can only
-    #         specify one ARN.</p>
+    #   <p>Specifies the ARN of the subnet where DataSync creates the <a href="https://docs.aws.amazon.com/datasync/latest/userguide/required-network-interfaces.html">network
+    #           interfaces</a> that handle data transfer traffic for your tasks. You can only specify one
+    #         ARN.</p>
+    #            <p>The subnet doesn't have to be the subnet that contains your VPC service endpoint. The
+    #         subnet can be one that another Amazon Web Services account shared with you through <a href="https://docs.aws.amazon.com/ram/latest/userguide/what-is.html">RAM</a>, in
+    #         which case the ARN must specify the account that owns the subnet. For more information, see
+    #           <a href="https://docs.aws.amazon.com/datasync/latest/userguide/choose-service-endpoint.html#vpc-endpoint-multiple-subnets">Using a single VPC service endpoint across multiple subnets</a>.</p>
     #   @return [Array<String>]
     # @!attribute security_group_arns
     #   <p>Specifies the Amazon Resource Name (ARN) of the security group that allows traffic between
     #         your agent and VPC service endpoint. You can only specify one ARN.</p>
+    #            <p>The ARN must specify your own account, even when the security group was shared with you
+    #         from the account that owns the VPC. The security group must belong to the same VPC as the
+    #         subnet that you specify in <code>SubnetArns</code>.</p>
     #   @return [Array<String>]
     class CreateAgentRequest < Struct.new(
       nil,
@@ -213,12 +223,13 @@ module Aws::DataSync
     #   <p>Specifies configuration information for a DataSync-managed secret, which
     #         includes the authentication token that DataSync uses to access a specific AzureBlob
     #         storage location, with a customer-managed KMS key.</p>
-    #            <p>When you include this paramater as part of a <code>CreateLocationAzureBlob</code> request,
+    #            <p>When you include this parameter as part of a <code>CreateLocationAzureBlob</code> request,
     #         you provide only the KMS key ARN. DataSync uses this KMS key together with the authentication token you specify for
     #           <code>SasConfiguration</code> to create a DataSync-managed secret to store the
     #         location access credentials.</p>
-    #            <p>Make sure the DataSync has permission to access the KMS key that
-    #         you specify.</p>
+    #            <p>Make sure that DataSync has permission to access the KMS key that
+    #         you specify. For more information, see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/location-credentials.html#service-secret-custom-key">
+    #           Using a service-managed secret encrypted with a custom KMS key</a>.</p>
     #            <note>
     #               <p>You can use either <code>CmkSecretConfig</code> (with <code>SasConfiguration</code>) or
     #             <code>CustomSecretConfig</code> (without <code>SasConfiguration</code>) to provide
@@ -228,9 +239,10 @@ module Aws::DataSync
     #   @return [Types::CmkSecretConfig]
     # @!attribute custom_secret_config
     #   <p>Specifies configuration information for a customer-managed Secrets Manager secret where
-    #         the authentication token for an AzureBlob storage location is stored in plain text. This
-    #         configuration includes the secret ARN, and the ARN for an IAM role that
-    #         provides access to the secret.</p>
+    #         the authentication token for an AzureBlob storage location is stored in plain text, in Secrets
+    #         Manager. This configuration includes the secret ARN, and the ARN for an IAM role
+    #         that provides access to the secret. For more information, see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/location-credentials.html#custom-secret-custom-key">
+    #           Using a secret that you manage</a>.</p>
     #            <note>
     #               <p>You can use either <code>CmkSecretConfig</code> (with <code>SasConfiguration</code>) or
     #             <code>CustomSecretConfig</code> (without <code>SasConfiguration</code>) to provide
@@ -536,6 +548,36 @@ module Aws::DataSync
     #   <p>Specifies the password of the user with the permissions to mount and access the files,
     #         folders, and file metadata in your FSx for Windows File Server file system.</p>
     #   @return [String]
+    # @!attribute cmk_secret_config
+    #   <p>Specifies configuration information for a DataSync-managed secret, which
+    #         includes the password that DataSync uses to access a specific FSx Windows
+    #         storage location, with a customer-managed KMS key.</p>
+    #            <p>When you include this parameter as part of a <code>CreateLocationFsxWindows</code> request,
+    #         you provide only the KMS key ARN. DataSync uses this KMS key together with the <code>Password</code> you specify for
+    #         to create a DataSync-managed secret to store the location access credentials.</p>
+    #            <p>Make sure that DataSync has permission to access the KMS key that
+    #         you specify. For more information, see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/location-credentials.html#service-secret-custom-key">
+    #           Using a service-managed secret encrypted with a custom KMS key</a>.</p>
+    #            <note>
+    #               <p>You can use either <code>CmkSecretConfig</code> (with <code>Password</code>) or
+    #           <code>CustomSecretConfig</code> (without <code>Password</code>) to provide
+    #           credentials for a <code>CreateLocationFsxWindows</code> request. Do not provide both
+    #           parameters for the same request.</p>
+    #            </note>
+    #   @return [Types::CmkSecretConfig]
+    # @!attribute custom_secret_config
+    #   <p>Specifies configuration information for a customer-managed Secrets Manager secret where
+    #         the password for an FSx for Windows File Server storage location is stored in plain text, in Secrets
+    #         Manager. This configuration includes the secret ARN, and the ARN for an IAM role
+    #         that provides access to the secret. For more information, see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/location-credentials.html#custom-secret-custom-key">
+    #           Using a secret that you manage</a>.</p>
+    #            <note>
+    #               <p>You can use either <code>CmkSecretConfig</code> (with <code>Password</code>) or
+    #           <code>CustomSecretConfig</code> (without <code>Password</code>) to provide
+    #           credentials for a <code>CreateLocationFsxWindows</code> request. Do not provide both
+    #           parameters for the same request.</p>
+    #            </note>
+    #   @return [Types::CustomSecretConfig]
     class CreateLocationFsxWindowsRequest < Struct.new(
       nil,
       :subdirectory,
@@ -545,6 +587,8 @@ module Aws::DataSync
       :user,
       :domain,
       :password,
+      :cmk_secret_config,
+      :custom_secret_config,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -569,7 +613,19 @@ module Aws::DataSync
     # @!attribute name_nodes
     #   <p>The NameNode that manages the HDFS namespace. The NameNode performs operations such as
     #         opening, closing, and renaming files and directories. The NameNode contains the information to
-    #         map blocks of data to the DataNodes. You can use only one NameNode.</p>
+    #         map blocks of data to the DataNodes.</p>
+    #            <p>The number of NameNodes you can specify depends on the task mode:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <b>Enhanced mode</b> – You can specify multiple NameNodes for HDFS High Availability (HA)
+    #             configurations.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <b>Basic mode</b> – You can specify only one NameNode.</p>
+    #               </li>
+    #            </ul>
     #   @return [Array<Types::HdfsNameNode>]
     # @!attribute block_size
     #   <p>The size of data blocks to write into the HDFS cluster. The block size must be a multiple
@@ -634,6 +690,37 @@ module Aws::DataSync
     #   <p>The key-value pair that represents the tag that you want to add to the location. The value
     #         can be an empty string. We recommend using tags to name your resources. </p>
     #   @return [Array<Types::TagListEntry>]
+    # @!attribute cmk_secret_config
+    #   <p>Specifies configuration information for a DataSync-managed secret, which
+    #         includes the Kerberos keytab that DataSync uses to access a specific Hadoop
+    #         Distributed File System (HDFS) storage location, with a
+    #         customer-managed KMS key.</p>
+    #            <p>When you include this parameter as part of a <code>CreateLocationHdfs</code> request,
+    #         you provide only the KMS key ARN. DataSync uses this KMS key together with the <code>KerberosKeytab</code> you specify for
+    #         to create a DataSync-managed secret to store the location access credentials.</p>
+    #            <p>Make sure that DataSync has permission to access the KMS key that
+    #         you specify. For more information, see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/location-credentials.html#service-secret-custom-key">
+    #           Using a service-managed secret encrypted with a custom KMS key</a>.</p>
+    #            <note>
+    #               <p>You can use either <code>CmkSecretConfig</code> (with <code>KerberosKeytab</code>) or
+    #           <code>CustomSecretConfig</code> (without <code>KerberosKeytab</code>) to provide
+    #           credentials for a <code>CreateLocationHdfs</code> request. Do not provide both
+    #           parameters for the same request.</p>
+    #            </note>
+    #   @return [Types::CmkSecretConfig]
+    # @!attribute custom_secret_config
+    #   <p>Specifies configuration information for a customer-managed Secrets Manager secret where
+    #         the Kerberos keytab for the HDFS storage location is stored in binary, in Secrets
+    #         Manager. This configuration includes the secret ARN, and the ARN for an IAM role
+    #         that provides access to the secret. For more information, see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/location-credentials.html#custom-secret-custom-key">
+    #           Using a secret that you manage</a>.</p>
+    #            <note>
+    #               <p>You can use either <code>CmkSecretConfig</code> (with <code>KerberosKeytab</code>) or
+    #           <code>CustomSecretConfig</code> (without <code>KerberosKeytab</code>) to provide
+    #           credentials for a <code>CreateLocationHdfs</code> request. Do not provide both
+    #           parameters for the same request.</p>
+    #            </note>
+    #   @return [Types::CustomSecretConfig]
     class CreateLocationHdfsRequest < Struct.new(
       nil,
       :subdirectory,
@@ -649,6 +736,8 @@ module Aws::DataSync
       :kerberos_krb5_conf,
       :agent_arns,
       :tags,
+      :cmk_secret_config,
+      :custom_secret_config,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -790,11 +879,12 @@ module Aws::DataSync
     #   <p>Specifies configuration information for a DataSync-managed secret, which
     #         includes the <code>SecretKey</code> that DataSync uses to access a specific object
     #         storage location, with a customer-managed KMS key.</p>
-    #            <p>When you include this paramater as part of a <code>CreateLocationObjectStorage</code>
+    #            <p>When you include this parameter as part of a <code>CreateLocationObjectStorage</code>
     #         request, you provide only the KMS key ARN. DataSync uses this KMS key together with the value you specify for the <code>SecretKey</code> parameter
     #         to create a DataSync-managed secret to store the location access credentials.</p>
-    #            <p>Make sure the DataSync has permission to access the KMS key that
-    #         you specify.</p>
+    #            <p>Make sure that DataSync has permission to access the KMS key that
+    #         you specify. For more information, see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/location-credentials.html#service-secret-custom-key">
+    #           Using a service-managed secret encrypted with a custom KMS key</a>.</p>
     #            <note>
     #               <p>You can use either <code>CmkSecretConfig</code> (with <code>SecretKey</code>) or
     #             <code>CustomSecretConfig</code> (without <code>SecretKey</code>) to provide credentials
@@ -804,9 +894,10 @@ module Aws::DataSync
     #   @return [Types::CmkSecretConfig]
     # @!attribute custom_secret_config
     #   <p>Specifies configuration information for a customer-managed Secrets Manager secret where
-    #         the secret key for a specific object storage location is stored in plain text. This
-    #         configuration includes the secret ARN, and the ARN for an IAM role that
-    #         provides access to the secret.</p>
+    #         the secret key for a specific object storage location is stored in plain text, in Secrets Manager.
+    #         This configuration includes the secret ARN, and the ARN for an IAM role that
+    #         provides access to the secret. For more information, see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/location-credentials.html#custom-secret-custom-key">
+    #           Using a secret that you manage</a>.</p>
     #            <note>
     #               <p>You can use either <code>CmkSecretConfig</code> (with <code>SecretKey</code>) or
     #             <code>CustomSecretConfig</code> (without <code>SecretKey</code>) to provide credentials
@@ -966,6 +1057,40 @@ module Aws::DataSync
     #         to access the files and folders involved in your transfer. This parameter applies only if
     #           <code>AuthenticationType</code> is set to <code>NTLM</code>.</p>
     #   @return [String]
+    # @!attribute cmk_secret_config
+    #   <p>Specifies configuration information for a DataSync-managed secret, either a
+    #         <code>Password</code> or <code>KerberosKeytab</code> (for <code>NTLM</code> (default) and
+    #         <code>KERBEROS</code> authentication types, respectively) that DataSync uses to
+    #         access a specific SMB storage location, with a customer-managed KMS key.</p>
+    #            <p>When you include this parameter as part of a <code>CreateLocationSmbRequest</code> request,
+    #         you provide only the KMS key ARN. DataSync uses this KMS key together with either the <code>Password</code> or <code>KerberosKeytab</code>
+    #         you specify to create a DataSync-managed secret to store the location access
+    #         credentials.</p>
+    #            <p>Make sure that DataSync has permission to access the KMS key that
+    #         you specify. For more information, see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/location-credentials.html#service-secret-custom-key">
+    #           Using a service-managed secret encrypted with a custom KMS key</a>.</p>
+    #            <note>
+    #               <p>You can use either <code>CmkSecretConfig</code> (with either <code>Password</code> or
+    #           <code>KerberosKeytab</code>) or <code>CustomSecretConfig</code> (without any <code>Password</code>
+    #           and <code>KerberosKeytab</code>) to provide credentials for a <code>CreateLocationSmbRequest</code>
+    #           request. Do not provide both <code>CmkSecretConfig</code> and <code>CustomSecretConfig</code>
+    #           parameters for the same request.</p>
+    #            </note>
+    #   @return [Types::CmkSecretConfig]
+    # @!attribute custom_secret_config
+    #   <p>Specifies configuration information for a customer-managed Secrets Manager secret where
+    #         the SMB storage location credentials is stored in Secrets Manager as plain text (for
+    #         <code>Password</code>) or binary (for <code>KerberosKeytab</code>). This configuration includes
+    #         the secret ARN, and the ARN for an IAM role that provides access to the secret. For
+    #         more information, see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/location-credentials.html#custom-secret-custom-key">
+    #           Using a secret that you manage</a>.</p>
+    #            <note>
+    #               <p>You can use either <code>CmkSecretConfig</code> (with <code>SasConfiguration</code>) or
+    #           <code>CustomSecretConfig</code> (without <code>SasConfiguration</code>) to provide
+    #           credentials for a <code>CreateLocationSmbRequest</code> request. Do not provide both
+    #           parameters for the same request.</p>
+    #            </note>
+    #   @return [Types::CustomSecretConfig]
     # @!attribute agent_arns
     #   <p>Specifies the DataSync agent (or agents) that can connect to your SMB file
     #         server. You specify an agent by using its Amazon Resource Name (ARN).</p>
@@ -1019,6 +1144,8 @@ module Aws::DataSync
       :user,
       :domain,
       :password,
+      :cmk_secret_config,
+      :custom_secret_config,
       :agent_arns,
       :mount_options,
       :tags,
@@ -1157,9 +1284,9 @@ module Aws::DataSync
     end
 
     # <p>Specifies configuration information for a customer-managed Secrets Manager secret where
-    #       a storage location authentication token or secret key is stored in plain text. This
-    #       configuration includes the secret ARN, and the ARN for an IAM role that
-    #       provides access to the secret.</p>
+    #       a storage location credentials is stored in Secrets Manager as plain text (for authentication
+    #       token, secret key, or password) or as binary (for Kerberos keytab). This configuration includes
+    #       the secret ARN, and the ARN for an IAM role that provides access to the secret.</p>
     #          <note>
     #             <p>You can use either <code>CmkSecretConfig</code> or <code>CustomSecretConfig</code> to
     #         provide credentials for a <code>CreateLocation</code> request. Do not provide both
@@ -1358,7 +1485,8 @@ module Aws::DataSync
     # @!attribute custom_secret_config
     #   <p>Describes configuration information for a customer-managed secret, such as an
     #         authentication token that DataSync uses to access a specific storage location, with
-    #         a customer-managed KMS key.</p>
+    #         a customer-managed Identity and Access Management (IAM) role that provides access to
+    #         the secret.</p>
     #   @return [Types::CustomSecretConfig]
     class DescribeLocationAzureBlobResponse < Struct.new(
       nil,
@@ -1599,6 +1727,23 @@ module Aws::DataSync
     #   <p>The name of the Microsoft Active Directory domain that the FSx for Windows File Server file
     #         system belongs to.</p>
     #   @return [String]
+    # @!attribute managed_secret_config
+    #   <p>Describes configuration information for a DataSync-managed secret, such as a
+    #         <code>Password</code> that DataSync uses to access
+    #         a specific storage location. DataSync uses the default Amazon Web Services-managed
+    #         KMS key to encrypt this secret in Secrets Manager.</p>
+    #   @return [Types::ManagedSecretConfig]
+    # @!attribute cmk_secret_config
+    #   <p>Describes configuration information for a DataSync-managed secret, such as a
+    #         <code>Password</code> that DataSync uses to access
+    #         a specific storage location, with a customer-managed KMS key.</p>
+    #   @return [Types::CmkSecretConfig]
+    # @!attribute custom_secret_config
+    #   <p>Describes configuration information for a customer-managed secret, such as a
+    #         <code>Password</code> that DataSync uses to access
+    #         a specific storage location, with a customer-managed Identity and Access Management
+    #         (IAM) role that provides access to the secret.</p>
+    #   @return [Types::CustomSecretConfig]
     class DescribeLocationFsxWindowsResponse < Struct.new(
       nil,
       :location_arn,
@@ -1607,6 +1752,9 @@ module Aws::DataSync
       :creation_time,
       :user,
       :domain,
+      :managed_secret_config,
+      :cmk_secret_config,
+      :custom_secret_config,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1663,6 +1811,23 @@ module Aws::DataSync
     # @!attribute creation_time
     #   <p>The time that the HDFS location was created.</p>
     #   @return [Time]
+    # @!attribute managed_secret_config
+    #   <p>Describes configuration information for a DataSync-managed secret, such as a
+    #         <code>KerberosKeytab</code> that DataSync uses to access
+    #         a specific storage location. DataSync uses the default Amazon Web Services-managed
+    #         KMS key to encrypt this secret in Secrets Manager.</p>
+    #   @return [Types::ManagedSecretConfig]
+    # @!attribute cmk_secret_config
+    #   <p>Describes configuration information for a DataSync-managed secret, such as a
+    #         <code>KerberosKeytab</code> that DataSync uses to access
+    #         a specific storage location, with a customer-managed KMS key.</p>
+    #   @return [Types::CmkSecretConfig]
+    # @!attribute custom_secret_config
+    #   <p>Describes configuration information for a customer-managed secret, such as a
+    #         <code>KerberosKeytab</code> that DataSync uses to access
+    #         a specific storage location, with a customer-managed Identity and Access Management
+    #         (IAM) role that provides access to the secret.</p>
+    #   @return [Types::CustomSecretConfig]
     class DescribeLocationHdfsResponse < Struct.new(
       nil,
       :location_arn,
@@ -1677,6 +1842,9 @@ module Aws::DataSync
       :kerberos_principal,
       :agent_arns,
       :creation_time,
+      :managed_secret_config,
+      :cmk_secret_config,
+      :custom_secret_config,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1778,7 +1946,8 @@ module Aws::DataSync
     # @!attribute custom_secret_config
     #   <p>Describes configuration information for a customer-managed secret, such as an
     #         authentication token or set of credentials that DataSync uses to access a specific
-    #         transfer location, and a customer-managed KMS key.</p>
+    #         transfer location, and a customer-managed Identity and Access Management (IAM) role
+    #         that provides access to the secret.</p>
     #   @return [Types::CustomSecretConfig]
     class DescribeLocationObjectStorageResponse < Struct.new(
       nil,
@@ -1903,6 +2072,23 @@ module Aws::DataSync
     #   <p>The authentication protocol that DataSync uses to connect to your SMB file
     #         server.</p>
     #   @return [String]
+    # @!attribute managed_secret_config
+    #   <p>Describes configuration information for a DataSync-managed secret, such as a
+    #         <code>Password</code> or <code>KerberosKeytab</code> that DataSync uses to access
+    #         a specific storage location. DataSync uses the default Amazon Web Services-managed
+    #         KMS key to encrypt this secret in Secrets Manager.</p>
+    #   @return [Types::ManagedSecretConfig]
+    # @!attribute cmk_secret_config
+    #   <p>Describes configuration information for a DataSync-managed secret, such as a
+    #         <code>Password</code> or <code>KerberosKeytab</code> that DataSync uses to access
+    #         a specific storage location, with a customer-managed KMS key.</p>
+    #   @return [Types::CmkSecretConfig]
+    # @!attribute custom_secret_config
+    #   <p>Describes configuration information for a customer-managed secret, such as a
+    #         <code>Password</code> or <code>KerberosKeytab</code> that DataSync uses to access
+    #         a specific storage location, with a customer-managed Identity and Access Management (IAM)
+    #         role that provides access to the secret.</p>
+    #   @return [Types::CustomSecretConfig]
     class DescribeLocationSmbResponse < Struct.new(
       nil,
       :location_arn,
@@ -1915,6 +2101,9 @@ module Aws::DataSync
       :dns_ip_addresses,
       :kerberos_principal,
       :authentication_type,
+      :managed_secret_config,
+      :cmk_secret_config,
+      :custom_secret_config,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2005,6 +2194,12 @@ module Aws::DataSync
     #             on the items that DataSync finds at the source location.</p>
     #               </li>
     #            </ul>
+    #            <note>
+    #               <p>For <a href="https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html">Enhanced mode
+    #           tasks</a>, this counter only includes files or objects. Directories are counted in
+    #           <a href="https://docs.aws.amazon.com/datasync/latest/userguide/API_DescribeTaskExecution.html#DataSync-DescribeTaskExecution-response-EstimatedFoldersToTransfer">EstimatedFoldersToTransfer</a>.
+    #         </p>
+    #            </note>
     #   @return [Integer]
     # @!attribute estimated_bytes_to_transfer
     #   <p>The number of logical bytes that DataSync expects to write to the destination
@@ -2019,6 +2214,12 @@ module Aws::DataSync
     #           <code>EstimatedFilesToTransfer</code>. This element is implementation-specific for some
     #         location types, so don't use it as an exact indication of what's transferring or to monitor
     #         your task execution.</p>
+    #            <note>
+    #               <p>For <a href="https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html">Enhanced mode
+    #           tasks</a>, this counter only includes files or objects. Directories are counted in
+    #           <a href="https://docs.aws.amazon.com/datasync/latest/userguide/API_DescribeTaskExecution.html#DataSync-DescribeTaskExecution-response-FoldersTransferred">FoldersTransferred</a>.
+    #         </p>
+    #            </note>
     #   @return [Integer]
     # @!attribute bytes_written
     #   <p>The number of logical bytes that DataSync actually writes to the destination
@@ -2043,10 +2244,22 @@ module Aws::DataSync
     #   <p>The number of files, objects, and directories that DataSync actually deletes in
     #         your destination location. If you don't configure your task to <a href="https://docs.aws.amazon.com/datasync/latest/userguide/configure-metadata.html">delete data in the destination that
     #           isn't in the source</a>, the value is always <code>0</code>.</p>
+    #            <note>
+    #               <p>For <a href="https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html">Enhanced mode
+    #           tasks</a>, this counter only includes files or objects. Directories are counted in
+    #           <a href="https://docs.aws.amazon.com/datasync/latest/userguide/API_DescribeTaskExecution.html#DataSync-DescribeTaskExecution-response-FoldersDeleted">FoldersDeleted</a>.
+    #         </p>
+    #            </note>
     #   @return [Integer]
     # @!attribute files_skipped
     #   <p>The number of files, objects, and directories that DataSync skips during your
     #         transfer.</p>
+    #            <note>
+    #               <p>For <a href="https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html">Enhanced mode
+    #           tasks</a>, this counter only includes files or objects. Directories are counted in
+    #           <a href="https://docs.aws.amazon.com/datasync/latest/userguide/API_DescribeTaskExecution.html#DataSync-DescribeTaskExecution-response-FoldersSkipped">FoldersSkipped</a>.
+    #         </p>
+    #            </note>
     #   @return [Integer]
     # @!attribute files_verified
     #   <p>The number of files, objects, and directories that DataSync verifies during your
@@ -2055,6 +2268,10 @@ module Aws::DataSync
     #               <p>When you configure your task to <a href="https://docs.aws.amazon.com/datasync/latest/userguide/configure-data-verification-options.html">verify only the
     #             data that's transferred</a>, DataSync doesn't verify directories in some
     #           situations or files that fail to transfer.</p>
+    #               <p>For <a href="https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html">Enhanced mode
+    #           tasks</a>, this counter only includes files or objects. Directories are counted in
+    #           <a href="https://docs.aws.amazon.com/datasync/latest/userguide/API_DescribeTaskExecution.html#DataSync-DescribeTaskExecution-response-FoldersVerified">FoldersVerified</a>.
+    #         </p>
     #            </note>
     #   @return [Integer]
     # @!attribute report_result
@@ -2065,13 +2282,19 @@ module Aws::DataSync
     #   <p>The number of files, objects, and directories that DataSync expects to delete in
     #         your destination location. If you don't configure your task to <a href="https://docs.aws.amazon.com/datasync/latest/userguide/configure-metadata.html">delete data in the destination that
     #           isn't in the source</a>, the value is always <code>0</code>.</p>
+    #            <note>
+    #               <p>For <a href="https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html">Enhanced mode
+    #           tasks</a>, this counter only includes files or objects. Directories are counted in
+    #           <a href="https://docs.aws.amazon.com/datasync/latest/userguide/API_DescribeTaskExecution.html#DataSync-DescribeTaskExecution-response-EstimatedFoldersToDelete">EstimatedFoldersToDelete</a>.
+    #         </p>
+    #            </note>
     #   @return [Integer]
     # @!attribute task_mode
     #   <p>The task mode that you're using. For more information, see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html">Choosing a task mode for your data
     #           transfer</a>.</p>
     #   @return [String]
     # @!attribute files_prepared
-    #   <p>The number of objects that DataSync will attempt to transfer after comparing
+    #   <p>The number of files or objects that DataSync will attempt to transfer after comparing
     #         your source and destination locations.</p>
     #            <note>
     #               <p>Applies only to <a href="https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html">Enhanced mode
@@ -2082,24 +2305,123 @@ module Aws::DataSync
     #         the destination without comparing differences between the locations.</p>
     #   @return [Integer]
     # @!attribute files_listed
-    #   <p>The number of
-    #         objects
-    #         that DataSync
-    #         finds
-    #         at your locations.</p>
+    #   <p>The number of files or objects that DataSync finds at your locations.</p>
     #            <note>
     #               <p>Applies only to <a href="https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html">Enhanced mode
     #           tasks</a>.</p>
     #            </note>
     #   @return [Types::TaskExecutionFilesListedDetail]
     # @!attribute files_failed
-    #   <p>The number of objects that DataSync fails to prepare, transfer, verify, and
+    #   <p>The number of files or objects that DataSync fails to prepare, transfer, verify, and
     #         delete during your task execution.</p>
     #            <note>
     #               <p>Applies only to <a href="https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html">Enhanced mode
     #           tasks</a>.</p>
     #            </note>
     #   @return [Types::TaskExecutionFilesFailedDetail]
+    # @!attribute estimated_folders_to_delete
+    #   <p>The number of directories that DataSync expects to delete in
+    #         your destination location. If you don't configure your task to <a href="https://docs.aws.amazon.com/datasync/latest/userguide/configure-metadata.html">delete data in the destination that
+    #           isn't in the source</a>, the value is always <code>0</code>.</p>
+    #            <note>
+    #               <p>Applies only to <a href="https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html">Enhanced mode
+    #             tasks</a>.</p>
+    #            </note>
+    #   @return [Integer]
+    # @!attribute estimated_folders_to_transfer
+    #   <p>The number of directories that DataSync expects to
+    #         transfer over the network. This value is calculated as DataSync
+    #         <a href="https://docs.aws.amazon.com/datasync/latest/userguide/run-task.html#understand-task-execution-statuses">prepares</a> directories to transfer.</p>
+    #            <p>How this gets calculated depends primarily on your task’s <a href="https://docs.aws.amazon.com/datasync/latest/userguide/API_Options.html#DataSync-Type-Options-TransferMode">transfer
+    #           mode</a> configuration:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>If <code>TranserMode</code> is set to <code>CHANGED</code> - The calculation is based
+    #             on comparing the content of the source and destination locations and determining the
+    #             difference that needs to be transferred. The difference can include:</p>
+    #                  <ul>
+    #                     <li>
+    #                        <p>Anything that's added or modified at the source location.</p>
+    #                     </li>
+    #                     <li>
+    #                        <p>Anything that's in both locations and modified at the destination after an initial
+    #                 transfer (unless <a href="https://docs.aws.amazon.com/datasync/latest/userguide/API_Options.html#DataSync-Type-Options-OverwriteMode">OverwriteMode</a> is set to <code>NEVER</code>).</p>
+    #                     </li>
+    #                  </ul>
+    #               </li>
+    #               <li>
+    #                  <p>If <code>TranserMode</code> is set to <code>ALL</code> - The calculation is based only
+    #             on the items that DataSync finds at the source location.</p>
+    #               </li>
+    #            </ul>
+    #            <note>
+    #               <p>Applies only to <a href="https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html">Enhanced mode
+    #           tasks</a>.</p>
+    #            </note>
+    #   @return [Integer]
+    # @!attribute folders_skipped
+    #   <p>The number of directories that DataSync skips during your
+    #           transfer.</p>
+    #            <note>
+    #               <p>Applies only to <a href="https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html">Enhanced mode
+    #           tasks</a>.</p>
+    #            </note>
+    #   @return [Integer]
+    # @!attribute folders_prepared
+    #   <p>The number of directories that DataSync will attempt to transfer after comparing
+    #         your source and destination locations.</p>
+    #            <note>
+    #               <p>Applies only to <a href="https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html">Enhanced mode
+    #           tasks</a>.</p>
+    #            </note>
+    #            <p>This counter isn't applicable if you configure your task to <a href="https://docs.aws.amazon.com/datasync/latest/userguide/configure-metadata.html#task-option-transfer-mode">transfer
+    #           all data</a>. In that scenario, DataSync copies everything from the source to
+    #         the destination without comparing differences between the locations.</p>
+    #   @return [Integer]
+    # @!attribute folders_transferred
+    #   <p>The number of directories that DataSync actually
+    #         transfers over the network. This value is updated periodically during your task execution when
+    #         something is read from the source and sent over the network.</p>
+    #            <p>If DataSync fails to transfer something, this value can be less than
+    #           <code>EstimatedFoldersToTransfer</code>. In some cases, this value can also be greater than
+    #           <code>EstimatedFoldersToTransfer</code>.
+    #       </p>
+    #            <note>
+    #               <p>Applies only to <a href="https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html">Enhanced mode
+    #           tasks</a>.</p>
+    #            </note>
+    #   @return [Integer]
+    # @!attribute folders_verified
+    #   <p>The number of directories that DataSync verifies during your transfer.</p>
+    #            <note>
+    #               <p>Applies only to <a href="https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html">Enhanced mode
+    #           tasks</a>.</p>
+    #            </note>
+    #   @return [Integer]
+    # @!attribute folders_deleted
+    #   <p>The number of directories that DataSync actually deletes in
+    #         your destination location. If you don't configure your task to <a href="https://docs.aws.amazon.com/datasync/latest/userguide/configure-metadata.html">delete data in the destination that
+    #           isn't in the source</a>, the value is always <code>0</code>.</p>
+    #            <note>
+    #               <p>Applies only to <a href="https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html">Enhanced mode
+    #           tasks</a>.</p>
+    #            </note>
+    #   @return [Integer]
+    # @!attribute folders_listed
+    #   <p>The number of directories that DataSync finds at your locations.</p>
+    #            <note>
+    #               <p>Applies only to <a href="https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html">Enhanced mode
+    #           tasks</a>.</p>
+    #            </note>
+    #   @return [Types::TaskExecutionFoldersListedDetail]
+    # @!attribute folders_failed
+    #   <p>The number of directories that DataSync fails to list, prepare, transfer, verify, and
+    #         delete during your task execution.</p>
+    #            <note>
+    #               <p>Applies only to <a href="https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html">Enhanced mode
+    #           tasks</a>.</p>
+    #            </note>
+    #   @return [Types::TaskExecutionFoldersFailedDetail]
     # @!attribute launch_time
     #   <p>The time that the task execution actually begins. For non-queued tasks,
     #           <code>LaunchTime</code> and <code>StartTime</code> are typically the same. For queued tasks,
@@ -2135,6 +2457,15 @@ module Aws::DataSync
       :files_prepared,
       :files_listed,
       :files_failed,
+      :estimated_folders_to_delete,
+      :estimated_folders_to_transfer,
+      :folders_skipped,
+      :folders_prepared,
+      :folders_transferred,
+      :folders_verified,
+      :folders_deleted,
+      :folders_listed,
+      :folders_failed,
       :launch_time,
       :end_time,
       keyword_init: true
@@ -2175,7 +2506,7 @@ module Aws::DataSync
     #   <p>The ARN of your task.</p>
     #   @return [String]
     # @!attribute status
-    #   <p>The status of your task. For information about what each status means, see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/understand-task-statuses.html#understand-task-creation-statuses">Task statuses</a>.</p>
+    #   <p>The status of your task. For information about what each status means, see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/create-task-how-to.html#understand-task-creation-statuses">Task statuses</a>.</p>
     #   @return [String]
     # @!attribute name
     #   <p>The name of your task.</p>
@@ -2383,15 +2714,64 @@ module Aws::DataSync
     #         see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/create-ontap-location.html#create-ontap-location-smb">Using
     #           the SMB protocol</a>.</p>
     #   @return [String]
+    # @!attribute managed_secret_config
+    #   <p>Describes configuration information for a DataSync-managed secret, such as a
+    #         <code>Password</code> that DataSync uses to access
+    #         a specific storage location. DataSync uses the default Amazon Web Services-managed
+    #         KMS key to encrypt this secret in Secrets Manager.</p>
+    #            <note>
+    #               <p>Do not provide this for a <code>CreateLocation</code> request. <code>ManagedSecretConfig</code>
+    #           is a ReadOnly property and is only be populated in the <code>DescribeLocation</code>
+    #           response.</p>
+    #            </note>
+    #   @return [Types::ManagedSecretConfig]
+    # @!attribute cmk_secret_config
+    #   <p>Specifies configuration information for a DataSync-managed secret, which
+    #         includes the password that DataSync uses to access a specific FSx for ONTAP
+    #         storage location (using SMB), with a customer-managed KMS key.</p>
+    #            <p>When you include this parameter as part of a <code>CreateLocationFsxOntap</code> request,
+    #         you provide only the KMS key ARN. DataSync uses this KMS key together with the <code>Password</code> you specify for
+    #         to create a DataSync-managed secret to store the location access credentials.</p>
+    #            <p>Make sure that DataSync has permission to access the KMS key that
+    #         you specify. For more information, see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/location-credentials.html#service-secret-custom-key">
+    #           Using a service-managed secret encrypted with a custom KMS key</a>.</p>
+    #            <note>
+    #               <p>You can use either <code>CmkSecretConfig</code> (with <code>Password</code>) or
+    #           <code>CustomSecretConfig</code> (without <code>Password</code>) to provide
+    #           credentials for a <code>CreateLocationFsxOntap</code> request. Do not provide both
+    #           parameters for the same request.</p>
+    #            </note>
+    #   @return [Types::CmkSecretConfig]
+    # @!attribute custom_secret_config
+    #   <p>Specifies configuration information for a customer-managed Secrets Manager secret where
+    #         the password for an FSx for ONTAP storage location (using SMB) is stored in plain text,
+    #         in Secrets Manager. This configuration includes the secret ARN, and the ARN for
+    #         an IAM role that provides access to the secret. For more information, see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/location-credentials.html#custom-secret-custom-key">
+    #           Using a secret that you manage</a>.</p>
+    #            <note>
+    #               <p>You can use either <code>CmkSecretConfig</code> (with <code>Password</code>) or
+    #           <code>CustomSecretConfig</code> (without <code>Password</code>) to provide
+    #           credentials for a <code>CreateLocationFsxOntap</code> request. Do not provide both
+    #           parameters for the same request.</p>
+    #            </note>
+    #   @return [Types::CustomSecretConfig]
     class FsxProtocolSmb < Struct.new(
       nil,
       :domain,
       :mount_options,
       :password,
       :user,
+      :managed_secret_config,
+      :cmk_secret_config,
+      :custom_secret_config,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:password] = '' unless options.key?(:password)
+        super
+      end
     end
 
     # <p>Specifies the data transfer protocol that DataSync uses to access your
@@ -2440,12 +2820,25 @@ module Aws::DataSync
     #         see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/create-ontap-location.html#create-ontap-location-smb">Using
     #           the SMB protocol</a>.</p>
     #   @return [String]
+    # @!attribute cmk_secret_config
+    #   <p>Specifies configuration information for a DataSync-managed secret, such as a
+    #         <code>Password</code> or set of credentials that DataSync uses to access a
+    #         specific transfer location, and a customer-managed KMS key.</p>
+    #   @return [Types::CmkSecretConfig]
+    # @!attribute custom_secret_config
+    #   <p>Specifies configuration information for a customer-managed secret, such as a
+    #         <code>Password</code> or set of credentials that DataSync uses to access a
+    #         specific transfer location. This configuration includes the secret ARN, and the ARN
+    #         for an IAM role that provides access to the secret.</p>
+    #   @return [Types::CustomSecretConfig]
     class FsxUpdateProtocolSmb < Struct.new(
       nil,
       :domain,
       :mount_options,
       :password,
       :user,
+      :cmk_secret_config,
+      :custom_secret_config,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2732,7 +3125,7 @@ module Aws::DataSync
     #       returns an array that contains a list of locations when the <a href="https://docs.aws.amazon.com/datasync/latest/userguide/API_ListLocations.html">ListLocations</a> operation is
     #       called.</p>
     # @!attribute location_arn
-    #   <p>The Amazon Resource Name (ARN) of the location. For Network File System (NFS) or Amazon EFS, 
+    #   <p>The Amazon Resource Name (ARN) of the location. For Network File System (NFS) or Amazon EFS,
     #         the location is the export path. For Amazon S3, the location is the prefix path that you
     #         want to mount and use as the root of the location.</p>
     #   @return [String]
@@ -2812,7 +3205,9 @@ module Aws::DataSync
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>AUTOMATIC</code> (default): DataSync chooses NFS version 4.1.</p>
+    #                     <code>AUTOMATIC</code> (default): DataSync chooses NFS version 4.1. For
+    #             Amazon FSx for OpenZFS locations, DataSync first attempts to use NFS
+    #             version 4.2, then falls back to version 4.1, and then to earlier versions if needed.</p>
     #               </li>
     #               <li>
     #                  <p>
@@ -2829,6 +3224,13 @@ module Aws::DataSync
     #                     <code>NFSv4_1</code>: Stateful protocol version that supports sessions, directory
     #             delegations, and parallel data processing. NFS version 4.1 also includes all features
     #             available in version 4.0.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>NFSv4_2</code>: Stateful protocol version that supports sparse file
+    #             operations, space reservation, and server-side copy operations, in addition to all
+    #             features available in version 4.1. Selecting NFS version 4.2 requires an Enhanced mode
+    #             task.</p>
     #               </li>
     #            </ul>
     #            <note>
@@ -2948,10 +3350,12 @@ module Aws::DataSync
     #               </li>
     #            </ul>
     #            <note>
+    #               <p>The following applies only to Basic mode tasks:</p>
     #               <p>If <code>Atime</code> is set to <code>BEST_EFFORT</code>, <code>Mtime</code> must be set
     #           to <code>PRESERVE</code>. </p>
     #               <p>If <code>Atime</code> is set to <code>NONE</code>, <code>Mtime</code> must also be
     #             <code>NONE</code>. </p>
+    #               <p>Enhanced mode tasks support configuring <code>Atime</code> independently of <code>Mtime</code>.</p>
     #            </note>
     #   @return [String]
     # @!attribute mtime
@@ -2970,10 +3374,12 @@ module Aws::DataSync
     #               </li>
     #            </ul>
     #            <note>
+    #               <p>The following applies only to Basic mode tasks:</p>
     #               <p>If <code>Mtime</code> is set to <code>PRESERVE</code>, <code>Atime</code> must be set to
     #             <code>BEST_EFFORT</code>.</p>
     #               <p>If <code>Mtime</code> is set to <code>NONE</code>, <code>Atime</code> must also be set
     #           to <code>NONE</code>. </p>
+    #               <p>Enhanced mode tasks don't support <code>Mtime</code> set to <code>NONE</code>.</p>
     #            </note>
     #   @return [String]
     # @!attribute uid
@@ -3075,10 +3481,6 @@ module Aws::DataSync
     #   <p>Limits the bandwidth used by a DataSync task. For example, if you want
     #           DataSync to use a maximum of 1 MB, set this value to <code>1048576</code>
     #           (<code>=1024*1024</code>).</p>
-    #            <note>
-    #               <p>Not applicable to <a href="https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html">Enhanced mode
-    #           tasks</a>.</p>
-    #            </note>
     #   @return [Integer]
     # @!attribute task_queueing
     #   <p>Specifies whether your transfer tasks should be put into a queue during certain scenarios
@@ -3180,6 +3582,15 @@ module Aws::DataSync
     #   <p>Specifies whether you want DataSync to <code>PRESERVE</code> object tags
     #         (default behavior) when transferring between object storage systems. If you want your DataSync task to ignore object tags, specify the <code>NONE</code> value.</p>
     #   @return [String]
+    # @!attribute object_metadata
+    #   <p>Specifies whether you want DataSync to <code>PRESERVE</code> object metadata
+    #         (default behavior) when transferring between object storage systems. If you want your
+    #         DataSync task to ignore object metadata, specify the <code>NONE</code> value.</p>
+    #            <note>
+    #               <p>Even if you specify <code>NONE</code>, metadata for the last modified time is still
+    #           preserved.</p>
+    #            </note>
+    #   @return [String]
     class Options < Struct.new(
       nil,
       :verify_mode,
@@ -3197,6 +3608,7 @@ module Aws::DataSync
       :transfer_mode,
       :security_descriptor_copy_flags,
       :object_tags,
+      :object_metadata,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3219,14 +3631,18 @@ module Aws::DataSync
     #         <a href="https://docs.aws.amazon.com/datasync/latest/userguide/choose-service-endpoint.html#choose-service-endpoint-vpc">virtual private cloud (VPC) service endpoint</a>. An agent that uses a VPC endpoint
     #       isn't accessible over the public internet.</p>
     # @!attribute vpc_endpoint_id
-    #   <p>Specifies the ID of the VPC endpoint that your agent connects to.</p>
+    #   <p>Specifies the ID of the VPC service endpoint that's recorded for your agent. The endpoint ID
+    #         is informational and isn't verified by DataSync. Your agent communicates through the
+    #         private IP address in <code>PrivateLinkEndpoint</code>, which is set when you activate the
+    #         agent.</p>
     #   @return [String]
     # @!attribute private_link_endpoint
     #   <p>Specifies the VPC endpoint provided by <a href="https://docs.aws.amazon.com/vpc/latest/privatelink/privatelink-share-your-services.html">Amazon Web Services PrivateLink</a> that your agent connects to.</p>
     #   @return [String]
     # @!attribute subnet_arns
-    #   <p>Specifies the ARN of the subnet where your VPC endpoint is located. You can only specify
-    #         one ARN.</p>
+    #   <p>Specifies the ARN of the subnet where DataSync creates the network interfaces
+    #         that handle data transfer traffic for your tasks. You can only specify one ARN.</p>
+    #            <p>The subnet doesn't have to be the subnet that contains your VPC endpoint.</p>
     #   @return [Array<String>]
     # @!attribute security_group_arns
     #   <p>Specifies the Amazon Resource Names (ARN) of the security group that provides DataSync access to your VPC endpoint. You can only specify one ARN.</p>
@@ -3581,26 +3997,26 @@ module Aws::DataSync
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The number of objects that DataSync fails to prepare, transfer, verify, and
+    # <p>The number of files or objects that DataSync fails to prepare, transfer, verify, and
     #       delete during your task execution.</p>
     #          <note>
     #             <p>Applies only to <a href="https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html">Enhanced mode
     #         tasks</a>.</p>
     #          </note>
     # @!attribute prepare
-    #   <p>The number of objects that DataSync fails to prepare during your task
+    #   <p>The number of files or objects that DataSync fails to prepare during your task
     #         execution.</p>
     #   @return [Integer]
     # @!attribute transfer
-    #   <p>The number of objects that DataSync fails to transfer during your task
+    #   <p>The number of files or objects that DataSync fails to transfer during your task
     #         execution.</p>
     #   @return [Integer]
     # @!attribute verify
-    #   <p>The number of objects that DataSync fails to verify during your task
+    #   <p>The number of files or objects that DataSync fails to verify during your task
     #         execution.</p>
     #   @return [Integer]
     # @!attribute delete
-    #   <p>The number of objects that DataSync fails to delete during your task
+    #   <p>The number of files or objects that DataSync fails to delete during your task
     #         execution.</p>
     #   @return [Integer]
     class TaskExecutionFilesFailedDetail < Struct.new(
@@ -3622,13 +4038,13 @@ module Aws::DataSync
       end
     end
 
-    # <p>The number of objects that DataSync finds at your locations.</p>
+    # <p>The number of files or objects that DataSync finds at your locations.</p>
     #          <note>
     #             <p>Applies only to <a href="https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html">Enhanced mode
     #         tasks</a>.</p>
     #          </note>
     # @!attribute at_source
-    #   <p>The number of objects that DataSync finds at your source location.</p>
+    #   <p>The number of files or objects that DataSync finds at your source location.</p>
     #            <ul>
     #               <li>
     #                  <p>With a <a href="https://docs.aws.amazon.com/datasync/latest/userguide/transferring-with-manifest.html">manifest</a>, DataSync
@@ -3645,11 +4061,100 @@ module Aws::DataSync
     #            </ul>
     #   @return [Integer]
     # @!attribute at_destination_for_delete
-    #   <p>The number of objects that DataSync finds at your destination location. This
+    #   <p>The number of files or objects that DataSync finds at your destination location. This
     #         counter is only applicable if you <a href="https://docs.aws.amazon.com/datasync/latest/userguide/configure-metadata.html#task-option-file-object-handling">configure your task</a> to delete data in the destination that isn't in the
     #         source.</p>
     #   @return [Integer]
     class TaskExecutionFilesListedDetail < Struct.new(
+      nil,
+      :at_source,
+      :at_destination_for_delete,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:at_source] = 0 unless options.key?(:at_source)
+        options[:at_destination_for_delete] = 0 unless options.key?(:at_destination_for_delete)
+        super
+      end
+    end
+
+    # <p>The number of directories that DataSync fails to list, prepare, transfer, verify, and
+    #       delete during your task execution.</p>
+    #          <note>
+    #             <p>Applies only to <a href="https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html">Enhanced mode
+    #         tasks</a>.</p>
+    #          </note>
+    # @!attribute list
+    #   <p>The number of directories that DataSync fails to list during your task
+    #         execution.</p>
+    #   @return [Integer]
+    # @!attribute prepare
+    #   <p>The number of directories that DataSync fails to prepare during your task
+    #         execution.</p>
+    #   @return [Integer]
+    # @!attribute transfer
+    #   <p>The number of directories that DataSync fails to transfer during your task
+    #         execution.</p>
+    #   @return [Integer]
+    # @!attribute verify
+    #   <p>The number of directories that DataSync fails to verify during your task
+    #         execution.</p>
+    #   @return [Integer]
+    # @!attribute delete
+    #   <p>The number of directories that DataSync fails to delete during your task
+    #         execution.</p>
+    #   @return [Integer]
+    class TaskExecutionFoldersFailedDetail < Struct.new(
+      nil,
+      :list,
+      :prepare,
+      :transfer,
+      :verify,
+      :delete,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:list] = 0 unless options.key?(:list)
+        options[:prepare] = 0 unless options.key?(:prepare)
+        options[:transfer] = 0 unless options.key?(:transfer)
+        options[:verify] = 0 unless options.key?(:verify)
+        options[:delete] = 0 unless options.key?(:delete)
+        super
+      end
+    end
+
+    # <p>The number of directories that DataSync finds at your locations.</p>
+    #          <note>
+    #             <p>Applies only to <a href="https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html">Enhanced mode
+    #         tasks</a>.</p>
+    #          </note>
+    # @!attribute at_source
+    #   <p>The number of directories that DataSync finds at your source location.</p>
+    #            <ul>
+    #               <li>
+    #                  <p>With a <a href="https://docs.aws.amazon.com/datasync/latest/userguide/transferring-with-manifest.html">manifest</a>, DataSync
+    #             lists only what's in your manifest (and not everything at your source location).</p>
+    #               </li>
+    #               <li>
+    #                  <p>With an include <a href="https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html">filter</a>, DataSync lists only what
+    #             matches the filter at your source location.</p>
+    #               </li>
+    #               <li>
+    #                  <p>With an exclude filter, DataSync lists everything at your source location before applying
+    #             the filter.</p>
+    #               </li>
+    #            </ul>
+    #   @return [Integer]
+    # @!attribute at_destination_for_delete
+    #   <p>The number of directories that DataSync finds at your destination location. This
+    #         counter is only applicable if you <a href="https://docs.aws.amazon.com/datasync/latest/userguide/configure-metadata.html#task-option-file-object-handling">configure your task</a> to delete data in the destination that isn't in the
+    #         source.</p>
+    #   @return [Integer]
+    class TaskExecutionFoldersListedDetail < Struct.new(
       nil,
       :at_source,
       :at_destination_for_delete,
@@ -3671,7 +4176,7 @@ module Aws::DataSync
     #   <p>The Amazon Resource Name (ARN) of a task execution.</p>
     #   @return [String]
     # @!attribute status
-    #   <p>The status of a task execution. For more information, see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/understand-task-statuses.html#understand-task-execution-statuses">Task execution statuses</a>.</p>
+    #   <p>The status of a task execution. For more information, see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/run-task.html#understand-task-execution-statuses">Task execution statuses</a>.</p>
     #   @return [String]
     # @!attribute task_mode
     #   <p>The task mode that you're using. For more information, see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html">Choosing a task mode for your data
@@ -4041,7 +4546,8 @@ module Aws::DataSync
     # @!attribute custom_secret_config
     #   <p>Specifies configuration information for a customer-managed secret, such as an
     #         authentication token or set of credentials that DataSync uses to access a specific
-    #         transfer location, and a customer-managed KMS key.</p>
+    #         transfer location, and a customer-managed Identity and Access Management (IAM) role that
+    #         provides access to the secret.</p>
     #   @return [Types::CustomSecretConfig]
     class UpdateLocationAzureBlobRequest < Struct.new(
       nil,
@@ -4231,6 +4737,17 @@ module Aws::DataSync
     #   <p>Specifies the password of the user with the permissions to mount and access the files,
     #         folders, and file metadata in your FSx for Windows File Server file system.</p>
     #   @return [String]
+    # @!attribute cmk_secret_config
+    #   <p>Specifies configuration information for a DataSync-managed secret, such as a
+    #         <code>Password</code> or set of credentials that DataSync uses to access a specific
+    #         transfer location, and a customer-managed KMS key.</p>
+    #   @return [Types::CmkSecretConfig]
+    # @!attribute custom_secret_config
+    #   <p>Specifies configuration information for a customer-managed secret, such as a
+    #         <code>Password</code> or set of credentials that DataSync uses to access a specific
+    #         transfer location, and a customer-managed Identity and Access Management (IAM) role
+    #         that provides access to the secret.</p>
+    #   @return [Types::CustomSecretConfig]
     class UpdateLocationFsxWindowsRequest < Struct.new(
       nil,
       :location_arn,
@@ -4238,6 +4755,8 @@ module Aws::DataSync
       :domain,
       :user,
       :password,
+      :cmk_secret_config,
+      :custom_secret_config,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4260,7 +4779,19 @@ module Aws::DataSync
     # @!attribute name_nodes
     #   <p>The NameNode that manages the HDFS namespace. The NameNode performs operations such as
     #         opening, closing, and renaming files and directories. The NameNode contains the information to
-    #         map blocks of data to the DataNodes. You can use only one NameNode.</p>
+    #         map blocks of data to the DataNodes.</p>
+    #            <p>The number of NameNodes you can specify depends on the task mode:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <b>Enhanced mode</b> – You can specify multiple NameNodes for HDFS High Availability (HA)
+    #             configurations.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <b>Basic mode</b> – You can specify only one NameNode.</p>
+    #               </li>
+    #            </ul>
     #   @return [Array<Types::HdfsNameNode>]
     # @!attribute block_size
     #   <p>The size of the data blocks to write into the HDFS cluster. </p>
@@ -4300,6 +4831,17 @@ module Aws::DataSync
     #   <p>The Amazon Resource Names (ARNs) of the DataSync agents that can connect to your
     #         HDFS cluster.</p>
     #   @return [Array<String>]
+    # @!attribute cmk_secret_config
+    #   <p>Specifies configuration information for a DataSync-managed secret, such as a
+    #         <code>KerberosKeytab</code> or set of credentials that DataSync uses to access a
+    #         specific transfer location, and a customer-managed KMS key.</p>
+    #   @return [Types::CmkSecretConfig]
+    # @!attribute custom_secret_config
+    #   <p>Specifies configuration information for a customer-managed secret, such as a
+    #         <code>KerberosKeytab</code> or set of credentials that DataSync uses to
+    #         access a specific transfer location, and a customer-managed
+    #         Identity and Access Management (IAM) role that provides access to the secret.</p>
+    #   @return [Types::CustomSecretConfig]
     class UpdateLocationHdfsRequest < Struct.new(
       nil,
       :location_arn,
@@ -4315,6 +4857,8 @@ module Aws::DataSync
       :kerberos_keytab,
       :kerberos_krb5_conf,
       :agent_arns,
+      :cmk_secret_config,
+      :custom_secret_config,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4443,7 +4987,8 @@ module Aws::DataSync
     # @!attribute custom_secret_config
     #   <p>Specifies configuration information for a customer-managed secret, such as an
     #         authentication token or set of credentials that DataSync uses to access a specific
-    #         transfer location, and a customer-managed KMS key.</p>
+    #         transfer location, and a customer-managed Identity and Access Management (IAM) role
+    #         that provides access to the secret.</p>
     #   @return [Types::CustomSecretConfig]
     class UpdateLocationObjectStorageRequest < Struct.new(
       nil,
@@ -4572,6 +5117,17 @@ module Aws::DataSync
     #         to access the files and folders involved in your transfer. This parameter applies only if
     #           <code>AuthenticationType</code> is set to <code>NTLM</code>.</p>
     #   @return [String]
+    # @!attribute cmk_secret_config
+    #   <p>Specifies configuration information for a DataSync-managed secret, such as a
+    #         <code>Password</code> or <code>KerberosKeytab</code> or set of credentials that DataSync uses to access a specific transfer location, and a
+    #         customer-managed KMS key.</p>
+    #   @return [Types::CmkSecretConfig]
+    # @!attribute custom_secret_config
+    #   <p>Specifies configuration information for a customer-managed secret, such as a
+    #         <code>Password</code> or <code>KerberosKeytab</code> or set of credentials that DataSync uses to access a specific transfer location, and a
+    #         customer-managed Identity and Access Management (IAM) role that provides access to
+    #         the secret.</p>
+    #   @return [Types::CustomSecretConfig]
     # @!attribute agent_arns
     #   <p>Specifies the DataSync agent (or agents) that can connect to your SMB file
     #         server. You specify an agent by using its Amazon Resource Name (ARN).</p>
@@ -4621,6 +5177,8 @@ module Aws::DataSync
       :user,
       :domain,
       :password,
+      :cmk_secret_config,
+      :custom_secret_config,
       :agent_arns,
       :mount_options,
       :authentication_type,

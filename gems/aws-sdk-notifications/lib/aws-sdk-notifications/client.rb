@@ -144,18 +144,18 @@ module Aws::Notifications
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -237,10 +237,13 @@ module Aws::Notifications
     #   <p>A unique value of an Account Contact Type to associate with the <code>ManagedNotificationConfiguration</code>.</p>
     # @option params [String] :managed_notification_configuration_arn
     #   <p>The Amazon Resource Name (ARN) of the <code>ManagedNotificationConfiguration</code> to associate with the Account Contact.</p>
+    # @option params [Boolean] :is_sensitive_events_subscribed
+    #   <p>Specifies whether this contact is subscribed to sensitive events. The <code>notifications:SubscribeSensitiveEvents</code> permission controls access to sensitive events. Defaults to false.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     contact_identifier: "AccountContactType", # required
     #     managed_notification_configuration_arn: "ManagedNotificationConfigurationOsArn", # required
+    #     is_sensitive_events_subscribed: false
     #   }
     #   options = {}
     #   response = client.associate_managed_notification_account_contact(params, options)
@@ -259,10 +262,13 @@ module Aws::Notifications
     #   <p>The Amazon Resource Name (ARN) of the Channel to associate with the <code>ManagedNotificationConfiguration</code>.</p> <p>Supported ARNs include Amazon Q Developer in chat applications, the Console Mobile Application, and email (notifications-contacts).</p>
     # @option params [String] :managed_notification_configuration_arn
     #   <p>The Amazon Resource Name (ARN) of the <code>ManagedNotificationConfiguration</code> to associate with the additional Channel.</p>
+    # @option params [Boolean] :is_sensitive_events_subscribed
+    #   <p>Specifies whether this channel is subscribed to sensitive events. The <code>notifications:SubscribeSensitiveEvents</code> permission controls access to sensitive events. Defaults to false.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     channel_arn: "ChannelArn", # required
     #     managed_notification_configuration_arn: "ManagedNotificationConfigurationOsArn", # required
+    #     is_sensitive_events_subscribed: false
     #   }
     #   options = {}
     #   response = client.associate_managed_notification_additional_channel(params, options)
@@ -408,10 +414,10 @@ module Aws::Notifications
       request.send_request(options)
     end
 
-    # <p>Deregisters a <code>NotificationConfiguration</code> in the specified Region.</p> <note> <p>You can't deregister the last <code>NotificationHub</code> in the account. <code>NotificationEvents</code> stored in the deregistered <code>NotificationConfiguration</code> are no longer be visible. Recreating a new <code>NotificationConfiguration</code> in the same Region restores access to those <code>NotificationEvents</code>.</p> </note>
+    # <p>Deregisters a <code>NotificationHub</code> in the specified Region.</p> <note> <p>You can't deregister the last <code>NotificationHub</code> in the account. <code>NotificationEvents</code> stored in the deregistered <code>NotificationHub</code> are no longer visible. Recreating a new <code>NotificationHub</code> in the same Region restores access to those <code>NotificationEvents</code>.</p> </note>
     # @param [Hash, Types::DeregisterNotificationHubRequest] params
     # @option params [String] :notification_hub_region
-    #   <p>The <code>NotificationConfiguration</code> Region.</p>
+    #   <p>The <code>NotificationHub</code> Region.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     notification_hub_region: "Region", # required
@@ -611,6 +617,7 @@ module Aws::Notifications
     #         headline: "TextPartReference",
     #         paragraph_summary: "TextPartReference",
     #         complete_description: "TextPartReference",
+    #         markup_description: "TextPartReference",
     #         dimensions: [
     #           {
     #             name: "TextPartReference", # required
@@ -703,6 +710,7 @@ module Aws::Notifications
     #         headline: "TextPartReference",
     #         paragraph_summary: "TextPartReference",
     #         complete_description: "TextPartReference",
+    #         markup_description: "TextPartReference",
     #         dimensions: [
     #           {
     #             name: "TextPartReference", # required
@@ -758,7 +766,14 @@ module Aws::Notifications
     #           url: "Url"
     #         }
     #       },
-    #       organizational_unit_id: "OrganizationalUnitId"
+    #       organizational_unit_id: "OrganizationalUnitId",
+    #       attachments: [
+    #         {
+    #           display_name: "AttachmentDisplayName", # required
+    #           attachment_download_url: "SensitiveUrl",
+    #           content_type: "AttachmentContentType", # required
+    #         }
+    #       ]
     #     }
     #   }
     # @return [Types::GetManagedNotificationEventResponse]
@@ -837,6 +852,7 @@ module Aws::Notifications
     #         headline: "TextPartReference",
     #         paragraph_summary: "TextPartReference",
     #         complete_description: "TextPartReference",
+    #         markup_description: "TextPartReference",
     #         dimensions: [
     #           {
     #             name: "TextPartReference", # required
@@ -1025,8 +1041,9 @@ module Aws::Notifications
     #     channel_associations: [ # required
     #       {
     #         channel_identifier: "String", # required
-    #         channel_type: "ChannelType", # required
-    #         override_option: "ChannelAssociationOverrideOption"
+    #         channel_type: "MOBILE" # One of: ["MOBILE", "CHATBOT", "EMAIL", "ACCOUNT_CONTACT"], # required
+    #         override_option: "ChannelAssociationOverrideOption",
+    #         is_sensitive_events_subscribed: false
     #       }
     #     ]
     #   }
@@ -1161,6 +1178,8 @@ module Aws::Notifications
     #   <p>The Organizational Unit Id that an Amazon Web Services account belongs to.</p>
     # @option params [String] :related_account
     #   <p>The Amazon Web Services account ID associated with the Managed Notification Events.</p>
+    # @option params [Boolean] :include_sensitive_events
+    #   <p>Specifies whether to include sensitive events in the result. By default, only non-sensitive events are returned. The <code>notifications:AccessSensitiveEvents</code> permission controls access to sensitive events.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     start_time: Time.now,
@@ -1170,7 +1189,8 @@ module Aws::Notifications
     #     max_results: 1,
     #     next_token: "NextToken",
     #     organizational_unit_id: "OrganizationalUnitId",
-    #     related_account: "AccountId"
+    #     related_account: "AccountId",
+    #     include_sensitive_events: false
     #   }
     #   options = {}
     #   response = client.list_managed_notification_events(params, options)
@@ -1518,7 +1538,7 @@ module Aws::Notifications
       request.send_request(options)
     end
 
-    # <p>Registers a <code>NotificationConfiguration</code> in the specified Region.</p> <p>There is a maximum of one <code>NotificationConfiguration</code> per Region. You can have a maximum of 3 <code>NotificationHub</code> resources at a time.</p>
+    # <p>Registers a <code>NotificationHub</code> in the specified Region.</p> <p>There is a maximum of one <code>NotificationHub</code> per Region. You can have a maximum of 3 <code>NotificationHub</code> resources at a time.</p>
     # @param [Hash, Types::RegisterNotificationHubRequest] params
     # @option params [String] :notification_hub_region
     #   <p>The Region of the <code>NotificationHub</code>.</p>
@@ -1622,6 +1642,31 @@ module Aws::Notifications
     # @return [Types::UpdateEventRuleResponse]
     def update_event_rule(params = {}, options = {})
       request = build_request(:update_event_rule, params)
+      request.send_request(options)
+    end
+
+    # <p>Updates the <code>isSensitiveEventsSubscribed</code> property of a particular ManagedNotification channel association.</p>
+    # @param [Hash, Types::UpdateManagedNotificationChannelAssociationRequest] params
+    # @option params [String] :managed_notification_configuration_arn
+    #   <p>The Amazon Resource Name (ARN) of the <code>ManagedNotificationConfiguration</code> whose Channel association property you want to update.</p>
+    # @option params [String] :channel_identifier
+    #   <p>The identifier of the channel association to update. You can specify one of the following:</p> <ul> <li> <p>An Account contact identifier.</p> </li> <li> <p>A Channel ARN.</p> </li> </ul>
+    # @option params [Boolean] :is_sensitive_events_subscribed
+    #   <p>Specifies whether the association is subscribed to sensitive events. The <code>notifications:SubscribeSensitiveEvents</code> permission controls access to sensitive events.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     managed_notification_configuration_arn: "ManagedNotificationConfigurationOsArn", # required
+    #     channel_identifier: "ManagedNotificationChannelIdentifier", # required
+    #     is_sensitive_events_subscribed: false
+    #   }
+    #   options = {}
+    #   response = client.update_managed_notification_channel_association(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::UpdateManagedNotificationChannelAssociationResponse]
+    def update_managed_notification_channel_association(params = {}, options = {})
+      request = build_request(:update_managed_notification_channel_association, params)
       request.send_request(options)
     end
 

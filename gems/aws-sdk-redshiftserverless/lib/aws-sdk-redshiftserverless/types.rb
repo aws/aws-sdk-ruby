@@ -46,11 +46,7 @@ module Aws::RedshiftServerless
 
     # <p>An array of key-value pairs to set for advanced control over Amazon Redshift Serverless.</p>
     # @!attribute parameter_key
-    #   <p>The key of the parameter. The
-    #            options are <code>auto_mv</code>, <code>datestyle</code>, <code>enable_case_sensitive_identifier</code>, <code>enable_user_activity_logging</code>,
-    #            <code>query_group</code>, <code>search_path</code>, <code>require_ssl</code>, <code>use_fips_ssl</code>, and query monitoring metrics that let 
-    #            you define performance boundaries. For more information about query monitoring rules and available metrics, see 
-    #            <a href="https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless">Query monitoring metrics for Amazon Redshift Serverless</a>.</p>
+    #   <p>The key of the parameter. The options are <code>auto_mv</code>, <code>datestyle</code>, <code>enable_case_sensitive_identifier</code>, <code>enable_user_activity_logging</code>, <code>query_group</code>, <code>search_path</code>, <code>require_ssl</code>, <code>use_fips_ssl</code>, and either <code>wlm_json_configuration</code> or query monitoring metrics that let you define performance boundaries. You can either specify individual query monitoring metrics (such as <code>max_scan_row_count</code>, <code>max_query_execution_time</code>) or use <code>wlm_json_configuration</code> to define query queues with rules, but not both. If you're using <code>wlm_json_configuration</code>, the maximum size of <code>parameterValue</code> is 8000 characters. For more information about query monitoring rules and available metrics, see <a href="https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless">Query monitoring metrics for Amazon Redshift Serverless</a>.</p>
     #   @return [String]
     # @!attribute parameter_value
     #   <p>The value of the parameter to set.</p>
@@ -85,8 +81,7 @@ module Aws::RedshiftServerless
     #   <p>How long to retain the snapshot.</p>
     #   @return [Integer]
     # @!attribute tags
-    #   <p>An array of <a href="https://docs.aws.amazon.com/redshift-serverless/latest/APIReference/API_Tag.html">Tag objects</a> 
-    #            to associate with the created snapshot.</p>
+    #   <p>An array of <a href="https://docs.aws.amazon.com/redshift-serverless/latest/APIReference/API_Tag.html">Tag objects</a> to associate with the created snapshot.</p>
     #   @return [Array<Types::Tag>]
     class ConvertRecoveryPointToSnapshotRequest < Struct.new(
       nil,
@@ -153,20 +148,16 @@ module Aws::RedshiftServerless
     end
 
     # @!attribute endpoint_name
-    #   <p>The name of the VPC endpoint. An endpoint name must contain 1-30 characters. 
-    #            Valid characters are A-Z, a-z, 0-9, and hyphen(-). The first character must be a letter. 
-    #            The name can't contain two consecutive hyphens or end with a hyphen.</p>
+    #   <p>The name of the VPC endpoint. An endpoint name must contain 1-30 characters. Valid characters are A-Z, a-z, 0-9, and hyphen(-). The first character must be a letter. The name can't contain two consecutive hyphens or end with a hyphen.</p>
     #   @return [String]
     # @!attribute subnet_ids
-    #   <p>The unique identifers of subnets from which 
-    #            Amazon Redshift Serverless chooses one to deploy a VPC endpoint.</p>
+    #   <p>The unique identifers of subnets from which Amazon Redshift Serverless chooses one to deploy a VPC endpoint.</p>
     #   @return [Array<String>]
     # @!attribute workgroup_name
     #   <p>The name of the workgroup to associate with the VPC endpoint.</p>
     #   @return [String]
     # @!attribute vpc_security_group_ids
-    #   <p>The unique identifiers of the security group that defines the ports, 
-    #            protocols, and sources for inbound traffic that you are authorizing into your endpoint.</p>
+    #   <p>The unique identifiers of the security group that defines the ports, protocols, and sources for inbound traffic that you are authorizing into your endpoint.</p>
     #   @return [Array<String>]
     # @!attribute owner_account
     #   <p>The owner Amazon Web Services account for the Amazon Redshift Serverless workgroup.</p>
@@ -201,8 +192,7 @@ module Aws::RedshiftServerless
     #   <p>The username of the administrator for the first database created in the namespace.</p>
     #   @return [String]
     # @!attribute admin_user_password
-    #   <p>The password of the administrator for the first database created in the namespace.</p>
-    #            <p>You can't use <code>adminUserPassword</code> if <code>manageAdminPassword</code> is true. </p>
+    #   <p>The password of the administrator for the first database created in the namespace.</p> <p>You can't use <code>adminUserPassword</code> if <code>manageAdminPassword</code> is true. </p>
     #   @return [String]
     # @!attribute db_name
     #   <p>The name of the first database created in the namespace.</p>
@@ -217,22 +207,16 @@ module Aws::RedshiftServerless
     #   <p>A list of IAM roles to associate with the namespace.</p>
     #   @return [Array<String>]
     # @!attribute log_exports
-    #   <p>The types of logs the namespace can export. 
-    #            Available export types are <code>userlog</code>, <code>connectionlog</code>, and <code>useractivitylog</code>.</p>
+    #   <p>The types of logs the namespace can export. Available export types are <code>userlog</code>, <code>connectionlog</code>, and <code>useractivitylog</code>.</p>
     #   @return [Array<String>]
     # @!attribute tags
     #   <p>A list of tag instances.</p>
     #   @return [Array<Types::Tag>]
     # @!attribute manage_admin_password
-    #   <p>If <code>true</code>, Amazon Redshift uses Secrets Manager to manage the namespace's admin credentials. 
-    #            You can't use <code>adminUserPassword</code> if <code>manageAdminPassword</code> is true. 
-    #            If <code>manageAdminPassword</code> is false or not set, Amazon Redshift uses 
-    #            <code>adminUserPassword</code> for the admin user account's password.
-    #         </p>
+    #   <p>If <code>true</code>, Amazon Redshift uses Secrets Manager to manage the namespace's admin credentials. You can't use <code>adminUserPassword</code> if <code>manageAdminPassword</code> is true. If <code>manageAdminPassword</code> is false or not set, Amazon Redshift uses <code>adminUserPassword</code> for the admin user account's password. </p>
     #   @return [Boolean]
     # @!attribute admin_password_secret_kms_key_id
-    #   <p>The ID of the Key Management Service (KMS) key used to encrypt and store the namespace's admin credentials secret. 
-    #            You can only use this parameter if <code>manageAdminPassword</code> is true.</p>
+    #   <p>The ID of the Key Management Service (KMS) key used to encrypt and store the namespace's admin credentials secret. You can only use this parameter if <code>manageAdminPassword</code> is true.</p>
     #   @return [String]
     # @!attribute redshift_idc_application_arn
     #   <p>The ARN for the Redshift application that integrates with IAM Identity Center.</p>
@@ -274,10 +258,7 @@ module Aws::RedshiftServerless
     #   <p>The ID of the offering associated with the reservation. The offering determines the payment schedule for the reservation.</p>
     #   @return [String]
     # @!attribute client_token
-    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services 
-    #            SDK populates this field. This token must be a valid UUIDv4 value. For more information about idempotency, see <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">
-    #               Making retries safe with idempotent APIs
-    #            </a>.</p>
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. This token must be a valid UUIDv4 value. For more information about idempotency, see <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/"> Making retries safe with idempotent APIs </a>.</p>
     #   @return [String]
     class CreateReservationRequest < Struct.new(
       nil,
@@ -304,35 +285,19 @@ module Aws::RedshiftServerless
     #   <p>The name of the scheduled action.</p>
     #   @return [String]
     # @!attribute target_action
-    #   <p>A JSON format string of the Amazon Redshift Serverless API operation with input parameters. The following is an example of a target action.</p>
-    #            <p>
-    #               <code>"{"CreateSnapshot": {"NamespaceName": "sampleNamespace","SnapshotName": "sampleSnapshot", "retentionPeriod": "1"}}"</code>
-    #            </p>
+    #   <p>A JSON format string of the Amazon Redshift Serverless API operation with input parameters. The following is an example of a target action.</p> <p> <code>"{"CreateSnapshot": {"NamespaceName": "sampleNamespace","SnapshotName": "sampleSnapshot", "retentionPeriod": "1"}}"</code> </p>
     #   @return [Types::TargetAction]
     # @!attribute schedule
-    #   <p>The schedule for a one-time (at timestamp format) or recurring (cron format) scheduled action. Schedule invocations must be separated by at least one hour. Times are in UTC.</p>
-    #            <ul>
-    #               <li>
-    #                  <p>Format of at timestamp is <code>yyyy-mm-ddThh:mm:ss</code>. For example, <code>2016-03-04T17:27:00</code>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>Format of cron expression is <code>(Minutes Hours Day-of-month Month Day-of-week Year)</code>. For example, <code>"(0 10 ? * MON *)"</code>. For more information, see 
-    #               <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions">Cron Expressions</a> in the <i>Amazon CloudWatch Events User Guide</i>.</p>
-    #               </li>
-    #            </ul>
+    #   <p>The schedule for a one-time (at timestamp format) or recurring (cron format) scheduled action. Schedule invocations must be separated by at least one hour. Times are in UTC.</p> <ul> <li> <p>Format of at timestamp is <code>yyyy-mm-ddThh:mm:ss</code>. For example, <code>2016-03-04T17:27:00</code>.</p> </li> <li> <p>Format of cron expression is <code>(Minutes Hours Day-of-month Month Day-of-week Year)</code>. For example, <code>"(0 10 ? * MON *)"</code>. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions">Cron Expressions</a> in the <i>Amazon CloudWatch Events User Guide</i>.</p> </li> </ul>
     #   @return [Types::Schedule]
     # @!attribute role_arn
-    #   <p>The ARN of the IAM role to assume to run the scheduled action. This IAM role must have permission to run the Amazon Redshift Serverless API operation in the scheduled action. 
-    #            This IAM role must allow the Amazon Redshift scheduler to schedule creating snapshots. (Principal scheduler.redshift.amazonaws.com) to assume permissions on your behalf. 
-    #            For more information about the IAM role to use with the Amazon Redshift scheduler, see <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html">Using Identity-Based Policies for 
-    #               Amazon Redshift</a> in the Amazon Redshift Management Guide</p>
+    #   <p>The ARN of the IAM role to assume to run the scheduled action. This IAM role must have permission to run the Amazon Redshift Serverless API operation in the scheduled action. This IAM role must allow the Amazon Redshift scheduler to schedule creating snapshots. (Principal scheduler.redshift.amazonaws.com) to assume permissions on your behalf. For more information about the IAM role to use with the Amazon Redshift scheduler, see <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html">Using Identity-Based Policies for Amazon Redshift</a> in the Amazon Redshift Management Guide</p>
     #   @return [String]
     # @!attribute namespace_name
     #   <p>The name of the namespace for which to create a scheduled action.</p>
     #   @return [String]
     # @!attribute enabled
-    #   <p>Indicates whether the schedule is enabled. If false, the scheduled action does not trigger. For more information about <code>state</code> 
-    #            of the scheduled action, see <a href="https://docs.aws.amazon.com/redshift-serverless/latest/APIReference/API_ScheduledAction.html">ScheduledAction</a>.</p>
+    #   <p>Indicates whether the schedule is enabled. If false, the scheduled action does not trigger. For more information about <code>state</code> of the scheduled action, see <a href="https://docs.aws.amazon.com/redshift-serverless/latest/APIReference/API_ScheduledAction.html">ScheduledAction</a>.</p>
     #   @return [Boolean]
     # @!attribute scheduled_action_description
     #   <p>The description of the scheduled action.</p>
@@ -438,14 +403,12 @@ module Aws::RedshiftServerless
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The parameters that you can use to configure a <a href="https://docs.aws.amazon.com/redshift-serverless/latest/APIReference/API_CreateScheduledAction.html">scheduled action</a> to create a snapshot. For more information about creating a scheduled action, see 
-    #          <a href="https://docs.aws.amazon.com/redshift-serverless/latest/APIReference/API_CreateScheduledAction.html">CreateScheduledAction</a>.</p>
+    # <p>The parameters that you can use to configure a <a href="https://docs.aws.amazon.com/redshift-serverless/latest/APIReference/API_CreateScheduledAction.html">scheduled action</a> to create a snapshot. For more information about creating a scheduled action, see <a href="https://docs.aws.amazon.com/redshift-serverless/latest/APIReference/API_CreateScheduledAction.html">CreateScheduledAction</a>.</p>
     # @!attribute namespace_name
     #   <p>The name of the namespace for which you want to configure a scheduled action to create a snapshot.</p>
     #   @return [String]
     # @!attribute snapshot_name_prefix
-    #   <p>A string prefix that is attached to the name of the snapshot created by the scheduled action. The final 
-    #         name of the snapshot is the string prefix appended by the date and time of when the snapshot was created.</p>
+    #   <p>A string prefix that is attached to the name of the snapshot created by the scheduled action. The final name of the snapshot is the string prefix appended by the date and time of when the snapshot was created.</p>
     #   @return [String]
     # @!attribute retention_period
     #   <p>The retention period of the snapshot created by the scheduled action.</p>
@@ -471,8 +434,7 @@ module Aws::RedshiftServerless
     #   <p>The type of Amazon Redshift Serverless usage to create a usage limit for.</p>
     #   @return [String]
     # @!attribute amount
-    #   <p>The limit amount. If time-based, this amount is in Redshift Processing Units (RPU) consumed per hour. If data-based, this amount is in terabytes (TB) of data
-    #            transferred between Regions in cross-account sharing. The value must be a positive number.</p>
+    #   <p>The limit amount. If time-based, this amount is in Redshift Processing Units (RPU) consumed per hour. If data-based, this amount is in terabytes (TB) of data transferred between Regions in cross-account sharing. The value must be a positive number.</p>
     #   @return [Integer]
     # @!attribute period
     #   <p>The time period that the amount applies to. A weekly period begins on Sunday. The default is monthly.</p>
@@ -513,15 +475,10 @@ module Aws::RedshiftServerless
     #   <p>The base data warehouse capacity of the workgroup in Redshift Processing Units (RPUs).</p>
     #   @return [Integer]
     # @!attribute enhanced_vpc_routing
-    #   <p>The value that specifies whether to turn on enhanced virtual 
-    #            private cloud (VPC) routing, which forces Amazon Redshift Serverless to route traffic through your VPC instead of over the internet.</p>
+    #   <p>The value that specifies whether to turn on enhanced virtual private cloud (VPC) routing, which forces Amazon Redshift Serverless to route traffic through your VPC instead of over the internet.</p>
     #   @return [Boolean]
     # @!attribute config_parameters
-    #   <p>An array of parameters to set for advanced control over a database. The
-    #            options are <code>auto_mv</code>, <code>datestyle</code>, <code>enable_case_sensitive_identifier</code>, <code>enable_user_activity_logging</code>,
-    #            <code>query_group</code>, <code>search_path</code>, <code>require_ssl</code>, <code>use_fips_ssl</code>, and query monitoring metrics that let you define performance boundaries. For more information about query monitoring rules and available metrics, see 
-    #            <a href="https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless">
-    #               Query monitoring metrics for Amazon Redshift Serverless</a>.</p>
+    #   <p>An array of parameters to set for advanced control over a database. The options are <code>auto_mv</code>, <code>datestyle</code>, <code>enable_case_sensitive_identifier</code>, <code>enable_user_activity_logging</code>, <code>query_group</code>, <code>search_path</code>, <code>require_ssl</code>, <code>use_fips_ssl</code>, and either <code>wlm_json_configuration</code> or query monitoring metrics that let you define performance boundaries. You can either specify individual query monitoring metrics (such as <code>max_scan_row_count</code>, <code>max_query_execution_time</code>) or use <code>wlm_json_configuration</code> to define query queues with rules, but not both. If you're using <code>wlm_json_configuration</code>, the maximum size of <code>parameterValue</code> is 8000 characters. For more information about query monitoring rules and available metrics, see <a href="https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless"> Query monitoring metrics for Amazon Redshift Serverless</a>.</p>
     #   @return [Array<Types::ConfigParameter>]
     # @!attribute security_group_ids
     #   <p>An array of security group IDs to associate with the workgroup.</p>
@@ -548,9 +505,11 @@ module Aws::RedshiftServerless
     #   <p>The IP address type that the workgroup supports. Possible values are <code>ipv4</code> and <code>dualstack</code>.</p>
     #   @return [String]
     # @!attribute track_name
-    #   <p>An optional parameter for the name of the track for the workgroup. If you don't provide 
-    #            a track name, the workgroup is assigned to the <code>current</code> track.</p>
+    #   <p>An optional parameter for the name of the track for the workgroup. If you don't provide a track name, the workgroup is assigned to the <code>current</code> track.</p>
     #   @return [String]
+    # @!attribute extra_compute_for_automatic_optimization
+    #   <p>If <code>true</code>, allocates additional compute resources for running automatic optimization operations.</p> <p>Default: false</p>
+    #   @return [Boolean]
     class CreateWorkgroupRequest < Struct.new(
       nil,
       :workgroup_name,
@@ -567,6 +526,7 @@ module Aws::RedshiftServerless
       :price_performance_target,
       :ip_address_type,
       :track_name,
+      :extra_compute_for_automatic_optimization,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -785,6 +745,17 @@ module Aws::RedshiftServerless
       include ::Smithy::Schema::Structure
     end
 
+    # <p>This exception is thrown when the request was successful, but dry run was enabled so no action was taken.</p>
+    # @!attribute message
+    #   @return [String]
+    class DryRunException < Struct.new(
+      nil,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The VPC endpoint object.</p>
     # @!attribute address
     #   <p>The DNS address of the VPC endpoint.</p>
@@ -825,8 +796,7 @@ module Aws::RedshiftServerless
     #   <p>The DNS address of the endpoint.</p>
     #   @return [String]
     # @!attribute subnet_ids
-    #   <p>The unique identifier of subnets 
-    #            where Amazon Redshift Serverless choose to deploy the VPC endpoint.</p>
+    #   <p>The unique identifier of subnets where Amazon Redshift Serverless choose to deploy the VPC endpoint.</p>
     #   @return [Array<String>]
     # @!attribute vpc_security_groups
     #   <p>The security groups associated with the endpoint.</p>
@@ -855,31 +825,10 @@ module Aws::RedshiftServerless
     end
 
     # @!attribute db_name
-    #   <p>The name of the database to get temporary authorization to log on to.</p>
-    #            <p>Constraints:</p>
-    #            <ul>
-    #               <li>
-    #                  <p>Must be 1 to 64 alphanumeric characters or hyphens.</p>
-    #               </li>
-    #               <li>
-    #                  <p>Must contain only uppercase or lowercase letters, numbers, underscore, plus sign, period (dot), at symbol (@), or hyphen.</p>
-    #               </li>
-    #               <li>
-    #                  <p>The first character must be a letter.</p>
-    #               </li>
-    #               <li>
-    #                  <p>Must not contain a colon ( : ) or slash ( / ).</p>
-    #               </li>
-    #               <li>
-    #                  <p>Cannot be a reserved word. A list of reserved words can be found 
-    #                  in <a href="https://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html">Reserved Words </a> 
-    #                  in the Amazon Redshift Database Developer Guide</p>
-    #               </li>
-    #            </ul>
+    #   <p>The name of the database to get temporary authorization to log on to.</p> <p>Constraints:</p> <ul> <li> <p>Must be 1 to 64 alphanumeric characters or hyphens.</p> </li> <li> <p>Must contain only uppercase or lowercase letters, numbers, underscore, plus sign, period (dot), at symbol (@), or hyphen.</p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>Must not contain a colon ( : ) or slash ( / ).</p> </li> <li> <p>Cannot be a reserved word. A list of reserved words can be found in <a href="https://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html">Reserved Words </a> in the Amazon Redshift Database Developer Guide</p> </li> </ul>
     #   @return [String]
     # @!attribute duration_seconds
-    #   <p>The number of seconds until the returned temporary password expires.
-    #            The minimum is 900 seconds, and the maximum is 3600 seconds.</p>
+    #   <p>The number of seconds until the returned temporary password expires. The minimum is 900 seconds, and the maximum is 3600 seconds.</p>
     #   @return [Integer]
     # @!attribute workgroup_name
     #   <p>The name of the workgroup associated with the database.</p>
@@ -899,21 +848,16 @@ module Aws::RedshiftServerless
     end
 
     # @!attribute db_user
-    #   <p>A database user name that is authorized to log on to the database <code>DbName</code>
-    #            using the password <code>DbPassword</code>. If the specified <code>DbUser</code> exists in the database, 
-    #            the new user name has the same database privileges as the the user named in 
-    #            <code>DbUser</code>. By default, the user is added to PUBLIC.</p>
+    #   <p>A database user name that is authorized to log on to the database <code>DbName</code> using the password <code>DbPassword</code>. If the specified <code>DbUser</code> exists in the database, the new user name has the same database privileges as the the user named in <code>DbUser</code>. By default, the user is added to PUBLIC.</p>
     #   @return [String]
     # @!attribute db_password
-    #   <p>A temporary password that authorizes the user name returned by 
-    #            <code>DbUser</code> to log on to the database <code>DbName</code>.</p>
+    #   <p>A temporary password that authorizes the user name returned by <code>DbUser</code> to log on to the database <code>DbName</code>.</p>
     #   @return [String]
     # @!attribute expiration
     #   <p>The date and time the password in <code>DbPassword</code> expires.</p>
     #   @return [Time]
     # @!attribute next_refresh_time
-    #   <p>The date and time of when the <code>DbUser</code> and <code>DbPassword</code> 
-    #            authorization refreshes.</p>
+    #   <p>The date and time of when the <code>DbUser</code> and <code>DbPassword</code> authorization refreshes.</p>
     #   @return [Time]
     class GetCredentialsResponse < Struct.new(
       nil,
@@ -981,6 +925,33 @@ module Aws::RedshiftServerless
     class GetEndpointAccessResponse < Struct.new(
       nil,
       :endpoint,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute workgroup_names
+    #   <p>A list of workgroup names for which to generate the Identity Center authentication token.</p> <p>Constraints:</p> <ul> <li> <p>Must contain between 1 and 20 workgroup names.</p> </li> <li> <p>Each workgroup name must be a valid Amazon Redshift Serverless workgroup identifier.</p> </li> <li> <p>All specified workgroups must have Identity Center integration enabled.</p> </li> </ul>
+    #   @return [Array<String>]
+    class GetIdentityCenterAuthTokenRequest < Struct.new(
+      nil,
+      :workgroup_names,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @note This shape contains sensitive data and should be treated as such.
+    # @!attribute token
+    #   <p>The Identity Center authentication token that can be used to access data in the specified workgroups.</p> <p>This token contains the Identity Center identity information and is encrypted for secure transmission.</p>
+    #   @return [String]
+    # @!attribute expiration_time
+    #   <p>The date and time when the Identity Center authentication token expires.</p> <p>After this time, a new token must be requested for continued access.</p>
+    #   @return [Time]
+    class GetIdentityCenterAuthTokenResponse < Struct.new(
+      nil,
+      :token,
+      :expiration_time,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1160,8 +1131,7 @@ module Aws::RedshiftServerless
     end
 
     # @!attribute table_restore_status
-    #   <p>The returned <code>TableRestoreStatus</code> object that contains information about
-    #            the status of your <code>RestoreTableFromSnapshot</code> request.</p>
+    #   <p>The returned <code>TableRestoreStatus</code> object that contains information about the status of your <code>RestoreTableFromSnapshot</code> request.</p>
     #   @return [Types::TableRestoreStatus]
     class GetTableRestoreStatusResponse < Struct.new(
       nil,
@@ -1282,13 +1252,10 @@ module Aws::RedshiftServerless
     end
 
     # @!attribute next_token
-    #   <p>When <code>nextToken</code> is returned, there are more results available. 
-    #            The value of <code>nextToken</code> is a unique pagination token for each page. 
-    #            Make the call again using the returned token to retrieve the next page.</p>
+    #   <p>When <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>An optional parameter that specifies the maximum number of results to return.
-    #            You can use <code>nextToken</code> to display the next page of results.</p>
+    #   <p>An optional parameter that specifies the maximum number of results to return. You can use <code>nextToken</code> to display the next page of results.</p>
     #   @return [Integer]
     # @!attribute custom_domain_name
     #   <p>The custom domain name associated with the workgroup.</p>
@@ -1308,9 +1275,7 @@ module Aws::RedshiftServerless
     end
 
     # @!attribute next_token
-    #   <p>When <code>nextToken</code> is returned, there are more results available. 
-    #            The value of <code>nextToken</code> is a unique pagination token for each page. 
-    #            Make the call again using the returned token to retrieve the next page.</p>
+    #   <p>When <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.</p>
     #   @return [String]
     # @!attribute associations
     #   <p>A list of Association objects.</p>
@@ -1325,13 +1290,10 @@ module Aws::RedshiftServerless
     end
 
     # @!attribute next_token
-    #   <p>If your initial <code>ListEndpointAccess</code> operation returns a <code>nextToken</code>,
-    #            you can include the returned <code>nextToken</code> in following <code>ListEndpointAccess</code> operations,
-    #            which returns results in the next page.</p>
+    #   <p>If your initial <code>ListEndpointAccess</code> operation returns a <code>nextToken</code>, you can include the returned <code>nextToken</code> in following <code>ListEndpointAccess</code> operations, which returns results in the next page.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>An optional parameter that specifies the maximum number of results to return.
-    #            You can use <code>nextToken</code> to display the next page of results.</p>
+    #   <p>An optional parameter that specifies the maximum number of results to return. You can use <code>nextToken</code> to display the next page of results.</p>
     #   @return [Integer]
     # @!attribute workgroup_name
     #   <p>The name of the workgroup associated with the VPC endpoint to return.</p>
@@ -1355,9 +1317,7 @@ module Aws::RedshiftServerless
     end
 
     # @!attribute next_token
-    #   <p>When <code>nextToken</code> is returned, there are more results available. 
-    #            The value of <code>nextToken</code> is a unique pagination token for each page. 
-    #            Make the call again using the returned token to retrieve the next page.</p>
+    #   <p>When <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.</p>
     #   @return [String]
     # @!attribute endpoints
     #   <p>The returned VPC endpoints.</p>
@@ -1372,17 +1332,13 @@ module Aws::RedshiftServerless
     end
 
     # @!attribute source_arn
-    #   <p>The Amazon Resource Name (ARN) for the managed 
-    #            workgroup in the AWS Glue Data Catalog.</p>
+    #   <p>The Amazon Resource Name (ARN) for the managed workgroup in the Glue Data Catalog.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>If your initial ListManagedWorkgroups operation returns a nextToken, 
-    #            you can include the returned nextToken in following ListManagedWorkgroups 
-    #            operations, which returns results in the next page.</p>
+    #   <p>If your initial ListManagedWorkgroups operation returns a nextToken, you can include the returned nextToken in following ListManagedWorkgroups operations, which returns results in the next page.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>An optional parameter that specifies the maximum number 
-    #            of results to return. You can use nextToken to display the next page of results.</p>
+    #   <p>An optional parameter that specifies the maximum number of results to return. You can use nextToken to display the next page of results.</p>
     #   @return [Integer]
     class ListManagedWorkgroupsRequest < Struct.new(
       nil,
@@ -1395,9 +1351,7 @@ module Aws::RedshiftServerless
     end
 
     # @!attribute next_token
-    #   <p>If nextToken is returned, there are more results available. 
-    #            The value of nextToken is a unique pagination token for each page.
-    #            To retrieve the next page, make the call again using the returned token.</p>
+    #   <p>If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. To retrieve the next page, make the call again using the returned token.</p>
     #   @return [String]
     # @!attribute managed_workgroups
     #   <p>The returned array of managed workgroups.</p>
@@ -1412,13 +1366,10 @@ module Aws::RedshiftServerless
     end
 
     # @!attribute next_token
-    #   <p>If your initial <code>ListNamespaces</code> operation returns a <code>nextToken</code>,
-    #            you can include the returned <code>nextToken</code> in following <code>ListNamespaces</code> operations,
-    #            which returns results in the next page.</p>
+    #   <p>If your initial <code>ListNamespaces</code> operation returns a <code>nextToken</code>, you can include the returned <code>nextToken</code> in following <code>ListNamespaces</code> operations, which returns results in the next page.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>An optional parameter that specifies the maximum number of results to return.
-    #            You can use <code>nextToken</code> to display the next page of results.</p>
+    #   <p>An optional parameter that specifies the maximum number of results to return. You can use <code>nextToken</code> to display the next page of results.</p>
     #   @return [Integer]
     class ListNamespacesRequest < Struct.new(
       nil,
@@ -1430,9 +1381,7 @@ module Aws::RedshiftServerless
     end
 
     # @!attribute next_token
-    #   <p>When <code>nextToken</code> is returned, there are more results available. 
-    #            The value of <code>nextToken</code> is a unique pagination token for each page. 
-    #            Make the call again using the returned token to retrieve the next page.</p>
+    #   <p>When <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.</p>
     #   @return [String]
     # @!attribute namespaces
     #   <p>The list of returned namespaces.</p>
@@ -1447,13 +1396,10 @@ module Aws::RedshiftServerless
     end
 
     # @!attribute next_token
-    #   <p>If your initial <code>ListRecoveryPoints</code> operation returns a <code>nextToken</code>,
-    #            you can include the returned <code>nextToken</code> in following <code>ListRecoveryPoints</code> operations,
-    #            which returns results in the next page.</p>
+    #   <p>If your initial <code>ListRecoveryPoints</code> operation returns a <code>nextToken</code>, you can include the returned <code>nextToken</code> in following <code>ListRecoveryPoints</code> operations, which returns results in the next page.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>An optional parameter that specifies the maximum number of results to return.
-    #            You can use <code>nextToken</code> to display the next page of results.</p>
+    #   <p>An optional parameter that specifies the maximum number of results to return. You can use <code>nextToken</code> to display the next page of results.</p>
     #   @return [Integer]
     # @!attribute start_time
     #   <p>The time when the recovery point's creation was initiated.</p>
@@ -1484,9 +1430,7 @@ module Aws::RedshiftServerless
     #   <p>The returned recovery point objects.</p>
     #   @return [Array<Types::RecoveryPoint>]
     # @!attribute next_token
-    #   <p>If <code>nextToken</code> is returned, there are more results available. 
-    #            The value of <code>nextToken</code> is a unique pagination token for each page. 
-    #            Make the call again using the returned token to retrieve the next page.</p>
+    #   <p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.</p>
     #   @return [String]
     class ListRecoveryPointsResponse < Struct.new(
       nil,
@@ -1558,8 +1502,7 @@ module Aws::RedshiftServerless
     end
 
     # @!attribute next_token
-    #   <p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. 
-    #            Make the call again using the returned token to retrieve the next page.</p>
+    #   <p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.</p>
     #   @return [String]
     # @!attribute max_results
     #   <p>An optional parameter that specifies the maximum number of results to return. Use <code>nextToken</code> to display the next page of results.</p>
@@ -1596,8 +1539,7 @@ module Aws::RedshiftServerless
     #   <p>The namespace from which to list all snapshot copy configurations.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using 
-    #            the returned token to retrieve the next page.</p>
+    #   <p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.</p>
     #   @return [String]
     # @!attribute max_results
     #   <p>An optional parameter that specifies the maximum number of results to return. You can use <code>nextToken</code> to display the next page of results.</p>
@@ -1613,8 +1555,7 @@ module Aws::RedshiftServerless
     end
 
     # @!attribute next_token
-    #   <p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using 
-    #            the returned token to retrieve the next page.</p>
+    #   <p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.</p>
     #   @return [String]
     # @!attribute snapshot_copy_configurations
     #   <p>All of the returned snapshot copy configurations.</p>
@@ -1629,13 +1570,10 @@ module Aws::RedshiftServerless
     end
 
     # @!attribute next_token
-    #   <p>If <code>nextToken</code> is returned, there are more results available. 
-    #            The value of <code>nextToken</code> is a unique pagination token for each page. 
-    #            Make the call again using the returned token to retrieve the next page.</p>
+    #   <p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>An optional parameter that specifies the maximum number of results to return.
-    #            You can use <code>nextToken</code> to display the next page of results.</p>
+    #   <p>An optional parameter that specifies the maximum number of results to return. You can use <code>nextToken</code> to display the next page of results.</p>
     #   @return [Integer]
     # @!attribute namespace_name
     #   <p>The namespace from which to list all snapshots.</p>
@@ -1667,9 +1605,7 @@ module Aws::RedshiftServerless
     end
 
     # @!attribute next_token
-    #   <p>If <code>nextToken</code> is returned, there are more results available. 
-    #            The value of <code>nextToken</code> is a unique pagination token for each page. 
-    #            Make the call again using the returned token to retrieve the next page.</p>
+    #   <p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.</p>
     #   @return [String]
     # @!attribute snapshots
     #   <p>All of the returned snapshot objects.</p>
@@ -1684,13 +1620,10 @@ module Aws::RedshiftServerless
     end
 
     # @!attribute next_token
-    #   <p>If your initial <code>ListTableRestoreStatus</code> operation returns a nextToken, 
-    #            you can include the returned <code>nextToken</code> in following <code>ListTableRestoreStatus</code>
-    #            operations. This will return results on the next page.</p>
+    #   <p>If your initial <code>ListTableRestoreStatus</code> operation returns a nextToken, you can include the returned <code>nextToken</code> in following <code>ListTableRestoreStatus</code> operations. This will return results on the next page.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>An optional parameter that specifies the maximum number of results to 
-    #            return. You can use nextToken to display the next page of results.</p>
+    #   <p>An optional parameter that specifies the maximum number of results to return. You can use nextToken to display the next page of results.</p>
     #   @return [Integer]
     # @!attribute namespace_name
     #   <p>The namespace from which to list all of the statuses of <code>RestoreTableFromSnapshot</code> operations .</p>
@@ -1710,9 +1643,7 @@ module Aws::RedshiftServerless
     end
 
     # @!attribute next_token
-    #   <p>If your initial <code>ListTableRestoreStatus</code> operation returns a <code>nextToken</code>, 
-    #            you can include the returned <code>nextToken</code> in following <code>ListTableRestoreStatus</code>
-    #            operations. This will returns results on the next page.</p>
+    #   <p>If your initial <code>ListTableRestoreStatus</code> operation returns a <code>nextToken</code>, you can include the returned <code>nextToken</code> in following <code>ListTableRestoreStatus</code> operations. This will returns results on the next page.</p>
     #   @return [String]
     # @!attribute table_restore_statuses
     #   <p>The array of returned <code>TableRestoreStatus</code> objects.</p>
@@ -1749,16 +1680,10 @@ module Aws::RedshiftServerless
     end
 
     # @!attribute next_token
-    #   <p>If your initial <code>ListTracksRequest</code> operation returns a 
-    #            <code>nextToken</code>, you can include the returned <code>nextToken</code>
-    #            in following <code>ListTracksRequest</code> operations, which returns results in the next page.</p>
+    #   <p>If your initial <code>ListTracksRequest</code> operation returns a <code>nextToken</code>, you can include the returned <code>nextToken</code> in following <code>ListTracksRequest</code> operations, which returns results in the next page.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of response records to return in each call. 
-    #            If the number of remaining response records exceeds the specified 
-    #            MaxRecords value, a value is returned in a marker field of the response. 
-    #            You can retrieve the next set of records by retrying the command with the 
-    #            returned marker value.</p>
+    #   <p>The maximum number of response records to return in each call. If the number of remaining response records exceeds the specified MaxRecords value, a value is returned in a marker field of the response. You can retrieve the next set of records by retrying the command with the returned marker value.</p>
     #   @return [Integer]
     class ListTracksRequest < Struct.new(
       nil,
@@ -1773,8 +1698,7 @@ module Aws::RedshiftServerless
     #   <p>The returned tracks.</p>
     #   @return [Array<Types::ServerlessTrack>]
     # @!attribute next_token
-    #   <p>When <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code>
-    #            is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.</p>
+    #   <p>When <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.</p>
     #   @return [String]
     class ListTracksResponse < Struct.new(
       nil,
@@ -1792,14 +1716,10 @@ module Aws::RedshiftServerless
     #   <p>The Amazon Redshift Serverless feature whose limits you want to see.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>If your initial <code>ListUsageLimits</code> operation returns a <code>nextToken</code>,
-    #            you can include the returned <code>nextToken</code> in following <code>ListUsageLimits</code> operations,
-    #            which returns results in the next page.
-    #         </p>
+    #   <p>If your initial <code>ListUsageLimits</code> operation returns a <code>nextToken</code>, you can include the returned <code>nextToken</code> in following <code>ListUsageLimits</code> operations, which returns results in the next page. </p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>An optional parameter that specifies the maximum number of results to return.
-    #            You can use <code>nextToken</code> to get the next page of results. The default is 100.</p>
+    #   <p>An optional parameter that specifies the maximum number of results to return. You can use <code>nextToken</code> to get the next page of results. The default is 100.</p>
     #   @return [Integer]
     class ListUsageLimitsRequest < Struct.new(
       nil,
@@ -1816,9 +1736,7 @@ module Aws::RedshiftServerless
     #   <p>An array of returned usage limit objects.</p>
     #   @return [Array<Types::UsageLimit>]
     # @!attribute next_token
-    #   <p>When <code>nextToken</code> is returned, there are more results available. 
-    #            The value of <code>nextToken</code> is a unique pagination token for each page. 
-    #            Make the call again using the returned token to retrieve the next page.</p>
+    #   <p>When <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.</p>
     #   @return [String]
     class ListUsageLimitsResponse < Struct.new(
       nil,
@@ -1830,13 +1748,10 @@ module Aws::RedshiftServerless
     end
 
     # @!attribute next_token
-    #   <p>If your initial ListWorkgroups operation returns a <code>nextToken</code>,
-    #            you can include the returned <code>nextToken</code> in following ListNamespaces operations,
-    #            which returns results in the next page.</p>
+    #   <p>If your initial ListWorkgroups operation returns a <code>nextToken</code>, you can include the returned <code>nextToken</code> in following ListNamespaces operations, which returns results in the next page.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>An optional parameter that specifies the maximum number of results to return.
-    #            You can use <code>nextToken</code> to display the next page of results.</p>
+    #   <p>An optional parameter that specifies the maximum number of results to return. You can use <code>nextToken</code> to display the next page of results.</p>
     #   @return [Integer]
     # @!attribute owner_account
     #   <p>The owner Amazon Web Services account for the Amazon Redshift Serverless workgroup.</p>
@@ -1852,10 +1767,7 @@ module Aws::RedshiftServerless
     end
 
     # @!attribute next_token
-    #   <p>
-    #            If <code>nextToken</code> is returned, there are more results available. 
-    #            The value of <code>nextToken</code> is a unique pagination token for each page. 
-    #            To retrieve the next page, make the call again using the returned token.</p>
+    #   <p> If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, make the call again using the returned token.</p>
     #   @return [String]
     # @!attribute workgroups
     #   <p>The returned array of workgroups.</p>
@@ -1869,7 +1781,7 @@ module Aws::RedshiftServerless
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A collection of Amazon Redshift compute resources managed by AWS Glue.</p>
+    # <p>A collection of Amazon Redshift compute resources managed by Glue.</p>
     # @!attribute managed_workgroup_name
     #   <p>The name of the managed workgroup.</p>
     #   @return [String]
@@ -1877,8 +1789,7 @@ module Aws::RedshiftServerless
     #   <p>The unique identifier of the managed workgroup.</p>
     #   @return [String]
     # @!attribute source_arn
-    #   <p>The Amazon Resource Name (ARN) for the managed 
-    #            workgroup in the AWS Glue Data Catalog.</p>
+    #   <p>The Amazon Resource Name (ARN) for the managed workgroup in the Glue Data Catalog.</p>
     #   @return [String]
     # @!attribute status
     #   <p>The status of the managed workgroup.</p>
@@ -1906,10 +1817,7 @@ module Aws::RedshiftServerless
     #   <p>The unique identifier of a namespace.</p>
     #   @return [String]
     # @!attribute namespace_name
-    #   <p>The name of the namespace. 
-    #         Must be between 3-64 alphanumeric characters in lowercase, 
-    #         and it cannot be a reserved word. A list of reserved words can be found 
-    #         in <a href="https://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html">Reserved Words</a> in the Amazon Redshift Database Developer Guide.</p>
+    #   <p>The name of the namespace. Must be between 3-64 alphanumeric characters in lowercase, and it cannot be a reserved word. A list of reserved words can be found in <a href="https://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html">Reserved Words</a> in the Amazon Redshift Database Developer Guide.</p>
     #   @return [String]
     # @!attribute admin_username
     #   <p>The username of the administrator for the first database created in the namespace.</p>
@@ -1941,6 +1849,15 @@ module Aws::RedshiftServerless
     # @!attribute admin_password_secret_kms_key_id
     #   <p>The ID of the Key Management Service (KMS) key used to encrypt and store the namespace's admin credentials secret.</p>
     #   @return [String]
+    # @!attribute lakehouse_registration_status
+    #   <p>The status of the lakehouse registration for the namespace. Indicates whether the namespace is successfully registered with Amazon Redshift federated permissions.</p>
+    #   @return [String]
+    # @!attribute catalog_arn
+    #   <p>The Amazon Resource Name (ARN) of the Glue Data Catalog associated with the namespace enabled with Amazon Redshift federated permissions.</p>
+    #   @return [String]
+    # @!attribute s3_table_publish_status
+    #   <p>The current Amazon S3 Tables log-publishing status for the namespace. Not returned when S3 Tables publishing has never been configured for the namespace.</p>
+    #   @return [Types::S3TablePublishStatus]
     class Namespace < Struct.new(
       nil,
       :namespace_arn,
@@ -1956,14 +1873,15 @@ module Aws::RedshiftServerless
       :creation_date,
       :admin_password_secret_arn,
       :admin_password_secret_kms_key_id,
+      :lakehouse_registration_status,
+      :catalog_arn,
+      :s3_table_publish_status,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Contains information about a network interface 
-    #          in an Amazon Redshift Serverless managed VPC endpoint.
-    #       </p>
+    # <p>Contains information about a network interface in an Amazon Redshift Serverless managed VPC endpoint. </p>
     # @!attribute network_interface_id
     #   <p>The unique identifier of the network interface.</p>
     #   @return [String]
@@ -1996,8 +1914,7 @@ module Aws::RedshiftServerless
     #   <p>Whether the price performance target is enabled for the workgroup.</p>
     #   @return [String]
     # @!attribute level
-    #   <p>The target price performance level for the workgroup. Valid values include 1, 25, 50, 75, and 100. These
-    #            correspond to the price performance levels LOW_COST, ECONOMICAL, BALANCED, RESOURCEFUL, and HIGH_PERFORMANCE.</p>
+    #   <p>The target price performance level for the workgroup. Valid values include 1, 25, 50, 75, and 100. These correspond to the price performance levels LOW_COST, ECONOMICAL, BALANCED, RESOURCEFUL, and HIGH_PERFORMANCE.</p>
     #   @return [Integer]
     class PerformanceTarget < Struct.new(
       nil,
@@ -2012,13 +1929,7 @@ module Aws::RedshiftServerless
     #   <p>The Amazon Resource Name (ARN) of the account to create or update a resource policy for.</p>
     #   @return [String]
     # @!attribute policy
-    #   <p>The policy to create or update. For example, the following policy grants a user authorization to restore a snapshot.</p>
-    #            <p>
-    #               <code>"{\"Version\": \"2012-10-17\", \"Statement\" : 
-    #               [{ \"Sid\": \"AllowUserRestoreFromSnapshot\", \"Principal\":{\"AWS\": 
-    #               [\"739247239426\"]}, \"Action\": [\"redshift-serverless:RestoreFromSnapshot\"]
-    #               , \"Effect\": \"Allow\" }]}"</code>
-    #            </p>
+    #   <p>The policy to create or update. For example, the following policy grants a user authorization to restore a snapshot.</p> <p> <code>"{\"Version\": \"2012-10-17\", \"Statement\" : [{ \"Sid\": \"AllowUserRestoreFromSnapshot\", \"Principal\":{\"AWS\": [\"739247239426\"]}, \"Action\": [\"redshift-serverless:RestoreFromSnapshot\"] , \"Effect\": \"Allow\" }]}"</code> </p>
     #   @return [String]
     class PutResourcePolicyRequest < Struct.new(
       nil,
@@ -2040,8 +1951,7 @@ module Aws::RedshiftServerless
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The automatically created recovery point of a namespace. 
-    #          Recovery points are created every 30 minutes and kept for 24 hours.</p>
+    # <p>The automatically created recovery point of a namespace. Recovery points are created every 30 minutes and kept for 24 hours.</p>
     # @!attribute recovery_point_id
     #   <p>The unique identifier of the recovery point.</p>
     #   @return [String]
@@ -2073,8 +1983,7 @@ module Aws::RedshiftServerless
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Represents an Amazon Redshift Serverless reservation, which gives you the option to commit to a specified number of Redshift Processing Units (RPUs) 
-    #          for a year at a discount from Serverless on-demand (OD) rates.</p>
+    # <p>Represents an Amazon Redshift Serverless reservation, which gives you the option to commit to a specified number of Redshift Processing Units (RPUs) for a year at a discount from Serverless on-demand (OD) rates.</p>
     # @!attribute reservation_id
     #   <p>The identifier that uniquely identifies the serverless reservation.</p>
     #   @return [String]
@@ -2082,8 +1991,7 @@ module Aws::RedshiftServerless
     #   <p>The Amazon Resource Name (ARN) that uniquely identifies the serverless reservation.</p>
     #   @return [String]
     # @!attribute start_date
-    #   <p>The start date for the serverless reservation. This is the date you specified for the reservation to start when
-    #            you created the reservation.</p>
+    #   <p>The start date for the serverless reservation. This is the date you created the reservation.</p>
     #   @return [Time]
     # @!attribute end_date
     #   <p>The end date for the serverless reservation. This date is one year after the start date that you specify.</p>
@@ -2095,29 +2003,7 @@ module Aws::RedshiftServerless
     #   <p>The type of offering for the reservation. The offering class determines the payment schedule for the reservation.</p>
     #   @return [Types::ReservationOffering]
     # @!attribute status
-    #   <p>The status of the reservation. Possible values include the following:</p>
-    #            <ul>
-    #               <li>
-    #                  <p>
-    #                     <code>payment-pending</code>
-    #                  </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>active</code>
-    #                  </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>payment-failed</code>
-    #                  </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>retired</code>
-    #                  </p>
-    #               </li>
-    #            </ul>
+    #   <p>The status of the reservation. Possible values include the following:</p> <ul> <li> <p> <code>payment-pending</code> </p> </li> <li> <p> <code>active</code> </p> </li> <li> <p> <code>payment-failed</code> </p> </li> <li> <p> <code>retired</code> </p> </li> </ul>
     #   @return [String]
     class Reservation < Struct.new(
       nil,
@@ -2138,8 +2024,7 @@ module Aws::RedshiftServerless
       end
     end
 
-    # <p>The class of offering for the reservation. The offering class determines the payment
-    #          schedule for the reservation.</p>
+    # <p>The class of offering for the reservation. The offering class determines the payment schedule for the reservation.</p>
     # @!attribute offering_id
     #   <p>The offering identifier.</p>
     #   @return [String]
@@ -2218,11 +2103,15 @@ module Aws::RedshiftServerless
     # @!attribute workgroup_name
     #   <p>The name of the workgroup used to restore data.</p>
     #   @return [String]
+    # @!attribute maintain_integration
+    #   <p>If <code>true</code>, maintain existing data sharing, zero-ETL and S3 event integrations when restoring. Otherwise, integrations will not be maintained after the restore operation. Integrations are only maintained when restored to the same serverless namespace.</p> <p>Default: true</p>
+    #   @return [Boolean]
     class RestoreFromRecoveryPointRequest < Struct.new(
       nil,
       :recovery_point_id,
       :namespace_name,
       :workgroup_name,
+      :maintain_integration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2253,23 +2142,20 @@ module Aws::RedshiftServerless
     #   <p>The name of the snapshot to restore from. Must not be specified at the same time as <code>snapshotArn</code>.</p>
     #   @return [String]
     # @!attribute snapshot_arn
-    #   <p>The Amazon Resource Name (ARN) of the snapshot to restore from. Required if restoring
-    #            from a provisioned cluster to Amazon Redshift Serverless. Must not be specified at the same time as
-    #               <code>snapshotName</code>.</p>
-    #            <p>The format of the ARN is arn:aws:redshift:&lt;region&gt;:&lt;account_id&gt;:snapshot:&lt;cluster_identifier&gt;/&lt;snapshot_identifier&gt;.</p>
+    #   <p>The Amazon Resource Name (ARN) of the snapshot to restore from. Required if restoring from a provisioned cluster to Amazon Redshift Serverless. Must not be specified at the same time as <code>snapshotName</code>.</p> <p>The format of the ARN is arn:aws:redshift:&lt;region&gt;:&lt;account_id&gt;:snapshot:&lt;cluster_identifier&gt;/&lt;snapshot_identifier&gt;.</p>
     #   @return [String]
     # @!attribute owner_account
     #   <p>The Amazon Web Services account that owns the snapshot.</p>
     #   @return [String]
     # @!attribute manage_admin_password
-    #   <p>If <code>true</code>, Amazon Redshift uses Secrets Manager to manage the restored 
-    #            snapshot's admin credentials. If <code>MmanageAdminPassword</code> is false or not set, 
-    #            Amazon Redshift uses the admin credentials that the namespace or cluster 
-    #            had at the time the snapshot was taken.</p>
+    #   <p>If <code>true</code>, Amazon Redshift uses Secrets Manager to manage the restored snapshot's admin credentials. If <code>MmanageAdminPassword</code> is false or not set, Amazon Redshift uses the admin credentials that the namespace or cluster had at the time the snapshot was taken.</p>
     #   @return [Boolean]
     # @!attribute admin_password_secret_kms_key_id
     #   <p>The ID of the Key Management Service (KMS) key used to encrypt and store the namespace's admin credentials secret.</p>
     #   @return [String]
+    # @!attribute maintain_integration
+    #   <p>If <code>true</code>, maintain existing data sharing, zero-ETL and S3 event integrations when restoring. Otherwise, integrations will not be maintained after the restore operation. Integrations are only maintained when restored to the same serverless namespace.</p> <p>Default: true</p>
+    #   @return [Boolean]
     class RestoreFromSnapshotRequest < Struct.new(
       nil,
       :namespace_name,
@@ -2279,6 +2165,7 @@ module Aws::RedshiftServerless
       :owner_account,
       :manage_admin_password,
       :admin_password_secret_kms_key_id,
+      :maintain_integration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2389,9 +2276,7 @@ module Aws::RedshiftServerless
     #   <p>The name of the table to create from the restore operation.</p>
     #   @return [String]
     # @!attribute activate_case_sensitive_identifier
-    #   <p>Indicates whether name identifiers for database, schema, and table 
-    #            are case sensitive. If true, the names are case sensitive. If 
-    #            false, the names are not case sensitive. The default is false.</p>
+    #   <p>Indicates whether name identifiers for database, schema, and table are case sensitive. If true, the names are case sensitive. If false, the names are not case sensitive. The default is false.</p>
     #   @return [Boolean]
     class RestoreTableFromSnapshotRequest < Struct.new(
       nil,
@@ -2421,14 +2306,40 @@ module Aws::RedshiftServerless
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Describes the state of Amazon S3 Tables system-table log publishing for a namespace.</p>
+    # @!attribute s3_tables
+    #   <p>The system tables currently being published.</p>
+    #   @return [Array<String>]
+    # @!attribute s3_table_namespace
+    #   <p>The identifier of the namespace in the S3 table bucket that holds the published tables.</p>
+    #   @return [String]
+    # @!attribute s3_table_granularity
+    #   <p>The scope currently in effect. Values are <code>namespace</code> or <code>account</code>.</p>
+    #   @return [String]
+    # @!attribute enabled_all
+    #   <p> <code>true</code> when the namespace is enrolled in every current and future system table rather than an explicit list of tables.</p>
+    #   @return [Boolean]
+    # @!attribute last_ingestion_times
+    #   <p>A map of system table name to the time that table last received data, as an ISO-8601 timestamp. A table that has not yet been ingested is absent from the map. Use it to judge data freshness.</p>
+    #   @return [Hash<String, String>]
+    class S3TablePublishStatus < Struct.new(
+      nil,
+      :s3_tables,
+      :s3_table_namespace,
+      :s3_table_granularity,
+      :enabled_all,
+      :last_ingestion_times,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The schedule of when Amazon Redshift Serverless should run the scheduled action.</p>
     # @!attribute at
     #   <p>The timestamp of when Amazon Redshift Serverless should run the scheduled action. Timestamp is in UTC. Format of at expression is <code>yyyy-mm-ddThh:mm:ss</code>. For example, <code>2016-03-04T17:27:00</code>.</p>
     #   @return [Time]
     # @!attribute cron
-    #   <p>The cron expression to use to schedule a recurring scheduled action. Schedule invocations must be separated by at least one hour. Times are in UTC.</p>
-    #            <p>Format of cron expressions is <code>(Minutes Hours Day-of-month Month Day-of-week Year)</code>. For example, <code>"(0 10 ? * MON *)"</code>. For more information, see 
-    #            <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions">Cron Expressions</a> in the <i>Amazon CloudWatch Events User Guide</i>.</p>
+    #   <p>The cron expression to use to schedule a recurring scheduled action. Schedule invocations must be separated by at least one hour. Times are in UTC.</p> <p>Format of cron expressions is <code>(Minutes Hours Day-of-month Month Day-of-week Year)</code>. For example, <code>"(0 10 ? * MON *)"</code>. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions">Cron Expressions</a> in the <i>Amazon CloudWatch Events User Guide</i>.</p>
     #   @return [String]
     class Schedule < Struct.new(
       :at,
@@ -2464,16 +2375,7 @@ module Aws::RedshiftServerless
     #   <p>The name of the scheduled action.</p>
     #   @return [String]
     # @!attribute schedule
-    #   <p>The schedule for a one-time (at timestamp format) or recurring (cron format) scheduled action. Schedule invocations must be separated by at least one hour. Times are in UTC.</p>
-    #            <ul>
-    #               <li>
-    #                  <p>Format of at timestamp is <code>yyyy-mm-ddThh:mm:ss</code>. For example, <code>2016-03-04T17:27:00</code>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>Format of cron expression is <code>(Minutes Hours Day-of-month Month Day-of-week Year)</code>. For example, <code>"(0 10 ? * MON *)"</code>. For more information, see 
-    #               <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions">Cron Expressions</a> in the <i>Amazon CloudWatch Events User Guide</i>.</p>
-    #               </li>
-    #            </ul>
+    #   <p>The schedule for a one-time (at timestamp format) or recurring (cron format) scheduled action. Schedule invocations must be separated by at least one hour. Times are in UTC.</p> <ul> <li> <p>Format of at timestamp is <code>yyyy-mm-ddThh:mm:ss</code>. For example, <code>2016-03-04T17:27:00</code>.</p> </li> <li> <p>Format of cron expression is <code>(Minutes Hours Day-of-month Month Day-of-week Year)</code>. For example, <code>"(0 10 ? * MON *)"</code>. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions">Cron Expressions</a> in the <i>Amazon CloudWatch Events User Guide</i>.</p> </li> </ul>
     #   @return [Types::Schedule]
     # @!attribute scheduled_action_description
     #   <p>The description of the scheduled action.</p>
@@ -2482,10 +2384,7 @@ module Aws::RedshiftServerless
     #   <p>An array of timestamps of when the next scheduled actions will trigger.</p>
     #   @return [Array<Time>]
     # @!attribute role_arn
-    #   <p>The ARN of the IAM role to assume to run the scheduled action. This IAM role must have permission to run the Amazon Redshift Serverless API operation in the scheduled action. 
-    #            This IAM role must allow the Amazon Redshift scheduler to schedule creating snapshots. (Principal scheduler.redshift.amazonaws.com) to assume permissions on your behalf. 
-    #            For more information about the IAM role to use with the Amazon Redshift scheduler, see <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html">Using Identity-Based Policies for 
-    #               Amazon Redshift</a> in the Amazon Redshift Management Guide</p>
+    #   <p>The ARN of the IAM role to assume to run the scheduled action. This IAM role must have permission to run the Amazon Redshift Serverless API operation in the scheduled action. This IAM role must allow the Amazon Redshift scheduler to schedule creating snapshots. (Principal scheduler.redshift.amazonaws.com) to assume permissions on your behalf. For more information about the IAM role to use with the Amazon Redshift scheduler, see <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html">Using Identity-Based Policies for Amazon Redshift</a> in the Amazon Redshift Management Guide</p>
     #   @return [String]
     # @!attribute state
     #   <p>The state of the scheduled action.</p>
@@ -2497,10 +2396,7 @@ module Aws::RedshiftServerless
     #   <p>The end time of </p>
     #   @return [Time]
     # @!attribute target_action
-    #   <p>A JSON format string of the Amazon Redshift Serverless API operation with input parameters. The following is an example of a target action.</p>
-    #            <p>
-    #               <code>"{"CreateSnapshot": {"NamespaceName": "sampleNamespace","SnapshotName": "sampleSnapshot", "retentionPeriod": "1"}}"</code>
-    #            </p>
+    #   <p>A JSON format string of the Amazon Redshift Serverless API operation with input parameters. The following is an example of a target action.</p> <p> <code>"{"CreateSnapshot": {"NamespaceName": "sampleNamespace","SnapshotName": "sampleSnapshot", "retentionPeriod": "1"}}"</code> </p>
     #   @return [Types::TargetAction]
     # @!attribute namespace_name
     #   <p>The end time in UTC when the schedule is no longer active. After this time, the scheduled action does not trigger.</p>
@@ -2526,10 +2422,7 @@ module Aws::RedshiftServerless
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Defines a track that determines which Amazon Redshift version 
-    #          to apply after a new version is released. If the value for <code>ServerlessTrack</code> is 
-    #          <code>current</code>, the workgroup is updated to the most recently certified release. 
-    #          If the value is <code>trailing</code>, the workgroup is updated to the previously certified release.</p>
+    # <p>Defines a track that determines which Amazon Redshift version to apply after a new version is released. If the value for <code>ServerlessTrack</code> is <code>current</code>, the workgroup is updated to the most recently certified release. If the value is <code>trailing</code>, the workgroup is updated to the previously certified release.</p>
     # @!attribute track_name
     #   <p>The name of the track. Valid values are <code>current</code> and <code>trailing</code>.</p>
     #   @return [String]
@@ -2616,8 +2509,7 @@ module Aws::RedshiftServerless
     #   <p>The Amazon Resource Name (ARN) of the snapshot.</p>
     #   @return [String]
     # @!attribute accounts_with_restore_access
-    #   <p>All of the Amazon Web Services accounts that have access to 
-    #            restore a snapshot to a namespace.</p>
+    #   <p>All of the Amazon Web Services accounts that have access to restore a snapshot to a namespace.</p>
     #   @return [Array<String>]
     # @!attribute accounts_with_provisioned_restore_access
     #   <p>All of the Amazon Web Services accounts that have access to restore a snapshot to a provisioned cluster.</p>
@@ -2694,15 +2586,13 @@ module Aws::RedshiftServerless
     #   <p>The ID of the RestoreTableFromSnapshot request.</p>
     #   @return [String]
     # @!attribute status
-    #   <p>A value that describes the current state of the table restore request. 
-    #            Possible values are <code>SUCCEEDED</code>, <code>FAILED</code>, <code>CANCELED</code>, <code>PENDING</code>, and <code>IN_PROGRESS</code>.</p>
+    #   <p>A value that describes the current state of the table restore request. Possible values are <code>SUCCEEDED</code>, <code>FAILED</code>, <code>CANCELED</code>, <code>PENDING</code>, and <code>IN_PROGRESS</code>.</p>
     #   @return [String]
     # @!attribute message
     #   <p>A message that explains the returned status. For example, if the status of the operation is <code>FAILED</code>, the message explains why the operation failed.</p>
     #   @return [String]
     # @!attribute request_time
-    #   <p>The time that the table restore request was made, 
-    #            in Universal Coordinated Time (UTC).</p>
+    #   <p>The time that the table restore request was made, in Universal Coordinated Time (UTC).</p>
     #   @return [Time]
     # @!attribute namespace_name
     #   <p>The namespace of the table being restored from.</p>
@@ -2801,13 +2691,9 @@ module Aws::RedshiftServerless
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A JSON format string of the Amazon Redshift Serverless API operation with input parameters. The following is an example of a target action.</p>
-    #          <p>
-    #             <code>"{"CreateSnapshot": {"NamespaceName": "sampleNamespace","SnapshotName": "sampleSnapshot", "retentionPeriod": "1"}}"</code>
-    #          </p>
+    # <p>A JSON format string of the Amazon Redshift Serverless API operation with input parameters. The following is an example of a target action.</p> <p> <code>"{"CreateSnapshot": {"NamespaceName": "sampleNamespace","SnapshotName": "sampleSnapshot", "retentionPeriod": "1"}}"</code> </p>
     # @!attribute create_snapshot
-    #   <p>The parameters that you can use to configure a <a href="https://docs.aws.amazon.com/redshift-serverless/latest/APIReference/API_CreateScheduledAction.html">scheduled action</a> to create a snapshot. For more information about creating a scheduled action, see 
-    #            <a href="https://docs.aws.amazon.com/redshift-serverless/latest/APIReference/API_CreateScheduledAction.html">CreateScheduledAction</a>.</p>
+    #   <p>The parameters that you can use to configure a <a href="https://docs.aws.amazon.com/redshift-serverless/latest/APIReference/API_CreateScheduledAction.html">scheduled action</a> to create a snapshot. For more information about creating a scheduled action, see <a href="https://docs.aws.amazon.com/redshift-serverless/latest/APIReference/API_CreateScheduledAction.html">CreateScheduledAction</a>.</p>
     #   @return [Types::CreateSnapshotScheduleActionParameters]
     class TargetAction < Struct.new(
       :create_snapshot,
@@ -2940,23 +2826,73 @@ module Aws::RedshiftServerless
     end
 
     # @!attribute namespace_name
+    #   <p>The name of the namespace whose lakehouse configuration you want to modify.</p>
+    #   @return [String]
+    # @!attribute lakehouse_registration
+    #   <p>Specifies whether to register or deregister the namespace with Amazon Redshift federated permissions. Valid values are <code>Register</code> or <code>Deregister</code>.</p>
+    #   @return [String]
+    # @!attribute catalog_name
+    #   <p>The name of the Glue Data Catalog that will be associated with the namespace enabled with Amazon Redshift federated permissions.</p> <p>Pattern: <code>^[a-z0-9_-]*[a-z]+[a-z0-9_-]*$</code> </p>
+    #   @return [String]
+    # @!attribute lakehouse_idc_registration
+    #   <p>Modifies the Amazon Web Services IAM Identity Center trusted identity propagation on a namespace enabled with Amazon Redshift federated permissions. Valid values are <code>Associate</code> or <code>Disassociate</code>.</p>
+    #   @return [String]
+    # @!attribute lakehouse_idc_application_arn
+    #   <p>The Amazon Resource Name (ARN) of the IAM Identity Center application used for enabling Amazon Web Services IAM Identity Center trusted identity propagation on a namespace enabled with Amazon Redshift federated permissions.</p>
+    #   @return [String]
+    # @!attribute dry_run
+    #   <p>A boolean value that, if <code>true</code>, validates the request without actually updating the lakehouse configuration. Use this to check for errors before making changes.</p>
+    #   @return [Boolean]
+    class UpdateLakehouseConfigurationRequest < Struct.new(
+      nil,
+      :namespace_name,
+      :lakehouse_registration,
+      :catalog_name,
+      :lakehouse_idc_registration,
+      :lakehouse_idc_application_arn,
+      :dry_run,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute namespace_name
+    #   <p>The name of the namespace.</p>
+    #   @return [String]
+    # @!attribute lakehouse_idc_application_arn
+    #   <p>The Amazon Resource Name (ARN) of the IAM Identity Center application used for enabling Amazon Web Services IAM Identity Center trusted identity propagation.</p>
+    #   @return [String]
+    # @!attribute lakehouse_registration_status
+    #   <p>The current status of the lakehouse registration. Indicates whether the namespace is successfully registered with Amazon Redshift federated permissions.</p>
+    #   @return [String]
+    # @!attribute catalog_arn
+    #   <p>The Amazon Resource Name (ARN) of the Glue Data Catalog associated with the lakehouse configuration.</p>
+    #   @return [String]
+    class UpdateLakehouseConfigurationResponse < Struct.new(
+      nil,
+      :namespace_name,
+      :lakehouse_idc_application_arn,
+      :lakehouse_registration_status,
+      :catalog_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute namespace_name
     #   <p>The name of the namespace to update. You can't update the name of a namespace once it is created.</p>
     #   @return [String]
     # @!attribute admin_user_password
-    #   <p>The password of the administrator for the first database created in the namespace. This parameter must be updated together
-    #         with <code>adminUsername</code>.</p>
-    #            <p>You can't use <code>adminUserPassword</code> if <code>manageAdminPassword</code> is true. </p>
+    #   <p>The password of the administrator for the first database created in the namespace. This parameter must be updated together with <code>adminUsername</code>.</p> <p>You can't use <code>adminUserPassword</code> if <code>manageAdminPassword</code> is true. </p> <p>If your admin user account is locked, this operation also unlocks your account and resets the failed-login counter. This option is available only when account lockout security is enabled for the namespace.</p>
     #   @return [String]
     # @!attribute admin_username
-    #   <p>The username of the administrator for the first database created in the namespace. This parameter must be updated
-    #         together with <code>adminUserPassword</code>.</p>
+    #   <p>The username of the administrator for the first database created in the namespace. This parameter must be updated together with <code>adminUserPassword</code>.</p>
     #   @return [String]
     # @!attribute kms_key_id
     #   <p>The ID of the Amazon Web Services Key Management Service key used to encrypt your data.</p>
     #   @return [String]
     # @!attribute default_iam_role_arn
-    #   <p>The Amazon Resource Name (ARN) of the IAM role to set as a default in the namespace. This parameter must be updated together
-    #         with <code>iamRoles</code>.</p>
+    #   <p>The Amazon Resource Name (ARN) of the IAM role to set as a default in the namespace. This parameter must be updated together with <code>iamRoles</code>.</p>
     #   @return [String]
     # @!attribute iam_roles
     #   <p>A list of IAM roles to associate with the namespace. This parameter must be updated together with <code>defaultIamRoleArn</code>.</p>
@@ -2965,15 +2901,25 @@ module Aws::RedshiftServerless
     #   <p>The types of logs the namespace can export. The export types are <code>userlog</code>, <code>connectionlog</code>, and <code>useractivitylog</code>.</p>
     #   @return [Array<String>]
     # @!attribute manage_admin_password
-    #   <p>If <code>true</code>, Amazon Redshift uses Secrets Manager to manage the namespace's admin credentials. 
-    #            You can't use <code>adminUserPassword</code> if <code>manageAdminPassword</code> is true. 
-    #            If <code>manageAdminPassword</code> is false or not set, Amazon Redshift uses 
-    #            <code>adminUserPassword</code> for the admin user account's password.
-    #         </p>
+    #   <p>If <code>true</code>, Amazon Redshift uses Secrets Manager to manage the namespace's admin credentials. You can't use <code>adminUserPassword</code> if <code>manageAdminPassword</code> is true. If <code>manageAdminPassword</code> is false or not set, Amazon Redshift uses <code>adminUserPassword</code> for the admin user account's password. </p>
     #   @return [Boolean]
     # @!attribute admin_password_secret_kms_key_id
-    #   <p>The ID of the Key Management Service (KMS) key used to encrypt and store the namespace's admin credentials secret. 
-    #            You can only use this parameter if <code>manageAdminPassword</code> is true.</p>
+    #   <p>The ID of the Key Management Service (KMS) key used to encrypt and store the namespace's admin credentials secret. You can only use this parameter if <code>manageAdminPassword</code> is true.</p>
+    #   @return [String]
+    # @!attribute log_destination_type
+    #   <p>The destination for the log data. Valid values are <code>s3table</code> and <code>cloudwatch</code>.</p> <p>Set this to <code>s3table</code> to manage Amazon S3 Tables system-table publishing for the namespace.</p>
+    #   @return [String]
+    # @!attribute s3_table_action
+    #   <p>Whether to enable or disable Amazon S3 Tables publishing. Valid values are <code>Enable</code> and <code>Disable</code>, matched case-insensitively.</p> <p>When omitted, defaults to <code>Enable</code>. Valid only when <code>logDestinationType</code> is <code>s3table</code>.</p>
+    #   @return [String]
+    # @!attribute s3_table_names
+    #   <p>The system tables to publish (on enable) or to stop publishing (on disable). Each value is either a system table view name that begins with <code>sys_</code> or the keyword <code>all</code>.</p> <p>Omitting this parameter, passing an empty list, or including <code>all</code> each select every current and future system table. Each name must be 1-128 characters, and the list can contain up to 256 names.</p> <p>Valid only when <code>logDestinationType</code> is <code>s3table</code>.</p>
+    #   @return [Array<String>]
+    # @!attribute s3_table_kms_key_id
+    #   <p>The identifier of the Key Management Service key used to encrypt the published Amazon S3 Tables data. When omitted, the data is encrypted with SSE-S3 (Amazon S3 managed keys).</p> <p>Valid only when <code>logDestinationType</code> is <code>s3table</code>.</p>
+    #   @return [String]
+    # @!attribute s3_table_granularity
+    #   <p>The scope of the Amazon S3 Tables destination. Valid values are <code>namespace</code> and <code>account</code>, matched case-insensitively. <code>namespace</code> scopes the published tables to this namespace; <code>account</code> scopes them to the Amazon Web Services account.</p> <p>Required when enabling. Omitting this parameter or passing a blank value fails with <code>ValidationException</code>. Valid only when <code>logDestinationType</code> is <code>s3table</code>.</p>
     #   @return [String]
     class UpdateNamespaceRequest < Struct.new(
       nil,
@@ -2986,6 +2932,11 @@ module Aws::RedshiftServerless
       :log_exports,
       :manage_admin_password,
       :admin_password_secret_kms_key_id,
+      :log_destination_type,
+      :s3_table_action,
+      :s3_table_names,
+      :s3_table_kms_key_id,
+      :s3_table_granularity,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3006,28 +2957,13 @@ module Aws::RedshiftServerless
     #   <p>The name of the scheduled action to update to.</p>
     #   @return [String]
     # @!attribute target_action
-    #   <p>A JSON format string of the Amazon Redshift Serverless API operation with input parameters. The following is an example of a target action.</p>
-    #            <p>
-    #               <code>"{"CreateSnapshot": {"NamespaceName": "sampleNamespace","SnapshotName": "sampleSnapshot", "retentionPeriod": "1"}}"</code>
-    #            </p>
+    #   <p>A JSON format string of the Amazon Redshift Serverless API operation with input parameters. The following is an example of a target action.</p> <p> <code>"{"CreateSnapshot": {"NamespaceName": "sampleNamespace","SnapshotName": "sampleSnapshot", "retentionPeriod": "1"}}"</code> </p>
     #   @return [Types::TargetAction]
     # @!attribute schedule
-    #   <p>The schedule for a one-time (at timestamp format) or recurring (cron format) scheduled action. Schedule invocations must be separated by at least one hour. Times are in UTC.</p>
-    #            <ul>
-    #               <li>
-    #                  <p>Format of at timestamp is <code>yyyy-mm-ddThh:mm:ss</code>. For example, <code>2016-03-04T17:27:00</code>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>Format of cron expression is <code>(Minutes Hours Day-of-month Month Day-of-week Year)</code>. For example, <code>"(0 10 ? * MON *)"</code>. For more information, see 
-    #               <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions">Cron Expressions</a> in the <i>Amazon CloudWatch Events User Guide</i>.</p>
-    #               </li>
-    #            </ul>
+    #   <p>The schedule for a one-time (at timestamp format) or recurring (cron format) scheduled action. Schedule invocations must be separated by at least one hour. Times are in UTC.</p> <ul> <li> <p>Format of at timestamp is <code>yyyy-mm-ddThh:mm:ss</code>. For example, <code>2016-03-04T17:27:00</code>.</p> </li> <li> <p>Format of cron expression is <code>(Minutes Hours Day-of-month Month Day-of-week Year)</code>. For example, <code>"(0 10 ? * MON *)"</code>. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions">Cron Expressions</a> in the <i>Amazon CloudWatch Events User Guide</i>.</p> </li> </ul>
     #   @return [Types::Schedule]
     # @!attribute role_arn
-    #   <p>The ARN of the IAM role to assume to run the scheduled action. This IAM role must have permission to run the Amazon Redshift Serverless API operation in the scheduled action. 
-    #            This IAM role must allow the Amazon Redshift scheduler to schedule creating snapshots (Principal scheduler.redshift.amazonaws.com) to assume permissions on your behalf. 
-    #            For more information about the IAM role to use with the Amazon Redshift scheduler, see <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html">Using Identity-Based Policies for 
-    #               Amazon Redshift</a> in the Amazon Redshift Management Guide</p>
+    #   <p>The ARN of the IAM role to assume to run the scheduled action. This IAM role must have permission to run the Amazon Redshift Serverless API operation in the scheduled action. This IAM role must allow the Amazon Redshift scheduler to schedule creating snapshots (Principal scheduler.redshift.amazonaws.com) to assume permissions on your behalf. For more information about the IAM role to use with the Amazon Redshift scheduler, see <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html">Using Identity-Based Policies for Amazon Redshift</a> in the Amazon Redshift Management Guide</p>
     #   @return [String]
     # @!attribute enabled
     #   <p>Specifies whether to enable the scheduled action.</p>
@@ -3139,9 +3075,7 @@ module Aws::RedshiftServerless
     #   <p>The identifier of the usage limit to update.</p>
     #   @return [String]
     # @!attribute amount
-    #   <p>The new limit amount. If time-based, this amount is in Redshift Processing Units (RPU) consumed per hour. 
-    #            If data-based, this amount is in terabytes (TB) of data transferred between Regions in cross-account sharing. 
-    #            The value must be a positive number.</p>
+    #   <p>The new limit amount. If time-based, this amount is in Redshift Processing Units (RPU) consumed per hour. If data-based, this amount is in terabytes (TB) of data transferred between Regions in cross-account sharing. The value must be a positive number.</p>
     #   @return [Integer]
     # @!attribute breach_action
     #   <p>The new action that Amazon Redshift Serverless takes when the limit is reached.</p>
@@ -3174,16 +3108,10 @@ module Aws::RedshiftServerless
     #   <p>The new base data warehouse capacity in Redshift Processing Units (RPUs).</p>
     #   @return [Integer]
     # @!attribute enhanced_vpc_routing
-    #   <p>The value that specifies whether to turn on enhanced virtual 
-    #            private cloud (VPC) routing, which forces Amazon Redshift Serverless to route traffic through your VPC.</p>
+    #   <p>The value that specifies whether to turn on enhanced virtual private cloud (VPC) routing, which forces Amazon Redshift Serverless to route traffic through your VPC.</p>
     #   @return [Boolean]
     # @!attribute config_parameters
-    #   <p>An array of parameters to set for advanced control over a database. The
-    #            options are <code>auto_mv</code>, <code>datestyle</code>, <code>enable_case_sensitive_identifier</code>, <code>enable_user_activity_logging</code>,
-    #            <code>query_group</code>, <code>search_path</code>, <code>require_ssl</code>, <code>use_fips_ssl</code>, and query monitoring metrics that let you 
-    #            define performance boundaries. For more information about query monitoring rules and available metrics, see 
-    #            <a href="https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless"> 
-    #               Query monitoring metrics for Amazon Redshift Serverless</a>.</p>
+    #   <p>An array of parameters to set for advanced control over a database. The options are <code>auto_mv</code>, <code>datestyle</code>, <code>enable_case_sensitive_identifier</code>, <code>enable_user_activity_logging</code>, <code>query_group</code>, <code>search_path</code>, <code>require_ssl</code>, <code>use_fips_ssl</code>, and either <code>wlm_json_configuration</code> or query monitoring metrics that let you define performance boundaries. You can either specify individual query monitoring metrics (such as <code>max_scan_row_count</code>, <code>max_query_execution_time</code>) or use <code>wlm_json_configuration</code> to define query queues with rules, but not both. If you're using <code>wlm_json_configuration</code>, the maximum size of <code>parameterValue</code> is 8000 characters. For more information about query monitoring rules and available metrics, see <a href="https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless"> Query monitoring metrics for Amazon Redshift Serverless</a>.</p>
     #   @return [Array<Types::ConfigParameter>]
     # @!attribute publicly_accessible
     #   <p>A value that specifies whether the workgroup can be accessible from a public network.</p>
@@ -3207,9 +3135,11 @@ module Aws::RedshiftServerless
     #   <p>An object that represents the price performance target settings for the workgroup.</p>
     #   @return [Types::PerformanceTarget]
     # @!attribute track_name
-    #   <p>An optional parameter for the name of the track for the workgroup. If you don't provide 
-    #            a track name, the workgroup is assigned to the <code>current</code> track.</p>
+    #   <p>An optional parameter for the name of the track for the workgroup. If you don't provide a track name, the workgroup is assigned to the <code>current</code> track.</p>
     #   @return [String]
+    # @!attribute extra_compute_for_automatic_optimization
+    #   <p>If <code>true</code>, allocates additional compute resources for running automatic optimization operations.</p> <p>Default: false</p>
+    #   @return [Boolean]
     class UpdateWorkgroupRequest < Struct.new(
       nil,
       :workgroup_name,
@@ -3224,6 +3154,7 @@ module Aws::RedshiftServerless
       :ip_address_type,
       :price_performance_target,
       :track_name,
+      :extra_compute_for_automatic_optimization,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3276,7 +3207,7 @@ module Aws::RedshiftServerless
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The input failed to satisfy the constraints specified by an AWS service.</p>
+    # <p>The input failed to satisfy the constraints specified by an Amazon Web Services service.</p>
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
@@ -3340,14 +3271,10 @@ module Aws::RedshiftServerless
     #   <p>The base data warehouse capacity of the workgroup in Redshift Processing Units (RPUs).</p>
     #   @return [Integer]
     # @!attribute enhanced_vpc_routing
-    #   <p>The value that specifies whether to enable enhanced virtual 
-    #         private cloud (VPC) routing, which forces Amazon Redshift Serverless to route traffic through your VPC.</p>
+    #   <p>The value that specifies whether to enable enhanced virtual private cloud (VPC) routing, which forces Amazon Redshift Serverless to route traffic through your VPC.</p>
     #   @return [Boolean]
     # @!attribute config_parameters
-    #   <p>An array of parameters to set for advanced control over a database. The
-    #           options are <code>auto_mv</code>, <code>datestyle</code>, <code>enable_case_sensitive_identifier</code>, <code>enable_user_activity_logging</code>,
-    #           <code>query_group</code>, <code>search_path</code>, <code>require_ssl</code>, <code>use_fips_ssl</code>, and query monitoring metrics that let you define performance boundaries. 
-    #           For more information about query monitoring rules and available metrics, see <a href="https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless"> Query monitoring metrics for Amazon Redshift Serverless</a>.</p>
+    #   <p>An array of parameters to set for advanced control over a database. The options are <code>auto_mv</code>, <code>datestyle</code>, <code>enable_case_sensitive_identifier</code>, <code>enable_user_activity_logging</code>, <code>query_group</code>, <code>search_path</code>, <code>require_ssl</code>, <code>use_fips_ssl</code>, and either <code>wlm_json_configuration</code> or query monitoring metrics that let you define performance boundaries. You can either specify individual query monitoring metrics (such as <code>max_scan_row_count</code>, <code>max_query_execution_time</code>) or use <code>wlm_json_configuration</code> to define query queues with rules, but not both. If you're using <code>wlm_json_configuration</code>, the maximum size of <code>parameterValue</code> is 8000 characters. For more information about query monitoring rules and available metrics, see <a href="https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless"> Query monitoring metrics for Amazon Redshift Serverless</a>.</p>
     #   @return [Array<Types::ConfigParameter>]
     # @!attribute security_group_ids
     #   <p>An array of security group IDs to associate with the workgroup.</p>
@@ -3383,8 +3310,7 @@ module Aws::RedshiftServerless
     #   <p>The Amazon Redshift Serverless version of your workgroup. For more information about Amazon Redshift Serverless versions, see<a href="https://docs.aws.amazon.com/redshift/latest/mgmt/cluster-versions.html">Cluster versions for Amazon Redshift</a>.</p>
     #   @return [String]
     # @!attribute patch_version
-    #   <p>The patch version of your Amazon Redshift Serverless workgroup. For more information about patch versions, see
-    #            <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/cluster-versions.html">Cluster versions for Amazon Redshift</a>.</p>
+    #   <p>The patch version of your Amazon Redshift Serverless workgroup. For more information about patch versions, see <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/cluster-versions.html">Cluster versions for Amazon Redshift</a>.</p>
     #   @return [String]
     # @!attribute max_capacity
     #   <p>The maximum data-warehouse capacity Amazon Redshift Serverless uses to serve queries. The max capacity is specified in RPUs.</p>
@@ -3402,10 +3328,11 @@ module Aws::RedshiftServerless
     #   <p>The name of the track for the workgroup.</p>
     #   @return [String]
     # @!attribute pending_track_name
-    #   <p>The name for the track that you want to assign to the workgroup. When the track changes, the 
-    #            workgroup is switched to the latest workgroup release available for the track. At this point, the 
-    #            track name is applied.</p>
+    #   <p>The name for the track that you want to assign to the workgroup. When the track changes, the workgroup is switched to the latest workgroup release available for the track. At this point, the track name is applied.</p>
     #   @return [String]
+    # @!attribute extra_compute_for_automatic_optimization
+    #   <p>A boolean value that, if <code>true</code>, indicates that the workgroup allocates additional compute resources to run automatic optimization operations.</p> <p>Default: false</p>
+    #   @return [Boolean]
     class Workgroup < Struct.new(
       nil,
       :workgroup_id,
@@ -3433,6 +3360,7 @@ module Aws::RedshiftServerless
       :price_performance_target,
       :track_name,
       :pending_track_name,
+      :extra_compute_for_automatic_optimization,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

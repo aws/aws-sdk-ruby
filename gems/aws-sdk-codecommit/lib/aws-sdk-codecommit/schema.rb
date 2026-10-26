@@ -153,6 +153,12 @@ module Aws::CodeCommit
     DescribePullRequestEventsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.codecommit#DescribePullRequestEventsInput", name: "DescribePullRequestEventsInput")
     DescribePullRequestEventsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.codecommit#DescribePullRequestEventsOutput", name: "DescribePullRequestEventsOutput")
     Description = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.codecommit#Description", name: "Description", traits: {"smithy.api#length" => {"min" => 0, "max" => 10240}})
+    DiffChange = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.codecommit#DiffChange", name: "DiffChange")
+    DiffChangeList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.codecommit#DiffChangeList", name: "DiffChangeList", traits: {"smithy.api#length" => {"min" => 0, "max" => 25000}})
+    DiffChangeType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.codecommit#DiffChangeType", name: "DiffChangeType")
+    DiffContext = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.codecommit#DiffContext", name: "DiffContext")
+    DiffHunk = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.codecommit#DiffHunk", name: "DiffHunk")
+    DiffHunkList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.codecommit#DiffHunkList", name: "DiffHunkList", traits: {"smithy.api#length" => {"min" => 0, "max" => 1000}})
     Difference = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.codecommit#Difference", name: "Difference")
     DifferenceList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.codecommit#DifferenceList", name: "DifferenceList")
     DirectoryNameConflictsWithFileNameException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.codecommit#DirectoryNameConflictsWithFileNameException", name: "DirectoryNameConflictsWithFileNameException", traits: {"smithy.api#error" => "client"})
@@ -199,6 +205,8 @@ module Aws::CodeCommit
     FolderList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.codecommit#FolderList", name: "FolderList")
     GetApprovalRuleTemplateInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.codecommit#GetApprovalRuleTemplateInput", name: "GetApprovalRuleTemplateInput")
     GetApprovalRuleTemplateOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.codecommit#GetApprovalRuleTemplateOutput", name: "GetApprovalRuleTemplateOutput")
+    GetBlobDifferencesInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.codecommit#GetBlobDifferencesInput", name: "GetBlobDifferencesInput")
+    GetBlobDifferencesOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.codecommit#GetBlobDifferencesOutput", name: "GetBlobDifferencesOutput")
     GetBlobInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.codecommit#GetBlobInput", name: "GetBlobInput")
     GetBlobOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.codecommit#GetBlobOutput", name: "GetBlobOutput")
     GetBranchInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.codecommit#GetBranchInput", name: "GetBranchInput")
@@ -237,6 +245,7 @@ module Aws::CodeCommit
     GetRepositoryTriggersOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.codecommit#GetRepositoryTriggersOutput", name: "GetRepositoryTriggersOutput")
     HunkContent = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.codecommit#HunkContent", name: "HunkContent")
     IdempotencyParameterMismatchException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.codecommit#IdempotencyParameterMismatchException", name: "IdempotencyParameterMismatchException", traits: {"smithy.api#error" => "client"})
+    IgnoreWhiteSpaces = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.codecommit#IgnoreWhiteSpaces", name: "IgnoreWhiteSpaces")
     InvalidActorArnException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.codecommit#InvalidActorArnException", name: "InvalidActorArnException", traits: {"smithy.api#error" => "client"})
     InvalidApprovalRuleContentException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.codecommit#InvalidApprovalRuleContentException", name: "InvalidApprovalRuleContentException", traits: {"smithy.api#error" => "client"})
     InvalidApprovalRuleNameException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.codecommit#InvalidApprovalRuleNameException", name: "InvalidApprovalRuleNameException", traits: {"smithy.api#error" => "client"})
@@ -313,6 +322,7 @@ module Aws::CodeCommit
     KmsKeyId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.codecommit#KmsKeyId", name: "KmsKeyId", traits: {"smithy.api#pattern" => "^[a-zA-Z0-9:/_-]+$"})
     LastModifiedDate = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.codecommit#LastModifiedDate", name: "LastModifiedDate")
     Limit = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.codecommit#Limit", name: "Limit")
+    LineContent = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.codecommit#LineContent", name: "LineContent")
     LineNumber = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.codecommit#LineNumber", name: "LineNumber")
     ListApprovalRuleTemplatesInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.codecommit#ListApprovalRuleTemplatesInput", name: "ListApprovalRuleTemplatesInput")
     ListApprovalRuleTemplatesOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.codecommit#ListApprovalRuleTemplatesOutput", name: "ListApprovalRuleTemplatesOutput")
@@ -543,6 +553,7 @@ module Aws::CodeCommit
     UpdateRepositoryEncryptionKeyOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.codecommit#UpdateRepositoryEncryptionKeyOutput", name: "UpdateRepositoryEncryptionKeyOutput")
     UpdateRepositoryNameInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.codecommit#UpdateRepositoryNameInput", name: "UpdateRepositoryNameInput")
     UserInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.codecommit#UserInfo", name: "UserInfo")
+    ValidationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.codecommit#ValidationException", name: "ValidationException", traits: {"smithy.api#error" => "client"})
     Blob = ::Smithy::Schema::Shapes::BlobShape.new(id: "com.amazonaws.codecommit#blob", name: "Blob")
 
     ActorDoesNotExistException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
@@ -940,6 +951,22 @@ module Aws::CodeCommit
     DescribePullRequestEventsOutput.add_member(:pull_request_events, ::Smithy::Schema::Shapes::MemberShape.new(target: PullRequestEventList, name: "pullRequestEvents", traits: {"smithy.api#required" => {}}))
     DescribePullRequestEventsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
     DescribePullRequestEventsOutput.type = Types::DescribePullRequestEventsOutput
+    DiffChange.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: DiffChangeType, name: "type"))
+    DiffChange.add_member(:before_line_number, ::Smithy::Schema::Shapes::MemberShape.new(target: LineNumber, name: "beforeLineNumber"))
+    DiffChange.add_member(:after_line_number, ::Smithy::Schema::Shapes::MemberShape.new(target: LineNumber, name: "afterLineNumber"))
+    DiffChange.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: LineContent, name: "content"))
+    DiffChange.type = Types::DiffChange
+    DiffChangeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DiffChange, name: "member"))
+    DiffChangeType.add_member(:context, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONTEXT", traits: {"smithy.api#enumValue" => "CONTEXT"}))
+    DiffChangeType.add_member(:add, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ADD", traits: {"smithy.api#enumValue" => "ADD"}))
+    DiffChangeType.add_member(:delete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETE", traits: {"smithy.api#enumValue" => "DELETE"}))
+    DiffHunk.add_member(:before_start_line, ::Smithy::Schema::Shapes::MemberShape.new(target: LineNumber, name: "beforeStartLine"))
+    DiffHunk.add_member(:before_line_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Count, name: "beforeLineCount"))
+    DiffHunk.add_member(:after_start_line, ::Smithy::Schema::Shapes::MemberShape.new(target: LineNumber, name: "afterStartLine"))
+    DiffHunk.add_member(:after_line_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Count, name: "afterLineCount"))
+    DiffHunk.add_member(:changes, ::Smithy::Schema::Shapes::MemberShape.new(target: DiffChangeList, name: "changes"))
+    DiffHunk.type = Types::DiffHunk
+    DiffHunkList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DiffHunk, name: "member"))
     Difference.add_member(:before_blob, ::Smithy::Schema::Shapes::MemberShape.new(target: BlobMetadata, name: "beforeBlob"))
     Difference.add_member(:after_blob, ::Smithy::Schema::Shapes::MemberShape.new(target: BlobMetadata, name: "afterBlob"))
     Difference.add_member(:change_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeTypeEnum, name: "changeType"))
@@ -1035,6 +1062,20 @@ module Aws::CodeCommit
     GetApprovalRuleTemplateInput.type = Types::GetApprovalRuleTemplateInput
     GetApprovalRuleTemplateOutput.add_member(:approval_rule_template, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRuleTemplate, name: "approvalRuleTemplate", traits: {"smithy.api#required" => {}}))
     GetApprovalRuleTemplateOutput.type = Types::GetApprovalRuleTemplateOutput
+    GetBlobDifferencesInput.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, name: "repositoryName", traits: {"smithy.api#required" => {}}))
+    GetBlobDifferencesInput.add_member(:after_blob_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, name: "afterBlobId", traits: {"smithy.api#required" => {}}))
+    GetBlobDifferencesInput.add_member(:before_blob_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, name: "beforeBlobId"))
+    GetBlobDifferencesInput.add_member(:context_lines, ::Smithy::Schema::Shapes::MemberShape.new(target: DiffContext, name: "contextLines"))
+    GetBlobDifferencesInput.add_member(:ignore_whitespace, ::Smithy::Schema::Shapes::MemberShape.new(target: IgnoreWhiteSpaces, name: "ignoreWhitespace"))
+    GetBlobDifferencesInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: Limit, name: "MaxResults"))
+    GetBlobDifferencesInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    GetBlobDifferencesInput.type = Types::GetBlobDifferencesInput
+    GetBlobDifferencesOutput.add_member(:hunks, ::Smithy::Schema::Shapes::MemberShape.new(target: DiffHunkList, name: "hunks", traits: {"smithy.api#required" => {}}))
+    GetBlobDifferencesOutput.add_member(:is_binary, ::Smithy::Schema::Shapes::MemberShape.new(target: CapitalBoolean, name: "isBinary", traits: {"smithy.api#required" => {}}))
+    GetBlobDifferencesOutput.add_member(:before_blob_size, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectSize, name: "beforeBlobSize", traits: {"smithy.api#default" => 0}))
+    GetBlobDifferencesOutput.add_member(:after_blob_size, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectSize, name: "afterBlobSize", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    GetBlobDifferencesOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    GetBlobDifferencesOutput.type = Types::GetBlobDifferencesOutput
     GetBlobInput.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, name: "repositoryName", traits: {"smithy.api#required" => {}}))
     GetBlobInput.add_member(:blob_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, name: "blobId", traits: {"smithy.api#required" => {}}))
     GetBlobInput.type = Types::GetBlobInput
@@ -1915,12 +1956,14 @@ module Aws::CodeCommit
     UserInfo.add_member(:email, ::Smithy::Schema::Shapes::MemberShape.new(target: Email, name: "email"))
     UserInfo.add_member(:date, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "date"))
     UserInfo.type = Types::UserInfo
+    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
+    ValidationException.type = Types::ValidationException
 
     CodeCommit20150413 = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.codecommit#CodeCommit_20150413"
       service.name = "CodeCommit20150413"
       service.version = "2015-04-13"
-      service.traits = {"aws.api#service" => {"sdkId" => "CodeCommit", "arnNamespace" => "codecommit", "cloudFormationName" => "CodeCommit", "cloudTrailEventSource" => "codecommit.amazonaws.com", "endpointPrefix" => "codecommit"}, "aws.auth#sigv4" => {"name" => "codecommit"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "AWS CodeCommit", "smithy.api#xmlNamespace" => {"uri" => "http://codecommit.amazonaws.com/doc/2015-04-13"}}
+      service.traits = {"aws.api#service" => {"sdkId" => "CodeCommit", "arnNamespace" => "codecommit", "cloudFormationName" => "CodeCommit", "cloudTrailEventSource" => "codecommit.amazonaws.com", "endpointPrefix" => "codecommit"}, "aws.auth#sigv4" => {"name" => "codecommit"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "AWS CodeCommit", "smithy.api#xmlNamespace" => {"uri" => "http://codecommit.amazonaws.com/doc/2015-04-13"}, "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://codecommit-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://codecommit-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://codecommit.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://codecommit.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
       service.add_operation(:associate_approval_rule_template_with_repository, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#AssociateApprovalRuleTemplateWithRepository"
         operation.name = "AssociateApprovalRuleTemplateWithRepository"
@@ -2453,6 +2496,29 @@ module Aws::CodeCommit
         operation.errors << RepositoryNameRequiredException
         operation.traits = {}
       end)
+      service.add_operation(:get_blob_differences, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.codecommit#GetBlobDifferences"
+        operation.name = "GetBlobDifferences"
+        operation.input = GetBlobDifferencesInput
+        operation.output = GetBlobDifferencesOutput
+        operation.errors << BlobIdDoesNotExistException
+        operation.errors << BlobIdRequiredException
+        operation.errors << EncryptionIntegrityChecksFailedException
+        operation.errors << EncryptionKeyAccessDeniedException
+        operation.errors << EncryptionKeyDisabledException
+        operation.errors << EncryptionKeyNotFoundException
+        operation.errors << EncryptionKeyUnavailableException
+        operation.errors << FileTooLargeException
+        operation.errors << InvalidBlobIdException
+        operation.errors << InvalidContinuationTokenException
+        operation.errors << InvalidMaxResultsException
+        operation.errors << InvalidRepositoryNameException
+        operation.errors << RepositoryDoesNotExistException
+        operation.errors << RepositoryNameRequiredException
+        operation.errors << ValidationException
+        operation.traits = {}
+        operation[:paginator] = Paginators::GetBlobDifferences.new
+      end)
       service.add_operation(:get_branch, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codecommit#GetBranch"
         operation.name = "GetBranch"
@@ -2825,7 +2891,7 @@ module Aws::CodeCommit
         operation.errors << InvalidRepositoryNameException
         operation.errors << RepositoryDoesNotExistException
         operation.errors << RepositoryNameRequiredException
-        operation.traits = {}
+        operation.traits = {"smithy.test#smokeTests" => [{"id" => "ListBranchesFailure", "params" => {"repositoryName" => "fake-repo"}, "vendorParams" => {"region" => "us-west-2"}, "vendorParamsShape" => "aws.test#AwsVendorParams", "expect" => {"failure" => {}}}]}
         operation[:paginator] = Paginators::ListBranches.new
       end)
       service.add_operation(:list_file_commit_history, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -2879,7 +2945,7 @@ module Aws::CodeCommit
         operation.errors << InvalidContinuationTokenException
         operation.errors << InvalidOrderException
         operation.errors << InvalidSortByException
-        operation.traits = {}
+        operation.traits = {"smithy.test#smokeTests" => [{"id" => "ListRepositoriesSuccess", "params" => {}, "vendorParams" => {"region" => "us-west-2"}, "vendorParamsShape" => "aws.test#AwsVendorParams", "expect" => {"success" => {}}}]}
         operation[:paginator] = Paginators::ListRepositories.new
       end)
       service.add_operation(:list_repositories_for_approval_rule_template, ::Smithy::Schema::Shapes::OperationShape.new do |operation|

@@ -7,6 +7,9 @@ module Aws::BedrockDataAutomation
     AudioExtractionCategoryType: EnumShape
     AudioExtractionCategoryTypeConfiguration: StructureShape
     AudioExtractionCategoryTypes: ListShape
+    AudioGenerativeOutputLanguage: EnumShape
+    AudioInputLanguages: ListShape
+    AudioLanguageConfiguration: StructureShape
     AudioOverrideConfiguration: StructureShape
     AudioStandardExtraction: StructureShape
     AudioStandardGenerativeField: StructureShape
@@ -19,6 +22,12 @@ module Aws::BedrockDataAutomation
     BlueprintItem: StructureShape
     BlueprintItems: ListShape
     BlueprintName: StringShape
+    BlueprintOptimizationInvocationArn: StringShape
+    BlueprintOptimizationJobStatus: EnumShape
+    BlueprintOptimizationObject: StructureShape
+    BlueprintOptimizationOutputConfiguration: StructureShape
+    BlueprintOptimizationSample: StructureShape
+    BlueprintOptimizationSamples: ListShape
     BlueprintSchema: StringShape
     BlueprintStage: EnumShape
     BlueprintStageFilter: EnumShape
@@ -28,13 +37,35 @@ module Aws::BedrockDataAutomation
     ChannelLabelingConfiguration: StructureShape
     ClientToken: StringShape
     ConflictException: StructureShape
+    CopyBlueprintStageRequest: StructureShape
+    CopyBlueprintStageResponse: StructureShape
     CreateBlueprintRequest: StructureShape
     CreateBlueprintResponse: StructureShape
     CreateBlueprintVersionRequest: StructureShape
     CreateBlueprintVersionResponse: StructureShape
+    CreateDataAutomationLibraryRequest: StructureShape
+    CreateDataAutomationLibraryResponse: StructureShape
     CreateDataAutomationProjectRequest: StructureShape
     CreateDataAutomationProjectResponse: StructureShape
     CustomOutputConfiguration: StructureShape
+    DataAutomationLibrary: StructureShape
+    DataAutomationLibraryArn: StringShape
+    DataAutomationLibraryConfiguration: StructureShape
+    DataAutomationLibraryDescription: StringShape
+    DataAutomationLibraryEntitySummaries: ListShape
+    DataAutomationLibraryEntitySummary: UnionShape
+    DataAutomationLibraryFilter: StructureShape
+    DataAutomationLibraryIngestionJob: StructureShape
+    DataAutomationLibraryIngestionJobArn: StringShape
+    DataAutomationLibraryIngestionJobSummaries: ListShape
+    DataAutomationLibraryIngestionJobSummary: StructureShape
+    DataAutomationLibraryItem: StructureShape
+    DataAutomationLibraryItems: ListShape
+    DataAutomationLibraryName: StringShape
+    DataAutomationLibraryStatus: EnumShape
+    DataAutomationLibrarySummaries: ListShape
+    DataAutomationLibrarySummary: StructureShape
+    DataAutomationProfileArn: StringShape
     DataAutomationProject: StructureShape
     DataAutomationProjectArn: StringShape
     DataAutomationProjectDescription: StringShape
@@ -45,13 +76,18 @@ module Aws::BedrockDataAutomation
     DataAutomationProjectStatus: EnumShape
     DataAutomationProjectSummaries: ListShape
     DataAutomationProjectSummary: StructureShape
+    DataAutomationProjectType: EnumShape
     DateTimestamp: TimestampShape
     DeleteBlueprintRequest: StructureShape
     DeleteBlueprintResponse: StructureShape
+    DeleteDataAutomationLibraryRequest: StructureShape
+    DeleteDataAutomationLibraryResponse: StructureShape
     DeleteDataAutomationProjectRequest: StructureShape
     DeleteDataAutomationProjectResponse: StructureShape
+    DeleteEntitiesInfo: StructureShape
     DesiredModality: EnumShape
     DocumentBoundingBox: StructureShape
+    DocumentCustomOutputConfiguration: StructureShape
     DocumentExtractionGranularity: StructureShape
     DocumentExtractionGranularityType: EnumShape
     DocumentExtractionGranularityTypes: ListShape
@@ -67,8 +103,26 @@ module Aws::BedrockDataAutomation
     EncryptionConfiguration: StructureShape
     EncryptionContextKey: StringShape
     EncryptionContextValue: StringShape
+    EntityDescription: StringShape
+    EntityDetails: UnionShape
+    EntityId: StringShape
+    EntityIdList: ListShape
+    EntityMetadata: StringShape
+    EntityType: EnumShape
+    EntityTypeInfo: StructureShape
+    EntityTypeInfoList: ListShape
+    EventBridgeConfiguration: StructureShape
+    FallbackBlueprintItems: ListShape
+    GetBlueprintOptimizationStatusRequest: StructureShape
+    GetBlueprintOptimizationStatusResponse: StructureShape
     GetBlueprintRequest: StructureShape
     GetBlueprintResponse: StructureShape
+    GetDataAutomationLibraryEntityRequest: StructureShape
+    GetDataAutomationLibraryEntityResponse: StructureShape
+    GetDataAutomationLibraryIngestionJobRequest: StructureShape
+    GetDataAutomationLibraryIngestionJobResponse: StructureShape
+    GetDataAutomationLibraryRequest: StructureShape
+    GetDataAutomationLibraryResponse: StructureShape
     GetDataAutomationProjectRequest: StructureShape
     GetDataAutomationProjectResponse: StructureShape
     ImageBoundingBox: StructureShape
@@ -81,11 +135,26 @@ module Aws::BedrockDataAutomation
     ImageStandardGenerativeFieldType: EnumShape
     ImageStandardGenerativeFieldTypes: ListShape
     ImageStandardOutputConfiguration: StructureShape
+    InlinePayload: UnionShape
+    InputConfiguration: StructureShape
     InternalServerException: StructureShape
+    InvokeBlueprintOptimizationAsyncRequest: StructureShape
+    InvokeBlueprintOptimizationAsyncResponse: StructureShape
+    InvokeDataAutomationLibraryIngestionJobRequest: StructureShape
+    InvokeDataAutomationLibraryIngestionJobResponse: StructureShape
     KmsEncryptionContext: MapShape
     KmsKeyId: StringShape
+    Language: EnumShape
+    LibraryIngestionJobOperationType: EnumShape
+    LibraryIngestionJobStatus: EnumShape
     ListBlueprintsRequest: StructureShape
     ListBlueprintsResponse: StructureShape
+    ListDataAutomationLibrariesRequest: StructureShape
+    ListDataAutomationLibrariesResponse: StructureShape
+    ListDataAutomationLibraryEntitiesRequest: StructureShape
+    ListDataAutomationLibraryEntitiesResponse: StructureShape
+    ListDataAutomationLibraryIngestionJobsRequest: StructureShape
+    ListDataAutomationLibraryIngestionJobsResponse: StructureShape
     ListDataAutomationProjectsRequest: StructureShape
     ListDataAutomationProjectsResponse: StructureShape
     ListTagsForResourceRequest: StructureShape
@@ -95,9 +164,26 @@ module Aws::BedrockDataAutomation
     ModalityRoutingConfiguration: StructureShape
     NextToken: StringShape
     NonBlankString: StringShape
+    NotificationConfiguration: StructureShape
+    OutputConfiguration: StructureShape
     OverrideConfiguration: StructureShape
+    PIIEntitiesConfiguration: StructureShape
+    PIIEntityType: EnumShape
+    PIIEntityTypes: ListShape
+    PIIRedactionMaskMode: EnumShape
+    Phrase: StructureShape
+    PhraseDisplayAsText: StringShape
+    PhraseList: ListShape
+    PhraseText: StringShape
     ResourceNotFoundException: StructureShape
     ResourceOwner: EnumShape
+    S3Object: StructureShape
+    S3ObjectVersion: StringShape
+    S3Uri: StringShape
+    SensitiveDataConfiguration: StructureShape
+    SensitiveDataDetectionMode: EnumShape
+    SensitiveDataDetectionScope: ListShape
+    SensitiveDataDetectionScopeType: EnumShape
     ServiceQuotaExceededException: StructureShape
     SpeakerLabelingConfiguration: StructureShape
     SplitterConfiguration: StructureShape
@@ -118,8 +204,12 @@ module Aws::BedrockDataAutomation
     UntagResourceResponse: StructureShape
     UpdateBlueprintRequest: StructureShape
     UpdateBlueprintResponse: StructureShape
+    UpdateDataAutomationLibraryRequest: StructureShape
+    UpdateDataAutomationLibraryResponse: StructureShape
     UpdateDataAutomationProjectRequest: StructureShape
     UpdateDataAutomationProjectResponse: StructureShape
+    UpsertEntitiesInfo: ListShape
+    UpsertEntityInfo: UnionShape
     ValidationException: StructureShape
     ValidationExceptionField: StructureShape
     ValidationExceptionFieldList: ListShape
@@ -133,6 +223,9 @@ module Aws::BedrockDataAutomation
     VideoStandardGenerativeFieldType: EnumShape
     VideoStandardGenerativeFieldTypes: ListShape
     VideoStandardOutputConfiguration: StructureShape
+    VocabularyEntity: StructureShape
+    VocabularyEntityInfo: StructureShape
+    VocabularyEntitySummary: StructureShape
 
     AmazonBedrockKeystoneBuildTimeService: ServiceShape
   end

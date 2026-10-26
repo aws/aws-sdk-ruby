@@ -36,6 +36,11 @@ module Aws::Inspector2
     AtigData: StructureShape
     AuthorizationUrl: StringShape
     AutoEnable: StructureShape
+    AwsConfigConnectorArn: StringShape
+    AwsConfigConnectorArnComparison: EnumShape
+    AwsConfigConnectorArnFilter: StructureShape
+    AwsConfigConnectorArnFilterList: ListShape
+    AwsConfigConnectorArnList: ListShape
     AwsEc2InstanceDetails: StructureShape
     AwsEcrContainerAggregation: StructureShape
     AwsEcrContainerAggregationResponse: StructureShape
@@ -46,6 +51,12 @@ module Aws::Inspector2
     AwsEksWorkloadInfo: StructureShape
     AwsEksWorkloadInfoList: ListShape
     AwsLambdaFunctionDetails: StructureShape
+    AzureProviderDetailCreate: StructureShape
+    AzureProviderDetailUpdate: StructureShape
+    AzureRegion: StringShape
+    AzureRegionList: ListShape
+    AzureScopeConfiguration: StructureShape
+    AzureScopeConfigurationInput: StructureShape
     BadRequestException: StructureShape
     BatchAssociateCodeSecurityScanConfigurationRequest: StructureShape
     BatchAssociateCodeSecurityScanConfigurationResponse: StructureShape
@@ -141,6 +152,9 @@ module Aws::Inspector2
     CisaDateAdded: TimestampShape
     CisaDateDue: TimestampShape
     ClientToken: StringShape
+    CloudProvider: StringShape
+    CloudSecurityGroupIdList: ListShape
+    CloudSubnetIdList: ListShape
     ClusterDetails: StructureShape
     ClusterDetailsList: ListShape
     ClusterForImageFilterCriteria: StructureShape
@@ -183,6 +197,39 @@ module Aws::Inspector2
     ComputePlatform: StructureShape
     ConfigurationLevel: EnumShape
     ConflictException: StructureShape
+    Connector: StructureShape
+    ConnectorArn: StringShape
+    ConnectorArnComparison: EnumShape
+    ConnectorArnFilter: StructureShape
+    ConnectorArnFilterList: ListShape
+    ConnectorArnList: ListShape
+    ConnectorCloudProvider: EnumShape
+    ConnectorContainerImageScanConfiguration: StructureShape
+    ConnectorDescription: StringShape
+    ConnectorFilterCriteria: StructureShape
+    ConnectorHealth: StructureShape
+    ConnectorHealthStatus: EnumShape
+    ConnectorList: ListShape
+    ConnectorName: StringShape
+    ConnectorNextToken: StringShape
+    ConnectorScanConfiguration: StructureShape
+    ConnectorScanConfigurationItem: StructureShape
+    ConnectorScanConfigurationItemList: ListShape
+    ConnectorTagKey: StringShape
+    ConnectorTagMap: MapShape
+    ConnectorTagValue: StringShape
+    ConnectorType: EnumShape
+    ConnectorTypeComparison: EnumShape
+    ConnectorTypeFilter: StructureShape
+    ConnectorTypeFilterList: ListShape
+    ContainerImageAggregation: StructureShape
+    ContainerImageAggregationResponse: StructureShape
+    ContainerImageMetadata: StructureShape
+    ContainerImagePullDateRescanDuration: StringShape
+    ContainerImageRescanDuration: StringShape
+    ContainerImageSortBy: StringShape
+    ContainerRegistryMetadata: StructureShape
+    ContainerRepositoryMetadata: StructureShape
     ContinuousIntegrationScanConfiguration: StructureShape
     ContinuousIntegrationScanEvent: EnumShape
     ContinuousIntegrationScanSupportedEvents: ListShape
@@ -210,6 +257,8 @@ module Aws::Inspector2
     CreateCodeSecurityIntegrationResponse: StructureShape
     CreateCodeSecurityScanConfigurationRequest: StructureShape
     CreateCodeSecurityScanConfigurationResponse: StructureShape
+    CreateConnectorRequest: StructureShape
+    CreateConnectorResponse: StructureShape
     CreateFilterInput: StructureShape
     CreateFilterOutput: StructureShape
     CreateFindingsReportInput: StructureShape
@@ -248,6 +297,8 @@ module Aws::Inspector2
     DeleteCodeSecurityIntegrationResponse: StructureShape
     DeleteCodeSecurityScanConfigurationRequest: StructureShape
     DeleteCodeSecurityScanConfigurationResponse: StructureShape
+    DeleteConnectorRequest: StructureShape
+    DeleteConnectorResponse: StructureShape
     DeleteFilterInput: StructureShape
     DeleteFilterOutput: StructureShape
     DescribeOrganizationConfigurationInput: StructureShape
@@ -290,6 +341,7 @@ module Aws::Inspector2
     EnableInput: StructureShape
     EnableOutput: StructureShape
     EnableResourceTypeList: ListShape
+    EnablementStatus: EnumShape
     Epss: StructureShape
     EpssDetails: StructureShape
     EpssScore: FloatShape
@@ -385,11 +437,13 @@ module Aws::Inspector2
     GitLabAccessToken: StringShape
     GitLabAuthCode: StringShape
     GroupKey: StringShape
+    Image: StructureShape
     ImageHash: StringShape
     ImageLayerAggregation: StructureShape
     ImageLayerAggregationResponse: StructureShape
     ImageLayerSortBy: StringShape
     ImageTagList: ListShape
+    InheritanceMode: StringShape
     InspectorScoreDetails: StructureShape
     InstanceUrl: StringShape
     IntegrationName: StringShape
@@ -437,6 +491,11 @@ module Aws::Inspector2
     ListCodeSecurityScanConfigurationAssociationsResponse: StructureShape
     ListCodeSecurityScanConfigurationsRequest: StructureShape
     ListCodeSecurityScanConfigurationsResponse: StructureShape
+    ListConnectorScanConfigurationsMaxResults: IntegerShape
+    ListConnectorScanConfigurationsRequest: StructureShape
+    ListConnectorScanConfigurationsResponse: StructureShape
+    ListConnectorsRequest: StructureShape
+    ListConnectorsResponse: StructureShape
     ListCoverageInput: StructureShape
     ListCoverageMaxResults: IntegerShape
     ListCoverageOutput: StructureShape
@@ -524,6 +583,16 @@ module Aws::Inspector2
     ProjectPeriodicScanConfiguration: StructureShape
     ProjectPeriodicScanConfigurationList: ListShape
     ProjectSelectionScope: EnumShape
+    Provider: StringShape
+    ProviderAccountId: StringShape
+    ProviderComparison: EnumShape
+    ProviderDetailCreate: UnionShape
+    ProviderDetailUpdate: UnionShape
+    ProviderFilter: StructureShape
+    ProviderFilterList: ListShape
+    ProviderOrgId: StringShape
+    ProviderPartition: StringShape
+    ProviderRegion: StringShape
     Reason: StringShape
     Recommendation: StructureShape
     ReferenceUrls: ListShape
@@ -574,7 +643,13 @@ module Aws::Inspector2
     ScanStatusReason: StringShape
     ScanType: StringShape
     Schedule: UnionShape
+    ScopeConfiguration: StructureShape
+    ScopeConfigurationInput: StructureShape
     ScopeSettings: StructureShape
+    ScopeState: EnumShape
+    ScopeType: EnumShape
+    ScopeValue: StringShape
+    ScopeValueList: ListShape
     SearchVulnerabilitiesFilterCriteria: StructureShape
     SearchVulnerabilitiesRequest: StructureShape
     SearchVulnerabilitiesResponse: StructureShape
@@ -584,6 +659,13 @@ module Aws::Inspector2
     SendCisSessionHealthResponse: StructureShape
     SendCisSessionTelemetryRequest: StructureShape
     SendCisSessionTelemetryResponse: StructureShape
+    ServerlessFunction: StructureShape
+    ServerlessFunctionAggregation: StructureShape
+    ServerlessFunctionAggregationResponse: StructureShape
+    ServerlessFunctionLayerList: ListShape
+    ServerlessFunctionLayerUrn: StringShape
+    ServerlessFunctionMetadata: StructureShape
+    ServerlessFunctionSortBy: StringShape
     Service: StringShape
     ServiceQuotaExceededException: StructureShape
     Severity: StringShape
@@ -658,8 +740,13 @@ module Aws::Inspector2
     UpdateCodeSecurityIntegrationResponse: StructureShape
     UpdateCodeSecurityScanConfigurationRequest: StructureShape
     UpdateCodeSecurityScanConfigurationResponse: StructureShape
+    UpdateConfigurationInheritance: StructureShape
     UpdateConfigurationInput: StructureShape
     UpdateConfigurationOutput: StructureShape
+    UpdateConnectorRequest: StructureShape
+    UpdateConnectorResponse: StructureShape
+    UpdateConnectorScanConfigurationRequest: StructureShape
+    UpdateConnectorScanConfigurationResponse: StructureShape
     UpdateEc2DeepInspectionConfigurationRequest: StructureShape
     UpdateEc2DeepInspectionConfigurationResponse: StructureShape
     UpdateEncryptionKeyRequest: StructureShape
@@ -681,6 +768,8 @@ module Aws::Inspector2
     UsageTotalList: ListShape
     UsageType: StringShape
     UsageValue: FloatShape
+    VMScannerState: StructureShape
+    VMScannerStatus: StringShape
     ValidationException: StructureShape
     ValidationExceptionField: StructureShape
     ValidationExceptionFields: ListShape
@@ -690,6 +779,12 @@ module Aws::Inspector2
     VendorSeverity: StringShape
     VendorUpdatedAt: TimestampShape
     Version: StringShape
+    Vm: StructureShape
+    VmInstanceAggregation: StructureShape
+    VmInstanceAggregationResponse: StructureShape
+    VmInstanceMetadata: StructureShape
+    VmInstanceSortBy: StringShape
+    VmPlatform: StringShape
     VpcId: StringShape
     VulnId: StringShape
     VulnIdList: ListShape

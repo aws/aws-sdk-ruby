@@ -144,18 +144,18 @@ module Aws::EventBridge
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -303,7 +303,7 @@ module Aws::EventBridge
     #       archive, all events are sent to the archive except replayed events. Replayed events are not
     #       sent to an archive.</p>
     #          <important>
-    #             <p>If you have specified that EventBridge use a customer managed key for encrypting the source event bus, we strongly recommend you also specify a 
+    #             <p>If you have specified that EventBridge use a customer managed key for encrypting the source event bus, we strongly recommend you also specify a
     #         customer managed key for any archives for the event bus as well. </p>
     #             <p>For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/encryption-archives.html">Encrypting archives</a> in the <i>Amazon EventBridge User Guide</i>.</p>
     #          </important>
@@ -321,14 +321,14 @@ module Aws::EventBridge
     #         retained indefinitely</p>
     # @option params [String] :kms_key_identifier
     #   <p>The identifier of the KMS
-    #         customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt this archive. The identifier can be the key 
+    #         customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt this archive. The identifier can be the key
     #         Amazon Resource Name (ARN), KeyId, key alias, or key alias ARN.</p>
     #            <p>If you do not specify a customer managed key identifier, EventBridge uses an
     #           Amazon Web Services owned key to encrypt the archive.</p>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/viewing-keys.html">Identify and view keys</a> in the <i>Key Management Service
     #                                   Developer Guide</i>. </p>
     #            <important>
-    #               <p>If you have specified that EventBridge use a customer managed key for encrypting the source event bus, we strongly recommend you also specify a 
+    #               <p>If you have specified that EventBridge use a customer managed key for encrypting the source event bus, we strongly recommend you also specify a
     #           customer managed key for any archives for the event bus as well. </p>
     #               <p>For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/encryption-archives.html">Encrypting archives</a> in the <i>Amazon EventBridge User Guide</i>.</p>
     #            </important>
@@ -381,7 +381,7 @@ module Aws::EventBridge
     #               </i>.</p>
     # @option params [String] :kms_key_identifier
     #   <p>The identifier of the KMS
-    #         customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt this connection. The identifier can be the key 
+    #         customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt this connection. The identifier can be the key
     #         Amazon Resource Name (ARN), KeyId, key alias, or key alias ARN.</p>
     #            <p>If you do not specify a customer managed key identifier, EventBridge uses an
     #           Amazon Web Services owned key to encrypt the connection.</p>
@@ -586,7 +586,7 @@ module Aws::EventBridge
     #   <p>The event bus description.</p>
     # @option params [String] :kms_key_identifier
     #   <p>The identifier of the KMS
-    #         customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt events on this event bus. The identifier can be the key 
+    #         customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt events on this event bus. The identifier can be the key
     #         Amazon Resource Name (ARN), KeyId, key alias, or key alias ARN.</p>
     #            <p>If you do not specify a customer managed key identifier, EventBridge uses an
     #           Amazon Web Services owned key to encrypt events on the event bus.</p>
@@ -611,7 +611,7 @@ module Aws::EventBridge
     #           use an Amazon Web Services owned key. For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-encryption-event-bus-cmkey.html">Encrypting events</a> in the <i>Amazon EventBridge User Guide</i>.</p>
     #            </note>
     #            <important>
-    #               <p>If you have specified that EventBridge use a customer managed key for encrypting the source event bus, we strongly recommend you also specify a 
+    #               <p>If you have specified that EventBridge use a customer managed key for encrypting the source event bus, we strongly recommend you also specify a
     #           customer managed key for any archives for the event bus as well. </p>
     #               <p>For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/encryption-archives.html">Encrypting archives</a> in the <i>Amazon EventBridge User Guide</i>.</p>
     #            </important>
@@ -622,7 +622,7 @@ module Aws::EventBridge
     #           Guide</i>.</p>
     # @option params [Types::LogConfig] :log_config
     #   <p>The logging configuration settings for the event bus.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/eb-event-bus-logs.html">Configuring logs for event buses</a> in the <i>EventBridge User Guide</i>.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-bus-logs.html">Configuring logs for event buses</a> in the <i>EventBridge User Guide</i>.</p>
     # @option params [Array<Types::Tag>] :tags
     #   <p>Tags to associate with the event bus.</p>
     # @example Request syntax with placeholder values
@@ -1216,7 +1216,8 @@ module Aws::EventBridge
     #       level: "OFF" # One of: ["OFF", "ERROR", "INFO", "TRACE"]
     #     },
     #     creation_time: Time.now,
-    #     last_modified_time: Time.now
+    #     last_modified_time: Time.now,
+    #     managed_by: "ManagedBy"
     #   }
     # @return [Types::DescribeEventBusResponse]
     def describe_event_bus(params = {}, options = {})
@@ -1654,7 +1655,8 @@ module Aws::EventBridge
     #         description: "EventBusDescription",
     #         policy: "String",
     #         creation_time: Time.now,
-    #         last_modified_time: Time.now
+    #         last_modified_time: Time.now,
+    #         managed_by: "ManagedBy"
     #       }
     #     ],
     #     next_token: "NextToken"
@@ -2110,8 +2112,8 @@ module Aws::EventBridge
     end
 
     # <p>Sends custom events to Amazon EventBridge so that they can be matched to rules.</p>
-    #          <p>You can batch multiple event entries into one request for efficiency. 
-    #       However, the total entry size must be less than 256KB. You can calculate the entry size before you send the events. 
+    #          <p>You can batch multiple event entries into one request for efficiency.
+    #       However, the total entry size must be less than 1MB. You can calculate the entry size before you send the events.
     #       For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-putevents.html#eb-putevent-size">Calculating PutEvents event entry
     #         size</a> in the <i>
     #                <i>Amazon EventBridge User Guide</i>
@@ -2323,8 +2325,8 @@ module Aws::EventBridge
     #       budgeting, which alerts you when charges exceed your specified limit. For more information,
     #       see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/budgets-managing-costs.html">Managing Your Costs with
     #         Budgets</a>.</p>
-    #          <p>To create a rule that filters for management events from Amazon Web Services services, see 
-    #       <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-service-event-cloudtrail.html#eb-service-event-cloudtrail-management">Receiving read-only management events from Amazon Web Services services</a> in the 
+    #          <p>To create a rule that filters for management events from Amazon Web Services services, see
+    #       <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-service-event-cloudtrail.html#eb-service-event-cloudtrail-management">Receiving read-only management events from Amazon Web Services services</a> in the
     #       <i>EventBridge User Guide</i>.</p>
     # @param [Hash, Types::PutRuleRequest] params
     # @option params [String] :name
@@ -2346,7 +2348,7 @@ module Aws::EventBridge
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>ENABLED</code>: The rule is enabled. 
+    #                     <code>ENABLED</code>: The rule is enabled.
     #             EventBridge matches events against the rule, <i>except</i> for Amazon Web Services management events delivered through CloudTrail.</p>
     #               </li>
     #               <li>
@@ -2360,8 +2362,8 @@ module Aws::EventBridge
     #               <i>
     #                        <i>Amazon EventBridge User Guide</i>
     #                     </i>.</p>
-    #                  <p>This value is only valid for rules on the <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-what-is-how-it-works-concepts.html#eb-bus-concepts-buses">default</a> event bus 
-    #             or <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-create-event-bus.html">custom event buses</a>. 
+    #                  <p>This value is only valid for rules on the <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-what-is-how-it-works-concepts.html#eb-bus-concepts-buses">default</a> event bus
+    #             or <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-create-event-bus.html">custom event buses</a>.
     #             It does not apply to <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-saas.html">partner event buses</a>.</p>
     #               </li>
     #            </ul>
@@ -2987,14 +2989,14 @@ module Aws::EventBridge
     #   <p>The number of days to retain events in the archive.</p>
     # @option params [String] :kms_key_identifier
     #   <p>The identifier of the KMS
-    #         customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt this archive. The identifier can be the key 
+    #         customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt this archive. The identifier can be the key
     #         Amazon Resource Name (ARN), KeyId, key alias, or key alias ARN.</p>
     #            <p>If you do not specify a customer managed key identifier, EventBridge uses an
     #           Amazon Web Services owned key to encrypt the archive.</p>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/viewing-keys.html">Identify and view keys</a> in the <i>Key Management Service
     #                                   Developer Guide</i>. </p>
     #            <important>
-    #               <p>If you have specified that EventBridge use a customer managed key for encrypting the source event bus, we strongly recommend you also specify a 
+    #               <p>If you have specified that EventBridge use a customer managed key for encrypting the source event bus, we strongly recommend you also specify a
     #           customer managed key for any archives for the event bus as well. </p>
     #               <p>For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/encryption-archives.html">Encrypting archives</a> in the <i>Amazon EventBridge User Guide</i>.</p>
     #            </important>
@@ -3039,7 +3041,7 @@ module Aws::EventBridge
     #               </i>.</p>
     # @option params [String] :kms_key_identifier
     #   <p>The identifier of the KMS
-    #         customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt this connection. The identifier can be the key 
+    #         customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt this connection. The identifier can be the key
     #         Amazon Resource Name (ARN), KeyId, key alias, or key alias ARN.</p>
     #            <p>If you do not specify a customer managed key identifier, EventBridge uses an
     #           Amazon Web Services owned key to encrypt the connection.</p>
@@ -3227,7 +3229,7 @@ module Aws::EventBridge
     #   <p>The name of the event bus.</p>
     # @option params [String] :kms_key_identifier
     #   <p>The identifier of the KMS
-    #         customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt events on this event bus. The identifier can be the key 
+    #         customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt events on this event bus. The identifier can be the key
     #         Amazon Resource Name (ARN), KeyId, key alias, or key alias ARN.</p>
     #            <p>If you do not specify a customer managed key identifier, EventBridge uses an
     #           Amazon Web Services owned key to encrypt events on the event bus.</p>
@@ -3252,7 +3254,7 @@ module Aws::EventBridge
     #           use an Amazon Web Services owned key. For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-encryption-event-bus-cmkey.html">Encrypting events</a> in the <i>Amazon EventBridge User Guide</i>.</p>
     #            </note>
     #            <important>
-    #               <p>If you have specified that EventBridge use a customer managed key for encrypting the source event bus, we strongly recommend you also specify a 
+    #               <p>If you have specified that EventBridge use a customer managed key for encrypting the source event bus, we strongly recommend you also specify a
     #           customer managed key for any archives for the event bus as well. </p>
     #               <p>For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/encryption-archives.html">Encrypting archives</a> in the <i>Amazon EventBridge User Guide</i>.</p>
     #            </important>
@@ -3265,7 +3267,7 @@ module Aws::EventBridge
     #           Guide</i>.</p>
     # @option params [Types::LogConfig] :log_config
     #   <p>The logging configuration settings for the event bus.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/eb-event-bus-logs.html">Configuring logs for event buses</a> in the <i>EventBridge User Guide</i>.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-bus-logs.html">Configuring logs for event buses</a> in the <i>EventBridge User Guide</i>.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     name: "EventBusName",

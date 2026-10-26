@@ -12,14 +12,16 @@ module Aws::WorkspacesInstances
     AssociateVolumeRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.workspacesinstances#AssociateVolumeRequest", name: "AssociateVolumeRequest")
     AssociateVolumeResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.workspacesinstances#AssociateVolumeResponse", name: "AssociateVolumeResponse")
     AutoRecoveryEnum = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.workspacesinstances#AutoRecoveryEnum", name: "AutoRecoveryEnum")
-    AvailabilityZone = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.workspacesinstances#AvailabilityZone", name: "AvailabilityZone", traits: {"smithy.api#pattern" => "^[a-z]{2}-[a-z]+-\\d[a-z](-[a-z0-9]+)?$"})
+    AvailabilityZone = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.workspacesinstances#AvailabilityZone", name: "AvailabilityZone", traits: {"smithy.api#pattern" => "^[a-z]{2}-[a-z]+-\\d(?:[a-z]|-[a-z]+-\\d[a-z])$"})
     BandwidthWeightingEnum = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.workspacesinstances#BandwidthWeightingEnum", name: "BandwidthWeightingEnum")
+    BillingConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.workspacesinstances#BillingConfiguration", name: "BillingConfiguration")
+    BillingMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.workspacesinstances#BillingMode", name: "BillingMode")
     BlockDeviceMappingRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.workspacesinstances#BlockDeviceMappingRequest", name: "BlockDeviceMappingRequest")
     BlockDeviceMappings = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.workspacesinstances#BlockDeviceMappings", name: "BlockDeviceMappings")
     CapacityReservationPreferenceEnum = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.workspacesinstances#CapacityReservationPreferenceEnum", name: "CapacityReservationPreferenceEnum")
     CapacityReservationSpecification = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.workspacesinstances#CapacityReservationSpecification", name: "CapacityReservationSpecification")
     CapacityReservationTarget = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.workspacesinstances#CapacityReservationTarget", name: "CapacityReservationTarget")
-    ClientToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.workspacesinstances#ClientToken", name: "ClientToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#sensitive" => {}})
+    ClientToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.workspacesinstances#ClientToken", name: "ClientToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[\\x20-\\x7E]+$", "smithy.api#sensitive" => {}})
     ConflictException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.workspacesinstances#ConflictException", name: "ConflictException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 409})
     ConnectionTrackingSpecificationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.workspacesinstances#ConnectionTrackingSpecificationRequest", name: "ConnectionTrackingSpecificationRequest")
     CpuCreditsEnum = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.workspacesinstances#CpuCreditsEnum", name: "CpuCreditsEnum")
@@ -56,6 +58,8 @@ module Aws::WorkspacesInstances
     HttpTokensEnum = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.workspacesinstances#HttpTokensEnum", name: "HttpTokensEnum")
     IamInstanceProfileSpecification = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.workspacesinstances#IamInstanceProfileSpecification", name: "IamInstanceProfileSpecification")
     ImageId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.workspacesinstances#ImageId", name: "ImageId", traits: {"smithy.api#pattern" => "^ami-[0-9a-zA-Z]{1,63}$"})
+    InstanceConfigurationFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.workspacesinstances#InstanceConfigurationFilter", name: "InstanceConfigurationFilter")
+    InstanceConfigurationTenancyEnum = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.workspacesinstances#InstanceConfigurationTenancyEnum", name: "InstanceConfigurationTenancyEnum")
     InstanceInterruptionBehaviorEnum = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.workspacesinstances#InstanceInterruptionBehaviorEnum", name: "InstanceInterruptionBehaviorEnum")
     InstanceIpv6Address = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.workspacesinstances#InstanceIpv6Address", name: "InstanceIpv6Address")
     InstanceMaintenanceOptionsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.workspacesinstances#InstanceMaintenanceOptionsRequest", name: "InstanceMaintenanceOptionsRequest")
@@ -64,7 +68,7 @@ module Aws::WorkspacesInstances
     InstanceMetadataTagsEnum = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.workspacesinstances#InstanceMetadataTagsEnum", name: "InstanceMetadataTagsEnum")
     InstanceNetworkInterfaceSpecification = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.workspacesinstances#InstanceNetworkInterfaceSpecification", name: "InstanceNetworkInterfaceSpecification")
     InstanceNetworkPerformanceOptionsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.workspacesinstances#InstanceNetworkPerformanceOptionsRequest", name: "InstanceNetworkPerformanceOptionsRequest")
-    InstanceType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.workspacesinstances#InstanceType", name: "InstanceType", traits: {"smithy.api#pattern" => "^([a-z0-9-]+)\\.([a-z0-9]+)$"})
+    InstanceType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.workspacesinstances#InstanceType", name: "InstanceType", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^([a-z0-9-]+)\\.([a-z0-9]+)$"})
     InstanceTypeInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.workspacesinstances#InstanceTypeInfo", name: "InstanceTypeInfo")
     InstanceTypes = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.workspacesinstances#InstanceTypes", name: "InstanceTypes")
     InterfaceTypeEnum = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.workspacesinstances#InterfaceTypeEnum", name: "InterfaceTypeEnum")
@@ -81,6 +85,7 @@ module Aws::WorkspacesInstances
     KmsKeyId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.workspacesinstances#KmsKeyId", name: "KmsKeyId", traits: {"smithy.api#length" => {"min" => 0, "max" => 128}, "smithy.api#sensitive" => {}})
     LicenseConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.workspacesinstances#LicenseConfigurationRequest", name: "LicenseConfigurationRequest")
     LicenseSpecifications = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.workspacesinstances#LicenseSpecifications", name: "LicenseSpecifications")
+    ListInstanceTypesMaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.workspacesinstances#ListInstanceTypesMaxResults", name: "ListInstanceTypesMaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 600}})
     ListInstanceTypesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.workspacesinstances#ListInstanceTypesRequest", name: "ListInstanceTypesRequest")
     ListInstanceTypesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.workspacesinstances#ListInstanceTypesResponse", name: "ListInstanceTypesResponse")
     ListRegionsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.workspacesinstances#ListRegionsRequest", name: "ListRegionsRequest")
@@ -92,12 +97,14 @@ module Aws::WorkspacesInstances
     ManagedInstanceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.workspacesinstances#ManagedInstanceRequest", name: "ManagedInstanceRequest")
     MarketTypeEnum = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.workspacesinstances#MarketTypeEnum", name: "MarketTypeEnum")
     MaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.workspacesinstances#MaxResults", name: "MaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 25}})
+    NestedVirtualizationEnum = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.workspacesinstances#NestedVirtualizationEnum", name: "NestedVirtualizationEnum")
     NetworkInterfaceId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.workspacesinstances#NetworkInterfaceId", name: "NetworkInterfaceId", traits: {"smithy.api#pattern" => "^eni-[0-9a-zA-Z]{1,63}$"})
     NetworkInterfaces = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.workspacesinstances#NetworkInterfaces", name: "NetworkInterfaces")
     NextToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.workspacesinstances#NextToken", name: "NextToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#sensitive" => {}})
     NonNegativeInteger = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.workspacesinstances#NonNegativeInteger", name: "NonNegativeInteger", traits: {"smithy.api#range" => {"min" => 0}})
     Placement = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.workspacesinstances#Placement", name: "Placement")
     PlacementGroupId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.workspacesinstances#PlacementGroupId", name: "PlacementGroupId", traits: {"smithy.api#pattern" => "^pg-[0-9a-zA-Z]{1,63}$"})
+    PlatformTypeEnum = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.workspacesinstances#PlatformTypeEnum", name: "PlatformTypeEnum")
     PrivateDnsNameOptionsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.workspacesinstances#PrivateDnsNameOptionsRequest", name: "PrivateDnsNameOptionsRequest")
     PrivateIpAddressSpecification = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.workspacesinstances#PrivateIpAddressSpecification", name: "PrivateIpAddressSpecification")
     PrivateIpAddresses = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.workspacesinstances#PrivateIpAddresses", name: "PrivateIpAddresses")
@@ -120,10 +127,12 @@ module Aws::WorkspacesInstances
     String128 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.workspacesinstances#String128", name: "String128", traits: {"smithy.api#length" => {"min" => 0, "max" => 128}})
     String64 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.workspacesinstances#String64", name: "String64", traits: {"smithy.api#length" => {"min" => 0, "max" => 64}})
     SubnetId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.workspacesinstances#SubnetId", name: "SubnetId", traits: {"smithy.api#pattern" => "^subnet-[0-9a-zA-Z]{1,63}$"})
+    SupportedInstanceConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.workspacesinstances#SupportedInstanceConfiguration", name: "SupportedInstanceConfiguration")
+    SupportedInstanceConfigurations = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.workspacesinstances#SupportedInstanceConfigurations", name: "SupportedInstanceConfigurations")
     Tag = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.workspacesinstances#Tag", name: "Tag")
     TagKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.workspacesinstances#TagKey", name: "TagKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]+)$"})
-    TagKeyList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.workspacesinstances#TagKeyList", name: "TagKeyList", traits: {"smithy.api#length" => {"min" => 1, "max" => 30}})
-    TagList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.workspacesinstances#TagList", name: "TagList", traits: {"smithy.api#length" => {"min" => 0, "max" => 30}})
+    TagKeyList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.workspacesinstances#TagKeyList", name: "TagKeyList", traits: {"smithy.api#length" => {"min" => 1, "max" => 50}})
+    TagList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.workspacesinstances#TagList", name: "TagList", traits: {"smithy.api#length" => {"min" => 0, "max" => 50}})
     TagResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.workspacesinstances#TagResourceRequest", name: "TagResourceRequest")
     TagResourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.workspacesinstances#TagResourceResponse", name: "TagResourceResponse")
     TagSpecification = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.workspacesinstances#TagSpecification", name: "TagSpecification")
@@ -161,6 +170,10 @@ module Aws::WorkspacesInstances
     BandwidthWeightingEnum.add_member(:default, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEFAULT", traits: {"smithy.api#enumValue" => "default"}))
     BandwidthWeightingEnum.add_member(:vpc_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VPC_1", traits: {"smithy.api#enumValue" => "vpc-1"}))
     BandwidthWeightingEnum.add_member(:ebs_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EBS_1", traits: {"smithy.api#enumValue" => "ebs-1"}))
+    BillingConfiguration.add_member(:billing_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingMode, name: "BillingMode", traits: {"smithy.api#required" => {}}))
+    BillingConfiguration.type = Types::BillingConfiguration
+    BillingMode.add_member(:monthly, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MONTHLY", traits: {"smithy.api#enumValue" => "MONTHLY"}))
+    BillingMode.add_member(:hourly, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HOURLY", traits: {"smithy.api#enumValue" => "HOURLY"}))
     BlockDeviceMappingRequest.add_member(:device_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceName, name: "DeviceName"))
     BlockDeviceMappingRequest.add_member(:ebs, ::Smithy::Schema::Shapes::MemberShape.new(target: EbsBlockDevice, name: "Ebs"))
     BlockDeviceMappingRequest.add_member(:no_device, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceName, name: "NoDevice"))
@@ -189,6 +202,7 @@ module Aws::WorkspacesInstances
     CpuOptionsRequest.add_member(:amd_sev_snp, ::Smithy::Schema::Shapes::MemberShape.new(target: AmdSevSnpEnum, name: "AmdSevSnp"))
     CpuOptionsRequest.add_member(:core_count, ::Smithy::Schema::Shapes::MemberShape.new(target: NonNegativeInteger, name: "CoreCount"))
     CpuOptionsRequest.add_member(:threads_per_core, ::Smithy::Schema::Shapes::MemberShape.new(target: NonNegativeInteger, name: "ThreadsPerCore"))
+    CpuOptionsRequest.add_member(:nested_virtualization, ::Smithy::Schema::Shapes::MemberShape.new(target: NestedVirtualizationEnum, name: "NestedVirtualization"))
     CpuOptionsRequest.type = Types::CpuOptionsRequest
     CreateVolumeRequest.add_member(:availability_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: String64, name: "AvailabilityZone", traits: {"smithy.api#required" => {}}))
     CreateVolumeRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
@@ -206,6 +220,7 @@ module Aws::WorkspacesInstances
     CreateWorkspaceInstanceRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     CreateWorkspaceInstanceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     CreateWorkspaceInstanceRequest.add_member(:managed_instance, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedInstanceRequest, name: "ManagedInstance", traits: {"smithy.api#required" => {}}))
+    CreateWorkspaceInstanceRequest.add_member(:billing_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingConfiguration, name: "BillingConfiguration"))
     CreateWorkspaceInstanceRequest.type = Types::CreateWorkspaceInstanceRequest
     CreateWorkspaceInstanceResponse.add_member(:workspace_instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceInstanceId, name: "WorkspaceInstanceId"))
     CreateWorkspaceInstanceResponse.type = Types::CreateWorkspaceInstanceResponse
@@ -253,6 +268,7 @@ module Aws::WorkspacesInstances
     GetWorkspaceInstanceResponse.add_member(:provision_state, ::Smithy::Schema::Shapes::MemberShape.new(target: ProvisionStateEnum, name: "ProvisionState"))
     GetWorkspaceInstanceResponse.add_member(:workspace_instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceInstanceId, name: "WorkspaceInstanceId"))
     GetWorkspaceInstanceResponse.add_member(:ec2_managed_instance, ::Smithy::Schema::Shapes::MemberShape.new(target: EC2ManagedInstance, name: "EC2ManagedInstance"))
+    GetWorkspaceInstanceResponse.add_member(:billing_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingConfiguration, name: "BillingConfiguration"))
     GetWorkspaceInstanceResponse.type = Types::GetWorkspaceInstanceResponse
     HibernationOptionsRequest.add_member(:configured, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "Configured"))
     HibernationOptionsRequest.type = Types::HibernationOptionsRequest
@@ -267,6 +283,12 @@ module Aws::WorkspacesInstances
     IamInstanceProfileSpecification.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "Arn"))
     IamInstanceProfileSpecification.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String64, name: "Name"))
     IamInstanceProfileSpecification.type = Types::IamInstanceProfileSpecification
+    InstanceConfigurationFilter.add_member(:billing_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingMode, name: "BillingMode", traits: {"smithy.api#required" => {}}))
+    InstanceConfigurationFilter.add_member(:platform_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PlatformTypeEnum, name: "PlatformType", traits: {"smithy.api#required" => {}}))
+    InstanceConfigurationFilter.add_member(:tenancy, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceConfigurationTenancyEnum, name: "Tenancy", traits: {"smithy.api#required" => {}}))
+    InstanceConfigurationFilter.type = Types::InstanceConfigurationFilter
+    InstanceConfigurationTenancyEnum.add_member(:shared, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SHARED", traits: {"smithy.api#enumValue" => "SHARED"}))
+    InstanceConfigurationTenancyEnum.add_member(:dedicated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEDICATED", traits: {"smithy.api#enumValue" => "DEDICATED"}))
     InstanceInterruptionBehaviorEnum.add_member(:hibernate, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HIBERNATE", traits: {"smithy.api#enumValue" => "hibernate"}))
     InstanceInterruptionBehaviorEnum.add_member(:stop, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STOP", traits: {"smithy.api#enumValue" => "stop"}))
     InstanceIpv6Address.add_member(:ipv6_address, ::Smithy::Schema::Shapes::MemberShape.new(target: Ipv6Address, name: "Ipv6Address"))
@@ -310,6 +332,7 @@ module Aws::WorkspacesInstances
     InstanceNetworkPerformanceOptionsRequest.add_member(:bandwidth_weighting, ::Smithy::Schema::Shapes::MemberShape.new(target: BandwidthWeightingEnum, name: "BandwidthWeighting"))
     InstanceNetworkPerformanceOptionsRequest.type = Types::InstanceNetworkPerformanceOptionsRequest
     InstanceTypeInfo.add_member(:instance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceType, name: "InstanceType"))
+    InstanceTypeInfo.add_member(:supported_instance_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: SupportedInstanceConfigurations, name: "SupportedInstanceConfigurations"))
     InstanceTypeInfo.type = Types::InstanceTypeInfo
     InstanceTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceTypeInfo, name: "member"))
     InterfaceTypeEnum.add_member(:interface, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTERFACE", traits: {"smithy.api#enumValue" => "interface"}))
@@ -328,8 +351,9 @@ module Aws::WorkspacesInstances
     LicenseConfigurationRequest.add_member(:license_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "LicenseConfigurationArn"))
     LicenseConfigurationRequest.type = Types::LicenseConfigurationRequest
     LicenseSpecifications.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseConfigurationRequest, name: "member"))
-    ListInstanceTypesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults"))
+    ListInstanceTypesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ListInstanceTypesMaxResults, name: "MaxResults"))
     ListInstanceTypesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    ListInstanceTypesRequest.add_member(:instance_configuration_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceConfigurationFilter, name: "InstanceConfigurationFilter"))
     ListInstanceTypesRequest.type = Types::ListInstanceTypesRequest
     ListInstanceTypesResponse.add_member(:instance_types, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceTypes, name: "InstanceTypes", traits: {"smithy.api#required" => {}}))
     ListInstanceTypesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
@@ -386,6 +410,8 @@ module Aws::WorkspacesInstances
     ManagedInstanceRequest.type = Types::ManagedInstanceRequest
     MarketTypeEnum.add_member(:spot, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SPOT", traits: {"smithy.api#enumValue" => "spot"}))
     MarketTypeEnum.add_member(:capacity_block, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CAPACITY_BLOCK", traits: {"smithy.api#enumValue" => "capacity-block"}))
+    NestedVirtualizationEnum.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "enabled"}))
+    NestedVirtualizationEnum.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "disabled"}))
     NetworkInterfaces.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceNetworkInterfaceSpecification, name: "member"))
     Placement.add_member(:affinity, ::Smithy::Schema::Shapes::MemberShape.new(target: String64, name: "Affinity"))
     Placement.add_member(:availability_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZone, name: "AvailabilityZone"))
@@ -396,6 +422,13 @@ module Aws::WorkspacesInstances
     Placement.add_member(:partition_number, ::Smithy::Schema::Shapes::MemberShape.new(target: NonNegativeInteger, name: "PartitionNumber"))
     Placement.add_member(:tenancy, ::Smithy::Schema::Shapes::MemberShape.new(target: TenancyEnum, name: "Tenancy"))
     Placement.type = Types::Placement
+    PlatformTypeEnum.add_member(:windows, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WINDOWS", traits: {"smithy.api#enumValue" => "Windows"}))
+    PlatformTypeEnum.add_member(:windows_byol, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WINDOWS_BYOL", traits: {"smithy.api#enumValue" => "Windows BYOL"}))
+    PlatformTypeEnum.add_member(:linux_unix, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LINUX_UNIX", traits: {"smithy.api#enumValue" => "Linux/UNIX"}))
+    PlatformTypeEnum.add_member(:ubuntu_pro, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UBUNTU_PRO", traits: {"smithy.api#enumValue" => "Ubuntu Pro Linux"}))
+    PlatformTypeEnum.add_member(:rhel, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RHEL", traits: {"smithy.api#enumValue" => "Red Hat Enterprise Linux"}))
+    PlatformTypeEnum.add_member(:linux_byol, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LINUX_BYOL", traits: {"smithy.api#enumValue" => "Red Hat BYOL Linux"}))
+    PlatformTypeEnum.add_member(:suse, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUSE", traits: {"smithy.api#enumValue" => "SUSE Linux"}))
     PrivateDnsNameOptionsRequest.add_member(:hostname_type, ::Smithy::Schema::Shapes::MemberShape.new(target: HostnameTypeEnum, name: "HostnameType"))
     PrivateDnsNameOptionsRequest.add_member(:enable_resource_name_dns_a_record, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "EnableResourceNameDnsARecord"))
     PrivateDnsNameOptionsRequest.add_member(:enable_resource_name_dns_aaaa_record, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "EnableResourceNameDnsAAAARecord"))
@@ -440,6 +473,11 @@ module Aws::WorkspacesInstances
     SpotMarketOptions.add_member(:spot_instance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: SpotInstanceTypeEnum, name: "SpotInstanceType"))
     SpotMarketOptions.add_member(:valid_until_utc, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "ValidUntilUtc"))
     SpotMarketOptions.type = Types::SpotMarketOptions
+    SupportedInstanceConfiguration.add_member(:billing_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingMode, name: "BillingMode"))
+    SupportedInstanceConfiguration.add_member(:platform_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PlatformTypeEnum, name: "PlatformType"))
+    SupportedInstanceConfiguration.add_member(:tenancy, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceConfigurationTenancyEnum, name: "Tenancy"))
+    SupportedInstanceConfiguration.type = Types::SupportedInstanceConfiguration
+    SupportedInstanceConfigurations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SupportedInstanceConfiguration, name: "member"))
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key"))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value"))
     Tag.type = Types::Tag
@@ -501,7 +539,7 @@ module Aws::WorkspacesInstances
       service.id = "com.amazonaws.workspacesinstances#EUCMIFrontendAPIService"
       service.name = "EUCMIFrontendAPIService"
       service.version = "2022-07-26"
-      service.traits = {"aws.api#service" => {"sdkId" => "Workspaces Instances", "arnNamespace" => "workspaces-instances", "cloudFormationName" => "WorkspacesInstances", "cloudTrailEventSource" => "workspaces-instances.amazonaws.com"}, "aws.auth#sigv4" => {"name" => "workspaces-instances"}, "aws.endpoints#dualStackOnlyEndpoints" => {}, "aws.endpoints#standardRegionalEndpoints" => {}, "aws.iam#defineConditionKeys" => {"aws:ResourceTag/${TagKey}" => {"type" => "String", "documentation" => "Filters access based on the tags associated with the resource", "externalDocumentation" => "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-resourcetag"}, "aws:RequestTag/${TagKey}" => {"type" => "String", "documentation" => "Filters access based on the tags that are passed in the request", "externalDocumentation" => "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-requesttag"}, "aws:TagKeys" => {"type" => "ArrayOfString", "documentation" => "Filters access based on the tag keys that are passed in the request", "externalDocumentation" => "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-tagkeys"}}, "aws.iam#supportedPrincipalTypes" => ["Root", "IAMUser", "IAMRole", "FederatedUser"], "aws.protocols#awsJson1_0" => {}, "smithy.api#title" => "Amazon Workspaces Instances"}
+      service.traits = {"aws.api#service" => {"sdkId" => "Workspaces Instances", "arnNamespace" => "workspaces-instances", "cloudFormationName" => "WorkspacesInstances", "cloudTrailEventSource" => "workspaces-instances.amazonaws.com"}, "aws.auth#sigv4" => {"name" => "workspaces-instances"}, "aws.endpoints#dualStackOnlyEndpoints" => {}, "aws.endpoints#standardRegionalEndpoints" => {}, "aws.iam#defineConditionKeys" => {"aws:ResourceTag/${TagKey}" => {"type" => "String", "documentation" => "Filters access based on the tags associated with the resource", "externalDocumentation" => "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-resourcetag"}, "aws:RequestTag/${TagKey}" => {"type" => "String", "documentation" => "Filters access based on the tags that are passed in the request", "externalDocumentation" => "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-requesttag"}, "aws:TagKeys" => {"type" => "ArrayOfString", "documentation" => "Filters access based on the tag keys that are passed in the request", "externalDocumentation" => "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-tagkeys"}}, "aws.iam#supportedPrincipalTypes" => ["Root", "IAMUser", "IAMRole", "FederatedUser"], "aws.protocols#awsJson1_0" => {}, "smithy.api#title" => "Amazon Workspaces Instances", "smithy.protocols#rpcv2Cbor" => {}, "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}, "Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://workspaces-instances-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://workspaces-instances.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 6, "nodes" => "/////wAAAAH/////AAAAAAAAAAYAAAADAAAAAQAAAAQF9eEFAAAAAgAAAAUF9eEFAAAAAwX14QMF9eEEAAAAAwX14QEF9eEC"}}
       service.add_operation(:associate_volume, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workspacesinstances#AssociateVolume"
         operation.name = "AssociateVolume"

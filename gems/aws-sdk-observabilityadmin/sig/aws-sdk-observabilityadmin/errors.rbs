@@ -6,16 +6,28 @@ module Aws::ObservabilityAdmin
     end
     class ConflictException < Smithy::Client::ServiceError
       def message: () -> String?
+      def resource_id: () -> String?
+      def resource_type: () -> String?
     end
     class InternalServerException < Smithy::Client::ServiceError
       def message: () -> String?
       def amzn_error_type: () -> String?
+      def retry_after_seconds: () -> Integer?
+    end
+    class InvalidStateException < Smithy::Client::ServiceError
+      def message: () -> String?
     end
     class ResourceNotFoundException < Smithy::Client::ServiceError
       def message: () -> String?
+      def resource_id: () -> String?
+      def resource_type: () -> String?
     end
     class ServiceQuotaExceededException < Smithy::Client::ServiceError
       def message: () -> String?
+      def resource_id: () -> String?
+      def resource_type: () -> String?
+      def service_code: () -> String?
+      def quota_code: () -> String?
       def amzn_error_type: () -> String?
     end
     class TooManyRequestsException < Smithy::Client::ServiceError
@@ -23,6 +35,7 @@ module Aws::ObservabilityAdmin
     end
     class ValidationException < Smithy::Client::ServiceError
       def message: () -> String?
+      def errors: () -> Array[Types::ValidationError]?
     end
   end
 end

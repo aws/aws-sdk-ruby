@@ -4,7 +4,19 @@ module Aws::Signin
       def error: () -> String?
       def message: () -> String?
     end
+    class ConflictException < Smithy::Client::ServiceError
+      def error: () -> String?
+      def message: () -> String?
+    end
     class InternalServerException < Smithy::Client::ServiceError
+      def error: () -> String?
+      def message: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def error: () -> String?
+      def message: () -> String?
+    end
+    class ServiceQuotaExceededException < Smithy::Client::ServiceError
       def error: () -> String?
       def message: () -> String?
     end

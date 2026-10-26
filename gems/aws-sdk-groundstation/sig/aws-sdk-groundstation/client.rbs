@@ -47,6 +47,7 @@ module Aws::GroundStation
     interface _CancelContactResponse
       include Smithy::Client::_Response[Types::CancelContactOutput]
       def contact_id: () -> String?
+      def version_id: () -> Integer?
     end
     def cancel_contact: (
       ?contact_id: String
@@ -109,6 +110,15 @@ module Aws::GroundStation
           bucket_arn: String,
           role_arn: String,
           prefix: String
+        },
+        telemetry_sink_config: {
+          telemetry_sink_type: String,
+          telemetry_sink_data: {
+            kinesis_data_stream_data: {
+              kinesis_role_arn: untyped,
+              kinesis_data_stream_arn: String
+            }
+          }
         }
       },
       ?tags: Hash[String, String]
@@ -154,6 +164,28 @@ module Aws::GroundStation
             agent_status: String,
             audit_results: String
           },
+          uplink_aws_ground_station_agent_endpoint: {
+            name: untyped,
+            dataflow_details: {
+              agent_connection_details: {
+                ingress_address_and_port: untyped,
+                agent_ip_and_port_address: untyped
+              }
+            },
+            agent_status: untyped,
+            audit_results: untyped
+          },
+          downlink_aws_ground_station_agent_endpoint: {
+            name: untyped,
+            dataflow_details: {
+              agent_connection_details: {
+                agent_ip_and_port_address: untyped,
+                egress_address_and_port: untyped
+              }
+            },
+            agent_status: untyped,
+            audit_results: untyped
+          },
           health_status: String,
           health_reasons: Array[String]
         }
@@ -162,6 +194,53 @@ module Aws::GroundStation
       ?contact_pre_pass_duration_seconds: Integer,
       ?contact_post_pass_duration_seconds: Integer
     ) -> _CreateDataflowEndpointGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDataflowEndpointGroupResponse
+
+    interface _CreateDataflowEndpointGroupV2Response
+      include Smithy::Client::_Response[Types::CreateDataflowEndpointGroupV2Response]
+      def dataflow_endpoint_group_id: () -> String?
+    end
+    def create_dataflow_endpoint_group_v2: (
+      ?endpoints: Array[
+        {
+          uplink_aws_ground_station_agent_endpoint: {
+            name: String,
+            dataflow_details: {
+              agent_connection_details: {
+                ingress_address_and_port: {
+                  socket_address: {
+                    name: String,
+                    port: Integer
+                  },
+                  mtu: untyped
+                },
+                agent_ip_and_port_address: {
+                  socket_address: {
+                    name: String,
+                    port_range: {
+                      minimum: untyped,
+                      maximum: untyped
+                    }
+                  },
+                  mtu: untyped
+                }
+              }
+            }
+          },
+          downlink_aws_ground_station_agent_endpoint: {
+            name: untyped,
+            dataflow_details: {
+              agent_connection_details: {
+                agent_ip_and_port_address: untyped,
+                egress_address_and_port: untyped
+              }
+            }
+          }
+        }
+      ],
+      ?contact_pre_pass_duration_seconds: Integer,
+      ?contact_post_pass_duration_seconds: Integer,
+      ?tags: Hash[String, String]
+    ) -> _CreateDataflowEndpointGroupV2Response | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDataflowEndpointGroupV2Response
 
     interface _CreateEphemerisResponse
       include Smithy::Client::_Response[Types::CreateEphemerisOutput]
@@ -195,6 +274,31 @@ module Aws::GroundStation
         oem: {
           s3_object: untyped,
           oem_data: String
+        },
+        az_el: {
+          ground_station: String,
+          data: {
+            s3_object: untyped,
+            az_el_data: {
+              angle_unit: String,
+              az_el_segment_list: Array[
+                {
+                  reference_epoch: untyped,
+                  valid_time_range: {
+                    start_time: untyped,
+                    end_time: untyped
+                  },
+                  az_el_list: Array[
+                    {
+                      dt: Float,
+                      az: untyped,
+                      el: untyped
+                    }
+                  ]
+                }
+              ]
+            }
+          }
         }
       },
       ?tags: Hash[String, String]
@@ -213,6 +317,7 @@ module Aws::GroundStation
         Array[String]
       ],
       ?tracking_config_arn: String,
+      ?telemetry_sink_config_arn: String,
       ?tags: Hash[String, String],
       ?streams_kms_key: {
         kms_key_arn: String,
@@ -258,7 +363,7 @@ module Aws::GroundStation
     ) -> _DeleteMissionProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteMissionProfileResponse
 
     interface _DescribeContactResponse
-      include Smithy::Client::_Response[Types::DescribeContactOutput]
+      include Smithy::Client::_Response[Types::DescribeContactResponse]
       def contact_id: () -> String?
       def mission_profile_arn: () -> String?
       def satellite_arn: () -> String?
@@ -275,13 +380,43 @@ module Aws::GroundStation
       def dataflow_list: () -> Array[Types::DataflowDetail]?
       def visibility_start_time: () -> Time?
       def visibility_end_time: () -> Time?
+      def tracking_overrides: () -> Types::TrackingOverrides?
+      def ephemeris: () -> Types::EphemerisResponseData?
+      def version: () -> Types::ContactVersion?
     end
     def describe_contact: (
       ?contact_id: String
     ) -> _DescribeContactResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeContactResponse
 
+    interface _DescribeContactVersionResponse
+      include Smithy::Client::_Response[Types::DescribeContactVersionResponse]
+      def contact_id: () -> String?
+      def mission_profile_arn: () -> String?
+      def satellite_arn: () -> String?
+      def start_time: () -> Time?
+      def end_time: () -> Time?
+      def pre_pass_start_time: () -> Time?
+      def post_pass_end_time: () -> Time?
+      def ground_station: () -> String?
+      def contact_status: () -> String?
+      def error_message: () -> String?
+      def maximum_elevation: () -> Types::Elevation?
+      def tags: () -> Hash[String, String]?
+      def region: () -> String?
+      def dataflow_list: () -> Array[Types::DataflowDetail]?
+      def visibility_start_time: () -> Time?
+      def visibility_end_time: () -> Time?
+      def tracking_overrides: () -> Types::TrackingOverrides?
+      def ephemeris: () -> Types::EphemerisResponseData?
+      def version: () -> Types::ContactVersion?
+    end
+    def describe_contact_version: (
+      ?contact_id: String,
+      ?version_id: Integer
+    ) -> _DescribeContactVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeContactVersionResponse
+
     interface _DescribeEphemerisResponse
-      include Smithy::Client::_Response[Types::DescribeEphemerisOutput]
+      include Smithy::Client::_Response[Types::DescribeEphemerisResponse]
       def ephemeris_id: () -> String?
       def satellite_id: () -> String?
       def status: () -> String?
@@ -292,13 +427,14 @@ module Aws::GroundStation
       def tags: () -> Hash[String, String]?
       def supplied_data: () -> Types::EphemerisTypeDescription?
       def invalid_reason: () -> String?
+      def error_reasons: () -> Array[Types::EphemerisErrorReason]?
     end
     def describe_ephemeris: (
       ?ephemeris_id: String
     ) -> _DescribeEphemerisResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeEphemerisResponse
 
     interface _GetAgentConfigurationResponse
-      include Smithy::Client::_Response[Types::GetAgentConfigurationOutput]
+      include Smithy::Client::_Response[Types::GetAgentConfigurationResponse]
       def agent_id: () -> String?
       def tasking_document: () -> String?
     end
@@ -306,8 +442,19 @@ module Aws::GroundStation
       ?agent_id: String
     ) -> _GetAgentConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAgentConfigurationResponse
 
+    interface _GetAgentTaskResponseUrlResponse
+      include Smithy::Client::_Response[Types::GetAgentTaskResponseUrlResponse]
+      def agent_id: () -> String?
+      def task_id: () -> String?
+      def presigned_log_url: () -> String?
+    end
+    def get_agent_task_response_url: (
+      ?agent_id: String,
+      ?task_id: String
+    ) -> _GetAgentTaskResponseUrlResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAgentTaskResponseUrlResponse
+
     interface _GetConfigResponse
-      include Smithy::Client::_Response[Types::GetConfigOutput]
+      include Smithy::Client::_Response[Types::GetConfigResponse]
       def config_id: () -> String?
       def config_arn: () -> String?
       def name: () -> String?
@@ -321,7 +468,7 @@ module Aws::GroundStation
     ) -> _GetConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetConfigResponse
 
     interface _GetDataflowEndpointGroupResponse
-      include Smithy::Client::_Response[Types::GetDataflowEndpointGroupOutput]
+      include Smithy::Client::_Response[Types::GetDataflowEndpointGroupResponse]
       def dataflow_endpoint_group_id: () -> String?
       def dataflow_endpoint_group_arn: () -> String?
       def endpoints_details: () -> Array[Types::EndpointDetails]?
@@ -334,7 +481,7 @@ module Aws::GroundStation
     ) -> _GetDataflowEndpointGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDataflowEndpointGroupResponse
 
     interface _GetMinuteUsageResponse
-      include Smithy::Client::_Response[Types::GetMinuteUsageOutput]
+      include Smithy::Client::_Response[Types::GetMinuteUsageResponse]
       def is_reserved_minutes_customer: () -> bool?
       def total_reserved_minute_allocation: () -> Integer?
       def upcoming_minutes_scheduled: () -> Integer?
@@ -347,7 +494,7 @@ module Aws::GroundStation
     ) -> _GetMinuteUsageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMinuteUsageResponse
 
     interface _GetMissionProfileResponse
-      include Smithy::Client::_Response[Types::GetMissionProfileOutput]
+      include Smithy::Client::_Response[Types::GetMissionProfileResponse]
       def mission_profile_id: () -> String?
       def mission_profile_arn: () -> String?
       def name: () -> String?
@@ -357,6 +504,7 @@ module Aws::GroundStation
       def minimum_viable_contact_duration_seconds: () -> Integer?
       def dataflow_edges: () -> Array[Array[String]]?
       def tracking_config_arn: () -> String?
+      def telemetry_sink_config_arn: () -> String?
       def tags: () -> Hash[String, String]?
       def streams_kms_key: () -> Types::KmsKey?
       def streams_kms_role: () -> String?
@@ -377,8 +525,19 @@ module Aws::GroundStation
       ?satellite_id: String
     ) -> _GetSatelliteResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSatelliteResponse
 
+    interface _ListAntennasResponse
+      include Smithy::Client::_Response[Types::ListAntennasResponse]
+      def antenna_list: () -> Array[Types::AntennaListItem]?
+      def next_token: () -> String?
+    end
+    def list_antennas: (
+      ?ground_station_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAntennasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAntennasResponse
+
     interface _ListConfigsResponse
-      include Smithy::Client::_Response[Types::ListConfigsOutput]
+      include Smithy::Client::_Response[Types::ListConfigsResponse]
       def next_token: () -> String?
       def config_list: () -> Array[Types::ConfigListItem]?
     end
@@ -387,8 +546,19 @@ module Aws::GroundStation
       ?next_token: String
     ) -> _ListConfigsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListConfigsResponse
 
+    interface _ListContactVersionsResponse
+      include Smithy::Client::_Response[Types::ListContactVersionsResponse]
+      def next_token: () -> String?
+      def contact_versions_list: () -> Array[Types::ContactVersion]?
+    end
+    def list_contact_versions: (
+      ?contact_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListContactVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListContactVersionsResponse
+
     interface _ListContactsResponse
-      include Smithy::Client::_Response[Types::ListContactsOutput]
+      include Smithy::Client::_Response[Types::ListContactsResponse]
       def next_token: () -> String?
       def contact_list: () -> Array[Types::ContactData]?
     end
@@ -400,11 +570,16 @@ module Aws::GroundStation
       ?end_time: Time,
       ?ground_station: String,
       ?satellite_arn: String,
-      ?mission_profile_arn: String
+      ?mission_profile_arn: String,
+      ?ephemeris: {
+        az_el: {
+          id: String
+        }
+      }
     ) -> _ListContactsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListContactsResponse
 
     interface _ListDataflowEndpointGroupsResponse
-      include Smithy::Client::_Response[Types::ListDataflowEndpointGroupsOutput]
+      include Smithy::Client::_Response[Types::ListDataflowEndpointGroupsResponse]
       def next_token: () -> String?
       def dataflow_endpoint_group_list: () -> Array[Types::DataflowEndpointListItem]?
     end
@@ -414,12 +589,13 @@ module Aws::GroundStation
     ) -> _ListDataflowEndpointGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDataflowEndpointGroupsResponse
 
     interface _ListEphemeridesResponse
-      include Smithy::Client::_Response[Types::ListEphemeridesOutput]
+      include Smithy::Client::_Response[Types::ListEphemeridesResponse]
       def next_token: () -> String?
       def ephemerides: () -> Array[Types::EphemerisItem]?
     end
     def list_ephemerides: (
       ?satellite_id: String,
+      ?ephemeris_type: String,
       ?start_time: Time,
       ?end_time: Time,
       ?status_list: Array[String],
@@ -427,8 +603,22 @@ module Aws::GroundStation
       ?next_token: String
     ) -> _ListEphemeridesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEphemeridesResponse
 
+    interface _ListGroundStationReservationsResponse
+      include Smithy::Client::_Response[Types::ListGroundStationReservationsResponse]
+      def reservation_list: () -> Array[Types::GroundStationReservationListItem]?
+      def next_token: () -> String?
+    end
+    def list_ground_station_reservations: (
+      ?ground_station_id: String,
+      ?start_time: Time,
+      ?end_time: Time,
+      ?reservation_types: Array[String],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListGroundStationReservationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListGroundStationReservationsResponse
+
     interface _ListGroundStationsResponse
-      include Smithy::Client::_Response[Types::ListGroundStationsOutput]
+      include Smithy::Client::_Response[Types::ListGroundStationsResponse]
       def next_token: () -> String?
       def ground_station_list: () -> Array[Types::GroundStationData]?
     end
@@ -439,7 +629,7 @@ module Aws::GroundStation
     ) -> _ListGroundStationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListGroundStationsResponse
 
     interface _ListMissionProfilesResponse
-      include Smithy::Client::_Response[Types::ListMissionProfilesOutput]
+      include Smithy::Client::_Response[Types::ListMissionProfilesResponse]
       def next_token: () -> String?
       def mission_profile_list: () -> Array[Types::MissionProfileListItem]?
     end
@@ -449,7 +639,7 @@ module Aws::GroundStation
     ) -> _ListMissionProfilesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMissionProfilesResponse
 
     interface _ListSatellitesResponse
-      include Smithy::Client::_Response[Types::ListSatellitesOutput]
+      include Smithy::Client::_Response[Types::ListSatellitesResponse]
       def next_token: () -> String?
       def satellites: () -> Array[Types::SatelliteListItem]?
     end
@@ -459,7 +649,7 @@ module Aws::GroundStation
     ) -> _ListSatellitesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSatellitesResponse
 
     interface _ListTagsForResourceResponse
-      include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
       def tags: () -> Hash[String, String]?
     end
     def list_tags_for_resource: (
@@ -467,7 +657,7 @@ module Aws::GroundStation
     ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
 
     interface _RegisterAgentResponse
-      include Smithy::Client::_Response[Types::RegisterAgentOutput]
+      include Smithy::Client::_Response[Types::RegisterAgentResponse]
       def agent_id: () -> String?
     end
     def register_agent: (
@@ -495,6 +685,7 @@ module Aws::GroundStation
     interface _ReserveContactResponse
       include Smithy::Client::_Response[Types::ReserveContactOutput]
       def contact_id: () -> String?
+      def version_id: () -> Integer?
     end
     def reserve_contact: (
       ?mission_profile_arn: String,
@@ -502,11 +693,24 @@ module Aws::GroundStation
       ?start_time: Time,
       ?end_time: Time,
       ?ground_station: String,
-      ?tags: Hash[String, String]
+      ?tags: Hash[String, String],
+      ?tracking_overrides: {
+        program_track_settings: {
+          az_el: {
+            ephemeris_id: String
+          },
+          oem: {
+            ephemeris_id: untyped
+          },
+          tle: {
+            ephemeris_id: untyped
+          }
+        }
+      }
     ) -> _ReserveContactResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ReserveContactResponse
 
     interface _TagResourceResponse
-      include Smithy::Client::_Response[Types::TagResourceOutput]
+      include Smithy::Client::_Response[Types::TagResourceResponse]
     end
     def tag_resource: (
       ?resource_arn: String,
@@ -514,7 +718,7 @@ module Aws::GroundStation
     ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
 
     interface _UntagResourceResponse
-      include Smithy::Client::_Response[Types::UntagResourceOutput]
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
     end
     def untag_resource: (
       ?resource_arn: String,
@@ -522,7 +726,7 @@ module Aws::GroundStation
     ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
 
     interface _UpdateAgentStatusResponse
-      include Smithy::Client::_Response[Types::UpdateAgentStatusOutput]
+      include Smithy::Client::_Response[Types::UpdateAgentStatusResponse]
       def agent_id: () -> String?
     end
     def update_agent_status: (
@@ -604,9 +808,42 @@ module Aws::GroundStation
           bucket_arn: String,
           role_arn: String,
           prefix: String
+        },
+        telemetry_sink_config: {
+          telemetry_sink_type: String,
+          telemetry_sink_data: {
+            kinesis_data_stream_data: {
+              kinesis_role_arn: untyped,
+              kinesis_data_stream_arn: String
+            }
+          }
         }
       }
     ) -> _UpdateConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateConfigResponse
+
+    interface _UpdateContactResponse
+      include Smithy::Client::_Response[Types::UpdateContactResponse]
+      def contact_id: () -> String?
+      def version_id: () -> Integer?
+    end
+    def update_contact: (
+      ?contact_id: String,
+      ?client_token: String,
+      ?tracking_overrides: {
+        program_track_settings: {
+          az_el: {
+            ephemeris_id: String
+          },
+          oem: {
+            ephemeris_id: untyped
+          },
+          tle: {
+            ephemeris_id: untyped
+          }
+        }
+      },
+      ?satellite_arn: String
+    ) -> _UpdateContactResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateContactResponse
 
     interface _UpdateEphemerisResponse
       include Smithy::Client::_Response[Types::UpdateEphemerisOutput]
@@ -633,6 +870,7 @@ module Aws::GroundStation
         Array[String]
       ],
       ?tracking_config_arn: String,
+      ?telemetry_sink_config_arn: String,
       ?streams_kms_key: {
         kms_key_arn: String,
         kms_alias_arn: String,

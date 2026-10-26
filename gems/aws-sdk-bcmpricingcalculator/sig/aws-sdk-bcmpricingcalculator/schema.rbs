@@ -98,6 +98,7 @@ module Aws::BCMPricingCalculator
     ClientToken: StringShape
     ConflictException: StructureShape
     CostAmount: StructureShape
+    CostCategoryArn: StringShape
     CostDifference: StructureShape
     CreateBillEstimateRequest: StructureShape
     CreateBillEstimateResponse: StructureShape
@@ -125,6 +126,7 @@ module Aws::BCMPricingCalculator
     GetPreferencesResponse: StructureShape
     GetWorkloadEstimateRequest: StructureShape
     GetWorkloadEstimateResponse: StructureShape
+    GroupSharingPreferenceEnum: EnumShape
     HistoricalUsageEntity: StructureShape
     InternalServerException: StructureShape
     Key: StringShape

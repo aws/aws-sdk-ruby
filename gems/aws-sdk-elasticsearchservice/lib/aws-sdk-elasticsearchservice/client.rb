@@ -144,18 +144,18 @@ module Aws::ElasticsearchService
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -437,6 +437,20 @@ module Aws::ElasticsearchService
     #   <p>Specifies Auto-Tune options.</p>
     # @option params [Array<Types::Tag>] :tag_list
     #   <p>A list of <code>Tag</code> added during domain creation.</p>
+    # @option params [Types::DeploymentStrategyOptions] :deployment_strategy_options
+    #   <p>Specifies the deployment strategy options.</p>
+    # @option params [Types::AutomatedSnapshotPauseRequestOptions] :automated_snapshot_pause_options
+    #   <p>Specifies the automated snapshot pause options for the domain.</p>
+    #           <important>
+    #               <p>Suspending snapshots reduces data protection. You cannot restore your domain to
+    #                   points in time when snapshots are suspended. Use this feature only for short-term
+    #                   operational needs such as migrations or maintenance windows.</p>
+    #           </important>
+    #           <p>Maximum suspension duration: 3 days.</p>
+    # @option params [String] :use_case
+    #   <p>The primary use case for the domain. For valid values, see <code>DomainUseCase</code>.</p>
+    # @option params [String] :engine_mode
+    #   <p>The engine mode for the domain. For valid values and requirements, see <code>DomainEngineMode</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_name: "DomainName", # required
@@ -497,7 +511,7 @@ module Aws::ElasticsearchService
     #     },
     #     domain_endpoint_options: {
     #       enforce_https: false,
-    #       tls_security_policy: "Policy-Min-TLS-1-0-2019-07" # One of: ["Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07", "Policy-Min-TLS-1-2-PFS-2023-10"],
+    #       tls_security_policy: "Policy-Min-TLS-1-0-2019-07" # One of: ["Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07", "Policy-Min-TLS-1-2-PFS-2023-10", "Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08"],
     #       custom_endpoint_enabled: false,
     #       custom_endpoint: "DomainNameFqdn",
     #       custom_endpoint_certificate_arn: "ARN"
@@ -542,7 +556,17 @@ module Aws::ElasticsearchService
     #         key: "TagKey", # required
     #         value: "TagValue", # required
     #       }
-    #     ]
+    #     ],
+    #     deployment_strategy_options: {
+    #       deployment_strategy: "Default" # One of: ["Default", "CapacityOptimized"], # required
+    #     },
+    #     automated_snapshot_pause_options: {
+    #       enabled: false, # required
+    #       start_time: Time.now,
+    #       end_time: Time.now
+    #     },
+    #     use_case: "SEARCH" # One of: ["SEARCH", "VECTOR", "OBSERVABILITY", "MIXED"],
+    #     engine_mode: "GENERAL" # One of: ["GENERAL", "OPTIMIZED"]
     #   }
     #   options = {}
     #   response = client.create_elasticsearch_domain(params, options)
@@ -630,7 +654,7 @@ module Aws::ElasticsearchService
     #       },
     #       domain_endpoint_options: {
     #         enforce_https: false,
-    #         tls_security_policy: "Policy-Min-TLS-1-0-2019-07" # One of: ["Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07", "Policy-Min-TLS-1-2-PFS-2023-10"],
+    #         tls_security_policy: "Policy-Min-TLS-1-0-2019-07" # One of: ["Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07", "Policy-Min-TLS-1-2-PFS-2023-10", "Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08"],
     #         custom_endpoint_enabled: false,
     #         custom_endpoint: "DomainNameFqdn",
     #         custom_endpoint_certificate_arn: "ARN"
@@ -671,7 +695,18 @@ module Aws::ElasticsearchService
     #           pending_value: "String",
     #           value_type: "PLAIN_TEXT" # One of: ["PLAIN_TEXT", "STRINGIFIED_JSON"]
     #         }
-    #       ]
+    #       ],
+    #       deployment_strategy_options: {
+    #         deployment_strategy: "Default" # One of: ["Default", "CapacityOptimized"], # required
+    #       },
+    #       automated_snapshot_pause_options: {
+    #         enabled: false, # required
+    #         start_time: Time.now,
+    #         end_time: Time.now,
+    #         state: "Active" # One of: ["Active", "Completed", "Scheduled", "Disabled"]
+    #       },
+    #       use_case: "SEARCH" # One of: ["SEARCH", "VECTOR", "OBSERVABILITY", "MIXED"],
+    #       engine_mode: "GENERAL" # One of: ["GENERAL", "OPTIMIZED"]
     #     }
     #   }
     # @return [Types::CreateElasticsearchDomainResponse]
@@ -912,7 +947,7 @@ module Aws::ElasticsearchService
     #       },
     #       domain_endpoint_options: {
     #         enforce_https: false,
-    #         tls_security_policy: "Policy-Min-TLS-1-0-2019-07" # One of: ["Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07", "Policy-Min-TLS-1-2-PFS-2023-10"],
+    #         tls_security_policy: "Policy-Min-TLS-1-0-2019-07" # One of: ["Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07", "Policy-Min-TLS-1-2-PFS-2023-10", "Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08"],
     #         custom_endpoint_enabled: false,
     #         custom_endpoint: "DomainNameFqdn",
     #         custom_endpoint_certificate_arn: "ARN"
@@ -953,7 +988,18 @@ module Aws::ElasticsearchService
     #           pending_value: "String",
     #           value_type: "PLAIN_TEXT" # One of: ["PLAIN_TEXT", "STRINGIFIED_JSON"]
     #         }
-    #       ]
+    #       ],
+    #       deployment_strategy_options: {
+    #         deployment_strategy: "Default" # One of: ["Default", "CapacityOptimized"], # required
+    #       },
+    #       automated_snapshot_pause_options: {
+    #         enabled: false, # required
+    #         start_time: Time.now,
+    #         end_time: Time.now,
+    #         state: "Active" # One of: ["Active", "Completed", "Scheduled", "Disabled"]
+    #       },
+    #       use_case: "SEARCH" # One of: ["SEARCH", "VECTOR", "OBSERVABILITY", "MIXED"],
+    #       engine_mode: "GENERAL" # One of: ["GENERAL", "OPTIMIZED"]
     #     }
     #   }
     # @return [Types::DeleteElasticsearchDomainResponse]
@@ -1291,7 +1337,7 @@ module Aws::ElasticsearchService
     #       },
     #       domain_endpoint_options: {
     #         enforce_https: false,
-    #         tls_security_policy: "Policy-Min-TLS-1-0-2019-07" # One of: ["Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07", "Policy-Min-TLS-1-2-PFS-2023-10"],
+    #         tls_security_policy: "Policy-Min-TLS-1-0-2019-07" # One of: ["Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07", "Policy-Min-TLS-1-2-PFS-2023-10", "Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08"],
     #         custom_endpoint_enabled: false,
     #         custom_endpoint: "DomainNameFqdn",
     #         custom_endpoint_certificate_arn: "ARN"
@@ -1332,7 +1378,18 @@ module Aws::ElasticsearchService
     #           pending_value: "String",
     #           value_type: "PLAIN_TEXT" # One of: ["PLAIN_TEXT", "STRINGIFIED_JSON"]
     #         }
-    #       ]
+    #       ],
+    #       deployment_strategy_options: {
+    #         deployment_strategy: "Default" # One of: ["Default", "CapacityOptimized"], # required
+    #       },
+    #       automated_snapshot_pause_options: {
+    #         enabled: false, # required
+    #         start_time: Time.now,
+    #         end_time: Time.now,
+    #         state: "Active" # One of: ["Active", "Completed", "Scheduled", "Disabled"]
+    #       },
+    #       use_case: "SEARCH" # One of: ["SEARCH", "VECTOR", "OBSERVABILITY", "MIXED"],
+    #       engine_mode: "GENERAL" # One of: ["GENERAL", "OPTIMIZED"]
     #     }
     #   }
     # @return [Types::DescribeElasticsearchDomainResponse]
@@ -1514,7 +1571,7 @@ module Aws::ElasticsearchService
     #       domain_endpoint_options: {
     #         options: { # required
     #           enforce_https: false,
-    #           tls_security_policy: "Policy-Min-TLS-1-0-2019-07" # One of: ["Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07", "Policy-Min-TLS-1-2-PFS-2023-10"],
+    #           tls_security_policy: "Policy-Min-TLS-1-0-2019-07" # One of: ["Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07", "Policy-Min-TLS-1-2-PFS-2023-10", "Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08"],
     #           custom_endpoint_enabled: false,
     #           custom_endpoint: "DomainNameFqdn",
     #           custom_endpoint_certificate_arn: "ARN"
@@ -1591,7 +1648,54 @@ module Aws::ElasticsearchService
     #           pending_value: "String",
     #           value_type: "PLAIN_TEXT" # One of: ["PLAIN_TEXT", "STRINGIFIED_JSON"]
     #         }
-    #       ]
+    #       ],
+    #       deployment_strategy_options: {
+    #         options: { # required
+    #           deployment_strategy: "Default" # One of: ["Default", "CapacityOptimized"], # required
+    #         },
+    #         status: { # required
+    #           creation_date: Time.now, # required
+    #           update_date: Time.now, # required
+    #           update_version: 1,
+    #           state: "RequiresIndexDocuments" # One of: ["RequiresIndexDocuments", "Processing", "Active"], # required
+    #           pending_deletion: false
+    #         }
+    #       },
+    #       automated_snapshot_pause_options: {
+    #         options: { # required
+    #           enabled: false, # required
+    #           start_time: Time.now,
+    #           end_time: Time.now,
+    #           state: "Active" # One of: ["Active", "Completed", "Scheduled", "Disabled"]
+    #         },
+    #         status: { # required
+    #           creation_date: Time.now, # required
+    #           update_date: Time.now, # required
+    #           update_version: 1,
+    #           state: "RequiresIndexDocuments" # One of: ["RequiresIndexDocuments", "Processing", "Active"], # required
+    #           pending_deletion: false
+    #         }
+    #       },
+    #       use_case: {
+    #         options: "SEARCH" # One of: ["SEARCH", "VECTOR", "OBSERVABILITY", "MIXED"], # required
+    #         status: { # required
+    #           creation_date: Time.now, # required
+    #           update_date: Time.now, # required
+    #           update_version: 1,
+    #           state: "RequiresIndexDocuments" # One of: ["RequiresIndexDocuments", "Processing", "Active"], # required
+    #           pending_deletion: false
+    #         }
+    #       },
+    #       engine_mode: {
+    #         options: "GENERAL" # One of: ["GENERAL", "OPTIMIZED"], # required
+    #         status: { # required
+    #           creation_date: Time.now, # required
+    #           update_date: Time.now, # required
+    #           update_version: 1,
+    #           state: "RequiresIndexDocuments" # One of: ["RequiresIndexDocuments", "Processing", "Active"], # required
+    #           pending_deletion: false
+    #         }
+    #       }
     #     }
     #   }
     # @return [Types::DescribeElasticsearchDomainConfigResponse]
@@ -1695,7 +1799,7 @@ module Aws::ElasticsearchService
     #         },
     #         domain_endpoint_options: {
     #           enforce_https: false,
-    #           tls_security_policy: "Policy-Min-TLS-1-0-2019-07" # One of: ["Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07", "Policy-Min-TLS-1-2-PFS-2023-10"],
+    #           tls_security_policy: "Policy-Min-TLS-1-0-2019-07" # One of: ["Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07", "Policy-Min-TLS-1-2-PFS-2023-10", "Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08"],
     #           custom_endpoint_enabled: false,
     #           custom_endpoint: "DomainNameFqdn",
     #           custom_endpoint_certificate_arn: "ARN"
@@ -1736,7 +1840,18 @@ module Aws::ElasticsearchService
     #             pending_value: "String",
     #             value_type: "PLAIN_TEXT" # One of: ["PLAIN_TEXT", "STRINGIFIED_JSON"]
     #           }
-    #         ]
+    #         ],
+    #         deployment_strategy_options: {
+    #           deployment_strategy: "Default" # One of: ["Default", "CapacityOptimized"], # required
+    #         },
+    #         automated_snapshot_pause_options: {
+    #           enabled: false, # required
+    #           start_time: Time.now,
+    #           end_time: Time.now,
+    #           state: "Active" # One of: ["Active", "Completed", "Scheduled", "Disabled"]
+    #         },
+    #         use_case: "SEARCH" # One of: ["SEARCH", "VECTOR", "OBSERVABILITY", "MIXED"],
+    #         engine_mode: "GENERAL" # One of: ["GENERAL", "OPTIMIZED"]
     #       }
     #     ]
     #   }
@@ -2788,6 +2903,20 @@ module Aws::ElasticsearchService
     #              This flag, when set to True, specifies the deployment mechanism through which the update shall be applied on the domain.
     #              This will not actually perform the Update.
     #          </p>
+    # @option params [Types::DeploymentStrategyOptions] :deployment_strategy_options
+    #   <p>Specifies the deployment strategy options.</p>
+    # @option params [Types::AutomatedSnapshotPauseRequestOptions] :automated_snapshot_pause_options
+    #   <p>Specifies the automated snapshot pause options for the domain.</p>
+    #         <important>
+    #             <p>Suspending snapshots reduces data protection. You cannot restore your domain to
+    #                 points in time when snapshots are suspended. Use this feature only for short-term
+    #                 operational needs such as migrations or maintenance windows.</p>
+    #         </important>
+    #         <p>Maximum suspension duration: 3 days.</p>
+    # @option params [String] :use_case
+    #   <p>The primary use case for the domain. For valid values, see <code>DomainUseCase</code>.</p>
+    # @option params [String] :engine_mode
+    #   <p>The engine mode for the domain. For valid values and requirements, see <code>DomainEngineMode</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_name: "DomainName", # required
@@ -2840,7 +2969,7 @@ module Aws::ElasticsearchService
     #     },
     #     domain_endpoint_options: {
     #       enforce_https: false,
-    #       tls_security_policy: "Policy-Min-TLS-1-0-2019-07" # One of: ["Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07", "Policy-Min-TLS-1-2-PFS-2023-10"],
+    #       tls_security_policy: "Policy-Min-TLS-1-0-2019-07" # One of: ["Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07", "Policy-Min-TLS-1-2-PFS-2023-10", "Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08"],
     #       custom_endpoint_enabled: false,
     #       custom_endpoint: "DomainNameFqdn",
     #       custom_endpoint_certificate_arn: "ARN"
@@ -2888,7 +3017,17 @@ module Aws::ElasticsearchService
     #         }
     #       ]
     #     },
-    #     dry_run: false
+    #     dry_run: false,
+    #     deployment_strategy_options: {
+    #       deployment_strategy: "Default" # One of: ["Default", "CapacityOptimized"], # required
+    #     },
+    #     automated_snapshot_pause_options: {
+    #       enabled: false, # required
+    #       start_time: Time.now,
+    #       end_time: Time.now
+    #     },
+    #     use_case: "SEARCH" # One of: ["SEARCH", "VECTOR", "OBSERVABILITY", "MIXED"],
+    #     engine_mode: "GENERAL" # One of: ["GENERAL", "OPTIMIZED"]
     #   }
     #   options = {}
     #   response = client.update_elasticsearch_domain_config(params, options)
@@ -3055,7 +3194,7 @@ module Aws::ElasticsearchService
     #       domain_endpoint_options: {
     #         options: { # required
     #           enforce_https: false,
-    #           tls_security_policy: "Policy-Min-TLS-1-0-2019-07" # One of: ["Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07", "Policy-Min-TLS-1-2-PFS-2023-10"],
+    #           tls_security_policy: "Policy-Min-TLS-1-0-2019-07" # One of: ["Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07", "Policy-Min-TLS-1-2-PFS-2023-10", "Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08"],
     #           custom_endpoint_enabled: false,
     #           custom_endpoint: "DomainNameFqdn",
     #           custom_endpoint_certificate_arn: "ARN"
@@ -3132,7 +3271,54 @@ module Aws::ElasticsearchService
     #           pending_value: "String",
     #           value_type: "PLAIN_TEXT" # One of: ["PLAIN_TEXT", "STRINGIFIED_JSON"]
     #         }
-    #       ]
+    #       ],
+    #       deployment_strategy_options: {
+    #         options: { # required
+    #           deployment_strategy: "Default" # One of: ["Default", "CapacityOptimized"], # required
+    #         },
+    #         status: { # required
+    #           creation_date: Time.now, # required
+    #           update_date: Time.now, # required
+    #           update_version: 1,
+    #           state: "RequiresIndexDocuments" # One of: ["RequiresIndexDocuments", "Processing", "Active"], # required
+    #           pending_deletion: false
+    #         }
+    #       },
+    #       automated_snapshot_pause_options: {
+    #         options: { # required
+    #           enabled: false, # required
+    #           start_time: Time.now,
+    #           end_time: Time.now,
+    #           state: "Active" # One of: ["Active", "Completed", "Scheduled", "Disabled"]
+    #         },
+    #         status: { # required
+    #           creation_date: Time.now, # required
+    #           update_date: Time.now, # required
+    #           update_version: 1,
+    #           state: "RequiresIndexDocuments" # One of: ["RequiresIndexDocuments", "Processing", "Active"], # required
+    #           pending_deletion: false
+    #         }
+    #       },
+    #       use_case: {
+    #         options: "SEARCH" # One of: ["SEARCH", "VECTOR", "OBSERVABILITY", "MIXED"], # required
+    #         status: { # required
+    #           creation_date: Time.now, # required
+    #           update_date: Time.now, # required
+    #           update_version: 1,
+    #           state: "RequiresIndexDocuments" # One of: ["RequiresIndexDocuments", "Processing", "Active"], # required
+    #           pending_deletion: false
+    #         }
+    #       },
+    #       engine_mode: {
+    #         options: "GENERAL" # One of: ["GENERAL", "OPTIMIZED"], # required
+    #         status: { # required
+    #           creation_date: Time.now, # required
+    #           update_date: Time.now, # required
+    #           update_version: 1,
+    #           state: "RequiresIndexDocuments" # One of: ["RequiresIndexDocuments", "Processing", "Active"], # required
+    #           pending_deletion: false
+    #         }
+    #       }
     #     },
     #     dry_run_results: {
     #       deployment_type: "DeploymentType",

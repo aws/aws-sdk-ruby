@@ -19,10 +19,10 @@ module Aws::KeyspacesStreams
     end
 
     # @!attribute shard_iterator
-    #   <p> The unique identifier of the shard iterator. A shard iterator specifies the position in the shard from which you want to start reading data records sequentially. You obtain this value by calling the <code>GetShardIterator</code> operation. Each shard iterator is valid for 15 minutes after creation. </p>
+    #   <p> The unique identifier of the shard iterator. A shard iterator specifies the position in the shard from which you want to start reading data records sequentially. You obtain this value by calling the <code>GetShardIterator </code> operation. Each shard iterator is valid for 15 minutes after creation. </p>
     #   @return [String]
     # @!attribute max_results
-    #   <p> The maximum number of records to return in a single <code>GetRecords</code> request. Default value is 1000. You can specify a limit between 1 and 1000, but the actual number returned might be less than the specified maximum if the size of the data for the returned records exceeds the internal size limit. </p>
+    #   <p> The maximum number of records to return in a single <code>GetRecords</code> request. The default value is 100. You can specify a limit between 1 and 1000, but the actual number returned might be less than the specified maximum if the size of the data for the returned records exceeds the internal size limit. </p>
     #   @return [Integer]
     class GetRecordsInput < Struct.new(
       nil,
@@ -37,12 +37,16 @@ module Aws::KeyspacesStreams
     #   <p> An array of change data records retrieved from the specified shard. Each record represents a single data modification (insert, update, or delete) to a row in the Amazon Keyspaces table. Records include the primary key columns and information about what data was modified. </p>
     #   @return [Array<Types::Record>]
     # @!attribute next_shard_iterator
-    #   <p> The next position in the shard from which to start sequentially reading data records. If null, the shard has been closed and the requested iterator doesn't return any more data. </p>
+    #   <p> The next position in the shard from which to start sequentially reading data records. If null, the shard has been closed and the requested iterator will not return any more data. </p>
     #   @return [String]
+    # @!attribute iterator_description
+    #   <p> Provides information about the current iterator at the time GetRecords request was processed by Keyspaces. </p>
+    #   @return [Types::IteratorDescription]
     class GetRecordsOutput < Struct.new(
       nil,
       :change_records,
       :next_shard_iterator,
+      :iterator_description,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -55,7 +59,7 @@ module Aws::KeyspacesStreams
     #   <p> The identifier of the shard within the stream. The shard ID uniquely identifies a subset of the stream's data records that you want to access. </p>
     #   @return [String]
     # @!attribute shard_iterator_type
-    #   <p> Determines how the shard iterator is positioned. Must be one of the following:</p> <ul> <li> <p> <code>TRIM_HORIZON</code> - Start reading at the last untrimmed record in the shard, which is the oldest data record in the shard.</p> </li> <li> <p> <code>AT_SEQUENCE_NUMBER</code> - Start reading exactly from the specified sequence number.</p> </li> <li> <p> <code>AFTER_SEQUENCE_NUMBER</code> - Start reading right after the specified sequence number.</p> </li> <li> <p> <code>LATEST</code> - Start reading just after the most recent record in the shard, so that you always read the most recent data.</p> </li> </ul>
+    #   <p> Determines how the shard iterator is positioned. Must be one of the following: </p> <ul> <li> <p> <code>TRIM_HORIZON</code> - Start reading at the last untrimmed record in the shard, which is the oldest data record in the shard.</p> </li> <li> <p> <code>AT_SEQUENCE_NUMBER</code> - Start reading exactly from the specified sequence number.</p> </li> <li> <p> <code>AFTER_SEQUENCE_NUMBER</code> - Start reading right after the specified sequence number. </p> </li> <li> <p> <code>LATEST</code> - Start reading just after the most recent record in the shard, so that you always read the most recent data. </p> </li> </ul>
     #   @return [String]
     # @!attribute sequence_number
     #   <p> The sequence number of the data record in the shard from which to start reading. Required if <code>ShardIteratorType</code> is <code>AT_SEQUENCE_NUMBER</code> or <code>AFTER_SEQUENCE_NUMBER</code>. This parameter is ignored for other iterator types. </p>
@@ -86,13 +90,13 @@ module Aws::KeyspacesStreams
     #   <p> The Amazon Resource Name (ARN) of the stream for which detailed information is requested. This uniquely identifies the specific stream you want to get information about. </p>
     #   @return [String]
     # @!attribute max_results
-    #   <p> The maximum number of shard objects to return in a single <code>GetStream</code> request. Default value is 100. The minimum value is 1 and the maximum value is 100. </p>
+    #   <p> The maximum number of shard objects to return in a single <code>GetStream</code> request. The default value is 100. The minimum value is 1 and the maximum value is 100. </p>
     #   @return [Integer]
     # @!attribute shard_filter
-    #   <p> Optional filter criteria to apply when retrieving shards. You can filter shards based on their state or other attributes to narrow down the results returned by the <code>GetStream</code> operation. </p>
+    #   <p> Optional filter criteria to apply when retrieving shards. You can filter shards based on their parent <code>shardID</code> to get a list of children shards to narrow down the results returned by the <code>GetStream</code> operation. </p>
     #   @return [Types::ShardFilter]
     # @!attribute next_token
-    #   <p> An optional pagination token provided by a previous <code>GetStream</code> operation. If this parameter is specified, the response includes only records beyond the token, up to the value specified by <code>maxResults</code>. </p>
+    #   <p> An optional pagination token provided by a previous <code>GetStream</code> operation. If this parameter is specified, the response includes only records beyond the token, up to the value specified by <code>MaxResults</code>. </p>
     #   @return [String]
     class GetStreamInput < Struct.new(
       nil,
@@ -115,7 +119,7 @@ module Aws::KeyspacesStreams
     #   <p> The current status of the stream. Values can be <code>ENABLING</code>, <code>ENABLED</code>, <code>DISABLING</code>, or <code>DISABLED</code>. Operations on the stream depend on its current status. </p>
     #   @return [String]
     # @!attribute stream_view_type
-    #   <p> The format of the data records in this stream. Currently, this can be one of the following options:</p> <ul> <li> <p> <code>NEW_AND_OLD_IMAGES</code> - both versions of the row, before and after the change. This is the default.</p> </li> <li> <p> <code>NEW_IMAGE</code> - the version of the row after the change.</p> </li> <li> <p> <code>OLD_IMAGE</code> - the version of the row before the change.</p> </li> <li> <p> <code>KEYS_ONLY</code> - the partition and clustering keys of the row that was changed.</p> </li> </ul>
+    #   <p> The format of the data records in this stream. Currently, this can be one of the following options: </p> <ul> <li> <p> <code>NEW_AND_OLD_IMAGES</code> - both versions of the row, before and after the change. This is the default.</p> </li> <li> <p> <code>NEW_IMAGE</code> - the version of the row after the change.</p> </li> <li> <p> <code>OLD_IMAGE</code> - the version of the row before the change.</p> </li> <li> <p> <code>KEYS_ONLY</code> - the partition and clustering keys of the row that was changed.</p> </li> </ul>
     #   @return [String]
     # @!attribute creation_request_date_time
     #   <p> The date and time when the request to create this stream was issued. The value is represented in ISO 8601 format. </p>
@@ -155,6 +159,18 @@ module Aws::KeyspacesStreams
     class InternalServerException < Struct.new(
       nil,
       :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Provides information about the current iterator.</p>
+    # @!attribute iterator_position
+    #   <p> Indicates the current iterator's position within the shard. The possible values are: </p> <ul> <li> <p> <code>AT_TIP</code> - No more records are currently available.</p> </li> <li> <p> <code>BEHIND_TIP</code> - Additional records may be available.</p> </li> </ul> <p>Stream progresses in absence of customer records. <code>BEHIND_TIP</code> with an empty <code>changeRecords</code> list indicates the stream is progressing but no customer records are available at this position. Continue polling normally.</p>
+    #   @return [String]
+    class IteratorDescription < Struct.new(
+      nil,
+      :iterator_position,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -221,6 +237,9 @@ module Aws::KeyspacesStreams
     # @!attribute double_t
     #   <p>A 64-bit double-precision floating point value. </p>
     #   @return [String]
+    # @!attribute duration_t
+    #   <p>A duration value with nanosecond precision, representing a period of time encoded as 32-bit months, 32-bit days, and 64-bit nanoseconds. </p>
+    #   @return [String]
     # @!attribute float_t
     #   <p>A 32-bit single-precision floating point value. </p>
     #   @return [String]
@@ -267,7 +286,7 @@ module Aws::KeyspacesStreams
     #   <p>A UTF-8 encoded string value, functionally equivalent to text type. </p>
     #   @return [String]
     # @!attribute varint_t
-    #   <p>A variable precision integer value with arbitrary length. </p>
+    #   <p>An integer value within the +/-10^38 range. </p>
     #   @return [String]
     # @!attribute udt_t
     #   <p>A user-defined type (UDT) value consisting of named fields, each with its own data type. </p>
@@ -281,6 +300,7 @@ module Aws::KeyspacesStreams
       :date_t,
       :decimal_t,
       :double_t,
+      :duration_t,
       :float_t,
       :inet_t,
       :int_t,
@@ -311,6 +331,7 @@ module Aws::KeyspacesStreams
       class DateT < KeyspacesCellValue; end
       class DecimalT < KeyspacesCellValue; end
       class DoubleT < KeyspacesCellValue; end
+      class DurationT < KeyspacesCellValue; end
       class FloatT < KeyspacesCellValue; end
       class InetT < KeyspacesCellValue; end
       class IntT < KeyspacesCellValue; end
@@ -374,7 +395,7 @@ module Aws::KeyspacesStreams
     #   <p> The name of the table for which to list streams. Must be used together with <code>keyspaceName</code>. If specified, only streams associated with this specific table are returned. </p>
     #   @return [String]
     # @!attribute max_results
-    #   <p> The maximum number of streams to return in a single <code>ListStreams</code> request. Default value is 100. The minimum value is 1 and the maximum value is 100. </p>
+    #   <p> The maximum number of streams to return in a single <code>ListStreams</code> request. The default value is 100. The minimum value is 1 and the maximum value is 100. </p>
     #   @return [Integer]
     # @!attribute next_token
     #   <p> An optional pagination token provided by a previous <code>ListStreams</code> operation. If this parameter is specified, the response includes only records beyond the token, up to the value specified by <code>maxResults</code>. </p>
@@ -394,7 +415,7 @@ module Aws::KeyspacesStreams
     #   <p> An array of stream objects, each containing summary information about a stream including its ARN, status, and associated table information. This list includes all streams that match the request criteria. </p>
     #   @return [Array<Types::Stream>]
     # @!attribute next_token
-    #   <p> A pagination token that can be used in a subsequent <code>ListStreams</code> request. This token is returned if the response contains more streams than can be returned in a single response based on the <code>MaxResults</code> parameter. </p>
+    #   <p> A pagination token that can be used in a subsequent <code>ListStreams</code> request. This token is returned if the response contains more streams than can be returned in a single response based on the <code>maxResults</code> parameter. </p>
     #   @return [String]
     class ListStreamsOutput < Struct.new(
       nil,
@@ -533,7 +554,7 @@ module Aws::KeyspacesStreams
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The request rate is too high and exceeds the service's throughput limits. </p> <p>This exception occurs when you send too many requests in a short period of time. Implement exponential backoff in your retry strategy to handle this exception. Reducing your request frequency or distributing requests more evenly can help avoid throughput exceptions.</p>
+    # <p>The request rate is too high and exceeds the service's throughput limits. </p> <p>This exception occurs when you send too many requests in a short period of time. Implement exponential backoff in your retry strategy to handle this exception. Reducing your request frequency or distributing requests more evenly can help avoid throughput exceptions.</p> <p>This exception can also occur when more than two processes are reading from the same stream shard at the same time. Ensure that only one process reads from a stream shard at the same time. </p>
     # @!attribute message
     #   <p>The request was denied due to request throttling. Reduce the frequency of requests and try again.</p>
     #   @return [String]

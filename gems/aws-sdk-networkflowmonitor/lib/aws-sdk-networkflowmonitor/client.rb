@@ -144,18 +144,18 @@ module Aws::NetworkFlowMonitor
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -228,7 +228,7 @@ module Aws::NetworkFlowMonitor
     #     monitor_name: "ResourceName", # required
     #     local_resources: [ # required
     #       {
-    #         type: "AWS::EC2::VPC" # One of: ["AWS::EC2::VPC", "AWS::AvailabilityZone", "AWS::EC2::Subnet", "AWS::Region"], # required
+    #         type: "AWS::EC2::VPC" # One of: ["AWS::EC2::VPC", "AWS::AvailabilityZone", "AWS::EC2::Subnet", "AWS::Region", "AWS::EKS::Cluster"], # required
     #         identifier: "String", # required
     #       }
     #     ],
@@ -254,7 +254,7 @@ module Aws::NetworkFlowMonitor
     #     monitor_status: "PENDING" # One of: ["PENDING", "ACTIVE", "INACTIVE", "ERROR", "DELETING"], # required
     #     local_resources: [ # required
     #       {
-    #         type: "AWS::EC2::VPC" # One of: ["AWS::EC2::VPC", "AWS::AvailabilityZone", "AWS::EC2::Subnet", "AWS::Region"], # required
+    #         type: "AWS::EC2::VPC" # One of: ["AWS::EC2::VPC", "AWS::AvailabilityZone", "AWS::EC2::Subnet", "AWS::Region", "AWS::EKS::Cluster"], # required
     #         identifier: "String", # required
     #       }
     #     ],
@@ -377,7 +377,7 @@ module Aws::NetworkFlowMonitor
     #     monitor_status: "PENDING" # One of: ["PENDING", "ACTIVE", "INACTIVE", "ERROR", "DELETING"], # required
     #     local_resources: [ # required
     #       {
-    #         type: "AWS::EC2::VPC" # One of: ["AWS::EC2::VPC", "AWS::AvailabilityZone", "AWS::EC2::Subnet", "AWS::Region"], # required
+    #         type: "AWS::EC2::VPC" # One of: ["AWS::EC2::VPC", "AWS::AvailabilityZone", "AWS::EC2::Subnet", "AWS::Region", "AWS::EKS::Cluster"], # required
     #         identifier: "String", # required
     #       }
     #     ],
@@ -988,13 +988,13 @@ module Aws::NetworkFlowMonitor
     #     monitor_name: "ResourceName", # required
     #     local_resources_to_add: [
     #       {
-    #         type: "AWS::EC2::VPC" # One of: ["AWS::EC2::VPC", "AWS::AvailabilityZone", "AWS::EC2::Subnet", "AWS::Region"], # required
+    #         type: "AWS::EC2::VPC" # One of: ["AWS::EC2::VPC", "AWS::AvailabilityZone", "AWS::EC2::Subnet", "AWS::Region", "AWS::EKS::Cluster"], # required
     #         identifier: "String", # required
     #       }
     #     ],
     #     local_resources_to_remove: [
     #       {
-    #         type: "AWS::EC2::VPC" # One of: ["AWS::EC2::VPC", "AWS::AvailabilityZone", "AWS::EC2::Subnet", "AWS::Region"], # required
+    #         type: "AWS::EC2::VPC" # One of: ["AWS::EC2::VPC", "AWS::AvailabilityZone", "AWS::EC2::Subnet", "AWS::Region", "AWS::EKS::Cluster"], # required
     #         identifier: "String", # required
     #       }
     #     ],
@@ -1022,7 +1022,7 @@ module Aws::NetworkFlowMonitor
     #     monitor_status: "PENDING" # One of: ["PENDING", "ACTIVE", "INACTIVE", "ERROR", "DELETING"], # required
     #     local_resources: [ # required
     #       {
-    #         type: "AWS::EC2::VPC" # One of: ["AWS::EC2::VPC", "AWS::AvailabilityZone", "AWS::EC2::Subnet", "AWS::Region"], # required
+    #         type: "AWS::EC2::VPC" # One of: ["AWS::EC2::VPC", "AWS::AvailabilityZone", "AWS::EC2::Subnet", "AWS::Region", "AWS::EKS::Cluster"], # required
     #         identifier: "String", # required
     #       }
     #     ],

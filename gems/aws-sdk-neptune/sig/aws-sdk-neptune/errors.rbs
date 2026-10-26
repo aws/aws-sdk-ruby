@@ -156,6 +156,9 @@ module Aws::Neptune
     class KMSKeyNotAccessibleFault < Smithy::Client::ServiceError
       def message: () -> String?
     end
+    class NetworkTypeNotSupportedFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
     class OptionGroupNotFoundFault < Smithy::Client::ServiceError
       def message: () -> String?
     end

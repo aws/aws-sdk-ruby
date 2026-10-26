@@ -58,6 +58,7 @@ module Aws::FSx
     CopySnapshotAndUpdateVolumeResponse: StructureShape
     CopyTagsToDataRepositoryAssociations: BooleanShape
     CreateAggregateConfiguration: StructureShape
+    CreateAndAttachS3AccessPointOntapConfiguration: StructureShape
     CreateAndAttachS3AccessPointOpenZFSConfiguration: StructureShape
     CreateAndAttachS3AccessPointRequest: StructureShape
     CreateAndAttachS3AccessPointResponse: StructureShape
@@ -95,6 +96,7 @@ module Aws::FSx
     CreateVolumeRequest: StructureShape
     CreateVolumeResponse: StructureShape
     CreationTime: TimestampShape
+    CustomerSecretsManagerARN: StringShape
     DNSName: StringShape
     DailyTime: StringShape
     DataCompressionType: EnumShape
@@ -293,8 +295,13 @@ module Aws::FSx
     OntapDeploymentType: EnumShape
     OntapEndpointIpAddresses: ListShape
     OntapFileSystemConfiguration: StructureShape
+    OntapFileSystemIdentity: StructureShape
+    OntapFileSystemUserName: StringShape
+    OntapFileSystemUserType: EnumShape
+    OntapUnixFileSystemUser: StructureShape
     OntapVolumeConfiguration: StructureShape
     OntapVolumeType: EnumShape
+    OntapWindowsFileSystemUser: StructureShape
     OpenZFSClientConfiguration: StructureShape
     OpenZFSClientConfigurations: ListShape
     OpenZFSClients: StringShape
@@ -360,6 +367,7 @@ module Aws::FSx
     S3AccessPointAttachmentsFilterValue: StringShape
     S3AccessPointAttachmentsFilterValues: ListShape
     S3AccessPointAttachmentsFilters: ListShape
+    S3AccessPointOntapConfiguration: StructureShape
     S3AccessPointOpenZFSConfiguration: StructureShape
     S3AccessPointVpcConfiguration: StructureShape
     S3DataRepositoryConfiguration: StructureShape
@@ -491,6 +499,7 @@ module Aws::FSx
     WindowsAuditLogCreateConfiguration: StructureShape
     WindowsDeploymentType: EnumShape
     WindowsFileSystemConfiguration: StructureShape
+    WindowsFsrmConfiguration: StructureShape
 
     AWSSimbaAPIServiceV20180301: ServiceShape
   end

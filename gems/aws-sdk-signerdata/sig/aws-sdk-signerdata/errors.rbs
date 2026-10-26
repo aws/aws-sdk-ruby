@@ -1,0 +1,20 @@
+module Aws::SignerData
+  module Errors
+    class AccessDeniedException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def code: () -> String?
+    end
+    class InternalServiceErrorException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def code: () -> String?
+    end
+    class TooManyRequestsException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def code: () -> String?
+    end
+    class ValidationException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def code: () -> String?
+    end
+  end
+end

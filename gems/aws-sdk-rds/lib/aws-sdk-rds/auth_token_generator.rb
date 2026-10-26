@@ -10,8 +10,8 @@ module Aws
     # @see https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html
     class AuthTokenGenerator
       # @param [Hash] options
-      # @option options [Aws::Core::CredentialsProvider] :credentials An object that responds to `#identity` returning
-      # another object that responds to `#access_key_id` and `#secret_access_key`.
+      # @option options [#identity] :credentials An identity provider, such as {Aws::StaticCredentialsProvider}.
+      #   Its `#identity` method must return a credentials object accepted by {Aws::SigV4::Signer}.
       def initialize(options = {})
         @credentials = options.fetch(:credentials)
       end

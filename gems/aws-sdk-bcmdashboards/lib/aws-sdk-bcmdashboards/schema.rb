@@ -7,10 +7,14 @@ module Aws::BCMDashboards
   module Schema
 
     AccessDeniedException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmdashboards#AccessDeniedException", name: "AccessDeniedException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 403})
+    ClientToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bcmdashboards#ClientToken", name: "ClientToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[\\u0021-\\u007E]+$"})
+    ConflictException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmdashboards#ConflictException", name: "ConflictException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 409})
     CostAndUsageQuery = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmdashboards#CostAndUsageQuery", name: "CostAndUsageQuery")
     CostCategoryValues = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmdashboards#CostCategoryValues", name: "CostCategoryValues")
     CreateDashboardRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmdashboards#CreateDashboardRequest", name: "CreateDashboardRequest")
     CreateDashboardResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmdashboards#CreateDashboardResponse", name: "CreateDashboardResponse")
+    CreateScheduledReportRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmdashboards#CreateScheduledReportRequest", name: "CreateScheduledReportRequest")
+    CreateScheduledReportResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmdashboards#CreateScheduledReportResponse", name: "CreateScheduledReportResponse")
     DashboardArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bcmdashboards#DashboardArn", name: "DashboardArn", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "^arn:aws[-a-z0-9]*:bcm-dashboards::[0-9]{12}:dashboard/(\\*|[-a-z0-9]+)$"})
     DashboardName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bcmdashboards#DashboardName", name: "DashboardName", traits: {"smithy.api#length" => {"min" => 2, "max" => 50}, "smithy.api#pattern" => "^(?!.* {2})[a-zA-Z][a-zA-Z0-9 _-]{0,48}[a-zA-Z0-9_-]$"})
     DashboardReference = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmdashboards#DashboardReference", name: "DashboardReference")
@@ -21,10 +25,14 @@ module Aws::BCMDashboards
     DateTimeValue = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmdashboards#DateTimeValue", name: "DateTimeValue")
     DeleteDashboardRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmdashboards#DeleteDashboardRequest", name: "DeleteDashboardRequest")
     DeleteDashboardResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmdashboards#DeleteDashboardResponse", name: "DeleteDashboardResponse")
+    DeleteScheduledReportRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmdashboards#DeleteScheduledReportRequest", name: "DeleteScheduledReportRequest")
+    DeleteScheduledReportResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmdashboards#DeleteScheduledReportResponse", name: "DeleteScheduledReportResponse")
     Description = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bcmdashboards#Description", name: "Description", traits: {"smithy.api#length" => {"min" => 1, "max" => 200}, "smithy.api#pattern" => "^(?!.* {2})[ a-zA-Z0-9.,!?;:@\#$%&\\-_/\\\\]*$"})
     Dimension = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bcmdashboards#Dimension", name: "Dimension")
     DimensionValues = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmdashboards#DimensionValues", name: "DimensionValues")
     DisplayConfig = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.bcmdashboards#DisplayConfig", name: "DisplayConfig")
+    ExecuteScheduledReportRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmdashboards#ExecuteScheduledReportRequest", name: "ExecuteScheduledReportRequest")
+    ExecuteScheduledReportResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmdashboards#ExecuteScheduledReportResponse", name: "ExecuteScheduledReportResponse")
     Expression = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmdashboards#Expression", name: "Expression")
     Expressions = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bcmdashboards#Expressions", name: "Expressions")
     GenericString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bcmdashboards#GenericString", name: "GenericString", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}, "smithy.api#pattern" => "^[\\S\\s]*$"})
@@ -33,15 +41,21 @@ module Aws::BCMDashboards
     GetDashboardResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmdashboards#GetDashboardResponse", name: "GetDashboardResponse")
     GetResourcePolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmdashboards#GetResourcePolicyRequest", name: "GetResourcePolicyRequest")
     GetResourcePolicyResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmdashboards#GetResourcePolicyResponse", name: "GetResourcePolicyResponse")
+    GetScheduledReportRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmdashboards#GetScheduledReportRequest", name: "GetScheduledReportRequest")
+    GetScheduledReportResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmdashboards#GetScheduledReportResponse", name: "GetScheduledReportResponse")
     Granularity = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bcmdashboards#Granularity", name: "Granularity")
     GraphDisplayConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmdashboards#GraphDisplayConfig", name: "GraphDisplayConfig")
     GraphDisplayConfigMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.bcmdashboards#GraphDisplayConfigMap", name: "GraphDisplayConfigMap")
     GroupDefinition = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmdashboards#GroupDefinition", name: "GroupDefinition")
     GroupDefinitionType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bcmdashboards#GroupDefinitionType", name: "GroupDefinitionType")
     GroupDefinitions = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bcmdashboards#GroupDefinitions", name: "GroupDefinitions")
+    HealthStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmdashboards#HealthStatus", name: "HealthStatus")
+    HealthStatusCode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bcmdashboards#HealthStatusCode", name: "HealthStatusCode")
     InternalServerException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmdashboards#InternalServerException", name: "InternalServerException", traits: {"smithy.api#error" => "server", "smithy.api#httpError" => 500})
     ListDashboardsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmdashboards#ListDashboardsRequest", name: "ListDashboardsRequest")
     ListDashboardsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmdashboards#ListDashboardsResponse", name: "ListDashboardsResponse")
+    ListScheduledReportsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmdashboards#ListScheduledReportsRequest", name: "ListScheduledReportsRequest")
+    ListScheduledReportsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmdashboards#ListScheduledReportsResponse", name: "ListScheduledReportsResponse")
     ListTagsForResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmdashboards#ListTagsForResourceRequest", name: "ListTagsForResourceRequest")
     ListTagsForResourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmdashboards#ListTagsForResourceResponse", name: "ListTagsForResourceResponse")
     MatchOption = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bcmdashboards#MatchOption", name: "MatchOption")
@@ -53,6 +67,7 @@ module Aws::BCMDashboards
     QueryParameters = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.bcmdashboards#QueryParameters", name: "QueryParameters")
     ReservationCoverageQuery = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmdashboards#ReservationCoverageQuery", name: "ReservationCoverageQuery")
     ReservationUtilizationQuery = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmdashboards#ReservationUtilizationQuery", name: "ReservationUtilizationQuery")
+    ResourceArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bcmdashboards#ResourceArn", name: "ResourceArn", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "^arn:aws[-a-z0-9]*:bcm-dashboards::[0-9]{12}:(dashboard|scheduled-report)/(\\*|[-a-z0-9]+)$"})
     ResourceNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmdashboards#ResourceNotFoundException", name: "ResourceNotFoundException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 404})
     ResourceTag = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmdashboards#ResourceTag", name: "ResourceTag")
     ResourceTagKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bcmdashboards#ResourceTagKey", name: "ResourceTagKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[\\S\\s]*$"})
@@ -61,7 +76,19 @@ module Aws::BCMDashboards
     ResourceTagValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bcmdashboards#ResourceTagValue", name: "ResourceTagValue", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#pattern" => "^[\\S\\s]*$"})
     SavingsPlansCoverageQuery = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmdashboards#SavingsPlansCoverageQuery", name: "SavingsPlansCoverageQuery")
     SavingsPlansUtilizationQuery = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmdashboards#SavingsPlansUtilizationQuery", name: "SavingsPlansUtilizationQuery")
+    ScheduleConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmdashboards#ScheduleConfig", name: "ScheduleConfig")
+    SchedulePeriod = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmdashboards#SchedulePeriod", name: "SchedulePeriod")
+    ScheduleState = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bcmdashboards#ScheduleState", name: "ScheduleState")
+    ScheduledReport = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmdashboards#ScheduledReport", name: "ScheduledReport")
+    ScheduledReportArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bcmdashboards#ScheduledReportArn", name: "ScheduledReportArn", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "^arn:aws[-a-z0-9]*:bcm-dashboards::[0-9]{12}:scheduled-report/(\\*|[-a-z0-9]+)$"})
+    ScheduledReportInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmdashboards#ScheduledReportInput", name: "ScheduledReportInput")
+    ScheduledReportName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bcmdashboards#ScheduledReportName", name: "ScheduledReportName", traits: {"smithy.api#length" => {"min" => 2, "max" => 50}, "smithy.api#pattern" => "^(?!.* {2})[a-zA-Z][a-zA-Z0-9 _-]{0,48}[a-zA-Z0-9_-]$"})
+    ScheduledReportSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmdashboards#ScheduledReportSummary", name: "ScheduledReportSummary")
+    ScheduledReportSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bcmdashboards#ScheduledReportSummaryList", name: "ScheduledReportSummaryList")
     ServiceQuotaExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmdashboards#ServiceQuotaExceededException", name: "ServiceQuotaExceededException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 402})
+    ServiceRoleArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bcmdashboards#ServiceRoleArn", name: "ServiceRoleArn", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "^arn:aws[-a-z0-9]*:iam::[0-9]{12}:role/[a-zA-Z0-9+=,.@_/-]+$"})
+    StatusReason = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bcmdashboards#StatusReason", name: "StatusReason")
+    StatusReasonList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bcmdashboards#StatusReasonList", name: "StatusReasonList")
     StringList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bcmdashboards#StringList", name: "StringList")
     TableDisplayConfigStruct = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmdashboards#TableDisplayConfigStruct", name: "TableDisplayConfigStruct")
     TagResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmdashboards#TagResourceRequest", name: "TagResourceRequest")
@@ -72,18 +99,24 @@ module Aws::BCMDashboards
     UntagResourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmdashboards#UntagResourceResponse", name: "UntagResourceResponse")
     UpdateDashboardRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmdashboards#UpdateDashboardRequest", name: "UpdateDashboardRequest")
     UpdateDashboardResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmdashboards#UpdateDashboardResponse", name: "UpdateDashboardResponse")
+    UpdateScheduledReportRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmdashboards#UpdateScheduledReportRequest", name: "UpdateScheduledReportRequest")
+    UpdateScheduledReportResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmdashboards#UpdateScheduledReportResponse", name: "UpdateScheduledReportResponse")
     ValidationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmdashboards#ValidationException", name: "ValidationException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     VisualType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bcmdashboards#VisualType", name: "VisualType")
     Widget = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmdashboards#Widget", name: "Widget")
     WidgetConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmdashboards#WidgetConfig", name: "WidgetConfig")
     WidgetConfigList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bcmdashboards#WidgetConfigList", name: "WidgetConfigList", traits: {"smithy.api#length" => {"min" => 1, "max" => 2}})
     WidgetHeight = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.bcmdashboards#WidgetHeight", name: "WidgetHeight", traits: {"smithy.api#range" => {"min" => 4, "max" => 10}})
+    WidgetId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bcmdashboards#WidgetId", name: "WidgetId", traits: {"smithy.api#length" => {"min" => 32, "max" => 32}, "smithy.api#pattern" => "^[0-9a-f]{32}$"})
+    WidgetIdList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bcmdashboards#WidgetIdList", name: "WidgetIdList", traits: {"smithy.api#length" => {"max" => 1}})
     WidgetList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bcmdashboards#WidgetList", name: "WidgetList", traits: {"smithy.api#length" => {"min" => 0, "max" => 20}})
     WidgetTitle = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bcmdashboards#WidgetTitle", name: "WidgetTitle", traits: {"smithy.api#length" => {"min" => 2, "max" => 50}, "smithy.api#pattern" => "^(?!.* {2})[a-zA-Z0-9_-][ a-zA-Z0-9_-]*[a-zA-Z0-9_-]$"})
     WidgetWidth = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.bcmdashboards#WidgetWidth", name: "WidgetWidth", traits: {"smithy.api#range" => {"min" => 2, "max" => 6}})
 
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "message", traits: {"smithy.api#required" => {}}))
     AccessDeniedException.type = Types::AccessDeniedException
+    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "message", traits: {"smithy.api#required" => {}}))
+    ConflictException.type = Types::ConflictException
     CostAndUsageQuery.add_member(:metrics, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricNames, name: "metrics", traits: {"smithy.api#required" => {}}))
     CostAndUsageQuery.add_member(:time_range, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeRange, name: "timeRange", traits: {"smithy.api#required" => {}}))
     CostAndUsageQuery.add_member(:granularity, ::Smithy::Schema::Shapes::MemberShape.new(target: Granularity, name: "granularity", traits: {"smithy.api#required" => {}}))
@@ -101,6 +134,12 @@ module Aws::BCMDashboards
     CreateDashboardRequest.type = Types::CreateDashboardRequest
     CreateDashboardResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardArn, name: "arn", traits: {"smithy.api#required" => {}}))
     CreateDashboardResponse.type = Types::CreateDashboardResponse
+    CreateScheduledReportRequest.add_member(:scheduled_report, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledReportInput, name: "scheduledReport", traits: {"smithy.api#required" => {}}))
+    CreateScheduledReportRequest.add_member(:resource_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTagList, name: "resourceTags"))
+    CreateScheduledReportRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#httpHeader" => "X-Amzn-Client-Token", "smithy.api#idempotencyToken" => {}, "smithy.api#notProperty" => {}}))
+    CreateScheduledReportRequest.type = Types::CreateScheduledReportRequest
+    CreateScheduledReportResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledReportArn, name: "arn", traits: {"smithy.api#required" => {}}))
+    CreateScheduledReportResponse.type = Types::CreateScheduledReportResponse
     DashboardReference.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardArn, name: "arn", traits: {"smithy.api#required" => {}}))
     DashboardReference.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardName, name: "name", traits: {"smithy.api#required" => {}}))
     DashboardReference.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
@@ -122,6 +161,10 @@ module Aws::BCMDashboards
     DeleteDashboardRequest.type = Types::DeleteDashboardRequest
     DeleteDashboardResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardArn, name: "arn", traits: {"smithy.api#required" => {}}))
     DeleteDashboardResponse.type = Types::DeleteDashboardResponse
+    DeleteScheduledReportRequest.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledReportArn, name: "arn", traits: {"smithy.api#required" => {}}))
+    DeleteScheduledReportRequest.type = Types::DeleteScheduledReportRequest
+    DeleteScheduledReportResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledReportArn, name: "arn", traits: {"smithy.api#required" => {}}))
+    DeleteScheduledReportResponse.type = Types::DeleteScheduledReportResponse
     Dimension.add_member(:az, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AZ", traits: {"smithy.api#enumValue" => "AZ"}))
     Dimension.add_member(:instance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INSTANCE_TYPE", traits: {"smithy.api#enumValue" => "INSTANCE_TYPE"}))
     Dimension.add_member(:linked_account, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LINKED_ACCOUNT", traits: {"smithy.api#enumValue" => "LINKED_ACCOUNT"}))
@@ -156,6 +199,13 @@ module Aws::BCMDashboards
     DisplayConfig.add_member(:table, Types::DisplayConfig::Table, ::Smithy::Schema::Shapes::MemberShape.new(target: TableDisplayConfigStruct, name: "table"))
     DisplayConfig.add_member(:unknown, Types::DisplayConfig::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     DisplayConfig.type = Types::DisplayConfig
+    ExecuteScheduledReportRequest.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledReportArn, name: "arn", traits: {"smithy.api#required" => {}}))
+    ExecuteScheduledReportRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#httpHeader" => "X-Amzn-Client-Token", "smithy.api#idempotencyToken" => {}, "smithy.api#notProperty" => {}}))
+    ExecuteScheduledReportRequest.add_member(:dry_run, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "dryRun"))
+    ExecuteScheduledReportRequest.type = Types::ExecuteScheduledReportRequest
+    ExecuteScheduledReportResponse.add_member(:health_status, ::Smithy::Schema::Shapes::MemberShape.new(target: HealthStatus, name: "healthStatus"))
+    ExecuteScheduledReportResponse.add_member(:execution_triggered, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "executionTriggered"))
+    ExecuteScheduledReportResponse.type = Types::ExecuteScheduledReportResponse
     Expression.add_member(:or, ::Smithy::Schema::Shapes::MemberShape.new(target: Expressions, name: "or"))
     Expression.add_member(:and, ::Smithy::Schema::Shapes::MemberShape.new(target: Expressions, name: "and"))
     Expression.add_member(:not, ::Smithy::Schema::Shapes::MemberShape.new(target: Expression, name: "not"))
@@ -179,6 +229,10 @@ module Aws::BCMDashboards
     GetResourcePolicyResponse.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardArn, name: "resourceArn", traits: {"smithy.api#required" => {}}))
     GetResourcePolicyResponse.add_member(:policy_document, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "policyDocument", traits: {"smithy.api#required" => {}}))
     GetResourcePolicyResponse.type = Types::GetResourcePolicyResponse
+    GetScheduledReportRequest.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledReportArn, name: "arn", traits: {"smithy.api#required" => {}}))
+    GetScheduledReportRequest.type = Types::GetScheduledReportRequest
+    GetScheduledReportResponse.add_member(:scheduled_report, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledReport, name: "scheduledReport", traits: {"smithy.api#required" => {}}))
+    GetScheduledReportResponse.type = Types::GetScheduledReportResponse
     Granularity.add_member(:hourly, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HOURLY", traits: {"smithy.api#enumValue" => "HOURLY"}))
     Granularity.add_member(:daily, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DAILY", traits: {"smithy.api#enumValue" => "DAILY"}))
     Granularity.add_member(:monthly, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MONTHLY", traits: {"smithy.api#enumValue" => "MONTHLY"}))
@@ -193,6 +247,12 @@ module Aws::BCMDashboards
     GroupDefinitionType.add_member(:tag, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TAG", traits: {"smithy.api#enumValue" => "TAG"}))
     GroupDefinitionType.add_member(:cost_category, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COST_CATEGORY", traits: {"smithy.api#enumValue" => "COST_CATEGORY"}))
     GroupDefinitions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupDefinition, name: "member"))
+    HealthStatus.add_member(:status_code, ::Smithy::Schema::Shapes::MemberShape.new(target: HealthStatusCode, name: "statusCode", traits: {"smithy.api#required" => {}}))
+    HealthStatus.add_member(:last_refreshed_at, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericTimeStamp, name: "lastRefreshedAt"))
+    HealthStatus.add_member(:status_reasons, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusReasonList, name: "statusReasons"))
+    HealthStatus.type = Types::HealthStatus
+    HealthStatusCode.add_member(:healthy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HEALTHY", traits: {"smithy.api#enumValue" => "HEALTHY"}))
+    HealthStatusCode.add_member(:unhealthy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNHEALTHY", traits: {"smithy.api#enumValue" => "UNHEALTHY"}))
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "message", traits: {"smithy.api#required" => {}}))
     InternalServerException.type = Types::InternalServerException
     ListDashboardsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "maxResults", traits: {"smithy.api#default" => 20}))
@@ -201,7 +261,13 @@ module Aws::BCMDashboards
     ListDashboardsResponse.add_member(:dashboards, ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardReferenceList, name: "dashboards", traits: {"smithy.api#required" => {}}))
     ListDashboardsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextPageToken, name: "nextToken"))
     ListDashboardsResponse.type = Types::ListDashboardsResponse
-    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardArn, name: "resourceArn", traits: {"smithy.api#required" => {}}))
+    ListScheduledReportsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextPageToken, name: "nextToken"))
+    ListScheduledReportsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "maxResults", traits: {"smithy.api#default" => 50}))
+    ListScheduledReportsRequest.type = Types::ListScheduledReportsRequest
+    ListScheduledReportsResponse.add_member(:scheduled_reports, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledReportSummaryList, name: "scheduledReports", traits: {"smithy.api#required" => {}}))
+    ListScheduledReportsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextPageToken, name: "nextToken"))
+    ListScheduledReportsResponse.type = Types::ListScheduledReportsResponse
+    ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "resourceArn", traits: {"smithy.api#required" => {}}))
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
     ListTagsForResourceResponse.add_member(:resource_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTagList, name: "resourceTags"))
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
@@ -261,11 +327,60 @@ module Aws::BCMDashboards
     SavingsPlansUtilizationQuery.add_member(:granularity, ::Smithy::Schema::Shapes::MemberShape.new(target: Granularity, name: "granularity"))
     SavingsPlansUtilizationQuery.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: Expression, name: "filter"))
     SavingsPlansUtilizationQuery.type = Types::SavingsPlansUtilizationQuery
+    ScheduleConfig.add_member(:schedule_expression, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "scheduleExpression"))
+    ScheduleConfig.add_member(:schedule_expression_time_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "scheduleExpressionTimeZone"))
+    ScheduleConfig.add_member(:schedule_period, ::Smithy::Schema::Shapes::MemberShape.new(target: SchedulePeriod, name: "schedulePeriod"))
+    ScheduleConfig.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleState, name: "state"))
+    ScheduleConfig.type = Types::ScheduleConfig
+    SchedulePeriod.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericTimeStamp, name: "startTime"))
+    SchedulePeriod.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericTimeStamp, name: "endTime"))
+    SchedulePeriod.type = Types::SchedulePeriod
+    ScheduleState.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
+    ScheduleState.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
+    ScheduledReport.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledReportArn, name: "arn"))
+    ScheduledReport.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledReportName, name: "name", traits: {"smithy.api#required" => {}}))
+    ScheduledReport.add_member(:dashboard_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardArn, name: "dashboardArn", traits: {"smithy.api#required" => {}}))
+    ScheduledReport.add_member(:scheduled_report_execution_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceRoleArn, name: "scheduledReportExecutionRoleArn", traits: {"smithy.api#required" => {}}))
+    ScheduledReport.add_member(:schedule_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleConfig, name: "scheduleConfig", traits: {"smithy.api#required" => {}}))
+    ScheduledReport.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
+    ScheduledReport.add_member(:widget_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: WidgetIdList, name: "widgetIds"))
+    ScheduledReport.add_member(:widget_date_range_override, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeRange, name: "widgetDateRangeOverride"))
+    ScheduledReport.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericTimeStamp, name: "createdAt"))
+    ScheduledReport.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericTimeStamp, name: "updatedAt"))
+    ScheduledReport.add_member(:last_execution_at, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericTimeStamp, name: "lastExecutionAt"))
+    ScheduledReport.add_member(:health_status, ::Smithy::Schema::Shapes::MemberShape.new(target: HealthStatus, name: "healthStatus"))
+    ScheduledReport.type = Types::ScheduledReport
+    ScheduledReportInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledReportName, name: "name", traits: {"smithy.api#required" => {}}))
+    ScheduledReportInput.add_member(:dashboard_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardArn, name: "dashboardArn", traits: {"smithy.api#required" => {}}))
+    ScheduledReportInput.add_member(:scheduled_report_execution_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceRoleArn, name: "scheduledReportExecutionRoleArn", traits: {"smithy.api#required" => {}}))
+    ScheduledReportInput.add_member(:schedule_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleConfig, name: "scheduleConfig", traits: {"smithy.api#required" => {}}))
+    ScheduledReportInput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
+    ScheduledReportInput.add_member(:widget_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: WidgetIdList, name: "widgetIds"))
+    ScheduledReportInput.add_member(:widget_date_range_override, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeRange, name: "widgetDateRangeOverride"))
+    ScheduledReportInput.type = Types::ScheduledReportInput
+    ScheduledReportSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledReportArn, name: "arn", traits: {"smithy.api#required" => {}}))
+    ScheduledReportSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledReportName, name: "name", traits: {"smithy.api#required" => {}}))
+    ScheduledReportSummary.add_member(:dashboard_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardArn, name: "dashboardArn", traits: {"smithy.api#required" => {}}))
+    ScheduledReportSummary.add_member(:schedule_expression, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "scheduleExpression", traits: {"smithy.api#required" => {}}))
+    ScheduledReportSummary.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleState, name: "state", traits: {"smithy.api#required" => {}}))
+    ScheduledReportSummary.add_member(:health_status, ::Smithy::Schema::Shapes::MemberShape.new(target: HealthStatus, name: "healthStatus", traits: {"smithy.api#required" => {}}))
+    ScheduledReportSummary.add_member(:schedule_expression_time_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "scheduleExpressionTimeZone"))
+    ScheduledReportSummary.add_member(:widget_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: WidgetIdList, name: "widgetIds"))
+    ScheduledReportSummary.type = Types::ScheduledReportSummary
+    ScheduledReportSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledReportSummary, name: "member"))
     ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "message", traits: {"smithy.api#required" => {}}))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
+    StatusReason.add_member(:data_source_access_denied, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DATA_SOURCE_ACCESS_DENIED", traits: {"smithy.api#enumValue" => "DATA_SOURCE_ACCESS_DENIED"}))
+    StatusReason.add_member(:execution_role_assume_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXECUTION_ROLE_ASSUME_FAILED", traits: {"smithy.api#enumValue" => "EXECUTION_ROLE_ASSUME_FAILED"}))
+    StatusReason.add_member(:execution_role_insufficient_permissions, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXECUTION_ROLE_INSUFFICIENT_PERMISSIONS", traits: {"smithy.api#enumValue" => "EXECUTION_ROLE_INSUFFICIENT_PERMISSIONS"}))
+    StatusReason.add_member(:dashboard_not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DASHBOARD_NOT_FOUND", traits: {"smithy.api#enumValue" => "DASHBOARD_NOT_FOUND"}))
+    StatusReason.add_member(:dashboard_access_denied, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DASHBOARD_ACCESS_DENIED", traits: {"smithy.api#enumValue" => "DASHBOARD_ACCESS_DENIED"}))
+    StatusReason.add_member(:internal_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTERNAL_FAILURE", traits: {"smithy.api#enumValue" => "INTERNAL_FAILURE"}))
+    StatusReason.add_member(:widget_id_not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WIDGET_ID_NOT_FOUND", traits: {"smithy.api#enumValue" => "WIDGET_ID_NOT_FOUND"}))
+    StatusReasonList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusReason, name: "member"))
     StringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
     TableDisplayConfigStruct.type = Types::TableDisplayConfigStruct
-    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardArn, name: "resourceArn", traits: {"smithy.api#required" => {}}))
+    TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "resourceArn", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.add_member(:resource_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTagList, name: "resourceTags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
@@ -275,22 +390,36 @@ module Aws::BCMDashboards
     TagValues.type = Types::TagValues
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "message", traits: {"smithy.api#required" => {}}))
     ThrottlingException.type = Types::ThrottlingException
-    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardArn, name: "resourceArn", traits: {"smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "resourceArn", traits: {"smithy.api#required" => {}}))
     UntagResourceRequest.add_member(:resource_tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTagKeyList, name: "resourceTagKeys", traits: {"smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
     UntagResourceResponse.type = Types::UntagResourceResponse
     UpdateDashboardRequest.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardArn, name: "arn", traits: {"smithy.api#required" => {}}))
-    UpdateDashboardRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardName, name: "name"))
+    UpdateDashboardRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardName, name: "name", traits: {"smithy.api#required" => {}}))
     UpdateDashboardRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
     UpdateDashboardRequest.add_member(:widgets, ::Smithy::Schema::Shapes::MemberShape.new(target: WidgetList, name: "widgets"))
     UpdateDashboardRequest.type = Types::UpdateDashboardRequest
     UpdateDashboardResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardArn, name: "arn", traits: {"smithy.api#required" => {}}))
     UpdateDashboardResponse.type = Types::UpdateDashboardResponse
+    UpdateScheduledReportRequest.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledReportArn, name: "arn", traits: {"smithy.api#required" => {}}))
+    UpdateScheduledReportRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledReportName, name: "name"))
+    UpdateScheduledReportRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
+    UpdateScheduledReportRequest.add_member(:dashboard_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardArn, name: "dashboardArn"))
+    UpdateScheduledReportRequest.add_member(:scheduled_report_execution_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceRoleArn, name: "scheduledReportExecutionRoleArn"))
+    UpdateScheduledReportRequest.add_member(:schedule_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleConfig, name: "scheduleConfig"))
+    UpdateScheduledReportRequest.add_member(:widget_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: WidgetIdList, name: "widgetIds"))
+    UpdateScheduledReportRequest.add_member(:widget_date_range_override, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeRange, name: "widgetDateRangeOverride"))
+    UpdateScheduledReportRequest.add_member(:clear_widget_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "clearWidgetIds", traits: {"smithy.api#default" => false}))
+    UpdateScheduledReportRequest.add_member(:clear_widget_date_range_override, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "clearWidgetDateRangeOverride", traits: {"smithy.api#default" => false}))
+    UpdateScheduledReportRequest.type = Types::UpdateScheduledReportRequest
+    UpdateScheduledReportResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledReportArn, name: "arn", traits: {"smithy.api#required" => {}}))
+    UpdateScheduledReportResponse.type = Types::UpdateScheduledReportResponse
     ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "message", traits: {"smithy.api#required" => {}}))
     ValidationException.type = Types::ValidationException
     VisualType.add_member(:line, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LINE", traits: {"smithy.api#enumValue" => "LINE"}))
     VisualType.add_member(:bar, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BAR", traits: {"smithy.api#enumValue" => "BAR"}))
     VisualType.add_member(:stack, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STACK", traits: {"smithy.api#enumValue" => "STACK"}))
+    Widget.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: WidgetId, name: "id"))
     Widget.add_member(:title, ::Smithy::Schema::Shapes::MemberShape.new(target: WidgetTitle, name: "title", traits: {"smithy.api#required" => {}}))
     Widget.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
     Widget.add_member(:width, ::Smithy::Schema::Shapes::MemberShape.new(target: WidgetWidth, name: "width", traits: {"smithy.api#default" => 4}))
@@ -302,19 +431,33 @@ module Aws::BCMDashboards
     WidgetConfig.add_member(:display_config, ::Smithy::Schema::Shapes::MemberShape.new(target: DisplayConfig, name: "displayConfig", traits: {"smithy.api#required" => {}}))
     WidgetConfig.type = Types::WidgetConfig
     WidgetConfigList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WidgetConfig, name: "member"))
+    WidgetIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
     WidgetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Widget, name: "member"))
 
     AWSBCMDashboardsService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.bcmdashboards#AWSBCMDashboardsService"
       service.name = "AWSBCMDashboardsService"
       service.version = "2025-08-18"
-      service.traits = {"aws.api#service" => {"sdkId" => "BCM Dashboards", "arnNamespace" => "bcm-dashboards", "endpointPrefix" => "bcm-dashboards"}, "aws.auth#sigv4" => {"name" => "bcm-dashboards"}, "aws.endpoints#dualStackOnlyEndpoints" => {}, "aws.endpoints#standardPartitionalEndpoints" => {"endpointPatternType" => "service_region_dnsSuffix"}, "aws.protocols#awsJson1_0" => {}, "smithy.api#title" => "AWS Billing and Cost Management Dashboards"}
+      service.traits = {"aws.api#service" => {"sdkId" => "BCM Dashboards", "arnNamespace" => "bcm-dashboards", "endpointPrefix" => "bcm-dashboards"}, "aws.auth#sigv4" => {"name" => "bcm-dashboards"}, "aws.endpoints#dualStackOnlyEndpoints" => {}, "aws.endpoints#standardPartitionalEndpoints" => {"endpointPatternType" => "service_region_dnsSuffix"}, "aws.protocols#awsJson1_0" => {}, "smithy.api#title" => "AWS Billing and Cost Management Dashboards", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}, "Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://bcm-dashboards-fips.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dualStackDnsSuffix}", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "{PartitionResult#implicitGlobalRegion}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://bcm-dashboards.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dualStackDnsSuffix}", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "{PartitionResult#implicitGlobalRegion}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 6, "nodes" => "/////wAAAAH/////AAAAAAAAAAYAAAADAAAAAQAAAAQF9eEFAAAAAgAAAAUF9eEFAAAAAwX14QMF9eEEAAAAAwX14QEF9eEC"}}
       service.add_operation(:create_dashboard, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.bcmdashboards#CreateDashboard"
         operation.name = "CreateDashboard"
         operation.input = CreateDashboardRequest
         operation.output = CreateDashboardResponse
         operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {}
+      end)
+      service.add_operation(:create_scheduled_report, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.bcmdashboards#CreateScheduledReport"
+        operation.name = "CreateScheduledReport"
+        operation.input = CreateScheduledReportRequest
+        operation.output = CreateScheduledReportResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
         operation.errors << InternalServerException
         operation.errors << ServiceQuotaExceededException
         operation.errors << ThrottlingException
@@ -328,6 +471,31 @@ module Aws::BCMDashboards
         operation.output = DeleteDashboardResponse
         operation.errors << AccessDeniedException
         operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {}
+      end)
+      service.add_operation(:delete_scheduled_report, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.bcmdashboards#DeleteScheduledReport"
+        operation.name = "DeleteScheduledReport"
+        operation.input = DeleteScheduledReportRequest
+        operation.output = DeleteScheduledReportResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {}
+      end)
+      service.add_operation(:execute_scheduled_report, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.bcmdashboards#ExecuteScheduledReport"
+        operation.name = "ExecuteScheduledReport"
+        operation.input = ExecuteScheduledReportRequest
+        operation.output = ExecuteScheduledReportResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {}
@@ -356,6 +524,18 @@ module Aws::BCMDashboards
         operation.errors << ValidationException
         operation.traits = {"smithy.api#readonly" => {}}
       end)
+      service.add_operation(:get_scheduled_report, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.bcmdashboards#GetScheduledReport"
+        operation.name = "GetScheduledReport"
+        operation.input = GetScheduledReportRequest
+        operation.output = GetScheduledReportResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#readonly" => {}}
+      end)
       service.add_operation(:list_dashboards, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.bcmdashboards#ListDashboards"
         operation.name = "ListDashboards"
@@ -367,6 +547,18 @@ module Aws::BCMDashboards
         operation.errors << ValidationException
         operation.traits = {"smithy.api#readonly" => {}, "smithy.test#smokeTests" => [{"id" => "ListDashboardsSuccess", "params" => {}, "expect" => {"success" => {}}, "vendorParamsShape" => "aws.test#AwsVendorParams", "vendorParams" => {"region" => "us-east-1"}}]}
         operation[:paginator] = Paginators::ListDashboards.new
+      end)
+      service.add_operation(:list_scheduled_reports, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.bcmdashboards#ListScheduledReports"
+        operation.name = "ListScheduledReports"
+        operation.input = ListScheduledReportsRequest
+        operation.output = ListScheduledReportsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListScheduledReports.new
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.bcmdashboards#ListTagsForResource"
@@ -407,6 +599,19 @@ module Aws::BCMDashboards
         operation.input = UpdateDashboardRequest
         operation.output = UpdateDashboardResponse
         operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {}
+      end)
+      service.add_operation(:update_scheduled_report, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.bcmdashboards#UpdateScheduledReport"
+        operation.name = "UpdateScheduledReport"
+        operation.input = UpdateScheduledReportRequest
+        operation.output = UpdateScheduledReportResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
         operation.errors << InternalServerException
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException

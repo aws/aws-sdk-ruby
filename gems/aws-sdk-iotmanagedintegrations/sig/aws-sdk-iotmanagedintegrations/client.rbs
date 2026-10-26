@@ -56,7 +56,10 @@ module Aws::IoTManagedIntegrations
       ?connector_destination_id: String,
       ?name: String,
       ?description: String,
-      ?tags: Hash[String, String]
+      ?tags: Hash[String, String],
+      ?general_authorization: {
+        auth_material_name: String
+      }
     ) -> _CreateAccountAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAccountAssociationResponse
 
     interface _CreateCloudConnectorResponse
@@ -95,7 +98,16 @@ module Aws::IoTManagedIntegrations
             enabled: bool,
             days_before_renewal: Integer
           }
-        }
+        },
+        general_authorization: Array[
+          {
+            secrets_manager: {
+              arn: String,
+              version_id: String
+            },
+            auth_material_name: String
+          }
+        ]
       },
       ?secrets_manager: {
         arn: String,
@@ -153,6 +165,11 @@ module Aws::IoTManagedIntegrations
       ?credential_locker_id: String,
       ?authentication_material: String,
       ?authentication_material_type: String,
+      ?wi_fi_simple_setup_configuration: {
+        enable_as_provisioner: bool,
+        enable_as_provisionee: bool,
+        timeout_in_minutes: Integer
+      },
       ?serial_number: String,
       ?brand: String,
       ?model: String,
@@ -284,12 +301,14 @@ module Aws::IoTManagedIntegrations
       def name: () -> String?
       def provisioning_type: () -> String?
       def id: () -> String?
+      def status: () -> String?
       def claim_certificate: () -> String?
       def claim_certificate_private_key: () -> String?
     end
     def create_provisioning_profile: (
       ?provisioning_type: String,
       ?ca_certificate: String,
+      ?claim_certificate: String,
       ?name: String,
       ?client_token: String,
       ?tags: Hash[String, String]
@@ -392,6 +411,7 @@ module Aws::IoTManagedIntegrations
       def arn: () -> String?
       def o_auth_authorization_url: () -> String?
       def tags: () -> Hash[String, String]?
+      def general_authorization: () -> Types::GeneralAuthorizationName?
     end
     def get_account_association: (
       ?account_association_id: String
@@ -529,6 +549,7 @@ module Aws::IoTManagedIntegrations
       def hub_network_mode: () -> String?
       def meta_data: () -> Hash[String, String]?
       def tags: () -> Hash[String, String]?
+      def wi_fi_simple_setup_configuration: () -> Types::WiFiSimpleSetupConfiguration?
     end
     def get_managed_thing: (
       ?identifier: String
@@ -543,6 +564,15 @@ module Aws::IoTManagedIntegrations
     def get_managed_thing_capabilities: (
       ?identifier: String
     ) -> _GetManagedThingCapabilitiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetManagedThingCapabilitiesResponse
+
+    interface _GetManagedThingCertificateResponse
+      include Smithy::Client::_Response[Types::GetManagedThingCertificateResponse]
+      def managed_thing_id: () -> String?
+      def certificate_pem: () -> String?
+    end
+    def get_managed_thing_certificate: (
+      ?identifier: String
+    ) -> _GetManagedThingCertificateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetManagedThingCertificateResponse
 
     interface _GetManagedThingConnectivityDataResponse
       include Smithy::Client::_Response[Types::GetManagedThingConnectivityDataResponse]
@@ -626,6 +656,7 @@ module Aws::IoTManagedIntegrations
       def name: () -> String?
       def provisioning_type: () -> String?
       def id: () -> String?
+      def status: () -> String?
       def claim_certificate: () -> String?
       def tags: () -> Hash[String, String]?
     end
@@ -1053,7 +1084,10 @@ module Aws::IoTManagedIntegrations
       ?authentication_material: String,
       ?authentication_material_type: String,
       ?client_token: String,
-      ?tags: Hash[String, String]
+      ?tags: Hash[String, String],
+      ?connector_device_id_list: Array[String],
+      ?protocol: String,
+      ?end_device_identifier: String
     ) -> _StartDeviceDiscoveryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartDeviceDiscoveryResponse
 
     interface _TagResourceResponse
@@ -1105,6 +1139,18 @@ module Aws::IoTManagedIntegrations
             enabled: bool,
             days_before_renewal: Integer
           }
+        },
+        general_authorization_update: {
+          auth_materials_to_add: Array[
+            {
+              secrets_manager: {
+                arn: String,
+                version_id: String
+              },
+              auth_material_name: String
+            }
+          ],
+          auth_materials_to_update: untyped
         }
       },
       ?secrets_manager: {
@@ -1140,6 +1186,11 @@ module Aws::IoTManagedIntegrations
       ?owner: String,
       ?credential_locker_id: String,
       ?serial_number: String,
+      ?wi_fi_simple_setup_configuration: {
+        enable_as_provisioner: bool,
+        enable_as_provisionee: bool,
+        timeout_in_minutes: Integer
+      },
       ?brand: String,
       ?model: String,
       ?name: String,

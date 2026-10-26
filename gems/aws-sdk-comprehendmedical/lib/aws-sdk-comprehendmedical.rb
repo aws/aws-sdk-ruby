@@ -2,6 +2,7 @@
 
 # This is generated code!
 
+require 'smithy-cbor'
 require 'aws-sdk-core'
 require 'smithy-json'
 require 'aws-sigv4'

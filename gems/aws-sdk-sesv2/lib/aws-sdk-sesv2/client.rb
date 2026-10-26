@@ -144,18 +144,18 @@ module Aws::SESv2
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -207,6 +207,56 @@ module Aws::SESv2
     #  When `true`, request parameters are validated before sending the request.
     def initialize(*options)
       super
+    end
+
+    # <p>Associates an S/MIME certificate with an email identity. After the certificate is
+    #             active, Amazon SES API v2 can add an S/MIME signature to messages that you send from the associated
+    #             address when signing is enabled on the configuration set used to send the message.</p>
+    #          <p>The certificate is an X.509 certificate that you manage in Certificate Manager
+    #             (ACM). You identify it by its Amazon Resource Name (ARN).</p>
+    #          <ul>
+    #             <li>
+    #                <p>If the email identity is a domain, you must specify a <code>FromAddress</code>
+    #                     that belongs to that domain or one of its subdomains. The certificate applies to
+    #                     messages sent from that address.</p>
+    #             </li>
+    #             <li>
+    #                <p>If the email identity is an email address, <code>FromAddress</code> is
+    #                     optional. If you specify it, it must exactly match the email identity.</p>
+    #             </li>
+    #          </ul>
+    #          <p>When the association is created, the certificate begins provisioning and its status is
+    #             <code>PROVISIONING</code>. The status changes to <code>ACTIVE</code> when the certificate
+    #             is ready to use for signing. Each email address can have only one certificate
+    #             association. If an association already exists for the address, this operation returns an
+    #             error, unless the existing association is in the <code>DEPROVISIONING</code> state.</p>
+    # @param [Hash, Types::AssociateEmailIdentityCertificateRequest] params
+    # @option params [String] :email_identity
+    #   <p>The email identity, either an email address or a domain, to associate the certificate
+    #               with.</p>
+    # @option params [String] :from_address
+    #   <p>The email address that the certificate applies to. This value is required when the
+    #               email identity is a domain, and the address must belong to that domain or one of its
+    #               subdomains. When the email identity is an email address, this value is optional. If you
+    #               specify it, it must exactly match the email identity.</p>
+    # @option params [String] :certificate_arn
+    #   <p>The Amazon Resource Name (ARN) of the Certificate Manager (ACM) certificate to
+    #               associate with the email identity.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     email_identity: "Identity", # required
+    #     from_address: "EmailAddress",
+    #     certificate_arn: "CertificateArn", # required
+    #   }
+    #   options = {}
+    #   response = client.associate_email_identity_certificate(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::AssociateEmailIdentityCertificateResponse]
+    def associate_email_identity_certificate(params = {}, options = {})
+      request = build_request(:associate_email_identity_certificate, params)
+      request.send_request(options)
     end
 
     # <p>Retrieves batches of metric data collected based on your sending activity.</p>
@@ -309,14 +359,18 @@ module Aws::SESv2
     #   <p>An array of objects that define the tags (keys and values) to associate with the
     #               configuration set.</p>
     # @option params [Types::SuppressionOptions] :suppression_options
-    #   <p>An object that contains information about the suppression list preferences for your
-    #               account.</p>
+    #   <p>An object that contains information about the suppression list preferences for the
+    #               configuration set. You can optionally include a <code>SuppressionScope</code> to override the
+    #               tenant or account suppression scope for emails sent using this configuration set.</p>
     # @option params [Types::VdmOptions] :vdm_options
     #   <p>An object that defines the VDM options for emails that you send using the
     #               configuration set.</p>
     # @option params [Types::ArchivingOptions] :archiving_options
     #   <p>An object that defines the MailManager archiving options for emails that you send
     #               using the configuration set.</p>
+    # @option params [Types::MessageSecurityOptions] :message_security_options
+    #   <p>The message security options to apply to the configuration set, such as the signing
+    #               scheme used for messages that you send with the configuration set.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     configuration_set_name: "ConfigurationSetName", # required
@@ -343,7 +397,16 @@ module Aws::SESv2
     #       }
     #     ],
     #     suppression_options: {
-    #       suppressed_reasons: ["BOUNCE" # One of: ["BOUNCE", "COMPLAINT"]]
+    #       suppressed_reasons: ["BOUNCE" # One of: ["BOUNCE", "COMPLAINT"]],
+    #       suppression_scope: "ACCOUNT" # One of: ["ACCOUNT", "TENANT"],
+    #       validation_options: {
+    #         condition_threshold: { # required
+    #           condition_threshold_enabled: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
+    #           overall_confidence_threshold: {
+    #             confidence_verdict_threshold: "MEDIUM" # One of: ["MEDIUM", "HIGH", "MANAGED"], # required
+    #           }
+    #         }
+    #       }
     #     },
     #     vdm_options: {
     #       dashboard_options: {
@@ -355,6 +418,16 @@ module Aws::SESv2
     #     },
     #     archiving_options: {
     #       archive_arn: "ArchiveArn"
+    #     },
+    #     message_security_options: {
+    #       signing_scheme: {
+    #         # One of:
+    #         default_scheme: {
+    #         },
+    #         smime_scheme: {
+    #           signature_format: "DETACHED" # One of: ["DETACHED"]
+    #         }
+    #       }
     #     }
     #   }
     #   options = {}
@@ -519,6 +592,9 @@ module Aws::SESv2
     #               than 10 MB. The message body may contain HTML, with some limitations. For more
     #               information, see <a href="https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#send-email-verify-address-custom-faq">Custom verification email frequently asked questions</a> in the <i>Amazon SES
     #                   Developer Guide</i>.</p>
+    # @option params [Array<Types::Tag>] :tags
+    #   <p>An array of objects that define the tags (keys and values) to associate with the
+    #               custom verification email template.</p>
     # @option params [String] :success_redirection_url
     #   <p>The URL that the recipient of the verification email is sent to if his or her address
     #               is successfully verified.</p>
@@ -531,6 +607,12 @@ module Aws::SESv2
     #     from_email_address: "EmailAddress", # required
     #     template_subject: "EmailTemplateSubject", # required
     #     template_content: "TemplateContent", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       }
+    #     ],
     #     success_redirection_url: "SuccessRedirectionURL", # required
     #     failure_redirection_url: "FailureRedirectionURL", # required
     #   }
@@ -694,7 +776,7 @@ module Aws::SESv2
     #             permission to send email from the identity.</p>
     #          <p>When you verify an email address, Amazon SES sends an email to the address. Your email
     #             address is verified as soon as you follow the link in the verification email.
-    #             
+    #
     #         </p>
     #          <p>When you verify a domain without specifying the <code>DkimSigningAttributes</code>
     #             object, this operation provides a set of DKIM tokens. You can convert these tokens into
@@ -742,7 +824,7 @@ module Aws::SESv2
     #       domain_signing_selector: "Selector",
     #       domain_signing_private_key: "PrivateKey",
     #       next_signing_key_length: "RSA_1024_BIT" # One of: ["RSA_1024_BIT", "RSA_2048_BIT"],
-    #       domain_signing_attributes_origin: "AWS_SES" # One of: ["AWS_SES", "EXTERNAL", "AWS_SES_AF_SOUTH_1", "AWS_SES_EU_NORTH_1", "AWS_SES_AP_SOUTH_1", "AWS_SES_EU_WEST_3", "AWS_SES_EU_WEST_2", "AWS_SES_EU_SOUTH_1", "AWS_SES_EU_WEST_1", "AWS_SES_AP_NORTHEAST_3", "AWS_SES_AP_NORTHEAST_2", "AWS_SES_ME_SOUTH_1", "AWS_SES_AP_NORTHEAST_1", "AWS_SES_IL_CENTRAL_1", "AWS_SES_SA_EAST_1", "AWS_SES_CA_CENTRAL_1", "AWS_SES_AP_SOUTHEAST_1", "AWS_SES_AP_SOUTHEAST_2", "AWS_SES_AP_SOUTHEAST_3", "AWS_SES_EU_CENTRAL_1", "AWS_SES_US_EAST_1", "AWS_SES_US_EAST_2", "AWS_SES_US_WEST_1", "AWS_SES_US_WEST_2", "AWS_SES_ME_CENTRAL_1", "AWS_SES_AP_SOUTH_2", "AWS_SES_EU_CENTRAL_2"]
+    #       domain_signing_attributes_origin: "AWS_SES" # One of: ["AWS_SES", "EXTERNAL", "AWS_SES_AF_SOUTH_1", "AWS_SES_EU_NORTH_1", "AWS_SES_AP_SOUTH_1", "AWS_SES_EU_WEST_3", "AWS_SES_EU_WEST_2", "AWS_SES_EU_SOUTH_1", "AWS_SES_EU_WEST_1", "AWS_SES_AP_NORTHEAST_3", "AWS_SES_AP_NORTHEAST_2", "AWS_SES_ME_SOUTH_1", "AWS_SES_AP_NORTHEAST_1", "AWS_SES_IL_CENTRAL_1", "AWS_SES_SA_EAST_1", "AWS_SES_CA_CENTRAL_1", "AWS_SES_AP_SOUTHEAST_1", "AWS_SES_AP_SOUTHEAST_2", "AWS_SES_AP_SOUTHEAST_3", "AWS_SES_EU_CENTRAL_1", "AWS_SES_US_EAST_1", "AWS_SES_US_EAST_2", "AWS_SES_US_WEST_1", "AWS_SES_US_WEST_2", "AWS_SES_ME_CENTRAL_1", "AWS_SES_AP_SOUTH_2", "AWS_SES_EU_CENTRAL_2", "AWS_SES_AP_SOUTHEAST_5", "AWS_SES_CA_WEST_1", "AWS_SES_US_GOV_EAST_1", "AWS_SES_US_GOV_WEST_1"]
     #     },
     #     configuration_set_name: "ConfigurationSetName"
     #   }
@@ -757,7 +839,8 @@ module Aws::SESv2
     #       signing_enabled: false,
     #       status: "PENDING" # One of: ["PENDING", "SUCCESS", "FAILED", "TEMPORARY_FAILURE", "NOT_STARTED"],
     #       tokens: ["DnsToken"],
-    #       signing_attributes_origin: "AWS_SES" # One of: ["AWS_SES", "EXTERNAL", "AWS_SES_AF_SOUTH_1", "AWS_SES_EU_NORTH_1", "AWS_SES_AP_SOUTH_1", "AWS_SES_EU_WEST_3", "AWS_SES_EU_WEST_2", "AWS_SES_EU_SOUTH_1", "AWS_SES_EU_WEST_1", "AWS_SES_AP_NORTHEAST_3", "AWS_SES_AP_NORTHEAST_2", "AWS_SES_ME_SOUTH_1", "AWS_SES_AP_NORTHEAST_1", "AWS_SES_IL_CENTRAL_1", "AWS_SES_SA_EAST_1", "AWS_SES_CA_CENTRAL_1", "AWS_SES_AP_SOUTHEAST_1", "AWS_SES_AP_SOUTHEAST_2", "AWS_SES_AP_SOUTHEAST_3", "AWS_SES_EU_CENTRAL_1", "AWS_SES_US_EAST_1", "AWS_SES_US_EAST_2", "AWS_SES_US_WEST_1", "AWS_SES_US_WEST_2", "AWS_SES_ME_CENTRAL_1", "AWS_SES_AP_SOUTH_2", "AWS_SES_EU_CENTRAL_2"],
+    #       signing_hosted_zone: "HostedZone",
+    #       signing_attributes_origin: "AWS_SES" # One of: ["AWS_SES", "EXTERNAL", "AWS_SES_AF_SOUTH_1", "AWS_SES_EU_NORTH_1", "AWS_SES_AP_SOUTH_1", "AWS_SES_EU_WEST_3", "AWS_SES_EU_WEST_2", "AWS_SES_EU_SOUTH_1", "AWS_SES_EU_WEST_1", "AWS_SES_AP_NORTHEAST_3", "AWS_SES_AP_NORTHEAST_2", "AWS_SES_ME_SOUTH_1", "AWS_SES_AP_NORTHEAST_1", "AWS_SES_IL_CENTRAL_1", "AWS_SES_SA_EAST_1", "AWS_SES_CA_CENTRAL_1", "AWS_SES_AP_SOUTHEAST_1", "AWS_SES_AP_SOUTHEAST_2", "AWS_SES_AP_SOUTHEAST_3", "AWS_SES_EU_CENTRAL_1", "AWS_SES_US_EAST_1", "AWS_SES_US_EAST_2", "AWS_SES_US_WEST_1", "AWS_SES_US_WEST_2", "AWS_SES_ME_CENTRAL_1", "AWS_SES_AP_SOUTH_2", "AWS_SES_EU_CENTRAL_2", "AWS_SES_AP_SOUTHEAST_5", "AWS_SES_CA_WEST_1", "AWS_SES_US_GOV_EAST_1", "AWS_SES_US_GOV_WEST_1"],
     #       next_signing_key_length: "RSA_1024_BIT" # One of: ["RSA_1024_BIT", "RSA_2048_BIT"],
     #       current_signing_key_length: "RSA_1024_BIT" # One of: ["RSA_1024_BIT", "RSA_2048_BIT"],
     #       last_key_generation_timestamp: Time.now
@@ -818,6 +901,8 @@ module Aws::SESv2
     # @option params [Types::EmailTemplateContent] :template_content
     #   <p>The content of the email template, composed of a subject line, an HTML part, and a
     #               text-only part.</p>
+    # @option params [Array<Types::Tag>] :tags
+    #   <p>An array of objects that define the tags (keys and values) to associate with the email template.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     template_name: "EmailTemplateName", # required
@@ -825,7 +910,13 @@ module Aws::SESv2
     #       subject: "EmailTemplateSubject",
     #       text: "EmailTemplateText",
     #       html: "EmailTemplateHtml"
-    #     }
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       }
+    #     ]
     #   }
     #   options = {}
     #   response = client.create_email_template(params, options)
@@ -839,12 +930,21 @@ module Aws::SESv2
     end
 
     # <p>Creates an export job for a data source and destination.</p>
+    #          <p>Export jobs run asynchronously. This operation returns a <code>JobId</code>. Call
+    #                 <code>GetExportJob</code> with that ID until <code>JobStatus</code> is
+    #                 <code>COMPLETED</code>, <code>FAILED</code>, or <code>CANCELLED</code>. When the
+    #             status is <code>COMPLETED</code>, download the export file from the pre-signed URL in
+    #                 <code>ExportDestination.S3Url</code>. When the status is <code>FAILED</code>, see
+    #                 <code>FailureInfo</code>. To store a copy in your own bucket, upload the downloaded
+    #             file to your bucket. Do not include <code>S3Url</code> in the request.</p>
     #          <p>You can execute this operation no more than once per second.</p>
     # @param [Hash, Types::CreateExportJobRequest] params
     # @option params [Types::ExportDataSource] :export_data_source
     #   <p>The data source for the export job.</p>
     # @option params [Types::ExportDestination] :export_destination
-    #   <p>The destination for the export job.</p>
+    #   <p>The destination for the export job. Specify only <code>DataFormat</code>. Do not
+    #               include <code>S3Url</code> in this request. SES writes the export file to a
+    #               location that it manages and returns the download URL in <code>GetExportJob</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     export_data_source: { # required
@@ -870,6 +970,7 @@ module Aws::SESv2
     #           destination: ["InsightsEmailAddress"],
     #           subject: ["EmailSubject"],
     #           isp: ["Isp"],
+    #           tenant_name: ["TenantName"],
     #           last_delivery_event: ["SEND" # One of: ["SEND", "DELIVERY", "TRANSIENT_BOUNCE", "PERMANENT_BOUNCE", "UNDETERMINED_BOUNCE", "COMPLAINT"]],
     #           last_engagement_event: ["OPEN" # One of: ["OPEN", "CLICK"]]
     #         },
@@ -878,6 +979,7 @@ module Aws::SESv2
     #           destination: ["InsightsEmailAddress"],
     #           subject: ["EmailSubject"],
     #           isp: ["Isp"],
+    #           tenant_name: ["TenantName"],
     #           last_delivery_event: ["SEND" # One of: ["SEND", "DELIVERY", "TRANSIENT_BOUNCE", "PERMANENT_BOUNCE", "UNDETERMINED_BOUNCE", "COMPLAINT"]],
     #           last_engagement_event: ["OPEN" # One of: ["OPEN", "CLICK"]]
     #         },
@@ -941,7 +1043,7 @@ module Aws::SESv2
     #          <p>The primary region is going to be the AWS-Region where the operation is executed.
     #             The secondary region has to be provided in request's parameters.
     #             From the data flow standpoint there is no difference between primary
-    #             and secondary regions - sending traffic will be split equally between the two.
+    #             and secondary regions - sending traffic is divided between the two.
     #             The primary region is the region where the resource has been created and where it can be managed.
     #         </p>
     # @param [Hash, Types::CreateMultiRegionEndpointRequest] params
@@ -988,12 +1090,18 @@ module Aws::SESv2
     #             Each tenant can have its own set of resources like email identities, configuration sets,
     #             and templates, along with reputation metrics and sending status. This helps isolate and manage
     #             email sending for different customers or business units within your Amazon SES API v2 account.</p>
+    #          <p>You can optionally specify <code>SuppressionAttributes</code> to configure tenant-level
+    #             suppression at creation time. When tenant-level suppression is enabled, Amazon SES maintains a
+    #             separate suppression list for the tenant instead of using the account-level suppression list.</p>
     # @param [Hash, Types::CreateTenantRequest] params
     # @option params [String] :tenant_name
     #   <p>The name of the tenant to create. The name can contain up to 64 alphanumeric
     #               characters, including letters, numbers, hyphens (-) and underscores (_) only.</p>
     # @option params [Array<Types::Tag>] :tags
     #   <p>An array of objects that define the tags (keys and values) to associate with the tenant</p>
+    # @option params [Types::TenantSuppressionAttributes] :suppression_attributes
+    #   <p>An object that contains information about the suppression list preferences for the tenant.
+    #               Use this to configure tenant-level suppression at creation time.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     tenant_name: "TenantName", # required
@@ -1002,7 +1110,11 @@ module Aws::SESv2
     #         key: "TagKey", # required
     #         value: "TagValue", # required
     #       }
-    #     ]
+    #     ],
+    #     suppression_attributes: {
+    #       suppressed_reasons: ["BOUNCE" # One of: ["BOUNCE", "COMPLAINT"]],
+    #       suppression_scope: "ACCOUNT" # One of: ["ACCOUNT", "TENANT"]
+    #     }
     #   }
     #   options = {}
     #   response = client.create_tenant(params, options)
@@ -1019,7 +1131,11 @@ module Aws::SESv2
     #         value: "TagValue", # required
     #       }
     #     ],
-    #     sending_status: "ENABLED" # One of: ["ENABLED", "REINSTATED", "DISABLED"]
+    #     sending_status: "ENABLED" # One of: ["ENABLED", "REINSTATED", "DISABLED"],
+    #     suppression_attributes: {
+    #       suppressed_reasons: ["BOUNCE" # One of: ["BOUNCE", "COMPLAINT"]],
+    #       suppression_scope: "ACCOUNT" # One of: ["ACCOUNT", "TENANT"]
+    #     }
     #   }
     # @return [Types::CreateTenantResponse]
     def create_tenant(params = {}, options = {})
@@ -1288,13 +1404,22 @@ module Aws::SESv2
       request.send_request(options)
     end
 
-    # <p>Removes an email address from the suppression list for your account.</p>
+    # <p>Removes an email address from the suppression list for your account or for a specific
+    #             tenant. To target a tenant's suppression list, specify the <code>TenantName</code>
+    #             parameter. If you omit <code>TenantName</code>, the address is removed from the
+    #             account-level suppression list.</p>
     # @param [Hash, Types::DeleteSuppressedDestinationRequest] params
     # @option params [String] :email_address
-    #   <p>The suppressed email destination to remove from the account suppression list.</p>
+    #   <p>The suppressed email destination to remove from the suppression list for your account
+    #               or for the specified tenant.</p>
+    # @option params [String] :tenant_name
+    #   <p>The name of the tenant whose suppression list you want to remove the address from. If
+    #               you omit this parameter, the address is removed from the account-level suppression
+    #               list.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     email_address: "EmailAddress", # required
+    #     tenant_name: "TenantName"
     #   }
     #   options = {}
     #   response = client.delete_suppressed_destination(params, options)
@@ -1353,6 +1478,38 @@ module Aws::SESv2
       request.send_request(options)
     end
 
+    # <p>Removes the association between an S/MIME certificate and an email identity. After the
+    #             association is removed, Amazon SES API v2 stops adding an S/MIME signature to messages sent from
+    #             that address.</p>
+    #          <p>If the email identity is a domain, specify the <code>FromAddress</code> whose
+    #             certificate association you want to remove.</p>
+    #          <p>This operation is idempotent. If the specified email identity exists but there's no
+    #             matching certificate association, the operation succeeds without making any changes.
+    #             Amazon SES API v2 returns a <code>NotFoundException</code> only when the specified email identity
+    #             doesn't exist.</p>
+    # @param [Hash, Types::DisassociateEmailIdentityCertificateRequest] params
+    # @option params [String] :email_identity
+    #   <p>The email identity whose certificate association you want to remove.</p>
+    # @option params [String] :from_address
+    #   <p>The email address whose certificate association you want to remove. This value is
+    #               required when the email identity is a domain. When the email identity is an email
+    #               address, this value is optional.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     email_identity: "Identity", # required
+    #     from_address: "EmailAddress"
+    #   }
+    #   options = {}
+    #   response = client.disassociate_email_identity_certificate(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::DisassociateEmailIdentityCertificateResponse]
+    def disassociate_email_identity_certificate(params = {}, options = {})
+      request = build_request(:disassociate_email_identity_certificate, params)
+      request.send_request(options)
+    end
+
     # <p>Obtain information about the email-sending status and capabilities of your Amazon SES
     #             account in the current Amazon Web Services Region.</p>
     # @param [Hash, Types::GetAccountRequest] params
@@ -1373,7 +1530,15 @@ module Aws::SESv2
     #     },
     #     sending_enabled: false,
     #     suppression_attributes: {
-    #       suppressed_reasons: ["BOUNCE" # One of: ["BOUNCE", "COMPLAINT"]]
+    #       suppressed_reasons: ["BOUNCE" # One of: ["BOUNCE", "COMPLAINT"]],
+    #       validation_attributes: {
+    #         condition_threshold: { # required
+    #           condition_threshold_enabled: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
+    #           overall_confidence_threshold: {
+    #             confidence_verdict_threshold: "MEDIUM" # One of: ["MEDIUM", "HIGH", "MANAGED"], # required
+    #           }
+    #         }
+    #       }
     #     },
     #     details: {
     #       mail_type: "MARKETING" # One of: ["MARKETING", "TRANSACTIONAL"],
@@ -1394,6 +1559,10 @@ module Aws::SESv2
     #       guardian_attributes: {
     #         optimized_shared_delivery: "ENABLED" # One of: ["ENABLED", "DISABLED"]
     #       }
+    #     },
+    #     pricing_attributes: {
+    #       current_plan: "NONE" # One of: ["NONE", "ESSENTIALS", "PRO", "ENTERPRISE"],
+    #       next_plan: "NONE" # One of: ["NONE", "ESSENTIALS", "PRO", "ENTERPRISE"]
     #     }
     #   }
     # @return [Types::GetAccountResponse]
@@ -1477,7 +1646,16 @@ module Aws::SESv2
     #       }
     #     ],
     #     suppression_options: {
-    #       suppressed_reasons: ["BOUNCE" # One of: ["BOUNCE", "COMPLAINT"]]
+    #       suppressed_reasons: ["BOUNCE" # One of: ["BOUNCE", "COMPLAINT"]],
+    #       suppression_scope: "ACCOUNT" # One of: ["ACCOUNT", "TENANT"],
+    #       validation_options: {
+    #         condition_threshold: { # required
+    #           condition_threshold_enabled: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
+    #           overall_confidence_threshold: {
+    #             confidence_verdict_threshold: "MEDIUM" # One of: ["MEDIUM", "HIGH", "MANAGED"], # required
+    #           }
+    #         }
+    #       }
     #     },
     #     vdm_options: {
     #       dashboard_options: {
@@ -1489,6 +1667,16 @@ module Aws::SESv2
     #     },
     #     archiving_options: {
     #       archive_arn: "ArchiveArn"
+    #     },
+    #     message_security_options: {
+    #       signing_scheme: {
+    #         # One of:
+    #         default_scheme: {
+    #         },
+    #         smime_scheme: {
+    #           signature_format: "DETACHED" # One of: ["DETACHED"]
+    #         }
+    #       }
     #     }
     #   }
     # @return [Types::GetConfigurationSetResponse]
@@ -1654,6 +1842,12 @@ module Aws::SESv2
     #     from_email_address: "EmailAddress",
     #     template_subject: "EmailTemplateSubject",
     #     template_content: "TemplateContent",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       }
+    #     ],
     #     success_redirection_url: "SuccessRedirectionURL",
     #     failure_redirection_url: "FailureRedirectionURL"
     #   }
@@ -1962,6 +2156,86 @@ module Aws::SESv2
       request.send_request(options)
     end
 
+    # <p>Provides validation insights about a specific email address, including syntax validation, DNS record checks, mailbox existence, and other deliverability factors.</p>
+    # @param [Hash, Types::GetEmailAddressInsightsRequest] params
+    # @option params [String] :email_address
+    #   <p>The email address to analyze for validation insights.</p>
+    # @example Get Email Address Insights
+    #   # Performs email validation against an email address.
+    #   params = {
+    #     email_address: "hello@example.com"
+    #   }
+    #   options = {}
+    #   response = client.get_email_address_insights(params, options)
+    #   response.to_h #=>
+    #   {
+    #     mailbox_validation: {
+    #       is_valid: {
+    #         confidence_verdict: HIGH
+    #       },
+    #       evaluations: {
+    #         has_valid_syntax: {
+    #           confidence_verdict: HIGH
+    #         },
+    #         has_valid_dns_records: {
+    #           confidence_verdict: MEDIUM
+    #         },
+    #         mailbox_exists: {
+    #           confidence_verdict: MEDIUM
+    #         },
+    #         is_role_address: {
+    #           confidence_verdict: LOW
+    #         },
+    #         is_disposable: {
+    #           confidence_verdict: LOW
+    #         },
+    #         is_random_input: {
+    #           confidence_verdict: LOW
+    #         }
+    #       }
+    #     }
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     email_address: "EmailAddress", # required
+    #   }
+    #   options = {}
+    #   response = client.get_email_address_insights(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     mailbox_validation: {
+    #       is_valid: {
+    #         confidence_verdict: "LOW" # One of: ["LOW", "MEDIUM", "HIGH"]
+    #       },
+    #       evaluations: {
+    #         has_valid_syntax: {
+    #           confidence_verdict: "LOW" # One of: ["LOW", "MEDIUM", "HIGH"]
+    #         },
+    #         has_valid_dns_records: {
+    #           confidence_verdict: "LOW" # One of: ["LOW", "MEDIUM", "HIGH"]
+    #         },
+    #         mailbox_exists: {
+    #           confidence_verdict: "LOW" # One of: ["LOW", "MEDIUM", "HIGH"]
+    #         },
+    #         is_role_address: {
+    #           confidence_verdict: "LOW" # One of: ["LOW", "MEDIUM", "HIGH"]
+    #         },
+    #         is_disposable: {
+    #           confidence_verdict: "LOW" # One of: ["LOW", "MEDIUM", "HIGH"]
+    #         },
+    #         is_random_input: {
+    #           confidence_verdict: "LOW" # One of: ["LOW", "MEDIUM", "HIGH"]
+    #         }
+    #       }
+    #     }
+    #   }
+    # @return [Types::GetEmailAddressInsightsResponse]
+    def get_email_address_insights(params = {}, options = {})
+      request = build_request(:get_email_address_insights, params)
+      request.send_request(options)
+    end
+
     # <p>Provides information about a specific identity, including the identity's verification
     #             status, sending authorization policies, its DKIM authentication status, and its custom
     #             Mail-From settings.</p>
@@ -1984,7 +2258,8 @@ module Aws::SESv2
     #       signing_enabled: false,
     #       status: "PENDING" # One of: ["PENDING", "SUCCESS", "FAILED", "TEMPORARY_FAILURE", "NOT_STARTED"],
     #       tokens: ["DnsToken"],
-    #       signing_attributes_origin: "AWS_SES" # One of: ["AWS_SES", "EXTERNAL", "AWS_SES_AF_SOUTH_1", "AWS_SES_EU_NORTH_1", "AWS_SES_AP_SOUTH_1", "AWS_SES_EU_WEST_3", "AWS_SES_EU_WEST_2", "AWS_SES_EU_SOUTH_1", "AWS_SES_EU_WEST_1", "AWS_SES_AP_NORTHEAST_3", "AWS_SES_AP_NORTHEAST_2", "AWS_SES_ME_SOUTH_1", "AWS_SES_AP_NORTHEAST_1", "AWS_SES_IL_CENTRAL_1", "AWS_SES_SA_EAST_1", "AWS_SES_CA_CENTRAL_1", "AWS_SES_AP_SOUTHEAST_1", "AWS_SES_AP_SOUTHEAST_2", "AWS_SES_AP_SOUTHEAST_3", "AWS_SES_EU_CENTRAL_1", "AWS_SES_US_EAST_1", "AWS_SES_US_EAST_2", "AWS_SES_US_WEST_1", "AWS_SES_US_WEST_2", "AWS_SES_ME_CENTRAL_1", "AWS_SES_AP_SOUTH_2", "AWS_SES_EU_CENTRAL_2"],
+    #       signing_hosted_zone: "HostedZone",
+    #       signing_attributes_origin: "AWS_SES" # One of: ["AWS_SES", "EXTERNAL", "AWS_SES_AF_SOUTH_1", "AWS_SES_EU_NORTH_1", "AWS_SES_AP_SOUTH_1", "AWS_SES_EU_WEST_3", "AWS_SES_EU_WEST_2", "AWS_SES_EU_SOUTH_1", "AWS_SES_EU_WEST_1", "AWS_SES_AP_NORTHEAST_3", "AWS_SES_AP_NORTHEAST_2", "AWS_SES_ME_SOUTH_1", "AWS_SES_AP_NORTHEAST_1", "AWS_SES_IL_CENTRAL_1", "AWS_SES_SA_EAST_1", "AWS_SES_CA_CENTRAL_1", "AWS_SES_AP_SOUTHEAST_1", "AWS_SES_AP_SOUTHEAST_2", "AWS_SES_AP_SOUTHEAST_3", "AWS_SES_EU_CENTRAL_1", "AWS_SES_US_EAST_1", "AWS_SES_US_EAST_2", "AWS_SES_US_WEST_1", "AWS_SES_US_WEST_2", "AWS_SES_ME_CENTRAL_1", "AWS_SES_AP_SOUTH_2", "AWS_SES_EU_CENTRAL_2", "AWS_SES_AP_SOUTHEAST_5", "AWS_SES_CA_WEST_1", "AWS_SES_US_GOV_EAST_1", "AWS_SES_US_GOV_WEST_1"],
     #       next_signing_key_length: "RSA_1024_BIT" # One of: ["RSA_1024_BIT", "RSA_2048_BIT"],
     #       current_signing_key_length: "RSA_1024_BIT" # One of: ["RSA_1024_BIT", "RSA_2048_BIT"],
     #       last_key_generation_timestamp: Time.now
@@ -2058,7 +2333,7 @@ module Aws::SESv2
 
     # <p>Displays the template object (which includes the subject line, HTML part and text
     #             part) for the template you specify.</p>
-    #          <p>You can execute this operation no more than once per second.</p>
+    #          <p>You can execute this operation no more than 50 times per second.</p>
     # @param [Hash, Types::GetEmailTemplateRequest] params
     # @option params [String] :template_name
     #   <p>The name of the template.</p>
@@ -2076,7 +2351,13 @@ module Aws::SESv2
     #       subject: "EmailTemplateSubject",
     #       text: "EmailTemplateText",
     #       html: "EmailTemplateHtml"
-    #     }
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       }
+    #     ]
     #   }
     # @return [Types::GetEmailTemplateResponse]
     def get_email_template(params = {}, options = {})
@@ -2085,6 +2366,9 @@ module Aws::SESv2
     end
 
     # <p>Provides information about an export job.</p>
+    #          <p>When the job status is <code>COMPLETED</code>, the response includes a pre-signed
+    #             URL in <code>ExportDestination.S3Url</code> that you use to download the export
+    #             file.</p>
     # @param [Hash, Types::GetExportJobRequest] params
     # @option params [String] :job_id
     #   <p>The export job ID.</p>
@@ -2127,6 +2411,7 @@ module Aws::SESv2
     #           destination: ["InsightsEmailAddress"],
     #           subject: ["EmailSubject"],
     #           isp: ["Isp"],
+    #           tenant_name: ["TenantName"],
     #           last_delivery_event: ["SEND" # One of: ["SEND", "DELIVERY", "TRANSIENT_BOUNCE", "PERMANENT_BOUNCE", "UNDETERMINED_BOUNCE", "COMPLAINT"]],
     #           last_engagement_event: ["OPEN" # One of: ["OPEN", "CLICK"]]
     #         },
@@ -2135,6 +2420,7 @@ module Aws::SESv2
     #           destination: ["InsightsEmailAddress"],
     #           subject: ["EmailSubject"],
     #           isp: ["Isp"],
+    #           tenant_name: ["TenantName"],
     #           last_delivery_event: ["SEND" # One of: ["SEND", "DELIVERY", "TRANSIENT_BOUNCE", "PERMANENT_BOUNCE", "UNDETERMINED_BOUNCE", "COMPLAINT"]],
     #           last_engagement_event: ["OPEN" # One of: ["OPEN", "CLICK"]]
     #         },
@@ -2290,17 +2576,17 @@ module Aws::SESv2
       request.send_request(options)
     end
 
-    # <p>Retrieve information about a specific reputation entity, including its reputation 
-    #             management policy, customer-managed status, Amazon Web Services Amazon SES-managed status, and aggregate 
+    # <p>Retrieve information about a specific reputation entity, including its reputation
+    #             management policy, customer-managed status, Amazon Web Services Amazon SES-managed status, and aggregate
     #             sending status.</p>
     #          <p>
-    #             <i>Reputation entities</i> represent resources in your Amazon SES account that have reputation 
-    #             tracking and management capabilities. The reputation impact reflects the highest 
-    #             impact reputation finding for the entity. Reputation findings can be retrieved 
+    #             <i>Reputation entities</i> represent resources in your Amazon SES account that have reputation
+    #             tracking and management capabilities. The reputation impact reflects the highest
+    #             impact reputation finding for the entity. Reputation findings can be retrieved
     #             using the <code>ListRecommendations</code> operation.</p>
     # @param [Hash, Types::GetReputationEntityRequest] params
     # @option params [String] :reputation_entity_reference
-    #   <p>The unique identifier for the reputation entity. For resource-type entities, 
+    #   <p>The unique identifier for the reputation entity. For resource-type entities,
     #               this is the Amazon Resource Name (ARN) of the resource.</p>
     # @option params [String] :reputation_entity_type
     #   <p>The type of reputation entity. Currently, only <code>RESOURCE</code> type entities are supported.</p>
@@ -2339,13 +2625,20 @@ module Aws::SESv2
     end
 
     # <p>Retrieves information about a specific email address that's on the suppression list
-    #             for your account.</p>
+    #             for your account or for a specific tenant. To target a tenant's suppression list,
+    #             specify the <code>TenantName</code> parameter. If you omit <code>TenantName</code>,
+    #             the operation targets the account-level suppression list.</p>
     # @param [Hash, Types::GetSuppressedDestinationRequest] params
     # @option params [String] :email_address
-    #   <p>The email address that's on the account suppression list.</p>
+    #   <p>The email address that's on the suppression list for your account or for the
+    #               specified tenant.</p>
+    # @option params [String] :tenant_name
+    #   <p>The name of the tenant whose suppression list you want to query. If you omit this
+    #               parameter, the operation targets the account-level suppression list.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     email_address: "EmailAddress", # required
+    #     tenant_name: "TenantName"
     #   }
     #   options = {}
     #   response = client.get_suppressed_destination(params, options)
@@ -2359,7 +2652,8 @@ module Aws::SESv2
     #       attributes: {
     #         message_id: "OutboundMessageId",
     #         feedback_id: "FeedbackId"
-    #       }
+    #       },
+    #       tenant_name: "TenantName"
     #     }
     #   }
     # @return [Types::GetSuppressedDestinationResponse]
@@ -2369,7 +2663,7 @@ module Aws::SESv2
     end
 
     # <p>Get information about a specific tenant, including the tenant's name, ID, ARN,
-    #             creation timestamp, tags, and sending status.</p>
+    #             creation timestamp, tags, sending status, and suppression attributes.</p>
     # @param [Hash, Types::GetTenantRequest] params
     # @option params [String] :tenant_name
     #   <p>The name of the tenant to retrieve information about.</p>
@@ -2393,7 +2687,11 @@ module Aws::SESv2
     #           value: "TagValue", # required
     #         }
     #       ],
-    #       sending_status: "ENABLED" # One of: ["ENABLED", "REINSTATED", "DISABLED"]
+    #       sending_status: "ENABLED" # One of: ["ENABLED", "REINSTATED", "DISABLED"],
+    #       suppression_attributes: {
+    #         suppressed_reasons: ["BOUNCE" # One of: ["BOUNCE", "COMPLAINT"]],
+    #         suppression_scope: "ACCOUNT" # One of: ["ACCOUNT", "TENANT"]
+    #       }
     #     }
     #   }
     # @return [Types::GetTenantResponse]
@@ -2410,6 +2708,9 @@ module Aws::SESv2
     #             the configuration set in the headers of the email. When you apply a configuration set to
     #             an email, all of the rules in that configuration set are applied to the email.</p>
     # @param [Hash, Types::ListConfigurationSetsRequest] params
+    # @option params [Hash<String, String>] :filter
+    #   <p>An object that contains filters to apply when listing configuration sets.
+    #               You can filter by a substring of the configuration set name.</p>
     # @option params [String] :next_token
     #   <p>A token returned from a previous call to <code>ListConfigurationSets</code> to
     #               indicate the position in the list of configuration sets.</p>
@@ -2420,6 +2721,9 @@ module Aws::SESv2
     #               additional results.</p>
     # @example Request syntax with placeholder values
     #   params = {
+    #     filter: {
+    #       "ConfigurationSetFilterKey" => "ConfigurationSetFilterValue"
+    #     },
     #     next_token: "NextToken",
     #     page_size: 1
     #   }
@@ -2722,6 +3026,10 @@ module Aws::SESv2
     #             identities that are verified as well as those that aren't. This operation returns
     #             identities that are associated with Amazon SES and Amazon Pinpoint.</p>
     # @param [Hash, Types::ListEmailIdentitiesRequest] params
+    # @option params [Hash<String, String>] :filter
+    #   <p>An object that contains filters to apply when listing email identities.
+    #               You can filter by a substring of the identity name, by identity type, or by
+    #               verification status.</p>
     # @option params [String] :next_token
     #   <p>A token returned from a previous call to <code>ListEmailIdentities</code> to indicate
     #               the position in the list of identities.</p>
@@ -2733,6 +3041,9 @@ module Aws::SESv2
     #            <p>The value you specify has to be at least 0, and can be no more than 1000.</p>
     # @example Request syntax with placeholder values
     #   params = {
+    #     filter: {
+    #       "IdentityFilterKey" => "IdentityFilterValue"
+    #     },
     #     next_token: "NextToken",
     #     page_size: 1
     #   }
@@ -2754,6 +3065,54 @@ module Aws::SESv2
     # @return [Types::ListEmailIdentitiesResponse]
     def list_email_identities(params = {}, options = {})
       request = build_request(:list_email_identities, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists the S/MIME certificates that are associated with the specified email identity.
+    #             The results include certificates in all states, such as <code>PROVISIONING</code>,
+    #             <code>ACTIVE</code>, <code>INACTIVE</code>, <code>DEPROVISIONING</code>, and
+    #             <code>FAILED</code>.</p>
+    #          <p>If a certificate has passed its expiration time, it's returned with a status of
+    #             <code>FAILED</code>.</p>
+    #          <p>We recommend using pagination to ensure that the operation returns quickly and
+    #             successfully. When there are more results than fit in a single response, the response
+    #             includes a <code>NextToken</code> value that you use in a subsequent call to retrieve
+    #             the next set of results.</p>
+    # @param [Hash, Types::ListEmailIdentityCertificatesRequest] params
+    # @option params [String] :email_identity
+    #   <p>The email identity whose certificate associations you want to list.</p>
+    # @option params [String] :next_token
+    #   <p>A token returned from a previous call to <code>ListEmailIdentityCertificates</code> to
+    #               indicate the position in the list of certificates.</p>
+    # @option params [Integer] :page_size
+    #   <p>The number of results to show in a single call to
+    #               <code>ListEmailIdentityCertificates</code>. If the number of results is larger than the
+    #               number you specified in this parameter, then the response includes a
+    #               <code>NextToken</code> element, which you can use to obtain additional results.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     email_identity: "Identity", # required
+    #     next_token: "NextToken",
+    #     page_size: 1
+    #   }
+    #   options = {}
+    #   response = client.list_email_identity_certificates(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     certificates: [
+    #       {
+    #         from_address: "EmailAddress",
+    #         status: "PROVISIONING" # One of: ["PROVISIONING", "INACTIVE", "DEPROVISIONING", "ACTIVE", "FAILED"],
+    #         certificate_arn: "CertificateArn",
+    #         certificate_expiry_time: Time.now
+    #       }
+    #     ],
+    #     next_token: "NextToken"
+    #   }
+    # @return [Types::ListEmailIdentityCertificatesResponse]
+    def list_email_identity_certificates(params = {}, options = {})
+      request = build_request(:list_email_identity_certificates, params)
       request.send_request(options)
     end
 
@@ -2981,25 +3340,25 @@ module Aws::SESv2
       request.send_request(options)
     end
 
-    # <p>List reputation entities in your Amazon SES account in the current Amazon Web Services Region. 
-    #             You can filter the results by entity type, reputation impact, sending status, 
+    # <p>List reputation entities in your Amazon SES account in the current Amazon Web Services Region.
+    #             You can filter the results by entity type, reputation impact, sending status,
     #             or entity reference prefix.</p>
     #          <p>
-    #             <i>Reputation entities</i> represent resources in your account that have reputation 
-    #             tracking and management capabilities. Use this operation to get an overview of 
+    #             <i>Reputation entities</i> represent resources in your account that have reputation
+    #             tracking and management capabilities. Use this operation to get an overview of
     #             all entities and their current reputation status.</p>
     # @param [Hash, Types::ListReputationEntitiesRequest] params
     # @option params [Hash<String, String>] :filter
-    #   <p>An object that contains filters to apply when listing reputation entities. 
-    #               You can filter by entity type, reputation impact, sending status, or entity 
+    #   <p>An object that contains filters to apply when listing reputation entities.
+    #               You can filter by entity type, reputation impact, sending status, or entity
     #               reference prefix.</p>
     # @option params [String] :next_token
-    #   <p>A token returned from a previous call to <code>ListReputationEntities</code> to indicate 
+    #   <p>A token returned from a previous call to <code>ListReputationEntities</code> to indicate
     #               the position in the list of reputation entities.</p>
     # @option params [Integer] :page_size
-    #   <p>The number of results to show in a single call to <code>ListReputationEntities</code>. 
-    #               If the number of results is larger than the number you specified in this parameter, 
-    #               then the response includes a <code>NextToken</code> element, which you can use to obtain 
+    #   <p>The number of results to show in a single call to <code>ListReputationEntities</code>.
+    #               If the number of results is larger than the number you specified in this parameter,
+    #               then the response includes a <code>NextToken</code> element, which you can use to obtain
     #               additional results.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -3082,10 +3441,16 @@ module Aws::SESv2
     end
 
     # <p>Retrieves a list of email addresses that are on the suppression list for your
-    #             account.</p>
+    #             account or for a specific tenant. To target a tenant's suppression list, specify the
+    #             <code>TenantName</code> parameter. If you omit <code>TenantName</code>, the operation
+    #             targets the account-level suppression list.</p>
     # @param [Hash, Types::ListSuppressedDestinationsRequest] params
+    # @option params [String] :tenant_name
+    #   <p>The name of the tenant whose suppression list you want to retrieve. If you omit this
+    #               parameter, the operation targets the account-level suppression list.</p>
     # @option params [Array<String>] :reasons
-    #   <p>The factors that caused the email address to be added to .</p>
+    #   <p>The factors that caused the email address to be added to the suppression list for
+    #               your account or for a specific tenant.</p>
     # @option params [Time] :start_date
     #   <p>Used to filter the list of suppressed email destinations so that it only includes
     #               addresses that were added to the list after a specific date.</p>
@@ -3103,6 +3468,7 @@ module Aws::SESv2
     #               results.</p>
     # @example Request syntax with placeholder values
     #   params = {
+    #     tenant_name: "TenantName",
     #     reasons: ["BOUNCE" # One of: ["BOUNCE", "COMPLAINT"]],
     #     start_date: Time.now,
     #     end_date: Time.now,
@@ -3209,6 +3575,9 @@ module Aws::SESv2
     #          <p>This operation returns basic information about each tenant,
     #             such as tenant name, ID, ARN, and creation timestamp.</p>
     # @param [Hash, Types::ListTenantsRequest] params
+    # @option params [Hash<String, String>] :filter
+    #   <p>An object that contains filters to apply when listing tenants. You can filter
+    #               by a substring of the tenant name or by sending status.</p>
     # @option params [String] :next_token
     #   <p>A token returned from a previous call to <code>ListTenants</code> to indicate the position in the list of tenants.</p>
     # @option params [Integer] :page_size
@@ -3217,6 +3586,9 @@ module Aws::SESv2
     #               then the response includes a <code>NextToken</code> element, which you can use to obtain additional results.</p>
     # @example Request syntax with placeholder values
     #   params = {
+    #     filter: {
+    #       "ListTenantsFilterKey" => "ListTenantsFilterValue"
+    #     },
     #     next_token: "NextToken",
     #     page_size: 1
     #   }
@@ -3230,7 +3602,8 @@ module Aws::SESv2
     #         tenant_name: "TenantName",
     #         tenant_id: "TenantId",
     #         tenant_arn: "AmazonResourceName",
-    #         created_timestamp: Time.now
+    #         created_timestamp: Time.now,
+    #         sending_status: "ENABLED" # One of: ["ENABLED", "REINSTATED", "DISABLED"]
     #       }
     #     ],
     #     next_token: "NextToken"
@@ -3307,6 +3680,48 @@ module Aws::SESv2
       request.send_request(options)
     end
 
+    # <p>Set the pricing plan for your Amazon SES account.</p>
+    # @param [Hash, Types::PutAccountPricingAttributesRequest] params
+    # @option params [String] :plan
+    #   <p>The pricing plan to apply to your Amazon SES account. For details about each plan, see <a href="http://aws.amazon.com/ses/pricing/">Amazon SES Pricing</a>. Can be one of the
+    #               following:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>NONE</code>
+    #                  </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ESSENTIALS</code>
+    #                  </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>PRO</code>
+    #                  </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ENTERPRISE</code>
+    #                  </p>
+    #               </li>
+    #            </ul>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     plan: "NONE" # One of: ["NONE", "ESSENTIALS", "PRO", "ENTERPRISE"], # required
+    #   }
+    #   options = {}
+    #   response = client.put_account_pricing_attributes(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::PutAccountPricingAttributesResponse]
+    def put_account_pricing_attributes(params = {}, options = {})
+      request = build_request(:put_account_pricing_attributes, params)
+      request.send_request(options)
+    end
+
     # <p>Enable or disable the ability of your account to send email.</p>
     # @param [Hash, Types::PutAccountSendingAttributesRequest] params
     # @option params [Boolean] :sending_enabled
@@ -3351,9 +3766,19 @@ module Aws::SESv2
     #                       bounce.</p>
     #               </li>
     #            </ul>
+    # @option params [Types::SuppressionValidationAttributes] :validation_attributes
+    #   <p>An object that contains additional suppression attributes for your account.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     suppressed_reasons: ["BOUNCE" # One of: ["BOUNCE", "COMPLAINT"]]
+    #     suppressed_reasons: ["BOUNCE" # One of: ["BOUNCE", "COMPLAINT"]],
+    #     validation_attributes: {
+    #       condition_threshold: { # required
+    #         condition_threshold_enabled: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
+    #         overall_confidence_threshold: {
+    #           confidence_verdict_threshold: "MEDIUM" # One of: ["MEDIUM", "HIGH", "MANAGED"], # required
+    #         }
+    #       }
+    #     }
     #   }
     #   options = {}
     #   response = client.put_account_suppression_attributes(params, options)
@@ -3513,33 +3938,61 @@ module Aws::SESv2
       request.send_request(options)
     end
 
-    # <p>Specify the account suppression list preferences for a configuration set.</p>
+    # <p>Specify the suppression list preferences for a configuration set. You can
+    #             also use this operation to specify a <code>SuppressionScope</code> to override the
+    #             suppression scope of the tenant or account for emails sent using this configuration
+    #             set.</p>
     # @param [Hash, Types::PutConfigurationSetSuppressionOptionsRequest] params
     # @option params [String] :configuration_set_name
     #   <p>The name of the configuration set to change the suppression list preferences
     #               for.</p>
+    # @option params [String] :suppression_scope
+    #   <p>The suppression scope for the configuration set. This overrides the tenant or account
+    #               suppression scope for emails sent using this configuration set. Can be one of the
+    #               following:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>TENANT</code> – Use the tenant's suppression list.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ACCOUNT</code> – Use the account-level suppression list.</p>
+    #               </li>
+    #            </ul>
     # @option params [Array<String>] :suppressed_reasons
     #   <p>A list that contains the reasons that email addresses are automatically added to the
-    #               suppression list for your account. This list can contain any or all of the
+    #               suppression list for your account or for a specific tenant. This list can contain any or all of the
     #               following:</p>
     #            <ul>
     #               <li>
     #                  <p>
     #                     <code>COMPLAINT</code> – Amazon SES adds an email address to the suppression
-    #                       list for your account when a message sent to that address results in a
+    #                       list for your account or for a specific tenant when a message sent to that address results in a
     #                       complaint.</p>
     #               </li>
     #               <li>
     #                  <p>
     #                     <code>BOUNCE</code> – Amazon SES adds an email address to the suppression
-    #                       list for your account when a message sent to that address results in a hard
+    #                       list for your account or for a specific tenant when a message sent to that address results in a hard
     #                       bounce.</p>
     #               </li>
     #            </ul>
+    # @option params [Types::SuppressionValidationOptions] :validation_options
+    #   <p>An object that contains information about the email address suppression preferences for the configuration set in the current Amazon Web Services Region.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     configuration_set_name: "ConfigurationSetName", # required
-    #     suppressed_reasons: ["BOUNCE" # One of: ["BOUNCE", "COMPLAINT"]]
+    #     suppression_scope: "ACCOUNT" # One of: ["ACCOUNT", "TENANT"],
+    #     suppressed_reasons: ["BOUNCE" # One of: ["BOUNCE", "COMPLAINT"]],
+    #     validation_options: {
+    #       condition_threshold: { # required
+    #         condition_threshold_enabled: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
+    #         overall_confidence_threshold: {
+    #           confidence_verdict_threshold: "MEDIUM" # One of: ["MEDIUM", "HIGH", "MANAGED"], # required
+    #         }
+    #       }
+    #     }
     #   }
     #   options = {}
     #   response = client.put_configuration_set_suppression_options(params, options)
@@ -3616,7 +4069,7 @@ module Aws::SESv2
     #          <note>
     #             <p>The dedicated IP address that you specify must already exist, and must be
     #                 associated with your Amazon Web Services account.
-    #                 
+    #
     #             </p>
     #             <p>The dedicated IP pool you specify must already exist. You can create a new pool by
     #                 using the <code>CreateDedicatedIpPool</code> operation.</p>
@@ -3839,12 +4292,12 @@ module Aws::SESv2
     # @example Request syntax with placeholder values
     #   params = {
     #     email_identity: "Identity", # required
-    #     signing_attributes_origin: "AWS_SES" # One of: ["AWS_SES", "EXTERNAL", "AWS_SES_AF_SOUTH_1", "AWS_SES_EU_NORTH_1", "AWS_SES_AP_SOUTH_1", "AWS_SES_EU_WEST_3", "AWS_SES_EU_WEST_2", "AWS_SES_EU_SOUTH_1", "AWS_SES_EU_WEST_1", "AWS_SES_AP_NORTHEAST_3", "AWS_SES_AP_NORTHEAST_2", "AWS_SES_ME_SOUTH_1", "AWS_SES_AP_NORTHEAST_1", "AWS_SES_IL_CENTRAL_1", "AWS_SES_SA_EAST_1", "AWS_SES_CA_CENTRAL_1", "AWS_SES_AP_SOUTHEAST_1", "AWS_SES_AP_SOUTHEAST_2", "AWS_SES_AP_SOUTHEAST_3", "AWS_SES_EU_CENTRAL_1", "AWS_SES_US_EAST_1", "AWS_SES_US_EAST_2", "AWS_SES_US_WEST_1", "AWS_SES_US_WEST_2", "AWS_SES_ME_CENTRAL_1", "AWS_SES_AP_SOUTH_2", "AWS_SES_EU_CENTRAL_2"], # required
+    #     signing_attributes_origin: "AWS_SES" # One of: ["AWS_SES", "EXTERNAL", "AWS_SES_AF_SOUTH_1", "AWS_SES_EU_NORTH_1", "AWS_SES_AP_SOUTH_1", "AWS_SES_EU_WEST_3", "AWS_SES_EU_WEST_2", "AWS_SES_EU_SOUTH_1", "AWS_SES_EU_WEST_1", "AWS_SES_AP_NORTHEAST_3", "AWS_SES_AP_NORTHEAST_2", "AWS_SES_ME_SOUTH_1", "AWS_SES_AP_NORTHEAST_1", "AWS_SES_IL_CENTRAL_1", "AWS_SES_SA_EAST_1", "AWS_SES_CA_CENTRAL_1", "AWS_SES_AP_SOUTHEAST_1", "AWS_SES_AP_SOUTHEAST_2", "AWS_SES_AP_SOUTHEAST_3", "AWS_SES_EU_CENTRAL_1", "AWS_SES_US_EAST_1", "AWS_SES_US_EAST_2", "AWS_SES_US_WEST_1", "AWS_SES_US_WEST_2", "AWS_SES_ME_CENTRAL_1", "AWS_SES_AP_SOUTH_2", "AWS_SES_EU_CENTRAL_2", "AWS_SES_AP_SOUTHEAST_5", "AWS_SES_CA_WEST_1", "AWS_SES_US_GOV_EAST_1", "AWS_SES_US_GOV_WEST_1"], # required
     #     signing_attributes: {
     #       domain_signing_selector: "Selector",
     #       domain_signing_private_key: "PrivateKey",
     #       next_signing_key_length: "RSA_1024_BIT" # One of: ["RSA_1024_BIT", "RSA_2048_BIT"],
-    #       domain_signing_attributes_origin: "AWS_SES" # One of: ["AWS_SES", "EXTERNAL", "AWS_SES_AF_SOUTH_1", "AWS_SES_EU_NORTH_1", "AWS_SES_AP_SOUTH_1", "AWS_SES_EU_WEST_3", "AWS_SES_EU_WEST_2", "AWS_SES_EU_SOUTH_1", "AWS_SES_EU_WEST_1", "AWS_SES_AP_NORTHEAST_3", "AWS_SES_AP_NORTHEAST_2", "AWS_SES_ME_SOUTH_1", "AWS_SES_AP_NORTHEAST_1", "AWS_SES_IL_CENTRAL_1", "AWS_SES_SA_EAST_1", "AWS_SES_CA_CENTRAL_1", "AWS_SES_AP_SOUTHEAST_1", "AWS_SES_AP_SOUTHEAST_2", "AWS_SES_AP_SOUTHEAST_3", "AWS_SES_EU_CENTRAL_1", "AWS_SES_US_EAST_1", "AWS_SES_US_EAST_2", "AWS_SES_US_WEST_1", "AWS_SES_US_WEST_2", "AWS_SES_ME_CENTRAL_1", "AWS_SES_AP_SOUTH_2", "AWS_SES_EU_CENTRAL_2"]
+    #       domain_signing_attributes_origin: "AWS_SES" # One of: ["AWS_SES", "EXTERNAL", "AWS_SES_AF_SOUTH_1", "AWS_SES_EU_NORTH_1", "AWS_SES_AP_SOUTH_1", "AWS_SES_EU_WEST_3", "AWS_SES_EU_WEST_2", "AWS_SES_EU_SOUTH_1", "AWS_SES_EU_WEST_1", "AWS_SES_AP_NORTHEAST_3", "AWS_SES_AP_NORTHEAST_2", "AWS_SES_ME_SOUTH_1", "AWS_SES_AP_NORTHEAST_1", "AWS_SES_IL_CENTRAL_1", "AWS_SES_SA_EAST_1", "AWS_SES_CA_CENTRAL_1", "AWS_SES_AP_SOUTHEAST_1", "AWS_SES_AP_SOUTHEAST_2", "AWS_SES_AP_SOUTHEAST_3", "AWS_SES_EU_CENTRAL_1", "AWS_SES_US_EAST_1", "AWS_SES_US_EAST_2", "AWS_SES_US_WEST_1", "AWS_SES_US_WEST_2", "AWS_SES_ME_CENTRAL_1", "AWS_SES_AP_SOUTH_2", "AWS_SES_EU_CENTRAL_2", "AWS_SES_AP_SOUTHEAST_5", "AWS_SES_CA_WEST_1", "AWS_SES_US_GOV_EAST_1", "AWS_SES_US_GOV_WEST_1"]
     #     }
     #   }
     #   options = {}
@@ -3853,7 +4306,8 @@ module Aws::SESv2
     #   response.to_h #=>
     #   {
     #     dkim_status: "PENDING" # One of: ["PENDING", "SUCCESS", "FAILED", "TEMPORARY_FAILURE", "NOT_STARTED"],
-    #     dkim_tokens: ["DnsToken"]
+    #     dkim_tokens: ["DnsToken"],
+    #     signing_hosted_zone: "HostedZone"
     #   }
     # @return [Types::PutEmailIdentityDkimSigningAttributesResponse]
     def put_email_identity_dkim_signing_attributes(params = {}, options = {})
@@ -3946,18 +4400,25 @@ module Aws::SESv2
       request.send_request(options)
     end
 
-    # <p>Adds an email address to the suppression list for your account.</p>
+    # <p>Adds an email address to the suppression list for your account or for a specific
+    #             tenant. To target a tenant's suppression list, specify the <code>TenantName</code>
+    #             parameter. If you omit <code>TenantName</code>, the address is added to the
+    #             account-level suppression list.</p>
     # @param [Hash, Types::PutSuppressedDestinationRequest] params
     # @option params [String] :email_address
-    #   <p>The email address that should be added to the suppression list for your
-    #               account.</p>
+    #   <p>The email address that should be added to the suppression list for your account or
+    #               for the specified tenant.</p>
     # @option params [String] :reason
     #   <p>The factors that should cause the email address to be added to the suppression list
-    #               for your account.</p>
+    #               for your account or for the specified tenant.</p>
+    # @option params [String] :tenant_name
+    #   <p>The name of the tenant whose suppression list you want to add the address to. If you
+    #               omit this parameter, the address is added to the account-level suppression list.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     email_address: "EmailAddress", # required
     #     reason: "BOUNCE" # One of: ["BOUNCE", "COMPLAINT"], # required
+    #     tenant_name: "TenantName"
     #   }
     #   options = {}
     #   response = client.put_suppressed_destination(params, options)
@@ -3967,6 +4428,53 @@ module Aws::SESv2
     # @return [Types::PutSuppressedDestinationResponse]
     def put_suppressed_destination(params = {}, options = {})
       request = build_request(:put_suppressed_destination, params)
+      request.send_request(options)
+    end
+
+    # <p>Configure the suppression list preferences for a tenant. Use this operation to enable
+    #             or disable tenant-level suppression, or to change the suppressed reasons for a tenant.</p>
+    #          <p>When you set the suppression scope to <code>TENANT</code>, Amazon SES maintains a separate
+    #             suppression list for the tenant. When you set the scope to <code>ACCOUNT</code>, the tenant
+    #             uses the account-level suppression list.</p>
+    # @param [Hash, Types::PutTenantSuppressionAttributesRequest] params
+    # @option params [String] :tenant_name
+    #   <p>The name of the tenant to configure suppression list preferences for.</p>
+    # @option params [Array<String>] :suppressed_reasons
+    #   <p>A list that contains the reasons that email addresses are automatically added to the
+    #               suppression list for the tenant. This list can contain any or all of the following:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>COMPLAINT</code> – Amazon SES adds an email address to the suppression
+    #                       list when a message sent to that address results in a complaint.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>BOUNCE</code> – Amazon SES adds an email address to the suppression
+    #                       list when a message sent to that address results in a hard bounce.</p>
+    #               </li>
+    #            </ul>
+    # @option params [String] :suppression_scope
+    #   <p>The suppression scope for the tenant. Specify <code>TENANT</code> to use the tenant's
+    #               own suppression list, or <code>ACCOUNT</code> to use the account-level suppression list.</p>
+    #            <note>
+    #               <p>If you don't specify a suppression scope, the tenant defaults to <code>ACCOUNT</code> scope
+    #                   and uses the account-level suppression list.</p>
+    #            </note>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     tenant_name: "TenantName", # required
+    #     suppressed_reasons: ["BOUNCE" # One of: ["BOUNCE", "COMPLAINT"]],
+    #     suppression_scope: "ACCOUNT" # One of: ["ACCOUNT", "TENANT"]
+    #   }
+    #   options = {}
+    #   response = client.put_tenant_suppression_attributes(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::PutTenantSuppressionAttributesResponse]
+    def put_tenant_suppression_attributes(params = {}, options = {})
+      request = build_request(:put_tenant_suppression_attributes, params)
       request.send_request(options)
     end
 
@@ -4026,6 +4534,10 @@ module Aws::SESv2
     #                   (identities, configuration sets, and templates) are associated with this tenant.
     #               </p>
     #            </note>
+    # @option params [Types::ConfigurationOverrides] :configuration_overrides
+    #   <p>An object that overrides, for the messages in this request only, settings that would
+    #               otherwise apply to them. The overrides apply to every message in the request. Each
+    #               setting that you don't override keeps the value that already applies.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     from_email_address: "EmailAddress",
@@ -4096,7 +4608,13 @@ module Aws::SESv2
     #     ],
     #     configuration_set_name: "ConfigurationSetName",
     #     endpoint_id: "EndpointId",
-    #     tenant_name: "TenantName"
+    #     tenant_name: "TenantName",
+    #     configuration_overrides: {
+    #       tracking: {
+    #         open_tracking_enabled: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #         click_tracking_enabled: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #       }
+    #     }
     #   }
     #   options = {}
     #   response = client.send_bulk_email(params, options)
@@ -4238,6 +4756,9 @@ module Aws::SESv2
     # @option params [Types::ListManagementOptions] :list_management_options
     #   <p>An object used to specify a list or topic to which an email belongs, which will be
     #               used when a contact chooses to unsubscribe.</p>
+    # @option params [Types::ConfigurationOverrides] :configuration_overrides
+    #   <p>An object that overrides, for this message only, settings that would otherwise apply to
+    #               it. Each setting that you don't override keeps the value that already applies.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     from_email_address: "EmailAddress",
@@ -4327,6 +4848,12 @@ module Aws::SESv2
     #     list_management_options: {
     #       contact_list_name: "ContactListName", # required
     #       topic_name: "TopicName"
+    #     },
+    #     configuration_overrides: {
+    #       tracking: {
+    #         open_tracking_enabled: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #         click_tracking_enabled: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #       }
     #     }
     #   }
     #   options = {}
@@ -4435,6 +4962,40 @@ module Aws::SESv2
     # @return [Types::UntagResourceResponse]
     def untag_resource(params = {}, options = {})
       request = build_request(:untag_resource, params)
+      request.send_request(options)
+    end
+
+    # <p>Updates an existing configuration set.</p>
+    #          <p>This operation performs a partial update. Only the attributes that you include in the
+    #             request are updated; any omitted attribute is left unchanged.</p>
+    # @param [Hash, Types::UpdateConfigurationSetRequest] params
+    # @option params [String] :configuration_set_name
+    #   <p>The name of the configuration set to update.</p>
+    # @option params [Types::MessageSecurityOptions] :message_security_options
+    #   <p>The security options that apply to the MIME message itself for messages sent with the
+    #               configuration set.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     configuration_set_name: "ConfigurationSetName", # required
+    #     message_security_options: {
+    #       signing_scheme: {
+    #         # One of:
+    #         default_scheme: {
+    #         },
+    #         smime_scheme: {
+    #           signature_format: "DETACHED" # One of: ["DETACHED"]
+    #         }
+    #       }
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.update_configuration_set(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::UpdateConfigurationSetResponse]
+    def update_configuration_set(params = {}, options = {})
+      request = build_request(:update_configuration_set, params)
       request.send_request(options)
     end
 
@@ -4682,7 +5243,7 @@ module Aws::SESv2
       request.send_request(options)
     end
 
-    # <p>Update the customer-managed sending status for a reputation entity. This allows 
+    # <p>Update the customer-managed sending status for a reputation entity. This allows
     #             you to enable, disable, or reinstate sending for the entity.</p>
     #          <p>The customer-managed status works in conjunction with the Amazon Web Services Amazon SES-managed status
     #         to determine the overall sending capability. When you update the customer-managed status,
@@ -4695,7 +5256,7 @@ module Aws::SESv2
     # @option params [String] :reputation_entity_type
     #   <p>The type of reputation entity. Currently, only <code>RESOURCE</code> type entities are supported.</p>
     # @option params [String] :reputation_entity_reference
-    #   <p>The unique identifier for the reputation entity. For resource-type entities, 
+    #   <p>The unique identifier for the reputation entity. For resource-type entities,
     #               this is the Amazon Resource Name (ARN) of the resource.</p>
     # @option params [String] :sending_status
     #   <p>The new customer-managed sending status for the reputation entity. This can be one of the following:</p>
@@ -4730,8 +5291,8 @@ module Aws::SESv2
       request.send_request(options)
     end
 
-    # <p>Update the reputation management policy for a reputation entity. The policy 
-    #             determines how the entity responds to reputation findings, such as automatically 
+    # <p>Update the reputation management policy for a reputation entity. The policy
+    #             determines how the entity responds to reputation findings, such as automatically
     #             pausing sending when certain thresholds are exceeded.</p>
     #          <p>Reputation management policies are Amazon Web Services Amazon SES-managed (predefined policies).
     #         You can select from none, standard, and strict policies.</p>
@@ -4739,10 +5300,10 @@ module Aws::SESv2
     # @option params [String] :reputation_entity_type
     #   <p>The type of reputation entity. Currently, only <code>RESOURCE</code> type entities are supported.</p>
     # @option params [String] :reputation_entity_reference
-    #   <p>The unique identifier for the reputation entity. For resource-type entities, 
+    #   <p>The unique identifier for the reputation entity. For resource-type entities,
     #               this is the Amazon Resource Name (ARN) of the resource.</p>
     # @option params [String] :reputation_entity_policy
-    #   <p>The Amazon Resource Name (ARN) of the reputation management policy to apply 
+    #   <p>The Amazon Resource Name (ARN) of the reputation management policy to apply
     #               to this entity. This is an Amazon Web Services Amazon SES-managed policy.</p>
     # @example Request syntax with placeholder values
     #   params = {

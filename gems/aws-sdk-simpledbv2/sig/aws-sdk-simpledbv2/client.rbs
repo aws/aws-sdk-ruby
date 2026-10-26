@@ -1,0 +1,96 @@
+module Aws::SimpleDBv2
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?account_id_endpoint_mode: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
+      ?connect_timeout: Numeric,
+      ?convert_params: bool,
+      ?credentials_provider: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::SimpleDBv2::EndpointProvider,
+      ?http_proxy: URI::HTTP | String,
+      ?http_wire_trace: bool,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?max_attempts: Integer,
+      ?profile: String,
+      ?protocol: Symbol | Object,
+      ?raise_response_errors: bool,
+      ?read_timeout: Numeric,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_mode: String,
+      ?retry_strategy: Object,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?ssl_ca_bundle: String,
+      ?ssl_ca_directory: String,
+      ?ssl_ca_store: OpenSSL::X509::Store,
+      ?ssl_verify_peer: bool,
+      ?stub_responses: bool,
+      ?transport: Smithy::Client::NetHTTP::Transport,
+      ?use_dualstack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _GetExportResponse
+      include Smithy::Client::_Response[Types::GetExportResponse]
+      def export_arn: () -> String?
+      def client_token: () -> String?
+      def export_status: () -> String?
+      def domain_name: () -> String?
+      def requested_at: () -> Time?
+      def s3_bucket: () -> String?
+      def s3_key_prefix: () -> String?
+      def s3_sse_algorithm: () -> String?
+      def s3_sse_kms_key_id: () -> String?
+      def s3_bucket_owner: () -> String?
+      def failure_code: () -> String?
+      def failure_message: () -> String?
+      def export_manifest: () -> String?
+      def items_count: () -> Integer?
+      def export_data_cutoff_time: () -> Time?
+    end
+    def get_export: (
+      ?export_arn: String
+    ) -> _GetExportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetExportResponse
+
+    interface _ListExportsResponse
+      include Smithy::Client::_Response[Types::ListExportsResponse]
+      def export_summaries: () -> Array[Types::ExportSummary]?
+      def next_token: () -> String?
+    end
+    def list_exports: (
+      ?domain_name: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListExportsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListExportsResponse
+
+    interface _StartDomainExportResponse
+      include Smithy::Client::_Response[Types::StartDomainExportResponse]
+      def client_token: () -> String?
+      def export_arn: () -> String?
+      def requested_at: () -> Time?
+    end
+    def start_domain_export: (
+      ?client_token: String,
+      ?domain_name: String,
+      ?s3_bucket: String,
+      ?s3_key_prefix: String,
+      ?s3_sse_algorithm: String,
+      ?s3_sse_kms_key_id: String,
+      ?s3_bucket_owner: String
+    ) -> _StartDomainExportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartDomainExportResponse
+  end
+end

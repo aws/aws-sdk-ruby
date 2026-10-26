@@ -878,6 +878,8 @@ module Aws::BCMPricingCalculator
         ?created_at: Time,
         ?expires_at: Time,
         ?failure_message: String,
+        ?group_sharing_preference: String,
+        ?cost_category_group_sharing_preference_arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -888,6 +890,8 @@ module Aws::BCMPricingCalculator
       attr_accessor created_at: Time?
       attr_accessor expires_at: Time?
       attr_accessor failure_message: String?
+      attr_accessor group_sharing_preference: String?
+      attr_accessor cost_category_group_sharing_preference_arn: String?
     end
 
     class BillScenarioUsageModificationItem
@@ -989,6 +993,9 @@ module Aws::BCMPricingCalculator
         ?cost_summary: Types::BillEstimateCostSummary,
         ?created_at: Time,
         ?expires_at: Time,
+        ?group_sharing_preference: String,
+        ?cost_category_group_sharing_preference_arn: String,
+        ?cost_category_group_sharing_preference_effective_date: Time,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1000,6 +1007,9 @@ module Aws::BCMPricingCalculator
       attr_accessor cost_summary: Types::BillEstimateCostSummary?
       attr_accessor created_at: Time?
       attr_accessor expires_at: Time?
+      attr_accessor group_sharing_preference: String?
+      attr_accessor cost_category_group_sharing_preference_arn: String?
+      attr_accessor cost_category_group_sharing_preference_effective_date: Time?
     end
 
     class CreateBillScenarioRequest
@@ -1009,12 +1019,16 @@ module Aws::BCMPricingCalculator
         ?name: String,
         ?client_token: String,
         ?tags: Hash[String, String],
+        ?group_sharing_preference: String,
+        ?cost_category_group_sharing_preference_arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor name: String?
       attr_accessor client_token: String?
       attr_accessor tags: Hash[String, String]?
+      attr_accessor group_sharing_preference: String?
+      attr_accessor cost_category_group_sharing_preference_arn: String?
     end
 
     class CreateBillScenarioResponse
@@ -1028,6 +1042,8 @@ module Aws::BCMPricingCalculator
         ?created_at: Time,
         ?expires_at: Time,
         ?failure_message: String,
+        ?group_sharing_preference: String,
+        ?cost_category_group_sharing_preference_arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1038,6 +1054,8 @@ module Aws::BCMPricingCalculator
       attr_accessor created_at: Time?
       attr_accessor expires_at: Time?
       attr_accessor failure_message: String?
+      attr_accessor group_sharing_preference: String?
+      attr_accessor cost_category_group_sharing_preference_arn: String?
     end
 
     class CreateWorkloadEstimateRequest
@@ -1233,6 +1251,9 @@ module Aws::BCMPricingCalculator
         ?cost_summary: Types::BillEstimateCostSummary,
         ?created_at: Time,
         ?expires_at: Time,
+        ?group_sharing_preference: String,
+        ?cost_category_group_sharing_preference_arn: String,
+        ?cost_category_group_sharing_preference_effective_date: Time,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1244,6 +1265,9 @@ module Aws::BCMPricingCalculator
       attr_accessor cost_summary: Types::BillEstimateCostSummary?
       attr_accessor created_at: Time?
       attr_accessor expires_at: Time?
+      attr_accessor group_sharing_preference: String?
+      attr_accessor cost_category_group_sharing_preference_arn: String?
+      attr_accessor cost_category_group_sharing_preference_effective_date: Time?
     end
 
     class GetBillScenarioRequest
@@ -1268,6 +1292,8 @@ module Aws::BCMPricingCalculator
         ?created_at: Time,
         ?expires_at: Time,
         ?failure_message: String,
+        ?group_sharing_preference: String,
+        ?cost_category_group_sharing_preference_arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1278,6 +1304,8 @@ module Aws::BCMPricingCalculator
       attr_accessor created_at: Time?
       attr_accessor expires_at: Time?
       attr_accessor failure_message: String?
+      attr_accessor group_sharing_preference: String?
+      attr_accessor cost_category_group_sharing_preference_arn: String?
     end
 
     class GetPreferencesRequest
@@ -1342,6 +1370,12 @@ module Aws::BCMPricingCalculator
       attr_accessor total_cost: Float?
       attr_accessor cost_currency: String?
       attr_accessor failure_message: String?
+    end
+
+    module GroupSharingPreferenceEnum
+      OPEN: String
+      PRIORITIZED: String
+      RESTRICTED: String
     end
 
     class HistoricalUsageEntity
@@ -1648,6 +1682,8 @@ module Aws::BCMPricingCalculator
     module ListBillScenariosFilterName
       STATUS: String
       NAME: String
+      GROUP_SHARING_PREFERENCE: String
+      COST_CATEGORY_ARN: String
     end
 
     class ListBillScenariosRequest
@@ -1976,6 +2012,9 @@ module Aws::BCMPricingCalculator
         ?cost_summary: Types::BillEstimateCostSummary,
         ?created_at: Time,
         ?expires_at: Time,
+        ?group_sharing_preference: String,
+        ?cost_category_group_sharing_preference_arn: String,
+        ?cost_category_group_sharing_preference_effective_date: Time,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1987,6 +2026,9 @@ module Aws::BCMPricingCalculator
       attr_accessor cost_summary: Types::BillEstimateCostSummary?
       attr_accessor created_at: Time?
       attr_accessor expires_at: Time?
+      attr_accessor group_sharing_preference: String?
+      attr_accessor cost_category_group_sharing_preference_arn: String?
+      attr_accessor cost_category_group_sharing_preference_effective_date: Time?
     end
 
     class UpdateBillScenarioRequest
@@ -1996,12 +2038,16 @@ module Aws::BCMPricingCalculator
         ?identifier: String,
         ?name: String,
         ?expires_at: Time,
+        ?group_sharing_preference: String,
+        ?cost_category_group_sharing_preference_arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor identifier: String?
       attr_accessor name: String?
       attr_accessor expires_at: Time?
+      attr_accessor group_sharing_preference: String?
+      attr_accessor cost_category_group_sharing_preference_arn: String?
     end
 
     class UpdateBillScenarioResponse
@@ -2015,6 +2061,8 @@ module Aws::BCMPricingCalculator
         ?created_at: Time,
         ?expires_at: Time,
         ?failure_message: String,
+        ?group_sharing_preference: String,
+        ?cost_category_group_sharing_preference_arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2025,6 +2073,8 @@ module Aws::BCMPricingCalculator
       attr_accessor created_at: Time?
       attr_accessor expires_at: Time?
       attr_accessor failure_message: String?
+      attr_accessor group_sharing_preference: String?
+      attr_accessor cost_category_group_sharing_preference_arn: String?
     end
 
     class UpdatePreferencesRequest

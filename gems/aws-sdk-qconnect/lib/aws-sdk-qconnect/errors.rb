@@ -32,6 +32,7 @@ module Aws::QConnect
   # * {ThrottlingException}
   # * {TooManyTagsException}
   # * {UnauthorizedException}
+  # * {UnprocessableContentException}
   # * {ValidationException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
@@ -65,7 +66,7 @@ module Aws::QConnect
       end
     end
 
-    # <p>An error occurred while calling a dependency. For example, calling <code>connect:DecribeContact</code> as part of <code>CreateSession</code> with a contactArn.</p>
+    # <p>The request failed because it depends on another request that failed.</p>
     class DependencyFailedException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::QConnect::Types::DependencyFailedException] data
@@ -178,6 +179,19 @@ module Aws::QConnect
     class UnauthorizedException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::QConnect::Types::UnauthorizedException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>The server has a failure of processing the message</p>
+    class UnprocessableContentException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::QConnect::Types::UnprocessableContentException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
         super
       end

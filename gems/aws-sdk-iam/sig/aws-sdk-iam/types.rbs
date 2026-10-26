@@ -1,6 +1,17 @@
 module Aws::IAM
   module Types
 
+    class AcceptDelegationRequestRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delegation_request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delegation_request_id: String?
+    end
+
     module AccessAdvisorUsageGranularityType
       SERVICE_LEVEL: String
       ACTION_LEVEL: String
@@ -89,6 +100,32 @@ module Aws::IAM
       attr_accessor message: String?
     end
 
+    class AcquireRoleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_arn: String,
+        ?template_minor_version: Integer,
+        ?replacement_values: Hash[String, Types::ReplacementValueEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_arn: String?
+      attr_accessor template_minor_version: Integer?
+      attr_accessor replacement_values: Hash[String, Types::ReplacementValueEntry]?
+    end
+
+    class AcquireRoleResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role: Types::Role,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role: Types::Role?
+    end
+
     class AddClientIDToOpenIDConnectProviderRequest
       include Smithy::Schema::Structure
 
@@ -126,6 +163,17 @@ module Aws::IAM
 
       attr_accessor group_name: String?
       attr_accessor user_name: String?
+    end
+
+    class AssociateDelegationRequestRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delegation_request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delegation_request_id: String?
     end
 
     class AttachGroupPolicyRequest
@@ -191,6 +239,12 @@ module Aws::IAM
 
       attr_accessor policy_name: String?
       attr_accessor policy_arn: String?
+    end
+
+    module AttachmentType
+      USER: String
+      GROUP: String
+      ROLE: String
     end
 
     class CallerIsNotManagementAccountException
@@ -289,6 +343,46 @@ module Aws::IAM
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor account_alias: String?
+    end
+
+    class CreateDelegationRequestRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?owner_account_id: String,
+        ?description: String,
+        ?permissions: Types::DelegationPermission,
+        ?request_message: String,
+        ?requestor_workflow_id: String,
+        ?redirect_url: String,
+        ?notification_channel: String,
+        ?session_duration: Integer,
+        ?only_send_by_owner: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor owner_account_id: String?
+      attr_accessor description: String?
+      attr_accessor permissions: Types::DelegationPermission?
+      attr_accessor request_message: String?
+      attr_accessor requestor_workflow_id: String?
+      attr_accessor redirect_url: String?
+      attr_accessor notification_channel: String?
+      attr_accessor session_duration: Integer?
+      attr_accessor only_send_by_owner: bool?
+    end
+
+    class CreateDelegationRequestResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?console_deep_link: String,
+        ?delegation_request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor console_deep_link: String?
+      attr_accessor delegation_request_id: String?
     end
 
     class CreateGroupRequest
@@ -669,6 +763,68 @@ module Aws::IAM
 
       attr_accessor user_name: String?
       attr_accessor serial_number: String?
+    end
+
+    class DelegationPermission
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_template_arn: String,
+        ?parameters: Array[Types::PolicyParameter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_template_arn: String?
+      attr_accessor parameters: Array[Types::PolicyParameter]?
+    end
+
+    class DelegationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delegation_request_id: String,
+        ?owner_account_id: String,
+        ?description: String,
+        ?request_message: String,
+        ?permissions: Types::DelegationPermission,
+        ?permission_policy: String,
+        ?role_permission_restriction_arns: Array[String],
+        ?owner_id: String,
+        ?approver_id: String,
+        ?state: String,
+        ?expiration_time: Time,
+        ?requestor_id: String,
+        ?requestor_name: String,
+        ?create_date: Time,
+        ?session_duration: Integer,
+        ?redirect_url: String,
+        ?notes: String,
+        ?rejection_reason: String,
+        ?only_send_by_owner: bool,
+        ?updated_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delegation_request_id: String?
+      attr_accessor owner_account_id: String?
+      attr_accessor description: String?
+      attr_accessor request_message: String?
+      attr_accessor permissions: Types::DelegationPermission?
+      attr_accessor permission_policy: String?
+      attr_accessor role_permission_restriction_arns: Array[String]?
+      attr_accessor owner_id: String?
+      attr_accessor approver_id: String?
+      attr_accessor state: String?
+      attr_accessor expiration_time: Time?
+      attr_accessor requestor_id: String?
+      attr_accessor requestor_name: String?
+      attr_accessor create_date: Time?
+      attr_accessor session_duration: Integer?
+      attr_accessor redirect_url: String?
+      attr_accessor notes: String?
+      attr_accessor rejection_reason: String?
+      attr_accessor only_send_by_owner: bool?
+      attr_accessor updated_time: Time?
     end
 
     class DeleteAccessKeyRequest
@@ -1137,6 +1293,17 @@ module Aws::IAM
       attr_accessor enabled_features: Array[String]?
     end
 
+    class EnableOutboundWebIdentityFederationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?issuer_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor issuer_identifier: String?
+    end
+
     class EntityAlreadyExistsException
       include Smithy::Schema::Structure
 
@@ -1237,6 +1404,28 @@ module Aws::IAM
       attr_accessor permissions_boundary_decision_detail: Types::PermissionsBoundaryDecisionDetail?
       attr_accessor eval_decision_details: Hash[String, String]?
       attr_accessor resource_specific_results: Array[Types::ResourceSpecificResult]?
+    end
+
+    class FeatureDisabledException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class FeatureEnabledException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
     end
 
     module FeatureType
@@ -1376,6 +1565,26 @@ module Aws::IAM
       attr_accessor password_policy: Types::PasswordPolicy?
     end
 
+    class GetAccountPropertiesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetAccountPropertiesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?properties: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor properties: Hash[String, String]?
+    end
+
     class GetAccountSummaryResponse
       include Smithy::Schema::Structure
 
@@ -1448,6 +1657,34 @@ module Aws::IAM
       attr_accessor generated_time: Time?
     end
 
+    class GetDelegationRequestRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delegation_request_id: String,
+        ?delegation_permission_check: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delegation_request_id: String?
+      attr_accessor delegation_permission_check: bool?
+    end
+
+    class GetDelegationRequestResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delegation_request: Types::DelegationRequest,
+        ?permission_check_status: String,
+        ?permission_check_result: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delegation_request: Types::DelegationRequest?
+      attr_accessor permission_check_status: String?
+      attr_accessor permission_check_result: String?
+    end
+
     class GetGroupPolicyRequest
       include Smithy::Schema::Structure
 
@@ -1506,6 +1743,34 @@ module Aws::IAM
       attr_accessor users: Array[Types::User]?
       attr_accessor is_truncated: bool?
       attr_accessor marker: String?
+    end
+
+    class GetHumanReadableSummaryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entity_arn: String,
+        ?locale: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entity_arn: String?
+      attr_accessor locale: String?
+    end
+
+    class GetHumanReadableSummaryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?summary_content: String,
+        ?locale: String,
+        ?summary_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor summary_content: String?
+      attr_accessor locale: String?
+      attr_accessor summary_state: String?
     end
 
     class GetInstanceProfileRequest
@@ -1656,6 +1921,19 @@ module Aws::IAM
       attr_accessor error_details: Types::ErrorDetails?
     end
 
+    class GetOutboundWebIdentityFederationInfoResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?issuer_identifier: String,
+        ?jwt_vending_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor issuer_identifier: String?
+      attr_accessor jwt_vending_enabled: bool?
+    end
+
     class GetPolicyRequest
       include Smithy::Schema::Structure
 
@@ -1750,6 +2028,30 @@ module Aws::IAM
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor role: Types::Role?
+    end
+
+    class GetRoleTemplateVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_arn: String,
+        ?minor_version: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_arn: String?
+      attr_accessor minor_version: Integer?
+    end
+
+    class GetRoleTemplateVersionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role_template_version: Types::RoleTemplateVersion,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role_template_version: Types::RoleTemplateVersion?
     end
 
     class GetSAMLProviderRequest
@@ -2030,6 +2332,34 @@ module Aws::IAM
       attr_accessor attached_managed_policies: Array[Types::AttachedPolicy]?
     end
 
+    class InlinePolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_name: String,
+        ?policy_document: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_name: String?
+      attr_accessor policy_document: String?
+    end
+
+    class InlinePolicyIdentifierType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_name: String,
+        ?attachment_type: String,
+        ?attachment_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_name: String?
+      attr_accessor attachment_type: String?
+      attr_accessor attachment_name: String?
+    end
+
     class InstanceProfile
       include Smithy::Schema::Structure
 
@@ -2282,6 +2612,36 @@ module Aws::IAM
       attr_accessor attached_policies: Array[Types::AttachedPolicy]?
       attr_accessor is_truncated: bool?
       attr_accessor marker: String?
+    end
+
+    class ListDelegationRequestsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?owner_id: String,
+        ?marker: String,
+        ?max_items: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor owner_id: String?
+      attr_accessor marker: String?
+      attr_accessor max_items: Integer?
+    end
+
+    class ListDelegationRequestsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delegation_requests: Array[Types::DelegationRequest],
+        ?marker: String,
+        ?is_truncated: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delegation_requests: Array[Types::DelegationRequest]?
+      attr_accessor marker: String?
+      attr_accessor is_truncated: bool?
     end
 
     class ListEntitiesForPolicyRequest
@@ -3274,6 +3634,17 @@ module Aws::IAM
       attr_accessor policy_version_list: Array[Types::PolicyVersion]?
     end
 
+    class NameConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
     class NoSuchEntityException
       include Smithy::Schema::Structure
 
@@ -3307,6 +3678,17 @@ module Aws::IAM
       attr_accessor message: String?
     end
 
+    class OrderedOrganizationPolicyType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_control_policy_input_list: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_control_policy_input_list: Array[String]?
+    end
+
     class OrganizationNotFoundException
       include Smithy::Schema::Structure
 
@@ -3338,6 +3720,29 @@ module Aws::IAM
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor allowed_by_organizations: bool?
+    end
+
+    class ParameterDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?type: String,
+        ?sub_type: String,
+        ?description: String,
+        ?is_required: bool,
+        ?default_value: String,
+        ?immutable: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor sub_type: String?
+      attr_accessor description: String?
+      attr_accessor is_required: bool?
+      attr_accessor default_value: String?
+      attr_accessor immutable: bool?
     end
 
     class PasswordPolicy
@@ -3490,6 +3895,39 @@ module Aws::IAM
       attr_accessor group_id: String?
     end
 
+    class PolicyIdentifier
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?policy_type: String,
+        ?policy_arn: String,
+        ?inline_policy_identifier: Types::InlinePolicyIdentifierType,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_type: String?
+      attr_accessor policy_arn: String?
+      attr_accessor inline_policy_identifier: Types::InlinePolicyIdentifierType?
+
+      class PolicyType < PolicyIdentifier
+      end
+      class PolicyArn < PolicyIdentifier
+      end
+      class InlinePolicyIdentifier < PolicyIdentifier
+      end
+      class Unknown < PolicyIdentifier
+      end
+    end
+
+    module PolicyIdentifierPolicyType
+      INLINE: String
+      AWS_MANAGED: String
+      USER_MANAGED: String
+      PERMISSION_BOUNDARY: String
+      SCP: String
+      RCP: String
+    end
+
     class PolicyNotAttachableException
       include Smithy::Schema::Structure
 
@@ -3499,6 +3937,26 @@ module Aws::IAM
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    class PolicyParameter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+      attr_accessor type: String?
+    end
+
+    module PolicyParameterTypeEnum
+      STRING: String
+      STRING_LIST: String
     end
 
     class PolicyRole
@@ -3572,6 +4030,26 @@ module Aws::IAM
       attr_accessor column: Integer?
     end
 
+    class PutAccountPropertiesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?properties: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor properties: Hash[String, String]?
+    end
+
+    class PutAccountPropertiesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
     class PutGroupPolicyRequest
       include Smithy::Schema::Structure
 
@@ -3643,6 +4121,19 @@ module Aws::IAM
       attr_accessor policy_document: String?
     end
 
+    class RejectDelegationRequestRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delegation_request_id: String,
+        ?notes: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delegation_request_id: String?
+      attr_accessor notes: String?
+    end
+
     class RemoveClientIDFromOpenIDConnectProviderRequest
       include Smithy::Schema::Structure
 
@@ -3680,6 +4171,17 @@ module Aws::IAM
 
       attr_accessor group_name: String?
       attr_accessor user_name: String?
+    end
+
+    class ReplacementValueEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor values: Array[String]?
     end
 
     module ReportFormatType
@@ -3780,6 +4282,7 @@ module Aws::IAM
         ?permissions_boundary: Types::AttachedPermissionsBoundary,
         ?tags: Array[Types::Tag],
         ?role_last_used: Types::RoleLastUsed,
+        ?source_role_template: Types::SourceRoleTemplate,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3794,6 +4297,7 @@ module Aws::IAM
       attr_accessor permissions_boundary: Types::AttachedPermissionsBoundary?
       attr_accessor tags: Array[Types::Tag]?
       attr_accessor role_last_used: Types::RoleLastUsed?
+      attr_accessor source_role_template: Types::SourceRoleTemplate?
     end
 
     class RoleDetail
@@ -3840,6 +4344,83 @@ module Aws::IAM
 
       attr_accessor last_used_date: Time?
       attr_accessor region: String?
+    end
+
+    class RoleModifiedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class RoleTemplateDisabledException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class RoleTemplateVersion
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_arn: String,
+        ?template_name: String,
+        ?template_version_id: String,
+        ?description: String,
+        ?major_version: Integer,
+        ?default_minor_version: Integer,
+        ?managed_by_type: String,
+        ?managed_by_value: String,
+        ?enabled: bool,
+        ?minor_version: Integer,
+        ?role_name_pattern: String,
+        ?role_path_pattern: String,
+        ?role_description_pattern: String,
+        ?assume_role_policy_document_template: String,
+        ?inline_policy_templates: Array[Types::InlinePolicy],
+        ?managed_policy_arns: Array[String],
+        ?permission_boundary_arn: String,
+        ?parameters_definition: Array[Types::ParameterDefinition],
+        ?role_tags_template: Array[Types::TagTemplate],
+        ?max_session_duration: Integer,
+        ?version_enabled: bool,
+        ?create_timestamp: Time,
+        ?update_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_arn: String?
+      attr_accessor template_name: String?
+      attr_accessor template_version_id: String?
+      attr_accessor description: String?
+      attr_accessor major_version: Integer?
+      attr_accessor default_minor_version: Integer?
+      attr_accessor managed_by_type: String?
+      attr_accessor managed_by_value: String?
+      attr_accessor enabled: bool?
+      attr_accessor minor_version: Integer?
+      attr_accessor role_name_pattern: String?
+      attr_accessor role_path_pattern: String?
+      attr_accessor role_description_pattern: String?
+      attr_accessor assume_role_policy_document_template: String?
+      attr_accessor inline_policy_templates: Array[Types::InlinePolicy]?
+      attr_accessor managed_policy_arns: Array[String]?
+      attr_accessor permission_boundary_arn: String?
+      attr_accessor parameters_definition: Array[Types::ParameterDefinition]?
+      attr_accessor role_tags_template: Array[Types::TagTemplate]?
+      attr_accessor max_session_duration: Integer?
+      attr_accessor version_enabled: bool?
+      attr_accessor create_timestamp: Time?
+      attr_accessor update_timestamp: Time?
     end
 
     class RoleUsageType
@@ -3919,6 +4500,17 @@ module Aws::IAM
       attr_accessor ssh_public_key_id: String?
       attr_accessor status: String?
       attr_accessor upload_date: Time?
+    end
+
+    class SendDelegationTokenRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delegation_request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delegation_request_id: String?
     end
 
     class ServerCertificate
@@ -4133,6 +4725,7 @@ module Aws::IAM
       def initialize: (
         ?policy_input_list: Array[String],
         ?permissions_boundary_policy_input_list: Array[String],
+        ?ordered_organization_policy_input_list: Array[Types::OrderedOrganizationPolicyType],
         ?action_names: Array[String],
         ?resource_arns: Array[String],
         ?resource_policy: String,
@@ -4147,6 +4740,7 @@ module Aws::IAM
 
       attr_accessor policy_input_list: Array[String]?
       attr_accessor permissions_boundary_policy_input_list: Array[String]?
+      attr_accessor ordered_organization_policy_input_list: Array[Types::OrderedOrganizationPolicyType]?
       attr_accessor action_names: Array[String]?
       attr_accessor resource_arns: Array[String]?
       attr_accessor resource_policy: String?
@@ -4180,6 +4774,7 @@ module Aws::IAM
         ?policy_source_arn: String,
         ?policy_input_list: Array[String],
         ?permissions_boundary_policy_input_list: Array[String],
+        ?policy_exclusion_list: Array[Types::PolicyIdentifier],
         ?action_names: Array[String],
         ?resource_arns: Array[String],
         ?resource_policy: String,
@@ -4195,6 +4790,7 @@ module Aws::IAM
       attr_accessor policy_source_arn: String?
       attr_accessor policy_input_list: Array[String]?
       attr_accessor permissions_boundary_policy_input_list: Array[String]?
+      attr_accessor policy_exclusion_list: Array[Types::PolicyIdentifier]?
       attr_accessor action_names: Array[String]?
       attr_accessor resource_arns: Array[String]?
       attr_accessor resource_policy: String?
@@ -4204,6 +4800,19 @@ module Aws::IAM
       attr_accessor resource_handling_option: String?
       attr_accessor max_items: Integer?
       attr_accessor marker: String?
+    end
+
+    class SourceRoleTemplate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_arn: String,
+        ?template_minor_version: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_arn: String?
+      attr_accessor template_minor_version: Integer?
     end
 
     class Statement
@@ -4325,6 +4934,19 @@ module Aws::IAM
 
       attr_accessor server_certificate_name: String?
       attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagTemplate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
     end
 
     class TagUserRequest
@@ -4536,6 +5158,19 @@ module Aws::IAM
 
       attr_accessor role_name: String?
       attr_accessor policy_document: String?
+    end
+
+    class UpdateDelegationRequestRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delegation_request_id: String,
+        ?notes: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delegation_request_id: String?
+      attr_accessor notes: String?
     end
 
     class UpdateGroupRequest
@@ -4918,6 +5553,31 @@ module Aws::IAM
       FAILED: String
     end
 
+    module ManagedByTypeType
+      Service: String
+    end
+
+    module ParameterTypeType
+      String: String
+      StringList: String
+      Number: String
+      NumberList: String
+      Arn: String
+      ArnList: String
+    end
+
+    module PermissionCheckResultType
+      ALLOWED: String
+      DENIED: String
+      UNSURE: String
+    end
+
+    module PermissionCheckStatusType
+      COMPLETE: String
+      IN_PROGRESS: String
+      FAILED: String
+    end
+
     module PolicyOwnerEntityType
       USER: String
       ROLE: String
@@ -4940,6 +5600,16 @@ module Aws::IAM
       SERVICE_NAMESPACE_DESCENDING: String
       LAST_AUTHENTICATED_TIME_ASCENDING: String
       LAST_AUTHENTICATED_TIME_DESCENDING: String
+    end
+
+    module StateType
+      UNASSIGNED: String
+      ASSIGNED: String
+      PENDING_APPROVAL: String
+      FINALIZED: String
+      ACCEPTED: String
+      REJECTED: String
+      EXPIRED: String
     end
 
     module StatusType
@@ -4976,6 +5646,20 @@ module Aws::IAM
       PolicyVersionsInUseQuota: String
       VersionsPerPolicyQuota: String
       GlobalEndpointTokenVersion: String
+      AssumeRolePolicySizeQuota: String
+      InstanceProfiles: String
+      InstanceProfilesQuota: String
+      Providers: String
+      RolePolicySizeQuota: String
+      Roles: String
+      RolesQuota: String
+    end
+
+    module SummaryStateType
+      AVAILABLE: String
+      NOT_AVAILABLE: String
+      NOT_SUPPORTED: String
+      FAILED: String
     end
   end
 end

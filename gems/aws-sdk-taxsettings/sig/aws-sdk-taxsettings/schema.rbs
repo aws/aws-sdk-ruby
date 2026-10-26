@@ -30,8 +30,9 @@ module Aws::TaxSettings
     BatchPutTaxRegistrationErrors: ListShape
     BatchPutTaxRegistrationRequest: StructureShape
     BatchPutTaxRegistrationResponse: StructureShape
-    Boolean: BooleanShape
+    BelgiumAdditionalInfo: StructureShape
     BrazilAdditionalInfo: StructureShape
+    BusinessNumber: StringShape
     BusinessRegistrationNumber: StringShape
     BusinessRepresentativeName: StringShape
     CanadaAdditionalInfo: StructureShape
@@ -41,12 +42,15 @@ module Aws::TaxSettings
     CaseCreationLimitExceededException: StructureShape
     CcmCode: StringShape
     CertifiedEmailId: StringShape
+    ChileAdditionalInfo: StructureShape
+    ChileDocumentType: EnumShape
     CigNumber: StringShape
     City: StringShape
     ConflictException: StructureShape
     ContractingAuthorityCode: StringShape
     CountryCode: StringShape
     CupNumber: StringShape
+    CustomerType: EnumShape
     DateOfBirth: StringShape
     DateString: StringShape
     DecisionNumber: StringShape
@@ -70,6 +74,7 @@ module Aws::TaxSettings
     ExemptionFileBlob: BlobShape
     FieldName: StringShape
     FileBlob: BlobShape
+    FranceAdditionalInfo: StructureShape
     GenericString: StringShape
     GeorgiaAdditionalInfo: StructureShape
     GetTaxExemptionTypesRequest: StructureShape
@@ -110,11 +115,15 @@ module Aws::TaxSettings
     MalaysiaServiceTaxCode: EnumShape
     MalaysiaServiceTaxCodesList: ListShape
     MaxResults: IntegerShape
+    MonacoAdditionalInfo: StructureShape
     PaginationTokenString: StringShape
     Pan: StringShape
     PaymentVoucherNumber: StringShape
+    PeppolId: StringShape
     PersonType: EnumShape
+    PhilippinesAdditionalInfo: StructureShape
     PolandAdditionalInfo: StructureShape
+    PolandTaxRegistrationNumberType: EnumShape
     PostalCode: StringShape
     PpnExceptionDesignationCode: StringShape
     PutSupplementalTaxRegistrationRequest: StructureShape
@@ -139,6 +148,7 @@ module Aws::TaxSettings
     SecondaryTaxId: StringShape
     Sector: EnumShape
     Seller: StringShape
+    SirenNumber: StringShape
     SourceS3Location: StructureShape
     SouthKoreaAdditionalInfo: StructureShape
     SpainAdditionalInfo: StructureShape

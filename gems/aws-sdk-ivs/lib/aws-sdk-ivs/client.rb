@@ -144,18 +144,18 @@ module Aws::Ivs
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -222,6 +222,13 @@ module Aws::Ivs
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {
+    #     access_control_allow_origin: "String",
+    #     access_control_expose_headers: "String",
+    #     cache_control: "String",
+    #     content_security_policy: "String",
+    #     strict_transport_security: "String",
+    #     x_content_type_options: "String",
+    #     x_frame_options: "String",
     #     channels: [
     #       {
     #         arn: "ChannelArn",
@@ -247,7 +254,8 @@ module Aws::Ivs
     #           policy: "ALLOW" # One of: ["ALLOW", "REQUIRE"],
     #           maximum_resolution: "SD" # One of: ["SD", "HD", "FULL_HD"]
     #         },
-    #         container_format: "ContainerFormat"
+    #         container_format: "ContainerFormat",
+    #         ad_configuration_arn: "ChannelAdConfigurationArn"
     #       }
     #     ],
     #     errors: [
@@ -277,6 +285,13 @@ module Aws::Ivs
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {
+    #     access_control_allow_origin: "String",
+    #     access_control_expose_headers: "String",
+    #     cache_control: "String",
+    #     content_security_policy: "String",
+    #     strict_transport_security: "String",
+    #     x_content_type_options: "String",
+    #     x_frame_options: "String",
     #     stream_keys: [
     #       {
     #         arn: "StreamKeyArn",
@@ -301,8 +316,7 @@ module Aws::Ivs
       request.send_request(options)
     end
 
-    # <p>Performs <a>StartViewerSessionRevocation</a> on multiple channel ARN and viewer
-    #       ID pairs simultaneously.</p>
+    # <p>Performs <a>StartViewerSessionRevocation</a> on multiple channel ARN and viewer ID pairs simultaneously.</p>
     # @param [Hash, Types::BatchStartViewerSessionRevocationInput] params
     # @option params [Array<Types::BatchStartViewerSessionRevocationViewerSession>] :viewer_sessions
     #   <p>Array of viewer sessions, one per channel-ARN and viewer-ID pair.</p>
@@ -321,6 +335,13 @@ module Aws::Ivs
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {
+    #     access_control_allow_origin: "String",
+    #     access_control_expose_headers: "String",
+    #     cache_control: "String",
+    #     content_security_policy: "String",
+    #     strict_transport_security: "String",
+    #     x_content_type_options: "String",
+    #     x_frame_options: "String",
     #     errors: [
     #       {
     #         channel_arn: "ChannelArn", # required
@@ -336,42 +357,86 @@ module Aws::Ivs
       request.send_request(options)
     end
 
+    # <p>Creates a new ad configuration to be used for server-side ad insertion.</p>
+    # @param [Hash, Types::CreateAdConfigurationRequest] params
+    # @option params [String] :name
+    #   <p>Ad configuration name. Defaults to “”.</p>
+    # @option params [Array<Types::MediaTailorPlaybackConfiguration>] :media_tailor_playback_configurations
+    #   <p>List of integration configurations with MediaTailor resources. The first item in the list is the default playback configuration used for the ad configuration. To select a different configuration per viewing session, see <a href="https://docs.aws.amazon.com/ivs/latest/LowLatencyUserGuide/private-channels-generate-tokens.html">Generate and Sign IVS Playback Tokens</a>.</p>
+    # @option params [Types::PostRollConfiguration] :post_roll_configuration
+    #   <p>Configuration for the post-roll ad break to use for this ad configuration. Default: disabled (<code>enabled</code> set to false, <code>durationSeconds</code> set to 15).</p>
+    # @option params [Hash<String, String>] :tags
+    #   <p>Array of 1-50 maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging Amazon Web Services Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     name: "AdConfigurationName",
+    #     media_tailor_playback_configurations: [ # required
+    #       {
+    #         playback_configuration_arn: "MediaTailorPlaybackConfigurationArn"
+    #       }
+    #     ],
+    #     post_roll_configuration: {
+    #       duration_seconds: 1, # required
+    #       enabled: false, # required
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue"
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.create_ad_configuration(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     ad_configuration: { # required
+    #       arn: "AdConfigurationArn", # required
+    #       name: "AdConfigurationName",
+    #       media_tailor_playback_configurations: [ # required
+    #         {
+    #           playback_configuration_arn: "MediaTailorPlaybackConfigurationArn"
+    #         }
+    #       ],
+    #       post_roll_configuration: {
+    #         duration_seconds: 1, # required
+    #         enabled: false, # required
+    #       },
+    #       tags: {
+    #         "TagKey" => "TagValue"
+    #       }
+    #     }
+    #   }
+    # @return [Types::CreateAdConfigurationResponse]
+    def create_ad_configuration(params = {}, options = {})
+      request = build_request(:create_ad_configuration, params)
+      request.send_request(options)
+    end
+
     # <p>Creates a new channel and an associated stream key to start streaming.</p>
     # @param [Hash, Types::CreateChannelInput] params
     # @option params [String] :name
     #   <p>Channel name.</p>
     # @option params [String] :latency_mode
-    #   <p>Channel latency mode. Use <code>NORMAL</code> to broadcast and deliver live video up to
-    #         Full HD. Use <code>LOW</code> for near-real-time interaction with viewers. Default: <code>LOW</code>.</p>
+    #   <p>Channel latency mode. Use <code>NORMAL</code> to broadcast and deliver live video up to Full HD. Use <code>LOW</code> for near-real-time interaction with viewers. Default: <code>LOW</code>.</p>
     # @option params [String] :type
-    #   <p>Channel type, which determines the allowable resolution and bitrate. <i>If you
-    #           exceed the allowable input resolution or bitrate, the stream probably will disconnect
-    #           immediately.</i> Default: <code>STANDARD</code>. For details, see <a href="https://docs.aws.amazon.com/ivs/latest/LowLatencyAPIReference/channel-types.html">Channel
-    #           Types</a>.</p>
+    #   <p>Channel type, which determines the allowable resolution and bitrate. <i>If you exceed the allowable input resolution or bitrate, the stream probably will disconnect immediately.</i> Default: <code>STANDARD</code>. For details, see <a href="https://docs.aws.amazon.com/ivs/latest/LowLatencyUserGuide/channel-types.html">Channel Types</a>.</p>
     # @option params [Boolean] :authorized
-    #   <p>Whether the channel is private (enabled for playback authorization). Default:
-    #           <code>false</code>.</p>
+    #   <p>Whether the channel is private (enabled for playback authorization). Default: <code>false</code>.</p>
     # @option params [String] :recording_configuration_arn
-    #   <p>Recording-configuration ARN. A valid ARN value here both specifies the ARN and enables recording.
-    #        Default: "" (empty string, recording is disabled).</p>
+    #   <p>Recording-configuration ARN. A valid ARN value here both specifies the ARN and enables recording. Default: "" (empty string, recording is disabled).</p>
     # @option params [Hash<String, String>] :tags
-    #   <p>Array of 1-50 maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging Amazon Web Services Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is
-    #         documented there.</p>
+    #   <p>Array of 1-50 maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging Amazon Web Services Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.</p>
     # @option params [Boolean] :insecure_ingest
     #   <p>Whether the channel allows insecure RTMP and SRT ingest. Default: <code>false</code>.</p>
     # @option params [String] :preset
-    #   <p>Optional transcode preset for the channel. This is selectable only for
-    #           <code>ADVANCED_HD</code> and <code>ADVANCED_SD</code> channel types. For those channel
-    #         types, the default <code>preset</code> is <code>HIGHER_BANDWIDTH_DELIVERY</code>. For other
-    #         channel types (<code>BASIC</code> and <code>STANDARD</code>), <code>preset</code> is the empty
-    #         string (<code>""</code>).</p>
+    #   <p>Optional transcode preset for the channel. This is selectable only for <code>ADVANCED_HD</code> and <code>ADVANCED_SD</code> channel types. For those channel types, the default <code>preset</code> is <code>HIGHER_BANDWIDTH_DELIVERY</code>. For other channel types (<code>BASIC</code> and <code>STANDARD</code>), <code>preset</code> is the empty string (<code>""</code>).</p>
     # @option params [String] :playback_restriction_policy_arn
-    #   <p>Playback-restriction-policy ARN. A valid ARN value here both specifies the ARN and enables playback restriction.
-    #       Default: "" (empty string, no playback restriction policy is applied).</p>
+    #   <p>Playback-restriction-policy ARN. A valid ARN value here both specifies the ARN and enables playback restriction. Default: "" (empty string, no playback restriction policy is applied).</p>
     # @option params [Types::MultitrackInputConfiguration] :multitrack_input_configuration
     #   <p>Object specifying multitrack input configuration. Default: no multitrack input configuration is specified.</p>
     # @option params [String] :container_format
     #   <p>Indicates which content-packaging format is used (MPEG-TS or fMP4). If <code>multitrackInputConfiguration</code> is specified and <code>enabled</code> is <code>true</code>, then <code>containerFormat</code> is required and must be set to <code>FRAGMENTED_MP4</code>. Otherwise, <code>containerFormat</code> may be set to <code>TS</code> or <code>FRAGMENTED_MP4</code>. Default: <code>TS</code>.</p>
+    # @option params [String] :ad_configuration_arn
+    #   <p>ARN of the ad configuration associated with the channel.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     name: "ChannelName",
@@ -390,7 +455,8 @@ module Aws::Ivs
     #       policy: "ALLOW" # One of: ["ALLOW", "REQUIRE"],
     #       maximum_resolution: "SD" # One of: ["SD", "HD", "FULL_HD"]
     #     },
-    #     container_format: "ContainerFormat"
+    #     container_format: "ContainerFormat",
+    #     ad_configuration_arn: "ChannelAdConfigurationArn"
     #   }
     #   options = {}
     #   response = client.create_channel(params, options)
@@ -421,7 +487,8 @@ module Aws::Ivs
     #         policy: "ALLOW" # One of: ["ALLOW", "REQUIRE"],
     #         maximum_resolution: "SD" # One of: ["SD", "HD", "FULL_HD"]
     #       },
-    #       container_format: "ContainerFormat"
+    #       container_format: "ContainerFormat",
+    #       ad_configuration_arn: "ChannelAdConfigurationArn"
     #     },
     #     stream_key: {
     #       arn: "StreamKeyArn",
@@ -438,25 +505,18 @@ module Aws::Ivs
       request.send_request(options)
     end
 
-    # <p>Creates a new playback restriction policy, for constraining playback by countries and/or
-    #       origins.</p>
+    # <p>Creates a new playback restriction policy, for constraining playback by countries and/or origins.</p>
     # @param [Hash, Types::CreatePlaybackRestrictionPolicyRequest] params
     # @option params [Array<String>] :allowed_countries
-    #   <p>A list of country codes that control geoblocking restriction. Allowed values are the
-    #         officially assigned <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1
-    #           alpha-2</a> codes. Default: All countries (an empty array).</p>
+    #   <p>A list of country codes that control geoblocking restriction. Allowed values are the officially assigned <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a> codes. Default: All countries (an empty array).</p>
     # @option params [Array<String>] :allowed_origins
-    #   <p>A list of origin sites that control CORS restriction. Allowed values are the same as valid
-    #         values of the Origin header defined at <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin</a>. Default: All
-    #         origins (an empty array).</p>
+    #   <p>A list of origin sites that control CORS restriction. Allowed values are the same as valid values of the Origin header defined at <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin</a>. Default: All origins (an empty array).</p>
     # @option params [Boolean] :enable_strict_origin_enforcement
-    #   <p>Whether channel playback is constrained by origin site. Default:
-    #         <code>false</code>.</p>
+    #   <p>Whether channel playback is constrained by origin site. Default: <code>false</code>.</p>
     # @option params [String] :name
     #   <p>Playback-restriction-policy name. The value does not need to be unique.</p>
     # @option params [Hash<String, String>] :tags
-    #   <p>Array of 1-50 maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging Amazon Web Services Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is
-    #         documented there.</p>
+    #   <p>Array of 1-50 maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging Amazon Web Services Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     allowed_countries: ["PlaybackRestrictionPolicyAllowedCountry"],
@@ -489,33 +549,18 @@ module Aws::Ivs
       request.send_request(options)
     end
 
-    # <p>Creates a new recording configuration, used to enable recording to Amazon S3.</p>
-    #          <p>
-    #             <b>Known issue:</b> In the us-east-1 region, if you use the
-    #         Amazon Web Services CLI to create a recording configuration, it returns success even if the
-    #       S3 bucket is in a different region. In this case, the <code>state</code> of the recording
-    #       configuration is <code>CREATE_FAILED</code> (instead of <code>ACTIVE</code>). (In other
-    #       regions, the CLI correctly returns failure if the bucket is in a different region.)</p>
-    #          <p>
-    #             <b>Workaround:</b> Ensure that your S3 bucket is in the same
-    #       region as the recording configuration. If you create a recording configuration in a different
-    #       region as your S3 bucket, delete that recording configuration and create a new one with an S3
-    #       bucket from the correct region.</p>
+    # <p>Creates a new recording configuration, used to enable recording to Amazon S3.</p> <p> <b>Known issue:</b> In the us-east-1 region, if you use the Amazon Web Services CLI to create a recording configuration, it returns success even if the S3 bucket is in a different region. In this case, the <code>state</code> of the recording configuration is <code>CREATE_FAILED</code> (instead of <code>ACTIVE</code>). (In other regions, the CLI correctly returns failure if the bucket is in a different region.)</p> <p> <b>Workaround:</b> Ensure that your S3 bucket is in the same region as the recording configuration. If you create a recording configuration in a different region as your S3 bucket, delete that recording configuration and create a new one with an S3 bucket from the correct region.</p>
     # @param [Hash, Types::CreateRecordingConfigurationInput] params
     # @option params [String] :name
     #   <p>Recording-configuration name. The value does not need to be unique.</p>
     # @option params [Types::DestinationConfiguration] :destination_configuration
-    #   <p>A complex type that contains a destination configuration for where recorded video will be
-    #         stored.</p>
+    #   <p>A complex type that contains a destination configuration for where recorded video will be stored.</p>
     # @option params [Hash<String, String>] :tags
-    #   <p>Array of 1-50 maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging Amazon Web Services Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is
-    #         documented there.</p>
+    #   <p>Array of 1-50 maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging Amazon Web Services Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.</p>
     # @option params [Types::ThumbnailConfiguration] :thumbnail_configuration
-    #   <p>A complex type that allows you to enable/disable the recording of thumbnails for a live
-    #         session and modify the interval at which thumbnails are generated for the live session.</p>
+    #   <p>A complex type that allows you to enable/disable the recording of thumbnails for a live session and modify the interval at which thumbnails are generated for the live session.</p>
     # @option params [Integer] :recording_reconnect_window_seconds
-    #   <p>If a broadcast disconnects and then reconnects within the specified interval, the multiple
-    #         streams will be considered a single broadcast and merged together. Default: 0.</p>
+    #   <p>If a broadcast disconnects and then reconnects within the specified interval, the multiple streams will be considered a single broadcast and merged together. Default: 0.</p>
     # @option params [Types::RenditionConfiguration] :rendition_configuration
     #   <p>Object that describes which renditions should be recorded for a stream.</p>
     # @example Request syntax with placeholder values
@@ -577,16 +622,12 @@ module Aws::Ivs
       request.send_request(options)
     end
 
-    # <p>Creates a stream key, used to initiate a stream, for the specified channel ARN.</p>
-    #          <p>Note that <a>CreateChannel</a> creates a stream key. If you subsequently use
-    #       CreateStreamKey on the same channel, it will fail because a stream key already exists and
-    #       there is a limit of 1 stream key per channel. To reset the stream key on a channel, use <a>DeleteStreamKey</a> and then CreateStreamKey.</p>
+    # <p>Creates a stream key, used to initiate a stream, for the specified channel ARN.</p> <p>Note that <a>CreateChannel</a> creates a stream key. If you subsequently use CreateStreamKey on the same channel, it will fail because a stream key already exists and there is a limit of 1 stream key per channel. To reset the stream key on a channel, use <a>DeleteStreamKey</a> and then CreateStreamKey.</p>
     # @param [Hash, Types::CreateStreamKeyInput] params
     # @option params [String] :channel_arn
     #   <p>ARN of the channel for which to create the stream key.</p>
     # @option params [Hash<String, String>] :tags
-    #   <p>Array of 1-50 maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging Amazon Web Services Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is
-    #         documented there.</p>
+    #   <p>Array of 1-50 maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging Amazon Web Services Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     channel_arn: "ChannelArn", # required
@@ -614,12 +655,26 @@ module Aws::Ivs
       request.send_request(options)
     end
 
-    # <p>Deletes the specified channel and its associated stream keys.</p>
-    #          <p>If you try to delete a live channel, you will get an error (409 ConflictException). To
-    #       delete a channel that is live, call <a>StopStream</a>, wait for the Amazon
-    #       EventBridge "Stream End" event (to verify that the stream's state is no longer Live), then
-    #       call DeleteChannel. (See <a href="https://docs.aws.amazon.com/ivs/latest/userguide/eventbridge.html"> Using EventBridge with Amazon IVS</a>.)
-    #     </p>
+    # <p>Deletes the specified ad configuration.</p>
+    # @param [Hash, Types::DeleteAdConfigurationRequest] params
+    # @option params [String] :arn
+    #   <p>ARN of the ad configuration to be deleted.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     arn: "AdConfigurationArn", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_ad_configuration(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Smithy::Schema::EmptyStructure]
+    def delete_ad_configuration(params = {}, options = {})
+      request = build_request(:delete_ad_configuration, params)
+      request.send_request(options)
+    end
+
+    # <p>Deletes the specified channel and its associated stream keys.</p> <p>If you try to delete a live channel, you will get an error (409 ConflictException). To delete a channel that is live, call <a>StopStream</a>, wait for the Amazon EventBridge "Stream End" event (to verify that the stream's state is no longer Live), then call DeleteChannel. (See <a href="https://docs.aws.amazon.com/ivs/latest/userguide/eventbridge.html"> Using EventBridge with Amazon IVS</a>.) </p>
     # @param [Hash, Types::DeleteChannelInput] params
     # @option params [String] :arn
     #   <p>ARN of the channel to be deleted.</p>
@@ -638,9 +693,7 @@ module Aws::Ivs
       request.send_request(options)
     end
 
-    # <p>Deletes a specified authorization key pair. This invalidates future viewer tokens
-    #       generated using the key pair’s <code>privateKey</code>. For more information, see <a href="https://docs.aws.amazon.com/ivs/latest/userguide/private-channels.html">Setting Up Private
-    #         Channels</a> in the <i>Amazon IVS User Guide</i>.</p>
+    # <p>Deletes a specified authorization key pair. This invalidates future viewer tokens generated using the key pair’s <code>privateKey</code>. For more information, see <a href="https://docs.aws.amazon.com/ivs/latest/userguide/private-channels.html">Setting Up Private Channels</a> in the <i>Amazon IVS User Guide</i>.</p>
     # @param [Hash, Types::DeletePlaybackKeyPairInput] params
     # @option params [String] :arn
     #   <p>ARN of the key pair to be deleted.</p>
@@ -678,12 +731,7 @@ module Aws::Ivs
       request.send_request(options)
     end
 
-    # <p>Deletes the recording configuration for the specified ARN.</p>
-    #          <p>If you try to delete a recording configuration that is associated with a channel, you will
-    #       get an error (409 ConflictException). To avoid this, for all channels that reference the
-    #       recording configuration, first use <a>UpdateChannel</a> to set the
-    #         <code>recordingConfigurationArn</code> field to an empty string, then use
-    #       DeleteRecordingConfiguration.</p>
+    # <p>Deletes the recording configuration for the specified ARN.</p> <p>If you try to delete a recording configuration that is associated with a channel, you will get an error (409 ConflictException). To avoid this, for all channels that reference the recording configuration, first use <a>UpdateChannel</a> to set the <code>recordingConfigurationArn</code> field to an empty string, then use DeleteRecordingConfiguration.</p>
     # @param [Hash, Types::DeleteRecordingConfigurationInput] params
     # @option params [String] :arn
     #   <p>ARN of the recording configuration to be deleted.</p>
@@ -702,8 +750,7 @@ module Aws::Ivs
       request.send_request(options)
     end
 
-    # <p>Deletes the stream key for the specified ARN, so it can no longer be used to
-    #       stream.</p>
+    # <p>Deletes the stream key for the specified ARN, so it can no longer be used to stream.</p>
     # @param [Hash, Types::DeleteStreamKeyInput] params
     # @option params [String] :arn
     #   <p>ARN of the stream key to be deleted.</p>
@@ -719,6 +766,42 @@ module Aws::Ivs
     # @return [Smithy::Schema::EmptyStructure]
     def delete_stream_key(params = {}, options = {})
       request = build_request(:delete_stream_key, params)
+      request.send_request(options)
+    end
+
+    # <p>Gets the ad configuration represented by the specified ARN.</p>
+    # @param [Hash, Types::GetAdConfigurationRequest] params
+    # @option params [String] :arn
+    #   <p>ARN of the ad configuration to be retrieved.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     arn: "AdConfigurationArn", # required
+    #   }
+    #   options = {}
+    #   response = client.get_ad_configuration(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     ad_configuration: {
+    #       arn: "AdConfigurationArn", # required
+    #       name: "AdConfigurationName",
+    #       media_tailor_playback_configurations: [ # required
+    #         {
+    #           playback_configuration_arn: "MediaTailorPlaybackConfigurationArn"
+    #         }
+    #       ],
+    #       post_roll_configuration: {
+    #         duration_seconds: 1, # required
+    #         enabled: false, # required
+    #       },
+    #       tags: {
+    #         "TagKey" => "TagValue"
+    #       }
+    #     }
+    #   }
+    # @return [Types::GetAdConfigurationResponse]
+    def get_ad_configuration(params = {}, options = {})
+      request = build_request(:get_ad_configuration, params)
       request.send_request(options)
     end
 
@@ -759,7 +842,8 @@ module Aws::Ivs
     #         policy: "ALLOW" # One of: ["ALLOW", "REQUIRE"],
     #         maximum_resolution: "SD" # One of: ["SD", "HD", "FULL_HD"]
     #       },
-    #       container_format: "ContainerFormat"
+    #       container_format: "ContainerFormat",
+    #       ad_configuration_arn: "ChannelAdConfigurationArn"
     #     }
     #   }
     # @return [Types::GetChannelOutput]
@@ -768,11 +852,7 @@ module Aws::Ivs
       request.send_request(options)
     end
 
-    # <p>Gets a specified playback authorization key pair and returns the <code>arn</code> and
-    #         <code>fingerprint</code>. The <code>privateKey</code> held by the caller can be used to
-    #       generate viewer authorization tokens, to grant viewers access to private channels. For more
-    #       information, see <a href="https://docs.aws.amazon.com/ivs/latest/userguide/private-channels.html">Setting Up Private Channels</a> in the <i>Amazon IVS User
-    #       Guide</i>.</p>
+    # <p>Gets a specified playback authorization key pair and returns the <code>arn</code> and <code>fingerprint</code>. The <code>privateKey</code> held by the caller can be used to generate viewer authorization tokens, to grant viewers access to private channels. For more information, see <a href="https://docs.aws.amazon.com/ivs/latest/userguide/private-channels.html">Setting Up Private Channels</a> in the <i>Amazon IVS User Guide</i>.</p>
     # @param [Hash, Types::GetPlaybackKeyPairInput] params
     # @option params [String] :arn
     #   <p>ARN of the key pair to be returned.</p>
@@ -936,9 +1016,7 @@ module Aws::Ivs
     # @option params [String] :channel_arn
     #   <p>ARN of the channel resource</p>
     # @option params [String] :stream_id
-    #   <p>Unique identifier for a live or previously live stream in the specified channel. If no
-    #           <code>streamId</code> is provided, this returns the most recent stream session for the
-    #         channel, if it exists.</p>
+    #   <p>Unique identifier for a live or previously live stream in the specified channel. If no <code>streamId</code> is provided, this returns the most recent stream session for the channel, if it exists.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     channel_arn: "ChannelArn", # required
@@ -977,7 +1055,8 @@ module Aws::Ivs
     #           policy: "ALLOW" # One of: ["ALLOW", "REQUIRE"],
     #           maximum_resolution: "SD" # One of: ["SD", "HD", "FULL_HD"]
     #         },
-    #         container_format: "ContainerFormat"
+    #         container_format: "ContainerFormat",
+    #         ad_configuration_arn: "ChannelAdConfigurationArn"
     #       },
     #       ingest_configuration: {
     #         video: {
@@ -1067,19 +1146,14 @@ module Aws::Ivs
       request.send_request(options)
     end
 
-    # <p>Imports the public portion of a new key pair and returns its <code>arn</code> and
-    #         <code>fingerprint</code>. The <code>privateKey</code> can then be used to generate viewer
-    #       authorization tokens, to grant viewers access to private channels. For more information, see
-    #         <a href="https://docs.aws.amazon.com/ivs/latest/userguide/private-channels.html">Setting Up
-    #         Private Channels</a> in the <i>Amazon IVS User Guide</i>.</p>
+    # <p>Imports the public portion of a new key pair and returns its <code>arn</code> and <code>fingerprint</code>. The <code>privateKey</code> can then be used to generate viewer authorization tokens, to grant viewers access to private channels. For more information, see <a href="https://docs.aws.amazon.com/ivs/latest/userguide/private-channels.html">Setting Up Private Channels</a> in the <i>Amazon IVS User Guide</i>.</p>
     # @param [Hash, Types::ImportPlaybackKeyPairInput] params
     # @option params [String] :public_key_material
     #   <p>The public portion of a customer-generated key pair.</p>
     # @option params [String] :name
     #   <p>Playback-key-pair name. The value does not need to be unique.</p>
     # @option params [Hash<String, String>] :tags
-    #   <p>Any tags provided with the request are added to the playback key pair tags. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging Amazon Web Services Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is
-    #         documented there.</p>
+    #   <p>Any tags provided with the request are added to the playback key pair tags. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging Amazon Web Services Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     public_key_material: "PlaybackPublicKeyMaterial", # required
@@ -1108,10 +1182,73 @@ module Aws::Ivs
       request.send_request(options)
     end
 
-    # <p>Gets summary information about all channels in your account, in the Amazon Web Services
-    #       region where the API request is processed. This list can be filtered to match a specified name
-    #       or recording-configuration ARN. Filters are mutually exclusive and cannot be used together. If
-    #       you try to use both filters, you will get an error (409 ConflictException).</p>
+    # <p>Inserts an ad marker in the playlist for the specified channel and duration using the ad configuration associated with the channel.</p> <p> <b>Note:</b> AWS Elemental MediaTailor (EMT), the service that handles ad requests, provides CloudWatch metrics to help you monitor the success or failure of each InsertAdBreak operation. See <a href="https://docs.aws.amazon.com/mediatailor/latest/ug/monitoring-cloudwatch-metrics.html">Monitoring AWS Elemental MediaTailor with Amazon CloudWatch</a> metrics in the <i>AWS Elemental MediaTailor User Guide</i> for details on available metrics.</p>
+    # @param [Hash, Types::InsertAdBreakRequest] params
+    # @option params [String] :channel_arn
+    #   <p>ARN of the channel into which the ad break is inserted.</p>
+    # @option params [Integer] :duration_seconds
+    #   <p>Duration of the ad break, in seconds.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     channel_arn: "ChannelArn", # required
+    #     duration_seconds: 1, # required
+    #   }
+    #   options = {}
+    #   response = client.insert_ad_break(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     ad_break_id: "AdBreakId"
+    #   }
+    # @return [Types::InsertAdBreakResponse]
+    def insert_ad_break(params = {}, options = {})
+      request = build_request(:insert_ad_break, params)
+      request.send_request(options)
+    end
+
+    # <p>Gets summary information about all ad configurations in your account, in the AWS region where the API request is processed.</p>
+    # @param [Hash, Types::ListAdConfigurationsRequest] params
+    # @option params [String] :next_token
+    #   <p>The first ad configuration to retrieve. This is used for pagination; see the <code>nextToken</code> response field.</p>
+    # @option params [Integer] :max_results
+    #   <p>Maximum number of ad configurations to return. Default: your service quota or 100, whichever is smaller.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     next_token: "PaginationToken",
+    #     max_results: 1
+    #   }
+    #   options = {}
+    #   response = client.list_ad_configurations(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     ad_configurations: [ # required
+    #       {
+    #         arn: "AdConfigurationArn", # required
+    #         name: "AdConfigurationName",
+    #         media_tailor_playback_configurations: [ # required
+    #           {
+    #             playback_configuration_arn: "MediaTailorPlaybackConfigurationArn"
+    #           }
+    #         ],
+    #         post_roll_configuration: {
+    #           duration_seconds: 1, # required
+    #           enabled: false, # required
+    #         },
+    #         tags: {
+    #           "TagKey" => "TagValue"
+    #         }
+    #       }
+    #     ],
+    #     next_token: "PaginationToken"
+    #   }
+    # @return [Types::ListAdConfigurationsResponse]
+    def list_ad_configurations(params = {}, options = {})
+      request = build_request(:list_ad_configurations, params)
+      request.send_request(options)
+    end
+
+    # <p>Gets summary information about all channels in your account, in the Amazon Web Services region where the API request is processed. This list can be filtered to match a specified name or recording-configuration ARN. Filters are mutually exclusive and cannot be used together. If you try to use both filters, you will get an error (409 ConflictException).</p>
     # @param [Hash, Types::ListChannelsInput] params
     # @option params [String] :filter_by_name
     #   <p>Filters the channel list to match the specified name.</p>
@@ -1119,9 +1256,10 @@ module Aws::Ivs
     #   <p>Filters the channel list to match the specified recording-configuration ARN.</p>
     # @option params [String] :filter_by_playback_restriction_policy_arn
     #   <p>Filters the channel list to match the specified policy.</p>
+    # @option params [String] :filter_by_ad_configuration_arn
+    #   <p>Filters the channel list to match the specified ad configuration ARN.</p>
     # @option params [String] :next_token
-    #   <p>The first channel to retrieve. This is used for pagination; see the <code>nextToken</code>
-    #         response field.</p>
+    #   <p>The first channel to retrieve. This is used for pagination; see the <code>nextToken</code> response field.</p>
     # @option params [Integer] :max_results
     #   <p>Maximum number of channels to return. Default: 100.</p>
     # @example Request syntax with placeholder values
@@ -1129,6 +1267,7 @@ module Aws::Ivs
     #     filter_by_name: "ChannelName",
     #     filter_by_recording_configuration_arn: "ChannelRecordingConfigurationArn",
     #     filter_by_playback_restriction_policy_arn: "ChannelPlaybackRestrictionPolicyArn",
+    #     filter_by_ad_configuration_arn: "ChannelAdConfigurationArn",
     #     next_token: "PaginationToken",
     #     max_results: 1
     #   }
@@ -1150,7 +1289,8 @@ module Aws::Ivs
     #         insecure_ingest: false,
     #         type: "BASIC" # One of: ["BASIC", "STANDARD", "ADVANCED_SD", "ADVANCED_HD"],
     #         preset: "HIGHER_BANDWIDTH_DELIVERY" # One of: ["HIGHER_BANDWIDTH_DELIVERY", "CONSTRAINED_BANDWIDTH_DELIVERY"],
-    #         playback_restriction_policy_arn: "ChannelPlaybackRestrictionPolicyArn"
+    #         playback_restriction_policy_arn: "ChannelPlaybackRestrictionPolicyArn",
+    #         ad_configuration_arn: "ChannelAdConfigurationArn"
     #       }
     #     ],
     #     next_token: "PaginationToken"
@@ -1161,15 +1301,12 @@ module Aws::Ivs
       request.send_request(options)
     end
 
-    # <p>Gets summary information about playback key pairs. For more information, see <a href="https://docs.aws.amazon.com/ivs/latest/userguide/private-channels.html">Setting Up Private
-    #         Channels</a> in the <i>Amazon IVS User Guide</i>.</p>
+    # <p>Gets summary information about playback key pairs. For more information, see <a href="https://docs.aws.amazon.com/ivs/latest/userguide/private-channels.html">Setting Up Private Channels</a> in the <i>Amazon IVS User Guide</i>.</p>
     # @param [Hash, Types::ListPlaybackKeyPairsInput] params
     # @option params [String] :next_token
-    #   <p>The first key pair to retrieve. This is used for pagination; see the
-    #           <code>nextToken</code> response field.</p>
+    #   <p>The first key pair to retrieve. This is used for pagination; see the <code>nextToken</code> response field.</p>
     # @option params [Integer] :max_results
-    #   <p>Maximum number of key pairs to return. Default: your service quota or 100, whichever is
-    #         smaller.</p>
+    #   <p>Maximum number of key pairs to return. Default: your service quota or 100, whichever is smaller.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     next_token: "PaginationToken",
@@ -1200,8 +1337,7 @@ module Aws::Ivs
     # <p>Gets summary information about playback restriction policies.</p>
     # @param [Hash, Types::ListPlaybackRestrictionPoliciesRequest] params
     # @option params [String] :next_token
-    #   <p>The first policy to retrieve. This is used for pagination; see the <code>nextToken</code>
-    #         response field.</p>
+    #   <p>The first policy to retrieve. This is used for pagination; see the <code>nextToken</code> response field.</p>
     # @option params [Integer] :max_results
     #   <p>Maximum number of policies to return. Default: 1.</p>
     # @example Request syntax with placeholder values
@@ -1234,15 +1370,12 @@ module Aws::Ivs
       request.send_request(options)
     end
 
-    # <p>Gets summary information about all recording configurations in your account, in the
-    #         Amazon Web Services region where the API request is processed.</p>
+    # <p>Gets summary information about all recording configurations in your account, in the Amazon Web Services region where the API request is processed.</p>
     # @param [Hash, Types::ListRecordingConfigurationsInput] params
     # @option params [String] :next_token
-    #   <p>The first recording configuration to retrieve. This is used for pagination; see the
-    #           <code>nextToken</code> response field.</p>
+    #   <p>The first recording configuration to retrieve. This is used for pagination; see the <code>nextToken</code> response field.</p>
     # @option params [Integer] :max_results
-    #   <p>Maximum number of recording configurations to return. Default: your service quota or 100,
-    #         whichever is smaller. </p>
+    #   <p>Maximum number of recording configurations to return. Default: your service quota or 100, whichever is smaller. </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     next_token: "PaginationToken",
@@ -1281,8 +1414,7 @@ module Aws::Ivs
     # @option params [String] :channel_arn
     #   <p>Channel ARN used to filter the list.</p>
     # @option params [String] :next_token
-    #   <p>The first stream key to retrieve. This is used for pagination; see the
-    #           <code>nextToken</code> response field.</p>
+    #   <p>The first stream key to retrieve. This is used for pagination; see the <code>nextToken</code> response field.</p>
     # @option params [Integer] :max_results
     #   <p>Maximum number of streamKeys to return. Default: 1.</p>
     # @example Request syntax with placeholder values
@@ -1313,14 +1445,12 @@ module Aws::Ivs
       request.send_request(options)
     end
 
-    # <p>Gets a summary of current and previous streams for a specified channel in your account, in
-    #       the AWS region where the API request is processed.</p>
+    # <p>Gets a summary of current and previous streams for a specified channel in your account, in the AWS region where the API request is processed.</p>
     # @param [Hash, Types::ListStreamSessionsInput] params
     # @option params [String] :channel_arn
     #   <p>Channel ARN used to filter the list.</p>
     # @option params [String] :next_token
-    #   <p>The first stream to retrieve. This is used for pagination; see the <code>nextToken</code>
-    #         response field.</p>
+    #   <p>The first stream to retrieve. This is used for pagination; see the <code>nextToken</code> response field.</p>
     # @option params [Integer] :max_results
     #   <p>Maximum number of streams to return. Default: 100.</p>
     # @example Request syntax with placeholder values
@@ -1350,14 +1480,12 @@ module Aws::Ivs
       request.send_request(options)
     end
 
-    # <p>Gets summary information about live streams in your account, in the Amazon Web Services
-    #       region where the API request is processed.</p>
+    # <p>Gets summary information about live streams in your account, in the Amazon Web Services region where the API request is processed.</p>
     # @param [Hash, Types::ListStreamsInput] params
     # @option params [Types::StreamFilters] :filter_by
     #   <p>Filters the stream list to match the specified criterion.</p>
     # @option params [String] :next_token
-    #   <p>The first stream to retrieve. This is used for pagination; see the <code>nextToken</code>
-    #         response field.</p>
+    #   <p>The first stream to retrieve. This is used for pagination; see the <code>nextToken</code> response field.</p>
     # @option params [Integer] :max_results
     #   <p>Maximum number of streams to return. Default: 100.</p>
     # @example Request syntax with placeholder values
@@ -1414,15 +1542,10 @@ module Aws::Ivs
       request.send_request(options)
     end
 
-    # <p>Inserts metadata into the active stream of the specified channel. At most 5 requests per
-    #       second per channel are allowed, each with a maximum 1 KB payload. (If 5 TPS is not sufficient
-    #       for your needs, we recommend batching your data into a single PutMetadata call.) At most 155
-    #       requests per second per account are allowed. Also see <a href="https://docs.aws.amazon.com/ivs/latest/userguide/metadata.html">Embedding Metadata within a Video Stream</a> in
-    #       the <i>Amazon IVS User Guide</i>.</p>
+    # <p>Inserts metadata into the active stream of the specified channel. At most 5 requests per second per channel are allowed, each with a maximum 1 KB payload. (If 5 TPS is not sufficient for your needs, we recommend batching your data into a single PutMetadata call.) At most 155 requests per second per account are allowed. Also see <a href="https://docs.aws.amazon.com/ivs/latest/userguide/metadata.html">Embedding Metadata within a Video Stream</a> in the <i>Amazon IVS User Guide</i>.</p>
     # @param [Hash, Types::PutMetadataInput] params
     # @option params [String] :channel_arn
-    #   <p>ARN of the channel into which metadata is inserted. This channel must have an active
-    #         stream.</p>
+    #   <p>ARN of the channel into which metadata is inserted. This channel must have an active stream.</p>
     # @option params [String] :metadata
     #   <p>Metadata to insert into the stream. Maximum: 1 KB per request.</p>
     # @example Request syntax with placeholder values
@@ -1441,20 +1564,14 @@ module Aws::Ivs
       request.send_request(options)
     end
 
-    # <p>Starts the process of revoking the viewer session associated with a specified channel ARN
-    #       and viewer ID. Optionally, you can provide a version to revoke viewer sessions less than and
-    #       including that version. For instructions on associating a viewer ID with a viewer session, see
-    #         <a href="https://docs.aws.amazon.com/ivs/latest/userguide/private-channels.html">Setting Up
-    #         Private Channels</a>.</p>
+    # <p>Starts the process of revoking the viewer session associated with a specified channel ARN and viewer ID. Optionally, you can provide a version to revoke viewer sessions less than and including that version. For instructions on associating a viewer ID with a viewer session, see <a href="https://docs.aws.amazon.com/ivs/latest/userguide/private-channels.html">Setting Up Private Channels</a>.</p>
     # @param [Hash, Types::StartViewerSessionRevocationInput] params
     # @option params [String] :channel_arn
     #   <p>The ARN of the channel associated with the viewer session to revoke.</p>
     # @option params [String] :viewer_id
-    #   <p>The ID of the viewer associated with the viewer session to revoke. Do not use this field
-    #         for personally identifying, confidential, or sensitive information.</p>
+    #   <p>The ID of the viewer associated with the viewer session to revoke. Do not use this field for personally identifying, confidential, or sensitive information.</p>
     # @option params [Integer] :viewer_session_versions_less_than_or_equal_to
-    #   <p>An optional filter on which versions of the viewer session to revoke. All versions less
-    #         than or equal to the specified version will be revoked. Default: 0.</p>
+    #   <p>An optional filter on which versions of the viewer session to revoke. All versions less than or equal to the specified version will be revoked. Default: 0.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     channel_arn: "ChannelArn", # required
@@ -1472,14 +1589,7 @@ module Aws::Ivs
       request.send_request(options)
     end
 
-    # <p>Disconnects the incoming RTMPS stream for the specified channel. Can be used in
-    #       conjunction with <a>DeleteStreamKey</a> to prevent further streaming to a
-    #       channel.</p>
-    #          <note>
-    #             <p>Many streaming client-software libraries automatically reconnect a dropped RTMPS
-    #         session, so to stop the stream permanently, you may want to first revoke the
-    #           <code>streamKey</code> attached to the channel.</p>
-    #          </note>
+    # <p>Disconnects the incoming RTMPS stream for the specified channel. Can be used in conjunction with <a>DeleteStreamKey</a> to prevent further streaming to a channel.</p> <note> <p>Many streaming client-software libraries automatically reconnect a dropped RTMPS session, so to stop the stream permanently, you may want to first revoke the <code>streamKey</code> attached to the channel.</p> </note>
     # @param [Hash, Types::StopStreamInput] params
     # @option params [String] :channel_arn
     #   <p>ARN of the channel for which the stream is to be stopped.</p>
@@ -1501,12 +1611,9 @@ module Aws::Ivs
     # <p>Adds or updates tags for the Amazon Web Services resource with the specified ARN.</p>
     # @param [Hash, Types::TagResourceInput] params
     # @option params [String] :resource_arn
-    #   <p>ARN of the resource for which tags are to be added or updated. The ARN must be
-    #         URL-encoded.</p>
+    #   <p>ARN of the resource for which tags are to be added or updated. The ARN must be URL-encoded.</p>
     # @option params [Hash<String, String>] :tags
-    #   <p>Array of tags to be added or updated. Array of maps, each of the form <code>string:string
-    #           (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging Amazon Web Services Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no
-    #         service-specific constraints beyond what is documented there.</p>
+    #   <p>Array of tags to be added or updated. Array of maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging Amazon Web Services Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     resource_arn: "ResourceArn", # required
@@ -1530,9 +1637,7 @@ module Aws::Ivs
     # @option params [String] :resource_arn
     #   <p>ARN of the resource for which tags are to be removed. The ARN must be URL-encoded.</p>
     # @option params [Array<String>] :tag_keys
-    #   <p>Array of tags to be removed. Array of maps, each of the form <code>string:string
-    #           (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging Amazon Web Services Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no
-    #         service-specific constraints beyond what is documented there.</p>
+    #   <p>Array of tag keys (strings) for the tags to be removed. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging Amazon Web Services Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     resource_arn: "ResourceArn", # required
@@ -1549,42 +1654,84 @@ module Aws::Ivs
       request.send_request(options)
     end
 
-    # <p>Updates a channel's configuration. Live channels cannot be updated. You must stop the
-    #       ongoing stream, update the channel, and restart the stream for the changes to take
-    #       effect.</p>
+    # <p>Updates a specified ad configuration.</p>
+    # @param [Hash, Types::UpdateAdConfigurationRequest] params
+    # @option params [String] :arn
+    #   <p>ARN of the ad configuration to be updated.</p>
+    # @option params [String] :name
+    #   <p>Ad configuration name. The value does not need to be unique.</p>
+    # @option params [Array<Types::MediaTailorPlaybackConfiguration>] :media_tailor_playback_configurations
+    #   <p>List of integration configurations with MediaTailor resources. The first item in the list is the default playback configuration used for the ad configuration. To select a different configuration per viewing session, see <a href="https://docs.aws.amazon.com/ivs/latest/LowLatencyUserGuide/private-channels-generate-tokens.html">Generate and Sign IVS Playback Tokens</a>.</p>
+    # @option params [Types::PostRollConfiguration] :post_roll_configuration
+    #   <p>Configuration for the post-roll ad break to use for this ad configuration.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     arn: "AdConfigurationArn", # required
+    #     name: "AdConfigurationName",
+    #     media_tailor_playback_configurations: [
+    #       {
+    #         playback_configuration_arn: "MediaTailorPlaybackConfigurationArn"
+    #       }
+    #     ],
+    #     post_roll_configuration: {
+    #       duration_seconds: 1, # required
+    #       enabled: false, # required
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.update_ad_configuration(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     ad_configuration: { # required
+    #       arn: "AdConfigurationArn", # required
+    #       name: "AdConfigurationName",
+    #       media_tailor_playback_configurations: [ # required
+    #         {
+    #           playback_configuration_arn: "MediaTailorPlaybackConfigurationArn"
+    #         }
+    #       ],
+    #       post_roll_configuration: {
+    #         duration_seconds: 1, # required
+    #         enabled: false, # required
+    #       },
+    #       tags: {
+    #         "TagKey" => "TagValue"
+    #       }
+    #     }
+    #   }
+    # @return [Types::UpdateAdConfigurationResponse]
+    def update_ad_configuration(params = {}, options = {})
+      request = build_request(:update_ad_configuration, params)
+      request.send_request(options)
+    end
+
+    # <p>Updates a channel's configuration. Live channels cannot be updated. You must stop the ongoing stream, update the channel, and restart the stream for the changes to take effect.</p>
     # @param [Hash, Types::UpdateChannelInput] params
     # @option params [String] :arn
     #   <p>ARN of the channel to be updated.</p>
     # @option params [String] :name
     #   <p>Channel name.</p>
     # @option params [String] :latency_mode
-    #   <p>Channel latency mode. Use <code>NORMAL</code> to broadcast and deliver live video up to
-    #         Full HD. Use <code>LOW</code> for near-real-time interaction with viewers.</p>
+    #   <p>Channel latency mode. Use <code>NORMAL</code> to broadcast and deliver live video up to Full HD. Use <code>LOW</code> for near-real-time interaction with viewers.</p>
     # @option params [String] :type
-    #   <p>Channel type, which determines the allowable resolution and bitrate. <i>If you
-    #           exceed the allowable input resolution or bitrate, the stream probably will disconnect
-    #           immediately.</i> Default: <code>STANDARD</code>. For details, see <a href="https://docs.aws.amazon.com/ivs/latest/LowLatencyAPIReference/channel-types.html">Channel
-    #           Types</a>.</p>
+    #   <p>Channel type, which determines the allowable resolution and bitrate. <i>If you exceed the allowable input resolution or bitrate, the stream probably will disconnect immediately.</i> Default: <code>STANDARD</code>. For details, see <a href="https://docs.aws.amazon.com/ivs/latest/LowLatencyUserGuide/channel-types.html">Channel Types</a>.</p>
     # @option params [Boolean] :authorized
     #   <p>Whether the channel is private (enabled for playback authorization).</p>
     # @option params [String] :recording_configuration_arn
-    #   <p>Recording-configuration ARN. A valid ARN value here both specifies the ARN and enables recording.
-    #       If this is set to an empty string, recording is disabled.</p>
+    #   <p>Recording-configuration ARN. A valid ARN value here both specifies the ARN and enables recording. If this is set to an empty string, recording is disabled.</p>
     # @option params [Boolean] :insecure_ingest
     #   <p>Whether the channel allows insecure RTMP and SRT ingest. Default: <code>false</code>.</p>
     # @option params [String] :preset
-    #   <p>Optional transcode preset for the channel. This is selectable only for
-    #           <code>ADVANCED_HD</code> and <code>ADVANCED_SD</code> channel types. For those channel
-    #         types, the default <code>preset</code> is <code>HIGHER_BANDWIDTH_DELIVERY</code>. For other
-    #         channel types (<code>BASIC</code> and <code>STANDARD</code>), <code>preset</code> is the empty
-    #         string (<code>""</code>).</p>
+    #   <p>Optional transcode preset for the channel. This is selectable only for <code>ADVANCED_HD</code> and <code>ADVANCED_SD</code> channel types. For those channel types, the default <code>preset</code> is <code>HIGHER_BANDWIDTH_DELIVERY</code>. For other channel types (<code>BASIC</code> and <code>STANDARD</code>), <code>preset</code> is the empty string (<code>""</code>).</p>
     # @option params [String] :playback_restriction_policy_arn
-    #   <p>Playback-restriction-policy ARN. A valid ARN value here both specifies the ARN and enables playback restriction.
-    #        If this is set to an empty string, playback restriction policy is disabled.</p>
+    #   <p>Playback-restriction-policy ARN. A valid ARN value here both specifies the ARN and enables playback restriction. If this is set to an empty string, playback restriction policy is disabled.</p>
     # @option params [Types::MultitrackInputConfiguration] :multitrack_input_configuration
     #   <p>Object specifying multitrack input configuration. Default: no multitrack input configuration is specified.</p>
     # @option params [String] :container_format
     #   <p>Indicates which content-packaging format is used (MPEG-TS or fMP4). If <code>multitrackInputConfiguration</code> is specified and <code>enabled</code> is <code>true</code>, then <code>containerFormat</code> is required and must be set to <code>FRAGMENTED_MP4</code>. Otherwise, <code>containerFormat</code> may be set to <code>TS</code> or <code>FRAGMENTED_MP4</code>. Default: <code>TS</code>.</p>
+    # @option params [String] :ad_configuration_arn
+    #   <p>ARN of the ad configuration associated with the channel.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     arn: "ChannelArn", # required
@@ -1601,7 +1748,8 @@ module Aws::Ivs
     #       policy: "ALLOW" # One of: ["ALLOW", "REQUIRE"],
     #       maximum_resolution: "SD" # One of: ["SD", "HD", "FULL_HD"]
     #     },
-    #     container_format: "ContainerFormat"
+    #     container_format: "ContainerFormat",
+    #     ad_configuration_arn: "ChannelAdConfigurationArn"
     #   }
     #   options = {}
     #   response = client.update_channel(params, options)
@@ -1632,7 +1780,8 @@ module Aws::Ivs
     #         policy: "ALLOW" # One of: ["ALLOW", "REQUIRE"],
     #         maximum_resolution: "SD" # One of: ["SD", "HD", "FULL_HD"]
     #       },
-    #       container_format: "ContainerFormat"
+    #       container_format: "ContainerFormat",
+    #       ad_configuration_arn: "ChannelAdConfigurationArn"
     #     }
     #   }
     # @return [Types::UpdateChannelOutput]
@@ -1646,16 +1795,11 @@ module Aws::Ivs
     # @option params [String] :arn
     #   <p>ARN of the playback-restriction-policy to be updated.</p>
     # @option params [Array<String>] :allowed_countries
-    #   <p>A list of country codes that control geoblocking restriction. Allowed values are the
-    #         officially assigned <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1
-    #           alpha-2</a> codes. Default: All countries (an empty array).</p>
+    #   <p>A list of country codes that control geoblocking restriction. Allowed values are the officially assigned <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a> codes. Default: All countries (an empty array).</p>
     # @option params [Array<String>] :allowed_origins
-    #   <p>A list of origin sites that control CORS restriction. Allowed values are the same as valid
-    #         values of the Origin header defined at <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin</a>. Default: All
-    #         origins (an empty array).</p>
+    #   <p>A list of origin sites that control CORS restriction. Allowed values are the same as valid values of the Origin header defined at <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin</a>. Default: All origins (an empty array).</p>
     # @option params [Boolean] :enable_strict_origin_enforcement
-    #   <p>Whether channel playback is constrained by origin site. Default:
-    #         <code>false</code>.</p>
+    #   <p>Whether channel playback is constrained by origin site. Default: <code>false</code>.</p>
     # @option params [String] :name
     #   <p>Playback-restriction-policy name. The value does not need to be unique.</p>
     # @example Request syntax with placeholder values

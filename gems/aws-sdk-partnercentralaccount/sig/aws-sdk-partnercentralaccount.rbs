@@ -1,0 +1,5 @@
+  module Aws
+    module PartnerCentralAccount
+      VERSION: String
+    end
+  end

@@ -102,7 +102,8 @@ module Aws::CloudFormation
       ?stack_name: String,
       ?role_arn: String,
       ?resources_to_skip: Array[String],
-      ?client_request_token: String
+      ?client_request_token: String,
+      ?force_rollback: bool
     ) -> _ContinueUpdateRollbackResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ContinueUpdateRollbackResponse
 
     interface _CreateChangeSetResponse
@@ -155,7 +156,13 @@ module Aws::CloudFormation
       ],
       ?include_nested_stacks: bool,
       ?on_stack_failure: String,
-      ?import_existing_resources: bool
+      ?import_existing_resources: bool,
+      ?deployment_mode: String,
+      ?deployment_config: {
+        mode: String,
+        disable_rollback: bool
+      },
+      ?disable_validation: bool
     ) -> _CreateChangeSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateChangeSetResponse
 
     interface _CreateGeneratedTemplateResponse
@@ -181,6 +188,7 @@ module Aws::CloudFormation
     interface _CreateStackResponse
       include Smithy::Client::_Response[Types::CreateStackOutput]
       def stack_id: () -> String?
+      def operation_id: () -> String?
     end
     def create_stack: (
       ?stack_name: String,
@@ -220,7 +228,12 @@ module Aws::CloudFormation
       ],
       ?client_request_token: String,
       ?enable_termination_protection: bool,
-      ?retain_except_on_create: bool
+      ?retain_except_on_create: bool,
+      ?deployment_config: {
+        mode: String,
+        disable_rollback: bool
+      },
+      ?disable_validation: bool
     ) -> _CreateStackResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateStackResponse
 
     interface _CreateStackInstancesResponse
@@ -313,7 +326,8 @@ module Aws::CloudFormation
       ?permission_model: String,
       ?auto_deployment: {
         enabled: bool,
-        retain_stacks_on_account_removal: bool
+        retain_stacks_on_account_removal: bool,
+        depends_on: Array[String]
       },
       ?call_as: String,
       ?client_request_token: String,
@@ -359,7 +373,11 @@ module Aws::CloudFormation
       ?retain_resources: Array[String],
       ?role_arn: String,
       ?client_request_token: String,
-      ?deletion_mode: String
+      ?deletion_mode: String,
+      ?deployment_config: {
+        mode: String,
+        disable_rollback: bool
+      }
     ) -> _DeleteStackResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteStackResponse
 
     interface _DeleteStackInstancesResponse
@@ -429,6 +447,7 @@ module Aws::CloudFormation
       def execution_status: () -> String?
       def status: () -> String?
       def status_reason: () -> String?
+      def stack_drift_status: () -> String?
       def notification_ar_ns: () -> Array[String]?
       def rollback_configuration: () -> Types::RollbackConfiguration?
       def capabilities: () -> Array[String]?
@@ -440,6 +459,8 @@ module Aws::CloudFormation
       def root_change_set_id: () -> String?
       def on_stack_failure: () -> String?
       def import_existing_resources: () -> bool?
+      def deployment_mode: () -> String?
+      def deployment_config: () -> Types::DeploymentConfig?
     end
     def describe_change_set: (
       ?change_set_name: String,
@@ -464,6 +485,21 @@ module Aws::CloudFormation
       ?next_token: String,
       ?logical_resource_id: String
     ) -> _DescribeChangeSetHooksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeChangeSetHooksResponse
+
+    interface _DescribeEventsResponse
+      include Smithy::Client::_Response[Types::DescribeEventsOutput]
+      def operation_events: () -> Array[Types::OperationEvent]?
+      def next_token: () -> String?
+    end
+    def describe_events: (
+      ?stack_name: String,
+      ?change_set_name: String,
+      ?operation_id: String,
+      ?filters: {
+        failed_events: bool
+      },
+      ?next_token: String
+    ) -> _DescribeEventsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeEventsResponse
 
     interface _DescribeGeneratedTemplateResponse
       include Smithy::Client::_Response[Types::DescribeGeneratedTemplateOutput]
@@ -759,6 +795,26 @@ module Aws::CloudFormation
       ?format: String,
       ?generated_template_name: String
     ) -> _GetGeneratedTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetGeneratedTemplateResponse
+
+    interface _GetHookResultResponse
+      include Smithy::Client::_Response[Types::GetHookResultOutput]
+      def hook_result_id: () -> String?
+      def invocation_point: () -> String?
+      def failure_mode: () -> String?
+      def type_name: () -> String?
+      def original_type_name: () -> String?
+      def type_version_id: () -> String?
+      def type_configuration_version_id: () -> String?
+      def type_arn: () -> String?
+      def status: () -> String?
+      def hook_status_reason: () -> String?
+      def invoked_at: () -> Time?
+      def target: () -> Types::HookTarget?
+      def annotations: () -> Array[Types::Annotation]?
+    end
+    def get_hook_result: (
+      ?hook_result_id: String
+    ) -> _GetHookResultResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetHookResultResponse
 
     interface _GetStackPolicyResponse
       include Smithy::Client::_Response[Types::GetStackPolicyOutput]
@@ -1155,12 +1211,17 @@ module Aws::CloudFormation
     interface _RollbackStackResponse
       include Smithy::Client::_Response[Types::RollbackStackOutput]
       def stack_id: () -> String?
+      def operation_id: () -> String?
     end
     def rollback_stack: (
       ?stack_name: String,
       ?role_arn: String,
       ?client_request_token: String,
-      ?retain_except_on_create: bool
+      ?retain_except_on_create: bool,
+      ?deployment_config: {
+        mode: String,
+        disable_rollback: bool
+      }
     ) -> _RollbackStackResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RollbackStackResponse
 
     interface _SetStackPolicyResponse
@@ -1263,6 +1324,7 @@ module Aws::CloudFormation
     interface _UpdateStackResponse
       include Smithy::Client::_Response[Types::UpdateStackOutput]
       def stack_id: () -> String?
+      def operation_id: () -> String?
     end
     def update_stack: (
       ?stack_name: String,
@@ -1302,7 +1364,12 @@ module Aws::CloudFormation
       ],
       ?disable_rollback: bool,
       ?client_request_token: String,
-      ?retain_except_on_create: bool
+      ?retain_except_on_create: bool,
+      ?deployment_config: {
+        mode: String,
+        disable_rollback: bool
+      },
+      ?disable_validation: bool
     ) -> _UpdateStackResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateStackResponse
 
     interface _UpdateStackInstancesResponse
@@ -1385,7 +1452,8 @@ module Aws::CloudFormation
       ?permission_model: String,
       ?auto_deployment: {
         enabled: bool,
-        retain_stacks_on_account_removal: bool
+        retain_stacks_on_account_removal: bool,
+        depends_on: Array[String]
       },
       ?operation_id: String,
       ?accounts: Array[String],

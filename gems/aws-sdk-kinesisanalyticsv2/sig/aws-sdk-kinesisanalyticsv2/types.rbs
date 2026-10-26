@@ -2448,6 +2448,8 @@ module Aws::KinesisAnalyticsV2
       FLINK_1_18: String
       FLINK_1_19: String
       FLINK_1_20: String
+      FLINK_2_2: String
+      FLINK_2_3: String
     end
 
     class S3ApplicationCodeLocationDescription

@@ -29,9 +29,12 @@ module Aws::SecurityHub
   # * {InvalidAccessException}
   # * {InvalidInputException}
   # * {LimitExceededException}
+  # * {OrganizationNotFoundException}
+  # * {OrganizationalUnitNotFoundException}
   # * {ResourceConflictException}
   # * {ResourceInUseException}
   # * {ResourceNotFoundException}
+  # * {ServiceQuotaExceededException}
   # * {ThrottlingException}
   # * {ValidationException}
   #
@@ -163,6 +166,40 @@ module Aws::SecurityHub
       end
     end
 
+    # <p>The request failed because one or more organizations specified in the request don't exist or don't belong to the caller's organization.</p>
+    class OrganizationNotFoundException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::SecurityHub::Types::OrganizationNotFoundException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+
+      def code
+        @data[:code]
+      end
+    end
+
+    # <p>The request failed because one or more organizational units specified in the request don't exist within the caller's organization.</p>
+    class OrganizationalUnitNotFoundException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::SecurityHub::Types::OrganizationalUnitNotFoundException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+
+      def code
+        @data[:code]
+      end
+    end
+
     # <p>The resource specified in the request conflicts with an existing resource.</p>
     class ResourceConflictException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
@@ -181,7 +218,7 @@ module Aws::SecurityHub
     end
 
     # <p>
-    #             The request was rejected because it conflicts with the resource's availability. For example, you tried 
+    #             The request was rejected because it conflicts with the resource's availability. For example, you tried
     #             to update a security control that's currently in the <code>UPDATING</code> state.
     #         </p>
     class ResourceInUseException < Smithy::Client::ServiceError
@@ -204,6 +241,23 @@ module Aws::SecurityHub
     class ResourceNotFoundException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::SecurityHub::Types::ResourceNotFoundException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+
+      def code
+        @data[:code]
+      end
+    end
+
+    # <p>The request was rejected because it would exceed the service quota limit.</p>
+    class ServiceQuotaExceededException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::SecurityHub::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
         super
       end

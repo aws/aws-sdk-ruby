@@ -36,7 +36,9 @@ module Aws::EMR
     CancelStepsInput: StructureShape
     CancelStepsOutput: StructureShape
     CancelStepsRequestStatus: EnumShape
+    ClientRequestToken: StringShape
     CloudWatchAlarmDefinition: StructureShape
+    CloudWatchLogConfiguration: StructureShape
     Cluster: StructureShape
     ClusterId: StringShape
     ClusterState: EnumShape
@@ -116,6 +118,10 @@ module Aws::EMR
     GetOnClusterAppUIPresignedURLOutput: StructureShape
     GetPersistentAppUIPresignedURLInput: StructureShape
     GetPersistentAppUIPresignedURLOutput: StructureShape
+    GetSessionEndpointInput: StructureShape
+    GetSessionEndpointOutput: StructureShape
+    GetSessionInput: StructureShape
+    GetSessionOutput: StructureShape
     GetStudioSessionMappingInput: StructureShape
     GetStudioSessionMappingOutput: StructureShape
     HadoopJarStepConfig: StructureShape
@@ -201,6 +207,8 @@ module Aws::EMR
     ListReleaseLabelsOutput: StructureShape
     ListSecurityConfigurationsInput: StructureShape
     ListSecurityConfigurationsOutput: StructureShape
+    ListSessionsInput: StructureShape
+    ListSessionsOutput: StructureShape
     ListStepsInput: StructureShape
     ListStepsOutput: StructureShape
     ListStudioSessionMappingsInput: StructureShape
@@ -209,6 +217,10 @@ module Aws::EMR
     ListStudiosOutput: StructureShape
     ListSupportedInstanceTypesInput: StructureShape
     ListSupportedInstanceTypesOutput: StructureShape
+    LogType: EnumShape
+    LogTypeMap: MapShape
+    LogTypesMap: MapShape
+    LogUploadPolicyValue: EnumShape
     Long: IntegerShape
     ManagedScalingPolicy: StructureShape
     Marker: StringShape
@@ -220,6 +232,7 @@ module Aws::EMR
     ModifyClusterOutput: StructureShape
     ModifyInstanceFleetInput: StructureShape
     ModifyInstanceGroupsInput: StructureShape
+    MonitoringConfiguration: StructureShape
     NewSupportedProductsList: ListShape
     NonNegativeDouble: FloatShape
     NotebookExecution: StructureShape
@@ -274,6 +287,8 @@ module Aws::EMR
     ResourceId: StringShape
     RunJobFlowInput: StructureShape
     RunJobFlowOutput: StructureShape
+    S3LoggingConfiguration: StructureShape
+    S3MonitoringConfiguration: StructureShape
     ScaleDownBehavior: EnumShape
     ScalingAction: StructureShape
     ScalingConstraints: StructureShape
@@ -285,9 +300,19 @@ module Aws::EMR
     SecurityConfigurationList: ListShape
     SecurityConfigurationSummary: StructureShape
     SecurityGroupsList: ListShape
+    SensitiveString: StringShape
+    Session: StructureShape
+    SessionCloudWatchLoggingConfiguration: StructureShape
+    SessionId: StringShape
+    SessionList: ListShape
+    SessionManagedLoggingConfiguration: StructureShape
     SessionMappingDetail: StructureShape
     SessionMappingSummary: StructureShape
     SessionMappingSummaryList: ListShape
+    SessionMonitoringConfiguration: StructureShape
+    SessionS3LoggingConfiguration: StructureShape
+    SessionState: EnumShape
+    SessionStateList: ListShape
     SetKeepJobFlowAliveWhenNoStepsInput: StructureShape
     SetTerminationProtectionInput: StructureShape
     SetUnhealthyNodeReplacementInput: StructureShape
@@ -302,6 +327,8 @@ module Aws::EMR
     SpotResizingSpecification: StructureShape
     StartNotebookExecutionInput: StructureShape
     StartNotebookExecutionOutput: StructureShape
+    StartSessionInput: StructureShape
+    StartSessionOutput: StructureShape
     Statistic: EnumShape
     Step: StructureShape
     StepCancellationOption: EnumShape
@@ -313,6 +340,7 @@ module Aws::EMR
     StepExecutionStatusDetail: StructureShape
     StepId: StringShape
     StepIdsList: ListShape
+    StepMonitoringConfiguration: StructureShape
     StepState: EnumShape
     StepStateChangeReason: StructureShape
     StepStateChangeReasonCode: EnumShape
@@ -336,6 +364,8 @@ module Aws::EMR
     Tag: StructureShape
     TagList: ListShape
     TerminateJobFlowsInput: StructureShape
+    TerminateSessionInput: StructureShape
+    TerminateSessionOutput: StructureShape
     ThroughputVal: IntegerShape
     Unit: EnumShape
     UpdateStudioInput: StructureShape

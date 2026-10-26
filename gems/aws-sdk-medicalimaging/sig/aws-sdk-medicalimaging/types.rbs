@@ -12,6 +12,17 @@ module Aws::MedicalImaging
       attr_accessor message: String?
     end
 
+    class BadRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
     class ConflictException
       include Smithy::Schema::Structure
 
@@ -151,6 +162,7 @@ module Aws::MedicalImaging
         ?tags: Hash[String, String],
         ?kms_key_arn: String,
         ?lambda_authorizer_arn: String,
+        ?lossless_storage_format: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -159,6 +171,7 @@ module Aws::MedicalImaging
       attr_accessor tags: Hash[String, String]?
       attr_accessor kms_key_arn: String?
       attr_accessor lambda_authorizer_arn: String?
+      attr_accessor lossless_storage_format: String?
     end
 
     class CreateDatastoreResponse
@@ -188,6 +201,7 @@ module Aws::MedicalImaging
         ?input_s3_uri: String,
         ?output_s3_uri: String,
         ?message: String,
+        ?import_configuration: Types::ImportConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -201,6 +215,7 @@ module Aws::MedicalImaging
       attr_accessor input_s3_uri: String?
       attr_accessor output_s3_uri: String?
       attr_accessor message: String?
+      attr_accessor import_configuration: Types::ImportConfiguration?
     end
 
     class DICOMImportJobSummary
@@ -304,6 +319,7 @@ module Aws::MedicalImaging
         ?datastore_status: String,
         ?kms_key_arn: String,
         ?lambda_authorizer_arn: String,
+        ?lossless_storage_format: String,
         ?datastore_arn: String,
         ?created_at: Time,
         ?updated_at: Time,
@@ -315,6 +331,7 @@ module Aws::MedicalImaging
       attr_accessor datastore_status: String?
       attr_accessor kms_key_arn: String?
       attr_accessor lambda_authorizer_arn: String?
+      attr_accessor lossless_storage_format: String?
       attr_accessor datastore_arn: String?
       attr_accessor created_at: Time?
       attr_accessor updated_at: Time?
@@ -401,6 +418,32 @@ module Aws::MedicalImaging
       attr_accessor image_set_id: String?
       attr_accessor image_set_state: String?
       attr_accessor image_set_workflow_status: String?
+    end
+
+    class DicomJsonMetadataImportConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dicom_metadata_mappings: Array[Types::DicomMetadataMapping],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dicom_metadata_mappings: Array[Types::DicomMetadataMapping]?
+    end
+
+    class DicomMetadataMapping
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?study_instance_uid: String,
+        ?series_instance_uid: String,
+        ?metadata_file_path: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor study_instance_uid: String?
+      attr_accessor series_instance_uid: String?
+      attr_accessor metadata_file_path: String?
     end
 
     class GetDICOMImportJobRequest
@@ -538,6 +581,8 @@ module Aws::MedicalImaging
         ?image_set_arn: String,
         ?overrides: Types::Overrides,
         ?is_primary: bool,
+        ?last_accessed_at: Time,
+        ?storage_tier: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -553,6 +598,8 @@ module Aws::MedicalImaging
       attr_accessor image_set_arn: String?
       attr_accessor overrides: Types::Overrides?
       attr_accessor is_primary: bool?
+      attr_accessor last_accessed_at: Time?
+      attr_accessor storage_tier: String?
     end
 
     class ImageFrameInformation
@@ -608,6 +655,7 @@ module Aws::MedicalImaging
       COPYING_WITH_READ_ONLY_ACCESS: String
       COPY_FAILED: String
       UPDATING: String
+      UPDATING_FOR_STUDY_CONSISTENCY: String
       UPDATED: String
       UPDATE_FAILED: String
       DELETING: String
@@ -625,6 +673,8 @@ module Aws::MedicalImaging
         ?version: Integer,
         ?created_at: Time,
         ?updated_at: Time,
+        ?last_accessed_at: Time,
+        ?storage_tier: String,
         ?dicom_tags: Types::DICOMTags,
         ?is_primary: bool,
       ) -> void
@@ -634,8 +684,26 @@ module Aws::MedicalImaging
       attr_accessor version: Integer?
       attr_accessor created_at: Time?
       attr_accessor updated_at: Time?
+      attr_accessor last_accessed_at: Time?
+      attr_accessor storage_tier: String?
       attr_accessor dicom_tags: Types::DICOMTags?
       attr_accessor is_primary: bool?
+    end
+
+    class ImportConfiguration
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?dicom_json_metadata_import_configuration: Types::DicomJsonMetadataImportConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dicom_json_metadata_import_configuration: Types::DicomJsonMetadataImportConfiguration?
+
+      class DicomJsonMetadataImportConfiguration < ImportConfiguration
+      end
+      class Unknown < ImportConfiguration
+      end
     end
 
     class InternalServerException
@@ -766,6 +834,11 @@ module Aws::MedicalImaging
       attr_accessor tags: Hash[String, String]?
     end
 
+    module LosslessStorageFormat
+      HTJ2K: String
+      JPEG_2000_LOSSLESS: String
+    end
+
     class MetadataCopies
       include Smithy::Schema::Structure
 
@@ -795,6 +868,17 @@ module Aws::MedicalImaging
       end
       class Unknown < MetadataUpdates
       end
+    end
+
+    class NotAcceptableException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
     end
 
     module Operator
@@ -976,6 +1060,7 @@ module Aws::MedicalImaging
         ?input_s3_uri: String,
         ?output_s3_uri: String,
         ?input_owner_account_id: String,
+        ?import_configuration: Types::ImportConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -986,6 +1071,7 @@ module Aws::MedicalImaging
       attr_accessor input_s3_uri: String?
       attr_accessor output_s3_uri: String?
       attr_accessor input_owner_account_id: String?
+      attr_accessor import_configuration: Types::ImportConfiguration?
     end
 
     class StartDICOMImportJobResponse
@@ -1003,6 +1089,11 @@ module Aws::MedicalImaging
       attr_accessor job_id: String?
       attr_accessor job_status: String?
       attr_accessor submitted_at: Time?
+    end
+
+    module StorageTier
+      FREQUENT_ACCESS: String
+      ARCHIVE_INSTANT_ACCESS: String
     end
 
     class TagResourceRequest
@@ -1068,6 +1159,7 @@ module Aws::MedicalImaging
         ?image_set_id: String,
         ?latest_version_id: String,
         ?force: bool,
+        ?include_study_image_sets: bool,
         ?update_image_set_metadata_updates: Types::MetadataUpdates,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -1076,6 +1168,7 @@ module Aws::MedicalImaging
       attr_accessor image_set_id: String?
       attr_accessor latest_version_id: String?
       attr_accessor force: bool?
+      attr_accessor include_study_image_sets: bool?
       attr_accessor update_image_set_metadata_updates: Types::MetadataUpdates?
     end
 

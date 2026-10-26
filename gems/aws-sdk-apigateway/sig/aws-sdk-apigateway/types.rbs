@@ -71,6 +71,13 @@ module Aws::APIGateway
       attr_accessor throttle: Hash[String, Types::ThrottleSettings]?
     end
 
+    module ApiStatus
+      UPDATING: String
+      AVAILABLE: String
+      PENDING: String
+      FAILED: String
+    end
+
     class Authorizer
       include Smithy::Schema::Structure
 
@@ -518,6 +525,7 @@ module Aws::APIGateway
         ?domain_name_status: String,
         ?domain_name_status_message: String,
         ?security_policy: String,
+        ?endpoint_access_mode: String,
         ?tags: Hash[String, String],
         ?mutual_tls_authentication: Types::MutualTlsAuthentication,
         ?ownership_verification_certificate_arn: String,
@@ -543,6 +551,7 @@ module Aws::APIGateway
       attr_accessor domain_name_status: String?
       attr_accessor domain_name_status_message: String?
       attr_accessor security_policy: String?
+      attr_accessor endpoint_access_mode: String?
       attr_accessor tags: Hash[String, String]?
       attr_accessor mutual_tls_authentication: Types::MutualTlsAuthentication?
       attr_accessor ownership_verification_certificate_arn: String?
@@ -566,6 +575,7 @@ module Aws::APIGateway
         ?endpoint_configuration: Types::EndpointConfiguration,
         ?tags: Hash[String, String],
         ?security_policy: String,
+        ?endpoint_access_mode: String,
         ?mutual_tls_authentication: Types::MutualTlsAuthenticationInput,
         ?ownership_verification_certificate_arn: String,
         ?policy: String,
@@ -584,6 +594,7 @@ module Aws::APIGateway
       attr_accessor endpoint_configuration: Types::EndpointConfiguration?
       attr_accessor tags: Hash[String, String]?
       attr_accessor security_policy: String?
+      attr_accessor endpoint_access_mode: String?
       attr_accessor mutual_tls_authentication: Types::MutualTlsAuthenticationInput?
       attr_accessor ownership_verification_certificate_arn: String?
       attr_accessor policy: String?
@@ -714,6 +725,10 @@ module Aws::APIGateway
         ?tags: Hash[String, String],
         ?disable_execute_api_endpoint: bool,
         ?root_resource_id: String,
+        ?security_policy: String,
+        ?endpoint_access_mode: String,
+        ?api_status: String,
+        ?api_status_message: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -731,6 +746,10 @@ module Aws::APIGateway
       attr_accessor tags: Hash[String, String]?
       attr_accessor disable_execute_api_endpoint: bool?
       attr_accessor root_resource_id: String?
+      attr_accessor security_policy: String?
+      attr_accessor endpoint_access_mode: String?
+      attr_accessor api_status: String?
+      attr_accessor api_status_message: String?
     end
 
     class CreateRestApiRequest
@@ -748,6 +767,8 @@ module Aws::APIGateway
         ?policy: String,
         ?tags: Hash[String, String],
         ?disable_execute_api_endpoint: bool,
+        ?security_policy: String,
+        ?endpoint_access_mode: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -762,6 +783,8 @@ module Aws::APIGateway
       attr_accessor policy: String?
       attr_accessor tags: Hash[String, String]?
       attr_accessor disable_execute_api_endpoint: bool?
+      attr_accessor security_policy: String?
+      attr_accessor endpoint_access_mode: String?
     end
 
     class CreateStageOutput
@@ -1360,6 +1383,7 @@ module Aws::APIGateway
         ?domain_name_status: String,
         ?domain_name_status_message: String,
         ?security_policy: String,
+        ?endpoint_access_mode: String,
         ?tags: Hash[String, String],
         ?mutual_tls_authentication: Types::MutualTlsAuthentication,
         ?ownership_verification_certificate_arn: String,
@@ -1385,6 +1409,7 @@ module Aws::APIGateway
       attr_accessor domain_name_status: String?
       attr_accessor domain_name_status_message: String?
       attr_accessor security_policy: String?
+      attr_accessor endpoint_access_mode: String?
       attr_accessor tags: Hash[String, String]?
       attr_accessor mutual_tls_authentication: Types::MutualTlsAuthentication?
       attr_accessor ownership_verification_certificate_arn: String?
@@ -1418,6 +1443,12 @@ module Aws::APIGateway
       PENDING: String
       PENDING_CERTIFICATE_REIMPORT: String
       PENDING_OWNERSHIP_VERIFICATION: String
+      FAILED: String
+    end
+
+    module EndpointAccessMode
+      BASIC: String
+      STRICT: String
     end
 
     class EndpointConfiguration
@@ -2077,6 +2108,7 @@ module Aws::APIGateway
         ?domain_name_status: String,
         ?domain_name_status_message: String,
         ?security_policy: String,
+        ?endpoint_access_mode: String,
         ?tags: Hash[String, String],
         ?mutual_tls_authentication: Types::MutualTlsAuthentication,
         ?ownership_verification_certificate_arn: String,
@@ -2102,6 +2134,7 @@ module Aws::APIGateway
       attr_accessor domain_name_status: String?
       attr_accessor domain_name_status_message: String?
       attr_accessor security_policy: String?
+      attr_accessor endpoint_access_mode: String?
       attr_accessor tags: Hash[String, String]?
       attr_accessor mutual_tls_authentication: Types::MutualTlsAuthentication?
       attr_accessor ownership_verification_certificate_arn: String?
@@ -2249,6 +2282,8 @@ module Aws::APIGateway
         ?cache_key_parameters: Array[String],
         ?integration_responses: Hash[String, Types::IntegrationResponse],
         ?tls_config: Types::TlsConfig,
+        ?response_transfer_mode: String,
+        ?integration_target: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2267,6 +2302,8 @@ module Aws::APIGateway
       attr_accessor cache_key_parameters: Array[String]?
       attr_accessor integration_responses: Hash[String, Types::IntegrationResponse]?
       attr_accessor tls_config: Types::TlsConfig?
+      attr_accessor response_transfer_mode: String?
+      attr_accessor integration_target: String?
     end
 
     class GetIntegrationRequest
@@ -2624,6 +2661,10 @@ module Aws::APIGateway
         ?tags: Hash[String, String],
         ?disable_execute_api_endpoint: bool,
         ?root_resource_id: String,
+        ?security_policy: String,
+        ?endpoint_access_mode: String,
+        ?api_status: String,
+        ?api_status_message: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2641,6 +2682,10 @@ module Aws::APIGateway
       attr_accessor tags: Hash[String, String]?
       attr_accessor disable_execute_api_endpoint: bool?
       attr_accessor root_resource_id: String?
+      attr_accessor security_policy: String?
+      attr_accessor endpoint_access_mode: String?
+      attr_accessor api_status: String?
+      attr_accessor api_status_message: String?
     end
 
     class GetRestApiRequest
@@ -3155,6 +3200,10 @@ module Aws::APIGateway
         ?tags: Hash[String, String],
         ?disable_execute_api_endpoint: bool,
         ?root_resource_id: String,
+        ?security_policy: String,
+        ?endpoint_access_mode: String,
+        ?api_status: String,
+        ?api_status_message: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3172,6 +3221,10 @@ module Aws::APIGateway
       attr_accessor tags: Hash[String, String]?
       attr_accessor disable_execute_api_endpoint: bool?
       attr_accessor root_resource_id: String?
+      attr_accessor security_policy: String?
+      attr_accessor endpoint_access_mode: String?
+      attr_accessor api_status: String?
+      attr_accessor api_status_message: String?
     end
 
     class ImportRestApiRequest
@@ -3208,6 +3261,8 @@ module Aws::APIGateway
         ?cache_key_parameters: Array[String],
         ?integration_responses: Hash[String, Types::IntegrationResponse],
         ?tls_config: Types::TlsConfig,
+        ?response_transfer_mode: String,
+        ?integration_target: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3226,6 +3281,8 @@ module Aws::APIGateway
       attr_accessor cache_key_parameters: Array[String]?
       attr_accessor integration_responses: Hash[String, Types::IntegrationResponse]?
       attr_accessor tls_config: Types::TlsConfig?
+      attr_accessor response_transfer_mode: String?
+      attr_accessor integration_target: String?
     end
 
     class IntegrationResponse
@@ -3507,6 +3564,8 @@ module Aws::APIGateway
         ?cache_key_parameters: Array[String],
         ?integration_responses: Hash[String, Types::IntegrationResponse],
         ?tls_config: Types::TlsConfig,
+        ?response_transfer_mode: String,
+        ?integration_target: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3525,6 +3584,8 @@ module Aws::APIGateway
       attr_accessor cache_key_parameters: Array[String]?
       attr_accessor integration_responses: Hash[String, Types::IntegrationResponse]?
       attr_accessor tls_config: Types::TlsConfig?
+      attr_accessor response_transfer_mode: String?
+      attr_accessor integration_target: String?
     end
 
     class PutIntegrationRequest
@@ -3548,6 +3609,8 @@ module Aws::APIGateway
         ?content_handling: String,
         ?timeout_in_millis: Integer,
         ?tls_config: Types::TlsConfig,
+        ?response_transfer_mode: String,
+        ?integration_target: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3568,6 +3631,8 @@ module Aws::APIGateway
       attr_accessor content_handling: String?
       attr_accessor timeout_in_millis: Integer?
       attr_accessor tls_config: Types::TlsConfig?
+      attr_accessor response_transfer_mode: String?
+      attr_accessor integration_target: String?
     end
 
     class PutIntegrationResponseOutput
@@ -3735,6 +3800,10 @@ module Aws::APIGateway
         ?tags: Hash[String, String],
         ?disable_execute_api_endpoint: bool,
         ?root_resource_id: String,
+        ?security_policy: String,
+        ?endpoint_access_mode: String,
+        ?api_status: String,
+        ?api_status_message: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3752,6 +3821,10 @@ module Aws::APIGateway
       attr_accessor tags: Hash[String, String]?
       attr_accessor disable_execute_api_endpoint: bool?
       attr_accessor root_resource_id: String?
+      attr_accessor security_policy: String?
+      attr_accessor endpoint_access_mode: String?
+      attr_accessor api_status: String?
+      attr_accessor api_status_message: String?
     end
 
     class PutRestApiRequest
@@ -3848,6 +3921,11 @@ module Aws::APIGateway
       OTHER_ACCOUNTS: String
     end
 
+    module ResponseTransferMode
+      BUFFERED: String
+      STREAM: String
+    end
+
     class RestApi
       include Smithy::Schema::Structure
 
@@ -3866,6 +3944,10 @@ module Aws::APIGateway
         ?tags: Hash[String, String],
         ?disable_execute_api_endpoint: bool,
         ?root_resource_id: String,
+        ?security_policy: String,
+        ?endpoint_access_mode: String,
+        ?api_status: String,
+        ?api_status_message: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3883,6 +3965,10 @@ module Aws::APIGateway
       attr_accessor tags: Hash[String, String]?
       attr_accessor disable_execute_api_endpoint: bool?
       attr_accessor root_resource_id: String?
+      attr_accessor security_policy: String?
+      attr_accessor endpoint_access_mode: String?
+      attr_accessor api_status: String?
+      attr_accessor api_status_message: String?
     end
 
     module RoutingMode
@@ -3945,6 +4031,18 @@ module Aws::APIGateway
     module SecurityPolicy
       TLS_1_0: String
       TLS_1_2: String
+      SecurityPolicy_TLS13_1_3_2025_09: String
+      SecurityPolicy_TLS13_1_3_FIPS_2025_09: String
+      SecurityPolicy_TLS13_1_2_PFS_PQ_2025_09: String
+      SecurityPolicy_TLS13_1_2_FIPS_PQ_2025_09: String
+      SecurityPolicy_TLS13_1_2_FIPS_PFS_PQ_2025_09: String
+      SecurityPolicy_TLS13_1_2_Ext2_PQ_2025_09: String
+      SecurityPolicy_TLS13_1_2_Ext2_FIPS_PQ_2025_09: String
+      SecurityPolicy_TLS13_1_2_PQ_2025_09: String
+      SecurityPolicy_TLS13_1_2_2021_06: String
+      SecurityPolicy_TLS13_2025_EDGE: String
+      SecurityPolicy_TLS12_PFS_2025_EDGE: String
+      SecurityPolicy_TLS12_2018_EDGE: String
     end
 
     class ServiceUnavailableException
@@ -4484,6 +4582,7 @@ module Aws::APIGateway
         ?domain_name_status: String,
         ?domain_name_status_message: String,
         ?security_policy: String,
+        ?endpoint_access_mode: String,
         ?tags: Hash[String, String],
         ?mutual_tls_authentication: Types::MutualTlsAuthentication,
         ?ownership_verification_certificate_arn: String,
@@ -4509,6 +4608,7 @@ module Aws::APIGateway
       attr_accessor domain_name_status: String?
       attr_accessor domain_name_status_message: String?
       attr_accessor security_policy: String?
+      attr_accessor endpoint_access_mode: String?
       attr_accessor tags: Hash[String, String]?
       attr_accessor mutual_tls_authentication: Types::MutualTlsAuthentication?
       attr_accessor ownership_verification_certificate_arn: String?
@@ -4585,6 +4685,8 @@ module Aws::APIGateway
         ?cache_key_parameters: Array[String],
         ?integration_responses: Hash[String, Types::IntegrationResponse],
         ?tls_config: Types::TlsConfig,
+        ?response_transfer_mode: String,
+        ?integration_target: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4603,6 +4705,8 @@ module Aws::APIGateway
       attr_accessor cache_key_parameters: Array[String]?
       attr_accessor integration_responses: Hash[String, Types::IntegrationResponse]?
       attr_accessor tls_config: Types::TlsConfig?
+      attr_accessor response_transfer_mode: String?
+      attr_accessor integration_target: String?
     end
 
     class UpdateIntegrationRequest
@@ -4860,6 +4964,10 @@ module Aws::APIGateway
         ?tags: Hash[String, String],
         ?disable_execute_api_endpoint: bool,
         ?root_resource_id: String,
+        ?security_policy: String,
+        ?endpoint_access_mode: String,
+        ?api_status: String,
+        ?api_status_message: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4877,6 +4985,10 @@ module Aws::APIGateway
       attr_accessor tags: Hash[String, String]?
       attr_accessor disable_execute_api_endpoint: bool?
       attr_accessor root_resource_id: String?
+      attr_accessor security_policy: String?
+      attr_accessor endpoint_access_mode: String?
+      attr_accessor api_status: String?
+      attr_accessor api_status_message: String?
     end
 
     class UpdateRestApiRequest

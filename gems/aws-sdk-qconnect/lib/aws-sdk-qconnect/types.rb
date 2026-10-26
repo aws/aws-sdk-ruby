@@ -25,6 +25,15 @@ module Aws::QConnect
     # @!attribute email_generative_answer_ai_agent_configuration
     #   <p>Configuration for the EMAIL_GENERATIVE_ANSWER AI agent that provides comprehensive knowledge-based answers for customer queries.</p>
     #   @return [Types::EmailGenerativeAnswerAIAgentConfiguration]
+    # @!attribute orchestration_ai_agent_configuration
+    #   <p>The configuration for AI Agents of type <code>ORCHESTRATION</code>.</p>
+    #   @return [Types::OrchestrationAIAgentConfiguration]
+    # @!attribute note_taking_ai_agent_configuration
+    #   <p>The configuration for AI Agents of type <code>NOTE_TAKING</code>.</p>
+    #   @return [Types::NoteTakingAIAgentConfiguration]
+    # @!attribute case_summarization_ai_agent_configuration
+    #   <p>The configuration for AI Agents of type <code>CASE_SUMMARIZATION</code>.</p>
+    #   @return [Types::CaseSummarizationAIAgentConfiguration]
     class AIAgentConfiguration < Struct.new(
       :manual_search_ai_agent_configuration,
       :answer_recommendation_ai_agent_configuration,
@@ -32,6 +41,9 @@ module Aws::QConnect
       :email_response_ai_agent_configuration,
       :email_overview_ai_agent_configuration,
       :email_generative_answer_ai_agent_configuration,
+      :orchestration_ai_agent_configuration,
+      :note_taking_ai_agent_configuration,
+      :case_summarization_ai_agent_configuration,
       :unknown,
       keyword_init: true
     )
@@ -43,6 +55,9 @@ module Aws::QConnect
       class EmailResponseAIAgentConfiguration < AIAgentConfiguration; end
       class EmailOverviewAIAgentConfiguration < AIAgentConfiguration; end
       class EmailGenerativeAnswerAIAgentConfiguration < AIAgentConfiguration; end
+      class OrchestrationAIAgentConfiguration < AIAgentConfiguration; end
+      class NoteTakingAIAgentConfiguration < AIAgentConfiguration; end
+      class CaseSummarizationAIAgentConfiguration < AIAgentConfiguration; end
       class Unknown < AIAgentConfiguration; end
     end
 
@@ -50,12 +65,21 @@ module Aws::QConnect
     # @!attribute ai_agent_id
     #   <p>The ID of the AI Agent to be configured.</p>
     #   @return [String]
+    # @!attribute enabled
+    #   <p>Indicates whether the AI Agent configured for this AI Agent type is enabled. When this value is omitted or set to true, the configured AI Agent runs; when set to false, the AI Agent ID is retained but no AI Agent runs for the AI Agent type. Setting this value to false is currently supported only for the <code>ANSWER_RECOMMENDATION</code> AI Agent type; other requests to set it to false are rejected with a validation error.</p>
+    #   @return [Boolean]
     class AIAgentConfigurationData < Struct.new(
       nil,
       :ai_agent_id,
+      :enabled,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:enabled] = nil unless options.key?(:enabled)
+        super
+      end
     end
 
     # <p>The data for the AI Agent.</p>
@@ -189,6 +213,18 @@ module Aws::QConnect
       nil,
       :ai_agent_summary,
       :version_number,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The assessment information from the AI Guardrail.</p>
+    # @!attribute blocked
+    #   <p>Indicates whether the AI Guardrail blocked the content.</p>
+    #   @return [Boolean]
+    class AIGuardrailAssessment < Struct.new(
+      nil,
+      :blocked,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -433,6 +469,9 @@ module Aws::QConnect
     # @!attribute template_configuration
     #   <p>The configuration of the prompt template for this AI Prompt.</p>
     #   @return [Types::AIPromptTemplateConfiguration]
+    # @!attribute inference_configuration
+    #   <p>The configuration for inference parameters when using the AI Prompt.</p>
+    #   @return [Types::AIPromptInferenceConfiguration]
     # @!attribute modified_time
     #   <p>The time the AI Prompt was last modified.</p>
     #   @return [Time]
@@ -463,12 +502,37 @@ module Aws::QConnect
       :model_id,
       :api_format,
       :template_configuration,
+      :inference_configuration,
       :modified_time,
       :description,
       :visibility_status,
       :tags,
       :origin,
       :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration for inference parameters when using AI Prompts.</p>
+    # @!attribute temperature
+    #   <p>The temperature setting for controlling randomness in the generated response.</p>
+    #   @return [Float]
+    # @!attribute top_p
+    #   <p>The top-P sampling parameter for nucleus sampling.</p>
+    #   @return [Float]
+    # @!attribute top_k
+    #   <p>The top-K sampling parameter for token selection.</p>
+    #   @return [Integer]
+    # @!attribute max_tokens_to_sample
+    #   <p>The maximum number of tokens to generate in the response.</p>
+    #   @return [Integer]
+    class AIPromptInferenceConfiguration < Struct.new(
+      nil,
+      :temperature,
+      :top_p,
+      :top_k,
+      :max_tokens_to_sample,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -638,13 +702,50 @@ module Aws::QConnect
       include ::Smithy::Schema::Structure
     end
 
+    # <p>A union that identifies a collaborator agent to engage. Specify either an Amazon Connect AI Agent or a third-party agent.</p>
+    # @!attribute ai_agent_id
+    #   <p>The identifier of an Amazon Connect AI Agent to use as the collaborator agent.</p>
+    #   @return [String]
+    # @!attribute application_id
+    #   <p>The identifier of a third-party agent to use as the collaborator agent.</p>
+    #   @return [String]
+    class AgentTarget < Struct.new(
+      :ai_agent_id,
+      :application_id,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class AiAgentId < AgentTarget; end
+      class ApplicationId < AgentTarget; end
+      class Unknown < AgentTarget; end
+    end
+
     # <p>Content association data for a <a href="https://docs.aws.amazon.com/connect/latest/adminguide/step-by-step-guided-experiences.html">step-by-step guide</a>.</p>
     # @!attribute flow_id
-    #   <p> The Amazon Resource Name (ARN) of an Amazon Connect flow. Step-by-step guides are a type of flow.</p>
+    #   <p> The Amazon Resource Name (ARN) of an Connect Customer flow. Step-by-step guides are a type of flow.</p>
     #   @return [String]
     class AmazonConnectGuideAssociationData < Struct.new(
       nil,
       :flow_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>An annotation that provides additional context or metadata.</p>
+    # @note This shape contains sensitive data and should be treated as such.
+    # @!attribute title
+    #   <p>The title of the annotation.</p>
+    #   @return [String]
+    # @!attribute destructive_hint
+    #   <p>A hint indicating that the annotation contains potentially destructive content.</p>
+    #   @return [Boolean]
+    class Annotation < Struct.new(
+      nil,
+      :title,
+      :destructive_hint,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -669,6 +770,9 @@ module Aws::QConnect
     # @!attribute locale
     #   <p>The locale to which specifies the language and region settings that determine the response language for <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_amazon-q-connect_QueryAssistant.html">QueryAssistant</a>.</p> <note> <p>For more information on supported locales, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/supported-languages.html#qic-notes-languages">Language support for Amazon Q in Connect</a>.</p> </note>
     #   @return [String]
+    # @!attribute suggested_messages
+    #   <p>The suggested messages configuration for the Answer Recommendation AI Agent.</p>
+    #   @return [Array<String>]
     class AnswerRecommendationAIAgentConfiguration < Struct.new(
       nil,
       :intent_labeling_generation_ai_prompt_id,
@@ -677,6 +781,7 @@ module Aws::QConnect
       :answer_generation_ai_guardrail_id,
       :association_configurations,
       :locale,
+      :suggested_messages,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -738,14 +843,19 @@ module Aws::QConnect
     # @!attribute knowledge_base_id
     #   <p>The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base.</p>
     #   @return [String]
+    # @!attribute external_bedrock_knowledge_base_config
+    #   <p>The configuration for an external Bedrock knowledge base association.</p>
+    #   @return [Types::ExternalBedrockKnowledgeBaseConfig]
     class AssistantAssociationInputData < Struct.new(
       :knowledge_base_id,
+      :external_bedrock_knowledge_base_config,
       :unknown,
       keyword_init: true
     )
       include ::Smithy::Schema::Union
 
       class KnowledgeBaseId < AssistantAssociationInputData; end
+      class ExternalBedrockKnowledgeBaseConfig < AssistantAssociationInputData; end
       class Unknown < AssistantAssociationInputData; end
     end
 
@@ -753,14 +863,19 @@ module Aws::QConnect
     # @!attribute knowledge_base_association
     #   <p>The knowledge base where output data is sent.</p>
     #   @return [Types::KnowledgeBaseAssociationData]
+    # @!attribute external_bedrock_knowledge_base_config
+    #   <p>The configuration for an external Bedrock knowledge base association in the output data.</p>
+    #   @return [Types::ExternalBedrockKnowledgeBaseConfig]
     class AssistantAssociationOutputData < Struct.new(
       :knowledge_base_association,
+      :external_bedrock_knowledge_base_config,
       :unknown,
       keyword_init: true
     )
       include ::Smithy::Schema::Union
 
       class KnowledgeBaseAssociation < AssistantAssociationOutputData; end
+      class ExternalBedrockKnowledgeBaseConfig < AssistantAssociationOutputData; end
       class Unknown < AssistantAssociationOutputData; end
     end
 
@@ -846,6 +961,9 @@ module Aws::QConnect
     # @!attribute ai_agent_configuration
     #   <p>The configuration of the AI Agents (mapped by AI Agent Type to AI Agent version) that is set on the Amazon Q in Connect Assistant.</p>
     #   @return [Hash<String, Types::AIAgentConfigurationData>]
+    # @!attribute orchestrator_configuration_list
+    #   <p>The list of orchestrator configurations for the assistant.</p>
+    #   @return [Array<Types::OrchestratorConfigurationEntry>]
     class AssistantData < Struct.new(
       nil,
       :assistant_id,
@@ -859,6 +977,7 @@ module Aws::QConnect
       :integration_configuration,
       :capability_configuration,
       :ai_agent_configuration,
+      :orchestrator_configuration_list,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -910,6 +1029,9 @@ module Aws::QConnect
     # @!attribute ai_agent_configuration
     #   <p>The configuration of the AI Agents (mapped by AI Agent Type to AI Agent version) that is set on the Amazon Q in Connect Assistant.</p>
     #   @return [Hash<String, Types::AIAgentConfigurationData>]
+    # @!attribute orchestrator_configuration_list
+    #   <p>The list of orchestrator configurations for the assistant.</p>
+    #   @return [Array<Types::OrchestratorConfigurationEntry>]
     class AssistantSummary < Struct.new(
       nil,
       :assistant_id,
@@ -923,6 +1045,7 @@ module Aws::QConnect
       :integration_configuration,
       :capability_configuration,
       :ai_agent_configuration,
+      :orchestrator_configuration_list,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -979,6 +1102,54 @@ module Aws::QConnect
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The configuration for AI Agents of type <code>CASE_SUMMARIZATION</code>.</p>
+    # @!attribute case_summarization_ai_prompt_id
+    #   <p>The AI Prompt identifier used by the Case Summarization AI Agent.</p>
+    #   @return [String]
+    # @!attribute case_summarization_ai_guardrail_id
+    #   <p>The AI Guardrail identifier used by the Case Summarization AI Agent.</p>
+    #   @return [String]
+    # @!attribute locale
+    #   <p>The locale setting for the Case Summarization AI Agent.</p>
+    #   @return [String]
+    class CaseSummarizationAIAgentConfiguration < Struct.new(
+      nil,
+      :case_summarization_ai_prompt_id,
+      :case_summarization_ai_guardrail_id,
+      :locale,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Details about case summarization chunk data.</p>
+    # @!attribute completion
+    #   <p>A chunk of the case summarization completion.</p>
+    #   @return [String]
+    # @!attribute next_chunk_token
+    #   <p>Token for retrieving the next chunk of streaming summarization data, if available.</p>
+    #   @return [String]
+    class CaseSummarizationChunkDataDetails < Struct.new(
+      nil,
+      :completion,
+      :next_chunk_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Input data for case summarization.</p>
+    # @!attribute case_arn
+    #   <p>The Amazon Resource Name (ARN) of the case for summarization.</p>
+    #   @return [String]
+    class CaseSummarizationInputData < Struct.new(
+      nil,
+      :case_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Details about how to chunk the documents in the data source. A chunk refers to an excerpt from a data source that is returned when the knowledge base that it belongs to is queried.</p>
     # @!attribute chunking_strategy
     #   <p>Knowledge base can split your source data into chunks. A chunk refers to an excerpt from a data source that is returned when the knowledge base that it belongs to is queried. You have the following options for chunking your data. If you opt for <code>NONE</code>, then you may want to pre-process your files by splitting them up such that each file corresponds to a chunk.</p>
@@ -998,6 +1169,38 @@ module Aws::QConnect
       :fixed_size_chunking_configuration,
       :hierarchical_chunking_configuration,
       :semantic_chunking_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A citation that references source content.</p>
+    # @!attribute content_id
+    #   <p>The identifier of the content being cited.</p>
+    #   @return [String]
+    # @!attribute title
+    #   <p>The title of the cited content.</p>
+    #   @return [String]
+    # @!attribute knowledge_base_id
+    #   <p>The identifier of the knowledge base containing the cited content.</p>
+    #   @return [String]
+    # @!attribute citation_span
+    #   <p>Contains information about where the text with a citation begins and ends in the generated output.</p>
+    #   @return [Types::CitationSpan]
+    # @!attribute source_url
+    #   <p>The source URL for the citation.</p>
+    #   @return [String]
+    # @!attribute reference_type
+    #   <p>A type to define the KB origin of a cited content</p>
+    #   @return [String]
+    class Citation < Struct.new(
+      nil,
+      :content_id,
+      :title,
+      :knowledge_base_id,
+      :citation_span,
+      :source_url,
+      :reference_type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1027,7 +1230,7 @@ module Aws::QConnect
 
     # <p>The configuration information of the external data source.</p>
     # @!attribute connect_configuration
-    #   <p>The configuration information of the Amazon Connect data source.</p>
+    #   <p>The configuration information of the Connect Customer data source.</p>
     #   @return [Types::ConnectConfiguration]
     class Configuration < Struct.new(
       :connect_configuration,
@@ -1051,9 +1254,9 @@ module Aws::QConnect
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The configuration information of the Amazon Connect data source.</p>
+    # <p>The configuration information of the Connect Customer data source.</p>
     # @!attribute instance_id
-    #   <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
+    #   <p>The identifier of the Connect Customer instance. You can find the instanceId in the ARN of the instance.</p>
     #   @return [String]
     class ConnectConfiguration < Struct.new(
       nil,
@@ -1602,6 +1805,9 @@ module Aws::QConnect
     # @!attribute description
     #   <p>The description of the AI Prompt.</p>
     #   @return [String]
+    # @!attribute inference_configuration
+    #   <p>The inference configuration for the AI Prompt being created.</p>
+    #   @return [Types::AIPromptInferenceConfiguration]
     class CreateAIPromptRequest < Struct.new(
       nil,
       :client_token,
@@ -1615,6 +1821,7 @@ module Aws::QConnect
       :api_format,
       :tags,
       :description,
+      :inference_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1955,6 +2162,9 @@ module Aws::QConnect
     # @!attribute language
     #   <p>The language code value for the language in which the quick response is written. The supported language codes include <code>de_DE</code>, <code>en_US</code>, <code>es_ES</code>, <code>fr_FR</code>, <code>id_ID</code>, <code>it_IT</code>, <code>ja_JP</code>, <code>ko_KR</code>, <code>pt_BR</code>, <code>zh_CN</code>, <code>zh_TW</code> </p>
     #   @return [String]
+    # @!attribute source_configuration
+    #   <p>The source configuration of the message template. Only set this argument for WHATSAPP channel subtype.</p>
+    #   @return [Types::MessageTemplateSourceConfiguration]
     # @!attribute default_attributes
     #   <p>An object that specifies the default values to use for variables in the message template. This object contains different categories of key-value pairs. Each key defines a variable or placeholder in the message template. The corresponding value defines the default value for that variable.</p>
     #   @return [Types::MessageTemplateAttributes]
@@ -1975,6 +2185,7 @@ module Aws::QConnect
       :description,
       :channel_subtype,
       :language,
+      :source_configuration,
       :default_attributes,
       :grouping_configuration,
       :client_token,
@@ -2050,7 +2261,7 @@ module Aws::QConnect
     #   <p>Whether the quick response is active.</p>
     #   @return [Boolean]
     # @!attribute channels
-    #   <p>The Amazon Connect channels this quick response applies to.</p>
+    #   <p>The Connect Customer channels this quick response applies to.</p>
     #   @return [Array<String>]
     # @!attribute language
     #   <p>The language code value for the language in which the quick response is written. The supported language codes include <code>de_DE</code>, <code>en_US</code>, <code>es_ES</code>, <code>fr_FR</code>, <code>id_ID</code>, <code>it_IT</code>, <code>ja_JP</code>, <code>ko_KR</code>, <code>pt_BR</code>, <code>zh_CN</code>, <code>zh_TW</code> </p>
@@ -2113,8 +2324,14 @@ module Aws::QConnect
     #   <p>The configuration of the AI Agents (mapped by AI Agent Type to AI Agent version) that should be used by Amazon Q in Connect for this Session.</p>
     #   @return [Hash<String, Types::AIAgentConfigurationData>]
     # @!attribute contact_arn
-    #   <p>The Amazon Resource Name (ARN) of the email contact in Amazon Connect. Used to retrieve email content and establish session context for AI-powered email assistance.</p>
+    #   <p>The Amazon Resource Name (ARN) of the email contact in Connect Customer. Used to retrieve email content and establish session context for AI-powered email assistance.</p>
     #   @return [String]
+    # @!attribute orchestrator_configuration_list
+    #   <p>The list of orchestrator configurations for the session being created.</p>
+    #   @return [Array<Types::OrchestratorConfigurationEntry>]
+    # @!attribute remove_orchestrator_configuration_list
+    #   <p>The list of orchestrator configurations to remove from the session.</p>
+    #   @return [Boolean]
     class CreateSessionInput < Struct.new(
       nil,
       :client_token,
@@ -2125,6 +2342,8 @@ module Aws::QConnect
       :tag_filter,
       :ai_agent_configuration,
       :contact_arn,
+      :orchestrator_configuration_list,
+      :remove_orchestrator_configuration_list,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2406,6 +2625,21 @@ module Aws::QConnect
     # @!attribute email_generative_answer_chunk_data
     #   <p>Streaming chunk data for email generative answers containing partial knowledge-based response content.</p>
     #   @return [Types::EmailGenerativeAnswerChunkDataDetails]
+    # @!attribute case_summarization_chunk_data
+    #   <p>Details about case summarization chunk data.</p>
+    #   @return [Types::CaseSummarizationChunkDataDetails]
+    # @!attribute suggested_message_data
+    #   <p>Details about suggested message data.</p>
+    #   @return [Types::SuggestedMessageDataDetails]
+    # @!attribute notes_data
+    #   <p>Details about notes data.</p>
+    #   @return [Types::NotesDataDetails]
+    # @!attribute notes_chunk_data
+    #   <p>Details about notes chunk data.</p>
+    #   @return [Types::NotesChunkDataDetails]
+    # @!attribute proactive_recommendation_data
+    #   <p>Details about a proactive recommendation, including the token used to retrieve its chunked response with <code>GetNextMessage</code>.</p>
+    #   @return [Types::ProactiveRecommendationDataDetails]
     class DataDetails < Struct.new(
       :content_data,
       :generative_data,
@@ -2415,6 +2649,11 @@ module Aws::QConnect
       :email_response_chunk_data,
       :email_overview_chunk_data,
       :email_generative_answer_chunk_data,
+      :case_summarization_chunk_data,
+      :suggested_message_data,
+      :notes_data,
+      :notes_chunk_data,
+      :proactive_recommendation_data,
       :unknown,
       keyword_init: true
     )
@@ -2428,6 +2667,11 @@ module Aws::QConnect
       class EmailResponseChunkData < DataDetails; end
       class EmailOverviewChunkData < DataDetails; end
       class EmailGenerativeAnswerChunkData < DataDetails; end
+      class CaseSummarizationChunkData < DataDetails; end
+      class SuggestedMessageData < DataDetails; end
+      class NotesData < DataDetails; end
+      class NotesChunkData < DataDetails; end
+      class ProactiveRecommendationData < DataDetails; end
       class Unknown < DataDetails; end
     end
 
@@ -2438,9 +2682,13 @@ module Aws::QConnect
     # @!attribute generative_reference
     #   <p>Reference information about the generative content.</p>
     #   @return [Types::GenerativeReference]
+    # @!attribute suggested_message_reference
+    #   <p>Reference information for suggested messages.</p>
+    #   @return [Types::SuggestedMessageReference]
     class DataReference < Struct.new(
       :content_reference,
       :generative_reference,
+      :suggested_message_reference,
       :unknown,
       keyword_init: true
     )
@@ -2448,6 +2696,7 @@ module Aws::QConnect
 
       class ContentReference < DataReference; end
       class GenerativeReference < DataReference; end
+      class SuggestedMessageReference < DataReference; end
       class Unknown < DataReference; end
     end
 
@@ -2500,6 +2749,22 @@ module Aws::QConnect
       :message_template_arn,
       :message_template_id,
       :version_number,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A collaborator agent configuration in which the Orchestration AI Agent invokes the collaborator, resuming when the collaborator returns.</p>
+    # @!attribute agent_target
+    #   <p>The collaborator agent to delegate to.</p>
+    #   @return [Types::AgentTarget]
+    # @!attribute instruction
+    #   <p>The instruction that tells the Orchestration AI Agent when and how to delegate to this collaborator agent.</p>
+    #   @return [Types::MultiAgentInstruction]
+    class DelegateAgentConfiguration < Struct.new(
+      nil,
+      :agent_target,
+      :instruction,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2847,7 +3112,7 @@ module Aws::QConnect
       include ::Smithy::Schema::Structure
     end
 
-    # <p>An error occurred while calling a dependency. For example, calling <code>connect:DecribeContact</code> as part of <code>CreateSession</code> with a contactArn.</p>
+    # <p>The request failed because it depends on another request that failed.</p>
     # @!attribute message
     #   @return [String]
     class DependencyFailedException < Struct.new(
@@ -3078,6 +3343,9 @@ module Aws::QConnect
     # @!attribute name
     #   <p>The name of the message template.</p>
     #   @return [String]
+    # @!attribute channel
+    #   <p>The channel of the message template.</p>
+    #   @return [String]
     # @!attribute channel_subtype
     #   <p>The channel subtype this message template applies to.</p>
     #   @return [String]
@@ -3099,6 +3367,9 @@ module Aws::QConnect
     # @!attribute language
     #   <p>The language code value for the language in which the quick response is written. The supported language codes include <code>de_DE</code>, <code>en_US</code>, <code>es_ES</code>, <code>fr_FR</code>, <code>id_ID</code>, <code>it_IT</code>, <code>ja_JP</code>, <code>ko_KR</code>, <code>pt_BR</code>, <code>zh_CN</code>, <code>zh_TW</code> </p>
     #   @return [String]
+    # @!attribute source_configuration_summary
+    #   <p>The source configuration summary of the message template.</p>
+    #   @return [Types::MessageTemplateSourceConfigurationSummary]
     # @!attribute grouping_configuration
     #   <p>The configuration information of the grouping of Amazon Q in Connect users.</p>
     #   @return [Types::GroupingConfiguration]
@@ -3130,6 +3401,7 @@ module Aws::QConnect
       :knowledge_base_arn,
       :knowledge_base_id,
       :name,
+      :channel,
       :channel_subtype,
       :created_time,
       :last_modified_time,
@@ -3137,6 +3409,7 @@ module Aws::QConnect
       :content,
       :description,
       :language,
+      :source_configuration_summary,
       :grouping_configuration,
       :default_attributes,
       :attribute_types,
@@ -3145,6 +3418,22 @@ module Aws::QConnect
       :version_number,
       :message_template_content_sha256,
       :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration for an external Bedrock knowledge base.</p>
+    # @!attribute bedrock_knowledge_base_arn
+    #   <p>The Amazon Resource Name (ARN) of the external Bedrock knowledge base.</p>
+    #   @return [String]
+    # @!attribute access_role_arn
+    #   <p>The Amazon Resource Name (ARN) of the IAM role used to access the external Bedrock knowledge base.</p>
+    #   @return [String]
+    class ExternalBedrockKnowledgeBaseConfig < Struct.new(
+      nil,
+      :bedrock_knowledge_base_arn,
+      :access_role_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3180,6 +3469,22 @@ module Aws::QConnect
       nil,
       :field,
       :operator,
+      :value,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>An attribute used for filtering.</p>
+    # @!attribute key
+    #   <p>The key of the filter attribute.</p>
+    #   @return [String]
+    # @!attribute value
+    #   <p>The value of the filter attribute.</p>
+    #   @return [JSON]
+    class FilterAttribute < Struct.new(
+      nil,
+      :key,
       :value,
       keyword_init: true
     )
@@ -3601,6 +3906,9 @@ module Aws::QConnect
     # @!attribute conversation_session_data
     #   <p>The conversation data stored on an Amazon Q in Connect Session.</p>
     #   @return [Array<Types::RuntimeSessionData>]
+    # @!attribute chunked_response_terminated
+    #   <p>Indicates whether the chunked response has been terminated.</p>
+    #   @return [Boolean]
     class GetNextMessageResponse < Struct.new(
       nil,
       :type,
@@ -3609,6 +3917,7 @@ module Aws::QConnect
       :conversation_state,
       :next_message_token,
       :conversation_session_data,
+      :chunked_response_terminated,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3655,6 +3964,9 @@ module Aws::QConnect
     # @!attribute next_chunk_token
     #   <p>The token for the next set of chunks. Use the value returned in the previous response in the next request to retrieve the next set of chunks.</p>
     #   @return [String]
+    # @!attribute recommendation_type
+    #   <p>The type of recommendation being requested.</p>
+    #   @return [String]
     class GetRecommendationsInput < Struct.new(
       nil,
       :assistant_id,
@@ -3662,6 +3974,7 @@ module Aws::QConnect
       :max_results,
       :wait_time_seconds,
       :next_chunk_token,
+      :recommendation_type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3713,7 +4026,7 @@ module Aws::QConnect
     #   <p>The criteria used for grouping Amazon Q in Connect users.</p> <p>The following is the list of supported criteria values.</p> <ul> <li> <p> <code>RoutingProfileArn</code>: Grouping the users by their <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_RoutingProfile.html">Amazon Connect routing profile ARN</a>. User should have <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_SearchRoutingProfiles.html">SearchRoutingProfile</a> and <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeRoutingProfile.html">DescribeRoutingProfile</a> permissions when setting criteria to this value.</p> </li> </ul>
     #   @return [String]
     # @!attribute values
-    #   <p>The list of values that define different groups of Amazon Q in Connect users.</p> <ul> <li> <p>When setting <code>criteria</code> to <code>RoutingProfileArn</code>, you need to provide a list of ARNs of <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_RoutingProfile.html">Amazon Connect routing profiles</a> as values of this parameter.</p> </li> </ul>
+    #   <p>The list of values that define different groups of Amazon Q in Connect users.</p> <ul> <li> <p>When setting <code>criteria</code> to <code>RoutingProfileArn</code>, you need to provide a list of ARNs of <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_RoutingProfile.html">Connect Customer routing profiles</a> as values of this parameter.</p> </li> </ul>
     #   @return [Array<String>]
     class GroupingConfiguration < Struct.new(
       nil,
@@ -3779,7 +4092,7 @@ module Aws::QConnect
 
     # <p>The PII entity to configure for the AI Guardrail.</p>
     # @!attribute type
-    #   <p>Configure AI Guardrail type when the PII entity is detected.</p> <p>The following PIIs are used to block or mask sensitive information:</p> <ul> <li> <p> <b>General</b> </p> <ul> <li> <p> <b>ADDRESS</b> </p> <p>A physical address, such as "100 Main Street, Anytown, USA" or "Suite #12, Building 123". An address can include information such as the street, building, location, city, state, country, county, zip code, precinct, and neighborhood. </p> </li> <li> <p> <b>AGE</b> </p> <p>An individual's age, including the quantity and unit of time. For example, in the phrase "I am 40 years old," Guarrails recognizes "40 years" as an age. </p> </li> <li> <p> <b>NAME</b> </p> <p>An individual's name. This entity type does not include titles, such as Dr., Mr., Mrs., or Miss. AI Guardrail doesn't apply this entity type to names that are part of organizations or addresses. For example, AI Guardrail recognizes the "John Doe Organization" as an organization, and it recognizes "Jane Doe Street" as an address. </p> </li> <li> <p> <b>EMAIL</b> </p> <p>An email address, such as <i>marymajor@email.com</i>.</p> </li> <li> <p> <b>PHONE</b> </p> <p>A phone number. This entity type also includes fax and pager numbers. </p> </li> <li> <p> <b>USERNAME</b> </p> <p>A user name that identifies an account, such as a login name, screen name, nick name, or handle. </p> </li> <li> <p> <b>PASSWORD</b> </p> <p>An alphanumeric string that is used as a password, such as "*<i> very20special#pass*</i>". </p> </li> <li> <p> <b>DRIVER_ID</b> </p> <p>The number assigned to a driver's license, which is an official document permitting an individual to operate one or more motorized vehicles on a public road. A driver's license number consists of alphanumeric characters. </p> </li> <li> <p> <b>LICENSE_PLATE</b> </p> <p>A license plate for a vehicle is issued by the state or country where the vehicle is registered. The format for passenger vehicles is typically five to eight digits, consisting of upper-case letters and numbers. The format varies depending on the location of the issuing state or country. </p> </li> <li> <p> <b>VEHICLE_IDENTIFICATION_NUMBER</b> </p> <p>A Vehicle Identification Number (VIN) uniquely identifies a vehicle. VIN content and format are defined in the <i>ISO 3779</i> specification. Each country has specific codes and formats for VINs. </p> </li> </ul> </li> <li> <p> <b>Finance</b> </p> <ul> <li> <p> <b>CREDIT_DEBIT_CARD_CVV</b> </p> <p>A three-digit card verification code (CVV) that is present on VISA, MasterCard, and Discover credit and debit cards. For American Express credit or debit cards, the CVV is a four-digit numeric code. </p> </li> <li> <p> <b>CREDIT_DEBIT_CARD_EXPIRY</b> </p> <p>The expiration date for a credit or debit card. This number is usually four digits long and is often formatted as <i>month/year</i> or <i>MM/YY</i>. AI Guardrail recognizes expiration dates such as <i>01/21</i>, <i>01/2021</i>, and <i>Jan 2021</i>. </p> </li> <li> <p> <b>CREDIT_DEBIT_CARD_NUMBER</b> </p> <p>The number for a credit or debit card. These numbers can vary from 13 to 16 digits in length. However, Amazon Comprehend also recognizes credit or debit card numbers when only the last four digits are present. </p> </li> <li> <p> <b>PIN</b> </p> <p>A four-digit personal identification number (PIN) with which you can access your bank account. </p> </li> <li> <p> <b>INTERNATIONAL_BANK_ACCOUNT_NUMBER</b> </p> <p>An International Bank Account Number has specific formats in each country. For more information, see <a href="https://www.iban.com/structure"> www.iban.com/structure</a>.</p> </li> <li> <p> <b>SWIFT_CODE</b> </p> <p>A SWIFT code is a standard format of Bank Identifier Code (BIC) used to specify a particular bank or branch. Banks use these codes for money transfers such as international wire transfers.</p> <p>SWIFT codes consist of eight or 11 characters. The 11-digit codes refer to specific branches, while eight-digit codes (or 11-digit codes ending in 'XXX') refer to the head or primary office.</p> </li> </ul> </li> <li> <p> <b>IT</b> </p> <ul> <li> <p> <b>IP_ADDRESS</b> </p> <p>An IPv4 address, such as <i>198.51.100.0</i>. </p> </li> <li> <p> <b>MAC_ADDRESS</b> </p> <p>A <i>media access control</i> (MAC) address is a unique identifier assigned to a network interface controller (NIC). </p> </li> <li> <p> <b>URL</b> </p> <p>A web address, such as <i>www.example.com</i>. </p> </li> <li> <p> <b>AWS_ACCESS_KEY</b> </p> <p>A unique identifier that's associated with a secret access key; you use the access key ID and secret access key to sign programmatic Amazon Web Services requests cryptographically. </p> </li> <li> <p> <b>AWS_SECRET_KEY</b> </p> <p>A unique identifier that's associated with an access key. You use the access key ID and secret access key to sign programmatic Amazon Web Services requests cryptographically. </p> </li> </ul> </li> <li> <p> <b>USA specific</b> </p> <ul> <li> <p> <b>US_BANK_ACCOUNT_NUMBER</b> </p> <p>A US bank account number, which is typically 10 to 12 digits long. </p> </li> <li> <p> <b>US_BANK_ROUTING_NUMBER</b> </p> <p>A US bank account routing number. These are typically nine digits long, </p> </li> <li> <p> <b>US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER</b> </p> <p>A US Individual Taxpayer Identification Number (ITIN) is a nine-digit number that starts with a "9" and contain a "7" or "8" as the fourth digit. An ITIN can be formatted with a space or a dash after the third and forth digits. </p> </li> <li> <p> <b>US_PASSPORT_NUMBER</b> </p> <p>A US passport number. Passport numbers range from six to nine alphanumeric characters. </p> </li> <li> <p> <b>US_SOCIAL_SECURITY_NUMBER</b> </p> <p>A US Social Security Number (SSN) is a nine-digit number that is issued to US citizens, permanent residents, and temporary working residents. </p> </li> </ul> </li> <li> <p> <b>Canada specific</b> </p> <ul> <li> <p> <b>CA_HEALTH_NUMBER</b> </p> <p>A Canadian Health Service Number is a 10-digit unique identifier, required for individuals to access healthcare benefits. </p> </li> <li> <p> <b>CA_SOCIAL_INSURANCE_NUMBER</b> </p> <p>A Canadian Social Insurance Number (SIN) is a nine-digit unique identifier, required for individuals to access government programs and benefits.</p> <p>The SIN is formatted as three groups of three digits, such as <i> 123-456-789</i>. A SIN can be validated through a simple check-digit process called the <a href="https://www.wikipedia.org/wiki/Luhn_algorithm">Luhn algorithm</a> .</p> </li> </ul> </li> <li> <p> <b>UK Specific</b> </p> <ul> <li> <p> <b>UK_NATIONAL_HEALTH_SERVICE_NUMBER</b> </p> <p>A UK National Health Service Number is a 10-17 digit number, such as <i>485 555 3456</i>. The current system formats the 10-digit number with spaces after the third and sixth digits. The final digit is an error-detecting checksum.</p> </li> <li> <p> <b>UK_NATIONAL_INSURANCE_NUMBER</b> </p> <p>A UK National Insurance Number (NINO) provides individuals with access to National Insurance (social security) benefits. It is also used for some purposes in the UK tax system.</p> <p>The number is nine digits long and starts with two letters, followed by six numbers and one letter. A NINO can be formatted with a space or a dash after the two letters and after the second, forth, and sixth digits.</p> </li> <li> <p> <b>UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER</b> </p> <p>A UK Unique Taxpayer Reference (UTR) is a 10-digit number that identifies a taxpayer or a business. </p> </li> </ul> </li> <li> <p> <b>Custom</b> </p> <ul> <li> <p> <b>Regex filter</b> - You can use a regular expressions to define patterns for an AI Guardrail to recognize and act upon such as serial number, booking ID etc..</p> </li> </ul> </li> </ul>
+    #   <p>Configure AI Guardrail type when the PII entity is detected.</p> <p>The following PIIs are used to block or mask sensitive information:</p> <ul> <li> <p> <b>General</b> </p> <ul> <li> <p> <b>ADDRESS</b> </p> <p>A physical address, such as "100 Main Street, Anytown, USA" or "Suite #12, Building 123". An address can include information such as the street, building, location, city, state, country, county, zip code, precinct, and neighborhood. </p> </li> <li> <p> <b>AGE</b> </p> <p>An individual's age, including the quantity and unit of time. For example, in the phrase "I am 40 years old," Guarrails recognizes "40 years" as an age. </p> </li> <li> <p> <b>NAME</b> </p> <p>An individual's name. This entity type does not include titles, such as Dr., Mr., Mrs., or Miss. AI Guardrail doesn't apply this entity type to names that are part of organizations or addresses. For example, AI Guardrail recognizes the "John Doe Organization" as an organization, and it recognizes "Jane Doe Street" as an address. </p> </li> <li> <p> <b>EMAIL</b> </p> <p>An email address, such as <i>marymajor@email.com</i>.</p> </li> <li> <p> <b>PHONE</b> </p> <p>A phone number. This entity type also includes fax and pager numbers. </p> </li> <li> <p> <b>USERNAME</b> </p> <p>A user name that identifies an account, such as a login name, screen name, nick name, or handle. </p> </li> <li> <p> <b>PASSWORD</b> </p> <p>An alphanumeric string that is used as a password, such as "*<i> very20special#pass*</i>". </p> </li> <li> <p> <b>DRIVER_ID</b> </p> <p>The number assigned to a driver's license, which is an official document permitting an individual to operate one or more motorized vehicles on a public road. A driver's license number consists of alphanumeric characters. </p> </li> <li> <p> <b>LICENSE_PLATE</b> </p> <p>A license plate for a vehicle is issued by the state or country where the vehicle is registered. The format for passenger vehicles is typically five to eight digits, consisting of upper-case letters and numbers. The format varies depending on the location of the issuing state or country. </p> </li> <li> <p> <b>VEHICLE_IDENTIFICATION_NUMBER</b> </p> <p>A Vehicle Identification Number (VIN) uniquely identifies a vehicle. VIN content and format are defined in the <i>ISO 3779</i> specification. Each country has specific codes and formats for VINs. </p> </li> </ul> </li> <li> <p> <b>Finance</b> </p> <ul> <li> <p> <b>CREDIT_DEBIT_CARD_CVV</b> </p> <p>A three-digit card verification code (CVV) that is present on VISA, MasterCard, and Discover credit and debit cards. For American Express credit or debit cards, the CVV is a four-digit numeric code. </p> </li> <li> <p> <b>CREDIT_DEBIT_CARD_EXPIRY</b> </p> <p>The expiration date for a credit or debit card. This number is usually four digits long and is often formatted as <i>month/year</i> or <i>MM/YY</i>. AI Guardrail recognizes expiration dates such as <i>01/21</i>, <i>01/2021</i>, and <i>Jan 2021</i>. </p> </li> <li> <p> <b>CREDIT_DEBIT_CARD_NUMBER</b> </p> <p>The number for a credit or debit card. These numbers can vary from 13 to 16 digits in length. However, Amazon Comprehend also recognizes credit or debit card numbers when only the last four digits are present. </p> </li> <li> <p> <b>PIN</b> </p> <p>A four-digit personal identification number (PIN) with which you can access your bank account. </p> </li> <li> <p> <b>INTERNATIONAL_BANK_ACCOUNT_NUMBER</b> </p> <p>An International Bank Account Number has specific formats in each country. For more information, see <a href="https://www.iban.com/structure"> www.iban.com/structure</a>.</p> </li> <li> <p> <b>SWIFT_CODE</b> </p> <p>A SWIFT code is a standard format of Bank Identifier Code (BIC) used to specify a particular bank or branch. Banks use these codes for money transfers such as international wire transfers.</p> <p>SWIFT codes consist of eight or 11 characters. The 11-digit codes refer to specific branches, while eight-digit codes (or 11-digit codes ending in 'XXX') refer to the head or primary office.</p> </li> </ul> </li> <li> <p> <b>IT</b> </p> <ul> <li> <p> <b>IP_ADDRESS</b> </p> <p>An IPv4 address, such as <i>198.51.100.0</i>. </p> </li> <li> <p> <b>MAC_ADDRESS</b> </p> <p>A <i>media access control</i> (MAC) address is a unique identifier assigned to a network interface controller (NIC). </p> </li> <li> <p> <b>URL</b> </p> <p>A web address, such as <i>www.example.com</i>. </p> </li> <li> <p> <b>AWS_ACCESS_KEY</b> </p> <p>A unique identifier that's associated with a secret access key; you use the access key ID and secret access key to sign programmatic Amazon Web Services requests cryptographically. </p> </li> <li> <p> <b>AWS_SECRET_KEY</b> </p> <p>A unique identifier that's associated with an access key. You use the access key ID and secret access key to sign programmatic Amazon Web Services requests cryptographically. </p> </li> </ul> </li> <li> <p> <b>USA specific</b> </p> <ul> <li> <p> <b>US_BANK_ACCOUNT_NUMBER</b> </p> <p>A US bank account number, which is typically 10 to 12 digits long. </p> </li> <li> <p> <b>US_BANK_ROUTING_NUMBER</b> </p> <p>A US bank account routing number. These are typically nine digits long, </p> </li> <li> <p> <b>US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER</b> </p> <p>A US Individual Taxpayer Identification Number (ITIN) is a nine-digit number that starts with a "9" and contain a "7" or "8" as the fourth digit. An ITIN can be formatted with a space or a dash after the third and forth digits. </p> </li> <li> <p> <b>US_PASSPORT_NUMBER</b> </p> <p>A US passport number. Passport numbers range from six to nine alphanumeric characters. </p> </li> <li> <p> <b>US_SOCIAL_SECURITY_NUMBER</b> </p> <p>A US Social Security Number (SSN) is a nine-digit number that is issued to US citizens, permanent residents, and temporary working residents. </p> </li> </ul> </li> <li> <p> <b>Canada specific</b> </p> <ul> <li> <p> <b>CA_HEALTH_NUMBER</b> </p> <p>A Canadian Health Service Number is a 10-digit unique identifier, required for individuals to access healthcare benefits. </p> </li> <li> <p> <b>CA_SOCIAL_INSURANCE_NUMBER</b> </p> <p>A Canadian Social Insurance Number (SIN) is a nine-digit unique identifier, required for individuals to access government programs and benefits.</p> <p>The SIN is formatted as three groups of three digits, such as <i> 123-456-789</i>. A SIN can be validated through a simple check-digit process called the Luhn algorithm. For more information, see <a href="https://www.wikipedia.org/wiki/Luhn_algorithm">Luhn algorithm</a> on the Wikipedia website.</p> </li> </ul> </li> <li> <p> <b>UK Specific</b> </p> <ul> <li> <p> <b>UK_NATIONAL_HEALTH_SERVICE_NUMBER</b> </p> <p>A UK National Health Service Number is a 10-17 digit number, such as <i>485 555 3456</i>. The current system formats the 10-digit number with spaces after the third and sixth digits. The final digit is an error-detecting checksum.</p> </li> <li> <p> <b>UK_NATIONAL_INSURANCE_NUMBER</b> </p> <p>A UK National Insurance Number (NINO) provides individuals with access to National Insurance (social security) benefits. It is also used for some purposes in the UK tax system.</p> <p>The number is nine digits long and starts with two letters, followed by six numbers and one letter. A NINO can be formatted with a space or a dash after the two letters and after the second, forth, and sixth digits.</p> </li> <li> <p> <b>UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER</b> </p> <p>A UK Unique Taxpayer Reference (UTR) is a 10-digit number that identifies a taxpayer or a business. </p> </li> </ul> </li> <li> <p> <b>Custom</b> </p> <ul> <li> <p> <b>Regex filter</b> - You can use a regular expressions to define patterns for an AI Guardrail to recognize and act upon such as serial number, booking ID etc..</p> </li> </ul> </li> </ul>
     #   @return [String]
     # @!attribute action
     #   <p>Configure AI Guardrail's action when the PII entity is detected.</p>
@@ -3788,6 +4101,26 @@ module Aws::QConnect
       nil,
       :type,
       :action,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Per-policy guardrail assessment result. Captures which policy triggered, its outcome, and a policy-specific detail string.</p>
+    # @!attribute policy_type
+    #   <p>The type of guardrail policy that was evaluated.</p>
+    #   @return [String]
+    # @!attribute action
+    #   <p>Outcome of this specific policy.</p>
+    #   @return [String]
+    # @!attribute details
+    #   <p>Policy-specific detail.</p>
+    #   @return [String]
+    class GuardrailPolicyResult < Struct.new(
+      nil,
+      :policy_type,
+      :action,
+      :details,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3848,6 +4181,30 @@ module Aws::QConnect
     class GuardrailWordConfig < Struct.new(
       nil,
       :text,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A collaborator agent configuration in which the Orchestration AI Agent transfers control of the conversation to the collaborator agent.</p>
+    # @!attribute agent_target
+    #   <p>The collaborator agent to hand off to.</p>
+    #   @return [Types::AgentTarget]
+    # @!attribute instruction
+    #   <p>The instruction that tells the Orchestration AI Agent when and how to hand off to this collaborator agent.</p>
+    #   @return [Types::MultiAgentInstruction]
+    # @!attribute audio_streaming_enabled
+    #   <p>Specifies whether the caller's audio is streamed directly to the collaborator agent and the collaborator's audio response is played back during the handoff. This applies only to voice handoffs.</p>
+    #   @return [Boolean]
+    # @!attribute immediate_handoff
+    #   <p>Specifies whether the conversation is handed off to this collaborator agent immediately on the first turn, without any orchestration reasoning. At most one handoff in an AI Agent's configuration can set this to <code>true</code>.</p>
+    #   @return [Boolean]
+    class HandoffAgentConfiguration < Struct.new(
+      nil,
+      :agent_target,
+      :instruction,
+      :audio_streaming_enabled,
+      :immediate_handoff,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4018,10 +4375,14 @@ module Aws::QConnect
     # @!attribute intent_id
     #   <p>The identifier of the detected intent.</p>
     #   @return [String]
+    # @!attribute relevance_level
+    #   <p>The relevance level of the detected intent.</p>
+    #   @return [String]
     class IntentDetectedDataDetails < Struct.new(
       nil,
       :intent,
       :intent_id,
+      :relevance_level,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4189,6 +4550,21 @@ module Aws::QConnect
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+    end
+
+    # <p>A knowledge source that provides content for recommendations.</p>
+    # @!attribute assistant_association_ids
+    #   <p>The list of assistant association identifiers for the knowledge source.</p>
+    #   @return [Array<String>]
+    class KnowledgeSource < Struct.new(
+      :assistant_association_ids,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class AssistantAssociationIds < KnowledgeSource; end
+      class Unknown < KnowledgeSource; end
     end
 
     # @!attribute assistant_id
@@ -4707,12 +5083,16 @@ module Aws::QConnect
     # @!attribute max_results
     #   <p>The maximum number of results to return per page.</p>
     #   @return [Integer]
+    # @!attribute filter
+    #   <p>The filter criteria for listing messages.</p>
+    #   @return [String]
     class ListMessagesRequest < Struct.new(
       nil,
       :assistant_id,
       :session_id,
       :next_token,
       :max_results,
+      :filter,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4727,6 +5107,48 @@ module Aws::QConnect
     class ListMessagesResponse < Struct.new(
       nil,
       :messages,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute assistant_id
+    #   <p>The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs cannot contain the ARN. The assistant's region determines which models are available.</p>
+    #   @return [String]
+    # @!attribute ai_prompt_type
+    #   <p>The type of the AI Prompt to filter models by. When specified, only models that support the given AI Prompt type are returned.</p>
+    #   @return [String]
+    # @!attribute model_lifecycle
+    #   <p>The lifecycle status of models to filter by. When specified, only models with the given lifecycle status are returned.</p>
+    #   @return [String]
+    # @!attribute next_token
+    #   <p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return per page.</p>
+    #   @return [Integer]
+    class ListModelsRequest < Struct.new(
+      nil,
+      :assistant_id,
+      :ai_prompt_type,
+      :model_lifecycle,
+      :next_token,
+      :max_results,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute model_summaries
+    #   <p>The summaries of the models available to the assistant.</p>
+    #   @return [Array<Types::ModelSummary>]
+    # @!attribute next_token
+    #   <p>If there are additional results, this is the token for the next set of results.</p>
+    #   @return [String]
+    class ListModelsResponse < Struct.new(
+      nil,
+      :model_summaries,
       :next_token,
       keyword_init: true
     )
@@ -4761,6 +5183,44 @@ module Aws::QConnect
     class ListQuickResponsesResponse < Struct.new(
       nil,
       :quick_response_summaries,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute assistant_id
+    #   <p>UUID or ARN of the Connect AI Assistant resource</p>
+    #   @return [String]
+    # @!attribute session_id
+    #   <p>UUID or ARN of the Connect AI Session resource</p>
+    #   @return [String]
+    # @!attribute next_token
+    #   <p>Pagination token for retrieving the next page of results</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>Maximum number of spans to return per page</p>
+    #   @return [Integer]
+    class ListSpansRequest < Struct.new(
+      nil,
+      :assistant_id,
+      :session_id,
+      :next_token,
+      :max_results,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute spans
+    #   <p>Array of span objects for the session</p>
+    #   @return [Array<Types::Span>]
+    # @!attribute next_token
+    #   <p>Pagination token for retrieving additional results</p>
+    #   @return [String]
+    class ListSpansResponse < Struct.new(
+      nil,
+      :spans,
       :next_token,
       keyword_init: true
     )
@@ -4832,9 +5292,13 @@ module Aws::QConnect
     # @!attribute generate_filler_message
     #   <p>Generates a filler response when tool selection is <code>QUESTION</code>.</p>
     #   @return [Boolean]
+    # @!attribute generate_chunked_message
+    #   <p>Configuration for generating chunked messages.</p>
+    #   @return [Boolean]
     class MessageConfiguration < Struct.new(
       nil,
       :generate_filler_message,
+      :generate_chunked_message,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4844,14 +5308,24 @@ module Aws::QConnect
     # @!attribute text
     #   <p>The message data in text type.</p>
     #   @return [Types::TextMessage]
+    # @!attribute tool_use_result
+    #   <p>The result of tool usage in the message.</p>
+    #   @return [Types::ToolUseResultData]
+    # @!attribute data
+    #   <p>The message data as a structured JSON document. This is the payload for a message of type <code>DATA</code>, and must be a JSON object at the root level.</p>
+    #   @return [JSON]
     class MessageData < Struct.new(
       :text,
+      :tool_use_result,
+      :data,
       :unknown,
       keyword_init: true
     )
       include ::Smithy::Schema::Union
 
       class Text < MessageData; end
+      class ToolUseResult < MessageData; end
+      class Data < MessageData; end
       class Unknown < MessageData; end
     end
 
@@ -4969,9 +5443,17 @@ module Aws::QConnect
     # @!attribute sms
     #   <p>The content of the message template that applies to the SMS channel subtype.</p>
     #   @return [Types::SMSMessageTemplateContent]
+    # @!attribute whats_app
+    #   <p>The content of the message template that applies to the WHATSAPP channel subtype.</p>
+    #   @return [Types::WhatsAppMessageTemplateContent]
+    # @!attribute push
+    #   <p>The content of the message template that applies to the push channel subtype.</p>
+    #   @return [Types::PushMessageTemplateContent]
     class MessageTemplateContentProvider < Struct.new(
       :email,
       :sms,
+      :whats_app,
+      :push,
       :unknown,
       keyword_init: true
     )
@@ -4979,6 +5461,8 @@ module Aws::QConnect
 
       class Email < MessageTemplateContentProvider; end
       class Sms < MessageTemplateContentProvider; end
+      class WhatsApp < MessageTemplateContentProvider; end
+      class Push < MessageTemplateContentProvider; end
       class Unknown < MessageTemplateContentProvider; end
     end
 
@@ -4997,6 +5481,9 @@ module Aws::QConnect
     #   @return [String]
     # @!attribute name
     #   <p>The name of the message template.</p>
+    #   @return [String]
+    # @!attribute channel
+    #   <p>The channel of the message template.</p>
     #   @return [String]
     # @!attribute channel_subtype
     #   <p>The channel subtype this message template applies to.</p>
@@ -5019,6 +5506,9 @@ module Aws::QConnect
     # @!attribute language
     #   <p>The language code value for the language in which the quick response is written. The supported language codes include <code>de_DE</code>, <code>en_US</code>, <code>es_ES</code>, <code>fr_FR</code>, <code>id_ID</code>, <code>it_IT</code>, <code>ja_JP</code>, <code>ko_KR</code>, <code>pt_BR</code>, <code>zh_CN</code>, <code>zh_TW</code> </p>
     #   @return [String]
+    # @!attribute source_configuration_summary
+    #   <p>The source configuration summary of the message template.</p>
+    #   @return [Types::MessageTemplateSourceConfigurationSummary]
     # @!attribute grouping_configuration
     #   <p>The configuration information of the grouping of Amazon Q in Connect users.</p>
     #   @return [Types::GroupingConfiguration]
@@ -5041,6 +5531,7 @@ module Aws::QConnect
       :knowledge_base_arn,
       :knowledge_base_id,
       :name,
+      :channel,
       :channel_subtype,
       :created_time,
       :last_modified_time,
@@ -5048,6 +5539,7 @@ module Aws::QConnect
       :content,
       :description,
       :language,
+      :source_configuration_summary,
       :grouping_configuration,
       :default_attributes,
       :attribute_types,
@@ -5162,6 +5654,9 @@ module Aws::QConnect
     # @!attribute name
     #   <p>The name of the message template.</p>
     #   @return [String]
+    # @!attribute channel
+    #   <p>The channel of the message template.</p>
+    #   @return [String]
     # @!attribute channel_subtype
     #   <p>The channel subtype this message template applies to.</p>
     #   @return [String]
@@ -5183,6 +5678,9 @@ module Aws::QConnect
     # @!attribute description
     #   <p>The description of the message template.</p>
     #   @return [String]
+    # @!attribute source_configuration_summary
+    #   <p>The source configuration summary of the message template.</p>
+    #   @return [Types::MessageTemplateSourceConfigurationSummary]
     # @!attribute grouping_configuration
     #   <p>The configuration information of the grouping of Amazon Q in Connect users.</p>
     #   @return [Types::GroupingConfiguration]
@@ -5199,6 +5697,7 @@ module Aws::QConnect
       :knowledge_base_arn,
       :knowledge_base_id,
       :name,
+      :channel,
       :channel_subtype,
       :created_time,
       :last_modified_time,
@@ -5206,12 +5705,43 @@ module Aws::QConnect
       :is_active,
       :version_number,
       :description,
+      :source_configuration_summary,
       :grouping_configuration,
       :language,
       :tags,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+    end
+
+    # <p>The container of message template source configuration.</p>
+    # @!attribute whats_app
+    #   <p>The sourceConfiguration of the message template that applies to the WHATSAPP channel subtype.</p>
+    #   @return [Types::WhatsAppMessageTemplateSourceConfiguration]
+    class MessageTemplateSourceConfiguration < Struct.new(
+      :whats_app,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class WhatsApp < MessageTemplateSourceConfiguration; end
+      class Unknown < MessageTemplateSourceConfiguration; end
+    end
+
+    # <p>The container of message template source configuration summary.</p>
+    # @!attribute whats_app
+    #   <p>The sourceConfiguration summary of the message template that applies to the WHATSAPP channel subtype.</p>
+    #   @return [Types::WhatsAppMessageTemplateSourceConfigurationSummary]
+    class MessageTemplateSourceConfigurationSummary < Struct.new(
+      :whats_app,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class WhatsApp < MessageTemplateSourceConfigurationSummary; end
+      class Unknown < MessageTemplateSourceConfigurationSummary; end
     end
 
     # <p>The summary of the message template.</p>
@@ -5230,6 +5760,9 @@ module Aws::QConnect
     # @!attribute name
     #   <p>The name of the message template.</p>
     #   @return [String]
+    # @!attribute channel
+    #   <p>The channel this message template applies to.</p>
+    #   @return [String]
     # @!attribute channel_subtype
     #   <p>The channel subtype this message template applies to.</p>
     #   @return [String]
@@ -5242,6 +5775,9 @@ module Aws::QConnect
     # @!attribute last_modified_by
     #   <p>The Amazon Resource Name (ARN) of the user who last updated the message template data.</p>
     #   @return [String]
+    # @!attribute source_configuration
+    #   <p>The container of message template source configuration.</p>
+    #   @return [Types::MessageTemplateSourceConfiguration]
     # @!attribute active_version_number
     #   <p>The version number of the message template version that is activated.</p>
     #   @return [Integer]
@@ -5258,10 +5794,12 @@ module Aws::QConnect
       :knowledge_base_arn,
       :knowledge_base_id,
       :name,
+      :channel,
       :channel_subtype,
       :created_time,
       :last_modified_time,
       :last_modified_by,
+      :source_configuration,
       :active_version_number,
       :description,
       :tags,
@@ -5286,6 +5824,9 @@ module Aws::QConnect
     # @!attribute name
     #   <p>The name of the message template.</p>
     #   @return [String]
+    # @!attribute channel
+    #   <p>The channel of the message template.</p>
+    #   @return [String]
     # @!attribute channel_subtype
     #   <p>The channel subtype this message template applies to.</p>
     #   @return [String]
@@ -5302,9 +5843,135 @@ module Aws::QConnect
       :knowledge_base_arn,
       :knowledge_base_id,
       :name,
+      :channel,
       :channel_subtype,
       :is_active,
       :version_number,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The summary of a model available to an Amazon Q in Connect assistant.</p>
+    # @!attribute model_id
+    #   <p>The identifier of the model.</p>
+    #   @return [String]
+    # @!attribute display_name
+    #   <p>The display name of the model.</p>
+    #   @return [String]
+    # @!attribute cross_region_status
+    #   <p>The cross-region availability status of the model. <code>NONE</code> indicates the model is only available in a single region, <code>REGIONAL</code> indicates the model is available through regional inference, and <code>GLOBAL</code> indicates the model is available through global cross-region inference.</p>
+    #   @return [String]
+    # @!attribute supports_prompt_caching
+    #   <p>Whether the model supports prompt caching.</p>
+    #   @return [Boolean]
+    # @!attribute supported_ai_prompt_types
+    #   <p>The list of AI Prompt types that the model supports.</p>
+    #   @return [Array<String>]
+    # @!attribute model_lifecycle
+    #   <p>The current lifecycle of the model. <code>ACTIVE</code> indicates the model is recommended for use and <code>LEGACY</code> indicates the model is still usable but is deprecated.</p>
+    #   @return [String]
+    # @!attribute legacy_timestamp
+    #   <p>The timestamp when the model lifecycle will transition from <code>ACTIVE</code> to <code>LEGACY</code>.</p>
+    #   @return [Time]
+    # @!attribute end_of_life_timestamp
+    #   <p>The timestamp when the model will reach end of life and no longer be available for use.</p>
+    #   @return [Time]
+    class ModelSummary < Struct.new(
+      nil,
+      :model_id,
+      :display_name,
+      :cross_region_status,
+      :supports_prompt_caching,
+      :supported_ai_prompt_types,
+      :model_lifecycle,
+      :legacy_timestamp,
+      :end_of_life_timestamp,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A union that configures a single collaborator agent for an Orchestration AI Agent, as either a delegate or a handoff.</p>
+    # @!attribute delegate_agent_configuration
+    #   <p>Configures the collaborator agent as a delegate that the Orchestration AI Agent invokes while retaining control of the conversation.</p>
+    #   @return [Types::DelegateAgentConfiguration]
+    # @!attribute handoff_agent_configuration
+    #   <p>Configures the collaborator agent as a handoff target that the Orchestration AI Agent transfers control of the conversation to.</p>
+    #   @return [Types::HandoffAgentConfiguration]
+    class MultiAgentConfiguration < Struct.new(
+      :delegate_agent_configuration,
+      :handoff_agent_configuration,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class DelegateAgentConfiguration < MultiAgentConfiguration; end
+      class HandoffAgentConfiguration < MultiAgentConfiguration; end
+      class Unknown < MultiAgentConfiguration; end
+    end
+
+    # <p>The instruction that guides how the Orchestration AI Agent works with a collaborator agent.</p>
+    # @note This shape contains sensitive data and should be treated as such.
+    # @!attribute instruction
+    #   <p>The natural-language instruction that tells the Orchestration AI Agent when and how to engage the collaborator agent.</p>
+    #   @return [String]
+    # @!attribute examples
+    #   <p>Example interactions that illustrate when the Orchestration AI Agent should engage the collaborator agent.</p>
+    #   @return [Array<String>]
+    class MultiAgentInstruction < Struct.new(
+      nil,
+      :instruction,
+      :examples,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration for AI Agents of type <code>NOTE_TAKING</code>.</p>
+    # @!attribute note_taking_ai_prompt_id
+    #   <p>The AI Prompt identifier used by the Note Taking AI Agent.</p>
+    #   @return [String]
+    # @!attribute note_taking_ai_guardrail_id
+    #   <p>The AI Guardrail identifier used by the Note Taking AI Agent.</p>
+    #   @return [String]
+    # @!attribute locale
+    #   <p>The locale setting for language-specific case summarization generation (for example, en_US, es_ES).</p>
+    #   @return [String]
+    class NoteTakingAIAgentConfiguration < Struct.new(
+      nil,
+      :note_taking_ai_prompt_id,
+      :note_taking_ai_guardrail_id,
+      :locale,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Details about notes chunk data.</p>
+    # @!attribute completion
+    #   <p>A chunk of the notes completion.</p>
+    #   @return [String]
+    # @!attribute next_chunk_token
+    #   <p>The token for the next chunk of notes data.</p>
+    #   @return [String]
+    class NotesChunkDataDetails < Struct.new(
+      nil,
+      :completion,
+      :next_chunk_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Details about notes data.</p>
+    # @!attribute completion
+    #   <p>The completion data for notes.</p>
+    #   @return [String]
+    class NotesDataDetails < Struct.new(
+      nil,
+      :completion,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5380,6 +6047,62 @@ module Aws::QConnect
       class Unknown < OrCondition; end
     end
 
+    # <p>The configuration for AI Agents of type <code>ORCHESTRATION</code>.</p>
+    # @!attribute orchestration_ai_prompt_id
+    #   <p>The AI Prompt identifier used by the Orchestration AI Agent.</p>
+    #   @return [String]
+    # @!attribute orchestration_ai_guardrail_id
+    #   <p>The AI Guardrail identifier used by the Orchestration AI Agent.</p>
+    #   @return [String]
+    # @!attribute tool_configurations
+    #   <p>The tool configurations used by the Orchestration AI Agent.</p>
+    #   @return [Array<Types::ToolConfiguration>]
+    # @!attribute multi_agent_configurations
+    #   <p>The collaborator agents that the Orchestration AI Agent can work with. Each entry defines another agent that the orchestrator either delegates to or hands the conversation off to.</p>
+    #   @return [Array<Types::MultiAgentConfiguration>]
+    # @!attribute connect_instance_arn
+    #   <p>The Amazon Resource Name (ARN) of the Amazon Connect instance used by the Orchestration AI Agent.</p>
+    #   @return [String]
+    # @!attribute locale
+    #   <p>The locale setting for the Orchestration AI Agent.</p>
+    #   @return [String]
+    # @!attribute input_schemas
+    #   <p>The JSON schemas that define the structure of the structured data input accepted by the Orchestration AI Agent. The data in a <code>DATA</code> message sent to the agent is validated against these schemas. You can specify at most one schema.</p>
+    #   @return [Array<JSON>]
+    # @!attribute output_schemas
+    #   <p>The JSON schemas that define the structure of the structured output generated by the Orchestration AI Agent. You can specify at most one schema.</p>
+    #   @return [Array<JSON>]
+    class OrchestrationAIAgentConfiguration < Struct.new(
+      nil,
+      :orchestration_ai_prompt_id,
+      :orchestration_ai_guardrail_id,
+      :tool_configurations,
+      :multi_agent_configurations,
+      :connect_instance_arn,
+      :locale,
+      :input_schemas,
+      :output_schemas,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>An entry in the orchestrator configuration list.</p>
+    # @!attribute ai_agent_id
+    #   <p>The identifier of the AI Agent in the orchestrator configuration.</p>
+    #   @return [String]
+    # @!attribute orchestrator_use_case
+    #   <p>The use case for the orchestrator configuration. (for example Connect.SelfService, Connect.AgentAssistance)</p>
+    #   @return [String]
+    class OrchestratorConfigurationEntry < Struct.new(
+      nil,
+      :ai_agent_id,
+      :orchestrator_use_case,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Settings for parsing document contents. By default, the service converts the contents of each document into text before splitting it into chunks. To improve processing of PDF files with tables and images, you can configure the data source to convert the pages of text into images and use a model to describe the contents of each page.</p>
     # @!attribute parsing_strategy
     #   <p>The parsing strategy for the data source.</p>
@@ -5414,6 +6137,210 @@ module Aws::QConnect
     class PreconditionFailedException < Struct.new(
       nil,
       :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Details about a proactive recommendation, including the token used to retrieve its chunked response with <code>GetNextMessage</code>.</p>
+    # @!attribute next_message_token
+    #   <p>The token used to retrieve the next message in the proactive recommendation. Pass this token in a <code>GetNextMessage</code> request to continue receiving the chunked proactive response. Each response returns the next token to use until the chunked response is complete.</p>
+    #   @return [String]
+    class ProactiveRecommendationDataDetails < Struct.new(
+      nil,
+      :next_message_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The content of the push message template that applies to ADM (Amazon Device Messaging) notification service.</p>
+    # @!attribute title
+    #   <p>The title to use in a push notification that's based on the message template. This title appears above the notification message on a recipient's device.</p>
+    #   @return [String]
+    # @!attribute body
+    #   <p>The message body to use in a push notification that is based on the message template.</p>
+    #   @return [Types::MessageTemplateBodyContentProvider]
+    # @!attribute action
+    #   <p>The action to occur if a recipient taps a push notification that is based on the message template. Valid values are:</p> <ul> <li> <p> <code>OPEN_APP</code> - Your app opens or it becomes the foreground app if it was sent to the background. This is the default action.</p> </li> <li> <p> <code>DEEP_LINK</code> - Your app opens and displays a designated user interface in the app. This action uses the deep-linking features of the Android platform.</p> </li> <li> <p> <code>URL</code> - The default mobile browser on the recipient's device opens and loads the web page at a URL that you specify.</p> </li> </ul>
+    #   @return [String]
+    # @!attribute sound
+    #   <p>The sound to play when a recipient receives a push notification that's based on the message template. You can use the default stream or specify the file name of a sound resource that's bundled in your app. On an Android platform, the sound file must reside in <code>/res/raw/</code>.</p>
+    #   @return [String]
+    # @!attribute url
+    #   <p>The URL to open in a recipient's default mobile browser, if a recipient taps a push notification that's based on the message template and the value of the <code>action</code> property is <code>URL</code>.</p>
+    #   @return [String]
+    # @!attribute image_url
+    #   <p>The URL of an image to display in a push notification that's based on the message template.</p>
+    #   @return [String]
+    # @!attribute image_icon_url
+    #   <p>The URL of the large icon image to display in the content view of a push notification that's based on the message template.</p>
+    #   @return [String]
+    # @!attribute small_image_icon_url
+    #   <p>The URL of the small icon image to display in the status bar and the content view of a push notification that's based on the message template.</p>
+    #   @return [String]
+    # @!attribute raw_content
+    #   <p>The URL of the small icon image to display in the status bar and the content view of a push notification that's based on the message template.</p>
+    #   @return [Types::MessageTemplateBodyContentProvider]
+    class PushADMMessageTemplateContent < Struct.new(
+      nil,
+      :title,
+      :body,
+      :action,
+      :sound,
+      :url,
+      :image_url,
+      :image_icon_url,
+      :small_image_icon_url,
+      :raw_content,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The content of the push message template that applies to APNS (Apple Push Notification service) notification service.</p>
+    # @!attribute title
+    #   <p>The title to use in a push notification that's based on the message template. This title appears above the notification message on a recipient's device.</p>
+    #   @return [String]
+    # @!attribute body
+    #   <p>The message body to use in a push notification that is based on the message template.</p>
+    #   @return [Types::MessageTemplateBodyContentProvider]
+    # @!attribute action
+    #   <p>The action to occur if a recipient taps a push notification that is based on the message template. Valid values are:</p> <ul> <li> <p> <code>OPEN_APP</code> - Your app opens or it becomes the foreground app if it was sent to the background. This is the default action.</p> </li> <li> <p> <code>DEEP_LINK</code> - Your app opens and displays a designated user interface in the app. This action uses the deep-linking features of the iOS platform.</p> </li> <li> <p> <code>URL</code> - The default mobile browser on the recipient's device opens and loads the web page at a URL that you specify.</p> </li> </ul>
+    #   @return [String]
+    # @!attribute sound
+    #   <p>The key for the sound to play when the recipient receives a push notification that's based on the message template. The value for this key is the name of a sound file in your app's main bundle or the <code>Library/Sounds</code> folder in your app's data container. If the sound file can't be found or you specify <code>default</code> for the value, the system plays the default alert sound.</p>
+    #   @return [String]
+    # @!attribute url
+    #   <p>The URL to open in a recipient's default mobile browser, if a recipient taps a push notification that's based on the message template and the value of the <code>action</code> property is <code>URL</code>.</p>
+    #   @return [String]
+    # @!attribute media_url
+    #   <p>The URL of an image or video to display in push notifications that are based on the message template.</p>
+    #   @return [String]
+    # @!attribute raw_content
+    #   <p>The raw, JSON-formatted string to use as the payload for a push notification that's based on the message template. If specified, this value overrides all other content for the message template.</p>
+    #   @return [Types::MessageTemplateBodyContentProvider]
+    class PushAPNSMessageTemplateContent < Struct.new(
+      nil,
+      :title,
+      :body,
+      :action,
+      :sound,
+      :url,
+      :media_url,
+      :raw_content,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The content of the push message template that applies to Baidu notification service.</p>
+    # @!attribute title
+    #   <p>The title to use in a push notification that's based on the message template. This title appears above the notification message on a recipient's device.</p>
+    #   @return [String]
+    # @!attribute body
+    #   <p>The message body to use in a push notification that is based on the message template.</p>
+    #   @return [Types::MessageTemplateBodyContentProvider]
+    # @!attribute action
+    #   <p>The action to occur if a recipient taps a push notification that is based on the message template. Valid values are:</p> <ul> <li> <p> <code>OPEN_APP</code> - Your app opens or it becomes the foreground app if it was sent to the background. This is the default action.</p> </li> <li> <p> <code>DEEP_LINK</code> - Your app opens and displays a designated user interface in the app. This action uses the deep-linking features of the Android platform.</p> </li> <li> <p> <code>URL</code> - The default mobile browser on the recipient's device opens and loads the web page at a URL that you specify.</p> </li> </ul>
+    #   @return [String]
+    # @!attribute sound
+    #   <p>The sound to play when a recipient receives a push notification that's based on the message template. You can use the default stream or specify the file name of a sound resource that's bundled in your app. On an Android platform, the sound file must reside in <code>/res/raw/</code>.</p>
+    #   @return [String]
+    # @!attribute url
+    #   <p>The URL to open in a recipient's default mobile browser, if a recipient taps a push notification that's based on the message template and the value of the <code>action</code> property is <code>URL</code>.</p>
+    #   @return [String]
+    # @!attribute image_url
+    #   <p>The URL of an image to display in a push notification that's based on the message template.</p>
+    #   @return [String]
+    # @!attribute image_icon_url
+    #   <p>The URL of the large icon image to display in the content view of a push notification that's based on the message template.</p>
+    #   @return [String]
+    # @!attribute small_image_icon_url
+    #   <p>The URL of the small icon image to display in the status bar and the content view of a push notification that's based on the message template.</p>
+    #   @return [String]
+    # @!attribute raw_content
+    #   <p>The URL of the small icon image to display in the status bar and the content view of a push notification that's based on the message template.</p>
+    #   @return [Types::MessageTemplateBodyContentProvider]
+    class PushBaiduMessageTemplateContent < Struct.new(
+      nil,
+      :title,
+      :body,
+      :action,
+      :sound,
+      :url,
+      :image_url,
+      :image_icon_url,
+      :small_image_icon_url,
+      :raw_content,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The content of the push message template that applies to FCM (Firebase Cloud Messaging) notification service.</p>
+    # @!attribute title
+    #   <p>The title to use in a push notification that's based on the message template. This title appears above the notification message on a recipient's device.</p>
+    #   @return [String]
+    # @!attribute body
+    #   <p>The message body to use in a push notification that is based on the message template.</p>
+    #   @return [Types::MessageTemplateBodyContentProvider]
+    # @!attribute action
+    #   <p>The action to occur if a recipient taps a push notification that is based on the message template. Valid values are:</p> <ul> <li> <p> <code>OPEN_APP</code> - Your app opens or it becomes the foreground app if it was sent to the background. This is the default action.</p> </li> <li> <p> <code>DEEP_LINK</code> - Your app opens and displays a designated user interface in the app. This action uses the deep-linking features of the Android platform.</p> </li> <li> <p> <code>URL</code> - The default mobile browser on the recipient's device opens and loads the web page at a URL that you specify.</p> </li> </ul>
+    #   @return [String]
+    # @!attribute sound
+    #   <p>The sound to play when a recipient receives a push notification that's based on the message template. You can use the default stream or specify the file name of a sound resource that's bundled in your app. On an Android platform, the sound file must reside in <code>/res/raw/</code>.</p>
+    #   @return [String]
+    # @!attribute url
+    #   <p>The URL to open in a recipient's default mobile browser, if a recipient taps a push notification that's based on the message template and the value of the <code>action</code> property is <code>URL</code>.</p>
+    #   @return [String]
+    # @!attribute image_url
+    #   <p>The URL of an image to display in a push notification that's based on the message template.</p>
+    #   @return [String]
+    # @!attribute image_icon_url
+    #   <p>The URL of the large icon image to display in the content view of a push notification that's based on the message template.</p>
+    #   @return [String]
+    # @!attribute small_image_icon_url
+    #   <p>The URL of the small icon image to display in the status bar and the content view of a push notification that's based on the message template.</p>
+    #   @return [String]
+    # @!attribute raw_content
+    #   <p>The URL of the small icon image to display in the status bar and the content view of a push notification that's based on the message template.</p>
+    #   @return [Types::MessageTemplateBodyContentProvider]
+    class PushFCMMessageTemplateContent < Struct.new(
+      nil,
+      :title,
+      :body,
+      :action,
+      :sound,
+      :url,
+      :image_url,
+      :image_icon_url,
+      :small_image_icon_url,
+      :raw_content,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The content of the message template that applies to the push channel subtype.</p>
+    # @!attribute adm
+    #   <p>The content of the message template that applies to ADM (Amazon Device Messaging) notification service.</p>
+    #   @return [Types::PushADMMessageTemplateContent]
+    # @!attribute apns
+    #   <p>The content of the message template that applies to APNS(Apple Push Notification service) notification service.</p>
+    #   @return [Types::PushAPNSMessageTemplateContent]
+    # @!attribute fcm
+    #   <p>The content of the message template that applies to FCM (Firebase Cloud Messaging) notification service.</p>
+    #   @return [Types::PushFCMMessageTemplateContent]
+    # @!attribute baidu
+    #   <p>The content of the message template that applies to Baidu notification service.</p>
+    #   @return [Types::PushBaiduMessageTemplateContent]
+    class PushMessageTemplateContent < Struct.new(
+      nil,
+      :adm,
+      :apns,
+      :fcm,
+      :baidu,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5565,9 +6492,13 @@ module Aws::QConnect
     # @!attribute intent_input_data
     #   <p>Input information for the intent.</p>
     #   @return [Types::IntentInputData]
+    # @!attribute case_summarization_input_data
+    #   <p>Input data for case summarization queries.</p>
+    #   @return [Types::CaseSummarizationInputData]
     class QueryInputData < Struct.new(
       :query_text_input_data,
       :intent_input_data,
+      :case_summarization_input_data,
       :unknown,
       keyword_init: true
     )
@@ -5575,6 +6506,7 @@ module Aws::QConnect
 
       class QueryTextInputData < QueryInputData; end
       class IntentInputData < QueryInputData; end
+      class CaseSummarizationInputData < QueryInputData; end
       class Unknown < QueryInputData; end
     end
 
@@ -5680,7 +6612,7 @@ module Aws::QConnect
     #   <p>Whether the quick response is active.</p>
     #   @return [Boolean]
     # @!attribute channels
-    #   <p>The Amazon Connect contact channels this quick response applies to. The supported contact channel types include <code>Chat</code>.</p>
+    #   <p>The Connect Customer contact channels this quick response applies to. The supported contact channel types include <code>Chat</code>.</p>
     #   @return [Array<String>]
     # @!attribute language
     #   <p>The language code value for the language in which the quick response is written. The supported language codes include <code>de_DE</code>, <code>en_US</code>, <code>es_ES</code>, <code>fr_FR</code>, <code>id_ID</code>, <code>it_IT</code>, <code>ja_JP</code>, <code>ko_KR</code>, <code>pt_BR</code>, <code>zh_CN</code>, <code>zh_TW</code> </p>
@@ -5863,7 +6795,7 @@ module Aws::QConnect
     #   <p>The Amazon Resource Name (ARN) of the user who last updated the quick response search result data.</p>
     #   @return [String]
     # @!attribute channels
-    #   <p>The Amazon Connect contact channels this quick response applies to. The supported contact channel types include <code>Chat</code>.</p>
+    #   <p>The Connect Customer contact channels this quick response applies to. The supported contact channel types include <code>Chat</code>.</p>
     #   @return [Array<String>]
     # @!attribute language
     #   <p>The language code value for the language in which the quick response is written.</p>
@@ -5942,7 +6874,7 @@ module Aws::QConnect
     #   <p>Whether the quick response is active.</p>
     #   @return [Boolean]
     # @!attribute channels
-    #   <p>The Amazon Connect contact channels this quick response applies to. The supported contact channel types include <code>Chat</code>.</p>
+    #   <p>The Connect Customer contact channels this quick response applies to. The supported contact channel types include <code>Chat</code>.</p>
     #   @return [Array<String>]
     # @!attribute tags
     #   <p>The tags used to organize, track, or control access for this resource.</p>
@@ -6075,10 +7007,14 @@ module Aws::QConnect
     # @!attribute ai_agent_type
     #   <p>The type of the AI Agent being removed for use by default from the Amazon Q in Connect Assistant.</p>
     #   @return [String]
+    # @!attribute orchestrator_use_case
+    #   <p>The orchestrator use case for the AI Agent being removed.</p>
+    #   @return [String]
     class RemoveAssistantAIAgentRequest < Struct.new(
       nil,
       :assistant_id,
       :ai_agent_type,
+      :orchestrator_use_case,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6131,6 +7067,9 @@ module Aws::QConnect
     # @!attribute content
     #   <p>The content of the message template.</p>
     #   @return [Types::MessageTemplateContentProvider]
+    # @!attribute source_configuration_summary
+    #   <p>The source configuration of the message template.</p>
+    #   @return [Types::MessageTemplateSourceConfigurationSummary]
     # @!attribute attributes_not_interpolated
     #   <p>The attribute keys that are not resolved.</p>
     #   @return [Array<String>]
@@ -6140,6 +7079,7 @@ module Aws::QConnect
     class RenderMessageTemplateResponse < Struct.new(
       nil,
       :content,
+      :source_configuration_summary,
       :attributes_not_interpolated,
       :attachments,
       keyword_init: true
@@ -6216,6 +7156,183 @@ module Aws::QConnect
         options[:relevance_score] = 0 unless options.key?(:relevance_score)
         super
       end
+    end
+
+    # <p>Configuration for content retrieval operations.</p>
+    # @!attribute knowledge_source
+    #   <p>The knowledge source configuration for content retrieval.</p>
+    #   @return [Types::KnowledgeSource]
+    # @!attribute filter
+    #   <p>The filter configuration for content retrieval.</p>
+    #   @return [Types::RetrievalFilterConfiguration]
+    # @!attribute number_of_results
+    #   <p>The number of results to retrieve.</p>
+    #   @return [Integer]
+    # @!attribute override_knowledge_base_search_type
+    #   <p>Override setting for the knowledge base search type during retrieval.</p>
+    #   @return [String]
+    class RetrievalConfiguration < Struct.new(
+      nil,
+      :knowledge_source,
+      :filter,
+      :number_of_results,
+      :override_knowledge_base_search_type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration for filtering content during retrieval operations.</p>
+    # @!attribute and_all
+    #   <p>Filter configuration that requires all conditions to be met.</p>
+    #   @return [Array<Types::RetrievalFilterConfiguration>]
+    # @!attribute equals
+    #   <p>Filter configuration for exact equality matching.</p>
+    #   @return [Types::FilterAttribute]
+    # @!attribute greater_than
+    #   <p>Filter configuration for greater than comparison.</p>
+    #   @return [Types::FilterAttribute]
+    # @!attribute greater_than_or_equals
+    #   <p>Filter configuration for greater than or equal comparison.</p>
+    #   @return [Types::FilterAttribute]
+    # @!attribute in
+    #   <p>Filter configuration for membership in a set of values.</p>
+    #   @return [Types::FilterAttribute]
+    # @!attribute less_than
+    #   <p>Filter configuration for less than comparison.</p>
+    #   @return [Types::FilterAttribute]
+    # @!attribute less_than_or_equals
+    #   <p>Filter configuration for less than or equal comparison.</p>
+    #   @return [Types::FilterAttribute]
+    # @!attribute list_contains
+    #   <p>Filter configuration for checking if a list contains a value.</p>
+    #   @return [Types::FilterAttribute]
+    # @!attribute not_equals
+    #   <p>Filter configuration for inequality matching.</p>
+    #   @return [Types::FilterAttribute]
+    # @!attribute not_in
+    #   <p>Filter configuration for exclusion from a set of values.</p>
+    #   @return [Types::FilterAttribute]
+    # @!attribute or_all
+    #   <p>Filter configuration where any condition can be met.</p>
+    #   @return [Array<Types::RetrievalFilterConfiguration>]
+    # @!attribute starts_with
+    #   <p>Filter configuration for prefix matching.</p>
+    #   @return [Types::FilterAttribute]
+    # @!attribute string_contains
+    #   <p>Filter configuration for substring matching.</p>
+    #   @return [Types::FilterAttribute]
+    class RetrievalFilterConfiguration < Struct.new(
+      :and_all,
+      :equals,
+      :greater_than,
+      :greater_than_or_equals,
+      :in,
+      :less_than,
+      :less_than_or_equals,
+      :list_contains,
+      :not_equals,
+      :not_in,
+      :or_all,
+      :starts_with,
+      :string_contains,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class AndAll < RetrievalFilterConfiguration; end
+      class Equals < RetrievalFilterConfiguration; end
+      class GreaterThan < RetrievalFilterConfiguration; end
+      class GreaterThanOrEquals < RetrievalFilterConfiguration; end
+      class In < RetrievalFilterConfiguration; end
+      class LessThan < RetrievalFilterConfiguration; end
+      class LessThanOrEquals < RetrievalFilterConfiguration; end
+      class ListContains < RetrievalFilterConfiguration; end
+      class NotEquals < RetrievalFilterConfiguration; end
+      class NotIn < RetrievalFilterConfiguration; end
+      class OrAll < RetrievalFilterConfiguration; end
+      class StartsWith < RetrievalFilterConfiguration; end
+      class StringContains < RetrievalFilterConfiguration; end
+      class Unknown < RetrievalFilterConfiguration; end
+    end
+
+    # <p>An error returned for a single assistant association whose knowledge base retrieval failed during a <code>Retrieve</code> operation. The overall operation still succeeds and returns the results from the associations that were queried successfully.</p>
+    # @!attribute association_id
+    #   <p>The identifier of the assistant association whose knowledge base retrieval failed.</p>
+    #   @return [String]
+    # @!attribute code
+    #   <p>The error code that categorizes the retrieval failure for the assistant association.</p>
+    #   @return [String]
+    # @!attribute message
+    #   <p>A human-readable description of the retrieval failure for the assistant association.</p>
+    #   @return [String]
+    class RetrieveError < Struct.new(
+      nil,
+      :association_id,
+      :code,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute assistant_id
+    #   <p>The identifier of the Amazon Q in Connect assistant for content retrieval.</p>
+    #   @return [String]
+    # @!attribute retrieval_configuration
+    #   <p>The configuration for the content retrieval operation.</p>
+    #   @return [Types::RetrievalConfiguration]
+    # @!attribute retrieval_query
+    #   <p>The query for content retrieval.</p>
+    #   @return [String]
+    class RetrieveRequest < Struct.new(
+      nil,
+      :assistant_id,
+      :retrieval_configuration,
+      :retrieval_query,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute results
+    #   <p>The results of the content retrieval operation.</p>
+    #   @return [Array<Types::RetrieveResult>]
+    # @!attribute errors
+    #   <p>The per-association errors returned when one or more knowledge base associations fail during a <code>Retrieve</code> operation that spans multiple assistant associations. The overall operation still succeeds and returns the results from the associations that were queried successfully. This list contains one entry for each association that failed, up to a maximum of five.</p>
+    #   @return [Array<Types::RetrieveError>]
+    class RetrieveResponse < Struct.new(
+      nil,
+      :results,
+      :errors,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A single result from a content retrieval operation.</p>
+    # @!attribute association_id
+    #   <p>The identifier of the assistant association for the retrieved result.</p>
+    #   @return [String]
+    # @!attribute source_id
+    #   <p>The URL, URI, or ID of the retrieved content when available, or a UUID when unavailable.</p>
+    #   @return [String]
+    # @!attribute reference_type
+    #   <p>A type to define the KB origin of a retrieved content.</p>
+    #   @return [String]
+    # @!attribute content_text
+    #   <p>The text content of the retrieved result.</p>
+    #   @return [String]
+    class RetrieveResult < Struct.new(
+      nil,
+      :association_id,
+      :source_id,
+      :reference_type,
+      :content_text,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The list of key-value pairs that are stored on the session.</p>
@@ -6374,7 +7491,7 @@ module Aws::QConnect
     #   <p>The maximum number of results to return per page.</p>
     #   @return [Integer]
     # @!attribute attributes
-    #   <p>The <a href="https://docs.aws.amazon.com/connect/latest/adminguide/connect-attrib-list.html#user-defined-attributes">user-defined Amazon Connect contact attributes</a> to be resolved when search results are returned.</p>
+    #   <p>The <a href="https://docs.aws.amazon.com/connect/latest/adminguide/connect-attrib-list.html#user-defined-attributes">user-defined Connect Customer contact attributes</a> to be resolved when search results are returned.</p>
     #   @return [Hash<String, String>]
     class SearchQuickResponsesRequest < Struct.new(
       nil,
@@ -6487,14 +7604,23 @@ module Aws::QConnect
     # @!attribute bot_response
     #   <p>The bot response of the conversation history data.</p>
     #   @return [String]
+    # @!attribute timestamp
+    #   <p>The timestamp of the conversation history entry.</p>
+    #   @return [Time]
     class SelfServiceConversationHistory < Struct.new(
       nil,
       :turn_number,
       :input_transcript,
       :bot_response,
+      :timestamp,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:turn_number] = 0 unless options.key?(:turn_number)
+        super
+      end
     end
 
     # <p>Settings for semantic document chunking for a data source. Semantic chunking splits a document into smaller documents based on groups of similar content derived from the text with natural language processing.</p>
@@ -6529,6 +7655,9 @@ module Aws::QConnect
     # @!attribute message
     #   <p>The message data to submit to the Amazon Q in Connect session.</p>
     #   @return [Types::MessageInput]
+    # @!attribute ai_agent_id
+    #   <p>The identifier of the AI Agent to use for processing the message.</p>
+    #   @return [String]
     # @!attribute conversation_context
     #   <p>The conversation context before the Amazon Q in Connect session.</p>
     #   @return [Types::ConversationContext]
@@ -6538,15 +7667,28 @@ module Aws::QConnect
     # @!attribute client_token
     #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the AWS SDK populates this field.For more information about idempotency, see Making retries safe with idempotent APIs.</p>
     #   @return [String]
+    # @!attribute orchestrator_use_case
+    #   <p>The orchestrator use case for message processing.</p>
+    #   @return [String]
+    # @!attribute metadata
+    #   <p>Additional metadata for the message.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute origin_request_id
+    #   <p>Request identifier from the origin system, used for end-to-end tracing across spans.</p>
+    #   @return [String]
     class SendMessageRequest < Struct.new(
       nil,
       :assistant_id,
       :session_id,
       :type,
       :message,
+      :ai_agent_id,
       :conversation_context,
       :configuration,
       :client_token,
+      :orchestrator_use_case,
+      :metadata,
+      :origin_request_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6622,6 +7764,9 @@ module Aws::QConnect
     # @!attribute origin
     #   <p>The origin of the Session to be listed. <code>SYSTEM</code> for a default Session created by Amazon Q in Connect or <code>CUSTOMER</code> for a Session created by calling <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_amazon-q-connect_CreateSession.html">CreateSession</a> API.</p>
     #   @return [String]
+    # @!attribute orchestrator_configuration_list
+    #   <p>The list of orchestrator configurations for the session.</p>
+    #   @return [Array<Types::OrchestratorConfigurationEntry>]
     class SessionData < Struct.new(
       nil,
       :session_arn,
@@ -6633,6 +7778,7 @@ module Aws::QConnect
       :tag_filter,
       :ai_agent_configuration,
       :origin,
+      :orchestrator_configuration_list,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6722,6 +7868,408 @@ module Aws::QConnect
       include ::Smithy::Schema::Structure
     end
 
+    # <p>A span represents a unit of work during AI agent execution, capturing timing, status, and contextual attributes.</p>
+    # @!attribute span_id
+    #   <p>Unique span identifier</p>
+    #   @return [String]
+    # @!attribute assistant_id
+    #   <p>UUID of the Connect AI Assistant resource</p>
+    #   @return [String]
+    # @!attribute session_id
+    #   <p>UUID of the Connect AI Session resource</p>
+    #   @return [String]
+    # @!attribute parent_span_id
+    #   <p>Parent span identifier for hierarchy. Null for root spans.</p>
+    #   @return [String]
+    # @!attribute span_name
+    #   <p>Service-defined operation name</p>
+    #   @return [String]
+    # @!attribute span_type
+    #   <p>Operation relationship type</p>
+    #   @return [String]
+    # @!attribute start_timestamp
+    #   <p>Operation start time in milliseconds since epoch</p>
+    #   @return [Time]
+    # @!attribute end_timestamp
+    #   <p>Operation end time in milliseconds since epoch</p>
+    #   @return [Time]
+    # @!attribute status
+    #   <p>Span completion status</p>
+    #   @return [String]
+    # @!attribute status_description
+    #   <p>Human-readable error description when status is ERROR or TIMEOUT</p>
+    #   @return [String]
+    # @!attribute request_id
+    #   <p>The service request ID that initiated the operation</p>
+    #   @return [String]
+    # @!attribute origin_request_id
+    #   <p>The origin request identifier for end-to-end tracing.</p>
+    #   @return [String]
+    # @!attribute attributes
+    #   <p>Span-specific contextual attributes</p>
+    #   @return [Types::SpanAttributes]
+    class Span < Struct.new(
+      nil,
+      :span_id,
+      :assistant_id,
+      :session_id,
+      :parent_span_id,
+      :span_name,
+      :span_type,
+      :start_timestamp,
+      :end_timestamp,
+      :status,
+      :status_description,
+      :request_id,
+      :origin_request_id,
+      :attributes,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contextual attributes capturing operation details, LLM configuration, usage metrics, and conversation data</p>
+    # @!attribute operation_name
+    #   <p>Action being performed</p>
+    #   @return [String]
+    # @!attribute provider_name
+    #   <p>Model provider identifier (e.g., aws.bedrock)</p>
+    #   @return [String]
+    # @!attribute error_type
+    #   <p>Error classification if span failed (e.g., throttle, timeout)</p>
+    #   @return [String]
+    # @!attribute agent_id
+    #   <p>Amazon Connect agent ID</p>
+    #   @return [String]
+    # @!attribute instance_arn
+    #   <p>Amazon Connect instance ARN</p>
+    #   @return [String]
+    # @!attribute contact_id
+    #   <p>Amazon Connect contact identifier</p>
+    #   @return [String]
+    # @!attribute initial_contact_id
+    #   <p>Amazon Connect contact identifier</p>
+    #   @return [String]
+    # @!attribute session_name
+    #   <p>Session name</p>
+    #   @return [String]
+    # @!attribute ai_agent_arn
+    #   <p>AI agent ARN</p>
+    #   @return [String]
+    # @!attribute ai_agent_type
+    #   <p>AI agent type</p>
+    #   @return [String]
+    # @!attribute ai_agent_name
+    #   <p>AI agent name</p>
+    #   @return [String]
+    # @!attribute ai_agent_id
+    #   <p>AI agent identifier</p>
+    #   @return [String]
+    # @!attribute ai_agent_version
+    #   <p>AI agent version number</p>
+    #   @return [Integer]
+    # @!attribute ai_agent_invoker
+    #   <p>Entity that invoked the AI agent</p>
+    #   @return [String]
+    # @!attribute ai_agent_orchestrator_use_case
+    #   <p>AI agent orchestrator use case</p>
+    #   @return [String]
+    # @!attribute interaction_mode
+    #   <p>How the orchestrator engaged the collaborator agent. Present on spans that invoke a collaborator agent.</p>
+    #   @return [String]
+    # @!attribute target_agent_id
+    #   <p>Identifier of the collaborator agent being invoked. For first-party collaborators this is the Amazon Connect AI agent ID; for third-party collaborators this is the external application ID.</p>
+    #   @return [String]
+    # @!attribute return_reason
+    #   <p>Reason a sub-agent returned control to the calling agent. Present on return_to_agent spans.</p>
+    #   @return [String]
+    # @!attribute request_model
+    #   <p>LLM model ID for request (e.g., anthropic.claude-3-sonnet)</p>
+    #   @return [String]
+    # @!attribute request_max_tokens
+    #   <p>Maximum tokens configured for generation</p>
+    #   @return [Integer]
+    # @!attribute temperature
+    #   <p>Sampling temperature for generation</p>
+    #   @return [Float]
+    # @!attribute top_p
+    #   <p>Top-p sampling parameter for generation</p>
+    #   @return [Float]
+    # @!attribute response_model
+    #   <p>Actual model used for response (usually matches requestModel)</p>
+    #   @return [String]
+    # @!attribute response_finish_reasons
+    #   <p>Generation termination reasons (e.g., stop, max_tokens)</p>
+    #   @return [Array<String>]
+    # @!attribute usage_input_tokens
+    #   <p>Number of input tokens in prompt</p>
+    #   @return [Integer]
+    # @!attribute usage_output_tokens
+    #   <p>Number of output tokens in response</p>
+    #   @return [Integer]
+    # @!attribute usage_total_tokens
+    #   <p>Total tokens consumed (input + output)</p>
+    #   @return [Integer]
+    # @!attribute cache_read_input_tokens
+    #   <p>Number of input tokens that were retrieved from cache</p>
+    #   @return [Integer]
+    # @!attribute cache_write_input_tokens
+    #   <p>Number of input tokens that were written to cache in this request</p>
+    #   @return [Integer]
+    # @!attribute input_messages
+    #   <p>Input message collection sent to LLM</p>
+    #   @return [Array<Types::SpanMessage>]
+    # @!attribute output_messages
+    #   <p>Output message collection received from LLM</p>
+    #   @return [Array<Types::SpanMessage>]
+    # @!attribute system_instructions
+    #   <p>System prompt instructions</p>
+    #   @return [Array<Types::SpanMessageValue>]
+    # @!attribute prompt_arn
+    #   <p>AI prompt ARN</p>
+    #   @return [String]
+    # @!attribute prompt_id
+    #   <p>AI prompt identifier</p>
+    #   @return [String]
+    # @!attribute prompt_type
+    #   <p>AI prompt type</p>
+    #   @return [String]
+    # @!attribute prompt_name
+    #   <p>AI prompt name</p>
+    #   @return [String]
+    # @!attribute prompt_version
+    #   <p>AI prompt version number</p>
+    #   @return [Integer]
+    # @!attribute time_to_first_token_ms
+    #   <p>Time to first token in milliseconds, measured from when Amazon Bedrock was invoked to when the first token was returned</p>
+    #   @return [Integer]
+    # @!attribute guardrail_assessments
+    #   <p>Guardrail assessments for the inference span. Absent on other span types and when no AI Guardrail is attached to the AI Agent.</p>
+    #   @return [Array<Types::SpanGuardrailAssessment>]
+    class SpanAttributes < Struct.new(
+      nil,
+      :operation_name,
+      :provider_name,
+      :error_type,
+      :agent_id,
+      :instance_arn,
+      :contact_id,
+      :initial_contact_id,
+      :session_name,
+      :ai_agent_arn,
+      :ai_agent_type,
+      :ai_agent_name,
+      :ai_agent_id,
+      :ai_agent_version,
+      :ai_agent_invoker,
+      :ai_agent_orchestrator_use_case,
+      :interaction_mode,
+      :target_agent_id,
+      :return_reason,
+      :request_model,
+      :request_max_tokens,
+      :temperature,
+      :top_p,
+      :response_model,
+      :response_finish_reasons,
+      :usage_input_tokens,
+      :usage_output_tokens,
+      :usage_total_tokens,
+      :cache_read_input_tokens,
+      :cache_write_input_tokens,
+      :input_messages,
+      :output_messages,
+      :system_instructions,
+      :prompt_arn,
+      :prompt_id,
+      :prompt_type,
+      :prompt_name,
+      :prompt_version,
+      :time_to_first_token_ms,
+      :guardrail_assessments,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A citation that spans a specific range of text.</p>
+    # @!attribute content_id
+    #   <p>The identifier of the content being cited in the span.</p>
+    #   @return [String]
+    # @!attribute title
+    #   <p>The title of the content being cited in the span.</p>
+    #   @return [String]
+    # @!attribute knowledge_base_id
+    #   <p>The identifier of the knowledge base containing the cited content.</p>
+    #   @return [String]
+    # @!attribute knowledge_base_arn
+    #   <p>The Amazon Resource Name (ARN) of the knowledge base containing the cited content.</p>
+    #   @return [String]
+    class SpanCitation < Struct.new(
+      nil,
+      :content_id,
+      :title,
+      :knowledge_base_id,
+      :knowledge_base_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Result of a single guardrail assessment, covering either the input (customer/user message) or the output (LLM response) of a Bedrock Converse call.</p>
+    # @!attribute guardrail_id
+    #   <p>Unique AI Guardrail identifier.</p>
+    #   @return [String]
+    # @!attribute guardrail_name
+    #   <p>Customer-defined display name of the AI Guardrail resource.</p>
+    #   @return [String]
+    # @!attribute source
+    #   <p>Content source the guardrail was evaluated against.</p>
+    #   @return [String]
+    # @!attribute action
+    #   <p>Outcome of the guardrail assessment.</p>
+    #   @return [String]
+    # @!attribute policies
+    #   <p>Per-policy assessment results. Absent or empty when action is NONE.</p>
+    #   @return [Array<Types::GuardrailPolicyResult>]
+    class SpanGuardrailAssessment < Struct.new(
+      nil,
+      :guardrail_id,
+      :guardrail_name,
+      :source,
+      :action,
+      :policies,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A message in the conversation history with participant role and content values</p>
+    # @!attribute message_id
+    #   <p>Unique message identifier</p>
+    #   @return [String]
+    # @!attribute participant
+    #   <p>Message source role</p>
+    #   @return [String]
+    # @!attribute timestamp
+    #   <p>Message timestamp</p>
+    #   @return [Time]
+    # @!attribute values
+    #   <p>Message content values (text, tool use, tool result, reasoning)</p>
+    #   @return [Array<Types::SpanMessageValue>]
+    class SpanMessage < Struct.new(
+      nil,
+      :message_id,
+      :participant,
+      :timestamp,
+      :values,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Message content value - can be text, tool invocation, tool result, or reasoning</p>
+    # @!attribute text
+    #   <p>Text message content</p>
+    #   @return [Types::SpanTextValue]
+    # @!attribute tool_use
+    #   <p>Tool invocation message content</p>
+    #   @return [Types::SpanToolUseValue]
+    # @!attribute tool_result
+    #   <p>Tool result message content</p>
+    #   @return [Types::SpanToolResultValue]
+    # @!attribute reasoning
+    #   <p>Model reasoning and it's internal decision making process</p>
+    #   @return [Types::SpanReasoningValue]
+    class SpanMessageValue < Struct.new(
+      :text,
+      :tool_use,
+      :tool_result,
+      :reasoning,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class Text < SpanMessageValue; end
+      class ToolUse < SpanMessageValue; end
+      class ToolResult < SpanMessageValue; end
+      class Reasoning < SpanMessageValue; end
+      class Unknown < SpanMessageValue; end
+    end
+
+    # <p>Model reasoning and it's internal decision making process</p>
+    # @!attribute value
+    #   <p>The reasoning text content</p>
+    #   @return [String]
+    class SpanReasoningValue < Struct.new(
+      nil,
+      :value,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Text message content</p>
+    # @!attribute value
+    #   <p>String content of the message text</p>
+    #   @return [String]
+    # @!attribute citations
+    #   <p>The citations associated with the span text.</p>
+    #   @return [Array<Types::SpanCitation>]
+    # @!attribute ai_guardrail_assessment
+    #   <p>The AI Guardrail assessment for the span text.</p>
+    #   @return [Types::AIGuardrailAssessment]
+    class SpanTextValue < Struct.new(
+      nil,
+      :value,
+      :citations,
+      :ai_guardrail_assessment,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Tool result message content</p>
+    # @!attribute tool_use_id
+    #   <p>Relates this result back to the tool invocation</p>
+    #   @return [String]
+    # @!attribute values
+    #   <p>The tool results</p>
+    #   @return [Array<Types::SpanMessageValue>]
+    # @!attribute error
+    #   <p>The tool invocation error if failed</p>
+    #   @return [String]
+    class SpanToolResultValue < Struct.new(
+      nil,
+      :tool_use_id,
+      :values,
+      :error,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Tool invocation message content</p>
+    # @!attribute tool_use_id
+    #   <p>Unique ID for this tool invocation</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The tool name</p>
+    #   @return [String]
+    # @!attribute arguments
+    #   <p>The tool input arguments</p>
+    #   @return [JSON]
+    class SpanToolUseValue < Struct.new(
+      nil,
+      :tool_use_id,
+      :name,
+      :arguments,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute knowledge_base_id
     #   <p>The identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>
     #   @return [String]
@@ -6801,6 +8349,34 @@ module Aws::QConnect
     class StartImportJobResponse < Struct.new(
       nil,
       :import_job,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Details about suggested message data.</p>
+    # @!attribute message_text
+    #   <p>The text content of the suggested message.</p>
+    #   @return [String]
+    class SuggestedMessageDataDetails < Struct.new(
+      nil,
+      :message_text,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Reference information for a suggested message.</p>
+    # @!attribute ai_agent_id
+    #   <p>The identifier of the AI Agent that generated the suggested message.</p>
+    #   @return [String]
+    # @!attribute ai_agent_arn
+    #   <p>The Amazon Resource Name (ARN) of the AI Agent that generated the suggested message.</p>
+    #   @return [String]
+    class SuggestedMessageReference < Struct.new(
+      nil,
+      :ai_agent_id,
+      :ai_agent_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6933,9 +8509,17 @@ module Aws::QConnect
     # @!attribute value
     #   <p>The value of the message data in text type.</p>
     #   @return [String]
+    # @!attribute citations
+    #   <p>The citations associated with the text message.</p>
+    #   @return [Array<Types::Citation>]
+    # @!attribute ai_guardrail_assessment
+    #   <p>The AI Guardrail assessment for the text message.</p>
+    #   @return [Types::AIGuardrailAssessment]
     class TextMessage < Struct.new(
       nil,
       :value,
+      :citations,
+      :ai_guardrail_assessment,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6967,10 +8551,197 @@ module Aws::QConnect
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Configuration settings for a tool used by AI Agents.</p>
+    # @!attribute tool_name
+    #   <p>The name of the tool.</p>
+    #   @return [String]
+    # @!attribute tool_type
+    #   <p>The type of the tool.</p>
+    #   @return [String]
+    # @!attribute title
+    #   <p>The title of the tool configuration.</p>
+    #   @return [String]
+    # @!attribute tool_id
+    #   <p>The identifier of the tool, for example toolName from Model Context Provider server.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>The description of the tool configuration.</p>
+    #   @return [String]
+    # @!attribute instruction
+    #   <p>Instructions for using the tool.</p>
+    #   @return [Types::ToolInstruction]
+    # @!attribute override_input_values
+    #   <p>Override input values for the tool configuration.</p>
+    #   @return [Array<Types::ToolOverrideInputValue>]
+    # @!attribute output_filters
+    #   <p>Output filters applies to the tool result.</p>
+    #   @return [Array<Types::ToolOutputFilter>]
+    # @!attribute input_schema
+    #   <p>The input schema for the tool configuration.</p>
+    #   @return [JSON]
+    # @!attribute output_schema
+    #   <p>The output schema for the tool configuration.</p>
+    #   @return [JSON]
+    # @!attribute annotations
+    #   <p>Annotations for the tool configuration.</p>
+    #   @return [Types::Annotation]
+    # @!attribute user_interaction_configuration
+    #   <p>Configuration for user interaction with the tool.</p>
+    #   @return [Types::UserInteractionConfiguration]
+    class ToolConfiguration < Struct.new(
+      nil,
+      :tool_name,
+      :tool_type,
+      :title,
+      :tool_id,
+      :description,
+      :instruction,
+      :override_input_values,
+      :output_filters,
+      :input_schema,
+      :output_schema,
+      :annotations,
+      :user_interaction_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Instructions for using a tool.</p>
+    # @note This shape contains sensitive data and should be treated as such.
+    # @!attribute instruction
+    #   <p>The instruction text for the tool.</p>
+    #   @return [String]
+    # @!attribute examples
+    #   <p>Examples for using the tool.</p>
+    #   @return [Array<String>]
+    class ToolInstruction < Struct.new(
+      nil,
+      :instruction,
+      :examples,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration for tool output handling.</p>
+    # @!attribute output_variable_name_override
+    #   <p>Override the tool output results to different variable name.</p>
+    #   @return [String]
+    # @!attribute session_data_namespace
+    #   <p>The session data namespace for tool output.</p>
+    #   @return [String]
+    class ToolOutputConfiguration < Struct.new(
+      nil,
+      :output_variable_name_override,
+      :session_data_namespace,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Filter configuration for tool output.</p>
+    # @!attribute json_path
+    #   <p>The JSON path for filtering tool output.</p>
+    #   @return [String]
+    # @!attribute output_configuration
+    #   <p>The output configuration for the filter.</p>
+    #   @return [Types::ToolOutputConfiguration]
+    class ToolOutputFilter < Struct.new(
+      nil,
+      :json_path,
+      :output_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A constant input value for tool override.</p>
+    # @!attribute type
+    #   <p>Override tool input value with constant values</p>
+    #   @return [String]
+    # @!attribute value
+    #   <p>The constant input override value.</p>
+    #   @return [String]
+    class ToolOverrideConstantInputValue < Struct.new(
+      nil,
+      :type,
+      :value,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>An input value override for tools.</p>
+    # @!attribute json_path
+    #   <p>The JSON path for the input value override.</p>
+    #   @return [String]
+    # @!attribute value
+    #   <p>The override input value.</p>
+    #   @return [Types::ToolOverrideInputValueConfiguration]
+    class ToolOverrideInputValue < Struct.new(
+      nil,
+      :json_path,
+      :value,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration for overriding tool input values.</p>
+    # @!attribute constant
+    #   <p>Constant input value configuration for tool override.</p>
+    #   @return [Types::ToolOverrideConstantInputValue]
+    class ToolOverrideInputValueConfiguration < Struct.new(
+      :constant,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class Constant < ToolOverrideInputValueConfiguration; end
+      class Unknown < ToolOverrideInputValueConfiguration; end
+    end
+
+    # <p>Data about the result of tool usage.</p>
+    # @!attribute tool_use_id
+    #   <p>The identifier of the tool use instance.</p>
+    #   @return [String]
+    # @!attribute tool_name
+    #   <p>The name of the tool that was used.</p>
+    #   @return [String]
+    # @!attribute tool_result
+    #   <p>The result of the tool usage.</p>
+    #   @return [JSON]
+    # @!attribute input_schema
+    #   <p>The input schema for the tool use result.</p>
+    #   @return [JSON]
+    class ToolUseResultData < Struct.new(
+      nil,
+      :tool_use_id,
+      :tool_name,
+      :tool_result,
+      :input_schema,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>You do not have permission to perform this action.</p>
     # @!attribute message
     #   @return [String]
     class UnauthorizedException < Struct.new(
+      nil,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The server has a failure of processing the message</p>
+    # @!attribute message
+    #   @return [String]
+    class UnprocessableContentException < Struct.new(
       nil,
       :message,
       keyword_init: true
@@ -7129,6 +8900,9 @@ module Aws::QConnect
     # @!attribute model_id
     #   <p>The identifier of the model used for this AI Prompt.</p> <note> <p>For information about which models are supported in each Amazon Web Services Region, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/create-ai-prompts.html#cli-create-aiprompt">Supported models for system/custom prompts</a>.</p> </note>
     #   @return [String]
+    # @!attribute inference_configuration
+    #   <p>The updated inference configuration for the AI Prompt.</p>
+    #   @return [Types::AIPromptInferenceConfiguration]
     class UpdateAIPromptRequest < Struct.new(
       nil,
       :client_token,
@@ -7138,6 +8912,7 @@ module Aws::QConnect
       :template_configuration,
       :description,
       :model_id,
+      :inference_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7163,11 +8938,15 @@ module Aws::QConnect
     # @!attribute configuration
     #   <p>The configuration of the AI Agent being updated for use by default on the Amazon Q in Connect Assistant.</p>
     #   @return [Types::AIAgentConfigurationData]
+    # @!attribute orchestrator_use_case
+    #   <p>The orchestrator use case for the AI Agent being added.</p>
+    #   @return [String]
     class UpdateAssistantAIAgentRequest < Struct.new(
       nil,
       :assistant_id,
       :ai_agent_type,
       :configuration,
+      :orchestrator_use_case,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7310,6 +9089,9 @@ module Aws::QConnect
     # @!attribute language
     #   <p>The language code value for the language in which the quick response is written. The supported language codes include <code>de_DE</code>, <code>en_US</code>, <code>es_ES</code>, <code>fr_FR</code>, <code>id_ID</code>, <code>it_IT</code>, <code>ja_JP</code>, <code>ko_KR</code>, <code>pt_BR</code>, <code>zh_CN</code>, <code>zh_TW</code> </p>
     #   @return [String]
+    # @!attribute source_configuration
+    #   <p>The source configuration of the message template. Only set this argument for WHATSAPP channel subtype.</p>
+    #   @return [Types::MessageTemplateSourceConfiguration]
     # @!attribute default_attributes
     #   <p>An object that specifies the default values to use for variables in the message template. This object contains different categories of key-value pairs. Each key defines a variable or placeholder in the message template. The corresponding value defines the default value for that variable.</p>
     #   @return [Types::MessageTemplateAttributes]
@@ -7319,6 +9101,7 @@ module Aws::QConnect
       :message_template_id,
       :content,
       :language,
+      :source_configuration,
       :default_attributes,
       keyword_init: true
     )
@@ -7373,7 +9156,7 @@ module Aws::QConnect
     #   <p>Whether the quick response is active. </p>
     #   @return [Boolean]
     # @!attribute channels
-    #   <p>The Amazon Connect contact channels this quick response applies to. The supported contact channel types include <code>Chat</code>.</p>
+    #   <p>The Connect Customer contact channels this quick response applies to. The supported contact channel types include <code>Chat</code>.</p>
     #   @return [Array<String>]
     # @!attribute language
     #   <p>The language code value for the language in which the quick response is written. The supported language codes include <code>de_DE</code>, <code>en_US</code>, <code>es_ES</code>, <code>fr_FR</code>, <code>id_ID</code>, <code>it_IT</code>, <code>ja_JP</code>, <code>ko_KR</code>, <code>pt_BR</code>, <code>zh_CN</code>, <code>zh_TW</code> </p>
@@ -7471,6 +9254,12 @@ module Aws::QConnect
     # @!attribute ai_agent_configuration
     #   <p>The configuration of the AI Agents (mapped by AI Agent Type to AI Agent version) that should be used by Amazon Q in Connect for this Session.</p>
     #   @return [Hash<String, Types::AIAgentConfigurationData>]
+    # @!attribute orchestrator_configuration_list
+    #   <p>The updated list of orchestrator configurations for the session.</p>
+    #   @return [Array<Types::OrchestratorConfigurationEntry>]
+    # @!attribute remove_orchestrator_configuration_list
+    #   <p>The list of orchestrator configurations to remove from the session.</p>
+    #   @return [Boolean]
     class UpdateSessionRequest < Struct.new(
       nil,
       :assistant_id,
@@ -7478,6 +9267,8 @@ module Aws::QConnect
       :description,
       :tag_filter,
       :ai_agent_configuration,
+      :orchestrator_configuration_list,
+      :remove_orchestrator_configuration_list,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7501,6 +9292,18 @@ module Aws::QConnect
     class UrlConfiguration < Struct.new(
       nil,
       :seed_urls,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration for user interaction settings.</p>
+    # @!attribute is_user_confirmation_required
+    #   <p>Indicates whether user confirmation is required for the interaction.</p>
+    #   @return [Boolean]
+    class UserInteractionConfiguration < Struct.new(
+      nil,
+      :is_user_confirmation_required,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7568,6 +9371,74 @@ module Aws::QConnect
     class WebCrawlerLimits < Struct.new(
       nil,
       :rate_limit,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The content of the message template that applies to the WHATSAPP channel subtype.</p>
+    # @!attribute data
+    #   <p>The data.</p>
+    #   @return [String]
+    class WhatsAppMessageTemplateContent < Struct.new(
+      nil,
+      :data,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration information about the external data source.</p>
+    # @!attribute business_account_id
+    #   <p>The ID of the End User Messaging WhatsApp Business Account to associate with this template.</p>
+    #   @return [String]
+    # @!attribute template_id
+    #   <p>The WhatsApp template ID.</p>
+    #   @return [String]
+    # @!attribute components
+    #   <p>The list of component mapping from WhatsApp template parameters to Message Template attributes.</p>
+    #   @return [Array<String>]
+    class WhatsAppMessageTemplateSourceConfiguration < Struct.new(
+      nil,
+      :business_account_id,
+      :template_id,
+      :components,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration information about the external data source.</p>
+    # @!attribute business_account_id
+    #   <p>The ID of the End User Messaging WhatsApp Business Account to associate with this template.</p>
+    #   @return [String]
+    # @!attribute template_id
+    #   <p>The ID of WhatsApp template.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the WhatsApp template.</p>
+    #   @return [String]
+    # @!attribute language
+    #   <p>The language of the WhatsApp template.</p>
+    #   @return [String]
+    # @!attribute components
+    #   <p>The list of component mapping from WhatsApp template parameters to Message Template attributes.</p>
+    #   @return [Array<String>]
+    # @!attribute status
+    #   <p>The status of the message template.</p>
+    #   @return [String]
+    # @!attribute status_reason
+    #   <p>The status reason of the message template.</p>
+    #   @return [String]
+    class WhatsAppMessageTemplateSourceConfigurationSummary < Struct.new(
+      nil,
+      :business_account_id,
+      :template_id,
+      :name,
+      :language,
+      :components,
+      :status,
+      :status_reason,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

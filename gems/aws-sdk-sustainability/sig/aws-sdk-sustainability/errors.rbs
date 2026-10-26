@@ -1,0 +1,18 @@
+module Aws::Sustainability
+  module Errors
+    class AccessDeniedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InternalServerException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def retryable?: () -> true
+    end
+    class ThrottlingException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def retryable?: () -> true
+    end
+    class ValidationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

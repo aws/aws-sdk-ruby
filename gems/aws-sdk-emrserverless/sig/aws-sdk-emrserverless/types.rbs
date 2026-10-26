@@ -25,9 +25,11 @@ module Aws::EMRServerless
         ?worker_type_specifications: Hash[String, Types::WorkerTypeSpecification],
         ?runtime_configuration: Array[Types::Configuration],
         ?monitoring_configuration: Types::MonitoringConfiguration,
+        ?disk_encryption_configuration: Types::DiskEncryptionConfiguration,
         ?interactive_configuration: Types::InteractiveConfiguration,
         ?scheduler_configuration: Types::SchedulerConfiguration,
         ?identity_center_configuration: Types::IdentityCenterConfiguration,
+        ?job_level_cost_allocation_configuration: Types::JobLevelCostAllocationConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -51,9 +53,11 @@ module Aws::EMRServerless
       attr_accessor worker_type_specifications: Hash[String, Types::WorkerTypeSpecification]?
       attr_accessor runtime_configuration: Array[Types::Configuration]?
       attr_accessor monitoring_configuration: Types::MonitoringConfiguration?
+      attr_accessor disk_encryption_configuration: Types::DiskEncryptionConfiguration?
       attr_accessor interactive_configuration: Types::InteractiveConfiguration?
       attr_accessor scheduler_configuration: Types::SchedulerConfiguration?
       attr_accessor identity_center_configuration: Types::IdentityCenterConfiguration?
+      attr_accessor job_level_cost_allocation_configuration: Types::JobLevelCostAllocationConfiguration?
     end
 
     class ApplicationSummary
@@ -177,11 +181,13 @@ module Aws::EMRServerless
       def initialize: (
         ?application_configuration: Array[Types::Configuration],
         ?monitoring_configuration: Types::MonitoringConfiguration,
+        ?disk_encryption_configuration: Types::DiskEncryptionConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor application_configuration: Array[Types::Configuration]?
       attr_accessor monitoring_configuration: Types::MonitoringConfiguration?
+      attr_accessor disk_encryption_configuration: Types::DiskEncryptionConfiguration?
     end
 
     class ConflictException
@@ -214,9 +220,11 @@ module Aws::EMRServerless
         ?worker_type_specifications: Hash[String, Types::WorkerTypeSpecificationInput],
         ?runtime_configuration: Array[Types::Configuration],
         ?monitoring_configuration: Types::MonitoringConfiguration,
+        ?disk_encryption_configuration: Types::DiskEncryptionConfiguration,
         ?interactive_configuration: Types::InteractiveConfiguration,
         ?scheduler_configuration: Types::SchedulerConfiguration,
         ?identity_center_configuration: Types::IdentityCenterConfigurationInput,
+        ?job_level_cost_allocation_configuration: Types::JobLevelCostAllocationConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -235,9 +243,11 @@ module Aws::EMRServerless
       attr_accessor worker_type_specifications: Hash[String, Types::WorkerTypeSpecificationInput]?
       attr_accessor runtime_configuration: Array[Types::Configuration]?
       attr_accessor monitoring_configuration: Types::MonitoringConfiguration?
+      attr_accessor disk_encryption_configuration: Types::DiskEncryptionConfiguration?
       attr_accessor interactive_configuration: Types::InteractiveConfiguration?
       attr_accessor scheduler_configuration: Types::SchedulerConfiguration?
       attr_accessor identity_center_configuration: Types::IdentityCenterConfigurationInput?
+      attr_accessor job_level_cost_allocation_configuration: Types::JobLevelCostAllocationConfiguration?
     end
 
     class CreateApplicationOutput
@@ -273,6 +283,19 @@ module Aws::EMRServerless
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+    end
+
+    class DiskEncryptionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?encryption_context: Hash[String, String],
+        ?encryption_key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor encryption_context: Hash[String, String]?
+      attr_accessor encryption_key_arn: String?
     end
 
     class GetApplicationInput
@@ -351,6 +374,90 @@ module Aws::EMRServerless
       attr_accessor job_run: Types::JobRun?
     end
 
+    class GetResourceDashboardRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?resource_id: String,
+        ?resource_type: String,
+        ?access_system_profile_logs: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor access_system_profile_logs: bool?
+    end
+
+    class GetResourceDashboardResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor url: String?
+    end
+
+    class GetSessionEndpointRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?session_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor session_id: String?
+    end
+
+    class GetSessionEndpointResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?session_id: String,
+        ?endpoint: String,
+        ?auth_token: String,
+        ?auth_token_expires_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor session_id: String?
+      attr_accessor endpoint: String?
+      attr_accessor auth_token: String?
+      attr_accessor auth_token_expires_at: Time?
+    end
+
+    class GetSessionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?session_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor session_id: String?
+    end
+
+    class GetSessionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session: Types::Session,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session: Types::Session?
+    end
+
     class Hive
       include Smithy::Schema::Structure
 
@@ -372,11 +479,13 @@ module Aws::EMRServerless
       def initialize: (
         ?identity_center_instance_arn: String,
         ?identity_center_application_arn: String,
+        ?user_background_sessions_enabled: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor identity_center_instance_arn: String?
       attr_accessor identity_center_application_arn: String?
+      attr_accessor user_background_sessions_enabled: bool?
     end
 
     class IdentityCenterConfigurationInput
@@ -384,10 +493,12 @@ module Aws::EMRServerless
 
       def initialize: (
         ?identity_center_instance_arn: String,
+        ?user_background_sessions_enabled: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor identity_center_instance_arn: String?
+      attr_accessor user_background_sessions_enabled: bool?
     end
 
     class ImageConfiguration
@@ -396,11 +507,13 @@ module Aws::EMRServerless
       def initialize: (
         ?image_uri: String,
         ?resolved_image_digest: String,
+        ?application_level_digest_resolution: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor image_uri: String?
       attr_accessor resolved_image_digest: String?
+      attr_accessor application_level_digest_resolution: bool?
     end
 
     class ImageConfigurationInput
@@ -408,10 +521,12 @@ module Aws::EMRServerless
 
       def initialize: (
         ?image_uri: String,
+        ?application_level_digest_resolution: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor image_uri: String?
+      attr_accessor application_level_digest_resolution: bool?
     end
 
     class InitialCapacityConfig
@@ -433,11 +548,13 @@ module Aws::EMRServerless
       def initialize: (
         ?studio_enabled: bool,
         ?livy_endpoint_enabled: bool,
+        ?session_enabled: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor studio_enabled: bool?
       attr_accessor livy_endpoint_enabled: bool?
+      attr_accessor session_enabled: bool?
     end
 
     class InternalServerException
@@ -469,6 +586,17 @@ module Aws::EMRServerless
       end
       class Unknown < JobDriver
       end
+    end
+
+    class JobLevelCostAllocationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
     end
 
     class JobRun
@@ -503,6 +631,8 @@ module Aws::EMRServerless
         ?started_at: Time,
         ?ended_at: Time,
         ?queued_duration_milliseconds: Integer,
+        ?image_configuration: Types::ImageConfiguration,
+        ?worker_type_specifications: Hash[String, Types::WorkerTypeSpecification],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -534,6 +664,8 @@ module Aws::EMRServerless
       attr_accessor started_at: Time?
       attr_accessor ended_at: Time?
       attr_accessor queued_duration_milliseconds: Integer?
+      attr_accessor image_configuration: Types::ImageConfiguration?
+      attr_accessor worker_type_specifications: Hash[String, Types::WorkerTypeSpecification]?
     end
 
     class JobRunAttemptSummary
@@ -723,6 +855,40 @@ module Aws::EMRServerless
       attr_accessor next_token: String?
     end
 
+    class ListSessionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?states: Array[String],
+        ?created_at_after: Time,
+        ?created_at_before: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor states: Array[String]?
+      attr_accessor created_at_after: Time?
+      attr_accessor created_at_before: Time?
+    end
+
+    class ListSessionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sessions: Array[Types::SessionSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sessions: Array[Types::SessionSummary]?
+      attr_accessor next_token: String?
+    end
+
     class ListTagsForResourceInput
       include Smithy::Schema::Structure
 
@@ -890,6 +1056,99 @@ module Aws::EMRServerless
       attr_accessor message: String?
     end
 
+    class Session
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?session_id: String,
+        ?arn: String,
+        ?name: String,
+        ?state: String,
+        ?state_details: String,
+        ?release_label: String,
+        ?execution_role_arn: String,
+        ?created_by: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?started_at: Time,
+        ?ended_at: Time,
+        ?idle_since: Time,
+        ?configuration_overrides: Types::SessionConfigurationOverrides,
+        ?network_configuration: Types::NetworkConfiguration,
+        ?idle_timeout_minutes: Integer,
+        ?tags: Hash[String, String],
+        ?total_resource_utilization: Types::TotalResourceUtilization,
+        ?billed_resource_utilization: Types::ResourceUtilization,
+        ?total_execution_duration_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor session_id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor state: String?
+      attr_accessor state_details: String?
+      attr_accessor release_label: String?
+      attr_accessor execution_role_arn: String?
+      attr_accessor created_by: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor started_at: Time?
+      attr_accessor ended_at: Time?
+      attr_accessor idle_since: Time?
+      attr_accessor configuration_overrides: Types::SessionConfigurationOverrides?
+      attr_accessor network_configuration: Types::NetworkConfiguration?
+      attr_accessor idle_timeout_minutes: Integer?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor total_resource_utilization: Types::TotalResourceUtilization?
+      attr_accessor billed_resource_utilization: Types::ResourceUtilization?
+      attr_accessor total_execution_duration_seconds: Integer?
+    end
+
+    class SessionConfigurationOverrides
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?runtime_configuration: Array[Types::Configuration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor runtime_configuration: Array[Types::Configuration]?
+    end
+
+    class SessionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?session_id: String,
+        ?arn: String,
+        ?name: String,
+        ?state: String,
+        ?state_details: String,
+        ?release_label: String,
+        ?execution_role_arn: String,
+        ?created_by: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor session_id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor state: String?
+      attr_accessor state_details: String?
+      attr_accessor release_label: String?
+      attr_accessor execution_role_arn: String?
+      attr_accessor created_by: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
     class SparkSubmit
       include Smithy::Schema::Structure
 
@@ -971,6 +1230,44 @@ module Aws::EMRServerless
       attr_accessor arn: String?
     end
 
+    class StartSessionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?client_token: String,
+        ?execution_role_arn: String,
+        ?configuration_overrides: Types::SessionConfigurationOverrides,
+        ?tags: Hash[String, String],
+        ?idle_timeout_minutes: Integer,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor client_token: String?
+      attr_accessor execution_role_arn: String?
+      attr_accessor configuration_overrides: Types::SessionConfigurationOverrides?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor idle_timeout_minutes: Integer?
+      attr_accessor name: String?
+    end
+
+    class StartSessionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?session_id: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor session_id: String?
+      attr_accessor arn: String?
+    end
+
     class StopApplicationInput
       include Smithy::Schema::Structure
 
@@ -1011,6 +1308,32 @@ module Aws::EMRServerless
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+    end
+
+    class TerminateSessionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?session_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor session_id: String?
+    end
+
+    class TerminateSessionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?session_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor session_id: String?
     end
 
     class TotalResourceUtilization
@@ -1068,8 +1391,10 @@ module Aws::EMRServerless
         ?release_label: String,
         ?runtime_configuration: Array[Types::Configuration],
         ?monitoring_configuration: Types::MonitoringConfiguration,
+        ?disk_encryption_configuration: Types::DiskEncryptionConfiguration,
         ?scheduler_configuration: Types::SchedulerConfiguration,
         ?identity_center_configuration: Types::IdentityCenterConfigurationInput,
+        ?job_level_cost_allocation_configuration: Types::JobLevelCostAllocationConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1087,8 +1412,10 @@ module Aws::EMRServerless
       attr_accessor release_label: String?
       attr_accessor runtime_configuration: Array[Types::Configuration]?
       attr_accessor monitoring_configuration: Types::MonitoringConfiguration?
+      attr_accessor disk_encryption_configuration: Types::DiskEncryptionConfiguration?
       attr_accessor scheduler_configuration: Types::SchedulerConfiguration?
       attr_accessor identity_center_configuration: Types::IdentityCenterConfigurationInput?
+      attr_accessor job_level_cost_allocation_configuration: Types::JobLevelCostAllocationConfiguration?
     end
 
     class UpdateApplicationOutput

@@ -10,8 +10,8 @@ module Aws::Pricing
     AttributeNameList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.pricing#AttributeNameList", name: "AttributeNameList")
     AttributeValue = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pricing#AttributeValue", name: "AttributeValue")
     AttributeValueList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.pricing#AttributeValueList", name: "AttributeValueList")
-    BoxedInteger = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.pricing#BoxedInteger", name: "BoxedInteger", traits: {"smithy.api#default" => 100, "smithy.api#range" => {"min" => 1, "max" => 100}})
     CurrencyCode = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pricing#CurrencyCode", name: "CurrencyCode", traits: {"smithy.api#pattern" => "^[A-Z]{3}$"})
+    DescribeServicesMaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.pricing#DescribeServicesMaxResults", name: "DescribeServicesMaxResults", traits: {"smithy.api#default" => 100, "smithy.api#range" => {"min" => 1, "max" => 100}})
     DescribeServicesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pricing#DescribeServicesRequest", name: "DescribeServicesRequest")
     DescribeServicesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pricing#DescribeServicesResponse", name: "DescribeServicesResponse")
     EffectiveDate = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.pricing#EffectiveDate", name: "EffectiveDate")
@@ -23,10 +23,12 @@ module Aws::Pricing
     FilterType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.pricing#FilterType", name: "FilterType")
     Filters = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.pricing#Filters", name: "Filters", traits: {"smithy.api#length" => {"min" => 0, "max" => 50}})
     FormatVersion = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pricing#FormatVersion", name: "FormatVersion", traits: {"smithy.api#length" => {"min" => 1, "max" => 32}})
+    GetAttributeValuesMaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.pricing#GetAttributeValuesMaxResults", name: "GetAttributeValuesMaxResults", traits: {"smithy.api#default" => 100, "smithy.api#range" => {"min" => 1, "max" => 10000}})
     GetAttributeValuesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pricing#GetAttributeValuesRequest", name: "GetAttributeValuesRequest")
     GetAttributeValuesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pricing#GetAttributeValuesResponse", name: "GetAttributeValuesResponse")
     GetPriceListFileUrlRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pricing#GetPriceListFileUrlRequest", name: "GetPriceListFileUrlRequest")
     GetPriceListFileUrlResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pricing#GetPriceListFileUrlResponse", name: "GetPriceListFileUrlResponse")
+    GetProductsMaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.pricing#GetProductsMaxResults", name: "GetProductsMaxResults", traits: {"smithy.api#default" => 100, "smithy.api#range" => {"min" => 1, "max" => 100}})
     GetProductsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pricing#GetProductsRequest", name: "GetProductsRequest")
     GetProductsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pricing#GetProductsResponse", name: "GetProductsResponse")
     InternalErrorException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pricing#InternalErrorException", name: "InternalErrorException", traits: {"smithy.api#error" => "server", "smithy.api#httpError" => 500, "smithy.api#retryable" => {}})
@@ -60,7 +62,7 @@ module Aws::Pricing
     DescribeServicesRequest.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ServiceCode"))
     DescribeServicesRequest.add_member(:format_version, ::Smithy::Schema::Shapes::MemberShape.new(target: FormatVersion, name: "FormatVersion"))
     DescribeServicesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken"))
-    DescribeServicesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedInteger, name: "MaxResults", traits: {"smithy.api#default" => nil}))
+    DescribeServicesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribeServicesMaxResults, name: "MaxResults", traits: {"smithy.api#default" => nil}))
     DescribeServicesRequest.type = Types::DescribeServicesRequest
     DescribeServicesResponse.add_member(:services, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceList, name: "Services"))
     DescribeServicesResponse.add_member(:format_version, ::Smithy::Schema::Shapes::MemberShape.new(target: FormatVersion, name: "FormatVersion"))
@@ -82,7 +84,7 @@ module Aws::Pricing
     GetAttributeValuesRequest.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ServiceCode", traits: {"smithy.api#required" => {}}))
     GetAttributeValuesRequest.add_member(:attribute_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "AttributeName", traits: {"smithy.api#required" => {}}))
     GetAttributeValuesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken"))
-    GetAttributeValuesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedInteger, name: "MaxResults", traits: {"smithy.api#default" => nil}))
+    GetAttributeValuesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: GetAttributeValuesMaxResults, name: "MaxResults", traits: {"smithy.api#default" => nil}))
     GetAttributeValuesRequest.type = Types::GetAttributeValuesRequest
     GetAttributeValuesResponse.add_member(:attribute_values, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValueList, name: "AttributeValues"))
     GetAttributeValuesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken"))
@@ -96,7 +98,7 @@ module Aws::Pricing
     GetProductsRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: Filters, name: "Filters"))
     GetProductsRequest.add_member(:format_version, ::Smithy::Schema::Shapes::MemberShape.new(target: FormatVersion, name: "FormatVersion"))
     GetProductsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken"))
-    GetProductsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedInteger, name: "MaxResults", traits: {"smithy.api#default" => nil}))
+    GetProductsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: GetProductsMaxResults, name: "MaxResults", traits: {"smithy.api#default" => nil}))
     GetProductsRequest.type = Types::GetProductsRequest
     GetProductsResponse.add_member(:format_version, ::Smithy::Schema::Shapes::MemberShape.new(target: FormatVersion, name: "FormatVersion"))
     GetProductsResponse.add_member(:price_list, ::Smithy::Schema::Shapes::MemberShape.new(target: PriceListJsonItems, name: "PriceList"))
@@ -140,12 +142,13 @@ module Aws::Pricing
       service.id = "com.amazonaws.pricing#AWSPriceListService"
       service.name = "AWSPriceListService"
       service.version = "2017-10-15"
-      service.traits = {"aws.api#service" => {"sdkId" => "Pricing", "arnNamespace" => "pricing", "cloudFormationName" => "Pricing", "cloudTrailEventSource" => "pricelist.amazonaws.com", "endpointPrefix" => "api.pricing"}, "aws.auth#sigv4" => {"name" => "pricing"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "AWS Price List Service"}
+      service.traits = {"aws.api#service" => {"sdkId" => "Pricing", "arnNamespace" => "pricing", "cloudFormationName" => "Pricing", "cloudTrailEventSource" => "pricelist.amazonaws.com", "endpointPrefix" => "api.pricing"}, "aws.auth#sigv4" => {"name" => "pricing"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "AWS Price List Service", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws"]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://api.pricing-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://api.pricing-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://api.pricing.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://api.pricing.{Region}.amazonaws.com", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://api.pricing.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 14, "nodes" => "/////wAAAAH/////AAAAAAAAAA0AAAADAAAAAQAAAAQF9eEMAAAAAgAAAAUF9eEMAAAAAwAAAAkAAAAGAAAABAAAAAgAAAAHAAAABwX14QoF9eELAAAABQX14QgF9eEJAAAABAAAAAsAAAAKAAAABgX14QYF9eEHAAAABQAAAAwF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAAOAAAABAX14QIF9eED"}}
       service.add_operation(:describe_services, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pricing#DescribeServices"
         operation.name = "DescribeServices"
         operation.input = DescribeServicesRequest
         operation.output = DescribeServicesResponse
+        operation.errors << AccessDeniedException
         operation.errors << ExpiredNextTokenException
         operation.errors << InternalErrorException
         operation.errors << InvalidNextTokenException
@@ -160,6 +163,7 @@ module Aws::Pricing
         operation.name = "GetAttributeValues"
         operation.input = GetAttributeValuesRequest
         operation.output = GetAttributeValuesResponse
+        operation.errors << AccessDeniedException
         operation.errors << ExpiredNextTokenException
         operation.errors << InternalErrorException
         operation.errors << InvalidNextTokenException
@@ -187,6 +191,7 @@ module Aws::Pricing
         operation.name = "GetProducts"
         operation.input = GetProductsRequest
         operation.output = GetProductsResponse
+        operation.errors << AccessDeniedException
         operation.errors << ExpiredNextTokenException
         operation.errors << InternalErrorException
         operation.errors << InvalidNextTokenException

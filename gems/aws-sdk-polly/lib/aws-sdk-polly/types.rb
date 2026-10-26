@@ -6,6 +6,28 @@ module Aws::Polly
   # This module contains the types returned by client operations.
   module Types
 
+    # <p>Contains a chunk of synthesized audio data.</p>
+    # @!attribute audio_chunk
+    #   <p>A chunk of synthesized audio data encoded in the format specified by the
+    #         <code>OutputFormat</code> parameter.</p>
+    #   @return [String]
+    class AudioEvent < Struct.new(
+      nil,
+      :audio_chunk,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Indicates the end of the input stream. After sending this event, the input stream
+    #      will be closed and all audio will be returned.</p>
+    class CloseStreamEvent < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute name
     #   <p>The name of the lexicon to delete. Must be an existing lexicon in
     #         the region.</p>
@@ -88,6 +110,24 @@ module Aws::Polly
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration that controls when synthesized audio data is sent on the output stream.</p>
+    # @!attribute force
+    #   <p>Specifies whether to force the synthesis engine to immediately
+    #         write buffered audio data to the output stream.</p>
+    #   @return [Boolean]
+    class FlushStreamConfiguration < Struct.new(
+      nil,
+      :force,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:force] = false unless options.key?(:force)
+        super
+      end
     end
 
     # @!attribute name
@@ -497,6 +537,25 @@ module Aws::Polly
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The request would cause a service quota to be exceeded.</p>
+    # @!attribute message
+    #   @return [String]
+    # @!attribute quota_code
+    #   <p>The quota code identifying the specific quota.</p>
+    #   @return [String]
+    # @!attribute service_code
+    #   <p>The service code identifying the originating service.</p>
+    #   @return [String]
+    class ServiceQuotaExceededException < Struct.new(
+      nil,
+      :message,
+      :quota_code,
+      :service_code,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>SSML speech marks are not supported for plain text-type
     #       input.</p>
     # @!attribute message
@@ -504,6 +563,117 @@ module Aws::Polly
     class SsmlMarksNotSupportedForTextTypeException < Struct.new(
       nil,
       :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Inbound event stream for sending input and control events to manage bidirectional speech synthesis.</p>
+    # @!attribute text_event
+    #   <p>A text event containing content to be synthesized.</p>
+    #   @return [Types::TextEvent]
+    # @!attribute close_stream_event
+    #   <p>An event indicating the end of the input stream.</p>
+    #   @return [Types::CloseStreamEvent]
+    class StartSpeechSynthesisStreamActionStream < Struct.new(
+      :text_event,
+      :close_stream_event,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class TextEvent < StartSpeechSynthesisStreamActionStream; end
+      class CloseStreamEvent < StartSpeechSynthesisStreamActionStream; end
+      class Unknown < StartSpeechSynthesisStreamActionStream; end
+    end
+
+    # <p>Outbound event stream that contains synthesized audio data and stream status events.</p>
+    # @!attribute audio_event
+    #   <p>An audio event containing synthesized speech.</p>
+    #   @return [Types::AudioEvent]
+    # @!attribute stream_closed_event
+    #   <p>An event, with summary information, indicating the stream has closed.</p>
+    #   @return [Types::StreamClosedEvent]
+    # @!attribute validation_exception
+    #   <p>An exception indicating the input failed validation.</p>
+    #   @return [Types::ValidationException]
+    # @!attribute service_quota_exceeded_exception
+    #   <p>An exception indicating a service quota would be exceeded.</p>
+    #   @return [Types::ServiceQuotaExceededException]
+    # @!attribute service_failure_exception
+    #   <p>An unknown condition has caused a service failure.</p>
+    #   @return [Types::ServiceFailureException]
+    # @!attribute throttling_exception
+    #   <p>An exception indicating the request was throttled.</p>
+    #   @return [Types::ThrottlingException]
+    class StartSpeechSynthesisStreamEventStream < Struct.new(
+      :audio_event,
+      :stream_closed_event,
+      :validation_exception,
+      :service_quota_exceeded_exception,
+      :service_failure_exception,
+      :throttling_exception,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class AudioEvent < StartSpeechSynthesisStreamEventStream; end
+      class StreamClosedEvent < StartSpeechSynthesisStreamEventStream; end
+      class ValidationException < StartSpeechSynthesisStreamEventStream; end
+      class ServiceQuotaExceededException < StartSpeechSynthesisStreamEventStream; end
+      class ServiceFailureException < StartSpeechSynthesisStreamEventStream; end
+      class ThrottlingException < StartSpeechSynthesisStreamEventStream; end
+      class Unknown < StartSpeechSynthesisStreamEventStream; end
+    end
+
+    # @!attribute engine
+    #   <p>Specifies the engine for Amazon Polly to use when processing input text for speech synthesis.
+    #         Currently, only the <code>generative</code> engine is supported.
+    #         If you specify a voice that the selected engine doesn't support, Amazon Polly returns an error.</p>
+    #   @return [String]
+    # @!attribute language_code
+    #   <p>An optional parameter that sets the language code for the speech synthesis request. Specify this parameter only
+    #         when using a bilingual voice. If a bilingual voice is used and no language code is specified, Amazon Polly
+    #         uses the default language of the bilingual voice.</p>
+    #   @return [String]
+    # @!attribute lexicon_names
+    #   <p>The names of one or more pronunciation lexicons for the service to apply
+    #         during synthesis. Amazon Polly applies lexicons only when the lexicon language matches the voice language.</p>
+    #   @return [Array<String>]
+    # @!attribute output_format
+    #   <p>The audio format for the synthesized speech. Currently, Amazon Polly does not support JSON speech marks.</p>
+    #   @return [String]
+    # @!attribute sample_rate
+    #   <p>The audio frequency, specified in Hz.</p>
+    #   @return [String]
+    # @!attribute voice_id
+    #   <p>The voice to use in synthesis. To get a list of available voice IDs, use the <a href="https://docs.aws.amazon.com/polly/latest/API/API_DescribeVoices.html">DescribeVoices</a> operation.</p>
+    #   @return [String]
+    # @!attribute action_stream
+    #   <p>The input event stream that contains text events and stream control events.</p>
+    #   @return [Types::StartSpeechSynthesisStreamActionStream]
+    class StartSpeechSynthesisStreamInput < Struct.new(
+      nil,
+      :engine,
+      :language_code,
+      :lexicon_names,
+      :output_format,
+      :sample_rate,
+      :voice_id,
+      :action_stream,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute event_stream
+    #   <p>The output event stream that contains synthesized audio events and stream status events.</p>
+    #   @return [Types::StartSpeechSynthesisStreamEventStream]
+    class StartSpeechSynthesisStreamOutput < Struct.new(
+      nil,
+      :event_stream,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -532,7 +702,7 @@ module Aws::Polly
     #   @return [Array<String>]
     # @!attribute output_format
     #   <p>The format in which the returned output will be encoded. For audio
-    #         stream, this will be mp3, ogg_vorbis, or pcm. For speech marks, this will
+    #         stream, this will be mp3, ogg_vorbis, ogg_opus, mu-law, a-law, or pcm. For speech marks, this will
     #         be json. </p>
     #   @return [String]
     # @!attribute output_s3_bucket_name
@@ -549,6 +719,8 @@ module Aws::Polly
     #         is "24000". The default value for generative voices is "24000".</p>
     #            <p>Valid values for pcm are "8000" and "16000" The default value is
     #         "16000". </p>
+    #            <p>Valid value for ogg_opus is "48000". </p>
+    #            <p>Valid value for mu-law and a-law is "8000". </p>
     #   @return [String]
     # @!attribute sns_topic_arn
     #   <p>ARN for the SNS topic optionally used for providing status
@@ -599,6 +771,23 @@ module Aws::Polly
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Indicates that the synthesis stream is closed and provides summary information.</p>
+    # @!attribute request_characters
+    #   <p>The total number of characters synthesized during the streaming session.</p>
+    #   @return [Integer]
+    class StreamClosedEvent < Struct.new(
+      nil,
+      :request_characters,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:request_characters] = 0 unless options.key?(:request_characters)
+        super
+      end
+    end
+
     # <p>SynthesisTask object that provides information about a speech
     #       synthesis task.</p>
     # @!attribute engine
@@ -637,7 +826,7 @@ module Aws::Polly
     #   @return [Array<String>]
     # @!attribute output_format
     #   <p>The format in which the returned output will be encoded. For audio
-    #         stream, this will be mp3, ogg_vorbis, or pcm. For speech marks, this will
+    #         stream, this will be mp3, ogg_vorbis, ogg_opus, mu-law, a-law, or pcm. For speech marks, this will
     #         be json. </p>
     #   @return [String]
     # @!attribute sample_rate
@@ -648,6 +837,8 @@ module Aws::Polly
     #         is "24000". The default value for generative voices is "24000".</p>
     #            <p>Valid values for pcm are "8000" and "16000" The default value is
     #         "16000". </p>
+    #            <p>Valid value for ogg_opus is "48000". </p>
+    #            <p>Valid value for mu-law and a-law is "8000". </p>
     #   @return [String]
     # @!attribute speech_mark_types
     #   <p>The type of speech marks returned for the input text.</p>
@@ -735,7 +926,7 @@ module Aws::Polly
     #   @return [Array<String>]
     # @!attribute output_format
     #   <p> The format in which the returned output will be encoded. For audio
-    #         stream, this will be mp3, ogg_vorbis, or pcm. For speech marks, this will
+    #         stream, this will be mp3, ogg_vorbis, ogg_opus, mu-law, a-law or pcm. For speech marks, this will
     #         be json. </p>
     #            <p>When pcm is used, the content returned is audio/pcm in a signed
     #         16-bit, 1 channel (mono), little-endian format. </p>
@@ -747,6 +938,8 @@ module Aws::Polly
     #         is "24000". The default value for generative voices is "24000".</p>
     #            <p>Valid values for pcm are "8000" and "16000" The default value is
     #         "16000". </p>
+    #            <p>Valid value for ogg_opus is "48000". </p>
+    #            <p>Valid value for mu-law and a-law is "8000". </p>
     #   @return [String]
     # @!attribute speech_mark_types
     #   <p>The type of speech marks returned for the input text.</p>
@@ -799,9 +992,26 @@ module Aws::Polly
     #             audio/ogg. </p>
     #               </li>
     #               <li>
+    #                  <p> If you request <code>ogg_opus</code> as the
+    #               <code>OutputFormat</code>, the <code>ContentType</code> returned is
+    #             audio/ogg. </p>
+    #               </li>
+    #               <li>
     #                  <p> If you request <code>pcm</code> as the
     #               <code>OutputFormat</code>, the <code>ContentType</code> returned is
     #             audio/pcm in a signed 16-bit, 1 channel (mono), little-endian format.
+    #           </p>
+    #               </li>
+    #               <li>
+    #                  <p> If you request <code>mu-law</code> as the
+    #               <code>OutputFormat</code>, the <code>ContentType</code> returned is
+    #             audio/mulaw.
+    #           </p>
+    #               </li>
+    #               <li>
+    #                  <p> If you request <code>a-law</code> as the
+    #               <code>OutputFormat</code>, the <code>ContentType</code> returned is
+    #             audio/alaw.
     #           </p>
     #               </li>
     #               <li>
@@ -831,6 +1041,27 @@ module Aws::Polly
       end
     end
 
+    # <p>Contains text content to be synthesized into speech.</p>
+    # @!attribute text
+    #   <p>The text content to synthesize. If you specify <code>ssml</code> as the
+    #         <code>TextType</code>, follow the SSML format for the input text.</p>
+    #   @return [String]
+    # @!attribute text_type
+    #   <p>Specifies whether the input text is plain text or SSML. Default: plain text.</p>
+    #   @return [String]
+    # @!attribute flush_stream_configuration
+    #   <p>Configuration for controlling when synthesized audio flushes to the output stream.</p>
+    #   @return [Types::FlushStreamConfiguration]
+    class TextEvent < Struct.new(
+      nil,
+      :text,
+      :text_type,
+      :flush_stream_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The value of the "Text" parameter is longer than the accepted
     #       limits. For the <code>SynthesizeSpeech</code> API, the limit for input
     #       text is a maximum of 6000 characters total, of which no more than 3000 can
@@ -843,6 +1074,37 @@ module Aws::Polly
     class TextLengthExceededException < Struct.new(
       nil,
       :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The request was denied because of request throttling.</p>
+    # @!attribute message
+    #   @return [String]
+    # @!attribute throttling_reasons
+    #   <p>A list of reasons explaining why the request was throttled.</p>
+    #   @return [Array<Types::ThrottlingReason>]
+    class ThrottlingException < Struct.new(
+      nil,
+      :message,
+      :throttling_reasons,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Provides information about a specific throttling reason.</p>
+    # @!attribute reason
+    #   <p>The reason code explaining why the request was throttled.</p>
+    #   @return [String]
+    # @!attribute resource
+    #   <p>The resource that caused the throttling.</p>
+    #   @return [String]
+    class ThrottlingReason < Struct.new(
+      nil,
+      :reason,
+      :resource,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -866,6 +1128,41 @@ module Aws::Polly
     #   @return [String]
     class UnsupportedPlsLanguageException < Struct.new(
       nil,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The input fails to satisfy the constraints specified by the service.</p>
+    # @!attribute message
+    #   @return [String]
+    # @!attribute reason
+    #   <p>The reason the request failed validation.</p>
+    #   @return [String]
+    # @!attribute fields
+    #   <p>The fields that caused the validation error.</p>
+    #   @return [Array<Types::ValidationExceptionField>]
+    class ValidationException < Struct.new(
+      nil,
+      :message,
+      :reason,
+      :fields,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Information about a field that failed validation.</p>
+    # @!attribute name
+    #   <p>The name of the field that failed validation.</p>
+    #   @return [String]
+    # @!attribute message
+    #   <p>A message describing why the field failed validation.</p>
+    #   @return [String]
+    class ValidationExceptionField < Struct.new(
+      nil,
+      :name,
       :message,
       keyword_init: true
     )

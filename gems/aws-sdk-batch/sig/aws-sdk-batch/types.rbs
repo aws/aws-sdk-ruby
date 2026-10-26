@@ -22,12 +22,14 @@ module Aws::Batch
 
       def initialize: (
         ?status_summary: Hash[String, Integer],
+        ?status_summary_last_updated_at: Integer,
         ?size: Integer,
         ?index: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor status_summary: Hash[String, Integer]?
+      attr_accessor status_summary_last_updated_at: Integer?
       attr_accessor size: Integer?
       attr_accessor index: Integer?
     end
@@ -38,11 +40,15 @@ module Aws::Batch
       def initialize: (
         ?size: Integer,
         ?index: Integer,
+        ?status_summary: Hash[String, Integer],
+        ?status_summary_last_updated_at: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor size: Integer?
       attr_accessor index: Integer?
+      attr_accessor status_summary: Hash[String, Integer]?
+      attr_accessor status_summary_last_updated_at: Integer?
     end
 
     module AssignPublicIp
@@ -146,8 +152,10 @@ module Aws::Batch
     module CRAllocationStrategy
       BEST_FIT: String
       BEST_FIT_PROGRESSIVE: String
+      BEST_FIT_PROGRESSIVE_ORDERED: String
       SPOT_CAPACITY_OPTIMIZED: String
       SPOT_PRICE_CAPACITY_OPTIMIZED: String
+      SPOT_CAPACITY_OPTIMIZED_PRIORITIZED: String
     end
 
     module CRType
@@ -155,12 +163,15 @@ module Aws::Batch
       SPOT: String
       FARGATE: String
       FARGATE_SPOT: String
+      ECS_MANAGED_INSTANCES: String
     end
 
     module CRUpdateAllocationStrategy
       BEST_FIT_PROGRESSIVE: String
+      BEST_FIT_PROGRESSIVE_ORDERED: String
       SPOT_CAPACITY_OPTIMIZED: String
       SPOT_PRICE_CAPACITY_OPTIMIZED: String
+      SPOT_CAPACITY_OPTIMIZED_PRIORITIZED: String
     end
 
     class CancelJobRequest
@@ -185,6 +196,47 @@ module Aws::Batch
 
     end
 
+    class CancelJobsErrorDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job: String,
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job: String?
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class CancelJobsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?jobs: Array[String],
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor jobs: Array[String]?
+      attr_accessor reason: String?
+    end
+
+    class CancelJobsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?successful: Array[String],
+        ?errors: Array[Types::CancelJobsErrorDetail],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor successful: Array[String]?
+      attr_accessor errors: Array[Types::CancelJobsErrorDetail]?
+    end
+
     class CapacityLimit
       include Smithy::Schema::Structure
 
@@ -196,6 +248,19 @@ module Aws::Batch
 
       attr_accessor max_capacity: Integer?
       attr_accessor capacity_unit: String?
+    end
+
+    class CapacityReservationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reservation_group_arn: String,
+        ?reservation_preference: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reservation_group_arn: String?
+      attr_accessor reservation_preference: String?
     end
 
     class ClientException
@@ -229,6 +294,7 @@ module Aws::Batch
         ?container_orchestration_type: String,
         ?uuid: String,
         ?context: String,
+        ?ecs_settings: Types::EcsSettings,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -248,6 +314,7 @@ module Aws::Batch
       attr_accessor container_orchestration_type: String?
       attr_accessor uuid: String?
       attr_accessor context: String?
+      attr_accessor ecs_settings: Types::EcsSettings?
     end
 
     class ComputeEnvironmentOrder
@@ -284,6 +351,9 @@ module Aws::Batch
         ?spot_iam_fleet_role: String,
         ?launch_template: Types::LaunchTemplateSpecification,
         ?ec2_configuration: Array[Types::Ec2Configuration],
+        ?scaling_policy: Types::ComputeScalingPolicy,
+        ?managed_instances_provider: Types::ManagedInstancesProvider,
+        ?capacity_tags: Hash[String, String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -304,6 +374,9 @@ module Aws::Batch
       attr_accessor spot_iam_fleet_role: String?
       attr_accessor launch_template: Types::LaunchTemplateSpecification?
       attr_accessor ec2_configuration: Array[Types::Ec2Configuration]?
+      attr_accessor scaling_policy: Types::ComputeScalingPolicy?
+      attr_accessor managed_instances_provider: Types::ManagedInstancesProvider?
+      attr_accessor capacity_tags: Hash[String, String]?
     end
 
     class ComputeResourceUpdate
@@ -327,6 +400,9 @@ module Aws::Batch
         ?update_to_latest_image_version: bool,
         ?type: String,
         ?image_id: String,
+        ?scaling_policy: Types::ComputeScalingPolicy,
+        ?managed_instances_provider: Types::UpdateManagedInstancesProviderConfiguration,
+        ?capacity_tags: Hash[String, String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -347,6 +423,20 @@ module Aws::Batch
       attr_accessor update_to_latest_image_version: bool?
       attr_accessor type: String?
       attr_accessor image_id: String?
+      attr_accessor scaling_policy: Types::ComputeScalingPolicy?
+      attr_accessor managed_instances_provider: Types::UpdateManagedInstancesProviderConfiguration?
+      attr_accessor capacity_tags: Hash[String, String]?
+    end
+
+    class ComputeScalingPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?min_scale_down_delay_minutes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor min_scale_down_delay_minutes: Integer?
     end
 
     class ConsumableResourceProperties
@@ -461,6 +551,12 @@ module Aws::Batch
       attr_accessor enable_execute_command: bool?
     end
 
+    module ContainerInsights
+      ENABLED: String
+      ENHANCED: String
+      DISABLED: String
+    end
+
     class ContainerOverrides
       include Smithy::Schema::Structure
 
@@ -565,6 +661,7 @@ module Aws::Batch
         ?tags: Hash[String, String],
         ?eks_configuration: Types::EksConfiguration,
         ?context: String,
+        ?ecs_settings: Types::EcsSettings,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -577,6 +674,7 @@ module Aws::Batch
       attr_accessor tags: Hash[String, String]?
       attr_accessor eks_configuration: Types::EksConfiguration?
       attr_accessor context: String?
+      attr_accessor ecs_settings: Types::EcsSettings?
     end
 
     class CreateComputeEnvironmentResponse
@@ -662,17 +760,55 @@ module Aws::Batch
       attr_accessor job_queue_arn: String?
     end
 
+    class CreateQuotaShareRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?quota_share_name: String,
+        ?job_queue: String,
+        ?capacity_limits: Array[Types::QuotaShareCapacityLimit],
+        ?resource_sharing_configuration: Types::QuotaShareResourceSharingConfiguration,
+        ?preemption_configuration: Types::QuotaSharePreemptionConfiguration,
+        ?state: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor quota_share_name: String?
+      attr_accessor job_queue: String?
+      attr_accessor capacity_limits: Array[Types::QuotaShareCapacityLimit]?
+      attr_accessor resource_sharing_configuration: Types::QuotaShareResourceSharingConfiguration?
+      attr_accessor preemption_configuration: Types::QuotaSharePreemptionConfiguration?
+      attr_accessor state: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateQuotaShareResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?quota_share_name: String,
+        ?quota_share_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor quota_share_name: String?
+      attr_accessor quota_share_arn: String?
+    end
+
     class CreateSchedulingPolicyRequest
       include Smithy::Schema::Structure
 
       def initialize: (
         ?name: String,
+        ?quota_share_policy: Types::QuotaSharePolicy,
         ?fairshare_policy: Types::FairsharePolicy,
         ?tags: Hash[String, String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor name: String?
+      attr_accessor quota_share_policy: Types::QuotaSharePolicy?
       attr_accessor fairshare_policy: Types::FairsharePolicy?
       attr_accessor tags: Hash[String, String]?
     end
@@ -774,6 +910,26 @@ module Aws::Batch
     end
 
     class DeleteJobQueueResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteQuotaShareRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?quota_share_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor quota_share_arn: String?
+    end
+
+    class DeleteQuotaShareResponse
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -988,6 +1144,44 @@ module Aws::Batch
       attr_accessor jobs: Array[Types::JobDetail]?
     end
 
+    class DescribeQuotaShareRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?quota_share_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor quota_share_arn: String?
+    end
+
+    class DescribeQuotaShareResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?quota_share_name: String,
+        ?quota_share_arn: String,
+        ?job_queue_arn: String,
+        ?capacity_limits: Array[Types::QuotaShareCapacityLimit],
+        ?resource_sharing_configuration: Types::QuotaShareResourceSharingConfiguration,
+        ?preemption_configuration: Types::QuotaSharePreemptionConfiguration,
+        ?state: String,
+        ?status: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor quota_share_name: String?
+      attr_accessor quota_share_arn: String?
+      attr_accessor job_queue_arn: String?
+      attr_accessor capacity_limits: Array[Types::QuotaShareCapacityLimit]?
+      attr_accessor resource_sharing_configuration: Types::QuotaShareResourceSharingConfiguration?
+      attr_accessor preemption_configuration: Types::QuotaSharePreemptionConfiguration?
+      attr_accessor state: String?
+      attr_accessor status: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
     class DescribeSchedulingPoliciesRequest
       include Smithy::Schema::Structure
 
@@ -1054,6 +1248,7 @@ module Aws::Batch
 
       def initialize: (
         ?attempts: Array[Types::ServiceJobAttemptDetail],
+        ?capacity_usage: Array[Types::ServiceJobCapacityUsageDetail],
         ?created_at: Integer,
         ?is_terminated: bool,
         ?job_arn: String,
@@ -1062,10 +1257,14 @@ module Aws::Batch
         ?job_queue: String,
         ?latest_attempt: Types::LatestServiceJobAttempt,
         ?retry_strategy: Types::ServiceJobRetryStrategy,
+        ?scheduled_at: Integer,
         ?scheduling_priority: Integer,
         ?service_request_payload: String,
         ?service_job_type: String,
         ?share_identifier: String,
+        ?quota_share_name: String,
+        ?preemption_configuration: Types::ServiceJobPreemptionConfiguration,
+        ?preemption_summary: Types::ServiceJobPreemptionSummary,
         ?started_at: Integer,
         ?status: String,
         ?status_reason: String,
@@ -1076,6 +1275,7 @@ module Aws::Batch
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor attempts: Array[Types::ServiceJobAttemptDetail]?
+      attr_accessor capacity_usage: Array[Types::ServiceJobCapacityUsageDetail]?
       attr_accessor created_at: Integer?
       attr_accessor is_terminated: bool?
       attr_accessor job_arn: String?
@@ -1084,10 +1284,14 @@ module Aws::Batch
       attr_accessor job_queue: String?
       attr_accessor latest_attempt: Types::LatestServiceJobAttempt?
       attr_accessor retry_strategy: Types::ServiceJobRetryStrategy?
+      attr_accessor scheduled_at: Integer?
       attr_accessor scheduling_priority: Integer?
       attr_accessor service_request_payload: String?
       attr_accessor service_job_type: String?
       attr_accessor share_identifier: String?
+      attr_accessor quota_share_name: String?
+      attr_accessor preemption_configuration: Types::ServiceJobPreemptionConfiguration?
+      attr_accessor preemption_summary: Types::ServiceJobPreemptionSummary?
       attr_accessor started_at: Integer?
       attr_accessor status: String?
       attr_accessor status_reason: String?
@@ -1165,12 +1369,14 @@ module Aws::Batch
       def initialize: (
         ?image_type: String,
         ?image_id_override: String,
+        ?batch_image_status: String,
         ?image_kubernetes_version: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor image_type: String?
       attr_accessor image_id_override: String?
+      attr_accessor batch_image_status: String?
       attr_accessor image_kubernetes_version: String?
     end
 
@@ -1207,6 +1413,17 @@ module Aws::Batch
       attr_accessor task_properties: Array[Types::TaskPropertiesOverride]?
     end
 
+    class EcsSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?container_insights: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor container_insights: String?
+    end
+
     class EcsTaskDetails
       include Smithy::Schema::Structure
 
@@ -1224,6 +1441,7 @@ module Aws::Batch
         ?runtime_platform: Types::RuntimePlatform,
         ?volumes: Array[Types::Volume],
         ?enable_execute_command: bool,
+        ?network_mode: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1240,6 +1458,7 @@ module Aws::Batch
       attr_accessor runtime_platform: Types::RuntimePlatform?
       attr_accessor volumes: Array[Types::Volume]?
       attr_accessor enable_execute_command: bool?
+      attr_accessor network_mode: String?
     end
 
     class EcsTaskProperties
@@ -1257,6 +1476,7 @@ module Aws::Batch
         ?runtime_platform: Types::RuntimePlatform,
         ?volumes: Array[Types::Volume],
         ?enable_execute_command: bool,
+        ?network_mode: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1271,6 +1491,31 @@ module Aws::Batch
       attr_accessor runtime_platform: Types::RuntimePlatform?
       attr_accessor volumes: Array[Types::Volume]?
       attr_accessor enable_execute_command: bool?
+      attr_accessor network_mode: String?
+    end
+
+    class EksAccessEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?desired_state: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor desired_state: String?
+      attr_accessor status: String?
+    end
+
+    module EksAccessEntryDesiredState
+      ENABLED: String
+      DISABLED: String
+      INHERIT_FROM_CLUSTER: String
+    end
+
+    module EksAccessEntryStatus
+      ACTIVE: String
+      INACTIVE: String
     end
 
     class EksAttemptContainerDetail
@@ -1323,11 +1568,24 @@ module Aws::Batch
       def initialize: (
         ?eks_cluster_arn: String,
         ?kubernetes_namespace: String,
+        ?access_entry: Types::EksAccessEntry,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor eks_cluster_arn: String?
       attr_accessor kubernetes_namespace: String?
+      attr_accessor access_entry: Types::EksAccessEntry?
+    end
+
+    class EksConfigurationUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_entry: Types::EksAccessEntry,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_entry: Types::EksAccessEntry?
     end
 
     class EksContainer
@@ -1691,6 +1949,32 @@ module Aws::Batch
       attr_accessor action: String?
     end
 
+    class FairshareCapacityUsage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capacity_unit: String,
+        ?quantity: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capacity_unit: String?
+      attr_accessor quantity: Float?
+    end
+
+    class FairshareCapacityUtilization
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?share_identifier: String,
+        ?capacity_usage: Array[Types::FairshareCapacityUsage],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor share_identifier: String?
+      attr_accessor capacity_usage: Array[Types::FairshareCapacityUsage]?
+    end
+
     class FairsharePolicy
       include Smithy::Schema::Structure
 
@@ -1704,6 +1988,19 @@ module Aws::Batch
       attr_accessor share_decay_seconds: Integer?
       attr_accessor compute_reservation: Integer?
       attr_accessor share_distribution: Array[Types::ShareAttributes]?
+    end
+
+    class FairshareUtilizationDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?active_share_count: Integer,
+        ?top_capacity_utilization: Array[Types::FairshareCapacityUtilization],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor active_share_count: Integer?
+      attr_accessor top_capacity_utilization: Array[Types::FairshareCapacityUtilization]?
     end
 
     class FargatePlatformConfiguration
@@ -1761,6 +2058,32 @@ module Aws::Batch
       attr_accessor earliest_time_at_position: Integer?
     end
 
+    class FrontOfQuotaShareJobSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_arn: String,
+        ?earliest_time_at_position: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_arn: String?
+      attr_accessor earliest_time_at_position: Integer?
+    end
+
+    class FrontOfQuotaSharesDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?quota_shares: Hash[String, Array[Types::FrontOfQuotaShareJobSummary]],
+        ?last_updated_at: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor quota_shares: Hash[String, Array[Types::FrontOfQuotaShareJobSummary]]?
+      attr_accessor last_updated_at: Integer?
+    end
+
     class GetJobQueueSnapshotRequest
       include Smithy::Schema::Structure
 
@@ -1777,10 +2100,14 @@ module Aws::Batch
 
       def initialize: (
         ?front_of_queue: Types::FrontOfQueueDetail,
+        ?front_of_quota_shares: Types::FrontOfQuotaSharesDetail,
+        ?queue_utilization: Types::QueueSnapshotUtilizationDetail,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor front_of_queue: Types::FrontOfQueueDetail?
+      attr_accessor front_of_quota_shares: Types::FrontOfQuotaSharesDetail?
+      attr_accessor queue_utilization: Types::QueueSnapshotUtilizationDetail?
     end
 
     class Host
@@ -1805,6 +2132,82 @@ module Aws::Batch
       attr_accessor name: String?
     end
 
+    class InfrastructureOptimization
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scale_in_after: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scale_in_after: Integer?
+    end
+
+    class InstanceLaunchTemplate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ec2_instance_profile_arn: String,
+        ?network_configuration: Types::ManagedInstancesNetworkConfiguration,
+        ?instance_requirements: Types::InstanceRequirementsRequest,
+        ?capacity_option_type: String,
+        ?storage_configuration: Types::ManagedInstancesStorageConfiguration,
+        ?monitoring: String,
+        ?fips_enabled: bool,
+        ?capacity_reservations: Types::CapacityReservationRequest,
+        ?instance_metadata_tags_propagation: bool,
+        ?local_storage_configuration: Types::ManagedInstancesLocalStorageConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ec2_instance_profile_arn: String?
+      attr_accessor network_configuration: Types::ManagedInstancesNetworkConfiguration?
+      attr_accessor instance_requirements: Types::InstanceRequirementsRequest?
+      attr_accessor capacity_option_type: String?
+      attr_accessor storage_configuration: Types::ManagedInstancesStorageConfiguration?
+      attr_accessor monitoring: String?
+      attr_accessor fips_enabled: bool?
+      attr_accessor capacity_reservations: Types::CapacityReservationRequest?
+      attr_accessor instance_metadata_tags_propagation: bool?
+      attr_accessor local_storage_configuration: Types::ManagedInstancesLocalStorageConfiguration?
+    end
+
+    class InstanceLaunchTemplateUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ec2_instance_profile_arn: String,
+        ?network_configuration: Types::ManagedInstancesNetworkConfiguration,
+        ?instance_requirements: Types::InstanceRequirementsRequest,
+        ?storage_configuration: Types::ManagedInstancesStorageConfiguration,
+        ?monitoring: String,
+        ?capacity_reservations: Types::CapacityReservationRequest,
+        ?instance_metadata_tags_propagation: bool,
+        ?local_storage_configuration: Types::ManagedInstancesLocalStorageConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ec2_instance_profile_arn: String?
+      attr_accessor network_configuration: Types::ManagedInstancesNetworkConfiguration?
+      attr_accessor instance_requirements: Types::InstanceRequirementsRequest?
+      attr_accessor storage_configuration: Types::ManagedInstancesStorageConfiguration?
+      attr_accessor monitoring: String?
+      attr_accessor capacity_reservations: Types::CapacityReservationRequest?
+      attr_accessor instance_metadata_tags_propagation: bool?
+      attr_accessor local_storage_configuration: Types::ManagedInstancesLocalStorageConfiguration?
+    end
+
+    class InstanceRequirementsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?allowed_instance_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor allowed_instance_types: Array[String]?
+    end
+
     module JQState
       ENABLED: String
       DISABLED: String
@@ -1817,6 +2220,19 @@ module Aws::Batch
       DELETED: String
       VALID: String
       INVALID: String
+    end
+
+    class JobCapacityUsageSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capacity_unit: String,
+        ?quantity: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capacity_unit: String?
+      attr_accessor quantity: Float?
     end
 
     class JobDefinition
@@ -1989,6 +2405,7 @@ module Aws::Batch
       ECS: String
       ECS_FARGATE: String
       SAGEMAKER_TRAINING: String
+      ECS_MANAGED_INSTANCES: String
     end
 
     class JobStateTimeLimitAction
@@ -2034,7 +2451,10 @@ module Aws::Batch
         ?job_arn: String,
         ?job_id: String,
         ?job_name: String,
+        ?capacity_usage: Array[Types::JobCapacityUsageSummary],
         ?created_at: Integer,
+        ?scheduled_at: Integer,
+        ?share_identifier: String,
         ?status: String,
         ?status_reason: String,
         ?started_at: Integer,
@@ -2043,13 +2463,18 @@ module Aws::Batch
         ?array_properties: Types::ArrayPropertiesSummary,
         ?node_properties: Types::NodePropertiesSummary,
         ?job_definition: String,
+        ?is_cancelled: bool,
+        ?is_terminated: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor job_arn: String?
       attr_accessor job_id: String?
       attr_accessor job_name: String?
+      attr_accessor capacity_usage: Array[Types::JobCapacityUsageSummary]?
       attr_accessor created_at: Integer?
+      attr_accessor scheduled_at: Integer?
+      attr_accessor share_identifier: String?
       attr_accessor status: String?
       attr_accessor status_reason: String?
       attr_accessor started_at: Integer?
@@ -2058,6 +2483,8 @@ module Aws::Batch
       attr_accessor array_properties: Types::ArrayPropertiesSummary?
       attr_accessor node_properties: Types::NodePropertiesSummary?
       attr_accessor job_definition: String?
+      attr_accessor is_cancelled: bool?
+      attr_accessor is_terminated: bool?
     end
 
     class JobTimeout
@@ -2292,6 +2719,34 @@ module Aws::Batch
       attr_accessor next_token: String?
     end
 
+    class ListQuotaSharesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_queue: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_queue: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListQuotaSharesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?quota_shares: Array[Types::QuotaShareDetail],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor quota_shares: Array[Types::QuotaShareDetail]?
+      attr_accessor next_token: String?
+    end
+
     class ListSchedulingPoliciesRequest
       include Smithy::Schema::Structure
 
@@ -2396,6 +2851,58 @@ module Aws::Batch
       AWSLOGS: String
       SPLUNK: String
       AWSFIRELENS: String
+    end
+
+    class ManagedInstancesLocalStorageConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?use_local_storage: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor use_local_storage: bool?
+    end
+
+    class ManagedInstancesNetworkConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subnets: Array[String],
+        ?security_groups: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subnets: Array[String]?
+      attr_accessor security_groups: Array[String]?
+    end
+
+    class ManagedInstancesProvider
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?propagate_tags: String,
+        ?infrastructure_role_arn: String,
+        ?instance_launch_template: Types::InstanceLaunchTemplate,
+        ?infrastructure_optimization: Types::InfrastructureOptimization,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor propagate_tags: String?
+      attr_accessor infrastructure_role_arn: String?
+      attr_accessor instance_launch_template: Types::InstanceLaunchTemplate?
+      attr_accessor infrastructure_optimization: Types::InfrastructureOptimization?
+    end
+
+    class ManagedInstancesStorageConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?storage_size_gi_b: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor storage_size_gi_b: Integer?
     end
 
     class MountPoint
@@ -2545,6 +3052,175 @@ module Aws::Batch
     module PlatformCapability
       EC2: String
       FARGATE: String
+      MANAGED_INSTANCES: String
+    end
+
+    class QueueSnapshotCapacityUsage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capacity_unit: String,
+        ?quantity: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capacity_unit: String?
+      attr_accessor quantity: Float?
+    end
+
+    class QueueSnapshotUtilizationDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?total_capacity_usage: Array[Types::QueueSnapshotCapacityUsage],
+        ?fairshare_utilization: Types::FairshareUtilizationDetail,
+        ?quota_share_utilization: Types::QuotaShareUtilizationDetail,
+        ?last_updated_at: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor total_capacity_usage: Array[Types::QueueSnapshotCapacityUsage]?
+      attr_accessor fairshare_utilization: Types::FairshareUtilizationDetail?
+      attr_accessor quota_share_utilization: Types::QuotaShareUtilizationDetail?
+      attr_accessor last_updated_at: Integer?
+    end
+
+    class QuotaShareCapacityLimit
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_capacity: Integer,
+        ?capacity_unit: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_capacity: Integer?
+      attr_accessor capacity_unit: String?
+    end
+
+    class QuotaShareCapacityUsage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capacity_unit: String,
+        ?quantity: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capacity_unit: String?
+      attr_accessor quantity: Float?
+    end
+
+    class QuotaShareCapacityUtilization
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?quota_share_name: String,
+        ?capacity_usage: Array[Types::QuotaShareCapacityUsage],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor quota_share_name: String?
+      attr_accessor capacity_usage: Array[Types::QuotaShareCapacityUsage]?
+    end
+
+    class QuotaShareDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?quota_share_name: String,
+        ?quota_share_arn: String,
+        ?job_queue_arn: String,
+        ?capacity_limits: Array[Types::QuotaShareCapacityLimit],
+        ?resource_sharing_configuration: Types::QuotaShareResourceSharingConfiguration,
+        ?preemption_configuration: Types::QuotaSharePreemptionConfiguration,
+        ?state: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor quota_share_name: String?
+      attr_accessor quota_share_arn: String?
+      attr_accessor job_queue_arn: String?
+      attr_accessor capacity_limits: Array[Types::QuotaShareCapacityLimit]?
+      attr_accessor resource_sharing_configuration: Types::QuotaShareResourceSharingConfiguration?
+      attr_accessor preemption_configuration: Types::QuotaSharePreemptionConfiguration?
+      attr_accessor state: String?
+      attr_accessor status: String?
+    end
+
+    module QuotaShareIdleResourceAssignmentStrategy
+      FIFO: String
+    end
+
+    module QuotaShareInSharePreemptionState
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class QuotaSharePolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?idle_resource_assignment_strategy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor idle_resource_assignment_strategy: String?
+    end
+
+    class QuotaSharePreemptionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?in_share_preemption: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor in_share_preemption: String?
+    end
+
+    class QuotaShareResourceSharingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?strategy: String,
+        ?borrow_limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor strategy: String?
+      attr_accessor borrow_limit: Integer?
+    end
+
+    module QuotaShareResourceSharingStrategy
+      RESERVE: String
+      LEND: String
+      LEND_AND_BORROW: String
+    end
+
+    module QuotaShareState
+      ENABLED: String
+      DISABLED: String
+    end
+
+    module QuotaShareStatus
+      CREATING: String
+      VALID: String
+      INVALID: String
+      UPDATING: String
+      DELETING: String
+    end
+
+    class QuotaShareUtilizationDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?top_capacity_utilization: Array[Types::QuotaShareCapacityUtilization],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor top_capacity_utilization: Array[Types::QuotaShareCapacityUtilization]?
     end
 
     class RegisterJobDefinitionRequest
@@ -2660,12 +3336,30 @@ module Aws::Batch
       attr_accessor cpu_architecture: String?
     end
 
+    class S3FilesVolumeConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_system_arn: String,
+        ?root_directory: String,
+        ?transit_encryption_port: Integer,
+        ?access_point_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_system_arn: String?
+      attr_accessor root_directory: String?
+      attr_accessor transit_encryption_port: Integer?
+      attr_accessor access_point_arn: String?
+    end
+
     class SchedulingPolicyDetail
       include Smithy::Schema::Structure
 
       def initialize: (
         ?name: String,
         ?arn: String,
+        ?quota_share_policy: Types::QuotaSharePolicy,
         ?fairshare_policy: Types::FairsharePolicy,
         ?tags: Hash[String, String],
       ) -> void
@@ -2673,6 +3367,7 @@ module Aws::Batch
 
       attr_accessor name: String?
       attr_accessor arn: String?
+      attr_accessor quota_share_policy: Types::QuotaSharePolicy?
       attr_accessor fairshare_policy: Types::FairsharePolicy?
       attr_accessor tags: Hash[String, String]?
     end
@@ -2783,6 +3478,32 @@ module Aws::Batch
       attr_accessor status_reason: String?
     end
 
+    class ServiceJobCapacityUsageDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capacity_unit: String,
+        ?quantity: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capacity_unit: String?
+      attr_accessor quantity: Float?
+    end
+
+    class ServiceJobCapacityUsageSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capacity_unit: String,
+        ?quantity: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capacity_unit: String?
+      attr_accessor quantity: Float?
+    end
+
     class ServiceJobEvaluateOnExit
       include Smithy::Schema::Structure
 
@@ -2794,6 +3515,47 @@ module Aws::Batch
 
       attr_accessor action: String?
       attr_accessor on_status_reason: String?
+    end
+
+    class ServiceJobPreemptedAttempt
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_resource_id: Types::ServiceResourceId,
+        ?started_at: Integer,
+        ?stopped_at: Integer,
+        ?status_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_resource_id: Types::ServiceResourceId?
+      attr_accessor started_at: Integer?
+      attr_accessor stopped_at: Integer?
+      attr_accessor status_reason: String?
+    end
+
+    class ServiceJobPreemptionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?preemption_retries_before_termination: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor preemption_retries_before_termination: Integer?
+    end
+
+    class ServiceJobPreemptionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?preempted_attempt_count: Integer,
+        ?recent_preempted_attempts: Array[Types::ServiceJobPreemptedAttempt],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor preempted_attempt_count: Integer?
+      attr_accessor recent_preempted_attempts: Array[Types::ServiceJobPreemptedAttempt]?
     end
 
     module ServiceJobRetryAction
@@ -2830,30 +3592,38 @@ module Aws::Batch
 
       def initialize: (
         ?latest_attempt: Types::LatestServiceJobAttempt,
+        ?capacity_usage: Array[Types::ServiceJobCapacityUsageSummary],
         ?created_at: Integer,
         ?job_arn: String,
         ?job_id: String,
         ?job_name: String,
+        ?scheduled_at: Integer,
         ?service_job_type: String,
         ?share_identifier: String,
+        ?quota_share_name: String,
         ?status: String,
         ?status_reason: String,
         ?started_at: Integer,
         ?stopped_at: Integer,
+        ?is_terminated: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor latest_attempt: Types::LatestServiceJobAttempt?
+      attr_accessor capacity_usage: Array[Types::ServiceJobCapacityUsageSummary]?
       attr_accessor created_at: Integer?
       attr_accessor job_arn: String?
       attr_accessor job_id: String?
       attr_accessor job_name: String?
+      attr_accessor scheduled_at: Integer?
       attr_accessor service_job_type: String?
       attr_accessor share_identifier: String?
+      attr_accessor quota_share_name: String?
       attr_accessor status: String?
       attr_accessor status_reason: String?
       attr_accessor started_at: Integer?
       attr_accessor stopped_at: Integer?
+      attr_accessor is_terminated: bool?
     end
 
     class ServiceJobTimeout
@@ -2970,6 +3740,8 @@ module Aws::Batch
         ?service_request_payload: String,
         ?service_job_type: String,
         ?share_identifier: String,
+        ?quota_share_name: String,
+        ?preemption_configuration: Types::ServiceJobPreemptionConfiguration,
         ?timeout_config: Types::ServiceJobTimeout,
         ?tags: Hash[String, String],
         ?client_token: String,
@@ -2983,6 +3755,8 @@ module Aws::Batch
       attr_accessor service_request_payload: String?
       attr_accessor service_job_type: String?
       attr_accessor share_identifier: String?
+      attr_accessor quota_share_name: String?
+      attr_accessor preemption_configuration: Types::ServiceJobPreemptionConfiguration?
       attr_accessor timeout_config: Types::ServiceJobTimeout?
       attr_accessor tags: Hash[String, String]?
       attr_accessor client_token: String?
@@ -3059,6 +3833,8 @@ module Aws::Batch
         ?secrets: Array[Types::Secret],
         ?ulimits: Array[Types::Ulimit],
         ?user: String,
+        ?start_timeout: Integer,
+        ?stop_timeout: Integer,
         ?exit_code: Integer,
         ?reason: String,
         ?log_stream_name: String,
@@ -3083,6 +3859,8 @@ module Aws::Batch
       attr_accessor secrets: Array[Types::Secret]?
       attr_accessor ulimits: Array[Types::Ulimit]?
       attr_accessor user: String?
+      attr_accessor start_timeout: Integer?
+      attr_accessor stop_timeout: Integer?
       attr_accessor exit_code: Integer?
       attr_accessor reason: String?
       attr_accessor log_stream_name: String?
@@ -3127,6 +3905,8 @@ module Aws::Batch
         ?secrets: Array[Types::Secret],
         ?ulimits: Array[Types::Ulimit],
         ?user: String,
+        ?start_timeout: Integer,
+        ?stop_timeout: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3147,6 +3927,8 @@ module Aws::Batch
       attr_accessor secrets: Array[Types::Secret]?
       attr_accessor ulimits: Array[Types::Ulimit]?
       attr_accessor user: String?
+      attr_accessor start_timeout: Integer?
+      attr_accessor stop_timeout: Integer?
     end
 
     class TaskPropertiesOverride
@@ -3182,6 +3964,47 @@ module Aws::Batch
 
     end
 
+    class TerminateJobsErrorDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job: String,
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job: String?
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class TerminateJobsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?jobs: Array[String],
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor jobs: Array[String]?
+      attr_accessor reason: String?
+    end
+
+    class TerminateJobsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?successful: Array[String],
+        ?errors: Array[Types::TerminateJobsErrorDetail],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor successful: Array[String]?
+      attr_accessor errors: Array[Types::TerminateJobsErrorDetail]?
+    end
+
     class TerminateServiceJobRequest
       include Smithy::Schema::Structure
 
@@ -3202,6 +4025,47 @@ module Aws::Batch
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+    end
+
+    class TerminateServiceJobsErrorDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job: String,
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job: String?
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class TerminateServiceJobsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?jobs: Array[String],
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor jobs: Array[String]?
+      attr_accessor reason: String?
+    end
+
+    class TerminateServiceJobsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?successful: Array[String],
+        ?errors: Array[Types::TerminateServiceJobsErrorDetail],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor successful: Array[String]?
+      attr_accessor errors: Array[Types::TerminateServiceJobsErrorDetail]?
     end
 
     class Tmpfs
@@ -3267,6 +4131,8 @@ module Aws::Batch
         ?service_role: String,
         ?update_policy: Types::UpdatePolicy,
         ?context: String,
+        ?ecs_settings: Types::EcsSettings,
+        ?eks_configuration: Types::EksConfigurationUpdate,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3277,6 +4143,8 @@ module Aws::Batch
       attr_accessor service_role: String?
       attr_accessor update_policy: Types::UpdatePolicy?
       attr_accessor context: String?
+      attr_accessor ecs_settings: Types::EcsSettings?
+      attr_accessor eks_configuration: Types::EksConfigurationUpdate?
     end
 
     class UpdateComputeEnvironmentResponse
@@ -3360,6 +4228,23 @@ module Aws::Batch
       attr_accessor job_queue_arn: String?
     end
 
+    class UpdateManagedInstancesProviderConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?propagate_tags: String,
+        ?infrastructure_role_arn: String,
+        ?instance_launch_template: Types::InstanceLaunchTemplateUpdate,
+        ?infrastructure_optimization: Types::InfrastructureOptimization,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor propagate_tags: String?
+      attr_accessor infrastructure_role_arn: String?
+      attr_accessor instance_launch_template: Types::InstanceLaunchTemplateUpdate?
+      attr_accessor infrastructure_optimization: Types::InfrastructureOptimization?
+    end
+
     class UpdatePolicy
       include Smithy::Schema::Structure
 
@@ -3373,16 +4258,50 @@ module Aws::Batch
       attr_accessor job_execution_timeout_minutes: Integer?
     end
 
+    class UpdateQuotaShareRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?quota_share_arn: String,
+        ?capacity_limits: Array[Types::QuotaShareCapacityLimit],
+        ?resource_sharing_configuration: Types::QuotaShareResourceSharingConfiguration,
+        ?preemption_configuration: Types::QuotaSharePreemptionConfiguration,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor quota_share_arn: String?
+      attr_accessor capacity_limits: Array[Types::QuotaShareCapacityLimit]?
+      attr_accessor resource_sharing_configuration: Types::QuotaShareResourceSharingConfiguration?
+      attr_accessor preemption_configuration: Types::QuotaSharePreemptionConfiguration?
+      attr_accessor state: String?
+    end
+
+    class UpdateQuotaShareResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?quota_share_name: String,
+        ?quota_share_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor quota_share_name: String?
+      attr_accessor quota_share_arn: String?
+    end
+
     class UpdateSchedulingPolicyRequest
       include Smithy::Schema::Structure
 
       def initialize: (
         ?arn: String,
+        ?quota_share_policy: Types::QuotaSharePolicy,
         ?fairshare_policy: Types::FairsharePolicy,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor arn: String?
+      attr_accessor quota_share_policy: Types::QuotaSharePolicy?
       attr_accessor fairshare_policy: Types::FairsharePolicy?
     end
 
@@ -3423,6 +4342,34 @@ module Aws::Batch
       attr_accessor service_environment_arn: String?
     end
 
+    class UpdateServiceJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?scheduling_priority: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor scheduling_priority: Integer?
+    end
+
+    class UpdateServiceJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_arn: String,
+        ?job_name: String,
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_arn: String?
+      attr_accessor job_name: String?
+      attr_accessor job_id: String?
+    end
+
     module UserdataType
       EKS_BOOTSTRAP_SH: String
       EKS_NODEADM: String
@@ -3435,12 +4382,14 @@ module Aws::Batch
         ?host: Types::Host,
         ?name: String,
         ?efs_volume_configuration: Types::EFSVolumeConfiguration,
+        ?s3files_volume_configuration: Types::S3FilesVolumeConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor host: Types::Host?
       attr_accessor name: String?
       attr_accessor efs_volume_configuration: Types::EFSVolumeConfiguration?
+      attr_accessor s3files_volume_configuration: Types::S3FilesVolumeConfiguration?
     end
   end
 end

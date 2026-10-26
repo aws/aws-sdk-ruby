@@ -1,0 +1,5 @@
+  module Aws
+    module Uxc
+      VERSION: String
+    end
+  end

@@ -161,6 +161,18 @@ module Aws::CostOptimizationHub
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The Amazon DocumentDB cluster recommendation details.</p>
+    # @!attribute cost_calculation
+    #   <p>Cost impact of the resource recommendation.</p>
+    #   @return [Types::ResourceCostCalculation]
+    class DocumentDbCluster < Struct.new(
+      nil,
+      :cost_calculation,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The DynamoDB reserved capacity recommendation details.</p>
     # @!attribute configuration
     #   <p>The DynamoDB reserved capacity configuration used for recommendations.</p>
@@ -216,6 +228,18 @@ module Aws::CostOptimizationHub
       :monthly_recurring_cost,
       :number_of_capacity_units_to_purchase,
       :capacity_units,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The DynamoDB table recommendation details.</p>
+    # @!attribute cost_calculation
+    #   <p>Cost impact of the resource recommendation.</p>
+    #   @return [Types::ResourceCostCalculation]
+    class DynamoDbTable < Struct.new(
+      nil,
+      :cost_calculation,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -355,7 +379,7 @@ module Aws::CostOptimizationHub
     #   <p>The hourly commitment for the Savings Plans type.</p>
     #   @return [String]
     # @!attribute instance_family
-    #   <p>The instance family of the recommended Savings Plan.</p>
+    #   <p>The instance family of the recommended Savings Plans.</p>
     #   @return [String]
     # @!attribute savings_plans_region
     #   <p>The Amazon Web Services Region of the commitment.</p>
@@ -484,6 +508,38 @@ module Aws::CostOptimizationHub
     class EcsServiceConfiguration < Struct.new(
       nil,
       :compute,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains cost efficiency metrics for a specific group over time. The group is defined by the grouping dimension specified in the request, such as account ID, Amazon Web Services Region.</p>
+    # @!attribute metrics_by_time
+    #   <p>A list of time-series data points containing efficiency metrics for this group. Each data point includes an efficiency score, estimated savings, spending, and a timestamp corresponding to the specified granularity. This field is null when efficiency metrics cannot be calculated for the group, in which case the message field provides an explanation.</p>
+    #   @return [Array<Types::MetricsByTime>]
+    # @!attribute group
+    #   <p>The value of the grouping dimension for this set of metrics. For example, if grouped by account ID, this field contains the account ID. If no grouping is specified, this field is empty.</p>
+    #   @return [String]
+    # @!attribute message
+    #   <p>An explanation of why efficiency metrics could not be calculated for this group when the metricsByTime field is null. Common reasons include insufficient or inconclusive cost and usage data during the specified time period. This field is null or empty when metrics are successfully calculated.</p>
+    #   @return [String]
+    class EfficiencyMetricsByGroup < Struct.new(
+      nil,
+      :metrics_by_time,
+      :group,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The ElastiCache cluster recommendation details.</p>
+    # @!attribute cost_calculation
+    #   <p>Cost impact of the resource recommendation.</p>
+    #   @return [Types::ResourceCostCalculation]
+    class ElastiCacheCluster < Struct.new(
+      nil,
+      :cost_calculation,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -824,6 +880,52 @@ module Aws::CostOptimizationHub
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute group_by
+    #   <p>The dimension by which to group the cost efficiency metrics. Valid values include account ID, Amazon Web Services Region. When no grouping is specified, metrics are aggregated across all resources in the specified time period.</p>
+    #   @return [String]
+    # @!attribute granularity
+    #   <p>The time granularity for the cost efficiency metrics. Specify <code>Daily</code> for metrics aggregated by day, or <code>Monthly</code> for metrics aggregated by month.</p>
+    #   @return [String]
+    # @!attribute time_period
+    #   <p>The time period for which to retrieve the cost efficiency metrics. The start date is inclusive and the end date is exclusive. Dates can be specified in either YYYY-MM-DD format or YYYY-MM format depending on the desired granularity.</p>
+    #   @return [Types::TimePeriod]
+    # @!attribute max_results
+    #   <p>The maximum number of groups to return in the response. Valid values range from 0 to 1000. Use in conjunction with <code>nextToken</code> to paginate through results when the total number of groups exceeds this limit.</p>
+    #   @return [Integer]
+    # @!attribute order_by
+    #   <p>The ordering specification for the results. Defines which dimension to sort by and whether to sort in ascending or descending order.</p>
+    #   @return [Types::OrderBy]
+    # @!attribute next_token
+    #   <p>The token to retrieve the next page of results. This value is returned in the response when the number of groups exceeds the specified <code>maxResults</code> value.</p>
+    #   @return [String]
+    class ListEfficiencyMetricsRequest < Struct.new(
+      nil,
+      :group_by,
+      :granularity,
+      :time_period,
+      :max_results,
+      :order_by,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute efficiency_metrics_by_group
+    #   <p>A list of cost efficiency metrics grouped by the specified dimension. Each group contains time-series data points with cost efficiency, potential savings, and optimzable spend for the specified time period.</p>
+    #   @return [Array<Types::EfficiencyMetricsByGroup>]
+    # @!attribute next_token
+    #   <p>The token to retrieve the next page of results. When this value is present in the response, additional groups are available. Pass this token in the <code>nextToken</code> parameter of a subsequent request to retrieve the next page.</p>
+    #   @return [String]
+    class ListEfficiencyMetricsResponse < Struct.new(
+      nil,
+      :efficiency_metrics_by_group,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute include_organization_info
     #   <p>Indicates whether to return the enrollment status for the organization.</p>
     #   @return [Boolean]
@@ -966,6 +1068,18 @@ module Aws::CostOptimizationHub
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The MemoryDB cluster recommendation details.</p>
+    # @!attribute cost_calculation
+    #   <p>Cost impact of the resource recommendation.</p>
+    #   @return [Types::ResourceCostCalculation]
+    class MemoryDbCluster < Struct.new(
+      nil,
+      :cost_calculation,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The MemoryDB reserved instances recommendation details.</p> <note> <p>While the API reference uses "MemoryDB reserved instances", the user guide and other documentation refer to them as "MemoryDB reserved nodes", as the terms are used interchangeably.</p> </note>
     # @!attribute configuration
     #   <p>The MemoryDB reserved instances configuration used for recommendations.</p>
@@ -1042,6 +1156,30 @@ module Aws::CostOptimizationHub
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Contains efficiency metrics for a specific point in time, including an efficiency score, potential savings, optimizable spend, and timestamp.</p>
+    # @!attribute score
+    #   <p>The efficiency score for this time period. The score represents a measure of how effectively the cloud resources are being optimized, with higher scores indicating better optimization performance.</p>
+    #   @return [Float]
+    # @!attribute savings
+    #   <p>The estimated savings amount for this time period, representing the potential cost reduction achieved through optimization recommendations.</p>
+    #   @return [Float]
+    # @!attribute spend
+    #   <p>The total spending amount for this time period.</p>
+    #   @return [Float]
+    # @!attribute timestamp
+    #   <p>The timestamp for this data point. The format depends on the granularity: YYYY-MM-DD for daily metrics, or YYYY-MM for monthly metrics.</p>
+    #   @return [String]
+    class MetricsByTime < Struct.new(
+      nil,
+      :score,
+      :savings,
+      :spend,
+      :timestamp,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The configuration for the EC2 Auto Scaling group with mixed instance types.</p>
     # @!attribute type
     #   <p>The instance type of the configuration.</p>
@@ -1049,6 +1187,42 @@ module Aws::CostOptimizationHub
     class MixedInstanceConfiguration < Struct.new(
       nil,
       :type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The NAT Gateway recommendation details.</p>
+    # @!attribute configuration
+    #   <p>The NAT Gateway configuration used for recommendations.</p>
+    #   @return [Types::NatGatewayConfiguration]
+    # @!attribute cost_calculation
+    #   <p>Cost impact of the resource recommendation.</p>
+    #   @return [Types::ResourceCostCalculation]
+    class NatGateway < Struct.new(
+      nil,
+      :configuration,
+      :cost_calculation,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The NAT Gateway configuration used for recommendations.</p>
+    # @!attribute active_connection_count
+    #   <p>The number of active connections through the NAT Gateway.</p>
+    #   @return [Integer]
+    # @!attribute packets_in_from_source
+    #   <p>The number of packets received from the source through the NAT Gateway.</p>
+    #   @return [Integer]
+    # @!attribute packets_in_from_destination
+    #   <p>The number of packets received from the destination through the NAT Gateway.</p>
+    #   @return [Integer]
+    class NatGatewayConfiguration < Struct.new(
+      nil,
+      :active_connection_count,
+      :packets_in_from_source,
+      :packets_in_from_destination,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1613,6 +1787,27 @@ module Aws::CostOptimizationHub
     # @!attribute memory_db_reserved_instances
     #   <p>The MemoryDB reserved instances recommendation details.</p>
     #   @return [Types::MemoryDbReservedInstances]
+    # @!attribute nat_gateway
+    #   <p>The NAT Gateway recommendation details.</p>
+    #   @return [Types::NatGateway]
+    # @!attribute dynamo_db_table
+    #   <p>The DynamoDB table recommendation details.</p>
+    #   @return [Types::DynamoDbTable]
+    # @!attribute elasti_cache_cluster
+    #   <p>The ElastiCache cluster recommendation details.</p>
+    #   @return [Types::ElastiCacheCluster]
+    # @!attribute memory_db_cluster
+    #   <p>The MemoryDB cluster recommendation details.</p>
+    #   @return [Types::MemoryDbCluster]
+    # @!attribute document_db_cluster
+    #   <p>The Amazon DocumentDB cluster recommendation details.</p>
+    #   @return [Types::DocumentDbCluster]
+    # @!attribute work_spaces
+    #   <p>The WorkSpaces recommendation details.</p>
+    #   @return [Types::WorkSpaces]
+    # @!attribute sage_maker_endpoint
+    #   <p>The SageMaker endpoint recommendation details.</p>
+    #   @return [Types::SageMakerEndpoint]
     class ResourceDetails < Struct.new(
       :lambda_function,
       :ecs_service,
@@ -1632,6 +1827,13 @@ module Aws::CostOptimizationHub
       :aurora_db_cluster_storage,
       :dynamo_db_reserved_capacity,
       :memory_db_reserved_instances,
+      :nat_gateway,
+      :dynamo_db_table,
+      :elasti_cache_cluster,
+      :memory_db_cluster,
+      :document_db_cluster,
+      :work_spaces,
+      :sage_maker_endpoint,
       :unknown,
       keyword_init: true
     )
@@ -1655,6 +1857,13 @@ module Aws::CostOptimizationHub
       class AuroraDbClusterStorage < ResourceDetails; end
       class DynamoDbReservedCapacity < ResourceDetails; end
       class MemoryDbReservedInstances < ResourceDetails; end
+      class NatGateway < ResourceDetails; end
+      class DynamoDbTable < ResourceDetails; end
+      class ElastiCacheCluster < ResourceDetails; end
+      class MemoryDbCluster < ResourceDetails; end
+      class DocumentDbCluster < ResourceDetails; end
+      class WorkSpaces < ResourceDetails; end
+      class SageMakerEndpoint < ResourceDetails; end
       class Unknown < ResourceDetails; end
     end
 
@@ -1692,6 +1901,18 @@ module Aws::CostOptimizationHub
       :estimated_net_unused_amortized_commitments,
       :estimated_discounts,
       :estimated_cost_after_discounts,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The SageMaker endpoint recommendation details.</p>
+    # @!attribute cost_calculation
+    #   <p>Cost impact of the resource recommendation.</p>
+    #   @return [Types::ResourceCostCalculation]
+    class SageMakerEndpoint < Struct.new(
+      nil,
+      :cost_calculation,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1749,18 +1970,18 @@ module Aws::CostOptimizationHub
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Pricing information about a Savings Plan.</p>
+    # <p>Pricing information about a Savings Plans.</p>
     # @!attribute monthly_savings_plans_eligible_cost
-    #   <p>The cost of paying for the recommended Savings Plan monthly.</p>
+    #   <p>The cost of paying for the recommended Savings Plans monthly.</p>
     #   @return [Float]
     # @!attribute estimated_monthly_commitment
-    #   <p>Estimated monthly commitment for the Savings Plan.</p>
+    #   <p>Estimated monthly commitment for the Savings Plans.</p>
     #   @return [Float]
     # @!attribute savings_percentage
-    #   <p>Estimated savings as a percentage of your overall costs after buying the Savings Plan.</p>
+    #   <p>Estimated savings as a percentage of your overall costs after buying the Savings Plans.</p>
     #   @return [Float]
     # @!attribute estimated_on_demand_cost
-    #   <p>Estimated On-Demand cost you will pay after buying the Savings Plan.</p>
+    #   <p>Estimated On-Demand cost you will pay after buying the Savings Plans.</p>
     #   @return [Float]
     class SavingsPlansPricing < Struct.new(
       nil,
@@ -1823,6 +2044,22 @@ module Aws::CostOptimizationHub
     class ThrottlingException < Struct.new(
       nil,
       :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Specifies a date range for retrieving efficiency metrics. The start date is inclusive and the end date is exclusive.</p>
+    # @!attribute start
+    #   <p>The beginning of the time period (inclusive). Specify the date in ISO 8601 format, such as 2024-01-01.</p>
+    #   @return [String]
+    # @!attribute end
+    #   <p>The end of the time period (exclusive). Specify the date in ISO 8601 format, such as 2024-12-31.</p>
+    #   @return [String]
+    class TimePeriod < Struct.new(
+      nil,
+      :start,
+      :end,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1950,6 +2187,18 @@ module Aws::CostOptimizationHub
       nil,
       :field_name,
       :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The WorkSpaces recommendation details.</p>
+    # @!attribute cost_calculation
+    #   <p>Cost impact of the resource recommendation.</p>
+    #   @return [Types::ResourceCostCalculation]
+    class WorkSpaces < Struct.new(
+      nil,
+      :cost_calculation,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

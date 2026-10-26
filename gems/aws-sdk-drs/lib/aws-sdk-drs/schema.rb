@@ -15,11 +15,14 @@ module Aws::Drs
     AgentVersion = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.drs#AgentVersion", name: "AgentVersion", traits: {"smithy.api#pattern" => "^[0-9]{1,5}.[0-9]{1,5}.[0-9]{1,5}(.[0-9]{4}.[0-9]{3}.[0-9]{4})?$"})
     AssociateSourceNetworkStackRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#AssociateSourceNetworkStackRequest", name: "AssociateSourceNetworkStackRequest")
     AssociateSourceNetworkStackResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#AssociateSourceNetworkStackResponse", name: "AssociateSourceNetworkStackResponse")
-    AwsAvailabilityZone = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.drs#AwsAvailabilityZone", name: "AwsAvailabilityZone", traits: {"smithy.api#length" => {"min" => 0, "max" => 255}, "smithy.api#pattern" => "^(us(-gov)?|ap|ca|cn|eu|sa|af|me|il)-(central|north|(north(?:east|west))|south|south(?:east|west)|east|west)-[0-9][a-z]$"})
-    AwsRegion = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.drs#AwsRegion", name: "AwsRegion", traits: {"smithy.api#length" => {"min" => 0, "max" => 255}, "smithy.api#pattern" => "^(us(-gov)?|ap|ca|cn|eu|sa|af|me|il)-(central|north|(north(?:east|west))|south|south(?:east|west)|east|west)-[0-9]$"})
+    AwsAvailabilityZone = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.drs#AwsAvailabilityZone", name: "AwsAvailabilityZone", traits: {"smithy.api#length" => {"min" => 0, "max" => 255}, "smithy.api#pattern" => "^(us(-gov)?|ap|ca|cn|eu|eusc|sa|af|me|mx|il)-([a-z]{2}-)?(central|north|(north(?:east|west))|south|south(?:east|west)|east|west)-[0-9][a-z]$"})
+    AwsRegion = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.drs#AwsRegion", name: "AwsRegion", traits: {"smithy.api#length" => {"min" => 0, "max" => 255}, "smithy.api#pattern" => "^(us(-gov)?|ap|ca|cn|eu|eusc|sa|af|me|mx|il)-([a-z]{2}-)?(central|north|(north(?:east|west))|south|south(?:east|west)|east|west)-[0-9]$"})
     BoundedString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.drs#BoundedString", name: "BoundedString", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}})
     CPU = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#CPU", name: "CPU")
+    CancelRecoveryPlanExecutionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#CancelRecoveryPlanExecutionRequest", name: "CancelRecoveryPlanExecutionRequest")
+    CancelRecoveryPlanExecutionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#CancelRecoveryPlanExecutionResponse", name: "CancelRecoveryPlanExecutionResponse")
     CfnStackName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.drs#CfnStackName", name: "CfnStackName", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[a-zA-Z][-a-zA-Z0-9]*$", "smithy.api#sensitive" => {}})
+    ClientIdempotencyToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.drs#ClientIdempotencyToken", name: "ClientIdempotencyToken", traits: {"smithy.api#length" => {"min" => 0, "max" => 64}})
     ConflictException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#ConflictException", name: "ConflictException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 409})
     ConversionMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.drs#ConversionMap", name: "ConversionMap")
     ConversionProperties = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#ConversionProperties", name: "ConversionProperties")
@@ -28,8 +31,12 @@ module Aws::Drs
     CreateExtendedSourceServerOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#CreateExtendedSourceServerOutput", name: "CreateExtendedSourceServerOutput")
     CreateLaunchConfigurationTemplateInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#CreateLaunchConfigurationTemplateInput", name: "CreateLaunchConfigurationTemplateInput")
     CreateLaunchConfigurationTemplateOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#CreateLaunchConfigurationTemplateOutput", name: "CreateLaunchConfigurationTemplateOutput")
-    CreateReplicationConfigurationTemplateInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#CreateReplicationConfigurationTemplateInput", name: "CreateReplicationConfigurationTemplateInput")
+    CreateRecoveryPlanRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#CreateRecoveryPlanRequest", name: "CreateRecoveryPlanRequest")
+    CreateRecoveryPlanResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#CreateRecoveryPlanResponse", name: "CreateRecoveryPlanResponse")
+    CreateRecoveryPlanStepRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#CreateRecoveryPlanStepRequest", name: "CreateRecoveryPlanStepRequest")
+    CreateRecoveryPlanStepResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#CreateRecoveryPlanStepResponse", name: "CreateRecoveryPlanStepResponse")
     CreateReplicationConfigurationTemplateOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#CreateReplicationConfigurationTemplateOutput", name: "CreateReplicationConfigurationTemplateOutput")
+    CreateReplicationConfigurationTemplateRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#CreateReplicationConfigurationTemplateRequest", name: "CreateReplicationConfigurationTemplateRequest")
     CreateSourceNetworkRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#CreateSourceNetworkRequest", name: "CreateSourceNetworkRequest")
     CreateSourceNetworkResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#CreateSourceNetworkResponse", name: "CreateSourceNetworkResponse")
     DataReplicationError = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#DataReplicationError", name: "DataReplicationError")
@@ -50,6 +57,12 @@ module Aws::Drs
     DeleteLaunchConfigurationTemplateInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#DeleteLaunchConfigurationTemplateInput", name: "DeleteLaunchConfigurationTemplateInput")
     DeleteLaunchConfigurationTemplateOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#DeleteLaunchConfigurationTemplateOutput", name: "DeleteLaunchConfigurationTemplateOutput")
     DeleteRecoveryInstanceInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#DeleteRecoveryInstanceInput", name: "DeleteRecoveryInstanceInput")
+    DeleteRecoveryPlanExecutionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#DeleteRecoveryPlanExecutionRequest", name: "DeleteRecoveryPlanExecutionRequest")
+    DeleteRecoveryPlanExecutionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#DeleteRecoveryPlanExecutionResponse", name: "DeleteRecoveryPlanExecutionResponse")
+    DeleteRecoveryPlanRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#DeleteRecoveryPlanRequest", name: "DeleteRecoveryPlanRequest")
+    DeleteRecoveryPlanResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#DeleteRecoveryPlanResponse", name: "DeleteRecoveryPlanResponse")
+    DeleteRecoveryPlanStepRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#DeleteRecoveryPlanStepRequest", name: "DeleteRecoveryPlanStepRequest")
+    DeleteRecoveryPlanStepResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#DeleteRecoveryPlanStepResponse", name: "DeleteRecoveryPlanStepResponse")
     DeleteReplicationConfigurationTemplateInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#DeleteReplicationConfigurationTemplateInput", name: "DeleteReplicationConfigurationTemplateInput")
     DeleteReplicationConfigurationTemplateOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#DeleteReplicationConfigurationTemplateOutput", name: "DeleteReplicationConfigurationTemplateOutput")
     DeleteSourceNetworkRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#DeleteSourceNetworkRequest", name: "DeleteSourceNetworkRequest")
@@ -92,7 +105,9 @@ module Aws::Drs
     EbsSnapshot = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.drs#EbsSnapshot", name: "EbsSnapshot", traits: {"smithy.api#pattern" => "^snap-[0-9a-zA-Z]{17}$"})
     EbsSnapshotsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.drs#EbsSnapshotsList", name: "EbsSnapshotsList")
     EbsVolumeID = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.drs#EbsVolumeID", name: "EbsVolumeID", traits: {"smithy.api#length" => {"min" => 10, "max" => 19}, "smithy.api#pattern" => "^vol-([0-9a-fA-F]{8}|[0-9a-fA-F]{17})$"})
+    ErrorDetail = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#ErrorDetail", name: "ErrorDetail")
     EventResourceData = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.drs#EventResourceData", name: "EventResourceData")
+    ExecutionServerStepConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#ExecutionServerStepConfiguration", name: "ExecutionServerStepConfiguration")
     ExportSourceNetworkCfnTemplateRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#ExportSourceNetworkCfnTemplateRequest", name: "ExportSourceNetworkCfnTemplateRequest")
     ExportSourceNetworkCfnTemplateResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#ExportSourceNetworkCfnTemplateResponse", name: "ExportSourceNetworkCfnTemplateResponse")
     ExtensionStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.drs#ExtensionStatus", name: "ExtensionStatus", traits: {"smithy.api#enum" => [{"name" => "EXTENDED", "value" => "EXTENDED"}, {"name" => "EXTENSION_ERROR", "value" => "EXTENSION_ERROR"}, {"name" => "NOT_EXTENDED", "value" => "NOT_EXTENDED"}]})
@@ -104,6 +119,14 @@ module Aws::Drs
     GetFailbackReplicationConfigurationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#GetFailbackReplicationConfigurationOutput", name: "GetFailbackReplicationConfigurationOutput")
     GetLaunchConfigurationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#GetLaunchConfigurationInput", name: "GetLaunchConfigurationInput")
     GetLaunchConfigurationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#GetLaunchConfigurationOutput", name: "GetLaunchConfigurationOutput")
+    GetRecoveryPlanExecutionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#GetRecoveryPlanExecutionRequest", name: "GetRecoveryPlanExecutionRequest")
+    GetRecoveryPlanExecutionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#GetRecoveryPlanExecutionResponse", name: "GetRecoveryPlanExecutionResponse")
+    GetRecoveryPlanExecutionStepRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#GetRecoveryPlanExecutionStepRequest", name: "GetRecoveryPlanExecutionStepRequest")
+    GetRecoveryPlanExecutionStepResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#GetRecoveryPlanExecutionStepResponse", name: "GetRecoveryPlanExecutionStepResponse")
+    GetRecoveryPlanRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#GetRecoveryPlanRequest", name: "GetRecoveryPlanRequest")
+    GetRecoveryPlanResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#GetRecoveryPlanResponse", name: "GetRecoveryPlanResponse")
+    GetRecoveryPlanStepRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#GetRecoveryPlanStepRequest", name: "GetRecoveryPlanStepRequest")
+    GetRecoveryPlanStepResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#GetRecoveryPlanStepResponse", name: "GetRecoveryPlanStepResponse")
     GetReplicationConfigurationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#GetReplicationConfigurationInput", name: "GetReplicationConfigurationInput")
     GetReplicationConfigurationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#GetReplicationConfigurationOutput", name: "GetReplicationConfigurationOutput")
     IPsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.drs#IPsList", name: "IPsList")
@@ -114,7 +137,9 @@ module Aws::Drs
     InitializeServiceOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#InitializeServiceOutput", name: "InitializeServiceOutput")
     InitiatedBy = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.drs#InitiatedBy", name: "InitiatedBy", traits: {"smithy.api#enum" => [{"value" => "START_RECOVERY", "name" => "START_RECOVERY"}, {"value" => "START_DRILL", "name" => "START_DRILL"}, {"value" => "FAILBACK", "name" => "FAILBACK"}, {"value" => "DIAGNOSTIC", "name" => "DIAGNOSTIC"}, {"value" => "TERMINATE_RECOVERY_INSTANCES", "name" => "TERMINATE_RECOVERY_INSTANCES"}, {"value" => "TARGET_ACCOUNT", "name" => "TARGET_ACCOUNT"}, {"value" => "CREATE_NETWORK_RECOVERY", "name" => "CREATE_NETWORK_RECOVERY"}, {"value" => "UPDATE_NETWORK_RECOVERY", "name" => "UPDATE_NETWORK_RECOVERY"}, {"value" => "ASSOCIATE_NETWORK_RECOVERY", "name" => "ASSOCIATE_NETWORK_RECOVERY"}]})
     InternalServerException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#InternalServerException", name: "InternalServerException", traits: {"smithy.api#error" => "server", "smithy.api#httpError" => 500})
+    InternetProtocol = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.drs#InternetProtocol", name: "InternetProtocol", traits: {"smithy.api#enum" => [{"value" => "IPV4", "name" => "IPV4"}, {"value" => "IPV6", "name" => "IPV6"}]})
     Job = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#Job", name: "Job")
+    JobEventAttemptCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.drs#JobEventAttemptCount", name: "JobEventAttemptCount", traits: {"smithy.api#default" => 0, "smithy.api#range" => {"min" => 0, "max" => 9}})
     JobID = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.drs#JobID", name: "JobID", traits: {"smithy.api#length" => {"min" => 24, "max" => 24}, "smithy.api#pattern" => "^drsjob-[0-9a-zA-Z]{17}$"})
     JobLog = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#JobLog", name: "JobLog")
     JobLogEvent = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.drs#JobLogEvent", name: "JobLogEvent", traits: {"smithy.api#enum" => [{"name" => "JOB_START", "value" => "JOB_START"}, {"name" => "SERVER_SKIPPED", "value" => "SERVER_SKIPPED"}, {"name" => "CLEANUP_START", "value" => "CLEANUP_START"}, {"name" => "CLEANUP_END", "value" => "CLEANUP_END"}, {"name" => "CLEANUP_FAIL", "value" => "CLEANUP_FAIL"}, {"name" => "SNAPSHOT_START", "value" => "SNAPSHOT_START"}, {"name" => "SNAPSHOT_END", "value" => "SNAPSHOT_END"}, {"name" => "SNAPSHOT_FAIL", "value" => "SNAPSHOT_FAIL"}, {"name" => "USING_PREVIOUS_SNAPSHOT", "value" => "USING_PREVIOUS_SNAPSHOT"}, {"name" => "USING_PREVIOUS_SNAPSHOT_FAILED", "value" => "USING_PREVIOUS_SNAPSHOT_FAILED"}, {"name" => "CONVERSION_START", "value" => "CONVERSION_START"}, {"name" => "CONVERSION_END", "value" => "CONVERSION_END"}, {"name" => "CONVERSION_FAIL", "value" => "CONVERSION_FAIL"}, {"name" => "LAUNCH_START", "value" => "LAUNCH_START"}, {"name" => "LAUNCH_FAILED", "value" => "LAUNCH_FAILED"}, {"name" => "JOB_CANCEL", "value" => "JOB_CANCEL"}, {"name" => "JOB_END", "value" => "JOB_END"}, {"name" => "DEPLOY_NETWORK_CONFIGURATION_START", "value" => "DEPLOY_NETWORK_CONFIGURATION_START"}, {"name" => "DEPLOY_NETWORK_CONFIGURATION_END", "value" => "DEPLOY_NETWORK_CONFIGURATION_END"}, {"name" => "DEPLOY_NETWORK_CONFIGURATION_FAILED", "value" => "DEPLOY_NETWORK_CONFIGURATION_FAILED"}, {"name" => "UPDATE_NETWORK_CONFIGURATION_START", "value" => "UPDATE_NETWORK_CONFIGURATION_START"}, {"name" => "UPDATE_NETWORK_CONFIGURATION_END", "value" => "UPDATE_NETWORK_CONFIGURATION_END"}, {"name" => "UPDATE_NETWORK_CONFIGURATION_FAILED", "value" => "UPDATE_NETWORK_CONFIGURATION_FAILED"}, {"name" => "UPDATE_LAUNCH_TEMPLATE_START", "value" => "UPDATE_LAUNCH_TEMPLATE_START"}, {"name" => "UPDATE_LAUNCH_TEMPLATE_END", "value" => "UPDATE_LAUNCH_TEMPLATE_END"}, {"name" => "UPDATE_LAUNCH_TEMPLATE_FAILED", "value" => "UPDATE_LAUNCH_TEMPLATE_FAILED"}, {"name" => "NETWORK_RECOVERY_FAIL", "value" => "NETWORK_RECOVERY_FAIL"}]})
@@ -163,6 +188,15 @@ module Aws::Drs
     ListExtensibleSourceServersOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#ListExtensibleSourceServersOutput", name: "ListExtensibleSourceServersOutput")
     ListLaunchActionsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#ListLaunchActionsRequest", name: "ListLaunchActionsRequest")
     ListLaunchActionsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#ListLaunchActionsResponse", name: "ListLaunchActionsResponse")
+    ListRecoveryPlanExecutionStepsFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#ListRecoveryPlanExecutionStepsFilter", name: "ListRecoveryPlanExecutionStepsFilter")
+    ListRecoveryPlanExecutionStepsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#ListRecoveryPlanExecutionStepsRequest", name: "ListRecoveryPlanExecutionStepsRequest")
+    ListRecoveryPlanExecutionStepsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#ListRecoveryPlanExecutionStepsResponse", name: "ListRecoveryPlanExecutionStepsResponse")
+    ListRecoveryPlanExecutionsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#ListRecoveryPlanExecutionsRequest", name: "ListRecoveryPlanExecutionsRequest")
+    ListRecoveryPlanExecutionsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#ListRecoveryPlanExecutionsResponse", name: "ListRecoveryPlanExecutionsResponse")
+    ListRecoveryPlanStepsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#ListRecoveryPlanStepsRequest", name: "ListRecoveryPlanStepsRequest")
+    ListRecoveryPlanStepsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#ListRecoveryPlanStepsResponse", name: "ListRecoveryPlanStepsResponse")
+    ListRecoveryPlansRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#ListRecoveryPlansRequest", name: "ListRecoveryPlansRequest")
+    ListRecoveryPlansResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#ListRecoveryPlansResponse", name: "ListRecoveryPlansResponse")
     ListStagingAccountsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#ListStagingAccountsInput", name: "ListStagingAccountsInput")
     ListStagingAccountsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#ListStagingAccountsOutput", name: "ListStagingAccountsOutput")
     ListTagsForResourceInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#ListTagsForResourceInput", name: "ListTagsForResourceInput")
@@ -174,7 +208,7 @@ module Aws::Drs
     OS = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#OS", name: "OS")
     OriginEnvironment = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.drs#OriginEnvironment", name: "OriginEnvironment", traits: {"smithy.api#enum" => [{"name" => "ON_PREMISES", "value" => "ON_PREMISES"}, {"name" => "AWS", "value" => "AWS"}]})
     OutpostARN = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.drs#OutpostARN", name: "OutpostARN", traits: {"smithy.api#length" => {"min" => 20, "max" => 255}, "smithy.api#pattern" => "^arn:aws([a-z-]+)?:outposts:[a-z\\d-]+:\\d{12}:outpost/op-[a-f0-9]{17}$"})
-    PITPolicy = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.drs#PITPolicy", name: "PITPolicy", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
+    PITPolicy = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.drs#PITPolicy", name: "PITPolicy", traits: {"smithy.api#length" => {"min" => 3, "max" => 3}})
     PITPolicyRule = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#PITPolicyRule", name: "PITPolicyRule")
     PITPolicyRuleUnits = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.drs#PITPolicyRuleUnits", name: "PITPolicyRuleUnits", traits: {"smithy.api#enum" => [{"value" => "MINUTE", "name" => "MINUTE"}, {"value" => "HOUR", "name" => "HOUR"}, {"value" => "DAY", "name" => "DAY"}]})
     PaginationToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.drs#PaginationToken", name: "PaginationToken", traits: {"smithy.api#length" => {"min" => 0, "max" => 2048}})
@@ -209,11 +243,43 @@ module Aws::Drs
     RecoveryInstanceProperties = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#RecoveryInstanceProperties", name: "RecoveryInstanceProperties")
     RecoveryInstancesForTerminationRequest = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.drs#RecoveryInstancesForTerminationRequest", name: "RecoveryInstancesForTerminationRequest", traits: {"smithy.api#length" => {"min" => 1, "max" => 200}})
     RecoveryLifeCycle = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#RecoveryLifeCycle", name: "RecoveryLifeCycle")
+    RecoveryMode = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.drs#RecoveryMode", name: "RecoveryMode", traits: {"smithy.api#enum" => [{"name" => "FAST", "value" => "FAST"}, {"name" => "OPTIMAL", "value" => "OPTIMAL"}]})
+    RecoveryPlan = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#RecoveryPlan", name: "RecoveryPlan")
+    RecoveryPlanDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.drs#RecoveryPlanDescription", name: "RecoveryPlanDescription", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}})
+    RecoveryPlanExecution = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#RecoveryPlanExecution", name: "RecoveryPlanExecution")
+    RecoveryPlanExecutionMode = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.drs#RecoveryPlanExecutionMode", name: "RecoveryPlanExecutionMode", traits: {"smithy.api#enum" => [{"value" => "DRILL", "name" => "DRILL"}, {"value" => "RECOVERY", "name" => "RECOVERY"}]})
+    RecoveryPlanExecutionServer = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#RecoveryPlanExecutionServer", name: "RecoveryPlanExecutionServer")
+    RecoveryPlanExecutionServers = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.drs#RecoveryPlanExecutionServers", name: "RecoveryPlanExecutionServers", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
+    RecoveryPlanExecutionSourceServer = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#RecoveryPlanExecutionSourceServer", name: "RecoveryPlanExecutionSourceServer")
+    RecoveryPlanExecutionSourceServerList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.drs#RecoveryPlanExecutionSourceServerList", name: "RecoveryPlanExecutionSourceServerList", traits: {"smithy.api#length" => {"min" => 0, "max" => 200}})
+    RecoveryPlanExecutionStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.drs#RecoveryPlanExecutionStatus", name: "RecoveryPlanExecutionStatus", traits: {"smithy.api#enum" => [{"value" => "CREATED", "name" => "CREATED"}, {"value" => "IN_PROGRESS", "name" => "IN_PROGRESS"}, {"value" => "COMPLETED", "name" => "COMPLETED"}, {"value" => "FAILED", "name" => "FAILED"}, {"value" => "CANCELLING", "name" => "CANCELLING"}, {"value" => "CANCELLED", "name" => "CANCELLED"}]})
+    RecoveryPlanExecutionStep = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#RecoveryPlanExecutionStep", name: "RecoveryPlanExecutionStep")
+    RecoveryPlanExecutionStepConfiguration = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.drs#RecoveryPlanExecutionStepConfiguration", name: "RecoveryPlanExecutionStepConfiguration")
+    RecoveryPlanExecutionStepStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.drs#RecoveryPlanExecutionStepStatus", name: "RecoveryPlanExecutionStepStatus", traits: {"smithy.api#enum" => [{"value" => "NOT_STARTED", "name" => "NOT_STARTED"}, {"value" => "EXECUTING", "name" => "EXECUTING"}, {"value" => "WAITING", "name" => "WAITING"}, {"value" => "COMPLETED", "name" => "COMPLETED"}, {"value" => "FAILED", "name" => "FAILED"}, {"value" => "TIMED_OUT", "name" => "TIMED_OUT"}, {"value" => "SKIPPED", "name" => "SKIPPED"}]})
+    RecoveryPlanExecutionStepSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#RecoveryPlanExecutionStepSummary", name: "RecoveryPlanExecutionStepSummary")
+    RecoveryPlanExecutionStepSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.drs#RecoveryPlanExecutionStepSummaryList", name: "RecoveryPlanExecutionStepSummaryList")
+    RecoveryPlanExecutionSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#RecoveryPlanExecutionSummary", name: "RecoveryPlanExecutionSummary")
+    RecoveryPlanExecutionSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.drs#RecoveryPlanExecutionSummaryList", name: "RecoveryPlanExecutionSummaryList")
+    RecoveryPlanName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.drs#RecoveryPlanName", name: "RecoveryPlanName", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[a-zA-Z0-9][a-zA-Z0-9 _-]*$"})
+    RecoveryPlanServer = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#RecoveryPlanServer", name: "RecoveryPlanServer")
+    RecoveryPlanServerImpactLevel = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.drs#RecoveryPlanServerImpactLevel", name: "RecoveryPlanServerImpactLevel", traits: {"smithy.api#enum" => [{"value" => "CRITICAL", "name" => "CRITICAL"}, {"value" => "OPTIONAL", "name" => "OPTIONAL"}]})
+    RecoveryPlanServers = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.drs#RecoveryPlanServers", name: "RecoveryPlanServers", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
+    RecoveryPlanStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.drs#RecoveryPlanStatus", name: "RecoveryPlanStatus", traits: {"smithy.api#enum" => [{"value" => "ACTIVE", "name" => "ACTIVE"}, {"value" => "INVALID", "name" => "INVALID"}]})
+    RecoveryPlanStep = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#RecoveryPlanStep", name: "RecoveryPlanStep")
+    RecoveryPlanStepArnList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.drs#RecoveryPlanStepArnList", name: "RecoveryPlanStepArnList", traits: {"smithy.api#length" => {"min" => 1, "max" => 20}})
+    RecoveryPlanStepConfiguration = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.drs#RecoveryPlanStepConfiguration", name: "RecoveryPlanStepConfiguration")
+    RecoveryPlanStepList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.drs#RecoveryPlanStepList", name: "RecoveryPlanStepList")
+    RecoveryPlanStepName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.drs#RecoveryPlanStepName", name: "RecoveryPlanStepName", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[a-zA-Z0-9][a-zA-Z0-9 _-]*$"})
+    RecoveryPlanStepOrder = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.drs#RecoveryPlanStepOrder", name: "RecoveryPlanStepOrder", traits: {"smithy.api#range" => {"min" => 1, "max" => 20}})
+    RecoveryPlanSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#RecoveryPlanSummary", name: "RecoveryPlanSummary")
+    RecoveryPlanSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.drs#RecoveryPlanSummaryList", name: "RecoveryPlanSummaryList")
     RecoveryResult = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.drs#RecoveryResult", name: "RecoveryResult", traits: {"smithy.api#enum" => [{"value" => "NOT_STARTED", "name" => "NOT_STARTED"}, {"value" => "IN_PROGRESS", "name" => "IN_PROGRESS"}, {"value" => "SUCCESS", "name" => "SUCCESS"}, {"value" => "FAIL", "name" => "FAIL"}, {"value" => "PARTIAL_SUCCESS", "name" => "PARTIAL_SUCCESS"}, {"value" => "ASSOCIATE_SUCCESS", "name" => "ASSOCIATE_SUCCESS"}, {"value" => "ASSOCIATE_FAIL", "name" => "ASSOCIATE_FAIL"}]})
     RecoverySnapshot = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#RecoverySnapshot", name: "RecoverySnapshot")
     RecoverySnapshotID = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.drs#RecoverySnapshotID", name: "RecoverySnapshotID", traits: {"smithy.api#length" => {"min" => 21, "max" => 21}, "smithy.api#pattern" => "^pit-[0-9a-zA-Z]{17}$"})
     RecoverySnapshotsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.drs#RecoverySnapshotsList", name: "RecoverySnapshotsList")
     RecoverySnapshotsOrder = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.drs#RecoverySnapshotsOrder", name: "RecoverySnapshotsOrder", traits: {"smithy.api#enum" => [{"name" => "ASC", "value" => "ASC"}, {"name" => "DESC", "value" => "DESC"}]})
+    ReorderRecoveryPlanStepsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#ReorderRecoveryPlanStepsRequest", name: "ReorderRecoveryPlanStepsRequest")
+    ReorderRecoveryPlanStepsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#ReorderRecoveryPlanStepsResponse", name: "ReorderRecoveryPlanStepsResponse")
     ReplicationConfigurationDataPlaneRouting = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.drs#ReplicationConfigurationDataPlaneRouting", name: "ReplicationConfigurationDataPlaneRouting", traits: {"smithy.api#enum" => [{"value" => "PRIVATE_IP", "name" => "PRIVATE_IP"}, {"value" => "PUBLIC_IP", "name" => "PUBLIC_IP"}]})
     ReplicationConfigurationDefaultLargeStagingDiskType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.drs#ReplicationConfigurationDefaultLargeStagingDiskType", name: "ReplicationConfigurationDefaultLargeStagingDiskType", traits: {"smithy.api#enum" => [{"value" => "GP2", "name" => "GP2"}, {"value" => "GP3", "name" => "GP3"}, {"value" => "ST1", "name" => "ST1"}, {"value" => "AUTO", "name" => "AUTO"}]})
     ReplicationConfigurationEbsEncryption = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.drs#ReplicationConfigurationEbsEncryption", name: "ReplicationConfigurationEbsEncryption", traits: {"smithy.api#enum" => [{"value" => "DEFAULT", "name" => "DEFAULT"}, {"value" => "CUSTOM", "name" => "CUSTOM"}, {"value" => "NONE", "name" => "NONE"}]})
@@ -230,10 +296,13 @@ module Aws::Drs
     ResourceNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#ResourceNotFoundException", name: "ResourceNotFoundException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 404})
     RetryDataReplicationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#RetryDataReplicationInput", name: "RetryDataReplicationInput", traits: {"smithy.api#deprecated" => {"message" => "WARNING: RetryDataReplication is deprecated"}})
     RetryDataReplicationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#RetryDataReplicationOutput", name: "RetryDataReplicationOutput", traits: {"smithy.api#references" => [{"resource" => "com.amazonaws.drs#SourceServerResource"}]})
+    RetryRecoveryPlanExecutionStepRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#RetryRecoveryPlanExecutionStepRequest", name: "RetryRecoveryPlanExecutionStepRequest")
+    RetryRecoveryPlanExecutionStepResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#RetryRecoveryPlanExecutionStepResponse", name: "RetryRecoveryPlanExecutionStepResponse")
     ReverseReplicationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#ReverseReplicationInput", name: "ReverseReplicationInput")
     ReverseReplicationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#ReverseReplicationOutput", name: "ReverseReplicationOutput")
     SecurityGroupID = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.drs#SecurityGroupID", name: "SecurityGroupID", traits: {"smithy.api#length" => {"min" => 0, "max" => 255}, "smithy.api#pattern" => "^sg-[0-9a-fA-F]{8,}$"})
     SensitiveBoundedString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.drs#SensitiveBoundedString", name: "SensitiveBoundedString", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#sensitive" => {}})
+    ServerStepConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#ServerStepConfiguration", name: "ServerStepConfiguration")
     ServiceQuotaExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#ServiceQuotaExceededException", name: "ServiceQuotaExceededException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 402})
     SmallBoundedString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.drs#SmallBoundedString", name: "SmallBoundedString", traits: {"smithy.api#length" => {"min" => 0, "max" => 128}})
     SourceCloudProperties = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#SourceCloudProperties", name: "SourceCloudProperties")
@@ -244,6 +313,7 @@ module Aws::Drs
     SourceProperties = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#SourceProperties", name: "SourceProperties")
     SourceServer = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#SourceServer", name: "SourceServer", traits: {"smithy.api#references" => [{"resource" => "com.amazonaws.drs#SourceServerResource"}]})
     SourceServerARN = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.drs#SourceServerARN", name: "SourceServerARN", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "^arn:(?:[0-9a-zA-Z_-]+:){3}([0-9]{12,}):source-server/(s-[0-9a-zA-Z]{17})$"})
+    SourceServerArchitecture = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.drs#SourceServerArchitecture", name: "SourceServerArchitecture", traits: {"smithy.api#enum" => [{"name" => "X86_64", "value" => "x86_64"}, {"name" => "ARM64", "value" => "arm64"}], "smithy.api#tags" => ["graviton"]})
     SourceServerID = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.drs#SourceServerID", name: "SourceServerID", traits: {"smithy.api#length" => {"min" => 19, "max" => 19}, "smithy.api#pattern" => "^s-[0-9a-zA-Z]{17}$"})
     SourceServerIDs = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.drs#SourceServerIDs", name: "SourceServerIDs")
     SourceServersList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.drs#SourceServersList", name: "SourceServersList")
@@ -256,6 +326,8 @@ module Aws::Drs
     StartFailbackRequestRecoveryInstanceIDs = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.drs#StartFailbackRequestRecoveryInstanceIDs", name: "StartFailbackRequestRecoveryInstanceIDs", traits: {"smithy.api#length" => {"min" => 1, "max" => 200}})
     StartRecoveryInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#StartRecoveryInput", name: "StartRecoveryInput")
     StartRecoveryOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#StartRecoveryOutput", name: "StartRecoveryOutput")
+    StartRecoveryPlanExecutionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#StartRecoveryPlanExecutionRequest", name: "StartRecoveryPlanExecutionRequest")
+    StartRecoveryPlanExecutionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#StartRecoveryPlanExecutionResponse", name: "StartRecoveryPlanExecutionResponse")
     StartRecoveryRequestSourceServer = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#StartRecoveryRequestSourceServer", name: "StartRecoveryRequestSourceServer")
     StartRecoveryRequestSourceServers = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.drs#StartRecoveryRequestSourceServers", name: "StartRecoveryRequestSourceServers", traits: {"smithy.api#length" => {"min" => 1, "max" => 200}})
     StartReplicationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#StartReplicationInput", name: "StartReplicationInput")
@@ -271,6 +343,7 @@ module Aws::Drs
     StopReplicationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#StopReplicationOutput", name: "StopReplicationOutput")
     StopSourceNetworkReplicationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#StopSourceNetworkReplicationRequest", name: "StopSourceNetworkReplicationRequest")
     StopSourceNetworkReplicationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#StopSourceNetworkReplicationResponse", name: "StopSourceNetworkReplicationResponse")
+    StrictDRSARN = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.drs#StrictDRSARN", name: "StrictDRSARN", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "^arn:aws(-[a-z0-9]+)*:drs:[a-z0-9-]+:[0-9]{12}:[a-zA-Z0-9_/.-]+$"})
     StrictlyPositiveInteger = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.drs#StrictlyPositiveInteger", name: "StrictlyPositiveInteger", traits: {"smithy.api#range" => {"min" => 1}})
     SubnetID = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.drs#SubnetID", name: "SubnetID", traits: {"smithy.api#length" => {"min" => 0, "max" => 255}, "smithy.api#pattern" => "^subnet-[0-9a-fA-F]{8,}$"})
     TagKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.drs#TagKey", name: "TagKey", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}})
@@ -289,6 +362,12 @@ module Aws::Drs
     UpdateLaunchConfigurationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#UpdateLaunchConfigurationOutput", name: "UpdateLaunchConfigurationOutput")
     UpdateLaunchConfigurationTemplateInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#UpdateLaunchConfigurationTemplateInput", name: "UpdateLaunchConfigurationTemplateInput")
     UpdateLaunchConfigurationTemplateOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#UpdateLaunchConfigurationTemplateOutput", name: "UpdateLaunchConfigurationTemplateOutput")
+    UpdateRecoveryPlanExecutionStepRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#UpdateRecoveryPlanExecutionStepRequest", name: "UpdateRecoveryPlanExecutionStepRequest")
+    UpdateRecoveryPlanExecutionStepResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#UpdateRecoveryPlanExecutionStepResponse", name: "UpdateRecoveryPlanExecutionStepResponse")
+    UpdateRecoveryPlanRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#UpdateRecoveryPlanRequest", name: "UpdateRecoveryPlanRequest")
+    UpdateRecoveryPlanResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#UpdateRecoveryPlanResponse", name: "UpdateRecoveryPlanResponse")
+    UpdateRecoveryPlanStepRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#UpdateRecoveryPlanStepRequest", name: "UpdateRecoveryPlanStepRequest")
+    UpdateRecoveryPlanStepResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#UpdateRecoveryPlanStepResponse", name: "UpdateRecoveryPlanStepResponse")
     UpdateReplicationConfigurationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#UpdateReplicationConfigurationInput", name: "UpdateReplicationConfigurationInput")
     UpdateReplicationConfigurationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#UpdateReplicationConfigurationOutput", name: "UpdateReplicationConfigurationOutput")
     UpdateReplicationConfigurationTemplateInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#UpdateReplicationConfigurationTemplateInput", name: "UpdateReplicationConfigurationTemplateInput")
@@ -302,6 +381,8 @@ module Aws::Drs
     VolumeToProductCodes = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.drs#VolumeToProductCodes", name: "VolumeToProductCodes")
     VolumeToSizeMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.drs#VolumeToSizeMap", name: "VolumeToSizeMap")
     VpcID = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.drs#VpcID", name: "VpcID", traits: {"smithy.api#length" => {"min" => 12, "max" => 21}, "smithy.api#pattern" => "^vpc-[0-9a-fA-F]{8,}$"})
+    WaitDurationMinutes = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.drs#WaitDurationMinutes", name: "WaitDurationMinutes", traits: {"smithy.api#range" => {"min" => 1, "max" => 120}})
+    WaitStepConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.drs#WaitStepConfiguration", name: "WaitStepConfiguration")
 
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: LargeBoundedString, name: "message"))
     AccessDeniedException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: LargeBoundedString, name: "code"))
@@ -318,6 +399,10 @@ module Aws::Drs
     CPU.add_member(:cores, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveInteger, name: "cores", traits: {"smithy.api#default" => 0}))
     CPU.add_member(:model_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedString, name: "modelName"))
     CPU.type = Types::CPU
+    CancelRecoveryPlanExecutionRequest.add_member(:recovery_plan_execution_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StrictDRSARN, name: "recoveryPlanExecutionArn", traits: {"smithy.api#required" => {}}))
+    CancelRecoveryPlanExecutionRequest.type = Types::CancelRecoveryPlanExecutionRequest
+    CancelRecoveryPlanExecutionResponse.add_member(:recovery_plan_execution, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPlanExecution, name: "recoveryPlanExecution", traits: {"smithy.api#required" => {}}))
+    CancelRecoveryPlanExecutionResponse.type = Types::CancelRecoveryPlanExecutionResponse
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: LargeBoundedString, name: "message"))
     ConflictException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: LargeBoundedString, name: "code"))
     ConflictException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LargeBoundedString, name: "resourceId"))
@@ -347,25 +432,25 @@ module Aws::Drs
     CreateLaunchConfigurationTemplateInput.add_member(:export_bucket_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "exportBucketArn"))
     CreateLaunchConfigurationTemplateInput.add_member(:post_launch_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "postLaunchEnabled"))
     CreateLaunchConfigurationTemplateInput.add_member(:launch_into_source_instance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "launchIntoSourceInstance"))
+    CreateLaunchConfigurationTemplateInput.add_member(:recovery_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryMode, name: "recoveryMode"))
     CreateLaunchConfigurationTemplateInput.type = Types::CreateLaunchConfigurationTemplateInput
     CreateLaunchConfigurationTemplateOutput.add_member(:launch_configuration_template, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchConfigurationTemplate, name: "launchConfigurationTemplate"))
     CreateLaunchConfigurationTemplateOutput.type = Types::CreateLaunchConfigurationTemplateOutput
-    CreateReplicationConfigurationTemplateInput.add_member(:staging_area_subnet_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetID, name: "stagingAreaSubnetId", traits: {"smithy.api#required" => {}}))
-    CreateReplicationConfigurationTemplateInput.add_member(:associate_default_security_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "associateDefaultSecurityGroup", traits: {"smithy.api#required" => {}}))
-    CreateReplicationConfigurationTemplateInput.add_member(:replication_servers_security_groups_i_ds, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationServersSecurityGroupsIDs, name: "replicationServersSecurityGroupsIDs", traits: {"smithy.api#required" => {}}))
-    CreateReplicationConfigurationTemplateInput.add_member(:replication_server_instance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EC2InstanceType, name: "replicationServerInstanceType", traits: {"smithy.api#required" => {}}))
-    CreateReplicationConfigurationTemplateInput.add_member(:use_dedicated_replication_server, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "useDedicatedReplicationServer", traits: {"smithy.api#required" => {}}))
-    CreateReplicationConfigurationTemplateInput.add_member(:default_large_staging_disk_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationConfigurationDefaultLargeStagingDiskType, name: "defaultLargeStagingDiskType", traits: {"smithy.api#required" => {}}))
-    CreateReplicationConfigurationTemplateInput.add_member(:ebs_encryption, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationConfigurationEbsEncryption, name: "ebsEncryption", traits: {"smithy.api#required" => {}}))
-    CreateReplicationConfigurationTemplateInput.add_member(:ebs_encryption_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "ebsEncryptionKeyArn"))
-    CreateReplicationConfigurationTemplateInput.add_member(:bandwidth_throttling, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveInteger, name: "bandwidthThrottling", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
-    CreateReplicationConfigurationTemplateInput.add_member(:data_plane_routing, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationConfigurationDataPlaneRouting, name: "dataPlaneRouting", traits: {"smithy.api#required" => {}}))
-    CreateReplicationConfigurationTemplateInput.add_member(:create_public_ip, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "createPublicIP", traits: {"smithy.api#required" => {}}))
-    CreateReplicationConfigurationTemplateInput.add_member(:staging_area_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "stagingAreaTags", traits: {"smithy.api#required" => {}}))
-    CreateReplicationConfigurationTemplateInput.add_member(:pit_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: PITPolicy, name: "pitPolicy", traits: {"smithy.api#required" => {}}))
-    CreateReplicationConfigurationTemplateInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "tags"))
-    CreateReplicationConfigurationTemplateInput.add_member(:auto_replicate_new_disks, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "autoReplicateNewDisks"))
-    CreateReplicationConfigurationTemplateInput.type = Types::CreateReplicationConfigurationTemplateInput
+    CreateRecoveryPlanRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPlanName, name: "name", traits: {"smithy.api#required" => {}}))
+    CreateRecoveryPlanRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPlanDescription, name: "description"))
+    CreateRecoveryPlanRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientIdempotencyToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateRecoveryPlanRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "tags"))
+    CreateRecoveryPlanRequest.type = Types::CreateRecoveryPlanRequest
+    CreateRecoveryPlanResponse.add_member(:recovery_plan, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPlan, name: "recoveryPlan", traits: {"smithy.api#required" => {}}))
+    CreateRecoveryPlanResponse.type = Types::CreateRecoveryPlanResponse
+    CreateRecoveryPlanStepRequest.add_member(:recovery_plan_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StrictDRSARN, name: "recoveryPlanArn", traits: {"smithy.api#required" => {}}))
+    CreateRecoveryPlanStepRequest.add_member(:step_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPlanStepName, name: "stepName", traits: {"smithy.api#required" => {}}))
+    CreateRecoveryPlanStepRequest.add_member(:step_order, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPlanStepOrder, name: "stepOrder"))
+    CreateRecoveryPlanStepRequest.add_member(:configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPlanStepConfiguration, name: "configuration", traits: {"smithy.api#required" => {}}))
+    CreateRecoveryPlanStepRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientIdempotencyToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateRecoveryPlanStepRequest.type = Types::CreateRecoveryPlanStepRequest
+    CreateRecoveryPlanStepResponse.add_member(:recovery_plan_step, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPlanStep, name: "recoveryPlanStep", traits: {"smithy.api#required" => {}}))
+    CreateRecoveryPlanStepResponse.type = Types::CreateRecoveryPlanStepResponse
     CreateReplicationConfigurationTemplateOutput.add_member(:replication_configuration_template_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationConfigurationTemplateID, name: "replicationConfigurationTemplateID", traits: {"smithy.api#required" => {}}))
     CreateReplicationConfigurationTemplateOutput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "arn"))
     CreateReplicationConfigurationTemplateOutput.add_member(:staging_area_subnet_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetID, name: "stagingAreaSubnetId"))
@@ -383,7 +468,25 @@ module Aws::Drs
     CreateReplicationConfigurationTemplateOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "tags"))
     CreateReplicationConfigurationTemplateOutput.add_member(:pit_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: PITPolicy, name: "pitPolicy"))
     CreateReplicationConfigurationTemplateOutput.add_member(:auto_replicate_new_disks, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "autoReplicateNewDisks"))
+    CreateReplicationConfigurationTemplateOutput.add_member(:internet_protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: InternetProtocol, name: "internetProtocol"))
     CreateReplicationConfigurationTemplateOutput.type = Types::CreateReplicationConfigurationTemplateOutput
+    CreateReplicationConfigurationTemplateRequest.add_member(:staging_area_subnet_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetID, name: "stagingAreaSubnetId", traits: {"smithy.api#required" => {}}))
+    CreateReplicationConfigurationTemplateRequest.add_member(:associate_default_security_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "associateDefaultSecurityGroup"))
+    CreateReplicationConfigurationTemplateRequest.add_member(:replication_servers_security_groups_i_ds, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationServersSecurityGroupsIDs, name: "replicationServersSecurityGroupsIDs", traits: {"smithy.api#required" => {}}))
+    CreateReplicationConfigurationTemplateRequest.add_member(:replication_server_instance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EC2InstanceType, name: "replicationServerInstanceType"))
+    CreateReplicationConfigurationTemplateRequest.add_member(:use_dedicated_replication_server, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "useDedicatedReplicationServer"))
+    CreateReplicationConfigurationTemplateRequest.add_member(:default_large_staging_disk_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationConfigurationDefaultLargeStagingDiskType, name: "defaultLargeStagingDiskType"))
+    CreateReplicationConfigurationTemplateRequest.add_member(:ebs_encryption, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationConfigurationEbsEncryption, name: "ebsEncryption", traits: {"smithy.api#required" => {}}))
+    CreateReplicationConfigurationTemplateRequest.add_member(:ebs_encryption_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "ebsEncryptionKeyArn"))
+    CreateReplicationConfigurationTemplateRequest.add_member(:bandwidth_throttling, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveInteger, name: "bandwidthThrottling", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    CreateReplicationConfigurationTemplateRequest.add_member(:data_plane_routing, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationConfigurationDataPlaneRouting, name: "dataPlaneRouting"))
+    CreateReplicationConfigurationTemplateRequest.add_member(:create_public_ip, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "createPublicIP"))
+    CreateReplicationConfigurationTemplateRequest.add_member(:staging_area_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "stagingAreaTags", traits: {"smithy.api#required" => {}}))
+    CreateReplicationConfigurationTemplateRequest.add_member(:pit_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: PITPolicy, name: "pitPolicy", traits: {"smithy.api#required" => {}}))
+    CreateReplicationConfigurationTemplateRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "tags"))
+    CreateReplicationConfigurationTemplateRequest.add_member(:auto_replicate_new_disks, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "autoReplicateNewDisks"))
+    CreateReplicationConfigurationTemplateRequest.add_member(:internet_protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: InternetProtocol, name: "internetProtocol"))
+    CreateReplicationConfigurationTemplateRequest.type = Types::CreateReplicationConfigurationTemplateRequest
     CreateSourceNetworkRequest.add_member(:vpc_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcID, name: "vpcID", traits: {"smithy.api#required" => {}}))
     CreateSourceNetworkRequest.add_member(:origin_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountID, name: "originAccountID", traits: {"smithy.api#required" => {}}))
     CreateSourceNetworkRequest.add_member(:origin_region, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRegion, name: "originRegion", traits: {"smithy.api#required" => {}}))
@@ -431,6 +534,18 @@ module Aws::Drs
     DeleteLaunchConfigurationTemplateOutput.type = Types::DeleteLaunchConfigurationTemplateOutput
     DeleteRecoveryInstanceInput.add_member(:recovery_instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryInstanceID, name: "recoveryInstanceID", traits: {"smithy.api#required" => {}}))
     DeleteRecoveryInstanceInput.type = Types::DeleteRecoveryInstanceInput
+    DeleteRecoveryPlanExecutionRequest.add_member(:recovery_plan_execution_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StrictDRSARN, name: "recoveryPlanExecutionArn", traits: {"smithy.api#required" => {}}))
+    DeleteRecoveryPlanExecutionRequest.type = Types::DeleteRecoveryPlanExecutionRequest
+    DeleteRecoveryPlanExecutionResponse.add_member(:recovery_plan_execution_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StrictDRSARN, name: "recoveryPlanExecutionArn", traits: {"smithy.api#required" => {}}))
+    DeleteRecoveryPlanExecutionResponse.type = Types::DeleteRecoveryPlanExecutionResponse
+    DeleteRecoveryPlanRequest.add_member(:recovery_plan_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StrictDRSARN, name: "recoveryPlanArn", traits: {"smithy.api#required" => {}}))
+    DeleteRecoveryPlanRequest.type = Types::DeleteRecoveryPlanRequest
+    DeleteRecoveryPlanResponse.add_member(:recovery_plan_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StrictDRSARN, name: "recoveryPlanArn", traits: {"smithy.api#required" => {}}))
+    DeleteRecoveryPlanResponse.type = Types::DeleteRecoveryPlanResponse
+    DeleteRecoveryPlanStepRequest.add_member(:recovery_plan_step_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StrictDRSARN, name: "recoveryPlanStepArn", traits: {"smithy.api#required" => {}}))
+    DeleteRecoveryPlanStepRequest.type = Types::DeleteRecoveryPlanStepRequest
+    DeleteRecoveryPlanStepResponse.add_member(:recovery_plan_step_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StrictDRSARN, name: "recoveryPlanStepArn", traits: {"smithy.api#required" => {}}))
+    DeleteRecoveryPlanStepResponse.type = Types::DeleteRecoveryPlanStepResponse
     DeleteReplicationConfigurationTemplateInput.add_member(:replication_configuration_template_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationConfigurationTemplateID, name: "replicationConfigurationTemplateID", traits: {"smithy.api#required" => {}}))
     DeleteReplicationConfigurationTemplateInput.type = Types::DeleteReplicationConfigurationTemplateInput
     DeleteReplicationConfigurationTemplateOutput.type = Types::DeleteReplicationConfigurationTemplateOutput
@@ -544,9 +659,14 @@ module Aws::Drs
     Disk.type = Types::Disk
     Disks.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Disk, name: "member"))
     EbsSnapshotsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EbsSnapshot, name: "member"))
+    ErrorDetail.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
+    ErrorDetail.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "code", traits: {"smithy.api#required" => {}}))
+    ErrorDetail.type = Types::ErrorDetail
     EventResourceData.add_member(:source_network_data, Types::EventResourceData::SourceNetworkData, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceNetworkData, name: "sourceNetworkData"))
     EventResourceData.add_member(:unknown, Types::EventResourceData::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     EventResourceData.type = Types::EventResourceData
+    ExecutionServerStepConfiguration.add_member(:servers, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPlanExecutionServers, name: "servers", traits: {"smithy.api#required" => {}}))
+    ExecutionServerStepConfiguration.type = Types::ExecutionServerStepConfiguration
     ExportSourceNetworkCfnTemplateRequest.add_member(:source_network_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceNetworkID, name: "sourceNetworkID", traits: {"smithy.api#required" => {}}))
     ExportSourceNetworkCfnTemplateRequest.type = Types::ExportSourceNetworkCfnTemplateRequest
     ExportSourceNetworkCfnTemplateResponse.add_member(:s3_destination_url, ::Smithy::Schema::Shapes::MemberShape.new(target: LargeBoundedString, name: "s3DestinationUrl"))
@@ -557,6 +677,7 @@ module Aws::Drs
     GetFailbackReplicationConfigurationOutput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedString, name: "name"))
     GetFailbackReplicationConfigurationOutput.add_member(:bandwidth_throttling, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveInteger, name: "bandwidthThrottling", traits: {"smithy.api#default" => 0}))
     GetFailbackReplicationConfigurationOutput.add_member(:use_private_ip, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "usePrivateIP"))
+    GetFailbackReplicationConfigurationOutput.add_member(:internet_protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: InternetProtocol, name: "internetProtocol"))
     GetFailbackReplicationConfigurationOutput.type = Types::GetFailbackReplicationConfigurationOutput
     GetLaunchConfigurationInput.add_member(:source_server_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceServerID, name: "sourceServerID", traits: {"smithy.api#required" => {}}))
     GetLaunchConfigurationInput.type = Types::GetLaunchConfigurationInput
@@ -570,7 +691,24 @@ module Aws::Drs
     GetLaunchConfigurationOutput.add_member(:licensing, ::Smithy::Schema::Shapes::MemberShape.new(target: Licensing, name: "licensing"))
     GetLaunchConfigurationOutput.add_member(:post_launch_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "postLaunchEnabled"))
     GetLaunchConfigurationOutput.add_member(:launch_into_instance_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchIntoInstanceProperties, name: "launchIntoInstanceProperties"))
+    GetLaunchConfigurationOutput.add_member(:recovery_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryMode, name: "recoveryMode"))
     GetLaunchConfigurationOutput.type = Types::GetLaunchConfigurationOutput
+    GetRecoveryPlanExecutionRequest.add_member(:recovery_plan_execution_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StrictDRSARN, name: "recoveryPlanExecutionArn", traits: {"smithy.api#required" => {}}))
+    GetRecoveryPlanExecutionRequest.type = Types::GetRecoveryPlanExecutionRequest
+    GetRecoveryPlanExecutionResponse.add_member(:recovery_plan_execution, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPlanExecution, name: "recoveryPlanExecution", traits: {"smithy.api#required" => {}}))
+    GetRecoveryPlanExecutionResponse.type = Types::GetRecoveryPlanExecutionResponse
+    GetRecoveryPlanExecutionStepRequest.add_member(:recovery_plan_execution_step_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StrictDRSARN, name: "recoveryPlanExecutionStepArn", traits: {"smithy.api#required" => {}}))
+    GetRecoveryPlanExecutionStepRequest.type = Types::GetRecoveryPlanExecutionStepRequest
+    GetRecoveryPlanExecutionStepResponse.add_member(:recovery_plan_execution_step, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPlanExecutionStep, name: "recoveryPlanExecutionStep", traits: {"smithy.api#required" => {}}))
+    GetRecoveryPlanExecutionStepResponse.type = Types::GetRecoveryPlanExecutionStepResponse
+    GetRecoveryPlanRequest.add_member(:recovery_plan_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StrictDRSARN, name: "recoveryPlanArn", traits: {"smithy.api#required" => {}}))
+    GetRecoveryPlanRequest.type = Types::GetRecoveryPlanRequest
+    GetRecoveryPlanResponse.add_member(:recovery_plan, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPlan, name: "recoveryPlan", traits: {"smithy.api#required" => {}}))
+    GetRecoveryPlanResponse.type = Types::GetRecoveryPlanResponse
+    GetRecoveryPlanStepRequest.add_member(:recovery_plan_step_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StrictDRSARN, name: "recoveryPlanStepArn", traits: {"smithy.api#required" => {}}))
+    GetRecoveryPlanStepRequest.type = Types::GetRecoveryPlanStepRequest
+    GetRecoveryPlanStepResponse.add_member(:recovery_plan_step, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPlanStep, name: "recoveryPlanStep", traits: {"smithy.api#required" => {}}))
+    GetRecoveryPlanStepResponse.type = Types::GetRecoveryPlanStepResponse
     GetReplicationConfigurationInput.add_member(:source_server_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceServerID, name: "sourceServerID", traits: {"smithy.api#required" => {}}))
     GetReplicationConfigurationInput.type = Types::GetReplicationConfigurationInput
     GetReplicationConfigurationOutput.add_member(:source_server_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceServerID, name: "sourceServerID"))
@@ -590,6 +728,7 @@ module Aws::Drs
     GetReplicationConfigurationOutput.add_member(:staging_area_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "stagingAreaTags"))
     GetReplicationConfigurationOutput.add_member(:pit_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: PITPolicy, name: "pitPolicy"))
     GetReplicationConfigurationOutput.add_member(:auto_replicate_new_disks, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "autoReplicateNewDisks"))
+    GetReplicationConfigurationOutput.add_member(:internet_protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: InternetProtocol, name: "internetProtocol"))
     GetReplicationConfigurationOutput.type = Types::GetReplicationConfigurationOutput
     IPsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedString, name: "member"))
     IdentificationHints.add_member(:fqdn, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedString, name: "fqdn"))
@@ -623,6 +762,8 @@ module Aws::Drs
     JobLogEventData.add_member(:raw_error, ::Smithy::Schema::Shapes::MemberShape.new(target: LargeBoundedString, name: "rawError"))
     JobLogEventData.add_member(:conversion_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: ConversionProperties, name: "conversionProperties"))
     JobLogEventData.add_member(:event_resource_data, ::Smithy::Schema::Shapes::MemberShape.new(target: EventResourceData, name: "eventResourceData"))
+    JobLogEventData.add_member(:attempt_count, ::Smithy::Schema::Shapes::MemberShape.new(target: JobEventAttemptCount, name: "attemptCount", traits: {"smithy.api#default" => 0}))
+    JobLogEventData.add_member(:max_attempts_count, ::Smithy::Schema::Shapes::MemberShape.new(target: JobEventAttemptCount, name: "maxAttemptsCount", traits: {"smithy.api#default" => 0}))
     JobLogEventData.type = Types::JobLogEventData
     JobLogs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: JobLog, name: "member"))
     JobsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Job, name: "member"))
@@ -667,6 +808,7 @@ module Aws::Drs
     LaunchConfigurationTemplate.add_member(:export_bucket_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "exportBucketArn"))
     LaunchConfigurationTemplate.add_member(:post_launch_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "postLaunchEnabled"))
     LaunchConfigurationTemplate.add_member(:launch_into_source_instance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "launchIntoSourceInstance"))
+    LaunchConfigurationTemplate.add_member(:recovery_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryMode, name: "recoveryMode"))
     LaunchConfigurationTemplate.type = Types::LaunchConfigurationTemplate
     LaunchConfigurationTemplateIDs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchConfigurationTemplateID, name: "member"))
     LaunchConfigurationTemplates.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchConfigurationTemplate, name: "member"))
@@ -702,6 +844,37 @@ module Aws::Drs
     ListLaunchActionsResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchActions, name: "items"))
     ListLaunchActionsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
     ListLaunchActionsResponse.type = Types::ListLaunchActionsResponse
+    ListRecoveryPlanExecutionStepsFilter.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPlanExecutionStepStatus, name: "status"))
+    ListRecoveryPlanExecutionStepsFilter.type = Types::ListRecoveryPlanExecutionStepsFilter
+    ListRecoveryPlanExecutionStepsRequest.add_member(:recovery_plan_execution_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StrictDRSARN, name: "recoveryPlanExecutionArn", traits: {"smithy.api#required" => {}}))
+    ListRecoveryPlanExecutionStepsRequest.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: ListRecoveryPlanExecutionStepsFilter, name: "filter"))
+    ListRecoveryPlanExecutionStepsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResultsType, name: "maxResults"))
+    ListRecoveryPlanExecutionStepsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
+    ListRecoveryPlanExecutionStepsRequest.type = Types::ListRecoveryPlanExecutionStepsRequest
+    ListRecoveryPlanExecutionStepsResponse.add_member(:recovery_plan_execution_steps, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPlanExecutionStepSummaryList, name: "recoveryPlanExecutionSteps", traits: {"smithy.api#required" => {}}))
+    ListRecoveryPlanExecutionStepsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
+    ListRecoveryPlanExecutionStepsResponse.type = Types::ListRecoveryPlanExecutionStepsResponse
+    ListRecoveryPlanExecutionsRequest.add_member(:recovery_plan_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StrictDRSARN, name: "recoveryPlanArn"))
+    ListRecoveryPlanExecutionsRequest.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPlanExecutionStatus, name: "status"))
+    ListRecoveryPlanExecutionsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResultsType, name: "maxResults"))
+    ListRecoveryPlanExecutionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
+    ListRecoveryPlanExecutionsRequest.type = Types::ListRecoveryPlanExecutionsRequest
+    ListRecoveryPlanExecutionsResponse.add_member(:recovery_plan_executions, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPlanExecutionSummaryList, name: "recoveryPlanExecutions", traits: {"smithy.api#required" => {}}))
+    ListRecoveryPlanExecutionsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
+    ListRecoveryPlanExecutionsResponse.type = Types::ListRecoveryPlanExecutionsResponse
+    ListRecoveryPlanStepsRequest.add_member(:recovery_plan_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StrictDRSARN, name: "recoveryPlanArn", traits: {"smithy.api#required" => {}}))
+    ListRecoveryPlanStepsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResultsType, name: "maxResults"))
+    ListRecoveryPlanStepsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
+    ListRecoveryPlanStepsRequest.type = Types::ListRecoveryPlanStepsRequest
+    ListRecoveryPlanStepsResponse.add_member(:recovery_plan_steps, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPlanStepList, name: "recoveryPlanSteps", traits: {"smithy.api#required" => {}}))
+    ListRecoveryPlanStepsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
+    ListRecoveryPlanStepsResponse.type = Types::ListRecoveryPlanStepsResponse
+    ListRecoveryPlansRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResultsType, name: "maxResults"))
+    ListRecoveryPlansRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
+    ListRecoveryPlansRequest.type = Types::ListRecoveryPlansRequest
+    ListRecoveryPlansResponse.add_member(:recovery_plans, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPlanSummaryList, name: "recoveryPlans", traits: {"smithy.api#required" => {}}))
+    ListRecoveryPlansResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
+    ListRecoveryPlansResponse.type = Types::ListRecoveryPlansResponse
     ListStagingAccountsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "maxResults", traits: {"smithy.api#default" => nil, "smithy.api#httpQuery" => "maxResults", "smithy.api#range" => {"min" => 1, "max" => 50}}))
     ListStagingAccountsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
     ListStagingAccountsInput.type = Types::ListStagingAccountsInput
@@ -841,6 +1014,86 @@ module Aws::Drs
     RecoveryLifeCycle.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobID, name: "jobID"))
     RecoveryLifeCycle.add_member(:last_recovery_result, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryResult, name: "lastRecoveryResult"))
     RecoveryLifeCycle.type = Types::RecoveryLifeCycle
+    RecoveryPlan.add_member(:recovery_plan_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StrictDRSARN, name: "recoveryPlanArn", traits: {"smithy.api#required" => {}}))
+    RecoveryPlan.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPlanName, name: "name", traits: {"smithy.api#required" => {}}))
+    RecoveryPlan.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPlanDescription, name: "description"))
+    RecoveryPlan.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPlanStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    RecoveryPlan.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ISO8601DatetimeString, name: "createdAt", traits: {"smithy.api#required" => {}}))
+    RecoveryPlan.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ISO8601DatetimeString, name: "updatedAt", traits: {"smithy.api#required" => {}}))
+    RecoveryPlan.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "tags"))
+    RecoveryPlan.type = Types::RecoveryPlan
+    RecoveryPlanExecution.add_member(:recovery_plan_execution_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StrictDRSARN, name: "recoveryPlanExecutionArn", traits: {"smithy.api#required" => {}}))
+    RecoveryPlanExecution.add_member(:recovery_plan_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StrictDRSARN, name: "recoveryPlanArn", traits: {"smithy.api#required" => {}}))
+    RecoveryPlanExecution.add_member(:mode, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPlanExecutionMode, name: "mode", traits: {"smithy.api#required" => {}}))
+    RecoveryPlanExecution.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPlanExecutionStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    RecoveryPlanExecution.add_member(:started_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ISO8601DatetimeString, name: "startedAt", traits: {"smithy.api#required" => {}}))
+    RecoveryPlanExecution.add_member(:completed_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ISO8601DatetimeString, name: "completedAt"))
+    RecoveryPlanExecution.add_member(:error_detail, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDetail, name: "errorDetail"))
+    RecoveryPlanExecution.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "tags"))
+    RecoveryPlanExecution.type = Types::RecoveryPlanExecution
+    RecoveryPlanExecutionServer.add_member(:server_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceServerARN, name: "serverArn", traits: {"smithy.api#required" => {}}))
+    RecoveryPlanExecutionServer.add_member(:impact_level, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPlanServerImpactLevel, name: "impactLevel"))
+    RecoveryPlanExecutionServer.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobID, name: "jobID"))
+    RecoveryPlanExecutionServer.type = Types::RecoveryPlanExecutionServer
+    RecoveryPlanExecutionServers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPlanExecutionServer, name: "member"))
+    RecoveryPlanExecutionSourceServer.add_member(:source_server_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceServerID, name: "sourceServerID", traits: {"smithy.api#required" => {}}))
+    RecoveryPlanExecutionSourceServer.add_member(:recovery_snapshot_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoverySnapshotID, name: "recoverySnapshotID", traits: {"smithy.api#required" => {}}))
+    RecoveryPlanExecutionSourceServer.type = Types::RecoveryPlanExecutionSourceServer
+    RecoveryPlanExecutionSourceServerList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPlanExecutionSourceServer, name: "member"))
+    RecoveryPlanExecutionStep.add_member(:recovery_plan_execution_step_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StrictDRSARN, name: "recoveryPlanExecutionStepArn", traits: {"smithy.api#required" => {}}))
+    RecoveryPlanExecutionStep.add_member(:step_index, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPlanStepOrder, name: "stepIndex", traits: {"smithy.api#required" => {}}))
+    RecoveryPlanExecutionStep.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPlanExecutionStepStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    RecoveryPlanExecutionStep.add_member(:step_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPlanStepName, name: "stepName", traits: {"smithy.api#required" => {}}))
+    RecoveryPlanExecutionStep.add_member(:configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPlanExecutionStepConfiguration, name: "configuration", traits: {"smithy.api#required" => {}}))
+    RecoveryPlanExecutionStep.add_member(:error_detail, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDetail, name: "errorDetail"))
+    RecoveryPlanExecutionStep.add_member(:attempt, ::Smithy::Schema::Shapes::MemberShape.new(target: StrictlyPositiveInteger, name: "attempt", traits: {"smithy.api#required" => {}}))
+    RecoveryPlanExecutionStep.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ISO8601DatetimeString, name: "createdAt", traits: {"smithy.api#required" => {}}))
+    RecoveryPlanExecutionStep.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ISO8601DatetimeString, name: "updatedAt", traits: {"smithy.api#required" => {}}))
+    RecoveryPlanExecutionStep.type = Types::RecoveryPlanExecutionStep
+    RecoveryPlanExecutionStepConfiguration.add_member(:execution_server_step_configuration, Types::RecoveryPlanExecutionStepConfiguration::ExecutionServerStepConfiguration, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionServerStepConfiguration, name: "executionServerStepConfiguration"))
+    RecoveryPlanExecutionStepConfiguration.add_member(:wait_step_configuration, Types::RecoveryPlanExecutionStepConfiguration::WaitStepConfiguration, ::Smithy::Schema::Shapes::MemberShape.new(target: WaitStepConfiguration, name: "waitStepConfiguration"))
+    RecoveryPlanExecutionStepConfiguration.add_member(:unknown, Types::RecoveryPlanExecutionStepConfiguration::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    RecoveryPlanExecutionStepConfiguration.type = Types::RecoveryPlanExecutionStepConfiguration
+    RecoveryPlanExecutionStepSummary.add_member(:recovery_plan_execution_step_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StrictDRSARN, name: "recoveryPlanExecutionStepArn", traits: {"smithy.api#required" => {}}))
+    RecoveryPlanExecutionStepSummary.add_member(:step_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPlanStepName, name: "stepName", traits: {"smithy.api#required" => {}}))
+    RecoveryPlanExecutionStepSummary.add_member(:step_index, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPlanStepOrder, name: "stepIndex", traits: {"smithy.api#required" => {}}))
+    RecoveryPlanExecutionStepSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPlanExecutionStepStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    RecoveryPlanExecutionStepSummary.add_member(:configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPlanExecutionStepConfiguration, name: "configuration", traits: {"smithy.api#required" => {}}))
+    RecoveryPlanExecutionStepSummary.add_member(:error_detail, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDetail, name: "errorDetail"))
+    RecoveryPlanExecutionStepSummary.type = Types::RecoveryPlanExecutionStepSummary
+    RecoveryPlanExecutionStepSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPlanExecutionStepSummary, name: "member"))
+    RecoveryPlanExecutionSummary.add_member(:recovery_plan_execution_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StrictDRSARN, name: "recoveryPlanExecutionArn", traits: {"smithy.api#required" => {}}))
+    RecoveryPlanExecutionSummary.add_member(:recovery_plan_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StrictDRSARN, name: "recoveryPlanArn", traits: {"smithy.api#required" => {}}))
+    RecoveryPlanExecutionSummary.add_member(:mode, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPlanExecutionMode, name: "mode", traits: {"smithy.api#required" => {}}))
+    RecoveryPlanExecutionSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPlanExecutionStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    RecoveryPlanExecutionSummary.add_member(:started_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ISO8601DatetimeString, name: "startedAt", traits: {"smithy.api#required" => {}}))
+    RecoveryPlanExecutionSummary.add_member(:error_detail, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDetail, name: "errorDetail"))
+    RecoveryPlanExecutionSummary.type = Types::RecoveryPlanExecutionSummary
+    RecoveryPlanExecutionSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPlanExecutionSummary, name: "member"))
+    RecoveryPlanServer.add_member(:server_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceServerARN, name: "serverArn", traits: {"smithy.api#required" => {}}))
+    RecoveryPlanServer.add_member(:impact_level, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPlanServerImpactLevel, name: "impactLevel"))
+    RecoveryPlanServer.type = Types::RecoveryPlanServer
+    RecoveryPlanServers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPlanServer, name: "member"))
+    RecoveryPlanStep.add_member(:recovery_plan_step_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StrictDRSARN, name: "recoveryPlanStepArn", traits: {"smithy.api#required" => {}}))
+    RecoveryPlanStep.add_member(:step_order, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPlanStepOrder, name: "stepOrder", traits: {"smithy.api#required" => {}}))
+    RecoveryPlanStep.add_member(:step_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPlanStepName, name: "stepName", traits: {"smithy.api#required" => {}}))
+    RecoveryPlanStep.add_member(:configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPlanStepConfiguration, name: "configuration", traits: {"smithy.api#required" => {}}))
+    RecoveryPlanStep.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ISO8601DatetimeString, name: "createdAt", traits: {"smithy.api#required" => {}}))
+    RecoveryPlanStep.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ISO8601DatetimeString, name: "updatedAt", traits: {"smithy.api#required" => {}}))
+    RecoveryPlanStep.type = Types::RecoveryPlanStep
+    RecoveryPlanStepArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StrictDRSARN, name: "member"))
+    RecoveryPlanStepConfiguration.add_member(:server_step_configuration, Types::RecoveryPlanStepConfiguration::ServerStepConfiguration, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerStepConfiguration, name: "serverStepConfiguration"))
+    RecoveryPlanStepConfiguration.add_member(:wait_step_configuration, Types::RecoveryPlanStepConfiguration::WaitStepConfiguration, ::Smithy::Schema::Shapes::MemberShape.new(target: WaitStepConfiguration, name: "waitStepConfiguration"))
+    RecoveryPlanStepConfiguration.add_member(:unknown, Types::RecoveryPlanStepConfiguration::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    RecoveryPlanStepConfiguration.type = Types::RecoveryPlanStepConfiguration
+    RecoveryPlanStepList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPlanStep, name: "member"))
+    RecoveryPlanSummary.add_member(:recovery_plan_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StrictDRSARN, name: "recoveryPlanArn", traits: {"smithy.api#required" => {}}))
+    RecoveryPlanSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPlanName, name: "name", traits: {"smithy.api#required" => {}}))
+    RecoveryPlanSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPlanStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    RecoveryPlanSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ISO8601DatetimeString, name: "createdAt", traits: {"smithy.api#required" => {}}))
+    RecoveryPlanSummary.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ISO8601DatetimeString, name: "updatedAt", traits: {"smithy.api#required" => {}}))
+    RecoveryPlanSummary.type = Types::RecoveryPlanSummary
+    RecoveryPlanSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPlanSummary, name: "member"))
     RecoverySnapshot.add_member(:snapshot_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoverySnapshotID, name: "snapshotID", traits: {"smithy.api#required" => {}}))
     RecoverySnapshot.add_member(:source_server_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceServerID, name: "sourceServerID", traits: {"smithy.api#required" => {}}))
     RecoverySnapshot.add_member(:expected_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ISO8601DatetimeString, name: "expectedTimestamp", traits: {"smithy.api#required" => {}}))
@@ -848,6 +1101,11 @@ module Aws::Drs
     RecoverySnapshot.add_member(:ebs_snapshots, ::Smithy::Schema::Shapes::MemberShape.new(target: EbsSnapshotsList, name: "ebsSnapshots"))
     RecoverySnapshot.type = Types::RecoverySnapshot
     RecoverySnapshotsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoverySnapshot, name: "member"))
+    ReorderRecoveryPlanStepsRequest.add_member(:recovery_plan_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StrictDRSARN, name: "recoveryPlanArn", traits: {"smithy.api#required" => {}}))
+    ReorderRecoveryPlanStepsRequest.add_member(:ordered_step_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPlanStepArnList, name: "orderedStepArns", traits: {"smithy.api#required" => {}}))
+    ReorderRecoveryPlanStepsRequest.type = Types::ReorderRecoveryPlanStepsRequest
+    ReorderRecoveryPlanStepsResponse.add_member(:recovery_plan_steps, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPlanStepList, name: "recoveryPlanSteps", traits: {"smithy.api#required" => {}}))
+    ReorderRecoveryPlanStepsResponse.type = Types::ReorderRecoveryPlanStepsResponse
     ReplicationConfigurationReplicatedDisk.add_member(:device_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedString, name: "deviceName"))
     ReplicationConfigurationReplicatedDisk.add_member(:is_boot_disk, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "isBootDisk"))
     ReplicationConfigurationReplicatedDisk.add_member(:staging_disk_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationConfigurationReplicatedDiskStagingDiskType, name: "stagingDiskType"))
@@ -873,6 +1131,7 @@ module Aws::Drs
     ReplicationConfigurationTemplate.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "tags"))
     ReplicationConfigurationTemplate.add_member(:pit_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: PITPolicy, name: "pitPolicy"))
     ReplicationConfigurationTemplate.add_member(:auto_replicate_new_disks, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "autoReplicateNewDisks"))
+    ReplicationConfigurationTemplate.add_member(:internet_protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: InternetProtocol, name: "internetProtocol"))
     ReplicationConfigurationTemplate.type = Types::ReplicationConfigurationTemplate
     ReplicationConfigurationTemplateIDs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationConfigurationTemplateID, name: "member"))
     ReplicationConfigurationTemplates.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationConfigurationTemplate, name: "member"))
@@ -899,10 +1158,16 @@ module Aws::Drs
     RetryDataReplicationOutput.add_member(:source_network_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceNetworkID, name: "sourceNetworkID"))
     RetryDataReplicationOutput.add_member(:agent_version, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentVersion, name: "agentVersion"))
     RetryDataReplicationOutput.type = Types::RetryDataReplicationOutput
+    RetryRecoveryPlanExecutionStepRequest.add_member(:recovery_plan_execution_step_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StrictDRSARN, name: "recoveryPlanExecutionStepArn", traits: {"smithy.api#required" => {}}))
+    RetryRecoveryPlanExecutionStepRequest.type = Types::RetryRecoveryPlanExecutionStepRequest
+    RetryRecoveryPlanExecutionStepResponse.add_member(:recovery_plan_execution_step, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPlanExecutionStep, name: "recoveryPlanExecutionStep", traits: {"smithy.api#required" => {}}))
+    RetryRecoveryPlanExecutionStepResponse.type = Types::RetryRecoveryPlanExecutionStepResponse
     ReverseReplicationInput.add_member(:recovery_instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryInstanceID, name: "recoveryInstanceID", traits: {"smithy.api#required" => {}}))
     ReverseReplicationInput.type = Types::ReverseReplicationInput
     ReverseReplicationOutput.add_member(:reversed_direction_source_server_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceServerARN, name: "reversedDirectionSourceServerArn"))
     ReverseReplicationOutput.type = Types::ReverseReplicationOutput
+    ServerStepConfiguration.add_member(:servers, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPlanServers, name: "servers", traits: {"smithy.api#required" => {}}))
+    ServerStepConfiguration.type = Types::ServerStepConfiguration
     ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: LargeBoundedString, name: "message"))
     ServiceQuotaExceededException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: LargeBoundedString, name: "code"))
     ServiceQuotaExceededException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LargeBoundedString, name: "resourceId"))
@@ -942,6 +1207,7 @@ module Aws::Drs
     SourceProperties.add_member(:ram_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveInteger, name: "ramBytes", traits: {"smithy.api#default" => 0}))
     SourceProperties.add_member(:os, ::Smithy::Schema::Shapes::MemberShape.new(target: OS, name: "os"))
     SourceProperties.add_member(:supports_nitro_instances, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "supportsNitroInstances"))
+    SourceProperties.add_member(:architecture, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceServerArchitecture, name: "architecture", traits: {"smithy.api#tags" => ["graviton"]}))
     SourceProperties.type = Types::SourceProperties
     SourceServer.add_member(:source_server_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceServerID, name: "sourceServerID"))
     SourceServer.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "arn"))
@@ -982,6 +1248,14 @@ module Aws::Drs
     StartRecoveryInput.type = Types::StartRecoveryInput
     StartRecoveryOutput.add_member(:job, ::Smithy::Schema::Shapes::MemberShape.new(target: Job, name: "job"))
     StartRecoveryOutput.type = Types::StartRecoveryOutput
+    StartRecoveryPlanExecutionRequest.add_member(:recovery_plan_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StrictDRSARN, name: "recoveryPlanArn", traits: {"smithy.api#required" => {}}))
+    StartRecoveryPlanExecutionRequest.add_member(:mode, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPlanExecutionMode, name: "mode", traits: {"smithy.api#required" => {}}))
+    StartRecoveryPlanExecutionRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientIdempotencyToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    StartRecoveryPlanExecutionRequest.add_member(:source_servers, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPlanExecutionSourceServerList, name: "sourceServers"))
+    StartRecoveryPlanExecutionRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "tags"))
+    StartRecoveryPlanExecutionRequest.type = Types::StartRecoveryPlanExecutionRequest
+    StartRecoveryPlanExecutionResponse.add_member(:recovery_plan_execution, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPlanExecution, name: "recoveryPlanExecution", traits: {"smithy.api#required" => {}}))
+    StartRecoveryPlanExecutionResponse.type = Types::StartRecoveryPlanExecutionResponse
     StartRecoveryRequestSourceServer.add_member(:source_server_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceServerID, name: "sourceServerID", traits: {"smithy.api#required" => {}}))
     StartRecoveryRequestSourceServer.add_member(:recovery_snapshot_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoverySnapshotID, name: "recoverySnapshotID"))
     StartRecoveryRequestSourceServer.type = Types::StartRecoveryRequestSourceServer
@@ -1039,6 +1313,7 @@ module Aws::Drs
     UpdateFailbackReplicationConfigurationInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedString, name: "name"))
     UpdateFailbackReplicationConfigurationInput.add_member(:bandwidth_throttling, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveInteger, name: "bandwidthThrottling", traits: {"smithy.api#default" => 0}))
     UpdateFailbackReplicationConfigurationInput.add_member(:use_private_ip, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "usePrivateIP"))
+    UpdateFailbackReplicationConfigurationInput.add_member(:internet_protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: InternetProtocol, name: "internetProtocol"))
     UpdateFailbackReplicationConfigurationInput.type = Types::UpdateFailbackReplicationConfigurationInput
     UpdateLaunchConfigurationInput.add_member(:source_server_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceServerID, name: "sourceServerID", traits: {"smithy.api#required" => {}}))
     UpdateLaunchConfigurationInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SmallBoundedString, name: "name"))
@@ -1049,6 +1324,7 @@ module Aws::Drs
     UpdateLaunchConfigurationInput.add_member(:licensing, ::Smithy::Schema::Shapes::MemberShape.new(target: Licensing, name: "licensing"))
     UpdateLaunchConfigurationInput.add_member(:post_launch_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "postLaunchEnabled"))
     UpdateLaunchConfigurationInput.add_member(:launch_into_instance_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchIntoInstanceProperties, name: "launchIntoInstanceProperties"))
+    UpdateLaunchConfigurationInput.add_member(:recovery_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryMode, name: "recoveryMode"))
     UpdateLaunchConfigurationInput.type = Types::UpdateLaunchConfigurationInput
     UpdateLaunchConfigurationOutput.add_member(:source_server_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceServerID, name: "sourceServerID"))
     UpdateLaunchConfigurationOutput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SmallBoundedString, name: "name"))
@@ -1060,6 +1336,7 @@ module Aws::Drs
     UpdateLaunchConfigurationOutput.add_member(:licensing, ::Smithy::Schema::Shapes::MemberShape.new(target: Licensing, name: "licensing"))
     UpdateLaunchConfigurationOutput.add_member(:post_launch_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "postLaunchEnabled"))
     UpdateLaunchConfigurationOutput.add_member(:launch_into_instance_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchIntoInstanceProperties, name: "launchIntoInstanceProperties"))
+    UpdateLaunchConfigurationOutput.add_member(:recovery_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryMode, name: "recoveryMode"))
     UpdateLaunchConfigurationOutput.type = Types::UpdateLaunchConfigurationOutput
     UpdateLaunchConfigurationTemplateInput.add_member(:launch_configuration_template_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchConfigurationTemplateID, name: "launchConfigurationTemplateID", traits: {"smithy.api#required" => {}}))
     UpdateLaunchConfigurationTemplateInput.add_member(:launch_disposition, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchDisposition, name: "launchDisposition"))
@@ -1070,9 +1347,29 @@ module Aws::Drs
     UpdateLaunchConfigurationTemplateInput.add_member(:export_bucket_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "exportBucketArn"))
     UpdateLaunchConfigurationTemplateInput.add_member(:post_launch_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "postLaunchEnabled"))
     UpdateLaunchConfigurationTemplateInput.add_member(:launch_into_source_instance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "launchIntoSourceInstance"))
+    UpdateLaunchConfigurationTemplateInput.add_member(:recovery_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryMode, name: "recoveryMode"))
     UpdateLaunchConfigurationTemplateInput.type = Types::UpdateLaunchConfigurationTemplateInput
     UpdateLaunchConfigurationTemplateOutput.add_member(:launch_configuration_template, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchConfigurationTemplate, name: "launchConfigurationTemplate"))
     UpdateLaunchConfigurationTemplateOutput.type = Types::UpdateLaunchConfigurationTemplateOutput
+    UpdateRecoveryPlanExecutionStepRequest.add_member(:recovery_plan_execution_step_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StrictDRSARN, name: "recoveryPlanExecutionStepArn", traits: {"smithy.api#required" => {}}))
+    UpdateRecoveryPlanExecutionStepRequest.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPlanExecutionStepStatus, name: "status"))
+    UpdateRecoveryPlanExecutionStepRequest.add_member(:servers, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPlanServers, name: "servers"))
+    UpdateRecoveryPlanExecutionStepRequest.add_member(:wait_duration_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: WaitDurationMinutes, name: "waitDurationMinutes"))
+    UpdateRecoveryPlanExecutionStepRequest.type = Types::UpdateRecoveryPlanExecutionStepRequest
+    UpdateRecoveryPlanExecutionStepResponse.add_member(:recovery_plan_execution_step, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPlanExecutionStep, name: "recoveryPlanExecutionStep", traits: {"smithy.api#required" => {}}))
+    UpdateRecoveryPlanExecutionStepResponse.type = Types::UpdateRecoveryPlanExecutionStepResponse
+    UpdateRecoveryPlanRequest.add_member(:recovery_plan_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StrictDRSARN, name: "recoveryPlanArn", traits: {"smithy.api#required" => {}}))
+    UpdateRecoveryPlanRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPlanName, name: "name"))
+    UpdateRecoveryPlanRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPlanDescription, name: "description"))
+    UpdateRecoveryPlanRequest.type = Types::UpdateRecoveryPlanRequest
+    UpdateRecoveryPlanResponse.add_member(:recovery_plan, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPlan, name: "recoveryPlan", traits: {"smithy.api#required" => {}}))
+    UpdateRecoveryPlanResponse.type = Types::UpdateRecoveryPlanResponse
+    UpdateRecoveryPlanStepRequest.add_member(:recovery_plan_step_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StrictDRSARN, name: "recoveryPlanStepArn", traits: {"smithy.api#required" => {}}))
+    UpdateRecoveryPlanStepRequest.add_member(:step_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPlanStepName, name: "stepName"))
+    UpdateRecoveryPlanStepRequest.add_member(:configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPlanStepConfiguration, name: "configuration"))
+    UpdateRecoveryPlanStepRequest.type = Types::UpdateRecoveryPlanStepRequest
+    UpdateRecoveryPlanStepResponse.add_member(:recovery_plan_step, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPlanStep, name: "recoveryPlanStep", traits: {"smithy.api#required" => {}}))
+    UpdateRecoveryPlanStepResponse.type = Types::UpdateRecoveryPlanStepResponse
     UpdateReplicationConfigurationInput.add_member(:source_server_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceServerID, name: "sourceServerID", traits: {"smithy.api#required" => {}}))
     UpdateReplicationConfigurationInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SmallBoundedString, name: "name"))
     UpdateReplicationConfigurationInput.add_member(:staging_area_subnet_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetID, name: "stagingAreaSubnetId"))
@@ -1090,6 +1387,7 @@ module Aws::Drs
     UpdateReplicationConfigurationInput.add_member(:staging_area_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "stagingAreaTags"))
     UpdateReplicationConfigurationInput.add_member(:pit_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: PITPolicy, name: "pitPolicy"))
     UpdateReplicationConfigurationInput.add_member(:auto_replicate_new_disks, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "autoReplicateNewDisks"))
+    UpdateReplicationConfigurationInput.add_member(:internet_protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: InternetProtocol, name: "internetProtocol"))
     UpdateReplicationConfigurationInput.type = Types::UpdateReplicationConfigurationInput
     UpdateReplicationConfigurationOutput.add_member(:source_server_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceServerID, name: "sourceServerID"))
     UpdateReplicationConfigurationOutput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SmallBoundedString, name: "name"))
@@ -1108,6 +1406,7 @@ module Aws::Drs
     UpdateReplicationConfigurationOutput.add_member(:staging_area_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "stagingAreaTags"))
     UpdateReplicationConfigurationOutput.add_member(:pit_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: PITPolicy, name: "pitPolicy"))
     UpdateReplicationConfigurationOutput.add_member(:auto_replicate_new_disks, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "autoReplicateNewDisks"))
+    UpdateReplicationConfigurationOutput.add_member(:internet_protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: InternetProtocol, name: "internetProtocol"))
     UpdateReplicationConfigurationOutput.type = Types::UpdateReplicationConfigurationOutput
     UpdateReplicationConfigurationTemplateInput.add_member(:replication_configuration_template_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationConfigurationTemplateID, name: "replicationConfigurationTemplateID", traits: {"smithy.api#required" => {}}))
     UpdateReplicationConfigurationTemplateInput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "arn"))
@@ -1125,6 +1424,7 @@ module Aws::Drs
     UpdateReplicationConfigurationTemplateInput.add_member(:staging_area_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "stagingAreaTags"))
     UpdateReplicationConfigurationTemplateInput.add_member(:pit_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: PITPolicy, name: "pitPolicy"))
     UpdateReplicationConfigurationTemplateInput.add_member(:auto_replicate_new_disks, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "autoReplicateNewDisks"))
+    UpdateReplicationConfigurationTemplateInput.add_member(:internet_protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: InternetProtocol, name: "internetProtocol"))
     UpdateReplicationConfigurationTemplateInput.type = Types::UpdateReplicationConfigurationTemplateInput
     UpdateReplicationConfigurationTemplateOutput.add_member(:replication_configuration_template_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationConfigurationTemplateID, name: "replicationConfigurationTemplateID", traits: {"smithy.api#required" => {}}))
     UpdateReplicationConfigurationTemplateOutput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "arn"))
@@ -1143,6 +1443,7 @@ module Aws::Drs
     UpdateReplicationConfigurationTemplateOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "tags"))
     UpdateReplicationConfigurationTemplateOutput.add_member(:pit_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: PITPolicy, name: "pitPolicy"))
     UpdateReplicationConfigurationTemplateOutput.add_member(:auto_replicate_new_disks, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "autoReplicateNewDisks"))
+    UpdateReplicationConfigurationTemplateOutput.add_member(:internet_protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: InternetProtocol, name: "internetProtocol"))
     UpdateReplicationConfigurationTemplateOutput.type = Types::UpdateReplicationConfigurationTemplateOutput
     ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: LargeBoundedString, name: "message"))
     ValidationException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: LargeBoundedString, name: "code"))
@@ -1159,12 +1460,14 @@ module Aws::Drs
     VolumeToProductCodes.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductCodes, name: "value"))
     VolumeToSizeMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: LargeBoundedString, name: "key"))
     VolumeToSizeMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveInteger, name: "value"))
+    WaitStepConfiguration.add_member(:wait_duration_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: WaitDurationMinutes, name: "waitDurationMinutes", traits: {"smithy.api#required" => {}}))
+    WaitStepConfiguration.type = Types::WaitStepConfiguration
 
     ElasticDisasterRecoveryService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.drs#ElasticDisasterRecoveryService"
       service.name = "ElasticDisasterRecoveryService"
       service.version = "2020-02-26"
-      service.traits = {"aws.api#service" => {"sdkId" => "drs", "arnNamespace" => "drs", "awsProductName" => "drs", "cloudTrailEventSource" => "drs.amazonaws.com"}, "aws.auth#sigv4" => {"name" => "drs"}, "aws.iam#defineConditionKeys" => {"drs:EC2InstanceARN" => {"type" => "String", "documentation" => "Filters access by the EC2 instance the request originated from"}}, "aws.protocols#restJson1" => {}, "smithy.api#cors" => {"additionalAllowedHeaders" => ["Content-Type", "X-Amz-Content-Sha256", "X-Amz-User-Agent", "X-Amzn-Trace-Id"], "additionalExposedHeaders" => ["X-Amzn-Errortype", "X-Amzn-Requestid", "X-Amzn-Trace-Id", "X-Amz-Apigw-Id"]}, "smithy.api#title" => "Elastic Disaster Recovery Service"}
+      service.traits = {"aws.api#service" => {"sdkId" => "drs", "arnNamespace" => "drs", "awsProductName" => "drs", "cloudTrailEventSource" => "drs.amazonaws.com"}, "aws.auth#sigv4" => {"name" => "drs"}, "aws.iam#defineConditionKeys" => {"drs:EC2InstanceARN" => {"type" => "String", "documentation" => "Filters access by the EC2 instance the request originated from"}}, "aws.protocols#restJson1" => {}, "smithy.api#cors" => {"additionalAllowedHeaders" => ["Content-Type", "X-Amz-Content-Sha256", "X-Amz-User-Agent", "X-Amzn-Trace-Id"], "additionalExposedHeaders" => ["X-Amzn-Errortype", "X-Amzn-Requestid", "X-Amzn-Trace-Id", "X-Amz-Apigw-Id"]}, "smithy.api#title" => "Elastic Disaster Recovery Service", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://drs-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://drs-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://drs.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://drs.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
       service.add_operation(:associate_source_network_stack, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.drs#AssociateSourceNetworkStack"
         operation.name = "AssociateSourceNetworkStack"
@@ -1178,6 +1481,20 @@ module Aws::Drs
         operation.errors << UninitializedAccountException
         operation.errors << ValidationException
         operation.traits = {"aws.iam#requiredActions" => ["cloudformation:DescribeStacks", "cloudformation:DescribeStackResource", "ec2:DescribeVpcs", "ec2:DescribeSubnets", "ec2:DescribeSecurityGroups", "ec2:DescribeLaunchTemplates", "ec2:DescribeLaunchTemplateVersions", "ec2:ModifyLaunchTemplate", "ec2:CreateLaunchTemplateVersion", "drs:GetLaunchConfiguration"], "smithy.api#http" => {"uri" => "/AssociateSourceNetworkStack", "method" => "POST", "code" => 202}}
+      end)
+      service.add_operation(:cancel_recovery_plan_execution, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.drs#CancelRecoveryPlanExecution"
+        operation.name = "CancelRecoveryPlanExecution"
+        operation.input = CancelRecoveryPlanExecutionRequest
+        operation.output = CancelRecoveryPlanExecutionResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << UninitializedAccountException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"uri" => "/CancelRecoveryPlanExecution", "method" => "POST", "code" => 200}}
       end)
       service.add_operation(:create_extended_source_server, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.drs#CreateExtendedSourceServer"
@@ -1206,10 +1523,39 @@ module Aws::Drs
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/CreateLaunchConfigurationTemplate", "method" => "POST", "code" => 201}}
       end)
+      service.add_operation(:create_recovery_plan, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.drs#CreateRecoveryPlan"
+        operation.name = "CreateRecoveryPlan"
+        operation.input = CreateRecoveryPlanRequest
+        operation.output = CreateRecoveryPlanResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << UninitializedAccountException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"uri" => "/CreateRecoveryPlan", "method" => "POST", "code" => 201}}
+      end)
+      service.add_operation(:create_recovery_plan_step, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.drs#CreateRecoveryPlanStep"
+        operation.name = "CreateRecoveryPlanStep"
+        operation.input = CreateRecoveryPlanStepRequest
+        operation.output = CreateRecoveryPlanStepResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << UninitializedAccountException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"uri" => "/CreateRecoveryPlanStep", "method" => "POST", "code" => 201}}
+      end)
       service.add_operation(:create_replication_configuration_template, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.drs#CreateReplicationConfigurationTemplate"
         operation.name = "CreateReplicationConfigurationTemplate"
-        operation.input = CreateReplicationConfigurationTemplateInput
+        operation.input = CreateReplicationConfigurationTemplateRequest
         operation.output = CreateReplicationConfigurationTemplateOutput
         operation.errors << AccessDeniedException
         operation.errors << InternalServerException
@@ -1280,6 +1626,48 @@ module Aws::Drs
         operation.errors << ThrottlingException
         operation.errors << UninitializedAccountException
         operation.traits = {"smithy.api#http" => {"uri" => "/DeleteRecoveryInstance", "method" => "POST", "code" => 200}}
+      end)
+      service.add_operation(:delete_recovery_plan, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.drs#DeleteRecoveryPlan"
+        operation.name = "DeleteRecoveryPlan"
+        operation.input = DeleteRecoveryPlanRequest
+        operation.output = DeleteRecoveryPlanResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << UninitializedAccountException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"uri" => "/DeleteRecoveryPlan", "method" => "POST", "code" => 200}}
+      end)
+      service.add_operation(:delete_recovery_plan_execution, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.drs#DeleteRecoveryPlanExecution"
+        operation.name = "DeleteRecoveryPlanExecution"
+        operation.input = DeleteRecoveryPlanExecutionRequest
+        operation.output = DeleteRecoveryPlanExecutionResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << UninitializedAccountException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"uri" => "/DeleteRecoveryPlanExecution", "method" => "POST", "code" => 200}}
+      end)
+      service.add_operation(:delete_recovery_plan_step, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.drs#DeleteRecoveryPlanStep"
+        operation.name = "DeleteRecoveryPlanStep"
+        operation.input = DeleteRecoveryPlanStepRequest
+        operation.output = DeleteRecoveryPlanStepResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << UninitializedAccountException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"uri" => "/DeleteRecoveryPlanStep", "method" => "POST", "code" => 200}}
       end)
       service.add_operation(:delete_replication_configuration_template, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.drs#DeleteReplicationConfigurationTemplate"
@@ -1476,6 +1864,58 @@ module Aws::Drs
         operation.errors << UninitializedAccountException
         operation.traits = {"smithy.api#http" => {"uri" => "/GetLaunchConfiguration", "method" => "POST", "code" => 200}, "smithy.api#readonly" => {}}
       end)
+      service.add_operation(:get_recovery_plan, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.drs#GetRecoveryPlan"
+        operation.name = "GetRecoveryPlan"
+        operation.input = GetRecoveryPlanRequest
+        operation.output = GetRecoveryPlanResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << UninitializedAccountException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"uri" => "/GetRecoveryPlan", "method" => "POST", "code" => 200}, "smithy.api#readonly" => {}}
+      end)
+      service.add_operation(:get_recovery_plan_execution, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.drs#GetRecoveryPlanExecution"
+        operation.name = "GetRecoveryPlanExecution"
+        operation.input = GetRecoveryPlanExecutionRequest
+        operation.output = GetRecoveryPlanExecutionResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << UninitializedAccountException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"uri" => "/GetRecoveryPlanExecution", "method" => "POST", "code" => 200}, "smithy.api#readonly" => {}}
+      end)
+      service.add_operation(:get_recovery_plan_execution_step, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.drs#GetRecoveryPlanExecutionStep"
+        operation.name = "GetRecoveryPlanExecutionStep"
+        operation.input = GetRecoveryPlanExecutionStepRequest
+        operation.output = GetRecoveryPlanExecutionStepResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << UninitializedAccountException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"uri" => "/GetRecoveryPlanExecutionStep", "method" => "POST", "code" => 200}, "smithy.api#readonly" => {}}
+      end)
+      service.add_operation(:get_recovery_plan_step, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.drs#GetRecoveryPlanStep"
+        operation.name = "GetRecoveryPlanStep"
+        operation.input = GetRecoveryPlanStepRequest
+        operation.output = GetRecoveryPlanStepResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << UninitializedAccountException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"uri" => "/GetRecoveryPlanStep", "method" => "POST", "code" => 200}, "smithy.api#readonly" => {}}
+      end)
       service.add_operation(:get_replication_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.drs#GetReplicationConfiguration"
         operation.name = "GetReplicationConfiguration"
@@ -1525,6 +1965,60 @@ module Aws::Drs
         operation.traits = {"smithy.api#http" => {"uri" => "/ListLaunchActions", "method" => "POST", "code" => 200}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListLaunchActions.new
       end)
+      service.add_operation(:list_recovery_plan_execution_steps, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.drs#ListRecoveryPlanExecutionSteps"
+        operation.name = "ListRecoveryPlanExecutionSteps"
+        operation.input = ListRecoveryPlanExecutionStepsRequest
+        operation.output = ListRecoveryPlanExecutionStepsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << UninitializedAccountException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"uri" => "/ListRecoveryPlanExecutionSteps", "method" => "POST", "code" => 200}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListRecoveryPlanExecutionSteps.new
+      end)
+      service.add_operation(:list_recovery_plan_executions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.drs#ListRecoveryPlanExecutions"
+        operation.name = "ListRecoveryPlanExecutions"
+        operation.input = ListRecoveryPlanExecutionsRequest
+        operation.output = ListRecoveryPlanExecutionsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << UninitializedAccountException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"uri" => "/ListRecoveryPlanExecutions", "method" => "POST", "code" => 200}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListRecoveryPlanExecutions.new
+      end)
+      service.add_operation(:list_recovery_plan_steps, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.drs#ListRecoveryPlanSteps"
+        operation.name = "ListRecoveryPlanSteps"
+        operation.input = ListRecoveryPlanStepsRequest
+        operation.output = ListRecoveryPlanStepsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << UninitializedAccountException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"uri" => "/ListRecoveryPlanSteps", "method" => "POST", "code" => 200}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListRecoveryPlanSteps.new
+      end)
+      service.add_operation(:list_recovery_plans, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.drs#ListRecoveryPlans"
+        operation.name = "ListRecoveryPlans"
+        operation.input = ListRecoveryPlansRequest
+        operation.output = ListRecoveryPlansResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << UninitializedAccountException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"uri" => "/ListRecoveryPlans", "method" => "POST", "code" => 200}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListRecoveryPlans.new
+      end)
       service.add_operation(:list_staging_accounts, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.drs#ListStagingAccounts"
         operation.name = "ListStagingAccounts"
@@ -1563,6 +2057,20 @@ module Aws::Drs
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/PutLaunchAction", "method" => "POST", "code" => 200}}
       end)
+      service.add_operation(:reorder_recovery_plan_steps, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.drs#ReorderRecoveryPlanSteps"
+        operation.name = "ReorderRecoveryPlanSteps"
+        operation.input = ReorderRecoveryPlanStepsRequest
+        operation.output = ReorderRecoveryPlanStepsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << UninitializedAccountException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"uri" => "/ReorderRecoveryPlanSteps", "method" => "POST", "code" => 200}}
+      end)
       service.add_operation(:retry_data_replication, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.drs#RetryDataReplication"
         operation.name = "RetryDataReplication"
@@ -1574,6 +2082,20 @@ module Aws::Drs
         operation.errors << UninitializedAccountException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#deprecated" => {"message" => "WARNING: RetryDataReplication is deprecated"}, "smithy.api#http" => {"uri" => "/RetryDataReplication", "method" => "POST", "code" => 200}}
+      end)
+      service.add_operation(:retry_recovery_plan_execution_step, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.drs#RetryRecoveryPlanExecutionStep"
+        operation.name = "RetryRecoveryPlanExecutionStep"
+        operation.input = RetryRecoveryPlanExecutionStepRequest
+        operation.output = RetryRecoveryPlanExecutionStepResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << UninitializedAccountException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"uri" => "/RetryRecoveryPlanExecutionStep", "method" => "POST", "code" => 200}}
       end)
       service.add_operation(:reverse_replication, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.drs#ReverseReplication"
@@ -1613,6 +2135,21 @@ module Aws::Drs
         operation.errors << ThrottlingException
         operation.errors << UninitializedAccountException
         operation.traits = {"aws.iam#requiredActions" => ["ec2:DetachVolume", "ec2:DescribeInstances", "ec2:TerminateInstances", "ec2:CreateTags", "ec2:DescribeLaunchTemplateVersions", "ec2:RunInstances", "ec2:DescribeSnapshots", "ec2:StopInstances", "ec2:CreateLaunchTemplateVersion", "ec2:DeleteVolume", "ec2:StartInstances", "ec2:DescribeVolumes", "ec2:DeleteLaunchTemplateVersions", "ec2:AttachVolume", "ec2:AuthorizeSecurityGroupEgress", "ec2:AuthorizeSecurityGroupIngress", "ec2:CreateLaunchTemplate", "ec2:CreateSnapshot", "ec2:CreateVolume", "ec2:DeleteSnapshot", "ec2:DescribeImages", "ec2:DescribeInstanceAttribute", "ec2:DescribeInstanceStatus", "ec2:DescribeLaunchTemplates", "ec2:DescribeSecurityGroups", "ec2:DescribeSubnets", "ec2:ModifyInstanceAttribute", "ec2:ModifyLaunchTemplate", "ec2:RevokeSecurityGroupEgress", "ec2:DescribeAccountAttributes", "ec2:DescribeAvailabilityZones", "ec2:DescribeInstanceTypes", "iam:PassRole", "drs:CreateRecoveryInstanceForDrs", "drs:ListTagsForResource"], "smithy.api#http" => {"uri" => "/StartRecovery", "method" => "POST", "code" => 202}}
+      end)
+      service.add_operation(:start_recovery_plan_execution, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.drs#StartRecoveryPlanExecution"
+        operation.name = "StartRecoveryPlanExecution"
+        operation.input = StartRecoveryPlanExecutionRequest
+        operation.output = StartRecoveryPlanExecutionResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << UninitializedAccountException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"uri" => "/StartRecoveryPlanExecution", "method" => "POST", "code" => 201}}
       end)
       service.add_operation(:start_replication, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.drs#StartReplication"
@@ -1760,6 +2297,48 @@ module Aws::Drs
         operation.errors << UninitializedAccountException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/UpdateLaunchConfigurationTemplate", "method" => "POST", "code" => 200}}
+      end)
+      service.add_operation(:update_recovery_plan, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.drs#UpdateRecoveryPlan"
+        operation.name = "UpdateRecoveryPlan"
+        operation.input = UpdateRecoveryPlanRequest
+        operation.output = UpdateRecoveryPlanResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << UninitializedAccountException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"uri" => "/UpdateRecoveryPlan", "method" => "POST", "code" => 200}}
+      end)
+      service.add_operation(:update_recovery_plan_execution_step, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.drs#UpdateRecoveryPlanExecutionStep"
+        operation.name = "UpdateRecoveryPlanExecutionStep"
+        operation.input = UpdateRecoveryPlanExecutionStepRequest
+        operation.output = UpdateRecoveryPlanExecutionStepResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << UninitializedAccountException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"uri" => "/UpdateRecoveryPlanExecutionStep", "method" => "POST", "code" => 200}}
+      end)
+      service.add_operation(:update_recovery_plan_step, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.drs#UpdateRecoveryPlanStep"
+        operation.name = "UpdateRecoveryPlanStep"
+        operation.input = UpdateRecoveryPlanStepRequest
+        operation.output = UpdateRecoveryPlanStepResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << UninitializedAccountException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"uri" => "/UpdateRecoveryPlanStep", "method" => "POST", "code" => 200}}
       end)
       service.add_operation(:update_replication_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.drs#UpdateReplicationConfiguration"

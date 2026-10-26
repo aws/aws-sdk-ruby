@@ -22,13 +22,19 @@ module Aws::S3
   #
   # ## Error Classes
   #
+  # * {AccessDenied}
+  # * {AnnotationLimitExceeded}
+  # * {AnnotationNameTooLong}
   # * {BucketAlreadyExists}
   # * {BucketAlreadyOwnedByYou}
   # * {EncryptionTypeMismatch}
   # * {IdempotencyParameterMismatch}
+  # * {InvalidAnnotationName}
   # * {InvalidObjectState}
+  # * {InvalidPrefix}
   # * {InvalidRequest}
   # * {InvalidWriteOffset}
+  # * {NoSuchAnnotation}
   # * {NoSuchBucket}
   # * {NoSuchKey}
   # * {NoSuchUpload}
@@ -36,11 +42,41 @@ module Aws::S3
   # * {ObjectAlreadyInActiveTierError}
   # * {ObjectNotInActiveTierError}
   # * {TooManyParts}
+  # * {UnsupportedMediaType}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.
   module Errors
     extend Smithy::Client::DynamicErrors
+
+    # <p>
+    #       You might receive this error for several reasons. For details, see the description of this API
+    #       operation.</p>
+    class AccessDenied < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::S3::Types::AccessDenied] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+    end
+
+    # <p>The request would exceed the maximum number of annotations allowed per object.</p>
+    class AnnotationLimitExceeded < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::S3::Types::AnnotationLimitExceeded] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+    end
+
+    # <p>The annotation name exceeds 512 bytes.</p>
+    class AnnotationNameTooLong < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::S3::Types::AnnotationNameTooLong] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+    end
 
     # <p>The requested bucket name is not available. The bucket namespace is shared by all users of the
     #       system. Select a different name and try again.</p>
@@ -89,6 +125,15 @@ module Aws::S3
       end
     end
 
+    # <p>The annotation name you provided is invalid.</p>
+    class InvalidAnnotationName < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::S3::Types::InvalidAnnotationName] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+    end
+
     # <p>Object is archived and inaccessible until restored.</p>
     #          <p>If the object you are retrieving is stored in the S3 Glacier Flexible Retrieval storage class, the
     #       S3 Glacier Deep Archive storage class, the S3 Intelligent-Tiering Archive Access tier, or the
@@ -112,21 +157,17 @@ module Aws::S3
       end
     end
 
-    # <p>You may receive this error in multiple cases. Depending on the reason for the error, you may receive
-    #       one of the messages below:</p>
-    #          <ul>
-    #             <li>
-    #                <p>Cannot specify both a write offset value and user-defined object metadata for existing
-    #           objects.</p>
-    #             </li>
-    #             <li>
-    #                <p>Checksum Type mismatch occurred, expected checksum Type: sha1, actual checksum Type:
-    #           crc32c.</p>
-    #             </li>
-    #             <li>
-    #                <p>Request body cannot be empty when 'write offset' is specified.</p>
-    #             </li>
-    #          </ul>
+    # <p>The annotation prefix you provided is invalid.</p>
+    class InvalidPrefix < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::S3::Types::InvalidPrefix] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+    end
+
+    # <p>A parameter or header in your request isn't valid. For details, see the description of this API
+    #       operation.</p>
     class InvalidRequest < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::S3::Types::InvalidRequest] data
@@ -139,6 +180,15 @@ module Aws::S3
     class InvalidWriteOffset < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::S3::Types::InvalidWriteOffset] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+    end
+
+    # <p>The specified annotation does not exist on this object.</p>
+    class NoSuchAnnotation < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::S3::Types::NoSuchAnnotation] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
         super
       end
@@ -205,6 +255,15 @@ module Aws::S3
     class TooManyParts < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::S3::Types::TooManyParts] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+    end
+
+    # <p>The annotation payload is not valid UTF-8 encoded text.</p>
+    class UnsupportedMediaType < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::S3::Types::UnsupportedMediaType] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
         super
       end

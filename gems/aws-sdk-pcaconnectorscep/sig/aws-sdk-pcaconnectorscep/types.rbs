@@ -132,6 +132,8 @@ module Aws::PcaConnectorScep
       PRIVATECA_ACCESS_DENIED: String
       PRIVATECA_INVALID_STATE: String
       PRIVATECA_RESOURCE_NOT_FOUND: String
+      VPC_ENDPOINT_RESOURCE_NOT_FOUND: String
+      VPC_ENDPOINT_DNS_ENTRIES_NOT_FOUND: String
     end
 
     class ConnectorSummary
@@ -200,6 +202,7 @@ module Aws::PcaConnectorScep
       def initialize: (
         ?certificate_authority_arn: String,
         ?mobile_device_management: Types::MobileDeviceManagement,
+        ?vpc_endpoint_id: String,
         ?client_token: String,
         ?tags: Hash[String, String],
       ) -> void
@@ -207,6 +210,7 @@ module Aws::PcaConnectorScep
 
       attr_accessor certificate_authority_arn: String?
       attr_accessor mobile_device_management: Types::MobileDeviceManagement?
+      attr_accessor vpc_endpoint_id: String?
       attr_accessor client_token: String?
       attr_accessor tags: Hash[String, String]?
     end

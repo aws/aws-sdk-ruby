@@ -62,6 +62,28 @@ module Aws::IoTDataPlane
       ?shadow_name: String
     ) -> _DeleteThingShadowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteThingShadowResponse
 
+    interface _GetConnectionResponse
+      include Smithy::Client::_Response[Types::GetConnectionResponse]
+      def connected: () -> bool?
+      def thing_name: () -> String?
+      def clean_session: () -> bool?
+      def source_ip: () -> String?
+      def source_port: () -> Integer?
+      def target_ip: () -> String?
+      def target_port: () -> Integer?
+      def keep_alive_duration: () -> Integer?
+      def connected_since: () -> Integer?
+      def disconnected_since: () -> Integer?
+      def disconnect_reason: () -> String?
+      def session_expiry: () -> Integer?
+      def client_id: () -> String?
+      def vpc_endpoint_id: () -> String?
+    end
+    def get_connection: (
+      ?client_id: String,
+      ?include_socket_information: bool
+    ) -> _GetConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetConnectionResponse
+
     interface _GetRetainedMessageResponse
       include Smithy::Client::_Response[Types::GetRetainedMessageResponse]
       def topic: () -> String?
@@ -105,6 +127,17 @@ module Aws::IoTDataPlane
       ?max_results: Integer
     ) -> _ListRetainedMessagesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRetainedMessagesResponse
 
+    interface _ListSubscriptionsResponse
+      include Smithy::Client::_Response[Types::ListSubscriptionsResponse]
+      def subscriptions: () -> Array[Types::SubscriptionSummary]?
+      def next_token: () -> String?
+    end
+    def list_subscriptions: (
+      ?client_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListSubscriptionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSubscriptionsResponse
+
     interface _PublishResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
     end
@@ -120,6 +153,24 @@ module Aws::IoTDataPlane
       ?correlation_data: String,
       ?message_expiry: Integer
     ) -> _PublishResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PublishResponse
+
+    interface _SendDirectMessageResponse
+      include Smithy::Client::_Response[Types::SendDirectMessageResponse]
+      def message: () -> String?
+      def trace_id: () -> String?
+    end
+    def send_direct_message: (
+      ?client_id: String,
+      ?topic: String,
+      ?content_type: String,
+      ?response_topic: String,
+      ?confirmation: bool,
+      ?timeout: Integer,
+      ?payload: String,
+      ?user_properties: String,
+      ?payload_format_indicator: String,
+      ?correlation_data: String
+    ) -> _SendDirectMessageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SendDirectMessageResponse
 
     interface _UpdateThingShadowResponse
       include Smithy::Client::_Response[Types::UpdateThingShadowResponse]

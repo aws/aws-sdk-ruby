@@ -377,6 +377,7 @@ module Aws::SsmSap
       WARNING: String
       UNKNOWN: String
       ERROR: String
+      STOPPING: String
     end
 
     class DatabaseSummary

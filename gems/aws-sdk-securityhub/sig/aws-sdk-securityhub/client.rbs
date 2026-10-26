@@ -264,6 +264,15 @@ module Aws::SecurityHub
               id: untyped,
               partition: String,
               region: untyped,
+              provider: String,
+              owner: {
+                account: {
+                  id: untyped
+                },
+                org: {
+                  id: untyped
+                }
+              },
               resource_role: untyped,
               tags: untyped,
               data_classification: {
@@ -3696,7 +3705,8 @@ module Aws::SecurityHub
                   provider_type: untyped,
                   project_name: untyped,
                   code_security_integration_arn: untyped
-                }
+                },
+                azure_resource: Smithy::Schema::document
               },
               application_name: untyped,
               application_arn: untyped
@@ -4005,7 +4015,8 @@ module Aws::SecurityHub
                 end: untyped,
                 date_range: {
                   value: Integer,
-                  unit: String
+                  unit: String,
+                  comparison: String
                 }
               }
             ],
@@ -4054,7 +4065,10 @@ module Aws::SecurityHub
             user_defined_fields: untyped,
             resource_application_arn: untyped,
             resource_application_name: untyped,
-            aws_account_name: untyped
+            aws_account_name: untyped,
+            resource_provider: untyped,
+            resource_owner_account_id: untyped,
+            resource_owner_org_id: untyped
           },
           actions: Array[
             {
@@ -4161,15 +4175,14 @@ module Aws::SecurityHub
       ]
     ) -> _BatchUpdateStandardsControlAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchUpdateStandardsControlAssociationsResponse
 
-    interface _ConnectorRegistrationsV2Response
-      include Smithy::Client::_Response[Types::ConnectorRegistrationsV2Response]
-      def connector_arn: () -> String?
-      def connector_id: () -> String?
+    interface _CancelExportJobV2Response
+      include Smithy::Client::_Response[Types::CancelExportJobV2Response]
+      def export_job_id: () -> String?
+      def status: () -> String?
     end
-    def connector_registrations_v2: (
-      ?auth_code: String,
-      ?auth_state: String
-    ) -> _ConnectorRegistrationsV2Response | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ConnectorRegistrationsV2Response
+    def cancel_export_job_v2: (
+      ?export_job_id: String
+    ) -> _CancelExportJobV2Response | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelExportJobV2Response
 
     interface _CreateActionTargetResponse
       include Smithy::Client::_Response[Types::CreateActionTargetResponse]
@@ -4223,7 +4236,8 @@ module Aws::SecurityHub
             end: untyped,
             date_range: {
               value: Integer,
-              unit: String
+              unit: String,
+              comparison: String
             }
           }
         ],
@@ -4272,7 +4286,10 @@ module Aws::SecurityHub
         user_defined_fields: untyped,
         resource_application_arn: untyped,
         resource_application_name: untyped,
-        aws_account_name: untyped
+        aws_account_name: untyped,
+        resource_provider: untyped,
+        resource_owner_account_id: untyped,
+        resource_owner_org_id: untyped
       },
       ?actions: Array[
         {
@@ -4337,7 +4354,8 @@ module Aws::SecurityHub
                     end: untyped,
                     date_range: {
                       value: Integer,
-                      unit: String
+                      unit: String,
+                      comparison: String
                     }
                   }
                 }
@@ -4372,7 +4390,49 @@ module Aws::SecurityHub
                   }
                 }
               ],
+              ip_filters: Array[
+                {
+                  field_name: String,
+                  filter: {
+                    cidr: untyped
+                  }
+                }
+              ],
+              nested_composite_filters: untyped,
               operator: String
+            }
+          ],
+          composite_operator: untyped
+        },
+        resource_criteria: {
+          composite_filters: Array[
+            {
+              string_filters: Array[
+                {
+                  field_name: String,
+                  filter: untyped
+                }
+              ],
+              date_filters: Array[
+                {
+                  field_name: String,
+                  filter: untyped
+                }
+              ],
+              number_filters: Array[
+                {
+                  field_name: String,
+                  filter: untyped
+                }
+              ],
+              map_filters: Array[
+                {
+                  field_name: String,
+                  filter: untyped
+                }
+              ],
+              nested_composite_filters: untyped,
+              operator: untyped
             }
           ],
           composite_operator: untyped
@@ -4388,6 +4448,9 @@ module Aws::SecurityHub
           },
           external_integration_configuration: {
             connector_arn: untyped
+          },
+          resource_fields_update: {
+            criticality: String
           }
         }
       ],
@@ -4441,11 +4504,37 @@ module Aws::SecurityHub
       ?tags: Hash[String, String]
     ) -> _CreateConfigurationPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateConfigurationPolicyResponse
 
+    interface _CreateConnectorResponse
+      include Smithy::Client::_Response[Types::CreateConnectorResponse]
+      def connector_arn: () -> String?
+      def connector_id: () -> String?
+      def connector_status: () -> String?
+      def enablement_status: () -> String?
+    end
+    def create_connector: (
+      ?name: String,
+      ?description: String,
+      ?provider: {
+        azure: {
+          aws_config_connector_arn: String,
+          scope_configuration: {
+            scope_type: String,
+            scope_values: Array[String]
+          },
+          azure_regions: Array[String]
+        }
+      },
+      ?tags: Hash[String, String],
+      ?client_token: String
+    ) -> _CreateConnectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateConnectorResponse
+
     interface _CreateConnectorV2Response
       include Smithy::Client::_Response[Types::CreateConnectorV2Response]
       def connector_arn: () -> String?
       def connector_id: () -> String?
       def auth_url: () -> String?
+      def connector_status: () -> String?
+      def enablement_status: () -> String?
     end
     def create_connector_v2: (
       ?name: String,
@@ -4456,8 +4545,15 @@ module Aws::SecurityHub
         },
         service_now: {
           instance_name: untyped,
-          client_id: untyped,
-          client_secret: String
+          secret_arn: untyped
+        },
+        azure: {
+          aws_config_connector_arn: untyped,
+          scope_configuration: {
+            scope_type: String,
+            scope_values: Array[String]
+          },
+          azure_regions: Array[String]
         }
       },
       ?kms_key_arn: String,
@@ -4501,7 +4597,8 @@ module Aws::SecurityHub
             end: untyped,
             date_range: {
               value: Integer,
-              unit: String
+              unit: String,
+              comparison: String
             }
           }
         ],
@@ -4627,7 +4724,10 @@ module Aws::SecurityHub
         compliance_security_control_parameters_value: untyped,
         aws_account_name: untyped,
         resource_application_name: untyped,
-        resource_application_arn: untyped
+        resource_application_arn: untyped,
+        resource_owner_account_id: untyped,
+        resource_owner_org_id: untyped,
+        resource_provider: untyped
       },
       ?group_by_attribute: String
     ) -> _CreateInsightResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateInsightResponse
@@ -4653,7 +4753,8 @@ module Aws::SecurityHub
     def create_ticket_v2: (
       ?connector_id: String,
       ?finding_metadata_uid: String,
-      ?client_token: String
+      ?client_token: String,
+      ?mode: String
     ) -> _CreateTicketV2Response | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTicketV2Response
 
     interface _DeclineInvitationsResponse
@@ -4693,8 +4794,17 @@ module Aws::SecurityHub
       ?identifier: String
     ) -> _DeleteConfigurationPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteConfigurationPolicyResponse
 
+    interface _DeleteConnectorResponse
+      include Smithy::Client::_Response[Types::DeleteConnectorResponse]
+      def enablement_status: () -> String?
+    end
+    def delete_connector: (
+      ?connector_id: String
+    ) -> _DeleteConnectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteConnectorResponse
+
     interface _DeleteConnectorV2Response
       include Smithy::Client::_Response[Types::DeleteConnectorV2Response]
+      def enablement_status: () -> String?
     end
     def delete_connector_v2: (
       ?connector_id: String
@@ -4787,6 +4897,7 @@ module Aws::SecurityHub
       include Smithy::Client::_Response[Types::DescribeSecurityHubV2Response]
       def hub_v2_arn: () -> String?
       def subscribed_at: () -> String?
+      def features: () -> Hash[String, Types::FeatureDetail]?
     end
     def describe_security_hub_v2: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeSecurityHubV2Response
 
@@ -4797,7 +4908,8 @@ module Aws::SecurityHub
     end
     def describe_standards: (
       ?next_token: String,
-      ?max_results: Integer
+      ?max_results: Integer,
+      ?providers: Array[String]
     ) -> _DescribeStandardsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeStandardsResponse
 
     interface _DescribeStandardsControlsResponse
@@ -4830,6 +4942,13 @@ module Aws::SecurityHub
       include Smithy::Client::_Response[Types::DisableSecurityHubResponse]
     end
     def disable_security_hub: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisableSecurityHubResponse
+
+    interface _DisableSecurityHubFeatureV2Response
+      include Smithy::Client::_Response[Types::DisableSecurityHubFeatureV2Response]
+    end
+    def disable_security_hub_feature_v2: (
+      ?feature_name: String
+    ) -> _DisableSecurityHubFeatureV2Response | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisableSecurityHubFeatureV2Response
 
     interface _DisableSecurityHubV2Response
       include Smithy::Client::_Response[Types::DisableSecurityHubV2Response]
@@ -4880,6 +4999,13 @@ module Aws::SecurityHub
       ?control_finding_generator: String
     ) -> _EnableSecurityHubResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnableSecurityHubResponse
 
+    interface _EnableSecurityHubFeatureV2Response
+      include Smithy::Client::_Response[Types::EnableSecurityHubFeatureV2Response]
+    end
+    def enable_security_hub_feature_v2: (
+      ?feature_name: String
+    ) -> _EnableSecurityHubFeatureV2Response | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnableSecurityHubFeatureV2Response
+
     interface _EnableSecurityHubV2Response
       include Smithy::Client::_Response[Types::EnableSecurityHubV2Response]
       def hub_v2_arn: () -> String?
@@ -4887,6 +5013,13 @@ module Aws::SecurityHub
     def enable_security_hub_v2: (
       ?tags: Hash[String, String]
     ) -> _EnableSecurityHubV2Response | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnableSecurityHubV2Response
+
+    interface _GenerateRecommendedPolicyV2Response
+      include Smithy::Client::_Response[Types::GenerateRecommendedPolicyV2Response]
+    end
+    def generate_recommended_policy_v2: (
+      ?metadata_uid: String
+    ) -> _GenerateRecommendedPolicyV2Response | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GenerateRecommendedPolicyV2Response
 
     interface _GetAdministratorAccountResponse
       include Smithy::Client::_Response[Types::GetAdministratorAccountResponse]
@@ -4954,6 +5087,23 @@ module Aws::SecurityHub
       }
     ) -> _GetConfigurationPolicyAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetConfigurationPolicyAssociationResponse
 
+    interface _GetConnectorResponse
+      include Smithy::Client::_Response[Types::GetConnectorResponse]
+      def connector_arn: () -> String?
+      def connector_id: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def created_at: () -> Time?
+      def last_updated_at: () -> Time?
+      def health: () -> Types::CspmHealthCheck?
+      def provider_detail: () -> Types::CspmProviderDetail?
+      def created_by: () -> String?
+      def enablement_status: () -> String?
+    end
+    def get_connector: (
+      ?connector_id: String
+    ) -> _GetConnectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetConnectorResponse
+
     interface _GetConnectorV2Response
       include Smithy::Client::_Response[Types::GetConnectorV2Response]
       def connector_arn: () -> String?
@@ -4965,6 +5115,8 @@ module Aws::SecurityHub
       def last_updated_at: () -> Time?
       def health: () -> Types::HealthCheck?
       def provider_detail: () -> Types::ProviderDetail?
+      def enablement_status: () -> String?
+      def enablement_status_reason: () -> String?
     end
     def get_connector_v2: (
       ?connector_id: String
@@ -4978,8 +5130,27 @@ module Aws::SecurityHub
     def get_enabled_standards: (
       ?standards_subscription_arns: Array[String],
       ?next_token: String,
-      ?max_results: Integer
+      ?max_results: Integer,
+      ?providers: Array[String]
     ) -> _GetEnabledStandardsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEnabledStandardsResponse
+
+    interface _GetExportJobV2Response
+      include Smithy::Client::_Response[Types::GetExportJobV2Response]
+      def export_job_id: () -> String?
+      def name: () -> String?
+      def status: () -> String?
+      def data_type: () -> String?
+      def output_configuration: () -> Types::ExportOutput?
+      def scopes: () -> Types::ExportScopes?
+      def destination: () -> Types::ExportDestination?
+      def failure_code: () -> String?
+      def failure_message: () -> String?
+      def started_at: () -> Time?
+      def ended_at: () -> Time?
+    end
+    def get_export_job_v2: (
+      ?export_job_id: String
+    ) -> _GetExportJobV2Response | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetExportJobV2Response
 
     interface _GetFindingAggregatorResponse
       include Smithy::Client::_Response[Types::GetFindingAggregatorResponse]
@@ -5035,7 +5206,8 @@ module Aws::SecurityHub
                       end: untyped,
                       date_range: {
                         value: Integer,
-                        unit: String
+                        unit: String,
+                        comparison: String
                       }
                     }
                   }
@@ -5070,6 +5242,15 @@ module Aws::SecurityHub
                     }
                   }
                 ],
+                ip_filters: Array[
+                  {
+                    field_name: String,
+                    filter: {
+                      cidr: untyped
+                    }
+                  }
+                ],
+                nested_composite_filters: untyped,
                 operator: String
               }
             ],
@@ -5078,6 +5259,14 @@ module Aws::SecurityHub
           group_by_field: String
         }
       ],
+      ?scopes: {
+        aws_organizations: Array[
+          {
+            organization_id: String,
+            organizational_unit_id: untyped
+          }
+        ]
+      },
       ?sort_order: String,
       ?max_statistic_results: Integer
     ) -> _GetFindingStatisticsV2Response | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFindingStatisticsV2Response
@@ -5106,7 +5295,8 @@ module Aws::SecurityHub
             end: untyped,
             date_range: {
               value: Integer,
-              unit: String
+              unit: String,
+              comparison: String
             }
           }
         ],
@@ -5232,7 +5422,10 @@ module Aws::SecurityHub
         compliance_security_control_parameters_value: untyped,
         aws_account_name: untyped,
         resource_application_name: untyped,
-        resource_application_arn: untyped
+        resource_application_arn: untyped,
+        resource_owner_account_id: untyped,
+        resource_owner_org_id: untyped,
+        resource_provider: untyped
       },
       ?sort_criteria: Array[
         {
@@ -5243,6 +5436,37 @@ module Aws::SecurityHub
       ?next_token: String,
       ?max_results: Integer
     ) -> _GetFindingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFindingsResponse
+
+    interface _GetFindingsTrendsV2Response
+      include Smithy::Client::_Response[Types::GetFindingsTrendsV2Response]
+      def granularity: () -> String?
+      def trends_metrics: () -> Array[Types::TrendsMetricsResult]?
+      def next_token: () -> String?
+    end
+    def get_findings_trends_v2: (
+      ?filters: {
+        composite_filters: Array[
+          {
+            string_filters: Array[
+              {
+                field_name: String,
+                filter: {
+                  value: String,
+                  comparison: String
+                }
+              }
+            ],
+            nested_composite_filters: untyped,
+            operator: String
+          }
+        ],
+        composite_operator: untyped
+      },
+      ?start_time: Time,
+      ?end_time: Time,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _GetFindingsTrendsV2Response | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFindingsTrendsV2Response
 
     interface _GetFindingsV2Response
       include Smithy::Client::_Response[Types::GetFindingsV2Response]
@@ -5270,7 +5494,8 @@ module Aws::SecurityHub
                   end: untyped,
                   date_range: {
                     value: Integer,
-                    unit: String
+                    unit: String,
+                    comparison: String
                   }
                 }
               }
@@ -5305,10 +5530,27 @@ module Aws::SecurityHub
                 }
               }
             ],
+            ip_filters: Array[
+              {
+                field_name: String,
+                filter: {
+                  cidr: untyped
+                }
+              }
+            ],
+            nested_composite_filters: untyped,
             operator: String
           }
         ],
         composite_operator: untyped
+      },
+      ?scopes: {
+        aws_organizations: Array[
+          {
+            organization_id: String,
+            organizational_unit_id: untyped
+          }
+        ]
       },
       ?sort_criteria: Array[
         {
@@ -5360,6 +5602,49 @@ module Aws::SecurityHub
       ?account_ids: Array[String]
     ) -> _GetMembersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMembersResponse
 
+    interface _GetRecommendedPolicyV2Response
+      include Smithy::Client::_Response[Types::GetRecommendedPolicyV2Response]
+      def next_token: () -> String?
+      def recommendation_type: () -> String?
+      def recommendation_steps: () -> Array[Types::RecommendationStep]?
+      def error: () -> Types::RecommendationError?
+      def status: () -> String?
+      def resource_arn: () -> String?
+    end
+    def get_recommended_policy_v2: (
+      ?metadata_uid: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _GetRecommendedPolicyV2Response | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRecommendedPolicyV2Response
+
+    interface _GetRemediationsV2Response
+      include Smithy::Client::_Response[Types::GetRemediationsV2Response]
+      def items: () -> Array[Types::RemediationV2Item]?
+      def next_token: () -> String?
+    end
+    def get_remediations_v2: (
+      ?target_uid: String,
+      ?metadata_uid: String,
+      ?filters: {
+        composite_filters: Array[
+          {
+            string_filters: Array[
+              {
+                field_name: String,
+                filter: {
+                  value: String
+                }
+              }
+            ]
+          }
+        ]
+      },
+      ?show_guidance: bool,
+      ?guidance_format: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetRemediationsV2Response | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRemediationsV2Response
+
     interface _GetResourcesStatisticsV2Response
       include Smithy::Client::_Response[Types::GetResourcesStatisticsV2Response]
       def group_by_results: () -> Array[Types::GroupByResult]?
@@ -5388,7 +5673,8 @@ module Aws::SecurityHub
                       end: untyped,
                       date_range: {
                         value: Integer,
-                        unit: String
+                        unit: String,
+                        comparison: String
                       }
                     }
                   }
@@ -5415,6 +5701,7 @@ module Aws::SecurityHub
                     }
                   }
                 ],
+                nested_composite_filters: untyped,
                 operator: String
               }
             ],
@@ -5422,9 +5709,48 @@ module Aws::SecurityHub
           }
         }
       ],
+      ?scopes: {
+        aws_organizations: Array[
+          {
+            organization_id: String,
+            organizational_unit_id: untyped
+          }
+        ]
+      },
       ?sort_order: String,
       ?max_statistic_results: Integer
     ) -> _GetResourcesStatisticsV2Response | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResourcesStatisticsV2Response
+
+    interface _GetResourcesTrendsV2Response
+      include Smithy::Client::_Response[Types::GetResourcesTrendsV2Response]
+      def granularity: () -> String?
+      def trends_metrics: () -> Array[Types::ResourcesTrendsMetricsResult]?
+      def next_token: () -> String?
+    end
+    def get_resources_trends_v2: (
+      ?filters: {
+        composite_filters: Array[
+          {
+            string_filters: Array[
+              {
+                field_name: String,
+                filter: {
+                  value: String,
+                  comparison: String
+                }
+              }
+            ],
+            nested_composite_filters: untyped,
+            operator: String
+          }
+        ],
+        composite_operator: untyped
+      },
+      ?start_time: Time,
+      ?end_time: Time,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _GetResourcesTrendsV2Response | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResourcesTrendsV2Response
 
     interface _GetResourcesV2Response
       include Smithy::Client::_Response[Types::GetResourcesV2Response]
@@ -5452,7 +5778,8 @@ module Aws::SecurityHub
                   end: untyped,
                   date_range: {
                     value: Integer,
-                    unit: String
+                    unit: String,
+                    comparison: String
                   }
                 }
               }
@@ -5479,10 +5806,19 @@ module Aws::SecurityHub
                 }
               }
             ],
+            nested_composite_filters: untyped,
             operator: String
           }
         ],
         composite_operator: untyped
+      },
+      ?scopes: {
+        aws_organizations: Array[
+          {
+            organization_id: String,
+            organizational_unit_id: untyped
+          }
+        ]
       },
       ?sort_criteria: Array[
         {
@@ -5565,6 +5901,19 @@ module Aws::SecurityHub
       }
     ) -> _ListConfigurationPolicyAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListConfigurationPolicyAssociationsResponse
 
+    interface _ListConnectorsResponse
+      include Smithy::Client::_Response[Types::ListConnectorsResponse]
+      def next_token: () -> String?
+      def connectors: () -> Array[Types::CspmConnectorSummary]?
+    end
+    def list_connectors: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?provider_name: String,
+      ?connector_status: String,
+      ?enablement_status: String
+    ) -> _ListConnectorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListConnectorsResponse
+
     interface _ListConnectorsV2Response
       include Smithy::Client::_Response[Types::ListConnectorsV2Response]
       def next_token: () -> String?
@@ -5574,7 +5923,8 @@ module Aws::SecurityHub
       ?next_token: String,
       ?max_results: Integer,
       ?provider_name: String,
-      ?connector_status: String
+      ?connector_status: String,
+      ?enablement_status: String
     ) -> _ListConnectorsV2Response | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListConnectorsV2Response
 
     interface _ListEnabledProductsForImportResponse
@@ -5587,6 +5937,33 @@ module Aws::SecurityHub
       ?max_results: Integer
     ) -> _ListEnabledProductsForImportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEnabledProductsForImportResponse
 
+    interface _ListExportJobsV2Response
+      include Smithy::Client::_Response[Types::ListExportJobsV2Response]
+      def items: () -> Array[Types::ExportSummary]?
+      def next_token: () -> String?
+    end
+    def list_export_jobs_v2: (
+      ?status: String,
+      ?data_type: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListExportJobsV2Response | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListExportJobsV2Response
+
+    interface _ListExposuresByRemediationV2Response
+      include Smithy::Client::_Response[Types::ListExposuresByRemediationV2Response]
+      def items: () -> Array[Types::ExposureFinding]?
+      def target_uid: () -> String?
+      def resource: () -> Types::RemediationResource?
+      def total_count: () -> Integer?
+      def trait: () -> Types::RemediationTrait?
+      def next_token: () -> String?
+    end
+    def list_exposures_by_remediation_v2: (
+      ?target_uid: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListExposuresByRemediationV2Response | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListExposuresByRemediationV2Response
+
     interface _ListFindingAggregatorsResponse
       include Smithy::Client::_Response[Types::ListFindingAggregatorsResponse]
       def finding_aggregators: () -> Array[Types::FindingAggregator]?
@@ -5596,6 +5973,18 @@ module Aws::SecurityHub
       ?next_token: String,
       ?max_results: Integer
     ) -> _ListFindingAggregatorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFindingAggregatorsResponse
+
+    interface _ListFreeTrialStatusesV2Response
+      include Smithy::Client::_Response[Types::ListFreeTrialStatusesV2Response]
+      def account_free_trial_statuses: () -> Array[Types::AccountFreeTrialStatus]?
+      def next_token: () -> String?
+    end
+    def list_free_trial_statuses_v2: (
+      ?account_ids: Array[String],
+      ?statuses: Array[String],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListFreeTrialStatusesV2Response | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFreeTrialStatusesV2Response
 
     interface _ListInvitationsResponse
       include Smithy::Client::_Response[Types::ListInvitationsResponse]
@@ -5638,7 +6027,8 @@ module Aws::SecurityHub
     def list_security_control_definitions: (
       ?standards_arn: String,
       ?next_token: String,
-      ?max_results: Integer
+      ?max_results: Integer,
+      ?providers: Array[String]
     ) -> _ListSecurityControlDefinitionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSecurityControlDefinitionsResponse
 
     interface _ListStandardsControlAssociationsResponse
@@ -5659,6 +6049,16 @@ module Aws::SecurityHub
     def list_tags_for_resource: (
       ?resource_arn: String
     ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _RegisterConnectorV2Response
+      include Smithy::Client::_Response[Types::RegisterConnectorV2Response]
+      def connector_arn: () -> String?
+      def connector_id: () -> String?
+    end
+    def register_connector_v2: (
+      ?auth_code: String,
+      ?auth_state: String
+    ) -> _RegisterConnectorV2Response | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterConnectorV2Response
 
     interface _StartConfigurationPolicyAssociationResponse
       include Smithy::Client::_Response[Types::StartConfigurationPolicyAssociationResponse]
@@ -5690,6 +6090,106 @@ module Aws::SecurityHub
       },
       ?configuration_policy_identifier: String
     ) -> _StartConfigurationPolicyDisassociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartConfigurationPolicyDisassociationResponse
+
+    interface _StartExportJobV2Response
+      include Smithy::Client::_Response[Types::StartExportJobV2Response]
+      def export_job_id: () -> String?
+    end
+    def start_export_job_v2: (
+      ?name: String,
+      ?destination: {
+        s3: {
+          bucket_arn: String,
+          kms_key_arn: untyped,
+          object_prefix: String
+        }
+      },
+      ?output_configuration: {
+        findings: {
+          format: String,
+          filters: {
+            composite_filters: Array[
+              {
+                string_filters: Array[
+                  {
+                    field_name: String,
+                    filter: {
+                      value: String,
+                      comparison: String
+                    }
+                  }
+                ],
+                date_filters: Array[
+                  {
+                    field_name: String,
+                    filter: {
+                      start: untyped,
+                      end: untyped,
+                      date_range: {
+                        value: Integer,
+                        unit: String,
+                        comparison: String
+                      }
+                    }
+                  }
+                ],
+                boolean_filters: Array[
+                  {
+                    field_name: String,
+                    filter: {
+                      value: bool
+                    }
+                  }
+                ],
+                number_filters: Array[
+                  {
+                    field_name: String,
+                    filter: {
+                      gte: Float,
+                      lte: untyped,
+                      eq: untyped,
+                      gt: untyped,
+                      lt: untyped
+                    }
+                  }
+                ],
+                map_filters: Array[
+                  {
+                    field_name: String,
+                    filter: {
+                      key: untyped,
+                      value: untyped,
+                      comparison: String
+                    }
+                  }
+                ],
+                ip_filters: Array[
+                  {
+                    field_name: String,
+                    filter: {
+                      cidr: untyped
+                    }
+                  }
+                ],
+                nested_composite_filters: untyped,
+                operator: String
+              }
+            ],
+            composite_operator: untyped
+          },
+          selected_fields: Array[String]
+        }
+      },
+      ?scopes: {
+        aws_organizations: Array[
+          {
+            organization_id: String,
+            organizational_unit_id: untyped
+          }
+        ]
+      },
+      ?client_token: String
+    ) -> _StartExportJobV2Response | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartExportJobV2Response
 
     interface _TagResourceResponse
       include Smithy::Client::_Response[Types::TagResourceResponse]
@@ -5759,7 +6259,8 @@ module Aws::SecurityHub
                     end: untyped,
                     date_range: {
                       value: Integer,
-                      unit: String
+                      unit: String,
+                      comparison: String
                     }
                   }
                 }
@@ -5794,7 +6295,49 @@ module Aws::SecurityHub
                   }
                 }
               ],
+              ip_filters: Array[
+                {
+                  field_name: String,
+                  filter: {
+                    cidr: untyped
+                  }
+                }
+              ],
+              nested_composite_filters: untyped,
               operator: String
+            }
+          ],
+          composite_operator: untyped
+        },
+        resource_criteria: {
+          composite_filters: Array[
+            {
+              string_filters: Array[
+                {
+                  field_name: String,
+                  filter: untyped
+                }
+              ],
+              date_filters: Array[
+                {
+                  field_name: String,
+                  filter: untyped
+                }
+              ],
+              number_filters: Array[
+                {
+                  field_name: String,
+                  filter: untyped
+                }
+              ],
+              map_filters: Array[
+                {
+                  field_name: String,
+                  filter: untyped
+                }
+              ],
+              nested_composite_filters: untyped,
+              operator: untyped
             }
           ],
           composite_operator: untyped
@@ -5810,6 +6353,9 @@ module Aws::SecurityHub
           },
           external_integration_configuration: {
             connector_arn: untyped
+          },
+          resource_fields_update: {
+            criticality: String
           }
         }
       ]
@@ -5862,16 +6408,46 @@ module Aws::SecurityHub
       }
     ) -> _UpdateConfigurationPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateConfigurationPolicyResponse
 
+    interface _UpdateConnectorResponse
+      include Smithy::Client::_Response[Types::UpdateConnectorResponse]
+      def connector_status: () -> String?
+      def enablement_status: () -> String?
+    end
+    def update_connector: (
+      ?connector_id: String,
+      ?description: String,
+      ?provider: {
+        azure: {
+          scope_configuration: {
+            scope_type: String,
+            scope_values: Array[String]
+          },
+          azure_regions: Array[String]
+        }
+      }
+    ) -> _UpdateConnectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateConnectorResponse
+
     interface _UpdateConnectorV2Response
       include Smithy::Client::_Response[Types::UpdateConnectorV2Response]
+      def connector_status: () -> String?
+      def enablement_status: () -> String?
     end
     def update_connector_v2: (
       ?connector_id: String,
-      ?client_secret: String,
       ?description: String,
       ?provider: {
         jira_cloud: {
           project_key: String
+        },
+        service_now: {
+          secret_arn: untyped
+        },
+        azure: {
+          scope_configuration: {
+            scope_type: String,
+            scope_values: Array[String]
+          },
+          azure_regions: Array[String]
         }
       }
     ) -> _UpdateConnectorV2Response | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateConnectorV2Response
@@ -5911,7 +6487,8 @@ module Aws::SecurityHub
             end: untyped,
             date_range: {
               value: Integer,
-              unit: String
+              unit: String,
+              comparison: String
             }
           }
         ],
@@ -6037,7 +6614,10 @@ module Aws::SecurityHub
         compliance_security_control_parameters_value: untyped,
         aws_account_name: untyped,
         resource_application_name: untyped,
-        resource_application_arn: untyped
+        resource_application_arn: untyped,
+        resource_owner_account_id: untyped,
+        resource_owner_org_id: untyped,
+        resource_provider: untyped
       },
       ?note: {
         text: String,
@@ -6070,7 +6650,8 @@ module Aws::SecurityHub
             end: untyped,
             date_range: {
               value: Integer,
-              unit: String
+              unit: String,
+              comparison: String
             }
           }
         ],
@@ -6196,7 +6777,10 @@ module Aws::SecurityHub
         compliance_security_control_parameters_value: untyped,
         aws_account_name: untyped,
         resource_application_name: untyped,
-        resource_application_arn: untyped
+        resource_application_arn: untyped,
+        resource_owner_account_id: untyped,
+        resource_owner_org_id: untyped,
+        resource_provider: untyped
       },
       ?group_by_attribute: String
     ) -> _UpdateInsightResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateInsightResponse

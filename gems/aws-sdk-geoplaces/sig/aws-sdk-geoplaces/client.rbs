@@ -97,7 +97,10 @@ module Aws::GeoPlaces
       ?language: String,
       ?political_view: String,
       ?intended_use: String,
-      ?key: String
+      ?key: String,
+      ?postal_code_mode: String,
+      ?address_translations: Array[String],
+      ?address_names_mode: String
     ) -> _GeocodeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GeocodeResponse
 
     interface _GetPlaceResponse
@@ -123,6 +126,9 @@ module Aws::GeoPlaces
       def phonemes: () -> Types::PhonemeDetails?
       def main_address: () -> Types::RelatedPlace?
       def secondary_addresses: () -> Array[Types::RelatedPlace]?
+      def place_attributes: () -> Array[String]?
+      def estimated_point_address: () -> bool?
+      def cross_references: () -> Array[Types::CrossReference]?
     end
     def get_place: (
       ?place_id: String,
@@ -130,7 +136,8 @@ module Aws::GeoPlaces
       ?language: String,
       ?political_view: String,
       ?intended_use: String,
-      ?key: String
+      ?key: String,
+      ?address_names_mode: String
     ) -> _GetPlaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPlaceResponse
 
     interface _ReverseGeocodeResponse
@@ -149,7 +156,9 @@ module Aws::GeoPlaces
       ?language: String,
       ?political_view: String,
       ?intended_use: String,
-      ?key: String
+      ?key: String,
+      ?heading: Float,
+      ?address_names_mode: String
     ) -> _ReverseGeocodeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ReverseGeocodeResponse
 
     interface _SearchNearbyResponse
@@ -204,6 +213,7 @@ module Aws::GeoPlaces
       ?political_view: String,
       ?intended_use: String,
       ?next_token: String,
+      ?travel_mode: String,
       ?key: String
     ) -> _SearchTextResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchTextResponse
 
@@ -230,6 +240,7 @@ module Aws::GeoPlaces
       ?language: String,
       ?political_view: String,
       ?intended_use: String,
+      ?travel_mode: String,
       ?key: String
     ) -> _SuggestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SuggestResponse
   end

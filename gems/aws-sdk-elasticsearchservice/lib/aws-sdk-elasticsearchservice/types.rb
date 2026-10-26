@@ -463,6 +463,73 @@ module Aws::ElasticsearchService
       end
     end
 
+    # <p>Specifies the automated snapshot pause options for the domain. These options allow you to temporarily pause automated snapshots for a specified time period.</p>
+    # @!attribute enabled
+    #   <p>Whether automated snapshot pause is enabled for the domain.</p>
+    #   @return [Boolean]
+    # @!attribute start_time
+    #   <p>The timestamp at which the automated snapshot pause begins.</p>
+    #   @return [Time]
+    # @!attribute end_time
+    #   <p>The timestamp at which the automated snapshot pause ends.</p>
+    #   @return [Time]
+    # @!attribute state
+    #   <p>The current state of the automated snapshot pause. Valid values are <code>Active</code>, <code>Completed</code>, <code>Scheduled</code>, and <code>Disabled</code>.</p>
+    #   @return [String]
+    class AutomatedSnapshotPauseOptions < Struct.new(
+      nil,
+      :enabled,
+      :start_time,
+      :end_time,
+      :state,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The status of automated snapshot pause options for the specified Elasticsearch domain.</p>
+    # @!attribute options
+    #   <p>Automated snapshot pause options for the specified Elasticsearch domain.</p>
+    #   @return [Types::AutomatedSnapshotPauseOptions]
+    # @!attribute status
+    #   <p>The current status of the automated snapshot pause options for the specified Elasticsearch domain.</p>
+    #   @return [Types::OptionStatus]
+    class AutomatedSnapshotPauseOptionsStatus < Struct.new(
+      nil,
+      :options,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Specifies the automated snapshot pause request options for the domain.</p>
+    #        <important>
+    #            <p>Suspending snapshots reduces data protection. You cannot restore your domain to
+    #                points in time when snapshots are suspended. Use this feature only for short-term
+    #                operational needs such as migrations or maintenance windows.</p>
+    #        </important>
+    #        <p>Maximum suspension duration: 3 days.</p>
+    # @!attribute enabled
+    #   <p>Whether to enable or disable automated snapshot pause for the domain.</p>
+    #   @return [Boolean]
+    # @!attribute start_time
+    #   <p>The timestamp at which the automated snapshot pause should begin.</p>
+    #   @return [Time]
+    # @!attribute end_time
+    #   <p>The timestamp at which the automated snapshot pause should end. The maximum allowed
+    #              duration between <code>StartTime</code> and <code>EndTime</code> is 3 days.</p>
+    #   @return [Time]
+    class AutomatedSnapshotPauseRequestOptions < Struct.new(
+      nil,
+      :enabled,
+      :start_time,
+      :end_time,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>An error occurred while processing the request.</p>
     # @!attribute message
     #   <p>A description of the error.</p>
@@ -805,6 +872,24 @@ module Aws::ElasticsearchService
     # @!attribute tag_list
     #   <p>A list of <code>Tag</code> added during domain creation.</p>
     #   @return [Array<Types::Tag>]
+    # @!attribute deployment_strategy_options
+    #   <p>Specifies the deployment strategy options.</p>
+    #   @return [Types::DeploymentStrategyOptions]
+    # @!attribute automated_snapshot_pause_options
+    #   <p>Specifies the automated snapshot pause options for the domain.</p>
+    #           <important>
+    #               <p>Suspending snapshots reduces data protection. You cannot restore your domain to
+    #                   points in time when snapshots are suspended. Use this feature only for short-term
+    #                   operational needs such as migrations or maintenance windows.</p>
+    #           </important>
+    #           <p>Maximum suspension duration: 3 days.</p>
+    #   @return [Types::AutomatedSnapshotPauseRequestOptions]
+    # @!attribute use_case
+    #   <p>The primary use case for the domain. For valid values, see <code>DomainUseCase</code>.</p>
+    #   @return [String]
+    # @!attribute engine_mode
+    #   <p>The engine mode for the domain. For valid values and requirements, see <code>DomainEngineMode</code>.</p>
+    #   @return [String]
     class CreateElasticsearchDomainRequest < Struct.new(
       nil,
       :domain_name,
@@ -823,6 +908,10 @@ module Aws::ElasticsearchService
       :advanced_security_options,
       :auto_tune_options,
       :tag_list,
+      :deployment_strategy_options,
+      :automated_snapshot_pause_options,
+      :use_case,
+      :engine_mode,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1096,6 +1185,34 @@ module Aws::ElasticsearchService
     class DeleteVpcEndpointResponse < Struct.new(
       nil,
       :vpc_endpoint_summary,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Specifies the deployment strategy options for the domain.</p>
+    # @!attribute deployment_strategy
+    #   <p>Specifies the deployment strategy for the domain. Valid values are <code>Default</code> and <code>CapacityOptimized</code>.</p>
+    #   @return [String]
+    class DeploymentStrategyOptions < Struct.new(
+      nil,
+      :deployment_strategy,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Specifies the status of deployment strategy options for the specified Elasticsearch domain.</p>
+    # @!attribute options
+    #   <p>Specifies deployment strategy options for the specified Elasticsearch domain.</p>
+    #   @return [Types::DeploymentStrategyOptions]
+    # @!attribute status
+    #   <p>Specifies the status of the deployment strategy options for the specified Elasticsearch domain.</p>
+    #   @return [Types::OptionStatus]
+    class DeploymentStrategyOptionsStatus < Struct.new(
+      nil,
+      :options,
+      :status,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1640,6 +1757,7 @@ module Aws::ElasticsearchService
     #               <li><b>Policy-Min-TLS-1-0-2019-07: </b> TLS security policy that supports TLS version 1.0 to TLS version 1.2</li>
     #               <li><b>Policy-Min-TLS-1-2-2019-07: </b> TLS security policy that supports only TLS version 1.2</li>
     #               <li><b>Policy-Min-TLS-1-2-PFS-2023-10: </b> TLS security policy that supports TLS version 1.2 to TLS version 1.3 with perfect forward secrecy cipher suites</li>
+    #               <li><b>Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08: </b> TLS security policy that supports TLS version 1.3 with FIPS</li>
     #           </ul>
     #       </p>
     #   @return [String]
@@ -1954,6 +2072,18 @@ module Aws::ElasticsearchService
     # @!attribute modifying_properties
     #   <p>Information about the domain properties that are currently being modified.</p>
     #   @return [Array<Types::ModifyingProperties>]
+    # @!attribute deployment_strategy_options
+    #   <p>Specifies <code>DeploymentStrategyOptions</code> for the domain. </p>
+    #   @return [Types::DeploymentStrategyOptionsStatus]
+    # @!attribute automated_snapshot_pause_options
+    #   <p>Specifies <code>AutomatedSnapshotPauseOptions</code> for the domain. </p>
+    #   @return [Types::AutomatedSnapshotPauseOptionsStatus]
+    # @!attribute use_case
+    #   <p>The use case configured for the domain.</p>
+    #   @return [Types::UseCaseStatus]
+    # @!attribute engine_mode
+    #   <p>The engine mode configured for the domain.</p>
+    #   @return [Types::EngineModeStatus]
     class ElasticsearchDomainConfig < Struct.new(
       nil,
       :elasticsearch_version,
@@ -1972,6 +2102,10 @@ module Aws::ElasticsearchService
       :auto_tune_options,
       :change_progress_details,
       :modifying_properties,
+      :deployment_strategy_options,
+      :automated_snapshot_pause_options,
+      :use_case,
+      :engine_mode,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2058,6 +2192,18 @@ module Aws::ElasticsearchService
     # @!attribute modifying_properties
     #   <p>Information about the domain properties that are currently being modified.</p>
     #   @return [Array<Types::ModifyingProperties>]
+    # @!attribute deployment_strategy_options
+    #   <p>The current status of the Elasticsearch domain's deployment strategy options.</p>
+    #   @return [Types::DeploymentStrategyOptions]
+    # @!attribute automated_snapshot_pause_options
+    #   <p>The current status of the Elasticsearch domain's automated snapshot pause options.</p>
+    #   @return [Types::AutomatedSnapshotPauseOptions]
+    # @!attribute use_case
+    #   <p>The primary use case for the domain.</p>
+    #   @return [String]
+    # @!attribute engine_mode
+    #   <p>The engine mode for the domain.</p>
+    #   @return [String]
     class ElasticsearchDomainStatus < Struct.new(
       nil,
       :domain_id,
@@ -2087,6 +2233,10 @@ module Aws::ElasticsearchService
       :change_progress_details,
       :domain_processing_status,
       :modifying_properties,
+      :deployment_strategy_options,
+      :automated_snapshot_pause_options,
+      :use_case,
+      :engine_mode,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2132,6 +2282,22 @@ module Aws::ElasticsearchService
     #   <p> Specifies the status of the Encryption At Rest options for the specified Elasticsearch domain.</p>
     #   @return [Types::OptionStatus]
     class EncryptionAtRestOptionsStatus < Struct.new(
+      nil,
+      :options,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The status of the engine mode for the domain.</p>
+    # @!attribute options
+    #   <p>The engine mode configured for the domain.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the engine mode for the domain.</p>
+    #   @return [Types::OptionStatus]
+    class EngineModeStatus < Struct.new(
       nil,
       :options,
       :status,
@@ -3838,6 +4004,24 @@ module Aws::ElasticsearchService
     #              This will not actually perform the Update.
     #          </p>
     #   @return [Boolean]
+    # @!attribute deployment_strategy_options
+    #   <p>Specifies the deployment strategy options.</p>
+    #   @return [Types::DeploymentStrategyOptions]
+    # @!attribute automated_snapshot_pause_options
+    #   <p>Specifies the automated snapshot pause options for the domain.</p>
+    #         <important>
+    #             <p>Suspending snapshots reduces data protection. You cannot restore your domain to
+    #                 points in time when snapshots are suspended. Use this feature only for short-term
+    #                 operational needs such as migrations or maintenance windows.</p>
+    #         </important>
+    #         <p>Maximum suspension duration: 3 days.</p>
+    #   @return [Types::AutomatedSnapshotPauseRequestOptions]
+    # @!attribute use_case
+    #   <p>The primary use case for the domain. For valid values, see <code>DomainUseCase</code>.</p>
+    #   @return [String]
+    # @!attribute engine_mode
+    #   <p>The engine mode for the domain. For valid values and requirements, see <code>DomainEngineMode</code>.</p>
+    #   @return [String]
     class UpdateElasticsearchDomainConfigRequest < Struct.new(
       nil,
       :domain_name,
@@ -3855,6 +4039,10 @@ module Aws::ElasticsearchService
       :encryption_at_rest_options,
       :auto_tune_options,
       :dry_run,
+      :deployment_strategy_options,
+      :automated_snapshot_pause_options,
+      :use_case,
+      :engine_mode,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4086,6 +4274,22 @@ module Aws::ElasticsearchService
       :upgrade_step_status,
       :issues,
       :progress_percent,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The status of the use case for the domain.</p>
+    # @!attribute options
+    #   <p>The use case configured for the domain.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the use case for the domain.</p>
+    #   @return [Types::OptionStatus]
+    class UseCaseStatus < Struct.new(
+      nil,
+      :options,
+      :status,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

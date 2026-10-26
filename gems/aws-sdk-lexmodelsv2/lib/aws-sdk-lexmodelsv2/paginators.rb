@@ -7,6 +7,31 @@ module Aws::LexModelsV2
   module Paginators
 
     # @api private
+    class DescribeBotAnalyzerRecommendation
+      def next_tokens(data)
+        next_token = data.next_token
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:next_token]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = prev_token
+        tokens
+      end
+
+      def items(data)
+        data.bot_analyzer_recommendation_list
+      end
+    end
+
+    # @api private
     class ListAggregatedUtterances
       def next_tokens(data)
         next_token = data.next_token
@@ -78,6 +103,31 @@ module Aws::LexModelsV2
 
       def items(data)
         raise NotImplementedError, 'item iteration is not implemented for this operation'
+      end
+    end
+
+    # @api private
+    class ListBotAnalyzerHistory
+      def next_tokens(data)
+        next_token = data.next_token
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:next_token]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = prev_token
+        tokens
+      end
+
+      def items(data)
+        data.bot_analyzer_history_list
       end
     end
 

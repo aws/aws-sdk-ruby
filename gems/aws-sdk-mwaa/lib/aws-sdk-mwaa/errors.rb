@@ -27,6 +27,7 @@ module Aws::MWAA
   # * {ResourceNotFoundException}
   # * {RestApiClientException}
   # * {RestApiServerException}
+  # * {ServiceUnavailableException}
   # * {ValidationException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
@@ -73,8 +74,7 @@ module Aws::MWAA
       end
     end
 
-    # <p>An exception indicating that a client-side error occurred during the Apache Airflow
-    #             REST API call.</p>
+    # <p>An exception indicating that a client-side error occurred during the Apache Airflow REST API call.</p>
     class RestApiClientException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MWAA::Types::RestApiClientException] data
@@ -87,15 +87,13 @@ module Aws::MWAA
         @data[:rest_api_status_code]
       end
 
-      # <p>The error response data from the Apache Airflow REST API call, provided as a JSON
-      #             object.</p>
+      # <p>The error response data from the Apache Airflow REST API call, provided as a JSON object.</p>
       def rest_api_response
         @data[:rest_api_response]
       end
     end
 
-    # <p>An exception indicating that a server-side error occurred during the Apache Airflow
-    #             REST API call.</p>
+    # <p>An exception indicating that a server-side error occurred during the Apache Airflow REST API call.</p>
     class RestApiServerException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MWAA::Types::RestApiServerException] data
@@ -108,10 +106,22 @@ module Aws::MWAA
         @data[:rest_api_status_code]
       end
 
-      # <p>The error response data from the Apache Airflow REST API call, provided as a JSON
-      #             object.</p>
+      # <p>The error response data from the Apache Airflow REST API call, provided as a JSON object.</p>
       def rest_api_response
         @data[:rest_api_response]
+      end
+    end
+
+    # <p>ServiceUnavailableException: The service is currently unavailable.</p>
+    class ServiceUnavailableException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::MWAA::Types::ServiceUnavailableException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
       end
     end
 

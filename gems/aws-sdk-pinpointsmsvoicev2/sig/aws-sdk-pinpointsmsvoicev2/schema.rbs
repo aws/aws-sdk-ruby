@@ -19,8 +19,23 @@ module Aws::PinpointSMSVoiceV2
     AttachmentStatus: StringShape
     AttachmentUploadErrorReason: StringShape
     AttachmentUrl: StringShape
+    AvailablePhoneNumberList: ListShape
+    CarrierLookupInputPhoneNumberType: StringShape
+    CarrierLookupRequest: StructureShape
+    CarrierLookupResult: StructureShape
+    CarrierStatus: StringShape
+    CarrierStatusInformation: StructureShape
+    CarrierStatusInformationList: ListShape
     ClientToken: StringShape
     CloudWatchLogsDestination: StructureShape
+    ConditionOperator: StringShape
+    ConditionValue: StringShape
+    ConditionValueList: ListShape
+    ConditionalBehavior: StructureShape
+    ConditionalFieldBehavior: StringShape
+    ConditionalRule: StructureShape
+    ConditionalRuleList: ListShape
+    ConditionalValidation: StructureShape
     ConfigurationSetFilter: StructureShape
     ConfigurationSetFilterList: ListShape
     ConfigurationSetFilterName: StringShape
@@ -34,16 +49,26 @@ module Aws::PinpointSMSVoiceV2
     ContextKey: StringShape
     ContextMap: MapShape
     ContextValue: StringShape
+    CountryLaunchStatus: StringShape
+    CountryLaunchStatusFilter: StructureShape
+    CountryLaunchStatusFilterList: ListShape
+    CountryLaunchStatusFilterName: StringShape
+    CountryLaunchStatusInformation: StructureShape
+    CountryLaunchStatusInformationList: ListShape
     CreateConfigurationSetRequest: StructureShape
     CreateConfigurationSetResult: StructureShape
     CreateEventDestinationRequest: StructureShape
     CreateEventDestinationResult: StructureShape
+    CreateNotifyConfigurationRequest: StructureShape
+    CreateNotifyConfigurationResult: StructureShape
     CreateOptOutListRequest: StructureShape
     CreateOptOutListResult: StructureShape
     CreatePoolRequest: StructureShape
     CreatePoolResult: StructureShape
     CreateProtectConfigurationRequest: StructureShape
     CreateProtectConfigurationResult: StructureShape
+    CreateRcsAgentRequest: StructureShape
+    CreateRcsAgentResult: StructureShape
     CreateRegistrationAssociationRequest: StructureShape
     CreateRegistrationAssociationResult: StructureShape
     CreateRegistrationAttachmentRequest: StructureShape
@@ -68,6 +93,10 @@ module Aws::PinpointSMSVoiceV2
     DeleteKeywordResult: StructureShape
     DeleteMediaMessageSpendLimitOverrideRequest: StructureShape
     DeleteMediaMessageSpendLimitOverrideResult: StructureShape
+    DeleteNotifyConfigurationRequest: StructureShape
+    DeleteNotifyConfigurationResult: StructureShape
+    DeleteNotifyMessageSpendLimitOverrideRequest: StructureShape
+    DeleteNotifyMessageSpendLimitOverrideResult: StructureShape
     DeleteOptOutListRequest: StructureShape
     DeleteOptOutListResult: StructureShape
     DeleteOptedOutNumberRequest: StructureShape
@@ -78,6 +107,10 @@ module Aws::PinpointSMSVoiceV2
     DeleteProtectConfigurationResult: StructureShape
     DeleteProtectConfigurationRuleSetNumberOverrideRequest: StructureShape
     DeleteProtectConfigurationRuleSetNumberOverrideResult: StructureShape
+    DeleteRcsAgentRequest: StructureShape
+    DeleteRcsAgentResult: StructureShape
+    DeleteRcsMessageSpendLimitOverrideRequest: StructureShape
+    DeleteRcsMessageSpendLimitOverrideResult: StructureShape
     DeleteRegistrationAttachmentRequest: StructureShape
     DeleteRegistrationAttachmentResult: StructureShape
     DeleteRegistrationFieldValueRequest: StructureShape
@@ -101,6 +134,10 @@ module Aws::PinpointSMSVoiceV2
     DescribeConfigurationSetsResult: StructureShape
     DescribeKeywordsRequest: StructureShape
     DescribeKeywordsResult: StructureShape
+    DescribeNotifyConfigurationsRequest: StructureShape
+    DescribeNotifyConfigurationsResult: StructureShape
+    DescribeNotifyTemplatesRequest: StructureShape
+    DescribeNotifyTemplatesResult: StructureShape
     DescribeOptOutListsRequest: StructureShape
     DescribeOptOutListsResult: StructureShape
     DescribeOptedOutNumbersRequest: StructureShape
@@ -111,6 +148,10 @@ module Aws::PinpointSMSVoiceV2
     DescribePoolsResult: StructureShape
     DescribeProtectConfigurationsRequest: StructureShape
     DescribeProtectConfigurationsResult: StructureShape
+    DescribeRcsAgentCountryLaunchStatusRequest: StructureShape
+    DescribeRcsAgentCountryLaunchStatusResult: StructureShape
+    DescribeRcsAgentsRequest: StructureShape
+    DescribeRcsAgentsResult: StructureShape
     DescribeRegistrationAttachmentsRequest: StructureShape
     DescribeRegistrationAttachmentsResult: StructureShape
     DescribeRegistrationFieldDefinitionsRequest: StructureShape
@@ -135,17 +176,21 @@ module Aws::PinpointSMSVoiceV2
     DestinationCountryParameterValue: StringShape
     DestinationCountryParameters: MapShape
     DestinationPhoneNumberList: ListShape
+    DialingCountryCodeType: StringShape
     DisassociateOriginationIdentityRequest: StructureShape
     DisassociateOriginationIdentityResult: StructureShape
     DisassociateProtectConfigurationRequest: StructureShape
     DisassociateProtectConfigurationResult: StructureShape
     DiscardRegistrationVersionRequest: StructureShape
     DiscardRegistrationVersionResult: StructureShape
+    E164PhoneNumberType: StringShape
     EventDestination: StructureShape
     EventDestinationList: ListShape
     EventDestinationName: StringShape
     EventType: StringShape
     EventTypeList: ListShape
+    FieldCondition: StructureShape
+    FieldConditionList: ListShape
     FieldPath: StringShape
     FieldPathList: ListShape
     FieldRequirement: StringShape
@@ -157,8 +202,10 @@ module Aws::PinpointSMSVoiceV2
     GetResourcePolicyRequest: StructureShape
     GetResourcePolicyResult: StructureShape
     IamRoleArn: StringShape
+    IamRoleArnOrUnset: StringShape
     InternalServerException: StructureShape
     IsoCountryCode: StringShape
+    IsoCountryCodeList: ListShape
     Keyword: StringShape
     KeywordAction: StringShape
     KeywordFilter: StructureShape
@@ -170,6 +217,11 @@ module Aws::PinpointSMSVoiceV2
     KeywordMessage: StringShape
     KinesisFirehoseDestination: StructureShape
     LanguageCode: StringShape
+    ListAvailablePhoneNumbersMaxResults: IntegerShape
+    ListAvailablePhoneNumbersRequest: StructureShape
+    ListAvailablePhoneNumbersResult: StructureShape
+    ListNotifyCountriesRequest: StructureShape
+    ListNotifyCountriesResult: StructureShape
     ListPoolOriginationIdentitiesRequest: StructureShape
     ListPoolOriginationIdentitiesResult: StructureShape
     ListProtectConfigurationRuleSetNumberOverrideFilter: ListShape
@@ -180,6 +232,9 @@ module Aws::PinpointSMSVoiceV2
     ListTagsForResourceRequest: StructureShape
     ListTagsForResourceResult: StructureShape
     LogGroupArn: StringShape
+    LongMap: MapShape
+    MCCType: StringShape
+    MNCType: StringShape
     MaxPrice: StringShape
     MaxResults: IntegerShape
     MediaMessageOriginationIdentity: StringShape
@@ -189,11 +244,47 @@ module Aws::PinpointSMSVoiceV2
     MessageId: StringShape
     MessageType: StringShape
     MessageTypeList: ListShape
+    MessagingLimits: StructureShape
     MonthlyLimit: IntegerShape
     NextToken: StringShape
     NonEmptyTagList: ListShape
+    NotifyConfigurationArn: StringShape
+    NotifyConfigurationDisplayName: StringShape
+    NotifyConfigurationFilter: StructureShape
+    NotifyConfigurationFilterList: ListShape
+    NotifyConfigurationFilterName: StringShape
+    NotifyConfigurationId: StringShape
+    NotifyConfigurationIdList: ListShape
+    NotifyConfigurationIdOrArn: StringShape
+    NotifyConfigurationInformation: StructureShape
+    NotifyConfigurationInformationList: ListShape
+    NotifyConfigurationStatus: StringShape
+    NotifyConfigurationTier: StringShape
+    NotifyConfigurationTierList: ListShape
+    NotifyConfigurationUseCase: StringShape
+    NotifyCountryInformation: StructureShape
+    NotifyCountryInformationList: ListShape
+    NotifyEnabledChannelsList: ListShape
+    NotifyLanguageCode: StringShape
+    NotifyPoolIdOrUnset: StringShape
+    NotifyTemplateFilter: StructureShape
+    NotifyTemplateFilterList: ListShape
+    NotifyTemplateFilterName: StringShape
+    NotifyTemplateId: StringShape
+    NotifyTemplateIdList: ListShape
+    NotifyTemplateInformation: StructureShape
+    NotifyTemplateInformationList: ListShape
+    NotifyTemplateStatus: StringShape
+    NotifyTemplateType: StringShape
+    NotifyTemplateVersion: IntegerShape
+    NotifyTierList: ListShape
+    NotifyUseCaseList: ListShape
     NumberCapability: StringShape
     NumberCapabilityList: ListShape
+    NumberFilterList: ListShape
+    NumberFilterValue: StringShape
+    NumberPreferenceItem: StructureShape
+    NumberPreferenceList: ListShape
     NumberStatus: StringShape
     NumberType: StringShape
     OptOutListInformation: StructureShape
@@ -218,6 +309,7 @@ module Aws::PinpointSMSVoiceV2
     PhoneNumberIdOrArn: StringShape
     PhoneNumberInformation: StructureShape
     PhoneNumberInformationList: ListShape
+    PhoneNumberType: StringShape
     PhoneOrPoolIdOrArn: StringShape
     PhoneOrSenderIdOrArn: StringShape
     PoolFilter: StructureShape
@@ -231,6 +323,8 @@ module Aws::PinpointSMSVoiceV2
     PoolOriginationIdentitiesFilterList: ListShape
     PoolOriginationIdentitiesFilterName: StringShape
     PoolStatus: StringShape
+    PreferenceType: StringShape
+    PreferenceTypeList: ListShape
     ProtectConfigurationArn: StringShape
     ProtectConfigurationCountryRuleSet: MapShape
     ProtectConfigurationCountryRuleSetInformation: StructureShape
@@ -260,6 +354,53 @@ module Aws::PinpointSMSVoiceV2
     PutRegistrationFieldValueResult: StructureShape
     PutResourcePolicyRequest: StructureShape
     PutResourcePolicyResult: StructureShape
+    RcsAgentFilter: StructureShape
+    RcsAgentFilterList: ListShape
+    RcsAgentFilterName: StringShape
+    RcsAgentIdList: ListShape
+    RcsAgentIdOrArn: StringShape
+    RcsAgentInformation: StructureShape
+    RcsAgentInformationList: ListShape
+    RcsAgentStatus: StringShape
+    RcsCalendarEventDescription: StringShape
+    RcsCalendarEventTitle: StringShape
+    RcsCardContent: StructureShape
+    RcsCardDescription: StringShape
+    RcsCardMedia: StructureShape
+    RcsCardSuggestedActionList: ListShape
+    RcsCardTitle: StringShape
+    RcsCarousel: StructureShape
+    RcsCarouselCardContent: StructureShape
+    RcsCarouselCardContentList: ListShape
+    RcsCarouselCardMedia: StructureShape
+    RcsContent: UnionShape
+    RcsCreateCalendarEventAction: StructureShape
+    RcsDialPhoneAction: StructureShape
+    RcsEventType: StringShape
+    RcsEventTypeList: ListShape
+    RcsFallbackChannel: StringShape
+    RcsFallbackConfiguration: StructureShape
+    RcsFallbackMessageBody: StringShape
+    RcsFallbackOriginationIdentity: StringShape
+    RcsFileMessage: StructureShape
+    RcsLocationLabel: StringShape
+    RcsMediaUrl: StringShape
+    RcsMessageContent: StructureShape
+    RcsMessageOriginationIdentity: StringShape
+    RcsMessageTrafficType: StringShape
+    RcsOpenUrlAction: StructureShape
+    RcsOpenUrlValue: StringShape
+    RcsPostbackData: StringShape
+    RcsReplyAction: StructureShape
+    RcsRequestLocationAction: StructureShape
+    RcsShowLocationAction: StructureShape
+    RcsStandaloneCard: StructureShape
+    RcsSuggestedAction: UnionShape
+    RcsSuggestedActionList: ListShape
+    RcsSuggestedActionText: StringShape
+    RcsTextBody: StringShape
+    RcsTextMessage: StructureShape
+    RcsTimeToLive: IntegerShape
     RegistrationAssociationBehavior: StringShape
     RegistrationAssociationFilter: StructureShape
     RegistrationAssociationFilterList: ListShape
@@ -322,6 +463,7 @@ module Aws::PinpointSMSVoiceV2
     ResourceNotFoundException: StructureShape
     ResourcePolicy: StringShape
     ResourceType: StringShape
+    SearchableNumberType: StringShape
     SectionPath: StringShape
     SectionPathList: ListShape
     SelectChoice: StringShape
@@ -333,6 +475,12 @@ module Aws::PinpointSMSVoiceV2
     SendDestinationNumberVerificationCodeResult: StructureShape
     SendMediaMessageRequest: StructureShape
     SendMediaMessageResult: StructureShape
+    SendNotifyTextMessageRequest: StructureShape
+    SendNotifyTextMessageResult: StructureShape
+    SendNotifyVoiceMessageRequest: StructureShape
+    SendNotifyVoiceMessageResult: StructureShape
+    SendRcsMessageRequest: StructureShape
+    SendRcsMessageResult: StructureShape
     SendTextMessageRequest: StructureShape
     SendTextMessageResult: StructureShape
     SendVoiceMessageRequest: StructureShape
@@ -358,6 +506,10 @@ module Aws::PinpointSMSVoiceV2
     SetDefaultSenderIdResult: StructureShape
     SetMediaMessageSpendLimitOverrideRequest: StructureShape
     SetMediaMessageSpendLimitOverrideResult: StructureShape
+    SetNotifyMessageSpendLimitOverrideRequest: StructureShape
+    SetNotifyMessageSpendLimitOverrideResult: StructureShape
+    SetRcsMessageSpendLimitOverrideRequest: StructureShape
+    SetRcsMessageSpendLimitOverrideResult: StructureShape
     SetTextMessageSpendLimitOverrideRequest: StructureShape
     SetTextMessageSpendLimitOverrideResult: StructureShape
     SetVoiceMessageSpendLimitOverrideRequest: StructureShape
@@ -380,17 +532,33 @@ module Aws::PinpointSMSVoiceV2
     TagResourceRequest: StructureShape
     TagResourceResult: StructureShape
     TagValue: StringShape
+    TemplateContent: StringShape
+    TemplateVariableMetadata: StructureShape
+    TemplateVariableName: StringShape
+    TemplateVariableSource: StringShape
+    TemplateVariableSubstitutionMap: MapShape
+    TemplateVariableType: StringShape
+    TemplateVariableValue: StringShape
+    TemplateVariablesMap: MapShape
+    TestingAgentInformation: StructureShape
+    TestingAgentStatus: StringShape
     TextMessageBody: StringShape
     TextMessageOriginationIdentity: StringShape
     TextValidation: StructureShape
     TextValue: StringShape
     ThrottlingException: StructureShape
+    TierUpgradeStatus: StringShape
     TimeToLive: IntegerShape
     TwoWayChannelArn: StringShape
+    TwoWayMediaS3BucketName: StringShape
+    TwoWayMediaS3BucketNameOrUnset: StringShape
+    TwoWayMediaS3KeyPrefix: StringShape
     UntagResourceRequest: StructureShape
     UntagResourceResult: StructureShape
     UpdateEventDestinationRequest: StructureShape
     UpdateEventDestinationResult: StructureShape
+    UpdateNotifyConfigurationRequest: StructureShape
+    UpdateNotifyConfigurationResult: StructureShape
     UpdatePhoneNumberRequest: StructureShape
     UpdatePhoneNumberResult: StructureShape
     UpdatePoolRequest: StructureShape
@@ -399,6 +567,8 @@ module Aws::PinpointSMSVoiceV2
     UpdateProtectConfigurationCountryRuleSetResult: StructureShape
     UpdateProtectConfigurationRequest: StructureShape
     UpdateProtectConfigurationResult: StructureShape
+    UpdateRcsAgentRequest: StructureShape
+    UpdateRcsAgentResult: StructureShape
     UpdateSenderIdRequest: StructureShape
     UpdateSenderIdResult: StructureShape
     ValidationException: StructureShape
@@ -419,6 +589,7 @@ module Aws::PinpointSMSVoiceV2
     VerifyDestinationNumberRequest: StructureShape
     VerifyDestinationNumberResult: StructureShape
     VoiceId: StringShape
+    VoiceIdList: ListShape
     VoiceMessageBody: StringShape
     VoiceMessageBodyTextType: StringShape
     VoiceMessageOriginationIdentity: StringShape

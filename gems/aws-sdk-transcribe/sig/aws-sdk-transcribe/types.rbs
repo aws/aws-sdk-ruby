@@ -286,6 +286,7 @@ module Aws::Transcribe
         ?base_model_name: String,
         ?model_name: String,
         ?input_data_config: Types::InputDataConfig,
+        ?encryption_configuration: Types::EncryptionConfiguration,
         ?tags: Array[Types::Tag],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -294,6 +295,7 @@ module Aws::Transcribe
       attr_accessor base_model_name: String?
       attr_accessor model_name: String?
       attr_accessor input_data_config: Types::InputDataConfig?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
       attr_accessor tags: Array[Types::Tag]?
     end
 
@@ -362,6 +364,7 @@ module Aws::Transcribe
         ?vocabulary_filter_file_uri: String,
         ?tags: Array[Types::Tag],
         ?data_access_role_arn: String,
+        ?encryption_configuration: Types::EncryptionConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -371,6 +374,7 @@ module Aws::Transcribe
       attr_accessor vocabulary_filter_file_uri: String?
       attr_accessor tags: Array[Types::Tag]?
       attr_accessor data_access_role_arn: String?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
     end
 
     class CreateVocabularyFilterResponse
@@ -398,6 +402,7 @@ module Aws::Transcribe
         ?vocabulary_file_uri: String,
         ?tags: Array[Types::Tag],
         ?data_access_role_arn: String,
+        ?encryption_configuration: Types::EncryptionConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -407,6 +412,7 @@ module Aws::Transcribe
       attr_accessor vocabulary_file_uri: String?
       attr_accessor tags: Array[Types::Tag]?
       attr_accessor data_access_role_arn: String?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
     end
 
     class CreateVocabularyResponse
@@ -565,6 +571,19 @@ module Aws::Transcribe
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor language_model: Types::LanguageModel?
+    end
+
+    class EncryptionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?kms_encryption_context: Hash[String, String],
+        ?kms_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor kms_encryption_context: Hash[String, String]?
+      attr_accessor kms_key: String?
     end
 
     class GetCallAnalyticsCategoryRequest
@@ -728,6 +747,8 @@ module Aws::Transcribe
         ?language_code: String,
         ?last_modified_time: Time,
         ?download_uri: String,
+        ?data_access_role_arn: String,
+        ?encryption_configuration: Types::EncryptionConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -735,6 +756,8 @@ module Aws::Transcribe
       attr_accessor language_code: String?
       attr_accessor last_modified_time: Time?
       attr_accessor download_uri: String?
+      attr_accessor data_access_role_arn: String?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
     end
 
     class GetVocabularyRequest
@@ -758,6 +781,8 @@ module Aws::Transcribe
         ?last_modified_time: Time,
         ?failure_reason: String,
         ?download_uri: String,
+        ?data_access_role_arn: String,
+        ?encryption_configuration: Types::EncryptionConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -767,6 +792,8 @@ module Aws::Transcribe
       attr_accessor last_modified_time: Time?
       attr_accessor failure_reason: String?
       attr_accessor download_uri: String?
+      attr_accessor data_access_role_arn: String?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
     end
 
     class InputDataConfig
@@ -836,6 +863,8 @@ module Aws::Transcribe
       AF_ZA: String
       AR_AE: String
       AR_SA: String
+      AM_ET: String
+      CY_GB: String
       DA_DK: String
       DE_CH: String
       DE_DE: String
@@ -847,16 +876,24 @@ module Aws::Transcribe
       EN_US: String
       EN_WL: String
       ES_ES: String
+      ES_MX: String
       ES_US: String
+      FA_AF: String
       FA_IR: String
       FR_CA: String
       FR_FR: String
+      GA_IE: String
+      GD_GB: String
       HE_IL: String
       HI_IN: String
+      HT_HT: String
       ID_ID: String
       IT_IT: String
       JA_JP: String
+      JV_ID: String
+      KM_KH: String
       KO_KR: String
+      MY_MM: String
       MS_MY: String
       NL_NL: String
       PT_BR: String
@@ -913,6 +950,7 @@ module Aws::Transcribe
       MR_IN: String
       MT_MT: String
       NO_NO: String
+      NE_NP: String
       OR_IN: String
       PA_IN: String
       PL_PL: String
@@ -923,6 +961,7 @@ module Aws::Transcribe
       SK_SK: String
       SL_SI: String
       SO_SO: String
+      SQ_AL: String
       SR_RS: String
       SU_ID: String
       SW_BI: String
@@ -981,6 +1020,7 @@ module Aws::Transcribe
         ?upgrade_availability: bool,
         ?failure_reason: String,
         ?input_data_config: Types::InputDataConfig,
+        ?encryption_configuration: Types::EncryptionConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -993,6 +1033,7 @@ module Aws::Transcribe
       attr_accessor upgrade_availability: bool?
       attr_accessor failure_reason: String?
       attr_accessor input_data_config: Types::InputDataConfig?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
     end
 
     class LimitExceededException
@@ -1662,6 +1703,24 @@ module Aws::Transcribe
       NAME: String
       PHONE: String
       SSN: String
+      DATE_TIME: String
+      PASSPORT_NUMBER: String
+      DRIVER_ID: String
+      URL: String
+      AGE: String
+      USERNAME: String
+      PASSWORD: String
+      AWS_ACCESS_KEY: String
+      AWS_SECRET_KEY: String
+      IP_ADDRESS: String
+      MAC_ADDRESS: String
+      LICENSE_PLATE: String
+      VEHICLE_IDENTIFICATION_NUMBER: String
+      US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER: String
+      CA_HEALTH_NUMBER: String
+      CA_SOCIAL_INSURANCE_NUMBER: String
+      INTERNATIONAL_BANK_ACCOUNT_NUMBER: String
+      SWIFT_CODE: String
       ALL: String
     end
 
@@ -2252,6 +2311,36 @@ module Aws::Transcribe
       attr_accessor category_properties: Types::CategoryProperties?
     end
 
+    class UpdateLanguageModelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_name: String,
+        ?data_access_role_arn: String,
+        ?encryption_configuration: Types::EncryptionConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_name: String?
+      attr_accessor data_access_role_arn: String?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+    end
+
+    class UpdateLanguageModelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_name: String,
+        ?model_status: String,
+        ?last_modified_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_name: String?
+      attr_accessor model_status: String?
+      attr_accessor last_modified_time: Time?
+    end
+
     class UpdateMedicalVocabularyRequest
       include Smithy::Schema::Structure
 
@@ -2292,6 +2381,7 @@ module Aws::Transcribe
         ?words: Array[String],
         ?vocabulary_filter_file_uri: String,
         ?data_access_role_arn: String,
+        ?encryption_configuration: Types::EncryptionConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2299,6 +2389,7 @@ module Aws::Transcribe
       attr_accessor words: Array[String]?
       attr_accessor vocabulary_filter_file_uri: String?
       attr_accessor data_access_role_arn: String?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
     end
 
     class UpdateVocabularyFilterResponse
@@ -2325,6 +2416,7 @@ module Aws::Transcribe
         ?phrases: Array[String],
         ?vocabulary_file_uri: String,
         ?data_access_role_arn: String,
+        ?encryption_configuration: Types::EncryptionConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2333,6 +2425,7 @@ module Aws::Transcribe
       attr_accessor phrases: Array[String]?
       attr_accessor vocabulary_file_uri: String?
       attr_accessor data_access_role_arn: String?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
     end
 
     class UpdateVocabularyResponse

@@ -83,6 +83,7 @@ module Aws::Account
       def account_id: () -> String?
       def account_name: () -> String?
       def account_created_date: () -> Time?
+      def account_state: () -> String?
     end
     def get_account_information: (
       ?account_id: String
@@ -100,10 +101,20 @@ module Aws::Account
     interface _GetContactInformationResponse
       include Smithy::Client::_Response[Types::GetContactInformationResponse]
       def contact_information: () -> Types::ContactInformation?
+      def verification_status: () -> String?
     end
     def get_contact_information: (
       ?account_id: String
     ) -> _GetContactInformationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetContactInformationResponse
+
+    interface _GetGovCloudAccountInformationResponse
+      include Smithy::Client::_Response[Types::GetGovCloudAccountInformationResponse]
+      def gov_cloud_account_id: () -> String?
+      def account_state: () -> String?
+    end
+    def get_gov_cloud_account_information: (
+      ?standard_account_id: String
+    ) -> _GetGovCloudAccountInformationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetGovCloudAccountInformationResponse
 
     interface _GetPrimaryEmailResponse
       include Smithy::Client::_Response[Types::GetPrimaryEmailResponse]
@@ -112,6 +123,15 @@ module Aws::Account
     def get_primary_email: (
       ?account_id: String
     ) -> _GetPrimaryEmailResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPrimaryEmailResponse
+
+    interface _GetPrimaryEmailUpdateStatusResponse
+      include Smithy::Client::_Response[Types::GetPrimaryEmailUpdateStatusResponse]
+      def status: () -> String?
+      def updated_at: () -> Time?
+    end
+    def get_primary_email_update_status: (
+      ?account_id: String
+    ) -> _GetPrimaryEmailUpdateStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPrimaryEmailUpdateStatusResponse
 
     interface _GetRegionOptStatusResponse
       include Smithy::Client::_Response[Types::GetRegionOptStatusResponse]
@@ -176,6 +196,14 @@ module Aws::Account
       ?account_id: String
     ) -> _PutContactInformationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutContactInformationResponse
 
+    interface _SendPhoneNumberVerificationResponse
+      include Smithy::Client::_Response[Types::SendPhoneNumberVerificationResponse]
+      def status: () -> String?
+    end
+    def send_phone_number_verification: (
+      ?account_id: String
+    ) -> _SendPhoneNumberVerificationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SendPhoneNumberVerificationResponse
+
     interface _StartPrimaryEmailUpdateResponse
       include Smithy::Client::_Response[Types::StartPrimaryEmailUpdateResponse]
       def status: () -> String?
@@ -184,5 +212,14 @@ module Aws::Account
       ?account_id: String,
       ?primary_email: String
     ) -> _StartPrimaryEmailUpdateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartPrimaryEmailUpdateResponse
+
+    interface _VerifyPhoneNumberResponse
+      include Smithy::Client::_Response[Types::VerifyPhoneNumberResponse]
+      def status: () -> String?
+    end
+    def verify_phone_number: (
+      ?account_id: String,
+      ?otp: String
+    ) -> _VerifyPhoneNumberResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _VerifyPhoneNumberResponse
   end
 end

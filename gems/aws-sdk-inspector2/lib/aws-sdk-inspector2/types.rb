@@ -156,6 +156,15 @@ module Aws::Inspector2
     #   <p>An object that contains details about an aggregation request based on code
     #            repositories.</p>
     #   @return [Types::CodeRepositoryAggregation]
+    # @!attribute vm_instance_aggregation
+    #   <p>An object that contains details about an aggregation request based on virtual machine (VM) instances.</p>
+    #   @return [Types::VmInstanceAggregation]
+    # @!attribute container_image_aggregation
+    #   <p>An object that contains details about an aggregation request based on container images.</p>
+    #   @return [Types::ContainerImageAggregation]
+    # @!attribute serverless_function_aggregation
+    #   <p>An object that contains details about an aggregation request based on serverless functions.</p>
+    #   @return [Types::ServerlessFunctionAggregation]
     class AggregationRequest < Struct.new(
       :account_aggregation,
       :ami_aggregation,
@@ -169,6 +178,9 @@ module Aws::Inspector2
       :lambda_layer_aggregation,
       :lambda_function_aggregation,
       :code_repository_aggregation,
+      :vm_instance_aggregation,
+      :container_image_aggregation,
+      :serverless_function_aggregation,
       :unknown,
       keyword_init: true
     )
@@ -186,6 +198,9 @@ module Aws::Inspector2
       class LambdaLayerAggregation < AggregationRequest; end
       class LambdaFunctionAggregation < AggregationRequest; end
       class CodeRepositoryAggregation < AggregationRequest; end
+      class VmInstanceAggregation < AggregationRequest; end
+      class ContainerImageAggregation < AggregationRequest; end
+      class ServerlessFunctionAggregation < AggregationRequest; end
       class Unknown < AggregationRequest; end
     end
 
@@ -236,6 +251,15 @@ module Aws::Inspector2
     #   <p>An object that contains details about an aggregation response based on code
     #            repositories.</p>
     #   @return [Types::CodeRepositoryAggregationResponse]
+    # @!attribute vm_instance_aggregation
+    #   <p>An object that contains details about an aggregation response based on VM instances.</p>
+    #   @return [Types::VmInstanceAggregationResponse]
+    # @!attribute container_image_aggregation
+    #   <p>An object that contains details about an aggregation response based on container images.</p>
+    #   @return [Types::ContainerImageAggregationResponse]
+    # @!attribute serverless_function_aggregation
+    #   <p>An object that contains details about an aggregation response based on serverless functions.</p>
+    #   @return [Types::ServerlessFunctionAggregationResponse]
     class AggregationResponse < Struct.new(
       :account_aggregation,
       :ami_aggregation,
@@ -249,6 +273,9 @@ module Aws::Inspector2
       :lambda_layer_aggregation,
       :lambda_function_aggregation,
       :code_repository_aggregation,
+      :vm_instance_aggregation,
+      :container_image_aggregation,
+      :serverless_function_aggregation,
       :unknown,
       keyword_init: true
     )
@@ -266,6 +293,9 @@ module Aws::Inspector2
       class LambdaLayerAggregation < AggregationResponse; end
       class LambdaFunctionAggregation < AggregationResponse; end
       class CodeRepositoryAggregation < AggregationResponse; end
+      class VmInstanceAggregation < AggregationResponse; end
+      class ContainerImageAggregation < AggregationResponse; end
+      class ServerlessFunctionAggregation < AggregationResponse; end
       class Unknown < AggregationResponse; end
     end
 
@@ -296,6 +326,57 @@ module Aws::Inspector2
     # @!attribute account_id
     #   <p>The Amazon Web Services account ID for the AMI.</p>
     #   @return [String]
+    # @!attribute cloud_provider
+    #   <p>The cloud service provider associated with this Amazon Machine Image (AMI) aggregation. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>AWS</code> – Findings from Amazon Web Services resources.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>AZURE</code> – Findings from Microsoft Azure resources.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute cloud_partition
+    #   <p>The cloud infrastructure partition associated with this AMI aggregation. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>aws</code> – Amazon Web Services commercial Regions.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>aws-cn</code> – Amazon Web Services China Regions.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>aws-us-gov</code> – Amazon Web Services GovCloud (US) Regions.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>AzureCloud</code> – Azure commercial Regions.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute cloud_region
+    #   <p>The cloud Region associated with this AMI aggregation. The value format depends on the cloud provider:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>An Amazon Web Services Region, such as <code>us-east-1</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>An Azure region, such as <code>eastus</code>.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute cloud_org_id
+    #   <p>The cloud organization ID for the AMI aggregation.</p>
+    #   @return [String]
+    # @!attribute cloud_account_id
+    #   <p>The cloud account ID for the AMI aggregation.</p>
+    #   @return [String]
     # @!attribute severity_counts
     #   <p>An object that contains the count of matched findings per severity.</p>
     #   @return [Types::SeverityCounts]
@@ -306,6 +387,11 @@ module Aws::Inspector2
       nil,
       :ami,
       :account_id,
+      :cloud_provider,
+      :cloud_partition,
+      :cloud_region,
+      :cloud_org_id,
+      :cloud_account_id,
       :severity_counts,
       :affected_instances,
       keyword_init: true
@@ -407,6 +493,22 @@ module Aws::Inspector2
       :lambda,
       :lambda_code,
       :code_repository,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A filter that matches connectors by the ARN of the associated Amazon Web Services Config connector.</p>
+    # @!attribute comparison
+    #   <p>The comparison operator for the Amazon Web Services Config connector ARN filter.</p>
+    #   @return [String]
+    # @!attribute value
+    #   <p>The Amazon Web Services Config connector ARN value to filter by.</p>
+    #   @return [String]
+    class AwsConfigConnectorArnFilter < Struct.new(
+      nil,
+      :comparison,
+      :value,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -697,6 +799,95 @@ module Aws::Inspector2
       :package_type,
       :architectures,
       :last_modified_at,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The Azure-specific configuration details for creating a connector, including the Amazon Web Services Config connector association, scan scope, and regions to scan.</p>
+    # @!attribute aws_config_connector_arn
+    #   <p>The ARN of the Amazon Web Services Config connector to associate with this connector.</p>
+    #   @return [String]
+    # @!attribute scope_configuration
+    #   <p>The scope configuration that defines which Azure resources to scan.</p>
+    #   @return [Types::AzureScopeConfigurationInput]
+    # @!attribute azure_regions
+    #   <p>The Azure regions to scan.</p>
+    #   @return [Array<String>]
+    # @!attribute auto_install_vm_scanner
+    #   <p>Specifies whether to automatically install the VM scanner on connected Azure resources. Defaults to <code>true</code>.</p>
+    #   @return [Boolean]
+    class AzureProviderDetailCreate < Struct.new(
+      nil,
+      :aws_config_connector_arn,
+      :scope_configuration,
+      :azure_regions,
+      :auto_install_vm_scanner,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:auto_install_vm_scanner] = true unless options.key?(:auto_install_vm_scanner)
+        super
+      end
+    end
+
+    # <p>The Azure-specific configuration details for updating a connector, including the scan scope and regions to scan.</p>
+    # @!attribute azure_regions
+    #   <p>The updated Azure regions to scan.</p>
+    #   @return [Array<String>]
+    # @!attribute scope_configuration
+    #   <p>The updated scope configuration that defines which Azure resources to scan.</p>
+    #   @return [Types::AzureScopeConfigurationInput]
+    # @!attribute auto_install_vm_scanner
+    #   <p>Specifies whether to automatically install the VM scanner on connected Azure resources.</p>
+    #   @return [Boolean]
+    class AzureProviderDetailUpdate < Struct.new(
+      nil,
+      :azure_regions,
+      :scope_configuration,
+      :auto_install_vm_scanner,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The scope of Azure resources that Amazon Inspector scans, defined separately for VM, container image, and serverless scanning. Returned as part of a connector's configuration.</p>
+    # @!attribute vm_scanning
+    #   <p>The scope configuration for VM scanning.</p>
+    #   @return [Types::ScopeConfiguration]
+    # @!attribute container_image_scanning
+    #   <p>The scope configuration for container image scanning.</p>
+    #   @return [Types::ScopeConfiguration]
+    # @!attribute serverless_scanning
+    #   <p>The scope configuration for serverless scanning.</p>
+    #   @return [Types::ScopeConfiguration]
+    class AzureScopeConfiguration < Struct.new(
+      nil,
+      :vm_scanning,
+      :container_image_scanning,
+      :serverless_scanning,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The scope of Azure resources to scan, defined separately for VM, container image, and serverless scanning. Provide this when you create or update an Azure connector.</p>
+    # @!attribute vm_scanning
+    #   <p>The scope configuration input for VM scanning.</p>
+    #   @return [Types::ScopeConfigurationInput]
+    # @!attribute container_image_scanning
+    #   <p>The scope configuration input for container image scanning.</p>
+    #   @return [Types::ScopeConfigurationInput]
+    # @!attribute serverless_scanning
+    #   <p>The scope configuration input for serverless scanning.</p>
+    #   @return [Types::ScopeConfigurationInput]
+    class AzureScopeConfigurationInput < Struct.new(
+      nil,
+      :vm_scanning,
+      :container_image_scanning,
+      :serverless_scanning,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1797,9 +1988,6 @@ module Aws::Inspector2
     # @!attribute last_update_on
     #   <p>The timestamp when the code security integration was last updated.</p>
     #   @return [Time]
-    # @!attribute tags
-    #   <p>The tags associated with the code security integration.</p>
-    #   @return [Hash<String, String>]
     class CodeSecurityIntegrationSummary < Struct.new(
       nil,
       :integration_arn,
@@ -1809,7 +1997,6 @@ module Aws::Inspector2
       :status_reason,
       :created_on,
       :last_update_on,
-      :tags,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1890,9 +2077,6 @@ module Aws::Inspector2
     #               <code>ScopeSetting</code> parameter is <code>ALL</code> the scan configuration applies
     #            to all existing and future projects imported into Amazon Inspector.</p>
     #   @return [Types::ScopeSettings]
-    # @!attribute tags
-    #   <p>The tags associated with the scan configuration.</p>
-    #   @return [Hash<String, String>]
     class CodeSecurityScanConfigurationSummary < Struct.new(
       nil,
       :scan_configuration_arn,
@@ -1903,7 +2087,6 @@ module Aws::Inspector2
       :continuous_integration_scan_supported_events,
       :rule_set_categories,
       :scope_settings,
-      :tags,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2048,6 +2231,466 @@ module Aws::Inspector2
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Describes a connector that links an external cloud provider to Amazon Inspector for vulnerability scanning.</p>
+    # @!attribute connector_arn
+    #   <p>The Amazon Resource Name (ARN) of the connector.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the connector.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>A description of the connector.</p>
+    #   @return [String]
+    # @!attribute provider
+    #   <p>The cloud provider for the connector.</p>
+    #   @return [String]
+    # @!attribute enablement_status
+    #   <p>The enablement status of the connector, which indicates whether the connector is active and scanning resources.</p>
+    #   @return [String]
+    # @!attribute enablement_status_reason
+    #   <p>Additional information about the current enablement status of the connector.</p>
+    #   @return [String]
+    # @!attribute health
+    #   <p>The health of the connector, which indicates whether Amazon Inspector can reach and scan the connected resources.</p>
+    #   @return [Types::ConnectorHealth]
+    # @!attribute created_at
+    #   <p>The date and time when the connector was created.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The date and time when the connector was last updated.</p>
+    #   @return [Time]
+    # @!attribute azure_regions
+    #   <p>The Azure regions configured for the connector.</p>
+    #   @return [Array<String>]
+    # @!attribute aws_config_connector_arn
+    #   <p>The ARN of the Amazon Web Services Config connector associated with this connector.</p>
+    #   @return [String]
+    # @!attribute scope_configuration
+    #   <p>The Azure scope configuration for the connector.</p>
+    #   @return [Types::AzureScopeConfiguration]
+    # @!attribute tags
+    #   <p>The tags associated with the connector.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute auto_install_vm_scanner
+    #   <p>Specifies whether the VM scanner is automatically installed on connected resources.</p>
+    #   @return [Boolean]
+    class Connector < Struct.new(
+      nil,
+      :connector_arn,
+      :name,
+      :description,
+      :provider,
+      :enablement_status,
+      :enablement_status_reason,
+      :health,
+      :created_at,
+      :updated_at,
+      :azure_regions,
+      :aws_config_connector_arn,
+      :scope_configuration,
+      :tags,
+      :auto_install_vm_scanner,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A filter that matches connectors by connector ARN.</p>
+    # @!attribute comparison
+    #   <p>The comparison operator for the connector ARN filter.</p>
+    #   @return [String]
+    # @!attribute value
+    #   <p>The connector ARN value to filter by.</p>
+    #   @return [String]
+    class ConnectorArnFilter < Struct.new(
+      nil,
+      :comparison,
+      :value,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The container image scanning settings for a connector, including how long pushed and pulled images continue to be rescanned for vulnerabilities.</p>
+    # @!attribute push_duration
+    #   <p>The amount of time after a container image is pushed to a repository during which Amazon Inspector continues to rescan the image for vulnerabilities. Valid values are <code>LIFETIME</code>, <code>DAYS_3</code>, <code>DAYS_7</code>, <code>DAYS_14</code>, <code>DAYS_30</code>, <code>DAYS_60</code>, <code>DAYS_90</code>, and <code>DAYS_180</code>.</p>
+    #   @return [String]
+    # @!attribute pull_duration
+    #   <p>The amount of time after a container image is last pulled from a repository during which Amazon Inspector continues to rescan the image for vulnerabilities. Valid values are <code>DAYS_3</code>, <code>DAYS_7</code>, <code>DAYS_14</code>, <code>DAYS_30</code>, <code>DAYS_60</code>, <code>DAYS_90</code>, and <code>DAYS_180</code>.</p>
+    #   @return [String]
+    class ConnectorContainerImageScanConfiguration < Struct.new(
+      nil,
+      :push_duration,
+      :pull_duration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the filter criteria for narrowing the results returned by a <code>ListConnectors</code> request. You can filter by connector ARN, Amazon Web Services account ID, Amazon Web Services Config connector ARN, connector type, or cloud provider.</p>
+    # @!attribute connector_arns
+    #   <p>Filter by connector ARNs.</p>
+    #   @return [Array<Types::ConnectorArnFilter>]
+    # @!attribute accounts
+    #   <p>Filter by Amazon Web Services account IDs.</p>
+    #   @return [Array<Types::StringFilter>]
+    # @!attribute aws_config_connector_arns
+    #   <p>Filter by Amazon Web Services Config connector ARNs.</p>
+    #   @return [Array<Types::AwsConfigConnectorArnFilter>]
+    # @!attribute connector_type
+    #   <p>Filter by connector type.</p>
+    #   @return [Array<Types::ConnectorTypeFilter>]
+    # @!attribute provider
+    #   <p>Filter by cloud provider.</p>
+    #   @return [Array<Types::ProviderFilter>]
+    class ConnectorFilterCriteria < Struct.new(
+      nil,
+      :connector_arns,
+      :accounts,
+      :aws_config_connector_arns,
+      :connector_type,
+      :provider,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The health and connectivity status of a connector, including the last time the status was checked and any diagnostic message. Returned as part of the <code>Connector</code> structure.</p>
+    # @!attribute connector_status
+    #   <p>The health status of the connector.</p>
+    #   @return [String]
+    # @!attribute last_checked_at
+    #   <p>The date and time when the connector health was last checked.</p>
+    #   @return [Time]
+    # @!attribute message
+    #   <p>A message providing additional details about the connector health status.</p>
+    #   @return [String]
+    class ConnectorHealth < Struct.new(
+      nil,
+      :connector_status,
+      :last_checked_at,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The scan settings that Amazon Inspector applies to resources discovered through a connector.</p>
+    # @!attribute container_image_scanning
+    #   <p>The container image scanning configuration, including push and pull duration settings.</p>
+    #   @return [Types::ConnectorContainerImageScanConfiguration]
+    class ConnectorScanConfiguration < Struct.new(
+      nil,
+      :container_image_scanning,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Represents a scan configuration and the connectors it applies to. Returned in the results of a <code>ListConnectorScanConfigurations</code> request.</p>
+    # @!attribute aws_config_connector_arn
+    #   <p>The ARN of the Amazon Web Services Config connector.</p>
+    #   @return [String]
+    # @!attribute connector_arns
+    #   <p>The list of connector ARNs associated with this Amazon Web Services Config connector.</p>
+    #   @return [Array<String>]
+    # @!attribute scan_configuration
+    #   <p>The scan configuration settings.</p>
+    #   @return [Types::ConnectorScanConfiguration]
+    class ConnectorScanConfigurationItem < Struct.new(
+      nil,
+      :aws_config_connector_arn,
+      :connector_arns,
+      :scan_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A filter that matches connectors by connector type.</p>
+    # @!attribute comparison
+    #   <p>The comparison operator for the connector type filter.</p>
+    #   @return [String]
+    # @!attribute value
+    #   <p>The connector type value to filter by.</p>
+    #   @return [String]
+    class ConnectorTypeFilter < Struct.new(
+      nil,
+      :comparison,
+      :value,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>An aggregation of information about container images.</p>
+    # @!attribute resource_ids
+    #   <p>The resource IDs to aggregate findings for.</p>
+    #   @return [Array<Types::StringFilter>]
+    # @!attribute image_digests
+    #   <p>The image digests to aggregate findings for.</p>
+    #   @return [Array<Types::StringFilter>]
+    # @!attribute repositories
+    #   <p>The image repositories to aggregate findings for.</p>
+    #   @return [Array<Types::StringFilter>]
+    # @!attribute registries
+    #   <p>The image registries to aggregate findings for.</p>
+    #   @return [Array<Types::StringFilter>]
+    # @!attribute architectures
+    #   <p>The image architectures to aggregate findings for.</p>
+    #   @return [Array<Types::StringFilter>]
+    # @!attribute image_tags
+    #   <p>The image tags to aggregate findings for.</p>
+    #   @return [Array<Types::StringFilter>]
+    # @!attribute cloud_providers
+    #   <p>The cloud providers to aggregate findings for. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>AWS</code> – Findings from Amazon Web Services resources.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>AZURE</code> – Findings from Microsoft Azure resources.</p>
+    #               </li>
+    #            </ul>
+    #   @return [Array<Types::StringFilter>]
+    # @!attribute cloud_partitions
+    #   <p>The cloud partitions to aggregate findings for. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>aws</code> – Amazon Web Services commercial Regions.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>aws-cn</code> – Amazon Web Services China Regions.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>aws-us-gov</code> – Amazon Web Services GovCloud (US) Regions.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>AzureCloud</code> – Azure commercial Regions.</p>
+    #               </li>
+    #            </ul>
+    #   @return [Array<Types::StringFilter>]
+    # @!attribute cloud_regions
+    #   <p>The cloud regions to aggregate findings for. The value format depends on the cloud provider:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>An Amazon Web Services Region, such as <code>us-east-1</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>An Azure region, such as <code>eastus</code>.</p>
+    #               </li>
+    #            </ul>
+    #   @return [Array<Types::StringFilter>]
+    # @!attribute cloud_org_ids
+    #   <p>The cloud organization IDs to aggregate findings for.</p>
+    #   @return [Array<Types::StringFilter>]
+    # @!attribute cloud_account_ids
+    #   <p>The cloud account IDs to aggregate findings for.</p>
+    #   @return [Array<Types::StringFilter>]
+    # @!attribute last_in_use_at
+    #   <p>The last in-use timestamps to aggregate findings for.</p>
+    #   @return [Array<Types::DateFilter>]
+    # @!attribute in_use_count
+    #   <p>The in-use counts to aggregate findings for.</p>
+    #   @return [Array<Types::NumberFilter>]
+    # @!attribute sort_order
+    #   <p>The order to sort results by. Valid values are <code>ASC</code> and <code>DESC</code>.</p>
+    #   @return [String]
+    # @!attribute sort_by
+    #   <p>The value to sort results by. Specify a field name from the aggregation response, such as <code>CRITICAL</code>, <code>HIGH</code>, or <code>ALL</code>.</p>
+    #   @return [String]
+    class ContainerImageAggregation < Struct.new(
+      nil,
+      :resource_ids,
+      :image_digests,
+      :repositories,
+      :registries,
+      :architectures,
+      :image_tags,
+      :cloud_providers,
+      :cloud_partitions,
+      :cloud_regions,
+      :cloud_org_ids,
+      :cloud_account_ids,
+      :last_in_use_at,
+      :in_use_count,
+      :sort_order,
+      :sort_by,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A response that contains the results of a container image aggregation.</p>
+    # @!attribute resource_id
+    #   <p>The resource ID for the container image.</p>
+    #   @return [String]
+    # @!attribute cloud_provider
+    #   <p>The cloud service provider associated with this container image aggregation. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>AWS</code> – Findings from Amazon Web Services resources.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>AZURE</code> – Findings from Microsoft Azure resources.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute cloud_account_id
+    #   <p>The cloud account ID for the container image aggregation.</p>
+    #   @return [String]
+    # @!attribute cloud_partition
+    #   <p>The cloud infrastructure partition associated with this container image aggregation. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>aws</code> – Amazon Web Services commercial Regions.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>aws-cn</code> – Amazon Web Services China Regions.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>aws-us-gov</code> – Amazon Web Services GovCloud (US) Regions.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>AzureCloud</code> – Azure commercial Regions.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute cloud_region
+    #   <p>The cloud Region associated with this container image aggregation. The value format depends on the cloud provider:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>An Amazon Web Services Region, such as <code>us-east-1</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>An Azure region, such as <code>eastus</code>.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute cloud_org_id
+    #   <p>The cloud organization ID for the container image aggregation.</p>
+    #   @return [String]
+    # @!attribute image_digest
+    #   <p>The image digest for the container image.</p>
+    #   @return [String]
+    # @!attribute repository
+    #   <p>The repository for the container image.</p>
+    #   @return [String]
+    # @!attribute registry
+    #   <p>The registry for the container image.</p>
+    #   @return [String]
+    # @!attribute architecture
+    #   <p>The architecture of the container image.</p>
+    #   @return [String]
+    # @!attribute image_tags
+    #   <p>The image tags attached to the container image.</p>
+    #   @return [Array<String>]
+    # @!attribute account_id
+    #   <p>The account ID associated with the container image.</p>
+    #   @return [String]
+    # @!attribute severity_counts
+    #   <p>An object that contains the counts of aggregated finding per severity.</p>
+    #   @return [Types::SeverityCounts]
+    # @!attribute last_in_use_at
+    #   <p>The last time the container image was in use.</p>
+    #   @return [Time]
+    # @!attribute in_use_count
+    #   <p>The number of times the container image is in use.</p>
+    #   @return [Integer]
+    # @!attribute exploit_available_active_findings_count
+    #   <p>The number of active findings with an exploit available for the container image.</p>
+    #   @return [Integer]
+    # @!attribute fix_available_active_findings_count
+    #   <p>The number of active findings with a fix available for the container image.</p>
+    #   @return [Integer]
+    class ContainerImageAggregationResponse < Struct.new(
+      nil,
+      :resource_id,
+      :cloud_provider,
+      :cloud_account_id,
+      :cloud_partition,
+      :cloud_region,
+      :cloud_org_id,
+      :image_digest,
+      :repository,
+      :registry,
+      :architecture,
+      :image_tags,
+      :account_id,
+      :severity_counts,
+      :last_in_use_at,
+      :in_use_count,
+      :exploit_available_active_findings_count,
+      :fix_available_active_findings_count,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains metadata about a container image associated with a covered resource.</p>
+    # @!attribute image_tags
+    #   <p>The tags attached to the container image.</p>
+    #   @return [Array<String>]
+    # @!attribute image_pulled_at
+    #   <p>The date and time the container image was pulled.</p>
+    #   @return [Time]
+    # @!attribute last_in_use_at
+    #   <p>The last time the container image was in use.</p>
+    #   @return [Time]
+    # @!attribute in_use_count
+    #   <p>The number of times the container image is in use.</p>
+    #   @return [Integer]
+    class ContainerImageMetadata < Struct.new(
+      nil,
+      :image_tags,
+      :image_pulled_at,
+      :last_in_use_at,
+      :in_use_count,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains metadata about a container registry associated with a covered resource.</p>
+    # @!attribute name
+    #   <p>The name of the container registry.</p>
+    #   @return [String]
+    class ContainerRegistryMetadata < Struct.new(
+      nil,
+      :name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains metadata about a container repository associated with a covered resource.</p>
+    # @!attribute name
+    #   <p>The name of the container repository.</p>
+    #   @return [String]
+    # @!attribute scan_frequency
+    #   <p>The scan frequency for the container repository.</p>
+    #   @return [String]
+    class ContainerRepositoryMetadata < Struct.new(
+      nil,
+      :name,
+      :scan_frequency,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Configuration settings for continuous integration scans that run automatically when code
     #          changes are made.</p>
     # @!attribute supported_events
@@ -2151,7 +2794,7 @@ module Aws::Inspector2
     #   @return [Array<Types::CoverageDateFilter>]
     # @!attribute scan_mode
     #   <p>The filter to search for Amazon EC2 instance coverage by scan mode. Valid values are
-    #               <code>EC2_SSM_AGENT_BASED</code> and <code>EC2_AGENTLESS</code>.</p>
+    #               <code>EC2_SSM_AGENT_BASED</code>, <code>EC2_AGENTLESS</code>, and <code>EC2_INSPECTOR_AGENT_BASED</code>.</p>
     #   @return [Array<Types::CoverageStringFilter>]
     # @!attribute image_pulled_at
     #   <p>The date an image was last pulled at.</p>
@@ -2176,6 +2819,39 @@ module Aws::Inspector2
     # @!attribute last_scanned_commit_id
     #   <p>Filter criteria for code repositories based on the ID of the last scanned commit.</p>
     #   @return [Array<Types::CoverageStringFilter>]
+    # @!attribute cloud_provider
+    #   <p>The cloud provider to filter coverage results by.</p>
+    #   @return [Array<Types::CoverageStringFilter>]
+    # @!attribute cloud_provider_account_id
+    #   <p>The cloud provider account ID to filter coverage results by.</p>
+    #   @return [Array<Types::CoverageStringFilter>]
+    # @!attribute cloud_provider_region
+    #   <p>The cloud provider region to filter coverage results by.</p>
+    #   @return [Array<Types::CoverageStringFilter>]
+    # @!attribute cloud_vm_instance_tags
+    #   <p>The cloud VM instance tags to filter coverage results by.</p>
+    #   @return [Array<Types::CoverageMapFilter>]
+    # @!attribute cloud_container_image_tags
+    #   <p>The cloud container image tags to filter coverage results by.</p>
+    #   @return [Array<Types::CoverageStringFilter>]
+    # @!attribute cloud_container_repository_name
+    #   <p>The cloud container repository name to filter coverage results by.</p>
+    #   @return [Array<Types::CoverageStringFilter>]
+    # @!attribute cloud_container_registry_name
+    #   <p>The cloud container registry name to filter coverage results by.</p>
+    #   @return [Array<Types::CoverageStringFilter>]
+    # @!attribute cloud_serverless_function_name
+    #   <p>The cloud serverless function name to filter coverage results by.</p>
+    #   @return [Array<Types::CoverageStringFilter>]
+    # @!attribute cloud_serverless_function_runtime
+    #   <p>The cloud serverless function runtime to filter coverage results by.</p>
+    #   @return [Array<Types::CoverageStringFilter>]
+    # @!attribute cloud_serverless_function_tags
+    #   <p>The cloud serverless function tags to filter coverage results by.</p>
+    #   @return [Array<Types::CoverageMapFilter>]
+    # @!attribute cloud_provider_org_id
+    #   <p>The cloud provider organization ID to filter coverage results by.</p>
+    #   @return [Array<Types::CoverageStringFilter>]
     class CoverageFilterCriteria < Struct.new(
       nil,
       :scan_status_code,
@@ -2199,6 +2875,17 @@ module Aws::Inspector2
       :code_repository_provider_type,
       :code_repository_provider_type_visibility,
       :last_scanned_commit_id,
+      :cloud_provider,
+      :cloud_provider_account_id,
+      :cloud_provider_region,
+      :cloud_vm_instance_tags,
+      :cloud_container_image_tags,
+      :cloud_container_repository_name,
+      :cloud_container_registry_name,
+      :cloud_serverless_function_name,
+      :cloud_serverless_function_runtime,
+      :cloud_serverless_function_tags,
+      :cloud_provider_org_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2281,6 +2968,21 @@ module Aws::Inspector2
     # @!attribute scan_mode
     #   <p>The scan method that is applied to the instance.</p>
     #   @return [String]
+    # @!attribute provider
+    #   <p>The cloud provider of the covered resource.</p>
+    #   @return [String]
+    # @!attribute provider_account_id
+    #   <p>The cloud provider account ID of the covered resource.</p>
+    #   @return [String]
+    # @!attribute provider_org_id
+    #   <p>The cloud provider organization ID of the covered resource.</p>
+    #   @return [String]
+    # @!attribute provider_region
+    #   <p>The cloud provider region of the covered resource.</p>
+    #   @return [String]
+    # @!attribute provider_partition
+    #   <p>The cloud provider partition of the covered resource.</p>
+    #   @return [String]
     class CoveredResource < Struct.new(
       nil,
       :resource_type,
@@ -2291,6 +2993,11 @@ module Aws::Inspector2
       :resource_metadata,
       :last_scanned_at,
       :scan_mode,
+      :provider,
+      :provider_account_id,
+      :provider_org_id,
+      :provider_region,
+      :provider_partition,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2431,6 +3138,48 @@ module Aws::Inspector2
     class CreateCodeSecurityScanConfigurationResponse < Struct.new(
       nil,
       :scan_configuration_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure that the operation completes no more than one time. If this token matches a previous request, the service ignores the request but does not return an error.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the connector.</p>
+    #   @return [String]
+    # @!attribute provider
+    #   <p>The cloud provider for the connector.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>A description of the connector.</p>
+    #   @return [String]
+    # @!attribute provider_detail
+    #   <p>The provider-specific configuration details for the connector.</p>
+    #   @return [Types::ProviderDetailCreate]
+    # @!attribute tags
+    #   <p>The tags to apply to the connector.</p>
+    #   @return [Hash<String, String>]
+    class CreateConnectorRequest < Struct.new(
+      nil,
+      :client_token,
+      :name,
+      :provider,
+      :description,
+      :provider_detail,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute connector_arn
+    #   <p>The Amazon Resource Name (ARN) of the created connector.</p>
+    #   @return [String]
+    class CreateConnectorResponse < Struct.new(
+      nil,
+      :connector_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2837,6 +3586,24 @@ module Aws::Inspector2
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute connector_arn
+    #   <p>The Amazon Resource Name (ARN) of the connector to delete.</p>
+    #   @return [String]
+    class DeleteConnectorRequest < Struct.new(
+      nil,
+      :connector_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class DeleteConnectorResponse < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute arn
     #   <p>The Amazon Resource Number (ARN) of the filter to be deleted.</p>
     #   @return [String]
@@ -3000,9 +3767,13 @@ module Aws::Inspector2
     # @!attribute scan_mode
     #   <p>The scan method that is applied to the instance.</p>
     #   @return [String]
+    # @!attribute activate_vm_scanner
+    #   <p>Whether to activate Amazon Inspector VM scanner for Amazon EC2 scanning.</p>
+    #   @return [Boolean]
     class Ec2Configuration < Struct.new(
       nil,
       :scan_mode,
+      :activate_vm_scanner,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3012,9 +3783,13 @@ module Aws::Inspector2
     # @!attribute scan_mode_state
     #   <p>An object that contains details about the state of the Amazon EC2 scan mode.</p>
     #   @return [Types::Ec2ScanModeState]
+    # @!attribute vm_scanner_state
+    #   <p>An object that contains details about the state of the Amazon Inspector VM scanner.</p>
+    #   @return [Types::VMScannerState]
     class Ec2ConfigurationState < Struct.new(
       nil,
       :scan_mode_state,
+      :vm_scanner_state,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3660,6 +4435,63 @@ module Aws::Inspector2
     #   <p>Filter criteria for findings based on the repository provider type (such as GitHub,
     #            GitLab, etc.).</p>
     #   @return [Array<Types::StringFilter>]
+    # @!attribute cloud_provider
+    #   <p>Filter criteria for the cloud provider.</p>
+    #   @return [Array<Types::StringFilter>]
+    # @!attribute cloud_provider_region
+    #   <p>Filter criteria for the cloud provider region.</p>
+    #   @return [Array<Types::StringFilter>]
+    # @!attribute cloud_provider_account_id
+    #   <p>Filter criteria for the cloud provider account ID.</p>
+    #   @return [Array<Types::StringFilter>]
+    # @!attribute cloud_provider_org_id
+    #   <p>Filter criteria for the cloud provider organization ID.</p>
+    #   @return [Array<Types::StringFilter>]
+    # @!attribute cloud_vm_image_reference
+    #   <p>Filter criteria for the image reference of a VM instance.</p>
+    #   @return [Array<Types::StringFilter>]
+    # @!attribute cloud_vm_network_id
+    #   <p>Filter criteria for the network ID of a VM instance.</p>
+    #   @return [Array<Types::StringFilter>]
+    # @!attribute cloud_vm_subnet_ids
+    #   <p>Filter criteria for the subnet IDs of a VM instance.</p>
+    #   @return [Array<Types::StringFilter>]
+    # @!attribute cloud_image_repository_name
+    #   <p>Filter criteria for the repository name of a container image.</p>
+    #   @return [Array<Types::StringFilter>]
+    # @!attribute cloud_image_registry
+    #   <p>Filter criteria for the registry of a container image.</p>
+    #   @return [Array<Types::StringFilter>]
+    # @!attribute cloud_image_digest
+    #   <p>Filter criteria for the digest of a container image.</p>
+    #   @return [Array<Types::StringFilter>]
+    # @!attribute cloud_image_tags
+    #   <p>Filter criteria for the tags of a container image.</p>
+    #   @return [Array<Types::StringFilter>]
+    # @!attribute cloud_image_pushed_at
+    #   <p>Filter criteria for when a container image was pushed.</p>
+    #   @return [Array<Types::DateFilter>]
+    # @!attribute cloud_image_architecture
+    #   <p>Filter criteria for the architecture of a container image.</p>
+    #   @return [Array<Types::StringFilter>]
+    # @!attribute cloud_image_last_in_use_at
+    #   <p>Filter criteria for the last time a container image was in use.</p>
+    #   @return [Array<Types::DateFilter>]
+    # @!attribute cloud_image_in_use_count
+    #   <p>Filter criteria for the in-use count of a container image.</p>
+    #   @return [Array<Types::NumberFilter>]
+    # @!attribute cloud_serverless_function_name
+    #   <p>Filter criteria for the name of a serverless function.</p>
+    #   @return [Array<Types::StringFilter>]
+    # @!attribute cloud_serverless_function_runtime
+    #   <p>Filter criteria for the runtime of a serverless function.</p>
+    #   @return [Array<Types::StringFilter>]
+    # @!attribute cloud_serverless_function_last_modified_at
+    #   <p>Filter criteria for when a serverless function was last modified.</p>
+    #   @return [Array<Types::DateFilter>]
+    # @!attribute cloud_serverless_function_execution_role
+    #   <p>Filter criteria for the execution role of a serverless function.</p>
+    #   @return [Array<Types::StringFilter>]
     class FilterCriteria < Struct.new(
       nil,
       :finding_arn,
@@ -3708,6 +4540,25 @@ module Aws::Inspector2
       :epss_score,
       :code_repository_project_name,
       :code_repository_provider_type,
+      :cloud_provider,
+      :cloud_provider_region,
+      :cloud_provider_account_id,
+      :cloud_provider_org_id,
+      :cloud_vm_image_reference,
+      :cloud_vm_network_id,
+      :cloud_vm_subnet_ids,
+      :cloud_image_repository_name,
+      :cloud_image_registry,
+      :cloud_image_digest,
+      :cloud_image_tags,
+      :cloud_image_pushed_at,
+      :cloud_image_architecture,
+      :cloud_image_last_in_use_at,
+      :cloud_image_in_use_count,
+      :cloud_serverless_function_name,
+      :cloud_serverless_function_runtime,
+      :cloud_serverless_function_last_modified_at,
+      :cloud_serverless_function_execution_role,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3925,12 +4776,68 @@ module Aws::Inspector2
     # @!attribute fix_available_count
     #   <p> Details about the number of fixes. </p>
     #   @return [Integer]
+    # @!attribute cloud_provider
+    #   <p>The cloud service provider associated with this finding type aggregation. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>AWS</code> – Findings from Amazon Web Services resources.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>AZURE</code> – Findings from Microsoft Azure resources.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute cloud_account_id
+    #   <p>The cloud account ID for the finding type aggregation.</p>
+    #   @return [String]
+    # @!attribute cloud_org_id
+    #   <p>The cloud organization ID for the finding type aggregation.</p>
+    #   @return [String]
+    # @!attribute cloud_region
+    #   <p>The cloud Region associated with this finding type aggregation. The value format depends on the cloud provider:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>An Amazon Web Services Region, such as <code>us-east-1</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>An Azure region, such as <code>eastus</code>.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute cloud_partition
+    #   <p>The cloud infrastructure partition associated with this finding type aggregation. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>aws</code> – Amazon Web Services commercial Regions.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>aws-cn</code> – Amazon Web Services China Regions.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>aws-us-gov</code> – Amazon Web Services GovCloud (US) Regions.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>AzureCloud</code> – Azure commercial Regions.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
     class FindingTypeAggregationResponse < Struct.new(
       nil,
       :account_id,
       :severity_counts,
       :exploit_available_count,
       :fix_available_count,
+      :cloud_provider,
+      :cloud_account_id,
+      :cloud_org_id,
+      :cloud_region,
+      :cloud_partition,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3965,12 +4872,16 @@ module Aws::Inspector2
     # @!attribute status
     #   <p>The order to sort results by.</p>
     #   @return [String]
+    # @!attribute cloud_provider
+    #   <p>The cloud provider associated with the free trial information.</p>
+    #   @return [String]
     class FreeTrialInfo < Struct.new(
       nil,
       :type,
       :start,
       :end,
       :status,
+      :cloud_provider,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4161,14 +5072,14 @@ module Aws::Inspector2
     # @!attribute last_update_on
     #   <p>The timestamp when the code security integration was last updated.</p>
     #   @return [Time]
-    # @!attribute tags
-    #   <p>The tags associated with the code security integration.</p>
-    #   @return [Hash<String, String>]
     # @!attribute authorization_url
     #   <p>The URL used to authorize the integration with the repository provider. This is only
     #            returned if reauthorization is required to fix a connection issue. Otherwise, it is
     #            null.</p>
     #   @return [String]
+    # @!attribute tags
+    #   <p>The tags associated with the code security integration.</p>
+    #   @return [Hash<String, String>]
     class GetCodeSecurityIntegrationResponse < Struct.new(
       nil,
       :integration_arn,
@@ -4178,8 +5089,8 @@ module Aws::Inspector2
       :status_reason,
       :created_on,
       :last_update_on,
-      :tags,
       :authorization_url,
+      :tags,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4292,8 +5203,15 @@ module Aws::Inspector2
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute account_id
+    #   <p>The 12-digit Amazon Web Services account ID of the member account whose scan configuration you want
+    #            to retrieve. When specified, you must be the delegated administrator for this
+    #            member account. If not specified, the operation returns your own
+    #            configuration.</p>
+    #   @return [String]
     class GetConfigurationInput < Struct.new(
       nil,
+      :account_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4502,6 +5420,54 @@ module Aws::Inspector2
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Contains details about a container image involved in a finding.</p>
+    # @!attribute repository_name
+    #   <p>The name of the repository the container image resides in.</p>
+    #   @return [String]
+    # @!attribute registry
+    #   <p>The registry for the container image.</p>
+    #   @return [String]
+    # @!attribute image_tags
+    #   <p>The image tags attached to the container image.</p>
+    #   @return [Array<String>]
+    # @!attribute image_digest
+    #   <p>The image digest of the container image.</p>
+    #   @return [String]
+    # @!attribute pushed_at
+    #   <p>The date and time the container image was pushed.</p>
+    #   @return [Time]
+    # @!attribute architecture
+    #   <p>The architecture of the container image.</p>
+    #   @return [String]
+    # @!attribute author
+    #   <p>The author of the container image.</p>
+    #   @return [String]
+    # @!attribute in_use_count
+    #   <p>The number of times the container image is in use.</p>
+    #   @return [Integer]
+    # @!attribute last_in_use_at
+    #   <p>The last time the container image was in use.</p>
+    #   @return [Time]
+    # @!attribute platform
+    #   <p>The platform of the container image.</p>
+    #   @return [String]
+    class Image < Struct.new(
+      nil,
+      :repository_name,
+      :registry,
+      :image_tags,
+      :image_digest,
+      :pushed_at,
+      :architecture,
+      :author,
+      :in_use_count,
+      :last_in_use_at,
+      :platform,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The details that define an aggregation based on container image layers.</p>
     # @!attribute repositories
     #   <p>The repository associated with the container image hosting the layers.</p>
@@ -4511,6 +5477,57 @@ module Aws::Inspector2
     #   @return [Array<Types::StringFilter>]
     # @!attribute layer_hashes
     #   <p>The hashes associated with the layers.</p>
+    #   @return [Array<Types::StringFilter>]
+    # @!attribute cloud_providers
+    #   <p>The cloud providers to aggregate findings for. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>AWS</code> – Findings from Amazon Web Services resources.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>AZURE</code> – Findings from Microsoft Azure resources.</p>
+    #               </li>
+    #            </ul>
+    #   @return [Array<Types::StringFilter>]
+    # @!attribute cloud_account_ids
+    #   <p>The cloud account IDs to aggregate findings for.</p>
+    #   @return [Array<Types::StringFilter>]
+    # @!attribute cloud_org_ids
+    #   <p>The cloud organization IDs to aggregate findings for.</p>
+    #   @return [Array<Types::StringFilter>]
+    # @!attribute cloud_regions
+    #   <p>The cloud regions to aggregate findings for. The value format depends on the cloud provider:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>An Amazon Web Services Region, such as <code>us-east-1</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>An Azure region, such as <code>eastus</code>.</p>
+    #               </li>
+    #            </ul>
+    #   @return [Array<Types::StringFilter>]
+    # @!attribute cloud_partitions
+    #   <p>The cloud partitions to aggregate findings for. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>aws</code> – Amazon Web Services commercial Regions.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>aws-cn</code> – Amazon Web Services China Regions.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>aws-us-gov</code> – Amazon Web Services GovCloud (US) Regions.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>AzureCloud</code> – Azure commercial Regions.</p>
+    #               </li>
+    #            </ul>
     #   @return [Array<Types::StringFilter>]
     # @!attribute sort_order
     #   <p>The order to sort results by.</p>
@@ -4523,6 +5540,11 @@ module Aws::Inspector2
       :repositories,
       :resource_ids,
       :layer_hashes,
+      :cloud_providers,
+      :cloud_account_ids,
+      :cloud_org_ids,
+      :cloud_regions,
+      :cloud_partitions,
       :sort_order,
       :sort_by,
       keyword_init: true
@@ -4544,6 +5566,57 @@ module Aws::Inspector2
     #   <p>The ID of the Amazon Web Services account that owns the container image hosting the layer
     #            image.</p>
     #   @return [String]
+    # @!attribute cloud_provider
+    #   <p>The cloud service provider associated with this image layer aggregation. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>AWS</code> – Findings from Amazon Web Services resources.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>AZURE</code> – Findings from Microsoft Azure resources.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute cloud_account_id
+    #   <p>The cloud account ID for the image layer aggregation.</p>
+    #   @return [String]
+    # @!attribute cloud_org_id
+    #   <p>The cloud organization ID for the image layer aggregation.</p>
+    #   @return [String]
+    # @!attribute cloud_region
+    #   <p>The cloud Region associated with this image layer aggregation. The value format depends on the cloud provider:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>An Amazon Web Services Region, such as <code>us-east-1</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>An Azure region, such as <code>eastus</code>.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute cloud_partition
+    #   <p>The cloud infrastructure partition associated with this image layer aggregation. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>aws</code> – Amazon Web Services commercial Regions.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>aws-cn</code> – Amazon Web Services China Regions.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>aws-us-gov</code> – Amazon Web Services GovCloud (US) Regions.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>AzureCloud</code> – Azure commercial Regions.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
     # @!attribute severity_counts
     #   <p>An object that represents the count of matched findings per severity.</p>
     #   @return [Types::SeverityCounts]
@@ -4553,6 +5626,11 @@ module Aws::Inspector2
       :resource_id,
       :layer_hash,
       :account_id,
+      :cloud_provider,
+      :cloud_account_id,
+      :cloud_org_id,
+      :cloud_region,
+      :cloud_partition,
       :severity_counts,
       keyword_init: true
     )
@@ -5176,6 +6254,74 @@ module Aws::Inspector2
     class ListCodeSecurityScanConfigurationsResponse < Struct.new(
       nil,
       :configurations,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute aws_config_connector_arns
+    #   <p>The list of Amazon Web Services Config connector ARNs to filter results.</p>
+    #   @return [Array<String>]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return in a single call. Valid range is 1 to 50. To retrieve the remaining results, make another request with the <code>nextToken</code> value returned from this request.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>A token to use for paginating results. Set this value to null for the first request. For subsequent calls, use the <code>nextToken</code> value returned from the previous request.</p>
+    #   @return [String]
+    class ListConnectorScanConfigurationsRequest < Struct.new(
+      nil,
+      :aws_config_connector_arns,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute scan_configurations
+    #   <p>A list of scan configuration items.</p>
+    #   @return [Array<Types::ConnectorScanConfigurationItem>]
+    # @!attribute next_token
+    #   <p>A pagination token. If this value is not null, there are additional results available. Use this token in the <code>nextToken</code> parameter of a subsequent request to retrieve the next page of results.</p>
+    #   @return [String]
+    class ListConnectorScanConfigurationsResponse < Struct.new(
+      nil,
+      :scan_configurations,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute max_results
+    #   <p>The maximum number of results to return in a single call. To retrieve the remaining results, make another request with the <code>nextToken</code> value returned from this request.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>A token to use for paginating results. Set this value to null for the first request. For subsequent calls, use the <code>nextToken</code> value returned from the previous request.</p>
+    #   @return [String]
+    # @!attribute filter_criteria
+    #   <p>The filter criteria to apply to the list of connectors.</p>
+    #   @return [Types::ConnectorFilterCriteria]
+    class ListConnectorsRequest < Struct.new(
+      nil,
+      :max_results,
+      :next_token,
+      :filter_criteria,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute items
+    #   <p>A list of connectors.</p>
+    #   @return [Array<Types::Connector>]
+    # @!attribute next_token
+    #   <p>A pagination token. If this value is not null, there are additional results available. Use this token in the <code>nextToken</code> parameter of a subsequent request to retrieve the next page of results.</p>
+    #   @return [String]
+    class ListConnectorsResponse < Struct.new(
+      nil,
+      :items,
       :next_token,
       keyword_init: true
     )
@@ -5972,6 +7118,52 @@ module Aws::Inspector2
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The provider-specific configuration details for creating a connector.</p>
+    # @!attribute azure
+    #   <p>The Azure-specific details for creating a connector.</p>
+    #   @return [Types::AzureProviderDetailCreate]
+    class ProviderDetailCreate < Struct.new(
+      :azure,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class Azure < ProviderDetailCreate; end
+      class Unknown < ProviderDetailCreate; end
+    end
+
+    # <p>The provider-specific configuration details for updating a connector.</p>
+    # @!attribute azure
+    #   <p>The Azure-specific details for updating a connector.</p>
+    #   @return [Types::AzureProviderDetailUpdate]
+    class ProviderDetailUpdate < Struct.new(
+      :azure,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class Azure < ProviderDetailUpdate; end
+      class Unknown < ProviderDetailUpdate; end
+    end
+
+    # <p>A filter that matches connectors by cloud provider.</p>
+    # @!attribute comparison
+    #   <p>The comparison operator for the provider filter.</p>
+    #   @return [String]
+    # @!attribute value
+    #   <p>The cloud provider value to filter by.</p>
+    #   @return [String]
+    class ProviderFilter < Struct.new(
+      nil,
+      :comparison,
+      :value,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Details about the recommended course of action to remediate the finding.</p>
     # @!attribute text
     #   <p>The recommended course of action to remediate the finding.</p>
@@ -6029,6 +7221,57 @@ module Aws::Inspector2
     # @!attribute account_id
     #   <p>The ID of the Amazon Web Services account associated with the findings.</p>
     #   @return [String]
+    # @!attribute cloud_provider
+    #   <p>The cloud service provider associated with this repository aggregation. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>AWS</code> – Findings from Amazon Web Services resources.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>AZURE</code> – Findings from Microsoft Azure resources.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute cloud_partition
+    #   <p>The cloud infrastructure partition associated with this repository aggregation. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>aws</code> – Amazon Web Services commercial Regions.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>aws-cn</code> – Amazon Web Services China Regions.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>aws-us-gov</code> – Amazon Web Services GovCloud (US) Regions.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>AzureCloud</code> – Azure commercial Regions.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute cloud_region
+    #   <p>The cloud Region associated with this repository aggregation. The value format depends on the cloud provider:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>An Amazon Web Services Region, such as <code>us-east-1</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>An Azure region, such as <code>eastus</code>.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute cloud_org_id
+    #   <p>The cloud organization ID for the repository aggregation.</p>
+    #   @return [String]
+    # @!attribute cloud_account_id
+    #   <p>The cloud account ID for the repository aggregation.</p>
+    #   @return [String]
     # @!attribute severity_counts
     #   <p>An object that represent the count of matched findings per severity.</p>
     #   @return [Types::SeverityCounts]
@@ -6039,6 +7282,11 @@ module Aws::Inspector2
       nil,
       :repository,
       :account_id,
+      :cloud_provider,
+      :cloud_partition,
+      :cloud_region,
+      :cloud_org_id,
+      :cloud_account_id,
       :severity_counts,
       :affected_images,
       keyword_init: true
@@ -6087,6 +7335,15 @@ module Aws::Inspector2
     # @!attribute details
     #   <p>An object that contains details about the resource involved in a finding.</p>
     #   @return [Types::ResourceDetails]
+    # @!attribute provider
+    #   <p>The cloud provider of the resource.</p>
+    #   @return [String]
+    # @!attribute provider_account_id
+    #   <p>The cloud provider account ID of the resource.</p>
+    #   @return [String]
+    # @!attribute provider_org_id
+    #   <p>The cloud provider organization ID of the resource.</p>
+    #   @return [String]
     class Resource < Struct.new(
       nil,
       :type,
@@ -6095,6 +7352,9 @@ module Aws::Inspector2
       :region,
       :tags,
       :details,
+      :provider,
+      :provider_account_id,
+      :provider_org_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6115,12 +7375,24 @@ module Aws::Inspector2
     # @!attribute code_repository
     #   <p>Contains details about a code repository resource associated with a finding.</p>
     #   @return [Types::CodeRepositoryDetails]
+    # @!attribute vm
+    #   <p>An object that contains details about a VM instance involved in the finding.</p>
+    #   @return [Types::Vm]
+    # @!attribute image
+    #   <p>An object that contains details about a container image involved in the finding.</p>
+    #   @return [Types::Image]
+    # @!attribute serverless_function
+    #   <p>An object that contains details about a serverless function involved in the finding.</p>
+    #   @return [Types::ServerlessFunction]
     class ResourceDetails < Struct.new(
       nil,
       :aws_ec2_instance,
       :aws_ecr_container_image,
       :aws_lambda_function,
       :code_repository,
+      :vm,
+      :image,
+      :serverless_function,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6151,6 +7423,39 @@ module Aws::Inspector2
     # @!attribute lambda_function_tags
     #   <p>The Amazon Web Services Lambda function tags used as resource filter criteria.</p>
     #   @return [Array<Types::ResourceMapFilter>]
+    # @!attribute cloud_provider
+    #   <p>The cloud providers used as resource filter criteria.</p>
+    #   @return [Array<Types::ResourceStringFilter>]
+    # @!attribute cloud_provider_account_id
+    #   <p>The cloud provider account IDs used as resource filter criteria.</p>
+    #   @return [Array<Types::ResourceStringFilter>]
+    # @!attribute cloud_provider_org_id
+    #   <p>The cloud provider organization IDs used as resource filter criteria.</p>
+    #   @return [Array<Types::ResourceStringFilter>]
+    # @!attribute cloud_provider_region
+    #   <p>The cloud provider regions used as resource filter criteria.</p>
+    #   @return [Array<Types::ResourceStringFilter>]
+    # @!attribute cloud_vm_instance_tags
+    #   <p>The cloud VM instance tags used as resource filter criteria.</p>
+    #   @return [Array<Types::ResourceMapFilter>]
+    # @!attribute cloud_container_image_tags
+    #   <p>The cloud container image tags used as resource filter criteria.</p>
+    #   @return [Array<Types::ResourceStringFilter>]
+    # @!attribute cloud_container_repository_name
+    #   <p>The cloud container repository names used as resource filter criteria.</p>
+    #   @return [Array<Types::ResourceStringFilter>]
+    # @!attribute cloud_container_registry_name
+    #   <p>The cloud container registry names used as resource filter criteria.</p>
+    #   @return [Array<Types::ResourceStringFilter>]
+    # @!attribute cloud_serverless_function_name
+    #   <p>The cloud serverless function names used as resource filter criteria.</p>
+    #   @return [Array<Types::ResourceStringFilter>]
+    # @!attribute cloud_serverless_function_runtime
+    #   <p>The cloud serverless function runtimes used as resource filter criteria.</p>
+    #   @return [Array<Types::ResourceStringFilter>]
+    # @!attribute cloud_serverless_function_tags
+    #   <p>The cloud serverless function tags used as resource filter criteria.</p>
+    #   @return [Array<Types::ResourceMapFilter>]
     class ResourceFilterCriteria < Struct.new(
       nil,
       :account_id,
@@ -6161,6 +7466,17 @@ module Aws::Inspector2
       :ecr_image_tags,
       :ec2_instance_tags,
       :lambda_function_tags,
+      :cloud_provider,
+      :cloud_provider_account_id,
+      :cloud_provider_org_id,
+      :cloud_provider_region,
+      :cloud_vm_instance_tags,
+      :cloud_container_image_tags,
+      :cloud_container_repository_name,
+      :cloud_container_registry_name,
+      :cloud_serverless_function_name,
+      :cloud_serverless_function_runtime,
+      :cloud_serverless_function_tags,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6215,6 +7531,21 @@ module Aws::Inspector2
     # @!attribute code_repository
     #   <p>Contains metadata about scan coverage for a code repository resource.</p>
     #   @return [Types::CodeRepositoryMetadata]
+    # @!attribute vm_instance
+    #   <p>The VM instance metadata associated with a covered resource.</p>
+    #   @return [Types::VmInstanceMetadata]
+    # @!attribute container_image
+    #   <p>The container image metadata associated with a covered resource.</p>
+    #   @return [Types::ContainerImageMetadata]
+    # @!attribute container_repository
+    #   <p>The container repository metadata associated with a covered resource.</p>
+    #   @return [Types::ContainerRepositoryMetadata]
+    # @!attribute container_registry
+    #   <p>The container registry metadata associated with a covered resource.</p>
+    #   @return [Types::ContainerRegistryMetadata]
+    # @!attribute serverless_function
+    #   <p>The serverless function metadata associated with a covered resource.</p>
+    #   @return [Types::ServerlessFunctionMetadata]
     class ResourceScanMetadata < Struct.new(
       nil,
       :ecr_repository,
@@ -6222,6 +7553,11 @@ module Aws::Inspector2
       :ec2,
       :lambda_function,
       :code_repository,
+      :vm_instance,
+      :container_image,
+      :container_repository,
+      :container_registry,
+      :serverless_function,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6391,6 +7727,8 @@ module Aws::Inspector2
     #            Once the instance becomes managed by SSM, Inspector will automatically begin scanning this
     #            instance. </p>
     #            <p>
+    #               <code>UNSUPPORTED_CODE_ARTIFACTS </code> - The function was not scanned because it has an unsupported code artifacts.</p>
+    #            <p>
     #               <code>UNSUPPORTED_CONFIG_FILE</code> - Reserved for future use.</p>
     #            <p>
     #               <code>UNSUPPORTED_LANGUAGE</code> - The scan was unsuccessful because the repository
@@ -6405,6 +7743,9 @@ module Aws::Inspector2
     #            <p>
     #               <code>UNSUPPORTED_RUNTIME</code> - The function was not scanned because it has an
     #            unsupported runtime. To see a complete list of supported runtimes see: <a href=" https://docs.aws.amazon.com/inspector/latest/user/supported.html">https://docs.aws.amazon.com/inspector/latest/user/supported.html</a>.</p>
+    #            <p>
+    #               <code>IMAGE_ARCHIVED</code> - This image has been archived in Amazon ECR and is no longer available for scanning in Amazon Inspector.
+    #         </p>
     #   @return [String]
     class ScanStatus < Struct.new(
       nil,
@@ -6443,6 +7784,46 @@ module Aws::Inspector2
       class Weekly < Schedule; end
       class Monthly < Schedule; end
       class Unknown < Schedule; end
+    end
+
+    # <p>The scope of resources that Amazon Inspector scans for a single scanning type, including the scope level, the targeted resources, and the current state.</p>
+    # @!attribute scope_type
+    #   <p>The type of scope. Valid values are <code>TENANT</code>, which scans all resources in the Azure tenant, and <code>SUBSCRIPTION</code>, which scans only the resources in the specified Azure subscriptions.</p>
+    #   @return [String]
+    # @!attribute scope_values
+    #   <p>The list of scope values. For subscription-level scope, these are Azure subscription IDs.</p>
+    #   @return [Array<String>]
+    # @!attribute state
+    #   <p>The current state of the scope configuration.</p>
+    #   @return [String]
+    # @!attribute state_reason
+    #   <p>The reason for the current state of the scope configuration.</p>
+    #   @return [String]
+    class ScopeConfiguration < Struct.new(
+      nil,
+      :scope_type,
+      :scope_values,
+      :state,
+      :state_reason,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The scope of resources to scan for a single scanning type. Provide this as part of an <code>AzureScopeConfigurationInput</code> when you create or update a connector.</p>
+    # @!attribute scope_type
+    #   <p>The type of scope. Valid values are <code>TENANT</code>, which scans all resources in the Azure tenant, and <code>SUBSCRIPTION</code>, which scans only the resources in the specified Azure subscriptions.</p>
+    #   @return [String]
+    # @!attribute scope_values
+    #   <p>The list of scope values. For subscription-level scope, these are Azure subscription IDs.</p>
+    #   @return [Array<String>]
+    class ScopeConfigurationInput < Struct.new(
+      nil,
+      :scope_type,
+      :scope_values,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the scope of repositories to be included in code security scans.</p>
@@ -6553,6 +7934,270 @@ module Aws::Inspector2
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Contains details about a serverless function involved in a finding.</p>
+    # @!attribute serverless_function_name
+    #   <p>The name of the serverless function.</p>
+    #   @return [String]
+    # @!attribute runtime
+    #   <p>The runtime of the serverless function.</p>
+    #   @return [String]
+    # @!attribute version
+    #   <p>The version of the serverless function.</p>
+    #   @return [String]
+    # @!attribute code_digest
+    #   <p>The code digest of the serverless function.</p>
+    #   @return [String]
+    # @!attribute last_modified_at
+    #   <p>The date and time the serverless function was last modified.</p>
+    #   @return [Time]
+    # @!attribute network_id
+    #   <p>The network ID associated with the serverless function.</p>
+    #   @return [String]
+    # @!attribute subnet_ids
+    #   <p>The subnet IDs associated with the serverless function.</p>
+    #   @return [Array<String>]
+    # @!attribute security_group_ids
+    #   <p>The security group IDs associated with the serverless function.</p>
+    #   @return [Array<String>]
+    # @!attribute execution_role
+    #   <p>The execution role of the serverless function.</p>
+    #   @return [String]
+    # @!attribute package_type
+    #   <p>The package type of the serverless function.</p>
+    #   @return [String]
+    # @!attribute architectures
+    #   <p>The architectures of the serverless function.</p>
+    #   @return [Array<String>]
+    # @!attribute layers
+    #   <p>The layers of the serverless function.</p>
+    #   @return [Array<String>]
+    class ServerlessFunction < Struct.new(
+      nil,
+      :serverless_function_name,
+      :runtime,
+      :version,
+      :code_digest,
+      :last_modified_at,
+      :network_id,
+      :subnet_ids,
+      :security_group_ids,
+      :execution_role,
+      :package_type,
+      :architectures,
+      :layers,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>An aggregation of information about serverless functions.</p>
+    # @!attribute resource_ids
+    #   <p>The resource IDs to aggregate findings for.</p>
+    #   @return [Array<Types::StringFilter>]
+    # @!attribute function_names
+    #   <p>The function names to aggregate findings for.</p>
+    #   @return [Array<Types::StringFilter>]
+    # @!attribute runtimes
+    #   <p>The runtimes to aggregate findings for.</p>
+    #   @return [Array<Types::StringFilter>]
+    # @!attribute function_tags
+    #   <p>The function tags to aggregate findings for.</p>
+    #   @return [Array<Types::MapFilter>]
+    # @!attribute cloud_providers
+    #   <p>The cloud providers to aggregate findings for. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>AWS</code> – Findings from Amazon Web Services resources.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>AZURE</code> – Findings from Microsoft Azure resources.</p>
+    #               </li>
+    #            </ul>
+    #   @return [Array<Types::StringFilter>]
+    # @!attribute cloud_partitions
+    #   <p>The cloud partitions to aggregate findings for. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>aws</code> – Amazon Web Services commercial Regions.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>aws-cn</code> – Amazon Web Services China Regions.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>aws-us-gov</code> – Amazon Web Services GovCloud (US) Regions.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>AzureCloud</code> – Azure commercial Regions.</p>
+    #               </li>
+    #            </ul>
+    #   @return [Array<Types::StringFilter>]
+    # @!attribute cloud_regions
+    #   <p>The cloud regions to aggregate findings for. The value format depends on the cloud provider:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>An Amazon Web Services Region, such as <code>us-east-1</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>An Azure region, such as <code>eastus</code>.</p>
+    #               </li>
+    #            </ul>
+    #   @return [Array<Types::StringFilter>]
+    # @!attribute cloud_org_ids
+    #   <p>The cloud organization IDs to aggregate findings for.</p>
+    #   @return [Array<Types::StringFilter>]
+    # @!attribute cloud_account_ids
+    #   <p>The cloud account IDs to aggregate findings for.</p>
+    #   @return [Array<Types::StringFilter>]
+    # @!attribute sort_order
+    #   <p>The order to sort results by. Valid values are <code>ASC</code> and <code>DESC</code>.</p>
+    #   @return [String]
+    # @!attribute sort_by
+    #   <p>The value to sort results by. Specify a field name from the aggregation response, such as <code>CRITICAL</code>, <code>HIGH</code>, or <code>ALL</code>.</p>
+    #   @return [String]
+    class ServerlessFunctionAggregation < Struct.new(
+      nil,
+      :resource_ids,
+      :function_names,
+      :runtimes,
+      :function_tags,
+      :cloud_providers,
+      :cloud_partitions,
+      :cloud_regions,
+      :cloud_org_ids,
+      :cloud_account_ids,
+      :sort_order,
+      :sort_by,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A response that contains the results of a serverless function aggregation.</p>
+    # @!attribute resource_id
+    #   <p>The resource ID for the serverless function.</p>
+    #   @return [String]
+    # @!attribute cloud_provider
+    #   <p>The cloud service provider associated with this serverless function aggregation. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>AWS</code> – Findings from Amazon Web Services resources.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>AZURE</code> – Findings from Microsoft Azure resources.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute cloud_account_id
+    #   <p>The cloud account ID for the serverless function aggregation.</p>
+    #   @return [String]
+    # @!attribute cloud_partition
+    #   <p>The cloud infrastructure partition associated with this serverless function aggregation. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>aws</code> – Amazon Web Services commercial Regions.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>aws-cn</code> – Amazon Web Services China Regions.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>aws-us-gov</code> – Amazon Web Services GovCloud (US) Regions.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>AzureCloud</code> – Azure commercial Regions.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute cloud_region
+    #   <p>The cloud Region associated with this serverless function aggregation. The value format depends on the cloud provider:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>An Amazon Web Services Region, such as <code>us-east-1</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>An Azure region, such as <code>eastus</code>.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute cloud_org_id
+    #   <p>The cloud organization ID for the serverless function aggregation.</p>
+    #   @return [String]
+    # @!attribute function_name
+    #   <p>The name of the serverless function.</p>
+    #   @return [String]
+    # @!attribute runtime
+    #   <p>The runtime of the serverless function.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>The tags attached to the serverless function.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute account_id
+    #   <p>The account ID associated with the serverless function.</p>
+    #   @return [String]
+    # @!attribute severity_counts
+    #   <p>An object that contains the counts of aggregated finding per severity.</p>
+    #   @return [Types::SeverityCounts]
+    # @!attribute last_modified_at
+    #   <p>The date and time the serverless function was last modified.</p>
+    #   @return [Time]
+    # @!attribute exploit_available_active_findings_count
+    #   <p>The number of active findings with an exploit available for the serverless function.</p>
+    #   @return [Integer]
+    # @!attribute fix_available_active_findings_count
+    #   <p>The number of active findings with a fix available for the serverless function.</p>
+    #   @return [Integer]
+    class ServerlessFunctionAggregationResponse < Struct.new(
+      nil,
+      :resource_id,
+      :cloud_provider,
+      :cloud_account_id,
+      :cloud_partition,
+      :cloud_region,
+      :cloud_org_id,
+      :function_name,
+      :runtime,
+      :tags,
+      :account_id,
+      :severity_counts,
+      :last_modified_at,
+      :exploit_available_active_findings_count,
+      :fix_available_active_findings_count,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains metadata about a serverless function associated with a covered resource.</p>
+    # @!attribute serverless_function_name
+    #   <p>The name of the serverless function.</p>
+    #   @return [String]
+    # @!attribute runtime
+    #   <p>The runtime of the serverless function.</p>
+    #   @return [String]
+    # @!attribute function_tags
+    #   <p>The tags associated with the serverless function.</p>
+    #   @return [Hash<String, String>]
+    class ServerlessFunctionMetadata < Struct.new(
+      nil,
+      :serverless_function_name,
+      :runtime,
+      :function_tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>You have exceeded your service quota. To perform the requested action, remove some of
     #          the relevant resources, or use Service Quotas to request a service quota increase.</p>
     # @!attribute message
@@ -6582,12 +8227,24 @@ module Aws::Inspector2
     # @!attribute critical
     #   <p>The total count of critical severity findings.</p>
     #   @return [Integer]
+    # @!attribute low
+    #   <p>The total count of low severity findings.</p>
+    #   @return [Integer]
+    # @!attribute informational
+    #   <p>The total count of informational severity findings.</p>
+    #   @return [Integer]
+    # @!attribute untriaged
+    #   <p>The total count of untriaged findings.</p>
+    #   @return [Integer]
     class SeverityCounts < Struct.new(
       nil,
       :all,
       :medium,
       :high,
       :critical,
+      :low,
+      :informational,
+      :untriaged,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6978,23 +8635,23 @@ module Aws::Inspector2
     # @!attribute resource_type
     #   <p>The resource type to aggregate on.</p>
     #   @return [String]
+    # @!attribute finding_type
+    #   <p>The type of finding to aggregate on.</p>
+    #   @return [String]
     # @!attribute sort_order
     #   <p>The order to sort results by.</p>
     #   @return [String]
     # @!attribute sort_by
     #   <p>The value to sort results by.</p>
     #   @return [String]
-    # @!attribute finding_type
-    #   <p>The type of finding to aggregate on.</p>
-    #   @return [String]
     class TitleAggregation < Struct.new(
       nil,
       :titles,
       :vulnerability_ids,
       :resource_type,
+      :finding_type,
       :sort_order,
       :sort_by,
-      :finding_type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7158,22 +8815,115 @@ module Aws::Inspector2
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The per-scan-type inheritance reset settings for the <code>UpdateConfiguration</code>
+    #          operation. Each member is independently optional. Including a member in this structure
+    #          resets that scan type's configuration to inherit from the delegated administrator.</p>
+    # @!attribute ec2_configuration
+    #   <p>The inheritance mode for Amazon EC2 scan configuration. Set to
+    #            <code>INHERIT_FROM_ADMIN</code> to reset the member account's Amazon EC2 scan configuration to
+    #            inherit from the delegated administrator. If omitted, the member account's existing Amazon EC2
+    #            scan configuration is not changed.</p>
+    #   @return [String]
+    # @!attribute ecr_configuration
+    #   <p>The inheritance mode for Amazon ECR scan configuration. Set to
+    #            <code>INHERIT_FROM_ADMIN</code> to reset the member account's Amazon ECR scan configuration to
+    #            inherit from the delegated administrator. If omitted, the member account's existing Amazon ECR
+    #            scan configuration is not changed.</p>
+    #   @return [String]
+    class UpdateConfigurationInheritance < Struct.new(
+      nil,
+      :ec2_configuration,
+      :ecr_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute account_id
+    #   <p>The 12-digit Amazon Web Services account ID of the member account whose scan configuration you want
+    #            to update. When specified, you must be the delegated administrator for this member
+    #            account. If not specified, the operation updates your own configuration and
+    #            propagates changes to any member accounts that have not been individually configured.</p>
+    #   @return [String]
     # @!attribute ecr_configuration
     #   <p>Specifies how the ECR automated re-scan will be updated for your environment.</p>
     #   @return [Types::EcrConfiguration]
     # @!attribute ec2_configuration
     #   <p>Specifies how the Amazon EC2 automated scan will be updated for your environment.</p>
     #   @return [Types::Ec2Configuration]
+    # @!attribute update_configuration_inheritance
+    #   <p>Specifies which scan-type configurations to reset to the delegated administrator's
+    #            inherited values for the targeted member account. Each member of this structure is
+    #            independently optional. When specified, <code>ec2Configuration</code> and
+    #            <code>ecrConfiguration</code> must be absent, and <code>accountId</code> must also be
+    #            present. Only <code>INHERIT_FROM_ADMIN</code> is valid for each member. If not specified,
+    #            the operation uses the <code>ec2Configuration</code> and <code>ecrConfiguration</code>
+    #            parameters instead.</p>
+    #   @return [Types::UpdateConfigurationInheritance]
     class UpdateConfigurationInput < Struct.new(
       nil,
+      :account_id,
       :ecr_configuration,
       :ec2_configuration,
+      :update_configuration_inheritance,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     class UpdateConfigurationOutput < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute connector_arn
+    #   <p>The Amazon Resource Name (ARN) of the connector to update.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>The updated description of the connector.</p>
+    #   @return [String]
+    # @!attribute provider_detail
+    #   <p>The updated provider-specific configuration details for the connector.</p>
+    #   @return [Types::ProviderDetailUpdate]
+    class UpdateConnectorRequest < Struct.new(
+      nil,
+      :connector_arn,
+      :description,
+      :provider_detail,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute connector_arn
+    #   <p>The Amazon Resource Name (ARN) of the updated connector.</p>
+    #   @return [String]
+    class UpdateConnectorResponse < Struct.new(
+      nil,
+      :connector_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute aws_config_connector_arn
+    #   <p>The ARN of the Amazon Web Services Config connector.</p>
+    #   @return [String]
+    # @!attribute scan_configuration
+    #   <p>The scan configuration settings to apply.</p>
+    #   @return [Types::ConnectorScanConfiguration]
+    class UpdateConnectorScanConfigurationRequest < Struct.new(
+      nil,
+      :aws_config_connector_arn,
+      :scan_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class UpdateConnectorScanConfigurationResponse < Struct.new(
       nil,
       keyword_init: true
     )
@@ -7396,12 +9146,16 @@ module Aws::Inspector2
     # @!attribute currency
     #   <p>The currency type used when calculating usage data.</p>
     #   @return [String]
+    # @!attribute cloud_provider
+    #   <p>The cloud provider associated with the usage information.</p>
+    #   @return [String]
     class Usage < Struct.new(
       nil,
       :type,
       :total,
       :estimated_monthly_cost,
       :currency,
+      :cloud_provider,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7424,6 +9178,26 @@ module Aws::Inspector2
       nil,
       :account_id,
       :usage,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The state of the Amazon Inspector VM scanner.</p>
+    # @!attribute activated
+    #   <p>Whether the VM scanner is activated.</p>
+    #   @return [Boolean]
+    # @!attribute activated_at
+    #   <p>The date and time the VM scanner was activated.</p>
+    #   @return [Time]
+    # @!attribute status
+    #   <p>The status of the VM scanner.</p>
+    #   @return [String]
+    class VMScannerState < Struct.new(
+      nil,
+      :activated,
+      :activated_at,
+      :status,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7460,6 +9234,274 @@ module Aws::Inspector2
       nil,
       :name,
       :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains details about a VM instance involved in a finding.</p>
+    # @!attribute type
+    #   <p>The type of the VM instance.</p>
+    #   @return [String]
+    # @!attribute vm_name
+    #   <p>The name of the VM instance.</p>
+    #   @return [String]
+    # @!attribute vm_image_reference
+    #   <p>The image reference of the VM instance.</p>
+    #   @return [String]
+    # @!attribute ip_v4_addresses
+    #   <p>The IPv4 addresses of the VM instance.</p>
+    #   @return [Array<String>]
+    # @!attribute ip_v6_addresses
+    #   <p>The IPv6 addresses of the VM instance.</p>
+    #   @return [Array<String>]
+    # @!attribute network_id
+    #   <p>The network ID associated with the VM instance.</p>
+    #   @return [String]
+    # @!attribute subnet_ids
+    #   <p>The subnet IDs of the VM instance.</p>
+    #   @return [Array<String>]
+    # @!attribute security_group_ids
+    #   <p>The security group IDs associated with the VM instance.</p>
+    #   @return [Array<String>]
+    # @!attribute launched_at
+    #   <p>The date and time the VM instance was launched.</p>
+    #   @return [Time]
+    # @!attribute platform
+    #   <p>The platform of the VM instance.</p>
+    #   @return [String]
+    # @!attribute execution_role
+    #   <p>The execution role of the VM instance.</p>
+    #   @return [String]
+    # @!attribute key_name
+    #   <p>The key name associated with the VM instance.</p>
+    #   @return [String]
+    class Vm < Struct.new(
+      nil,
+      :type,
+      :vm_name,
+      :vm_image_reference,
+      :ip_v4_addresses,
+      :ip_v6_addresses,
+      :network_id,
+      :subnet_ids,
+      :security_group_ids,
+      :launched_at,
+      :platform,
+      :execution_role,
+      :key_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>An aggregation of information about VM instances.</p>
+    # @!attribute resource_ids
+    #   <p>The resource IDs to aggregate findings for.</p>
+    #   @return [Array<Types::StringFilter>]
+    # @!attribute operating_systems
+    #   <p>The operating systems to aggregate findings for.</p>
+    #   @return [Array<Types::StringFilter>]
+    # @!attribute instance_tags
+    #   <p>The instance tags to aggregate findings for.</p>
+    #   @return [Array<Types::MapFilter>]
+    # @!attribute vm_image_references
+    #   <p>The VM image references to aggregate findings for.</p>
+    #   @return [Array<Types::StringFilter>]
+    # @!attribute cloud_providers
+    #   <p>The cloud providers to aggregate findings for. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>AWS</code> – Findings from Amazon Web Services resources.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>AZURE</code> – Findings from Microsoft Azure resources.</p>
+    #               </li>
+    #            </ul>
+    #   @return [Array<Types::StringFilter>]
+    # @!attribute cloud_partitions
+    #   <p>The cloud partitions to aggregate findings for. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>aws</code> – Amazon Web Services commercial Regions.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>aws-cn</code> – Amazon Web Services China Regions.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>aws-us-gov</code> – Amazon Web Services GovCloud (US) Regions.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>AzureCloud</code> – Azure commercial Regions.</p>
+    #               </li>
+    #            </ul>
+    #   @return [Array<Types::StringFilter>]
+    # @!attribute cloud_regions
+    #   <p>The cloud regions to aggregate findings for. The value format depends on the cloud provider:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>An Amazon Web Services Region, such as <code>us-east-1</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>An Azure region, such as <code>eastus</code>.</p>
+    #               </li>
+    #            </ul>
+    #   @return [Array<Types::StringFilter>]
+    # @!attribute cloud_org_ids
+    #   <p>The cloud organization IDs to aggregate findings for.</p>
+    #   @return [Array<Types::StringFilter>]
+    # @!attribute cloud_account_ids
+    #   <p>The cloud account IDs to aggregate findings for.</p>
+    #   @return [Array<Types::StringFilter>]
+    # @!attribute sort_order
+    #   <p>The order to sort results by. Valid values are <code>ASC</code> and <code>DESC</code>.</p>
+    #   @return [String]
+    # @!attribute sort_by
+    #   <p>The value to sort results by. Specify a field name from the aggregation response, such as <code>CRITICAL</code>, <code>HIGH</code>, <code>ALL</code>, or <code>NETWORK_FINDINGS</code>.</p>
+    #   @return [String]
+    class VmInstanceAggregation < Struct.new(
+      nil,
+      :resource_ids,
+      :operating_systems,
+      :instance_tags,
+      :vm_image_references,
+      :cloud_providers,
+      :cloud_partitions,
+      :cloud_regions,
+      :cloud_org_ids,
+      :cloud_account_ids,
+      :sort_order,
+      :sort_by,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A response that contains the results of a VM instance aggregation.</p>
+    # @!attribute resource_id
+    #   <p>The resource ID for the VM instance.</p>
+    #   @return [String]
+    # @!attribute cloud_provider
+    #   <p>The cloud service provider associated with this VM instance aggregation. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>AWS</code> – Findings from Amazon Web Services resources.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>AZURE</code> – Findings from Microsoft Azure resources.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute cloud_account_id
+    #   <p>The cloud account ID for the VM instance aggregation.</p>
+    #   @return [String]
+    # @!attribute cloud_partition
+    #   <p>The cloud infrastructure partition associated with this VM instance aggregation. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>aws</code> – Amazon Web Services commercial Regions.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>aws-cn</code> – Amazon Web Services China Regions.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>aws-us-gov</code> – Amazon Web Services GovCloud (US) Regions.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>AzureCloud</code> – Azure commercial Regions.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute cloud_region
+    #   <p>The cloud Region associated with this VM instance aggregation. The value format depends on the cloud provider:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>An Amazon Web Services Region, such as <code>us-east-1</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>An Azure region, such as <code>eastus</code>.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute cloud_org_id
+    #   <p>The cloud organization ID for the VM instance aggregation.</p>
+    #   @return [String]
+    # @!attribute vm_image_reference
+    #   <p>The VM image reference for the VM instance.</p>
+    #   @return [String]
+    # @!attribute operating_system
+    #   <p>The operating system of the VM instance.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>The tags attached to the VM instance.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute account_id
+    #   <p>The account ID associated with the VM instance.</p>
+    #   @return [String]
+    # @!attribute severity_counts
+    #   <p>An object that contains the counts of aggregated finding per severity.</p>
+    #   @return [Types::SeverityCounts]
+    # @!attribute network_findings
+    #   <p>The number of network findings for the VM instance. This field applies only to Amazon Web Services resources.</p>
+    #   @return [Integer]
+    # @!attribute exploit_available_active_findings_count
+    #   <p>The number of active findings with an exploit available for the VM instance.</p>
+    #   @return [Integer]
+    # @!attribute fix_available_active_findings_count
+    #   <p>The number of active findings with a fix available for the VM instance.</p>
+    #   @return [Integer]
+    class VmInstanceAggregationResponse < Struct.new(
+      nil,
+      :resource_id,
+      :cloud_provider,
+      :cloud_account_id,
+      :cloud_partition,
+      :cloud_region,
+      :cloud_org_id,
+      :vm_image_reference,
+      :operating_system,
+      :tags,
+      :account_id,
+      :severity_counts,
+      :network_findings,
+      :exploit_available_active_findings_count,
+      :fix_available_active_findings_count,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains metadata about a virtual machine (VM) instance associated with a covered resource.</p>
+    # @!attribute tags
+    #   <p>The tags associated with the VM instance.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute platform
+    #   <p>The platform of the VM instance.</p>
+    #   @return [String]
+    # @!attribute inventory_hash
+    #   <p>The inventory hash of the VM instance.</p>
+    #   @return [String]
+    # @!attribute vm_image_reference
+    #   <p>The image reference of the VM instance.</p>
+    #   @return [String]
+    class VmInstanceMetadata < Struct.new(
+      nil,
+      :tags,
+      :platform,
+      :inventory_hash,
+      :vm_image_reference,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

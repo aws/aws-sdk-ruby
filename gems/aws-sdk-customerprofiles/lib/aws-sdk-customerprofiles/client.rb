@@ -144,18 +144,18 @@ module Aws::CustomerProfiles
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -244,6 +244,54 @@ module Aws::CustomerProfiles
     # @return [Types::AddProfileKeyResponse]
     def add_profile_key(params = {}, options = {})
       request = build_request(:add_profile_key, params)
+      request.send_request(options)
+    end
+
+    # <p>Associates an Amazon Kinesis data stream to receive segment membership events for a given
+    #          domain. This is a domain-level configuration that applies to all segment
+    #          subscriptions within the domain. A domain can have only one associated stream at a time.
+    #       </p>
+    # @param [Hash, Types::AssociateStreamForSegmentsRequest] params
+    # @option params [String] :domain_name
+    #   <p>The unique name of the domain.</p>
+    # @option params [String] :destination_arn
+    #   <p>The Amazon Resource Name (ARN) of the Amazon Kinesis data stream to deliver segment membership events to.
+    #            For example, <code>arn:aws:kinesis:region:account-id:stream/stream-name</code>. </p>
+    # @option params [String] :destination_role_arn
+    #   <p>The Amazon Resource Name (ARN) of the IAM role that allows Customer Profiles service principal to assume the role for
+    #            conducting AWS Key Management Service (KMS) and Amazon Kinesis operations. The role must grant the following
+    #            Amazon Kinesis permissions to deliver segment membership events to the stream: </p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>kinesis:PutRecord</code>
+    #                  </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>kinesis:PutRecords</code>
+    #                  </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>kinesis:DescribeStream</code>
+    #                  </p>
+    #               </li>
+    #            </ul>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     domain_name: "name", # required
+    #     destination_arn: "DestinationArnString", # required
+    #     destination_role_arn: "DestinationRoleArn", # required
+    #   }
+    #   options = {}
+    #   response = client.associate_stream_for_segments(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::AssociateStreamForSegmentsResponse]
+    def associate_stream_for_segments(params = {}, options = {})
+      request = build_request(:associate_stream_for_segments, params)
       request.send_request(options)
     end
 
@@ -436,6 +484,59 @@ module Aws::CustomerProfiles
       request.send_request(options)
     end
 
+    # <p>Adds multiple profile objects to a domain of a given ObjectType in a single API call.</p>
+    #          <p>When adding a specific profile object, like a Contact Record, an inferred profile can
+    #          get created if it is not mapped to an existing profile. The resulting profile will only
+    #          have a phone number populated in the standard ProfileObject. Any additional Contact Records
+    #          with the same phone number will be mapped to the same inferred profile.</p>
+    #          <p>When a ProfileObject is created and if a ProfileObjectType already exists for the
+    #          ProfileObject, it will provide data to a standard profile depending on the
+    #          ProfileObjectType definition.</p>
+    #          <p>BatchPutProfileObject needs an ObjectType, which can be created using
+    #          PutProfileObjectType.</p>
+    # @param [Hash, Types::BatchPutProfileObjectRequest] params
+    # @option params [String] :domain_name
+    #   <p>The unique name of the domain.</p>
+    # @option params [String] :object_type_name
+    #   <p>The name of the profile object type.</p>
+    # @option params [Array<Types::BatchPutProfileObjectRequestItem>] :items
+    #   <p>A list of items to add to the domain.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     domain_name: "name", # required
+    #     object_type_name: "typeName", # required
+    #     items: [ # required
+    #       {
+    #         id: "name", # required
+    #         object: "stringifiedJson", # required
+    #       }
+    #     ]
+    #   }
+    #   options = {}
+    #   response = client.batch_put_profile_object(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     successful: [
+    #       {
+    #         id: "name", # required
+    #         profile_object_unique_key: "string1To255", # required
+    #       }
+    #     ],
+    #     failed: [
+    #       {
+    #         id: "name", # required
+    #         code: 1, # required
+    #         message: "text"
+    #       }
+    #     ]
+    #   }
+    # @return [Types::BatchPutProfileObjectResponse]
+    def batch_put_profile_object(params = {}, options = {})
+      request = build_request(:batch_put_profile_object, params)
+      request.send_request(options)
+    end
+
     # <p>Creates a new calculated attribute definition. After creation, new object data ingested
     #          into Customer Profiles will be included in the calculated attribute, which can be retrieved
     #          for a profile using the <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetCalculatedAttributeForProfile.html">GetCalculatedAttributeForProfile</a> API. Defining a calculated attribute makes it
@@ -516,7 +617,7 @@ module Aws::CustomerProfiles
     #         }
     #       ]
     #     },
-    #     statistic: "FIRST_OCCURRENCE" # One of: ["FIRST_OCCURRENCE", "LAST_OCCURRENCE", "COUNT", "SUM", "MINIMUM", "MAXIMUM", "AVERAGE", "MAX_OCCURRENCE"], # required
+    #     statistic: "FIRST_OCCURRENCE" # One of: ["FIRST_OCCURRENCE", "LAST_OCCURRENCE", "COUNT", "SUM", "MINIMUM", "MAXIMUM", "AVERAGE", "MAX_OCCURRENCE", "RECENT_OCCURRENCES"], # required
     #     use_historical_data: false,
     #     tags: {
     #       "TagKey" => "TagValue"
@@ -573,7 +674,7 @@ module Aws::CustomerProfiles
     #         }
     #       ]
     #     },
-    #     statistic: "FIRST_OCCURRENCE" # One of: ["FIRST_OCCURRENCE", "LAST_OCCURRENCE", "COUNT", "SUM", "MINIMUM", "MAXIMUM", "AVERAGE", "MAX_OCCURRENCE"],
+    #     statistic: "FIRST_OCCURRENCE" # One of: ["FIRST_OCCURRENCE", "LAST_OCCURRENCE", "COUNT", "SUM", "MINIMUM", "MAXIMUM", "AVERAGE", "MAX_OCCURRENCE", "RECENT_OCCURRENCES"],
     #     created_at: Time.now,
     #     last_updated_at: Time.now,
     #     use_historical_data: false,
@@ -595,8 +696,8 @@ module Aws::CustomerProfiles
     # <p>Creates a domain, which is a container for all customer data, such as customer profile
     #          attributes, object types, profile keys, and encryption keys. You can create multiple
     #          domains, and each domain can have multiple third-party integrations.</p>
-    #          <p>Each Amazon Connect instance can be associated with only one domain. Multiple
-    #             Amazon Connect instances can be associated with one domain.</p>
+    #          <p>Each Connect Customer instance can be associated with only one domain. Multiple
+    #             Connect Customer instances can be associated with one domain.</p>
     #          <p>Use this API or <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UpdateDomain.html">UpdateDomain</a> to
     #          enable <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html">identity
     #             resolution</a>: set <code>Matching</code> to true.</p>
@@ -625,20 +726,22 @@ module Aws::CustomerProfiles
     #            messages to the DeadLetterQueue.</p>
     # @option params [Types::MatchingRequest] :matching
     #   <p>The process of matching duplicate profiles. If <code>Matching</code> = <code>true</code>, Amazon Connect Customer Profiles starts a weekly
-    #   batch process called Identity Resolution Job. If you do not specify a date and time for Identity Resolution Job to run, by default it runs every 
+    #   batch process called Identity Resolution Job. If you do not specify a date and time for Identity Resolution Job to run, by default it runs every
     #   Saturday at 12AM UTC to detect duplicate profiles in your domains. </p>
-    #            <p>After the Identity Resolution Job completes, use the 
+    #            <p>After the Identity Resolution Job completes, use the
     #   <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html">GetMatches</a>
     #   API to return and review the results. Or, if you have configured <code>ExportingConfig</code> in the <code>MatchingRequest</code>, you can download the results from
     #   S3.</p>
     # @option params [Types::RuleBasedMatchingRequest] :rule_based_matching
     #   <p>The process of matching duplicate profiles using the Rule-Based matching. If
-    #               <code>RuleBasedMatching</code> = true, Amazon Connect Customer Profiles will start
+    #               <code>RuleBasedMatching</code> = true, Connect Customer Customer Profiles will start
     #            to match and merge your profiles according to your configuration in the
     #               <code>RuleBasedMatchingRequest</code>. You can use the <code>ListRuleBasedMatches</code>
     #            and <code>GetSimilarProfiles</code> API to return and review the results. Also, if you have
     #            configured <code>ExportingConfig</code> in the <code>RuleBasedMatchingRequest</code>, you
     #            can download the results from S3.</p>
+    # @option params [Types::DataStoreRequest] :data_store
+    #   <p>Set to true to enabled data store for this domain.</p>
     # @option params [Hash<String, String>] :tags
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     # @example Request syntax with placeholder values
@@ -698,6 +801,9 @@ module Aws::CustomerProfiles
     #           s3_key_name: "s3KeyNameCustomerOutputConfig"
     #         }
     #       }
+    #     },
+    #     data_store: {
+    #       enabled: false
     #     },
     #     tags: {
     #       "TagKey" => "TagValue"
@@ -763,6 +869,13 @@ module Aws::CustomerProfiles
     #           s3_bucket_name: "s3BucketName", # required
     #           s3_key_name: "s3KeyNameCustomerOutputConfig"
     #         }
+    #       }
+    #     },
+    #     data_store: {
+    #       enabled: false,
+    #       readiness: {
+    #         progress_percentage: 1,
+    #         message: "text"
     #       }
     #     },
     #     created_at: Time.now, # required
@@ -836,7 +949,7 @@ module Aws::CustomerProfiles
     end
 
     # <p>Creates an event stream, which is a subscription to real-time events, such as when
-    #          profiles are created and updated through Amazon Connect Customer Profiles.</p>
+    #          profiles are created and updated through Connect Customer Customer Profiles.</p>
     #          <p>Each event stream can be associated with only one Kinesis Data Stream destination in the
     #          same region and Amazon Web Services account as the customer profiles domain</p>
     # @param [Hash, Types::CreateEventStreamRequest] params
@@ -925,7 +1038,7 @@ module Aws::CustomerProfiles
     #       event_expiration: 1,
     #       periods: [
     #         {
-    #           unit: "HOURS" # One of: ["HOURS", "DAYS", "WEEKS", "MONTHS"], # required
+    #           unit: "MINUTES" # One of: ["MINUTES", "HOURS", "DAYS", "WEEKS", "MONTHS"], # required
     #           value: 1, # required
     #           max_invocations_per_profile: 1,
     #           unlimited: false
@@ -966,7 +1079,7 @@ module Aws::CustomerProfiles
     #       event_expiration: 1,
     #       periods: [
     #         {
-    #           unit: "HOURS" # One of: ["HOURS", "DAYS", "WEEKS", "MONTHS"], # required
+    #           unit: "MINUTES" # One of: ["MINUTES", "HOURS", "DAYS", "WEEKS", "MONTHS"], # required
     #           value: 1, # required
     #           max_invocations_per_profile: 1,
     #           unlimited: false
@@ -1261,6 +1374,175 @@ module Aws::CustomerProfiles
       request.send_request(options)
     end
 
+    # <p>Creates a recommender</p>
+    # @param [Hash, Types::CreateRecommenderRequest] params
+    # @option params [String] :domain_name
+    #   <p>The unique name of the domain.</p>
+    # @option params [String] :recommender_name
+    #   <p>The name of the recommender.</p>
+    # @option params [String] :recommender_recipe_name
+    #   <p>The name of the recommeder recipe.</p>
+    # @option params [Types::RecommenderConfig] :recommender_config
+    #   <p>The recommender configuration.</p>
+    # @option params [String] :description
+    #   <p>The description of the domain object type.</p>
+    # @option params [String] :recommender_schema_name
+    #   <p>The name of the recommender schema to use for this recommender. If not specified, the default schema is used.</p>
+    # @option params [Hash<String, String>] :tags
+    #   <p>The tags used to organize, track, or control access for this resource.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     domain_name: "name", # required
+    #     recommender_name: "name", # required
+    #     recommender_recipe_name: "recommended-for-you" # One of: ["recommended-for-you", "similar-items", "frequently-paired-items", "popular-items", "trending-now", "personalized-ranking"], # required
+    #     recommender_config: {
+    #       events_config: {
+    #         event_parameters_list: [ # required
+    #           {
+    #             event_type: "EventParametersEventTypeString", # required
+    #             event_value_threshold: 1.0,
+    #             event_weight: 1.0
+    #           }
+    #         ]
+    #       },
+    #       training_frequency: 1,
+    #       inference_config: {
+    #         min_provisioned_tps: 1
+    #       },
+    #       included_columns: {
+    #         "String" => ["text"]
+    #       },
+    #       excluded_columns: {
+    #         "String" => ["text"]
+    #       },
+    #       diversity_config: {
+    #         diversity_columns: [
+    #           {
+    #             name: "text", # required
+    #             cap_type: "PERCENTAGE" # One of: ["PERCENTAGE", "VALUE"], # required
+    #             target: "DiversityTargetExpression", # required
+    #           }
+    #         ]
+    #       }
+    #     },
+    #     description: "sensitiveText",
+    #     recommender_schema_name: "name",
+    #     tags: {
+    #       "TagKey" => "TagValue"
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.create_recommender(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     recommender_arn: "Arn", # required
+    #     tags: {
+    #       "TagKey" => "TagValue"
+    #     }
+    #   }
+    # @return [Types::CreateRecommenderResponse]
+    def create_recommender(params = {}, options = {})
+      request = build_request(:create_recommender, params)
+      request.send_request(options)
+    end
+
+    # <p>Creates a recommender filter. A recommender filter specifies which items to include or exclude from recommendations.</p>
+    # @param [Hash, Types::CreateRecommenderFilterRequest] params
+    # @option params [String] :domain_name
+    #   <p>The unique name of the domain.</p>
+    # @option params [String] :recommender_filter_name
+    #   <p>The name of the recommender filter. The name must be unique within the domain.</p>
+    # @option params [String] :recommender_filter_expression
+    #   <p>The filter expression that defines which items to include or exclude from recommendations.</p>
+    # @option params [String] :recommender_schema_name
+    #   <p>The name of the recommender schema to use for this recommender filter. If not specified, the default schema is used.</p>
+    # @option params [String] :description
+    #   <p>A description of the recommender filter.</p>
+    # @option params [Hash<String, String>] :tags
+    #   <p>The tags used to organize, track, or control access for this resource.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     domain_name: "name", # required
+    #     recommender_filter_name: "RecommenderFilterName", # required
+    #     recommender_filter_expression: "RecommenderFilterExpression", # required
+    #     recommender_schema_name: "name",
+    #     description: "sensitiveText",
+    #     tags: {
+    #       "TagKey" => "TagValue"
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.create_recommender_filter(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     recommender_filter_arn: "Arn", # required
+    #     tags: {
+    #       "TagKey" => "TagValue"
+    #     }
+    #   }
+    # @return [Types::CreateRecommenderFilterResponse]
+    def create_recommender_filter(params = {}, options = {})
+      request = build_request(:create_recommender_filter, params)
+      request.send_request(options)
+    end
+
+    # <p>Creates a recommender schema. A recommender schema defines the set of data columns available for training recommenders and filters under a domain.</p>
+    # @param [Hash, Types::CreateRecommenderSchemaRequest] params
+    # @option params [String] :domain_name
+    #   <p>The unique name of the domain.</p>
+    # @option params [String] :recommender_schema_name
+    #   <p>The name of the recommender schema. The name must be unique within the domain.</p>
+    # @option params [Hash<String, Array<Types::RecommenderSchemaField>>] :fields
+    #   <p>A map of dataset type to column definitions that specifies which data columns to include in the schema. The <code>_webAnalytics</code> and <code>_catalogItem</code> keys are supported.</p>
+    # @option params [Hash<String, String>] :tags
+    #   <p>The tags used to organize, track, or control access for this resource.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     domain_name: "name", # required
+    #     recommender_schema_name: "name", # required
+    #     fields: { # required
+    #       "String" => [
+    #         {
+    #           target_field_name: "text", # required
+    #           content_type: "STRING" # One of: ["STRING", "NUMBER"],
+    #           feature_type: "TEXTUAL" # One of: ["TEXTUAL", "CATEGORICAL"]
+    #         }
+    #       ]
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue"
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.create_recommender_schema(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     recommender_schema_arn: "Arn", # required
+    #     recommender_schema_name: "name", # required
+    #     fields: { # required
+    #       "String" => [
+    #         {
+    #           target_field_name: "text", # required
+    #           content_type: "STRING" # One of: ["STRING", "NUMBER"],
+    #           feature_type: "TEXTUAL" # One of: ["TEXTUAL", "CATEGORICAL"]
+    #         }
+    #       ]
+    #     },
+    #     created_at: Time.now, # required
+    #     status: "ACTIVE" # One of: ["ACTIVE", "DELETING"], # required
+    #     tags: {
+    #       "TagKey" => "TagValue"
+    #     }
+    #   }
+    # @return [Types::CreateRecommenderSchemaResponse]
+    def create_recommender_schema(params = {}, options = {})
+      request = build_request(:create_recommender_schema, params)
+      request.send_request(options)
+    end
+
     # <p>Creates a segment definition associated to the given domain.</p>
     # @param [Hash, Types::CreateSegmentDefinitionRequest] params
     # @option params [String] :domain_name
@@ -1274,6 +1556,10 @@ module Aws::CustomerProfiles
     # @option params [Types::SegmentGroup] :segment_groups
     #   <p>Specifies the base segments and dimensions for a segment definition along with their
     #            respective relationship.</p>
+    # @option params [String] :segment_sql_query
+    #   <p>The segment SQL query.</p>
+    # @option params [Types::SegmentSort] :segment_sort
+    #   <p>The segment sort.</p>
     # @option params [Hash<String, String>] :tags
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     # @example Request syntax with placeholder values
@@ -1281,8 +1567,8 @@ module Aws::CustomerProfiles
     #     domain_name: "name", # required
     #     segment_definition_name: "name", # required
     #     display_name: "string1To255", # required
-    #     description: "sensitiveText",
-    #     segment_groups: { # required
+    #     description: "sensitiveString1To4000",
+    #     segment_groups: {
     #       groups: [
     #         {
     #           dimensions: [{
@@ -1457,8 +1743,8 @@ module Aws::CustomerProfiles
     #                 }
     #               },
     #               attributes: {
-    #                 "typeName" => {
-    #                   dimension_type: "INCLUSIVE" # One of: ["INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEGINS_WITH", "ENDS_WITH", "BEFORE", "AFTER", "BETWEEN", "NOT_BETWEEN", "ON", "GREATER_THAN", "LESS_THAN", "GREATER_THAN_OR_EQUAL", "LESS_THAN_OR_EQUAL", "EQUAL"], # required
+    #                 "string1To255" => {
+    #                   dimension_type: "INCLUSIVE" # One of: ["INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEGINS_WITH", "ENDS_WITH", "BEFORE", "AFTER", "BETWEEN", "NOT_BETWEEN", "ON", "GREATER_THAN", "LESS_THAN", "GREATER_THAN_OR_EQUAL", "LESS_THAN_OR_EQUAL", "EQUAL", "LIST_CONTAINS", "LIST_CONTAINS_ALL"], # required
     #                   values: ["string1To255"], # required
     #                 }
     #               },
@@ -1469,7 +1755,7 @@ module Aws::CustomerProfiles
     #             },
     #             calculated_attributes: {
     #               "typeName" => {
-    #                 dimension_type: "INCLUSIVE" # One of: ["INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEGINS_WITH", "ENDS_WITH", "BEFORE", "AFTER", "BETWEEN", "NOT_BETWEEN", "ON", "GREATER_THAN", "LESS_THAN", "GREATER_THAN_OR_EQUAL", "LESS_THAN_OR_EQUAL", "EQUAL"], # required
+    #                 dimension_type: "INCLUSIVE" # One of: ["INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEGINS_WITH", "ENDS_WITH", "BEFORE", "AFTER", "BETWEEN", "NOT_BETWEEN", "ON", "GREATER_THAN", "LESS_THAN", "GREATER_THAN_OR_EQUAL", "LESS_THAN_OR_EQUAL", "EQUAL", "LIST_CONTAINS", "LIST_CONTAINS_ALL"], # required
     #                 values: ["string1To255"], # required
     #                 condition_overrides: {
     #                   range: {
@@ -1492,6 +1778,17 @@ module Aws::CustomerProfiles
     #       ],
     #       include: "ALL" # One of: ["ALL", "ANY", "NONE"]
     #     },
+    #     segment_sql_query: "sensitiveString1To50000",
+    #     segment_sort: {
+    #       attributes: [ # required
+    #         {
+    #           name: "fieldName", # required
+    #           data_type: "STRING" # One of: ["STRING", "NUMBER", "DATE"],
+    #           order: "ASC" # One of: ["ASC", "DESC"], # required
+    #           type: "PROFILE" # One of: ["PROFILE", "CALCULATED"]
+    #         }
+    #       ]
+    #     },
     #     tags: {
     #       "TagKey" => "TagValue"
     #     }
@@ -1503,7 +1800,7 @@ module Aws::CustomerProfiles
     #   {
     #     segment_definition_name: "name", # required
     #     display_name: "string1To255",
-    #     description: "sensitiveText",
+    #     description: "sensitiveString1To4000",
     #     created_at: Time.now,
     #     segment_definition_arn: "SegmentDefinitionArn",
     #     tags: {
@@ -1522,10 +1819,12 @@ module Aws::CustomerProfiles
     #   <p>The unique name of the domain.</p>
     # @option params [Types::SegmentGroupStructure] :segment_query
     #   <p>The segment query for calculating a segment estimate.</p>
+    # @option params [String] :segment_sql_query
+    #   <p>The segment SQL query.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_name: "name", # required
-    #     segment_query: { # required
+    #     segment_query: {
     #       groups: [
     #         {
     #           dimensions: [{
@@ -1700,8 +1999,8 @@ module Aws::CustomerProfiles
     #                 }
     #               },
     #               attributes: {
-    #                 "typeName" => {
-    #                   dimension_type: "INCLUSIVE" # One of: ["INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEGINS_WITH", "ENDS_WITH", "BEFORE", "AFTER", "BETWEEN", "NOT_BETWEEN", "ON", "GREATER_THAN", "LESS_THAN", "GREATER_THAN_OR_EQUAL", "LESS_THAN_OR_EQUAL", "EQUAL"], # required
+    #                 "string1To255" => {
+    #                   dimension_type: "INCLUSIVE" # One of: ["INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEGINS_WITH", "ENDS_WITH", "BEFORE", "AFTER", "BETWEEN", "NOT_BETWEEN", "ON", "GREATER_THAN", "LESS_THAN", "GREATER_THAN_OR_EQUAL", "LESS_THAN_OR_EQUAL", "EQUAL", "LIST_CONTAINS", "LIST_CONTAINS_ALL"], # required
     #                   values: ["string1To255"], # required
     #                 }
     #               },
@@ -1712,7 +2011,7 @@ module Aws::CustomerProfiles
     #             },
     #             calculated_attributes: {
     #               "typeName" => {
-    #                 dimension_type: "INCLUSIVE" # One of: ["INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEGINS_WITH", "ENDS_WITH", "BEFORE", "AFTER", "BETWEEN", "NOT_BETWEEN", "ON", "GREATER_THAN", "LESS_THAN", "GREATER_THAN_OR_EQUAL", "LESS_THAN_OR_EQUAL", "EQUAL"], # required
+    #                 dimension_type: "INCLUSIVE" # One of: ["INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEGINS_WITH", "ENDS_WITH", "BEFORE", "AFTER", "BETWEEN", "NOT_BETWEEN", "ON", "GREATER_THAN", "LESS_THAN", "GREATER_THAN_OR_EQUAL", "LESS_THAN_OR_EQUAL", "EQUAL", "LIST_CONTAINS", "LIST_CONTAINS_ALL"], # required
     #                 values: ["string1To255"], # required
     #                 condition_overrides: {
     #                   range: {
@@ -1734,7 +2033,8 @@ module Aws::CustomerProfiles
     #         }
     #       ],
     #       include: "ALL" # One of: ["ALL", "ANY", "NONE"]
-    #     }
+    #     },
+    #     segment_sql_query: "sensitiveString1To50000"
     #   }
     #   options = {}
     #   response = client.create_segment_estimate(params, options)
@@ -1767,7 +2067,7 @@ module Aws::CustomerProfiles
     #            principal to assume the role for conducting KMS and S3 operations.</p>
     # @option params [String] :destination_uri
     #   <p>The destination to which the segment will be exported. This field must be provided if
-    #            the request is not submitted from the Amazon Connect Admin Website.</p>
+    #            the request is not submitted from the Connect Customer Admin Website.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_name: "name", # required
@@ -1904,6 +2204,28 @@ module Aws::CustomerProfiles
     # @return [Types::DeleteDomainLayoutResponse]
     def delete_domain_layout(params = {}, options = {})
       request = build_request(:delete_domain_layout, params)
+      request.send_request(options)
+    end
+
+    # <p>Delete a DomainObjectType for the given Domain and ObjectType name.</p>
+    # @param [Hash, Types::DeleteDomainObjectTypeRequest] params
+    # @option params [String] :domain_name
+    #   <p>The unique name of the domain.</p>
+    # @option params [String] :object_type_name
+    #   <p>The unique name of the domain object type.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     domain_name: "name", # required
+    #     object_type_name: "typeName", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_domain_object_type(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::DeleteDomainObjectTypeResponse]
+    def delete_domain_object_type(params = {}, options = {})
+      request = build_request(:delete_domain_object_type, params)
       request.send_request(options)
     end
 
@@ -2091,6 +2413,74 @@ module Aws::CustomerProfiles
       request.send_request(options)
     end
 
+    # <p>Deletes a recommender.</p>
+    # @param [Hash, Types::DeleteRecommenderRequest] params
+    # @option params [String] :domain_name
+    #   <p>The unique name of the domain.</p>
+    # @option params [String] :recommender_name
+    #   <p>The recommender name.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     domain_name: "name", # required
+    #     recommender_name: "name", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_recommender(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::DeleteRecommenderResponse]
+    def delete_recommender(params = {}, options = {})
+      request = build_request(:delete_recommender, params)
+      request.send_request(options)
+    end
+
+    # <p>Deletes a recommender filter from a domain.</p>
+    # @param [Hash, Types::DeleteRecommenderFilterRequest] params
+    # @option params [String] :domain_name
+    #   <p>The unique name of the domain.</p>
+    # @option params [String] :recommender_filter_name
+    #   <p>The name of the recommender filter to delete.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     domain_name: "name", # required
+    #     recommender_filter_name: "RecommenderFilterName", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_recommender_filter(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     message: "String", # required
+    #   }
+    # @return [Types::DeleteRecommenderFilterResponse]
+    def delete_recommender_filter(params = {}, options = {})
+      request = build_request(:delete_recommender_filter, params)
+      request.send_request(options)
+    end
+
+    # <p>Deletes a recommender schema from a domain.</p>
+    # @param [Hash, Types::DeleteRecommenderSchemaRequest] params
+    # @option params [String] :domain_name
+    #   <p>The unique name of the domain.</p>
+    # @option params [String] :recommender_schema_name
+    #   <p>The name of the recommender schema to delete.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     domain_name: "name", # required
+    #     recommender_schema_name: "name", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_recommender_schema(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::DeleteRecommenderSchemaResponse]
+    def delete_recommender_schema(params = {}, options = {})
+      request = build_request(:delete_recommender_schema, params)
+      request.send_request(options)
+    end
+
     # <p>Deletes a segment definition from the domain.</p>
     # @param [Hash, Types::DeleteSegmentDefinitionRequest] params
     # @option params [String] :domain_name
@@ -2112,6 +2502,31 @@ module Aws::CustomerProfiles
     # @return [Types::DeleteSegmentDefinitionResponse]
     def delete_segment_definition(params = {}, options = {})
       request = build_request(:delete_segment_definition, params)
+      request.send_request(options)
+    end
+
+    # <p>Deletes a segment subscription for membership events. All active event notifications for
+    #          this segment are stopped. </p>
+    # @param [Hash, Types::DeleteSegmentSubscriptionRequest] params
+    # @option params [String] :domain_name
+    #   <p>The unique name of the domain.</p>
+    # @option params [String] :segment_definition_name
+    #   <p>The unique name of the segment definition. </p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     domain_name: "name", # required
+    #     segment_definition_name: "name", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_segment_subscription(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     message: "string1To1000"
+    #   }
+    # @return [Types::DeleteSegmentSubscriptionResponse]
+    def delete_segment_subscription(params = {}, options = {})
+      request = build_request(:delete_segment_subscription, params)
       request.send_request(options)
     end
 
@@ -2167,7 +2582,7 @@ module Aws::CustomerProfiles
     #         keys: {
     #           "name" => [
     #             {
-    #               standard_identifiers: ["PROFILE" # One of: ["PROFILE", "ASSET", "CASE", "ORDER", "COMMUNICATION_RECORD", "AIR_PREFERENCE", "HOTEL_PREFERENCE", "AIR_BOOKING", "AIR_SEGMENT", "HOTEL_RESERVATION", "HOTEL_STAY_REVENUE", "LOYALTY", "LOYALTY_TRANSACTION", "LOYALTY_PROMOTION", "UNIQUE", "SECONDARY", "LOOKUP_ONLY", "NEW_ONLY"]],
+    #               standard_identifiers: ["PROFILE" # One of: ["PROFILE", "ASSET", "CASE", "DEVICE", "WEB_ANALYTICS", "ORDER", "COMMUNICATION_RECORD", "AIR_PREFERENCE", "HOTEL_PREFERENCE", "AIR_BOOKING", "AIR_SEGMENT", "HOTEL_RESERVATION", "HOTEL_STAY_REVENUE", "LOYALTY", "LOYALTY_TRANSACTION", "LOYALTY_PROMOTION", "UNIQUE", "SECONDARY", "LOOKUP_ONLY", "NEW_ONLY"]],
     #               field_names: ["name"]
     #             }
     #           ]
@@ -2178,6 +2593,28 @@ module Aws::CustomerProfiles
     # @return [Types::DetectProfileObjectTypeResponse]
     def detect_profile_object_type(params = {}, options = {})
       request = build_request(:detect_profile_object_type, params)
+      request.send_request(options)
+    end
+
+    # <p>Disassociates the Amazon Kinesis data stream configured for segment membership events. All
+    #          active segment subscriptions delivering events to this stream are eventually stopped. </p>
+    # @param [Hash, Types::DisassociateStreamForSegmentsRequest] params
+    # @option params [String] :domain_name
+    #   <p>The unique name of the domain.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     domain_name: "name", # required
+    #   }
+    #   options = {}
+    #   response = client.disassociate_stream_for_segments(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     message: "string1To1000"
+    #   }
+    # @return [Types::DisassociateStreamForSegmentsResponse]
+    def disassociate_stream_for_segments(params = {}, options = {})
+      request = build_request(:disassociate_stream_for_segments, params)
       request.send_request(options)
     end
 
@@ -2256,7 +2693,7 @@ module Aws::CustomerProfiles
     #     description: "sensitiveText",
     #     created_at: Time.now,
     #     last_updated_at: Time.now,
-    #     statistic: "FIRST_OCCURRENCE" # One of: ["FIRST_OCCURRENCE", "LAST_OCCURRENCE", "COUNT", "SUM", "MINIMUM", "MAXIMUM", "AVERAGE", "MAX_OCCURRENCE"],
+    #     statistic: "FIRST_OCCURRENCE" # One of: ["FIRST_OCCURRENCE", "LAST_OCCURRENCE", "COUNT", "SUM", "MINIMUM", "MAXIMUM", "AVERAGE", "MAX_OCCURRENCE", "RECENT_OCCURRENCES"],
     #     filter: {
     #       include: "ALL" # One of: ["ALL", "ANY", "NONE"], # required
     #       groups: [ # required
@@ -2423,6 +2860,13 @@ module Aws::CustomerProfiles
     #         }
     #       }
     #     },
+    #     data_store: {
+    #       enabled: false,
+    #       readiness: {
+    #         progress_percentage: 1,
+    #         message: "text"
+    #       }
+    #     },
     #     created_at: Time.now, # required
     #     last_updated_at: Time.now, # required
     #     tags: {
@@ -2468,6 +2912,45 @@ module Aws::CustomerProfiles
     # @return [Types::GetDomainLayoutResponse]
     def get_domain_layout(params = {}, options = {})
       request = build_request(:get_domain_layout, params)
+      request.send_request(options)
+    end
+
+    # <p>Return a DomainObjectType for the input Domain and ObjectType names. </p>
+    # @param [Hash, Types::GetDomainObjectTypeRequest] params
+    # @option params [String] :domain_name
+    #   <p>The unique name of the domain.</p>
+    # @option params [String] :object_type_name
+    #   <p>The unique name of the domain object type.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     domain_name: "name", # required
+    #     object_type_name: "typeName", # required
+    #   }
+    #   options = {}
+    #   response = client.get_domain_object_type(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     object_type_name: "typeName", # required
+    #     description: "sensitiveString1To10000",
+    #     encryption_key: "encryptionKey",
+    #     fields: {
+    #       "DomainObjectTypeFieldName" => {
+    #         source: "text", # required
+    #         target: "text", # required
+    #         content_type: "STRING" # One of: ["STRING", "NUMBER"],
+    #         feature_type: "TEXTUAL" # One of: ["TEXTUAL", "CATEGORICAL"]
+    #       }
+    #     },
+    #     created_at: Time.now,
+    #     last_updated_at: Time.now,
+    #     tags: {
+    #       "TagKey" => "TagValue"
+    #     }
+    #   }
+    # @return [Types::GetDomainObjectTypeResponse]
+    def get_domain_object_type(params = {}, options = {})
+      request = build_request(:get_domain_object_type, params)
       request.send_request(options)
     end
 
@@ -2549,7 +3032,7 @@ module Aws::CustomerProfiles
     #       event_expiration: 1,
     #       periods: [
     #         {
-    #           unit: "HOURS" # One of: ["HOURS", "DAYS", "WEEKS", "MONTHS"], # required
+    #           unit: "MINUTES" # One of: ["MINUTES", "HOURS", "DAYS", "WEEKS", "MONTHS"], # required
     #           value: 1, # required
     #           max_invocations_per_profile: 1,
     #           unlimited: false
@@ -2655,7 +3138,8 @@ module Aws::CustomerProfiles
     #     workflow_id: "string1To255",
     #     is_unstructured: false,
     #     role_arn: "RoleArn",
-    #     event_trigger_names: ["name"]
+    #     event_trigger_names: ["name"],
+    #     scope: "PROFILE" # One of: ["PROFILE", "DOMAIN"]
     #   }
     # @return [Types::GetIntegrationResponse]
     def get_integration(params = {}, options = {})
@@ -2670,9 +3154,9 @@ module Aws::CustomerProfiles
     #          of a machine learning process. </p>
     #          <important>
     #             <p>The process of matching duplicate profiles. If <code>Matching</code> = <code>true</code>, Amazon Connect Customer Profiles starts a weekly
-    # batch process called Identity Resolution Job. If you do not specify a date and time for Identity Resolution Job to run, by default it runs every 
+    # batch process called Identity Resolution Job. If you do not specify a date and time for Identity Resolution Job to run, by default it runs every
     # Saturday at 12AM UTC to detect duplicate profiles in your domains. </p>
-    #             <p>After the Identity Resolution Job completes, use the 
+    #             <p>After the Identity Resolution Job completes, use the
     # <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html">GetMatches</a>
     # API to return and review the results. Or, if you have configured <code>ExportingConfig</code> in the <code>MatchingRequest</code>, you can download the results from
     # S3.</p>
@@ -2710,7 +3194,7 @@ module Aws::CustomerProfiles
     #          formats such as <b>555-010-0000</b> and <b>+1-555-010-0000</b>—can be detected as belonging to the same customer <b>John Doe</b> and merged into a unified profile.</p>
     # @param [Hash, Types::GetMatchesRequest] params
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous 
+    #   <p>The token for the next set of results. Use the value returned in the previous
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
@@ -2741,6 +3225,52 @@ module Aws::CustomerProfiles
     # @return [Types::GetMatchesResponse]
     def get_matches(params = {}, options = {})
       request = build_request(:get_matches, params)
+      request.send_request(options)
+    end
+
+    # <p>The GetObjectTypeAttributeValues API delivers statistical insights about attributes within a specific object type, but is exclusively available for domains with data store enabled. This API performs daily calculations to provide statistical information about your attribute values, helping you understand patterns and trends in your data. The statistical calculations are performed once per day, providing a consistent snapshot of your attribute data characteristics.</p>
+    #          <note>
+    #             <p>You'll receive null values in two scenarios: </p>
+    #             <p>During the first period after enabling data vault (unless a calculation cycle occurs, which happens once daily).</p>
+    #             <p>For attributes that don't contain numeric values.
+    #       </p>
+    #          </note>
+    # @param [Hash, Types::GetObjectTypeAttributeStatisticsRequest] params
+    # @option params [String] :domain_name
+    #   <p>The unique name of the domain.</p>
+    # @option params [String] :object_type_name
+    #   <p>The unique name of the domain object type.</p>
+    # @option params [String] :attribute_name
+    #   <p>The attribute name.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     domain_name: "name", # required
+    #     object_type_name: "typeName", # required
+    #     attribute_name: "string1To1000", # required
+    #   }
+    #   options = {}
+    #   response = client.get_object_type_attribute_statistics(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     statistics: { # required
+    #       maximum: 1.0, # required
+    #       minimum: 1.0, # required
+    #       average: 1.0, # required
+    #       standard_deviation: 1.0, # required
+    #       percentiles: { # required
+    #         p5: 1.0, # required
+    #         p25: 1.0, # required
+    #         p50: 1.0, # required
+    #         p75: 1.0, # required
+    #         p95: 1.0, # required
+    #       }
+    #     },
+    #     calculated_at: Time.now, # required
+    #   }
+    # @return [Types::GetObjectTypeAttributeStatisticsResponse]
+    def get_object_type_attribute_statistics(params = {}, options = {})
+      request = build_request(:get_object_type_attribute_statistics, params)
       request.send_request(options)
     end
 
@@ -2803,6 +3333,7 @@ module Aws::CustomerProfiles
     #     source_last_updated_timestamp_format: "string1To255",
     #     max_available_profile_object_count: 1,
     #     max_profile_object_count: 1,
+    #     source_priority: 1,
     #     fields: {
     #       "fieldName" => {
     #         source: "text",
@@ -2813,7 +3344,7 @@ module Aws::CustomerProfiles
     #     keys: {
     #       "name" => [
     #         {
-    #           standard_identifiers: ["PROFILE" # One of: ["PROFILE", "ASSET", "CASE", "ORDER", "COMMUNICATION_RECORD", "AIR_PREFERENCE", "HOTEL_PREFERENCE", "AIR_BOOKING", "AIR_SEGMENT", "HOTEL_RESERVATION", "HOTEL_STAY_REVENUE", "LOYALTY", "LOYALTY_TRANSACTION", "LOYALTY_PROMOTION", "UNIQUE", "SECONDARY", "LOOKUP_ONLY", "NEW_ONLY"]],
+    #           standard_identifiers: ["PROFILE" # One of: ["PROFILE", "ASSET", "CASE", "DEVICE", "WEB_ANALYTICS", "ORDER", "COMMUNICATION_RECORD", "AIR_PREFERENCE", "HOTEL_PREFERENCE", "AIR_BOOKING", "AIR_SEGMENT", "HOTEL_RESERVATION", "HOTEL_STAY_REVENUE", "LOYALTY", "LOYALTY_TRANSACTION", "LOYALTY_PROMOTION", "UNIQUE", "SECONDARY", "LOOKUP_ONLY", "NEW_ONLY"]],
     #           field_names: ["name"]
     #         }
     #       ]
@@ -2862,7 +3393,7 @@ module Aws::CustomerProfiles
     #     keys: {
     #       "name" => [
     #         {
-    #           standard_identifiers: ["PROFILE" # One of: ["PROFILE", "ASSET", "CASE", "ORDER", "COMMUNICATION_RECORD", "AIR_PREFERENCE", "HOTEL_PREFERENCE", "AIR_BOOKING", "AIR_SEGMENT", "HOTEL_RESERVATION", "HOTEL_STAY_REVENUE", "LOYALTY", "LOYALTY_TRANSACTION", "LOYALTY_PROMOTION", "UNIQUE", "SECONDARY", "LOOKUP_ONLY", "NEW_ONLY"]],
+    #           standard_identifiers: ["PROFILE" # One of: ["PROFILE", "ASSET", "CASE", "DEVICE", "WEB_ANALYTICS", "ORDER", "COMMUNICATION_RECORD", "AIR_PREFERENCE", "HOTEL_PREFERENCE", "AIR_BOOKING", "AIR_SEGMENT", "HOTEL_RESERVATION", "HOTEL_STAY_REVENUE", "LOYALTY", "LOYALTY_TRANSACTION", "LOYALTY_PROMOTION", "UNIQUE", "SECONDARY", "LOOKUP_ONLY", "NEW_ONLY"]],
     #           field_names: ["name"]
     #         }
     #       ]
@@ -2871,6 +3402,282 @@ module Aws::CustomerProfiles
     # @return [Types::GetProfileObjectTypeTemplateResponse]
     def get_profile_object_type_template(params = {}, options = {})
       request = build_request(:get_profile_object_type_template, params)
+      request.send_request(options)
+    end
+
+    # <p>Fetches the recommendations for a profile in the input Customer Profiles domain. Fetches all the profile recommendations </p>
+    # @param [Hash, Types::GetProfileRecommendationsRequest] params
+    # @option params [String] :domain_name
+    #   <p>The unique name of the domain.</p>
+    # @option params [String] :profile_id
+    #   <p>The unique identifier of the profile for which to retrieve recommendations.</p>
+    # @option params [String] :recommender_name
+    #   <p>The unique name of the recommender.</p>
+    # @option params [Hash<String, String>] :context
+    #   <p>The contextual metadata used to provide dynamic runtime information to tailor recommendations.</p>
+    # @option params [Array<Types::RecommenderFilter>] :recommender_filters
+    #   <p>A list of filters to apply to the returned recommendations. Filters define criteria for including or excluding items from the recommendation results.</p>
+    # @option params [Array<Types::RecommenderPromotionalFilter>] :recommender_promotional_filters
+    #   <p>A list of promotional filters to apply to the recommendations. Promotional filters allow you to promote specific items within a configurable subset of recommendation results.</p>
+    # @option params [Array<String>] :candidate_ids
+    #   <p>A list of item IDs to rank for the user. Use this when you want to re-rank a specific set of items rather than getting recommendations from the full item catalog. Required for personalized-ranking use cases.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of recommendations to return. The default value is 10.</p>
+    # @option params [Types::MetadataConfig] :metadata_config
+    #   <p>Configuration for including item metadata in the recommendation response. Use this to specify which metadata columns to return alongside recommended items.</p>
+    # @option params [Types::RecommendationDiversityConfig] :diversity_config
+    #   <p>Runtime diversity configuration for this request. Enables diversity-aware recommendations and optionally supplies values for placeholder-based diversity caps configured on the recommender.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     domain_name: "name", # required
+    #     profile_id: "uuid", # required
+    #     recommender_name: "name", # required
+    #     context: {
+    #       "ContextKey" => "string1To255"
+    #     },
+    #     recommender_filters: [
+    #       {
+    #         name: "name",
+    #         values: {
+    #           "RecommenderFilterAttributeName" => "RecommenderFilterAttributeValue"
+    #         }
+    #       }
+    #     ],
+    #     recommender_promotional_filters: [
+    #       {
+    #         name: "name",
+    #         values: {
+    #           "RecommenderFilterAttributeName" => "RecommenderFilterAttributeValue"
+    #         },
+    #         promotion_name: "name",
+    #         percent_promoted_items: 1
+    #       }
+    #     ],
+    #     candidate_ids: ["string1To255"],
+    #     max_results: 1,
+    #     metadata_config: {
+    #       metadata_columns: ["MetadataColumnName"]
+    #     },
+    #     diversity_config: {
+    #       enabled: false, # required
+    #       values: {
+    #         "DiversityPlaceholderName" => 1
+    #       }
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.get_profile_recommendations(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     recommendations: [
+    #       {
+    #         catalog_item: {
+    #           id: "sensitiveString1To255",
+    #           name: "sensitiveString1To255",
+    #           code: "sensitiveString1To255",
+    #           type: "sensitiveString1To255",
+    #           category: "sensitiveString1To255",
+    #           description: "sensitiveString1To255",
+    #           additional_information: "sensitiveString1To1000",
+    #           image_link: "sensitiveString1To1000",
+    #           link: "sensitiveString1To1000",
+    #           created_at: Time.now,
+    #           updated_at: Time.now,
+    #           price: "sensitiveString1To255",
+    #           attributes: {
+    #             "string1To255" => "string1To255"
+    #           }
+    #         },
+    #         score: 1.0
+    #       }
+    #     ]
+    #   }
+    # @return [Types::GetProfileRecommendationsResponse]
+    def get_profile_recommendations(params = {}, options = {})
+      request = build_request(:get_profile_recommendations, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves a recommender.</p>
+    # @param [Hash, Types::GetRecommenderRequest] params
+    # @option params [String] :domain_name
+    #   <p>The unique name of the domain.</p>
+    # @option params [String] :recommender_name
+    #   <p>The name of the recommender.</p>
+    # @option params [Integer] :training_metrics_count
+    #   <p>The number of training metrics to retrieve for the recommender.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     domain_name: "name", # required
+    #     recommender_name: "name", # required
+    #     training_metrics_count: 1
+    #   }
+    #   options = {}
+    #   response = client.get_recommender(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     recommender_name: "name", # required
+    #     recommender_recipe_name: "recommended-for-you" # One of: ["recommended-for-you", "similar-items", "frequently-paired-items", "popular-items", "trending-now", "personalized-ranking"], # required
+    #     recommender_schema_name: "name",
+    #     recommender_config: {
+    #       events_config: {
+    #         event_parameters_list: [ # required
+    #           {
+    #             event_type: "EventParametersEventTypeString", # required
+    #             event_value_threshold: 1.0,
+    #             event_weight: 1.0
+    #           }
+    #         ]
+    #       },
+    #       training_frequency: 1,
+    #       inference_config: {
+    #         min_provisioned_tps: 1
+    #       },
+    #       included_columns: {
+    #         "String" => ["text"]
+    #       },
+    #       excluded_columns: {
+    #         "String" => ["text"]
+    #       },
+    #       diversity_config: {
+    #         diversity_columns: [
+    #           {
+    #             name: "text", # required
+    #             cap_type: "PERCENTAGE" # One of: ["PERCENTAGE", "VALUE"], # required
+    #             target: "DiversityTargetExpression", # required
+    #           }
+    #         ]
+    #       }
+    #     },
+    #     description: "sensitiveText",
+    #     status: "PENDING" # One of: ["PENDING", "IN_PROGRESS", "ACTIVE", "FAILED", "STOPPING", "INACTIVE", "STARTING", "DELETING"],
+    #     last_updated_at: Time.now,
+    #     created_at: Time.now,
+    #     failure_reason: "String",
+    #     latest_recommender_update: {
+    #       recommender_config: {
+    #         events_config: {
+    #           event_parameters_list: [ # required
+    #             {
+    #               event_type: "EventParametersEventTypeString", # required
+    #               event_value_threshold: 1.0,
+    #               event_weight: 1.0
+    #             }
+    #           ]
+    #         },
+    #         training_frequency: 1,
+    #         inference_config: {
+    #           min_provisioned_tps: 1
+    #         },
+    #         included_columns: {
+    #           "String" => ["text"]
+    #         },
+    #         excluded_columns: {
+    #           "String" => ["text"]
+    #         },
+    #         diversity_config: {
+    #           diversity_columns: [
+    #             {
+    #               name: "text", # required
+    #               cap_type: "PERCENTAGE" # One of: ["PERCENTAGE", "VALUE"], # required
+    #               target: "DiversityTargetExpression", # required
+    #             }
+    #           ]
+    #         }
+    #       },
+    #       status: "PENDING" # One of: ["PENDING", "IN_PROGRESS", "ACTIVE", "FAILED", "STOPPING", "INACTIVE", "STARTING", "DELETING"],
+    #       created_at: Time.now,
+    #       last_updated_at: Time.now,
+    #       failure_reason: "String",
+    #       recommender_version_name: "RecommenderVersionName"
+    #     },
+    #     active_recommender_version_name: "RecommenderVersionName",
+    #     training_metrics: [
+    #       {
+    #         time: Time.now,
+    #         metrics: {
+    #           "TrainingMetricName" => 1.0
+    #         },
+    #         recommender_version_name: "RecommenderVersionName"
+    #       }
+    #     ],
+    #     tags: {
+    #       "TagKey" => "TagValue"
+    #     }
+    #   }
+    # @return [Types::GetRecommenderResponse]
+    def get_recommender(params = {}, options = {})
+      request = build_request(:get_recommender, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves information about a specific recommender filter in a domain.</p>
+    # @param [Hash, Types::GetRecommenderFilterRequest] params
+    # @option params [String] :domain_name
+    #   <p>The unique name of the domain.</p>
+    # @option params [String] :recommender_filter_name
+    #   <p>The name of the recommender filter to retrieve.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     domain_name: "name", # required
+    #     recommender_filter_name: "RecommenderFilterName", # required
+    #   }
+    #   options = {}
+    #   response = client.get_recommender_filter(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     recommender_filter_name: "RecommenderFilterName", # required
+    #     recommender_filter_expression: "RecommenderFilterExpression", # required
+    #     recommender_schema_name: "name",
+    #     created_at: Time.now, # required
+    #     status: "ACTIVE" # One of: ["ACTIVE", "PENDING", "IN_PROGRESS", "FAILED", "DELETING"], # required
+    #     description: "sensitiveText",
+    #     failure_reason: "String",
+    #     tags: { # required
+    #       "TagKey" => "TagValue"
+    #     }
+    #   }
+    # @return [Types::GetRecommenderFilterResponse]
+    def get_recommender_filter(params = {}, options = {})
+      request = build_request(:get_recommender_filter, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves information about a specific recommender schema in a domain.</p>
+    # @param [Hash, Types::GetRecommenderSchemaRequest] params
+    # @option params [String] :domain_name
+    #   <p>The unique name of the domain.</p>
+    # @option params [String] :recommender_schema_name
+    #   <p>The name of the recommender schema to retrieve.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     domain_name: "name", # required
+    #     recommender_schema_name: "name", # required
+    #   }
+    #   options = {}
+    #   response = client.get_recommender_schema(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     recommender_schema_name: "name", # required
+    #     fields: { # required
+    #       "String" => [
+    #         {
+    #           target_field_name: "text", # required
+    #           content_type: "STRING" # One of: ["STRING", "NUMBER"],
+    #           feature_type: "TEXTUAL" # One of: ["TEXTUAL", "CATEGORICAL"]
+    #         }
+    #       ]
+    #     },
+    #     created_at: Time.now, # required
+    #     status: "ACTIVE" # One of: ["ACTIVE", "DELETING"], # required
+    #   }
+    # @return [Types::GetRecommenderSchemaResponse]
+    def get_recommender_schema(params = {}, options = {})
+      request = build_request(:get_recommender_schema, params)
       request.send_request(options)
     end
 
@@ -2892,7 +3699,7 @@ module Aws::CustomerProfiles
     #   {
     #     segment_definition_name: "name",
     #     display_name: "string1To255",
-    #     description: "sensitiveText",
+    #     description: "sensitiveString1To4000",
     #     segment_groups: {
     #       groups: [
     #         {
@@ -3068,8 +3875,8 @@ module Aws::CustomerProfiles
     #                 }
     #               },
     #               attributes: {
-    #                 "typeName" => {
-    #                   dimension_type: "INCLUSIVE" # One of: ["INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEGINS_WITH", "ENDS_WITH", "BEFORE", "AFTER", "BETWEEN", "NOT_BETWEEN", "ON", "GREATER_THAN", "LESS_THAN", "GREATER_THAN_OR_EQUAL", "LESS_THAN_OR_EQUAL", "EQUAL"], # required
+    #                 "string1To255" => {
+    #                   dimension_type: "INCLUSIVE" # One of: ["INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEGINS_WITH", "ENDS_WITH", "BEFORE", "AFTER", "BETWEEN", "NOT_BETWEEN", "ON", "GREATER_THAN", "LESS_THAN", "GREATER_THAN_OR_EQUAL", "LESS_THAN_OR_EQUAL", "EQUAL", "LIST_CONTAINS", "LIST_CONTAINS_ALL"], # required
     #                   values: ["string1To255"], # required
     #                 }
     #               },
@@ -3080,7 +3887,7 @@ module Aws::CustomerProfiles
     #             },
     #             calculated_attributes: {
     #               "typeName" => {
-    #                 dimension_type: "INCLUSIVE" # One of: ["INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEGINS_WITH", "ENDS_WITH", "BEFORE", "AFTER", "BETWEEN", "NOT_BETWEEN", "ON", "GREATER_THAN", "LESS_THAN", "GREATER_THAN_OR_EQUAL", "LESS_THAN_OR_EQUAL", "EQUAL"], # required
+    #                 dimension_type: "INCLUSIVE" # One of: ["INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEGINS_WITH", "ENDS_WITH", "BEFORE", "AFTER", "BETWEEN", "NOT_BETWEEN", "ON", "GREATER_THAN", "LESS_THAN", "GREATER_THAN_OR_EQUAL", "LESS_THAN_OR_EQUAL", "EQUAL", "LIST_CONTAINS", "LIST_CONTAINS_ALL"], # required
     #                 values: ["string1To255"], # required
     #                 condition_overrides: {
     #                   range: {
@@ -3103,11 +3910,23 @@ module Aws::CustomerProfiles
     #       ],
     #       include: "ALL" # One of: ["ALL", "ANY", "NONE"]
     #     },
+    #     segment_sort: {
+    #       attributes: [ # required
+    #         {
+    #           name: "fieldName", # required
+    #           data_type: "STRING" # One of: ["STRING", "NUMBER", "DATE"],
+    #           order: "ASC" # One of: ["ASC", "DESC"], # required
+    #           type: "PROFILE" # One of: ["PROFILE", "CALCULATED"]
+    #         }
+    #       ]
+    #     },
     #     segment_definition_arn: "SegmentDefinitionArn", # required
     #     created_at: Time.now,
     #     tags: {
     #       "TagKey" => "TagValue"
-    #     }
+    #     },
+    #     segment_sql_query: "sensitiveString1To50000",
+    #     segment_type: "CLASSIC" # One of: ["CLASSIC", "ENHANCED"]
     #   }
     # @return [Types::GetSegmentDefinitionResponse]
     def get_segment_definition(params = {}, options = {})
@@ -3273,7 +4092,8 @@ module Aws::CustomerProfiles
     #         message: "GetSegmentMembershipMessage", # required
     #         status: 1
     #       }
-    #     ]
+    #     ],
+    #     last_computed_at: Time.now
     #   }
     # @return [Types::GetSegmentMembershipResponse]
     def get_segment_membership(params = {}, options = {})
@@ -3311,6 +4131,42 @@ module Aws::CustomerProfiles
     # @return [Types::GetSegmentSnapshotResponse]
     def get_segment_snapshot(params = {}, options = {})
       request = build_request(:get_segment_snapshot, params)
+      request.send_request(options)
+    end
+
+    # <p>Returns the current subscription configuration, execution schedule, and status for
+    #          segment membership events. </p>
+    # @param [Hash, Types::GetSegmentSubscriptionRequest] params
+    # @option params [String] :domain_name
+    #   <p>The unique name of the domain.</p>
+    # @option params [String] :segment_definition_name
+    #   <p>The unique name of the segment definition. </p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     domain_name: "name", # required
+    #     segment_definition_name: "name", # required
+    #   }
+    #   options = {}
+    #   response = client.get_segment_subscription(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     status: "STARTING" # One of: ["STARTING", "RUNNING", "STOPPED", "FAILED"],
+    #     message: "string1To1000",
+    #     schedule_configuration: {
+    #       interval: 1, # required
+    #       unit: "HOURLY" # One of: ["HOURLY"]
+    #     },
+    #     scheduled_executions: {
+    #       next_executed_at: Time.now,
+    #       last_executed_at: Time.now
+    #     },
+    #     started_at: Time.now,
+    #     last_updated_at: Time.now
+    #   }
+    # @return [Types::GetSegmentSubscriptionResponse]
+    def get_segment_subscription(params = {}, options = {})
+      request = build_request(:get_segment_subscription, params)
       request.send_request(options)
     end
 
@@ -3355,6 +4211,41 @@ module Aws::CustomerProfiles
     # @return [Types::GetSimilarProfilesResponse]
     def get_similar_profiles(params = {}, options = {})
       request = build_request(:get_similar_profiles, params)
+      request.send_request(options)
+    end
+
+    # <p>Returns information about the segment membership event stream configured for a specific
+    #          domain, including the stream state and associated segments. </p>
+    # @param [Hash, Types::GetStreamForSegmentsRequest] params
+    # @option params [String] :domain_name
+    #   <p>The unique name of the domain.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     domain_name: "name", # required
+    #   }
+    #   options = {}
+    #   response = client.get_stream_for_segments(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     associated_at: Time.now,
+    #     associated_segments: [
+    #       {
+    #         segment_name: "name",
+    #         status: "STARTING" # One of: ["STARTING", "RUNNING", "STOPPED", "FAILED"],
+    #         message: "string1To1000"
+    #       }
+    #     ],
+    #     domain_name: "name",
+    #     destination_arn: "DestinationArnString",
+    #     destination_role_arn: "DestinationRoleArn",
+    #     state: "RUNNING" # One of: ["RUNNING", "UNHEALTHY", "STOPPED"],
+    #     disassociated_at: Time.now,
+    #     failure_reason: "string1To255"
+    #   }
+    # @return [Types::GetStreamForSegmentsResponse]
+    def get_stream_for_segments(params = {}, options = {})
+      request = build_request(:get_stream_for_segments, params)
       request.send_request(options)
     end
 
@@ -3479,7 +4370,7 @@ module Aws::CustomerProfiles
     # @option params [String] :workflow_id
     #   <p>Unique identifier for the workflow.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous 
+    #   <p>The token for the next set of results. Use the value returned in the previous
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
@@ -3557,7 +4448,8 @@ module Aws::CustomerProfiles
     #         workflow_id: "string1To255",
     #         is_unstructured: false,
     #         role_arn: "RoleArn",
-    #         event_trigger_names: ["name"]
+    #         event_trigger_names: ["name"],
+    #         scope: "PROFILE" # One of: ["PROFILE", "DOMAIN"]
     #       }
     #     ],
     #     next_token: "token"
@@ -3692,6 +4584,44 @@ module Aws::CustomerProfiles
       request.send_request(options)
     end
 
+    # <p>List all DomainObjectType(s) in a Customer Profiles domain. </p>
+    # @param [Hash, Types::ListDomainObjectTypesRequest] params
+    # @option params [String] :domain_name
+    #   <p>The unique name of the domain.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of domain object types returned per page.</p>
+    # @option params [String] :next_token
+    #   <p>The pagination token from the previous call to ListDomainObjectTypes.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     domain_name: "name", # required
+    #     max_results: 1,
+    #     next_token: "token"
+    #   }
+    #   options = {}
+    #   response = client.list_domain_object_types(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     items: [
+    #       {
+    #         object_type_name: "typeName", # required
+    #         description: "sensitiveString1To10000",
+    #         created_at: Time.now,
+    #         last_updated_at: Time.now,
+    #         tags: {
+    #           "TagKey" => "TagValue"
+    #         }
+    #       }
+    #     ],
+    #     next_token: "token"
+    #   }
+    # @return [Types::ListDomainObjectTypesResponse]
+    def list_domain_object_types(params = {}, options = {})
+      request = build_request(:list_domain_object_types, params)
+      request.send_request(options)
+    end
+
     # <p>Returns a list of all the domains for an AWS account that have been created.</p>
     # @param [Hash, Types::ListDomainsRequest] params
     # @option params [String] :next_token
@@ -3815,7 +4745,7 @@ module Aws::CustomerProfiles
     # @option params [String] :domain_name
     #   <p>The unique name of the domain.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous 
+    #   <p>The token for the next set of results. Use the value returned in the previous
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
@@ -3897,7 +4827,8 @@ module Aws::CustomerProfiles
     #         workflow_id: "string1To255",
     #         is_unstructured: false,
     #         role_arn: "RoleArn",
-    #         event_trigger_names: ["name"]
+    #         event_trigger_names: ["name"],
+    #         scope: "PROFILE" # One of: ["PROFILE", "DOMAIN"]
     #       }
     #     ],
     #     next_token: "token"
@@ -3905,6 +4836,45 @@ module Aws::CustomerProfiles
     # @return [Types::ListIntegrationsResponse]
     def list_integrations(params = {}, options = {})
       request = build_request(:list_integrations, params)
+      request.send_request(options)
+    end
+
+    # <p>The ListObjectTypeAttributeValues API provides access to the most recent distinct values for any specified attribute, making it valuable for real-time data validation and consistency checks within your object types. This API works across domain, supporting both custom and standard object types. The API accepts the object type name, attribute name, and domain name as input parameters and returns values up to the storage limit of approximately 350KB.</p>
+    # @param [Hash, Types::ListObjectTypeAttributeValuesRequest] params
+    # @option params [String] :next_token
+    #   <p>The pagination token from the previous call.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of objects returned per page. Valid Range: Minimum value of 1. Maximum value of 100. If not provided default as 100.</p>
+    # @option params [String] :domain_name
+    #   <p>The unique name of the domain.</p>
+    # @option params [String] :object_type_name
+    #   <p>The unique name of the domain object type.</p>
+    # @option params [String] :attribute_name
+    #   <p>The attribute name.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     next_token: "token",
+    #     max_results: 1,
+    #     domain_name: "name", # required
+    #     object_type_name: "typeName", # required
+    #     attribute_name: "string1To1000", # required
+    #   }
+    #   options = {}
+    #   response = client.list_object_type_attribute_values(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     items: [
+    #       {
+    #         value: "sensitiveString1To1000", # required
+    #         last_updated_at: Time.now, # required
+    #       }
+    #     ],
+    #     next_token: "token"
+    #   }
+    # @return [Types::ListObjectTypeAttributeValuesResponse]
+    def list_object_type_attribute_values(params = {}, options = {})
+      request = build_request(:list_object_type_attribute_values, params)
       request.send_request(options)
     end
 
@@ -3984,7 +4954,7 @@ module Aws::CustomerProfiles
     # @option params [String] :object_type_name
     #   <p>Applies a filter to include profile history records only with the specified <code>ObjectTypeName</code> value in the response.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous 
+    #   <p>The token for the next set of results. Use the value returned in the previous
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
@@ -4084,6 +5054,7 @@ module Aws::CustomerProfiles
     #         last_updated_at: Time.now,
     #         max_profile_object_count: 1,
     #         max_available_profile_object_count: 1,
+    #         source_priority: 1,
     #         tags: {
     #           "TagKey" => "TagValue"
     #         }
@@ -4144,6 +5115,229 @@ module Aws::CustomerProfiles
       request.send_request(options)
     end
 
+    # <p>Returns a list of recommender filters in the specified domain.</p>
+    # @param [Hash, Types::ListRecommenderFiltersRequest] params
+    # @option params [String] :domain_name
+    #   <p>The unique name of the domain.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of recommender filters to return in the response. The default value is 100.</p>
+    # @option params [String] :next_token
+    #   <p>A token received from a previous ListRecommenderFilters call to retrieve the next page of results.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     domain_name: "name", # required
+    #     max_results: 1,
+    #     next_token: "token"
+    #   }
+    #   options = {}
+    #   response = client.list_recommender_filters(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     next_token: "token",
+    #     recommender_filters: [
+    #       {
+    #         recommender_filter_name: "RecommenderFilterName",
+    #         recommender_schema_name: "name",
+    #         recommender_filter_expression: "RecommenderFilterExpression",
+    #         created_at: Time.now,
+    #         description: "sensitiveText",
+    #         status: "ACTIVE" # One of: ["ACTIVE", "PENDING", "IN_PROGRESS", "FAILED", "DELETING"],
+    #         failure_reason: "String",
+    #         tags: {
+    #           "TagKey" => "TagValue"
+    #         }
+    #       }
+    #     ]
+    #   }
+    # @return [Types::ListRecommenderFiltersResponse]
+    def list_recommender_filters(params = {}, options = {})
+      request = build_request(:list_recommender_filters, params)
+      request.send_request(options)
+    end
+
+    # <p>Returns a list of available recommender recipes that can be used to create recommenders.</p>
+    # @param [Hash, Types::ListRecommenderRecipesRequest] params
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of recommender recipes to return in the response. The default value is 100.</p>
+    # @option params [String] :next_token
+    #   <p>A token received from a previous ListRecommenderRecipes call to retrieve the next page of results.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     max_results: 1,
+    #     next_token: "token"
+    #   }
+    #   options = {}
+    #   response = client.list_recommender_recipes(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     next_token: "token",
+    #     recommender_recipes: [
+    #       {
+    #         name: "recommended-for-you" # One of: ["recommended-for-you", "similar-items", "frequently-paired-items", "popular-items", "trending-now", "personalized-ranking"],
+    #         description: "String"
+    #       }
+    #     ]
+    #   }
+    # @return [Types::ListRecommenderRecipesResponse]
+    def list_recommender_recipes(params = {}, options = {})
+      request = build_request(:list_recommender_recipes, params)
+      request.send_request(options)
+    end
+
+    # <p>Returns a list of recommender schemas in the specified domain.</p>
+    # @param [Hash, Types::ListRecommenderSchemasRequest] params
+    # @option params [String] :domain_name
+    #   <p>The unique name of the domain.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of recommender schemas to return in the response. The default value is 100.</p>
+    # @option params [String] :next_token
+    #   <p>A token received from a previous ListRecommenderSchemas call to retrieve the next page of results.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     domain_name: "name", # required
+    #     max_results: 1,
+    #     next_token: "token"
+    #   }
+    #   options = {}
+    #   response = client.list_recommender_schemas(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     next_token: "token",
+    #     recommender_schemas: [
+    #       {
+    #         recommender_schema_name: "name", # required
+    #         fields: { # required
+    #           "String" => [
+    #             {
+    #               target_field_name: "text", # required
+    #               content_type: "STRING" # One of: ["STRING", "NUMBER"],
+    #               feature_type: "TEXTUAL" # One of: ["TEXTUAL", "CATEGORICAL"]
+    #             }
+    #           ]
+    #         },
+    #         created_at: Time.now, # required
+    #         status: "ACTIVE" # One of: ["ACTIVE", "DELETING"], # required
+    #       }
+    #     ]
+    #   }
+    # @return [Types::ListRecommenderSchemasResponse]
+    def list_recommender_schemas(params = {}, options = {})
+      request = build_request(:list_recommender_schemas, params)
+      request.send_request(options)
+    end
+
+    # <p>Returns a list of recommenders in the specified domain.</p>
+    # @param [Hash, Types::ListRecommendersRequest] params
+    # @option params [String] :domain_name
+    #   <p>The unique name of the domain.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of recommenders to return in the response. The default value is 100.</p>
+    # @option params [String] :next_token
+    #   <p>A token received from a previous ListRecommenders call to retrieve the next page of results.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     domain_name: "name", # required
+    #     max_results: 1,
+    #     next_token: "token"
+    #   }
+    #   options = {}
+    #   response = client.list_recommenders(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     next_token: "token",
+    #     recommenders: [
+    #       {
+    #         recommender_name: "name",
+    #         recipe_name: "recommended-for-you" # One of: ["recommended-for-you", "similar-items", "frequently-paired-items", "popular-items", "trending-now", "personalized-ranking"],
+    #         recommender_schema_name: "name",
+    #         recommender_config: {
+    #           events_config: {
+    #             event_parameters_list: [ # required
+    #               {
+    #                 event_type: "EventParametersEventTypeString", # required
+    #                 event_value_threshold: 1.0,
+    #                 event_weight: 1.0
+    #               }
+    #             ]
+    #           },
+    #           training_frequency: 1,
+    #           inference_config: {
+    #             min_provisioned_tps: 1
+    #           },
+    #           included_columns: {
+    #             "String" => ["text"]
+    #           },
+    #           excluded_columns: {
+    #             "String" => ["text"]
+    #           },
+    #           diversity_config: {
+    #             diversity_columns: [
+    #               {
+    #                 name: "text", # required
+    #                 cap_type: "PERCENTAGE" # One of: ["PERCENTAGE", "VALUE"], # required
+    #                 target: "DiversityTargetExpression", # required
+    #               }
+    #             ]
+    #           }
+    #         },
+    #         created_at: Time.now,
+    #         description: "sensitiveText",
+    #         status: "PENDING" # One of: ["PENDING", "IN_PROGRESS", "ACTIVE", "FAILED", "STOPPING", "INACTIVE", "STARTING", "DELETING"],
+    #         last_updated_at: Time.now,
+    #         tags: {
+    #           "TagKey" => "TagValue"
+    #         },
+    #         failure_reason: "String",
+    #         latest_recommender_update: {
+    #           recommender_config: {
+    #             events_config: {
+    #               event_parameters_list: [ # required
+    #                 {
+    #                   event_type: "EventParametersEventTypeString", # required
+    #                   event_value_threshold: 1.0,
+    #                   event_weight: 1.0
+    #                 }
+    #               ]
+    #             },
+    #             training_frequency: 1,
+    #             inference_config: {
+    #               min_provisioned_tps: 1
+    #             },
+    #             included_columns: {
+    #               "String" => ["text"]
+    #             },
+    #             excluded_columns: {
+    #               "String" => ["text"]
+    #             },
+    #             diversity_config: {
+    #               diversity_columns: [
+    #                 {
+    #                   name: "text", # required
+    #                   cap_type: "PERCENTAGE" # One of: ["PERCENTAGE", "VALUE"], # required
+    #                   target: "DiversityTargetExpression", # required
+    #                 }
+    #               ]
+    #             }
+    #           },
+    #           status: "PENDING" # One of: ["PENDING", "IN_PROGRESS", "ACTIVE", "FAILED", "STOPPING", "INACTIVE", "STARTING", "DELETING"],
+    #           created_at: Time.now,
+    #           last_updated_at: Time.now,
+    #           failure_reason: "String",
+    #           recommender_version_name: "RecommenderVersionName"
+    #         }
+    #       }
+    #     ]
+    #   }
+    # @return [Types::ListRecommendersResponse]
+    def list_recommenders(params = {}, options = {})
+      request = build_request(:list_recommenders, params)
+      request.send_request(options)
+    end
+
     # <p>Returns a set of <code>MatchIds</code> that belong to the given domain.</p>
     # @param [Hash, Types::ListRuleBasedMatchesRequest] params
     # @option params [String] :next_token
@@ -4197,18 +5391,59 @@ module Aws::CustomerProfiles
     #       {
     #         segment_definition_name: "name",
     #         display_name: "string1To255",
-    #         description: "sensitiveText",
+    #         description: "sensitiveString1To4000",
     #         segment_definition_arn: "SegmentDefinitionArn",
     #         created_at: Time.now,
     #         tags: {
     #           "TagKey" => "TagValue"
-    #         }
+    #         },
+    #         segment_type: "CLASSIC" # One of: ["CLASSIC", "ENHANCED"]
     #       }
     #     ]
     #   }
     # @return [Types::ListSegmentDefinitionsResponse]
     def list_segment_definitions(params = {}, options = {})
       request = build_request(:list_segment_definitions, params)
+      request.send_request(options)
+    end
+
+    # <p>Returns the most recent membership events for a segment. Each event represents a profile
+    #          that entered or exited the segment. </p>
+    #          <p>This operation is paginated. </p>
+    # @param [Hash, Types::ListSegmentSubscriptionEventsRequest] params
+    # @option params [String] :domain_name
+    #   <p>The unique name of the domain.</p>
+    # @option params [String] :segment_definition_name
+    #   <p>The unique name of the segment definition. </p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of events to return per page. </p>
+    # @option params [String] :next_token
+    #   <p>The pagination token from the previous call to retrieve the next page of results. </p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     domain_name: "name", # required
+    #     segment_definition_name: "name", # required
+    #     max_results: 1,
+    #     next_token: "token"
+    #   }
+    #   options = {}
+    #   response = client.list_segment_subscription_events(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     events: [
+    #       {
+    #         profile_id: "uuid",
+    #         updated_at: Time.now,
+    #         event_type: "LIVE" # One of: ["LIVE", "SCHEDULE"],
+    #         event: "JOINED" # One of: ["JOINED", "LEFT"]
+    #       }
+    #     ],
+    #     next_token: "token"
+    #   }
+    # @return [Types::ListSegmentSubscriptionEventsResponse]
+    def list_segment_subscription_events(params = {}, options = {})
+      request = build_request(:list_segment_subscription_events, params)
       request.send_request(options)
     end
 
@@ -4288,7 +5523,7 @@ module Aws::CustomerProfiles
     # @option params [Time] :query_end_date
     #   <p>Retrieve workflows ended after timestamp.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous 
+    #   <p>The token for the next set of results. Use the value returned in the previous
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
@@ -4425,6 +5660,66 @@ module Aws::CustomerProfiles
       request.send_request(options)
     end
 
+    # <p>Create/Update a DomainObjectType in a Customer Profiles domain. To create a new DomainObjectType, Data Store needs to be enabled on the Domain.</p>
+    # @param [Hash, Types::PutDomainObjectTypeRequest] params
+    # @option params [String] :domain_name
+    #   <p>The unique name of the domain.</p>
+    # @option params [String] :object_type_name
+    #   <p>The unique name of the domain object type.</p>
+    # @option params [String] :description
+    #   <p>The description of the domain object type.</p>
+    # @option params [String] :encryption_key
+    #   <p>The customer provided KMS key used to encrypt this type of domain object.</p>
+    # @option params [Hash<String, Types::DomainObjectTypeField>] :fields
+    #   <p>A map of field names to their corresponding domain object type field definitions.</p>
+    # @option params [Hash<String, String>] :tags
+    #   <p>The tags used to organize, track, or control access for this resource.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     domain_name: "name", # required
+    #     object_type_name: "typeName", # required
+    #     description: "sensitiveString1To10000",
+    #     encryption_key: "encryptionKey",
+    #     fields: { # required
+    #       "DomainObjectTypeFieldName" => {
+    #         source: "text", # required
+    #         target: "text", # required
+    #         content_type: "STRING" # One of: ["STRING", "NUMBER"],
+    #         feature_type: "TEXTUAL" # One of: ["TEXTUAL", "CATEGORICAL"]
+    #       }
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue"
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.put_domain_object_type(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     object_type_name: "typeName",
+    #     description: "sensitiveString1To10000",
+    #     encryption_key: "encryptionKey",
+    #     fields: {
+    #       "DomainObjectTypeFieldName" => {
+    #         source: "text", # required
+    #         target: "text", # required
+    #         content_type: "STRING" # One of: ["STRING", "NUMBER"],
+    #         feature_type: "TEXTUAL" # One of: ["TEXTUAL", "CATEGORICAL"]
+    #       }
+    #     },
+    #     created_at: Time.now,
+    #     last_updated_at: Time.now,
+    #     tags: {
+    #       "TagKey" => "TagValue"
+    #     }
+    #   }
+    # @return [Types::PutDomainObjectTypeResponse]
+    def put_domain_object_type(params = {}, options = {})
+      request = build_request(:put_domain_object_type, params)
+      request.send_request(options)
+    end
+
     # <p>Adds an integration between the service and a third-party service, which includes
     #          Amazon AppFlow and Amazon Connect.</p>
     #          <p>An integration can belong to only one domain.</p>
@@ -4438,25 +5733,30 @@ module Aws::CustomerProfiles
     #   <p>The URI of the S3 bucket or any other type of data source.</p>
     # @option params [String] :object_type_name
     #   <p>The name of the profile object type.</p>
+    # @option params [Hash<String, String>] :object_type_names
+    #   <p>A map in which each key is an event type from an external application such as Segment or Shopify, and each value is an <code>ObjectTypeName</code> (template) used to ingest the event.
+    #   It supports the following event types: <code>SegmentIdentify</code>, <code>ShopifyCreateCustomers</code>, <code>ShopifyUpdateCustomers</code>, <code>ShopifyCreateDraftOrders</code>,
+    #   <code>ShopifyUpdateDraftOrders</code>, <code>ShopifyCreateOrders</code>, and <code>ShopifyUpdatedOrders</code>.</p>
     # @option params [Hash<String, String>] :tags
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     # @option params [Types::FlowDefinition] :flow_definition
     #   <p>The configuration that controls how Customer Profiles retrieves data from the
     #            source.</p>
-    # @option params [Hash<String, String>] :object_type_names
-    #   <p>A map in which each key is an event type from an external application such as Segment or Shopify, and each value is an <code>ObjectTypeName</code> (template) used to ingest the event.
-    #   It supports the following event types: <code>SegmentIdentify</code>, <code>ShopifyCreateCustomers</code>, <code>ShopifyUpdateCustomers</code>, <code>ShopifyCreateDraftOrders</code>, 
-    #   <code>ShopifyUpdateDraftOrders</code>, <code>ShopifyCreateOrders</code>, and <code>ShopifyUpdatedOrders</code>.</p>
     # @option params [String] :role_arn
     #   <p>The Amazon Resource Name (ARN) of the IAM role. The Integration uses this role to make
     #            Customer Profiles requests on your behalf.</p>
     # @option params [Array<String>] :event_trigger_names
     #   <p>A list of unique names for active event triggers associated with the integration.</p>
+    # @option params [String] :scope
+    #   <p>Specifies whether the integration applies to profile level data (associated with profiles) or domain level data (not associated with any specific profile). The default value is PROFILE.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_name: "name", # required
     #     uri: "string1To255",
     #     object_type_name: "typeName",
+    #     object_type_names: {
+    #       "string1To255" => "typeName"
+    #     },
     #     tags: {
     #       "TagKey" => "TagValue"
     #     },
@@ -4523,11 +5823,9 @@ module Aws::CustomerProfiles
     #         }
     #       }
     #     },
-    #     object_type_names: {
-    #       "string1To255" => "typeName"
-    #     },
     #     role_arn: "RoleArn",
-    #     event_trigger_names: ["name"]
+    #     event_trigger_names: ["name"],
+    #     scope: "PROFILE" # One of: ["PROFILE", "DOMAIN"]
     #   }
     #   options = {}
     #   response = client.put_integration(params, options)
@@ -4548,7 +5846,8 @@ module Aws::CustomerProfiles
     #     workflow_id: "string1To255",
     #     is_unstructured: false,
     #     role_arn: "RoleArn",
-    #     event_trigger_names: ["name"]
+    #     event_trigger_names: ["name"],
+    #     scope: "PROFILE" # One of: ["PROFILE", "DOMAIN"]
     #   }
     # @return [Types::PutIntegrationResponse]
     def put_integration(params = {}, options = {})
@@ -4626,6 +5925,8 @@ module Aws::CustomerProfiles
     #         </p>
     # @option params [Integer] :max_profile_object_count
     #   <p>The amount of profile object max count assigned to the object type</p>
+    # @option params [Integer] :source_priority
+    #   <p>An integer that determines the priority of this object type when data from multiple sources is ingested. Lower values take priority. Object types without a specified source priority default to the lowest priority.</p>
     # @option params [Hash<String, Types::ObjectTypeField>] :fields
     #   <p>A map of the name and ObjectType field.</p>
     # @option params [Hash<String, Array<Types::ObjectTypeKey>>] :keys
@@ -4643,6 +5944,7 @@ module Aws::CustomerProfiles
     #     allow_profile_creation: false,
     #     source_last_updated_timestamp_format: "string1To255",
     #     max_profile_object_count: 1,
+    #     source_priority: 1,
     #     fields: {
     #       "fieldName" => {
     #         source: "text",
@@ -4653,7 +5955,7 @@ module Aws::CustomerProfiles
     #     keys: {
     #       "name" => [
     #         {
-    #           standard_identifiers: ["PROFILE" # One of: ["PROFILE", "ASSET", "CASE", "ORDER", "COMMUNICATION_RECORD", "AIR_PREFERENCE", "HOTEL_PREFERENCE", "AIR_BOOKING", "AIR_SEGMENT", "HOTEL_RESERVATION", "HOTEL_STAY_REVENUE", "LOYALTY", "LOYALTY_TRANSACTION", "LOYALTY_PROMOTION", "UNIQUE", "SECONDARY", "LOOKUP_ONLY", "NEW_ONLY"]],
+    #           standard_identifiers: ["PROFILE" # One of: ["PROFILE", "ASSET", "CASE", "DEVICE", "WEB_ANALYTICS", "ORDER", "COMMUNICATION_RECORD", "AIR_PREFERENCE", "HOTEL_PREFERENCE", "AIR_BOOKING", "AIR_SEGMENT", "HOTEL_RESERVATION", "HOTEL_STAY_REVENUE", "LOYALTY", "LOYALTY_TRANSACTION", "LOYALTY_PROMOTION", "UNIQUE", "SECONDARY", "LOOKUP_ONLY", "NEW_ONLY"]],
     #           field_names: ["name"]
     #         }
     #       ]
@@ -4676,6 +5978,7 @@ module Aws::CustomerProfiles
     #     source_last_updated_timestamp_format: "string1To255",
     #     max_profile_object_count: 1,
     #     max_available_profile_object_count: 1,
+    #     source_priority: 1,
     #     fields: {
     #       "fieldName" => {
     #         source: "text",
@@ -4686,7 +5989,7 @@ module Aws::CustomerProfiles
     #     keys: {
     #       "name" => [
     #         {
-    #           standard_identifiers: ["PROFILE" # One of: ["PROFILE", "ASSET", "CASE", "ORDER", "COMMUNICATION_RECORD", "AIR_PREFERENCE", "HOTEL_PREFERENCE", "AIR_BOOKING", "AIR_SEGMENT", "HOTEL_RESERVATION", "HOTEL_STAY_REVENUE", "LOYALTY", "LOYALTY_TRANSACTION", "LOYALTY_PROMOTION", "UNIQUE", "SECONDARY", "LOOKUP_ONLY", "NEW_ONLY"]],
+    #           standard_identifiers: ["PROFILE" # One of: ["PROFILE", "ASSET", "CASE", "DEVICE", "WEB_ANALYTICS", "ORDER", "COMMUNICATION_RECORD", "AIR_PREFERENCE", "HOTEL_PREFERENCE", "AIR_BOOKING", "AIR_SEGMENT", "HOTEL_RESERVATION", "HOTEL_STAY_REVENUE", "LOYALTY", "LOYALTY_TRANSACTION", "LOYALTY_PROMOTION", "UNIQUE", "SECONDARY", "LOOKUP_ONLY", "NEW_ONLY"]],
     #           field_names: ["name"]
     #         }
     #       ]
@@ -4700,6 +6003,53 @@ module Aws::CustomerProfiles
     # @return [Types::PutProfileObjectTypeResponse]
     def put_profile_object_type(params = {}, options = {})
       request = build_request(:put_profile_object_type, params)
+      request.send_request(options)
+    end
+
+    # <p>Creates or updates a segment subscription for membership events. When a subscription is
+    #          created, an initial snapshot is taken and the system begins monitoring for membership
+    #          changes. </p>
+    #          <p>You can optionally set a schedule configuration interval to control how often membership
+    #          snapshots are run. The interval can be from 1 to 24 hours. If not set, the interval defaults
+    #          to 24 hours. Scheduled snapshots run on
+    #          a best-effort basis. If a scheduled snapshot takes longer than the configured interval, the
+    #          next scheduled run does not start until the in-progress snapshot completes, so a run might
+    #          be delayed or skipped and is not guaranteed to occur at exactly the requested time. </p>
+    #          <p>For Classic segments, membership events are generated from these scheduled snapshots and
+    #          also in near real-time as profile attribute changes occur. For SQL segments, membership
+    #          events are generated only from the scheduled snapshots. </p>
+    # @param [Hash, Types::PutSegmentSubscriptionRequest] params
+    # @option params [String] :domain_name
+    #   <p>The unique name of the domain.</p>
+    # @option params [String] :segment_definition_name
+    #   <p>The unique name of the segment definition. </p>
+    # @option params [Types::ScheduleConfiguration] :schedule_configuration
+    #   <p>The optional schedule configuration that controls how often membership snapshots are run.
+    #            If not provided, the subscription defaults to a 24-hour interval. </p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     domain_name: "name", # required
+    #     segment_definition_name: "name", # required
+    #     schedule_configuration: {
+    #       interval: 1, # required
+    #       unit: "HOURLY" # One of: ["HOURLY"]
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.put_segment_subscription(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     status: "STARTING" # One of: ["STARTING", "RUNNING", "STOPPED", "FAILED"],
+    #     schedule_configuration: {
+    #       interval: 1, # required
+    #       unit: "HOURLY" # One of: ["HOURLY"]
+    #     },
+    #     started_at: Time.now
+    #   }
+    # @return [Types::PutSegmentSubscriptionResponse]
+    def put_segment_subscription(params = {}, options = {})
+      request = build_request(:put_segment_subscription, params)
       request.send_request(options)
     end
 
@@ -4880,6 +6230,132 @@ module Aws::CustomerProfiles
       request.send_request(options)
     end
 
+    # <p>Retrieves recommendations for a profile in a specific domain. The profile is identified
+    #          using a search key, which consists of a <code>KeyName</code> and a <code>KeyValues</code> list.
+    #          The <code>KeyName</code> can be a predefined key (for example, <code>_profileId</code>,
+    #          <code>_phone</code>, <code>_email</code>) or a custom-defined key.</p>
+    #          <p>The search key must match exactly one profile. If no profile matches the search key, the
+    #          operation returns a <code>ResourceNotFoundException</code>. If more than one profile matches
+    #          the search key, the operation returns a <code>BadRequestException</code>. You can use the
+    #          SearchProfiles API to review the matching profiles.</p>
+    # @param [Hash, Types::SearchRecommendationsRequest] params
+    # @option params [String] :domain_name
+    #   <p>The unique name of the domain.</p>
+    # @option params [String] :key_name
+    #   <p>A searchable identifier of a customer profile. You can use a predefined key, such as
+    #            <code>_profileId</code>, <code>_phone</code>, or <code>_email</code>, or a custom-defined key.</p>
+    # @option params [Array<String>] :key_values
+    #   <p>A list of key values. Provide one value for each field of the search key.</p>
+    # @option params [Types::Recommender] :recommender
+    #   <p>The recommender used to generate the recommendations.</p>
+    # @option params [Array<String>] :candidate_ids
+    #   <p>A list of item IDs to rank for the user. Use this when you want to re-rank a specific set of items rather than getting recommendations from the full item catalog. Required for personalized-ranking use cases.</p>
+    # @option params [Hash<String, String>] :context
+    #   <p>The contextual metadata used to provide dynamic runtime information to tailor recommendations.</p>
+    # @option params [Types::RecommendationDiversityConfig] :diversity
+    #   <p>Runtime diversity configuration for this request. Enables diversity-aware recommendations and optionally supplies values for placeholder-based diversity caps configured on the recommender.</p>
+    # @option params [Types::RecommendationMetadata] :metadata
+    #   <p>Configuration for metadata to include in recommendation responses.</p>
+    # @option params [Integer] :max_recommendations
+    #   <p>The maximum number of recommendations to return. The default value is 5.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     domain_name: "name", # required
+    #     key_name: "name", # required
+    #     key_values: ["string1To255"], # required
+    #     recommender: { # required
+    #       name: "name", # required
+    #       filters: [
+    #         {
+    #           name: "name",
+    #           values: {
+    #             "RecommenderFilterAttributeName" => "RecommenderFilterAttributeValue"
+    #           }
+    #         }
+    #       ],
+    #       promotional_filters: [
+    #         {
+    #           name: "name",
+    #           values: {
+    #             "RecommenderFilterAttributeName" => "RecommenderFilterAttributeValue"
+    #           },
+    #           promotion_name: "name",
+    #           percent_promoted_items: 1
+    #         }
+    #       ]
+    #     },
+    #     candidate_ids: ["string1To255"],
+    #     context: {
+    #       "ContextKey" => "string1To255"
+    #     },
+    #     diversity: {
+    #       enabled: false, # required
+    #       values: {
+    #         "DiversityPlaceholderName" => 1
+    #       }
+    #     },
+    #     metadata: {
+    #       columns: ["MetadataColumnName"]
+    #     },
+    #     max_recommendations: 1
+    #   }
+    #   options = {}
+    #   response = client.search_recommendations(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     profile_id: "uuid",
+    #     recommendations: [
+    #       {
+    #         catalog_item: {
+    #           id: "sensitiveString1To255",
+    #           name: "sensitiveString1To255",
+    #           code: "sensitiveString1To255",
+    #           type: "sensitiveString1To255",
+    #           category: "sensitiveString1To255",
+    #           description: "sensitiveString1To255",
+    #           additional_information: "sensitiveString1To1000",
+    #           image_link: "sensitiveString1To1000",
+    #           link: "sensitiveString1To1000",
+    #           created_at: Time.now,
+    #           updated_at: Time.now,
+    #           price: "sensitiveString1To255",
+    #           attributes: {
+    #             "string1To255" => "string1To255"
+    #           }
+    #         },
+    #         score: 1.0
+    #       }
+    #     ]
+    #   }
+    # @return [Types::SearchRecommendationsResponse]
+    def search_recommendations(params = {}, options = {})
+      request = build_request(:search_recommendations, params)
+      request.send_request(options)
+    end
+
+    # <p>Starts a recommender that was previously stopped. Starting a recommender resumes its ability to generate recommendations.</p>
+    # @param [Hash, Types::StartRecommenderRequest] params
+    # @option params [String] :domain_name
+    #   <p>The unique name of the domain.</p>
+    # @option params [String] :recommender_name
+    #   <p>The name of the recommender to start.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     domain_name: "name", # required
+    #     recommender_name: "name", # required
+    #   }
+    #   options = {}
+    #   response = client.start_recommender(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::StartRecommenderResponse]
+    def start_recommender(params = {}, options = {})
+      request = build_request(:start_recommender, params)
+      request.send_request(options)
+    end
+
     # <p>This API starts the processing of an upload job to ingest profile data. </p>
     # @param [Hash, Types::StartUploadJobRequest] params
     # @option params [String] :domain_name
@@ -4899,6 +6375,28 @@ module Aws::CustomerProfiles
     # @return [Types::StartUploadJobResponse]
     def start_upload_job(params = {}, options = {})
       request = build_request(:start_upload_job, params)
+      request.send_request(options)
+    end
+
+    # <p>Stops a recommender, suspending its ability to generate recommendations. The recommender can be restarted later using StartRecommender.</p>
+    # @param [Hash, Types::StopRecommenderRequest] params
+    # @option params [String] :domain_name
+    #   <p>The unique name of the domain.</p>
+    # @option params [String] :recommender_name
+    #   <p>The name of the recommender to stop.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     domain_name: "name", # required
+    #     recommender_name: "name", # required
+    #   }
+    #   options = {}
+    #   response = client.stop_recommender(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::StopRecommenderResponse]
+    def stop_recommender(params = {}, options = {})
+      request = build_request(:stop_recommender, params)
       request.send_request(options)
     end
 
@@ -5031,7 +6529,7 @@ module Aws::CustomerProfiles
     #     description: "sensitiveText",
     #     created_at: Time.now,
     #     last_updated_at: Time.now,
-    #     statistic: "FIRST_OCCURRENCE" # One of: ["FIRST_OCCURRENCE", "LAST_OCCURRENCE", "COUNT", "SUM", "MINIMUM", "MAXIMUM", "AVERAGE", "MAX_OCCURRENCE"],
+    #     statistic: "FIRST_OCCURRENCE" # One of: ["FIRST_OCCURRENCE", "LAST_OCCURRENCE", "COUNT", "SUM", "MINIMUM", "MAXIMUM", "AVERAGE", "MAX_OCCURRENCE", "RECENT_OCCURRENCES"],
     #     conditions: {
     #       range: {
     #         value: 1,
@@ -5100,20 +6598,22 @@ module Aws::CustomerProfiles
     #            DeadLetterQueue.</p>
     # @option params [Types::MatchingRequest] :matching
     #   <p>The process of matching duplicate profiles. If <code>Matching</code> = <code>true</code>, Amazon Connect Customer Profiles starts a weekly
-    #   batch process called Identity Resolution Job. If you do not specify a date and time for Identity Resolution Job to run, by default it runs every 
+    #   batch process called Identity Resolution Job. If you do not specify a date and time for Identity Resolution Job to run, by default it runs every
     #   Saturday at 12AM UTC to detect duplicate profiles in your domains. </p>
-    #            <p>After the Identity Resolution Job completes, use the 
+    #            <p>After the Identity Resolution Job completes, use the
     #   <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html">GetMatches</a>
     #   API to return and review the results. Or, if you have configured <code>ExportingConfig</code> in the <code>MatchingRequest</code>, you can download the results from
     #   S3.</p>
     # @option params [Types::RuleBasedMatchingRequest] :rule_based_matching
     #   <p>The process of matching duplicate profiles using the rule-Based matching. If
-    #               <code>RuleBasedMatching</code> = true, Amazon Connect Customer Profiles will start
+    #               <code>RuleBasedMatching</code> = true, Connect Customer Customer Profiles will start
     #            to match and merge your profiles according to your configuration in the
     #               <code>RuleBasedMatchingRequest</code>. You can use the <code>ListRuleBasedMatches</code>
     #            and <code>GetSimilarProfiles</code> API to return and review the results. Also, if you have
     #            configured <code>ExportingConfig</code> in the <code>RuleBasedMatchingRequest</code>, you
     #            can download the results from S3.</p>
+    # @option params [Types::DataStoreRequest] :data_store
+    #   <p>Set to true to enabled data store for this domain.</p>
     # @option params [Hash<String, String>] :tags
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     # @example Request syntax with placeholder values
@@ -5173,6 +6673,9 @@ module Aws::CustomerProfiles
     #           s3_key_name: "s3KeyNameCustomerOutputConfig"
     #         }
     #       }
+    #     },
+    #     data_store: {
+    #       enabled: false
     #     },
     #     tags: {
     #       "TagKey" => "TagValue"
@@ -5238,6 +6741,13 @@ module Aws::CustomerProfiles
     #           s3_bucket_name: "s3BucketName", # required
     #           s3_key_name: "s3KeyNameCustomerOutputConfig"
     #         }
+    #       }
+    #     },
+    #     data_store: {
+    #       enabled: false,
+    #       readiness: {
+    #         progress_percentage: 1,
+    #         message: "text"
     #       }
     #     },
     #     created_at: Time.now, # required
@@ -5351,7 +6861,7 @@ module Aws::CustomerProfiles
     #       event_expiration: 1,
     #       periods: [
     #         {
-    #           unit: "HOURS" # One of: ["HOURS", "DAYS", "WEEKS", "MONTHS"], # required
+    #           unit: "MINUTES" # One of: ["MINUTES", "HOURS", "DAYS", "WEEKS", "MONTHS"], # required
     #           value: 1, # required
     #           max_invocations_per_profile: 1,
     #           unlimited: false
@@ -5389,7 +6899,7 @@ module Aws::CustomerProfiles
     #       event_expiration: 1,
     #       periods: [
     #         {
-    #           unit: "HOURS" # One of: ["HOURS", "DAYS", "WEEKS", "MONTHS"], # required
+    #           unit: "MINUTES" # One of: ["MINUTES", "HOURS", "DAYS", "WEEKS", "MONTHS"], # required
     #           value: 1, # required
     #           max_invocations_per_profile: 1,
     #           unlimited: false
@@ -5574,6 +7084,68 @@ module Aws::CustomerProfiles
     # @return [Types::UpdateProfileResponse]
     def update_profile(params = {}, options = {})
       request = build_request(:update_profile, params)
+      request.send_request(options)
+    end
+
+    # <p>Updates the properties of an existing recommender, allowing you to modify its configuration and description.</p>
+    # @param [Hash, Types::UpdateRecommenderRequest] params
+    # @option params [String] :domain_name
+    #   <p>The unique name of the domain.</p>
+    # @option params [String] :recommender_name
+    #   <p>The name of the recommender to update.</p>
+    # @option params [String] :description
+    #   <p>The new description to assign to the recommender.</p>
+    # @option params [Types::RecommenderConfig] :recommender_config
+    #   <p>The new configuration settings to apply to the recommender, including updated parameters and settings that define its behavior.</p>
+    # @option params [String] :recommender_version_name
+    #   <p>The name of a specific recommender version to activate as part of this update (for example, to roll back to a previously trained version).</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     domain_name: "name", # required
+    #     recommender_name: "name", # required
+    #     description: "sensitiveText",
+    #     recommender_config: {
+    #       events_config: {
+    #         event_parameters_list: [ # required
+    #           {
+    #             event_type: "EventParametersEventTypeString", # required
+    #             event_value_threshold: 1.0,
+    #             event_weight: 1.0
+    #           }
+    #         ]
+    #       },
+    #       training_frequency: 1,
+    #       inference_config: {
+    #         min_provisioned_tps: 1
+    #       },
+    #       included_columns: {
+    #         "String" => ["text"]
+    #       },
+    #       excluded_columns: {
+    #         "String" => ["text"]
+    #       },
+    #       diversity_config: {
+    #         diversity_columns: [
+    #           {
+    #             name: "text", # required
+    #             cap_type: "PERCENTAGE" # One of: ["PERCENTAGE", "VALUE"], # required
+    #             target: "DiversityTargetExpression", # required
+    #           }
+    #         ]
+    #       }
+    #     },
+    #     recommender_version_name: "RecommenderVersionName"
+    #   }
+    #   options = {}
+    #   response = client.update_recommender(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     recommender_name: "name", # required
+    #   }
+    # @return [Types::UpdateRecommenderResponse]
+    def update_recommender(params = {}, options = {})
+      request = build_request(:update_recommender, params)
       request.send_request(options)
     end
 

@@ -144,18 +144,18 @@ module Aws::OpenSearchServerless
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -235,6 +235,10 @@ module Aws::OpenSearchServerless
     #         arn: "String",
     #         kms_key_arn: "String",
     #         standby_replicas: "StandbyReplicas",
+    #         deletion_protection: "DeletionProtection",
+    #         vector_options: {
+    #           serverless_vector_acceleration: "ServerlessVectorAccelerationStatus", # required
+    #         },
     #         created_date: 1,
     #         last_modified_date: 1,
     #         collection_endpoint: "String",
@@ -244,7 +248,8 @@ module Aws::OpenSearchServerless
     #           dashboard_endpoint: "String"
     #         },
     #         failure_code: "String",
-    #         failure_message: "String"
+    #         failure_message: "String",
+    #         collection_group_name: "CollectionGroupName"
     #       }
     #     ],
     #     collection_error_details: [
@@ -259,6 +264,71 @@ module Aws::OpenSearchServerless
     # @return [Types::BatchGetCollectionOutput]
     def batch_get_collection(params = {}, options = {})
       request = build_request(:batch_get_collection, params)
+      request.send_request(options)
+    end
+
+    # <p>Returns attributes for one or more collection groups, including capacity limits and the number of collections in each group. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-manage.html">Creating and managing Amazon OpenSearch Serverless collections</a>.</p>
+    # @param [Hash, Types::BatchGetCollectionGroupRequest] params
+    # @option params [Array<String>] :ids
+    #   <p>A list of collection group IDs. You can't provide names and IDs in the same request.</p>
+    # @option params [Array<String>] :names
+    #   <p>A list of collection group names. You can't provide names and IDs in the same request.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     ids: ["CollectionGroupId"],
+    #     names: ["CollectionGroupName"]
+    #   }
+    #   options = {}
+    #   response = client.batch_get_collection_group(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     collection_group_details: [
+    #       {
+    #         id: "CollectionGroupId",
+    #         arn: "String",
+    #         name: "CollectionGroupName",
+    #         standby_replicas: "StandbyReplicas",
+    #         description: "String",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           }
+    #         ],
+    #         created_date: 1,
+    #         capacity_limits: {
+    #           max_indexing_capacity_in_ocu: 1.0,
+    #           max_search_capacity_in_ocu: 1.0,
+    #           min_indexing_capacity_in_ocu: 1.0,
+    #           min_search_capacity_in_ocu: 1.0
+    #         },
+    #         current_capacity: {
+    #           search: {
+    #             capacity_in_ocu: 1.0,
+    #             autoscaling_status: "AutoscalingStatus"
+    #           },
+    #           indexing: {
+    #             capacity_in_ocu: 1.0,
+    #             autoscaling_status: "AutoscalingStatus"
+    #           }
+    #         },
+    #         number_of_collections: 1,
+    #         generation: "ServerlessGeneration"
+    #       }
+    #     ],
+    #     collection_group_error_details: [
+    #       {
+    #         id: "CollectionGroupId",
+    #         name: "CollectionGroupName",
+    #         error_message: "String",
+    #         error_code: "String"
+    #       }
+    #     ]
+    #   }
+    # @return [Types::BatchGetCollectionGroupResponse]
+    def batch_get_collection_group(params = {}, options = {})
+      request = build_request(:batch_get_collection_group, params)
       request.send_request(options)
     end
 
@@ -442,6 +512,14 @@ module Aws::OpenSearchServerless
     #   <p>An arbitrary set of tags (key–value pairs) to associate with the OpenSearch Serverless collection.</p>
     # @option params [String] :standby_replicas
     #   <p>Indicates whether standby replicas should be used for a collection.</p>
+    # @option params [Types::VectorOptions] :vector_options
+    #   <p>Configuration options for vector search capabilities in the collection.</p>
+    # @option params [String] :collection_group_name
+    #   <p>The name of the collection group to associate with the collection.</p>
+    # @option params [Types::EncryptionConfig] :encryption_config
+    #   <p>Encryption settings for the collection.</p>
+    # @option params [String] :deletion_protection
+    #   <p>Indicates whether to enable deletion protection for the collection. When set to <code>ENABLED</code>, the collection cannot be deleted.</p>
     # @option params [String] :client_token
     #   <p>Unique, case-sensitive identifier to ensure idempotency of the request.</p>
     # @example Request syntax with placeholder values
@@ -456,6 +534,15 @@ module Aws::OpenSearchServerless
     #       }
     #     ],
     #     standby_replicas: "StandbyReplicas",
+    #     vector_options: {
+    #       serverless_vector_acceleration: "ServerlessVectorAccelerationStatus", # required
+    #     },
+    #     collection_group_name: "CollectionGroupName",
+    #     encryption_config: {
+    #       a_ws_owned_key: false,
+    #       kms_key_arn: "String"
+    #     },
+    #     deletion_protection: "DeletionProtection",
     #     client_token: "ClientToken"
     #   }
     #   options = {}
@@ -472,13 +559,87 @@ module Aws::OpenSearchServerless
     #       arn: "String",
     #       kms_key_arn: "String",
     #       standby_replicas: "StandbyReplicas",
+    #       deletion_protection: "DeletionProtection",
+    #       vector_options: {
+    #         serverless_vector_acceleration: "ServerlessVectorAccelerationStatus", # required
+    #       },
     #       created_date: 1,
-    #       last_modified_date: 1
+    #       last_modified_date: 1,
+    #       collection_group_name: "CollectionGroupName"
     #     }
     #   }
     # @return [Types::CreateCollectionOutput]
     def create_collection(params = {}, options = {})
       request = build_request(:create_collection, params)
+      request.send_request(options)
+    end
+
+    # <p>Creates a collection group within OpenSearch Serverless. Collection groups let you manage OpenSearch Compute Units (OCUs) at a group level, with multiple collections sharing the group's capacity limits.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-collection-groups.html">Managing collection groups</a>.</p>
+    # @param [Hash, Types::CreateCollectionGroupRequest] params
+    # @option params [String] :name
+    #   <p>The name of the collection group.</p>
+    # @option params [String] :standby_replicas
+    #   <p>Indicates whether standby replicas should be used for a collection group.</p>
+    # @option params [String] :description
+    #   <p>A description of the collection group.</p>
+    # @option params [Array<Types::Tag>] :tags
+    #   <p>An arbitrary set of tags (key–value pairs) to associate with the OpenSearch Serverless collection group.</p>
+    # @option params [Types::CollectionGroupCapacityLimits] :capacity_limits
+    #   <p>The capacity limits for the collection group, in OpenSearch Compute Units (OCUs). These limits control the maximum and minimum capacity for collections within the group.</p>
+    # @option params [String] :generation
+    #   <p>The generation of Amazon OpenSearch Serverless for the collection group. Valid values are <code>CLASSIC</code> and <code>NEXTGEN</code>.</p>
+    # @option params [String] :client_token
+    #   <p>Unique, case-sensitive identifier to ensure idempotency of the request.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     name: "CollectionGroupName", # required
+    #     standby_replicas: "StandbyReplicas", # required
+    #     description: "String",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       }
+    #     ],
+    #     capacity_limits: {
+    #       max_indexing_capacity_in_ocu: 1.0,
+    #       max_search_capacity_in_ocu: 1.0,
+    #       min_indexing_capacity_in_ocu: 1.0,
+    #       min_search_capacity_in_ocu: 1.0
+    #     },
+    #     generation: "ServerlessGeneration",
+    #     client_token: "ClientToken"
+    #   }
+    #   options = {}
+    #   response = client.create_collection_group(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     create_collection_group_detail: {
+    #       id: "CollectionGroupId",
+    #       arn: "String",
+    #       name: "CollectionGroupName",
+    #       standby_replicas: "StandbyReplicas",
+    #       description: "String",
+    #       tags: [
+    #         {
+    #           key: "TagKey", # required
+    #           value: "TagValue", # required
+    #         }
+    #       ],
+    #       created_date: 1,
+    #       capacity_limits: {
+    #         max_indexing_capacity_in_ocu: 1.0,
+    #         max_search_capacity_in_ocu: 1.0,
+    #         min_indexing_capacity_in_ocu: 1.0,
+    #         min_search_capacity_in_ocu: 1.0
+    #       },
+    #       generation: "ServerlessGeneration"
+    #     }
+    #   }
+    # @return [Types::CreateCollectionGroupResponse]
+    def create_collection_group(params = {}, options = {})
+      request = build_request(:create_collection_group, params)
       request.send_request(options)
     end
 
@@ -557,9 +718,9 @@ module Aws::OpenSearchServerless
     # @option params [String] :description
     #   <p>A description of the security configuration.</p>
     # @option params [Types::SamlConfigOptions] :saml_options
-    #   <p>Describes SAML options in in the form of a key-value map. This field is required if you specify <code>SAML</code> for the <code>type</code> parameter.</p>
+    #   <p>Describes SAML options in the form of a key-value map. This field is required if you specify <code>SAML</code> for the <code>type</code> parameter.</p>
     # @option params [Types::CreateIamIdentityCenterConfigOptions] :iam_identity_center_options
-    #   <p>Describes IAM Identity Center options in the form of a key-value map. This field is required if you specify iamidentitycenter for the type parameter.</p>
+    #   <p>Describes IAM Identity Center options in the form of a key-value map. This field is required if you specify <code>iamidentitycenter</code> for the <code>type</code> parameter.</p>
     # @option params [Types::IamFederationConfigOptions] :iam_federation_options
     #   <p>Describes IAM federation options in the form of a key-value map. This field is required if you specify <code>iamFederation</code> for the <code>type</code> parameter.</p>
     # @option params [String] :client_token
@@ -748,12 +909,35 @@ module Aws::OpenSearchServerless
     #     delete_collection_detail: {
     #       id: "CollectionId",
     #       name: "CollectionName",
-    #       status: "CollectionStatus"
+    #       status: "CollectionStatus",
+    #       deletion_protection: "DeletionProtection"
     #     }
     #   }
     # @return [Types::DeleteCollectionOutput]
     def delete_collection(params = {}, options = {})
       request = build_request(:delete_collection, params)
+      request.send_request(options)
+    end
+
+    # <p>Deletes a collection group. You can only delete empty collection groups that contain no collections. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-manage.html">Creating and managing Amazon OpenSearch Serverless collections</a>.</p>
+    # @param [Hash, Types::DeleteCollectionGroupRequest] params
+    # @option params [String] :id
+    #   <p>The unique identifier of the collection group to delete.</p>
+    # @option params [String] :client_token
+    #   <p>Unique, case-sensitive identifier to ensure idempotency of the request.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     id: "CollectionGroupId", # required
+    #     client_token: "ClientToken"
+    #   }
+    #   options = {}
+    #   response = client.delete_collection_group(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::DeleteCollectionGroupResponse]
+    def delete_collection_group(params = {}, options = {})
+      request = build_request(:delete_collection_group, params)
       request.send_request(options)
     end
 
@@ -1106,6 +1290,46 @@ module Aws::OpenSearchServerless
       request.send_request(options)
     end
 
+    # <p>Returns a list of collection groups. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-manage.html">Creating and managing Amazon OpenSearch Serverless collections</a>.</p>
+    # @param [Hash, Types::ListCollectionGroupsRequest] params
+    # @option params [String] :next_token
+    #   <p>If your initial <code>ListCollectionGroups</code> operation returns a <code>nextToken</code>, you can include the returned <code>nextToken</code> in subsequent <code>ListCollectionGroups</code> operations, which returns results in the next page.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return. Default is 20. You can use <code>nextToken</code> to get the next page of results.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     next_token: "String",
+    #     max_results: 1
+    #   }
+    #   options = {}
+    #   response = client.list_collection_groups(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     collection_group_summaries: [
+    #       {
+    #         id: "CollectionGroupId",
+    #         arn: "String",
+    #         name: "CollectionGroupName",
+    #         number_of_collections: 1,
+    #         created_date: 1,
+    #         capacity_limits: {
+    #           max_indexing_capacity_in_ocu: 1.0,
+    #           max_search_capacity_in_ocu: 1.0,
+    #           min_indexing_capacity_in_ocu: 1.0,
+    #           min_search_capacity_in_ocu: 1.0
+    #         },
+    #         generation: "ServerlessGeneration"
+    #       }
+    #     ],
+    #     next_token: "String"
+    #   }
+    # @return [Types::ListCollectionGroupsResponse]
+    def list_collection_groups(params = {}, options = {})
+      request = build_request(:list_collection_groups, params)
+      request.send_request(options)
+    end
+
     # <p>Lists all OpenSearch Serverless collections. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-manage.html">Creating and managing Amazon OpenSearch Serverless collections</a>.</p> <note> <p>Make sure to include an empty request body {} if you don't include any collection filters in the request.</p> </note>
     # @param [Hash, Types::ListCollectionsInput] params
     # @option params [Types::CollectionFilters] :collection_filters
@@ -1118,7 +1342,8 @@ module Aws::OpenSearchServerless
     #   params = {
     #     collection_filters: {
     #       name: "CollectionName",
-    #       status: "CollectionStatus"
+    #       status: "CollectionStatus",
+    #       collection_group_name: "CollectionGroupName"
     #     },
     #     next_token: "String",
     #     max_results: 1
@@ -1133,7 +1358,9 @@ module Aws::OpenSearchServerless
     #         id: "CollectionId",
     #         name: "CollectionName",
     #         status: "CollectionStatus",
-    #         arn: "String"
+    #         arn: "String",
+    #         kms_key_arn: "String",
+    #         collection_group_name: "CollectionGroupName"
     #       }
     #     ],
     #     next_token: "String"
@@ -1451,12 +1678,20 @@ module Aws::OpenSearchServerless
     #   <p>The unique identifier of the collection.</p>
     # @option params [String] :description
     #   <p>A description of the collection.</p>
+    # @option params [Types::VectorOptions] :vector_options
+    #   <p>Configuration options for vector search capabilities in the collection.</p>
+    # @option params [String] :deletion_protection
+    #   <p>Indicates whether to enable or disable deletion protection for the collection. When set to <code>ENABLED</code>, the collection cannot be deleted.</p>
     # @option params [String] :client_token
     #   <p>Unique, case-sensitive identifier to ensure idempotency of the request.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     id: "CollectionId", # required
     #     description: "String",
+    #     vector_options: {
+    #       serverless_vector_acceleration: "ServerlessVectorAccelerationStatus", # required
+    #     },
+    #     deletion_protection: "DeletionProtection",
     #     client_token: "ClientToken"
     #   }
     #   options = {}
@@ -1470,14 +1705,67 @@ module Aws::OpenSearchServerless
     #       status: "CollectionStatus",
     #       type: "CollectionType",
     #       description: "String",
+    #       vector_options: {
+    #         serverless_vector_acceleration: "ServerlessVectorAccelerationStatus", # required
+    #       },
     #       arn: "String",
     #       created_date: 1,
-    #       last_modified_date: 1
+    #       last_modified_date: 1,
+    #       deletion_protection: "DeletionProtection"
     #     }
     #   }
     # @return [Types::UpdateCollectionOutput]
     def update_collection(params = {}, options = {})
       request = build_request(:update_collection, params)
+      request.send_request(options)
+    end
+
+    # <p>Updates the description and capacity limits of a collection group.</p>
+    # @param [Hash, Types::UpdateCollectionGroupRequest] params
+    # @option params [String] :id
+    #   <p>The unique identifier of the collection group to update.</p>
+    # @option params [String] :description
+    #   <p>A new description for the collection group.</p>
+    # @option params [Types::CollectionGroupCapacityLimits] :capacity_limits
+    #   <p>Updated capacity limits for the collection group, in OpenSearch Compute Units (OCUs).</p>
+    # @option params [String] :client_token
+    #   <p>Unique, case-sensitive identifier to ensure idempotency of the request.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     id: "CollectionGroupId", # required
+    #     description: "String",
+    #     capacity_limits: {
+    #       max_indexing_capacity_in_ocu: 1.0,
+    #       max_search_capacity_in_ocu: 1.0,
+    #       min_indexing_capacity_in_ocu: 1.0,
+    #       min_search_capacity_in_ocu: 1.0
+    #     },
+    #     client_token: "ClientToken"
+    #   }
+    #   options = {}
+    #   response = client.update_collection_group(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     update_collection_group_detail: {
+    #       id: "CollectionGroupId",
+    #       arn: "String",
+    #       name: "CollectionGroupName",
+    #       description: "String",
+    #       capacity_limits: {
+    #         max_indexing_capacity_in_ocu: 1.0,
+    #         max_search_capacity_in_ocu: 1.0,
+    #         min_indexing_capacity_in_ocu: 1.0,
+    #         min_search_capacity_in_ocu: 1.0
+    #       },
+    #       created_date: 1,
+    #       last_modified_date: 1,
+    #       generation: "ServerlessGeneration"
+    #     }
+    #   }
+    # @return [Types::UpdateCollectionGroupResponse]
+    def update_collection_group(params = {}, options = {})
+      request = build_request(:update_collection_group, params)
       request.send_request(options)
     end
 

@@ -144,18 +144,18 @@ module Aws::PCS
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -246,8 +246,23 @@ module Aws::PCS
     #           parameter_value: "String", # required
     #         }
     #       ],
+    #       slurmdbd_custom_settings: [
+    #         {
+    #           parameter_name: "String", # required
+    #           parameter_value: "String", # required
+    #         }
+    #       ],
+    #       cgroup_custom_settings: [
+    #         {
+    #           parameter_name: "String", # required
+    #           parameter_value: "String", # required
+    #         }
+    #       ],
     #       accounting: {
     #         default_purge_time_in_days: 1,
+    #         mode: "STANDARD" # One of: ["STANDARD", "NONE"], # required
+    #       },
+    #       slurm_rest: {
     #         mode: "STANDARD" # One of: ["STANDARD", "NONE"], # required
     #       }
     #     },
@@ -265,7 +280,7 @@ module Aws::PCS
     #       name: "String", # required
     #       id: "String", # required
     #       arn: "String", # required
-    #       status: "CREATING" # One of: ["CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED", "UPDATE_FAILED", "SUSPENDING", "SUSPENDED"], # required
+    #       status: "CREATING" # One of: ["CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED", "UPDATE_FAILED", "SUSPENDING", "SUSPENDED", "RESUMING"], # required
     #       created_at: Time.now, # required
     #       modified_at: Time.now, # required
     #       scheduler: { # required
@@ -281,12 +296,33 @@ module Aws::PCS
     #             parameter_value: "String", # required
     #           }
     #         ],
+    #         slurmdbd_custom_settings: [
+    #           {
+    #             parameter_name: "String", # required
+    #             parameter_value: "String", # required
+    #           }
+    #         ],
+    #         cgroup_custom_settings: [
+    #           {
+    #             parameter_name: "String", # required
+    #             parameter_value: "String", # required
+    #           }
+    #         ],
     #         auth_key: {
     #           secret_arn: "String", # required
     #           secret_version: "String", # required
     #         },
+    #         jwt_auth: {
+    #           jwt_key: {
+    #             secret_arn: "String", # required
+    #             secret_version: "String", # required
+    #           }
+    #         },
     #         accounting: {
     #           default_purge_time_in_days: 1,
+    #           mode: "STANDARD" # One of: ["STANDARD", "NONE"], # required
+    #         },
+    #         slurm_rest: {
     #           mode: "STANDARD" # One of: ["STANDARD", "NONE"], # required
     #         }
     #       },
@@ -297,7 +333,7 @@ module Aws::PCS
     #       },
     #       endpoints: [
     #         {
-    #           type: "SLURMCTLD" # One of: ["SLURMCTLD", "SLURMDBD"], # required
+    #           type: "SLURMCTLD" # One of: ["SLURMCTLD", "SLURMDBD", "SLURMRESTD"], # required
     #           private_ip_address: "String", # required
     #           public_ip_address: "String",
     #           ipv6_address: "String",
@@ -329,7 +365,7 @@ module Aws::PCS
     # @option params [Array<String>] :subnet_ids
     #   <p>The list of subnet IDs where the compute node group launches instances. Subnets must be in the same VPC as the cluster.</p>
     # @option params [String] :purchase_option
-    #   <p>Specifies how EC2 instances are purchased on your behalf. PCS supports On-Demand Instances, Spot Instances, and Amazon EC2 Capacity Blocks for ML. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html">Amazon EC2 billing and purchasing options</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. For more information about PCS support for Capacity Blocks, see <a href="https://docs.aws.amazon.com/pcs/latest/userguide/capacity-blocks.html">Using Amazon EC2 Capacity Blocks for ML with PCS</a> in the <i>PCS User Guide</i>. If you don't provide this option, it defaults to On-Demand.</p>
+    #   <p>Specifies how EC2 instances are purchased on your behalf. PCS supports On-Demand Instances, Spot Instances, Interruptible Capacity Reservations, On-Demand Capacity Reservations, and Amazon EC2 Capacity Blocks for ML. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html">Amazon EC2 billing and purchasing options</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. For more information about PCS support for Capacity Blocks, see <a href="https://docs.aws.amazon.com/pcs/latest/userguide/capacity-blocks.html">Using Amazon EC2 Capacity Blocks for ML with PCS</a> in the <i>PCS User Guide</i>. For more information about PCS support for interruptible capacity reservations, see <a href="https://docs.aws.amazon.com/pcs/latest/userguide/capacity-reservations-iodcr.html">Using I-ODCRs with PCS</a> in the <i>PCS User Guide</i>. Choose On-Demand if you plan to use an On-Demand Capacity Reservation (ODCR). For more information, see <a href="https://docs.aws.amazon.com/pcs/latest/userguide/capacity-reservations-odcr.html">Using ODCRs with PCS</a>. If you don't provide this option, it defaults to On-Demand.</p>
     # @option params [Types::CustomLaunchTemplate] :custom_launch_template
     #   <p>An Amazon EC2 launch template PCS uses to launch compute nodes.</p>
     # @option params [String] :iam_instance_profile_arn
@@ -342,6 +378,8 @@ module Aws::PCS
     #   <p>Additional configuration when you specify <code>SPOT</code> as the <code>purchaseOption</code> for the <code>CreateComputeNodeGroup</code> API action.</p>
     # @option params [Types::ComputeNodeGroupSlurmConfigurationRequest] :slurm_configuration
     #   <p>Additional options related to the Slurm scheduler.</p>
+    # @option params [Types::NodeLifecycleActionsRequest] :node_lifecycle_actions
+    #   <p>The lifecycle actions to run on compute nodes in the compute node group. Use lifecycle actions to run custom scripts at defined stages of a compute node's lifecycle, such as when a compute node finishes bootstrapping or becomes ready to accept jobs.</p>
     # @option params [String] :client_token
     #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully, the subsequent retries with the same client token return the result from the original successful request and they have no additional effect. If you don't specify a client token, the CLI and SDK automatically generate 1 for you.</p>
     # @option params [Hash<String, String>] :tags
@@ -352,7 +390,7 @@ module Aws::PCS
     #     compute_node_group_name: "ComputeNodeGroupName", # required
     #     ami_id: "AmiId",
     #     subnet_ids: ["String"], # required
-    #     purchase_option: "ONDEMAND" # One of: ["ONDEMAND", "SPOT", "CAPACITY_BLOCK"],
+    #     purchase_option: "ONDEMAND" # One of: ["ONDEMAND", "SPOT", "CAPACITY_BLOCK", "INTERRUPTIBLE_CAPACITY_RESERVATION"],
     #     custom_launch_template: { # required
     #       id: "String", # required
     #       version: "String", # required
@@ -371,12 +409,49 @@ module Aws::PCS
     #       allocation_strategy: "lowest-price" # One of: ["lowest-price", "capacity-optimized", "price-capacity-optimized"]
     #     },
     #     slurm_configuration: {
+    #       scale_down_idle_time_in_seconds: 1,
     #       slurm_custom_settings: [
     #         {
     #           parameter_name: "String", # required
     #           parameter_value: "String", # required
     #         }
+    #       ],
+    #       gres_custom_settings: [
+    #         {
+    #           "String" => "String"
+    #         }
     #       ]
+    #     },
+    #     node_lifecycle_actions: {
+    #       stages: { # required
+    #         node_bootstrapped: [
+    #           {
+    #             name: "String", # required
+    #             script_source: { # required
+    #               script_location: "String", # required
+    #               s3_version_id: "String",
+    #               checksum: "String"
+    #             },
+    #             arguments: ["NodeLifecycleScriptArgument"],
+    #             on_error: "TERMINATE" # One of: ["TERMINATE", "STOP_SEQUENCE", "CONTINUE"],
+    #             execution_policy: "FIRST_BOOT_ONLY" # One of: ["FIRST_BOOT_ONLY", "EVERY_BOOT"]
+    #           }
+    #         ],
+    #         node_ready: [
+    #           {
+    #             name: "String", # required
+    #             script_source: { # required
+    #               script_location: "String", # required
+    #               s3_version_id: "String",
+    #               checksum: "String"
+    #             },
+    #             arguments: ["NodeLifecycleScriptArgument"],
+    #             on_error: "TERMINATE" # One of: ["TERMINATE", "STOP_SEQUENCE", "CONTINUE"],
+    #             execution_policy: "FIRST_BOOT_ONLY" # One of: ["FIRST_BOOT_ONLY", "EVERY_BOOT"]
+    #           }
+    #         ]
+    #       },
+    #       script_caching_policy: "CACHE_ONCE" # One of: ["CACHE_ONCE", "REFRESH_ON_REBOOT"]
     #     },
     #     client_token: "SBClientToken",
     #     tags: {
@@ -395,10 +470,10 @@ module Aws::PCS
     #       cluster_id: "String", # required
     #       created_at: Time.now, # required
     #       modified_at: Time.now, # required
-    #       status: "CREATING" # One of: ["CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED", "UPDATE_FAILED", "DELETED", "SUSPENDING", "SUSPENDED"], # required
+    #       status: "CREATING" # One of: ["CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED", "UPDATE_FAILED", "DELETED", "SUSPENDING", "SUSPENDED", "RESUMING"], # required
     #       ami_id: "AmiId",
     #       subnet_ids: ["SubnetId"], # required
-    #       purchase_option: "ONDEMAND" # One of: ["ONDEMAND", "SPOT", "CAPACITY_BLOCK"],
+    #       purchase_option: "ONDEMAND" # One of: ["ONDEMAND", "SPOT", "CAPACITY_BLOCK", "INTERRUPTIBLE_CAPACITY_RESERVATION"],
     #       custom_launch_template: { # required
     #         id: "String", # required
     #         version: "String", # required
@@ -417,12 +492,49 @@ module Aws::PCS
     #         allocation_strategy: "lowest-price" # One of: ["lowest-price", "capacity-optimized", "price-capacity-optimized"]
     #       },
     #       slurm_configuration: {
+    #         scale_down_idle_time_in_seconds: 1,
     #         slurm_custom_settings: [
     #           {
     #             parameter_name: "String", # required
     #             parameter_value: "String", # required
     #           }
+    #         ],
+    #         gres_custom_settings: [
+    #           {
+    #             "String" => "String"
+    #           }
     #         ]
+    #       },
+    #       node_lifecycle_actions: {
+    #         stages: { # required
+    #           node_bootstrapped: [
+    #             {
+    #               name: "String", # required
+    #               script_source: { # required
+    #                 script_location: "String", # required
+    #                 s3_version_id: "String",
+    #                 checksum: "String"
+    #               },
+    #               arguments: ["NodeLifecycleScriptArgument"],
+    #               on_error: "TERMINATE" # One of: ["TERMINATE", "STOP_SEQUENCE", "CONTINUE"],
+    #               execution_policy: "FIRST_BOOT_ONLY" # One of: ["FIRST_BOOT_ONLY", "EVERY_BOOT"]
+    #             }
+    #           ],
+    #           node_ready: [
+    #             {
+    #               name: "String", # required
+    #               script_source: { # required
+    #                 script_location: "String", # required
+    #                 s3_version_id: "String",
+    #                 checksum: "String"
+    #               },
+    #               arguments: ["NodeLifecycleScriptArgument"],
+    #               on_error: "TERMINATE" # One of: ["TERMINATE", "STOP_SEQUENCE", "CONTINUE"],
+    #               execution_policy: "FIRST_BOOT_ONLY" # One of: ["FIRST_BOOT_ONLY", "EVERY_BOOT"]
+    #             }
+    #           ]
+    #         },
+    #         script_caching_policy: "CACHE_ONCE" # One of: ["CACHE_ONCE", "REFRESH_ON_REBOOT"]
     #       },
     #       error_info: [
     #         {
@@ -486,7 +598,7 @@ module Aws::PCS
     #       cluster_id: "String", # required
     #       created_at: Time.now, # required
     #       modified_at: Time.now, # required
-    #       status: "CREATING" # One of: ["CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED", "UPDATE_FAILED", "SUSPENDING", "SUSPENDED"], # required
+    #       status: "CREATING" # One of: ["CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED", "UPDATE_FAILED", "SUSPENDING", "SUSPENDED", "RESUMING"], # required
     #       compute_node_group_configurations: [ # required
     #         {
     #           compute_node_group_id: "String"
@@ -603,7 +715,7 @@ module Aws::PCS
     #       name: "String", # required
     #       id: "String", # required
     #       arn: "String", # required
-    #       status: "CREATING" # One of: ["CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED", "UPDATE_FAILED", "SUSPENDING", "SUSPENDED"], # required
+    #       status: "CREATING" # One of: ["CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED", "UPDATE_FAILED", "SUSPENDING", "SUSPENDED", "RESUMING"], # required
     #       created_at: Time.now, # required
     #       modified_at: Time.now, # required
     #       scheduler: { # required
@@ -619,12 +731,33 @@ module Aws::PCS
     #             parameter_value: "String", # required
     #           }
     #         ],
+    #         slurmdbd_custom_settings: [
+    #           {
+    #             parameter_name: "String", # required
+    #             parameter_value: "String", # required
+    #           }
+    #         ],
+    #         cgroup_custom_settings: [
+    #           {
+    #             parameter_name: "String", # required
+    #             parameter_value: "String", # required
+    #           }
+    #         ],
     #         auth_key: {
     #           secret_arn: "String", # required
     #           secret_version: "String", # required
     #         },
+    #         jwt_auth: {
+    #           jwt_key: {
+    #             secret_arn: "String", # required
+    #             secret_version: "String", # required
+    #           }
+    #         },
     #         accounting: {
     #           default_purge_time_in_days: 1,
+    #           mode: "STANDARD" # One of: ["STANDARD", "NONE"], # required
+    #         },
+    #         slurm_rest: {
     #           mode: "STANDARD" # One of: ["STANDARD", "NONE"], # required
     #         }
     #       },
@@ -635,7 +768,7 @@ module Aws::PCS
     #       },
     #       endpoints: [
     #         {
-    #           type: "SLURMCTLD" # One of: ["SLURMCTLD", "SLURMDBD"], # required
+    #           type: "SLURMCTLD" # One of: ["SLURMCTLD", "SLURMDBD", "SLURMRESTD"], # required
     #           private_ip_address: "String", # required
     #           public_ip_address: "String",
     #           ipv6_address: "String",
@@ -679,10 +812,10 @@ module Aws::PCS
     #       cluster_id: "String", # required
     #       created_at: Time.now, # required
     #       modified_at: Time.now, # required
-    #       status: "CREATING" # One of: ["CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED", "UPDATE_FAILED", "DELETED", "SUSPENDING", "SUSPENDED"], # required
+    #       status: "CREATING" # One of: ["CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED", "UPDATE_FAILED", "DELETED", "SUSPENDING", "SUSPENDED", "RESUMING"], # required
     #       ami_id: "AmiId",
     #       subnet_ids: ["SubnetId"], # required
-    #       purchase_option: "ONDEMAND" # One of: ["ONDEMAND", "SPOT", "CAPACITY_BLOCK"],
+    #       purchase_option: "ONDEMAND" # One of: ["ONDEMAND", "SPOT", "CAPACITY_BLOCK", "INTERRUPTIBLE_CAPACITY_RESERVATION"],
     #       custom_launch_template: { # required
     #         id: "String", # required
     #         version: "String", # required
@@ -701,12 +834,49 @@ module Aws::PCS
     #         allocation_strategy: "lowest-price" # One of: ["lowest-price", "capacity-optimized", "price-capacity-optimized"]
     #       },
     #       slurm_configuration: {
+    #         scale_down_idle_time_in_seconds: 1,
     #         slurm_custom_settings: [
     #           {
     #             parameter_name: "String", # required
     #             parameter_value: "String", # required
     #           }
+    #         ],
+    #         gres_custom_settings: [
+    #           {
+    #             "String" => "String"
+    #           }
     #         ]
+    #       },
+    #       node_lifecycle_actions: {
+    #         stages: { # required
+    #           node_bootstrapped: [
+    #             {
+    #               name: "String", # required
+    #               script_source: { # required
+    #                 script_location: "String", # required
+    #                 s3_version_id: "String",
+    #                 checksum: "String"
+    #               },
+    #               arguments: ["NodeLifecycleScriptArgument"],
+    #               on_error: "TERMINATE" # One of: ["TERMINATE", "STOP_SEQUENCE", "CONTINUE"],
+    #               execution_policy: "FIRST_BOOT_ONLY" # One of: ["FIRST_BOOT_ONLY", "EVERY_BOOT"]
+    #             }
+    #           ],
+    #           node_ready: [
+    #             {
+    #               name: "String", # required
+    #               script_source: { # required
+    #                 script_location: "String", # required
+    #                 s3_version_id: "String",
+    #                 checksum: "String"
+    #               },
+    #               arguments: ["NodeLifecycleScriptArgument"],
+    #               on_error: "TERMINATE" # One of: ["TERMINATE", "STOP_SEQUENCE", "CONTINUE"],
+    #               execution_policy: "FIRST_BOOT_ONLY" # One of: ["FIRST_BOOT_ONLY", "EVERY_BOOT"]
+    #             }
+    #           ]
+    #         },
+    #         script_caching_policy: "CACHE_ONCE" # One of: ["CACHE_ONCE", "REFRESH_ON_REBOOT"]
     #       },
     #       error_info: [
     #         {
@@ -745,7 +915,7 @@ module Aws::PCS
     #       cluster_id: "String", # required
     #       created_at: Time.now, # required
     #       modified_at: Time.now, # required
-    #       status: "CREATING" # One of: ["CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED", "UPDATE_FAILED", "SUSPENDING", "SUSPENDED"], # required
+    #       status: "CREATING" # One of: ["CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED", "UPDATE_FAILED", "SUSPENDING", "SUSPENDED", "RESUMING"], # required
     #       compute_node_group_configurations: [ # required
     #         {
     #           compute_node_group_id: "String"
@@ -796,7 +966,7 @@ module Aws::PCS
     #         arn: "String", # required
     #         created_at: Time.now, # required
     #         modified_at: Time.now, # required
-    #         status: "CREATING" # One of: ["CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED", "UPDATE_FAILED", "SUSPENDING", "SUSPENDED"], # required
+    #         status: "CREATING" # One of: ["CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED", "UPDATE_FAILED", "SUSPENDING", "SUSPENDED", "RESUMING"], # required
     #       }
     #     ],
     #     next_token: "String"
@@ -834,7 +1004,7 @@ module Aws::PCS
     #         cluster_id: "String", # required
     #         created_at: Time.now, # required
     #         modified_at: Time.now, # required
-    #         status: "CREATING" # One of: ["CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED", "UPDATE_FAILED", "DELETED", "SUSPENDING", "SUSPENDED"], # required
+    #         status: "CREATING" # One of: ["CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED", "UPDATE_FAILED", "DELETED", "SUSPENDING", "SUSPENDED", "RESUMING"], # required
     #       }
     #     ],
     #     next_token: "String"
@@ -872,7 +1042,7 @@ module Aws::PCS
     #         cluster_id: "String", # required
     #         created_at: Time.now, # required
     #         modified_at: Time.now, # required
-    #         status: "CREATING" # One of: ["CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED", "UPDATE_FAILED", "SUSPENDING", "SUSPENDED"], # required
+    #         status: "CREATING" # One of: ["CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED", "UPDATE_FAILED", "SUSPENDING", "SUSPENDED", "RESUMING"], # required
     #       }
     #     ],
     #     next_token: "String"
@@ -926,13 +1096,48 @@ module Aws::PCS
     #     shared_secret: "SharedSecret", # required
     #     endpoints: [ # required
     #       {
-    #         type: "SLURMCTLD" # One of: ["SLURMCTLD", "SLURMDBD"], # required
+    #         type: "SLURMCTLD" # One of: ["SLURMCTLD", "SLURMDBD", "SLURMRESTD"], # required
     #         private_ip_address: "String", # required
     #         public_ip_address: "String",
     #         ipv6_address: "String",
     #         port: "String", # required
     #       }
-    #     ]
+    #     ],
+    #     cluster_name: "String",
+    #     compute_node_group_id: "String",
+    #     compute_node_group_name: "String",
+    #     node_lifecycle_actions: {
+    #       stages: { # required
+    #         node_bootstrapped: [
+    #           {
+    #             name: "String", # required
+    #             script_source: { # required
+    #               script_location: "String", # required
+    #               s3_version_id: "String",
+    #               checksum: "String"
+    #             },
+    #             arguments: ["NodeLifecycleScriptArgument"],
+    #             on_error: "TERMINATE" # One of: ["TERMINATE", "STOP_SEQUENCE", "CONTINUE"],
+    #             execution_policy: "FIRST_BOOT_ONLY" # One of: ["FIRST_BOOT_ONLY", "EVERY_BOOT"]
+    #           }
+    #         ],
+    #         node_ready: [
+    #           {
+    #             name: "String", # required
+    #             script_source: { # required
+    #               script_location: "String", # required
+    #               s3_version_id: "String",
+    #               checksum: "String"
+    #             },
+    #             arguments: ["NodeLifecycleScriptArgument"],
+    #             on_error: "TERMINATE" # One of: ["TERMINATE", "STOP_SEQUENCE", "CONTINUE"],
+    #             execution_policy: "FIRST_BOOT_ONLY" # One of: ["FIRST_BOOT_ONLY", "EVERY_BOOT"]
+    #           }
+    #         ]
+    #       },
+    #       script_caching_policy: "CACHE_ONCE" # One of: ["CACHE_ONCE", "REFRESH_ON_REBOOT"]
+    #     },
+    #     scheduler_version: "String"
     #   }
     # @return [Types::RegisterComputeNodeGroupInstanceResponse]
     def register_compute_node_group_instance(params = {}, options = {})
@@ -958,7 +1163,7 @@ module Aws::PCS
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {}
-    # @return [Smithy::Schema::EmptyStructure]
+    # @return [Types::TagResourceResponse]
     def tag_resource(params = {}, options = {})
       request = build_request(:tag_resource, params)
       request.send_request(options)
@@ -980,13 +1185,13 @@ module Aws::PCS
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {}
-    # @return [Smithy::Schema::EmptyStructure]
+    # @return [Types::UntagResourceResponse]
     def untag_resource(params = {}, options = {})
       request = build_request(:untag_resource, params)
       request.send_request(options)
     end
 
-    # <p>Updates a cluster configuration. You can modify Slurm scheduler settings, accounting configuration, and security groups for an existing cluster. </p> <note> <p>You can only update clusters that are in <code>ACTIVE</code>, <code>UPDATE_FAILED</code>, or <code>SUSPENDED</code> state. All associated resources (queues and compute node groups) must be in <code>ACTIVE</code> state before you can update the cluster.</p> </note>
+    # <p>Updates a cluster configuration. You can update the scheduler version, modify scheduler settings, and update accounting configuration for an existing cluster. For more information about updating the scheduler version, see <a href="https://docs.aws.amazon.com/pcs/latest/userguide/working-with_clusters_version_update.html">Updating the scheduler version on a cluster</a> in the <i>PCS User Guide</i>. </p> <note> <p>You can only update clusters that are in <code>ACTIVE</code>, <code>UPDATE_FAILED</code>, or <code>SUSPENDED</code> state. All associated resources (queues and compute node groups) must be in <code>ACTIVE</code> state before you can update the cluster.</p> </note>
     # @param [Hash, Types::UpdateClusterRequest] params
     # @option params [String] :cluster_identifier
     #   <p>The name or ID of the cluster to update.</p>
@@ -994,6 +1199,8 @@ module Aws::PCS
     #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully, the subsequent retries with the same client token return the result from the original successful request and they have no additional effect. If you don't specify a client token, the CLI and SDK automatically generate 1 for you.</p>
     # @option params [Types::UpdateClusterSlurmConfigurationRequest] :slurm_configuration
     #   <p>Additional options related to the Slurm scheduler.</p>
+    # @option params [Types::UpdateSchedulerRequest] :scheduler
+    #   <p>The scheduler configuration to update for the cluster. Use this to update the scheduler version. For more information, see <a href="https://docs.aws.amazon.com/pcs/latest/userguide/working-with_clusters_version_update.html">Updating the scheduler version on a cluster</a> in the <i>PCS User Guide</i>.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     cluster_identifier: "ClusterIdentifier", # required
@@ -1006,10 +1213,28 @@ module Aws::PCS
     #           parameter_value: "String", # required
     #         }
     #       ],
+    #       slurmdbd_custom_settings: [
+    #         {
+    #           parameter_name: "String", # required
+    #           parameter_value: "String", # required
+    #         }
+    #       ],
+    #       cgroup_custom_settings: [
+    #         {
+    #           parameter_name: "String", # required
+    #           parameter_value: "String", # required
+    #         }
+    #       ],
     #       accounting: {
     #         default_purge_time_in_days: 1,
     #         mode: "STANDARD" # One of: ["STANDARD", "NONE"]
+    #       },
+    #       slurm_rest: {
+    #         mode: "STANDARD" # One of: ["STANDARD", "NONE"]
     #       }
+    #     },
+    #     scheduler: {
+    #       version: "String", # required
     #     }
     #   }
     #   options = {}
@@ -1021,7 +1246,7 @@ module Aws::PCS
     #       name: "String", # required
     #       id: "String", # required
     #       arn: "String", # required
-    #       status: "CREATING" # One of: ["CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED", "UPDATE_FAILED", "SUSPENDING", "SUSPENDED"], # required
+    #       status: "CREATING" # One of: ["CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED", "UPDATE_FAILED", "SUSPENDING", "SUSPENDED", "RESUMING"], # required
     #       created_at: Time.now, # required
     #       modified_at: Time.now, # required
     #       scheduler: { # required
@@ -1037,12 +1262,33 @@ module Aws::PCS
     #             parameter_value: "String", # required
     #           }
     #         ],
+    #         slurmdbd_custom_settings: [
+    #           {
+    #             parameter_name: "String", # required
+    #             parameter_value: "String", # required
+    #           }
+    #         ],
+    #         cgroup_custom_settings: [
+    #           {
+    #             parameter_name: "String", # required
+    #             parameter_value: "String", # required
+    #           }
+    #         ],
     #         auth_key: {
     #           secret_arn: "String", # required
     #           secret_version: "String", # required
     #         },
+    #         jwt_auth: {
+    #           jwt_key: {
+    #             secret_arn: "String", # required
+    #             secret_version: "String", # required
+    #           }
+    #         },
     #         accounting: {
     #           default_purge_time_in_days: 1,
+    #           mode: "STANDARD" # One of: ["STANDARD", "NONE"], # required
+    #         },
+    #         slurm_rest: {
     #           mode: "STANDARD" # One of: ["STANDARD", "NONE"], # required
     #         }
     #       },
@@ -1053,7 +1299,7 @@ module Aws::PCS
     #       },
     #       endpoints: [
     #         {
-    #           type: "SLURMCTLD" # One of: ["SLURMCTLD", "SLURMDBD"], # required
+    #           type: "SLURMCTLD" # One of: ["SLURMCTLD", "SLURMDBD", "SLURMRESTD"], # required
     #           private_ip_address: "String", # required
     #           public_ip_address: "String",
     #           ipv6_address: "String",
@@ -1087,7 +1333,7 @@ module Aws::PCS
     # @option params [Types::CustomLaunchTemplate] :custom_launch_template
     #   <p>An Amazon EC2 launch template PCS uses to launch compute nodes.</p>
     # @option params [String] :purchase_option
-    #   <p>Specifies how EC2 instances are purchased on your behalf. PCS supports On-Demand Instances, Spot Instances, and Amazon EC2 Capacity Blocks for ML. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html">Amazon EC2 billing and purchasing options</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. For more information about PCS support for Capacity Blocks, see <a href="https://docs.aws.amazon.com/pcs/latest/userguide/capacity-blocks.html">Using Amazon EC2 Capacity Blocks for ML with PCS</a> in the <i>PCS User Guide</i>. If you don't provide this option, it defaults to On-Demand.</p>
+    #   <p>Specifies how EC2 instances are purchased on your behalf. PCS supports On-Demand Instances, Spot Instances, Interruptible Capacity Reservations, On-Demand Capacity Reservations, and Amazon EC2 Capacity Blocks for ML. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html">Amazon EC2 billing and purchasing options</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. For more information about PCS support for Capacity Blocks, see <a href="https://docs.aws.amazon.com/pcs/latest/userguide/capacity-blocks.html">Using Amazon EC2 Capacity Blocks for ML with PCS</a> in the <i>PCS User Guide</i>. For more information about PCS support for interruptible capacity reservations, see <a href="https://docs.aws.amazon.com/pcs/latest/userguide/capacity-reservations-iodcr.html">Using I-ODCRs with PCS</a> in the <i>PCS User Guide</i>. Choose On-Demand if you plan to use an On-Demand Capacity Reservation (ODCR). For more information, see <a href="https://docs.aws.amazon.com/pcs/latest/userguide/capacity-reservations-odcr.html">Using ODCRs with PCS</a>. If you don't provide this option, it defaults to On-Demand.</p>
     # @option params [Types::SpotOptions] :spot_options
     #   <p>Additional configuration when you specify <code>SPOT</code> as the <code>purchaseOption</code> for the <code>CreateComputeNodeGroup</code> API action.</p>
     # @option params [Types::ScalingConfigurationRequest] :scaling_configuration
@@ -1096,6 +1342,8 @@ module Aws::PCS
     #   <p>The Amazon Resource Name (ARN) of the IAM instance profile used to pass an IAM role when launching EC2 instances. The role contained in your instance profile must have the <code>pcs:RegisterComputeNodeGroupInstance</code> permission and the role name must start with <code>AWSPCS</code> or must have the path <code>/aws-pcs/</code>. For more information, see <a href="https://docs.aws.amazon.com/pcs/latest/userguide/security-instance-profiles.html">IAM instance profiles for PCS</a> in the <i>PCS User Guide</i>.</p>
     # @option params [Types::UpdateComputeNodeGroupSlurmConfigurationRequest] :slurm_configuration
     #   <p>Additional options related to the Slurm scheduler.</p>
+    # @option params [Types::UpdateNodeLifecycleActionsRequest] :node_lifecycle_actions
+    #   <p>The lifecycle actions to run on compute nodes in the compute node group. Use lifecycle actions to run custom scripts at defined stages of a compute node's lifecycle, such as when a compute node finishes bootstrapping or becomes ready to accept jobs.</p>
     # @option params [String] :client_token
     #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully, the subsequent retries with the same client token return the result from the original successful request and they have no additional effect. If you don't specify a client token, the CLI and SDK automatically generate 1 for you.</p>
     # @example Request syntax with placeholder values
@@ -1108,7 +1356,7 @@ module Aws::PCS
     #       id: "String", # required
     #       version: "String", # required
     #     },
-    #     purchase_option: "ONDEMAND" # One of: ["ONDEMAND", "SPOT", "CAPACITY_BLOCK"],
+    #     purchase_option: "ONDEMAND" # One of: ["ONDEMAND", "SPOT", "CAPACITY_BLOCK", "INTERRUPTIBLE_CAPACITY_RESERVATION"],
     #     spot_options: {
     #       allocation_strategy: "lowest-price" # One of: ["lowest-price", "capacity-optimized", "price-capacity-optimized"]
     #     },
@@ -1118,12 +1366,49 @@ module Aws::PCS
     #     },
     #     iam_instance_profile_arn: "InstanceProfileArn",
     #     slurm_configuration: {
+    #       scale_down_idle_time_in_seconds: 1,
     #       slurm_custom_settings: [
     #         {
     #           parameter_name: "String", # required
     #           parameter_value: "String", # required
     #         }
+    #       ],
+    #       gres_custom_settings: [
+    #         {
+    #           "String" => "String"
+    #         }
     #       ]
+    #     },
+    #     node_lifecycle_actions: {
+    #       stages: { # required
+    #         node_bootstrapped: [
+    #           {
+    #             name: "String", # required
+    #             script_source: { # required
+    #               script_location: "String", # required
+    #               s3_version_id: "String",
+    #               checksum: "String"
+    #             },
+    #             arguments: ["NodeLifecycleScriptArgument"],
+    #             on_error: "TERMINATE" # One of: ["TERMINATE", "STOP_SEQUENCE", "CONTINUE"],
+    #             execution_policy: "FIRST_BOOT_ONLY" # One of: ["FIRST_BOOT_ONLY", "EVERY_BOOT"]
+    #           }
+    #         ],
+    #         node_ready: [
+    #           {
+    #             name: "String", # required
+    #             script_source: { # required
+    #               script_location: "String", # required
+    #               s3_version_id: "String",
+    #               checksum: "String"
+    #             },
+    #             arguments: ["NodeLifecycleScriptArgument"],
+    #             on_error: "TERMINATE" # One of: ["TERMINATE", "STOP_SEQUENCE", "CONTINUE"],
+    #             execution_policy: "FIRST_BOOT_ONLY" # One of: ["FIRST_BOOT_ONLY", "EVERY_BOOT"]
+    #           }
+    #         ]
+    #       },
+    #       script_caching_policy: "CACHE_ONCE" # One of: ["CACHE_ONCE", "REFRESH_ON_REBOOT"]
     #     },
     #     client_token: "SBClientToken"
     #   }
@@ -1139,10 +1424,10 @@ module Aws::PCS
     #       cluster_id: "String", # required
     #       created_at: Time.now, # required
     #       modified_at: Time.now, # required
-    #       status: "CREATING" # One of: ["CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED", "UPDATE_FAILED", "DELETED", "SUSPENDING", "SUSPENDED"], # required
+    #       status: "CREATING" # One of: ["CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED", "UPDATE_FAILED", "DELETED", "SUSPENDING", "SUSPENDED", "RESUMING"], # required
     #       ami_id: "AmiId",
     #       subnet_ids: ["SubnetId"], # required
-    #       purchase_option: "ONDEMAND" # One of: ["ONDEMAND", "SPOT", "CAPACITY_BLOCK"],
+    #       purchase_option: "ONDEMAND" # One of: ["ONDEMAND", "SPOT", "CAPACITY_BLOCK", "INTERRUPTIBLE_CAPACITY_RESERVATION"],
     #       custom_launch_template: { # required
     #         id: "String", # required
     #         version: "String", # required
@@ -1161,12 +1446,49 @@ module Aws::PCS
     #         allocation_strategy: "lowest-price" # One of: ["lowest-price", "capacity-optimized", "price-capacity-optimized"]
     #       },
     #       slurm_configuration: {
+    #         scale_down_idle_time_in_seconds: 1,
     #         slurm_custom_settings: [
     #           {
     #             parameter_name: "String", # required
     #             parameter_value: "String", # required
     #           }
+    #         ],
+    #         gres_custom_settings: [
+    #           {
+    #             "String" => "String"
+    #           }
     #         ]
+    #       },
+    #       node_lifecycle_actions: {
+    #         stages: { # required
+    #           node_bootstrapped: [
+    #             {
+    #               name: "String", # required
+    #               script_source: { # required
+    #                 script_location: "String", # required
+    #                 s3_version_id: "String",
+    #                 checksum: "String"
+    #               },
+    #               arguments: ["NodeLifecycleScriptArgument"],
+    #               on_error: "TERMINATE" # One of: ["TERMINATE", "STOP_SEQUENCE", "CONTINUE"],
+    #               execution_policy: "FIRST_BOOT_ONLY" # One of: ["FIRST_BOOT_ONLY", "EVERY_BOOT"]
+    #             }
+    #           ],
+    #           node_ready: [
+    #             {
+    #               name: "String", # required
+    #               script_source: { # required
+    #                 script_location: "String", # required
+    #                 s3_version_id: "String",
+    #                 checksum: "String"
+    #               },
+    #               arguments: ["NodeLifecycleScriptArgument"],
+    #               on_error: "TERMINATE" # One of: ["TERMINATE", "STOP_SEQUENCE", "CONTINUE"],
+    #               execution_policy: "FIRST_BOOT_ONLY" # One of: ["FIRST_BOOT_ONLY", "EVERY_BOOT"]
+    #             }
+    #           ]
+    #         },
+    #         script_caching_policy: "CACHE_ONCE" # One of: ["CACHE_ONCE", "REFRESH_ON_REBOOT"]
     #       },
     #       error_info: [
     #         {
@@ -1225,7 +1547,7 @@ module Aws::PCS
     #       cluster_id: "String", # required
     #       created_at: Time.now, # required
     #       modified_at: Time.now, # required
-    #       status: "CREATING" # One of: ["CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED", "UPDATE_FAILED", "SUSPENDING", "SUSPENDED"], # required
+    #       status: "CREATING" # One of: ["CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED", "UPDATE_FAILED", "SUSPENDING", "SUSPENDED", "RESUMING"], # required
     #       compute_node_group_configurations: [ # required
     #         {
     #           compute_node_group_id: "String"

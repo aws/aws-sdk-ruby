@@ -144,18 +144,18 @@ module Aws::Appflow
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -408,7 +408,8 @@ module Aws::Appflow
     #           refresh_token: "RefreshToken",
     #           o_auth_request: {
     #             auth_code: "AuthCode",
-    #             redirect_uri: "RedirectUri"
+    #             redirect_uri: "RedirectUri",
+    #             code_verifier: "CodeVerifier"
     #           }
     #         },
     #         honeycode: {
@@ -416,7 +417,8 @@ module Aws::Appflow
     #           refresh_token: "RefreshToken",
     #           o_auth_request: {
     #             auth_code: "AuthCode",
-    #             redirect_uri: "RedirectUri"
+    #             redirect_uri: "RedirectUri",
+    #             code_verifier: "CodeVerifier"
     #           }
     #         },
     #         infor_nexus: {
@@ -431,7 +433,8 @@ module Aws::Appflow
     #           access_token: "AccessToken",
     #           o_auth_request: {
     #             auth_code: "AuthCode",
-    #             redirect_uri: "RedirectUri"
+    #             redirect_uri: "RedirectUri",
+    #             code_verifier: "CodeVerifier"
     #           }
     #         },
     #         redshift: {
@@ -443,7 +446,8 @@ module Aws::Appflow
     #           refresh_token: "RefreshToken",
     #           o_auth_request: {
     #             auth_code: "AuthCode",
-    #             redirect_uri: "RedirectUri"
+    #             redirect_uri: "RedirectUri",
+    #             code_verifier: "CodeVerifier"
     #           },
     #           client_credentials_arn: "ClientCredentialsArn",
     #           o_auth2_grant_type: "CLIENT_CREDENTIALS" # One of: ["CLIENT_CREDENTIALS", "AUTHORIZATION_CODE", "JWT_BEARER"],
@@ -459,7 +463,8 @@ module Aws::Appflow
     #             refresh_token: "RefreshToken",
     #             o_auth_request: {
     #               auth_code: "AuthCode",
-    #               redirect_uri: "RedirectUri"
+    #               redirect_uri: "RedirectUri",
+    #               code_verifier: "CodeVerifier"
     #             }
     #           }
     #         },
@@ -472,12 +477,14 @@ module Aws::Appflow
     #           access_token: "AccessToken",
     #           o_auth_request: {
     #             auth_code: "AuthCode",
-    #             redirect_uri: "RedirectUri"
+    #             redirect_uri: "RedirectUri",
+    #             code_verifier: "CodeVerifier"
     #           }
     #         },
     #         snowflake: {
     #           username: "Username", # required
-    #           password: "Password", # required
+    #           password: "Password",
+    #           private_key: "PrivateKey"
     #         },
     #         trendmicro: {
     #           api_secret_key: "ApiSecretKey", # required
@@ -492,7 +499,8 @@ module Aws::Appflow
     #           access_token: "AccessToken",
     #           o_auth_request: {
     #             auth_code: "AuthCode",
-    #             redirect_uri: "RedirectUri"
+    #             redirect_uri: "RedirectUri",
+    #             code_verifier: "CodeVerifier"
     #           }
     #         },
     #         sapo_data: {
@@ -507,7 +515,8 @@ module Aws::Appflow
     #             refresh_token: "RefreshToken",
     #             o_auth_request: {
     #               auth_code: "AuthCode",
-    #               redirect_uri: "RedirectUri"
+    #               redirect_uri: "RedirectUri",
+    #               code_verifier: "CodeVerifier"
     #             }
     #           }
     #         },
@@ -524,7 +533,8 @@ module Aws::Appflow
     #             refresh_token: "RefreshToken",
     #             o_auth_request: {
     #               auth_code: "AuthCode",
-    #               redirect_uri: "RedirectUri"
+    #               redirect_uri: "RedirectUri",
+    #               code_verifier: "CodeVerifier"
     #             }
     #           },
     #           api_key: {
@@ -543,7 +553,8 @@ module Aws::Appflow
     #           refresh_token: "RefreshToken",
     #           o_auth_request: {
     #             auth_code: "AuthCode",
-    #             redirect_uri: "RedirectUri"
+    #             redirect_uri: "RedirectUri",
+    #             code_verifier: "CodeVerifier"
     #           },
     #           client_credentials_arn: "ClientCredentialsArn"
     #         }
@@ -2167,12 +2178,12 @@ module Aws::Appflow
     # @option params [String] :connector_profile_name
     #   <p>The name of the connector profile that you want to reset cached metadata for.</p>
     #            <p>You can omit this parameter if you're resetting the cache for any of the following
-    #         connectors: Amazon Connect, Amazon EventBridge, Amazon Lookout for Metrics, Amazon S3, or Upsolver. If you're resetting the cache for any other connector, you must include this
+    #         connectors: Connect Customer, Amazon EventBridge, Amazon Lookout for Metrics, Amazon S3, or Upsolver. If you're resetting the cache for any other connector, you must include this
     #         parameter in your request.</p>
     # @option params [String] :connector_type
     #   <p>The type of connector to reset cached metadata for.</p>
     #            <p>You must include this parameter in your request if you're resetting the cache for any of
-    #         the following connectors: Amazon Connect, Amazon EventBridge, Amazon Lookout for Metrics,
+    #         the following connectors: Connect Customer, Amazon EventBridge, Amazon Lookout for Metrics,
     #           Amazon S3, or Upsolver. If you're resetting the cache for any other connector, you
     #         can omit this parameter from your request. </p>
     # @option params [String] :connector_entity_name
@@ -2492,7 +2503,8 @@ module Aws::Appflow
     #           refresh_token: "RefreshToken",
     #           o_auth_request: {
     #             auth_code: "AuthCode",
-    #             redirect_uri: "RedirectUri"
+    #             redirect_uri: "RedirectUri",
+    #             code_verifier: "CodeVerifier"
     #           }
     #         },
     #         honeycode: {
@@ -2500,7 +2512,8 @@ module Aws::Appflow
     #           refresh_token: "RefreshToken",
     #           o_auth_request: {
     #             auth_code: "AuthCode",
-    #             redirect_uri: "RedirectUri"
+    #             redirect_uri: "RedirectUri",
+    #             code_verifier: "CodeVerifier"
     #           }
     #         },
     #         infor_nexus: {
@@ -2515,7 +2528,8 @@ module Aws::Appflow
     #           access_token: "AccessToken",
     #           o_auth_request: {
     #             auth_code: "AuthCode",
-    #             redirect_uri: "RedirectUri"
+    #             redirect_uri: "RedirectUri",
+    #             code_verifier: "CodeVerifier"
     #           }
     #         },
     #         redshift: {
@@ -2527,7 +2541,8 @@ module Aws::Appflow
     #           refresh_token: "RefreshToken",
     #           o_auth_request: {
     #             auth_code: "AuthCode",
-    #             redirect_uri: "RedirectUri"
+    #             redirect_uri: "RedirectUri",
+    #             code_verifier: "CodeVerifier"
     #           },
     #           client_credentials_arn: "ClientCredentialsArn",
     #           o_auth2_grant_type: "CLIENT_CREDENTIALS" # One of: ["CLIENT_CREDENTIALS", "AUTHORIZATION_CODE", "JWT_BEARER"],
@@ -2543,7 +2558,8 @@ module Aws::Appflow
     #             refresh_token: "RefreshToken",
     #             o_auth_request: {
     #               auth_code: "AuthCode",
-    #               redirect_uri: "RedirectUri"
+    #               redirect_uri: "RedirectUri",
+    #               code_verifier: "CodeVerifier"
     #             }
     #           }
     #         },
@@ -2556,12 +2572,14 @@ module Aws::Appflow
     #           access_token: "AccessToken",
     #           o_auth_request: {
     #             auth_code: "AuthCode",
-    #             redirect_uri: "RedirectUri"
+    #             redirect_uri: "RedirectUri",
+    #             code_verifier: "CodeVerifier"
     #           }
     #         },
     #         snowflake: {
     #           username: "Username", # required
-    #           password: "Password", # required
+    #           password: "Password",
+    #           private_key: "PrivateKey"
     #         },
     #         trendmicro: {
     #           api_secret_key: "ApiSecretKey", # required
@@ -2576,7 +2594,8 @@ module Aws::Appflow
     #           access_token: "AccessToken",
     #           o_auth_request: {
     #             auth_code: "AuthCode",
-    #             redirect_uri: "RedirectUri"
+    #             redirect_uri: "RedirectUri",
+    #             code_verifier: "CodeVerifier"
     #           }
     #         },
     #         sapo_data: {
@@ -2591,7 +2610,8 @@ module Aws::Appflow
     #             refresh_token: "RefreshToken",
     #             o_auth_request: {
     #               auth_code: "AuthCode",
-    #               redirect_uri: "RedirectUri"
+    #               redirect_uri: "RedirectUri",
+    #               code_verifier: "CodeVerifier"
     #             }
     #           }
     #         },
@@ -2608,7 +2628,8 @@ module Aws::Appflow
     #             refresh_token: "RefreshToken",
     #             o_auth_request: {
     #               auth_code: "AuthCode",
-    #               redirect_uri: "RedirectUri"
+    #               redirect_uri: "RedirectUri",
+    #               code_verifier: "CodeVerifier"
     #             }
     #           },
     #           api_key: {
@@ -2627,7 +2648,8 @@ module Aws::Appflow
     #           refresh_token: "RefreshToken",
     #           o_auth_request: {
     #             auth_code: "AuthCode",
-    #             redirect_uri: "RedirectUri"
+    #             redirect_uri: "RedirectUri",
+    #             code_verifier: "CodeVerifier"
     #           },
     #           client_credentials_arn: "ClientCredentialsArn"
     #         }

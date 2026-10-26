@@ -378,6 +378,24 @@ module Aws::CodeCommit
       ?blob_id: String
     ) -> _GetBlobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBlobResponse
 
+    interface _GetBlobDifferencesResponse
+      include Smithy::Client::_Response[Types::GetBlobDifferencesOutput]
+      def hunks: () -> Array[Types::DiffHunk]?
+      def is_binary: () -> bool?
+      def before_blob_size: () -> Integer?
+      def after_blob_size: () -> Integer?
+      def next_token: () -> String?
+    end
+    def get_blob_differences: (
+      ?repository_name: String,
+      ?after_blob_id: String,
+      ?before_blob_id: String,
+      ?context_lines: Integer,
+      ?ignore_whitespace: bool,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetBlobDifferencesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBlobDifferencesResponse
+
     interface _GetBranchResponse
       include Smithy::Client::_Response[Types::GetBranchOutput]
       def branch: () -> Types::BranchInfo?

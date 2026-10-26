@@ -1128,6 +1128,9 @@ module Aws::DynamoDB
     #                     <code>CapacityUnits</code> - The total number of capacity units consumed.</p>
     #               </li>
     #            </ul>
+    #            <p>If the table has vector indexes, each element also includes a
+    #               <code>VectorIndexes</code> field with <code>VectorWriteRequestBytes</code> consumed
+    #               for each affected vector index.</p>
     #   @return [Array<Types::ConsumedCapacity>]
     class BatchWriteItemOutput < Struct.new(
       nil,
@@ -1538,6 +1541,11 @@ module Aws::DynamoDB
     #   <p>The amount of throughput consumed on each global index affected by the
     #               operation.</p>
     #   @return [Hash<String, Types::Capacity>]
+    # @!attribute vector_indexes
+    #   <p>The amount of throughput consumed on each vector index affected by the operation.
+    #               Each entry contains <code>VectorWriteRequestBytes</code> (for write operations) or
+    #               <code>VectorSearchRequestBytes</code> (for search operations).</p>
+    #   @return [Hash<String, Types::VectorCapacity>]
     class ConsumedCapacity < Struct.new(
       nil,
       :table_name,
@@ -1547,6 +1555,7 @@ module Aws::DynamoDB
       :table,
       :local_secondary_indexes,
       :global_secondary_indexes,
+      :vector_indexes,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1641,7 +1650,8 @@ module Aws::DynamoDB
     #   <p>The name of the global secondary index to be created.</p>
     #   @return [String]
     # @!attribute key_schema
-    #   <p>The key schema for the global secondary index.</p>
+    #   <p>The key schema for the global secondary index.
+    #               Global secondary index supports up to 4 partition and up to 4 sort keys.</p>
     #   @return [Array<Types::KeySchemaElement>]
     # @!attribute projection
     #   <p>Represents attributes that are copied (projected) from the table into an index. These
@@ -1916,7 +1926,7 @@ module Aws::DynamoDB
     #               <li>
     #                  <p>
     #                     <code>KeySchema</code> - Specifies the key schema for the global secondary
-    #                       index.</p>
+    #                       index. Each global secondary index supports up to 4 partition keys and up to 4 sort keys.</p>
     #               </li>
     #               <li>
     #                  <p>
@@ -2075,6 +2085,58 @@ module Aws::DynamoDB
     #               capacity mode. If you use this parameter, you must specify
     #                   <code>MaxReadRequestUnits</code>, <code>MaxWriteRequestUnits</code>, or both.</p>
     #   @return [Types::OnDemandThroughput]
+    # @!attribute global_table_source_arn
+    #   <p>The Amazon Resource Name (ARN) of the source table used for the creation
+    #               of a multi-account global table.</p>
+    #   @return [String]
+    # @!attribute global_table_settings_replication_mode
+    #   <p>Controls the settings synchronization mode for the global table. For multi-account global tables,
+    #               this parameter is required and the only supported value is ENABLED. For same-account global tables,
+    #               this parameter is set to ENABLED_WITH_OVERRIDES.
+    #           </p>
+    #   @return [String]
+    # @!attribute vector_indexes
+    #   <p>One or more vector indexes to be created on the table. Each vector index enables
+    #               similarity search on a vector attribute. Each element in the list consists of:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>IndexName</code> - The name of the vector index. Must be unique
+    #                       within the table.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>VectorAttribute</code> - The attribute that contains vector
+    #                       embeddings. If multiple vector indexes reference the same attribute, they
+    #                       must all use the same number of dimensions.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>Dimensions</code> - The number of dimensions in each vector.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>DistanceFunction</code> - The distance function used to calculate
+    #                       similarity. Valid values: <code>COSINE</code>, <code>EUCLIDEAN</code>,
+    #                       <code>DOT_PRODUCT</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>Projection</code> - Specifies attributes that are copied (projected)
+    #                       from the table into the vector index. The total number of projected
+    #                       non-key attributes is shared across the vector attribute (counts as 1)
+    #                       and <code>INLINE_FILTER</code> search schema elements (each counts as 1).
+    #                       <code>HASH</code> search schema elements do not count toward this
+    #                       limit.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>SearchSchema</code> - (Optional) Defines the partition key
+    #                       (<code>HASH</code>) and inline filter (<code>INLINE_FILTER</code>) attributes
+    #                       for the vector index.</p>
+    #               </li>
+    #            </ul>
+    #   @return [Array<Types::VectorIndex>]
     class CreateTableInput < Struct.new(
       nil,
       :attribute_definitions,
@@ -2092,6 +2154,9 @@ module Aws::DynamoDB
       :warm_throughput,
       :resource_policy,
       :on_demand_throughput,
+      :global_table_source_arn,
+      :global_table_settings_replication_mode,
+      :vector_indexes,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2104,6 +2169,43 @@ module Aws::DynamoDB
     class CreateTableOutput < Struct.new(
       nil,
       :table_description,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A new vector index to be added to a table.</p>
+    # @!attribute index_name
+    #   <p>The name of the vector index. Must be unique within the table.</p>
+    #   @return [String]
+    # @!attribute vector_attribute
+    #   <p>The attribute that contains vector embeddings. If multiple vector indexes
+    #               reference the same attribute, they must all use the same number of
+    #               dimensions.</p>
+    #   @return [Types::VectorAttributeDefinition]
+    # @!attribute search_schema
+    #   <p>The partition key and inline filter attribute definitions for the vector
+    #               index.</p>
+    #   @return [Array<Types::SearchSchemaElement>]
+    # @!attribute projection
+    #   <p>Specifies attributes that are copied (projected) from the table into the vector
+    #               index.</p>
+    #   @return [Types::Projection]
+    # @!attribute dimensions
+    #   <p>The number of dimensions in each vector.</p>
+    #   @return [Integer]
+    # @!attribute distance_function
+    #   <p>The distance function used to calculate similarity. Valid values:
+    #               <code>COSINE</code>, <code>EUCLIDEAN</code>, <code>DOT_PRODUCT</code>.</p>
+    #   @return [String]
+    class CreateVectorIndexAction < Struct.new(
+      nil,
+      :index_name,
+      :vector_attribute,
+      :search_schema,
+      :projection,
+      :dimensions,
+      :distance_function,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2433,6 +2535,9 @@ module Aws::DynamoDB
     #               only returned if the <code>ReturnConsumedCapacity</code> parameter was specified. For
     #               more information, see <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/provisioned-capacity-mode.html">Provisioned capacity mode</a> in the <i>Amazon DynamoDB Developer
     #                   Guide</i>.</p>
+    #            <p>If the table has vector indexes, the response includes a
+    #               <code>VectorIndexes</code> field with <code>VectorWriteRequestBytes</code> consumed
+    #               for each affected vector index.</p>
     #   @return [Types::ConsumedCapacity]
     # @!attribute item_collection_metrics
     #   <p>Information about item collections, if any, that were affected by the
@@ -2563,6 +2668,18 @@ module Aws::DynamoDB
     class DeleteTableOutput < Struct.new(
       nil,
       :table_description,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A vector index to be removed from a table.</p>
+    # @!attribute index_name
+    #   <p>The name of the vector index to delete.</p>
+    #   @return [String]
+    class DeleteVectorIndexAction < Struct.new(
+      nil,
+      :index_name,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3590,6 +3707,11 @@ module Aws::DynamoDB
     # @!attribute incremental_export_specification
     #   <p>Optional object containing the parameters specific to an incremental export.</p>
     #   @return [Types::IncrementalExportSpecification]
+    # @!attribute filter_specification
+    #   <p>The filter criteria applied to the export. When present, only items that match the
+    #               specified key conditions and filter expressions are included in the export
+    #               output.</p>
+    #   @return [Types::FilterSpecification]
     class ExportDescription < Struct.new(
       nil,
       :export_arn,
@@ -3613,6 +3735,7 @@ module Aws::DynamoDB
       :item_count,
       :export_type,
       :incremental_export_specification,
+      :filter_specification,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3669,7 +3792,7 @@ module Aws::DynamoDB
     #               result might not be idempotent.</p>
     #            <p>If you submit a request with the same client token but a change in other parameters
     #               within the 8-hour idempotency window, DynamoDB returns an
-    #                   <code>ImportConflictException</code>.</p>
+    #                   <code>ExportConflictException</code>.</p>
     #   @return [String]
     # @!attribute s3_bucket
     #   <p>The name of the Amazon S3 bucket to export the snapshot to.</p>
@@ -3719,6 +3842,11 @@ module Aws::DynamoDB
     # @!attribute incremental_export_specification
     #   <p>Optional object containing the parameters specific to an incremental export.</p>
     #   @return [Types::IncrementalExportSpecification]
+    # @!attribute filter_specification
+    #   <p>The criteria used to filter which items are included in the point-in-time export.
+    #               When you specify this parameter, only items that match the key conditions and filter
+    #               expressions are exported.</p>
+    #   @return [Types::FilterSpecification]
     class ExportTableToPointInTimeInput < Struct.new(
       nil,
       :table_arn,
@@ -3732,6 +3860,7 @@ module Aws::DynamoDB
       :export_format,
       :export_type,
       :incremental_export_specification,
+      :filter_specification,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3759,6 +3888,48 @@ module Aws::DynamoDB
       nil,
       :exception_name,
       :exception_description,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the filter criteria used to limit which items are included in an export.
+    #             If you don't include this parameter, all items and attributes are exported.</p>
+    # @!attribute filter_expression
+    #   <p>A condition that filters which items are included in the export. This parameter
+    #               uses the same syntax as <code>FilterExpression</code> in <code>Query</code> and
+    #                   <code>Scan</code>. If you don't provide <code>KeyConditionExpression</code>, this
+    #               expression can also reference key attributes. If you don't specify this parameter,
+    #               all items are included in the export.</p>
+    #   @return [String]
+    # @!attribute projection_expression
+    #   <p>The attributes you want to retrieve for items included in the export. Separate
+    #               attribute names in the expression with commas. If you don't specify this parameter,
+    #               all attributes are returned.</p>
+    #   @return [String]
+    # @!attribute key_condition_expression
+    #   <p>A condition expression that filters items by key values. The expression must test
+    #               equality on a single partition key value and can optionally compare a sort key value.
+    #               This parameter uses the same syntax as <code>KeyConditionExpression</code> in
+    #                   <code>Query</code>. When you provide this parameter, <code>FilterExpression</code>
+    #               can only reference non-key attributes. If you don't specify this parameter, all items
+    #               are eligible for export.</p>
+    #   @return [String]
+    # @!attribute expression_attribute_names
+    #   <p>One or more substitution tokens for attribute names in an expression. For more
+    #               information, see <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.ExpressionAttributeNames.html">Expression Attribute Names</a> in the Amazon DynamoDB Developer Guide.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute expression_attribute_values
+    #   <p>One or more values that can be substituted in an expression. For more information,
+    #               see <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.ExpressionAttributeValues.html">Expression Attribute Values</a> in the Amazon DynamoDB Developer Guide.</p>
+    #   @return [Hash<String, Types::AttributeValue>]
+    class FilterSpecification < Struct.new(
+      nil,
+      :filter_expression,
+      :projection_expression,
+      :key_condition_expression,
+      :expression_attribute_names,
+      :expression_attribute_values,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4529,8 +4700,7 @@ module Aws::DynamoDB
     #   <p> The time at which this import task began. </p>
     #   @return [Time]
     # @!attribute end_time
-    #   <p> The time at which this import task ended. (Does this include the successful complete
-    #               creation of the table it was imported to?) </p>
+    #   <p> The time at which this import task ended. </p>
     #   @return [Time]
     class ImportSummary < Struct.new(
       nil,
@@ -4722,6 +4892,14 @@ module Aws::DynamoDB
     #   <p>The view type that was chosen for the export. Valid values are
     #                   <code>NEW_AND_OLD_IMAGES</code> and <code>NEW_IMAGES</code>. The default value is
     #                   <code>NEW_AND_OLD_IMAGES</code>.</p>
+    #            <p>
+    #               <code>NEW_AND_OLD_IMAGES</code> exports both the new and old images of each changed
+    #               item, while <code>NEW_IMAGES</code> exports only the new (latest) image. The view type
+    #               you choose determines the structure of each item in the output for
+    #                   <code>insert</code>, <code>update</code>, and <code>delete</code> operations. For
+    #               details and examples of how each view type shapes the export output, see <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/S3DataExport.Output.html">DynamoDB table
+    #                   export output format</a> in the <i>Amazon DynamoDB Developer
+    #                   Guide</i>.</p>
     #   @return [String]
     class IncrementalExportSpecification < Struct.new(
       nil,
@@ -5742,10 +5920,16 @@ module Aws::DynamoDB
     #               effort than strongly consistent reads, so a setting of 50 <code>ReadCapacityUnits</code>
     #               per second provides 100 eventually consistent <code>ReadCapacityUnits</code> per
     #               second.</p>
+    #            <p>For a table or global secondary index that uses on-demand capacity mode
+    #                   (<code>PAY_PER_REQUEST</code>), this value is <code>0</code>, because on-demand mode
+    #               does not use provisioned throughput.</p>
     #   @return [Integer]
     # @!attribute write_capacity_units
     #   <p>The maximum number of writes consumed per second before DynamoDB returns a
     #                   <code>ThrottlingException</code>.</p>
+    #            <p>For a table or global secondary index that uses on-demand capacity mode
+    #                   (<code>PAY_PER_REQUEST</code>), this value is <code>0</code>, because on-demand mode
+    #               does not use provisioned throughput.</p>
     #   @return [Integer]
     class ProvisionedThroughputDescription < Struct.new(
       nil,
@@ -5853,6 +6037,23 @@ module Aws::DynamoDB
     #            <p>If you specify any attributes that are part of an index key, then the data types for
     #               those attributes must match those of the schema in the table's attribute
     #               definition.</p>
+    #            <p>If the table has vector indexes, the following validations apply to write
+    #               operations. A violation of any of these constraints results in a
+    #               <code>ValidationException</code>:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>The vector attribute must be a list of numbers with dimensions matching the
+    #                       index configuration.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Vector values must fit in 32-bit IEEE-754 floating point format
+    #                       (f32).</p>
+    #               </li>
+    #               <li>
+    #                  <p>Partition key and inline filter attributes defined in the search schema
+    #                       must have data types matching the index schema definition.</p>
+    #               </li>
+    #            </ul>
     #            <p>Empty String and Binary attribute values are allowed. Attribute values of type String
     #               and Binary must have a length greater than zero if the attribute is used as a key
     #               attribute for a table or index.</p>
@@ -6068,6 +6269,9 @@ module Aws::DynamoDB
     #               returned if the <code>ReturnConsumedCapacity</code> parameter was specified. For more
     #               information, see <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/read-write-operations.html#write-operation-consumption">Capacity unity consumption for write operations</a> in the <i>Amazon
     #                   DynamoDB Developer Guide</i>.</p>
+    #            <p>If the table has vector indexes, the response includes a
+    #               <code>VectorIndexes</code> field with <code>VectorWriteRequestBytes</code> consumed
+    #               for each affected vector index.</p>
     #   @return [Types::ConsumedCapacity]
     # @!attribute item_collection_metrics
     #   <p>Information about item collections, if any, that were affected by the
@@ -6768,6 +6972,9 @@ module Aws::DynamoDB
     #               </li>
     #            </ul>
     #   @return [String]
+    # @!attribute replica_arn
+    #   <p>The Amazon Resource Name (ARN) of the global table replica.</p>
+    #   @return [String]
     # @!attribute replica_status_description
     #   <p>Detailed information about the replica status.</p>
     #   @return [String]
@@ -6800,10 +7007,31 @@ module Aws::DynamoDB
     # @!attribute replica_table_class_summary
     #   <p>Contains details of the table class.</p>
     #   @return [Types::TableClassSummary]
+    # @!attribute global_table_settings_replication_mode
+    #   <p>Indicates one of the settings synchronization modes for the global table replica:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>ENABLED</code>: Indicates that the settings synchronization mode for the global table
+    #                       replica is enabled.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>DISABLED</code>: Indicates that the settings synchronization mode for the global table
+    #                       replica is disabled.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ENABLED_WITH_OVERRIDES</code>: This mode is set by default for a same account global table.
+    #                       Indicates that certain global table settings can be overridden.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
     class ReplicaDescription < Struct.new(
       nil,
       :region_name,
       :replica_status,
+      :replica_arn,
       :replica_status_description,
       :replica_status_percent_progress,
       :kms_master_key_id,
@@ -6813,6 +7041,7 @@ module Aws::DynamoDB
       :global_secondary_indexes,
       :replica_inaccessible_date_time,
       :replica_table_class_summary,
+      :global_table_settings_replication_mode,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7312,6 +7541,12 @@ module Aws::DynamoDB
     # @!attribute sse_specification_override
     #   <p>The new server-side encryption settings for the restored table.</p>
     #   @return [Types::SSESpecification]
+    # @!attribute vector_index_override
+    #   <p>The vector indexes for the restored table. If not specified, all vector indexes
+    #               from the backup are restored. The indexes provided must match existing vector
+    #               indexes from the backup. You can choose to exclude some or all of the vector
+    #               indexes at the time of restore.</p>
+    #   @return [Array<Types::VectorIndex>]
     class RestoreTableFromBackupInput < Struct.new(
       nil,
       :target_table_name,
@@ -7322,6 +7557,7 @@ module Aws::DynamoDB
       :provisioned_throughput_override,
       :on_demand_throughput_override,
       :sse_specification_override,
+      :vector_index_override,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7362,6 +7598,11 @@ module Aws::DynamoDB
     #   <p>List of global secondary indexes for the restored table. The indexes provided should
     #               match existing secondary indexes. You can choose to exclude some or all of the indexes
     #               at the time of restore.</p>
+    #            <p>The <code>WarmThroughput</code> setting is not supported on global secondary indexes
+    #               when you use <code>RestoreTableToPointInTime</code>. Although <code>WarmThroughput</code>
+    #               appears in the shared index definition, including it in a
+    #               <code>GlobalSecondaryIndexOverride</code> entry causes the request to fail with a
+    #               validation error.</p>
     #   @return [Array<Types::GlobalSecondaryIndex>]
     # @!attribute local_secondary_index_override
     #   <p>List of local secondary indexes for the restored table. The indexes provided should
@@ -7379,6 +7620,12 @@ module Aws::DynamoDB
     # @!attribute sse_specification_override
     #   <p>The new server-side encryption settings for the restored table.</p>
     #   @return [Types::SSESpecification]
+    # @!attribute vector_index_override
+    #   <p>The vector indexes for the restored table. If not specified, all vector indexes
+    #               from the source table are restored. The indexes provided must match existing
+    #               vector indexes from the source table. You can choose to exclude some or all of
+    #               the vector indexes at the time of restore.</p>
+    #   @return [Array<Types::VectorIndex>]
     class RestoreTableToPointInTimeInput < Struct.new(
       nil,
       :source_table_arn,
@@ -7392,6 +7639,7 @@ module Aws::DynamoDB
       :provisioned_throughput_override,
       :on_demand_throughput_override,
       :sse_specification_override,
+      :vector_index_override,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7862,6 +8110,161 @@ module Aws::DynamoDB
       end
     end
 
+    # <p>A single result from a <code>SearchVectors</code> operation.</p>
+    # @!attribute item
+    #   <p>A map of attribute names to <code>AttributeValue</code> objects, representing the
+    #               projected attributes of the item returned by the vector search.</p>
+    #   @return [Hash<String, Types::AttributeValue>]
+    # @!attribute score
+    #   <p>The similarity score for this item relative to the search vector. The
+    #               interpretation depends on the distance function configured for the vector
+    #               index.</p>
+    #   @return [Float]
+    class SearchResultItem < Struct.new(
+      nil,
+      :item,
+      :score,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:score] = 0 unless options.key?(:score)
+        super
+      end
+    end
+
+    # <p>An element in the search schema of a vector index.</p>
+    # @!attribute attribute_name
+    #   <p>The name of the attribute.</p>
+    #   @return [String]
+    # @!attribute search_schema_element_type
+    #   <p>The role of the attribute in the search schema. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>HASH</code> - A partition key that partitions the vector index for
+    #                       independent scaling. When specified, you must provide this attribute's value
+    #                       in the <code>SearchConditionExpression</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>INLINE_FILTER</code> - An attribute projected into the vector index
+    #                       for filtering at the storage layer during search. Inline filters are
+    #                       optional in the <code>SearchConditionExpression</code>.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    class SearchSchemaElement < Struct.new(
+      nil,
+      :attribute_name,
+      :search_schema_element_type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute table_name
+    #   <p>The name or Amazon Resource Name (ARN) of the table containing the vector index.</p>
+    #   @return [String]
+    # @!attribute index_name
+    #   <p>The name of the vector index to search. The index must be in the
+    #               <code>ACTIVE</code> state.</p>
+    #   @return [String]
+    # @!attribute return_consumed_capacity
+    #   <p>Determines the level of detail about either provisioned or on-demand throughput
+    #               consumption that is returned in the response:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>INDEXES</code> - The response includes the aggregate
+    #                           <code>ConsumedCapacity</code> for the operation, together with
+    #                           <code>ConsumedCapacity</code> for each table and secondary index that was
+    #                       accessed.</p>
+    #                  <p>Note that some operations, such as <code>GetItem</code> and
+    #                           <code>BatchGetItem</code>, do not access any indexes at all. In these cases,
+    #                       specifying <code>INDEXES</code> will only return <code>ConsumedCapacity</code>
+    #                       information for table(s).</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>TOTAL</code> - The response includes only the aggregate
+    #                           <code>ConsumedCapacity</code> for the operation.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>NONE</code> - No <code>ConsumedCapacity</code> details are included in the
+    #                       response.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute expression_attribute_names
+    #   <p>One or more substitution tokens for attribute names in an expression. Use the
+    #               <code>#</code> character in an expression to dereference an attribute name.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute expression_attribute_values
+    #   <p>One or more values that can be substituted in an expression. Use the
+    #               <code>:</code> character in an expression to dereference an attribute value.</p>
+    #   @return [Hash<String, Types::AttributeValue>]
+    # @!attribute projection_expression
+    #   <p>A string that identifies one or more attributes to retrieve from the index.
+    #               Separate attribute names with commas. If not specified, the operation returns all
+    #               attributes projected into the vector index.</p>
+    #            <p>Only attributes projected into the vector index can be retrieved.</p>
+    #   @return [String]
+    # @!attribute search_vector
+    #   <p>The search vector to compare against the indexed vectors. Each element is a 32-bit
+    #               IEEE-754 floating point number, provided in DynamoDB list format.</p>
+    #            <p>The number of dimensions must match the number of dimensions configured for the
+    #               vector index.</p>
+    #   @return [Array<Types::AttributeValue>]
+    # @!attribute search_condition_expression
+    #   <p>A condition expression used to filter the vector search results. The expression can
+    #               reference attributes defined in the vector index search schema, including
+    #               <code>HASH</code> and <code>INLINE_FILTER</code> key elements.</p>
+    #            <p>Only the equality operator (<code>=</code>) is supported for <code>HASH</code>
+    #               attributes. Comparison and range operators are supported for
+    #               <code>INLINE_FILTER</code> attributes. Only top-level attributes from the search
+    #               schema can be referenced.</p>
+    #   @return [String]
+    # @!attribute top_k
+    #   <p>The number of most similar results to return.</p>
+    #   @return [Integer]
+    class SearchVectorsInput < Struct.new(
+      nil,
+      :table_name,
+      :index_name,
+      :return_consumed_capacity,
+      :expression_attribute_names,
+      :expression_attribute_values,
+      :projection_expression,
+      :search_vector,
+      :search_condition_expression,
+      :top_k,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute consumed_capacity
+    #   <p>The capacity units consumed by the <code>SearchVectors</code> operation. Contains
+    #               <code>VectorSearchRequestBytes</code>, which represents the vector search capacity
+    #               consumed.</p>
+    #   @return [Types::VectorCapacity]
+    # @!attribute search_results
+    #   <p>A list of items returned by the vector similarity search, sorted by similarity
+    #               with the most similar item first. Each item contains the projected attributes and
+    #               a similarity score.</p>
+    #   @return [Array<Types::SearchResultItem>]
+    class SearchVectorsOutput < Struct.new(
+      nil,
+      :consumed_capacity,
+      :search_results,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Contains the details of the table when the backup was created. </p>
     # @!attribute table_name
     #   <p>The name of the table for which the backup was created. </p>
@@ -7949,6 +8352,11 @@ module Aws::DynamoDB
     #   <p>The description of the server-side encryption status on the table when the backup was
     #               created.</p>
     #   @return [Types::SSEDescription]
+    # @!attribute vector_indexes
+    #   <p>The vector index properties for the table at the time the backup was created,
+    #               including the index name, vector attribute, dimensions, distance function, search
+    #               schema, and projection.</p>
+    #   @return [Array<Types::VectorIndexInfo>]
     class SourceTableFeatureDetails < Struct.new(
       nil,
       :local_secondary_indexes,
@@ -7956,6 +8364,7 @@ module Aws::DynamoDB
       :stream_description,
       :time_to_live_description,
       :sse_description,
+      :vector_indexes,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8103,6 +8512,10 @@ module Aws::DynamoDB
     #   <p> The Global Secondary Indexes (GSI) of the table to be created as part of the import
     #               operation. </p>
     #   @return [Array<Types::GlobalSecondaryIndex>]
+    # @!attribute vector_indexes
+    #   <p>The vector indexes of the table to be created as part of the import
+    #               operation.</p>
+    #   @return [Array<Types::VectorIndex>]
     class TableCreationParameters < Struct.new(
       nil,
       :table_name,
@@ -8113,6 +8526,7 @@ module Aws::DynamoDB
       :on_demand_throughput,
       :sse_specification,
       :global_secondary_indexes,
+      :vector_indexes,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8234,7 +8648,8 @@ module Aws::DynamoDB
     #   <p>The Amazon Resource Name (ARN) that uniquely identifies the table.</p>
     #   @return [String]
     # @!attribute table_id
-    #   <p>Unique identifier for the table for which the backup was created. </p>
+    #   <p>A unique identifier for the table, in UUID format, generated by DynamoDB when the
+    #               table is created.</p>
     #   @return [String]
     # @!attribute billing_mode_summary
     #   <p>Contains the details for the read/write capacity mode.</p>
@@ -8470,6 +8885,26 @@ module Aws::DynamoDB
     #   <p>The witness Region and its current status in the MRSC global table. Only one witness
     #               Region can be configured per MRSC global table.</p>
     #   @return [Array<Types::GlobalTableWitnessDescription>]
+    # @!attribute global_table_settings_replication_mode
+    #   <p>Indicates one of the settings synchronization modes for the global table:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>ENABLED</code>: Indicates that the settings synchronization mode for the global table
+    #                       is enabled.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>DISABLED</code>: Indicates that the settings synchronization mode for the global table is
+    #                       disabled.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ENABLED_WITH_OVERRIDES</code>: This mode is set by default for a same account global table.
+    #                       Indicates that certain global table settings can be overridden.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
     # @!attribute restore_summary
     #   <p>Contains details for the restore.</p>
     #   @return [Types::RestoreSummary]
@@ -8513,6 +8948,70 @@ module Aws::DynamoDB
     #               see <a href="https://docs.aws.amazon.com/V2globaltables_HowItWorks.html#V2globaltables_HowItWorks.consistency-modes">
     #                   Consistency modes</a> in DynamoDB developer guide. </p>
     #   @return [String]
+    # @!attribute vector_indexes
+    #   <p>The vector indexes, if any, on the table. Each element is composed of:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>IndexName</code> - The name of the vector index.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>IndexStatus</code> - The current status of the vector index:
+    #                       <code>CREATING</code>, <code>ACTIVE</code>, or
+    #                       <code>DELETING</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>Backfilling</code> - Specifies whether the index is currently
+    #                       backfilling. During backfill, <code>SearchVectors</code> operations might
+    #                       return incomplete results.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>VectorAttribute</code> - The attribute that contains vector
+    #                       embeddings.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>Dimensions</code> - The number of dimensions in each
+    #                       vector.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>DistanceFunction</code> - The distance function used to calculate
+    #                       similarity (<code>COSINE</code>, <code>EUCLIDEAN</code>, or
+    #                       <code>DOT_PRODUCT</code>).</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>SearchSchema</code> - The partition key and inline filter
+    #                       attributes for the vector index.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>Projection</code> - Specifies attributes that are copied
+    #                       (projected) from the table into the vector index.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>IndexArn</code> - The Amazon Resource Name (ARN) that uniquely
+    #                       identifies the index.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>IndexSizeBytes</code> - The total size of the vector index, in
+    #                       bytes. Amazon DynamoDB updates this value approximately every six hours.
+    #                       Recent changes might not be reflected in this value.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ItemCount</code> - The number of items indexed in the vector
+    #                       index. Amazon DynamoDB updates this value approximately every six hours.
+    #                       Recent changes might not be reflected in this value.</p>
+    #               </li>
+    #            </ul>
+    #   @return [Array<Types::VectorIndexDescription>]
     class TableDescription < Struct.new(
       nil,
       :attribute_definitions,
@@ -8534,6 +9033,7 @@ module Aws::DynamoDB
       :global_table_version,
       :replicas,
       :global_table_witnesses,
+      :global_table_settings_replication_mode,
       :restore_summary,
       :sse_description,
       :archival_summary,
@@ -8542,6 +9042,7 @@ module Aws::DynamoDB
       :on_demand_throughput,
       :warm_throughput,
       :multi_region_consistency,
+      :vector_indexes,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8656,7 +9157,7 @@ module Aws::DynamoDB
     end
 
     # <p>Represents the specific reason why a DynamoDB request was throttled and the
-    #             ARN of the impacted resource. This helps identify exactly what resource is being throttled, 
+    #             ARN of the impacted resource. This helps identify exactly what resource is being throttled,
     #             what type of operation caused it, and why the throttling occurred.</p>
     # @!attribute reason
     #   <p>The reason for throttling. The throttling reason follows a specific format:
@@ -8915,6 +9416,9 @@ module Aws::DynamoDB
     #   <p>The capacity units consumed by the entire <code>TransactWriteItems</code> operation.
     #               The values of the list are ordered according to the ordering of the
     #                   <code>TransactItems</code> request parameter. </p>
+    #            <p>If the table has vector indexes, each element also includes a
+    #               <code>VectorIndexes</code> field with <code>VectorWriteRequestBytes</code> consumed
+    #               for each affected vector index.</p>
     #   @return [Array<Types::ConsumedCapacity>]
     # @!attribute item_collection_metrics
     #   <p>A list of tables that were processed by <code>TransactWriteItems</code> and, for each
@@ -8988,11 +9492,13 @@ module Aws::DynamoDB
     #             </li>
     #          </ul>
     #          <note>
-    #             <p>If using Java, DynamoDB lists the cancellation reasons on the
-    #                     <code>CancellationReasons</code> property. This property is not set for other
-    #                 languages. Transaction cancellation reasons are ordered in the order of requested
+    #             <p>DynamoDB lists the cancellation reasons on the
+    #                     <code>CancellationReasons</code> property. Transaction cancellation reasons are ordered in the order of requested
     #                 items, if an item has no error it will have <code>None</code> code and
-    #                     <code>Null</code> message.</p>
+    #                     <code>Null</code> message. The <code>None</code> code is returned as the literal
+    #                 string <code>"None"</code>, not a null or absent value; the message field is omitted
+    #                 entirely for an item that has no error. This is important to note when using an SDK
+    #                 that surfaces the code as an optional or nullable type.</p>
     #          </note>
     #          <p>Cancellation reason codes and possible error messages:</p>
     #          <ul>
@@ -9697,9 +10203,7 @@ module Aws::DynamoDB
     #                     </li>
     #                  </ul>
     #                  <important>
-    #                     <p>The <code>ADD</code> action only supports Number and set data types. In
-    #                           addition, <code>ADD</code> can only be used on top-level attributes, not
-    #                           nested attributes.</p>
+    #                     <p>The <code>ADD</code> action only supports Number and set data types.</p>
     #                  </important>
     #               </li>
     #               <li>
@@ -9710,9 +10214,7 @@ module Aws::DynamoDB
     #                       the <code>DELETE</code> action specifies <code>[a,c]</code>, then the final
     #                       attribute value is <code>[b]</code>. Specifying an empty set is an error.</p>
     #                  <important>
-    #                     <p>The <code>DELETE</code> action only supports set data types. In addition,
-    #                               <code>DELETE</code> can only be used on top-level attributes, not nested
-    #                           attributes.</p>
+    #                     <p>The <code>DELETE</code> action only supports set data types.</p>
     #                  </important>
     #               </li>
     #            </ul>
@@ -9864,6 +10366,9 @@ module Aws::DynamoDB
     #               only returned if the <code>ReturnConsumedCapacity</code> parameter was specified. For
     #               more information, see <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/read-write-operations.html#write-operation-consumption">Capacity unity consumption for write operations</a> in the <i>Amazon
     #                   DynamoDB Developer Guide</i>.</p>
+    #            <p>If the table has vector indexes, the response includes a
+    #               <code>VectorIndexes</code> field with <code>VectorWriteRequestBytes</code> consumed
+    #               for each affected vector index.</p>
     #   @return [Types::ConsumedCapacity]
     # @!attribute item_collection_metrics
     #   <p>Information about item collections, if any, that were affected by the
@@ -10124,6 +10629,31 @@ module Aws::DynamoDB
     #   <p>Represents the warm throughput (in read units per second and write units per second)
     #               for updating a table.</p>
     #   @return [Types::WarmThroughput]
+    # @!attribute global_table_settings_replication_mode
+    #   <p>Controls the settings replication mode for a global table replica. This attribute can be defined
+    #               using UpdateTable operation only on a regional table with values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>ENABLED</code>: Defines settings replication on a regional table to be used as a
+    #                       source table for creating Multi-Account Global Table.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>DISABLED</code>: Remove settings replication on a regional table. Settings replication needs
+    #                       to be defined to ENABLED again in order to create a Multi-Account Global Table using this table.
+    #                   </p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute vector_index_updates
+    #   <p>A list of vector indexes to be added to or removed from the table. You can add or
+    #               remove one vector index for each <code>UpdateTable</code> operation.</p>
+    #            <p>To add a vector index, specify <code>IndexName</code>,
+    #               <code>VectorAttribute</code>, <code>Dimensions</code>,
+    #               <code>DistanceFunction</code>, and <code>Projection</code>. To remove a vector
+    #               index, specify only the <code>IndexName</code>.</p>
+    #   @return [Array<Types::VectorIndexUpdate>]
     class UpdateTableInput < Struct.new(
       nil,
       :attribute_definitions,
@@ -10140,6 +10670,8 @@ module Aws::DynamoDB
       :global_table_witness_updates,
       :on_demand_throughput,
       :warm_throughput,
+      :global_table_settings_replication_mode,
+      :vector_index_updates,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -10219,6 +10751,201 @@ module Aws::DynamoDB
     class UpdateTimeToLiveOutput < Struct.new(
       nil,
       :time_to_live_specification,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The definition of a vector attribute for a vector index.</p>
+    # @!attribute attribute_name
+    #   <p>The name of the vector attribute.</p>
+    #   @return [String]
+    class VectorAttributeDefinition < Struct.new(
+      nil,
+      :attribute_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The consumed capacity for vector index operations, including vector search request bytes
+    #             and vector write request bytes.</p>
+    # @!attribute vector_search_request_bytes
+    #   <p>The number of vector search request bytes consumed by a
+    #               <code>SearchVectors</code> operation.</p>
+    #   @return [Float]
+    # @!attribute vector_write_request_bytes
+    #   <p>The number of vector write request bytes consumed when writing to a vector index.
+    #               Reported for write operations that modify attributes indexed by a vector
+    #               index.</p>
+    #   @return [Float]
+    class VectorCapacity < Struct.new(
+      nil,
+      :vector_search_request_bytes,
+      :vector_write_request_bytes,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the configuration settings for a vector index, including the index name,
+    #             vector attribute, dimensions, distance function, search schema, and
+    #             projection.</p>
+    # @!attribute index_name
+    #   <p>The name of the vector index.</p>
+    #   @return [String]
+    # @!attribute vector_attribute
+    #   <p>The vector attribute configuration for the index.</p>
+    #   @return [Types::VectorAttributeDefinition]
+    # @!attribute search_schema
+    #   <p>The search schema that defines partition key and inline filter attributes for
+    #               the vector index.</p>
+    #   @return [Array<Types::SearchSchemaElement>]
+    # @!attribute projection
+    #   <p>Specifies attributes that are copied (projected) from the table into the vector
+    #               index.</p>
+    #   @return [Types::Projection]
+    # @!attribute dimensions
+    #   <p>The number of dimensions in each vector.</p>
+    #   @return [Integer]
+    # @!attribute distance_function
+    #   <p>The distance function used to calculate similarity between vectors. Valid values:
+    #               <code>COSINE</code>, <code>EUCLIDEAN</code>, <code>DOT_PRODUCT</code>.</p>
+    #   @return [String]
+    class VectorIndex < Struct.new(
+      nil,
+      :index_name,
+      :vector_attribute,
+      :search_schema,
+      :projection,
+      :dimensions,
+      :distance_function,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the current state and configuration of a vector index, including its
+    #             status, size, item count, and the settings specified when the index was
+    #             created.</p>
+    # @!attribute index_name
+    #   <p>The name of the vector index.</p>
+    #   @return [String]
+    # @!attribute search_schema
+    #   <p>The search schema that defines partition key and inline filter attributes for
+    #               the vector index.</p>
+    #   @return [Array<Types::SearchSchemaElement>]
+    # @!attribute projection
+    #   <p>Specifies attributes that are copied (projected) from the table into the vector
+    #               index.</p>
+    #   @return [Types::Projection]
+    # @!attribute vector_attribute
+    #   <p>The vector attribute configuration for the index.</p>
+    #   @return [Types::VectorAttributeDefinition]
+    # @!attribute dimensions
+    #   <p>The number of dimensions in each vector.</p>
+    #   @return [Integer]
+    # @!attribute distance_function
+    #   <p>The distance function used to calculate similarity between vectors.</p>
+    #   @return [String]
+    # @!attribute index_status
+    #   <p>The current state of the vector index:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>CREATING</code> - The index is being created.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ACTIVE</code> - The index is ready for use.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>DELETING</code> - The index is being deleted.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute backfilling
+    #   <p>Specifies whether the index is currently backfilling. During backfill,
+    #               <code>SearchVectors</code> operations might return incomplete results.</p>
+    #   @return [Boolean]
+    # @!attribute index_size_bytes
+    #   <p>The total size of the vector index, in bytes. Amazon DynamoDB updates this value
+    #               approximately every six hours. Recent changes might not be reflected in this
+    #               value.</p>
+    #   @return [Integer]
+    # @!attribute item_count
+    #   <p>The number of items indexed in the vector index. Amazon DynamoDB updates this
+    #               value approximately every six hours. Recent changes might not be reflected in
+    #               this value.</p>
+    #   @return [Integer]
+    # @!attribute index_arn
+    #   <p>The Amazon Resource Name (ARN) that uniquely identifies the vector index.</p>
+    #   @return [String]
+    class VectorIndexDescription < Struct.new(
+      nil,
+      :index_name,
+      :search_schema,
+      :projection,
+      :vector_attribute,
+      :dimensions,
+      :distance_function,
+      :index_status,
+      :backfilling,
+      :index_size_bytes,
+      :item_count,
+      :index_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the configuration of a vector index as it existed at the time a backup
+    #             was created.</p>
+    # @!attribute index_name
+    #   <p>The name of the vector index.</p>
+    #   @return [String]
+    # @!attribute vector_attribute
+    #   <p>The vector attribute configuration for the index.</p>
+    #   @return [Types::VectorAttributeDefinition]
+    # @!attribute search_schema
+    #   <p>The search schema that defines partition key and inline filter attributes for
+    #               the vector index.</p>
+    #   @return [Array<Types::SearchSchemaElement>]
+    # @!attribute projection
+    #   <p>Specifies attributes that are copied (projected) from the table into the vector
+    #               index.</p>
+    #   @return [Types::Projection]
+    # @!attribute dimensions
+    #   <p>The number of dimensions in each vector.</p>
+    #   @return [Integer]
+    # @!attribute distance_function
+    #   <p>The distance function used to calculate similarity between vectors.</p>
+    #   @return [String]
+    class VectorIndexInfo < Struct.new(
+      nil,
+      :index_name,
+      :vector_attribute,
+      :search_schema,
+      :projection,
+      :dimensions,
+      :distance_function,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A vector index to be added to or removed from a table.</p>
+    # @!attribute create
+    #   <p>The configuration for creating a new vector index on the table.</p>
+    #   @return [Types::CreateVectorIndexAction]
+    # @!attribute delete
+    #   <p>The configuration for deleting an existing vector index from the table.</p>
+    #   @return [Types::DeleteVectorIndexAction]
+    class VectorIndexUpdate < Struct.new(
+      nil,
+      :create,
+      :delete,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

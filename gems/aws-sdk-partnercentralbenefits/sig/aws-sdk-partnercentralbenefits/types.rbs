@@ -1,0 +1,1178 @@
+module Aws::PartnerCentralBenefits
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AccessDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+    end
+
+    class AmendBenefitApplicationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?client_token: String,
+        ?revision: String,
+        ?identifier: String,
+        ?amendment_reason: String,
+        ?amendments: Array[Types::Amendment],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor client_token: String?
+      attr_accessor revision: String?
+      attr_accessor identifier: String?
+      attr_accessor amendment_reason: String?
+      attr_accessor amendments: Array[Types::Amendment]?
+    end
+
+    class AmendBenefitApplicationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class Amendment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?field_path: String,
+        ?new_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor field_path: String?
+      attr_accessor new_value: String?
+    end
+
+    class AssociateBenefitApplicationResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?benefit_application_identifier: String,
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor benefit_application_identifier: String?
+      attr_accessor resource_arn: String?
+    end
+
+    class AssociateBenefitApplicationResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?revision: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor revision: String?
+    end
+
+    class AssociatedResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?resource_identifier: String,
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor resource_identifier: String?
+      attr_accessor resource_arn: String?
+    end
+
+    module BenefitAllocationStatus
+      ACTIVE: String
+      INACTIVE: String
+      FULFILLED: String
+    end
+
+    class BenefitAllocationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?catalog: String,
+        ?arn: String,
+        ?status: String,
+        ?status_reason: String,
+        ?name: String,
+        ?benefit_id: String,
+        ?benefit_application_id: String,
+        ?fulfillment_types: Array[String],
+        ?created_at: Time,
+        ?expires_at: Time,
+        ?applicable_benefit_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor catalog: String?
+      attr_accessor arn: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor name: String?
+      attr_accessor benefit_id: String?
+      attr_accessor benefit_application_id: String?
+      attr_accessor fulfillment_types: Array[String]?
+      attr_accessor created_at: Time?
+      attr_accessor expires_at: Time?
+      attr_accessor applicable_benefit_ids: Array[String]?
+    end
+
+    module BenefitApplicationStatus
+      PENDING_SUBMISSION: String
+      IN_REVIEW: String
+      ACTION_REQUIRED: String
+      APPROVED: String
+      REJECTED: String
+      CANCELED: String
+    end
+
+    class BenefitApplicationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?name: String,
+        ?id: String,
+        ?arn: String,
+        ?benefit_id: String,
+        ?programs: Array[String],
+        ?fulfillment_types: Array[String],
+        ?status: String,
+        ?stage: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?benefit_application_details: Hash[String, String],
+        ?associated_resources: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor name: String?
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor benefit_id: String?
+      attr_accessor programs: Array[String]?
+      attr_accessor fulfillment_types: Array[String]?
+      attr_accessor status: String?
+      attr_accessor stage: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor benefit_application_details: Hash[String, String]?
+      attr_accessor associated_resources: Array[String]?
+    end
+
+    module BenefitStatus
+      ACTIVE: String
+      INACTIVE: String
+    end
+
+    class BenefitSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?catalog: String,
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+        ?programs: Array[String],
+        ?fulfillment_types: Array[String],
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor catalog: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor programs: Array[String]?
+      attr_accessor fulfillment_types: Array[String]?
+      attr_accessor status: String?
+    end
+
+    class CancelBenefitApplicationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?client_token: String,
+        ?identifier: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor client_token: String?
+      attr_accessor identifier: String?
+      attr_accessor reason: String?
+    end
+
+    class CancelBenefitApplicationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ConsumableDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?allocated_amount: Types::MonetaryValue,
+        ?remaining_amount: Types::MonetaryValue,
+        ?utilized_amount: Types::MonetaryValue,
+        ?issuance_details: Types::IssuanceDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor allocated_amount: Types::MonetaryValue?
+      attr_accessor remaining_amount: Types::MonetaryValue?
+      attr_accessor utilized_amount: Types::MonetaryValue?
+      attr_accessor issuance_details: Types::IssuanceDetail?
+    end
+
+    class Contact
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?email: String,
+        ?first_name: String,
+        ?last_name: String,
+        ?business_title: String,
+        ?phone: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor email: String?
+      attr_accessor first_name: String?
+      attr_accessor last_name: String?
+      attr_accessor business_title: String?
+      attr_accessor phone: String?
+    end
+
+    class CreateBenefitApplicationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?client_token: String,
+        ?name: String,
+        ?description: String,
+        ?benefit_identifier: String,
+        ?fulfillment_types: Array[String],
+        ?benefit_application_details: Smithy::Schema::document,
+        ?tags: Array[Types::Tag],
+        ?associated_resources: Array[String],
+        ?partner_contacts: Array[Types::Contact],
+        ?file_details: Array[Types::FileInput],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor client_token: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor benefit_identifier: String?
+      attr_accessor fulfillment_types: Array[String]?
+      attr_accessor benefit_application_details: Smithy::Schema::document?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor associated_resources: Array[String]?
+      attr_accessor partner_contacts: Array[Types::Contact]?
+      attr_accessor file_details: Array[Types::FileInput]?
+    end
+
+    class CreateBenefitApplicationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?revision: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor revision: String?
+    end
+
+    class CreditCode
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?aws_account_id: String,
+        ?value: Types::MonetaryValue,
+        ?aws_credit_code: String,
+        ?status: String,
+        ?issued_at: Time,
+        ?expires_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor aws_account_id: String?
+      attr_accessor value: Types::MonetaryValue?
+      attr_accessor aws_credit_code: String?
+      attr_accessor status: String?
+      attr_accessor issued_at: Time?
+      attr_accessor expires_at: Time?
+    end
+
+    class CreditDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?allocated_amount: Types::MonetaryValue,
+        ?issued_amount: Types::MonetaryValue,
+        ?codes: Array[Types::CreditCode],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor allocated_amount: Types::MonetaryValue?
+      attr_accessor issued_amount: Types::MonetaryValue?
+      attr_accessor codes: Array[Types::CreditCode]?
+    end
+
+    module CurrencyCode
+      AED: String
+      AMD: String
+      ARS: String
+      AUD: String
+      AWG: String
+      AZN: String
+      BBD: String
+      BDT: String
+      BGN: String
+      BMD: String
+      BND: String
+      BOB: String
+      BRL: String
+      BSD: String
+      BYR: String
+      BZD: String
+      CAD: String
+      CHF: String
+      CLP: String
+      CNY: String
+      COP: String
+      CRC: String
+      CZK: String
+      DKK: String
+      DOP: String
+      EEK: String
+      EGP: String
+      EUR: String
+      GBP: String
+      GEL: String
+      GHS: String
+      GTQ: String
+      GYD: String
+      HKD: String
+      HNL: String
+      HRK: String
+      HTG: String
+      HUF: String
+      IDR: String
+      ILS: String
+      INR: String
+      ISK: String
+      JMD: String
+      JPY: String
+      KES: String
+      KHR: String
+      KRW: String
+      KYD: String
+      KZT: String
+      LBP: String
+      LKR: String
+      LTL: String
+      LVL: String
+      MAD: String
+      MNT: String
+      MOP: String
+      MUR: String
+      MVR: String
+      MXN: String
+      MYR: String
+      NAD: String
+      NGN: String
+      NIO: String
+      NOK: String
+      NZD: String
+      PAB: String
+      PEN: String
+      PHP: String
+      PKR: String
+      PLN: String
+      PYG: String
+      QAR: String
+      RON: String
+      RUB: String
+      SAR: String
+      SEK: String
+      SGD: String
+      SIT: String
+      SKK: String
+      THB: String
+      TND: String
+      TRY: String
+      TTD: String
+      TWD: String
+      TZS: String
+      UAH: String
+      USD: String
+      UYU: String
+      UZS: String
+      VND: String
+      XAF: String
+      XCD: String
+      XOF: String
+      XPF: String
+      ZAR: String
+    end
+
+    class DisassociateBenefitApplicationResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?benefit_application_identifier: String,
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor benefit_application_identifier: String?
+      attr_accessor resource_arn: String?
+    end
+
+    class DisassociateBenefitApplicationResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?revision: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor revision: String?
+    end
+
+    class DisbursementDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?disbursed_amount: Types::MonetaryValue,
+        ?issuance_details: Types::IssuanceDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor disbursed_amount: Types::MonetaryValue?
+      attr_accessor issuance_details: Types::IssuanceDetail?
+    end
+
+    class FileDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_uri: String,
+        ?business_use_case: String,
+        ?file_name: String,
+        ?file_status: String,
+        ?file_status_reason: String,
+        ?file_type: String,
+        ?created_by: String,
+        ?created_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_uri: String?
+      attr_accessor business_use_case: String?
+      attr_accessor file_name: String?
+      attr_accessor file_status: String?
+      attr_accessor file_status_reason: String?
+      attr_accessor file_type: String?
+      attr_accessor created_by: String?
+      attr_accessor created_at: Time?
+    end
+
+    class FileInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_uri: String,
+        ?business_use_case: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_uri: String?
+      attr_accessor business_use_case: String?
+    end
+
+    module FileType
+      DOC: String
+      DOCX: String
+      XLSX: String
+      PPTX: String
+      PDF: String
+      PNG: String
+      JPG: String
+      SVG: String
+      CSV: String
+    end
+
+    class FulfillmentDetails
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?disbursement_details: Types::DisbursementDetails,
+        ?consumable_details: Types::ConsumableDetails,
+        ?credit_details: Types::CreditDetails,
+        ?access_details: Types::AccessDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor disbursement_details: Types::DisbursementDetails?
+      attr_accessor consumable_details: Types::ConsumableDetails?
+      attr_accessor credit_details: Types::CreditDetails?
+      attr_accessor access_details: Types::AccessDetails?
+
+      class DisbursementDetails < FulfillmentDetails
+      end
+      class ConsumableDetails < FulfillmentDetails
+      end
+      class CreditDetails < FulfillmentDetails
+      end
+      class AccessDetails < FulfillmentDetails
+      end
+      class Unknown < FulfillmentDetails
+      end
+    end
+
+    module FulfillmentType
+      CREDITS: String
+      CASH: String
+      ACCESS: String
+    end
+
+    class GetBenefitAllocationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor identifier: String?
+    end
+
+    class GetBenefitAllocationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?catalog: String,
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+        ?status: String,
+        ?status_reason: String,
+        ?benefit_application_id: String,
+        ?benefit_id: String,
+        ?fulfillment_type: String,
+        ?applicable_benefit_ids: Array[String],
+        ?fulfillment_detail: Types::FulfillmentDetails,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?starts_at: Time,
+        ?expires_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor catalog: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor benefit_application_id: String?
+      attr_accessor benefit_id: String?
+      attr_accessor fulfillment_type: String?
+      attr_accessor applicable_benefit_ids: Array[String]?
+      attr_accessor fulfillment_detail: Types::FulfillmentDetails?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor starts_at: Time?
+      attr_accessor expires_at: Time?
+    end
+
+    class GetBenefitApplicationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor identifier: String?
+    end
+
+    class GetBenefitApplicationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?catalog: String,
+        ?benefit_id: String,
+        ?name: String,
+        ?description: String,
+        ?fulfillment_types: Array[String],
+        ?benefit_application_details: Smithy::Schema::document,
+        ?programs: Array[String],
+        ?status: String,
+        ?stage: String,
+        ?status_reason: String,
+        ?status_reason_code: String,
+        ?status_reason_codes: Array[String],
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?revision: String,
+        ?associated_resources: Array[String],
+        ?partner_contacts: Array[Types::Contact],
+        ?file_details: Array[Types::FileDetail],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor catalog: String?
+      attr_accessor benefit_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor fulfillment_types: Array[String]?
+      attr_accessor benefit_application_details: Smithy::Schema::document?
+      attr_accessor programs: Array[String]?
+      attr_accessor status: String?
+      attr_accessor stage: String?
+      attr_accessor status_reason: String?
+      attr_accessor status_reason_code: String?
+      attr_accessor status_reason_codes: Array[String]?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor revision: String?
+      attr_accessor associated_resources: Array[String]?
+      attr_accessor partner_contacts: Array[Types::Contact]?
+      attr_accessor file_details: Array[Types::FileDetail]?
+    end
+
+    class GetBenefitInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor identifier: String?
+    end
+
+    class GetBenefitOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?catalog: String,
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+        ?programs: Array[String],
+        ?fulfillment_types: Array[String],
+        ?benefit_request_schema: Smithy::Schema::document,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor catalog: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor programs: Array[String]?
+      attr_accessor fulfillment_types: Array[String]?
+      attr_accessor benefit_request_schema: Smithy::Schema::document?
+      attr_accessor status: String?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class IssuanceDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?issuance_id: String,
+        ?issuance_amount: Types::MonetaryValue,
+        ?issued_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor issuance_id: String?
+      attr_accessor issuance_amount: Types::MonetaryValue?
+      attr_accessor issued_at: Time?
+    end
+
+    class ListBenefitAllocationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?fulfillment_types: Array[String],
+        ?benefit_identifiers: Array[String],
+        ?benefit_application_identifiers: Array[String],
+        ?status: Array[String],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor fulfillment_types: Array[String]?
+      attr_accessor benefit_identifiers: Array[String]?
+      attr_accessor benefit_application_identifiers: Array[String]?
+      attr_accessor status: Array[String]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListBenefitAllocationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?benefit_allocation_summaries: Array[Types::BenefitAllocationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor benefit_allocation_summaries: Array[Types::BenefitAllocationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListBenefitApplicationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?programs: Array[String],
+        ?fulfillment_types: Array[String],
+        ?benefit_identifiers: Array[String],
+        ?status: Array[String],
+        ?stages: Array[String],
+        ?associated_resources: Array[Types::AssociatedResource],
+        ?associated_resource_arns: Array[String],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor programs: Array[String]?
+      attr_accessor fulfillment_types: Array[String]?
+      attr_accessor benefit_identifiers: Array[String]?
+      attr_accessor status: Array[String]?
+      attr_accessor stages: Array[String]?
+      attr_accessor associated_resources: Array[Types::AssociatedResource]?
+      attr_accessor associated_resource_arns: Array[String]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListBenefitApplicationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?benefit_application_summaries: Array[Types::BenefitApplicationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor benefit_application_summaries: Array[Types::BenefitApplicationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListBenefitsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?programs: Array[String],
+        ?fulfillment_types: Array[String],
+        ?status: Array[String],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor programs: Array[String]?
+      attr_accessor fulfillment_types: Array[String]?
+      attr_accessor status: Array[String]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListBenefitsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?benefit_summaries: Array[Types::BenefitSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor benefit_summaries: Array[Types::BenefitSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class MonetaryValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?amount: String,
+        ?currency_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor amount: String?
+      attr_accessor currency_code: String?
+    end
+
+    class RecallBenefitApplicationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?client_token: String,
+        ?identifier: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor client_token: String?
+      attr_accessor identifier: String?
+      attr_accessor reason: String?
+    end
+
+    class RecallBenefitApplicationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ResourceType
+      OPPORTUNITY: String
+      BENEFIT_ALLOCATION: String
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+        ?quota_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor quota_code: String?
+    end
+
+    class SubmitBenefitApplicationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor identifier: String?
+    end
+
+    class SubmitBenefitApplicationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateBenefitApplicationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?client_token: String,
+        ?name: String,
+        ?description: String,
+        ?identifier: String,
+        ?revision: String,
+        ?benefit_application_details: Smithy::Schema::document,
+        ?partner_contacts: Array[Types::Contact],
+        ?file_details: Array[Types::FileInput],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor client_token: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor identifier: String?
+      attr_accessor revision: String?
+      attr_accessor benefit_application_details: Smithy::Schema::document?
+      attr_accessor partner_contacts: Array[Types::Contact]?
+      attr_accessor file_details: Array[Types::FileInput]?
+    end
+
+    class UpdateBenefitApplicationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?revision: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor revision: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+        ?field_list: Array[Types::ValidationExceptionField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+      attr_accessor field_list: Array[Types::ValidationExceptionField]?
+    end
+
+    module ValidationExceptionErrorCode
+      REQUIRED_FIELD_MISSING: String
+      INVALID_ENUM_VALUE: String
+      INVALID_STRING_FORMAT: String
+      INVALID_VALUE: String
+      NOT_ENOUGH_VALUES: String
+      TOO_MANY_VALUES: String
+      INVALID_RESOURCE_STATE: String
+      DUPLICATE_KEY_VALUE: String
+      VALUE_OUT_OF_RANGE: String
+      ACTION_NOT_PERMITTED: String
+    end
+
+    class ValidationExceptionField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?message: String,
+        ?code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor message: String?
+      attr_accessor code: String?
+    end
+
+    module ValidationExceptionReason
+      UNKNOWN_OPERATION: String
+      CANNOT_PARSE: String
+      FIELD_VALIDATION_FAILED: String
+      OTHER: String
+      BUSINESS_VALIDATION_FAILED: String
+    end
+  end
+end

@@ -56,12 +56,15 @@ module Aws::ControlTower
     EnabledBaselineTargetIdentifiers: ListShape
     EnabledBaselines: ListShape
     EnabledControlDetails: StructureShape
+    EnabledControlDriftTypes: StructureShape
     EnabledControlFilter: StructureShape
     EnabledControlIdentifiers: ListShape
+    EnabledControlInheritanceDrift: StructureShape
     EnabledControlParameter: StructureShape
     EnabledControlParameterSummaries: ListShape
     EnabledControlParameterSummary: StructureShape
     EnabledControlParameters: ListShape
+    EnabledControlResourceDrift: StructureShape
     EnabledControlSummary: StructureShape
     EnabledControls: ListShape
     EnablementStatus: EnumShape
@@ -121,8 +124,12 @@ module Aws::ControlTower
     Manifest: DocumentShape
     MaxResults: IntegerShape
     OperationIdentifier: StringShape
+    ParentIdentifier: StringShape
+    ParentIdentifiers: ListShape
     Region: StructureShape
     RegionName: StringShape
+    RemediationType: EnumShape
+    RemediationTypes: ListShape
     ResetEnabledBaselineInput: StructureShape
     ResetEnabledBaselineOutput: StructureShape
     ResetEnabledControlInput: StructureShape

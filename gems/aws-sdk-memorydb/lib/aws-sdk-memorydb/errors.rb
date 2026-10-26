@@ -85,7 +85,7 @@ module Aws::MemoryDB
   module Errors
     extend Smithy::Client::DynamicErrors
 
-    # <p></p>
+    # <p>An ACL with the specified name already exists.</p>
     class ACLAlreadyExistsFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::ACLAlreadyExistsFault] data
@@ -98,7 +98,7 @@ module Aws::MemoryDB
       end
     end
 
-    # <p></p>
+    # <p>The specified ACL does not exist.</p>
     class ACLNotFoundFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::ACLNotFoundFault] data
@@ -111,7 +111,7 @@ module Aws::MemoryDB
       end
     end
 
-    # <p></p>
+    # <p>The request cannot be processed because it would exceed the maximum number of ACLs allowed.</p>
     class ACLQuotaExceededFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::ACLQuotaExceededFault] data
@@ -124,7 +124,7 @@ module Aws::MemoryDB
       end
     end
 
-    # <p></p>
+    # <p>The customer has exceeded the maximum number of API requests allowed per time period.</p>
     class APICallRateForCustomerExceededFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::APICallRateForCustomerExceededFault] data
@@ -137,7 +137,7 @@ module Aws::MemoryDB
       end
     end
 
-    # <p></p>
+    # <p>A cluster with the specified name already exists.</p>
     class ClusterAlreadyExistsFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::ClusterAlreadyExistsFault] data
@@ -150,7 +150,7 @@ module Aws::MemoryDB
       end
     end
 
-    # <p></p>
+    # <p>The specified cluster does not exist.</p>
     class ClusterNotFoundFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::ClusterNotFoundFault] data
@@ -163,7 +163,7 @@ module Aws::MemoryDB
       end
     end
 
-    # <p></p>
+    # <p>The request cannot be processed because it would exceed the maximum number of clusters allowed for this customer.</p>
     class ClusterQuotaForCustomerExceededFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::ClusterQuotaForCustomerExceededFault] data
@@ -176,7 +176,7 @@ module Aws::MemoryDB
       end
     end
 
-    # <p></p>
+    # <p>A default user is required and must be specified.</p>
     class DefaultUserRequired < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::DefaultUserRequired] data
@@ -189,7 +189,7 @@ module Aws::MemoryDB
       end
     end
 
-    # <p></p>
+    # <p>A user with the specified name already exists.</p>
     class DuplicateUserNameFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::DuplicateUserNameFault] data
@@ -202,7 +202,7 @@ module Aws::MemoryDB
       end
     end
 
-    # <p></p>
+    # <p>The cluster does not have sufficient capacity to perform the requested operation.</p>
     class InsufficientClusterCapacityFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::InsufficientClusterCapacityFault] data
@@ -215,7 +215,7 @@ module Aws::MemoryDB
       end
     end
 
-    # <p></p>
+    # <p>The ACL is not in a valid state for the requested operation.</p>
     class InvalidACLStateFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::InvalidACLStateFault] data
@@ -228,7 +228,7 @@ module Aws::MemoryDB
       end
     end
 
-    # <p></p>
+    # <p>The specified Amazon Resource Name (ARN) is not valid.</p>
     class InvalidARNFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::InvalidARNFault] data
@@ -241,7 +241,7 @@ module Aws::MemoryDB
       end
     end
 
-    # <p></p>
+    # <p>The cluster is not in a valid state for the requested operation.</p>
     class InvalidClusterStateFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::InvalidClusterStateFault] data
@@ -254,7 +254,7 @@ module Aws::MemoryDB
       end
     end
 
-    # <p></p>
+    # <p>The provided credentials are not valid.</p>
     class InvalidCredentialsException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::InvalidCredentialsException] data
@@ -267,7 +267,7 @@ module Aws::MemoryDB
       end
     end
 
-    # <p></p>
+    # <p>The specified KMS key is not valid or accessible.</p>
     class InvalidKMSKeyFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::InvalidKMSKeyFault] data
@@ -293,7 +293,7 @@ module Aws::MemoryDB
       end
     end
 
-    # <p></p>
+    # <p>The node is not in a valid state for the requested operation.</p>
     class InvalidNodeStateFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::InvalidNodeStateFault] data
@@ -306,7 +306,7 @@ module Aws::MemoryDB
       end
     end
 
-    # <p></p>
+    # <p>The specified parameter combination is not valid.</p>
     class InvalidParameterCombinationException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::InvalidParameterCombinationException] data
@@ -319,7 +319,7 @@ module Aws::MemoryDB
       end
     end
 
-    # <p></p>
+    # <p>The parameter group is not in a valid state for the requested operation.</p>
     class InvalidParameterGroupStateFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::InvalidParameterGroupStateFault] data
@@ -332,7 +332,7 @@ module Aws::MemoryDB
       end
     end
 
-    # <p></p>
+    # <p>The specified parameter value is not valid.</p>
     class InvalidParameterValueException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::InvalidParameterValueException] data
@@ -345,7 +345,7 @@ module Aws::MemoryDB
       end
     end
 
-    # <p></p>
+    # <p>The snapshot is not in a valid state for the requested operation.</p>
     class InvalidSnapshotStateFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::InvalidSnapshotStateFault] data
@@ -358,7 +358,7 @@ module Aws::MemoryDB
       end
     end
 
-    # <p></p>
+    # <p>The specified subnet is not valid.</p>
     class InvalidSubnet < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::InvalidSubnet] data
@@ -371,7 +371,7 @@ module Aws::MemoryDB
       end
     end
 
-    # <p></p>
+    # <p>The user is not in a valid state for the requested operation.</p>
     class InvalidUserStateFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::InvalidUserStateFault] data
@@ -384,7 +384,7 @@ module Aws::MemoryDB
       end
     end
 
-    # <p></p>
+    # <p>The VPC network is not in a valid state for the requested operation.</p>
     class InvalidVPCNetworkStateFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::InvalidVPCNetworkStateFault] data
@@ -436,7 +436,7 @@ module Aws::MemoryDB
       end
     end
 
-    # <p></p>
+    # <p>The requested operation would result in no changes.</p>
     class NoOperationFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::NoOperationFault] data
@@ -449,7 +449,7 @@ module Aws::MemoryDB
       end
     end
 
-    # <p></p>
+    # <p>The request cannot be processed because it would exceed the maximum number of nodes allowed for this cluster.</p>
     class NodeQuotaForClusterExceededFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::NodeQuotaForClusterExceededFault] data
@@ -462,7 +462,7 @@ module Aws::MemoryDB
       end
     end
 
-    # <p></p>
+    # <p>The request cannot be processed because it would exceed the maximum number of nodes allowed for this customer.</p>
     class NodeQuotaForCustomerExceededFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::NodeQuotaForCustomerExceededFault] data
@@ -475,7 +475,7 @@ module Aws::MemoryDB
       end
     end
 
-    # <p></p>
+    # <p>A parameter group with the specified name already exists.</p>
     class ParameterGroupAlreadyExistsFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::ParameterGroupAlreadyExistsFault] data
@@ -488,7 +488,7 @@ module Aws::MemoryDB
       end
     end
 
-    # <p></p>
+    # <p>The specified parameter group does not exist.</p>
     class ParameterGroupNotFoundFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::ParameterGroupNotFoundFault] data
@@ -501,7 +501,7 @@ module Aws::MemoryDB
       end
     end
 
-    # <p></p>
+    # <p>The request cannot be processed because it would exceed the maximum number of parameter groups allowed.</p>
     class ParameterGroupQuotaExceededFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::ParameterGroupQuotaExceededFault] data
@@ -554,7 +554,7 @@ module Aws::MemoryDB
     end
 
     # <p>The requested node offering does not exist.
-    #          
+    #
     #       </p>
     class ReservedNodesOfferingNotFoundFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
@@ -568,7 +568,7 @@ module Aws::MemoryDB
       end
     end
 
-    # <p></p>
+    # <p>The required service-linked role was not found.</p>
     class ServiceLinkedRoleNotFoundFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::ServiceLinkedRoleNotFoundFault] data
@@ -581,7 +581,7 @@ module Aws::MemoryDB
       end
     end
 
-    # <p></p>
+    # <p>The specified service update does not exist.</p>
     class ServiceUpdateNotFoundFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::ServiceUpdateNotFoundFault] data
@@ -594,7 +594,7 @@ module Aws::MemoryDB
       end
     end
 
-    # <p></p>
+    # <p>The specified shard does not exist.</p>
     class ShardNotFoundFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::ShardNotFoundFault] data
@@ -607,7 +607,7 @@ module Aws::MemoryDB
       end
     end
 
-    # <p></p>
+    # <p>The request cannot be processed because it would exceed the maximum number of shards allowed per cluster.</p>
     class ShardsPerClusterQuotaExceededFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::ShardsPerClusterQuotaExceededFault] data
@@ -620,7 +620,7 @@ module Aws::MemoryDB
       end
     end
 
-    # <p></p>
+    # <p>A snapshot with the specified name already exists.</p>
     class SnapshotAlreadyExistsFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::SnapshotAlreadyExistsFault] data
@@ -633,7 +633,7 @@ module Aws::MemoryDB
       end
     end
 
-    # <p></p>
+    # <p>The specified snapshot does not exist.</p>
     class SnapshotNotFoundFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::SnapshotNotFoundFault] data
@@ -646,7 +646,7 @@ module Aws::MemoryDB
       end
     end
 
-    # <p></p>
+    # <p>The request cannot be processed because it would exceed the maximum number of snapshots allowed.</p>
     class SnapshotQuotaExceededFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::SnapshotQuotaExceededFault] data
@@ -659,7 +659,7 @@ module Aws::MemoryDB
       end
     end
 
-    # <p></p>
+    # <p>A subnet group with the specified name already exists.</p>
     class SubnetGroupAlreadyExistsFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::SubnetGroupAlreadyExistsFault] data
@@ -672,7 +672,7 @@ module Aws::MemoryDB
       end
     end
 
-    # <p></p>
+    # <p>The subnet group is currently in use and cannot be deleted.</p>
     class SubnetGroupInUseFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::SubnetGroupInUseFault] data
@@ -685,7 +685,7 @@ module Aws::MemoryDB
       end
     end
 
-    # <p></p>
+    # <p>The specified subnet group does not exist.</p>
     class SubnetGroupNotFoundFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::SubnetGroupNotFoundFault] data
@@ -698,7 +698,7 @@ module Aws::MemoryDB
       end
     end
 
-    # <p></p>
+    # <p>The request cannot be processed because it would exceed the maximum number of subnet groups allowed.</p>
     class SubnetGroupQuotaExceededFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::SubnetGroupQuotaExceededFault] data
@@ -711,7 +711,7 @@ module Aws::MemoryDB
       end
     end
 
-    # <p></p>
+    # <p>The subnet is currently in use and cannot be deleted.</p>
     class SubnetInUse < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::SubnetInUse] data
@@ -724,7 +724,7 @@ module Aws::MemoryDB
       end
     end
 
-    # <p></p>
+    # <p>The specified subnet is not allowed for this operation.</p>
     class SubnetNotAllowedFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::SubnetNotAllowedFault] data
@@ -737,7 +737,7 @@ module Aws::MemoryDB
       end
     end
 
-    # <p></p>
+    # <p>The request cannot be processed because it would exceed the maximum number of subnets allowed.</p>
     class SubnetQuotaExceededFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::SubnetQuotaExceededFault] data
@@ -750,7 +750,7 @@ module Aws::MemoryDB
       end
     end
 
-    # <p></p>
+    # <p>The specified tag does not exist.</p>
     class TagNotFoundFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::TagNotFoundFault] data
@@ -763,7 +763,7 @@ module Aws::MemoryDB
       end
     end
 
-    # <p></p>
+    # <p>The request cannot be processed because it would exceed the maximum number of tags allowed per resource.</p>
     class TagQuotaPerResourceExceeded < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::TagQuotaPerResourceExceeded] data
@@ -776,7 +776,7 @@ module Aws::MemoryDB
       end
     end
 
-    # <p></p>
+    # <p>Test failover is not available for this cluster configuration.</p>
     class TestFailoverNotAvailableFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::TestFailoverNotAvailableFault] data
@@ -789,7 +789,7 @@ module Aws::MemoryDB
       end
     end
 
-    # <p></p>
+    # <p>A user with the specified name already exists.</p>
     class UserAlreadyExistsFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::UserAlreadyExistsFault] data
@@ -802,7 +802,7 @@ module Aws::MemoryDB
       end
     end
 
-    # <p></p>
+    # <p>The specified user does not exist.</p>
     class UserNotFoundFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::UserNotFoundFault] data
@@ -815,7 +815,7 @@ module Aws::MemoryDB
       end
     end
 
-    # <p></p>
+    # <p>The request cannot be processed because it would exceed the maximum number of users allowed.</p>
     class UserQuotaExceededFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MemoryDB::Types::UserQuotaExceededFault] data

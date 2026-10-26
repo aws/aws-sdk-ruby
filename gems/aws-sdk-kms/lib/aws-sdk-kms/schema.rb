@@ -7,6 +7,7 @@ module Aws::KMS
   module Schema
 
     AWSAccountIdType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.kms#AWSAccountIdType", name: "AWSAccountIdType")
+    AccountIdType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.kms#AccountIdType", name: "AccountIdType", traits: {"smithy.api#length" => {"min" => 12, "max" => 12}, "smithy.api#pattern" => "^[0-9]{12}$"})
     AlgorithmSpec = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.kms#AlgorithmSpec", name: "AlgorithmSpec")
     AliasList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.kms#AliasList", name: "AliasList")
     AliasListEntry = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kms#AliasListEntry", name: "AliasListEntry")
@@ -26,6 +27,7 @@ module Aws::KMS
     CloudHsmClusterNotActiveException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kms#CloudHsmClusterNotActiveException", name: "CloudHsmClusterNotActiveException", traits: {"aws.protocols#awsQueryError" => {"code" => "CloudHsmClusterNotActiveException", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
     CloudHsmClusterNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kms#CloudHsmClusterNotFoundException", name: "CloudHsmClusterNotFoundException", traits: {"aws.protocols#awsQueryError" => {"code" => "CloudHsmClusterNotFoundException", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
     CloudHsmClusterNotRelatedException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kms#CloudHsmClusterNotRelatedException", name: "CloudHsmClusterNotRelatedException", traits: {"aws.protocols#awsQueryError" => {"code" => "CloudHsmClusterNotRelatedException", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
+    CloudTrailEventIdType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.kms#CloudTrailEventIdType", name: "CloudTrailEventIdType")
     ConflictException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kms#ConflictException", name: "ConflictException", traits: {"aws.protocols#awsQueryError" => {"code" => "ConflictException", "httpResponseCode" => 409}, "smithy.api#error" => "client", "smithy.api#httpError" => 409})
     ConnectCustomKeyStoreRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kms#ConnectCustomKeyStoreRequest", name: "ConnectCustomKeyStoreRequest")
     ConnectCustomKeyStoreResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kms#ConnectCustomKeyStoreResponse", name: "ConnectCustomKeyStoreResponse")
@@ -71,6 +73,8 @@ module Aws::KMS
     DisabledException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kms#DisabledException", name: "DisabledException", traits: {"aws.protocols#awsQueryError" => {"code" => "Disabled", "httpResponseCode" => 409}, "smithy.api#error" => "client", "smithy.api#httpError" => 409})
     DisconnectCustomKeyStoreRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kms#DisconnectCustomKeyStoreRequest", name: "DisconnectCustomKeyStoreRequest")
     DisconnectCustomKeyStoreResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kms#DisconnectCustomKeyStoreResponse", name: "DisconnectCustomKeyStoreResponse")
+    DryRunModifierList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.kms#DryRunModifierList", name: "DryRunModifierList")
+    DryRunModifierType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.kms#DryRunModifierType", name: "DryRunModifierType")
     DryRunOperationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kms#DryRunOperationException", name: "DryRunOperationException", traits: {"aws.protocols#awsQueryError" => {"code" => "DryRunOperation", "httpResponseCode" => 412}, "smithy.api#error" => "client", "smithy.api#httpError" => 412})
     EnableKeyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kms#EnableKeyRequest", name: "EnableKeyRequest")
     EnableKeyRotationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kms#EnableKeyRotationRequest", name: "EnableKeyRotationRequest")
@@ -96,6 +100,8 @@ module Aws::KMS
     GenerateMacResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kms#GenerateMacResponse", name: "GenerateMacResponse")
     GenerateRandomRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kms#GenerateRandomRequest", name: "GenerateRandomRequest")
     GenerateRandomResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kms#GenerateRandomResponse", name: "GenerateRandomResponse")
+    GetKeyLastUsageRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kms#GetKeyLastUsageRequest", name: "GetKeyLastUsageRequest")
+    GetKeyLastUsageResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kms#GetKeyLastUsageResponse", name: "GetKeyLastUsageResponse")
     GetKeyPolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kms#GetKeyPolicyRequest", name: "GetKeyPolicyRequest")
     GetKeyPolicyResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kms#GetKeyPolicyResponse", name: "GetKeyPolicyResponse")
     GetKeyRotationStatusRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kms#GetKeyRotationStatusRequest", name: "GetKeyRotationStatusRequest")
@@ -104,6 +110,7 @@ module Aws::KMS
     GetParametersForImportResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kms#GetParametersForImportResponse", name: "GetParametersForImportResponse")
     GetPublicKeyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kms#GetPublicKeyRequest", name: "GetPublicKeyRequest")
     GetPublicKeyResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kms#GetPublicKeyResponse", name: "GetPublicKeyResponse")
+    GrantConstraintSourceArnType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.kms#GrantConstraintSourceArnType", name: "GrantConstraintSourceArnType", traits: {"smithy.api#length" => {"min" => 20, "max" => 512}, "smithy.api#pattern" => "^arn:aws[a-z0-9-]*:[a-z0-9-]+:[a-z0-9-]*:[0-9]{12}:.+$"})
     GrantConstraints = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kms#GrantConstraints", name: "GrantConstraints")
     GrantIdType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.kms#GrantIdType", name: "GrantIdType", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}})
     GrantList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.kms#GrantList", name: "GrantList")
@@ -137,6 +144,8 @@ module Aws::KMS
     KeyAgreementAlgorithmSpecList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.kms#KeyAgreementAlgorithmSpecList", name: "KeyAgreementAlgorithmSpecList")
     KeyEncryptionMechanism = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.kms#KeyEncryptionMechanism", name: "KeyEncryptionMechanism")
     KeyIdType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.kms#KeyIdType", name: "KeyIdType", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}})
+    KeyLastUsageData = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kms#KeyLastUsageData", name: "KeyLastUsageData")
+    KeyLastUsageTrackingOperation = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.kms#KeyLastUsageTrackingOperation", name: "KeyLastUsageTrackingOperation")
     KeyList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.kms#KeyList", name: "KeyList")
     KeyListEntry = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kms#KeyListEntry", name: "KeyListEntry")
     KeyManagerType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.kms#KeyManagerType", name: "KeyManagerType")
@@ -148,6 +157,7 @@ module Aws::KMS
     KeyStorePasswordType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.kms#KeyStorePasswordType", name: "KeyStorePasswordType", traits: {"smithy.api#length" => {"min" => 7, "max" => 32}, "smithy.api#sensitive" => {}})
     KeyUnavailableException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kms#KeyUnavailableException", name: "KeyUnavailableException", traits: {"aws.protocols#awsQueryError" => {"code" => "KeyUnavailable", "httpResponseCode" => 500}, "smithy.api#error" => "server", "smithy.api#httpError" => 500})
     KeyUsageType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.kms#KeyUsageType", name: "KeyUsageType")
+    KmsRequestIdType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.kms#KmsRequestIdType", name: "KmsRequestIdType")
     LimitExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kms#LimitExceededException", name: "LimitExceededException", traits: {"aws.protocols#awsQueryError" => {"code" => "LimitExceeded", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
     LimitType = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.kms#LimitType", name: "LimitType", traits: {"smithy.api#range" => {"min" => 1, "max" => 1000}})
     ListAliasesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kms#ListAliasesRequest", name: "ListAliasesRequest")
@@ -201,6 +211,7 @@ module Aws::KMS
     RotationsListEntry = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kms#RotationsListEntry", name: "RotationsListEntry")
     ScheduleKeyDeletionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kms#ScheduleKeyDeletionRequest", name: "ScheduleKeyDeletionRequest")
     ScheduleKeyDeletionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kms#ScheduleKeyDeletionResponse", name: "ScheduleKeyDeletionResponse")
+    ServicePrincipalType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.kms#ServicePrincipalType", name: "ServicePrincipalType", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^([A-Za-z0-9\\-]+)\\.([A-Za-z0-9\\-]+)(\\.[A-Za-z0-9\\-]+)+$"})
     SignRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kms#SignRequest", name: "SignRequest")
     SignResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kms#SignResponse", name: "SignResponse")
     SigningAlgorithmSpec = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.kms#SigningAlgorithmSpec", name: "SigningAlgorithmSpec")
@@ -245,7 +256,7 @@ module Aws::KMS
     XksProxyUriUnreachableException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kms#XksProxyUriUnreachableException", name: "XksProxyUriUnreachableException", traits: {"aws.protocols#awsQueryError" => {"code" => "XksProxyUriUnreachableException", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
     XksProxyVpcEndpointServiceInUseException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kms#XksProxyVpcEndpointServiceInUseException", name: "XksProxyVpcEndpointServiceInUseException", traits: {"aws.protocols#awsQueryError" => {"code" => "XksProxyVpcEndpointServiceInUseException", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
     XksProxyVpcEndpointServiceInvalidConfigurationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kms#XksProxyVpcEndpointServiceInvalidConfigurationException", name: "XksProxyVpcEndpointServiceInvalidConfigurationException", traits: {"aws.protocols#awsQueryError" => {"code" => "XksProxyVpcEndpointServiceInvalidConfigurationException", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
-    XksProxyVpcEndpointServiceNameType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.kms#XksProxyVpcEndpointServiceNameType", name: "XksProxyVpcEndpointServiceNameType", traits: {"smithy.api#length" => {"min" => 20, "max" => 64}, "smithy.api#pattern" => "^com\\.amazonaws\\.vpce\\.([a-z]+-){2,3}\\d+\\.vpce-svc-[0-9a-z]+$"})
+    XksProxyVpcEndpointServiceNameType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.kms#XksProxyVpcEndpointServiceNameType", name: "XksProxyVpcEndpointServiceNameType", traits: {"smithy.api#length" => {"min" => 20, "max" => 64}, "smithy.api#pattern" => "^(com|eu)\\.amazonaws\\.vpce\\.([a-z]+-){2,3}\\d+\\.vpce-svc-[0-9a-z]+$"})
     XksProxyVpcEndpointServiceNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kms#XksProxyVpcEndpointServiceNotFoundException", name: "XksProxyVpcEndpointServiceNotFoundException", traits: {"aws.protocols#awsQueryError" => {"code" => "XksProxyVpcEndpointServiceNotFoundException", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
 
     AlgorithmSpec.add_member(:rsaes_pkcs1_v1_5, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RSAES_PKCS1_V1_5", traits: {"smithy.api#enumValue" => "RSAES_PKCS1_V1_5"}))
@@ -316,19 +327,22 @@ module Aws::KMS
     CreateCustomKeyStoreRequest.add_member(:xks_proxy_uri_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: XksProxyUriEndpointType, name: "XksProxyUriEndpoint"))
     CreateCustomKeyStoreRequest.add_member(:xks_proxy_uri_path, ::Smithy::Schema::Shapes::MemberShape.new(target: XksProxyUriPathType, name: "XksProxyUriPath"))
     CreateCustomKeyStoreRequest.add_member(:xks_proxy_vpc_endpoint_service_name, ::Smithy::Schema::Shapes::MemberShape.new(target: XksProxyVpcEndpointServiceNameType, name: "XksProxyVpcEndpointServiceName"))
+    CreateCustomKeyStoreRequest.add_member(:xks_proxy_vpc_endpoint_service_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountIdType, name: "XksProxyVpcEndpointServiceOwner"))
     CreateCustomKeyStoreRequest.add_member(:xks_proxy_authentication_credential, ::Smithy::Schema::Shapes::MemberShape.new(target: XksProxyAuthenticationCredentialType, name: "XksProxyAuthenticationCredential"))
     CreateCustomKeyStoreRequest.add_member(:xks_proxy_connectivity, ::Smithy::Schema::Shapes::MemberShape.new(target: XksProxyConnectivityType, name: "XksProxyConnectivity"))
     CreateCustomKeyStoreRequest.type = Types::CreateCustomKeyStoreRequest
     CreateCustomKeyStoreResponse.add_member(:custom_key_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomKeyStoreIdType, name: "CustomKeyStoreId"))
     CreateCustomKeyStoreResponse.type = Types::CreateCustomKeyStoreResponse
     CreateGrantRequest.add_member(:key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyIdType, name: "KeyId", traits: {"smithy.api#required" => {}}))
-    CreateGrantRequest.add_member(:grantee_principal, ::Smithy::Schema::Shapes::MemberShape.new(target: PrincipalIdType, name: "GranteePrincipal", traits: {"smithy.api#required" => {}}))
+    CreateGrantRequest.add_member(:grantee_principal, ::Smithy::Schema::Shapes::MemberShape.new(target: PrincipalIdType, name: "GranteePrincipal"))
     CreateGrantRequest.add_member(:retiring_principal, ::Smithy::Schema::Shapes::MemberShape.new(target: PrincipalIdType, name: "RetiringPrincipal"))
     CreateGrantRequest.add_member(:operations, ::Smithy::Schema::Shapes::MemberShape.new(target: GrantOperationList, name: "Operations", traits: {"smithy.api#required" => {}}))
     CreateGrantRequest.add_member(:constraints, ::Smithy::Schema::Shapes::MemberShape.new(target: GrantConstraints, name: "Constraints"))
     CreateGrantRequest.add_member(:grant_tokens, ::Smithy::Schema::Shapes::MemberShape.new(target: GrantTokenList, name: "GrantTokens"))
     CreateGrantRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: GrantNameType, name: "Name"))
     CreateGrantRequest.add_member(:dry_run, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBooleanType, name: "DryRun"))
+    CreateGrantRequest.add_member(:grantee_service_principal, ::Smithy::Schema::Shapes::MemberShape.new(target: ServicePrincipalType, name: "GranteeServicePrincipal"))
+    CreateGrantRequest.add_member(:retiring_service_principal, ::Smithy::Schema::Shapes::MemberShape.new(target: ServicePrincipalType, name: "RetiringServicePrincipal"))
     CreateGrantRequest.type = Types::CreateGrantRequest
     CreateGrantResponse.add_member(:grant_token, ::Smithy::Schema::Shapes::MemberShape.new(target: GrantTokenType, name: "GrantToken"))
     CreateGrantResponse.add_member(:grant_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GrantIdType, name: "GrantId"))
@@ -389,15 +403,17 @@ module Aws::KMS
     DataKeyPairSpec.add_member(:ecc_nist_p521, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ECC_NIST_P521", traits: {"smithy.api#enumValue" => "ECC_NIST_P521"}))
     DataKeyPairSpec.add_member(:ecc_secg_p256_k1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ECC_SECG_P256K1", traits: {"smithy.api#enumValue" => "ECC_SECG_P256K1"}))
     DataKeyPairSpec.add_member(:sm2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SM2", traits: {"smithy.api#enumValue" => "SM2"}))
+    DataKeyPairSpec.add_member(:ecc_nist_edwards25519, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ECC_NIST_EDWARDS25519", traits: {"smithy.api#enumValue" => "ECC_NIST_EDWARDS25519"}))
     DataKeySpec.add_member(:aes_256, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AES_256", traits: {"smithy.api#enumValue" => "AES_256"}))
     DataKeySpec.add_member(:aes_128, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AES_128", traits: {"smithy.api#enumValue" => "AES_128"}))
-    DecryptRequest.add_member(:ciphertext_blob, ::Smithy::Schema::Shapes::MemberShape.new(target: CiphertextType, name: "CiphertextBlob", traits: {"smithy.api#required" => {}}))
+    DecryptRequest.add_member(:ciphertext_blob, ::Smithy::Schema::Shapes::MemberShape.new(target: CiphertextType, name: "CiphertextBlob"))
     DecryptRequest.add_member(:encryption_context, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionContextType, name: "EncryptionContext"))
     DecryptRequest.add_member(:grant_tokens, ::Smithy::Schema::Shapes::MemberShape.new(target: GrantTokenList, name: "GrantTokens"))
     DecryptRequest.add_member(:key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyIdType, name: "KeyId"))
     DecryptRequest.add_member(:encryption_algorithm, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionAlgorithmSpec, name: "EncryptionAlgorithm"))
     DecryptRequest.add_member(:recipient, ::Smithy::Schema::Shapes::MemberShape.new(target: RecipientInfo, name: "Recipient"))
     DecryptRequest.add_member(:dry_run, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBooleanType, name: "DryRun"))
+    DecryptRequest.add_member(:dry_run_modifiers, ::Smithy::Schema::Shapes::MemberShape.new(target: DryRunModifierList, name: "DryRunModifiers"))
     DecryptRequest.type = Types::DecryptRequest
     DecryptResponse.add_member(:key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyIdType, name: "KeyId"))
     DecryptResponse.add_member(:plaintext, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaintextType, name: "Plaintext"))
@@ -454,6 +470,8 @@ module Aws::KMS
     DisconnectCustomKeyStoreRequest.add_member(:custom_key_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomKeyStoreIdType, name: "CustomKeyStoreId", traits: {"smithy.api#required" => {}}))
     DisconnectCustomKeyStoreRequest.type = Types::DisconnectCustomKeyStoreRequest
     DisconnectCustomKeyStoreResponse.type = Types::DisconnectCustomKeyStoreResponse
+    DryRunModifierList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DryRunModifierType, name: "member"))
+    DryRunModifierType.add_member(:ignore_ciphertext, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IGNORE_CIPHERTEXT", traits: {"smithy.api#enumValue" => "IGNORE_CIPHERTEXT"}))
     DryRunOperationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessageType, name: "message"))
     DryRunOperationException.type = Types::DryRunOperationException
     EnableKeyRequest.add_member(:key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyIdType, name: "KeyId", traits: {"smithy.api#required" => {}}))
@@ -552,6 +570,13 @@ module Aws::KMS
     GenerateRandomResponse.add_member(:plaintext, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaintextType, name: "Plaintext"))
     GenerateRandomResponse.add_member(:ciphertext_for_recipient, ::Smithy::Schema::Shapes::MemberShape.new(target: CiphertextType, name: "CiphertextForRecipient"))
     GenerateRandomResponse.type = Types::GenerateRandomResponse
+    GetKeyLastUsageRequest.add_member(:key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyIdType, name: "KeyId", traits: {"smithy.api#required" => {}}))
+    GetKeyLastUsageRequest.type = Types::GetKeyLastUsageRequest
+    GetKeyLastUsageResponse.add_member(:key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyIdType, name: "KeyId"))
+    GetKeyLastUsageResponse.add_member(:key_last_usage, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyLastUsageData, name: "KeyLastUsage"))
+    GetKeyLastUsageResponse.add_member(:tracking_start_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, name: "TrackingStartDate"))
+    GetKeyLastUsageResponse.add_member(:key_creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, name: "KeyCreationDate"))
+    GetKeyLastUsageResponse.type = Types::GetKeyLastUsageResponse
     GetKeyPolicyRequest.add_member(:key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyIdType, name: "KeyId", traits: {"smithy.api#required" => {}}))
     GetKeyPolicyRequest.add_member(:policy_name, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyNameType, name: "PolicyName"))
     GetKeyPolicyRequest.type = Types::GetKeyPolicyRequest
@@ -589,6 +614,7 @@ module Aws::KMS
     GetPublicKeyResponse.type = Types::GetPublicKeyResponse
     GrantConstraints.add_member(:encryption_context_subset, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionContextType, name: "EncryptionContextSubset"))
     GrantConstraints.add_member(:encryption_context_equals, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionContextType, name: "EncryptionContextEquals"))
+    GrantConstraints.add_member(:source_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GrantConstraintSourceArnType, name: "SourceArn"))
     GrantConstraints.type = Types::GrantConstraints
     GrantList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GrantListEntry, name: "member"))
     GrantListEntry.add_member(:key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyIdType, name: "KeyId"))
@@ -600,6 +626,8 @@ module Aws::KMS
     GrantListEntry.add_member(:issuing_account, ::Smithy::Schema::Shapes::MemberShape.new(target: PrincipalIdType, name: "IssuingAccount"))
     GrantListEntry.add_member(:operations, ::Smithy::Schema::Shapes::MemberShape.new(target: GrantOperationList, name: "Operations"))
     GrantListEntry.add_member(:constraints, ::Smithy::Schema::Shapes::MemberShape.new(target: GrantConstraints, name: "Constraints"))
+    GrantListEntry.add_member(:grantee_service_principal, ::Smithy::Schema::Shapes::MemberShape.new(target: ServicePrincipalType, name: "GranteeServicePrincipal"))
+    GrantListEntry.add_member(:retiring_service_principal, ::Smithy::Schema::Shapes::MemberShape.new(target: ServicePrincipalType, name: "RetiringServicePrincipal"))
     GrantListEntry.type = Types::GrantListEntry
     GrantOperation.add_member(:decrypt, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Decrypt", traits: {"smithy.api#enumValue" => "Decrypt"}))
     GrantOperation.add_member(:encrypt, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Encrypt", traits: {"smithy.api#enumValue" => "Encrypt"}))
@@ -671,6 +699,23 @@ module Aws::KMS
     KeyAgreementAlgorithmSpec.add_member(:ecdh, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ECDH", traits: {"smithy.api#enumValue" => "ECDH"}))
     KeyAgreementAlgorithmSpecList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyAgreementAlgorithmSpec, name: "member"))
     KeyEncryptionMechanism.add_member(:rsaes_oaep_sha_256, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RSAES_OAEP_SHA_256", traits: {"smithy.api#enumValue" => "RSAES_OAEP_SHA_256"}))
+    KeyLastUsageData.add_member(:operation, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyLastUsageTrackingOperation, name: "Operation"))
+    KeyLastUsageData.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, name: "Timestamp"))
+    KeyLastUsageData.add_member(:cloud_trail_event_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudTrailEventIdType, name: "CloudTrailEventId"))
+    KeyLastUsageData.add_member(:kms_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsRequestIdType, name: "KmsRequestId"))
+    KeyLastUsageData.type = Types::KeyLastUsageData
+    KeyLastUsageTrackingOperation.add_member(:decrypt, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Decrypt", traits: {"smithy.api#enumValue" => "Decrypt"}))
+    KeyLastUsageTrackingOperation.add_member(:derive_shared_secret, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DeriveSharedSecret", traits: {"smithy.api#enumValue" => "DeriveSharedSecret"}))
+    KeyLastUsageTrackingOperation.add_member(:encrypt, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Encrypt", traits: {"smithy.api#enumValue" => "Encrypt"}))
+    KeyLastUsageTrackingOperation.add_member(:generate_data_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GenerateDataKey", traits: {"smithy.api#enumValue" => "GenerateDataKey"}))
+    KeyLastUsageTrackingOperation.add_member(:generate_data_key_pair, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GenerateDataKeyPair", traits: {"smithy.api#enumValue" => "GenerateDataKeyPair"}))
+    KeyLastUsageTrackingOperation.add_member(:generate_data_key_pair_without_plaintext, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GenerateDataKeyPairWithoutPlaintext", traits: {"smithy.api#enumValue" => "GenerateDataKeyPairWithoutPlaintext"}))
+    KeyLastUsageTrackingOperation.add_member(:generate_data_key_without_plaintext, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GenerateDataKeyWithoutPlaintext", traits: {"smithy.api#enumValue" => "GenerateDataKeyWithoutPlaintext"}))
+    KeyLastUsageTrackingOperation.add_member(:generate_mac, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GenerateMac", traits: {"smithy.api#enumValue" => "GenerateMac"}))
+    KeyLastUsageTrackingOperation.add_member(:re_encrypt, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ReEncrypt", traits: {"smithy.api#enumValue" => "ReEncrypt"}))
+    KeyLastUsageTrackingOperation.add_member(:sign, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Sign", traits: {"smithy.api#enumValue" => "Sign"}))
+    KeyLastUsageTrackingOperation.add_member(:verify, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Verify", traits: {"smithy.api#enumValue" => "Verify"}))
+    KeyLastUsageTrackingOperation.add_member(:verify_mac, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VerifyMac", traits: {"smithy.api#enumValue" => "VerifyMac"}))
     KeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyListEntry, name: "member"))
     KeyListEntry.add_member(:key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyIdType, name: "KeyId"))
     KeyListEntry.add_member(:key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, name: "KeyArn"))
@@ -680,6 +725,7 @@ module Aws::KMS
     KeyMaterialState.add_member(:non_current, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NON_CURRENT", traits: {"smithy.api#enumValue" => "NON_CURRENT"}))
     KeyMaterialState.add_member(:current, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CURRENT", traits: {"smithy.api#enumValue" => "CURRENT"}))
     KeyMaterialState.add_member(:pending_rotation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING_ROTATION", traits: {"smithy.api#enumValue" => "PENDING_ROTATION"}))
+    KeyMaterialState.add_member(:pending_multi_region_import_and_rotation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING_MULTI_REGION_IMPORT_AND_ROTATION", traits: {"smithy.api#enumValue" => "PENDING_MULTI_REGION_IMPORT_AND_ROTATION"}))
     KeyMetadata.add_member(:aws_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AWSAccountIdType, name: "AWSAccountId"))
     KeyMetadata.add_member(:key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyIdType, name: "KeyId", traits: {"smithy.api#required" => {}}))
     KeyMetadata.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, name: "Arn"))
@@ -723,6 +769,7 @@ module Aws::KMS
     KeySpec.add_member(:ml_dsa_44, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_DSA_44", traits: {"smithy.api#enumValue" => "ML_DSA_44"}))
     KeySpec.add_member(:ml_dsa_65, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_DSA_65", traits: {"smithy.api#enumValue" => "ML_DSA_65"}))
     KeySpec.add_member(:ml_dsa_87, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_DSA_87", traits: {"smithy.api#enumValue" => "ML_DSA_87"}))
+    KeySpec.add_member(:ecc_nist_edwards25519, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ECC_NIST_EDWARDS25519", traits: {"smithy.api#enumValue" => "ECC_NIST_EDWARDS25519"}))
     KeyState.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Creating", traits: {"smithy.api#enumValue" => "Creating"}))
     KeyState.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Enabled", traits: {"smithy.api#enumValue" => "Enabled"}))
     KeyState.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Disabled", traits: {"smithy.api#enumValue" => "Disabled"}))
@@ -756,6 +803,7 @@ module Aws::KMS
     ListGrantsRequest.add_member(:key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyIdType, name: "KeyId", traits: {"smithy.api#required" => {}}))
     ListGrantsRequest.add_member(:grant_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GrantIdType, name: "GrantId"))
     ListGrantsRequest.add_member(:grantee_principal, ::Smithy::Schema::Shapes::MemberShape.new(target: PrincipalIdType, name: "GranteePrincipal"))
+    ListGrantsRequest.add_member(:grantee_service_principal, ::Smithy::Schema::Shapes::MemberShape.new(target: ServicePrincipalType, name: "GranteeServicePrincipal"))
     ListGrantsRequest.type = Types::ListGrantsRequest
     ListKeyPoliciesRequest.add_member(:key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyIdType, name: "KeyId", traits: {"smithy.api#required" => {}}))
     ListKeyPoliciesRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: LimitType, name: "Limit"))
@@ -795,7 +843,8 @@ module Aws::KMS
     ListRetirableGrantsOutput.type = Types::ListRetirableGrantsOutput
     ListRetirableGrantsRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: LimitType, name: "Limit"))
     ListRetirableGrantsRequest.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: MarkerType, name: "Marker"))
-    ListRetirableGrantsRequest.add_member(:retiring_principal, ::Smithy::Schema::Shapes::MemberShape.new(target: PrincipalIdType, name: "RetiringPrincipal", traits: {"smithy.api#required" => {}}))
+    ListRetirableGrantsRequest.add_member(:retiring_principal, ::Smithy::Schema::Shapes::MemberShape.new(target: PrincipalIdType, name: "RetiringPrincipal"))
+    ListRetirableGrantsRequest.add_member(:retiring_service_principal, ::Smithy::Schema::Shapes::MemberShape.new(target: ServicePrincipalType, name: "RetiringServicePrincipal"))
     ListRetirableGrantsRequest.type = Types::ListRetirableGrantsRequest
     MacAlgorithmSpec.add_member(:hmac_sha_224, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HMAC_SHA_224", traits: {"smithy.api#enumValue" => "HMAC_SHA_224"}))
     MacAlgorithmSpec.add_member(:hmac_sha_256, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HMAC_SHA_256", traits: {"smithy.api#enumValue" => "HMAC_SHA_256"}))
@@ -829,7 +878,7 @@ module Aws::KMS
     PutKeyPolicyRequest.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyType, name: "Policy", traits: {"smithy.api#required" => {}}))
     PutKeyPolicyRequest.add_member(:bypass_policy_lockout_safety_check, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanType, name: "BypassPolicyLockoutSafetyCheck", traits: {"smithy.api#default" => false}))
     PutKeyPolicyRequest.type = Types::PutKeyPolicyRequest
-    ReEncryptRequest.add_member(:ciphertext_blob, ::Smithy::Schema::Shapes::MemberShape.new(target: CiphertextType, name: "CiphertextBlob", traits: {"smithy.api#required" => {}}))
+    ReEncryptRequest.add_member(:ciphertext_blob, ::Smithy::Schema::Shapes::MemberShape.new(target: CiphertextType, name: "CiphertextBlob"))
     ReEncryptRequest.add_member(:source_encryption_context, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionContextType, name: "SourceEncryptionContext"))
     ReEncryptRequest.add_member(:source_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyIdType, name: "SourceKeyId"))
     ReEncryptRequest.add_member(:destination_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyIdType, name: "DestinationKeyId", traits: {"smithy.api#required" => {}}))
@@ -838,6 +887,7 @@ module Aws::KMS
     ReEncryptRequest.add_member(:destination_encryption_algorithm, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionAlgorithmSpec, name: "DestinationEncryptionAlgorithm"))
     ReEncryptRequest.add_member(:grant_tokens, ::Smithy::Schema::Shapes::MemberShape.new(target: GrantTokenList, name: "GrantTokens"))
     ReEncryptRequest.add_member(:dry_run, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBooleanType, name: "DryRun"))
+    ReEncryptRequest.add_member(:dry_run_modifiers, ::Smithy::Schema::Shapes::MemberShape.new(target: DryRunModifierList, name: "DryRunModifiers"))
     ReEncryptRequest.type = Types::ReEncryptRequest
     ReEncryptResponse.add_member(:ciphertext_blob, ::Smithy::Schema::Shapes::MemberShape.new(target: CiphertextType, name: "CiphertextBlob"))
     ReEncryptResponse.add_member(:source_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyIdType, name: "SourceKeyId"))
@@ -917,6 +967,8 @@ module Aws::KMS
     SigningAlgorithmSpec.add_member(:ecdsa_sha_512, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ECDSA_SHA_512", traits: {"smithy.api#enumValue" => "ECDSA_SHA_512"}))
     SigningAlgorithmSpec.add_member(:sm2_dsa, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SM2DSA", traits: {"smithy.api#enumValue" => "SM2DSA"}))
     SigningAlgorithmSpec.add_member(:ml_dsa_shake_256, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_DSA_SHAKE_256", traits: {"smithy.api#enumValue" => "ML_DSA_SHAKE_256"}))
+    SigningAlgorithmSpec.add_member(:ed25519_sha_512, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ED25519_SHA_512", traits: {"smithy.api#enumValue" => "ED25519_SHA_512"}))
+    SigningAlgorithmSpec.add_member(:ed25519_ph_sha_512, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ED25519_PH_SHA_512", traits: {"smithy.api#enumValue" => "ED25519_PH_SHA_512"}))
     SigningAlgorithmSpecList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SigningAlgorithmSpec, name: "member"))
     Tag.add_member(:tag_key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyType, name: "TagKey", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:tag_value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValueType, name: "TagValue", traits: {"smithy.api#required" => {}}))
@@ -943,6 +995,7 @@ module Aws::KMS
     UpdateCustomKeyStoreRequest.add_member(:xks_proxy_uri_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: XksProxyUriEndpointType, name: "XksProxyUriEndpoint"))
     UpdateCustomKeyStoreRequest.add_member(:xks_proxy_uri_path, ::Smithy::Schema::Shapes::MemberShape.new(target: XksProxyUriPathType, name: "XksProxyUriPath"))
     UpdateCustomKeyStoreRequest.add_member(:xks_proxy_vpc_endpoint_service_name, ::Smithy::Schema::Shapes::MemberShape.new(target: XksProxyVpcEndpointServiceNameType, name: "XksProxyVpcEndpointServiceName"))
+    UpdateCustomKeyStoreRequest.add_member(:xks_proxy_vpc_endpoint_service_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountIdType, name: "XksProxyVpcEndpointServiceOwner"))
     UpdateCustomKeyStoreRequest.add_member(:xks_proxy_authentication_credential, ::Smithy::Schema::Shapes::MemberShape.new(target: XksProxyAuthenticationCredentialType, name: "XksProxyAuthenticationCredential"))
     UpdateCustomKeyStoreRequest.add_member(:xks_proxy_connectivity, ::Smithy::Schema::Shapes::MemberShape.new(target: XksProxyConnectivityType, name: "XksProxyConnectivity"))
     UpdateCustomKeyStoreRequest.type = Types::UpdateCustomKeyStoreRequest
@@ -996,6 +1049,7 @@ module Aws::KMS
     XksProxyConfigurationType.add_member(:uri_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: XksProxyUriEndpointType, name: "UriEndpoint"))
     XksProxyConfigurationType.add_member(:uri_path, ::Smithy::Schema::Shapes::MemberShape.new(target: XksProxyUriPathType, name: "UriPath"))
     XksProxyConfigurationType.add_member(:vpc_endpoint_service_name, ::Smithy::Schema::Shapes::MemberShape.new(target: XksProxyVpcEndpointServiceNameType, name: "VpcEndpointServiceName"))
+    XksProxyConfigurationType.add_member(:vpc_endpoint_service_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountIdType, name: "VpcEndpointServiceOwner"))
     XksProxyConfigurationType.type = Types::XksProxyConfigurationType
     XksProxyConnectivityType.add_member(:public_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PUBLIC_ENDPOINT", traits: {"smithy.api#enumValue" => "PUBLIC_ENDPOINT"}))
     XksProxyConnectivityType.add_member(:vpc_endpoint_service, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VPC_ENDPOINT_SERVICE", traits: {"smithy.api#enumValue" => "VPC_ENDPOINT_SERVICE"}))
@@ -1022,7 +1076,7 @@ module Aws::KMS
       service.id = "com.amazonaws.kms#TrentService"
       service.name = "TrentService"
       service.version = "2014-11-01"
-      service.traits = {"aws.api#service" => {"sdkId" => "KMS", "arnNamespace" => "kms", "cloudFormationName" => "KMS", "cloudTrailEventSource" => "kms.amazonaws.com", "endpointPrefix" => "kms"}, "aws.auth#sigv4" => {"name" => "kms"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "AWS Key Management Service", "smithy.api#xmlNamespace" => {"uri" => "https://trent.amazonaws.com/doc/2014-11-01/"}}
+      service.traits = {"aws.api#service" => {"sdkId" => "KMS", "arnNamespace" => "kms", "cloudFormationName" => "KMS", "cloudTrailEventSource" => "kms.amazonaws.com", "endpointPrefix" => "kms"}, "aws.auth#sigv4" => {"name" => "kms"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "AWS Key Management Service", "smithy.api#xmlNamespace" => {"uri" => "https://trent.amazonaws.com/doc/2014-11-01/"}, "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://kms-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://kms-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://kms.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://kms.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
       service.add_operation(:cancel_key_deletion, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kms#CancelKeyDeletion"
         operation.name = "CancelKeyDeletion"
@@ -1382,6 +1436,17 @@ module Aws::KMS
         operation.errors << DependencyTimeoutException
         operation.errors << KMSInternalException
         operation.errors << UnsupportedOperationException
+        operation.traits = {}
+      end)
+      service.add_operation(:get_key_last_usage, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.kms#GetKeyLastUsage"
+        operation.name = "GetKeyLastUsage"
+        operation.input = GetKeyLastUsageRequest
+        operation.output = GetKeyLastUsageResponse
+        operation.errors << DependencyTimeoutException
+        operation.errors << InvalidArnException
+        operation.errors << KMSInternalException
+        operation.errors << NotFoundException
         operation.traits = {}
       end)
       service.add_operation(:get_key_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|

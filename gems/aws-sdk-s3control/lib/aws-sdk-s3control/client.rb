@@ -148,18 +148,18 @@ module Aws::S3Control
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -216,35 +216,22 @@ module Aws::S3Control
       super
     end
 
-    # <p>Associate your S3 Access Grants instance with an Amazon Web Services IAM Identity Center instance. Use this
-    #          action if you want to create access grants for users or groups from your corporate identity
-    #          directory. First, you must add your corporate identity directory to Amazon Web Services IAM Identity
-    #          Center. Then, you can associate this IAM Identity Center instance with your S3 Access Grants
-    #          instance.</p>
+    # <p>Associate your S3 Access Grants instance with an Amazon Web Services IAM Identity Center instance. Use this action if you want to create access grants for users or groups from your corporate identity directory. First, you must add your corporate identity directory to Amazon Web Services IAM Identity Center. Then, you can associate this IAM Identity Center instance with your S3 Access Grants instance.</p>
     #          <dl>
     #             <dt>Permissions</dt>
     #             <dd>
-    #                <p>You must have the <code>s3:AssociateAccessGrantsIdentityCenter</code>
-    #                   permission to use this operation. </p>
+    #                <p>You must have the <code>s3:AssociateAccessGrantsIdentityCenter</code> permission to use this operation. </p>
     #             </dd>
     #             <dt>Additional Permissions</dt>
     #             <dd>
-    #                <p>You must also have the following permissions:
-    #                      <code>sso:CreateApplication</code>, <code>sso:PutApplicationGrant</code>, and
-    #                      <code>sso:PutApplicationAuthenticationMethod</code>. </p>
+    #                <p>You must also have the following permissions: <code>sso:CreateApplication</code>, <code>sso:PutApplicationGrant</code>, and <code>sso:PutApplicationAuthenticationMethod</code>. </p>
     #             </dd>
     #          </dl>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::AssociateAccessGrantsIdentityCenterRequest] params
     # @option params [String] :account_id
     #   <p>The Amazon Web Services account ID of the S3 Access Grants instance.</p>
     # @option params [String] :identity_center_arn
-    #   <p>The Amazon Resource Name (ARN) of the Amazon Web Services IAM Identity Center instance that you are
-    #            associating with your S3 Access Grants instance. An IAM Identity Center instance is your corporate
-    #            identity directory that you added to the IAM Identity Center. You can use the <a href="https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_ListInstances.html">ListInstances</a> API operation to retrieve a list of your Identity Center
-    #            instances and their ARNs.</p>
+    #   <p>The Amazon Resource Name (ARN) of the Amazon Web Services IAM Identity Center instance that you are associating with your S3 Access Grants instance. An IAM Identity Center instance is your corporate identity directory that you added to the IAM Identity Center. You can use the <a href="https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_ListInstances.html">ListInstances</a> API operation to retrieve a list of your Identity Center instances and their ARNs.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     account_id: "AccountId",
@@ -261,21 +248,15 @@ module Aws::S3Control
       request.send_request(options)
     end
 
-    # <p>Creates an access grant that gives a grantee access to your S3 data. The grantee can be
-    #          an IAM user or role or a directory user, or group. Before you can create a grant, you
-    #          must have an S3 Access Grants instance in the same Region as the S3 data. You can create an S3 Access Grants
-    #          instance using the <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessGrantsInstance.html">CreateAccessGrantsInstance</a>. You must also have registered at least one S3 data
-    #          location in your S3 Access Grants instance using <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessGrantsLocation.html">CreateAccessGrantsLocation</a>. </p>
+    # <p>Creates an access grant that gives a grantee access to your S3 data. The grantee can be an IAM user or role or a directory user, or group. Before you can create a grant, you must have an S3 Access Grants instance in the same Region as the S3 data. You can create an S3 Access Grants instance using the <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessGrantsInstance.html">CreateAccessGrantsInstance</a>. You must also have registered at least one S3 data location in your S3 Access Grants instance using <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessGrantsLocation.html">CreateAccessGrantsLocation</a>.  </p>
     #          <dl>
     #             <dt>Permissions</dt>
     #             <dd>
-    #                <p>You must have the <code>s3:CreateAccessGrant</code> permission to use this
-    #                   operation. </p>
+    #                <p>You must have the <code>s3:CreateAccessGrant</code> permission to use this operation. </p>
     #             </dd>
     #             <dt>Additional Permissions</dt>
     #             <dd>
-    #                <p>For any directory identity - <code>sso:DescribeInstance</code> and
-    #                      <code>sso:DescribeApplication</code>
+    #                <p>For any directory identity - <code>sso:DescribeInstance</code> and <code>sso:DescribeApplication</code>
     #                </p>
     #                <p>For directory users - <code>identitystore:DescribeUser</code>
     #                </p>
@@ -283,33 +264,18 @@ module Aws::S3Control
     #                </p>
     #             </dd>
     #          </dl>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::CreateAccessGrantRequest] params
     # @option params [String] :account_id
     #   <p>The Amazon Web Services account ID of the S3 Access Grants instance.</p>
     # @option params [String] :access_grants_location_id
-    #   <p>The ID of the registered location to which you are granting access. S3 Access Grants assigns this
-    #            ID when you register the location. S3 Access Grants assigns the ID <code>default</code> to the
-    #            default location <code>s3://</code> and assigns an auto-generated ID to other locations
-    #            that you register. </p>
-    #            <p>If you are passing the <code>default</code> location, you cannot create an access grant
-    #            for the entire default location. You must also specify a bucket or a bucket and prefix in
-    #            the <code>Subprefix</code> field. </p>
+    #   <p>The ID of the registered location to which you are granting access. S3 Access Grants assigns this ID when you register the location. S3 Access Grants assigns the ID <code>default</code> to the default location <code>s3://</code> and assigns an auto-generated ID to other locations that you register. </p>
+    #            <p>If you are passing the <code>default</code> location, you cannot create an access grant for the entire default location. You must also specify a bucket or a bucket and prefix in the <code>Subprefix</code> field. </p>
     # @option params [Types::AccessGrantsLocationConfiguration] :access_grants_location_configuration
-    #   <p>The configuration options of the grant location. The grant location is the S3 path to
-    #            the data to which you are granting access. It contains the <code>S3SubPrefix</code> field.
-    #            The grant scope is the result of appending the subprefix to the location scope of the
-    #            registered location.</p>
+    #   <p>The configuration options of the grant location. The grant location is the S3 path to the data to which you are granting access. It contains the <code>S3SubPrefix</code> field. The grant scope is the result of appending the subprefix to the location scope of the registered location.</p>
     # @option params [Types::Grantee] :grantee
-    #   <p>The user, group, or role to which you are granting access. You can grant access to an
-    #            IAM user or role. If you have added your corporate directory to Amazon Web Services IAM Identity
-    #            Center and associated your Identity Center instance with your S3 Access Grants instance, the grantee
-    #            can also be a corporate directory user or group.</p>
+    #   <p>The user, group, or role to which you are granting access. You can grant access to an IAM user or role. If you have added your corporate directory to Amazon Web Services IAM Identity Center and associated your Identity Center instance with your S3 Access Grants instance, the grantee can also be a corporate directory user or group.</p>
     # @option params [String] :permission
-    #   <p>The type of access that you are granting to your S3 data, which can be set to one of the
-    #            following values:</p>
+    #   <p>The type of access that you are granting to your S3 data, which can be set to one of the following values:</p>
     #            <ul>
     #               <li>
     #                  <p>
@@ -325,18 +291,11 @@ module Aws::S3Control
     #               </li>
     #            </ul>
     # @option params [String] :application_arn
-    #   <p>The Amazon Resource Name (ARN) of an Amazon Web Services IAM Identity Center application associated
-    #            with your Identity Center instance. If an application ARN is included in the request to
-    #            create an access grant, the grantee can only access the S3 data through this application.
-    #         </p>
+    #   <p>The Amazon Resource Name (ARN) of an Amazon Web Services IAM Identity Center application associated with your Identity Center instance. If an application ARN is included in the request to create an access grant, the grantee can only access the S3 data through this application. </p>
     # @option params [String] :s3_prefix_type
-    #   <p>The type of <code>S3SubPrefix</code>. The only possible value is <code>Object</code>.
-    #            Pass this value if the access grant scope is an object. Do not pass this value if the
-    #            access grant scope is a bucket or a bucket and a prefix. </p>
+    #   <p>The type of <code>S3SubPrefix</code>. The only possible value is <code>Object</code>. Pass this value if the access grant scope is an object. Do not pass this value if the access grant scope is a bucket or a bucket and a prefix. </p>
     # @option params [Array<Types::Tag>] :tags
-    #   <p>The Amazon Web Services resource tags that you are adding to the access grant. Each tag is a label
-    #            consisting of a user-defined key and value. Tags can help you manage, identify, organize,
-    #            search for, and filter resources. </p>
+    #   <p>The Amazon Web Services resource tags that you are adding to the access grant. Each tag is a label consisting of a user-defined key and value. Tags can help you manage, identify, organize, search for, and filter resources. </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     account_id: "AccountId",
@@ -384,39 +343,24 @@ module Aws::S3Control
       request.send_request(options)
     end
 
-    # <p>Creates an S3 Access Grants instance, which serves as a logical grouping for access grants. You
-    #          can create one S3 Access Grants instance per Region per account. </p>
+    # <p>Creates an S3 Access Grants instance, which serves as a logical grouping for access grants. You can create one S3 Access Grants instance per Region per account. </p>
     #          <dl>
     #             <dt>Permissions</dt>
     #             <dd>
-    #                <p>You must have the <code>s3:CreateAccessGrantsInstance</code> permission to use
-    #                   this operation. </p>
+    #                <p>You must have the <code>s3:CreateAccessGrantsInstance</code> permission to use this operation. </p>
     #             </dd>
     #             <dt>Additional Permissions</dt>
     #             <dd>
-    #                <p>To associate an IAM Identity Center instance with your S3 Access Grants instance, you
-    #                   must also have the <code>sso:DescribeInstance</code>,
-    #                      <code>sso:CreateApplication</code>, <code>sso:PutApplicationGrant</code>, and
-    #                      <code>sso:PutApplicationAuthenticationMethod</code> permissions. </p>
+    #                <p>To associate an IAM Identity Center instance with your S3 Access Grants instance, you must also have the <code>sso:DescribeInstance</code>, <code>sso:CreateApplication</code>, <code>sso:PutApplicationGrant</code>, and <code>sso:PutApplicationAuthenticationMethod</code> permissions. </p>
     #             </dd>
     #          </dl>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::CreateAccessGrantsInstanceRequest] params
     # @option params [String] :account_id
     #   <p>The Amazon Web Services account ID of the S3 Access Grants instance.</p>
     # @option params [String] :identity_center_arn
-    #   <p>If you would like to associate your S3 Access Grants instance with an Amazon Web Services IAM Identity Center
-    #            instance, use this field to pass the Amazon Resource Name (ARN) of the Amazon Web Services IAM Identity
-    #            Center instance that you are associating with your S3 Access Grants instance. An IAM Identity
-    #            Center instance is your corporate identity directory that you added to the IAM Identity
-    #            Center. You can use the <a href="https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_ListInstances.html">ListInstances</a> API
-    #            operation to retrieve a list of your Identity Center instances and their ARNs. </p>
+    #   <p>If you would like to associate your S3 Access Grants instance with an Amazon Web Services IAM Identity Center instance, use this field to pass the Amazon Resource Name (ARN) of the Amazon Web Services IAM Identity Center instance that you are associating with your S3 Access Grants instance. An IAM Identity Center instance is your corporate identity directory that you added to the IAM Identity Center. You can use the <a href="https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_ListInstances.html">ListInstances</a> API operation to retrieve a list of your Identity Center instances and their ARNs. </p>
     # @option params [Array<Types::Tag>] :tags
-    #   <p>The Amazon Web Services resource tags that you are adding to the S3 Access Grants instance. Each tag is a label
-    #            consisting of a user-defined key and value. Tags can help you manage, identify, organize,
-    #            search for, and filter resources. </p>
+    #   <p>The Amazon Web Services resource tags that you are adding to the S3 Access Grants instance. Each tag is a label consisting of a user-defined key and value. Tags can help you manage, identify, organize, search for, and filter resources. </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     account_id: "AccountId",
@@ -446,9 +390,7 @@ module Aws::S3Control
       request.send_request(options)
     end
 
-    # <p>The S3 data location that you would like to register in your S3 Access Grants instance. Your S3
-    #          data must be in the same Region as your S3 Access Grants instance. The location can be one of the
-    #          following: </p>
+    # <p>The S3 data location that you would like to register in your S3 Access Grants instance. Your S3 data must be in the same Region as your S3 Access Grants instance. The location can be one of the following: </p>
     #          <ul>
     #             <li>
     #                <p>The default S3 location <code>s3://</code>
@@ -463,45 +405,27 @@ module Aws::S3Control
     #                </p>
     #             </li>
     #          </ul>
-    #          <p>When you register a location, you must include the IAM role that has permission to
-    #          manage the S3 location that you are registering. Give S3 Access Grants permission to assume this role
-    #             <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-grants-location.html">using a policy</a>. S3 Access Grants assumes this role to manage access to the location and
-    #          to vend temporary credentials to grantees or client applications. </p>
+    #          <p>When you register a location, you must include the IAM role that has permission to manage the S3 location that you are registering. Give S3 Access Grants permission to assume this role <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-grants-location.html">using a policy</a>. S3 Access Grants assumes this role to manage access to the location and to vend temporary credentials to grantees or client applications. </p>
     #          <dl>
     #             <dt>Permissions</dt>
     #             <dd>
-    #                <p>You must have the <code>s3:CreateAccessGrantsLocation</code> permission to use
-    #                   this operation. </p>
+    #                <p>You must have the <code>s3:CreateAccessGrantsLocation</code> permission to use this operation. </p>
     #             </dd>
     #             <dt>Additional Permissions</dt>
     #             <dd>
-    #                <p>You must also have the following permission for the specified IAM role:
-    #                      <code>iam:PassRole</code>
+    #                <p>You must also have the following permission for the specified IAM role: <code>iam:PassRole</code>
     #                </p>
     #             </dd>
     #          </dl>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::CreateAccessGrantsLocationRequest] params
     # @option params [String] :account_id
     #   <p>The Amazon Web Services account ID of the S3 Access Grants instance.</p>
     # @option params [String] :location_scope
-    #   <p>The S3 path to the location that you are registering. The location scope can be the
-    #            default S3 location <code>s3://</code>, the S3 path to a bucket
-    #               <code>s3://<bucket></code>, or the S3 path to a bucket and prefix
-    #               <code>s3://<bucket>/<prefix></code>. A prefix in S3 is a string of
-    #            characters at the beginning of an object key name used to organize the objects that you
-    #            store in your S3 buckets. For example, object key names that start with the
-    #               <code>engineering/</code> prefix or object key names that start with the
-    #               <code>marketing/campaigns/</code> prefix.</p>
+    #   <p>The S3 path to the location that you are registering. The location scope can be the default S3 location <code>s3://</code>, the S3 path to a bucket <code>s3://<bucket></code>, or the S3 path to a bucket and prefix <code>s3://<bucket>/<prefix></code>. A prefix in S3 is a string of characters at the beginning of an object key name used to organize the objects that you store in your S3 buckets. For example, object key names that start with the <code>engineering/</code> prefix or object key names that start with the <code>marketing/campaigns/</code> prefix.</p>
     # @option params [String] :iam_role_arn
-    #   <p>The Amazon Resource Name (ARN) of the IAM role for the registered location. S3 Access Grants
-    #            assumes this role to manage access to the registered location. </p>
+    #   <p>The Amazon Resource Name (ARN) of the IAM role for the registered location. S3 Access Grants assumes this role to manage access to the registered location. </p>
     # @option params [Array<Types::Tag>] :tags
-    #   <p>The Amazon Web Services resource tags that you are adding to the S3 Access Grants location. Each tag is a label
-    #            consisting of a user-defined key and value. Tags can help you manage, identify, organize,
-    #            search for, and filter resources.</p>
+    #   <p>The Amazon Web Services resource tags that you are adding to the S3 Access Grants location. Each tag is a label consisting of a user-defined key and value. Tags can help you manage, identify, organize, search for, and filter resources.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     account_id: "AccountId",
@@ -570,9 +494,6 @@ module Aws::S3Control
     #                </p>
     #             </li>
     #          </ul>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::CreateAccessPointRequest] params
     # @option params [String] :account_id
     #   <p>The Amazon Web Services account ID for the account that owns the specified access point.</p>
@@ -597,9 +518,9 @@ module Aws::S3Control
     #         </p>
     # @option params [String] :bucket_account_id
     #   <p>The Amazon Web Services account ID associated with the S3 bucket associated with this access point.</p>
-    #            <p>For same account access point when your bucket and access point belong to the same account owner, the
-    #               <code>BucketAccountId</code> is not required. For cross-account access point when your bucket
-    #            and access point are not in the same account, the <code>BucketAccountId</code> is required. </p>
+    #            <p>For same account access point when your bucket and access point belong to the same account owner, the <code>BucketAccountId</code> is not required.
+    #            For cross-account access point when your bucket and access point are not in the same account, the <code>BucketAccountId</code> is required.
+    #         </p>
     # @option params [Types::Scope] :scope
     #   <p>For directory buckets, you can filter access control to specific prefixes, API
     #            operations, or a combination of both. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-directory-buckets.html">Managing access to shared datasets in directory buckets with
@@ -609,16 +530,6 @@ module Aws::S3Control
     #            </note>
     # @option params [Array<Types::Tag>] :tags
     #   <p>An array of tags that you can apply to an access point. Tags are key-value pairs of metadata used to control access to your access points. For more information about tags, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/tagging.html">Using tags with Amazon S3</a>. For information about tagging access points, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/tagging.html#using-tags-for-abac">Using tags for attribute-based access control (ABAC)</a>.</p>
-    #            <note>
-    #               <ul>
-    #                  <li>
-    #                     <p>You must have the <code>s3:TagResource</code> permission to create an access point with tags for a general purpose bucket. </p>
-    #                  </li>
-    #                  <li>
-    #                     <p>You must have the <code>s3express:TagResource</code> permission to create an access point with tags for a directory bucket.</p>
-    #                  </li>
-    #               </ul>
-    #            </note>
     # @example Request syntax with placeholder values
     #   params = {
     #     account_id: "AccountId",
@@ -683,9 +594,6 @@ module Aws::S3Control
     #                </p>
     #             </li>
     #          </ul>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::CreateAccessPointForObjectLambdaRequest] params
     # @option params [String] :account_id
     #   <p>The Amazon Web Services account ID for owner of the specified Object Lambda Access Point.</p>
@@ -871,9 +779,8 @@ module Aws::S3Control
     #          <dl>
     #             <dt>Permissions</dt>
     #             <dd>
-    #                <p>For information about permissions required to use the Batch Operations, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/batch-ops-iam-role-policies.html">Granting
-    #                      permissions for S3 Batch Operations</a> in the <i>Amazon S3 User
-    #                      Guide</i>.</p>
+    #                <p>For information about permissions required to use the Batch Operations, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/batch-ops-iam-role-policies.html">Granting permissions for S3 Batch Operations</a> in the <i>Amazon S3
+    #                      User Guide</i>.</p>
     #             </dd>
     #          </dl>
     #          <p></p>
@@ -905,9 +812,6 @@ module Aws::S3Control
     #                </p>
     #             </li>
     #          </ul>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::CreateJobRequest] params
     # @option params [String] :account_id
     #   <p>The Amazon Web Services account ID that creates the job.</p>
@@ -965,6 +869,7 @@ module Aws::S3Control
     #           }
     #         ],
     #         metadata_directive: "COPY" # One of: ["COPY", "REPLACE"],
+    #         annotation_directive: "COPY" # One of: ["COPY", "EXCLUDE"],
     #         modified_since_constraint: Time.now,
     #         new_object_metadata: {
     #           cache_control: "NonEmptyMaxLength1024String",
@@ -997,7 +902,12 @@ module Aws::S3Control
     #         object_lock_mode: "COMPLIANCE" # One of: ["COMPLIANCE", "GOVERNANCE"],
     #         object_lock_retain_until_date: Time.now,
     #         bucket_key_enabled: false,
-    #         checksum_algorithm: "CRC32" # One of: ["CRC32", "CRC32C", "SHA1", "SHA256", "CRC64NVME"]
+    #         checksum_algorithm: "CRC32" # One of: ["CRC32", "CRC32C", "SHA1", "SHA256", "CRC64NVME", "SHA512", "MD5", "XXHASH64", "XXHASH3", "XXHASH128"],
+    #         object_lock_event_hold: "ON" # One of: ["ON", "OFF"],
+    #         object_lock_event_hold_duration: {
+    #           days: 1,
+    #           years: 1
+    #         }
     #       },
     #       s3_put_object_acl: {
     #         access_control_policy: {
@@ -1043,14 +953,27 @@ module Aws::S3Control
     #         bypass_governance_retention: false,
     #         retention: { # required
     #           retain_until_date: Time.now,
-    #           mode: "COMPLIANCE" # One of: ["COMPLIANCE", "GOVERNANCE"]
+    #           mode: "COMPLIANCE" # One of: ["COMPLIANCE", "GOVERNANCE"],
+    #           event_hold: "ON" # One of: ["ON", "OFF"],
+    #           event_hold_duration: {
+    #             days: 1,
+    #             years: 1
+    #           }
     #         }
     #       },
     #       s3_replicate_object: {
     #       },
     #       s3_compute_object_checksum: {
-    #         checksum_algorithm: "CRC32" # One of: ["CRC32", "CRC32C", "CRC64NVME", "MD5", "SHA1", "SHA256"],
+    #         checksum_algorithm: "CRC32" # One of: ["CRC32", "CRC32C", "CRC64NVME", "MD5", "SHA1", "SHA256", "SHA512", "XXHASH64", "XXHASH3", "XXHASH128"],
     #         checksum_type: "FULL_OBJECT" # One of: ["FULL_OBJECT", "COMPOSITE"]
+    #       },
+    #       s3_update_object_encryption: {
+    #         object_encryption: {
+    #           ssekms: {
+    #             kms_key_arn: "NonEmptyKmsKeyArnString", # required
+    #             bucket_key_enabled: false
+    #           }
+    #         }
     #       }
     #     },
     #     report: { # required
@@ -1151,8 +1074,7 @@ module Aws::S3Control
     #             <p>This operation is not supported by directory buckets.</p>
     #          </note>
     #          <p>Creates a Multi-Region Access Point and associates it with the specified buckets. For more information
-    #          about creating Multi-Region Access Points, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/CreatingMultiRegionAccessPoints.html">Creating
-    #             Multi-Region Access Points</a> in the <i>Amazon S3 User Guide</i>.</p>
+    #          about creating Multi-Region Access Points, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/CreatingMultiRegionAccessPoints.html">Creating Multi-Region Access Points</a> in the <i>Amazon S3 User Guide</i>.</p>
     #          <p>This action will always be routed to the US West (Oregon) Region. For more information
     #          about the restrictions around working with Multi-Region Access Points, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/MultiRegionAccessPointRestrictions.html">Multi-Region Access Point
     #             restrictions and limitations</a> in the <i>Amazon S3 User Guide</i>.</p>
@@ -1183,9 +1105,6 @@ module Aws::S3Control
     #                </p>
     #             </li>
     #          </ul>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::CreateMultiRegionAccessPointRequest] params
     # @option params [String] :account_id
     #   <p>The Amazon Web Services account ID for the owner of the Multi-Region Access Point. The owner of the Multi-Region Access Point also must own
@@ -1241,9 +1160,6 @@ module Aws::S3Control
     #          Groups permissions, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions">Setting account permissions to use S3 Storage Lens groups</a>.</p>
     #          <p>For information about Storage Lens groups errors, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3LensErrorCodeList">List of Amazon S3 Storage
     #             Lens error codes</a>.</p>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::CreateStorageLensGroupRequest] params
     # @option params [String] :account_id
     #   <p>
@@ -1336,24 +1252,18 @@ module Aws::S3Control
       request.send_request(options)
     end
 
-    # <p>Deletes the access grant from the S3 Access Grants instance. You cannot undo an access grant
-    #          deletion and the grantee will no longer have access to the S3 data.</p>
+    # <p>Deletes the access grant from the S3 Access Grants instance. You cannot undo an access grant deletion and the grantee will no longer have access to the S3 data.</p>
     #          <dl>
     #             <dt>Permissions</dt>
     #             <dd>
-    #                <p>You must have the <code>s3:DeleteAccessGrant</code> permission to use this
-    #                   operation. </p>
+    #                <p>You must have the <code>s3:DeleteAccessGrant</code> permission to use this operation. </p>
     #             </dd>
     #          </dl>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::DeleteAccessGrantRequest] params
     # @option params [String] :account_id
     #   <p>The Amazon Web Services account ID of the S3 Access Grants instance.</p>
     # @option params [String] :access_grant_id
-    #   <p>The ID of the access grant. S3 Access Grants auto-generates this ID when you create the access
-    #            grant.</p>
+    #   <p>The ID of the access grant. S3 Access Grants auto-generates this ID when you create the access grant.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     account_id: "AccountId",
@@ -1370,21 +1280,13 @@ module Aws::S3Control
       request.send_request(options)
     end
 
-    # <p>Deletes your S3 Access Grants instance. You must first delete the access grants and locations
-    #          before S3 Access Grants can delete the instance. See <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessGrant.html">DeleteAccessGrant</a>
-    #          and <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessGrantsLocation.html">DeleteAccessGrantsLocation</a>. If you have associated an IAM Identity Center
-    #          instance with your S3 Access Grants instance, you must first dissassociate the Identity Center
-    #          instance from the S3 Access Grants instance before you can delete the S3 Access Grants instance. See <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_AssociateAccessGrantsIdentityCenter.html">AssociateAccessGrantsIdentityCenter</a> and <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DissociateAccessGrantsIdentityCenter.html">DissociateAccessGrantsIdentityCenter</a>.</p>
+    # <p>Deletes your S3 Access Grants instance. You must first delete the access grants and locations before S3 Access Grants can delete the instance. See <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessGrant.html">DeleteAccessGrant</a> and <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessGrantsLocation.html">DeleteAccessGrantsLocation</a>. If you have associated an IAM Identity Center instance with your S3 Access Grants instance, you must first dissassociate the Identity Center instance from the S3 Access Grants instance before you can delete the S3 Access Grants instance. See <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_AssociateAccessGrantsIdentityCenter.html">AssociateAccessGrantsIdentityCenter</a> and <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DissociateAccessGrantsIdentityCenter.html">DissociateAccessGrantsIdentityCenter</a>.</p>
     #          <dl>
     #             <dt>Permissions</dt>
     #             <dd>
-    #                <p>You must have the <code>s3:DeleteAccessGrantsInstance</code> permission to use
-    #                   this operation. </p>
+    #                <p>You must have the <code>s3:DeleteAccessGrantsInstance</code> permission to use this operation. </p>
     #             </dd>
     #          </dl>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::DeleteAccessGrantsInstanceRequest] params
     # @option params [String] :account_id
     #   <p>The Amazon Web Services account ID of the S3 Access Grants instance.</p>
@@ -1403,19 +1305,13 @@ module Aws::S3Control
       request.send_request(options)
     end
 
-    # <p>Deletes the resource policy of the S3 Access Grants instance. The resource policy is used to
-    #          manage cross-account access to your S3 Access Grants instance. By deleting the resource policy, you
-    #          delete any cross-account permissions to your S3 Access Grants instance. </p>
+    # <p>Deletes the resource policy of the S3 Access Grants instance. The resource policy is used to manage cross-account access to your S3 Access Grants instance. By deleting the resource policy, you delete any cross-account permissions to your S3 Access Grants instance. </p>
     #          <dl>
     #             <dt>Permissions</dt>
     #             <dd>
-    #                <p>You must have the <code>s3:DeleteAccessGrantsInstanceResourcePolicy</code>
-    #                   permission to use this operation. </p>
+    #                <p>You must have the <code>s3:DeleteAccessGrantsInstanceResourcePolicy</code> permission to use this operation. </p>
     #             </dd>
     #          </dl>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::DeleteAccessGrantsInstanceResourcePolicyRequest] params
     # @option params [String] :account_id
     #   <p>The Amazon Web Services account ID of the S3 Access Grants instance.</p>
@@ -1434,29 +1330,18 @@ module Aws::S3Control
       request.send_request(options)
     end
 
-    # <p>Deregisters a location from your S3 Access Grants instance. You can only delete a location
-    #          registration from an S3 Access Grants instance if there are no grants associated with this location.
-    #          See <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessGrant.html">Delete a grant</a> for
-    #          information on how to delete grants. You need to have at least one registered location in
-    #          your S3 Access Grants instance in order to create access grants. </p>
+    # <p>Deregisters a location from your S3 Access Grants instance. You can only delete a location registration from an S3 Access Grants instance if there are no grants associated with this location. See <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessGrant.html">Delete a grant</a> for information on how to delete grants. You need to have at least one registered location in your S3 Access Grants instance in order to create access grants. </p>
     #          <dl>
     #             <dt>Permissions</dt>
     #             <dd>
-    #                <p>You must have the <code>s3:DeleteAccessGrantsLocation</code> permission to use
-    #                   this operation. </p>
+    #                <p>You must have the <code>s3:DeleteAccessGrantsLocation</code> permission to use this operation. </p>
     #             </dd>
     #          </dl>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::DeleteAccessGrantsLocationRequest] params
     # @option params [String] :account_id
     #   <p>The Amazon Web Services account ID of the S3 Access Grants instance.</p>
     # @option params [String] :access_grants_location_id
-    #   <p>The ID of the registered location that you are deregistering from your S3 Access Grants instance.
-    #            S3 Access Grants assigned this ID when you registered the location. S3 Access Grants assigns the ID
-    #               <code>default</code> to the default location <code>s3://</code> and assigns an
-    #            auto-generated ID to other locations that you register. </p>
+    #   <p>The ID of the registered location that you are deregistering from your S3 Access Grants instance. S3 Access Grants assigned this ID when you registered the location. S3 Access Grants assigns the ID <code>default</code> to the default location <code>s3://</code> and assigns an auto-generated ID to other locations that you register.  </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     account_id: "AccountId",
@@ -1493,9 +1378,6 @@ module Aws::S3Control
     #                </p>
     #             </li>
     #          </ul>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::DeleteAccessPointRequest] params
     # @option params [String] :account_id
     #   <p>The Amazon Web Services account ID for the account that owns the specified access point.</p>
@@ -1542,9 +1424,6 @@ module Aws::S3Control
     #                </p>
     #             </li>
     #          </ul>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::DeleteAccessPointForObjectLambdaRequest] params
     # @option params [String] :account_id
     #   <p>The account ID for the account that owns the specified Object Lambda Access Point.</p>
@@ -1582,9 +1461,6 @@ module Aws::S3Control
     #                </p>
     #             </li>
     #          </ul>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::DeleteAccessPointPolicyRequest] params
     # @option params [String] :account_id
     #   <p>The account ID for the account that owns the specified access point.</p>
@@ -1626,9 +1502,6 @@ module Aws::S3Control
     #                </p>
     #             </li>
     #          </ul>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::DeleteAccessPointPolicyForObjectLambdaRequest] params
     # @option params [String] :account_id
     #   <p>The account ID for the account that owns the specified Object Lambda Access Point.</p>
@@ -1650,23 +1523,23 @@ module Aws::S3Control
       request.send_request(options)
     end
 
-    # <p> Deletes an existing access point scope for a directory bucket.</p>
+    # <p>
+    #          Deletes an existing access point scope for a directory bucket.</p>
     #          <note>
-    #             <p>When you delete the scope of an access point, all prefixes and permissions are
-    #             deleted.</p>
+    #             <p>When you delete the scope of an access point, all prefixes and permissions are deleted.</p>
     #          </note>
     #          <p>To use this operation, you must have the permission to perform the
-    #             <code>s3express:DeleteAccessPointScope</code>
-    #          action.</p>
+    #          <code>s3express:DeleteAccessPointScope</code> action.</p>
     #          <p>For information about REST API errors, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#RESTErrorResponses">REST error responses</a>.</p>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::DeleteAccessPointScopeRequest] params
     # @option params [String] :account_id
-    #   <p> The Amazon Web Services account ID that owns the access point with the scope that you want to delete. </p>
+    #   <p>
+    #            The Amazon Web Services account ID that owns the access point with the scope that you want to delete.
+    #         </p>
     # @option params [String] :name
-    #   <p> The name of the access point with the scope that you want to delete. </p>
+    #   <p>
+    #            The name of the access point with the scope that you want to delete.
+    #         </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     account_id: "AccountId", # required
@@ -1763,9 +1636,6 @@ module Aws::S3Control
     #                </p>
     #             </li>
     #          </ul>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::DeleteBucketLifecycleConfigurationRequest] params
     # @option params [String] :account_id
     #   <p>The account ID of the lifecycle configuration to delete.</p>
@@ -1825,9 +1695,6 @@ module Aws::S3Control
     #                </p>
     #             </li>
     #          </ul>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::DeleteBucketPolicyRequest] params
     # @option params [String] :account_id
     #   <p>The account ID of the Outposts bucket.</p>
@@ -1886,9 +1753,6 @@ module Aws::S3Control
     #                </p>
     #             </li>
     #          </ul>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::DeleteBucketReplicationRequest] params
     # @option params [String] :account_id
     #   <p>The Amazon Web Services account ID of the Outposts bucket to delete the replication configuration
@@ -1936,9 +1800,6 @@ module Aws::S3Control
     #                </p>
     #             </li>
     #          </ul>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::DeleteBucketTaggingRequest] params
     # @option params [String] :account_id
     #   <p>The Amazon Web Services account ID of the Outposts bucket tag set to be removed.</p>
@@ -1966,10 +1827,11 @@ module Aws::S3Control
     #          <dl>
     #             <dt>Permissions</dt>
     #             <dd>
-    #                <p>To use the <code>DeleteJobTagging</code> operation, you must have permission to
-    #                   perform the <code>s3:DeleteJobTagging</code> action. For more information, see
-    #                      <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-managing-jobs.html#batch-ops-job-tags">Controlling access and labeling jobs using tags</a> in the
-    #                      <i>Amazon S3 User Guide</i>.</p>
+    #                <p>To use the
+    #                   <code>DeleteJobTagging</code> operation, you must have permission to
+    #                   perform the <code>s3:DeleteJobTagging</code> action. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-managing-jobs.html#batch-ops-job-tags">Controlling
+    #                      access and labeling jobs using tags</a> in the
+    #                   <i>Amazon S3 User Guide</i>.</p>
     #             </dd>
     #          </dl>
     #          <p>Related actions include:</p>
@@ -1990,9 +1852,6 @@ module Aws::S3Control
     #                </p>
     #             </li>
     #          </ul>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::DeleteJobTaggingRequest] params
     # @option params [String] :account_id
     #   <p>The Amazon Web Services account ID associated with the S3 Batch Operations job.</p>
@@ -2049,9 +1908,6 @@ module Aws::S3Control
     #                </p>
     #             </li>
     #          </ul>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::DeleteMultiRegionAccessPointRequest] params
     # @option params [String] :account_id
     #   <p>The Amazon Web Services account ID for the owner of the Multi-Region Access Point.</p>
@@ -2084,7 +1940,11 @@ module Aws::S3Control
     # <note>
     #             <p>This operation is not supported by directory buckets.</p>
     #          </note>
-    #          <p>Removes the <code>PublicAccessBlock</code> configuration for an Amazon Web Services account. For more
+    #          <p>Removes the <code>PublicAccessBlock</code> configuration for an Amazon Web Services account. This
+    #          operation might be restricted when the account is managed by organization-level Block
+    #          Public Access policies. You’ll get an Access Denied (403) error when the account is managed
+    #          by organization-level Block Public Access policies. Organization-level policies override
+    #          account-level settings, preventing direct account-level modifications. For more
     #          information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html"> Using Amazon S3 block
     #             public access</a>.</p>
     #          <p>Related actions include:</p>
@@ -2100,9 +1960,6 @@ module Aws::S3Control
     #                </p>
     #             </li>
     #          </ul>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::DeletePublicAccessBlockRequest] params
     # @option params [String] :account_id
     #   <p>The account ID for the Amazon Web Services account whose <code>PublicAccessBlock</code> configuration
@@ -2134,9 +1991,6 @@ module Aws::S3Control
     #                <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens_iam_permissions.html">Setting permissions to
     #                use Amazon S3 Storage Lens</a> in the <i>Amazon S3 User Guide</i>.</p>
     #          </note>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::DeleteStorageLensConfigurationRequest] params
     # @option params [String] :config_id
     #   <p>The ID of the S3 Storage Lens configuration.</p>
@@ -2171,9 +2025,6 @@ module Aws::S3Control
     #             see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens_iam_permissions.html">Setting permissions to
     #                use Amazon S3 Storage Lens</a> in the <i>Amazon S3 User Guide</i>.</p>
     #          </note>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::DeleteStorageLensConfigurationTaggingRequest] params
     # @option params [String] :config_id
     #   <p>The ID of the S3 Storage Lens configuration.</p>
@@ -2202,9 +2053,6 @@ module Aws::S3Control
     #       Groups permissions, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions">Setting account permissions to use S3 Storage Lens groups</a>.</p>
     #          <p>For information about Storage Lens groups errors, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3LensErrorCodeList">List of Amazon S3 Storage
     #       Lens error codes</a>.</p>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::DeleteStorageLensGroupRequest] params
     # @option params [String] :name
     #   <p>
@@ -2235,8 +2083,7 @@ module Aws::S3Control
     #          <dl>
     #             <dt>Permissions</dt>
     #             <dd>
-    #                <p>To use the <code>DescribeJob</code> operation, you must have permission to
-    #                   perform the <code>s3:DescribeJob</code> action.</p>
+    #                <p>To use the <code>DescribeJob</code> operation, you must have permission to perform the <code>s3:DescribeJob</code> action.</p>
     #             </dd>
     #          </dl>
     #          <p>Related actions include:</p>
@@ -2262,9 +2109,6 @@ module Aws::S3Control
     #                </p>
     #             </li>
     #          </ul>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::DescribeJobRequest] params
     # @option params [String] :account_id
     #   <p>The Amazon Web Services account ID associated with the S3 Batch Operations job.</p>
@@ -2319,6 +2163,7 @@ module Aws::S3Control
     #             }
     #           ],
     #           metadata_directive: "COPY" # One of: ["COPY", "REPLACE"],
+    #           annotation_directive: "COPY" # One of: ["COPY", "EXCLUDE"],
     #           modified_since_constraint: Time.now,
     #           new_object_metadata: {
     #             cache_control: "NonEmptyMaxLength1024String",
@@ -2351,7 +2196,12 @@ module Aws::S3Control
     #           object_lock_mode: "COMPLIANCE" # One of: ["COMPLIANCE", "GOVERNANCE"],
     #           object_lock_retain_until_date: Time.now,
     #           bucket_key_enabled: false,
-    #           checksum_algorithm: "CRC32" # One of: ["CRC32", "CRC32C", "SHA1", "SHA256", "CRC64NVME"]
+    #           checksum_algorithm: "CRC32" # One of: ["CRC32", "CRC32C", "SHA1", "SHA256", "CRC64NVME", "SHA512", "MD5", "XXHASH64", "XXHASH3", "XXHASH128"],
+    #           object_lock_event_hold: "ON" # One of: ["ON", "OFF"],
+    #           object_lock_event_hold_duration: {
+    #             days: 1,
+    #             years: 1
+    #           }
     #         },
     #         s3_put_object_acl: {
     #           access_control_policy: {
@@ -2397,14 +2247,27 @@ module Aws::S3Control
     #           bypass_governance_retention: false,
     #           retention: { # required
     #             retain_until_date: Time.now,
-    #             mode: "COMPLIANCE" # One of: ["COMPLIANCE", "GOVERNANCE"]
+    #             mode: "COMPLIANCE" # One of: ["COMPLIANCE", "GOVERNANCE"],
+    #             event_hold: "ON" # One of: ["ON", "OFF"],
+    #             event_hold_duration: {
+    #               days: 1,
+    #               years: 1
+    #             }
     #           }
     #         },
     #         s3_replicate_object: {
     #         },
     #         s3_compute_object_checksum: {
-    #           checksum_algorithm: "CRC32" # One of: ["CRC32", "CRC32C", "CRC64NVME", "MD5", "SHA1", "SHA256"],
+    #           checksum_algorithm: "CRC32" # One of: ["CRC32", "CRC32C", "CRC64NVME", "MD5", "SHA1", "SHA256", "SHA512", "XXHASH64", "XXHASH3", "XXHASH128"],
     #           checksum_type: "FULL_OBJECT" # One of: ["FULL_OBJECT", "COMPOSITE"]
+    #         },
+    #         s3_update_object_encryption: {
+    #           object_encryption: {
+    #             ssekms: {
+    #               kms_key_arn: "NonEmptyKmsKeyArnString", # required
+    #               bucket_key_enabled: false
+    #             }
+    #           }
     #         }
     #       },
     #       priority: 1,
@@ -2507,8 +2370,7 @@ module Aws::S3Control
     #             <p>This operation is not supported by directory buckets.</p>
     #          </note>
     #          <p>Retrieves the status of an asynchronous request to manage a Multi-Region Access Point. For more information
-    #          about managing Multi-Region Access Points and how asynchronous requests work, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/MrapOperations.html">Using Multi-Region Access Points</a> in the
-    #             <i>Amazon S3 User Guide</i>.</p>
+    #          about managing Multi-Region Access Points and how asynchronous requests work, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/MrapOperations.html">Using Multi-Region Access Points</a> in the <i>Amazon S3 User Guide</i>.</p>
     #          <p>The following actions are related to <code>GetMultiRegionAccessPoint</code>:</p>
     #          <ul>
     #             <li>
@@ -2532,9 +2394,6 @@ module Aws::S3Control
     #                </p>
     #             </li>
     #          </ul>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::DescribeMultiRegionAccessPointOperationRequest] params
     # @option params [String] :account_id
     #   <p>The Amazon Web Services account ID for the owner of the Multi-Region Access Point.</p>
@@ -2609,18 +2468,13 @@ module Aws::S3Control
     #          <dl>
     #             <dt>Permissions</dt>
     #             <dd>
-    #                <p>You must have the <code>s3:DissociateAccessGrantsIdentityCenter</code>
-    #                   permission to use this operation. </p>
+    #                <p>You must have the <code>s3:DissociateAccessGrantsIdentityCenter</code> permission to use this operation. </p>
     #             </dd>
     #             <dt>Additional Permissions</dt>
     #             <dd>
-    #                <p>You must have the <code>sso:DeleteApplication</code> permission to use this
-    #                   operation. </p>
+    #                <p>You must have the <code>sso:DeleteApplication</code> permission to use this operation. </p>
     #             </dd>
     #          </dl>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::DissociateAccessGrantsIdentityCenterRequest] params
     # @option params [String] :account_id
     #   <p>The Amazon Web Services account ID of the S3 Access Grants instance.</p>
@@ -2643,19 +2497,14 @@ module Aws::S3Control
     #          <dl>
     #             <dt>Permissions</dt>
     #             <dd>
-    #                <p>You must have the <code>s3:GetAccessGrant</code> permission to use this
-    #                   operation. </p>
+    #                <p>You must have the <code>s3:GetAccessGrant</code> permission to use this operation. </p>
     #             </dd>
     #          </dl>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::GetAccessGrantRequest] params
     # @option params [String] :account_id
     #   <p>The Amazon Web Services account ID of the S3 Access Grants instance.</p>
     # @option params [String] :access_grant_id
-    #   <p>The ID of the access grant. S3 Access Grants auto-generates this ID when you create the access
-    #            grant.</p>
+    #   <p>The ID of the access grant. S3 Access Grants auto-generates this ID when you create the access grant.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     account_id: "AccountId",
@@ -2691,17 +2540,13 @@ module Aws::S3Control
     #          <dl>
     #             <dt>Permissions</dt>
     #             <dd>
-    #                <p>You must have the <code>s3:GetAccessGrantsInstance</code> permission to use
-    #                   this operation. </p>
+    #                <p>You must have the <code>s3:GetAccessGrantsInstance</code> permission to use this operation. </p>
     #             </dd>
     #          </dl>
     #          <note>
     #             <p>
     #                <code>GetAccessGrantsInstance</code> is not supported for cross-account access. You can only call the API from the account that owns the S3 Access Grants instance.</p>
     #          </note>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::GetAccessGrantsInstanceRequest] params
     # @option params [String] :account_id
     #   <p>The Amazon Web Services account ID of the S3 Access Grants instance.</p>
@@ -2727,22 +2572,17 @@ module Aws::S3Control
       request.send_request(options)
     end
 
-    # <p>Retrieve the S3 Access Grants instance that contains a particular prefix. </p>
+    # <p>Retrieve the S3 Access Grants instance that contains a particular prefix.  </p>
     #          <dl>
     #             <dt>Permissions</dt>
     #             <dd>
-    #                <p>You must have the <code>s3:GetAccessGrantsInstanceForPrefix</code> permission
-    #                   for the caller account to use this operation. </p>
+    #                <p>You must have the <code>s3:GetAccessGrantsInstanceForPrefix</code> permission for the caller account to use this operation. </p>
     #             </dd>
     #             <dt>Additional Permissions</dt>
     #             <dd>
-    #                <p>The prefix owner account must grant you the following permissions to their
-    #                   S3 Access Grants instance: <code>s3:GetAccessGrantsInstanceForPrefix</code>. </p>
+    #                <p>The prefix owner account must grant you the following permissions to their S3 Access Grants instance: <code>s3:GetAccessGrantsInstanceForPrefix</code>. </p>
     #             </dd>
     #          </dl>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::GetAccessGrantsInstanceForPrefixRequest] params
     # @option params [String] :account_id
     #   <p>The ID of the Amazon Web Services account that is making this request.</p>
@@ -2771,13 +2611,9 @@ module Aws::S3Control
     #          <dl>
     #             <dt>Permissions</dt>
     #             <dd>
-    #                <p>You must have the <code>s3:GetAccessGrantsInstanceResourcePolicy</code>
-    #                   permission to use this operation. </p>
+    #                <p>You must have the <code>s3:GetAccessGrantsInstanceResourcePolicy</code> permission to use this operation. </p>
     #             </dd>
     #          </dl>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::GetAccessGrantsInstanceResourcePolicyRequest] params
     # @option params [String] :account_id
     #   <p>The Amazon Web Services account ID of the S3 Access Grants instance.</p>
@@ -2804,21 +2640,14 @@ module Aws::S3Control
     #          <dl>
     #             <dt>Permissions</dt>
     #             <dd>
-    #                <p>You must have the <code>s3:GetAccessGrantsLocation</code> permission to use
-    #                   this operation. </p>
+    #                <p>You must have the <code>s3:GetAccessGrantsLocation</code> permission to use this operation. </p>
     #             </dd>
     #          </dl>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::GetAccessGrantsLocationRequest] params
     # @option params [String] :account_id
     #   <p>The Amazon Web Services account ID of the S3 Access Grants instance.</p>
     # @option params [String] :access_grants_location_id
-    #   <p>The ID of the registered location that you are retrieving. S3 Access Grants assigns this ID when
-    #            you register the location. S3 Access Grants assigns the ID <code>default</code> to the default
-    #            location <code>s3://</code> and assigns an auto-generated ID to other locations that you
-    #            register. </p>
+    #   <p>The ID of the registered location that you are retrieving. S3 Access Grants assigns this ID when you register the location. S3 Access Grants assigns the ID <code>default</code> to the default location <code>s3://</code> and assigns an auto-generated ID to other locations that you register.  </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     account_id: "AccountId",
@@ -2862,9 +2691,6 @@ module Aws::S3Control
     #                </p>
     #             </li>
     #          </ul>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::GetAccessPointRequest] params
     # @option params [String] :account_id
     #   <p>The Amazon Web Services account ID for the account that owns the specified access point.</p>
@@ -2923,9 +2749,6 @@ module Aws::S3Control
     #                </p>
     #             </li>
     #          </ul>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::GetAccessPointConfigurationForObjectLambdaRequest] params
     # @option params [String] :account_id
     #   <p>The account ID for the account that owns the specified Object Lambda Access Point.</p>
@@ -2987,9 +2810,6 @@ module Aws::S3Control
     #                </p>
     #             </li>
     #          </ul>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::GetAccessPointForObjectLambdaRequest] params
     # @option params [String] :account_id
     #   <p>The account ID for the account that owns the specified Object Lambda Access Point.</p>
@@ -3038,9 +2858,6 @@ module Aws::S3Control
     #                </p>
     #             </li>
     #          </ul>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::GetAccessPointPolicyRequest] params
     # @option params [String] :account_id
     #   <p>The account ID for the account that owns the specified access point.</p>
@@ -3084,9 +2901,6 @@ module Aws::S3Control
     #                </p>
     #             </li>
     #          </ul>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::GetAccessPointPolicyForObjectLambdaRequest] params
     # @option params [String] :account_id
     #   <p>The account ID for the account that owns the specified Object Lambda Access Point.</p>
@@ -3116,9 +2930,6 @@ module Aws::S3Control
     #          <p>Indicates whether the specified access point currently has a policy that allows public access.
     #          For more information about public access through access points, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points.html">Managing Data Access with Amazon S3
     #             access points</a> in the <i>Amazon S3 User Guide</i>.</p>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::GetAccessPointPolicyStatusRequest] params
     # @option params [String] :account_id
     #   <p>The account ID for the account that owns the specified access point.</p>
@@ -3148,9 +2959,6 @@ module Aws::S3Control
     #             <p>This operation is not supported by directory buckets.</p>
     #          </note>
     #          <p>Returns the status of the resource policy associated with an Object Lambda Access Point.</p>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::GetAccessPointPolicyStatusForObjectLambdaRequest] params
     # @option params [String] :account_id
     #   <p>The account ID for the account that owns the specified Object Lambda Access Point.</p>
@@ -3176,17 +2984,15 @@ module Aws::S3Control
       request.send_request(options)
     end
 
-    # <p> Returns the access point scope for a directory bucket.</p>
+    # <p>
+    #          Returns the access point scope for a directory bucket.</p>
     #          <p>To use this operation, you must have the permission to perform the
-    #             <code>s3express:GetAccessPointScope</code>
-    #          action.</p>
+    #          <code>s3express:GetAccessPointScope</code> action.</p>
     #          <p>For information about REST API errors, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#RESTErrorResponses">REST error responses</a>.</p>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::GetAccessPointScopeRequest] params
     # @option params [String] :account_id
-    #   <p> The Amazon Web Services account ID that owns the access point with the scope that you want to retrieve.
+    #   <p>
+    #            The Amazon Web Services account ID that owns the access point with the scope that you want to retrieve.
     #         </p>
     # @option params [String] :name
     #   <p>The name of the access point with the scope you want to retrieve.</p>
@@ -3240,9 +3046,6 @@ module Aws::S3Control
     #                </p>
     #             </li>
     #          </ul>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::GetBucketRequest] params
     # @option params [String] :account_id
     #   <p>The Amazon Web Services account ID of the Outposts bucket.</p>
@@ -3318,9 +3121,6 @@ module Aws::S3Control
     #                </p>
     #             </li>
     #          </ul>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::GetBucketLifecycleConfigurationRequest] params
     # @option params [String] :account_id
     #   <p>The Amazon Web Services account ID of the Outposts bucket.</p>
@@ -3437,9 +3237,6 @@ module Aws::S3Control
     #                </p>
     #             </li>
     #          </ul>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::GetBucketPolicyRequest] params
     # @option params [String] :account_id
     #   <p>The Amazon Web Services account ID of the Outposts bucket.</p>
@@ -3725,36 +3522,24 @@ module Aws::S3Control
       request.send_request(options)
     end
 
-    # <p>Returns a temporary access credential from S3 Access Grants to the grantee or client application.
-    #          The <a href="https://docs.aws.amazon.com/STS/latest/APIReference/API_Credentials.html">temporary credential</a> is an Amazon Web Services STS token that grants them access to the S3 data. </p>
+    # <p>Returns a temporary access credential from S3 Access Grants to the grantee or client application. The <a href="https://docs.aws.amazon.com/STS/latest/APIReference/API_Credentials.html">temporary credential</a> is an Amazon Web Services STS token that grants them access to the S3 data. </p>
     #          <dl>
     #             <dt>Permissions</dt>
     #             <dd>
-    #                <p>You must have the <code>s3:GetDataAccess</code> permission to use this
-    #                   operation. </p>
+    #                <p>You must have the <code>s3:GetDataAccess</code> permission to use this operation. </p>
     #             </dd>
     #             <dt>Additional Permissions</dt>
     #             <dd>
-    #                <p>The IAM role that S3 Access Grants assumes must have the following permissions
-    #                   specified in the trust policy when registering the location:
-    #                      <code>sts:AssumeRole</code>, for directory users or groups
-    #                      <code>sts:SetContext</code>, and for IAM users or roles
-    #                      <code>sts:SetSourceIdentity</code>. </p>
+    #                <p>The IAM role that S3 Access Grants assumes must have the following permissions specified in the trust policy when registering the location: <code>sts:AssumeRole</code>, for directory users or groups <code>sts:SetContext</code>, and for IAM users or roles <code>sts:SetSourceIdentity</code>. </p>
     #             </dd>
     #          </dl>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::GetDataAccessRequest] params
     # @option params [String] :account_id
     #   <p>The Amazon Web Services account ID of the S3 Access Grants instance.</p>
     # @option params [String] :target
-    #   <p>The S3 URI path of the data to which you are requesting temporary access credentials. If
-    #            the requesting account has an access grant for this data, S3 Access Grants vends temporary access
-    #            credentials in the response.</p>
+    #   <p>The S3 URI path of the data to which you are requesting temporary access credentials. If the requesting account has an access grant for this data, S3 Access Grants vends temporary access credentials in the response.</p>
     # @option params [String] :permission
-    #   <p>The type of permission granted to your S3 data, which can be set to one of the following
-    #            values:</p>
+    #   <p>The type of permission granted to your S3 data, which can be set to one of the following values:</p>
     #            <ul>
     #               <li>
     #                  <p>
@@ -3770,30 +3555,23 @@ module Aws::S3Control
     #               </li>
     #            </ul>
     # @option params [Integer] :duration_seconds
-    #   <p>The session duration, in seconds, of the temporary access credential that S3 Access Grants vends
-    #            to the grantee or client application. The default value is 1 hour, but the grantee can
-    #            specify a range from 900 seconds (15 minutes) up to 43200 seconds (12 hours). If the
-    #            grantee requests a value higher than this maximum, the operation fails. </p>
+    #   <p>The session duration, in seconds, of the temporary access credential that S3 Access Grants vends to the grantee or client application. The default value is 1 hour, but the grantee can specify a range from 900 seconds (15 minutes) up to 43200 seconds (12 hours). If the grantee requests a value higher than this maximum, the operation fails. </p>
     # @option params [String] :privilege
-    #   <p>The scope of the temporary access credential that S3 Access Grants vends to the grantee or client
-    #            application. </p>
+    #   <p>The scope of the temporary access credential that S3 Access Grants vends to the grantee or client application. </p>
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>Default</code> – The scope of the returned temporary access token is the scope
-    #                  of the grant that is closest to the target scope.</p>
+    #                     <code>Default</code> – The scope of the returned temporary access token is the scope of the grant that is closest to the target scope.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>Minimal</code> – The scope of the returned temporary access token is the same
-    #                  as the requested target scope as long as the requested scope is the same as or a
-    #                  subset of the grant scope. </p>
+    #                     <code>Minimal</code> – The scope of the returned temporary access token is the same as the requested target scope as long as the requested scope is the same as or a subset of the grant scope. </p>
     #               </li>
     #            </ul>
     # @option params [String] :target_type
-    #   <p>The type of <code>Target</code>. The only possible value is <code>Object</code>. Pass
-    #            this value if the target data that you would like to access is a path to an object. Do not
-    #            pass this value if the target data is a bucket or a bucket and a prefix. </p>
+    #   <p>The type of <code>Target</code>. The only possible value is <code>Object</code>. Pass this value if the target data that you would like to access is a path to an object. Do not pass this value if the target data is a bucket or a bucket and a prefix. </p>
+    # @option params [String] :audit_context
+    #   <p>The context to identify the job or query associated with the credential request. This information will be displayed in CloudTrail log in your account.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     account_id: "AccountId",
@@ -3801,7 +3579,8 @@ module Aws::S3Control
     #     permission: "READ" # One of: ["READ", "WRITE", "READWRITE"], # required
     #     duration_seconds: 1,
     #     privilege: "Minimal" # One of: ["Minimal", "Default"],
-    #     target_type: "Object" # One of: ["Object"]
+    #     target_type: "Object" # One of: ["Object"],
+    #     audit_context: "AuditContext"
     #   }
     #   options = {}
     #   response = client.get_data_access(params, options)
@@ -3830,9 +3609,11 @@ module Aws::S3Control
     #          <dl>
     #             <dt>Permissions</dt>
     #             <dd>
-    #                <p>To use the <code>GetJobTagging</code> operation, you must have permission to
-    #                   perform the <code>s3:GetJobTagging</code> action. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-managing-jobs.html#batch-ops-job-tags">Controlling access and labeling jobs using tags</a> in the
-    #                      <i>Amazon S3 User Guide</i>.</p>
+    #                <p>To use the
+    #                   <code>GetJobTagging</code> operation, you must have permission to
+    #                   perform the <code>s3:GetJobTagging</code> action. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-managing-jobs.html#batch-ops-job-tags">Controlling
+    #                      access and labeling jobs using tags</a> in the
+    #                   <i>Amazon S3 User Guide</i>.</p>
     #             </dd>
     #          </dl>
     #          <p>Related actions include:</p>
@@ -3853,9 +3634,6 @@ module Aws::S3Control
     #                </p>
     #             </li>
     #          </ul>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::GetJobTaggingRequest] params
     # @option params [String] :account_id
     #   <p>The Amazon Web Services account ID associated with the S3 Batch Operations job.</p>
@@ -3914,9 +3692,6 @@ module Aws::S3Control
     #                </p>
     #             </li>
     #          </ul>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::GetMultiRegionAccessPointRequest] params
     # @option params [String] :account_id
     #   <p>The Amazon Web Services account ID for the owner of the Multi-Region Access Point.</p>
@@ -3982,9 +3757,6 @@ module Aws::S3Control
     #                </p>
     #             </li>
     #          </ul>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::GetMultiRegionAccessPointPolicyRequest] params
     # @option params [String] :account_id
     #   <p>The Amazon Web Services account ID for the owner of the Multi-Region Access Point.</p>
@@ -4039,9 +3811,6 @@ module Aws::S3Control
     #                </p>
     #             </li>
     #          </ul>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::GetMultiRegionAccessPointPolicyStatusRequest] params
     # @option params [String] :account_id
     #   <p>The Amazon Web Services account ID for the owner of the Multi-Region Access Point.</p>
@@ -4103,9 +3872,6 @@ module Aws::S3Control
     #                </p>
     #             </li>
     #          </ul>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::GetMultiRegionAccessPointRoutesRequest] params
     # @option params [String] :account_id
     #   <p>The Amazon Web Services account ID for the owner of the Multi-Region Access Point.</p>
@@ -4139,8 +3905,9 @@ module Aws::S3Control
     # <note>
     #             <p>This operation is not supported by directory buckets.</p>
     #          </note>
-    #          <p>Retrieves the <code>PublicAccessBlock</code> configuration for an Amazon Web Services account. For
-    #          more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html"> Using Amazon S3 block
+    #          <p>Retrieves the <code>PublicAccessBlock</code> configuration for an Amazon Web Services account. This
+    #          operation returns the effective account-level configuration, which may inherit from
+    #          organization-level policies. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html"> Using Amazon S3 block
     #             public access</a>.</p>
     #          <p>Related actions include:</p>
     #          <ul>
@@ -4155,9 +3922,6 @@ module Aws::S3Control
     #                </p>
     #             </li>
     #          </ul>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::GetPublicAccessBlockRequest] params
     # @option params [String] :account_id
     #   <p>The account ID for the Amazon Web Services account whose <code>PublicAccessBlock</code> configuration
@@ -4195,9 +3959,6 @@ module Aws::S3Control
     #                <code>s3:GetStorageLensConfiguration</code> action. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens_iam_permissions.html">Setting permissions to use Amazon S3 Storage Lens</a> in the
     #                <i>Amazon S3 User Guide</i>.</p>
     #          </note>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::GetStorageLensConfigurationRequest] params
     # @option params [String] :config_id
     #   <p>The ID of the Amazon S3 Storage Lens configuration.</p>
@@ -4241,6 +4002,9 @@ module Aws::S3Control
     #           },
     #           detailed_status_codes_metrics: {
     #             is_enabled: false
+    #           },
+    #           advanced_performance_metrics: {
+    #             is_enabled: false
     #           }
     #         },
     #         advanced_cost_optimization_metrics: {
@@ -4250,6 +4014,9 @@ module Aws::S3Control
     #           is_enabled: false
     #         },
     #         detailed_status_codes_metrics: {
+    #           is_enabled: false
+    #         },
+    #         advanced_performance_metrics: {
     #           is_enabled: false
     #         },
     #         storage_lens_group_level: {
@@ -4284,13 +4051,50 @@ module Aws::S3Control
     #         },
     #         cloud_watch_metrics: {
     #           is_enabled: false, # required
+    #         },
+    #         storage_lens_table_destination: {
+    #           is_enabled: false, # required
+    #           encryption: {
+    #             sses3: {
+    #             },
+    #             ssekms: {
+    #               key_id: "SSEKMSKeyId", # required
+    #             }
+    #           }
+    #         }
+    #       },
+    #       expanded_prefixes_data_export: {
+    #         s3_bucket_destination: {
+    #           format: "CSV" # One of: ["CSV", "Parquet"], # required
+    #           output_schema_version: "V_1" # One of: ["V_1"], # required
+    #           account_id: "AccountId", # required
+    #           arn: "S3BucketArnString", # required
+    #           prefix: "Prefix",
+    #           encryption: {
+    #             sses3: {
+    #             },
+    #             ssekms: {
+    #               key_id: "SSEKMSKeyId", # required
+    #             }
+    #           }
+    #         },
+    #         storage_lens_table_destination: {
+    #           is_enabled: false, # required
+    #           encryption: {
+    #             sses3: {
+    #             },
+    #             ssekms: {
+    #               key_id: "SSEKMSKeyId", # required
+    #             }
+    #           }
     #         }
     #       },
     #       is_enabled: false, # required
     #       aws_org: {
     #         arn: "AwsOrgArn", # required
     #       },
-    #       storage_lens_arn: "StorageLensArn"
+    #       storage_lens_arn: "StorageLensArn",
+    #       prefix_delimiter: "StorageLensPrefixLevelDelimiter"
     #     }
     #   }
     # @return [Types::GetStorageLensConfigurationResult]
@@ -4312,9 +4116,6 @@ module Aws::S3Control
     #                <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens_iam_permissions.html">Setting permissions to
     #                use Amazon S3 Storage Lens</a> in the <i>Amazon S3 User Guide</i>.</p>
     #          </note>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::GetStorageLensConfigurationTaggingRequest] params
     # @option params [String] :config_id
     #   <p>The ID of the Amazon S3 Storage Lens configuration.</p>
@@ -4350,9 +4151,6 @@ module Aws::S3Control
     #       Groups permissions, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions">Setting account permissions to use S3 Storage Lens groups</a>.</p>
     #          <p>For information about Storage Lens groups errors, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3LensErrorCodeList">List of Amazon S3 Storage
     #       Lens error codes</a>.</p>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::GetStorageLensGroupRequest] params
     # @option params [String] :name
     #   <p>
@@ -4441,28 +4239,18 @@ module Aws::S3Control
     #          <dl>
     #             <dt>Permissions</dt>
     #             <dd>
-    #                <p>You must have the <code>s3:ListAccessGrants</code> permission to use this
-    #                   operation. </p>
+    #                <p>You must have the <code>s3:ListAccessGrants</code> permission to use this operation. </p>
     #             </dd>
     #          </dl>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::ListAccessGrantsRequest] params
     # @option params [String] :account_id
     #   <p>The Amazon Web Services account ID of the S3 Access Grants instance.</p>
     # @option params [String] :next_token
-    #   <p>A pagination token to request the next page of results. Pass this value into a
-    #            subsequent <code>List Access Grants</code> request in order to retrieve the next page of
-    #            results.</p>
+    #   <p>A pagination token to request the next page of results. Pass this value into a subsequent <code>List Access Grants</code> request in order to retrieve the next page of results.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of access grants that you would like returned in the <code>List
-    #               Access Grants</code> response. If the results include the pagination token
-    #               <code>NextToken</code>, make another call using the <code>NextToken</code> to determine
-    #            if there are more results.</p>
+    #   <p>The maximum number of access grants that you would like returned in the <code>List Access Grants</code> response. If the results include the pagination token <code>NextToken</code>, make another call using the <code>NextToken</code> to determine if there are more results.</p>
     # @option params [String] :grantee_type
-    #   <p>The type of the grantee to which access has been granted. It can be one of the following
-    #            values:</p>
+    #   <p>The type of the grantee to which access has been granted. It can be one of the following values:</p>
     #            <ul>
     #               <li>
     #                  <p>
@@ -4470,29 +4258,17 @@ module Aws::S3Control
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>DIRECTORY_USER</code> - Your corporate directory user. You can use
-    #                  this option if you have added your corporate identity directory to IAM Identity
-    #                  Center and associated the IAM Identity Center instance with your S3 Access Grants
-    #                  instance.</p>
+    #                     <code>DIRECTORY_USER</code> - Your corporate directory user. You can use this option if you have added your corporate identity directory to IAM Identity Center and associated the IAM Identity Center instance with your S3 Access Grants instance.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>DIRECTORY_GROUP</code> - Your corporate directory group. You can use
-    #                  this option if you have added your corporate identity directory to IAM Identity
-    #                  Center and associated the IAM Identity Center instance with your S3 Access Grants
-    #                  instance.</p>
+    #                     <code>DIRECTORY_GROUP</code> - Your corporate directory group. You can use this option if you have added your corporate identity directory to IAM Identity Center and associated the IAM Identity Center instance with your S3 Access Grants instance.</p>
     #               </li>
     #            </ul>
     # @option params [String] :grantee_identifier
-    #   <p>The unique identifer of the <code>Grantee</code>. If the grantee type is
-    #               <code>IAM</code>, the identifier is the IAM Amazon Resource Name (ARN) of the user
-    #            or role. If the grantee type is a directory user or group, the identifier is 128-bit
-    #            universally unique identifier (UUID) in the format
-    #               <code>a1b2c3d4-5678-90ab-cdef-EXAMPLE11111</code>. You can obtain this UUID from your
-    #            Amazon Web Services IAM Identity Center instance.</p>
+    #   <p>The unique identifer of the <code>Grantee</code>. If the grantee type is <code>IAM</code>, the identifier is the IAM Amazon Resource Name (ARN) of the user or role. If the grantee type is a directory user or group, the identifier is 128-bit universally unique identifier (UUID) in the format <code>a1b2c3d4-5678-90ab-cdef-EXAMPLE11111</code>. You can obtain this UUID from your Amazon Web Services IAM Identity Center instance.</p>
     # @option params [String] :permission
-    #   <p>The type of permission granted to your S3 data, which can be set to one of the following
-    #            values:</p>
+    #   <p>The type of permission granted to your S3 data, which can be set to one of the following values:</p>
     #            <ul>
     #               <li>
     #                  <p>
@@ -4508,12 +4284,9 @@ module Aws::S3Control
     #               </li>
     #            </ul>
     # @option params [String] :grant_scope
-    #   <p>The S3 path of the data to which you are granting access. It is the result of appending
-    #            the <code>Subprefix</code> to the location scope.</p>
+    #   <p>The S3 path of the data to which you are granting access. It is the result of appending the <code>Subprefix</code> to the location scope.</p>
     # @option params [String] :application_arn
-    #   <p>The Amazon Resource Name (ARN) of an Amazon Web Services IAM Identity Center application associated
-    #            with your Identity Center instance. If the grant includes an application ARN, the grantee
-    #            can only access the S3 data through this application. </p>
+    #   <p>The Amazon Resource Name (ARN) of an Amazon Web Services IAM Identity Center application associated with your Identity Center instance. If the grant includes an application ARN, the grantee can only access the S3 data through this application. </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     account_id: "AccountId",
@@ -4556,31 +4329,20 @@ module Aws::S3Control
       request.send_request(options)
     end
 
-    # <p>Returns a list of S3 Access Grants instances. An S3 Access Grants instance serves as a logical grouping for
-    #          your individual access grants. You can only have one S3 Access Grants instance per Region per
-    #          account.</p>
+    # <p>Returns a list of S3 Access Grants instances. An S3 Access Grants instance serves as a logical grouping for your individual access grants. You can only have one S3 Access Grants instance per Region per account.</p>
     #          <dl>
     #             <dt>Permissions</dt>
     #             <dd>
-    #                <p>You must have the <code>s3:ListAccessGrantsInstances</code> permission to use
-    #                   this operation. </p>
+    #                <p>You must have the <code>s3:ListAccessGrantsInstances</code> permission to use this operation. </p>
     #             </dd>
     #          </dl>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::ListAccessGrantsInstancesRequest] params
     # @option params [String] :account_id
     #   <p>The Amazon Web Services account ID of the S3 Access Grants instance.</p>
     # @option params [String] :next_token
-    #   <p>A pagination token to request the next page of results. Pass this value into a
-    #            subsequent <code>List Access Grants Instances</code> request in order to retrieve the next
-    #            page of results.</p>
+    #   <p>A pagination token to request the next page of results. Pass this value into a subsequent <code>List Access Grants Instances</code> request in order to retrieve the next page of results.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of access grants that you would like returned in the <code>List
-    #               Access Grants</code> response. If the results include the pagination token
-    #               <code>NextToken</code>, make another call using the <code>NextToken</code> to determine
-    #            if there are more results.</p>
+    #   <p>The maximum number of access grants that you would like returned in the <code>List Access Grants</code> response. If the results include the pagination token <code>NextToken</code>, make another call using the <code>NextToken</code> to determine if there are more results.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     account_id: "AccountId",
@@ -4614,34 +4376,18 @@ module Aws::S3Control
     #          <dl>
     #             <dt>Permissions</dt>
     #             <dd>
-    #                <p>You must have the <code>s3:ListAccessGrantsLocations</code> permission to use
-    #                   this operation. </p>
+    #                <p>You must have the <code>s3:ListAccessGrantsLocations</code> permission to use this operation. </p>
     #             </dd>
     #          </dl>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::ListAccessGrantsLocationsRequest] params
     # @option params [String] :account_id
     #   <p>The Amazon Web Services account ID of the S3 Access Grants instance.</p>
     # @option params [String] :next_token
-    #   <p>A pagination token to request the next page of results. Pass this value into a
-    #            subsequent <code>List Access Grants Locations</code> request in order to retrieve the next
-    #            page of results.</p>
+    #   <p>A pagination token to request the next page of results. Pass this value into a subsequent <code>List Access Grants Locations</code> request in order to retrieve the next page of results.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of access grants that you would like returned in the <code>List
-    #               Access Grants</code> response. If the results include the pagination token
-    #               <code>NextToken</code>, make another call using the <code>NextToken</code> to determine
-    #            if there are more results.</p>
+    #   <p>The maximum number of access grants that you would like returned in the <code>List Access Grants</code> response. If the results include the pagination token <code>NextToken</code>, make another call using the <code>NextToken</code> to determine if there are more results.</p>
     # @option params [String] :location_scope
-    #   <p>The S3 path to the location that you are registering. The location scope can be the
-    #            default S3 location <code>s3://</code>, the S3 path to a bucket
-    #               <code>s3://<bucket></code>, or the S3 path to a bucket and prefix
-    #               <code>s3://<bucket>/<prefix></code>. A prefix in S3 is a string of
-    #            characters at the beginning of an object key name used to organize the objects that you
-    #            store in your S3 buckets. For example, object key names that start with the
-    #               <code>engineering/</code> prefix or object key names that start with the
-    #               <code>marketing/campaigns/</code> prefix.</p>
+    #   <p>The S3 path to the location that you are registering. The location scope can be the default S3 location <code>s3://</code>, the S3 path to a bucket <code>s3://<bucket></code>, or the S3 path to a bucket and prefix <code>s3://<bucket>/<prefix></code>. A prefix in S3 is a string of characters at the beginning of an object key name used to organize the objects that you store in your S3 buckets. For example, object key names that start with the <code>engineering/</code> prefix or object key names that start with the <code>marketing/campaigns/</code> prefix.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     account_id: "AccountId",
@@ -4700,9 +4446,6 @@ module Aws::S3Control
     #                </p>
     #             </li>
     #          </ul>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::ListAccessPointsRequest] params
     # @option params [String] :account_id
     #   <p>The Amazon Web Services account ID for the account that owns the specified access points.</p>
@@ -4722,9 +4465,8 @@ module Aws::S3Control
     # @option params [String] :data_source_id
     #   <p>The unique identifier for the data source of the access point.</p>
     # @option params [String] :data_source_type
-    #   <p>The type of the data source that the access point is attached to. Returns only access points attached to
-    #            S3 buckets by default. To return all access points specify <code>DataSourceType</code> as
-    #               <code>ALL</code>.</p>
+    #   <p>The type of the data source that the access point is attached to. Returns only access points attached to S3 buckets by default. To return all access points specify
+    #            <code>DataSourceType</code> as <code>ALL</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     account_id: "AccountId",
@@ -4762,33 +4504,25 @@ module Aws::S3Control
       request.send_request(options)
     end
 
-    # <p>Returns a list of the access points that are owned by the Amazon Web Services account and that are associated
-    #          with the specified directory bucket.</p>
+    # <p>Returns a list of the access points that are owned by the Amazon Web Services account and that are associated with the specified directory bucket.</p>
     #          <p>To list access points for general purpose buckets, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPoints.html">ListAccesspoints</a>.</p>
     #          <p>To use this operation, you must have the permission to perform the
-    #             <code>s3express:ListAccessPointsForDirectoryBuckets</code>
-    #          action.</p>
+    #          <code>s3express:ListAccessPointsForDirectoryBuckets</code> action.</p>
     #          <p>For information about REST API errors, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#RESTErrorResponses">REST error responses</a>.</p>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::ListAccessPointsForDirectoryBucketsRequest] params
     # @option params [String] :account_id
     #   <p>The Amazon Web Services account ID that owns the access points.</p>
     # @option params [String] :directory_bucket
     #   <p>The name of the directory bucket associated with the access points you want to list.</p>
     # @option params [String] :next_token
-    #   <p> If <code>NextToken</code> is returned, there are more access points available than requested in
-    #            the <code>maxResults</code> value. The value of <code>NextToken</code> is a unique
-    #            pagination token for each page. Make the call again using the returned token to retrieve
-    #            the next page. Keep all other arguments unchanged. Each pagination token expires after 24
-    #            hours. </p>
+    #   <p>
+    #            If <code>NextToken</code> is returned, there are more access points available than requested in the <code>maxResults</code> value. The value of <code>NextToken</code> is a
+    #            unique pagination token for each page. Make the call again using the returned token to
+    #            retrieve the next page. Keep all other arguments unchanged. Each pagination token expires
+    #            after 24 hours.
+    #         </p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of access points that you would like returned in the
-    #               <code>ListAccessPointsForDirectoryBuckets</code> response. If the directory bucket is
-    #            associated with more than this number of access points, the results include the pagination token
-    #               <code>NextToken</code>. Make another call using the <code>NextToken</code> to retrieve
-    #            more results.</p>
+    #   <p>The maximum number of access points that you would like returned in the <code>ListAccessPointsForDirectoryBuckets</code> response. If the directory bucket is associated with more than this number of access points, the results include the pagination token <code>NextToken</code>. Make another call using the <code>NextToken</code> to retrieve more results.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     account_id: "AccountId", # required
@@ -4849,9 +4583,6 @@ module Aws::S3Control
     #                </p>
     #             </li>
     #          </ul>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::ListAccessPointsForObjectLambdaRequest] params
     # @option params [String] :account_id
     #   <p>The account ID for the account that owns the specified Object Lambda Access Point.</p>
@@ -4893,46 +4624,24 @@ module Aws::S3Control
       request.send_request(options)
     end
 
-    # <p>Use this API to list the access grants that grant the caller access to Amazon S3 data through
-    #          S3 Access Grants. The caller (grantee) can be an Identity and Access Management (IAM) identity or Amazon Web Services Identity Center
-    #          corporate directory identity. You must pass the Amazon Web Services account of the S3 data owner
-    #          (grantor) in the request. You can, optionally, narrow the results by
-    #             <code>GrantScope</code>, using a fragment of the data's S3 path, and S3 Access Grants will return
-    #          only the grants with a path that contains the path fragment. You can also pass the
-    #             <code>AllowedByApplication</code> filter in the request, which returns only the grants
-    #          authorized for applications, whether the application is the caller's Identity Center
-    #          application or any other application (<code>ALL</code>). For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-grants-list-grants.html">List
-    #             the caller's access grants</a> in the <i>Amazon S3 User Guide</i>.</p>
+    # <p>Use this API to list the access grants that grant the caller access to Amazon S3 data through S3 Access Grants. The caller (grantee) can be an Identity and Access Management (IAM) identity or Amazon Web Services Identity Center corporate directory identity. You must pass the Amazon Web Services account of the S3 data owner (grantor) in the request. You can, optionally, narrow the results by <code>GrantScope</code>, using a fragment of the data's S3 path, and S3 Access Grants will return only the grants with a path that contains the path fragment. You can also pass the <code>AllowedByApplication</code> filter in the request, which returns only the grants authorized for applications, whether the application is the caller's Identity Center application or any other application (<code>ALL</code>). For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-grants-list-grants.html">List the caller's access grants</a> in the <i>Amazon S3 User Guide</i>.</p>
     #          <dl>
     #             <dt>Permissions</dt>
     #             <dd>
-    #                <p>You must have the <code>s3:ListCallerAccessGrants</code> permission to use this
-    #                   operation. </p>
+    #                <p>You must have the <code>s3:ListCallerAccessGrants</code> permission to use this operation. </p>
     #             </dd>
     #          </dl>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::ListCallerAccessGrantsRequest] params
     # @option params [String] :account_id
     #   <p>The Amazon Web Services account ID of the S3 Access Grants instance.</p>
     # @option params [String] :grant_scope
-    #   <p>The S3 path of the data that you would like to access. Must start with
-    #               <code>s3://</code>. You can optionally pass only the beginning characters of a path, and
-    #            S3 Access Grants will search for all applicable grants for the path fragment. </p>
+    #   <p>The S3 path of the data that you would like to access. Must start with <code>s3://</code>. You can optionally pass only the beginning characters of a path, and S3 Access Grants will search for all applicable grants for the path fragment. </p>
     # @option params [String] :next_token
-    #   <p>A pagination token to request the next page of results. Pass this value into a
-    #            subsequent <code>List Caller Access Grants</code> request in order to retrieve the next
-    #            page of results.</p>
+    #   <p>A pagination token to request the next page of results. Pass this value into a subsequent <code>List Caller Access Grants</code> request in order to retrieve the next page of results.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of access grants that you would like returned in the <code>List
-    #               Caller Access Grants</code> response. If the results include the pagination token
-    #               <code>NextToken</code>, make another call using the <code>NextToken</code> to determine
-    #            if there are more results.</p>
+    #   <p>The maximum number of access grants that you would like returned in the <code>List Caller Access Grants</code> response. If the results include the pagination token <code>NextToken</code>, make another call using the <code>NextToken</code> to determine if there are more results.</p>
     # @option params [Boolean] :allowed_by_application
-    #   <p>If this optional parameter is passed in the request, a filter is applied to the results.
-    #            The results will include only the access grants for the caller's Identity Center
-    #            application or for any other applications (<code>ALL</code>).</p>
+    #   <p>If this optional parameter is passed in the request, a filter is applied to the results. The results will include only the access grants for the caller's Identity Center application or for any other applications (<code>ALL</code>).</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     account_id: "AccountId",
@@ -4966,8 +4675,9 @@ module Aws::S3Control
     #          <dl>
     #             <dt>Permissions</dt>
     #             <dd>
-    #                <p>To use the <code>ListJobs</code> operation, you must have permission to perform
-    #                   the <code>s3:ListJobs</code> action.</p>
+    #                <p>To use the
+    #                   <code>ListJobs</code> operation, you must have permission to
+    #                   perform the <code>s3:ListJobs</code> action.</p>
     #             </dd>
     #          </dl>
     #          <p>Related actions include:</p>
@@ -4994,9 +4704,6 @@ module Aws::S3Control
     #                </p>
     #             </li>
     #          </ul>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::ListJobsRequest] params
     # @option params [String] :account_id
     #   <p>The Amazon Web Services account ID associated with the S3 Batch Operations job.</p>
@@ -5029,7 +4736,7 @@ module Aws::S3Control
     #       {
     #         job_id: "JobId",
     #         description: "NonEmptyMaxLength256String",
-    #         operation: "LambdaInvoke" # One of: ["LambdaInvoke", "S3PutObjectCopy", "S3PutObjectAcl", "S3PutObjectTagging", "S3DeleteObjectTagging", "S3InitiateRestoreObject", "S3PutObjectLegalHold", "S3PutObjectRetention", "S3ReplicateObject", "S3ComputeObjectChecksum"],
+    #         operation: "LambdaInvoke" # One of: ["LambdaInvoke", "S3PutObjectCopy", "S3PutObjectAcl", "S3PutObjectTagging", "S3DeleteObjectTagging", "S3InitiateRestoreObject", "S3PutObjectLegalHold", "S3PutObjectRetention", "S3ReplicateObject", "S3ComputeObjectChecksum", "S3UpdateObjectEncryption"],
     #         priority: 1,
     #         status: "Active" # One of: ["Active", "Cancelled", "Cancelling", "Complete", "Completing", "Failed", "Failing", "New", "Paused", "Pausing", "Preparing", "Ready", "Suspended"],
     #         creation_time: Time.now,
@@ -5083,9 +4790,6 @@ module Aws::S3Control
     #                </p>
     #             </li>
     #          </ul>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::ListMultiRegionAccessPointsRequest] params
     # @option params [String] :account_id
     #   <p>The Amazon Web Services account ID for the owner of the Multi-Region Access Point.</p>
@@ -5141,9 +4845,6 @@ module Aws::S3Control
     #             <i>Amazon S3 User Guide</i>.</p>
     #          <p>For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts
     #          endpoint hostname prefix and <code>x-amz-outpost-id</code> in your request, see the <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListRegionalBuckets.html#API_control_ListRegionalBuckets_Examples">Examples</a> section.</p>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::ListRegionalBucketsRequest] params
     # @option params [String] :account_id
     #   <p>The Amazon Web Services account ID of the Outposts bucket.</p>
@@ -5198,9 +4899,6 @@ module Aws::S3Control
     #                <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens_iam_permissions.html">Setting permissions to
     #                use Amazon S3 Storage Lens</a> in the <i>Amazon S3 User Guide</i>.</p>
     #          </note>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::ListStorageLensConfigurationsRequest] params
     # @option params [String] :account_id
     #   <p>The account ID of the requester.</p>
@@ -5240,9 +4938,6 @@ module Aws::S3Control
     #       Groups permissions, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions">Setting account permissions to use S3 Storage Lens groups</a>.</p>
     #          <p>For information about Storage Lens groups errors, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3LensErrorCodeList">List of Amazon S3 Storage
     #       Lens error codes</a>.</p>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::ListStorageLensGroupsRequest] params
     # @option params [String] :account_id
     #   <p>
@@ -5276,12 +4971,15 @@ module Aws::S3Control
       request.send_request(options)
     end
 
-    # <p>This operation allows you to list all of the tags for a specified resource. Each tag is
-    #          a label consisting of a key and value. Tags can help you organize, track costs for, and
-    #          control access to resources. </p>
+    # <p>This operation allows you to list all of the tags for a specified resource. Each tag is a label consisting of a key and value. Tags can help you organize, track costs for, and control access to resources. </p>
     #          <note>
     #             <p>This operation is only supported for the following Amazon S3 resources:</p>
     #             <ul>
+    #                <li>
+    #                   <p>
+    #                      <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/buckets-tagging.html">General purpose buckets</a>
+    #                   </p>
+    #                </li>
     #                <li>
     #                   <p>
     #                      <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-db-tagging.html">Access Points for directory buckets</a>
@@ -5299,7 +4997,7 @@ module Aws::S3Control
     #                </li>
     #                <li>
     #                   <p>
-    #                      <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups.html">Storage Lens groups</a>
+    #                      <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups.html">S3 Storage Lens groups</a>
     #                   </p>
     #                </li>
     #                <li>
@@ -5311,14 +5009,11 @@ module Aws::S3Control
     #          <dl>
     #             <dt>Permissions</dt>
     #             <dd>
-    #                <p>For Storage Lens groups and S3 Access Grants, you must have the
-    #                      <code>s3:ListTagsForResource</code> permission to use this operation. </p>
-    #                <p>For more information about the required Storage Lens Groups permissions, see
-    #                      <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions">Setting account permissions to use S3 Storage Lens groups</a>.</p>
+    #                <p>For general purpose buckets, access points for general purpose buckets, Storage Lens groups, and S3 Access Grants, you must have the <code>s3:ListTagsForResource</code> permission to use this operation. </p>
     #             </dd>
     #             <dt>Directory bucket permissions</dt>
     #             <dd>
-    #                <p>For directory buckets and access points for directory buckets, you must have the <code>s3express:ListTagsForResource</code> permission to use this operation. For more information about directory buckets policies and permissions, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-permissions.html">Identity and Access Management (IAM) for S3 Express One Zone</a> in the <i>Amazon S3 User Guide</i>.</p>
+    #                <p>For directory buckets, you must have the <code>s3express:ListTagsForResource</code> permission to use this operation. For more information about directory buckets policies and permissions, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-permissions.html">Identity and Access Management (IAM) for S3 Express One Zone</a> in the <i>Amazon S3 User Guide</i>.</p>
     #             </dd>
     #             <dt>HTTP Host header syntax</dt>
     #             <dd>
@@ -5326,18 +5021,16 @@ module Aws::S3Control
     #                   <b>Directory buckets </b> - The HTTP Host header syntax is <code>s3express-control.<i>region</i>.amazonaws.com</code>.</p>
     #             </dd>
     #          </dl>
-    #          <p>For information about S3 Tagging errors, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3TaggingErrorCodeList">List of Amazon S3
-    #             Tagging error codes</a>.</p>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
+    #          <p>For information about S3 Tagging errors, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3TaggingErrorCodeList">List of Amazon S3 Tagging error codes</a>.</p>
     # @param [Hash, Types::ListTagsForResourceRequest] params
     # @option params [String] :account_id
-    #   <p> The Amazon Web Services account ID of the resource owner. </p>
+    #   <p>
+    #   The Amazon Web Services account ID of the resource owner.
+    #   </p>
     # @option params [String] :resource_arn
-    #   <p> The Amazon Resource Name (ARN) of the S3 resource that you want to list tags for. The
-    #            tagged resource can be a directory bucket, S3 Storage Lens group or S3 Access Grants instance,
-    #            registered location, or grant. </p>
+    #   <p>
+    #   The Amazon Resource Name (ARN) of the S3 resource that you want to list tags for. The tagged resource can be a directory bucket, S3 Storage Lens group or S3 Access Grants instance, registered location, or grant.
+    #   </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     account_id: "AccountId",
@@ -5365,13 +5058,9 @@ module Aws::S3Control
     #          <dl>
     #             <dt>Permissions</dt>
     #             <dd>
-    #                <p>You must have the <code>s3:PutAccessGrantsInstanceResourcePolicy</code>
-    #                   permission to use this operation. </p>
+    #                <p>You must have the <code>s3:PutAccessGrantsInstanceResourcePolicy</code> permission to use this operation. </p>
     #             </dd>
     #          </dl>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::PutAccessGrantsInstanceResourcePolicyRequest] params
     # @option params [String] :account_id
     #   <p>The Amazon Web Services account ID of the S3 Access Grants instance.</p>
@@ -5413,9 +5102,6 @@ module Aws::S3Control
     #                </p>
     #             </li>
     #          </ul>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::PutAccessPointConfigurationForObjectLambdaRequest] params
     # @option params [String] :account_id
     #   <p>The account ID for the account that owns the specified Object Lambda Access Point.</p>
@@ -5474,9 +5160,6 @@ module Aws::S3Control
     #                </p>
     #             </li>
     #          </ul>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::PutAccessPointPolicyRequest] params
     # @option params [String] :account_id
     #   <p>The Amazon Web Services account ID for owner of the bucket associated with the specified access point.</p>
@@ -5487,9 +5170,7 @@ module Aws::S3Control
     # @option params [String] :policy
     #   <p>The policy that you want to apply to the specified access point. For more information about access point
     #            policies, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points.html">Managing data access with Amazon S3
-    #               access points</a> or <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-directory-buckets.html">Managing access to
-    #               shared datasets in directory buckets with access points</a> in the
-    #               <i>Amazon S3 User Guide</i>.</p>
+    #               access points</a> or <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-directory-buckets.html">Managing access to shared datasets in directory buckets with access points</a> in the <i>Amazon S3 User Guide</i>.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     account_id: "AccountId",
@@ -5525,9 +5206,6 @@ module Aws::S3Control
     #                </p>
     #             </li>
     #          </ul>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::PutAccessPointPolicyForObjectLambdaRequest] params
     # @option params [String] :account_id
     #   <p>The account ID for the account that owns the specified Object Lambda Access Point.</p>
@@ -5552,23 +5230,17 @@ module Aws::S3Control
       request.send_request(options)
     end
 
-    # <p>Creates or replaces the access point scope for a directory bucket. You can use the access point
-    #          scope to restrict access to specific prefixes, API operations, or a combination of
-    #          both.</p>
+    # <p>Creates or replaces the access point scope for a directory bucket. You can use the access point scope to restrict access to specific prefixes, API operations, or a combination of both.</p>
     #          <note>
-    #             <p>You can specify any amount of prefixes, but the total length of characters of all
-    #             prefixes must be less than 256 bytes in size.</p>
+    #             <p>You can specify any amount of prefixes, but the total length of characters of all prefixes must be less than 256 bytes in size.</p>
     #          </note>
     #          <p>To use this operation, you must have the permission to perform the
-    #             <code>s3express:PutAccessPointScope</code>
-    #          action.</p>
+    #          <code>s3express:PutAccessPointScope</code> action.</p>
     #          <p>For information about REST API errors, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#RESTErrorResponses">REST error responses</a>.</p>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::PutAccessPointScopeRequest] params
     # @option params [String] :account_id
-    #   <p> The Amazon Web Services account ID that owns the access point with scope that you want to create or replace.
+    #   <p>
+    #            The Amazon Web Services account ID that owns the access point with scope that you want to create or replace.
     #         </p>
     # @option params [String] :name
     #   <p>The name of the access point with the scope that you want to create or replace.</p>
@@ -6114,9 +5786,6 @@ module Aws::S3Control
     #                </p>
     #             </li>
     #          </ul>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::PutBucketVersioningRequest] params
     # @option params [String] :account_id
     #   <p>The Amazon Web Services account ID of the S3 on Outposts bucket.</p>
@@ -6152,8 +5821,8 @@ module Aws::S3Control
     #          <p>A tag is a key-value pair. You can associate S3 Batch Operations tags with any job by sending
     #          a PUT request against the tagging subresource that is associated with the job. To modify
     #          the existing tag set, you can either replace the existing tag set entirely, or make changes
-    #          within the existing tag set by retrieving the existing tag set using <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetJobTagging.html">GetJobTagging</a>, modify that tag set, and use this operation to replace the tag
-    #          set with the one you modified. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-managing-jobs.html#batch-ops-job-tags">Controlling
+    #          within the existing tag set by retrieving the existing tag set using <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetJobTagging.html">GetJobTagging</a>, modify that tag set, and use this operation to replace the tag set
+    #          with the one you modified. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-managing-jobs.html#batch-ops-job-tags">Controlling
     #             access and labeling jobs using tags</a> in the <i>Amazon S3 User Guide</i>. </p>
     #          <note>
     #             <ul>
@@ -6194,7 +5863,8 @@ module Aws::S3Control
     #          <dl>
     #             <dt>Permissions</dt>
     #             <dd>
-    #                <p>To use the <code>PutJobTagging</code> operation, you must have permission to
+    #                <p>To use the
+    #                   <code>PutJobTagging</code> operation, you must have permission to
     #                   perform the <code>s3:PutJobTagging</code> action.</p>
     #             </dd>
     #          </dl>
@@ -6216,9 +5886,6 @@ module Aws::S3Control
     #                </p>
     #             </li>
     #          </ul>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::PutJobTaggingRequest] params
     # @option params [String] :account_id
     #   <p>The Amazon Web Services account ID associated with the S3 Batch Operations job.</p>
@@ -6271,9 +5938,6 @@ module Aws::S3Control
     #                </p>
     #             </li>
     #          </ul>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::PutMultiRegionAccessPointPolicyRequest] params
     # @option params [String] :account_id
     #   <p>The Amazon Web Services account ID for the owner of the Multi-Region Access Point.</p>
@@ -6308,7 +5972,11 @@ module Aws::S3Control
     #             <p>This operation is not supported by directory buckets.</p>
     #          </note>
     #          <p>Creates or modifies the <code>PublicAccessBlock</code> configuration for an
-    #          Amazon Web Services account. For this operation, users must have the
+    #          Amazon Web Services account. This operation may be restricted when the account is managed by
+    #          organization-level Block Public Access policies. You might get an Access Denied (403) error
+    #          when the account is managed by organization-level Block Public Access policies.
+    #          Organization-level policies override account-level settings, preventing direct
+    #          account-level modifications. For this operation, users must have the
     #             <code>s3:PutAccountPublicAccessBlock</code> permission. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html">
     #             Using Amazon S3 block public access</a>.</p>
     #          <p>Related actions include:</p>
@@ -6324,9 +5992,6 @@ module Aws::S3Control
     #                </p>
     #             </li>
     #          </ul>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::PutPublicAccessBlockRequest] params
     # @option params [Types::PublicAccessBlockConfiguration] :public_access_block_configuration
     #   <p>The <code>PublicAccessBlock</code> configuration that you want to apply to the specified
@@ -6365,9 +6030,6 @@ module Aws::S3Control
     #                <code>s3:PutStorageLensConfiguration</code> action. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens_iam_permissions.html">Setting permissions to use Amazon S3 Storage Lens</a> in the
     #                <i>Amazon S3 User Guide</i>.</p>
     #          </note>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::PutStorageLensConfigurationRequest] params
     # @option params [String] :config_id
     #   <p>The ID of the S3 Storage Lens configuration.</p>
@@ -6412,6 +6074,9 @@ module Aws::S3Control
     #           },
     #           detailed_status_codes_metrics: {
     #             is_enabled: false
+    #           },
+    #           advanced_performance_metrics: {
+    #             is_enabled: false
     #           }
     #         },
     #         advanced_cost_optimization_metrics: {
@@ -6421,6 +6086,9 @@ module Aws::S3Control
     #           is_enabled: false
     #         },
     #         detailed_status_codes_metrics: {
+    #           is_enabled: false
+    #         },
+    #         advanced_performance_metrics: {
     #           is_enabled: false
     #         },
     #         storage_lens_group_level: {
@@ -6455,13 +6123,50 @@ module Aws::S3Control
     #         },
     #         cloud_watch_metrics: {
     #           is_enabled: false, # required
+    #         },
+    #         storage_lens_table_destination: {
+    #           is_enabled: false, # required
+    #           encryption: {
+    #             sses3: {
+    #             },
+    #             ssekms: {
+    #               key_id: "SSEKMSKeyId", # required
+    #             }
+    #           }
+    #         }
+    #       },
+    #       expanded_prefixes_data_export: {
+    #         s3_bucket_destination: {
+    #           format: "CSV" # One of: ["CSV", "Parquet"], # required
+    #           output_schema_version: "V_1" # One of: ["V_1"], # required
+    #           account_id: "AccountId", # required
+    #           arn: "S3BucketArnString", # required
+    #           prefix: "Prefix",
+    #           encryption: {
+    #             sses3: {
+    #             },
+    #             ssekms: {
+    #               key_id: "SSEKMSKeyId", # required
+    #             }
+    #           }
+    #         },
+    #         storage_lens_table_destination: {
+    #           is_enabled: false, # required
+    #           encryption: {
+    #             sses3: {
+    #             },
+    #             ssekms: {
+    #               key_id: "SSEKMSKeyId", # required
+    #             }
+    #           }
     #         }
     #       },
     #       is_enabled: false, # required
     #       aws_org: {
     #         arn: "AwsOrgArn", # required
     #       },
-    #       storage_lens_arn: "StorageLensArn"
+    #       storage_lens_arn: "StorageLensArn",
+    #       prefix_delimiter: "StorageLensPrefixLevelDelimiter"
     #     },
     #     tags: [
     #       {
@@ -6493,9 +6198,6 @@ module Aws::S3Control
     #                <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens_iam_permissions.html">Setting permissions to
     #                use Amazon S3 Storage Lens</a> in the <i>Amazon S3 User Guide</i>.</p>
     #          </note>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::PutStorageLensConfigurationTaggingRequest] params
     # @option params [String] :config_id
     #   <p>The ID of the S3 Storage Lens configuration.</p>
@@ -6574,9 +6276,6 @@ module Aws::S3Control
     #                </p>
     #             </li>
     #          </ul>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::SubmitMultiRegionAccessPointRoutesRequest] params
     # @option params [String] :account_id
     #   <p>The Amazon Web Services account ID for the owner of the Multi-Region Access Point.</p>
@@ -6614,6 +6313,11 @@ module Aws::S3Control
     #             <ul>
     #                <li>
     #                   <p>
+    #                      <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/buckets-tagging.html">General purpose buckets</a>
+    #                   </p>
+    #                </li>
+    #                <li>
+    #                   <p>
     #                      <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-db-tagging.html">Access Points for directory buckets</a>
     #                   </p>
     #                </li>
@@ -6638,39 +6342,14 @@ module Aws::S3Control
     #                </li>
     #             </ul>
     #          </note>
-    #          <note>
-    #             <p>This operation is only supported for the following Amazon S3 resource:</p>
-    #             <ul>
-    #                <li>
-    #                   <p>
-    #                      <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-tagging.html">Directory
-    #                      buckets</a>
-    #                   </p>
-    #                </li>
-    #                <li>
-    #                   <p>
-    #                      <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups.html">S3 Storage Lens
-    #                      groups</a>
-    #                   </p>
-    #                </li>
-    #                <li>
-    #                   <p>
-    #                      <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-grants-tagging.html">S3 Access Grants instances,
-    #                      registered locations, or grants</a>.</p>
-    #                </li>
-    #             </ul>
-    #          </note>
     #          <dl>
     #             <dt>Permissions</dt>
     #             <dd>
-    #                <p>For Storage Lens groups and S3 Access Grants, you must have the
-    #                      <code>s3:TagResource</code> permission to use this operation. </p>
-    #                <p>For more information about the required Storage Lens Groups permissions, see
-    #                      <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions">Setting account permissions to use S3 Storage Lens groups</a>.</p>
+    #                <p>For general purpose buckets, access points for general purpose buckets, Storage Lens groups, and S3 Access Grants, you must have the <code>s3:TagResource</code> permission to use this operation. </p>
     #             </dd>
     #             <dt>Directory bucket permissions</dt>
     #             <dd>
-    #                <p>For directory buckets and access points for directory buckets, you must have the <code>s3express:TagResource</code> permission to use this operation. For more information about directory buckets policies and permissions, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-permissions.html">Identity and Access Management (IAM) for S3 Express One Zone</a> in the <i>Amazon S3 User Guide</i>.</p>
+    #                <p>For directory buckets, you must have the <code>s3express:TagResource</code> permission to use this operation. For more information about directory buckets policies and permissions, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-permissions.html">Identity and Access Management (IAM) for S3 Express One Zone</a> in the <i>Amazon S3 User Guide</i>.</p>
     #             </dd>
     #             <dt>HTTP Host header syntax</dt>
     #             <dd>
@@ -6679,20 +6358,17 @@ module Aws::S3Control
     #             </dd>
     #          </dl>
     #          <p>For information about S3 Tagging errors, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3TaggingErrorCodeList">List of Amazon S3 Tagging error codes</a>.</p>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::TagResourceRequest] params
     # @option params [String] :account_id
     #   <p>
-    #   The Amazon Web Services account ID that created the S3 resource that you're trying to add tags to or the requester's account ID. 
+    #   The Amazon Web Services account ID that created the S3 resource that you're trying to add tags to or the requester's account ID.
     #   </p>
     # @option params [String] :resource_arn
-    #   <p>The Amazon Resource Name (ARN) of the S3 resource that you're applying tags to. The
-    #            tagged resource can be a directory bucket, S3 Storage Lens group or S3 Access Grants instance,
-    #            registered location, or grant.</p>
+    #   <p>The Amazon Resource Name (ARN) of the S3 resource that you're applying tags to. The tagged resource can be a directory bucket, S3 Storage Lens group or S3 Access Grants instance, registered location, or grant.</p>
     # @option params [Array<Types::Tag>] :tags
-    #   <p> The Amazon Web Services resource tags that you want to add to the specified S3 resource. </p>
+    #   <p>
+    #   The Amazon Web Services resource tags that you want to add to the specified S3 resource.
+    #   </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     account_id: "AccountId",
@@ -6715,11 +6391,15 @@ module Aws::S3Control
       request.send_request(options)
     end
 
-    # <p>This operation removes the specified user-defined tags from an S3 resource. You can pass
-    #          one or more tag keys. </p>
+    # <p>This operation removes the specified user-defined tags from an S3 resource. You can pass one or more tag keys. </p>
     #          <note>
     #             <p>This operation is only supported for the following Amazon S3 resources:</p>
     #             <ul>
+    #                <li>
+    #                   <p>
+    #                      <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/buckets-tagging.html">General purpose buckets</a>
+    #                   </p>
+    #                </li>
     #                <li>
     #                   <p>
     #                      <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-db-tagging.html">Access Points for directory buckets</a>
@@ -6737,7 +6417,7 @@ module Aws::S3Control
     #                </li>
     #                <li>
     #                   <p>
-    #                      <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups.html">Storage Lens groups</a>
+    #                      <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups.html">S3 Storage Lens groups</a>
     #                   </p>
     #                </li>
     #                <li>
@@ -6749,16 +6429,11 @@ module Aws::S3Control
     #          <dl>
     #             <dt>Permissions</dt>
     #             <dd>
-    #                <p>For Storage Lens groups and S3 Access Grants, you must have the
-    #                      <code>s3:UntagResource</code> permission to use this operation. </p>
-    #                <p>For more information about the required Storage Lens Groups permissions, see
-    #                      <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions">Setting account permissions to use S3 Storage Lens groups</a>.</p>
+    #                <p>For general purpose buckets, access points for general purpose buckets, Storage Lens groups, and S3 Access Grants, you must have the <code>s3:UntagResource</code> permission to use this operation. </p>
     #             </dd>
     #             <dt>Directory bucket permissions</dt>
     #             <dd>
-    #                <p>For directory buckets and access points for directory buckets, you must have
-    #                   the <code>s3express:UntagResource</code> permission to use this operation.
-    #                   For more information about directory buckets policies and permissions, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-permissions.html">Identity and Access Management (IAM) for S3 Express One Zone</a> in the <i>Amazon S3 User Guide</i>.</p>
+    #                <p>For directory buckets, you must have the <code>s3express:UntagResource</code> permission to use this operation. For more information about directory buckets policies and permissions, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-permissions.html">Identity and Access Management (IAM) for S3 Express One Zone</a> in the <i>Amazon S3 User Guide</i>.</p>
     #             </dd>
     #             <dt>HTTP Host header syntax</dt>
     #             <dd>
@@ -6768,20 +6443,17 @@ module Aws::S3Control
     #          </dl>
     #          <p>For information about S3 Tagging errors, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3TaggingErrorCodeList">List of Amazon S3
     #             Tagging error codes</a>.</p>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::UntagResourceRequest] params
     # @option params [String] :account_id
-    #   <p> The Amazon Web Services account ID that owns the resource that you're trying to remove the tags from.
-    #         </p>
+    #   <p>
+    #      The Amazon Web Services account ID that owns the resource that you're trying to remove the tags from.
+    #      </p>
     # @option params [String] :resource_arn
-    #   <p>The Amazon Resource Name (ARN) of the S3 resource that you're removing tags from. The
-    #            tagged resource can be a directory bucket, S3 Storage Lens group or S3 Access Grants instance,
-    #            registered location, or grant.</p>
+    #   <p>The Amazon Resource Name (ARN) of the S3 resource that you're removing tags from. The tagged resource can be a directory bucket, S3 Storage Lens group or S3 Access Grants instance, registered location, or grant.</p>
     # @option params [Array<String>] :tag_keys
-    #   <p> The array of tag key-value pairs that you're trying to remove from of the S3 resource.
-    #         </p>
+    #   <p>
+    #      The array of tag key-value pairs that you're trying to remove from of the S3 resource.
+    #      </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     account_id: "AccountId",
@@ -6803,8 +6475,7 @@ module Aws::S3Control
     #          <dl>
     #             <dt>Permissions</dt>
     #             <dd>
-    #                <p>You must have the <code>s3:UpdateAccessGrantsLocation</code> permission to use
-    #                   this operation. </p>
+    #                <p>You must have the <code>s3:UpdateAccessGrantsLocation</code> permission to use this operation. </p>
     #             </dd>
     #             <dt>Additional Permissions</dt>
     #             <dd>
@@ -6812,27 +6483,15 @@ module Aws::S3Control
     #                </p>
     #             </dd>
     #          </dl>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::UpdateAccessGrantsLocationRequest] params
     # @option params [String] :account_id
     #   <p>The Amazon Web Services account ID of the S3 Access Grants instance.</p>
     # @option params [String] :access_grants_location_id
-    #   <p>The ID of the registered location that you are updating. S3 Access Grants assigns this ID when you
-    #            register the location. S3 Access Grants assigns the ID <code>default</code> to the default location
-    #               <code>s3://</code> and assigns an auto-generated ID to other locations that you
-    #            register. </p>
-    #            <p>The ID of the registered location to which you are granting access. S3 Access Grants assigned this
-    #            ID when you registered the location. S3 Access Grants assigns the ID <code>default</code> to the
-    #            default location <code>s3://</code> and assigns an auto-generated ID to other locations
-    #            that you register. </p>
-    #            <p>If you are passing the <code>default</code> location, you cannot create an access grant
-    #            for the entire default location. You must also specify a bucket or a bucket and prefix in
-    #            the <code>Subprefix</code> field. </p>
+    #   <p>The ID of the registered location that you are updating. S3 Access Grants assigns this ID when you register the location. S3 Access Grants assigns the ID <code>default</code> to the default location <code>s3://</code> and assigns an auto-generated ID to other locations that you register.  </p>
+    #            <p>The ID of the registered location to which you are granting access. S3 Access Grants assigned this ID when you registered the location. S3 Access Grants assigns the ID <code>default</code> to the default location <code>s3://</code> and assigns an auto-generated ID to other locations that you register.  </p>
+    #            <p>If you are passing the <code>default</code> location, you cannot create an access grant for the entire default location. You must also specify a bucket or a bucket and prefix in the <code>Subprefix</code> field. </p>
     # @option params [String] :iam_role_arn
-    #   <p>The Amazon Resource Name (ARN) of the IAM role for the registered location. S3 Access Grants
-    #            assumes this role to manage access to the registered location. </p>
+    #   <p>The Amazon Resource Name (ARN) of the IAM role for the registered location. S3 Access Grants assumes this role to manage access to the registered location. </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     account_id: "AccountId",
@@ -6860,8 +6519,9 @@ module Aws::S3Control
     #          <dl>
     #             <dt>Permissions</dt>
     #             <dd>
-    #                <p>To use the <code>UpdateJobPriority</code> operation, you must have permission
-    #                   to perform the <code>s3:UpdateJobPriority</code> action.</p>
+    #                <p>To use the
+    #                   <code>UpdateJobPriority</code> operation, you must have permission to
+    #                   perform the <code>s3:UpdateJobPriority</code> action.</p>
     #             </dd>
     #          </dl>
     #          <p>Related actions include:</p>
@@ -6887,9 +6547,6 @@ module Aws::S3Control
     #                </p>
     #             </li>
     #          </ul>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::UpdateJobPriorityRequest] params
     # @option params [String] :account_id
     #   <p>The Amazon Web Services account ID associated with the S3 Batch Operations job.</p>
@@ -6922,7 +6579,8 @@ module Aws::S3Control
     #          <dl>
     #             <dt>Permissions</dt>
     #             <dd>
-    #                <p>To use the <code>UpdateJobStatus</code> operation, you must have permission to
+    #                <p>To use the
+    #                   <code>UpdateJobStatus</code> operation, you must have permission to
     #                   perform the <code>s3:UpdateJobStatus</code> action.</p>
     #             </dd>
     #          </dl>
@@ -6949,9 +6607,6 @@ module Aws::S3Control
     #                </p>
     #             </li>
     #          </ul>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::UpdateJobStatusRequest] params
     # @option params [String] :account_id
     #   <p>The Amazon Web Services account ID associated with the S3 Batch Operations job.</p>
@@ -6991,9 +6646,6 @@ module Aws::S3Control
     #       Groups permissions, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions">Setting account permissions to use S3 Storage Lens groups</a>.</p>
     #          <p>For information about Storage Lens groups errors, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3LensErrorCodeList">List of Amazon S3 Storage
     #       Lens error codes</a>.</p>
-    #          <important>
-    #             <p>You must URL encode any signed header values that contain spaces. For example, if your header value is <code>my  file.txt</code>, containing two spaces after <code>my</code>, you must URL encode this value to <code>my%20%20file.txt</code>.</p>
-    #          </important>
     # @param [Hash, Types::UpdateStorageLensGroupRequest] params
     # @option params [String] :name
     #   <p>

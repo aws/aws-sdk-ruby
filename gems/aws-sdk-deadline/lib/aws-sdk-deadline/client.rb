@@ -144,18 +144,18 @@ module Aws::Deadline
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -213,21 +213,24 @@ module Aws::Deadline
     # @param [Hash, Types::AssociateMemberToFarmRequest] params
     # @option params [String] :farm_id
     #   <p>The ID of the farm to associate with the member.</p>
-    # @option params [String] :principal_id
-    #   <p>The member's principal ID to associate with the farm.</p>
     # @option params [String] :principal_type
     #   <p>The principal type of the member to associate with the farm.</p>
     # @option params [String] :identity_store_id
     #   <p>The identity store ID of the member to associate with the farm.</p>
     # @option params [String] :membership_level
     #   <p>The principal's membership level for the associated farm.</p>
+    # @option params [String] :principal_id
+    #   <p>The member's principal ID to associate with the farm.</p>
+    # @option params [String] :identity_center_region
+    #   <p>The Region of the IAM Identity Center instance. If not provided, the service defaults to the Region of the farm.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     farm_id: "FarmId", # required
-    #     principal_id: "IdentityCenterPrincipalId", # required
     #     principal_type: "USER" # One of: ["USER", "GROUP"], # required
     #     identity_store_id: "IdentityStoreId", # required
     #     membership_level: "VIEWER" # One of: ["VIEWER", "CONTRIBUTOR", "OWNER", "MANAGER"], # required
+    #     principal_id: "IdentityCenterPrincipalId", # required
+    #     identity_center_region: "Region"
     #   }
     #   options = {}
     #   response = client.associate_member_to_farm(params, options)
@@ -246,22 +249,25 @@ module Aws::Deadline
     #   <p>The farm ID of the fleet to associate with the member.</p>
     # @option params [String] :fleet_id
     #   <p>The ID of the fleet to associate with a member.</p>
-    # @option params [String] :principal_id
-    #   <p>The member's principal ID to associate with a fleet.</p>
     # @option params [String] :principal_type
     #   <p>The member's principal type to associate with the fleet.</p>
     # @option params [String] :identity_store_id
     #   <p>The member's identity store ID to associate with the fleet.</p>
     # @option params [String] :membership_level
     #   <p>The principal's membership level for the associated fleet.</p>
+    # @option params [String] :principal_id
+    #   <p>The member's principal ID to associate with a fleet.</p>
+    # @option params [String] :identity_center_region
+    #   <p>The Region of the IAM Identity Center instance. If not provided, the service defaults to the Region of the farm.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     farm_id: "FarmId", # required
     #     fleet_id: "FleetId", # required
-    #     principal_id: "IdentityCenterPrincipalId", # required
     #     principal_type: "USER" # One of: ["USER", "GROUP"], # required
     #     identity_store_id: "IdentityStoreId", # required
     #     membership_level: "VIEWER" # One of: ["VIEWER", "CONTRIBUTOR", "OWNER", "MANAGER"], # required
+    #     principal_id: "IdentityCenterPrincipalId", # required
+    #     identity_center_region: "Region"
     #   }
     #   options = {}
     #   response = client.associate_member_to_fleet(params, options)
@@ -282,23 +288,26 @@ module Aws::Deadline
     #   <p>The queue ID to associate to the member.</p>
     # @option params [String] :job_id
     #   <p>The job ID to associate with the member.</p>
-    # @option params [String] :principal_id
-    #   <p>The member's principal ID to associate with the job.</p>
     # @option params [String] :principal_type
     #   <p>The member's principal type to associate with the job.</p>
     # @option params [String] :identity_store_id
     #   <p>The member's identity store ID to associate with the job.</p>
     # @option params [String] :membership_level
     #   <p>The principal's membership level for the associated job.</p>
+    # @option params [String] :principal_id
+    #   <p>The member's principal ID to associate with the job.</p>
+    # @option params [String] :identity_center_region
+    #   <p>The Region of the IAM Identity Center instance. If not provided, the service defaults to the Region of the farm.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     farm_id: "FarmId", # required
     #     queue_id: "QueueId", # required
     #     job_id: "JobId", # required
-    #     principal_id: "IdentityCenterPrincipalId", # required
     #     principal_type: "USER" # One of: ["USER", "GROUP"], # required
     #     identity_store_id: "IdentityStoreId", # required
     #     membership_level: "VIEWER" # One of: ["VIEWER", "CONTRIBUTOR", "OWNER", "MANAGER"], # required
+    #     principal_id: "IdentityCenterPrincipalId", # required
+    #     identity_center_region: "Region"
     #   }
     #   options = {}
     #   response = client.associate_member_to_job(params, options)
@@ -317,22 +326,25 @@ module Aws::Deadline
     #   <p>The farm ID of the queue to associate with the member.</p>
     # @option params [String] :queue_id
     #   <p>The ID of the queue to associate to the member.</p>
-    # @option params [String] :principal_id
-    #   <p>The member's principal ID to associate with the queue.</p>
     # @option params [String] :principal_type
     #   <p>The member's principal type to associate with the queue.</p>
     # @option params [String] :identity_store_id
     #   <p>The member's identity store ID to associate with the queue.</p>
     # @option params [String] :membership_level
     #   <p>The principal's membership level for the associated queue.</p>
+    # @option params [String] :principal_id
+    #   <p>The member's principal ID to associate with the queue.</p>
+    # @option params [String] :identity_center_region
+    #   <p>The Region of the IAM Identity Center instance. If not provided, the service defaults to the Region of the farm.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     farm_id: "FarmId", # required
     #     queue_id: "QueueId", # required
-    #     principal_id: "IdentityCenterPrincipalId", # required
     #     principal_type: "USER" # One of: ["USER", "GROUP"], # required
     #     identity_store_id: "IdentityStoreId", # required
     #     membership_level: "VIEWER" # One of: ["VIEWER", "CONTRIBUTOR", "OWNER", "MANAGER"], # required
+    #     principal_id: "IdentityCenterPrincipalId", # required
+    #     identity_center_region: "Region"
     #   }
     #   options = {}
     #   response = client.associate_member_to_queue(params, options)
@@ -345,8 +357,7 @@ module Aws::Deadline
       request.send_request(options)
     end
 
-    # <p>Get Amazon Web Services credentials from the fleet role. The IAM permissions of the credentials are
-    #          scoped down to have read-only access.</p>
+    # <p>Get Amazon Web Services credentials from the fleet role. The IAM permissions of the credentials are scoped down to have read-only access.</p>
     # @param [Hash, Types::AssumeFleetRoleForReadRequest] params
     # @option params [String] :farm_id
     #   <p>The farm ID for the fleet's farm.</p>
@@ -407,8 +418,7 @@ module Aws::Deadline
       request.send_request(options)
     end
 
-    # <p>Gets Amazon Web Services credentials from the queue role. The IAM permissions of the credentials are
-    #          scoped down to have read-only access.</p>
+    # <p>Gets Amazon Web Services credentials from the queue role. The IAM permissions of the credentials are scoped down to have read-only access.</p>
     # @param [Hash, Types::AssumeQueueRoleForReadRequest] params
     # @option params [String] :farm_id
     #   <p>The farm ID of the farm containing the queue.</p>
@@ -501,14 +511,128 @@ module Aws::Deadline
       request.send_request(options)
     end
 
+    # <p>Retrieves multiple jobs in a single request. This is a batch version of the <code>GetJob</code> API.</p> <p>The result of getting each job is reported individually in the response. Because the batch request can result in a combination of successful and unsuccessful actions, you should check for batch errors even when the call returns an HTTP status code of 200.</p>
+    # @param [Hash, Types::BatchGetJobRequest] params
+    # @option params [Array<Types::BatchGetJobIdentifier>] :identifiers
+    #   <p>The list of job identifiers to retrieve. You can specify up to 100 identifiers per request.</p>
+    # @example Get multiple jobs in a single request
+    #   # Example operation for batch_get_job
+    #   params = {
+    #     identifiers: [
+    #       {
+    #         farm_id: "farm-1234567890abcdef1234567890abcdef",
+    #         queue_id: "queue-1234567890abcdef1234567890abcdef",
+    #         job_id: "job-1234567890abcdef1234567890abcdef"
+    #       },
+    #       {
+    #         farm_id: "farm-1234567890abcdef1234567890abcdef",
+    #         queue_id: "queue-1234567890abcdef1234567890abcdef",
+    #         job_id: "job-234567890abcdef1234567890abcdef1"
+    #       }
+    #     ]
+    #   }
+    #   options = {}
+    #   response = client.batch_get_job(params, options)
+    #   response.to_h #=>
+    #   {}
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     identifiers: [ # required
+    #       {
+    #         farm_id: "FarmId", # required
+    #         queue_id: "QueueId", # required
+    #         job_id: "JobId", # required
+    #       }
+    #     ]
+    #   }
+    #   options = {}
+    #   response = client.batch_get_job(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     jobs: [ # required
+    #       {
+    #         farm_id: "FarmId", # required
+    #         queue_id: "QueueId", # required
+    #         job_id: "JobId", # required
+    #         name: "JobName", # required
+    #         lifecycle_status: "CREATE_IN_PROGRESS" # One of: ["CREATE_IN_PROGRESS", "CREATE_FAILED", "CREATE_COMPLETE", "UPLOAD_IN_PROGRESS", "UPLOAD_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_FAILED", "UPDATE_SUCCEEDED", "ARCHIVED"], # required
+    #         lifecycle_status_message: "String", # required
+    #         priority: 1, # required
+    #         created_at: Time.now, # required
+    #         created_by: "CreatedBy", # required
+    #         updated_at: Time.now,
+    #         updated_by: "UpdatedBy",
+    #         started_at: Time.now,
+    #         ended_at: Time.now,
+    #         task_run_status: "PENDING" # One of: ["PENDING", "READY", "ASSIGNED", "STARTING", "SCHEDULED", "INTERRUPTING", "RUNNING", "SUSPENDED", "CANCELED", "FAILED", "SUCCEEDED", "NOT_COMPATIBLE"],
+    #         target_task_run_status: "READY" # One of: ["READY", "FAILED", "SUCCEEDED", "CANCELED", "SUSPENDED", "PENDING"],
+    #         task_run_status_counts: {
+    #           "TaskRunStatus" => 1
+    #         },
+    #         task_failure_retry_count: 1,
+    #         storage_profile_id: "StorageProfileId",
+    #         max_failed_tasks_count: 1,
+    #         max_retries_per_task: 1,
+    #         parameters: {
+    #           "String" => {
+    #             # One of:
+    #             int: "IntString",
+    #             float: "FloatString",
+    #             string: "ParameterString",
+    #             path: "PathString",
+    #             bool: "BooleanString",
+    #             range_expr: "RangeExprString",
+    #             string_list: ["ParameterString"],
+    #             path_list: ["PathString"],
+    #             int_list: ["IntString"],
+    #             float_list: ["FloatString"],
+    #             bool_list: ["BooleanString"],
+    #             int_list_list: [
+    #               ["IntString"]
+    #             ]
+    #           }
+    #         },
+    #         attachments: {
+    #           manifests: [ # required
+    #             {
+    #               file_system_location_name: "FileSystemLocationName",
+    #               root_path: "String", # required
+    #               root_path_format: "windows" # One of: ["windows", "posix"], # required
+    #               output_relative_directories: ["String"],
+    #               input_manifest_path: "String",
+    #               input_manifest_hash: "String"
+    #             }
+    #           ],
+    #           file_system: "COPIED" # One of: ["COPIED", "VIRTUAL"]
+    #         },
+    #         description: "JobDescription",
+    #         max_worker_count: 1,
+    #         source_job_id: "JobId"
+    #       }
+    #     ],
+    #     errors: [ # required
+    #       {
+    #         farm_id: "FarmId", # required
+    #         queue_id: "QueueId", # required
+    #         job_id: "JobId", # required
+    #         code: "InternalServerErrorException" # One of: ["InternalServerErrorException", "ResourceNotFoundException", "ValidationException", "AccessDeniedException", "ThrottlingException"], # required
+    #         message: "String", # required
+    #       }
+    #     ]
+    #   }
+    # @return [Types::BatchGetJobResponse]
+    def batch_get_job(params = {}, options = {})
+      request = build_request(:batch_get_job, params)
+      request.send_request(options)
+    end
+
     # <p>Get batched job details for a worker.</p>
     # @param [Hash, Types::BatchGetJobEntityRequest] params
     # @option params [String] :farm_id
-    #   <p>The farm ID of the worker that's fetching job details. The worker must have an
-    #            assignment on a job to fetch job details.</p>
+    #   <p>The farm ID of the worker that's fetching job details. The worker must have an assignment on a job to fetch job details.</p>
     # @option params [String] :fleet_id
-    #   <p>The fleet ID of the worker that's fetching job details. The worker must have an
-    #            assignment on a job to fetch job details.</p>
+    #   <p>The fleet ID of the worker that's fetching job details. The worker must have an assignment on a job to fetch job details.</p>
     # @option params [String] :worker_id
     #   <p>The worker ID of the worker containing the job details to get.</p>
     # @option params [Array<Types::JobEntityIdentifiersUnion>] :identifiers
@@ -568,10 +692,21 @@ module Aws::Deadline
     #             int: "IntString",
     #             float: "FloatString",
     #             string: "ParameterString",
-    #             path: "PathString"
+    #             path: "PathString",
+    #             bool: "BooleanString",
+    #             range_expr: "RangeExprString",
+    #             string_list: ["ParameterString"],
+    #             path_list: ["PathString"],
+    #             int_list: ["IntString"],
+    #             float_list: ["FloatString"],
+    #             bool_list: ["BooleanString"],
+    #             int_list_list: [
+    #               ["IntString"]
+    #             ]
     #           }
     #         },
     #         schema_version: "String", # required
+    #         extensions: ["OpenjdExtensionName"],
     #         path_mapping_rules: [
     #           {
     #             source_path_format: "windows" # One of: ["windows", "posix"], # required
@@ -602,12 +737,16 @@ module Aws::Deadline
     #         schema_version: "String", # required
     #         template: ""null"", # required
     #         dependencies: ["StepId"], # required
+    #         extensions: ["OpenjdExtensionName"],
+    #         resolved_symbol_table: "SerializedSymbolTable"
     #       },
     #       environment_details: {
     #         job_id: "JobId", # required
     #         environment_id: "EnvironmentId", # required
     #         schema_version: "String", # required
     #         template: ""null"", # required
+    #         extensions: ["OpenjdExtensionName"],
+    #         resolved_symbol_table: "SerializedSymbolTable"
     #       }
     #     }],
     #     errors: [{ # required
@@ -642,22 +781,673 @@ module Aws::Deadline
       request.send_request(options)
     end
 
+    # <p>Retrieves multiple sessions in a single request. This is a batch version of the <code>GetSession</code> API.</p> <p>The result of getting each session is reported individually in the response. Because the batch request can result in a combination of successful and unsuccessful actions, you should check for batch errors even when the call returns an HTTP status code of 200.</p>
+    # @param [Hash, Types::BatchGetSessionRequest] params
+    # @option params [Array<Types::BatchGetSessionIdentifier>] :identifiers
+    #   <p>The list of session identifiers to retrieve. You can specify up to 100 identifiers per request.</p>
+    # @example Get multiple sessions in a single request
+    #   # Example operation for batch_get_session
+    #   params = {
+    #     identifiers: [
+    #       {
+    #         farm_id: "farm-1234567890abcdef1234567890abcdef",
+    #         queue_id: "queue-1234567890abcdef1234567890abcdef",
+    #         job_id: "job-1234567890abcdef1234567890abcdef",
+    #         session_id: "session-1234567890abcdef1234567890abcdef"
+    #       },
+    #       {
+    #         farm_id: "farm-1234567890abcdef1234567890abcdef",
+    #         queue_id: "queue-1234567890abcdef1234567890abcdef",
+    #         job_id: "job-1234567890abcdef1234567890abcdef",
+    #         session_id: "session-234567890abcdef1234567890abcdef1"
+    #       }
+    #     ]
+    #   }
+    #   options = {}
+    #   response = client.batch_get_session(params, options)
+    #   response.to_h #=>
+    #   {}
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     identifiers: [ # required
+    #       {
+    #         farm_id: "FarmId", # required
+    #         queue_id: "QueueId", # required
+    #         job_id: "JobId", # required
+    #         session_id: "SessionId", # required
+    #       }
+    #     ]
+    #   }
+    #   options = {}
+    #   response = client.batch_get_session(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     sessions: [ # required
+    #       {
+    #         farm_id: "FarmId", # required
+    #         queue_id: "QueueId", # required
+    #         job_id: "JobId", # required
+    #         session_id: "SessionId", # required
+    #         fleet_id: "FleetId", # required
+    #         worker_id: "WorkerId", # required
+    #         started_at: Time.now, # required
+    #         lifecycle_status: "STARTED" # One of: ["STARTED", "UPDATE_IN_PROGRESS", "UPDATE_SUCCEEDED", "UPDATE_FAILED", "ENDED"], # required
+    #         ended_at: Time.now,
+    #         target_lifecycle_status: "ENDED" # One of: ["ENDED"],
+    #         updated_at: Time.now,
+    #         updated_by: "UpdatedBy",
+    #         log: { # required
+    #           log_driver: "LogDriver", # required
+    #           options: {
+    #             "String" => "String"
+    #           },
+    #           parameters: {
+    #             "String" => "String"
+    #           },
+    #           error: "LogError"
+    #         },
+    #         host_properties: {
+    #           ip_addresses: {
+    #             ip_v4_addresses: ["IpV4Address"],
+    #             ip_v6_addresses: ["IpV6Address"]
+    #           },
+    #           host_name: "HostName",
+    #           ec2_instance_arn: "String",
+    #           ec2_instance_type: "InstanceType"
+    #         },
+    #         worker_log: {
+    #           log_driver: "LogDriver", # required
+    #           options: {
+    #             "String" => "String"
+    #           },
+    #           parameters: {
+    #             "String" => "String"
+    #           },
+    #           error: "LogError"
+    #         }
+    #       }
+    #     ],
+    #     errors: [ # required
+    #       {
+    #         farm_id: "FarmId", # required
+    #         queue_id: "QueueId", # required
+    #         job_id: "JobId", # required
+    #         session_id: "SessionId", # required
+    #         code: "InternalServerErrorException" # One of: ["InternalServerErrorException", "ResourceNotFoundException", "ValidationException"], # required
+    #         message: "String", # required
+    #       }
+    #     ]
+    #   }
+    # @return [Types::BatchGetSessionResponse]
+    def batch_get_session(params = {}, options = {})
+      request = build_request(:batch_get_session, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves multiple session actions in a single request. This is a batch version of the <code>GetSessionAction</code> API.</p> <p>The result of getting each session action is reported individually in the response. Because the batch request can result in a combination of successful and unsuccessful actions, you should check for batch errors even when the call returns an HTTP status code of 200.</p>
+    # @param [Hash, Types::BatchGetSessionActionRequest] params
+    # @option params [Array<Types::BatchGetSessionActionIdentifier>] :identifiers
+    #   <p>The list of session action identifiers to retrieve. You can specify up to 100 identifiers per request.</p>
+    # @example Get multiple session actions in a single request
+    #   # Example operation for batch_get_session_action
+    #   params = {
+    #     identifiers: [
+    #       {
+    #         farm_id: "farm-1234567890abcdef1234567890abcdef",
+    #         queue_id: "queue-1234567890abcdef1234567890abcdef",
+    #         job_id: "job-1234567890abcdef1234567890abcdef",
+    #         session_action_id: "sessionaction-1234567890abcdef1234567890abcdef-0"
+    #       },
+    #       {
+    #         farm_id: "farm-1234567890abcdef1234567890abcdef",
+    #         queue_id: "queue-1234567890abcdef1234567890abcdef",
+    #         job_id: "job-1234567890abcdef1234567890abcdef",
+    #         session_action_id: "sessionaction-1234567890abcdef1234567890abcdef-1"
+    #       }
+    #     ]
+    #   }
+    #   options = {}
+    #   response = client.batch_get_session_action(params, options)
+    #   response.to_h #=>
+    #   {}
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     identifiers: [ # required
+    #       {
+    #         farm_id: "FarmId", # required
+    #         queue_id: "QueueId", # required
+    #         job_id: "JobId", # required
+    #         session_action_id: "SessionActionId", # required
+    #       }
+    #     ]
+    #   }
+    #   options = {}
+    #   response = client.batch_get_session_action(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     session_actions: [ # required
+    #       {
+    #         farm_id: "FarmId", # required
+    #         queue_id: "QueueId", # required
+    #         job_id: "JobId", # required
+    #         session_action_id: "SessionActionId", # required
+    #         status: "ASSIGNED" # One of: ["ASSIGNED", "RUNNING", "CANCELING", "SUCCEEDED", "FAILED", "INTERRUPTED", "CANCELED", "NEVER_ATTEMPTED", "SCHEDULED", "RECLAIMING", "RECLAIMED"], # required
+    #         started_at: Time.now,
+    #         ended_at: Time.now,
+    #         worker_updated_at: Time.now,
+    #         progress_percent: 1.0,
+    #         manifests: [
+    #           {
+    #             output_manifest_path: "String",
+    #             output_manifest_hash: "String"
+    #           }
+    #         ],
+    #         session_id: "SessionId", # required
+    #         process_exit_code: 1,
+    #         progress_message: "SessionActionProgressMessage",
+    #         acquired_limits: [
+    #           {
+    #             limit_id: "LimitId", # required
+    #             count: 1, # required
+    #           }
+    #         ],
+    #         definition: { # required
+    #           # One of:
+    #           env_enter: {
+    #             environment_id: "EnvironmentId", # required
+    #           },
+    #           env_exit: {
+    #             environment_id: "EnvironmentId", # required
+    #           },
+    #           task_run: {
+    #             task_id: "TaskId",
+    #             step_id: "StepId", # required
+    #             parameters: { # required
+    #               "String" => {
+    #                 # One of:
+    #                 int: "IntString",
+    #                 float: "FloatString",
+    #                 string: "ParameterString",
+    #                 path: "PathString",
+    #                 chunk_int: "String"
+    #               }
+    #             }
+    #           },
+    #           sync_input_job_attachments: {
+    #             step_id: "StepId"
+    #           }
+    #         }
+    #       }
+    #     ],
+    #     errors: [ # required
+    #       {
+    #         farm_id: "FarmId", # required
+    #         queue_id: "QueueId", # required
+    #         job_id: "JobId", # required
+    #         session_action_id: "SessionActionId", # required
+    #         code: "InternalServerErrorException" # One of: ["InternalServerErrorException", "ResourceNotFoundException", "ValidationException"], # required
+    #         message: "String", # required
+    #       }
+    #     ]
+    #   }
+    # @return [Types::BatchGetSessionActionResponse]
+    def batch_get_session_action(params = {}, options = {})
+      request = build_request(:batch_get_session_action, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves multiple steps in a single request. This is a batch version of the <code>GetStep</code> API.</p> <p>The result of getting each step is reported individually in the response. Because the batch request can result in a combination of successful and unsuccessful actions, you should check for batch errors even when the call returns an HTTP status code of 200.</p>
+    # @param [Hash, Types::BatchGetStepRequest] params
+    # @option params [Array<Types::BatchGetStepIdentifier>] :identifiers
+    #   <p>The list of step identifiers to retrieve. You can specify up to 100 identifiers per request.</p>
+    # @example Get multiple steps in a single request
+    #   # Example operation for batch_get_step
+    #   params = {
+    #     identifiers: [
+    #       {
+    #         farm_id: "farm-1234567890abcdef1234567890abcdef",
+    #         queue_id: "queue-1234567890abcdef1234567890abcdef",
+    #         job_id: "job-1234567890abcdef1234567890abcdef",
+    #         step_id: "step-1234567890abcdef1234567890abcdef"
+    #       },
+    #       {
+    #         farm_id: "farm-1234567890abcdef1234567890abcdef",
+    #         queue_id: "queue-1234567890abcdef1234567890abcdef",
+    #         job_id: "job-1234567890abcdef1234567890abcdef",
+    #         step_id: "step-234567890abcdef1234567890abcdef1"
+    #       }
+    #     ]
+    #   }
+    #   options = {}
+    #   response = client.batch_get_step(params, options)
+    #   response.to_h #=>
+    #   {}
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     identifiers: [ # required
+    #       {
+    #         farm_id: "FarmId", # required
+    #         queue_id: "QueueId", # required
+    #         job_id: "JobId", # required
+    #         step_id: "StepId", # required
+    #       }
+    #     ]
+    #   }
+    #   options = {}
+    #   response = client.batch_get_step(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     steps: [ # required
+    #       {
+    #         farm_id: "FarmId", # required
+    #         queue_id: "QueueId", # required
+    #         job_id: "JobId", # required
+    #         step_id: "StepId", # required
+    #         name: "StepName", # required
+    #         lifecycle_status: "CREATE_COMPLETE" # One of: ["CREATE_COMPLETE", "UPDATE_IN_PROGRESS", "UPDATE_FAILED", "UPDATE_SUCCEEDED"], # required
+    #         lifecycle_status_message: "String",
+    #         task_run_status: "PENDING" # One of: ["PENDING", "READY", "ASSIGNED", "STARTING", "SCHEDULED", "INTERRUPTING", "RUNNING", "SUSPENDED", "CANCELED", "FAILED", "SUCCEEDED", "NOT_COMPATIBLE"], # required
+    #         task_run_status_counts: { # required
+    #           "TaskRunStatus" => 1
+    #         },
+    #         task_failure_retry_count: 1,
+    #         target_task_run_status: "READY" # One of: ["READY", "FAILED", "SUCCEEDED", "CANCELED", "SUSPENDED", "PENDING"],
+    #         created_at: Time.now, # required
+    #         created_by: "CreatedBy", # required
+    #         updated_at: Time.now,
+    #         updated_by: "UpdatedBy",
+    #         started_at: Time.now,
+    #         ended_at: Time.now,
+    #         dependency_counts: {
+    #           dependencies_resolved: 1, # required
+    #           dependencies_unresolved: 1, # required
+    #           consumers_resolved: 1, # required
+    #           consumers_unresolved: 1, # required
+    #         },
+    #         required_capabilities: {
+    #           attributes: [ # required
+    #             {
+    #               name: "AttributeCapabilityName", # required
+    #               any_of: ["AttributeCapabilityValue"],
+    #               all_of: ["AttributeCapabilityValue"]
+    #             }
+    #           ],
+    #           amounts: [ # required
+    #             {
+    #               name: "AmountCapabilityName", # required
+    #               min: 1.0,
+    #               max: 1.0,
+    #               value: 1.0
+    #             }
+    #           ]
+    #         },
+    #         parameter_space: {
+    #           parameters: [ # required
+    #             {
+    #               name: "StepParameterName", # required
+    #               type: "INT" # One of: ["INT", "FLOAT", "STRING", "PATH", "CHUNK_INT"], # required
+    #               chunks: {
+    #                 default_task_count: 1, # required
+    #                 target_runtime_seconds: 1,
+    #                 range_constraint: "CONTIGUOUS" # One of: ["CONTIGUOUS", "NONCONTIGUOUS"], # required
+    #               }
+    #             }
+    #           ],
+    #           combination: "CombinationExpression"
+    #         },
+    #         description: "StepDescription"
+    #       }
+    #     ],
+    #     errors: [ # required
+    #       {
+    #         farm_id: "FarmId", # required
+    #         queue_id: "QueueId", # required
+    #         job_id: "JobId", # required
+    #         step_id: "StepId", # required
+    #         code: "InternalServerErrorException" # One of: ["InternalServerErrorException", "ResourceNotFoundException", "ValidationException", "AccessDeniedException", "ThrottlingException"], # required
+    #         message: "String", # required
+    #       }
+    #     ]
+    #   }
+    # @return [Types::BatchGetStepResponse]
+    def batch_get_step(params = {}, options = {})
+      request = build_request(:batch_get_step, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves multiple tasks in a single request. This is a batch version of the <code>GetTask</code> API.</p> <p>The result of getting each task is reported individually in the response. Because the batch request can result in a combination of successful and unsuccessful actions, you should check for batch errors even when the call returns an HTTP status code of 200.</p>
+    # @param [Hash, Types::BatchGetTaskRequest] params
+    # @option params [Array<Types::BatchGetTaskIdentifier>] :identifiers
+    #   <p>The list of task identifiers to retrieve. You can specify up to 100 identifiers per request.</p>
+    # @example Get multiple tasks in a single request
+    #   # Example operation for batch_get_task
+    #   params = {
+    #     identifiers: [
+    #       {
+    #         farm_id: "farm-1234567890abcdef1234567890abcdef",
+    #         queue_id: "queue-1234567890abcdef1234567890abcdef",
+    #         job_id: "job-1234567890abcdef1234567890abcdef",
+    #         step_id: "step-1234567890abcdef1234567890abcdef",
+    #         task_id: "task-1234567890abcdef1234567890abcdef-0"
+    #       },
+    #       {
+    #         farm_id: "farm-1234567890abcdef1234567890abcdef",
+    #         queue_id: "queue-1234567890abcdef1234567890abcdef",
+    #         job_id: "job-1234567890abcdef1234567890abcdef",
+    #         step_id: "step-1234567890abcdef1234567890abcdef",
+    #         task_id: "task-1234567890abcdef1234567890abcdef-1"
+    #       }
+    #     ]
+    #   }
+    #   options = {}
+    #   response = client.batch_get_task(params, options)
+    #   response.to_h #=>
+    #   {}
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     identifiers: [ # required
+    #       {
+    #         farm_id: "FarmId", # required
+    #         queue_id: "QueueId", # required
+    #         job_id: "JobId", # required
+    #         step_id: "StepId", # required
+    #         task_id: "TaskId", # required
+    #       }
+    #     ]
+    #   }
+    #   options = {}
+    #   response = client.batch_get_task(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     tasks: [ # required
+    #       {
+    #         farm_id: "FarmId", # required
+    #         queue_id: "QueueId", # required
+    #         job_id: "JobId", # required
+    #         step_id: "StepId", # required
+    #         task_id: "TaskId", # required
+    #         created_at: Time.now, # required
+    #         created_by: "CreatedBy", # required
+    #         run_status: "PENDING" # One of: ["PENDING", "READY", "ASSIGNED", "STARTING", "SCHEDULED", "INTERRUPTING", "RUNNING", "SUSPENDED", "CANCELED", "FAILED", "SUCCEEDED", "NOT_COMPATIBLE"], # required
+    #         target_run_status: "READY" # One of: ["READY", "FAILED", "SUCCEEDED", "CANCELED", "SUSPENDED", "PENDING"],
+    #         failure_retry_count: 1,
+    #         started_at: Time.now,
+    #         ended_at: Time.now,
+    #         updated_at: Time.now,
+    #         updated_by: "UpdatedBy",
+    #         latest_session_action_id: "SessionActionId",
+    #         parameters: {
+    #           "String" => {
+    #             # One of:
+    #             int: "IntString",
+    #             float: "FloatString",
+    #             string: "ParameterString",
+    #             path: "PathString",
+    #             chunk_int: "String"
+    #           }
+    #         }
+    #       }
+    #     ],
+    #     errors: [ # required
+    #       {
+    #         farm_id: "FarmId", # required
+    #         queue_id: "QueueId", # required
+    #         job_id: "JobId", # required
+    #         step_id: "StepId", # required
+    #         task_id: "TaskId", # required
+    #         code: "InternalServerErrorException" # One of: ["InternalServerErrorException", "ResourceNotFoundException", "ValidationException", "AccessDeniedException", "ThrottlingException"], # required
+    #         message: "String", # required
+    #       }
+    #     ]
+    #   }
+    # @return [Types::BatchGetTaskResponse]
+    def batch_get_task(params = {}, options = {})
+      request = build_request(:batch_get_task, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves multiple workers in a single request. This is a batch version of the <code>GetWorker</code> API.</p> <p>The result of getting each worker is reported individually in the response. Because the batch request can result in a combination of successful and unsuccessful actions, you should check for batch errors even when the call returns an HTTP status code of 200.</p>
+    # @param [Hash, Types::BatchGetWorkerRequest] params
+    # @option params [Array<Types::BatchGetWorkerIdentifier>] :identifiers
+    #   <p>The list of worker identifiers to retrieve. You can specify up to 100 identifiers per request.</p>
+    # @example Get multiple workers in a single request
+    #   # Example operation for batch_get_worker
+    #   params = {
+    #     identifiers: [
+    #       {
+    #         farm_id: "farm-1234567890abcdef1234567890abcdef",
+    #         fleet_id: "fleet-1234567890abcdef1234567890abcdef",
+    #         worker_id: "worker-1234567890abcdef1234567890abcdef"
+    #       },
+    #       {
+    #         farm_id: "farm-1234567890abcdef1234567890abcdef",
+    #         fleet_id: "fleet-1234567890abcdef1234567890abcdef",
+    #         worker_id: "worker-234567890abcdef1234567890abcdef1"
+    #       }
+    #     ]
+    #   }
+    #   options = {}
+    #   response = client.batch_get_worker(params, options)
+    #   response.to_h #=>
+    #   {}
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     identifiers: [ # required
+    #       {
+    #         farm_id: "FarmId", # required
+    #         fleet_id: "FleetId", # required
+    #         worker_id: "WorkerId", # required
+    #       }
+    #     ]
+    #   }
+    #   options = {}
+    #   response = client.batch_get_worker(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     workers: [ # required
+    #       {
+    #         farm_id: "FarmId", # required
+    #         fleet_id: "FleetId", # required
+    #         worker_id: "WorkerId", # required
+    #         host_properties: {
+    #           ip_addresses: {
+    #             ip_v4_addresses: ["IpV4Address"],
+    #             ip_v6_addresses: ["IpV6Address"]
+    #           },
+    #           host_name: "HostName",
+    #           ec2_instance_arn: "String",
+    #           ec2_instance_type: "InstanceType"
+    #         },
+    #         status: "CREATED" # One of: ["CREATED", "STARTED", "STOPPING", "STOPPED", "NOT_RESPONDING", "NOT_COMPATIBLE", "RUNNING", "IDLE"], # required
+    #         log: {
+    #           log_driver: "LogDriver", # required
+    #           options: {
+    #             "String" => "String"
+    #           },
+    #           parameters: {
+    #             "String" => "String"
+    #           },
+    #           error: "LogError"
+    #         },
+    #         created_at: Time.now, # required
+    #         created_by: "CreatedBy", # required
+    #         updated_at: Time.now,
+    #         updated_by: "UpdatedBy"
+    #       }
+    #     ],
+    #     errors: [ # required
+    #       {
+    #         farm_id: "FarmId", # required
+    #         fleet_id: "FleetId", # required
+    #         worker_id: "WorkerId", # required
+    #         code: "InternalServerErrorException" # One of: ["InternalServerErrorException", "ResourceNotFoundException", "ValidationException"], # required
+    #         message: "String", # required
+    #       }
+    #     ]
+    #   }
+    # @return [Types::BatchGetWorkerResponse]
+    def batch_get_worker(params = {}, options = {})
+      request = build_request(:batch_get_worker, params)
+      request.send_request(options)
+    end
+
+    # <p>Updates multiple jobs in a single request. This is a batch version of the <code>UpdateJob</code> API.</p> <p>The result of updating each job is reported individually in the response. Because the batch request can result in a combination of successful and unsuccessful actions, you should check for batch errors even when the call returns an HTTP status code of 200.</p> <p>When you change the status of a job to <code>ARCHIVED</code>, the job can't be scheduled or archived.</p> <important> <p>An archived job and its steps and tasks are deleted after 120 days. The job can't be recovered.</p> </important>
+    # @param [Hash, Types::BatchUpdateJobRequest] params
+    # @option params [String] :client_token
+    #   <p>The unique token which the server uses to recognize retries of the same request.</p>
+    # @option params [Array<Types::BatchUpdateJobItem>] :jobs
+    #   <p>The list of jobs to update. You can specify up to 100 jobs per request.</p>
+    # @example Update multiple jobs in a single request
+    #   # Example operation for batch_update_job
+    #   params = {
+    #     jobs: [
+    #       {
+    #         farm_id: "farm-1234567890abcdef1234567890abcdef",
+    #         queue_id: "queue-1234567890abcdef1234567890abcdef",
+    #         job_id: "job-1234567890abcdef1234567890abcdef",
+    #         target_task_run_status: FAILED
+    #       },
+    #       {
+    #         farm_id: "farm-1234567890abcdef1234567890abcdef",
+    #         queue_id: "queue-1234567890abcdef1234567890abcdef",
+    #         job_id: "job-234567890abcdef1234567890abcdef1",
+    #         target_task_run_status: FAILED
+    #       }
+    #     ]
+    #   }
+    #   options = {}
+    #   response = client.batch_update_job(params, options)
+    #   response.to_h #=>
+    #   {}
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     client_token: "ClientToken",
+    #     jobs: [ # required
+    #       {
+    #         farm_id: "FarmId", # required
+    #         queue_id: "QueueId", # required
+    #         job_id: "JobId", # required
+    #         target_task_run_status: "READY" # One of: ["READY", "FAILED", "SUCCEEDED", "CANCELED", "SUSPENDED", "PENDING"],
+    #         priority: 1,
+    #         max_failed_tasks_count: 1,
+    #         max_retries_per_task: 1,
+    #         lifecycle_status: "ARCHIVED" # One of: ["ARCHIVED"],
+    #         max_worker_count: 1,
+    #         name: "JobName",
+    #         description: "JobDescriptionOverride"
+    #       }
+    #     ]
+    #   }
+    #   options = {}
+    #   response = client.batch_update_job(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     errors: [ # required
+    #       {
+    #         farm_id: "FarmId", # required
+    #         queue_id: "QueueId", # required
+    #         job_id: "JobId", # required
+    #         code: "ConflictException" # One of: ["ConflictException", "InternalServerErrorException", "ResourceNotFoundException", "ValidationException", "AccessDeniedException", "ThrottlingException"], # required
+    #         message: "String", # required
+    #       }
+    #     ]
+    #   }
+    # @return [Types::BatchUpdateJobResponse]
+    def batch_update_job(params = {}, options = {})
+      request = build_request(:batch_update_job, params)
+      request.send_request(options)
+    end
+
+    # <p>Updates multiple tasks in a single request. This is a batch version of the <code>UpdateTask</code> API.</p> <p>The result of updating each task is reported individually in the response. Because the batch request can result in a combination of successful and unsuccessful actions, you should check for batch errors even when the call returns an HTTP status code of 200.</p>
+    # @param [Hash, Types::BatchUpdateTaskRequest] params
+    # @option params [String] :client_token
+    #   <p>The unique token which the server uses to recognize retries of the same request.</p>
+    # @option params [Array<Types::BatchUpdateTaskItem>] :tasks
+    #   <p>The list of tasks to update. You can specify up to 100 tasks per request.</p>
+    # @example Update multiple tasks in a single request
+    #   # Example operation for batch_update_task
+    #   params = {
+    #     tasks: [
+    #       {
+    #         farm_id: "farm-1234567890abcdef1234567890abcdef",
+    #         queue_id: "queue-1234567890abcdef1234567890abcdef",
+    #         job_id: "job-1234567890abcdef1234567890abcdef",
+    #         step_id: "step-1234567890abcdef1234567890abcdef",
+    #         task_id: "task-1234567890abcdef1234567890abcdef-0",
+    #         target_run_status: FAILED
+    #       },
+    #       {
+    #         farm_id: "farm-1234567890abcdef1234567890abcdef",
+    #         queue_id: "queue-1234567890abcdef1234567890abcdef",
+    #         job_id: "job-1234567890abcdef1234567890abcdef",
+    #         step_id: "step-1234567890abcdef1234567890abcdef",
+    #         task_id: "task-1234567890abcdef1234567890abcdef-1",
+    #         target_run_status: FAILED
+    #       }
+    #     ]
+    #   }
+    #   options = {}
+    #   response = client.batch_update_task(params, options)
+    #   response.to_h #=>
+    #   {}
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     client_token: "ClientToken",
+    #     tasks: [ # required
+    #       {
+    #         farm_id: "FarmId", # required
+    #         queue_id: "QueueId", # required
+    #         job_id: "JobId", # required
+    #         step_id: "StepId", # required
+    #         task_id: "TaskId", # required
+    #         target_run_status: "READY" # One of: ["READY", "FAILED", "SUCCEEDED", "CANCELED", "SUSPENDED", "PENDING"], # required
+    #       }
+    #     ]
+    #   }
+    #   options = {}
+    #   response = client.batch_update_task(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     errors: [ # required
+    #       {
+    #         farm_id: "FarmId", # required
+    #         queue_id: "QueueId", # required
+    #         job_id: "JobId", # required
+    #         step_id: "StepId", # required
+    #         task_id: "TaskId", # required
+    #         code: "ConflictException" # One of: ["ConflictException", "InternalServerErrorException", "ResourceNotFoundException", "ValidationException", "AccessDeniedException", "ThrottlingException"], # required
+    #         message: "String", # required
+    #       }
+    #     ]
+    #   }
+    # @return [Types::BatchUpdateTaskResponse]
+    def batch_update_task(params = {}, options = {})
+      request = build_request(:batch_update_task, params)
+      request.send_request(options)
+    end
+
     # <p>Copies a job template to an Amazon S3 bucket.</p>
     # @param [Hash, Types::CopyJobTemplateRequest] params
     # @option params [String] :farm_id
     #   <p>The farm ID to copy.</p>
-    # @option params [String] :job_id
-    #   <p>The job ID to copy.</p>
     # @option params [String] :queue_id
     #   <p>The queue ID to copy.</p>
+    # @option params [String] :job_id
+    #   <p>The job ID to copy.</p>
     # @option params [Types::S3Location] :target_s3_location
-    #   <p>The Amazon S3 bucket name and key where you would like to add a copy of the job
-    #            template.</p>
+    #   <p>The Amazon S3 bucket name and key where you would like to add a copy of the job template.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     farm_id: "FarmId", # required
-    #     job_id: "JobId", # required
     #     queue_id: "QueueId", # required
+    #     job_id: "JobId", # required
     #     target_s3_location: { # required
     #       bucket_name: "S3BucketName", # required
     #       key: "S3Key", # required
@@ -678,38 +1468,34 @@ module Aws::Deadline
 
     # <p>Creates a budget to set spending thresholds for your rendering activity.</p>
     # @param [Hash, Types::CreateBudgetRequest] params
-    # @option params [String] :client_token
-    #   <p>The unique token which the server uses to recognize retries of the same request.</p>
     # @option params [String] :farm_id
     #   <p>The farm ID to include in this budget.</p>
+    # @option params [String] :display_name
+    #   <p>The display name of the budget.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>
+    # @option params [String] :description
+    #   <p>The description of the budget.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>
+    # @option params [String] :client_token
+    #   <p>The unique token which the server uses to recognize retries of the same request.</p>
     # @option params [Types::UsageTrackingResource] :usage_tracking_resource
     #   <p>The queue ID provided to this budget to track usage.</p>
-    # @option params [String] :display_name
-    #   <p>The display name of the budget.</p>
-    #            <important>
-    #               <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>
-    #            </important>
-    # @option params [String] :description
-    #   <p>The description of the budget.</p>
-    #            <important>
-    #               <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>
-    #            </important>
     # @option params [Float] :approximate_dollar_limit
     #   <p>The dollar limit based on consumed usage.</p>
     # @option params [Array<Types::BudgetActionToAdd>] :actions
     #   <p>The budget actions to specify what happens when the budget runs out.</p>
     # @option params [Types::BudgetSchedule] :schedule
     #   <p>The schedule to associate with this budget.</p>
+    # @option params [Hash<String, String>] :tags
+    #   <p>Each tag consists of a tag key and a tag value. Tag keys and values are both required, but tag values can be empty strings.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     client_token: "ClientToken",
     #     farm_id: "FarmId", # required
+    #     display_name: "ResourceName", # required
+    #     description: "Description",
+    #     client_token: "ClientToken",
     #     usage_tracking_resource: { # required
     #       # One of:
     #       queue_id: "QueueId"
     #     },
-    #     display_name: "ResourceName", # required
-    #     description: "Description",
     #     approximate_dollar_limit: 1.0, # required
     #     actions: [ # required
     #       {
@@ -724,6 +1510,9 @@ module Aws::Deadline
     #         start_time: Time.now, # required
     #         end_time: Time.now, # required
     #       }
+    #     },
+    #     tags: {
+    #       "String" => "String"
     #     }
     #   }
     #   options = {}
@@ -739,25 +1528,18 @@ module Aws::Deadline
       request.send_request(options)
     end
 
-    # <p>Creates a farm to allow space for queues and fleets. Farms are the space where the
-    #          components of your renders gather and are pieced together in the cloud. Farms contain
-    #          budgets and allow you to enforce permissions. Deadline Cloud farms are a useful container for
-    #          large projects.</p>
+    # <p>Creates a farm to allow space for queues and fleets. Farms are the space where the components of your renders gather and are pieced together in the cloud. Farms contain budgets and allow you to enforce permissions. Deadline Cloud farms are a useful container for large projects.</p>
     # @param [Hash, Types::CreateFarmRequest] params
     # @option params [String] :client_token
     #   <p>The unique token which the server uses to recognize retries of the same request.</p>
     # @option params [String] :display_name
-    #   <p>The display name of the farm.</p>
-    #            <important>
-    #               <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>
-    #            </important>
+    #   <p>The display name of the farm.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>
     # @option params [String] :description
-    #   <p>The description of the farm.</p>
-    #            <important>
-    #               <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>
-    #            </important>
+    #   <p>The description of the farm.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>
     # @option params [String] :kms_key_arn
     #   <p>The ARN of the KMS key to use on the farm.</p>
+    # @option params [Float] :cost_scale_factor
+    #   <p>A multiplier applied to the farm's calculated costs for usage data and budget tracking. A value less than 1 represents a discount, a value greater than 1 represents a premium, and a value of 1 represents no adjustment. The default value is 1.</p>
     # @option params [Hash<String, String>] :tags
     #   <p>The tags to add to your farm. Each tag consists of a tag key and a tag value. Tag keys and values are both required, but tag values can be empty strings.</p>
     # @example Request syntax with placeholder values
@@ -766,6 +1548,7 @@ module Aws::Deadline
     #     display_name: "ResourceName", # required
     #     description: "Description",
     #     kms_key_arn: "KmsKeyArn",
+    #     cost_scale_factor: 1.0,
     #     tags: {
     #       "String" => "String"
     #     }
@@ -783,49 +1566,32 @@ module Aws::Deadline
       request.send_request(options)
     end
 
-    # <p>Creates a fleet. Fleets gather information relating to compute, or capacity, for renders
-    #          within your farms. You can choose to manage your own capacity or opt to have fleets fully
-    #          managed by Deadline Cloud.</p>
+    # <p>Creates a fleet. Fleets gather information relating to compute, or capacity, for renders within your farms. You can choose to manage your own capacity or opt to have fleets fully managed by Deadline Cloud.</p>
     # @param [Hash, Types::CreateFleetRequest] params
-    # @option params [String] :client_token
-    #   <p>The unique token which the server uses to recognize retries of the same request.</p>
     # @option params [String] :farm_id
     #   <p>The farm ID of the farm to connect to the fleet.</p>
+    # @option params [String] :client_token
+    #   <p>The unique token which the server uses to recognize retries of the same request.</p>
     # @option params [String] :display_name
-    #   <p>The display name of the fleet.</p>
-    #            <important>
-    #               <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>
-    #            </important>
+    #   <p>The display name of the fleet.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>
     # @option params [String] :description
-    #   <p>The description of the fleet.</p>
-    #            <important>
-    #               <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>
-    #            </important>
+    #   <p>The description of the fleet.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>
     # @option params [String] :role_arn
     #   <p>The IAM role ARN for the role that the fleet's workers will use.</p>
     # @option params [Integer] :min_worker_count
     #   <p>The minimum number of workers for the fleet.</p>
     # @option params [Integer] :max_worker_count
-    #   <p>The maximum number of workers for the fleet.</p>
-    #            <p>Deadline Cloud limits the number of workers to less than or equal to the fleet's
-    #            maximum worker count. The service maintains eventual consistency for the worker count. If
-    #            you make multiple rapid calls to <code>CreateWorker</code> before the field updates, you
-    #            might exceed your fleet's maximum worker count. For example, if your
-    #            <code>maxWorkerCount</code> is 10 and you currently have 9 workers, making two quick
-    #            <code>CreateWorker</code> calls might successfully create 2 workers instead of 1,
-    #            resulting in 11 total workers.</p>
+    #   <p>The maximum number of workers for the fleet.</p> <p>Deadline Cloud limits the number of workers to less than or equal to the fleet's maximum worker count. The service maintains eventual consistency for the worker count. If you make multiple rapid calls to <code>CreateWorker</code> before the field updates, you might exceed your fleet's maximum worker count. For example, if your <code>maxWorkerCount</code> is 10 and you currently have 9 workers, making two quick <code>CreateWorker</code> calls might successfully create 2 workers instead of 1, resulting in 11 total workers.</p>
     # @option params [Types::FleetConfiguration] :configuration
-    #   <p>The configuration settings for the fleet. Customer managed fleets are self-managed.
-    #            Service managed Amazon EC2 fleets are managed by Deadline Cloud.</p>
+    #   <p>The configuration settings for the fleet. Customer managed fleets are self-managed. Service managed Amazon EC2 fleets are managed by Deadline Cloud.</p>
     # @option params [Hash<String, String>] :tags
     #   <p>Each tag consists of a tag key and a tag value. Tag keys and values are both required, but tag values can be empty strings.</p>
     # @option params [Types::HostConfiguration] :host_configuration
-    #   <p>Provides a script that runs as a worker is starting up that you can use to provide
-    #            additional configuration for workers in your fleet.</p>
+    #   <p>Provides a script that runs as a worker is starting up that you can use to provide additional configuration for workers in your fleet.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     client_token: "ClientToken",
     #     farm_id: "FarmId", # required
+    #     client_token: "ClientToken",
     #     display_name: "ResourceName", # required
     #     description: "Description",
     #     role_arn: "IamRoleArn", # required
@@ -835,6 +1601,11 @@ module Aws::Deadline
     #       # One of:
     #       customer_managed: {
     #         mode: "NO_SCALING" # One of: ["NO_SCALING", "EVENT_BASED_AUTO_SCALING"], # required
+    #         auto_scaling_configuration: {
+    #           standby_worker_count: 1,
+    #           worker_idle_duration_seconds: 1,
+    #           scale_out_workers_per_minute: 1
+    #         },
     #         worker_capabilities: { # required
     #           v_cpu_count: { # required
     #             min: 1, # required
@@ -892,7 +1663,7 @@ module Aws::Deadline
     #           accelerator_capabilities: {
     #             selections: [ # required
     #               {
-    #                 name: "t4" # One of: ["t4", "a10g", "l4", "l40s"], # required
+    #                 name: "t4" # One of: ["t4", "a10g", "l4", "l40s", "rtx-pro-server-6000"], # required
     #                 runtime: "AcceleratorRuntime"
     #               }
     #             ],
@@ -915,6 +1686,11 @@ module Aws::Deadline
     #               name: "AttributeCapabilityName", # required
     #               values: ["AttributeCapabilityValue"], # required
     #             }
+    #           ],
+    #           software_add_ons: [
+    #             {
+    #               name: "docker" # One of: ["docker"], # required
+    #             }
     #           ]
     #         },
     #         instance_market_options: { # required
@@ -923,7 +1699,19 @@ module Aws::Deadline
     #         vpc_configuration: {
     #           resource_configuration_arns: ["VpcResourceConfigurationArn"]
     #         },
-    #         storage_profile_id: "StorageProfileId"
+    #         storage_profile_id: "StorageProfileId",
+    #         persistent_volume_configuration: {
+    #           size_gi_b: 1,
+    #           iops: 1,
+    #           throughput_mi_b: 1,
+    #           mount_path: "MountPath", # required
+    #           last_used_ttl_hours: 1
+    #         },
+    #         auto_scaling_configuration: {
+    #           standby_worker_count: 1,
+    #           worker_idle_duration_seconds: 1,
+    #           scale_out_workers_per_minute: 1
+    #         }
     #       }
     #     },
     #     tags: {
@@ -947,9 +1735,7 @@ module Aws::Deadline
       request.send_request(options)
     end
 
-    # <p>Creates a job. A job is a set of instructions that Deadline Cloud uses to schedule
-    #          and run work on available workers. For more information, see <a href="https://docs.aws.amazon.com/deadline-cloud/latest/userguide/deadline-cloud-jobs.html">Deadline Cloud
-    #             jobs</a>.</p>
+    # <p>Creates a job. A job is a set of instructions that Deadline Cloud uses to schedule and run work on available workers. For more information, see <a href="https://docs.aws.amazon.com/deadline-cloud/latest/userguide/deadline-cloud-jobs.html">Deadline Cloud jobs</a>.</p>
     # @param [Hash, Types::CreateJobRequest] params
     # @option params [String] :farm_id
     #   <p>The farm ID of the farm to connect to the job.</p>
@@ -962,32 +1748,29 @@ module Aws::Deadline
     # @option params [String] :template_type
     #   <p>The file type for the job template.</p>
     # @option params [Integer] :priority
-    #   <p>The priority of the job. The highest priority (first scheduled) is 100. When two jobs
-    #            have the same priority, the oldest job is scheduled first.</p>
+    #   <p>The priority of the job. The highest priority (first scheduled) is 100. When two jobs have the same priority, the oldest job is scheduled first.</p>
     # @option params [Hash<String, Types::JobParameter>] :parameters
     #   <p>The parameters for the job.</p>
     # @option params [Types::Attachments] :attachments
-    #   <p>The attachments for the job. Attach files required for the job to run to a render
-    #            job.</p>
+    #   <p>The attachments for the job. Attach files required for the job to run to a render job.</p>
     # @option params [String] :storage_profile_id
     #   <p>The storage profile ID for the storage profile to connect to the job.</p>
     # @option params [String] :target_task_run_status
-    #   <p>The initial job status when it is created. Jobs that are created with a
-    #               <code>SUSPENDED</code> status will not run until manually requeued.</p>
+    #   <p>The initial job status when it is created. Jobs that are created with a <code>SUSPENDED</code> status will not run until manually requeued.</p>
     # @option params [Integer] :max_failed_tasks_count
     #   <p>The number of task failures before the job stops running and is marked as <code>FAILED</code>.</p>
     # @option params [Integer] :max_retries_per_task
     #   <p>The maximum number of retries for each task.</p>
     # @option params [Integer] :max_worker_count
-    #   <p>The maximum number of worker hosts that can concurrently process a job. When the
-    #               <code>maxWorkerCount</code> is reached, no more workers will be assigned to process the
-    #            job, even if the fleets assigned to the job's queue has available workers.</p>
-    #            <p>You can't set the <code>maxWorkerCount</code> to 0. If you set it to -1, there is no
-    #            maximum number of workers.</p>
-    #            <p>If you don't specify the <code>maxWorkerCount</code>, Deadline Cloud won't throttle
-    #            the number of workers used to process the job.</p>
+    #   <p>The maximum number of worker hosts that can concurrently process a job. When the <code>maxWorkerCount</code> is reached, no more workers will be assigned to process the job, even if the fleets assigned to the job's queue has available workers.</p> <p>You can't set the <code>maxWorkerCount</code> to 0. If you set it to -1, there is no maximum number of workers.</p> <p>If you don't specify the <code>maxWorkerCount</code>, Deadline Cloud won't throttle the number of workers used to process the job.</p>
     # @option params [String] :source_job_id
     #   <p>The job ID for the source job.</p>
+    # @option params [String] :name_override
+    #   <p>A custom name to override the job name derived from the job template.</p>
+    # @option params [String] :description_override
+    #   <p>A custom description to override the job description derived from the job template.</p>
+    # @option params [Hash<String, String>] :tags
+    #   <p>The tags to add to your job. Each tag consists of a tag key and a tag value. Tag keys and values are both required, but tag values can be empty strings.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     farm_id: "FarmId", # required
@@ -1002,7 +1785,17 @@ module Aws::Deadline
     #         int: "IntString",
     #         float: "FloatString",
     #         string: "ParameterString",
-    #         path: "PathString"
+    #         path: "PathString",
+    #         bool: "BooleanString",
+    #         range_expr: "RangeExprString",
+    #         string_list: ["ParameterString"],
+    #         path_list: ["PathString"],
+    #         int_list: ["IntString"],
+    #         float_list: ["FloatString"],
+    #         bool_list: ["BooleanString"],
+    #         int_list_list: [
+    #           ["IntString"]
+    #         ]
     #       }
     #     },
     #     attachments: {
@@ -1023,7 +1816,12 @@ module Aws::Deadline
     #     max_failed_tasks_count: 1,
     #     max_retries_per_task: 1,
     #     max_worker_count: 1,
-    #     source_job_id: "JobId"
+    #     source_job_id: "JobId",
+    #     name_override: "JobName",
+    #     description_override: "JobDescriptionOverride",
+    #     tags: {
+    #       "String" => "String"
+    #     }
     #   }
     #   options = {}
     #   response = client.create_job(params, options)
@@ -1038,8 +1836,7 @@ module Aws::Deadline
       request.send_request(options)
     end
 
-    # <p>Creates a license endpoint to integrate your various licensed software used for
-    #          rendering on Deadline Cloud.</p>
+    # <p>Creates a license endpoint to integrate your various licensed software used for rendering on Deadline Cloud.</p>
     # @param [Hash, Types::CreateLicenseEndpointRequest] params
     # @option params [String] :client_token
     #   <p>The unique token which the server uses to recognize retries of the same request.</p>
@@ -1074,44 +1871,27 @@ module Aws::Deadline
       request.send_request(options)
     end
 
-    # <p>Creates a limit that manages the distribution of shared resources, such as floating
-    #          licenses. A limit can throttle work assignments, help manage workloads, and track current
-    #          usage. Before you use a limit, you must associate the limit with one or more queues. </p>
-    #          <p>You must add the <code>amountRequirementName</code> to a step in a job template to
-    #          declare the limit requirement.</p>
+    # <p>Creates a limit that manages the distribution of shared resources, such as floating licenses. A limit can throttle work assignments, help manage workloads, and track current usage. Before you use a limit, you must associate the limit with one or more queues. </p> <p>You must add the <code>amountRequirementName</code> to a step in a job template to declare the limit requirement.</p>
     # @param [Hash, Types::CreateLimitRequest] params
+    # @option params [String] :farm_id
+    #   <p>The farm ID of the farm that contains the limit.</p>
     # @option params [String] :client_token
     #   <p>The unique token which the server uses to recognize retries of the same request.</p>
     # @option params [String] :display_name
-    #   <p>The display name of the limit.</p>
-    #            <important>
-    #               <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>
-    #            </important>
+    #   <p>The display name of the limit.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>
     # @option params [String] :amount_requirement_name
-    #   <p>The value that you specify as the <code>name</code> in the <code>amounts</code> field of
-    #            the <code>hostRequirements</code> in a step of a job template to declare the limit
-    #            requirement.</p>
+    #   <p>The value that you specify as the <code>name</code> in the <code>amounts</code> field of the <code>hostRequirements</code> in a step of a job template to declare the limit requirement.</p>
     # @option params [Integer] :max_count
-    #   <p>The maximum number of resources constrained by this limit. When all of the resources are
-    #            in use, steps that require the limit won't be scheduled until the resource is
-    #            available.</p>
-    #            <p>The <code>maxCount</code> must not be 0. If the value is -1, there is no restriction on
-    #            the number of resources that can be acquired for this limit.</p>
-    # @option params [String] :farm_id
-    #   <p>The farm ID of the farm that contains the limit.</p>
+    #   <p>The maximum number of resources constrained by this limit. When all of the resources are in use, steps that require the limit won't be scheduled until the resource is available.</p> <p>The <code>maxCount</code> must not be 0. If the value is -1, there is no restriction on the number of resources that can be acquired for this limit.</p>
     # @option params [String] :description
-    #   <p>A description of the limit. A description helps you identify the purpose of the
-    #            limit.</p>
-    #            <important>
-    #               <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>
-    #            </important>
+    #   <p>A description of the limit. A description helps you identify the purpose of the limit.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>
     # @example Request syntax with placeholder values
     #   params = {
+    #     farm_id: "FarmId", # required
     #     client_token: "ClientToken",
     #     display_name: "ResourceName", # required
     #     amount_requirement_name: "AmountRequirementName", # required
     #     max_count: 1, # required
-    #     farm_id: "FarmId", # required
     #     description: "Description"
     #   }
     #   options = {}
@@ -1127,26 +1907,20 @@ module Aws::Deadline
       request.send_request(options)
     end
 
-    # <p>Creates an Amazon Web Services Deadline Cloud monitor that you can use to view your farms, queues, and
-    #          fleets. After you submit a job, you can track the progress of the tasks and steps that make
-    #          up the job, and then download the job's results. </p>
+    # <p>Creates an Amazon Web Services Deadline Cloud monitor that you can use to view your farms, queues, and fleets. After you submit a job, you can track the progress of the tasks and steps that make up the job, and then download the job's results. </p>
     # @param [Hash, Types::CreateMonitorRequest] params
     # @option params [String] :client_token
     #   <p>The unique token which the server uses to recognize retries of the same request.</p>
     # @option params [String] :display_name
-    #   <p>The name that you give the monitor that is displayed in the Deadline Cloud console.</p>
-    #            <important>
-    #               <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>
-    #            </important>
+    #   <p>The name that you give the monitor that is displayed in the Deadline Cloud console.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>
     # @option params [String] :identity_center_instance_arn
-    #   <p>The Amazon Resource Name (ARN) of the IAM Identity Center instance that authenticates monitor users.</p>
+    #   <p>The Amazon Resource Name of the IAM Identity Center instance that authenticates monitor users.</p>
+    # @option params [String] :identity_center_region
+    #   <p>The Region where IAM Identity Center is enabled. Required when IAM Identity Center is in a different Region than the monitor.</p>
     # @option params [String] :subdomain
-    #   <p>The subdomain to use when creating the monitor URL. The full URL of the monitor is
-    #            subdomain.Region.deadlinecloud.amazonaws.com.</p>
+    #   <p>The subdomain to use when creating the monitor URL. The full URL of the monitor is subdomain.Region.deadlinecloud.amazonaws.com.</p>
     # @option params [String] :role_arn
-    #   <p>The Amazon Resource Name (ARN) of the IAM role that the monitor uses to connect to Deadline Cloud. Every user
-    #            that signs in to the monitor using IAM Identity Center uses this role to access Deadline Cloud
-    #            resources.</p>
+    #   <p>The Amazon Resource Name of the IAM role that the monitor uses to connect to Deadline Cloud. Every user that signs in to the monitor using IAM Identity Center uses this role to access Deadline Cloud resources.</p>
     # @option params [Hash<String, String>] :tags
     #   <p>The tags to add to your monitor. Each tag consists of a tag key and a tag value. Tag keys and values are both required, but tag values can be empty strings.</p>
     # @example Request syntax with placeholder values
@@ -1154,6 +1928,7 @@ module Aws::Deadline
     #     client_token: "ClientToken",
     #     display_name: "ResourceName", # required
     #     identity_center_instance_arn: "IdentityCenterInstanceArn", # required
+    #     identity_center_region: "Region",
     #     subdomain: "Subdomain", # required
     #     role_arn: "IamRoleArn", # required
     #     tags: {
@@ -1174,28 +1949,20 @@ module Aws::Deadline
       request.send_request(options)
     end
 
-    # <p>Creates a queue to coordinate the order in which jobs run on a farm. A queue can also
-    #          specify where to pull resources and indicate where to output completed jobs.</p>
+    # <p>Creates a queue to coordinate the order in which jobs run on a farm. A queue can also specify where to pull resources and indicate where to output completed jobs.</p>
     # @param [Hash, Types::CreateQueueRequest] params
-    # @option params [String] :client_token
-    #   <p>The unique token which the server uses to recognize retries of the same request.</p>
     # @option params [String] :farm_id
     #   <p>The farm ID of the farm to connect to the queue.</p>
+    # @option params [String] :client_token
+    #   <p>The unique token which the server uses to recognize retries of the same request.</p>
     # @option params [String] :display_name
-    #   <p>The display name of the queue.</p>
-    #            <important>
-    #               <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>
-    #            </important>
+    #   <p>The display name of the queue.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>
     # @option params [String] :description
-    #   <p>The description of the queue.</p>
-    #            <important>
-    #               <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>
-    #            </important>
+    #   <p>The description of the queue.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>
     # @option params [String] :default_budget_action
     #   <p>The default action to take on a queue if a budget isn't configured.</p>
     # @option params [Types::JobAttachmentSettings] :job_attachment_settings
-    #   <p>The job attachment settings for the queue. These are the Amazon S3 bucket name and the Amazon S3
-    #            prefix.</p>
+    #   <p>The job attachment settings for the queue. These are the Amazon S3 bucket name and the Amazon S3 prefix.</p>
     # @option params [String] :role_arn
     #   <p>The IAM role ARN that workers will use while running jobs for this queue.</p>
     # @option params [Types::JobRunAsUser] :job_run_as_user
@@ -1206,10 +1973,12 @@ module Aws::Deadline
     #   <p>The storage profile IDs to include in the queue.</p>
     # @option params [Hash<String, String>] :tags
     #   <p>Each tag consists of a tag key and a tag value. Tag keys and values are both required, but tag values can be empty strings.</p>
+    # @option params [Types::SchedulingConfiguration] :scheduling_configuration
+    #   <p>The scheduling configuration for the queue. This configuration determines how workers are assigned to jobs in the queue.</p> <p>If not specified, the queue defaults to the <code>priorityFifo</code> scheduling configuration.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     client_token: "ClientToken",
     #     farm_id: "FarmId", # required
+    #     client_token: "ClientToken",
     #     display_name: "ResourceName", # required
     #     description: "Description",
     #     default_budget_action: "NONE" # One of: ["NONE", "STOP_SCHEDULING_AND_COMPLETE_TASKS", "STOP_SCHEDULING_AND_CANCEL_TASKS"],
@@ -1233,6 +2002,31 @@ module Aws::Deadline
     #     allowed_storage_profile_ids: ["StorageProfileId"],
     #     tags: {
     #       "String" => "String"
+    #     },
+    #     scheduling_configuration: {
+    #       # One of:
+    #       priority_fifo: {
+    #       },
+    #       priority_balanced: {
+    #         rendering_task_buffer: 1
+    #       },
+    #       weighted_balanced: {
+    #         priority_weight: 1.0,
+    #         error_weight: 1.0,
+    #         submission_time_weight: 1.0,
+    #         rendering_task_weight: 1.0,
+    #         rendering_task_buffer: 1,
+    #         max_priority_override: {
+    #           # One of:
+    #           always_schedule_first: {
+    #           }
+    #         },
+    #         min_priority_override: {
+    #           # One of:
+    #           always_schedule_last: {
+    #           }
+    #         }
+    #       }
     #     }
     #   }
     #   options = {}
@@ -1250,25 +2044,23 @@ module Aws::Deadline
 
     # <p>Creates an environment for a queue that defines how jobs in the queue run.</p>
     # @param [Hash, Types::CreateQueueEnvironmentRequest] params
-    # @option params [String] :client_token
-    #   <p>The unique token which the server uses to recognize retries of the same request.</p>
     # @option params [String] :farm_id
     #   <p>The farm ID of the farm to connect to the environment.</p>
     # @option params [String] :queue_id
     #   <p>The queue ID to connect the queue and environment.</p>
+    # @option params [String] :client_token
+    #   <p>The unique token which the server uses to recognize retries of the same request.</p>
     # @option params [Integer] :priority
-    #   <p>Sets the priority of the environments in the queue from 0 to 10,000, where 0 is the
-    #            highest priority (activated first and deactivated last). If two environments share the same
-    #            priority value, the environment created first takes higher priority.</p>
+    #   <p>Sets the priority of the environments in the queue from 0 to 10,000, where 0 is the highest priority (activated first and deactivated last). If two environments share the same priority value, the environment created first takes higher priority.</p>
     # @option params [String] :template_type
     #   <p>The template's file type, <code>JSON</code> or <code>YAML</code>.</p>
     # @option params [String] :template
     #   <p>The environment template to use in the queue.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     client_token: "ClientToken",
     #     farm_id: "FarmId", # required
     #     queue_id: "QueueId", # required
+    #     client_token: "ClientToken",
     #     priority: 1, # required
     #     template_type: "JSON" # One of: ["JSON", "YAML"], # required
     #     template: "EnvironmentTemplate", # required
@@ -1311,10 +2103,7 @@ module Aws::Deadline
       request.send_request(options)
     end
 
-    # <p>Associates a limit with a particular queue. After the limit is associated, all workers
-    #          for jobs that specify the limit associated with the queue are subject to the limit. You
-    #          can't associate two limits with the same <code>amountRequirementName</code> to the same
-    #          queue.</p>
+    # <p>Associates a limit with a particular queue. After the limit is associated, all workers for jobs that specify the limit associated with the queue are subject to the limit. You can't associate two limits with the same <code>amountRequirementName</code> to the same queue.</p>
     # @param [Hash, Types::CreateQueueLimitAssociationRequest] params
     # @option params [String] :farm_id
     #   <p>The unique identifier of the farm that contains the queue and limit to associate.</p>
@@ -1339,26 +2128,22 @@ module Aws::Deadline
       request.send_request(options)
     end
 
-    # <p>Creates a storage profile that specifies the operating system, file type, and file
-    #          location of resources used on a farm.</p>
+    # <p>Creates a storage profile that specifies the operating system, file type, and file location of resources used on a farm.</p>
     # @param [Hash, Types::CreateStorageProfileRequest] params
-    # @option params [String] :client_token
-    #   <p>The unique token which the server uses to recognize retries of the same request.</p>
     # @option params [String] :farm_id
     #   <p>The farm ID of the farm to connect to the storage profile.</p>
+    # @option params [String] :client_token
+    #   <p>The unique token which the server uses to recognize retries of the same request.</p>
     # @option params [String] :display_name
-    #   <p>The display name of the storage profile.</p>
-    #            <important>
-    #               <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>
-    #            </important>
+    #   <p>The display name of the storage profile.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>
     # @option params [String] :os_family
     #   <p>The type of operating system (OS) for the storage profile.</p>
     # @option params [Array<Types::FileSystemLocation>] :file_system_locations
     #   <p>File system paths to include in the storage profile.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     client_token: "ClientToken",
     #     farm_id: "FarmId", # required
+    #     client_token: "ClientToken",
     #     display_name: "ResourceName", # required
     #     os_family: "WINDOWS" # One of: ["WINDOWS", "LINUX", "MACOS"], # required
     #     file_system_locations: [
@@ -1382,17 +2167,7 @@ module Aws::Deadline
       request.send_request(options)
     end
 
-    # <p>Creates a worker. A worker tells your instance how much processing power (vCPU), and
-    #          memory (GiB) you’ll need to assemble the digital assets held within a particular instance.
-    #          You can specify certain instance types to use, or let the worker know which instances types
-    #          to exclude.</p>
-    #          <p>Deadline Cloud limits the number of workers to less than or equal to the fleet's
-    #          maximum worker count. The service maintains eventual consistency for the worker count. If
-    #          you make multiple rapid calls to <code>CreateWorker</code> before the field updates, you
-    #          might exceed your fleet's maximum worker count. For example, if your
-    #             <code>maxWorkerCount</code> is 10 and you currently have 9 workers, making two quick
-    #             <code>CreateWorker</code> calls might successfully create 2 workers instead of 1,
-    #          resulting in 11 total workers.</p>
+    # <p>Creates a worker. A worker tells your instance how much processing power (vCPU), and memory (GiB) you’ll need to assemble the digital assets held within a particular instance. You can specify certain instance types to use, or let the worker know which instances types to exclude.</p> <p>Deadline Cloud limits the number of workers to less than or equal to the fleet's maximum worker count. The service maintains eventual consistency for the worker count. If you make multiple rapid calls to <code>CreateWorker</code> before the field updates, you might exceed your fleet's maximum worker count. For example, if your <code>maxWorkerCount</code> is 10 and you currently have 9 workers, making two quick <code>CreateWorker</code> calls might successfully create 2 workers instead of 1, resulting in 11 total workers.</p>
     # @param [Hash, Types::CreateWorkerRequest] params
     # @option params [String] :farm_id
     #   <p>The farm ID of the farm to connect to the worker.</p>
@@ -1476,17 +2251,17 @@ module Aws::Deadline
 
     # <p>Deletes a fleet.</p>
     # @param [Hash, Types::DeleteFleetRequest] params
-    # @option params [String] :client_token
-    #   <p>The unique token which the server uses to recognize retries of the same request.</p>
     # @option params [String] :farm_id
     #   <p>The farm ID of the farm to remove from the fleet.</p>
     # @option params [String] :fleet_id
     #   <p>The fleet ID of the fleet to delete.</p>
+    # @option params [String] :client_token
+    #   <p>The unique token which the server uses to recognize retries of the same request.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     client_token: "ClientToken",
     #     farm_id: "FarmId", # required
     #     fleet_id: "FleetId", # required
+    #     client_token: "ClientToken"
     #   }
     #   options = {}
     #   response = client.delete_fleet(params, options)
@@ -1518,9 +2293,7 @@ module Aws::Deadline
       request.send_request(options)
     end
 
-    # <p>Removes a limit from the specified farm. Before you delete a limit you must use the
-    #             <code>DeleteQueueLimitAssociation</code> operation to remove the association with any
-    #          queues. </p>
+    # <p>Removes a limit from the specified farm. Before you delete a limit you must use the <code>DeleteQueueLimitAssociation</code> operation to remove the association with any queues. </p>
     # @param [Hash, Types::DeleteLimitRequest] params
     # @option params [String] :farm_id
     #   <p>The unique identifier of the farm that contains the limit to delete.</p>
@@ -1564,13 +2337,10 @@ module Aws::Deadline
       request.send_request(options)
     end
 
-    # <p>Removes a Deadline Cloud monitor. After you delete a monitor, you can create a new one and
-    #          attach farms to the monitor.</p>
+    # <p>Removes a Deadline Cloud monitor. After you delete a monitor, you can create a new one and attach farms to the monitor.</p>
     # @param [Hash, Types::DeleteMonitorRequest] params
     # @option params [String] :monitor_id
-    #   <p>The unique identifier of the monitor to delete. This ID is returned by the
-    #               <code>CreateMonitor</code> operation, and is included in the response to the
-    #               <code>GetMonitor</code> operation.</p>
+    #   <p>The unique identifier of the monitor to delete. This ID is returned by the <code>CreateMonitor</code> operation, and is included in the response to the <code>GetMonitor</code> operation.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     monitor_id: "MonitorId", # required
@@ -1586,11 +2356,7 @@ module Aws::Deadline
       request.send_request(options)
     end
 
-    # <p>Deletes a queue.</p>
-    #          <important>
-    #             <p>You can't recover the jobs in a queue if you delete the queue. Deleting the queue
-    #             also deletes the jobs in that queue.</p>
-    #          </important>
+    # <p>Deletes a queue.</p> <important> <p>You can't recover the jobs in a queue if you delete the queue. Deleting the queue also deletes the jobs in that queue.</p> </important>
     # @param [Hash, Types::DeleteQueueRequest] params
     # @option params [String] :farm_id
     #   <p>The ID of the farm from which to remove the queue.</p>
@@ -1662,16 +2428,10 @@ module Aws::Deadline
       request.send_request(options)
     end
 
-    # <p>Removes the association between a queue and a limit. You must use the
-    #             <code>UpdateQueueLimitAssociation</code> operation to set the status to
-    #             <code>STOP_LIMIT_USAGE_AND_COMPLETE_TASKS</code> or
-    #             <code>STOP_LIMIT_USAGE_AND_CANCEL_TASKS</code>. The status does not change immediately.
-    #          Use the <code>GetQueueLimitAssociation</code> operation to see if the status changed to
-    #             <code>STOPPED</code> before deleting the association.</p>
+    # <p>Removes the association between a queue and a limit. You must use the <code>UpdateQueueLimitAssociation</code> operation to set the status to <code>STOP_LIMIT_USAGE_AND_COMPLETE_TASKS</code> or <code>STOP_LIMIT_USAGE_AND_CANCEL_TASKS</code>. The status does not change immediately. Use the <code>GetQueueLimitAssociation</code> operation to see if the status changed to <code>STOPPED</code> before deleting the association.</p>
     # @param [Hash, Types::DeleteQueueLimitAssociationRequest] params
     # @option params [String] :farm_id
-    #   <p>The unique identifier of the farm that contains the queue and limit to
-    #            disassociate.</p>
+    #   <p>The unique identifier of the farm that contains the queue and limit to disassociate.</p>
     # @option params [String] :queue_id
     #   <p>The unique identifier of the queue to disassociate.</p>
     # @option params [String] :limit_id
@@ -1712,6 +2472,42 @@ module Aws::Deadline
     # @return [Types::DeleteStorageProfileResponse]
     def delete_storage_profile(params = {}, options = {})
       request = build_request(:delete_storage_profile, params)
+      request.send_request(options)
+    end
+
+    # <p>Deletes a persistent volume.</p>
+    # @param [Hash, Types::DeleteVolumeRequest] params
+    # @option params [String] :farm_id
+    #   <p>The farm ID of the farm that contains the fleet.</p>
+    # @option params [String] :fleet_id
+    #   <p>The fleet ID of the fleet that contains the volume.</p>
+    # @option params [String] :volume_id
+    #   <p>The volume ID of the volume to delete.</p>
+    # @example Delete a volume
+    #   # Example operation for delete_volume
+    #   params = {
+    #     farm_id: "farm-1234567890abcdef1234567890abcdef",
+    #     fleet_id: "fleet-1234567890abcdef1234567890abcdef",
+    #     volume_id: "volume-1234567890abcdef1234567890abcdef"
+    #   }
+    #   options = {}
+    #   response = client.delete_volume(params, options)
+    #   response.to_h #=>
+    #   {}
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     farm_id: "FarmId", # required
+    #     fleet_id: "FleetId", # required
+    #     volume_id: "VolumeId", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_volume(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::DeleteVolumeResponse]
+    def delete_volume(params = {}, options = {})
+      request = build_request(:delete_volume, params)
       request.send_request(options)
     end
 
@@ -1863,11 +2659,15 @@ module Aws::Deadline
     #     },
     #     status: "ACTIVE" # One of: ["ACTIVE", "INACTIVE"], # required
     #     display_name: "ResourceName", # required
-    #     description: "Description",
     #     approximate_dollar_limit: 1.0, # required
     #     usages: { # required
     #       approximate_dollar_usage: 1.0, # required
     #     },
+    #     created_by: "CreatedBy", # required
+    #     created_at: Time.now, # required
+    #     updated_by: "UpdatedBy",
+    #     updated_at: Time.now,
+    #     description: "Description",
     #     actions: [ # required
     #       {
     #         type: "STOP_SCHEDULING_AND_COMPLETE_TASKS" # One of: ["STOP_SCHEDULING_AND_COMPLETE_TASKS", "STOP_SCHEDULING_AND_CANCEL_TASKS"], # required
@@ -1882,10 +2682,6 @@ module Aws::Deadline
     #         end_time: Time.now, # required
     #       }
     #     },
-    #     created_by: "CreatedBy", # required
-    #     created_at: Time.now, # required
-    #     updated_by: "UpdatedBy",
-    #     updated_at: Time.now,
     #     queue_stopped_at: Time.now
     #   }
     # @return [Types::GetBudgetResponse]
@@ -1909,12 +2705,13 @@ module Aws::Deadline
     #   {
     #     farm_id: "FarmId", # required
     #     display_name: "ResourceName", # required
-    #     description: "Description",
-    #     kms_key_arn: "KmsKeyArn", # required
+    #     kms_key_arn: "KmsKeyArn",
     #     created_at: Time.now, # required
     #     created_by: "CreatedBy", # required
     #     updated_at: Time.now,
-    #     updated_by: "UpdatedBy"
+    #     updated_by: "UpdatedBy",
+    #     description: "Description",
+    #     cost_scale_factor: 1.0, # required
     #   }
     # @return [Types::GetFarmResponse]
     def get_farm(params = {}, options = {})
@@ -1941,7 +2738,6 @@ module Aws::Deadline
     #     fleet_id: "FleetId", # required
     #     farm_id: "FarmId", # required
     #     display_name: "ResourceName", # required
-    #     description: "Description",
     #     status: "ACTIVE" # One of: ["ACTIVE", "CREATE_IN_PROGRESS", "UPDATE_IN_PROGRESS", "CREATE_FAILED", "UPDATE_FAILED", "SUSPENDED"], # required
     #     status_message: "String",
     #     auto_scaling_status: "GROWING" # One of: ["GROWING", "STEADY", "SHRINKING"],
@@ -1953,6 +2749,11 @@ module Aws::Deadline
     #       # One of:
     #       customer_managed: {
     #         mode: "NO_SCALING" # One of: ["NO_SCALING", "EVENT_BASED_AUTO_SCALING"], # required
+    #         auto_scaling_configuration: {
+    #           standby_worker_count: 1,
+    #           worker_idle_duration_seconds: 1,
+    #           scale_out_workers_per_minute: 1
+    #         },
     #         worker_capabilities: { # required
     #           v_cpu_count: { # required
     #             min: 1, # required
@@ -2010,7 +2811,7 @@ module Aws::Deadline
     #           accelerator_capabilities: {
     #             selections: [ # required
     #               {
-    #                 name: "t4" # One of: ["t4", "a10g", "l4", "l40s"], # required
+    #                 name: "t4" # One of: ["t4", "a10g", "l4", "l40s", "rtx-pro-server-6000"], # required
     #                 runtime: "AcceleratorRuntime"
     #               }
     #             ],
@@ -2033,6 +2834,11 @@ module Aws::Deadline
     #               name: "AttributeCapabilityName", # required
     #               values: ["AttributeCapabilityValue"], # required
     #             }
+    #           ],
+    #           software_add_ons: [
+    #             {
+    #               name: "docker" # One of: ["docker"], # required
+    #             }
     #           ]
     #         },
     #         instance_market_options: { # required
@@ -2041,9 +2847,26 @@ module Aws::Deadline
     #         vpc_configuration: {
     #           resource_configuration_arns: ["VpcResourceConfigurationArn"]
     #         },
-    #         storage_profile_id: "StorageProfileId"
+    #         storage_profile_id: "StorageProfileId",
+    #         persistent_volume_configuration: {
+    #           size_gi_b: 1,
+    #           iops: 1,
+    #           throughput_mi_b: 1,
+    #           mount_path: "MountPath", # required
+    #           last_used_ttl_hours: 1
+    #         },
+    #         auto_scaling_configuration: {
+    #           standby_worker_count: 1,
+    #           worker_idle_duration_seconds: 1,
+    #           scale_out_workers_per_minute: 1
+    #         }
     #       }
     #     },
+    #     created_at: Time.now, # required
+    #     created_by: "CreatedBy", # required
+    #     updated_at: Time.now,
+    #     updated_by: "UpdatedBy",
+    #     description: "Description",
     #     host_configuration: {
     #       script_body: "HostConfigurationScript", # required
     #       script_timeout_seconds: 1
@@ -2064,10 +2887,6 @@ module Aws::Deadline
     #       ]
     #     },
     #     role_arn: "IamRoleArn", # required
-    #     created_at: Time.now, # required
-    #     created_by: "CreatedBy", # required
-    #     updated_at: Time.now,
-    #     updated_by: "UpdatedBy"
     #   }
     # @return [Types::GetFleetResponse]
     def get_fleet(params = {}, options = {})
@@ -2120,7 +2939,17 @@ module Aws::Deadline
     #         int: "IntString",
     #         float: "FloatString",
     #         string: "ParameterString",
-    #         path: "PathString"
+    #         path: "PathString",
+    #         bool: "BooleanString",
+    #         range_expr: "RangeExprString",
+    #         string_list: ["ParameterString"],
+    #         path_list: ["PathString"],
+    #         int_list: ["IntString"],
+    #         float_list: ["FloatString"],
+    #         bool_list: ["BooleanString"],
+    #         int_list_list: [
+    #           ["IntString"]
+    #         ]
     #       }
     #     },
     #     attachments: {
@@ -2189,16 +3018,16 @@ module Aws::Deadline
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {
-    #     display_name: "ResourceName", # required
-    #     amount_requirement_name: "AmountRequirementName", # required
-    #     max_count: 1, # required
+    #     farm_id: "FarmId", # required
+    #     limit_id: "LimitId", # required
+    #     current_count: 1, # required
     #     created_at: Time.now, # required
     #     created_by: "CreatedBy", # required
     #     updated_at: Time.now,
     #     updated_by: "UpdatedBy",
-    #     farm_id: "FarmId", # required
-    #     limit_id: "LimitId", # required
-    #     current_count: 1, # required
+    #     display_name: "ResourceName", # required
+    #     amount_requirement_name: "AmountRequirementName", # required
+    #     max_count: 1, # required
     #     description: "Description"
     #   }
     # @return [Types::GetLimitResponse]
@@ -2210,8 +3039,7 @@ module Aws::Deadline
     # <p>Gets information about the specified monitor.</p>
     # @param [Hash, Types::GetMonitorRequest] params
     # @option params [String] :monitor_id
-    #   <p>The unique identifier for the monitor. This ID is returned by the
-    #               <code>CreateMonitor</code> operation.</p>
+    #   <p>The unique identifier for the monitor. This ID is returned by the <code>CreateMonitor</code> operation.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     monitor_id: "MonitorId", # required
@@ -2227,6 +3055,7 @@ module Aws::Deadline
     #     url: "Url", # required
     #     role_arn: "IamRoleArn", # required
     #     identity_center_instance_arn: "IdentityCenterInstanceArn", # required
+    #     identity_center_region: "Region",
     #     identity_center_application_arn: "IdentityCenterApplicationArn", # required
     #     created_at: Time.now, # required
     #     created_by: "CreatedBy", # required
@@ -2236,6 +3065,38 @@ module Aws::Deadline
     # @return [Types::GetMonitorResponse]
     def get_monitor(params = {}, options = {})
       request = build_request(:get_monitor, params)
+      request.send_request(options)
+    end
+
+    # <p>Gets the settings for a Deadline Cloud monitor.</p>
+    # @param [Hash, Types::GetMonitorSettingsRequest] params
+    # @option params [String] :monitor_id
+    #   <p>The unique identifier of the monitor. This ID is returned by the <code>CreateMonitor</code> operation, and is included in the response to the <code>ListMonitors</code> operation.</p>
+    # @example Get monitor settings
+    #   # Example operation for get_monitor_settings
+    #   params = {
+    #     monitor_id: "monitor-1234567890abcdef1234567890abcdef"
+    #   }
+    #   options = {}
+    #   response = client.get_monitor_settings(params, options)
+    #   response.to_h #=>
+    #   {}
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     monitor_id: "MonitorId", # required
+    #   }
+    #   options = {}
+    #   response = client.get_monitor_settings(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     settings: { # required
+    #       "SettingKey" => "SettingValue"
+    #     }
+    #   }
+    # @return [Types::GetMonitorSettingsResponse]
+    def get_monitor_settings(params = {}, options = {})
+      request = build_request(:get_monitor_settings, params)
       request.send_request(options)
     end
 
@@ -2255,13 +3116,17 @@ module Aws::Deadline
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {
+    #     farm_id: "FarmId", # required
     #     queue_id: "QueueId", # required
     #     display_name: "ResourceName", # required
-    #     description: "Description",
-    #     farm_id: "FarmId", # required
     #     status: "IDLE" # One of: ["IDLE", "SCHEDULING", "SCHEDULING_BLOCKED"], # required
     #     default_budget_action: "NONE" # One of: ["NONE", "STOP_SCHEDULING_AND_COMPLETE_TASKS", "STOP_SCHEDULING_AND_CANCEL_TASKS"], # required
     #     blocked_reason: "NO_BUDGET_CONFIGURED" # One of: ["NO_BUDGET_CONFIGURED", "BUDGET_THRESHOLD_REACHED"],
+    #     created_at: Time.now, # required
+    #     created_by: "CreatedBy", # required
+    #     updated_at: Time.now,
+    #     updated_by: "UpdatedBy",
+    #     description: "Description",
     #     job_attachment_settings: {
     #       s3_bucket_name: "S3BucketName", # required
     #       root_prefix: "S3Prefix", # required
@@ -2280,10 +3145,31 @@ module Aws::Deadline
     #       },
     #       run_as: "QUEUE_CONFIGURED_USER" # One of: ["QUEUE_CONFIGURED_USER", "WORKER_AGENT_USER"], # required
     #     },
-    #     created_at: Time.now, # required
-    #     created_by: "CreatedBy", # required
-    #     updated_at: Time.now,
-    #     updated_by: "UpdatedBy"
+    #     scheduling_configuration: {
+    #       # One of:
+    #       priority_fifo: {
+    #       },
+    #       priority_balanced: {
+    #         rendering_task_buffer: 1
+    #       },
+    #       weighted_balanced: {
+    #         priority_weight: 1.0,
+    #         error_weight: 1.0,
+    #         submission_time_weight: 1.0,
+    #         rendering_task_weight: 1.0,
+    #         rendering_task_buffer: 1,
+    #         max_priority_override: {
+    #           # One of:
+    #           always_schedule_first: {
+    #           }
+    #         },
+    #         min_priority_override: {
+    #           # One of:
+    #           always_schedule_last: {
+    #           }
+    #         }
+    #       }
+    #     }
     #   }
     # @return [Types::GetQueueResponse]
     def get_queue(params = {}, options = {})
@@ -2378,13 +3264,13 @@ module Aws::Deadline
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {
-    #     created_at: Time.now, # required
-    #     created_by: "CreatedBy", # required
-    #     updated_at: Time.now,
-    #     updated_by: "UpdatedBy",
     #     queue_id: "QueueId", # required
     #     limit_id: "LimitId", # required
     #     status: "ACTIVE" # One of: ["ACTIVE", "STOP_LIMIT_USAGE_AND_COMPLETE_TASKS", "STOP_LIMIT_USAGE_AND_CANCEL_TASKS", "STOPPED"], # required
+    #     created_at: Time.now, # required
+    #     created_by: "CreatedBy", # required
+    #     updated_at: Time.now,
+    #     updated_by: "UpdatedBy"
     #   }
     # @return [Types::GetQueueLimitAssociationResponse]
     def get_queue_limit_association(params = {}, options = {})
@@ -2418,6 +3304,11 @@ module Aws::Deadline
     #     fleet_id: "FleetId", # required
     #     worker_id: "WorkerId", # required
     #     started_at: Time.now, # required
+    #     lifecycle_status: "STARTED" # One of: ["STARTED", "UPDATE_IN_PROGRESS", "UPDATE_SUCCEEDED", "UPDATE_FAILED", "ENDED"], # required
+    #     ended_at: Time.now,
+    #     target_lifecycle_status: "ENDED" # One of: ["ENDED"],
+    #     updated_at: Time.now,
+    #     updated_by: "UpdatedBy",
     #     log: { # required
     #       log_driver: "LogDriver", # required
     #       options: {
@@ -2428,11 +3319,6 @@ module Aws::Deadline
     #       },
     #       error: "LogError"
     #     },
-    #     lifecycle_status: "STARTED" # One of: ["STARTED", "UPDATE_IN_PROGRESS", "UPDATE_SUCCEEDED", "UPDATE_FAILED", "ENDED"], # required
-    #     ended_at: Time.now,
-    #     updated_at: Time.now,
-    #     updated_by: "UpdatedBy",
-    #     target_lifecycle_status: "ENDED" # One of: ["ENDED"],
     #     host_properties: {
     #       ip_addresses: {
     #         ip_v4_addresses: ["IpV4Address"],
@@ -2487,9 +3373,21 @@ module Aws::Deadline
     #     ended_at: Time.now,
     #     worker_updated_at: Time.now,
     #     progress_percent: 1.0,
+    #     manifests: [
+    #       {
+    #         output_manifest_path: "String",
+    #         output_manifest_hash: "String"
+    #       }
+    #     ],
     #     session_id: "SessionId", # required
     #     process_exit_code: 1,
     #     progress_message: "SessionActionProgressMessage",
+    #     acquired_limits: [
+    #       {
+    #         limit_id: "LimitId", # required
+    #         count: 1, # required
+    #       }
+    #     ],
     #     definition: { # required
     #       # One of:
     #       env_enter: {
@@ -2515,19 +3413,7 @@ module Aws::Deadline
     #       sync_input_job_attachments: {
     #         step_id: "StepId"
     #       }
-    #     },
-    #     acquired_limits: [
-    #       {
-    #         limit_id: "LimitId", # required
-    #         count: 1, # required
-    #       }
-    #     ],
-    #     manifests: [
-    #       {
-    #         output_manifest_path: "String",
-    #         output_manifest_hash: "String"
-    #       }
-    #     ]
+    #     }
     #   }
     # @return [Types::GetSessionActionResponse]
     def get_session_action(params = {}, options = {})
@@ -2535,28 +3421,22 @@ module Aws::Deadline
       request.send_request(options)
     end
 
-    # <p>Gets a set of statistics for queues or farms. Before you can call the
-    #             <code>GetSessionStatisticsAggregation</code> operation, you must first call the
-    #             <code>StartSessionsStatisticsAggregation</code> operation. Statistics are available for
-    #          1 hour after you call the <code>StartSessionsStatisticsAggregation</code> operation.</p>
+    # <p>Gets a set of statistics for queues or farms. Before you can call the <code>GetSessionStatisticsAggregation</code> operation, you must first call the <code>StartSessionsStatisticsAggregation</code> operation. Statistics are available for 1 hour after you call the <code>StartSessionsStatisticsAggregation</code> operation.</p>
     # @param [Hash, Types::GetSessionsStatisticsAggregationRequest] params
     # @option params [String] :farm_id
-    #   <p>The identifier of the farm to include in the statistics. This should be the same as the
-    #            farm ID used in the call to the <code>StartSessionsStatisticsAggregation</code>
-    #            operation.</p>
-    # @option params [String] :aggregation_id
-    #   <p>The identifier returned by the <code>StartSessionsStatisticsAggregation</code> operation
-    #            that identifies the aggregated statistics.</p>
-    # @option params [Integer] :max_results
-    #   <p>The maximum number of results to return. Use this parameter with <code>NextToken</code> to get results as a set of sequential pages.</p>
+    #   <p>The identifier of the farm to include in the statistics. This should be the same as the farm ID used in the call to the <code>StartSessionsStatisticsAggregation</code> operation.</p>
     # @option params [String] :next_token
     #   <p>The token for the next set of results, or <code>null</code> to start from the beginning.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return. Use this parameter with <code>NextToken</code> to get results as a set of sequential pages.</p>
+    # @option params [String] :aggregation_id
+    #   <p>The identifier returned by the <code>StartSessionsStatisticsAggregation</code> operation that identifies the aggregated statistics.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     farm_id: "FarmId", # required
-    #     aggregation_id: "AggregationId", # required
+    #     next_token: "NextToken",
     #     max_results: 1,
-    #     next_token: "String"
+    #     aggregation_id: "AggregationId", # required
     #   }
     #   options = {}
     #   response = client.get_sessions_statistics_aggregation(params, options)
@@ -2570,7 +3450,7 @@ module Aws::Deadline
     #         job_id: "JobId",
     #         job_name: "JobName",
     #         user_id: "UserId",
-    #         usage_type: "COMPUTE" # One of: ["COMPUTE", "LICENSE"],
+    #         usage_type: "COMPUTE" # One of: ["COMPUTE", "LICENSE", "PERSISTENT_VOLUME"],
     #         license_product: "LicenseProduct",
     #         instance_type: "InstanceType",
     #         count: 1, # required
@@ -2590,9 +3470,9 @@ module Aws::Deadline
     #         aggregation_end_time: Time.now
     #       }
     #     ],
-    #     next_token: "String",
     #     status: "IN_PROGRESS" # One of: ["IN_PROGRESS", "TIMEOUT", "FAILED", "COMPLETED"], # required
-    #     status_message: "String"
+    #     status_message: "String",
+    #     next_token: "NextToken"
     #   }
     # @return [Types::GetSessionsStatisticsAggregationResponse]
     def get_sessions_statistics_aggregation(params = {}, options = {})
@@ -2666,6 +3546,11 @@ module Aws::Deadline
     #         {
     #           name: "StepParameterName", # required
     #           type: "INT" # One of: ["INT", "FLOAT", "STRING", "PATH", "CHUNK_INT"], # required
+    #           chunks: {
+    #             default_task_count: 1, # required
+    #             target_runtime_seconds: 1,
+    #             range_constraint: "CONTIGUOUS" # One of: ["CONTIGUOUS", "NONCONTIGUOUS"], # required
+    #           }
     #         }
     #       ],
     #       combination: "CombinationExpression"
@@ -2782,6 +3667,11 @@ module Aws::Deadline
     #     run_status: "PENDING" # One of: ["PENDING", "READY", "ASSIGNED", "STARTING", "SCHEDULED", "INTERRUPTING", "RUNNING", "SUSPENDED", "CANCELED", "FAILED", "SUCCEEDED", "NOT_COMPATIBLE"], # required
     #     target_run_status: "READY" # One of: ["READY", "FAILED", "SUCCEEDED", "CANCELED", "SUSPENDED", "PENDING"],
     #     failure_retry_count: 1,
+    #     started_at: Time.now,
+    #     ended_at: Time.now,
+    #     updated_at: Time.now,
+    #     updated_by: "UpdatedBy",
+    #     latest_session_action_id: "SessionActionId",
     #     parameters: {
     #       "String" => {
     #         # One of:
@@ -2791,16 +3681,62 @@ module Aws::Deadline
     #         path: "PathString",
     #         chunk_int: "String"
     #       }
-    #     },
-    #     started_at: Time.now,
-    #     ended_at: Time.now,
-    #     updated_at: Time.now,
-    #     updated_by: "UpdatedBy",
-    #     latest_session_action_id: "SessionActionId"
+    #     }
     #   }
     # @return [Types::GetTaskResponse]
     def get_task(params = {}, options = {})
       request = build_request(:get_task, params)
+      request.send_request(options)
+    end
+
+    # <p>Gets a persistent volume.</p>
+    # @param [Hash, Types::GetVolumeRequest] params
+    # @option params [String] :farm_id
+    #   <p>The farm ID of the farm that contains the fleet.</p>
+    # @option params [String] :fleet_id
+    #   <p>The fleet ID of the fleet that contains the volume.</p>
+    # @option params [String] :volume_id
+    #   <p>The volume ID of the volume to retrieve.</p>
+    # @example Get a volume
+    #   # Example operation for get_volume
+    #   params = {
+    #     farm_id: "farm-1234567890abcdef1234567890abcdef",
+    #     fleet_id: "fleet-1234567890abcdef1234567890abcdef",
+    #     volume_id: "volume-1234567890abcdef1234567890abcdef"
+    #   }
+    #   options = {}
+    #   response = client.get_volume(params, options)
+    #   response.to_h #=>
+    #   {}
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     farm_id: "FarmId", # required
+    #     fleet_id: "FleetId", # required
+    #     volume_id: "VolumeId", # required
+    #   }
+    #   options = {}
+    #   response = client.get_volume(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     volume_id: "VolumeId", # required
+    #     farm_id: "FarmId", # required
+    #     fleet_id: "FleetId", # required
+    #     state: "PENDING_CREATION" # One of: ["PENDING_CREATION", "PENDING_ATTACHMENT", "IN_USE", "AVAILABLE", "PENDING_DELETION"], # required
+    #     size_gi_b: 1, # required
+    #     availability_zone_id: "String", # required
+    #     attached_worker_id: "WorkerId",
+    #     volume_type: "gp3" # One of: ["gp3"], # required
+    #     iops: 1,
+    #     throughput_mi_b: 1,
+    #     created_at: Time.now, # required
+    #     last_assigned_at: Time.now,
+    #     last_released_at: Time.now,
+    #     expires_at: Time.now
+    #   }
+    # @return [Types::GetVolumeResponse]
+    def get_volume(params = {}, options = {})
+      request = build_request(:get_volume, params)
       request.send_request(options)
     end
 
@@ -2865,7 +3801,7 @@ module Aws::Deadline
     #   <p>The maximum number of results to return. Use this parameter with <code>NextToken</code> to get results as a set of sequential pages.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     next_token: "String",
+    #     next_token: "NextToken",
     #     max_results: 1
     #   }
     #   options = {}
@@ -2881,7 +3817,7 @@ module Aws::Deadline
     #         port: 1, # required
     #       }
     #     ],
-    #     next_token: "String"
+    #     next_token: "NextToken"
     #   }
     # @return [Types::ListAvailableMeteredProductsResponse]
     def list_available_metered_products(params = {}, options = {})
@@ -2891,18 +3827,18 @@ module Aws::Deadline
 
     # <p>A list of budgets in a farm.</p>
     # @param [Hash, Types::ListBudgetsRequest] params
-    # @option params [String] :next_token
-    #   <p>The token for the next set of results, or <code>null</code> to start from the beginning.</p>
     # @option params [String] :farm_id
     #   <p>The farm ID associated with the budgets.</p>
+    # @option params [String] :next_token
+    #   <p>The token for the next set of results, or <code>null</code> to start from the beginning.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return. Use this parameter with <code>NextToken</code> to get results as a set of sequential pages.</p>
     # @option params [String] :status
     #   <p>The status to list for the budgets.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     next_token: "String",
     #     farm_id: "FarmId", # required
+    #     next_token: "NextToken",
     #     max_results: 1,
     #     status: "ACTIVE" # One of: ["ACTIVE", "INACTIVE"]
     #   }
@@ -2911,7 +3847,6 @@ module Aws::Deadline
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {
-    #     next_token: "String",
     #     budgets: [ # required
     #       {
     #         budget_id: "BudgetId", # required
@@ -2921,7 +3856,6 @@ module Aws::Deadline
     #         },
     #         status: "ACTIVE" # One of: ["ACTIVE", "INACTIVE"], # required
     #         display_name: "ResourceName", # required
-    #         description: "Description",
     #         approximate_dollar_limit: 1.0, # required
     #         usages: { # required
     #           approximate_dollar_usage: 1.0, # required
@@ -2929,9 +3863,11 @@ module Aws::Deadline
     #         created_by: "CreatedBy", # required
     #         created_at: Time.now, # required
     #         updated_by: "UpdatedBy",
-    #         updated_at: Time.now
+    #         updated_at: Time.now,
+    #         description: "Description"
     #       }
-    #     ]
+    #     ],
+    #     next_token: "NextToken"
     #   }
     # @return [Types::ListBudgetsResponse]
     def list_budgets(params = {}, options = {})
@@ -2950,7 +3886,7 @@ module Aws::Deadline
     # @example Request syntax with placeholder values
     #   params = {
     #     farm_id: "FarmId", # required
-    #     next_token: "String",
+    #     next_token: "NextToken",
     #     max_results: 1
     #   }
     #   options = {}
@@ -2967,7 +3903,7 @@ module Aws::Deadline
     #         membership_level: "VIEWER" # One of: ["VIEWER", "CONTRIBUTOR", "OWNER", "MANAGER"], # required
     #       }
     #     ],
-    #     next_token: "String"
+    #     next_token: "NextToken"
     #   }
     # @return [Types::ListFarmMembersResponse]
     def list_farm_members(params = {}, options = {})
@@ -2979,22 +3915,21 @@ module Aws::Deadline
     # @param [Hash, Types::ListFarmsRequest] params
     # @option params [String] :next_token
     #   <p>The token for the next set of results, or <code>null</code> to start from the beginning.</p>
-    # @option params [String] :principal_id
-    #   <p>The principal ID of the member to list on the farm.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return. Use this parameter with <code>NextToken</code> to get results as a set of sequential pages.</p>
+    # @option params [String] :principal_id
+    #   <p>The principal ID of the member to list on the farm.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     next_token: "String",
-    #     principal_id: "IdentityCenterPrincipalId",
-    #     max_results: 1
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     principal_id: "IdentityCenterPrincipalId"
     #   }
     #   options = {}
     #   response = client.list_farms(params, options)
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {
-    #     next_token: "String",
     #     farms: [ # required
     #       {
     #         farm_id: "FarmId", # required
@@ -3005,7 +3940,8 @@ module Aws::Deadline
     #         updated_at: Time.now,
     #         updated_by: "UpdatedBy"
     #       }
-    #     ]
+    #     ],
+    #     next_token: "NextToken"
     #   }
     # @return [Types::ListFarmsResponse]
     def list_farms(params = {}, options = {})
@@ -3027,7 +3963,7 @@ module Aws::Deadline
     #   params = {
     #     farm_id: "FarmId", # required
     #     fleet_id: "FleetId", # required
-    #     next_token: "String",
+    #     next_token: "NextToken",
     #     max_results: 1
     #   }
     #   options = {}
@@ -3045,7 +3981,7 @@ module Aws::Deadline
     #         membership_level: "VIEWER" # One of: ["VIEWER", "CONTRIBUTOR", "OWNER", "MANAGER"], # required
     #       }
     #     ],
-    #     next_token: "String"
+    #     next_token: "NextToken"
     #   }
     # @return [Types::ListFleetMembersResponse]
     def list_fleet_members(params = {}, options = {})
@@ -3057,27 +3993,24 @@ module Aws::Deadline
     # @param [Hash, Types::ListFleetsRequest] params
     # @option params [String] :farm_id
     #   <p>The farm ID of the fleets.</p>
-    # @option params [String] :principal_id
-    #   <p>The principal ID of the members to include in the fleet.</p>
-    # @option params [String] :display_name
-    #   <p>The display names of a list of fleets.</p>
-    #            <important>
-    #               <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>
-    #            </important>
-    # @option params [String] :status
-    #   <p>The status of the fleet.</p>
     # @option params [String] :next_token
     #   <p>The token for the next set of results, or <code>null</code> to start from the beginning.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return. Use this parameter with <code>NextToken</code> to get results as a set of sequential pages.</p>
+    # @option params [String] :principal_id
+    #   <p>The principal ID of the members to include in the fleet.</p>
+    # @option params [String] :display_name
+    #   <p>The display names of a list of fleets.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>
+    # @option params [String] :status
+    #   <p>The status of the fleet.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     farm_id: "FarmId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
     #     principal_id: "IdentityCenterPrincipalId",
     #     display_name: "ResourceName",
-    #     status: "ACTIVE" # One of: ["ACTIVE", "CREATE_IN_PROGRESS", "UPDATE_IN_PROGRESS", "CREATE_FAILED", "UPDATE_FAILED", "SUSPENDED"],
-    #     next_token: "String",
-    #     max_results: 1
+    #     status: "ACTIVE" # One of: ["ACTIVE", "CREATE_IN_PROGRESS", "UPDATE_IN_PROGRESS", "CREATE_FAILED", "UPDATE_FAILED", "SUSPENDED"]
     #   }
     #   options = {}
     #   response = client.list_fleets(params, options)
@@ -3100,6 +4033,11 @@ module Aws::Deadline
     #           # One of:
     #           customer_managed: {
     #             mode: "NO_SCALING" # One of: ["NO_SCALING", "EVENT_BASED_AUTO_SCALING"], # required
+    #             auto_scaling_configuration: {
+    #               standby_worker_count: 1,
+    #               worker_idle_duration_seconds: 1,
+    #               scale_out_workers_per_minute: 1
+    #             },
     #             worker_capabilities: { # required
     #               v_cpu_count: { # required
     #                 min: 1, # required
@@ -3157,7 +4095,7 @@ module Aws::Deadline
     #               accelerator_capabilities: {
     #                 selections: [ # required
     #                   {
-    #                     name: "t4" # One of: ["t4", "a10g", "l4", "l40s"], # required
+    #                     name: "t4" # One of: ["t4", "a10g", "l4", "l40s", "rtx-pro-server-6000"], # required
     #                     runtime: "AcceleratorRuntime"
     #                   }
     #                 ],
@@ -3180,6 +4118,11 @@ module Aws::Deadline
     #                   name: "AttributeCapabilityName", # required
     #                   values: ["AttributeCapabilityValue"], # required
     #                 }
+    #               ],
+    #               software_add_ons: [
+    #                 {
+    #                   name: "docker" # One of: ["docker"], # required
+    #                 }
     #               ]
     #             },
     #             instance_market_options: { # required
@@ -3188,7 +4131,19 @@ module Aws::Deadline
     #             vpc_configuration: {
     #               resource_configuration_arns: ["VpcResourceConfigurationArn"]
     #             },
-    #             storage_profile_id: "StorageProfileId"
+    #             storage_profile_id: "StorageProfileId",
+    #             persistent_volume_configuration: {
+    #               size_gi_b: 1,
+    #               iops: 1,
+    #               throughput_mi_b: 1,
+    #               mount_path: "MountPath", # required
+    #               last_used_ttl_hours: 1
+    #             },
+    #             auto_scaling_configuration: {
+    #               standby_worker_count: 1,
+    #               worker_idle_duration_seconds: 1,
+    #               scale_out_workers_per_minute: 1
+    #             }
     #           }
     #         },
     #         created_at: Time.now, # required
@@ -3197,7 +4152,7 @@ module Aws::Deadline
     #         updated_by: "UpdatedBy"
     #       }
     #     ],
-    #     next_token: "String"
+    #     next_token: "NextToken"
     #   }
     # @return [Types::ListFleetsResponse]
     def list_fleets(params = {}, options = {})
@@ -3222,7 +4177,7 @@ module Aws::Deadline
     #     farm_id: "FarmId", # required
     #     queue_id: "QueueId", # required
     #     job_id: "JobId", # required
-    #     next_token: "String",
+    #     next_token: "NextToken",
     #     max_results: 1
     #   }
     #   options = {}
@@ -3241,7 +4196,7 @@ module Aws::Deadline
     #         membership_level: "VIEWER" # One of: ["VIEWER", "CONTRIBUTOR", "OWNER", "MANAGER"], # required
     #       }
     #     ],
-    #     next_token: "String"
+    #     next_token: "NextToken"
     #   }
     # @return [Types::ListJobMembersResponse]
     def list_job_members(params = {}, options = {})
@@ -3253,10 +4208,10 @@ module Aws::Deadline
     # @param [Hash, Types::ListJobParameterDefinitionsRequest] params
     # @option params [String] :farm_id
     #   <p>The farm ID of the job to list.</p>
-    # @option params [String] :job_id
-    #   <p>The job ID to include on the list.</p>
     # @option params [String] :queue_id
     #   <p>The queue ID to include on the list.</p>
+    # @option params [String] :job_id
+    #   <p>The job ID to include on the list.</p>
     # @option params [String] :next_token
     #   <p>The token for the next set of results, or <code>null</code> to start from the beginning.</p>
     # @option params [Integer] :max_results
@@ -3264,9 +4219,9 @@ module Aws::Deadline
     # @example Request syntax with placeholder values
     #   params = {
     #     farm_id: "FarmId", # required
-    #     job_id: "JobId", # required
     #     queue_id: "QueueId", # required
-    #     next_token: "String",
+    #     job_id: "JobId", # required
+    #     next_token: "NextToken",
     #     max_results: 1
     #   }
     #   options = {}
@@ -3275,7 +4230,7 @@ module Aws::Deadline
     #   response.to_h #=>
     #   {
     #     job_parameter_definitions: [""null""], # required
-    #     next_token: "String"
+    #     next_token: "NextToken"
     #   }
     # @return [Types::ListJobParameterDefinitionsResponse]
     def list_job_parameter_definitions(params = {}, options = {})
@@ -3287,21 +4242,21 @@ module Aws::Deadline
     # @param [Hash, Types::ListJobsRequest] params
     # @option params [String] :farm_id
     #   <p>The farm ID for the jobs.</p>
-    # @option params [String] :principal_id
-    #   <p>The principal ID of the members on the jobs.</p>
     # @option params [String] :queue_id
     #   <p>The queue ID for the job.</p>
     # @option params [String] :next_token
     #   <p>The token for the next set of results, or <code>null</code> to start from the beginning.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return. Use this parameter with <code>NextToken</code> to get results as a set of sequential pages.</p>
+    # @option params [String] :principal_id
+    #   <p>The principal ID of the members on the jobs.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     farm_id: "FarmId", # required
-    #     principal_id: "IdentityCenterPrincipalId",
     #     queue_id: "QueueId", # required
-    #     next_token: "String",
-    #     max_results: 1
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     principal_id: "IdentityCenterPrincipalId"
     #   }
     #   options = {}
     #   response = client.list_jobs(params, options)
@@ -3333,7 +4288,7 @@ module Aws::Deadline
     #         source_job_id: "JobId"
     #       }
     #     ],
-    #     next_token: "String"
+    #     next_token: "NextToken"
     #   }
     # @return [Types::ListJobsResponse]
     def list_jobs(params = {}, options = {})
@@ -3349,7 +4304,7 @@ module Aws::Deadline
     #   <p>The maximum number of results to return. Use this parameter with <code>NextToken</code> to get results as a set of sequential pages.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     next_token: "String",
+    #     next_token: "NextToken",
     #     max_results: 1
     #   }
     #   options = {}
@@ -3365,7 +4320,7 @@ module Aws::Deadline
     #         vpc_id: "VpcId"
     #       }
     #     ],
-    #     next_token: "String"
+    #     next_token: "NextToken"
     #   }
     # @return [Types::ListLicenseEndpointsResponse]
     def list_license_endpoints(params = {}, options = {})
@@ -3384,7 +4339,7 @@ module Aws::Deadline
     # @example Request syntax with placeholder values
     #   params = {
     #     farm_id: "FarmId", # required
-    #     next_token: "String",
+    #     next_token: "NextToken",
     #     max_results: 1
     #   }
     #   options = {}
@@ -3394,23 +4349,118 @@ module Aws::Deadline
     #   {
     #     limits: [ # required
     #       {
-    #         display_name: "ResourceName", # required
-    #         amount_requirement_name: "AmountRequirementName", # required
-    #         max_count: 1, # required
+    #         farm_id: "FarmId", # required
+    #         limit_id: "LimitId", # required
+    #         current_count: 1, # required
     #         created_at: Time.now, # required
     #         created_by: "CreatedBy", # required
     #         updated_at: Time.now,
     #         updated_by: "UpdatedBy",
-    #         farm_id: "FarmId", # required
-    #         limit_id: "LimitId", # required
-    #         current_count: 1, # required
+    #         display_name: "ResourceName", # required
+    #         amount_requirement_name: "AmountRequirementName", # required
+    #         max_count: 1, # required
     #       }
     #     ],
-    #     next_token: "String"
+    #     next_token: "NextToken"
     #   }
     # @return [Types::ListLimitsResponse]
     def list_limits(params = {}, options = {})
       request = build_request(:list_limits, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists the Deadline Cloud resource memberships associated with a specified IAM Identity Center principal, optionally filtered by the requested resource types.</p>
+    # @param [Hash, Types::ListMembershipsRequest] params
+    # @option params [String] :next_token
+    #   <p>The token for the next set of results, or <code>null</code> to start from the beginning.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return. Use this parameter with <code>NextToken</code> to get results as a set of sequential pages.</p>
+    # @option params [String] :principal_id
+    #   <p>The ID of the IAM Identity Center principal whose Deadline Cloud resource memberships you want to list.</p>
+    # @option params [String] :identity_store_id
+    #   <p>The identity store ID that contains the principal. This parameter is required for callers that do not use a monitor session.</p>
+    # @option params [String] :identity_center_region
+    #   <p>The Region of the IAM Identity Center instance. If not provided, the service defaults to the Amazon Web Services Region in which you make the request.</p>
+    # @option params [Array<String>] :resource_types
+    #   <p>The resource types to include when listing the principal's memberships. If not specified, memberships for all supported resource types are returned.</p>
+    # @example List memberships using a cross-region identity store
+    #   # Example operation for list_memberships
+    #   params = {
+    #     principal_id: "12345678-1234-1234-1234-123456789abc",
+    #     identity_store_id: "d-1234567890",
+    #     identity_center_region: "us-east-1",
+    #     resource_types: [
+    #       QUEUE,
+    #       JOB
+    #     ]
+    #   }
+    #   options = {}
+    #   response = client.list_memberships(params, options)
+    #   response.to_h #=>
+    #   {}
+    # @example List a Monitor user's memberships of every resource type
+    #   # Example operation for list_memberships
+    #   params = {
+    #     principal_id: "12345678-1234-1234-1234-123456789abc"
+    #   }
+    #   options = {}
+    #   response = client.list_memberships(params, options)
+    #   response.to_h #=>
+    #   {}
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     principal_id: "IdentityCenterPrincipalId", # required
+    #     identity_store_id: "IdentityStoreId",
+    #     identity_center_region: "Region",
+    #     resource_types: ["FARM" # One of: ["FARM", "QUEUE", "FLEET", "JOB"]]
+    #   }
+    #   options = {}
+    #   response = client.list_memberships(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     memberships: [{ # required
+    #       # One of:
+    #       farm: {
+    #         farm_id: "FarmId", # required
+    #         principal_id: "IdentityCenterPrincipalId", # required
+    #         principal_type: "USER" # One of: ["USER", "GROUP"], # required
+    #         identity_store_id: "IdentityStoreId", # required
+    #         membership_level: "VIEWER" # One of: ["VIEWER", "CONTRIBUTOR", "OWNER", "MANAGER"], # required
+    #       },
+    #       queue: {
+    #         farm_id: "FarmId", # required
+    #         queue_id: "QueueId", # required
+    #         principal_id: "IdentityCenterPrincipalId", # required
+    #         principal_type: "USER" # One of: ["USER", "GROUP"], # required
+    #         identity_store_id: "IdentityStoreId", # required
+    #         membership_level: "VIEWER" # One of: ["VIEWER", "CONTRIBUTOR", "OWNER", "MANAGER"], # required
+    #       },
+    #       fleet: {
+    #         farm_id: "FarmId", # required
+    #         fleet_id: "FleetId", # required
+    #         principal_id: "IdentityCenterPrincipalId", # required
+    #         principal_type: "USER" # One of: ["USER", "GROUP"], # required
+    #         identity_store_id: "IdentityStoreId", # required
+    #         membership_level: "VIEWER" # One of: ["VIEWER", "CONTRIBUTOR", "OWNER", "MANAGER"], # required
+    #       },
+    #       job: {
+    #         farm_id: "FarmId", # required
+    #         queue_id: "QueueId", # required
+    #         job_id: "JobId", # required
+    #         principal_id: "IdentityCenterPrincipalId", # required
+    #         principal_type: "USER" # One of: ["USER", "GROUP"], # required
+    #         identity_store_id: "IdentityStoreId", # required
+    #         membership_level: "VIEWER" # One of: ["VIEWER", "CONTRIBUTOR", "OWNER", "MANAGER"], # required
+    #       }
+    #     }],
+    #     next_token: "NextToken"
+    #   }
+    # @return [Types::ListMembershipsResponse]
+    def list_memberships(params = {}, options = {})
+      request = build_request(:list_memberships, params)
       request.send_request(options)
     end
 
@@ -3425,7 +4475,7 @@ module Aws::Deadline
     # @example Request syntax with placeholder values
     #   params = {
     #     license_endpoint_id: "LicenseEndpointId", # required
-    #     next_token: "String",
+    #     next_token: "NextToken",
     #     max_results: 1
     #   }
     #   options = {}
@@ -3441,7 +4491,7 @@ module Aws::Deadline
     #         port: 1, # required
     #       }
     #     ],
-    #     next_token: "String"
+    #     next_token: "NextToken"
     #   }
     # @return [Types::ListMeteredProductsResponse]
     def list_metered_products(params = {}, options = {})
@@ -3457,7 +4507,7 @@ module Aws::Deadline
     #   <p>The maximum number of results to return. Use this parameter with <code>NextToken</code> to get results as a set of sequential pages.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     next_token: "String",
+    #     next_token: "NextToken",
     #     max_results: 1
     #   }
     #   options = {}
@@ -3465,7 +4515,6 @@ module Aws::Deadline
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {
-    #     next_token: "String",
     #     monitors: [ # required
     #       {
     #         monitor_id: "MonitorId", # required
@@ -3474,13 +4523,15 @@ module Aws::Deadline
     #         url: "Url", # required
     #         role_arn: "IamRoleArn", # required
     #         identity_center_instance_arn: "IdentityCenterInstanceArn", # required
+    #         identity_center_region: "Region",
     #         identity_center_application_arn: "IdentityCenterApplicationArn", # required
     #         created_at: Time.now, # required
     #         created_by: "CreatedBy", # required
     #         updated_at: Time.now,
     #         updated_by: "UpdatedBy"
     #       }
-    #     ]
+    #     ],
+    #     next_token: "NextToken"
     #   }
     # @return [Types::ListMonitorsResponse]
     def list_monitors(params = {}, options = {})
@@ -3502,7 +4553,7 @@ module Aws::Deadline
     #   params = {
     #     farm_id: "FarmId", # required
     #     queue_id: "QueueId", # required
-    #     next_token: "String",
+    #     next_token: "NextToken",
     #     max_results: 1
     #   }
     #   options = {}
@@ -3517,7 +4568,7 @@ module Aws::Deadline
     #         priority: 1, # required
     #       }
     #     ],
-    #     next_token: "String"
+    #     next_token: "NextToken"
     #   }
     # @return [Types::ListQueueEnvironmentsResponse]
     def list_queue_environments(params = {}, options = {})
@@ -3529,21 +4580,21 @@ module Aws::Deadline
     # @param [Hash, Types::ListQueueFleetAssociationsRequest] params
     # @option params [String] :farm_id
     #   <p>The farm ID for the queue-fleet association list.</p>
-    # @option params [String] :queue_id
-    #   <p>The queue ID for the queue-fleet association list.</p>
-    # @option params [String] :fleet_id
-    #   <p>The fleet ID for the queue-fleet association list.</p>
     # @option params [String] :next_token
     #   <p>The token for the next set of results, or <code>null</code> to start from the beginning.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return. Use this parameter with <code>NextToken</code> to get results as a set of sequential pages.</p>
+    # @option params [String] :queue_id
+    #   <p>The queue ID for the queue-fleet association list.</p>
+    # @option params [String] :fleet_id
+    #   <p>The fleet ID for the queue-fleet association list.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     farm_id: "FarmId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
     #     queue_id: "QueueId",
-    #     fleet_id: "FleetId",
-    #     next_token: "String",
-    #     max_results: 1
+    #     fleet_id: "FleetId"
     #   }
     #   options = {}
     #   response = client.list_queue_fleet_associations(params, options)
@@ -3561,7 +4612,7 @@ module Aws::Deadline
     #         updated_by: "UpdatedBy"
     #       }
     #     ],
-    #     next_token: "String"
+    #     next_token: "NextToken"
     #   }
     # @return [Types::ListQueueFleetAssociationsResponse]
     def list_queue_fleet_associations(params = {}, options = {})
@@ -3573,25 +4624,21 @@ module Aws::Deadline
     # @param [Hash, Types::ListQueueLimitAssociationsRequest] params
     # @option params [String] :farm_id
     #   <p>The unique identifier of the farm that contains the limits and associations.</p>
-    # @option params [String] :queue_id
-    #   <p>Specifies that the operation should return only the queue limit associations for the
-    #            specified queue. If you specify both the <code>queueId</code> and the <code>limitId</code>,
-    #            only the specified limit is returned if it exists.</p>
-    # @option params [String] :limit_id
-    #   <p>Specifies that the operation should return only the queue limit associations for the
-    #            specified limit. If you specify both the <code>queueId</code> and the <code>limitId</code>,
-    #            only the specified limit is returned if it exists.</p>
     # @option params [String] :next_token
     #   <p>The token for the next set of results, or <code>null</code> to start from the beginning.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of associations to return in each page of results.</p>
+    # @option params [String] :queue_id
+    #   <p>Specifies that the operation should return only the queue limit associations for the specified queue. If you specify both the <code>queueId</code> and the <code>limitId</code>, only the specified limit is returned if it exists.</p>
+    # @option params [String] :limit_id
+    #   <p>Specifies that the operation should return only the queue limit associations for the specified limit. If you specify both the <code>queueId</code> and the <code>limitId</code>, only the specified limit is returned if it exists.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     farm_id: "FarmId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
     #     queue_id: "QueueId",
-    #     limit_id: "LimitId",
-    #     next_token: "String",
-    #     max_results: 1
+    #     limit_id: "LimitId"
     #   }
     #   options = {}
     #   response = client.list_queue_limit_associations(params, options)
@@ -3600,16 +4647,16 @@ module Aws::Deadline
     #   {
     #     queue_limit_associations: [ # required
     #       {
-    #         created_at: Time.now, # required
-    #         created_by: "CreatedBy", # required
-    #         updated_at: Time.now,
-    #         updated_by: "UpdatedBy",
     #         queue_id: "QueueId", # required
     #         limit_id: "LimitId", # required
     #         status: "ACTIVE" # One of: ["ACTIVE", "STOP_LIMIT_USAGE_AND_COMPLETE_TASKS", "STOP_LIMIT_USAGE_AND_CANCEL_TASKS", "STOPPED"], # required
+    #         created_at: Time.now, # required
+    #         created_by: "CreatedBy", # required
+    #         updated_at: Time.now,
+    #         updated_by: "UpdatedBy"
     #       }
     #     ],
-    #     next_token: "String"
+    #     next_token: "NextToken"
     #   }
     # @return [Types::ListQueueLimitAssociationsResponse]
     def list_queue_limit_associations(params = {}, options = {})
@@ -3631,7 +4678,7 @@ module Aws::Deadline
     #   params = {
     #     farm_id: "FarmId", # required
     #     queue_id: "QueueId", # required
-    #     next_token: "String",
+    #     next_token: "NextToken",
     #     max_results: 1
     #   }
     #   options = {}
@@ -3649,7 +4696,7 @@ module Aws::Deadline
     #         membership_level: "VIEWER" # One of: ["VIEWER", "CONTRIBUTOR", "OWNER", "MANAGER"], # required
     #       }
     #     ],
-    #     next_token: "String"
+    #     next_token: "NextToken"
     #   }
     # @return [Types::ListQueueMembersResponse]
     def list_queue_members(params = {}, options = {})
@@ -3661,36 +4708,21 @@ module Aws::Deadline
     # @param [Hash, Types::ListQueuesRequest] params
     # @option params [String] :farm_id
     #   <p>The farm ID of the queue.</p>
-    # @option params [String] :principal_id
-    #   <p>The principal IDs to include in the list of queues.</p>
-    # @option params [String] :status
-    #   <p>The status of the queues listed.</p>
-    #            <ul>
-    #               <li>
-    #                  <p>
-    #                     <code>ACTIVE</code>–The queues are active.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>SCHEDULING</code>–The queues are scheduling.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>SCHEDULING_BLOCKED</code>–The queue scheduling is blocked for these
-    #                  queues.</p>
-    #               </li>
-    #            </ul>
     # @option params [String] :next_token
     #   <p>The token for the next set of results, or <code>null</code> to start from the beginning.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return. Use this parameter with <code>NextToken</code> to get results as a set of sequential pages.</p>
+    # @option params [String] :principal_id
+    #   <p>The principal IDs to include in the list of queues.</p>
+    # @option params [String] :status
+    #   <p>The status of the queues listed.</p> <ul> <li> <p> <code>ACTIVE</code>–The queues are active.</p> </li> <li> <p> <code>SCHEDULING</code>–The queues are scheduling.</p> </li> <li> <p> <code>SCHEDULING_BLOCKED</code>–The queue scheduling is blocked for these queues.</p> </li> </ul>
     # @example Request syntax with placeholder values
     #   params = {
     #     farm_id: "FarmId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
     #     principal_id: "IdentityCenterPrincipalId",
-    #     status: "IDLE" # One of: ["IDLE", "SCHEDULING", "SCHEDULING_BLOCKED"],
-    #     next_token: "String",
-    #     max_results: 1
+    #     status: "IDLE" # One of: ["IDLE", "SCHEDULING", "SCHEDULING_BLOCKED"]
     #   }
     #   options = {}
     #   response = client.list_queues(params, options)
@@ -3711,7 +4743,7 @@ module Aws::Deadline
     #         updated_by: "UpdatedBy"
     #       }
     #     ],
-    #     next_token: "String"
+    #     next_token: "NextToken"
     #   }
     # @return [Types::ListQueuesResponse]
     def list_queues(params = {}, options = {})
@@ -3727,23 +4759,23 @@ module Aws::Deadline
     #   <p>The queue ID for the session actions list.</p>
     # @option params [String] :job_id
     #   <p>The job ID for the session actions list.</p>
-    # @option params [String] :session_id
-    #   <p>The session ID to include on the sessions action list.</p>
-    # @option params [String] :task_id
-    #   <p>The task ID for the session actions list.</p>
     # @option params [String] :next_token
     #   <p>The token for the next set of results, or <code>null</code> to start from the beginning.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return. Use this parameter with <code>NextToken</code> to get results as a set of sequential pages.</p>
+    # @option params [String] :session_id
+    #   <p>The session ID to include on the sessions action list.</p>
+    # @option params [String] :task_id
+    #   <p>The task ID for the session actions list.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     farm_id: "FarmId", # required
     #     queue_id: "QueueId", # required
     #     job_id: "JobId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
     #     session_id: "SessionId",
-    #     task_id: "TaskId",
-    #     next_token: "String",
-    #     max_results: 1
+    #     task_id: "TaskId"
     #   }
     #   options = {}
     #   response = client.list_session_actions(params, options)
@@ -3758,6 +4790,12 @@ module Aws::Deadline
     #         ended_at: Time.now,
     #         worker_updated_at: Time.now,
     #         progress_percent: 1.0,
+    #         manifests: [
+    #           {
+    #             output_manifest_path: "String",
+    #             output_manifest_hash: "String"
+    #           }
+    #         ],
     #         definition: { # required
     #           # One of:
     #           env_enter: {
@@ -3783,16 +4821,10 @@ module Aws::Deadline
     #           sync_input_job_attachments: {
     #             step_id: "StepId"
     #           }
-    #         },
-    #         manifests: [
-    #           {
-    #             output_manifest_path: "String",
-    #             output_manifest_hash: "String"
-    #           }
-    #         ]
+    #         }
     #       }
     #     ],
-    #     next_token: "String"
+    #     next_token: "NextToken"
     #   }
     # @return [Types::ListSessionActionsResponse]
     def list_session_actions(params = {}, options = {})
@@ -3817,7 +4849,7 @@ module Aws::Deadline
     #     farm_id: "FarmId", # required
     #     queue_id: "QueueId", # required
     #     job_id: "JobId", # required
-    #     next_token: "String",
+    #     next_token: "NextToken",
     #     max_results: 1
     #   }
     #   options = {}
@@ -3833,12 +4865,12 @@ module Aws::Deadline
     #         started_at: Time.now, # required
     #         lifecycle_status: "STARTED" # One of: ["STARTED", "UPDATE_IN_PROGRESS", "UPDATE_SUCCEEDED", "UPDATE_FAILED", "ENDED"], # required
     #         ended_at: Time.now,
+    #         target_lifecycle_status: "ENDED" # One of: ["ENDED"],
     #         updated_at: Time.now,
-    #         updated_by: "UpdatedBy",
-    #         target_lifecycle_status: "ENDED" # One of: ["ENDED"]
+    #         updated_by: "UpdatedBy"
     #       }
     #     ],
-    #     next_token: "String"
+    #     next_token: "NextToken"
     #   }
     # @return [Types::ListSessionsResponse]
     def list_sessions(params = {}, options = {})
@@ -3863,7 +4895,7 @@ module Aws::Deadline
     #     farm_id: "FarmId", # required
     #     fleet_id: "FleetId", # required
     #     worker_id: "WorkerId", # required
-    #     next_token: "String",
+    #     next_token: "NextToken",
     #     max_results: 1
     #   }
     #   options = {}
@@ -3882,7 +4914,7 @@ module Aws::Deadline
     #         target_lifecycle_status: "ENDED" # One of: ["ENDED"]
     #       }
     #     ],
-    #     next_token: "String"
+    #     next_token: "NextToken"
     #   }
     # @return [Types::ListSessionsForWorkerResponse]
     def list_sessions_for_worker(params = {}, options = {})
@@ -3910,7 +4942,7 @@ module Aws::Deadline
     #     queue_id: "QueueId", # required
     #     job_id: "JobId", # required
     #     step_id: "StepId", # required
-    #     next_token: "String",
+    #     next_token: "NextToken",
     #     max_results: 1
     #   }
     #   options = {}
@@ -3924,7 +4956,7 @@ module Aws::Deadline
     #         status: "RESOLVED" # One of: ["RESOLVED", "UNRESOLVED"], # required
     #       }
     #     ],
-    #     next_token: "String"
+    #     next_token: "NextToken"
     #   }
     # @return [Types::ListStepConsumersResponse]
     def list_step_consumers(params = {}, options = {})
@@ -3952,7 +4984,7 @@ module Aws::Deadline
     #     queue_id: "QueueId", # required
     #     job_id: "JobId", # required
     #     step_id: "StepId", # required
-    #     next_token: "String",
+    #     next_token: "NextToken",
     #     max_results: 1
     #   }
     #   options = {}
@@ -3966,7 +4998,7 @@ module Aws::Deadline
     #         status: "RESOLVED" # One of: ["RESOLVED", "UNRESOLVED"], # required
     #       }
     #     ],
-    #     next_token: "String"
+    #     next_token: "NextToken"
     #   }
     # @return [Types::ListStepDependenciesResponse]
     def list_step_dependencies(params = {}, options = {})
@@ -3991,7 +5023,7 @@ module Aws::Deadline
     #     farm_id: "FarmId", # required
     #     queue_id: "QueueId", # required
     #     job_id: "JobId", # required
-    #     next_token: "String",
+    #     next_token: "NextToken",
     #     max_results: 1
     #   }
     #   options = {}
@@ -4025,7 +5057,7 @@ module Aws::Deadline
     #         }
     #       }
     #     ],
-    #     next_token: "String"
+    #     next_token: "NextToken"
     #   }
     # @return [Types::ListStepsResponse]
     def list_steps(params = {}, options = {})
@@ -4044,7 +5076,7 @@ module Aws::Deadline
     # @example Request syntax with placeholder values
     #   params = {
     #     farm_id: "FarmId", # required
-    #     next_token: "String",
+    #     next_token: "NextToken",
     #     max_results: 1
     #   }
     #   options = {}
@@ -4059,7 +5091,7 @@ module Aws::Deadline
     #         os_family: "WINDOWS" # One of: ["WINDOWS", "LINUX", "MACOS"], # required
     #       }
     #     ],
-    #     next_token: "String"
+    #     next_token: "NextToken"
     #   }
     # @return [Types::ListStorageProfilesResponse]
     def list_storage_profiles(params = {}, options = {})
@@ -4081,7 +5113,7 @@ module Aws::Deadline
     #   params = {
     #     farm_id: "FarmId", # required
     #     queue_id: "QueueId", # required
-    #     next_token: "String",
+    #     next_token: "NextToken",
     #     max_results: 1
     #   }
     #   options = {}
@@ -4096,7 +5128,7 @@ module Aws::Deadline
     #         os_family: "WINDOWS" # One of: ["WINDOWS", "LINUX", "MACOS"], # required
     #       }
     #     ],
-    #     next_token: "String"
+    #     next_token: "NextToken"
     #   }
     # @return [Types::ListStorageProfilesForQueueResponse]
     def list_storage_profiles_for_queue(params = {}, options = {})
@@ -4147,7 +5179,7 @@ module Aws::Deadline
     #     queue_id: "QueueId", # required
     #     job_id: "JobId", # required
     #     step_id: "StepId", # required
-    #     next_token: "String",
+    #     next_token: "NextToken",
     #     max_results: 1
     #   }
     #   options = {}
@@ -4163,6 +5195,11 @@ module Aws::Deadline
     #         run_status: "PENDING" # One of: ["PENDING", "READY", "ASSIGNED", "STARTING", "SCHEDULED", "INTERRUPTING", "RUNNING", "SUSPENDED", "CANCELED", "FAILED", "SUCCEEDED", "NOT_COMPATIBLE"], # required
     #         target_run_status: "READY" # One of: ["READY", "FAILED", "SUCCEEDED", "CANCELED", "SUSPENDED", "PENDING"],
     #         failure_retry_count: 1,
+    #         started_at: Time.now,
+    #         ended_at: Time.now,
+    #         updated_at: Time.now,
+    #         updated_by: "UpdatedBy",
+    #         latest_session_action_id: "SessionActionId",
     #         parameters: {
     #           "String" => {
     #             # One of:
@@ -4172,19 +5209,65 @@ module Aws::Deadline
     #             path: "PathString",
     #             chunk_int: "String"
     #           }
-    #         },
-    #         started_at: Time.now,
-    #         ended_at: Time.now,
-    #         updated_at: Time.now,
-    #         updated_by: "UpdatedBy",
-    #         latest_session_action_id: "SessionActionId"
+    #         }
     #       }
     #     ],
-    #     next_token: "String"
+    #     next_token: "NextToken"
     #   }
     # @return [Types::ListTasksResponse]
     def list_tasks(params = {}, options = {})
       request = build_request(:list_tasks, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists the persistent volumes in a fleet.</p>
+    # @param [Hash, Types::ListVolumesRequest] params
+    # @option params [String] :farm_id
+    #   <p>The farm ID of the farm that contains the fleet.</p>
+    # @option params [String] :fleet_id
+    #   <p>The fleet ID of the fleet that contains the volumes.</p>
+    # @option params [String] :next_token
+    #   <p>The token for the next set of results, or <code>null</code> to start from the beginning.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return. Use this parameter with <code>NextToken</code> to get results as a set of sequential pages.</p>
+    # @example List volumes for a fleet
+    #   # Example operation for list_volumes
+    #   params = {
+    #     farm_id: "farm-1234567890abcdef1234567890abcdef",
+    #     fleet_id: "fleet-1234567890abcdef1234567890abcdef"
+    #   }
+    #   options = {}
+    #   response = client.list_volumes(params, options)
+    #   response.to_h #=>
+    #   {}
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     farm_id: "FarmId", # required
+    #     fleet_id: "FleetId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1
+    #   }
+    #   options = {}
+    #   response = client.list_volumes(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     volumes: [ # required
+    #       {
+    #         volume_id: "VolumeId", # required
+    #         farm_id: "FarmId", # required
+    #         fleet_id: "FleetId", # required
+    #         state: "PENDING_CREATION" # One of: ["PENDING_CREATION", "PENDING_ATTACHMENT", "IN_USE", "AVAILABLE", "PENDING_DELETION"], # required
+    #         size_gi_b: 1, # required
+    #         availability_zone_id: "String", # required
+    #         attached_worker_id: "WorkerId"
+    #       }
+    #     ],
+    #     next_token: "NextToken"
+    #   }
+    # @return [Types::ListVolumesResponse]
+    def list_volumes(params = {}, options = {})
+      request = build_request(:list_volumes, params)
       request.send_request(options)
     end
 
@@ -4202,7 +5285,7 @@ module Aws::Deadline
     #   params = {
     #     farm_id: "FarmId", # required
     #     fleet_id: "FleetId", # required
-    #     next_token: "String",
+    #     next_token: "NextToken",
     #     max_results: 1
     #   }
     #   options = {}
@@ -4210,13 +5293,11 @@ module Aws::Deadline
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {
-    #     next_token: "String",
     #     workers: [ # required
     #       {
-    #         worker_id: "WorkerId", # required
     #         farm_id: "FarmId", # required
     #         fleet_id: "FleetId", # required
-    #         status: "CREATED" # One of: ["CREATED", "STARTED", "STOPPING", "STOPPED", "NOT_RESPONDING", "NOT_COMPATIBLE", "RUNNING", "IDLE"], # required
+    #         worker_id: "WorkerId", # required
     #         host_properties: {
     #           ip_addresses: {
     #             ip_v4_addresses: ["IpV4Address"],
@@ -4226,6 +5307,7 @@ module Aws::Deadline
     #           ec2_instance_arn: "String",
     #           ec2_instance_type: "InstanceType"
     #         },
+    #         status: "CREATED" # One of: ["CREATED", "STARTED", "STOPPING", "STOPPED", "NOT_RESPONDING", "NOT_COMPATIBLE", "RUNNING", "IDLE"], # required
     #         log: {
     #           log_driver: "LogDriver", # required
     #           options: {
@@ -4241,7 +5323,8 @@ module Aws::Deadline
     #         updated_at: Time.now,
     #         updated_by: "UpdatedBy"
     #       }
-    #     ]
+    #     ],
+    #     next_token: "NextToken"
     #   }
     # @return [Types::ListWorkersResponse]
     def list_workers(params = {}, options = {})
@@ -4275,34 +5358,30 @@ module Aws::Deadline
     # @param [Hash, Types::SearchJobsRequest] params
     # @option params [String] :farm_id
     #   <p>The farm ID of the job.</p>
-    # @option params [Array<String>] :queue_ids
-    #   <p>The queue ID to use in the job search.</p>
     # @option params [Types::SearchGroupedFilterExpressions] :filter_expressions
-    #   <p>The filter expression, <code>AND</code> or <code>OR</code>, to use
-    #   when searching among a group of search strings in a resource.
-    #   
-    #   You can use two groupings per search each within parenthesis <code>()</code>.</p>
+    #   <p>The search terms for a resource.</p>
     # @option params [Array<Types::SearchSortExpression>] :sort_expressions
     #   <p>The search terms for a resource.</p>
     # @option params [Integer] :item_offset
-    #   <p>Defines how far into the scrollable list to start the return of results.</p>
+    #   <p>The offset for the search results.</p>
     # @option params [Integer] :page_size
-    #   <p>Specifies the number of items per page for the resource.</p>
+    #   <p>Specifies the number of results to return.</p>
+    # @option params [Array<String>] :queue_ids
+    #   <p>The queue ID to use in the job search.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     farm_id: "FarmId", # required
-    #     queue_ids: ["QueueId"], # required
     #     filter_expressions: {
     #       filters: [{ # required
     #         # One of:
     #         date_time_filter: {
     #           name: "String", # required
-    #           operator: "EQUAL" # One of: ["EQUAL", "NOT_EQUAL", "GREATER_THAN_EQUAL_TO", "GREATER_THAN", "LESS_THAN_EQUAL_TO", "LESS_THAN"], # required
+    #           operator: "EQUAL" # One of: ["EQUAL", "NOT_EQUAL", "GREATER_THAN_EQUAL_TO", "GREATER_THAN", "LESS_THAN_EQUAL_TO", "LESS_THAN", "ANY_EQUALS", "ALL_NOT_EQUALS"], # required
     #           date_time: Time.now, # required
     #         },
     #         parameter_filter: {
     #           name: "String", # required
-    #           operator: "EQUAL" # One of: ["EQUAL", "NOT_EQUAL", "GREATER_THAN_EQUAL_TO", "GREATER_THAN", "LESS_THAN_EQUAL_TO", "LESS_THAN"], # required
+    #           operator: "EQUAL" # One of: ["EQUAL", "NOT_EQUAL", "GREATER_THAN_EQUAL_TO", "GREATER_THAN", "LESS_THAN_EQUAL_TO", "LESS_THAN", "ANY_EQUALS", "ALL_NOT_EQUALS"], # required
     #           value: "ParameterValue", # required
     #         },
     #         search_term_filter: {
@@ -4311,8 +5390,13 @@ module Aws::Deadline
     #         },
     #         string_filter: {
     #           name: "String", # required
-    #           operator: "EQUAL" # One of: ["EQUAL", "NOT_EQUAL", "GREATER_THAN_EQUAL_TO", "GREATER_THAN", "LESS_THAN_EQUAL_TO", "LESS_THAN"], # required
+    #           operator: "EQUAL" # One of: ["EQUAL", "NOT_EQUAL", "GREATER_THAN_EQUAL_TO", "GREATER_THAN", "LESS_THAN_EQUAL_TO", "LESS_THAN", "ANY_EQUALS", "ALL_NOT_EQUALS"], # required
     #           value: "StringFilter", # required
+    #         },
+    #         string_list_filter: {
+    #           name: "String", # required
+    #           operator: "EQUAL" # One of: ["EQUAL", "NOT_EQUAL", "GREATER_THAN_EQUAL_TO", "GREATER_THAN", "LESS_THAN_EQUAL_TO", "LESS_THAN", "ANY_EQUALS", "ALL_NOT_EQUALS"], # required
+    #           values: ["StringFilter"], # required
     #         },
     #         group_filter: {
     #           # recursive SearchGroupedFilterExpressions
@@ -4335,7 +5419,8 @@ module Aws::Deadline
     #       }
     #     }],
     #     item_offset: 1, # required
-    #     page_size: 1
+    #     page_size: 1,
+    #     queue_ids: ["QueueId"], # required
     #   }
     #   options = {}
     #   response = client.search_jobs(params, options)
@@ -4370,7 +5455,17 @@ module Aws::Deadline
     #             int: "IntString",
     #             float: "FloatString",
     #             string: "ParameterString",
-    #             path: "PathString"
+    #             path: "PathString",
+    #             bool: "BooleanString",
+    #             range_expr: "RangeExprString",
+    #             string_list: ["ParameterString"],
+    #             path_list: ["PathString"],
+    #             int_list: ["IntString"],
+    #             float_list: ["FloatString"],
+    #             bool_list: ["BooleanString"],
+    #             int_list_list: [
+    #               ["IntString"]
+    #             ]
     #           }
     #         },
     #         max_worker_count: 1,
@@ -4390,37 +5485,32 @@ module Aws::Deadline
     # @param [Hash, Types::SearchStepsRequest] params
     # @option params [String] :farm_id
     #   <p>The farm ID to use for the step search.</p>
+    # @option params [Types::SearchGroupedFilterExpressions] :filter_expressions
+    #   <p>The search terms for a resource.</p>
+    # @option params [Array<Types::SearchSortExpression>] :sort_expressions
+    #   <p>The search terms for a resource.</p>
+    # @option params [Integer] :item_offset
+    #   <p>The offset for the search results.</p>
+    # @option params [Integer] :page_size
+    #   <p>Specifies the number of results to return.</p>
     # @option params [Array<String>] :queue_ids
     #   <p>The queue IDs in the step search.</p>
     # @option params [String] :job_id
     #   <p>The job ID to use in the step search.</p>
-    # @option params [Types::SearchGroupedFilterExpressions] :filter_expressions
-    #   <p>The filter expression, <code>AND</code> or <code>OR</code>, to use
-    #   when searching among a group of search strings in a resource.
-    #   
-    #   You can use two groupings per search each within parenthesis <code>()</code>.</p>
-    # @option params [Array<Types::SearchSortExpression>] :sort_expressions
-    #   <p>The search terms for a resource.</p>
-    # @option params [Integer] :item_offset
-    #   <p>Defines how far into the scrollable list to start the return of results.</p>
-    # @option params [Integer] :page_size
-    #   <p>Specifies the number of items per page for the resource.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     farm_id: "FarmId", # required
-    #     queue_ids: ["QueueId"], # required
-    #     job_id: "JobId",
     #     filter_expressions: {
     #       filters: [{ # required
     #         # One of:
     #         date_time_filter: {
     #           name: "String", # required
-    #           operator: "EQUAL" # One of: ["EQUAL", "NOT_EQUAL", "GREATER_THAN_EQUAL_TO", "GREATER_THAN", "LESS_THAN_EQUAL_TO", "LESS_THAN"], # required
+    #           operator: "EQUAL" # One of: ["EQUAL", "NOT_EQUAL", "GREATER_THAN_EQUAL_TO", "GREATER_THAN", "LESS_THAN_EQUAL_TO", "LESS_THAN", "ANY_EQUALS", "ALL_NOT_EQUALS"], # required
     #           date_time: Time.now, # required
     #         },
     #         parameter_filter: {
     #           name: "String", # required
-    #           operator: "EQUAL" # One of: ["EQUAL", "NOT_EQUAL", "GREATER_THAN_EQUAL_TO", "GREATER_THAN", "LESS_THAN_EQUAL_TO", "LESS_THAN"], # required
+    #           operator: "EQUAL" # One of: ["EQUAL", "NOT_EQUAL", "GREATER_THAN_EQUAL_TO", "GREATER_THAN", "LESS_THAN_EQUAL_TO", "LESS_THAN", "ANY_EQUALS", "ALL_NOT_EQUALS"], # required
     #           value: "ParameterValue", # required
     #         },
     #         search_term_filter: {
@@ -4429,8 +5519,13 @@ module Aws::Deadline
     #         },
     #         string_filter: {
     #           name: "String", # required
-    #           operator: "EQUAL" # One of: ["EQUAL", "NOT_EQUAL", "GREATER_THAN_EQUAL_TO", "GREATER_THAN", "LESS_THAN_EQUAL_TO", "LESS_THAN"], # required
+    #           operator: "EQUAL" # One of: ["EQUAL", "NOT_EQUAL", "GREATER_THAN_EQUAL_TO", "GREATER_THAN", "LESS_THAN_EQUAL_TO", "LESS_THAN", "ANY_EQUALS", "ALL_NOT_EQUALS"], # required
     #           value: "StringFilter", # required
+    #         },
+    #         string_list_filter: {
+    #           name: "String", # required
+    #           operator: "EQUAL" # One of: ["EQUAL", "NOT_EQUAL", "GREATER_THAN_EQUAL_TO", "GREATER_THAN", "LESS_THAN_EQUAL_TO", "LESS_THAN", "ANY_EQUALS", "ALL_NOT_EQUALS"], # required
+    #           values: ["StringFilter"], # required
     #         },
     #         group_filter: {
     #           # recursive SearchGroupedFilterExpressions
@@ -4453,7 +5548,9 @@ module Aws::Deadline
     #       }
     #     }],
     #     item_offset: 1, # required
-    #     page_size: 1
+    #     page_size: 1,
+    #     queue_ids: ["QueueId"], # required
+    #     job_id: "JobId"
     #   }
     #   options = {}
     #   response = client.search_steps(params, options)
@@ -4485,6 +5582,11 @@ module Aws::Deadline
     #             {
     #               name: "StepParameterName", # required
     #               type: "INT" # One of: ["INT", "FLOAT", "STRING", "PATH", "CHUNK_INT"], # required
+    #               chunks: {
+    #                 default_task_count: 1, # required
+    #                 target_runtime_seconds: 1,
+    #                 range_constraint: "CONTIGUOUS" # One of: ["CONTIGUOUS", "NONCONTIGUOUS"], # required
+    #               }
     #             }
     #           ],
     #           combination: "CombinationExpression"
@@ -4504,37 +5606,32 @@ module Aws::Deadline
     # @param [Hash, Types::SearchTasksRequest] params
     # @option params [String] :farm_id
     #   <p>The farm ID of the task.</p>
+    # @option params [Types::SearchGroupedFilterExpressions] :filter_expressions
+    #   <p>The search terms for a resource.</p>
+    # @option params [Array<Types::SearchSortExpression>] :sort_expressions
+    #   <p>The search terms for a resource.</p>
+    # @option params [Integer] :item_offset
+    #   <p>The offset for the search results.</p>
+    # @option params [Integer] :page_size
+    #   <p>Specifies the number of results to return.</p>
     # @option params [Array<String>] :queue_ids
     #   <p>The queue IDs to include in the search.</p>
     # @option params [String] :job_id
     #   <p>The job ID for the task search.</p>
-    # @option params [Types::SearchGroupedFilterExpressions] :filter_expressions
-    #   <p>The filter expression, <code>AND</code> or <code>OR</code>, to use
-    #   when searching among a group of search strings in a resource.
-    #   
-    #   You can use two groupings per search each within parenthesis <code>()</code>.</p>
-    # @option params [Array<Types::SearchSortExpression>] :sort_expressions
-    #   <p>The search terms for a resource.</p>
-    # @option params [Integer] :item_offset
-    #   <p>Defines how far into the scrollable list to start the return of results.</p>
-    # @option params [Integer] :page_size
-    #   <p>Specifies the number of items per page for the resource.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     farm_id: "FarmId", # required
-    #     queue_ids: ["QueueId"], # required
-    #     job_id: "JobId",
     #     filter_expressions: {
     #       filters: [{ # required
     #         # One of:
     #         date_time_filter: {
     #           name: "String", # required
-    #           operator: "EQUAL" # One of: ["EQUAL", "NOT_EQUAL", "GREATER_THAN_EQUAL_TO", "GREATER_THAN", "LESS_THAN_EQUAL_TO", "LESS_THAN"], # required
+    #           operator: "EQUAL" # One of: ["EQUAL", "NOT_EQUAL", "GREATER_THAN_EQUAL_TO", "GREATER_THAN", "LESS_THAN_EQUAL_TO", "LESS_THAN", "ANY_EQUALS", "ALL_NOT_EQUALS"], # required
     #           date_time: Time.now, # required
     #         },
     #         parameter_filter: {
     #           name: "String", # required
-    #           operator: "EQUAL" # One of: ["EQUAL", "NOT_EQUAL", "GREATER_THAN_EQUAL_TO", "GREATER_THAN", "LESS_THAN_EQUAL_TO", "LESS_THAN"], # required
+    #           operator: "EQUAL" # One of: ["EQUAL", "NOT_EQUAL", "GREATER_THAN_EQUAL_TO", "GREATER_THAN", "LESS_THAN_EQUAL_TO", "LESS_THAN", "ANY_EQUALS", "ALL_NOT_EQUALS"], # required
     #           value: "ParameterValue", # required
     #         },
     #         search_term_filter: {
@@ -4543,8 +5640,13 @@ module Aws::Deadline
     #         },
     #         string_filter: {
     #           name: "String", # required
-    #           operator: "EQUAL" # One of: ["EQUAL", "NOT_EQUAL", "GREATER_THAN_EQUAL_TO", "GREATER_THAN", "LESS_THAN_EQUAL_TO", "LESS_THAN"], # required
+    #           operator: "EQUAL" # One of: ["EQUAL", "NOT_EQUAL", "GREATER_THAN_EQUAL_TO", "GREATER_THAN", "LESS_THAN_EQUAL_TO", "LESS_THAN", "ANY_EQUALS", "ALL_NOT_EQUALS"], # required
     #           value: "StringFilter", # required
+    #         },
+    #         string_list_filter: {
+    #           name: "String", # required
+    #           operator: "EQUAL" # One of: ["EQUAL", "NOT_EQUAL", "GREATER_THAN_EQUAL_TO", "GREATER_THAN", "LESS_THAN_EQUAL_TO", "LESS_THAN", "ANY_EQUALS", "ALL_NOT_EQUALS"], # required
+    #           values: ["StringFilter"], # required
     #         },
     #         group_filter: {
     #           # recursive SearchGroupedFilterExpressions
@@ -4567,7 +5669,9 @@ module Aws::Deadline
     #       }
     #     }],
     #     item_offset: 1, # required
-    #     page_size: 1
+    #     page_size: 1,
+    #     queue_ids: ["QueueId"], # required
+    #     job_id: "JobId"
     #   }
     #   options = {}
     #   response = client.search_tasks(params, options)
@@ -4596,7 +5700,8 @@ module Aws::Deadline
     #         started_at: Time.now,
     #         ended_at: Time.now,
     #         updated_at: Time.now,
-    #         updated_by: "UpdatedBy"
+    #         updated_by: "UpdatedBy",
+    #         latest_session_action_id: "SessionActionId"
     #       }
     #     ],
     #     next_item_offset: 1,
@@ -4612,34 +5717,30 @@ module Aws::Deadline
     # @param [Hash, Types::SearchWorkersRequest] params
     # @option params [String] :farm_id
     #   <p>The farm ID in the workers search.</p>
-    # @option params [Array<String>] :fleet_ids
-    #   <p>The fleet ID of the workers to search for.</p>
     # @option params [Types::SearchGroupedFilterExpressions] :filter_expressions
-    #   <p>The filter expression, <code>AND</code> or <code>OR</code>, to use
-    #   when searching among a group of search strings in a resource.
-    #   
-    #   You can use two groupings per search each within parenthesis <code>()</code>.</p>
+    #   <p>The search terms for a resource.</p>
     # @option params [Array<Types::SearchSortExpression>] :sort_expressions
     #   <p>The search terms for a resource.</p>
     # @option params [Integer] :item_offset
-    #   <p>Defines how far into the scrollable list to start the return of results.</p>
+    #   <p>The offset for the search results.</p>
     # @option params [Integer] :page_size
-    #   <p>Specifies the number of items per page for the resource.</p>
+    #   <p>Specifies the number of results to return.</p>
+    # @option params [Array<String>] :fleet_ids
+    #   <p>The fleet ID of the workers to search for.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     farm_id: "FarmId", # required
-    #     fleet_ids: ["FleetId"], # required
     #     filter_expressions: {
     #       filters: [{ # required
     #         # One of:
     #         date_time_filter: {
     #           name: "String", # required
-    #           operator: "EQUAL" # One of: ["EQUAL", "NOT_EQUAL", "GREATER_THAN_EQUAL_TO", "GREATER_THAN", "LESS_THAN_EQUAL_TO", "LESS_THAN"], # required
+    #           operator: "EQUAL" # One of: ["EQUAL", "NOT_EQUAL", "GREATER_THAN_EQUAL_TO", "GREATER_THAN", "LESS_THAN_EQUAL_TO", "LESS_THAN", "ANY_EQUALS", "ALL_NOT_EQUALS"], # required
     #           date_time: Time.now, # required
     #         },
     #         parameter_filter: {
     #           name: "String", # required
-    #           operator: "EQUAL" # One of: ["EQUAL", "NOT_EQUAL", "GREATER_THAN_EQUAL_TO", "GREATER_THAN", "LESS_THAN_EQUAL_TO", "LESS_THAN"], # required
+    #           operator: "EQUAL" # One of: ["EQUAL", "NOT_EQUAL", "GREATER_THAN_EQUAL_TO", "GREATER_THAN", "LESS_THAN_EQUAL_TO", "LESS_THAN", "ANY_EQUALS", "ALL_NOT_EQUALS"], # required
     #           value: "ParameterValue", # required
     #         },
     #         search_term_filter: {
@@ -4648,8 +5749,13 @@ module Aws::Deadline
     #         },
     #         string_filter: {
     #           name: "String", # required
-    #           operator: "EQUAL" # One of: ["EQUAL", "NOT_EQUAL", "GREATER_THAN_EQUAL_TO", "GREATER_THAN", "LESS_THAN_EQUAL_TO", "LESS_THAN"], # required
+    #           operator: "EQUAL" # One of: ["EQUAL", "NOT_EQUAL", "GREATER_THAN_EQUAL_TO", "GREATER_THAN", "LESS_THAN_EQUAL_TO", "LESS_THAN", "ANY_EQUALS", "ALL_NOT_EQUALS"], # required
     #           value: "StringFilter", # required
+    #         },
+    #         string_list_filter: {
+    #           name: "String", # required
+    #           operator: "EQUAL" # One of: ["EQUAL", "NOT_EQUAL", "GREATER_THAN_EQUAL_TO", "GREATER_THAN", "LESS_THAN_EQUAL_TO", "LESS_THAN", "ANY_EQUALS", "ALL_NOT_EQUALS"], # required
+    #           values: ["StringFilter"], # required
     #         },
     #         group_filter: {
     #           # recursive SearchGroupedFilterExpressions
@@ -4672,7 +5778,8 @@ module Aws::Deadline
     #       }
     #     }],
     #     item_offset: 1, # required
-    #     page_size: 1
+    #     page_size: 1,
+    #     fleet_ids: ["FleetId"], # required
     #   }
     #   options = {}
     #   response = client.search_workers(params, options)
@@ -4708,17 +5815,10 @@ module Aws::Deadline
       request.send_request(options)
     end
 
-    # <p>Starts an asynchronous request for getting aggregated statistics about queues and farms.
-    #          Get the statistics using the <code>GetSessionsStatisticsAggregation</code> operation. You
-    #          can only have one running aggregation for your Deadline Cloud farm. Call the
-    #             <code>GetSessionsStatisticsAggregation</code> operation and check the
-    #             <code>status</code> field to see if an aggregation is running. Statistics are available
-    #          for 1 hour after you call the <code>StartSessionsStatisticsAggregation</code>
-    #          operation.</p>
+    # <p>Starts an asynchronous request for getting aggregated statistics about queues and farms. Get the statistics using the <code>GetSessionsStatisticsAggregation</code> operation. You can only have one running aggregation for your Deadline Cloud farm. Call the <code>GetSessionsStatisticsAggregation</code> operation and check the <code>status</code> field to see if an aggregation is running. Statistics are available for 1 hour after you call the <code>StartSessionsStatisticsAggregation</code> operation.</p>
     # @param [Hash, Types::StartSessionsStatisticsAggregationRequest] params
     # @option params [String] :farm_id
-    #   <p>The identifier of the farm that contains queues or fleets to return statistics
-    #            for.</p>
+    #   <p>The identifier of the farm that contains queues or fleets to return statistics for.</p>
     # @option params [Types::SessionsStatisticsResources] :resource_ids
     #   <p>A list of fleet IDs or queue IDs to gather statistics for.</p>
     # @option params [Time] :start_time
@@ -4726,7 +5826,7 @@ module Aws::Deadline
     # @option params [Time] :end_time
     #   <p>The Linux timestamp of the date and time that the statistics end.</p>
     # @option params [String] :timezone
-    #   <p>The timezone to use for the statistics. Use UTC notation such as "UTC+8."</p>
+    #   <p>The time zone to use for the statistics. Use UTC notation such as "UTC+8."</p>
     # @option params [String] :period
     #   <p>The period to aggregate the statistics.</p>
     # @option params [Array<String>] :group_by
@@ -4809,49 +5909,31 @@ module Aws::Deadline
 
     # <p>Updates a budget that sets spending thresholds for rendering activity.</p>
     # @param [Hash, Types::UpdateBudgetRequest] params
-    # @option params [String] :client_token
-    #   <p>The unique token which the server uses to recognize retries of the same request.</p>
     # @option params [String] :farm_id
     #   <p>The farm ID of the budget to update.</p>
     # @option params [String] :budget_id
     #   <p>The budget ID to update.</p>
+    # @option params [String] :client_token
+    #   <p>The unique token which the server uses to recognize retries of the same request.</p>
     # @option params [String] :display_name
-    #   <p>The display name of the budget to update.</p>
-    #            <important>
-    #               <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>
-    #            </important>
+    #   <p>The display name of the budget to update.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>
     # @option params [String] :description
-    #   <p>The description of the budget to update.</p>
-    #            <important>
-    #               <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>
-    #            </important>
+    #   <p>The description of the budget to update.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>
     # @option params [String] :status
-    #   <p>Updates the status of the budget.</p>
-    #            <ul>
-    #               <li>
-    #                  <p>
-    #                     <code>ACTIVE</code>–The budget is being evaluated.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>INACTIVE</code>–The budget is inactive. This can include Expired,
-    #                  Canceled, or deleted Deleted statuses.</p>
-    #               </li>
-    #            </ul>
+    #   <p>Updates the status of the budget.</p> <ul> <li> <p> <code>ACTIVE</code>–The budget is being evaluated.</p> </li> <li> <p> <code>INACTIVE</code>–The budget is inactive. This can include Expired, Canceled, or deleted Deleted statuses.</p> </li> </ul>
     # @option params [Float] :approximate_dollar_limit
     #   <p>The dollar limit to update on the budget. Based on consumed usage.</p>
     # @option params [Array<Types::BudgetActionToAdd>] :actions_to_add
-    #   <p>The budget actions to add. Budget actions specify what happens when the budget runs
-    #            out.</p>
+    #   <p>The budget actions to add. Budget actions specify what happens when the budget runs out.</p>
     # @option params [Array<Types::BudgetActionToRemove>] :actions_to_remove
     #   <p>The budget actions to remove from the budget.</p>
     # @option params [Types::BudgetSchedule] :schedule
     #   <p>The schedule to update.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     client_token: "ClientToken",
     #     farm_id: "FarmId", # required
     #     budget_id: "BudgetId", # required
+    #     client_token: "ClientToken",
     #     display_name: "ResourceName",
     #     description: "Description",
     #     status: "ACTIVE" # One of: ["ACTIVE", "INACTIVE"],
@@ -4893,20 +5975,17 @@ module Aws::Deadline
     # @option params [String] :farm_id
     #   <p>The farm ID to update.</p>
     # @option params [String] :display_name
-    #   <p>The display name of the farm to update.</p>
-    #            <important>
-    #               <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>
-    #            </important>
+    #   <p>The display name of the farm to update.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>
     # @option params [String] :description
-    #   <p>The description of the farm to update.</p>
-    #            <important>
-    #               <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>
-    #            </important>
+    #   <p>The description of the farm to update.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>
+    # @option params [Float] :cost_scale_factor
+    #   <p>A multiplier applied to the farm's calculated costs for usage data and budget tracking. A value less than 1 represents a discount, a value greater than 1 represents a premium, and a value of 1 represents no adjustment.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     farm_id: "FarmId", # required
     #     display_name: "ResourceName",
-    #     description: "Description"
+    #     description: "Description",
+    #     cost_scale_factor: 1.0
     #   }
     #   options = {}
     #   response = client.update_farm(params, options)
@@ -4919,47 +5998,33 @@ module Aws::Deadline
       request.send_request(options)
     end
 
-    # <p>Updates a fleet.</p>
+    # <p>Updates a fleet.</p> <note> <p>Workers that are running when you call <code>UpdateFleet</code> keep the instance type and capabilities that they launched with until they scale in. Deadline Cloud can schedule jobs that you submit after the update on these existing workers, so the new configuration might not take effect immediately. To make sure that all workers use the new configuration, set <code>maxWorkerCount</code> to 0, use the <code>ListWorkers</code> operation to confirm that the fleet has no workers, and then restore <code>maxWorkerCount</code>.</p> </note>
     # @param [Hash, Types::UpdateFleetRequest] params
-    # @option params [String] :client_token
-    #   <p>The unique token which the server uses to recognize retries of the same request.</p>
     # @option params [String] :farm_id
     #   <p>The farm ID to update.</p>
     # @option params [String] :fleet_id
     #   <p>The fleet ID to update.</p>
+    # @option params [String] :client_token
+    #   <p>The unique token which the server uses to recognize retries of the same request.</p>
     # @option params [String] :display_name
-    #   <p>The display name of the fleet to update.</p>
-    #            <important>
-    #               <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>
-    #            </important>
+    #   <p>The display name of the fleet to update.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>
     # @option params [String] :description
-    #   <p>The description of the fleet to update.</p>
-    #            <important>
-    #               <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>
-    #            </important>
+    #   <p>The description of the fleet to update.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>
     # @option params [String] :role_arn
     #   <p>The IAM role ARN that the fleet's workers assume while running jobs.</p>
     # @option params [Integer] :min_worker_count
     #   <p>The minimum number of workers in the fleet.</p>
     # @option params [Integer] :max_worker_count
-    #   <p>The maximum number of workers in the fleet.</p>
-    #            <p>Deadline Cloud limits the number of workers to less than or equal to the fleet's
-    #            maximum worker count. The service maintains eventual consistency for the worker count. If
-    #            you make multiple rapid calls to <code>CreateWorker</code> before the field updates, you
-    #            might exceed your fleet's maximum worker count. For example, if your
-    #            <code>maxWorkerCount</code> is 10 and you currently have 9 workers, making two quick
-    #            <code>CreateWorker</code> calls might successfully create 2 workers instead of 1,
-    #            resulting in 11 total workers.</p>
+    #   <p>The maximum number of workers in the fleet.</p> <p>Deadline Cloud limits the number of workers to less than or equal to the fleet's maximum worker count. The service maintains eventual consistency for the worker count. If you make multiple rapid calls to <code>CreateWorker</code> before the field updates, you might exceed your fleet's maximum worker count. For example, if your <code>maxWorkerCount</code> is 10 and you currently have 9 workers, making two quick <code>CreateWorker</code> calls might successfully create 2 workers instead of 1, resulting in 11 total workers.</p>
     # @option params [Types::FleetConfiguration] :configuration
     #   <p>The fleet configuration to update.</p>
     # @option params [Types::HostConfiguration] :host_configuration
-    #   <p>Provides a script that runs as a worker is starting up that you can use to provide
-    #            additional configuration for workers in your fleet.</p>
+    #   <p>Provides a script that runs as a worker is starting up that you can use to provide additional configuration for workers in your fleet.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     client_token: "ClientToken",
     #     farm_id: "FarmId", # required
     #     fleet_id: "FleetId", # required
+    #     client_token: "ClientToken",
     #     display_name: "ResourceName",
     #     description: "Description",
     #     role_arn: "IamRoleArn",
@@ -4969,6 +6034,11 @@ module Aws::Deadline
     #       # One of:
     #       customer_managed: {
     #         mode: "NO_SCALING" # One of: ["NO_SCALING", "EVENT_BASED_AUTO_SCALING"], # required
+    #         auto_scaling_configuration: {
+    #           standby_worker_count: 1,
+    #           worker_idle_duration_seconds: 1,
+    #           scale_out_workers_per_minute: 1
+    #         },
     #         worker_capabilities: { # required
     #           v_cpu_count: { # required
     #             min: 1, # required
@@ -5026,7 +6096,7 @@ module Aws::Deadline
     #           accelerator_capabilities: {
     #             selections: [ # required
     #               {
-    #                 name: "t4" # One of: ["t4", "a10g", "l4", "l40s"], # required
+    #                 name: "t4" # One of: ["t4", "a10g", "l4", "l40s", "rtx-pro-server-6000"], # required
     #                 runtime: "AcceleratorRuntime"
     #               }
     #             ],
@@ -5049,6 +6119,11 @@ module Aws::Deadline
     #               name: "AttributeCapabilityName", # required
     #               values: ["AttributeCapabilityValue"], # required
     #             }
+    #           ],
+    #           software_add_ons: [
+    #             {
+    #               name: "docker" # One of: ["docker"], # required
+    #             }
     #           ]
     #         },
     #         instance_market_options: { # required
@@ -5057,7 +6132,19 @@ module Aws::Deadline
     #         vpc_configuration: {
     #           resource_configuration_arns: ["VpcResourceConfigurationArn"]
     #         },
-    #         storage_profile_id: "StorageProfileId"
+    #         storage_profile_id: "StorageProfileId",
+    #         persistent_volume_configuration: {
+    #           size_gi_b: 1,
+    #           iops: 1,
+    #           throughput_mi_b: 1,
+    #           mount_path: "MountPath", # required
+    #           last_used_ttl_hours: 1
+    #         },
+    #         auto_scaling_configuration: {
+    #           standby_worker_count: 1,
+    #           worker_idle_duration_seconds: 1,
+    #           scale_out_workers_per_minute: 1
+    #         }
     #       }
     #     },
     #     host_configuration: {
@@ -5076,47 +6163,37 @@ module Aws::Deadline
       request.send_request(options)
     end
 
-    # <p>Updates a job. </p>
-    #          <p>When you change the status of the job to <code>ARCHIVED</code>, the job can't be
-    #          scheduled or archived.</p>
-    #          <important>
-    #             <p>An archived jobs and its steps and tasks are deleted after 120 days. The job can't be
-    #             recovered.</p>
-    #          </important>
+    # <p>Updates a job. </p> <p>When you change the status of the job to <code>ARCHIVED</code>, the job can't be scheduled or archived.</p> <important> <p>An archived jobs and its steps and tasks are deleted after 120 days. The job can't be recovered.</p> </important>
     # @param [Hash, Types::UpdateJobRequest] params
-    # @option params [String] :client_token
-    #   <p>The unique token which the server uses to recognize retries of the same request.</p>
-    # @option params [String] :target_task_run_status
-    #   <p>The task status to update the job's tasks to.</p>
-    # @option params [Integer] :priority
-    #   <p>The job priority to update.</p>
-    # @option params [Integer] :max_failed_tasks_count
-    #   <p>The number of task failures before the job stops running and is marked as <code>FAILED</code>.</p>
-    # @option params [Integer] :max_retries_per_task
-    #   <p>The maximum number of retries for a job.</p>
-    # @option params [String] :lifecycle_status
-    #   <p>The status of a job in its lifecycle. When you change the status of the job to
-    #               <code>ARCHIVED</code>, the job can't be scheduled or archived.</p>
-    #            <important>
-    #               <p>An archived jobs and its steps and tasks are deleted after 120 days. The job can't be
-    #               recovered.</p>
-    #            </important>
-    # @option params [Integer] :max_worker_count
-    #   <p>The maximum number of worker hosts that can concurrently process a job. When the
-    #               <code>maxWorkerCount</code> is reached, no more workers will be assigned to process the
-    #            job, even if the fleets assigned to the job's queue has available workers.</p>
-    #            <p>You can't set the <code>maxWorkerCount</code> to 0. If you set it to -1, there is no
-    #            maximum number of workers.</p>
-    #            <p>If you don't specify the <code>maxWorkerCount</code>, the default is -1.</p>
-    #            <p>The maximum number of workers that can process tasks in the job.</p>
     # @option params [String] :farm_id
     #   <p>The farm ID of the job to update.</p>
     # @option params [String] :queue_id
     #   <p>The queue ID of the job to update.</p>
     # @option params [String] :job_id
     #   <p>The job ID to update.</p>
+    # @option params [String] :client_token
+    #   <p>The unique token which the server uses to recognize retries of the same request.</p>
+    # @option params [String] :target_task_run_status
+    #   <p>The task status to update the job's tasks to.</p>
+    # @option params [Integer] :priority
+    #   <p>The updated job priority.</p>
+    # @option params [Integer] :max_failed_tasks_count
+    #   <p>The number of task failures before the job stops running and is marked as <code>FAILED</code>.</p>
+    # @option params [Integer] :max_retries_per_task
+    #   <p>The maximum number of retries for a job.</p>
+    # @option params [String] :lifecycle_status
+    #   <p>The status of a job in its lifecycle. When you change the status of the job to <code>ARCHIVED</code>, the job can't be scheduled or archived.</p> <important> <p>An archived jobs and its steps and tasks are deleted after 120 days. The job can't be recovered.</p> </important>
+    # @option params [Integer] :max_worker_count
+    #   <p>The maximum number of worker hosts that can concurrently process a job. When the <code>maxWorkerCount</code> is reached, no more workers will be assigned to process the job, even if the fleets assigned to the job's queue has available workers.</p> <p>You can't set the <code>maxWorkerCount</code> to 0. If you set it to -1, there is no maximum number of workers.</p> <p>If you don't specify the <code>maxWorkerCount</code>, the default is -1.</p> <p>The maximum number of workers that can process tasks in the job.</p>
+    # @option params [String] :name
+    #   <p>The updated job name.</p>
+    # @option params [String] :description
+    #   <p>The updated job description.</p>
     # @example Request syntax with placeholder values
     #   params = {
+    #     farm_id: "FarmId", # required
+    #     queue_id: "QueueId", # required
+    #     job_id: "JobId", # required
     #     client_token: "ClientToken",
     #     target_task_run_status: "READY" # One of: ["READY", "FAILED", "SUCCEEDED", "CANCELED", "SUSPENDED", "PENDING"],
     #     priority: 1,
@@ -5124,9 +6201,8 @@ module Aws::Deadline
     #     max_retries_per_task: 1,
     #     lifecycle_status: "ARCHIVED" # One of: ["ARCHIVED"],
     #     max_worker_count: 1,
-    #     farm_id: "FarmId", # required
-    #     queue_id: "QueueId", # required
-    #     job_id: "JobId", # required
+    #     name: "JobName",
+    #     description: "JobDescriptionOverride"
     #   }
     #   options = {}
     #   response = client.update_job(params, options)
@@ -5146,24 +6222,11 @@ module Aws::Deadline
     # @option params [String] :limit_id
     #   <p>The unique identifier of the limit to update.</p>
     # @option params [String] :display_name
-    #   <p>The new display name of the limit.</p>
-    #            <important>
-    #               <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>
-    #            </important>
+    #   <p>The new display name of the limit.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>
     # @option params [String] :description
-    #   <p>The new description of the limit.</p>
-    #            <important>
-    #               <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>
-    #            </important>
+    #   <p>The new description of the limit.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>
     # @option params [Integer] :max_count
-    #   <p>The maximum number of resources constrained by this limit. When all of the resources are
-    #            in use, steps that require the limit won't be scheduled until the resource is
-    #            available.</p>
-    #            <p>If more than the new maximum number is currently in use, running jobs finish but no new
-    #            jobs are started until the number of resources in use is below the new maximum
-    #            number.</p>
-    #            <p>The <code>maxCount</code> must not be 0. If the value is -1, there is no restriction on
-    #            the number of resources that can be acquired for this limit.</p>
+    #   <p>The maximum number of resources constrained by this limit. When all of the resources are in use, steps that require the limit won't be scheduled until the resource is available.</p> <p>If more than the new maximum number is currently in use, running jobs finish but no new jobs are started until the number of resources in use is below the new maximum number.</p> <p>The <code>maxCount</code> must not be 0. If the value is -1, there is no restriction on the number of resources that can be acquired for this limit.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     farm_id: "FarmId", # required
@@ -5183,20 +6246,16 @@ module Aws::Deadline
       request.send_request(options)
     end
 
-    # <p>Modifies the settings for a Deadline Cloud monitor. You can modify one or all of the settings
-    #          when you call <code>UpdateMonitor</code>.</p>
+    # <p>Modifies the settings for a Deadline Cloud monitor. You can modify one or all of the settings when you call <code>UpdateMonitor</code>.</p>
     # @param [Hash, Types::UpdateMonitorRequest] params
     # @option params [String] :monitor_id
     #   <p>The unique identifier of the monitor to update.</p>
     # @option params [String] :subdomain
     #   <p>The new value of the subdomain to use when forming the monitor URL.</p>
     # @option params [String] :display_name
-    #   <p>The new value to use for the monitor's display name.</p>
-    #            <important>
-    #               <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>
-    #            </important>
+    #   <p>The new value to use for the monitor's display name.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>
     # @option params [String] :role_arn
-    #   <p>The Amazon Resource Name (ARN) of the new IAM role to use with the monitor.</p>
+    #   <p>The Amazon Resource Name of the new IAM role to use with the monitor.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     monitor_id: "MonitorId", # required
@@ -5215,29 +6274,58 @@ module Aws::Deadline
       request.send_request(options)
     end
 
+    # <p>Updates the settings for a Deadline Cloud monitor. Keys present in the request are upserted; keys absent are left unchanged. Send an empty string value to delete a key.</p>
+    # @param [Hash, Types::UpdateMonitorSettingsRequest] params
+    # @option params [String] :monitor_id
+    #   <p>The unique identifier of the monitor to update settings for.</p>
+    # @option params [Hash<String, String>] :settings
+    #   <p>The monitor settings to update as key-value pairs. Keys present in the request are upserted; keys absent are left unchanged. Send an empty string value to delete a key.</p>
+    # @example Update monitor settings
+    #   # Example operation for update_monitor_settings
+    #   params = {
+    #     monitor_id: "monitor-1234567890abcdef1234567890abcdef",
+    #     settings: {
+    #       "idcApplicationArn" => "arn:aws:sso::123456789012:application/ins-1234567890abcdef/apl-1234567890abcdef"
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.update_monitor_settings(params, options)
+    #   response.to_h #=>
+    #   {}
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     monitor_id: "MonitorId", # required
+    #     settings: { # required
+    #       "SettingKey" => "SettingValue"
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.update_monitor_settings(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::UpdateMonitorSettingsResponse]
+    def update_monitor_settings(params = {}, options = {})
+      request = build_request(:update_monitor_settings, params)
+      request.send_request(options)
+    end
+
     # <p>Updates a queue.</p>
     # @param [Hash, Types::UpdateQueueRequest] params
-    # @option params [String] :client_token
-    #   <p>The idempotency token to update in the queue.</p>
     # @option params [String] :farm_id
     #   <p>The farm ID to update in the queue.</p>
     # @option params [String] :queue_id
     #   <p>The queue ID to update.</p>
+    # @option params [String] :client_token
+    #   <p>The idempotency token to update in the queue.</p>
     # @option params [String] :display_name
-    #   <p>The display name of the queue to update.</p>
-    #            <important>
-    #               <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>
-    #            </important>
+    #   <p>The display name of the queue to update.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>
     # @option params [String] :description
-    #   <p>The description of the queue to update.</p>
-    #            <important>
-    #               <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>
-    #            </important>
+    #   <p>The description of the queue to update.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>
     # @option params [String] :default_budget_action
     #   <p>The default action to take for a queue update if a budget isn't configured.</p>
     # @option params [Types::JobAttachmentSettings] :job_attachment_settings
-    #   <p>The job attachment settings to update for the
-    #            queue.</p>
+    #   <p>The job attachment settings to update for the queue.</p>
     # @option params [String] :role_arn
     #   <p>The IAM role ARN that's used to run jobs from this queue.</p>
     # @option params [Types::JobRunAsUser] :job_run_as_user
@@ -5250,11 +6338,13 @@ module Aws::Deadline
     #   <p>The storage profile IDs to add.</p>
     # @option params [Array<String>] :allowed_storage_profile_ids_to_remove
     #   <p>The storage profile ID to remove.</p>
+    # @option params [Types::SchedulingConfiguration] :scheduling_configuration
+    #   <p>The scheduling configuration for the queue. This configuration determines how workers are assigned to jobs in the queue.</p> <p>When updating the scheduling configuration, the entire configuration is replaced.</p> <p>In-progress tasks run to completion before the new scheduling configuration takes effect.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     client_token: "ClientToken",
     #     farm_id: "FarmId", # required
     #     queue_id: "QueueId", # required
+    #     client_token: "ClientToken",
     #     display_name: "ResourceName",
     #     description: "Description",
     #     default_budget_action: "NONE" # One of: ["NONE", "STOP_SCHEDULING_AND_COMPLETE_TASKS", "STOP_SCHEDULING_AND_CANCEL_TASKS"],
@@ -5277,7 +6367,32 @@ module Aws::Deadline
     #     required_file_system_location_names_to_add: ["FileSystemLocationName"],
     #     required_file_system_location_names_to_remove: ["FileSystemLocationName"],
     #     allowed_storage_profile_ids_to_add: ["StorageProfileId"],
-    #     allowed_storage_profile_ids_to_remove: ["StorageProfileId"]
+    #     allowed_storage_profile_ids_to_remove: ["StorageProfileId"],
+    #     scheduling_configuration: {
+    #       # One of:
+    #       priority_fifo: {
+    #       },
+    #       priority_balanced: {
+    #         rendering_task_buffer: 1
+    #       },
+    #       weighted_balanced: {
+    #         priority_weight: 1.0,
+    #         error_weight: 1.0,
+    #         submission_time_weight: 1.0,
+    #         rendering_task_weight: 1.0,
+    #         rendering_task_buffer: 1,
+    #         max_priority_override: {
+    #           # One of:
+    #           always_schedule_first: {
+    #           }
+    #         },
+    #         min_priority_override: {
+    #           # One of:
+    #           always_schedule_last: {
+    #           }
+    #         }
+    #       }
+    #     }
     #   }
     #   options = {}
     #   response = client.update_queue(params, options)
@@ -5292,14 +6407,14 @@ module Aws::Deadline
 
     # <p>Updates the queue environment.</p>
     # @param [Hash, Types::UpdateQueueEnvironmentRequest] params
-    # @option params [String] :client_token
-    #   <p>The unique token which the server uses to recognize retries of the same request.</p>
     # @option params [String] :farm_id
     #   <p>The farm ID of the queue environment to update.</p>
     # @option params [String] :queue_id
     #   <p>The queue ID of the queue environment to update.</p>
     # @option params [String] :queue_environment_id
     #   <p>The queue environment ID to update.</p>
+    # @option params [String] :client_token
+    #   <p>The unique token which the server uses to recognize retries of the same request.</p>
     # @option params [Integer] :priority
     #   <p>The priority to update.</p>
     # @option params [String] :template_type
@@ -5308,10 +6423,10 @@ module Aws::Deadline
     #   <p>The template to update.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     client_token: "ClientToken",
     #     farm_id: "FarmId", # required
     #     queue_id: "QueueId", # required
     #     queue_environment_id: "QueueEnvironmentId", # required
+    #     client_token: "ClientToken",
     #     priority: 1,
     #     template_type: "JSON" # One of: ["JSON", "YAML"],
     #     template: "EnvironmentTemplate"
@@ -5355,9 +6470,7 @@ module Aws::Deadline
       request.send_request(options)
     end
 
-    # <p>Updates the status of the queue. If you set the status to one of the
-    #             <code>STOP_LIMIT_USAGE*</code> values, there will be a delay before the status
-    #          transitions to the <code>STOPPED</code> state. </p>
+    # <p>Updates the status of the queue. If you set the status to one of the <code>STOP_LIMIT_USAGE*</code> values, there will be a delay before the status transitions to the <code>STOPPED</code> state. </p>
     # @param [Hash, Types::UpdateQueueLimitAssociationRequest] params
     # @option params [String] :farm_id
     #   <p>The unique identifier of the farm that contains the associated queues and limits.</p>
@@ -5366,9 +6479,7 @@ module Aws::Deadline
     # @option params [String] :limit_id
     #   <p>The unique identifier of the limit associated to the queue.</p>
     # @option params [String] :status
-    #   <p>Sets the status of the limit. You can mark the limit active, or you can stop usage of
-    #            the limit and either complete existing tasks or cancel any existing tasks immediately.
-    #         </p>
+    #   <p>Sets the status of the limit. You can mark the limit active, or you can stop usage of the limit and either complete existing tasks or cancel any existing tasks immediately. </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     farm_id: "FarmId", # required
@@ -5389,10 +6500,6 @@ module Aws::Deadline
 
     # <p>Updates a session.</p>
     # @param [Hash, Types::UpdateSessionRequest] params
-    # @option params [String] :client_token
-    #   <p>The unique token which the server uses to recognize retries of the same request.</p>
-    # @option params [String] :target_lifecycle_status
-    #   <p>The life cycle status to update in the session.</p>
     # @option params [String] :farm_id
     #   <p>The farm ID to update in the session.</p>
     # @option params [String] :queue_id
@@ -5401,14 +6508,18 @@ module Aws::Deadline
     #   <p>The job ID to update in the session.</p>
     # @option params [String] :session_id
     #   <p>The session ID to update.</p>
+    # @option params [String] :client_token
+    #   <p>The unique token which the server uses to recognize retries of the same request.</p>
+    # @option params [String] :target_lifecycle_status
+    #   <p>The life cycle status to update in the session.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     client_token: "ClientToken",
-    #     target_lifecycle_status: "ENDED" # One of: ["ENDED"], # required
     #     farm_id: "FarmId", # required
     #     queue_id: "QueueId", # required
     #     job_id: "JobId", # required
     #     session_id: "SessionId", # required
+    #     client_token: "ClientToken",
+    #     target_lifecycle_status: "ENDED" # One of: ["ENDED"], # required
     #   }
     #   options = {}
     #   response = client.update_session(params, options)
@@ -5423,10 +6534,6 @@ module Aws::Deadline
 
     # <p>Updates a step.</p>
     # @param [Hash, Types::UpdateStepRequest] params
-    # @option params [String] :target_task_run_status
-    #   <p>The task status to update the step's tasks to.</p>
-    # @option params [String] :client_token
-    #   <p>The unique token which the server uses to recognize retries of the same request.</p>
     # @option params [String] :farm_id
     #   <p>The farm ID to update.</p>
     # @option params [String] :queue_id
@@ -5435,14 +6542,18 @@ module Aws::Deadline
     #   <p>The job ID to update.</p>
     # @option params [String] :step_id
     #   <p>The step ID to update.</p>
+    # @option params [String] :client_token
+    #   <p>The unique token which the server uses to recognize retries of the same request.</p>
+    # @option params [String] :target_task_run_status
+    #   <p>The task status to update the step's tasks to.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     target_task_run_status: "READY" # One of: ["READY", "FAILED", "SUCCEEDED", "CANCELED", "SUSPENDED", "PENDING"], # required
-    #     client_token: "ClientToken",
     #     farm_id: "FarmId", # required
     #     queue_id: "QueueId", # required
     #     job_id: "JobId", # required
     #     step_id: "StepId", # required
+    #     client_token: "ClientToken",
+    #     target_task_run_status: "READY" # One of: ["READY", "FAILED", "SUCCEEDED", "CANCELED", "SUSPENDED", "PENDING"], # required
     #   }
     #   options = {}
     #   response = client.update_step(params, options)
@@ -5457,17 +6568,14 @@ module Aws::Deadline
 
     # <p>Updates a storage profile.</p>
     # @param [Hash, Types::UpdateStorageProfileRequest] params
-    # @option params [String] :client_token
-    #   <p>The unique token which the server uses to recognize retries of the same request.</p>
     # @option params [String] :farm_id
     #   <p>The farm ID to update.</p>
     # @option params [String] :storage_profile_id
     #   <p>The storage profile ID to update.</p>
+    # @option params [String] :client_token
+    #   <p>The unique token which the server uses to recognize retries of the same request.</p>
     # @option params [String] :display_name
-    #   <p>The display name of the storage profile to update.</p>
-    #            <important>
-    #               <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>
-    #            </important>
+    #   <p>The display name of the storage profile to update.</p> <important> <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p> </important>
     # @option params [String] :os_family
     #   <p>The OS system to update.</p>
     # @option params [Array<Types::FileSystemLocation>] :file_system_locations_to_add
@@ -5476,9 +6584,9 @@ module Aws::Deadline
     #   <p>The file system location names to remove.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     client_token: "ClientToken",
     #     farm_id: "FarmId", # required
     #     storage_profile_id: "StorageProfileId", # required
+    #     client_token: "ClientToken",
     #     display_name: "ResourceName",
     #     os_family: "WINDOWS" # One of: ["WINDOWS", "LINUX", "MACOS"],
     #     file_system_locations_to_add: [
@@ -5509,10 +6617,6 @@ module Aws::Deadline
 
     # <p>Updates a task.</p>
     # @param [Hash, Types::UpdateTaskRequest] params
-    # @option params [String] :client_token
-    #   <p>The unique token which the server uses to recognize retries of the same request.</p>
-    # @option params [String] :target_run_status
-    #   <p>The run status with which to start the task.</p>
     # @option params [String] :farm_id
     #   <p>The farm ID to update.</p>
     # @option params [String] :queue_id
@@ -5523,15 +6627,19 @@ module Aws::Deadline
     #   <p>The step ID to update.</p>
     # @option params [String] :task_id
     #   <p>The task ID to update.</p>
+    # @option params [String] :client_token
+    #   <p>The unique token which the server uses to recognize retries of the same request.</p>
+    # @option params [String] :target_run_status
+    #   <p>The run status with which to start the task.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     client_token: "ClientToken",
-    #     target_run_status: "READY" # One of: ["READY", "FAILED", "SUCCEEDED", "CANCELED", "SUSPENDED", "PENDING"], # required
     #     farm_id: "FarmId", # required
     #     queue_id: "QueueId", # required
     #     job_id: "JobId", # required
     #     step_id: "StepId", # required
     #     task_id: "TaskId", # required
+    #     client_token: "ClientToken",
+    #     target_run_status: "READY" # One of: ["READY", "FAILED", "SUCCEEDED", "CANCELED", "SUSPENDED", "PENDING"], # required
     #   }
     #   options = {}
     #   response = client.update_task(params, options)
@@ -5694,6 +6802,9 @@ module Aws::Deadline
     #             "String" => "String"
     #           },
     #           error: "LogError"
+    #         },
+    #         metadata: {
+    #           "SessionMetadataKey" => "SessionMetadataValue"
     #         }
     #       }
     #     },
@@ -5794,7 +6905,9 @@ module Aws::Deadline
     def waiters
       {
         fleet_active: Waiters::FleetActive,
+        job_complete: Waiters::JobComplete,
         job_create_complete: Waiters::JobCreateComplete,
+        job_succeeded: Waiters::JobSucceeded,
         license_endpoint_deleted: Waiters::LicenseEndpointDeleted,
         license_endpoint_valid: Waiters::LicenseEndpointValid,
         queue_fleet_association_stopped: Waiters::QueueFleetAssociationStopped,

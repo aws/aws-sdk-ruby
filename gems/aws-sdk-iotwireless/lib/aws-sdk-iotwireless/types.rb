@@ -78,6 +78,21 @@ module Aws::IoTWireless
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Optional configuration for customizing position estimates, including parameters
+    #             that affect the accuracy and uncertainty of WiFi and cellular-based location
+    #             estimates.</p>
+    # @!attribute wi_fi_cellular
+    #   <p>Configuration for WiFi and cellular-based location estimate payloads resolved
+    #               by HERE's solvers.</p>
+    #   @return [Types::WiFiCellular]
+    class AdvancedConfiguration < Struct.new(
+      nil,
+      :wi_fi_cellular,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>LoRaWAN application configuration, which can be used to perform geolocation.</p>
     # @!attribute f_port
     #   <p>The Fport value.</p>
@@ -892,8 +907,7 @@ module Aws::IoTWireless
     #               manage a resource.</p>
     #   @return [Array<Types::Tag>]
     # @!attribute positioning
-    #   <p>FPort values for the GNSS, stream, and ClockSync functions of the positioning
-    #               information.</p>
+    #   <p>The integration status of the Device Location feature for LoRaWAN and Sidewalk devices.</p>
     #   @return [String]
     # @!attribute sidewalk
     #   <p>The device configuration information to use to create the Sidewalk device.</p>
@@ -1090,6 +1104,22 @@ module Aws::IoTWireless
       :factory_support,
       :ap_id,
       :device_type_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The default session parameters for the multicast group.</p>
+    # @!attribute dl_dr
+    #   <p>Downlink data rate.</p>
+    #   @return [Integer]
+    # @!attribute dl_freq
+    #   <p>Downlink frequency.</p>
+    #   @return [Integer]
+    class DefaultSessionParametersMulticast < Struct.new(
+      nil,
+      :dl_dr,
+      :dl_freq,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2250,20 +2280,31 @@ module Aws::IoTWireless
     # @!attribute gnss
     #   <p>Retrieves an estimated device position by resolving the global navigation satellite
     #               system (GNSS) scan data. The position is resolved using the GNSS solver powered by LoRa
-    #               Cloud.</p>
+    #               Cloud. This field is mutually exclusive with the GnssMultiFrame field.</p>
     #   @return [Types::Gnss]
+    # @!attribute gnss_multi_frame
+    #   <p>Retrieves an estimated device position by resolving multiple global navigation
+    #               satellite system (GNSS) scan captures. The position is resolved using the multi-frame
+    #               GNSS solver powered by LoRa Cloud. This field is mutually exclusive with the Gnss
+    #               field.</p>
+    #   @return [Types::GnssMultiFrame]
     # @!attribute timestamp
     #   <p>Optional information that specifies the time when the position information will be
     #               resolved. It uses the Unix timestamp format. If not specified, the time at which the
     #               request was received will be used.</p>
     #   @return [Time]
+    # @!attribute advanced_configuration
+    #   <p>Optional configuration for customizing position measurement data.</p>
+    #   @return [Types::AdvancedConfiguration]
     class GetPositionEstimateRequest < Struct.new(
       nil,
       :wi_fi_access_points,
       :cell_towers,
       :ip,
       :gnss,
+      :gnss_multi_frame,
       :timestamp,
+      :advanced_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2532,6 +2573,9 @@ module Aws::IoTWireless
     #   <p>The name of the destination that's assigned to the wireless devices in the import
     #               task.</p>
     #   @return [String]
+    # @!attribute positioning
+    #   <p>The integration status of the Device Location feature for LoRaWAN and Sidewalk devices.</p>
+    #   @return [String]
     # @!attribute sidewalk
     #   <p>The Sidewalk-related information about an import task.</p>
     #   @return [Types::SidewalkGetStartImportInfo]
@@ -2566,6 +2610,7 @@ module Aws::IoTWireless
       :id,
       :arn,
       :destination_name,
+      :positioning,
       :sidewalk,
       :creation_time,
       :status,
@@ -2626,8 +2671,7 @@ module Aws::IoTWireless
     #   <p>Sidewalk device object.</p>
     #   @return [Types::SidewalkDevice]
     # @!attribute positioning
-    #   <p>FPort values for the GNSS, stream, and ClockSync functions of the positioning
-    #               information.</p>
+    #   <p>The integration status of the Device Location feature for LoRaWAN and Sidewalk devices.</p>
     #   @return [String]
     class GetWirelessDeviceResponse < Struct.new(
       nil,
@@ -2960,6 +3004,66 @@ module Aws::IoTWireless
       end
     end
 
+    # <p>A single GNSS scan capture containing the scan payload and optional capture time.</p>
+    # @!attribute payload
+    #   <p>Payload that contains the GNSS scan result, or NAV message, in hexadecimal
+    #               notation.</p>
+    #   @return [String]
+    # @!attribute capture_time
+    #   <p>Optional parameter that gives an estimate of the time when the GNSS scan information
+    #               is taken, in seconds GPS time (GPST). If capture time is not specified, the local server
+    #               time is used.</p>
+    #   @return [Float]
+    class GnssCapture < Struct.new(
+      nil,
+      :payload,
+      :capture_time,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Global navigation satellite system (GNSS) multi-frame object used for positioning.
+    #             Contains multiple GNSS scan captures that are combined by the solver.</p>
+    # @!attribute captures
+    #   <p>List of GNSS scan captures. Each capture contains a payload from a single GNSS scan.
+    #               The number of captures must be 2, 4, 8, 16, or 32.</p>
+    #   @return [Array<Types::GnssCapture>]
+    # @!attribute capture_time_accuracy
+    #   <p>Optional value that gives the capture time estimate accuracy, in seconds. If capture
+    #               time accuracy is not specified, default value of 300 is used.</p>
+    #   @return [Float]
+    # @!attribute assist_position
+    #   <p>Optional assistance position information, specified using latitude and longitude
+    #               values in degrees. The coordinates are inside the WGS84 reference frame.</p>
+    #   @return [Array<Float>]
+    # @!attribute assist_altitude
+    #   <p>Optional assistance altitude, which is the altitude of the device at capture time,
+    #               specified in meters above the WGS84 reference ellipsoid. This parameter is required
+    #               when Use2DSolver is enabled.</p>
+    #   @return [Float]
+    # @!attribute use2_d_solver
+    #   <p>Optional parameter that forces 2D solve, which modifies the positioning algorithm to a
+    #               2D solution problem. When this parameter is specified, the assistance altitude should
+    #               have an accuracy of at least 10 meters.</p>
+    #   @return [Boolean]
+    class GnssMultiFrame < Struct.new(
+      nil,
+      :captures,
+      :capture_time_accuracy,
+      :assist_position,
+      :assist_altitude,
+      :use2_d_solver,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:use2_d_solver] = false unless options.key?(:use2_d_solver)
+        super
+      end
+    end
+
     # <p>GSM local ID information, which corresponds to the local identification parameters of
     #             a GSM cell.</p>
     # @!attribute bsic
@@ -3235,6 +3339,12 @@ module Aws::IoTWireless
     #   <p>The name of the Sidewalk destination that describes the IoT rule to route messages
     #               received from devices in an import task that are onboarded to AWS IoT Wireless.</p>
     #   @return [String]
+    # @!attribute positioning
+    #   <p>The integration status of the Device Location feature for Sidewalk devices.</p>
+    #   @return [String]
+    # @!attribute sidewalk
+    #   <p>The Sidewalk object containing Sidewalk-related device information.</p>
+    #   @return [Types::SidewalkListDevicesForImportInfo]
     # @!attribute imported_wireless_device_list
     #   <p>List of wireless devices in an import task and their onboarding status.</p>
     #   @return [Array<Types::ImportedWirelessDevice>]
@@ -3242,6 +3352,8 @@ module Aws::IoTWireless
       nil,
       :next_token,
       :destination_name,
+      :positioning,
+      :sidewalk,
       :imported_wireless_device_list,
       keyword_init: true
     )
@@ -3636,7 +3748,7 @@ module Aws::IoTWireless
     #               results.</p>
     #   @return [String]
     # @!attribute destination_name
-    #   <p>A filter to list only the wireless devices that use this destination.</p>
+    #   <p>A filter to list only the wireless devices that use as uplink destination.</p>
     #   @return [String]
     # @!attribute device_profile_id
     #   <p>A filter to list only the wireless devices that use this device profile.</p>
@@ -4234,11 +4346,15 @@ module Aws::IoTWireless
     #               messages. The multicast message will be sent to each gateway in the list, with the
     #               transmission interval as the time interval between each message.</p>
     #   @return [Types::ParticipatingGatewaysMulticast]
+    # @!attribute default_session_parameters
+    #   <p>The default session parameters for the multicast group.</p>
+    #   @return [Types::DefaultSessionParametersMulticast]
     class LoRaWANMulticast < Struct.new(
       nil,
       :rf_region,
       :dl_class,
       :participating_gateways,
+      :default_session_parameters,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4263,6 +4379,9 @@ module Aws::IoTWireless
     #               messages. The multicast message will be sent to each gateway in the list, with the
     #               transmission interval as the time interval between each message.</p>
     #   @return [Types::ParticipatingGatewaysMulticast]
+    # @!attribute default_session_parameters
+    #   <p>The default session parameters for the multicast group.</p>
+    #   @return [Types::DefaultSessionParametersMulticast]
     class LoRaWANMulticastGet < Struct.new(
       nil,
       :rf_region,
@@ -4270,6 +4389,7 @@ module Aws::IoTWireless
       :number_of_devices_requested,
       :number_of_devices_in_group,
       :participating_gateways,
+      :default_session_parameters,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5280,9 +5400,17 @@ module Aws::IoTWireless
     # @!attribute device_profile_id
     #   <p>The ID of the Sidewalk device profile.</p>
     #   @return [String]
+    # @!attribute positioning
+    #   <p>The Positioning object of the Sidewalk device.</p>
+    #   @return [Types::SidewalkPositioning]
+    # @!attribute sidewalk_manufacturing_sn
+    #   <p>The Sidewalk manufacturing serial number.</p>
+    #   @return [String]
     class SidewalkCreateWirelessDevice < Struct.new(
       nil,
       :device_profile_id,
+      :positioning,
+      :sidewalk_manufacturing_sn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5313,6 +5441,9 @@ module Aws::IoTWireless
     # @!attribute status
     #   <p>The Sidewalk device status, such as provisioned or registered.</p>
     #   @return [String]
+    # @!attribute positioning
+    #   <p>The Positioning object of the Sidewalk device.</p>
+    #   @return [Types::SidewalkPositioning]
     class SidewalkDevice < Struct.new(
       nil,
       :amazon_id,
@@ -5323,6 +5454,7 @@ module Aws::IoTWireless
       :device_profile_id,
       :certificate_id,
       :status,
+      :positioning,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5395,10 +5527,14 @@ module Aws::IoTWireless
     #   <p>The IAM role that allows AWS IoT Wireless to access the CSV file in the S3
     #               bucket.</p>
     #   @return [String]
+    # @!attribute positioning
+    #   <p>The Positioning object of the Sidewalk device.</p>
+    #   @return [Types::SidewalkPositioning]
     class SidewalkGetStartImportInfo < Struct.new(
       nil,
       :device_creation_file_list,
       :role,
+      :positioning,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5423,6 +5559,9 @@ module Aws::IoTWireless
     # @!attribute status
     #   <p>The status of the Sidewalk devices, such as provisioned or registered.</p>
     #   @return [String]
+    # @!attribute positioning
+    #   <p>The Positioning object of the Sidewalk device.</p>
+    #   @return [Types::SidewalkPositioning]
     class SidewalkListDevice < Struct.new(
       nil,
       :amazon_id,
@@ -5431,6 +5570,31 @@ module Aws::IoTWireless
       :device_certificates,
       :device_profile_id,
       :status,
+      :positioning,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The Sidewalk-related object containing positioning information used to configure Sidewalk devices during import.</p>
+    # @!attribute positioning
+    #   <p>The Positioning object of the Sidewalk device.</p>
+    #   @return [Types::SidewalkPositioning]
+    class SidewalkListDevicesForImportInfo < Struct.new(
+      nil,
+      :positioning,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The Positioning object of the Sidewalk device.</p>
+    # @!attribute destination_name
+    #   <p>The location destination name of the Sidewalk device.</p>
+    #   @return [String]
+    class SidewalkPositioning < Struct.new(
+      nil,
+      :destination_name,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5475,9 +5639,13 @@ module Aws::IoTWireless
     #   <p>The Sidewalk manufacturing serial number (SMSN) of the device added to the import
     #               task.</p>
     #   @return [String]
+    # @!attribute positioning
+    #   <p>The Positioning object of the Sidewalk device.</p>
+    #   @return [Types::SidewalkPositioning]
     class SidewalkSingleStartImportInfo < Struct.new(
       nil,
       :sidewalk_manufacturing_sn,
+      :positioning,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5492,10 +5660,14 @@ module Aws::IoTWireless
     #   <p>The IAM role that allows AWS IoT Wireless to access the CSV file in the S3
     #               bucket.</p>
     #   @return [String]
+    # @!attribute positioning
+    #   <p>The Positioning object of the Sidewalk device.</p>
+    #   @return [Types::SidewalkPositioning]
     class SidewalkStartImportInfo < Struct.new(
       nil,
       :device_creation_file,
       :role,
+      :positioning,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5521,6 +5693,18 @@ module Aws::IoTWireless
     class SidewalkUpdateImportInfo < Struct.new(
       nil,
       :device_creation_file,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Sidewalk object for updating a wireless device.</p>
+    # @!attribute positioning
+    #   <p>The Positioning object of the Sidewalk device.</p>
+    #   @return [Types::SidewalkPositioning]
+    class SidewalkUpdateWirelessDevice < Struct.new(
+      nil,
+      :positioning,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5647,6 +5831,9 @@ module Aws::IoTWireless
     #   <p>The tag to attach to the specified resource. Tags are metadata that you can use to
     #               manage a resource.</p>
     #   @return [Array<Types::Tag>]
+    # @!attribute positioning
+    #   <p>The integration status of the Device Location feature for Sidewalk devices.</p>
+    #   @return [String]
     # @!attribute sidewalk
     #   <p>The Sidewalk-related parameters for importing a single wireless device.</p>
     #   @return [Types::SidewalkSingleStartImportInfo]
@@ -5656,6 +5843,7 @@ module Aws::IoTWireless
       :client_request_token,
       :device_name,
       :tags,
+      :positioning,
       :sidewalk,
       keyword_init: true
     )
@@ -5695,6 +5883,9 @@ module Aws::IoTWireless
     #   <p>The tag to attach to the specified resource. Tags are metadata that you can use to
     #               manage a resource.</p>
     #   @return [Array<Types::Tag>]
+    # @!attribute positioning
+    #   <p>The integration status of the Device Location feature for Sidewalk devices.</p>
+    #   @return [String]
     # @!attribute sidewalk
     #   <p>The Sidewalk-related parameters for importing wireless devices that need to be
     #               provisioned in bulk.</p>
@@ -5704,6 +5895,7 @@ module Aws::IoTWireless
       :destination_name,
       :client_request_token,
       :tags,
+      :positioning,
       :sidewalk,
       keyword_init: true
     )
@@ -6545,9 +6737,11 @@ module Aws::IoTWireless
     #   <p>The updated wireless device's configuration.</p>
     #   @return [Types::LoRaWANUpdateDevice]
     # @!attribute positioning
-    #   <p>FPort values for the GNSS, stream, and ClockSync functions of the positioning
-    #               information.</p>
+    #   <p>The integration status of the Device Location feature for LoRaWAN and Sidewalk devices.</p>
     #   @return [String]
+    # @!attribute sidewalk
+    #   <p>The updated sidewalk properties.</p>
+    #   @return [Types::SidewalkUpdateWirelessDevice]
     class UpdateWirelessDeviceRequest < Struct.new(
       nil,
       :id,
@@ -6556,6 +6750,7 @@ module Aws::IoTWireless
       :description,
       :lo_ra_wan,
       :positioning,
+      :sidewalk,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6764,6 +6959,30 @@ module Aws::IoTWireless
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Configuration for WiFi and cellular location payloads. Contains the confidence
+    #             level that determines the size of the uncertainty radius in the position estimate.</p>
+    # @!attribute confidence_percent
+    #   <p>The confidence level for WiFi and cellular position estimates, expressed as a
+    #               percentage. This value determines the size of the confidence area or uncertainty
+    #               radius for the estimated position. A higher confidence level produces a larger uncertainty radius, while a lower
+    #               confidence level produces a smaller, more precise radius.</p>
+    #            <p>Valid range: 50 to 99 inclusive. If not specified, the default value of 68 is
+    #               used, which corresponds to approximately one standard deviation of the normal
+    #               distribution.</p>
+    #   @return [Integer]
+    class WiFiCellular < Struct.new(
+      nil,
+      :confidence_percent,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:confidence_percent] = 68 unless options.key?(:confidence_percent)
+        super
+      end
+    end
+
     # <p>The log options for a wireless device event and can be used to set log levels for a
     #             specific wireless device event.</p>
     #          <p>For a LoRaWAN device, possible events for a log messsage are: <code>Join</code>,
@@ -6799,6 +7018,9 @@ module Aws::IoTWireless
     #               messages from the device in the import task that will be onboarded to AWS IoT
     #               Wireless</p>
     #   @return [String]
+    # @!attribute positioning
+    #   <p>The integration status of the Device Location feature for Sidewalk devices.</p>
+    #   @return [String]
     # @!attribute sidewalk
     #   <p>The Sidewalk-related information of the wireless device import task.</p>
     #   @return [Types::SidewalkGetStartImportInfo]
@@ -6832,6 +7054,7 @@ module Aws::IoTWireless
       :id,
       :arn,
       :destination_name,
+      :positioning,
       :sidewalk,
       :creation_time,
       :status,
@@ -6905,6 +7128,9 @@ module Aws::IoTWireless
     # @!attribute mc_group_id
     #   <p>Id of the multicast group.</p>
     #   @return [Integer]
+    # @!attribute positioning
+    #   <p>The integration status of the Device Location feature for LoRaWAN and Amazon Sidewalk enabled devices.</p>
+    #   @return [String]
     class WirelessDeviceStatistics < Struct.new(
       nil,
       :arn,
@@ -6918,6 +7144,7 @@ module Aws::IoTWireless
       :fuota_device_status,
       :multicast_device_status,
       :mc_group_id,
+      :positioning,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

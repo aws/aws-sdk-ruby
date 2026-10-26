@@ -11,7 +11,7 @@ Object.const_set('Aws', Module.new) unless Object.const_defined?('Aws')
 Aws.const_set('Mgn', Module.new) unless Aws.const_defined?('Mgn')
 
 # @title Application Migration Service
-# <p>The Application Migration Service service.</p>
+# <p>Application Migration Service.</p>
 module Aws::Mgn
   VERSION = '2.0.0.pre0'
 end

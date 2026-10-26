@@ -18,6 +18,8 @@ module Aws::CloudTrail
     AdvancedEventSelectors = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudtrail#AdvancedEventSelectors", name: "AdvancedEventSelectors")
     AdvancedFieldSelector = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudtrail#AdvancedFieldSelector", name: "AdvancedFieldSelector")
     AdvancedFieldSelectors = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudtrail#AdvancedFieldSelectors", name: "AdvancedFieldSelectors", traits: {"smithy.api#length" => {"min" => 1}})
+    AggregationConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudtrail#AggregationConfiguration", name: "AggregationConfiguration")
+    AggregationConfigurations = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudtrail#AggregationConfigurations", name: "AggregationConfigurations", traits: {"smithy.api#length" => {"min" => 0, "max" => 1}})
     BillingMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudtrail#BillingMode", name: "BillingMode")
     Boolean = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.cloudtrail#Boolean", name: "Boolean")
     ByteBuffer = ::Smithy::Schema::Shapes::BlobShape.new(id: "com.amazonaws.cloudtrail#ByteBuffer", name: "ByteBuffer")
@@ -90,6 +92,7 @@ module Aws::CloudTrail
     ErrorMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudtrail#ErrorMessage", name: "ErrorMessage", traits: {"smithy.api#length" => {"min" => 4, "max" => 1000}, "smithy.api#pattern" => ".*"})
     Event = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudtrail#Event", name: "Event")
     EventCategory = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudtrail#EventCategory", name: "EventCategory")
+    EventCategoryAggregation = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudtrail#EventCategoryAggregation", name: "EventCategoryAggregation")
     EventDataStore = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudtrail#EventDataStore", name: "EventDataStore")
     EventDataStoreARNInvalidException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudtrail#EventDataStoreARNInvalidException", name: "EventDataStoreARNInvalidException", traits: {"aws.protocols#awsQueryError" => {"code" => "EventDataStoreARNInvalid", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
     EventDataStoreAlreadyExistsException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudtrail#EventDataStoreAlreadyExistsException", name: "EventDataStoreAlreadyExistsException", traits: {"aws.protocols#awsQueryError" => {"code" => "EventDataStoreAlreadyExists", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
@@ -209,6 +212,13 @@ module Aws::CloudTrail
     ListImportsMaxResultsCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.cloudtrail#ListImportsMaxResultsCount", name: "ListImportsMaxResultsCount", traits: {"smithy.api#range" => {"min" => 1, "max" => 1000}})
     ListImportsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudtrail#ListImportsRequest", name: "ListImportsRequest")
     ListImportsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudtrail#ListImportsResponse", name: "ListImportsResponse")
+    ListInsightsDataDimensionKey = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudtrail#ListInsightsDataDimensionKey", name: "ListInsightsDataDimensionKey")
+    ListInsightsDataDimensionValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudtrail#ListInsightsDataDimensionValue", name: "ListInsightsDataDimensionValue", traits: {"smithy.api#length" => {"min" => 1, "max" => 2000}})
+    ListInsightsDataDimensions = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.cloudtrail#ListInsightsDataDimensions", name: "ListInsightsDataDimensions", traits: {"smithy.api#length" => {"min" => 1, "max" => 1}})
+    ListInsightsDataMaxResultsCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.cloudtrail#ListInsightsDataMaxResultsCount", name: "ListInsightsDataMaxResultsCount", traits: {"smithy.api#range" => {"min" => 1, "max" => 50}})
+    ListInsightsDataRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudtrail#ListInsightsDataRequest", name: "ListInsightsDataRequest")
+    ListInsightsDataResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudtrail#ListInsightsDataResponse", name: "ListInsightsDataResponse")
+    ListInsightsDataType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudtrail#ListInsightsDataType", name: "ListInsightsDataType")
     ListInsightsMetricDataRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudtrail#ListInsightsMetricDataRequest", name: "ListInsightsMetricDataRequest")
     ListInsightsMetricDataResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudtrail#ListInsightsMetricDataResponse", name: "ListInsightsMetricDataResponse")
     ListPublicKeysRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudtrail#ListPublicKeysRequest", name: "ListPublicKeysRequest")
@@ -323,6 +333,8 @@ module Aws::CloudTrail
     ServiceQuotaExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudtrail#ServiceQuotaExceededException", name: "ServiceQuotaExceededException", traits: {"aws.protocols#awsQueryError" => {"code" => "ServiceQuotaExceeded", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
     Source = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudtrail#Source", name: "Source", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => ".*"})
     SourceConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudtrail#SourceConfig", name: "SourceConfig")
+    SourceEventCategories = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudtrail#SourceEventCategories", name: "SourceEventCategories")
+    SourceEventCategory = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudtrail#SourceEventCategory", name: "SourceEventCategory")
     StartDashboardRefreshRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudtrail#StartDashboardRefreshRequest", name: "StartDashboardRefreshRequest")
     StartDashboardRefreshResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudtrail#StartDashboardRefreshResponse", name: "StartDashboardRefreshResponse")
     StartEventDataStoreIngestionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudtrail#StartEventDataStoreIngestionRequest", name: "StartEventDataStoreIngestionRequest")
@@ -345,6 +357,8 @@ module Aws::CloudTrail
     TagValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudtrail#TagValue", name: "TagValue", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}})
     TagsLimitExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudtrail#TagsLimitExceededException", name: "TagsLimitExceededException", traits: {"aws.protocols#awsQueryError" => {"code" => "TagsLimitExceeded", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
     TagsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudtrail#TagsList", name: "TagsList", traits: {"smithy.api#length" => {"min" => 0, "max" => 200}})
+    Template = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cloudtrail#Template", name: "Template")
+    Templates = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cloudtrail#Templates", name: "Templates", traits: {"smithy.api#length" => {"min" => 1, "max" => 50}})
     TerminationProtectionEnabled = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.cloudtrail#TerminationProtectionEnabled", name: "TerminationProtectionEnabled")
     ThrottlingException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cloudtrail#ThrottlingException", name: "ThrottlingException", traits: {"aws.protocols#awsQueryError" => {"code" => "ThrottlingException", "httpResponseCode" => 429}, "smithy.api#error" => "client", "smithy.api#httpError" => 429})
     TimeOfDay = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudtrail#TimeOfDay", name: "TimeOfDay", traits: {"smithy.api#pattern" => "^[0-9]{2}:[0-9]{2}$"})
@@ -401,6 +415,10 @@ module Aws::CloudTrail
     AdvancedFieldSelector.add_member(:not_ends_with, ::Smithy::Schema::Shapes::MemberShape.new(target: Operator, name: "NotEndsWith"))
     AdvancedFieldSelector.type = Types::AdvancedFieldSelector
     AdvancedFieldSelectors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AdvancedFieldSelector, name: "member"))
+    AggregationConfiguration.add_member(:templates, ::Smithy::Schema::Shapes::MemberShape.new(target: Templates, name: "Templates", traits: {"smithy.api#required" => {}}))
+    AggregationConfiguration.add_member(:event_category, ::Smithy::Schema::Shapes::MemberShape.new(target: EventCategoryAggregation, name: "EventCategory", traits: {"smithy.api#required" => {}}))
+    AggregationConfiguration.type = Types::AggregationConfiguration
+    AggregationConfigurations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregationConfiguration, name: "member"))
     BillingMode.add_member(:extendable_retention_pricing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXTENDABLE_RETENTION_PRICING", traits: {"smithy.api#enumValue" => "EXTENDABLE_RETENTION_PRICING"}))
     BillingMode.add_member(:fixed_retention_pricing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FIXED_RETENTION_PRICING", traits: {"smithy.api#enumValue" => "FIXED_RETENTION_PRICING"}))
     CancelQueryRequest.add_member(:event_data_store, ::Smithy::Schema::Shapes::MemberShape.new(target: EventDataStoreArn, name: "EventDataStore", traits: {"smithy.api#deprecated" => {"message" => "EventDataStore is no longer required by CancelQueryRequest"}}))
@@ -505,6 +523,7 @@ module Aws::CloudTrail
     CreateTrailRequest.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "KmsKeyId"))
     CreateTrailRequest.add_member(:is_organization_trail, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "IsOrganizationTrail"))
     CreateTrailRequest.add_member(:tags_list, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsList, name: "TagsList"))
+    CreateTrailRequest.add_member(:recursive_logging, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "RecursiveLogging"))
     CreateTrailRequest.type = Types::CreateTrailRequest
     CreateTrailResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name"))
     CreateTrailResponse.add_member(:s3_bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "S3BucketName"))
@@ -519,6 +538,7 @@ module Aws::CloudTrail
     CreateTrailResponse.add_member(:cloud_watch_logs_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CloudWatchLogsRoleArn"))
     CreateTrailResponse.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "KmsKeyId"))
     CreateTrailResponse.add_member(:is_organization_trail, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "IsOrganizationTrail"))
+    CreateTrailResponse.add_member(:recursive_logging, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "RecursiveLogging"))
     CreateTrailResponse.type = Types::CreateTrailResponse
     DashboardDetail.add_member(:dashboard_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardArn, name: "DashboardArn"))
     DashboardDetail.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardType, name: "Type"))
@@ -615,6 +635,7 @@ module Aws::CloudTrail
     Event.add_member(:cloud_trail_event, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CloudTrailEvent"))
     Event.type = Types::Event
     EventCategory.add_member(:insight, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Insight", traits: {"smithy.api#enumValue" => "insight"}))
+    EventCategoryAggregation.add_member(:data, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Data", traits: {"smithy.api#enumValue" => "Data"}))
     EventDataStore.add_member(:event_data_store_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EventDataStoreArn, name: "EventDataStoreArn"))
     EventDataStore.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: EventDataStoreName, name: "Name"))
     EventDataStore.add_member(:termination_protection_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: TerminationProtectionEnabled, name: "TerminationProtectionEnabled", traits: {"smithy.api#deprecated" => {"message" => "TerminationProtectionEnabled is no longer returned by ListEventDataStores"}}))
@@ -691,11 +712,14 @@ module Aws::CloudTrail
     GetDashboardResponse.add_member(:last_refresh_failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "LastRefreshFailureReason"))
     GetDashboardResponse.add_member(:termination_protection_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: TerminationProtectionEnabled, name: "TerminationProtectionEnabled"))
     GetDashboardResponse.type = Types::GetDashboardResponse
+    GetEventConfigurationRequest.add_member(:trail_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "TrailName"))
     GetEventConfigurationRequest.add_member(:event_data_store, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "EventDataStore"))
     GetEventConfigurationRequest.type = Types::GetEventConfigurationRequest
+    GetEventConfigurationResponse.add_member(:trail_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "TrailARN"))
     GetEventConfigurationResponse.add_member(:event_data_store_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EventDataStoreArn, name: "EventDataStoreArn"))
     GetEventConfigurationResponse.add_member(:max_event_size, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxEventSize, name: "MaxEventSize"))
     GetEventConfigurationResponse.add_member(:context_key_selectors, ::Smithy::Schema::Shapes::MemberShape.new(target: ContextKeySelectors, name: "ContextKeySelectors"))
+    GetEventConfigurationResponse.add_member(:aggregation_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregationConfigurations, name: "AggregationConfigurations"))
     GetEventConfigurationResponse.type = Types::GetEventConfigurationResponse
     GetEventDataStoreRequest.add_member(:event_data_store, ::Smithy::Schema::Shapes::MemberShape.new(target: EventDataStoreArn, name: "EventDataStore", traits: {"smithy.api#required" => {}}))
     GetEventDataStoreRequest.type = Types::GetEventDataStoreRequest
@@ -829,6 +853,7 @@ module Aws::CloudTrail
     InsightNotEnabledException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     InsightNotEnabledException.type = Types::InsightNotEnabledException
     InsightSelector.add_member(:insight_type, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightType, name: "InsightType"))
+    InsightSelector.add_member(:event_categories, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceEventCategories, name: "EventCategories"))
     InsightSelector.type = Types::InsightSelector
     InsightSelectors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightSelector, name: "member"))
     InsightType.add_member(:api_call_rate_insight, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ApiCallRateInsight", traits: {"smithy.api#enumValue" => "ApiCallRateInsight"}))
@@ -939,6 +964,24 @@ module Aws::CloudTrail
     ListImportsResponse.add_member(:imports, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportsList, name: "Imports"))
     ListImportsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "NextToken"))
     ListImportsResponse.type = Types::ListImportsResponse
+    ListInsightsDataDimensionKey.add_member(:event_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EVENT_ID", traits: {"smithy.api#enumValue" => "EventId"}))
+    ListInsightsDataDimensionKey.add_member(:event_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EVENT_NAME", traits: {"smithy.api#enumValue" => "EventName"}))
+    ListInsightsDataDimensionKey.add_member(:event_source, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EVENT_SOURCE", traits: {"smithy.api#enumValue" => "EventSource"}))
+    ListInsightsDataDimensions.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ListInsightsDataDimensionKey, name: "key"))
+    ListInsightsDataDimensions.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ListInsightsDataDimensionValue, name: "value"))
+    ListInsightsDataRequest.add_member(:insight_source, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "InsightSource", traits: {"smithy.api#required" => {}}))
+    ListInsightsDataRequest.add_member(:data_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ListInsightsDataType, name: "DataType", traits: {"smithy.api#required" => {}}))
+    ListInsightsDataRequest.add_member(:dimensions, ::Smithy::Schema::Shapes::MemberShape.new(target: ListInsightsDataDimensions, name: "Dimensions"))
+    ListInsightsDataRequest.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "StartTime"))
+    ListInsightsDataRequest.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "EndTime"))
+    ListInsightsDataRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ListInsightsDataMaxResultsCount, name: "MaxResults"))
+    ListInsightsDataRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "NextToken"))
+    ListInsightsDataRequest.type = Types::ListInsightsDataRequest
+    ListInsightsDataResponse.add_member(:events, ::Smithy::Schema::Shapes::MemberShape.new(target: EventsList, name: "Events"))
+    ListInsightsDataResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "NextToken"))
+    ListInsightsDataResponse.type = Types::ListInsightsDataResponse
+    ListInsightsDataType.add_member(:insights_events, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INSIGHTS_EVENTS", traits: {"smithy.api#enumValue" => "InsightsEvents"}))
+    ListInsightsMetricDataRequest.add_member(:trail_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "TrailName"))
     ListInsightsMetricDataRequest.add_member(:event_source, ::Smithy::Schema::Shapes::MemberShape.new(target: EventSource, name: "EventSource", traits: {"smithy.api#required" => {}}))
     ListInsightsMetricDataRequest.add_member(:event_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EventName, name: "EventName", traits: {"smithy.api#required" => {}}))
     ListInsightsMetricDataRequest.add_member(:insight_type, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightType, name: "InsightType", traits: {"smithy.api#required" => {}}))
@@ -950,6 +993,7 @@ module Aws::CloudTrail
     ListInsightsMetricDataRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightsMetricMaxResults, name: "MaxResults"))
     ListInsightsMetricDataRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightsMetricNextToken, name: "NextToken"))
     ListInsightsMetricDataRequest.type = Types::ListInsightsMetricDataRequest
+    ListInsightsMetricDataResponse.add_member(:trail_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "TrailARN"))
     ListInsightsMetricDataResponse.add_member(:event_source, ::Smithy::Schema::Shapes::MemberShape.new(target: EventSource, name: "EventSource"))
     ListInsightsMetricDataResponse.add_member(:event_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EventName, name: "EventName"))
     ListInsightsMetricDataResponse.add_member(:insight_type, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightType, name: "InsightType"))
@@ -1038,13 +1082,17 @@ module Aws::CloudTrail
     PublicKey.add_member(:fingerprint, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Fingerprint"))
     PublicKey.type = Types::PublicKey
     PublicKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PublicKey, name: "member"))
+    PutEventConfigurationRequest.add_member(:trail_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "TrailName"))
     PutEventConfigurationRequest.add_member(:event_data_store, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "EventDataStore"))
-    PutEventConfigurationRequest.add_member(:max_event_size, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxEventSize, name: "MaxEventSize", traits: {"smithy.api#required" => {}}))
-    PutEventConfigurationRequest.add_member(:context_key_selectors, ::Smithy::Schema::Shapes::MemberShape.new(target: ContextKeySelectors, name: "ContextKeySelectors", traits: {"smithy.api#required" => {}}))
+    PutEventConfigurationRequest.add_member(:max_event_size, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxEventSize, name: "MaxEventSize"))
+    PutEventConfigurationRequest.add_member(:context_key_selectors, ::Smithy::Schema::Shapes::MemberShape.new(target: ContextKeySelectors, name: "ContextKeySelectors"))
+    PutEventConfigurationRequest.add_member(:aggregation_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregationConfigurations, name: "AggregationConfigurations"))
     PutEventConfigurationRequest.type = Types::PutEventConfigurationRequest
+    PutEventConfigurationResponse.add_member(:trail_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "TrailARN"))
     PutEventConfigurationResponse.add_member(:event_data_store_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EventDataStoreArn, name: "EventDataStoreArn"))
     PutEventConfigurationResponse.add_member(:max_event_size, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxEventSize, name: "MaxEventSize"))
     PutEventConfigurationResponse.add_member(:context_key_selectors, ::Smithy::Schema::Shapes::MemberShape.new(target: ContextKeySelectors, name: "ContextKeySelectors"))
+    PutEventConfigurationResponse.add_member(:aggregation_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregationConfigurations, name: "AggregationConfigurations"))
     PutEventConfigurationResponse.type = Types::PutEventConfigurationResponse
     PutEventSelectorsRequest.add_member(:trail_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "TrailName", traits: {"smithy.api#required" => {}}))
     PutEventSelectorsRequest.add_member(:event_selectors, ::Smithy::Schema::Shapes::MemberShape.new(target: EventSelectors, name: "EventSelectors"))
@@ -1185,6 +1233,9 @@ module Aws::CloudTrail
     SourceConfig.add_member(:apply_to_all_regions, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "ApplyToAllRegions"))
     SourceConfig.add_member(:advanced_event_selectors, ::Smithy::Schema::Shapes::MemberShape.new(target: AdvancedEventSelectors, name: "AdvancedEventSelectors"))
     SourceConfig.type = Types::SourceConfig
+    SourceEventCategories.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceEventCategory, name: "member"))
+    SourceEventCategory.add_member(:management, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Management", traits: {"smithy.api#enumValue" => "Management"}))
+    SourceEventCategory.add_member(:data, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Data", traits: {"smithy.api#enumValue" => "Data"}))
     StartDashboardRefreshRequest.add_member(:dashboard_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardArn, name: "DashboardId", traits: {"smithy.api#required" => {}}))
     StartDashboardRefreshRequest.add_member(:query_parameter_values, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryParameterValues, name: "QueryParameterValues"))
     StartDashboardRefreshRequest.type = Types::StartDashboardRefreshRequest
@@ -1244,6 +1295,10 @@ module Aws::CloudTrail
     TagsLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     TagsLimitExceededException.type = Types::TagsLimitExceededException
     TagsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
+    Template.add_member(:api_activity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "API_ACTIVITY", traits: {"smithy.api#enumValue" => "API_ACTIVITY"}))
+    Template.add_member(:resource_access, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_ACCESS", traits: {"smithy.api#enumValue" => "RESOURCE_ACCESS"}))
+    Template.add_member(:user_actions, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "USER_ACTIONS", traits: {"smithy.api#enumValue" => "USER_ACTIONS"}))
+    Templates.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Template, name: "member"))
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     ThrottlingException.type = Types::ThrottlingException
     Timestamps.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "member"))
@@ -1263,6 +1318,7 @@ module Aws::CloudTrail
     Trail.add_member(:has_custom_event_selectors, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "HasCustomEventSelectors"))
     Trail.add_member(:has_insight_selectors, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "HasInsightSelectors"))
     Trail.add_member(:is_organization_trail, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "IsOrganizationTrail"))
+    Trail.add_member(:recursive_logging, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "RecursiveLogging"))
     Trail.type = Types::Trail
     TrailAlreadyExistsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     TrailAlreadyExistsException.type = Types::TrailAlreadyExistsException
@@ -1340,6 +1396,7 @@ module Aws::CloudTrail
     UpdateTrailRequest.add_member(:cloud_watch_logs_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CloudWatchLogsRoleArn"))
     UpdateTrailRequest.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "KmsKeyId"))
     UpdateTrailRequest.add_member(:is_organization_trail, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "IsOrganizationTrail"))
+    UpdateTrailRequest.add_member(:recursive_logging, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "RecursiveLogging"))
     UpdateTrailRequest.type = Types::UpdateTrailRequest
     UpdateTrailResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name"))
     UpdateTrailResponse.add_member(:s3_bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "S3BucketName"))
@@ -1354,6 +1411,7 @@ module Aws::CloudTrail
     UpdateTrailResponse.add_member(:cloud_watch_logs_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CloudWatchLogsRoleArn"))
     UpdateTrailResponse.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "KmsKeyId"))
     UpdateTrailResponse.add_member(:is_organization_trail, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "IsOrganizationTrail"))
+    UpdateTrailResponse.add_member(:recursive_logging, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "RecursiveLogging"))
     UpdateTrailResponse.type = Types::UpdateTrailResponse
     ViewPropertiesMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ViewPropertiesKey, name: "key"))
     ViewPropertiesMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ViewPropertiesValue, name: "value"))
@@ -1368,7 +1426,7 @@ module Aws::CloudTrail
       service.id = "com.amazonaws.cloudtrail#CloudTrail_20131101"
       service.name = "CloudTrail20131101"
       service.version = "2013-11-01"
-      service.traits = {"aws.api#service" => {"sdkId" => "CloudTrail", "arnNamespace" => "cloudtrail", "cloudFormationName" => "CloudTrail", "cloudTrailEventSource" => "cloudtrail.amazonaws.com", "endpointPrefix" => "cloudtrail"}, "aws.auth#sigv4" => {"name" => "cloudtrail"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "AWS CloudTrail", "smithy.api#xmlNamespace" => {"uri" => "http://cloudtrail.amazonaws.com/doc/2013-11-01/"}}
+      service.traits = {"aws.api#service" => {"sdkId" => "CloudTrail", "arnNamespace" => "cloudtrail", "cloudFormationName" => "CloudTrail", "cloudTrailEventSource" => "cloudtrail.amazonaws.com", "endpointPrefix" => "cloudtrail"}, "aws.auth#sigv4" => {"name" => "cloudtrail"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "AWS CloudTrail", "smithy.api#xmlNamespace" => {"uri" => "http://cloudtrail.amazonaws.com/doc/2013-11-01/"}, "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}, {"fn" => "stringEquals", "argv" => [{"ref" => "Region"}, "us-gov-east-1"]}, {"fn" => "stringEquals", "argv" => [{"ref" => "Region"}, "us-gov-west-1"]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://cloudtrail-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://cloudtrail.us-gov-east-1.amazonaws.com", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://cloudtrail.us-gov-west-1.amazonaws.com", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://cloudtrail-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://cloudtrail.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://cloudtrail.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 15, "nodes" => "/////wAAAAH/////AAAAAAAAAA4AAAADAAAAAQAAAAQF9eENAAAAAgAAAAUF9eENAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEMAAAABQX14QoF9eELAAAABAAAAAwAAAAJAAAABgAAAAoF9eEJAAAABwX14QYAAAALAAAACAX14QcF9eEIAAAABQAAAA0F9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAAPAAAABAX14QIF9eED"}}
       service.add_operation(:add_tags, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cloudtrail#AddTags"
         operation.name = "AddTags"
@@ -1465,6 +1523,7 @@ module Aws::CloudTrail
         operation.errors << OperationNotPermittedException
         operation.errors << OrganizationNotInAllFeaturesModeException
         operation.errors << OrganizationsNotInUseException
+        operation.errors << ThrottlingException
         operation.errors << UnsupportedOperationException
         operation.traits = {}
       end)
@@ -1717,8 +1776,10 @@ module Aws::CloudTrail
         operation.errors << InvalidEventDataStoreStatusException
         operation.errors << InvalidParameterCombinationException
         operation.errors << InvalidParameterException
+        operation.errors << InvalidTrailNameException
         operation.errors << NoManagementAccountSLRExistsException
         operation.errors << OperationNotPermittedException
+        operation.errors << TrailNotFoundException
         operation.errors << UnsupportedOperationException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
@@ -1889,12 +1950,24 @@ module Aws::CloudTrail
         operation.traits = {"smithy.api#idempotent" => {}}
         operation[:paginator] = Paginators::ListImports.new
       end)
+      service.add_operation(:list_insights_data, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cloudtrail#ListInsightsData"
+        operation.name = "ListInsightsData"
+        operation.input = ListInsightsDataRequest
+        operation.output = ListInsightsDataResponse
+        operation.errors << InvalidParameterException
+        operation.errors << OperationNotPermittedException
+        operation.errors << UnsupportedOperationException
+        operation.traits = {"smithy.api#idempotent" => {}}
+        operation[:paginator] = Paginators::ListInsightsData.new
+      end)
       service.add_operation(:list_insights_metric_data, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cloudtrail#ListInsightsMetricData"
         operation.name = "ListInsightsMetricData"
         operation.input = ListInsightsMetricDataRequest
         operation.output = ListInsightsMetricDataResponse
         operation.errors << InvalidParameterException
+        operation.errors << InvalidTrailNameException
         operation.errors << OperationNotPermittedException
         operation.errors << UnsupportedOperationException
         operation.traits = {"smithy.api#idempotent" => {}}
@@ -1990,12 +2063,15 @@ module Aws::CloudTrail
         operation.errors << InsufficientIAMAccessPermissionException
         operation.errors << InvalidEventDataStoreCategoryException
         operation.errors << InvalidEventDataStoreStatusException
+        operation.errors << InvalidHomeRegionException
         operation.errors << InvalidParameterCombinationException
         operation.errors << InvalidParameterException
+        operation.errors << InvalidTrailNameException
         operation.errors << NoManagementAccountSLRExistsException
         operation.errors << NotOrganizationMasterAccountException
         operation.errors << OperationNotPermittedException
         operation.errors << ThrottlingException
+        operation.errors << TrailNotFoundException
         operation.errors << UnsupportedOperationException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
@@ -2024,6 +2100,7 @@ module Aws::CloudTrail
         operation.input = PutInsightSelectorsRequest
         operation.output = PutInsightSelectorsResponse
         operation.errors << CloudTrailARNInvalidException
+        operation.errors << ConflictException
         operation.errors << InsufficientEncryptionPolicyException
         operation.errors << InsufficientS3BucketPolicyException
         operation.errors << InvalidHomeRegionException
@@ -2301,6 +2378,7 @@ module Aws::CloudTrail
         operation.input = UpdateEventDataStoreRequest
         operation.output = UpdateEventDataStoreResponse
         operation.errors << CloudTrailAccessNotEnabledException
+        operation.errors << ConflictException
         operation.errors << EventDataStoreAlreadyExistsException
         operation.errors << EventDataStoreARNInvalidException
         operation.errors << EventDataStoreHasOngoingImportException
@@ -2319,6 +2397,7 @@ module Aws::CloudTrail
         operation.errors << OperationNotPermittedException
         operation.errors << OrganizationNotInAllFeaturesModeException
         operation.errors << OrganizationsNotInUseException
+        operation.errors << ThrottlingException
         operation.errors << UnsupportedOperationException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)

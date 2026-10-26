@@ -177,6 +177,7 @@ module Aws::Personalize
     HyperParameterRanges: StructureShape
     HyperParameters: MapShape
     ImportMode: EnumShape
+    IncludedDatasetColumns: MapShape
     IngestionMode: EnumShape
     Integer: IntegerShape
     IntegerHyperParameterRange: StructureShape
@@ -247,6 +248,10 @@ module Aws::Personalize
     PerformAutoML: BooleanShape
     PerformAutoTraining: BooleanShape
     PerformHPO: BooleanShape
+    PerformIncrementalUpdate: BooleanShape
+    RankingInfluence: MapShape
+    RankingInfluenceType: EnumShape
+    RankingInfluenceWeight: FloatShape
     Recipe: StructureShape
     RecipeProvider: EnumShape
     RecipeSummary: StructureShape

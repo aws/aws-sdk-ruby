@@ -66,18 +66,22 @@ module Aws::ApplicationSignals
         ?service: Types::ServiceEntity,
         ?slo: Types::ServiceLevelObjectiveEntity,
         ?service_operation: Types::ServiceOperationEntity,
+        ?canary: Types::CanaryEntity,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor service: Types::ServiceEntity?
       attr_accessor slo: Types::ServiceLevelObjectiveEntity?
       attr_accessor service_operation: Types::ServiceOperationEntity?
+      attr_accessor canary: Types::CanaryEntity?
 
       class Service < AuditTargetEntity
       end
       class Slo < AuditTargetEntity
       end
       class ServiceOperation < AuditTargetEntity
+      end
+      class Canary < AuditTargetEntity
       end
       class Unknown < AuditTargetEntity
       end
@@ -89,13 +93,125 @@ module Aws::ApplicationSignals
       def initialize: (
         ?auditor: String,
         ?description: String,
+        ?data: Hash[String, String],
         ?severity: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor auditor: String?
       attr_accessor description: String?
+      attr_accessor data: Hash[String, String]?
       attr_accessor severity: String?
+    end
+
+    class BatchDeleteByResourceArns
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arns: Array[String],
+        ?instrumentation_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arns: Array[String]?
+      attr_accessor instrumentation_type: String?
+    end
+
+    class BatchDeleteDeletionTarget
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?scope: Types::BatchDeleteScope,
+        ?resource_arns: Types::BatchDeleteByResourceArns,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scope: Types::BatchDeleteScope?
+      attr_accessor resource_arns: Types::BatchDeleteByResourceArns?
+
+      class Scope < BatchDeleteDeletionTarget
+      end
+      class ResourceArns < BatchDeleteDeletionTarget
+      end
+      class Unknown < BatchDeleteDeletionTarget
+      end
+    end
+
+    class BatchDeleteError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    module BatchDeleteErrorCode
+      RESOURCE_NOT_FOUND: String
+      ACCESS_DENIED: String
+      INTERNAL_SERVICE_ERROR: String
+    end
+
+    class BatchDeleteInstrumentationConfigurationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deletion_target: Types::BatchDeleteDeletionTarget,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deletion_target: Types::BatchDeleteDeletionTarget?
+    end
+
+    class BatchDeleteInstrumentationConfigurationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deleted_count: Integer,
+        ?successful_deletions: Array[Types::BatchDeleteSuccessfulDeletion],
+        ?errors: Array[Types::BatchDeleteError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deleted_count: Integer?
+      attr_accessor successful_deletions: Array[Types::BatchDeleteSuccessfulDeletion]?
+      attr_accessor errors: Array[Types::BatchDeleteError]?
+    end
+
+    class BatchDeleteScope
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service: String,
+        ?environment: String,
+        ?instrumentation_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service: String?
+      attr_accessor environment: String?
+      attr_accessor instrumentation_type: String?
+    end
+
+    class BatchDeleteSuccessfulDeletion
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?signal_type: String,
+        ?location_hash: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor signal_type: String?
+      attr_accessor location_hash: String?
     end
 
     class BatchGetServiceLevelObjectiveBudgetReportInput
@@ -195,6 +311,58 @@ module Aws::ApplicationSignals
       attr_accessor duration: Integer?
     end
 
+    class CanaryEntity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?canary_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor canary_name: String?
+    end
+
+    class CaptureConfiguration
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?code_capture: Types::CodeCaptureConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code_capture: Types::CodeCaptureConfiguration?
+
+      class CodeCapture < CaptureConfiguration
+      end
+      class Unknown < CaptureConfiguration
+      end
+    end
+
+    class CaptureLimitsConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_hits: Integer,
+        ?max_string_length: Integer,
+        ?max_collection_width: Integer,
+        ?max_collection_depth: Integer,
+        ?max_stack_frames: Integer,
+        ?max_stack_trace_size: Integer,
+        ?max_object_depth: Integer,
+        ?max_fields_per_object: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_hits: Integer?
+      attr_accessor max_string_length: Integer?
+      attr_accessor max_collection_width: Integer?
+      attr_accessor max_collection_depth: Integer?
+      attr_accessor max_stack_frames: Integer?
+      attr_accessor max_stack_trace_size: Integer?
+      attr_accessor max_object_depth: Integer?
+      attr_accessor max_fields_per_object: Integer?
+    end
+
     class ChangeEvent
       include Smithy::Schema::Structure
 
@@ -222,6 +390,76 @@ module Aws::ApplicationSignals
 
     module ChangeEventType
       DEPLOYMENT: String
+      CONFIGURATION: String
+    end
+
+    class CodeCaptureConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capture_arguments: Array[String],
+        ?capture_return: bool,
+        ?capture_stack_trace: bool,
+        ?capture_locals: Array[String],
+        ?capture_limits: Types::CaptureLimitsConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capture_arguments: Array[String]?
+      attr_accessor capture_return: bool?
+      attr_accessor capture_stack_trace: bool?
+      attr_accessor capture_locals: Array[String]?
+      attr_accessor capture_limits: Types::CaptureLimitsConfig?
+    end
+
+    class CodeLocation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?language: String,
+        ?code_unit: String,
+        ?class_name: String,
+        ?method_name: String,
+        ?file_path: String,
+        ?line_number: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor language: String?
+      attr_accessor code_unit: String?
+      attr_accessor class_name: String?
+      attr_accessor method_name: String?
+      attr_accessor file_path: String?
+      attr_accessor line_number: Integer?
+    end
+
+    class CompositeSliComponent
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?operation_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_name: String?
+
+      class OperationName < CompositeSliComponent
+      end
+      class Unknown < CompositeSliComponent
+      end
+    end
+
+    class CompositeSliConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?selection_config: Types::SelectionConfig,
+        ?components: Array[Types::CompositeSliComponent],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor selection_config: Types::SelectionConfig?
+      attr_accessor components: Array[Types::CompositeSliComponent]?
     end
 
     class ConflictException
@@ -240,6 +478,68 @@ module Aws::ApplicationSignals
       DIRECT: String
     end
 
+    class CreateInstrumentationConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instrumentation_type: String,
+        ?service: String,
+        ?environment: String,
+        ?signal_type: String,
+        ?location: Types::Location,
+        ?description: String,
+        ?expires_at: Time,
+        ?attribute_filters: Array[Hash[String, String]],
+        ?capture_configuration: Types::CaptureConfiguration,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instrumentation_type: String?
+      attr_accessor service: String?
+      attr_accessor environment: String?
+      attr_accessor signal_type: String?
+      attr_accessor location: Types::Location?
+      attr_accessor description: String?
+      attr_accessor expires_at: Time?
+      attr_accessor attribute_filters: Array[Hash[String, String]]?
+      attr_accessor capture_configuration: Types::CaptureConfiguration?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateInstrumentationConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instrumentation_type: String,
+        ?service: String,
+        ?environment: String,
+        ?signal_type: String,
+        ?location: Types::Location,
+        ?location_hash: String,
+        ?description: String,
+        ?expires_at: Time,
+        ?attribute_filters: Array[Hash[String, String]],
+        ?capture_configuration: Types::CaptureConfiguration,
+        ?created_at: Time,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instrumentation_type: String?
+      attr_accessor service: String?
+      attr_accessor environment: String?
+      attr_accessor signal_type: String?
+      attr_accessor location: Types::Location?
+      attr_accessor location_hash: String?
+      attr_accessor description: String?
+      attr_accessor expires_at: Time?
+      attr_accessor attribute_filters: Array[Hash[String, String]]?
+      attr_accessor capture_configuration: Types::CaptureConfiguration?
+      attr_accessor created_at: Time?
+      attr_accessor arn: String?
+    end
+
     class CreateServiceLevelObjectiveInput
       include Smithy::Schema::Structure
 
@@ -251,6 +551,8 @@ module Aws::ApplicationSignals
         ?goal: Types::Goal,
         ?tags: Array[Types::Tag],
         ?burn_rate_configurations: Array[Types::BurnRateConfiguration],
+        ?create_recommended_slo: bool,
+        ?auto_investigation_enabled: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -261,6 +563,8 @@ module Aws::ApplicationSignals
       attr_accessor goal: Types::Goal?
       attr_accessor tags: Array[Types::Tag]?
       attr_accessor burn_rate_configurations: Array[Types::BurnRateConfiguration]?
+      attr_accessor create_recommended_slo: bool?
+      attr_accessor auto_investigation_enabled: bool?
     end
 
     class CreateServiceLevelObjectiveOutput
@@ -281,6 +585,36 @@ module Aws::ApplicationSignals
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+    end
+
+    class DeleteInstrumentationConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instrumentation_type: String,
+        ?service: String,
+        ?environment: String,
+        ?signal_type: String,
+        ?location_identifier: Types::LocationIdentifier,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instrumentation_type: String?
+      attr_accessor service: String?
+      attr_accessor environment: String?
+      attr_accessor signal_type: String?
+      attr_accessor location_identifier: Types::LocationIdentifier?
+    end
+
+    class DeleteInstrumentationConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deletion_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deletion_status: String?
     end
 
     class DeleteServiceLevelObjectiveInput
@@ -329,6 +663,11 @@ module Aws::ApplicationSignals
       attr_accessor edges: Array[Types::Edge]?
     end
 
+    module DetailLevel
+      BRIEF: String
+      DETAILED: String
+    end
+
     class Dimension
       include Smithy::Schema::Structure
 
@@ -347,6 +686,14 @@ module Aws::ApplicationSignals
       HOUR: String
       DAY: String
       MONTH: String
+    end
+
+    module DynamicInstrumentationDeletionStatus
+      DELETED: String
+    end
+
+    module DynamicInstrumentationSignalType
+      SNAPSHOT: String
     end
 
     class Edge
@@ -386,6 +733,88 @@ module Aws::ApplicationSignals
       attr_accessor start_time: Time?
       attr_accessor recurrence_rule: Types::RecurrenceRule?
       attr_accessor reason: String?
+    end
+
+    class GetInstrumentationConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instrumentation_type: String,
+        ?service: String,
+        ?environment: String,
+        ?signal_type: String,
+        ?location_identifier: Types::LocationIdentifier,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instrumentation_type: String?
+      attr_accessor service: String?
+      attr_accessor environment: String?
+      attr_accessor signal_type: String?
+      attr_accessor location_identifier: Types::LocationIdentifier?
+    end
+
+    class GetInstrumentationConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration: Types::InstrumentationConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration: Types::InstrumentationConfiguration?
+    end
+
+    class GetInstrumentationConfigurationStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instrumentation_type: String,
+        ?service: String,
+        ?environment: String,
+        ?signal_type: String,
+        ?location_identifier: Types::LocationIdentifier,
+        ?status: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instrumentation_type: String?
+      attr_accessor service: String?
+      attr_accessor environment: String?
+      attr_accessor signal_type: String?
+      attr_accessor location_identifier: Types::LocationIdentifier?
+      attr_accessor status: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class GetInstrumentationConfigurationStatusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service: String,
+        ?environment: String,
+        ?signal_type: String,
+        ?location: Types::Location,
+        ?status: String,
+        ?events: Array[Types::InstrumentationStatusEvent],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service: String?
+      attr_accessor environment: String?
+      attr_accessor signal_type: String?
+      attr_accessor location: Types::Location?
+      attr_accessor status: String?
+      attr_accessor events: Array[Types::InstrumentationStatusEvent]?
+      attr_accessor next_token: String?
     end
 
     class GetServiceInput
@@ -485,6 +914,146 @@ module Aws::ApplicationSignals
       attr_accessor updated_at: Time?
     end
 
+    class InstrumentationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instrumentation_type: String,
+        ?service: String,
+        ?environment: String,
+        ?signal_type: String,
+        ?location: Types::Location,
+        ?location_hash: String,
+        ?description: String,
+        ?expires_at: Time,
+        ?attribute_filters: Array[Hash[String, String]],
+        ?capture_configuration: Types::CaptureConfiguration,
+        ?created_at: Time,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instrumentation_type: String?
+      attr_accessor service: String?
+      attr_accessor environment: String?
+      attr_accessor signal_type: String?
+      attr_accessor location: Types::Location?
+      attr_accessor location_hash: String?
+      attr_accessor description: String?
+      attr_accessor expires_at: Time?
+      attr_accessor attribute_filters: Array[Hash[String, String]]?
+      attr_accessor capture_configuration: Types::CaptureConfiguration?
+      attr_accessor created_at: Time?
+      attr_accessor arn: String?
+    end
+
+    module InstrumentationConfigurationStatus
+      READY: String
+      ERROR: String
+      ACTIVE: String
+      DISABLED: String
+    end
+
+    class InstrumentationConfigurationStatusReport
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instrumentation_type: String,
+        ?signal_type: String,
+        ?location_hash: String,
+        ?status: String,
+        ?time: Time,
+        ?error_cause: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instrumentation_type: String?
+      attr_accessor signal_type: String?
+      attr_accessor location_hash: String?
+      attr_accessor status: String?
+      attr_accessor time: Time?
+      attr_accessor error_cause: String?
+    end
+
+    class InstrumentationConfigurationWithoutServiceEnv
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instrumentation_type: String,
+        ?signal_type: String,
+        ?location: Types::Location,
+        ?location_hash: String,
+        ?description: String,
+        ?expires_at: Time,
+        ?attribute_filters: Array[Hash[String, String]],
+        ?capture_configuration: Types::CaptureConfiguration,
+        ?created_at: Time,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instrumentation_type: String?
+      attr_accessor signal_type: String?
+      attr_accessor location: Types::Location?
+      attr_accessor location_hash: String?
+      attr_accessor description: String?
+      attr_accessor expires_at: Time?
+      attr_accessor attribute_filters: Array[Hash[String, String]]?
+      attr_accessor capture_configuration: Types::CaptureConfiguration?
+      attr_accessor created_at: Time?
+      attr_accessor arn: String?
+    end
+
+    class InstrumentationConfigurationsPage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service: String,
+        ?environment: String,
+        ?changed: bool,
+        ?latest_configurations: Array[Types::InstrumentationConfigurationWithoutServiceEnv],
+        ?synced_at: Time,
+        ?sync_interval: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service: String?
+      attr_accessor environment: String?
+      attr_accessor changed: bool?
+      attr_accessor latest_configurations: Array[Types::InstrumentationConfigurationWithoutServiceEnv]?
+      attr_accessor synced_at: Time?
+      attr_accessor sync_interval: Integer?
+      attr_accessor next_token: String?
+    end
+
+    module InstrumentationErrorCause
+      FILE_NOT_FOUND: String
+      METHOD_NOT_FOUND: String
+      LINE_NOT_EXECUTABLE: String
+      OVERLOADED_METHODS: String
+      LANGUAGE_MISMATCH: String
+      RUNTIME_ERROR: String
+    end
+
+    class InstrumentationStatusEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?time: Time,
+        ?error_cause: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor time: Time?
+      attr_accessor error_cause: String?
+    end
+
+    module InstrumentationType
+      BREAKPOINT: String
+      PROBE: String
+    end
+
     class Interval
       include Smithy::Schema::Union
 
@@ -513,6 +1082,7 @@ module Aws::ApplicationSignals
         ?end_time: Time,
         ?auditors: Array[String],
         ?audit_targets: Array[Types::AuditTarget],
+        ?detail_level: String,
         ?next_token: String,
         ?max_results: Integer,
       ) -> void
@@ -522,6 +1092,7 @@ module Aws::ApplicationSignals
       attr_accessor end_time: Time?
       attr_accessor auditors: Array[String]?
       attr_accessor audit_targets: Array[Types::AuditTarget]?
+      attr_accessor detail_level: String?
       attr_accessor next_token: String?
       attr_accessor max_results: Integer?
     end
@@ -530,12 +1101,52 @@ module Aws::ApplicationSignals
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?start_time: Time,
+        ?end_time: Time,
         ?audit_findings: Array[Types::AuditFinding],
         ?next_token: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
       attr_accessor audit_findings: Array[Types::AuditFinding]?
+      attr_accessor next_token: String?
+    end
+
+    class ListEntityEventsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entity: Hash[String, String],
+        ?start_time: Time,
+        ?end_time: Time,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entity: Hash[String, String]?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListEntityEventsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_time: Time,
+        ?end_time: Time,
+        ?change_events: Array[Types::ChangeEvent],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor change_events: Array[Types::ChangeEvent]?
       attr_accessor next_token: String?
     end
 
@@ -544,10 +1155,14 @@ module Aws::ApplicationSignals
 
       def initialize: (
         ?next_token: String,
+        ?aws_account_id: String,
+        ?include_linked_accounts: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor next_token: String?
+      attr_accessor aws_account_id: String?
+      attr_accessor include_linked_accounts: bool?
     end
 
     class ListGroupingAttributeDefinitionsOutput
@@ -562,6 +1177,27 @@ module Aws::ApplicationSignals
 
       attr_accessor grouping_attribute_definitions: Array[Types::GroupingAttributeDefinition]?
       attr_accessor updated_at: Time?
+      attr_accessor next_token: String?
+    end
+
+    class ListInstrumentationConfigurationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service: String,
+        ?environment: String,
+        ?instrumentation_type: String,
+        ?synced_at: Time,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service: String?
+      attr_accessor environment: String?
+      attr_accessor instrumentation_type: String?
+      attr_accessor synced_at: Time?
+      attr_accessor max_results: Integer?
       attr_accessor next_token: String?
     end
 
@@ -674,9 +1310,10 @@ module Aws::ApplicationSignals
         ?dependency_config: Types::DependencyConfig,
         ?max_results: Integer,
         ?next_token: String,
+        ?metric_source_types: Array[String],
         ?include_linked_accounts: bool,
         ?slo_owner_aws_account_id: String,
-        ?metric_source_types: Array[String],
+        ?metric_source: Types::MetricSource,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -685,9 +1322,10 @@ module Aws::ApplicationSignals
       attr_accessor dependency_config: Types::DependencyConfig?
       attr_accessor max_results: Integer?
       attr_accessor next_token: String?
+      attr_accessor metric_source_types: Array[String]?
       attr_accessor include_linked_accounts: bool?
       attr_accessor slo_owner_aws_account_id: String?
-      attr_accessor metric_source_types: Array[String]?
+      attr_accessor metric_source: Types::MetricSource?
     end
 
     class ListServiceLevelObjectivesOutput
@@ -839,6 +1477,42 @@ module Aws::ApplicationSignals
       attr_accessor tags: Array[Types::Tag]?
     end
 
+    class Location
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?code_location: Types::CodeLocation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code_location: Types::CodeLocation?
+
+      class CodeLocation < Location
+      end
+      class Unknown < Location
+      end
+    end
+
+    class LocationIdentifier
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?code_location: Types::CodeLocation,
+        ?location_hash: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code_location: Types::CodeLocation?
+      attr_accessor location_hash: String?
+
+      class CodeLocation < LocationIdentifier
+      end
+      class LocationHash < LocationIdentifier
+      end
+      class Unknown < LocationIdentifier
+      end
+    end
+
     class Metric
       include Smithy::Schema::Structure
 
@@ -911,10 +1585,26 @@ module Aws::ApplicationSignals
       attr_accessor account_id: String?
     end
 
+    class MetricSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metric_source_key_attributes: Hash[String, String],
+        ?metric_source_attributes: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metric_source_key_attributes: Hash[String, String]?
+      attr_accessor metric_source_attributes: Hash[String, String]?
+    end
+
     module MetricSourceType
       SERVICE_OPERATION: String
       CLOUDWATCH_METRIC: String
       SERVICE_DEPENDENCY: String
+      APPMONITOR: String
+      CANARY: String
+      SERVICE: String
     end
 
     class MetricStat
@@ -977,6 +1667,12 @@ module Aws::ApplicationSignals
       attr_accessor status: String?
     end
 
+    module ProgrammingLanguage
+      JAVA: String
+      PYTHON: String
+      JAVASCRIPT: String
+    end
+
     class PutGroupingConfigurationInput
       include Smithy::Schema::Structure
 
@@ -1008,6 +1704,36 @@ module Aws::ApplicationSignals
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor expression: String?
+    end
+
+    class ReportInstrumentationConfigurationStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service: String,
+        ?environment: String,
+        ?configurations: Array[Types::InstrumentationConfigurationStatusReport],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service: String?
+      attr_accessor environment: String?
+      attr_accessor configurations: Array[Types::InstrumentationConfigurationStatusReport]?
+    end
+
+    class ReportInstrumentationConfigurationStatusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service: String,
+        ?environment: String,
+        ?unprocessed_status_events: Array[Types::UnprocessedStatusEvent],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service: String?
+      attr_accessor environment: String?
+      attr_accessor unprocessed_status_events: Array[Types::UnprocessedStatusEvent]?
     end
 
     class RequestBasedServiceLevelIndicator
@@ -1050,6 +1776,8 @@ module Aws::ApplicationSignals
         ?total_request_count_metric: Array[Types::MetricDataQuery],
         ?monitored_request_count_metric: Types::MonitoredRequestCountMetricDataQueries,
         ?dependency_config: Types::DependencyConfig,
+        ?metric_source: Types::MetricSource,
+        ?composite_sli_config: Types::CompositeSliConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1059,6 +1787,8 @@ module Aws::ApplicationSignals
       attr_accessor total_request_count_metric: Array[Types::MetricDataQuery]?
       attr_accessor monitored_request_count_metric: Types::MonitoredRequestCountMetricDataQueries?
       attr_accessor dependency_config: Types::DependencyConfig?
+      attr_accessor metric_source: Types::MetricSource?
+      attr_accessor composite_sli_config: Types::CompositeSliConfig?
     end
 
     class RequestBasedServiceLevelIndicatorMetricConfig
@@ -1071,6 +1801,9 @@ module Aws::ApplicationSignals
         ?total_request_count_metric: Array[Types::MetricDataQuery],
         ?monitored_request_count_metric: Types::MonitoredRequestCountMetricDataQueries,
         ?dependency_config: Types::DependencyConfig,
+        ?metric_source: Types::MetricSource,
+        ?metric_name: String,
+        ?composite_sli_config: Types::CompositeSliConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1080,6 +1813,9 @@ module Aws::ApplicationSignals
       attr_accessor total_request_count_metric: Array[Types::MetricDataQuery]?
       attr_accessor monitored_request_count_metric: Types::MonitoredRequestCountMetricDataQueries?
       attr_accessor dependency_config: Types::DependencyConfig?
+      attr_accessor metric_source: Types::MetricSource?
+      attr_accessor metric_name: String?
+      attr_accessor composite_sli_config: Types::CompositeSliConfig?
     end
 
     class ResourceNotFoundException
@@ -1108,6 +1844,25 @@ module Aws::ApplicationSignals
 
       attr_accessor duration_unit: String?
       attr_accessor duration: Integer?
+    end
+
+    class SelectionConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?pattern: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor pattern: String?
+    end
+
+    module SelectionType
+      EXPLICIT: String
+      PREFIX: String
+      REGEX: String
     end
 
     class Service
@@ -1243,6 +1998,8 @@ module Aws::ApplicationSignals
         ?metric_type: String,
         ?metric_data_queries: Array[Types::MetricDataQuery],
         ?dependency_config: Types::DependencyConfig,
+        ?metric_source: Types::MetricSource,
+        ?composite_sli_config: Types::CompositeSliConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1251,6 +2008,8 @@ module Aws::ApplicationSignals
       attr_accessor metric_type: String?
       attr_accessor metric_data_queries: Array[Types::MetricDataQuery]?
       attr_accessor dependency_config: Types::DependencyConfig?
+      attr_accessor metric_source: Types::MetricSource?
+      attr_accessor composite_sli_config: Types::CompositeSliConfig?
     end
 
     class ServiceLevelIndicatorMetricConfig
@@ -1263,8 +2022,10 @@ module Aws::ApplicationSignals
         ?metric_name: String,
         ?statistic: String,
         ?period_seconds: Integer,
+        ?metric_source: Types::MetricSource,
         ?metric_data_queries: Array[Types::MetricDataQuery],
         ?dependency_config: Types::DependencyConfig,
+        ?composite_sli_config: Types::CompositeSliConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1274,8 +2035,10 @@ module Aws::ApplicationSignals
       attr_accessor metric_name: String?
       attr_accessor statistic: String?
       attr_accessor period_seconds: Integer?
+      attr_accessor metric_source: Types::MetricSource?
       attr_accessor metric_data_queries: Array[Types::MetricDataQuery]?
       attr_accessor dependency_config: Types::DependencyConfig?
+      attr_accessor composite_sli_config: Types::CompositeSliConfig?
     end
 
     module ServiceLevelIndicatorMetricType
@@ -1298,6 +2061,7 @@ module Aws::ApplicationSignals
         ?goal: Types::Goal,
         ?burn_rate_configurations: Array[Types::BurnRateConfiguration],
         ?metric_source_type: String,
+        ?auto_investigation_enabled: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1312,6 +2076,7 @@ module Aws::ApplicationSignals
       attr_accessor goal: Types::Goal?
       attr_accessor burn_rate_configurations: Array[Types::BurnRateConfiguration]?
       attr_accessor metric_source_type: String?
+      attr_accessor auto_investigation_enabled: bool?
     end
 
     class ServiceLevelObjectiveBudgetReport
@@ -1396,6 +2161,8 @@ module Aws::ApplicationSignals
         ?created_time: Time,
         ?evaluation_type: String,
         ?metric_source_type: String,
+        ?metric_source: Types::MetricSource,
+        ?composite_sli_config: Types::CompositeSliConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1407,6 +2174,8 @@ module Aws::ApplicationSignals
       attr_accessor created_time: Time?
       attr_accessor evaluation_type: String?
       attr_accessor metric_source_type: String?
+      attr_accessor metric_source: Types::MetricSource?
+      attr_accessor composite_sli_config: Types::CompositeSliConfig?
     end
 
     class ServiceOperation
@@ -1582,6 +2351,33 @@ module Aws::ApplicationSignals
       attr_accessor message: String?
     end
 
+    class UnprocessedStatusEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instrumentation_type: String,
+        ?signal_type: String,
+        ?location_hash: String,
+        ?status: String,
+        ?time: Time,
+        ?failed_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instrumentation_type: String?
+      attr_accessor signal_type: String?
+      attr_accessor location_hash: String?
+      attr_accessor status: String?
+      attr_accessor time: Time?
+      attr_accessor failed_reason: String?
+    end
+
+    module UnprocessedStatusEventFailureReason
+      THROTTLED: String
+      INTERNAL_ERROR: String
+      VALIDATION_ERROR: String
+    end
+
     class UntagResourceRequest
       include Smithy::Schema::Structure
 
@@ -1614,6 +2410,7 @@ module Aws::ApplicationSignals
         ?request_based_sli_config: Types::RequestBasedServiceLevelIndicatorConfig,
         ?goal: Types::Goal,
         ?burn_rate_configurations: Array[Types::BurnRateConfiguration],
+        ?auto_investigation_enabled: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1623,6 +2420,7 @@ module Aws::ApplicationSignals
       attr_accessor request_based_sli_config: Types::RequestBasedServiceLevelIndicatorConfig?
       attr_accessor goal: Types::Goal?
       attr_accessor burn_rate_configurations: Array[Types::BurnRateConfiguration]?
+      attr_accessor auto_investigation_enabled: bool?
     end
 
     class UpdateServiceLevelObjectiveOutput

@@ -23,8 +23,11 @@ module Aws::IoTManagedIntegrations
     AttributeValue: StringShape
     AuthConfig: StructureShape
     AuthConfigUpdate: StructureShape
+    AuthMaterial: StructureShape
+    AuthMaterialName: StringShape
     AuthMaterialString: StringShape
     AuthMaterialType: EnumShape
+    AuthMaterials: ListShape
     AuthType: EnumShape
     AuthUrl: StringShape
     BaseRatePerMinute: IntegerShape
@@ -49,6 +52,7 @@ module Aws::IoTManagedIntegrations
     CapabilitySchemaItem: StructureShape
     CapabilitySchemas: ListShape
     CapabilityVersion: StringShape
+    CertificatePem: StringShape
     ClaimCertificate: StringShape
     ClaimCertificatePrivateKey: StringShape
     Classification: StringShape
@@ -76,6 +80,7 @@ module Aws::IoTManagedIntegrations
     ConnectorDestinationName: StringShape
     ConnectorDestinationSummary: StructureShape
     ConnectorDeviceId: StringShape
+    ConnectorDeviceIdList: ListShape
     ConnectorDeviceName: StringShape
     ConnectorEventMessage: StringShape
     ConnectorEventOperation: EnumShape
@@ -163,6 +168,8 @@ module Aws::IoTManagedIntegrations
     DiscoveryType: EnumShape
     DisplayName: StringShape
     DurationInMinutes: IntegerShape
+    EnableAsProvisionee: BooleanShape
+    EnableAsProvisioner: BooleanShape
     EncryptionType: EnumShape
     EndTime: StringShape
     EndpointAddress: StringShape
@@ -180,6 +187,8 @@ module Aws::IoTManagedIntegrations
     ExecutionNumber: IntegerShape
     ExponentialRolloutRate: StructureShape
     ExtrinsicSchemaId: StringShape
+    GeneralAuthorizationName: StructureShape
+    GeneralAuthorizationUpdate: StructureShape
     GetAccountAssociationRequest: StructureShape
     GetAccountAssociationResponse: StructureShape
     GetCloudConnectorRequest: StructureShape
@@ -202,6 +211,8 @@ module Aws::IoTManagedIntegrations
     GetHubConfigurationResponse: StructureShape
     GetManagedThingCapabilitiesRequest: StructureShape
     GetManagedThingCapabilitiesResponse: StructureShape
+    GetManagedThingCertificateRequest: StructureShape
+    GetManagedThingCertificateResponse: StructureShape
     GetManagedThingConnectivityDataRequest: StructureShape
     GetManagedThingConnectivityDataResponse: StructureShape
     GetManagedThingMetaDataRequest: StructureShape
@@ -282,6 +293,7 @@ module Aws::IoTManagedIntegrations
     ManagedThingArn: StringShape
     ManagedThingAssociation: StructureShape
     ManagedThingAssociationList: ListShape
+    ManagedThingAssociationStatus: EnumShape
     ManagedThingId: StringShape
     ManagedThingListDefinition: ListShape
     ManagedThingSchemaListDefinition: ListShape
@@ -329,7 +341,7 @@ module Aws::IoTManagedIntegrations
     NotificationConfigurationUpdatedAt: TimestampShape
     NumberOfNotifiedThings: IntegerShape
     NumberOfSucceededThings: IntegerShape
-    OAuthAuthorizationUrl: StringShape
+    OAuthAuthorizationUrlOutput: StringShape
     OAuthCompleteRedirectUrl: StringShape
     OAuthConfig: StructureShape
     OAuthUpdate: StructureShape
@@ -361,10 +373,12 @@ module Aws::IoTManagedIntegrations
     ParentControllerId: StringShape
     ProactiveRefreshTokenRenewal: StructureShape
     PropertyName: StringShape
+    ProtocolType: EnumShape
     ProvisioningProfileArn: StringShape
     ProvisioningProfileId: StringShape
     ProvisioningProfileListDefinition: ListShape
     ProvisioningProfileName: StringShape
+    ProvisioningProfileStatus: EnumShape
     ProvisioningProfileSummary: StructureShape
     ProvisioningStatus: EnumShape
     ProvisioningType: EnumShape
@@ -439,6 +453,7 @@ module Aws::IoTManagedIntegrations
     ThirdPartyUserId: StringShape
     ThresholdPercentage: FloatShape
     ThrottlingException: StructureShape
+    TimeoutInMinutes: IntegerShape
     TokenEndpointAuthenticationScheme: EnumShape
     TokenUrl: StringShape
     TraceId: StringShape
@@ -459,6 +474,7 @@ module Aws::IoTManagedIntegrations
     UploadPeriodMinutes: IntegerShape
     ValidationException: StructureShape
     ValidationSchema: DocumentShape
+    WiFiSimpleSetupConfiguration: StructureShape
 
     IotManagedIntegrations: ServiceShape
   end

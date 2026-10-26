@@ -36,6 +36,7 @@ module Aws::Savingsplans
     module CurrencyCode
       CNY: String
       USD: String
+      EUR: String
     end
 
     class DeleteQueuedSavingsPlanRequest
@@ -492,6 +493,16 @@ module Aws::Savingsplans
       FARGATE: String
       LAMBDA: String
       SAGEMAKER: String
+      RDS: String
+      DSQL: String
+      DYNAMODB: String
+      ELASTICACHE: String
+      DOCDB: String
+      NEPTUNE: String
+      TIMESTREAM: String
+      KEYSPACES: String
+      DMS: String
+      OPENSEARCH: String
     end
 
     class SavingsPlanRate
@@ -579,12 +590,36 @@ module Aws::Savingsplans
       FARGATE_EKS: String
       LAMBDA: String
       SAGEMAKER: String
+      RDS: String
+      AURORA: String
+      DYNAMODB: String
+      ELASTICACHE: String
+      DOCDB: String
+      NEPTUNE: String
+      TIMESTREAM: String
+      MCS: String
+      DMS: String
+      ES: String
     end
 
     module SavingsPlanRateUnit
       HOURS: String
       LAMBDA_GB_SECOND: String
       REQUEST: String
+      ACU_HR: String
+      READ_REQUEST_UNITS: String
+      WRITE_REQUEST_UNITS: String
+      READ_CAPACITY_UNIT_HRS: String
+      WRITE_CAPACITY_UNIT_HRS: String
+      REPLICATED_WRITE_REQUEST_UNITS: String
+      REPLICATED_WRITE_CAPACITY_UNIT_HRS: String
+      GB_HOURS: String
+      DPU: String
+      ELASTI_CACHE_PROCESSING_UNIT: String
+      DCU_HR: String
+      NCU_HR: String
+      OCU_HRS: String
+      JOBS: String
     end
 
     module SavingsPlanState
@@ -602,6 +637,7 @@ module Aws::Savingsplans
       COMPUTE: String
       EC2_INSTANCE: String
       SAGEMAKER: String
+      DATABASE: String
     end
 
     module SavingsPlansFilterName
@@ -614,6 +650,7 @@ module Aws::Savingsplans
       PAYMENT_OPTION: String
       START: String
       END: String
+      INSTANCE_FAMILY: String
     end
 
     class ServiceQuotaExceededException

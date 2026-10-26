@@ -102,6 +102,7 @@ module Aws::BCMPricingCalculator
     ClientToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bcmpricingcalculator#ClientToken", name: "ClientToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[\\u0021-\\u007E]+$"})
     ConflictException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmpricingcalculator#ConflictException", name: "ConflictException", traits: {"aws.protocols#awsQueryError" => {"code" => "ConflictCode", "httpResponseCode" => 409}, "smithy.api#error" => "client", "smithy.api#httpError" => 409})
     CostAmount = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmpricingcalculator#CostAmount", name: "CostAmount")
+    CostCategoryArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bcmpricingcalculator#CostCategoryArn", name: "CostCategoryArn", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "^arn:aws[-a-z0-9]*:ce::[0-9]{12}:costcategory/[a-f0-9-]{36}$"})
     CostDifference = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmpricingcalculator#CostDifference", name: "CostDifference")
     CreateBillEstimateRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmpricingcalculator#CreateBillEstimateRequest", name: "CreateBillEstimateRequest", traits: {"smithy.api#references" => [{"resource" => "com.amazonaws.bcmpricingcalculator#BillScenario"}]})
     CreateBillEstimateResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmpricingcalculator#CreateBillEstimateResponse", name: "CreateBillEstimateResponse")
@@ -129,6 +130,7 @@ module Aws::BCMPricingCalculator
     GetPreferencesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmpricingcalculator#GetPreferencesResponse", name: "GetPreferencesResponse")
     GetWorkloadEstimateRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmpricingcalculator#GetWorkloadEstimateRequest", name: "GetWorkloadEstimateRequest")
     GetWorkloadEstimateResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmpricingcalculator#GetWorkloadEstimateResponse", name: "GetWorkloadEstimateResponse")
+    GroupSharingPreferenceEnum = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bcmpricingcalculator#GroupSharingPreferenceEnum", name: "GroupSharingPreferenceEnum")
     HistoricalUsageEntity = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmpricingcalculator#HistoricalUsageEntity", name: "HistoricalUsageEntity")
     InternalServerException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmpricingcalculator#InternalServerException", name: "InternalServerException", traits: {"smithy.api#error" => "server", "smithy.api#httpError" => 500})
     Key = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bcmpricingcalculator#Key", name: "Key", traits: {"smithy.api#length" => {"max" => 10}, "smithy.api#pattern" => "^[a-zA-Z0-9]*$"})
@@ -531,6 +533,8 @@ module Aws::BCMPricingCalculator
     BillScenarioSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAt"))
     BillScenarioSummary.add_member(:expires_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "expiresAt"))
     BillScenarioSummary.add_member(:failure_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "failureMessage"))
+    BillScenarioSummary.add_member(:group_sharing_preference, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupSharingPreferenceEnum, name: "groupSharingPreference"))
+    BillScenarioSummary.add_member(:cost_category_group_sharing_preference_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CostCategoryArn, name: "costCategoryGroupSharingPreferenceArn"))
     BillScenarioSummary.type = Types::BillScenarioSummary
     BillScenarioUsageModificationItem.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceCode, name: "serviceCode", traits: {"smithy.api#required" => {}}))
     BillScenarioUsageModificationItem.add_member(:usage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageType, name: "usageType", traits: {"smithy.api#required" => {}}))
@@ -567,10 +571,15 @@ module Aws::BCMPricingCalculator
     CreateBillEstimateResponse.add_member(:cost_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: BillEstimateCostSummary, name: "costSummary"))
     CreateBillEstimateResponse.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAt"))
     CreateBillEstimateResponse.add_member(:expires_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "expiresAt"))
+    CreateBillEstimateResponse.add_member(:group_sharing_preference, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupSharingPreferenceEnum, name: "groupSharingPreference"))
+    CreateBillEstimateResponse.add_member(:cost_category_group_sharing_preference_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CostCategoryArn, name: "costCategoryGroupSharingPreferenceArn"))
+    CreateBillEstimateResponse.add_member(:cost_category_group_sharing_preference_effective_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "costCategoryGroupSharingPreferenceEffectiveDate"))
     CreateBillEstimateResponse.type = Types::CreateBillEstimateResponse
     CreateBillScenarioRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: BillScenarioName, name: "name", traits: {"smithy.api#required" => {}}))
     CreateBillScenarioRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#httpHeader" => "X-Amzn-Client-Token", "smithy.api#idempotencyToken" => {}, "smithy.api#notProperty" => {}}))
     CreateBillScenarioRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags", traits: {"smithy.api#notProperty" => {}}))
+    CreateBillScenarioRequest.add_member(:group_sharing_preference, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupSharingPreferenceEnum, name: "groupSharingPreference"))
+    CreateBillScenarioRequest.add_member(:cost_category_group_sharing_preference_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CostCategoryArn, name: "costCategoryGroupSharingPreferenceArn"))
     CreateBillScenarioRequest.type = Types::CreateBillScenarioRequest
     CreateBillScenarioResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "id", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "billScenarioId"}))
     CreateBillScenarioResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: BillScenarioName, name: "name"))
@@ -579,6 +588,8 @@ module Aws::BCMPricingCalculator
     CreateBillScenarioResponse.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAt"))
     CreateBillScenarioResponse.add_member(:expires_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "expiresAt"))
     CreateBillScenarioResponse.add_member(:failure_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "failureMessage"))
+    CreateBillScenarioResponse.add_member(:group_sharing_preference, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupSharingPreferenceEnum, name: "groupSharingPreference"))
+    CreateBillScenarioResponse.add_member(:cost_category_group_sharing_preference_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CostCategoryArn, name: "costCategoryGroupSharingPreferenceArn"))
     CreateBillScenarioResponse.type = Types::CreateBillScenarioResponse
     CreateWorkloadEstimateRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkloadEstimateName, name: "name", traits: {"smithy.api#required" => {}}))
     CreateWorkloadEstimateRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#httpHeader" => "X-Amzn-Client-Token", "smithy.api#idempotencyToken" => {}, "smithy.api#notProperty" => {}}))
@@ -633,6 +644,9 @@ module Aws::BCMPricingCalculator
     GetBillEstimateResponse.add_member(:cost_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: BillEstimateCostSummary, name: "costSummary"))
     GetBillEstimateResponse.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAt"))
     GetBillEstimateResponse.add_member(:expires_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "expiresAt"))
+    GetBillEstimateResponse.add_member(:group_sharing_preference, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupSharingPreferenceEnum, name: "groupSharingPreference"))
+    GetBillEstimateResponse.add_member(:cost_category_group_sharing_preference_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CostCategoryArn, name: "costCategoryGroupSharingPreferenceArn"))
+    GetBillEstimateResponse.add_member(:cost_category_group_sharing_preference_effective_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "costCategoryGroupSharingPreferenceEffectiveDate"))
     GetBillEstimateResponse.type = Types::GetBillEstimateResponse
     GetBillScenarioRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "identifier", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "billScenarioId"}))
     GetBillScenarioRequest.type = Types::GetBillScenarioRequest
@@ -643,6 +657,8 @@ module Aws::BCMPricingCalculator
     GetBillScenarioResponse.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAt"))
     GetBillScenarioResponse.add_member(:expires_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "expiresAt"))
     GetBillScenarioResponse.add_member(:failure_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "failureMessage"))
+    GetBillScenarioResponse.add_member(:group_sharing_preference, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupSharingPreferenceEnum, name: "groupSharingPreference"))
+    GetBillScenarioResponse.add_member(:cost_category_group_sharing_preference_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CostCategoryArn, name: "costCategoryGroupSharingPreferenceArn"))
     GetBillScenarioResponse.type = Types::GetBillScenarioResponse
     GetPreferencesRequest.type = Types::GetPreferencesRequest
     GetPreferencesResponse.add_member(:management_account_rate_type_selections, ::Smithy::Schema::Shapes::MemberShape.new(target: RateTypes, name: "managementAccountRateTypeSelections"))
@@ -662,6 +678,9 @@ module Aws::BCMPricingCalculator
     GetWorkloadEstimateResponse.add_member(:cost_currency, ::Smithy::Schema::Shapes::MemberShape.new(target: CurrencyCode, name: "costCurrency"))
     GetWorkloadEstimateResponse.add_member(:failure_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "failureMessage"))
     GetWorkloadEstimateResponse.type = Types::GetWorkloadEstimateResponse
+    GroupSharingPreferenceEnum.add_member(:open, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OPEN", traits: {"smithy.api#enumValue" => "OPEN"}))
+    GroupSharingPreferenceEnum.add_member(:prioritized, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRIORITIZED", traits: {"smithy.api#enumValue" => "PRIORITIZED"}))
+    GroupSharingPreferenceEnum.add_member(:restricted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESTRICTED", traits: {"smithy.api#enumValue" => "RESTRICTED"}))
     HistoricalUsageEntity.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceCode, name: "serviceCode", traits: {"smithy.api#required" => {}}))
     HistoricalUsageEntity.add_member(:usage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageType, name: "usageType", traits: {"smithy.api#required" => {}}))
     HistoricalUsageEntity.add_member(:operation, ::Smithy::Schema::Shapes::MemberShape.new(target: Operation, name: "operation", traits: {"smithy.api#required" => {}}))
@@ -753,6 +772,8 @@ module Aws::BCMPricingCalculator
     ListBillScenariosFilter.type = Types::ListBillScenariosFilter
     ListBillScenariosFilterName.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STATUS", traits: {"smithy.api#enumValue" => "STATUS"}))
     ListBillScenariosFilterName.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NAME", traits: {"smithy.api#enumValue" => "NAME"}))
+    ListBillScenariosFilterName.add_member(:group_sharing_preference, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GROUP_SHARING_PREFERENCE", traits: {"smithy.api#enumValue" => "GROUP_SHARING_PREFERENCE"}))
+    ListBillScenariosFilterName.add_member(:cost_category_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COST_CATEGORY_ARN", traits: {"smithy.api#enumValue" => "COST_CATEGORY_ARN"}))
     ListBillScenariosFilterValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
     ListBillScenariosFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListBillScenariosFilter, name: "member"))
     ListBillScenariosRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ListBillScenariosFilters, name: "filters"))
@@ -865,10 +886,15 @@ module Aws::BCMPricingCalculator
     UpdateBillEstimateResponse.add_member(:cost_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: BillEstimateCostSummary, name: "costSummary"))
     UpdateBillEstimateResponse.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAt"))
     UpdateBillEstimateResponse.add_member(:expires_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "expiresAt"))
+    UpdateBillEstimateResponse.add_member(:group_sharing_preference, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupSharingPreferenceEnum, name: "groupSharingPreference"))
+    UpdateBillEstimateResponse.add_member(:cost_category_group_sharing_preference_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CostCategoryArn, name: "costCategoryGroupSharingPreferenceArn"))
+    UpdateBillEstimateResponse.add_member(:cost_category_group_sharing_preference_effective_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "costCategoryGroupSharingPreferenceEffectiveDate"))
     UpdateBillEstimateResponse.type = Types::UpdateBillEstimateResponse
     UpdateBillScenarioRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "identifier", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "billScenarioId"}))
     UpdateBillScenarioRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: BillScenarioName, name: "name"))
     UpdateBillScenarioRequest.add_member(:expires_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "expiresAt"))
+    UpdateBillScenarioRequest.add_member(:group_sharing_preference, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupSharingPreferenceEnum, name: "groupSharingPreference"))
+    UpdateBillScenarioRequest.add_member(:cost_category_group_sharing_preference_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CostCategoryArn, name: "costCategoryGroupSharingPreferenceArn"))
     UpdateBillScenarioRequest.type = Types::UpdateBillScenarioRequest
     UpdateBillScenarioResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "id", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "billScenarioId"}))
     UpdateBillScenarioResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: BillScenarioName, name: "name"))
@@ -877,6 +903,8 @@ module Aws::BCMPricingCalculator
     UpdateBillScenarioResponse.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAt"))
     UpdateBillScenarioResponse.add_member(:expires_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "expiresAt"))
     UpdateBillScenarioResponse.add_member(:failure_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "failureMessage"))
+    UpdateBillScenarioResponse.add_member(:group_sharing_preference, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupSharingPreferenceEnum, name: "groupSharingPreference"))
+    UpdateBillScenarioResponse.add_member(:cost_category_group_sharing_preference_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CostCategoryArn, name: "costCategoryGroupSharingPreferenceArn"))
     UpdateBillScenarioResponse.type = Types::UpdateBillScenarioResponse
     UpdatePreferencesRequest.add_member(:management_account_rate_type_selections, ::Smithy::Schema::Shapes::MemberShape.new(target: RateTypes, name: "managementAccountRateTypeSelections"))
     UpdatePreferencesRequest.add_member(:member_account_rate_type_selections, ::Smithy::Schema::Shapes::MemberShape.new(target: RateTypes, name: "memberAccountRateTypeSelections"))
@@ -975,7 +1003,7 @@ module Aws::BCMPricingCalculator
       service.id = "com.amazonaws.bcmpricingcalculator#AWSBCMPricingCalculator"
       service.name = "AWSBCMPricingCalculator"
       service.version = "2024-06-19"
-      service.traits = {"aws.api#service" => {"sdkId" => "BCM Pricing Calculator", "arnNamespace" => "bcm-pricing-calculator"}, "aws.api#tagEnabled" => {}, "aws.auth#sigv4" => {"name" => "bcm-pricing-calculator"}, "aws.endpoints#dualStackOnlyEndpoints" => {}, "aws.endpoints#standardPartitionalEndpoints" => {"endpointPatternType" => "service_region_dnsSuffix"}, "aws.iam#defineConditionKeys" => {"aws:RequestTag/${TagKey}" => {"type" => "String", "documentation" => "Filters access by the tags that are passed in the request", "externalDocumentation" => "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-requesttag"}, "aws:ResourceTag/${TagKey}" => {"type" => "String", "documentation" => "Filters access by the tags associated with the resource", "externalDocumentation" => "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-resourcetag"}, "aws:TagKeys" => {"type" => "ArrayOfString", "documentation" => "Filters access by the tag keys that are passed in the request", "externalDocumentation" => "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-tagkeys"}}, "aws.iam#supportedPrincipalTypes" => ["Root", "IAMUser", "IAMRole", "FederatedUser"], "aws.protocols#awsJson1_0" => {}, "smithy.api#title" => "AWS Billing and Cost Management Pricing Calculator"}
+      service.traits = {"aws.api#service" => {"sdkId" => "BCM Pricing Calculator", "arnNamespace" => "bcm-pricing-calculator"}, "aws.api#tagEnabled" => {}, "aws.auth#sigv4" => {"name" => "bcm-pricing-calculator"}, "aws.endpoints#dualStackOnlyEndpoints" => {}, "aws.endpoints#standardPartitionalEndpoints" => {"endpointPatternType" => "service_region_dnsSuffix"}, "aws.iam#defineConditionKeys" => {"aws:RequestTag/${TagKey}" => {"type" => "String", "documentation" => "Filters access by the tags that are passed in the request", "externalDocumentation" => "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-requesttag"}, "aws:ResourceTag/${TagKey}" => {"type" => "String", "documentation" => "Filters access by the tags associated with the resource", "externalDocumentation" => "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-resourcetag"}, "aws:TagKeys" => {"type" => "ArrayOfString", "documentation" => "Filters access by the tag keys that are passed in the request", "externalDocumentation" => "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-tagkeys"}}, "aws.iam#supportedPrincipalTypes" => ["Root", "IAMUser", "IAMRole", "FederatedUser"], "aws.protocols#awsJson1_0" => {}, "smithy.api#title" => "AWS Billing and Cost Management Pricing Calculator", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}, "Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://bcm-pricing-calculator-fips.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dualStackDnsSuffix}", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "{PartitionResult#implicitGlobalRegion}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://bcm-pricing-calculator.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dualStackDnsSuffix}", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "{PartitionResult#implicitGlobalRegion}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 6, "nodes" => "/////wAAAAH/////AAAAAAAAAAYAAAADAAAAAQAAAAQF9eEFAAAAAgAAAAUF9eEFAAAAAwX14QMF9eEEAAAAAwX14QEF9eEC"}}
       service.add_operation(:batch_create_bill_scenario_commitment_modification, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.bcmpricingcalculator#BatchCreateBillScenarioCommitmentModification"
         operation.name = "BatchCreateBillScenarioCommitmentModification"

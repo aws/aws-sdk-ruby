@@ -6,8 +6,8 @@ module Aws::Pricing
     AttributeNameList: ListShape
     AttributeValue: StructureShape
     AttributeValueList: ListShape
-    BoxedInteger: IntegerShape
     CurrencyCode: StringShape
+    DescribeServicesMaxResults: IntegerShape
     DescribeServicesRequest: StructureShape
     DescribeServicesResponse: StructureShape
     EffectiveDate: TimestampShape
@@ -19,10 +19,12 @@ module Aws::Pricing
     FilterType: EnumShape
     Filters: ListShape
     FormatVersion: StringShape
+    GetAttributeValuesMaxResults: IntegerShape
     GetAttributeValuesRequest: StructureShape
     GetAttributeValuesResponse: StructureShape
     GetPriceListFileUrlRequest: StructureShape
     GetPriceListFileUrlResponse: StructureShape
+    GetProductsMaxResults: IntegerShape
     GetProductsRequest: StructureShape
     GetProductsResponse: StructureShape
     InternalErrorException: StructureShape

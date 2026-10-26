@@ -27,14 +27,17 @@ module Aws::Connect
   # * {ConflictException}
   # * {ContactFlowNotPublishedException}
   # * {ContactNotFoundException}
+  # * {ContactNotTerminatedException}
   # * {DestinationNotAllowedException}
   # * {DuplicateResourceException}
   # * {IdempotencyException}
   # * {InternalServiceException}
+  # * {InvalidActiveRegionException}
   # * {InvalidContactFlowException}
   # * {InvalidContactFlowModuleException}
   # * {InvalidParameterException}
   # * {InvalidRequestException}
+  # * {InvalidTestCaseException}
   # * {LimitExceededException}
   # * {MaximumResultReturnedException}
   # * {OutboundContactNotPermittedException}
@@ -80,8 +83,8 @@ module Aws::Connect
       end
     end
 
-    # <p>Operation cannot be performed at this time as there is a conflict with another operation or
-    #    contact state.</p>
+    # <p>Operation cannot be performed at this time as there is a conflict with another operation or contact
+    #    state.</p>
     class ConflictException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Connect::Types::ConflictException] data
@@ -107,7 +110,7 @@ module Aws::Connect
       end
     end
 
-    # <p>The contact with the specified ID is not active or does not exist.</p>
+    # <p>The contact with the specified ID does not exist.</p>
     class ContactNotFoundException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Connect::Types::ContactNotFoundException] data
@@ -116,6 +119,21 @@ module Aws::Connect
       end
 
       # <p>The message.</p>
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>The contact has not been disconnected and is not in a terminated state. To delete PII,
+    #    disconnect the contact first. Wait for it to reach the terminated state, then retry the
+    #    request.</p>
+    class ContactNotTerminatedException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::Connect::Types::ContactNotTerminatedException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
       def message
         @data[:message]
       end
@@ -170,6 +188,19 @@ module Aws::Connect
       end
 
       # <p>The message.</p>
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>This exception occurs when an API request is made to a non-active region in an Amazon Connect instance configured with Amazon Connect Global Resiliency. For example, if the active region is US West (Oregon) and a request is made to US East (N. Virginia), the exception will be returned.</p>
+    class InvalidActiveRegionException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::Connect::Types::InvalidActiveRegionException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
       def message
         @data[:message]
       end
@@ -234,6 +265,20 @@ module Aws::Connect
       end
     end
 
+    # <p>The test is not valid.</p>
+    class InvalidTestCaseException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::Connect::Types::InvalidTestCaseException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      # <p>The problems with the test. Please fix before trying again.</p>
+      def problems
+        @data[:problems]
+      end
+    end
+
     # <p>The allowed limit for the resource has been exceeded.</p>
     class LimitExceededException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
@@ -248,8 +293,8 @@ module Aws::Connect
       end
     end
 
-    # <p>Maximum number (1000) of tags have been returned with current request. Consider changing
-    #    request parameters to get more tags.</p>
+    # <p>Maximum number (1000) of tags have been returned with current request. Consider changing request parameters to
+    #    get more tags.</p>
     class MaximumResultReturnedException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Connect::Types::MaximumResultReturnedException] data
@@ -276,9 +321,8 @@ module Aws::Connect
       end
     end
 
-    # <p>Thrown for analyzed content when requested OutputType was not enabled for a given contact.
-    #    For example, if an OutputType.Raw was requested for a contact that had `RedactedOnly` Redaction
-    #    policy set in the flow.</p>
+    # <p>Thrown for analyzed content when requested OutputType was not enabled for a given contact. For example, if an
+    #    OutputType.Raw was requested for a contact that had `RedactedOnly` Redaction policy set in the flow.</p>
     class OutputTypeNotFoundException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Connect::Types::OutputTypeNotFoundException] data
@@ -321,10 +365,9 @@ module Aws::Connect
       end
     end
 
-    # <p>That resource is already in use (for example, you're trying to add a record with the same
-    #    name as an existing record). If you are trying to delete a resource (for example,
-    #    DeleteHoursOfOperation or DeletePredefinedAttribute), remove its reference from related resources
-    #    and then try again.</p>
+    # <p>That resource is already in use (for example, you're trying to add a record with the same name as an existing
+    #    record). If you are trying to delete a resource (for example, DeleteHoursOfOperation or DeletePredefinedAttribute),
+    #    remove its reference from related resources and then try again.</p>
     class ResourceInUseException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Connect::Types::ResourceInUseException] data
@@ -417,7 +460,7 @@ module Aws::Connect
       end
     end
 
-    # <p>No user with the specified credentials was found in the Amazon Connect instance.</p>
+    # <p>No user with the specified credentials was found in the Connect Customer instance.</p>
     class UserNotFoundException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Connect::Types::UserNotFoundException] data

@@ -236,6 +236,7 @@ module Aws::Neptune
     ModifyEventSubscriptionResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.neptune#ModifyEventSubscriptionResult", name: "ModifyEventSubscriptionResult")
     ModifyGlobalClusterMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.neptune#ModifyGlobalClusterMessage", name: "ModifyGlobalClusterMessage")
     ModifyGlobalClusterResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.neptune#ModifyGlobalClusterResult", name: "ModifyGlobalClusterResult")
+    NetworkTypeNotSupportedFault = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.neptune#NetworkTypeNotSupportedFault", name: "NetworkTypeNotSupportedFault", traits: {"aws.protocols#awsQueryError" => {"code" => "NetworkTypeNotSupported", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
     OptionGroupMembership = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.neptune#OptionGroupMembership", name: "OptionGroupMembership")
     OptionGroupMembershipList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.neptune#OptionGroupMembershipList", name: "OptionGroupMembershipList")
     OptionGroupNotFoundFault = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.neptune#OptionGroupNotFoundFault", name: "OptionGroupNotFoundFault", traits: {"aws.protocols#awsQueryError" => {"code" => "OptionGroupNotFoundFault", "httpResponseCode" => 404}, "smithy.api#error" => "client", "smithy.api#httpError" => 404})
@@ -364,6 +365,7 @@ module Aws::Neptune
     ClusterPendingModifiedValues.add_member(:storage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "StorageType"))
     ClusterPendingModifiedValues.add_member(:allocated_storage, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "AllocatedStorage"))
     ClusterPendingModifiedValues.add_member(:iops, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "Iops"))
+    ClusterPendingModifiedValues.add_member(:network_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NetworkType"))
     ClusterPendingModifiedValues.type = Types::ClusterPendingModifiedValues
     CopyDBClusterParameterGroupMessage.add_member(:source_db_cluster_parameter_group_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SourceDBClusterParameterGroupIdentifier", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CopyDBClusterParameterGroupMessage.add_member(:target_db_cluster_parameter_group_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "TargetDBClusterParameterGroupIdentifier", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -435,6 +437,7 @@ module Aws::Neptune
     CreateDBClusterMessage.add_member(:serverless_v2_scaling_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerlessV2ScalingConfiguration, name: "ServerlessV2ScalingConfiguration"))
     CreateDBClusterMessage.add_member(:global_cluster_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalClusterIdentifier, name: "GlobalClusterIdentifier"))
     CreateDBClusterMessage.add_member(:storage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "StorageType"))
+    CreateDBClusterMessage.add_member(:network_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NetworkType"))
     CreateDBClusterMessage.add_member(:source_region, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SourceRegion"))
     CreateDBClusterMessage.type = Types::CreateDBClusterMessage
     CreateDBClusterParameterGroupMessage.add_member(:db_cluster_parameter_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBClusterParameterGroupName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -527,6 +530,8 @@ module Aws::Neptune
     CreateGlobalClusterMessage.add_member(:engine, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Engine"))
     CreateGlobalClusterMessage.add_member(:engine_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "EngineVersion"))
     CreateGlobalClusterMessage.add_member(:deletion_protection, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "DeletionProtection"))
+    CreateGlobalClusterMessage.add_member(:database_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DatabaseName"))
+    CreateGlobalClusterMessage.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     CreateGlobalClusterMessage.add_member(:storage_encrypted, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "StorageEncrypted"))
     CreateGlobalClusterMessage.type = Types::CreateGlobalClusterMessage
     CreateGlobalClusterResult.add_member(:global_cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalCluster, name: "GlobalCluster"))
@@ -576,6 +581,7 @@ module Aws::Neptune
     DBCluster.add_member(:global_cluster_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalClusterIdentifier, name: "GlobalClusterIdentifier"))
     DBCluster.add_member(:io_optimized_next_allowed_modification_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TStamp, name: "IOOptimizedNextAllowedModificationTime"))
     DBCluster.add_member(:storage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "StorageType"))
+    DBCluster.add_member(:network_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NetworkType"))
     DBCluster.type = Types::DBCluster
     DBClusterAlreadyExistsFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     DBClusterAlreadyExistsFault.type = Types::DBClusterAlreadyExistsFault
@@ -748,6 +754,7 @@ module Aws::Neptune
     DBInstance.add_member(:performance_insights_kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PerformanceInsightsKMSKeyId"))
     DBInstance.add_member(:enabled_cloudwatch_logs_exports, ::Smithy::Schema::Shapes::MemberShape.new(target: LogTypeList, name: "EnabledCloudwatchLogsExports"))
     DBInstance.add_member(:deletion_protection, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "DeletionProtection"))
+    DBInstance.add_member(:network_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NetworkType"))
     DBInstance.type = Types::DBInstance
     DBInstanceAlreadyExistsFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     DBInstanceAlreadyExistsFault.type = Types::DBInstanceAlreadyExistsFault
@@ -799,6 +806,7 @@ module Aws::Neptune
     DBSubnetGroup.add_member(:subnet_group_status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SubnetGroupStatus"))
     DBSubnetGroup.add_member(:subnets, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetList, name: "Subnets"))
     DBSubnetGroup.add_member(:db_subnet_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBSubnetGroupArn"))
+    DBSubnetGroup.add_member(:supported_network_types, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "SupportedNetworkTypes"))
     DBSubnetGroup.type = Types::DBSubnetGroup
     DBSubnetGroupAlreadyExistsFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     DBSubnetGroupAlreadyExistsFault.type = Types::DBSubnetGroupAlreadyExistsFault
@@ -1071,10 +1079,12 @@ module Aws::Neptune
     GlobalCluster.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Status"))
     GlobalCluster.add_member(:engine, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Engine"))
     GlobalCluster.add_member(:engine_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "EngineVersion"))
+    GlobalCluster.add_member(:database_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DatabaseName"))
     GlobalCluster.add_member(:storage_encrypted, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "StorageEncrypted"))
     GlobalCluster.add_member(:deletion_protection, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "DeletionProtection"))
     GlobalCluster.add_member(:global_cluster_members, ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalClusterMemberList, name: "GlobalClusterMembers"))
     GlobalCluster.add_member(:failover_state, ::Smithy::Schema::Shapes::MemberShape.new(target: FailoverState, name: "FailoverState"))
+    GlobalCluster.add_member(:tag_list, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "TagList"))
     GlobalCluster.type = Types::GlobalCluster
     GlobalClusterAlreadyExistsFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     GlobalClusterAlreadyExistsFault.type = Types::GlobalClusterAlreadyExistsFault
@@ -1170,6 +1180,7 @@ module Aws::Neptune
     ModifyDBClusterMessage.add_member(:copy_tags_to_snapshot, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "CopyTagsToSnapshot"))
     ModifyDBClusterMessage.add_member(:serverless_v2_scaling_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerlessV2ScalingConfiguration, name: "ServerlessV2ScalingConfiguration"))
     ModifyDBClusterMessage.add_member(:storage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "StorageType"))
+    ModifyDBClusterMessage.add_member(:network_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NetworkType"))
     ModifyDBClusterMessage.type = Types::ModifyDBClusterMessage
     ModifyDBClusterParameterGroupMessage.add_member(:db_cluster_parameter_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBClusterParameterGroupName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ModifyDBClusterParameterGroupMessage.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ParametersList, name: "Parameters", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -1252,6 +1263,8 @@ module Aws::Neptune
     ModifyGlobalClusterMessage.type = Types::ModifyGlobalClusterMessage
     ModifyGlobalClusterResult.add_member(:global_cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalCluster, name: "GlobalCluster"))
     ModifyGlobalClusterResult.type = Types::ModifyGlobalClusterResult
+    NetworkTypeNotSupportedFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
+    NetworkTypeNotSupportedFault.type = Types::NetworkTypeNotSupportedFault
     OptionGroupMembership.add_member(:option_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "OptionGroupName"))
     OptionGroupMembership.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Status"))
     OptionGroupMembership.type = Types::OptionGroupMembership
@@ -1279,6 +1292,7 @@ module Aws::Neptune
     OrderableDBInstanceOption.add_member(:min_iops_per_gib, ::Smithy::Schema::Shapes::MemberShape.new(target: DoubleOptional, name: "MinIopsPerGib"))
     OrderableDBInstanceOption.add_member(:max_iops_per_gib, ::Smithy::Schema::Shapes::MemberShape.new(target: DoubleOptional, name: "MaxIopsPerGib"))
     OrderableDBInstanceOption.add_member(:supports_global_databases, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "SupportsGlobalDatabases"))
+    OrderableDBInstanceOption.add_member(:supported_network_types, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "SupportedNetworkTypes"))
     OrderableDBInstanceOption.type = Types::OrderableDBInstanceOption
     OrderableDBInstanceOptionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OrderableDBInstanceOption, name: "member", traits: {"smithy.api#xmlName" => "OrderableDBInstanceOption"}))
     OrderableDBInstanceOptionsMessage.add_member(:orderable_db_instance_options, ::Smithy::Schema::Shapes::MemberShape.new(target: OrderableDBInstanceOptionsList, name: "OrderableDBInstanceOptions"))
@@ -1399,6 +1413,7 @@ module Aws::Neptune
     RestoreDBClusterFromSnapshotMessage.add_member(:copy_tags_to_snapshot, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "CopyTagsToSnapshot"))
     RestoreDBClusterFromSnapshotMessage.add_member(:serverless_v2_scaling_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerlessV2ScalingConfiguration, name: "ServerlessV2ScalingConfiguration"))
     RestoreDBClusterFromSnapshotMessage.add_member(:storage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "StorageType"))
+    RestoreDBClusterFromSnapshotMessage.add_member(:network_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NetworkType"))
     RestoreDBClusterFromSnapshotMessage.type = Types::RestoreDBClusterFromSnapshotMessage
     RestoreDBClusterFromSnapshotResult.add_member(:db_cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: DBCluster, name: "DBCluster"))
     RestoreDBClusterFromSnapshotResult.type = Types::RestoreDBClusterFromSnapshotResult
@@ -1419,6 +1434,7 @@ module Aws::Neptune
     RestoreDBClusterToPointInTimeMessage.add_member(:deletion_protection, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "DeletionProtection"))
     RestoreDBClusterToPointInTimeMessage.add_member(:serverless_v2_scaling_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerlessV2ScalingConfiguration, name: "ServerlessV2ScalingConfiguration"))
     RestoreDBClusterToPointInTimeMessage.add_member(:storage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "StorageType"))
+    RestoreDBClusterToPointInTimeMessage.add_member(:network_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NetworkType"))
     RestoreDBClusterToPointInTimeMessage.type = Types::RestoreDBClusterToPointInTimeMessage
     RestoreDBClusterToPointInTimeResult.add_member(:db_cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: DBCluster, name: "DBCluster"))
     RestoreDBClusterToPointInTimeResult.type = Types::RestoreDBClusterToPointInTimeResult
@@ -1515,7 +1531,7 @@ module Aws::Neptune
       service.id = "com.amazonaws.neptune#AmazonRDSv19"
       service.name = "AmazonRDSv19"
       service.version = "2014-10-31"
-      service.traits = {"aws.api#service" => {"sdkId" => "Neptune", "arnNamespace" => "rds", "cloudFormationName" => "Neptune", "cloudTrailEventSource" => "neptune.amazonaws.com", "endpointPrefix" => "rds"}, "aws.auth#sigv4" => {"name" => "rds"}, "aws.protocols#awsQuery" => {}, "smithy.api#title" => "Amazon Neptune", "smithy.api#xmlNamespace" => {"uri" => "http://rds.amazonaws.com/doc/2014-10-31/"}}
+      service.traits = {"aws.api#service" => {"sdkId" => "Neptune", "arnNamespace" => "rds", "cloudFormationName" => "Neptune", "cloudTrailEventSource" => "neptune.amazonaws.com", "endpointPrefix" => "rds"}, "aws.auth#sigv4" => {"name" => "rds"}, "aws.protocols#awsQuery" => {}, "smithy.api#title" => "Amazon Neptune", "smithy.api#xmlNamespace" => {"uri" => "http://rds.amazonaws.com/doc/2014-10-31/"}, "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws-us-gov"]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://rds-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://rds.{Region}.amazonaws.com", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://rds-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://rds.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://rds.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 14, "nodes" => "/////wAAAAH/////AAAAAAAAAA0AAAADAAAAAQAAAAQF9eEMAAAAAgAAAAUF9eEMAAAAAwAAAAgAAAAGAAAABAAAAAcF9eELAAAABQX14QkF9eEKAAAABAAAAAsAAAAJAAAABgAAAAoF9eEIAAAABwX14QYF9eEHAAAABQAAAAwF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAAOAAAABAX14QIF9eED"}}
       service.add_operation(:add_role_to_db_cluster, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.neptune#AddRoleToDBCluster"
         operation.name = "AddRoleToDBCluster"
@@ -1608,6 +1624,7 @@ module Aws::Neptune
         operation.errors << InvalidSubnet
         operation.errors << InvalidVPCNetworkStateFault
         operation.errors << KMSKeyNotAccessibleFault
+        operation.errors << NetworkTypeNotSupportedFault
         operation.errors << StorageQuotaExceededFault
         operation.traits = {}
       end)
@@ -2022,6 +2039,7 @@ module Aws::Neptune
         operation.errors << InvalidDBSubnetGroupStateFault
         operation.errors << InvalidSubnet
         operation.errors << InvalidVPCNetworkStateFault
+        operation.errors << NetworkTypeNotSupportedFault
         operation.errors << StorageQuotaExceededFault
         operation.errors << StorageTypeNotSupportedFault
         operation.traits = {}
@@ -2119,7 +2137,10 @@ module Aws::Neptune
         operation.name = "ModifyGlobalCluster"
         operation.input = ModifyGlobalClusterMessage
         operation.output = ModifyGlobalClusterResult
+        operation.errors << GlobalClusterAlreadyExistsFault
         operation.errors << GlobalClusterNotFoundFault
+        operation.errors << InvalidDBClusterStateFault
+        operation.errors << InvalidDBInstanceStateFault
         operation.errors << InvalidGlobalClusterStateFault
         operation.traits = {}
       end)
@@ -2217,6 +2238,7 @@ module Aws::Neptune
         operation.errors << InvalidSubnet
         operation.errors << InvalidVPCNetworkStateFault
         operation.errors << KMSKeyNotAccessibleFault
+        operation.errors << NetworkTypeNotSupportedFault
         operation.errors << OptionGroupNotFoundFault
         operation.errors << StorageQuotaExceededFault
         operation.traits = {}
@@ -2241,6 +2263,7 @@ module Aws::Neptune
         operation.errors << InvalidSubnet
         operation.errors << InvalidVPCNetworkStateFault
         operation.errors << KMSKeyNotAccessibleFault
+        operation.errors << NetworkTypeNotSupportedFault
         operation.errors << OptionGroupNotFoundFault
         operation.errors << StorageQuotaExceededFault
         operation.traits = {}

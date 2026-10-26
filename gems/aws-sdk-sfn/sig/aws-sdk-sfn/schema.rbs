@@ -61,6 +61,7 @@ module Aws::SFN
     EvaluationFailedEventDetails: StructureShape
     EvaluationFailureLocation: StringShape
     EventId: IntegerShape
+    ExceptionHandlerIndex: IntegerShape
     ExecutionAbortedEventDetails: StructureShape
     ExecutionAlreadyExists: StructureShape
     ExecutionDoesNotExist: StructureShape
@@ -97,7 +98,11 @@ module Aws::SFN
     InspectionData: StructureShape
     InspectionDataRequest: StructureShape
     InspectionDataResponse: StructureShape
+    InspectionErrorDetails: StructureShape
     InspectionLevel: EnumShape
+    InspectionMaxConcurrency: IntegerShape
+    InspectionToleratedFailureCount: IntegerShape
+    InspectionToleratedFailurePercentage: FloatShape
     InvalidArn: StructureShape
     InvalidDefinition: StructureShape
     InvalidEncryptionConfiguration: StructureShape
@@ -141,6 +146,7 @@ module Aws::SFN
     LongArn: StringShape
     LongObject: IntegerShape
     MapIterationEventDetails: StructureShape
+    MapIterationFailureCount: IntegerShape
     MapRunExecutionCounts: StructureShape
     MapRunFailedEventDetails: StructureShape
     MapRunItemCounts: StructureShape
@@ -153,6 +159,9 @@ module Aws::SFN
     MapStateStartedEventDetails: StructureShape
     MaxConcurrency: IntegerShape
     MissingRequiredParameter: StructureShape
+    MockErrorOutput: StructureShape
+    MockInput: StructureShape
+    MockResponseValidationMode: EnumShape
     Name: StringShape
     PageSize: IntegerShape
     PageToken: StringShape
@@ -163,6 +172,8 @@ module Aws::SFN
     RedriveExecutionInput: StructureShape
     RedriveExecutionOutput: StructureShape
     ResourceNotFound: StructureShape
+    RetrierRetryCount: IntegerShape
+    RetryBackoffIntervalSeconds: IntegerShape
     RevealSecrets: BooleanShape
     ReverseOrder: BooleanShape
     RevisionId: StringShape
@@ -222,8 +233,10 @@ module Aws::SFN
     TaskTimedOutEventDetails: StructureShape
     TaskToken: StringShape
     TestExecutionStatus: EnumShape
+    TestStateConfiguration: StructureShape
     TestStateInput: StructureShape
     TestStateOutput: StructureShape
+    TestStateStateName: StringShape
     TimeoutInSeconds: IntegerShape
     Timestamp: TimestampShape
     ToleratedFailureCount: IntegerShape

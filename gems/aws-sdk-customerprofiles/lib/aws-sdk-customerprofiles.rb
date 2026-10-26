@@ -11,7 +11,7 @@ Object.const_set('Aws', Module.new) unless Object.const_defined?('Aws')
 Aws.const_set('CustomerProfiles', Module.new) unless Aws.const_defined?('CustomerProfiles')
 
 # @title Amazon Connect Customer Profiles
-# <fullname>Amazon Connect Customer Profiles</fullname>
+# <fullname>Connect Customer Customer Profiles</fullname>
 #          <ul>
 #             <li>
 #                <p>
@@ -24,12 +24,12 @@ Aws.const_set('CustomerProfiles', Module.new) unless Aws.const_defined?('Custome
 #                </p>
 #             </li>
 #          </ul>
-#          <p>Amazon Connect Customer Profiles is a unified customer profile for your contact
+#          <p>Connect Customer Customer Profiles is a unified customer profile for your contact
 #          center that has pre-built connectors powered by AppFlow that make it easy to combine
 #          customer information from third party applications, such as Salesforce (CRM), ServiceNow
-#          (ITSM), and your enterprise resource planning (ERP), with contact history from your Amazon Connect contact center. </p>
-#          <p>For more information about the Amazon Connect Customer Profiles feature, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/customer-profiles.html">Use Customer
-#             Profiles</a> in the <i>Amazon Connect Administrator's Guide</i>. </p>
+#          (ITSM), and your enterprise resource planning (ERP), with contact history from your Connect Customer contact center. </p>
+#          <p>For more information about the Connect Customer Customer Profiles feature, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/customer-profiles.html">Use Customer
+#             Profiles</a> in the <i>Connect Customer Administrator's Guide</i>. </p>
 module Aws::CustomerProfiles
   VERSION = '2.0.0.pre0'
 end

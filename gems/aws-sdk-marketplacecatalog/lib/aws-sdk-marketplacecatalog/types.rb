@@ -6,6 +6,31 @@ module Aws::MarketplaceCatalog
   # This module contains the types returned by client operations.
   module Types
 
+    # <p>Filters that apply to assessments performed against the AMI Security framework.</p>
+    # @!attribute delivery_option_id
+    #   <p>The unique ID of the delivery option whose AMI Security assessments you want to
+    #               list.</p>
+    #   @return [String]
+    class AMISecurityFilters < Struct.new(
+      nil,
+      :delivery_option_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The details of the resource assessed under the AMI Security framework.</p>
+    # @!attribute delivery_option_id
+    #   <p>The unique ID of the delivery option that was evaluated.</p>
+    #   @return [String]
+    class AMISecuritySummary < Struct.new(
+      nil,
+      :delivery_option_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Access is denied.</p>
     #          <p>HTTP status code: 403</p>
     # @!attribute message
@@ -143,6 +168,85 @@ module Aws::MarketplaceCatalog
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Summarized information about an assessment.</p>
+    # @!attribute assessment_arn
+    #   <p>The ARN associated with the assessment.</p>
+    #   @return [String]
+    # @!attribute assessment_id
+    #   <p>The unique ID of the assessment.</p>
+    #   @return [String]
+    # @!attribute framework_id
+    #   <p>The identifier of the framework that was evaluated by this assessment, in the format
+    #               <code>frameworkId@version</code> (for example,
+    #               <code>AMISecurity@1.0</code>).</p>
+    #   @return [String]
+    # @!attribute assessment_target_summary
+    #   <p>Identifies the entity or change set that was assessed.</p>
+    #   @return [Types::AssessmentTargetSummary]
+    # @!attribute framework_summary
+    #   <p>The framework-specific details of the assessed resource. The set member corresponds
+    #               to the framework identified by <code>FrameworkId</code>.</p>
+    #   @return [Types::FrameworkSummary]
+    # @!attribute assessment_result
+    #   <p>The overall result of the assessment.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The date and time the assessment was created, in ISO 8601 format
+    #               (<code>2018-02-27T13:45:22Z</code>).</p>
+    #   @return [String]
+    # @!attribute expires_at
+    #   <p>The date and time the assessment expires, in ISO 8601 format
+    #               (<code>2018-02-27T13:45:22Z</code>).</p>
+    #   @return [String]
+    class AssessmentSummary < Struct.new(
+      nil,
+      :assessment_arn,
+      :assessment_id,
+      :framework_id,
+      :assessment_target_summary,
+      :framework_summary,
+      :assessment_result,
+      :created_at,
+      :expires_at,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Filters assessment list results by the resource that was assessed. Provide an entity
+    #             identifier, a change set identifier, or both.</p>
+    # @!attribute entity_id
+    #   <p>The unique ID of the entity whose assessments you want to list.</p>
+    #   @return [String]
+    # @!attribute change_set_id
+    #   <p>The unique ID of the change set that triggered the assessments you want to
+    #               list.</p>
+    #   @return [String]
+    class AssessmentTargetFilter < Struct.new(
+      nil,
+      :entity_id,
+      :change_set_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Identifies the entity or change set that was assessed.</p>
+    # @!attribute entity_id
+    #   <p>The unique ID of the entity that was assessed.</p>
+    #   @return [String]
+    # @!attribute change_set_id
+    #   <p>The unique ID of the change set that was assessed.</p>
+    #   @return [String]
+    class AssessmentTargetSummary < Struct.new(
+      nil,
+      :entity_id,
+      :change_set_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute entity_request_list
     #   <p>List of entity IDs and the catalogs the entities are present in.</p>
     #   @return [Array<Types::EntityRequest>]
@@ -242,7 +346,7 @@ module Aws::MarketplaceCatalog
     #   <p>Alternative field that accepts a JSON value instead of a string for
     #                   <code>ChangeType</code> details. You can use either <code>Details</code> or
     #                   <code>DetailsDocument</code>, but not both.</p>
-    #            <p>To download the "DetailsDocument" shapes, see the <a href="https://github.com/awslabs/aws-marketplace-catalog-api-shapes-for-python">Python</a> 
+    #            <p>To download the "DetailsDocument" shapes, see the <a href="https://github.com/awslabs/aws-marketplace-catalog-api-shapes-for-python">Python</a>
     #               and <a href="https://github.com/awslabs/aws-marketplace-catalog-api-shapes-for-java/tree/main">Java</a> shapes on GitHub.</p>
     #   @return [JSON]
     # @!attribute change_name
@@ -324,7 +428,7 @@ module Aws::MarketplaceCatalog
     #   @return [String]
     # @!attribute details_document
     #   <p>The JSON value of the details specific to the change type of the requested change.</p>
-    #            <p>To download the "DetailsDocument" shapes, see the <a href="https://github.com/awslabs/aws-marketplace-catalog-api-shapes-for-python">Python</a> 
+    #            <p>To download the "DetailsDocument" shapes, see the <a href="https://github.com/awslabs/aws-marketplace-catalog-api-shapes-for-python">Python</a>
     #               and <a href="https://github.com/awslabs/aws-marketplace-catalog-api-shapes-for-java/tree/main">Java</a> shapes on GitHub.</p>
     #   @return [JSON]
     # @!attribute error_detail_list
@@ -465,6 +569,74 @@ module Aws::MarketplaceCatalog
     class ContainerProductVisibilityFilter < Struct.new(
       nil,
       :value_list,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Filters that apply to assessments performed against the Container Security
+    #             framework.</p>
+    # @!attribute delivery_option_id
+    #   <p>The unique ID of the delivery option whose Container Security assessments you want
+    #               to list.</p>
+    #   @return [String]
+    class ContainerSecurityFilters < Struct.new(
+      nil,
+      :delivery_option_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The details of the resource assessed under the Container Security framework.</p>
+    # @!attribute delivery_option_id
+    #   <p>The unique ID of the delivery option that was evaluated.</p>
+    #   @return [String]
+    class ContainerSecuritySummary < Struct.new(
+      nil,
+      :delivery_option_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The result of evaluating a single control as part of an assessment.</p>
+    # @!attribute control_id
+    #   <p>The unique ID of the control that was evaluated.</p>
+    #   @return [String]
+    # @!attribute control_assessment_result
+    #   <p>The result of the control evaluation.</p>
+    #   @return [String]
+    # @!attribute errors
+    #   <p>An array of <code>ControlError</code> objects associated with the control
+    #               evaluation.</p>
+    #   @return [Array<Types::ControlError>]
+    class ControlAssessment < Struct.new(
+      nil,
+      :control_id,
+      :control_assessment_result,
+      :errors,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>An error reported during the evaluation of a single control.</p>
+    # @!attribute code
+    #   <p>The error code that identifies the type of error.</p>
+    #   @return [String]
+    # @!attribute message
+    #   <p>The message for the error.</p>
+    #   @return [String]
+    # @!attribute scope
+    #   <p>The list of name-value pairs that identify the resource or attribute that the error
+    #               applies to.</p>
+    #   @return [Array<Types::ErrorScope>]
+    class ControlError < Struct.new(
+      nil,
+      :code,
+      :message,
+      :scope,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -614,6 +786,90 @@ module Aws::MarketplaceCatalog
     end
 
     # @!attribute catalog
+    #   <p>The catalog related to the request. Fixed value: <code>AWSMarketplace</code>
+    #            </p>
+    #   @return [String]
+    # @!attribute assessment_identifier
+    #   <p>The unique identifier of the assessment to describe. You can provide either
+    #               the assessment ID (for example, <code>assessment-12345</code>) or the full
+    #               assessment ARN (for example,
+    #               <code>arn:aws:aws-marketplace:us-east-1::AWSMarketplace/Assessment/assessment-12345</code>).</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>Specifies the upper limit of <code>ControlAssessment</code> elements returned on a
+    #               single page. If a value isn't provided, the default value is 50. Valid values range
+    #               from 1 to 100.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The value of the next token, if it exists. <code>null</code> if there are no more
+    #               results.</p>
+    #   @return [String]
+    class DescribeAssessmentRequest < Struct.new(
+      nil,
+      :catalog,
+      :assessment_identifier,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute assessment_arn
+    #   <p>The ARN associated with the assessment.</p>
+    #   @return [String]
+    # @!attribute assessment_id
+    #   <p>The unique ID of the assessment.</p>
+    #   @return [String]
+    # @!attribute framework_id
+    #   <p>The identifier of the framework that was evaluated by this assessment, in the format
+    #               <code>frameworkId@version</code> (for example,
+    #               <code>AMISecurity@1.0</code>).</p>
+    #   @return [String]
+    # @!attribute assessment_target_summary
+    #   <p>Identifies the entity or change set that was assessed.</p>
+    #   @return [Types::AssessmentTargetSummary]
+    # @!attribute framework_summary
+    #   <p>The framework-specific details of the assessed resource. The set member corresponds
+    #               to the framework identified by <code>FrameworkId</code>.</p>
+    #   @return [Types::FrameworkSummary]
+    # @!attribute assessment_result
+    #   <p>The overall result of the assessment.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The date and time the assessment was created, in ISO 8601 format
+    #               (<code>2018-02-27T13:45:22Z</code>).</p>
+    #   @return [String]
+    # @!attribute expires_at
+    #   <p>The date and time the assessment expires, in ISO 8601 format
+    #               (<code>2018-02-27T13:45:22Z</code>).</p>
+    #   @return [String]
+    # @!attribute control_assessments
+    #   <p>An array of <code>ControlAssessment</code> objects, each containing the result of an
+    #               individual control evaluated as part of the assessment.</p>
+    #   @return [Array<Types::ControlAssessment>]
+    # @!attribute next_token
+    #   <p>The value of the next token, if it exists. <code>null</code> if there are no more
+    #               results.</p>
+    #   @return [String]
+    class DescribeAssessmentResponse < Struct.new(
+      nil,
+      :assessment_arn,
+      :assessment_id,
+      :framework_id,
+      :assessment_target_summary,
+      :framework_summary,
+      :assessment_result,
+      :created_at,
+      :expires_at,
+      :control_assessments,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute catalog
     #   <p>Required. The catalog related to the request. Fixed value:
     #               <code>AWSMarketplace</code>
     #            </p>
@@ -725,7 +981,7 @@ module Aws::MarketplaceCatalog
     #   @return [String]
     # @!attribute details_document
     #   <p>The JSON value of the details specific to the entity.</p>
-    #            <p>To download "DetailsDocument" shapes, see the <a href="https://github.com/awslabs/aws-marketplace-catalog-api-shapes-for-python">Python</a> 
+    #            <p>To download "DetailsDocument" shapes, see the <a href="https://github.com/awslabs/aws-marketplace-catalog-api-shapes-for-python">Python</a>
     #               and <a href="https://github.com/awslabs/aws-marketplace-catalog-api-shapes-for-java/tree/main">Java</a> shapes on GitHub.</p>
     #   @return [JSON]
     class DescribeEntityResponse < Struct.new(
@@ -850,6 +1106,9 @@ module Aws::MarketplaceCatalog
     # @!attribute machine_learning_product_summary
     #   <p>A summary of a machine learning product.</p>
     #   @return [Types::MachineLearningProductSummary]
+    # @!attribute offer_set_summary
+    #   <p>An object that contains summary information about the offer set.</p>
+    #   @return [Types::OfferSetSummary]
     class EntitySummary < Struct.new(
       nil,
       :name,
@@ -865,6 +1124,7 @@ module Aws::MarketplaceCatalog
       :offer_summary,
       :resale_authorization_summary,
       :machine_learning_product_summary,
+      :offer_set_summary,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -890,8 +1150,12 @@ module Aws::MarketplaceCatalog
     #   <p>A filter for Resale Authorizations.</p>
     #   @return [Types::ResaleAuthorizationFilters]
     # @!attribute machine_learning_product_filters
-    #   <p>The filters that you can use with the ListEntities operation to filter machine learning products. You can filter by EntityId, LastModifiedDate, ProductTitle, and Visibility.</p>
+    #   <p>The filters that you can use with the ListEntities operation to filter machine learning products.
+    #               You can filter by <code>EntityId</code>, <code>astModifiedDate</code>, <code>ProductTitle</code>, and <code>Visibility</code>.</p>
     #   @return [Types::MachineLearningProductFilters]
+    # @!attribute offer_set_filters
+    #   <p>A filter for offer sets.</p>
+    #   @return [Types::OfferSetFilters]
     class EntityTypeFilters < Struct.new(
       :data_product_filters,
       :saa_s_product_filters,
@@ -900,6 +1164,7 @@ module Aws::MarketplaceCatalog
       :container_product_filters,
       :resale_authorization_filters,
       :machine_learning_product_filters,
+      :offer_set_filters,
       :unknown,
       keyword_init: true
     )
@@ -912,6 +1177,7 @@ module Aws::MarketplaceCatalog
       class ContainerProductFilters < EntityTypeFilters; end
       class ResaleAuthorizationFilters < EntityTypeFilters; end
       class MachineLearningProductFilters < EntityTypeFilters; end
+      class OfferSetFilters < EntityTypeFilters; end
       class Unknown < EntityTypeFilters; end
     end
 
@@ -937,6 +1203,9 @@ module Aws::MarketplaceCatalog
     # @!attribute machine_learning_product_sort
     #   <p>The sort options for machine learning products.</p>
     #   @return [Types::MachineLearningProductSort]
+    # @!attribute offer_set_sort
+    #   <p>A sort for offer sets.</p>
+    #   @return [Types::OfferSetSort]
     class EntityTypeSort < Struct.new(
       :data_product_sort,
       :saa_s_product_sort,
@@ -945,6 +1214,7 @@ module Aws::MarketplaceCatalog
       :container_product_sort,
       :resale_authorization_sort,
       :machine_learning_product_sort,
+      :offer_set_sort,
       :unknown,
       keyword_init: true
     )
@@ -957,6 +1227,7 @@ module Aws::MarketplaceCatalog
       class ContainerProductSort < EntityTypeSort; end
       class ResaleAuthorizationSort < EntityTypeSort; end
       class MachineLearningProductSort < EntityTypeSort; end
+      class OfferSetSort < EntityTypeSort; end
       class Unknown < EntityTypeSort; end
     end
 
@@ -971,6 +1242,24 @@ module Aws::MarketplaceCatalog
       nil,
       :error_code,
       :error_message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A name-value pair that identifies the resource or attribute that a
+    #             <code>ControlError</code> applies to.</p>
+    # @!attribute name
+    #   <p>The name of the resource field the error applies to (for example,
+    #               <code>AMI_ID</code>, <code>FILE_PATH</code>, or <code>PACKAGE_NAME</code>).</p>
+    #   @return [String]
+    # @!attribute value
+    #   <p>The value of the resource field the error applies to.</p>
+    #   @return [String]
+    class ErrorScope < Struct.new(
+      nil,
+      :name,
+      :value,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1037,6 +1326,49 @@ module Aws::MarketplaceCatalog
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Framework-specific filters used to scope <code>ListAssessments</code> results. Set
+    #             exactly one member, corresponding to the framework you want to filter by.</p>
+    # @!attribute ami_security_filters
+    #   <p>Filters that apply to assessments performed against the AMI Security framework.</p>
+    #   @return [Types::AMISecurityFilters]
+    # @!attribute container_security_filters
+    #   <p>Filters that apply to assessments performed against the Container Security
+    #               framework.</p>
+    #   @return [Types::ContainerSecurityFilters]
+    class FrameworkFilters < Struct.new(
+      :ami_security_filters,
+      :container_security_filters,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class AMISecurityFilters < FrameworkFilters; end
+      class ContainerSecurityFilters < FrameworkFilters; end
+      class Unknown < FrameworkFilters; end
+    end
+
+    # <p>The framework-specific details of the assessed resource. Exactly one member is set,
+    #             corresponding to the framework that was assessed.</p>
+    # @!attribute ami_security_summary
+    #   <p>The details of the resource assessed under the AMI Security framework.</p>
+    #   @return [Types::AMISecuritySummary]
+    # @!attribute container_security_summary
+    #   <p>The details of the resource assessed under the Container Security framework.</p>
+    #   @return [Types::ContainerSecuritySummary]
+    class FrameworkSummary < Struct.new(
+      :ami_security_summary,
+      :container_security_summary,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class AMISecuritySummary < FrameworkSummary; end
+      class ContainerSecuritySummary < FrameworkSummary; end
+      class Unknown < FrameworkSummary; end
+    end
+
     # @!attribute resource_arn
     #   <p>The Amazon Resource Name (ARN) of the entity resource that is associated with the
     #               resource policy.</p>
@@ -1067,6 +1399,59 @@ module Aws::MarketplaceCatalog
     class InternalServiceException < Struct.new(
       nil,
       :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute catalog
+    #   <p>The catalog related to the request. Fixed value: <code>AWSMarketplace</code>
+    #            </p>
+    #   @return [String]
+    # @!attribute framework_id
+    #   <p>The unique identifier of a framework. When specified, only assessments performed
+    #               against this framework are returned. For example, <code>AMISecurity</code>.</p>
+    #   @return [String]
+    # @!attribute assessment_target_filter
+    #   <p>Filters the list of assessments to those performed against a specific entity or
+    #               change set.</p>
+    #   @return [Types::AssessmentTargetFilter]
+    # @!attribute framework_filters
+    #   <p>Framework-specific filters. Set exactly one member to filter results to assessments
+    #               performed against that framework.</p>
+    #   @return [Types::FrameworkFilters]
+    # @!attribute max_results
+    #   <p>Specifies the upper limit of the elements on a single page. If a value isn't provided,
+    #               the default value is 20. Valid values range from 1 to 100.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The value of the next token, if it exists. <code>null</code> if there are no more
+    #               results.</p>
+    #   @return [String]
+    class ListAssessmentsRequest < Struct.new(
+      nil,
+      :catalog,
+      :framework_id,
+      :assessment_target_filter,
+      :framework_filters,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute assessment_summary_list
+    #   <p>An array of <code>AssessmentSummary</code> objects.</p>
+    #   @return [Array<Types::AssessmentSummary>]
+    # @!attribute next_token
+    #   <p>The value of the next token, if it exists. <code>null</code> if there are no more
+    #               results.</p>
+    #   @return [String]
+    class ListAssessmentsResponse < Struct.new(
+      nil,
+      :assessment_summary_list,
+      :next_token,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1129,8 +1514,8 @@ module Aws::MarketplaceCatalog
     #               values are: <code>AmiProduct</code>, <code>ContainerProduct</code>,
     #                   <code>DataProduct</code>, <code>SaaSProduct</code>, <code>ProcurementPolicy</code>,
     #                   <code>Experience</code>, <code>Audience</code>, <code>BrandingSettings</code>,
-    #                   <code>Offer</code>, <code>Seller</code>,
-    #               <code>ResaleAuthorization</code>.</p>
+    #                   <code>Offer</code>, <code>OfferSet</code>, <code>Seller</code>,
+    #               <code>ResaleAuthorization</code>, <code>Solution</code>.</p>
     #   @return [String]
     # @!attribute filter_list
     #   <p>An array of filter objects. Each filter object contains two attributes,
@@ -1236,7 +1621,8 @@ module Aws::MarketplaceCatalog
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The filters that you can use with the ListEntities operation to filter machine learning products. You can filter by EntityId, LastModifiedDate, ProductTitle, and Visibility.</p>
+    # <p>The filters that you can use with the ListEntities operation to filter machine learning products.
+    #             You can filter by <code>EntityId</code>, <code>astModifiedDate</code>, <code>ProductTitle</code>, and <code>Visibility</code>.</p>
     # @!attribute entity_id
     #   <p>Filter machine learning products by their entity IDs.</p>
     #   @return [Types::MachineLearningProductEntityIdFilter]
@@ -1388,6 +1774,18 @@ module Aws::MarketplaceCatalog
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Allows filtering on the <code>CreatedBySource</code> of an offer.</p>
+    # @!attribute value_list
+    #   <p>Allows filtering on the <code>CreatedBySource</code> of an offer with list input.</p>
+    #   @return [Array<String>]
+    class OfferCreatedBySourceFilter < Struct.new(
+      nil,
+      :value_list,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Allows filtering on the entity id of an offer.</p>
     # @!attribute value_list
     #   <p>Allows filtering on entity id of an offer with list input.</p>
@@ -1435,6 +1833,18 @@ module Aws::MarketplaceCatalog
     # @!attribute last_modified_date
     #   <p>Allows filtering on the <code>LastModifiedDate</code> of an offer.</p>
     #   @return [Types::OfferLastModifiedDateFilter]
+    # @!attribute offer_set_id
+    #   <p>Allows filtering on the <code>OfferSetId</code> of an offer.</p>
+    #   @return [Types::OfferSetIdFilter]
+    # @!attribute target_agreement_id
+    #   <p>Allows filtering on the <code>TargetAgreementId</code> of an offer.</p>
+    #   @return [Types::OfferTargetAgreementIdFilter]
+    # @!attribute target_agreement_intent
+    #   <p>Allows filtering on the <code>TargetAgreementIntent</code> of an offer.</p>
+    #   @return [Types::OfferTargetAgreementIntentFilter]
+    # @!attribute created_by_source
+    #   <p>Allows filtering on the <code>CreatedBySource</code> of an offer.</p>
+    #   @return [Types::OfferCreatedBySourceFilter]
     class OfferFilters < Struct.new(
       nil,
       :entity_id,
@@ -1447,6 +1857,10 @@ module Aws::MarketplaceCatalog
       :state,
       :targeting,
       :last_modified_date,
+      :offer_set_id,
+      :target_agreement_id,
+      :target_agreement_intent,
+      :created_by_source,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1552,6 +1966,214 @@ module Aws::MarketplaceCatalog
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Allows filtering on the <code>AssociatedOfferIds</code> of an offer set.</p>
+    # @!attribute value_list
+    #   <p>Allows filtering on the <code>AssociatedOfferIds</code> of an offer set with list input.</p>
+    #   @return [Array<String>]
+    class OfferSetAssociatedOfferIdsFilter < Struct.new(
+      nil,
+      :value_list,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Allows filtering on the entity id of an offer set.</p>
+    # @!attribute value_list
+    #   <p>Allows filtering on entity id of an offer set with list input.</p>
+    #   @return [Array<String>]
+    class OfferSetEntityIdFilter < Struct.new(
+      nil,
+      :value_list,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Object containing all the filter fields for offer sets entity. Client can add a maximum of 8 filters in a single <code>ListEntities</code> request.</p>
+    # @!attribute entity_id
+    #   <p>Allows filtering on <code>EntityId</code> of an offer set.</p>
+    #   @return [Types::OfferSetEntityIdFilter]
+    # @!attribute name
+    #   <p>Allows filtering on the <code>Name</code> of an offer set.</p>
+    #   @return [Types::OfferSetNameFilter]
+    # @!attribute state
+    #   <p>Allows filtering on the <code>State</code> of an offer set.</p>
+    #   @return [Types::OfferSetStateFilter]
+    # @!attribute release_date
+    #   <p>Allows filtering on the <code>ReleaseDate</code> of an offer set.</p>
+    #   @return [Types::OfferSetReleaseDateFilter]
+    # @!attribute associated_offer_ids
+    #   <p>Allows filtering on the <code>AssociatedOfferIds</code> of an offer set.</p>
+    #   @return [Types::OfferSetAssociatedOfferIdsFilter]
+    # @!attribute solution_id
+    #   <p>Allows filtering on the <code>SolutionId</code> of an offer set.</p>
+    #   @return [Types::OfferSetSolutionIdFilter]
+    # @!attribute last_modified_date
+    #   <p>Allows filtering on the <code>LastModifiedDate</code> of an offer set.</p>
+    #   @return [Types::OfferSetLastModifiedDateFilter]
+    class OfferSetFilters < Struct.new(
+      nil,
+      :entity_id,
+      :name,
+      :state,
+      :release_date,
+      :associated_offer_ids,
+      :solution_id,
+      :last_modified_date,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Allows filtering on the <code>OfferSetId</code> of an offer.</p>
+    # @!attribute value_list
+    #   <p>Allows filtering on the <code>OfferSetId</code> of an offer.</p>
+    #   @return [Array<String>]
+    class OfferSetIdFilter < Struct.new(
+      nil,
+      :value_list,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Allows filtering on the <code>LastModifiedDate</code> of an offer set.</p>
+    # @!attribute date_range
+    #   <p>Allows filtering on the <code>LastModifiedDate</code> of an offer set with date range as input.</p>
+    #   @return [Types::OfferSetLastModifiedDateFilterDateRange]
+    class OfferSetLastModifiedDateFilter < Struct.new(
+      nil,
+      :date_range,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Allows filtering on the <code>LastModifiedDate</code> of an offer set with date range as input.</p>
+    # @!attribute after_value
+    #   <p>Allows filtering on the <code>LastModifiedDate</code> of an offer set after a date.</p>
+    #   @return [String]
+    # @!attribute before_value
+    #   <p>Allows filtering on the <code>LastModifiedDate</code> of an offer set before a date.</p>
+    #   @return [String]
+    class OfferSetLastModifiedDateFilterDateRange < Struct.new(
+      nil,
+      :after_value,
+      :before_value,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Allows filtering on the <code>Name</code> of an offer set.</p>
+    # @!attribute value_list
+    #   <p>Allows filtering on the <code>Name</code> of an offer set with list input.</p>
+    #   @return [Array<String>]
+    class OfferSetNameFilter < Struct.new(
+      nil,
+      :value_list,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Allows filtering on the <code>ReleaseDate</code> of an offer set.</p>
+    # @!attribute date_range
+    #   <p>Allows filtering on the <code>ReleaseDate</code> of an offer set with date range as input.</p>
+    #   @return [Types::OfferSetReleaseDateFilterDateRange]
+    class OfferSetReleaseDateFilter < Struct.new(
+      nil,
+      :date_range,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Allows filtering on the <code>ReleaseDate</code> of an offer set with date range as input.</p>
+    # @!attribute after_value
+    #   <p>Allows filtering on the <code>ReleaseDate</code> of offer set after a date.</p>
+    #   @return [String]
+    # @!attribute before_value
+    #   <p>Allows filtering on the <code>ReleaseDate</code> of offer set before a date.</p>
+    #   @return [String]
+    class OfferSetReleaseDateFilterDateRange < Struct.new(
+      nil,
+      :after_value,
+      :before_value,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Allows filtering on the <code>SolutionId</code> of an offer set.</p>
+    # @!attribute value_list
+    #   <p>Allows filtering on the <code>SolutionId</code> of an offer set with list input.</p>
+    #   @return [Array<String>]
+    class OfferSetSolutionIdFilter < Struct.new(
+      nil,
+      :value_list,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Allows to sort offer sets.</p>
+    # @!attribute sort_by
+    #   <p>Allows to sort offer sets.</p>
+    #   @return [String]
+    # @!attribute sort_order
+    #   <p>Allows to sort offer sets.</p>
+    #   @return [String]
+    class OfferSetSort < Struct.new(
+      nil,
+      :sort_by,
+      :sort_order,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Allows filtering on the <code>State</code> of an offer set.</p>
+    # @!attribute value_list
+    #   <p>Allows filtering on the <code>State</code> of an offer set with list input.</p>
+    #   @return [Array<String>]
+    class OfferSetStateFilter < Struct.new(
+      nil,
+      :value_list,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Summarized information about an offer set.</p>
+    # @!attribute name
+    #   <p>The name of the offer set.</p>
+    #   @return [String]
+    # @!attribute state
+    #   <p>The state of the offer set.</p>
+    #   @return [String]
+    # @!attribute release_date
+    #   <p>The release date of the offer set.</p>
+    #   @return [String]
+    # @!attribute associated_offer_ids
+    #   <p>The list of offer IDs associated with the offer set.</p>
+    #   @return [Array<String>]
+    # @!attribute solution_id
+    #   <p>The solution ID associated with the offer set.</p>
+    #   @return [String]
+    class OfferSetSummary < Struct.new(
+      nil,
+      :name,
+      :state,
+      :release_date,
+      :associated_offer_ids,
+      :solution_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Allows to sort offers.</p>
     # @!attribute sort_by
     #   <p>Allows to sort offers.</p>
@@ -1605,6 +2227,18 @@ module Aws::MarketplaceCatalog
     # @!attribute targeting
     #   <p>The targeting in the offer.</p>
     #   @return [Array<String>]
+    # @!attribute offer_set_id
+    #   <p>The offer set ID of the offer.</p>
+    #   @return [String]
+    # @!attribute target_agreement_id
+    #   <p>The target agreement ID of the offer.</p>
+    #   @return [String]
+    # @!attribute target_agreement_intent
+    #   <p>The target agreement intent of the offer.</p>
+    #   @return [String]
+    # @!attribute created_by_source
+    #   <p>The creation source of the offer.</p>
+    #   @return [String]
     class OfferSummary < Struct.new(
       nil,
       :name,
@@ -1615,6 +2249,34 @@ module Aws::MarketplaceCatalog
       :buyer_accounts,
       :state,
       :targeting,
+      :offer_set_id,
+      :target_agreement_id,
+      :target_agreement_intent,
+      :created_by_source,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Allows filtering on the <code>TargetAgreementId</code> of an offer.</p>
+    # @!attribute value_list
+    #   <p>Allows filtering on the <code>TargetAgreementId</code> of an offer with list input.</p>
+    #   @return [Array<String>]
+    class OfferTargetAgreementIdFilter < Struct.new(
+      nil,
+      :value_list,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Allows filtering on the <code>TargetAgreementIntent</code> of an offer.</p>
+    # @!attribute value_list
+    #   <p>Allows filtering on the <code>TargetAgreementIntent</code> of an offer with list input.</p>
+    #   @return [Array<String>]
+    class OfferTargetAgreementIntentFilter < Struct.new(
+      nil,
+      :value_list,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1771,6 +2433,15 @@ module Aws::MarketplaceCatalog
     # @!attribute last_modified_date
     #   <p>Allows filtering on the <code>LastModifiedDate</code> of a ResaleAuthorization.</p>
     #   @return [Types::ResaleAuthorizationLastModifiedDateFilter]
+    # @!attribute reseller_role
+    #   <p>Allows filtering on the <code>ResellerRole</code> of a ResaleAuthorization.</p>
+    #   @return [Types::ResaleAuthorizationResellerRoleFilter]
+    # @!attribute source_authorization
+    #   <p>Allows filtering on the <code>SourceAuthorization</code> of a ResaleAuthorization.</p>
+    #   @return [Types::ResaleAuthorizationSourceAuthorizationFilter]
+    # @!attribute issuer_account_id
+    #   <p>Allows filtering on the <code>IssuerAccountId</code> of a ResaleAuthorization.</p>
+    #   @return [Types::ResaleAuthorizationIssuerAccountIdFilter]
     class ResaleAuthorizationFilters < Struct.new(
       nil,
       :entity_id,
@@ -1786,6 +2457,21 @@ module Aws::MarketplaceCatalog
       :status,
       :offer_extended_status,
       :last_modified_date,
+      :reseller_role,
+      :source_authorization,
+      :issuer_account_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Allows filtering on the <code>IssuerAccountId</code> of a ResaleAuthorization.</p>
+    # @!attribute value_list
+    #   <p>Allows filtering on the <code>IssuerAccountId</code> of a ResaleAuthorization with list input.</p>
+    #   @return [Array<String>]
+    class ResaleAuthorizationIssuerAccountIdFilter < Struct.new(
+      nil,
+      :value_list,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1943,6 +2629,18 @@ module Aws::MarketplaceCatalog
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Allows filtering on the <code>ResellerRole</code> of a ResaleAuthorization.</p>
+    # @!attribute value_list
+    #   <p>Allows filtering on the <code>ResellerRole</code> of a ResaleAuthorization with list input.</p>
+    #   @return [Array<String>]
+    class ResaleAuthorizationResellerRoleFilter < Struct.new(
+      nil,
+      :value_list,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Allows to sort ResaleAuthorization.</p>
     # @!attribute sort_by
     #   <p>Allows to sort ResaleAuthorization.</p>
@@ -1954,6 +2652,18 @@ module Aws::MarketplaceCatalog
       nil,
       :sort_by,
       :sort_order,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Allows filtering on the <code>SourceAuthorization</code> of a ResaleAuthorization.</p>
+    # @!attribute value_list
+    #   <p>Allows filtering on the <code>SourceAuthorization</code> of a ResaleAuthorization with list input.</p>
+    #   @return [Array<String>]
+    class ResaleAuthorizationSourceAuthorizationFilter < Struct.new(
+      nil,
+      :value_list,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2005,6 +2715,15 @@ module Aws::MarketplaceCatalog
     # @!attribute availability_end_date
     #   <p>The availability end date of the ResaleAuthorization.</p>
     #   @return [String]
+    # @!attribute reseller_role
+    #   <p>The reseller role of the ResaleAuthorization.</p>
+    #   @return [String]
+    # @!attribute source_authorization
+    #   <p>The source authorization of the ResaleAuthorization.</p>
+    #   @return [String]
+    # @!attribute issuer_account_id
+    #   <p>The issuer account ID of the ResaleAuthorization.</p>
+    #   @return [String]
     class ResaleAuthorizationSummary < Struct.new(
       nil,
       :name,
@@ -2018,6 +2737,9 @@ module Aws::MarketplaceCatalog
       :offer_extended_status,
       :created_date,
       :availability_end_date,
+      :reseller_role,
+      :source_authorization,
+      :issuer_account_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2347,8 +3069,53 @@ module Aws::MarketplaceCatalog
     #          <p>HTTP status code: 422</p>
     # @!attribute message
     #   @return [String]
+    # @!attribute validation_exception_field_list
+    #   <p>A list of detailed entries describing the request fields that failed
+    #               validation. Present when the failure can be attributed to one or more specific
+    #               fields.</p>
+    #   @return [Array<Types::ValidationExceptionField>]
     class ValidationException < Struct.new(
       nil,
+      :message,
+      :validation_exception_field_list,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Detailed information about a single request field that failed
+    #             validation, including the field's location, the reason it failed, and a
+    #             human-readable message.</p>
+    # @!attribute reason
+    #   <p>The reason the field failed validation.</p>
+    #   @return [String]
+    # @!attribute entity_type
+    #   <p>The entity type the failing field applies to, if the field is on a
+    #               specific entity. For example, <code>AmiProduct@1.0</code>.</p>
+    #   @return [String]
+    # @!attribute entity_id
+    #   <p>The entity identifier the failing field applies to, if the field is on a
+    #               specific entity.</p>
+    #   @return [String]
+    # @!attribute change_type
+    #   <p>The change type the failing field applies to, if the field is part of a
+    #               change request. For example, <code>AddDeliveryOptions</code>.</p>
+    #   @return [String]
+    # @!attribute field
+    #   <p>The name of the request field that failed validation, expressed as a
+    #               JSON path (for example, <code>Details.DeliveryOptions[0].Type</code>).</p>
+    #   @return [String]
+    # @!attribute message
+    #   <p>A human-readable message describing why the field failed
+    #               validation.</p>
+    #   @return [String]
+    class ValidationExceptionField < Struct.new(
+      nil,
+      :reason,
+      :entity_type,
+      :entity_id,
+      :change_type,
+      :field,
       :message,
       keyword_init: true
     )

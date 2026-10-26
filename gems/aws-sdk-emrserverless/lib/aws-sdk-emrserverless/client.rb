@@ -144,18 +144,18 @@ module Aws::EMRServerless
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -269,12 +269,16 @@ module Aws::EMRServerless
     #   <p>The <a href="https://docs.aws.amazon.com/emr-serverless/latest/APIReference/API_Configuration.html">Configuration</a> specifications to use when creating an application. Each configuration consists of a classification and properties. This configuration is applied to all the job runs submitted under the application.</p>
     # @option params [Types::MonitoringConfiguration] :monitoring_configuration
     #   <p>The configuration setting for monitoring.</p>
+    # @option params [Types::DiskEncryptionConfiguration] :disk_encryption_configuration
+    #   <p>The configuration object that allows encrypting local disks.</p>
     # @option params [Types::InteractiveConfiguration] :interactive_configuration
     #   <p>The interactive configuration object that enables the interactive use cases to use when running an application.</p>
     # @option params [Types::SchedulerConfiguration] :scheduler_configuration
     #   <p>The scheduler configuration for batch and streaming jobs running on this application. Supported with release labels emr-7.0.0 and above.</p>
     # @option params [Types::IdentityCenterConfigurationInput] :identity_center_configuration
     #   <p>The IAM Identity Center Configuration accepts the Identity Center instance parameter required to enable trusted identity propagation. This configuration allows identity propagation between integrated services and the Identity Center instance.</p>
+    # @option params [Types::JobLevelCostAllocationConfiguration] :job_level_cost_allocation_configuration
+    #   <p>The configuration object that enables job level cost allocation.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     name: "ApplicationName",
@@ -313,12 +317,14 @@ module Aws::EMRServerless
     #     },
     #     architecture: "Architecture",
     #     image_configuration: {
-    #       image_uri: "ImageUri"
+    #       image_uri: "ImageUri",
+    #       application_level_digest_resolution: false
     #     },
     #     worker_type_specifications: {
     #       "WorkerTypeString" => {
     #         image_configuration: {
-    #           image_uri: "ImageUri"
+    #           image_uri: "ImageUri",
+    #           application_level_digest_resolution: false
     #         }
     #       }
     #     },
@@ -355,16 +361,27 @@ module Aws::EMRServerless
     #         remote_write_url: "PrometheusUrlString"
     #       }
     #     },
+    #     disk_encryption_configuration: {
+    #       encryption_context: {
+    #         "EncryptionContextKey" => "EncryptionContextValue"
+    #       },
+    #       encryption_key_arn: "EncryptionKeyArn"
+    #     },
     #     interactive_configuration: {
     #       studio_enabled: false,
-    #       livy_endpoint_enabled: false
+    #       livy_endpoint_enabled: false,
+    #       session_enabled: false
     #     },
     #     scheduler_configuration: {
     #       queue_timeout_minutes: 1,
     #       max_concurrent_runs: 1
     #     },
     #     identity_center_configuration: {
-    #       identity_center_instance_arn: "IdentityCenterInstanceArn"
+    #       identity_center_instance_arn: "IdentityCenterInstanceArn",
+    #       user_background_sessions_enabled: false
+    #     },
+    #     job_level_cost_allocation_configuration: {
+    #       enabled: false
     #     }
     #   }
     #   options = {}
@@ -457,13 +474,15 @@ module Aws::EMRServerless
     #       architecture: "Architecture",
     #       image_configuration: {
     #         image_uri: "ImageUri", # required
-    #         resolved_image_digest: "ImageDigest"
+    #         resolved_image_digest: "ImageDigest",
+    #         application_level_digest_resolution: false
     #       },
     #       worker_type_specifications: {
     #         "WorkerTypeString" => {
     #           image_configuration: {
     #             image_uri: "ImageUri", # required
-    #             resolved_image_digest: "ImageDigest"
+    #             resolved_image_digest: "ImageDigest",
+    #             application_level_digest_resolution: false
     #           }
     #         }
     #       },
@@ -500,9 +519,16 @@ module Aws::EMRServerless
     #           remote_write_url: "PrometheusUrlString"
     #         }
     #       },
+    #       disk_encryption_configuration: {
+    #         encryption_context: {
+    #           "EncryptionContextKey" => "EncryptionContextValue"
+    #         },
+    #         encryption_key_arn: "EncryptionKeyArn"
+    #       },
     #       interactive_configuration: {
     #         studio_enabled: false,
-    #         livy_endpoint_enabled: false
+    #         livy_endpoint_enabled: false,
+    #         session_enabled: false
     #       },
     #       scheduler_configuration: {
     #         queue_timeout_minutes: 1,
@@ -510,7 +536,11 @@ module Aws::EMRServerless
     #       },
     #       identity_center_configuration: {
     #         identity_center_instance_arn: "IdentityCenterInstanceArn",
-    #         identity_center_application_arn: "IdentityCenterApplicationArn"
+    #         identity_center_application_arn: "IdentityCenterApplicationArn",
+    #         user_background_sessions_enabled: false
+    #       },
+    #       job_level_cost_allocation_configuration: {
+    #         enabled: false
     #       }
     #     }
     #   }
@@ -618,6 +648,12 @@ module Aws::EMRServerless
     #           prometheus_monitoring_configuration: {
     #             remote_write_url: "PrometheusUrlString"
     #           }
+    #         },
+    #         disk_encryption_configuration: {
+    #           encryption_context: {
+    #             "EncryptionContextKey" => "EncryptionContextValue"
+    #           },
+    #           encryption_key_arn: "EncryptionKeyArn"
     #         }
     #       },
     #       job_driver: { # required
@@ -662,12 +698,155 @@ module Aws::EMRServerless
     #       attempt_updated_at: Time.now,
     #       started_at: Time.now,
     #       ended_at: Time.now,
-    #       queued_duration_milliseconds: 1
+    #       queued_duration_milliseconds: 1,
+    #       image_configuration: {
+    #         image_uri: "ImageUri", # required
+    #         resolved_image_digest: "ImageDigest",
+    #         application_level_digest_resolution: false
+    #       },
+    #       worker_type_specifications: {
+    #         "WorkerTypeString" => {
+    #           image_configuration: {
+    #             image_uri: "ImageUri", # required
+    #             resolved_image_digest: "ImageDigest",
+    #             application_level_digest_resolution: false
+    #           }
+    #         }
+    #       }
     #     }
     #   }
     # @return [Types::GetJobRunOutput]
     def get_job_run(params = {}, options = {})
       request = build_request(:get_job_run, params)
+      request.send_request(options)
+    end
+
+    # <p>Returns a URL that you can use to access the application UIs for a specified resource, such as a session.</p> <p>For resources in a running state, the application UI is a live user interface such as the Spark web UI. For terminated resources, the application UI is a persistent application user interface such as the Spark History Server.</p> <note> <p>The URL is valid for one hour after you generate it. To access the application UI after that hour elapses, you must invoke the API again to generate a new URL.</p> </note>
+    # @param [Hash, Types::GetResourceDashboardRequest] params
+    # @option params [String] :application_id
+    #   <p>The ID of the application that the resource belongs to.</p>
+    # @option params [String] :resource_id
+    #   <p>The ID of the resource.</p>
+    # @option params [String] :resource_type
+    #   <p>The type of resource to access the dashboard for. Currently, only <code>Session</code> is supported.</p>
+    # @option params [Boolean] :access_system_profile_logs
+    #   <p>Allows access to system profile logs for Lake Formation-enabled sessions. Default is false.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     application_id: "ApplicationId", # required
+    #     resource_id: "ResourceId", # required
+    #     resource_type: "ResourceType", # required
+    #     access_system_profile_logs: false
+    #   }
+    #   options = {}
+    #   response = client.get_resource_dashboard(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     url: "Url"
+    #   }
+    # @return [Types::GetResourceDashboardResponse]
+    def get_resource_dashboard(params = {}, options = {})
+      request = build_request(:get_resource_dashboard, params)
+      request.send_request(options)
+    end
+
+    # <p>Displays detailed information about a session.</p>
+    # @param [Hash, Types::GetSessionRequest] params
+    # @option params [String] :application_id
+    #   <p>The ID of the application that the session belongs to.</p>
+    # @option params [String] :session_id
+    #   <p>The ID of the session.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     application_id: "ApplicationId", # required
+    #     session_id: "SessionId", # required
+    #   }
+    #   options = {}
+    #   response = client.get_session(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     session: { # required
+    #       application_id: "ApplicationId", # required
+    #       session_id: "SessionId", # required
+    #       arn: "SessionArn", # required
+    #       name: "String256",
+    #       state: "SessionState", # required
+    #       state_details: "String1024", # required
+    #       release_label: "ReleaseLabel", # required
+    #       execution_role_arn: "IAMRoleArn", # required
+    #       created_by: "RequestIdentityUserArn", # required
+    #       created_at: Time.now, # required
+    #       updated_at: Time.now, # required
+    #       started_at: Time.now,
+    #       ended_at: Time.now,
+    #       idle_since: Time.now,
+    #       configuration_overrides: {
+    #         runtime_configuration: [
+    #           {
+    #             classification: "String1024", # required
+    #             properties: {
+    #               "ConfigurationPropertyKey" => "ConfigurationPropertyValue"
+    #             },
+    #             configurations: {
+    #               # recursive ConfigurationList
+    #             }
+    #           }
+    #         ]
+    #       },
+    #       network_configuration: {
+    #         subnet_ids: ["SubnetString"],
+    #         security_group_ids: ["SecurityGroupString"]
+    #       },
+    #       idle_timeout_minutes: 1,
+    #       tags: {
+    #         "TagKey" => "TagValue"
+    #       },
+    #       total_resource_utilization: {
+    #         v_cpu_hour: 1.0,
+    #         memory_gb_hour: 1.0,
+    #         storage_gb_hour: 1.0
+    #       },
+    #       billed_resource_utilization: {
+    #         v_cpu_hour: 1.0,
+    #         memory_gb_hour: 1.0,
+    #         storage_gb_hour: 1.0
+    #       },
+    #       total_execution_duration_seconds: 1
+    #     }
+    #   }
+    # @return [Types::GetSessionResponse]
+    def get_session(params = {}, options = {})
+      request = build_request(:get_session, params)
+      request.send_request(options)
+    end
+
+    # <p>Returns the session endpoint URL and a time-limited authentication token for the specified session. Use the endpoint and token to connect a client to the session. Call this operation again when the authentication token expires to obtain a new token.</p>
+    # @param [Hash, Types::GetSessionEndpointRequest] params
+    # @option params [String] :application_id
+    #   <p>The ID of the application that the session belongs to.</p>
+    # @option params [String] :session_id
+    #   <p>The ID of the session.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     application_id: "ApplicationId", # required
+    #     session_id: "SessionId", # required
+    #   }
+    #   options = {}
+    #   response = client.get_session_endpoint(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     application_id: "ApplicationId", # required
+    #     session_id: "SessionId", # required
+    #     endpoint: "EndpointUrl", # required
+    #     auth_token: "SessionAuthToken", # required
+    #     auth_token_expires_at: Time.now, # required
+    #   }
+    # @return [Types::GetSessionEndpointResponse]
+    def get_session_endpoint(params = {}, options = {})
+      request = build_request(:get_session_endpoint, params)
       request.send_request(options)
     end
 
@@ -820,6 +999,57 @@ module Aws::EMRServerless
       request.send_request(options)
     end
 
+    # <p>Lists sessions for the specified application. You can filter sessions by state and creation time.</p>
+    # @param [Hash, Types::ListSessionsRequest] params
+    # @option params [String] :application_id
+    #   <p>The ID of the application to list sessions for.</p>
+    # @option params [String] :next_token
+    #   <p>The token for the next set of session results.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of sessions to return in each page of results.</p>
+    # @option params [Array<String>] :states
+    #   <p>An optional filter for session states. Note that if this filter contains multiple states, the resulting list will be grouped by the state.</p>
+    # @option params [Time] :created_at_after
+    #   <p>The lower bound of the option to filter by creation date and time.</p>
+    # @option params [Time] :created_at_before
+    #   <p>The upper bound of the option to filter by creation date and time.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     application_id: "ApplicationId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     states: ["SessionState"],
+    #     created_at_after: Time.now,
+    #     created_at_before: Time.now
+    #   }
+    #   options = {}
+    #   response = client.list_sessions(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     sessions: [ # required
+    #       {
+    #         application_id: "ApplicationId", # required
+    #         session_id: "SessionId", # required
+    #         arn: "SessionArn", # required
+    #         name: "String256",
+    #         state: "SessionState", # required
+    #         state_details: "String1024", # required
+    #         release_label: "ReleaseLabel", # required
+    #         execution_role_arn: "IAMRoleArn", # required
+    #         created_by: "RequestIdentityUserArn", # required
+    #         created_at: Time.now, # required
+    #         updated_at: Time.now, # required
+    #       }
+    #     ],
+    #     next_token: "NextToken"
+    #   }
+    # @return [Types::ListSessionsResponse]
+    def list_sessions(params = {}, options = {})
+      request = build_request(:list_sessions, params)
+      request.send_request(options)
+    end
+
     # <p>Lists the tags assigned to the resources.</p>
     # @param [Hash, Types::ListTagsForResourceInput] params
     # @option params [String] :resource_arn
@@ -879,7 +1109,7 @@ module Aws::EMRServerless
     # @option params [Hash<String, String>] :tags
     #   <p>The tags assigned to the job run.</p>
     # @option params [Integer] :execution_timeout_minutes
-    #   <p>The maximum duration for the job run to run. If the job run runs beyond this duration, it will be automatically cancelled.</p>
+    #   <p>The maximum duration, in minutes, for the job run. If the job run exceeds this duration, Amazon EMR Serverless cancels it automatically.</p> <p>For BATCH mode job runs, the maximum value is 10080 minutes (7 days) starting with Amazon EMR release 7.11. Setting a value of 0 to disable the timeout is no longer supported for BATCH mode job runs.</p>
     # @option params [String] :name
     #   <p>The optional job run name. This doesn't have to be unique.</p>
     # @option params [String] :mode
@@ -941,6 +1171,12 @@ module Aws::EMRServerless
     #         prometheus_monitoring_configuration: {
     #           remote_write_url: "PrometheusUrlString"
     #         }
+    #       },
+    #       disk_encryption_configuration: {
+    #         encryption_context: {
+    #           "EncryptionContextKey" => "EncryptionContextValue"
+    #         },
+    #         encryption_key_arn: "EncryptionKeyArn"
     #       }
     #     },
     #     tags: {
@@ -966,6 +1202,61 @@ module Aws::EMRServerless
     # @return [Types::StartJobRunOutput]
     def start_job_run(params = {}, options = {})
       request = build_request(:start_job_run, params)
+      request.send_request(options)
+    end
+
+    # <p>Creates and starts a new session on the specified application. The application must be in the <code>STARTED</code> state or have <code>AutoStart</code> enabled, and have interactive sessions enabled. This operation is supported for EMR release 7.13.0 and later.</p>
+    # @param [Hash, Types::StartSessionRequest] params
+    # @option params [String] :application_id
+    #   <p>The ID of the application on which to start the session.</p>
+    # @option params [String] :client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you retry a request that completed successfully using the same client token, the server returns the successful response without performing the operation again.</p>
+    # @option params [String] :execution_role_arn
+    #   <p>The execution role ARN for the session. Amazon EMR Serverless uses this role to access Amazon Web Services resources on your behalf during session execution.</p>
+    # @option params [Types::SessionConfigurationOverrides] :configuration_overrides
+    #   <p>The configuration overrides for the session. Only runtime configuration overrides are supported.</p>
+    # @option params [Hash<String, String>] :tags
+    #   <p>The tags to assign to the session.</p>
+    # @option params [Integer] :idle_timeout_minutes
+    #   <p>The idle timeout in minutes for the session. After the session remains idle for this duration, Amazon EMR Serverless automatically terminates it.</p>
+    # @option params [String] :name
+    #   <p>The optional name for the session.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     application_id: "ApplicationId", # required
+    #     client_token: "ClientToken", # required
+    #     execution_role_arn: "IAMRoleArn", # required
+    #     configuration_overrides: {
+    #       runtime_configuration: [
+    #         {
+    #           classification: "String1024", # required
+    #           properties: {
+    #             "ConfigurationPropertyKey" => "ConfigurationPropertyValue"
+    #           },
+    #           configurations: {
+    #             # recursive ConfigurationList
+    #           }
+    #         }
+    #       ]
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue"
+    #     },
+    #     idle_timeout_minutes: 1,
+    #     name: "String256"
+    #   }
+    #   options = {}
+    #   response = client.start_session(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     application_id: "ApplicationId", # required
+    #     session_id: "SessionId", # required
+    #     arn: "SessionArn", # required
+    #   }
+    # @return [Types::StartSessionResponse]
+    def start_session(params = {}, options = {})
+      request = build_request(:start_session, params)
       request.send_request(options)
     end
 
@@ -1009,6 +1300,31 @@ module Aws::EMRServerless
     # @return [Types::TagResourceOutput]
     def tag_resource(params = {}, options = {})
       request = build_request(:tag_resource, params)
+      request.send_request(options)
+    end
+
+    # <p>Terminates the specified session. After you terminate a session, it enters the <code>TERMINATING</code> state and then the <code>TERMINATED</code> state. You can still access the Spark History Server for a terminated session through the <code>GetResourceDashboard</code> operation.</p>
+    # @param [Hash, Types::TerminateSessionRequest] params
+    # @option params [String] :application_id
+    #   <p>The ID of the application that the session belongs to.</p>
+    # @option params [String] :session_id
+    #   <p>The ID of the session to terminate.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     application_id: "ApplicationId", # required
+    #     session_id: "SessionId", # required
+    #   }
+    #   options = {}
+    #   response = client.terminate_session(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     application_id: "ApplicationId", # required
+    #     session_id: "SessionId", # required
+    #   }
+    # @return [Types::TerminateSessionResponse]
+    def terminate_session(params = {}, options = {})
+      request = build_request(:terminate_session, params)
       request.send_request(options)
     end
 
@@ -1064,10 +1380,14 @@ module Aws::EMRServerless
     #   <p>The <a href="https://docs.aws.amazon.com/emr-serverless/latest/APIReference/API_Configuration.html">Configuration</a> specifications to use when updating an application. Each configuration consists of a classification and properties. This configuration is applied across all the job runs submitted under the application.</p>
     # @option params [Types::MonitoringConfiguration] :monitoring_configuration
     #   <p>The configuration setting for monitoring.</p>
+    # @option params [Types::DiskEncryptionConfiguration] :disk_encryption_configuration
+    #   <p>The configuration object that allows encrypting local disks.</p>
     # @option params [Types::SchedulerConfiguration] :scheduler_configuration
     #   <p>The scheduler configuration for batch and streaming jobs running on this application. Supported with release labels emr-7.0.0 and above.</p>
     # @option params [Types::IdentityCenterConfigurationInput] :identity_center_configuration
     #   <p>Specifies the IAM Identity Center configuration used to enable or disable trusted identity propagation. When provided, this configuration determines how the application interacts with IAM Identity Center for user authentication and access control.</p>
+    # @option params [Types::JobLevelCostAllocationConfiguration] :job_level_cost_allocation_configuration
+    #   <p>The configuration object that enables job level cost allocation.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     application_id: "ApplicationId", # required
@@ -1101,18 +1421,21 @@ module Aws::EMRServerless
     #     },
     #     architecture: "Architecture",
     #     image_configuration: {
-    #       image_uri: "ImageUri"
+    #       image_uri: "ImageUri",
+    #       application_level_digest_resolution: false
     #     },
     #     worker_type_specifications: {
     #       "WorkerTypeString" => {
     #         image_configuration: {
-    #           image_uri: "ImageUri"
+    #           image_uri: "ImageUri",
+    #           application_level_digest_resolution: false
     #         }
     #       }
     #     },
     #     interactive_configuration: {
     #       studio_enabled: false,
-    #       livy_endpoint_enabled: false
+    #       livy_endpoint_enabled: false,
+    #       session_enabled: false
     #     },
     #     release_label: "ReleaseLabel",
     #     runtime_configuration: [
@@ -1148,12 +1471,22 @@ module Aws::EMRServerless
     #         remote_write_url: "PrometheusUrlString"
     #       }
     #     },
+    #     disk_encryption_configuration: {
+    #       encryption_context: {
+    #         "EncryptionContextKey" => "EncryptionContextValue"
+    #       },
+    #       encryption_key_arn: "EncryptionKeyArn"
+    #     },
     #     scheduler_configuration: {
     #       queue_timeout_minutes: 1,
     #       max_concurrent_runs: 1
     #     },
     #     identity_center_configuration: {
-    #       identity_center_instance_arn: "IdentityCenterInstanceArn"
+    #       identity_center_instance_arn: "IdentityCenterInstanceArn",
+    #       user_background_sessions_enabled: false
+    #     },
+    #     job_level_cost_allocation_configuration: {
+    #       enabled: false
     #     }
     #   }
     #   options = {}
@@ -1204,13 +1537,15 @@ module Aws::EMRServerless
     #       architecture: "Architecture",
     #       image_configuration: {
     #         image_uri: "ImageUri", # required
-    #         resolved_image_digest: "ImageDigest"
+    #         resolved_image_digest: "ImageDigest",
+    #         application_level_digest_resolution: false
     #       },
     #       worker_type_specifications: {
     #         "WorkerTypeString" => {
     #           image_configuration: {
     #             image_uri: "ImageUri", # required
-    #             resolved_image_digest: "ImageDigest"
+    #             resolved_image_digest: "ImageDigest",
+    #             application_level_digest_resolution: false
     #           }
     #         }
     #       },
@@ -1247,9 +1582,16 @@ module Aws::EMRServerless
     #           remote_write_url: "PrometheusUrlString"
     #         }
     #       },
+    #       disk_encryption_configuration: {
+    #         encryption_context: {
+    #           "EncryptionContextKey" => "EncryptionContextValue"
+    #         },
+    #         encryption_key_arn: "EncryptionKeyArn"
+    #       },
     #       interactive_configuration: {
     #         studio_enabled: false,
-    #         livy_endpoint_enabled: false
+    #         livy_endpoint_enabled: false,
+    #         session_enabled: false
     #       },
     #       scheduler_configuration: {
     #         queue_timeout_minutes: 1,
@@ -1257,7 +1599,11 @@ module Aws::EMRServerless
     #       },
     #       identity_center_configuration: {
     #         identity_center_instance_arn: "IdentityCenterInstanceArn",
-    #         identity_center_application_arn: "IdentityCenterApplicationArn"
+    #         identity_center_application_arn: "IdentityCenterApplicationArn",
+    #         user_background_sessions_enabled: false
+    #       },
+    #       job_level_cost_allocation_configuration: {
+    #         enabled: false
     #       }
     #     }
     #   }

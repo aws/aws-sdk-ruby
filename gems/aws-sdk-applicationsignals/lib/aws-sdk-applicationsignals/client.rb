@@ -144,18 +144,18 @@ module Aws::ApplicationSignals
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -207,6 +207,55 @@ module Aws::ApplicationSignals
     #  When `true`, request parameters are validated before sending the request.
     def initialize(*options)
       super
+    end
+
+    # Deletes multiple instrumentation configurations in a single request.
+    # Supports two mutually exclusive selection methods:
+    # - By scope: Delete all configurations matching a Service + Environment + InstrumentationType
+    # - By ARN list: Delete specific configurations by providing a list of resource ARNs
+    # @param [Hash, Types::BatchDeleteInstrumentationConfigurationsRequest] params
+    # @option params [Types::BatchDeleteDeletionTarget] :deletion_target
+    #   The deletion target - either bulk by scope or targeted by ARN list.
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     deletion_target: { # required
+    #       # One of:
+    #       scope: {
+    #         service: "String", # required
+    #         environment: "String", # required
+    #         instrumentation_type: "BREAKPOINT" # One of: ["BREAKPOINT", "PROBE"], # required
+    #       },
+    #       resource_arns: {
+    #         resource_arns: ["String"], # required
+    #         instrumentation_type: "BREAKPOINT" # One of: ["BREAKPOINT", "PROBE"], # required
+    #       }
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.batch_delete_instrumentation_configurations(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     deleted_count: 1, # required
+    #     successful_deletions: [ # required
+    #       {
+    #         resource_arn: "String",
+    #         signal_type: "String",
+    #         location_hash: "String"
+    #       }
+    #     ],
+    #     errors: [ # required
+    #       {
+    #         resource_arn: "String", # required
+    #         code: "ResourceNotFoundException" # One of: ["ResourceNotFoundException", "AccessDeniedException", "InternalServiceException"], # required
+    #         message: "String", # required
+    #       }
+    #     ]
+    #   }
+    # @return [Types::BatchDeleteInstrumentationConfigurationsResponse]
+    def batch_delete_instrumentation_configurations(params = {}, options = {})
+      request = build_request(:batch_delete_instrumentation_configurations, params)
+      request.send_request(options)
     end
 
     # <p>Use this operation to retrieve one or more <i>service level objective (SLO) budget reports</i>.</p> <p>An <i>error budget</i> is the amount of time or requests in an unhealthy state that your service can accumulate during an interval before your overall SLO budget health is breached and the SLO is considered to be unmet. For example, an SLO with a threshold of 99.95% and a monthly interval translates to an error budget of 21.9 minutes of downtime in a 30-day month.</p> <p>Budget reports include a health indicator, the attainment value, and remaining budget.</p> <p>For more information about SLO error budgets, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-ServiceLevelObjectives.html#CloudWatch-ServiceLevelObjectives-concepts"> SLO concepts</a>.</p>
@@ -274,6 +323,24 @@ module Aws::ApplicationSignals
     #                 "KeyAttributeName" => "KeyAttributeValue"
     #               },
     #               dependency_operation_name: "OperationName", # required
+    #             },
+    #             metric_source: {
+    #               metric_source_key_attributes: { # required
+    #                 "KeyAttributeName" => "KeyAttributeValue"
+    #               },
+    #               metric_source_attributes: {
+    #                 "KeyAttributeName" => "KeyAttributeValue"
+    #               }
+    #             },
+    #             composite_sli_config: {
+    #               selection_config: { # required
+    #                 type: "EXPLICIT" # One of: ["EXPLICIT", "PREFIX", "REGEX"], # required
+    #                 pattern: "SelectionPattern"
+    #               },
+    #               components: [{
+    #                 # One of:
+    #                 operation_name: "OperationName"
+    #               }]
     #             }
     #           },
     #           metric_threshold: 1.0, # required
@@ -369,6 +436,24 @@ module Aws::ApplicationSignals
     #                 "KeyAttributeName" => "KeyAttributeValue"
     #               },
     #               dependency_operation_name: "OperationName", # required
+    #             },
+    #             metric_source: {
+    #               metric_source_key_attributes: { # required
+    #                 "KeyAttributeName" => "KeyAttributeValue"
+    #               },
+    #               metric_source_attributes: {
+    #                 "KeyAttributeName" => "KeyAttributeValue"
+    #               }
+    #             },
+    #             composite_sli_config: {
+    #               selection_config: { # required
+    #                 type: "EXPLICIT" # One of: ["EXPLICIT", "PREFIX", "REGEX"], # required
+    #                 pattern: "SelectionPattern"
+    #               },
+    #               components: [{
+    #                 # One of:
+    #                 operation_name: "OperationName"
+    #               }]
     #             }
     #           },
     #           metric_threshold: 1.0,
@@ -465,6 +550,135 @@ module Aws::ApplicationSignals
       request.send_request(options)
     end
 
+    # <p>Creates a dynamic instrumentation configuration for a specific code or endpoint location within a service and environment. Configurations are immutable after creation.</p> <p>For <code>BREAKPOINT</code> type configurations, they expire after 24 hours unless a shorter expiration is provided. For <code>PROBE</code> type configurations, they persist until explicitly deleted; an expiration cannot be set for <code>PROBE</code> configurations.</p> <p>If a configuration already exists for the same service, environment, signal type, and location, this operation returns a conflict instead of overwriting it. Use attribute filters and capture settings to control where the instrumentation runs and which data is collected.</p>
+    # @param [Hash, Types::CreateInstrumentationConfigurationRequest] params
+    # @option params [String] :instrumentation_type
+    #   Type of instrumentation: BREAKPOINT (temporary) or PROBE (permanent)
+    # @option params [String] :service
+    #   <p>The name of the service to instrument. This should match the <code>service.name</code> resource attribute reported by the application.</p>
+    # @option params [String] :environment
+    #   <p>The environment that the service is running in, such as <code>eks:cluster-prod/namespace</code> or <code>ec2:production</code>.</p>
+    # @option params [String] :signal_type
+    #   <p>The telemetry signal type to emit for this instrumentation. The supported value is <code>SNAPSHOT</code>.</p>
+    # @option params [Types::Location] :location
+    #   <p>The location where instrumentation should be applied. Specify a <code>CodeLocation</code> for code-level instrumentation.</p>
+    # @option params [String] :description
+    #   <p>An optional short description (up to 50 characters) that explains the purpose of this instrumentation.</p>
+    # @option params [Time] :expires_at
+    #   For BREAKPOINT: optional, defaults to 24 hours, must be between 5 min and 24 hours.
+    #   For PROBE: not supported. PROBE configurations are permanent and persist until explicitly deleted.
+    # @option params [Array<Hash<String, String>>] :attribute_filters
+    #   <p>Client-side filters that target specific instances. Each object in the array is AND-matched on its keys, and multiple objects are OR-matched to decide where to apply the instrumentation.</p>
+    # @option params [Types::CaptureConfiguration] :capture_configuration
+    #   <p>Specifies what to capture when the instrumentation point is hit. Specify <code>CodeCapture</code> for code-level capture settings.</p>
+    # @option params [Array<Types::Tag>] :tags
+    #   <p>An optional list of key-value pairs to associate with the instrumentation configuration. Tags can help you organize and categorize your resources.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     instrumentation_type: "BREAKPOINT" # One of: ["BREAKPOINT", "PROBE"], # required
+    #     service: "String", # required
+    #     environment: "String", # required
+    #     signal_type: "SNAPSHOT" # One of: ["SNAPSHOT"], # required
+    #     location: { # required
+    #       # One of:
+    #       code_location: {
+    #         language: "Java" # One of: ["Java", "Python", "Javascript"], # required
+    #         code_unit: "String",
+    #         class_name: "String",
+    #         method_name: "String",
+    #         file_path: "String", # required
+    #         line_number: 1
+    #       }
+    #     },
+    #     description: "String",
+    #     expires_at: Time.now,
+    #     attribute_filters: [
+    #       {
+    #         "String" => "String"
+    #       }
+    #     ],
+    #     capture_configuration: { # required
+    #       # One of:
+    #       code_capture: {
+    #         capture_arguments: ["String"],
+    #         capture_return: false,
+    #         capture_stack_trace: false,
+    #         capture_locals: ["String"],
+    #         capture_limits: { # required
+    #           max_hits: 1,
+    #           max_string_length: 1,
+    #           max_collection_width: 1,
+    #           max_collection_depth: 1,
+    #           max_stack_frames: 1,
+    #           max_stack_trace_size: 1,
+    #           max_object_depth: 1,
+    #           max_fields_per_object: 1
+    #         }
+    #       }
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       }
+    #     ]
+    #   }
+    #   options = {}
+    #   response = client.create_instrumentation_configuration(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     instrumentation_type: "BREAKPOINT" # One of: ["BREAKPOINT", "PROBE"], # required
+    #     service: "String", # required
+    #     environment: "String", # required
+    #     signal_type: "SNAPSHOT" # One of: ["SNAPSHOT"], # required
+    #     location: { # required
+    #       # One of:
+    #       code_location: {
+    #         language: "Java" # One of: ["Java", "Python", "Javascript"], # required
+    #         code_unit: "String",
+    #         class_name: "String",
+    #         method_name: "String",
+    #         file_path: "String", # required
+    #         line_number: 1
+    #       }
+    #     },
+    #     location_hash: "String", # required
+    #     description: "String",
+    #     expires_at: Time.now,
+    #     attribute_filters: [
+    #       {
+    #         "String" => "String"
+    #       }
+    #     ],
+    #     capture_configuration: { # required
+    #       # One of:
+    #       code_capture: {
+    #         capture_arguments: ["String"],
+    #         capture_return: false,
+    #         capture_stack_trace: false,
+    #         capture_locals: ["String"],
+    #         capture_limits: { # required
+    #           max_hits: 1,
+    #           max_string_length: 1,
+    #           max_collection_width: 1,
+    #           max_collection_depth: 1,
+    #           max_stack_frames: 1,
+    #           max_stack_trace_size: 1,
+    #           max_object_depth: 1,
+    #           max_fields_per_object: 1
+    #         }
+    #       }
+    #     },
+    #     created_at: Time.now, # required
+    #     arn: "InstrumentationConfigurationArn", # required
+    #   }
+    # @return [Types::CreateInstrumentationConfigurationResponse]
+    def create_instrumentation_configuration(params = {}, options = {})
+      request = build_request(:create_instrumentation_configuration, params)
+      request.send_request(options)
+    end
+
     # <p>Creates a service level objective (SLO), which can help you ensure that your critical business operations are meeting customer expectations. Use SLOs to set and track specific target levels for the reliability and availability of your applications and services. SLOs use service level indicators (SLIs) to calculate whether the application is performing at the level that you want.</p> <p>Create an SLO to set a target for a service or operation’s availability or latency. CloudWatch measures this target frequently you can find whether it has been breached. </p> <p>The target performance quality that is defined for an SLO is the <i>attainment goal</i>.</p> <p>You can set SLO targets for your applications that are discovered by Application Signals, using critical metrics such as latency and availability. You can also set SLOs against any CloudWatch metric or math expression that produces a time series.</p> <note> <p>You can't create an SLO for a service operation that was discovered by Application Signals until after that operation has reported standard metrics to Application Signals.</p> </note> <p>When you create an SLO, you specify whether it is a <i>period-based SLO</i> or a <i>request-based SLO</i>. Each type of SLO has a different way of evaluating your application's performance against its attainment goal.</p> <ul> <li> <p>A <i>period-based SLO</i> uses defined <i>periods</i> of time within a specified total time interval. For each period of time, Application Signals determines whether the application met its goal. The attainment rate is calculated as the <code>number of good periods/number of total periods</code>.</p> <p>For example, for a period-based SLO, meeting an attainment goal of 99.9% means that within your interval, your application must meet its performance goal during at least 99.9% of the time periods.</p> </li> <li> <p>A <i>request-based SLO</i> doesn't use pre-defined periods of time. Instead, the SLO measures <code>number of good requests/number of total requests</code> during the interval. At any time, you can find the ratio of good requests to total requests for the interval up to the time stamp that you specify, and measure that ratio against the goal set in your SLO.</p> </li> </ul> <p>After you have created an SLO, you can retrieve error budget reports for it. An <i>error budget</i> is the amount of time or amount of requests that your application can be non-compliant with the SLO's goal, and still have your application meet the goal.</p> <ul> <li> <p>For a period-based SLO, the error budget starts at a number defined by the highest number of periods that can fail to meet the threshold, while still meeting the overall goal. The <i>remaining error budget</i> decreases with every failed period that is recorded. The error budget within one interval can never increase.</p> <p>For example, an SLO with a threshold that 99.95% of requests must be completed under 2000ms every month translates to an error budget of 21.9 minutes of downtime per month.</p> </li> <li> <p>For a request-based SLO, the remaining error budget is dynamic and can increase or decrease, depending on the ratio of good requests to total requests.</p> </li> </ul> <p>For more information about SLOs, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-ServiceLevelObjectives.html"> Service level objectives (SLOs)</a>. </p> <p>When you perform a <code>CreateServiceLevelObjective</code> operation, Application Signals creates the <i>AWSServiceRoleForCloudWatchApplicationSignals</i> service-linked role, if it doesn't already exist in your account. This service- linked role has the following permissions:</p> <ul> <li> <p> <code>xray:GetServiceGraph</code> </p> </li> <li> <p> <code>logs:StartQuery</code> </p> </li> <li> <p> <code>logs:GetQueryResults</code> </p> </li> <li> <p> <code>cloudwatch:GetMetricData</code> </p> </li> <li> <p> <code>cloudwatch:ListMetrics</code> </p> </li> <li> <p> <code>tag:GetResources</code> </p> </li> <li> <p> <code>autoscaling:DescribeAutoScalingGroups</code> </p> </li> </ul>
     # @param [Hash, Types::CreateServiceLevelObjectiveInput] params
     # @option params [String] :name
@@ -481,6 +695,10 @@ module Aws::ApplicationSignals
     #   <p>A list of key-value pairs to associate with the SLO. You can associate as many as 50 tags with an SLO. To be able to associate tags with the SLO when you create the SLO, you must have the <code>cloudwatch:TagResource</code> permission.</p> <p>Tags can help you organize and categorize your resources. You can also use them to scope user permissions by granting a user permission to access or change only resources with certain tag values.</p>
     # @option params [Array<Types::BurnRateConfiguration>] :burn_rate_configurations
     #   <p>Use this array to create <i>burn rates</i> for this SLO. Each burn rate is a metric that indicates how fast the service is consuming the error budget, relative to the attainment goal of the SLO.</p>
+    # @option params [Boolean] :create_recommended_slo
+    #   <p>Set this to <code>true</code> to create a recommended SLO out of the box. When set to <code>true</code>, you don't need to specify the <code>MetricThreshold</code> or <code>ComparisonOperator</code> in the <code>SliConfig</code> or <code>RequestBasedSliConfig</code>. The default value is <code>false</code>.</p> <p>This is supported for SLOs on a service, service operation, or a dependency.</p>
+    # @option params [Boolean] :auto_investigation_enabled
+    #   Indicates whether DevOps Agent will automatically investigate this SLO when it is breached
     # @example Request syntax with placeholder values
     #   params = {
     #     name: "ServiceLevelObjectiveName", # required
@@ -495,6 +713,14 @@ module Aws::ApplicationSignals
     #         metric_name: "MetricName",
     #         statistic: "ServiceLevelIndicatorStatistic",
     #         period_seconds: 1,
+    #         metric_source: {
+    #           metric_source_key_attributes: { # required
+    #             "KeyAttributeName" => "KeyAttributeValue"
+    #           },
+    #           metric_source_attributes: {
+    #             "KeyAttributeName" => "KeyAttributeValue"
+    #           }
+    #         },
     #         metric_data_queries: [
     #           {
     #             id: "MetricId", # required
@@ -525,10 +751,20 @@ module Aws::ApplicationSignals
     #             "KeyAttributeName" => "KeyAttributeValue"
     #           },
     #           dependency_operation_name: "OperationName", # required
+    #         },
+    #         composite_sli_config: {
+    #           selection_config: { # required
+    #             type: "EXPLICIT" # One of: ["EXPLICIT", "PREFIX", "REGEX"], # required
+    #             pattern: "SelectionPattern"
+    #           },
+    #           components: [{
+    #             # One of:
+    #             operation_name: "OperationName"
+    #           }]
     #         }
     #       },
-    #       metric_threshold: 1.0, # required
-    #       comparison_operator: "GreaterThanOrEqualTo" # One of: ["GreaterThanOrEqualTo", "GreaterThan", "LessThan", "LessThanOrEqualTo"], # required
+    #       metric_threshold: 1.0,
+    #       comparison_operator: "GreaterThanOrEqualTo" # One of: ["GreaterThanOrEqualTo", "GreaterThan", "LessThan", "LessThanOrEqualTo"]
     #     },
     #     request_based_sli_config: {
     #       request_based_sli_metric_config: { # required
@@ -620,6 +856,25 @@ module Aws::ApplicationSignals
     #             "KeyAttributeName" => "KeyAttributeValue"
     #           },
     #           dependency_operation_name: "OperationName", # required
+    #         },
+    #         metric_source: {
+    #           metric_source_key_attributes: { # required
+    #             "KeyAttributeName" => "KeyAttributeValue"
+    #           },
+    #           metric_source_attributes: {
+    #             "KeyAttributeName" => "KeyAttributeValue"
+    #           }
+    #         },
+    #         metric_name: "MetricName",
+    #         composite_sli_config: {
+    #           selection_config: { # required
+    #             type: "EXPLICIT" # One of: ["EXPLICIT", "PREFIX", "REGEX"], # required
+    #             pattern: "SelectionPattern"
+    #           },
+    #           components: [{
+    #             # One of:
+    #             operation_name: "OperationName"
+    #           }]
     #         }
     #       },
     #       metric_threshold: 1.0,
@@ -651,7 +906,9 @@ module Aws::ApplicationSignals
     #       {
     #         look_back_window_minutes: 1, # required
     #       }
-    #     ]
+    #     ],
+    #     create_recommended_slo: false,
+    #     auto_investigation_enabled: false
     #   }
     #   options = {}
     #   response = client.create_service_level_objective(params, options)
@@ -701,6 +958,24 @@ module Aws::ApplicationSignals
     #               "KeyAttributeName" => "KeyAttributeValue"
     #             },
     #             dependency_operation_name: "OperationName", # required
+    #           },
+    #           metric_source: {
+    #             metric_source_key_attributes: { # required
+    #               "KeyAttributeName" => "KeyAttributeValue"
+    #             },
+    #             metric_source_attributes: {
+    #               "KeyAttributeName" => "KeyAttributeValue"
+    #             }
+    #           },
+    #           composite_sli_config: {
+    #             selection_config: { # required
+    #               type: "EXPLICIT" # One of: ["EXPLICIT", "PREFIX", "REGEX"], # required
+    #               pattern: "SelectionPattern"
+    #             },
+    #             components: [{
+    #               # One of:
+    #               operation_name: "OperationName"
+    #             }]
     #           }
     #         },
     #         metric_threshold: 1.0, # required
@@ -796,6 +1071,24 @@ module Aws::ApplicationSignals
     #               "KeyAttributeName" => "KeyAttributeValue"
     #             },
     #             dependency_operation_name: "OperationName", # required
+    #           },
+    #           metric_source: {
+    #             metric_source_key_attributes: { # required
+    #               "KeyAttributeName" => "KeyAttributeValue"
+    #             },
+    #             metric_source_attributes: {
+    #               "KeyAttributeName" => "KeyAttributeValue"
+    #             }
+    #           },
+    #           composite_sli_config: {
+    #             selection_config: { # required
+    #               type: "EXPLICIT" # One of: ["EXPLICIT", "PREFIX", "REGEX"], # required
+    #               pattern: "SelectionPattern"
+    #             },
+    #             components: [{
+    #               # One of:
+    #               operation_name: "OperationName"
+    #             }]
     #           }
     #         },
     #         metric_threshold: 1.0,
@@ -823,7 +1116,8 @@ module Aws::ApplicationSignals
     #           look_back_window_minutes: 1, # required
     #         }
     #       ],
-    #       metric_source_type: "ServiceOperation" # One of: ["ServiceOperation", "CloudWatchMetric", "ServiceDependency"]
+    #       metric_source_type: "ServiceOperation" # One of: ["ServiceOperation", "CloudWatchMetric", "ServiceDependency", "AppMonitor", "Canary", "Service"],
+    #       auto_investigation_enabled: false
     #     }
     #   }
     # @return [Types::CreateServiceLevelObjectiveOutput]
@@ -847,6 +1141,51 @@ module Aws::ApplicationSignals
       request.send_request(options)
     end
 
+    # <p>Deletes the specified instrumentation configuration. SDKs remove the instrumentation during their next sync after the configuration is deleted or expires.</p>
+    # @param [Hash, Types::DeleteInstrumentationConfigurationRequest] params
+    # @option params [String] :instrumentation_type
+    #   Type of instrumentation configuration (BREAKPOINT or PROBE).
+    #   Required to identify the configuration to delete.
+    # @option params [String] :service
+    #   Service name for the instrumentation configuration.
+    # @option params [String] :environment
+    #   Environment name for the instrumentation configuration.
+    # @option params [String] :signal_type
+    #   Signal type for the instrumentation configuration.
+    # @option params [Types::LocationIdentifier] :location_identifier
+    #   Location identifier - either full code location or a pre-computed hash.
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     instrumentation_type: "BREAKPOINT" # One of: ["BREAKPOINT", "PROBE"], # required
+    #     service: "String", # required
+    #     environment: "String", # required
+    #     signal_type: "SNAPSHOT" # One of: ["SNAPSHOT"], # required
+    #     location_identifier: { # required
+    #       # One of:
+    #       code_location: {
+    #         language: "Java" # One of: ["Java", "Python", "Javascript"], # required
+    #         code_unit: "String",
+    #         class_name: "String",
+    #         method_name: "String",
+    #         file_path: "String", # required
+    #         line_number: 1
+    #       },
+    #       location_hash: "String"
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.delete_instrumentation_configuration(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     deletion_status: "DELETED" # One of: ["DELETED"], # required
+    #   }
+    # @return [Types::DeleteInstrumentationConfigurationResponse]
+    def delete_instrumentation_configuration(params = {}, options = {})
+      request = build_request(:delete_instrumentation_configuration, params)
+      request.send_request(options)
+    end
+
     # <p>Deletes the specified service level objective.</p>
     # @param [Hash, Types::DeleteServiceLevelObjectiveInput] params
     # @option params [String] :id
@@ -863,6 +1202,177 @@ module Aws::ApplicationSignals
     # @return [Types::DeleteServiceLevelObjectiveOutput]
     def delete_service_level_objective(params = {}, options = {})
       request = build_request(:delete_service_level_objective, params)
+      request.send_request(options)
+    end
+
+    # <p>Returns the details of a single instrumentation configuration identified by service, environment, signal type, and location. Use this to audit or display configuration details.</p>
+    # @param [Hash, Types::GetInstrumentationConfigurationRequest] params
+    # @option params [String] :instrumentation_type
+    #   Type of instrumentation configuration (BREAKPOINT or PROBE).
+    #   Required to identify the configuration to retrieve.
+    # @option params [String] :service
+    #   Service name for the instrumentation configuration.
+    # @option params [String] :environment
+    #   Environment name for the instrumentation configuration.
+    # @option params [String] :signal_type
+    #   Signal type for the instrumentation configuration.
+    # @option params [Types::LocationIdentifier] :location_identifier
+    #   Location identifier - either full code location or a pre-computed hash.
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     instrumentation_type: "BREAKPOINT" # One of: ["BREAKPOINT", "PROBE"], # required
+    #     service: "String", # required
+    #     environment: "String", # required
+    #     signal_type: "SNAPSHOT" # One of: ["SNAPSHOT"], # required
+    #     location_identifier: { # required
+    #       # One of:
+    #       code_location: {
+    #         language: "Java" # One of: ["Java", "Python", "Javascript"], # required
+    #         code_unit: "String",
+    #         class_name: "String",
+    #         method_name: "String",
+    #         file_path: "String", # required
+    #         line_number: 1
+    #       },
+    #       location_hash: "String"
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.get_instrumentation_configuration(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     configuration: { # required
+    #       instrumentation_type: "BREAKPOINT" # One of: ["BREAKPOINT", "PROBE"], # required
+    #       service: "String", # required
+    #       environment: "String", # required
+    #       signal_type: "SNAPSHOT" # One of: ["SNAPSHOT"], # required
+    #       location: { # required
+    #         # One of:
+    #         code_location: {
+    #           language: "Java" # One of: ["Java", "Python", "Javascript"], # required
+    #           code_unit: "String",
+    #           class_name: "String",
+    #           method_name: "String",
+    #           file_path: "String", # required
+    #           line_number: 1
+    #         }
+    #       },
+    #       location_hash: "String", # required
+    #       description: "String",
+    #       expires_at: Time.now,
+    #       attribute_filters: [
+    #         {
+    #           "String" => "String"
+    #         }
+    #       ],
+    #       capture_configuration: { # required
+    #         # One of:
+    #         code_capture: {
+    #           capture_arguments: ["String"],
+    #           capture_return: false,
+    #           capture_stack_trace: false,
+    #           capture_locals: ["String"],
+    #           capture_limits: { # required
+    #             max_hits: 1,
+    #             max_string_length: 1,
+    #             max_collection_width: 1,
+    #             max_collection_depth: 1,
+    #             max_stack_frames: 1,
+    #             max_stack_trace_size: 1,
+    #             max_object_depth: 1,
+    #             max_fields_per_object: 1
+    #           }
+    #         }
+    #       },
+    #       created_at: Time.now, # required
+    #       arn: "InstrumentationConfigurationArn", # required
+    #     }
+    #   }
+    # @return [Types::GetInstrumentationConfigurationResponse]
+    def get_instrumentation_configuration(params = {}, options = {})
+      request = build_request(:get_instrumentation_configuration, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves the status history for a single instrumentation configuration during a specified time range. The response lists when the configuration was ACTIVE, READY, ERROR, or DISABLED.</p> <p>If no status or time window is provided, the operation defaults to ACTIVE events from the last hour.</p>
+    # @param [Hash, Types::GetInstrumentationConfigurationStatusRequest] params
+    # @option params [String] :instrumentation_type
+    #   Type of instrumentation configuration (BREAKPOINT or PROBE).
+    #   Required to identify the configuration to retrieve.
+    # @option params [String] :service
+    #   Service name for the instrumentation configuration.
+    # @option params [String] :environment
+    #   Environment name for the instrumentation configuration.
+    # @option params [String] :signal_type
+    #   Signal type for the instrumentation configuration.
+    # @option params [Types::LocationIdentifier] :location_identifier
+    #   Location identifier - either full code location or a pre-computed hash.
+    # @option params [String] :status
+    #   <p>The single status to query for. If omitted, only <code>ACTIVE</code> status events are returned.</p>
+    # @option params [Time] :start_time
+    #   <p>The start of the time range to retrieve status events for. <code>StartTime</code> and <code>EndTime</code> must both be provided together or both be omitted. When both are omitted, the time range defaults to the last hour.</p>
+    # @option params [Time] :end_time
+    #   <p>The end of the time range to retrieve status events for. <code>StartTime</code> and <code>EndTime</code> must both be provided together or both be omitted. When both are omitted, the time range defaults to the last hour.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of status events to return in one call. The default is 60.</p>
+    # @option params [String] :next_token
+    #   <p>Use the token returned by a previous call to retrieve the next page of status events.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     instrumentation_type: "BREAKPOINT" # One of: ["BREAKPOINT", "PROBE"], # required
+    #     service: "String", # required
+    #     environment: "String", # required
+    #     signal_type: "SNAPSHOT" # One of: ["SNAPSHOT"], # required
+    #     location_identifier: { # required
+    #       # One of:
+    #       code_location: {
+    #         language: "Java" # One of: ["Java", "Python", "Javascript"], # required
+    #         code_unit: "String",
+    #         class_name: "String",
+    #         method_name: "String",
+    #         file_path: "String", # required
+    #         line_number: 1
+    #       },
+    #       location_hash: "String"
+    #     },
+    #     status: "READY" # One of: ["READY", "ERROR", "ACTIVE", "DISABLED"],
+    #     start_time: Time.now,
+    #     end_time: Time.now,
+    #     max_results: 1,
+    #     next_token: "NextToken"
+    #   }
+    #   options = {}
+    #   response = client.get_instrumentation_configuration_status(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     service: "String", # required
+    #     environment: "String", # required
+    #     signal_type: "SNAPSHOT" # One of: ["SNAPSHOT"], # required
+    #     location: { # required
+    #       # One of:
+    #       code_location: {
+    #         language: "Java" # One of: ["Java", "Python", "Javascript"], # required
+    #         code_unit: "String",
+    #         class_name: "String",
+    #         method_name: "String",
+    #         file_path: "String", # required
+    #         line_number: 1
+    #       }
+    #     },
+    #     status: "READY" # One of: ["READY", "ERROR", "ACTIVE", "DISABLED"], # required
+    #     events: [ # required
+    #       {
+    #         time: Time.now, # required
+    #         error_cause: "FILE_NOT_FOUND" # One of: ["FILE_NOT_FOUND", "METHOD_NOT_FOUND", "LINE_NOT_EXECUTABLE", "OVERLOADED_METHODS", "LANGUAGE_MISMATCH", "RUNTIME_ERROR"]
+    #       }
+    #     ],
+    #     next_token: "NextToken"
+    #   }
+    # @return [Types::GetInstrumentationConfigurationStatusResponse]
+    def get_instrumentation_configuration_status(params = {}, options = {})
+      request = build_request(:get_instrumentation_configuration_status, params)
       request.send_request(options)
     end
 
@@ -994,6 +1504,24 @@ module Aws::ApplicationSignals
     #               "KeyAttributeName" => "KeyAttributeValue"
     #             },
     #             dependency_operation_name: "OperationName", # required
+    #           },
+    #           metric_source: {
+    #             metric_source_key_attributes: { # required
+    #               "KeyAttributeName" => "KeyAttributeValue"
+    #             },
+    #             metric_source_attributes: {
+    #               "KeyAttributeName" => "KeyAttributeValue"
+    #             }
+    #           },
+    #           composite_sli_config: {
+    #             selection_config: { # required
+    #               type: "EXPLICIT" # One of: ["EXPLICIT", "PREFIX", "REGEX"], # required
+    #               pattern: "SelectionPattern"
+    #             },
+    #             components: [{
+    #               # One of:
+    #               operation_name: "OperationName"
+    #             }]
     #           }
     #         },
     #         metric_threshold: 1.0, # required
@@ -1089,6 +1617,24 @@ module Aws::ApplicationSignals
     #               "KeyAttributeName" => "KeyAttributeValue"
     #             },
     #             dependency_operation_name: "OperationName", # required
+    #           },
+    #           metric_source: {
+    #             metric_source_key_attributes: { # required
+    #               "KeyAttributeName" => "KeyAttributeValue"
+    #             },
+    #             metric_source_attributes: {
+    #               "KeyAttributeName" => "KeyAttributeValue"
+    #             }
+    #           },
+    #           composite_sli_config: {
+    #             selection_config: { # required
+    #               type: "EXPLICIT" # One of: ["EXPLICIT", "PREFIX", "REGEX"], # required
+    #               pattern: "SelectionPattern"
+    #             },
+    #             components: [{
+    #               # One of:
+    #               operation_name: "OperationName"
+    #             }]
     #           }
     #         },
     #         metric_threshold: 1.0,
@@ -1116,7 +1662,8 @@ module Aws::ApplicationSignals
     #           look_back_window_minutes: 1, # required
     #         }
     #       ],
-    #       metric_source_type: "ServiceOperation" # One of: ["ServiceOperation", "CloudWatchMetric", "ServiceDependency"]
+    #       metric_source_type: "ServiceOperation" # One of: ["ServiceOperation", "CloudWatchMetric", "ServiceDependency", "AppMonitor", "Canary", "Service"],
+    #       auto_investigation_enabled: false
     #     }
     #   }
     # @return [Types::GetServiceLevelObjectiveOutput]
@@ -1132,9 +1679,11 @@ module Aws::ApplicationSignals
     # @option params [Time] :end_time
     #   <p>The end of the time period to retrieve audit findings for. When used in a raw HTTP Query API, it is formatted as epoch time in seconds. For example, <code>1698778057</code> </p>
     # @option params [Array<String>] :auditors
-    #   <p>A list of auditor names to filter the findings by. Only findings generated by the specified auditors will be returned.</p> <p>The following auditors are available for configuration:</p> <ul> <li> <p> <code>slo</code> - SloAuditor: Identifies SLO violations and detects breached thresholds during the Assessment phase.</p> </li> <li> <p> <code>operation_metric</code> - OperationMetricAuditor: Detects anomalies in service operation metrics from Application Signals RED metrics during the Assessment phase</p> </li> <li> <p> <code>service_quota</code> - ServiceQuotaAuditor: Monitors resource utilization against service quotas during the Assessment phase</p> </li> <li> <p> <code>trace</code> - TraceAuditor: Performs deep-dive analysis of distributed traces, correlating traces with breached SLOs or abnormal RED metrics during the Analysis phase</p> </li> <li> <p> <code>dependency_metric</code> - CriticalPathAuditor: Analyzes service dependency impacts and maps dependency relationships from Application Signals RED metrics during the Analysis phase</p> </li> <li> <p> <code>top_contributor</code> - TopContributorAuditor: Identifies infrastructure-level contributors to issues by analyzing EMF logs of Application Signals RED metrics during the Analysis phase</p> </li> <li> <p> <code>log</code> - LogAuditor: Extracts insights from application logs, categorizing error types and ranking severity by frequency during the Analysis phase</p> </li> </ul> <note> <p> <code>InitAuditor</code> and <code>Summarizer</code> auditors are not configurable as they are automatically triggered during the audit process.</p> </note>
+    #   <p>A list of auditor names to filter the findings by. Only findings generated by the specified auditors will be returned.</p> <p>The following auditors are available for configuration:</p> <ul> <li> <p> <code>slo</code> - SloAuditor: Identifies SLO violations and detects breached thresholds during the Assessment phase.</p> </li> <li> <p> <code>operation_metric</code> - OperationMetricAuditor: Detects anomalies in service operation metrics from Application Signals RED metrics during the Assessment phase</p> <note> <p>Anomaly detection is not supported for sparse metrics (those missing more than 80% of datapoints within the given time period).</p> </note> </li> <li> <p> <code>service_quota</code> - ServiceQuotaAuditor: Monitors resource utilization against service quotas during the Assessment phase</p> </li> <li> <p> <code>trace</code> - TraceAuditor: Performs deep-dive analysis of distributed traces, correlating traces with breached SLOs or abnormal RED metrics during the Analysis phase</p> </li> <li> <p> <code>dependency_metric</code> - CriticalPathAuditor: Analyzes service dependency impacts and maps dependency relationships from Application Signals RED metrics during the Analysis phase</p> </li> <li> <p> <code>top_contributor</code> - TopContributorAuditor: Identifies infrastructure-level contributors to issues by analyzing EMF logs of Application Signals RED metrics during the Analysis phase</p> </li> <li> <p> <code>log</code> - LogAuditor: Extracts insights from application logs, categorizing error types and ranking severity by frequency during the Analysis phase</p> </li> <li> <p> <code>change_indicator</code> - ChangeIndicatorAuditor: Detects change events (deployments, configuration changes) that occurred within 10 minutes before and during a detected anomaly, and surfaces them as findings with deployment timestamps in the Analysis phase. When changes are detected, the <code>top_contributor</code> auditor skips its analysis to avoid redundancy.</p> </li> </ul> <note> <p> <code>InitAuditor</code> and <code>Summarizer</code> auditors are not configurable as they are automatically triggered during the audit process.</p> </note>
     # @option params [Array<Types::AuditTarget>] :audit_targets
     #   <p>A list of audit targets to filter the findings by. You can specify services, SLOs, or service operations to limit the audit findings to specific entities.</p>
+    # @option params [String] :detail_level
+    #   <p>The level of details of the audit findings. Supported values: <code>BRIEF</code>, <code>DETAILED</code>.</p>
     # @option params [String] :next_token
     #   <p>Include this value, if it was returned by the previous operation, to get the next set of audit findings.</p>
     # @option params [Integer] :max_results
@@ -1168,10 +1717,14 @@ module Aws::ApplicationSignals
     #             },
     #             operation: "String",
     #             metric_type: "String"
+    #           },
+    #           canary: {
+    #             canary_name: "String", # required
     #           }
     #         }
     #       }
     #     ],
+    #     detail_level: "BRIEF" # One of: ["BRIEF", "DETAILED"],
     #     next_token: "NextToken",
     #     max_results: 1
     #   }
@@ -1180,6 +1733,8 @@ module Aws::ApplicationSignals
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {
+    #     start_time: Time.now,
+    #     end_time: Time.now,
     #     audit_findings: [ # required
     #       {
     #         key_attributes: { # required
@@ -1189,6 +1744,9 @@ module Aws::ApplicationSignals
     #           {
     #             auditor: "String",
     #             description: "String",
+    #             data: {
+    #               "String" => "String"
+    #             },
     #             severity: "CRITICAL" # One of: ["CRITICAL", "HIGH", "MEDIUM", "LOW", "NONE"]
     #           }
     #         ],
@@ -1256,13 +1814,70 @@ module Aws::ApplicationSignals
       request.send_request(options)
     end
 
+    # <p>Returns a list of change events for a specific entity, such as deployments, configuration changes, or other state-changing activities. This operation helps track the history of changes that may have affected service performance.</p>
+    # @param [Hash, Types::ListEntityEventsInput] params
+    # @option params [Hash<String, String>] :entity
+    #   <p>The entity for which to retrieve change events. This specifies the service, resource, or other entity whose event history you want to examine.</p> <p>This is a string-to-string map. It can include the following fields.</p> <ul> <li> <p> <code>Type</code> designates the type of object this is.</p> </li> <li> <p> <code>ResourceType</code> specifies the type of the resource. This field is used only when the value of the <code>Type</code> field is <code>Resource</code> or <code>AWS::Resource</code>.</p> </li> <li> <p> <code>Name</code> specifies the name of the object. This is used only if the value of the <code>Type</code> field is <code>Service</code>, <code>RemoteService</code>, or <code>AWS::Service</code>.</p> </li> <li> <p> <code>Identifier</code> identifies the resource objects of this resource. This is used only if the value of the <code>Type</code> field is <code>Resource</code> or <code>AWS::Resource</code>.</p> </li> <li> <p> <code>Environment</code> specifies the location where this object is hosted, or what it belongs to.</p> </li> <li> <p> <code>AwsAccountId</code> specifies the account where this object is in.</p> </li> </ul> <p>Below is an example of a service.</p> <p> <code>{ "Type": "Service", "Name": "visits-service", "Environment": "petclinic-test" }</code> </p> <p>Below is an example of a resource.</p> <p> <code>{ "Type": "AWS::Resource", "ResourceType": "AWS::DynamoDB::Table", "Identifier": "Customers" }</code> </p>
+    # @option params [Time] :start_time
+    #   <p>The start of the time period to retrieve change events for. When used in a raw HTTP Query API, it is formatted as epoch time in seconds. For example: <code>1698778057</code> </p>
+    # @option params [Time] :end_time
+    #   <p>The end of the time period to retrieve change events for. When used in a raw HTTP Query API, it is formatted as epoch time in seconds. For example: <code>1698778057</code> </p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of change events to return in one operation. If you omit this parameter, the default of 50 is used.</p>
+    # @option params [String] :next_token
+    #   <p>Include this value, if it was returned by the previous operation, to get the next set of change events.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     entity: { # required
+    #       "KeyAttributeName" => "KeyAttributeValue"
+    #     },
+    #     start_time: Time.now, # required
+    #     end_time: Time.now, # required
+    #     max_results: 1,
+    #     next_token: "NextToken"
+    #   }
+    #   options = {}
+    #   response = client.list_entity_events(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     start_time: Time.now, # required
+    #     end_time: Time.now, # required
+    #     change_events: [ # required
+    #       {
+    #         timestamp: Time.now, # required
+    #         account_id: "AwsAccountId", # required
+    #         region: "String", # required
+    #         entity: { # required
+    #           "KeyAttributeName" => "KeyAttributeValue"
+    #         },
+    #         change_event_type: "DEPLOYMENT" # One of: ["DEPLOYMENT", "CONFIGURATION"], # required
+    #         event_id: "String", # required
+    #         user_name: "String",
+    #         event_name: "String"
+    #       }
+    #     ],
+    #     next_token: "NextToken"
+    #   }
+    # @return [Types::ListEntityEventsOutput]
+    def list_entity_events(params = {}, options = {})
+      request = build_request(:list_entity_events, params)
+      request.send_request(options)
+    end
+
     # <p>Returns the current grouping configuration for this account, including all custom grouping attribute definitions that have been configured. These definitions determine how services are logically grouped based on telemetry attributes, Amazon Web Services tags, or predefined mappings.</p>
     # @param [Hash, Types::ListGroupingAttributeDefinitionsInput] params
     # @option params [String] :next_token
     #   <p>Include this value, if it was returned by the previous operation, to get the next set of grouping attribute definitions.</p>
+    # @option params [String] :aws_account_id
+    #   <p>The Amazon Web Services account ID to retrieve grouping attribute definitions for. Use this when accessing grouping configurations from a different account in cross-account monitoring scenarios.</p>
+    # @option params [Boolean] :include_linked_accounts
+    #   <p>If you are using this operation in a monitoring account, specify <code>true</code> to include grouping attributes from source accounts in the returned data.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     next_token: "NextToken"
+    #     next_token: "NextToken",
+    #     aws_account_id: "AwsAccountId",
+    #     include_linked_accounts: false
     #   }
     #   options = {}
     #   response = client.list_grouping_attribute_definitions(params, options)
@@ -1282,6 +1897,94 @@ module Aws::ApplicationSignals
     # @return [Types::ListGroupingAttributeDefinitionsOutput]
     def list_grouping_attribute_definitions(params = {}, options = {})
       request = build_request(:list_grouping_attribute_definitions, params)
+      request.send_request(options)
+    end
+
+    # <p>Returns all active instrumentation configurations for a service and environment. SDKs use this operation to sync configurations and apply client-side filters locally.</p> <p>Include the previous <code>SyncedAt</code> value to perform incremental syncs. When no changes are detected, the response sets <code>Changed</code> to <code>false</code> and omits configuration details.</p>
+    # @param [Hash, Types::ListInstrumentationConfigurationsRequest] params
+    # @option params [String] :service
+    #   <p>The name of the service to retrieve instrumentation configurations for.</p>
+    # @option params [String] :environment
+    #   <p>The environment that the service is running in.</p>
+    # @option params [String] :instrumentation_type
+    #   Type of instrumentation configuration (BREAKPOINT or PROBE).
+    #   Required to determine which backing store to query.
+    # @option params [Time] :synced_at
+    #   <p>The timestamp from the last successful sync. When provided, the response returns <code>Changed</code> as <code>false</code> if nothing is new since this time, or returns the latest configurations when changes exist.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of configurations to return in one call. The default is 50 and the maximum is 100.</p>
+    # @option params [String] :next_token
+    #   <p>Use the token returned by a previous call to retrieve the next page of configurations.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     service: "String", # required
+    #     environment: "String", # required
+    #     instrumentation_type: "BREAKPOINT" # One of: ["BREAKPOINT", "PROBE"], # required
+    #     synced_at: Time.now,
+    #     max_results: 1,
+    #     next_token: "NextToken"
+    #   }
+    #   options = {}
+    #   response = client.list_instrumentation_configurations(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     service: "String", # required
+    #     environment: "String", # required
+    #     changed: false, # required
+    #     latest_configurations: [
+    #       {
+    #         instrumentation_type: "BREAKPOINT" # One of: ["BREAKPOINT", "PROBE"], # required
+    #         signal_type: "SNAPSHOT" # One of: ["SNAPSHOT"], # required
+    #         location: { # required
+    #           # One of:
+    #           code_location: {
+    #             language: "Java" # One of: ["Java", "Python", "Javascript"], # required
+    #             code_unit: "String",
+    #             class_name: "String",
+    #             method_name: "String",
+    #             file_path: "String", # required
+    #             line_number: 1
+    #           }
+    #         },
+    #         location_hash: "String", # required
+    #         description: "String",
+    #         expires_at: Time.now,
+    #         attribute_filters: [
+    #           {
+    #             "String" => "String"
+    #           }
+    #         ],
+    #         capture_configuration: { # required
+    #           # One of:
+    #           code_capture: {
+    #             capture_arguments: ["String"],
+    #             capture_return: false,
+    #             capture_stack_trace: false,
+    #             capture_locals: ["String"],
+    #             capture_limits: { # required
+    #               max_hits: 1,
+    #               max_string_length: 1,
+    #               max_collection_width: 1,
+    #               max_collection_depth: 1,
+    #               max_stack_frames: 1,
+    #               max_stack_trace_size: 1,
+    #               max_object_depth: 1,
+    #               max_fields_per_object: 1
+    #             }
+    #           }
+    #         },
+    #         created_at: Time.now, # required
+    #         arn: "InstrumentationConfigurationArn", # required
+    #       }
+    #     ],
+    #     synced_at: Time.now, # required
+    #     sync_interval: 1, # required
+    #     next_token: "NextToken"
+    #   }
+    # @return [Types::InstrumentationConfigurationsPage]
+    def list_instrumentation_configurations(params = {}, options = {})
+      request = build_request(:list_instrumentation_configurations, params)
       request.send_request(options)
     end
 
@@ -1457,12 +2160,14 @@ module Aws::ApplicationSignals
     #   <p>The maximum number of results to return in one operation. If you omit this parameter, the default of 50 is used.</p>
     # @option params [String] :next_token
     #   <p>Include this value, if it was returned by the previous operation, to get the next set of service level objectives.</p>
+    # @option params [Array<String>] :metric_source_types
+    #   <p>Use this optional field to only include SLOs with the specified metric source types in the output. Supported types are:</p> <ul> <li> <p>Service operation</p> </li> <li> <p>Service dependency</p> </li> <li> <p>Service</p> </li> <li> <p>CloudWatch metric</p> </li> <li> <p>AppMonitor</p> </li> <li> <p>Canary</p> </li> </ul>
     # @option params [Boolean] :include_linked_accounts
     #   <p>If you are using this operation in a monitoring account, specify <code>true</code> to include SLO from source accounts in the returned data. </p> <p>When you are monitoring an account, you can use Amazon Web Services account ID in <code>KeyAttribute</code> filter for service source account and <code>SloOwnerawsaccountID</code> for SLO source account with <code>IncludeLinkedAccounts</code> to filter the returned data to only a single source account. </p>
     # @option params [String] :slo_owner_aws_account_id
     #   <p>SLO's Amazon Web Services account ID.</p>
-    # @option params [Array<String>] :metric_source_types
-    #   <p>Use this optional field to only include SLOs with the specified metric source types in the output. Supported types are:</p> <ul> <li> <p>Service operation</p> </li> <li> <p>Service dependency</p> </li> <li> <p>CloudWatch metric</p> </li> </ul>
+    # @option params [Types::MetricSource] :metric_source
+    #   <p>Identifies the metric source to filter SLOs by.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     key_attributes: {
@@ -1477,9 +2182,17 @@ module Aws::ApplicationSignals
     #     },
     #     max_results: 1,
     #     next_token: "NextToken",
+    #     metric_source_types: ["ServiceOperation" # One of: ["ServiceOperation", "CloudWatchMetric", "ServiceDependency", "AppMonitor", "Canary", "Service"]],
     #     include_linked_accounts: false,
     #     slo_owner_aws_account_id: "AwsAccountId",
-    #     metric_source_types: ["ServiceOperation" # One of: ["ServiceOperation", "CloudWatchMetric", "ServiceDependency"]]
+    #     metric_source: {
+    #       metric_source_key_attributes: { # required
+    #         "KeyAttributeName" => "KeyAttributeValue"
+    #       },
+    #       metric_source_attributes: {
+    #         "KeyAttributeName" => "KeyAttributeValue"
+    #       }
+    #     }
     #   }
     #   options = {}
     #   response = client.list_service_level_objectives(params, options)
@@ -1502,7 +2215,25 @@ module Aws::ApplicationSignals
     #         },
     #         created_time: Time.now,
     #         evaluation_type: "PeriodBased" # One of: ["PeriodBased", "RequestBased"],
-    #         metric_source_type: "ServiceOperation" # One of: ["ServiceOperation", "CloudWatchMetric", "ServiceDependency"]
+    #         metric_source_type: "ServiceOperation" # One of: ["ServiceOperation", "CloudWatchMetric", "ServiceDependency", "AppMonitor", "Canary", "Service"],
+    #         metric_source: {
+    #           metric_source_key_attributes: { # required
+    #             "KeyAttributeName" => "KeyAttributeValue"
+    #           },
+    #           metric_source_attributes: {
+    #             "KeyAttributeName" => "KeyAttributeValue"
+    #           }
+    #         },
+    #         composite_sli_config: {
+    #           selection_config: { # required
+    #             type: "EXPLICIT" # One of: ["EXPLICIT", "PREFIX", "REGEX"], # required
+    #             pattern: "SelectionPattern"
+    #           },
+    #           components: [{
+    #             # One of:
+    #             operation_name: "OperationName"
+    #           }]
+    #         }
     #       }
     #     ],
     #     next_token: "NextToken"
@@ -1626,7 +2357,7 @@ module Aws::ApplicationSignals
     #             entity: { # required
     #               "KeyAttributeName" => "KeyAttributeValue"
     #             },
-    #             change_event_type: "DEPLOYMENT" # One of: ["DEPLOYMENT"], # required
+    #             change_event_type: "DEPLOYMENT" # One of: ["DEPLOYMENT", "CONFIGURATION"], # required
     #             event_id: "String", # required
     #             user_name: "String",
     #             event_name: "String"
@@ -1776,7 +2507,54 @@ module Aws::ApplicationSignals
       request.send_request(options)
     end
 
-    # <p>Enables this Amazon Web Services account to be able to use CloudWatch Application Signals by creating the <i>AWSServiceRoleForCloudWatchApplicationSignals</i> service-linked role. This service- linked role has the following permissions:</p> <ul> <li> <p> <code>xray:GetServiceGraph</code> </p> </li> <li> <p> <code>logs:StartQuery</code> </p> </li> <li> <p> <code>logs:GetQueryResults</code> </p> </li> <li> <p> <code>cloudwatch:GetMetricData</code> </p> </li> <li> <p> <code>cloudwatch:ListMetrics</code> </p> </li> <li> <p> <code>tag:GetResources</code> </p> </li> <li> <p> <code>autoscaling:DescribeAutoScalingGroups</code> </p> </li> </ul> <p>After completing this step, you still need to instrument your Java and Python applications to send data to Application Signals. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Application-Signals-Enable.html"> Enabling Application Signals</a>.</p>
+    # <p>Reports the status of one or more instrumentation configurations from SDK instances. Use this to record when configurations become ready, hit errors, become active, or are disabled by limits.</p> <p>Report <code>READY</code>, <code>ERROR</code>, and <code>DISABLED</code> when the status changes. Report <code>ACTIVE</code> periodically (for example, every minute) while instrumentation is running.</p>
+    # @param [Hash, Types::ReportInstrumentationConfigurationStatusRequest] params
+    # @option params [String] :service
+    #   <p>The service that the reported configurations belong to.</p>
+    # @option params [String] :environment
+    #   <p>The environment that the service is running in.</p>
+    # @option params [Array<Types::InstrumentationConfigurationStatusReport>] :configurations
+    #   <p>An array of configuration status reports (up to 100) that include the instrumentation type, signal type, location hash, status, timestamp, and optional error cause.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     service: "String", # required
+    #     environment: "String", # required
+    #     configurations: [ # required
+    #       {
+    #         instrumentation_type: "BREAKPOINT" # One of: ["BREAKPOINT", "PROBE"], # required
+    #         signal_type: "SNAPSHOT" # One of: ["SNAPSHOT"], # required
+    #         location_hash: "String", # required
+    #         status: "READY" # One of: ["READY", "ERROR", "ACTIVE", "DISABLED"], # required
+    #         time: Time.now, # required
+    #         error_cause: "FILE_NOT_FOUND" # One of: ["FILE_NOT_FOUND", "METHOD_NOT_FOUND", "LINE_NOT_EXECUTABLE", "OVERLOADED_METHODS", "LANGUAGE_MISMATCH", "RUNTIME_ERROR"]
+    #       }
+    #     ]
+    #   }
+    #   options = {}
+    #   response = client.report_instrumentation_configuration_status(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     service: "String", # required
+    #     environment: "String", # required
+    #     unprocessed_status_events: [ # required
+    #       {
+    #         instrumentation_type: "BREAKPOINT" # One of: ["BREAKPOINT", "PROBE"], # required
+    #         signal_type: "SNAPSHOT" # One of: ["SNAPSHOT"], # required
+    #         location_hash: "String", # required
+    #         status: "READY" # One of: ["READY", "ERROR", "ACTIVE", "DISABLED"], # required
+    #         time: Time.now, # required
+    #         failed_reason: "THROTTLED" # One of: ["THROTTLED", "INTERNAL_ERROR", "VALIDATION_ERROR"], # required
+    #       }
+    #     ]
+    #   }
+    # @return [Types::ReportInstrumentationConfigurationStatusResponse]
+    def report_instrumentation_configuration_status(params = {}, options = {})
+      request = build_request(:report_instrumentation_configuration_status, params)
+      request.send_request(options)
+    end
+
+    # <p>Enables this Amazon Web Services account to be able to use CloudWatch Application Signals by creating the <i>AWSServiceRoleForCloudWatchApplicationSignals</i> service-linked role. This service- linked role has the following permissions:</p> <ul> <li> <p> <code>xray:GetServiceGraph</code> </p> </li> <li> <p> <code>logs:StartQuery</code> </p> </li> <li> <p> <code>logs:GetQueryResults</code> </p> </li> <li> <p> <code>cloudwatch:GetMetricData</code> </p> </li> <li> <p> <code>cloudwatch:ListMetrics</code> </p> </li> <li> <p> <code>tag:GetResources</code> </p> </li> <li> <p> <code>autoscaling:DescribeAutoScalingGroups</code> </p> </li> </ul> <p>A service-linked CloudTrail event channel is created to process CloudTrail events and return change event information. This includes last deployment time, userName, eventName, and other event metadata.</p> <p>After completing this step, you still need to instrument your Java and Python applications to send data to Application Signals. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Application-Signals-Enable.html"> Enabling Application Signals</a>.</p>
     # @param [Hash, Types::StartDiscoveryInput] params
     # @example Request syntax with placeholder values
     #   params = {}
@@ -1854,6 +2632,8 @@ module Aws::ApplicationSignals
     #   <p>A structure that contains the attributes that determine the goal of the SLO. This includes the time period for evaluation and the attainment threshold.</p>
     # @option params [Array<Types::BurnRateConfiguration>] :burn_rate_configurations
     #   <p>Use this array to create <i>burn rates</i> for this SLO. Each burn rate is a metric that indicates how fast the service is consuming the error budget, relative to the attainment goal of the SLO.</p>
+    # @option params [Boolean] :auto_investigation_enabled
+    #   Indicates whether DevOps Agent will automatically investigate this SLO when it is breached
     # @example Request syntax with placeholder values
     #   params = {
     #     id: "ServiceLevelObjectiveId", # required
@@ -1868,6 +2648,14 @@ module Aws::ApplicationSignals
     #         metric_name: "MetricName",
     #         statistic: "ServiceLevelIndicatorStatistic",
     #         period_seconds: 1,
+    #         metric_source: {
+    #           metric_source_key_attributes: { # required
+    #             "KeyAttributeName" => "KeyAttributeValue"
+    #           },
+    #           metric_source_attributes: {
+    #             "KeyAttributeName" => "KeyAttributeValue"
+    #           }
+    #         },
     #         metric_data_queries: [
     #           {
     #             id: "MetricId", # required
@@ -1898,10 +2686,20 @@ module Aws::ApplicationSignals
     #             "KeyAttributeName" => "KeyAttributeValue"
     #           },
     #           dependency_operation_name: "OperationName", # required
+    #         },
+    #         composite_sli_config: {
+    #           selection_config: { # required
+    #             type: "EXPLICIT" # One of: ["EXPLICIT", "PREFIX", "REGEX"], # required
+    #             pattern: "SelectionPattern"
+    #           },
+    #           components: [{
+    #             # One of:
+    #             operation_name: "OperationName"
+    #           }]
     #         }
     #       },
-    #       metric_threshold: 1.0, # required
-    #       comparison_operator: "GreaterThanOrEqualTo" # One of: ["GreaterThanOrEqualTo", "GreaterThan", "LessThan", "LessThanOrEqualTo"], # required
+    #       metric_threshold: 1.0,
+    #       comparison_operator: "GreaterThanOrEqualTo" # One of: ["GreaterThanOrEqualTo", "GreaterThan", "LessThan", "LessThanOrEqualTo"]
     #     },
     #     request_based_sli_config: {
     #       request_based_sli_metric_config: { # required
@@ -1993,6 +2791,25 @@ module Aws::ApplicationSignals
     #             "KeyAttributeName" => "KeyAttributeValue"
     #           },
     #           dependency_operation_name: "OperationName", # required
+    #         },
+    #         metric_source: {
+    #           metric_source_key_attributes: { # required
+    #             "KeyAttributeName" => "KeyAttributeValue"
+    #           },
+    #           metric_source_attributes: {
+    #             "KeyAttributeName" => "KeyAttributeValue"
+    #           }
+    #         },
+    #         metric_name: "MetricName",
+    #         composite_sli_config: {
+    #           selection_config: { # required
+    #             type: "EXPLICIT" # One of: ["EXPLICIT", "PREFIX", "REGEX"], # required
+    #             pattern: "SelectionPattern"
+    #           },
+    #           components: [{
+    #             # One of:
+    #             operation_name: "OperationName"
+    #           }]
     #         }
     #       },
     #       metric_threshold: 1.0,
@@ -2018,7 +2835,8 @@ module Aws::ApplicationSignals
     #       {
     #         look_back_window_minutes: 1, # required
     #       }
-    #     ]
+    #     ],
+    #     auto_investigation_enabled: false
     #   }
     #   options = {}
     #   response = client.update_service_level_objective(params, options)
@@ -2068,6 +2886,24 @@ module Aws::ApplicationSignals
     #               "KeyAttributeName" => "KeyAttributeValue"
     #             },
     #             dependency_operation_name: "OperationName", # required
+    #           },
+    #           metric_source: {
+    #             metric_source_key_attributes: { # required
+    #               "KeyAttributeName" => "KeyAttributeValue"
+    #             },
+    #             metric_source_attributes: {
+    #               "KeyAttributeName" => "KeyAttributeValue"
+    #             }
+    #           },
+    #           composite_sli_config: {
+    #             selection_config: { # required
+    #               type: "EXPLICIT" # One of: ["EXPLICIT", "PREFIX", "REGEX"], # required
+    #               pattern: "SelectionPattern"
+    #             },
+    #             components: [{
+    #               # One of:
+    #               operation_name: "OperationName"
+    #             }]
     #           }
     #         },
     #         metric_threshold: 1.0, # required
@@ -2163,6 +2999,24 @@ module Aws::ApplicationSignals
     #               "KeyAttributeName" => "KeyAttributeValue"
     #             },
     #             dependency_operation_name: "OperationName", # required
+    #           },
+    #           metric_source: {
+    #             metric_source_key_attributes: { # required
+    #               "KeyAttributeName" => "KeyAttributeValue"
+    #             },
+    #             metric_source_attributes: {
+    #               "KeyAttributeName" => "KeyAttributeValue"
+    #             }
+    #           },
+    #           composite_sli_config: {
+    #             selection_config: { # required
+    #               type: "EXPLICIT" # One of: ["EXPLICIT", "PREFIX", "REGEX"], # required
+    #               pattern: "SelectionPattern"
+    #             },
+    #             components: [{
+    #               # One of:
+    #               operation_name: "OperationName"
+    #             }]
     #           }
     #         },
     #         metric_threshold: 1.0,
@@ -2190,7 +3044,8 @@ module Aws::ApplicationSignals
     #           look_back_window_minutes: 1, # required
     #         }
     #       ],
-    #       metric_source_type: "ServiceOperation" # One of: ["ServiceOperation", "CloudWatchMetric", "ServiceDependency"]
+    #       metric_source_type: "ServiceOperation" # One of: ["ServiceOperation", "CloudWatchMetric", "ServiceDependency", "AppMonitor", "Canary", "Service"],
+    #       auto_investigation_enabled: false
     #     }
     #   }
     # @return [Types::UpdateServiceLevelObjectiveOutput]

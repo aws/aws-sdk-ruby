@@ -28,6 +28,9 @@ module Aws::DynamoDB
   # @!attribute resource_arn_list
   #   ResourceArnList containing list of resource arns
   #   @return [Array<String>]
+  # @!attribute is_search_operation
+  #   Set to true for SearchVectors to route to the Search FQDN
+  #   @return [Boolean]
   EndpointParameters = Struct.new(
     nil,
     :region,
@@ -38,6 +41,7 @@ module Aws::DynamoDB
     :account_id_endpoint_mode,
     :resource_arn,
     :resource_arn_list,
+    :is_search_operation,
     keyword_init: true
   ) do
     def initialize(options = {})
@@ -49,6 +53,7 @@ module Aws::DynamoDB
       self.account_id_endpoint_mode = options.fetch(:account_id_endpoint_mode, nil)
       self.resource_arn = options.fetch(:resource_arn, nil)
       self.resource_arn_list = options.fetch(:resource_arn_list, nil)
+      self.is_search_operation = options.fetch(:is_search_operation, nil)
     end
 
     # @api private
@@ -204,6 +209,11 @@ module Aws::DynamoDB
         when :scan
           {
             resource_arn: params[:table_name],
+          }
+        when :search_vectors
+          {
+            resource_arn: params[:table_name],
+            is_search_operation: true,
           }
         when :tag_resource
           {

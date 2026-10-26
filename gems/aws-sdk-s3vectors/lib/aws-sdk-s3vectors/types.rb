@@ -49,6 +49,12 @@ module Aws::S3Vectors
     # @!attribute metadata_configuration
     #   <p>The metadata configuration for the vector index. </p>
     #   @return [Types::MetadataConfiguration]
+    # @!attribute encryption_configuration
+    #   <p>The encryption configuration for a vector index. By default, if you don't specify, all new vectors in the vector index will use the encryption configuration of the vector bucket.</p>
+    #   @return [Types::EncryptionConfiguration]
+    # @!attribute tags
+    #   <p>An array of user-defined tags that you would like to apply to the vector index that you are creating. A tag is a key-value pair that you apply to your resources. Tags can help you organize, track costs, and control access to resources. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/tagging.html">Tagging for cost allocation or attribute-based access control (ABAC)</a>.</p> <note> <p>You must have the <code>s3vectors:TagResource</code> permission in addition to <code>s3vectors:CreateIndex</code> permission to create a vector index with tags.</p> </note>
+    #   @return [Hash<String, String>]
     class CreateIndexInput < Struct.new(
       nil,
       :vector_bucket_name,
@@ -58,13 +64,19 @@ module Aws::S3Vectors
       :dimension,
       :distance_metric,
       :metadata_configuration,
+      :encryption_configuration,
+      :tags,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute index_arn
+    #   <p>The Amazon Resource Name (ARN) of the newly created vector index.</p>
+    #   @return [String]
     class CreateIndexOutput < Struct.new(
       nil,
+      :index_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -76,17 +88,25 @@ module Aws::S3Vectors
     # @!attribute encryption_configuration
     #   <p>The encryption configuration for the vector bucket. By default, if you don't specify, all new vectors in Amazon S3 vector buckets use server-side encryption with Amazon S3 managed keys (SSE-S3), specifically <code>AES256</code>. </p>
     #   @return [Types::EncryptionConfiguration]
+    # @!attribute tags
+    #   <p>An array of user-defined tags that you would like to apply to the vector bucket that you are creating. A tag is a key-value pair that you apply to your resources. Tags can help you organize and control access to resources. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/tagging.html">Tagging for cost allocation or attribute-based access control (ABAC)</a>.</p> <note> <p>You must have the <code>s3vectors:TagResource</code> permission in addition to <code>s3vectors:CreateVectorBucket</code> permission to create a vector bucket with tags.</p> </note>
+    #   @return [Hash<String, String>]
     class CreateVectorBucketInput < Struct.new(
       nil,
       :vector_bucket_name,
       :encryption_configuration,
+      :tags,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute vector_bucket_arn
+    #   <p>The Amazon Resource Name (ARN) of the newly created vector bucket.</p>
+    #   @return [String]
     class CreateVectorBucketOutput < Struct.new(
       nil,
+      :vector_bucket_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -192,7 +212,7 @@ module Aws::S3Vectors
       include ::Smithy::Schema::Structure
     end
 
-    # <note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>The encryption configuration for a vector bucket. By default, if you don't specify, all new vectors in Amazon S3 vector buckets use server-side encryption with Amazon S3 managed keys (SSE-S3), specifically <code>AES256</code>.</p>
+    # <p>The encryption configuration for a vector bucket or index. By default, if you don't specify, all new vectors in Amazon S3 vector buckets use server-side encryption with Amazon S3 managed keys (SSE-S3), specifically <code>AES256</code>. You can optionally override bucket level encryption settings, and set a specific encryption configuration for a vector index at the time of index creation.</p>
     # @!attribute sse_type
     #   <p>The server-side encryption type to use for the encryption configuration of the vector bucket. By default, if you don't specify, all new vectors in Amazon S3 vector buckets use server-side encryption with Amazon S3 managed keys (SSE-S3), specifically <code>AES256</code>.</p>
     #   @return [String]
@@ -243,7 +263,7 @@ module Aws::S3Vectors
       include ::Smithy::Schema::Structure
     end
 
-    # <note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>The attributes of a vector returned by the <code>GetVectors</code> operation.</p>
+    # <p>The attributes of a vector returned by the <code>GetVectors</code> operation.</p>
     # @!attribute key
     #   <p>The name of the vector. </p>
     #   @return [String]
@@ -357,7 +377,7 @@ module Aws::S3Vectors
       include ::Smithy::Schema::Structure
     end
 
-    # <note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>The attributes of a vector index.</p>
+    # <p>The attributes of a vector index.</p>
     # @!attribute vector_bucket_name
     #   <p>The name of the vector bucket that contains the vector index. </p>
     #   @return [String]
@@ -382,6 +402,12 @@ module Aws::S3Vectors
     # @!attribute metadata_configuration
     #   <p>The metadata configuration for the vector index. </p>
     #   @return [Types::MetadataConfiguration]
+    # @!attribute encryption_configuration
+    #   <p>The encryption configuration for a vector index. By default, if you don't specify, all new vectors in the vector index will use the encryption configuration of the vector bucket.</p>
+    #   @return [Types::EncryptionConfiguration]
+    # @!attribute index_mode
+    #   <p>The mode that determines how the vector index processes queries.</p> <p>Valid values:</p> <ul> <li> <p> <code>CLASSIC</code> - Applies metadata filters during the vector search.</p> </li> <li> <p> <code>ENHANCED</code> - Applies metadata filters before the vector search.</p> </li> </ul>
+    #   @return [String]
     class Index < Struct.new(
       nil,
       :vector_bucket_name,
@@ -392,12 +418,14 @@ module Aws::S3Vectors
       :dimension,
       :distance_metric,
       :metadata_configuration,
+      :encryption_configuration,
+      :index_mode,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
-    # <note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>Summary information about a vector index.</p>
+    # <p>Summary information about a vector index.</p>
     # @!attribute vector_bucket_name
     #   <p>The name of the vector bucket that contains the vector index. </p>
     #   @return [String]
@@ -518,7 +546,7 @@ module Aws::S3Vectors
       include ::Smithy::Schema::Structure
     end
 
-    # <note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>The attributes of a vector returned by the <code>ListVectors</code> operation.</p>
+    # <p>The attributes of a vector returned by the <code>ListVectors</code> operation.</p>
     # @!attribute key
     #   <p>The name of the vector. </p>
     #   @return [String]
@@ -533,6 +561,28 @@ module Aws::S3Vectors
       :key,
       :data,
       :metadata,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the Amazon S3 Vectors resource that you want to list tags for. The tagged resource can be a vector bucket or a vector index. </p>
+    #   @return [String]
+    class ListTagsForResourceInput < Struct.new(
+      nil,
+      :resource_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute tags
+    #   <p>The user-defined tags that are applied to the S3 Vectors resource. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/tagging.html">Tagging for cost allocation or attribute-based access control (ABAC)</a>.</p>
+    #   @return [Hash<String, String>]
+    class ListTagsForResourceOutput < Struct.new(
+      nil,
+      :tags,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -630,7 +680,7 @@ module Aws::S3Vectors
       include ::Smithy::Schema::Structure
     end
 
-    # <note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>The metadata configuration for a vector index.</p>
+    # <p>The metadata configuration for a vector index.</p>
     # @!attribute non_filterable_metadata_keys
     #   <p>Non-filterable metadata keys allow you to enrich vectors with additional context during storage and retrieval. Unlike default metadata keys, these keys can’t be used as query filters. Non-filterable metadata keys can be retrieved but can’t be searched, queried, or filtered. You can access non-filterable metadata keys of your vectors after finding the vectors. For more information about non-filterable metadata keys, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-vectors-vectors.html">Vectors</a> and <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-vectors-limitations.html">Limitations and restrictions</a> in the <i>Amazon S3 User Guide</i>. </p>
     #   @return [Array<String>]
@@ -653,7 +703,7 @@ module Aws::S3Vectors
       include ::Smithy::Schema::Structure
     end
 
-    # <note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>The attributes of a vector to add to a vector index.</p>
+    # <p>The attributes of a vector to add to a vector index.</p>
     # @!attribute key
     #   <p>The name of the vector. The key uniquely identifies the vector in a vector index. </p>
     #   @return [String]
@@ -676,6 +726,32 @@ module Aws::S3Vectors
         options[:metadata] = {} unless options.key?(:metadata)
         super
       end
+    end
+
+    # @!attribute vector_bucket_name
+    #   <p>The name of the vector bucket to update.</p>
+    #   @return [String]
+    # @!attribute vector_bucket_arn
+    #   <p>The Amazon Resource Name (ARN) of the vector bucket to update.</p>
+    #   @return [String]
+    # @!attribute default_index_mode
+    #   <p>The default mode to assign to new vector indexes in the vector bucket. This change doesn't affect existing vector indexes.</p>
+    #   @return [String]
+    class PutVectorBucketDefaultIndexModeInput < Struct.new(
+      nil,
+      :vector_bucket_name,
+      :vector_bucket_arn,
+      :default_index_mode,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class PutVectorBucketDefaultIndexModeOutput < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vector_bucket_name
@@ -734,25 +810,21 @@ module Aws::S3Vectors
       include ::Smithy::Schema::Structure
     end
 
-    # <note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>The attributes of a vector in the approximate nearest neighbor search.</p>
-    # @!attribute key
-    #   <p>The key of the vector in the approximate nearest neighbor search.</p>
-    #   @return [String]
-    # @!attribute data
-    #   <p>The vector data associated with the vector, if requested. </p>
-    #   @return [Types::VectorData]
-    # @!attribute metadata
-    #   <p>The metadata associated with the vector, if requested.</p>
-    #   @return [JSON]
+    # <p>The attributes of a vector in the approximate nearest neighbor search.</p>
     # @!attribute distance
     #   <p>The measure of similarity between the vector in the response and the query vector.</p>
     #   @return [Float]
+    # @!attribute key
+    #   <p>The key of the vector in the approximate nearest neighbor search.</p>
+    #   @return [String]
+    # @!attribute metadata
+    #   <p>The metadata associated with the vector, if requested.</p>
+    #   @return [JSON]
     class QueryOutputVector < Struct.new(
       nil,
-      :key,
-      :data,
-      :metadata,
       :distance,
+      :key,
+      :metadata,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -776,12 +848,18 @@ module Aws::S3Vectors
     # @!attribute filter
     #   <p>Metadata filter to apply during the query. For more information about metadata keys, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-vectors-metadata-filtering.html">Metadata filtering</a> in the <i>Amazon S3 User Guide</i>. </p>
     #   @return [JSON]
+    # @!attribute query_mode
+    #   <p>The mode to use to process the query. If you don't specify a query mode, the operation uses the mode that's currently configured for the vector index.</p> <p>Valid values:</p> <ul> <li> <p> <code>CLASSIC</code> - Applies metadata filters during the vector search. You can't specify <code>CLASSIC</code> for an <code>ENHANCED</code> index.</p> </li> <li> <p> <code>ENHANCED</code> - Applies metadata filters before the vector search.</p> </li> </ul>
+    #   @return [String]
     # @!attribute return_metadata
     #   <p>Indicates whether to include metadata in the response. The default value is <code>false</code>.</p>
     #   @return [Boolean]
     # @!attribute return_distance
     #   <p>Indicates whether to include the computed distance in the response. The default value is <code>false</code>.</p>
     #   @return [Boolean]
+    # @!attribute next_token
+    #   <p>Pagination token from a previous request. The value of this field is empty for an initial request.</p>
+    #   @return [String]
     class QueryVectorsInput < Struct.new(
       nil,
       :vector_bucket_name,
@@ -790,8 +868,10 @@ module Aws::S3Vectors
       :top_k,
       :query_vector,
       :filter,
+      :query_mode,
       :return_metadata,
       :return_distance,
+      :next_token,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -800,9 +880,28 @@ module Aws::S3Vectors
     # @!attribute vectors
     #   <p>The vectors in the approximate nearest neighbor search.</p>
     #   @return [Array<Types::QueryOutputVector>]
+    # @!attribute distance_metric
+    #   <p>The distance metric that was used for the similarity search calculation. This is the same distance metric that was configured for the vector index when it was created.</p>
+    #   @return [String]
+    # @!attribute next_token
+    #   <p>Pagination token to be used in the subsequent page request. The field is empty if no further pagination is required.</p>
+    #   @return [String]
     class QueryVectorsOutput < Struct.new(
       nil,
       :vectors,
+      :distance_metric,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The request timed out. Retry your request.</p>
+    # @!attribute message
+    #   @return [String]
+    class RequestTimeoutException < Struct.new(
+      nil,
+      :message,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -830,12 +929,86 @@ module Aws::S3Vectors
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the Amazon S3 Vectors resource that you're applying tags to. The tagged resource can be a vector bucket or a vector index. </p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>The user-defined tag that you want to add to the specified S3 Vectors resource. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/tagging.html">Tagging for cost allocation or attribute-based access control (ABAC)</a>.</p>
+    #   @return [Hash<String, String>]
+    class TagResourceInput < Struct.new(
+      nil,
+      :resource_arn,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class TagResourceOutput < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The request was denied due to request throttling.</p>
     # @!attribute message
     #   @return [String]
     class TooManyRequestsException < Struct.new(
       nil,
       :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the Amazon S3 Vectors resource that you're removing tags from. The tagged resource can be a vector bucket or a vector index. </p>
+    #   @return [String]
+    # @!attribute tag_keys
+    #   <p>The array of tag keys that you're removing from the S3 Vectors resource. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/tagging.html">Tagging for cost allocation or attribute-based access control (ABAC)</a>.</p>
+    #   @return [Array<String>]
+    class UntagResourceInput < Struct.new(
+      nil,
+      :resource_arn,
+      :tag_keys,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class UntagResourceOutput < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute vector_bucket_name
+    #   <p>The name of the vector bucket that contains the vector index.</p>
+    #   @return [String]
+    # @!attribute index_name
+    #   <p>The name of the vector index to update.</p>
+    #   @return [String]
+    # @!attribute index_arn
+    #   <p>The Amazon Resource Name (ARN) of the vector index to update.</p>
+    #   @return [String]
+    # @!attribute index_mode
+    #   <p>The new mode for the vector index.</p> <p>Valid values:</p> <ul> <li> <p> <code>CLASSIC</code> - Applies metadata filters during the vector search. You can specify <code>CLASSIC</code> only for a vector index in a vector bucket created before September 30, 2026.</p> </li> <li> <p> <code>ENHANCED</code> - Applies metadata filters before the vector search.</p> </li> </ul>
+    #   @return [String]
+    class UpdateIndexModeInput < Struct.new(
+      nil,
+      :vector_bucket_name,
+      :index_name,
+      :index_arn,
+      :index_mode,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class UpdateIndexModeOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -872,7 +1045,7 @@ module Aws::S3Vectors
       include ::Smithy::Schema::Structure
     end
 
-    # <note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>The attributes of a vector bucket. </p>
+    # <p>The attributes of a vector bucket. </p>
     # @!attribute vector_bucket_name
     #   <p>The name of the vector bucket. </p>
     #   @return [String]
@@ -885,18 +1058,22 @@ module Aws::S3Vectors
     # @!attribute encryption_configuration
     #   <p>The encryption configuration for the vector bucket.</p>
     #   @return [Types::EncryptionConfiguration]
+    # @!attribute default_index_mode
+    #   <p>The mode that is automatically assigned to new vector indexes in the vector bucket. Changing the default index mode doesn't affect existing vector indexes.</p>
+    #   @return [String]
     class VectorBucket < Struct.new(
       nil,
       :vector_bucket_name,
       :vector_bucket_arn,
       :creation_time,
       :encryption_configuration,
+      :default_index_mode,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
-    # <note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>Summary information about a vector bucket.</p>
+    # <p>Summary information about a vector bucket.</p>
     # @!attribute vector_bucket_name
     #   <p>The name of the vector bucket. </p>
     #   @return [String]
@@ -916,7 +1093,7 @@ module Aws::S3Vectors
       include ::Smithy::Schema::Structure
     end
 
-    # <note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>The vector data in different formats.</p>
+    # <p>The vector data in different formats.</p>
     # @!attribute float32
     #   <p>The vector data as 32-bit floating point numbers. The number of elements in this array must exactly match the dimension of the vector index where the operation is being performed.</p>
     #   @return [Array<Float>]

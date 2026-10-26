@@ -8,6 +8,7 @@ module Aws::EMRcontainers
 
     ACMCertArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.emrcontainers#ACMCertArn", name: "ACMCertArn", traits: {"smithy.api#length" => {"min" => 44, "max" => 2048}, "smithy.api#pattern" => "^arn:(aws[a-zA-Z0-9-]*):acm:.+:(\\d{12}):certificate/.+$"})
     AllowAWSToRetainLogs = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.emrcontainers#AllowAWSToRetainLogs", name: "AllowAWSToRetainLogs")
+    AuthenticationConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrcontainers#AuthenticationConfiguration", name: "AuthenticationConfiguration")
     AuthorizationConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrcontainers#AuthorizationConfiguration", name: "AuthorizationConfiguration")
     Base64Encoded = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.emrcontainers#Base64Encoded", name: "Base64Encoded", traits: {"smithy.api#length" => {"min" => 0, "max" => 5000}, "smithy.api#pattern" => "^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)?$"})
     Boolean = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.emrcontainers#Boolean", name: "Boolean")
@@ -40,6 +41,8 @@ module Aws::EMRcontainers
     DeleteJobTemplateResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrcontainers#DeleteJobTemplateResponse", name: "DeleteJobTemplateResponse")
     DeleteManagedEndpointRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrcontainers#DeleteManagedEndpointRequest", name: "DeleteManagedEndpointRequest")
     DeleteManagedEndpointResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrcontainers#DeleteManagedEndpointResponse", name: "DeleteManagedEndpointResponse")
+    DeleteSecurityConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrcontainers#DeleteSecurityConfigurationRequest", name: "DeleteSecurityConfigurationRequest")
+    DeleteSecurityConfigurationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrcontainers#DeleteSecurityConfigurationResponse", name: "DeleteSecurityConfigurationResponse")
     DeleteVirtualClusterRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrcontainers#DeleteVirtualClusterRequest", name: "DeleteVirtualClusterRequest")
     DeleteVirtualClusterResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrcontainers#DeleteVirtualClusterResponse", name: "DeleteVirtualClusterResponse")
     DescribeJobRunRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrcontainers#DescribeJobRunRequest", name: "DescribeJobRunRequest")
@@ -54,6 +57,7 @@ module Aws::EMRcontainers
     DescribeVirtualClusterResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrcontainers#DescribeVirtualClusterResponse", name: "DescribeVirtualClusterResponse")
     EKSRequestThrottledException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrcontainers#EKSRequestThrottledException", name: "EKSRequestThrottledException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 429})
     EksInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrcontainers#EksInfo", name: "EksInfo")
+    EmrIdentityCenterApplicationARN = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.emrcontainers#EmrIdentityCenterApplicationARN", name: "EmrIdentityCenterApplicationARN", traits: {"smithy.api#pattern" => "^arn:(aws[a-zA-Z0-9-]*):sso:::application/ssoins-[0-9a-zA-Z/\\\\-_]+/apl-[0-9a-zA-Z/\\\\-_]+$"})
     EncryptionConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrcontainers#EncryptionConfiguration", name: "EncryptionConfiguration")
     Endpoint = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrcontainers#Endpoint", name: "Endpoint")
     EndpointArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.emrcontainers#EndpointArn", name: "EndpointArn", traits: {"smithy.api#length" => {"min" => 60, "max" => 1024}, "smithy.api#pattern" => "^arn:(aws[a-zA-Z0-9-]*):emr-containers:.+:(\\d{12}):\\/virtualclusters\\/[0-9a-zA-Z]+\\/endpoints\\/[0-9a-zA-Z]+$"})
@@ -68,12 +72,17 @@ module Aws::EMRcontainers
     FailureReason = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.emrcontainers#FailureReason", name: "FailureReason")
     GetManagedEndpointSessionCredentialsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrcontainers#GetManagedEndpointSessionCredentialsRequest", name: "GetManagedEndpointSessionCredentialsRequest")
     GetManagedEndpointSessionCredentialsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrcontainers#GetManagedEndpointSessionCredentialsResponse", name: "GetManagedEndpointSessionCredentialsResponse")
+    IAMConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrcontainers#IAMConfiguration", name: "IAMConfiguration")
     IAMRoleArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.emrcontainers#IAMRoleArn", name: "IAMRoleArn", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "^arn:(aws[a-zA-Z0-9-]*):iam::(\\d{12})?:(role((\\u002F)|(\\u002F[\\u0021-\\u007F]+\\u002F))[\\w+=,.@-]+)$"})
+    IdentityCenterConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrcontainers#IdentityCenterConfiguration", name: "IdentityCenterConfiguration")
+    IdentityCenterInstanceARN = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.emrcontainers#IdentityCenterInstanceARN", name: "IdentityCenterInstanceARN", traits: {"smithy.api#length" => {"min" => 10, "max" => 1224}, "smithy.api#pattern" => "^arn:(aws[a-zA-Z0-9-]*):sso:::instance/ssoins-[0-9a-zA-Z/\\\\-_]+$"})
+    InQueueJobLimitInteger = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.emrcontainers#InQueueJobLimitInteger", name: "InQueueJobLimitInteger", traits: {"smithy.api#range" => {"min" => 100, "max" => 10000}})
     InTransitEncryptionConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrcontainers#InTransitEncryptionConfiguration", name: "InTransitEncryptionConfiguration")
     InternalServerException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrcontainers#InternalServerException", name: "InternalServerException", traits: {"smithy.api#error" => "server", "smithy.api#httpError" => 500})
     JavaInteger = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.emrcontainers#JavaInteger", name: "JavaInteger")
     JobArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.emrcontainers#JobArn", name: "JobArn", traits: {"smithy.api#length" => {"min" => 60, "max" => 1024}, "smithy.api#pattern" => "^arn:(aws[a-zA-Z0-9-]*):emr-containers:.+:(\\d{12}):\\/virtualclusters\\/[0-9a-zA-Z]+\\/jobruns\\/[0-9a-zA-Z]+$"})
     JobDriver = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrcontainers#JobDriver", name: "JobDriver")
+    JobLimitInteger = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.emrcontainers#JobLimitInteger", name: "JobLimitInteger", traits: {"smithy.api#range" => {"min" => 1, "max" => 10000}})
     JobRun = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrcontainers#JobRun", name: "JobRun")
     JobRunState = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.emrcontainers#JobRunState", name: "JobRunState")
     JobRunStates = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.emrcontainers#JobRunStates", name: "JobRunStates", traits: {"smithy.api#length" => {"min" => 0, "max" => 10}})
@@ -103,6 +112,8 @@ module Aws::EMRcontainers
     MaxFilesToKeep = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.emrcontainers#MaxFilesToKeep", name: "MaxFilesToKeep", traits: {"smithy.api#range" => {"min" => 1, "max" => 50}})
     MonitoringConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrcontainers#MonitoringConfiguration", name: "MonitoringConfiguration")
     NextToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.emrcontainers#NextToken", name: "NextToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => "\\S"})
+    NodeLabelString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.emrcontainers#NodeLabelString", name: "NodeLabelString", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$"})
+    NonNegativeInteger = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.emrcontainers#NonNegativeInteger", name: "NonNegativeInteger", traits: {"smithy.api#default" => 0, "smithy.api#range" => {"min" => 0}})
     ParametricCloudWatchMonitoringConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrcontainers#ParametricCloudWatchMonitoringConfiguration", name: "ParametricCloudWatchMonitoringConfiguration")
     ParametricConfigurationOverrides = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrcontainers#ParametricConfigurationOverrides", name: "ParametricConfigurationOverrides")
     ParametricIAMRoleArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.emrcontainers#ParametricIAMRoleArn", name: "ParametricIAMRoleArn", traits: {"smithy.api#length" => {"min" => 4, "max" => 2048}, "smithy.api#pattern" => "^(^arn:(aws[a-zA-Z0-9-]*):iam::(\\d{12})?:(role((\\u002F)|(\\u002F[\\u0021-\\u007F]+\\u002F))[\\w+=,.@-]+)$)|([\\.\\-_\\#A-Za-z0-9\\$\\{\\}]+)$"})
@@ -121,6 +132,8 @@ module Aws::EMRcontainers
     RotationSize = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.emrcontainers#RotationSize", name: "RotationSize", traits: {"smithy.api#length" => {"min" => 3, "max" => 12}, "smithy.api#pattern" => "^\\d+(\\.\\d+)?[KMG][Bb]?$"})
     RsiArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.emrcontainers#RsiArn", name: "RsiArn", traits: {"smithy.api#length" => {"min" => 60, "max" => 500}, "smithy.api#pattern" => "^arn:(aws[a-zA-Z0-9-]*):emr-containers:.+:(\\d{12}):/virtualclusters/.+$"})
     S3MonitoringConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrcontainers#S3MonitoringConfiguration", name: "S3MonitoringConfiguration")
+    SchedulerConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrcontainers#SchedulerConfiguration", name: "SchedulerConfiguration")
+    SchedulerStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrcontainers#SchedulerStatus", name: "SchedulerStatus")
     SecretsManagerArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.emrcontainers#SecretsManagerArn", name: "SecretsManagerArn", traits: {"smithy.api#length" => {"min" => 3, "max" => 2048}, "smithy.api#pattern" => "^arn:(aws[a-zA-Z0-9-]*):secretsmanager:.+:(\\d{12}):secret:[0-9a-zA-Z/_+=.@-]+$"})
     SecureNamespaceInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrcontainers#SecureNamespaceInfo", name: "SecureNamespaceInfo")
     SecurityConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrcontainers#SecurityConfiguration", name: "SecurityConfiguration")
@@ -128,6 +141,7 @@ module Aws::EMRcontainers
     SecurityConfigurationData = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrcontainers#SecurityConfigurationData", name: "SecurityConfigurationData")
     SecurityConfigurations = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.emrcontainers#SecurityConfigurations", name: "SecurityConfigurations")
     SensitivePropertiesMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.emrcontainers#SensitivePropertiesMap", name: "SensitivePropertiesMap", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}, "smithy.api#sensitive" => {}})
+    SessionIdleTimeoutInMinutes = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.emrcontainers#SessionIdleTimeoutInMinutes", name: "SessionIdleTimeoutInMinutes", traits: {"smithy.api#default" => 0})
     SessionTagValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.emrcontainers#SessionTagValue", name: "SessionTagValue", traits: {"smithy.api#length" => {"min" => 1, "max" => 512}, "smithy.api#pattern" => "^[\\.\\-_/#A-Za-z0-9 ]+$"})
     SparkSqlJobDriver = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrcontainers#SparkSqlJobDriver", name: "SparkSqlJobDriver")
     SparkSqlParameters = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.emrcontainers#SparkSqlParameters", name: "SparkSqlParameters", traits: {"smithy.api#length" => {"min" => 1, "max" => 102400}, "smithy.api#pattern" => "\\S", "smithy.api#sensitive" => {}})
@@ -155,6 +169,8 @@ module Aws::EMRcontainers
     Token = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.emrcontainers#Token", name: "Token", traits: {"smithy.api#length" => {"min" => 1}, "smithy.api#pattern" => "^.*\\S.*$", "smithy.api#sensitive" => {}})
     UntagResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrcontainers#UntagResourceRequest", name: "UntagResourceRequest")
     UntagResourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrcontainers#UntagResourceResponse", name: "UntagResourceResponse")
+    UpdateVirtualClusterRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrcontainers#UpdateVirtualClusterRequest", name: "UpdateVirtualClusterRequest")
+    UpdateVirtualClusterResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrcontainers#UpdateVirtualClusterResponse", name: "UpdateVirtualClusterResponse")
     UriString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.emrcontainers#UriString", name: "UriString", traits: {"smithy.api#length" => {"min" => 1, "max" => 10280}, "smithy.api#pattern" => "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDBFF-\\uDC00\\uDFFF\\r\\n\\t]*$"})
     ValidationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrcontainers#ValidationException", name: "ValidationException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     VirtualCluster = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrcontainers#VirtualCluster", name: "VirtualCluster")
@@ -165,6 +181,9 @@ module Aws::EMRcontainers
 
     AllowAWSToRetainLogs.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     AllowAWSToRetainLogs.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
+    AuthenticationConfiguration.add_member(:identity_center_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityCenterConfiguration, name: "identityCenterConfiguration"))
+    AuthenticationConfiguration.add_member(:iam_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: IAMConfiguration, name: "iamConfiguration"))
+    AuthenticationConfiguration.type = Types::AuthenticationConfiguration
     AuthorizationConfiguration.add_member(:lake_formation_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: LakeFormationConfiguration, name: "lakeFormationConfiguration"))
     AuthorizationConfiguration.add_member(:encryption_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionConfiguration, name: "encryptionConfiguration"))
     AuthorizationConfiguration.type = Types::AuthorizationConfiguration
@@ -220,6 +239,7 @@ module Aws::EMRcontainers
     CreateManagedEndpointRequest.add_member(:configuration_overrides, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationOverrides, name: "configurationOverrides"))
     CreateManagedEndpointRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
     CreateManagedEndpointRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
+    CreateManagedEndpointRequest.add_member(:session_idle_timeout_in_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionIdleTimeoutInMinutes, name: "sessionIdleTimeoutInMinutes", traits: {"smithy.api#default" => 0}))
     CreateManagedEndpointRequest.type = Types::CreateManagedEndpointRequest
     CreateManagedEndpointResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdString, name: "id"))
     CreateManagedEndpointResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceNameString, name: "name"))
@@ -241,6 +261,8 @@ module Aws::EMRcontainers
     CreateVirtualClusterRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
     CreateVirtualClusterRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
     CreateVirtualClusterRequest.add_member(:security_configuration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdString, name: "securityConfigurationId"))
+    CreateVirtualClusterRequest.add_member(:session_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "sessionEnabled"))
+    CreateVirtualClusterRequest.add_member(:scheduler_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SchedulerConfiguration, name: "schedulerConfiguration"))
     CreateVirtualClusterRequest.type = Types::CreateVirtualClusterRequest
     CreateVirtualClusterResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdString, name: "id"))
     CreateVirtualClusterResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceNameString, name: "name"))
@@ -259,6 +281,10 @@ module Aws::EMRcontainers
     DeleteManagedEndpointResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdString, name: "id"))
     DeleteManagedEndpointResponse.add_member(:virtual_cluster_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdString, name: "virtualClusterId"))
     DeleteManagedEndpointResponse.type = Types::DeleteManagedEndpointResponse
+    DeleteSecurityConfigurationRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdString, name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteSecurityConfigurationRequest.type = Types::DeleteSecurityConfigurationRequest
+    DeleteSecurityConfigurationResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdString, name: "id"))
+    DeleteSecurityConfigurationResponse.type = Types::DeleteSecurityConfigurationResponse
     DeleteVirtualClusterRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdString, name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteVirtualClusterRequest.type = Types::DeleteVirtualClusterRequest
     DeleteVirtualClusterResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdString, name: "id"))
@@ -288,7 +314,7 @@ module Aws::EMRcontainers
     EKSRequestThrottledException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String1024, name: "message"))
     EKSRequestThrottledException.type = Types::EKSRequestThrottledException
     EksInfo.add_member(:namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: KubernetesNamespace, name: "namespace"))
-    EksInfo.add_member(:node_label, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceNameString, name: "nodeLabel"))
+    EksInfo.add_member(:node_label, ::Smithy::Schema::Shapes::MemberShape.new(target: NodeLabelString, name: "nodeLabel"))
     EksInfo.type = Types::EksInfo
     EncryptionConfiguration.add_member(:in_transit_encryption_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: InTransitEncryptionConfiguration, name: "inTransitEncryptionConfiguration"))
     EncryptionConfiguration.type = Types::EncryptionConfiguration
@@ -304,6 +330,7 @@ module Aws::EMRcontainers
     Endpoint.add_member(:certificate_authority, ::Smithy::Schema::Shapes::MemberShape.new(target: Certificate, name: "certificateAuthority"))
     Endpoint.add_member(:configuration_overrides, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationOverrides, name: "configurationOverrides"))
     Endpoint.add_member(:server_url, ::Smithy::Schema::Shapes::MemberShape.new(target: UriString, name: "serverUrl"))
+    Endpoint.add_member(:auth_proxy_url, ::Smithy::Schema::Shapes::MemberShape.new(target: UriString, name: "authProxyUrl"))
     Endpoint.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "createdAt"))
     Endpoint.add_member(:security_group, ::Smithy::Schema::Shapes::MemberShape.new(target: String256, name: "securityGroup"))
     Endpoint.add_member(:subnet_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetIds, name: "subnetIds"))
@@ -334,8 +361,16 @@ module Aws::EMRcontainers
     GetManagedEndpointSessionCredentialsRequest.type = Types::GetManagedEndpointSessionCredentialsRequest
     GetManagedEndpointSessionCredentialsResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdString, name: "id"))
     GetManagedEndpointSessionCredentialsResponse.add_member(:credentials, ::Smithy::Schema::Shapes::MemberShape.new(target: Credentials, name: "credentials"))
+    GetManagedEndpointSessionCredentialsResponse.add_member(:endpoint_credentials, ::Smithy::Schema::Shapes::MemberShape.new(target: Credentials, name: "endpointCredentials"))
     GetManagedEndpointSessionCredentialsResponse.add_member(:expires_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "expiresAt"))
     GetManagedEndpointSessionCredentialsResponse.type = Types::GetManagedEndpointSessionCredentialsResponse
+    IAMConfiguration.add_member(:system_role, ::Smithy::Schema::Shapes::MemberShape.new(target: IAMRoleArn, name: "systemRole"))
+    IAMConfiguration.type = Types::IAMConfiguration
+    IdentityCenterConfiguration.add_member(:enable_identity_center, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "enableIdentityCenter"))
+    IdentityCenterConfiguration.add_member(:identity_center_application_assignment_required, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "identityCenterApplicationAssignmentRequired"))
+    IdentityCenterConfiguration.add_member(:identity_center_instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityCenterInstanceARN, name: "identityCenterInstanceARN"))
+    IdentityCenterConfiguration.add_member(:emr_identity_center_application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EmrIdentityCenterApplicationARN, name: "emrIdentityCenterApplicationARN"))
+    IdentityCenterConfiguration.type = Types::IdentityCenterConfiguration
     InTransitEncryptionConfiguration.add_member(:tls_certificate_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: TLSCertificateConfiguration, name: "tlsCertificateConfiguration"))
     InTransitEncryptionConfiguration.type = Types::InTransitEncryptionConfiguration
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String1024, name: "message"))
@@ -479,7 +514,14 @@ module Aws::EMRcontainers
     RetryPolicyExecution.add_member(:current_attempt_count, ::Smithy::Schema::Shapes::MemberShape.new(target: JavaInteger, name: "currentAttemptCount", traits: {"smithy.api#required" => {}}))
     RetryPolicyExecution.type = Types::RetryPolicyExecution
     S3MonitoringConfiguration.add_member(:log_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: UriString, name: "logUri", traits: {"smithy.api#required" => {}}))
+    S3MonitoringConfiguration.add_member(:encryption_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyArn, name: "encryptionKeyArn"))
     S3MonitoringConfiguration.type = Types::S3MonitoringConfiguration
+    SchedulerConfiguration.add_member(:max_in_queue_job_runs, ::Smithy::Schema::Shapes::MemberShape.new(target: InQueueJobLimitInteger, name: "maxInQueueJobRuns"))
+    SchedulerConfiguration.add_member(:max_concurrent_job_runs, ::Smithy::Schema::Shapes::MemberShape.new(target: JobLimitInteger, name: "maxConcurrentJobRuns"))
+    SchedulerConfiguration.type = Types::SchedulerConfiguration
+    SchedulerStatus.add_member(:current_in_queue_job_runs, ::Smithy::Schema::Shapes::MemberShape.new(target: NonNegativeInteger, name: "currentInQueueJobRuns", traits: {"smithy.api#default" => 0}))
+    SchedulerStatus.add_member(:current_concurrent_job_runs, ::Smithy::Schema::Shapes::MemberShape.new(target: NonNegativeInteger, name: "currentConcurrentJobRuns", traits: {"smithy.api#default" => 0}))
+    SchedulerStatus.type = Types::SchedulerStatus
     SecureNamespaceInfo.add_member(:cluster_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterId, name: "clusterId"))
     SecureNamespaceInfo.add_member(:namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: KubernetesNamespace, name: "namespace"))
     SecureNamespaceInfo.type = Types::SecureNamespaceInfo
@@ -492,6 +534,7 @@ module Aws::EMRcontainers
     SecurityConfiguration.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
     SecurityConfiguration.type = Types::SecurityConfiguration
     SecurityConfigurationData.add_member(:authorization_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthorizationConfiguration, name: "authorizationConfiguration"))
+    SecurityConfigurationData.add_member(:authentication_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthenticationConfiguration, name: "authenticationConfiguration"))
     SecurityConfigurationData.type = Types::SecurityConfigurationData
     SecurityConfigurations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityConfiguration, name: "member"))
     SensitivePropertiesMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String1024, name: "key"))
@@ -545,6 +588,12 @@ module Aws::EMRcontainers
     UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, name: "tagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
     UntagResourceResponse.type = Types::UntagResourceResponse
+    UpdateVirtualClusterRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdString, name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateVirtualClusterRequest.add_member(:scheduler_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SchedulerConfiguration, name: "schedulerConfiguration"))
+    UpdateVirtualClusterRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
+    UpdateVirtualClusterRequest.type = Types::UpdateVirtualClusterRequest
+    UpdateVirtualClusterResponse.add_member(:virtual_cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualCluster, name: "virtualCluster"))
+    UpdateVirtualClusterResponse.type = Types::UpdateVirtualClusterResponse
     ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String1024, name: "message"))
     ValidationException.type = Types::ValidationException
     VirtualCluster.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdString, name: "id"))
@@ -555,6 +604,9 @@ module Aws::EMRcontainers
     VirtualCluster.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "createdAt"))
     VirtualCluster.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
     VirtualCluster.add_member(:security_configuration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdString, name: "securityConfigurationId"))
+    VirtualCluster.add_member(:session_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "sessionEnabled"))
+    VirtualCluster.add_member(:scheduler_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SchedulerConfiguration, name: "schedulerConfiguration"))
+    VirtualCluster.add_member(:scheduler_status, ::Smithy::Schema::Shapes::MemberShape.new(target: SchedulerStatus, name: "schedulerStatus"))
     VirtualCluster.type = Types::VirtualCluster
     VirtualClusterState.add_member(:running, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RUNNING", traits: {"smithy.api#enumValue" => "RUNNING"}))
     VirtualClusterState.add_member(:terminating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TERMINATING", traits: {"smithy.api#enumValue" => "TERMINATING"}))
@@ -567,7 +619,7 @@ module Aws::EMRcontainers
       service.id = "com.amazonaws.emrcontainers#AwsChicagoWebService"
       service.name = "AwsChicagoWebService"
       service.version = "2020-10-01"
-      service.traits = {"aws.api#service" => {"sdkId" => "EMR containers", "arnNamespace" => "emr-containers", "cloudFormationName" => "EMRcontainers", "cloudTrailEventSource" => "emrcontainers.amazonaws.com", "endpointPrefix" => "emr-containers"}, "aws.auth#sigv4" => {"name" => "emr-containers"}, "aws.protocols#restJson1" => {}, "smithy.api#title" => "Amazon EMR Containers"}
+      service.traits = {"aws.api#service" => {"sdkId" => "EMR containers", "arnNamespace" => "emr-containers", "cloudFormationName" => "EMRcontainers", "cloudTrailEventSource" => "emrcontainers.amazonaws.com", "endpointPrefix" => "emr-containers"}, "aws.auth#sigv4" => {"name" => "emr-containers"}, "aws.protocols#restJson1" => {}, "smithy.api#title" => "Amazon EMR Containers", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}, {"fn" => "stringEquals", "argv" => [{"ref" => "Region"}, "us-gov-east-1"]}, {"fn" => "stringEquals", "argv" => [{"ref" => "Region"}, "us-gov-west-1"]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://emr-containers-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://emr-containers.us-gov-east-1.amazonaws.com", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://emr-containers.us-gov-west-1.amazonaws.com", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://emr-containers-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://emr-containers.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://emr-containers.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 15, "nodes" => "/////wAAAAH/////AAAAAAAAAA4AAAADAAAAAQAAAAQF9eENAAAAAgAAAAUF9eENAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEMAAAABQX14QoF9eELAAAABAAAAAwAAAAJAAAABgAAAAoF9eEJAAAABwX14QYAAAALAAAACAX14QcF9eEIAAAABQAAAA0F9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAAPAAAABAX14QIF9eED"}}
       service.add_operation(:cancel_job_run, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.emrcontainers#CancelJobRun"
         operation.name = "CancelJobRun"
@@ -634,6 +686,15 @@ module Aws::EMRcontainers
         operation.errors << InternalServerException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/virtualclusters/{virtualClusterId}/endpoints/{id}", "code" => 200}}
+      end)
+      service.add_operation(:delete_security_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.emrcontainers#DeleteSecurityConfiguration"
+        operation.name = "DeleteSecurityConfiguration"
+        operation.input = DeleteSecurityConfigurationRequest
+        operation.output = DeleteSecurityConfigurationResponse
+        operation.errors << InternalServerException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/securityconfigurations/{id}", "code" => 200}}
       end)
       service.add_operation(:delete_virtual_cluster, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.emrcontainers#DeleteVirtualCluster"
@@ -794,6 +855,16 @@ module Aws::EMRcontainers
         operation.errors << ResourceNotFoundException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/tags/{resourceArn}", "code" => 200}}
+      end)
+      service.add_operation(:update_virtual_cluster, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.emrcontainers#UpdateVirtualCluster"
+        operation.name = "UpdateVirtualCluster"
+        operation.input = UpdateVirtualClusterRequest
+        operation.output = UpdateVirtualClusterResponse
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "PATCH", "uri" => "/virtualclusters/{id}", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
     end
 

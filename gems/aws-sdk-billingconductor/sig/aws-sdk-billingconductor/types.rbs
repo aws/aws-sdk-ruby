@@ -35,11 +35,13 @@ module Aws::Billingconductor
       def initialize: (
         ?linked_account_ids: Array[String],
         ?auto_associate: bool,
+        ?responsibility_transfer_arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor linked_account_ids: Array[String]?
       attr_accessor auto_associate: bool?
+      attr_accessor responsibility_transfer_arn: String?
     end
 
     class AssociateAccountsOperationInput
@@ -103,6 +105,14 @@ module Aws::Billingconductor
       attr_accessor reason: String?
     end
 
+    module AssociateResourceErrorReason
+      INVALID_ARN: String
+      SERVICE_LIMIT_EXCEEDED: String
+      ILLEGAL_CUSTOMLINEITEM: String
+      INTERNAL_SERVER_EXCEPTION: String
+      INVALID_BILLING_PERIOD_RANGE: String
+    end
+
     class AssociateResourceResponseElement
       include Smithy::Schema::Structure
 
@@ -127,6 +137,19 @@ module Aws::Billingconductor
 
       attr_accessor key: String?
       attr_accessor value: String?
+    end
+
+    class AutoTransferBillingGroupCreationPreference
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?pricing_plan_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor pricing_plan_arn: String?
     end
 
     class BatchAssociateResourcesToCustomLineItemOperationInput
@@ -244,6 +267,7 @@ module Aws::Billingconductor
         ?status: String,
         ?status_reason: String,
         ?account_grouping: Types::ListBillingGroupAccountGrouping,
+        ?billing_group_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -258,6 +282,18 @@ module Aws::Billingconductor
       attr_accessor status: String?
       attr_accessor status_reason: String?
       attr_accessor account_grouping: Types::ListBillingGroupAccountGrouping?
+      attr_accessor billing_group_type: String?
+    end
+
+    module BillingGroupStatus
+      ACTIVE: String
+      PRIMARY_ACCOUNT_MISSING: String
+      PENDING: String
+    end
+
+    module BillingGroupType
+      STANDARD: String
+      TRANSFER_BILLING: String
     end
 
     class BillingPeriodRange
@@ -284,6 +320,11 @@ module Aws::Billingconductor
       attr_accessor pricing_plan_arn: String?
     end
 
+    module ComputationRuleEnum
+      ITEMIZED: String
+      CONSOLIDATED: String
+    end
+
     class ConflictException
       include Smithy::Schema::Structure
 
@@ -299,6 +340,15 @@ module Aws::Billingconductor
       attr_accessor resource_id: String?
       attr_accessor resource_type: String?
       attr_accessor reason: String?
+    end
+
+    module ConflictExceptionReason
+      RESOURCE_NAME_CONFLICT: String
+      PRICING_RULE_IN_PRICING_PLAN_CONFLICT: String
+      PRICING_PLAN_ATTACHED_TO_BILLING_GROUP_DELETE_CONFLICT: String
+      PRICING_PLAN_REFERENCED_BY_PREFERENCE_DELETE_CONFLICT: String
+      PRICING_RULE_ATTACHED_TO_PRICING_PLAN_DELETE_CONFLICT: String
+      WRITE_CONFLICT_RETRY: String
     end
 
     class CreateBillingGroupOperationInput
@@ -347,6 +397,8 @@ module Aws::Billingconductor
         ?tags: Hash[String, String],
         ?charge_details: Types::CustomLineItemChargeDetails,
         ?account_id: String,
+        ?computation_rule: String,
+        ?presentation_details: Types::PresentationObject,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -358,6 +410,8 @@ module Aws::Billingconductor
       attr_accessor tags: Hash[String, String]?
       attr_accessor charge_details: Types::CustomLineItemChargeDetails?
       attr_accessor account_id: String?
+      attr_accessor computation_rule: String?
+      attr_accessor presentation_details: Types::PresentationObject?
     end
 
     class CreateCustomLineItemOperationOutput
@@ -461,10 +515,17 @@ module Aws::Billingconductor
 
       def initialize: (
         ?free_tier: Types::CreateFreeTierConfig,
+        ?custom_tiers: Array[Types::CustomTier],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor free_tier: Types::CreateFreeTierConfig?
+      attr_accessor custom_tiers: Array[Types::CustomTier]?
+    end
+
+    module CurrencyCode
+      USD: String
+      CNY: String
     end
 
     class CustomLineItemBillingPeriodRange
@@ -523,6 +584,8 @@ module Aws::Billingconductor
         ?last_modified_time: Integer,
         ?association_size: Integer,
         ?account_id: String,
+        ?computation_rule: String,
+        ?presentation_details: Types::PresentationObject,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -537,6 +600,8 @@ module Aws::Billingconductor
       attr_accessor last_modified_time: Integer?
       attr_accessor association_size: Integer?
       attr_accessor account_id: String?
+      attr_accessor computation_rule: String?
+      attr_accessor presentation_details: Types::PresentationObject?
     end
 
     class CustomLineItemPercentageChargeDetails
@@ -550,6 +615,16 @@ module Aws::Billingconductor
 
       attr_accessor percentage_value: Float?
       attr_accessor associated_values: Array[String]?
+    end
+
+    module CustomLineItemRelationship
+      PARENT: String
+      CHILD: String
+    end
+
+    module CustomLineItemType
+      CREDIT: String
+      FEE: String
     end
 
     class CustomLineItemVersionListElement
@@ -570,6 +645,8 @@ module Aws::Billingconductor
         ?arn: String,
         ?start_time: Integer,
         ?account_id: String,
+        ?computation_rule: String,
+        ?presentation_details: Types::PresentationObject,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -587,6 +664,23 @@ module Aws::Billingconductor
       attr_accessor arn: String?
       attr_accessor start_time: Integer?
       attr_accessor account_id: String?
+      attr_accessor computation_rule: String?
+      attr_accessor presentation_details: Types::PresentationObject?
+    end
+
+    class CustomTier
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?begin_range_inclusive: Float,
+        ?end_range_exclusive: Float,
+        ?rate_value: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor begin_range_inclusive: Float?
+      attr_accessor end_range_exclusive: Float?
+      attr_accessor rate_value: Float?
     end
 
     class DeleteBillingGroupOperationInput
@@ -783,6 +877,37 @@ module Aws::Billingconductor
       attr_accessor next_token: String?
     end
 
+    class GetBillingTransferPreferenceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?responsibility_transfer_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor responsibility_transfer_arn: String?
+    end
+
+    class GetBillingTransferPreferenceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?responsibility_transfer_arn: String,
+        ?auto_billing_transfer_billing_group_creation: Types::AutoTransferBillingGroupCreationPreference,
+        ?last_modified_time: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor responsibility_transfer_arn: String?
+      attr_accessor auto_billing_transfer_billing_group_creation: Types::AutoTransferBillingGroupCreationPreference?
+      attr_accessor last_modified_time: Integer?
+    end
+
+    module GroupByAttributeName
+      PRODUCT_NAME: String
+      BILLING_PERIOD: String
+    end
+
     class InternalServerException
       include Smithy::Schema::Structure
 
@@ -803,12 +928,23 @@ module Aws::Billingconductor
         ?attribute: String,
         ?match_option: String,
         ?values: Array[String],
+        ?attribute_values: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor attribute: String?
       attr_accessor match_option: String?
       attr_accessor values: Array[String]?
+      attr_accessor attribute_values: Array[String]?
+    end
+
+    module LineItemFilterAttributeName
+      LINE_ITEM_TYPE: String
+      SERVICE: String
+    end
+
+    module LineItemFilterValue
+      SAVINGS_PLAN_NEGATION: String
     end
 
     class ListAccountAssociationsFilter
@@ -859,10 +995,12 @@ module Aws::Billingconductor
 
       def initialize: (
         ?auto_associate: bool,
+        ?responsibility_transfer_arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor auto_associate: bool?
+      attr_accessor responsibility_transfer_arn: String?
     end
 
     class ListBillingGroupCostReportsFilter
@@ -914,6 +1052,10 @@ module Aws::Billingconductor
         ?pricing_plan: String,
         ?statuses: Array[String],
         ?auto_associate: bool,
+        ?primary_account_ids: Array[String],
+        ?billing_group_types: Array[String],
+        ?names: Array[Types::StringSearch],
+        ?responsibility_transfer_arns: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -921,6 +1063,10 @@ module Aws::Billingconductor
       attr_accessor pricing_plan: String?
       attr_accessor statuses: Array[String]?
       attr_accessor auto_associate: bool?
+      attr_accessor primary_account_ids: Array[String]?
+      attr_accessor billing_group_types: Array[String]?
+      attr_accessor names: Array[Types::StringSearch]?
+      attr_accessor responsibility_transfer_arns: Array[String]?
     end
 
     class ListBillingGroupsOperationInput
@@ -1329,6 +1475,22 @@ module Aws::Billingconductor
       attr_accessor tags: Hash[String, String]?
     end
 
+    module MatchOption
+      NOT_EQUAL: String
+      EQUAL: String
+    end
+
+    class PresentationObject
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service: String?
+    end
+
     class PricingPlanListElement
       include Smithy::Schema::Structure
 
@@ -1387,6 +1549,19 @@ module Aws::Billingconductor
       attr_accessor operation: String?
     end
 
+    module PricingRuleScope
+      GLOBAL: String
+      SERVICE: String
+      BILLING_ENTITY: String
+      SKU: String
+    end
+
+    module PricingRuleType
+      MARKUP: String
+      DISCOUNT: String
+      TIERING: String
+    end
+
     class ResourceNotFoundException
       include Smithy::Schema::Structure
 
@@ -1400,6 +1575,10 @@ module Aws::Billingconductor
       attr_accessor message: String?
       attr_accessor resource_id: String?
       attr_accessor resource_type: String?
+    end
+
+    module SearchOption
+      STARTS_WITH: String
     end
 
     class ServiceLimitExceededException
@@ -1419,6 +1598,19 @@ module Aws::Billingconductor
       attr_accessor resource_type: String?
       attr_accessor limit_code: String?
       attr_accessor service_code: String?
+    end
+
+    class StringSearch
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?search_option: String,
+        ?search_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor search_option: String?
+      attr_accessor search_value: String?
     end
 
     class TagResourceInput
@@ -1461,10 +1653,12 @@ module Aws::Billingconductor
 
       def initialize: (
         ?free_tier: Types::FreeTierConfig,
+        ?custom_tiers: Array[Types::CustomTier],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor free_tier: Types::FreeTierConfig?
+      attr_accessor custom_tiers: Array[Types::CustomTier]?
     end
 
     class UntagResourceInput
@@ -1494,10 +1688,12 @@ module Aws::Billingconductor
 
       def initialize: (
         ?auto_associate: bool,
+        ?responsibility_transfer_arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor auto_associate: bool?
+      attr_accessor responsibility_transfer_arn: String?
     end
 
     class UpdateBillingGroupOperationInput
@@ -1548,6 +1744,36 @@ module Aws::Billingconductor
       attr_accessor status: String?
       attr_accessor status_reason: String?
       attr_accessor account_grouping: Types::UpdateBillingGroupAccountGrouping?
+    end
+
+    class UpdateBillingTransferPreferenceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?responsibility_transfer_arn: String,
+        ?auto_billing_transfer_billing_group_creation: Types::AutoTransferBillingGroupCreationPreference,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor responsibility_transfer_arn: String?
+      attr_accessor auto_billing_transfer_billing_group_creation: Types::AutoTransferBillingGroupCreationPreference?
+    end
+
+    class UpdateBillingTransferPreferenceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?responsibility_transfer_arn: String,
+        ?auto_billing_transfer_billing_group_creation: Types::AutoTransferBillingGroupCreationPreference,
+        ?last_modified_time: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor responsibility_transfer_arn: String?
+      attr_accessor auto_billing_transfer_billing_group_creation: Types::AutoTransferBillingGroupCreationPreference?
+      attr_accessor last_modified_time: Integer?
     end
 
     class UpdateCustomLineItemChargeDetails
@@ -1735,10 +1961,12 @@ module Aws::Billingconductor
 
       def initialize: (
         ?free_tier: Types::UpdateFreeTierConfig,
+        ?custom_tiers: Array[Types::CustomTier],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor free_tier: Types::UpdateFreeTierConfig?
+      attr_accessor custom_tiers: Array[Types::CustomTier]?
     end
 
     class ValidationException
@@ -1767,6 +1995,75 @@ module Aws::Billingconductor
 
       attr_accessor name: String?
       attr_accessor message: String?
+    end
+
+    module ValidationExceptionReason
+      UNKNOWN_OPERATION: String
+      CANNOT_PARSE: String
+      FIELD_VALIDATION_FAILED: String
+      OTHER: String
+      PRIMARY_NOT_ASSOCIATED: String
+      PRIMARY_CANNOT_DISASSOCIATE: String
+      ACCOUNTS_NOT_ASSOCIATED: String
+      ACCOUNTS_ALREADY_ASSOCIATED: String
+      ILLEGAL_PRIMARY_ACCOUNT: String
+      ILLEGAL_ACCOUNTS: String
+      MISMATCHED_BILLINGGROUP_ARN: String
+      MISSING_BILLINGGROUP: String
+      MISMATCHED_CUSTOMLINEITEM_ARN: String
+      ILLEGAL_BILLING_PERIOD: String
+      ILLEGAL_BILLING_PERIOD_RANGE: String
+      TOO_MANY_ACCOUNTS_IN_REQUEST: String
+      DUPLICATE_ACCOUNT: String
+      INVALID_BILLING_GROUP_STATUS: String
+      MISMATCHED_PRICINGPLAN_ARN: String
+      MISSING_PRICINGPLAN: String
+      MISMATCHED_PRICINGRULE_ARN: String
+      DUPLICATE_PRICINGRULE_ARNS: String
+      MISSING_COSTCATEGORY: String
+      ILLEGAL_EXPRESSION: String
+      ILLEGAL_SCOPE: String
+      ILLEGAL_SERVICE: String
+      PRICINGRULES_NOT_EXIST: String
+      PRICINGRULES_ALREADY_ASSOCIATED: String
+      PRICINGRULES_NOT_ASSOCIATED: String
+      INVALID_TIME_RANGE: String
+      INVALID_BILLINGVIEW_ARN: String
+      MISMATCHED_BILLINGVIEW_ARN: String
+      ILLEGAL_CUSTOMLINEITEM: String
+      MISSING_CUSTOMLINEITEM: String
+      ILLEGAL_CUSTOMLINEITEM_UPDATE: String
+      TOO_MANY_CUSTOMLINEITEMS_IN_REQUEST: String
+      ILLEGAL_CHARGE_DETAILS: String
+      ILLEGAL_UPDATE_CHARGE_DETAILS: String
+      INVALID_ARN: String
+      ILLEGAL_RESOURCE_ARNS: String
+      ILLEGAL_CUSTOMLINEITEM_MODIFICATION: String
+      MISSING_LINKED_ACCOUNT_IDS: String
+      MULTIPLE_LINKED_ACCOUNT_IDS: String
+      MISSING_PRICING_PLAN_ARN: String
+      MULTIPLE_PRICING_PLAN_ARN: String
+      ILLEGAL_CHILD_ASSOCIATE_RESOURCE: String
+      CUSTOM_LINE_ITEM_ASSOCIATION_EXISTS: String
+      INVALID_BILLING_GROUP: String
+      INVALID_BILLING_PERIOD_FOR_OPERATION: String
+      ILLEGAL_BILLING_ENTITY: String
+      ILLEGAL_MODIFIER_PERCENTAGE: String
+      ILLEGAL_TYPE: String
+      ILLEGAL_BILLING_GROUP_TYPE: String
+      ILLEGAL_BILLING_GROUP_PRICING_PLAN: String
+      ILLEGAL_ENDED_BILLINGGROUP: String
+      ILLEGAL_TIERING_INPUT: String
+      ILLEGAL_OPERATION: String
+      ILLEGAL_USAGE_TYPE: String
+      INVALID_SKU_COMBO: String
+      INVALID_FILTER: String
+      TOO_MANY_AUTO_ASSOCIATE_BILLING_GROUPS: String
+      CANNOT_DELETE_AUTO_ASSOCIATE_BILLING_GROUP: String
+      ILLEGAL_ACCOUNT_ID: String
+      BILLING_GROUP_ALREADY_EXIST_IN_CURRENT_BILLING_PERIOD: String
+      ILLEGAL_COMPUTATION_RULE: String
+      ILLEGAL_LINE_ITEM_FILTER: String
     end
   end
 end

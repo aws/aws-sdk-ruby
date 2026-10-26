@@ -12,6 +12,7 @@ module Aws::CleanRooms
     AccessDeniedException: StructureShape
     AccessDeniedExceptionReason: StringShape
     AccountId: StringShape
+    AccountIdList: ListShape
     AdditionalAnalyses: EnumShape
     AdditionalAnalysesResourceArn: StringShape
     AggregateColumn: StructureShape
@@ -19,14 +20,28 @@ module Aws::CleanRooms
     AggregateFunctionName: StringShape
     AggregationConstraint: StructureShape
     AggregationConstraints: ListShape
+    AggregationThreshold: StructureShape
+    AggregationThresholdList: ListShape
+    AggregationThresholdType: EnumShape
     AggregationType: StringShape
     AllowedAdditionalAnalyses: ListShape
+    AllowedAggregateExpressionType: EnumShape
     AllowedAnalysesList: ListShape
     AllowedAnalysisProviderList: ListShape
     AllowedColumnList: ListShape
     AllowedResultReceivers: ListShape
     AllowedResultRegions: ListShape
     AnalysisFormat: EnumShape
+    AnalysisIdentifier: StringShape
+    AnalysisLogExport: StructureShape
+    AnalysisLogExportError: StructureShape
+    AnalysisLogExportIdentifier: StringShape
+    AnalysisLogExportOutputConfiguration: StructureShape
+    AnalysisLogExportResultConfiguration: StructureShape
+    AnalysisLogExportS3OutputConfiguration: StructureShape
+    AnalysisLogExportStatus: EnumShape
+    AnalysisLogExportSummary: StructureShape
+    AnalysisLogExportSummaryList: ListShape
     AnalysisMethod: EnumShape
     AnalysisParameter: StructureShape
     AnalysisParameterList: ListShape
@@ -65,6 +80,10 @@ module Aws::CleanRooms
     AnalysisTemplateValidationType: EnumShape
     AnalysisType: EnumShape
     AnalyticsEngine: EnumShape
+    ApprovalStatus: EnumShape
+    ApprovalStatusDetails: StructureShape
+    ApprovalStatuses: MapShape
+    AthenaCatalogName: StringShape
     AthenaDatabaseName: StringShape
     AthenaOutputLocation: StringShape
     AthenaTableName: StringShape
@@ -73,6 +92,8 @@ module Aws::CleanRooms
     AutoApprovedChangeType: EnumShape
     AutoApprovedChangeTypeList: ListShape
     AutoRefreshMode: EnumShape
+    BaseTableDependencyType: EnumShape
+    BaseTableParentType: EnumShape
     BatchGetCollaborationAnalysisTemplateError: StructureShape
     BatchGetCollaborationAnalysisTemplateErrorList: ListShape
     BatchGetCollaborationAnalysisTemplateOperationInput: StructureShape
@@ -95,11 +116,15 @@ module Aws::CleanRooms
     ChangeInput: StructureShape
     ChangeInputList: ListShape
     ChangeList: ListShape
+    ChangeRequestAction: EnumShape
     ChangeRequestStatus: EnumShape
     ChangeSpecification: UnionShape
     ChangeSpecificationType: EnumShape
     ChangeType: EnumShape
     ChangeTypeList: ListShape
+    ChildResource: StructureShape
+    ChildResourceList: ListShape
+    ChildResourceType: EnumShape
     CleanroomsArn: StringShape
     Collaboration: StructureShape
     CollaborationAnalysisTemplate: StructureShape
@@ -111,6 +136,7 @@ module Aws::CleanRooms
     CollaborationChangeRequestIdentifier: StringShape
     CollaborationChangeRequestSummary: StructureShape
     CollaborationChangeRequestSummaryList: ListShape
+    CollaborationChangeSpecification: StructureShape
     CollaborationConfiguredAudienceModelAssociation: StructureShape
     CollaborationConfiguredAudienceModelAssociationSummary: StructureShape
     CollaborationConfiguredAudienceModelAssociationSummaryList: ListShape
@@ -130,10 +156,15 @@ module Aws::CleanRooms
     CollaborationSummary: StructureShape
     CollaborationSummaryList: ListShape
     Column: StructureShape
+    ColumnClassificationDetails: StructureShape
+    ColumnLineageEntry: StructureShape
+    ColumnLineageList: ListShape
     ColumnList: ListShape
+    ColumnMappingList: ListShape
     ColumnName: StringShape
     ColumnTypeString: StringShape
     CommercialRegion: EnumShape
+    ComparisonControls: StructureShape
     ComputeConfiguration: UnionShape
     ConfigurationDetails: UnionShape
     ConfiguredAudienceModelArn: StringShape
@@ -161,6 +192,7 @@ module Aws::CleanRooms
     ConfiguredTableAssociationAnalysisRuleTypeList: ListShape
     ConfiguredTableAssociationArn: StringShape
     ConfiguredTableAssociationIdentifier: StringShape
+    ConfiguredTableAssociationSchemaTypeProperties: StructureShape
     ConfiguredTableAssociationSummary: StructureShape
     ConfiguredTableAssociationSummaryList: ListShape
     ConfiguredTableIdentifier: StringShape
@@ -193,6 +225,10 @@ module Aws::CleanRooms
     CreateIdMappingTableOutput: StructureShape
     CreateIdNamespaceAssociationInput: StructureShape
     CreateIdNamespaceAssociationOutput: StructureShape
+    CreateIntermediateTableAnalysisRuleInput: StructureShape
+    CreateIntermediateTableAnalysisRuleOutput: StructureShape
+    CreateIntermediateTableInput: StructureShape
+    CreateIntermediateTableOutput: StructureShape
     CreateMembershipOperationInput: StructureShape
     CreateMembershipOperationOutput: StructureShape
     CreatePrivacyBudgetTemplateInput: StructureShape
@@ -218,12 +254,17 @@ module Aws::CleanRooms
     DeleteIdMappingTableOutput: StructureShape
     DeleteIdNamespaceAssociationInput: StructureShape
     DeleteIdNamespaceAssociationOutput: StructureShape
+    DeleteIntermediateTableAnalysisRuleInput: StructureShape
+    DeleteIntermediateTableAnalysisRuleOutput: StructureShape
+    DeleteIntermediateTableInput: StructureShape
+    DeleteIntermediateTableOutput: StructureShape
     DeleteMemberOperationInput: StructureShape
     DeleteMemberOperationOutput: StructureShape
     DeleteMembershipOperationInput: StructureShape
     DeleteMembershipOperationOutput: StructureShape
     DeletePrivacyBudgetTemplateInput: StructureShape
     DeletePrivacyBudgetTemplateOutput: StructureShape
+    DependencyList: ListShape
     DifferentialPrivacyAggregationExpression: StringShape
     DifferentialPrivacyAggregationType: EnumShape
     DifferentialPrivacyColumn: StructureShape
@@ -243,12 +284,16 @@ module Aws::CleanRooms
     DifferentialPrivacyTemplateParametersOutput: StructureShape
     DifferentialPrivacyTemplateUpdateParameters: StructureShape
     DirectAnalysisConfigurationDetails: StructureShape
+    DisallowIntermediateTableInput: StructureShape
+    DisallowIntermediateTableOutput: StructureShape
     DisplayName: StringShape
     Epsilon: IntegerShape
     ErrorMessageConfiguration: StructureShape
     ErrorMessageType: EnumShape
     FilterableMemberStatus: StringShape
     GenericResourceName: StringShape
+    GetAnalysisLogExportInput: StructureShape
+    GetAnalysisLogExportOutput: StructureShape
     GetAnalysisTemplateOperationInput: StructureShape
     GetAnalysisTemplateOperationOutput: StructureShape
     GetCollaborationAnalysisTemplateOperationInput: StructureShape
@@ -277,6 +322,10 @@ module Aws::CleanRooms
     GetIdMappingTableOutput: StructureShape
     GetIdNamespaceAssociationInput: StructureShape
     GetIdNamespaceAssociationOutput: StructureShape
+    GetIntermediateTableAnalysisRuleInput: StructureShape
+    GetIntermediateTableAnalysisRuleOutput: StructureShape
+    GetIntermediateTableInput: StructureShape
+    GetIntermediateTableOutput: StructureShape
     GetMembershipOperationInput: StructureShape
     GetMembershipOperationOutput: StructureShape
     GetPrivacyBudgetTemplateInput: StructureShape
@@ -316,14 +365,54 @@ module Aws::CleanRooms
     IdNamespaceAssociationSummary: StructureShape
     IdNamespaceAssociationSummaryList: ListShape
     IdNamespaceType: EnumShape
+    InheritedAdditionalAnalyses: StructureShape
+    InheritedAdditionalAnalysesSource: StructureShape
+    InheritedAdditionalAnalysesSourceList: ListShape
+    InheritedAllowedAdditionalAnalyses: StructureShape
+    InheritedAllowedAdditionalAnalysesSource: StructureShape
+    InheritedAllowedAdditionalAnalysesSourceList: ListShape
+    InheritedAllowedResultReceivers: StructureShape
+    InheritedAllowedResultReceiversSource: StructureShape
+    InheritedAllowedResultReceiversSourceList: ListShape
+    InheritedDisallowedOutputColumns: StructureShape
+    IntermediateTable: StructureShape
+    IntermediateTableActiveVersion: StructureShape
+    IntermediateTableAnalysisRule: StructureShape
+    IntermediateTableAnalysisRuleCustom: StructureShape
+    IntermediateTableAnalysisRulePolicy: UnionShape
+    IntermediateTableAnalysisRulePolicyV1: UnionShape
+    IntermediateTableAnalysisRuleType: EnumShape
+    IntermediateTableAnalysisRuleTypeList: ListShape
+    IntermediateTableArn: StringShape
+    IntermediateTableColumn: StructureShape
+    IntermediateTableColumnList: ListShape
+    IntermediateTableColumnTypeString: StringShape
+    IntermediateTableComputeConfiguration: UnionShape
+    IntermediateTableDependency: StructureShape
+    IntermediateTableIdentifier: StringShape
+    IntermediateTableInheritedConstraints: StructureShape
+    IntermediateTableOutputConfiguration: StructureShape
+    IntermediateTableSchema: StructureShape
+    IntermediateTableSchemaTypeProperties: StructureShape
+    IntermediateTableStatus: EnumShape
+    IntermediateTableSummary: StructureShape
+    IntermediateTableSummaryList: ListShape
+    IntermediateTableVersionStatus: EnumShape
+    IntermediateTableVersionSummary: StructureShape
+    IntermediateTableVersionSummaryList: ListShape
     InternalServerException: StructureShape
     JobComputePaymentConfig: StructureShape
+    JobParameterMap: MapShape
+    JobParameterName: StringShape
+    JobParameterValue: StringShape
     JobType: EnumShape
     JoinOperator: StringShape
     JoinOperatorsList: ListShape
     JoinRequiredOption: StringShape
     KMSKeyArn: StringShape
     KeyPrefix: StringShape
+    ListAnalysisLogExportsInput: StructureShape
+    ListAnalysisLogExportsOutput: StructureShape
     ListAnalysisTemplatesOperationInput: StructureShape
     ListAnalysisTemplatesOperationOutput: StructureShape
     ListCollaborationAnalysisTemplatesOperationInput: StructureShape
@@ -350,6 +439,10 @@ module Aws::CleanRooms
     ListIdMappingTablesOutput: StructureShape
     ListIdNamespaceAssociationsInput: StructureShape
     ListIdNamespaceAssociationsOutput: StructureShape
+    ListIntermediateTableVersionsInput: StructureShape
+    ListIntermediateTableVersionsOutput: StructureShape
+    ListIntermediateTablesInput: StructureShape
+    ListIntermediateTablesOutput: StructureShape
     ListMembersOperationInput: StructureShape
     ListMembersOperationOutput: StructureShape
     ListMembershipsOperationInput: StructureShape
@@ -366,8 +459,11 @@ module Aws::CleanRooms
     ListSchemasOperationOutput: StructureShape
     ListTagsForResourceInput: StructureShape
     ListTagsForResourceOutput: StructureShape
+    LogExportAnalysisType: EnumShape
     MLMemberAbilities: StructureShape
     MLPaymentConfig: StructureShape
+    MLSyntheticDataParameters: StructureShape
+    MaxMembershipInferenceAttackScore: FloatShape
     MaxResults: IntegerShape
     MemberAbilities: ListShape
     MemberAbility: EnumShape
@@ -395,8 +491,11 @@ module Aws::CleanRooms
     MembershipStatus: StringShape
     MembershipSummary: StructureShape
     MembershipSummaryList: ListShape
+    MembershipSyntheticDataGenerationPaymentConfig: StructureShape
     ModelInferencePaymentConfig: StructureShape
     ModelTrainingPaymentConfig: StructureShape
+    OutputColumnThreshold: StructureShape
+    OutputColumnThresholdList: ListShape
     PaginationToken: StringShape
     ParameterMap: MapShape
     ParameterName: StringShape
@@ -405,6 +504,11 @@ module Aws::CleanRooms
     PaymentConfiguration: StructureShape
     PopulateIdMappingTableInput: StructureShape
     PopulateIdMappingTableOutput: StructureShape
+    PopulateIntermediateTableAnalysisType: EnumShape
+    PopulateIntermediateTableInput: StructureShape
+    PopulateIntermediateTableOutput: StructureShape
+    PopulationAnalysisConfiguration: UnionShape
+    PopulationAnalysisSqlParameters: StructureShape
     PreviewPrivacyImpactInput: StructureShape
     PreviewPrivacyImpactOutput: StructureShape
     PreviewPrivacyImpactParametersInput: UnionShape
@@ -487,8 +591,9 @@ module Aws::CleanRooms
     ResourceAlias: StringShape
     ResourceDescription: StringShape
     ResourceNotFoundException: StructureShape
+    ResourceStatus: EnumShape
     ResourceType: StringShape
-    ResultFormat: StringShape
+    ResultFormat: EnumShape
     RoleArn: StringShape
     S3Location: StructureShape
     ScalarFunctions: StringShape
@@ -523,11 +628,21 @@ module Aws::CleanRooms
     SnowflakeTableSchema: UnionShape
     SnowflakeTableSchemaList: ListShape
     SnowflakeTableSchemaV1: StructureShape
+    SparkProperties: MapShape
+    SparkPropertyKey: StringShape
+    SparkPropertyValue: StringShape
+    StartAnalysisLogExportInput: StructureShape
+    StartAnalysisLogExportOutput: StructureShape
     StartProtectedJobInput: StructureShape
     StartProtectedJobOutput: StructureShape
     StartProtectedQueryOperationInput: StructureShape
     StartProtectedQueryOperationOutput: StructureShape
     SupportedS3Region: EnumShape
+    SyntheticDataColumnName: StringShape
+    SyntheticDataColumnProperties: StructureShape
+    SyntheticDataColumnType: EnumShape
+    SyntheticDataGenerationPaymentConfig: StructureShape
+    SyntheticDataParameters: UnionShape
     TableAlias: StringShape
     TableAliasList: ListShape
     TableDescription: StringShape
@@ -546,6 +661,8 @@ module Aws::CleanRooms
     UntagResourceOutput: StructureShape
     UpdateAnalysisTemplateOperationInput: StructureShape
     UpdateAnalysisTemplateOperationOutput: StructureShape
+    UpdateCollaborationChangeRequestInput: StructureShape
+    UpdateCollaborationChangeRequestOutput: StructureShape
     UpdateCollaborationOperationInput: StructureShape
     UpdateCollaborationOperationOutput: StructureShape
     UpdateConfiguredAudienceModelAssociationInput: StructureShape
@@ -562,8 +679,13 @@ module Aws::CleanRooms
     UpdateIdMappingTableOutput: StructureShape
     UpdateIdNamespaceAssociationInput: StructureShape
     UpdateIdNamespaceAssociationOutput: StructureShape
+    UpdateIntermediateTableAnalysisRuleInput: StructureShape
+    UpdateIntermediateTableAnalysisRuleOutput: StructureShape
+    UpdateIntermediateTableInput: StructureShape
+    UpdateIntermediateTableOutput: StructureShape
     UpdateMembershipOperationInput: StructureShape
     UpdateMembershipOperationOutput: StructureShape
+    UpdateMembershipPaymentConfiguration: StructureShape
     UpdatePrivacyBudgetTemplateInput: StructureShape
     UpdatePrivacyBudgetTemplateOutput: StructureShape
     UpdateProtectedJobInput: StructureShape
@@ -576,6 +698,7 @@ module Aws::CleanRooms
     ValidationExceptionFieldList: ListShape
     ValidationExceptionReason: StringShape
     WorkerComputeConfiguration: StructureShape
+    WorkerComputeConfigurationProperties: UnionShape
     WorkerComputeType: EnumShape
 
     AWSBastionControlPlaneServiceLambda: ServiceShape

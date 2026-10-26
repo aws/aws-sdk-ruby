@@ -8,6 +8,15 @@ module Aws::AppStream
     AccountName: StringShape
     AccountPassword: StringShape
     Action: EnumShape
+    AdminAppLicenseUsageList: ListShape
+    AdminAppLicenseUsageRecord: StructureShape
+    AgentAccessConfig: StructureShape
+    AgentAccessConfigForUpdate: StructureShape
+    AgentAccessSetting: StructureShape
+    AgentAccessSettingList: ListShape
+    AgentAction: EnumShape
+    AgentSoftwareVersion: EnumShape
+    AmiName: StringShape
     AppBlock: StructureShape
     AppBlockBuilder: StructureShape
     AppBlockBuilderAppBlockAssociation: StructureShape
@@ -21,10 +30,14 @@ module Aws::AppStream
     AppBlockBuilderStateChangeReasonCode: EnumShape
     AppBlockState: EnumShape
     AppBlocks: ListShape
+    AppCatalogConfig: ListShape
+    AppDisplayName: StringShape
+    AppName: StringShape
     AppVisibility: EnumShape
     Application: StructureShape
     ApplicationAttribute: EnumShape
     ApplicationAttributes: ListShape
+    ApplicationConfig: StructureShape
     ApplicationFleetAssociation: StructureShape
     ApplicationFleetAssociationList: ListShape
     ApplicationSettings: StructureShape
@@ -41,6 +54,8 @@ module Aws::AppStream
     AssociateApplicationToEntitlementResult: StructureShape
     AssociateFleetRequest: StructureShape
     AssociateFleetResult: StructureShape
+    AssociateSoftwareToImageBuilderRequest: StructureShape
+    AssociateSoftwareToImageBuilderResult: StructureShape
     AuthenticationType: EnumShape
     AwsAccountId: StringShape
     AwsAccountIdList: ListShape
@@ -55,6 +70,7 @@ module Aws::AppStream
     ComputeCapacity: StructureShape
     ComputeCapacityStatus: StructureShape
     ConcurrentModificationException: StructureShape
+    ContentRedirection: StructureShape
     CopyImageRequest: StructureShape
     CopyImageResponse: StructureShape
     CreateAppBlockBuilderRequest: StructureShape
@@ -69,12 +85,16 @@ module Aws::AppStream
     CreateDirectoryConfigResult: StructureShape
     CreateEntitlementRequest: StructureShape
     CreateEntitlementResult: StructureShape
+    CreateExportImageTaskRequest: StructureShape
+    CreateExportImageTaskResult: StructureShape
     CreateFleetRequest: StructureShape
     CreateFleetResult: StructureShape
     CreateImageBuilderRequest: StructureShape
     CreateImageBuilderResult: StructureShape
     CreateImageBuilderStreamingURLRequest: StructureShape
     CreateImageBuilderStreamingURLResult: StructureShape
+    CreateImportedImageRequest: StructureShape
+    CreateImportedImageResult: StructureShape
     CreateStackRequest: StructureShape
     CreateStackResult: StructureShape
     CreateStreamingURLRequest: StructureShape
@@ -119,6 +139,8 @@ module Aws::AppStream
     DescribeAppBlockBuildersResult: StructureShape
     DescribeAppBlocksRequest: StructureShape
     DescribeAppBlocksResult: StructureShape
+    DescribeAppLicenseUsageRequest: StructureShape
+    DescribeAppLicenseUsageResult: StructureShape
     DescribeApplicationFleetAssociationsRequest: StructureShape
     DescribeApplicationFleetAssociationsResult: StructureShape
     DescribeApplicationsRequest: StructureShape
@@ -138,6 +160,8 @@ module Aws::AppStream
     DescribeImagesResult: StructureShape
     DescribeSessionsRequest: StructureShape
     DescribeSessionsResult: StructureShape
+    DescribeSoftwareAssociationsRequest: StructureShape
+    DescribeSoftwareAssociationsResult: StructureShape
     DescribeStacksRequest: StructureShape
     DescribeStacksResult: StructureShape
     DescribeThemeForStackRequest: StructureShape
@@ -163,10 +187,15 @@ module Aws::AppStream
     DisassociateApplicationFromEntitlementResult: StructureShape
     DisassociateFleetRequest: StructureShape
     DisassociateFleetResult: StructureShape
+    DisassociateSoftwareFromImageBuilderRequest: StructureShape
+    DisassociateSoftwareFromImageBuilderResult: StructureShape
     DisplayName: StringShape
     Domain: StringShape
     DomainJoinInfo: StructureShape
     DomainList: ListShape
+    DrainSessionInstanceRequest: StructureShape
+    DrainSessionInstanceResult: StructureShape
+    DryRunOperationException: StructureShape
     DynamicAppProvidersEnabled: EnumShape
     EmbedHostDomain: StringShape
     EmbedHostDomains: ListShape
@@ -185,7 +214,16 @@ module Aws::AppStream
     ErrorMessage: StringShape
     ExpireSessionRequest: StructureShape
     ExpireSessionResult: StructureShape
+    ExportImageTask: StructureShape
+    ExportImageTaskState: EnumShape
+    ExportImageTasks: ListShape
     FeedbackURL: StringShape
+    FilePath: StringShape
+    Filter: StructureShape
+    FilterName: StringShape
+    FilterValue: StringShape
+    FilterValues: ListShape
+    Filters: ListShape
     Fleet: StructureShape
     FleetAttribute: EnumShape
     FleetAttributes: ListShape
@@ -195,19 +233,27 @@ module Aws::AppStream
     FleetList: ListShape
     FleetState: EnumShape
     FleetType: EnumShape
+    GetExportImageTaskRequest: StructureShape
+    GetExportImageTaskResult: StructureShape
     Image: StructureShape
     ImageBuilder: StructureShape
     ImageBuilderList: ListShape
     ImageBuilderState: EnumShape
     ImageBuilderStateChangeReason: StructureShape
     ImageBuilderStateChangeReasonCode: EnumShape
+    ImageImportDescription: StringShape
+    ImageImportDisplayName: StringShape
     ImageList: ListShape
     ImagePermissions: StructureShape
     ImageSharedWithOthers: EnumShape
+    ImageSoftwareMetadata: StructureShape
     ImageState: EnumShape
     ImageStateChangeReason: StructureShape
     ImageStateChangeReasonCode: EnumShape
+    ImageType: EnumShape
     IncompatibleImageException: StructureShape
+    InstanceDrainStatus: EnumShape
+    InstanceType: StringShape
     Integer: IntegerShape
     InvalidAccountStatusException: StructureShape
     InvalidParameterCombinationException: StructureShape
@@ -215,6 +261,7 @@ module Aws::AppStream
     LastReportGenerationExecutionError: StructureShape
     LastReportGenerationExecutionErrors: ListShape
     LatestAppstreamAgentVersion: EnumShape
+    LaunchParameters: StringShape
     LimitExceededException: StructureShape
     ListAssociatedFleetsRequest: StructureShape
     ListAssociatedFleetsResult: StructureShape
@@ -222,6 +269,8 @@ module Aws::AppStream
     ListAssociatedStacksResult: StructureShape
     ListEntitledApplicationsRequest: StructureShape
     ListEntitledApplicationsResult: StructureShape
+    ListExportImageTasksRequest: StructureShape
+    ListExportImageTasksResult: StructureShape
     ListTagsForResourceRequest: StructureShape
     ListTagsForResourceResponse: StructureShape
     Long: IntegerShape
@@ -230,11 +279,13 @@ module Aws::AppStream
     Metadata: MapShape
     Name: StringShape
     NetworkAccessConfiguration: StructureShape
+    NvidiaGridDriverVersion: StringShape
     OperationNotPermittedException: StructureShape
     OrganizationalUnitDistinguishedName: StringShape
     OrganizationalUnitDistinguishedNamesList: ListShape
     PackagingType: EnumShape
     Permission: EnumShape
+    PhotonAmiId: StringShape
     PlatformType: EnumShape
     Platforms: ListShape
     PreferredProtocol: EnumShape
@@ -248,9 +299,13 @@ module Aws::AppStream
     ResourceInUseException: StructureShape
     ResourceNotAvailableException: StructureShape
     ResourceNotFoundException: StructureShape
+    RuntimeValidationConfig: StructureShape
     S3Bucket: StringShape
+    S3BucketArn: StringShape
     S3Key: StringShape
     S3Location: StructureShape
+    ScreenImageFormat: EnumShape
+    ScreenResolution: EnumShape
     ScriptDetails: StructureShape
     SecurityGroupIdList: ListShape
     ServiceAccountCredentials: StructureShape
@@ -261,6 +316,9 @@ module Aws::AppStream
     SettingsGroup: StringShape
     SharedImagePermissions: StructureShape
     SharedImagePermissionsList: ListShape
+    SoftwareAssociations: StructureShape
+    SoftwareAssociationsList: ListShape
+    SoftwareDeploymentStatus: EnumShape
     Stack: StructureShape
     StackAttribute: EnumShape
     StackAttributes: ListShape
@@ -274,6 +332,8 @@ module Aws::AppStream
     StartFleetResult: StructureShape
     StartImageBuilderRequest: StructureShape
     StartImageBuilderResult: StructureShape
+    StartSoftwareDeploymentToImageBuilderRequest: StructureShape
+    StartSoftwareDeploymentToImageBuilderResult: StructureShape
     StopAppBlockBuilderRequest: StructureShape
     StopAppBlockBuilderResult: StructureShape
     StopFleetRequest: StructureShape
@@ -281,6 +341,7 @@ module Aws::AppStream
     StopImageBuilderRequest: StructureShape
     StopImageBuilderResult: StructureShape
     StorageConnector: StructureShape
+    StorageConnectorAuthentication: EnumShape
     StorageConnectorList: ListShape
     StorageConnectorType: EnumShape
     StreamView: EnumShape
@@ -306,6 +367,7 @@ module Aws::AppStream
     ThemeStyling: EnumShape
     ThemeTitleText: StringShape
     Timestamp: TimestampShape
+    UUID: StringShape
     UntagResourceRequest: StructureShape
     UntagResourceResponse: StructureShape
     UpdateAppBlockBuilderRequest: StructureShape
@@ -324,6 +386,9 @@ module Aws::AppStream
     UpdateStackResult: StructureShape
     UpdateThemeForStackRequest: StructureShape
     UpdateThemeForStackResult: StructureShape
+    UrlPattern: StringShape
+    UrlPatternList: ListShape
+    UrlRedirectionConfig: StructureShape
     UsageReportExecutionErrorCode: EnumShape
     UsageReportSchedule: EnumShape
     UsageReportSubscription: StructureShape
@@ -332,6 +397,7 @@ module Aws::AppStream
     UsbDeviceFilterStrings: ListShape
     User: StructureShape
     UserAttributeValue: StringShape
+    UserControlMode: EnumShape
     UserId: StringShape
     UserList: ListShape
     UserSetting: StructureShape
@@ -343,7 +409,9 @@ module Aws::AppStream
     UserStackAssociationList: ListShape
     Username: StringShape
     VisibilityType: EnumShape
+    VolumeConfig: StructureShape
     VpcConfig: StructureShape
+    WorkspaceImageId: StringShape
 
     PhotonAdminProxyService: ServiceShape
   end

@@ -54,7 +54,10 @@ module Aws::EKSAuth
     end
     def assume_role_for_pod_identity: (
       ?cluster_name: String,
-      ?token: String
+      ?token: String,
+      ?eks_node_name: String,
+      ?instance_id: String,
+      ?zone: String
     ) -> _AssumeRoleForPodIdentityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssumeRoleForPodIdentityResponse
   end
 end

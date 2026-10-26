@@ -12,8 +12,15 @@ module Aws::SocialMessaging
     AssociateInProgressToken: StringShape
     AssociateWhatsAppBusinessAccountInput: StructureShape
     AssociateWhatsAppBusinessAccountOutput: StructureShape
+    BusinessPublicKeyPem: StringShape
+    BusinessPublicKeySignatureStatus: StringShape
     ButtonType: StringShape
     CodeExpirationMinutes: IntegerShape
+    ConflictException: StructureShape
+    CreateWhatsAppDatasetInput: StructureShape
+    CreateWhatsAppDatasetOutput: StructureShape
+    CreateWhatsAppFlowInput: StructureShape
+    CreateWhatsAppFlowOutput: StructureShape
     CreateWhatsAppMessageTemplateFromLibraryInput: StructureShape
     CreateWhatsAppMessageTemplateFromLibraryOutput: StructureShape
     CreateWhatsAppMessageTemplateInput: StructureShape
@@ -21,11 +28,15 @@ module Aws::SocialMessaging
     CreateWhatsAppMessageTemplateMediaOutput: StructureShape
     CreateWhatsAppMessageTemplateOutput: StructureShape
     DeleteAllLanguages: BooleanShape
+    DeleteWhatsAppFlowInput: StructureShape
+    DeleteWhatsAppFlowOutput: StructureShape
     DeleteWhatsAppMessageMediaInput: StructureShape
     DeleteWhatsAppMessageMediaOutput: StructureShape
     DeleteWhatsAppMessageTemplateInput: StructureShape
     DeleteWhatsAppMessageTemplateOutput: StructureShape
     DependencyException: StructureShape
+    DeprecateWhatsAppFlowInput: StructureShape
+    DeprecateWhatsAppFlowOutput: StructureShape
     DisassociateWhatsAppBusinessAccountInput: StructureShape
     DisassociateWhatsAppBusinessAccountOutput: StructureShape
     ErrorMessage: StringShape
@@ -35,14 +46,25 @@ module Aws::SocialMessaging
     GetLinkedWhatsAppBusinessAccountOutput: StructureShape
     GetLinkedWhatsAppBusinessAccountPhoneNumberInput: StructureShape
     GetLinkedWhatsAppBusinessAccountPhoneNumberOutput: StructureShape
+    GetWhatsAppBusinessPublicKeyInput: StructureShape
+    GetWhatsAppBusinessPublicKeyOutput: StructureShape
+    GetWhatsAppCallPermissionInput: StructureShape
+    GetWhatsAppCallPermissionOutput: StructureShape
+    GetWhatsAppFlowInput: StructureShape
+    GetWhatsAppFlowOutput: StructureShape
+    GetWhatsAppFlowPreviewInput: StructureShape
+    GetWhatsAppFlowPreviewOutput: StructureShape
     GetWhatsAppMessageMediaInput: StructureShape
     GetWhatsAppMessageMediaOutput: StructureShape
     GetWhatsAppMessageTemplateInput: StructureShape
     GetWhatsAppMessageTemplateOutput: StructureShape
     Headers: MapShape
+    IanaTimezone: StringShape
     InternalServiceException: StructureShape
     InvalidParametersException: StructureShape
+    Iso8601Duration: StringShape
     IsoCountryCode: StringShape
+    KmsKeyArn: StringShape
     LibraryTemplateBodyInputs: StructureShape
     LibraryTemplateButtonInput: StructureShape
     LibraryTemplateButtonList: StructureShape
@@ -59,11 +81,48 @@ module Aws::SocialMessaging
     ListLinkedWhatsAppBusinessAccountsOutput: StructureShape
     ListTagsForResourceInput: StructureShape
     ListTagsForResourceOutput: StructureShape
+    ListWhatsAppFlowAssetsInput: StructureShape
+    ListWhatsAppFlowAssetsOutput: StructureShape
+    ListWhatsAppFlowsInput: StructureShape
+    ListWhatsAppFlowsOutput: StructureShape
     ListWhatsAppMessageTemplatesInput: StructureShape
     ListWhatsAppMessageTemplatesOutput: StructureShape
     ListWhatsAppTemplateLibraryInput: StructureShape
     ListWhatsAppTemplateLibraryOutput: StructureShape
     MaxResults: IntegerShape
+    MetaFlowApplicationId: StringShape
+    MetaFlowApplicationInfo: StructureShape
+    MetaFlowApplicationLink: StringShape
+    MetaFlowApplicationName: StringShape
+    MetaFlowAsset: StructureShape
+    MetaFlowAssetDownloadUrl: StringShape
+    MetaFlowAssetList: ListShape
+    MetaFlowAssetName: StringShape
+    MetaFlowAssetType: StringShape
+    MetaFlowCategory: EnumShape
+    MetaFlowCategoryList: ListShape
+    MetaFlowDataApiVersion: StringShape
+    MetaFlowEndpointUri: StringShape
+    MetaFlowHealthEntity: StructureShape
+    MetaFlowHealthEntityList: ListShape
+    MetaFlowHealthEntityType: StringShape
+    MetaFlowHealthStatus: StructureShape
+    MetaFlowHealthStatusAvailability: StringShape
+    MetaFlowId: StringShape
+    MetaFlowJsonBlob: BlobShape
+    MetaFlowJsonVersion: StringShape
+    MetaFlowName: StringShape
+    MetaFlowPreviewInfo: StructureShape
+    MetaFlowPreviewUrl: StringShape
+    MetaFlowStatus: StringShape
+    MetaFlowSummary: StructureShape
+    MetaFlowSummaryList: ListShape
+    MetaFlowTimestamp: StringShape
+    MetaFlowValidationError: StringShape
+    MetaFlowWabaCurrency: StringShape
+    MetaFlowWabaTemplateNamespace: StringShape
+    MetaFlowWabaTimezoneId: StringShape
+    MetaFlowWhatsAppBusinessAccountInfo: StructureShape
     MetaIndustries: ListShape
     MetaIndustry: StringShape
     MetaLibraryTemplate: StructureShape
@@ -71,10 +130,13 @@ module Aws::SocialMessaging
     MetaLibraryTemplateButtonList: ListShape
     MetaLibraryTemplateDefinition: StructureShape
     MetaLibraryTemplatesList: ListShape
+    MetaParameterFormat: StringShape
     MetaTemplate: StringShape
     MetaTemplateBody: StringShape
+    MetaTemplateBodyExampleParams: ListShape
     MetaTemplateCategory: StringShape
     MetaTemplateComponents: BlobShape
+    MetaTemplateCtaLinkTrackingOptedOut: BooleanShape
     MetaTemplateDefinition: BlobShape
     MetaTemplateHeader: StringShape
     MetaTemplateId: StringShape
@@ -92,13 +154,21 @@ module Aws::SocialMessaging
     PhoneNumber: StringShape
     PostWhatsAppMessageMediaInput: StructureShape
     PostWhatsAppMessageMediaOutput: StructureShape
+    PublishWhatsAppFlowInput: StructureShape
+    PublishWhatsAppFlowOutput: StructureShape
     PutWhatsAppBusinessAccountEventDestinationsInput: StructureShape
     PutWhatsAppBusinessAccountEventDestinationsOutput: StructureShape
+    PutWhatsAppBusinessPublicKeyInput: StructureShape
+    PutWhatsAppBusinessPublicKeyOutput: StructureShape
     RegistrationStatus: EnumShape
     ResourceNotFoundException: StructureShape
     RoleArn: StringShape
     S3File: StructureShape
     S3PresignedUrl: StructureShape
+    SendWhatsAppCallEventInput: StructureShape
+    SendWhatsAppCallEventOutput: StructureShape
+    SendWhatsAppConversionEventInput: StructureShape
+    SendWhatsAppConversionEventOutput: StructureShape
     SendWhatsAppMessageInput: StructureShape
     SendWhatsAppMessageOutput: StructureShape
     StringList: ListShape
@@ -114,8 +184,15 @@ module Aws::SocialMessaging
     TwoFactorPin: StringShape
     UntagResourceInput: StructureShape
     UntagResourceOutput: StructureShape
+    UpdateLinkedWhatsAppBusinessAccountPhoneNumberInput: StructureShape
+    UpdateLinkedWhatsAppBusinessAccountPhoneNumberOutput: StructureShape
+    UpdateWhatsAppFlowAssetsInput: StructureShape
+    UpdateWhatsAppFlowAssetsOutput: StructureShape
+    UpdateWhatsAppFlowInput: StructureShape
+    UpdateWhatsAppFlowOutput: StructureShape
     UpdateWhatsAppMessageTemplateInput: StructureShape
     UpdateWhatsAppMessageTemplateOutput: StructureShape
+    ValidationErrorList: ListShape
     ValidationException: StructureShape
     WabaPhoneNumberSetupFinalization: StructureShape
     WabaPhoneNumberSetupFinalizationList: ListShape
@@ -124,8 +201,29 @@ module Aws::SocialMessaging
     WhatsAppBusinessAccountEventDestinations: ListShape
     WhatsAppBusinessAccountId: StringShape
     WhatsAppBusinessAccountLinkDate: TimestampShape
+    WhatsAppBusinessAccountMarketingMessagesOnboardingStatus: StringShape
     WhatsAppBusinessAccountName: StringShape
+    WhatsAppBusinessScopedUserId: StringShape
+    WhatsAppCallEventBlob: BlobShape
+    WhatsAppCallHours: StructureShape
+    WhatsAppCallIconVisibility: StringShape
+    WhatsAppCallPermission: StructureShape
+    WhatsAppCallPermissionAction: StructureShape
+    WhatsAppCallPermissionActionList: ListShape
+    WhatsAppCallPermissionActionName: StringShape
+    WhatsAppCallPermissionLimit: StructureShape
+    WhatsAppCallPermissionLimitList: ListShape
+    WhatsAppCallPermissionStatus: StringShape
+    WhatsAppCallSettings: StructureShape
+    WhatsAppCallbackPermissionStatus: StringShape
+    WhatsAppConversionEventBlob: BlobShape
+    WhatsAppDatasetId: StringShape
+    WhatsAppDate: StringShape
+    WhatsAppDayOfWeek: EnumShape
+    WhatsAppDestinationPhoneNumber: StringShape
     WhatsAppDisplayPhoneNumber: StringShape
+    WhatsAppHolidayScheduleEntry: StructureShape
+    WhatsAppHolidayScheduleList: ListShape
     WhatsAppMediaId: StringShape
     WhatsAppMessageBlob: BlobShape
     WhatsAppPhoneNumber: StringShape
@@ -139,6 +237,9 @@ module Aws::SocialMessaging
     WhatsAppSetupFinalization: StructureShape
     WhatsAppSignupCallback: StructureShape
     WhatsAppSignupCallbackResult: StructureShape
+    WhatsAppTimeOfDay: StructureShape
+    WhatsAppWeeklyOperatingHoursEntry: StructureShape
+    WhatsAppWeeklyOperatingHoursList: ListShape
     ZeroTapTermsAccepted: BooleanShape
 
     SocialMessaging: ServiceShape

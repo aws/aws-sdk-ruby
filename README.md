@@ -1,6 +1,10 @@
-# AWS SDK for Ruby Staging
+# AWS SDK for Ruby V4
 
-This repository is used to develop and validate the next major version of the AWS SDK for Ruby. Service clients are generated using [smithy-ruby](https://github.com/smithy-lang/smithy-ruby).
+The AWS SDK for Ruby V4 is experimental and under active development. APIs and behavior may change before general availability. Use [AWS SDK for Ruby V3](https://github.com/aws/aws-sdk-ruby/tree/version-3) for production workloads.
+
+V4 uses [smithy-ruby](https://github.com/smithy-lang/smithy-ruby) to generate service clients. It does not yet include all features and service-specific functionality available in V3.
+
+To work on V4 from source, follow [CONTRIBUTING.md](CONTRIBUTING.md). Build and test commands are documented below.
 
 ## Protocol Tests
 
@@ -79,20 +83,6 @@ bundle exec rake test:spec:aws-sdk-s3
 
 # Run RuboCop
 bundle exec rake rubocop
-```
-
-### Updating aws models
-
-To update service models, point `AWS_MODELS_DIR` at a local `aws-models` checkout and run:
-
-```bash
-AWS_MODELS_DIR=/path/to/aws-models bundle exec rake sync:aws-models
-```
-
-This replaces the repository's entire `models/` directory with models discovered under `<AWS_MODELS_DIR>/*/smithy/model.json`. Review the resulting model changes, then regenerate the service gems:
-
-```bash
-bundle exec rake build
 ```
 
 ### Updating dependencies in `aws-sdk` gem

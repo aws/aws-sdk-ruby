@@ -29,6 +29,7 @@ require 'aws-sdk-core/plugins/retry_errors'
 require 'aws-sdk-core/plugins/stub_responses'
 require 'aws-sdk-core/plugins/regional_endpoints'
 require 'aws-sdk-core/plugins/sigv4'
+require 'smithy-client/rpc_v2_cbor'
 require 'aws-sdk-core/json_rpc'
 
 Aws::Core::Plugins::GlobalConfiguration.add_identifier(:health)
@@ -123,7 +124,7 @@ module Aws::Health
     #  at ~/.aws/config and ~/.aws/credentials, respectively.  When not specified, 'default' is used.
     # @option options [Symbol, Object] :protocol
     #  The protocol used for request serialization and response deserialization. Defaults to the service default protocol. May be a Symbol naming a supported protocol, or a custom object implementing the protocol interface.
-    #  Supported protocols: +:json_rpc+ (defaults to +:json_rpc+).
+    #  Supported protocols: +:rpc_v2_cbor+, +:json_rpc+ (defaults to +:rpc_v2_cbor+).
     # @option options [Boolean] :raise_response_errors (true)
     #  When `true`, response errors are raised. When `false`, the error is placed on the
     #  output in the {Smithy::Client::Response#error error accessor}.
@@ -144,18 +145,18 @@ module Aws::Health
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -284,7 +285,7 @@ module Aws::Health
     #   retrieve the next batch of results, reissue the search request and include the returned token.
     #   When all results have been returned, the response does not contain a pagination token value.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of items to return in one batch, between 10 and 100, inclusive.</p>
+    #   <p>The maximum number of items to return in one batch, between 1 and 100, inclusive.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     filter: { # required
@@ -369,7 +370,7 @@ module Aws::Health
     #   retrieve the next batch of results, reissue the search request and include the returned token.
     #   When all results have been returned, the response does not contain a pagination token value.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of items to return in one batch, between 10 and 100, inclusive.</p>
+    #   <p>The maximum number of items to return in one batch, between 1 and 100, inclusive.</p>
     # @option params [Array<Types::EntityAccountFilter>] :organization_entity_account_filters
     #   <p>A JSON set of elements including the <code>awsAccountId</code>, <code>eventArn</code> and a set of <code>statusCodes</code>.</p>
     # @example Request syntax with placeholder values
@@ -522,6 +523,7 @@ module Aws::Health
     # @example Request syntax with placeholder values
     #   params = {
     #     filter: {
+    #       actionabilities: ["ACTION_REQUIRED" # One of: ["ACTION_REQUIRED", "ACTION_MAY_BE_REQUIRED", "INFORMATIONAL"]],
     #       event_arns: ["eventArn"],
     #       event_type_codes: ["EventType2"],
     #       services: ["service"],
@@ -553,7 +555,8 @@ module Aws::Health
     #           "tagKey" => "tagValue"
     #         }
     #       ],
-    #       event_status_codes: ["open" # One of: ["open", "closed", "upcoming"]]
+    #       event_status_codes: ["open" # One of: ["open", "closed", "upcoming"]],
+    #       personas: ["OPERATIONS" # One of: ["OPERATIONS", "SECURITY", "BILLING"]]
     #     },
     #     aggregate_field: "eventTypeCategory" # One of: ["eventTypeCategory"], # required
     #     max_results: 1,
@@ -617,7 +620,9 @@ module Aws::Health
     #           end_time: Time.now,
     #           last_updated_time: Time.now,
     #           status_code: "open" # One of: ["open", "closed", "upcoming"],
-    #           event_scope_code: "PUBLIC" # One of: ["PUBLIC", "ACCOUNT_SPECIFIC", "NONE"]
+    #           event_scope_code: "PUBLIC" # One of: ["PUBLIC", "ACCOUNT_SPECIFIC", "NONE"],
+    #           actionability: "ACTION_REQUIRED" # One of: ["ACTION_REQUIRED", "ACTION_MAY_BE_REQUIRED", "INFORMATIONAL"],
+    #           personas: ["OPERATIONS" # One of: ["OPERATIONS", "SECURITY", "BILLING"]]
     #         },
     #         event_description: {
     #           latest_description: "EventDescription2"
@@ -708,7 +713,9 @@ module Aws::Health
     #           end_time: Time.now,
     #           last_updated_time: Time.now,
     #           status_code: "open" # One of: ["open", "closed", "upcoming"],
-    #           event_scope_code: "PUBLIC" # One of: ["PUBLIC", "ACCOUNT_SPECIFIC", "NONE"]
+    #           event_scope_code: "PUBLIC" # One of: ["PUBLIC", "ACCOUNT_SPECIFIC", "NONE"],
+    #           actionability: "ACTION_REQUIRED" # One of: ["ACTION_REQUIRED", "ACTION_MAY_BE_REQUIRED", "INFORMATIONAL"],
+    #           personas: ["OPERATIONS" # One of: ["OPERATIONS", "SECURITY", "BILLING"]]
     #         },
     #         event_description: {
     #           latest_description: "EventDescription2"
@@ -761,7 +768,9 @@ module Aws::Health
     #     filter: {
     #       event_type_codes: ["eventTypeCode"],
     #       services: ["service"],
-    #       event_type_categories: ["issue" # One of: ["issue", "accountNotification", "scheduledChange", "investigation"]]
+    #       event_type_categories: ["issue" # One of: ["issue", "accountNotification", "scheduledChange", "investigation"]],
+    #       actionabilities: ["ACTION_REQUIRED" # One of: ["ACTION_REQUIRED", "ACTION_MAY_BE_REQUIRED", "INFORMATIONAL"]],
+    #       personas: ["OPERATIONS" # One of: ["OPERATIONS", "SECURITY", "BILLING"]]
     #     },
     #     locale: "locale",
     #     next_token: "nextToken",
@@ -776,7 +785,9 @@ module Aws::Health
     #       {
     #         service: "service",
     #         code: "eventTypeCode",
-    #         category: "issue" # One of: ["issue", "accountNotification", "scheduledChange", "investigation"]
+    #         category: "issue" # One of: ["issue", "accountNotification", "scheduledChange", "investigation"],
+    #         actionability: "ACTION_REQUIRED" # One of: ["ACTION_REQUIRED", "ACTION_MAY_BE_REQUIRED", "INFORMATIONAL"],
+    #         personas: ["OPERATIONS" # One of: ["OPERATIONS", "SECURITY", "BILLING"]]
     #       }
     #     ],
     #     next_token: "nextToken"
@@ -819,12 +830,13 @@ module Aws::Health
     #   retrieve the next batch of results, reissue the search request and include the returned token.
     #   When all results have been returned, the response does not contain a pagination token value.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of items to return in one batch, between 10 and 100, inclusive.</p>
+    #   <p>The maximum number of items to return in one batch, between 1 and 100, inclusive.</p>
     # @option params [String] :locale
     #   <p>The locale (language) to return information in. English (en) is the default and the only supported value at this time.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     filter: {
+    #       actionabilities: ["ACTION_REQUIRED" # One of: ["ACTION_REQUIRED", "ACTION_MAY_BE_REQUIRED", "INFORMATIONAL"]],
     #       event_arns: ["eventArn"],
     #       event_type_codes: ["EventType2"],
     #       services: ["service"],
@@ -856,7 +868,8 @@ module Aws::Health
     #           "tagKey" => "tagValue"
     #         }
     #       ],
-    #       event_status_codes: ["open" # One of: ["open", "closed", "upcoming"]]
+    #       event_status_codes: ["open" # One of: ["open", "closed", "upcoming"]],
+    #       personas: ["OPERATIONS" # One of: ["OPERATIONS", "SECURITY", "BILLING"]]
     #     },
     #     next_token: "nextToken",
     #     max_results: 1,
@@ -879,7 +892,9 @@ module Aws::Health
     #         end_time: Time.now,
     #         last_updated_time: Time.now,
     #         status_code: "open" # One of: ["open", "closed", "upcoming"],
-    #         event_scope_code: "PUBLIC" # One of: ["PUBLIC", "ACCOUNT_SPECIFIC", "NONE"]
+    #         event_scope_code: "PUBLIC" # One of: ["PUBLIC", "ACCOUNT_SPECIFIC", "NONE"],
+    #         actionability: "ACTION_REQUIRED" # One of: ["ACTION_REQUIRED", "ACTION_MAY_BE_REQUIRED", "INFORMATIONAL"],
+    #         personas: ["OPERATIONS" # One of: ["OPERATIONS", "SECURITY", "BILLING"]]
     #       }
     #     ],
     #     next_token: "nextToken"
@@ -931,12 +946,13 @@ module Aws::Health
     #   retrieve the next batch of results, reissue the search request and include the returned token.
     #   When all results have been returned, the response does not contain a pagination token value.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of items to return in one batch, between 10 and 100, inclusive.</p>
+    #   <p>The maximum number of items to return in one batch, between 1 and 100, inclusive.</p>
     # @option params [String] :locale
     #   <p>The locale (language) to return information in. English (en) is the default and the only supported value at this time.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     filter: {
+    #       actionabilities: ["ACTION_REQUIRED" # One of: ["ACTION_REQUIRED", "ACTION_MAY_BE_REQUIRED", "INFORMATIONAL"]],
     #       event_type_codes: ["EventType2"],
     #       aws_account_ids: ["accountId"],
     #       services: ["service"],
@@ -956,7 +972,8 @@ module Aws::Health
     #       entity_arns: ["entityArn"],
     #       entity_values: ["entityValue"],
     #       event_type_categories: ["issue" # One of: ["issue", "accountNotification", "scheduledChange", "investigation"]],
-    #       event_status_codes: ["open" # One of: ["open", "closed", "upcoming"]]
+    #       event_status_codes: ["open" # One of: ["open", "closed", "upcoming"]],
+    #       personas: ["OPERATIONS" # One of: ["OPERATIONS", "SECURITY", "BILLING"]]
     #     },
     #     next_token: "nextToken",
     #     max_results: 1,
@@ -978,7 +995,9 @@ module Aws::Health
     #         start_time: Time.now,
     #         end_time: Time.now,
     #         last_updated_time: Time.now,
-    #         status_code: "open" # One of: ["open", "closed", "upcoming"]
+    #         status_code: "open" # One of: ["open", "closed", "upcoming"],
+    #         actionability: "ACTION_REQUIRED" # One of: ["ACTION_REQUIRED", "ACTION_MAY_BE_REQUIRED", "INFORMATIONAL"],
+    #         personas: ["OPERATIONS" # One of: ["OPERATIONS", "SECURITY", "BILLING"]]
     #       }
     #     ],
     #     next_token: "nextToken"
@@ -1005,6 +1024,114 @@ module Aws::Health
     # @return [Types::DescribeHealthServiceStatusForOrganizationResponse]
     def describe_health_service_status_for_organization(params = {}, options = {})
       request = build_request(:describe_health_service_status_for_organization, params)
+      request.send_request(options)
+    end
+
+    # <p>Returns lifecycle information for Amazon Web Services services, including end-of-life dates, version recommendations, and lifecycle events.</p>
+    # @param [Hash, Types::DescribeServiceLifecycleRequest] params
+    # @option params [Types::ServiceLifecycleFilter] :filter
+    #   <p>Values to narrow the results returned.</p>
+    # @option params [String] :next_token
+    #   <p>If the results of a search are large, only a portion of the
+    #   results are returned, and a <code>nextToken</code> pagination token is returned in the response. To
+    #   retrieve the next batch of results, reissue the search request and include the returned token.
+    #   When all results have been returned, the response does not contain a pagination token value.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of items to return in one batch, between 1 and 20, inclusive.</p>
+    # @example To retrieve service lifecycle information
+    #   # The following example returns service lifecycle information, including support milestones and lifecycle events for each service version.
+    #   params = {
+    #     max_results: 5
+    #   }
+    #   options = {}
+    #   response = client.describe_service_lifecycle(params, options)
+    #   response.to_h #=>
+    #   {
+    #     service_lifecycles: [
+    #       {
+    #         service: "BEDROCK",
+    #         version: "ai21.jamba-1-5-large-v1:0",
+    #         title: "AI21 Labs Jamba 1.5 Large",
+    #         lifecycle_events: [
+    #           {
+    #             lifecycle_event_type: "STANDARD_SUPPORT_END",
+    #             date: Time.parse("2026-05-26T00:00:00Z"),
+    #             regions: [
+    #               "all"
+    #             ],
+    #             impact_risks: [
+    #               "END_OF_SUPPORT"
+    #             ],
+    #             description: "Model enters Legacy state — no longer actively maintained. Public extended access (pricing may increase) starts 2026-08-26"
+    #           },
+    #           {
+    #             lifecycle_event_type: "EXTENDED_SUPPORT_END",
+    #             date: Time.parse("2026-11-26T00:00:00Z"),
+    #             regions: [
+    #               "all"
+    #             ],
+    #             impact_risks: [
+    #               "AVAILABILITY"
+    #             ],
+    #             description: "Model is no longer available for inference"
+    #           }
+    #         ]
+    #       },
+    #       {
+    #         service: "BEDROCK",
+    #         version: "amazon.nova-2-lite-v1:0",
+    #         title: "Amazon Nova 2 Lite",
+    #         lifecycle_events: [
+    #           {
+    #             lifecycle_event_type: "SUPPORTED",
+    #             date: Time.parse("2025-12-02T00:00:00Z"),
+    #             regions: [
+    #               "all"
+    #             ],
+    #             impact_risks: [
+    #             ],
+    #             description: "Amazon Nova 2 Lite available on Amazon Bedrock"
+    #           }
+    #         ]
+    #       }
+    #     ],
+    #     next_token: "AQICAHjDhCYeYPq-zXMzcdNOIWJQKCUN1s1J84fdK4ztGn9uoAExampleTokenExampleTokenExampleToken"
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     filter: {
+    #       service: "service"
+    #     },
+    #     next_token: "nextToken",
+    #     max_results: 1
+    #   }
+    #   options = {}
+    #   response = client.describe_service_lifecycle(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     service_lifecycles: [
+    #       {
+    #         service: "service",
+    #         version: "string",
+    #         title: "string",
+    #         recommended_version: "string",
+    #         lifecycle_events: [
+    #           {
+    #             lifecycle_event_type: "string",
+    #             date: Time.now,
+    #             regions: ["region"],
+    #             impact_risks: ["string"],
+    #             description: "string"
+    #           }
+    #         ]
+    #       }
+    #     ],
+    #     next_token: "nextToken"
+    #   }
+    # @return [Types::DescribeServiceLifecycleResponse]
+    def describe_service_lifecycle(params = {}, options = {})
+      request = build_request(:describe_service_lifecycle, params)
       request.send_request(options)
     end
 
@@ -1181,6 +1308,7 @@ module Aws::Health
       # @api private
       def protocols
         {
+          rpc_v2_cbor: Smithy::Client::RpcV2Cbor,
           json_rpc: Aws::Core::JsonRpc
         }
       end

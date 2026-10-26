@@ -34,6 +34,10 @@ module Aws::SecretsManager
     ExcludeNumbersType: BooleanShape
     ExcludePunctuationType: BooleanShape
     ExcludeUppercaseType: BooleanShape
+    ExternalSecretRotationMetadataItem: StructureShape
+    ExternalSecretRotationMetadataItemKeyType: StringShape
+    ExternalSecretRotationMetadataItemValueType: StringShape
+    ExternalSecretRotationMetadataType: ListShape
     Filter: StructureShape
     FilterNameStringType: EnumShape
     FilterValueStringType: StringShape
@@ -63,6 +67,7 @@ module Aws::SecretsManager
     MalformedPolicyDocumentException: StructureShape
     MaxResultsBatchType: IntegerShape
     MaxResultsType: IntegerShape
+    MedeaTypeType: StringShape
     NameType: StringShape
     NextRotationDateType: TimestampShape
     NextTokenType: StringShape
@@ -91,6 +96,7 @@ module Aws::SecretsManager
     ResourceNotFoundException: StructureShape
     RestoreSecretRequest: StructureShape
     RestoreSecretResponse: StructureShape
+    RoleARNType: StringShape
     RotateSecretRequest: StructureShape
     RotateSecretResponse: StructureShape
     RotationEnabledType: BooleanShape
@@ -114,6 +120,7 @@ module Aws::SecretsManager
     SecretVersionsListEntry: StructureShape
     SecretVersionsListType: ListShape
     SecretVersionsToStagesMapType: MapShape
+    SortByType: EnumShape
     SortOrderType: EnumShape
     StatusMessageType: StringShape
     StatusType: EnumShape

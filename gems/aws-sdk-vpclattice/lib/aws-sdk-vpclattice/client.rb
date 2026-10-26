@@ -144,18 +144,18 @@ module Aws::VPCLattice
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -455,19 +455,25 @@ module Aws::VPCLattice
     # @option params [String] :name
     #   <p>The name of the resource configuration. The name must be unique within the account. The valid characters are a-z, 0-9, and hyphens (-). You can't use a hyphen as the first or last character, or immediately after another hyphen.</p>
     # @option params [String] :type
-    #   <p>The type of resource configuration. A resource configuration can be one of the following types:</p> <ul> <li> <p> <b>SINGLE</b> - A single resource.</p> </li> <li> <p> <b>GROUP</b> - A group of resources. You must create a group resource configuration before you create a child resource configuration.</p> </li> <li> <p> <b>CHILD</b> - A single resource that is part of a group resource configuration.</p> </li> <li> <p> <b>ARN</b> - An Amazon Web Services resource.</p> </li> </ul>
+    #   <p>The type of resource configuration. A resource configuration can be one of the following types:</p> <ul> <li> <p> <b>SINGLE</b> - A single resource.</p> </li> <li> <p> <b>GROUP</b> - A group of resources. You must create a group resource configuration before you create a child resource configuration.</p> </li> <li> <p> <b>CHILD</b> - A single resource that is part of a group resource configuration.</p> </li> <li> <p> <b>ARN</b> - An Amazon Web Services resource.</p> </li> <li> <p> <b>CIDR</b> - A network segment, expressed as a range of IP addresses (a CIDR block). Use this type to share a portion of your network rather than an individual resource. A consumer accesses the resources within the CIDR range through a <code>Tunnel</code> VPC endpoint. You can't add a CIDR resource configuration to a service network. A CIDR resource configuration must be associated with a resource gateway whose DNS resolution is set to <code>IN_VPC</code>.</p> </li> </ul>
     # @option params [Array<String>] :port_ranges
-    #   <p>(SINGLE, GROUP, CHILD) The TCP port ranges that a consumer can use to access a resource configuration (for example: 1-65535). You can separate port ranges using commas (for example: 1,2,22-30).</p>
+    #   <p>(SINGLE, GROUP, CHILD, CIDR) The port ranges that a consumer can use to access a resource configuration (for example: 1-65535). You can separate port ranges using commas (for example: 1,2,22-30). To resolve DNS through a CIDR resource configuration, include port 53 in the port ranges.</p>
     # @option params [String] :protocol
-    #   <p>(SINGLE, GROUP) The protocol accepted by the resource configuration.</p>
+    #   <p>(SINGLE, GROUP, CIDR) The protocol accepted by the resource configuration. The default is <code>TCP</code>. <code>TCP_UDP</code> is supported only for CIDR resource configurations; specify it for a CIDR resource configuration to allow DNS resolution, which uses UDP.</p>
     # @option params [String] :resource_gateway_identifier
-    #   <p>(SINGLE, GROUP, ARN) The ID or ARN of the resource gateway used to connect to the resource configuration. For a child resource configuration, this value is inherited from the parent resource configuration.</p>
+    #   <p>(SINGLE, GROUP, ARN, CIDR) The ID or ARN of the resource gateway used to connect to the resource configuration. For a child resource configuration, this value is inherited from the parent resource configuration. For a CIDR resource configuration, the associated resource gateway must have its DNS resolution set to <code>IN_VPC</code> so that DNS queries resolve in the context of your VPC.</p>
     # @option params [String] :resource_configuration_group_identifier
     #   <p>(CHILD) The ID or ARN of the parent resource configuration of type <code>GROUP</code>. This is used to associate a child resource configuration with a group resource configuration.</p>
     # @option params [Types::ResourceConfigurationDefinition] :resource_configuration_definition
-    #   <p>Identifies the resource configuration in one of the following ways:</p> <ul> <li> <p> <b>Amazon Resource Name (ARN)</b> - Supported resource-types that are provisioned by Amazon Web Services services, such as RDS databases, can be identified by their ARN.</p> </li> <li> <p> <b>Domain name</b> - Any domain name that is publicly resolvable.</p> </li> <li> <p> <b>IP address</b> - For IPv4 and IPv6, only IP addresses in the VPC are supported.</p> </li> </ul>
+    #   <p>Identifies the resource configuration in one of the following ways:</p> <ul> <li> <p> <b>Amazon Resource Name (ARN)</b> - Supported resource-types that are provisioned by Amazon Web Services services, such as RDS databases, can be identified by their ARN.</p> </li> <li> <p> <b>Domain name</b> - Any domain name that is publicly resolvable.</p> </li> <li> <p> <b>IP address</b> - For IPv4 and IPv6, only IP addresses in the VPC are supported.</p> </li> <li> <p> <b>CIDR range</b> - For a resource configuration of type CIDR, specify a <code>cidrResource</code> with one or more <code>cidrRanges</code> (for example, <code>10.0.0.0/16</code>) that cover the IP addresses of the resources you want to make accessible. You can specify up to 10 ranges, using IPv4, IPv6, or both, and each range must include a prefix length. To represent your entire network, specify <code>0.0.0.0/0</code> (IPv4) or <code>::/0</code> (IPv6) as the only range. You can't use reserved ranges such as <code>169.254.0.0/16</code>, <code>100.64.0.0/10</code>, <code>224.0.0.0/4</code>, <code>fe80::/10</code>, or <code>ff00::/8</code>.</p> </li> </ul>
     # @option params [Boolean] :allow_association_to_shareable_service_network
     #   <p>(SINGLE, GROUP, ARN) Specifies whether the resource configuration can be associated with a sharable service network. The default is false.</p>
+    # @option params [String] :custom_domain_name
+    #   <p> A custom domain name for your resource configuration. Additionally, provide a DomainVerificationID to prove your ownership of a domain. </p>
+    # @option params [String] :group_domain
+    #   <p> (GROUP) The group domain for a group resource configuration. Any domains that you create for the child resource are subdomains of the group domain. Child resources inherit the verification status of the domain. </p>
+    # @option params [String] :domain_verification_identifier
+    #   <p> The domain verification ID of your verified custom domain name. If you don't provide an ID, you must configure the DNS settings yourself. </p>
     # @option params [String] :client_token
     #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you retry a request that completed successfully using the same client token and parameters, the retry succeeds without performing any actions. If the parameters aren't identical, the retry fails.</p>
     # @option params [Hash<String, String>] :tags
@@ -475,9 +481,9 @@ module Aws::VPCLattice
     # @example Request syntax with placeholder values
     #   params = {
     #     name: "ResourceConfigurationName", # required
-    #     type: "ResourceConfigurationType", # required
+    #     type: "GROUP" # One of: ["GROUP", "CHILD", "SINGLE", "ARN", "CIDR"], # required
     #     port_ranges: ["PortRange"],
-    #     protocol: "ProtocolType",
+    #     protocol: "TCP" # One of: ["TCP", "TCP_UDP"],
     #     resource_gateway_identifier: "ResourceGatewayIdentifier",
     #     resource_configuration_group_identifier: "ResourceConfigurationIdentifier",
     #     resource_configuration_definition: {
@@ -491,9 +497,15 @@ module Aws::VPCLattice
     #       },
     #       arn_resource: {
     #         arn: "WildcardArn"
+    #       },
+    #       cidr_resource: {
+    #         cidr_ranges: ["CidrRange"]
     #       }
     #     },
     #     allow_association_to_shareable_service_network: false,
+    #     custom_domain_name: "DomainName",
+    #     group_domain: "DomainName",
+    #     domain_verification_identifier: "DomainVerificationIdentifier",
     #     client_token: "ClientToken",
     #     tags: {
     #       "TagKey" => "TagValue"
@@ -509,9 +521,9 @@ module Aws::VPCLattice
     #     arn: "ResourceConfigurationArn",
     #     resource_gateway_id: "ResourceGatewayId",
     #     resource_configuration_group_id: "ResourceConfigurationId",
-    #     type: "ResourceConfigurationType",
+    #     type: "GROUP" # One of: ["GROUP", "CHILD", "SINGLE", "ARN", "CIDR"],
     #     port_ranges: ["PortRange"],
-    #     protocol: "ProtocolType",
+    #     protocol: "TCP" # One of: ["TCP", "TCP_UDP"],
     #     status: "ResourceConfigurationStatus",
     #     resource_configuration_definition: {
     #       # One of:
@@ -524,11 +536,18 @@ module Aws::VPCLattice
     #       },
     #       arn_resource: {
     #         arn: "WildcardArn"
+    #       },
+    #       cidr_resource: {
+    #         cidr_ranges: ["CidrRange"]
     #       }
     #     },
     #     allow_association_to_shareable_service_network: false,
     #     created_at: Time.now,
-    #     failure_reason: "String"
+    #     failure_reason: "String",
+    #     custom_domain_name: "DomainName",
+    #     domain_verification_id: "DomainVerificationId",
+    #     group_domain: "DomainName",
+    #     domain_verification_arn: "DomainVerificationArn"
     #   }
     # @return [Types::CreateResourceConfigurationResponse]
     def create_resource_configuration(params = {}, options = {})
@@ -552,6 +571,8 @@ module Aws::VPCLattice
     #   <p>A resource gateway can have IPv4, IPv6 or dualstack addresses. The IP address type of a resource gateway must be compatible with the subnets of the resource gateway and the IP address type of the resource, as described here: </p> <ul> <li> <p> <b>IPv4</b>Assign IPv4 addresses to your resource gateway network interfaces. This option is supported only if all selected subnets have IPv4 address ranges, and the resource also has an IPv4 address.</p> </li> <li> <p> <b>IPv6</b>Assign IPv6 addresses to your resource gateway network interfaces. This option is supported only if all selected subnets are IPv6 only subnets, and the resource also has an IPv6 address.</p> </li> <li> <p> <b>Dualstack</b>Assign both IPv4 and IPv6 addresses to your resource gateway network interfaces. This option is supported only if all selected subnets have both IPv4 and IPv6 address ranges, and the resource either has an IPv4 or IPv6 address.</p> </li> </ul> <p>The IP address type of the resource gateway is independent of the IP address type of the client or the VPC endpoint through which the resource is accessed.</p>
     # @option params [Integer] :ipv4_addresses_per_eni
     #   <p>The number of IPv4 addresses in each ENI for the resource gateway.</p>
+    # @option params [String] :resource_config_dns_resolution
+    #   <p>Indicates how DNS is resolved for resource configurations associated with this resource gateway. This value is set when you create the resource gateway and can't be changed afterward. The default is <code>PUBLIC</code>.</p> <ul> <li> <p> <code>IN_VPC</code> - DNS resolution occurs privately within the resource gateway's VPC. DNS queries for resources behind this resource gateway resolve using the DNS resolvers defined in the VPC's DHCP option sets. Use this when your resource domain names are hosted in private Route 53 hosted zones or on-premises DNS servers reachable from the VPC. A CIDR resource configuration requires a resource gateway that uses <code>IN_VPC</code>, and an <code>IN_VPC</code> resource gateway can't be used for ARN resource configurations, so a single resource gateway can't serve both ARN and CIDR resource configurations.</p> </li> <li> <p> <code>PUBLIC</code> - DNS resolution occurs against public DNS resolvers. DNS queries for resources behind this resource gateway resolve using standard public DNS. Use this when your resource domain names are publicly resolvable.</p> </li> </ul>
     # @option params [Hash<String, String>] :tags
     #   <p>The tags for the resource gateway.</p>
     # @example Request syntax with placeholder values
@@ -563,6 +584,7 @@ module Aws::VPCLattice
     #     security_group_ids: ["SecurityGroupId"],
     #     ip_address_type: "ResourceGatewayIpAddressType",
     #     ipv4_addresses_per_eni: 1,
+    #     resource_config_dns_resolution: "ResourceConfigDnsResolution",
     #     tags: {
     #       "TagKey" => "TagValue"
     #     }
@@ -580,7 +602,8 @@ module Aws::VPCLattice
     #     subnet_ids: ["SubnetId"],
     #     security_group_ids: ["SecurityGroupId"],
     #     ip_address_type: "ResourceGatewayIpAddressType",
-    #     ipv4_addresses_per_eni: 1
+    #     ipv4_addresses_per_eni: 1,
+    #     resource_config_dns_resolution: "ResourceConfigDnsResolution"
     #   }
     # @return [Types::CreateResourceGatewayResponse]
     def create_resource_gateway(params = {}, options = {})
@@ -727,6 +750,8 @@ module Aws::VPCLattice
     #   <p>The Amazon Resource Name (ARN) of the certificate.</p>
     # @option params [String] :auth_type
     #   <p>The type of IAM policy.</p> <ul> <li> <p> <code>NONE</code>: The resource does not use an IAM policy. This is the default.</p> </li> <li> <p> <code>AWS_IAM</code>: The resource uses an IAM policy. When this type is used, auth is enabled and an auth policy is required.</p> </li> </ul>
+    # @option params [Integer] :idle_timeout_seconds
+    #   <p>The amount of time, in seconds, that a connection can remain idle (no data sent) before VPC Lattice closes it. The valid range is 60 to 600 seconds. If you don't specify a value, the default is 60 seconds. This setting does not change the maximum connection duration of 10 minutes; connections are still closed when they reach that limit.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     client_token: "ClientToken",
@@ -736,7 +761,8 @@ module Aws::VPCLattice
     #     },
     #     custom_domain_name: "ServiceCustomDomainName",
     #     certificate_arn: "CertificateArn",
-    #     auth_type: "AuthType"
+    #     auth_type: "AuthType",
+    #     idle_timeout_seconds: 1
     #   }
     #   options = {}
     #   response = client.create_service(params, options)
@@ -750,6 +776,7 @@ module Aws::VPCLattice
     #     certificate_arn: "CertificateArn",
     #     status: "ServiceStatus",
     #     auth_type: "AuthType",
+    #     idle_timeout_seconds: 1,
     #     dns_entry: {
     #       domain_name: "String",
     #       hosted_zone_id: "String"
@@ -812,6 +839,8 @@ module Aws::VPCLattice
     #   <p>The ID of the resource configuration to associate with the service network.</p>
     # @option params [String] :service_network_identifier
     #   <p>The ID of the service network to associate with the resource configuration.</p>
+    # @option params [Boolean] :private_dns_enabled
+    #   <p> Indicates if private DNS is enabled for the service network resource association. </p>
     # @option params [Hash<String, String>] :tags
     #   <p>A key-value pair to associate with a resource.</p>
     # @example Request syntax with placeholder values
@@ -819,6 +848,7 @@ module Aws::VPCLattice
     #     client_token: "ClientToken",
     #     resource_configuration_identifier: "ResourceConfigurationIdentifier", # required
     #     service_network_identifier: "ServiceNetworkIdentifierWithoutRegex", # required
+    #     private_dns_enabled: false,
     #     tags: {
     #       "TagKey" => "TagValue"
     #     }
@@ -831,7 +861,8 @@ module Aws::VPCLattice
     #     id: "ServiceNetworkResourceAssociationId",
     #     arn: "ServiceNetworkResourceAssociationArn",
     #     status: "ServiceNetworkResourceAssociationStatus",
-    #     created_by: "AccountId"
+    #     created_by: "AccountId",
+    #     private_dns_enabled: false
     #   }
     # @return [Types::CreateServiceNetworkResourceAssociationResponse]
     def create_service_network_resource_association(params = {}, options = {})
@@ -887,18 +918,27 @@ module Aws::VPCLattice
     #   <p>The ID or ARN of the service network. You must use an ARN if the resources are in different accounts.</p>
     # @option params [String] :vpc_identifier
     #   <p>The ID of the VPC.</p>
+    # @option params [Boolean] :private_dns_enabled
+    #   <p> Indicates if private DNS is enabled for the VPC association. </p>
     # @option params [Array<String>] :security_group_ids
     #   <p>The IDs of the security groups. Security groups aren't added by default. You can add a security group to apply network level controls to control which resources in a VPC are allowed to access the service network and its services. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html">Control traffic to resources using security groups</a> in the <i>Amazon VPC User Guide</i>.</p>
     # @option params [Hash<String, String>] :tags
     #   <p>The tags for the association.</p>
+    # @option params [Types::DnsOptions] :dns_options
+    #   <p> DNS options for the service network VPC association. </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     client_token: "ClientToken",
-    #     service_network_identifier: "ServiceNetworkIdentifier", # required
+    #     service_network_identifier: "ServiceNetworkIdentifierWithoutRegex", # required
     #     vpc_identifier: "VpcId", # required
+    #     private_dns_enabled: false,
     #     security_group_ids: ["SecurityGroupId"],
     #     tags: {
     #       "TagKey" => "TagValue"
+    #     },
+    #     dns_options: {
+    #       private_dns_preference: "PrivateDnsPreference",
+    #       private_dns_specified_domains: ["PrivateDnsSpecifiedDomain"]
     #     }
     #   }
     #   options = {}
@@ -910,7 +950,12 @@ module Aws::VPCLattice
     #     status: "ServiceNetworkVpcAssociationStatus",
     #     arn: "ServiceNetworkVpcAssociationArn",
     #     created_by: "AccountId",
-    #     security_group_ids: ["SecurityGroupId"]
+    #     security_group_ids: ["SecurityGroupId"],
+    #     private_dns_enabled: false,
+    #     dns_options: {
+    #       private_dns_preference: "PrivateDnsPreference",
+    #       private_dns_specified_domains: ["PrivateDnsSpecifiedDomain"]
+    #     }
     #   }
     # @return [Types::CreateServiceNetworkVpcAssociationOutput]
     def create_service_network_vpc_association(params = {}, options = {})
@@ -1037,6 +1082,25 @@ module Aws::VPCLattice
     # @return [Types::DeleteAuthPolicyOutput]
     def delete_auth_policy(params = {}, options = {})
       request = build_request(:delete_auth_policy, params)
+      request.send_request(options)
+    end
+
+    # <p> Deletes the specified domain verification. </p>
+    # @param [Hash, Types::DeleteDomainVerificationRequest] params
+    # @option params [String] :domain_verification_identifier
+    #   <p> The ID of the domain verification to delete. </p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     domain_verification_identifier: "DomainVerificationIdentifier", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_domain_verification(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::DeleteDomainVerificationResponse]
+    def delete_domain_verification(params = {}, options = {})
+      request = build_request(:delete_domain_verification, params)
       request.send_request(options)
     end
 
@@ -1403,6 +1467,39 @@ module Aws::VPCLattice
       request.send_request(options)
     end
 
+    # <p> Retrieves information about a domain verification.ß </p>
+    # @param [Hash, Types::GetDomainVerificationRequest] params
+    # @option params [String] :domain_verification_identifier
+    #   <p> The ID or ARN of the domain verification to retrieve. </p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     domain_verification_identifier: "DomainVerificationIdentifier", # required
+    #   }
+    #   options = {}
+    #   response = client.get_domain_verification(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     id: "DomainVerificationId", # required
+    #     arn: "DomainVerificationArn", # required
+    #     domain_name: "DomainName", # required
+    #     status: "VerificationStatus", # required
+    #     txt_method_config: {
+    #       value: "String", # required
+    #       name: "String", # required
+    #     },
+    #     created_at: Time.now, # required
+    #     last_verified_time: Time.now,
+    #     tags: {
+    #       "TagKey" => "TagValue"
+    #     }
+    #   }
+    # @return [Types::GetDomainVerificationResponse]
+    def get_domain_verification(params = {}, options = {})
+      request = build_request(:get_domain_verification, params)
+      request.send_request(options)
+    end
+
     # <p>Retrieves information about the specified listener for the specified service.</p>
     # @param [Hash, Types::GetListenerInput] params
     # @option params [String] :service_identifier
@@ -1467,10 +1564,10 @@ module Aws::VPCLattice
     #     arn: "ResourceConfigurationArn",
     #     resource_gateway_id: "ResourceGatewayId",
     #     resource_configuration_group_id: "ResourceConfigurationId",
-    #     type: "ResourceConfigurationType",
+    #     type: "GROUP" # One of: ["GROUP", "CHILD", "SINGLE", "ARN", "CIDR"],
     #     allow_association_to_shareable_service_network: false,
     #     port_ranges: ["PortRange"],
-    #     protocol: "ProtocolType",
+    #     protocol: "TCP" # One of: ["TCP", "TCP_UDP"],
     #     custom_domain_name: "DomainName",
     #     status: "ResourceConfigurationStatus",
     #     resource_configuration_definition: {
@@ -1484,12 +1581,19 @@ module Aws::VPCLattice
     #       },
     #       arn_resource: {
     #         arn: "WildcardArn"
+    #       },
+    #       cidr_resource: {
+    #         cidr_ranges: ["CidrRange"]
     #       }
     #     },
     #     created_at: Time.now,
     #     amazon_managed: false,
     #     failure_reason: "String",
-    #     last_updated_at: Time.now
+    #     last_updated_at: Time.now,
+    #     domain_verification_id: "DomainVerificationId",
+    #     domain_verification_arn: "DomainVerificationArn",
+    #     domain_verification_status: "VerificationStatus",
+    #     group_domain: "DomainName"
     #   }
     # @return [Types::GetResourceConfigurationResponse]
     def get_resource_configuration(params = {}, options = {})
@@ -1516,9 +1620,12 @@ module Aws::VPCLattice
     #     status: "ResourceGatewayStatus",
     #     vpc_id: "VpcId",
     #     subnet_ids: ["SubnetId"],
+    #     service_managed: false,
+    #     managed_by: "String",
     #     security_group_ids: ["SecurityGroupId"],
     #     ip_address_type: "ResourceGatewayIpAddressType",
     #     ipv4_addresses_per_eni: 1,
+    #     resource_config_dns_resolution: "ResourceConfigDnsResolution",
     #     created_at: Time.now,
     #     last_updated_at: Time.now
     #   }
@@ -1648,6 +1755,7 @@ module Aws::VPCLattice
     #     certificate_arn: "CertificateArn",
     #     status: "ServiceStatus",
     #     auth_type: "AuthType",
+    #     idle_timeout_seconds: 1,
     #     failure_code: "FailureCode",
     #     failure_message: "FailureMessage"
     #   }
@@ -1719,11 +1827,13 @@ module Aws::VPCLattice
     #       domain_name: "String",
     #       hosted_zone_id: "String"
     #     },
+    #     private_dns_enabled: false,
     #     dns_entry: {
     #       domain_name: "String",
     #       hosted_zone_id: "String"
     #     },
-    #     is_managed_association: false
+    #     is_managed_association: false,
+    #     domain_verification_status: "VerificationStatus"
     #   }
     # @return [Types::GetServiceNetworkResourceAssociationResponse]
     def get_service_network_resource_association(params = {}, options = {})
@@ -1792,9 +1902,14 @@ module Aws::VPCLattice
     #     service_network_arn: "ServiceNetworkArn",
     #     vpc_id: "VpcId",
     #     security_group_ids: ["SecurityGroupId"],
+    #     private_dns_enabled: false,
     #     failure_message: "String",
     #     failure_code: "String",
-    #     last_updated_at: Time.now
+    #     last_updated_at: Time.now,
+    #     dns_options: {
+    #       private_dns_preference: "PrivateDnsPreference",
+    #       private_dns_specified_domains: ["PrivateDnsSpecifiedDomain"]
+    #     }
     #   }
     # @return [Types::GetServiceNetworkVpcAssociationOutput]
     def get_service_network_vpc_association(params = {}, options = {})
@@ -1894,6 +2009,47 @@ module Aws::VPCLattice
       request.send_request(options)
     end
 
+    # <p> Lists the domain verifications. </p>
+    # @param [Hash, Types::ListDomainVerificationsRequest] params
+    # @option params [Integer] :max_results
+    #   <p> The maximum number of results to return. </p>
+    # @option params [String] :next_token
+    #   <p> A pagination token for the next page of results. </p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     max_results: 1,
+    #     next_token: "NextToken"
+    #   }
+    #   options = {}
+    #   response = client.list_domain_verifications(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     items: [ # required
+    #       {
+    #         id: "DomainVerificationId", # required
+    #         arn: "DomainVerificationArn", # required
+    #         domain_name: "DomainName", # required
+    #         status: "VerificationStatus", # required
+    #         txt_method_config: {
+    #           value: "String", # required
+    #           name: "String", # required
+    #         },
+    #         created_at: Time.now, # required
+    #         last_verified_time: Time.now,
+    #         tags: {
+    #           "TagKey" => "TagValue"
+    #         }
+    #       }
+    #     ],
+    #     next_token: "NextToken"
+    #   }
+    # @return [Types::ListDomainVerificationsResponse]
+    def list_domain_verifications(params = {}, options = {})
+      request = build_request(:list_domain_verifications, params)
+      request.send_request(options)
+    end
+
     # <p>Lists the listeners for the specified service.</p>
     # @param [Hash, Types::ListListenersInput] params
     # @option params [String] :service_identifier
@@ -1938,6 +2094,8 @@ module Aws::VPCLattice
     #   <p>The ID of the resource gateway for the resource configuration.</p>
     # @option params [String] :resource_configuration_group_identifier
     #   <p>The ID of the resource configuration of type <code>Group</code>.</p>
+    # @option params [String] :domain_verification_identifier
+    #   <p> The domain verification ID. </p>
     # @option params [Integer] :max_results
     #   <p>The maximum page size.</p>
     # @option params [String] :next_token
@@ -1946,6 +2104,7 @@ module Aws::VPCLattice
     #   params = {
     #     resource_gateway_identifier: "ResourceGatewayIdentifier",
     #     resource_configuration_group_identifier: "ResourceConfigurationIdentifier",
+    #     domain_verification_identifier: "DomainVerificationIdentifier",
     #     max_results: 1,
     #     next_token: "NextToken"
     #   }
@@ -1961,11 +2120,14 @@ module Aws::VPCLattice
     #         arn: "ResourceConfigurationArn",
     #         resource_gateway_id: "ResourceGatewayId",
     #         resource_configuration_group_id: "ResourceConfigurationId",
-    #         type: "ResourceConfigurationType",
+    #         type: "GROUP" # One of: ["GROUP", "CHILD", "SINGLE", "ARN", "CIDR"],
     #         status: "ResourceConfigurationStatus",
     #         amazon_managed: false,
     #         created_at: Time.now,
-    #         last_updated_at: Time.now
+    #         last_updated_at: Time.now,
+    #         custom_domain_name: "DomainName",
+    #         domain_verification_id: "DomainVerificationId",
+    #         group_domain: "DomainName"
     #       }
     #     ],
     #     next_token: "NextToken"
@@ -2014,7 +2176,13 @@ module Aws::VPCLattice
     #         vpc_endpoint_id: "VpcEndpointId",
     #         vpc_endpoint_owner: "VpcEndpointOwner",
     #         created_by: "AccountId",
-    #         created_at: Time.now
+    #         created_at: Time.now,
+    #         payer_responsibility: [
+    #           {
+    #             scope: "ResourceGatewayCharges" # One of: ["ResourceGatewayCharges"],
+    #             payer_responsibility_type: "VpcEndpointAccount" # One of: ["VpcEndpointAccount", "ResourceGatewayAccount"]
+    #           }
+    #         ]
     #       }
     #     ],
     #     next_token: "NextToken"
@@ -2052,6 +2220,7 @@ module Aws::VPCLattice
     #         security_group_ids: ["SecurityGroupId"],
     #         ip_address_type: "ResourceGatewayIpAddressType",
     #         ipv4_addresses_per_eni: 1,
+    #         resource_config_dns_resolution: "ResourceConfigDnsResolution",
     #         created_at: Time.now,
     #         last_updated_at: Time.now
     #       }
@@ -2152,7 +2321,8 @@ module Aws::VPCLattice
     #           hosted_zone_id: "String"
     #         },
     #         is_managed_association: false,
-    #         failure_code: "String"
+    #         failure_code: "String",
+    #         private_dns_enabled: false
     #       }
     #     ],
     #     next_token: "NextToken"
@@ -2245,6 +2415,11 @@ module Aws::VPCLattice
     #         service_network_id: "ServiceNetworkId",
     #         service_network_name: "ServiceNetworkName",
     #         service_network_arn: "ServiceNetworkArn",
+    #         private_dns_enabled: false,
+    #         dns_options: {
+    #           private_dns_preference: "PrivateDnsPreference",
+    #           private_dns_specified_domains: ["PrivateDnsSpecifiedDomain"]
+    #         },
     #         vpc_id: "VpcId",
     #         last_updated_at: Time.now
     #       }
@@ -2572,6 +2747,42 @@ module Aws::VPCLattice
       request.send_request(options)
     end
 
+    # <p> Starts the domain verification process for a custom domain name. </p>
+    # @param [Hash, Types::StartDomainVerificationRequest] params
+    # @option params [String] :client_token
+    #   <p> A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you retry a request that completed successfully using the same client token and parameters, the retry succeeds without performing any actions. If the parameters aren't identical, the retry fails. </p>
+    # @option params [String] :domain_name
+    #   <p> The domain name to verify ownership for. </p>
+    # @option params [Hash<String, String>] :tags
+    #   <p> The tags for the domain verification. </p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     client_token: "ClientToken",
+    #     domain_name: "DomainName", # required
+    #     tags: {
+    #       "TagKey" => "TagValue"
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.start_domain_verification(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     id: "DomainVerificationId", # required
+    #     arn: "DomainVerificationArn", # required
+    #     domain_name: "DomainName", # required
+    #     status: "VerificationStatus", # required
+    #     txt_method_config: {
+    #       value: "String", # required
+    #       name: "String", # required
+    #     }
+    #   }
+    # @return [Types::StartDomainVerificationResponse]
+    def start_domain_verification(params = {}, options = {})
+      request = build_request(:start_domain_verification, params)
+      request.send_request(options)
+    end
+
     # <p>Adds the specified tags to the specified resource.</p>
     # @param [Hash, Types::TagResourceInput] params
     # @option params [String] :resource_arn
@@ -2730,6 +2941,9 @@ module Aws::VPCLattice
     #       },
     #       arn_resource: {
     #         arn: "WildcardArn"
+    #       },
+    #       cidr_resource: {
+    #         cidr_ranges: ["CidrRange"]
     #       }
     #     },
     #     allow_association_to_shareable_service_network: false,
@@ -2745,10 +2959,10 @@ module Aws::VPCLattice
     #     arn: "ResourceConfigurationArn",
     #     resource_gateway_id: "ResourceGatewayId",
     #     resource_configuration_group_id: "ResourceConfigurationId",
-    #     type: "ResourceConfigurationType",
+    #     type: "GROUP" # One of: ["GROUP", "CHILD", "SINGLE", "ARN", "CIDR"],
     #     port_ranges: ["PortRange"],
     #     allow_association_to_shareable_service_network: false,
-    #     protocol: "ProtocolType",
+    #     protocol: "TCP" # One of: ["TCP", "TCP_UDP"],
     #     status: "ResourceConfigurationStatus",
     #     resource_configuration_definition: {
     #       # One of:
@@ -2761,6 +2975,9 @@ module Aws::VPCLattice
     #       },
     #       arn_resource: {
     #         arn: "WildcardArn"
+    #       },
+    #       cidr_resource: {
+    #         cidr_ranges: ["CidrRange"]
     #       }
     #     }
     #   }
@@ -2927,11 +3144,14 @@ module Aws::VPCLattice
     #   <p>The Amazon Resource Name (ARN) of the certificate.</p>
     # @option params [String] :auth_type
     #   <p>The type of IAM policy.</p> <ul> <li> <p> <code>NONE</code>: The resource does not use an IAM policy. This is the default.</p> </li> <li> <p> <code>AWS_IAM</code>: The resource uses an IAM policy. When this type is used, auth is enabled and an auth policy is required.</p> </li> </ul>
+    # @option params [Integer] :idle_timeout_seconds
+    #   <p>The amount of time, in seconds, that a connection can remain idle (no data sent) before VPC Lattice closes it. The valid range is 60 to 600 seconds. If you don't specify a value, the default is 60 seconds. This setting does not change the maximum connection duration of 10 minutes; connections are still closed when they reach that limit.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     service_identifier: "ServiceIdentifier", # required
     #     certificate_arn: "CertificateArn",
-    #     auth_type: "AuthType"
+    #     auth_type: "AuthType",
+    #     idle_timeout_seconds: 1
     #   }
     #   options = {}
     #   response = client.update_service(params, options)
@@ -2943,7 +3163,8 @@ module Aws::VPCLattice
     #     name: "ServiceName",
     #     custom_domain_name: "ServiceCustomDomainName",
     #     certificate_arn: "CertificateArn",
-    #     auth_type: "AuthType"
+    #     auth_type: "AuthType",
+    #     idle_timeout_seconds: 1
     #   }
     # @return [Types::UpdateServiceOutput]
     def update_service(params = {}, options = {})
@@ -2984,10 +3205,19 @@ module Aws::VPCLattice
     #   <p>The ID or ARN of the association.</p>
     # @option params [Array<String>] :security_group_ids
     #   <p>The IDs of the security groups.</p>
+    # @option params [Boolean] :private_dns_enabled
+    #   <p> Indicates if private DNS is enabled for the VPC association. </p>
+    # @option params [Types::DnsOptions] :dns_options
+    #   <p> DNS options for the service network VPC association. </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     service_network_vpc_association_identifier: "ServiceNetworkVpcAssociationIdentifier", # required
-    #     security_group_ids: ["SecurityGroupId"], # required
+    #     security_group_ids: ["SecurityGroupId"],
+    #     private_dns_enabled: false,
+    #     dns_options: {
+    #       private_dns_preference: "PrivateDnsPreference",
+    #       private_dns_specified_domains: ["PrivateDnsSpecifiedDomain"]
+    #     }
     #   }
     #   options = {}
     #   response = client.update_service_network_vpc_association(params, options)
@@ -2998,7 +3228,12 @@ module Aws::VPCLattice
     #     arn: "ServiceNetworkVpcAssociationArn",
     #     status: "ServiceNetworkVpcAssociationStatus",
     #     created_by: "AccountId",
-    #     security_group_ids: ["SecurityGroupId"]
+    #     security_group_ids: ["SecurityGroupId"],
+    #     private_dns_enabled: false,
+    #     dns_options: {
+    #       private_dns_preference: "PrivateDnsPreference",
+    #       private_dns_specified_domains: ["PrivateDnsSpecifiedDomain"]
+    #     }
     #   }
     # @return [Types::UpdateServiceNetworkVpcAssociationOutput]
     def update_service_network_vpc_association(params = {}, options = {})

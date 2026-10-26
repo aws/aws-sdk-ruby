@@ -12,9 +12,11 @@ module Aws::Account
     AccountCreatedDate = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.account#AccountCreatedDate", name: "AccountCreatedDate", traits: {"smithy.api#timestampFormat" => "date-time"})
     AccountId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.account#AccountId", name: "AccountId", traits: {"smithy.api#pattern" => "^\\d{12}$"})
     AccountName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.account#AccountName", name: "AccountName", traits: {"smithy.api#length" => {"min" => 1, "max" => 50}, "smithy.api#pattern" => "^[ -;=?-~]+$", "smithy.api#sensitive" => {}})
+    AccountState = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.account#AccountState", name: "AccountState", traits: {"smithy.api#enum" => [{"value" => "PENDING_ACTIVATION", "name" => "PENDING_ACTIVATION"}, {"value" => "ACTIVE", "name" => "ACTIVE"}, {"value" => "SUSPENDED", "name" => "SUSPENDED"}, {"value" => "CLOSED", "name" => "CLOSED"}]})
     AddressLine = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.account#AddressLine", name: "AddressLine", traits: {"smithy.api#length" => {"min" => 1, "max" => 60}, "smithy.api#sensitive" => {}})
     AlternateContact = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.account#AlternateContact", name: "AlternateContact")
     AlternateContactType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.account#AlternateContactType", name: "AlternateContactType", traits: {"smithy.api#enum" => [{"value" => "BILLING", "name" => "BILLING"}, {"value" => "OPERATIONS", "name" => "OPERATIONS"}, {"value" => "SECURITY", "name" => "SECURITY"}]})
+    AwsAccountState = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.account#AwsAccountState", name: "AwsAccountState", traits: {"smithy.api#enum" => [{"value" => "PENDING_ACTIVATION", "name" => "PENDING_ACTIVATION"}, {"value" => "ACTIVE", "name" => "ACTIVE"}, {"value" => "SUSPENDED", "name" => "SUSPENDED"}, {"value" => "CLOSED", "name" => "CLOSED"}]})
     City = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.account#City", name: "City", traits: {"smithy.api#length" => {"min" => 1, "max" => 50}, "smithy.api#sensitive" => {}})
     CompanyName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.account#CompanyName", name: "CompanyName", traits: {"smithy.api#length" => {"min" => 1, "max" => 50}, "smithy.api#sensitive" => {}})
     ConflictException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.account#ConflictException", name: "ConflictException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 409})
@@ -33,8 +35,12 @@ module Aws::Account
     GetAlternateContactResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.account#GetAlternateContactResponse", name: "GetAlternateContactResponse")
     GetContactInformationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.account#GetContactInformationRequest", name: "GetContactInformationRequest")
     GetContactInformationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.account#GetContactInformationResponse", name: "GetContactInformationResponse")
+    GetGovCloudAccountInformationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.account#GetGovCloudAccountInformationRequest", name: "GetGovCloudAccountInformationRequest")
+    GetGovCloudAccountInformationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.account#GetGovCloudAccountInformationResponse", name: "GetGovCloudAccountInformationResponse")
     GetPrimaryEmailRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.account#GetPrimaryEmailRequest", name: "GetPrimaryEmailRequest")
     GetPrimaryEmailResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.account#GetPrimaryEmailResponse", name: "GetPrimaryEmailResponse")
+    GetPrimaryEmailUpdateStatusRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.account#GetPrimaryEmailUpdateStatusRequest", name: "GetPrimaryEmailUpdateStatusRequest")
+    GetPrimaryEmailUpdateStatusResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.account#GetPrimaryEmailUpdateStatusResponse", name: "GetPrimaryEmailUpdateStatusResponse")
     GetRegionOptStatusRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.account#GetRegionOptStatusRequest", name: "GetRegionOptStatusRequest")
     GetRegionOptStatusResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.account#GetRegionOptStatusResponse", name: "GetRegionOptStatusResponse")
     InternalServerException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.account#InternalServerException", name: "InternalServerException", traits: {"smithy.api#error" => "server", "smithy.api#httpError" => 500, "smithy.api#retryable" => {}})
@@ -43,9 +49,10 @@ module Aws::Account
     Name = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.account#Name", name: "Name", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#sensitive" => {}})
     Otp = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.account#Otp", name: "Otp", traits: {"smithy.api#pattern" => "^[a-zA-Z0-9]{6}$", "smithy.api#sensitive" => {}})
     PhoneNumber = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.account#PhoneNumber", name: "PhoneNumber", traits: {"smithy.api#length" => {"min" => 1, "max" => 25}, "smithy.api#pattern" => "^[\\s0-9()+-]+$", "smithy.api#sensitive" => {}})
+    PhoneNumberVerificationStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.account#PhoneNumberVerificationStatus", name: "PhoneNumberVerificationStatus", traits: {"smithy.api#enum" => [{"value" => "PENDING", "name" => "PENDING"}, {"value" => "VERIFIED", "name" => "VERIFIED"}, {"value" => "UNVERIFIED", "name" => "UNVERIFIED"}, {"value" => "NOT_SUPPORTED", "name" => "NOT_SUPPORTED"}]})
     PostalCode = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.account#PostalCode", name: "PostalCode", traits: {"smithy.api#length" => {"min" => 1, "max" => 20}, "smithy.api#sensitive" => {}})
     PrimaryEmailAddress = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.account#PrimaryEmailAddress", name: "PrimaryEmailAddress", traits: {"smithy.api#length" => {"min" => 5, "max" => 64}, "smithy.api#sensitive" => {}})
-    PrimaryEmailUpdateStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.account#PrimaryEmailUpdateStatus", name: "PrimaryEmailUpdateStatus", traits: {"smithy.api#enum" => [{"value" => "PENDING", "name" => "PENDING"}, {"value" => "ACCEPTED", "name" => "ACCEPTED"}]})
+    PrimaryEmailUpdateStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.account#PrimaryEmailUpdateStatus", name: "PrimaryEmailUpdateStatus", traits: {"smithy.api#enum" => [{"value" => "PENDING", "name" => "PENDING"}, {"value" => "ACCEPTED", "name" => "ACCEPTED"}, {"value" => "COMPLETED", "name" => "COMPLETED"}, {"value" => "FAILED", "name" => "FAILED"}]})
     PutAccountNameRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.account#PutAccountNameRequest", name: "PutAccountNameRequest")
     PutAlternateContactRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.account#PutAlternateContactRequest", name: "PutAlternateContactRequest")
     PutContactInformationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.account#PutContactInformationRequest", name: "PutContactInformationRequest")
@@ -55,6 +62,9 @@ module Aws::Account
     RegionOptStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.account#RegionOptStatus", name: "RegionOptStatus", traits: {"smithy.api#enum" => [{"value" => "ENABLED", "name" => "ENABLED"}, {"value" => "ENABLING", "name" => "ENABLING"}, {"value" => "DISABLING", "name" => "DISABLING"}, {"value" => "DISABLED", "name" => "DISABLED"}, {"value" => "ENABLED_BY_DEFAULT", "name" => "ENABLED_BY_DEFAULT"}]})
     RegionOptStatusList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.account#RegionOptStatusList", name: "RegionOptStatusList")
     ResourceNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.account#ResourceNotFoundException", name: "ResourceNotFoundException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 404})
+    ResourceUnavailableException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.account#ResourceUnavailableException", name: "ResourceUnavailableException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 424})
+    SendPhoneNumberVerificationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.account#SendPhoneNumberVerificationRequest", name: "SendPhoneNumberVerificationRequest")
+    SendPhoneNumberVerificationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.account#SendPhoneNumberVerificationResponse", name: "SendPhoneNumberVerificationResponse")
     SensitiveString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.account#SensitiveString", name: "SensitiveString", traits: {"smithy.api#sensitive" => {}})
     StartPrimaryEmailUpdateRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.account#StartPrimaryEmailUpdateRequest", name: "StartPrimaryEmailUpdateRequest")
     StartPrimaryEmailUpdateResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.account#StartPrimaryEmailUpdateResponse", name: "StartPrimaryEmailUpdateResponse")
@@ -65,6 +75,8 @@ module Aws::Account
     ValidationExceptionField = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.account#ValidationExceptionField", name: "ValidationExceptionField")
     ValidationExceptionFieldList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.account#ValidationExceptionFieldList", name: "ValidationExceptionFieldList")
     ValidationExceptionReason = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.account#ValidationExceptionReason", name: "ValidationExceptionReason", traits: {"smithy.api#enum" => [{"value" => "invalidRegionOptTarget", "name" => "INVALID_REGION_OPT_TARGET"}, {"value" => "fieldValidationFailed", "name" => "FIELD_VALIDATION_FAILED"}]})
+    VerifyPhoneNumberRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.account#VerifyPhoneNumberRequest", name: "VerifyPhoneNumberRequest")
+    VerifyPhoneNumberResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.account#VerifyPhoneNumberResponse", name: "VerifyPhoneNumberResponse")
     WebsiteUrl = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.account#WebsiteUrl", name: "WebsiteUrl", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#sensitive" => {}})
 
     AcceptPrimaryEmailUpdateRequest.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "AccountId", traits: {"smithy.api#required" => {}}))
@@ -112,6 +124,7 @@ module Aws::Account
     GetAccountInformationResponse.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "AccountId"))
     GetAccountInformationResponse.add_member(:account_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountName, name: "AccountName"))
     GetAccountInformationResponse.add_member(:account_created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountCreatedDate, name: "AccountCreatedDate"))
+    GetAccountInformationResponse.add_member(:account_state, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountState, name: "AccountState"))
     GetAccountInformationResponse.type = Types::GetAccountInformationResponse
     GetAlternateContactRequest.add_member(:alternate_contact_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AlternateContactType, name: "AlternateContactType", traits: {"smithy.api#required" => {}}))
     GetAlternateContactRequest.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "AccountId"))
@@ -121,11 +134,22 @@ module Aws::Account
     GetContactInformationRequest.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "AccountId"))
     GetContactInformationRequest.type = Types::GetContactInformationRequest
     GetContactInformationResponse.add_member(:contact_information, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactInformation, name: "ContactInformation"))
+    GetContactInformationResponse.add_member(:verification_status, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberVerificationStatus, name: "VerificationStatus"))
     GetContactInformationResponse.type = Types::GetContactInformationResponse
+    GetGovCloudAccountInformationRequest.add_member(:standard_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "StandardAccountId"))
+    GetGovCloudAccountInformationRequest.type = Types::GetGovCloudAccountInformationRequest
+    GetGovCloudAccountInformationResponse.add_member(:gov_cloud_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "GovCloudAccountId", traits: {"smithy.api#required" => {}}))
+    GetGovCloudAccountInformationResponse.add_member(:account_state, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAccountState, name: "AccountState", traits: {"smithy.api#required" => {}}))
+    GetGovCloudAccountInformationResponse.type = Types::GetGovCloudAccountInformationResponse
     GetPrimaryEmailRequest.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "AccountId", traits: {"smithy.api#required" => {}}))
     GetPrimaryEmailRequest.type = Types::GetPrimaryEmailRequest
     GetPrimaryEmailResponse.add_member(:primary_email, ::Smithy::Schema::Shapes::MemberShape.new(target: PrimaryEmailAddress, name: "PrimaryEmail"))
     GetPrimaryEmailResponse.type = Types::GetPrimaryEmailResponse
+    GetPrimaryEmailUpdateStatusRequest.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "AccountId"))
+    GetPrimaryEmailUpdateStatusRequest.type = Types::GetPrimaryEmailUpdateStatusRequest
+    GetPrimaryEmailUpdateStatusResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: PrimaryEmailUpdateStatus, name: "Status", traits: {"smithy.api#required" => {}}))
+    GetPrimaryEmailUpdateStatusResponse.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "UpdatedAt"))
+    GetPrimaryEmailUpdateStatusResponse.type = Types::GetPrimaryEmailUpdateStatusResponse
     GetRegionOptStatusRequest.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "AccountId"))
     GetRegionOptStatusRequest.add_member(:region_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionName, name: "RegionName", traits: {"smithy.api#required" => {}}))
     GetRegionOptStatusRequest.type = Types::GetRegionOptStatusRequest
@@ -164,6 +188,13 @@ module Aws::Account
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.add_member(:error_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "errorType", traits: {"smithy.api#httpHeader" => "x-amzn-ErrorType"}))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
+    ResourceUnavailableException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
+    ResourceUnavailableException.add_member(:error_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "errorType", traits: {"smithy.api#httpHeader" => "x-amzn-ErrorType"}))
+    ResourceUnavailableException.type = Types::ResourceUnavailableException
+    SendPhoneNumberVerificationRequest.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "AccountId"))
+    SendPhoneNumberVerificationRequest.type = Types::SendPhoneNumberVerificationRequest
+    SendPhoneNumberVerificationResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberVerificationStatus, name: "Status"))
+    SendPhoneNumberVerificationResponse.type = Types::SendPhoneNumberVerificationResponse
     StartPrimaryEmailUpdateRequest.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "AccountId", traits: {"smithy.api#required" => {}}))
     StartPrimaryEmailUpdateRequest.add_member(:primary_email, ::Smithy::Schema::Shapes::MemberShape.new(target: PrimaryEmailAddress, name: "PrimaryEmail", traits: {"smithy.api#required" => {}}))
     StartPrimaryEmailUpdateRequest.type = Types::StartPrimaryEmailUpdateRequest
@@ -180,12 +211,17 @@ module Aws::Account
     ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "message", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
     ValidationExceptionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member"))
+    VerifyPhoneNumberRequest.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "AccountId"))
+    VerifyPhoneNumberRequest.add_member(:otp, ::Smithy::Schema::Shapes::MemberShape.new(target: Otp, name: "Otp", traits: {"smithy.api#required" => {}}))
+    VerifyPhoneNumberRequest.type = Types::VerifyPhoneNumberRequest
+    VerifyPhoneNumberResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberVerificationStatus, name: "Status"))
+    VerifyPhoneNumberResponse.type = Types::VerifyPhoneNumberResponse
 
     Account = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.account#Account"
       service.name = "Account"
       service.version = "2021-02-01"
-      service.traits = {"aws.api#service" => {"sdkId" => "Account", "arnNamespace" => "account", "cloudTrailEventSource" => "CLOUDTRAIL_EVENT_SOURCE"}, "aws.auth#sigv4" => {"name" => "account"}, "aws.endpoints#standardPartitionalEndpoints" => {"endpointPatternType" => "service_region_dnsSuffix"}, "aws.protocols#restJson1" => {}, "smithy.api#cors" => {}, "smithy.api#suppress" => ["EventSource"], "smithy.api#title" => "AWS Account"}
+      service.traits = {"aws.api#service" => {"sdkId" => "Account", "arnNamespace" => "account", "cloudTrailEventSource" => "CLOUDTRAIL_EVENT_SOURCE"}, "aws.auth#sigv4" => {"name" => "account"}, "aws.endpoints#standardPartitionalEndpoints" => {"endpointPatternType" => "service_region_dnsSuffix"}, "aws.protocols#restJson1" => {}, "smithy.api#cors" => {}, "smithy.api#suppress" => ["EventSource"], "smithy.api#title" => "AWS Account", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}, "Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://account-fips.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dualStackDnsSuffix}", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "{PartitionResult#implicitGlobalRegion}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://account-fips.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dnsSuffix}", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "{PartitionResult#implicitGlobalRegion}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://account.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dualStackDnsSuffix}", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "{PartitionResult#implicitGlobalRegion}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://account.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dnsSuffix}", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "{PartitionResult#implicitGlobalRegion}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
       service.add_operation(:accept_primary_email_update, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.account#AcceptPrimaryEmailUpdate"
         operation.name = "AcceptPrimaryEmailUpdate"
@@ -270,6 +306,19 @@ module Aws::Account
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/getContactInformation", "method" => "POST", "code" => 200}, "smithy.api#readonly" => {}, "smithy.api#suppress" => ["HttpMethodSemantics"]}
       end)
+      service.add_operation(:get_gov_cloud_account_information, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.account#GetGovCloudAccountInformation"
+        operation.name = "GetGovCloudAccountInformation"
+        operation.input = GetGovCloudAccountInformationRequest
+        operation.output = GetGovCloudAccountInformationResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ResourceUnavailableException
+        operation.errors << TooManyRequestsException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"uri" => "/getGovCloudAccountInformation", "method" => "POST", "code" => 200}, "smithy.api#readonly" => {}}
+      end)
       service.add_operation(:get_primary_email, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.account#GetPrimaryEmail"
         operation.name = "GetPrimaryEmail"
@@ -281,6 +330,18 @@ module Aws::Account
         operation.errors << TooManyRequestsException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/getPrimaryEmail", "method" => "POST", "code" => 200}, "smithy.api#readonly" => {}, "smithy.api#suppress" => ["HttpMethodSemantics"]}
+      end)
+      service.add_operation(:get_primary_email_update_status, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.account#GetPrimaryEmailUpdateStatus"
+        operation.name = "GetPrimaryEmailUpdateStatus"
+        operation.input = GetPrimaryEmailUpdateStatusRequest
+        operation.output = GetPrimaryEmailUpdateStatusResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"uri" => "/getPrimaryEmailUpdateStatus", "method" => "POST", "code" => 200}, "smithy.api#readonly" => {}, "smithy.api#suppress" => ["HttpMethodSemantics"]}
       end)
       service.add_operation(:get_region_opt_status, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.account#GetRegionOptStatus"
@@ -338,6 +399,19 @@ module Aws::Account
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/putContactInformation", "method" => "POST", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
+      service.add_operation(:send_phone_number_verification, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.account#SendPhoneNumberVerification"
+        operation.name = "SendPhoneNumberVerification"
+        operation.input = SendPhoneNumberVerificationRequest
+        operation.output = SendPhoneNumberVerificationResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"uri" => "/sendPhoneNumberVerification", "method" => "POST", "code" => 200}}
+      end)
       service.add_operation(:start_primary_email_update, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.account#StartPrimaryEmailUpdate"
         operation.name = "StartPrimaryEmailUpdate"
@@ -350,6 +424,19 @@ module Aws::Account
         operation.errors << TooManyRequestsException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/startPrimaryEmailUpdate", "method" => "POST", "code" => 200}}
+      end)
+      service.add_operation(:verify_phone_number, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.account#VerifyPhoneNumber"
+        operation.name = "VerifyPhoneNumber"
+        operation.input = VerifyPhoneNumberRequest
+        operation.output = VerifyPhoneNumberResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"uri" => "/verifyPhoneNumber", "method" => "POST", "code" => 200}}
       end)
     end
 

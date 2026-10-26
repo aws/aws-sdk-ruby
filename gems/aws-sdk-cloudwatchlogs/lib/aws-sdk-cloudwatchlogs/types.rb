@@ -94,6 +94,26 @@ module Aws::CloudWatchLogs
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Contains an aggregate summary of log groups grouped by data source characteristics,
+    #       including the count of log groups and their grouping identifiers.</p>
+    # @!attribute log_group_count
+    #   <p>The number of log groups in this aggregate summary group.</p>
+    #   @return [Integer]
+    # @!attribute grouping_identifiers
+    #   <p>An array of key-value pairs that identify the data source characteristics used to group
+    #         the log groups.</p>
+    #            <p>The size and content of this array depends on the <code>groupBy</code> parameter specified
+    #         in the request.</p>
+    #   @return [Array<Types::GroupingIdentifier>]
+    class AggregateLogGroupSummary < Struct.new(
+      nil,
+      :log_group_count,
+      :grouping_identifiers,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>This structure represents one anomaly that has been found by a logs anomaly
     #       detector.</p>
     #          <p>For more information about patterns and anomalies, see <a href="https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateLogAnomalyDetector.html">CreateLogAnomalyDetector</a>. </p>
@@ -312,6 +332,35 @@ module Aws::CloudWatchLogs
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute integration_arn
+    #   <p>The Amazon Resource Name (ARN) of the S3 Table Integration to associate the data source
+    #         with.</p>
+    #   @return [String]
+    # @!attribute data_source
+    #   <p>The data source to associate with the S3 Table Integration. Contains the name and type of
+    #         the data source.</p>
+    #   @return [Types::DataSource]
+    class AssociateSourceToS3TableIntegrationRequest < Struct.new(
+      nil,
+      :integration_arn,
+      :data_source,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute identifier
+    #   <p>The unique identifier for the association between the data source and S3 Table
+    #         Integration.</p>
+    #   @return [String]
+    class AssociateSourceToS3TableIntegrationResponse < Struct.new(
+      nil,
+      :identifier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The <code>CSV</code> processor parses comma-separated values (CSV) from the log events
     #       into columns.</p>
     #          <p>For more information about this processor including examples, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html#CloudWatch-Logs-Transformation-csv"> csv</a> in the <i>CloudWatch Logs User Guide</i>.</p>
@@ -333,12 +382,17 @@ module Aws::CloudWatchLogs
     #   <p>The path to the field in the log event that has the comma separated values to be parsed.
     #         If you omit this value, the whole log message is processed.</p>
     #   @return [String]
+    # @!attribute destination
+    #   <p>The path to the parent field to put transformed key value pairs under.
+    #         If you omit this value, the key value pairs will be placed under the root node.</p>
+    #   @return [String]
     class CSV < Struct.new(
       nil,
       :quote_character,
       :delimiter,
       :columns,
       :source,
+      :destination,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -350,6 +404,44 @@ module Aws::CloudWatchLogs
     class CancelExportTaskRequest < Struct.new(
       nil,
       :task_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute import_id
+    #   <p>The ID of the import task to cancel.</p>
+    #   @return [String]
+    class CancelImportTaskRequest < Struct.new(
+      nil,
+      :import_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute import_id
+    #   <p>The ID of the cancelled import task.</p>
+    #   @return [String]
+    # @!attribute import_statistics
+    #   <p>Statistics about the import progress at the time of cancellation.</p>
+    #   @return [Types::ImportStatistics]
+    # @!attribute import_status
+    #   <p>The final status of the import task. This will be set to CANCELLED.</p>
+    #   @return [String]
+    # @!attribute creation_time
+    #   <p>The timestamp when the import task was created, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.</p>
+    #   @return [Integer]
+    # @!attribute last_updated_time
+    #   <p>The timestamp when the import task was cancelled, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.</p>
+    #   @return [Integer]
+    class CancelImportTaskResponse < Struct.new(
+      nil,
+      :import_id,
+      :import_statistics,
+      :import_status,
+      :creation_time,
+      :last_updated_time,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -397,6 +489,14 @@ module Aws::CloudWatchLogs
     #   <p>The list of variable fields that can be used in the suffix path of a delivery that
     #         delivers to an S3 bucket.</p>
     #   @return [Array<String>]
+    # @!attribute delivery_source_configuration
+    #   <p>The schema of the delivery source configuration that is available for this log type.
+    #         Each element describes a configuration that can be set when calling <a href="https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliverySource.html">PutDeliverySource</a>, including the configuration name, type, and default value.</p>
+    #   @return [Array<Types::DeliverySourceConfigurationSchema>]
+    # @!attribute s3_tables_integration
+    #   <p>The S3 Tables integration configuration for this configuration template, including the
+    #         datasource name and type.</p>
+    #   @return [Types::S3TablesIntegration]
     class ConfigurationTemplate < Struct.new(
       nil,
       :service,
@@ -409,6 +509,8 @@ module Aws::CloudWatchLogs
       :allowed_action_for_allow_vended_logs_delivery_for_resource,
       :allowed_field_delimiters,
       :allowed_suffix_path_fields,
+      :delivery_source_configuration,
+      :s3_tables_integration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -597,6 +699,45 @@ module Aws::CloudWatchLogs
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute import_source_arn
+    #   <p>The ARN of the source to import from.</p>
+    #   @return [String]
+    # @!attribute import_role_arn
+    #   <p>The ARN of the IAM role that grants CloudWatch Logs permission to import from the CloudTrail Lake Event Data Store.</p>
+    #   @return [String]
+    # @!attribute import_filter
+    #   <p>Optional filters to constrain the import by CloudTrail event time. Times are specified in Unix timestamp milliseconds.
+    #         The range of data being imported must be within the specified source's retention period.</p>
+    #   @return [Types::ImportFilter]
+    class CreateImportTaskRequest < Struct.new(
+      nil,
+      :import_source_arn,
+      :import_role_arn,
+      :import_filter,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute import_id
+    #   <p>A unique identifier for the import task.</p>
+    #   @return [String]
+    # @!attribute import_destination_arn
+    #   <p>The ARN of the CloudWatch Logs log group created as the destination for the imported events.</p>
+    #   @return [String]
+    # @!attribute creation_time
+    #   <p>The timestamp when the import task was created, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.</p>
+    #   @return [Integer]
+    class CreateImportTaskResponse < Struct.new(
+      nil,
+      :import_id,
+      :import_destination_arn,
+      :creation_time,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute log_group_arn_list
     #   <p>An array containing the ARN of the log group that this anomaly detector will watch. You
     #         can specify only one log group ARN.</p>
@@ -707,12 +848,18 @@ module Aws::CloudWatchLogs
     #            <p>For details about the features supported by each class, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch_Logs_Log_Classes.html">Log classes</a>
     #            </p>
     #   @return [String]
+    # @!attribute deletion_protection_enabled
+    #   <p>Use this parameter to enable deletion protection for the new log group. When enabled on
+    #         a log group, deletion protection blocks all deletion operations until it is explicitly
+    #         disabled. By default log groups are created without deletion protection enabled.</p>
+    #   @return [Boolean]
     class CreateLogGroupRequest < Struct.new(
       nil,
       :log_group_name,
       :kms_key_id,
       :tags,
       :log_group_class,
+      :deletion_protection_enabled,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -733,6 +880,166 @@ module Aws::CloudWatchLogs
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute lookup_table_name
+    #   <p>The name of the lookup table. The name must be unique within your account and Region.
+    #         The name can contain only alphanumeric characters and underscores, and can be up to
+    #         256 characters long.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>A description of the lookup table. The description can be up to 1024 characters
+    #         long.</p>
+    #   @return [String]
+    # @!attribute table_body
+    #   <p>The CSV content of the lookup table. The first row must be a header row with column
+    #         names. The content must use UTF-8 encoding and not exceed 10 MB.</p>
+    #            <p>You must specify either <code>tableBody</code> or <code>queryId</code>, but not
+    #         both.</p>
+    #   @return [String]
+    # @!attribute query_id
+    #   <p>The ID of a completed or cancelled CloudWatch Logs query whose results populate
+    #         the lookup table. A cancelled query populates the table with the partial results that were
+    #         available when the query was stopped.</p>
+    #            <p>You must specify either <code>tableBody</code> or <code>queryId</code>, but not
+    #         both.</p>
+    #   @return [String]
+    # @!attribute kms_key_id
+    #   <p>The ARN of the KMS key to use to encrypt the lookup table data. If you
+    #         don't specify a key, the data is encrypted with an Amazon Web Services-owned key.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>A list of key-value pairs to associate with the lookup table. You can associate as many
+    #         as 50 tags with a lookup table. Tags can help you organize and categorize your
+    #         resources.</p>
+    #   @return [Hash<String, String>]
+    class CreateLookupTableRequest < Struct.new(
+      nil,
+      :lookup_table_name,
+      :description,
+      :table_body,
+      :query_id,
+      :kms_key_id,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute lookup_table_arn
+    #   <p>The ARN of the lookup table that was created.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The time when the lookup table was created, expressed as the number of milliseconds
+    #         after <code>Jan 1, 1970 00:00:00 UTC</code>.</p>
+    #   @return [Integer]
+    class CreateLookupTableResponse < Struct.new(
+      nil,
+      :lookup_table_arn,
+      :created_at,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute name
+    #   <p>The name of the scheduled query. The name must be unique within your account and region.
+    #         Length must be between 1 and 300 characters.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>An optional description for the scheduled query to help identify its purpose and
+    #         functionality.</p>
+    #   @return [String]
+    # @!attribute query_language
+    #   <p>The query language to use for the scheduled query. Valid values are <code>CWLI</code>,
+    #           <code>PPL</code>, and <code>SQL</code>.</p>
+    #   @return [String]
+    # @!attribute query_string
+    #   <p>The query string to execute. This is the same query syntax used in CloudWatch Logs
+    #         Insights. Maximum length is 10,000 characters.</p>
+    #   @return [String]
+    # @!attribute log_group_identifiers
+    #   <p>An array of log group names or ARNs to query. You can specify between 1 and 50 log groups.
+    #         Log groups can be identified by name or full ARN.</p>
+    #   @return [Array<String>]
+    # @!attribute schedule_expression
+    #   <p>A cron expression that defines when the scheduled query runs. The expression uses standard
+    #         cron syntax and supports minute-level precision. Maximum length is 256 characters.</p>
+    #   @return [String]
+    # @!attribute timezone
+    #   <p>The timezone for evaluating the schedule expression. This determines when the scheduled
+    #         query executes relative to the specified timezone.</p>
+    #   @return [String]
+    # @!attribute start_time_offset
+    #   <p>The time offset in seconds that defines the lookback period for the query. This determines
+    #         how far back in time the query searches from the execution time.</p>
+    #   @return [Integer]
+    # @!attribute end_time_offset
+    #   <p>The time offset in seconds that defines the end of the lookback period for the query.
+    #         Together with <code>startTimeOffset</code>, this determines the time window relative to the
+    #         execution time over which the query runs.</p>
+    #   @return [Integer]
+    # @!attribute destination_configuration
+    #   <p>Configuration for where to deliver query results. Supports Amazon S3 destinations for storing
+    #         query output and lookup table destinations for automatically refreshing lookup tables with
+    #         query results. You can configure one or both destination types.</p>
+    #   @return [Types::DestinationConfiguration]
+    # @!attribute schedule_start_time
+    #   <p>The start time for the scheduled query in Unix epoch format. The query will not execute
+    #         before this time.</p>
+    #   @return [Integer]
+    # @!attribute schedule_end_time
+    #   <p>The end time for the scheduled query in Unix epoch format. The query will stop executing
+    #         after this time.</p>
+    #   @return [Integer]
+    # @!attribute execution_role_arn
+    #   <p>The ARN of the IAM role that grants permissions to execute the query and deliver results
+    #         to the specified destination. The role must have permissions to read from the specified log
+    #         groups and write to the destination.</p>
+    #   @return [String]
+    # @!attribute state
+    #   <p>The initial state of the scheduled query. Valid values are <code>ENABLED</code> and
+    #           <code>DISABLED</code>. Default is <code>ENABLED</code>.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>Key-value pairs to associate with the scheduled query for resource management and cost
+    #         allocation.</p>
+    #   @return [Hash<String, String>]
+    class CreateScheduledQueryRequest < Struct.new(
+      nil,
+      :name,
+      :description,
+      :query_language,
+      :query_string,
+      :log_group_identifiers,
+      :schedule_expression,
+      :timezone,
+      :start_time_offset,
+      :end_time_offset,
+      :destination_configuration,
+      :schedule_start_time,
+      :schedule_end_time,
+      :execution_role_arn,
+      :state,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute scheduled_query_arn
+    #   <p>The ARN of the created scheduled query.</p>
+    #   @return [String]
+    # @!attribute state
+    #   <p>The current state of the scheduled query.</p>
+    #   @return [String]
+    class CreateScheduledQueryResponse < Struct.new(
+      nil,
+      :scheduled_query_arn,
+      :state,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The event was already logged.</p>
     #          <important>
     #             <p>
@@ -748,6 +1055,40 @@ module Aws::CloudWatchLogs
       nil,
       :expected_sequence_token,
       :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Represents a data source that categorizes logs by originating service and log type,
+    #       providing service-based organization complementing traditional log groups.</p>
+    # @!attribute name
+    #   <p>The name of the data source.</p>
+    #   @return [String]
+    # @!attribute type
+    #   <p>The type of the data source.</p>
+    #   @return [String]
+    class DataSource < Struct.new(
+      nil,
+      :name,
+      :type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Filter criteria for data sources, used to specify which data sources to include in
+    #       operations based on name and type.</p>
+    # @!attribute name
+    #   <p>The name pattern to filter data sources by.</p>
+    #   @return [String]
+    # @!attribute type
+    #   <p>The type pattern to filter data sources by.</p>
+    #   @return [String]
+    class DataSourceFilter < Struct.new(
+      nil,
+      :name,
+      :type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -972,6 +1313,17 @@ module Aws::CloudWatchLogs
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute lookup_table_arn
+    #   <p>The ARN of the lookup table to delete.</p>
+    #   @return [String]
+    class DeleteLookupTableRequest < Struct.new(
+      nil,
+      :lookup_table_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute log_group_name
     #   <p>The name of the log group.</p>
     #   @return [String]
@@ -1048,6 +1400,24 @@ module Aws::CloudWatchLogs
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute identifier
+    #   <p>The ARN or name of the scheduled query to delete.</p>
+    #   @return [String]
+    class DeleteScheduledQueryRequest < Struct.new(
+      nil,
+      :identifier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class DeleteScheduledQueryResponse < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute log_group_name
     #   <p>The name of the log group.</p>
     #   @return [String]
@@ -1058,6 +1428,21 @@ module Aws::CloudWatchLogs
       nil,
       :log_group_name,
       :filter_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute log_group_identifier
+    #   <p>The name or ARN of the log group to remove the syslog configuration from.</p>
+    #   @return [String]
+    # @!attribute vpc_endpoint_id
+    #   <p>The ID of the VPC endpoint associated with the syslog configuration to delete.</p>
+    #   @return [String]
+    class DeleteSyslogConfigurationRequest < Struct.new(
+      nil,
+      :log_group_identifier,
+      :vpc_endpoint_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1171,6 +1556,11 @@ module Aws::CloudWatchLogs
     #   <p>A structure that contains the ARN of the Amazon Web Services resource that will receive the
     #         logs.</p>
     #   @return [Types::DeliveryDestinationConfiguration]
+    # @!attribute role_arn
+    #   <p>The ARN of the IAM role that CloudWatch Logs assumes to deliver to this
+    #         delivery destination. This field is present only for X-Ray trace delivery
+    #         destinations that were created with a role.</p>
+    #   @return [String]
     # @!attribute tags
     #   <p>The tags that have been assigned to this delivery destination.</p>
     #   @return [Hash<String, String>]
@@ -1181,6 +1571,7 @@ module Aws::CloudWatchLogs
       :delivery_destination_type,
       :output_format,
       :delivery_destination_configuration,
+      :role_arn,
       :tags,
       keyword_init: true
     )
@@ -1251,6 +1642,18 @@ module Aws::CloudWatchLogs
     # @!attribute tags
     #   <p>The tags that have been assigned to this delivery source.</p>
     #   @return [Hash<String, String>]
+    # @!attribute delivery_source_configuration
+    #   <p>The map of key-value pairs that configure the delivery source.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute status
+    #   <p>The status of the delivery source. A delivery source can have the status
+    #         <code>ACTIVE</code> or <code>INACTIVE</code>. Note: This value is defined for selective log types.</p>
+    #   @return [String]
+    # @!attribute status_reason
+    #   <p>The reason for the status of the delivery source. A status reason of
+    #         <code>RESOURCE_DELETED</code> indicates that the resource associated with the delivery
+    #         source has been deleted. Note: This value is defined for selective log types.</p>
+    #   @return [String]
     class DeliverySource < Struct.new(
       nil,
       :name,
@@ -1259,6 +1662,47 @@ module Aws::CloudWatchLogs
       :service,
       :log_type,
       :tags,
+      :delivery_source_configuration,
+      :status,
+      :status_reason,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A structure that describes a single configuration for a log type,
+    #       including its name, value type, default value, and the range of supported values.</p>
+    # @!attribute key_name
+    #   <p>The name of the configuration.</p>
+    #   @return [String]
+    # @!attribute value_type
+    #   <p>The data type of the configuration value. Valid values are <code>string</code>,
+    #         <code>boolean</code>, <code>int</code>, <code>double</code>, and
+    #         <code>long</code>.</p>
+    #   @return [String]
+    # @!attribute default_value
+    #   <p>The default value of the configuration that is used when a value is not
+    #         specified in a <a href="https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliverySource.html">PutDeliverySource</a> request.</p>
+    #   @return [String]
+    # @!attribute supported_values
+    #   <p>The list of allowed values for the configuration. Empty for free-form configuration.</p>
+    #   @return [Array<String>]
+    # @!attribute min_value
+    #   <p>The minimum numeric value allowed for the configuration. This applies only when
+    #         the <code>valueType</code> is a numeric type.</p>
+    #   @return [Float]
+    # @!attribute max_value
+    #   <p>The maximum numeric value allowed for the configuration. This applies only when
+    #         the <code>valueType</code> is a numeric type.</p>
+    #   @return [Float]
+    class DeliverySourceConfigurationSchema < Struct.new(
+      nil,
+      :key_name,
+      :value_type,
+      :default_value,
+      :supported_values,
+      :min_value,
+      :max_value,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1551,6 +1995,40 @@ module Aws::CloudWatchLogs
     #   <p>An array containing the names or ARNs of the log groups that you want to retrieve field
     #         indexes for.</p>
     #   @return [Array<String>]
+    # @!attribute index_categories
+    #   <p>The index categories to return. The following values are supported:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>DEFAULT</code>: Fields that CloudWatch Logs indexes by default. Examples
+    #             include <code>@logStream</code> and <code>@data_format</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>CUSTOM</code>: Fields that you added manually to the field index policy.
+    #               CloudWatch Logs always indexes these fields. These fields count toward the quota of
+    #             20 fields for each log group.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>AUTO</code>: Fields that CloudWatch Logs indexes automatically based on your
+    #             query patterns and usage. These fields do not count toward the field index quota.
+    #               CloudWatch Logs might update these fields based on changes in your query patterns. To
+    #             keep a field indexed permanently, add it to an account-level or log-group level field
+    #             index policy.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>INACTIVE</code>: Fields that CloudWatch Logs indexed before but does not
+    #             index now. This happens if you remove a field from the field index policy or if
+    #               CloudWatch Logs automatically selects a different field based on your queries.</p>
+    #               </li>
+    #            </ul>
+    #            <p>If you omit this parameter, the response includes the <code>DEFAULT</code>,
+    #           <code>CUSTOM</code>, and <code>INACTIVE</code> categories.</p>
+    #            <p>For more information about automatically indexed fields and using the <code>AUTO</code>
+    #         category, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatchLogs-Field-Indexing-Automatic.html">Automatically indexed fields</a>.</p>
+    #   @return [Array<String>]
     # @!attribute next_token
     #   <p>The token for the next set of items to return. The token expires after 24
     #         hours.</p>
@@ -1558,6 +2036,7 @@ module Aws::CloudWatchLogs
     class DescribeFieldIndexesRequest < Struct.new(
       nil,
       :log_group_identifiers,
+      :index_categories,
       :next_token,
       keyword_init: true
     )
@@ -1574,6 +2053,94 @@ module Aws::CloudWatchLogs
     class DescribeFieldIndexesResponse < Struct.new(
       nil,
       :field_indexes,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute import_id
+    #   <p>The ID of the import task to get batch information for.</p>
+    #   @return [String]
+    # @!attribute batch_import_status
+    #   <p>Optional filter to list import batches by their status. Accepts multiple status values: IN_PROGRESS, CANCELLED, COMPLETED and FAILED.</p>
+    #   @return [Array<String>]
+    # @!attribute limit
+    #   <p>The maximum number of import batches to return in the response. Default: 10</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The pagination token for the next set of results.</p>
+    #   @return [String]
+    class DescribeImportTaskBatchesRequest < Struct.new(
+      nil,
+      :import_id,
+      :batch_import_status,
+      :limit,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute import_source_arn
+    #   <p>The ARN of the source being imported from.</p>
+    #   @return [String]
+    # @!attribute import_id
+    #   <p>The ID of the import task.</p>
+    #   @return [String]
+    # @!attribute import_batches
+    #   <p>The list of import batches that match the request filters.</p>
+    #   @return [Array<Types::ImportBatch>]
+    # @!attribute next_token
+    #   <p>The token to use when requesting the next set of results. Not present if there are no additional results to retrieve.</p>
+    #   @return [String]
+    class DescribeImportTaskBatchesResponse < Struct.new(
+      nil,
+      :import_source_arn,
+      :import_id,
+      :import_batches,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute import_id
+    #   <p>Optional filter to describe a specific import task by its ID.</p>
+    #   @return [String]
+    # @!attribute import_status
+    #   <p>Optional filter to list imports by their status. Valid values are IN_PROGRESS, CANCELLED, COMPLETED and FAILED.</p>
+    #   @return [String]
+    # @!attribute import_source_arn
+    #   <p>Optional filter to list imports from a specific source</p>
+    #   @return [String]
+    # @!attribute limit
+    #   <p>The maximum number of import tasks to return in the response. Default: 50</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The pagination token for the next set of results.</p>
+    #   @return [String]
+    class DescribeImportTasksRequest < Struct.new(
+      nil,
+      :import_id,
+      :import_status,
+      :import_source_arn,
+      :limit,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute imports
+    #   <p>The list of import tasks that match the request filters.</p>
+    #   @return [Array<Types::Import>]
+    # @!attribute next_token
+    #   <p>The token to use when requesting the next set of results. Not present if there are no additional results to retrieve.</p>
+    #   @return [String]
+    class DescribeImportTasksResponse < Struct.new(
+      nil,
+      :imports,
       :next_token,
       keyword_init: true
     )
@@ -1791,6 +2358,45 @@ module Aws::CloudWatchLogs
     class DescribeLogStreamsResponse < Struct.new(
       nil,
       :log_streams,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute lookup_table_name_prefix
+    #   <p>A prefix to filter lookup tables by name. Only tables whose names start with this
+    #         prefix are returned. If you don't specify a prefix, all tables in the account and Region are
+    #         returned.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of lookup tables to return in the response. The default value is 50
+    #         and the maximum value is 100.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The token for the next set of items to return. (You received this token from a previous
+    #         call.)</p>
+    #   @return [String]
+    class DescribeLookupTablesRequest < Struct.new(
+      nil,
+      :lookup_table_name_prefix,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute lookup_tables
+    #   <p>An array of structures, where each structure contains metadata about one lookup
+    #         table.</p>
+    #   @return [Array<Types::LookupTable>]
+    # @!attribute next_token
+    #   <p>The token to use when requesting the next set of items.</p>
+    #   @return [String]
+    class DescribeLookupTablesResponse < Struct.new(
+      nil,
+      :lookup_tables,
       :next_token,
       keyword_init: true
     )
@@ -2060,6 +2666,25 @@ module Aws::CloudWatchLogs
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Configuration for where to deliver scheduled query results. Specifies the destination type
+    #       and associated settings for result delivery.</p>
+    # @!attribute s3_configuration
+    #   <p>Configuration for delivering query results to Amazon S3.</p>
+    #   @return [Types::S3Configuration]
+    # @!attribute lookup_table_configuration
+    #   <p>Configuration for delivering query results to a lookup table. The query results
+    #         automatically populate or refresh the specified lookup table on each scheduled
+    #         execution.</p>
+    #   @return [Types::LookupTableConfiguration]
+    class DestinationConfiguration < Struct.new(
+      nil,
+      :s3_configuration,
+      :lookup_table_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute log_group_name
     #   <p>The name of the log group.</p>
     #            <p>In your <code>DisassociateKmsKey</code> operation, you must specify either the
@@ -2098,6 +2723,29 @@ module Aws::CloudWatchLogs
       nil,
       :log_group_name,
       :resource_identifier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute identifier
+    #   <p>The unique identifier of the association to remove between the data source and S3 Table
+    #         Integration.</p>
+    #   @return [String]
+    class DisassociateSourceFromS3TableIntegrationRequest < Struct.new(
+      nil,
+      :identifier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute identifier
+    #   <p>The unique identifier of the association that was removed.</p>
+    #   @return [String]
+    class DisassociateSourceFromS3TableIntegrationResponse < Struct.new(
+      nil,
+      :identifier,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2233,6 +2881,42 @@ module Aws::CloudWatchLogs
     # @!attribute last_event_time
     #   <p>The time and date of the most recent log event that matches this field index. </p>
     #   @return [Integer]
+    # @!attribute type
+    #   <p>The type of index. Specify <code>FACET</code> for facet-based indexing or
+    #           <code>FIELD_INDEX</code> for field-based indexing. This determines how the field is indexed
+    #         and can be queried.</p>
+    #   @return [String]
+    # @!attribute index_category
+    #   <p>The category of the field index:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>DEFAULT</code>: Fields that CloudWatch Logs indexes by default. Examples
+    #             include <code>@logStream</code> and <code>@data_format</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>CUSTOM</code>: Fields that you added manually to the field index policy.
+    #               CloudWatch Logs always indexes these fields. These fields count toward the quota of
+    #             20 fields for each log group.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>AUTO</code>: Fields that CloudWatch Logs indexes automatically based on your
+    #             query patterns and usage. These fields do not count toward the field index quota.
+    #               CloudWatch Logs might update these fields based on changes in your query patterns. To
+    #             keep a field indexed permanently, add it to an account-level or log-group level field
+    #             index policy.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>INACTIVE</code>: Fields that CloudWatch Logs indexed before but does not
+    #             index now. This happens if you remove a field from the field index policy or if
+    #               CloudWatch Logs automatically selects a different field based on your queries.</p>
+    #               </li>
+    #            </ul>
+    #            <p>For more information about automatically indexed fields, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatchLogs-Field-Indexing-Automatic.html">Automatically indexed fields</a>.</p>
+    #   @return [String]
     class FieldIndex < Struct.new(
       nil,
       :log_group_identifier,
@@ -2240,6 +2924,8 @@ module Aws::CloudWatchLogs
       :last_scan_time,
       :first_event_time,
       :last_event_time,
+      :type,
+      :index_category,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2293,6 +2979,10 @@ module Aws::CloudWatchLogs
     #   <p>The start of the time range, expressed as the number of milliseconds after <code>Jan 1,
     #           1970 00:00:00 UTC</code>. Events with a timestamp before this time are not
     #         returned.</p>
+    #            <note>
+    #               <p>Set <code>startTime</code> explicitly to reduce the chances of empty pages in the
+    #           response.</p>
+    #            </note>
     #   @return [Integer]
     # @!attribute end_time
     #   <p>The end of the time range, expressed as the number of milliseconds after <code>Jan 1,
@@ -2311,6 +3001,21 @@ module Aws::CloudWatchLogs
     # @!attribute limit
     #   <p>The maximum number of events to return. The default is 10,000 events.</p>
     #   @return [Integer]
+    # @!attribute start_from_head
+    #   <p>If the value is true, the earliest log events are returned first. If the value is
+    #         false, the latest log events are returned first. The default value is true.</p>
+    #            <p>The <code>startFromHead</code> parameter sets the sort direction on the first request.
+    #         On subsequent requests, the <code>nextToken</code> determines the sort direction. To continue
+    #         paginating in the same direction, provide the returned <code>nextToken</code>. If you provide
+    #         both <code>nextToken</code> and <code>startFromHead</code>, the direction of the
+    #           <code>nextToken</code> is used.</p>
+    #            <note>
+    #               <p>Setting <code>startFromHead</code> to <code>false</code> is supported only when
+    #             <code>startTime</code> is on or after <code>Jan 1, 2024 00:00:00 UTC</code>. A request with
+    #             <code>startFromHead</code> set to <code>false</code> and a <code>startTime</code> before
+    #           this date returns an <code>InvalidParameterException</code>.</p>
+    #            </note>
+    #   @return [Boolean]
     # @!attribute interleaved
     #   <p>If the value is true, the operation attempts to provide responses that contain events
     #         from multiple log streams within the log group, interleaved in a single response. If the value
@@ -2340,6 +3045,7 @@ module Aws::CloudWatchLogs
       :filter_pattern,
       :next_token,
       :limit,
+      :start_from_head,
       :interleaved,
       :unmask,
       keyword_init: true
@@ -2358,7 +3064,8 @@ module Aws::CloudWatchLogs
     #         completely.</p>
     #   @return [Array<Types::SearchedLogStream>]
     # @!attribute next_token
-    #   <p>The token to use when requesting the next set of items. The token expires after 24
+    #   <p>The token for the next set of items in the sorting direction specified by the
+    #           <code>startFromHead</code> parameter in the first request. The token expires after 24
     #         hours.</p>
     #            <p>If the results don't include a <code>nextToken</code>, then pagination is finished.
     #       </p>
@@ -2654,6 +3361,10 @@ module Aws::CloudWatchLogs
     #   <p>The start of the time range, expressed as the number of milliseconds after <code>Jan 1,
     #           1970 00:00:00 UTC</code>. Events with a timestamp equal to this time or later than this time
     #         are included. Events with a timestamp earlier than this time are not included.</p>
+    #            <note>
+    #               <p>Set <code>startTime</code> explicitly to reduce the chances of empty pages in the
+    #           response.</p>
+    #            </note>
     #   @return [Integer]
     # @!attribute end_time
     #   <p>The end of the time range, expressed as the number of milliseconds after <code>Jan 1,
@@ -2715,6 +3426,33 @@ module Aws::CloudWatchLogs
       :events,
       :next_forward_token,
       :next_backward_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute data_source_name
+    #   <p>The name of the data source to retrieve log fields for.</p>
+    #   @return [String]
+    # @!attribute data_source_type
+    #   <p>The type of the data source to retrieve log fields for.</p>
+    #   @return [String]
+    class GetLogFieldsRequest < Struct.new(
+      nil,
+      :data_source_name,
+      :data_source_type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute log_fields
+    #   <p>The list of log fields for the specified data source, including field names and their data
+    #         types.</p>
+    #   @return [Array<Types::LogFieldsListItem>]
+    class GetLogFieldsResponse < Struct.new(
+      nil,
+      :log_fields,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2854,12 +3592,70 @@ module Aws::CloudWatchLogs
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute lookup_table_arn
+    #   <p>The ARN of the lookup table to retrieve.</p>
+    #   @return [String]
+    class GetLookupTableRequest < Struct.new(
+      nil,
+      :lookup_table_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute lookup_table_arn
+    #   <p>The ARN of the lookup table.</p>
+    #   @return [String]
+    # @!attribute lookup_table_name
+    #   <p>The name of the lookup table.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>The description of the lookup table.</p>
+    #   @return [String]
+    # @!attribute table_body
+    #   <p>The full CSV content of the lookup table.</p>
+    #   @return [String]
+    # @!attribute size_bytes
+    #   <p>The size of the lookup table in bytes.</p>
+    #   @return [Integer]
+    # @!attribute last_updated_time
+    #   <p>The time when the lookup table was last updated, expressed as the number of
+    #         milliseconds after <code>Jan 1, 1970 00:00:00 UTC</code>.</p>
+    #   @return [Integer]
+    # @!attribute kms_key_id
+    #   <p>The ARN of the KMS key used to encrypt the lookup table data, if
+    #         applicable.</p>
+    #   @return [String]
+    class GetLookupTableResponse < Struct.new(
+      nil,
+      :lookup_table_arn,
+      :lookup_table_name,
+      :description,
+      :table_body,
+      :size_bytes,
+      :last_updated_time,
+      :kms_key_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute query_id
     #   <p>The ID number of the query.</p>
     #   @return [String]
+    # @!attribute next_token
+    #   <p>The token for the next set of items to return. The token expires after 1 hour.</p>
+    #   @return [String]
+    # @!attribute max_items
+    #   <p>The maximum number of log events to return in the response. The maximum is 10,000 log
+    #         events per request. You can retrieve up to 100,000 log event results from a query by
+    #         paginating with the <code>nextToken</code>.</p>
+    #   @return [Integer]
     class GetQueryResultsRequest < Struct.new(
       nil,
       :query_id,
+      :next_token,
+      :max_items,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2894,6 +3690,12 @@ module Aws::CloudWatchLogs
     #         the query results when <a href="https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_StartQuery.html">StartQuery</a> stores
     #         them.</p>
     #   @return [String]
+    # @!attribute next_token
+    #   <p>If there are more log events remaining in the results, the response includes a
+    #         <code>nextToken</code>. You can use this token in a subsequent <code>GetQueryResults</code>
+    #         request to get the next set of results. You can retrieve up to 100,000 log event results
+    #         from a query by paginating with this token. This is only supported for Logs Insights QL and is currently not supported for PPL and SQL query languages.</p>
+    #   @return [String]
     class GetQueryResultsResponse < Struct.new(
       nil,
       :query_language,
@@ -2901,6 +3703,187 @@ module Aws::CloudWatchLogs
       :statistics,
       :status,
       :encryption_key,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute identifier
+    #   <p>The ARN or name of the scheduled query to retrieve history for.</p>
+    #   @return [String]
+    # @!attribute start_time
+    #   <p>The start time for the history query in Unix epoch format.</p>
+    #   @return [Integer]
+    # @!attribute end_time
+    #   <p>The end time for the history query in Unix epoch format.</p>
+    #   @return [Integer]
+    # @!attribute execution_statuses
+    #   <p>An array of execution statuses to filter the history results. Only executions with the
+    #         specified statuses are returned.</p>
+    #   @return [Array<String>]
+    # @!attribute max_results
+    #   <p>The maximum number of history records to return. Valid range is 1 to 1000.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The token for the next set of items to return. The token expires after 24
+    #         hours.</p>
+    #   @return [String]
+    class GetScheduledQueryHistoryRequest < Struct.new(
+      nil,
+      :identifier,
+      :start_time,
+      :end_time,
+      :execution_statuses,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute name
+    #   <p>The name of the scheduled query.</p>
+    #   @return [String]
+    # @!attribute scheduled_query_arn
+    #   <p>The ARN of the scheduled query.</p>
+    #   @return [String]
+    # @!attribute trigger_history
+    #   <p>An array of execution history records for the scheduled query.</p>
+    #   @return [Array<Types::TriggerHistoryRecord>]
+    # @!attribute next_token
+    #   <p>The token for the next set of items to return. The token expires after 24
+    #         hours.</p>
+    #   @return [String]
+    class GetScheduledQueryHistoryResponse < Struct.new(
+      nil,
+      :name,
+      :scheduled_query_arn,
+      :trigger_history,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute identifier
+    #   <p>The ARN or name of the scheduled query to retrieve.</p>
+    #   @return [String]
+    class GetScheduledQueryRequest < Struct.new(
+      nil,
+      :identifier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute scheduled_query_arn
+    #   <p>The ARN of the scheduled query.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the scheduled query.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>The description of the scheduled query.</p>
+    #   @return [String]
+    # @!attribute query_language
+    #   <p>The query language used by the scheduled query.</p>
+    #   @return [String]
+    # @!attribute query_string
+    #   <p>The query string executed by the scheduled query.</p>
+    #   @return [String]
+    # @!attribute log_group_identifiers
+    #   <p>The log groups queried by the scheduled query.</p>
+    #   @return [Array<String>]
+    # @!attribute schedule_expression
+    #   <p>The cron expression that defines when the scheduled query runs.</p>
+    #   @return [String]
+    # @!attribute timezone
+    #   <p>The timezone used for evaluating the schedule expression.</p>
+    #   @return [String]
+    # @!attribute start_time_offset
+    #   <p>The time offset in seconds that defines the lookback period for the query.</p>
+    #   @return [Integer]
+    # @!attribute end_time_offset
+    #   <p>The time offset in seconds that defines the end of the lookback period for the
+    #         query.</p>
+    #   @return [Integer]
+    # @!attribute destination_configuration
+    #   <p>Configuration for where query results are delivered.</p>
+    #   @return [Types::DestinationConfiguration]
+    # @!attribute state
+    #   <p>The current state of the scheduled query.</p>
+    #   @return [String]
+    # @!attribute schedule_type
+    #   <p>The schedule type of the scheduled query. Valid values are
+    #         <code>CUSTOMER_MANAGED</code> and <code>AWS_MANAGED</code>.</p>
+    #   @return [String]
+    # @!attribute last_triggered_time
+    #   <p>The timestamp when the scheduled query was last executed.</p>
+    #   @return [Integer]
+    # @!attribute last_execution_status
+    #   <p>The status of the most recent execution of the scheduled query.</p>
+    #   @return [String]
+    # @!attribute schedule_start_time
+    #   <p>The start time for the scheduled query in Unix epoch format.</p>
+    #   @return [Integer]
+    # @!attribute schedule_end_time
+    #   <p>The end time for the scheduled query in Unix epoch format.</p>
+    #   @return [Integer]
+    # @!attribute execution_role_arn
+    #   <p>The ARN of the IAM role used to execute the query and deliver results.</p>
+    #   @return [String]
+    # @!attribute creation_time
+    #   <p>The timestamp when the scheduled query was created.</p>
+    #   @return [Integer]
+    # @!attribute last_updated_time
+    #   <p>The timestamp when the scheduled query was last updated.</p>
+    #   @return [Integer]
+    class GetScheduledQueryResponse < Struct.new(
+      nil,
+      :scheduled_query_arn,
+      :name,
+      :description,
+      :query_language,
+      :query_string,
+      :log_group_identifiers,
+      :schedule_expression,
+      :timezone,
+      :start_time_offset,
+      :end_time_offset,
+      :destination_configuration,
+      :state,
+      :schedule_type,
+      :last_triggered_time,
+      :last_execution_status,
+      :schedule_start_time,
+      :schedule_end_time,
+      :execution_role_arn,
+      :creation_time,
+      :last_updated_time,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class GetStorageTierPolicyRequest < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute storage_tier
+    #   <p>The current storage tier for the account.</p>
+    #   @return [String]
+    # @!attribute last_updated_time
+    #   <p>The time when the storage tier policy was last updated, expressed as the number of
+    #         milliseconds after <code>January 1, 1970 00:00:00 UTC</code>.</p>
+    #   @return [Integer]
+    class GetStorageTierPolicyResponse < Struct.new(
+      nil,
+      :storage_tier,
+      :last_updated_time,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2946,19 +3929,130 @@ module Aws::CloudWatchLogs
 
     # <p>This processor uses pattern matching to parse and structure unstructured data. This
     #       processor can also extract fields from log messages.</p>
-    #          <p>For more information about this processor including examples, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation-Processors.html#CloudWatch-Logs-Transformation-Grok">grok</a> in the <i>CloudWatch Logs User Guide</i>.</p>
+    #          <p>For more information about this processor including examples, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation-Configurable.html#CloudWatch-Logs-Transformation-Grok">grok</a> in the <i>CloudWatch Logs User Guide</i>.</p>
     # @!attribute source
     #   <p>The path to the field in the log event that you want to parse. If you omit this value, the
     #         whole log message is parsed.</p>
     #   @return [String]
     # @!attribute match
     #   <p>The grok pattern to match against the log event. For a list of supported grok patterns,
-    #         see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation-Processors.html#Grok-Patterns">Supported grok patterns</a>.</p>
+    #         see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation-Configurable.html#CloudWatch-Logs-Transformation-Grok">Supported grok patterns</a>.</p>
     #   @return [String]
     class Grok < Struct.new(
       nil,
       :source,
       :match,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A key-value pair that identifies how log groups are grouped in aggregate summaries.</p>
+    # @!attribute key
+    #   <p>The key that identifies the grouping characteristic. The format of the key uses dot
+    #         notation. Examples are, <code>dataSource.Name</code>, <code>dataSource.Type</code>, and
+    #           <code>dataSource.Format</code>.</p>
+    #   @return [String]
+    # @!attribute value
+    #   <p>The value associated with the grouping characteristic. Examples are
+    #           <code>amazon_vpc</code>, <code>flow</code>, and <code>OCSF</code>.</p>
+    #   @return [String]
+    class GroupingIdentifier < Struct.new(
+      nil,
+      :key,
+      :value,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>An import job to move data from CloudTrail Event Data Store to CloudWatch.</p>
+    # @!attribute import_id
+    #   <p>The unique identifier of the import task.</p>
+    #   @return [String]
+    # @!attribute import_source_arn
+    #   <p>The ARN of the CloudTrail Lake Event Data Store being imported from.</p>
+    #   @return [String]
+    # @!attribute import_status
+    #   <p>The current status of the import task. Valid values are IN_PROGRESS, CANCELLED, COMPLETED and FAILED.</p>
+    #   @return [String]
+    # @!attribute import_destination_arn
+    #   <p>The ARN of the managed CloudWatch Logs log group where the events are being imported to.</p>
+    #   @return [String]
+    # @!attribute import_statistics
+    #   <p>Statistics about the import progress</p>
+    #   @return [Types::ImportStatistics]
+    # @!attribute import_filter
+    #   <p>The filter criteria used for this import task.</p>
+    #   @return [Types::ImportFilter]
+    # @!attribute creation_time
+    #   <p>The timestamp when the import task was created, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.</p>
+    #   @return [Integer]
+    # @!attribute last_updated_time
+    #   <p>The timestamp when the import task was last updated, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.</p>
+    #   @return [Integer]
+    # @!attribute error_message
+    #   <p>Error message related to any failed imports</p>
+    #   @return [String]
+    class Import < Struct.new(
+      nil,
+      :import_id,
+      :import_source_arn,
+      :import_status,
+      :import_destination_arn,
+      :import_statistics,
+      :import_filter,
+      :creation_time,
+      :last_updated_time,
+      :error_message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A collection of events being imported to CloudWatch</p>
+    # @!attribute batch_id
+    #   <p>The unique identifier of the import batch.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the import batch. Valid values are IN_PROGRESS, CANCELLED, COMPLETED and FAILED.</p>
+    #   @return [String]
+    # @!attribute error_message
+    #   <p>The error message if the batch failed to import. Only present when status is FAILED.</p>
+    #   @return [String]
+    class ImportBatch < Struct.new(
+      nil,
+      :batch_id,
+      :status,
+      :error_message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The filter criteria used for import tasks</p>
+    # @!attribute start_event_time
+    #   <p>The start of the time range for events to import, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.</p>
+    #   @return [Integer]
+    # @!attribute end_event_time
+    #   <p>The end of the time range for events to import, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.</p>
+    #   @return [Integer]
+    class ImportFilter < Struct.new(
+      nil,
+      :start_event_time,
+      :end_event_time,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Statistics about the import progress</p>
+    # @!attribute bytes_imported
+    #   <p>The total number of bytes that have been imported to the managed log group.</p>
+    #   @return [Integer]
+    class ImportStatistics < Struct.new(
+      nil,
+      :bytes_imported,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3052,6 +4146,19 @@ module Aws::CloudWatchLogs
       include ::Smithy::Schema::Structure
     end
 
+    # <p>An internal server error occurred while processing the request. This exception is returned
+    #       when the service encounters an unexpected condition that prevents it from fulfilling the
+    #       request.</p>
+    # @!attribute message
+    #   @return [String]
+    class InternalServerException < Struct.new(
+      nil,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>An internal error occurred during the streaming of log data. This exception is thrown when
     #       there's an issue with the internal streaming mechanism used by the GetLogObject
     #       operation.</p>
@@ -3115,6 +4222,93 @@ module Aws::CloudWatchLogs
     class LimitExceededException < Struct.new(
       nil,
       :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute account_identifiers
+    #   <p>When <code>includeLinkedAccounts</code> is set to <code>true</code>, use this parameter to
+    #         specify the list of accounts to search. You can specify as many as 20 account IDs in the
+    #         array.</p>
+    #   @return [Array<String>]
+    # @!attribute include_linked_accounts
+    #   <p>If you are using a monitoring account, set this to <code>true</code> to have the operation
+    #         return log groups in the accounts listed in <code>accountIdentifiers</code>.</p>
+    #            <p>If this parameter is set to <code>true</code> and <code>accountIdentifiers</code> contains
+    #         a null value, the operation returns all log groups in the monitoring account and all log
+    #         groups in all source accounts that are linked to the monitoring account. </p>
+    #            <p>The default for this parameter is <code>false</code>.</p>
+    #   @return [Boolean]
+    # @!attribute log_group_class
+    #   <p>Filters the results by log group class to include only log groups of the specified
+    #         class.</p>
+    #   @return [String]
+    # @!attribute log_group_name_pattern
+    #   <p>Use this parameter to limit the returned log groups to only those with names that match
+    #         the pattern that you specify. This parameter is a regular expression that can match prefixes
+    #         and substrings, and supports wildcard matching and matching multiple patterns, as in the
+    #         following examples. </p>
+    #            <ul>
+    #               <li>
+    #                  <p>Use <code>^</code> to match log group names by prefix.</p>
+    #               </li>
+    #               <li>
+    #                  <p>For a substring match, specify the string to match. All matches are case
+    #             sensitive</p>
+    #               </li>
+    #               <li>
+    #                  <p>To match multiple patterns, separate them with a <code>|</code> as in the example
+    #               <code>^/aws/lambda|discovery</code>
+    #                  </p>
+    #               </li>
+    #            </ul>
+    #            <p>You can specify as many as five different regular expression patterns in this field, each
+    #         of which must be between 3 and 24 characters. You can include the <code>^</code> symbol as
+    #         many as five times, and include the <code>|</code> symbol as many as four times.</p>
+    #   @return [String]
+    # @!attribute data_sources
+    #   <p>Filters the results by data source characteristics to include only log groups associated
+    #         with the specified data sources.</p>
+    #   @return [Array<Types::DataSourceFilter>]
+    # @!attribute group_by
+    #   <p>Specifies how to group the log groups in the summary.</p>
+    #   @return [String]
+    # @!attribute next_token
+    #   <p>The token for the next set of items to return. The token expires after 24
+    #         hours.</p>
+    #   @return [String]
+    # @!attribute limit
+    #   <p>The maximum number of aggregated summaries to return. If you omit this parameter, the
+    #         default is up to 50 aggregated summaries.</p>
+    #   @return [Integer]
+    class ListAggregateLogGroupSummariesRequest < Struct.new(
+      nil,
+      :account_identifiers,
+      :include_linked_accounts,
+      :log_group_class,
+      :log_group_name_pattern,
+      :data_sources,
+      :group_by,
+      :next_token,
+      :limit,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute aggregate_log_group_summaries
+    #   <p>The list of aggregate log group summaries grouped by the specified data source
+    #         characteristics.</p>
+    #   @return [Array<Types::AggregateLogGroupSummary>]
+    # @!attribute next_token
+    #   <p>The token for the next set of items to return. The token expires after 24
+    #         hours.</p>
+    #   @return [String]
+    class ListAggregateLogGroupSummariesResponse < Struct.new(
+      nil,
+      :aggregate_log_group_summaries,
+      :next_token,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3320,6 +4514,21 @@ module Aws::CloudWatchLogs
     #   <p>The maximum number of log groups to return. If you omit this parameter, the default is
     #         up to 50 log groups.</p>
     #   @return [Integer]
+    # @!attribute data_sources
+    #   <p>An array of data source filters to filter log groups by their associated data sources. You
+    #         can filter by data source name, type, or both. Multiple filters within the same dimension are
+    #         combined with OR logic, while filters across different dimensions are combined with AND
+    #         logic.</p>
+    #   @return [Array<Types::DataSourceFilter>]
+    # @!attribute field_index_names
+    #   <p>An array of field index names to filter log groups that have specific field indexes. Only
+    #         log groups containing all specified field indexes are returned. You can specify 1 to 20 field
+    #         index names, each with 1 to 512 characters.</p>
+    #   @return [Array<String>]
+    # @!attribute log_group_tags
+    #   <p>An array of tag filters to return only log groups that have specific tags. Multiple
+    #         filters are combined with AND logic.</p>
+    #   @return [Array<Types::TagFilter>]
     class ListLogGroupsRequest < Struct.new(
       nil,
       :log_group_name_pattern,
@@ -3328,6 +4537,9 @@ module Aws::CloudWatchLogs
       :account_identifiers,
       :next_token,
       :limit,
+      :data_sources,
+      :field_index_names,
+      :log_group_tags,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3344,6 +4556,126 @@ module Aws::CloudWatchLogs
     class ListLogGroupsResponse < Struct.new(
       nil,
       :log_groups,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute max_results
+    #   <p>The maximum number of scheduled queries to return. Valid range is 1 to 1000.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The token for the next set of items to return. The token expires after 24
+    #         hours.</p>
+    #   @return [String]
+    # @!attribute state
+    #   <p>Filter scheduled queries by state. Valid values are <code>ENABLED</code> and
+    #           <code>DISABLED</code>. If not specified, all scheduled queries are returned.</p>
+    #   @return [String]
+    # @!attribute schedule_type
+    #   <p>Filter scheduled queries by schedule type. Valid values are
+    #         <code>CUSTOMER_MANAGED</code> and <code>AWS_MANAGED</code>. If not specified, scheduled
+    #         queries of all schedule types are returned.</p>
+    #   @return [String]
+    class ListScheduledQueriesRequest < Struct.new(
+      nil,
+      :max_results,
+      :next_token,
+      :state,
+      :schedule_type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute next_token
+    #   <p>The token for the next set of items to return. The token expires after 24
+    #         hours.</p>
+    #   @return [String]
+    # @!attribute scheduled_queries
+    #   <p>An array of scheduled query summary information.</p>
+    #   @return [Array<Types::ScheduledQuerySummary>]
+    class ListScheduledQueriesResponse < Struct.new(
+      nil,
+      :next_token,
+      :scheduled_queries,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute integration_arn
+    #   <p>The Amazon Resource Name (ARN) of the S3 Table Integration to list associations
+    #         for.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of associations to return in a single call. Valid range is 1 to
+    #         100.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The token for the next set of items to return. The token expires after 24
+    #         hours.</p>
+    #   @return [String]
+    class ListSourcesForS3TableIntegrationRequest < Struct.new(
+      nil,
+      :integration_arn,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute sources
+    #   <p>The list of data source associations for the specified S3 Table Integration.</p>
+    #   @return [Array<Types::S3TableIntegrationSource>]
+    # @!attribute next_token
+    #   <p>The token for the next set of items to return. The token expires after 24
+    #         hours.</p>
+    #   @return [String]
+    class ListSourcesForS3TableIntegrationResponse < Struct.new(
+      nil,
+      :sources,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute log_group_identifier
+    #   <p>The name or ARN of the log group to filter syslog configurations for.</p>
+    #   @return [String]
+    # @!attribute vpc_endpoint_id
+    #   <p>The ID of the VPC endpoint to filter syslog configurations for.</p>
+    #   @return [String]
+    # @!attribute next_token
+    #   <p>The token for the next set of items to return. You received this token from a previous
+    #         call.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of syslog configurations to return in the response.</p>
+    #   @return [Integer]
+    class ListSyslogConfigurationsRequest < Struct.new(
+      nil,
+      :log_group_identifier,
+      :vpc_endpoint_id,
+      :next_token,
+      :max_results,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute syslog_configurations
+    #   <p>The list of syslog configurations.</p>
+    #   @return [Array<Types::SyslogConfiguration>]
+    # @!attribute next_token
+    #   <p>The token for the next set of items to return. The token expires after 24 hours.</p>
+    #   @return [String]
+    class ListSyslogConfigurationsResponse < Struct.new(
+      nil,
+      :syslog_configurations,
       :next_token,
       keyword_init: true
     )
@@ -3588,6 +4920,44 @@ module Aws::CloudWatchLogs
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Defines the data type structure for a log field, including the type, element information,
+    #       and nested fields for complex types.</p>
+    # @!attribute type
+    #   <p>The data type of the log field.</p>
+    #   @return [String]
+    # @!attribute element
+    #   <p>For array or collection types, specifies the element type information.</p>
+    #   @return [Types::LogFieldType]
+    # @!attribute fields
+    #   <p>For complex types, contains the nested field definitions.</p>
+    #   @return [Array<Types::LogFieldsListItem>]
+    class LogFieldType < Struct.new(
+      nil,
+      :type,
+      :element,
+      :fields,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Represents a log field with its name and data type information for a specific data
+    #       source.</p>
+    # @!attribute log_field_name
+    #   <p>The name of the log field.</p>
+    #   @return [String]
+    # @!attribute log_field_type
+    #   <p>The data type information for the log field.</p>
+    #   @return [Types::LogFieldType]
+    class LogFieldsListItem < Struct.new(
+      nil,
+      :log_field_name,
+      :log_field_type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Represents a log group.</p>
     # @!attribute log_group_name
     #   <p>The name of the log group.</p>
@@ -3667,6 +5037,14 @@ module Aws::CloudWatchLogs
     #               </li>
     #            </ul>
     #   @return [String]
+    # @!attribute deletion_protection_enabled
+    #   <p>Indicates whether deletion protection is enabled for this log group. When enabled,
+    #         deletion protection blocks all deletion operations until it is explicitly disabled.</p>
+    #   @return [Boolean]
+    # @!attribute bearer_token_authentication_enabled
+    #   <p>Indicates whether bearer token authentication is enabled for this log group. When enabled,
+    #         bearer token authentication is allowed on operations until it is explicitly disabled.</p>
+    #   @return [Boolean]
     class LogGroup < Struct.new(
       nil,
       :log_group_name,
@@ -3680,6 +5058,8 @@ module Aws::CloudWatchLogs
       :inherited_properties,
       :log_group_class,
       :log_group_arn,
+      :deletion_protection_enabled,
+      :bearer_token_authentication_enabled,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3791,6 +5171,81 @@ module Aws::CloudWatchLogs
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Contains metadata about a lookup table returned by <code>DescribeLookupTables</code>.</p>
+    # @!attribute lookup_table_arn
+    #   <p>The ARN of the lookup table.</p>
+    #   @return [String]
+    # @!attribute lookup_table_name
+    #   <p>The name of the lookup table.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>The description of the lookup table.</p>
+    #   @return [String]
+    # @!attribute table_fields
+    #   <p>The column headers from the first row of the CSV file.</p>
+    #   @return [Array<String>]
+    # @!attribute records_count
+    #   <p>The number of data rows in the lookup table, excluding the header row.</p>
+    #   @return [Integer]
+    # @!attribute size_bytes
+    #   <p>The size of the lookup table in bytes.</p>
+    #   @return [Integer]
+    # @!attribute last_updated_time
+    #   <p>The time when the lookup table was last updated, expressed as the number of
+    #         milliseconds after <code>Jan 1, 1970 00:00:00 UTC</code>.</p>
+    #   @return [Integer]
+    # @!attribute kms_key_id
+    #   <p>The ARN of the KMS key used to encrypt the lookup table data, if
+    #         applicable.</p>
+    #   @return [String]
+    class LookupTable < Struct.new(
+      nil,
+      :lookup_table_arn,
+      :lookup_table_name,
+      :description,
+      :table_fields,
+      :records_count,
+      :size_bytes,
+      :last_updated_time,
+      :kms_key_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration for a lookup table destination. Use it to automatically refresh a lookup
+    #       table with query results on a schedule.</p>
+    # @!attribute table_name
+    #   <p>The name of the lookup table to create or update with query results. The name can
+    #         contain only alphanumeric characters and underscores.</p>
+    #   @return [String]
+    # @!attribute role_arn
+    #   <p>The ARN of the IAM role that grants permissions to create or update the lookup table
+    #         with query results.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>A description of the lookup table.</p>
+    #   @return [String]
+    # @!attribute kms_key_id
+    #   <p>The ARN of the KMS key to use to encrypt the lookup table data. If you
+    #         don't specify a key, the data is encrypted with an Amazon Web Services-owned key.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>Key-value pairs to associate with the lookup table for resource management and cost
+    #         allocation. The service applies tags only during initial table creation.</p>
+    #   @return [Hash<String, String>]
+    class LookupTableConfiguration < Struct.new(
+      nil,
+      :table_name,
+      :role_arn,
+      :description,
+      :kms_key_id,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>This processor converts a string to lowercase.</p>
     #          <p>For more information about this processor including examples, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html#CloudWatch-Logs-Transformation-lowerCaseString"> lowerCaseString</a> in the <i>CloudWatch Logs User Guide</i>.</p>
     # @!attribute with_keys
@@ -3849,10 +5304,14 @@ module Aws::CloudWatchLogs
     #         version of the log events instead of the original ingested log events.</p>
     #   @return [Boolean]
     # @!attribute field_selection_criteria
-    #   <p>The filter expression that specifies which log events are processed by this metric filter based on system fields. Returns the <code>fieldSelectionCriteria</code> value if it was specified when the metric filter was created.</p>
+    #   <p>The filter expression that specifies which log events are processed by this metric filter
+    #         based on system fields. Returns the <code>fieldSelectionCriteria</code> value if it was
+    #         specified when the metric filter was created.</p>
     #   @return [String]
     # @!attribute emit_system_field_dimensions
-    #   <p>The list of system fields that are emitted as additional dimensions in the generated metrics. Returns the <code>emitSystemFieldDimensions</code> value if it was specified when the metric filter was created.</p>
+    #   <p>The list of system fields that are emitted as additional dimensions in the generated
+    #         metrics. Returns the <code>emitSystemFieldDimensions</code> value if it was specified when the
+    #         metric filter was created.</p>
     #   @return [Array<String>]
     class MetricFilter < Struct.new(
       nil,
@@ -4460,7 +5919,7 @@ module Aws::CloudWatchLogs
 
     # <p>This processor converts logs into <a href="https://ocsf.io">Open Cybersecurity Schema
     #         Framework (OCSF)</a> events.</p>
-    #          <p>For more information about this processor including examples, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html#CloudWatch-Logs-Transformation-parseToOCSF"> parseToOSCF</a> in the <i>CloudWatch Logs User Guide</i>.</p>
+    #          <p>For more information about this processor including examples, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html#CloudWatch-Logs-Transformation-parseToOCSF">parseToOCSF</a> in the <i>CloudWatch Logs User Guide</i>.</p>
     # @!attribute source
     #   <p>The path to the field in the log event that you want to parse. If you omit this value, the
     #         whole log message is parsed.</p>
@@ -4472,11 +5931,15 @@ module Aws::CloudWatchLogs
     # @!attribute ocsf_version
     #   <p>Specify which version of the OCSF schema to use for the transformed log events.</p>
     #   @return [String]
+    # @!attribute mapping_version
+    #   <p>The version of the OCSF mapping to use for parsing log data.</p>
+    #   @return [String]
     class ParseToOCSF < Struct.new(
       nil,
       :source,
       :event_source,
       :ocsf_version,
+      :mapping_version,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4688,7 +6151,8 @@ module Aws::CloudWatchLogs
     end
 
     # @!attribute policy_name
-    #   <p>A name for the policy. This must be unique within the account.</p>
+    #   <p>A name for the policy. This must be unique within the account and cannot start with
+    #           <code>aws/</code>.</p>
     #   @return [String]
     # @!attribute policy_document
     #   <p>Specify the policy, in JSON.</p>
@@ -4792,14 +6256,23 @@ module Aws::CloudWatchLogs
     #                  <p>
     #                     <b>Fields</b> The array of field indexes to create.</p>
     #               </li>
+    #               <li>
+    #                  <p>
+    #                     <b>FieldsV2</b> The object of field indexes to create along
+    #             with it's type.</p>
+    #               </li>
     #            </ul>
     #            <p>It must contain at least one field index.</p>
-    #            <p>The following is an example of an index policy document that creates two indexes,
-    #           <code>RequestId</code> and <code>TransactionId</code>.</p>
+    #            <p>The following is an example of an index policy document that creates indexes with
+    #         different types.</p>
     #            <p>
-    #               <code>"policyDocument": "{ \"Fields\": [ \"RequestId\", \"TransactionId\" ]
-    #         }"</code>
+    #               <code>"policyDocument": "{ \"Fields\": [ \"TransactionId\" ], \"FieldsV2\":
+    #           {\"RequestId\": {\"type\": \"FIELD_INDEX\"}, \"APIName\": {\"type\": \"FACET\"},
+    #           \"StatusCode\": {\"type\": \"FACET\"}}}"</code>
     #            </p>
+    #            <p>You can use <code>FieldsV2</code> to specify the type for each field. Supported types are
+    #           <code>FIELD_INDEX</code> and <code>FACET</code>. Field names within <code>Fields</code> and
+    #           <code>FieldsV2</code> must be mutually exclusive.</p>
     #   @return [String]
     # @!attribute policy_type
     #   <p>The type of policy that you're creating or updating.</p>
@@ -4810,18 +6283,43 @@ module Aws::CloudWatchLogs
     #         parameter, the default of <code>ALL</code> is used.</p>
     #   @return [String]
     # @!attribute selection_criteria
-    #   <p>Use this parameter to apply the new policy to a subset of log groups in the
-    #         account.</p>
+    #   <p>Use this parameter to apply the new policy to a subset of log groups in the account or a
+    #         data source name and type combination.  </p>
     #            <p>Specifying <code>selectionCriteria</code> is valid only when you specify
     #           <code>SUBSCRIPTION_FILTER_POLICY</code>, <code>FIELD_INDEX_POLICY</code> or
     #           <code>TRANSFORMER_POLICY</code>for <code>policyType</code>.</p>
-    #            <p>If <code>policyType</code> is <code>SUBSCRIPTION_FILTER_POLICY</code>, the only supported
-    #           <code>selectionCriteria</code> filter is <code>LogGroupName NOT IN []</code>
-    #            </p>
-    #            <p>If <code>policyType</code> is <code>FIELD_INDEX_POLICY</code> or
-    #           <code>TRANSFORMER_POLICY</code>, the only supported <code>selectionCriteria</code> filter is
-    #           <code>LogGroupNamePrefix</code>
-    #            </p>
+    #            <ul>
+    #               <li>
+    #                  <p>If <code>policyType</code> is <code>SUBSCRIPTION_FILTER_POLICY</code>, the only
+    #             supported <code>selectionCriteria</code> filter is <code>LogGroupName NOT IN
+    #             []</code>
+    #                  </p>
+    #               </li>
+    #               <li>
+    #                  <p>If <code>policyType</code> is <code>TRANSFORMER_POLICY</code>, the only supported
+    #               <code>selectionCriteria</code> filter is <code>LogGroupNamePrefix</code>
+    #                  </p>
+    #               </li>
+    #               <li>
+    #                  <p>If <code>policyType</code> is <code>FIELD_INDEX_POLICY</code>, the supported
+    #               <code>selectionCriteria</code> filters are:</p>
+    #                  <ul>
+    #                     <li>
+    #                        <p>
+    #                           <code>LogGroupNamePrefix</code>
+    #                        </p>
+    #                     </li>
+    #                     <li>
+    #                        <p>
+    #                           <code>DataSourceName</code> AND <code>DataSourceType</code>
+    #                        </p>
+    #                     </li>
+    #                  </ul>
+    #                  <p>When you specify <code>selectionCriteria</code> for a field index policy you can
+    #           use either <code>LogGroupNamePrefix</code> by itself or <code>DataSourceName</code> and
+    #             <code>DataSourceType</code> together.</p>
+    #               </li>
+    #            </ul>
     #            <p>The <code>selectionCriteria</code> string can be up to 25KB in length. The length is
     #         determined by using its UTF-8 bytes.</p>
     #            <p>Using the <code>selectionCriteria</code> parameter with
@@ -4847,6 +6345,28 @@ module Aws::CloudWatchLogs
     class PutAccountPolicyResponse < Struct.new(
       nil,
       :account_policy,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute log_group_identifier
+    #   <p>The name or ARN of the log group.</p>
+    #            <p>Type: String</p>
+    #            <p>Length Constraints: Minimum length of 1. Maximum length of 512.</p>
+    #            <p>Pattern: <code>[\.\-_/#A-Za-z0-9]+</code>
+    #            </p>
+    #            <p>Required: Yes</p>
+    #   @return [String]
+    # @!attribute bearer_token_authentication_enabled
+    #   <p>Whether to enable bearer token authentication.</p>
+    #            <p>Type: Boolean</p>
+    #            <p>Required: Yes</p>
+    #   @return [Boolean]
+    class PutBearerTokenAuthenticationRequest < Struct.new(
+      nil,
+      :log_group_identifier,
+      :bearer_token_authentication_enabled,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4991,6 +6511,11 @@ module Aws::CloudWatchLogs
     #            <p>The delivery destination type determines the format and configuration options available
     #         for log delivery.</p>
     #   @return [String]
+    # @!attribute role_arn
+    #   <p>The ARN of an IAM role in your account that CloudWatch Logs assumes to
+    #         deliver to this delivery destination. The trust policy of the role must allow CloudWatch Logs to assume it. This parameter is supported only for X-Ray trace delivery
+    #         destinations.</p>
+    #   @return [String]
     # @!attribute tags
     #   <p>An optional list of key-value pairs to associate with the resource.</p>
     #            <p>For more information about tagging, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services resources</a>
@@ -5002,6 +6527,7 @@ module Aws::CloudWatchLogs
       :output_format,
       :delivery_destination_configuration,
       :delivery_destination_type,
+      :role_arn,
       :tags,
       keyword_init: true
     )
@@ -5029,19 +6555,89 @@ module Aws::CloudWatchLogs
     #         example,
     #           <code>arn:aws:workmail:us-east-1:123456789012:organization/m-1234EXAMPLEabcd1234abcd1234abcd1234</code>
     #            </p>
+    #            <p>For the <code>SECURITY_FINDING_LOGS</code> logType, use a wildcard ARN for the hub
+    #         resource. For Amazon Web Services Security Hub CSPM, use
+    #           <code>arn:aws:securityhub:us-east-1:111122223333:hub/*</code>
+    #         and for Amazon Web Services Security Hub, use
+    #           <code>arn:aws:securityhub:us-east-1:111122223333:hubv2/*</code>
+    #            </p>
+    #            <p>For the <code>INSIGHTS_QUERY_LOGS</code> log type, use a wildcard log group ARN, such as
+    #           <code>arn:aws:logs:us-east-1:111122223333:log-group:*</code>. Amazon Web Services does not support a
+    #         specific log group ARN for this log type.</p>
     #   @return [String]
     # @!attribute log_type
     #   <p>Defines the type of log that the source is sending.</p>
     #            <ul>
     #               <li>
-    #                  <p>For Amazon Bedrock, the valid value is <code>APPLICATION_LOGS</code> and
-    #               <code>TRACES</code>.</p>
+    #                  <p>For Amazon Web Services Amplify, the valid values are <code>ACCESS_LOGS</code> and
+    #               <code>WAF_LOGS</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>For Application Load Balancer, the valid values are <code>ALB_ACCESS_LOGS</code>,
+    #               <code>ALB_CONNECTION_LOGS</code>, and <code>ALB_HEALTH_CHECK_LOGS</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>For Amazon Bedrock AgentCore Gateway, the valid values are
+    #               <code>APPLICATION_LOGS</code> and <code>TRACES</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>For Amazon Bedrock AgentCore Identity, the valid values are
+    #               <code>APPLICATION_LOGS</code> and <code>TRACES</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>For Amazon Bedrock AgentCore Memory, the valid values are
+    #               <code>APPLICATION_LOGS</code> and <code>TRACES</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>For Amazon Bedrock AgentCore Payments, the valid values are
+    #               <code>APPLICATION_LOGS</code> and <code>TRACES</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>For Amazon Bedrock AgentCore Runtime, the valid values are
+    #               <code>APPLICATION_LOGS</code>, <code>USAGE_LOGS</code>, and <code>TRACES</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>For Amazon Bedrock AgentCore Tools, the valid values are
+    #               <code>APPLICATION_LOGS</code>, <code>USAGE_LOGS</code>, and <code>TRACES</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>For Amazon Bedrock Agents, the valid values are <code>APPLICATION_LOGS</code> and
+    #               <code>EVENT_LOGS</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>For Amazon Bedrock Knowledge Bases, the valid values are
+    #               <code>APPLICATION_LOGS</code> and <code>TRACES</code>.</p>
     #               </li>
     #               <li>
     #                  <p>For CloudFront, the valid value is <code>ACCESS_LOGS</code>.</p>
     #               </li>
     #               <li>
+    #                  <p>For query execution logs from CloudWatch Logs Insights, the valid value is
+    #               <code>INSIGHTS_QUERY_LOGS</code>.</p>
+    #               </li>
+    #               <li>
     #                  <p>For Amazon CodeWhisperer, the valid value is <code>EVENT_LOGS</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>For DevOps Agent, the valid value is <code>APPLICATION_LOGS</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>For Amazon EKS Auto Mode, the valid values are <code>AUTO_MODE_BLOCK_STORAGE_LOGS</code>,
+    #               <code>AUTO_MODE_COMPUTE_LOGS</code>, <code>AUTO_MODE_IPAM_LOGS</code>, and
+    #               <code>AUTO_MODE_LOAD_BALANCING_LOGS</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>For Amazon EKS Capability Logs, the valid values are <code>EKS_CAPABILITY_ACK_LOGS</code>,
+    #               <code>EKS_CAPABILITY_ARGOCD_APPLICATION_LOGS</code>,
+    #               <code>EKS_CAPABILITY_ARGOCD_APPLICATIONSET_LOGS</code>,
+    #               <code>EKS_CAPABILITY_ARGOCD_COMMITSERVER_LOGS</code>,
+    #               <code>EKS_CAPABILITY_ARGOCD_REPOSERVER_LOGS</code>,
+    #               <code>EKS_CAPABILITY_ARGOCD_SERVER_LOGS</code>, and
+    #               <code>EKS_CAPABILITY_KRO_LOGS</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>For Amazon Web Services Elemental Inference, the valid value is
+    #               <code>APPLICATION_LOGS</code>.</p>
     #               </li>
     #               <li>
     #                  <p>For Elemental MediaPackage, the valid values are <code>EGRESS_ACCESS_LOGS</code> and
@@ -5059,25 +6655,67 @@ module Aws::CloudWatchLogs
     #             <code>ERROR_LOGS</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>For PCS, the valid values are <code>PCS_SCHEDULER_LOGS</code> and
-    #               <code>PCS_JOBCOMP_LOGS</code>.</p>
+    #                  <p>For Network Firewall Proxy, the valid values are <code>ALERT_LOGS</code>,
+    #               <code>ALLOW_LOGS</code>, and <code>DENY_LOGS</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>For Amazon Q, the valid value is <code>EVENT_LOGS</code>.</p>
+    #                  <p>For Network Load Balancer, the valid value is <code>NLB_ACCESS_LOGS</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>For Amazon SES mail manager, the valid values are <code>APPLICATION_LOG</code>
-    #             and <code>TRAFFIC_POLICY_DEBUG_LOGS</code>.</p>
+    #                  <p>For PCS, the valid values are <code>PCS_SCHEDULER_LOGS</code>,
+    #               <code>PCS_JOBCOMP_LOGS</code>, and <code>PCS_SCHEDULER_AUDIT_LOGS</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>For Amazon Q, the valid values are <code>EVENT_LOGS</code> and
+    #               <code>SYNC_JOB_LOGS</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>For Amazon Q in Connect AI agents, the valid value is
+    #               <code>EVENT_LOGS</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>For Quick, the valid values are <code>AGENT_HOURS_LOGS</code>,
+    #               <code>AGENT_METADATA_LOGS</code>, <code>CHAT_LOGS</code>, <code>DLP_LOGS</code>,
+    #               <code>FEEDBACK_LOGS</code>, <code>INDEX_USAGE_LOGS</code>, and
+    #               <code>KB_FILE_SYNC_LOGS</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>For Route 53 Global Resolver, the valid value is
+    #               <code>GLOBAL_RESOLVER_LOGS</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>For Amazon Web Services RTB Fabric, the valid value is
+    #               <code>APPLICATION_LOGS</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>For Amazon S3, the valid value is
+    #               <code>S3_SERVER_ACCESS_LOGS</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>For Amazon Web Services Security Hub, the valid value is
+    #               <code>SECURITY_FINDING_LOGS</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>For Amazon Web Services Security Hub CSPM, the valid value is
+    #               <code>SECURITY_FINDING_LOGS</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>For Amazon SES mail manager, the valid values are
+    #               <code>APPLICATION_LOGS</code> and <code>TRAFFIC_POLICY_DEBUG_LOGS</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>For Amazon Web Services Shield Advanced, the valid value is
+    #               <code>FLOW_LOGS</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>For Amazon VPC Route Server, the valid value is
+    #             <code>EVENT_LOGS</code>.</p>
     #               </li>
     #               <li>
     #                  <p>For Amazon WorkMail, the valid values are <code>ACCESS_CONTROL_LOGS</code>,
     #               <code>AUTHENTICATION_LOGS</code>, <code>WORKMAIL_AVAILABILITY_PROVIDER_LOGS</code>,
     #               <code>WORKMAIL_MAILBOX_ACCESS_LOGS</code>, and
     #               <code>WORKMAIL_PERSONAL_ACCESS_TOKEN_LOGS</code>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>For Amazon VPC Route Server, the valid value is
-    #             <code>EVENT_LOGS</code>.</p>
     #               </li>
     #            </ul>
     #   @return [String]
@@ -5086,12 +6724,18 @@ module Aws::CloudWatchLogs
     #            <p>For more information about tagging, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services resources</a>
     #            </p>
     #   @return [Hash<String, String>]
+    # @!attribute delivery_source_configuration
+    #   <p>A map of key-value pairs to configure the delivery source. Both keys and values must be
+    #         between 1 and 255 characters in length. For example,
+    #         <code>{"samplingRate": "50"}</code>.</p>
+    #   @return [Hash<String, String>]
     class PutDeliverySourceRequest < Struct.new(
       nil,
       :name,
       :resource_arn,
       :log_type,
       :tags,
+      :delivery_source_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5183,11 +6827,15 @@ module Aws::CloudWatchLogs
     #   @return [String]
     # @!attribute policy_document
     #   <p>The index policy document, in JSON format. The following is an example of an index policy
-    #         document that creates two indexes, <code>RequestId</code> and
-    #         <code>TransactionId</code>.</p>
+    #         document that creates indexes with different types.</p>
     #            <p>
-    #               <code>"policyDocument": "{ "Fields": [ "RequestId", "TransactionId" ] }"</code>
+    #               <code>"policyDocument": "{"Fields": [ "TransactionId" ], "FieldsV2": {"RequestId":
+    #           {"type": "FIELD_INDEX"}, "APIName": {"type": "FACET"}, "StatusCode": {"type":
+    #           "FACET"}}}"</code>
     #            </p>
+    #            <p>You can use <code>FieldsV2</code> to specify the type for each field. Supported types are
+    #           <code>FIELD_INDEX</code> and <code>FACET</code>. Field names within <code>Fields</code> and
+    #           <code>FieldsV2</code> must be mutually exclusive.</p>
     #            <p>The policy document must include at least one field index. For more information about the
     #         fields that can be included and other restrictions, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatchLogs-Field-Indexing-Syntax.html">Field index
     #           syntax and quotas</a>.</p>
@@ -5315,6 +6963,28 @@ module Aws::CloudWatchLogs
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute log_group_identifier
+    #   <p>The name or ARN of the log group.</p>
+    #            <p>Type: String</p>
+    #            <p>Length Constraints: Minimum length of 1. Maximum length of 512.</p>
+    #            <p>Pattern: <code>[\.\-_/#A-Za-z0-9]+</code>
+    #            </p>
+    #            <p>Required: Yes</p>
+    #   @return [String]
+    # @!attribute deletion_protection_enabled
+    #   <p>Whether to enable deletion protection.</p>
+    #            <p>Type: Boolean</p>
+    #            <p>Required: Yes</p>
+    #   @return [Boolean]
+    class PutLogGroupDeletionProtectionRequest < Struct.new(
+      nil,
+      :log_group_identifier,
+      :deletion_protection_enabled,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute log_group_name
     #   <p>The name of the log group.</p>
     #   @return [String]
@@ -5335,10 +7005,18 @@ module Aws::CloudWatchLogs
     #         log events instead of the original ingested log events.</p>
     #   @return [Boolean]
     # @!attribute field_selection_criteria
-    #   <p>A filter expression that specifies which log events should be processed by this metric filter based on system fields such as source account and source region. Uses selection criteria syntax with operators like <code>=</code>, <code>!=</code>, <code>AND</code>, <code>OR</code>, <code>IN</code>, <code>NOT IN</code>. Example: <code>@aws.region = "us-east-1"</code> or <code>@aws.account IN ["123456789012", "987654321098"]</code>. Maximum length: 2000 characters.</p>
+    #   <p>A filter expression that specifies which log events should be processed by this metric
+    #         filter based on system fields such as source account and source region. Uses selection
+    #         criteria syntax with operators like <code>=</code>, <code>!=</code>, <code>AND</code>,
+    #           <code>OR</code>, <code>IN</code>, <code>NOT IN</code>. Example: <code>@aws.region =
+    #           "us-east-1"</code> or <code>@aws.account IN ["123456789012", "987654321098"]</code>. Maximum
+    #         length: 2000 characters.</p>
     #   @return [String]
     # @!attribute emit_system_field_dimensions
-    #   <p>A list of system fields to emit as additional dimensions in the generated metrics. Valid values are <code>@aws.account</code> and <code>@aws.region</code>. These dimensions help identify the source of centralized log data and count toward the total dimension limit for metric filters.</p>
+    #   <p>A list of system fields to emit as additional dimensions in the generated metrics. Valid
+    #         values are <code>@aws.account</code> and <code>@aws.region</code>. These dimensions help
+    #         identify the source of centralized log data and count toward the total dimension limit for
+    #         metric filters.</p>
     #   @return [Array<String>]
     class PutMetricFilterRequest < Struct.new(
       nil,
@@ -5388,6 +7066,13 @@ module Aws::CloudWatchLogs
     #   <p>Used as an idempotency token, to avoid returning an exception if the service receives the
     #         same request twice because of a network error.</p>
     #   @return [String]
+    # @!attribute parameters
+    #   <p>Use this parameter to include specific query parameters as part of your query definition.
+    #         Query parameters are supported only for Logs Insights QL queries. Query parameters allow you
+    #         to use placeholder variables in your query string that are substituted with values at execution
+    #         time. Use the <code>{{parameterName}}</code> syntax in your query string to reference a
+    #         parameter.</p>
+    #   @return [Array<Types::QueryParameter>]
     class PutQueryDefinitionRequest < Struct.new(
       nil,
       :query_language,
@@ -5396,6 +7081,7 @@ module Aws::CloudWatchLogs
       :log_group_names,
       :query_string,
       :client_token,
+      :parameters,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5429,11 +7115,11 @@ module Aws::CloudWatchLogs
     #         that call.</p>
     #            <p></p>
     #            <p>
-    #               <code>{ "Version": "2012-10-17", "Statement": [ { "Sid": "Route53LogsToCloudWatchLogs",
-    #           "Effect": "Allow", "Principal": { "Service": [ "route53.amazonaws.com" ] }, "Action":
-    #           "logs:PutLogEvents", "Resource": "logArn", "Condition": { "ArnLike": { "aws:SourceArn":
-    #           "myRoute53ResourceArn" }, "StringEquals": { "aws:SourceAccount": "myAwsAccountId" } } } ]
-    #           }</code>
+    #               <code>{ "Version": "2012-10-17",		 	 	  "Statement": [ { "Sid":
+    #           "Route53LogsToCloudWatchLogs", "Effect": "Allow", "Principal": { "Service": [
+    #           "route53.amazonaws.com" ] }, "Action": "logs:PutLogEvents", "Resource": "logArn",
+    #           "Condition": { "ArnLike": { "aws:SourceArn": "myRoute53ResourceArn" }, "StringEquals": {
+    #           "aws:SourceAccount": "myAwsAccountId" } } } ] }</code>
     #            </p>
     #   @return [String]
     # @!attribute resource_arn
@@ -5485,6 +7171,35 @@ module Aws::CloudWatchLogs
       nil,
       :log_group_name,
       :retention_in_days,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute storage_tier
+    #   <p>The storage tier to set for the account. Use <code>INTELLIGENT_TIERING</code> to
+    #         automatically optimize storage costs by moving log data to the appropriate tier based on
+    #         access frequency.</p>
+    #   @return [String]
+    class PutStorageTierPolicyRequest < Struct.new(
+      nil,
+      :storage_tier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute storage_tier
+    #   <p>The storage tier for the account.</p>
+    #   @return [String]
+    # @!attribute last_updated_time
+    #   <p>The time when the storage tier policy was last updated, expressed as the number of
+    #         milliseconds after <code>January 1, 1970 00:00:00 UTC</code>.</p>
+    #   @return [Integer]
+    class PutStorageTierPolicyResponse < Struct.new(
+      nil,
+      :storage_tier,
+      :last_updated_time,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5545,10 +7260,18 @@ module Aws::CloudWatchLogs
     #         of the log events instead of the original ingested log events.</p>
     #   @return [Boolean]
     # @!attribute field_selection_criteria
-    #   <p>A filter expression that specifies which log events should be processed by this subscription filter based on system fields such as source account and source region. Uses selection criteria syntax with operators like <code>=</code>, <code>!=</code>, <code>AND</code>, <code>OR</code>, <code>IN</code>, <code>NOT IN</code>. Example: <code>@aws.region NOT IN ["cn-north-1"]</code> or <code>@aws.account = "123456789012" AND @aws.region = "us-east-1"</code>. Maximum length: 2000 characters.</p>
+    #   <p>A filter expression that specifies which log events should be processed by this
+    #         subscription filter based on system fields such as source account and source region. Uses
+    #         selection criteria syntax with operators like <code>=</code>, <code>!=</code>,
+    #           <code>AND</code>, <code>OR</code>, <code>IN</code>, <code>NOT IN</code>. Example:
+    #           <code>@aws.region NOT IN ["cn-north-1"]</code> or <code>@aws.account = "123456789012" AND
+    #           @aws.region = "us-east-1"</code>. Maximum length: 2000 characters.</p>
     #   @return [String]
     # @!attribute emit_system_fields
-    #   <p>A list of system fields to include in the log events sent to the subscription destination. Valid values are <code>@aws.account</code> and <code>@aws.region</code>. These fields provide source information for centralized log data in the forwarded payload.</p>
+    #   <p>A list of system fields to include in the log events sent to the subscription destination.
+    #         Valid values are <code>@aws.account</code>, <code>@aws.region</code>, and
+    #         <code>@source.log</code>. These fields provide
+    #         source information for centralized log data in the forwarded payload.</p>
     #   @return [Array<String>]
     class PutSubscriptionFilterRequest < Struct.new(
       nil,
@@ -5561,6 +7284,21 @@ module Aws::CloudWatchLogs
       :apply_on_transformed_logs,
       :field_selection_criteria,
       :emit_system_fields,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute log_group_identifier
+    #   <p>The name or ARN of the log group to associate with the syslog configuration.</p>
+    #   @return [String]
+    # @!attribute vpc_endpoint_id
+    #   <p>The ID of the VPC endpoint to use for syslog ingestion.</p>
+    #   @return [String]
+    class PutSyslogConfigurationRequest < Struct.new(
+      nil,
+      :log_group_identifier,
+      :vpc_endpoint_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5639,6 +7377,10 @@ module Aws::CloudWatchLogs
     #   <p>If this query definition contains a list of log groups that it is limited to, that list
     #         appears here.</p>
     #   @return [Array<String>]
+    # @!attribute parameters
+    #   <p>If this query definition contains a list of query parameters that define placeholder
+    #         variables for the query string, that list appears here.</p>
+    #   @return [Array<Types::QueryParameter>]
     class QueryDefinition < Struct.new(
       nil,
       :query_language,
@@ -5647,6 +7389,7 @@ module Aws::CloudWatchLogs
       :query_string,
       :last_modified,
       :log_group_names,
+      :parameters,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5676,6 +7419,15 @@ module Aws::CloudWatchLogs
     # @!attribute log_group_name
     #   <p>The name of the log group scanned by this query.</p>
     #   @return [String]
+    # @!attribute query_duration
+    #   <p>The duration in milliseconds that the query took to execute.</p>
+    #   @return [Integer]
+    # @!attribute bytes_scanned
+    #   <p>The total number of bytes scanned by the query. This indicates the cost associated with the query.</p>
+    #   @return [Float]
+    # @!attribute user_identity
+    #   <p>The ARN of the user who ran the query.</p>
+    #   @return [String]
     class QueryInfo < Struct.new(
       nil,
       :query_language,
@@ -5684,6 +7436,35 @@ module Aws::CloudWatchLogs
       :status,
       :create_time,
       :log_group_name,
+      :query_duration,
+      :bytes_scanned,
+      :user_identity,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>This structure defines a query parameter for a saved CloudWatch Logs Insights query
+    #       definition. Query parameters are supported only for Logs Insights QL queries. They are
+    #       placeholder variables that you can reference in a query string using the
+    #       <code>{{parameterName}}</code> syntax. Each parameter can include a default value and a
+    #       description.</p>
+    # @!attribute name
+    #   <p>The name of the query parameter. A query parameter name must start with a letter or
+    #         underscore, and contain only letters, digits, and underscores.</p>
+    #   @return [String]
+    # @!attribute default_value
+    #   <p>The default value to use for this query parameter if no value is supplied at execution
+    #         time.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>A description of the query parameter that explains its purpose or expected values.</p>
+    #   @return [String]
+    class QueryParameter < Struct.new(
+      nil,
+      :name,
+      :default_value,
+      :description,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5720,6 +7501,13 @@ module Aws::CloudWatchLogs
     # @!attribute log_groups_scanned
     #   <p>The number of log groups that were scanned by this query.</p>
     #   @return [Float]
+    # @!attribute result_count
+    #   <p>The number of rows in the final query result set. This value represents the total number
+    #         of output rows across all pages. For queries that include post-aggregation filters (such as
+    #         <code>stats count(*) by field | filter count > threshold</code>), this value might be less
+    #         than <code>recordsMatched</code>. It reflects only the rows that survived all operations in
+    #         the query.</p>
+    #   @return [Float]
     class QueryStatistics < Struct.new(
       nil,
       :records_matched,
@@ -5728,6 +7516,7 @@ module Aws::CloudWatchLogs
       :bytes_scanned,
       :estimated_bytes_skipped,
       :log_groups_scanned,
+      :result_count,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5739,6 +7528,7 @@ module Aws::CloudWatchLogs
         options[:bytes_scanned] = 0 unless options.key?(:bytes_scanned)
         options[:estimated_bytes_skipped] = 0 unless options.key?(:estimated_bytes_skipped)
         options[:log_groups_scanned] = 0 unless options.key?(:log_groups_scanned)
+        options[:result_count] = 0 unless options.key?(:result_count)
         super
       end
     end
@@ -5928,13 +7718,41 @@ module Aws::CloudWatchLogs
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Configuration for Amazon S3 destination where scheduled query results are delivered.</p>
+    # @!attribute destination_identifier
+    #   <p>The Amazon S3 URI where query results are delivered. Must be a valid S3 URI format.</p>
+    #   @return [String]
+    # @!attribute role_arn
+    #   <p>The ARN of the IAM role that grants permissions to write query results to the specified
+    #         Amazon S3 destination.</p>
+    #   @return [String]
+    # @!attribute owner_account_id
+    #   <p>The Amazon Web Services accountId for the bucket owning account.</p>
+    #   @return [String]
+    # @!attribute kms_key_id
+    #   <p>The Amazon Resource Name (ARN) of the KMS encryption key. Must belong to the same Amazon Web Services Region
+    #         as the destination Amazon S3 bucket.</p>
+    #   @return [String]
+    class S3Configuration < Struct.new(
+      nil,
+      :destination_identifier,
+      :role_arn,
+      :owner_account_id,
+      :kms_key_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>This structure contains delivery configurations that apply only when the delivery
     #       destination resource is an S3 bucket.</p>
     # @!attribute suffix_path
     #   <p>This string allows re-configuring the S3 object prefix to contain either static or
-    #         variable sections. The valid variables to use in the suffix path will vary by each log source.
-    #         To find the values supported for the suffix path for each log source, use the <a href="https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeConfigurationTemplates.html">DescribeConfigurationTemplates</a> operation and check the
-    #           <code>allowedSuffixPathFields</code> field in the response.</p>
+    #         variable sections. The valid variables to use in the suffix path vary by log type. To find the
+    #         values supported for the suffix path for each log type, use the <a href="https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeConfigurationTemplates.html">DescribeConfigurationTemplates</a> operation and check the
+    #           <code>allowedSuffixPathFields</code> field in the response. For more information about how
+    #         the destination prefix, suffix path, and Hive-compatible setting determine the Amazon S3 object
+    #         key, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AWS-logs-infrastructure-V2-S3.html#AWS-logs-infrastructure-V2-S3-object-key">Amazon S3 object key for V2 deliveries</a>.</p>
     #   @return [String]
     # @!attribute enable_hive_compatible_path
     #   <p>This parameter causes the S3 objects that contain delivered logs to use a prefix structure
@@ -5944,6 +7762,139 @@ module Aws::CloudWatchLogs
       nil,
       :suffix_path,
       :enable_hive_compatible_path,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Represents a data source association with an S3 Table Integration, including its status
+    #       and metadata.</p>
+    # @!attribute identifier
+    #   <p>The unique identifier for this data source association.</p>
+    #   @return [String]
+    # @!attribute data_source
+    #   <p>The data source associated with the S3 Table Integration.</p>
+    #   @return [Types::DataSource]
+    # @!attribute status
+    #   <p>The current status of the data source association.</p>
+    #   @return [String]
+    # @!attribute status_reason
+    #   <p>Additional information about the status of the data source association.</p>
+    #   @return [String]
+    # @!attribute created_time_stamp
+    #   <p>The timestamp when the data source association was created.</p>
+    #   @return [Integer]
+    # @!attribute parent_source_identifier
+    #   <p>The identifier of the parent data source for this association.</p>
+    #   @return [String]
+    class S3TableIntegrationSource < Struct.new(
+      nil,
+      :identifier,
+      :data_source,
+      :status,
+      :status_reason,
+      :created_time_stamp,
+      :parent_source_identifier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains information about the S3 Tables integration configuration for a configuration
+    #       template.</p>
+    # @!attribute datasource_name
+    #   <p>The name of the S3 Tables datasource.</p>
+    #   @return [String]
+    # @!attribute datasource_type
+    #   <p>The type of the S3 Tables datasource.</p>
+    #   @return [String]
+    class S3TablesIntegration < Struct.new(
+      nil,
+      :datasource_name,
+      :datasource_type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Information about a destination where scheduled query results are processed, including
+    #       processing status and any error messages.</p>
+    # @!attribute destination_type
+    #   <p>The type of destination for query results.</p>
+    #   @return [String]
+    # @!attribute destination_identifier
+    #   <p>The identifier for the destination where results are delivered.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The processing status of the destination delivery.</p>
+    #   @return [String]
+    # @!attribute processed_identifier
+    #   <p>The identifier of the processed result at the destination.</p>
+    #   @return [String]
+    # @!attribute error_message
+    #   <p>Error message if destination processing failed.</p>
+    #   @return [String]
+    class ScheduledQueryDestination < Struct.new(
+      nil,
+      :destination_type,
+      :destination_identifier,
+      :status,
+      :processed_identifier,
+      :error_message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Summary information about a scheduled query, including basic configuration and execution
+    #       status.</p>
+    # @!attribute scheduled_query_arn
+    #   <p>The ARN of the scheduled query.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the scheduled query.</p>
+    #   @return [String]
+    # @!attribute state
+    #   <p>The current state of the scheduled query.</p>
+    #   @return [String]
+    # @!attribute schedule_type
+    #   <p>The schedule type of the scheduled query. Valid values are
+    #         <code>CUSTOMER_MANAGED</code> and <code>AWS_MANAGED</code>.</p>
+    #   @return [String]
+    # @!attribute last_triggered_time
+    #   <p>The timestamp when the scheduled query was last executed.</p>
+    #   @return [Integer]
+    # @!attribute last_execution_status
+    #   <p>The status of the most recent execution.</p>
+    #   @return [String]
+    # @!attribute schedule_expression
+    #   <p>The cron expression that defines when the scheduled query runs.</p>
+    #   @return [String]
+    # @!attribute timezone
+    #   <p>The timezone used for evaluating the schedule expression.</p>
+    #   @return [String]
+    # @!attribute destination_configuration
+    #   <p>Configuration for where query results are delivered.</p>
+    #   @return [Types::DestinationConfiguration]
+    # @!attribute creation_time
+    #   <p>The timestamp when the scheduled query was created.</p>
+    #   @return [Integer]
+    # @!attribute last_updated_time
+    #   <p>The timestamp when the scheduled query was last updated.</p>
+    #   @return [Integer]
+    class ScheduledQuerySummary < Struct.new(
+      nil,
+      :scheduled_query_arn,
+      :name,
+      :state,
+      :schedule_type,
+      :last_triggered_time,
+      :last_execution_status,
+      :schedule_expression,
+      :timezone,
+      :destination_configuration,
+      :creation_time,
+      :last_updated_time,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6190,9 +8141,7 @@ module Aws::CloudWatchLogs
     #           Syntax</a>.</p>
     #   @return [String]
     # @!attribute limit
-    #   <p>The maximum number of log events to return in the query. If the query string uses the
-    #           <code>fields</code> command, only the specified fields and their values are returned. The
-    #         default is 10,000.</p>
+    #   <p>The maximum number of log events to return from the query. The maximum limit is 100,000. The maximum events returned in a single GetQueryResults API call is 10,000 log events per request. You can retrieve up to 100,000 log event results from a query by paginating with the <code>nextToken</code>. 100,000 limit is only supported for Logs Insights QL and is currently not supported for PPL and SQL query languages.</p>
     #   @return [Integer]
     class StartQueryRequest < Struct.new(
       nil,
@@ -6281,10 +8230,14 @@ module Aws::CloudWatchLogs
     #         after <code>Jan 1, 1970 00:00:00 UTC</code>.</p>
     #   @return [Integer]
     # @!attribute field_selection_criteria
-    #   <p>The filter expression that specifies which log events are processed by this subscription filter based on system fields. Returns the <code>fieldSelectionCriteria</code> value if it was specified when the subscription filter was created.</p>
+    #   <p>The filter expression that specifies which log events are processed by this subscription
+    #         filter based on system fields. Returns the <code>fieldSelectionCriteria</code> value if it was
+    #         specified when the subscription filter was created.</p>
     #   @return [String]
     # @!attribute emit_system_fields
-    #   <p>The list of system fields that are included in the log events sent to the subscription destination. Returns the <code>emitSystemFields</code> value if it was specified when the subscription filter was created.</p>
+    #   <p>The list of system fields that are included in the log events sent to the subscription
+    #         destination. Returns the <code>emitSystemFields</code> value if it was specified when the
+    #         subscription filter was created.</p>
     #   @return [Array<String>]
     class SubscriptionFilter < Struct.new(
       nil,
@@ -6367,6 +8320,70 @@ module Aws::CloudWatchLogs
         options[:value] = 0 unless options.key?(:value)
         super
       end
+    end
+
+    # <p>Contains information about a syslog configuration associated with a log group.</p>
+    # @!attribute log_group_arn
+    #   <p>The ARN of the log group associated with this syslog configuration.</p>
+    #   @return [String]
+    # @!attribute source_type
+    #   <p>The source type for the syslog configuration.</p>
+    #   @return [String]
+    # @!attribute vpc_endpoint_id
+    #   <p>The ID of the VPC endpoint used for syslog ingestion.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The time when the syslog configuration was created, expressed as the number of
+    #         milliseconds after <code>Jan 1, 1970 00:00:00 UTC</code>.</p>
+    #   @return [Integer]
+    class SyslogConfiguration < Struct.new(
+      nil,
+      :log_group_arn,
+      :source_type,
+      :vpc_endpoint_id,
+      :created_at,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A tag filter that specifies a tag key and optional tag values for filtering log
+    #       groups by tags.</p>
+    # @!attribute key
+    #   <p>The tag key to filter on.</p>
+    #   @return [String]
+    # @!attribute values
+    #   <p>An optional list of tag values to filter on.</p>
+    #            <ul>
+    #               <li>
+    #                  <p>If you specify a filter that contains more than one value for a key,
+    #         the response returns log groups that match any of the specified values for that key.</p>
+    #               </li>
+    #               <li>
+    #                  <p>If you don't specify values, the response returns all log groups that are
+    #         tagged with that key, with any or no value.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Use <code>*</code> for wildcard matching. For example,
+    #           <code>prod*</code> matches values that start with <code>prod</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Use <code>!</code> as a prefix for negation. For example,
+    #           <code>!prod</code> matches values that are not <code>prod</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Exact matching and negation are case-sensitive. Wildcard matching is
+    #           case-insensitive.</p>
+    #               </li>
+    #            </ul>
+    #   @return [Array<String>]
+    class TagFilter < Struct.new(
+      nil,
+      :key,
+      :values,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
     end
 
     # @deprecated
@@ -6518,6 +8535,35 @@ module Aws::CloudWatchLogs
         options[:event_number] = 0 unless options.key?(:event_number)
         super
       end
+    end
+
+    # <p>A record of a scheduled query execution, including execution status, timestamp, and
+    #       destination processing results.</p>
+    # @!attribute query_id
+    #   <p>The unique identifier for this query execution.</p>
+    #   @return [String]
+    # @!attribute execution_status
+    #   <p>The execution status of the scheduled query run.</p>
+    #   @return [String]
+    # @!attribute triggered_timestamp
+    #   <p>The timestamp when the scheduled query execution was triggered.</p>
+    #   @return [Integer]
+    # @!attribute error_message
+    #   <p>Error message if the query execution failed.</p>
+    #   @return [String]
+    # @!attribute destinations
+    #   <p>Information about destination processing for this query execution.</p>
+    #   @return [Array<Types::ScheduledQueryDestination>]
+    class TriggerHistoryRecord < Struct.new(
+      nil,
+      :query_id,
+      :execution_status,
+      :triggered_timestamp,
+      :error_message,
+      :destinations,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Use this processor to remove leading and trailing whitespace.</p>
@@ -6727,6 +8773,210 @@ module Aws::CloudWatchLogs
       :filter_pattern,
       :anomaly_visibility_time,
       :enabled,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute lookup_table_arn
+    #   <p>The ARN of the lookup table to update.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>An updated description of the lookup table.</p>
+    #   @return [String]
+    # @!attribute table_body
+    #   <p>The new CSV content to replace the existing data. The first row must be a header row
+    #         with column names. The content must use UTF-8 encoding and not exceed 10 MB.</p>
+    #            <p>You must specify either <code>tableBody</code> or <code>queryId</code>, but not
+    #         both.</p>
+    #   @return [String]
+    # @!attribute query_id
+    #   <p>The ID of a completed or cancelled CloudWatch Logs query whose results replace
+    #         the lookup table content. A cancelled query replaces the content with the partial results
+    #         that were available when the query was stopped.</p>
+    #            <p>You must specify either <code>tableBody</code> or <code>queryId</code>, but not
+    #         both.</p>
+    #   @return [String]
+    # @!attribute kms_key_id
+    #   <p>The ARN of the KMS key to use to encrypt the lookup table data. You can
+    #         use this parameter to add, update, or remove the KMS key. To remove the KMS key and use an
+    #         Amazon Web Services-owned key instead, specify an empty string.</p>
+    #   @return [String]
+    class UpdateLookupTableRequest < Struct.new(
+      nil,
+      :lookup_table_arn,
+      :description,
+      :table_body,
+      :query_id,
+      :kms_key_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute lookup_table_arn
+    #   <p>The ARN of the lookup table that was updated.</p>
+    #   @return [String]
+    # @!attribute last_updated_time
+    #   <p>The time when the lookup table was last updated, expressed as the number of
+    #         milliseconds after <code>Jan 1, 1970 00:00:00 UTC</code>.</p>
+    #   @return [Integer]
+    class UpdateLookupTableResponse < Struct.new(
+      nil,
+      :lookup_table_arn,
+      :last_updated_time,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute identifier
+    #   <p>The ARN or name of the scheduled query to update.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>An updated description for the scheduled query.</p>
+    #   @return [String]
+    # @!attribute query_language
+    #   <p>The updated query language for the scheduled query.</p>
+    #   @return [String]
+    # @!attribute query_string
+    #   <p>The updated query string to execute.</p>
+    #   @return [String]
+    # @!attribute log_group_identifiers
+    #   <p>The updated array of log group names or ARNs to query.</p>
+    #   @return [Array<String>]
+    # @!attribute schedule_expression
+    #   <p>The updated cron expression that defines when the scheduled query runs.</p>
+    #   @return [String]
+    # @!attribute timezone
+    #   <p>The updated timezone for evaluating the schedule expression.</p>
+    #   @return [String]
+    # @!attribute start_time_offset
+    #   <p>The updated time offset in seconds that defines the lookback period for the query.</p>
+    #   @return [Integer]
+    # @!attribute end_time_offset
+    #   <p>The updated time offset in seconds that defines the end of the lookback period for
+    #         the query.</p>
+    #   @return [Integer]
+    # @!attribute destination_configuration
+    #   <p>The updated configuration for where to deliver query results.</p>
+    #   @return [Types::DestinationConfiguration]
+    # @!attribute schedule_start_time
+    #   <p>The updated start time for the scheduled query in Unix epoch format.</p>
+    #   @return [Integer]
+    # @!attribute schedule_end_time
+    #   <p>The updated end time for the scheduled query in Unix epoch format.</p>
+    #   @return [Integer]
+    # @!attribute execution_role_arn
+    #   <p>The updated ARN of the IAM role that grants permissions to execute the query and deliver
+    #         results.</p>
+    #   @return [String]
+    # @!attribute state
+    #   <p>The updated state of the scheduled query.</p>
+    #   @return [String]
+    class UpdateScheduledQueryRequest < Struct.new(
+      nil,
+      :identifier,
+      :description,
+      :query_language,
+      :query_string,
+      :log_group_identifiers,
+      :schedule_expression,
+      :timezone,
+      :start_time_offset,
+      :end_time_offset,
+      :destination_configuration,
+      :schedule_start_time,
+      :schedule_end_time,
+      :execution_role_arn,
+      :state,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute scheduled_query_arn
+    #   <p>The ARN of the updated scheduled query.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the updated scheduled query.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>The description of the updated scheduled query.</p>
+    #   @return [String]
+    # @!attribute query_language
+    #   <p>The query language of the updated scheduled query.</p>
+    #   @return [String]
+    # @!attribute query_string
+    #   <p>The query string of the updated scheduled query.</p>
+    #   @return [String]
+    # @!attribute log_group_identifiers
+    #   <p>The log groups queried by the updated scheduled query.</p>
+    #   @return [Array<String>]
+    # @!attribute schedule_expression
+    #   <p>The cron expression of the updated scheduled query.</p>
+    #   @return [String]
+    # @!attribute timezone
+    #   <p>The timezone of the updated scheduled query.</p>
+    #   @return [String]
+    # @!attribute start_time_offset
+    #   <p>The time offset of the updated scheduled query.</p>
+    #   @return [Integer]
+    # @!attribute end_time_offset
+    #   <p>The end time offset in seconds of the updated scheduled query.</p>
+    #   @return [Integer]
+    # @!attribute destination_configuration
+    #   <p>The destination configuration of the updated scheduled query.</p>
+    #   @return [Types::DestinationConfiguration]
+    # @!attribute state
+    #   <p>The state of the updated scheduled query.</p>
+    #   @return [String]
+    # @!attribute schedule_type
+    #   <p>The schedule type of the updated scheduled query.</p>
+    #   @return [String]
+    # @!attribute last_triggered_time
+    #   <p>The timestamp when the updated scheduled query was last executed.</p>
+    #   @return [Integer]
+    # @!attribute last_execution_status
+    #   <p>The status of the most recent execution of the updated scheduled query.</p>
+    #   @return [String]
+    # @!attribute schedule_start_time
+    #   <p>The start time of the updated scheduled query.</p>
+    #   @return [Integer]
+    # @!attribute schedule_end_time
+    #   <p>The end time of the updated scheduled query.</p>
+    #   @return [Integer]
+    # @!attribute execution_role_arn
+    #   <p>The execution role ARN of the updated scheduled query.</p>
+    #   @return [String]
+    # @!attribute creation_time
+    #   <p>The timestamp when the scheduled query was originally created.</p>
+    #   @return [Integer]
+    # @!attribute last_updated_time
+    #   <p>The timestamp when the scheduled query was last updated.</p>
+    #   @return [Integer]
+    class UpdateScheduledQueryResponse < Struct.new(
+      nil,
+      :scheduled_query_arn,
+      :name,
+      :description,
+      :query_language,
+      :query_string,
+      :log_group_identifiers,
+      :schedule_expression,
+      :timezone,
+      :start_time_offset,
+      :end_time_offset,
+      :destination_configuration,
+      :state,
+      :schedule_type,
+      :last_triggered_time,
+      :last_execution_status,
+      :schedule_start_time,
+      :schedule_end_time,
+      :execution_role_arn,
+      :creation_time,
+      :last_updated_time,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

@@ -2,6 +2,7 @@ module Aws::SecurityHub
   module Schema
     include Smithy::Schema::Shapes
 
+    AIDetails: StructureShape
     AcceptAdministratorInvitationRequest: StructureShape
     AcceptAdministratorInvitationResponse: StructureShape
     AcceptInvitationRequest: StructureShape
@@ -9,6 +10,8 @@ module Aws::SecurityHub
     AccessDeniedException: StructureShape
     AccountDetails: StructureShape
     AccountDetailsList: ListShape
+    AccountFreeTrialStatus: StructureShape
+    AccountFreeTrialStatusList: ListShape
     AccountId: StringShape
     AccountIdList: ListShape
     Action: StructureShape
@@ -61,6 +64,7 @@ module Aws::SecurityHub
     AutomationRulesMetadataList: ListShape
     AutomationRulesMetadataListV2: ListShape
     AutomationRulesMetadataV2: StructureShape
+    AutomationRulesResourceFieldsUpdateV2: StructureShape
     AvailabilityZone: StructureShape
     AvailabilityZones: ListShape
     AwsAmazonMqBrokerDetails: StructureShape
@@ -532,6 +536,8 @@ module Aws::SecurityHub
     AwsOpenSearchServiceDomainNodeToNodeEncryptionOptionsDetails: StructureShape
     AwsOpenSearchServiceDomainServiceSoftwareOptionsDetails: StructureShape
     AwsOpenSearchServiceDomainVpcOptionsDetails: StructureShape
+    AwsOrganizationScope: StructureShape
+    AwsOrganizationScopeList: ListShape
     AwsRdsDbClusterAssociatedRole: StructureShape
     AwsRdsDbClusterAssociatedRoles: ListShape
     AwsRdsDbClusterDetails: StructureShape
@@ -712,6 +718,12 @@ module Aws::SecurityHub
     AwsWafv2WebAclCaptchaConfigImmunityTimePropertyDetails: StructureShape
     AwsWafv2WebAclDetails: StructureShape
     AwsXrayEncryptionConfigDetails: StructureShape
+    AzureDetail: StructureShape
+    AzureProviderConfiguration: StructureShape
+    AzureRegionList: ListShape
+    AzureResourceDetails: DocumentShape
+    AzureScopeConfiguration: StructureShape
+    AzureUpdateConfiguration: StructureShape
     BatchDeleteAutomationRulesRequest: StructureShape
     BatchDeleteAutomationRulesResponse: StructureShape
     BatchDisableStandardsRequest: StructureShape
@@ -748,6 +760,8 @@ module Aws::SecurityHub
     BooleanConfigurationOptions: StructureShape
     BooleanFilter: StructureShape
     BooleanFilterList: ListShape
+    CancelExportJobV2Request: StructureShape
+    CancelExportJobV2Response: StructureShape
     CategoryList: ListShape
     Cell: StructureShape
     Cells: ListShape
@@ -757,6 +771,7 @@ module Aws::SecurityHub
     ClassificationResult: StructureShape
     ClassificationStatus: StructureShape
     ClientToken: StringShape
+    CloudProviderName: EnumShape
     CloudWatchLogsLogGroupArnConfigDetails: StructureShape
     CodeRepositoryDetails: StructureShape
     CodeVulnerabilitiesFilePath: StructureShape
@@ -777,8 +792,6 @@ module Aws::SecurityHub
     ConnectionDirection: EnumShape
     ConnectorAuthStatus: EnumShape
     ConnectorProviderName: EnumShape
-    ConnectorRegistrationsV2Request: StructureShape
-    ConnectorRegistrationsV2Response: StructureShape
     ConnectorStatus: EnumShape
     ConnectorSummary: StructureShape
     ConnectorSummaryList: ListShape
@@ -796,6 +809,8 @@ module Aws::SecurityHub
     CreateAutomationRuleV2Response: StructureShape
     CreateConfigurationPolicyRequest: StructureShape
     CreateConfigurationPolicyResponse: StructureShape
+    CreateConnectorRequest: StructureShape
+    CreateConnectorResponse: StructureShape
     CreateConnectorV2Request: StructureShape
     CreateConnectorV2Response: StructureShape
     CreateFindingAggregatorRequest: StructureShape
@@ -807,7 +822,20 @@ module Aws::SecurityHub
     CreateTicketV2Request: StructureShape
     CreateTicketV2Response: StructureShape
     Criteria: UnionShape
+    CriticalitySource: StructureShape
+    CriticalitySourceList: ListShape
+    CriticalitySourceType: EnumShape
     CrossAccountMaxResults: IntegerShape
+    CspmConnectorProviderName: EnumShape
+    CspmConnectorStatus: EnumShape
+    CspmConnectorSummary: StructureShape
+    CspmConnectorSummaryList: ListShape
+    CspmEnablementStatus: EnumShape
+    CspmHealthCheck: StructureShape
+    CspmProviderConfiguration: UnionShape
+    CspmProviderDetail: UnionShape
+    CspmProviderSummary: StructureShape
+    CspmProviderUpdateConfiguration: UnionShape
     CustomDataIdentifiersDetections: StructureShape
     CustomDataIdentifiersDetectionsList: ListShape
     CustomDataIdentifiersResult: StructureShape
@@ -818,6 +846,7 @@ module Aws::SecurityHub
     DateFilter: StructureShape
     DateFilterList: ListShape
     DateRange: StructureShape
+    DateRangeComparison: EnumShape
     DateRangeUnit: EnumShape
     DeclineInvitationsRequest: StructureShape
     DeclineInvitationsResponse: StructureShape
@@ -829,6 +858,8 @@ module Aws::SecurityHub
     DeleteAutomationRuleV2Response: StructureShape
     DeleteConfigurationPolicyRequest: StructureShape
     DeleteConfigurationPolicyResponse: StructureShape
+    DeleteConnectorRequest: StructureShape
+    DeleteConnectorResponse: StructureShape
     DeleteConnectorV2Request: StructureShape
     DeleteConnectorV2Response: StructureShape
     DeleteFindingAggregatorRequest: StructureShape
@@ -860,6 +891,8 @@ module Aws::SecurityHub
     DisableImportFindingsForProductResponse: StructureShape
     DisableOrganizationAdminAccountRequest: StructureShape
     DisableOrganizationAdminAccountResponse: StructureShape
+    DisableSecurityHubFeatureV2Request: StructureShape
+    DisableSecurityHubFeatureV2Response: StructureShape
     DisableSecurityHubRequest: StructureShape
     DisableSecurityHubResponse: StructureShape
     DisableSecurityHubV2Request: StructureShape
@@ -871,6 +904,7 @@ module Aws::SecurityHub
     DisassociateFromMasterAccountResponse: StructureShape
     DisassociateMembersRequest: StructureShape
     DisassociateMembersResponse: StructureShape
+    DiscoveryType: EnumShape
     DnsRequestAction: StructureShape
     Double: FloatShape
     DoubleConfigurationOptions: StructureShape
@@ -878,15 +912,39 @@ module Aws::SecurityHub
     EnableImportFindingsForProductResponse: StructureShape
     EnableOrganizationAdminAccountRequest: StructureShape
     EnableOrganizationAdminAccountResponse: StructureShape
+    EnableSecurityHubFeatureV2Request: StructureShape
+    EnableSecurityHubFeatureV2Response: StructureShape
     EnableSecurityHubRequest: StructureShape
     EnableSecurityHubResponse: StructureShape
     EnableSecurityHubV2Request: StructureShape
     EnableSecurityHubV2Response: StructureShape
     EnabledSecurityControlIdentifierList: ListShape
     EnabledStandardIdentifierList: ListShape
+    EnablementStatus: EnumShape
     EnumConfigurationOptions: StructureShape
     EnumListConfigurationOptions: StructureShape
+    ExportDataType: EnumShape
+    ExportDestination: UnionShape
+    ExportFailureCode: EnumShape
+    ExportJobId: StringShape
+    ExportMaxResults: IntegerShape
+    ExportName: StringShape
+    ExportOutput: UnionShape
+    ExportOutputSummary: UnionShape
+    ExportScopes: StructureShape
+    ExportStatus: EnumShape
+    ExportSummary: StructureShape
+    ExportSummaryList: ListShape
+    ExposureFinding: StructureShape
+    ExposureFindingItemsList: ListShape
+    ExposureImpact: EnumShape
+    ExposureSeverity: EnumShape
     ExternalIntegrationConfiguration: StructureShape
+    FeatureDetail: StructureShape
+    FeatureName: EnumShape
+    FeatureNameKey: StringShape
+    FeatureStatus: EnumShape
+    Features: MapShape
     FieldMap: MapShape
     FilePathList: ListShape
     FilePaths: StructureShape
@@ -900,6 +958,18 @@ module Aws::SecurityHub
     FindingHistoryUpdatesList: ListShape
     FindingProviderFields: StructureShape
     FindingProviderSeverity: StructureShape
+    FindingScopes: StructureShape
+    FindingsExportFormat: EnumShape
+    FindingsOutput: StructureShape
+    FindingsOutputSummary: StructureShape
+    FindingsSelectableField: EnumShape
+    FindingsSelectedFieldList: ListShape
+    FindingsTrendsCompositeFilter: StructureShape
+    FindingsTrendsCompositeFilterList: ListShape
+    FindingsTrendsFilters: StructureShape
+    FindingsTrendsStringField: EnumShape
+    FindingsTrendsStringFilter: StructureShape
+    FindingsTrendsStringFilterList: ListShape
     FirewallPolicyDetails: StructureShape
     FirewallPolicyStatefulRuleGroupReferencesDetails: StructureShape
     FirewallPolicyStatefulRuleGroupReferencesList: ListShape
@@ -907,6 +977,15 @@ module Aws::SecurityHub
     FirewallPolicyStatelessCustomActionsList: ListShape
     FirewallPolicyStatelessRuleGroupReferencesDetails: StructureShape
     FirewallPolicyStatelessRuleGroupReferencesList: ListShape
+    FreeTrialAccountId: StringShape
+    FreeTrialAccountIdList: ListShape
+    FreeTrialStatus: StructureShape
+    FreeTrialStatusList: ListShape
+    FreeTrialStatusValue: EnumShape
+    FreeTrialStatusValueList: ListShape
+    FreeTrialType: EnumShape
+    GenerateRecommendedPolicyV2Request: StructureShape
+    GenerateRecommendedPolicyV2Response: StructureShape
     GeneratorDetails: StructureShape
     GeoLocation: StructureShape
     GetAdministratorAccountRequest: StructureShape
@@ -919,10 +998,14 @@ module Aws::SecurityHub
     GetConfigurationPolicyAssociationResponse: StructureShape
     GetConfigurationPolicyRequest: StructureShape
     GetConfigurationPolicyResponse: StructureShape
+    GetConnectorRequest: StructureShape
+    GetConnectorResponse: StructureShape
     GetConnectorV2Request: StructureShape
     GetConnectorV2Response: StructureShape
     GetEnabledStandardsRequest: StructureShape
     GetEnabledStandardsResponse: StructureShape
+    GetExportJobV2Request: StructureShape
+    GetExportJobV2Response: StructureShape
     GetFindingAggregatorRequest: StructureShape
     GetFindingAggregatorResponse: StructureShape
     GetFindingHistoryRequest: StructureShape
@@ -931,6 +1014,8 @@ module Aws::SecurityHub
     GetFindingStatisticsV2Response: StructureShape
     GetFindingsRequest: StructureShape
     GetFindingsResponse: StructureShape
+    GetFindingsTrendsV2Request: StructureShape
+    GetFindingsTrendsV2Response: StructureShape
     GetFindingsV2Request: StructureShape
     GetFindingsV2Response: StructureShape
     GetInsightResultsRequest: StructureShape
@@ -943,12 +1028,19 @@ module Aws::SecurityHub
     GetMasterAccountResponse: StructureShape
     GetMembersRequest: StructureShape
     GetMembersResponse: StructureShape
+    GetRecommendedPolicyV2Request: StructureShape
+    GetRecommendedPolicyV2Response: StructureShape
+    GetRemediationsV2Request: StructureShape
+    GetRemediationsV2Response: StructureShape
     GetResourcesStatisticsV2Request: StructureShape
     GetResourcesStatisticsV2Response: StructureShape
+    GetResourcesTrendsV2Request: StructureShape
+    GetResourcesTrendsV2Response: StructureShape
     GetResourcesV2Request: StructureShape
     GetResourcesV2Response: StructureShape
     GetSecurityControlDefinitionRequest: StructureShape
     GetSecurityControlDefinitionResponse: StructureShape
+    GranularityField: EnumShape
     GroupByField: EnumShape
     GroupByResult: StructureShape
     GroupByResults: ListShape
@@ -956,7 +1048,11 @@ module Aws::SecurityHub
     GroupByRules: ListShape
     GroupByValue: StructureShape
     GroupByValues: ListShape
+    GuidanceFormat: EnumShape
     HealthCheck: StructureShape
+    HealthIssue: StructureShape
+    HealthIssueCode: EnumShape
+    HealthIssueList: ListShape
     IcmpTypeCode: StructureShape
     ImportFindingsError: StructureShape
     ImportFindingsErrorList: ListShape
@@ -988,9 +1084,12 @@ module Aws::SecurityHub
     IpOrganizationDetails: StructureShape
     Ipv6CidrBlockAssociation: StructureShape
     Ipv6CidrBlockAssociationList: ListShape
+    IsoString: StringShape
     JiraCloudDetail: StructureShape
     JiraCloudProviderConfiguration: StructureShape
     JiraCloudUpdateConfiguration: StructureShape
+    KbArticle: StructureShape
+    KbArticleList: ListShape
     KeywordFilter: StructureShape
     KeywordFilterList: ListShape
     LimitExceededException: StructureShape
@@ -1004,12 +1103,20 @@ module Aws::SecurityHub
     ListConfigurationPoliciesResponse: StructureShape
     ListConfigurationPolicyAssociationsRequest: StructureShape
     ListConfigurationPolicyAssociationsResponse: StructureShape
+    ListConnectorsRequest: StructureShape
+    ListConnectorsResponse: StructureShape
     ListConnectorsV2Request: StructureShape
     ListConnectorsV2Response: StructureShape
     ListEnabledProductsForImportRequest: StructureShape
     ListEnabledProductsForImportResponse: StructureShape
+    ListExportJobsV2Request: StructureShape
+    ListExportJobsV2Response: StructureShape
+    ListExposuresByRemediationV2Request: StructureShape
+    ListExposuresByRemediationV2Response: StructureShape
     ListFindingAggregatorsRequest: StructureShape
     ListFindingAggregatorsResponse: StructureShape
+    ListFreeTrialStatusesV2Request: StructureShape
+    ListFreeTrialStatusesV2Response: StructureShape
     ListInvitationsRequest: StructureShape
     ListInvitationsResponse: StructureShape
     ListMembersRequest: StructureShape
@@ -1067,6 +1174,9 @@ module Aws::SecurityHub
     OcsfFindingIdentifier: StructureShape
     OcsfFindingIdentifierList: ListShape
     OcsfFindingsList: ListShape
+    OcsfIpField: EnumShape
+    OcsfIpFilter: StructureShape
+    OcsfIpFilterList: ListShape
     OcsfMapField: EnumShape
     OcsfMapFilter: StructureShape
     OcsfMapFilterList: ListShape
@@ -1079,6 +1189,8 @@ module Aws::SecurityHub
     OrganizationConfiguration: StructureShape
     OrganizationConfigurationConfigurationType: EnumShape
     OrganizationConfigurationStatus: EnumShape
+    OrganizationNotFoundException: StructureShape
+    OrganizationalUnitNotFoundException: StructureShape
     Page: StructureShape
     Pages: ListShape
     ParameterConfiguration: StructureShape
@@ -1112,19 +1224,53 @@ module Aws::SecurityHub
     Ranges: ListShape
     RatioScale: IntegerShape
     Recommendation: StructureShape
+    RecommendationError: StructureShape
+    RecommendationStatus: EnumShape
+    RecommendationStep: UnionShape
+    RecommendationSteps: ListShape
+    RecommendationType: EnumShape
     Record: StructureShape
     RecordState: EnumShape
     Records: ListShape
     RegionAvailabilityStatus: EnumShape
+    RegisterConnectorV2Request: StructureShape
+    RegisterConnectorV2Response: StructureShape
     RelatedFinding: StructureShape
     RelatedFindingList: ListShape
     RelatedRequirementsList: ListShape
     Remediation: StructureShape
+    RemediationCompositeFilter: StructureShape
+    RemediationCompositeFilterList: ListShape
+    RemediationFilters: StructureShape
+    RemediationGuidance: StructureShape
+    RemediationGuidanceContext: StructureShape
+    RemediationGuidanceExamples: StructureShape
+    RemediationGuidanceMetadata: StructureShape
+    RemediationGuidanceSpecification: StructureShape
+    RemediationOutcome: StructureShape
+    RemediationParameter: StructureShape
+    RemediationParameterList: ListShape
+    RemediationPriority: EnumShape
+    RemediationResource: StructureShape
+    RemediationStatus: EnumShape
+    RemediationStep: StructureShape
+    RemediationStepList: ListShape
+    RemediationStringField: EnumShape
+    RemediationStringFilter: StructureShape
+    RemediationStringFilterCondition: StructureShape
+    RemediationStringFilterList: ListShape
+    RemediationStringList: ListShape
+    RemediationStringUid: StringShape
+    RemediationSummaryDetail: StructureShape
+    RemediationTrait: StructureShape
+    RemediationV2Item: StructureShape
+    RemediationV2ItemList: ListShape
     Resource: StructureShape
     ResourceArn: StringShape
     ResourceCategory: EnumShape
     ResourceConfig: DocumentShape
     ResourceConflictException: StructureShape
+    ResourceCriticality: EnumShape
     ResourceDetails: StructureShape
     ResourceFindingsSummary: StructureShape
     ResourceFindingsSummaryList: ListShape
@@ -1132,15 +1278,22 @@ module Aws::SecurityHub
     ResourceGroupByRule: StructureShape
     ResourceGroupByRules: ListShape
     ResourceInUseException: StructureShape
+    ResourceInfo: StructureShape
     ResourceList: ListShape
     ResourceNotFoundException: StructureShape
+    ResourceOwner: StructureShape
+    ResourceOwnerAccount: StructureShape
+    ResourceOwnerOrg: StructureShape
     ResourceResult: StructureShape
+    ResourceScopes: StructureShape
     ResourceSeverityBreakdown: StructureShape
+    ResourceSubCategory: EnumShape
     ResourceTag: StructureShape
     ResourceTagList: ListShape
     Resources: ListShape
     ResourcesCompositeFilter: StructureShape
     ResourcesCompositeFilterList: ListShape
+    ResourcesCount: StructureShape
     ResourcesDateField: EnumShape
     ResourcesDateFilter: StructureShape
     ResourcesDateFilterList: ListShape
@@ -1154,6 +1307,15 @@ module Aws::SecurityHub
     ResourcesStringField: EnumShape
     ResourcesStringFilter: StructureShape
     ResourcesStringFilterList: ListShape
+    ResourcesTrendsCompositeFilter: StructureShape
+    ResourcesTrendsCompositeFilterList: ListShape
+    ResourcesTrendsFilters: StructureShape
+    ResourcesTrendsMetrics: ListShape
+    ResourcesTrendsMetricsResult: StructureShape
+    ResourcesTrendsStringField: EnumShape
+    ResourcesTrendsStringFilter: StructureShape
+    ResourcesTrendsStringFilterList: ListShape
+    ResourcesTrendsValues: StructureShape
     Result: StructureShape
     ResultList: ListShape
     RouteSetDetails: StructureShape
@@ -1192,6 +1354,10 @@ module Aws::SecurityHub
     RuleOrderValueV2: FloatShape
     RuleStatus: EnumShape
     RuleStatusV2: EnumShape
+    S3ExportDestination: StructureShape
+    S3ObjectPrefix: StringShape
+    ScopeType: EnumShape
+    ScopeValueList: ListShape
     SecurityControl: StructureShape
     SecurityControlCustomParameter: StructureShape
     SecurityControlCustomParametersList: ListShape
@@ -1202,6 +1368,8 @@ module Aws::SecurityHub
     SecurityControlProperty: EnumShape
     SecurityControls: ListShape
     SecurityControlsConfiguration: StructureShape
+    SecurityControlsProvider: EnumShape
+    SecurityControlsProviders: ListShape
     SecurityGroups: ListShape
     SecurityHubFeature: EnumShape
     SecurityHubPolicy: StructureShape
@@ -1209,13 +1377,15 @@ module Aws::SecurityHub
     SensitiveDataDetectionsList: ListShape
     SensitiveDataResult: StructureShape
     SensitiveDataResultList: ListShape
-    SensitiveNonEmptyString: StringShape
     Sequence: StructureShape
     ServiceNowDetail: StructureShape
     ServiceNowProviderConfiguration: StructureShape
+    ServiceNowUpdateConfiguration: StructureShape
+    ServiceQuotaExceededException: StructureShape
     Severity: StructureShape
     SeverityLabel: EnumShape
     SeverityRating: EnumShape
+    SeverityTrendsCount: StructureShape
     SeverityUpdate: StructureShape
     Signal: StructureShape
     SignalsList: ListShape
@@ -1241,6 +1411,8 @@ module Aws::SecurityHub
     StandardsControlsUpdatable: EnumShape
     StandardsInputParameterMap: MapShape
     StandardsManagedBy: StructureShape
+    StandardsProvider: EnumShape
+    StandardsProviders: ListShape
     StandardsStatus: EnumShape
     StandardsStatusReason: StructureShape
     StandardsSubscription: StructureShape
@@ -1252,6 +1424,8 @@ module Aws::SecurityHub
     StartConfigurationPolicyAssociationResponse: StructureShape
     StartConfigurationPolicyDisassociationRequest: StructureShape
     StartConfigurationPolicyDisassociationResponse: StructureShape
+    StartExportJobV2Request: StructureShape
+    StartExportJobV2Response: StructureShape
     StatelessCustomActionDefinition: StructureShape
     StatelessCustomPublishMetricAction: StructureShape
     StatelessCustomPublishMetricActionDimension: StructureShape
@@ -1280,7 +1454,12 @@ module Aws::SecurityHub
     ThreatIntelIndicatorType: EnumShape
     ThreatList: ListShape
     ThrottlingException: StructureShape
+    TicketCreationMode: EnumShape
     Timestamp: TimestampShape
+    TrendsMetrics: ListShape
+    TrendsMetricsResult: StructureShape
+    TrendsValueCount: IntegerShape
+    TrendsValues: StructureShape
     TypeList: ListShape
     UnprocessedAutomationRule: StructureShape
     UnprocessedAutomationRulesList: ListShape
@@ -1295,6 +1474,7 @@ module Aws::SecurityHub
     UnprocessedStandardsControlAssociations: ListShape
     UntagResourceRequest: StructureShape
     UntagResourceResponse: StructureShape
+    UnusedPermissionsRecommendationStep: StructureShape
     UpdateActionTargetRequest: StructureShape
     UpdateActionTargetResponse: StructureShape
     UpdateAggregatorV2Request: StructureShape
@@ -1305,6 +1485,8 @@ module Aws::SecurityHub
     UpdateAutomationRulesRequestItemsList: ListShape
     UpdateConfigurationPolicyRequest: StructureShape
     UpdateConfigurationPolicyResponse: StructureShape
+    UpdateConnectorRequest: StructureShape
+    UpdateConnectorResponse: StructureShape
     UpdateConnectorV2Request: StructureShape
     UpdateConnectorV2Response: StructureShape
     UpdateFindingAggregatorRequest: StructureShape

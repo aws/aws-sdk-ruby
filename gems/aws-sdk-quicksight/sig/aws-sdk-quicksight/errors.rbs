@@ -31,7 +31,15 @@ module Aws::QuickSight
     class InternalServerException < Smithy::Client::ServiceError
       def message: () -> String?
     end
+    class InvalidDataSetParameterValueException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def request_id: () -> String?
+    end
     class InvalidNextTokenException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class InvalidParameterException < Smithy::Client::ServiceError
       def message: () -> String?
       def request_id: () -> String?
     end

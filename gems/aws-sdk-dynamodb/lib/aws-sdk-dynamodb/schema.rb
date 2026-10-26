@@ -102,6 +102,7 @@ module Aws::DynamoDB
     CreateReplicationGroupMemberAction = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.dynamodb#CreateReplicationGroupMemberAction", name: "CreateReplicationGroupMemberAction")
     CreateTableInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.dynamodb#CreateTableInput", name: "CreateTableInput")
     CreateTableOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.dynamodb#CreateTableOutput", name: "CreateTableOutput")
+    CreateVectorIndexAction = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.dynamodb#CreateVectorIndexAction", name: "CreateVectorIndexAction")
     CsvDelimiter = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.dynamodb#CsvDelimiter", name: "CsvDelimiter", traits: {"smithy.api#length" => {"min" => 1, "max" => 1}, "smithy.api#pattern" => "^[,;:|\\t ]$"})
     CsvHeader = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.dynamodb#CsvHeader", name: "CsvHeader", traits: {"smithy.api#length" => {"min" => 1, "max" => 65536}, "smithy.api#pattern" => "^[\\x20-\\x21\\x23-\\x2B\\x2D-\\x7E]*$"})
     CsvHeaderList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.dynamodb#CsvHeaderList", name: "CsvHeaderList", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}})
@@ -121,6 +122,7 @@ module Aws::DynamoDB
     DeleteResourcePolicyOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.dynamodb#DeleteResourcePolicyOutput", name: "DeleteResourcePolicyOutput")
     DeleteTableInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.dynamodb#DeleteTableInput", name: "DeleteTableInput")
     DeleteTableOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.dynamodb#DeleteTableOutput", name: "DeleteTableOutput")
+    DeleteVectorIndexAction = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.dynamodb#DeleteVectorIndexAction", name: "DeleteVectorIndexAction")
     DeletionProtectionEnabled = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.dynamodb#DeletionProtectionEnabled", name: "DeletionProtectionEnabled")
     DescribeBackupInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.dynamodb#DescribeBackupInput", name: "DescribeBackupInput")
     DescribeBackupOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.dynamodb#DescribeBackupOutput", name: "DescribeBackupOutput")
@@ -195,6 +197,7 @@ module Aws::DynamoDB
     FailureException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.dynamodb#FailureException", name: "FailureException")
     FailureMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.dynamodb#FailureMessage", name: "FailureMessage")
     FilterConditionMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.dynamodb#FilterConditionMap", name: "FilterConditionMap")
+    FilterSpecification = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.dynamodb#FilterSpecification", name: "FilterSpecification")
     Get = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.dynamodb#Get", name: "Get")
     GetItemInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.dynamodb#GetItemInput", name: "GetItemInput")
     GetItemOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.dynamodb#GetItemOutput", name: "GetItemOutput")
@@ -219,6 +222,7 @@ module Aws::DynamoDB
     GlobalTableGlobalSecondaryIndexSettingsUpdateList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.dynamodb#GlobalTableGlobalSecondaryIndexSettingsUpdateList", name: "GlobalTableGlobalSecondaryIndexSettingsUpdateList", traits: {"smithy.api#length" => {"min" => 1, "max" => 20}})
     GlobalTableList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.dynamodb#GlobalTableList", name: "GlobalTableList")
     GlobalTableNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.dynamodb#GlobalTableNotFoundException", name: "GlobalTableNotFoundException", traits: {"smithy.api#error" => "client"})
+    GlobalTableSettingsReplicationMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.dynamodb#GlobalTableSettingsReplicationMode", name: "GlobalTableSettingsReplicationMode")
     GlobalTableStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.dynamodb#GlobalTableStatus", name: "GlobalTableStatus")
     GlobalTableWitnessDescription = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.dynamodb#GlobalTableWitnessDescription", name: "GlobalTableWitnessDescription")
     GlobalTableWitnessDescriptionList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.dynamodb#GlobalTableWitnessDescriptionList", name: "GlobalTableWitnessDescriptionList")
@@ -268,7 +272,7 @@ module Aws::DynamoDB
     KeyConditions = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.dynamodb#KeyConditions", name: "KeyConditions")
     KeyExpression = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.dynamodb#KeyExpression", name: "KeyExpression")
     KeyList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.dynamodb#KeyList", name: "KeyList", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
-    KeySchema = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.dynamodb#KeySchema", name: "KeySchema", traits: {"smithy.api#length" => {"min" => 1, "max" => 2}})
+    KeySchema = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.dynamodb#KeySchema", name: "KeySchema", traits: {"smithy.api#length" => {"min" => 1}})
     KeySchemaAttributeName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.dynamodb#KeySchemaAttributeName", name: "KeySchemaAttributeName", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}})
     KeySchemaElement = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.dynamodb#KeySchemaElement", name: "KeySchemaElement")
     KeyType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.dynamodb#KeyType", name: "KeyType")
@@ -416,6 +420,15 @@ module Aws::DynamoDB
     ScanOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.dynamodb#ScanOutput", name: "ScanOutput")
     ScanSegment = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.dynamodb#ScanSegment", name: "ScanSegment", traits: {"smithy.api#range" => {"min" => 0, "max" => 999999}})
     ScanTotalSegments = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.dynamodb#ScanTotalSegments", name: "ScanTotalSegments", traits: {"smithy.api#range" => {"min" => 1, "max" => 1000000}})
+    ScoreNumber = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.dynamodb#ScoreNumber", name: "ScoreNumber", traits: {"smithy.api#default" => 0})
+    SearchResultItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.dynamodb#SearchResultItem", name: "SearchResultItem")
+    SearchResultList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.dynamodb#SearchResultList", name: "SearchResultList")
+    SearchSchema = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.dynamodb#SearchSchema", name: "SearchSchema", traits: {"smithy.api#length" => {"min" => 1}})
+    SearchSchemaElement = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.dynamodb#SearchSchemaElement", name: "SearchSchemaElement")
+    SearchSchemaElementType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.dynamodb#SearchSchemaElementType", name: "SearchSchemaElementType")
+    SearchVectorList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.dynamodb#SearchVectorList", name: "SearchVectorList", traits: {"smithy.api#length" => {"min" => 1, "max" => 4096}})
+    SearchVectorsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.dynamodb#SearchVectorsInput", name: "SearchVectorsInput")
+    SearchVectorsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.dynamodb#SearchVectorsOutput", name: "SearchVectorsOutput")
     SecondaryIndexesCapacityMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.dynamodb#SecondaryIndexesCapacityMap", name: "SecondaryIndexesCapacityMap")
     Select = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.dynamodb#Select", name: "Select")
     SourceTableDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.dynamodb#SourceTableDetails", name: "SourceTableDetails")
@@ -458,6 +471,7 @@ module Aws::DynamoDB
     TimeToLiveEnabled = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.dynamodb#TimeToLiveEnabled", name: "TimeToLiveEnabled")
     TimeToLiveSpecification = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.dynamodb#TimeToLiveSpecification", name: "TimeToLiveSpecification")
     TimeToLiveStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.dynamodb#TimeToLiveStatus", name: "TimeToLiveStatus")
+    TopKInteger = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.dynamodb#TopKInteger", name: "TopKInteger", traits: {"smithy.api#range" => {"min" => 1}})
     TransactGetItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.dynamodb#TransactGetItem", name: "TransactGetItem")
     TransactGetItemList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.dynamodb#TransactGetItemList", name: "TransactGetItemList", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
     TransactGetItemsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.dynamodb#TransactGetItemsInput", name: "TransactGetItemsInput")
@@ -493,6 +507,19 @@ module Aws::DynamoDB
     UpdateTableReplicaAutoScalingOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.dynamodb#UpdateTableReplicaAutoScalingOutput", name: "UpdateTableReplicaAutoScalingOutput")
     UpdateTimeToLiveInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.dynamodb#UpdateTimeToLiveInput", name: "UpdateTimeToLiveInput")
     UpdateTimeToLiveOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.dynamodb#UpdateTimeToLiveOutput", name: "UpdateTimeToLiveOutput")
+    VectorAttributeDefinition = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.dynamodb#VectorAttributeDefinition", name: "VectorAttributeDefinition")
+    VectorAttributeName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.dynamodb#VectorAttributeName", name: "VectorAttributeName", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}})
+    VectorCapacity = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.dynamodb#VectorCapacity", name: "VectorCapacity")
+    VectorDistanceFunction = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.dynamodb#VectorDistanceFunction", name: "VectorDistanceFunction")
+    VectorIndex = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.dynamodb#VectorIndex", name: "VectorIndex")
+    VectorIndexDescription = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.dynamodb#VectorIndexDescription", name: "VectorIndexDescription")
+    VectorIndexDescriptionList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.dynamodb#VectorIndexDescriptionList", name: "VectorIndexDescriptionList")
+    VectorIndexInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.dynamodb#VectorIndexInfo", name: "VectorIndexInfo")
+    VectorIndexList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.dynamodb#VectorIndexList", name: "VectorIndexList")
+    VectorIndexUpdate = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.dynamodb#VectorIndexUpdate", name: "VectorIndexUpdate")
+    VectorIndexUpdateList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.dynamodb#VectorIndexUpdateList", name: "VectorIndexUpdateList")
+    VectorIndexes = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.dynamodb#VectorIndexes", name: "VectorIndexes")
+    VectorIndexesCapacityMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.dynamodb#VectorIndexesCapacityMap", name: "VectorIndexesCapacityMap")
     WarmThroughput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.dynamodb#WarmThroughput", name: "WarmThroughput")
     WitnessStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.dynamodb#WitnessStatus", name: "WitnessStatus")
     WriteRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.dynamodb#WriteRequest", name: "WriteRequest")
@@ -700,6 +727,7 @@ module Aws::DynamoDB
     ConsumedCapacity.add_member(:table, ::Smithy::Schema::Shapes::MemberShape.new(target: Capacity, name: "Table"))
     ConsumedCapacity.add_member(:local_secondary_indexes, ::Smithy::Schema::Shapes::MemberShape.new(target: SecondaryIndexesCapacityMap, name: "LocalSecondaryIndexes"))
     ConsumedCapacity.add_member(:global_secondary_indexes, ::Smithy::Schema::Shapes::MemberShape.new(target: SecondaryIndexesCapacityMap, name: "GlobalSecondaryIndexes"))
+    ConsumedCapacity.add_member(:vector_indexes, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorIndexesCapacityMap, name: "VectorIndexes"))
     ConsumedCapacity.type = Types::ConsumedCapacity
     ConsumedCapacityMultiple.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConsumedCapacity, name: "member"))
     ContinuousBackupsDescription.add_member(:continuous_backups_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ContinuousBackupsStatus, name: "ContinuousBackupsStatus", traits: {"smithy.api#required" => {}}))
@@ -753,9 +781,9 @@ module Aws::DynamoDB
     CreateReplicationGroupMemberAction.add_member(:global_secondary_indexes, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicaGlobalSecondaryIndexList, name: "GlobalSecondaryIndexes"))
     CreateReplicationGroupMemberAction.add_member(:table_class_override, ::Smithy::Schema::Shapes::MemberShape.new(target: TableClass, name: "TableClassOverride"))
     CreateReplicationGroupMemberAction.type = Types::CreateReplicationGroupMemberAction
-    CreateTableInput.add_member(:attribute_definitions, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeDefinitions, name: "AttributeDefinitions", traits: {"smithy.api#required" => {}}))
+    CreateTableInput.add_member(:attribute_definitions, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeDefinitions, name: "AttributeDefinitions"))
     CreateTableInput.add_member(:table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TableArn, name: "TableName", traits: {"smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "ResourceArn"}}))
-    CreateTableInput.add_member(:key_schema, ::Smithy::Schema::Shapes::MemberShape.new(target: KeySchema, name: "KeySchema", traits: {"smithy.api#required" => {}}))
+    CreateTableInput.add_member(:key_schema, ::Smithy::Schema::Shapes::MemberShape.new(target: KeySchema, name: "KeySchema"))
     CreateTableInput.add_member(:local_secondary_indexes, ::Smithy::Schema::Shapes::MemberShape.new(target: LocalSecondaryIndexList, name: "LocalSecondaryIndexes"))
     CreateTableInput.add_member(:global_secondary_indexes, ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalSecondaryIndexList, name: "GlobalSecondaryIndexes"))
     CreateTableInput.add_member(:billing_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingMode, name: "BillingMode"))
@@ -768,9 +796,19 @@ module Aws::DynamoDB
     CreateTableInput.add_member(:warm_throughput, ::Smithy::Schema::Shapes::MemberShape.new(target: WarmThroughput, name: "WarmThroughput"))
     CreateTableInput.add_member(:resource_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcePolicy, name: "ResourcePolicy"))
     CreateTableInput.add_member(:on_demand_throughput, ::Smithy::Schema::Shapes::MemberShape.new(target: OnDemandThroughput, name: "OnDemandThroughput"))
+    CreateTableInput.add_member(:global_table_source_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TableArn, name: "GlobalTableSourceArn"))
+    CreateTableInput.add_member(:global_table_settings_replication_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalTableSettingsReplicationMode, name: "GlobalTableSettingsReplicationMode"))
+    CreateTableInput.add_member(:vector_indexes, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorIndexList, name: "VectorIndexes"))
     CreateTableInput.type = Types::CreateTableInput
     CreateTableOutput.add_member(:table_description, ::Smithy::Schema::Shapes::MemberShape.new(target: TableDescription, name: "TableDescription"))
     CreateTableOutput.type = Types::CreateTableOutput
+    CreateVectorIndexAction.add_member(:index_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexName, name: "IndexName", traits: {"smithy.api#required" => {}}))
+    CreateVectorIndexAction.add_member(:vector_attribute, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorAttributeDefinition, name: "VectorAttribute", traits: {"smithy.api#required" => {}}))
+    CreateVectorIndexAction.add_member(:search_schema, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchSchema, name: "SearchSchema"))
+    CreateVectorIndexAction.add_member(:projection, ::Smithy::Schema::Shapes::MemberShape.new(target: Projection, name: "Projection", traits: {"smithy.api#required" => {}}))
+    CreateVectorIndexAction.add_member(:dimensions, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveLongObject, name: "Dimensions", traits: {"smithy.api#required" => {}}))
+    CreateVectorIndexAction.add_member(:distance_function, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorDistanceFunction, name: "DistanceFunction", traits: {"smithy.api#required" => {}}))
+    CreateVectorIndexAction.type = Types::CreateVectorIndexAction
     CsvHeaderList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CsvHeader, name: "member"))
     CsvOptions.add_member(:delimiter, ::Smithy::Schema::Shapes::MemberShape.new(target: CsvDelimiter, name: "Delimiter"))
     CsvOptions.add_member(:header_list, ::Smithy::Schema::Shapes::MemberShape.new(target: CsvHeaderList, name: "HeaderList"))
@@ -821,6 +859,8 @@ module Aws::DynamoDB
     DeleteTableInput.type = Types::DeleteTableInput
     DeleteTableOutput.add_member(:table_description, ::Smithy::Schema::Shapes::MemberShape.new(target: TableDescription, name: "TableDescription"))
     DeleteTableOutput.type = Types::DeleteTableOutput
+    DeleteVectorIndexAction.add_member(:index_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexName, name: "IndexName", traits: {"smithy.api#required" => {}}))
+    DeleteVectorIndexAction.type = Types::DeleteVectorIndexAction
     DescribeBackupInput.add_member(:backup_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupArn, name: "BackupArn", traits: {"smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "ResourceArn"}}))
     DescribeBackupInput.type = Types::DescribeBackupInput
     DescribeBackupOutput.add_member(:backup_description, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupDescription, name: "BackupDescription"))
@@ -965,6 +1005,7 @@ module Aws::DynamoDB
     ExportDescription.add_member(:item_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ItemCount, name: "ItemCount"))
     ExportDescription.add_member(:export_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportType, name: "ExportType"))
     ExportDescription.add_member(:incremental_export_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: IncrementalExportSpecification, name: "IncrementalExportSpecification"))
+    ExportDescription.add_member(:filter_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterSpecification, name: "FilterSpecification"))
     ExportDescription.type = Types::ExportDescription
     ExportFormat.add_member(:dynamodb_json, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DYNAMODB_JSON", traits: {"smithy.api#enumValue" => "DYNAMODB_JSON"}))
     ExportFormat.add_member(:ion, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ION", traits: {"smithy.api#enumValue" => "ION"}))
@@ -989,6 +1030,7 @@ module Aws::DynamoDB
     ExportTableToPointInTimeInput.add_member(:export_format, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportFormat, name: "ExportFormat"))
     ExportTableToPointInTimeInput.add_member(:export_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportType, name: "ExportType"))
     ExportTableToPointInTimeInput.add_member(:incremental_export_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: IncrementalExportSpecification, name: "IncrementalExportSpecification"))
+    ExportTableToPointInTimeInput.add_member(:filter_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterSpecification, name: "FilterSpecification"))
     ExportTableToPointInTimeInput.type = Types::ExportTableToPointInTimeInput
     ExportTableToPointInTimeOutput.add_member(:export_description, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportDescription, name: "ExportDescription"))
     ExportTableToPointInTimeOutput.type = Types::ExportTableToPointInTimeOutput
@@ -1005,6 +1047,12 @@ module Aws::DynamoDB
     FailureException.type = Types::FailureException
     FilterConditionMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "key"))
     FilterConditionMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Condition, name: "value"))
+    FilterSpecification.add_member(:filter_expression, ::Smithy::Schema::Shapes::MemberShape.new(target: ConditionExpression, name: "FilterExpression"))
+    FilterSpecification.add_member(:projection_expression, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectionExpression, name: "ProjectionExpression"))
+    FilterSpecification.add_member(:key_condition_expression, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyExpression, name: "KeyConditionExpression"))
+    FilterSpecification.add_member(:expression_attribute_names, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpressionAttributeNameMap, name: "ExpressionAttributeNames"))
+    FilterSpecification.add_member(:expression_attribute_values, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpressionAttributeValueMap, name: "ExpressionAttributeValues"))
+    FilterSpecification.type = Types::FilterSpecification
     Get.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Key, name: "Key", traits: {"smithy.api#required" => {}}))
     Get.add_member(:table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TableArn, name: "TableName", traits: {"smithy.api#required" => {}}))
     Get.add_member(:projection_expression, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectionExpression, name: "ProjectionExpression"))
@@ -1086,6 +1134,9 @@ module Aws::DynamoDB
     GlobalTableList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalTable, name: "member"))
     GlobalTableNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     GlobalTableNotFoundException.type = Types::GlobalTableNotFoundException
+    GlobalTableSettingsReplicationMode.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
+    GlobalTableSettingsReplicationMode.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
+    GlobalTableSettingsReplicationMode.add_member(:enabled_with_overrides, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED_WITH_OVERRIDES", traits: {"smithy.api#enumValue" => "ENABLED_WITH_OVERRIDES"}))
     GlobalTableStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
     GlobalTableStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     GlobalTableStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
@@ -1412,6 +1463,7 @@ module Aws::DynamoDB
     ReplicaAutoScalingUpdateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicaAutoScalingUpdate, name: "member"))
     ReplicaDescription.add_member(:region_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionName, name: "RegionName"))
     ReplicaDescription.add_member(:replica_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicaStatus, name: "ReplicaStatus"))
+    ReplicaDescription.add_member(:replica_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ReplicaArn"))
     ReplicaDescription.add_member(:replica_status_description, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicaStatusDescription, name: "ReplicaStatusDescription"))
     ReplicaDescription.add_member(:replica_status_percent_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicaStatusPercentProgress, name: "ReplicaStatusPercentProgress"))
     ReplicaDescription.add_member(:kms_master_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KMSMasterKeyId, name: "KMSMasterKeyId"))
@@ -1421,6 +1473,7 @@ module Aws::DynamoDB
     ReplicaDescription.add_member(:global_secondary_indexes, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicaGlobalSecondaryIndexDescriptionList, name: "GlobalSecondaryIndexes"))
     ReplicaDescription.add_member(:replica_inaccessible_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "ReplicaInaccessibleDateTime"))
     ReplicaDescription.add_member(:replica_table_class_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: TableClassSummary, name: "ReplicaTableClassSummary"))
+    ReplicaDescription.add_member(:global_table_settings_replication_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalTableSettingsReplicationMode, name: "GlobalTableSettingsReplicationMode"))
     ReplicaDescription.type = Types::ReplicaDescription
     ReplicaDescriptionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicaDescription, name: "member"))
     ReplicaGlobalSecondaryIndex.add_member(:index_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexName, name: "IndexName", traits: {"smithy.api#required" => {}}))
@@ -1519,6 +1572,7 @@ module Aws::DynamoDB
     RestoreTableFromBackupInput.add_member(:provisioned_throughput_override, ::Smithy::Schema::Shapes::MemberShape.new(target: ProvisionedThroughput, name: "ProvisionedThroughputOverride"))
     RestoreTableFromBackupInput.add_member(:on_demand_throughput_override, ::Smithy::Schema::Shapes::MemberShape.new(target: OnDemandThroughput, name: "OnDemandThroughputOverride"))
     RestoreTableFromBackupInput.add_member(:sse_specification_override, ::Smithy::Schema::Shapes::MemberShape.new(target: SSESpecification, name: "SSESpecificationOverride"))
+    RestoreTableFromBackupInput.add_member(:vector_index_override, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorIndexList, name: "VectorIndexOverride"))
     RestoreTableFromBackupInput.type = Types::RestoreTableFromBackupInput
     RestoreTableFromBackupOutput.add_member(:table_description, ::Smithy::Schema::Shapes::MemberShape.new(target: TableDescription, name: "TableDescription"))
     RestoreTableFromBackupOutput.type = Types::RestoreTableFromBackupOutput
@@ -1533,6 +1587,7 @@ module Aws::DynamoDB
     RestoreTableToPointInTimeInput.add_member(:provisioned_throughput_override, ::Smithy::Schema::Shapes::MemberShape.new(target: ProvisionedThroughput, name: "ProvisionedThroughputOverride"))
     RestoreTableToPointInTimeInput.add_member(:on_demand_throughput_override, ::Smithy::Schema::Shapes::MemberShape.new(target: OnDemandThroughput, name: "OnDemandThroughputOverride"))
     RestoreTableToPointInTimeInput.add_member(:sse_specification_override, ::Smithy::Schema::Shapes::MemberShape.new(target: SSESpecification, name: "SSESpecificationOverride"))
+    RestoreTableToPointInTimeInput.add_member(:vector_index_override, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorIndexList, name: "VectorIndexOverride"))
     RestoreTableToPointInTimeInput.type = Types::RestoreTableToPointInTimeInput
     RestoreTableToPointInTimeOutput.add_member(:table_description, ::Smithy::Schema::Shapes::MemberShape.new(target: TableDescription, name: "TableDescription"))
     RestoreTableToPointInTimeOutput.type = Types::RestoreTableToPointInTimeOutput
@@ -1596,6 +1651,30 @@ module Aws::DynamoDB
     ScanOutput.add_member(:last_evaluated_key, ::Smithy::Schema::Shapes::MemberShape.new(target: Key, name: "LastEvaluatedKey"))
     ScanOutput.add_member(:consumed_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: ConsumedCapacity, name: "ConsumedCapacity"))
     ScanOutput.type = Types::ScanOutput
+    SearchResultItem.add_member(:item, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeMap, name: "Item"))
+    SearchResultItem.add_member(:score, ::Smithy::Schema::Shapes::MemberShape.new(target: ScoreNumber, name: "Score", traits: {"smithy.api#default" => 0}))
+    SearchResultItem.type = Types::SearchResultItem
+    SearchResultList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchResultItem, name: "member"))
+    SearchSchema.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchSchemaElement, name: "member"))
+    SearchSchemaElement.add_member(:attribute_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "AttributeName", traits: {"smithy.api#required" => {}}))
+    SearchSchemaElement.add_member(:search_schema_element_type, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchSchemaElementType, name: "SearchSchemaElementType", traits: {"smithy.api#required" => {}}))
+    SearchSchemaElement.type = Types::SearchSchemaElement
+    SearchSchemaElementType.add_member(:hash, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HASH", traits: {"smithy.api#enumValue" => "HASH"}))
+    SearchSchemaElementType.add_member(:inline_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INLINE_FILTER", traits: {"smithy.api#enumValue" => "INLINE_FILTER"}))
+    SearchVectorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "member"))
+    SearchVectorsInput.add_member(:table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TableArn, name: "TableName", traits: {"smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "ResourceArn"}}))
+    SearchVectorsInput.add_member(:index_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexName, name: "IndexName", traits: {"smithy.api#required" => {}}))
+    SearchVectorsInput.add_member(:return_consumed_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: ReturnConsumedCapacity, name: "ReturnConsumedCapacity"))
+    SearchVectorsInput.add_member(:expression_attribute_names, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpressionAttributeNameMap, name: "ExpressionAttributeNames"))
+    SearchVectorsInput.add_member(:expression_attribute_values, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpressionAttributeValueMap, name: "ExpressionAttributeValues"))
+    SearchVectorsInput.add_member(:projection_expression, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectionExpression, name: "ProjectionExpression"))
+    SearchVectorsInput.add_member(:search_vector, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchVectorList, name: "SearchVector", traits: {"smithy.api#required" => {}}))
+    SearchVectorsInput.add_member(:search_condition_expression, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SearchConditionExpression"))
+    SearchVectorsInput.add_member(:top_k, ::Smithy::Schema::Shapes::MemberShape.new(target: TopKInteger, name: "TopK", traits: {"smithy.api#required" => {}}))
+    SearchVectorsInput.type = Types::SearchVectorsInput
+    SearchVectorsOutput.add_member(:consumed_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorCapacity, name: "ConsumedCapacity"))
+    SearchVectorsOutput.add_member(:search_results, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchResultList, name: "SearchResults"))
+    SearchVectorsOutput.type = Types::SearchVectorsOutput
     SecondaryIndexesCapacityMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexName, name: "key"))
     SecondaryIndexesCapacityMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Capacity, name: "value"))
     Select.add_member(:all_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALL_ATTRIBUTES", traits: {"smithy.api#enumValue" => "ALL_ATTRIBUTES"}))
@@ -1618,6 +1697,7 @@ module Aws::DynamoDB
     SourceTableFeatureDetails.add_member(:stream_description, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamSpecification, name: "StreamDescription"))
     SourceTableFeatureDetails.add_member(:time_to_live_description, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeToLiveDescription, name: "TimeToLiveDescription"))
     SourceTableFeatureDetails.add_member(:sse_description, ::Smithy::Schema::Shapes::MemberShape.new(target: SSEDescription, name: "SSEDescription"))
+    SourceTableFeatureDetails.add_member(:vector_indexes, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorIndexes, name: "VectorIndexes"))
     SourceTableFeatureDetails.type = Types::SourceTableFeatureDetails
     StreamSpecification.add_member(:stream_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamEnabled, name: "StreamEnabled", traits: {"smithy.api#required" => {}}))
     StreamSpecification.add_member(:stream_view_type, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamViewType, name: "StreamViewType"))
@@ -1646,6 +1726,7 @@ module Aws::DynamoDB
     TableCreationParameters.add_member(:on_demand_throughput, ::Smithy::Schema::Shapes::MemberShape.new(target: OnDemandThroughput, name: "OnDemandThroughput"))
     TableCreationParameters.add_member(:sse_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: SSESpecification, name: "SSESpecification"))
     TableCreationParameters.add_member(:global_secondary_indexes, ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalSecondaryIndexList, name: "GlobalSecondaryIndexes"))
+    TableCreationParameters.add_member(:vector_indexes, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorIndexList, name: "VectorIndexes"))
     TableCreationParameters.type = Types::TableCreationParameters
     TableDescription.add_member(:attribute_definitions, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeDefinitions, name: "AttributeDefinitions"))
     TableDescription.add_member(:table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TableName, name: "TableName"))
@@ -1666,6 +1747,7 @@ module Aws::DynamoDB
     TableDescription.add_member(:global_table_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "GlobalTableVersion"))
     TableDescription.add_member(:replicas, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicaDescriptionList, name: "Replicas"))
     TableDescription.add_member(:global_table_witnesses, ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalTableWitnessDescriptionList, name: "GlobalTableWitnesses"))
+    TableDescription.add_member(:global_table_settings_replication_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalTableSettingsReplicationMode, name: "GlobalTableSettingsReplicationMode"))
     TableDescription.add_member(:restore_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: RestoreSummary, name: "RestoreSummary"))
     TableDescription.add_member(:sse_description, ::Smithy::Schema::Shapes::MemberShape.new(target: SSEDescription, name: "SSEDescription"))
     TableDescription.add_member(:archival_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: ArchivalSummary, name: "ArchivalSummary"))
@@ -1674,6 +1756,7 @@ module Aws::DynamoDB
     TableDescription.add_member(:on_demand_throughput, ::Smithy::Schema::Shapes::MemberShape.new(target: OnDemandThroughput, name: "OnDemandThroughput"))
     TableDescription.add_member(:warm_throughput, ::Smithy::Schema::Shapes::MemberShape.new(target: TableWarmThroughputDescription, name: "WarmThroughput"))
     TableDescription.add_member(:multi_region_consistency, ::Smithy::Schema::Shapes::MemberShape.new(target: MultiRegionConsistency, name: "MultiRegionConsistency"))
+    TableDescription.add_member(:vector_indexes, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorIndexDescriptionList, name: "VectorIndexes"))
     TableDescription.type = Types::TableDescription
     TableInUseException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     TableInUseException.type = Types::TableInUseException
@@ -1843,6 +1926,8 @@ module Aws::DynamoDB
     UpdateTableInput.add_member(:global_table_witness_updates, ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalTableWitnessGroupUpdateList, name: "GlobalTableWitnessUpdates"))
     UpdateTableInput.add_member(:on_demand_throughput, ::Smithy::Schema::Shapes::MemberShape.new(target: OnDemandThroughput, name: "OnDemandThroughput"))
     UpdateTableInput.add_member(:warm_throughput, ::Smithy::Schema::Shapes::MemberShape.new(target: WarmThroughput, name: "WarmThroughput"))
+    UpdateTableInput.add_member(:global_table_settings_replication_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalTableSettingsReplicationMode, name: "GlobalTableSettingsReplicationMode"))
+    UpdateTableInput.add_member(:vector_index_updates, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorIndexUpdateList, name: "VectorIndexUpdates"))
     UpdateTableInput.type = Types::UpdateTableInput
     UpdateTableOutput.add_member(:table_description, ::Smithy::Schema::Shapes::MemberShape.new(target: TableDescription, name: "TableDescription"))
     UpdateTableOutput.type = Types::UpdateTableOutput
@@ -1858,6 +1943,49 @@ module Aws::DynamoDB
     UpdateTimeToLiveInput.type = Types::UpdateTimeToLiveInput
     UpdateTimeToLiveOutput.add_member(:time_to_live_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeToLiveSpecification, name: "TimeToLiveSpecification"))
     UpdateTimeToLiveOutput.type = Types::UpdateTimeToLiveOutput
+    VectorAttributeDefinition.add_member(:attribute_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorAttributeName, name: "AttributeName", traits: {"smithy.api#required" => {}}))
+    VectorAttributeDefinition.type = Types::VectorAttributeDefinition
+    VectorCapacity.add_member(:vector_search_request_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: ConsumedCapacityUnits, name: "VectorSearchRequestBytes"))
+    VectorCapacity.add_member(:vector_write_request_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: ConsumedCapacityUnits, name: "VectorWriteRequestBytes"))
+    VectorCapacity.type = Types::VectorCapacity
+    VectorDistanceFunction.add_member(:cosine, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COSINE", traits: {"smithy.api#enumValue" => "COSINE"}))
+    VectorDistanceFunction.add_member(:dot_product, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DOT_PRODUCT", traits: {"smithy.api#enumValue" => "DOT_PRODUCT"}))
+    VectorDistanceFunction.add_member(:euclidean, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EUCLIDEAN", traits: {"smithy.api#enumValue" => "EUCLIDEAN"}))
+    VectorIndex.add_member(:index_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexName, name: "IndexName", traits: {"smithy.api#required" => {}}))
+    VectorIndex.add_member(:vector_attribute, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorAttributeDefinition, name: "VectorAttribute", traits: {"smithy.api#required" => {}}))
+    VectorIndex.add_member(:search_schema, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchSchema, name: "SearchSchema"))
+    VectorIndex.add_member(:projection, ::Smithy::Schema::Shapes::MemberShape.new(target: Projection, name: "Projection", traits: {"smithy.api#required" => {}}))
+    VectorIndex.add_member(:dimensions, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveLongObject, name: "Dimensions", traits: {"smithy.api#required" => {}}))
+    VectorIndex.add_member(:distance_function, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorDistanceFunction, name: "DistanceFunction", traits: {"smithy.api#required" => {}}))
+    VectorIndex.type = Types::VectorIndex
+    VectorIndexDescription.add_member(:index_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexName, name: "IndexName"))
+    VectorIndexDescription.add_member(:search_schema, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchSchema, name: "SearchSchema"))
+    VectorIndexDescription.add_member(:projection, ::Smithy::Schema::Shapes::MemberShape.new(target: Projection, name: "Projection"))
+    VectorIndexDescription.add_member(:vector_attribute, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorAttributeDefinition, name: "VectorAttribute"))
+    VectorIndexDescription.add_member(:dimensions, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveLongObject, name: "Dimensions"))
+    VectorIndexDescription.add_member(:distance_function, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorDistanceFunction, name: "DistanceFunction"))
+    VectorIndexDescription.add_member(:index_status, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexStatus, name: "IndexStatus"))
+    VectorIndexDescription.add_member(:backfilling, ::Smithy::Schema::Shapes::MemberShape.new(target: Backfilling, name: "Backfilling"))
+    VectorIndexDescription.add_member(:index_size_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: LongObject, name: "IndexSizeBytes"))
+    VectorIndexDescription.add_member(:item_count, ::Smithy::Schema::Shapes::MemberShape.new(target: LongObject, name: "ItemCount"))
+    VectorIndexDescription.add_member(:index_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "IndexArn"))
+    VectorIndexDescription.type = Types::VectorIndexDescription
+    VectorIndexDescriptionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorIndexDescription, name: "member"))
+    VectorIndexInfo.add_member(:index_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexName, name: "IndexName"))
+    VectorIndexInfo.add_member(:vector_attribute, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorAttributeDefinition, name: "VectorAttribute"))
+    VectorIndexInfo.add_member(:search_schema, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchSchema, name: "SearchSchema"))
+    VectorIndexInfo.add_member(:projection, ::Smithy::Schema::Shapes::MemberShape.new(target: Projection, name: "Projection"))
+    VectorIndexInfo.add_member(:dimensions, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveLongObject, name: "Dimensions"))
+    VectorIndexInfo.add_member(:distance_function, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorDistanceFunction, name: "DistanceFunction"))
+    VectorIndexInfo.type = Types::VectorIndexInfo
+    VectorIndexList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorIndex, name: "member"))
+    VectorIndexUpdate.add_member(:create, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateVectorIndexAction, name: "Create"))
+    VectorIndexUpdate.add_member(:delete, ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteVectorIndexAction, name: "Delete"))
+    VectorIndexUpdate.type = Types::VectorIndexUpdate
+    VectorIndexUpdateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorIndexUpdate, name: "member"))
+    VectorIndexes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorIndexInfo, name: "member"))
+    VectorIndexesCapacityMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexName, name: "key"))
+    VectorIndexesCapacityMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorCapacity, name: "value"))
     WarmThroughput.add_member(:read_units_per_second, ::Smithy::Schema::Shapes::MemberShape.new(target: LongObject, name: "ReadUnitsPerSecond"))
     WarmThroughput.add_member(:write_units_per_second, ::Smithy::Schema::Shapes::MemberShape.new(target: LongObject, name: "WriteUnitsPerSecond"))
     WarmThroughput.type = Types::WarmThroughput
@@ -1873,7 +2001,7 @@ module Aws::DynamoDB
       service.id = "com.amazonaws.dynamodb#DynamoDB_20120810"
       service.name = "DynamoDB20120810"
       service.version = "2012-08-10"
-      service.traits = {"aws.api#clientEndpointDiscovery" => {"operation" => "com.amazonaws.dynamodb#DescribeEndpoints", "error" => "com.amazonaws.dynamodb#InvalidEndpointException"}, "aws.api#service" => {"sdkId" => "DynamoDB", "arnNamespace" => "dynamodb", "cloudFormationName" => "DynamoDB", "cloudTrailEventSource" => "dynamodb.amazonaws.com", "endpointPrefix" => "dynamodb"}, "aws.auth#sigv4" => {"name" => "dynamodb"}, "aws.protocols#awsJson1_0" => {}, "smithy.api#suppress" => ["RuleSetAwsBuiltIn.AWS::Auth::AccountId"], "smithy.api#title" => "Amazon DynamoDB", "smithy.api#xmlNamespace" => {"uri" => "http://dynamodb.amazonaws.com/doc/2012-08-10/"}}
+      service.traits = {"aws.api#clientEndpointDiscovery" => {"operation" => "com.amazonaws.dynamodb#DescribeEndpoints", "error" => "com.amazonaws.dynamodb#InvalidEndpointException"}, "aws.api#service" => {"sdkId" => "DynamoDB", "arnNamespace" => "dynamodb", "cloudFormationName" => "DynamoDB", "cloudTrailEventSource" => "dynamodb.amazonaws.com", "endpointPrefix" => "dynamodb"}, "aws.auth#sigv4" => {"name" => "dynamodb"}, "aws.protocols#awsJson1_0" => {}, "smithy.api#suppress" => ["RuleSetAwsBuiltIn.AWS::Auth::AccountId"], "smithy.api#title" => "Amazon DynamoDB", "smithy.api#xmlNamespace" => {"uri" => "http://dynamodb.amazonaws.com/doc/2012-08-10/"}, "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}, "AccountId" => {"builtIn" => "AWS::Auth::AccountId", "required" => false, "documentation" => "The AWS AccountId used for the request.", "type" => "string"}, "AccountIdEndpointMode" => {"builtIn" => "AWS::Auth::AccountIdEndpointMode", "required" => false, "documentation" => "The AccountId Endpoint Mode.", "type" => "string"}, "ResourceArn" => {"required" => false, "documentation" => "ResourceArn containing arn of resource", "type" => "string"}, "ResourceArnList" => {"required" => false, "documentation" => "ResourceArnList containing list of resource arns", "type" => "stringArray"}, "IsSearchOperation" => {"required" => false, "documentation" => "Set to true for SearchVectors to route to the Search FQDN", "type" => "boolean"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "stringEquals", "argv" => [{"ref" => "Region"}, "local"]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}, {"fn" => "parseURL", "argv" => [{"ref" => "Endpoint"}], "assign" => "parsedEndpoint"}, {"fn" => "stringEquals", "argv" => ["dynamodb.{Region}.{PartitionResult#dualStackDnsSuffix}", {"fn" => "getAttr", "argv" => [{"ref" => "parsedEndpoint"}, "authority"]}]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "stringEquals", "argv" => ["search-dynamodb.{Region}.{PartitionResult#dualStackDnsSuffix}", {"fn" => "getAttr", "argv" => [{"ref" => "parsedEndpoint"}, "authority"]}]}, {"fn" => "isSet", "argv" => [{"ref" => "AccountIdEndpointMode"}]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws"]}, {"fn" => "stringEquals", "argv" => [{"ref" => "AccountIdEndpointMode"}, "disabled"]}, {"fn" => "isSet", "argv" => [{"ref" => "ResourceArn"}]}, {"fn" => "aws.parseArn", "argv" => [{"ref" => "ResourceArn"}], "assign" => "ParsedArn_ssa_2"}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "ParsedArn_ssa_2"}, "region"]}, {"ref" => "Region"}]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "ParsedArn_ssa_2"}, "service"]}, "dynamodb"]}, {"fn" => "isValidHostLabel", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "ParsedArn_ssa_2"}, "region"]}, false]}, {"fn" => "isValidHostLabel", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "ParsedArn_ssa_2"}, "accountId"]}, false]}, {"fn" => "isSet", "argv" => [{"ref" => "ResourceArnList"}]}, {"fn" => "getAttr", "argv" => [{"ref" => "ResourceArnList"}, "[0]"], "assign" => "FirstArn"}, {"fn" => "aws.parseArn", "argv" => [{"ref" => "FirstArn"}], "assign" => "ParsedArn_ssa_1"}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "ParsedArn_ssa_1"}, "region"]}, {"ref" => "Region"}]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "ParsedArn_ssa_1"}, "service"]}, "dynamodb"]}, {"fn" => "isValidHostLabel", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "ParsedArn_ssa_1"}, "accountId"]}, false]}, {"fn" => "isValidHostLabel", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "ParsedArn_ssa_1"}, "region"]}, false]}, {"fn" => "isSet", "argv" => [{"ref" => "AccountId"}]}, {"fn" => "stringEquals", "argv" => [{"ref" => "AccountIdEndpointMode"}, "required"]}, {"fn" => "isValidHostLabel", "argv" => [{"ref" => "AccountId"}, false]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws-us-gov"]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "coalesce", "argv" => [{"ref" => "IsSearchOperation"}, false]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "{Endpoint}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: FIPS and local endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and local endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "http://localhost:8000", "properties" => {"authSchemes" => [{"signingRegion" => "us-east-1", "signingName" => "dynamodb", "name" => "sigv4"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://search-dynamodb-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://dynamodb-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://search-dynamodb.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://dynamodb.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://search-dynamodb-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://dynamodb-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://{ParsedArn_ssa_2#accountId}.search-ddb.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {"metricValues" => ["O"]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://{ParsedArn_ssa_2#accountId}.ddb.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {"metricValues" => ["O"]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://{ParsedArn_ssa_1#accountId}.search-ddb.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {"metricValues" => ["O"]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://{ParsedArn_ssa_1#accountId}.ddb.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {"metricValues" => ["O"]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://{AccountId}.search-ddb.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {"metricValues" => ["O"]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://{AccountId}.ddb.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {"metricValues" => ["O"]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Credentials-sourced account ID parameter is invalid", "type" => "error"}, {"conditions" => [], "error" => "AccountIdEndpointMode is required but no AccountID was provided or able to be loaded", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://search-dynamodb.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://dynamodb.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://{ParsedArn_ssa_2#accountId}.search-ddb.{Region}.{PartitionResult#dnsSuffix}", "properties" => {"metricValues" => ["O"]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://{ParsedArn_ssa_2#accountId}.ddb.{Region}.{PartitionResult#dnsSuffix}", "properties" => {"metricValues" => ["O"]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://{ParsedArn_ssa_1#accountId}.search-ddb.{Region}.{PartitionResult#dnsSuffix}", "properties" => {"metricValues" => ["O"]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://{ParsedArn_ssa_1#accountId}.ddb.{Region}.{PartitionResult#dnsSuffix}", "properties" => {"metricValues" => ["O"]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://{AccountId}.search-ddb.{Region}.{PartitionResult#dnsSuffix}", "properties" => {"metricValues" => ["O"]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://{AccountId}.ddb.{Region}.{PartitionResult#dnsSuffix}", "properties" => {"metricValues" => ["O"]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 82, "nodes" => "/////wAAAAH/////AAAAAAAAAAYAAAADAAAAAQAAAAQF9eEjAAAAAgX14QEAAAAFAAAAAwX14QIF9eEEAAAAAQAAAE0AAAAHAAAAAgAAAD0AAAAIAAAAAwAAACIAAAAJAAAABAAAAAoF9eEjAAAABQX14QcAAAALAAAACwAAAAwAAABFAAAADAAAAA4AAAANAAAAHAX14RkAAABFAAAADQAAACEAAAAPAAAADgAAABAAAAAVAAAADwAAABEAAAAVAAAAEAAAABIAAAAVAAAAEQAAABMAAAAVAAAAEgAAABQAAAAVAAAAEwAAACAAAAAVAAAAFAAAABYAAAAcAAAAFQAAABcAAAAcAAAAFgAAABgAAAAcAAAAFwAAABkAAAAcAAAAGAAAABoAAAAcAAAAGQAAABsAAAAcAAAAGgAAAB8AAAAcAAAAGwAAAB0AAAAhAAAAHQAAAB4F9eEXAAAAHwX14SEF9eEiAAAAHwX14R8F9eEgAAAAHwX14R0F9eEeAAAAHAX14RgAAABFAAAABAAAACMF9eEjAAAABQX14QYAAAAkAAAACQAAACUF9eEcAAAACwAAACYAAAA8AAAADAAAACgAAAAnAAAAHAX14RkAAAA8AAAADQAAADsAAAApAAAADgAAACoAAAAvAAAADwAAACsAAAAvAAAAEAAAACwAAAAvAAAAEQAAAC0AAAAvAAAAEgAAAC4AAAAvAAAAEwAAADoAAAAvAAAAFAAAADAAAAA2AAAAFQAAADEAAAA2AAAAFgAAADIAAAA2AAAAFwAAADMAAAA2AAAAGAAAADQAAAA2AAAAGQAAADUAAAA2AAAAGgAAADkAAAA2AAAAGwAAADcAAAA7AAAAHQAAADgF9eEXAAAAHwX14RUF9eEWAAAAHwX14RMF9eEUAAAAHwX14REF9eESAAAAHAX14RgAAAA8AAAAHwX14RoF9eEbAAAAAwAAAEYAAAA+AAAABAAAAD8F9eEjAAAABQX14QUAAABAAAAABgAAAEEF9eEQAAAACwAAAEIAAABDAAAAHAX14QgAAABDAAAAHgAAAEUAAABEAAAAHwX14Q4F9eEPAAAAHwX14QwF9eENAAAABAAAAEcF9eEjAAAABQX14QUAAABIAAAABgAAAEkF9eELAAAACQAAAEoF9eELAAAACwAAAEsAAABMAAAAHAX14QgAAABMAAAAHwX14QkF9eEKAAAAAgX14QEAAABOAAAAAwX14QIAAABPAAAABAAAAFAF9eEEAAAABwAAAFEF9eEEAAAACAX14QMAAABSAAAACgX14QMF9eEE"}}
       service.add_operation(:batch_execute_statement, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.dynamodb#BatchExecuteStatement"
         operation.name = "BatchExecuteStatement"
@@ -2380,6 +2508,17 @@ module Aws::DynamoDB
         operation.errors << ThrottlingException
         operation.traits = {"aws.api#clientDiscoveredEndpoint" => {"required" => false}, "smithy.api#suppress" => ["PaginatedTrait"]}
         operation[:paginator] = Paginators::Scan.new
+      end)
+      service.add_operation(:search_vectors, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.dynamodb#SearchVectors"
+        operation.name = "SearchVectors"
+        operation.input = SearchVectorsInput
+        operation.output = SearchVectorsOutput
+        operation.errors << InternalServerError
+        operation.errors << RequestLimitExceeded
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.rules#staticContextParams" => {"IsSearchOperation" => {"value" => true}}}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.dynamodb#TagResource"

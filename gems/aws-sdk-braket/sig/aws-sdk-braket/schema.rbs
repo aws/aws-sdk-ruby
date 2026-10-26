@@ -21,7 +21,11 @@ module Aws::Braket
     CreateJobOutput: StructureShape
     CreateQuantumTaskInput: StructureShape
     CreateQuantumTaskOutput: StructureShape
+    CreateSpendingLimitRequest: StructureShape
+    CreateSpendingLimitResponse: StructureShape
     DataSource: StructureShape
+    DeleteSpendingLimitRequest: StructureShape
+    DeleteSpendingLimitResponse: StructureShape
     DeviceArn: StringShape
     DeviceConfig: StructureShape
     DeviceOfflineException: StructureShape
@@ -32,6 +36,8 @@ module Aws::Braket
     DeviceSummary: StructureShape
     DeviceSummaryList: ListShape
     DeviceType: StringShape
+    ExperimentalCapabilities: UnionShape
+    ExperimentalCapabilitiesEnablementType: StringShape
     GetDeviceInput: StructureShape
     GetDeviceOutput: StructureShape
     GetJobInput: StructureShape
@@ -92,7 +98,15 @@ module Aws::Braket
     SearchQuantumTasksFilterOperator: StringShape
     SearchQuantumTasksInput: StructureShape
     SearchQuantumTasksOutput: StructureShape
+    SearchSpendingLimitsFilter: StructureShape
+    SearchSpendingLimitsFilterList: ListShape
+    SearchSpendingLimitsFilterOperator: StringShape
+    SearchSpendingLimitsRequest: StructureShape
+    SearchSpendingLimitsResponse: StructureShape
     ServiceQuotaExceededException: StructureShape
+    SpendingLimitArn: StringShape
+    SpendingLimitSummary: StructureShape
+    SpendingLimitSummaryList: ListShape
     String1024: StringShape
     String2048: StringShape
     String256: StringShape
@@ -104,8 +118,11 @@ module Aws::Braket
     TagResourceOutput: StructureShape
     TagsMap: MapShape
     ThrottlingException: StructureShape
+    TimePeriod: StructureShape
     UntagResourceInput: StructureShape
     UntagResourceOutput: StructureShape
+    UpdateSpendingLimitRequest: StructureShape
+    UpdateSpendingLimitResponse: StructureShape
     Uri: StringShape
     ValidationException: StructureShape
     ValidationExceptionReason: StringShape

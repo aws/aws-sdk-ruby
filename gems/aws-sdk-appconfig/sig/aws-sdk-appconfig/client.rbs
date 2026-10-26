@@ -130,6 +130,72 @@ module Aws::AppConfig
       ?tags: Hash[String, String]
     ) -> _CreateEnvironmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateEnvironmentResponse
 
+    interface _CreateExperimentDefinitionResponse
+      include Smithy::Client::_Response[Types::CreateExperimentDefinitionOutput]
+      def application_id: () -> String?
+      def id: () -> String?
+      def name: () -> String?
+      def hypothesis: () -> String?
+      def status: () -> String?
+      def configuration_profile_id: () -> String?
+      def environment_id: () -> String?
+      def flag_key: () -> String?
+      def audience_rule: () -> String?
+      def audience_description: () -> String?
+      def launch_criteria: () -> String?
+      def treatments: () -> Array[Types::Treatment]?
+      def control: () -> Types::Treatment?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def kms_key_identifier: () -> String?
+    end
+    def create_experiment_definition: (
+      ?application_identifier: String,
+      ?name: String,
+      ?configuration_profile_identifier: String,
+      ?environment_identifier: String,
+      ?flag_key: String,
+      ?treatments: Array[
+        {
+          weight: Float,
+          description: String,
+          flag_value: {
+            enabled: bool,
+            attribute_values: Hash[String,
+              {
+                string_value: String,
+                number_value: Float,
+                boolean_value: untyped,
+                string_array: Array[String],
+                number_array: Array[Float]
+              }
+            ]
+          }
+        }
+      ],
+      ?control: {
+        weight: Float,
+        description: String,
+        flag_value: {
+          enabled: bool,
+          attribute_values: Hash[String,
+            {
+              string_value: String,
+              number_value: Float,
+              boolean_value: untyped,
+              string_array: Array[String],
+              number_array: Array[Float]
+            }
+          ]
+        }
+      },
+      ?audience_rule: String,
+      ?hypothesis: String,
+      ?audience_description: String,
+      ?launch_criteria: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateExperimentDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateExperimentDefinitionResponse
+
     interface _CreateExtensionResponse
       include Smithy::Client::_Response[Types::CreateExtensionOutput]
       def id: () -> String?
@@ -234,6 +300,15 @@ module Aws::AppConfig
       ?deletion_protection_check: String
     ) -> _DeleteEnvironmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEnvironmentResponse
 
+    interface _DeleteExperimentDefinitionResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_experiment_definition: (
+      ?application_identifier: String,
+      ?experiment_definition_identifier: String,
+      ?delete_type: String
+    ) -> _DeleteExperimentDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteExperimentDefinitionResponse
+
     interface _DeleteExtensionResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
     end
@@ -261,6 +336,7 @@ module Aws::AppConfig
     interface _GetAccountSettingsResponse
       include Smithy::Client::_Response[Types::GetAccountSettingsOutput]
       def deletion_protection: () -> Types::DeletionProtectionSettings?
+      def vended_metrics: () -> Types::VendedMetricsSettings?
     end
     def get_account_settings: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAccountSettingsResponse
 
@@ -366,6 +442,51 @@ module Aws::AppConfig
       ?environment_id: String
     ) -> _GetEnvironmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEnvironmentResponse
 
+    interface _GetExperimentDefinitionResponse
+      include Smithy::Client::_Response[Types::GetExperimentDefinitionOutput]
+      def application_id: () -> String?
+      def id: () -> String?
+      def name: () -> String?
+      def hypothesis: () -> String?
+      def status: () -> String?
+      def configuration_profile_id: () -> String?
+      def environment_id: () -> String?
+      def flag_key: () -> String?
+      def audience_rule: () -> String?
+      def audience_description: () -> String?
+      def launch_criteria: () -> String?
+      def treatments: () -> Array[Types::Treatment]?
+      def control: () -> Types::Treatment?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def kms_key_identifier: () -> String?
+    end
+    def get_experiment_definition: (
+      ?application_identifier: String,
+      ?experiment_definition_identifier: String
+    ) -> _GetExperimentDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetExperimentDefinitionResponse
+
+    interface _GetExperimentRunResponse
+      include Smithy::Client::_Response[Types::GetExperimentRunOutput]
+      def application_id: () -> String?
+      def experiment_definition_id: () -> String?
+      def run: () -> Integer?
+      def description: () -> String?
+      def status: () -> String?
+      def exposure_percentage: () -> Float?
+      def treatment_overrides: () -> Types::TreatmentOverrides?
+      def result: () -> Types::ExperimentRunResult?
+      def started_at: () -> Time?
+      def updated_at: () -> Time?
+      def ended_at: () -> Time?
+      def experiment_definition_snapshot: () -> Types::ExperimentDefinitionSnapshot?
+    end
+    def get_experiment_run: (
+      ?application_identifier: String,
+      ?experiment_definition_identifier: String,
+      ?run: Integer
+    ) -> _GetExperimentRunResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetExperimentRunResponse
+
     interface _GetExtensionResponse
       include Smithy::Client::_Response[Types::GetExtensionOutput]
       def id: () -> String?
@@ -466,6 +587,46 @@ module Aws::AppConfig
       ?next_token: String
     ) -> _ListEnvironmentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEnvironmentsResponse
 
+    interface _ListExperimentDefinitionsResponse
+      include Smithy::Client::_Response[Types::ListExperimentDefinitionsOutput]
+      def items: () -> Array[Types::ExperimentDefinitionSummary]?
+      def next_token: () -> String?
+    end
+    def list_experiment_definitions: (
+      ?application_identifier: String,
+      ?configuration_profile_identifier: String,
+      ?environment_identifier: String,
+      ?status: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListExperimentDefinitionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListExperimentDefinitionsResponse
+
+    interface _ListExperimentRunEventsResponse
+      include Smithy::Client::_Response[Types::ListExperimentRunEventsOutput]
+      def items: () -> Array[Types::ExperimentRunEvent]?
+      def next_token: () -> String?
+    end
+    def list_experiment_run_events: (
+      ?application_identifier: String,
+      ?experiment_definition_identifier: String,
+      ?run: Integer,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListExperimentRunEventsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListExperimentRunEventsResponse
+
+    interface _ListExperimentRunsResponse
+      include Smithy::Client::_Response[Types::ListExperimentRunsOutput]
+      def items: () -> Array[Types::ExperimentRunSummary]?
+      def next_token: () -> String?
+    end
+    def list_experiment_runs: (
+      ?application_identifier: String,
+      ?experiment_definition_identifier: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?status: String
+    ) -> _ListExperimentRunsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListExperimentRunsResponse
+
     interface _ListExtensionAssociationsResponse
       include Smithy::Client::_Response[Types::ListExtensionAssociationsOutput]
       def items: () -> Array[Types::ExtensionAssociationSummary]?
@@ -545,8 +706,39 @@ module Aws::AppConfig
       ?description: String,
       ?tags: Hash[String, String],
       ?kms_key_identifier: String,
-      ?dynamic_extension_parameters: Hash[String, String]
+      ?dynamic_extension_parameters: Hash[String, String],
+      ?latest_deployment_number: Integer
     ) -> _StartDeploymentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartDeploymentResponse
+
+    interface _StartExperimentRunResponse
+      include Smithy::Client::_Response[Types::StartExperimentRunOutput]
+      def application_id: () -> String?
+      def experiment_definition_id: () -> String?
+      def run: () -> Integer?
+      def description: () -> String?
+      def status: () -> String?
+      def exposure_percentage: () -> Float?
+      def treatment_overrides: () -> Types::TreatmentOverrides?
+      def result: () -> Types::ExperimentRunResult?
+      def started_at: () -> Time?
+      def updated_at: () -> Time?
+      def ended_at: () -> Time?
+      def experiment_definition_snapshot: () -> Types::ExperimentDefinitionSnapshot?
+    end
+    def start_experiment_run: (
+      ?application_identifier: String,
+      ?experiment_definition_identifier: String,
+      ?description: String,
+      ?exposure_percentage: Float,
+      ?treatment_overrides: {
+        inline: Hash[String, String]
+      },
+      ?tags: Hash[String, String],
+      ?deployment_parameters: {
+        dynamic_extension_parameters: Hash[String, String],
+        tags: Hash[String, String]
+      }
+    ) -> _StartExperimentRunResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartExperimentRunResponse
 
     interface _StopDeploymentResponse
       include Smithy::Client::_Response[Types::StopDeploymentOutput]
@@ -580,6 +772,36 @@ module Aws::AppConfig
       ?allow_revert: bool
     ) -> _StopDeploymentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopDeploymentResponse
 
+    interface _StopExperimentRunResponse
+      include Smithy::Client::_Response[Types::StopExperimentRunOutput]
+      def application_id: () -> String?
+      def experiment_definition_id: () -> String?
+      def run: () -> Integer?
+      def description: () -> String?
+      def status: () -> String?
+      def exposure_percentage: () -> Float?
+      def treatment_overrides: () -> Types::TreatmentOverrides?
+      def result: () -> Types::ExperimentRunResult?
+      def started_at: () -> Time?
+      def updated_at: () -> Time?
+      def ended_at: () -> Time?
+      def experiment_definition_snapshot: () -> Types::ExperimentDefinitionSnapshot?
+    end
+    def stop_experiment_run: (
+      ?application_identifier: String,
+      ?experiment_definition_identifier: String,
+      ?run: Integer,
+      ?result: {
+        executive_summary: String,
+        reasons_to_launch: untyped,
+        reasons_not_to_launch: untyped
+      },
+      ?deployment_parameters: {
+        dynamic_extension_parameters: Hash[String, String],
+        tags: Hash[String, String]
+      }
+    ) -> _StopExperimentRunResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopExperimentRunResponse
+
     interface _TagResourceResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
     end
@@ -599,11 +821,15 @@ module Aws::AppConfig
     interface _UpdateAccountSettingsResponse
       include Smithy::Client::_Response[Types::UpdateAccountSettingsOutput]
       def deletion_protection: () -> Types::DeletionProtectionSettings?
+      def vended_metrics: () -> Types::VendedMetricsSettings?
     end
     def update_account_settings: (
       ?deletion_protection: {
         enabled: bool,
         protection_period_in_minutes: Integer
+      },
+      ?vended_metrics: {
+        enabled: bool
       }
     ) -> _UpdateAccountSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAccountSettingsResponse
 
@@ -688,6 +914,98 @@ module Aws::AppConfig
         }
       ]
     ) -> _UpdateEnvironmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateEnvironmentResponse
+
+    interface _UpdateExperimentDefinitionResponse
+      include Smithy::Client::_Response[Types::UpdateExperimentDefinitionOutput]
+      def application_id: () -> String?
+      def id: () -> String?
+      def name: () -> String?
+      def hypothesis: () -> String?
+      def status: () -> String?
+      def configuration_profile_id: () -> String?
+      def environment_id: () -> String?
+      def flag_key: () -> String?
+      def audience_rule: () -> String?
+      def audience_description: () -> String?
+      def launch_criteria: () -> String?
+      def treatments: () -> Array[Types::Treatment]?
+      def control: () -> Types::Treatment?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def kms_key_identifier: () -> String?
+    end
+    def update_experiment_definition: (
+      ?application_identifier: String,
+      ?experiment_definition_identifier: String,
+      ?treatments: Array[
+        {
+          weight: Float,
+          description: String,
+          flag_value: {
+            enabled: bool,
+            attribute_values: Hash[String,
+              {
+                string_value: String,
+                number_value: Float,
+                boolean_value: untyped,
+                string_array: Array[String],
+                number_array: Array[Float]
+              }
+            ]
+          }
+        }
+      ],
+      ?control: {
+        weight: Float,
+        description: String,
+        flag_value: {
+          enabled: bool,
+          attribute_values: Hash[String,
+            {
+              string_value: String,
+              number_value: Float,
+              boolean_value: untyped,
+              string_array: Array[String],
+              number_array: Array[Float]
+            }
+          ]
+        }
+      },
+      ?hypothesis: String,
+      ?audience_rule: String,
+      ?audience_description: String,
+      ?launch_criteria: String
+    ) -> _UpdateExperimentDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateExperimentDefinitionResponse
+
+    interface _UpdateExperimentRunResponse
+      include Smithy::Client::_Response[Types::UpdateExperimentRunOutput]
+      def application_id: () -> String?
+      def experiment_definition_id: () -> String?
+      def run: () -> Integer?
+      def description: () -> String?
+      def status: () -> String?
+      def exposure_percentage: () -> Float?
+      def treatment_overrides: () -> Types::TreatmentOverrides?
+      def result: () -> Types::ExperimentRunResult?
+      def started_at: () -> Time?
+      def updated_at: () -> Time?
+      def ended_at: () -> Time?
+      def experiment_definition_snapshot: () -> Types::ExperimentDefinitionSnapshot?
+    end
+    def update_experiment_run: (
+      ?application_identifier: String,
+      ?experiment_definition_identifier: String,
+      ?run: Integer,
+      ?description: String,
+      ?exposure_percentage: Float,
+      ?treatment_overrides: {
+        inline: Hash[String, String]
+      },
+      ?deployment_parameters: {
+        dynamic_extension_parameters: Hash[String, String],
+        tags: Hash[String, String]
+      }
+    ) -> _UpdateExperimentRunResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateExperimentRunResponse
 
     interface _UpdateExtensionResponse
       include Smithy::Client::_Response[Types::UpdateExtensionOutput]

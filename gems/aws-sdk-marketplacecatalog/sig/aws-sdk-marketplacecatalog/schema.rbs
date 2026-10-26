@@ -2,6 +2,8 @@ module Aws::MarketplaceCatalog
   module Schema
     include Smithy::Schema::Shapes
 
+    AMISecurityFilters: StructureShape
+    AMISecuritySummary: StructureShape
     ARN: StringShape
     AccessDeniedException: StructureShape
     AmiProductEntityIdFilter: StructureShape
@@ -19,6 +21,12 @@ module Aws::MarketplaceCatalog
     AmiProductVisibilityFilter: StructureShape
     AmiProductVisibilityFilterValueList: ListShape
     AmiProductVisibilityString: EnumShape
+    AssessmentIdentifier: StringShape
+    AssessmentResult: EnumShape
+    AssessmentSummary: StructureShape
+    AssessmentSummaryList: ListShape
+    AssessmentTargetFilter: StructureShape
+    AssessmentTargetSummary: StructureShape
     BatchDescribeEntitiesRequest: StructureShape
     BatchDescribeEntitiesResponse: StructureShape
     BatchDescribeErrorCodeString: StringShape
@@ -52,6 +60,13 @@ module Aws::MarketplaceCatalog
     ContainerProductVisibilityFilter: StructureShape
     ContainerProductVisibilityFilterValueList: ListShape
     ContainerProductVisibilityString: EnumShape
+    ContainerSecurityFilters: StructureShape
+    ContainerSecuritySummary: StructureShape
+    ControlAssessment: StructureShape
+    ControlAssessmentList: ListShape
+    ControlAssessmentResult: EnumShape
+    ControlError: StructureShape
+    ControlErrorList: ListShape
     DataProductEntityIdFilter: StructureShape
     DataProductEntityIdFilterValueList: ListShape
     DataProductEntityIdString: StringShape
@@ -70,6 +85,9 @@ module Aws::MarketplaceCatalog
     DateTimeISO8601: StringShape
     DeleteResourcePolicyRequest: StructureShape
     DeleteResourcePolicyResponse: StructureShape
+    DescribeAssessmentMaxResultInteger: IntegerShape
+    DescribeAssessmentRequest: StructureShape
+    DescribeAssessmentResponse: StructureShape
     DescribeChangeSetRequest: StructureShape
     DescribeChangeSetResponse: StructureShape
     DescribeEntityRequest: StructureShape
@@ -86,16 +104,24 @@ module Aws::MarketplaceCatalog
     EntityType: StringShape
     EntityTypeFilters: UnionShape
     EntityTypeSort: UnionShape
+    ErrorCode: StringShape
     ErrorCodeString: StringShape
     ErrorDetail: StructureShape
     ErrorDetailList: ListShape
+    ErrorMessage: StringShape
+    ErrorScope: StructureShape
+    ErrorScopeList: ListShape
     Errors: MapShape
     ExceptionMessageContent: StringShape
     FailureCode: EnumShape
+    FieldName: StringShape
     Filter: StructureShape
     FilterList: ListShape
     FilterName: StringShape
     FilterValueContent: StringShape
+    FrameworkFilters: UnionShape
+    FrameworkId: StringShape
+    FrameworkSummary: UnionShape
     GetResourcePolicyRequest: StructureShape
     GetResourcePolicyResponse: StructureShape
     Identifier: StringShape
@@ -103,6 +129,9 @@ module Aws::MarketplaceCatalog
     InternalServiceException: StructureShape
     Json: StringShape
     JsonDocumentType: DocumentShape
+    ListAssessmentsMaxResultInteger: IntegerShape
+    ListAssessmentsRequest: StructureShape
+    ListAssessmentsResponse: StructureShape
     ListChangeSetsMaxResultInteger: IntegerShape
     ListChangeSetsRequest: StructureShape
     ListChangeSetsResponse: StructureShape
@@ -133,6 +162,9 @@ module Aws::MarketplaceCatalog
     OfferBuyerAccountsFilterWildcard: StringShape
     OfferBuyerAccountsList: ListShape
     OfferBuyerAccountsString: StringShape
+    OfferCreatedBySourceFilter: StructureShape
+    OfferCreatedBySourceFilterValueList: ListShape
+    OfferCreatedBySourceString: EnumShape
     OfferEntityIdFilter: StructureShape
     OfferEntityIdFilterValueList: ListShape
     OfferEntityIdString: StringShape
@@ -150,12 +182,45 @@ module Aws::MarketplaceCatalog
     OfferResaleAuthorizationIdFilter: StructureShape
     OfferResaleAuthorizationIdFilterValueList: ListShape
     OfferResaleAuthorizationIdString: StringShape
+    OfferSetAssociatedOfferIdsFilter: StructureShape
+    OfferSetAssociatedOfferIdsFilterValueList: ListShape
+    OfferSetAssociatedOfferIdsList: ListShape
+    OfferSetAssociatedOfferIdsString: StringShape
+    OfferSetEntityIdFilter: StructureShape
+    OfferSetEntityIdFilterValueList: ListShape
+    OfferSetEntityIdString: StringShape
+    OfferSetFilters: StructureShape
+    OfferSetIdFilter: StructureShape
+    OfferSetIdFilterValueList: ListShape
+    OfferSetIdString: StringShape
+    OfferSetLastModifiedDateFilter: StructureShape
+    OfferSetLastModifiedDateFilterDateRange: StructureShape
+    OfferSetNameFilter: StructureShape
+    OfferSetNameFilterValueList: ListShape
+    OfferSetNameString: StringShape
+    OfferSetReleaseDateFilter: StructureShape
+    OfferSetReleaseDateFilterDateRange: StructureShape
+    OfferSetSolutionIdFilter: StructureShape
+    OfferSetSolutionIdFilterValueList: ListShape
+    OfferSetSolutionIdString: StringShape
+    OfferSetSort: StructureShape
+    OfferSetSortBy: EnumShape
+    OfferSetStateFilter: StructureShape
+    OfferSetStateFilterValueList: ListShape
+    OfferSetStateString: EnumShape
+    OfferSetSummary: StructureShape
     OfferSort: StructureShape
     OfferSortBy: EnumShape
     OfferStateFilter: StructureShape
     OfferStateFilterValueList: ListShape
     OfferStateString: EnumShape
     OfferSummary: StructureShape
+    OfferTargetAgreementIdFilter: StructureShape
+    OfferTargetAgreementIdFilterValueList: ListShape
+    OfferTargetAgreementIdString: StringShape
+    OfferTargetAgreementIntentFilter: StructureShape
+    OfferTargetAgreementIntentFilterValueList: ListShape
+    OfferTargetAgreementIntentString: EnumShape
     OfferTargetingFilter: StructureShape
     OfferTargetingFilterValueList: ListShape
     OfferTargetingList: ListShape
@@ -174,6 +239,9 @@ module Aws::MarketplaceCatalog
     ResaleAuthorizationEntityIdFilterValueList: ListShape
     ResaleAuthorizationEntityIdString: StringShape
     ResaleAuthorizationFilters: StructureShape
+    ResaleAuthorizationIssuerAccountIdFilter: StructureShape
+    ResaleAuthorizationIssuerAccountIdFilterValueList: ListShape
+    ResaleAuthorizationIssuerAccountIdString: StringShape
     ResaleAuthorizationLastModifiedDateFilter: StructureShape
     ResaleAuthorizationLastModifiedDateFilterDateRange: StructureShape
     ResaleAuthorizationManufacturerAccountIdFilter: StructureShape
@@ -207,8 +275,14 @@ module Aws::MarketplaceCatalog
     ResaleAuthorizationResellerLegalNameFilterValueList: ListShape
     ResaleAuthorizationResellerLegalNameFilterWildcard: StringShape
     ResaleAuthorizationResellerLegalNameString: StringShape
+    ResaleAuthorizationResellerRoleFilter: StructureShape
+    ResaleAuthorizationResellerRoleFilterValueList: ListShape
+    ResaleAuthorizationResellerRoleString: EnumShape
     ResaleAuthorizationSort: StructureShape
     ResaleAuthorizationSortBy: EnumShape
+    ResaleAuthorizationSourceAuthorizationFilter: StructureShape
+    ResaleAuthorizationSourceAuthorizationFilterValueList: ListShape
+    ResaleAuthorizationSourceAuthorizationString: StringShape
     ResaleAuthorizationStatusFilter: StructureShape
     ResaleAuthorizationStatusFilterValueList: ListShape
     ResaleAuthorizationStatusString: EnumShape
@@ -235,6 +309,8 @@ module Aws::MarketplaceCatalog
     SaaSProductVisibilityFilter: StructureShape
     SaaSProductVisibilityFilterValueList: ListShape
     SaaSProductVisibilityString: EnumShape
+    ScopeName: StringShape
+    ScopeValue: StringShape
     ServiceQuotaExceededException: StructureShape
     Sort: StructureShape
     SortBy: StringShape
@@ -252,7 +328,11 @@ module Aws::MarketplaceCatalog
     UntagResourceRequest: StructureShape
     UntagResourceResponse: StructureShape
     ValidationException: StructureShape
+    ValidationExceptionField: StructureShape
+    ValidationExceptionFieldList: ListShape
+    ValidationExceptionReason: EnumShape
     ValueList: ListShape
+    VersionedFrameworkId: StringShape
     VisibilityValue: StringShape
 
     AWSMPSeymour: ServiceShape

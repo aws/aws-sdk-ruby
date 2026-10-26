@@ -144,18 +144,18 @@ module Aws::MediaConnect
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -355,7 +355,10 @@ module Aws::MediaConnect
     #         media_stream_id: 1, # required
     #         media_stream_name: "String", # required
     #         media_stream_type: "video" # One of: ["video", "audio", "ancillary-data"], # required
-    #         video_format: "String"
+    #         video_format: "String",
+    #         media_stream_tags: {
+    #           "String" => "String"
+    #         }
     #       }
     #     ]
     #   }
@@ -443,7 +446,7 @@ module Aws::MediaConnect
     #         min_latency: 1,
     #         name: "String",
     #         port: 1,
-    #         protocol: "zixi-push" # One of: ["zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "srt-caller", "fujitsu-qos", "udp", "ndi-speed-hq"], # required
+    #         protocol: "zixi-push" # One of: ["zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "srt-caller", "fujitsu-qos", "udp", "ndi-speed-hq"],
     #         remote_id: "String",
     #         sender_control_port: 1,
     #         smoothing_latency: 1,
@@ -453,7 +456,25 @@ module Aws::MediaConnect
     #         },
     #         output_status: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #         ndi_speed_hq_quality: 1,
-    #         ndi_program_name: "String"
+    #         ndi_program_name: "String",
+    #         output_tags: {
+    #           "String" => "String"
+    #         },
+    #         router_integration_state: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #         router_integration_transit_encryption: {
+    #           encryption_key_type: "SECRETS_MANAGER" # One of: ["SECRETS_MANAGER", "AUTOMATIC"],
+    #           encryption_key_configuration: { # required
+    #             # One of:
+    #             secrets_manager: {
+    #               secret_arn: "SecretArn", # required
+    #               role_arn: "RoleArn", # required
+    #             },
+    #             automatic: {
+    #             }
+    #           }
+    #         },
+    #         ndi_output_timecode_source: "EMBEDDED_TIMECODE" # One of: ["EMBEDDED_TIMECODE", "UTC_SYSTEM_TIME"],
+    #         ndi_audio_reference_level: 1
     #       }
     #     ]
     #   }
@@ -520,7 +541,13 @@ module Aws::MediaConnect
     #           source_listener_port: 1,
     #           stream_id: "String",
     #           ndi_speed_hq_quality: 1,
-    #           ndi_program_name: "String"
+    #           ndi_program_name: "String",
+    #           ndi_source_settings: {
+    #             source_name: "String",
+    #             audio_reference_level: 1
+    #           },
+    #           ndi_output_timecode_source: "EMBEDDED_TIMECODE" # One of: ["EMBEDDED_TIMECODE", "UTC_SYSTEM_TIME"],
+    #           ndi_audio_reference_level: 1
     #         },
     #         vpc_interface_attachment: {
     #           vpc_interface_name: "String"
@@ -528,7 +555,21 @@ module Aws::MediaConnect
     #         bridge_arn: "String",
     #         bridge_ports: [1],
     #         output_status: "ENABLED" # One of: ["ENABLED", "DISABLED"],
-    #         peer_ip_address: "String"
+    #         peer_ip_address: "String",
+    #         router_integration_state: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #         router_integration_transit_encryption: {
+    #           encryption_key_type: "SECRETS_MANAGER" # One of: ["SECRETS_MANAGER", "AUTOMATIC"],
+    #           encryption_key_configuration: { # required
+    #             # One of:
+    #             secrets_manager: {
+    #               secret_arn: "SecretArn", # required
+    #               role_arn: "RoleArn", # required
+    #             },
+    #             automatic: {
+    #             }
+    #           }
+    #         },
+    #         connected_router_input_arn: "String"
     #       }
     #     ]
     #   }
@@ -595,6 +636,26 @@ module Aws::MediaConnect
     #           vpc_interface_attachment: {
     #             vpc_interface_name: "String"
     #           }
+    #         },
+    #         ndi_source_settings: {
+    #           source_name: "String",
+    #           audio_reference_level: 1
+    #         },
+    #         source_tags: {
+    #           "String" => "String"
+    #         },
+    #         router_integration_state: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #         router_integration_transit_decryption: {
+    #           encryption_key_type: "SECRETS_MANAGER" # One of: ["SECRETS_MANAGER", "AUTOMATIC"],
+    #           encryption_key_configuration: { # required
+    #             # One of:
+    #             secrets_manager: {
+    #               secret_arn: "SecretArn", # required
+    #               role_arn: "RoleArn", # required
+    #             },
+    #             automatic: {
+    #             }
+    #           }
     #         }
     #       }
     #     ]
@@ -657,7 +718,13 @@ module Aws::MediaConnect
     #           source_listener_port: 1,
     #           stream_id: "String",
     #           ndi_speed_hq_quality: 1,
-    #           ndi_program_name: "String"
+    #           ndi_program_name: "String",
+    #           ndi_source_settings: {
+    #             source_name: "String",
+    #             audio_reference_level: 1
+    #           },
+    #           ndi_output_timecode_source: "EMBEDDED_TIMECODE" # One of: ["EMBEDDED_TIMECODE", "UTC_SYSTEM_TIME"],
+    #           ndi_audio_reference_level: 1
     #         },
     #         vpc_interface_name: "String",
     #         whitelist_cidr: "String",
@@ -667,7 +734,21 @@ module Aws::MediaConnect
     #             vpc_interface_name: "String"
     #           }
     #         },
-    #         peer_ip_address: "String"
+    #         peer_ip_address: "String",
+    #         router_integration_state: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #         router_integration_transit_decryption: {
+    #           encryption_key_type: "SECRETS_MANAGER" # One of: ["SECRETS_MANAGER", "AUTOMATIC"],
+    #           encryption_key_configuration: { # required
+    #             # One of:
+    #             secrets_manager: {
+    #               secret_arn: "SecretArn", # required
+    #               role_arn: "RoleArn", # required
+    #             },
+    #             automatic: {
+    #             }
+    #           }
+    #         },
+    #         connected_router_output_arn: "String"
     #       }
     #     ]
     #   }
@@ -693,6 +774,9 @@ module Aws::MediaConnect
     #         role_arn: "String", # required
     #         security_group_ids: ["String"], # required
     #         subnet_id: "String", # required
+    #         vpc_interface_tags: {
+    #           "String" => "String"
+    #         }
     #       }
     #     ]
     #   }
@@ -716,6 +800,498 @@ module Aws::MediaConnect
     # @return [Types::AddFlowVpcInterfacesResponse]
     def add_flow_vpc_interfaces(params = {}, options = {})
       request = build_request(:add_flow_vpc_interfaces, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves information about multiple router inputs in AWS Elemental MediaConnect.</p>
+    # @param [Hash, Types::BatchGetRouterInputRequest] params
+    # @option params [Array<String>] :arns
+    #   <p>The Amazon Resource Names (ARNs) of the router inputs you want to retrieve information about.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     arns: ["RouterInputArn"], # required
+    #   }
+    #   options = {}
+    #   response = client.batch_get_router_input(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     router_inputs: [ # required
+    #       {
+    #         name: "String", # required
+    #         arn: "RouterInputArn", # required
+    #         id: "String", # required
+    #         state: "CREATING" # One of: ["CREATING", "STANDBY", "STARTING", "ACTIVE", "STOPPING", "DELETING", "UPDATING", "ERROR", "RECOVERING", "MIGRATING"], # required
+    #         input_type: "STANDARD" # One of: ["STANDARD", "FAILOVER", "MERGE", "MEDIACONNECT_FLOW", "MEDIALIVE_CHANNEL"], # required
+    #         configuration: { # required
+    #           # One of:
+    #           standard: {
+    #             network_interface_arn: "RouterNetworkInterfaceArn", # required
+    #             protocol_configuration: { # required
+    #               # One of:
+    #               rist: {
+    #                 port: 1, # required
+    #                 recovery_latency_milliseconds: 1, # required
+    #               },
+    #               srt_listener: {
+    #                 port: 1, # required
+    #                 minimum_latency_milliseconds: 1, # required
+    #                 decryption_configuration: {
+    #                   encryption_key: { # required
+    #                     secret_arn: "SecretArn", # required
+    #                     role_arn: "RoleArn", # required
+    #                   }
+    #                 }
+    #               },
+    #               srt_caller: {
+    #                 source_address: "String", # required
+    #                 source_port: 1, # required
+    #                 minimum_latency_milliseconds: 1, # required
+    #                 stream_id: "String",
+    #                 decryption_configuration: {
+    #                   encryption_key: { # required
+    #                     secret_arn: "SecretArn", # required
+    #                     role_arn: "RoleArn", # required
+    #                   }
+    #                 }
+    #               },
+    #               rtp: {
+    #                 port: 1, # required
+    #                 forward_error_correction: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #               }
+    #             },
+    #             protocol: "RTP" # One of: ["RTP", "RIST", "SRT_CALLER", "SRT_LISTENER"]
+    #           },
+    #           media_live_channel: {
+    #             media_live_channel_arn: "MediaLiveChannelArn",
+    #             media_live_pipeline_id: "PIPELINE_0" # One of: ["PIPELINE_0", "PIPELINE_1"],
+    #             media_live_channel_output_name: "String",
+    #             source_transit_decryption: { # required
+    #               encryption_key_type: "SECRETS_MANAGER" # One of: ["SECRETS_MANAGER", "AUTOMATIC"],
+    #               encryption_key_configuration: { # required
+    #                 # One of:
+    #                 secrets_manager: {
+    #                   secret_arn: "SecretArn", # required
+    #                   role_arn: "RoleArn", # required
+    #                 },
+    #                 automatic: {
+    #                 }
+    #               }
+    #             }
+    #           },
+    #           failover: {
+    #             network_interface_arn: "RouterNetworkInterfaceArn", # required
+    #             protocol_configurations: [{ # required
+    #               # One of:
+    #               rist: {
+    #                 port: 1, # required
+    #                 recovery_latency_milliseconds: 1, # required
+    #               },
+    #               srt_listener: {
+    #                 port: 1, # required
+    #                 minimum_latency_milliseconds: 1, # required
+    #                 decryption_configuration: {
+    #                   encryption_key: { # required
+    #                     secret_arn: "SecretArn", # required
+    #                     role_arn: "RoleArn", # required
+    #                   }
+    #                 }
+    #               },
+    #               srt_caller: {
+    #                 source_address: "String", # required
+    #                 source_port: 1, # required
+    #                 minimum_latency_milliseconds: 1, # required
+    #                 stream_id: "String",
+    #                 decryption_configuration: {
+    #                   encryption_key: { # required
+    #                     secret_arn: "SecretArn", # required
+    #                     role_arn: "RoleArn", # required
+    #                   }
+    #                 }
+    #               },
+    #               rtp: {
+    #                 port: 1, # required
+    #                 forward_error_correction: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #               }
+    #             }],
+    #             source_priority_mode: "NO_PRIORITY" # One of: ["NO_PRIORITY", "PRIMARY_SECONDARY"], # required
+    #             primary_source_index: 1
+    #           },
+    #           media_connect_flow: {
+    #             flow_arn: "FlowArn",
+    #             flow_output_arn: "FlowOutputArn",
+    #             source_transit_decryption: { # required
+    #               encryption_key_type: "SECRETS_MANAGER" # One of: ["SECRETS_MANAGER", "AUTOMATIC"],
+    #               encryption_key_configuration: { # required
+    #                 # One of:
+    #                 secrets_manager: {
+    #                   secret_arn: "SecretArn", # required
+    #                   role_arn: "RoleArn", # required
+    #                 },
+    #                 automatic: {
+    #                 }
+    #               }
+    #             }
+    #           },
+    #           merge: {
+    #             network_interface_arn: "RouterNetworkInterfaceArn", # required
+    #             protocol_configurations: [{ # required
+    #               # One of:
+    #               rtp: {
+    #                 port: 1, # required
+    #                 forward_error_correction: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #               },
+    #               rist: {
+    #                 port: 1, # required
+    #                 recovery_latency_milliseconds: 1, # required
+    #               }
+    #             }],
+    #             merge_recovery_window_milliseconds: 1, # required
+    #           }
+    #         },
+    #         routed_outputs: 1, # required
+    #         maximum_routed_outputs: 1,
+    #         region_name: "String", # required
+    #         availability_zone: "String", # required
+    #         maximum_bitrate: 1, # required
+    #         tier: "INPUT_100" # One of: ["INPUT_100", "INPUT_50", "INPUT_20", "INPUT_500", "INPUT_250"], # required
+    #         routing_scope: "REGIONAL" # One of: ["REGIONAL", "GLOBAL"], # required
+    #         created_at: Time.now, # required
+    #         updated_at: Time.now, # required
+    #         messages: [ # required
+    #           {
+    #             code: "String", # required
+    #             message: "String", # required
+    #           }
+    #         ],
+    #         transit_encryption: { # required
+    #           encryption_key_type: "SECRETS_MANAGER" # One of: ["SECRETS_MANAGER", "AUTOMATIC"],
+    #           encryption_key_configuration: { # required
+    #             # One of:
+    #             secrets_manager: {
+    #               secret_arn: "SecretArn", # required
+    #               role_arn: "RoleArn", # required
+    #             },
+    #             automatic: {
+    #             }
+    #           }
+    #         },
+    #         tags: { # required
+    #           "String" => "String"
+    #         },
+    #         stream_details: { # required
+    #           # One of:
+    #           standard: {
+    #             source_ip_address: "String"
+    #           },
+    #           media_live_channel: {
+    #           },
+    #           failover: {
+    #             source_index_zero_stream_details: { # required
+    #               source_index: 1, # required
+    #               source_ip_address: "String"
+    #             },
+    #             source_index_one_stream_details: { # required
+    #               source_index: 1, # required
+    #               source_ip_address: "String"
+    #             }
+    #           },
+    #           media_connect_flow: {
+    #           },
+    #           merge: {
+    #             source_index_zero_stream_details: { # required
+    #               source_index: 1, # required
+    #               source_ip_address: "String"
+    #             },
+    #             source_index_one_stream_details: { # required
+    #               source_index: 1, # required
+    #               source_ip_address: "String"
+    #             }
+    #           }
+    #         },
+    #         ip_address: "String",
+    #         maintenance_type: "PREFERRED_DAY_TIME" # One of: ["PREFERRED_DAY_TIME", "DEFAULT"], # required
+    #         maintenance_configuration: { # required
+    #           # One of:
+    #           preferred_day_time: {
+    #             day: "MONDAY" # One of: ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"], # required
+    #             time: "String", # required
+    #           },
+    #           default: {
+    #           }
+    #         },
+    #         maintenance_schedule_type: "WINDOW" # One of: ["WINDOW"],
+    #         maintenance_schedule: {
+    #           # One of:
+    #           window: {
+    #             start: Time.now, # required
+    #             end: Time.now, # required
+    #             scheduled_time: Time.now, # required
+    #           }
+    #         },
+    #         content_quality_analysis_type: "CONTENT_LEVEL" # One of: ["CONTENT_LEVEL"], # required
+    #         content_quality_analysis_configuration: { # required
+    #           # One of:
+    #           content_level: {
+    #             black_frames: {
+    #               state: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
+    #               threshold_seconds: 1, # required
+    #             },
+    #             frozen_frames: {
+    #               state: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
+    #               threshold_seconds: 1, # required
+    #             },
+    #             silent_audio: {
+    #               state: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
+    #               threshold_seconds: 1, # required
+    #             }
+    #           }
+    #         }
+    #       }
+    #     ],
+    #     errors: [ # required
+    #       {
+    #         arn: "RouterInputArn", # required
+    #         code: "String", # required
+    #         message: "String", # required
+    #       }
+    #     ]
+    #   }
+    # @return [Types::BatchGetRouterInputResponse]
+    def batch_get_router_input(params = {}, options = {})
+      request = build_request(:batch_get_router_input, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves information about multiple router network interfaces in AWS Elemental MediaConnect.</p>
+    # @param [Hash, Types::BatchGetRouterNetworkInterfaceRequest] params
+    # @option params [Array<String>] :arns
+    #   <p>The Amazon Resource Names (ARNs) of the router network interfaces you want to retrieve information about.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     arns: ["RouterNetworkInterfaceArn"], # required
+    #   }
+    #   options = {}
+    #   response = client.batch_get_router_network_interface(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     router_network_interfaces: [ # required
+    #       {
+    #         name: "String", # required
+    #         arn: "RouterNetworkInterfaceArn", # required
+    #         id: "String", # required
+    #         state: "CREATING" # One of: ["CREATING", "ACTIVE", "UPDATING", "DELETING", "ERROR", "RECOVERING"], # required
+    #         network_interface_type: "PUBLIC" # One of: ["PUBLIC", "VPC"], # required
+    #         configuration: { # required
+    #           # One of:
+    #           public: {
+    #             allow_rules: [ # required
+    #               {
+    #                 cidr: "String", # required
+    #               }
+    #             ]
+    #           },
+    #           vpc: {
+    #             security_group_ids: ["String"], # required
+    #             subnet_id: "String", # required
+    #           }
+    #         },
+    #         associated_output_count: 1, # required
+    #         associated_input_count: 1, # required
+    #         region_name: "String", # required
+    #         created_at: Time.now, # required
+    #         updated_at: Time.now, # required
+    #         tags: { # required
+    #           "String" => "String"
+    #         }
+    #       }
+    #     ],
+    #     errors: [ # required
+    #       {
+    #         arn: "RouterNetworkInterfaceArn", # required
+    #         code: "String", # required
+    #         message: "String", # required
+    #       }
+    #     ]
+    #   }
+    # @return [Types::BatchGetRouterNetworkInterfaceResponse]
+    def batch_get_router_network_interface(params = {}, options = {})
+      request = build_request(:batch_get_router_network_interface, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves information about multiple router outputs in AWS Elemental MediaConnect.</p>
+    # @param [Hash, Types::BatchGetRouterOutputRequest] params
+    # @option params [Array<String>] :arns
+    #   <p>The Amazon Resource Names (ARNs) of the router outputs you want to retrieve information about.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     arns: ["RouterOutputArn"], # required
+    #   }
+    #   options = {}
+    #   response = client.batch_get_router_output(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     router_outputs: [ # required
+    #       {
+    #         name: "String", # required
+    #         arn: "RouterOutputArn", # required
+    #         id: "String", # required
+    #         state: "CREATING" # One of: ["CREATING", "STANDBY", "STARTING", "ACTIVE", "STOPPING", "DELETING", "UPDATING", "ERROR", "RECOVERING", "MIGRATING"], # required
+    #         output_type: "STANDARD" # One of: ["STANDARD", "MEDIACONNECT_FLOW", "MEDIALIVE_INPUT"], # required
+    #         configuration: { # required
+    #           # One of:
+    #           standard: {
+    #             network_interface_arn: "RouterNetworkInterfaceArn", # required
+    #             protocol_configuration: { # required
+    #               # One of:
+    #               rist: {
+    #                 destination_address: "String", # required
+    #                 destination_port: 1, # required
+    #               },
+    #               srt_listener: {
+    #                 port: 1, # required
+    #                 minimum_latency_milliseconds: 1, # required
+    #                 encryption_configuration: {
+    #                   encryption_key: { # required
+    #                     secret_arn: "SecretArn", # required
+    #                     role_arn: "RoleArn", # required
+    #                   }
+    #                 }
+    #               },
+    #               rtmp_push: {
+    #                 destination_address: "String", # required
+    #                 destination_port: 1, # required
+    #                 application_name: "String", # required
+    #                 stream_name: "String", # required
+    #                 tls_encryption: {
+    #                   encryption_type: "PUBLIC" # One of: ["PUBLIC"],
+    #                   encryption_configuration: { # required
+    #                     # One of:
+    #                     public: {
+    #                     }
+    #                   }
+    #                 }
+    #               },
+    #               srt_caller: {
+    #                 destination_address: "String", # required
+    #                 destination_port: 1, # required
+    #                 minimum_latency_milliseconds: 1, # required
+    #                 stream_id: "String",
+    #                 encryption_configuration: {
+    #                   encryption_key: { # required
+    #                     secret_arn: "SecretArn", # required
+    #                     role_arn: "RoleArn", # required
+    #                   }
+    #                 }
+    #               },
+    #               rtp: {
+    #                 destination_address: "String", # required
+    #                 destination_port: 1, # required
+    #                 forward_error_correction: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #               }
+    #             },
+    #             protocol: "RTP" # One of: ["RTP", "RIST", "SRT_CALLER", "SRT_LISTENER", "RTMP_PUSH"]
+    #           },
+    #           media_connect_flow: {
+    #             flow_arn: "FlowArn",
+    #             flow_source_arn: "FlowSourceArn",
+    #             destination_transit_encryption: { # required
+    #               encryption_key_type: "SECRETS_MANAGER" # One of: ["SECRETS_MANAGER", "AUTOMATIC"],
+    #               encryption_key_configuration: { # required
+    #                 # One of:
+    #                 secrets_manager: {
+    #                   secret_arn: "SecretArn", # required
+    #                   role_arn: "RoleArn", # required
+    #                 },
+    #                 automatic: {
+    #                 }
+    #               }
+    #             }
+    #           },
+    #           media_live_input: {
+    #             media_live_input_arn: "MediaLiveInputArn",
+    #             media_live_pipeline_id: "PIPELINE_0" # One of: ["PIPELINE_0", "PIPELINE_1"],
+    #             destination_transit_encryption: { # required
+    #               encryption_key_type: "SECRETS_MANAGER" # One of: ["SECRETS_MANAGER", "AUTOMATIC"],
+    #               encryption_key_configuration: { # required
+    #                 # One of:
+    #                 secrets_manager: {
+    #                   secret_arn: "SecretArn", # required
+    #                   role_arn: "RoleArn", # required
+    #                 },
+    #                 automatic: {
+    #                 }
+    #               }
+    #             }
+    #           }
+    #         },
+    #         routed_state: "ROUTED" # One of: ["ROUTED", "ROUTING", "UNROUTED"], # required
+    #         region_name: "String", # required
+    #         availability_zone: "String", # required
+    #         maximum_bitrate: 1, # required
+    #         routing_scope: "REGIONAL" # One of: ["REGIONAL", "GLOBAL"], # required
+    #         tier: "OUTPUT_100" # One of: ["OUTPUT_100", "OUTPUT_50", "OUTPUT_20", "OUTPUT_500", "OUTPUT_250"], # required
+    #         created_at: Time.now, # required
+    #         updated_at: Time.now, # required
+    #         messages: [ # required
+    #           {
+    #             code: "String", # required
+    #             message: "String", # required
+    #           }
+    #         ],
+    #         tags: { # required
+    #           "String" => "String"
+    #         },
+    #         stream_details: { # required
+    #           # One of:
+    #           standard: {
+    #             destination_ip_address: "String"
+    #           },
+    #           media_connect_flow: {
+    #           },
+    #           media_live_input: {
+    #           }
+    #         },
+    #         ip_address: "String",
+    #         routed_input_arn: "RouterInputArn",
+    #         maintenance_type: "PREFERRED_DAY_TIME" # One of: ["PREFERRED_DAY_TIME", "DEFAULT"], # required
+    #         maintenance_configuration: { # required
+    #           # One of:
+    #           preferred_day_time: {
+    #             day: "MONDAY" # One of: ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"], # required
+    #             time: "String", # required
+    #           },
+    #           default: {
+    #           }
+    #         },
+    #         maintenance_schedule_type: "WINDOW" # One of: ["WINDOW"],
+    #         maintenance_schedule: {
+    #           # One of:
+    #           window: {
+    #             start: Time.now, # required
+    #             end: Time.now, # required
+    #             scheduled_time: Time.now, # required
+    #           }
+    #         },
+    #         fabric_configuration: { # required
+    #           recovery_latency_mode: "BALANCED" # One of: ["BALANCED", "LOW_LATENCY"], # required
+    #         }
+    #       }
+    #     ],
+    #     errors: [ # required
+    #       {
+    #         arn: "RouterOutputArn", # required
+    #         code: "String", # required
+    #         message: "String", # required
+    #       }
+    #     ]
+    #   }
+    # @return [Types::BatchGetRouterOutputResponse]
+    def batch_get_router_output(params = {}, options = {})
+      request = build_request(:batch_get_router_output, params)
       request.send_request(options)
     end
 
@@ -894,9 +1470,13 @@ module Aws::MediaConnect
     # @option params [Types::MonitoringConfig] :source_monitoring_config
     #   <p> The settings for source monitoring. </p>
     # @option params [String] :flow_size
-    #   <p> Determines the processing capacity and feature set of the flow. Set this optional parameter to <code>LARGE</code> if you want to enable NDI outputs on the flow. </p>
+    #   <p> Determines the processing capacity and feature set of the flow. Set this optional parameter to <code>LARGE</code> if you want to enable NDI sources or outputs on the flow. </p>
     # @option params [Types::NdiConfig] :ndi_config
-    #   <p> Specifies the configuration settings for NDI outputs. Required when the flow includes NDI outputs. </p>
+    #   <p> Specifies the configuration settings for a flow's NDI source or output. Required when the flow includes an NDI source or output. </p>
+    # @option params [Types::EncodingConfig] :encoding_config
+    #   <p> The encoding configuration to apply to the NDI® source when transcoding it to a transport stream for downstream distribution. You can choose between several predefined encoding profiles based on common use cases. </p>
+    # @option params [Hash<String, String>] :flow_tags
+    #   <p> The key-value pairs that can be used to tag and organize the flow. </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     availability_zone: "String",
@@ -918,6 +1498,9 @@ module Aws::MediaConnect
     #         entitlement_status: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #         name: "String",
     #         subscribers: ["String"], # required
+    #         entitlement_tags: {
+    #           "String" => "String"
+    #         }
     #       }
     #     ],
     #     media_streams: [
@@ -939,7 +1522,10 @@ module Aws::MediaConnect
     #         media_stream_id: 1, # required
     #         media_stream_name: "String", # required
     #         media_stream_type: "video" # One of: ["video", "audio", "ancillary-data"], # required
-    #         video_format: "String"
+    #         video_format: "String",
+    #         media_stream_tags: {
+    #           "String" => "String"
+    #         }
     #       }
     #     ],
     #     name: "String", # required
@@ -982,7 +1568,7 @@ module Aws::MediaConnect
     #         min_latency: 1,
     #         name: "String",
     #         port: 1,
-    #         protocol: "zixi-push" # One of: ["zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "srt-caller", "fujitsu-qos", "udp", "ndi-speed-hq"], # required
+    #         protocol: "zixi-push" # One of: ["zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "srt-caller", "fujitsu-qos", "udp", "ndi-speed-hq"],
     #         remote_id: "String",
     #         sender_control_port: 1,
     #         smoothing_latency: 1,
@@ -992,7 +1578,25 @@ module Aws::MediaConnect
     #         },
     #         output_status: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #         ndi_speed_hq_quality: 1,
-    #         ndi_program_name: "String"
+    #         ndi_program_name: "String",
+    #         output_tags: {
+    #           "String" => "String"
+    #         },
+    #         router_integration_state: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #         router_integration_transit_encryption: {
+    #           encryption_key_type: "SECRETS_MANAGER" # One of: ["SECRETS_MANAGER", "AUTOMATIC"],
+    #           encryption_key_configuration: { # required
+    #             # One of:
+    #             secrets_manager: {
+    #               secret_arn: "SecretArn", # required
+    #               role_arn: "RoleArn", # required
+    #             },
+    #             automatic: {
+    #             }
+    #           }
+    #         },
+    #         ndi_output_timecode_source: "EMBEDDED_TIMECODE" # One of: ["EMBEDDED_TIMECODE", "UTC_SYSTEM_TIME"],
+    #         ndi_audio_reference_level: 1
     #       }
     #     ],
     #     source: {
@@ -1041,6 +1645,26 @@ module Aws::MediaConnect
     #         bridge_arn: "String", # required
     #         vpc_interface_attachment: {
     #           vpc_interface_name: "String"
+    #         }
+    #       },
+    #       ndi_source_settings: {
+    #         source_name: "String",
+    #         audio_reference_level: 1
+    #       },
+    #       source_tags: {
+    #         "String" => "String"
+    #       },
+    #       router_integration_state: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #       router_integration_transit_decryption: {
+    #         encryption_key_type: "SECRETS_MANAGER" # One of: ["SECRETS_MANAGER", "AUTOMATIC"],
+    #         encryption_key_configuration: { # required
+    #           # One of:
+    #           secrets_manager: {
+    #             secret_arn: "SecretArn", # required
+    #             role_arn: "RoleArn", # required
+    #           },
+    #           automatic: {
+    #           }
     #         }
     #       }
     #     },
@@ -1100,6 +1724,26 @@ module Aws::MediaConnect
     #           vpc_interface_attachment: {
     #             vpc_interface_name: "String"
     #           }
+    #         },
+    #         ndi_source_settings: {
+    #           source_name: "String",
+    #           audio_reference_level: 1
+    #         },
+    #         source_tags: {
+    #           "String" => "String"
+    #         },
+    #         router_integration_state: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #         router_integration_transit_decryption: {
+    #           encryption_key_type: "SECRETS_MANAGER" # One of: ["SECRETS_MANAGER", "AUTOMATIC"],
+    #           encryption_key_configuration: { # required
+    #             # One of:
+    #             secrets_manager: {
+    #               secret_arn: "SecretArn", # required
+    #               role_arn: "RoleArn", # required
+    #             },
+    #             automatic: {
+    #             }
+    #           }
     #         }
     #       }
     #     ],
@@ -1110,6 +1754,9 @@ module Aws::MediaConnect
     #         role_arn: "String", # required
     #         security_group_ids: ["String"], # required
     #         subnet_id: "String", # required
+    #         vpc_interface_tags: {
+    #           "String" => "String"
+    #         }
     #       }
     #     ],
     #     maintenance: {
@@ -1140,7 +1787,7 @@ module Aws::MediaConnect
     #         }
     #       ]
     #     },
-    #     flow_size: "MEDIUM" # One of: ["MEDIUM", "LARGE"],
+    #     flow_size: "MEDIUM" # One of: ["MEDIUM", "LARGE", "LARGE_4X"],
     #     ndi_config: {
     #       ndi_state: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #       machine_name: "String",
@@ -1151,6 +1798,13 @@ module Aws::MediaConnect
     #           vpc_interface_adapter: "String", # required
     #         }
     #       ]
+    #     },
+    #     encoding_config: {
+    #       encoding_profile: "DISTRIBUTION_H264_DEFAULT" # One of: ["DISTRIBUTION_H264_DEFAULT", "CONTRIBUTION_H264_DEFAULT"],
+    #       video_max_bitrate: 1
+    #     },
+    #     flow_tags: {
+    #       "String" => "String"
     #     }
     #   }
     #   options = {}
@@ -1265,7 +1919,13 @@ module Aws::MediaConnect
     #             source_listener_port: 1,
     #             stream_id: "String",
     #             ndi_speed_hq_quality: 1,
-    #             ndi_program_name: "String"
+    #             ndi_program_name: "String",
+    #             ndi_source_settings: {
+    #               source_name: "String",
+    #               audio_reference_level: 1
+    #             },
+    #             ndi_output_timecode_source: "EMBEDDED_TIMECODE" # One of: ["EMBEDDED_TIMECODE", "UTC_SYSTEM_TIME"],
+    #             ndi_audio_reference_level: 1
     #           },
     #           vpc_interface_attachment: {
     #             vpc_interface_name: "String"
@@ -1273,7 +1933,21 @@ module Aws::MediaConnect
     #           bridge_arn: "String",
     #           bridge_ports: [1],
     #           output_status: "ENABLED" # One of: ["ENABLED", "DISABLED"],
-    #           peer_ip_address: "String"
+    #           peer_ip_address: "String",
+    #           router_integration_state: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #           router_integration_transit_encryption: {
+    #             encryption_key_type: "SECRETS_MANAGER" # One of: ["SECRETS_MANAGER", "AUTOMATIC"],
+    #             encryption_key_configuration: { # required
+    #               # One of:
+    #               secrets_manager: {
+    #                 secret_arn: "SecretArn", # required
+    #                 role_arn: "RoleArn", # required
+    #               },
+    #               automatic: {
+    #               }
+    #             }
+    #           },
+    #           connected_router_input_arn: "String"
     #         }
     #       ],
     #       source: { # required
@@ -1327,7 +2001,13 @@ module Aws::MediaConnect
     #           source_listener_port: 1,
     #           stream_id: "String",
     #           ndi_speed_hq_quality: 1,
-    #           ndi_program_name: "String"
+    #           ndi_program_name: "String",
+    #           ndi_source_settings: {
+    #             source_name: "String",
+    #             audio_reference_level: 1
+    #           },
+    #           ndi_output_timecode_source: "EMBEDDED_TIMECODE" # One of: ["EMBEDDED_TIMECODE", "UTC_SYSTEM_TIME"],
+    #           ndi_audio_reference_level: 1
     #         },
     #         vpc_interface_name: "String",
     #         whitelist_cidr: "String",
@@ -1337,7 +2017,21 @@ module Aws::MediaConnect
     #             vpc_interface_name: "String"
     #           }
     #         },
-    #         peer_ip_address: "String"
+    #         peer_ip_address: "String",
+    #         router_integration_state: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #         router_integration_transit_decryption: {
+    #           encryption_key_type: "SECRETS_MANAGER" # One of: ["SECRETS_MANAGER", "AUTOMATIC"],
+    #           encryption_key_configuration: { # required
+    #             # One of:
+    #             secrets_manager: {
+    #               secret_arn: "SecretArn", # required
+    #               role_arn: "RoleArn", # required
+    #             },
+    #             automatic: {
+    #             }
+    #           }
+    #         },
+    #         connected_router_output_arn: "String"
     #       },
     #       source_failover_config: {
     #         failover_mode: "MERGE" # One of: ["MERGE", "FAILOVER"],
@@ -1399,7 +2093,13 @@ module Aws::MediaConnect
     #             source_listener_port: 1,
     #             stream_id: "String",
     #             ndi_speed_hq_quality: 1,
-    #             ndi_program_name: "String"
+    #             ndi_program_name: "String",
+    #             ndi_source_settings: {
+    #               source_name: "String",
+    #               audio_reference_level: 1
+    #             },
+    #             ndi_output_timecode_source: "EMBEDDED_TIMECODE" # One of: ["EMBEDDED_TIMECODE", "UTC_SYSTEM_TIME"],
+    #             ndi_audio_reference_level: 1
     #           },
     #           vpc_interface_name: "String",
     #           whitelist_cidr: "String",
@@ -1409,7 +2109,21 @@ module Aws::MediaConnect
     #               vpc_interface_name: "String"
     #             }
     #           },
-    #           peer_ip_address: "String"
+    #           peer_ip_address: "String",
+    #           router_integration_state: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #           router_integration_transit_decryption: {
+    #             encryption_key_type: "SECRETS_MANAGER" # One of: ["SECRETS_MANAGER", "AUTOMATIC"],
+    #             encryption_key_configuration: { # required
+    #               # One of:
+    #               secrets_manager: {
+    #                 secret_arn: "SecretArn", # required
+    #                 role_arn: "RoleArn", # required
+    #               },
+    #               automatic: {
+    #               }
+    #             }
+    #           },
+    #           connected_router_output_arn: "String"
     #         }
     #       ],
     #       status: "STANDBY" # One of: ["STANDBY", "ACTIVE", "UPDATING", "DELETING", "STARTING", "STOPPING", "ERROR"], # required
@@ -1453,7 +2167,7 @@ module Aws::MediaConnect
     #           }
     #         ]
     #       },
-    #       flow_size: "MEDIUM" # One of: ["MEDIUM", "LARGE"],
+    #       flow_size: "MEDIUM" # One of: ["MEDIUM", "LARGE", "LARGE_4X"],
     #       ndi_config: {
     #         ndi_state: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #         machine_name: "String",
@@ -1464,6 +2178,10 @@ module Aws::MediaConnect
     #             vpc_interface_adapter: "String", # required
     #           }
     #         ]
+    #       },
+    #       encoding_config: {
+    #         encoding_profile: "DISTRIBUTION_H264_DEFAULT" # One of: ["DISTRIBUTION_H264_DEFAULT", "CONTRIBUTION_H264_DEFAULT"],
+    #         video_max_bitrate: 1
     #       }
     #     }
     #   }
@@ -1520,6 +2238,821 @@ module Aws::MediaConnect
     # @return [Types::CreateGatewayResponse]
     def create_gateway(params = {}, options = {})
       request = build_request(:create_gateway, params)
+      request.send_request(options)
+    end
+
+    # <p>Creates a new router input in AWS Elemental MediaConnect.</p>
+    # @param [Hash, Types::CreateRouterInputRequest] params
+    # @option params [String] :name
+    #   <p>The name of the router input.</p>
+    # @option params [Types::RouterInputConfiguration] :configuration
+    #   <p>The configuration settings for the router input, which can include the protocol, network interface, and other details.</p>
+    # @option params [Integer] :maximum_bitrate
+    #   <p>The maximum bitrate for the router input.</p>
+    # @option params [String] :routing_scope
+    #   <p>Specifies whether the router input can be assigned to outputs in different Regions. REGIONAL (default) - connects only to outputs in same Region. GLOBAL - connects to outputs in any Region.</p>
+    # @option params [String] :tier
+    #   <p>The tier level for the router input. The tier sets the maximum bitrate, in Mbps, for the router input. Valid values include the following:</p> <ul> <li> <p> <code>INPUT_20</code> – 20 Mbps</p> </li> <li> <p> <code>INPUT_50</code> – 50 Mbps</p> </li> <li> <p> <code>INPUT_100</code> – 100 Mbps</p> </li> <li> <p> <code>INPUT_250</code> – 250 Mbps</p> </li> <li> <p> <code>INPUT_500</code> – 500 Mbps</p> </li> </ul> <p>The 250 Mbps and 500 Mbps tiers are high-bitrate tiers that support TR-07 (JPEG XS) workflows.</p>
+    # @option params [String] :region_name
+    #   <p>The Amazon Web Services Region for the router input. Defaults to the current region if not specified.</p>
+    # @option params [String] :availability_zone
+    #   <p>The Availability Zone where you want to create the router input. This must be a valid Availability Zone for the region specified by <code>regionName</code>, or the current region if no <code>regionName</code> is provided. </p>
+    # @option params [Types::RouterInputTransitEncryption] :transit_encryption
+    #   <p>The transit encryption settings for the router input.</p>
+    # @option params [Types::MaintenanceConfiguration] :maintenance_configuration
+    #   <p>The maintenance configuration settings for the router input, including preferred maintenance windows and schedules.</p>
+    # @option params [Hash<String, String>] :tags
+    #   <p>Key-value pairs that can be used to tag and organize this router input.</p>
+    # @option params [String] :client_token
+    #   <p>A unique identifier for the request to ensure idempotency.</p>
+    # @option params [Types::RouterContentQualityAnalysisConfiguration] :content_quality_analysis_configuration
+    #   <p>The content quality analysis configuration for the router input.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     name: "String", # required
+    #     configuration: { # required
+    #       # One of:
+    #       standard: {
+    #         network_interface_arn: "RouterNetworkInterfaceArn", # required
+    #         protocol_configuration: { # required
+    #           # One of:
+    #           rist: {
+    #             port: 1, # required
+    #             recovery_latency_milliseconds: 1, # required
+    #           },
+    #           srt_listener: {
+    #             port: 1, # required
+    #             minimum_latency_milliseconds: 1, # required
+    #             decryption_configuration: {
+    #               encryption_key: { # required
+    #                 secret_arn: "SecretArn", # required
+    #                 role_arn: "RoleArn", # required
+    #               }
+    #             }
+    #           },
+    #           srt_caller: {
+    #             source_address: "String", # required
+    #             source_port: 1, # required
+    #             minimum_latency_milliseconds: 1, # required
+    #             stream_id: "String",
+    #             decryption_configuration: {
+    #               encryption_key: { # required
+    #                 secret_arn: "SecretArn", # required
+    #                 role_arn: "RoleArn", # required
+    #               }
+    #             }
+    #           },
+    #           rtp: {
+    #             port: 1, # required
+    #             forward_error_correction: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #           }
+    #         },
+    #         protocol: "RTP" # One of: ["RTP", "RIST", "SRT_CALLER", "SRT_LISTENER"]
+    #       },
+    #       media_live_channel: {
+    #         media_live_channel_arn: "MediaLiveChannelArn",
+    #         media_live_pipeline_id: "PIPELINE_0" # One of: ["PIPELINE_0", "PIPELINE_1"],
+    #         media_live_channel_output_name: "String",
+    #         source_transit_decryption: { # required
+    #           encryption_key_type: "SECRETS_MANAGER" # One of: ["SECRETS_MANAGER", "AUTOMATIC"],
+    #           encryption_key_configuration: { # required
+    #             # One of:
+    #             secrets_manager: {
+    #               secret_arn: "SecretArn", # required
+    #               role_arn: "RoleArn", # required
+    #             },
+    #             automatic: {
+    #             }
+    #           }
+    #         }
+    #       },
+    #       failover: {
+    #         network_interface_arn: "RouterNetworkInterfaceArn", # required
+    #         protocol_configurations: [{ # required
+    #           # One of:
+    #           rist: {
+    #             port: 1, # required
+    #             recovery_latency_milliseconds: 1, # required
+    #           },
+    #           srt_listener: {
+    #             port: 1, # required
+    #             minimum_latency_milliseconds: 1, # required
+    #             decryption_configuration: {
+    #               encryption_key: { # required
+    #                 secret_arn: "SecretArn", # required
+    #                 role_arn: "RoleArn", # required
+    #               }
+    #             }
+    #           },
+    #           srt_caller: {
+    #             source_address: "String", # required
+    #             source_port: 1, # required
+    #             minimum_latency_milliseconds: 1, # required
+    #             stream_id: "String",
+    #             decryption_configuration: {
+    #               encryption_key: { # required
+    #                 secret_arn: "SecretArn", # required
+    #                 role_arn: "RoleArn", # required
+    #               }
+    #             }
+    #           },
+    #           rtp: {
+    #             port: 1, # required
+    #             forward_error_correction: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #           }
+    #         }],
+    #         source_priority_mode: "NO_PRIORITY" # One of: ["NO_PRIORITY", "PRIMARY_SECONDARY"], # required
+    #         primary_source_index: 1
+    #       },
+    #       media_connect_flow: {
+    #         flow_arn: "FlowArn",
+    #         flow_output_arn: "FlowOutputArn",
+    #         source_transit_decryption: { # required
+    #           encryption_key_type: "SECRETS_MANAGER" # One of: ["SECRETS_MANAGER", "AUTOMATIC"],
+    #           encryption_key_configuration: { # required
+    #             # One of:
+    #             secrets_manager: {
+    #               secret_arn: "SecretArn", # required
+    #               role_arn: "RoleArn", # required
+    #             },
+    #             automatic: {
+    #             }
+    #           }
+    #         }
+    #       },
+    #       merge: {
+    #         network_interface_arn: "RouterNetworkInterfaceArn", # required
+    #         protocol_configurations: [{ # required
+    #           # One of:
+    #           rtp: {
+    #             port: 1, # required
+    #             forward_error_correction: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #           },
+    #           rist: {
+    #             port: 1, # required
+    #             recovery_latency_milliseconds: 1, # required
+    #           }
+    #         }],
+    #         merge_recovery_window_milliseconds: 1, # required
+    #       }
+    #     },
+    #     maximum_bitrate: 1, # required
+    #     routing_scope: "REGIONAL" # One of: ["REGIONAL", "GLOBAL"], # required
+    #     tier: "INPUT_100" # One of: ["INPUT_100", "INPUT_50", "INPUT_20", "INPUT_500", "INPUT_250"], # required
+    #     region_name: "String",
+    #     availability_zone: "String",
+    #     transit_encryption: {
+    #       encryption_key_type: "SECRETS_MANAGER" # One of: ["SECRETS_MANAGER", "AUTOMATIC"],
+    #       encryption_key_configuration: { # required
+    #         # One of:
+    #         secrets_manager: {
+    #           secret_arn: "SecretArn", # required
+    #           role_arn: "RoleArn", # required
+    #         },
+    #         automatic: {
+    #         }
+    #       }
+    #     },
+    #     maintenance_configuration: {
+    #       # One of:
+    #       preferred_day_time: {
+    #         day: "MONDAY" # One of: ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"], # required
+    #         time: "String", # required
+    #       },
+    #       default: {
+    #       }
+    #     },
+    #     tags: {
+    #       "String" => "String"
+    #     },
+    #     client_token: "ClientToken",
+    #     content_quality_analysis_configuration: {
+    #       # One of:
+    #       content_level: {
+    #         black_frames: {
+    #           state: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
+    #           threshold_seconds: 1, # required
+    #         },
+    #         frozen_frames: {
+    #           state: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
+    #           threshold_seconds: 1, # required
+    #         },
+    #         silent_audio: {
+    #           state: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
+    #           threshold_seconds: 1, # required
+    #         }
+    #       }
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.create_router_input(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     router_input: { # required
+    #       name: "String", # required
+    #       arn: "RouterInputArn", # required
+    #       id: "String", # required
+    #       state: "CREATING" # One of: ["CREATING", "STANDBY", "STARTING", "ACTIVE", "STOPPING", "DELETING", "UPDATING", "ERROR", "RECOVERING", "MIGRATING"], # required
+    #       input_type: "STANDARD" # One of: ["STANDARD", "FAILOVER", "MERGE", "MEDIACONNECT_FLOW", "MEDIALIVE_CHANNEL"], # required
+    #       configuration: { # required
+    #         # One of:
+    #         standard: {
+    #           network_interface_arn: "RouterNetworkInterfaceArn", # required
+    #           protocol_configuration: { # required
+    #             # One of:
+    #             rist: {
+    #               port: 1, # required
+    #               recovery_latency_milliseconds: 1, # required
+    #             },
+    #             srt_listener: {
+    #               port: 1, # required
+    #               minimum_latency_milliseconds: 1, # required
+    #               decryption_configuration: {
+    #                 encryption_key: { # required
+    #                   secret_arn: "SecretArn", # required
+    #                   role_arn: "RoleArn", # required
+    #                 }
+    #               }
+    #             },
+    #             srt_caller: {
+    #               source_address: "String", # required
+    #               source_port: 1, # required
+    #               minimum_latency_milliseconds: 1, # required
+    #               stream_id: "String",
+    #               decryption_configuration: {
+    #                 encryption_key: { # required
+    #                   secret_arn: "SecretArn", # required
+    #                   role_arn: "RoleArn", # required
+    #                 }
+    #               }
+    #             },
+    #             rtp: {
+    #               port: 1, # required
+    #               forward_error_correction: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #             }
+    #           },
+    #           protocol: "RTP" # One of: ["RTP", "RIST", "SRT_CALLER", "SRT_LISTENER"]
+    #         },
+    #         media_live_channel: {
+    #           media_live_channel_arn: "MediaLiveChannelArn",
+    #           media_live_pipeline_id: "PIPELINE_0" # One of: ["PIPELINE_0", "PIPELINE_1"],
+    #           media_live_channel_output_name: "String",
+    #           source_transit_decryption: { # required
+    #             encryption_key_type: "SECRETS_MANAGER" # One of: ["SECRETS_MANAGER", "AUTOMATIC"],
+    #             encryption_key_configuration: { # required
+    #               # One of:
+    #               secrets_manager: {
+    #                 secret_arn: "SecretArn", # required
+    #                 role_arn: "RoleArn", # required
+    #               },
+    #               automatic: {
+    #               }
+    #             }
+    #           }
+    #         },
+    #         failover: {
+    #           network_interface_arn: "RouterNetworkInterfaceArn", # required
+    #           protocol_configurations: [{ # required
+    #             # One of:
+    #             rist: {
+    #               port: 1, # required
+    #               recovery_latency_milliseconds: 1, # required
+    #             },
+    #             srt_listener: {
+    #               port: 1, # required
+    #               minimum_latency_milliseconds: 1, # required
+    #               decryption_configuration: {
+    #                 encryption_key: { # required
+    #                   secret_arn: "SecretArn", # required
+    #                   role_arn: "RoleArn", # required
+    #                 }
+    #               }
+    #             },
+    #             srt_caller: {
+    #               source_address: "String", # required
+    #               source_port: 1, # required
+    #               minimum_latency_milliseconds: 1, # required
+    #               stream_id: "String",
+    #               decryption_configuration: {
+    #                 encryption_key: { # required
+    #                   secret_arn: "SecretArn", # required
+    #                   role_arn: "RoleArn", # required
+    #                 }
+    #               }
+    #             },
+    #             rtp: {
+    #               port: 1, # required
+    #               forward_error_correction: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #             }
+    #           }],
+    #           source_priority_mode: "NO_PRIORITY" # One of: ["NO_PRIORITY", "PRIMARY_SECONDARY"], # required
+    #           primary_source_index: 1
+    #         },
+    #         media_connect_flow: {
+    #           flow_arn: "FlowArn",
+    #           flow_output_arn: "FlowOutputArn",
+    #           source_transit_decryption: { # required
+    #             encryption_key_type: "SECRETS_MANAGER" # One of: ["SECRETS_MANAGER", "AUTOMATIC"],
+    #             encryption_key_configuration: { # required
+    #               # One of:
+    #               secrets_manager: {
+    #                 secret_arn: "SecretArn", # required
+    #                 role_arn: "RoleArn", # required
+    #               },
+    #               automatic: {
+    #               }
+    #             }
+    #           }
+    #         },
+    #         merge: {
+    #           network_interface_arn: "RouterNetworkInterfaceArn", # required
+    #           protocol_configurations: [{ # required
+    #             # One of:
+    #             rtp: {
+    #               port: 1, # required
+    #               forward_error_correction: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #             },
+    #             rist: {
+    #               port: 1, # required
+    #               recovery_latency_milliseconds: 1, # required
+    #             }
+    #           }],
+    #           merge_recovery_window_milliseconds: 1, # required
+    #         }
+    #       },
+    #       routed_outputs: 1, # required
+    #       maximum_routed_outputs: 1,
+    #       region_name: "String", # required
+    #       availability_zone: "String", # required
+    #       maximum_bitrate: 1, # required
+    #       tier: "INPUT_100" # One of: ["INPUT_100", "INPUT_50", "INPUT_20", "INPUT_500", "INPUT_250"], # required
+    #       routing_scope: "REGIONAL" # One of: ["REGIONAL", "GLOBAL"], # required
+    #       created_at: Time.now, # required
+    #       updated_at: Time.now, # required
+    #       messages: [ # required
+    #         {
+    #           code: "String", # required
+    #           message: "String", # required
+    #         }
+    #       ],
+    #       transit_encryption: { # required
+    #         encryption_key_type: "SECRETS_MANAGER" # One of: ["SECRETS_MANAGER", "AUTOMATIC"],
+    #         encryption_key_configuration: { # required
+    #           # One of:
+    #           secrets_manager: {
+    #             secret_arn: "SecretArn", # required
+    #             role_arn: "RoleArn", # required
+    #           },
+    #           automatic: {
+    #           }
+    #         }
+    #       },
+    #       tags: { # required
+    #         "String" => "String"
+    #       },
+    #       stream_details: { # required
+    #         # One of:
+    #         standard: {
+    #           source_ip_address: "String"
+    #         },
+    #         media_live_channel: {
+    #         },
+    #         failover: {
+    #           source_index_zero_stream_details: { # required
+    #             source_index: 1, # required
+    #             source_ip_address: "String"
+    #           },
+    #           source_index_one_stream_details: { # required
+    #             source_index: 1, # required
+    #             source_ip_address: "String"
+    #           }
+    #         },
+    #         media_connect_flow: {
+    #         },
+    #         merge: {
+    #           source_index_zero_stream_details: { # required
+    #             source_index: 1, # required
+    #             source_ip_address: "String"
+    #           },
+    #           source_index_one_stream_details: { # required
+    #             source_index: 1, # required
+    #             source_ip_address: "String"
+    #           }
+    #         }
+    #       },
+    #       ip_address: "String",
+    #       maintenance_type: "PREFERRED_DAY_TIME" # One of: ["PREFERRED_DAY_TIME", "DEFAULT"], # required
+    #       maintenance_configuration: { # required
+    #         # One of:
+    #         preferred_day_time: {
+    #           day: "MONDAY" # One of: ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"], # required
+    #           time: "String", # required
+    #         },
+    #         default: {
+    #         }
+    #       },
+    #       maintenance_schedule_type: "WINDOW" # One of: ["WINDOW"],
+    #       maintenance_schedule: {
+    #         # One of:
+    #         window: {
+    #           start: Time.now, # required
+    #           end: Time.now, # required
+    #           scheduled_time: Time.now, # required
+    #         }
+    #       },
+    #       content_quality_analysis_type: "CONTENT_LEVEL" # One of: ["CONTENT_LEVEL"], # required
+    #       content_quality_analysis_configuration: { # required
+    #         # One of:
+    #         content_level: {
+    #           black_frames: {
+    #             state: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
+    #             threshold_seconds: 1, # required
+    #           },
+    #           frozen_frames: {
+    #             state: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
+    #             threshold_seconds: 1, # required
+    #           },
+    #           silent_audio: {
+    #             state: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
+    #             threshold_seconds: 1, # required
+    #           }
+    #         }
+    #       }
+    #     }
+    #   }
+    # @return [Types::CreateRouterInputResponse]
+    def create_router_input(params = {}, options = {})
+      request = build_request(:create_router_input, params)
+      request.send_request(options)
+    end
+
+    # <p>Creates a new router network interface in AWS Elemental MediaConnect.</p>
+    # @param [Hash, Types::CreateRouterNetworkInterfaceRequest] params
+    # @option params [String] :name
+    #   <p>The name of the router network interface.</p>
+    # @option params [Types::RouterNetworkInterfaceConfiguration] :configuration
+    #   <p>The configuration settings for the router network interface.</p>
+    # @option params [String] :region_name
+    #   <p>The Amazon Web Services Region for the router network interface. Defaults to the current region if not specified.</p>
+    # @option params [Hash<String, String>] :tags
+    #   <p>Key-value pairs that can be used to tag and organize this router network interface.</p>
+    # @option params [String] :client_token
+    #   <p>A unique identifier for the request to ensure idempotency.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     name: "String", # required
+    #     configuration: { # required
+    #       # One of:
+    #       public: {
+    #         allow_rules: [ # required
+    #           {
+    #             cidr: "String", # required
+    #           }
+    #         ]
+    #       },
+    #       vpc: {
+    #         security_group_ids: ["String"], # required
+    #         subnet_id: "String", # required
+    #       }
+    #     },
+    #     region_name: "String",
+    #     tags: {
+    #       "String" => "String"
+    #     },
+    #     client_token: "ClientToken"
+    #   }
+    #   options = {}
+    #   response = client.create_router_network_interface(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     router_network_interface: { # required
+    #       name: "String", # required
+    #       arn: "RouterNetworkInterfaceArn", # required
+    #       id: "String", # required
+    #       state: "CREATING" # One of: ["CREATING", "ACTIVE", "UPDATING", "DELETING", "ERROR", "RECOVERING"], # required
+    #       network_interface_type: "PUBLIC" # One of: ["PUBLIC", "VPC"], # required
+    #       configuration: { # required
+    #         # One of:
+    #         public: {
+    #           allow_rules: [ # required
+    #             {
+    #               cidr: "String", # required
+    #             }
+    #           ]
+    #         },
+    #         vpc: {
+    #           security_group_ids: ["String"], # required
+    #           subnet_id: "String", # required
+    #         }
+    #       },
+    #       associated_output_count: 1, # required
+    #       associated_input_count: 1, # required
+    #       region_name: "String", # required
+    #       created_at: Time.now, # required
+    #       updated_at: Time.now, # required
+    #       tags: { # required
+    #         "String" => "String"
+    #       }
+    #     }
+    #   }
+    # @return [Types::CreateRouterNetworkInterfaceResponse]
+    def create_router_network_interface(params = {}, options = {})
+      request = build_request(:create_router_network_interface, params)
+      request.send_request(options)
+    end
+
+    # <p>Creates a new router output in AWS Elemental MediaConnect.</p>
+    # @param [Hash, Types::CreateRouterOutputRequest] params
+    # @option params [String] :name
+    #   <p>The name of the router output.</p>
+    # @option params [Types::RouterOutputConfiguration] :configuration
+    #   <p>The configuration settings for the router output.</p>
+    # @option params [Integer] :maximum_bitrate
+    #   <p>The maximum bitrate for the router output.</p>
+    # @option params [String] :routing_scope
+    #   <p>Specifies whether the router output can take inputs that are in different Regions. REGIONAL (default) - can only take inputs from same Region. GLOBAL - can take inputs from any Region.</p>
+    # @option params [String] :tier
+    #   <p>The tier level for the router output. The tier sets the maximum bitrate, in Mbps, for the router output. Valid values include the following:</p> <ul> <li> <p> <code>OUTPUT_20</code> – 20 Mbps</p> </li> <li> <p> <code>OUTPUT_50</code> – 50 Mbps</p> </li> <li> <p> <code>OUTPUT_100</code> – 100 Mbps</p> </li> <li> <p> <code>OUTPUT_250</code> – 250 Mbps</p> </li> <li> <p> <code>OUTPUT_500</code> – 500 Mbps</p> </li> </ul> <p>The 250 Mbps and 500 Mbps tiers are high-bitrate tiers that support TR-07 (JPEG XS) workflows.</p>
+    # @option params [String] :region_name
+    #   <p>The Amazon Web Services Region for the router output. Defaults to the current region if not specified.</p>
+    # @option params [String] :availability_zone
+    #   <p>The Availability Zone where you want to create the router output. This must be a valid Availability Zone for the region specified by <code>regionName</code>, or the current region if no <code>regionName</code> is provided. </p>
+    # @option params [Types::MaintenanceConfiguration] :maintenance_configuration
+    #   <p>The maintenance configuration settings for the router output, including preferred maintenance windows and schedules.</p>
+    # @option params [Hash<String, String>] :tags
+    #   <p>Key-value pairs that can be used to tag this router output.</p>
+    # @option params [Types::FabricConfiguration] :fabric_configuration
+    #   <p>The fabric configuration settings for the router output.</p>
+    # @option params [String] :client_token
+    #   <p>A unique identifier for the request to ensure idempotency.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     name: "String", # required
+    #     configuration: { # required
+    #       # One of:
+    #       standard: {
+    #         network_interface_arn: "RouterNetworkInterfaceArn", # required
+    #         protocol_configuration: { # required
+    #           # One of:
+    #           rist: {
+    #             destination_address: "String", # required
+    #             destination_port: 1, # required
+    #           },
+    #           srt_listener: {
+    #             port: 1, # required
+    #             minimum_latency_milliseconds: 1, # required
+    #             encryption_configuration: {
+    #               encryption_key: { # required
+    #                 secret_arn: "SecretArn", # required
+    #                 role_arn: "RoleArn", # required
+    #               }
+    #             }
+    #           },
+    #           rtmp_push: {
+    #             destination_address: "String", # required
+    #             destination_port: 1, # required
+    #             application_name: "String", # required
+    #             stream_name: "String", # required
+    #             tls_encryption: {
+    #               encryption_type: "PUBLIC" # One of: ["PUBLIC"],
+    #               encryption_configuration: { # required
+    #                 # One of:
+    #                 public: {
+    #                 }
+    #               }
+    #             }
+    #           },
+    #           srt_caller: {
+    #             destination_address: "String", # required
+    #             destination_port: 1, # required
+    #             minimum_latency_milliseconds: 1, # required
+    #             stream_id: "String",
+    #             encryption_configuration: {
+    #               encryption_key: { # required
+    #                 secret_arn: "SecretArn", # required
+    #                 role_arn: "RoleArn", # required
+    #               }
+    #             }
+    #           },
+    #           rtp: {
+    #             destination_address: "String", # required
+    #             destination_port: 1, # required
+    #             forward_error_correction: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #           }
+    #         },
+    #         protocol: "RTP" # One of: ["RTP", "RIST", "SRT_CALLER", "SRT_LISTENER", "RTMP_PUSH"]
+    #       },
+    #       media_connect_flow: {
+    #         flow_arn: "FlowArn",
+    #         flow_source_arn: "FlowSourceArn",
+    #         destination_transit_encryption: { # required
+    #           encryption_key_type: "SECRETS_MANAGER" # One of: ["SECRETS_MANAGER", "AUTOMATIC"],
+    #           encryption_key_configuration: { # required
+    #             # One of:
+    #             secrets_manager: {
+    #               secret_arn: "SecretArn", # required
+    #               role_arn: "RoleArn", # required
+    #             },
+    #             automatic: {
+    #             }
+    #           }
+    #         }
+    #       },
+    #       media_live_input: {
+    #         media_live_input_arn: "MediaLiveInputArn",
+    #         media_live_pipeline_id: "PIPELINE_0" # One of: ["PIPELINE_0", "PIPELINE_1"],
+    #         destination_transit_encryption: { # required
+    #           encryption_key_type: "SECRETS_MANAGER" # One of: ["SECRETS_MANAGER", "AUTOMATIC"],
+    #           encryption_key_configuration: { # required
+    #             # One of:
+    #             secrets_manager: {
+    #               secret_arn: "SecretArn", # required
+    #               role_arn: "RoleArn", # required
+    #             },
+    #             automatic: {
+    #             }
+    #           }
+    #         }
+    #       }
+    #     },
+    #     maximum_bitrate: 1, # required
+    #     routing_scope: "REGIONAL" # One of: ["REGIONAL", "GLOBAL"], # required
+    #     tier: "OUTPUT_100" # One of: ["OUTPUT_100", "OUTPUT_50", "OUTPUT_20", "OUTPUT_500", "OUTPUT_250"], # required
+    #     region_name: "String",
+    #     availability_zone: "String",
+    #     maintenance_configuration: {
+    #       # One of:
+    #       preferred_day_time: {
+    #         day: "MONDAY" # One of: ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"], # required
+    #         time: "String", # required
+    #       },
+    #       default: {
+    #       }
+    #     },
+    #     tags: {
+    #       "String" => "String"
+    #     },
+    #     fabric_configuration: {
+    #       recovery_latency_mode: "BALANCED" # One of: ["BALANCED", "LOW_LATENCY"], # required
+    #     },
+    #     client_token: "ClientToken"
+    #   }
+    #   options = {}
+    #   response = client.create_router_output(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     router_output: { # required
+    #       name: "String", # required
+    #       arn: "RouterOutputArn", # required
+    #       id: "String", # required
+    #       state: "CREATING" # One of: ["CREATING", "STANDBY", "STARTING", "ACTIVE", "STOPPING", "DELETING", "UPDATING", "ERROR", "RECOVERING", "MIGRATING"], # required
+    #       output_type: "STANDARD" # One of: ["STANDARD", "MEDIACONNECT_FLOW", "MEDIALIVE_INPUT"], # required
+    #       configuration: { # required
+    #         # One of:
+    #         standard: {
+    #           network_interface_arn: "RouterNetworkInterfaceArn", # required
+    #           protocol_configuration: { # required
+    #             # One of:
+    #             rist: {
+    #               destination_address: "String", # required
+    #               destination_port: 1, # required
+    #             },
+    #             srt_listener: {
+    #               port: 1, # required
+    #               minimum_latency_milliseconds: 1, # required
+    #               encryption_configuration: {
+    #                 encryption_key: { # required
+    #                   secret_arn: "SecretArn", # required
+    #                   role_arn: "RoleArn", # required
+    #                 }
+    #               }
+    #             },
+    #             rtmp_push: {
+    #               destination_address: "String", # required
+    #               destination_port: 1, # required
+    #               application_name: "String", # required
+    #               stream_name: "String", # required
+    #               tls_encryption: {
+    #                 encryption_type: "PUBLIC" # One of: ["PUBLIC"],
+    #                 encryption_configuration: { # required
+    #                   # One of:
+    #                   public: {
+    #                   }
+    #                 }
+    #               }
+    #             },
+    #             srt_caller: {
+    #               destination_address: "String", # required
+    #               destination_port: 1, # required
+    #               minimum_latency_milliseconds: 1, # required
+    #               stream_id: "String",
+    #               encryption_configuration: {
+    #                 encryption_key: { # required
+    #                   secret_arn: "SecretArn", # required
+    #                   role_arn: "RoleArn", # required
+    #                 }
+    #               }
+    #             },
+    #             rtp: {
+    #               destination_address: "String", # required
+    #               destination_port: 1, # required
+    #               forward_error_correction: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #             }
+    #           },
+    #           protocol: "RTP" # One of: ["RTP", "RIST", "SRT_CALLER", "SRT_LISTENER", "RTMP_PUSH"]
+    #         },
+    #         media_connect_flow: {
+    #           flow_arn: "FlowArn",
+    #           flow_source_arn: "FlowSourceArn",
+    #           destination_transit_encryption: { # required
+    #             encryption_key_type: "SECRETS_MANAGER" # One of: ["SECRETS_MANAGER", "AUTOMATIC"],
+    #             encryption_key_configuration: { # required
+    #               # One of:
+    #               secrets_manager: {
+    #                 secret_arn: "SecretArn", # required
+    #                 role_arn: "RoleArn", # required
+    #               },
+    #               automatic: {
+    #               }
+    #             }
+    #           }
+    #         },
+    #         media_live_input: {
+    #           media_live_input_arn: "MediaLiveInputArn",
+    #           media_live_pipeline_id: "PIPELINE_0" # One of: ["PIPELINE_0", "PIPELINE_1"],
+    #           destination_transit_encryption: { # required
+    #             encryption_key_type: "SECRETS_MANAGER" # One of: ["SECRETS_MANAGER", "AUTOMATIC"],
+    #             encryption_key_configuration: { # required
+    #               # One of:
+    #               secrets_manager: {
+    #                 secret_arn: "SecretArn", # required
+    #                 role_arn: "RoleArn", # required
+    #               },
+    #               automatic: {
+    #               }
+    #             }
+    #           }
+    #         }
+    #       },
+    #       routed_state: "ROUTED" # One of: ["ROUTED", "ROUTING", "UNROUTED"], # required
+    #       region_name: "String", # required
+    #       availability_zone: "String", # required
+    #       maximum_bitrate: 1, # required
+    #       routing_scope: "REGIONAL" # One of: ["REGIONAL", "GLOBAL"], # required
+    #       tier: "OUTPUT_100" # One of: ["OUTPUT_100", "OUTPUT_50", "OUTPUT_20", "OUTPUT_500", "OUTPUT_250"], # required
+    #       created_at: Time.now, # required
+    #       updated_at: Time.now, # required
+    #       messages: [ # required
+    #         {
+    #           code: "String", # required
+    #           message: "String", # required
+    #         }
+    #       ],
+    #       tags: { # required
+    #         "String" => "String"
+    #       },
+    #       stream_details: { # required
+    #         # One of:
+    #         standard: {
+    #           destination_ip_address: "String"
+    #         },
+    #         media_connect_flow: {
+    #         },
+    #         media_live_input: {
+    #         }
+    #       },
+    #       ip_address: "String",
+    #       routed_input_arn: "RouterInputArn",
+    #       maintenance_type: "PREFERRED_DAY_TIME" # One of: ["PREFERRED_DAY_TIME", "DEFAULT"], # required
+    #       maintenance_configuration: { # required
+    #         # One of:
+    #         preferred_day_time: {
+    #           day: "MONDAY" # One of: ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"], # required
+    #           time: "String", # required
+    #         },
+    #         default: {
+    #         }
+    #       },
+    #       maintenance_schedule_type: "WINDOW" # One of: ["WINDOW"],
+    #       maintenance_schedule: {
+    #         # One of:
+    #         window: {
+    #           start: Time.now, # required
+    #           end: Time.now, # required
+    #           scheduled_time: Time.now, # required
+    #         }
+    #       },
+    #       fabric_configuration: { # required
+    #         recovery_latency_mode: "BALANCED" # One of: ["BALANCED", "LOW_LATENCY"], # required
+    #       }
+    #     }
+    #   }
+    # @return [Types::CreateRouterOutputResponse]
+    def create_router_output(params = {}, options = {})
+      request = build_request(:create_router_output, params)
       request.send_request(options)
     end
 
@@ -1584,6 +3117,75 @@ module Aws::MediaConnect
     # @return [Types::DeleteGatewayResponse]
     def delete_gateway(params = {}, options = {})
       request = build_request(:delete_gateway, params)
+      request.send_request(options)
+    end
+
+    # <p>Deletes a router input from AWS Elemental MediaConnect.</p>
+    # @param [Hash, Types::DeleteRouterInputRequest] params
+    # @option params [String] :arn
+    #   <p>The Amazon Resource Name (ARN) of the router input that you want to delete.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     arn: "RouterInputArn", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_router_input(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     arn: "RouterInputArn", # required
+    #     name: "String", # required
+    #     state: "CREATING" # One of: ["CREATING", "STANDBY", "STARTING", "ACTIVE", "STOPPING", "DELETING", "UPDATING", "ERROR", "RECOVERING", "MIGRATING"], # required
+    #   }
+    # @return [Types::DeleteRouterInputResponse]
+    def delete_router_input(params = {}, options = {})
+      request = build_request(:delete_router_input, params)
+      request.send_request(options)
+    end
+
+    # <p>Deletes a router network interface from AWS Elemental MediaConnect.</p>
+    # @param [Hash, Types::DeleteRouterNetworkInterfaceRequest] params
+    # @option params [String] :arn
+    #   <p>The Amazon Resource Name (ARN) of the router network interface that you want to delete.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     arn: "RouterNetworkInterfaceArn", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_router_network_interface(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     arn: "RouterNetworkInterfaceArn", # required
+    #     name: "String", # required
+    #     state: "CREATING" # One of: ["CREATING", "ACTIVE", "UPDATING", "DELETING", "ERROR", "RECOVERING"], # required
+    #   }
+    # @return [Types::DeleteRouterNetworkInterfaceResponse]
+    def delete_router_network_interface(params = {}, options = {})
+      request = build_request(:delete_router_network_interface, params)
+      request.send_request(options)
+    end
+
+    # <p>Deletes a router output from AWS Elemental MediaConnect.</p>
+    # @param [Hash, Types::DeleteRouterOutputRequest] params
+    # @option params [String] :arn
+    #   <p>The Amazon Resource Name (ARN) of the router output that you want to delete.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     arn: "RouterOutputArn", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_router_output(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     arn: "RouterOutputArn", # required
+    #     name: "String", # required
+    #     state: "CREATING" # One of: ["CREATING", "STANDBY", "STARTING", "ACTIVE", "STOPPING", "DELETING", "UPDATING", "ERROR", "RECOVERING", "MIGRATING"], # required
+    #   }
+    # @return [Types::DeleteRouterOutputResponse]
+    def delete_router_output(params = {}, options = {})
+      request = build_request(:delete_router_output, params)
       request.send_request(options)
     end
 
@@ -1821,7 +3423,13 @@ module Aws::MediaConnect
     #             source_listener_port: 1,
     #             stream_id: "String",
     #             ndi_speed_hq_quality: 1,
-    #             ndi_program_name: "String"
+    #             ndi_program_name: "String",
+    #             ndi_source_settings: {
+    #               source_name: "String",
+    #               audio_reference_level: 1
+    #             },
+    #             ndi_output_timecode_source: "EMBEDDED_TIMECODE" # One of: ["EMBEDDED_TIMECODE", "UTC_SYSTEM_TIME"],
+    #             ndi_audio_reference_level: 1
     #           },
     #           vpc_interface_attachment: {
     #             vpc_interface_name: "String"
@@ -1829,7 +3437,21 @@ module Aws::MediaConnect
     #           bridge_arn: "String",
     #           bridge_ports: [1],
     #           output_status: "ENABLED" # One of: ["ENABLED", "DISABLED"],
-    #           peer_ip_address: "String"
+    #           peer_ip_address: "String",
+    #           router_integration_state: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #           router_integration_transit_encryption: {
+    #             encryption_key_type: "SECRETS_MANAGER" # One of: ["SECRETS_MANAGER", "AUTOMATIC"],
+    #             encryption_key_configuration: { # required
+    #               # One of:
+    #               secrets_manager: {
+    #                 secret_arn: "SecretArn", # required
+    #                 role_arn: "RoleArn", # required
+    #               },
+    #               automatic: {
+    #               }
+    #             }
+    #           },
+    #           connected_router_input_arn: "String"
     #         }
     #       ],
     #       source: { # required
@@ -1883,7 +3505,13 @@ module Aws::MediaConnect
     #           source_listener_port: 1,
     #           stream_id: "String",
     #           ndi_speed_hq_quality: 1,
-    #           ndi_program_name: "String"
+    #           ndi_program_name: "String",
+    #           ndi_source_settings: {
+    #             source_name: "String",
+    #             audio_reference_level: 1
+    #           },
+    #           ndi_output_timecode_source: "EMBEDDED_TIMECODE" # One of: ["EMBEDDED_TIMECODE", "UTC_SYSTEM_TIME"],
+    #           ndi_audio_reference_level: 1
     #         },
     #         vpc_interface_name: "String",
     #         whitelist_cidr: "String",
@@ -1893,7 +3521,21 @@ module Aws::MediaConnect
     #             vpc_interface_name: "String"
     #           }
     #         },
-    #         peer_ip_address: "String"
+    #         peer_ip_address: "String",
+    #         router_integration_state: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #         router_integration_transit_decryption: {
+    #           encryption_key_type: "SECRETS_MANAGER" # One of: ["SECRETS_MANAGER", "AUTOMATIC"],
+    #           encryption_key_configuration: { # required
+    #             # One of:
+    #             secrets_manager: {
+    #               secret_arn: "SecretArn", # required
+    #               role_arn: "RoleArn", # required
+    #             },
+    #             automatic: {
+    #             }
+    #           }
+    #         },
+    #         connected_router_output_arn: "String"
     #       },
     #       source_failover_config: {
     #         failover_mode: "MERGE" # One of: ["MERGE", "FAILOVER"],
@@ -1955,7 +3597,13 @@ module Aws::MediaConnect
     #             source_listener_port: 1,
     #             stream_id: "String",
     #             ndi_speed_hq_quality: 1,
-    #             ndi_program_name: "String"
+    #             ndi_program_name: "String",
+    #             ndi_source_settings: {
+    #               source_name: "String",
+    #               audio_reference_level: 1
+    #             },
+    #             ndi_output_timecode_source: "EMBEDDED_TIMECODE" # One of: ["EMBEDDED_TIMECODE", "UTC_SYSTEM_TIME"],
+    #             ndi_audio_reference_level: 1
     #           },
     #           vpc_interface_name: "String",
     #           whitelist_cidr: "String",
@@ -1965,7 +3613,21 @@ module Aws::MediaConnect
     #               vpc_interface_name: "String"
     #             }
     #           },
-    #           peer_ip_address: "String"
+    #           peer_ip_address: "String",
+    #           router_integration_state: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #           router_integration_transit_decryption: {
+    #             encryption_key_type: "SECRETS_MANAGER" # One of: ["SECRETS_MANAGER", "AUTOMATIC"],
+    #             encryption_key_configuration: { # required
+    #               # One of:
+    #               secrets_manager: {
+    #                 secret_arn: "SecretArn", # required
+    #                 role_arn: "RoleArn", # required
+    #               },
+    #               automatic: {
+    #               }
+    #             }
+    #           },
+    #           connected_router_output_arn: "String"
     #         }
     #       ],
     #       status: "STANDBY" # One of: ["STANDBY", "ACTIVE", "UPDATING", "DELETING", "STARTING", "STOPPING", "ERROR"], # required
@@ -2009,7 +3671,7 @@ module Aws::MediaConnect
     #           }
     #         ]
     #       },
-    #       flow_size: "MEDIUM" # One of: ["MEDIUM", "LARGE"],
+    #       flow_size: "MEDIUM" # One of: ["MEDIUM", "LARGE", "LARGE_4X"],
     #       ndi_config: {
     #         ndi_state: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #         machine_name: "String",
@@ -2020,6 +3682,10 @@ module Aws::MediaConnect
     #             vpc_interface_adapter: "String", # required
     #           }
     #         ]
+    #       },
+    #       encoding_config: {
+    #         encoding_profile: "DISTRIBUTION_H264_DEFAULT" # One of: ["DISTRIBUTION_H264_DEFAULT", "CONTRIBUTION_H264_DEFAULT"],
+    #         video_max_bitrate: 1
     #       }
     #     },
     #     messages: {
@@ -2065,6 +3731,11 @@ module Aws::MediaConnect
     #             {
     #               channels: 1,
     #               codec: "String",
+    #               color: {
+    #                 colorimetry: "BT709" # One of: ["BT709", "BT470M", "BT470BG", "BT601", "SMPTE240M", "GENERIC_FILM", "BT2020", "SMPTE428", "SMPTE431", "SMPTE432"],
+    #                 transfer_characteristics: "BT709" # One of: ["BT709", "BT470M", "BT470BG", "BT601", "SMPTE240M", "LINEAR", "LOG100", "LOG316", "IEC61966_2_4", "BT1361_ECG", "IEC61966_2_1", "BT2020_10", "BT2020_12", "BT2100_PQ", "SMPTE428", "BT2100_HLG"],
+    #                 matrix_coefficients: "IDENTITY" # One of: ["IDENTITY", "BT709", "FCC", "BT470BG", "BT601", "SMPTE240M", "YCGCO", "BT2020_NCL", "BT2020_CL", "SMPTE2085", "CHROMATICITY_DERIVED_NCL", "CHROMATICITY_DERIVED_CL", "BT2100_ICTCP", "IPT_C2"]
+    #               },
     #               frame_rate: "String",
     #               frame_resolution: {
     #                 frame_height: 1, # required
@@ -2076,6 +3747,46 @@ module Aws::MediaConnect
     #               stream_type: "String", # required
     #             }
     #           ]
+    #         }
+    #       ],
+    #       ts_id: 1
+    #     },
+    #     ndi_info: {
+    #       active_source: {
+    #         source_name: "String", # required
+    #       },
+    #       discovered_sources: [ # required
+    #         {
+    #           source_name: "String", # required
+    #         }
+    #       ],
+    #       media_info: { # required
+    #         streams: [ # required
+    #           {
+    #             stream_type: "String", # required
+    #             codec: "String", # required
+    #             stream_id: 1, # required
+    #             scan_mode: "progressive" # One of: ["progressive", "interlace", "progressive-segmented-frame"],
+    #             color: {
+    #               colorimetry: "BT709" # One of: ["BT709", "BT470M", "BT470BG", "BT601", "SMPTE240M", "GENERIC_FILM", "BT2020", "SMPTE428", "SMPTE431", "SMPTE432"],
+    #               transfer_characteristics: "BT709" # One of: ["BT709", "BT470M", "BT470BG", "BT601", "SMPTE240M", "LINEAR", "LOG100", "LOG316", "IEC61966_2_4", "BT1361_ECG", "IEC61966_2_1", "BT2020_10", "BT2020_12", "BT2100_PQ", "SMPTE428", "BT2100_HLG"],
+    #               matrix_coefficients: "IDENTITY" # One of: ["IDENTITY", "BT709", "FCC", "BT470BG", "BT601", "SMPTE240M", "YCGCO", "BT2020_NCL", "BT2020_CL", "SMPTE2085", "CHROMATICITY_DERIVED_NCL", "CHROMATICITY_DERIVED_CL", "BT2100_ICTCP", "IPT_C2"]
+    #             },
+    #             frame_resolution: {
+    #               frame_height: 1, # required
+    #               frame_width: 1, # required
+    #             },
+    #             frame_rate: "String",
+    #             channels: 1,
+    #             sample_rate: 1
+    #           }
+    #         ]
+    #       },
+    #       messages: [ # required
+    #         {
+    #           code: "String", # required
+    #           message: "String", # required
+    #           resource_name: "String"
     #         }
     #       ]
     #     }
@@ -2265,6 +3976,569 @@ module Aws::MediaConnect
       request.send_request(options)
     end
 
+    # <p>Retrieves information about a specific router input in AWS Elemental MediaConnect.</p>
+    # @param [Hash, Types::GetRouterInputRequest] params
+    # @option params [String] :arn
+    #   <p>The Amazon Resource Name (ARN) of the router input to retrieve information about.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     arn: "RouterInputArn", # required
+    #   }
+    #   options = {}
+    #   response = client.get_router_input(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     router_input: { # required
+    #       name: "String", # required
+    #       arn: "RouterInputArn", # required
+    #       id: "String", # required
+    #       state: "CREATING" # One of: ["CREATING", "STANDBY", "STARTING", "ACTIVE", "STOPPING", "DELETING", "UPDATING", "ERROR", "RECOVERING", "MIGRATING"], # required
+    #       input_type: "STANDARD" # One of: ["STANDARD", "FAILOVER", "MERGE", "MEDIACONNECT_FLOW", "MEDIALIVE_CHANNEL"], # required
+    #       configuration: { # required
+    #         # One of:
+    #         standard: {
+    #           network_interface_arn: "RouterNetworkInterfaceArn", # required
+    #           protocol_configuration: { # required
+    #             # One of:
+    #             rist: {
+    #               port: 1, # required
+    #               recovery_latency_milliseconds: 1, # required
+    #             },
+    #             srt_listener: {
+    #               port: 1, # required
+    #               minimum_latency_milliseconds: 1, # required
+    #               decryption_configuration: {
+    #                 encryption_key: { # required
+    #                   secret_arn: "SecretArn", # required
+    #                   role_arn: "RoleArn", # required
+    #                 }
+    #               }
+    #             },
+    #             srt_caller: {
+    #               source_address: "String", # required
+    #               source_port: 1, # required
+    #               minimum_latency_milliseconds: 1, # required
+    #               stream_id: "String",
+    #               decryption_configuration: {
+    #                 encryption_key: { # required
+    #                   secret_arn: "SecretArn", # required
+    #                   role_arn: "RoleArn", # required
+    #                 }
+    #               }
+    #             },
+    #             rtp: {
+    #               port: 1, # required
+    #               forward_error_correction: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #             }
+    #           },
+    #           protocol: "RTP" # One of: ["RTP", "RIST", "SRT_CALLER", "SRT_LISTENER"]
+    #         },
+    #         media_live_channel: {
+    #           media_live_channel_arn: "MediaLiveChannelArn",
+    #           media_live_pipeline_id: "PIPELINE_0" # One of: ["PIPELINE_0", "PIPELINE_1"],
+    #           media_live_channel_output_name: "String",
+    #           source_transit_decryption: { # required
+    #             encryption_key_type: "SECRETS_MANAGER" # One of: ["SECRETS_MANAGER", "AUTOMATIC"],
+    #             encryption_key_configuration: { # required
+    #               # One of:
+    #               secrets_manager: {
+    #                 secret_arn: "SecretArn", # required
+    #                 role_arn: "RoleArn", # required
+    #               },
+    #               automatic: {
+    #               }
+    #             }
+    #           }
+    #         },
+    #         failover: {
+    #           network_interface_arn: "RouterNetworkInterfaceArn", # required
+    #           protocol_configurations: [{ # required
+    #             # One of:
+    #             rist: {
+    #               port: 1, # required
+    #               recovery_latency_milliseconds: 1, # required
+    #             },
+    #             srt_listener: {
+    #               port: 1, # required
+    #               minimum_latency_milliseconds: 1, # required
+    #               decryption_configuration: {
+    #                 encryption_key: { # required
+    #                   secret_arn: "SecretArn", # required
+    #                   role_arn: "RoleArn", # required
+    #                 }
+    #               }
+    #             },
+    #             srt_caller: {
+    #               source_address: "String", # required
+    #               source_port: 1, # required
+    #               minimum_latency_milliseconds: 1, # required
+    #               stream_id: "String",
+    #               decryption_configuration: {
+    #                 encryption_key: { # required
+    #                   secret_arn: "SecretArn", # required
+    #                   role_arn: "RoleArn", # required
+    #                 }
+    #               }
+    #             },
+    #             rtp: {
+    #               port: 1, # required
+    #               forward_error_correction: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #             }
+    #           }],
+    #           source_priority_mode: "NO_PRIORITY" # One of: ["NO_PRIORITY", "PRIMARY_SECONDARY"], # required
+    #           primary_source_index: 1
+    #         },
+    #         media_connect_flow: {
+    #           flow_arn: "FlowArn",
+    #           flow_output_arn: "FlowOutputArn",
+    #           source_transit_decryption: { # required
+    #             encryption_key_type: "SECRETS_MANAGER" # One of: ["SECRETS_MANAGER", "AUTOMATIC"],
+    #             encryption_key_configuration: { # required
+    #               # One of:
+    #               secrets_manager: {
+    #                 secret_arn: "SecretArn", # required
+    #                 role_arn: "RoleArn", # required
+    #               },
+    #               automatic: {
+    #               }
+    #             }
+    #           }
+    #         },
+    #         merge: {
+    #           network_interface_arn: "RouterNetworkInterfaceArn", # required
+    #           protocol_configurations: [{ # required
+    #             # One of:
+    #             rtp: {
+    #               port: 1, # required
+    #               forward_error_correction: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #             },
+    #             rist: {
+    #               port: 1, # required
+    #               recovery_latency_milliseconds: 1, # required
+    #             }
+    #           }],
+    #           merge_recovery_window_milliseconds: 1, # required
+    #         }
+    #       },
+    #       routed_outputs: 1, # required
+    #       maximum_routed_outputs: 1,
+    #       region_name: "String", # required
+    #       availability_zone: "String", # required
+    #       maximum_bitrate: 1, # required
+    #       tier: "INPUT_100" # One of: ["INPUT_100", "INPUT_50", "INPUT_20", "INPUT_500", "INPUT_250"], # required
+    #       routing_scope: "REGIONAL" # One of: ["REGIONAL", "GLOBAL"], # required
+    #       created_at: Time.now, # required
+    #       updated_at: Time.now, # required
+    #       messages: [ # required
+    #         {
+    #           code: "String", # required
+    #           message: "String", # required
+    #         }
+    #       ],
+    #       transit_encryption: { # required
+    #         encryption_key_type: "SECRETS_MANAGER" # One of: ["SECRETS_MANAGER", "AUTOMATIC"],
+    #         encryption_key_configuration: { # required
+    #           # One of:
+    #           secrets_manager: {
+    #             secret_arn: "SecretArn", # required
+    #             role_arn: "RoleArn", # required
+    #           },
+    #           automatic: {
+    #           }
+    #         }
+    #       },
+    #       tags: { # required
+    #         "String" => "String"
+    #       },
+    #       stream_details: { # required
+    #         # One of:
+    #         standard: {
+    #           source_ip_address: "String"
+    #         },
+    #         media_live_channel: {
+    #         },
+    #         failover: {
+    #           source_index_zero_stream_details: { # required
+    #             source_index: 1, # required
+    #             source_ip_address: "String"
+    #           },
+    #           source_index_one_stream_details: { # required
+    #             source_index: 1, # required
+    #             source_ip_address: "String"
+    #           }
+    #         },
+    #         media_connect_flow: {
+    #         },
+    #         merge: {
+    #           source_index_zero_stream_details: { # required
+    #             source_index: 1, # required
+    #             source_ip_address: "String"
+    #           },
+    #           source_index_one_stream_details: { # required
+    #             source_index: 1, # required
+    #             source_ip_address: "String"
+    #           }
+    #         }
+    #       },
+    #       ip_address: "String",
+    #       maintenance_type: "PREFERRED_DAY_TIME" # One of: ["PREFERRED_DAY_TIME", "DEFAULT"], # required
+    #       maintenance_configuration: { # required
+    #         # One of:
+    #         preferred_day_time: {
+    #           day: "MONDAY" # One of: ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"], # required
+    #           time: "String", # required
+    #         },
+    #         default: {
+    #         }
+    #       },
+    #       maintenance_schedule_type: "WINDOW" # One of: ["WINDOW"],
+    #       maintenance_schedule: {
+    #         # One of:
+    #         window: {
+    #           start: Time.now, # required
+    #           end: Time.now, # required
+    #           scheduled_time: Time.now, # required
+    #         }
+    #       },
+    #       content_quality_analysis_type: "CONTENT_LEVEL" # One of: ["CONTENT_LEVEL"], # required
+    #       content_quality_analysis_configuration: { # required
+    #         # One of:
+    #         content_level: {
+    #           black_frames: {
+    #             state: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
+    #             threshold_seconds: 1, # required
+    #           },
+    #           frozen_frames: {
+    #             state: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
+    #             threshold_seconds: 1, # required
+    #           },
+    #           silent_audio: {
+    #             state: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
+    #             threshold_seconds: 1, # required
+    #           }
+    #         }
+    #       }
+    #     }
+    #   }
+    # @return [Types::GetRouterInputResponse]
+    def get_router_input(params = {}, options = {})
+      request = build_request(:get_router_input, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves detailed metadata information about a specific router input source, including stream details and connection state.</p>
+    # @param [Hash, Types::GetRouterInputSourceMetadataRequest] params
+    # @option params [String] :arn
+    #   <p>The Amazon Resource Name (ARN) of the router input to retrieve metadata for.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     arn: "RouterInputArn", # required
+    #   }
+    #   options = {}
+    #   response = client.get_router_input_source_metadata(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     arn: "RouterInputArn", # required
+    #     name: "String", # required
+    #     source_metadata_details: { # required
+    #       source_metadata_messages: [ # required
+    #         {
+    #           code: "String", # required
+    #           message: "String", # required
+    #         }
+    #       ],
+    #       timestamp: Time.now, # required
+    #       router_input_metadata: {
+    #         # One of:
+    #         transport_stream_media_info: {
+    #           programs: [ # required
+    #             {
+    #               pcr_pid: 1, # required
+    #               program_name: "String",
+    #               program_number: 1, # required
+    #               program_pid: 1, # required
+    #               streams: [ # required
+    #                 {
+    #                   channels: 1,
+    #                   codec: "String",
+    #                   color: {
+    #                     colorimetry: "BT709" # One of: ["BT709", "BT470M", "BT470BG", "BT601", "SMPTE240M", "GENERIC_FILM", "BT2020", "SMPTE428", "SMPTE431", "SMPTE432"],
+    #                     transfer_characteristics: "BT709" # One of: ["BT709", "BT470M", "BT470BG", "BT601", "SMPTE240M", "LINEAR", "LOG100", "LOG316", "IEC61966_2_4", "BT1361_ECG", "IEC61966_2_1", "BT2020_10", "BT2020_12", "BT2100_PQ", "SMPTE428", "BT2100_HLG"],
+    #                     matrix_coefficients: "IDENTITY" # One of: ["IDENTITY", "BT709", "FCC", "BT470BG", "BT601", "SMPTE240M", "YCGCO", "BT2020_NCL", "BT2020_CL", "SMPTE2085", "CHROMATICITY_DERIVED_NCL", "CHROMATICITY_DERIVED_CL", "BT2100_ICTCP", "IPT_C2"]
+    #                   },
+    #                   frame_rate: "String",
+    #                   frame_resolution: {
+    #                     frame_height: 1, # required
+    #                     frame_width: 1, # required
+    #                   },
+    #                   pid: 1, # required
+    #                   sample_rate: 1,
+    #                   sample_size: 1,
+    #                   stream_type: "String", # required
+    #                 }
+    #               ]
+    #             }
+    #           ],
+    #           ts_id: 1
+    #         }
+    #       }
+    #     }
+    #   }
+    # @return [Types::GetRouterInputSourceMetadataResponse]
+    def get_router_input_source_metadata(params = {}, options = {})
+      request = build_request(:get_router_input_source_metadata, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves the thumbnail for a router input in AWS Elemental MediaConnect.</p>
+    # @param [Hash, Types::GetRouterInputThumbnailRequest] params
+    # @option params [String] :arn
+    #   <p>The Amazon Resource Name (ARN) of the router input that you want to see a thumbnail of.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     arn: "RouterInputArn", # required
+    #   }
+    #   options = {}
+    #   response = client.get_router_input_thumbnail(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     arn: "RouterInputArn", # required
+    #     name: "String", # required
+    #     thumbnail_details: { # required
+    #       thumbnail_messages: [ # required
+    #         {
+    #           code: "String", # required
+    #           message: "String", # required
+    #         }
+    #       ],
+    #       thumbnail: "data",
+    #       timecode: "String",
+    #       timestamp: Time.now
+    #     }
+    #   }
+    # @return [Types::GetRouterInputThumbnailResponse]
+    def get_router_input_thumbnail(params = {}, options = {})
+      request = build_request(:get_router_input_thumbnail, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves information about a specific router network interface in AWS Elemental MediaConnect.</p>
+    # @param [Hash, Types::GetRouterNetworkInterfaceRequest] params
+    # @option params [String] :arn
+    #   <p>The Amazon Resource Name (ARN) of the router network interface that you want to retrieve information about.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     arn: "RouterNetworkInterfaceArn", # required
+    #   }
+    #   options = {}
+    #   response = client.get_router_network_interface(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     router_network_interface: { # required
+    #       name: "String", # required
+    #       arn: "RouterNetworkInterfaceArn", # required
+    #       id: "String", # required
+    #       state: "CREATING" # One of: ["CREATING", "ACTIVE", "UPDATING", "DELETING", "ERROR", "RECOVERING"], # required
+    #       network_interface_type: "PUBLIC" # One of: ["PUBLIC", "VPC"], # required
+    #       configuration: { # required
+    #         # One of:
+    #         public: {
+    #           allow_rules: [ # required
+    #             {
+    #               cidr: "String", # required
+    #             }
+    #           ]
+    #         },
+    #         vpc: {
+    #           security_group_ids: ["String"], # required
+    #           subnet_id: "String", # required
+    #         }
+    #       },
+    #       associated_output_count: 1, # required
+    #       associated_input_count: 1, # required
+    #       region_name: "String", # required
+    #       created_at: Time.now, # required
+    #       updated_at: Time.now, # required
+    #       tags: { # required
+    #         "String" => "String"
+    #       }
+    #     }
+    #   }
+    # @return [Types::GetRouterNetworkInterfaceResponse]
+    def get_router_network_interface(params = {}, options = {})
+      request = build_request(:get_router_network_interface, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves information about a specific router output in AWS Elemental MediaConnect.</p>
+    # @param [Hash, Types::GetRouterOutputRequest] params
+    # @option params [String] :arn
+    #   <p>The Amazon Resource Name (ARN) of the router output that you want to retrieve information about.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     arn: "RouterOutputArn", # required
+    #   }
+    #   options = {}
+    #   response = client.get_router_output(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     router_output: { # required
+    #       name: "String", # required
+    #       arn: "RouterOutputArn", # required
+    #       id: "String", # required
+    #       state: "CREATING" # One of: ["CREATING", "STANDBY", "STARTING", "ACTIVE", "STOPPING", "DELETING", "UPDATING", "ERROR", "RECOVERING", "MIGRATING"], # required
+    #       output_type: "STANDARD" # One of: ["STANDARD", "MEDIACONNECT_FLOW", "MEDIALIVE_INPUT"], # required
+    #       configuration: { # required
+    #         # One of:
+    #         standard: {
+    #           network_interface_arn: "RouterNetworkInterfaceArn", # required
+    #           protocol_configuration: { # required
+    #             # One of:
+    #             rist: {
+    #               destination_address: "String", # required
+    #               destination_port: 1, # required
+    #             },
+    #             srt_listener: {
+    #               port: 1, # required
+    #               minimum_latency_milliseconds: 1, # required
+    #               encryption_configuration: {
+    #                 encryption_key: { # required
+    #                   secret_arn: "SecretArn", # required
+    #                   role_arn: "RoleArn", # required
+    #                 }
+    #               }
+    #             },
+    #             rtmp_push: {
+    #               destination_address: "String", # required
+    #               destination_port: 1, # required
+    #               application_name: "String", # required
+    #               stream_name: "String", # required
+    #               tls_encryption: {
+    #                 encryption_type: "PUBLIC" # One of: ["PUBLIC"],
+    #                 encryption_configuration: { # required
+    #                   # One of:
+    #                   public: {
+    #                   }
+    #                 }
+    #               }
+    #             },
+    #             srt_caller: {
+    #               destination_address: "String", # required
+    #               destination_port: 1, # required
+    #               minimum_latency_milliseconds: 1, # required
+    #               stream_id: "String",
+    #               encryption_configuration: {
+    #                 encryption_key: { # required
+    #                   secret_arn: "SecretArn", # required
+    #                   role_arn: "RoleArn", # required
+    #                 }
+    #               }
+    #             },
+    #             rtp: {
+    #               destination_address: "String", # required
+    #               destination_port: 1, # required
+    #               forward_error_correction: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #             }
+    #           },
+    #           protocol: "RTP" # One of: ["RTP", "RIST", "SRT_CALLER", "SRT_LISTENER", "RTMP_PUSH"]
+    #         },
+    #         media_connect_flow: {
+    #           flow_arn: "FlowArn",
+    #           flow_source_arn: "FlowSourceArn",
+    #           destination_transit_encryption: { # required
+    #             encryption_key_type: "SECRETS_MANAGER" # One of: ["SECRETS_MANAGER", "AUTOMATIC"],
+    #             encryption_key_configuration: { # required
+    #               # One of:
+    #               secrets_manager: {
+    #                 secret_arn: "SecretArn", # required
+    #                 role_arn: "RoleArn", # required
+    #               },
+    #               automatic: {
+    #               }
+    #             }
+    #           }
+    #         },
+    #         media_live_input: {
+    #           media_live_input_arn: "MediaLiveInputArn",
+    #           media_live_pipeline_id: "PIPELINE_0" # One of: ["PIPELINE_0", "PIPELINE_1"],
+    #           destination_transit_encryption: { # required
+    #             encryption_key_type: "SECRETS_MANAGER" # One of: ["SECRETS_MANAGER", "AUTOMATIC"],
+    #             encryption_key_configuration: { # required
+    #               # One of:
+    #               secrets_manager: {
+    #                 secret_arn: "SecretArn", # required
+    #                 role_arn: "RoleArn", # required
+    #               },
+    #               automatic: {
+    #               }
+    #             }
+    #           }
+    #         }
+    #       },
+    #       routed_state: "ROUTED" # One of: ["ROUTED", "ROUTING", "UNROUTED"], # required
+    #       region_name: "String", # required
+    #       availability_zone: "String", # required
+    #       maximum_bitrate: 1, # required
+    #       routing_scope: "REGIONAL" # One of: ["REGIONAL", "GLOBAL"], # required
+    #       tier: "OUTPUT_100" # One of: ["OUTPUT_100", "OUTPUT_50", "OUTPUT_20", "OUTPUT_500", "OUTPUT_250"], # required
+    #       created_at: Time.now, # required
+    #       updated_at: Time.now, # required
+    #       messages: [ # required
+    #         {
+    #           code: "String", # required
+    #           message: "String", # required
+    #         }
+    #       ],
+    #       tags: { # required
+    #         "String" => "String"
+    #       },
+    #       stream_details: { # required
+    #         # One of:
+    #         standard: {
+    #           destination_ip_address: "String"
+    #         },
+    #         media_connect_flow: {
+    #         },
+    #         media_live_input: {
+    #         }
+    #       },
+    #       ip_address: "String",
+    #       routed_input_arn: "RouterInputArn",
+    #       maintenance_type: "PREFERRED_DAY_TIME" # One of: ["PREFERRED_DAY_TIME", "DEFAULT"], # required
+    #       maintenance_configuration: { # required
+    #         # One of:
+    #         preferred_day_time: {
+    #           day: "MONDAY" # One of: ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"], # required
+    #           time: "String", # required
+    #         },
+    #         default: {
+    #         }
+    #       },
+    #       maintenance_schedule_type: "WINDOW" # One of: ["WINDOW"],
+    #       maintenance_schedule: {
+    #         # One of:
+    #         window: {
+    #           start: Time.now, # required
+    #           end: Time.now, # required
+    #           scheduled_time: Time.now, # required
+    #         }
+    #       },
+    #       fabric_configuration: { # required
+    #         recovery_latency_mode: "BALANCED" # One of: ["BALANCED", "LOW_LATENCY"], # required
+    #       }
+    #     }
+    #   }
+    # @return [Types::GetRouterOutputResponse]
+    def get_router_output(params = {}, options = {})
+      request = build_request(:get_router_output, params)
+      request.send_request(options)
+    end
+
     # <p> Grants entitlements to an existing flow.</p>
     # @param [Hash, Types::GrantFlowEntitlementsRequest] params
     # @option params [Array<Types::GrantEntitlementRequest>] :entitlements
@@ -2291,6 +4565,9 @@ module Aws::MediaConnect
     #         entitlement_status: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #         name: "String",
     #         subscribers: ["String"], # required
+    #         entitlement_tags: {
+    #           "String" => "String"
+    #         }
     #       }
     #     ],
     #     flow_arn: "FlowArn", # required
@@ -2585,7 +4862,200 @@ module Aws::MediaConnect
       request.send_request(options)
     end
 
-    # <p> List all tags on a MediaConnect resource.</p>
+    # <p>Retrieves a list of router inputs in AWS Elemental MediaConnect.</p>
+    # @param [Hash, Types::ListRouterInputsRequest] params
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of router inputs to return in the response.</p>
+    # @option params [String] :next_token
+    #   <p>A token used to retrieve the next page of results.</p>
+    # @option params [Array<Types::RouterInputFilter>] :filters
+    #   <p>The filters to apply when retrieving the list of router inputs.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     max_results: 1,
+    #     next_token: "String",
+    #     filters: [{
+    #       # One of:
+    #       name_contains: ["String"],
+    #       region_names: ["String"],
+    #       network_interface_arns: ["RouterNetworkInterfaceArn"],
+    #       routing_scopes: ["REGIONAL" # One of: ["REGIONAL", "GLOBAL"]],
+    #       input_types: ["STANDARD" # One of: ["STANDARD", "FAILOVER", "MERGE", "MEDIACONNECT_FLOW", "MEDIALIVE_CHANNEL"]]
+    #     }]
+    #   }
+    #   options = {}
+    #   response = client.list_router_inputs(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     router_inputs: [ # required
+    #       {
+    #         name: "String", # required
+    #         arn: "RouterInputArn", # required
+    #         id: "String", # required
+    #         input_type: "STANDARD" # One of: ["STANDARD", "FAILOVER", "MERGE", "MEDIACONNECT_FLOW", "MEDIALIVE_CHANNEL"], # required
+    #         state: "CREATING" # One of: ["CREATING", "STANDBY", "STARTING", "ACTIVE", "STOPPING", "DELETING", "UPDATING", "ERROR", "RECOVERING", "MIGRATING"], # required
+    #         routed_outputs: 1, # required
+    #         region_name: "String", # required
+    #         availability_zone: "String", # required
+    #         maximum_bitrate: 1, # required
+    #         routing_scope: "REGIONAL" # One of: ["REGIONAL", "GLOBAL"], # required
+    #         created_at: Time.now, # required
+    #         updated_at: Time.now, # required
+    #         message_count: 1, # required
+    #         network_interface_arn: "RouterNetworkInterfaceArn",
+    #         maintenance_schedule_type: "WINDOW" # One of: ["WINDOW"],
+    #         maintenance_schedule: {
+    #           # One of:
+    #           window: {
+    #             start: Time.now, # required
+    #             end: Time.now, # required
+    #             scheduled_time: Time.now, # required
+    #           }
+    #         }
+    #       }
+    #     ],
+    #     next_token: "String"
+    #   }
+    # @return [Types::ListRouterInputsResponse]
+    def list_router_inputs(params = {}, options = {})
+      request = build_request(:list_router_inputs, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves a list of router network interfaces in AWS Elemental MediaConnect.</p>
+    # @param [Hash, Types::ListRouterNetworkInterfacesRequest] params
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of router network interfaces to return in the response.</p>
+    # @option params [String] :next_token
+    #   <p>A token used to retrieve the next page of results.</p>
+    # @option params [Array<Types::RouterNetworkInterfaceFilter>] :filters
+    #   <p>The filters to apply when retrieving the list of router network interfaces.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     max_results: 1,
+    #     next_token: "String",
+    #     filters: [{
+    #       # One of:
+    #       region_names: ["String"],
+    #       network_interface_types: ["PUBLIC" # One of: ["PUBLIC", "VPC"]],
+    #       name_contains: ["String"]
+    #     }]
+    #   }
+    #   options = {}
+    #   response = client.list_router_network_interfaces(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     router_network_interfaces: [ # required
+    #       {
+    #         name: "String", # required
+    #         arn: "RouterNetworkInterfaceArn", # required
+    #         id: "String", # required
+    #         network_interface_type: "PUBLIC" # One of: ["PUBLIC", "VPC"], # required
+    #         associated_output_count: 1, # required
+    #         associated_input_count: 1, # required
+    #         state: "CREATING" # One of: ["CREATING", "ACTIVE", "UPDATING", "DELETING", "ERROR", "RECOVERING"], # required
+    #         region_name: "String", # required
+    #         created_at: Time.now, # required
+    #         updated_at: Time.now, # required
+    #       }
+    #     ],
+    #     next_token: "String"
+    #   }
+    # @return [Types::ListRouterNetworkInterfacesResponse]
+    def list_router_network_interfaces(params = {}, options = {})
+      request = build_request(:list_router_network_interfaces, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves a list of router outputs in AWS Elemental MediaConnect.</p>
+    # @param [Hash, Types::ListRouterOutputsRequest] params
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of router outputs to return in the response.</p>
+    # @option params [String] :next_token
+    #   <p>A token used to retrieve the next page of results.</p>
+    # @option params [Array<Types::RouterOutputFilter>] :filters
+    #   <p>The filters to apply when retrieving the list of router outputs.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     max_results: 1,
+    #     next_token: "String",
+    #     filters: [{
+    #       # One of:
+    #       region_names: ["String"],
+    #       network_interface_arns: ["RouterNetworkInterfaceArn"],
+    #       routing_scopes: ["REGIONAL" # One of: ["REGIONAL", "GLOBAL"]],
+    #       output_types: ["STANDARD" # One of: ["STANDARD", "MEDIACONNECT_FLOW", "MEDIALIVE_INPUT"]],
+    #       routed_input_arns: ["RouterInputArn"],
+    #       name_contains: ["String"]
+    #     }]
+    #   }
+    #   options = {}
+    #   response = client.list_router_outputs(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     router_outputs: [ # required
+    #       {
+    #         name: "String", # required
+    #         arn: "RouterOutputArn", # required
+    #         id: "String", # required
+    #         output_type: "STANDARD" # One of: ["STANDARD", "MEDIACONNECT_FLOW", "MEDIALIVE_INPUT"], # required
+    #         state: "CREATING" # One of: ["CREATING", "STANDBY", "STARTING", "ACTIVE", "STOPPING", "DELETING", "UPDATING", "ERROR", "RECOVERING", "MIGRATING"], # required
+    #         routed_state: "ROUTED" # One of: ["ROUTED", "ROUTING", "UNROUTED"], # required
+    #         region_name: "String", # required
+    #         availability_zone: "String", # required
+    #         maximum_bitrate: 1, # required
+    #         routing_scope: "REGIONAL" # One of: ["REGIONAL", "GLOBAL"], # required
+    #         created_at: Time.now, # required
+    #         updated_at: Time.now, # required
+    #         message_count: 1, # required
+    #         routed_input_arn: "RouterInputArn",
+    #         network_interface_arn: "RouterNetworkInterfaceArn",
+    #         maintenance_schedule_type: "WINDOW" # One of: ["WINDOW"],
+    #         maintenance_schedule: {
+    #           # One of:
+    #           window: {
+    #             start: Time.now, # required
+    #             end: Time.now, # required
+    #             scheduled_time: Time.now, # required
+    #           }
+    #         }
+    #       }
+    #     ],
+    #     next_token: "String"
+    #   }
+    # @return [Types::ListRouterOutputsResponse]
+    def list_router_outputs(params = {}, options = {})
+      request = build_request(:list_router_outputs, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists the tags associated with a global resource in AWS Elemental MediaConnect. The API supports the following global resources: router inputs, router outputs and router network interfaces. </p>
+    # @param [Hash, Types::ListTagsForGlobalResourceRequest] params
+    # @option params [String] :resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the global resource whose tags you want to list.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     resource_arn: "String", # required
+    #   }
+    #   options = {}
+    #   response = client.list_tags_for_global_resource(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     tags: {
+    #       "String" => "String"
+    #     }
+    #   }
+    # @return [Types::ListTagsForGlobalResourceResponse]
+    def list_tags_for_global_resource(params = {}, options = {})
+      request = build_request(:list_tags_for_global_resource, params)
+      request.send_request(options)
+    end
+
+    # <p> List all tags on a MediaConnect resource in the current region.</p>
     # @param [Hash, Types::ListTagsForResourceRequest] params
     # @option params [String] :resource_arn
     #   <p> The Amazon Resource Name (ARN) that identifies the MediaConnect resource for which to list the tags.</p>
@@ -2803,6 +5273,52 @@ module Aws::MediaConnect
       request.send_request(options)
     end
 
+    # <p>Restarts a router input. This operation can be used to recover from errors or refresh the input state.</p>
+    # @param [Hash, Types::RestartRouterInputRequest] params
+    # @option params [String] :arn
+    #   <p>The Amazon Resource Name (ARN) of the router input that you want to restart.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     arn: "RouterInputArn", # required
+    #   }
+    #   options = {}
+    #   response = client.restart_router_input(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     arn: "RouterInputArn", # required
+    #     name: "String", # required
+    #     state: "CREATING" # One of: ["CREATING", "STANDBY", "STARTING", "ACTIVE", "STOPPING", "DELETING", "UPDATING", "ERROR", "RECOVERING", "MIGRATING"], # required
+    #   }
+    # @return [Types::RestartRouterInputResponse]
+    def restart_router_input(params = {}, options = {})
+      request = build_request(:restart_router_input, params)
+      request.send_request(options)
+    end
+
+    # <p>Restarts a router output. This operation can be used to recover from errors or refresh the output state.</p>
+    # @param [Hash, Types::RestartRouterOutputRequest] params
+    # @option params [String] :arn
+    #   <p>The Amazon Resource Name (ARN) of the router output that you want to restart.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     arn: "RouterOutputArn", # required
+    #   }
+    #   options = {}
+    #   response = client.restart_router_output(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     arn: "RouterOutputArn", # required
+    #     name: "String", # required
+    #     state: "CREATING" # One of: ["CREATING", "STANDBY", "STARTING", "ACTIVE", "STOPPING", "DELETING", "UPDATING", "ERROR", "RECOVERING", "MIGRATING"], # required
+    #   }
+    # @return [Types::RestartRouterOutputResponse]
+    def restart_router_output(params = {}, options = {})
+      request = build_request(:restart_router_output, params)
+      request.send_request(options)
+    end
+
     # <p> Revokes an entitlement from a flow. Once an entitlement is revoked, the content becomes unavailable to the subscriber and the associated output is removed.</p>
     # @param [Hash, Types::RevokeFlowEntitlementRequest] params
     # @option params [String] :entitlement_arn
@@ -2850,6 +5366,70 @@ module Aws::MediaConnect
       request.send_request(options)
     end
 
+    # <p>Starts a router input in AWS Elemental MediaConnect.</p>
+    # @param [Hash, Types::StartRouterInputRequest] params
+    # @option params [String] :arn
+    #   <p>The Amazon Resource Name (ARN) of the router input that you want to start.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     arn: "RouterInputArn", # required
+    #   }
+    #   options = {}
+    #   response = client.start_router_input(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     arn: "RouterInputArn", # required
+    #     name: "String", # required
+    #     state: "CREATING" # One of: ["CREATING", "STANDBY", "STARTING", "ACTIVE", "STOPPING", "DELETING", "UPDATING", "ERROR", "RECOVERING", "MIGRATING"], # required
+    #     maintenance_schedule_type: "WINDOW" # One of: ["WINDOW"], # required
+    #     maintenance_schedule: { # required
+    #       # One of:
+    #       window: {
+    #         start: Time.now, # required
+    #         end: Time.now, # required
+    #         scheduled_time: Time.now, # required
+    #       }
+    #     }
+    #   }
+    # @return [Types::StartRouterInputResponse]
+    def start_router_input(params = {}, options = {})
+      request = build_request(:start_router_input, params)
+      request.send_request(options)
+    end
+
+    # <p>Starts a router output in AWS Elemental MediaConnect.</p>
+    # @param [Hash, Types::StartRouterOutputRequest] params
+    # @option params [String] :arn
+    #   <p>The Amazon Resource Name (ARN) of the router output that you want to start.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     arn: "RouterOutputArn", # required
+    #   }
+    #   options = {}
+    #   response = client.start_router_output(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     arn: "RouterOutputArn", # required
+    #     name: "String", # required
+    #     state: "CREATING" # One of: ["CREATING", "STANDBY", "STARTING", "ACTIVE", "STOPPING", "DELETING", "UPDATING", "ERROR", "RECOVERING", "MIGRATING"], # required
+    #     maintenance_schedule_type: "WINDOW" # One of: ["WINDOW"], # required
+    #     maintenance_schedule: { # required
+    #       # One of:
+    #       window: {
+    #         start: Time.now, # required
+    #         end: Time.now, # required
+    #         scheduled_time: Time.now, # required
+    #       }
+    #     }
+    #   }
+    # @return [Types::StartRouterOutputResponse]
+    def start_router_output(params = {}, options = {})
+      request = build_request(:start_router_output, params)
+      request.send_request(options)
+    end
+
     # <p> Stops a flow.</p>
     # @param [Hash, Types::StopFlowRequest] params
     # @option params [String] :flow_arn
@@ -2872,7 +5452,77 @@ module Aws::MediaConnect
       request.send_request(options)
     end
 
-    # <p> Associates the specified tags to a resource with the specified <code>resourceArn</code>. If existing tags on a resource are not specified in the request parameters, they are not changed. When a resource is deleted, the tags associated with that resource are deleted as well.</p>
+    # <p>Stops a router input in AWS Elemental MediaConnect.</p>
+    # @param [Hash, Types::StopRouterInputRequest] params
+    # @option params [String] :arn
+    #   <p>The Amazon Resource Name (ARN) of the router input that you want to stop.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     arn: "RouterInputArn", # required
+    #   }
+    #   options = {}
+    #   response = client.stop_router_input(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     arn: "RouterInputArn", # required
+    #     name: "String", # required
+    #     state: "CREATING" # One of: ["CREATING", "STANDBY", "STARTING", "ACTIVE", "STOPPING", "DELETING", "UPDATING", "ERROR", "RECOVERING", "MIGRATING"], # required
+    #   }
+    # @return [Types::StopRouterInputResponse]
+    def stop_router_input(params = {}, options = {})
+      request = build_request(:stop_router_input, params)
+      request.send_request(options)
+    end
+
+    # <p>Stops a router output in AWS Elemental MediaConnect.</p>
+    # @param [Hash, Types::StopRouterOutputRequest] params
+    # @option params [String] :arn
+    #   <p>The Amazon Resource Name (ARN) of the router output that you want to stop.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     arn: "RouterOutputArn", # required
+    #   }
+    #   options = {}
+    #   response = client.stop_router_output(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     arn: "RouterOutputArn", # required
+    #     name: "String", # required
+    #     state: "CREATING" # One of: ["CREATING", "STANDBY", "STARTING", "ACTIVE", "STOPPING", "DELETING", "UPDATING", "ERROR", "RECOVERING", "MIGRATING"], # required
+    #   }
+    # @return [Types::StopRouterOutputResponse]
+    def stop_router_output(params = {}, options = {})
+      request = build_request(:stop_router_output, params)
+      request.send_request(options)
+    end
+
+    # <p>Adds tags to a global resource in AWS Elemental MediaConnect. The API supports the following global resources: router inputs, router outputs and router network interfaces. </p>
+    # @param [Hash, Types::TagGlobalResourceRequest] params
+    # @option params [String] :resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the global resource to tag.</p>
+    # @option params [Hash<String, String>] :tags
+    #   <p>A map of tag keys and values to add to the global resource.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     resource_arn: "String", # required
+    #     tags: { # required
+    #       "String" => "String"
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.tag_global_resource(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Smithy::Schema::EmptyStructure]
+    def tag_global_resource(params = {}, options = {})
+      request = build_request(:tag_global_resource, params)
+      request.send_request(options)
+    end
+
+    # <p> Associates the specified tags to a resource with the specified <code>resourceArn</code> in the current region. If existing tags on a resource are not specified in the request parameters, they are not changed. When a resource is deleted, the tags associated with that resource are deleted as well.</p>
     # @param [Hash, Types::TagResourceRequest] params
     # @option params [String] :resource_arn
     #   <p> The Amazon Resource Name (ARN) that identifies the MediaConnect resource to which to add tags.</p>
@@ -2896,7 +5546,57 @@ module Aws::MediaConnect
       request.send_request(options)
     end
 
-    # <p> Deletes specified tags from a resource.</p>
+    # <p>Associates a router input with a router output in AWS Elemental MediaConnect.</p>
+    # @param [Hash, Types::TakeRouterInputRequest] params
+    # @option params [String] :router_output_arn
+    #   <p>The Amazon Resource Name (ARN) of the router output that you want to associate with a router input.</p>
+    # @option params [String] :router_input_arn
+    #   <p>The Amazon Resource Name (ARN) of the router input that you want to associate with a router output.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     router_output_arn: "RouterOutputArn", # required
+    #     router_input_arn: "RouterInputArn"
+    #   }
+    #   options = {}
+    #   response = client.take_router_input(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     routed_state: "ROUTED" # One of: ["ROUTED", "ROUTING", "UNROUTED"], # required
+    #     router_output_arn: "RouterOutputArn", # required
+    #     router_output_name: "String", # required
+    #     router_input_arn: "RouterInputArn",
+    #     router_input_name: "String"
+    #   }
+    # @return [Types::TakeRouterInputResponse]
+    def take_router_input(params = {}, options = {})
+      request = build_request(:take_router_input, params)
+      request.send_request(options)
+    end
+
+    # <p>Removes tags from a global resource in AWS Elemental MediaConnect. The API supports the following global resources: router inputs, router outputs and router network interfaces. </p>
+    # @param [Hash, Types::UntagGlobalResourceRequest] params
+    # @option params [String] :resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the global resource to remove tags from.</p>
+    # @option params [Array<String>] :tag_keys
+    #   <p>The keys of the tags to remove from the global resource.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     resource_arn: "String", # required
+    #     tag_keys: ["String"], # required
+    #   }
+    #   options = {}
+    #   response = client.untag_global_resource(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Smithy::Schema::EmptyStructure]
+    def untag_global_resource(params = {}, options = {})
+      request = build_request(:untag_global_resource, params)
+      request.send_request(options)
+    end
+
+    # <p> Deletes specified tags from a resource in the current region.</p>
     # @param [Hash, Types::UntagResourceRequest] params
     # @option params [String] :resource_arn
     #   <p> The Amazon Resource Name (ARN) of the resource that you want to untag. </p>
@@ -3164,7 +5864,7 @@ module Aws::MediaConnect
       request.send_request(options)
     end
 
-    # <p> Updates an existing flow.</p>
+    # <p> Updates an existing flow.</p> <note> <p> Because <code>UpdateFlowSources</code> and <code>UpdateFlow</code> are separate operations, you can't change both the source type AND the flow size in a single request. </p> <ul> <li> <p>If you have a <code>MEDIUM</code> flow and you want to change the flow source to NDI®:</p> <ul> <li> <p>First, use the <code>UpdateFlow</code> operation to upgrade the flow size to <code>LARGE</code>. </p> </li> <li> <p>After that, you can then use the <code>UpdateFlowSource</code> operation to configure the NDI source. </p> </li> </ul> </li> <li> <p>If you're switching from an NDI source to a transport stream (TS) source and want to downgrade the flow size: </p> <ul> <li> <p>First, use the <code>UpdateFlowSource</code> operation to change the flow source type. </p> </li> <li> <p>After that, you can then use the <code>UpdateFlow</code> operation to downgrade the flow size to <code>MEDIUM</code>.</p> </li> </ul> </li> </ul> </note>
     # @param [Hash, Types::UpdateFlowRequest] params
     # @option params [String] :flow_arn
     #   <p> The Amazon Resource Name (ARN) of the flow that you want to update.</p>
@@ -3175,7 +5875,11 @@ module Aws::MediaConnect
     # @option params [Types::MonitoringConfig] :source_monitoring_config
     #   <p> The settings for source monitoring. </p>
     # @option params [Types::NdiConfig] :ndi_config
-    #   <p> Specifies the configuration settings for NDI outputs. Required when the flow includes NDI outputs. </p>
+    #   <p> Specifies the configuration settings for a flow's NDI source or output. Required when the flow includes an NDI source or output. </p>
+    # @option params [String] :flow_size
+    #   <p> Determines the processing capacity and feature set of the flow. </p>
+    # @option params [Types::EncodingConfig] :encoding_config
+    #   <p> The encoding configuration to apply to the NDI® source when transcoding it to a transport stream for downstream distribution. You can choose between several predefined encoding profiles based on common use cases. </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     flow_arn: "FlowArn", # required
@@ -3226,6 +5930,11 @@ module Aws::MediaConnect
     #           vpc_interface_adapter: "String", # required
     #         }
     #       ]
+    #     },
+    #     flow_size: "MEDIUM" # One of: ["MEDIUM", "LARGE", "LARGE_4X"],
+    #     encoding_config: {
+    #       encoding_profile: "DISTRIBUTION_H264_DEFAULT" # One of: ["DISTRIBUTION_H264_DEFAULT", "CONTRIBUTION_H264_DEFAULT"],
+    #       video_max_bitrate: 1
     #     }
     #   }
     #   options = {}
@@ -3340,7 +6049,13 @@ module Aws::MediaConnect
     #             source_listener_port: 1,
     #             stream_id: "String",
     #             ndi_speed_hq_quality: 1,
-    #             ndi_program_name: "String"
+    #             ndi_program_name: "String",
+    #             ndi_source_settings: {
+    #               source_name: "String",
+    #               audio_reference_level: 1
+    #             },
+    #             ndi_output_timecode_source: "EMBEDDED_TIMECODE" # One of: ["EMBEDDED_TIMECODE", "UTC_SYSTEM_TIME"],
+    #             ndi_audio_reference_level: 1
     #           },
     #           vpc_interface_attachment: {
     #             vpc_interface_name: "String"
@@ -3348,7 +6063,21 @@ module Aws::MediaConnect
     #           bridge_arn: "String",
     #           bridge_ports: [1],
     #           output_status: "ENABLED" # One of: ["ENABLED", "DISABLED"],
-    #           peer_ip_address: "String"
+    #           peer_ip_address: "String",
+    #           router_integration_state: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #           router_integration_transit_encryption: {
+    #             encryption_key_type: "SECRETS_MANAGER" # One of: ["SECRETS_MANAGER", "AUTOMATIC"],
+    #             encryption_key_configuration: { # required
+    #               # One of:
+    #               secrets_manager: {
+    #                 secret_arn: "SecretArn", # required
+    #                 role_arn: "RoleArn", # required
+    #               },
+    #               automatic: {
+    #               }
+    #             }
+    #           },
+    #           connected_router_input_arn: "String"
     #         }
     #       ],
     #       source: { # required
@@ -3402,7 +6131,13 @@ module Aws::MediaConnect
     #           source_listener_port: 1,
     #           stream_id: "String",
     #           ndi_speed_hq_quality: 1,
-    #           ndi_program_name: "String"
+    #           ndi_program_name: "String",
+    #           ndi_source_settings: {
+    #             source_name: "String",
+    #             audio_reference_level: 1
+    #           },
+    #           ndi_output_timecode_source: "EMBEDDED_TIMECODE" # One of: ["EMBEDDED_TIMECODE", "UTC_SYSTEM_TIME"],
+    #           ndi_audio_reference_level: 1
     #         },
     #         vpc_interface_name: "String",
     #         whitelist_cidr: "String",
@@ -3412,7 +6147,21 @@ module Aws::MediaConnect
     #             vpc_interface_name: "String"
     #           }
     #         },
-    #         peer_ip_address: "String"
+    #         peer_ip_address: "String",
+    #         router_integration_state: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #         router_integration_transit_decryption: {
+    #           encryption_key_type: "SECRETS_MANAGER" # One of: ["SECRETS_MANAGER", "AUTOMATIC"],
+    #           encryption_key_configuration: { # required
+    #             # One of:
+    #             secrets_manager: {
+    #               secret_arn: "SecretArn", # required
+    #               role_arn: "RoleArn", # required
+    #             },
+    #             automatic: {
+    #             }
+    #           }
+    #         },
+    #         connected_router_output_arn: "String"
     #       },
     #       source_failover_config: {
     #         failover_mode: "MERGE" # One of: ["MERGE", "FAILOVER"],
@@ -3474,7 +6223,13 @@ module Aws::MediaConnect
     #             source_listener_port: 1,
     #             stream_id: "String",
     #             ndi_speed_hq_quality: 1,
-    #             ndi_program_name: "String"
+    #             ndi_program_name: "String",
+    #             ndi_source_settings: {
+    #               source_name: "String",
+    #               audio_reference_level: 1
+    #             },
+    #             ndi_output_timecode_source: "EMBEDDED_TIMECODE" # One of: ["EMBEDDED_TIMECODE", "UTC_SYSTEM_TIME"],
+    #             ndi_audio_reference_level: 1
     #           },
     #           vpc_interface_name: "String",
     #           whitelist_cidr: "String",
@@ -3484,7 +6239,21 @@ module Aws::MediaConnect
     #               vpc_interface_name: "String"
     #             }
     #           },
-    #           peer_ip_address: "String"
+    #           peer_ip_address: "String",
+    #           router_integration_state: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #           router_integration_transit_decryption: {
+    #             encryption_key_type: "SECRETS_MANAGER" # One of: ["SECRETS_MANAGER", "AUTOMATIC"],
+    #             encryption_key_configuration: { # required
+    #               # One of:
+    #               secrets_manager: {
+    #                 secret_arn: "SecretArn", # required
+    #                 role_arn: "RoleArn", # required
+    #               },
+    #               automatic: {
+    #               }
+    #             }
+    #           },
+    #           connected_router_output_arn: "String"
     #         }
     #       ],
     #       status: "STANDBY" # One of: ["STANDBY", "ACTIVE", "UPDATING", "DELETING", "STARTING", "STOPPING", "ERROR"], # required
@@ -3528,7 +6297,7 @@ module Aws::MediaConnect
     #           }
     #         ]
     #       },
-    #       flow_size: "MEDIUM" # One of: ["MEDIUM", "LARGE"],
+    #       flow_size: "MEDIUM" # One of: ["MEDIUM", "LARGE", "LARGE_4X"],
     #       ndi_config: {
     #         ndi_state: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #         machine_name: "String",
@@ -3539,6 +6308,10 @@ module Aws::MediaConnect
     #             vpc_interface_adapter: "String", # required
     #           }
     #         ]
+    #       },
+    #       encoding_config: {
+    #         encoding_profile: "DISTRIBUTION_H264_DEFAULT" # One of: ["DISTRIBUTION_H264_DEFAULT", "CONTRIBUTION_H264_DEFAULT"],
+    #         video_max_bitrate: 1
     #       }
     #     }
     #   }
@@ -3723,9 +6496,17 @@ module Aws::MediaConnect
     # @option params [String] :output_status
     #   <p> An indication of whether the output should transmit data or not. If you don't specify the <code>outputStatus</code> field in your request, MediaConnect leaves the value unchanged.</p>
     # @option params [String] :ndi_program_name
-    #   <p> A suffix for the names of the NDI sources that the flow creates. If a custom name isn't specified, MediaConnect uses the output name. </p>
+    #   <p> A suffix for the name of the NDI® sender that the flow creates. If a custom name isn't specified, MediaConnect uses the output name. </p>
     # @option params [Integer] :ndi_speed_hq_quality
     #   <p>A quality setting for the NDI Speed HQ encoder. </p>
+    # @option params [String] :router_integration_state
+    #   <p>Indicates whether to enable or disable router integration for this flow output.</p>
+    # @option params [Types::FlowTransitEncryption] :router_integration_transit_encryption
+    #   <p>The configuration that defines how content is encrypted during transit between the MediaConnect router and a MediaConnect flow.</p>
+    # @option params [String] :ndi_output_timecode_source
+    #   <p>Controls how MediaConnect generates timecodes for NDI output frames. If you don't specify this field, MediaConnect leaves the value unchanged.</p> <ul> <li> <p> <code>EMBEDDED_TIMECODE</code> - Preserves timecodes from the input transport stream. The timecodes must be embedded in the video stream as SEI timing messages. If no embedded timecode is detected, MediaConnect uses the UTC system time instead.</p> </li> <li> <p> <code>UTC_SYSTEM_TIME</code> - Generates timecodes based on the system clock time when each frame is sent.</p> </li> </ul>
+    # @option params [Integer] :ndi_audio_reference_level
+    #   <p>The audio reference level of the NDI receiver, in decibels relative to full scale (dBFS). Common values are <code>-20</code> (NDI and SMPTE) and <code>-18</code> (EBU). If you don't specify this field, MediaConnect leaves the value unchanged.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     cidr_allow_list: ["String"],
@@ -3777,7 +6558,22 @@ module Aws::MediaConnect
     #     },
     #     output_status: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #     ndi_program_name: "String",
-    #     ndi_speed_hq_quality: 1
+    #     ndi_speed_hq_quality: 1,
+    #     router_integration_state: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #     router_integration_transit_encryption: {
+    #       encryption_key_type: "SECRETS_MANAGER" # One of: ["SECRETS_MANAGER", "AUTOMATIC"],
+    #       encryption_key_configuration: { # required
+    #         # One of:
+    #         secrets_manager: {
+    #           secret_arn: "SecretArn", # required
+    #           role_arn: "RoleArn", # required
+    #         },
+    #         automatic: {
+    #         }
+    #       }
+    #     },
+    #     ndi_output_timecode_source: "EMBEDDED_TIMECODE" # One of: ["EMBEDDED_TIMECODE", "UTC_SYSTEM_TIME"],
+    #     ndi_audio_reference_level: 1
     #   }
     #   options = {}
     #   response = client.update_flow_output(params, options)
@@ -3841,7 +6637,13 @@ module Aws::MediaConnect
     #         source_listener_port: 1,
     #         stream_id: "String",
     #         ndi_speed_hq_quality: 1,
-    #         ndi_program_name: "String"
+    #         ndi_program_name: "String",
+    #         ndi_source_settings: {
+    #           source_name: "String",
+    #           audio_reference_level: 1
+    #         },
+    #         ndi_output_timecode_source: "EMBEDDED_TIMECODE" # One of: ["EMBEDDED_TIMECODE", "UTC_SYSTEM_TIME"],
+    #         ndi_audio_reference_level: 1
     #       },
     #       vpc_interface_attachment: {
     #         vpc_interface_name: "String"
@@ -3849,7 +6651,21 @@ module Aws::MediaConnect
     #       bridge_arn: "String",
     #       bridge_ports: [1],
     #       output_status: "ENABLED" # One of: ["ENABLED", "DISABLED"],
-    #       peer_ip_address: "String"
+    #       peer_ip_address: "String",
+    #       router_integration_state: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #       router_integration_transit_encryption: {
+    #         encryption_key_type: "SECRETS_MANAGER" # One of: ["SECRETS_MANAGER", "AUTOMATIC"],
+    #         encryption_key_configuration: { # required
+    #           # One of:
+    #           secrets_manager: {
+    #             secret_arn: "SecretArn", # required
+    #             role_arn: "RoleArn", # required
+    #           },
+    #           automatic: {
+    #           }
+    #         }
+    #       },
+    #       connected_router_input_arn: "String"
     #     }
     #   }
     # @return [Types::UpdateFlowOutputResponse]
@@ -3858,7 +6674,7 @@ module Aws::MediaConnect
       request.send_request(options)
     end
 
-    # <p> Updates the source of a flow.</p>
+    # <p> Updates the source of a flow.</p> <note> <p> Because <code>UpdateFlowSources</code> and <code>UpdateFlow</code> are separate operations, you can't change both the source type AND the flow size in a single request. </p> <ul> <li> <p>If you have a <code>MEDIUM</code> flow and you want to change the flow source to NDI®:</p> <ul> <li> <p>First, use the <code>UpdateFlow</code> operation to upgrade the flow size to <code>LARGE</code>. </p> </li> <li> <p>After that, you can then use the <code>UpdateFlowSource</code> operation to configure the NDI source. </p> </li> </ul> </li> <li> <p>If you're switching from an NDI source to a transport stream (TS) source and want to downgrade the flow size: </p> <ul> <li> <p>First, use the <code>UpdateFlowSource</code> operation to change the flow source type. </p> </li> <li> <p>After that, you can then use the <code>UpdateFlow</code> operation to downgrade the flow size to <code>MEDIUM</code>.</p> </li> </ul> </li> </ul> </note>
     # @param [Hash, Types::UpdateFlowSourceRequest] params
     # @option params [Types::UpdateEncryption] :decryption
     #   <p>The type of encryption that is used on the content ingested from the source. </p>
@@ -3900,6 +6716,12 @@ module Aws::MediaConnect
     #   <p>The range of IP addresses that are allowed to contribute content to your source. Format the IP addresses as a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16. </p>
     # @option params [Types::UpdateGatewayBridgeSourceRequest] :gateway_bridge_source
     #   <p>The source configuration for cloud flows receiving a stream from a bridge. </p>
+    # @option params [Types::NdiSourceSettings] :ndi_source_settings
+    #   <p> The settings for the NDI source. This includes the exact name of the upstream NDI sender that you want to connect to your source. </p>
+    # @option params [String] :router_integration_state
+    #   <p>Indicates whether to enable or disable router integration for this flow source.</p>
+    # @option params [Types::FlowTransitEncryption] :router_integration_transit_decryption
+    #   <p>The encryption configuration for the flow source when router integration is enabled.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     decryption: {
@@ -3948,6 +6770,23 @@ module Aws::MediaConnect
     #       bridge_arn: "String",
     #       vpc_interface_attachment: {
     #         vpc_interface_name: "String"
+    #       }
+    #     },
+    #     ndi_source_settings: {
+    #       source_name: "String",
+    #       audio_reference_level: 1
+    #     },
+    #     router_integration_state: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #     router_integration_transit_decryption: {
+    #       encryption_key_type: "SECRETS_MANAGER" # One of: ["SECRETS_MANAGER", "AUTOMATIC"],
+    #       encryption_key_configuration: { # required
+    #         # One of:
+    #         secrets_manager: {
+    #           secret_arn: "SecretArn", # required
+    #           role_arn: "RoleArn", # required
+    #         },
+    #         automatic: {
+    #         }
     #       }
     #     }
     #   }
@@ -4008,7 +6847,13 @@ module Aws::MediaConnect
     #         source_listener_port: 1,
     #         stream_id: "String",
     #         ndi_speed_hq_quality: 1,
-    #         ndi_program_name: "String"
+    #         ndi_program_name: "String",
+    #         ndi_source_settings: {
+    #           source_name: "String",
+    #           audio_reference_level: 1
+    #         },
+    #         ndi_output_timecode_source: "EMBEDDED_TIMECODE" # One of: ["EMBEDDED_TIMECODE", "UTC_SYSTEM_TIME"],
+    #         ndi_audio_reference_level: 1
     #       },
     #       vpc_interface_name: "String",
     #       whitelist_cidr: "String",
@@ -4018,7 +6863,21 @@ module Aws::MediaConnect
     #           vpc_interface_name: "String"
     #         }
     #       },
-    #       peer_ip_address: "String"
+    #       peer_ip_address: "String",
+    #       router_integration_state: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #       router_integration_transit_decryption: {
+    #         encryption_key_type: "SECRETS_MANAGER" # One of: ["SECRETS_MANAGER", "AUTOMATIC"],
+    #         encryption_key_configuration: { # required
+    #           # One of:
+    #           secrets_manager: {
+    #             secret_arn: "SecretArn", # required
+    #             role_arn: "RoleArn", # required
+    #           },
+    #           automatic: {
+    #           }
+    #         }
+    #       },
+    #       connected_router_output_arn: "String"
     #     }
     #   }
     # @return [Types::UpdateFlowSourceResponse]
@@ -4049,6 +6908,791 @@ module Aws::MediaConnect
     # @return [Types::UpdateGatewayInstanceResponse]
     def update_gateway_instance(params = {}, options = {})
       request = build_request(:update_gateway_instance, params)
+      request.send_request(options)
+    end
+
+    # <p>Updates the configuration of an existing router input in AWS Elemental MediaConnect.</p>
+    # @param [Hash, Types::UpdateRouterInputRequest] params
+    # @option params [String] :arn
+    #   <p>The Amazon Resource Name (ARN) of the router input that you want to update.</p>
+    # @option params [String] :name
+    #   <p>The updated name for the router input.</p>
+    # @option params [Types::RouterInputConfiguration] :configuration
+    #   <p>The updated configuration settings for the router input. Changing the type of the configuration is not supported.</p>
+    # @option params [Integer] :maximum_bitrate
+    #   <p>The updated maximum bitrate for the router input.</p>
+    # @option params [String] :routing_scope
+    #   <p>Specifies whether the router input can be assigned to outputs in different Regions. REGIONAL (default) - can be assigned only to outputs in the same Region. GLOBAL - can be assigned to outputs in any Region.</p>
+    # @option params [String] :tier
+    #   <p>The updated tier level for the router input. The tier sets the maximum bitrate, in Mbps, for the router input. Valid values include the following:</p> <ul> <li> <p> <code>INPUT_20</code> – 20 Mbps</p> </li> <li> <p> <code>INPUT_50</code> – 50 Mbps</p> </li> <li> <p> <code>INPUT_100</code> – 100 Mbps</p> </li> <li> <p> <code>INPUT_250</code> – 250 Mbps</p> </li> <li> <p> <code>INPUT_500</code> – 500 Mbps</p> </li> </ul> <p>The 250 Mbps and 500 Mbps tiers are high-bitrate tiers that support TR-07 (JPEG XS) workflows.</p>
+    # @option params [Types::RouterInputTransitEncryption] :transit_encryption
+    #   <p>The updated transit encryption settings for the router input.</p>
+    # @option params [Types::MaintenanceConfiguration] :maintenance_configuration
+    #   <p>The updated maintenance configuration settings for the router input, including any changes to preferred maintenance windows and schedules.</p>
+    # @option params [Types::RouterContentQualityAnalysisConfiguration] :content_quality_analysis_configuration
+    #   <p>The content quality analysis configuration for the router input.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     arn: "RouterInputArn", # required
+    #     name: "String",
+    #     configuration: {
+    #       # One of:
+    #       standard: {
+    #         network_interface_arn: "RouterNetworkInterfaceArn", # required
+    #         protocol_configuration: { # required
+    #           # One of:
+    #           rist: {
+    #             port: 1, # required
+    #             recovery_latency_milliseconds: 1, # required
+    #           },
+    #           srt_listener: {
+    #             port: 1, # required
+    #             minimum_latency_milliseconds: 1, # required
+    #             decryption_configuration: {
+    #               encryption_key: { # required
+    #                 secret_arn: "SecretArn", # required
+    #                 role_arn: "RoleArn", # required
+    #               }
+    #             }
+    #           },
+    #           srt_caller: {
+    #             source_address: "String", # required
+    #             source_port: 1, # required
+    #             minimum_latency_milliseconds: 1, # required
+    #             stream_id: "String",
+    #             decryption_configuration: {
+    #               encryption_key: { # required
+    #                 secret_arn: "SecretArn", # required
+    #                 role_arn: "RoleArn", # required
+    #               }
+    #             }
+    #           },
+    #           rtp: {
+    #             port: 1, # required
+    #             forward_error_correction: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #           }
+    #         },
+    #         protocol: "RTP" # One of: ["RTP", "RIST", "SRT_CALLER", "SRT_LISTENER"]
+    #       },
+    #       media_live_channel: {
+    #         media_live_channel_arn: "MediaLiveChannelArn",
+    #         media_live_pipeline_id: "PIPELINE_0" # One of: ["PIPELINE_0", "PIPELINE_1"],
+    #         media_live_channel_output_name: "String",
+    #         source_transit_decryption: { # required
+    #           encryption_key_type: "SECRETS_MANAGER" # One of: ["SECRETS_MANAGER", "AUTOMATIC"],
+    #           encryption_key_configuration: { # required
+    #             # One of:
+    #             secrets_manager: {
+    #               secret_arn: "SecretArn", # required
+    #               role_arn: "RoleArn", # required
+    #             },
+    #             automatic: {
+    #             }
+    #           }
+    #         }
+    #       },
+    #       failover: {
+    #         network_interface_arn: "RouterNetworkInterfaceArn", # required
+    #         protocol_configurations: [{ # required
+    #           # One of:
+    #           rist: {
+    #             port: 1, # required
+    #             recovery_latency_milliseconds: 1, # required
+    #           },
+    #           srt_listener: {
+    #             port: 1, # required
+    #             minimum_latency_milliseconds: 1, # required
+    #             decryption_configuration: {
+    #               encryption_key: { # required
+    #                 secret_arn: "SecretArn", # required
+    #                 role_arn: "RoleArn", # required
+    #               }
+    #             }
+    #           },
+    #           srt_caller: {
+    #             source_address: "String", # required
+    #             source_port: 1, # required
+    #             minimum_latency_milliseconds: 1, # required
+    #             stream_id: "String",
+    #             decryption_configuration: {
+    #               encryption_key: { # required
+    #                 secret_arn: "SecretArn", # required
+    #                 role_arn: "RoleArn", # required
+    #               }
+    #             }
+    #           },
+    #           rtp: {
+    #             port: 1, # required
+    #             forward_error_correction: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #           }
+    #         }],
+    #         source_priority_mode: "NO_PRIORITY" # One of: ["NO_PRIORITY", "PRIMARY_SECONDARY"], # required
+    #         primary_source_index: 1
+    #       },
+    #       media_connect_flow: {
+    #         flow_arn: "FlowArn",
+    #         flow_output_arn: "FlowOutputArn",
+    #         source_transit_decryption: { # required
+    #           encryption_key_type: "SECRETS_MANAGER" # One of: ["SECRETS_MANAGER", "AUTOMATIC"],
+    #           encryption_key_configuration: { # required
+    #             # One of:
+    #             secrets_manager: {
+    #               secret_arn: "SecretArn", # required
+    #               role_arn: "RoleArn", # required
+    #             },
+    #             automatic: {
+    #             }
+    #           }
+    #         }
+    #       },
+    #       merge: {
+    #         network_interface_arn: "RouterNetworkInterfaceArn", # required
+    #         protocol_configurations: [{ # required
+    #           # One of:
+    #           rtp: {
+    #             port: 1, # required
+    #             forward_error_correction: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #           },
+    #           rist: {
+    #             port: 1, # required
+    #             recovery_latency_milliseconds: 1, # required
+    #           }
+    #         }],
+    #         merge_recovery_window_milliseconds: 1, # required
+    #       }
+    #     },
+    #     maximum_bitrate: 1,
+    #     routing_scope: "REGIONAL" # One of: ["REGIONAL", "GLOBAL"],
+    #     tier: "INPUT_100" # One of: ["INPUT_100", "INPUT_50", "INPUT_20", "INPUT_500", "INPUT_250"],
+    #     transit_encryption: {
+    #       encryption_key_type: "SECRETS_MANAGER" # One of: ["SECRETS_MANAGER", "AUTOMATIC"],
+    #       encryption_key_configuration: { # required
+    #         # One of:
+    #         secrets_manager: {
+    #           secret_arn: "SecretArn", # required
+    #           role_arn: "RoleArn", # required
+    #         },
+    #         automatic: {
+    #         }
+    #       }
+    #     },
+    #     maintenance_configuration: {
+    #       # One of:
+    #       preferred_day_time: {
+    #         day: "MONDAY" # One of: ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"], # required
+    #         time: "String", # required
+    #       },
+    #       default: {
+    #       }
+    #     },
+    #     content_quality_analysis_configuration: {
+    #       # One of:
+    #       content_level: {
+    #         black_frames: {
+    #           state: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
+    #           threshold_seconds: 1, # required
+    #         },
+    #         frozen_frames: {
+    #           state: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
+    #           threshold_seconds: 1, # required
+    #         },
+    #         silent_audio: {
+    #           state: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
+    #           threshold_seconds: 1, # required
+    #         }
+    #       }
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.update_router_input(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     router_input: { # required
+    #       name: "String", # required
+    #       arn: "RouterInputArn", # required
+    #       id: "String", # required
+    #       state: "CREATING" # One of: ["CREATING", "STANDBY", "STARTING", "ACTIVE", "STOPPING", "DELETING", "UPDATING", "ERROR", "RECOVERING", "MIGRATING"], # required
+    #       input_type: "STANDARD" # One of: ["STANDARD", "FAILOVER", "MERGE", "MEDIACONNECT_FLOW", "MEDIALIVE_CHANNEL"], # required
+    #       configuration: { # required
+    #         # One of:
+    #         standard: {
+    #           network_interface_arn: "RouterNetworkInterfaceArn", # required
+    #           protocol_configuration: { # required
+    #             # One of:
+    #             rist: {
+    #               port: 1, # required
+    #               recovery_latency_milliseconds: 1, # required
+    #             },
+    #             srt_listener: {
+    #               port: 1, # required
+    #               minimum_latency_milliseconds: 1, # required
+    #               decryption_configuration: {
+    #                 encryption_key: { # required
+    #                   secret_arn: "SecretArn", # required
+    #                   role_arn: "RoleArn", # required
+    #                 }
+    #               }
+    #             },
+    #             srt_caller: {
+    #               source_address: "String", # required
+    #               source_port: 1, # required
+    #               minimum_latency_milliseconds: 1, # required
+    #               stream_id: "String",
+    #               decryption_configuration: {
+    #                 encryption_key: { # required
+    #                   secret_arn: "SecretArn", # required
+    #                   role_arn: "RoleArn", # required
+    #                 }
+    #               }
+    #             },
+    #             rtp: {
+    #               port: 1, # required
+    #               forward_error_correction: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #             }
+    #           },
+    #           protocol: "RTP" # One of: ["RTP", "RIST", "SRT_CALLER", "SRT_LISTENER"]
+    #         },
+    #         media_live_channel: {
+    #           media_live_channel_arn: "MediaLiveChannelArn",
+    #           media_live_pipeline_id: "PIPELINE_0" # One of: ["PIPELINE_0", "PIPELINE_1"],
+    #           media_live_channel_output_name: "String",
+    #           source_transit_decryption: { # required
+    #             encryption_key_type: "SECRETS_MANAGER" # One of: ["SECRETS_MANAGER", "AUTOMATIC"],
+    #             encryption_key_configuration: { # required
+    #               # One of:
+    #               secrets_manager: {
+    #                 secret_arn: "SecretArn", # required
+    #                 role_arn: "RoleArn", # required
+    #               },
+    #               automatic: {
+    #               }
+    #             }
+    #           }
+    #         },
+    #         failover: {
+    #           network_interface_arn: "RouterNetworkInterfaceArn", # required
+    #           protocol_configurations: [{ # required
+    #             # One of:
+    #             rist: {
+    #               port: 1, # required
+    #               recovery_latency_milliseconds: 1, # required
+    #             },
+    #             srt_listener: {
+    #               port: 1, # required
+    #               minimum_latency_milliseconds: 1, # required
+    #               decryption_configuration: {
+    #                 encryption_key: { # required
+    #                   secret_arn: "SecretArn", # required
+    #                   role_arn: "RoleArn", # required
+    #                 }
+    #               }
+    #             },
+    #             srt_caller: {
+    #               source_address: "String", # required
+    #               source_port: 1, # required
+    #               minimum_latency_milliseconds: 1, # required
+    #               stream_id: "String",
+    #               decryption_configuration: {
+    #                 encryption_key: { # required
+    #                   secret_arn: "SecretArn", # required
+    #                   role_arn: "RoleArn", # required
+    #                 }
+    #               }
+    #             },
+    #             rtp: {
+    #               port: 1, # required
+    #               forward_error_correction: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #             }
+    #           }],
+    #           source_priority_mode: "NO_PRIORITY" # One of: ["NO_PRIORITY", "PRIMARY_SECONDARY"], # required
+    #           primary_source_index: 1
+    #         },
+    #         media_connect_flow: {
+    #           flow_arn: "FlowArn",
+    #           flow_output_arn: "FlowOutputArn",
+    #           source_transit_decryption: { # required
+    #             encryption_key_type: "SECRETS_MANAGER" # One of: ["SECRETS_MANAGER", "AUTOMATIC"],
+    #             encryption_key_configuration: { # required
+    #               # One of:
+    #               secrets_manager: {
+    #                 secret_arn: "SecretArn", # required
+    #                 role_arn: "RoleArn", # required
+    #               },
+    #               automatic: {
+    #               }
+    #             }
+    #           }
+    #         },
+    #         merge: {
+    #           network_interface_arn: "RouterNetworkInterfaceArn", # required
+    #           protocol_configurations: [{ # required
+    #             # One of:
+    #             rtp: {
+    #               port: 1, # required
+    #               forward_error_correction: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #             },
+    #             rist: {
+    #               port: 1, # required
+    #               recovery_latency_milliseconds: 1, # required
+    #             }
+    #           }],
+    #           merge_recovery_window_milliseconds: 1, # required
+    #         }
+    #       },
+    #       routed_outputs: 1, # required
+    #       maximum_routed_outputs: 1,
+    #       region_name: "String", # required
+    #       availability_zone: "String", # required
+    #       maximum_bitrate: 1, # required
+    #       tier: "INPUT_100" # One of: ["INPUT_100", "INPUT_50", "INPUT_20", "INPUT_500", "INPUT_250"], # required
+    #       routing_scope: "REGIONAL" # One of: ["REGIONAL", "GLOBAL"], # required
+    #       created_at: Time.now, # required
+    #       updated_at: Time.now, # required
+    #       messages: [ # required
+    #         {
+    #           code: "String", # required
+    #           message: "String", # required
+    #         }
+    #       ],
+    #       transit_encryption: { # required
+    #         encryption_key_type: "SECRETS_MANAGER" # One of: ["SECRETS_MANAGER", "AUTOMATIC"],
+    #         encryption_key_configuration: { # required
+    #           # One of:
+    #           secrets_manager: {
+    #             secret_arn: "SecretArn", # required
+    #             role_arn: "RoleArn", # required
+    #           },
+    #           automatic: {
+    #           }
+    #         }
+    #       },
+    #       tags: { # required
+    #         "String" => "String"
+    #       },
+    #       stream_details: { # required
+    #         # One of:
+    #         standard: {
+    #           source_ip_address: "String"
+    #         },
+    #         media_live_channel: {
+    #         },
+    #         failover: {
+    #           source_index_zero_stream_details: { # required
+    #             source_index: 1, # required
+    #             source_ip_address: "String"
+    #           },
+    #           source_index_one_stream_details: { # required
+    #             source_index: 1, # required
+    #             source_ip_address: "String"
+    #           }
+    #         },
+    #         media_connect_flow: {
+    #         },
+    #         merge: {
+    #           source_index_zero_stream_details: { # required
+    #             source_index: 1, # required
+    #             source_ip_address: "String"
+    #           },
+    #           source_index_one_stream_details: { # required
+    #             source_index: 1, # required
+    #             source_ip_address: "String"
+    #           }
+    #         }
+    #       },
+    #       ip_address: "String",
+    #       maintenance_type: "PREFERRED_DAY_TIME" # One of: ["PREFERRED_DAY_TIME", "DEFAULT"], # required
+    #       maintenance_configuration: { # required
+    #         # One of:
+    #         preferred_day_time: {
+    #           day: "MONDAY" # One of: ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"], # required
+    #           time: "String", # required
+    #         },
+    #         default: {
+    #         }
+    #       },
+    #       maintenance_schedule_type: "WINDOW" # One of: ["WINDOW"],
+    #       maintenance_schedule: {
+    #         # One of:
+    #         window: {
+    #           start: Time.now, # required
+    #           end: Time.now, # required
+    #           scheduled_time: Time.now, # required
+    #         }
+    #       },
+    #       content_quality_analysis_type: "CONTENT_LEVEL" # One of: ["CONTENT_LEVEL"], # required
+    #       content_quality_analysis_configuration: { # required
+    #         # One of:
+    #         content_level: {
+    #           black_frames: {
+    #             state: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
+    #             threshold_seconds: 1, # required
+    #           },
+    #           frozen_frames: {
+    #             state: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
+    #             threshold_seconds: 1, # required
+    #           },
+    #           silent_audio: {
+    #             state: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
+    #             threshold_seconds: 1, # required
+    #           }
+    #         }
+    #       }
+    #     }
+    #   }
+    # @return [Types::UpdateRouterInputResponse]
+    def update_router_input(params = {}, options = {})
+      request = build_request(:update_router_input, params)
+      request.send_request(options)
+    end
+
+    # <p>Updates the configuration of an existing router network interface in AWS Elemental MediaConnect.</p>
+    # @param [Hash, Types::UpdateRouterNetworkInterfaceRequest] params
+    # @option params [String] :arn
+    #   <p>The Amazon Resource Name (ARN) of the router network interface that you want to update.</p>
+    # @option params [String] :name
+    #   <p>The updated name for the router network interface.</p>
+    # @option params [Types::RouterNetworkInterfaceConfiguration] :configuration
+    #   <p>The updated configuration settings for the router network interface. Changing the type of the configuration is not supported.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     arn: "RouterNetworkInterfaceArn", # required
+    #     name: "String",
+    #     configuration: {
+    #       # One of:
+    #       public: {
+    #         allow_rules: [ # required
+    #           {
+    #             cidr: "String", # required
+    #           }
+    #         ]
+    #       },
+    #       vpc: {
+    #         security_group_ids: ["String"], # required
+    #         subnet_id: "String", # required
+    #       }
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.update_router_network_interface(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     router_network_interface: { # required
+    #       name: "String", # required
+    #       arn: "RouterNetworkInterfaceArn", # required
+    #       id: "String", # required
+    #       state: "CREATING" # One of: ["CREATING", "ACTIVE", "UPDATING", "DELETING", "ERROR", "RECOVERING"], # required
+    #       network_interface_type: "PUBLIC" # One of: ["PUBLIC", "VPC"], # required
+    #       configuration: { # required
+    #         # One of:
+    #         public: {
+    #           allow_rules: [ # required
+    #             {
+    #               cidr: "String", # required
+    #             }
+    #           ]
+    #         },
+    #         vpc: {
+    #           security_group_ids: ["String"], # required
+    #           subnet_id: "String", # required
+    #         }
+    #       },
+    #       associated_output_count: 1, # required
+    #       associated_input_count: 1, # required
+    #       region_name: "String", # required
+    #       created_at: Time.now, # required
+    #       updated_at: Time.now, # required
+    #       tags: { # required
+    #         "String" => "String"
+    #       }
+    #     }
+    #   }
+    # @return [Types::UpdateRouterNetworkInterfaceResponse]
+    def update_router_network_interface(params = {}, options = {})
+      request = build_request(:update_router_network_interface, params)
+      request.send_request(options)
+    end
+
+    # <p>Updates the configuration of an existing router output in AWS Elemental MediaConnect.</p>
+    # @param [Hash, Types::UpdateRouterOutputRequest] params
+    # @option params [String] :arn
+    #   <p>The Amazon Resource Name (ARN) of the router output that you want to update.</p>
+    # @option params [String] :name
+    #   <p>The updated name for the router output.</p>
+    # @option params [Types::RouterOutputConfiguration] :configuration
+    #   <p>The updated configuration settings for the router output. Changing the type of the configuration is not supported.</p>
+    # @option params [Integer] :maximum_bitrate
+    #   <p>The updated maximum bitrate for the router output.</p>
+    # @option params [String] :routing_scope
+    #   <p>Specifies whether the router output can take inputs that are in different Regions. REGIONAL (default) - can only take inputs from same Region. GLOBAL - can take inputs from any Region.</p>
+    # @option params [String] :tier
+    #   <p>The updated tier level for the router output. The tier sets the maximum bitrate, in Mbps, for the router output. Valid values include the following:</p> <ul> <li> <p> <code>OUTPUT_20</code> – 20 Mbps</p> </li> <li> <p> <code>OUTPUT_50</code> – 50 Mbps</p> </li> <li> <p> <code>OUTPUT_100</code> – 100 Mbps</p> </li> <li> <p> <code>OUTPUT_250</code> – 250 Mbps</p> </li> <li> <p> <code>OUTPUT_500</code> – 500 Mbps</p> </li> </ul> <p>The 250 Mbps and 500 Mbps tiers are high-bitrate tiers that support TR-07 (JPEG XS) workflows.</p>
+    # @option params [Types::MaintenanceConfiguration] :maintenance_configuration
+    #   <p>The updated maintenance configuration settings for the router output, including any changes to preferred maintenance windows and schedules.</p>
+    # @option params [Types::FabricConfiguration] :fabric_configuration
+    #   <p>The updated fabric configuration settings for the router output. You cannot update the fabric configuration while the output has an active route. You must unroute the output before updating the fabric configuration.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     arn: "RouterOutputArn", # required
+    #     name: "String",
+    #     configuration: {
+    #       # One of:
+    #       standard: {
+    #         network_interface_arn: "RouterNetworkInterfaceArn", # required
+    #         protocol_configuration: { # required
+    #           # One of:
+    #           rist: {
+    #             destination_address: "String", # required
+    #             destination_port: 1, # required
+    #           },
+    #           srt_listener: {
+    #             port: 1, # required
+    #             minimum_latency_milliseconds: 1, # required
+    #             encryption_configuration: {
+    #               encryption_key: { # required
+    #                 secret_arn: "SecretArn", # required
+    #                 role_arn: "RoleArn", # required
+    #               }
+    #             }
+    #           },
+    #           rtmp_push: {
+    #             destination_address: "String", # required
+    #             destination_port: 1, # required
+    #             application_name: "String", # required
+    #             stream_name: "String", # required
+    #             tls_encryption: {
+    #               encryption_type: "PUBLIC" # One of: ["PUBLIC"],
+    #               encryption_configuration: { # required
+    #                 # One of:
+    #                 public: {
+    #                 }
+    #               }
+    #             }
+    #           },
+    #           srt_caller: {
+    #             destination_address: "String", # required
+    #             destination_port: 1, # required
+    #             minimum_latency_milliseconds: 1, # required
+    #             stream_id: "String",
+    #             encryption_configuration: {
+    #               encryption_key: { # required
+    #                 secret_arn: "SecretArn", # required
+    #                 role_arn: "RoleArn", # required
+    #               }
+    #             }
+    #           },
+    #           rtp: {
+    #             destination_address: "String", # required
+    #             destination_port: 1, # required
+    #             forward_error_correction: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #           }
+    #         },
+    #         protocol: "RTP" # One of: ["RTP", "RIST", "SRT_CALLER", "SRT_LISTENER", "RTMP_PUSH"]
+    #       },
+    #       media_connect_flow: {
+    #         flow_arn: "FlowArn",
+    #         flow_source_arn: "FlowSourceArn",
+    #         destination_transit_encryption: { # required
+    #           encryption_key_type: "SECRETS_MANAGER" # One of: ["SECRETS_MANAGER", "AUTOMATIC"],
+    #           encryption_key_configuration: { # required
+    #             # One of:
+    #             secrets_manager: {
+    #               secret_arn: "SecretArn", # required
+    #               role_arn: "RoleArn", # required
+    #             },
+    #             automatic: {
+    #             }
+    #           }
+    #         }
+    #       },
+    #       media_live_input: {
+    #         media_live_input_arn: "MediaLiveInputArn",
+    #         media_live_pipeline_id: "PIPELINE_0" # One of: ["PIPELINE_0", "PIPELINE_1"],
+    #         destination_transit_encryption: { # required
+    #           encryption_key_type: "SECRETS_MANAGER" # One of: ["SECRETS_MANAGER", "AUTOMATIC"],
+    #           encryption_key_configuration: { # required
+    #             # One of:
+    #             secrets_manager: {
+    #               secret_arn: "SecretArn", # required
+    #               role_arn: "RoleArn", # required
+    #             },
+    #             automatic: {
+    #             }
+    #           }
+    #         }
+    #       }
+    #     },
+    #     maximum_bitrate: 1,
+    #     routing_scope: "REGIONAL" # One of: ["REGIONAL", "GLOBAL"],
+    #     tier: "OUTPUT_100" # One of: ["OUTPUT_100", "OUTPUT_50", "OUTPUT_20", "OUTPUT_500", "OUTPUT_250"],
+    #     maintenance_configuration: {
+    #       # One of:
+    #       preferred_day_time: {
+    #         day: "MONDAY" # One of: ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"], # required
+    #         time: "String", # required
+    #       },
+    #       default: {
+    #       }
+    #     },
+    #     fabric_configuration: {
+    #       recovery_latency_mode: "BALANCED" # One of: ["BALANCED", "LOW_LATENCY"], # required
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.update_router_output(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     router_output: { # required
+    #       name: "String", # required
+    #       arn: "RouterOutputArn", # required
+    #       id: "String", # required
+    #       state: "CREATING" # One of: ["CREATING", "STANDBY", "STARTING", "ACTIVE", "STOPPING", "DELETING", "UPDATING", "ERROR", "RECOVERING", "MIGRATING"], # required
+    #       output_type: "STANDARD" # One of: ["STANDARD", "MEDIACONNECT_FLOW", "MEDIALIVE_INPUT"], # required
+    #       configuration: { # required
+    #         # One of:
+    #         standard: {
+    #           network_interface_arn: "RouterNetworkInterfaceArn", # required
+    #           protocol_configuration: { # required
+    #             # One of:
+    #             rist: {
+    #               destination_address: "String", # required
+    #               destination_port: 1, # required
+    #             },
+    #             srt_listener: {
+    #               port: 1, # required
+    #               minimum_latency_milliseconds: 1, # required
+    #               encryption_configuration: {
+    #                 encryption_key: { # required
+    #                   secret_arn: "SecretArn", # required
+    #                   role_arn: "RoleArn", # required
+    #                 }
+    #               }
+    #             },
+    #             rtmp_push: {
+    #               destination_address: "String", # required
+    #               destination_port: 1, # required
+    #               application_name: "String", # required
+    #               stream_name: "String", # required
+    #               tls_encryption: {
+    #                 encryption_type: "PUBLIC" # One of: ["PUBLIC"],
+    #                 encryption_configuration: { # required
+    #                   # One of:
+    #                   public: {
+    #                   }
+    #                 }
+    #               }
+    #             },
+    #             srt_caller: {
+    #               destination_address: "String", # required
+    #               destination_port: 1, # required
+    #               minimum_latency_milliseconds: 1, # required
+    #               stream_id: "String",
+    #               encryption_configuration: {
+    #                 encryption_key: { # required
+    #                   secret_arn: "SecretArn", # required
+    #                   role_arn: "RoleArn", # required
+    #                 }
+    #               }
+    #             },
+    #             rtp: {
+    #               destination_address: "String", # required
+    #               destination_port: 1, # required
+    #               forward_error_correction: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #             }
+    #           },
+    #           protocol: "RTP" # One of: ["RTP", "RIST", "SRT_CALLER", "SRT_LISTENER", "RTMP_PUSH"]
+    #         },
+    #         media_connect_flow: {
+    #           flow_arn: "FlowArn",
+    #           flow_source_arn: "FlowSourceArn",
+    #           destination_transit_encryption: { # required
+    #             encryption_key_type: "SECRETS_MANAGER" # One of: ["SECRETS_MANAGER", "AUTOMATIC"],
+    #             encryption_key_configuration: { # required
+    #               # One of:
+    #               secrets_manager: {
+    #                 secret_arn: "SecretArn", # required
+    #                 role_arn: "RoleArn", # required
+    #               },
+    #               automatic: {
+    #               }
+    #             }
+    #           }
+    #         },
+    #         media_live_input: {
+    #           media_live_input_arn: "MediaLiveInputArn",
+    #           media_live_pipeline_id: "PIPELINE_0" # One of: ["PIPELINE_0", "PIPELINE_1"],
+    #           destination_transit_encryption: { # required
+    #             encryption_key_type: "SECRETS_MANAGER" # One of: ["SECRETS_MANAGER", "AUTOMATIC"],
+    #             encryption_key_configuration: { # required
+    #               # One of:
+    #               secrets_manager: {
+    #                 secret_arn: "SecretArn", # required
+    #                 role_arn: "RoleArn", # required
+    #               },
+    #               automatic: {
+    #               }
+    #             }
+    #           }
+    #         }
+    #       },
+    #       routed_state: "ROUTED" # One of: ["ROUTED", "ROUTING", "UNROUTED"], # required
+    #       region_name: "String", # required
+    #       availability_zone: "String", # required
+    #       maximum_bitrate: 1, # required
+    #       routing_scope: "REGIONAL" # One of: ["REGIONAL", "GLOBAL"], # required
+    #       tier: "OUTPUT_100" # One of: ["OUTPUT_100", "OUTPUT_50", "OUTPUT_20", "OUTPUT_500", "OUTPUT_250"], # required
+    #       created_at: Time.now, # required
+    #       updated_at: Time.now, # required
+    #       messages: [ # required
+    #         {
+    #           code: "String", # required
+    #           message: "String", # required
+    #         }
+    #       ],
+    #       tags: { # required
+    #         "String" => "String"
+    #       },
+    #       stream_details: { # required
+    #         # One of:
+    #         standard: {
+    #           destination_ip_address: "String"
+    #         },
+    #         media_connect_flow: {
+    #         },
+    #         media_live_input: {
+    #         }
+    #       },
+    #       ip_address: "String",
+    #       routed_input_arn: "RouterInputArn",
+    #       maintenance_type: "PREFERRED_DAY_TIME" # One of: ["PREFERRED_DAY_TIME", "DEFAULT"], # required
+    #       maintenance_configuration: { # required
+    #         # One of:
+    #         preferred_day_time: {
+    #           day: "MONDAY" # One of: ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"], # required
+    #           time: "String", # required
+    #         },
+    #         default: {
+    #         }
+    #       },
+    #       maintenance_schedule_type: "WINDOW" # One of: ["WINDOW"],
+    #       maintenance_schedule: {
+    #         # One of:
+    #         window: {
+    #           start: Time.now, # required
+    #           end: Time.now, # required
+    #           scheduled_time: Time.now, # required
+    #         }
+    #       },
+    #       fabric_configuration: { # required
+    #         recovery_latency_mode: "BALANCED" # One of: ["BALANCED", "LOW_LATENCY"], # required
+    #       }
+    #     }
+    #   }
+    # @return [Types::UpdateRouterOutputResponse]
+    def update_router_output(params = {}, options = {})
+      request = build_request(:update_router_output, params)
       request.send_request(options)
     end
 
@@ -4138,7 +7782,15 @@ module Aws::MediaConnect
       {
         flow_active: Waiters::FlowActive,
         flow_deleted: Waiters::FlowDeleted,
-        flow_standby: Waiters::FlowStandby
+        flow_standby: Waiters::FlowStandby,
+        input_active: Waiters::InputActive,
+        input_deleted: Waiters::InputDeleted,
+        input_standby: Waiters::InputStandby,
+        output_active: Waiters::OutputActive,
+        output_deleted: Waiters::OutputDeleted,
+        output_routed: Waiters::OutputRouted,
+        output_standby: Waiters::OutputStandby,
+        output_unrouted: Waiters::OutputUnrouted
       }
     end
 

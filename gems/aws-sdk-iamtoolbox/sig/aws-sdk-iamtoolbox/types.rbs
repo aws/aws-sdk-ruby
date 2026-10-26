@@ -1,0 +1,172 @@
+module Aws::IAMToolbox
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AttachedTo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    module EvaluatedEffect
+      ALLOW: String
+      EXPLICIT_DENY: String
+      IMPLICIT_DENY: String
+    end
+
+    class Evaluation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action: String,
+        ?resource: String,
+        ?context: Hash[String, Smithy::Schema::document],
+        ?evaluated_effect: String,
+        ?matched_policies: Array[Types::MatchedPolicy],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action: String?
+      attr_accessor resource: String?
+      attr_accessor context: Hash[String, Smithy::Schema::document]?
+      attr_accessor evaluated_effect: String?
+      attr_accessor matched_policies: Array[Types::MatchedPolicy]?
+    end
+
+    class GetRequestAuthorizationDetailsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authorization_id: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authorization_id: String?
+      attr_accessor next_token: String?
+    end
+
+    class GetRequestAuthorizationDetailsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?request_context: Hash[String, Smithy::Schema::document],
+        ?evaluations: Array[Types::Evaluation],
+        ?policies: Array[Types::PolicyInfo],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor request_context: Hash[String, Smithy::Schema::document]?
+      attr_accessor evaluations: Array[Types::Evaluation]?
+      attr_accessor policies: Array[Types::PolicyInfo]?
+      attr_accessor next_token: String?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class MatchedPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?uri: String,
+        ?matched_statements: Array[Types::MatchedStatement],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor uri: String?
+      attr_accessor matched_statements: Array[Types::MatchedStatement]?
+    end
+
+    class MatchedStatement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sid: String,
+        ?evaluated_effect: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sid: String?
+      attr_accessor evaluated_effect: String?
+    end
+
+    class PolicyInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?inline: bool,
+        ?uri: String,
+        ?attached_to: Array[Types::AttachedTo],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor inline: bool?
+      attr_accessor uri: String?
+      attr_accessor attached_to: Array[Types::AttachedTo]?
+    end
+
+    module PolicyType
+      IDENTITY_BASED_POLICY: String
+      RESOURCE_BASED_POLICY: String
+      PERMISSIONS_BOUNDARY: String
+      SESSION_POLICY: String
+      SERVICE_CONTROL_POLICY: String
+      RESOURCE_CONTROL_POLICY: String
+      VPC_ENDPOINT_POLICY: String
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module StatementEffect
+      ALLOW: String
+      DENY: String
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

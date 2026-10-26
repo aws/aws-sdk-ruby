@@ -37,10 +37,7 @@ module Aws::EKSAuth
   module Errors
     extend Smithy::Client::DynamicErrors
 
-    # <p>You don't have permissions to perform the requested operation. The IAM principal
-    #             making the request must have at least one IAM permissions policy attached
-    #             that grants the required permissions. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access.html">Access
-    #                 management</a> in the <i>IAM User Guide</i>. </p>
+    # <p>You don't have permissions to perform the requested operation. The IAM principal making the request must have at least one IAM permissions policy attached that grants the required permissions. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access.html">Access management</a> in the <i>IAM User Guide</i>. </p>
     class AccessDeniedException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EKSAuth::Types::AccessDeniedException] data
@@ -79,8 +76,7 @@ module Aws::EKSAuth
       end
     end
 
-    # <p>The specified parameter is invalid. Review the available parameters for the API
-    #             request.</p>
+    # <p>The specified parameter is invalid. Review the available parameters for the API request.</p>
     class InvalidParameterException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EKSAuth::Types::InvalidParameterException] data
@@ -93,8 +89,7 @@ module Aws::EKSAuth
       end
     end
 
-    # <p>This exception is thrown if the request contains a semantic error. The precise meaning
-    #             will depend on the API, and will be documented in the error message.</p>
+    # <p>This exception is thrown if the request contains a semantic error. The precise meaning will depend on the API, and will be documented in the error message.</p>
     class InvalidRequestException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::EKSAuth::Types::InvalidRequestException] data

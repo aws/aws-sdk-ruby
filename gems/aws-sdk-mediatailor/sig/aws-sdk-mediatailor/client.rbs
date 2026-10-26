@@ -71,6 +71,7 @@ module Aws::MediaTailor
         exclude_event_types: Array[String]
       },
       ?manifest_service_interaction_log: {
+        publish_opt_in_event_types: Array[String],
         exclude_event_types: Array[String]
       }
     ) -> _ConfigureLogsForPlaybackConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ConfigureLogsForPlaybackConfigurationResponse
@@ -154,6 +155,7 @@ module Aws::MediaTailor
       def recurring_prefetch_configuration: () -> Types::RecurringPrefetchConfiguration?
       def schedule_type: () -> String?
       def stream_id: () -> String?
+      def tags: () -> Hash[String, String]?
     end
     def create_prefetch_schedule: (
       ?consumption: {
@@ -207,7 +209,8 @@ module Aws::MediaTailor
         }
       },
       ?schedule_type: String,
-      ?stream_id: String
+      ?stream_id: String,
+      ?tags: Hash[String, String]
     ) -> _CreatePrefetchScheduleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePrefetchScheduleResponse
 
     interface _CreateProgramResponse
@@ -224,6 +227,7 @@ module Aws::MediaTailor
       def clip_range: () -> Types::ClipRange?
       def duration_millis: () -> Integer?
       def audience_media: () -> Array[Types::AudienceMedia]?
+      def tags: () -> Hash[String, String]?
     end
     def create_program: (
       ?ad_breaks: Array[
@@ -333,7 +337,8 @@ module Aws::MediaTailor
             }
           ]
         }
-      ]
+      ],
+      ?tags: Hash[String, String]
     ) -> _CreateProgramResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateProgramResponse
 
     interface _CreateSourceLocationResponse
@@ -409,6 +414,13 @@ module Aws::MediaTailor
     def delete_channel_policy: (
       ?channel_name: String
     ) -> _DeleteChannelPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteChannelPolicyResponse
+
+    interface _DeleteFunctionResponse
+      include Smithy::Client::_Response[Types::DeleteFunctionResponse]
+    end
+    def delete_function: (
+      ?function_id: String
+    ) -> _DeleteFunctionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteFunctionResponse
 
     interface _DeleteLiveSourceResponse
       include Smithy::Client::_Response[Types::DeleteLiveSourceOutput]
@@ -505,6 +517,7 @@ module Aws::MediaTailor
       def clip_range: () -> Types::ClipRange?
       def duration_millis: () -> Integer?
       def audience_media: () -> Array[Types::AudienceMedia]?
+      def tags: () -> Hash[String, String]?
     end
     def describe_program: (
       ?channel_name: String,
@@ -564,6 +577,24 @@ module Aws::MediaTailor
       ?audience: String
     ) -> _GetChannelScheduleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetChannelScheduleResponse
 
+    interface _GetFunctionResponse
+      include Smithy::Client::_Response[Types::GetFunctionResponse]
+      def function_id: () -> String?
+      def function_type: () -> String?
+      def description: () -> String?
+      def http_request_configuration: () -> Types::HttpRequestConfiguration?
+      def aws_service_request_configuration: () -> Types::AwsServiceRequestConfiguration?
+      def custom_output_configuration: () -> Types::CustomOutputConfiguration?
+      def concurrent_executor_configuration: () -> Types::ConcurrentExecutorConfiguration?
+      def sequential_executor_configuration: () -> Types::SequentialExecutorConfiguration?
+      def vast_request_configuration: () -> Types::VastRequestConfiguration?
+      def tags: () -> Hash[String, String]?
+      def arn: () -> String?
+    end
+    def get_function: (
+      ?function_id: String
+    ) -> _GetFunctionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFunctionResponse
+
     interface _GetPlaybackConfigurationResponse
       include Smithy::Client::_Response[Types::GetPlaybackConfigurationOutput]
       def ad_decision_server_url: () -> String?
@@ -581,12 +612,20 @@ module Aws::MediaTailor
       def personalization_threshold_seconds: () -> Integer?
       def playback_configuration_arn: () -> String?
       def playback_endpoint_prefix: () -> String?
+      def dual_stack_playback_endpoint_prefix: () -> String?
       def session_initialization_endpoint_prefix: () -> String?
+      def dual_stack_session_initialization_endpoint_prefix: () -> String?
       def slate_ad_url: () -> String?
       def tags: () -> Hash[String, String]?
       def transcode_profile_name: () -> String?
       def video_content_source_url: () -> String?
       def ad_conditioning_configuration: () -> Types::AdConditioningConfiguration?
+      def ad_decision_server_configuration: () -> Types::AdDecisionServerConfiguration?
+      def yield_optimization_configuration: () -> Types::YieldOptimizationConfiguration?
+      def function_mapping: () -> Hash[String, String]?
+      def ads_personalization_timeouts: () -> Types::AdsPersonalizationTimeouts?
+      def ads_personalization_concurrency: () -> Types::AdsPersonalizationConcurrency?
+      def beaconing_configuration: () -> Types::BeaconingConfiguration?
     end
     def get_playback_configuration: (
       ?name: String
@@ -602,6 +641,7 @@ module Aws::MediaTailor
       def schedule_type: () -> String?
       def recurring_prefetch_configuration: () -> Types::RecurringPrefetchConfiguration?
       def stream_id: () -> String?
+      def tags: () -> Hash[String, String]?
     end
     def get_prefetch_schedule: (
       ?name: String,
@@ -628,6 +668,16 @@ module Aws::MediaTailor
       ?max_results: Integer,
       ?next_token: String
     ) -> _ListChannelsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListChannelsResponse
+
+    interface _ListFunctionsResponse
+      include Smithy::Client::_Response[Types::ListFunctionsResponse]
+      def items: () -> Array[Types::Function]?
+      def next_token: () -> String?
+    end
+    def list_functions: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListFunctionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFunctionsResponse
 
     interface _ListLiveSourcesResponse
       include Smithy::Client::_Response[Types::ListLiveSourcesOutput]
@@ -700,6 +750,100 @@ module Aws::MediaTailor
       ?policy: String
     ) -> _PutChannelPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutChannelPolicyResponse
 
+    interface _PutFunctionResponse
+      include Smithy::Client::_Response[Types::PutFunctionResponse]
+      def function_id: () -> String?
+      def function_type: () -> String?
+      def description: () -> String?
+      def http_request_configuration: () -> Types::HttpRequestConfiguration?
+      def aws_service_request_configuration: () -> Types::AwsServiceRequestConfiguration?
+      def custom_output_configuration: () -> Types::CustomOutputConfiguration?
+      def concurrent_executor_configuration: () -> Types::ConcurrentExecutorConfiguration?
+      def sequential_executor_configuration: () -> Types::SequentialExecutorConfiguration?
+      def vast_request_configuration: () -> Types::VastRequestConfiguration?
+      def tags: () -> Hash[String, String]?
+      def arn: () -> String?
+    end
+    def put_function: (
+      ?function_id: String,
+      ?function_type: String,
+      ?description: String,
+      ?http_request_configuration: {
+        runtime: String,
+        output: Hash[String, String],
+        method_type: String,
+        request_timeout_milliseconds: Integer,
+        url: String,
+        body: untyped,
+        headers: untyped,
+        cache: {
+          ttl_minimum_seconds: Integer,
+          ttl_maximum_seconds: untyped,
+          key: untyped
+        }
+      },
+      ?aws_service_request_configuration: {
+        runtime: String,
+        output: Hash[String, String],
+        method_type: String,
+        request_timeout_milliseconds: Integer,
+        url: String,
+        body: untyped,
+        headers: untyped,
+        cache: {
+          ttl_minimum_seconds: Integer,
+          ttl_maximum_seconds: untyped,
+          key: untyped
+        },
+        target_service: String,
+        target_region: untyped
+      },
+      ?custom_output_configuration: {
+        runtime: String,
+        output: Hash[String, String]
+      },
+      ?concurrent_executor_configuration: {
+        runtime: String,
+        output: Hash[String, String],
+        function_list: Array[
+          {
+            run_condition: String,
+            function_id: untyped,
+            alias: untyped
+          }
+        ],
+        timeout_milliseconds: Integer,
+        max_concurrency: untyped
+      },
+      ?sequential_executor_configuration: {
+        runtime: String,
+        output: Hash[String, String],
+        function_list: Array[
+          {
+            run_condition: String,
+            function_id: untyped,
+            alias: untyped
+          }
+        ],
+        timeout_milliseconds: Integer
+      },
+      ?vast_request_configuration: {
+        runtime: String,
+        output: Hash[String, String],
+        method_type: String,
+        request_timeout_milliseconds: Integer,
+        url: String,
+        body: untyped,
+        headers: untyped,
+        cache: {
+          ttl_minimum_seconds: Integer,
+          ttl_maximum_seconds: untyped,
+          key: untyped
+        }
+      },
+      ?tags: Hash[String, String]
+    ) -> _PutFunctionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutFunctionResponse
+
     interface _PutPlaybackConfigurationResponse
       include Smithy::Client::_Response[Types::PutPlaybackConfigurationOutput]
       def ad_decision_server_url: () -> String?
@@ -717,12 +861,20 @@ module Aws::MediaTailor
       def personalization_threshold_seconds: () -> Integer?
       def playback_configuration_arn: () -> String?
       def playback_endpoint_prefix: () -> String?
+      def dual_stack_playback_endpoint_prefix: () -> String?
       def session_initialization_endpoint_prefix: () -> String?
+      def dual_stack_session_initialization_endpoint_prefix: () -> String?
       def slate_ad_url: () -> String?
       def tags: () -> Hash[String, String]?
       def transcode_profile_name: () -> String?
       def video_content_source_url: () -> String?
       def ad_conditioning_configuration: () -> Types::AdConditioningConfiguration?
+      def ad_decision_server_configuration: () -> Types::AdDecisionServerConfiguration?
+      def yield_optimization_configuration: () -> Types::YieldOptimizationConfiguration?
+      def function_mapping: () -> Hash[String, String]?
+      def ads_personalization_timeouts: () -> Types::AdsPersonalizationTimeouts?
+      def ads_personalization_concurrency: () -> Types::AdsPersonalizationConcurrency?
+      def beaconing_configuration: () -> Types::BeaconingConfiguration?
     end
     def put_playback_configuration: (
       ?ad_decision_server_url: String,
@@ -749,7 +901,12 @@ module Aws::MediaTailor
       ?insertion_mode: String,
       ?live_pre_roll_configuration: {
         ad_decision_server_url: String,
-        max_duration_seconds: Integer
+        max_duration_seconds: Integer,
+        ad_decision_server_configuration: {
+          vast_response: {
+            ad_sequencing_mode: String
+          }
+        }
       },
       ?manifest_processing_rules: {
         ad_marker_passthrough: {
@@ -764,6 +921,41 @@ module Aws::MediaTailor
       ?video_content_source_url: String,
       ?ad_conditioning_configuration: {
         streaming_media_file_conditioning: String
+      },
+      ?ad_decision_server_configuration: {
+        http_request: {
+          method: String,
+          body: String,
+          headers: Hash[String, String],
+          compress_request: String
+        },
+        vast_response: {
+          ad_sequencing_mode: String
+        }
+      },
+      ?yield_optimization_configuration: {
+        minimum_unfilled_duration: Integer,
+        publisher_id: String,
+        region: String,
+        open_rtb_template: String
+      },
+      ?function_mapping: Hash[String, String],
+      ?ads_personalization_timeouts: {
+        ads_request_timeout_milliseconds: Integer,
+        live_maximum_ads_personalization_time_milliseconds: untyped,
+        vod_maximum_ads_personalization_time_milliseconds: untyped,
+        prefetch_ads_request_timeout_milliseconds: untyped,
+        prefetch_maximum_ads_personalization_time_milliseconds: untyped
+      },
+      ?ads_personalization_concurrency: {
+        max_concurrent_ads_requests: Integer,
+        enable_vod_vast_parallelization: bool
+      },
+      ?beaconing_configuration: {
+        client_side: {
+          reporting_mode: String,
+          additional_event_types: Array[String]
+        }
       }
     ) -> _PutPlaybackConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutPlaybackConfigurationResponse
 
@@ -876,6 +1068,7 @@ module Aws::MediaTailor
       def duration_millis: () -> Integer?
       def scheduled_start_time: () -> Time?
       def audience_media: () -> Array[Types::AudienceMedia]?
+      def tags: () -> Hash[String, String]?
     end
     def update_program: (
       ?ad_breaks: Array[

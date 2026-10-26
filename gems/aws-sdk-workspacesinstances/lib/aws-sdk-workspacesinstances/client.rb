@@ -29,6 +29,7 @@ require 'aws-sdk-core/plugins/retry_errors'
 require 'aws-sdk-core/plugins/stub_responses'
 require 'aws-sdk-core/plugins/regional_endpoints'
 require 'aws-sdk-core/plugins/sigv4'
+require 'smithy-client/rpc_v2_cbor'
 require 'aws-sdk-core/json_rpc'
 
 Aws::Core::Plugins::GlobalConfiguration.add_identifier(:workspacesinstances)
@@ -123,7 +124,7 @@ module Aws::WorkspacesInstances
     #  at ~/.aws/config and ~/.aws/credentials, respectively.  When not specified, 'default' is used.
     # @option options [Symbol, Object] :protocol
     #  The protocol used for request serialization and response deserialization. Defaults to the service default protocol. May be a Symbol naming a supported protocol, or a custom object implementing the protocol interface.
-    #  Supported protocols: +:json_rpc+ (defaults to +:json_rpc+).
+    #  Supported protocols: +:rpc_v2_cbor+, +:json_rpc+ (defaults to +:rpc_v2_cbor+).
     # @option options [Boolean] :raise_response_errors (true)
     #  When `true`, response errors are raised. When `false`, the error is placed on the
     #  output in the {Smithy::Client::Response#error error accessor}.
@@ -144,18 +145,18 @@ module Aws::WorkspacesInstances
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -300,6 +301,8 @@ module Aws::WorkspacesInstances
     #   <p>Optional metadata tags for categorizing and managing WorkSpaces Instances.</p>
     # @option params [Types::ManagedInstanceRequest] :managed_instance
     #   <p>Comprehensive configuration settings for the WorkSpaces Instance, including network, compute, and storage parameters.</p>
+    # @option params [Types::BillingConfiguration] :billing_configuration
+    #   <p>Optional billing configuration for the WorkSpace Instance. Allows customers to specify their preferred billing mode when creating a new instance. Defaults to hourly billing if not specified.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     client_token: "ClientToken",
@@ -335,7 +338,8 @@ module Aws::WorkspacesInstances
     #       cpu_options: {
     #         amd_sev_snp: "enabled" # One of: ["enabled", "disabled"],
     #         core_count: 1,
-    #         threads_per_core: 1
+    #         threads_per_core: 1,
+    #         nested_virtualization: "enabled" # One of: ["enabled", "disabled"]
     #       },
     #       credit_specification: {
     #         cpu_credits: "standard" # One of: ["standard", "unlimited"]
@@ -479,6 +483,9 @@ module Aws::WorkspacesInstances
     #         }
     #       ],
     #       user_data: "UserData"
+    #     },
+    #     billing_configuration: {
+    #       billing_mode: "MONTHLY" # One of: ["MONTHLY", "HOURLY"], # required
     #     }
     #   }
     #   options = {}
@@ -513,7 +520,7 @@ module Aws::WorkspacesInstances
       request.send_request(options)
     end
 
-    # <p>Deletes the specified WorkSpace</p>
+    # <p>Deletes the specified WorkSpace</p> <important> <p>Usage of this API will result in deletion of the resource in question.</p> </important>
     # @param [Hash, Types::DeleteWorkspaceInstanceRequest] params
     # @option params [String] :workspace_instance_id
     #   <p>Unique identifier of the WorkSpaces Instance targeted for deletion.</p>
@@ -590,6 +597,9 @@ module Aws::WorkspacesInstances
     #     workspace_instance_id: "WorkspaceInstanceId",
     #     ec2_managed_instance: {
     #       instance_id: "String"
+    #     },
+    #     billing_configuration: {
+    #       billing_mode: "MONTHLY" # One of: ["MONTHLY", "HOURLY"], # required
     #     }
     #   }
     # @return [Types::GetWorkspaceInstanceResponse]
@@ -604,10 +614,17 @@ module Aws::WorkspacesInstances
     #   <p>Maximum number of instance types to return in a single API call. Enables pagination of instance type results.</p>
     # @option params [String] :next_token
     #   <p>Pagination token for retrieving subsequent pages of instance type results.</p>
+    # @option params [Types::InstanceConfigurationFilter] :instance_configuration_filter
+    #   <p>Optional filter to narrow instance type results based on configuration requirements. Only returns instance types that support the specified combination of tenancy, platform type, and billing mode.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     max_results: 1,
-    #     next_token: "NextToken"
+    #     next_token: "NextToken",
+    #     instance_configuration_filter: {
+    #       billing_mode: "MONTHLY" # One of: ["MONTHLY", "HOURLY"], # required
+    #       platform_type: "Windows" # One of: ["Windows", "Windows BYOL", "Linux/UNIX", "Ubuntu Pro Linux", "Red Hat Enterprise Linux", "Red Hat BYOL Linux", "SUSE Linux"], # required
+    #       tenancy: "SHARED" # One of: ["SHARED", "DEDICATED"], # required
+    #     }
     #   }
     #   options = {}
     #   response = client.list_instance_types(params, options)
@@ -616,7 +633,14 @@ module Aws::WorkspacesInstances
     #   {
     #     instance_types: [ # required
     #       {
-    #         instance_type: "InstanceType"
+    #         instance_type: "InstanceType",
+    #         supported_instance_configurations: [
+    #           {
+    #             billing_mode: "MONTHLY" # One of: ["MONTHLY", "HOURLY"],
+    #             platform_type: "Windows" # One of: ["Windows", "Windows BYOL", "Linux/UNIX", "Ubuntu Pro Linux", "Red Hat Enterprise Linux", "Red Hat BYOL Linux", "SUSE Linux"],
+    #             tenancy: "SHARED" # One of: ["SHARED", "DEDICATED"]
+    #           }
+    #         ]
     #       }
     #     ],
     #     next_token: "NextToken"
@@ -875,6 +899,7 @@ module Aws::WorkspacesInstances
       # @api private
       def protocols
         {
+          rpc_v2_cbor: Smithy::Client::RpcV2Cbor,
           json_rpc: Aws::Core::JsonRpc
         }
       end

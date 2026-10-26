@@ -30,7 +30,7 @@ module Aws::GlobalAccelerator
     #            <p>The naming convention for the DNS name for an accelerator is the following: A lowercase letter a,
     #   			followed by a 16-bit random hex string, followed by .awsglobalaccelerator.com. For example:
     #   			a1234567890abcdef.awsglobalaccelerator.com.</p>
-    #            <p>If you have a dual-stack accelerator, you also have a second DNS name, <code>DualStackDnsName</code>, that points to both 
+    #            <p>If you have a dual-stack accelerator, you also have a second DNS name, <code>DualStackDnsName</code>, that points to both
     #    			the A record and the AAAA record for all four static addresses for the accelerator: two IPv4 addresses and two IPv6 addresses.</p>
     #            <p>For more information about the default DNS name, see <a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/dns-addressing-custom-domains.dns-addressing.html">
     #   			Support for DNS addressing in Global Accelerator</a> in the <i>Global Accelerator Developer Guide</i>.</p>
@@ -103,9 +103,9 @@ module Aws::GlobalAccelerator
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A complex type that contains a <code>Timestamp</code> value and <code>Message</code> for changes 
-    # 			that you make to an accelerator in Global Accelerator. Messages stored here provide progress or error information when 
-    # 			you update an accelerator from IPv4 to dual-stack, or from dual-stack to IPv4. Global Accelerator stores a maximum 
+    # <p>A complex type that contains a <code>Timestamp</code> value and <code>Message</code> for changes
+    # 			that you make to an accelerator in Global Accelerator. Messages stored here provide progress or error information when
+    # 			you update an accelerator from IPv4 to dual-stack, or from dual-stack to IPv4. Global Accelerator stores a maximum
     # 			of ten event messages. </p>
     # @!attribute message
     #   <p>A string that contains an <code>Event</code> message describing changes or errors
@@ -217,10 +217,10 @@ module Aws::GlobalAccelerator
     end
 
     # @!attribute cidr
-    #   <p>The address range, in CIDR notation. This must be the exact range that you provisioned. 
+    #   <p>The address range, in CIDR notation. This must be the exact range that you provisioned.
     #   			You can't advertise only a portion of the provisioned range.</p>
     #            <p> For more information, see
-    #   			<a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html">Bring your own IP addresses (BYOIP)</a> in 
+    #   			<a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html">Bring your own IP addresses (BYOIP)</a> in
     #   			the Global Accelerator Developer Guide.</p>
     #   @return [String]
     class AdvertiseByoipCidrRequest < Struct.new(
@@ -249,7 +249,7 @@ module Aws::GlobalAccelerator
     #   <p>An ID for the endpoint. For custom routing accelerators, this is the virtual private cloud (VPC) subnet ID.</p>
     #   @return [String]
     # @!attribute destination_addresses
-    #   <p>A list of specific Amazon EC2 instance IP addresses (destination addresses) in a subnet that you want to allow to receive 
+    #   <p>A list of specific Amazon EC2 instance IP addresses (destination addresses) in a subnet that you want to allow to receive
     #   			traffic. The IP addresses must be a subset of the IP addresses that you specified for the endpoint group.</p>
     #            <p>
     #               <code>DestinationAddresses</code> is required if <code>AllowAllTrafficToEndpoint</code> is <code>FALSE</code> or is
@@ -259,9 +259,9 @@ module Aws::GlobalAccelerator
     #   <p>A list of specific Amazon EC2 instance ports (destination ports) that you want to allow to receive traffic.</p>
     #   @return [Array<Integer>]
     # @!attribute allow_all_traffic_to_endpoint
-    #   <p>Indicates whether all destination IP addresses and ports for a specified VPC subnet endpoint can receive traffic 
+    #   <p>Indicates whether all destination IP addresses and ports for a specified VPC subnet endpoint can receive traffic
     #   			from a custom routing accelerator. The value is TRUE or FALSE. </p>
-    #            <p>When set to TRUE, <i>all</i> destinations in the custom routing VPC subnet can receive traffic. Note 
+    #            <p>When set to TRUE, <i>all</i> destinations in the custom routing VPC subnet can receive traffic. Note
     #   			that you cannot specify destination IP addresses and ports when the value is set to TRUE.</p>
     #            <p>When set to FALSE (or not specified), you <i>must</i> specify a list of destination IP addresses that are allowed
     #   			to receive traffic. A list of ports is optional. If you don't specify a list of ports, the ports that can accept traffic is
@@ -305,7 +305,7 @@ module Aws::GlobalAccelerator
     end
 
     # <p>A cross-account attachment in Global Accelerator. A cross-account attachment
-    # 			specifies the <i>principals</i> who have permission to work with <i>resources</i> 
+    # 			specifies the <i>principals</i> who have permission to work with <i>resources</i>
     # 			in your account, which you also list in the attachment.</p>
     # @!attribute attachment_arn
     #   <p>The Amazon Resource Name (ARN) of the cross-account attachment.</p>
@@ -349,50 +349,50 @@ module Aws::GlobalAccelerator
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Information about an IP address range that is provisioned for use with your Amazon Web Services resources through 
+    # <p>Information about an IP address range that is provisioned for use with your Amazon Web Services resources through
     # 			bring your own IP address (BYOIP).</p>
     #          <p>The following describes each BYOIP <code>State</code> that your IP address range can be in.</p>
     #          <ul>
     #             <li>
     #                <p>
-    #                   <b>PENDING_PROVISIONING</b> — 
-    # 				You’ve submitted a request to provision an IP address range but it is not yet provisioned with 
+    #                   <b>PENDING_PROVISIONING</b> —
+    # 				You’ve submitted a request to provision an IP address range but it is not yet provisioned with
     # 			    Global Accelerator.</p>
     #             </li>
     #             <li>
     #                <p>
-    #                   <b>READY</b> — The address range is provisioned 
+    #                   <b>READY</b> — The address range is provisioned
     # 			    with Global Accelerator and can be advertised.</p>
     #             </li>
     #             <li>
     #                <p>
-    #                   <b>PENDING_ADVERTISING</b> — You’ve submitted a 
+    #                   <b>PENDING_ADVERTISING</b> — You’ve submitted a
     # 			    request for Global Accelerator to advertise an address range but it is not yet being advertised.</p>
     #             </li>
     #             <li>
     #                <p>
-    #                   <b>ADVERTISING</b> — The address range is 
+    #                   <b>ADVERTISING</b> — The address range is
     # 			    being advertised by Global Accelerator.</p>
     #             </li>
     #             <li>
     #                <p>
-    #                   <b>PENDING_WITHDRAWING</b> — You’ve submitted 
-    # 				a request to withdraw an address range from being advertised but it is still being advertised 
+    #                   <b>PENDING_WITHDRAWING</b> — You’ve submitted
+    # 				a request to withdraw an address range from being advertised but it is still being advertised
     # 				by Global Accelerator.</p>
     #             </li>
     #             <li>
     #                <p>
-    #                   <b>PENDING_DEPROVISIONING</b> — You’ve submitted a 
+    #                   <b>PENDING_DEPROVISIONING</b> — You’ve submitted a
     # 			    request to deprovision an address range from Global Accelerator but it is still provisioned.</p>
     #             </li>
     #             <li>
     #                <p>
-    #                   <b>DEPROVISIONED</b> — The address range is deprovisioned 
+    #                   <b>DEPROVISIONED</b> — The address range is deprovisioned
     # 			    from Global Accelerator.</p>
     #             </li>
     #             <li>
     #                <p>
-    #                   <b>FAILED_PROVISION </b> — The request to 
+    #                   <b>FAILED_PROVISION </b> — The request to
     # 			    provision the address range from Global Accelerator was not successful. Please make sure that
     # 				you provide all of the correct information, and try again. If the request fails
     # 				a second time, contact Amazon Web Services support.</p>
@@ -406,14 +406,14 @@ module Aws::GlobalAccelerator
     #             </li>
     #             <li>
     #                <p>
-    #                   <b>FAILED_WITHDRAW</b> — The request to withdraw 
+    #                   <b>FAILED_WITHDRAW</b> — The request to withdraw
     # 			    the address range from advertising by Global Accelerator was not successful. Please make sure that
     # 				you provide all of the correct information, and try again. If the request fails
     # 				a second time, contact Amazon Web Services support.</p>
     #             </li>
     #             <li>
     #                <p>
-    #                   <b>FAILED_DEPROVISION </b> — The request to 
+    #                   <b>FAILED_DEPROVISION </b> — The request to
     # 			    deprovision the address range from Global Accelerator was not successful. Please make sure that
     # 				you provide all of the correct information, and try again. If the request fails
     # 				a second time, contact Amazon Web Services support.</p>
@@ -422,7 +422,7 @@ module Aws::GlobalAccelerator
     # @!attribute cidr
     #   <p>The address range, in CIDR notation.</p>
     #            <p> For more information, see
-    #   			<a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html">Bring your own IP addresses (BYOIP)</a> in 
+    #   			<a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html">Bring your own IP addresses (BYOIP)</a> in
     #   			the Global Accelerator Developer Guide.</p>
     #   @return [String]
     # @!attribute state
@@ -442,15 +442,15 @@ module Aws::GlobalAccelerator
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A complex type that contains a <code>Message</code> and a <code>Timestamp</code> value for changes 
-    # 			that you make in the status of an IP address range that you bring to Global Accelerator through bring your own IP 
+    # <p>A complex type that contains a <code>Message</code> and a <code>Timestamp</code> value for changes
+    # 			that you make in the status of an IP address range that you bring to Global Accelerator through bring your own IP
     # 			address (BYOIP).</p>
     # @!attribute message
-    #   <p>A string that contains an <code>Event</code> message describing changes that you make in the status 
+    #   <p>A string that contains an <code>Event</code> message describing changes that you make in the status
     #   			of an IP address range that you bring to Global Accelerator through bring your own IP address (BYOIP).</p>
     #   @return [String]
     # @!attribute timestamp
-    #   <p>A timestamp for when you make a status change for an IP address range that you bring to Global Accelerator through 
+    #   <p>A timestamp for when you make a status change for an IP address range that you bring to Global Accelerator through
     #   			bring your own IP address (BYOIP).</p>
     #   @return [Time]
     class ByoipCidrEvent < Struct.new(
@@ -473,9 +473,9 @@ module Aws::GlobalAccelerator
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Provides authorization for Amazon to bring a specific IP address range to a specific Amazon Web Services 
+    # <p>Provides authorization for Amazon to bring a specific IP address range to a specific Amazon Web Services
     # 			account using bring your own IP addresses (BYOIP). </p>
-    #          <p>For more information, see <a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html">Bring your own 
+    #          <p>For more information, see <a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html">Bring your own
     # 		    IP addresses (BYOIP)</a> in the <i>Global Accelerator Developer Guide</i>.</p>
     # @!attribute message
     #   <p>The plain-text authorization message for the prefix and account.</p>
@@ -504,24 +504,24 @@ module Aws::GlobalAccelerator
     end
 
     # @!attribute name
-    #   <p>The name of the accelerator. The name can have a maximum of 64 characters, must contain only alphanumeric characters, 
+    #   <p>The name of the accelerator. The name can have a maximum of 64 characters, must contain only alphanumeric characters,
     #   			periods (.), or hyphens (-), and must not begin or end with a hyphen or period.</p>
     #   @return [String]
     # @!attribute ip_address_type
     #   <p>The IP address type that an accelerator supports. For a standard accelerator, the value can be IPV4 or DUAL_STACK.</p>
     #   @return [String]
     # @!attribute ip_addresses
-    #   <p>Optionally, if you've added your own IP address pool to Global Accelerator (BYOIP), you can choose an IPv4 address 
+    #   <p>Optionally, if you've added your own IP address pool to Global Accelerator (BYOIP), you can choose an IPv4 address
     #   			from your own pool to use for the accelerator's static IPv4 address when you create an accelerator. </p>
-    #            <p>After you bring an address range to Amazon Web Services, it appears in your account as an address pool. 
-    #   	    	When you create an accelerator, you can assign one IPv4 address from your range to it. Global Accelerator assigns 
-    #   	    	you a second static IPv4 address from an Amazon IP address range. If you bring two IPv4 address ranges 
-    #   	    	to Amazon Web Services, you can assign one IPv4 address from each range to your accelerator. This restriction is 
+    #            <p>After you bring an address range to Amazon Web Services, it appears in your account as an address pool.
+    #   	    	When you create an accelerator, you can assign one IPv4 address from your range to it. Global Accelerator assigns
+    #   	    	you a second static IPv4 address from an Amazon IP address range. If you bring two IPv4 address ranges
+    #   	    	to Amazon Web Services, you can assign one IPv4 address from each range to your accelerator. This restriction is
     #   			because Global Accelerator assigns each address range to a different network zone, for high availability.</p>
     #            <p>You can specify one or two addresses, separated by a space. Do not include the /32 suffix.</p>
-    #            <p>Note that you can't update IP addresses for an existing accelerator. To change them, you must create a new 
+    #            <p>Note that you can't update IP addresses for an existing accelerator. To change them, you must create a new
     #   			accelerator with the new addresses.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html">Bring 
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html">Bring
     #   		    your own IP addresses (BYOIP)</a> in the <i>Global Accelerator Developer Guide</i>.</p>
     #   @return [Array<String>]
     # @!attribute enabled
@@ -606,24 +606,24 @@ module Aws::GlobalAccelerator
     end
 
     # @!attribute name
-    #   <p>The name of a custom routing accelerator. The name can have a maximum of 64 characters, must contain 
+    #   <p>The name of a custom routing accelerator. The name can have a maximum of 64 characters, must contain
     #   		only alphanumeric characters or hyphens (-), and must not begin or end with a hyphen.</p>
     #   @return [String]
     # @!attribute ip_address_type
     #   <p>The IP address type that an accelerator supports. For a custom routing accelerator, the value must be IPV4.</p>
     #   @return [String]
     # @!attribute ip_addresses
-    #   <p>Optionally, if you've added your own IP address pool to Global Accelerator (BYOIP), you can choose an IPv4 address 
+    #   <p>Optionally, if you've added your own IP address pool to Global Accelerator (BYOIP), you can choose an IPv4 address
     #   			from your own pool to use for the accelerator's static IPv4 address when you create an accelerator. </p>
-    #            <p>After you bring an address range to Amazon Web Services, it appears in your account as an address pool. 
-    #   			When you create an accelerator, you can assign one IPv4 address from your range to it. Global Accelerator assigns 
-    #   			you a second static IPv4 address from an Amazon IP address range. If you bring two IPv4 address ranges 
-    #   			to Amazon Web Services, you can assign one IPv4 address from each range to your accelerator. This restriction is 
+    #            <p>After you bring an address range to Amazon Web Services, it appears in your account as an address pool.
+    #   			When you create an accelerator, you can assign one IPv4 address from your range to it. Global Accelerator assigns
+    #   			you a second static IPv4 address from an Amazon IP address range. If you bring two IPv4 address ranges
+    #   			to Amazon Web Services, you can assign one IPv4 address from each range to your accelerator. This restriction is
     #   			because Global Accelerator assigns each address range to a different network zone, for high availability.</p>
     #            <p>You can specify one or two addresses, separated by a space. Do not include the /32 suffix.</p>
-    #            <p>Note that you can't update IP addresses for an existing accelerator. To change them, you must create a new 
+    #            <p>Note that you can't update IP addresses for an existing accelerator. To change them, you must create a new
     #   			accelerator with the new addresses.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html">Bring 
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html">Bring
     #   			your own IP addresses (BYOIP)</a> in the <i>Global Accelerator Developer Guide</i>.</p>
     #   @return [Array<String>]
     # @!attribute enabled
@@ -671,7 +671,7 @@ module Aws::GlobalAccelerator
     #   		specific Region.</p>
     #   @return [String]
     # @!attribute destination_configurations
-    #   <p>Sets the port range and protocol for all endpoints (virtual private cloud subnets) in a custom routing endpoint group to accept 
+    #   <p>Sets the port range and protocol for all endpoints (virtual private cloud subnets) in a custom routing endpoint group to accept
     #   		client traffic on.</p>
     #   @return [Array<Types::CustomRoutingDestinationConfiguration>]
     # @!attribute idempotency_token
@@ -705,7 +705,7 @@ module Aws::GlobalAccelerator
     #   @return [String]
     # @!attribute port_ranges
     #   <p>The port range to support for connections from clients to your accelerator.</p>
-    #            <p>Separately, you set port ranges for endpoints. For more information, see <a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/about-custom-routing-endpoints.html">About 
+    #            <p>Separately, you set port ranges for endpoints. For more information, see <a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/about-custom-routing-endpoints.html">About
     #   		endpoints for custom routing accelerators</a>.</p>
     #   @return [Array<Types::PortRange>]
     # @!attribute idempotency_token
@@ -776,8 +776,8 @@ module Aws::GlobalAccelerator
     #   @return [String]
     # @!attribute port_overrides
     #   <p>Override specific listener ports used to route traffic to endpoints that are part of this endpoint group.
-    #   			For example, you can create a port override in which the listener 
-    #   			receives user traffic on ports 80 and 443, but your accelerator routes that traffic to ports 1080 
+    #   			For example, you can create a port override in which the listener
+    #   			receives user traffic on ports 80 and 443, but your accelerator routes that traffic to ports 1080
     #   			and 1443, respectively, on the endpoints.</p>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/about-endpoint-groups-port-override.html">
     #   			Overriding listener ports</a> in the <i>Global Accelerator Developer Guide</i>.</p>
@@ -861,8 +861,8 @@ module Aws::GlobalAccelerator
       include ::Smithy::Schema::Structure
     end
 
-    # <p>An endpoint (Amazon Web Services resource) or an IP address range, in CIDR format, that is 
-    # 			listed in a cross-account attachment. A cross-account resource can be added to an accelerator by 
+    # <p>An endpoint (Amazon Web Services resource) or an IP address range, in CIDR format, that is
+    # 			listed in a cross-account attachment. A cross-account resource can be added to an accelerator by
     # 			specified principals, which are also listed in the attachment.</p>
     #          <p>For more information, see <a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/cross-account-resources.html">
     # 			Working with cross-account attachments and resources in Global Accelerator</a> in the <i>
@@ -873,10 +873,10 @@ module Aws::GlobalAccelerator
     #   @return [String]
     # @!attribute cidr
     #   <p>An IP address range, in CIDR format, that is specified as an Amazon Web Services resource. The address must
-    #   			be provisioned and advertised in Global Accelerator by following the bring your own IP address (BYOIP) process 
+    #   			be provisioned and advertised in Global Accelerator by following the bring your own IP address (BYOIP) process
     #   			for Global Accelerator.</p>
     #            <p> For more information, see
-    #   			<a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html">Bring your own IP addresses (BYOIP)</a> in 
+    #   			<a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html">Bring your own IP addresses (BYOIP)</a> in
     #   			the Global Accelerator Developer Guide.</p>
     #   @return [String]
     # @!attribute attachment_arn
@@ -916,7 +916,7 @@ module Aws::GlobalAccelerator
     #            <p>The naming convention for the DNS name is the following: A lowercase letter a,
     #   			followed by a 16-bit random hex string, followed by .awsglobalaccelerator.com. For example:
     #   			a1234567890abcdef.awsglobalaccelerator.com.</p>
-    #            <p>If you have a dual-stack accelerator, you also have a second DNS name, <code>DualStackDnsName</code>, that points to both the A record 
+    #            <p>If you have a dual-stack accelerator, you also have a second DNS name, <code>DualStackDnsName</code>, that points to both the A record
     #   			and the AAAA record for all four static addresses for the accelerator: two IPv4 addresses and two IPv6 addresses.</p>
     #            <p>For more information about the default DNS name, see <a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/dns-addressing-custom-domains.dns-addressing.html">
     #   			Support for DNS addressing in Global Accelerator</a> in the <i>Global Accelerator Developer Guide</i>.</p>
@@ -961,8 +961,7 @@ module Aws::GlobalAccelerator
     # @!attribute flow_logs_s3_prefix
     #   <p>The prefix for the location in the Amazon S3 bucket for the flow logs. Attribute is required if
     #   			<code>FlowLogsEnabled</code> is <code>true</code>.</p>
-    #            <p>If you don’t specify a prefix, the flow logs are stored in the
-    #   			root of the bucket. If you specify slash (/) for the S3 bucket prefix, the log file bucket folder structure will include a double slash (//), like the following:</p>
+    #            <p>If you specify slash (/) for the S3 bucket prefix, the log file bucket folder structure will include a double slash (//), like the following:</p>
     #            <p>DOC-EXAMPLE-BUCKET//AWSLogs/aws_account_id</p>
     #   @return [String]
     class CustomRoutingAcceleratorAttributes < Struct.new(
@@ -1035,7 +1034,7 @@ module Aws::GlobalAccelerator
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A complex type for an endpoint for a custom routing accelerator. Each endpoint group can include one or more endpoints, 
+    # <p>A complex type for an endpoint for a custom routing accelerator. Each endpoint group can include one or more endpoints,
     # 			which are virtual private cloud (VPC) subnets.</p>
     # @!attribute endpoint_id
     #   <p>An ID for the endpoint. For custom routing accelerators, this is the virtual private cloud (VPC)
@@ -1082,7 +1081,7 @@ module Aws::GlobalAccelerator
     #   @return [String]
     # @!attribute port_ranges
     #   <p>The port range to support for connections from clients to your accelerator.</p>
-    #            <p>Separately, you set port ranges for endpoints. For more information, see <a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/about-custom-routing-endpoints.html">About 
+    #            <p>Separately, you set port ranges for endpoints. For more information, see <a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/about-custom-routing-endpoints.html">About
     #   				endpoints for custom routing accelerators</a>.</p>
     #   @return [Array<Types::PortRange>]
     class CustomRoutingListener < Struct.new(
@@ -1178,18 +1177,18 @@ module Aws::GlobalAccelerator
     #   <p>An ID for the endpoint. For custom routing accelerators, this is the virtual private cloud (VPC) subnet ID.</p>
     #   @return [String]
     # @!attribute destination_addresses
-    #   <p>A list of specific Amazon EC2 instance IP addresses (destination addresses) in a subnet that you want to prevent from receiving 
-    #   			traffic. The IP addresses must be a subset of the IP addresses allowed for the VPC subnet associated with the 
+    #   <p>A list of specific Amazon EC2 instance IP addresses (destination addresses) in a subnet that you want to prevent from receiving
+    #   			traffic. The IP addresses must be a subset of the IP addresses allowed for the VPC subnet associated with the
     #   			endpoint group.</p>
     #   @return [Array<String>]
     # @!attribute destination_ports
-    #   <p>A list of specific Amazon EC2 instance ports (destination ports) in a subnet endpoint that you want to prevent from 
+    #   <p>A list of specific Amazon EC2 instance ports (destination ports) in a subnet endpoint that you want to prevent from
     #   			receiving traffic.</p>
     #   @return [Array<Integer>]
     # @!attribute deny_all_traffic_to_endpoint
-    #   <p>Indicates whether all destination IP addresses and ports for a specified VPC subnet endpoint <i>cannot</i> 
+    #   <p>Indicates whether all destination IP addresses and ports for a specified VPC subnet endpoint <i>cannot</i>
     #   			receive traffic from a custom routing accelerator. The value is TRUE or FALSE. </p>
-    #            <p>When set to TRUE, <i>no</i> destinations in the custom routing VPC subnet can receive traffic. Note 
+    #            <p>When set to TRUE, <i>no</i> destinations in the custom routing VPC subnet can receive traffic. Note
     #   			that you cannot specify destination IP addresses and ports when the value is set to TRUE.</p>
     #            <p>When set to FALSE (or not specified), you <i>must</i> specify a list of destination IP addresses that cannot receive
     #   			traffic. A list of ports is optional. If you don't specify a list of ports, the ports that can accept traffic is
@@ -1209,10 +1208,10 @@ module Aws::GlobalAccelerator
     end
 
     # @!attribute cidr
-    #   <p>The address range, in CIDR notation. The prefix must be the same prefix that you specified 
+    #   <p>The address range, in CIDR notation. The prefix must be the same prefix that you specified
     #   			when you provisioned the address range.</p>
     #            <p> For more information, see
-    #   			<a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html">Bring your own IP addresses (BYOIP)</a> in 
+    #   			<a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html">Bring your own IP addresses (BYOIP)</a> in
     #   			the Global Accelerator Developer Guide.</p>
     #   @return [String]
     class DeprovisionByoipCidrRequest < Struct.new(
@@ -1434,7 +1433,7 @@ module Aws::GlobalAccelerator
 
     # <p>The port mappings for a specified endpoint IP address (destination).</p>
     # @!attribute accelerator_arn
-    #   <p>The Amazon Resource Name (ARN) of the custom routing accelerator 
+    #   <p>The Amazon Resource Name (ARN) of the custom routing accelerator
     #   			that you have port mappings for.</p>
     #   @return [String]
     # @!attribute accelerator_socket_addresses
@@ -1490,7 +1489,7 @@ module Aws::GlobalAccelerator
     # @!attribute endpoint_id
     #   <p>An ID for the endpoint. If the endpoint is a Network Load Balancer or Application Load Balancer, this is the Amazon
     #   			Resource Name (ARN) of the resource. If the endpoint is an Elastic IP address, this is the Elastic IP address
-    #   			allocation ID. For Amazon EC2 instances, this is the EC2 instance ID. A resource must be valid and active 
+    #   			allocation ID. For Amazon EC2 instances, this is the EC2 instance ID. A resource must be valid and active
     #   			when you add it as an endpoint.</p>
     #            <p>For cross-account endpoints, this must be the ARN of the resource.</p>
     #   @return [String]
@@ -1502,11 +1501,11 @@ module Aws::GlobalAccelerator
     #   	        <i>Global Accelerator Developer Guide</i>.</p>
     #   @return [Integer]
     # @!attribute client_ip_preservation_enabled
-    #   <p>Indicates whether client IP address preservation is enabled for an endpoint. 
+    #   <p>Indicates whether client IP address preservation is enabled for an endpoint.
     #   			The value is true or false. The default value is true for Application Load Balancer endpoints. </p>
-    #            <p>If the value is set to true, the client's IP address is preserved in the <code>X-Forwarded-For</code> request header as 
+    #            <p>If the value is set to true, the client's IP address is preserved in the <code>X-Forwarded-For</code> request header as
     #   			traffic travels to applications on the endpoint fronted by the accelerator.</p>
-    #            <p>Client IP address preservation is supported, in specific Amazon Web Services Regions, for endpoints that are Application Load 
+    #            <p>Client IP address preservation is supported, in specific Amazon Web Services Regions, for endpoints that are Application Load
     #   			Balancers, Amazon EC2 instances, and Network Load Balancers with security groups. IMPORTANT: You cannot use client IP address preservation
     #   			with Network Load Balancers with TLS listeners.</p>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/preserve-client-ip-address.html">
@@ -1549,11 +1548,11 @@ module Aws::GlobalAccelerator
     #   <p>Returns a null result.</p>
     #   @return [String]
     # @!attribute client_ip_preservation_enabled
-    #   <p>Indicates whether client IP address preservation is enabled for an endpoint. 
+    #   <p>Indicates whether client IP address preservation is enabled for an endpoint.
     #   			The value is true or false. The default value is true for Application Load Balancers endpoints. </p>
-    #            <p>If the value is set to true, the client's IP address is preserved in the <code>X-Forwarded-For</code> request header as 
+    #            <p>If the value is set to true, the client's IP address is preserved in the <code>X-Forwarded-For</code> request header as
     #   			traffic travels to applications on the endpoint fronted by the accelerator.</p>
-    #            <p>Client IP address preservation is supported, in specific Amazon Web Services Regions, for endpoints that are Application Load 
+    #            <p>Client IP address preservation is supported, in specific Amazon Web Services Regions, for endpoints that are Application Load
     #   			Balancers, Amazon EC2 instances, and Network Load Balancers with security groups. IMPORTANT: You cannot use client IP address preservation
     #   			with Network Load Balancers with TLS listeners.</p>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/preserve-client-ip-address.html">
@@ -1610,9 +1609,9 @@ module Aws::GlobalAccelerator
     #   			unhealthy endpoint to healthy. The default value is 3.</p>
     #   @return [Integer]
     # @!attribute port_overrides
-    #   <p>Allows you to override the destination ports used to route traffic to an endpoint. 
+    #   <p>Allows you to override the destination ports used to route traffic to an endpoint.
     #   			Using a port override lets you map a list of external destination ports (that your
-    #   			users send traffic to) to a list of internal destination ports that you want an application 
+    #   			users send traffic to) to a list of internal destination ports that you want an application
     #   			endpoint to receive traffic on. </p>
     #   @return [Array<Types::PortOverride>]
     class EndpointGroup < Struct.new(
@@ -1663,7 +1662,7 @@ module Aws::GlobalAccelerator
     #   @return [String]
     # @!attribute client_ip_preservation_enabled
     #   <p>Indicates whether client IP address preservation is enabled for an endpoint. The value is true or false. </p>
-    #            <p>If the value is set to true, the client's IP address is preserved in the <code>X-Forwarded-For</code> request header as 
+    #            <p>If the value is set to true, the client's IP address is preserved in the <code>X-Forwarded-For</code> request header as
     #   			traffic travels to applications on the endpoint fronted by the accelerator.</p>
     #   @return [Boolean]
     class EndpointIdentifier < Struct.new(
@@ -1742,6 +1741,22 @@ module Aws::GlobalAccelerator
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Detailed information for the IP addresses assigned to the Global Accelerator.</p>
+    # @!attribute ip_address
+    #   <p>The static IP address.</p>
+    #   @return [String]
+    # @!attribute network_zone
+    #   <p>The network zone that the specified IP address is located on.</p>
+    #   @return [String]
+    class IpAddressDetail < Struct.new(
+      nil,
+      :ip_address,
+      :network_zone,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>A complex type for the set of IP addresses for an accelerator.</p>
     # @!attribute ip_family
     #   <p>IpFamily is deprecated and has been replaced by IpAddressFamily.</p>
@@ -1754,11 +1769,16 @@ module Aws::GlobalAccelerator
     # @!attribute ip_address_family
     #   <p>The types of IP addresses included in this IP set. </p>
     #   @return [String]
+    # @!attribute ip_address_details
+    #   <p>The array of IP addresses in the IP address set, with detailed information about the IP addresses.
+    #   		An IP address set can have a maximum of two IP addresses.</p>
+    #   @return [Array<Types::IpAddressDetail>]
     class IpSet < Struct.new(
       nil,
       :ip_family,
       :ip_addresses,
       :ip_address_family,
+      :ip_address_details,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2271,8 +2291,8 @@ module Aws::GlobalAccelerator
     end
 
     # <p>Override specific listener ports used to route traffic to endpoints that are part of an endpoint group.
-    # 			For example, you can create a port override in which the listener 
-    # 			receives user traffic on ports 80 and 443, but your accelerator routes that traffic to ports 1080 
+    # 			For example, you can create a port override in which the listener
+    # 			receives user traffic on ports 80 and 443, but your accelerator routes that traffic to ports 1080
     # 			and 1443, respectively, on the endpoints.</p>
     #          <p>For more information, see <a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/about-endpoint-groups-port-override.html">
     # 		    Overriding listener ports</a> in the <i>Global Accelerator Developer Guide</i>.</p>
@@ -2311,10 +2331,10 @@ module Aws::GlobalAccelerator
 
     # @!attribute cidr
     #   <p>The public IPv4 address range, in CIDR notation. The most specific IP prefix that you can
-    #   			specify is /24. The address range cannot overlap with another address range that you've brought 
+    #   			specify is /24. The address range cannot overlap with another address range that you've brought
     #   			to this Amazon Web Services Region or another Region.</p>
     #            <p> For more information, see
-    #   			<a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html">Bring your own IP addresses (BYOIP)</a> in 
+    #   			<a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html">Bring your own IP addresses (BYOIP)</a> in
     #   			the Global Accelerator Developer Guide.</p>
     #   @return [String]
     # @!attribute cidr_authorization_context
@@ -2373,19 +2393,19 @@ module Aws::GlobalAccelerator
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A resource is one of the following: the ARN for an Amazon Web Services resource that is supported by 
+    # <p>A resource is one of the following: the ARN for an Amazon Web Services resource that is supported by
     # 			Global Accelerator to be added as an endpoint, or a CIDR range that specifies a bring your own IP (BYOIP) address pool.</p>
     # @!attribute endpoint_id
     #   <p>The endpoint ID for the endpoint that is specified as a Amazon Web Services resource. </p>
-    #            <p>An endpoint ID for the cross-account feature is the ARN of an Amazon Web Services resource, such as a 
+    #            <p>An endpoint ID for the cross-account feature is the ARN of an Amazon Web Services resource, such as a
     #   			Network Load Balancer, that Global Accelerator supports as an endpoint for an accelerator.</p>
     #   @return [String]
     # @!attribute cidr
     #   <p>An IP address range, in CIDR format, that is specified as resource. The address must
-    #   			be provisioned and advertised in Global Accelerator by following the bring your own IP address (BYOIP) process 
+    #   			be provisioned and advertised in Global Accelerator by following the bring your own IP address (BYOIP) process
     #   			for Global Accelerator</p>
     #            <p> For more information, see
-    #   			<a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html">Bring your own IP addresses (BYOIP)</a> in 
+    #   			<a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html">Bring your own IP addresses (BYOIP)</a> in
     #   			the Global Accelerator Developer Guide.</p>
     #   @return [String]
     # @!attribute region
@@ -2510,7 +2530,7 @@ module Aws::GlobalAccelerator
     # @!attribute flow_logs_s3_prefix
     #   <p>Update the prefix for the location in the Amazon S3 bucket for the flow logs. Attribute is required if
     #   				<code>FlowLogsEnabled</code> is <code>true</code>. </p>
-    #            <p>If you specify slash (/) for the S3 bucket prefix, the log file bucket folder structure will include a double slash (//), 
+    #            <p>If you specify slash (/) for the S3 bucket prefix, the log file bucket folder structure will include a double slash (//),
     #   			like the following:</p>
     #            <p>s3-bucket_name//AWSLogs/aws_account_id</p>
     #   @return [String]
@@ -2540,7 +2560,7 @@ module Aws::GlobalAccelerator
     #   <p>The Amazon Resource Name (ARN) of the accelerator to update.</p>
     #   @return [String]
     # @!attribute name
-    #   <p>The name of the accelerator. The name can have a maximum of 64 characters, must contain only alphanumeric characters, 
+    #   <p>The name of the accelerator. The name can have a maximum of 64 characters, must contain only alphanumeric characters,
     #   			periods (.), or hyphens (-), and must not begin or end with a hyphen or period.</p>
     #   @return [String]
     # @!attribute ip_address_type
@@ -2645,8 +2665,7 @@ module Aws::GlobalAccelerator
     # @!attribute flow_logs_s3_prefix
     #   <p>Update the prefix for the location in the Amazon S3 bucket for the flow logs. Attribute is required if
     #   		<code>FlowLogsEnabled</code> is <code>true</code>. </p>
-    #            <p>If you don’t specify a prefix, the flow logs are stored in the
-    #   		root of the bucket. If you specify slash (/) for the S3 bucket prefix, the log file bucket folder structure will include a double slash (//), like the following:</p>
+    #            <p>If you specify slash (/) for the S3 bucket prefix, the log file bucket folder structure will include a double slash (//), like the following:</p>
     #            <p>DOC-EXAMPLE-BUCKET//AWSLogs/aws_account_id</p>
     #   @return [String]
     class UpdateCustomRoutingAcceleratorAttributesRequest < Struct.new(
@@ -2675,7 +2694,7 @@ module Aws::GlobalAccelerator
     #   <p>The Amazon Resource Name (ARN) of the accelerator to update.</p>
     #   @return [String]
     # @!attribute name
-    #   <p>The name of the accelerator. The name can have a maximum of 64 characters, must contain only alphanumeric characters, 
+    #   <p>The name of the accelerator. The name can have a maximum of 64 characters, must contain only alphanumeric characters,
     #   		periods (.), or hyphens (-), and must not begin or end with a hyphen or period.</p>
     #   @return [String]
     # @!attribute ip_address_type
@@ -2717,7 +2736,7 @@ module Aws::GlobalAccelerator
     # @!attribute port_ranges
     #   <p>The updated port range to support for connections from clients to your accelerator. If you remove ports that are
     #   	currently being used by a subnet endpoint, the call fails.</p>
-    #            <p>Separately, you set port ranges for endpoints. For more information, see <a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/about-custom-routing-endpoints.html">About 
+    #            <p>Separately, you set port ranges for endpoints. For more information, see <a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/about-custom-routing-endpoints.html">About
     #   		endpoints for custom routing accelerators</a>.</p>
     #   @return [Array<Types::PortRange>]
     class UpdateCustomRoutingListenerRequest < Struct.new(
@@ -2774,9 +2793,9 @@ module Aws::GlobalAccelerator
     #   			unhealthy endpoint to healthy. The default value is 3.</p>
     #   @return [Integer]
     # @!attribute port_overrides
-    #   <p>Override specific listener ports used to route traffic to endpoints that are part of this endpoint group. 
-    #   			For example, you can create a port override in which the listener 
-    #   			receives user traffic on ports 80 and 443, but your accelerator routes that traffic to ports 1080 
+    #   <p>Override specific listener ports used to route traffic to endpoints that are part of this endpoint group.
+    #   			For example, you can create a port override in which the listener
+    #   			receives user traffic on ports 80 and 443, but your accelerator routes that traffic to ports 1080
     #   			and 1443, respectively, on the endpoints.</p>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/about-endpoint-groups-port-override.html">
     #   			Overriding listener ports</a> in the <i>Global Accelerator Developer Guide</i>.</p>
@@ -2856,7 +2875,7 @@ module Aws::GlobalAccelerator
     # @!attribute cidr
     #   <p>The address range, in CIDR notation.</p>
     #            <p> For more information, see
-    #   			<a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html">Bring your own IP addresses (BYOIP)</a> in 
+    #   			<a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html">Bring your own IP addresses (BYOIP)</a> in
     #   			the Global Accelerator Developer Guide.</p>
     #   @return [String]
     class WithdrawByoipCidrRequest < Struct.new(

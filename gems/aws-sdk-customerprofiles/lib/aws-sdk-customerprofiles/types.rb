@@ -280,6 +280,94 @@ module Aws::CustomerProfiles
       end
     end
 
+    # @!attribute domain_name
+    #   <p>The unique name of the domain.</p>
+    #   @return [String]
+    # @!attribute destination_arn
+    #   <p>The Amazon Resource Name (ARN) of the Amazon Kinesis data stream to deliver segment membership events to.
+    #            For example, <code>arn:aws:kinesis:region:account-id:stream/stream-name</code>. </p>
+    #   @return [String]
+    # @!attribute destination_role_arn
+    #   <p>The Amazon Resource Name (ARN) of the IAM role that allows Customer Profiles service principal to assume the role for
+    #            conducting AWS Key Management Service (KMS) and Amazon Kinesis operations. The role must grant the following
+    #            Amazon Kinesis permissions to deliver segment membership events to the stream: </p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>kinesis:PutRecord</code>
+    #                  </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>kinesis:PutRecords</code>
+    #                  </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>kinesis:DescribeStream</code>
+    #                  </p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    class AssociateStreamForSegmentsRequest < Struct.new(
+      nil,
+      :domain_name,
+      :destination_arn,
+      :destination_role_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class AssociateStreamForSegmentsResponse < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Represents a segment associated with a membership event stream. </p>
+    # @!attribute segment_name
+    #   <p>The unique name of the segment definition. </p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The subscription status of the segment. The following are valid values: </p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <b>STARTING</b>: The segment is being prepared to publish
+    #                  membership events. </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <b>RUNNING</b>: The segment is actively publishing
+    #                  membership events to the stream. </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <b>STOPPED</b>: The segment has stopped publishing
+    #                  membership events. </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <b>FAILED</b>: The segment failed to publish membership
+    #                  events. </p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute message
+    #   <p>An optional message providing context, such as a failure reason. </p>
+    #   @return [String]
+    class AssociatedSegment < Struct.new(
+      nil,
+      :segment_name,
+      :status,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Mathematical expression and a list of attribute items specified in that
     #          expression.</p>
     # @note This shape contains sensitive data and should be treated as such.
@@ -305,7 +393,10 @@ module Aws::CustomerProfiles
     #   <p>The action to segment with.</p>
     #   @return [String]
     # @!attribute values
-    #   <p>The values to apply the DimensionType on.</p>
+    #   <p>The values to apply the DimensionType on. To reference a calculated attribute or profile
+    #            attribute as a dynamic value, use handlebar notation:
+    #            <code>{{_profile.ProfileAttributeName}}</code> or
+    #            <code>{{_calculated_attribute.CalculatedAttributeName}}</code>.</p>
     #   @return [Array<String>]
     class AttributeDimension < Struct.new(
       nil,
@@ -603,12 +694,101 @@ module Aws::CustomerProfiles
       include ::Smithy::Schema::Structure
     end
 
+    # <p>An item that failed to be added to the domain.</p>
+    # @!attribute id
+    #   <p>The unique identifier of the item in the batch request that failed.</p>
+    #   @return [String]
+    # @!attribute code
+    #   <p>The HTTP status code for the error.</p>
+    #   @return [Integer]
+    # @!attribute message
+    #   <p>A message describing the error.</p>
+    #   @return [String]
+    class BatchPutProfileObjectErrorItem < Struct.new(
+      nil,
+      :id,
+      :code,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute domain_name
+    #   <p>The unique name of the domain.</p>
+    #   @return [String]
+    # @!attribute object_type_name
+    #   <p>The name of the profile object type.</p>
+    #   @return [String]
+    # @!attribute items
+    #   <p>A list of items to add to the domain.</p>
+    #   @return [Array<Types::BatchPutProfileObjectRequestItem>]
+    class BatchPutProfileObjectRequest < Struct.new(
+      nil,
+      :domain_name,
+      :object_type_name,
+      :items,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>An item to add to the domain as part of a batch request.</p>
+    # @!attribute id
+    #   <p>A unique identifier for this item in the batch request. Used to correlate items in the response.</p>
+    #   @return [String]
+    # @!attribute object
+    #   <p>A string that is serialized from a JSON object.</p>
+    #   @return [String]
+    class BatchPutProfileObjectRequestItem < Struct.new(
+      nil,
+      :id,
+      :object,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute successful
+    #   <p>A list of items that were successfully added to the domain.</p>
+    #   @return [Array<Types::BatchPutProfileObjectResponseItem>]
+    # @!attribute failed
+    #   <p>A list of items that failed to be added to the domain.</p>
+    #   @return [Array<Types::BatchPutProfileObjectErrorItem>]
+    class BatchPutProfileObjectResponse < Struct.new(
+      nil,
+      :successful,
+      :failed,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>An item that was successfully added to the domain.</p>
+    # @!attribute id
+    #   <p>The unique identifier of the item in the batch request.</p>
+    #   @return [String]
+    # @!attribute profile_object_unique_key
+    #   <p>The unique identifier of the profile object generated by the service.</p>
+    #   @return [String]
+    class BatchPutProfileObjectResponseItem < Struct.new(
+      nil,
+      :id,
+      :profile_object_unique_key,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Object that segments on Customer Profile's Calculated Attributes.</p>
     # @!attribute dimension_type
     #   <p>The action to segment with.</p>
     #   @return [String]
     # @!attribute values
-    #   <p>The values to apply the DimensionType with.</p>
+    #   <p>The values to apply the DimensionType with. To reference a calculated attribute or
+    #            profile attribute as a dynamic value, use handlebar notation:
+    #            <code>{{_profile.ProfileAttributeName}}</code> or
+    #            <code>{{_calculated_attribute.CalculatedAttributeName}}</code>.</p>
     #   @return [Array<String>]
     # @!attribute condition_overrides
     #   <p>Applies the given condition over the initial Calculated Attribute's definition.</p>
@@ -652,6 +832,66 @@ module Aws::CustomerProfiles
       :profile_id,
       :value,
       :last_object_timestamp,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Represents an item in the catalog with its complete set of attributes and metadata.</p>
+    # @!attribute id
+    #   <p>The unique identifier for the catalog item.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The display name of the catalog item.</p>
+    #   @return [String]
+    # @!attribute code
+    #   <p>The product code or SKU of the catalog item.</p>
+    #   @return [String]
+    # @!attribute type
+    #   <p>The type classification of the catalog item.</p>
+    #   @return [String]
+    # @!attribute category
+    #   <p>The category to which the catalog item belongs.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>A detailed description of the catalog item.</p>
+    #   @return [String]
+    # @!attribute additional_information
+    #   <p>Supplementary information about the catalog item beyond the basic description.</p>
+    #   @return [String]
+    # @!attribute image_link
+    #   <p>The URL link to the item's image.</p>
+    #   @return [String]
+    # @!attribute link
+    #   <p>The URL link to the item's detailed page or external resource.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The timestamp when the catalog item was created.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The timestamp when the catalog item was last updated.</p>
+    #   @return [Time]
+    # @!attribute price
+    #   <p>The price of the catalog item.</p>
+    #   @return [String]
+    # @!attribute attributes
+    #   <p>Additional attributes or properties associated with the catalog item stored as key-value pairs.</p>
+    #   @return [Hash<String, String>]
+    class CatalogItem < Struct.new(
+      nil,
+      :id,
+      :name,
+      :code,
+      :type,
+      :category,
+      :description,
+      :additional_information,
+      :image_link,
+      :link,
+      :created_at,
+      :updated_at,
+      :price,
+      :attributes,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1019,22 +1259,25 @@ module Aws::CustomerProfiles
     #   @return [String]
     # @!attribute matching
     #   <p>The process of matching duplicate profiles. If <code>Matching</code> = <code>true</code>, Amazon Connect Customer Profiles starts a weekly
-    #   batch process called Identity Resolution Job. If you do not specify a date and time for Identity Resolution Job to run, by default it runs every 
+    #   batch process called Identity Resolution Job. If you do not specify a date and time for Identity Resolution Job to run, by default it runs every
     #   Saturday at 12AM UTC to detect duplicate profiles in your domains. </p>
-    #            <p>After the Identity Resolution Job completes, use the 
+    #            <p>After the Identity Resolution Job completes, use the
     #   <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html">GetMatches</a>
     #   API to return and review the results. Or, if you have configured <code>ExportingConfig</code> in the <code>MatchingRequest</code>, you can download the results from
     #   S3.</p>
     #   @return [Types::MatchingRequest]
     # @!attribute rule_based_matching
     #   <p>The process of matching duplicate profiles using the Rule-Based matching. If
-    #               <code>RuleBasedMatching</code> = true, Amazon Connect Customer Profiles will start
+    #               <code>RuleBasedMatching</code> = true, Connect Customer Customer Profiles will start
     #            to match and merge your profiles according to your configuration in the
     #               <code>RuleBasedMatchingRequest</code>. You can use the <code>ListRuleBasedMatches</code>
     #            and <code>GetSimilarProfiles</code> API to return and review the results. Also, if you have
     #            configured <code>ExportingConfig</code> in the <code>RuleBasedMatchingRequest</code>, you
     #            can download the results from S3.</p>
     #   @return [Types::RuleBasedMatchingRequest]
+    # @!attribute data_store
+    #   <p>Set to true to enabled data store for this domain.</p>
+    #   @return [Types::DataStoreRequest]
     # @!attribute tags
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
@@ -1046,6 +1289,7 @@ module Aws::CustomerProfiles
       :dead_letter_queue_url,
       :matching,
       :rule_based_matching,
+      :data_store,
       :tags,
       keyword_init: true
     )
@@ -1069,22 +1313,25 @@ module Aws::CustomerProfiles
     #   @return [String]
     # @!attribute matching
     #   <p>The process of matching duplicate profiles. If <code>Matching</code> = <code>true</code>, Amazon Connect Customer Profiles starts a weekly
-    #   batch process called Identity Resolution Job. If you do not specify a date and time for Identity Resolution Job to run, by default it runs every 
+    #   batch process called Identity Resolution Job. If you do not specify a date and time for Identity Resolution Job to run, by default it runs every
     #   Saturday at 12AM UTC to detect duplicate profiles in your domains. </p>
-    #            <p>After the Identity Resolution Job completes, use the 
+    #            <p>After the Identity Resolution Job completes, use the
     #   <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html">GetMatches</a>
     #   API to return and review the results. Or, if you have configured <code>ExportingConfig</code> in the <code>MatchingRequest</code>, you can download the results from
     #   S3.</p>
     #   @return [Types::MatchingResponse]
     # @!attribute rule_based_matching
     #   <p>The process of matching duplicate profiles using the Rule-Based matching. If
-    #               <code>RuleBasedMatching</code> = true, Amazon Connect Customer Profiles will start
+    #               <code>RuleBasedMatching</code> = true, Connect Customer Customer Profiles will start
     #            to match and merge your profiles according to your configuration in the
     #               <code>RuleBasedMatchingRequest</code>. You can use the <code>ListRuleBasedMatches</code>
     #            and <code>GetSimilarProfiles</code> API to return and review the results. Also, if you have
     #            configured <code>ExportingConfig</code> in the <code>RuleBasedMatchingRequest</code>, you
     #            can download the results from S3.</p>
     #   @return [Types::RuleBasedMatchingResponse]
+    # @!attribute data_store
+    #   <p>The data store.</p>
+    #   @return [Types::DataStoreResponse]
     # @!attribute created_at
     #   <p>The timestamp of when the domain was created.</p>
     #   @return [Time]
@@ -1102,6 +1349,7 @@ module Aws::CustomerProfiles
       :dead_letter_queue_url,
       :matching,
       :rule_based_matching,
+      :data_store,
       :created_at,
       :last_updated_at,
       :tags,
@@ -1409,6 +1657,156 @@ module Aws::CustomerProfiles
     # @!attribute domain_name
     #   <p>The unique name of the domain.</p>
     #   @return [String]
+    # @!attribute recommender_filter_name
+    #   <p>The name of the recommender filter. The name must be unique within the domain.</p>
+    #   @return [String]
+    # @!attribute recommender_filter_expression
+    #   <p>The filter expression that defines which items to include or exclude from recommendations.</p>
+    #   @return [String]
+    # @!attribute recommender_schema_name
+    #   <p>The name of the recommender schema to use for this recommender filter. If not specified, the default schema is used.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>A description of the recommender filter.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>The tags used to organize, track, or control access for this resource.</p>
+    #   @return [Hash<String, String>]
+    class CreateRecommenderFilterRequest < Struct.new(
+      nil,
+      :domain_name,
+      :recommender_filter_name,
+      :recommender_filter_expression,
+      :recommender_schema_name,
+      :description,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute recommender_filter_arn
+    #   <p>The Amazon Resource Name (ARN) of the recommender filter.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>The tags used to organize, track, or control access for this resource.</p>
+    #   @return [Hash<String, String>]
+    class CreateRecommenderFilterResponse < Struct.new(
+      nil,
+      :recommender_filter_arn,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute domain_name
+    #   <p>The unique name of the domain.</p>
+    #   @return [String]
+    # @!attribute recommender_name
+    #   <p>The name of the recommender.</p>
+    #   @return [String]
+    # @!attribute recommender_recipe_name
+    #   <p>The name of the recommeder recipe.</p>
+    #   @return [String]
+    # @!attribute recommender_config
+    #   <p>The recommender configuration.</p>
+    #   @return [Types::RecommenderConfig]
+    # @!attribute description
+    #   <p>The description of the domain object type.</p>
+    #   @return [String]
+    # @!attribute recommender_schema_name
+    #   <p>The name of the recommender schema to use for this recommender. If not specified, the default schema is used.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>The tags used to organize, track, or control access for this resource.</p>
+    #   @return [Hash<String, String>]
+    class CreateRecommenderRequest < Struct.new(
+      nil,
+      :domain_name,
+      :recommender_name,
+      :recommender_recipe_name,
+      :recommender_config,
+      :description,
+      :recommender_schema_name,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute recommender_arn
+    #   <p>The ARN of the recommender</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>The tags used to organize, track, or control access for this resource.</p>
+    #   @return [Hash<String, String>]
+    class CreateRecommenderResponse < Struct.new(
+      nil,
+      :recommender_arn,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute domain_name
+    #   <p>The unique name of the domain.</p>
+    #   @return [String]
+    # @!attribute recommender_schema_name
+    #   <p>The name of the recommender schema. The name must be unique within the domain.</p>
+    #   @return [String]
+    # @!attribute fields
+    #   <p>A map of dataset type to column definitions that specifies which data columns to include in the schema. The <code>_webAnalytics</code> and <code>_catalogItem</code> keys are supported.</p>
+    #   @return [Hash<String, Array<Types::RecommenderSchemaField>>]
+    # @!attribute tags
+    #   <p>The tags used to organize, track, or control access for this resource.</p>
+    #   @return [Hash<String, String>]
+    class CreateRecommenderSchemaRequest < Struct.new(
+      nil,
+      :domain_name,
+      :recommender_schema_name,
+      :fields,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute recommender_schema_arn
+    #   <p>The Amazon Resource Name (ARN) of the recommender schema.</p>
+    #   @return [String]
+    # @!attribute recommender_schema_name
+    #   <p>The name of the recommender schema.</p>
+    #   @return [String]
+    # @!attribute fields
+    #   <p>A map of dataset type to column definitions included in the schema.</p>
+    #   @return [Hash<String, Array<Types::RecommenderSchemaField>>]
+    # @!attribute created_at
+    #   <p>The timestamp of when the recommender schema was created.</p>
+    #   @return [Time]
+    # @!attribute status
+    #   <p>The status of the recommender schema.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>The tags used to organize, track, or control access for this resource.</p>
+    #   @return [Hash<String, String>]
+    class CreateRecommenderSchemaResponse < Struct.new(
+      nil,
+      :recommender_schema_arn,
+      :recommender_schema_name,
+      :fields,
+      :created_at,
+      :status,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute domain_name
+    #   <p>The unique name of the domain.</p>
+    #   @return [String]
     # @!attribute segment_definition_name
     #   <p>The unique name of the segment definition.</p>
     #   @return [String]
@@ -1422,6 +1820,12 @@ module Aws::CustomerProfiles
     #   <p>Specifies the base segments and dimensions for a segment definition along with their
     #            respective relationship.</p>
     #   @return [Types::SegmentGroup]
+    # @!attribute segment_sql_query
+    #   <p>The segment SQL query.</p>
+    #   @return [String]
+    # @!attribute segment_sort
+    #   <p>The segment sort.</p>
+    #   @return [Types::SegmentSort]
     # @!attribute tags
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
@@ -1432,6 +1836,8 @@ module Aws::CustomerProfiles
       :display_name,
       :description,
       :segment_groups,
+      :segment_sql_query,
+      :segment_sort,
       :tags,
       keyword_init: true
     )
@@ -1475,10 +1881,14 @@ module Aws::CustomerProfiles
     # @!attribute segment_query
     #   <p>The segment query for calculating a segment estimate.</p>
     #   @return [Types::SegmentGroupStructure]
+    # @!attribute segment_sql_query
+    #   <p>The segment SQL query.</p>
+    #   @return [String]
     class CreateSegmentEstimateRequest < Struct.new(
       nil,
       :domain_name,
       :segment_query,
+      :segment_sql_query,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1529,7 +1939,7 @@ module Aws::CustomerProfiles
     #   @return [String]
     # @!attribute destination_uri
     #   <p>The destination to which the segment will be exported. This field must be provided if
-    #            the request is not submitted from the Amazon Connect Admin Website.</p>
+    #            the request is not submitted from the Connect Customer Admin Website.</p>
     #   @return [String]
     class CreateSegmentSnapshotRequest < Struct.new(
       nil,
@@ -1598,12 +2008,44 @@ module Aws::CustomerProfiles
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The data store request.</p>
+    # @!attribute enabled
+    #   <p>Enabled: Set to true to enabled data store for this domain.</p>
+    #   @return [Boolean]
+    class DataStoreRequest < Struct.new(
+      nil,
+      :enabled,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The data store response.</p>
+    # @!attribute enabled
+    #   <p>True if data store is enabled for this domain</p>
+    #   @return [Boolean]
+    # @!attribute readiness
+    #   <p>Information indicating if the Calculated Attribute is ready for use by confirming all
+    #            historical data has been processed and reflected.</p>
+    #   @return [Types::Readiness]
+    class DataStoreResponse < Struct.new(
+      nil,
+      :enabled,
+      :readiness,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Object that segments on various Customer Profile's date fields.</p>
     # @!attribute dimension_type
     #   <p>The action to segment with.</p>
     #   @return [String]
     # @!attribute values
-    #   <p>The values to apply the DimensionType on.</p>
+    #   <p>The values to apply the DimensionType on. To reference a calculated attribute or profile
+    #            attribute as a dynamic value, use handlebar notation:
+    #            <code>{{_profile.ProfileAttributeName}}</code> or
+    #            <code>{{_calculated_attribute.CalculatedAttributeName}}</code>.</p>
     #   @return [Array<String>]
     class DateDimension < Struct.new(
       nil,
@@ -1657,6 +2099,28 @@ module Aws::CustomerProfiles
     class DeleteDomainLayoutResponse < Struct.new(
       nil,
       :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute domain_name
+    #   <p>The unique name of the domain.</p>
+    #   @return [String]
+    # @!attribute object_type_name
+    #   <p>The unique name of the domain object type.</p>
+    #   @return [String]
+    class DeleteDomainObjectTypeRequest < Struct.new(
+      nil,
+      :domain_name,
+      :object_type_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class DeleteDomainObjectTypeResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1881,6 +2345,76 @@ module Aws::CustomerProfiles
     # @!attribute domain_name
     #   <p>The unique name of the domain.</p>
     #   @return [String]
+    # @!attribute recommender_filter_name
+    #   <p>The name of the recommender filter to delete.</p>
+    #   @return [String]
+    class DeleteRecommenderFilterRequest < Struct.new(
+      nil,
+      :domain_name,
+      :recommender_filter_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute message
+    #   <p>A message that indicates the delete request is done.</p>
+    #   @return [String]
+    class DeleteRecommenderFilterResponse < Struct.new(
+      nil,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute domain_name
+    #   <p>The unique name of the domain.</p>
+    #   @return [String]
+    # @!attribute recommender_name
+    #   <p>The recommender name.</p>
+    #   @return [String]
+    class DeleteRecommenderRequest < Struct.new(
+      nil,
+      :domain_name,
+      :recommender_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class DeleteRecommenderResponse < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute domain_name
+    #   <p>The unique name of the domain.</p>
+    #   @return [String]
+    # @!attribute recommender_schema_name
+    #   <p>The name of the recommender schema to delete.</p>
+    #   @return [String]
+    class DeleteRecommenderSchemaRequest < Struct.new(
+      nil,
+      :domain_name,
+      :recommender_schema_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class DeleteRecommenderSchemaResponse < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute domain_name
+    #   <p>The unique name of the domain.</p>
+    #   @return [String]
     # @!attribute segment_definition_name
     #   <p>The unique name of the segment definition.</p>
     #   @return [String]
@@ -1897,6 +2431,32 @@ module Aws::CustomerProfiles
     #   <p>A message that indicates the delete request is done.</p>
     #   @return [String]
     class DeleteSegmentDefinitionResponse < Struct.new(
+      nil,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute domain_name
+    #   <p>The unique name of the domain.</p>
+    #   @return [String]
+    # @!attribute segment_definition_name
+    #   <p>The unique name of the segment definition. </p>
+    #   @return [String]
+    class DeleteSegmentSubscriptionRequest < Struct.new(
+      nil,
+      :domain_name,
+      :segment_definition_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute message
+    #   <p>A confirmation message indicating the subscription was deleted successfully. </p>
+    #   @return [String]
+    class DeleteSegmentSubscriptionResponse < Struct.new(
       nil,
       :message,
       keyword_init: true
@@ -2015,6 +2575,112 @@ module Aws::CustomerProfiles
       class Unknown < Dimension; end
     end
 
+    # @!attribute domain_name
+    #   <p>The unique name of the domain.</p>
+    #   @return [String]
+    class DisassociateStreamForSegmentsRequest < Struct.new(
+      nil,
+      :domain_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute message
+    #   <p>A confirmation message indicating the stream was disassociated successfully. </p>
+    #   @return [String]
+    class DisassociateStreamForSegmentsResponse < Struct.new(
+      nil,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Defines a diversity constraint for a single item column, specifying a cap type and a target value or placeholder that controls how many recommended items may share the same column value.</p>
+    # @!attribute name
+    #   <p>The name of the item catalog column on which to apply the diversity cap. The column must be defined in the recommender schema.</p>
+    #   @return [String]
+    # @!attribute cap_type
+    #   <p>The type of diversity cap to apply. Valid values are <code>PERCENTAGE</code> (interpret <code>Target</code> as a percentage of returned items) and <code>VALUE</code> (interpret <code>Target</code> as an absolute count).</p>
+    #   @return [String]
+    # @!attribute target
+    #   <p>The diversity cap target. Either an integer literal (for example, <code>"25"</code>) or a placeholder expression of the form <code>$name</code> whose value is supplied at inference time through <code>GetProfileRecommendations</code>.</p>
+    #   @return [String]
+    class DiversityColumn < Struct.new(
+      nil,
+      :name,
+      :cap_type,
+      :target,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration that controls diversity of recommendation results by capping the representation of specified item columns.</p>
+    # @!attribute diversity_columns
+    #   <p>A list of up to two diversity columns. Each column defines a cap on the number or percentage of recommended items that share the same value for that column.</p>
+    #   @return [Array<Types::DiversityColumn>]
+    class DiversityConfig < Struct.new(
+      nil,
+      :diversity_columns,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The standard domain object type.</p>
+    # @!attribute source
+    #   <p>The expression that defines how to extract the field value from the source object.></p>
+    #   @return [String]
+    # @!attribute target
+    #   <p>The expression that defines where the field value should be placed in the standard domain object.</p>
+    #   @return [String]
+    # @!attribute content_type
+    #   <p>The content type of the field.</p>
+    #   @return [String]
+    # @!attribute feature_type
+    #   <p>The semantic meaning of the field.</p>
+    #   @return [String]
+    class DomainObjectTypeField < Struct.new(
+      nil,
+      :source,
+      :target,
+      :content_type,
+      :feature_type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Represents an item in the list of domain object types, containing basic information about a specific object type within a domain.</p>
+    # @!attribute object_type_name
+    #   <p>The name that identifies the object type within the domain.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>A description explaining the purpose and characteristics of this object type.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The timestamp of when the domain object type was created.</p>
+    #   @return [Time]
+    # @!attribute last_updated_at
+    #   <p>The timestamp of when the domain object type was most recently edited.</p>
+    #   @return [Time]
+    # @!attribute tags
+    #   <p>The tags used to organize, track, or control access for this resource.</p>
+    #   @return [Hash<String, String>]
+    class DomainObjectTypesListItem < Struct.new(
+      nil,
+      :object_type_name,
+      :description,
+      :created_at,
+      :last_updated_at,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Usage-specific statistics about the domain.</p>
     # @!attribute profile_count
     #   <p>The total number of profiles currently in the domain.</p>
@@ -2061,6 +2727,26 @@ module Aws::CustomerProfiles
       nil,
       :phone,
       :email,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration parameters for events in the personalization system.</p>
+    # @!attribute event_type
+    #   <p>The type of event being tracked (e.g., 'click', 'purchase', 'view').</p>
+    #   @return [String]
+    # @!attribute event_value_threshold
+    #   <p>The minimum value threshold that an event must meet to be considered valid.</p>
+    #   @return [Float]
+    # @!attribute event_weight
+    #   <p>The weight of the event type. A higher weight means higher importance of the event type for the created solution.</p>
+    #   @return [Float]
+    class EventParameters < Struct.new(
+      nil,
+      :event_type,
+      :event_value_threshold,
+      :event_weight,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2206,6 +2892,18 @@ module Aws::CustomerProfiles
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Configuration settings that define how events are processed and tracked.</p>
+    # @!attribute event_parameters_list
+    #   <p>A list of event parameters configurations that specify how different event types should be handled.</p>
+    #   @return [Array<Types::EventParameters>]
+    class EventsConfig < Struct.new(
+      nil,
+      :event_parameters_list,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Configuration information about the S3 bucket where Identity Resolution Jobs writes result files. </p>
     #          <note>
     #             <p>You need to give Customer Profiles service principal write permission to your S3 bucket.
@@ -2241,7 +2939,10 @@ module Aws::CustomerProfiles
     #   <p>The action to segment with.</p>
     #   @return [String]
     # @!attribute values
-    #   <p>The values to apply the DimensionType on.</p>
+    #   <p>The values to apply the DimensionType on. To reference a calculated attribute or profile
+    #            attribute as a dynamic value, use handlebar notation:
+    #            <code>{{_profile.ProfileAttributeName}}</code> or
+    #            <code>{{_calculated_attribute.CalculatedAttributeName}}</code>.</p>
     #   @return [Array<String>]
     class ExtraLengthValueProfileDimension < Struct.new(
       nil,
@@ -2725,6 +3426,56 @@ module Aws::CustomerProfiles
     # @!attribute domain_name
     #   <p>The unique name of the domain.</p>
     #   @return [String]
+    # @!attribute object_type_name
+    #   <p>The unique name of the domain object type.</p>
+    #   @return [String]
+    class GetDomainObjectTypeRequest < Struct.new(
+      nil,
+      :domain_name,
+      :object_type_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute object_type_name
+    #   <p>The unique name of the domain object type.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>The description of the domain object type.</p>
+    #   @return [String]
+    # @!attribute encryption_key
+    #   <p>The customer provided KMS key used to encrypt this type of domain object.</p>
+    #   @return [String]
+    # @!attribute fields
+    #   <p>A map of field names to their corresponding domain object type field definitions.</p>
+    #   @return [Hash<String, Types::DomainObjectTypeField>]
+    # @!attribute created_at
+    #   <p>The timestamp of when the domain object type was created.</p>
+    #   @return [Time]
+    # @!attribute last_updated_at
+    #   <p>The timestamp of when the domain object type was most recently edited.</p>
+    #   @return [Time]
+    # @!attribute tags
+    #   <p>The tags used to organize, track, or control access for this resource.</p>
+    #   @return [Hash<String, String>]
+    class GetDomainObjectTypeResponse < Struct.new(
+      nil,
+      :object_type_name,
+      :description,
+      :encryption_key,
+      :fields,
+      :created_at,
+      :last_updated_at,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute domain_name
+    #   <p>The unique name of the domain.</p>
+    #   @return [String]
     class GetDomainRequest < Struct.new(
       nil,
       :domain_name,
@@ -2753,22 +3504,25 @@ module Aws::CustomerProfiles
     #   @return [Types::DomainStats]
     # @!attribute matching
     #   <p>The process of matching duplicate profiles. If <code>Matching</code> = <code>true</code>, Amazon Connect Customer Profiles starts a weekly
-    #   batch process called Identity Resolution Job. If you do not specify a date and time for Identity Resolution Job to run, by default it runs every 
+    #   batch process called Identity Resolution Job. If you do not specify a date and time for Identity Resolution Job to run, by default it runs every
     #   Saturday at 12AM UTC to detect duplicate profiles in your domains. </p>
-    #            <p>After the Identity Resolution Job completes, use the 
+    #            <p>After the Identity Resolution Job completes, use the
     #   <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html">GetMatches</a>
     #   API to return and review the results. Or, if you have configured <code>ExportingConfig</code> in the <code>MatchingRequest</code>, you can download the results from
     #   S3.</p>
     #   @return [Types::MatchingResponse]
     # @!attribute rule_based_matching
     #   <p>The process of matching duplicate profiles using the Rule-Based matching. If
-    #               <code>RuleBasedMatching</code> = true, Amazon Connect Customer Profiles will start
+    #               <code>RuleBasedMatching</code> = true, Connect Customer Customer Profiles will start
     #            to match and merge your profiles according to your configuration in the
     #               <code>RuleBasedMatchingRequest</code>. You can use the <code>ListRuleBasedMatches</code>
     #            and <code>GetSimilarProfiles</code> API to return and review the results. Also, if you have
     #            configured <code>ExportingConfig</code> in the <code>RuleBasedMatchingRequest</code>, you
     #            can download the results from S3.</p>
     #   @return [Types::RuleBasedMatchingResponse]
+    # @!attribute data_store
+    #   <p> True if data store is enabled for this domain.</p>
+    #   @return [Types::DataStoreResponse]
     # @!attribute created_at
     #   <p>The timestamp of when the domain was created.</p>
     #   @return [Time]
@@ -2787,6 +3541,7 @@ module Aws::CustomerProfiles
       :stats,
       :matching,
       :rule_based_matching,
+      :data_store,
       :created_at,
       :last_updated_at,
       :tags,
@@ -3041,7 +3796,7 @@ module Aws::CustomerProfiles
     #   @return [Hash<String, String>]
     # @!attribute object_type_names
     #   <p>A map in which each key is an event type from an external application such as Segment or Shopify, and each value is an <code>ObjectTypeName</code> (template) used to ingest the event.
-    #   It supports the following event types: <code>SegmentIdentify</code>, <code>ShopifyCreateCustomers</code>, <code>ShopifyUpdateCustomers</code>, <code>ShopifyCreateDraftOrders</code>, 
+    #   It supports the following event types: <code>SegmentIdentify</code>, <code>ShopifyCreateCustomers</code>, <code>ShopifyUpdateCustomers</code>, <code>ShopifyCreateDraftOrders</code>,
     #   <code>ShopifyUpdateDraftOrders</code>, <code>ShopifyCreateOrders</code>, and <code>ShopifyUpdatedOrders</code>.</p>
     #   @return [Hash<String, String>]
     # @!attribute workflow_id
@@ -3060,6 +3815,9 @@ module Aws::CustomerProfiles
     #   <p>A list of unique names for active event triggers associated with the integration. This
     #            list would be empty if no Event Trigger is associated with the integration.</p>
     #   @return [Array<String>]
+    # @!attribute scope
+    #   <p>Specifies whether the integration applies to profile level data (associated with profiles) or domain level data (not associated with any specific profile). The default value is PROFILE.</p>
+    #   @return [String]
     class GetIntegrationResponse < Struct.new(
       nil,
       :domain_name,
@@ -3073,13 +3831,14 @@ module Aws::CustomerProfiles
       :is_unstructured,
       :role_arn,
       :event_trigger_names,
+      :scope,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous 
+    #   <p>The token for the next set of results. Use the value returned in the previous
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -3116,6 +3875,96 @@ module Aws::CustomerProfiles
       :match_generation_date,
       :potential_matches,
       :matches,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains percentile statistics for object type attributes.</p>
+    # @!attribute p5
+    #   <p>The 5th percentile value of the attribute.</p>
+    #   @return [Float]
+    # @!attribute p25
+    #   <p>The 25th percentile value of the attribute.</p>
+    #   @return [Float]
+    # @!attribute p50
+    #   <p>The 50th percentile (median) value of the attribute.</p>
+    #   @return [Float]
+    # @!attribute p75
+    #   <p>The 75th percentile value of the attribute.</p>
+    #   @return [Float]
+    # @!attribute p95
+    #   <p>The 95th percentile value of the attribute.</p>
+    #   @return [Float]
+    class GetObjectTypeAttributeStatisticsPercentiles < Struct.new(
+      nil,
+      :p5,
+      :p25,
+      :p50,
+      :p75,
+      :p95,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute domain_name
+    #   <p>The unique name of the domain.</p>
+    #   @return [String]
+    # @!attribute object_type_name
+    #   <p>The unique name of the domain object type.</p>
+    #   @return [String]
+    # @!attribute attribute_name
+    #   <p>The attribute name.</p>
+    #   @return [String]
+    class GetObjectTypeAttributeStatisticsRequest < Struct.new(
+      nil,
+      :domain_name,
+      :object_type_name,
+      :attribute_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute statistics
+    #   <p>The statistics.</p>
+    #   @return [Types::GetObjectTypeAttributeStatisticsStats]
+    # @!attribute calculated_at
+    #   <p>Time when this statistics was calculated.</p>
+    #   @return [Time]
+    class GetObjectTypeAttributeStatisticsResponse < Struct.new(
+      nil,
+      :statistics,
+      :calculated_at,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Statistical measurements for object type attributes including basic statistics and percentiles.</p>
+    # @!attribute maximum
+    #   <p>The maximum value found in the attribute dataset.</p>
+    #   @return [Float]
+    # @!attribute minimum
+    #   <p>The minimum value found in the attribute dataset.</p>
+    #   @return [Float]
+    # @!attribute average
+    #   <p>The arithmetic mean of the attribute values.</p>
+    #   @return [Float]
+    # @!attribute standard_deviation
+    #   <p>The standard deviation of the attribute values, measuring their spread around the mean.</p>
+    #   @return [Float]
+    # @!attribute percentiles
+    #   <p>Percentile distribution statistics for the attribute values.</p>
+    #   @return [Types::GetObjectTypeAttributeStatisticsPercentiles]
+    class GetObjectTypeAttributeStatisticsStats < Struct.new(
+      nil,
+      :maximum,
+      :minimum,
+      :average,
+      :standard_deviation,
+      :percentiles,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3227,6 +4076,9 @@ module Aws::CustomerProfiles
     # @!attribute max_profile_object_count
     #   <p>The amount of profile object max count assigned to the object type.</p>
     #   @return [Integer]
+    # @!attribute source_priority
+    #   <p>An integer that determines the priority of this object type when data from multiple sources is ingested. Lower values take priority. Object types without a specified source priority default to the lowest priority.</p>
+    #   @return [Integer]
     # @!attribute fields
     #   <p>A map of the name and ObjectType field.</p>
     #   @return [Hash<String, Types::ObjectTypeField>]
@@ -3253,6 +4105,7 @@ module Aws::CustomerProfiles
       :source_last_updated_timestamp_format,
       :max_available_profile_object_count,
       :max_profile_object_count,
+      :source_priority,
       :fields,
       :keys,
       :created_at,
@@ -3327,6 +4180,234 @@ module Aws::CustomerProfiles
     # @!attribute domain_name
     #   <p>The unique name of the domain.</p>
     #   @return [String]
+    # @!attribute profile_id
+    #   <p>The unique identifier of the profile for which to retrieve recommendations.</p>
+    #   @return [String]
+    # @!attribute recommender_name
+    #   <p>The unique name of the recommender.</p>
+    #   @return [String]
+    # @!attribute context
+    #   <p>The contextual metadata used to provide dynamic runtime information to tailor recommendations.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute recommender_filters
+    #   <p>A list of filters to apply to the returned recommendations. Filters define criteria for including or excluding items from the recommendation results.</p>
+    #   @return [Array<Types::RecommenderFilter>]
+    # @!attribute recommender_promotional_filters
+    #   <p>A list of promotional filters to apply to the recommendations. Promotional filters allow you to promote specific items within a configurable subset of recommendation results.</p>
+    #   @return [Array<Types::RecommenderPromotionalFilter>]
+    # @!attribute candidate_ids
+    #   <p>A list of item IDs to rank for the user. Use this when you want to re-rank a specific set of items rather than getting recommendations from the full item catalog. Required for personalized-ranking use cases.</p>
+    #   @return [Array<String>]
+    # @!attribute max_results
+    #   <p>The maximum number of recommendations to return. The default value is 10.</p>
+    #   @return [Integer]
+    # @!attribute metadata_config
+    #   <p>Configuration for including item metadata in the recommendation response. Use this to specify which metadata columns to return alongside recommended items.</p>
+    #   @return [Types::MetadataConfig]
+    # @!attribute diversity_config
+    #   <p>Runtime diversity configuration for this request. Enables diversity-aware recommendations and optionally supplies values for placeholder-based diversity caps configured on the recommender.</p>
+    #   @return [Types::RecommendationDiversityConfig]
+    class GetProfileRecommendationsRequest < Struct.new(
+      nil,
+      :domain_name,
+      :profile_id,
+      :recommender_name,
+      :context,
+      :recommender_filters,
+      :recommender_promotional_filters,
+      :candidate_ids,
+      :max_results,
+      :metadata_config,
+      :diversity_config,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute recommendations
+    #   <p>List of recommendations generated by the recommender.</p>
+    #   @return [Array<Types::Recommendation>]
+    class GetProfileRecommendationsResponse < Struct.new(
+      nil,
+      :recommendations,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute domain_name
+    #   <p>The unique name of the domain.</p>
+    #   @return [String]
+    # @!attribute recommender_filter_name
+    #   <p>The name of the recommender filter to retrieve.</p>
+    #   @return [String]
+    class GetRecommenderFilterRequest < Struct.new(
+      nil,
+      :domain_name,
+      :recommender_filter_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute recommender_filter_name
+    #   <p>The name of the recommender filter.</p>
+    #   @return [String]
+    # @!attribute recommender_filter_expression
+    #   <p>The filter expression that defines which items to include or exclude from recommendations.</p>
+    #   @return [String]
+    # @!attribute recommender_schema_name
+    #   <p>The name of the recommender schema associated with this recommender filter.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The timestamp of when the recommender filter was created.</p>
+    #   @return [Time]
+    # @!attribute status
+    #   <p>The status of the recommender filter.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>The description of the recommender filter.</p>
+    #   @return [String]
+    # @!attribute failure_reason
+    #   <p>If the recommender filter failed, provides the reason for the failure.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>The tags used to organize, track, or control access for this resource.</p>
+    #   @return [Hash<String, String>]
+    class GetRecommenderFilterResponse < Struct.new(
+      nil,
+      :recommender_filter_name,
+      :recommender_filter_expression,
+      :recommender_schema_name,
+      :created_at,
+      :status,
+      :description,
+      :failure_reason,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute domain_name
+    #   <p>The unique name of the domain.</p>
+    #   @return [String]
+    # @!attribute recommender_name
+    #   <p>The name of the recommender.</p>
+    #   @return [String]
+    # @!attribute training_metrics_count
+    #   <p>The number of training metrics to retrieve for the recommender.</p>
+    #   @return [Integer]
+    class GetRecommenderRequest < Struct.new(
+      nil,
+      :domain_name,
+      :recommender_name,
+      :training_metrics_count,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute recommender_name
+    #   <p>The name of the recommender.</p>
+    #   @return [String]
+    # @!attribute recommender_recipe_name
+    #   <p>The name of the recipe used by the recommender to generate recommendations.</p>
+    #   @return [String]
+    # @!attribute recommender_schema_name
+    #   <p>The name of the recommender schema associated with this recommender.</p>
+    #   @return [String]
+    # @!attribute recommender_config
+    #   <p>The configuration settings for the recommender, including parameters and settings that define its behavior.</p>
+    #   @return [Types::RecommenderConfig]
+    # @!attribute description
+    #   <p>A detailed description of the recommender providing information about its purpose and functionality.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the recommender, indicating whether it is active, creating, updating, or in another state.</p>
+    #   @return [String]
+    # @!attribute last_updated_at
+    #   <p>The timestamp of when the recommender was edited.</p>
+    #   @return [Time]
+    # @!attribute created_at
+    #   <p>The timestamp of when the recommender was created.</p>
+    #   @return [Time]
+    # @!attribute failure_reason
+    #   <p>If the recommender fails, provides the reason for the failure.</p>
+    #   @return [String]
+    # @!attribute latest_recommender_update
+    #   <p>Information about the most recent update performed on the recommender, including status and timestamp.</p>
+    #   @return [Types::RecommenderUpdate]
+    # @!attribute active_recommender_version_name
+    #   <p>The name of the recommender version currently serving recommendations. Omitted when no active recommender version is set.</p>
+    #   @return [String]
+    # @!attribute training_metrics
+    #   <p>A set of metrics that provide information about the recommender's training performance and accuracy.</p>
+    #   @return [Array<Types::TrainingMetrics>]
+    # @!attribute tags
+    #   <p>The tags used to organize, track, or control access for this resource.</p>
+    #   @return [Hash<String, String>]
+    class GetRecommenderResponse < Struct.new(
+      nil,
+      :recommender_name,
+      :recommender_recipe_name,
+      :recommender_schema_name,
+      :recommender_config,
+      :description,
+      :status,
+      :last_updated_at,
+      :created_at,
+      :failure_reason,
+      :latest_recommender_update,
+      :active_recommender_version_name,
+      :training_metrics,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute domain_name
+    #   <p>The unique name of the domain.</p>
+    #   @return [String]
+    # @!attribute recommender_schema_name
+    #   <p>The name of the recommender schema to retrieve.</p>
+    #   @return [String]
+    class GetRecommenderSchemaRequest < Struct.new(
+      nil,
+      :domain_name,
+      :recommender_schema_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute recommender_schema_name
+    #   <p>The name of the recommender schema.</p>
+    #   @return [String]
+    # @!attribute fields
+    #   <p>A map of dataset type to column definitions included in the schema.</p>
+    #   @return [Hash<String, Array<Types::RecommenderSchemaField>>]
+    # @!attribute created_at
+    #   <p>The timestamp of when the recommender schema was created.</p>
+    #   @return [Time]
+    # @!attribute status
+    #   <p>The status of the recommender schema.</p>
+    #   @return [String]
+    class GetRecommenderSchemaResponse < Struct.new(
+      nil,
+      :recommender_schema_name,
+      :fields,
+      :created_at,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute domain_name
+    #   <p>The unique name of the domain.</p>
+    #   @return [String]
     # @!attribute segment_definition_name
     #   <p>The unique name of the segment definition.</p>
     #   @return [String]
@@ -3351,6 +4432,9 @@ module Aws::CustomerProfiles
     # @!attribute segment_groups
     #   <p>The segment criteria associated with this definition.</p>
     #   @return [Types::SegmentGroup]
+    # @!attribute segment_sort
+    #   <p>The segment sort.</p>
+    #   @return [Types::SegmentSort]
     # @!attribute segment_definition_arn
     #   <p>The arn of the segment definition.</p>
     #   @return [String]
@@ -3360,15 +4444,27 @@ module Aws::CustomerProfiles
     # @!attribute tags
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
+    # @!attribute segment_sql_query
+    #   <p>The segment SQL query.</p>
+    #   @return [String]
+    # @!attribute segment_type
+    #   <p>The segment type.</p>
+    #            <p> Classic : Segments created using traditional SegmentGroup structure</p>
+    #            <p> Enhanced : Segments created using SQL queries
+    #         </p>
+    #   @return [String]
     class GetSegmentDefinitionResponse < Struct.new(
       nil,
       :segment_definition_name,
       :display_name,
       :description,
       :segment_groups,
+      :segment_sort,
       :segment_definition_arn,
       :created_at,
       :tags,
+      :segment_sql_query,
+      :segment_type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3455,11 +4551,15 @@ module Aws::CustomerProfiles
     #   <p>An array of maps where each contains a response per profile failed for the
     #            request.</p>
     #   @return [Array<Types::ProfileQueryFailures>]
+    # @!attribute last_computed_at
+    #   <p>The timestamp indicating when the segment membership was last computed or updated.</p>
+    #   @return [Time]
     class GetSegmentMembershipResponse < Struct.new(
       nil,
       :segment_definition_name,
       :profiles,
       :failures,
+      :last_computed_at,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3506,7 +4606,7 @@ module Aws::CustomerProfiles
     #   @return [String]
     # @!attribute destination_uri
     #   <p>The destination to which the segment will be exported. This field must be provided if
-    #            the request is not submitted from the Amazon Connect Admin Website.</p>
+    #            the request is not submitted from the Connect Customer Admin Website.</p>
     #   @return [String]
     class GetSegmentSnapshotResponse < Struct.new(
       nil,
@@ -3517,6 +4617,72 @@ module Aws::CustomerProfiles
       :encryption_key,
       :role_arn,
       :destination_uri,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute domain_name
+    #   <p>The unique name of the domain.</p>
+    #   @return [String]
+    # @!attribute segment_definition_name
+    #   <p>The unique name of the segment definition. </p>
+    #   @return [String]
+    class GetSegmentSubscriptionRequest < Struct.new(
+      nil,
+      :domain_name,
+      :segment_definition_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute status
+    #   <p>The current lifecycle status of the subscription. The following are valid values: </p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <b>STARTING</b>: Initial snapshot is in progress. </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <b>RUNNING</b>: Notifications are active and running.
+    #               </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <b>STOPPED</b>: Notifications have been stopped. </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <b>FAILED</b>: Notifications failed (for example, the
+    #                  Amazon Kinesis data stream became inaccessible). </p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute message
+    #   <p>A status message providing additional context, such as a failure reason. </p>
+    #   @return [String]
+    # @!attribute schedule_configuration
+    #   <p>The schedule configuration for periodic membership event notifications. </p>
+    #   @return [Types::ScheduleConfiguration]
+    # @!attribute scheduled_executions
+    #   <p>Information about scheduled execution timestamps. </p>
+    #   @return [Types::ScheduledExecutions]
+    # @!attribute started_at
+    #   <p>The timestamp of when the subscription was first started. </p>
+    #   @return [Time]
+    # @!attribute last_updated_at
+    #   <p>The timestamp of the most recent configuration change. </p>
+    #   @return [Time]
+    class GetSegmentSubscriptionResponse < Struct.new(
+      nil,
+      :status,
+      :message,
+      :schedule_configuration,
+      :scheduled_executions,
+      :started_at,
+      :last_updated_at,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3586,6 +4752,74 @@ module Aws::CustomerProfiles
       :rule_level,
       :confidence_score,
       :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute domain_name
+    #   <p>The unique name of the domain.</p>
+    #   @return [String]
+    class GetStreamForSegmentsRequest < Struct.new(
+      nil,
+      :domain_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute associated_at
+    #   <p>The timestamp of when the stream was associated. </p>
+    #   @return [Time]
+    # @!attribute associated_segments
+    #   <p>A list of segments currently associated with the stream and their subscription status.
+    #         </p>
+    #   @return [Array<Types::AssociatedSegment>]
+    # @!attribute domain_name
+    #   <p>The unique name of the domain.</p>
+    #   @return [String]
+    # @!attribute destination_arn
+    #   <p>The Amazon Resource Name (ARN) of the Amazon Kinesis data stream receiving segment membership events. </p>
+    #   @return [String]
+    # @!attribute destination_role_arn
+    #   <p>The Amazon Resource Name (ARN) of the IAM role used for Amazon Kinesis and AWS Key Management Service (KMS) operations. </p>
+    #   @return [String]
+    # @!attribute state
+    #   <p>The operational state of the destination stream. The following are valid values: </p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <b>RUNNING</b>: The stream is associated and healthy.
+    #                  Segment membership events are being published. </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <b>UNHEALTHY</b>: The stream is associated but events
+    #                  cannot currently be published. See <code>FailureReason</code> for details. </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <b>STOPPED</b>: The stream is no longer publishing
+    #                  segment membership events. </p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute disassociated_at
+    #   <p>The timestamp of when the stream was disassociated. </p>
+    #   @return [Time]
+    # @!attribute failure_reason
+    #   <p>The reason why the stream is in an unhealthy state, if applicable. </p>
+    #   @return [String]
+    class GetStreamForSegmentsResponse < Struct.new(
+      nil,
+      :associated_at,
+      :associated_segments,
+      :domain_name,
+      :destination_arn,
+      :destination_role_arn,
+      :state,
+      :disassociated_at,
+      :failure_reason,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3811,7 +5045,7 @@ module Aws::CustomerProfiles
     #   <p>Unique identifier for the workflow.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous 
+    #   <p>The token for the next set of results. Use the value returned in the previous
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -3965,6 +5199,18 @@ module Aws::CustomerProfiles
     class IncrementalPullConfig < Struct.new(
       nil,
       :datetime_type_field_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration settings for inference behavior of the recommender.</p>
+    # @!attribute min_provisioned_tps
+    #   <p>The minimum provisioned transactions per second (TPS) that the recommender supports. The default value is 1. A high MinProvisionedTPS will increase your cost.</p>
+    #   @return [Integer]
+    class InferenceConfig < Struct.new(
+      nil,
+      :min_provisioned_tps,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4329,6 +5575,40 @@ module Aws::CustomerProfiles
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute domain_name
+    #   <p>The unique name of the domain.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of domain object types returned per page.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The pagination token from the previous call to ListDomainObjectTypes.</p>
+    #   @return [String]
+    class ListDomainObjectTypesRequest < Struct.new(
+      nil,
+      :domain_name,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute items
+    #   <p>The list of domain object types.</p>
+    #   @return [Array<Types::DomainObjectTypesListItem>]
+    # @!attribute next_token
+    #   <p>The pagination token from the previous call to ListDomainObjectTypes.</p>
+    #   @return [String]
+    class ListDomainObjectTypesResponse < Struct.new(
+      nil,
+      :items,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute next_token
     #   <p>The pagination token from the previous ListDomain API call.</p>
     #   @return [String]
@@ -4431,7 +5711,7 @@ module Aws::CustomerProfiles
     #   <p>The unique name of the domain.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous 
+    #   <p>The token for the next set of results. Use the value returned in the previous
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -4476,14 +5756,14 @@ module Aws::CustomerProfiles
     #   <p>The timestamp of when the domain was created.</p>
     #   @return [Time]
     # @!attribute last_updated_at
-    #   <p>The timestamp of when the domain was most recently edited.</p>
+    #   <p>The timestamp of when the integration was most recently edited.</p>
     #   @return [Time]
     # @!attribute tags
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
     # @!attribute object_type_names
     #   <p>A map in which each key is an event type from an external application such as Segment or Shopify, and each value is an <code>ObjectTypeName</code> (template) used to ingest the event.
-    #   It supports the following event types: <code>SegmentIdentify</code>, <code>ShopifyCreateCustomers</code>, <code>ShopifyUpdateCustomers</code>, <code>ShopifyCreateDraftOrders</code>, 
+    #   It supports the following event types: <code>SegmentIdentify</code>, <code>ShopifyCreateCustomers</code>, <code>ShopifyUpdateCustomers</code>, <code>ShopifyCreateDraftOrders</code>,
     #   <code>ShopifyUpdateDraftOrders</code>, <code>ShopifyCreateOrders</code>, and <code>ShopifyUpdatedOrders</code>.</p>
     #   @return [Hash<String, String>]
     # @!attribute workflow_id
@@ -4501,6 +5781,9 @@ module Aws::CustomerProfiles
     # @!attribute event_trigger_names
     #   <p>A list of unique names for active event triggers associated with the integration.</p>
     #   @return [Array<String>]
+    # @!attribute scope
+    #   <p>The scope or boundary of the integration item's applicability.</p>
+    #   @return [String]
     class ListIntegrationItem < Struct.new(
       nil,
       :domain_name,
@@ -4514,6 +5797,7 @@ module Aws::CustomerProfiles
       :is_unstructured,
       :role_arn,
       :event_trigger_names,
+      :scope,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4573,6 +5857,64 @@ module Aws::CustomerProfiles
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Represents an item in the list of object type attribute values with its associated metadata.</p>
+    # @!attribute value
+    #   <p>The actual value of the object type attribute.</p>
+    #   @return [String]
+    # @!attribute last_updated_at
+    #   <p>The timestamp of when the object type attribute value was most recently updated.</p>
+    #   @return [Time]
+    class ListObjectTypeAttributeValuesItem < Struct.new(
+      nil,
+      :value,
+      :last_updated_at,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute next_token
+    #   <p>The pagination token from the previous call.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of objects returned per page. Valid Range: Minimum value of 1. Maximum value of 100. If not provided default as 100.</p>
+    #   @return [Integer]
+    # @!attribute domain_name
+    #   <p>The unique name of the domain.</p>
+    #   @return [String]
+    # @!attribute object_type_name
+    #   <p>The unique name of the domain object type.</p>
+    #   @return [String]
+    # @!attribute attribute_name
+    #   <p>The attribute name.</p>
+    #   @return [String]
+    class ListObjectTypeAttributeValuesRequest < Struct.new(
+      nil,
+      :next_token,
+      :max_results,
+      :domain_name,
+      :object_type_name,
+      :attribute_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute items
+    #   <p>A list of unique attribute values sorted on the basis of LastUpdatedAt. </p>
+    #   @return [Array<Types::ListObjectTypeAttributeValuesItem>]
+    # @!attribute next_token
+    #   <p>The pagination token from the previous call to call ListObjectTypeAttributeValues. </p>
+    #   @return [String]
+    class ListObjectTypeAttributeValuesResponse < Struct.new(
+      nil,
+      :items,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute next_token
     #   <p>The pagination token from the previous call. </p>
     #   @return [String]
@@ -4621,7 +5963,7 @@ module Aws::CustomerProfiles
     #   <p>Applies a filter to include profile history records only with the specified <code>ObjectTypeName</code> value in the response.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous 
+    #   <p>The token for the next set of results. Use the value returned in the previous
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -4673,13 +6015,16 @@ module Aws::CustomerProfiles
     #   <p>The timestamp of when the domain was created.</p>
     #   @return [Time]
     # @!attribute last_updated_at
-    #   <p>The timestamp of when the domain was most recently edited.</p>
+    #   <p>The timestamp of when the profile object type was most recently edited.</p>
     #   @return [Time]
     # @!attribute max_profile_object_count
     #   <p>The amount of profile object max count assigned to the object type.</p>
     #   @return [Integer]
     # @!attribute max_available_profile_object_count
     #   <p>The amount of provisioned profile object max count available.</p>
+    #   @return [Integer]
+    # @!attribute source_priority
+    #   <p>An integer that determines the priority of this object type when data from multiple sources is ingested. Lower values take priority. Object types without a specified source priority default to the lowest priority.</p>
     #   @return [Integer]
     # @!attribute tags
     #   <p>The tags used to organize, track, or control access for this resource.</p>
@@ -4692,6 +6037,7 @@ module Aws::CustomerProfiles
       :last_updated_at,
       :max_profile_object_count,
       :max_available_profile_object_count,
+      :source_priority,
       :tags,
       keyword_init: true
     )
@@ -4850,6 +6196,138 @@ module Aws::CustomerProfiles
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute domain_name
+    #   <p>The unique name of the domain.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of recommender filters to return in the response. The default value is 100.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>A token received from a previous ListRecommenderFilters call to retrieve the next page of results.</p>
+    #   @return [String]
+    class ListRecommenderFiltersRequest < Struct.new(
+      nil,
+      :domain_name,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute next_token
+    #   <p>A token to retrieve the next page of results. Null if there are no more results to retrieve.</p>
+    #   @return [String]
+    # @!attribute recommender_filters
+    #   <p>A list of recommender filters and their properties in the specified domain.</p>
+    #   @return [Array<Types::RecommenderFilterSummary>]
+    class ListRecommenderFiltersResponse < Struct.new(
+      nil,
+      :next_token,
+      :recommender_filters,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute max_results
+    #   <p>The maximum number of recommender recipes to return in the response. The default value is 100.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>A token received from a previous ListRecommenderRecipes call to retrieve the next page of results.</p>
+    #   @return [String]
+    class ListRecommenderRecipesRequest < Struct.new(
+      nil,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute next_token
+    #   <p>A token to retrieve the next page of results. Null if there are no more results to retrieve.</p>
+    #   @return [String]
+    # @!attribute recommender_recipes
+    #   <p>A list of available recommender recipes and their properties.</p>
+    #   @return [Array<Types::RecommenderRecipe>]
+    class ListRecommenderRecipesResponse < Struct.new(
+      nil,
+      :next_token,
+      :recommender_recipes,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute domain_name
+    #   <p>The unique name of the domain.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of recommender schemas to return in the response. The default value is 100.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>A token received from a previous ListRecommenderSchemas call to retrieve the next page of results.</p>
+    #   @return [String]
+    class ListRecommenderSchemasRequest < Struct.new(
+      nil,
+      :domain_name,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute next_token
+    #   <p>A token to retrieve the next page of results. Null if there are no more results to retrieve.</p>
+    #   @return [String]
+    # @!attribute recommender_schemas
+    #   <p>A list of recommender schemas and their properties in the specified domain.</p>
+    #   @return [Array<Types::RecommenderSchemaSummary>]
+    class ListRecommenderSchemasResponse < Struct.new(
+      nil,
+      :next_token,
+      :recommender_schemas,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute domain_name
+    #   <p>The unique name of the domain.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of recommenders to return in the response. The default value is 100.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>A token received from a previous ListRecommenders call to retrieve the next page of results.</p>
+    #   @return [String]
+    class ListRecommendersRequest < Struct.new(
+      nil,
+      :domain_name,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute next_token
+    #   <p>A token to retrieve the next page of results. Null if there are no more results to retrieve.</p>
+    #   @return [String]
+    # @!attribute recommenders
+    #   <p>A list of recommenders and their properties in the specified domain.</p>
+    #   @return [Array<Types::RecommenderSummary>]
+    class ListRecommendersResponse < Struct.new(
+      nil,
+      :next_token,
+      :recommenders,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute next_token
     #   <p>The pagination token from the previous <code>ListRuleBasedMatches</code> API
     #            call.</p>
@@ -4915,6 +6393,44 @@ module Aws::CustomerProfiles
       nil,
       :next_token,
       :items,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute domain_name
+    #   <p>The unique name of the domain.</p>
+    #   @return [String]
+    # @!attribute segment_definition_name
+    #   <p>The unique name of the segment definition. </p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of events to return per page. </p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The pagination token from the previous call to retrieve the next page of results. </p>
+    #   @return [String]
+    class ListSegmentSubscriptionEventsRequest < Struct.new(
+      nil,
+      :domain_name,
+      :segment_definition_name,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute events
+    #   <p>A list of segment membership events. </p>
+    #   @return [Array<Types::SubscriptionEventItem>]
+    # @!attribute next_token
+    #   <p>The pagination token to use to retrieve the next page of results. </p>
+    #   @return [String]
+    class ListSegmentSubscriptionEventsResponse < Struct.new(
+      nil,
+      :events,
+      :next_token,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5025,7 +6541,7 @@ module Aws::CustomerProfiles
     #   <p>Retrieve workflows ended after timestamp.</p>
     #   @return [Time]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous 
+    #   <p>The token for the next set of results. Use the value returned in the previous
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -5253,6 +6769,18 @@ module Aws::CustomerProfiles
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Configuration for metadata to include in recommendation responses.</p>
+    # @!attribute metadata_columns
+    #   <p>A list of metadata column names from your Items dataset to include in the recommendation response.</p>
+    #   @return [Array<String>]
+    class MetadataConfig < Struct.new(
+      nil,
+      :metadata_columns,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The criteria that a specific object attribute must meet to trigger the
     #          destination.</p>
     # @!attribute source
@@ -5306,7 +6834,7 @@ module Aws::CustomerProfiles
     #   @return [String]
     # @!attribute target
     #   <p>The location of the data in the standard ProfileObject model. For example:
-    #            _profile.Address.PostalCode.</p>
+    #            _profile.Address.PostalCode. Do not include sensitive or personally identifiable information (PII) in the target field name.</p>
     #   @return [String]
     # @!attribute content_type
     #   <p>The content type of the field. Used for determining equality when searching.</p>
@@ -5662,7 +7190,10 @@ module Aws::CustomerProfiles
     #   <p>The action to segment on.</p>
     #   @return [String]
     # @!attribute values
-    #   <p>The values to apply the DimensionType on.</p>
+    #   <p>The values to apply the DimensionType on. To reference a calculated attribute or profile
+    #            attribute as a dynamic value, use handlebar notation:
+    #            <code>{{_profile.ProfileAttributeName}}</code> or
+    #            <code>{{_calculated_attribute.CalculatedAttributeName}}</code>.</p>
     #   @return [Array<String>]
     class ProfileDimension < Struct.new(
       nil,
@@ -5768,12 +7299,83 @@ module Aws::CustomerProfiles
     # @!attribute domain_name
     #   <p>The unique name of the domain.</p>
     #   @return [String]
+    # @!attribute object_type_name
+    #   <p>The unique name of the domain object type.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>The description of the domain object type.</p>
+    #   @return [String]
+    # @!attribute encryption_key
+    #   <p>The customer provided KMS key used to encrypt this type of domain object.</p>
+    #   @return [String]
+    # @!attribute fields
+    #   <p>A map of field names to their corresponding domain object type field definitions.</p>
+    #   @return [Hash<String, Types::DomainObjectTypeField>]
+    # @!attribute tags
+    #   <p>The tags used to organize, track, or control access for this resource.</p>
+    #   @return [Hash<String, String>]
+    class PutDomainObjectTypeRequest < Struct.new(
+      nil,
+      :domain_name,
+      :object_type_name,
+      :description,
+      :encryption_key,
+      :fields,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute object_type_name
+    #   <p>The unique name of the domain object type.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>The description of the domain object type.</p>
+    #   @return [String]
+    # @!attribute encryption_key
+    #   <p>The customer provided KMS key used to encrypt this type of domain object.</p>
+    #   @return [String]
+    # @!attribute fields
+    #   <p>A map of field names to their corresponding domain object type field definitions.</p>
+    #   @return [Hash<String, Types::DomainObjectTypeField>]
+    # @!attribute created_at
+    #   <p>The timestamp of when the domain object type was created.</p>
+    #   @return [Time]
+    # @!attribute last_updated_at
+    #   <p>The timestamp of when the domain object type was most recently edited.</p>
+    #   @return [Time]
+    # @!attribute tags
+    #   <p>The tags used to organize, track, or control access for this resource.</p>
+    #   @return [Hash<String, String>]
+    class PutDomainObjectTypeResponse < Struct.new(
+      nil,
+      :object_type_name,
+      :description,
+      :encryption_key,
+      :fields,
+      :created_at,
+      :last_updated_at,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute domain_name
+    #   <p>The unique name of the domain.</p>
+    #   @return [String]
     # @!attribute uri
     #   <p>The URI of the S3 bucket or any other type of data source.</p>
     #   @return [String]
     # @!attribute object_type_name
     #   <p>The name of the profile object type.</p>
     #   @return [String]
+    # @!attribute object_type_names
+    #   <p>A map in which each key is an event type from an external application such as Segment or Shopify, and each value is an <code>ObjectTypeName</code> (template) used to ingest the event.
+    #   It supports the following event types: <code>SegmentIdentify</code>, <code>ShopifyCreateCustomers</code>, <code>ShopifyUpdateCustomers</code>, <code>ShopifyCreateDraftOrders</code>,
+    #   <code>ShopifyUpdateDraftOrders</code>, <code>ShopifyCreateOrders</code>, and <code>ShopifyUpdatedOrders</code>.</p>
+    #   @return [Hash<String, String>]
     # @!attribute tags
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
@@ -5781,11 +7383,6 @@ module Aws::CustomerProfiles
     #   <p>The configuration that controls how Customer Profiles retrieves data from the
     #            source.</p>
     #   @return [Types::FlowDefinition]
-    # @!attribute object_type_names
-    #   <p>A map in which each key is an event type from an external application such as Segment or Shopify, and each value is an <code>ObjectTypeName</code> (template) used to ingest the event.
-    #   It supports the following event types: <code>SegmentIdentify</code>, <code>ShopifyCreateCustomers</code>, <code>ShopifyUpdateCustomers</code>, <code>ShopifyCreateDraftOrders</code>, 
-    #   <code>ShopifyUpdateDraftOrders</code>, <code>ShopifyCreateOrders</code>, and <code>ShopifyUpdatedOrders</code>.</p>
-    #   @return [Hash<String, String>]
     # @!attribute role_arn
     #   <p>The Amazon Resource Name (ARN) of the IAM role. The Integration uses this role to make
     #            Customer Profiles requests on your behalf.</p>
@@ -5793,16 +7390,20 @@ module Aws::CustomerProfiles
     # @!attribute event_trigger_names
     #   <p>A list of unique names for active event triggers associated with the integration.</p>
     #   @return [Array<String>]
+    # @!attribute scope
+    #   <p>Specifies whether the integration applies to profile level data (associated with profiles) or domain level data (not associated with any specific profile). The default value is PROFILE.</p>
+    #   @return [String]
     class PutIntegrationRequest < Struct.new(
       nil,
       :domain_name,
       :uri,
       :object_type_name,
+      :object_type_names,
       :tags,
       :flow_definition,
-      :object_type_names,
       :role_arn,
       :event_trigger_names,
+      :scope,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5828,7 +7429,7 @@ module Aws::CustomerProfiles
     #   @return [Hash<String, String>]
     # @!attribute object_type_names
     #   <p>A map in which each key is an event type from an external application such as Segment or Shopify, and each value is an <code>ObjectTypeName</code> (template) used to ingest the event.
-    #   It supports the following event types: <code>SegmentIdentify</code>, <code>ShopifyCreateCustomers</code>, <code>ShopifyUpdateCustomers</code>, <code>ShopifyCreateDraftOrders</code>, 
+    #   It supports the following event types: <code>SegmentIdentify</code>, <code>ShopifyCreateCustomers</code>, <code>ShopifyUpdateCustomers</code>, <code>ShopifyCreateDraftOrders</code>,
     #   <code>ShopifyUpdateDraftOrders</code>, <code>ShopifyCreateOrders</code>, and <code>ShopifyUpdatedOrders</code>.</p>
     #   @return [Hash<String, String>]
     # @!attribute workflow_id
@@ -5847,6 +7448,9 @@ module Aws::CustomerProfiles
     #   <p>A list of unique names for active event triggers associated with the integration. This
     #            list would be empty if no Event Trigger is associated with the integration.</p>
     #   @return [Array<String>]
+    # @!attribute scope
+    #   <p>Specifies whether the integration applies to profile level data (associated with profiles) or domain level data (not associated with any specific profile). The default value is PROFILE.</p>
+    #   @return [String]
     class PutIntegrationResponse < Struct.new(
       nil,
       :domain_name,
@@ -5860,6 +7464,7 @@ module Aws::CustomerProfiles
       :is_unstructured,
       :role_arn,
       :event_trigger_names,
+      :scope,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5934,6 +7539,9 @@ module Aws::CustomerProfiles
     # @!attribute max_profile_object_count
     #   <p>The amount of profile object max count assigned to the object type</p>
     #   @return [Integer]
+    # @!attribute source_priority
+    #   <p>An integer that determines the priority of this object type when data from multiple sources is ingested. Lower values take priority. Object types without a specified source priority default to the lowest priority.</p>
+    #   @return [Integer]
     # @!attribute fields
     #   <p>A map of the name and ObjectType field.</p>
     #   @return [Hash<String, Types::ObjectTypeField>]
@@ -5954,6 +7562,7 @@ module Aws::CustomerProfiles
       :allow_profile_creation,
       :source_last_updated_timestamp_format,
       :max_profile_object_count,
+      :source_priority,
       :fields,
       :keys,
       :tags,
@@ -5996,6 +7605,9 @@ module Aws::CustomerProfiles
     # @!attribute max_available_profile_object_count
     #   <p>The amount of provisioned profile object max count available.</p>
     #   @return [Integer]
+    # @!attribute source_priority
+    #   <p>An integer that determines the priority of this object type when data from multiple sources is ingested. Lower values take priority. Object types without a specified source priority default to the lowest priority.</p>
+    #   @return [Integer]
     # @!attribute fields
     #   <p>A map of the name and ObjectType field.</p>
     #   @return [Hash<String, Types::ObjectTypeField>]
@@ -6022,6 +7634,7 @@ module Aws::CustomerProfiles
       :source_last_updated_timestamp_format,
       :max_profile_object_count,
       :max_available_profile_object_count,
+      :source_priority,
       :fields,
       :keys,
       :created_at,
@@ -6035,6 +7648,65 @@ module Aws::CustomerProfiles
         options[:allow_profile_creation] = false unless options.key?(:allow_profile_creation)
         super
       end
+    end
+
+    # @!attribute domain_name
+    #   <p>The unique name of the domain.</p>
+    #   @return [String]
+    # @!attribute segment_definition_name
+    #   <p>The unique name of the segment definition. </p>
+    #   @return [String]
+    # @!attribute schedule_configuration
+    #   <p>The optional schedule configuration that controls how often membership snapshots are run.
+    #            If not provided, the subscription defaults to a 24-hour interval. </p>
+    #   @return [Types::ScheduleConfiguration]
+    class PutSegmentSubscriptionRequest < Struct.new(
+      nil,
+      :domain_name,
+      :segment_definition_name,
+      :schedule_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute status
+    #   <p>The current lifecycle status of the subscription. The following are valid values: </p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <b>STARTING</b>: Initial snapshot is in progress. </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <b>RUNNING</b>: Notifications are active and running.
+    #               </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <b>STOPPED</b>: Notifications have been stopped. </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <b>FAILED</b>: Notifications failed (for example, the
+    #                  Amazon Kinesis data stream became inaccessible). </p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute schedule_configuration
+    #   <p>The schedule configuration for the subscription, if configured. </p>
+    #   @return [Types::ScheduleConfiguration]
+    # @!attribute started_at
+    #   <p>The timestamp of when the subscription was started. </p>
+    #   @return [Time]
+    class PutSegmentSubscriptionResponse < Struct.new(
+      nil,
+      :status,
+      :schedule_configuration,
+      :started_at,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The relative time period over which data is included in the aggregation.</p>
@@ -6121,6 +7793,326 @@ module Aws::CustomerProfiles
       nil,
       :progress_percentage,
       :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Represents a single recommendation generated by the recommender system.</p>
+    # @!attribute catalog_item
+    #   <p>The catalog item being recommended, including its complete details and attributes.</p>
+    #   @return [Types::CatalogItem]
+    # @!attribute score
+    #   <p>Recommendation Score between 0 and 1.</p>
+    #   @return [Float]
+    class Recommendation < Struct.new(
+      nil,
+      :catalog_item,
+      :score,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Runtime diversity configuration for a <code>GetProfileRecommendations</code> request.</p>
+    # @!attribute enabled
+    #   <p>Whether diversity-aware recommendations are enabled for this request.</p>
+    #   @return [Boolean]
+    # @!attribute values
+    #   <p>An optional map of placeholder name to integer cap value used to resolve <code>$name</code> placeholders defined in the recommender's <code>DiversityConfig</code> at inference time. Up to 2 entries are supported.</p>
+    #   @return [Hash<String, Integer>]
+    class RecommendationDiversityConfig < Struct.new(
+      nil,
+      :enabled,
+      :values,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration for metadata to include in recommendation responses.</p>
+    # @!attribute columns
+    #   <p>A list of metadata column names from your Items dataset to include in the recommendation response.</p>
+    #   @return [Array<String>]
+    class RecommendationMetadata < Struct.new(
+      nil,
+      :columns,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The recommender used to generate the recommendations.</p>
+    # @!attribute name
+    #   <p>The unique name of the recommender.</p>
+    #   @return [String]
+    # @!attribute filters
+    #   <p>A list of filters to apply to the returned recommendations. Filters define criteria for including or excluding items from the recommendation results.</p>
+    #   @return [Array<Types::RecommenderFilter>]
+    # @!attribute promotional_filters
+    #   <p>A list of promotional filters to apply to the recommendations. Promotional filters allow you to promote specific items within a configurable subset of recommendation results.</p>
+    #   @return [Array<Types::RecommenderPromotionalFilter>]
+    class Recommender < Struct.new(
+      nil,
+      :name,
+      :filters,
+      :promotional_filters,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration settings that define the behavior and parameters of a recommender.</p>
+    # @!attribute events_config
+    #   <p>Configuration settings for how the recommender processes and uses events.</p>
+    #   @return [Types::EventsConfig]
+    # @!attribute training_frequency
+    #   <p>How often the recommender should retrain its model with new data. If set to 0, automatic retraining will not be enabled.</p>
+    #   @return [Integer]
+    # @!attribute inference_config
+    #   <p>Configuration settings for how the recommender handles inference requests.</p>
+    #   @return [Types::InferenceConfig]
+    # @!attribute included_columns
+    #   <p>A map of dataset type to a list of column names to train on. The <code>_webAnalytics</code> and <code>_catalogItem</code> keys are supported. The column names must be a subset of the columns defined in the recommender schema. If not specified, all columns in the schema are used for training. The following columns are always included in training and do not need to be specified: <code>Item.Id</code>, <code>EventTimestamp</code>, and <code>EventType</code> for <code>_webAnalytics</code>; <code>Id</code> for <code>_catalogItem</code>. Mutually exclusive with ExcludedColumns — both cannot be specified in the same request.</p>
+    #   @return [Hash<String, Array<String>>]
+    # @!attribute excluded_columns
+    #   <p>A map of dataset type to a list of column names to exclude from training. The <code>_webAnalytics</code> and <code>_catalogItem</code> keys are supported. The column names must be valid columns defined in the recommender schema. All columns in the schema except the listed columns will be used for training. The following columns are mandatory and cannot be excluded: <code>Item.Id</code>, <code>EventTimestamp</code>, and <code>EventType</code> for <code>_webAnalytics</code>; <code>Id</code> for <code>_catalogItem</code>. Mutually exclusive with IncludedColumns — both cannot be specified in the same request.</p>
+    #   @return [Hash<String, Array<String>>]
+    # @!attribute diversity_config
+    #   <p>Configuration for diversity-aware recommendations. When set, the recommender applies diversity constraints defined per item column to reduce over-concentration of similar items in the results.</p>
+    #   @return [Types::DiversityConfig]
+    class RecommenderConfig < Struct.new(
+      nil,
+      :events_config,
+      :training_frequency,
+      :inference_config,
+      :included_columns,
+      :excluded_columns,
+      :diversity_config,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A filter that specifies criteria for including or excluding items from recommendations.</p>
+    # @!attribute name
+    #   <p>The name of the recommender filter to apply.</p>
+    #   @return [String]
+    # @!attribute values
+    #   <p>The values to use when filtering recommendations. For each placeholder parameter in your filter expression, provide the parameter name (in matching case) as a key and the filter value(s) as the corresponding value. Separate multiple values for one parameter with a comma.</p>
+    #   @return [Hash<String, String>]
+    class RecommenderFilter < Struct.new(
+      nil,
+      :name,
+      :values,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Provides a summary of a recommender filter's configuration and current state.</p>
+    # @!attribute recommender_filter_name
+    #   <p>The name of the recommender filter.</p>
+    #   @return [String]
+    # @!attribute recommender_schema_name
+    #   <p>The name of the recommender schema associated with this recommender filter.</p>
+    #   @return [String]
+    # @!attribute recommender_filter_expression
+    #   <p>The filter expression that defines which items to include or exclude from recommendations.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The timestamp when the recommender filter was created.</p>
+    #   @return [Time]
+    # @!attribute description
+    #   <p>A description of the recommender filter's purpose and characteristics.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current operational status of the recommender filter.</p>
+    #   @return [String]
+    # @!attribute failure_reason
+    #   <p>If the recommender filter is in a failed state, provides the reason for the failure.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>The tags used to organize, track, or control access for this resource.</p>
+    #   @return [Hash<String, String>]
+    class RecommenderFilterSummary < Struct.new(
+      nil,
+      :recommender_filter_name,
+      :recommender_schema_name,
+      :recommender_filter_expression,
+      :created_at,
+      :description,
+      :status,
+      :failure_reason,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains information on a promotion. A promotion defines additional business rules that apply to a configurable subset of recommended items.</p>
+    # @!attribute name
+    #   <p>The name of the recommender filter to use for the promotion.</p>
+    #   @return [String]
+    # @!attribute values
+    #   <p>The values to use when promoting items. For each placeholder parameter in your promotion's filter expression, provide the parameter name (in matching case) as a key and the filter value(s) as the corresponding value. Separate multiple values for one parameter with a comma.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute promotion_name
+    #   <p>The name of the promotion.</p>
+    #   @return [String]
+    # @!attribute percent_promoted_items
+    #   <p>The percentage of recommended items to apply the promotion to.</p>
+    #   @return [Integer]
+    class RecommenderPromotionalFilter < Struct.new(
+      nil,
+      :name,
+      :values,
+      :promotion_name,
+      :percent_promoted_items,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Defines the algorithm and approach used to generate recommendations.</p>
+    # @!attribute name
+    #   <p>The name of the recommender recipe.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>A description of the recommender recipe's purpose and functionality.</p>
+    #   @return [String]
+    class RecommenderRecipe < Struct.new(
+      nil,
+      :name,
+      :description,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Defines a column in a recommender schema, including the target field name and optional feature and content type settings for training.</p>
+    # @!attribute target_field_name
+    #   <p>The name of the target field in the dataset, such as <code>Location.City</code> or <code>Attributes.MealTime</code>.</p>
+    #   @return [String]
+    # @!attribute content_type
+    #   <p>The data type of the column value. Valid values are <code>String</code> and <code>Number</code>. The default value is <code>String</code>.</p>
+    #   @return [String]
+    # @!attribute feature_type
+    #   <p>How the column is treated for model training. Valid values are <code>CATEGORICAL</code> and <code>TEXTUAL</code>.</p>
+    #   @return [String]
+    class RecommenderSchemaField < Struct.new(
+      nil,
+      :target_field_name,
+      :content_type,
+      :feature_type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Provides a summary of a recommender schema's configuration and current state.</p>
+    # @!attribute recommender_schema_name
+    #   <p>The name of the recommender schema.</p>
+    #   @return [String]
+    # @!attribute fields
+    #   <p>A map of dataset type to column definitions included in the schema.</p>
+    #   @return [Hash<String, Array<Types::RecommenderSchemaField>>]
+    # @!attribute created_at
+    #   <p>The timestamp when the recommender schema was created.</p>
+    #   @return [Time]
+    # @!attribute status
+    #   <p>The current operational status of the recommender schema.</p>
+    #   @return [String]
+    class RecommenderSchemaSummary < Struct.new(
+      nil,
+      :recommender_schema_name,
+      :fields,
+      :created_at,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Provides a summary of a recommender's configuration and current state.</p>
+    # @!attribute recommender_name
+    #   <p>The name of the recommender.</p>
+    #   @return [String]
+    # @!attribute recipe_name
+    #   <p>The name of the recipe used by this recommender.</p>
+    #   @return [String]
+    # @!attribute recommender_schema_name
+    #   <p>The name of the recommender schema associated with this recommender.</p>
+    #   @return [String]
+    # @!attribute recommender_config
+    #   <p>The configuration settings applied to this recommender.</p>
+    #   @return [Types::RecommenderConfig]
+    # @!attribute created_at
+    #   <p>The timestamp when the recommender was created.</p>
+    #   @return [Time]
+    # @!attribute description
+    #   <p>A description of the recommender's purpose and characteristics.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current operational status of the recommender.</p>
+    #   @return [String]
+    # @!attribute last_updated_at
+    #   <p>The timestamp of when the recommender was edited.</p>
+    #   @return [Time]
+    # @!attribute tags
+    #   <p>The tags used to organize, track, or control access for this resource.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute failure_reason
+    #   <p>If the recommender is in a failed state, provides the reason for the failure.</p>
+    #   @return [String]
+    # @!attribute latest_recommender_update
+    #   <p>Information about the most recent update performed on the recommender, including its status and timing.</p>
+    #   @return [Types::RecommenderUpdate]
+    class RecommenderSummary < Struct.new(
+      nil,
+      :recommender_name,
+      :recipe_name,
+      :recommender_schema_name,
+      :recommender_config,
+      :created_at,
+      :description,
+      :status,
+      :last_updated_at,
+      :tags,
+      :failure_reason,
+      :latest_recommender_update,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains information about an update operation performed on a recommender.</p>
+    # @!attribute recommender_config
+    #   <p>The updated configuration settings applied to the recommender during this update.</p>
+    #   @return [Types::RecommenderConfig]
+    # @!attribute status
+    #   <p>The current status of the recommender update operation.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The timestamp when this recommender update was initiated.</p>
+    #   @return [Time]
+    # @!attribute last_updated_at
+    #   <p>The timestamp of when the recommender was edited.</p>
+    #   @return [Time]
+    # @!attribute failure_reason
+    #   <p>If the update operation failed, provides the reason for the failure.</p>
+    #   @return [String]
+    # @!attribute recommender_version_name
+    #   <p>The name of the recommender version associated with this update operation.</p>
+    #   @return [String]
+    class RecommenderUpdate < Struct.new(
+      nil,
+      :recommender_config,
+      :status,
+      :created_at,
+      :last_updated_at,
+      :failure_reason,
+      :recommender_version_name,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6350,6 +8342,44 @@ module Aws::CustomerProfiles
       end
     end
 
+    # <p>Configuration for scheduled segment membership event notifications. </p>
+    # @!attribute interval
+    #   <p>The interval between scheduled executions. </p>
+    #   @return [Integer]
+    # @!attribute unit
+    #   <p>The unit for the interval. The following are valid values: </p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <b>HOURLY</b>: The interval is measured in hours. </p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    class ScheduleConfiguration < Struct.new(
+      nil,
+      :interval,
+      :unit,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Information about scheduled execution timestamps. </p>
+    # @!attribute next_executed_at
+    #   <p>The timestamp of the next scheduled execution. </p>
+    #   @return [Time]
+    # @!attribute last_executed_at
+    #   <p>The timestamp of the last successful scheduled execution. </p>
+    #   @return [Time]
+    class ScheduledExecutions < Struct.new(
+      nil,
+      :next_executed_at,
+      :last_executed_at,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Specifies the configuration details of a scheduled-trigger flow that you define.
     #          Currently, these settings only apply to the scheduled-trigger type.</p>
     # @!attribute schedule_expression
@@ -6476,6 +8506,65 @@ module Aws::CustomerProfiles
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute domain_name
+    #   <p>The unique name of the domain.</p>
+    #   @return [String]
+    # @!attribute key_name
+    #   <p>A searchable identifier of a customer profile. You can use a predefined key, such as
+    #            <code>_profileId</code>, <code>_phone</code>, or <code>_email</code>, or a custom-defined key.</p>
+    #   @return [String]
+    # @!attribute key_values
+    #   <p>A list of key values. Provide one value for each field of the search key.</p>
+    #   @return [Array<String>]
+    # @!attribute recommender
+    #   <p>The recommender used to generate the recommendations.</p>
+    #   @return [Types::Recommender]
+    # @!attribute candidate_ids
+    #   <p>A list of item IDs to rank for the user. Use this when you want to re-rank a specific set of items rather than getting recommendations from the full item catalog. Required for personalized-ranking use cases.</p>
+    #   @return [Array<String>]
+    # @!attribute context
+    #   <p>The contextual metadata used to provide dynamic runtime information to tailor recommendations.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute diversity
+    #   <p>Runtime diversity configuration for this request. Enables diversity-aware recommendations and optionally supplies values for placeholder-based diversity caps configured on the recommender.</p>
+    #   @return [Types::RecommendationDiversityConfig]
+    # @!attribute metadata
+    #   <p>Configuration for metadata to include in recommendation responses.</p>
+    #   @return [Types::RecommendationMetadata]
+    # @!attribute max_recommendations
+    #   <p>The maximum number of recommendations to return. The default value is 5.</p>
+    #   @return [Integer]
+    class SearchRecommendationsRequest < Struct.new(
+      nil,
+      :domain_name,
+      :key_name,
+      :key_values,
+      :recommender,
+      :candidate_ids,
+      :context,
+      :diversity,
+      :metadata,
+      :max_recommendations,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute profile_id
+    #   <p>The unique identifier of the profile for which to retrieve recommendations.</p>
+    #   @return [String]
+    # @!attribute recommendations
+    #   <p>List of recommendations generated by the recommender.</p>
+    #   @return [Array<Types::Recommendation>]
+    class SearchRecommendationsResponse < Struct.new(
+      nil,
+      :profile_id,
+      :recommendations,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Object holding the segment definition fields.</p>
     # @!attribute segment_definition_name
     #   <p>Name of the segment definition.</p>
@@ -6495,6 +8584,12 @@ module Aws::CustomerProfiles
     # @!attribute tags
     #   <p>The tags belonging to the segment definition.</p>
     #   @return [Hash<String, String>]
+    # @!attribute segment_type
+    #   <p>The segment type.</p>
+    #            <p> Classic : Segments created using traditional SegmentGroup structure</p>
+    #            <p> Enhanced : Segments created using SQL queries
+    #         </p>
+    #   @return [String]
     class SegmentDefinitionItem < Struct.new(
       nil,
       :segment_definition_name,
@@ -6503,6 +8598,7 @@ module Aws::CustomerProfiles
       :segment_definition_arn,
       :created_at,
       :tags,
+      :segment_type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6546,6 +8642,19 @@ module Aws::CustomerProfiles
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Defines how segments should be sorted and ordered in the results.</p>
+    # @note This shape contains sensitive data and should be treated as such.
+    # @!attribute attributes
+    #   <p>A list of attributes used to sort the segments and their ordering preferences.</p>
+    #   @return [Array<Types::SortAttribute>]
+    class SegmentSort < Struct.new(
+      nil,
+      :attributes,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The properties that are applied when ServiceNow is being used as a source.</p>
     # @!attribute object
     #   <p>The object specified in the ServiceNow flow source.</p>
@@ -6556,6 +8665,35 @@ module Aws::CustomerProfiles
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+    end
+
+    # <p>Defines the characteristics and rules for sorting by a specific attribute.</p>
+    # @!attribute name
+    #   <p>The name of the attribute to sort by.</p>
+    #   @return [String]
+    # @!attribute data_type
+    #   <p>The data type of the sort attribute (e.g., string, number, date).</p>
+    #   @return [String]
+    # @!attribute order
+    #   <p>The sort order for the attribute (ascending or descending).</p>
+    #   @return [String]
+    # @!attribute type
+    #   <p>The type of attribute (e.g., profile, calculated).</p>
+    #   @return [String]
+    class SortAttribute < Struct.new(
+      nil,
+      :name,
+      :data_type,
+      :order,
+      :type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:type] = 'PROFILE' unless options.key?(:type)
+        super
+      end
     end
 
     # <p>Specifies the information that is required to query a particular Amazon AppFlow connector.
@@ -6629,6 +8767,28 @@ module Aws::CustomerProfiles
     end
 
     # @!attribute domain_name
+    #   <p>The unique name of the domain.</p>
+    #   @return [String]
+    # @!attribute recommender_name
+    #   <p>The name of the recommender to start.</p>
+    #   @return [String]
+    class StartRecommenderRequest < Struct.new(
+      nil,
+      :domain_name,
+      :recommender_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class StartRecommenderResponse < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute domain_name
     #   <p>The unique name of the domain containing the upload job to start. </p>
     #   @return [String]
     # @!attribute job_id
@@ -6644,6 +8804,28 @@ module Aws::CustomerProfiles
     end
 
     class StartUploadJobResponse < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute domain_name
+    #   <p>The unique name of the domain.</p>
+    #   @return [String]
+    # @!attribute recommender_name
+    #   <p>The name of the recommender to stop.</p>
+    #   @return [String]
+    class StopRecommenderRequest < Struct.new(
+      nil,
+      :domain_name,
+      :recommender_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class StopRecommenderResponse < Struct.new(
       nil,
       keyword_init: true
     )
@@ -6667,6 +8849,53 @@ module Aws::CustomerProfiles
 
     class StopUploadJobResponse < Struct.new(
       nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Represents a single segment membership event. </p>
+    # @!attribute profile_id
+    #   <p>The unique identifier of a customer profile.</p>
+    #   @return [String]
+    # @!attribute updated_at
+    #   <p>The timestamp of when the membership change was detected. </p>
+    #   @return [Time]
+    # @!attribute event_type
+    #   <p>The type of event that triggered the membership change. The following are valid values:
+    #         </p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <b>LIVE</b>: Real-time event triggered by a profile or
+    #                  calculated attribute change (Classic segments only). </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <b>SCHEDULE</b>: Event generated during a scheduled
+    #                  execution. </p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute event
+    #   <p>Whether the profile joined or left the segment. The following are valid values: </p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <b>JOINED</b>: The profile joined the segment. </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <b>LEFT</b>: The profile left the segment. </p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    class SubscriptionEventItem < Struct.new(
+      nil,
+      :profile_id,
+      :updated_at,
+      :event_type,
+      :event,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6747,6 +8976,26 @@ module Aws::CustomerProfiles
     class ThrottlingException < Struct.new(
       nil,
       :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains metrics and performance indicators from the training of a recommender model.</p>
+    # @!attribute time
+    #   <p>The timestamp when these training metrics were recorded.</p>
+    #   @return [Time]
+    # @!attribute metrics
+    #   <p>A collection of performance metrics and statistics from the training process.</p>
+    #   @return [Hash<String, Float>]
+    # @!attribute recommender_version_name
+    #   <p>The name of the recommender version that produced these training metrics.</p>
+    #   @return [String]
+    class TrainingMetrics < Struct.new(
+      nil,
+      :time,
+      :metrics,
+      :recommender_version_name,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7055,22 +9304,25 @@ module Aws::CustomerProfiles
     #   @return [String]
     # @!attribute matching
     #   <p>The process of matching duplicate profiles. If <code>Matching</code> = <code>true</code>, Amazon Connect Customer Profiles starts a weekly
-    #   batch process called Identity Resolution Job. If you do not specify a date and time for Identity Resolution Job to run, by default it runs every 
+    #   batch process called Identity Resolution Job. If you do not specify a date and time for Identity Resolution Job to run, by default it runs every
     #   Saturday at 12AM UTC to detect duplicate profiles in your domains. </p>
-    #            <p>After the Identity Resolution Job completes, use the 
+    #            <p>After the Identity Resolution Job completes, use the
     #   <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html">GetMatches</a>
     #   API to return and review the results. Or, if you have configured <code>ExportingConfig</code> in the <code>MatchingRequest</code>, you can download the results from
     #   S3.</p>
     #   @return [Types::MatchingRequest]
     # @!attribute rule_based_matching
     #   <p>The process of matching duplicate profiles using the rule-Based matching. If
-    #               <code>RuleBasedMatching</code> = true, Amazon Connect Customer Profiles will start
+    #               <code>RuleBasedMatching</code> = true, Connect Customer Customer Profiles will start
     #            to match and merge your profiles according to your configuration in the
     #               <code>RuleBasedMatchingRequest</code>. You can use the <code>ListRuleBasedMatches</code>
     #            and <code>GetSimilarProfiles</code> API to return and review the results. Also, if you have
     #            configured <code>ExportingConfig</code> in the <code>RuleBasedMatchingRequest</code>, you
     #            can download the results from S3.</p>
     #   @return [Types::RuleBasedMatchingRequest]
+    # @!attribute data_store
+    #   <p>Set to true to enabled data store for this domain.</p>
+    #   @return [Types::DataStoreRequest]
     # @!attribute tags
     #   <p>The tags used to organize, track, or control access for this resource.</p>
     #   @return [Hash<String, String>]
@@ -7082,6 +9334,7 @@ module Aws::CustomerProfiles
       :dead_letter_queue_url,
       :matching,
       :rule_based_matching,
+      :data_store,
       :tags,
       keyword_init: true
     )
@@ -7105,22 +9358,25 @@ module Aws::CustomerProfiles
     #   @return [String]
     # @!attribute matching
     #   <p>The process of matching duplicate profiles. If <code>Matching</code> = <code>true</code>, Amazon Connect Customer Profiles starts a weekly
-    #   batch process called Identity Resolution Job. If you do not specify a date and time for Identity Resolution Job to run, by default it runs every 
+    #   batch process called Identity Resolution Job. If you do not specify a date and time for Identity Resolution Job to run, by default it runs every
     #   Saturday at 12AM UTC to detect duplicate profiles in your domains. </p>
-    #            <p>After the Identity Resolution Job completes, use the 
+    #            <p>After the Identity Resolution Job completes, use the
     #   <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html">GetMatches</a>
     #   API to return and review the results. Or, if you have configured <code>ExportingConfig</code> in the <code>MatchingRequest</code>, you can download the results from
     #   S3.</p>
     #   @return [Types::MatchingResponse]
     # @!attribute rule_based_matching
     #   <p>The process of matching duplicate profiles using the rule-Based matching. If
-    #               <code>RuleBasedMatching</code> = true, Amazon Connect Customer Profiles will start
+    #               <code>RuleBasedMatching</code> = true, Connect Customer Customer Profiles will start
     #            to match and merge your profiles according to your configuration in the
     #               <code>RuleBasedMatchingRequest</code>. You can use the <code>ListRuleBasedMatches</code>
     #            and <code>GetSimilarProfiles</code> API to return and review the results. Also, if you have
     #            configured <code>ExportingConfig</code> in the <code>RuleBasedMatchingRequest</code>, you
     #            can download the results from S3.</p>
     #   @return [Types::RuleBasedMatchingResponse]
+    # @!attribute data_store
+    #   <p>The data store.</p>
+    #   @return [Types::DataStoreResponse]
     # @!attribute created_at
     #   <p>The timestamp of when the domain was created.</p>
     #   @return [Time]
@@ -7138,6 +9394,7 @@ module Aws::CustomerProfiles
       :dead_letter_queue_url,
       :matching,
       :rule_based_matching,
+      :data_store,
       :created_at,
       :last_updated_at,
       :tags,
@@ -7352,6 +9609,44 @@ module Aws::CustomerProfiles
     class UpdateProfileResponse < Struct.new(
       nil,
       :profile_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute domain_name
+    #   <p>The unique name of the domain.</p>
+    #   @return [String]
+    # @!attribute recommender_name
+    #   <p>The name of the recommender to update.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>The new description to assign to the recommender.</p>
+    #   @return [String]
+    # @!attribute recommender_config
+    #   <p>The new configuration settings to apply to the recommender, including updated parameters and settings that define its behavior.</p>
+    #   @return [Types::RecommenderConfig]
+    # @!attribute recommender_version_name
+    #   <p>The name of a specific recommender version to activate as part of this update (for example, to roll back to a previously trained version).</p>
+    #   @return [String]
+    class UpdateRecommenderRequest < Struct.new(
+      nil,
+      :domain_name,
+      :recommender_name,
+      :description,
+      :recommender_config,
+      :recommender_version_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute recommender_name
+    #   <p>The name of the recommender that was updated.</p>
+    #   @return [String]
+    class UpdateRecommenderResponse < Struct.new(
+      nil,
+      :recommender_name,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

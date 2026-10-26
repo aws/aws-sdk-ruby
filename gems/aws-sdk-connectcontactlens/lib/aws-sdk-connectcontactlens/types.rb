@@ -63,6 +63,81 @@ module Aws::ConnectContactLens
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Segment containing information extracted from the conversation. Each segment
+    #             represents the results for a single extraction definition.</p>
+    # @!attribute extraction_definition_id
+    #   <p>The identifier of the extraction definition that produced this result.</p>
+    #   @return [String]
+    # @!attribute extraction_definition_name
+    #   <p>The name of the extraction definition that produced this result.</p>
+    #   @return [String]
+    # @!attribute extraction_definition_display_label
+    #   <p>The display label of the extraction definition that produced this result.</p>
+    #   @return [String]
+    # @!attribute extracted_values
+    #   <p>The list of values extracted from the conversation for this extraction definition.
+    #               This field is empty when a <code>FailureCode</code> is present.</p>
+    #   @return [Array<Types::ExtractedInformationValue>]
+    # @!attribute failure_code
+    #   <p>If the information failed to be extracted, one of the following failure codes
+    #               occurs:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>QUOTA_EXCEEDED</code>: The number of concurrent analytics jobs reached
+    #                       your service quota.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>INSUFFICIENT_CONVERSATION_CONTENT</code>: Information extraction requires a
+    #                       conversation with at least one turn from each participant.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>FAILED_SAFETY_GUIDELINES</code>: The extracted information cannot be
+    #                       provided because it failed to meet system safety guidelines.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>INTERNAL_ERROR</code>: Internal system error.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>MAX_PACKAGE_FEATURE_ONLY</code>: Information extraction is only available
+    #                       in Amazon Connect Customer instances.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    class ExtractedInformation < Struct.new(
+      nil,
+      :extraction_definition_id,
+      :extraction_definition_name,
+      :extraction_definition_display_label,
+      :extracted_values,
+      :failure_code,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>An individual value extracted from the conversation, including its content and the
+    #             locations where it was found.</p>
+    # @!attribute content
+    #   <p>The text content of the extracted value.</p>
+    #   @return [String]
+    # @!attribute points_of_interest
+    #   <p>The sections in the conversation that indicate where the extracted value was
+    #               found.</p>
+    #   @return [Array<Types::PointOfInterest>]
+    class ExtractedInformationValue < Struct.new(
+      nil,
+      :content,
+      :points_of_interest,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Request processing failed due to an error or failure with the service.</p>
     # @!attribute message
     #   @return [String]
@@ -108,7 +183,7 @@ module Aws::ConnectContactLens
     #   <p>The maximum number of results to return per page.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous 
+    #   <p>The token for the next set of results. Use the value returned in the previous
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     class ListRealtimeContactAnalysisSegmentsRequest < Struct.new(
@@ -150,12 +225,12 @@ module Aws::ConnectContactLens
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The section of the contact audio where that category rule was detected.</p>
+    # <p>The section of the contact audio where a match was detected.</p>
     # @!attribute begin_offset_millis
-    #   <p>The beginning offset in milliseconds where the category rule was detected.</p>
+    #   <p>The beginning offset (in milliseconds) where the match was detected.</p>
     #   @return [Integer]
     # @!attribute end_offset_millis
-    #   <p>The ending offset in milliseconds where the category rule was detected.</p>
+    #   <p>The ending offset (in milliseconds) where the match was detected.</p>
     #   @return [Integer]
     class PointOfInterest < Struct.new(
       nil,
@@ -196,10 +271,8 @@ module Aws::ConnectContactLens
     #               <li>
     #                  <p>
     #                     <code>INVALID_ANALYSIS_CONFIGURATION</code>: This code occurs when, for
-    #                       example, you're using a 
-    #                       <a href="https://docs.aws.amazon.com/connect/latest/adminguide/supported-languages.html#supported-languages-contact-lens">language</a> 
-    #                        that isn't supported by generative AI-powered post-contact summaries.
-    #                   </p>
+    #                       example, you're using a <a href="https://docs.aws.amazon.com/connect/latest/adminguide/supported-languages.html#supported-languages-contact-lens">language</a> that isn't supported by generative AI-powered post-contact
+    #                       summaries. </p>
     #               </li>
     #               <li>
     #                  <p>
@@ -227,11 +300,15 @@ module Aws::ConnectContactLens
     # @!attribute post_contact_summary
     #   <p>Information about the post-contact summary.</p>
     #   @return [Types::PostContactSummary]
+    # @!attribute extracted_information
+    #   <p>The extracted information from the conversation.</p>
+    #   @return [Types::ExtractedInformation]
     class RealtimeContactAnalysisSegment < Struct.new(
       nil,
       :transcript,
       :categories,
       :post_contact_summary,
+      :extracted_information,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

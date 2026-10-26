@@ -374,6 +374,7 @@ module Aws::RedshiftServerless
         ?price_performance_target: Types::PerformanceTarget,
         ?ip_address_type: String,
         ?track_name: String,
+        ?extra_compute_for_automatic_optimization: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -391,6 +392,7 @@ module Aws::RedshiftServerless
       attr_accessor price_performance_target: Types::PerformanceTarget?
       attr_accessor ip_address_type: String?
       attr_accessor track_name: String?
+      attr_accessor extra_compute_for_automatic_optimization: bool?
     end
 
     class CreateWorkgroupResponse
@@ -604,6 +606,17 @@ module Aws::RedshiftServerless
       attr_accessor workgroup: Types::Workgroup?
     end
 
+    class DryRunException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
     class Endpoint
       include Smithy::Schema::Structure
 
@@ -732,6 +745,30 @@ module Aws::RedshiftServerless
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor endpoint: Types::EndpointAccess?
+    end
+
+    class GetIdentityCenterAuthTokenRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workgroup_names: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workgroup_names: Array[String]?
+    end
+
+    class GetIdentityCenterAuthTokenResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?token: String,
+        ?expiration_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor token: String?
+      attr_accessor expiration_time: Time?
     end
 
     class GetNamespaceRequest
@@ -1498,6 +1535,9 @@ module Aws::RedshiftServerless
         ?creation_date: Time,
         ?admin_password_secret_arn: String,
         ?admin_password_secret_kms_key_id: String,
+        ?lakehouse_registration_status: String,
+        ?catalog_arn: String,
+        ?s3_table_publish_status: Types::S3TablePublishStatus,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1514,6 +1554,9 @@ module Aws::RedshiftServerless
       attr_accessor creation_date: Time?
       attr_accessor admin_password_secret_arn: String?
       attr_accessor admin_password_secret_kms_key_id: String?
+      attr_accessor lakehouse_registration_status: String?
+      attr_accessor catalog_arn: String?
+      attr_accessor s3_table_publish_status: Types::S3TablePublishStatus?
     end
 
     class NetworkInterface
@@ -1670,12 +1713,14 @@ module Aws::RedshiftServerless
         ?recovery_point_id: String,
         ?namespace_name: String,
         ?workgroup_name: String,
+        ?maintain_integration: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor recovery_point_id: String?
       attr_accessor namespace_name: String?
       attr_accessor workgroup_name: String?
+      attr_accessor maintain_integration: bool?
     end
 
     class RestoreFromRecoveryPointResponse
@@ -1702,6 +1747,7 @@ module Aws::RedshiftServerless
         ?owner_account: String,
         ?manage_admin_password: bool,
         ?admin_password_secret_kms_key_id: String,
+        ?maintain_integration: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1712,6 +1758,7 @@ module Aws::RedshiftServerless
       attr_accessor owner_account: String?
       attr_accessor manage_admin_password: bool?
       attr_accessor admin_password_secret_kms_key_id: String?
+      attr_accessor maintain_integration: bool?
     end
 
     class RestoreFromSnapshotResponse
@@ -1807,6 +1854,25 @@ module Aws::RedshiftServerless
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor table_restore_status: Types::TableRestoreStatus?
+    end
+
+    class S3TablePublishStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_tables: Array[String],
+        ?s3_table_namespace: String,
+        ?s3_table_granularity: String,
+        ?enabled_all: bool,
+        ?last_ingestion_times: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_tables: Array[String]?
+      attr_accessor s3_table_namespace: String?
+      attr_accessor s3_table_granularity: String?
+      attr_accessor enabled_all: bool?
+      attr_accessor last_ingestion_times: Hash[String, String]?
     end
 
     class Schedule
@@ -2169,6 +2235,44 @@ module Aws::RedshiftServerless
       attr_accessor endpoint: Types::EndpointAccess?
     end
 
+    class UpdateLakehouseConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?namespace_name: String,
+        ?lakehouse_registration: String,
+        ?catalog_name: String,
+        ?lakehouse_idc_registration: String,
+        ?lakehouse_idc_application_arn: String,
+        ?dry_run: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor namespace_name: String?
+      attr_accessor lakehouse_registration: String?
+      attr_accessor catalog_name: String?
+      attr_accessor lakehouse_idc_registration: String?
+      attr_accessor lakehouse_idc_application_arn: String?
+      attr_accessor dry_run: bool?
+    end
+
+    class UpdateLakehouseConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?namespace_name: String,
+        ?lakehouse_idc_application_arn: String,
+        ?lakehouse_registration_status: String,
+        ?catalog_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor namespace_name: String?
+      attr_accessor lakehouse_idc_application_arn: String?
+      attr_accessor lakehouse_registration_status: String?
+      attr_accessor catalog_arn: String?
+    end
+
     class UpdateNamespaceRequest
       include Smithy::Schema::Structure
 
@@ -2182,6 +2286,11 @@ module Aws::RedshiftServerless
         ?log_exports: Array[String],
         ?manage_admin_password: bool,
         ?admin_password_secret_kms_key_id: String,
+        ?log_destination_type: String,
+        ?s3_table_action: String,
+        ?s3_table_names: Array[String],
+        ?s3_table_kms_key_id: String,
+        ?s3_table_granularity: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2194,6 +2303,11 @@ module Aws::RedshiftServerless
       attr_accessor log_exports: Array[String]?
       attr_accessor manage_admin_password: bool?
       attr_accessor admin_password_secret_kms_key_id: String?
+      attr_accessor log_destination_type: String?
+      attr_accessor s3_table_action: String?
+      attr_accessor s3_table_names: Array[String]?
+      attr_accessor s3_table_kms_key_id: String?
+      attr_accessor s3_table_granularity: String?
     end
 
     class UpdateNamespaceResponse
@@ -2346,6 +2460,7 @@ module Aws::RedshiftServerless
         ?ip_address_type: String,
         ?price_performance_target: Types::PerformanceTarget,
         ?track_name: String,
+        ?extra_compute_for_automatic_optimization: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2361,6 +2476,7 @@ module Aws::RedshiftServerless
       attr_accessor ip_address_type: String?
       attr_accessor price_performance_target: Types::PerformanceTarget?
       attr_accessor track_name: String?
+      attr_accessor extra_compute_for_automatic_optimization: bool?
     end
 
     class UpdateWorkgroupResponse
@@ -2465,6 +2581,7 @@ module Aws::RedshiftServerless
         ?price_performance_target: Types::PerformanceTarget,
         ?track_name: String,
         ?pending_track_name: String,
+        ?extra_compute_for_automatic_optimization: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2493,6 +2610,7 @@ module Aws::RedshiftServerless
       attr_accessor price_performance_target: Types::PerformanceTarget?
       attr_accessor track_name: String?
       attr_accessor pending_track_name: String?
+      attr_accessor extra_compute_for_automatic_optimization: bool?
     end
   end
 end

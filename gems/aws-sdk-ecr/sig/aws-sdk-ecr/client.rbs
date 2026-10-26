@@ -256,6 +256,21 @@ module Aws::ECR
       ?repository_name: String
     ) -> _DeleteRepositoryPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRepositoryPolicyResponse
 
+    interface _DeleteSigningConfigurationResponse
+      include Smithy::Client::_Response[Types::DeleteSigningConfigurationResponse]
+      def registry_id: () -> String?
+      def signing_configuration: () -> Types::SigningConfiguration?
+    end
+    def delete_signing_configuration: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSigningConfigurationResponse
+
+    interface _DeregisterPullTimeUpdateExclusionResponse
+      include Smithy::Client::_Response[Types::DeregisterPullTimeUpdateExclusionResponse]
+      def principal_arn: () -> String?
+    end
+    def deregister_pull_time_update_exclusion: (
+      ?principal_arn: String
+    ) -> _DeregisterPullTimeUpdateExclusionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeregisterPullTimeUpdateExclusionResponse
+
     interface _DescribeImageReplicationStatusResponse
       include Smithy::Client::_Response[Types::DescribeImageReplicationStatusResponse]
       def repository_name: () -> String?
@@ -291,6 +306,22 @@ module Aws::ECR
       ?max_results: Integer
     ) -> _DescribeImageScanFindingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeImageScanFindingsResponse
 
+    interface _DescribeImageSigningStatusResponse
+      include Smithy::Client::_Response[Types::DescribeImageSigningStatusResponse]
+      def repository_name: () -> String?
+      def image_id: () -> Types::ImageIdentifier?
+      def registry_id: () -> String?
+      def signing_statuses: () -> Array[Types::ImageSigningStatus]?
+    end
+    def describe_image_signing_status: (
+      ?repository_name: String,
+      ?image_id: {
+        image_digest: String,
+        image_tag: String
+      },
+      ?registry_id: String
+    ) -> _DescribeImageSigningStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeImageSigningStatusResponse
+
     interface _DescribeImagesResponse
       include Smithy::Client::_Response[Types::DescribeImagesResponse]
       def image_details: () -> Array[Types::ImageDetail]?
@@ -308,7 +339,8 @@ module Aws::ECR
       ?next_token: String,
       ?max_results: Integer,
       ?filter: {
-        tag_status: String
+        tag_status: String,
+        image_status: String
       }
     ) -> _DescribeImagesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeImagesResponse
 
@@ -446,6 +478,13 @@ module Aws::ECR
       ?repository_name: String
     ) -> _GetRepositoryPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRepositoryPolicyResponse
 
+    interface _GetSigningConfigurationResponse
+      include Smithy::Client::_Response[Types::GetSigningConfigurationResponse]
+      def registry_id: () -> String?
+      def signing_configuration: () -> Types::SigningConfiguration?
+    end
+    def get_signing_configuration: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSigningConfigurationResponse
+
     interface _InitiateLayerUploadResponse
       include Smithy::Client::_Response[Types::InitiateLayerUploadResponse]
       def upload_id: () -> String?
@@ -455,6 +494,25 @@ module Aws::ECR
       ?registry_id: String,
       ?repository_name: String
     ) -> _InitiateLayerUploadResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _InitiateLayerUploadResponse
+
+    interface _ListImageReferrersResponse
+      include Smithy::Client::_Response[Types::ListImageReferrersResponse]
+      def referrers: () -> Array[Types::ImageReferrer]?
+      def next_token: () -> String?
+    end
+    def list_image_referrers: (
+      ?registry_id: String,
+      ?repository_name: String,
+      ?subject_id: {
+        image_digest: String
+      },
+      ?filter: {
+        artifact_types: Array[String],
+        artifact_status: String
+      },
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListImageReferrersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListImageReferrersResponse
 
     interface _ListImagesResponse
       include Smithy::Client::_Response[Types::ListImagesResponse]
@@ -467,9 +525,20 @@ module Aws::ECR
       ?next_token: String,
       ?max_results: Integer,
       ?filter: {
-        tag_status: String
+        tag_status: String,
+        image_status: String
       }
     ) -> _ListImagesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListImagesResponse
+
+    interface _ListPullTimeUpdateExclusionsResponse
+      include Smithy::Client::_Response[Types::ListPullTimeUpdateExclusionsResponse]
+      def pull_time_update_exclusions: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_pull_time_update_exclusions: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListPullTimeUpdateExclusionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPullTimeUpdateExclusionsResponse
 
     interface _ListTagsForResourceResponse
       include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
@@ -600,6 +669,35 @@ module Aws::ECR
       }
     ) -> _PutReplicationConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutReplicationConfigurationResponse
 
+    interface _PutSigningConfigurationResponse
+      include Smithy::Client::_Response[Types::PutSigningConfigurationResponse]
+      def signing_configuration: () -> Types::SigningConfiguration?
+    end
+    def put_signing_configuration: (
+      ?signing_configuration: {
+        rules: Array[
+          {
+            signing_profile_arn: String,
+            repository_filters: Array[
+              {
+                filter: String,
+                filter_type: String
+              }
+            ]
+          }
+        ]
+      }
+    ) -> _PutSigningConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutSigningConfigurationResponse
+
+    interface _RegisterPullTimeUpdateExclusionResponse
+      include Smithy::Client::_Response[Types::RegisterPullTimeUpdateExclusionResponse]
+      def principal_arn: () -> String?
+      def created_at: () -> Time?
+    end
+    def register_pull_time_update_exclusion: (
+      ?principal_arn: String
+    ) -> _RegisterPullTimeUpdateExclusionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterPullTimeUpdateExclusionResponse
+
     interface _SetRepositoryPolicyResponse
       include Smithy::Client::_Response[Types::SetRepositoryPolicyResponse]
       def registry_id: () -> String?
@@ -662,6 +760,23 @@ module Aws::ECR
       ?resource_arn: String,
       ?tag_keys: Array[String]
     ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateImageStorageClassResponse
+      include Smithy::Client::_Response[Types::UpdateImageStorageClassResponse]
+      def registry_id: () -> String?
+      def repository_name: () -> String?
+      def image_id: () -> Types::ImageIdentifier?
+      def image_status: () -> String?
+    end
+    def update_image_storage_class: (
+      ?registry_id: String,
+      ?repository_name: String,
+      ?image_id: {
+        image_digest: String,
+        image_tag: String
+      },
+      ?target_storage_class: String
+    ) -> _UpdateImageStorageClassResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateImageStorageClassResponse
 
     interface _UpdatePullThroughCacheRuleResponse
       include Smithy::Client::_Response[Types::UpdatePullThroughCacheRuleResponse]

@@ -32,6 +32,7 @@ module Aws::ACM
       ?retry_strategy: Object,
       ?sdk_ua_app_id: String,
       ?secret_access_key: String,
+      ?service_type: String,
       ?session_token: String,
       ?ssl_ca_bundle: String,
       ?ssl_ca_directory: String,
@@ -57,12 +58,139 @@ module Aws::ACM
       ]
     ) -> _AddTagsToCertificateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddTagsToCertificateResponse
 
+    interface _CreateAcmeDomainValidationResponse
+      include Smithy::Client::_Response[Types::CreateAcmeDomainValidationResponse]
+      def acme_domain_validation_arn: () -> String?
+    end
+    def create_acme_domain_validation: (
+      ?idempotency_token: String,
+      ?acme_endpoint_arn: String,
+      ?domain_name: String,
+      ?prevalidation_options: {
+        dns_prevalidation: {
+          domain_scope: {
+            exact_domain: String,
+            subdomains: untyped,
+            wildcards: untyped
+          },
+          hosted_zone_id: String
+        }
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateAcmeDomainValidationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAcmeDomainValidationResponse
+
+    interface _CreateAcmeEndpointResponse
+      include Smithy::Client::_Response[Types::CreateAcmeEndpointResponse]
+      def acme_endpoint_arn: () -> String?
+    end
+    def create_acme_endpoint: (
+      ?idempotency_token: String,
+      ?authorization_behavior: String,
+      ?contact: String,
+      ?certificate_authority: {
+        public_certificate_authority: {
+          allowed_key_algorithms: Array[String]
+        }
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?certificate_tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateAcmeEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAcmeEndpointResponse
+
+    interface _CreateAcmeExternalAccountBindingResponse
+      include Smithy::Client::_Response[Types::CreateAcmeExternalAccountBindingResponse]
+      def external_account_binding: () -> Types::AcmeExternalAccountBinding?
+    end
+    def create_acme_external_account_binding: (
+      ?idempotency_token: String,
+      ?acme_endpoint_arn: String,
+      ?role_arn: String,
+      ?expiration: {
+        value: Integer,
+        type: String
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateAcmeExternalAccountBindingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAcmeExternalAccountBindingResponse
+
+    interface _DeleteAcmeDomainValidationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_acme_domain_validation: (
+      ?acme_domain_validation_arn: String
+    ) -> _DeleteAcmeDomainValidationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAcmeDomainValidationResponse
+
+    interface _DeleteAcmeEndpointResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_acme_endpoint: (
+      ?acme_endpoint_arn: String
+    ) -> _DeleteAcmeEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAcmeEndpointResponse
+
+    interface _DeleteAcmeExternalAccountBindingResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_acme_external_account_binding: (
+      ?acme_external_account_binding_arn: String
+    ) -> _DeleteAcmeExternalAccountBindingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAcmeExternalAccountBindingResponse
+
     interface _DeleteCertificateResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
     end
     def delete_certificate: (
       ?certificate_arn: String
     ) -> _DeleteCertificateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCertificateResponse
+
+    interface _DescribeAcmeAccountResponse
+      include Smithy::Client::_Response[Types::DescribeAcmeAccountResponse]
+      def acme_account: () -> Types::AcmeAccount?
+    end
+    def describe_acme_account: (
+      ?acme_endpoint_arn: String,
+      ?account_url: String
+    ) -> _DescribeAcmeAccountResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAcmeAccountResponse
+
+    interface _DescribeAcmeDomainValidationResponse
+      include Smithy::Client::_Response[Types::DescribeAcmeDomainValidationResponse]
+      def acme_domain_validation: () -> Types::AcmeDomainValidation?
+    end
+    def describe_acme_domain_validation: (
+      ?acme_domain_validation_arn: String
+    ) -> _DescribeAcmeDomainValidationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAcmeDomainValidationResponse
+
+    interface _DescribeAcmeEndpointResponse
+      include Smithy::Client::_Response[Types::DescribeAcmeEndpointResponse]
+      def acme_endpoint: () -> Types::AcmeEndpoint?
+    end
+    def describe_acme_endpoint: (
+      ?acme_endpoint_arn: String
+    ) -> _DescribeAcmeEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAcmeEndpointResponse
+
+    interface _DescribeAcmeExternalAccountBindingResponse
+      include Smithy::Client::_Response[Types::DescribeAcmeExternalAccountBindingResponse]
+      def external_account_binding: () -> Types::AcmeExternalAccountBinding?
+    end
+    def describe_acme_external_account_binding: (
+      ?acme_external_account_binding_arn: String
+    ) -> _DescribeAcmeExternalAccountBindingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAcmeExternalAccountBindingResponse
 
     interface _DescribeCertificateResponse
       include Smithy::Client::_Response[Types::DescribeCertificateResponse]
@@ -88,6 +216,15 @@ module Aws::ACM
       def expiry_events: () -> Types::ExpiryEventsConfiguration?
     end
     def get_account_configuration: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAccountConfigurationResponse
+
+    interface _GetAcmeExternalAccountBindingCredentialsResponse
+      include Smithy::Client::_Response[Types::GetAcmeExternalAccountBindingCredentialsResponse]
+      def key_id: () -> String?
+      def mac_key: () -> String?
+    end
+    def get_acme_external_account_binding_credentials: (
+      ?acme_external_account_binding_arn: String
+    ) -> _GetAcmeExternalAccountBindingCredentialsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAcmeExternalAccountBindingCredentialsResponse
 
     interface _GetCertificateResponse
       include Smithy::Client::_Response[Types::GetCertificateResponse]
@@ -115,6 +252,60 @@ module Aws::ACM
       ]
     ) -> _ImportCertificateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ImportCertificateResponse
 
+    interface _ListAcmeAccountsResponse
+      include Smithy::Client::_Response[Types::ListAcmeAccountsResponse]
+      def acme_accounts: () -> Array[Types::AcmeAccountSummary]?
+      def next_token: () -> String?
+    end
+    def list_acme_accounts: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?acme_endpoint_arn: String
+    ) -> _ListAcmeAccountsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAcmeAccountsResponse
+
+    interface _ListAcmeDomainValidationsResponse
+      include Smithy::Client::_Response[Types::ListAcmeDomainValidationsResponse]
+      def acme_domain_validations: () -> Array[Types::AcmeDomainValidationSummary]?
+      def next_token: () -> String?
+    end
+    def list_acme_domain_validations: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?acme_endpoint_arn: String
+    ) -> _ListAcmeDomainValidationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAcmeDomainValidationsResponse
+
+    interface _ListAcmeEndpointsResponse
+      include Smithy::Client::_Response[Types::ListAcmeEndpointsResponse]
+      def acme_endpoints: () -> Array[Types::AcmeEndpointSummary]?
+      def next_token: () -> String?
+    end
+    def list_acme_endpoints: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAcmeEndpointsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAcmeEndpointsResponse
+
+    interface _ListAcmeExternalAccountBindingsResponse
+      include Smithy::Client::_Response[Types::ListAcmeExternalAccountBindingsResponse]
+      def external_account_bindings: () -> Array[Types::AcmeExternalAccountBindingSummary]?
+      def next_token: () -> String?
+    end
+    def list_acme_external_account_bindings: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?acme_endpoint_arn: String
+    ) -> _ListAcmeExternalAccountBindingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAcmeExternalAccountBindingsResponse
+
+    interface _ListCertificateDomainValidationsResponse
+      include Smithy::Client::_Response[Types::ListCertificateDomainValidationsResponse]
+      def domain_validation_summary_list: () -> Array[Types::DomainValidationSummary]?
+      def next_token: () -> String?
+    end
+    def list_certificate_domain_validations: (
+      ?certificate_arn: String,
+      ?next_token: String,
+      ?max_items: Integer
+    ) -> _ListCertificateDomainValidationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCertificateDomainValidationsResponse
+
     interface _ListCertificatesResponse
       include Smithy::Client::_Response[Types::ListCertificatesResponse]
       def next_token: () -> String?
@@ -122,6 +313,7 @@ module Aws::ACM
     end
     def list_certificates: (
       ?certificate_statuses: Array[String],
+      ?certificate_key_pair_origins: Array[String],
       ?includes: {
         extended_key_usage: Array[String],
         key_usage: Array[String],
@@ -142,6 +334,14 @@ module Aws::ACM
     def list_tags_for_certificate: (
       ?certificate_arn: String
     ) -> _ListTagsForCertificateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForCertificateResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
 
     interface _PutAccountConfigurationResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
@@ -190,7 +390,8 @@ module Aws::ACM
       ],
       ?options: {
         certificate_transparency_logging_preference: String,
-        export: String
+        export: String,
+        validation_method: String
       },
       ?certificate_authority_arn: String,
       ?tags: Array[
@@ -212,6 +413,21 @@ module Aws::ACM
       ?validation_domain: String
     ) -> _ResendValidationEmailResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ResendValidationEmailResponse
 
+    interface _RevokeAcmeAccountResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def revoke_acme_account: (
+      ?acme_endpoint_arn: String,
+      ?account_url: String
+    ) -> _RevokeAcmeAccountResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RevokeAcmeAccountResponse
+
+    interface _RevokeAcmeExternalAccountBindingResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def revoke_acme_external_account_binding: (
+      ?acme_external_account_binding_arn: String
+    ) -> _RevokeAcmeExternalAccountBindingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RevokeAcmeExternalAccountBindingResponse
+
     interface _RevokeCertificateResponse
       include Smithy::Client::_Response[Types::RevokeCertificateResponse]
       def certificate_arn: () -> String?
@@ -221,6 +437,121 @@ module Aws::ACM
       ?revocation_reason: String
     ) -> _RevokeCertificateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RevokeCertificateResponse
 
+    interface _SearchCertificatesResponse
+      include Smithy::Client::_Response[Types::SearchCertificatesResponse]
+      def results: () -> Array[Types::CertificateSearchResult]?
+      def next_token: () -> String?
+    end
+    def search_certificates: (
+      ?filter_statement: {
+        and: Array[
+          {
+            and: untyped,
+            or: untyped,
+            not: untyped,
+            filter: {
+              certificate_arn: String,
+              x509_attribute_filter: {
+                subject: {
+                  common_name: {
+                    value: String,
+                    comparison_operator: String
+                  }
+                },
+                subject_alternative_name: {
+                  dns_name: {
+                    value: untyped,
+                    comparison_operator: untyped
+                  }
+                },
+                extended_key_usage: String,
+                key_usage: String,
+                key_algorithm: String,
+                serial_number: String,
+                not_after: {
+                  start: Time,
+                  end: untyped
+                },
+                not_before: untyped
+              },
+              acm_certificate_metadata_filter: {
+                status: String,
+                renewal_status: String,
+                type: String,
+                in_use: bool,
+                exported: untyped,
+                export_option: String,
+                managed_by: String,
+                validation_method: String,
+                certificate_key_pair_origin: String,
+                acme_endpoint_arn: untyped,
+                acme_account_id: String
+              }
+            }
+          }
+        ],
+        or: untyped,
+        not: untyped,
+        filter: untyped
+      },
+      ?max_results: Integer,
+      ?next_token: String,
+      ?sort_by: String,
+      ?sort_order: String
+    ) -> _SearchCertificatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchCertificatesResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateAcmeDomainValidationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_acme_domain_validation: (
+      ?acme_domain_validation_arn: String,
+      ?prevalidation_options: {
+        dns_prevalidation: {
+          domain_scope: {
+            exact_domain: String,
+            subdomains: untyped,
+            wildcards: untyped
+          },
+          hosted_zone_id: String
+        }
+      }
+    ) -> _UpdateAcmeDomainValidationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAcmeDomainValidationResponse
+
+    interface _UpdateAcmeEndpointResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_acme_endpoint: (
+      ?acme_endpoint_arn: String,
+      ?authorization_behavior: String,
+      ?contact: String,
+      ?certificate_authority: {
+        public_certificate_authority: {
+          allowed_key_algorithms: Array[String]
+        }
+      }
+    ) -> _UpdateAcmeEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAcmeEndpointResponse
+
     interface _UpdateCertificateOptionsResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
     end
@@ -228,7 +559,8 @@ module Aws::ACM
       ?certificate_arn: String,
       ?options: {
         certificate_transparency_logging_preference: String,
-        export: String
+        export: String,
+        validation_method: String
       }
     ) -> _UpdateCertificateOptionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCertificateOptionsResponse
   end

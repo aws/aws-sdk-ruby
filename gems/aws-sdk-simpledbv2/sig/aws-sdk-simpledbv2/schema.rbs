@@ -1,0 +1,40 @@
+module Aws::SimpleDBv2
+  module Schema
+    include Smithy::Schema::Shapes
+
+    AwsAccountId: StringShape
+    ConflictException: StructureShape
+    DomainName: StringShape
+    ExportArn: StringShape
+    ExportDataCutoffTime: TimestampShape
+    ExportManifestSummary: StringShape
+    ExportStatus: EnumShape
+    ExportSummaries: ListShape
+    ExportSummary: StructureShape
+    FailureCode: StringShape
+    FailureMessage: StringShape
+    GetExportRequest: StructureShape
+    GetExportResponse: StructureShape
+    IdempotencyToken: StringShape
+    InvalidNextTokenException: StructureShape
+    InvalidParameterCombinationException: StructureShape
+    InvalidParameterValueException: StructureShape
+    ItemsCount: IntegerShape
+    ListExportsRequest: StructureShape
+    ListExportsResponse: StructureShape
+    MaxResults: IntegerShape
+    NextToken: StringShape
+    NoSuchDomainException: StructureShape
+    NoSuchExportException: StructureShape
+    NumberExportsLimitExceeded: StructureShape
+    RequestedAt: TimestampShape
+    S3BucketName: StringShape
+    S3KeyPrefix: StringShape
+    S3SseAlgorithm: EnumShape
+    S3SseKmsKeyId: StringShape
+    StartDomainExportRequest: StructureShape
+    StartDomainExportResponse: StructureShape
+
+    SimpleDBv2: ServiceShape
+  end
+end

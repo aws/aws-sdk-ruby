@@ -44,6 +44,15 @@ module Aws::SSOAdmin
       ?validate_params: bool,
     ) -> void | (?Hash[Symbol, untyped]) -> void
 
+    interface _AddRegionResponse
+      include Smithy::Client::_Response[Types::AddRegionResponse]
+      def status: () -> String?
+    end
+    def add_region: (
+      ?instance_arn: String,
+      ?region_name: String
+    ) -> _AddRegionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddRegionResponse
+
     interface _AttachCustomerManagedPolicyReferenceToPermissionSetResponse
       include Smithy::Client::_Response[Types::AttachCustomerManagedPolicyReferenceToPermissionSetResponse]
     end
@@ -81,6 +90,8 @@ module Aws::SSOAdmin
     interface _CreateApplicationResponse
       include Smithy::Client::_Response[Types::CreateApplicationResponse]
       def application_arn: () -> String?
+      def instance_arn: () -> String?
+      def identity_store_arn: () -> String?
     end
     def create_application: (
       ?instance_arn: String,
@@ -311,10 +322,12 @@ module Aws::SSOAdmin
       def name: () -> String?
       def application_account: () -> String?
       def instance_arn: () -> String?
+      def identity_store_arn: () -> String?
       def status: () -> String?
       def portal_options: () -> Types::PortalOptions?
       def description: () -> String?
       def created_date: () -> Time?
+      def created_from: () -> String?
     end
     def describe_application: (
       ?application_arn: String
@@ -347,12 +360,16 @@ module Aws::SSOAdmin
       include Smithy::Client::_Response[Types::DescribeInstanceResponse]
       def instance_arn: () -> String?
       def identity_store_id: () -> String?
+      def identity_store_arn: () -> String?
       def owner_account_id: () -> String?
       def name: () -> String?
       def created_date: () -> Time?
       def status: () -> String?
       def status_reason: () -> String?
+      def primary_region: () -> String?
+      def regions: () -> Array[Types::RegionMetadata]?
       def encryption_configuration_details: () -> Types::EncryptionConfigurationDetails?
+      def permission_sets_enabled: () -> bool?
     end
     def describe_instance: (
       ?instance_arn: String
@@ -385,6 +402,18 @@ module Aws::SSOAdmin
       ?instance_arn: String,
       ?provision_permission_set_request_id: String
     ) -> _DescribePermissionSetProvisioningStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribePermissionSetProvisioningStatusResponse
+
+    interface _DescribeRegionResponse
+      include Smithy::Client::_Response[Types::DescribeRegionResponse]
+      def region_name: () -> String?
+      def status: () -> String?
+      def added_date: () -> Time?
+      def is_primary_region: () -> bool?
+    end
+    def describe_region: (
+      ?instance_arn: String,
+      ?region_name: String
+    ) -> _DescribeRegionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeRegionResponse
 
     interface _DescribeTrustedTokenIssuerResponse
       include Smithy::Client::_Response[Types::DescribeTrustedTokenIssuerResponse]
@@ -705,6 +734,17 @@ module Aws::SSOAdmin
       ?next_token: String
     ) -> _ListPermissionSetsProvisionedToAccountResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPermissionSetsProvisionedToAccountResponse
 
+    interface _ListRegionsResponse
+      include Smithy::Client::_Response[Types::ListRegionsResponse]
+      def regions: () -> Array[Types::RegionMetadata]?
+      def next_token: () -> String?
+    end
+    def list_regions: (
+      ?instance_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListRegionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRegionsResponse
+
     interface _ListTagsForResourceResponse
       include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
       def tags: () -> Array[Types::Tag]?
@@ -825,6 +865,15 @@ module Aws::SSOAdmin
       }
     ) -> _PutPermissionsBoundaryToPermissionSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutPermissionsBoundaryToPermissionSetResponse
 
+    interface _RemoveRegionResponse
+      include Smithy::Client::_Response[Types::RemoveRegionResponse]
+      def status: () -> String?
+    end
+    def remove_region: (
+      ?instance_arn: String,
+      ?region_name: String
+    ) -> _RemoveRegionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemoveRegionResponse
+
     interface _TagResourceResponse
       include Smithy::Client::_Response[Types::TagResourceResponse]
     end
@@ -873,7 +922,8 @@ module Aws::SSOAdmin
       ?encryption_configuration: {
         key_type: String,
         kms_key_arn: String
-      }
+      },
+      ?permission_sets_enabled: bool
     ) -> _UpdateInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateInstanceResponse
 
     interface _UpdateInstanceAccessControlAttributeConfigurationResponse

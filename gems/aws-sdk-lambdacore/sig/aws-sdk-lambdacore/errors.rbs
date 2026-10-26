@@ -1,0 +1,30 @@
+module Aws::LambdaCore
+  module Errors
+    class InvalidParameterValueException < Smithy::Client::ServiceError
+      def type: () -> String?
+      def message: () -> String?
+    end
+    class NetworkConnectorLimitExceededException < Smithy::Client::ServiceError
+      def type: () -> String?
+      def message: () -> String?
+    end
+    class ResourceConflictException < Smithy::Client::ServiceError
+      def type: () -> String?
+      def message: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def type: () -> String?
+      def message: () -> String?
+    end
+    class ServiceException < Smithy::Client::ServiceError
+      def type: () -> String?
+      def message: () -> String?
+    end
+    class TooManyRequestsException < Smithy::Client::ServiceError
+      def retry_after_seconds: () -> String?
+      def type: () -> String?
+      def message: () -> String?
+      def reason: () -> String?
+    end
+  end
+end

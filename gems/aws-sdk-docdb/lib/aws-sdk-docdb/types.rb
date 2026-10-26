@@ -195,10 +195,10 @@ module Aws::DocDB
     end
 
     # <p>Returns the details of the DB instance’s server certificate.</p>
-    #          <p>For more information, see <a href="https://docs.aws.amazon.com/documentdb/latest/developerguide/ca_cert_rotation.html">Updating Your Amazon DocumentDB TLS 
-    #             Certificates</a> and 
-    #             <a href="https://docs.aws.amazon.com/documentdb/latest/developerguide/security.encryption.ssl.html">
-    #                 Encrypting Data in Transit</a> in the <i>Amazon DocumentDB Developer 
+    #          <p>For more information, see <a href="https://docs.aws.amazon.com/documentdb/latest/devguide/ca_cert_rotation.html">Updating Your Amazon DocumentDB TLS
+    #             Certificates</a> and
+    #             <a href="https://docs.aws.amazon.com/documentdb/latest/devguide/security.encryption.ssl.html">
+    #                 Encrypting Data in Transit</a> in the <i>Amazon DocumentDB Developer
     #                     Guide</i>.</p>
     # @!attribute ca_identifier
     #   <p>The CA identifier of the CA certificate used for the DB instance's server certificate.</p>
@@ -280,9 +280,9 @@ module Aws::DocDB
     #                  <p>rotating - The secret is being rotated.</p>
     #               </li>
     #               <li>
-    #                  <p>impaired - The secret can be used to access database credentials, but it can't be rotated. 
+    #                  <p>impaired - The secret can be used to access database credentials, but it can't be rotated.
     #                   A secret might have this status if, for example, permissions are changed so that Amazon DocumentDB can no longer access either the secret or the KMS key for the secret.</p>
-    #                  <p>When a secret has this status, you can correct the condition that caused the status. 
+    #                  <p>When a secret has this status, you can correct the condition that caused the status.
     #                       Alternatively, modify the instance to turn off automatic management of database credentials, and then modify the instance again to turn on automatic management of database credentials.</p>
     #               </li>
     #            </ul>
@@ -375,14 +375,14 @@ module Aws::DocDB
     #            <p>Constraints:</p>
     #            <ul>
     #               <li>
-    #                  <p>Must specify a valid system snapshot in the
+    #                  <p>Must specify a valid cluster snapshot in the
     #                       <i>available</i> state.</p>
     #               </li>
     #               <li>
-    #                  <p>If the source snapshot is in the same Amazon Web Services Region as the copy, specify a valid snapshot identifier.</p>
+    #                  <p>If the source cluster snapshot is in the same Amazon Web Services Region as the copy, specify a valid snapshot identifier.</p>
     #               </li>
     #               <li>
-    #                  <p>If the source snapshot is in a different Amazon Web Services Region than the copy, specify a valid cluster snapshot ARN.</p>
+    #                  <p>If the source cluster snapshot is in a different Amazon Web Services Region or owned by another Amazon Web Services account, specify the snapshot ARN.</p>
     #               </li>
     #            </ul>
     #            <p>Example: <code>my-cluster-snapshot1</code>
@@ -465,7 +465,7 @@ module Aws::DocDB
     #   <p>The tags to be assigned to the cluster snapshot.</p>
     #   @return [Array<Types::Tag>]
     # @!attribute source_region
-    #   <p>The source region of the snapshot. This is only needed when the shapshot is encrypted and in a different region.</p>
+    #   <p>The source region of the snapshot. This is only needed when the snapshot is encrypted and in a different region.</p>
     #   @return [String]
     class CopyDBClusterSnapshotMessage < Struct.new(
       nil,
@@ -635,9 +635,9 @@ module Aws::DocDB
     # @!attribute enable_cloudwatch_logs_exports
     #   <p>A list of log types that need to be enabled for exporting to Amazon
     #               CloudWatch Logs. You can enable audit logs or profiler logs. For more
-    #               information, see <a href="https://docs.aws.amazon.com/documentdb/latest/developerguide/event-auditing.html">
+    #               information, see <a href="https://docs.aws.amazon.com/documentdb/latest/devguide/event-auditing.html">
     #                   Auditing Amazon DocumentDB Events</a>
-    #               and <a href="https://docs.aws.amazon.com/documentdb/latest/developerguide/profiling.html">
+    #               and <a href="https://docs.aws.amazon.com/documentdb/latest/devguide/profiling.html">
     #                   Profiling Amazon DocumentDB Operations</a>.
     #           </p>
     #   @return [Array<String>]
@@ -653,14 +653,14 @@ module Aws::DocDB
     #   @return [String]
     # @!attribute storage_type
     #   <p>The storage type to associate with the DB cluster.</p>
-    #            <p>For information on storage types for Amazon DocumentDB clusters, see 
+    #            <p>For information on storage types for Amazon DocumentDB clusters, see
     #               Cluster storage configurations in the <i>Amazon DocumentDB Developer Guide</i>.</p>
     #            <p>Valid values for storage type - <code>standard | iopt1</code>
     #            </p>
     #            <p>Default value is <code>standard </code>
     #            </p>
     #            <note>
-    #               <p>When you create a DocumentDB DB cluster with the storage type set to <code>iopt1</code>, the storage type is returned
+    #               <p>When you create an Amazon DocumentDB cluster with the storage type set to <code>iopt1</code>, the storage type is returned
     #                       in the response. The storage type isn't returned when you set it to <code>standard</code>.</p>
     #            </note>
     #   @return [String]
@@ -674,15 +674,26 @@ module Aws::DocDB
     # @!attribute master_user_secret_kms_key_id
     #   <p>The Amazon Web Services KMS key identifier to encrypt a secret that is automatically generated and managed in Amazon Web Services Secrets Manager.
     #               This setting is valid only if the master user password is managed by Amazon DocumentDB in Amazon Web Services Secrets Manager for the DB cluster.</p>
-    #            <p>The Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key. 
+    #            <p>The Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key.
     #               To use a KMS key in a different Amazon Web Services account, specify the key ARN or alias ARN.</p>
-    #            <p>If you don't specify <code>MasterUserSecretKmsKeyId</code>, then the <code>aws/secretsmanager</code> KMS key is used to encrypt the secret. 
+    #            <p>If you don't specify <code>MasterUserSecretKmsKeyId</code>, then the <code>aws/secretsmanager</code> KMS key is used to encrypt the secret.
     #               If the secret is in a different Amazon Web Services account, then you can't use the <code>aws/secretsmanager</code> KMS key to encrypt the secret, and you must use a customer managed KMS key.</p>
-    #            <p>There is a default KMS key for your Amazon Web Services account. 
+    #            <p>There is a default KMS key for your Amazon Web Services account.
     #               Your Amazon Web Services account has a different default KMS key for each Amazon Web Services Region.</p>
     #   @return [String]
+    # @!attribute network_type
+    #   <p>The network type of the cluster.</p>
+    #            <p>The network type is determined by the <code>DBSubnetGroup</code> specified for the cluster.
+    #               A <code>DBSubnetGroup</code> can support only the IPv4 protocol or the IPv4 and the IPv6 protocols (<code>DUAL</code>).</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/documentdb/latest/devguide/vpc-clusters.html">DocumentDB clusters in a VPC</a> in the Amazon DocumentDB Developer Guide.</p>
+    #            <p>Valid Values: <code>IPV4</code> | <code>DUAL</code>
+    #            </p>
+    #   @return [String]
+    # @!attribute copy_tags_to_snapshot
+    #   <p>Specifies whether to copy all tags from the DB cluster to snapshots of the DB cluster. The default is not to copy them.</p>
+    #   @return [Boolean]
     # @!attribute source_region
-    #   <p>The source region of the snapshot. This is only needed when the shapshot is encrypted and in a different region.</p>
+    #   <p>The source region of the snapshot. This is only needed when the snapshot is encrypted and in a different region.</p>
     #   @return [String]
     class CreateDBClusterMessage < Struct.new(
       nil,
@@ -710,6 +721,8 @@ module Aws::DocDB
       :serverless_v2_scaling_configuration,
       :manage_master_user_password,
       :master_user_secret_kms_key_id,
+      :network_type,
+      :copy_tags_to_snapshot,
       :source_region,
       keyword_init: true
     )
@@ -895,7 +908,7 @@ module Aws::DocDB
     #   @return [Integer]
     # @!attribute enable_performance_insights
     #   <p>A value that indicates whether to enable Performance Insights for the DB Instance. For
-    #               more information, see <a href="https://docs.aws.amazon.com/documentdb/latest/developerguide/performance-insights.html">Using Amazon
+    #               more information, see <a href="https://docs.aws.amazon.com/documentdb/latest/devguide/performance-insights.html">Using Amazon
     #                   Performance Insights</a>.</p>
     #   @return [Boolean]
     # @!attribute performance_insights_kms_key_id
@@ -910,10 +923,10 @@ module Aws::DocDB
     #   @return [String]
     # @!attribute ca_certificate_identifier
     #   <p>The CA certificate identifier to use for the DB instance's server certificate.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/documentdb/latest/developerguide/ca_cert_rotation.html">Updating Your Amazon DocumentDB TLS 
-    #               Certificates</a> and 
-    #               <a href="https://docs.aws.amazon.com/documentdb/latest/developerguide/security.encryption.ssl.html">
-    #                   Encrypting Data in Transit</a> in the <i>Amazon DocumentDB Developer 
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/documentdb/latest/devguide/ca_cert_rotation.html">Updating Your Amazon DocumentDB TLS
+    #               Certificates</a> and
+    #               <a href="https://docs.aws.amazon.com/documentdb/latest/devguide/security.encryption.ssl.html">
+    #                   Encrypting Data in Transit</a> in the <i>Amazon DocumentDB Developer
     #                       Guide</i>.</p>
     #   @return [String]
     class CreateDBInstanceMessage < Struct.new(
@@ -1221,9 +1234,12 @@ module Aws::DocDB
     #                   <code>DeletionProtection</code> is disabled. <code>DeletionProtection</code>
     #               protects clusters from being accidentally deleted.</p>
     #   @return [Boolean]
+    # @!attribute io_optimized_next_allowed_modification_time
+    #   <p>The next time you can modify the Amazon DocumentDB cluster to use the iopt1 storage type.</p>
+    #   @return [Time]
     # @!attribute storage_type
     #   <p>Storage type associated with your cluster</p>
-    #            <p>For information on storage types for Amazon DocumentDB clusters, see 
+    #            <p>For information on storage types for Amazon DocumentDB clusters, see
     #               Cluster storage configurations in the <i>Amazon DocumentDB Developer Guide</i>.</p>
     #            <p>Valid values for storage type - <code>standard | iopt1</code>
     #            </p>
@@ -1236,6 +1252,17 @@ module Aws::DocDB
     # @!attribute master_user_secret
     #   <p>The secret managed by Amazon DocumentDB in Amazon Web Services Secrets Manager for the master user password.</p>
     #   @return [Types::ClusterMasterUserSecret]
+    # @!attribute network_type
+    #   <p>The network type of the cluster.</p>
+    #            <p>The network type is determined by the <code>DBSubnetGroup</code> specified for the cluster.
+    #               A <code>DBSubnetGroup</code> can support only the IPv4 protocol or the IPv4 and the IPv6 protocols (<code>DUAL</code>).</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/documentdb/latest/devguide/vpc-clusters.html">DocumentDB clusters in a VPC</a> in the Amazon DocumentDB Developer Guide.</p>
+    #            <p>Valid Values: <code>IPV4</code> | <code>DUAL</code>
+    #            </p>
+    #   @return [String]
+    # @!attribute copy_tags_to_snapshot
+    #   <p>Specifies whether to copy all tags from the DB cluster to snapshots of the DB cluster. The default is not to copy them.</p>
+    #   @return [Boolean]
     class DBCluster < Struct.new(
       nil,
       :availability_zones,
@@ -1270,9 +1297,12 @@ module Aws::DocDB
       :cluster_create_time,
       :enabled_cloudwatch_logs_exports,
       :deletion_protection,
+      :io_optimized_next_allowed_modification_time,
       :storage_type,
       :serverless_v2_scaling_configuration,
       :master_user_secret,
+      :network_type,
+      :copy_tags_to_snapshot,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1505,7 +1535,7 @@ module Aws::DocDB
     #   @return [String]
     # @!attribute storage_type
     #   <p>Storage type associated with your cluster snapshot</p>
-    #            <p>For information on storage types for Amazon DocumentDB clusters, see 
+    #            <p>For information on storage types for Amazon DocumentDB clusters, see
     #               Cluster storage configurations in the <i>Amazon DocumentDB Developer Guide</i>.</p>
     #            <p>Valid values for storage type - <code>standard | iopt1</code>
     #            </p>
@@ -1643,19 +1673,19 @@ module Aws::DocDB
     #   @return [Boolean]
     # @!attribute supported_ca_certificate_identifiers
     #   <p>A list of the supported CA certificate identifiers.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/documentdb/latest/developerguide/ca_cert_rotation.html">Updating Your Amazon DocumentDB TLS 
-    #               Certificates</a> and 
-    #               <a href="https://docs.aws.amazon.com/documentdb/latest/developerguide/security.encryption.ssl.html">
-    #                   Encrypting Data in Transit</a> in the <i>Amazon DocumentDB Developer 
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/documentdb/latest/devguide/ca_cert_rotation.html">Updating Your Amazon DocumentDB TLS
+    #               Certificates</a> and
+    #               <a href="https://docs.aws.amazon.com/documentdb/latest/devguide/security.encryption.ssl.html">
+    #                   Encrypting Data in Transit</a> in the <i>Amazon DocumentDB Developer
     #                       Guide</i>.</p>
     #   @return [Array<String>]
     # @!attribute supports_certificate_rotation_without_restart
-    #   <p>Indicates whether the engine version supports rotating the server certificate without 
+    #   <p>Indicates whether the engine version supports rotating the server certificate without
     #               rebooting the DB instance.</p>
     #   @return [Boolean]
     # @!attribute serverless_v2_features_support
-    #   <p>Specifies any Amazon DocumentDB Serverless properties or limits that differ between Amazon DocumentDB engine versions. 
-    #               You can test the values of this attribute when deciding which Amazon DocumentDB version to use in a new or upgraded cluster. 
+    #   <p>Specifies any Amazon DocumentDB Serverless properties or limits that differ between Amazon DocumentDB engine versions.
+    #               You can test the values of this attribute when deciding which Amazon DocumentDB version to use in a new or upgraded cluster.
     #               You can also retrieve the version of an existing cluster and check whether that version supports certain Amazon DocumentDB Serverless features before you attempt to use those features.</p>
     #   @return [Types::ServerlessV2FeaturesSupport]
     class DBEngineVersion < Struct.new(
@@ -1749,7 +1779,7 @@ module Aws::DocDB
     #   <p>Does not apply. This parameter does not apply to Amazon DocumentDB. Amazon DocumentDB does not perform minor version upgrades regardless of the value set.</p>
     #   @return [Boolean]
     # @!attribute publicly_accessible
-    #   <p>Not supported. Amazon DocumentDB does not currently support public endpoints. The value 
+    #   <p>Not supported. Amazon DocumentDB does not currently support public endpoints. The value
     #             of <code>PubliclyAccessible</code> is always <code>false</code>.</p>
     #   @return [Boolean]
     # @!attribute status_infos
@@ -1757,7 +1787,7 @@ module Aws::DocDB
     #               blank.</p>
     #   @return [Array<Types::DBInstanceStatusInfo>]
     # @!attribute db_cluster_identifier
-    #   <p>Contains the name of the cluster that the instance is a member of if the 
+    #   <p>Contains the name of the cluster that the instance is a member of if the
     #               instance is a member of a cluster.</p>
     #   @return [String]
     # @!attribute storage_encrypted
@@ -1991,6 +2021,12 @@ module Aws::DocDB
     # @!attribute db_subnet_group_arn
     #   <p>The Amazon Resource Name (ARN) for the DB subnet group.</p>
     #   @return [String]
+    # @!attribute supported_network_types
+    #   <p>The network type of the DB subnet group.</p>
+    #            <p>Valid Values: <code>IPV4</code> | <code>DUAL</code>
+    #            </p>
+    #            <p>A <code>DBSubnetGroup</code> can support only the IPv4 protocol or the IPv4 and the IPv6 protocols (DUAL).</p>
+    #   @return [Array<String>]
     class DBSubnetGroup < Struct.new(
       nil,
       :db_subnet_group_name,
@@ -1999,6 +2035,7 @@ module Aws::DocDB
       :subnet_group_status,
       :subnets,
       :db_subnet_group_arn,
+      :supported_network_types,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3252,8 +3289,8 @@ module Aws::DocDB
     end
 
     # @!attribute global_cluster_identifier
-    #   <p>The identifier of the Amazon DocumentDB global cluster to apply this operation. 
-    #               The identifier is the unique key assigned by the user when the cluster is created. 
+    #   <p>The identifier of the Amazon DocumentDB global cluster to apply this operation.
+    #               The identifier is the unique key assigned by the user when the cluster is created.
     #               In other words, it's the name of the global cluster.</p>
     #            <p>Constraints:</p>
     #            <ul>
@@ -3268,7 +3305,7 @@ module Aws::DocDB
     #            </p>
     #   @return [String]
     # @!attribute target_db_cluster_identifier
-    #   <p>The identifier of the secondary Amazon DocumentDB cluster that you want to promote to the primary for the global cluster. 
+    #   <p>The identifier of the secondary Amazon DocumentDB cluster that you want to promote to the primary for the global cluster.
     #               Use the Amazon Resource Name (ARN) for the identifier so that Amazon DocumentDB can locate the cluster in its Amazon Web Services region.</p>
     #            <p>Constraints:</p>
     #            <ul>
@@ -3323,6 +3360,47 @@ module Aws::DocDB
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Contains the state of scheduled or in-process operations on an Amazon DocumentDB global cluster.
+    #             This data type is empty unless a switchover or failover operation is scheduled or is in progress on the global cluster.</p>
+    # @!attribute status
+    #   <p>The current status of the global cluster. Possible values are as follows:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <b>pending</b> – The service received a request to switch over or fail over the global cluster.
+    #                   The global cluster's primary cluster and the specified secondary cluster are being verified before the operation starts.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <b>failing-over</b> – The chosen secondary cluster is being promoted to become the new primary cluster to fail over the global cluster.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <b>cancelling</b> – The request to switch over or fail over the global cluster was cancelled and the primary cluster and the selected secondary cluster are returning to their previous states.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute from_db_cluster_arn
+    #   <p>The Amazon Resource Name (ARN) of the Amazon DocumentDB cluster that is currently being demoted, and which is associated with this state.</p>
+    #   @return [String]
+    # @!attribute to_db_cluster_arn
+    #   <p>The Amazon Resource Name (ARN) of the Amazon DocumentDB cluster that is currently being promoted, and which is associated with this state.</p>
+    #   @return [String]
+    # @!attribute is_data_loss_allowed
+    #   <p>Indicates whether the operation is a global switchover or a global failover.
+    #               If data loss is allowed, then the operation is a global failover. Otherwise, it's a switchover.</p>
+    #   @return [Boolean]
+    class FailoverState < Struct.new(
+      nil,
+      :status,
+      :from_db_cluster_arn,
+      :to_db_cluster_arn,
+      :is_data_loss_allowed,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>A named set of filter values, used to return a more specific list of results. You can
     #             use a filter to match a set of resources by specific criteria, such as IDs.</p>
     #          <p>Wildcards are not supported in filters.</p>
@@ -3346,7 +3424,7 @@ module Aws::DocDB
     #   <p>Contains a user-supplied global  cluster identifier. This identifier is the unique key that identifies a global cluster. </p>
     #   @return [String]
     # @!attribute global_cluster_resource_id
-    #   <p>The Amazon Web Services RegionRegion-unique, immutable identifier for the global database cluster. 
+    #   <p>The Amazon Web Services RegionRegion-unique, immutable identifier for the global database cluster.
     #               This identifier is found in CloudTrail log entries whenever the KMS customer master key (CMK) for the cluster is accessed. </p>
     #   @return [String]
     # @!attribute global_cluster_arn
@@ -3373,6 +3451,13 @@ module Aws::DocDB
     # @!attribute global_cluster_members
     #   <p>The list of cluster IDs for secondary clusters within the global cluster. Currently limited to one item. </p>
     #   @return [Array<Types::GlobalClusterMember>]
+    # @!attribute failover_state
+    #   <p>A data object containing all properties for the current state of an in-process or pending switchover or failover process for this global cluster.
+    #               This object is empty unless the <code>SwitchoverGlobalCluster</code> or <code>FailoverGlobalCluster</code> operation was called on this global cluster.</p>
+    #   @return [Types::FailoverState]
+    # @!attribute tag_list
+    #   <p>A list of global cluster tags.</p>
+    #   @return [Array<Types::Tag>]
     class GlobalCluster < Struct.new(
       nil,
       :global_cluster_identifier,
@@ -3385,6 +3470,8 @@ module Aws::DocDB
       :storage_encrypted,
       :deletion_protection,
       :global_cluster_members,
+      :failover_state,
+      :tag_list,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3411,11 +3498,15 @@ module Aws::DocDB
     # @!attribute is_writer
     #   <p> Specifies whether the Amazon DocumentDB cluster is the primary cluster (that is, has read-write capability) for the Amazon DocumentDB global cluster with which it is associated. </p>
     #   @return [Boolean]
+    # @!attribute synchronization_status
+    #   <p>The status of synchronization of each Amazon DocumentDB cluster in the global cluster.</p>
+    #   @return [String]
     class GlobalClusterMember < Struct.new(
       nil,
       :db_cluster_arn,
       :readers,
       :is_writer,
+      :synchronization_status,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3799,9 +3890,40 @@ module Aws::DocDB
     #   @return [String]
     # @!attribute allow_major_version_upgrade
     #   <p>A value that indicates whether major version upgrades are allowed.</p>
-    #            <p>Constraints: You must allow major version upgrades when specifying a value for the
-    #                <code>EngineVersion</code> parameter that is a different major version than the DB
-    #                cluster's current version.</p>
+    #            <p>Constraints:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>You must allow major version upgrades when specifying a value for the <code>EngineVersion</code> parameter that is a different major version than the cluster's current version.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Since some parameters are version specific, changing them requires executing a new <code>ModifyDBCluster</code> API call after the in-place MVU completes.</p>
+    #               </li>
+    #            </ul>
+    #            <note>
+    #               <p>Performing an MVU directly impacts the following parameters:</p>
+    #               <ul>
+    #                  <li>
+    #                     <p>
+    #                        <code>MasterUserPassword</code>
+    #                     </p>
+    #                  </li>
+    #                  <li>
+    #                     <p>
+    #                        <code>NewDBClusterIdentifier</code>
+    #                     </p>
+    #                  </li>
+    #                  <li>
+    #                     <p>
+    #                        <code>VpcSecurityGroupIds</code>
+    #                     </p>
+    #                  </li>
+    #                  <li>
+    #                     <p>
+    #                        <code>Port</code>
+    #                     </p>
+    #                  </li>
+    #               </ul>
+    #            </note>
     #   @return [Boolean]
     # @!attribute deletion_protection
     #   <p>Specifies whether this cluster can be deleted. If <code>DeletionProtection</code> is
@@ -3811,7 +3933,7 @@ module Aws::DocDB
     #   @return [Boolean]
     # @!attribute storage_type
     #   <p>The storage type to associate with the DB cluster.</p>
-    #            <p>For information on storage types for Amazon DocumentDB clusters, see 
+    #            <p>For information on storage types for Amazon DocumentDB clusters, see
     #               Cluster storage configurations in the <i>Amazon DocumentDB Developer Guide</i>.</p>
     #            <p>Valid values for storage type - <code>standard | iopt1</code>
     #            </p>
@@ -3823,9 +3945,9 @@ module Aws::DocDB
     #   @return [Types::ServerlessV2ScalingConfiguration]
     # @!attribute manage_master_user_password
     #   <p>Specifies whether to manage the master user password with Amazon Web Services Secrets Manager.
-    #               If the cluster doesn't manage the master user password with Amazon Web Services Secrets Manager, you can turn on this management. 
+    #               If the cluster doesn't manage the master user password with Amazon Web Services Secrets Manager, you can turn on this management.
     #               In this case, you can't specify <code>MasterUserPassword</code>.
-    #               If the cluster already manages the master user password with Amazon Web Services Secrets Manager, and you specify that the master user password is not managed with Amazon Web Services Secrets Manager, then you must specify <code>MasterUserPassword</code>. 
+    #               If the cluster already manages the master user password with Amazon Web Services Secrets Manager, and you specify that the master user password is not managed with Amazon Web Services Secrets Manager, then you must specify <code>MasterUserPassword</code>.
     #               In this case, Amazon DocumentDB deletes the secret and uses the new password for the master user specified by <code>MasterUserPassword</code>.</p>
     #   @return [Boolean]
     # @!attribute master_user_secret_kms_key_id
@@ -3833,25 +3955,36 @@ module Aws::DocDB
     #            <p>This setting is valid only if both of the following conditions are met:</p>
     #            <ul>
     #               <li>
-    #                  <p>The cluster doesn't manage the master user password in Amazon Web Services Secrets Manager. 
+    #                  <p>The cluster doesn't manage the master user password in Amazon Web Services Secrets Manager.
     #                   If the cluster already manages the master user password in Amazon Web Services Secrets Manager, you can't change the KMS key that is used to encrypt the secret.</p>
     #               </li>
     #               <li>
-    #                  <p>You are enabling <code>ManageMasterUserPassword</code> to manage the master user password in Amazon Web Services Secrets Manager. 
-    #                   If you are turning on <code>ManageMasterUserPassword</code> and don't specify <code>MasterUserSecretKmsKeyId</code>, then the <code>aws/secretsmanager</code> KMS key is used to encrypt the secret. 
+    #                  <p>You are enabling <code>ManageMasterUserPassword</code> to manage the master user password in Amazon Web Services Secrets Manager.
+    #                   If you are turning on <code>ManageMasterUserPassword</code> and don't specify <code>MasterUserSecretKmsKeyId</code>, then the <code>aws/secretsmanager</code> KMS key is used to encrypt the secret.
     #                   If the secret is in a different Amazon Web Services account, then you can't use the <code>aws/secretsmanager</code> KMS key to encrypt the secret, and you must use a customer managed KMS key.</p>
     #               </li>
     #            </ul>
-    #            <p>The Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key. 
+    #            <p>The Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key.
     #               To use a KMS key in a different Amazon Web Services account, specify the key ARN or alias ARN.</p>
-    #            <p>There is a default KMS key for your Amazon Web Services account. 
+    #            <p>There is a default KMS key for your Amazon Web Services account.
     #               Your Amazon Web Services account has a different default KMS key for each Amazon Web Services Region.</p>
     #   @return [String]
     # @!attribute rotate_master_user_password
     #   <p>Specifies whether to rotate the secret managed by Amazon Web Services Secrets Manager for the master user password.</p>
-    #            <p>This setting is valid only if the master user password is managed by Amazon DocumentDB in Amazon Web Services Secrets Manager for the cluster. 
+    #            <p>This setting is valid only if the master user password is managed by Amazon DocumentDB in Amazon Web Services Secrets Manager for the cluster.
     #               The secret value contains the updated password.</p>
     #            <p>Constraint: You must apply the change immediately when rotating the master user password.</p>
+    #   @return [Boolean]
+    # @!attribute network_type
+    #   <p>The network type of the cluster.</p>
+    #            <p>The network type is determined by the <code>DBSubnetGroup</code> specified for the cluster.
+    #               A <code>DBSubnetGroup</code> can support only the IPv4 protocol or the IPv4 and the IPv6 protocols (<code>DUAL</code>).</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/documentdb/latest/devguide/vpc-clusters.html">DocumentDB clusters in a VPC</a> in the Amazon DocumentDB Developer Guide.</p>
+    #            <p>Valid Values: <code>IPV4</code> | <code>DUAL</code>
+    #            </p>
+    #   @return [String]
+    # @!attribute copy_tags_to_snapshot
+    #   <p>Specifies whether to copy all tags from the DB cluster to snapshots of the DB cluster. The default is not to copy them.</p>
     #   @return [Boolean]
     class ModifyDBClusterMessage < Struct.new(
       nil,
@@ -3874,6 +4007,8 @@ module Aws::DocDB
       :manage_master_user_password,
       :master_user_secret_kms_key_id,
       :rotate_master_user_password,
+      :network_type,
+      :copy_tags_to_snapshot,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4048,7 +4183,7 @@ module Aws::DocDB
     #   @return [Integer]
     # @!attribute enable_performance_insights
     #   <p>A value that indicates whether to enable Performance Insights for the DB Instance. For
-    #               more information, see <a href="https://docs.aws.amazon.com/documentdb/latest/developerguide/performance-insights.html">Using Amazon
+    #               more information, see <a href="https://docs.aws.amazon.com/documentdb/latest/devguide/performance-insights.html">Using Amazon
     #                   Performance Insights</a>.</p>
     #   @return [Boolean]
     # @!attribute performance_insights_kms_key_id
@@ -4062,17 +4197,17 @@ module Aws::DocDB
     #               default KMS key for each Amazon Web Services region.</p>
     #   @return [String]
     # @!attribute certificate_rotation_restart
-    #   <p>Specifies whether the DB instance is restarted when you rotate your 
+    #   <p>Specifies whether the DB instance is restarted when you rotate your
     #               SSL/TLS certificate.</p>
-    #            <p>By default, the DB instance is restarted when you rotate your SSL/TLS certificate. The certificate 
+    #            <p>By default, the DB instance is restarted when you rotate your SSL/TLS certificate. The certificate
     #               is not updated until the DB instance is restarted.</p>
     #            <important>
     #               <p>Set this parameter only if you are <i>not</i> using SSL/TLS to connect to the DB instance.</p>
     #            </important>
-    #            <p>If you are using SSL/TLS to connect to the DB instance, see <a href="https://docs.aws.amazon.com/documentdb/latest/developerguide/ca_cert_rotation.html">Updating Your Amazon DocumentDB TLS 
-    #               Certificates</a> and 
-    #               <a href="https://docs.aws.amazon.com/documentdb/latest/developerguide/security.encryption.ssl.html">
-    #                   Encrypting Data in Transit</a> in the <i>Amazon DocumentDB Developer 
+    #            <p>If you are using SSL/TLS to connect to the DB instance, see <a href="https://docs.aws.amazon.com/documentdb/latest/devguide/ca_cert_rotation.html">Updating Your Amazon DocumentDB TLS
+    #               Certificates</a> and
+    #               <a href="https://docs.aws.amazon.com/documentdb/latest/devguide/security.encryption.ssl.html">
+    #                   Encrypting Data in Transit</a> in the <i>Amazon DocumentDB Developer
     #                       Guide</i>.</p>
     #   @return [Boolean]
     class ModifyDBInstanceMessage < Struct.new(
@@ -4228,6 +4363,17 @@ module Aws::DocDB
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The network type is not supported by either <code>DBSubnetGroup</code> or the DB engine version.</p>
+    # @!attribute message
+    #   @return [String]
+    class NetworkTypeNotSupported < Struct.new(
+      nil,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The options that are available for an instance.</p>
     # @!attribute engine
     #   <p>The engine type of an instance.</p>
@@ -4287,7 +4433,34 @@ module Aws::DocDB
     #   <p>Specifies the name of the parameter.</p>
     #   @return [String]
     # @!attribute parameter_value
-    #   <p>Specifies the value of the parameter.</p>
+    #   <p>Specifies the value of the parameter.
+    #               Must be one or more of the cluster parameter's <code>AllowedValues</code> in CSV format:</p>
+    #            <p>Valid values are:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>enabled</code>: The cluster accepts secure connections using TLS version 1.0 through 1.3. </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>disabled</code>: The cluster does not accept secure connections using TLS. </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>fips-140-3</code>: The cluster only accepts secure connections per the requirements of the Federal Information Processing Standards (FIPS) publication 140-3.
+    #                       Only supported starting with Amazon DocumentDB 5.0 (engine version 3.0.3727) clusters in these regions: ca-central-1, us-west-2, us-east-1, us-east-2, us-gov-east-1, us-gov-west-1.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>tls1.2+</code>: The cluster accepts secure connections using TLS version 1.2 and above.
+    #                       Only supported starting with Amazon DocumentDB 4.0 (engine version 2.0.10980) and Amazon DocumentDB 5.0 (engine version 3.0.11051).</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>tls1.3+</code>: The cluster accepts secure connections using TLS version 1.3 and above.
+    #                       Only supported starting with Amazon DocumentDB 4.0 (engine version 2.0.10980) and Amazon DocumentDB 5.0 (engine version 3.0.11051).</p>
+    #               </li>
+    #            </ul>
     #   @return [String]
     # @!attribute description
     #   <p>Provides a description of the parameter.</p>
@@ -4770,13 +4943,24 @@ module Aws::DocDB
     #   @return [Types::ServerlessV2ScalingConfiguration]
     # @!attribute storage_type
     #   <p>The storage type to associate with the DB cluster.</p>
-    #            <p>For information on storage types for Amazon DocumentDB clusters, see 
+    #            <p>For information on storage types for Amazon DocumentDB clusters, see
     #               Cluster storage configurations in the <i>Amazon DocumentDB Developer Guide</i>.</p>
     #            <p>Valid values for storage type - <code>standard | iopt1</code>
     #            </p>
     #            <p>Default value is <code>standard </code>
     #            </p>
     #   @return [String]
+    # @!attribute network_type
+    #   <p>The network type of the cluster.</p>
+    #            <p>The network type is determined by the <code>DBSubnetGroup</code> specified for the cluster.
+    #               A <code>DBSubnetGroup</code> can support only the IPv4 protocol or the IPv4 and the IPv6 protocols (<code>DUAL</code>).</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/documentdb/latest/devguide/vpc-clusters.html">DocumentDB clusters in a VPC</a> in the Amazon DocumentDB Developer Guide.</p>
+    #            <p>Valid Values: <code>IPV4</code> | <code>DUAL</code>
+    #            </p>
+    #   @return [String]
+    # @!attribute copy_tags_to_snapshot
+    #   <p>Specifies whether to copy all tags from the restored DB cluster to snapshots of the restored DB cluster. The default is not to copy them.</p>
+    #   @return [Boolean]
     class RestoreDBClusterFromSnapshotMessage < Struct.new(
       nil,
       :availability_zones,
@@ -4794,6 +4978,8 @@ module Aws::DocDB
       :db_cluster_parameter_group_name,
       :serverless_v2_scaling_configuration,
       :storage_type,
+      :network_type,
+      :copy_tags_to_snapshot,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4928,13 +5114,24 @@ module Aws::DocDB
     #   @return [Types::ServerlessV2ScalingConfiguration]
     # @!attribute storage_type
     #   <p>The storage type to associate with the DB cluster.</p>
-    #            <p>For information on storage types for Amazon DocumentDB clusters, see 
+    #            <p>For information on storage types for Amazon DocumentDB clusters, see
     #               Cluster storage configurations in the <i>Amazon DocumentDB Developer Guide</i>.</p>
     #            <p>Valid values for storage type - <code>standard | iopt1</code>
     #            </p>
     #            <p>Default value is <code>standard </code>
     #            </p>
     #   @return [String]
+    # @!attribute network_type
+    #   <p>The network type of the cluster.</p>
+    #            <p>The network type is determined by the <code>DBSubnetGroup</code> specified for the cluster.
+    #               A <code>DBSubnetGroup</code> can support only the IPv4 protocol or the IPv4 and the IPv6 protocols (<code>DUAL</code>).</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/documentdb/latest/devguide/vpc-clusters.html">DocumentDB clusters in a VPC</a> in the Amazon DocumentDB Developer Guide.</p>
+    #            <p>Valid Values: <code>IPV4</code> | <code>DUAL</code>
+    #            </p>
+    #   @return [String]
+    # @!attribute copy_tags_to_snapshot
+    #   <p>Specifies whether to copy all tags from the restored DB cluster to snapshots of the restored DB cluster. The default is not to copy them.</p>
+    #   @return [Boolean]
     class RestoreDBClusterToPointInTimeMessage < Struct.new(
       nil,
       :db_cluster_identifier,
@@ -4951,6 +5148,8 @@ module Aws::DocDB
       :deletion_protection,
       :serverless_v2_scaling_configuration,
       :storage_type,
+      :network_type,
+      :copy_tags_to_snapshot,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5000,11 +5199,11 @@ module Aws::DocDB
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Specifies any Amazon DocumentDB Serverless properties or limits that differ between Amazon DocumentDB engine versions. 
-    #             You can test the values of this attribute when deciding which Amazon DocumentDB version to use in a new or upgraded cluster. 
+    # <p>Specifies any Amazon DocumentDB Serverless properties or limits that differ between Amazon DocumentDB engine versions.
+    #             You can test the values of this attribute when deciding which Amazon DocumentDB version to use in a new or upgraded cluster.
     #             You can also retrieve the version of an existing cluster and check whether that version supports certain Amazon DocumentDB Serverless features before you attempt to use those features.</p>
     # @!attribute min_capacity
-    #   <p>The minimum number of Amazon DocumentDB capacity units (DCUs) for an instance in an Amazon DocumentDB Serverless cluster. 
+    #   <p>The minimum number of Amazon DocumentDB capacity units (DCUs) for an instance in an Amazon DocumentDB Serverless cluster.
     #               You can specify DCU values in half-step increments, such as 8, 8.5, 9, and so on.</p>
     #   @return [Float]
     # @!attribute max_capacity
@@ -5022,7 +5221,7 @@ module Aws::DocDB
 
     # <p>Sets the scaling configuration of an Amazon DocumentDB Serverless cluster.</p>
     # @!attribute min_capacity
-    #   <p>The minimum number of Amazon DocumentDB capacity units (DCUs) for an instance in an Amazon DocumentDB Serverless cluster. 
+    #   <p>The minimum number of Amazon DocumentDB capacity units (DCUs) for an instance in an Amazon DocumentDB Serverless cluster.
     #               You can specify DCU values in half-step increments, such as 8, 8.5, 9, and so on.</p>
     #   @return [Float]
     # @!attribute max_capacity
@@ -5040,11 +5239,11 @@ module Aws::DocDB
 
     # <p>Retrieves the scaling configuration for an Amazon DocumentDB Serverless cluster.</p>
     # @!attribute min_capacity
-    #   <p>The minimum number of Amazon DocumentDB capacity units (DCUs) for an instance in an Amazon DocumentDB Serverless cluster. 
+    #   <p>The minimum number of Amazon DocumentDB capacity units (DCUs) for an instance in an Amazon DocumentDB Serverless cluster.
     #               You can specify DCU values in half-step increments, such as 8, 8.5, 9, and so on.</p>
     #   @return [Float]
     # @!attribute max_capacity
-    #   <p>The maximum number of Amazon DocumentDB capacity units (DCUs) for an instance in an Amazon DocumentDB Serverless cluster. 
+    #   <p>The maximum number of Amazon DocumentDB capacity units (DCUs) for an instance in an Amazon DocumentDB Serverless cluster.
     #               You can specify DCU values in half-step increments, such as 32, 32.5, 33, and so on. </p>
     #   @return [Float]
     class ServerlessV2ScalingConfigurationInfo < Struct.new(
@@ -5227,8 +5426,8 @@ module Aws::DocDB
     end
 
     # @!attribute global_cluster_identifier
-    #   <p>The identifier of the Amazon DocumentDB global database cluster to switch over. 
-    #           The identifier is the unique key assigned by the user when the cluster is created. 
+    #   <p>The identifier of the Amazon DocumentDB global database cluster to switch over.
+    #           The identifier is the unique key assigned by the user when the cluster is created.
     #           In other words, it's the name of the global cluster.
     #           This parameter isn’t case-sensitive.</p>
     #            <p>Constraints:</p>
@@ -5244,7 +5443,7 @@ module Aws::DocDB
     #            </p>
     #   @return [String]
     # @!attribute target_db_cluster_identifier
-    #   <p>The identifier of the secondary Amazon DocumentDB cluster to promote to the new primary for the global database cluster. 
+    #   <p>The identifier of the secondary Amazon DocumentDB cluster to promote to the new primary for the global database cluster.
     #               Use the Amazon Resource Name (ARN) for the identifier so that Amazon DocumentDB can locate the cluster in its Amazon Web Services region.</p>
     #            <p>Constraints:</p>
     #            <ul>

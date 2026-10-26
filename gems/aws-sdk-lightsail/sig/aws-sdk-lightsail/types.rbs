@@ -181,6 +181,7 @@ module Aws::Lightsail
         ?contact_protocols: Array[String],
         ?notification_triggers: Array[String],
         ?notification_enabled: bool,
+        ?tags: Array[Types::Tag],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -204,6 +205,7 @@ module Aws::Lightsail
       attr_accessor contact_protocols: Array[String]?
       attr_accessor notification_triggers: Array[String]?
       attr_accessor notification_enabled: bool?
+      attr_accessor tags: Array[Types::Tag]?
     end
 
     module AlarmState
@@ -502,6 +504,7 @@ module Aws::Lightsail
         ?resources_receiving_access: Array[Types::ResourceReceivingAccess],
         ?state: Types::BucketState,
         ?access_log_config: Types::BucketAccessLogConfig,
+        ?cors: Types::BucketCorsConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -521,6 +524,7 @@ module Aws::Lightsail
       attr_accessor resources_receiving_access: Array[Types::ResourceReceivingAccess]?
       attr_accessor state: Types::BucketState?
       attr_accessor access_log_config: Types::BucketAccessLogConfig?
+      attr_accessor cors: Types::BucketCorsConfig?
     end
 
     class BucketAccessLogConfig
@@ -557,6 +561,38 @@ module Aws::Lightsail
       attr_accessor storage_per_month_in_gb: Integer?
       attr_accessor transfer_per_month_in_gb: Integer?
       attr_accessor is_active: bool?
+    end
+
+    class BucketCorsConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rules: Array[Types::BucketCorsRule],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rules: Array[Types::BucketCorsRule]?
+    end
+
+    class BucketCorsRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?allowed_methods: Array[String],
+        ?allowed_origins: Array[String],
+        ?allowed_headers: Array[String],
+        ?expose_headers: Array[String],
+        ?max_age_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor allowed_methods: Array[String]?
+      attr_accessor allowed_origins: Array[String]?
+      attr_accessor allowed_headers: Array[String]?
+      attr_accessor expose_headers: Array[String]?
+      attr_accessor max_age_seconds: Integer?
     end
 
     module BucketMetricName
@@ -839,6 +875,7 @@ module Aws::Lightsail
         ?location: Types::ResourceLocation,
         ?resource_type: String,
         ?support_code: String,
+        ?tags: Array[Types::Tag],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -851,6 +888,7 @@ module Aws::Lightsail
       attr_accessor location: Types::ResourceLocation?
       attr_accessor resource_type: String?
       attr_accessor support_code: String?
+      attr_accessor tags: Array[Types::Tag]?
     end
 
     module ContactMethodStatus
@@ -1334,11 +1372,13 @@ module Aws::Lightsail
       def initialize: (
         ?protocol: String,
         ?contact_endpoint: String,
+        ?tags: Array[Types::Tag],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor protocol: String?
       attr_accessor contact_endpoint: String?
+      attr_accessor tags: Array[Types::Tag]?
     end
 
     class CreateContactMethodResult
@@ -1542,6 +1582,9 @@ module Aws::Lightsail
         ?tags: Array[Types::Tag],
         ?certificate_name: String,
         ?viewer_minimum_tls_protocol_version: String,
+        ?enable_private_origin_access: bool,
+        ?default_root_object: String,
+        ?custom_error_responses: Array[Types::DistributionCustomErrorResponse],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1555,6 +1598,9 @@ module Aws::Lightsail
       attr_accessor tags: Array[Types::Tag]?
       attr_accessor certificate_name: String?
       attr_accessor viewer_minimum_tls_protocol_version: String?
+      attr_accessor enable_private_origin_access: bool?
+      attr_accessor default_root_object: String?
+      attr_accessor custom_error_responses: Array[Types::DistributionCustomErrorResponse]?
     end
 
     class CreateDistributionResult
@@ -2736,6 +2782,23 @@ module Aws::Lightsail
       attr_accessor is_active: bool?
     end
 
+    class DistributionCustomErrorResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_code: Integer,
+        ?response_code: String,
+        ?response_page_path: String,
+        ?error_caching_min_ttl: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_code: Integer?
+      attr_accessor response_code: String?
+      attr_accessor response_page_path: String?
+      attr_accessor error_caching_min_ttl: Integer?
+    end
+
     module DistributionMetricName
       Requests: String
       BytesDownloaded: String
@@ -3187,12 +3250,14 @@ module Aws::Lightsail
         ?bucket_name: String,
         ?page_token: String,
         ?include_connected_resources: bool,
+        ?include_cors: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor bucket_name: String?
       attr_accessor page_token: String?
       attr_accessor include_connected_resources: bool?
+      attr_accessor include_cors: bool?
     end
 
     class GetBucketsResult
@@ -4217,6 +4282,28 @@ module Aws::Lightsail
       attr_accessor next_page_token: String?
     end
 
+    class GetProfileRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetProfileResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_type: String,
+        ?partner: Types::PartnerInfo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_type: String?
+      attr_accessor partner: Types::PartnerInfo?
+    end
+
     class GetRegionsRequest
       include Smithy::Schema::Structure
 
@@ -4730,6 +4817,7 @@ module Aws::Lightsail
         ?region_name: String,
         ?protocol_policy: String,
         ?response_timeout: Integer,
+        ?ip_address_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4737,6 +4825,7 @@ module Aws::Lightsail
       attr_accessor region_name: String?
       attr_accessor protocol_policy: String?
       attr_accessor response_timeout: Integer?
+      attr_accessor ip_address_type: String?
     end
 
     class Instance
@@ -5174,6 +5263,8 @@ module Aws::Lightsail
         ?ip_address_type: String,
         ?tags: Array[Types::Tag],
         ?viewer_minimum_tls_protocol_version: String,
+        ?default_root_object: String,
+        ?custom_error_responses: Array[Types::DistributionCustomErrorResponse],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -5198,6 +5289,8 @@ module Aws::Lightsail
       attr_accessor ip_address_type: String?
       attr_accessor tags: Array[Types::Tag]?
       attr_accessor viewer_minimum_tls_protocol_version: String?
+      attr_accessor default_root_object: String?
+      attr_accessor custom_error_responses: Array[Types::DistributionCustomErrorResponse]?
     end
 
     class LoadBalancer
@@ -5545,6 +5638,8 @@ module Aws::Lightsail
       FreeStorageSpace: String
       NetworkReceiveThroughput: String
       NetworkTransmitThroughput: String
+      FreeableMemory: String
+      SwapUsage: String
       BurstCapacityTime: String
       BurstCapacityPercentage: String
     end
@@ -5824,6 +5919,7 @@ module Aws::Lightsail
       StartGUISession: String
       StopGUISession: String
       SetupInstanceHttps: String
+      GetProfile: String
     end
 
     class Origin
@@ -5835,6 +5931,8 @@ module Aws::Lightsail
         ?region_name: String,
         ?protocol_policy: String,
         ?response_timeout: Integer,
+        ?ip_address_type: String,
+        ?is_private_origin_access_enabled: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -5843,11 +5941,39 @@ module Aws::Lightsail
       attr_accessor region_name: String?
       attr_accessor protocol_policy: String?
       attr_accessor response_timeout: Integer?
+      attr_accessor ip_address_type: String?
+      attr_accessor is_private_origin_access_enabled: bool?
+    end
+
+    module OriginIpAddressTypeEnum
+      IPV4: String
+      IPV6: String
+      DUALSTACK: String
     end
 
     module OriginProtocolPolicyEnum
       HTTPOnly: String
       HTTPSOnly: String
+    end
+
+    class PartnerInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enrolled_at: Time,
+        ?tier_name: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enrolled_at: Time?
+      attr_accessor tier_name: String?
+      attr_accessor status: String?
+    end
+
+    module PartnerStatus
+      Active: String
+      Suspended: String
     end
 
     class PasswordData
@@ -5981,6 +6107,11 @@ module Aws::Lightsail
       attr_accessor ecr_image_puller_role: Types::ContainerServiceECRImagePullerRoleRequest?
     end
 
+    module ProfileType
+      Lightsailor: String
+      LightsailPartner: String
+    end
+
     class PutAlarmRequest
       include Smithy::Schema::Structure
 
@@ -5996,6 +6127,7 @@ module Aws::Lightsail
         ?contact_protocols: Array[String],
         ?notification_triggers: Array[String],
         ?notification_enabled: bool,
+        ?tags: Array[Types::Tag],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -6010,6 +6142,7 @@ module Aws::Lightsail
       attr_accessor contact_protocols: Array[String]?
       attr_accessor notification_triggers: Array[String]?
       attr_accessor notification_enabled: bool?
+      attr_accessor tags: Array[Types::Tag]?
     end
 
     class PutAlarmResult
@@ -6160,14 +6293,18 @@ module Aws::Lightsail
       EU_WEST_2: String
       EU_WEST_3: String
       EU_CENTRAL_1: String
+      EU_NORTH_1: String
+      EU_SOUTH_2: String
       CA_CENTRAL_1: String
+      AP_EAST_1: String
       AP_SOUTH_1: String
       AP_SOUTHEAST_1: String
       AP_SOUTHEAST_2: String
       AP_NORTHEAST_1: String
       AP_NORTHEAST_2: String
-      EU_NORTH_1: String
       AP_SOUTHEAST_3: String
+      AP_SOUTHEAST_5: String
+      SA_EAST_1: String
     end
 
     class RegionSetupInProgressException
@@ -6391,6 +6528,8 @@ module Aws::Lightsail
       FreeStorageSpace: String
       NetworkReceiveThroughput: String
       NetworkTransmitThroughput: String
+      FreeableMemory: String
+      SwapUsage: String
     end
 
     class RelationalDatabaseParameter
@@ -7098,6 +7237,13 @@ module Aws::Lightsail
       attr_accessor operations: Array[Types::Operation]?
     end
 
+    module TierName
+      Essential: String
+      Growth: String
+      Accelerate: String
+      Premier: String
+    end
+
     class TimePeriod
       include Smithy::Schema::Structure
 
@@ -7214,6 +7360,7 @@ module Aws::Lightsail
         ?versioning: String,
         ?readonly_access_accounts: Array[String],
         ?access_log_config: Types::BucketAccessLogConfig,
+        ?cors: Types::BucketCorsConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -7222,6 +7369,7 @@ module Aws::Lightsail
       attr_accessor versioning: String?
       attr_accessor readonly_access_accounts: Array[String]?
       attr_accessor access_log_config: Types::BucketAccessLogConfig?
+      attr_accessor cors: Types::BucketCorsConfig?
     end
 
     class UpdateBucketResult
@@ -7306,6 +7454,9 @@ module Aws::Lightsail
         ?viewer_minimum_tls_protocol_version: String,
         ?certificate_name: String,
         ?use_default_certificate: bool,
+        ?enable_private_origin_access: bool,
+        ?default_root_object: String,
+        ?custom_error_responses: Array[Types::DistributionCustomErrorResponse],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -7318,6 +7469,9 @@ module Aws::Lightsail
       attr_accessor viewer_minimum_tls_protocol_version: String?
       attr_accessor certificate_name: String?
       attr_accessor use_default_certificate: bool?
+      attr_accessor enable_private_origin_access: bool?
+      attr_accessor default_root_object: String?
+      attr_accessor custom_error_responses: Array[Types::DistributionCustomErrorResponse]?
     end
 
     class UpdateDistributionResult

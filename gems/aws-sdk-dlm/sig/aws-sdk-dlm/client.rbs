@@ -104,7 +104,8 @@ module Aws::DLM
               count: Integer,
               interval: untyped,
               interval_unit: untyped,
-              availability_zones: Array[String]
+              availability_zones: Array[String],
+              availability_zone_ids: Array[String]
             },
             cross_region_copy_rules: Array[
               {
@@ -336,7 +337,8 @@ module Aws::DLM
               count: Integer,
               interval: untyped,
               interval_unit: untyped,
-              availability_zones: Array[String]
+              availability_zones: Array[String],
+              availability_zone_ids: Array[String]
             },
             cross_region_copy_rules: Array[
               {

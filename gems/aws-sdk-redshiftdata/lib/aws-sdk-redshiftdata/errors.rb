@@ -24,6 +24,7 @@ module Aws::RedshiftData
   #
   # * {ActiveSessionsExceededException}
   # * {ActiveStatementsExceededException}
+  # * {ActiveWaitingRequestsExceededException}
   # * {BatchExecuteStatementException}
   # * {DatabaseConnectionException}
   # * {ExecuteStatementException}
@@ -54,6 +55,19 @@ module Aws::RedshiftData
     class ActiveStatementsExceededException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RedshiftData::Types::ActiveStatementsExceededException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>The number of active requests with <code>WaitTimeSeconds</code> for the same SQL statement exceeds the limit.</p>
+    class ActiveWaitingRequestsExceededException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::RedshiftData::Types::ActiveWaitingRequestsExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
         super
       end

@@ -144,18 +144,18 @@ module Aws::TimestreamInfluxDB
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -209,6 +209,74 @@ module Aws::TimestreamInfluxDB
       super
     end
 
+    # <p>Creates a new on-demand backup of a Timestream for InfluxDB resource.</p>
+    # @param [Hash, Types::CreateDbBackupInput] params
+    # @option params [String] :name
+    #   <p>The name of the backup. Must be unique within the account and region.</p>
+    # @option params [String] :db_resource_id
+    #   <p>The id of the DB instance or DB cluster to back up.</p>
+    # @option params [Integer] :retention_days
+    #   <p>The number of days to retain the backup. Valid values are 1 to 3650.</p>
+    # @option params [Hash<String, String>] :tags
+    #   <p>A list of key-value pairs to associate with the backup.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     name: "DbBackupName", # required
+    #     db_resource_id: "DbResourceId", # required
+    #     retention_days: 1,
+    #     tags: {
+    #       "TagKey" => "TagValue"
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.create_db_backup(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     id: "DbBackupId", # required
+    #     name: "DbBackupName",
+    #     arn: "Arn", # required
+    #     status: "IN_PROGRESS" # One of: ["IN_PROGRESS", "COMPLETED", "FAILED", "DELETING", "DELETED"],
+    #     created_at: Time.now,
+    #     expires_after: "Date",
+    #     db_resource_id: "DbResourceId",
+    #     type: "HOURLY" # One of: ["HOURLY", "DAILY", "WEEKLY", "MONTHLY", "CUSTOM_SCHEDULE", "ON_DEMAND", "CONTINUOUS"],
+    #     engine_type: "INFLUXDB_V2" # One of: ["INFLUXDB_V2", "INFLUXDB_V3_CORE", "INFLUXDB_V3_ENTERPRISE"],
+    #     deployment_type: "SINGLE_AZ" # One of: ["SINGLE_AZ", "WITH_MULTIAZ_STANDBY", "MULTI_NODE_READ_REPLICAS"],
+    #     kms_key_id: "KmsKeyId",
+    #     cluster_configuration: {
+    #       ingest_query_instances: 1,
+    #       query_only_instances: 1,
+    #       dedicated_compactor: false
+    #     },
+    #     db_parameter_group_id: "DbParameterGroupId",
+    #     db_instance_type: "db.influx.medium" # One of: ["db.influx.medium", "db.influx.large", "db.influx.xlarge", "db.influx.2xlarge", "db.influx.4xlarge", "db.influx.8xlarge", "db.influx.12xlarge", "db.influx.16xlarge", "db.influx.24xlarge"],
+    #     log_delivery_configuration: {
+    #       s3_configuration: { # required
+    #         bucket_name: "String", # required
+    #         enabled: false, # required
+    #       }
+    #     },
+    #     failover_mode: "AUTOMATIC" # One of: ["AUTOMATIC", "NO_FAILOVER"],
+    #     db_storage_type: "InfluxIOIncludedT1" # One of: ["InfluxIOIncludedT1", "InfluxIOIncludedT2", "InfluxIOIncludedT3"],
+    #     allocated_storage: 1,
+    #     vpc_subnet_ids: ["VpcSubnetId"],
+    #     vpc_security_group_ids: ["VpcSecurityGroupId"],
+    #     publicly_accessible: false,
+    #     port: 1,
+    #     network_type: "IPV4" # One of: ["IPV4", "DUAL"],
+    #     influx_auth_parameters_secret_arn: "String",
+    #     maintenance_schedule: {
+    #       timezone: "IanaTimezone", # required
+    #       preferred_maintenance_window: "MaintenanceWindow", # required
+    #     }
+    #   }
+    # @return [Types::CreateDbBackupOutput]
+    def create_db_backup(params = {}, options = {})
+      request = build_request(:create_db_backup, params)
+      request.send_request(options)
+    end
+
     # <p>Creates a new Timestream for InfluxDB cluster.</p>
     # @param [Hash, Types::CreateDbClusterInput] params
     # @option params [String] :name
@@ -226,7 +294,7 @@ module Aws::TimestreamInfluxDB
     # @option params [Integer] :port
     #   <p>The port number on which InfluxDB accepts connections.</p>
     #            <p>Valid Values: 1024-65535</p>
-    #            <p>Default: 8086</p>
+    #            <p>Default: 8086 for InfluxDB v2, 8181 for InfluxDB v3</p>
     #            <p>Constraints: The value can't be 2375-2376, 7788-7799, 8090, or 51678-51680</p>
     # @option params [String] :db_parameter_group_identifier
     #   <p>The ID of the DB parameter group to assign to your DB cluster. DB parameter groups specify how the database is configured. For example, DB parameter groups can specify the limit for query concurrency.</p>
@@ -262,25 +330,31 @@ module Aws::TimestreamInfluxDB
     #   <p>Specifies the behavior of failure recovery when the primary node of the cluster fails.</p>
     # @option params [Types::LogDeliveryConfiguration] :log_delivery_configuration
     #   <p>Configuration for sending InfluxDB engine logs to a specified S3 bucket.</p>
+    # @option params [Types::MaintenanceSchedule] :maintenance_schedule
+    #   <p>Specifies the maintenance schedule for the DB cluster, including the preferred maintenance window and timezone.</p>
+    # @option params [Array<Types::DbBackupConfiguration>] :db_backup_configurations
+    #   <p>A list of backup configurations to enable automated backups for the DB cluster.</p>
+    # @option params [String] :kms_key_id
+    #   <p>The Amazon Web Services KMS key identifier to use for encryption of the DB cluster. Can be a key ID, key ARN, alias name, or alias ARN.</p>
     # @option params [Hash<String, String>] :tags
     #   <p>A list of key-value pairs to associate with the DB instance.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     name: "DbClusterName", # required
     #     username: "Username",
-    #     password: "Password", # required
+    #     password: "Password",
     #     organization: "Organization",
     #     bucket: "Bucket",
     #     port: 1,
     #     db_parameter_group_identifier: "DbParameterGroupIdentifier",
     #     db_instance_type: "db.influx.medium" # One of: ["db.influx.medium", "db.influx.large", "db.influx.xlarge", "db.influx.2xlarge", "db.influx.4xlarge", "db.influx.8xlarge", "db.influx.12xlarge", "db.influx.16xlarge", "db.influx.24xlarge"], # required
     #     db_storage_type: "InfluxIOIncludedT1" # One of: ["InfluxIOIncludedT1", "InfluxIOIncludedT2", "InfluxIOIncludedT3"],
-    #     allocated_storage: 1, # required
+    #     allocated_storage: 1,
     #     network_type: "IPV4" # One of: ["IPV4", "DUAL"],
     #     publicly_accessible: false,
     #     vpc_subnet_ids: ["VpcSubnetId"], # required
     #     vpc_security_group_ids: ["VpcSecurityGroupId"], # required
-    #     deployment_type: "MULTI_NODE_READ_REPLICAS" # One of: ["MULTI_NODE_READ_REPLICAS"], # required
+    #     deployment_type: "MULTI_NODE_READ_REPLICAS" # One of: ["MULTI_NODE_READ_REPLICAS"],
     #     failover_mode: "AUTOMATIC" # One of: ["AUTOMATIC", "NO_FAILOVER"],
     #     log_delivery_configuration: {
     #       s3_configuration: { # required
@@ -288,6 +362,19 @@ module Aws::TimestreamInfluxDB
     #         enabled: false, # required
     #       }
     #     },
+    #     maintenance_schedule: {
+    #       timezone: "IanaTimezone", # required
+    #       preferred_maintenance_window: "MaintenanceWindow", # required
+    #     },
+    #     db_backup_configurations: [
+    #       {
+    #         type: "HOURLY" # One of: ["HOURLY", "DAILY", "WEEKLY", "MONTHLY", "CUSTOM_SCHEDULE", "CONTINUOUS"], # required
+    #         retention_days: 1, # required
+    #         enabled: false, # required
+    #         custom_schedule: "AwsCronSchedule"
+    #       }
+    #     ],
+    #     kms_key_id: "KmsKeyId",
     #     tags: {
     #       "TagKey" => "TagValue"
     #     }
@@ -298,7 +385,7 @@ module Aws::TimestreamInfluxDB
     #   response.to_h #=>
     #   {
     #     db_cluster_id: "DbClusterId",
-    #     db_cluster_status: "CREATING" # One of: ["CREATING", "UPDATING", "DELETING", "AVAILABLE", "FAILED", "DELETED", "MAINTENANCE"]
+    #     db_cluster_status: "CREATING" # One of: ["CREATING", "UPDATING", "DELETING", "AVAILABLE", "FAILED", "DELETED", "MAINTENANCE", "UPDATING_INSTANCE_TYPE", "REBOOTING", "REBOOT_FAILED", "PARTIALLY_AVAILABLE", "RESTORING", "RESTORE_FAILED"]
     #   }
     # @return [Types::CreateDbClusterOutput]
     def create_db_cluster(params = {}, options = {})
@@ -313,7 +400,7 @@ module Aws::TimestreamInfluxDB
     # @option params [String] :username
     #   <p>The username of the initial admin user created in InfluxDB. Must start with a letter and can't end with a hyphen or contain two consecutive hyphens. For example, my-user1. This username will allow you to access the InfluxDB UI to perform various administrative tasks and also use the InfluxDB CLI to create an operator token. These attributes will be stored in a Secret created in Amazon Secrets Manager in your account.</p>
     # @option params [String] :password
-    #   <p>The password of the initial admin user created in InfluxDB. This password will allow
+    #   <p>The password of the initial admin user created in InfluxDB v2. This password will allow
     #               you to access the InfluxDB UI to perform various administrative tasks and also use the
     #               InfluxDB CLI to create an operator token. These attributes will be stored in a Secret
     #               created in Secrets Manager in your account.</p>
@@ -351,6 +438,8 @@ module Aws::TimestreamInfluxDB
     #   <p>Specifies whether the DB instance will be deployed as a standalone instance or with a Multi-AZ standby for high availability.</p>
     # @option params [Types::LogDeliveryConfiguration] :log_delivery_configuration
     #   <p>Configuration for sending InfluxDB engine logs to a specified S3 bucket.</p>
+    # @option params [Types::MaintenanceSchedule] :maintenance_schedule
+    #   <p>Specifies the maintenance schedule for the DB instance, including the preferred maintenance window and timezone.</p>
     # @option params [Hash<String, String>] :tags
     #   <p>A list of key-value pairs to associate with the DB instance.</p>
     # @option params [Integer] :port
@@ -360,6 +449,10 @@ module Aws::TimestreamInfluxDB
     #            <p>Constraints: The value can't be 2375-2376, 7788-7799, 8090, or 51678-51680</p>
     # @option params [String] :network_type
     #   <p>Specifies whether the networkType of the Timestream for InfluxDB instance is IPV4, which can communicate over IPv4 protocol only, or DUAL, which can communicate over both IPv4 and IPv6 protocols.</p>
+    # @option params [Array<Types::DbBackupConfiguration>] :db_backup_configurations
+    #   <p>A list of backup configurations to enable automated backups for the DB instance.</p>
+    # @option params [String] :kms_key_id
+    #   <p>The Amazon Web Services KMS key identifier to use for encryption of the DB instance. Can be a key ID, key ARN, alias name, or alias ARN.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     name: "DbInstanceName", # required
@@ -381,11 +474,24 @@ module Aws::TimestreamInfluxDB
     #         enabled: false, # required
     #       }
     #     },
+    #     maintenance_schedule: {
+    #       timezone: "IanaTimezone", # required
+    #       preferred_maintenance_window: "MaintenanceWindow", # required
+    #     },
     #     tags: {
     #       "TagKey" => "TagValue"
     #     },
     #     port: 1,
-    #     network_type: "IPV4" # One of: ["IPV4", "DUAL"]
+    #     network_type: "IPV4" # One of: ["IPV4", "DUAL"],
+    #     db_backup_configurations: [
+    #       {
+    #         type: "HOURLY" # One of: ["HOURLY", "DAILY", "WEEKLY", "MONTHLY", "CUSTOM_SCHEDULE", "CONTINUOUS"], # required
+    #         retention_days: 1, # required
+    #         enabled: false, # required
+    #         custom_schedule: "AwsCronSchedule"
+    #       }
+    #     ],
+    #     kms_key_id: "KmsKeyId"
     #   }
     #   options = {}
     #   response = client.create_db_instance(params, options)
@@ -395,7 +501,7 @@ module Aws::TimestreamInfluxDB
     #     id: "DbInstanceId", # required
     #     name: "DbInstanceName", # required
     #     arn: "Arn", # required
-    #     status: "CREATING" # One of: ["CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE", "MAINTENANCE"],
+    #     status: "CREATING" # One of: ["CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE", "MAINTENANCE", "REBOOTING", "REBOOT_FAILED", "RESTORING", "RESTORE_FAILED"],
     #     endpoint: "String",
     #     port: 1,
     #     network_type: "IPV4" # One of: ["IPV4", "DUAL"],
@@ -417,7 +523,24 @@ module Aws::TimestreamInfluxDB
     #     },
     #     influx_auth_parameters_secret_arn: "String",
     #     db_cluster_id: "DbClusterId",
-    #     instance_mode: "PRIMARY" # One of: ["PRIMARY", "STANDBY", "REPLICA"]
+    #     instance_mode: "PRIMARY" # One of: ["PRIMARY", "STANDBY", "REPLICA", "INGEST", "QUERY", "COMPACT", "PROCESS"],
+    #     instance_modes: ["PRIMARY" # One of: ["PRIMARY", "STANDBY", "REPLICA", "INGEST", "QUERY", "COMPACT", "PROCESS"]],
+    #     maintenance_schedule: {
+    #       timezone: "IanaTimezone", # required
+    #       preferred_maintenance_window: "MaintenanceWindow", # required
+    #     },
+    #     last_maintenance_time: Time.now,
+    #     next_maintenance_time: Time.now,
+    #     db_backup_configurations: [
+    #       {
+    #         type: "HOURLY" # One of: ["HOURLY", "DAILY", "WEEKLY", "MONTHLY", "CUSTOM_SCHEDULE", "CONTINUOUS"], # required
+    #         retention_days: 1, # required
+    #         enabled: false, # required
+    #         custom_schedule: "AwsCronSchedule",
+    #         next_automated_backup_time: Time.now
+    #       }
+    #     ],
+    #     kms_key_id: "KmsKeyId"
     #   }
     # @return [Types::CreateDbInstanceOutput]
     def create_db_instance(params = {}, options = {})
@@ -447,22 +570,22 @@ module Aws::TimestreamInfluxDB
     #         no_tasks: false,
     #         query_concurrency: 1,
     #         query_queue_size: 1,
-    #         tracing_type: "log" # One of: ["log", "jaeger"],
+    #         tracing_type: "log" # One of: ["log", "jaeger", "disabled"],
     #         metrics_disabled: false,
     #         http_idle_timeout: {
-    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds"], # required
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
     #           value: 1, # required
     #         },
     #         http_read_header_timeout: {
-    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds"], # required
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
     #           value: 1, # required
     #         },
     #         http_read_timeout: {
-    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds"], # required
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
     #           value: 1, # required
     #         },
     #         http_write_timeout: {
-    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds"], # required
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
     #           value: 1, # required
     #         },
     #         influxql_max_select_buckets: 1,
@@ -477,11 +600,11 @@ module Aws::TimestreamInfluxDB
     #         storage_cache_max_memory_size: 1,
     #         storage_cache_snapshot_memory_size: 1,
     #         storage_cache_snapshot_write_cold_duration: {
-    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds"], # required
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
     #           value: 1, # required
     #         },
     #         storage_compact_full_write_cold_duration: {
-    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds"], # required
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
     #           value: 1, # required
     #         },
     #         storage_compact_throughput_burst: 1,
@@ -489,17 +612,221 @@ module Aws::TimestreamInfluxDB
     #         storage_max_index_log_file_size: 1,
     #         storage_no_validate_field_size: false,
     #         storage_retention_check_interval: {
-    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds"], # required
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
     #           value: 1, # required
     #         },
     #         storage_series_file_max_concurrent_snapshot_compactions: 1,
     #         storage_series_id_set_cache_size: 1,
     #         storage_wal_max_concurrent_writes: 1,
     #         storage_wal_max_write_delay: {
-    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds"], # required
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
     #           value: 1, # required
     #         },
     #         ui_disabled: false
+    #       },
+    #       influx_d_bv3_core: {
+    #         query_file_limit: 1,
+    #         query_log_size: 1,
+    #         log_filter: "String",
+    #         log_format: "full" # One of: ["full"],
+    #         data_fusion_num_threads: 1,
+    #         data_fusion_runtime_type: "multi-thread" # One of: ["multi-thread", "multi-thread-alt"],
+    #         data_fusion_runtime_disable_lifo_slot: false,
+    #         data_fusion_runtime_event_interval: 1,
+    #         data_fusion_runtime_global_queue_interval: 1,
+    #         data_fusion_runtime_max_blocking_threads: 1,
+    #         data_fusion_runtime_max_io_events_per_tick: 1,
+    #         data_fusion_runtime_thread_keep_alive: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         data_fusion_runtime_thread_priority: 1,
+    #         data_fusion_max_parquet_fanout: 1,
+    #         data_fusion_use_cached_parquet_loader: false,
+    #         data_fusion_config: "String",
+    #         max_http_request_size: 1,
+    #         force_snapshot_mem_threshold: {
+    #           # One of:
+    #           percent: "String",
+    #           absolute: 1
+    #         },
+    #         wal_snapshot_size: 1,
+    #         wal_max_write_buffer_size: 1,
+    #         snapshotted_wal_files_to_keep: 1,
+    #         preemptive_cache_age: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         parquet_mem_cache_prune_percentage: 1.0,
+    #         parquet_mem_cache_prune_interval: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         disable_parquet_mem_cache: false,
+    #         parquet_mem_cache_query_path_duration: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         last_cache_eviction_interval: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         distinct_cache_eviction_interval: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         gen1_duration: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         exec_mem_pool_bytes: {
+    #           # One of:
+    #           percent: "String",
+    #           absolute: 1
+    #         },
+    #         parquet_mem_cache_size: {
+    #           # One of:
+    #           percent: "String",
+    #           absolute: 1
+    #         },
+    #         wal_replay_fail_on_error: false,
+    #         wal_replay_concurrency_limit: 1,
+    #         table_index_cache_max_entries: 1,
+    #         table_index_cache_concurrency_limit: 1,
+    #         gen1_lookback_duration: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         retention_check_interval: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         delete_grace_period: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         hard_delete_default_duration: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         plugin_repository_url: "String",
+    #         plugin_repository_secret_arn: "PluginRepositorySecretArn"
+    #       },
+    #       influx_d_bv3_enterprise: {
+    #         query_file_limit: 1,
+    #         query_log_size: 1,
+    #         log_filter: "String",
+    #         log_format: "full" # One of: ["full"],
+    #         data_fusion_num_threads: 1,
+    #         data_fusion_runtime_type: "multi-thread" # One of: ["multi-thread", "multi-thread-alt"],
+    #         data_fusion_runtime_disable_lifo_slot: false,
+    #         data_fusion_runtime_event_interval: 1,
+    #         data_fusion_runtime_global_queue_interval: 1,
+    #         data_fusion_runtime_max_blocking_threads: 1,
+    #         data_fusion_runtime_max_io_events_per_tick: 1,
+    #         data_fusion_runtime_thread_keep_alive: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         data_fusion_runtime_thread_priority: 1,
+    #         data_fusion_max_parquet_fanout: 1,
+    #         data_fusion_use_cached_parquet_loader: false,
+    #         data_fusion_config: "String",
+    #         max_http_request_size: 1,
+    #         force_snapshot_mem_threshold: {
+    #           # One of:
+    #           percent: "String",
+    #           absolute: 1
+    #         },
+    #         wal_snapshot_size: 1,
+    #         wal_max_write_buffer_size: 1,
+    #         snapshotted_wal_files_to_keep: 1,
+    #         preemptive_cache_age: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         parquet_mem_cache_prune_percentage: 1.0,
+    #         parquet_mem_cache_prune_interval: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         disable_parquet_mem_cache: false,
+    #         parquet_mem_cache_query_path_duration: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         last_cache_eviction_interval: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         distinct_cache_eviction_interval: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         gen1_duration: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         exec_mem_pool_bytes: {
+    #           # One of:
+    #           percent: "String",
+    #           absolute: 1
+    #         },
+    #         parquet_mem_cache_size: {
+    #           # One of:
+    #           percent: "String",
+    #           absolute: 1
+    #         },
+    #         wal_replay_fail_on_error: false,
+    #         wal_replay_concurrency_limit: 1,
+    #         table_index_cache_max_entries: 1,
+    #         table_index_cache_concurrency_limit: 1,
+    #         gen1_lookback_duration: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         retention_check_interval: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         delete_grace_period: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         hard_delete_default_duration: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         plugin_repository_url: "String",
+    #         plugin_repository_secret_arn: "PluginRepositorySecretArn",
+    #         ingest_query_instances: 1, # required
+    #         query_only_instances: 1, # required
+    #         dedicated_compactor: false, # required
+    #         compaction_row_limit: 1,
+    #         compaction_max_num_files_per_plan: 1,
+    #         compaction_gen2_duration: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         compaction_multipliers: "String",
+    #         compaction_cleanup_wait: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         compaction_check_interval: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         last_value_cache_disable_from_history: false,
+    #         distinct_value_cache_disable_from_history: false,
+    #         replication_interval: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         catalog_sync_interval: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         }
     #       }
     #     },
     #     tags: {
@@ -523,22 +850,22 @@ module Aws::TimestreamInfluxDB
     #         no_tasks: false,
     #         query_concurrency: 1,
     #         query_queue_size: 1,
-    #         tracing_type: "log" # One of: ["log", "jaeger"],
+    #         tracing_type: "log" # One of: ["log", "jaeger", "disabled"],
     #         metrics_disabled: false,
     #         http_idle_timeout: {
-    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds"], # required
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
     #           value: 1, # required
     #         },
     #         http_read_header_timeout: {
-    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds"], # required
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
     #           value: 1, # required
     #         },
     #         http_read_timeout: {
-    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds"], # required
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
     #           value: 1, # required
     #         },
     #         http_write_timeout: {
-    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds"], # required
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
     #           value: 1, # required
     #         },
     #         influxql_max_select_buckets: 1,
@@ -553,11 +880,11 @@ module Aws::TimestreamInfluxDB
     #         storage_cache_max_memory_size: 1,
     #         storage_cache_snapshot_memory_size: 1,
     #         storage_cache_snapshot_write_cold_duration: {
-    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds"], # required
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
     #           value: 1, # required
     #         },
     #         storage_compact_full_write_cold_duration: {
-    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds"], # required
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
     #           value: 1, # required
     #         },
     #         storage_compact_throughput_burst: 1,
@@ -565,17 +892,221 @@ module Aws::TimestreamInfluxDB
     #         storage_max_index_log_file_size: 1,
     #         storage_no_validate_field_size: false,
     #         storage_retention_check_interval: {
-    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds"], # required
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
     #           value: 1, # required
     #         },
     #         storage_series_file_max_concurrent_snapshot_compactions: 1,
     #         storage_series_id_set_cache_size: 1,
     #         storage_wal_max_concurrent_writes: 1,
     #         storage_wal_max_write_delay: {
-    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds"], # required
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
     #           value: 1, # required
     #         },
     #         ui_disabled: false
+    #       },
+    #       influx_d_bv3_core: {
+    #         query_file_limit: 1,
+    #         query_log_size: 1,
+    #         log_filter: "String",
+    #         log_format: "full" # One of: ["full"],
+    #         data_fusion_num_threads: 1,
+    #         data_fusion_runtime_type: "multi-thread" # One of: ["multi-thread", "multi-thread-alt"],
+    #         data_fusion_runtime_disable_lifo_slot: false,
+    #         data_fusion_runtime_event_interval: 1,
+    #         data_fusion_runtime_global_queue_interval: 1,
+    #         data_fusion_runtime_max_blocking_threads: 1,
+    #         data_fusion_runtime_max_io_events_per_tick: 1,
+    #         data_fusion_runtime_thread_keep_alive: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         data_fusion_runtime_thread_priority: 1,
+    #         data_fusion_max_parquet_fanout: 1,
+    #         data_fusion_use_cached_parquet_loader: false,
+    #         data_fusion_config: "String",
+    #         max_http_request_size: 1,
+    #         force_snapshot_mem_threshold: {
+    #           # One of:
+    #           percent: "String",
+    #           absolute: 1
+    #         },
+    #         wal_snapshot_size: 1,
+    #         wal_max_write_buffer_size: 1,
+    #         snapshotted_wal_files_to_keep: 1,
+    #         preemptive_cache_age: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         parquet_mem_cache_prune_percentage: 1.0,
+    #         parquet_mem_cache_prune_interval: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         disable_parquet_mem_cache: false,
+    #         parquet_mem_cache_query_path_duration: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         last_cache_eviction_interval: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         distinct_cache_eviction_interval: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         gen1_duration: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         exec_mem_pool_bytes: {
+    #           # One of:
+    #           percent: "String",
+    #           absolute: 1
+    #         },
+    #         parquet_mem_cache_size: {
+    #           # One of:
+    #           percent: "String",
+    #           absolute: 1
+    #         },
+    #         wal_replay_fail_on_error: false,
+    #         wal_replay_concurrency_limit: 1,
+    #         table_index_cache_max_entries: 1,
+    #         table_index_cache_concurrency_limit: 1,
+    #         gen1_lookback_duration: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         retention_check_interval: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         delete_grace_period: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         hard_delete_default_duration: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         plugin_repository_url: "String",
+    #         plugin_repository_secret_arn: "PluginRepositorySecretArn"
+    #       },
+    #       influx_d_bv3_enterprise: {
+    #         query_file_limit: 1,
+    #         query_log_size: 1,
+    #         log_filter: "String",
+    #         log_format: "full" # One of: ["full"],
+    #         data_fusion_num_threads: 1,
+    #         data_fusion_runtime_type: "multi-thread" # One of: ["multi-thread", "multi-thread-alt"],
+    #         data_fusion_runtime_disable_lifo_slot: false,
+    #         data_fusion_runtime_event_interval: 1,
+    #         data_fusion_runtime_global_queue_interval: 1,
+    #         data_fusion_runtime_max_blocking_threads: 1,
+    #         data_fusion_runtime_max_io_events_per_tick: 1,
+    #         data_fusion_runtime_thread_keep_alive: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         data_fusion_runtime_thread_priority: 1,
+    #         data_fusion_max_parquet_fanout: 1,
+    #         data_fusion_use_cached_parquet_loader: false,
+    #         data_fusion_config: "String",
+    #         max_http_request_size: 1,
+    #         force_snapshot_mem_threshold: {
+    #           # One of:
+    #           percent: "String",
+    #           absolute: 1
+    #         },
+    #         wal_snapshot_size: 1,
+    #         wal_max_write_buffer_size: 1,
+    #         snapshotted_wal_files_to_keep: 1,
+    #         preemptive_cache_age: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         parquet_mem_cache_prune_percentage: 1.0,
+    #         parquet_mem_cache_prune_interval: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         disable_parquet_mem_cache: false,
+    #         parquet_mem_cache_query_path_duration: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         last_cache_eviction_interval: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         distinct_cache_eviction_interval: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         gen1_duration: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         exec_mem_pool_bytes: {
+    #           # One of:
+    #           percent: "String",
+    #           absolute: 1
+    #         },
+    #         parquet_mem_cache_size: {
+    #           # One of:
+    #           percent: "String",
+    #           absolute: 1
+    #         },
+    #         wal_replay_fail_on_error: false,
+    #         wal_replay_concurrency_limit: 1,
+    #         table_index_cache_max_entries: 1,
+    #         table_index_cache_concurrency_limit: 1,
+    #         gen1_lookback_duration: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         retention_check_interval: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         delete_grace_period: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         hard_delete_default_duration: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         plugin_repository_url: "String",
+    #         plugin_repository_secret_arn: "PluginRepositorySecretArn",
+    #         ingest_query_instances: 1, # required
+    #         query_only_instances: 1, # required
+    #         dedicated_compactor: false, # required
+    #         compaction_row_limit: 1,
+    #         compaction_max_num_files_per_plan: 1,
+    #         compaction_gen2_duration: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         compaction_multipliers: "String",
+    #         compaction_cleanup_wait: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         compaction_check_interval: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         last_value_cache_disable_from_history: false,
+    #         distinct_value_cache_disable_from_history: false,
+    #         replication_interval: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         catalog_sync_interval: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         }
     #       }
     #     }
     #   }
@@ -585,20 +1116,80 @@ module Aws::TimestreamInfluxDB
       request.send_request(options)
     end
 
+    # <p>Deletes a Timestream for InfluxDB backup.</p>
+    # @param [Hash, Types::DeleteDbBackupInput] params
+    # @option params [String] :identifier
+    #   <p>The identifier of the backup to delete.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     identifier: "DbBackupId", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_db_backup(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     id: "DbBackupId", # required
+    #     name: "DbBackupName",
+    #     arn: "Arn", # required
+    #     status: "IN_PROGRESS" # One of: ["IN_PROGRESS", "COMPLETED", "FAILED", "DELETING", "DELETED"],
+    #     created_at: Time.now,
+    #     expires_after: "Date",
+    #     db_resource_id: "DbResourceId",
+    #     type: "HOURLY" # One of: ["HOURLY", "DAILY", "WEEKLY", "MONTHLY", "CUSTOM_SCHEDULE", "ON_DEMAND", "CONTINUOUS"],
+    #     engine_type: "INFLUXDB_V2" # One of: ["INFLUXDB_V2", "INFLUXDB_V3_CORE", "INFLUXDB_V3_ENTERPRISE"],
+    #     deployment_type: "SINGLE_AZ" # One of: ["SINGLE_AZ", "WITH_MULTIAZ_STANDBY", "MULTI_NODE_READ_REPLICAS"],
+    #     kms_key_id: "KmsKeyId",
+    #     cluster_configuration: {
+    #       ingest_query_instances: 1,
+    #       query_only_instances: 1,
+    #       dedicated_compactor: false
+    #     },
+    #     db_parameter_group_id: "DbParameterGroupId",
+    #     db_instance_type: "db.influx.medium" # One of: ["db.influx.medium", "db.influx.large", "db.influx.xlarge", "db.influx.2xlarge", "db.influx.4xlarge", "db.influx.8xlarge", "db.influx.12xlarge", "db.influx.16xlarge", "db.influx.24xlarge"],
+    #     log_delivery_configuration: {
+    #       s3_configuration: { # required
+    #         bucket_name: "String", # required
+    #         enabled: false, # required
+    #       }
+    #     },
+    #     failover_mode: "AUTOMATIC" # One of: ["AUTOMATIC", "NO_FAILOVER"],
+    #     db_storage_type: "InfluxIOIncludedT1" # One of: ["InfluxIOIncludedT1", "InfluxIOIncludedT2", "InfluxIOIncludedT3"],
+    #     allocated_storage: 1,
+    #     vpc_subnet_ids: ["VpcSubnetId"],
+    #     vpc_security_group_ids: ["VpcSecurityGroupId"],
+    #     publicly_accessible: false,
+    #     port: 1,
+    #     network_type: "IPV4" # One of: ["IPV4", "DUAL"],
+    #     influx_auth_parameters_secret_arn: "String",
+    #     maintenance_schedule: {
+    #       timezone: "IanaTimezone", # required
+    #       preferred_maintenance_window: "MaintenanceWindow", # required
+    #     }
+    #   }
+    # @return [Types::DeleteDbBackupOutput]
+    def delete_db_backup(params = {}, options = {})
+      request = build_request(:delete_db_backup, params)
+      request.send_request(options)
+    end
+
     # <p>Deletes a Timestream for InfluxDB cluster.</p>
     # @param [Hash, Types::DeleteDbClusterInput] params
     # @option params [String] :db_cluster_id
     #   <p>Service-generated unique identifier of the DB cluster.</p>
+    # @option params [Boolean] :retain_automated_backups
+    #   <p>Specifies whether to retain automated backups after the DB cluster is deleted. If set to true, automated backups are not deleted and can be restored later.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     db_cluster_id: "DbClusterId", # required
+    #     retain_automated_backups: false
     #   }
     #   options = {}
     #   response = client.delete_db_cluster(params, options)
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {
-    #     db_cluster_status: "CREATING" # One of: ["CREATING", "UPDATING", "DELETING", "AVAILABLE", "FAILED", "DELETED", "MAINTENANCE"]
+    #     db_cluster_status: "CREATING" # One of: ["CREATING", "UPDATING", "DELETING", "AVAILABLE", "FAILED", "DELETED", "MAINTENANCE", "UPDATING_INSTANCE_TYPE", "REBOOTING", "REBOOT_FAILED", "PARTIALLY_AVAILABLE", "RESTORING", "RESTORE_FAILED"]
     #   }
     # @return [Types::DeleteDbClusterOutput]
     def delete_db_cluster(params = {}, options = {})
@@ -610,9 +1201,12 @@ module Aws::TimestreamInfluxDB
     # @param [Hash, Types::DeleteDbInstanceInput] params
     # @option params [String] :identifier
     #   <p>The id of the DB instance.</p>
+    # @option params [Boolean] :retain_automated_backups
+    #   <p>Specifies whether to retain automated backups after the DB instance is deleted. If set to true, automated backups are not deleted and can be restored later.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     identifier: "DbInstanceIdentifier", # required
+    #     retain_automated_backups: false
     #   }
     #   options = {}
     #   response = client.delete_db_instance(params, options)
@@ -622,7 +1216,7 @@ module Aws::TimestreamInfluxDB
     #     id: "DbInstanceId", # required
     #     name: "DbInstanceName", # required
     #     arn: "Arn", # required
-    #     status: "CREATING" # One of: ["CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE", "MAINTENANCE"],
+    #     status: "CREATING" # One of: ["CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE", "MAINTENANCE", "REBOOTING", "REBOOT_FAILED", "RESTORING", "RESTORE_FAILED"],
     #     endpoint: "String",
     #     port: 1,
     #     network_type: "IPV4" # One of: ["IPV4", "DUAL"],
@@ -644,11 +1238,85 @@ module Aws::TimestreamInfluxDB
     #     },
     #     influx_auth_parameters_secret_arn: "String",
     #     db_cluster_id: "DbClusterId",
-    #     instance_mode: "PRIMARY" # One of: ["PRIMARY", "STANDBY", "REPLICA"]
+    #     instance_mode: "PRIMARY" # One of: ["PRIMARY", "STANDBY", "REPLICA", "INGEST", "QUERY", "COMPACT", "PROCESS"],
+    #     instance_modes: ["PRIMARY" # One of: ["PRIMARY", "STANDBY", "REPLICA", "INGEST", "QUERY", "COMPACT", "PROCESS"]],
+    #     maintenance_schedule: {
+    #       timezone: "IanaTimezone", # required
+    #       preferred_maintenance_window: "MaintenanceWindow", # required
+    #     },
+    #     last_maintenance_time: Time.now,
+    #     next_maintenance_time: Time.now,
+    #     db_backup_configurations: [
+    #       {
+    #         type: "HOURLY" # One of: ["HOURLY", "DAILY", "WEEKLY", "MONTHLY", "CUSTOM_SCHEDULE", "CONTINUOUS"], # required
+    #         retention_days: 1, # required
+    #         enabled: false, # required
+    #         custom_schedule: "AwsCronSchedule",
+    #         next_automated_backup_time: Time.now
+    #       }
+    #     ],
+    #     kms_key_id: "KmsKeyId"
     #   }
     # @return [Types::DeleteDbInstanceOutput]
     def delete_db_instance(params = {}, options = {})
       request = build_request(:delete_db_instance, params)
+      request.send_request(options)
+    end
+
+    # <p>Returns information about a specific Timestream for InfluxDB backup.</p>
+    # @param [Hash, Types::GetDbBackupInput] params
+    # @option params [String] :identifier
+    #   <p>The identifier of the backup to retrieve information for.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     identifier: "DbBackupId", # required
+    #   }
+    #   options = {}
+    #   response = client.get_db_backup(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     id: "DbBackupId", # required
+    #     name: "DbBackupName",
+    #     arn: "Arn", # required
+    #     status: "IN_PROGRESS" # One of: ["IN_PROGRESS", "COMPLETED", "FAILED", "DELETING", "DELETED"],
+    #     created_at: Time.now,
+    #     expires_after: "Date",
+    #     db_resource_id: "DbResourceId",
+    #     type: "HOURLY" # One of: ["HOURLY", "DAILY", "WEEKLY", "MONTHLY", "CUSTOM_SCHEDULE", "ON_DEMAND", "CONTINUOUS"],
+    #     engine_type: "INFLUXDB_V2" # One of: ["INFLUXDB_V2", "INFLUXDB_V3_CORE", "INFLUXDB_V3_ENTERPRISE"],
+    #     deployment_type: "SINGLE_AZ" # One of: ["SINGLE_AZ", "WITH_MULTIAZ_STANDBY", "MULTI_NODE_READ_REPLICAS"],
+    #     kms_key_id: "KmsKeyId",
+    #     cluster_configuration: {
+    #       ingest_query_instances: 1,
+    #       query_only_instances: 1,
+    #       dedicated_compactor: false
+    #     },
+    #     db_parameter_group_id: "DbParameterGroupId",
+    #     db_instance_type: "db.influx.medium" # One of: ["db.influx.medium", "db.influx.large", "db.influx.xlarge", "db.influx.2xlarge", "db.influx.4xlarge", "db.influx.8xlarge", "db.influx.12xlarge", "db.influx.16xlarge", "db.influx.24xlarge"],
+    #     log_delivery_configuration: {
+    #       s3_configuration: { # required
+    #         bucket_name: "String", # required
+    #         enabled: false, # required
+    #       }
+    #     },
+    #     failover_mode: "AUTOMATIC" # One of: ["AUTOMATIC", "NO_FAILOVER"],
+    #     db_storage_type: "InfluxIOIncludedT1" # One of: ["InfluxIOIncludedT1", "InfluxIOIncludedT2", "InfluxIOIncludedT3"],
+    #     allocated_storage: 1,
+    #     vpc_subnet_ids: ["VpcSubnetId"],
+    #     vpc_security_group_ids: ["VpcSecurityGroupId"],
+    #     publicly_accessible: false,
+    #     port: 1,
+    #     network_type: "IPV4" # One of: ["IPV4", "DUAL"],
+    #     influx_auth_parameters_secret_arn: "String",
+    #     maintenance_schedule: {
+    #       timezone: "IanaTimezone", # required
+    #       preferred_maintenance_window: "MaintenanceWindow", # required
+    #     }
+    #   }
+    # @return [Types::GetDbBackupOutput]
+    def get_db_backup(params = {}, options = {})
+      request = build_request(:get_db_backup, params)
       request.send_request(options)
     end
 
@@ -668,7 +1336,7 @@ module Aws::TimestreamInfluxDB
     #     id: "DbClusterId", # required
     #     name: "DbClusterName", # required
     #     arn: "Arn", # required
-    #     status: "CREATING" # One of: ["CREATING", "UPDATING", "DELETING", "AVAILABLE", "FAILED", "DELETED", "MAINTENANCE"],
+    #     status: "CREATING" # One of: ["CREATING", "UPDATING", "DELETING", "AVAILABLE", "FAILED", "DELETED", "MAINTENANCE", "UPDATING_INSTANCE_TYPE", "REBOOTING", "REBOOT_FAILED", "PARTIALLY_AVAILABLE", "RESTORING", "RESTORE_FAILED"],
     #     endpoint: "String",
     #     reader_endpoint: "String",
     #     port: 1,
@@ -677,18 +1345,41 @@ module Aws::TimestreamInfluxDB
     #     network_type: "IPV4" # One of: ["IPV4", "DUAL"],
     #     db_storage_type: "InfluxIOIncludedT1" # One of: ["InfluxIOIncludedT1", "InfluxIOIncludedT2", "InfluxIOIncludedT3"],
     #     allocated_storage: 1,
+    #     engine_type: "INFLUXDB_V2" # One of: ["INFLUXDB_V2", "INFLUXDB_V3_CORE", "INFLUXDB_V3_ENTERPRISE"],
     #     publicly_accessible: false,
     #     db_parameter_group_identifier: "DbParameterGroupIdentifier",
+    #     effective_db_parameter_group_identifier: "DbParameterGroupIdentifier",
     #     log_delivery_configuration: {
     #       s3_configuration: { # required
     #         bucket_name: "String", # required
     #         enabled: false, # required
     #       }
     #     },
+    #     maintenance_schedule: {
+    #       timezone: "IanaTimezone", # required
+    #       preferred_maintenance_window: "MaintenanceWindow", # required
+    #     },
+    #     last_maintenance_time: Time.now,
+    #     next_maintenance_time: Time.now,
     #     influx_auth_parameters_secret_arn: "String",
     #     vpc_subnet_ids: ["VpcSubnetId"],
     #     vpc_security_group_ids: ["VpcSecurityGroupId"],
-    #     failover_mode: "AUTOMATIC" # One of: ["AUTOMATIC", "NO_FAILOVER"]
+    #     failover_mode: "AUTOMATIC" # One of: ["AUTOMATIC", "NO_FAILOVER"],
+    #     cluster_configuration: {
+    #       ingest_query_instances: 1,
+    #       query_only_instances: 1,
+    #       dedicated_compactor: false
+    #     },
+    #     db_backup_configurations: [
+    #       {
+    #         type: "HOURLY" # One of: ["HOURLY", "DAILY", "WEEKLY", "MONTHLY", "CUSTOM_SCHEDULE", "CONTINUOUS"], # required
+    #         retention_days: 1, # required
+    #         enabled: false, # required
+    #         custom_schedule: "AwsCronSchedule",
+    #         next_automated_backup_time: Time.now
+    #       }
+    #     ],
+    #     kms_key_id: "KmsKeyId"
     #   }
     # @return [Types::GetDbClusterOutput]
     def get_db_cluster(params = {}, options = {})
@@ -712,7 +1403,7 @@ module Aws::TimestreamInfluxDB
     #     id: "DbInstanceId", # required
     #     name: "DbInstanceName", # required
     #     arn: "Arn", # required
-    #     status: "CREATING" # One of: ["CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE", "MAINTENANCE"],
+    #     status: "CREATING" # One of: ["CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE", "MAINTENANCE", "REBOOTING", "REBOOT_FAILED", "RESTORING", "RESTORE_FAILED"],
     #     endpoint: "String",
     #     port: 1,
     #     network_type: "IPV4" # One of: ["IPV4", "DUAL"],
@@ -734,7 +1425,24 @@ module Aws::TimestreamInfluxDB
     #     },
     #     influx_auth_parameters_secret_arn: "String",
     #     db_cluster_id: "DbClusterId",
-    #     instance_mode: "PRIMARY" # One of: ["PRIMARY", "STANDBY", "REPLICA"]
+    #     instance_mode: "PRIMARY" # One of: ["PRIMARY", "STANDBY", "REPLICA", "INGEST", "QUERY", "COMPACT", "PROCESS"],
+    #     instance_modes: ["PRIMARY" # One of: ["PRIMARY", "STANDBY", "REPLICA", "INGEST", "QUERY", "COMPACT", "PROCESS"]],
+    #     maintenance_schedule: {
+    #       timezone: "IanaTimezone", # required
+    #       preferred_maintenance_window: "MaintenanceWindow", # required
+    #     },
+    #     last_maintenance_time: Time.now,
+    #     next_maintenance_time: Time.now,
+    #     db_backup_configurations: [
+    #       {
+    #         type: "HOURLY" # One of: ["HOURLY", "DAILY", "WEEKLY", "MONTHLY", "CUSTOM_SCHEDULE", "CONTINUOUS"], # required
+    #         retention_days: 1, # required
+    #         enabled: false, # required
+    #         custom_schedule: "AwsCronSchedule",
+    #         next_automated_backup_time: Time.now
+    #       }
+    #     ],
+    #     kms_key_id: "KmsKeyId"
     #   }
     # @return [Types::GetDbInstanceOutput]
     def get_db_instance(params = {}, options = {})
@@ -767,22 +1475,22 @@ module Aws::TimestreamInfluxDB
     #         no_tasks: false,
     #         query_concurrency: 1,
     #         query_queue_size: 1,
-    #         tracing_type: "log" # One of: ["log", "jaeger"],
+    #         tracing_type: "log" # One of: ["log", "jaeger", "disabled"],
     #         metrics_disabled: false,
     #         http_idle_timeout: {
-    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds"], # required
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
     #           value: 1, # required
     #         },
     #         http_read_header_timeout: {
-    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds"], # required
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
     #           value: 1, # required
     #         },
     #         http_read_timeout: {
-    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds"], # required
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
     #           value: 1, # required
     #         },
     #         http_write_timeout: {
-    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds"], # required
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
     #           value: 1, # required
     #         },
     #         influxql_max_select_buckets: 1,
@@ -797,11 +1505,11 @@ module Aws::TimestreamInfluxDB
     #         storage_cache_max_memory_size: 1,
     #         storage_cache_snapshot_memory_size: 1,
     #         storage_cache_snapshot_write_cold_duration: {
-    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds"], # required
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
     #           value: 1, # required
     #         },
     #         storage_compact_full_write_cold_duration: {
-    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds"], # required
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
     #           value: 1, # required
     #         },
     #         storage_compact_throughput_burst: 1,
@@ -809,23 +1517,269 @@ module Aws::TimestreamInfluxDB
     #         storage_max_index_log_file_size: 1,
     #         storage_no_validate_field_size: false,
     #         storage_retention_check_interval: {
-    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds"], # required
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
     #           value: 1, # required
     #         },
     #         storage_series_file_max_concurrent_snapshot_compactions: 1,
     #         storage_series_id_set_cache_size: 1,
     #         storage_wal_max_concurrent_writes: 1,
     #         storage_wal_max_write_delay: {
-    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds"], # required
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
     #           value: 1, # required
     #         },
     #         ui_disabled: false
+    #       },
+    #       influx_d_bv3_core: {
+    #         query_file_limit: 1,
+    #         query_log_size: 1,
+    #         log_filter: "String",
+    #         log_format: "full" # One of: ["full"],
+    #         data_fusion_num_threads: 1,
+    #         data_fusion_runtime_type: "multi-thread" # One of: ["multi-thread", "multi-thread-alt"],
+    #         data_fusion_runtime_disable_lifo_slot: false,
+    #         data_fusion_runtime_event_interval: 1,
+    #         data_fusion_runtime_global_queue_interval: 1,
+    #         data_fusion_runtime_max_blocking_threads: 1,
+    #         data_fusion_runtime_max_io_events_per_tick: 1,
+    #         data_fusion_runtime_thread_keep_alive: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         data_fusion_runtime_thread_priority: 1,
+    #         data_fusion_max_parquet_fanout: 1,
+    #         data_fusion_use_cached_parquet_loader: false,
+    #         data_fusion_config: "String",
+    #         max_http_request_size: 1,
+    #         force_snapshot_mem_threshold: {
+    #           # One of:
+    #           percent: "String",
+    #           absolute: 1
+    #         },
+    #         wal_snapshot_size: 1,
+    #         wal_max_write_buffer_size: 1,
+    #         snapshotted_wal_files_to_keep: 1,
+    #         preemptive_cache_age: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         parquet_mem_cache_prune_percentage: 1.0,
+    #         parquet_mem_cache_prune_interval: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         disable_parquet_mem_cache: false,
+    #         parquet_mem_cache_query_path_duration: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         last_cache_eviction_interval: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         distinct_cache_eviction_interval: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         gen1_duration: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         exec_mem_pool_bytes: {
+    #           # One of:
+    #           percent: "String",
+    #           absolute: 1
+    #         },
+    #         parquet_mem_cache_size: {
+    #           # One of:
+    #           percent: "String",
+    #           absolute: 1
+    #         },
+    #         wal_replay_fail_on_error: false,
+    #         wal_replay_concurrency_limit: 1,
+    #         table_index_cache_max_entries: 1,
+    #         table_index_cache_concurrency_limit: 1,
+    #         gen1_lookback_duration: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         retention_check_interval: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         delete_grace_period: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         hard_delete_default_duration: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         plugin_repository_url: "String",
+    #         plugin_repository_secret_arn: "PluginRepositorySecretArn"
+    #       },
+    #       influx_d_bv3_enterprise: {
+    #         query_file_limit: 1,
+    #         query_log_size: 1,
+    #         log_filter: "String",
+    #         log_format: "full" # One of: ["full"],
+    #         data_fusion_num_threads: 1,
+    #         data_fusion_runtime_type: "multi-thread" # One of: ["multi-thread", "multi-thread-alt"],
+    #         data_fusion_runtime_disable_lifo_slot: false,
+    #         data_fusion_runtime_event_interval: 1,
+    #         data_fusion_runtime_global_queue_interval: 1,
+    #         data_fusion_runtime_max_blocking_threads: 1,
+    #         data_fusion_runtime_max_io_events_per_tick: 1,
+    #         data_fusion_runtime_thread_keep_alive: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         data_fusion_runtime_thread_priority: 1,
+    #         data_fusion_max_parquet_fanout: 1,
+    #         data_fusion_use_cached_parquet_loader: false,
+    #         data_fusion_config: "String",
+    #         max_http_request_size: 1,
+    #         force_snapshot_mem_threshold: {
+    #           # One of:
+    #           percent: "String",
+    #           absolute: 1
+    #         },
+    #         wal_snapshot_size: 1,
+    #         wal_max_write_buffer_size: 1,
+    #         snapshotted_wal_files_to_keep: 1,
+    #         preemptive_cache_age: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         parquet_mem_cache_prune_percentage: 1.0,
+    #         parquet_mem_cache_prune_interval: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         disable_parquet_mem_cache: false,
+    #         parquet_mem_cache_query_path_duration: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         last_cache_eviction_interval: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         distinct_cache_eviction_interval: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         gen1_duration: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         exec_mem_pool_bytes: {
+    #           # One of:
+    #           percent: "String",
+    #           absolute: 1
+    #         },
+    #         parquet_mem_cache_size: {
+    #           # One of:
+    #           percent: "String",
+    #           absolute: 1
+    #         },
+    #         wal_replay_fail_on_error: false,
+    #         wal_replay_concurrency_limit: 1,
+    #         table_index_cache_max_entries: 1,
+    #         table_index_cache_concurrency_limit: 1,
+    #         gen1_lookback_duration: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         retention_check_interval: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         delete_grace_period: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         hard_delete_default_duration: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         plugin_repository_url: "String",
+    #         plugin_repository_secret_arn: "PluginRepositorySecretArn",
+    #         ingest_query_instances: 1, # required
+    #         query_only_instances: 1, # required
+    #         dedicated_compactor: false, # required
+    #         compaction_row_limit: 1,
+    #         compaction_max_num_files_per_plan: 1,
+    #         compaction_gen2_duration: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         compaction_multipliers: "String",
+    #         compaction_cleanup_wait: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         compaction_check_interval: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         last_value_cache_disable_from_history: false,
+    #         distinct_value_cache_disable_from_history: false,
+    #         replication_interval: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         },
+    #         catalog_sync_interval: {
+    #           duration_type: "hours" # One of: ["hours", "minutes", "seconds", "milliseconds", "days"], # required
+    #           value: 1, # required
+    #         }
     #       }
     #     }
     #   }
     # @return [Types::GetDbParameterGroupOutput]
     def get_db_parameter_group(params = {}, options = {})
       request = build_request(:get_db_parameter_group, params)
+      request.send_request(options)
+    end
+
+    # <p>Returns a list of Timestream for InfluxDB backups.</p>
+    # @param [Hash, Types::ListDbBackupsInput] params
+    # @option params [String] :db_resource_id
+    #   <p>The identifier of the DB instance or DB cluster to list backups for. If not specified, returns all backups in the account and region.</p>
+    # @option params [String] :next_token
+    #   <p>The pagination token. To resume pagination, provide the nextToken value as an argument of a subsequent API invocation.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of items to return in the output. If the total number of items available is more than the value specified, a nextToken is provided in the output. To resume pagination, provide the nextToken value as an argument of a subsequent API invocation.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     db_resource_id: "DbResourceId",
+    #     next_token: "NextToken",
+    #     max_results: 1
+    #   }
+    #   options = {}
+    #   response = client.list_db_backups(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     items: [ # required
+    #       {
+    #         id: "DbBackupId", # required
+    #         name: "DbBackupName",
+    #         arn: "Arn", # required
+    #         status: "IN_PROGRESS" # One of: ["IN_PROGRESS", "COMPLETED", "FAILED", "DELETING", "DELETED"],
+    #         created_at: Time.now,
+    #         expires_after: "Date",
+    #         db_resource_id: "DbResourceId",
+    #         type: "HOURLY" # One of: ["HOURLY", "DAILY", "WEEKLY", "MONTHLY", "CUSTOM_SCHEDULE", "ON_DEMAND", "CONTINUOUS"],
+    #         engine_type: "INFLUXDB_V2" # One of: ["INFLUXDB_V2", "INFLUXDB_V3_CORE", "INFLUXDB_V3_ENTERPRISE"],
+    #         deployment_type: "SINGLE_AZ" # One of: ["SINGLE_AZ", "WITH_MULTIAZ_STANDBY", "MULTI_NODE_READ_REPLICAS"],
+    #         kms_key_id: "KmsKeyId"
+    #       }
+    #     ],
+    #     next_token: "NextToken"
+    #   }
+    # @return [Types::ListDbBackupsOutput]
+    def list_db_backups(params = {}, options = {})
+      request = build_request(:list_db_backups, params)
       request.send_request(options)
     end
 
@@ -850,7 +1804,7 @@ module Aws::TimestreamInfluxDB
     #         id: "DbClusterId", # required
     #         name: "DbClusterName", # required
     #         arn: "Arn", # required
-    #         status: "CREATING" # One of: ["CREATING", "UPDATING", "DELETING", "AVAILABLE", "FAILED", "DELETED", "MAINTENANCE"],
+    #         status: "CREATING" # One of: ["CREATING", "UPDATING", "DELETING", "AVAILABLE", "FAILED", "DELETED", "MAINTENANCE", "UPDATING_INSTANCE_TYPE", "REBOOTING", "REBOOT_FAILED", "PARTIALLY_AVAILABLE", "RESTORING", "RESTORE_FAILED"],
     #         endpoint: "String",
     #         reader_endpoint: "String",
     #         port: 1,
@@ -858,7 +1812,8 @@ module Aws::TimestreamInfluxDB
     #         db_instance_type: "db.influx.medium" # One of: ["db.influx.medium", "db.influx.large", "db.influx.xlarge", "db.influx.2xlarge", "db.influx.4xlarge", "db.influx.8xlarge", "db.influx.12xlarge", "db.influx.16xlarge", "db.influx.24xlarge"],
     #         network_type: "IPV4" # One of: ["IPV4", "DUAL"],
     #         db_storage_type: "InfluxIOIncludedT1" # One of: ["InfluxIOIncludedT1", "InfluxIOIncludedT2", "InfluxIOIncludedT3"],
-    #         allocated_storage: 1
+    #         allocated_storage: 1,
+    #         engine_type: "INFLUXDB_V2" # One of: ["INFLUXDB_V2", "INFLUXDB_V3_CORE", "INFLUXDB_V3_ENTERPRISE"]
     #       }
     #     ],
     #     next_token: "NextToken"
@@ -890,7 +1845,7 @@ module Aws::TimestreamInfluxDB
     #         id: "DbInstanceId", # required
     #         name: "DbInstanceName", # required
     #         arn: "Arn", # required
-    #         status: "CREATING" # One of: ["CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE", "MAINTENANCE"],
+    #         status: "CREATING" # One of: ["CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE", "MAINTENANCE", "REBOOTING", "REBOOT_FAILED", "RESTORING", "RESTORE_FAILED"],
     #         endpoint: "String",
     #         port: 1,
     #         network_type: "IPV4" # One of: ["IPV4", "DUAL"],
@@ -932,7 +1887,7 @@ module Aws::TimestreamInfluxDB
     #         id: "DbInstanceId", # required
     #         name: "DbInstanceName", # required
     #         arn: "Arn", # required
-    #         status: "CREATING" # One of: ["CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE", "MAINTENANCE"],
+    #         status: "CREATING" # One of: ["CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE", "MAINTENANCE", "REBOOTING", "REBOOT_FAILED", "RESTORING", "RESTORE_FAILED"],
     #         endpoint: "String",
     #         port: 1,
     #         network_type: "IPV4" # One of: ["IPV4", "DUAL"],
@@ -940,7 +1895,8 @@ module Aws::TimestreamInfluxDB
     #         db_storage_type: "InfluxIOIncludedT1" # One of: ["InfluxIOIncludedT1", "InfluxIOIncludedT2", "InfluxIOIncludedT3"],
     #         allocated_storage: 1,
     #         deployment_type: "SINGLE_AZ" # One of: ["SINGLE_AZ", "WITH_MULTIAZ_STANDBY"],
-    #         instance_mode: "PRIMARY" # One of: ["PRIMARY", "STANDBY", "REPLICA"]
+    #         instance_mode: "PRIMARY" # One of: ["PRIMARY", "STANDBY", "REPLICA", "INGEST", "QUERY", "COMPACT", "PROCESS"],
+    #         instance_modes: ["PRIMARY" # One of: ["PRIMARY", "STANDBY", "REPLICA", "INGEST", "QUERY", "COMPACT", "PROCESS"]]
     #       }
     #     ],
     #     next_token: "NextToken"
@@ -1006,6 +1962,177 @@ module Aws::TimestreamInfluxDB
       request.send_request(options)
     end
 
+    # <p>Reboots a Timestream for InfluxDB cluster.</p>
+    # @param [Hash, Types::RebootDbClusterInput] params
+    # @option params [String] :db_cluster_id
+    #   <p>Service-generated unique identifier of the DB cluster to reboot.</p>
+    # @option params [Array<String>] :instance_ids
+    #   <p>A list of service-generated unique DB Instance Ids belonging to the DB Cluster to reboot.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     db_cluster_id: "DbClusterId", # required
+    #     instance_ids: ["DbInstanceId"]
+    #   }
+    #   options = {}
+    #   response = client.reboot_db_cluster(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     db_cluster_status: "CREATING" # One of: ["CREATING", "UPDATING", "DELETING", "AVAILABLE", "FAILED", "DELETED", "MAINTENANCE", "UPDATING_INSTANCE_TYPE", "REBOOTING", "REBOOT_FAILED", "PARTIALLY_AVAILABLE", "RESTORING", "RESTORE_FAILED"]
+    #   }
+    # @return [Types::RebootDbClusterOutput]
+    def reboot_db_cluster(params = {}, options = {})
+      request = build_request(:reboot_db_cluster, params)
+      request.send_request(options)
+    end
+
+    # <p>Reboots a Timestream for InfluxDB instance.</p>
+    # @param [Hash, Types::RebootDbInstanceInput] params
+    # @option params [String] :identifier
+    #   <p>The id of the DB instance to reboot.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     identifier: "DbInstanceIdentifier", # required
+    #   }
+    #   options = {}
+    #   response = client.reboot_db_instance(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     id: "DbInstanceId", # required
+    #     name: "DbInstanceName", # required
+    #     arn: "Arn", # required
+    #     status: "CREATING" # One of: ["CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE", "MAINTENANCE", "REBOOTING", "REBOOT_FAILED", "RESTORING", "RESTORE_FAILED"],
+    #     endpoint: "String",
+    #     port: 1,
+    #     network_type: "IPV4" # One of: ["IPV4", "DUAL"],
+    #     db_instance_type: "db.influx.medium" # One of: ["db.influx.medium", "db.influx.large", "db.influx.xlarge", "db.influx.2xlarge", "db.influx.4xlarge", "db.influx.8xlarge", "db.influx.12xlarge", "db.influx.16xlarge", "db.influx.24xlarge"],
+    #     db_storage_type: "InfluxIOIncludedT1" # One of: ["InfluxIOIncludedT1", "InfluxIOIncludedT2", "InfluxIOIncludedT3"],
+    #     allocated_storage: 1,
+    #     deployment_type: "SINGLE_AZ" # One of: ["SINGLE_AZ", "WITH_MULTIAZ_STANDBY"],
+    #     vpc_subnet_ids: ["VpcSubnetId"], # required
+    #     publicly_accessible: false,
+    #     vpc_security_group_ids: ["VpcSecurityGroupId"],
+    #     db_parameter_group_identifier: "DbParameterGroupIdentifier",
+    #     availability_zone: "String",
+    #     secondary_availability_zone: "String",
+    #     log_delivery_configuration: {
+    #       s3_configuration: { # required
+    #         bucket_name: "String", # required
+    #         enabled: false, # required
+    #       }
+    #     },
+    #     influx_auth_parameters_secret_arn: "String",
+    #     db_cluster_id: "DbClusterId",
+    #     instance_mode: "PRIMARY" # One of: ["PRIMARY", "STANDBY", "REPLICA", "INGEST", "QUERY", "COMPACT", "PROCESS"],
+    #     instance_modes: ["PRIMARY" # One of: ["PRIMARY", "STANDBY", "REPLICA", "INGEST", "QUERY", "COMPACT", "PROCESS"]],
+    #     maintenance_schedule: {
+    #       timezone: "IanaTimezone", # required
+    #       preferred_maintenance_window: "MaintenanceWindow", # required
+    #     },
+    #     last_maintenance_time: Time.now,
+    #     next_maintenance_time: Time.now,
+    #     db_backup_configurations: [
+    #       {
+    #         type: "HOURLY" # One of: ["HOURLY", "DAILY", "WEEKLY", "MONTHLY", "CUSTOM_SCHEDULE", "CONTINUOUS"], # required
+    #         retention_days: 1, # required
+    #         enabled: false, # required
+    #         custom_schedule: "AwsCronSchedule",
+    #         next_automated_backup_time: Time.now
+    #       }
+    #     ],
+    #     kms_key_id: "KmsKeyId"
+    #   }
+    # @return [Types::RebootDbInstanceOutput]
+    def reboot_db_instance(params = {}, options = {})
+      request = build_request(:reboot_db_instance, params)
+      request.send_request(options)
+    end
+
+    # <p>Restores a Timestream for InfluxDB resource from a backup. By default, a new resource is created. You can optionally restore to the same resource using the REPLACE_EXISTING restore mode.</p>
+    # @param [Hash, Types::RestoreFromDbBackupInput] params
+    # @option params [String] :name
+    #   <p>The name of the new resource to create from the restore. If restoring to an existing resource, the name must match the existing resource name.</p>
+    # @option params [String] :db_backup_id
+    #   <p>The identifier of the backup to restore from.</p>
+    # @option params [Time] :restore_to_time
+    #   <p>The point in time to restore to, for continuous backups. Must be within the backup's retention window.</p>
+    # @option params [String] :restore_mode
+    #   <p>Specifies whether to restore to a new resource or replace the existing resource. Valid values are NEW_RESOURCE (default) and REPLACE_EXISTING.</p>
+    # @option params [Array<String>] :vpc_subnet_ids
+    #   <p>A list of VPC subnet IDs for the restored resource. If not specified, the restored resource uses the same subnets as the backup.</p>
+    # @option params [Array<String>] :vpc_security_group_ids
+    #   <p>A list of VPC security group IDs for the restored resource. If not specified, the restored resource uses the same security groups as the backup.</p>
+    # @option params [Boolean] :publicly_accessible
+    #   <p>Specifies whether the restored resource is publicly accessible.</p>
+    # @option params [Types::LogDeliveryConfiguration] :log_delivery_configuration
+    #   <p>Configuration for sending InfluxDB engine logs to the specified S3 bucket for the restored resource.</p>
+    # @option params [Types::MaintenanceSchedule] :maintenance_schedule
+    #   <p>The maintenance schedule for the restored resource.</p>
+    # @option params [Hash<String, String>] :tags
+    #   <p>A list of key-value pairs to associate with the restored resource.</p>
+    # @option params [Integer] :port
+    #   <p>The port number on which the restored InfluxDB resource accepts connections.</p>
+    # @option params [String] :network_type
+    #   <p>Specifies the network type of the restored resource. Valid values are IPV4 and DUAL.</p>
+    # @option params [String] :deployment_type
+    #   <p>Specifies the deployment type of the restored resource. Valid values are SINGLE_AZ, WITH_MULTIAZ_STANDBY, and MULTI_NODE_READ_REPLICAS.</p>
+    # @option params [Array<Types::DbBackupConfiguration>] :db_backup_configurations
+    #   <p>A list of backup configurations to apply to the restored resource.</p>
+    # @option params [String] :kms_key_id
+    #   <p>The Amazon Web Services KMS key identifier to use for encryption of the restored resource. Can be a key ID, key ARN, alias name, or alias ARN.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     name: "DbResourceName", # required
+    #     db_backup_id: "DbBackupId", # required
+    #     restore_to_time: Time.now,
+    #     restore_mode: "NEW_RESOURCE" # One of: ["NEW_RESOURCE", "REPLACE_EXISTING"],
+    #     vpc_subnet_ids: ["VpcSubnetId"],
+    #     vpc_security_group_ids: ["VpcSecurityGroupId"],
+    #     publicly_accessible: false,
+    #     log_delivery_configuration: {
+    #       s3_configuration: { # required
+    #         bucket_name: "String", # required
+    #         enabled: false, # required
+    #       }
+    #     },
+    #     maintenance_schedule: {
+    #       timezone: "IanaTimezone", # required
+    #       preferred_maintenance_window: "MaintenanceWindow", # required
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue"
+    #     },
+    #     port: 1,
+    #     network_type: "IPV4" # One of: ["IPV4", "DUAL"],
+    #     deployment_type: "SINGLE_AZ" # One of: ["SINGLE_AZ", "WITH_MULTIAZ_STANDBY", "MULTI_NODE_READ_REPLICAS"],
+    #     db_backup_configurations: [
+    #       {
+    #         type: "HOURLY" # One of: ["HOURLY", "DAILY", "WEEKLY", "MONTHLY", "CUSTOM_SCHEDULE", "CONTINUOUS"], # required
+    #         retention_days: 1, # required
+    #         enabled: false, # required
+    #         custom_schedule: "AwsCronSchedule"
+    #       }
+    #     ],
+    #     kms_key_id: "KmsKeyId"
+    #   }
+    #   options = {}
+    #   response = client.restore_from_db_backup(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     restored_db_resource_id: "DbResourceId",
+    #     restore_status: "RESTORING" # One of: ["RESTORING"],
+    #     resource_type: "DB_INSTANCE" # One of: ["DB_INSTANCE", "DB_CLUSTER"],
+    #     engine_type: "INFLUXDB_V2" # One of: ["INFLUXDB_V2", "INFLUXDB_V3_CORE", "INFLUXDB_V3_ENTERPRISE"],
+    #     deployment_type: "SINGLE_AZ" # One of: ["SINGLE_AZ", "WITH_MULTIAZ_STANDBY", "MULTI_NODE_READ_REPLICAS"]
+    #   }
+    # @return [Types::RestoreFromDbBackupOutput]
+    def restore_from_db_backup(params = {}, options = {})
+      request = build_request(:restore_from_db_backup, params)
+      request.send_request(options)
+    end
+
     # <p>Tags are composed of a Key/Value pairs. You can use tags to categorize and track your Timestream for InfluxDB resources.</p>
     # @param [Hash, Types::TagResourceRequest] params
     # @option params [String] :resource_arn
@@ -1066,6 +2193,10 @@ module Aws::TimestreamInfluxDB
     #   <p>Update the DB cluster to use the specified DB instance Type.</p>
     # @option params [String] :failover_mode
     #   <p>Update the DB cluster's failover behavior.</p>
+    # @option params [Types::MaintenanceSchedule] :maintenance_schedule
+    #   <p>Specifies the maintenance schedule for the DB cluster, including the preferred maintenance window and timezone.</p>
+    # @option params [Array<Types::DbBackupConfiguration>] :db_backup_configurations
+    #   <p>A list of backup configurations to update for the DB cluster.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     db_cluster_id: "DbClusterId", # required
@@ -1078,14 +2209,26 @@ module Aws::TimestreamInfluxDB
     #     db_parameter_group_identifier: "DbParameterGroupIdentifier",
     #     port: 1,
     #     db_instance_type: "db.influx.medium" # One of: ["db.influx.medium", "db.influx.large", "db.influx.xlarge", "db.influx.2xlarge", "db.influx.4xlarge", "db.influx.8xlarge", "db.influx.12xlarge", "db.influx.16xlarge", "db.influx.24xlarge"],
-    #     failover_mode: "AUTOMATIC" # One of: ["AUTOMATIC", "NO_FAILOVER"]
+    #     failover_mode: "AUTOMATIC" # One of: ["AUTOMATIC", "NO_FAILOVER"],
+    #     maintenance_schedule: {
+    #       timezone: "IanaTimezone", # required
+    #       preferred_maintenance_window: "MaintenanceWindow", # required
+    #     },
+    #     db_backup_configurations: [
+    #       {
+    #         type: "HOURLY" # One of: ["HOURLY", "DAILY", "WEEKLY", "MONTHLY", "CUSTOM_SCHEDULE", "CONTINUOUS"], # required
+    #         retention_days: 1, # required
+    #         enabled: false, # required
+    #         custom_schedule: "AwsCronSchedule"
+    #       }
+    #     ]
     #   }
     #   options = {}
     #   response = client.update_db_cluster(params, options)
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {
-    #     db_cluster_status: "CREATING" # One of: ["CREATING", "UPDATING", "DELETING", "AVAILABLE", "FAILED", "DELETED", "MAINTENANCE"]
+    #     db_cluster_status: "CREATING" # One of: ["CREATING", "UPDATING", "DELETING", "AVAILABLE", "FAILED", "DELETED", "MAINTENANCE", "UPDATING_INSTANCE_TYPE", "REBOOTING", "REBOOT_FAILED", "PARTIALLY_AVAILABLE", "RESTORING", "RESTORE_FAILED"]
     #   }
     # @return [Types::UpdateDbClusterOutput]
     def update_db_cluster(params = {}, options = {})
@@ -1115,6 +2258,10 @@ module Aws::TimestreamInfluxDB
     #   <p>The Timestream for InfluxDB DB storage type that InfluxDB stores data on.</p>
     # @option params [Integer] :allocated_storage
     #   <p>The amount of storage to allocate for your DB storage type (in gibibytes).</p>
+    # @option params [Types::MaintenanceSchedule] :maintenance_schedule
+    #   <p>Specifies the maintenance schedule for the DB instance, including the preferred maintenance window and timezone.</p>
+    # @option params [Array<Types::DbBackupConfiguration>] :db_backup_configurations
+    #   <p>A list of backup configurations to update for the DB instance.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     identifier: "DbInstanceIdentifier", # required
@@ -1129,7 +2276,19 @@ module Aws::TimestreamInfluxDB
     #     db_instance_type: "db.influx.medium" # One of: ["db.influx.medium", "db.influx.large", "db.influx.xlarge", "db.influx.2xlarge", "db.influx.4xlarge", "db.influx.8xlarge", "db.influx.12xlarge", "db.influx.16xlarge", "db.influx.24xlarge"],
     #     deployment_type: "SINGLE_AZ" # One of: ["SINGLE_AZ", "WITH_MULTIAZ_STANDBY"],
     #     db_storage_type: "InfluxIOIncludedT1" # One of: ["InfluxIOIncludedT1", "InfluxIOIncludedT2", "InfluxIOIncludedT3"],
-    #     allocated_storage: 1
+    #     allocated_storage: 1,
+    #     maintenance_schedule: {
+    #       timezone: "IanaTimezone", # required
+    #       preferred_maintenance_window: "MaintenanceWindow", # required
+    #     },
+    #     db_backup_configurations: [
+    #       {
+    #         type: "HOURLY" # One of: ["HOURLY", "DAILY", "WEEKLY", "MONTHLY", "CUSTOM_SCHEDULE", "CONTINUOUS"], # required
+    #         retention_days: 1, # required
+    #         enabled: false, # required
+    #         custom_schedule: "AwsCronSchedule"
+    #       }
+    #     ]
     #   }
     #   options = {}
     #   response = client.update_db_instance(params, options)
@@ -1139,7 +2298,7 @@ module Aws::TimestreamInfluxDB
     #     id: "DbInstanceId", # required
     #     name: "DbInstanceName", # required
     #     arn: "Arn", # required
-    #     status: "CREATING" # One of: ["CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE", "MAINTENANCE"],
+    #     status: "CREATING" # One of: ["CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE", "MAINTENANCE", "REBOOTING", "REBOOT_FAILED", "RESTORING", "RESTORE_FAILED"],
     #     endpoint: "String",
     #     port: 1,
     #     network_type: "IPV4" # One of: ["IPV4", "DUAL"],
@@ -1161,7 +2320,24 @@ module Aws::TimestreamInfluxDB
     #     },
     #     influx_auth_parameters_secret_arn: "String",
     #     db_cluster_id: "DbClusterId",
-    #     instance_mode: "PRIMARY" # One of: ["PRIMARY", "STANDBY", "REPLICA"]
+    #     instance_mode: "PRIMARY" # One of: ["PRIMARY", "STANDBY", "REPLICA", "INGEST", "QUERY", "COMPACT", "PROCESS"],
+    #     instance_modes: ["PRIMARY" # One of: ["PRIMARY", "STANDBY", "REPLICA", "INGEST", "QUERY", "COMPACT", "PROCESS"]],
+    #     maintenance_schedule: {
+    #       timezone: "IanaTimezone", # required
+    #       preferred_maintenance_window: "MaintenanceWindow", # required
+    #     },
+    #     last_maintenance_time: Time.now,
+    #     next_maintenance_time: Time.now,
+    #     db_backup_configurations: [
+    #       {
+    #         type: "HOURLY" # One of: ["HOURLY", "DAILY", "WEEKLY", "MONTHLY", "CUSTOM_SCHEDULE", "CONTINUOUS"], # required
+    #         retention_days: 1, # required
+    #         enabled: false, # required
+    #         custom_schedule: "AwsCronSchedule",
+    #         next_automated_backup_time: Time.now
+    #       }
+    #     ],
+    #     kms_key_id: "KmsKeyId"
     #   }
     # @return [Types::UpdateDbInstanceOutput]
     def update_db_instance(params = {}, options = {})

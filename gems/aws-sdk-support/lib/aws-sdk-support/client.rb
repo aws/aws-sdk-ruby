@@ -144,18 +144,18 @@ module Aws::Support
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -216,12 +216,12 @@ module Aws::Support
     #          <note>
     #             <ul>
     #                <li>
-    #                   <p>You must have a Business, Enterprise On-Ramp, or Enterprise Support plan to use the Amazon Web Services Support
-    #                         API. </p>
+    #                   <p>You must have an Amazon Web Services Business Support+, Amazon Web Services Enterprise Support, or Amazon Web Services Unified Operations plan to use the Amazon Web Services Support
+    #                         API. If you're in an Amazon Web Services Region that doesn't offer one of these Amazon Web Services Support plans, or if you haven't transitioned to one of these plans, you can use the Amazon Web Services Support API with a Business, Enterprise On-Ramp, or Enterprise Support plan.</p>
     #                </li>
     #                <li>
-    #                   <p>If you call the Amazon Web Services Support API from an account that doesn't have a
-    #                         Business, Enterprise On-Ramp, or Enterprise Support plan, the
+    #                   <p>If you call the Amazon Web Services Support API from an account that doesn't have an
+    #                         Amazon Web Services Business Support+, Amazon Web Services Enterprise Support, or Amazon Web Services Unified Operations plan, the
     #                             <code>SubscriptionRequiredException</code> error message appears. For
     #                         information about changing your support plan, see <a href="http://aws.amazon.com/premiumsupport/">Amazon Web Services Support</a>.</p>
     #                </li>
@@ -241,6 +241,11 @@ module Aws::Support
     #                   <code>data</code> appear as <code>blob</code>, which is represented as a
     #               base64-encoded string. The value for <code>fileName</code> is the name of the
     #               attachment, such as <code>troubleshoot-screenshot.png</code>.</p>
+    # @option params [Boolean] :dry_run
+    #   <p>Specifies whether to validate the request without actually adding the attachments. When set
+    #            to <code>true</code>, the request is validated but no attachments are stored, and the operation
+    #            returns a <code>DryRunOperationException</code>. When omitted or set to <code>false</code>, the
+    #            request runs normally.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     attachment_set_id: "AttachmentSetId",
@@ -249,7 +254,8 @@ module Aws::Support
     #         file_name: "FileName",
     #         data: "data"
     #       }
-    #     ]
+    #     ],
+    #     dry_run: false
     #   }
     #   options = {}
     #   response = client.add_attachments_to_set(params, options)
@@ -265,20 +271,39 @@ module Aws::Support
       request.send_request(options)
     end
 
-    # <p>Adds additional customer communication to an Amazon Web Services Support case. Use the <code>caseId</code>
-    #             parameter to identify the case to which to add communication. You can list a set of
-    #             email addresses to copy on the communication by using the <code>ccEmailAddresses</code>
+    # <p>Adds additional customer communication to a Amazon Web Services Support case. Use the <code>caseId</code>
+    #             parameter to identify the case to which to add communication. To list a set of
+    #             email addresses to copy on the communication, use the <code>ccEmailAddresses</code>
     #             parameter. The <code>communicationBody</code> value contains the text of the
     #             communication.</p>
+    #          <p>To attach files larger than 5 MB to the communication, use the <code>uploadIds</code> parameter.</p>
+    #          <important>
+    #             <p>Amazon Web Services Support automatically redacts sensitive information from support cases to protect your data. The following information is replaced with <code>[REDACTED_BY_Amazon Web Services]</code> and is not stored:</p>
+    #             <ul>
+    #                <li>
+    #                   <p>Amazon Web Services secret keys - The complete key is replaced. Example: <code>[REDACTED_BY_Amazon Web Services]</code>
+    #                   </p>
+    #                </li>
+    #                <li>
+    #                   <p>Private keys - The complete key is replaced. Example: <code>[REDACTED_BY_Amazon Web Services]</code>
+    #                   </p>
+    #                </li>
+    #                <li>
+    #                   <p>Credit card numbers - The number is redacted, but the last 4 digits remain. Example: <code>[REDACTED_BY_Amazon Web Services]-7016</code>
+    #                   </p>
+    #                </li>
+    #             </ul>
+    #             <p>This sensitive information is never required by Amazon Web Services Support.</p>
+    #          </important>
     #          <note>
     #             <ul>
     #                <li>
-    #                   <p>You must have a Business, Enterprise On-Ramp, or Enterprise Support plan to use the Amazon Web Services Support
-    #                         API. </p>
+    #                   <p>You must have an Amazon Web Services Business Support+, Amazon Web Services Enterprise Support, or Amazon Web Services Unified Operations plan to use the Amazon Web Services Support
+    #                         API. If you're in an Amazon Web Services Region that doesn't offer one of these Amazon Web Services Support plans, or if you haven't transitioned to one of these plans, you can use the Amazon Web Services Support API with a Business, Enterprise On-Ramp, or Enterprise Support plan.</p>
     #                </li>
     #                <li>
-    #                   <p>If you call the Amazon Web Services Support API from an account that doesn't have a
-    #                         Business, Enterprise On-Ramp, or Enterprise Support plan, the
+    #                   <p>If you call the Amazon Web Services Support API from an account that doesn't have an
+    #                         Amazon Web Services Business Support+, Amazon Web Services Enterprise Support, or Amazon Web Services Unified Operations plan, the
     #                             <code>SubscriptionRequiredException</code> error message appears. For
     #                         information about changing your support plan, see <a href="http://aws.amazon.com/premiumsupport/">Amazon Web Services Support</a>.</p>
     #                </li>
@@ -288,7 +313,7 @@ module Aws::Support
     # @option params [String] :case_id
     #   <p>The support case ID requested or returned in the call. The case ID is an alphanumeric
     #               string formatted as shown in this example:
-    #                   case-<i>12345678910-2013-c4c1d2bf33c5cf47</i>
+    #                   case-<i>12345678910-exen-2025-c4c1d2bf33c5cf47</i>
     #            </p>
     # @option params [String] :communication_body
     #   <p>The body of an email communication to add to the support case.</p>
@@ -296,14 +321,28 @@ module Aws::Support
     #   <p>The email addresses in the CC line of an email to be added to the support case.</p>
     # @option params [String] :attachment_set_id
     #   <p>The ID of a set of one or more attachments for the communication to add to the case.
-    #               Create the set by calling <a>AddAttachmentsToSet</a>
-    #            </p>
+    #               Create the set by calling <a>AddAttachmentsToSet</a>. Each attachment in the
+    #               set must be 5 MB or smaller. To attach files larger than 5 MB, use <code>uploadIds</code>.</p>
+    # @option params [Array<String>] :upload_ids
+    #   <p>A list of upload IDs that identify attachments to add to the case. Each
+    #               <code>uploadId</code> is returned by the <a>GetAttachmentUploadLinks</a>
+    #            operation. The upload must reach the <code>attachment-ready</code> state by calling <a>CompleteAttachmentUpload</a> before it can be passed here.
+    #            Use
+    #               <code>uploadIds</code> to attach files of any supported size, including files larger than
+    #            5 MB.</p>
+    # @option params [Boolean] :dry_run
+    #   <p>Specifies whether to validate the request without actually adding the communication to the
+    #            case. When set to <code>true</code>, the request is validated but the communication isn't
+    #            added, and the operation returns a <code>DryRunOperationException</code>. When omitted or set
+    #            to <code>false</code>, the request runs normally.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     case_id: "CaseId",
     #     communication_body: "CommunicationBody", # required
     #     cc_email_addresses: ["CcEmailAddress"],
-    #     attachment_set_id: "AttachmentSetId"
+    #     attachment_set_id: "AttachmentSetId",
+    #     upload_ids: ["UploadId"],
+    #     dry_run: false
     #   }
     #   options = {}
     #   response = client.add_communication_to_case(params, options)
@@ -315,6 +354,47 @@ module Aws::Support
     # @return [Types::AddCommunicationToCaseResponse]
     def add_communication_to_case(params = {}, options = {})
       request = build_request(:add_communication_to_case, params)
+      request.send_request(options)
+    end
+
+    # <p>Completes an attachment upload that was started with <a>GetAttachmentUploadLinks</a>. After you upload a part of the file to its
+    #          presigned Amazon S3 URL, call <code>CompleteAttachmentUpload</code> with the
+    #             <code>partIndex</code> and <code>eTag</code> of that part. You can include one part per
+    #          call, or multiple parts in a single call. After <code>CompleteAttachmentUpload</code> has
+    #          been called for every part of the file, the service processes the upload asynchronously. The
+    #             <code>attachment-ready</code> status might not be reflected immediately. Use <a>DescribeAttachmentUploadStatus</a> to poll for the <code>uploadStatus</code> to
+    #          become <code>attachment-ready</code> before passing the <code>uploadId</code> to <a>CreateCase</a> or <a>AddCommunicationToCase</a>.</p>
+    # @param [Hash, Types::CompleteAttachmentUploadRequest] params
+    # @option params [String] :upload_id
+    #   <p>The identifier associated with the upload to complete.</p>
+    # @option params [Array<Types::CompletedUpload>] :completed_uploads
+    #   <p>The list of parts being reported as completed in this call. Each entry must contain the <code>partIndex</code> of an uploaded part and the <code>ETag</code> returned by Amazon S3 when that part was uploaded.</p>
+    # @option params [Boolean] :dry_run
+    #   <p>Specifies whether to validate the request without actually completing the upload. When set
+    #            to <code>true</code>, the request is validated but the upload isn't finalized, and the
+    #            operation returns a <code>DryRunOperationException</code>. When omitted or set to
+    #               <code>false</code>, the request runs normally.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     upload_id: "UploadId", # required
+    #     completed_uploads: [ # required
+    #       {
+    #         part_index: 1, # required
+    #         e_tag: "ETag", # required
+    #       }
+    #     ],
+    #     dry_run: false
+    #   }
+    #   options = {}
+    #   response = client.complete_attachment_upload(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     upload_status: "attachment-ready" # One of: ["attachment-ready", "attachment-not-ready", "failed"], # required
+    #   }
+    # @return [Types::CompleteAttachmentUploadResponse]
+    def complete_attachment_upload(params = {}, options = {})
+      request = build_request(:complete_attachment_upload, params)
       request.send_request(options)
     end
 
@@ -331,7 +411,25 @@ module Aws::Support
     #                <p>Use the Service Quotas <a href="https://docs.aws.amazon.com/servicequotas/2019-06-24/apireference/API_RequestServiceQuotaIncrease.html">RequestServiceQuotaIncrease</a> operation.</p>
     #             </li>
     #          </ul>
-    #          <p>A successful <code>CreateCase</code> request returns an Amazon Web Services Support case number. You can use
+    #          <important>
+    #             <p>Amazon Web Services Support automatically redacts sensitive information from support cases to protect your data. The following information is replaced with <code>[REDACTED_BY_Amazon Web Services]</code> and is not stored:</p>
+    #             <ul>
+    #                <li>
+    #                   <p>Amazon Web Services secret keys - The complete key is replaced. Example: <code>[REDACTED_BY_Amazon Web Services]</code>
+    #                   </p>
+    #                </li>
+    #                <li>
+    #                   <p>Private keys - The complete key is replaced. Example: <code>[REDACTED_BY_Amazon Web Services]</code>
+    #                   </p>
+    #                </li>
+    #                <li>
+    #                   <p>Credit card numbers - The number is redacted, but the last 4 digits remain. Example: <code>[REDACTED_BY_Amazon Web Services]-7016</code>
+    #                   </p>
+    #                </li>
+    #             </ul>
+    #             <p>This sensitive information is never required by Amazon Web Services Support.</p>
+    #          </important>
+    #          <p>A successful <code>CreateCase</code> request returns a Amazon Web Services Support case number. You can use
     #             the <a>DescribeCases</a> operation and specify the case number to get
     #             existing Amazon Web Services Support cases. After you create a case, use the <a>AddCommunicationToCase</a> operation to add additional communication or
     #             attachments to an existing case.</p>
@@ -340,12 +438,12 @@ module Aws::Support
     #          <note>
     #             <ul>
     #                <li>
-    #                   <p>You must have a Business, Enterprise On-Ramp, or Enterprise Support plan to use the Amazon Web Services Support
-    #                         API. </p>
+    #                   <p>You must have an Amazon Web Services Business Support+, Amazon Web Services Enterprise Support, or Amazon Web Services Unified Operations plan to use the Amazon Web Services Support
+    #                         API. If you're in an Amazon Web Services Region that doesn't offer one of these Amazon Web Services Support plans, or if you haven't transitioned to one of these plans, you can use the Amazon Web Services Support API with a Business, Enterprise On-Ramp, or Enterprise Support plan.</p>
     #                </li>
     #                <li>
-    #                   <p>If you call the Amazon Web Services Support API from an account that doesn't have a
-    #                         Business, Enterprise On-Ramp, or Enterprise Support plan, the
+    #                   <p>If you call the Amazon Web Services Support API from an account that doesn't have an
+    #                         Amazon Web Services Business Support+, Amazon Web Services Enterprise Support, or Amazon Web Services Unified Operations plan, the
     #                             <code>SubscriptionRequiredException</code> error message appears. For
     #                         information about changing your support plan, see <a href="http://aws.amazon.com/premiumsupport/">Amazon Web Services Support</a>.</p>
     #                </li>
@@ -380,7 +478,7 @@ module Aws::Support
     #           </p>
     # @option params [String] :language
     #   <p>The language in which Amazon Web Services Support handles the case. Amazon Web Services Support
-    #   currently supports Chinese (“zh”), English ("en"), Japanese ("ja") and Korean (“ko”). You must specify the ISO 639-1
+    #   currently supports Chinese (“zh”), English ("en"), Japanese ("ja") , Chinese ("zh"), Spanish ("es"), Portuguese ("pt"), French ("fr"), Korean (“ko”), and Turkish ("tr"). You must specify the ISO 639-1
     #   code for the <code>language</code> parameter if you want support in that language.</p>
     # @option params [String] :issue_type
     #   <p>The type of issue for the case. You can specify <code>customer-service</code> or
@@ -388,7 +486,20 @@ module Aws::Support
     #                   <code>technical</code>.</p>
     # @option params [String] :attachment_set_id
     #   <p>The ID of a set of one or more attachments for the case. Create the set by using the
-    #                   <a>AddAttachmentsToSet</a> operation.</p>
+    #                   <a>AddAttachmentsToSet</a> operation. Each attachment in the set must be 5
+    #               MB or smaller. To attach files larger than 5 MB, use <code>uploadIds</code>.</p>
+    # @option params [Array<String>] :upload_ids
+    #   <p>A list of upload IDs that identify attachments to add to the case. Each
+    #               <code>uploadId</code> is returned by the <a>GetAttachmentUploadLinks</a>
+    #            operation. The upload must reach the <code>attachment-ready</code> state by calling <a>CompleteAttachmentUpload</a> before it can be passed here.
+    #            Use
+    #               <code>uploadIds</code> to attach files of any supported size, including files larger than
+    #            5 MB.</p>
+    # @option params [Boolean] :dry_run
+    #   <p>Specifies whether to validate the request without actually creating the case. When set to
+    #               <code>true</code>, the request is validated but no case is created, and the operation
+    #            returns a <code>DryRunOperationException</code>. When omitted or set to <code>false</code>, the
+    #            request runs normally.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     subject: "Subject", # required
@@ -399,7 +510,9 @@ module Aws::Support
     #     cc_email_addresses: ["CcEmailAddress"],
     #     language: "Language",
     #     issue_type: "IssueType",
-    #     attachment_set_id: "AttachmentSetId"
+    #     attachment_set_id: "AttachmentSetId",
+    #     upload_ids: ["UploadId"],
+    #     dry_run: false
     #   }
     #   options = {}
     #   response = client.create_case(params, options)
@@ -422,23 +535,42 @@ module Aws::Support
     #          <note>
     #             <ul>
     #                <li>
-    #                   <p>You must have a Business, Enterprise On-Ramp, or Enterprise Support plan to use the Amazon Web Services Support
-    #                         API. </p>
+    #                   <p>You must have an Amazon Web Services Business Support+, Amazon Web Services Enterprise Support, or Amazon Web Services Unified Operations plan to use the Amazon Web Services Support
+    #                         API. If you're in an Amazon Web Services Region that doesn't offer one of these Amazon Web Services Support plans, or if you haven't transitioned to one of these plans, you can use the Amazon Web Services Support API with a Business, Enterprise On-Ramp, or Enterprise Support plan.</p>
     #                </li>
     #                <li>
-    #                   <p>If you call the Amazon Web Services Support API from an account that doesn't have a
-    #                         Business, Enterprise On-Ramp, or Enterprise Support plan, the
+    #                   <p>If you call the Amazon Web Services Support API from an account that doesn't have an
+    #                         Amazon Web Services Business Support+, Amazon Web Services Enterprise Support, or Amazon Web Services Unified Operations plan, the
     #                             <code>SubscriptionRequiredException</code> error message appears. For
     #                         information about changing your support plan, see <a href="http://aws.amazon.com/premiumsupport/">Amazon Web Services Support</a>.</p>
     #                </li>
     #             </ul>
     #          </note>
+    #          <important>
+    #             <p>
+    #                <code>DescribeAttachment</code> can't return attachments larger than 5 MB. If the
+    #                 specified <code>attachmentId</code> refers to an attachment larger than 5 MB, the
+    #                 request fails with <code>InvalidParameterValueException</code>.</p>
+    #             <p>To download an attachment of any size, including attachments larger than 5 MB, use
+    #                     <a>GetAttachmentDownloadLink</a>.
+    #                     <code>GetAttachmentDownloadLink</code> returns an Amazon S3 presigned URL that you can
+    #                 use to download the attachment directly.</p>
+    #          </important>
     # @param [Hash, Types::DescribeAttachmentRequest] params
     # @option params [String] :attachment_id
     #   <p>The ID of the attachment to return. Attachment IDs are returned by the <a>DescribeCommunications</a> operation.</p>
+    #            <p>If the specified attachment is larger than 5 MB, this operation returns
+    #                   <code>InvalidParameterValueException</code>. To download attachments larger than 5
+    #               MB, use <a>GetAttachmentDownloadLink</a>.</p>
+    # @option params [Boolean] :dry_run
+    #   <p>Specifies whether to validate the request without actually retrieving the attachment. When
+    #            set to <code>true</code>, the request is validated but no attachment content is returned, and
+    #            the operation returns a <code>DryRunOperationException</code>. When omitted or set to
+    #               <code>false</code>, the request runs normally.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     attachment_id: "AttachmentId", # required
+    #     dry_run: false
     #   }
     #   options = {}
     #   response = client.describe_attachment(params, options)
@@ -453,6 +585,61 @@ module Aws::Support
     # @return [Types::DescribeAttachmentResponse]
     def describe_attachment(params = {}, options = {})
       request = build_request(:describe_attachment, params)
+      request.send_request(options)
+    end
+
+    # <p>Returns the current status, file name, and progress of a multipart attachment upload that
+    #          was started with <a>GetAttachmentUploadLinks</a>. Use this operation to track
+    #          where an upload is in the workflow. While parts are still being uploaded and reported through
+    #             <a>CompleteAttachmentUpload</a>, the <code>uploadStatus</code> is
+    #             <code>attachment-not-ready</code> and <code>uploadProgress</code> reports the total number
+    #          of parts and how many have been completed so far. After every part has been reported and the
+    #          service finishes processing the upload asynchronously, the <code>uploadStatus</code> becomes
+    #             <code>attachment-ready</code> and the <code>uploadId</code> can be attached to a case
+    #          through <a>CreateCase</a> or <a>AddCommunicationToCase</a>.</p>
+    #          <note>
+    #             <ul>
+    #                <li>
+    #                   <p>You must have an Amazon Web Services Business Support+, Amazon Web Services Enterprise Support, or Amazon Web Services Unified Operations plan to use the Amazon Web Services Support
+    #                         API. If you're in an Amazon Web Services Region that doesn't offer one of these Amazon Web Services Support plans, or if you haven't transitioned to one of these plans, you can use the Amazon Web Services Support API with a Business, Enterprise On-Ramp, or Enterprise Support plan.</p>
+    #                </li>
+    #                <li>
+    #                   <p>If you call the Amazon Web Services Support API from an account that doesn't have an
+    #                         Amazon Web Services Business Support+, Amazon Web Services Enterprise Support, or Amazon Web Services Unified Operations plan, the
+    #                             <code>SubscriptionRequiredException</code> error message appears. For
+    #                         information about changing your support plan, see <a href="http://aws.amazon.com/premiumsupport/">Amazon Web Services Support</a>.</p>
+    #                </li>
+    #             </ul>
+    #          </note>
+    # @param [Hash, Types::DescribeAttachmentUploadStatusRequest] params
+    # @option params [String] :upload_id
+    #   <p>The unique identifier for the upload. The <code>uploadId</code> is returned by
+    #               <a>GetAttachmentUploadLinks</a> when you initiate the upload.</p>
+    # @option params [Boolean] :dry_run
+    #   <p>Specifies whether to validate the request without actually returning upload status. When
+    #            set to <code>true</code>, the request is validated but no status is returned, and the operation
+    #            returns a <code>DryRunOperationException</code>. When omitted or set to <code>false</code>, the
+    #            request runs normally.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     upload_id: "UploadId", # required
+    #     dry_run: false
+    #   }
+    #   options = {}
+    #   response = client.describe_attachment_upload_status(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     upload_status: "attachment-ready" # One of: ["attachment-ready", "attachment-not-ready", "failed"], # required
+    #     file_name: "FileName", # required
+    #     upload_progress: {
+    #       total_parts: 1,
+    #       completed_parts_count: 1
+    #     }
+    #   }
+    # @return [Types::DescribeAttachmentUploadStatusResponse]
+    def describe_attachment_upload_status(params = {}, options = {})
+      request = build_request(:describe_attachment_upload_status, params)
       request.send_request(options)
     end
 
@@ -471,22 +658,41 @@ module Aws::Support
     #                     returned records represented by the <code>CaseDetails</code> objects.</p>
     #             </li>
     #          </ul>
-    #          <p>Case data is available for 12 months after creation. If a case was created more than
-    #             12 months ago, a request might return an error.</p>
+    #          <p>Case data is available for 24 months after creation. If a case was created more than
+    #             24 months ago, a request might return an error.</p>
     #          <note>
     #             <ul>
     #                <li>
-    #                   <p>You must have a Business, Enterprise On-Ramp, or Enterprise Support plan to use the Amazon Web Services Support
-    #                         API. </p>
+    #                   <p>You must have an Amazon Web Services Business Support+, Amazon Web Services Enterprise Support, or Amazon Web Services Unified Operations plan to use the Amazon Web Services Support
+    #                         API. If you're in an Amazon Web Services Region that doesn't offer one of these Amazon Web Services Support plans, or if you haven't transitioned to one of these plans, you can use the Amazon Web Services Support API with a Business, Enterprise On-Ramp, or Enterprise Support plan.</p>
     #                </li>
     #                <li>
-    #                   <p>If you call the Amazon Web Services Support API from an account that doesn't have a
-    #                         Business, Enterprise On-Ramp, or Enterprise Support plan, the
+    #                   <p>If you call the Amazon Web Services Support API from an account that doesn't have an
+    #                         Amazon Web Services Business Support+, Amazon Web Services Enterprise Support, or Amazon Web Services Unified Operations plan, the
     #                             <code>SubscriptionRequiredException</code> error message appears. For
     #                         information about changing your support plan, see <a href="http://aws.amazon.com/premiumsupport/">Amazon Web Services Support</a>.</p>
     #                </li>
     #             </ul>
     #          </note>
+    #          <important>
+    #             <p>Each <a>Communication</a> returned by this operation includes
+    #                 attachment information in two fields:</p>
+    #             <ul>
+    #                <li>
+    #                   <p>
+    #                      <code>attachmentSet</code>: returns only attachments that are 5 MB or
+    #                         smaller. Attachments larger than 5 MB are not included in this field.</p>
+    #                </li>
+    #                <li>
+    #                   <p>
+    #                      <code>attachments</code>: returns all attachments regardless of size.</p>
+    #                </li>
+    #             </ul>
+    #             <p>Amazon Web Services recommends that you use the <code>attachments</code> field and download each
+    #                 attachment with <a>GetAttachmentDownloadLink</a>, which supports
+    #                 attachments of any size. The <code>attachmentSet</code> field and <a>DescribeAttachment</a> return only attachments that are 5 MB or
+    #                 smaller.</p>
+    #          </important>
     # @param [Hash, Types::DescribeCasesRequest] params
     # @option params [Array<String>] :case_id_list
     #   <p>A list of ID numbers of the support cases you want returned. The maximum number of
@@ -495,10 +701,10 @@ module Aws::Support
     #   <p>The ID displayed for a case in the Amazon Web Services Support Center user interface.</p>
     # @option params [String] :after_time
     #   <p>The start date for a filtered date search on support case communications. Case
-    #               communications are available for 12 months after creation.</p>
+    #               communications are available for 24 months after creation.</p>
     # @option params [String] :before_time
     #   <p>The end date for a filtered date search on support case communications. Case
-    #               communications are available for 12 months after creation.</p>
+    #               communications are available for 24 months after creation.</p>
     # @option params [Boolean] :include_resolved_cases
     #   <p>Specifies whether to include resolved support cases in the <code>DescribeCases</code>
     #               response. By default, resolved cases aren't included.</p>
@@ -508,11 +714,16 @@ module Aws::Support
     #   <p>The maximum number of results to return before paginating.</p>
     # @option params [String] :language
     #   <p>The language in which Amazon Web Services Support handles the case. Amazon Web Services Support
-    #   currently supports Chinese (“zh”), English ("en"), Japanese ("ja") and Korean (“ko”). You must specify the ISO 639-1
+    #   currently supports Chinese (“zh”), English ("en"), Japanese ("ja") , Chinese ("zh"), Spanish ("es"), Portuguese ("pt"), French ("fr"), Korean (“ko”), and Turkish ("tr"). You must specify the ISO 639-1
     #   code for the <code>language</code> parameter if you want support in that language.</p>
     # @option params [Boolean] :include_communications
     #   <p>Specifies whether to include communications in the <code>DescribeCases</code>
     #               response. By default, communications are included.</p>
+    # @option params [Boolean] :dry_run
+    #   <p>Specifies whether to validate the request without actually returning case data. When set
+    #            to <code>true</code>, the request is validated but no cases are returned, and the operation
+    #            returns a <code>DryRunOperationException</code>. When omitted or set to <code>false</code>, the
+    #            request runs normally.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     case_id_list: ["CaseId"],
@@ -523,7 +734,8 @@ module Aws::Support
     #     next_token: "NextToken",
     #     max_results: 1,
     #     language: "Language",
-    #     include_communications: false
+    #     include_communications: false,
+    #     dry_run: false
     #   }
     #   options = {}
     #   response = client.describe_cases(params, options)
@@ -548,6 +760,12 @@ module Aws::Support
     #               body: "ValidatedCommunicationBody",
     #               submitted_by: "SubmittedBy",
     #               time_created: "TimeCreated",
+    #               attachments: [
+    #                 {
+    #                   attachment_id: "AttachmentId",
+    #                   file_name: "FileName"
+    #                 }
+    #               ],
     #               attachment_set: [
     #                 {
     #                   attachment_id: "AttachmentId",
@@ -574,8 +792,8 @@ module Aws::Support
     #                 <code>afterTime</code> and <code>beforeTime</code> parameters to filter by date. You
     #             can use the <code>caseId</code> parameter to restrict the results to a specific
     #             case.</p>
-    #          <p>Case data is available for 12 months after creation. If a case was created more than
-    #             12 months ago, a request for data might cause an error.</p>
+    #          <p>Case data is available for 24 months after creation. If a case was created more than
+    #             24 months ago, a request for data might cause an error.</p>
     #          <p>You can use the <code>maxResults</code> and <code>nextToken</code> parameters to
     #             control the pagination of the results. Set <code>maxResults</code> to the number of
     #             cases that you want to display on each page, and use <code>nextToken</code> to specify
@@ -583,40 +801,65 @@ module Aws::Support
     #          <note>
     #             <ul>
     #                <li>
-    #                   <p>You must have a Business, Enterprise On-Ramp, or Enterprise Support plan to use the Amazon Web Services Support
-    #                         API. </p>
+    #                   <p>You must have an Amazon Web Services Business Support+, Amazon Web Services Enterprise Support, or Amazon Web Services Unified Operations plan to use the Amazon Web Services Support
+    #                         API. If you're in an Amazon Web Services Region that doesn't offer one of these Amazon Web Services Support plans, or if you haven't transitioned to one of these plans, you can use the Amazon Web Services Support API with a Business, Enterprise On-Ramp, or Enterprise Support plan.</p>
     #                </li>
     #                <li>
-    #                   <p>If you call the Amazon Web Services Support API from an account that doesn't have a
-    #                         Business, Enterprise On-Ramp, or Enterprise Support plan, the
+    #                   <p>If you call the Amazon Web Services Support API from an account that doesn't have an
+    #                         Amazon Web Services Business Support+, Amazon Web Services Enterprise Support, or Amazon Web Services Unified Operations plan, the
     #                             <code>SubscriptionRequiredException</code> error message appears. For
     #                         information about changing your support plan, see <a href="http://aws.amazon.com/premiumsupport/">Amazon Web Services Support</a>.</p>
     #                </li>
     #             </ul>
     #          </note>
+    #          <important>
+    #             <p>Each <a>Communication</a> returned by this operation includes
+    #                 attachment information in two fields:</p>
+    #             <ul>
+    #                <li>
+    #                   <p>
+    #                      <code>attachmentSet</code>: returns only attachments that are 5 MB or
+    #                         smaller. Attachments larger than 5 MB are not included in this field.</p>
+    #                </li>
+    #                <li>
+    #                   <p>
+    #                      <code>attachments</code>: returns all attachments regardless of size.</p>
+    #                </li>
+    #             </ul>
+    #             <p>Amazon Web Services recommends that you use the <code>attachments</code> field and download each
+    #                 attachment with <a>GetAttachmentDownloadLink</a>, which supports
+    #                 attachments of any size. The <code>attachmentSet</code> field and <a>DescribeAttachment</a> return only attachments that are 5 MB or
+    #                 smaller.</p>
+    #          </important>
     # @param [Hash, Types::DescribeCommunicationsRequest] params
     # @option params [String] :case_id
     #   <p>The support case ID requested or returned in the call. The case ID is an alphanumeric
     #               string formatted as shown in this example:
-    #                   case-<i>12345678910-2013-c4c1d2bf33c5cf47</i>
+    #                   case-<i>12345678910-exen-2025-c4c1d2bf33c5cf47</i>
     #            </p>
     # @option params [String] :before_time
     #   <p>The end date for a filtered date search on support case communications. Case
-    #               communications are available for 12 months after creation.</p>
+    #               communications are available for 24 months after creation.</p>
     # @option params [String] :after_time
     #   <p>The start date for a filtered date search on support case communications. Case
-    #               communications are available for 12 months after creation.</p>
+    #               communications are available for 24 months after creation.</p>
     # @option params [String] :next_token
     #   <p>A resumption point for pagination.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return before paginating.</p>
+    # @option params [Boolean] :dry_run
+    #   <p>Specifies whether to validate the request without actually returning communications. When
+    #            set to <code>true</code>, the request is validated but no communications are returned, and the
+    #            operation returns a <code>DryRunOperationException</code>. When omitted or set to
+    #               <code>false</code>, the request runs normally.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     case_id: "CaseId", # required
     #     before_time: "BeforeTime",
     #     after_time: "AfterTime",
     #     next_token: "NextToken",
-    #     max_results: 1
+    #     max_results: 1,
+    #     dry_run: false
     #   }
     #   options = {}
     #   response = client.describe_communications(params, options)
@@ -629,6 +872,12 @@ module Aws::Support
     #         body: "ValidatedCommunicationBody",
     #         submitted_by: "SubmittedBy",
     #         time_created: "TimeCreated",
+    #         attachments: [
+    #           {
+    #             attachment_id: "AttachmentId",
+    #             file_name: "FileName"
+    #           }
+    #         ],
     #         attachment_set: [
     #           {
     #             attachment_id: "AttachmentId",
@@ -645,19 +894,19 @@ module Aws::Support
       request.send_request(options)
     end
 
-    # <p>Returns a list of CreateCaseOption types along with the 
+    # <p>Returns a list of CreateCaseOption types along with the
     #         corresponding supported hours and language availability. You can specify the <code>language</code>
-    #             <code>categoryCode</code>, 
+    #             <code>categoryCode</code>,
     #         <code>issueType</code> and <code>serviceCode</code> used to retrieve the CreateCaseOptions.</p>
     #          <note>
     #             <ul>
     #                <li>
-    #                   <p>You must have a Business, Enterprise On-Ramp, or Enterprise Support plan to use the Amazon Web Services Support
-    #                         API. </p>
+    #                   <p>You must have an Amazon Web Services Business Support+, Amazon Web Services Enterprise Support, or Amazon Web Services Unified Operations plan to use the Amazon Web Services Support
+    #                         API. If you're in an Amazon Web Services Region that doesn't offer one of these Amazon Web Services Support plans, or if you haven't transitioned to one of these plans, you can use the Amazon Web Services Support API with a Business, Enterprise On-Ramp, or Enterprise Support plan.</p>
     #                </li>
     #                <li>
-    #                   <p>If you call the Amazon Web Services Support API from an account that doesn't have a
-    #                         Business, Enterprise On-Ramp, or Enterprise Support plan, the
+    #                   <p>If you call the Amazon Web Services Support API from an account that doesn't have an
+    #                         Amazon Web Services Business Support+, Amazon Web Services Enterprise Support, or Amazon Web Services Unified Operations plan, the
     #                             <code>SubscriptionRequiredException</code> error message appears. For
     #                         information about changing your support plan, see <a href="http://aws.amazon.com/premiumsupport/">Amazon Web Services Support</a>.</p>
     #                </li>
@@ -673,17 +922,23 @@ module Aws::Support
     #               operation to get the possible <code>serviceCode</code> values.</p>
     # @option params [String] :language
     #   <p>The language in which Amazon Web Services Support handles the case. Amazon Web Services Support
-    #   currently supports Chinese (“zh”), English ("en"), Japanese ("ja") and Korean (“ko”). You must specify the ISO 639-1
+    #   currently supports Chinese (“zh”), English ("en"), Japanese ("ja") , Chinese ("zh"), Spanish ("es"), Portuguese ("pt"), French ("fr"), Korean (“ko”), and Turkish ("tr"). You must specify the ISO 639-1
     #   code for the <code>language</code> parameter if you want support in that language.</p>
     # @option params [String] :category_code
     #   <p>The category of problem for the support case. You also use the <a>DescribeServices</a> operation to get the category code for a service. Each
     #               Amazon Web Services service defines its own set of category codes.</p>
+    # @option params [Boolean] :dry_run
+    #   <p>Specifies whether to validate the request without actually returning case option data.
+    #            When set to <code>true</code>, the request is validated but no options are returned, and the
+    #            operation returns a <code>DryRunOperationException</code>. When omitted or set to
+    #               <code>false</code>, the request runs normally.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     issue_type: "IssueType", # required
     #     service_code: "ServiceCode2", # required
     #     language: "Language", # required
     #     category_code: "CategoryCode", # required
+    #     dry_run: false
     #   }
     #   options = {}
     #   response = client.describe_create_case_options(params, options)
@@ -727,12 +982,12 @@ module Aws::Support
     #          <note>
     #             <ul>
     #                <li>
-    #                   <p>You must have a Business, Enterprise On-Ramp, or Enterprise Support plan to use the Amazon Web Services Support
-    #                         API. </p>
+    #                   <p>You must have an Amazon Web Services Business Support+, Amazon Web Services Enterprise Support, or Amazon Web Services Unified Operations plan to use the Amazon Web Services Support
+    #                         API. If you're in an Amazon Web Services Region that doesn't offer one of these Amazon Web Services Support plans, or if you haven't transitioned to one of these plans, you can use the Amazon Web Services Support API with a Business, Enterprise On-Ramp, or Enterprise Support plan.</p>
     #                </li>
     #                <li>
-    #                   <p>If you call the Amazon Web Services Support API from an account that doesn't have a
-    #                         Business, Enterprise On-Ramp, or Enterprise Support plan, the
+    #                   <p>If you call the Amazon Web Services Support API from an account that doesn't have an
+    #                         Amazon Web Services Business Support+, Amazon Web Services Enterprise Support, or Amazon Web Services Unified Operations plan, the
     #                             <code>SubscriptionRequiredException</code> error message appears. For
     #                         information about changing your support plan, see <a href="http://aws.amazon.com/premiumsupport/">Amazon Web Services Support</a>.</p>
     #                </li>
@@ -743,12 +998,18 @@ module Aws::Support
     #   <p>A JSON-formatted list of service codes available for Amazon Web Services services.</p>
     # @option params [String] :language
     #   <p>The language in which Amazon Web Services Support handles the case. Amazon Web Services Support
-    #   currently supports Chinese (“zh”), English ("en"), Japanese ("ja") and Korean (“ko”). You must specify the ISO 639-1
+    #   currently supports Chinese (“zh”), English ("en"), Japanese ("ja") , Chinese ("zh"), Spanish ("es"), Portuguese ("pt"), French ("fr"), Korean (“ko”), and Turkish ("tr"). You must specify the ISO 639-1
     #   code for the <code>language</code> parameter if you want support in that language.</p>
+    # @option params [Boolean] :dry_run
+    #   <p>Specifies whether to validate the request without actually returning the list of services.
+    #            When set to <code>true</code>, the request is validated but no services are returned, and the
+    #            operation returns a <code>DryRunOperationException</code>. When omitted or set to
+    #               <code>false</code>, the request runs normally.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     service_code_list: ["ServiceCode2"],
-    #     language: "Language"
+    #     language: "Language",
+    #     dry_run: false
     #   }
     #   options = {}
     #   response = client.describe_services(params, options)
@@ -780,12 +1041,12 @@ module Aws::Support
     #          <note>
     #             <ul>
     #                <li>
-    #                   <p>You must have a Business, Enterprise On-Ramp, or Enterprise Support plan to use the Amazon Web Services Support
-    #                         API. </p>
+    #                   <p>You must have an Amazon Web Services Business Support+, Amazon Web Services Enterprise Support, or Amazon Web Services Unified Operations plan to use the Amazon Web Services Support
+    #                         API. If you're in an Amazon Web Services Region that doesn't offer one of these Amazon Web Services Support plans, or if you haven't transitioned to one of these plans, you can use the Amazon Web Services Support API with a Business, Enterprise On-Ramp, or Enterprise Support plan.</p>
     #                </li>
     #                <li>
-    #                   <p>If you call the Amazon Web Services Support API from an account that doesn't have a
-    #                         Business, Enterprise On-Ramp, or Enterprise Support plan, the
+    #                   <p>If you call the Amazon Web Services Support API from an account that doesn't have an
+    #                         Amazon Web Services Business Support+, Amazon Web Services Enterprise Support, or Amazon Web Services Unified Operations plan, the
     #                             <code>SubscriptionRequiredException</code> error message appears. For
     #                         information about changing your support plan, see <a href="http://aws.amazon.com/premiumsupport/">Amazon Web Services Support</a>.</p>
     #                </li>
@@ -794,11 +1055,17 @@ module Aws::Support
     # @param [Hash, Types::DescribeSeverityLevelsRequest] params
     # @option params [String] :language
     #   <p>The language in which Amazon Web Services Support handles the case. Amazon Web Services Support
-    #   currently supports Chinese (“zh”), English ("en"), Japanese ("ja") and Korean (“ko”). You must specify the ISO 639-1
+    #   currently supports Chinese (“zh”), English ("en"), Japanese ("ja") , Chinese ("zh"), Spanish ("es"), Portuguese ("pt"), French ("fr"), Korean (“ko”), and Turkish ("tr"). You must specify the ISO 639-1
     #   code for the <code>language</code> parameter if you want support in that language.</p>
+    # @option params [Boolean] :dry_run
+    #   <p>Specifies whether to validate the request without actually returning severity levels. When
+    #            set to <code>true</code>, the request is validated but no severity levels are returned, and the
+    #            operation returns a <code>DryRunOperationException</code>. When omitted or set to
+    #               <code>false</code>, the request runs normally.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     language: "Language"
+    #     language: "Language",
+    #     dry_run: false
     #   }
     #   options = {}
     #   response = client.describe_severity_levels(params, options)
@@ -818,18 +1085,18 @@ module Aws::Support
       request.send_request(options)
     end
 
-    # <p>Returns a list of supported languages for a specified <code>categoryCode</code>, 
-    #         <code>issueType</code> and <code>serviceCode</code>. The returned supported languages will 
+    # <p>Returns a list of supported languages for a specified <code>categoryCode</code>,
+    #         <code>issueType</code> and <code>serviceCode</code>. The returned supported languages will
     #         include a ISO 639-1 code for the <code>language</code>, and the language display name.</p>
     #          <note>
     #             <ul>
     #                <li>
-    #                   <p>You must have a Business, Enterprise On-Ramp, or Enterprise Support plan to use the Amazon Web Services Support
-    #                         API. </p>
+    #                   <p>You must have an Amazon Web Services Business Support+, Amazon Web Services Enterprise Support, or Amazon Web Services Unified Operations plan to use the Amazon Web Services Support
+    #                         API. If you're in an Amazon Web Services Region that doesn't offer one of these Amazon Web Services Support plans, or if you haven't transitioned to one of these plans, you can use the Amazon Web Services Support API with a Business, Enterprise On-Ramp, or Enterprise Support plan.</p>
     #                </li>
     #                <li>
-    #                   <p>If you call the Amazon Web Services Support API from an account that doesn't have a
-    #                         Business, Enterprise On-Ramp, or Enterprise Support plan, the
+    #                   <p>If you call the Amazon Web Services Support API from an account that doesn't have an
+    #                         Amazon Web Services Business Support+, Amazon Web Services Enterprise Support, or Amazon Web Services Unified Operations plan, the
     #                             <code>SubscriptionRequiredException</code> error message appears. For
     #                         information about changing your support plan, see <a href="http://aws.amazon.com/premiumsupport/">Amazon Web Services Support</a>.</p>
     #                </li>
@@ -845,11 +1112,17 @@ module Aws::Support
     # @option params [String] :category_code
     #   <p>The category of problem for the support case. You also use the <a>DescribeServices</a> operation to get the category code for a service. Each
     #               Amazon Web Services service defines its own set of category codes.</p>
+    # @option params [Boolean] :dry_run
+    #   <p>Specifies whether to validate the request without actually returning supported languages.
+    #            When set to <code>true</code>, the request is validated but no languages are returned, and the
+    #            operation returns a <code>DryRunOperationException</code>. When omitted or set to
+    #               <code>false</code>, the request runs normally.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     issue_type: "ValidatedIssueTypeString", # required
     #     service_code: "ValidatedServiceCode", # required
     #     category_code: "ValidatedCategoryCode", # required
+    #     dry_run: false
     #   }
     #   options = {}
     #   response = client.describe_supported_languages(params, options)
@@ -879,19 +1152,19 @@ module Aws::Support
     #          <note>
     #             <ul>
     #                <li>
-    #                   <p>You must have a Business, Enterprise On-Ramp, or Enterprise Support plan to use the Amazon Web Services Support
-    #                         API. </p>
+    #                   <p>You must have an Amazon Web Services Business Support+, Amazon Web Services Enterprise Support, or Amazon Web Services Unified Operations plan to use the Amazon Web Services Support
+    #                         API. If you're in an Amazon Web Services Region that doesn't offer one of these Amazon Web Services Support plans, or if you haven't transitioned to one of these plans, you can use the Amazon Web Services Support API with a Business, Enterprise On-Ramp, or Enterprise Support plan.</p>
     #                </li>
     #                <li>
-    #                   <p>If you call the Amazon Web Services Support API from an account that doesn't have a
-    #                         Business, Enterprise On-Ramp, or Enterprise Support plan, the
+    #                   <p>If you call the Amazon Web Services Support API from an account that doesn't have an
+    #                         Amazon Web Services Business Support+, Amazon Web Services Enterprise Support, or Amazon Web Services Unified Operations plan, the
     #                             <code>SubscriptionRequiredException</code> error message appears. For
     #                         information about changing your support plan, see <a href="http://aws.amazon.com/premiumsupport/">Amazon Web Services Support</a>.</p>
     #                </li>
     #             </ul>
     #          </note>
     #          <p>To call the Trusted Advisor operations in
-    # the Amazon Web Services Support API, you must use the US East (N. Virginia) endpoint. Currently, the US West (Oregon) and Europe (Ireland) 
+    # the Amazon Web Services Support API, you must use the US East (N. Virginia) endpoint. Currently, the US West (Oregon) and Europe (Ireland)
     # endpoints don't support the Trusted Advisor operations. For more information, see <a href="https://docs.aws.amazon.com/awssupport/latest/user/about-support-api.html#endpoint">About the Amazon Web Services Support
     # API</a> in the <i>Amazon Web Services Support User Guide</i>.</p>
     # @param [Hash, Types::DescribeTrustedAdvisorCheckRefreshStatusesRequest] params
@@ -968,19 +1241,19 @@ module Aws::Support
     #          <note>
     #             <ul>
     #                <li>
-    #                   <p>You must have a Business, Enterprise On-Ramp, or Enterprise Support plan to use the Amazon Web Services Support
-    #                         API. </p>
+    #                   <p>You must have an Amazon Web Services Business Support+, Amazon Web Services Enterprise Support, or Amazon Web Services Unified Operations plan to use the Amazon Web Services Support
+    #                         API. If you're in an Amazon Web Services Region that doesn't offer one of these Amazon Web Services Support plans, or if you haven't transitioned to one of these plans, you can use the Amazon Web Services Support API with a Business, Enterprise On-Ramp, or Enterprise Support plan.</p>
     #                </li>
     #                <li>
-    #                   <p>If you call the Amazon Web Services Support API from an account that doesn't have a
-    #                         Business, Enterprise On-Ramp, or Enterprise Support plan, the
+    #                   <p>If you call the Amazon Web Services Support API from an account that doesn't have an
+    #                         Amazon Web Services Business Support+, Amazon Web Services Enterprise Support, or Amazon Web Services Unified Operations plan, the
     #                             <code>SubscriptionRequiredException</code> error message appears. For
     #                         information about changing your support plan, see <a href="http://aws.amazon.com/premiumsupport/">Amazon Web Services Support</a>.</p>
     #                </li>
     #             </ul>
     #          </note>
     #          <p>To call the Trusted Advisor operations in
-    # the Amazon Web Services Support API, you must use the US East (N. Virginia) endpoint. Currently, the US West (Oregon) and Europe (Ireland) 
+    # the Amazon Web Services Support API, you must use the US East (N. Virginia) endpoint. Currently, the US West (Oregon) and Europe (Ireland)
     # endpoints don't support the Trusted Advisor operations. For more information, see <a href="https://docs.aws.amazon.com/awssupport/latest/user/about-support-api.html#endpoint">About the Amazon Web Services Support
     # API</a> in the <i>Amazon Web Services Support User Guide</i>.</p>
     # @param [Hash, Types::DescribeTrustedAdvisorCheckResultRequest] params
@@ -1086,21 +1359,25 @@ module Aws::Support
     #          <note>
     #             <ul>
     #                <li>
-    #                   <p>You must have a Business, Enterprise On-Ramp, or Enterprise Support plan to use the Amazon Web Services Support
-    #                         API. </p>
+    #                   <p>You must have an Amazon Web Services Business Support+, Amazon Web Services Enterprise Support, or Amazon Web Services Unified Operations plan to use the Amazon Web Services Support
+    #                         API. If you're in an Amazon Web Services Region that doesn't offer one of these Amazon Web Services Support plans, or if you haven't transitioned to one of these plans, you can use the Amazon Web Services Support API with a Business, Enterprise On-Ramp, or Enterprise Support plan.</p>
     #                </li>
     #                <li>
-    #                   <p>If you call the Amazon Web Services Support API from an account that doesn't have a
-    #                         Business, Enterprise On-Ramp, or Enterprise Support plan, the
+    #                   <p>If you call the Amazon Web Services Support API from an account that doesn't have an
+    #                         Amazon Web Services Business Support+, Amazon Web Services Enterprise Support, or Amazon Web Services Unified Operations plan, the
     #                             <code>SubscriptionRequiredException</code> error message appears. For
     #                         information about changing your support plan, see <a href="http://aws.amazon.com/premiumsupport/">Amazon Web Services Support</a>.</p>
     #                </li>
     #             </ul>
     #          </note>
     #          <p>To call the Trusted Advisor operations in
-    # the Amazon Web Services Support API, you must use the US East (N. Virginia) endpoint. Currently, the US West (Oregon) and Europe (Ireland) 
+    # the Amazon Web Services Support API, you must use the US East (N. Virginia) endpoint. Currently, the US West (Oregon) and Europe (Ireland)
     # endpoints don't support the Trusted Advisor operations. For more information, see <a href="https://docs.aws.amazon.com/awssupport/latest/user/about-support-api.html#endpoint">About the Amazon Web Services Support
     # API</a> in the <i>Amazon Web Services Support User Guide</i>.</p>
+    #          <p>
+    #             <b>Understanding the Trusted Advisor Resources processed value</b>
+    #          </p>
+    #          <p>The <b>Resources processed</b> value, <code>resourcesProcessed</code>, usually shows both flagged resources (those with warnings or errors) and resources in good standing (ok status resources). However, some checks report flagged resources only. To understand what a specific check reports, review the detailed check information in the <a href="https://docs.aws.amazon.com/awssupport/latest/user/trusted-advisor-check-reference.html">Trusted Advisor check reference</a>. If you see a <b>Green</b> criterion listed in the <b>Alert criteria</b>, then the check reports all resources. If there's no <b>Green</b> criterion listed in the <b>Alert criteria</b>, then the check reports only flagged resources. For example, the <a href="https://docs.aws.amazon.com/awssupport/latest/user/cost-optimization-checks.html#amazon-ec2-reserved-instances-optimization">Amazon EC2 Reserved Instance optimization check (cX3c2R1chu)</a> doesn't list a <b>Green</b> criterion in the <b>Alert criteria</b>. So, this check only reports flagged resources.</p>
     # @param [Hash, Types::DescribeTrustedAdvisorCheckSummariesRequest] params
     # @option params [Array<String>] :check_ids
     #   <p>The IDs of the Trusted Advisor checks.</p>
@@ -1147,11 +1424,11 @@ module Aws::Support
     #          <note>
     #             <ul>
     #                <li>
-    #                   <p>You must have a Business, Enterprise On-Ramp, or Enterprise Support plan to use the Amazon Web Services Support API. </p>
+    #                   <p>You must have a Amazon Web Services Business Support+, Amazon Web Services Enterprise Support, or Amazon Web Services Unified Operations plan to use the Amazon Web Services Support API. </p>
     #                </li>
     #                <li>
     #                   <p>If you call the Amazon Web Services Support API from an account that doesn't have a
-    #                         Business, Enterprise On-Ramp, or Enterprise Support plan, the <code>SubscriptionRequiredException</code> error
+    #                         Amazon Web Services Business Support+, Amazon Web Services Enterprise Support, or Amazon Web Services Unified Operations plan, the <code>SubscriptionRequiredException</code> error
     #                         message appears. For information about changing your support plan, see
     #                             <a href="http://aws.amazon.com/premiumsupport/">Amazon Web Services Support</a>.</p>
     #                </li>
@@ -1163,7 +1440,7 @@ module Aws::Support
     #             </ul>
     #          </note>
     #          <p>To call the Trusted Advisor operations in
-    # the Amazon Web Services Support API, you must use the US East (N. Virginia) endpoint. Currently, the US West (Oregon) and Europe (Ireland) 
+    # the Amazon Web Services Support API, you must use the US East (N. Virginia) endpoint. Currently, the US West (Oregon) and Europe (Ireland)
     # endpoints don't support the Trusted Advisor operations. For more information, see <a href="https://docs.aws.amazon.com/awssupport/latest/user/about-support-api.html#endpoint">About the Amazon Web Services Support
     # API</a> in the <i>Amazon Web Services Support User Guide</i>.</p>
     # @param [Hash, Types::DescribeTrustedAdvisorChecksRequest] params
@@ -1241,6 +1518,143 @@ module Aws::Support
       request.send_request(options)
     end
 
+    # <p>Returns a presigned download URL for an attachment that is associated with a case
+    #          communication. The download link works for an attachment of any size, including attachments
+    #          added through <code>AddAttachmentsToSet</code> and attachments uploaded through <a>GetAttachmentUploadLinks</a>. The download URL is time-limited and expires at the
+    #          date and time indicated in the <code>downloadUrl</code> response field. Download the
+    #          attachment from the URL before it expires.</p>
+    #          <note>
+    #             <ul>
+    #                <li>
+    #                   <p>You must have an Amazon Web Services Business Support+, Amazon Web Services Enterprise Support, or Amazon Web Services Unified Operations plan to use the Amazon Web Services Support
+    #                         API. If you're in an Amazon Web Services Region that doesn't offer one of these Amazon Web Services Support plans, or if you haven't transitioned to one of these plans, you can use the Amazon Web Services Support API with a Business, Enterprise On-Ramp, or Enterprise Support plan.</p>
+    #                </li>
+    #                <li>
+    #                   <p>If you call the Amazon Web Services Support API from an account that doesn't have an
+    #                         Amazon Web Services Business Support+, Amazon Web Services Enterprise Support, or Amazon Web Services Unified Operations plan, the
+    #                             <code>SubscriptionRequiredException</code> error message appears. For
+    #                         information about changing your support plan, see <a href="http://aws.amazon.com/premiumsupport/">Amazon Web Services Support</a>.</p>
+    #                </li>
+    #             </ul>
+    #          </note>
+    # @param [Hash, Types::GetAttachmentDownloadLinkRequest] params
+    # @option params [String] :attachment_id
+    #   <p>The unique identifier of the attachment for which to retrieve a download link. Attachment
+    #            IDs are returned in the <code>AttachmentDetails</code> objects in the <code>attachments</code>
+    #            field of a <a>Communication</a> returned by <a>DescribeCommunications</a>
+    #            or <a>DescribeCases</a>.</p>
+    # @option params [Boolean] :dry_run
+    #   <p>Specifies whether to validate the request without actually returning a download link. When
+    #            set to <code>true</code>, the request is validated but no URL is returned, and the operation
+    #            returns a <code>DryRunOperationException</code>. When omitted or set to <code>false</code>, the
+    #            request runs normally.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     attachment_id: "AttachmentId", # required
+    #     dry_run: false
+    #   }
+    #   options = {}
+    #   response = client.get_attachment_download_link(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     file_name: "FileName", # required
+    #     download_url: { # required
+    #       url: "HttpsUrl", # required
+    #       expiry_date: "ValidatedDateTime", # required
+    #     }
+    #   }
+    # @return [Types::GetAttachmentDownloadLinkResponse]
+    def get_attachment_download_link(params = {}, options = {})
+      request = build_request(:get_attachment_download_link, params)
+      request.send_request(options)
+    end
+
+    # <p>Returns one or more presigned upload URLs for uploading a large file attachment to a
+    #          support case by using a multipart upload workflow. The maximum file size that you can upload
+    #          with this workflow is 150 MB, and parts can be up to 100 MB each. Initiate a new upload by
+    #          providing <code>fileName</code> and <code>fileSizeBytes</code>; the response returns a unique
+    #             <code>uploadId</code>, the part size, the total number of parts, and a list of presigned
+    #          upload URLs for the requested range of parts. A maximum of 10 upload URLs are returned per
+    #          call. To retrieve more upload URLs for an upload
+    #          that's already in progress, call <code>GetAttachmentUploadLinks</code> again with the existing
+    #             <code>uploadId</code> and a new <code>uploadRange</code>.</p>
+    #          <p>Upload each part to its presigned URL by using HTTP <code>PUT</code> and capture the ETag
+    #          from the response. After you upload all parts, call <a>CompleteAttachmentUpload</a>
+    #          with the <code>uploadId</code> and the list of part indexes and ETags to finalize the upload.
+    #          You can then attach the upload to a case by passing the <code>uploadId</code> in the
+    #             <code>uploadIds</code> parameter of <a>CreateCase</a> or <a>AddCommunicationToCase</a>. To monitor progress before completion, call <a>DescribeAttachmentUploadStatus</a>.</p>
+    #          <note>
+    #             <ul>
+    #                <li>
+    #                   <p>You must have an Amazon Web Services Business Support+, Amazon Web Services Enterprise Support, or Amazon Web Services Unified Operations plan to use the Amazon Web Services Support
+    #                         API. If you're in an Amazon Web Services Region that doesn't offer one of these Amazon Web Services Support plans, or if you haven't transitioned to one of these plans, you can use the Amazon Web Services Support API with a Business, Enterprise On-Ramp, or Enterprise Support plan.</p>
+    #                </li>
+    #                <li>
+    #                   <p>If you call the Amazon Web Services Support API from an account that doesn't have an
+    #                         Amazon Web Services Business Support+, Amazon Web Services Enterprise Support, or Amazon Web Services Unified Operations plan, the
+    #                             <code>SubscriptionRequiredException</code> error message appears. For
+    #                         information about changing your support plan, see <a href="http://aws.amazon.com/premiumsupport/">Amazon Web Services Support</a>.</p>
+    #                </li>
+    #             </ul>
+    #          </note>
+    # @param [Hash, Types::GetAttachmentUploadLinksRequest] params
+    # @option params [String] :file_name
+    #   <p>The name of the file to upload, including the file extension. This value is required when
+    #            you initiate a new upload.</p>
+    # @option params [Integer] :file_size_bytes
+    #   <p>The total size of the file in bytes. The service uses this value to calculate the total
+    #            number of parts and the size of each part. Required when you initiate a new upload (when
+    #               <code>uploadId</code> isn't provided). Valid range: 1 to 157,286,400 bytes (approximately
+    #            150 MB).</p>
+    # @option params [String] :upload_id
+    #   <p>The unique identifier of an in-progress multipart upload, returned by a previous call to
+    #               <code>GetAttachmentUploadLinks</code>. Specify <code>uploadId</code> to retrieve additional
+    #            presigned upload URLs for an upload that has already been initiated. Required when
+    #               <code>fileSizeBytes</code> isn't provided. Length: 1 to 2,048 characters.</p>
+    # @option params [Types::UploadRange] :upload_range
+    #   <p>The range of part indexes for which to return presigned upload URLs. Use this parameter
+    #            to page through the upload URLs for a large file across multiple calls. If you omit this
+    #            parameter, the service determines the range to return.</p>
+    # @option params [Boolean] :dry_run
+    #   <p>Specifies whether to validate the request without actually generating upload URLs. When
+    #            set to <code>true</code>, the request is validated but no URLs are returned, and the operation
+    #            returns a <code>DryRunOperationException</code>. When omitted or set to <code>false</code>, the
+    #            request runs normally.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     file_name: "FileName", # required
+    #     file_size_bytes: 1,
+    #     upload_id: "UploadId",
+    #     upload_range: {
+    #       start_index: 1, # required
+    #       end_index: 1
+    #     },
+    #     dry_run: false
+    #   }
+    #   options = {}
+    #   response = client.get_attachment_upload_links(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     upload_id: "UploadId", # required
+    #     part_size_bytes: 1, # required
+    #     total_parts: 1, # required
+    #     next_index: 1,
+    #     upload_urls: [ # required
+    #       {
+    #         url: "HttpsUrl", # required
+    #         part_index: 1, # required
+    #         expiry_date: "ValidatedDateTime", # required
+    #       }
+    #     ]
+    #   }
+    # @return [Types::GetAttachmentUploadLinksResponse]
+    def get_attachment_upload_links(params = {}, options = {})
+      request = build_request(:get_attachment_upload_links, params)
+      request.send_request(options)
+    end
+
     # <p>Refreshes the Trusted Advisor check that you specify using the check ID. You can get the
     #             check IDs by calling the <a>DescribeTrustedAdvisorChecks</a>
     #             operation.</p>
@@ -1252,19 +1666,19 @@ module Aws::Support
     #          <note>
     #             <ul>
     #                <li>
-    #                   <p>You must have a Business, Enterprise On-Ramp, or Enterprise Support plan to use the Amazon Web Services Support
-    #                         API. </p>
+    #                   <p>You must have an Amazon Web Services Business Support+, Amazon Web Services Enterprise Support, or Amazon Web Services Unified Operations plan to use the Amazon Web Services Support
+    #                         API. If you're in an Amazon Web Services Region that doesn't offer one of these Amazon Web Services Support plans, or if you haven't transitioned to one of these plans, you can use the Amazon Web Services Support API with a Business, Enterprise On-Ramp, or Enterprise Support plan.</p>
     #                </li>
     #                <li>
-    #                   <p>If you call the Amazon Web Services Support API from an account that doesn't have a
-    #                         Business, Enterprise On-Ramp, or Enterprise Support plan, the
+    #                   <p>If you call the Amazon Web Services Support API from an account that doesn't have an
+    #                         Amazon Web Services Business Support+, Amazon Web Services Enterprise Support, or Amazon Web Services Unified Operations plan, the
     #                             <code>SubscriptionRequiredException</code> error message appears. For
     #                         information about changing your support plan, see <a href="http://aws.amazon.com/premiumsupport/">Amazon Web Services Support</a>.</p>
     #                </li>
     #             </ul>
     #          </note>
     #          <p>To call the Trusted Advisor operations in
-    # the Amazon Web Services Support API, you must use the US East (N. Virginia) endpoint. Currently, the US West (Oregon) and Europe (Ireland) 
+    # the Amazon Web Services Support API, you must use the US East (N. Virginia) endpoint. Currently, the US West (Oregon) and Europe (Ireland)
     # endpoints don't support the Trusted Advisor operations. For more information, see <a href="https://docs.aws.amazon.com/awssupport/latest/user/about-support-api.html#endpoint">About the Amazon Web Services Support
     # API</a> in the <i>Amazon Web Services Support User Guide</i>.</p>
     # @param [Hash, Types::RefreshTrustedAdvisorCheckRequest] params
@@ -1300,12 +1714,12 @@ module Aws::Support
     #          <note>
     #             <ul>
     #                <li>
-    #                   <p>You must have a Business, Enterprise On-Ramp, or Enterprise Support plan to use the Amazon Web Services Support
-    #                         API. </p>
+    #                   <p>You must have an Amazon Web Services Business Support+, Amazon Web Services Enterprise Support, or Amazon Web Services Unified Operations plan to use the Amazon Web Services Support
+    #                         API. If you're in an Amazon Web Services Region that doesn't offer one of these Amazon Web Services Support plans, or if you haven't transitioned to one of these plans, you can use the Amazon Web Services Support API with a Business, Enterprise On-Ramp, or Enterprise Support plan.</p>
     #                </li>
     #                <li>
-    #                   <p>If you call the Amazon Web Services Support API from an account that doesn't have a
-    #                         Business, Enterprise On-Ramp, or Enterprise Support plan, the
+    #                   <p>If you call the Amazon Web Services Support API from an account that doesn't have an
+    #                         Amazon Web Services Business Support+, Amazon Web Services Enterprise Support, or Amazon Web Services Unified Operations plan, the
     #                             <code>SubscriptionRequiredException</code> error message appears. For
     #                         information about changing your support plan, see <a href="http://aws.amazon.com/premiumsupport/">Amazon Web Services Support</a>.</p>
     #                </li>
@@ -1315,11 +1729,17 @@ module Aws::Support
     # @option params [String] :case_id
     #   <p>The support case ID requested or returned in the call. The case ID is an alphanumeric
     #               string formatted as shown in this example:
-    #                   case-<i>12345678910-2013-c4c1d2bf33c5cf47</i>
+    #                   case-<i>12345678910-exen-2025-c4c1d2bf33c5cf47</i>
     #            </p>
+    # @option params [Boolean] :dry_run
+    #   <p>Specifies whether to validate the request without actually resolving the case. When set
+    #            to <code>true</code>, the request is validated but the case isn't resolved, and the operation
+    #            returns a <code>DryRunOperationException</code>. When omitted or set to <code>false</code>, the
+    #            request runs normally.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     case_id: "CaseId"
+    #     case_id: "CaseId",
+    #     dry_run: false
     #   }
     #   options = {}
     #   response = client.resolve_case(params, options)

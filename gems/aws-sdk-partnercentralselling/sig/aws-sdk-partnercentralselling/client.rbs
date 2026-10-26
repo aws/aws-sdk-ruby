@@ -62,6 +62,7 @@ module Aws::PartnerCentralSelling
         email: String,
         first_name: String,
         last_name: untyped,
+        phone: String,
         business_title: String
       }
     ) -> _AssignOpportunityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssignOpportunityResponse
@@ -80,6 +81,7 @@ module Aws::PartnerCentralSelling
       include Smithy::Client::_Response[Types::CreateEngagementResponse]
       def id: () -> String?
       def arn: () -> String?
+      def modified_at: () -> Time?
     end
     def create_engagement: (
       ?catalog: String,
@@ -88,6 +90,7 @@ module Aws::PartnerCentralSelling
       ?description: String,
       ?contexts: Array[
         {
+          id: String,
           type: String,
           payload: {
             customer_project: {
@@ -102,11 +105,170 @@ module Aws::PartnerCentralSelling
                 business_problem: String,
                 target_completion_date: String
               }
+            },
+            lead: {
+              insights: {
+                lead_readiness_score: untyped
+              },
+              qualification_status: String,
+              customer: {
+                industry: String,
+                company_name: untyped,
+                website_url: String,
+                address: {
+                  city: untyped,
+                  postal_code: untyped,
+                  state_or_region: untyped,
+                  country_code: String
+                },
+                aws_maturity: String,
+                market_segment: String
+              },
+              interactions: Array[
+                {
+                  source_type: String,
+                  source_id: String,
+                  source_name: String,
+                  usecase: String,
+                  interaction_date: Time,
+                  customer_action: String,
+                  business_problem: String,
+                  contact: {
+                    business_title: String,
+                    email: String,
+                    first_name: String,
+                    last_name: untyped,
+                    phone: String
+                  }
+                }
+              ]
+            },
+            prospecting_result: {
+              aws: {
+                customer: {
+                  account_name: String,
+                  geo: String,
+                  region: String,
+                  sub_region: String,
+                  country: untyped,
+                  industry: untyped,
+                  sub_industry: String,
+                  segment: String,
+                  company_size: String,
+                  eligible_programs: Array[String],
+                  public_profile_summary: String
+                },
+                insights: {
+                  marketplace_engagement_score: String,
+                  solution_score: untyped,
+                  solution_category: untyped,
+                  solution_sub_category: untyped
+                },
+                start_time: untyped,
+                end_time: untyped,
+                task_id: String,
+                task_arn: String,
+                task_name: String
+              }
             }
           }
         }
       ]
     ) -> _CreateEngagementResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateEngagementResponse
+
+    interface _CreateEngagementContextResponse
+      include Smithy::Client::_Response[Types::CreateEngagementContextResponse]
+      def engagement_id: () -> String?
+      def engagement_arn: () -> String?
+      def engagement_last_modified_at: () -> Time?
+      def context_id: () -> String?
+    end
+    def create_engagement_context: (
+      ?catalog: String,
+      ?engagement_identifier: String,
+      ?client_token: String,
+      ?type: String,
+      ?payload: {
+        customer_project: {
+          customer: {
+            industry: String,
+            company_name: String,
+            website_url: String,
+            country_code: String
+          },
+          project: {
+            title: String,
+            business_problem: String,
+            target_completion_date: String
+          }
+        },
+        lead: {
+          insights: {
+            lead_readiness_score: untyped
+          },
+          qualification_status: String,
+          customer: {
+            industry: String,
+            company_name: untyped,
+            website_url: String,
+            address: {
+              city: untyped,
+              postal_code: untyped,
+              state_or_region: untyped,
+              country_code: String
+            },
+            aws_maturity: String,
+            market_segment: String
+          },
+          interactions: Array[
+            {
+              source_type: String,
+              source_id: String,
+              source_name: String,
+              usecase: String,
+              interaction_date: Time,
+              customer_action: String,
+              business_problem: String,
+              contact: {
+                business_title: String,
+                email: String,
+                first_name: String,
+                last_name: untyped,
+                phone: String
+              }
+            }
+          ]
+        },
+        prospecting_result: {
+          aws: {
+            customer: {
+              account_name: String,
+              geo: String,
+              region: String,
+              sub_region: String,
+              country: untyped,
+              industry: untyped,
+              sub_industry: String,
+              segment: String,
+              company_size: String,
+              eligible_programs: Array[String],
+              public_profile_summary: String
+            },
+            insights: {
+              marketplace_engagement_score: String,
+              solution_score: untyped,
+              solution_category: untyped,
+              solution_sub_category: untyped
+            },
+            start_time: untyped,
+            end_time: untyped,
+            task_id: String,
+            task_arn: String,
+            task_name: String
+          }
+        }
+      }
+    ) -> _CreateEngagementContextResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateEngagementContextResponse
 
     interface _CreateEngagementInvitationResponse
       include Smithy::Client::_Response[Types::CreateEngagementInvitationResponse]
@@ -156,6 +318,23 @@ module Aws::PartnerCentralSelling
                   estimation_url: String
                 }
               ]
+            }
+          },
+          lead_invitation: {
+            customer: {
+              industry: String,
+              company_name: untyped,
+              website_url: String,
+              country_code: String,
+              aws_maturity: String,
+              market_segment: String
+            },
+            interaction: {
+              source_type: String,
+              source_id: String,
+              source_name: String,
+              usecase: String,
+              contact_business_title: untyped
             }
           }
         }
@@ -210,6 +389,10 @@ module Aws::PartnerCentralSelling
             estimation_url: String
           }
         ],
+        expected_contract_duration: {
+          term: String,
+          value: untyped
+        },
         title: String,
         apn_programs: Array[String],
         customer_business_problem: untyped,
@@ -219,7 +402,8 @@ module Aws::PartnerCentralSelling
         competitor_name: String,
         other_competitor_names: untyped,
         other_solution_description: untyped,
-        additional_comments: untyped
+        additional_comments: untyped,
+        aws_partition: String
       },
       ?opportunity_type: String,
       ?marketing: {
@@ -326,7 +510,6 @@ module Aws::PartnerCentralSelling
 
     interface _GetAwsOpportunitySummaryResponse
       include Smithy::Client::_Response[Types::GetAwsOpportunitySummaryResponse]
-      def catalog: () -> String?
       def related_opportunity_id: () -> String?
       def origin: () -> String?
       def involvement_type: () -> String?
@@ -338,6 +521,9 @@ module Aws::PartnerCentralSelling
       def related_entity_ids: () -> Types::AwsOpportunityRelatedEntities?
       def customer: () -> Types::AwsOpportunityCustomer?
       def project: () -> Types::AwsOpportunityProject?
+      def cosell_motion: () -> String?
+      def software_revenue: () -> Types::AwsSoftwareRevenue?
+      def catalog: () -> String?
     end
     def get_aws_opportunity_summary: (
       ?catalog: String,
@@ -353,6 +539,8 @@ module Aws::PartnerCentralSelling
       def created_at: () -> Time?
       def created_by: () -> String?
       def member_count: () -> Integer?
+      def modified_at: () -> Time?
+      def modified_by: () -> String?
       def contexts: () -> Array[Types::EngagementContextDetails]?
     end
     def get_engagement: (
@@ -379,6 +567,7 @@ module Aws::PartnerCentralSelling
       def invitation_message: () -> String?
       def engagement_description: () -> String?
       def existing_members: () -> Array[Types::EngagementMemberSummary]?
+      def enrichment_context: () -> Types::EnrichmentContext?
     end
     def get_engagement_invitation: (
       ?catalog: String,
@@ -409,6 +598,20 @@ module Aws::PartnerCentralSelling
       ?identifier: String
     ) -> _GetOpportunityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetOpportunityResponse
 
+    interface _GetProspectingFromEngagementTaskResponse
+      include Smithy::Client::_Response[Types::GetProspectingFromEngagementTaskResponse]
+      def task_id: () -> String?
+      def task_arn: () -> String?
+      def task_name: () -> String?
+      def start_time: () -> Time?
+      def end_time: () -> Time?
+      def engagements: () -> Array[Types::EngagementProspectingResult]?
+    end
+    def get_prospecting_from_engagement_task: (
+      ?catalog: String,
+      ?task_identifier: String
+    ) -> _GetProspectingFromEngagementTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetProspectingFromEngagementTaskResponse
+
     interface _GetResourceSnapshotResponse
       include Smithy::Client::_Response[Types::GetResourceSnapshotResponse]
       def catalog: () -> String?
@@ -421,6 +624,7 @@ module Aws::PartnerCentralSelling
       def resource_snapshot_template_name: () -> String?
       def revision: () -> Integer?
       def payload: () -> Types::ResourceSnapshotPayload?
+      def target_member_accounts: () -> Array[String]?
     end
     def get_resource_snapshot: (
       ?catalog: String,
@@ -554,6 +758,8 @@ module Aws::PartnerCentralSelling
       ?catalog: String,
       ?created_by: Array[String],
       ?exclude_created_by: Array[String],
+      ?context_types: Array[String],
+      ?exclude_context_types: Array[String],
       ?sort: {
         sort_order: String,
         sort_by: String
@@ -583,8 +789,55 @@ module Aws::PartnerCentralSelling
       ?identifier: Array[String],
       ?life_cycle_stage: Array[String],
       ?life_cycle_review_status: Array[String],
-      ?customer_company_name: Array[String]
+      ?customer_company_name: Array[String],
+      ?created_date: {
+        after_created_date: Time,
+        before_created_date: untyped
+      },
+      ?target_close_date: {
+        after_target_close_date: String,
+        before_target_close_date: untyped
+      }
     ) -> _ListOpportunitiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListOpportunitiesResponse
+
+    interface _ListOpportunityFromEngagementTasksResponse
+      include Smithy::Client::_Response[Types::ListOpportunityFromEngagementTasksResponse]
+      def task_summaries: () -> Array[Types::ListOpportunityFromEngagementTaskSummary]?
+      def next_token: () -> String?
+    end
+    def list_opportunity_from_engagement_tasks: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?sort: {
+        sort_order: String,
+        sort_by: String
+      },
+      ?catalog: String,
+      ?task_status: Array[String],
+      ?task_identifier: Array[String],
+      ?opportunity_identifier: Array[String],
+      ?engagement_identifier: Array[String],
+      ?context_identifier: Array[String]
+    ) -> _ListOpportunityFromEngagementTasksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListOpportunityFromEngagementTasksResponse
+
+    interface _ListProspectingFromEngagementTasksResponse
+      include Smithy::Client::_Response[Types::ListProspectingFromEngagementTasksResponse]
+      def next_token: () -> String?
+      def task_summaries: () -> Array[Types::ProspectingTaskSummary]?
+    end
+    def list_prospecting_from_engagement_tasks: (
+      ?catalog: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?task_identifier: Array[String],
+      ?task_name: Array[String],
+      ?start_after: Time,
+      ?start_before: Time,
+      ?sort: {
+        sort_order: String,
+        sort_by: String
+      }
+    ) -> _ListProspectingFromEngagementTasksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListProspectingFromEngagementTasksResponse
 
     interface _ListResourceSnapshotJobsResponse
       include Smithy::Client::_Response[Types::ListResourceSnapshotJobsResponse]
@@ -634,7 +887,8 @@ module Aws::PartnerCentralSelling
       },
       ?status: Array[String],
       ?identifier: Array[String],
-      ?category: Array[String]
+      ?category: Array[String],
+      ?aws_marketplace_solution_arn: Array[String]
     ) -> _ListSolutionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSolutionsResponse
 
     interface _ListTagsForResourceResponse
@@ -717,6 +971,50 @@ module Aws::PartnerCentralSelling
       ]
     ) -> _StartEngagementFromOpportunityTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartEngagementFromOpportunityTaskResponse
 
+    interface _StartOpportunityFromEngagementTaskResponse
+      include Smithy::Client::_Response[Types::StartOpportunityFromEngagementTaskResponse]
+      def task_id: () -> String?
+      def task_arn: () -> String?
+      def start_time: () -> Time?
+      def task_status: () -> String?
+      def message: () -> String?
+      def reason_code: () -> String?
+      def opportunity_id: () -> String?
+      def resource_snapshot_job_id: () -> String?
+      def engagement_id: () -> String?
+      def context_id: () -> String?
+    end
+    def start_opportunity_from_engagement_task: (
+      ?catalog: String,
+      ?client_token: String,
+      ?identifier: String,
+      ?context_identifier: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _StartOpportunityFromEngagementTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartOpportunityFromEngagementTaskResponse
+
+    interface _StartProspectingFromEngagementTaskResponse
+      include Smithy::Client::_Response[Types::StartProspectingFromEngagementTaskResponse]
+      def identifiers: () -> Array[String]?
+      def task_name: () -> String?
+      def message: () -> String?
+      def reason_code: () -> String?
+      def start_time: () -> Time?
+      def task_id: () -> String?
+      def task_arn: () -> String?
+      def task_status: () -> String?
+    end
+    def start_prospecting_from_engagement_task: (
+      ?catalog: String,
+      ?identifiers: Array[String],
+      ?task_name: String,
+      ?client_token: String
+    ) -> _StartProspectingFromEngagementTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartProspectingFromEngagementTaskResponse
+
     interface _StartResourceSnapshotJobResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
     end
@@ -763,6 +1061,99 @@ module Aws::PartnerCentralSelling
       ?resource_arn: String,
       ?tag_keys: Array[String]
     ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateEngagementContextResponse
+      include Smithy::Client::_Response[Types::UpdateEngagementContextResponse]
+      def engagement_id: () -> String?
+      def engagement_arn: () -> String?
+      def engagement_last_modified_at: () -> Time?
+      def context_id: () -> String?
+    end
+    def update_engagement_context: (
+      ?catalog: String,
+      ?engagement_identifier: String,
+      ?context_identifier: String,
+      ?engagement_last_modified_at: Time,
+      ?type: String,
+      ?payload: {
+        lead: {
+          qualification_status: String,
+          customer: {
+            industry: String,
+            company_name: String,
+            website_url: String,
+            address: {
+              city: String,
+              postal_code: untyped,
+              state_or_region: untyped,
+              country_code: String
+            },
+            aws_maturity: String,
+            market_segment: String
+          },
+          interaction: {
+            source_type: String,
+            source_id: String,
+            source_name: String,
+            usecase: String,
+            interaction_date: Time,
+            customer_action: String,
+            business_problem: String,
+            contact: {
+              business_title: String,
+              email: String,
+              first_name: String,
+              last_name: untyped,
+              phone: String
+            }
+          },
+          insights: {
+            lead_readiness_score: untyped
+          }
+        },
+        customer_project: {
+          customer: {
+            industry: String,
+            company_name: untyped,
+            website_url: String,
+            country_code: String
+          },
+          project: {
+            title: String,
+            business_problem: String,
+            target_completion_date: untyped
+          }
+        },
+        prospecting_result: {
+          aws: {
+            customer: {
+              account_name: String,
+              geo: String,
+              region: String,
+              sub_region: String,
+              country: untyped,
+              industry: untyped,
+              sub_industry: String,
+              segment: String,
+              company_size: String,
+              eligible_programs: Array[String],
+              public_profile_summary: String
+            },
+            insights: {
+              marketplace_engagement_score: String,
+              solution_score: untyped,
+              solution_category: untyped,
+              solution_sub_category: untyped
+            },
+            start_time: untyped,
+            end_time: untyped,
+            task_id: String,
+            task_arn: String,
+            task_name: String
+          }
+        }
+      }
+    ) -> _UpdateEngagementContextResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateEngagementContextResponse
 
     interface _UpdateOpportunityResponse
       include Smithy::Client::_Response[Types::UpdateOpportunityResponse]
@@ -811,6 +1202,10 @@ module Aws::PartnerCentralSelling
             estimation_url: String
           }
         ],
+        expected_contract_duration: {
+          term: String,
+          value: untyped
+        },
         title: String,
         apn_programs: Array[String],
         customer_business_problem: untyped,
@@ -820,7 +1215,8 @@ module Aws::PartnerCentralSelling
         competitor_name: String,
         other_competitor_names: untyped,
         other_solution_description: untyped,
-        additional_comments: untyped
+        additional_comments: untyped,
+        aws_partition: String
       },
       ?opportunity_type: String,
       ?marketing: {

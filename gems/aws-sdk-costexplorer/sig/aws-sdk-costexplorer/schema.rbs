@@ -6,6 +6,7 @@ module Aws::CostExplorer
     AccountScope: EnumShape
     AmortizedRecurringFee: StringShape
     AmortizedUpfrontFee: StringShape
+    AnalysesPageSize: IntegerShape
     AnalysisDetails: StructureShape
     AnalysisId: StringShape
     AnalysisIds: ListShape
@@ -62,6 +63,8 @@ module Aws::CostExplorer
     CostCategoryProcessingStatusList: ListShape
     CostCategoryReference: StructureShape
     CostCategoryReferencesList: ListShape
+    CostCategoryResourceAssociation: StructureShape
+    CostCategoryResourceAssociations: ListShape
     CostCategoryRule: StructureShape
     CostCategoryRuleType: EnumShape
     CostCategoryRuleVersion: EnumShape
@@ -110,6 +113,7 @@ module Aws::CostExplorer
     DescribeCostCategoryDefinitionRequest: StructureShape
     DescribeCostCategoryDefinitionResponse: StructureShape
     Dimension: EnumShape
+    DimensionKey: StringShape
     DimensionValues: StructureShape
     DimensionValuesWithAttributes: StructureShape
     DimensionValuesWithAttributesList: ListShape
@@ -136,6 +140,7 @@ module Aws::CostExplorer
     GenerationStatus: EnumShape
     GenerationSummary: StructureShape
     GenerationSummaryList: ListShape
+    GenericArn: StringShape
     GenericBoolean: BooleanShape
     GenericDouble: FloatShape
     GenericString: StringShape
@@ -206,6 +211,8 @@ module Aws::CostExplorer
     ListCostAllocationTagsResponse: StructureShape
     ListCostCategoryDefinitionsRequest: StructureShape
     ListCostCategoryDefinitionsResponse: StructureShape
+    ListCostCategoryResourceAssociationsRequest: StructureShape
+    ListCostCategoryResourceAssociationsResponse: StructureShape
     ListSavingsPlansPurchaseRecommendationGenerationRequest: StructureShape
     ListSavingsPlansPurchaseRecommendationGenerationResponse: StructureShape
     ListTagsForResourceRequest: StructureShape
@@ -244,6 +251,9 @@ module Aws::CostExplorer
     PlatformDifference: EnumShape
     PlatformDifferences: ListShape
     PredictionIntervalLevel: IntegerShape
+    ProductAttributeName: StringShape
+    ProductAttributeValueList: ListShape
+    ProductAttributeValues: StructureShape
     ProvideAnomalyFeedbackRequest: StructureShape
     ProvideAnomalyFeedbackResponse: StructureShape
     PurchasedHours: StringShape
@@ -257,6 +267,7 @@ module Aws::CostExplorer
     RecommendationId: StringShape
     RecommendationIdList: ListShape
     RecommendationTarget: EnumShape
+    RecommendationsPageSize: IntegerShape
     RedshiftInstanceDetails: StructureShape
     RequestChangedException: StructureShape
     ReservationAggregates: StructureShape
@@ -282,6 +293,9 @@ module Aws::CostExplorer
     ResourceTagKeyList: ListShape
     ResourceTagList: ListShape
     ResourceTagValue: StringShape
+    ResourceType: StringShape
+    ResourceTypes: ListShape
+    ResourceTypesFilterInput: ListShape
     ResourceUtilization: StructureShape
     ResultByTime: StructureShape
     ResultsByTime: ListShape
@@ -313,6 +327,7 @@ module Aws::CostExplorer
     SavingsPlansPurchaseRecommendationMetadata: StructureShape
     SavingsPlansPurchaseRecommendationSummary: StructureShape
     SavingsPlansSavings: StructureShape
+    SavingsPlansTargetCoverage: IntegerShape
     SavingsPlansToAdd: ListShape
     SavingsPlansToExclude: ListShape
     SavingsPlansUtilization: StructureShape

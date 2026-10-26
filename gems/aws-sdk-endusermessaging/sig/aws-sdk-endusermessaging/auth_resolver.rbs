@@ -1,0 +1,5 @@
+module Aws::EndUserMessaging
+  class AuthResolver
+    def resolve: (AuthParameters) -> Array[Smithy::Client::AuthOption]
+  end
+end

@@ -24,6 +24,17 @@ module Aws::ApplicationSignals
     AuditorResults: ListShape
     Auditors: ListShape
     AwsAccountId: StringShape
+    BatchDeleteByResourceArns: StructureShape
+    BatchDeleteDeletionTarget: UnionShape
+    BatchDeleteError: StructureShape
+    BatchDeleteErrorCode: EnumShape
+    BatchDeleteErrorList: ListShape
+    BatchDeleteInstrumentationConfigurationsRequest: StructureShape
+    BatchDeleteInstrumentationConfigurationsResponse: StructureShape
+    BatchDeleteResourceArnList: ListShape
+    BatchDeleteScope: StructureShape
+    BatchDeleteSuccessfulDeletion: StructureShape
+    BatchDeleteSuccessfulDeletionList: ListShape
     BatchGetServiceLevelObjectiveBudgetReportInput: StructureShape
     BatchGetServiceLevelObjectiveBudgetReportOutput: StructureShape
     BatchUpdateExclusionWindowsError: StructureShape
@@ -37,22 +48,41 @@ module Aws::ApplicationSignals
     BurnRateLookBackWindowMinutes: IntegerShape
     CalendarInterval: StructureShape
     CalendarIntervalDuration: IntegerShape
+    CanaryEntity: StructureShape
+    CaptureConfiguration: UnionShape
+    CaptureLimitsConfig: StructureShape
     ChangeEvent: StructureShape
     ChangeEventType: EnumShape
+    ChangeEvents: ListShape
+    CodeCaptureConfiguration: StructureShape
+    CodeLocation: StructureShape
+    CompositeSliComponent: UnionShape
+    CompositeSliComponents: ListShape
+    CompositeSliConfig: StructureShape
     ConflictException: StructureShape
     ConnectionType: EnumShape
+    CreateInstrumentationConfigurationRequest: StructureShape
+    CreateInstrumentationConfigurationResponse: StructureShape
     CreateServiceLevelObjectiveInput: StructureShape
     CreateServiceLevelObjectiveOutput: StructureShape
+    DataMap: MapShape
     DeleteGroupingConfigurationOutput: StructureShape
+    DeleteInstrumentationConfigurationRequest: StructureShape
+    DeleteInstrumentationConfigurationResponse: StructureShape
     DeleteServiceLevelObjectiveInput: StructureShape
     DeleteServiceLevelObjectiveOutput: StructureShape
     DependencyConfig: StructureShape
     DependencyGraph: StructureShape
+    DetailLevel: EnumShape
     Dimension: StructureShape
     DimensionName: StringShape
     DimensionValue: StringShape
     Dimensions: ListShape
     DurationUnit: EnumShape
+    DynamicInstrumentationAttributeFilterGroup: MapShape
+    DynamicInstrumentationAttributeFilters: ListShape
+    DynamicInstrumentationDeletionStatus: EnumShape
+    DynamicInstrumentationSignalType: EnumShape
     Edge: StructureShape
     Edges: ListShape
     EvaluationType: EnumShape
@@ -64,6 +94,10 @@ module Aws::ApplicationSignals
     ExclusionWindows: ListShape
     Expression: StringShape
     FaultDescription: StringShape
+    GetInstrumentationConfigurationRequest: StructureShape
+    GetInstrumentationConfigurationResponse: StructureShape
+    GetInstrumentationConfigurationStatusRequest: StructureShape
+    GetInstrumentationConfigurationStatusResponse: StructureShape
     GetServiceInput: StructureShape
     GetServiceLevelObjectiveInput: StructureShape
     GetServiceLevelObjectiveOutput: StructureShape
@@ -78,6 +112,18 @@ module Aws::ApplicationSignals
     GroupingConfiguration: StructureShape
     GroupingSourceKeyStringList: ListShape
     GroupingString: StringShape
+    InstrumentationConfiguration: StructureShape
+    InstrumentationConfigurationArn: StringShape
+    InstrumentationConfigurationStatus: EnumShape
+    InstrumentationConfigurationStatusList: ListShape
+    InstrumentationConfigurationStatusReport: StructureShape
+    InstrumentationConfigurationWithoutServiceEnv: StructureShape
+    InstrumentationConfigurationsPage: StructureShape
+    InstrumentationConfigurationsWithoutServiceEnv: ListShape
+    InstrumentationErrorCause: EnumShape
+    InstrumentationStatusEvent: StructureShape
+    InstrumentationStatusEventList: ListShape
+    InstrumentationType: EnumShape
     Interval: UnionShape
     KeyAttributeName: StringShape
     KeyAttributeValue: StringShape
@@ -85,8 +131,12 @@ module Aws::ApplicationSignals
     ListAuditFindingMaxResults: IntegerShape
     ListAuditFindingsInput: StructureShape
     ListAuditFindingsOutput: StructureShape
+    ListEntityEventsInput: StructureShape
+    ListEntityEventsMaxResults: IntegerShape
+    ListEntityEventsOutput: StructureShape
     ListGroupingAttributeDefinitionsInput: StructureShape
     ListGroupingAttributeDefinitionsOutput: StructureShape
+    ListInstrumentationConfigurationsRequest: StructureShape
     ListServiceDependenciesInput: StructureShape
     ListServiceDependenciesMaxResults: IntegerShape
     ListServiceDependenciesOutput: StructureShape
@@ -110,6 +160,8 @@ module Aws::ApplicationSignals
     ListServicesOutput: StructureShape
     ListTagsForResourceRequest: StructureShape
     ListTagsForResourceResponse: StructureShape
+    Location: UnionShape
+    LocationIdentifier: UnionShape
     LogGroupReferences: ListShape
     Metric: StructureShape
     MetricDataQueries: ListShape
@@ -121,6 +173,7 @@ module Aws::ApplicationSignals
     MetricName: StringShape
     MetricReference: StructureShape
     MetricReferences: ListShape
+    MetricSource: StructureShape
     MetricSourceType: EnumShape
     MetricSourceTypes: ListShape
     MetricStat: StructureShape
@@ -132,9 +185,12 @@ module Aws::ApplicationSignals
     Nodes: ListShape
     OperationName: StringShape
     Period: IntegerShape
+    ProgrammingLanguage: EnumShape
     PutGroupingConfigurationInput: StructureShape
     PutGroupingConfigurationOutput: StructureShape
     RecurrenceRule: StructureShape
+    ReportInstrumentationConfigurationStatusRequest: StructureShape
+    ReportInstrumentationConfigurationStatusResponse: StructureShape
     RequestBasedServiceLevelIndicator: StructureShape
     RequestBasedServiceLevelIndicatorConfig: StructureShape
     RequestBasedServiceLevelIndicatorMetric: StructureShape
@@ -146,6 +202,9 @@ module Aws::ApplicationSignals
     RollingInterval: StructureShape
     RollingIntervalDuration: IntegerShape
     SLIPeriodSeconds: IntegerShape
+    SelectionConfig: StructureShape
+    SelectionPattern: StringShape
+    SelectionType: EnumShape
     Service: StructureShape
     ServiceDependencies: ListShape
     ServiceDependency: StructureShape
@@ -192,6 +251,7 @@ module Aws::ApplicationSignals
     StartDiscoveryInput: StructureShape
     StartDiscoveryOutput: StructureShape
     Stat: StringShape
+    StringList: ListShape
     Tag: StructureShape
     TagKey: StringShape
     TagKeyList: ListShape
@@ -202,6 +262,9 @@ module Aws::ApplicationSignals
     ThrottlingException: StructureShape
     TotalBudgetRequests: IntegerShape
     TotalBudgetSeconds: IntegerShape
+    UnprocessedStatusEvent: StructureShape
+    UnprocessedStatusEventFailureReason: EnumShape
+    UnprocessedStatusEventList: ListShape
     UntagResourceRequest: StructureShape
     UntagResourceResponse: StructureShape
     UpdateServiceLevelObjectiveInput: StructureShape

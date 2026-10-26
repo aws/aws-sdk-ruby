@@ -6,6 +6,22 @@ module Aws::EMRcontainers
   # This module contains the types returned by client operations.
   module Types
 
+    # <p>Contains the authentication settings for a security configuration, including Identity Center and IAM configuration options.</p>
+    # @!attribute identity_center_configuration
+    #   <p>The IAM Identity Center configuration to use for authentication.</p>
+    #   @return [Types::IdentityCenterConfiguration]
+    # @!attribute iam_configuration
+    #   <p>The IAM configuration to use for authentication.</p>
+    #   @return [Types::IAMConfiguration]
+    class AuthenticationConfiguration < Struct.new(
+      nil,
+      :identity_center_configuration,
+      :iam_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Authorization-related configuration inputs for the security configuration.</p>
     # @!attribute lake_formation_configuration
     #   <p>Lake Formation related configuration inputs for the security
@@ -258,6 +274,9 @@ module Aws::EMRcontainers
     # @!attribute tags
     #   <p>The tags of the managed endpoint. </p>
     #   @return [Hash<String, String>]
+    # @!attribute session_idle_timeout_in_minutes
+    #   <p>The number of idle minutes before the managed endpoint session times out.</p>
+    #   @return [Integer]
     class CreateManagedEndpointRequest < Struct.new(
       nil,
       :name,
@@ -269,6 +288,7 @@ module Aws::EMRcontainers
       :configuration_overrides,
       :client_token,
       :tags,
+      :session_idle_timeout_in_minutes,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -358,6 +378,13 @@ module Aws::EMRcontainers
     # @!attribute security_configuration_id
     #   <p>The ID of the security configuration.</p>
     #   @return [String]
+    # @!attribute session_enabled
+    #   <p>Indicates whether the virtual cluster has session support enabled.</p>
+    #   @return [Boolean]
+    # @!attribute scheduler_configuration
+    #   <p>The scheduler configuration (concurrency and queue limits) to apply to the virtual
+    #            cluster at creation time. When omitted, no limits are applied.</p>
+    #   @return [Types::SchedulerConfiguration]
     class CreateVirtualClusterRequest < Struct.new(
       nil,
       :name,
@@ -365,6 +392,8 @@ module Aws::EMRcontainers
       :client_token,
       :tags,
       :security_configuration_id,
+      :session_enabled,
+      :scheduler_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -451,6 +480,28 @@ module Aws::EMRcontainers
       nil,
       :id,
       :virtual_cluster_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute id
+    #   <p>The ID of the security configuration to delete.</p>
+    #   @return [String]
+    class DeleteSecurityConfigurationRequest < Struct.new(
+      nil,
+      :id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute id
+    #   <p>The ID of the deleted security configuration.</p>
+    #   @return [String]
+    class DeleteSecurityConfigurationResponse < Struct.new(
+      nil,
+      :id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -677,6 +728,9 @@ module Aws::EMRcontainers
     # @!attribute server_url
     #   <p>The server URL of the endpoint.</p>
     #   @return [String]
+    # @!attribute auth_proxy_url
+    #   <p>The authentication proxy URL of the endpoint.</p>
+    #   @return [String]
     # @!attribute created_at
     #   <p>The date and time when the endpoint was created.</p>
     #   @return [Time]
@@ -709,6 +763,7 @@ module Aws::EMRcontainers
       :certificate_authority,
       :configuration_overrides,
       :server_url,
+      :auth_proxy_url,
       :created_at,
       :security_group,
       :subnet_ids,
@@ -763,6 +818,9 @@ module Aws::EMRcontainers
     # @!attribute credentials
     #   <p>The structure containing the session credentials.</p>
     #   @return [Types::Credentials]
+    # @!attribute endpoint_credentials
+    #   <p>The session credentials that the operation returns.</p>
+    #   @return [Types::Credentials]
     # @!attribute expires_at
     #   <p>The date and time when the session token will expire.</p>
     #   @return [Time]
@@ -770,7 +828,44 @@ module Aws::EMRcontainers
       nil,
       :id,
       :credentials,
+      :endpoint_credentials,
       :expires_at,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the IAM settings for a security configuration, including the system role used for authentication.</p>
+    # @!attribute system_role
+    #   <p>The Amazon Resource Name (ARN) of the system role used by the security configuration.</p>
+    #   @return [String]
+    class IAMConfiguration < Struct.new(
+      nil,
+      :system_role,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the IAM Identity Center settings for a security configuration, including instance ARN, application assignment requirements, and application ARN.</p>
+    # @!attribute enable_identity_center
+    #   <p>Specifies whether Identity Center is enabled for the security configuration.</p>
+    #   @return [Boolean]
+    # @!attribute identity_center_application_assignment_required
+    #   <p>Specifies whether user assignment is required for the Identity Center application.</p>
+    #   @return [Boolean]
+    # @!attribute identity_center_instance_arn
+    #   <p>The Amazon Resource Name (ARN) of the Identity Center instance.</p>
+    #   @return [String]
+    # @!attribute emr_identity_center_application_arn
+    #   <p>The Amazon Resource Name (ARN) of the Amazon EMR Identity Center application.</p>
+    #   @return [String]
+    class IdentityCenterConfiguration < Struct.new(
+      nil,
+      :enable_identity_center,
+      :identity_center_application_assignment_required,
+      :identity_center_instance_arn,
+      :emr_identity_center_application_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1222,7 +1317,7 @@ module Aws::EMRcontainers
     #   <p>The token for the next set of virtual clusters to return. </p>
     #   @return [String]
     # @!attribute eks_access_entry_integrated
-    #   <p>Optional Boolean that specifies whether the operation should return the 
+    #   <p>Optional Boolean that specifies whether the operation should return the
     #            virtual clusters that have the access entry integration enabled or disabled. If not specified,
     #         the operation returns all applicable virtual clusters.</p>
     #   @return [Boolean]
@@ -1421,12 +1516,64 @@ module Aws::EMRcontainers
     # @!attribute log_uri
     #   <p>Amazon S3 destination URI for log publishing.</p>
     #   @return [String]
+    # @!attribute encryption_key_arn
+    #   <p>The Amazon Resource Name (ARN) of the encryption key for logs.</p>
+    #   @return [String]
     class S3MonitoringConfiguration < Struct.new(
       nil,
       :log_uri,
+      :encryption_key_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+    end
+
+    # <p>The scheduler configuration for a virtual cluster on Amazon EMR on EKS. It controls how
+    #          many job runs can run concurrently and how many can wait in the queue. When not set, no
+    #          concurrency or queue limits are applied.</p>
+    # @!attribute max_in_queue_job_runs
+    #   <p>The maximum number of job runs that can be in the <code>PENDING</code> or
+    #            <code>SUBMITTED</code> state at any time for the virtual cluster. When the queue is full,
+    #            the service rejects <code>StartJobRun</code> requests with a <code>ValidationException</code>. If you omit
+    #            this field, the service applies no queue-depth limit.</p>
+    #   @return [Integer]
+    # @!attribute max_concurrent_job_runs
+    #   <p>The maximum number of job runs that can be in the <code>RUNNING</code> state at any time
+    #            for the virtual cluster. As running slots free up, queued job runs start automatically. If
+    #            you omit this field, the service applies no concurrency limit.</p>
+    #   @return [Integer]
+    class SchedulerConfiguration < Struct.new(
+      nil,
+      :max_in_queue_job_runs,
+      :max_concurrent_job_runs,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The current job-run counts for a virtual cluster, reflecting how much of the configured
+    #          scheduler capacity is in use.</p>
+    # @!attribute current_in_queue_job_runs
+    #   <p>The number of job runs currently waiting in the queue (<code>PENDING</code> or
+    #            <code>SUBMITTED</code>) for the virtual cluster.</p>
+    #   @return [Integer]
+    # @!attribute current_concurrent_job_runs
+    #   <p>The number of job runs currently in the <code>RUNNING</code> state for the virtual
+    #            cluster.</p>
+    #   @return [Integer]
+    class SchedulerStatus < Struct.new(
+      nil,
+      :current_in_queue_job_runs,
+      :current_concurrent_job_runs,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:current_in_queue_job_runs] = 0 unless options.key?(:current_in_queue_job_runs)
+        options[:current_concurrent_job_runs] = 0 unless options.key?(:current_concurrent_job_runs)
+        super
+      end
     end
 
     # <p>Namespace inputs for the system job.</p>
@@ -1488,9 +1635,13 @@ module Aws::EMRcontainers
     # @!attribute authorization_configuration
     #   <p>Authorization-related configuration input for the security configuration.</p>
     #   @return [Types::AuthorizationConfiguration]
+    # @!attribute authentication_configuration
+    #   <p>Authentication-related configuration input for the security configuration.</p>
+    #   @return [Types::AuthenticationConfiguration]
     class SecurityConfigurationData < Struct.new(
       nil,
       :authorization_configuration,
+      :authentication_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1689,6 +1840,41 @@ module Aws::EMRcontainers
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Contains the parameters for a request to update a virtual cluster on Amazon EMR on EKS.</p>
+    # @!attribute id
+    #   <p>The ID of the virtual cluster to update.</p>
+    #   @return [String]
+    # @!attribute scheduler_configuration
+    #   <p>The scheduler configuration to apply to the virtual cluster. The new configuration fully
+    #            replaces the existing one. If you omit a field, the corresponding limit is removed.</p>
+    #   @return [Types::SchedulerConfiguration]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure that the operation
+    #            completes no more than one time. If this token matches a previous request, the service
+    #            ignores the request, but does not return an error.</p>
+    #   @return [String]
+    class UpdateVirtualClusterRequest < Struct.new(
+      nil,
+      :id,
+      :scheduler_configuration,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the virtual cluster returned after a successful update request.</p>
+    # @!attribute virtual_cluster
+    #   <p>The updated virtual cluster.</p>
+    #   @return [Types::VirtualCluster]
+    class UpdateVirtualClusterResponse < Struct.new(
+      nil,
+      :virtual_cluster,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>There are invalid parameters in the client request.</p>
     # @!attribute message
     #   @return [String]
@@ -1730,6 +1916,16 @@ module Aws::EMRcontainers
     # @!attribute security_configuration_id
     #   <p>The ID of the security configuration.</p>
     #   @return [String]
+    # @!attribute session_enabled
+    #   <p>Specifies whether the virtual cluster has session support enabled. </p>
+    #   @return [Boolean]
+    # @!attribute scheduler_configuration
+    #   <p>The scheduler configuration (concurrency and queue limits) applied to the virtual
+    #            cluster. The service does not return this field when no scheduler limits are configured.</p>
+    #   @return [Types::SchedulerConfiguration]
+    # @!attribute scheduler_status
+    #   <p>The current in-queue and concurrent job-run counts for the virtual cluster.</p>
+    #   @return [Types::SchedulerStatus]
     class VirtualCluster < Struct.new(
       nil,
       :id,
@@ -1740,6 +1936,9 @@ module Aws::EMRcontainers
       :created_at,
       :tags,
       :security_configuration_id,
+      :session_enabled,
+      :scheduler_configuration,
+      :scheduler_status,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

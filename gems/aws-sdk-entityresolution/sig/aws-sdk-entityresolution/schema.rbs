@@ -20,6 +20,9 @@ module Aws::EntityResolution
     CreateMatchingWorkflowOutput: StructureShape
     CreateSchemaMappingInput: StructureShape
     CreateSchemaMappingOutput: StructureShape
+    CustomerProfilesDomainArn: StringShape
+    CustomerProfilesIntegrationConfig: StructureShape
+    CustomerProfilesObjectTypeArn: StringShape
     DeleteIdMappingWorkflowInput: StructureShape
     DeleteIdMappingWorkflowOutput: StructureShape
     DeleteIdNamespaceInput: StructureShape
@@ -132,6 +135,7 @@ module Aws::EntityResolution
     MatchPurpose: EnumShape
     MatchedRecord: StructureShape
     MatchedRecordsList: ListShape
+    MatchingConfig: StructureShape
     MatchingKeys: ListShape
     MatchingWorkflowArn: StringShape
     MatchingWorkflowList: ListShape
@@ -139,6 +143,7 @@ module Aws::EntityResolution
     NamespaceProviderProperties: StructureShape
     NamespaceRuleBasedProperties: StructureShape
     NextToken: StringShape
+    OptionalS3Path: StringShape
     OutputAttribute: StructureShape
     OutputAttributes: ListShape
     OutputSource: StructureShape

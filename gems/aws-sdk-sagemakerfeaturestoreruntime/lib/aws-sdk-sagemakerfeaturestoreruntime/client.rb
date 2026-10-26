@@ -144,18 +144,18 @@ module Aws::SageMakerFeatureStoreRuntime
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -272,6 +272,123 @@ module Aws::SageMakerFeatureStoreRuntime
       request.send_request(options)
     end
 
+    # <p>Writes a batch of <code>Records</code> to one or more <code>FeatureGroup</code>s. Use
+    #          this API for bulk ingestion of records into the <code>OnlineStore</code> and
+    #             <code>OfflineStore</code>.</p>
+    #          <p>You can set the ingested records to expire at a given time to live (TTL) duration after
+    #          the record's event time by specifying the <code>TtlDuration</code> parameter. A request
+    #          level <code>TtlDuration</code> applies to all entries that do not specify their own
+    #             <code>TtlDuration</code>.</p>
+    # @param [Hash, Types::BatchWriteRecordRequest] params
+    # @option params [Array<Types::BatchWriteRecordEntry>] :entries
+    #   <p>A list of records to write. Each entry specifies the <code>FeatureGroup</code>, the
+    #            record data, and optionally target stores and a TTL duration.</p>
+    # @option params [Types::TtlDuration] :ttl_duration
+    #   <p>Time to live duration applied to all entries in the batch that do not specify their own
+    #               <code>TtlDuration</code>; <code>ExpiresAt</code> = <code>EventTime</code> +
+    #               <code>TtlDuration</code>. For information on HardDelete, see the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_DeleteRecord.html">DeleteRecord</a> API in the Amazon SageMaker API Reference guide.</p>
+    # @example Write records to multiple feature groups
+    #   # Example operation for batch_write_record
+    #   params = {
+    #     entries: [
+    #       {
+    #         feature_group_name: "my-feature-group",
+    #         record: [
+    #           {
+    #             feature_name: "customer_id",
+    #             value_as_string: "cust-001"
+    #           },
+    #           {
+    #             feature_name: "age",
+    #             value_as_string: "25"
+    #           }
+    #         ]
+    #       }
+    #     ]
+    #   }
+    #   options = {}
+    #   response = client.batch_write_record(params, options)
+    #   response.to_h #=>
+    #   {
+    #     errors: [
+    #     ],
+    #     unprocessed_entries: [
+    #     ]
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     entries: [ # required
+    #       {
+    #         feature_group_name: "FeatureGroupNameOrArn", # required
+    #         record: [ # required
+    #           {
+    #             feature_name: "FeatureName", # required
+    #             value_as_string: "ValueAsString",
+    #             value_as_string_list: ["ValueAsString"]
+    #           }
+    #         ],
+    #         target_stores: ["OnlineStore" # One of: ["OnlineStore", "OfflineStore"]],
+    #         ttl_duration: {
+    #           unit: "Seconds" # One of: ["Seconds", "Minutes", "Hours", "Days", "Weeks"], # required
+    #           value: 1, # required
+    #         }
+    #       }
+    #     ],
+    #     ttl_duration: {
+    #       unit: "Seconds" # One of: ["Seconds", "Minutes", "Hours", "Days", "Weeks"], # required
+    #       value: 1, # required
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.batch_write_record(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     errors: [ # required
+    #       {
+    #         entry: { # required
+    #           feature_group_name: "FeatureGroupNameOrArn", # required
+    #           record: [ # required
+    #             {
+    #               feature_name: "FeatureName", # required
+    #               value_as_string: "ValueAsString",
+    #               value_as_string_list: ["ValueAsString"]
+    #             }
+    #           ],
+    #           target_stores: ["OnlineStore" # One of: ["OnlineStore", "OfflineStore"]],
+    #           ttl_duration: {
+    #             unit: "Seconds" # One of: ["Seconds", "Minutes", "Hours", "Days", "Weeks"], # required
+    #             value: 1, # required
+    #           }
+    #         },
+    #         error_code: "ValueAsString", # required
+    #         error_message: "Message", # required
+    #       }
+    #     ],
+    #     unprocessed_entries: [ # required
+    #       {
+    #         feature_group_name: "FeatureGroupNameOrArn", # required
+    #         record: [ # required
+    #           {
+    #             feature_name: "FeatureName", # required
+    #             value_as_string: "ValueAsString",
+    #             value_as_string_list: ["ValueAsString"]
+    #           }
+    #         ],
+    #         target_stores: ["OnlineStore" # One of: ["OnlineStore", "OfflineStore"]],
+    #         ttl_duration: {
+    #           unit: "Seconds" # One of: ["Seconds", "Minutes", "Hours", "Days", "Weeks"], # required
+    #           value: 1, # required
+    #         }
+    #       }
+    #     ]
+    #   }
+    # @return [Types::BatchWriteRecordResponse]
+    def batch_write_record(params = {}, options = {})
+      request = build_request(:batch_write_record, params)
+      request.send_request(options)
+    end
+
     # <p>Deletes a <code>Record</code> from a <code>FeatureGroup</code> in the
     #             <code>OnlineStore</code>. Feature Store supports both <code>SoftDelete</code> and
     #             <code>HardDelete</code>. For <code>SoftDelete</code> (default), feature columns are set
@@ -305,7 +422,7 @@ module Aws::SageMakerFeatureStoreRuntime
     #          your <code>OfflineStore</code>, you can remove all history of a record from the
     #             <code>OfflineStore</code> using Amazon Athena or Apache Spark. For information on how to
     #          hard delete a record from the <code>OfflineStore</code> with the Iceberg table format
-    #          enabled, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/feature-store-delete-records-offline-store.html#feature-store-delete-records-offline-store">Delete records from the offline store</a>.</p>
+    #          enabled, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/feature-store-delete-records.html#feature-store-delete-records-offline-store">Delete records from the offline store</a>.</p>
     # @param [Hash, Types::DeleteRecordRequest] params
     # @option params [String] :feature_group_name
     #   <p>The name or Amazon Resource Name (ARN) of the feature group to delete the record from.
@@ -386,6 +503,56 @@ module Aws::SageMakerFeatureStoreRuntime
       request.send_request(options)
     end
 
+    # <p>Lists the <code>RecordIdentifier</code> values of all records stored in a
+    #             <code>FeatureGroup</code>'s <code>OnlineStore</code>. This enables you to discover which
+    #          records exist without retrieving the full record data.</p>
+    # @param [Hash, Types::ListRecordsRequest] params
+    # @option params [String] :feature_group_name
+    #   <p>The name or Amazon Resource Name (ARN) of the feature group to list records from.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of record identifiers to return in a single page of results. For the <code>InMemory</code> tier, this value is a hint and not a strict requirement. The response may contain more or fewer results than the specified <code>MaxResults</code>.</p>
+    # @option params [String] :next_token
+    #   <p>A token to resume pagination of <code>ListRecords</code> results.</p>
+    # @option params [Boolean] :include_soft_deleted_records
+    #   <p>If set to <code>true</code>, the result includes records that have been soft
+    #            deleted.</p>
+    # @example List record identifiers from a feature group
+    #   # Example operation for list_records
+    #   params = {
+    #     feature_group_name: "my-feature-group",
+    #     max_results: 10
+    #   }
+    #   options = {}
+    #   response = client.list_records(params, options)
+    #   response.to_h #=>
+    #   {
+    #     record_identifiers: [
+    #       "record-id-1",
+    #       "record-id-2"
+    #     ],
+    #     next_token: "eyJsYXN0RXZhbHVhdGVkS2V5IjoiYWJjMTIzIn0="
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     feature_group_name: "FeatureGroupNameOrArn", # required
+    #     max_results: 1,
+    #     next_token: "ListRecordsNextToken",
+    #     include_soft_deleted_records: false
+    #   }
+    #   options = {}
+    #   response = client.list_records(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     record_identifiers: ["ValueAsString"], # required
+    #     next_token: "ListRecordsNextToken"
+    #   }
+    # @return [Types::ListRecordsResponse]
+    def list_records(params = {}, options = {})
+      request = build_request(:list_records, params)
+      request.send_request(options)
+    end
+
     # <p>The <code>PutRecord</code> API is used to ingest a list of <code>Records</code> into
     #          your feature group. </p>
     #          <p>If a new record’s <code>EventTime</code> is greater, the new record is written to both
@@ -451,6 +618,127 @@ module Aws::SageMakerFeatureStoreRuntime
     # @return [Smithy::Schema::EmptyStructure]
     def put_record(params = {}, options = {})
       request = build_request(:put_record, params)
+      request.send_request(options)
+    end
+
+    # <p>Updates one or more feature values for an existing record in the specified
+    #          feature group. Features that you do not include in the request remain unchanged.
+    #          You can update up to 100 features per call.</p>
+    #          <important>
+    #             <p>This operation is available only for feature groups that use the
+    #                <code>Standard_V2</code> or <code>InMemory</code> online store type.</p>
+    #          </important>
+    #          <p>The record must already exist. If the record does not exist or has been
+    #          soft-deleted, the operation returns a <code>ResourceNotFound</code> error. To create
+    #          a record, use <code>PutRecord</code>.</p>
+    #          <p>If you provide an <code>EventTime</code> that is older than the record's current
+    #             <code>EventTime</code>, the service rejects the update with a
+    #             <code>ConflictException</code>. If the <code>EventTime</code> is equal to or newer
+    #          than the current value, the service applies the update. If you omit
+    #             <code>EventTime</code>, the service keeps the record's existing
+    #             <code>EventTime</code> and applies the update.</p>
+    #          <p>If you specify a <code>TtlDuration</code>, you must also provide an
+    #             <code>EventTime</code> in the request. Otherwise, the operation returns a
+    #             <code>ValidationError</code>.</p>
+    # @param [Hash, Types::UpdateRecordRequest] params
+    # @option params [String] :feature_group_name
+    #   <p>The identifier for the feature group that contains the record to update. You can
+    #            specify one of the following:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>The feature group name.</p>
+    #               </li>
+    #               <li>
+    #                  <p>The feature group Amazon Resource Name (ARN).</p>
+    #               </li>
+    #            </ul>
+    # @option params [String] :record_identifier_value_as_string
+    #   <p>The value that uniquely identifies the record in the feature group. This must
+    #            match the value defined by the feature group's record identifier feature.</p>
+    # @option params [Array<Types::FeatureValue>] :features
+    #   <p>The feature values to write to the record.</p>
+    # @option params [Array<String>] :target_stores
+    #   <p>The target stores for the record update. By default, Amazon SageMaker Feature
+    #            Store updates the record in all stores associated with the
+    #               <code>FeatureGroup</code>.</p>
+    # @option params [Types::TtlDuration] :ttl_duration
+    #   <p>The time-to-live (TTL) duration for the record. Amazon SageMaker Feature Store
+    #            deletes the record when <code>EventTime</code> + <code>TtlDuration</code>
+    #            elapses. If you omit this parameter, the record's existing TTL setting remains
+    #            unchanged. For information about <code>HardDelete</code>, see the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_DeleteRecord.html">DeleteRecord</a> operation in the Amazon SageMaker API Reference.</p>
+    # @example Update specific features in a record
+    #   # Example operation for update_record
+    #   params = {
+    #     feature_group_name: "my-feature-group",
+    #     record_identifier_value_as_string: "cust-001",
+    #     features: [
+    #       {
+    #         feature_name: "age",
+    #         value_as_string: "26"
+    #       },
+    #       {
+    #         feature_name: "membership_tier",
+    #         value_as_string: "gold"
+    #       },
+    #       {
+    #         feature_name: "event_time",
+    #         value_as_string: "2026-07-26T12:00:00Z"
+    #       }
+    #     ]
+    #   }
+    #   options = {}
+    #   response = client.update_record(params, options)
+    #   response.to_h #=>
+    #   {}
+    # @example Update features and set a time-to-live (TTL) duration
+    #   # Example operation for update_record
+    #   params = {
+    #     feature_group_name: "my-feature-group",
+    #     record_identifier_value_as_string: "cust-001",
+    #     features: [
+    #       {
+    #         feature_name: "age",
+    #         value_as_string: "26"
+    #       },
+    #       {
+    #         feature_name: "event_time",
+    #         value_as_string: "2026-07-26T12:00:00Z"
+    #       }
+    #     ],
+    #     ttl_duration: {
+    #       unit: Weeks,
+    #       value: 4
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.update_record(params, options)
+    #   response.to_h #=>
+    #   {}
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     feature_group_name: "FeatureGroupNameOrArn", # required
+    #     record_identifier_value_as_string: "ValueAsString", # required
+    #     features: [ # required
+    #       {
+    #         feature_name: "FeatureName", # required
+    #         value_as_string: "ValueAsString",
+    #         value_as_string_list: ["ValueAsString"]
+    #       }
+    #     ],
+    #     target_stores: ["OnlineStore" # One of: ["OnlineStore", "OfflineStore"]],
+    #     ttl_duration: {
+    #       unit: "Seconds" # One of: ["Seconds", "Minutes", "Hours", "Days", "Weeks"], # required
+    #       value: 1, # required
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.update_record(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Smithy::Schema::EmptyStructure]
+    def update_record(params = {}, options = {})
+      request = build_request(:update_record, params)
       request.send_request(options)
     end
 

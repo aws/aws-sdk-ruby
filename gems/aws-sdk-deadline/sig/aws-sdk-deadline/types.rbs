@@ -32,6 +32,7 @@ module Aws::Deadline
       A10G: String
       L4: String
       L40S: String
+      RTX_PRO_SERVER_6000: String
     end
 
     class AcceleratorSelection
@@ -120,6 +121,7 @@ module Aws::Deadline
         ?job_id: String,
         ?session_actions: Array[Types::AssignedSessionAction],
         ?log_configuration: Types::LogConfiguration,
+        ?metadata: Hash[String, String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -127,6 +129,7 @@ module Aws::Deadline
       attr_accessor job_id: String?
       attr_accessor session_actions: Array[Types::AssignedSessionAction]?
       attr_accessor log_configuration: Types::LogConfiguration?
+      attr_accessor metadata: Hash[String, String]?
     end
 
     class AssignedSessionAction
@@ -201,18 +204,20 @@ module Aws::Deadline
 
       def initialize: (
         ?farm_id: String,
-        ?principal_id: String,
         ?principal_type: String,
         ?identity_store_id: String,
         ?membership_level: String,
+        ?principal_id: String,
+        ?identity_center_region: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor farm_id: String?
-      attr_accessor principal_id: String?
       attr_accessor principal_type: String?
       attr_accessor identity_store_id: String?
       attr_accessor membership_level: String?
+      attr_accessor principal_id: String?
+      attr_accessor identity_center_region: String?
     end
 
     class AssociateMemberToFarmResponse
@@ -230,19 +235,21 @@ module Aws::Deadline
       def initialize: (
         ?farm_id: String,
         ?fleet_id: String,
-        ?principal_id: String,
         ?principal_type: String,
         ?identity_store_id: String,
         ?membership_level: String,
+        ?principal_id: String,
+        ?identity_center_region: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor farm_id: String?
       attr_accessor fleet_id: String?
-      attr_accessor principal_id: String?
       attr_accessor principal_type: String?
       attr_accessor identity_store_id: String?
       attr_accessor membership_level: String?
+      attr_accessor principal_id: String?
+      attr_accessor identity_center_region: String?
     end
 
     class AssociateMemberToFleetResponse
@@ -261,20 +268,22 @@ module Aws::Deadline
         ?farm_id: String,
         ?queue_id: String,
         ?job_id: String,
-        ?principal_id: String,
         ?principal_type: String,
         ?identity_store_id: String,
         ?membership_level: String,
+        ?principal_id: String,
+        ?identity_center_region: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor farm_id: String?
       attr_accessor queue_id: String?
       attr_accessor job_id: String?
-      attr_accessor principal_id: String?
       attr_accessor principal_type: String?
       attr_accessor identity_store_id: String?
       attr_accessor membership_level: String?
+      attr_accessor principal_id: String?
+      attr_accessor identity_center_region: String?
     end
 
     class AssociateMemberToJobResponse
@@ -292,19 +301,21 @@ module Aws::Deadline
       def initialize: (
         ?farm_id: String,
         ?queue_id: String,
-        ?principal_id: String,
         ?principal_type: String,
         ?identity_store_id: String,
         ?membership_level: String,
+        ?principal_id: String,
+        ?identity_center_region: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor farm_id: String?
       attr_accessor queue_id: String?
-      attr_accessor principal_id: String?
       attr_accessor principal_type: String?
       attr_accessor identity_store_id: String?
       attr_accessor membership_level: String?
+      attr_accessor principal_id: String?
+      attr_accessor identity_center_region: String?
     end
 
     class AssociateMemberToQueueResponse
@@ -513,6 +524,834 @@ module Aws::Deadline
       attr_accessor errors: Array[Types::GetJobEntityError]?
     end
 
+    class BatchGetJobError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?queue_id: String,
+        ?job_id: String,
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor job_id: String?
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    module BatchGetJobErrorCode
+      InternalServerErrorException: String
+      ResourceNotFoundException: String
+      ValidationException: String
+      AccessDeniedException: String
+      ThrottlingException: String
+    end
+
+    class BatchGetJobIdentifier
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?queue_id: String,
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor job_id: String?
+    end
+
+    class BatchGetJobItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?queue_id: String,
+        ?job_id: String,
+        ?name: String,
+        ?lifecycle_status: String,
+        ?lifecycle_status_message: String,
+        ?priority: Integer,
+        ?created_at: Time,
+        ?created_by: String,
+        ?updated_at: Time,
+        ?updated_by: String,
+        ?started_at: Time,
+        ?ended_at: Time,
+        ?task_run_status: String,
+        ?target_task_run_status: String,
+        ?task_run_status_counts: Hash[String, Integer],
+        ?task_failure_retry_count: Integer,
+        ?storage_profile_id: String,
+        ?max_failed_tasks_count: Integer,
+        ?max_retries_per_task: Integer,
+        ?parameters: Hash[String, Types::JobParameter],
+        ?attachments: Types::Attachments,
+        ?description: String,
+        ?max_worker_count: Integer,
+        ?source_job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor job_id: String?
+      attr_accessor name: String?
+      attr_accessor lifecycle_status: String?
+      attr_accessor lifecycle_status_message: String?
+      attr_accessor priority: Integer?
+      attr_accessor created_at: Time?
+      attr_accessor created_by: String?
+      attr_accessor updated_at: Time?
+      attr_accessor updated_by: String?
+      attr_accessor started_at: Time?
+      attr_accessor ended_at: Time?
+      attr_accessor task_run_status: String?
+      attr_accessor target_task_run_status: String?
+      attr_accessor task_run_status_counts: Hash[String, Integer]?
+      attr_accessor task_failure_retry_count: Integer?
+      attr_accessor storage_profile_id: String?
+      attr_accessor max_failed_tasks_count: Integer?
+      attr_accessor max_retries_per_task: Integer?
+      attr_accessor parameters: Hash[String, Types::JobParameter]?
+      attr_accessor attachments: Types::Attachments?
+      attr_accessor description: String?
+      attr_accessor max_worker_count: Integer?
+      attr_accessor source_job_id: String?
+    end
+
+    class BatchGetJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifiers: Array[Types::BatchGetJobIdentifier],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifiers: Array[Types::BatchGetJobIdentifier]?
+    end
+
+    class BatchGetJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?jobs: Array[Types::BatchGetJobItem],
+        ?errors: Array[Types::BatchGetJobError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor jobs: Array[Types::BatchGetJobItem]?
+      attr_accessor errors: Array[Types::BatchGetJobError]?
+    end
+
+    class BatchGetSessionActionError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?queue_id: String,
+        ?job_id: String,
+        ?session_action_id: String,
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor job_id: String?
+      attr_accessor session_action_id: String?
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    module BatchGetSessionActionErrorCode
+      InternalServerErrorException: String
+      ResourceNotFoundException: String
+      ValidationException: String
+    end
+
+    class BatchGetSessionActionIdentifier
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?queue_id: String,
+        ?job_id: String,
+        ?session_action_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor job_id: String?
+      attr_accessor session_action_id: String?
+    end
+
+    class BatchGetSessionActionItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?queue_id: String,
+        ?job_id: String,
+        ?session_action_id: String,
+        ?status: String,
+        ?started_at: Time,
+        ?ended_at: Time,
+        ?worker_updated_at: Time,
+        ?progress_percent: Float,
+        ?manifests: Array[Types::TaskRunManifestPropertiesResponse],
+        ?session_id: String,
+        ?process_exit_code: Integer,
+        ?progress_message: String,
+        ?acquired_limits: Array[Types::AcquiredLimit],
+        ?definition: Types::SessionActionDefinition,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor job_id: String?
+      attr_accessor session_action_id: String?
+      attr_accessor status: String?
+      attr_accessor started_at: Time?
+      attr_accessor ended_at: Time?
+      attr_accessor worker_updated_at: Time?
+      attr_accessor progress_percent: Float?
+      attr_accessor manifests: Array[Types::TaskRunManifestPropertiesResponse]?
+      attr_accessor session_id: String?
+      attr_accessor process_exit_code: Integer?
+      attr_accessor progress_message: String?
+      attr_accessor acquired_limits: Array[Types::AcquiredLimit]?
+      attr_accessor definition: Types::SessionActionDefinition?
+    end
+
+    class BatchGetSessionActionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifiers: Array[Types::BatchGetSessionActionIdentifier],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifiers: Array[Types::BatchGetSessionActionIdentifier]?
+    end
+
+    class BatchGetSessionActionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_actions: Array[Types::BatchGetSessionActionItem],
+        ?errors: Array[Types::BatchGetSessionActionError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_actions: Array[Types::BatchGetSessionActionItem]?
+      attr_accessor errors: Array[Types::BatchGetSessionActionError]?
+    end
+
+    class BatchGetSessionError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?queue_id: String,
+        ?job_id: String,
+        ?session_id: String,
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor job_id: String?
+      attr_accessor session_id: String?
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    module BatchGetSessionErrorCode
+      InternalServerErrorException: String
+      ResourceNotFoundException: String
+      ValidationException: String
+    end
+
+    class BatchGetSessionIdentifier
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?queue_id: String,
+        ?job_id: String,
+        ?session_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor job_id: String?
+      attr_accessor session_id: String?
+    end
+
+    class BatchGetSessionItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?queue_id: String,
+        ?job_id: String,
+        ?session_id: String,
+        ?fleet_id: String,
+        ?worker_id: String,
+        ?started_at: Time,
+        ?lifecycle_status: String,
+        ?ended_at: Time,
+        ?target_lifecycle_status: String,
+        ?updated_at: Time,
+        ?updated_by: String,
+        ?log: Types::LogConfiguration,
+        ?host_properties: Types::HostPropertiesResponse,
+        ?worker_log: Types::LogConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor job_id: String?
+      attr_accessor session_id: String?
+      attr_accessor fleet_id: String?
+      attr_accessor worker_id: String?
+      attr_accessor started_at: Time?
+      attr_accessor lifecycle_status: String?
+      attr_accessor ended_at: Time?
+      attr_accessor target_lifecycle_status: String?
+      attr_accessor updated_at: Time?
+      attr_accessor updated_by: String?
+      attr_accessor log: Types::LogConfiguration?
+      attr_accessor host_properties: Types::HostPropertiesResponse?
+      attr_accessor worker_log: Types::LogConfiguration?
+    end
+
+    class BatchGetSessionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifiers: Array[Types::BatchGetSessionIdentifier],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifiers: Array[Types::BatchGetSessionIdentifier]?
+    end
+
+    class BatchGetSessionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sessions: Array[Types::BatchGetSessionItem],
+        ?errors: Array[Types::BatchGetSessionError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sessions: Array[Types::BatchGetSessionItem]?
+      attr_accessor errors: Array[Types::BatchGetSessionError]?
+    end
+
+    class BatchGetStepError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?queue_id: String,
+        ?job_id: String,
+        ?step_id: String,
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor job_id: String?
+      attr_accessor step_id: String?
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    module BatchGetStepErrorCode
+      InternalServerErrorException: String
+      ResourceNotFoundException: String
+      ValidationException: String
+      AccessDeniedException: String
+      ThrottlingException: String
+    end
+
+    class BatchGetStepIdentifier
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?queue_id: String,
+        ?job_id: String,
+        ?step_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor job_id: String?
+      attr_accessor step_id: String?
+    end
+
+    class BatchGetStepItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?queue_id: String,
+        ?job_id: String,
+        ?step_id: String,
+        ?name: String,
+        ?lifecycle_status: String,
+        ?lifecycle_status_message: String,
+        ?task_run_status: String,
+        ?task_run_status_counts: Hash[String, Integer],
+        ?task_failure_retry_count: Integer,
+        ?target_task_run_status: String,
+        ?created_at: Time,
+        ?created_by: String,
+        ?updated_at: Time,
+        ?updated_by: String,
+        ?started_at: Time,
+        ?ended_at: Time,
+        ?dependency_counts: Types::DependencyCounts,
+        ?required_capabilities: Types::StepRequiredCapabilities,
+        ?parameter_space: Types::ParameterSpace,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor job_id: String?
+      attr_accessor step_id: String?
+      attr_accessor name: String?
+      attr_accessor lifecycle_status: String?
+      attr_accessor lifecycle_status_message: String?
+      attr_accessor task_run_status: String?
+      attr_accessor task_run_status_counts: Hash[String, Integer]?
+      attr_accessor task_failure_retry_count: Integer?
+      attr_accessor target_task_run_status: String?
+      attr_accessor created_at: Time?
+      attr_accessor created_by: String?
+      attr_accessor updated_at: Time?
+      attr_accessor updated_by: String?
+      attr_accessor started_at: Time?
+      attr_accessor ended_at: Time?
+      attr_accessor dependency_counts: Types::DependencyCounts?
+      attr_accessor required_capabilities: Types::StepRequiredCapabilities?
+      attr_accessor parameter_space: Types::ParameterSpace?
+      attr_accessor description: String?
+    end
+
+    class BatchGetStepRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifiers: Array[Types::BatchGetStepIdentifier],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifiers: Array[Types::BatchGetStepIdentifier]?
+    end
+
+    class BatchGetStepResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?steps: Array[Types::BatchGetStepItem],
+        ?errors: Array[Types::BatchGetStepError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor steps: Array[Types::BatchGetStepItem]?
+      attr_accessor errors: Array[Types::BatchGetStepError]?
+    end
+
+    class BatchGetTaskError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?queue_id: String,
+        ?job_id: String,
+        ?step_id: String,
+        ?task_id: String,
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor job_id: String?
+      attr_accessor step_id: String?
+      attr_accessor task_id: String?
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    module BatchGetTaskErrorCode
+      InternalServerErrorException: String
+      ResourceNotFoundException: String
+      ValidationException: String
+      AccessDeniedException: String
+      ThrottlingException: String
+    end
+
+    class BatchGetTaskIdentifier
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?queue_id: String,
+        ?job_id: String,
+        ?step_id: String,
+        ?task_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor job_id: String?
+      attr_accessor step_id: String?
+      attr_accessor task_id: String?
+    end
+
+    class BatchGetTaskItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?queue_id: String,
+        ?job_id: String,
+        ?step_id: String,
+        ?task_id: String,
+        ?created_at: Time,
+        ?created_by: String,
+        ?run_status: String,
+        ?target_run_status: String,
+        ?failure_retry_count: Integer,
+        ?started_at: Time,
+        ?ended_at: Time,
+        ?updated_at: Time,
+        ?updated_by: String,
+        ?latest_session_action_id: String,
+        ?parameters: Hash[String, Types::TaskParameterValue],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor job_id: String?
+      attr_accessor step_id: String?
+      attr_accessor task_id: String?
+      attr_accessor created_at: Time?
+      attr_accessor created_by: String?
+      attr_accessor run_status: String?
+      attr_accessor target_run_status: String?
+      attr_accessor failure_retry_count: Integer?
+      attr_accessor started_at: Time?
+      attr_accessor ended_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor updated_by: String?
+      attr_accessor latest_session_action_id: String?
+      attr_accessor parameters: Hash[String, Types::TaskParameterValue]?
+    end
+
+    class BatchGetTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifiers: Array[Types::BatchGetTaskIdentifier],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifiers: Array[Types::BatchGetTaskIdentifier]?
+    end
+
+    class BatchGetTaskResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tasks: Array[Types::BatchGetTaskItem],
+        ?errors: Array[Types::BatchGetTaskError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tasks: Array[Types::BatchGetTaskItem]?
+      attr_accessor errors: Array[Types::BatchGetTaskError]?
+    end
+
+    class BatchGetWorkerError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?fleet_id: String,
+        ?worker_id: String,
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor fleet_id: String?
+      attr_accessor worker_id: String?
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    module BatchGetWorkerErrorCode
+      InternalServerErrorException: String
+      ResourceNotFoundException: String
+      ValidationException: String
+    end
+
+    class BatchGetWorkerIdentifier
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?fleet_id: String,
+        ?worker_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor fleet_id: String?
+      attr_accessor worker_id: String?
+    end
+
+    class BatchGetWorkerItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?fleet_id: String,
+        ?worker_id: String,
+        ?host_properties: Types::HostPropertiesResponse,
+        ?status: String,
+        ?log: Types::LogConfiguration,
+        ?created_at: Time,
+        ?created_by: String,
+        ?updated_at: Time,
+        ?updated_by: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor fleet_id: String?
+      attr_accessor worker_id: String?
+      attr_accessor host_properties: Types::HostPropertiesResponse?
+      attr_accessor status: String?
+      attr_accessor log: Types::LogConfiguration?
+      attr_accessor created_at: Time?
+      attr_accessor created_by: String?
+      attr_accessor updated_at: Time?
+      attr_accessor updated_by: String?
+    end
+
+    class BatchGetWorkerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifiers: Array[Types::BatchGetWorkerIdentifier],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifiers: Array[Types::BatchGetWorkerIdentifier]?
+    end
+
+    class BatchGetWorkerResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workers: Array[Types::BatchGetWorkerItem],
+        ?errors: Array[Types::BatchGetWorkerError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workers: Array[Types::BatchGetWorkerItem]?
+      attr_accessor errors: Array[Types::BatchGetWorkerError]?
+    end
+
+    class BatchUpdateJobError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?queue_id: String,
+        ?job_id: String,
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor job_id: String?
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    module BatchUpdateJobErrorCode
+      ConflictException: String
+      InternalServerErrorException: String
+      ResourceNotFoundException: String
+      ValidationException: String
+      AccessDeniedException: String
+      ThrottlingException: String
+    end
+
+    class BatchUpdateJobItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?queue_id: String,
+        ?job_id: String,
+        ?target_task_run_status: String,
+        ?priority: Integer,
+        ?max_failed_tasks_count: Integer,
+        ?max_retries_per_task: Integer,
+        ?lifecycle_status: String,
+        ?max_worker_count: Integer,
+        ?name: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor job_id: String?
+      attr_accessor target_task_run_status: String?
+      attr_accessor priority: Integer?
+      attr_accessor max_failed_tasks_count: Integer?
+      attr_accessor max_retries_per_task: Integer?
+      attr_accessor lifecycle_status: String?
+      attr_accessor max_worker_count: Integer?
+      attr_accessor name: String?
+      attr_accessor description: String?
+    end
+
+    class BatchUpdateJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?jobs: Array[Types::BatchUpdateJobItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor jobs: Array[Types::BatchUpdateJobItem]?
+    end
+
+    class BatchUpdateJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?errors: Array[Types::BatchUpdateJobError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor errors: Array[Types::BatchUpdateJobError]?
+    end
+
+    class BatchUpdateTaskError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?queue_id: String,
+        ?job_id: String,
+        ?step_id: String,
+        ?task_id: String,
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor job_id: String?
+      attr_accessor step_id: String?
+      attr_accessor task_id: String?
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    module BatchUpdateTaskErrorCode
+      ConflictException: String
+      InternalServerErrorException: String
+      ResourceNotFoundException: String
+      ValidationException: String
+      AccessDeniedException: String
+      ThrottlingException: String
+    end
+
+    class BatchUpdateTaskItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?queue_id: String,
+        ?job_id: String,
+        ?step_id: String,
+        ?task_id: String,
+        ?target_run_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor job_id: String?
+      attr_accessor step_id: String?
+      attr_accessor task_id: String?
+      attr_accessor target_run_status: String?
+    end
+
+    class BatchUpdateTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?tasks: Array[Types::BatchUpdateTaskItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor tasks: Array[Types::BatchUpdateTaskItem]?
+    end
+
+    class BatchUpdateTaskResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?errors: Array[Types::BatchUpdateTaskError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor errors: Array[Types::BatchUpdateTaskError]?
+    end
+
     class BudgetActionToAdd
       include Smithy::Schema::Structure
 
@@ -575,13 +1414,13 @@ module Aws::Deadline
         ?usage_tracking_resource: Types::UsageTrackingResource,
         ?status: String,
         ?display_name: String,
-        ?description: String,
         ?approximate_dollar_limit: Float,
         ?usages: Types::ConsumedUsages,
         ?created_by: String,
         ?created_at: Time,
         ?updated_by: String,
         ?updated_at: Time,
+        ?description: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -589,13 +1428,13 @@ module Aws::Deadline
       attr_accessor usage_tracking_resource: Types::UsageTrackingResource?
       attr_accessor status: String?
       attr_accessor display_name: String?
-      attr_accessor description: String?
       attr_accessor approximate_dollar_limit: Float?
       attr_accessor usages: Types::ConsumedUsages?
       attr_accessor created_by: String?
       attr_accessor created_at: Time?
       attr_accessor updated_by: String?
       attr_accessor updated_at: Time?
+      attr_accessor description: String?
     end
 
     module ComparisonOperator
@@ -605,6 +1444,8 @@ module Aws::Deadline
       GREATER_THAN: String
       LESS_THAN_EQUAL_TO: String
       LESS_THAN: String
+      ANY_EQUALS: String
+      ALL_NOT_EQUALS: String
     end
 
     module CompletedStatus
@@ -658,15 +1499,15 @@ module Aws::Deadline
 
       def initialize: (
         ?farm_id: String,
-        ?job_id: String,
         ?queue_id: String,
+        ?job_id: String,
         ?target_s3_location: Types::S3Location,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor farm_id: String?
-      attr_accessor job_id: String?
       attr_accessor queue_id: String?
+      attr_accessor job_id: String?
       attr_accessor target_s3_location: Types::S3Location?
     end
 
@@ -690,25 +1531,27 @@ module Aws::Deadline
       include Smithy::Schema::Structure
 
       def initialize: (
-        ?client_token: String,
         ?farm_id: String,
-        ?usage_tracking_resource: Types::UsageTrackingResource,
         ?display_name: String,
         ?description: String,
+        ?client_token: String,
+        ?usage_tracking_resource: Types::UsageTrackingResource,
         ?approximate_dollar_limit: Float,
         ?actions: Array[Types::BudgetActionToAdd],
         ?schedule: Types::BudgetSchedule,
+        ?tags: Hash[String, String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
-      attr_accessor client_token: String?
       attr_accessor farm_id: String?
-      attr_accessor usage_tracking_resource: Types::UsageTrackingResource?
       attr_accessor display_name: String?
       attr_accessor description: String?
+      attr_accessor client_token: String?
+      attr_accessor usage_tracking_resource: Types::UsageTrackingResource?
       attr_accessor approximate_dollar_limit: Float?
       attr_accessor actions: Array[Types::BudgetActionToAdd]?
       attr_accessor schedule: Types::BudgetSchedule?
+      attr_accessor tags: Hash[String, String]?
     end
 
     class CreateBudgetResponse
@@ -730,6 +1573,7 @@ module Aws::Deadline
         ?display_name: String,
         ?description: String,
         ?kms_key_arn: String,
+        ?cost_scale_factor: Float,
         ?tags: Hash[String, String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -738,6 +1582,7 @@ module Aws::Deadline
       attr_accessor display_name: String?
       attr_accessor description: String?
       attr_accessor kms_key_arn: String?
+      attr_accessor cost_scale_factor: Float?
       attr_accessor tags: Hash[String, String]?
     end
 
@@ -756,8 +1601,8 @@ module Aws::Deadline
       include Smithy::Schema::Structure
 
       def initialize: (
-        ?client_token: String,
         ?farm_id: String,
+        ?client_token: String,
         ?display_name: String,
         ?description: String,
         ?role_arn: String,
@@ -769,8 +1614,8 @@ module Aws::Deadline
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
-      attr_accessor client_token: String?
       attr_accessor farm_id: String?
+      attr_accessor client_token: String?
       attr_accessor display_name: String?
       attr_accessor description: String?
       attr_accessor role_arn: String?
@@ -810,6 +1655,9 @@ module Aws::Deadline
         ?max_retries_per_task: Integer,
         ?max_worker_count: Integer,
         ?source_job_id: String,
+        ?name_override: String,
+        ?description_override: String,
+        ?tags: Hash[String, String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -827,6 +1675,9 @@ module Aws::Deadline
       attr_accessor max_retries_per_task: Integer?
       attr_accessor max_worker_count: Integer?
       attr_accessor source_job_id: String?
+      attr_accessor name_override: String?
+      attr_accessor description_override: String?
+      attr_accessor tags: Hash[String, String]?
     end
 
     class CreateJobResponse
@@ -879,20 +1730,20 @@ module Aws::Deadline
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?farm_id: String,
         ?client_token: String,
         ?display_name: String,
         ?amount_requirement_name: String,
         ?max_count: Integer,
-        ?farm_id: String,
         ?description: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor farm_id: String?
       attr_accessor client_token: String?
       attr_accessor display_name: String?
       attr_accessor amount_requirement_name: String?
       attr_accessor max_count: Integer?
-      attr_accessor farm_id: String?
       attr_accessor description: String?
     end
 
@@ -914,6 +1765,7 @@ module Aws::Deadline
         ?client_token: String,
         ?display_name: String,
         ?identity_center_instance_arn: String,
+        ?identity_center_region: String,
         ?subdomain: String,
         ?role_arn: String,
         ?tags: Hash[String, String],
@@ -923,6 +1775,7 @@ module Aws::Deadline
       attr_accessor client_token: String?
       attr_accessor display_name: String?
       attr_accessor identity_center_instance_arn: String?
+      attr_accessor identity_center_region: String?
       attr_accessor subdomain: String?
       attr_accessor role_arn: String?
       attr_accessor tags: Hash[String, String]?
@@ -945,18 +1798,18 @@ module Aws::Deadline
       include Smithy::Schema::Structure
 
       def initialize: (
-        ?client_token: String,
         ?farm_id: String,
         ?queue_id: String,
+        ?client_token: String,
         ?priority: Integer,
         ?template_type: String,
         ?template: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
-      attr_accessor client_token: String?
       attr_accessor farm_id: String?
       attr_accessor queue_id: String?
+      attr_accessor client_token: String?
       attr_accessor priority: Integer?
       attr_accessor template_type: String?
       attr_accessor template: String?
@@ -1025,8 +1878,8 @@ module Aws::Deadline
       include Smithy::Schema::Structure
 
       def initialize: (
-        ?client_token: String,
         ?farm_id: String,
+        ?client_token: String,
         ?display_name: String,
         ?description: String,
         ?default_budget_action: String,
@@ -1036,11 +1889,12 @@ module Aws::Deadline
         ?required_file_system_location_names: Array[String],
         ?allowed_storage_profile_ids: Array[String],
         ?tags: Hash[String, String],
+        ?scheduling_configuration: Types::SchedulingConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
-      attr_accessor client_token: String?
       attr_accessor farm_id: String?
+      attr_accessor client_token: String?
       attr_accessor display_name: String?
       attr_accessor description: String?
       attr_accessor default_budget_action: String?
@@ -1050,6 +1904,7 @@ module Aws::Deadline
       attr_accessor required_file_system_location_names: Array[String]?
       attr_accessor allowed_storage_profile_ids: Array[String]?
       attr_accessor tags: Hash[String, String]?
+      attr_accessor scheduling_configuration: Types::SchedulingConfiguration?
     end
 
     class CreateQueueResponse
@@ -1067,16 +1922,16 @@ module Aws::Deadline
       include Smithy::Schema::Structure
 
       def initialize: (
-        ?client_token: String,
         ?farm_id: String,
+        ?client_token: String,
         ?display_name: String,
         ?os_family: String,
         ?file_system_locations: Array[Types::FileSystemLocation],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
-      attr_accessor client_token: String?
       attr_accessor farm_id: String?
+      attr_accessor client_token: String?
       attr_accessor display_name: String?
       attr_accessor os_family: String?
       attr_accessor file_system_locations: Array[Types::FileSystemLocation]?
@@ -1123,11 +1978,27 @@ module Aws::Deadline
       attr_accessor worker_id: String?
     end
 
+    class CustomerManagedAutoScalingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?standby_worker_count: Integer,
+        ?worker_idle_duration_seconds: Integer,
+        ?scale_out_workers_per_minute: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor standby_worker_count: Integer?
+      attr_accessor worker_idle_duration_seconds: Integer?
+      attr_accessor scale_out_workers_per_minute: Integer?
+    end
+
     class CustomerManagedFleetConfiguration
       include Smithy::Schema::Structure
 
       def initialize: (
         ?mode: String,
+        ?auto_scaling_configuration: Types::CustomerManagedAutoScalingConfiguration,
         ?worker_capabilities: Types::CustomerManagedWorkerCapabilities,
         ?storage_profile_id: String,
         ?tag_propagation_mode: String,
@@ -1135,6 +2006,7 @@ module Aws::Deadline
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor mode: String?
+      attr_accessor auto_scaling_configuration: Types::CustomerManagedAutoScalingConfiguration?
       attr_accessor worker_capabilities: Types::CustomerManagedWorkerCapabilities?
       attr_accessor storage_profile_id: String?
       attr_accessor tag_propagation_mode: String?
@@ -1245,15 +2117,15 @@ module Aws::Deadline
       include Smithy::Schema::Structure
 
       def initialize: (
-        ?client_token: String,
         ?farm_id: String,
         ?fleet_id: String,
+        ?client_token: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
-      attr_accessor client_token: String?
       attr_accessor farm_id: String?
       attr_accessor fleet_id: String?
+      attr_accessor client_token: String?
     end
 
     class DeleteFleetResponse
@@ -1465,6 +2337,30 @@ module Aws::Deadline
 
     end
 
+    class DeleteVolumeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?fleet_id: String,
+        ?volume_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor fleet_id: String?
+      attr_accessor volume_id: String?
+    end
+
+    class DeleteVolumeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
     class DeleteWorkerRequest
       include Smithy::Schema::Structure
 
@@ -1611,6 +2507,10 @@ module Aws::Deadline
 
     end
 
+    module EbsVolumeType
+      GP3: String
+    end
+
     class Ec2EbsVolume
       include Smithy::Schema::Structure
 
@@ -1640,6 +2540,8 @@ module Aws::Deadline
         ?environment_id: String,
         ?schema_version: String,
         ?template: Smithy::Schema::document,
+        ?extensions: Array[String],
+        ?resolved_symbol_table: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1647,6 +2549,8 @@ module Aws::Deadline
       attr_accessor environment_id: String?
       attr_accessor schema_version: String?
       attr_accessor template: Smithy::Schema::document?
+      attr_accessor extensions: Array[String]?
+      attr_accessor resolved_symbol_table: String?
     end
 
     class EnvironmentDetailsError
@@ -1898,6 +2802,21 @@ module Aws::Deadline
       attr_accessor membership_level: String?
     end
 
+    class FleetSoftwareAddOn
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    module FleetSoftwareAddOnName
+      DOCKER: String
+    end
+
     module FleetStatus
       ACTIVE: String
       CREATE_IN_PROGRESS: String
@@ -1967,15 +2886,15 @@ module Aws::Deadline
         ?usage_tracking_resource: Types::UsageTrackingResource,
         ?status: String,
         ?display_name: String,
-        ?description: String,
         ?approximate_dollar_limit: Float,
         ?usages: Types::ConsumedUsages,
-        ?actions: Array[Types::ResponseBudgetAction],
-        ?schedule: Types::BudgetSchedule,
         ?created_by: String,
         ?created_at: Time,
         ?updated_by: String,
         ?updated_at: Time,
+        ?description: String,
+        ?actions: Array[Types::ResponseBudgetAction],
+        ?schedule: Types::BudgetSchedule,
         ?queue_stopped_at: Time,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -1984,15 +2903,15 @@ module Aws::Deadline
       attr_accessor usage_tracking_resource: Types::UsageTrackingResource?
       attr_accessor status: String?
       attr_accessor display_name: String?
-      attr_accessor description: String?
       attr_accessor approximate_dollar_limit: Float?
       attr_accessor usages: Types::ConsumedUsages?
-      attr_accessor actions: Array[Types::ResponseBudgetAction]?
-      attr_accessor schedule: Types::BudgetSchedule?
       attr_accessor created_by: String?
       attr_accessor created_at: Time?
       attr_accessor updated_by: String?
       attr_accessor updated_at: Time?
+      attr_accessor description: String?
+      attr_accessor actions: Array[Types::ResponseBudgetAction]?
+      attr_accessor schedule: Types::BudgetSchedule?
       attr_accessor queue_stopped_at: Time?
     end
 
@@ -2013,23 +2932,25 @@ module Aws::Deadline
       def initialize: (
         ?farm_id: String,
         ?display_name: String,
-        ?description: String,
         ?kms_key_arn: String,
         ?created_at: Time,
         ?created_by: String,
         ?updated_at: Time,
         ?updated_by: String,
+        ?description: String,
+        ?cost_scale_factor: Float,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor farm_id: String?
       attr_accessor display_name: String?
-      attr_accessor description: String?
       attr_accessor kms_key_arn: String?
       attr_accessor created_at: Time?
       attr_accessor created_by: String?
       attr_accessor updated_at: Time?
       attr_accessor updated_by: String?
+      attr_accessor description: String?
+      attr_accessor cost_scale_factor: Float?
     end
 
     class GetFleetRequest
@@ -2052,7 +2973,6 @@ module Aws::Deadline
         ?fleet_id: String,
         ?farm_id: String,
         ?display_name: String,
-        ?description: String,
         ?status: String,
         ?status_message: String,
         ?auto_scaling_status: String,
@@ -2061,20 +2981,20 @@ module Aws::Deadline
         ?min_worker_count: Integer,
         ?max_worker_count: Integer,
         ?configuration: Types::FleetConfiguration,
-        ?host_configuration: Types::HostConfiguration,
-        ?capabilities: Types::FleetCapabilities,
-        ?role_arn: String,
         ?created_at: Time,
         ?created_by: String,
         ?updated_at: Time,
         ?updated_by: String,
+        ?description: String,
+        ?host_configuration: Types::HostConfiguration,
+        ?capabilities: Types::FleetCapabilities,
+        ?role_arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor fleet_id: String?
       attr_accessor farm_id: String?
       attr_accessor display_name: String?
-      attr_accessor description: String?
       attr_accessor status: String?
       attr_accessor status_message: String?
       attr_accessor auto_scaling_status: String?
@@ -2083,13 +3003,14 @@ module Aws::Deadline
       attr_accessor min_worker_count: Integer?
       attr_accessor max_worker_count: Integer?
       attr_accessor configuration: Types::FleetConfiguration?
-      attr_accessor host_configuration: Types::HostConfiguration?
-      attr_accessor capabilities: Types::FleetCapabilities?
-      attr_accessor role_arn: String?
       attr_accessor created_at: Time?
       attr_accessor created_by: String?
       attr_accessor updated_at: Time?
       attr_accessor updated_by: String?
+      attr_accessor description: String?
+      attr_accessor host_configuration: Types::HostConfiguration?
+      attr_accessor capabilities: Types::FleetCapabilities?
+      attr_accessor role_arn: String?
     end
 
     class GetJobEntityError
@@ -2241,30 +3162,30 @@ module Aws::Deadline
       include Smithy::Schema::Structure
 
       def initialize: (
-        ?display_name: String,
-        ?amount_requirement_name: String,
-        ?max_count: Integer,
+        ?farm_id: String,
+        ?limit_id: String,
+        ?current_count: Integer,
         ?created_at: Time,
         ?created_by: String,
         ?updated_at: Time,
         ?updated_by: String,
-        ?farm_id: String,
-        ?limit_id: String,
-        ?current_count: Integer,
+        ?display_name: String,
+        ?amount_requirement_name: String,
+        ?max_count: Integer,
         ?description: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
-      attr_accessor display_name: String?
-      attr_accessor amount_requirement_name: String?
-      attr_accessor max_count: Integer?
+      attr_accessor farm_id: String?
+      attr_accessor limit_id: String?
+      attr_accessor current_count: Integer?
       attr_accessor created_at: Time?
       attr_accessor created_by: String?
       attr_accessor updated_at: Time?
       attr_accessor updated_by: String?
-      attr_accessor farm_id: String?
-      attr_accessor limit_id: String?
-      attr_accessor current_count: Integer?
+      attr_accessor display_name: String?
+      attr_accessor amount_requirement_name: String?
+      attr_accessor max_count: Integer?
       attr_accessor description: String?
     end
 
@@ -2289,6 +3210,7 @@ module Aws::Deadline
         ?url: String,
         ?role_arn: String,
         ?identity_center_instance_arn: String,
+        ?identity_center_region: String,
         ?identity_center_application_arn: String,
         ?created_at: Time,
         ?created_by: String,
@@ -2303,11 +3225,34 @@ module Aws::Deadline
       attr_accessor url: String?
       attr_accessor role_arn: String?
       attr_accessor identity_center_instance_arn: String?
+      attr_accessor identity_center_region: String?
       attr_accessor identity_center_application_arn: String?
       attr_accessor created_at: Time?
       attr_accessor created_by: String?
       attr_accessor updated_at: Time?
       attr_accessor updated_by: String?
+    end
+
+    class GetMonitorSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monitor_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monitor_id: String?
+    end
+
+    class GetMonitorSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?settings: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor settings: Hash[String, String]?
     end
 
     class GetQueueEnvironmentRequest
@@ -2409,23 +3354,23 @@ module Aws::Deadline
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?queue_id: String,
+        ?limit_id: String,
+        ?status: String,
         ?created_at: Time,
         ?created_by: String,
         ?updated_at: Time,
         ?updated_by: String,
-        ?queue_id: String,
-        ?limit_id: String,
-        ?status: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor queue_id: String?
+      attr_accessor limit_id: String?
+      attr_accessor status: String?
       attr_accessor created_at: Time?
       attr_accessor created_by: String?
       attr_accessor updated_at: Time?
       attr_accessor updated_by: String?
-      attr_accessor queue_id: String?
-      attr_accessor limit_id: String?
-      attr_accessor status: String?
     end
 
     class GetQueueRequest
@@ -2445,41 +3390,43 @@ module Aws::Deadline
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?farm_id: String,
         ?queue_id: String,
         ?display_name: String,
-        ?description: String,
-        ?farm_id: String,
         ?status: String,
         ?default_budget_action: String,
         ?blocked_reason: String,
+        ?created_at: Time,
+        ?created_by: String,
+        ?updated_at: Time,
+        ?updated_by: String,
+        ?description: String,
         ?job_attachment_settings: Types::JobAttachmentSettings,
         ?role_arn: String,
         ?required_file_system_location_names: Array[String],
         ?allowed_storage_profile_ids: Array[String],
         ?job_run_as_user: Types::JobRunAsUser,
-        ?created_at: Time,
-        ?created_by: String,
-        ?updated_at: Time,
-        ?updated_by: String,
+        ?scheduling_configuration: Types::SchedulingConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor farm_id: String?
       attr_accessor queue_id: String?
       attr_accessor display_name: String?
-      attr_accessor description: String?
-      attr_accessor farm_id: String?
       attr_accessor status: String?
       attr_accessor default_budget_action: String?
       attr_accessor blocked_reason: String?
+      attr_accessor created_at: Time?
+      attr_accessor created_by: String?
+      attr_accessor updated_at: Time?
+      attr_accessor updated_by: String?
+      attr_accessor description: String?
       attr_accessor job_attachment_settings: Types::JobAttachmentSettings?
       attr_accessor role_arn: String?
       attr_accessor required_file_system_location_names: Array[String]?
       attr_accessor allowed_storage_profile_ids: Array[String]?
       attr_accessor job_run_as_user: Types::JobRunAsUser?
-      attr_accessor created_at: Time?
-      attr_accessor created_by: String?
-      attr_accessor updated_at: Time?
-      attr_accessor updated_by: String?
+      attr_accessor scheduling_configuration: Types::SchedulingConfiguration?
     end
 
     class GetSessionActionRequest
@@ -2509,12 +3456,12 @@ module Aws::Deadline
         ?ended_at: Time,
         ?worker_updated_at: Time,
         ?progress_percent: Float,
+        ?manifests: Array[Types::TaskRunManifestPropertiesResponse],
         ?session_id: String,
         ?process_exit_code: Integer,
         ?progress_message: String,
-        ?definition: Types::SessionActionDefinition,
         ?acquired_limits: Array[Types::AcquiredLimit],
-        ?manifests: Array[Types::TaskRunManifestPropertiesResponse],
+        ?definition: Types::SessionActionDefinition,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2524,12 +3471,12 @@ module Aws::Deadline
       attr_accessor ended_at: Time?
       attr_accessor worker_updated_at: Time?
       attr_accessor progress_percent: Float?
+      attr_accessor manifests: Array[Types::TaskRunManifestPropertiesResponse]?
       attr_accessor session_id: String?
       attr_accessor process_exit_code: Integer?
       attr_accessor progress_message: String?
-      attr_accessor definition: Types::SessionActionDefinition?
       attr_accessor acquired_limits: Array[Types::AcquiredLimit]?
-      attr_accessor manifests: Array[Types::TaskRunManifestPropertiesResponse]?
+      attr_accessor definition: Types::SessionActionDefinition?
     end
 
     class GetSessionRequest
@@ -2557,12 +3504,12 @@ module Aws::Deadline
         ?fleet_id: String,
         ?worker_id: String,
         ?started_at: Time,
-        ?log: Types::LogConfiguration,
         ?lifecycle_status: String,
         ?ended_at: Time,
+        ?target_lifecycle_status: String,
         ?updated_at: Time,
         ?updated_by: String,
-        ?target_lifecycle_status: String,
+        ?log: Types::LogConfiguration,
         ?host_properties: Types::HostPropertiesResponse,
         ?worker_log: Types::LogConfiguration,
       ) -> void
@@ -2572,12 +3519,12 @@ module Aws::Deadline
       attr_accessor fleet_id: String?
       attr_accessor worker_id: String?
       attr_accessor started_at: Time?
-      attr_accessor log: Types::LogConfiguration?
       attr_accessor lifecycle_status: String?
       attr_accessor ended_at: Time?
+      attr_accessor target_lifecycle_status: String?
       attr_accessor updated_at: Time?
       attr_accessor updated_by: String?
-      attr_accessor target_lifecycle_status: String?
+      attr_accessor log: Types::LogConfiguration?
       attr_accessor host_properties: Types::HostPropertiesResponse?
       attr_accessor worker_log: Types::LogConfiguration?
     end
@@ -2587,16 +3534,16 @@ module Aws::Deadline
 
       def initialize: (
         ?farm_id: String,
-        ?aggregation_id: String,
-        ?max_results: Integer,
         ?next_token: String,
+        ?max_results: Integer,
+        ?aggregation_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor farm_id: String?
-      attr_accessor aggregation_id: String?
-      attr_accessor max_results: Integer?
       attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor aggregation_id: String?
     end
 
     class GetSessionsStatisticsAggregationResponse
@@ -2604,16 +3551,16 @@ module Aws::Deadline
 
       def initialize: (
         ?statistics: Array[Types::Statistics],
-        ?next_token: String,
         ?status: String,
         ?status_message: String,
+        ?next_token: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor statistics: Array[Types::Statistics]?
-      attr_accessor next_token: String?
       attr_accessor status: String?
       attr_accessor status_message: String?
+      attr_accessor next_token: String?
     end
 
     class GetStepRequest
@@ -2777,12 +3724,12 @@ module Aws::Deadline
         ?run_status: String,
         ?target_run_status: String,
         ?failure_retry_count: Integer,
-        ?parameters: Hash[String, Types::TaskParameterValue],
         ?started_at: Time,
         ?ended_at: Time,
         ?updated_at: Time,
         ?updated_by: String,
         ?latest_session_action_id: String,
+        ?parameters: Hash[String, Types::TaskParameterValue],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2792,12 +3739,64 @@ module Aws::Deadline
       attr_accessor run_status: String?
       attr_accessor target_run_status: String?
       attr_accessor failure_retry_count: Integer?
-      attr_accessor parameters: Hash[String, Types::TaskParameterValue]?
       attr_accessor started_at: Time?
       attr_accessor ended_at: Time?
       attr_accessor updated_at: Time?
       attr_accessor updated_by: String?
       attr_accessor latest_session_action_id: String?
+      attr_accessor parameters: Hash[String, Types::TaskParameterValue]?
+    end
+
+    class GetVolumeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?fleet_id: String,
+        ?volume_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor fleet_id: String?
+      attr_accessor volume_id: String?
+    end
+
+    class GetVolumeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?volume_id: String,
+        ?farm_id: String,
+        ?fleet_id: String,
+        ?state: String,
+        ?size_gi_b: Integer,
+        ?availability_zone_id: String,
+        ?attached_worker_id: String,
+        ?volume_type: String,
+        ?iops: Integer,
+        ?throughput_mi_b: Integer,
+        ?created_at: Time,
+        ?last_assigned_at: Time,
+        ?last_released_at: Time,
+        ?expires_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor volume_id: String?
+      attr_accessor farm_id: String?
+      attr_accessor fleet_id: String?
+      attr_accessor state: String?
+      attr_accessor size_gi_b: Integer?
+      attr_accessor availability_zone_id: String?
+      attr_accessor attached_worker_id: String?
+      attr_accessor volume_type: String?
+      attr_accessor iops: Integer?
+      attr_accessor throughput_mi_b: Integer?
+      attr_accessor created_at: Time?
+      attr_accessor last_assigned_at: Time?
+      attr_accessor last_released_at: Time?
+      attr_accessor expires_at: Time?
     end
 
     class GetWorkerRequest
@@ -2975,23 +3974,25 @@ module Aws::Deadline
 
       def initialize: (
         ?job_id: String,
-        ?job_attachment_settings: Types::JobAttachmentSettings,
+        ?job_attachment_settings: Types::JobDetailsJobAttachmentSettings,
         ?job_run_as_user: Types::JobRunAsUser,
         ?log_group_name: String,
         ?queue_role_arn: String,
         ?parameters: Hash[String, Types::JobParameter],
         ?schema_version: String,
+        ?extensions: Array[String],
         ?path_mapping_rules: Array[Types::PathMappingRule],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor job_id: String?
-      attr_accessor job_attachment_settings: Types::JobAttachmentSettings?
+      attr_accessor job_attachment_settings: Types::JobDetailsJobAttachmentSettings?
       attr_accessor job_run_as_user: Types::JobRunAsUser?
       attr_accessor log_group_name: String?
       attr_accessor queue_role_arn: String?
       attr_accessor parameters: Hash[String, Types::JobParameter]?
       attr_accessor schema_version: String?
+      attr_accessor extensions: Array[String]?
       attr_accessor path_mapping_rules: Array[Types::PathMappingRule]?
     end
 
@@ -3019,6 +4020,19 @@ module Aws::Deadline
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor job_id: String?
+    end
+
+    class JobDetailsJobAttachmentSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_bucket_name: String,
+        ?root_prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_bucket_name: String?
+      attr_accessor root_prefix: String?
     end
 
     class JobEntity
@@ -3129,6 +4143,14 @@ module Aws::Deadline
         ?float: String,
         ?string: String,
         ?path: String,
+        ?bool: String,
+        ?range_expr: String,
+        ?string_list: Array[String],
+        ?path_list: Array[String],
+        ?int_list: Array[String],
+        ?float_list: Array[String],
+        ?bool_list: Array[String],
+        ?int_list_list: Array[Array[String]],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3136,6 +4158,14 @@ module Aws::Deadline
       attr_accessor float: String?
       attr_accessor string: String?
       attr_accessor path: String?
+      attr_accessor bool: String?
+      attr_accessor range_expr: String?
+      attr_accessor string_list: Array[String]?
+      attr_accessor path_list: Array[String]?
+      attr_accessor int_list: Array[String]?
+      attr_accessor float_list: Array[String]?
+      attr_accessor bool_list: Array[String]?
+      attr_accessor int_list_list: Array[Array[String]]?
 
       class Int < JobParameter
       end
@@ -3144,6 +4174,22 @@ module Aws::Deadline
       class String < JobParameter
       end
       class Path < JobParameter
+      end
+      class Bool < JobParameter
+      end
+      class RangeExpr < JobParameter
+      end
+      class StringList < JobParameter
+      end
+      class PathList < JobParameter
+      end
+      class IntList < JobParameter
+      end
+      class FloatList < JobParameter
+      end
+      class BoolList < JobParameter
+      end
+      class IntListList < JobParameter
       end
       class Unknown < JobParameter
       end
@@ -3304,29 +4350,29 @@ module Aws::Deadline
       include Smithy::Schema::Structure
 
       def initialize: (
-        ?display_name: String,
-        ?amount_requirement_name: String,
-        ?max_count: Integer,
+        ?farm_id: String,
+        ?limit_id: String,
+        ?current_count: Integer,
         ?created_at: Time,
         ?created_by: String,
         ?updated_at: Time,
         ?updated_by: String,
-        ?farm_id: String,
-        ?limit_id: String,
-        ?current_count: Integer,
+        ?display_name: String,
+        ?amount_requirement_name: String,
+        ?max_count: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
-      attr_accessor display_name: String?
-      attr_accessor amount_requirement_name: String?
-      attr_accessor max_count: Integer?
+      attr_accessor farm_id: String?
+      attr_accessor limit_id: String?
+      attr_accessor current_count: Integer?
       attr_accessor created_at: Time?
       attr_accessor created_by: String?
       attr_accessor updated_at: Time?
       attr_accessor updated_by: String?
-      attr_accessor farm_id: String?
-      attr_accessor limit_id: String?
-      attr_accessor current_count: Integer?
+      attr_accessor display_name: String?
+      attr_accessor amount_requirement_name: String?
+      attr_accessor max_count: Integer?
     end
 
     class ListAvailableMeteredProductsRequest
@@ -3359,15 +4405,15 @@ module Aws::Deadline
       include Smithy::Schema::Structure
 
       def initialize: (
-        ?next_token: String,
         ?farm_id: String,
+        ?next_token: String,
         ?max_results: Integer,
         ?status: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
-      attr_accessor next_token: String?
       attr_accessor farm_id: String?
+      attr_accessor next_token: String?
       attr_accessor max_results: Integer?
       attr_accessor status: String?
     end
@@ -3376,13 +4422,13 @@ module Aws::Deadline
       include Smithy::Schema::Structure
 
       def initialize: (
-        ?next_token: String,
         ?budgets: Array[Types::BudgetSummary],
+        ?next_token: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
-      attr_accessor next_token: String?
       attr_accessor budgets: Array[Types::BudgetSummary]?
+      attr_accessor next_token: String?
     end
 
     class ListFarmMembersRequest
@@ -3418,27 +4464,27 @@ module Aws::Deadline
 
       def initialize: (
         ?next_token: String,
-        ?principal_id: String,
         ?max_results: Integer,
+        ?principal_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor next_token: String?
-      attr_accessor principal_id: String?
       attr_accessor max_results: Integer?
+      attr_accessor principal_id: String?
     end
 
     class ListFarmsResponse
       include Smithy::Schema::Structure
 
       def initialize: (
-        ?next_token: String,
         ?farms: Array[Types::FarmSummary],
+        ?next_token: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
-      attr_accessor next_token: String?
       attr_accessor farms: Array[Types::FarmSummary]?
+      attr_accessor next_token: String?
     end
 
     class ListFleetMembersRequest
@@ -3476,20 +4522,20 @@ module Aws::Deadline
 
       def initialize: (
         ?farm_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
         ?principal_id: String,
         ?display_name: String,
         ?status: String,
-        ?next_token: String,
-        ?max_results: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor farm_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
       attr_accessor principal_id: String?
       attr_accessor display_name: String?
       attr_accessor status: String?
-      attr_accessor next_token: String?
-      attr_accessor max_results: Integer?
     end
 
     class ListFleetsResponse
@@ -3542,16 +4588,16 @@ module Aws::Deadline
 
       def initialize: (
         ?farm_id: String,
-        ?job_id: String,
         ?queue_id: String,
+        ?job_id: String,
         ?next_token: String,
         ?max_results: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor farm_id: String?
-      attr_accessor job_id: String?
       attr_accessor queue_id: String?
+      attr_accessor job_id: String?
       attr_accessor next_token: String?
       attr_accessor max_results: Integer?
     end
@@ -3574,18 +4620,18 @@ module Aws::Deadline
 
       def initialize: (
         ?farm_id: String,
-        ?principal_id: String,
         ?queue_id: String,
         ?next_token: String,
         ?max_results: Integer,
+        ?principal_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor farm_id: String?
-      attr_accessor principal_id: String?
       attr_accessor queue_id: String?
       attr_accessor next_token: String?
       attr_accessor max_results: Integer?
+      attr_accessor principal_id: String?
     end
 
     class ListJobsResponse
@@ -3655,6 +4701,40 @@ module Aws::Deadline
       attr_accessor next_token: String?
     end
 
+    class ListMembershipsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?principal_id: String,
+        ?identity_store_id: String,
+        ?identity_center_region: String,
+        ?resource_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor principal_id: String?
+      attr_accessor identity_store_id: String?
+      attr_accessor identity_center_region: String?
+      attr_accessor resource_types: Array[String]?
+    end
+
+    class ListMembershipsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?memberships: Array[Types::MembershipSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor memberships: Array[Types::MembershipSummary]?
+      attr_accessor next_token: String?
+    end
+
     class ListMeteredProductsRequest
       include Smithy::Schema::Structure
 
@@ -3700,13 +4780,13 @@ module Aws::Deadline
       include Smithy::Schema::Structure
 
       def initialize: (
-        ?next_token: String,
         ?monitors: Array[Types::MonitorSummary],
+        ?next_token: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
-      attr_accessor next_token: String?
       attr_accessor monitors: Array[Types::MonitorSummary]?
+      attr_accessor next_token: String?
     end
 
     class ListQueueEnvironmentsRequest
@@ -3744,18 +4824,18 @@ module Aws::Deadline
 
       def initialize: (
         ?farm_id: String,
-        ?queue_id: String,
-        ?fleet_id: String,
         ?next_token: String,
         ?max_results: Integer,
+        ?queue_id: String,
+        ?fleet_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor farm_id: String?
-      attr_accessor queue_id: String?
-      attr_accessor fleet_id: String?
       attr_accessor next_token: String?
       attr_accessor max_results: Integer?
+      attr_accessor queue_id: String?
+      attr_accessor fleet_id: String?
     end
 
     class ListQueueFleetAssociationsResponse
@@ -3776,18 +4856,18 @@ module Aws::Deadline
 
       def initialize: (
         ?farm_id: String,
-        ?queue_id: String,
-        ?limit_id: String,
         ?next_token: String,
         ?max_results: Integer,
+        ?queue_id: String,
+        ?limit_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor farm_id: String?
-      attr_accessor queue_id: String?
-      attr_accessor limit_id: String?
       attr_accessor next_token: String?
       attr_accessor max_results: Integer?
+      attr_accessor queue_id: String?
+      attr_accessor limit_id: String?
     end
 
     class ListQueueLimitAssociationsResponse
@@ -3838,18 +4918,18 @@ module Aws::Deadline
 
       def initialize: (
         ?farm_id: String,
-        ?principal_id: String,
-        ?status: String,
         ?next_token: String,
         ?max_results: Integer,
+        ?principal_id: String,
+        ?status: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor farm_id: String?
-      attr_accessor principal_id: String?
-      attr_accessor status: String?
       attr_accessor next_token: String?
       attr_accessor max_results: Integer?
+      attr_accessor principal_id: String?
+      attr_accessor status: String?
     end
 
     class ListQueuesResponse
@@ -3872,20 +4952,20 @@ module Aws::Deadline
         ?farm_id: String,
         ?queue_id: String,
         ?job_id: String,
-        ?session_id: String,
-        ?task_id: String,
         ?next_token: String,
         ?max_results: Integer,
+        ?session_id: String,
+        ?task_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor farm_id: String?
       attr_accessor queue_id: String?
       attr_accessor job_id: String?
-      attr_accessor session_id: String?
-      attr_accessor task_id: String?
       attr_accessor next_token: String?
       attr_accessor max_results: Integer?
+      attr_accessor session_id: String?
+      attr_accessor task_id: String?
     end
 
     class ListSessionActionsResponse
@@ -4179,6 +5259,36 @@ module Aws::Deadline
       attr_accessor next_token: String?
     end
 
+    class ListVolumesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?farm_id: String,
+        ?fleet_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm_id: String?
+      attr_accessor fleet_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListVolumesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?volumes: Array[Types::VolumeSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor volumes: Array[Types::VolumeSummary]?
+      attr_accessor next_token: String?
+    end
+
     class ListWorkersRequest
       include Smithy::Schema::Structure
 
@@ -4200,13 +5310,13 @@ module Aws::Deadline
       include Smithy::Schema::Structure
 
       def initialize: (
-        ?next_token: String,
         ?workers: Array[Types::WorkerSummary],
+        ?next_token: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
-      attr_accessor next_token: String?
       attr_accessor workers: Array[Types::WorkerSummary]?
+      attr_accessor next_token: String?
     end
 
     class LogConfiguration
@@ -4259,6 +5369,41 @@ module Aws::Deadline
       MANAGER: String
     end
 
+    module MembershipResourceType
+      FARM: String
+      QUEUE: String
+      FLEET: String
+      JOB: String
+    end
+
+    class MembershipSummary
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?farm: Types::FarmMember,
+        ?queue: Types::QueueMember,
+        ?fleet: Types::FleetMember,
+        ?job: Types::JobMember,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor farm: Types::FarmMember?
+      attr_accessor queue: Types::QueueMember?
+      attr_accessor fleet: Types::FleetMember?
+      attr_accessor job: Types::JobMember?
+
+      class Farm < MembershipSummary
+      end
+      class Queue < MembershipSummary
+      end
+      class Fleet < MembershipSummary
+      end
+      class Job < MembershipSummary
+      end
+      class Unknown < MembershipSummary
+      end
+    end
+
     class MemoryMiBRange
       include Smithy::Schema::Structure
 
@@ -4299,6 +5444,7 @@ module Aws::Deadline
         ?url: String,
         ?role_arn: String,
         ?identity_center_instance_arn: String,
+        ?identity_center_region: String,
         ?identity_center_application_arn: String,
         ?created_at: Time,
         ?created_by: String,
@@ -4313,6 +5459,7 @@ module Aws::Deadline
       attr_accessor url: String?
       attr_accessor role_arn: String?
       attr_accessor identity_center_instance_arn: String?
+      attr_accessor identity_center_region: String?
       attr_accessor identity_center_application_arn: String?
       attr_accessor created_at: Time?
       attr_accessor created_by: String?
@@ -4388,6 +5535,25 @@ module Aws::Deadline
       MONTHLY: String
     end
 
+    class PersistentVolumeConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?size_gi_b: Integer,
+        ?iops: Integer,
+        ?throughput_mi_b: Integer,
+        ?mount_path: String,
+        ?last_used_ttl_hours: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor size_gi_b: Integer?
+      attr_accessor iops: Integer?
+      attr_accessor throughput_mi_b: Integer?
+      attr_accessor mount_path: String?
+      attr_accessor last_used_ttl_hours: Integer?
+    end
+
     class PosixUser
       include Smithy::Schema::Structure
 
@@ -4399,6 +5565,26 @@ module Aws::Deadline
 
       attr_accessor user: String?
       attr_accessor group: String?
+    end
+
+    class PriorityBalancedSchedulingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rendering_task_buffer: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rendering_task_buffer: Integer?
+    end
+
+    class PriorityFifoSchedulingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
     end
 
     class PutMeteredProductRequest
@@ -4484,23 +5670,23 @@ module Aws::Deadline
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?queue_id: String,
+        ?limit_id: String,
+        ?status: String,
         ?created_at: Time,
         ?created_by: String,
         ?updated_at: Time,
         ?updated_by: String,
-        ?queue_id: String,
-        ?limit_id: String,
-        ?status: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor queue_id: String?
+      attr_accessor limit_id: String?
+      attr_accessor status: String?
       attr_accessor created_at: Time?
       attr_accessor created_by: String?
       attr_accessor updated_at: Time?
       attr_accessor updated_by: String?
-      attr_accessor queue_id: String?
-      attr_accessor limit_id: String?
-      attr_accessor status: String?
     end
 
     class QueueMember
@@ -4559,6 +5745,11 @@ module Aws::Deadline
       attr_accessor updated_by: String?
     end
 
+    module RangeConstraint
+      CONTIGUOUS: String
+      NONCONTIGUOUS: String
+    end
+
     class ResourceNotFoundException
       include Smithy::Schema::Structure
 
@@ -4609,6 +5800,80 @@ module Aws::Deadline
       attr_accessor key: String?
     end
 
+    class SchedulingConfiguration
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?priority_fifo: Types::PriorityFifoSchedulingConfiguration,
+        ?priority_balanced: Types::PriorityBalancedSchedulingConfiguration,
+        ?weighted_balanced: Types::WeightedBalancedSchedulingConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor priority_fifo: Types::PriorityFifoSchedulingConfiguration?
+      attr_accessor priority_balanced: Types::PriorityBalancedSchedulingConfiguration?
+      attr_accessor weighted_balanced: Types::WeightedBalancedSchedulingConfiguration?
+
+      class PriorityFifo < SchedulingConfiguration
+      end
+      class PriorityBalanced < SchedulingConfiguration
+      end
+      class WeightedBalanced < SchedulingConfiguration
+      end
+      class Unknown < SchedulingConfiguration
+      end
+    end
+
+    class SchedulingMaxPriorityOverride
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?always_schedule_first: Types::SchedulingMaxPriorityOverrideAlwaysScheduleFirst,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor always_schedule_first: Types::SchedulingMaxPriorityOverrideAlwaysScheduleFirst?
+
+      class AlwaysScheduleFirst < SchedulingMaxPriorityOverride
+      end
+      class Unknown < SchedulingMaxPriorityOverride
+      end
+    end
+
+    class SchedulingMaxPriorityOverrideAlwaysScheduleFirst
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class SchedulingMinPriorityOverride
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?always_schedule_last: Types::SchedulingMinPriorityOverrideAlwaysScheduleLast,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor always_schedule_last: Types::SchedulingMinPriorityOverrideAlwaysScheduleLast?
+
+      class AlwaysScheduleLast < SchedulingMinPriorityOverride
+      end
+      class Unknown < SchedulingMinPriorityOverride
+      end
+    end
+
+    class SchedulingMinPriorityOverrideAlwaysScheduleLast
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
     class SearchFilterExpression
       include Smithy::Schema::Union
 
@@ -4617,6 +5882,7 @@ module Aws::Deadline
         ?parameter_filter: Types::ParameterFilterExpression,
         ?search_term_filter: Types::SearchTermFilterExpression,
         ?string_filter: Types::StringFilterExpression,
+        ?string_list_filter: Types::StringListFilterExpression,
         ?group_filter: Types::SearchGroupedFilterExpressions,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -4625,6 +5891,7 @@ module Aws::Deadline
       attr_accessor parameter_filter: Types::ParameterFilterExpression?
       attr_accessor search_term_filter: Types::SearchTermFilterExpression?
       attr_accessor string_filter: Types::StringFilterExpression?
+      attr_accessor string_list_filter: Types::StringListFilterExpression?
       attr_accessor group_filter: Types::SearchGroupedFilterExpressions?
 
       class DateTimeFilter < SearchFilterExpression
@@ -4634,6 +5901,8 @@ module Aws::Deadline
       class SearchTermFilter < SearchFilterExpression
       end
       class StringFilter < SearchFilterExpression
+      end
+      class StringListFilter < SearchFilterExpression
       end
       class GroupFilter < SearchFilterExpression
       end
@@ -4659,20 +5928,20 @@ module Aws::Deadline
 
       def initialize: (
         ?farm_id: String,
-        ?queue_ids: Array[String],
         ?filter_expressions: Types::SearchGroupedFilterExpressions,
         ?sort_expressions: Array[Types::SearchSortExpression],
         ?item_offset: Integer,
         ?page_size: Integer,
+        ?queue_ids: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor farm_id: String?
-      attr_accessor queue_ids: Array[String]?
       attr_accessor filter_expressions: Types::SearchGroupedFilterExpressions?
       attr_accessor sort_expressions: Array[Types::SearchSortExpression]?
       attr_accessor item_offset: Integer?
       attr_accessor page_size: Integer?
+      attr_accessor queue_ids: Array[String]?
     end
 
     class SearchJobsResponse
@@ -4719,22 +5988,22 @@ module Aws::Deadline
 
       def initialize: (
         ?farm_id: String,
-        ?queue_ids: Array[String],
-        ?job_id: String,
         ?filter_expressions: Types::SearchGroupedFilterExpressions,
         ?sort_expressions: Array[Types::SearchSortExpression],
         ?item_offset: Integer,
         ?page_size: Integer,
+        ?queue_ids: Array[String],
+        ?job_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor farm_id: String?
-      attr_accessor queue_ids: Array[String]?
-      attr_accessor job_id: String?
       attr_accessor filter_expressions: Types::SearchGroupedFilterExpressions?
       attr_accessor sort_expressions: Array[Types::SearchSortExpression]?
       attr_accessor item_offset: Integer?
       attr_accessor page_size: Integer?
+      attr_accessor queue_ids: Array[String]?
+      attr_accessor job_id: String?
     end
 
     class SearchStepsResponse
@@ -4757,22 +6026,22 @@ module Aws::Deadline
 
       def initialize: (
         ?farm_id: String,
-        ?queue_ids: Array[String],
-        ?job_id: String,
         ?filter_expressions: Types::SearchGroupedFilterExpressions,
         ?sort_expressions: Array[Types::SearchSortExpression],
         ?item_offset: Integer,
         ?page_size: Integer,
+        ?queue_ids: Array[String],
+        ?job_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor farm_id: String?
-      attr_accessor queue_ids: Array[String]?
-      attr_accessor job_id: String?
       attr_accessor filter_expressions: Types::SearchGroupedFilterExpressions?
       attr_accessor sort_expressions: Array[Types::SearchSortExpression]?
       attr_accessor item_offset: Integer?
       attr_accessor page_size: Integer?
+      attr_accessor queue_ids: Array[String]?
+      attr_accessor job_id: String?
     end
 
     class SearchTasksResponse
@@ -4813,20 +6082,20 @@ module Aws::Deadline
 
       def initialize: (
         ?farm_id: String,
-        ?fleet_ids: Array[String],
         ?filter_expressions: Types::SearchGroupedFilterExpressions,
         ?sort_expressions: Array[Types::SearchSortExpression],
         ?item_offset: Integer,
         ?page_size: Integer,
+        ?fleet_ids: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor farm_id: String?
-      attr_accessor fleet_ids: Array[String]?
       attr_accessor filter_expressions: Types::SearchGroupedFilterExpressions?
       attr_accessor sort_expressions: Array[Types::SearchSortExpression]?
       attr_accessor item_offset: Integer?
       attr_accessor page_size: Integer?
+      attr_accessor fleet_ids: Array[String]?
     end
 
     class SearchWorkersResponse
@@ -4844,6 +6113,21 @@ module Aws::Deadline
       attr_accessor total_results: Integer?
     end
 
+    class ServiceManagedEc2AutoScalingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?standby_worker_count: Integer,
+        ?worker_idle_duration_seconds: Integer,
+        ?scale_out_workers_per_minute: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor standby_worker_count: Integer?
+      attr_accessor worker_idle_duration_seconds: Integer?
+      attr_accessor scale_out_workers_per_minute: Integer?
+    end
+
     class ServiceManagedEc2FleetConfiguration
       include Smithy::Schema::Structure
 
@@ -4852,6 +6136,8 @@ module Aws::Deadline
         ?instance_market_options: Types::ServiceManagedEc2InstanceMarketOptions,
         ?vpc_configuration: Types::VpcConfiguration,
         ?storage_profile_id: String,
+        ?persistent_volume_configuration: Types::PersistentVolumeConfiguration,
+        ?auto_scaling_configuration: Types::ServiceManagedEc2AutoScalingConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4859,6 +6145,8 @@ module Aws::Deadline
       attr_accessor instance_market_options: Types::ServiceManagedEc2InstanceMarketOptions?
       attr_accessor vpc_configuration: Types::VpcConfiguration?
       attr_accessor storage_profile_id: String?
+      attr_accessor persistent_volume_configuration: Types::PersistentVolumeConfiguration?
+      attr_accessor auto_scaling_configuration: Types::ServiceManagedEc2AutoScalingConfiguration?
     end
 
     class ServiceManagedEc2InstanceCapabilities
@@ -4875,6 +6163,7 @@ module Aws::Deadline
         ?excluded_instance_types: Array[String],
         ?custom_amounts: Array[Types::FleetAmountCapability],
         ?custom_attributes: Array[Types::FleetAttributeCapability],
+        ?software_add_ons: Array[Types::FleetSoftwareAddOn],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4888,6 +6177,7 @@ module Aws::Deadline
       attr_accessor excluded_instance_types: Array[String]?
       attr_accessor custom_amounts: Array[Types::FleetAmountCapability]?
       attr_accessor custom_attributes: Array[Types::FleetAttributeCapability]?
+      attr_accessor software_add_ons: Array[Types::FleetSoftwareAddOn]?
     end
 
     class ServiceManagedEc2InstanceMarketOptions
@@ -5015,8 +6305,8 @@ module Aws::Deadline
         ?ended_at: Time,
         ?worker_updated_at: Time,
         ?progress_percent: Float,
-        ?definition: Types::SessionActionDefinitionSummary,
         ?manifests: Array[Types::TaskRunManifestPropertiesResponse],
+        ?definition: Types::SessionActionDefinitionSummary,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -5026,8 +6316,8 @@ module Aws::Deadline
       attr_accessor ended_at: Time?
       attr_accessor worker_updated_at: Time?
       attr_accessor progress_percent: Float?
-      attr_accessor definition: Types::SessionActionDefinitionSummary?
       attr_accessor manifests: Array[Types::TaskRunManifestPropertiesResponse]?
+      attr_accessor definition: Types::SessionActionDefinitionSummary?
     end
 
     module SessionLifecycleStatus
@@ -5052,9 +6342,9 @@ module Aws::Deadline
         ?started_at: Time,
         ?lifecycle_status: String,
         ?ended_at: Time,
+        ?target_lifecycle_status: String,
         ?updated_at: Time,
         ?updated_by: String,
-        ?target_lifecycle_status: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -5064,9 +6354,9 @@ module Aws::Deadline
       attr_accessor started_at: Time?
       attr_accessor lifecycle_status: String?
       attr_accessor ended_at: Time?
+      attr_accessor target_lifecycle_status: String?
       attr_accessor updated_at: Time?
       attr_accessor updated_by: String?
-      attr_accessor target_lifecycle_status: String?
     end
 
     module SessionsStatisticsAggregationStatus
@@ -5256,6 +6546,8 @@ module Aws::Deadline
         ?schema_version: String,
         ?template: Smithy::Schema::document,
         ?dependencies: Array[String],
+        ?extensions: Array[String],
+        ?resolved_symbol_table: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -5264,6 +6556,8 @@ module Aws::Deadline
       attr_accessor schema_version: String?
       attr_accessor template: Smithy::Schema::document?
       attr_accessor dependencies: Array[String]?
+      attr_accessor extensions: Array[String]?
+      attr_accessor resolved_symbol_table: String?
     end
 
     class StepDetailsError
@@ -5309,11 +6603,28 @@ module Aws::Deadline
       def initialize: (
         ?name: String,
         ?type: String,
+        ?chunks: Types::StepParameterChunks,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor name: String?
       attr_accessor type: String?
+      attr_accessor chunks: Types::StepParameterChunks?
+    end
+
+    class StepParameterChunks
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?default_task_count: Integer,
+        ?target_runtime_seconds: Integer,
+        ?range_constraint: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor default_task_count: Integer?
+      attr_accessor target_runtime_seconds: Integer?
+      attr_accessor range_constraint: String?
     end
 
     module StepParameterType
@@ -5462,6 +6773,21 @@ module Aws::Deadline
       attr_accessor name: String?
       attr_accessor operator: String?
       attr_accessor value: String?
+    end
+
+    class StringListFilterExpression
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?operator: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor operator: String?
+      attr_accessor values: Array[String]?
     end
 
     class SyncInputJobAttachmentsSessionActionDefinition
@@ -5632,6 +6958,7 @@ module Aws::Deadline
         ?ended_at: Time,
         ?updated_at: Time,
         ?updated_by: String,
+        ?latest_session_action_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -5647,6 +6974,7 @@ module Aws::Deadline
       attr_accessor ended_at: Time?
       attr_accessor updated_at: Time?
       attr_accessor updated_by: String?
+      attr_accessor latest_session_action_id: String?
     end
 
     class TaskSummary
@@ -5659,12 +6987,12 @@ module Aws::Deadline
         ?run_status: String,
         ?target_run_status: String,
         ?failure_retry_count: Integer,
-        ?parameters: Hash[String, Types::TaskParameterValue],
         ?started_at: Time,
         ?ended_at: Time,
         ?updated_at: Time,
         ?updated_by: String,
         ?latest_session_action_id: String,
+        ?parameters: Hash[String, Types::TaskParameterValue],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -5674,12 +7002,12 @@ module Aws::Deadline
       attr_accessor run_status: String?
       attr_accessor target_run_status: String?
       attr_accessor failure_retry_count: Integer?
-      attr_accessor parameters: Hash[String, Types::TaskParameterValue]?
       attr_accessor started_at: Time?
       attr_accessor ended_at: Time?
       attr_accessor updated_at: Time?
       attr_accessor updated_by: String?
       attr_accessor latest_session_action_id: String?
+      attr_accessor parameters: Hash[String, Types::TaskParameterValue]?
     end
 
     module TaskTargetRunStatus
@@ -5736,9 +7064,9 @@ module Aws::Deadline
       include Smithy::Schema::Structure
 
       def initialize: (
-        ?client_token: String,
         ?farm_id: String,
         ?budget_id: String,
+        ?client_token: String,
         ?display_name: String,
         ?description: String,
         ?status: String,
@@ -5749,9 +7077,9 @@ module Aws::Deadline
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
-      attr_accessor client_token: String?
       attr_accessor farm_id: String?
       attr_accessor budget_id: String?
+      attr_accessor client_token: String?
       attr_accessor display_name: String?
       attr_accessor description: String?
       attr_accessor status: String?
@@ -5777,12 +7105,14 @@ module Aws::Deadline
         ?farm_id: String,
         ?display_name: String,
         ?description: String,
+        ?cost_scale_factor: Float,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor farm_id: String?
       attr_accessor display_name: String?
       attr_accessor description: String?
+      attr_accessor cost_scale_factor: Float?
     end
 
     class UpdateFarmResponse
@@ -5798,9 +7128,9 @@ module Aws::Deadline
       include Smithy::Schema::Structure
 
       def initialize: (
-        ?client_token: String,
         ?farm_id: String,
         ?fleet_id: String,
+        ?client_token: String,
         ?display_name: String,
         ?description: String,
         ?role_arn: String,
@@ -5811,9 +7141,9 @@ module Aws::Deadline
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
-      attr_accessor client_token: String?
       attr_accessor farm_id: String?
       attr_accessor fleet_id: String?
+      attr_accessor client_token: String?
       attr_accessor display_name: String?
       attr_accessor description: String?
       attr_accessor role_arn: String?
@@ -5840,6 +7170,9 @@ module Aws::Deadline
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?farm_id: String,
+        ?queue_id: String,
+        ?job_id: String,
         ?client_token: String,
         ?target_task_run_status: String,
         ?priority: Integer,
@@ -5847,12 +7180,14 @@ module Aws::Deadline
         ?max_retries_per_task: Integer,
         ?lifecycle_status: String,
         ?max_worker_count: Integer,
-        ?farm_id: String,
-        ?queue_id: String,
-        ?job_id: String,
+        ?name: String,
+        ?description: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor farm_id: String?
+      attr_accessor queue_id: String?
+      attr_accessor job_id: String?
       attr_accessor client_token: String?
       attr_accessor target_task_run_status: String?
       attr_accessor priority: Integer?
@@ -5860,9 +7195,8 @@ module Aws::Deadline
       attr_accessor max_retries_per_task: Integer?
       attr_accessor lifecycle_status: String?
       attr_accessor max_worker_count: Integer?
-      attr_accessor farm_id: String?
-      attr_accessor queue_id: String?
-      attr_accessor job_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
     end
 
     class UpdateJobResponse
@@ -5928,24 +7262,46 @@ module Aws::Deadline
 
     end
 
+    class UpdateMonitorSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monitor_id: String,
+        ?settings: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monitor_id: String?
+      attr_accessor settings: Hash[String, String]?
+    end
+
+    class UpdateMonitorSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
     class UpdateQueueEnvironmentRequest
       include Smithy::Schema::Structure
 
       def initialize: (
-        ?client_token: String,
         ?farm_id: String,
         ?queue_id: String,
         ?queue_environment_id: String,
+        ?client_token: String,
         ?priority: Integer,
         ?template_type: String,
         ?template: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
-      attr_accessor client_token: String?
       attr_accessor farm_id: String?
       attr_accessor queue_id: String?
       attr_accessor queue_environment_id: String?
+      attr_accessor client_token: String?
       attr_accessor priority: Integer?
       attr_accessor template_type: String?
       attr_accessor template: String?
@@ -6028,9 +7384,9 @@ module Aws::Deadline
       include Smithy::Schema::Structure
 
       def initialize: (
-        ?client_token: String,
         ?farm_id: String,
         ?queue_id: String,
+        ?client_token: String,
         ?display_name: String,
         ?description: String,
         ?default_budget_action: String,
@@ -6041,12 +7397,13 @@ module Aws::Deadline
         ?required_file_system_location_names_to_remove: Array[String],
         ?allowed_storage_profile_ids_to_add: Array[String],
         ?allowed_storage_profile_ids_to_remove: Array[String],
+        ?scheduling_configuration: Types::SchedulingConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
-      attr_accessor client_token: String?
       attr_accessor farm_id: String?
       attr_accessor queue_id: String?
+      attr_accessor client_token: String?
       attr_accessor display_name: String?
       attr_accessor description: String?
       attr_accessor default_budget_action: String?
@@ -6057,6 +7414,7 @@ module Aws::Deadline
       attr_accessor required_file_system_location_names_to_remove: Array[String]?
       attr_accessor allowed_storage_profile_ids_to_add: Array[String]?
       attr_accessor allowed_storage_profile_ids_to_remove: Array[String]?
+      attr_accessor scheduling_configuration: Types::SchedulingConfiguration?
     end
 
     class UpdateQueueResponse
@@ -6072,21 +7430,21 @@ module Aws::Deadline
       include Smithy::Schema::Structure
 
       def initialize: (
-        ?client_token: String,
-        ?target_lifecycle_status: String,
         ?farm_id: String,
         ?queue_id: String,
         ?job_id: String,
         ?session_id: String,
+        ?client_token: String,
+        ?target_lifecycle_status: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
-      attr_accessor client_token: String?
-      attr_accessor target_lifecycle_status: String?
       attr_accessor farm_id: String?
       attr_accessor queue_id: String?
       attr_accessor job_id: String?
       attr_accessor session_id: String?
+      attr_accessor client_token: String?
+      attr_accessor target_lifecycle_status: String?
     end
 
     class UpdateSessionResponse
@@ -6102,21 +7460,21 @@ module Aws::Deadline
       include Smithy::Schema::Structure
 
       def initialize: (
-        ?target_task_run_status: String,
-        ?client_token: String,
         ?farm_id: String,
         ?queue_id: String,
         ?job_id: String,
         ?step_id: String,
+        ?client_token: String,
+        ?target_task_run_status: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
-      attr_accessor target_task_run_status: String?
-      attr_accessor client_token: String?
       attr_accessor farm_id: String?
       attr_accessor queue_id: String?
       attr_accessor job_id: String?
       attr_accessor step_id: String?
+      attr_accessor client_token: String?
+      attr_accessor target_task_run_status: String?
     end
 
     class UpdateStepResponse
@@ -6132,9 +7490,9 @@ module Aws::Deadline
       include Smithy::Schema::Structure
 
       def initialize: (
-        ?client_token: String,
         ?farm_id: String,
         ?storage_profile_id: String,
+        ?client_token: String,
         ?display_name: String,
         ?os_family: String,
         ?file_system_locations_to_add: Array[Types::FileSystemLocation],
@@ -6142,9 +7500,9 @@ module Aws::Deadline
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
-      attr_accessor client_token: String?
       attr_accessor farm_id: String?
       attr_accessor storage_profile_id: String?
+      attr_accessor client_token: String?
       attr_accessor display_name: String?
       attr_accessor os_family: String?
       attr_accessor file_system_locations_to_add: Array[Types::FileSystemLocation]?
@@ -6164,23 +7522,23 @@ module Aws::Deadline
       include Smithy::Schema::Structure
 
       def initialize: (
-        ?client_token: String,
-        ?target_run_status: String,
         ?farm_id: String,
         ?queue_id: String,
         ?job_id: String,
         ?step_id: String,
         ?task_id: String,
+        ?client_token: String,
+        ?target_run_status: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
-      attr_accessor client_token: String?
-      attr_accessor target_run_status: String?
       attr_accessor farm_id: String?
       attr_accessor queue_id: String?
       attr_accessor job_id: String?
       attr_accessor step_id: String?
       attr_accessor task_id: String?
+      attr_accessor client_token: String?
+      attr_accessor target_run_status: String?
     end
 
     class UpdateTaskResponse
@@ -6327,6 +7685,7 @@ module Aws::Deadline
     module UsageType
       COMPUTE: String
       LICENSE: String
+      PERSISTENT_VOLUME: String
     end
 
     class UserJobsFirst
@@ -6390,6 +7749,37 @@ module Aws::Deadline
       OTHER: String
     end
 
+    module VolumeState
+      PENDING_CREATION: String
+      PENDING_ATTACHMENT: String
+      IN_USE: String
+      AVAILABLE: String
+      PENDING_DELETION: String
+    end
+
+    class VolumeSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?volume_id: String,
+        ?farm_id: String,
+        ?fleet_id: String,
+        ?state: String,
+        ?size_gi_b: Integer,
+        ?availability_zone_id: String,
+        ?attached_worker_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor volume_id: String?
+      attr_accessor farm_id: String?
+      attr_accessor fleet_id: String?
+      attr_accessor state: String?
+      attr_accessor size_gi_b: Integer?
+      attr_accessor availability_zone_id: String?
+      attr_accessor attached_worker_id: String?
+    end
+
     class VpcConfiguration
       include Smithy::Schema::Structure
 
@@ -6399,6 +7789,29 @@ module Aws::Deadline
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor resource_configuration_arns: Array[String]?
+    end
+
+    class WeightedBalancedSchedulingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?priority_weight: Float,
+        ?error_weight: Float,
+        ?submission_time_weight: Float,
+        ?rendering_task_weight: Float,
+        ?rendering_task_buffer: Integer,
+        ?max_priority_override: Types::SchedulingMaxPriorityOverride,
+        ?min_priority_override: Types::SchedulingMinPriorityOverride,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor priority_weight: Float?
+      attr_accessor error_weight: Float?
+      attr_accessor submission_time_weight: Float?
+      attr_accessor rendering_task_weight: Float?
+      attr_accessor rendering_task_buffer: Integer?
+      attr_accessor max_priority_override: Types::SchedulingMaxPriorityOverride?
+      attr_accessor min_priority_override: Types::SchedulingMinPriorityOverride?
     end
 
     class WindowsUser
@@ -6516,11 +7929,11 @@ module Aws::Deadline
       include Smithy::Schema::Structure
 
       def initialize: (
-        ?worker_id: String,
         ?farm_id: String,
         ?fleet_id: String,
-        ?status: String,
+        ?worker_id: String,
         ?host_properties: Types::HostPropertiesResponse,
+        ?status: String,
         ?log: Types::LogConfiguration,
         ?created_at: Time,
         ?created_by: String,
@@ -6529,11 +7942,11 @@ module Aws::Deadline
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
-      attr_accessor worker_id: String?
       attr_accessor farm_id: String?
       attr_accessor fleet_id: String?
-      attr_accessor status: String?
+      attr_accessor worker_id: String?
       attr_accessor host_properties: Types::HostPropertiesResponse?
+      attr_accessor status: String?
       attr_accessor log: Types::LogConfiguration?
       attr_accessor created_at: Time?
       attr_accessor created_by: String?

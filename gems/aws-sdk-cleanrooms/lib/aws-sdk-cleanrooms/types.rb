@@ -153,10 +153,166 @@ module Aws::CleanRooms
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Specifies the minimum number of distinct identities that each query output group must represent.</p>
+    # @!attribute identity_columns
+    #   <p>The identity column, such as <code>user_id</code>, whose distinct values Clean Rooms counts to enforce minimum aggregation thresholds. Currently, you can specify only one column, and its data type must be string, varchar, or char.</p>
+    #   @return [Array<String>]
+    # @!attribute minimum_identity_count
+    #   <p>The minimum number of distinct identities that each query output group must represent. This threshold applies to all output columns in the table. To override this threshold for a specific column, use <code>outputColumnThresholds</code>.</p>
+    #   @return [Integer]
+    # @!attribute type
+    #   <p>The type of aggregation that the threshold enforces. Currently, the only supported value is <code>COUNT_DISTINCT</code>, which counts the distinct values in the identity column.</p>
+    #   @return [String]
+    # @!attribute output_column_thresholds
+    #   <p>The per-column overrides of <code>minimumIdentityCount</code>. An output column without an override uses <code>minimumIdentityCount</code>.</p>
+    #   @return [Array<Types::OutputColumnThreshold>]
+    # @!attribute allowed_aggregate_expression_type
+    #   <p>Specifies whether a query can aggregate a transformed column. This applies to the arguments of both aggregate and window functions. Valid values are:</p> <p> <code>COLUMNS_ONLY</code> – A query can aggregate only a direct column reference, such as <code>SUM(amount)</code>, or a constant. Clean Rooms rejects a query that transforms a column and then aggregates it, such as <code>SUM(amount * 2)</code> or <code>SUM(ROUND(amount))</code>.</p> <p> <code>ANY_EXPRESSION</code> – A query can aggregate any expression. This includes arithmetic, such as <code>SUM(price * quantity)</code>; a cast, such as <code>SUM(CAST(amount AS DECIMAL))</code>; a nested function call, such as <code>SUM(COALESCE(amount, 0))</code>; and a conditional, such as <code>SUM(CASE WHEN region = 'EU' THEN amount ELSE 0 END)</code>.</p>
+    #   @return [String]
+    class AggregationThreshold < Struct.new(
+      nil,
+      :identity_columns,
+      :minimum_identity_count,
+      :type,
+      :output_column_thresholds,
+      :allowed_aggregate_expression_type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>An export of the redacted Apache Spark logs for a protected query.</p>
+    # @!attribute analysis_log_export_id
+    #   <p>The unique identifier of the analysis log export.</p>
+    #   @return [String]
+    # @!attribute analysis_id
+    #   <p>The unique identifier of the protected query that the analysis logs were exported for.</p>
+    #   @return [String]
+    # @!attribute analysis_type
+    #   <p>The type of analysis that the logs were exported for. Currently, only <code>PROTECTED_QUERY</code> is supported.</p>
+    #   @return [String]
+    # @!attribute membership_id
+    #   <p>The unique identifier of the membership that the analysis log export belongs to.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status of the analysis log export. Possible values are:</p> <ul> <li> <p> <code>IN_PROGRESS</code> – The export is currently running.</p> </li> <li> <p> <code>SUCCESS</code> – The export completed successfully.</p> </li> <li> <p> <code>FAILED</code> – The export failed. See the <code>error</code> field for details.</p> </li> </ul>
+    #   @return [String]
+    # @!attribute result_configuration
+    #   <p>Contains the details needed to write the exported analysis logs.</p>
+    #   @return [Types::AnalysisLogExportResultConfiguration]
+    # @!attribute create_time
+    #   <p>The time the analysis log export was created.</p>
+    #   @return [Time]
+    # @!attribute update_time
+    #   <p>The time the analysis log export was last updated.</p>
+    #   @return [Time]
+    # @!attribute error
+    #   <p>The analysis log export error. This is present only when the export <code>status</code> is <code>FAILED</code>.</p>
+    #   @return [Types::AnalysisLogExportError]
+    class AnalysisLogExport < Struct.new(
+      nil,
+      :analysis_log_export_id,
+      :analysis_id,
+      :analysis_type,
+      :membership_id,
+      :status,
+      :result_configuration,
+      :create_time,
+      :update_time,
+      :error,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The analysis log export error.</p>
+    # @!attribute code
+    #   <p>The error code for the analysis log export.</p>
+    #   @return [String]
+    # @!attribute message
+    #   <p>The message for the analysis log export error.</p>
+    #   @return [String]
+    class AnalysisLogExportError < Struct.new(
+      nil,
+      :code,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains configuration details for analysis log export output.</p>
+    # @!attribute s3
+    #   <p>Required configuration for an analysis log export with an <code>s3</code> output type.</p>
+    #   @return [Types::AnalysisLogExportS3OutputConfiguration]
+    class AnalysisLogExportOutputConfiguration < Struct.new(
+      nil,
+      :s3,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains configurations for analysis log export results.</p>
+    # @!attribute output_configuration
+    #   <p>The configuration for analysis log export results.</p>
+    #   @return [Types::AnalysisLogExportOutputConfiguration]
+    class AnalysisLogExportResultConfiguration < Struct.new(
+      nil,
+      :output_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains output information for an analysis log export with an S3 output type.</p> <p>The exported logs are written under the bucket and key prefix that you specify. The path includes the collaboration ID, the protected query ID, and the analysis log export ID. Because the path includes the export ID, exporting the same query more than once doesn't overwrite the logs from an earlier export.</p> <note> <p>The exported logs are encrypted using the default encryption configuration of the destination bucket. Clean Rooms doesn't accept a KMS key for log export. To encrypt the exported logs with a customer managed key, configure the bucket's default encryption to use that key before you export.</p> </note>
+    # @!attribute bucket
+    #   <p>The S3 bucket that the exported analysis logs are written to. The bucket must be in the same Amazon Web Services Region as the collaboration.</p>
+    #   @return [String]
+    # @!attribute key_prefix
+    #   <p>The S3 key prefix under which the exported analysis logs are written.</p> <p>Only one export can be in progress at a time for a given query and destination. To export the same query twice at once, use a different key prefix for the second export.</p>
+    #   @return [String]
+    class AnalysisLogExportS3OutputConfiguration < Struct.new(
+      nil,
+      :bucket,
+      :key_prefix,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A summary of an analysis log export, including its identifier, status, analysis type, and creation time. Returned by <code>ListAnalysisLogExports</code>.</p>
+    # @!attribute analysis_log_export_id
+    #   <p>The unique identifier of the analysis log export.</p>
+    #   @return [String]
+    # @!attribute analysis_id
+    #   <p>The unique identifier of the protected query that the analysis logs were exported for.</p>
+    #   @return [String]
+    # @!attribute analysis_type
+    #   <p>The type of analysis that the logs were exported for. Currently, only <code>PROTECTED_QUERY</code> is supported.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status of the analysis log export. Possible values are:</p> <ul> <li> <p> <code>IN_PROGRESS</code> – The export is currently running.</p> </li> <li> <p> <code>SUCCESS</code> – The export completed successfully.</p> </li> <li> <p> <code>FAILED</code> – The export failed.</p> </li> </ul>
+    #   @return [String]
+    # @!attribute create_time
+    #   <p>The time the analysis log export was created.</p>
+    #   @return [Time]
+    class AnalysisLogExportSummary < Struct.new(
+      nil,
+      :analysis_log_export_id,
+      :analysis_id,
+      :analysis_type,
+      :status,
+      :create_time,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Optional. The member who can query can provide this placeholder for a literal data value in an analysis template.</p>
     # @note This shape contains sensitive data and should be treated as such.
     # @!attribute name
-    #   <p>The name of the parameter. The name must use only alphanumeric, underscore (_), or hyphen (-) characters but cannot start or end with a hyphen.</p>
+    #   <p>The name of the parameter. The name must use only alphanumeric or underscore (_) characters.</p>
     #   @return [String]
     # @!attribute type
     #   <p>The type of parameter.</p>
@@ -254,7 +410,7 @@ module Aws::CleanRooms
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A type of analysis rule that enables the table owner to approve custom SQL queries on their configured tables. It supports differential privacy.</p>
+    # <p>A type of analysis rule that enables the table owner to approve custom SQL queries on their configured tables. It supports differential privacy, minimum aggregation thresholds, and comparison controls.</p>
     # @!attribute allowed_analyses
     #   <p>The ARN of the analysis templates that are allowed by the custom analysis rule.</p>
     #   @return [Array<String>]
@@ -270,6 +426,18 @@ module Aws::CleanRooms
     # @!attribute differential_privacy
     #   <p>The differential privacy configuration.</p>
     #   @return [Types::DifferentialPrivacyConfiguration]
+    # @!attribute aggregation_thresholds
+    #   <p>The aggregation thresholds that each query output group must satisfy. Clean Rooms filters out any group that represents fewer than the specified number of distinct identities. You can specify at most one threshold. You can't use aggregation thresholds with differential privacy, or when <code>allowedAnalyses</code> allows only jobs.</p>
+    #   @return [Array<Types::AggregationThreshold>]
+    # @!attribute comparison_controls
+    #   <p>The controls that restrict how a query can compare the columns in the configured table. You can't use comparison controls with differential privacy, or when <code>allowedAnalyses</code> allows only jobs.</p>
+    #   @return [Types::ComparisonControls]
+    # @!attribute allowed_result_receivers
+    #   <p>The list of Amazon Web Services account IDs that are allowed to receive results from queries run on the configured table.</p>
+    #   @return [Array<String>]
+    # @!attribute allowed_additional_analyses
+    #   <p>The list of allowed additional analyses for the custom analysis rule.</p>
+    #   @return [Array<String>]
     class AnalysisRuleCustom < Struct.new(
       nil,
       :allowed_analyses,
@@ -277,6 +445,10 @@ module Aws::CleanRooms
       :additional_analyses,
       :disallowed_output_columns,
       :differential_privacy,
+      :aggregation_thresholds,
+      :comparison_controls,
+      :allowed_result_receivers,
+      :allowed_additional_analyses,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -470,6 +642,9 @@ module Aws::CleanRooms
     # @!attribute error_message_configuration
     #   <p>The configuration that specifies the level of detail in error messages returned by analyses using this template. When set to <code>DETAILED</code>, error messages include more information to help troubleshoot issues with PySpark jobs. Detailed error messages may expose underlying data, including sensitive information. Recommended for faster troubleshooting in development and testing environments.</p>
     #   @return [Types::ErrorMessageConfiguration]
+    # @!attribute synthetic_data_parameters
+    #   <p>The parameters used to generate synthetic data for this analysis template.</p>
+    #   @return [Types::SyntheticDataParameters]
     class AnalysisTemplate < Struct.new(
       nil,
       :id,
@@ -489,6 +664,7 @@ module Aws::CleanRooms
       :analysis_parameters,
       :validations,
       :error_message_configuration,
+      :synthetic_data_parameters,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -573,6 +749,9 @@ module Aws::CleanRooms
     # @!attribute description
     #   <p>The description of the analysis template.</p>
     #   @return [String]
+    # @!attribute is_synthetic_data
+    #   <p>Indicates if this analysis template summary generated synthetic data.</p>
+    #   @return [Boolean]
     class AnalysisTemplateSummary < Struct.new(
       nil,
       :arn,
@@ -585,6 +764,7 @@ module Aws::CleanRooms
       :collaboration_arn,
       :collaboration_id,
       :description,
+      :is_synthetic_data,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -622,6 +802,18 @@ module Aws::CleanRooms
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Contains detailed information about the approval state of a given member in the collaboration for a given collaboration change request.</p>
+    # @!attribute status
+    #   <p>The approval status of a member's vote on the change request. Valid values are PENDING (if they haven't voted), APPROVED, or DENIED.</p>
+    #   @return [String]
+    class ApprovalStatusDetails < Struct.new(
+      nil,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p> A reference to a table within Athena.</p>
     # @!attribute region
     #   <p>The Amazon Web Services Region where the Athena table is located. This parameter is required to uniquely identify and access tables across different Regions.</p>
@@ -638,6 +830,9 @@ module Aws::CleanRooms
     # @!attribute table_name
     #   <p> The table reference.</p>
     #   @return [String]
+    # @!attribute catalog_name
+    #   <p> The catalog name.</p>
+    #   @return [String]
     class AthenaTableReference < Struct.new(
       nil,
       :region,
@@ -645,6 +840,7 @@ module Aws::CleanRooms
       :output_location,
       :database_name,
       :table_name,
+      :catalog_name,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -888,15 +1084,48 @@ module Aws::CleanRooms
     # @!attribute member
     #   <p>The member change specification when the change type is <code>MEMBER</code>.</p>
     #   @return [Types::MemberChangeSpecification]
+    # @!attribute collaboration
+    #   <p>The collaboration configuration changes being requested. Currently, this only supports modifying which change types are auto-approved for the collaboration.</p>
+    #   @return [Types::CollaborationChangeSpecification]
     class ChangeSpecification < Struct.new(
       :member,
+      :collaboration,
       :unknown,
       keyword_init: true
     )
       include ::Smithy::Schema::Union
 
       class Member < ChangeSpecification; end
+      class Collaboration < ChangeSpecification; end
       class Unknown < ChangeSpecification; end
+    end
+
+    # <p>Contains information about a child resource of a given resource in a collaboration.</p>
+    # @!attribute resource_id
+    #   <p>The unique identifier of the child resource.</p>
+    #   @return [String]
+    # @!attribute resource_type
+    #   <p>The type of the child resource.</p>
+    #   @return [String]
+    # @!attribute resource_name
+    #   <p>The name of the child resource.</p>
+    #   @return [String]
+    # @!attribute owner_account_id
+    #   <p>The Amazon Web Services account ID of the member who owns the child resource.</p>
+    #   @return [String]
+    # @!attribute resource_status
+    #   <p>The current status of the child resource.</p>
+    #   @return [String]
+    class ChildResource < Struct.new(
+      nil,
+      :resource_id,
+      :resource_type,
+      :resource_name,
+      :owner_account_id,
+      :resource_status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The multi-party data share environment. The collaboration contains metadata about its purpose and participants.</p>
@@ -951,6 +1180,9 @@ module Aws::CleanRooms
     # @!attribute allowed_result_regions
     #   <p>The Amazon Web Services Regions where collaboration query results can be stored. Returns the list of Region identifiers that were specified when the collaboration was created. This list is used to enforce regional storage policies and compliance requirements.</p>
     #   @return [Array<String>]
+    # @!attribute is_metrics_enabled
+    #   <p>An indicator as to whether metrics are enabled for the collaboration.</p> <p>When <code>true</code>, collaboration members can opt in to Amazon CloudWatch metrics for their membership queries.</p>
+    #   @return [Boolean]
     class Collaboration < Struct.new(
       nil,
       :id,
@@ -970,6 +1202,7 @@ module Aws::CleanRooms
       :analytics_engine,
       :auto_approved_change_types,
       :allowed_result_regions,
+      :is_metrics_enabled,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1024,6 +1257,9 @@ module Aws::CleanRooms
     # @!attribute error_message_configuration
     #   <p>The configuration that specifies the level of detail in error messages returned by analyses using this template. When set to <code>DETAILED</code>, error messages include more information to help troubleshoot issues with PySpark jobs. Detailed error messages may expose underlying data, including sensitive information. Recommended for faster troubleshooting in development and testing environments.</p>
     #   @return [Types::ErrorMessageConfiguration]
+    # @!attribute synthetic_data_parameters
+    #   <p>The synthetic data generation parameters configured for this collaboration analysis template.</p>
+    #   @return [Types::SyntheticDataParameters]
     class CollaborationAnalysisTemplate < Struct.new(
       nil,
       :id,
@@ -1042,6 +1278,7 @@ module Aws::CleanRooms
       :analysis_parameters,
       :validations,
       :error_message_configuration,
+      :synthetic_data_parameters,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1075,6 +1312,9 @@ module Aws::CleanRooms
     # @!attribute description
     #   <p>The description of the analysis template.</p>
     #   @return [String]
+    # @!attribute is_synthetic_data
+    #   <p>Indicates if this collaboration analysis template uses synthetic data generation.</p>
+    #   @return [Boolean]
     class CollaborationAnalysisTemplateSummary < Struct.new(
       nil,
       :arn,
@@ -1086,6 +1326,7 @@ module Aws::CleanRooms
       :collaboration_id,
       :creator_account_id,
       :description,
+      :is_synthetic_data,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1113,6 +1354,9 @@ module Aws::CleanRooms
     # @!attribute changes
     #   <p>The list of changes specified in this change request.</p>
     #   @return [Array<Types::Change>]
+    # @!attribute approvals
+    #   <p>A list of approval details from collaboration members, including approval status and multi-party approval workflow information.</p>
+    #   @return [Hash<String, Types::ApprovalStatusDetails>]
     class CollaborationChangeRequest < Struct.new(
       nil,
       :id,
@@ -1122,6 +1366,7 @@ module Aws::CleanRooms
       :status,
       :is_auto_approved,
       :changes,
+      :approvals,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1149,6 +1394,9 @@ module Aws::CleanRooms
     # @!attribute changes
     #   <p>Summary of the changes in this change request.</p>
     #   @return [Array<Types::Change>]
+    # @!attribute approvals
+    #   <p>Summary of approval statuses from all collaboration members for this change request.</p>
+    #   @return [Hash<String, Types::ApprovalStatusDetails>]
     class CollaborationChangeRequestSummary < Struct.new(
       nil,
       :id,
@@ -1158,6 +1406,19 @@ module Aws::CleanRooms
       :status,
       :is_auto_approved,
       :changes,
+      :approvals,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Defines the specific changes being requested for a collaboration, including configuration modifications and approval requirements.</p>
+    # @!attribute auto_approved_change_types
+    #   <p>Defines requested updates to properties of the collaboration. Currently, this only supports modifying which change types are auto-approved for the collaboration.</p>
+    #   @return [Array<String>]
+    class CollaborationChangeSpecification < Struct.new(
+      nil,
+      :auto_approved_change_types,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1567,6 +1828,66 @@ module Aws::CleanRooms
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Contains classification information for data columns, including mappings that specify how columns should be handled during synthetic data generation and privacy analysis.</p>
+    # @!attribute column_mapping
+    #   <p>A mapping that defines the classification of data columns for synthetic data generation and specifies how each column should be handled during the privacy-preserving data synthesis process.</p>
+    #   @return [Array<Types::SyntheticDataColumnProperties>]
+    class ColumnClassificationDetails < Struct.new(
+      nil,
+      :column_mapping,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains column lineage information that traces a disallowed output column back to its source in a base table.</p>
+    # @!attribute column
+    #   <p>The name of the column in the intermediate table.</p>
+    #   @return [String]
+    # @!attribute source_column
+    #   <p>The name of the column in the source table.</p>
+    #   @return [String]
+    # @!attribute source_name
+    #   <p>The name of the source table.</p>
+    #   @return [String]
+    # @!attribute source_id
+    #   <p>The unique identifier of the source table.</p>
+    #   @return [String]
+    # @!attribute source_type
+    #   <p>The type of the source table.</p>
+    #   @return [String]
+    # @!attribute source_account_id
+    #   <p>The Amazon Web Services account ID of the owner of the source table.</p>
+    #   @return [String]
+    class ColumnLineageEntry < Struct.new(
+      nil,
+      :column,
+      :source_column,
+      :source_name,
+      :source_id,
+      :source_type,
+      :source_account_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Specifies how a query can compare the columns in a table, including literal comparisons and column-to-column comparisons.</p>
+    # @!attribute allowed_literal_comparison_columns
+    #   <p>The columns that a query can compare to literal values, for example, in a WHERE clause. Clean Rooms rejects a query that compares any other column to a literal value. Specify an empty list to block literal comparison on every column. You can't specify a column that you also use as an identity column in an aggregation threshold.</p>
+    #   @return [Array<String>]
+    # @!attribute allowed_column_comparison_columns
+    #   <p>The columns that a query can compare to another column, for example, in a join, a WHERE clause, a GROUP BY clause, or a window function. Clean Rooms rejects a query that uses any other column in a column-to-column comparison. Specify an empty list to block column-to-column comparison on every column.</p>
+    #   @return [Array<String>]
+    class ComparisonControls < Struct.new(
+      nil,
+      :allowed_literal_comparison_columns,
+      :allowed_column_comparison_columns,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p> The configuration of the compute resources for an analysis with the Spark analytics engine.</p>
     # @!attribute worker
     #   <p> The worker configuration for the compute environment.</p>
@@ -1734,7 +2055,7 @@ module Aws::CleanRooms
     #   <p>The analysis method for the configured table.</p> <p> <code>DIRECT_QUERY</code> allows SQL queries to be run directly on this table.</p> <p> <code>DIRECT_JOB</code> allows PySpark jobs to be run directly on this table.</p> <p> <code>MULTIPLE</code> allows both SQL queries and PySpark jobs to be run directly on this table.</p>
     #   @return [String]
     # @!attribute allowed_columns
-    #   <p>The columns within the underlying Glue table that can be utilized within collaborations.</p>
+    #   <p>The columns within the underlying Glue table that can be used within collaborations.</p>
     #   @return [Array<String>]
     # @!attribute selected_analysis_methods
     #   <p> The selected analysis methods for the configured table.</p>
@@ -1812,7 +2133,7 @@ module Aws::CleanRooms
     #   <p>Analysis rule type that enables only aggregation queries on a configured table.</p>
     #   @return [Types::AnalysisRuleAggregation]
     # @!attribute custom
-    #   <p>A type of analysis rule that enables the table owner to approve custom SQL queries on their configured tables. It supports differential privacy.</p>
+    #   <p>A type of analysis rule that enables the table owner to approve custom SQL queries on their configured tables. It supports differential privacy, minimum aggregation thresholds, and comparison controls.</p>
     #   @return [Types::AnalysisRuleCustom]
     class ConfiguredTableAnalysisRulePolicyV1 < Struct.new(
       :list,
@@ -1866,6 +2187,9 @@ module Aws::CleanRooms
     # @!attribute update_time
     #   <p>The time the configured table association was last updated.</p>
     #   @return [Time]
+    # @!attribute child_resources
+    #   <p>The child resources that depend on this configured table association.</p>
+    #   @return [Array<Types::ChildResource>]
     class ConfiguredTableAssociation < Struct.new(
       nil,
       :arn,
@@ -1880,6 +2204,7 @@ module Aws::CleanRooms
       :analysis_rule_types,
       :create_time,
       :update_time,
+      :child_resources,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2007,6 +2332,18 @@ module Aws::CleanRooms
       class Aggregation < ConfiguredTableAssociationAnalysisRulePolicyV1; end
       class Custom < ConfiguredTableAssociationAnalysisRulePolicyV1; end
       class Unknown < ConfiguredTableAssociationAnalysisRulePolicyV1; end
+    end
+
+    # <p>Contains the schema type properties for a configured table association.</p>
+    # @!attribute configured_table_association_id
+    #   <p>The unique identifier of the configured table association.</p>
+    #   @return [String]
+    class ConfiguredTableAssociationSchemaTypeProperties < Struct.new(
+      nil,
+      :configured_table_association_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configured table association summary for the objects listed by the request.</p>
@@ -2195,6 +2532,12 @@ module Aws::CleanRooms
     # @!attribute differential_privacy
     #   <p>Specifies the unique identifier for your users.</p>
     #   @return [Types::DifferentialPrivacyConfiguration]
+    # @!attribute aggregation_thresholds
+    #   <p> The aggregation thresholds for the consolidated policy.</p>
+    #   @return [Array<Types::AggregationThreshold>]
+    # @!attribute comparison_controls
+    #   <p> The comparison controls for the consolidated policy.</p>
+    #   @return [Types::ComparisonControls]
     # @!attribute allowed_result_receivers
     #   <p> The allowed result receivers.</p>
     #   @return [Array<String>]
@@ -2208,6 +2551,8 @@ module Aws::CleanRooms
       :additional_analyses,
       :disallowed_output_columns,
       :differential_privacy,
+      :aggregation_thresholds,
+      :comparison_controls,
       :allowed_result_receivers,
       :allowed_additional_analyses,
       keyword_init: true
@@ -2299,6 +2644,9 @@ module Aws::CleanRooms
     # @!attribute error_message_configuration
     #   <p>The configuration that specifies the level of detail in error messages returned by analyses using this template. When set to <code>DETAILED</code>, error messages include more information to help troubleshoot issues with PySpark jobs. Detailed error messages may expose underlying data, including sensitive information. Recommended for faster troubleshooting in development and testing environments.</p>
     #   @return [Types::ErrorMessageConfiguration]
+    # @!attribute synthetic_data_parameters
+    #   <p>The parameters for generating synthetic data when running the analysis template.</p>
+    #   @return [Types::SyntheticDataParameters]
     class CreateAnalysisTemplateOperationInput < Struct.new(
       nil,
       :description,
@@ -2310,6 +2658,7 @@ module Aws::CleanRooms
       :analysis_parameters,
       :schema,
       :error_message_configuration,
+      :synthetic_data_parameters,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2394,6 +2743,9 @@ module Aws::CleanRooms
     # @!attribute allowed_result_regions
     #   <p>The Amazon Web Services Regions where collaboration query results can be stored. When specified, results can only be written to these Regions. This parameter enables you to meet your compliance and data governance requirements, and implement regional data governance policies.</p>
     #   @return [Array<String>]
+    # @!attribute is_metrics_enabled
+    #   <p>An indicator as to whether metrics have been enabled or disabled for the collaboration.</p> <p>When <code>true</code>, collaboration members can opt in to Amazon CloudWatch metrics for their membership queries. The default value is <code>false</code>.</p>
+    #   @return [Boolean]
     class CreateCollaborationOperationInput < Struct.new(
       nil,
       :members,
@@ -2410,6 +2762,7 @@ module Aws::CleanRooms
       :analytics_engine,
       :auto_approved_change_request_types,
       :allowed_result_regions,
+      :is_metrics_enabled,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2704,6 +3057,86 @@ module Aws::CleanRooms
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute membership_identifier
+    #   <p>The unique identifier of the membership that contains the intermediate table.</p>
+    #   @return [String]
+    # @!attribute intermediate_table_identifier
+    #   <p>The unique identifier of the intermediate table for which to create the analysis rule.</p>
+    #   @return [String]
+    # @!attribute analysis_rule_type
+    #   <p>The type of analysis rule to create. Currently, only <code>CUSTOM</code> is supported.</p>
+    #   @return [String]
+    # @!attribute analysis_rule_policy
+    #   <p>The analysis rule policy to apply to the intermediate table.</p>
+    #   @return [Types::IntermediateTableAnalysisRulePolicy]
+    class CreateIntermediateTableAnalysisRuleInput < Struct.new(
+      nil,
+      :membership_identifier,
+      :intermediate_table_identifier,
+      :analysis_rule_type,
+      :analysis_rule_policy,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute analysis_rule
+    #   <p>The analysis rule that was created for the intermediate table.</p>
+    #   @return [Types::IntermediateTableAnalysisRule]
+    class CreateIntermediateTableAnalysisRuleOutput < Struct.new(
+      nil,
+      :analysis_rule,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute membership_identifier
+    #   <p>The unique identifier of the membership where the intermediate table is created.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The display name for the intermediate table.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>A description of the intermediate table.</p>
+    #   @return [String]
+    # @!attribute population_analysis_configuration
+    #   <p>The configuration that defines the analysis used to populate the intermediate table.</p>
+    #   @return [Types::PopulationAnalysisConfiguration]
+    # @!attribute kms_key_arn
+    #   <p>The Amazon Resource Name (ARN) of the customer-managed KMS key used to encrypt the intermediate table data.</p>
+    #   @return [String]
+    # @!attribute retention_in_days
+    #   <p>The number of days to retain populated data versions.</p>
+    #   @return [Integer]
+    # @!attribute tags
+    #   <p>An optional label that you can assign to a resource when you create it. Each tag consists of a key and an optional value, both of which you define. When you use tagging, you can also use tag-based access control in IAM policies to control access to this resource.</p>
+    #   @return [Hash<String, String>]
+    class CreateIntermediateTableInput < Struct.new(
+      nil,
+      :membership_identifier,
+      :name,
+      :description,
+      :population_analysis_configuration,
+      :kms_key_arn,
+      :retention_in_days,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute intermediate_table
+    #   <p>The intermediate table that was created.</p>
+    #   @return [Types::IntermediateTable]
+    class CreateIntermediateTableOutput < Struct.new(
+      nil,
+      :intermediate_table,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute collaboration_identifier
     #   <p>The unique ID for the associated collaboration.</p>
     #   @return [String]
@@ -2725,6 +3158,9 @@ module Aws::CleanRooms
     # @!attribute payment_configuration
     #   <p>The payment responsibilities accepted by the collaboration member.</p> <p>Not required if the collaboration member has the member ability to run queries. </p> <p>Required if the collaboration member doesn't have the member ability to run queries but is configured as a payer by the collaboration creator. </p>
     #   @return [Types::MembershipPaymentConfiguration]
+    # @!attribute is_metrics_enabled
+    #   <p>An indicator as to whether Amazon CloudWatch metrics have been enabled or disabled for the membership.</p> <p>Amazon CloudWatch metrics are only available when the collaboration has metrics enabled. This option can be set by collaboration members who have the ability to run queries (analysis runners) or by members who are configured as payers.</p> <p>When <code>true</code>, metrics about query execution are collected in Amazon CloudWatch. The default value is <code>false</code>.</p>
+    #   @return [Boolean]
     class CreateMembershipOperationInput < Struct.new(
       nil,
       :collaboration_identifier,
@@ -2734,6 +3170,7 @@ module Aws::CleanRooms
       :default_result_configuration,
       :default_job_result_configuration,
       :payment_configuration,
+      :is_metrics_enabled,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3008,6 +3445,54 @@ module Aws::CleanRooms
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute membership_identifier
+    #   <p>The unique identifier of the membership that contains the intermediate table.</p>
+    #   @return [String]
+    # @!attribute intermediate_table_identifier
+    #   <p>The unique identifier of the intermediate table from which to delete the analysis rule.</p>
+    #   @return [String]
+    # @!attribute analysis_rule_type
+    #   <p>The type of analysis rule to delete. Currently, only <code>CUSTOM</code> is supported.</p>
+    #   @return [String]
+    class DeleteIntermediateTableAnalysisRuleInput < Struct.new(
+      nil,
+      :membership_identifier,
+      :intermediate_table_identifier,
+      :analysis_rule_type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class DeleteIntermediateTableAnalysisRuleOutput < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute membership_identifier
+    #   <p>The unique identifier of the membership that contains the intermediate table.</p>
+    #   @return [String]
+    # @!attribute intermediate_table_identifier
+    #   <p>The unique identifier of the intermediate table to delete.</p>
+    #   @return [String]
+    class DeleteIntermediateTableInput < Struct.new(
+      nil,
+      :membership_identifier,
+      :intermediate_table_identifier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class DeleteIntermediateTableOutput < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute collaboration_identifier
     #   <p>The unique identifier for the associated collaboration.</p>
     #   @return [String]
@@ -3274,6 +3759,32 @@ module Aws::CleanRooms
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute membership_identifier
+    #   <p>The unique identifier of the membership that contains the intermediate table to disallow.</p>
+    #   @return [String]
+    # @!attribute intermediate_table_name
+    #   <p>The name of the intermediate table to disallow.</p>
+    #   @return [String]
+    # @!attribute include_descendants
+    #   <p>Specifies whether to cascade the disallow action to descendant intermediate tables. Default is <code>true</code>.</p>
+    #   @return [Boolean]
+    class DisallowIntermediateTableInput < Struct.new(
+      nil,
+      :membership_identifier,
+      :intermediate_table_name,
+      :include_descendants,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class DisallowIntermediateTableOutput < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>A structure that defines the level of detail included in error messages returned by PySpark jobs. This configuration allows you to control the verbosity of error messages to help with troubleshooting PySpark jobs while maintaining appropriate security controls.</p>
     # @!attribute type
     #   <p>The level of detail for error messages returned by the PySpark job. When set to DETAILED, error messages include more information to help troubleshoot issues with your PySpark job.</p> <p>Because this setting may expose sensitive data, it is recommended for development and testing environments.</p>
@@ -3281,6 +3792,32 @@ module Aws::CleanRooms
     class ErrorMessageConfiguration < Struct.new(
       nil,
       :type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute membership_identifier
+    #   <p>A unique identifier for the membership that the analysis log export belongs to. Currently accepts the membership ID.</p>
+    #   @return [String]
+    # @!attribute analysis_log_export_identifier
+    #   <p>The unique identifier of the analysis log export to retrieve.</p>
+    #   @return [String]
+    class GetAnalysisLogExportInput < Struct.new(
+      nil,
+      :membership_identifier,
+      :analysis_log_export_identifier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute analysis_log_export
+    #   <p>The analysis log export processing metadata.</p>
+    #   @return [Types::AnalysisLogExport]
+    class GetAnalysisLogExportOutput < Struct.new(
+      nil,
+      :analysis_log_export,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3647,6 +4184,62 @@ module Aws::CleanRooms
     end
 
     # @!attribute membership_identifier
+    #   <p>The unique identifier of the membership that contains the intermediate table.</p>
+    #   @return [String]
+    # @!attribute intermediate_table_identifier
+    #   <p>The unique identifier of the intermediate table for which to retrieve the analysis rule.</p>
+    #   @return [String]
+    # @!attribute analysis_rule_type
+    #   <p>The type of analysis rule to retrieve. Currently, only <code>CUSTOM</code> is supported.</p>
+    #   @return [String]
+    class GetIntermediateTableAnalysisRuleInput < Struct.new(
+      nil,
+      :membership_identifier,
+      :intermediate_table_identifier,
+      :analysis_rule_type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute analysis_rule
+    #   <p>The analysis rule for the intermediate table.</p>
+    #   @return [Types::IntermediateTableAnalysisRule]
+    class GetIntermediateTableAnalysisRuleOutput < Struct.new(
+      nil,
+      :analysis_rule,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute intermediate_table_identifier
+    #   <p>The unique identifier of the intermediate table to retrieve.</p>
+    #   @return [String]
+    # @!attribute membership_identifier
+    #   <p>The unique identifier of the membership that contains the intermediate table.</p>
+    #   @return [String]
+    class GetIntermediateTableInput < Struct.new(
+      nil,
+      :intermediate_table_identifier,
+      :membership_identifier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute intermediate_table
+    #   <p>The intermediate table retrieved.</p>
+    #   @return [Types::IntermediateTable]
+    class GetIntermediateTableOutput < Struct.new(
+      nil,
+      :intermediate_table,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute membership_identifier
     #   <p>The identifier for a membership resource.</p>
     #   @return [String]
     class GetMembershipOperationInput < Struct.new(
@@ -3891,6 +4484,9 @@ module Aws::CleanRooms
     # @!attribute kms_key_arn
     #   <p>The Amazon Resource Name (ARN) of the Amazon Web Services KMS key.</p>
     #   @return [String]
+    # @!attribute child_resources
+    #   <p>The child resources that depend on this ID mapping table.</p>
+    #   @return [Array<Types::ChildResource>]
     class IdMappingTable < Struct.new(
       nil,
       :id,
@@ -3906,6 +4502,7 @@ module Aws::CleanRooms
       :update_time,
       :input_reference_properties,
       :kms_key_arn,
+      :child_resources,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3959,9 +4556,13 @@ module Aws::CleanRooms
     # @!attribute id_mapping_table_input_source
     #   <p>Defines which ID namespace associations are used to create the ID mapping table.</p>
     #   @return [Array<Types::IdMappingTableInputSource>]
+    # @!attribute id_mapping_table_id
+    #   <p>The unique identifier of the ID mapping table.</p>
+    #   @return [String]
     class IdMappingTableSchemaTypeProperties < Struct.new(
       nil,
       :id_mapping_table_input_source,
+      :id_mapping_table_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4179,6 +4780,611 @@ module Aws::CleanRooms
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Contains the inherited additional analyses constraint and its sources from parent tables.</p>
+    # @!attribute value
+    #   <p>The effective additional analyses setting inherited from parent tables.</p>
+    #   @return [String]
+    # @!attribute sources
+    #   <p>The list of parent tables that contribute to this inherited constraint.</p>
+    #   @return [Array<Types::InheritedAdditionalAnalysesSource>]
+    class InheritedAdditionalAnalyses < Struct.new(
+      nil,
+      :value,
+      :sources,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains information about a parent table that contributes an additional analyses constraint.</p>
+    # @!attribute name
+    #   <p>The name of the parent table.</p>
+    #   @return [String]
+    # @!attribute id
+    #   <p>The unique identifier of the parent table.</p>
+    #   @return [String]
+    # @!attribute type
+    #   <p>The type of the parent table.</p>
+    #   @return [String]
+    # @!attribute value
+    #   <p>The additional analyses setting defined on the parent table.</p>
+    #   @return [String]
+    # @!attribute source_account_id
+    #   <p>The Amazon Web Services account ID of the member who owns the parent table.</p>
+    #   @return [String]
+    class InheritedAdditionalAnalysesSource < Struct.new(
+      nil,
+      :name,
+      :id,
+      :type,
+      :value,
+      :source_account_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the inherited allowed additional analyses constraint and its sources from parent tables.</p>
+    # @!attribute value
+    #   <p>The effective list of allowed additional analyses inherited from parent tables.</p>
+    #   @return [Array<String>]
+    # @!attribute sources
+    #   <p>The list of parent tables that contribute to this inherited constraint.</p>
+    #   @return [Array<Types::InheritedAllowedAdditionalAnalysesSource>]
+    class InheritedAllowedAdditionalAnalyses < Struct.new(
+      nil,
+      :value,
+      :sources,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains information about a parent table that contributes an allowed additional analyses constraint.</p>
+    # @!attribute name
+    #   <p>The name of the parent table.</p>
+    #   @return [String]
+    # @!attribute id
+    #   <p>The unique identifier of the parent table.</p>
+    #   @return [String]
+    # @!attribute type
+    #   <p>The type of the parent table.</p>
+    #   @return [String]
+    # @!attribute value
+    #   <p>The allowed additional analyses defined on the parent table.</p>
+    #   @return [Array<String>]
+    # @!attribute source_account_id
+    #   <p>The Amazon Web Services account ID of the member who owns the parent table.</p>
+    #   @return [String]
+    class InheritedAllowedAdditionalAnalysesSource < Struct.new(
+      nil,
+      :name,
+      :id,
+      :type,
+      :value,
+      :source_account_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the inherited allowed result receivers constraint and its sources from parent tables.</p>
+    # @!attribute value
+    #   <p>The effective list of Amazon Web Services account IDs allowed to receive results, inherited from parent tables.</p>
+    #   @return [Array<String>]
+    # @!attribute sources
+    #   <p>The list of parent tables that contribute to this inherited constraint.</p>
+    #   @return [Array<Types::InheritedAllowedResultReceiversSource>]
+    class InheritedAllowedResultReceivers < Struct.new(
+      nil,
+      :value,
+      :sources,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains information about a parent table that contributes an allowed result receivers constraint.</p>
+    # @!attribute name
+    #   <p>The name of the parent table.</p>
+    #   @return [String]
+    # @!attribute id
+    #   <p>The unique identifier of the parent table.</p>
+    #   @return [String]
+    # @!attribute type
+    #   <p>The type of the parent table.</p>
+    #   @return [String]
+    # @!attribute value
+    #   <p>The allowed result receiver account IDs defined on the parent table.</p>
+    #   @return [Array<String>]
+    # @!attribute source_account_id
+    #   <p>The Amazon Web Services account ID of the member who owns the parent table.</p>
+    #   @return [String]
+    class InheritedAllowedResultReceiversSource < Struct.new(
+      nil,
+      :name,
+      :id,
+      :type,
+      :value,
+      :source_account_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the inherited disallowed output columns constraint and the column lineage tracing each column to its source.</p>
+    # @!attribute value
+    #   <p>The list of column names that are disallowed from appearing in query output, inherited from parent tables.</p>
+    #   @return [Array<String>]
+    # @!attribute column_lineage
+    #   <p>The lineage information that traces each disallowed output column back to its source in a parent table.</p>
+    #   @return [Array<Types::ColumnLineageEntry>]
+    class InheritedDisallowedOutputColumns < Struct.new(
+      nil,
+      :value,
+      :column_lineage,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the details of an intermediate table in Clean Rooms. An intermediate table stores a query definition and its materialized results within a collaboration.</p>
+    # @!attribute id
+    #   <p>The unique identifier of the intermediate table.</p>
+    #   @return [String]
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the intermediate table.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the intermediate table.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>The description of the intermediate table.</p>
+    #   @return [String]
+    # @!attribute membership_arn
+    #   <p>The Amazon Resource Name (ARN) of the membership that contains the intermediate table.</p>
+    #   @return [String]
+    # @!attribute membership_id
+    #   <p>The unique identifier of the membership that contains the intermediate table.</p>
+    #   @return [String]
+    # @!attribute collaboration_arn
+    #   <p>The Amazon Resource Name (ARN) of the collaboration that contains the intermediate table.</p>
+    #   @return [String]
+    # @!attribute collaboration_id
+    #   <p>The unique identifier of the collaboration that contains the intermediate table.</p>
+    #   @return [String]
+    # @!attribute child_resources
+    #   <p>The child resources that depend on this intermediate table.</p>
+    #   @return [Array<Types::ChildResource>]
+    # @!attribute create_time
+    #   <p>The time the intermediate table was created.</p>
+    #   @return [Time]
+    # @!attribute update_time
+    #   <p>The time the intermediate table was last updated.</p>
+    #   @return [Time]
+    # @!attribute status
+    #   <p>The current status of the intermediate table.</p>
+    #   @return [String]
+    # @!attribute status_reason
+    #   <p>The reason for the current status of the intermediate table.</p>
+    #   @return [String]
+    # @!attribute kms_key_arn
+    #   <p>The Amazon Resource Name (ARN) of the KMS key used to encrypt the intermediate table data.</p>
+    #   @return [String]
+    # @!attribute population_analysis_configuration
+    #   <p>The analysis configuration that defines the query used to populate the intermediate table.</p>
+    #   @return [Types::PopulationAnalysisConfiguration]
+    # @!attribute retention_in_days
+    #   <p>The number of days that populated data is retained before expiring.</p>
+    #   @return [Integer]
+    # @!attribute table_dependencies
+    #   <p>The list of base tables that this intermediate table depends on.</p>
+    #   @return [Array<Types::IntermediateTableDependency>]
+    # @!attribute intermediate_table_version
+    #   <p>The details of the currently active version of the intermediate table.</p>
+    #   @return [Types::IntermediateTableActiveVersion]
+    # @!attribute analysis_rule_types
+    #   <p>The types of analysis rules associated with the intermediate table.</p>
+    #   @return [Array<String>]
+    # @!attribute schema
+    #   <p>The schema of the intermediate table, containing column definitions. Available after the table has been successfully populated.</p>
+    #   @return [Types::IntermediateTableSchema]
+    class IntermediateTable < Struct.new(
+      nil,
+      :id,
+      :arn,
+      :name,
+      :description,
+      :membership_arn,
+      :membership_id,
+      :collaboration_arn,
+      :collaboration_id,
+      :child_resources,
+      :create_time,
+      :update_time,
+      :status,
+      :status_reason,
+      :kms_key_arn,
+      :population_analysis_configuration,
+      :retention_in_days,
+      :table_dependencies,
+      :intermediate_table_version,
+      :analysis_rule_types,
+      :schema,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the details of the currently active version of an intermediate table.</p>
+    # @!attribute version_id
+    #   <p>The unique identifier of the active version.</p>
+    #   @return [String]
+    # @!attribute analysis_id
+    #   <p>The identifier of the protected query that created this version.</p>
+    #   @return [String]
+    # @!attribute analysis_type
+    #   <p>The type of analysis that created this version.</p>
+    #   @return [String]
+    # @!attribute kms_key_arn
+    #   <p>The Amazon Resource Name (ARN) of the KMS key used to encrypt this version's data.</p>
+    #   @return [String]
+    # @!attribute parameters
+    #   <p>The runtime parameters that were used when populating this version.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute inherited_constraints
+    #   <p>The privacy constraints inherited from parent tables at the time this version was populated.</p>
+    #   @return [Types::IntermediateTableInheritedConstraints]
+    # @!attribute expiration_time
+    #   <p>The time when this version expires based on the retention period.</p>
+    #   @return [Time]
+    class IntermediateTableActiveVersion < Struct.new(
+      nil,
+      :version_id,
+      :analysis_id,
+      :analysis_type,
+      :kms_key_arn,
+      :parameters,
+      :inherited_constraints,
+      :expiration_time,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the details of an analysis rule for an intermediate table.</p>
+    # @!attribute intermediate_table_identifier
+    #   <p>The unique identifier of the intermediate table associated with this analysis rule.</p>
+    #   @return [String]
+    # @!attribute intermediate_table_arn
+    #   <p>The Amazon Resource Name (ARN) of the intermediate table associated with this analysis rule.</p>
+    #   @return [String]
+    # @!attribute analysis_rule_policy
+    #   <p>The policy of the analysis rule.</p>
+    #   @return [Types::IntermediateTableAnalysisRulePolicy]
+    # @!attribute analysis_rule_type
+    #   <p>The type of the analysis rule.</p>
+    #   @return [String]
+    # @!attribute create_time
+    #   <p>The time the analysis rule was created.</p>
+    #   @return [Time]
+    # @!attribute update_time
+    #   <p>The time the analysis rule was last updated.</p>
+    #   @return [Time]
+    class IntermediateTableAnalysisRule < Struct.new(
+      nil,
+      :intermediate_table_identifier,
+      :intermediate_table_arn,
+      :analysis_rule_policy,
+      :analysis_rule_type,
+      :create_time,
+      :update_time,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the custom analysis rule configuration for an intermediate table.</p>
+    # @!attribute allowed_analyses
+    #   <p>The list of allowed analyses that can be performed on the intermediate table.</p>
+    #   @return [Array<String>]
+    # @!attribute additional_analyses
+    #   <p>The setting that controls whether additional analyses are allowed on the intermediate table.</p>
+    #   @return [String]
+    # @!attribute allowed_additional_analyses
+    #   <p>The list of allowed additional analyses for the intermediate table.</p>
+    #   @return [Array<String>]
+    # @!attribute allowed_analysis_providers
+    #   <p>The list of Amazon Web Services account IDs for the allowed analysis providers.</p>
+    #   @return [Array<String>]
+    # @!attribute allowed_result_receivers
+    #   <p>The list of Amazon Web Services account IDs that are allowed to receive results from queries run on the intermediate table.</p>
+    #   @return [Array<String>]
+    # @!attribute differential_privacy
+    #   <p>Specifies the unique identifier for your users.</p>
+    #   @return [Types::DifferentialPrivacyConfiguration]
+    # @!attribute disallowed_output_columns
+    #   <p>The list of columns that are not allowed in the query output.</p>
+    #   @return [Array<String>]
+    # @!attribute aggregation_thresholds
+    #   <p>The aggregation thresholds that each query output group must satisfy. Clean Rooms filters out any group that represents fewer than the specified number of distinct identities. You can specify at most one threshold. You can't use aggregation thresholds with differential privacy, or when <code>allowedAnalyses</code> allows only jobs.</p>
+    #   @return [Array<Types::AggregationThreshold>]
+    # @!attribute comparison_controls
+    #   <p>The controls that restrict how a query can compare the columns in the intermediate table. You can't use comparison controls with differential privacy, or when <code>allowedAnalyses</code> allows only jobs.</p>
+    #   @return [Types::ComparisonControls]
+    class IntermediateTableAnalysisRuleCustom < Struct.new(
+      nil,
+      :allowed_analyses,
+      :additional_analyses,
+      :allowed_additional_analyses,
+      :allowed_analysis_providers,
+      :allowed_result_receivers,
+      :differential_privacy,
+      :disallowed_output_columns,
+      :aggregation_thresholds,
+      :comparison_controls,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the policy for an intermediate table analysis rule.</p>
+    # @!attribute v1
+    #   <p>The version 1 policy for the analysis rule.</p>
+    #   @return [Types::IntermediateTableAnalysisRulePolicyV1]
+    class IntermediateTableAnalysisRulePolicy < Struct.new(
+      :v1,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class V1 < IntermediateTableAnalysisRulePolicy; end
+      class Unknown < IntermediateTableAnalysisRulePolicy; end
+    end
+
+    # <p>Contains the version 1 policy for an intermediate table analysis rule.</p>
+    # @!attribute custom
+    #   <p>The custom analysis rule policy.</p>
+    #   @return [Types::IntermediateTableAnalysisRuleCustom]
+    class IntermediateTableAnalysisRulePolicyV1 < Struct.new(
+      :custom,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class Custom < IntermediateTableAnalysisRulePolicyV1; end
+      class Unknown < IntermediateTableAnalysisRulePolicyV1; end
+    end
+
+    # <p>Contains the name and type of a column in an intermediate table.</p>
+    # @!attribute name
+    #   <p>The name of the column.</p>
+    #   @return [String]
+    # @!attribute type
+    #   <p>The data type of the column.</p>
+    #   @return [String]
+    class IntermediateTableColumn < Struct.new(
+      nil,
+      :name,
+      :type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the compute configuration for an intermediate table population operation.</p>
+    # @!attribute query_compute_configuration
+    #   <p> The configuration of the compute resources for workers running an analysis with the Clean Rooms SQL analytics engine.</p>
+    #   @return [Types::WorkerComputeConfiguration]
+    class IntermediateTableComputeConfiguration < Struct.new(
+      :query_compute_configuration,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class QueryComputeConfiguration < IntermediateTableComputeConfiguration; end
+      class Unknown < IntermediateTableComputeConfiguration; end
+    end
+
+    # <p>Contains information about a base table that an intermediate table depends on.</p>
+    # @!attribute id
+    #   <p>The unique identifier of the dependency table.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the dependency table.</p>
+    #   @return [String]
+    # @!attribute type
+    #   <p>The type of the dependency table.</p>
+    #   @return [String]
+    # @!attribute parent_type
+    #   <p>The type of dependency, either direct or indirect. A direct dependency is a table explicitly referenced in the stored query. An indirect dependency is a table referenced through another intermediate table.</p>
+    #   @return [String]
+    # @!attribute creator_account_id
+    #   <p>The Amazon Web Services account ID of the member who owns the dependency table.</p>
+    #   @return [String]
+    class IntermediateTableDependency < Struct.new(
+      nil,
+      :id,
+      :name,
+      :type,
+      :parent_type,
+      :creator_account_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the privacy constraints inherited from parent tables for an intermediate table version.</p>
+    # @!attribute additional_analyses
+    #   <p>The inherited additional analyses constraint.</p>
+    #   @return [Types::InheritedAdditionalAnalyses]
+    # @!attribute allowed_additional_analyses
+    #   <p>The inherited allowed additional analyses constraint.</p>
+    #   @return [Types::InheritedAllowedAdditionalAnalyses]
+    # @!attribute allowed_result_receivers
+    #   <p>The inherited allowed result receivers constraint.</p>
+    #   @return [Types::InheritedAllowedResultReceivers]
+    # @!attribute disallowed_output_columns
+    #   <p>The inherited disallowed output columns constraint.</p>
+    #   @return [Types::InheritedDisallowedOutputColumns]
+    class IntermediateTableInheritedConstraints < Struct.new(
+      nil,
+      :additional_analyses,
+      :allowed_additional_analyses,
+      :allowed_result_receivers,
+      :disallowed_output_columns,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the output configuration of an intermediate table when a protected query populates it.</p>
+    # @!attribute id
+    #   <p>The unique identifier of the intermediate table.</p>
+    #   @return [String]
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the intermediate table.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the intermediate table.</p>
+    #   @return [String]
+    class IntermediateTableOutputConfiguration < Struct.new(
+      nil,
+      :id,
+      :arn,
+      :name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the schema definition of an intermediate table.</p>
+    # @!attribute columns
+    #   <p>The list of columns in the intermediate table schema.</p>
+    #   @return [Array<Types::Column>]
+    class IntermediateTableSchema < Struct.new(
+      nil,
+      :columns,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the schema type properties for an intermediate table.</p>
+    # @!attribute intermediate_table_id
+    #   <p>The unique identifier of the intermediate table.</p>
+    #   @return [String]
+    class IntermediateTableSchemaTypeProperties < Struct.new(
+      nil,
+      :intermediate_table_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains summary information about an intermediate table.</p>
+    # @!attribute id
+    #   <p>The unique identifier of the intermediate table.</p>
+    #   @return [String]
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the intermediate table.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the intermediate table.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>The description of the intermediate table.</p>
+    #   @return [String]
+    # @!attribute membership_arn
+    #   <p>The Amazon Resource Name (ARN) of the membership that contains the intermediate table.</p>
+    #   @return [String]
+    # @!attribute membership_id
+    #   <p>The unique identifier of the membership that contains the intermediate table.</p>
+    #   @return [String]
+    # @!attribute collaboration_arn
+    #   <p>The Amazon Resource Name (ARN) of the collaboration that contains the intermediate table.</p>
+    #   @return [String]
+    # @!attribute collaboration_id
+    #   <p>The unique identifier of the collaboration that contains the intermediate table.</p>
+    #   @return [String]
+    # @!attribute create_time
+    #   <p>The time the intermediate table was created.</p>
+    #   @return [Time]
+    # @!attribute update_time
+    #   <p>The time the intermediate table was last updated.</p>
+    #   @return [Time]
+    # @!attribute status
+    #   <p>The current status of the intermediate table.</p>
+    #   @return [String]
+    # @!attribute retention_in_days
+    #   <p>The number of days that populated data is retained before expiring.</p>
+    #   @return [Integer]
+    # @!attribute analysis_rule_types
+    #   <p>The types of analysis rules associated with the intermediate table.</p>
+    #   @return [Array<String>]
+    class IntermediateTableSummary < Struct.new(
+      nil,
+      :id,
+      :arn,
+      :name,
+      :description,
+      :membership_arn,
+      :membership_id,
+      :collaboration_arn,
+      :collaboration_id,
+      :create_time,
+      :update_time,
+      :status,
+      :retention_in_days,
+      :analysis_rule_types,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains summary information about a version of an intermediate table.</p>
+    # @!attribute version_id
+    #   <p>The unique identifier of the version.</p>
+    #   @return [String]
+    # @!attribute table_id
+    #   <p>The unique identifier of the intermediate table that this version belongs to.</p>
+    #   @return [String]
+    # @!attribute create_time
+    #   <p>The time the version was created.</p>
+    #   @return [Time]
+    # @!attribute analysis_id
+    #   <p>The identifier of the protected query that created this version.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status of the version.</p>
+    #   @return [String]
+    # @!attribute analysis_type
+    #   <p>The type of analysis that created this version.</p>
+    #   @return [String]
+    # @!attribute kms_key_arn
+    #   <p>The Amazon Resource Name (ARN) of the KMS key used to encrypt this version's data.</p>
+    #   @return [String]
+    # @!attribute expiration_time
+    #   <p>The time when this version expires based on the retention period.</p>
+    #   @return [Time]
+    class IntermediateTableVersionSummary < Struct.new(
+      nil,
+      :version_id,
+      :table_id,
+      :create_time,
+      :analysis_id,
+      :status,
+      :analysis_type,
+      :kms_key_arn,
+      :expiration_time,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Unexpected error during processing of request.</p>
     # @!attribute message
     #   @return [String]
@@ -4192,11 +5398,53 @@ module Aws::CleanRooms
 
     # <p>An object representing the collaboration member's payment responsibilities set by the collaboration creator for query and job compute costs.</p>
     # @!attribute is_responsible
-    #   <p>Indicates whether the collaboration creator has configured the collaboration member to pay for query and job compute costs (<code>TRUE</code>) or has not configured the collaboration member to pay for query and job compute costs (<code>FALSE</code>).</p> <p>Exactly one member can be configured to pay for query and job compute costs. An error is returned if the collaboration creator sets a <code>TRUE</code> value for more than one member in the collaboration. </p> <p>An error is returned if the collaboration creator sets a <code>FALSE</code> value for the member who can run queries and jobs.</p>
+    #   <p>Indicates whether the collaboration creator has configured the collaboration member to pay for query and job compute costs (<code>TRUE</code>) or has not configured the collaboration member to pay for query and job compute costs (<code>FALSE</code>).</p> <p>One or more members can be configured as payer candidates for query and job compute costs.</p> <p>An error is returned if the collaboration creator sets a <code>FALSE</code> value for the member who can run queries and jobs.</p>
     #   @return [Boolean]
     class JobComputePaymentConfig < Struct.new(
       nil,
       :is_responsible,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute membership_identifier
+    #   <p>A unique identifier for the membership to list analysis log exports for. Currently accepts the membership ID.</p>
+    #   @return [String]
+    # @!attribute analysis_identifier
+    #   <p>A filter on the unique identifier of the protected query that the analysis logs were exported for.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>A filter on the status of the analysis log export.</p>
+    #   @return [String]
+    # @!attribute next_token
+    #   <p>The pagination token that's used to fetch the next set of results.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results that are returned for an API request call. The service chooses a default number if you don't set one. The service might return a <code>nextToken</code> even if the <code>maxResults</code> value has not been met.</p>
+    #   @return [Integer]
+    class ListAnalysisLogExportsInput < Struct.new(
+      nil,
+      :membership_identifier,
+      :analysis_identifier,
+      :status,
+      :next_token,
+      :max_results,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute next_token
+    #   <p>The pagination token that's used to fetch the next set of results.</p>
+    #   @return [String]
+    # @!attribute analysis_log_exports
+    #   <p>A list of analysis log exports.</p>
+    #   @return [Array<Types::AnalysisLogExportSummary>]
+    class ListAnalysisLogExportsOutput < Struct.new(
+      nil,
+      :next_token,
+      :analysis_log_exports,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4652,6 +5900,78 @@ module Aws::CleanRooms
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute membership_identifier
+    #   <p>The unique identifier of the membership that contains the intermediate table.</p>
+    #   @return [String]
+    # @!attribute intermediate_table_identifier
+    #   <p>The unique identifier of the intermediate table for which to list versions.</p>
+    #   @return [String]
+    # @!attribute next_token
+    #   <p>The pagination token that's used to fetch the next set of results.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results that are returned for an API request call. The service chooses a default number if you don't set one. The service might return a <code>nextToken</code> even if the <code>maxResults</code> value has not been met.</p>
+    #   @return [Integer]
+    class ListIntermediateTableVersionsInput < Struct.new(
+      nil,
+      :membership_identifier,
+      :intermediate_table_identifier,
+      :next_token,
+      :max_results,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute intermediate_table_version_summaries
+    #   <p>The list of intermediate table version summaries.</p>
+    #   @return [Array<Types::IntermediateTableVersionSummary>]
+    # @!attribute next_token
+    #   <p>The pagination token that's used to fetch the next set of results.</p>
+    #   @return [String]
+    class ListIntermediateTableVersionsOutput < Struct.new(
+      nil,
+      :intermediate_table_version_summaries,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute membership_identifier
+    #   <p>The unique identifier of the membership for which to list intermediate tables.</p>
+    #   @return [String]
+    # @!attribute next_token
+    #   <p>The pagination token that's used to fetch the next set of results.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results that are returned for an API request call. The service chooses a default number if you don't set one. The service might return a <code>nextToken</code> even if the <code>maxResults</code> value has not been met.</p>
+    #   @return [Integer]
+    class ListIntermediateTablesInput < Struct.new(
+      nil,
+      :membership_identifier,
+      :next_token,
+      :max_results,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute intermediate_table_summaries
+    #   <p>The list of intermediate table summaries.</p>
+    #   @return [Array<Types::IntermediateTableSummary>]
+    # @!attribute next_token
+    #   <p>The pagination token that's used to fetch the next set of results.</p>
+    #   @return [String]
+    class ListIntermediateTablesOutput < Struct.new(
+      nil,
+      :intermediate_table_summaries,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute collaboration_identifier
     #   <p>The identifier of the collaboration in which the members are listed.</p>
     #   @return [String]
@@ -4951,10 +6271,34 @@ module Aws::CleanRooms
     # @!attribute model_inference
     #   <p>The payment responsibilities accepted by the member for model inference.</p>
     #   @return [Types::ModelInferencePaymentConfig]
+    # @!attribute synthetic_data_generation
+    #   <p>The payment configuration for machine learning synthetic data generation.</p>
+    #   @return [Types::SyntheticDataGenerationPaymentConfig]
     class MLPaymentConfig < Struct.new(
       nil,
       :model_training,
       :model_inference,
+      :synthetic_data_generation,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Parameters that control the generation of synthetic data for machine learning, including privacy settings and column classification details.</p>
+    # @!attribute epsilon
+    #   <p>The epsilon value for differential privacy when generating synthetic data. Lower values provide stronger privacy guarantees but may reduce data utility.</p>
+    #   @return [Float]
+    # @!attribute max_membership_inference_attack_score
+    #   <p>The maximum acceptable score for membership inference attack vulnerability. Synthetic data generation fails if the score for the resulting data exceeds this threshold.</p>
+    #   @return [Float]
+    # @!attribute column_classification
+    #   <p>Classification details for data columns that specify how each column should be treated during synthetic data generation.</p>
+    #   @return [Types::ColumnClassificationDetails]
+    class MLSyntheticDataParameters < Struct.new(
+      nil,
+      :epsilon,
+      :max_membership_inference_attack_score,
+      :column_classification,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4965,8 +6309,14 @@ module Aws::CleanRooms
     #   <p>The Amazon Web Services account ID of the member to add to the collaboration.</p>
     #   @return [String]
     # @!attribute member_abilities
-    #   <p>The abilities granted to the collaboration member. These determine what actions the member can perform within the collaboration.</p> <note> <p>The following values are currently not supported: <code>CAN_QUERY</code>, <code>CAN_RECEIVE_RESULTS,</code> and <code>CAN_RUN_JOB</code>. </p> <p>Set the value of <code>memberAbilities</code> to <code>[]</code> to allow a member to contribute data.</p> </note>
+    #   <p>The abilities granted to the collaboration member. These determine what actions the member can perform within the collaboration.</p> <note> <p>The following values are currently not supported: <code>CAN_QUERY</code> and <code>CAN_RUN_JOB</code>. </p> <p>Set the value of <code>memberAbilities</code> to <code>[]</code> to allow a member to contribute data.</p> <p>Set the value of <code>memberAbilities</code> to <code>[CAN_RECEIVE_RESULTS]</code> to allow a member to contribute data and receive results.</p> <p>Set the value of <code>memberAbilities</code> to <code>[CAN_EXPORT_QUERY_ANALYSIS_LOG]</code> so that the member can export the analysis logs for a protected query. Having this ability isn't sufficient on its own: You can export logs only for queries that you ran or paid for.</p> </note>
     #   @return [Array<String>]
+    # @!attribute ml_member_abilities
+    #   <p>The ML member abilities for a collaboration member.</p>
+    #   @return [Types::MLMemberAbilities]
+    # @!attribute payment_configuration
+    #   <p>An object representing the collaboration member's payment responsibilities set by the collaboration creator.</p>
+    #   @return [Types::PaymentConfiguration]
     # @!attribute display_name
     #   <p>Specifies the display name that will be shown for this member in the collaboration. While this field is required when inviting new members, it becomes optional when modifying abilities of existing collaboration members. </p>
     #   @return [String]
@@ -4974,6 +6324,8 @@ module Aws::CleanRooms
       nil,
       :account_id,
       :member_abilities,
+      :ml_member_abilities,
+      :payment_configuration,
       :display_name,
       keyword_init: true
     )
@@ -5108,6 +6460,9 @@ module Aws::CleanRooms
     # @!attribute payment_configuration
     #   <p>The payment responsibilities accepted by the collaboration member.</p>
     #   @return [Types::MembershipPaymentConfiguration]
+    # @!attribute is_metrics_enabled
+    #   <p>An indicator as to whether Amazon CloudWatch metrics are enabled for the membership.</p> <p>When <code>true</code>, metrics about query execution are collected in Amazon CloudWatch.</p>
+    #   @return [Boolean]
     class Membership < Struct.new(
       nil,
       :id,
@@ -5127,6 +6482,7 @@ module Aws::CleanRooms
       :default_result_configuration,
       :default_job_result_configuration,
       :payment_configuration,
+      :is_metrics_enabled,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5134,7 +6490,7 @@ module Aws::CleanRooms
 
     # <p>An object representing the payment responsibilities accepted by the collaboration member for query and job compute costs.</p>
     # @!attribute is_responsible
-    #   <p>Indicates whether the collaboration member has accepted to pay for job compute costs (<code>TRUE</code>) or has not accepted to pay for query and job compute costs (<code>FALSE</code>).</p> <p>There is only one member who pays for queries and jobs. </p> <p>An error message is returned for the following reasons: </p> <ul> <li> <p>If you set the value to <code>FALSE</code> but you are responsible to pay for query and job compute costs. </p> </li> <li> <p>If you set the value to <code>TRUE</code> but you are not responsible to pay for query and job compute costs. </p> </li> </ul>
+    #   <p>Indicates whether the collaboration member has accepted to pay for job compute costs (<code>TRUE</code>) or has not accepted to pay for query and job compute costs (<code>FALSE</code>).</p> <p>There can be one or more members who are designated as payer candidates for queries and jobs. </p> <p>An error message is returned for the following reasons: </p> <ul> <li> <p>If you set the value to <code>FALSE</code> but you are responsible to pay for query and job compute costs. </p> </li> <li> <p>If you set the value to <code>TRUE</code> but you are not responsible to pay for query and job compute costs. </p> </li> </ul>
     #   @return [Boolean]
     class MembershipJobComputePaymentConfig < Struct.new(
       nil,
@@ -5151,10 +6507,14 @@ module Aws::CleanRooms
     # @!attribute model_inference
     #   <p>The payment responsibilities accepted by the member for model inference.</p>
     #   @return [Types::MembershipModelInferencePaymentConfig]
+    # @!attribute synthetic_data_generation
+    #   <p>The payment configuration for synthetic data generation for this machine learning membership.</p>
+    #   @return [Types::MembershipSyntheticDataGenerationPaymentConfig]
     class MembershipMLPaymentConfig < Struct.new(
       nil,
       :model_training,
       :model_inference,
+      :synthetic_data_generation,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5338,9 +6698,21 @@ module Aws::CleanRooms
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Configuration for payment for synthetic data generation in a membership.</p>
+    # @!attribute is_responsible
+    #   <p>Indicates if this membership is responsible for paying for synthetic data generation.</p>
+    #   @return [Boolean]
+    class MembershipSyntheticDataGenerationPaymentConfig < Struct.new(
+      nil,
+      :is_responsible,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>An object representing the collaboration member's model inference payment responsibilities set by the collaboration creator.</p>
     # @!attribute is_responsible
-    #   <p>Indicates whether the collaboration creator has configured the collaboration member to pay for model inference costs (<code>TRUE</code>) or has not configured the collaboration member to pay for model inference costs (<code>FALSE</code>).</p> <p>Exactly one member can be configured to pay for model inference costs. An error is returned if the collaboration creator sets a <code>TRUE</code> value for more than one member in the collaboration. </p> <p>If the collaboration creator hasn't specified anyone as the member paying for model inference costs, then the member who can query is the default payer. An error is returned if the collaboration creator sets a <code>FALSE</code> value for the member who can query.</p>
+    #   <p>Indicates whether the collaboration creator has configured the collaboration member to pay for model inference costs (<code>TRUE</code>) or has not configured the collaboration member to pay for model inference costs (<code>FALSE</code>).</p> <p>One or more members can be configured as payer candidates for model inference costs.</p> <p>If the collaboration creator hasn't specified anyone as the member paying for model inference costs, then the member who can query is the default payer.</p>
     #   @return [Boolean]
     class ModelInferencePaymentConfig < Struct.new(
       nil,
@@ -5352,11 +6724,27 @@ module Aws::CleanRooms
 
     # <p>An object representing the collaboration member's model training payment responsibilities set by the collaboration creator.</p>
     # @!attribute is_responsible
-    #   <p>Indicates whether the collaboration creator has configured the collaboration member to pay for model training costs (<code>TRUE</code>) or has not configured the collaboration member to pay for model training costs (<code>FALSE</code>).</p> <p>Exactly one member can be configured to pay for model training costs. An error is returned if the collaboration creator sets a <code>TRUE</code> value for more than one member in the collaboration. </p> <p>If the collaboration creator hasn't specified anyone as the member paying for model training costs, then the member who can query is the default payer. An error is returned if the collaboration creator sets a <code>FALSE</code> value for the member who can query.</p>
+    #   <p>Indicates whether the collaboration creator has configured the collaboration member to pay for model training costs (<code>TRUE</code>) or has not configured the collaboration member to pay for model training costs (<code>FALSE</code>).</p> <p>One or more members can be configured as payer candidates for model training costs.</p> <p>If the collaboration creator hasn't specified anyone as the member paying for model training costs, then the member who can query is the default payer.</p>
     #   @return [Boolean]
     class ModelTrainingPaymentConfig < Struct.new(
       nil,
       :is_responsible,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Specifies the minimum number of distinct identities for an individual output column. This value overrides the table-wide <code>minimumIdentityCount</code> that you set in <code>AggregationThreshold</code>.</p>
+    # @!attribute output_column_name
+    #   <p>The name of the output column that the override applies to. You can specify each column only once.</p>
+    #   @return [String]
+    # @!attribute minimum_identity_count
+    #   <p>The minimum number of distinct identities that each query output group must represent for this column. Specify 0 to exempt the column from the threshold, or a value of 2 or greater to enforce a threshold.</p>
+    #   @return [Integer]
+    class OutputColumnThreshold < Struct.new(
+      nil,
+      :output_column_name,
+      :minimum_identity_count,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5407,6 +6795,84 @@ module Aws::CleanRooms
     class PopulateIdMappingTableOutput < Struct.new(
       nil,
       :id_mapping_job_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute intermediate_table_identifier
+    #   <p>The unique identifier of the intermediate table to populate.</p>
+    #   @return [String]
+    # @!attribute membership_identifier
+    #   <p>The unique identifier of the membership that contains the intermediate table.</p>
+    #   @return [String]
+    # @!attribute parameters
+    #   <p>The runtime parameter values that override the defaults in the stored query.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute compute_configuration
+    #   <p>The compute configuration for the population query execution.</p>
+    #   @return [Types::IntermediateTableComputeConfiguration]
+    # @!attribute analysis_payer_account_id
+    #   <p>The account ID of the member that pays for the analysis compute costs.</p>
+    #   @return [String]
+    class PopulateIntermediateTableInput < Struct.new(
+      nil,
+      :intermediate_table_identifier,
+      :membership_identifier,
+      :parameters,
+      :compute_configuration,
+      :analysis_payer_account_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute analysis_id
+    #   <p>The identifier for the protected query execution that populated the intermediate table.</p>
+    #   @return [String]
+    # @!attribute analysis_type
+    #   <p>The type of analysis performed to populate the intermediate table.</p>
+    #   @return [String]
+    # @!attribute version_id
+    #   <p>The unique identifier of the version created by this population operation.</p>
+    #   @return [String]
+    class PopulateIntermediateTableOutput < Struct.new(
+      nil,
+      :analysis_id,
+      :analysis_type,
+      :version_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the configuration that defines the analysis used to populate an intermediate table.</p>
+    # @!attribute sql_parameters
+    #   <p>The SQL parameters for the population analysis, including the query string or analysis template ARN.</p>
+    #   @return [Types::PopulationAnalysisSqlParameters]
+    class PopulationAnalysisConfiguration < Struct.new(
+      :sql_parameters,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class SqlParameters < PopulationAnalysisConfiguration; end
+      class Unknown < PopulationAnalysisConfiguration; end
+    end
+
+    # <p>Contains the SQL parameters used to populate an intermediate table.</p>
+    # @note This shape contains sensitive data and should be treated as such.
+    # @!attribute query_string
+    #   <p>The SQL query string used to populate the intermediate table.</p>
+    #   @return [String]
+    # @!attribute analysis_template_arn
+    #   <p>The Amazon Resource Name (ARN) of the analysis template to use for populating the intermediate table.</p>
+    #   @return [String]
+    class PopulationAnalysisSqlParameters < Struct.new(
+      nil,
+      :query_string,
+      :analysis_template_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5730,6 +7196,9 @@ module Aws::CleanRooms
     # @!attribute compute_configuration
     #   <p>The compute configuration for the protected job.</p>
     #   @return [Types::ProtectedJobComputeConfiguration]
+    # @!attribute job_compute_payer_account_id
+    #   <p>The account ID of the member that pays for the job compute costs.</p>
+    #   @return [String]
     class ProtectedJob < Struct.new(
       nil,
       :id,
@@ -5743,6 +7212,7 @@ module Aws::CleanRooms
       :result,
       :error,
       :compute_configuration,
+      :job_compute_payer_account_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5889,9 +7359,13 @@ module Aws::CleanRooms
     # @!attribute analysis_template_arn
     #   <p> The ARN of the analysis template.</p>
     #   @return [String]
+    # @!attribute parameters
+    #   <p>Runtime configuration values passed to the PySpark analysis script. Parameter names and types must match those defined in the analysis template.</p>
+    #   @return [Hash<String, String>]
     class ProtectedJobParameters < Struct.new(
       nil,
       :analysis_template_arn,
+      :parameters,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6040,6 +7514,9 @@ module Aws::CleanRooms
     # @!attribute receiver_configurations
     #   <p> The receiver configurations for the protected job.</p>
     #   @return [Array<Types::ProtectedJobReceiverConfiguration>]
+    # @!attribute job_compute_payer_account_id
+    #   <p>The account ID of the member that pays for the job compute costs.</p>
+    #   @return [String]
     class ProtectedJobSummary < Struct.new(
       nil,
       :id,
@@ -6048,6 +7525,7 @@ module Aws::CleanRooms
       :create_time,
       :status,
       :receiver_configurations,
+      :job_compute_payer_account_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6065,10 +7543,14 @@ module Aws::CleanRooms
     # @!attribute number
     #   <p>The number of workers for a PySpark job.</p>
     #   @return [Integer]
+    # @!attribute properties
+    #   <p>The configuration properties for the worker compute environment. These properties allow you to customize the compute settings for your Clean Rooms workloads.</p>
+    #   @return [Types::WorkerComputeConfigurationProperties]
     class ProtectedJobWorkerComputeConfiguration < Struct.new(
       nil,
       :type,
       :number,
+      :properties,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6111,6 +7593,9 @@ module Aws::CleanRooms
     # @!attribute compute_configuration
     #   <p> The compute configuration for the protected query.</p>
     #   @return [Types::ComputeConfiguration]
+    # @!attribute query_compute_payer_account_id
+    #   <p>The account ID of the member that pays for the query compute costs.</p>
+    #   @return [String]
     class ProtectedQuery < Struct.new(
       nil,
       :id,
@@ -6125,6 +7610,7 @@ module Aws::CleanRooms
       :error,
       :differential_privacy,
       :compute_configuration,
+      :query_compute_payer_account_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6241,10 +7727,14 @@ module Aws::CleanRooms
     # @!attribute distribute
     #   <p> Required configuration for a protected query with a <code>distribute</code> output type.</p>
     #   @return [Types::ProtectedQueryDistributeOutputConfiguration]
+    # @!attribute intermediate_table
+    #   <p>The intermediate table output configuration, present when the protected query was triggered by a populate operation.</p>
+    #   @return [Types::IntermediateTableOutputConfiguration]
     class ProtectedQueryOutputConfiguration < Struct.new(
       :s3,
       :member,
       :distribute,
+      :intermediate_table,
       :unknown,
       keyword_init: true
     )
@@ -6253,6 +7743,7 @@ module Aws::CleanRooms
       class S3 < ProtectedQueryOutputConfiguration; end
       class Member < ProtectedQueryOutputConfiguration; end
       class Distribute < ProtectedQueryOutputConfiguration; end
+      class IntermediateTable < ProtectedQueryOutputConfiguration; end
       class Unknown < ProtectedQueryOutputConfiguration; end
     end
 
@@ -6384,6 +7875,12 @@ module Aws::CleanRooms
     # @!attribute receiver_configurations
     #   <p> The receiver configuration.</p>
     #   @return [Array<Types::ReceiverConfiguration>]
+    # @!attribute query_compute_payer_account_id
+    #   <p>The account ID of the member that pays for the query compute costs.</p>
+    #   @return [String]
+    # @!attribute intermediate_table_configuration
+    #   <p>The intermediate table configuration, present when the protected query was triggered by a populate operation.</p>
+    #   @return [Types::IntermediateTableOutputConfiguration]
     class ProtectedQuerySummary < Struct.new(
       nil,
       :id,
@@ -6392,6 +7889,8 @@ module Aws::CleanRooms
       :create_time,
       :status,
       :receiver_configurations,
+      :query_compute_payer_account_id,
+      :intermediate_table_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6404,7 +7903,7 @@ module Aws::CleanRooms
 
     # <p>An object representing the collaboration member's payment responsibilities set by the collaboration creator for query compute costs.</p>
     # @!attribute is_responsible
-    #   <p>Indicates whether the collaboration creator has configured the collaboration member to pay for query compute costs (<code>TRUE</code>) or has not configured the collaboration member to pay for query compute costs (<code>FALSE</code>).</p> <p>Exactly one member can be configured to pay for query compute costs. An error is returned if the collaboration creator sets a <code>TRUE</code> value for more than one member in the collaboration. </p> <p>If the collaboration creator hasn't specified anyone as the member paying for query compute costs, then the member who can query is the default payer. An error is returned if the collaboration creator sets a <code>FALSE</code> value for the member who can query.</p>
+    #   <p>Indicates whether the collaboration creator has configured the collaboration member to pay for query compute costs (<code>TRUE</code>) or has not configured the collaboration member to pay for query compute costs (<code>FALSE</code>).</p> <p>One or more members can be configured as payer candidates for query compute costs.</p> <p>If the collaboration creator hasn't specified anyone as the member paying for query compute costs, then the member who can query is the default payer.</p>
     #   @return [Boolean]
     class QueryComputePaymentConfig < Struct.new(
       nil,
@@ -6690,14 +8189,24 @@ module Aws::CleanRooms
     # @!attribute id_mapping_table
     #   <p>The ID mapping table for the schema type properties.</p>
     #   @return [Types::IdMappingTableSchemaTypeProperties]
+    # @!attribute intermediate_table
+    #   <p>The schema type properties for an intermediate table.</p>
+    #   @return [Types::IntermediateTableSchemaTypeProperties]
+    # @!attribute configured_table_association
+    #   <p>The schema type properties for a configured table association.</p>
+    #   @return [Types::ConfiguredTableAssociationSchemaTypeProperties]
     class SchemaTypeProperties < Struct.new(
       :id_mapping_table,
+      :intermediate_table,
+      :configured_table_association,
       :unknown,
       keyword_init: true
     )
       include ::Smithy::Schema::Union
 
       class IdMappingTable < SchemaTypeProperties; end
+      class IntermediateTable < SchemaTypeProperties; end
+      class ConfiguredTableAssociation < SchemaTypeProperties; end
       class Unknown < SchemaTypeProperties; end
     end
 
@@ -6783,6 +8292,40 @@ module Aws::CleanRooms
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute membership_identifier
+    #   <p>A unique identifier for the membership to export the analysis logs for. Currently accepts a membership ID.</p>
+    #   @return [String]
+    # @!attribute analysis_id
+    #   <p>The unique identifier of the protected query that you want to export the analysis logs for.</p>
+    #   @return [String]
+    # @!attribute analysis_type
+    #   <p>The type of analysis that the logs are exported for. Currently, only <code>PROTECTED_QUERY</code> is supported.</p>
+    #   @return [String]
+    # @!attribute result_configuration
+    #   <p>The details needed to write the exported analysis logs.</p> <p>You don't need to create an IAM role for log export. Clean Rooms writes the exported logs using your own identity, so Clean Rooms writes the exported logs only where your existing permissions allow.</p>
+    #   @return [Types::AnalysisLogExportResultConfiguration]
+    class StartAnalysisLogExportInput < Struct.new(
+      nil,
+      :membership_identifier,
+      :analysis_id,
+      :analysis_type,
+      :result_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute analysis_log_export
+    #   <p>The analysis log export that was started. The <code>status</code> is <code>IN_PROGRESS</code>.</p>
+    #   @return [Types::AnalysisLogExport]
+    class StartAnalysisLogExportOutput < Struct.new(
+      nil,
+      :analysis_log_export,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute type
     #   <p> The type of protected job to start.</p>
     #   @return [String]
@@ -6798,6 +8341,9 @@ module Aws::CleanRooms
     # @!attribute compute_configuration
     #   <p>The compute configuration for the protected job.</p>
     #   @return [Types::ProtectedJobComputeConfiguration]
+    # @!attribute job_compute_payer_account_id
+    #   <p>The account ID of the member that pays for the job compute costs.</p>
+    #   @return [String]
     class StartProtectedJobInput < Struct.new(
       nil,
       :type,
@@ -6805,6 +8351,7 @@ module Aws::CleanRooms
       :job_parameters,
       :result_configuration,
       :compute_configuration,
+      :job_compute_payer_account_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6836,6 +8383,9 @@ module Aws::CleanRooms
     # @!attribute compute_configuration
     #   <p> The compute configuration for the protected query.</p>
     #   @return [Types::ComputeConfiguration]
+    # @!attribute query_compute_payer_account_id
+    #   <p>The account ID of the member that pays for the query compute costs.</p>
+    #   @return [String]
     class StartProtectedQueryOperationInput < Struct.new(
       nil,
       :type,
@@ -6843,6 +8393,7 @@ module Aws::CleanRooms
       :sql_parameters,
       :result_configuration,
       :compute_configuration,
+      :query_compute_payer_account_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6857,6 +8408,53 @@ module Aws::CleanRooms
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+    end
+
+    # <p>Properties that define how a specific data column should be handled during synthetic data generation, including its name, type, and role in predictive modeling.</p>
+    # @!attribute column_name
+    #   <p>The name of the data column as it appears in the dataset.</p>
+    #   @return [String]
+    # @!attribute column_type
+    #   <p>The data type of the column, which determines how the synthetic data generation algorithm processes and synthesizes values for this column.</p>
+    #   @return [String]
+    # @!attribute is_predictive_value
+    #   <p>Indicates if this column contains predictive values that should be treated as target variables in machine learning models. This affects how the synthetic data generation preserves statistical relationships.</p>
+    #   @return [Boolean]
+    class SyntheticDataColumnProperties < Struct.new(
+      nil,
+      :column_name,
+      :column_type,
+      :is_predictive_value,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Payment configuration for synthetic data generation.</p>
+    # @!attribute is_responsible
+    #   <p>Indicates who is responsible for paying for synthetic data generation.</p>
+    #   @return [Boolean]
+    class SyntheticDataGenerationPaymentConfig < Struct.new(
+      nil,
+      :is_responsible,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The parameters that control how synthetic data is generated, including privacy settings, column classifications, and other configuration options that affect the data synthesis process.</p>
+    # @!attribute ml_synthetic_data_parameters
+    #   <p>The machine learning-specific parameters for synthetic data generation.</p>
+    #   @return [Types::MLSyntheticDataParameters]
+    class SyntheticDataParameters < Struct.new(
+      :ml_synthetic_data_parameters,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class MlSyntheticDataParameters < SyntheticDataParameters; end
+      class Unknown < SyntheticDataParameters; end
     end
 
     # <p>A pointer to the dataset that underlies this table.</p>
@@ -6964,6 +8562,36 @@ module Aws::CleanRooms
     class UpdateAnalysisTemplateOperationOutput < Struct.new(
       nil,
       :analysis_template,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute collaboration_identifier
+    #   <p>The unique identifier of the collaboration that contains the change request to be updated.</p>
+    #   @return [String]
+    # @!attribute change_request_identifier
+    #   <p>The unique identifier of the specific change request to be updated within the collaboration.</p>
+    #   @return [String]
+    # @!attribute action
+    #   <p>The action to perform on the change request. Valid values include APPROVE (approve the change), DENY (reject the change), CANCEL (cancel the request), and COMMIT (commit after the request is approved).</p> <p>For change requests without automatic approval, a member in the collaboration can manually APPROVE or DENY a change request. The collaboration owner can manually CANCEL or COMMIT a change request.</p>
+    #   @return [String]
+    class UpdateCollaborationChangeRequestInput < Struct.new(
+      nil,
+      :collaboration_identifier,
+      :change_request_identifier,
+      :action,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute collaboration_change_request
+    #   <p>Represents a request to modify a collaboration. Change requests enable structured modifications to collaborations after they have been created.</p>
+    #   @return [Types::CollaborationChangeRequest]
+    class UpdateCollaborationChangeRequestOutput < Struct.new(
+      nil,
+      :collaboration_change_request,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7254,6 +8882,78 @@ module Aws::CleanRooms
     end
 
     # @!attribute membership_identifier
+    #   <p>The unique identifier of the membership that contains the intermediate table.</p>
+    #   @return [String]
+    # @!attribute intermediate_table_identifier
+    #   <p>The unique identifier of the intermediate table for which to update the analysis rule.</p>
+    #   @return [String]
+    # @!attribute analysis_rule_type
+    #   <p>The type of analysis rule to update. Currently, only <code>CUSTOM</code> is supported.</p>
+    #   @return [String]
+    # @!attribute analysis_rule_policy
+    #   <p>The updated analysis rule policy for the intermediate table.</p>
+    #   @return [Types::IntermediateTableAnalysisRulePolicy]
+    class UpdateIntermediateTableAnalysisRuleInput < Struct.new(
+      nil,
+      :membership_identifier,
+      :intermediate_table_identifier,
+      :analysis_rule_type,
+      :analysis_rule_policy,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute analysis_rule
+    #   <p>The updated analysis rule for the intermediate table.</p>
+    #   @return [Types::IntermediateTableAnalysisRule]
+    class UpdateIntermediateTableAnalysisRuleOutput < Struct.new(
+      nil,
+      :analysis_rule,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute intermediate_table_identifier
+    #   <p>The unique identifier of the intermediate table to update.</p>
+    #   @return [String]
+    # @!attribute membership_identifier
+    #   <p>The unique identifier of the membership that contains the intermediate table.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>A new description for the intermediate table.</p>
+    #   @return [String]
+    # @!attribute kms_key_arn
+    #   <p>The Amazon Resource Name (ARN) of the customer-managed KMS key to use for encrypting future population data.</p>
+    #   @return [String]
+    # @!attribute columns
+    #   <p>The list of columns with updated type definitions. Only the type of existing columns can be updated.</p>
+    #   @return [Array<Types::IntermediateTableColumn>]
+    class UpdateIntermediateTableInput < Struct.new(
+      nil,
+      :intermediate_table_identifier,
+      :membership_identifier,
+      :description,
+      :kms_key_arn,
+      :columns,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute intermediate_table
+    #   <p>The updated intermediate table.</p>
+    #   @return [Types::IntermediateTable]
+    class UpdateIntermediateTableOutput < Struct.new(
+      nil,
+      :intermediate_table,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute membership_identifier
     #   <p>The unique identifier of the membership.</p>
     #   @return [String]
     # @!attribute query_log_status
@@ -7268,6 +8968,9 @@ module Aws::CleanRooms
     # @!attribute default_job_result_configuration
     #   <p> The default job result configuration.</p>
     #   @return [Types::MembershipProtectedJobResultConfiguration]
+    # @!attribute membership_payment_configuration
+    #   <p>The payment configuration to update for the membership.</p>
+    #   @return [Types::UpdateMembershipPaymentConfiguration]
     class UpdateMembershipOperationInput < Struct.new(
       nil,
       :membership_identifier,
@@ -7275,6 +8978,7 @@ module Aws::CleanRooms
       :job_log_status,
       :default_result_configuration,
       :default_job_result_configuration,
+      :membership_payment_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7286,6 +8990,26 @@ module Aws::CleanRooms
     class UpdateMembershipOperationOutput < Struct.new(
       nil,
       :membership,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>An object representing the payment responsibilities to update for the membership.</p>
+    # @!attribute query_compute
+    #   <p>An object representing the payment responsibilities accepted by the collaboration member for query compute costs.</p>
+    #   @return [Types::MembershipQueryComputePaymentConfig]
+    # @!attribute machine_learning
+    #   <p>An object representing the collaboration member's machine learning payment responsibilities set by the collaboration creator.</p>
+    #   @return [Types::MembershipMLPaymentConfig]
+    # @!attribute job_compute
+    #   <p>An object representing the payment responsibilities accepted by the collaboration member for query and job compute costs.</p>
+    #   @return [Types::MembershipJobComputePaymentConfig]
+    class UpdateMembershipPaymentConfiguration < Struct.new(
+      nil,
+      :query_compute,
+      :machine_learning,
+      :job_compute,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7427,13 +9151,32 @@ module Aws::CleanRooms
     # @!attribute number
     #   <p> The number of workers.</p> <p>SQL queries support a minimum value of 2 and a maximum value of 400. </p> <p>PySpark jobs support a minimum value of 4 and a maximum value of 128.</p>
     #   @return [Integer]
+    # @!attribute properties
+    #   <p>The configuration properties for the worker compute environment. These properties allow you to customize the compute settings for your Clean Rooms workloads.</p>
+    #   @return [Types::WorkerComputeConfigurationProperties]
     class WorkerComputeConfiguration < Struct.new(
       nil,
       :type,
       :number,
+      :properties,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration properties that define the compute environment settings for workers in Clean Rooms. These properties enable customization of the underlying compute environment to optimize performance for your specific workloads.</p>
+    # @!attribute spark
+    #   <p>The Spark configuration properties for SQL and PySpark workloads. This map contains key-value pairs that configure Apache Spark settings to optimize performance for your data processing jobs. You can specify up to 50 Spark properties, with each key being 1-200 characters and each value being 0-500 characters. These properties allow you to adjust compute capacity for large datasets and complex workloads.</p>
+    #   @return [Hash<String, String>]
+    class WorkerComputeConfigurationProperties < Struct.new(
+      :spark,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class Spark < WorkerComputeConfigurationProperties; end
+      class Unknown < WorkerComputeConfigurationProperties; end
     end
 
   end

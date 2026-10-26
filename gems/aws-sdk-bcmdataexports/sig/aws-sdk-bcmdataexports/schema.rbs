@@ -2,6 +2,8 @@ module Aws::BCMDataExports
   module Schema
     include Smithy::Schema::Shapes
 
+    AccessDeniedException: StructureShape
+    AccountId: StringShape
     Arn: StringShape
     Column: StructureShape
     ColumnList: ListShape
@@ -65,6 +67,7 @@ module Aws::BCMDataExports
     TableProperty: StringShape
     TablePropertyDescription: StructureShape
     TablePropertyDescriptionList: ListShape
+    TablePropertyGenericString: StringShape
     TagResourceRequest: StructureShape
     TagResourceResponse: StructureShape
     ThrottlingException: StructureShape

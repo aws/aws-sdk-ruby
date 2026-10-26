@@ -144,18 +144,18 @@ module Aws::SSM
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -305,7 +305,7 @@ module Aws::SSM
     #            </important>
     # @example Request syntax with placeholder values
     #   params = {
-    #     resource_type: "Document" # One of: ["Document", "ManagedInstance", "MaintenanceWindow", "Parameter", "PatchBaseline", "OpsItem", "OpsMetadata", "Automation", "Association"], # required
+    #     resource_type: "Document" # One of: ["Document", "ManagedInstance", "MaintenanceWindow", "Parameter", "PatchBaseline", "OpsItem", "OpsMetadata", "Automation", "Association", "CloudConnector"], # required
     #     resource_id: "ResourceId", # required
     #     tags: [ # required
     #       {
@@ -634,7 +634,8 @@ module Aws::SSM
     #      association. Use this action to create an association in multiple Regions and multiple
     #      accounts.</p>
     #            <note>
-    #               <p>The <code>IncludeChildOrganizationUnits</code> parameter is not supported by State Manager.</p>
+    #               <p>The <code>TargetLocationAlarmConfiguration</code> parameter is not supported by State
+    #       Manager.</p>
     #            </note>
     # @option params [Integer] :schedule_offset
     #   <p>Number of days to wait after the scheduled day to run an association. For example, if you
@@ -675,6 +676,19 @@ module Aws::SSM
     # @option params [Types::AlarmConfiguration] :alarm_configuration
     #   <p>The details for the CloudWatch alarm you want to apply to an automation or
     #      command.</p>
+    # @option params [String] :association_dispatch_assume_role
+    #   <p>A role used by association to take actions on your behalf.
+    #      State Manager will assume this role and call required APIs when dispatching
+    #      configurations to nodes. If not specified, <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html">
+    #      service-linked role for Systems Manager</a> will be used by default.
+    #     </p>
+    #            <note>
+    #               <p>It is recommended that you define a custom IAM role so that you have full control of
+    #       the permissions that State Manager has when taking actions on your behalf.</p>
+    #               <p>Service-linked role support in State Manager is being phased out. Associations
+    #       relying on service-linked role may require updates in the future to continue
+    #       functioning properly.</p>
+    #            </note>
     # @example Request syntax with placeholder values
     #   params = {
     #     name: "DocumentARN", # required
@@ -752,7 +766,8 @@ module Aws::SSM
     #           name: "AlarmName", # required
     #         }
     #       ]
-    #     }
+    #     },
+    #     association_dispatch_assume_role: "AssociationDispatchAssumeRoleArn"
     #   }
     #   options = {}
     #   response = client.create_association(params, options)
@@ -854,7 +869,8 @@ module Aws::SSM
     #           name: "AlarmName", # required
     #           state: "UNKNOWN" # One of: ["UNKNOWN", "ALARM"], # required
     #         }
-    #       ]
+    #       ],
+    #       association_dispatch_assume_role: "AssociationDispatchAssumeRoleArn"
     #     }
     #   }
     # @return [Types::CreateAssociationResult]
@@ -873,6 +889,19 @@ module Aws::SSM
     # @param [Hash, Types::CreateAssociationBatchRequest] params
     # @option params [Array<Types::CreateAssociationBatchRequestEntry>] :entries
     #   <p>One or more associations.</p>
+    # @option params [String] :association_dispatch_assume_role
+    #   <p>A role used by association to take actions on your behalf.
+    #      State Manager will assume this role and call required APIs when dispatching
+    #      configurations to nodes. If not specified, <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html">
+    #      service-linked role for Systems Manager</a> will be used by default.
+    #     </p>
+    #            <note>
+    #               <p>It is recommended that you define a custom IAM role so that you have full control of
+    #       the permissions that State Manager has when taking actions on your behalf.</p>
+    #               <p>Service-linked role support in State Manager is being phased out. Associations
+    #       relying on service-linked role may require updates in the future to continue
+    #       functioning properly.</p>
+    #            </note>
     # @example Request syntax with placeholder values
     #   params = {
     #     entries: [ # required
@@ -948,7 +977,8 @@ module Aws::SSM
     #           ]
     #         }
     #       }
-    #     ]
+    #     ],
+    #     association_dispatch_assume_role: "AssociationDispatchAssumeRoleArn"
     #   }
     #   options = {}
     #   response = client.create_association_batch(params, options)
@@ -1051,7 +1081,8 @@ module Aws::SSM
     #             name: "AlarmName", # required
     #             state: "UNKNOWN" # One of: ["UNKNOWN", "ALARM"], # required
     #           }
-    #         ]
+    #         ],
+    #         association_dispatch_assume_role: "AssociationDispatchAssumeRoleArn"
     #       }
     #     ],
     #     failed: [
@@ -1136,6 +1167,67 @@ module Aws::SSM
     # @return [Types::CreateAssociationBatchResult]
     def create_association_batch(params = {}, options = {})
       request = build_request(:create_association_batch, params)
+      request.send_request(options)
+    end
+
+    # <p>Creates a cloud connector that establishes a connection between Systems Manager and a third-party
+    #    cloud environment.</p>
+    # @param [Hash, Types::CreateCloudConnectorRequest] params
+    # @option params [String] :display_name
+    #   <p>A friendly name for the cloud connector.</p>
+    # @option params [String] :role_arn
+    #   <p>The Amazon Resource Name (ARN) of the IAM role that the cloud connector
+    #      uses to communicate with the third-party cloud environment.</p>
+    # @option params [String] :description
+    #   <p>A description for the cloud connector.</p>
+    # @option params [Types::CloudConnectorConfiguration] :configuration
+    #   <p>The configuration details for connecting to the third-party cloud environment.</p>
+    # @option params [String] :config_connector_arn
+    #   <p>The ARN of the Amazon Web Services Config connector associated with this cloud connector.</p>
+    # @option params [Array<Types::Tag>] :tags
+    #   <p>Optional metadata that you assign to a resource. Tags enable you to categorize a resource
+    #      in different ways, such as by purpose, owner, or environment.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     display_name: "DisplayName", # required
+    #     role_arn: "CloudConnectorIamRoleArn", # required
+    #     description: "CloudConnectorDescription",
+    #     configuration: { # required
+    #       # One of:
+    #       azure_configuration: {
+    #         tenant_id: "AzureTenantId", # required
+    #         tenant_display_name: "AzureTenantDisplayName",
+    #         application_id: "AzureApplicationId", # required
+    #         application_display_name: "AzureApplicationDisplayName",
+    #         targets: {
+    #           # One of:
+    #           subscriptions: [
+    #             {
+    #               id: "AzureSubscriptionId", # required
+    #               display_name: "AzureSubscriptionDisplayName"
+    #             }
+    #           ]
+    #         }
+    #       }
+    #     },
+    #     config_connector_arn: "ConfigConnectorArn", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       }
+    #     ]
+    #   }
+    #   options = {}
+    #   response = client.create_cloud_connector(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     cloud_connector_id: "CloudConnectorId"
+    #   }
+    # @return [Types::CreateCloudConnectorResult]
+    def create_cloud_connector(params = {}, options = {})
+      request = build_request(:create_cloud_connector, params)
       request.send_request(options)
     end
 
@@ -1507,17 +1599,22 @@ module Aws::SSM
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>/aws/changerequest</code>
-    #                  </p>
-    #                  <p>This type of OpsItem is used by Change Manager for reviewing and approving or rejecting change
-    #        requests. </p>
-    #               </li>
-    #               <li>
-    #                  <p>
     #                     <code>/aws/insight</code>
     #                  </p>
     #                  <p>This type of OpsItem is used by OpsCenter for aggregating and reporting on duplicate
     #        OpsItems. </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>/aws/changerequest</code>
+    #                  </p>
+    #                  <p>This type of OpsItem is used by Change Manager for reviewing and approving or rejecting change
+    #        requests. </p>
+    #                  <important>
+    #                     <p>Amazon Web Services Systems Manager Change Manager is no longer open to new customers. Existing customers can
+    #     continue to use the service as normal. For more information, see
+    #   <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/change-manager-availability-change.html">Amazon Web Services Systems Manager Change Manager availability change</a>.</p>
+    #                  </important>
     #               </li>
     #            </ul>
     # @option params [Hash<String, Types::OpsItemDataValue>] :operational_data
@@ -2013,6 +2110,27 @@ module Aws::SSM
       request.send_request(options)
     end
 
+    # <p>Deletes a cloud connector.</p>
+    # @param [Hash, Types::DeleteCloudConnectorRequest] params
+    # @option params [String] :cloud_connector_id
+    #   <p>The ID of the cloud connector to delete.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     cloud_connector_id: "CloudConnectorId", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_cloud_connector(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     cloud_connector_id: "CloudConnectorId"
+    #   }
+    # @return [Types::DeleteCloudConnectorResult]
+    def delete_cloud_connector(params = {}, options = {})
+      request = build_request(:delete_cloud_connector, params)
+      request.send_request(options)
+    end
+
     # <p>Deletes the Amazon Web Services Systems Manager document (SSM document) and all managed node associations to the
     #    document.</p>
     #          <p>Before you delete the document, we recommend that you use <a>DeleteAssociation</a> to disassociate all managed nodes that are associated with the document.</p>
@@ -2300,6 +2418,11 @@ module Aws::SSM
     #      cross-account sharing of parameters, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-shared-parameters.html">Working with
     #       shared parameters</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>
     #             </li>
+    #             <li>
+    #                <p>
+    #                   <code>Document</code> – Shares the document using Resource Access Manager (RAM). For more information about sharing documents, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/documents-ssm-sharing.html">Sharing
+    #       Systems Manager documents</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>
+    #             </li>
     #          </ul>
     # @param [Hash, Types::DeleteResourcePolicyRequest] params
     # @option params [String] :resource_arn
@@ -2309,11 +2432,28 @@ module Aws::SSM
     # @option params [String] :policy_hash
     #   <p>ID of the current policy version. The hash helps to prevent multiple calls from attempting
     #      to overwrite a policy.</p>
+    # @option params [String] :deletion_mode
+    #   <p>Specifies the intended outcome of the operation. Applies only to the <code>Document</code>
+    #      resource type. The operation ignores this parameter for other resource types. Optional. Defaults
+    #      to <code>RemoveSharing</code>.</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>RemoveSharing</code> – Deletes the resource policy and removes sharing of the
+    #        document.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>RollbackMigration</code> – Reverts the document to Custom sharing, preserving
+    #        existing consumer access, instead of removing the policy.</p>
+    #               </li>
+    #            </ul>
     # @example Request syntax with placeholder values
     #   params = {
     #     resource_arn: "ResourceArnString", # required
     #     policy_id: "PolicyId", # required
     #     policy_hash: "PolicyHash", # required
+    #     deletion_mode: "RemoveSharing" # One of: ["RemoveSharing", "RollbackMigration"]
     #   }
     #   options = {}
     #   response = client.delete_resource_policy(params, options)
@@ -2609,7 +2749,8 @@ module Aws::SSM
     #           name: "AlarmName", # required
     #           state: "UNKNOWN" # One of: ["UNKNOWN", "ALARM"], # required
     #         }
-    #       ]
+    #       ],
+    #       association_dispatch_assume_role: "AssociationDispatchAssumeRoleArn"
     #     }
     #   }
     # @return [Types::DescribeAssociationResult]
@@ -2786,6 +2927,7 @@ module Aws::SSM
     #         current_step_name: "String",
     #         current_action: "String",
     #         failure_message: "String",
+    #         warning_message: "String",
     #         target_parameter_name: "AutomationParameterKey",
     #         targets: [
     #           {
@@ -2939,6 +3081,7 @@ module Aws::SSM
     #         },
     #         response: "String",
     #         failure_message: "String",
+    #         warning_message: "String",
     #         failure_details: {
     #           failure_stage: "String",
     #           failure_type: "String",
@@ -3619,7 +3762,8 @@ module Aws::SSM
     #           }
     #         },
     #         source_id: "SourceId",
-    #         source_type: "AWS::EC2::Instance" # One of: ["AWS::EC2::Instance", "AWS::IoT::Thing", "AWS::SSM::ManagedInstance"]
+    #         source_type: "AWS::EC2::Instance" # One of: ["AWS::EC2::Instance", "AWS::IoT::Thing", "AWS::SSM::ManagedInstance", "Microsoft.Compute/virtualMachines"],
+    #         source_location: "SourceLocation"
     #       }
     #     ],
     #     next_token: "NextToken"
@@ -3919,7 +4063,9 @@ module Aws::SSM
     #           }
     #         },
     #         source_id: "SourceId",
-    #         source_type: "AWS::EC2::Instance" # One of: ["AWS::EC2::Instance", "AWS::IoT::Thing", "AWS::SSM::ManagedInstance"]
+    #         source_type: "AWS::EC2::Instance" # One of: ["AWS::EC2::Instance", "AWS::IoT::Thing", "AWS::SSM::ManagedInstance", "Microsoft.Compute/virtualMachines"],
+    #         source_location: "SourceLocation",
+    #         availability_zone: "AvailabilityZone"
     #       }
     #     ],
     #     next_token: "NextToken"
@@ -5112,6 +5258,7 @@ module Aws::SSM
     #           },
     #           response: "String",
     #           failure_message: "String",
+    #           warning_message: "String",
     #           failure_details: {
     #             failure_stage: "String",
     #             failure_type: "String",
@@ -5181,6 +5328,7 @@ module Aws::SSM
     #         "AutomationParameterKey" => ["AutomationParameterValue"]
     #       },
     #       failure_message: "String",
+    #       warning_message: "String",
     #       mode: "Auto" # One of: ["Auto", "Interactive"],
     #       parent_automation_execution_id: "AutomationExecutionId",
     #       executed_by: "String",
@@ -5356,6 +5504,51 @@ module Aws::SSM
       request.send_request(options)
     end
 
+    # <p>Returns detailed information about a cloud connector.</p>
+    # @param [Hash, Types::GetCloudConnectorRequest] params
+    # @option params [String] :cloud_connector_id
+    #   <p>The ID of the cloud connector to retrieve information about.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     cloud_connector_id: "CloudConnectorId", # required
+    #   }
+    #   options = {}
+    #   response = client.get_cloud_connector(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     cloud_connector_arn: "CloudConnectorArn",
+    #     display_name: "DisplayName",
+    #     description: "CloudConnectorDescription",
+    #     role_arn: "CloudConnectorIamRoleArn",
+    #     configuration: {
+    #       # One of:
+    #       azure_configuration: {
+    #         tenant_id: "AzureTenantId", # required
+    #         tenant_display_name: "AzureTenantDisplayName",
+    #         application_id: "AzureApplicationId", # required
+    #         application_display_name: "AzureApplicationDisplayName",
+    #         targets: {
+    #           # One of:
+    #           subscriptions: [
+    #             {
+    #               id: "AzureSubscriptionId", # required
+    #               display_name: "AzureSubscriptionDisplayName"
+    #             }
+    #           ]
+    #         }
+    #       }
+    #     },
+    #     config_connector_arn: "ConfigConnectorArn",
+    #     created_at: Time.now,
+    #     updated_at: Time.now
+    #   }
+    # @return [Types::GetCloudConnectorResult]
+    def get_cloud_connector(params = {}, options = {})
+      request = build_request(:get_cloud_connector, params)
+      request.send_request(options)
+    end
+
     # <p>Returns detailed information about command execution for an invocation or plugin. The Run
     #    Command API follows an eventual consistency model, due to the distributed nature of the system
     #    supporting the API. This means that the result of an API command you run that affects your
@@ -5488,11 +5681,10 @@ module Aws::SSM
     # @option params [Types::BaselineOverride] :baseline_override
     #   <p>Defines the basic information about a patch baseline override.</p>
     # @option params [Boolean] :use_s3_dual_stack_endpoint
-    #   <p>Specifies whether to use S3 dualstack endpoints
-    #      for the patch snapshot download URL. Set to <code>true</code> to receive a presigned URL that
-    #      supports both IPv4 and IPv6 connectivity. Set to <code>false</code> to use standard IPv4-only
-    #      endpoints. Default is <code>false</code>. This parameter is required for managed nodes in
-    #      IPv6-only environments. </p>
+    #   <p>Specifies whether to use S3 dualstack endpoints for the patch snapshot download URL. Set to
+    #       <code>true</code> to receive a presigned URL that supports both IPv4 and IPv6 connectivity. Set
+    #      to <code>false</code> to use standard IPv4-only endpoints. Default is <code>false</code>. This
+    #      parameter is required for managed nodes in IPv6-only environments. </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     instance_id: "InstanceId", # required
@@ -6248,6 +6440,20 @@ module Aws::SSM
     #          <note>
     #             <p>To get information about more than one parameter at a time, use the <a>GetParameters</a> operation.</p>
     #          </note>
+    #          <note>
+    #             <p>Parameter Store throughput defines the number of API transactions per second (TPS) that
+    #     Systems Manager can process. This applies to <code>GetParameter</code>,
+    #     <code>GetParameters</code>, and <code>PutParameter</code> API calls for your Amazon Web Services account and
+    #     Amazon Web Services Region. By default, Parameter Store is configured with a standard throughput quota suitable
+    #     for low- to moderate-volume workloads. Applications that retrieve configuration data infrequently
+    #     or operate at smaller scale can use this default setting without additional cost.</p>
+    #             <p>For higher-volume workloads, you can enable higher throughput. This increases the maximum
+    #     number of supported transactions per second for your account and Region. Increased throughput
+    #     supports applications and workloads that need concurrent access to multiple parameters. If you
+    #     experience <code>ThrottlingException: Rate exceeded</code> errors, enable higher throughput. For
+    #     more information, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-throughput.html">Changing Parameter Store
+    #      throughput</a>.</p>
+    #          </note>
     # @param [Hash, Types::GetParameterRequest] params
     # @option params [String] :name
     #   <p>The name or Amazon Resource Name (ARN) of the parameter that you want to query. For
@@ -6361,6 +6567,20 @@ module Aws::SSM
     #          <p>Parameter names can't contain spaces. The service removes any spaces specified for the
     #    beginning or end of a parameter name. If the specified name for a parameter contains spaces
     #    between characters, the request fails with a <code>ValidationException</code> error.</p>
+    #          <note>
+    #             <p>Parameter Store throughput defines the number of API transactions per second (TPS) that
+    #     Systems Manager can process. This applies to <code>GetParameter</code>,
+    #     <code>GetParameters</code>, and <code>PutParameter</code> API calls for your Amazon Web Services account and
+    #     Amazon Web Services Region. By default, Parameter Store is configured with a standard throughput quota suitable
+    #     for low- to moderate-volume workloads. Applications that retrieve configuration data infrequently
+    #     or operate at smaller scale can use this default setting without additional cost.</p>
+    #             <p>For higher-volume workloads, you can enable higher throughput. This increases the maximum
+    #     number of supported transactions per second for your account and Region. Increased throughput
+    #     supports applications and workloads that need concurrent access to multiple parameters. If you
+    #     experience <code>ThrottlingException: Rate exceeded</code> errors, enable higher throughput. For
+    #     more information, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-throughput.html">Changing Parameter Store
+    #      throughput</a>.</p>
+    #          </note>
     # @param [Hash, Types::GetParametersRequest] params
     # @option params [Array<String>] :names
     #   <p>The names or Amazon Resource Names (ARNs) of the parameters that you want to query. For
@@ -6570,7 +6790,7 @@ module Aws::SSM
     #   <p>The name of the patch group whose patch baseline should be retrieved.</p>
     # @option params [String] :operating_system
     #   <p>Returns the operating system rule specified for patch groups using the patch
-    #      baseline.</p>
+    #     baseline. The default value is <code>WINDOWS</code>. </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     patch_group: "PatchGroup", # required
@@ -6875,7 +7095,8 @@ module Aws::SSM
     #           {
     #             "TargetMapKey" => ["TargetMapValue"]
     #           }
-    #         ]
+    #         ],
+    #         association_dispatch_assume_role: "AssociationDispatchAssumeRoleArn"
     #       }
     #     ],
     #     next_token: "NextToken"
@@ -6908,7 +7129,7 @@ module Aws::SSM
     #   params = {
     #     association_filter_list: [
     #       {
-    #         key: "InstanceId" # One of: ["InstanceId", "Name", "AssociationId", "AssociationStatusName", "LastExecutedBefore", "LastExecutedAfter", "AssociationName", "ResourceGroupName"], # required
+    #         key: "InstanceId" # One of: ["InstanceId", "Name", "AssociationId", "AssociationStatusName", "LastExecutedBefore", "LastExecutedAfter", "AssociationName", "ResourceGroupName", "CloudConnectorId"], # required
     #         value: "AssociationFilterValue", # required
     #       }
     #     ],
@@ -6957,6 +7178,49 @@ module Aws::SSM
     # @return [Types::ListAssociationsResult]
     def list_associations(params = {}, options = {})
       request = build_request(:list_associations, params)
+      request.send_request(options)
+    end
+
+    # <p>Returns a list of cloud connectors in the current Amazon Web Services account and Amazon Web Services Region.</p>
+    # @param [Hash, Types::ListCloudConnectorsRequest] params
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of items to return for this call.</p>
+    # @option params [String] :next_token
+    #   <p>The token for the next set of items to return. (You received this token from a previous
+    #      call.)</p>
+    # @option params [Array<Types::CloudConnectorFilter>] :filters
+    #   <p>One or more filters to limit the cloud connectors returned in the response.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     filters: [
+    #       {
+    #         filter_key: "SubscriptionId" # One of: ["SubscriptionId", "TenantId"],
+    #         filter_values: ["CloudConnectorFilterValue"]
+    #       }
+    #     ]
+    #   }
+    #   options = {}
+    #   response = client.list_cloud_connectors(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     cloud_connectors: [
+    #       {
+    #         cloud_connector_id: "CloudConnectorId",
+    #         display_name: "DisplayName",
+    #         description: "CloudConnectorDescription",
+    #         role_arn: "CloudConnectorIamRoleArn",
+    #         created_at: Time.now,
+    #         updated_at: Time.now
+    #       }
+    #     ],
+    #     next_token: "NextToken"
+    #   }
+    # @return [Types::ListCloudConnectorsResult]
+    def list_cloud_connectors(params = {}, options = {})
+      request = build_request(:list_cloud_connectors, params)
       request.send_request(options)
     end
 
@@ -7282,7 +7546,12 @@ module Aws::SSM
       request.send_request(options)
     end
 
-    # <p>Information about approval reviews for a version of a change template in Change Manager.</p>
+    # <important>
+    #             <p>Amazon Web Services Systems Manager Change Manager is no longer open to new customers. Existing customers can
+    #   continue to use the service as normal. For more information, see
+    # <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/change-manager-availability-change.html">Amazon Web Services Systems Manager Change Manager availability change</a>.</p>
+    #          </important>
+    #          <p>Information about approval reviews for a version of a change template in Change Manager.</p>
     # @param [Hash, Types::ListDocumentMetadataHistoryRequest] params
     # @option params [String] :name
     #   <p>The name of the change template.</p>
@@ -7534,7 +7803,7 @@ module Aws::SSM
     #     sync_name: "ResourceDataSyncName",
     #     filters: [
     #       {
-    #         key: "AgentType" # One of: ["AgentType", "AgentVersion", "ComputerName", "InstanceId", "InstanceStatus", "IpAddress", "ManagedStatus", "PlatformName", "PlatformType", "PlatformVersion", "ResourceType", "OrganizationalUnitId", "OrganizationalUnitPath", "Region", "AccountId"], # required
+    #         key: "AgentType" # One of: ["AgentType", "AgentVersion", "ComputerName", "InstanceId", "InstanceStatus", "IpAddress", "ManagedStatus", "PlatformName", "PlatformType", "PlatformVersion", "ResourceType", "OrganizationalUnitId", "OrganizationalUnitPath", "Region", "AccountId", "SourceType", "SourceId", "SourceLocation", "AvailabilityZone", "AvailabilityZoneId"], # required
     #         values: ["NodeFilterValue"], # required
     #         type: "Equal" # One of: ["Equal", "NotEqual", "BeginWith"]
     #       }
@@ -7566,10 +7835,16 @@ module Aws::SSM
     #             instance_status: "InstanceStatus",
     #             ip_address: "IPAddress",
     #             managed_status: "All" # One of: ["All", "Managed", "Unmanaged"],
+    #             name: "NodeName",
     #             platform_type: "Windows" # One of: ["Windows", "Linux", "MacOS"],
     #             platform_name: "PlatformName",
     #             platform_version: "PlatformVersion",
-    #             resource_type: "ManagedInstance" # One of: ["ManagedInstance", "EC2Instance"]
+    #             resource_type: "ManagedInstance" # One of: ["ManagedInstance", "EC2Instance"],
+    #             source_type: "AWS::EC2::Instance" # One of: ["AWS::EC2::Instance", "AWS::IoT::Thing", "AWS::SSM::ManagedInstance", "Microsoft.Compute/virtualMachines"],
+    #             source_id: "SourceId",
+    #             source_location: "SourceLocation",
+    #             availability_zone: "AvailabilityZone",
+    #             availability_zone_id: "AvailabilityZoneId"
     #           }
     #         }
     #       }
@@ -7646,7 +7921,7 @@ module Aws::SSM
     #     sync_name: "ResourceDataSyncName",
     #     filters: [
     #       {
-    #         key: "AgentType" # One of: ["AgentType", "AgentVersion", "ComputerName", "InstanceId", "InstanceStatus", "IpAddress", "ManagedStatus", "PlatformName", "PlatformType", "PlatformVersion", "ResourceType", "OrganizationalUnitId", "OrganizationalUnitPath", "Region", "AccountId"], # required
+    #         key: "AgentType" # One of: ["AgentType", "AgentVersion", "ComputerName", "InstanceId", "InstanceStatus", "IpAddress", "ManagedStatus", "PlatformName", "PlatformType", "PlatformVersion", "ResourceType", "OrganizationalUnitId", "OrganizationalUnitPath", "Region", "AccountId", "SourceType", "SourceId", "SourceLocation", "AvailabilityZone", "AvailabilityZoneId"], # required
     #         values: ["NodeFilterValue"], # required
     #         type: "Equal" # One of: ["Equal", "NotEqual", "BeginWith"]
     #       }
@@ -7655,7 +7930,7 @@ module Aws::SSM
     #       {
     #         aggregator_type: "Count" # One of: ["Count"], # required
     #         type_name: "Instance" # One of: ["Instance"], # required
-    #         attribute_name: "AgentVersion" # One of: ["AgentVersion", "PlatformName", "PlatformType", "PlatformVersion", "Region", "ResourceType"], # required
+    #         attribute_name: "AgentVersion" # One of: ["AgentVersion", "PlatformName", "PlatformType", "PlatformVersion", "Region", "ResourceType", "SourceType", "AvailabilityZone"], # required
     #         aggregators: {
     #           # recursive NodeAggregatorList
     #         }
@@ -7985,7 +8260,7 @@ module Aws::SSM
     #   <p>The resource ID for which you want to see a list of tags.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     resource_type: "Document" # One of: ["Document", "ManagedInstance", "MaintenanceWindow", "Parameter", "PatchBaseline", "OpsItem", "OpsMetadata", "Automation", "Association"], # required
+    #     resource_type: "Document" # One of: ["Document", "ManagedInstance", "MaintenanceWindow", "Parameter", "PatchBaseline", "OpsItem", "OpsMetadata", "Automation", "Association", "CloudConnector"], # required
     #     resource_id: "ResourceId", # required
     #   }
     #   options = {}
@@ -8223,6 +8498,20 @@ module Aws::SSM
     end
 
     # <p>Create or update a parameter in Parameter Store.</p>
+    #          <note>
+    #             <p>Parameter Store throughput defines the number of API transactions per second (TPS) that
+    #     Systems Manager can process. This applies to <code>GetParameter</code>,
+    #     <code>GetParameters</code>, and <code>PutParameter</code> API calls for your Amazon Web Services account and
+    #     Amazon Web Services Region. By default, Parameter Store is configured with a standard throughput quota suitable
+    #     for low- to moderate-volume workloads. Applications that retrieve configuration data infrequently
+    #     or operate at smaller scale can use this default setting without additional cost.</p>
+    #             <p>For higher-volume workloads, you can enable higher throughput. This increases the maximum
+    #     number of supported transactions per second for your account and Region. Increased throughput
+    #     supports applications and workloads that need concurrent access to multiple parameters. If you
+    #     experience <code>ThrottlingException: Rate exceeded</code> errors, enable higher throughput. For
+    #     more information, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-throughput.html">Changing Parameter Store
+    #      throughput</a>.</p>
+    #          </note>
     # @param [Hash, Types::PutParameterRequest] params
     # @option params [String] :name
     #   <p>The fully qualified name of the parameter that you want to create or update.</p>
@@ -8523,7 +8812,19 @@ module Aws::SSM
     #                   </p>
     #                </important>
     #             </li>
+    #             <li>
+    #                <p>
+    #                   <code>Document</code> – Shares the document using Resource Access Manager (RAM). For more information about sharing documents, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/documents-ssm-sharing.html">Sharing
+    #       Systems Manager documents</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>
+    #             </li>
     #          </ul>
+    #          <important>
+    #             <p>While you can share a document using the Systems Manager <code>PutResourcePolicy</code> operation, we
+    #     recommend using Resource Access Manager (RAM) instead. Using
+    #      <code>PutResourcePolicy</code> requires an extra step. You must promote the document to a
+    #     standard RAM Resource Share using the RAM <a href="https://docs.aws.amazon.com/ram/latest/APIReference/API_PromoteResourceShareCreatedFromPolicy.html">PromoteResourceShareCreatedFromPolicy</a> API operation. Otherwise, the Systems Manager <a href="https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_ListDocuments.html">ListDocuments</a> API operation won't return the document when filtering for shared
+    #     documents. The Amazon Web Services Config <a href="https://docs.aws.amazon.com/config/latest/APIReference/API_PutRemediationConfigurations.html">PutRemediationConfigurations</a> API operation also can't use the document.</p>
+    #          </important>
     # @param [Hash, Types::PutResourcePolicyRequest] params
     # @option params [String] :resource_arn
     #   <p>Amazon Resource Name (ARN) of the resource to which you want to attach a policy.</p>
@@ -8939,7 +9240,7 @@ module Aws::SSM
     #   <p>Tag keys that you want to remove from the specified resource.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     resource_type: "Document" # One of: ["Document", "ManagedInstance", "MaintenanceWindow", "Parameter", "PatchBaseline", "OpsItem", "OpsMetadata", "Automation", "Association"], # required
+    #     resource_type: "Document" # One of: ["Document", "ManagedInstance", "MaintenanceWindow", "Parameter", "PatchBaseline", "OpsItem", "OpsMetadata", "Automation", "Association", "CloudConnector"], # required
     #     resource_id: "ResourceId", # required
     #     tag_keys: ["TagKey"], # required
     #   }
@@ -9533,7 +9834,12 @@ module Aws::SSM
       request.send_request(options)
     end
 
-    # <p>Creates a change request for Change Manager. The Automation runbooks specified in the
+    # <important>
+    #             <p>Amazon Web Services Systems Manager Change Manager is no longer open to new customers. Existing customers can
+    #   continue to use the service as normal. For more information, see
+    # <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/change-manager-availability-change.html">Amazon Web Services Systems Manager Change Manager availability change</a>.</p>
+    #          </important>
+    #          <p>Creates a change request for Change Manager. The Automation runbooks specified in the
     #    change request run only after all required approvals for the change request have been
     #    received.</p>
     # @param [Hash, Types::StartChangeRequestExecutionRequest] params
@@ -10043,7 +10349,8 @@ module Aws::SSM
     #      association. Use this action to update an association in multiple Regions and multiple
     #      accounts.</p>
     #            <note>
-    #               <p>The <code>IncludeChildOrganizationUnits</code> parameter is not supported by State Manager.</p>
+    #               <p>The <code>TargetLocationAlarmConfiguration</code> parameter is not supported by State
+    #       Manager.</p>
     #            </note>
     # @option params [Integer] :schedule_offset
     #   <p>Number of days to wait after the scheduled day to run an association. For example, if you
@@ -10079,6 +10386,19 @@ module Aws::SSM
     # @option params [Types::AlarmConfiguration] :alarm_configuration
     #   <p>The details for the CloudWatch alarm you want to apply to an automation or
     #      command.</p>
+    # @option params [String] :association_dispatch_assume_role
+    #   <p>A role used by association to take actions on your behalf.
+    #      State Manager will assume this role and call required APIs when dispatching
+    #      configurations to nodes. If not specified, <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html">
+    #      service-linked role for Systems Manager</a> will be used by default.
+    #     </p>
+    #            <note>
+    #               <p>It is recommended that you define a custom IAM role so that you have full control of
+    #       the permissions that State Manager has when taking actions on your behalf.</p>
+    #               <p>Service-linked role support in State Manager is being phased out. Associations
+    #       relying on service-linked role may require updates in the future to continue
+    #       functioning properly.</p>
+    #            </note>
     # @example Request syntax with placeholder values
     #   params = {
     #     association_id: "AssociationId", # required
@@ -10151,7 +10471,8 @@ module Aws::SSM
     #           name: "AlarmName", # required
     #         }
     #       ]
-    #     }
+    #     },
+    #     association_dispatch_assume_role: "AssociationDispatchAssumeRoleArn"
     #   }
     #   options = {}
     #   response = client.update_association(params, options)
@@ -10253,7 +10574,8 @@ module Aws::SSM
     #           name: "AlarmName", # required
     #           state: "UNKNOWN" # One of: ["UNKNOWN", "ALARM"], # required
     #         }
-    #       ]
+    #       ],
+    #       association_dispatch_assume_role: "AssociationDispatchAssumeRoleArn"
     #     }
     #   }
     # @return [Types::UpdateAssociationResult]
@@ -10386,12 +10708,61 @@ module Aws::SSM
     #           name: "AlarmName", # required
     #           state: "UNKNOWN" # One of: ["UNKNOWN", "ALARM"], # required
     #         }
-    #       ]
+    #       ],
+    #       association_dispatch_assume_role: "AssociationDispatchAssumeRoleArn"
     #     }
     #   }
     # @return [Types::UpdateAssociationStatusResult]
     def update_association_status(params = {}, options = {})
       request = build_request(:update_association_status, params)
+      request.send_request(options)
+    end
+
+    # <p>Updates an existing cloud connector with new configuration details.</p>
+    # @param [Hash, Types::UpdateCloudConnectorRequest] params
+    # @option params [String] :cloud_connector_id
+    #   <p>The ID of the cloud connector to update.</p>
+    # @option params [String] :display_name
+    #   <p>A new friendly name for the cloud connector.</p>
+    # @option params [Types::CloudConnectorConfiguration] :configuration
+    #   <p>The updated configuration details for connecting to the third-party cloud
+    #      environment.</p>
+    # @option params [String] :description
+    #   <p>A new description for the cloud connector.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     cloud_connector_id: "CloudConnectorId", # required
+    #     display_name: "DisplayName",
+    #     configuration: {
+    #       # One of:
+    #       azure_configuration: {
+    #         tenant_id: "AzureTenantId", # required
+    #         tenant_display_name: "AzureTenantDisplayName",
+    #         application_id: "AzureApplicationId", # required
+    #         application_display_name: "AzureApplicationDisplayName",
+    #         targets: {
+    #           # One of:
+    #           subscriptions: [
+    #             {
+    #               id: "AzureSubscriptionId", # required
+    #               display_name: "AzureSubscriptionDisplayName"
+    #             }
+    #           ]
+    #         }
+    #       }
+    #     },
+    #     description: "CloudConnectorDescription"
+    #   }
+    #   options = {}
+    #   response = client.update_cloud_connector(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     cloud_connector_id: "CloudConnectorId"
+    #   }
+    # @return [Types::UpdateCloudConnectorResult]
+    def update_cloud_connector(params = {}, options = {})
+      request = build_request(:update_cloud_connector, params)
       request.send_request(options)
     end
 
@@ -10421,8 +10792,8 @@ module Aws::SSM
     #       parameter.</p>
     #            </note>
     # @option params [String] :document_format
-    #   <p>Specify the document format for the new document version. Systems Manager supports JSON and YAML
-    #      documents. JSON is the default format.</p>
+    #   <p>Specify the document format for the new document version. The document format can be JSON,
+    #      YAML, or TEXT. JSON is the default format.</p>
     # @option params [String] :target_type
     #   <p>Specify a new target type for the document.</p>
     # @example Request syntax with placeholder values
@@ -10548,7 +10919,12 @@ module Aws::SSM
       request.send_request(options)
     end
 
-    # <p>Updates information related to approval reviews for a specific version of a change template
+    # <important>
+    #             <p>Amazon Web Services Systems Manager Change Manager is no longer open to new customers. Existing customers can
+    #   continue to use the service as normal. For more information, see
+    # <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/change-manager-availability-change.html">Amazon Web Services Systems Manager Change Manager availability change</a>.</p>
+    #          </important>
+    #          <p>Updates information related to approval reviews for a specific version of a change template
     #    in Change Manager.</p>
     # @param [Hash, Types::UpdateDocumentMetadataRequest] params
     # @option params [String] :name
@@ -11648,6 +12024,46 @@ module Aws::SSM
     # @return [Types::UpdateServiceSettingResult]
     def update_service_setting(params = {}, options = {})
       request = build_request(:update_service_setting, params)
+      request.send_request(options)
+    end
+
+    # <p>Validates the configuration and connectivity of a cloud connector.</p>
+    # @param [Hash, Types::ValidateCloudConnectorRequest] params
+    # @option params [String] :cloud_connector_id
+    #   <p>The ID of the cloud connector to validate.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of validation findings to return.</p>
+    # @option params [String] :next_token
+    #   <p>The token for the next set of items to return. (You received this token from a previous
+    #      call.)</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     cloud_connector_id: "CloudConnectorId", # required
+    #     max_results: 1,
+    #     next_token: "NextToken"
+    #   }
+    #   options = {}
+    #   response = client.validate_cloud_connector(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     validation_findings: [
+    #       {
+    #         type: "INFO" # One of: ["INFO", "WARN", "ERROR"],
+    #         code: "TargetInaccessible" # One of: ["TargetInaccessible", "TargetUnusable", "TargetStateWarning", "AwsRoleAssumptionFailed", "WebIdentityTokenFailed", "OutboundWebIdentityFederationDisabled", "ProviderCredentialCreationFailed", "TenantSummary", "SubscriptionAccessible"],
+    #         message: "String",
+    #         provider_message: "String",
+    #         scope: {
+    #           type: "azure:tenant" # One of: ["azure:tenant", "azure:subscription"],
+    #           id: "String"
+    #         }
+    #       }
+    #     ],
+    #     next_token: "NextToken"
+    #   }
+    # @return [Types::ValidateCloudConnectorResult]
+    def validate_cloud_connector(params = {}, options = {})
+      request = build_request(:validate_cloud_connector, params)
       request.send_request(options)
     end
 

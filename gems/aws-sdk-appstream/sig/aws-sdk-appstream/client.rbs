@@ -79,6 +79,14 @@ module Aws::AppStream
       ?stack_name: String
     ) -> _AssociateFleetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateFleetResponse
 
+    interface _AssociateSoftwareToImageBuilderResponse
+      include Smithy::Client::_Response[Types::AssociateSoftwareToImageBuilderResult]
+    end
+    def associate_software_to_image_builder: (
+      ?image_builder_name: String,
+      ?software_names: Array[String]
+    ) -> _AssociateSoftwareToImageBuilderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateSoftwareToImageBuilderResponse
+
     interface _BatchAssociateUserStackResponse
       include Smithy::Client::_Response[Types::BatchAssociateUserStackResult]
       def errors: () -> Array[Types::UserStackAssociationError]?
@@ -176,7 +184,8 @@ module Aws::AppStream
           endpoint_type: String,
           vpce_id: String
         }
-      ]
+      ],
+      ?disable_imdsv1: bool
     ) -> _CreateAppBlockBuilderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAppBlockBuilderResponse
 
     interface _CreateAppBlockBuilderStreamingURLResponse
@@ -244,6 +253,18 @@ module Aws::AppStream
       ]
     ) -> _CreateEntitlementResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateEntitlementResponse
 
+    interface _CreateExportImageTaskResponse
+      include Smithy::Client::_Response[Types::CreateExportImageTaskResult]
+      def export_image_task: () -> Types::ExportImageTask?
+    end
+    def create_export_image_task: (
+      ?image_name: String,
+      ?ami_name: String,
+      ?iam_role_arn: String,
+      ?tag_specifications: Hash[String, String],
+      ?ami_description: String
+    ) -> _CreateExportImageTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateExportImageTaskResponse
+
     interface _CreateFleetResponse
       include Smithy::Client::_Response[Types::CreateFleetResult]
       def fleet: () -> Types::Fleet?
@@ -282,7 +303,11 @@ module Aws::AppStream
         s3_bucket: String,
         s3_key: String
       },
-      ?max_sessions_per_instance: Integer
+      ?max_sessions_per_instance: Integer,
+      ?root_volume_config: {
+        volume_size_in_gb: Integer
+      },
+      ?disable_imdsv1: bool
     ) -> _CreateFleetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateFleetResponse
 
     interface _CreateImageBuilderResponse
@@ -313,7 +338,13 @@ module Aws::AppStream
           endpoint_type: String,
           vpce_id: String
         }
-      ]
+      ],
+      ?root_volume_config: {
+        volume_size_in_gb: Integer
+      },
+      ?softwares_to_install: Array[String],
+      ?softwares_to_uninstall: Array[String],
+      ?disable_imdsv1: bool
     ) -> _CreateImageBuilderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateImageBuilderResponse
 
     interface _CreateImageBuilderStreamingURLResponse
@@ -325,6 +356,36 @@ module Aws::AppStream
       ?name: String,
       ?validity: Integer
     ) -> _CreateImageBuilderStreamingURLResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateImageBuilderStreamingURLResponse
+
+    interface _CreateImportedImageResponse
+      include Smithy::Client::_Response[Types::CreateImportedImageResult]
+      def image: () -> Types::Image?
+    end
+    def create_imported_image: (
+      ?name: String,
+      ?source_ami_id: String,
+      ?workspace_image_id: String,
+      ?iam_role_arn: String,
+      ?description: String,
+      ?display_name: String,
+      ?tags: Hash[String, String],
+      ?runtime_validation_config: {
+        intended_instance_type: String
+      },
+      ?agent_software_version: String,
+      ?app_catalog_config: Array[
+        {
+          name: String,
+          display_name: String,
+          absolute_app_path: String,
+          absolute_icon_path: untyped,
+          absolute_manifest_path: untyped,
+          working_directory: untyped,
+          launch_parameters: String
+        }
+      ],
+      ?dry_run: bool
+    ) -> _CreateImportedImageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateImportedImageResponse
 
     interface _CreateStackResponse
       include Smithy::Client::_Response[Types::CreateStackResult]
@@ -365,7 +426,28 @@ module Aws::AppStream
       ?embed_host_domains: Array[String],
       ?streaming_experience_settings: {
         preferred_protocol: String
-      }
+      },
+      ?content_redirection: {
+        host_to_client: {
+          enabled: bool,
+          allowed_urls: Array[String],
+          denied_urls: untyped
+        }
+      },
+      ?agent_access_config: {
+        settings: Array[
+          {
+            agent_action: String,
+            permission: String
+          }
+        ],
+        s3_bucket_arn: String,
+        screenshots_upload_enabled: bool,
+        screen_resolution: String,
+        screen_image_format: String,
+        user_control_mode: String
+      },
+      ?storage_connector_authentication: String
     ) -> _CreateStackResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateStackResponse
 
     interface _CreateStreamingURLResponse
@@ -566,6 +648,17 @@ module Aws::AppStream
       ?max_results: Integer
     ) -> _DescribeAppBlocksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAppBlocksResponse
 
+    interface _DescribeAppLicenseUsageResponse
+      include Smithy::Client::_Response[Types::DescribeAppLicenseUsageResult]
+      def app_license_usages: () -> Array[Types::AdminAppLicenseUsageRecord]?
+      def next_token: () -> String?
+    end
+    def describe_app_license_usage: (
+      ?billing_period: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeAppLicenseUsageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAppLicenseUsageResponse
+
     interface _DescribeApplicationFleetAssociationsResponse
       include Smithy::Client::_Response[Types::DescribeApplicationFleetAssociationsResult]
       def application_fleet_associations: () -> Array[Types::ApplicationFleetAssociation]?
@@ -674,6 +767,18 @@ module Aws::AppStream
       ?instance_id: String
     ) -> _DescribeSessionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeSessionsResponse
 
+    interface _DescribeSoftwareAssociationsResponse
+      include Smithy::Client::_Response[Types::DescribeSoftwareAssociationsResult]
+      def associated_resource: () -> String?
+      def software_associations: () -> Array[Types::SoftwareAssociations]?
+      def next_token: () -> String?
+    end
+    def describe_software_associations: (
+      ?associated_resource: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeSoftwareAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeSoftwareAssociationsResponse
+
     interface _DescribeStacksResponse
       include Smithy::Client::_Response[Types::DescribeStacksResult]
       def stacks: () -> Array[Types::Stack]?
@@ -767,6 +872,21 @@ module Aws::AppStream
       ?stack_name: String
     ) -> _DisassociateFleetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateFleetResponse
 
+    interface _DisassociateSoftwareFromImageBuilderResponse
+      include Smithy::Client::_Response[Types::DisassociateSoftwareFromImageBuilderResult]
+    end
+    def disassociate_software_from_image_builder: (
+      ?image_builder_name: String,
+      ?software_names: Array[String]
+    ) -> _DisassociateSoftwareFromImageBuilderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateSoftwareFromImageBuilderResponse
+
+    interface _DrainSessionInstanceResponse
+      include Smithy::Client::_Response[Types::DrainSessionInstanceResult]
+    end
+    def drain_session_instance: (
+      ?session_id: String
+    ) -> _DrainSessionInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DrainSessionInstanceResponse
+
     interface _EnableUserResponse
       include Smithy::Client::_Response[Types::EnableUserResult]
     end
@@ -781,6 +901,14 @@ module Aws::AppStream
     def expire_session: (
       ?session_id: String
     ) -> _ExpireSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ExpireSessionResponse
+
+    interface _GetExportImageTaskResponse
+      include Smithy::Client::_Response[Types::GetExportImageTaskResult]
+      def export_image_task: () -> Types::ExportImageTask?
+    end
+    def get_export_image_task: (
+      ?task_id: String
+    ) -> _GetExportImageTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetExportImageTaskResponse
 
     interface _ListAssociatedFleetsResponse
       include Smithy::Client::_Response[Types::ListAssociatedFleetsResult]
@@ -814,6 +942,22 @@ module Aws::AppStream
       ?max_results: Integer
     ) -> _ListEntitledApplicationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEntitledApplicationsResponse
 
+    interface _ListExportImageTasksResponse
+      include Smithy::Client::_Response[Types::ListExportImageTasksResult]
+      def export_image_tasks: () -> Array[Types::ExportImageTask]?
+      def next_token: () -> String?
+    end
+    def list_export_image_tasks: (
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListExportImageTasksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListExportImageTasksResponse
+
     interface _ListTagsForResourceResponse
       include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
       def tags: () -> Hash[String, String]?
@@ -845,6 +989,14 @@ module Aws::AppStream
       ?name: String,
       ?appstream_agent_version: String
     ) -> _StartImageBuilderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartImageBuilderResponse
+
+    interface _StartSoftwareDeploymentToImageBuilderResponse
+      include Smithy::Client::_Response[Types::StartSoftwareDeploymentToImageBuilderResult]
+    end
+    def start_software_deployment_to_image_builder: (
+      ?image_builder_name: String,
+      ?retry_failed_deployments: bool
+    ) -> _StartSoftwareDeploymentToImageBuilderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartSoftwareDeploymentToImageBuilderResponse
 
     interface _StopAppBlockBuilderResponse
       include Smithy::Client::_Response[Types::StopAppBlockBuilderResult]
@@ -907,7 +1059,8 @@ module Aws::AppStream
           vpce_id: String
         }
       ],
-      ?attributes_to_delete: Array[String]
+      ?attributes_to_delete: Array[String],
+      ?disable_imdsv1: bool
     ) -> _UpdateAppBlockBuilderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAppBlockBuilderResponse
 
     interface _UpdateApplicationResponse
@@ -1001,7 +1154,11 @@ module Aws::AppStream
         s3_bucket: String,
         s3_key: String
       },
-      ?max_sessions_per_instance: Integer
+      ?max_sessions_per_instance: Integer,
+      ?root_volume_config: {
+        volume_size_in_gb: Integer
+      },
+      ?disable_imdsv1: bool
     ) -> _UpdateFleetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFleetResponse
 
     interface _UpdateImagePermissionsResponse
@@ -1056,7 +1213,28 @@ module Aws::AppStream
       ?embed_host_domains: Array[String],
       ?streaming_experience_settings: {
         preferred_protocol: String
-      }
+      },
+      ?content_redirection: {
+        host_to_client: {
+          enabled: bool,
+          allowed_urls: Array[String],
+          denied_urls: untyped
+        }
+      },
+      ?agent_access_config: {
+        settings: Array[
+          {
+            agent_action: String,
+            permission: String
+          }
+        ],
+        s3_bucket_arn: String,
+        screenshots_upload_enabled: bool,
+        screen_resolution: String,
+        screen_image_format: String,
+        user_control_mode: String
+      },
+      ?storage_connector_authentication: String
     ) -> _UpdateStackResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateStackResponse
 
     interface _UpdateThemeForStackResponse

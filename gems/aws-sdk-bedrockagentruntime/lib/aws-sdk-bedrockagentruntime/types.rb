@@ -233,6 +233,775 @@ module Aws::BedrockAgentRuntime
       include ::Smithy::Schema::Structure
     end
 
+    # <p>An action taken during agentic retrieval.</p>
+    # @!attribute retrieve
+    #   <p>Details of the retrieve action.</p>
+    #   @return [Types::AgenticRetrieveActionDetails]
+    # @!attribute full_document_expansion
+    #   <p>Details of a full document expansion action.</p>
+    #   @return [Types::AgenticRetrieveFullDocExpansionDetails]
+    # @!attribute memory_retrieve
+    #   <p>The details of a long-term memory retrieval that the agent chose to perform.</p>
+    #   @return [Types::AgenticRetrieveMemoryRetrieveDetails]
+    class AgenticRetrieveAction < Struct.new(
+      nil,
+      :retrieve,
+      :full_document_expansion,
+      :memory_retrieve,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Details of a retrieve action including the query and target retrievers.</p>
+    # @!attribute input_query
+    #   <p>The input query used for retrieval.</p>
+    #   @return [Types::AgenticRetrieveMessageContent]
+    # @!attribute source_retrievers
+    #   <p>The list of source retrievers targeted by this action.</p>
+    #   @return [Array<Types::AgenticRetrieveSourceRetriever>]
+    class AgenticRetrieveActionDetails < Struct.new(
+      nil,
+      :input_query,
+      :source_retrievers,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration for a Bedrock guardrail applied during agentic retrieval.</p>
+    # @!attribute guardrail_id
+    #   <p>The unique identifier of the guardrail.</p>
+    #   @return [String]
+    # @!attribute guardrail_version
+    #   <p>The version of the guardrail to use.</p>
+    #   @return [String]
+    class AgenticRetrieveBedrockGuardrailConfiguration < Struct.new(
+      nil,
+      :guardrail_id,
+      :guardrail_version,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration for a Bedrock reranking model.</p>
+    # @!attribute model_configuration
+    #   <p>The model configuration containing the model ARN.</p>
+    #   @return [Types::AgenticRetrieveBedrockRerankingModelConfiguration]
+    class AgenticRetrieveBedrockRerankingConfiguration < Struct.new(
+      nil,
+      :model_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Model configuration for a Bedrock reranking model.</p>
+    # @!attribute model_arn
+    #   <p>The ARN of the Bedrock reranking model.</p>
+    #   @return [String]
+    class AgenticRetrieveBedrockRerankingModelConfiguration < Struct.new(
+      nil,
+      :model_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A citation mapping a span of the generated answer to supporting results.</p>
+    # @!attribute start_index
+    #   <p>Character offset start in the answer text.</p>
+    #   @return [Integer]
+    # @!attribute end_index
+    #   <p>Character offset end (exclusive) in the answer text.</p>
+    #   @return [Integer]
+    # @!attribute references
+    #   <p>References to results that support this span.</p>
+    #   @return [Array<Types::AgenticRetrieveCitationReference>]
+    class AgenticRetrieveCitation < Struct.new(
+      nil,
+      :start_index,
+      :end_index,
+      :references,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A reference to a specific result item.</p>
+    # @!attribute result_index
+    #   <p>Index into the results array on the same event.</p>
+    #   @return [Integer]
+    class AgenticRetrieveCitationReference < Struct.new(
+      nil,
+      :result_index,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration settings for the agentic retrieval operation.</p>
+    # @!attribute foundation_model_type
+    #   <p>The type of foundation model to use. CUSTOM uses a specified model, MANAGED uses the service default.</p>
+    #   @return [String]
+    # @!attribute foundation_model_configuration
+    #   <p>The foundation model configuration. Required when foundationModelType is CUSTOM.</p>
+    #   @return [Types::FoundationModelConfiguration]
+    # @!attribute reranking_model_type
+    #   <p>The type of reranking model to use. CUSTOM uses a specified model, MANAGED uses the service default. If not specified, defaults to MANAGED for managed embedding knowledge bases and NONE for custom embedding knowledge bases.</p>
+    #   @return [String]
+    # @!attribute reranking_configuration
+    #   <p>The reranking model configuration. Required when rerankingModelType is CUSTOM.</p>
+    #   @return [Types::AgenticRetrieveRerankingConfiguration]
+    # @!attribute max_agent_iteration
+    #   <p>The maximum number of agent iterations for retrieval.</p>
+    #   @return [Integer]
+    class AgenticRetrieveConfiguration < Struct.new(
+      nil,
+      :foundation_model_type,
+      :foundation_model_configuration,
+      :reranking_model_type,
+      :reranking_configuration,
+      :max_agent_iteration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:foundation_model_type] = 'MANAGED' unless options.key?(:foundation_model_type)
+        options[:max_agent_iteration] = 5 unless options.key?(:max_agent_iteration)
+        super
+      end
+    end
+
+    # <p>A failure that occurred during agentic retrieval.</p>
+    # @!attribute message
+    #   <p>A message describing the failure.</p>
+    #   @return [String]
+    class AgenticRetrieveFailure < Struct.new(
+      nil,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Details of a full document expansion action.</p>
+    # @!attribute document_id
+    #   <p>The identifier of the document to expand.</p>
+    #   @return [String]
+    # @!attribute source_retriever
+    #   <p>The source retriever associated with the document.</p>
+    #   @return [Types::AgenticRetrieveSourceRetriever]
+    class AgenticRetrieveFullDocExpansionDetails < Struct.new(
+      nil,
+      :document_id,
+      :source_retriever,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The generated response synthesized from retrieved results.</p>
+    # @!attribute answer
+    #   <p>The generated answer text.</p>
+    #   @return [String]
+    # @!attribute citations
+    #   <p>Citations mapping spans of the answer to supporting results.</p>
+    #   @return [Array<Types::AgenticRetrieveCitation>]
+    class AgenticRetrieveGeneratedResponse < Struct.new(
+      nil,
+      :answer,
+      :citations,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A warning generated by a guardrail during agentic retrieval.</p>
+    # @!attribute id
+    #   <p>The unique identifier of the guardrail.</p>
+    #   @return [String]
+    # @!attribute version
+    #   <p>The version of the guardrail.</p>
+    #   @return [String]
+    # @!attribute action
+    #   <p>The action taken by the guardrail.</p>
+    #   @return [String]
+    # @!attribute message
+    #   <p>A message describing the guardrail evaluation result.</p>
+    #   @return [String]
+    class AgenticRetrieveGuardrailWarning < Struct.new(
+      nil,
+      :id,
+      :version,
+      :action,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Specifies an AgentCore Memory resource and how this retrieval uses it. Set sessionBinding to restore and continue a session. Set retrievalConfigs to let the agent retrieve from long-term memory. You must specify at least one of the two.</p>
+    # @!attribute memory_id
+    #   <p>The identifier of the AgentCore Memory resource to use. The resource must exist in your account and be in the ACTIVE state.</p>
+    #   @return [String]
+    # @!attribute session_binding
+    #   <p>The short-term memory session whose history is restored for this retrieval. To persist the agent-generated answer to the session, omit persistenceMode or set it to DEFAULT. To leave the session unchanged, set persistenceMode to NONE. Supply session history through the existing messages parameter or through short-term memory, but not both.</p>
+    #   @return [Types::AgenticRetrieveMemorySessionBinding]
+    # @!attribute retrieval_configs
+    #   <p>Specifies the long-term memory configuration the agent can retrieve from. The agent decides whether to retrieve and composes its own query. This field currently accepts at most one entry.</p>
+    #   @return [Array<Types::AgenticRetrieveMemoryRetrievalConfig>]
+    # @!attribute persistence_mode
+    #   <p>Specifies whether the agent-generated answer is written back to the given short-term memory session, and applies only when sessionBinding is set. Valid values:</p> <ul> <li> <p> <code>DEFAULT</code> (default) – Specifies that the question and the agent-generated answer are persisted to the session as a single event. This value requires generateResponse to be true.</p> </li> <li> <p> <code>NONE</code> – Specifies that the session is left unchanged.</p> </li> </ul>
+    #   @return [String]
+    class AgenticRetrieveMemoryConfiguration < Struct.new(
+      nil,
+      :memory_id,
+      :session_binding,
+      :retrieval_configs,
+      :persistence_mode,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A metadata filter expression, in the form accepted by the AgentCore Memory RetrieveMemoryRecords operation. The expression has a left operand that names the metadata key, an operator, and a right operand. For the EXISTS and NOT_EXISTS operators, omit the right operand.</p>
+    # @!attribute left
+    #   <p>The metadata key that the expression evaluates.</p>
+    #   @return [Types::AgenticRetrieveMemoryMetadataFilterLeft]
+    # @!attribute operator
+    #   <p>The relationship that the metadata key and value must have for a memory record to match.</p>
+    #   @return [String]
+    # @!attribute right
+    #   <p>The value that the expression compares the metadata key against. Supply this value for every operator except EXISTS and NOT_EXISTS.</p>
+    #   @return [Types::AgenticRetrieveMemoryMetadataFilterRight]
+    class AgenticRetrieveMemoryMetadataFilter < Struct.new(
+      nil,
+      :left,
+      :operator,
+      :right,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The left operand of a metadata filter expression. Set exactly one member.</p>
+    # @!attribute metadata_key
+    #   <p>The metadata key to filter on.</p>
+    #   @return [String]
+    class AgenticRetrieveMemoryMetadataFilterLeft < Struct.new(
+      :metadata_key,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class MetadataKey < AgenticRetrieveMemoryMetadataFilterLeft; end
+      class Unknown < AgenticRetrieveMemoryMetadataFilterLeft; end
+    end
+
+    # <p>The right operand of a metadata filter expression. Set exactly one member.</p>
+    # @!attribute metadata_value
+    #   <p>The value to compare the metadata key against.</p>
+    #   @return [Types::AgenticRetrieveMemoryMetadataValue]
+    class AgenticRetrieveMemoryMetadataFilterRight < Struct.new(
+      :metadata_value,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class MetadataValue < AgenticRetrieveMemoryMetadataFilterRight; end
+      class Unknown < AgenticRetrieveMemoryMetadataFilterRight; end
+    end
+
+    # <p>A metadata value that a filter expression compares against. Set exactly one member.</p>
+    # @!attribute string_value
+    #   <p>A string value.</p>
+    #   @return [String]
+    # @!attribute number_value
+    #   <p>A numeric value.</p>
+    #   @return [Float]
+    # @!attribute string_list_value
+    #   <p>A list of string values.</p>
+    #   @return [Array<String>]
+    # @!attribute date_time_value
+    #   <p>A timestamp value in ISO 8601 UTC format.</p>
+    #   @return [Time]
+    class AgenticRetrieveMemoryMetadataValue < Struct.new(
+      :string_value,
+      :number_value,
+      :string_list_value,
+      :date_time_value,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class StringValue < AgenticRetrieveMemoryMetadataValue; end
+      class NumberValue < AgenticRetrieveMemoryMetadataValue; end
+      class StringListValue < AgenticRetrieveMemoryMetadataValue; end
+      class DateTimeValue < AgenticRetrieveMemoryMetadataValue; end
+      class Unknown < AgenticRetrieveMemoryMetadataValue; end
+    end
+
+    # <p>The long-term memory namespace that the agent might retrieve memory records from, and the filters applied to that retrieval. You must specify either namespace or namespacePath.</p>
+    # @!attribute namespace
+    #   <p>The namespace prefix to filter memory records by. The agent retrieves memory records in namespaces that start with the provided prefix. You must specify either namespace or namespacePath.</p>
+    #   @return [String]
+    # @!attribute namespace_path
+    #   <p>The parent namespace to use for hierarchical retrievals. The agent retrieves all memory records whose namespace falls under the same parent hierarchy. You must specify either namespace or namespacePath.</p>
+    #   @return [String]
+    # @!attribute strategy_id
+    #   <p>The extraction strategy ID that restricts retrieval to memory records produced by a single strategy. Omit this parameter to retrieve records from every strategy on the memory resource.</p>
+    #   @return [String]
+    # @!attribute metadata_filters
+    #   <p>The metadata filter expressions that restrict retrieval to matching memory records. You can specify a maximum of 5 expressions.</p>
+    #   @return [Array<Types::AgenticRetrieveMemoryMetadataFilter>]
+    class AgenticRetrieveMemoryRetrievalConfig < Struct.new(
+      nil,
+      :namespace,
+      :namespace_path,
+      :strategy_id,
+      :metadata_filters,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A long-term memory retrieval that the agent chose to perform. The record reports the query and the namespace. The corresponding Retrieval step reports the results.</p>
+    # @!attribute input_query
+    #   <p>The query that the agent composed.</p>
+    #   @return [Types::AgenticRetrieveMessageContent]
+    # @!attribute memory_id
+    #   <p>The identifier of the AgentCore Memory resource retrieved from.</p>
+    #   @return [String]
+    # @!attribute namespace
+    #   <p>The namespace prefix retrieved from, as supplied in the request. This field is present when the request specified namespace.</p>
+    #   @return [String]
+    # @!attribute namespace_path
+    #   <p>The parent namespace retrieved from hierarchically, as supplied in the request. This field is present when the request specified namespacePath.</p>
+    #   @return [String]
+    # @!attribute strategy_id
+    #   <p>The extraction strategy that restricted retrieval, if the request specified one.</p>
+    #   @return [String]
+    class AgenticRetrieveMemoryRetrieveDetails < Struct.new(
+      nil,
+      :input_query,
+      :memory_id,
+      :namespace,
+      :namespace_path,
+      :strategy_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The short-term memory session that this retrieval reads from and writes to.</p>
+    # @!attribute actor_id
+    #   <p>The identifier of the end user or agent that the session belongs to. This identifier scopes session history so that one actor's history is never returned for another. You are responsible for sending the correct actor value.</p>
+    #   @return [String]
+    # @!attribute session_id
+    #   <p>The identifier of the session to restore and continue. You are responsible for sending the correct session value.</p>
+    #   @return [String]
+    class AgenticRetrieveMemorySessionBinding < Struct.new(
+      nil,
+      :actor_id,
+      :session_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A message in the agentic retrieval conversation.</p>
+    # @!attribute content
+    #   <p>The content of the message.</p>
+    #   @return [Types::AgenticRetrieveMessageContent]
+    # @!attribute role
+    #   <p>The role of the message sender (e.g., user or assistant).</p>
+    #   @return [String]
+    class AgenticRetrieveMessage < Struct.new(
+      nil,
+      :content,
+      :role,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The content of an agentic retrieval message.</p>
+    # @note This shape contains sensitive data and should be treated as such.
+    # @!attribute text
+    #   <p>The text content of the message.</p>
+    #   @return [String]
+    class AgenticRetrieveMessageContent < Struct.new(
+      nil,
+      :text,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Policy configuration for agentic retrieval.</p>
+    # @!attribute bedrock_guardrail_configuration
+    #   <p>Configuration for Bedrock guardrails to apply during retrieval.</p>
+    #   @return [Types::AgenticRetrieveBedrockGuardrailConfiguration]
+    class AgenticRetrievePolicyConfiguration < Struct.new(
+      nil,
+      :bedrock_guardrail_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration for the reranking model.</p>
+    # @!attribute type
+    #   <p>The type of reranking configuration.</p>
+    #   @return [String]
+    # @!attribute bedrock_reranking_configuration
+    #   <p>The Bedrock reranking model configuration.</p>
+    #   @return [Types::AgenticRetrieveBedrockRerankingConfiguration]
+    class AgenticRetrieveRerankingConfiguration < Struct.new(
+      nil,
+      :type,
+      :bedrock_reranking_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A chunk of the generated answer text.</p>
+    # @!attribute text
+    #   <p>The generated text chunk.</p>
+    #   @return [String]
+    class AgenticRetrieveResponseEvent < Struct.new(
+      nil,
+      :text,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>An event containing agentic retrieval results.</p>
+    # @!attribute results
+    #   <p>The list of retrieved result items.</p>
+    #   @return [Array<Types::AgenticRetrieveResultItem>]
+    # @!attribute generated_response
+    #   <p>The generated response. Present only when generateResponse is true.</p>
+    #   @return [Types::AgenticRetrieveGeneratedResponse]
+    # @!attribute next_token
+    #   <p>Opaque continuation token for paginated results.</p>
+    #   @return [String]
+    class AgenticRetrieveResultEvent < Struct.new(
+      nil,
+      :results,
+      :generated_response,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A single item from the agentic retrieval results.</p>
+    # @!attribute content
+    #   <p>The retrieved content.</p>
+    #   @return [Types::RetrievalContent]
+    # @!attribute metadata
+    #   <p>Metadata associated with the retrieved item.</p>
+    #   @return [Hash<String, JSON>]
+    # @!attribute source_retriever
+    #   <p>The source retriever that produced this result.</p>
+    #   @return [Types::AgenticRetrieveSourceRetriever]
+    class AgenticRetrieveResultItem < Struct.new(
+      nil,
+      :content,
+      :metadata,
+      :source_retriever,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Metadata about a retrieval source.</p>
+    # @!attribute identifier
+    #   <p>The identifier of the retrieval source.</p>
+    #   @return [String]
+    # @!attribute retrieval_type
+    #   <p>The type of retrieval source.</p>
+    #   @return [String]
+    class AgenticRetrieveSourceMetadata < Struct.new(
+      nil,
+      :identifier,
+      :retrieval_type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A source retriever that produced retrieval results.</p>
+    # @!attribute identifier
+    #   <p>The unique identifier of the source retriever.</p>
+    #   @return [String]
+    class AgenticRetrieveSourceRetriever < Struct.new(
+      nil,
+      :identifier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Request structure for the agentic retrieve stream operation.</p>
+    # @!attribute messages
+    #   <p>The list of messages for the agentic retrieval conversation.</p>
+    #   @return [Array<Types::AgenticRetrieveMessage>]
+    # @!attribute retrievers
+    #   <p>The list of retrievers to use for agentic retrieval.</p>
+    #   @return [Array<Types::AgenticRetriever>]
+    # @!attribute agentic_retrieve_configuration
+    #   <p>Configuration settings for the agentic retrieval operation.</p>
+    #   @return [Types::AgenticRetrieveConfiguration]
+    # @!attribute policy_configuration
+    #   <p>Policy configuration for guardrails and content filtering.</p>
+    #   @return [Types::AgenticRetrievePolicyConfiguration]
+    # @!attribute next_token
+    #   <p>Opaque continuation token for paginated results.</p>
+    #   @return [String]
+    # @!attribute user_context
+    #   <p>Contains information about the user making the request. This is used for access control filtering to ensure that retrieval results only include documents the user is authorized to access.</p>
+    #   @return [Types::UserContext]
+    # @!attribute memory_configuration
+    #   <p>The configuration for using an Amazon Bedrock AgentCore Memory resource with this retrieval.</p>
+    #   @return [Types::AgenticRetrieveMemoryConfiguration]
+    # @!attribute generate_response
+    #   <p>Whether to generate a response based on the retrieved results.</p>
+    #   @return [Boolean]
+    class AgenticRetrieveStreamRequest < Struct.new(
+      nil,
+      :messages,
+      :retrievers,
+      :agentic_retrieve_configuration,
+      :policy_configuration,
+      :next_token,
+      :user_context,
+      :memory_configuration,
+      :generate_response,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Response structure for the agentic retrieve stream operation.</p>
+    # @!attribute stream
+    #   <p>The output stream containing retrieval results and trace events.</p>
+    #   @return [Types::AgenticRetrieveStreamResponseOutput]
+    class AgenticRetrieveStreamResponse < Struct.new(
+      nil,
+      :stream,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The streaming output for agentic retrieval, containing results, traces, and errors.</p>
+    # @!attribute result
+    #   <p>A retrieval result event containing the retrieved items.</p>
+    #   @return [Types::AgenticRetrieveResultEvent]
+    # @!attribute trace_event
+    #   <p>A trace event providing visibility into the retrieval process.</p>
+    #   @return [Types::AgenticRetrieveTraceEvent]
+    # @!attribute response_event
+    #   <p>A chunk of the generated answer. Emitted only when generateResponse is true.</p>
+    #   @return [Types::AgenticRetrieveResponseEvent]
+    # @!attribute internal_server_exception
+    #   <p>An internal server error occurred.</p>
+    #   @return [Types::InternalServerException]
+    # @!attribute validation_exception
+    #   <p>The request validation failed.</p>
+    #   @return [Types::ValidationException]
+    # @!attribute resource_not_found_exception
+    #   <p>The specified resource was not found.</p>
+    #   @return [Types::ResourceNotFoundException]
+    # @!attribute service_quota_exceeded_exception
+    #   <p>The service quota has been exceeded.</p>
+    #   @return [Types::ServiceQuotaExceededException]
+    # @!attribute throttling_exception
+    #   <p>The request was throttled.</p>
+    #   @return [Types::ThrottlingException]
+    # @!attribute access_denied_exception
+    #   <p>Access to the resource was denied.</p>
+    #   @return [Types::AccessDeniedException]
+    # @!attribute conflict_exception
+    #   <p>A conflict occurred with the current state of the resource.</p>
+    #   @return [Types::ConflictException]
+    # @!attribute dependency_failed_exception
+    #   <p>A dependency failed during the operation.</p>
+    #   @return [Types::DependencyFailedException]
+    # @!attribute bad_gateway_exception
+    #   <p>A bad gateway error occurred.</p>
+    #   @return [Types::BadGatewayException]
+    class AgenticRetrieveStreamResponseOutput < Struct.new(
+      :result,
+      :trace_event,
+      :response_event,
+      :internal_server_exception,
+      :validation_exception,
+      :resource_not_found_exception,
+      :service_quota_exceeded_exception,
+      :throttling_exception,
+      :access_denied_exception,
+      :conflict_exception,
+      :dependency_failed_exception,
+      :bad_gateway_exception,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class Result < AgenticRetrieveStreamResponseOutput; end
+      class TraceEvent < AgenticRetrieveStreamResponseOutput; end
+      class ResponseEvent < AgenticRetrieveStreamResponseOutput; end
+      class InternalServerException < AgenticRetrieveStreamResponseOutput; end
+      class ValidationException < AgenticRetrieveStreamResponseOutput; end
+      class ResourceNotFoundException < AgenticRetrieveStreamResponseOutput; end
+      class ServiceQuotaExceededException < AgenticRetrieveStreamResponseOutput; end
+      class ThrottlingException < AgenticRetrieveStreamResponseOutput; end
+      class AccessDeniedException < AgenticRetrieveStreamResponseOutput; end
+      class ConflictException < AgenticRetrieveStreamResponseOutput; end
+      class DependencyFailedException < AgenticRetrieveStreamResponseOutput; end
+      class BadGatewayException < AgenticRetrieveStreamResponseOutput; end
+      class Unknown < AgenticRetrieveStreamResponseOutput; end
+    end
+
+    # <p>A trace event providing visibility into the agentic retrieval process.</p>
+    # @!attribute id
+    #   <p>The unique identifier of the trace event.</p>
+    #   @return [String]
+    # @!attribute timestamp
+    #   <p>The timestamp when the trace event occurred.</p>
+    #   @return [Integer]
+    # @!attribute attributes
+    #   <p>The attributes describing the trace event details.</p>
+    #   @return [Types::AgenticRetrieveTraceEventAttributes]
+    class AgenticRetrieveTraceEvent < Struct.new(
+      nil,
+      :id,
+      :timestamp,
+      :attributes,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Attributes describing the details of an agentic retrieval trace event.</p>
+    # @!attribute step
+    #   <p>The current step in the retrieval process.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status of the current step.</p>
+    #   @return [String]
+    # @!attribute message
+    #   <p>A human-readable message describing the trace event.</p>
+    #   @return [String]
+    # @!attribute actions
+    #   <p>The list of actions taken during this step.</p>
+    #   @return [Array<Types::AgenticRetrieveAction>]
+    # @!attribute warnings
+    #   <p>Warnings generated during this step.</p>
+    #   @return [Array<Types::AgenticRetrieveWarning>]
+    # @!attribute failures
+    #   <p>Failures that occurred during this step.</p>
+    #   @return [Array<Types::AgenticRetrieveFailure>]
+    # @!attribute retrieval_metadata
+    #   <p>Metadata about the retrieval sources used.</p>
+    #   @return [Array<Types::AgenticRetrieveSourceMetadata>]
+    # @!attribute retrieval_response
+    #   <p>The retrieval results from this step.</p>
+    #   @return [Array<Types::AgenticRetrieveTraceResultItem>]
+    class AgenticRetrieveTraceEventAttributes < Struct.new(
+      nil,
+      :step,
+      :status,
+      :message,
+      :actions,
+      :warnings,
+      :failures,
+      :retrieval_metadata,
+      :retrieval_response,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A result item from an agentic retrieval trace.</p>
+    # @!attribute content
+    #   <p>The retrieved content.</p>
+    #   @return [Types::RetrievalContent]
+    # @!attribute metadata
+    #   <p>Metadata associated with the retrieved item.</p>
+    #   @return [Hash<String, JSON>]
+    # @!attribute source_retriever
+    #   <p>The source retriever that produced this result.</p>
+    #   @return [Types::AgenticRetrieveSourceRetriever]
+    class AgenticRetrieveTraceResultItem < Struct.new(
+      nil,
+      :content,
+      :metadata,
+      :source_retriever,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A warning generated during agentic retrieval.</p>
+    # @!attribute message
+    #   <p>A general warning message.</p>
+    #   @return [Types::AgenticRetrieveWarningMessage]
+    # @!attribute guardrail
+    #   <p>A warning from a guardrail evaluation.</p>
+    #   @return [Types::AgenticRetrieveGuardrailWarning]
+    class AgenticRetrieveWarning < Struct.new(
+      :message,
+      :guardrail,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class Message < AgenticRetrieveWarning; end
+      class Guardrail < AgenticRetrieveWarning; end
+      class Unknown < AgenticRetrieveWarning; end
+    end
+
+    # <p>A general warning message from agentic retrieval.</p>
+    # @!attribute message
+    #   <p>The warning message text.</p>
+    #   @return [String]
+    class AgenticRetrieveWarningMessage < Struct.new(
+      nil,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A retriever used in agentic retrieval.</p>
+    # @!attribute description
+    #   <p>A description of the retriever's purpose.</p>
+    #   @return [String]
+    # @!attribute configuration
+    #   <p>The configuration for this retriever.</p>
+    #   @return [Types::RetrieverConfiguration]
+    class AgenticRetriever < Struct.new(
+      nil,
+      :description,
+      :configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>An event in which the prompt was analyzed in preparation for optimization.</p>
     # @note This shape contains sensitive data and should be treated as such.
     # @!attribute message
@@ -370,6 +1139,22 @@ module Aws::BedrockAgentRuntime
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Contains information about an audio segment retrieved from a knowledge base, including its location and transcription.</p> <p>This data type is used in the following API operations:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax">Retrieve response</a> – in the <code>audio</code> field</p> </li> </ul>
+    # @!attribute s3_uri
+    #   <p>The S3 URI where this specific audio segment is stored in the multimodal storage destination.</p>
+    #   @return [String]
+    # @!attribute transcription
+    #   <p>The text transcription of the audio segment content.</p>
+    #   @return [String]
+    class AudioSegment < Struct.new(
+      nil,
+      :s3_uri,
+      :transcription,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>There was an issue with a dependency due to a server issue. Retry your request.</p>
     # @!attribute message
     #   @return [String]
@@ -380,6 +1165,30 @@ module Aws::BedrockAgentRuntime
       nil,
       :message,
       :resource_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration for a Bedrock foundation model.</p>
+    # @!attribute model_configuration
+    #   <p>The model configuration containing the model ARN.</p>
+    #   @return [Types::BedrockFoundationModelModelConfiguration]
+    class BedrockFoundationModelConfiguration < Struct.new(
+      nil,
+      :model_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Model configuration for a Bedrock foundation model.</p>
+    # @!attribute model_arn
+    #   <p>The ARN of the Bedrock foundation model.</p>
+    #   @return [String]
+    class BedrockFoundationModelModelConfiguration < Struct.new(
+      nil,
+      :model_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -499,6 +1308,40 @@ module Aws::BedrockAgentRuntime
 
       class AgentAliasArn < Caller; end
       class Unknown < Caller; end
+    end
+
+    # @!attribute knowledge_base_id
+    #   <p>The unique identifier of the knowledge base that contains the document.</p>
+    #   @return [String]
+    # @!attribute data_source_id
+    #   <p>The unique identifier of the data source that contains the document.</p>
+    #   @return [String]
+    # @!attribute document_id
+    #   <p>The unique identifier of the document to check access for.</p>
+    #   @return [String]
+    # @!attribute user_context
+    #   <p>The context object containing identity information for access control filtering, including user ID and optional group memberships used to evaluate the document access control list (ACL).</p>
+    #   @return [Types::UserContext]
+    class CheckIngestedDocumentAclRequest < Struct.new(
+      nil,
+      :knowledge_base_id,
+      :data_source_id,
+      :document_id,
+      :user_context,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute has_access
+    #   <p>Specifies whether the user has access to the document based on the ingested access control list (ACL). Returns <code>true</code> if the user is allowed access, and <code>false</code> otherwise.</p>
+    #   @return [Boolean]
+    class CheckIngestedDocumentAclResponse < Struct.new(
+      nil,
+      :has_access,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object containing a segment of the generated response that is based on a source in the knowledge base, alongside information about the source.</p> <p>This data type is used in the following API operations:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax">InvokeAgent response</a> – in the <code>citations</code> field</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_ResponseSyntax">RetrieveAndGenerate response</a> – in the <code>citations</code> field</p> </li> </ul>
@@ -921,6 +1764,91 @@ module Aws::BedrockAgentRuntime
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The access control list for a document, containing allow and deny membership lists. Each list specifies conditions that determine which users and groups are granted or denied access.</p>
+    # @note This shape contains sensitive data and should be treated as such.
+    # @!attribute allow_list
+    #   <p>The list of principals allowed access to the document.</p>
+    #   @return [Types::DocumentAclMembership]
+    # @!attribute deny_list
+    #   <p>The list of principals denied access to the document.</p>
+    #   @return [Types::DocumentAclMembership]
+    class DocumentAcl < Struct.new(
+      nil,
+      :allow_list,
+      :deny_list,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A condition within a document access control list (ACL) membership, specifying users and groups that are evaluated together.</p>
+    # @!attribute condition_operator
+    #   <p>The logical operator for combining users and groups within this condition. Valid values: <code>AND</code> – Both a user match and a group match are required. <code>OR</code> – Either a user match or a group match is sufficient.</p>
+    #   @return [String]
+    # @!attribute users
+    #   <p>The list of user entries in this condition.</p>
+    #   @return [Array<Types::DocumentAclUser>]
+    # @!attribute groups
+    #   <p>The list of group entries in this condition.</p>
+    #   @return [Array<Types::DocumentAclGroup>]
+    class DocumentAclCondition < Struct.new(
+      nil,
+      :condition_operator,
+      :users,
+      :groups,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A group entry within a document access control list (ACL) condition.</p>
+    # @!attribute id
+    #   <p>The identifier of the group.</p>
+    #   @return [String]
+    # @!attribute type
+    #   <p>The membership type indicating the scope of the group entry.</p>
+    #   @return [String]
+    class DocumentAclGroup < Struct.new(
+      nil,
+      :id,
+      :type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The membership entry for a document access control list (ACL), containing conditions and their logical relation.</p>
+    # @!attribute member_relation
+    #   <p>The logical relation between conditions. Valid values: <code>AND</code> – All conditions must match. <code>OR</code> – At least one condition must match.</p>
+    #   @return [String]
+    # @!attribute conditions
+    #   <p>The list of conditions that determine membership.</p>
+    #   @return [Array<Types::DocumentAclCondition>]
+    class DocumentAclMembership < Struct.new(
+      nil,
+      :member_relation,
+      :conditions,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A user entry within a document access control list (ACL) condition.</p>
+    # @!attribute id
+    #   <p>The identifier of the user.</p>
+    #   @return [String]
+    # @!attribute type
+    #   <p>The membership type indicating the scope of the user entry.</p>
+    #   @return [String]
+    class DocumentAclUser < Struct.new(
+      nil,
+      :id,
+      :type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute session_identifier
     #   <p>The unique identifier for the session to end. You can specify either the session's <code>sessionId</code> or its Amazon Resource Name (ARN).</p>
     #   @return [String]
@@ -1093,7 +2021,7 @@ module Aws::BedrockAgentRuntime
     #   <p>The name that the metadata attribute must match.</p>
     #   @return [String]
     # @!attribute value
-    #   <p>The value to whcih to compare the value of the metadata attribute.</p>
+    #   <p>The value to which to compare the value of the metadata attribute.</p>
     #   @return [JSON]
     class FilterAttribute < Struct.new(
       nil,
@@ -1874,6 +2802,26 @@ module Aws::BedrockAgentRuntime
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Configuration for the foundation model.</p>
+    # @!attribute type
+    #   <p>The type of foundation model configuration.</p>
+    #   @return [String]
+    # @!attribute bedrock_foundation_model_configuration
+    #   <p>The Bedrock foundation model configuration.</p>
+    #   @return [Types::BedrockFoundationModelConfiguration]
+    # @!attribute mantle_foundation_model_configuration
+    #   <p>The Mantle foundation model configuration.</p>
+    #   @return [Types::MantleFoundationModelConfiguration]
+    class FoundationModelConfiguration < Struct.new(
+      nil,
+      :type,
+      :bedrock_foundation_model_configuration,
+      :mantle_foundation_model_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p> Defines parameters that the agent needs to invoke from the user to complete the function. Corresponds to an action in an action group. </p>
     # @!attribute name
     #   <p> A name for the function. </p>
@@ -2126,6 +3074,52 @@ module Aws::BedrockAgentRuntime
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute knowledge_base_id
+    #   <p>The unique identifier of the knowledge base that contains the document.</p>
+    #   @return [String]
+    # @!attribute data_source_id
+    #   <p>The unique identifier of the data source that contains the document.</p>
+    #   @return [String]
+    # @!attribute document_id
+    #   <p>The unique identifier of the document to retrieve content for.</p>
+    #   @return [String]
+    # @!attribute output_format
+    #   <p>The output format for the document content. <code>RAW</code> returns the original file. <code>EXTRACTED</code> returns parsed text as JSON. Defaults to <code>RAW</code>.</p>
+    #   @return [String]
+    # @!attribute user_context
+    #   <p>Contains information about the user making the request. This is used for access control filtering to ensure that results only include documents the user is authorized to access.</p>
+    #   @return [Types::UserContext]
+    class GetDocumentContentRequest < Struct.new(
+      nil,
+      :knowledge_base_id,
+      :data_source_id,
+      :document_id,
+      :output_format,
+      :user_context,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute mime_type
+    #   <p>The MIME type of the document content. For <code>RAW</code> format, this is the original file type (for example, <code>application/pdf</code>). For <code>EXTRACTED</code> format, this is always <code>application/json</code>.</p>
+    #   @return [String]
+    # @!attribute presigned_url
+    #   <p>A pre-signed URL for downloading the document content. The URL expires after 5 minutes.</p>
+    #   @return [String]
+    # @!attribute document_content_length
+    #   <p>The size of the document content in bytes available at the pre-signed URL.</p>
+    #   @return [Integer]
+    class GetDocumentContentResponse < Struct.new(
+      nil,
+      :mime_type,
+      :presigned_url,
+      :document_content_length,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute flow_identifier
     #   <p>The unique identifier of the flow.</p>
     #   @return [String]
@@ -2229,6 +3223,36 @@ module Aws::BedrockAgentRuntime
       :flow_alias_identifier,
       :flow_identifier,
       :flow_version,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute knowledge_base_id
+    #   <p>The unique identifier of the knowledge base that contains the document.</p>
+    #   @return [String]
+    # @!attribute data_source_id
+    #   <p>The unique identifier of the data source that contains the document.</p>
+    #   @return [String]
+    # @!attribute document_id
+    #   <p>The unique identifier of the document to retrieve the ingested access control list (ACL) for.</p>
+    #   @return [String]
+    class GetIngestedDocumentAclRequest < Struct.new(
+      nil,
+      :knowledge_base_id,
+      :data_source_id,
+      :document_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute document_acl
+    #   <p>The ingested document access control list (ACL) containing allow and deny membership information.</p>
+    #   @return [Types::DocumentAcl]
+    class GetIngestedDocumentAclResponse < Struct.new(
+      nil,
+      :document_acl,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2931,6 +3955,22 @@ module Aws::BedrockAgentRuntime
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Contains the image data for multimodal knowledge base queries, including format and content.</p> <p>This data type is used in the following API operations:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_RequestSyntax">Retrieve request</a> – in the <code>image</code> field</p> </li> </ul>
+    # @!attribute format
+    #   <p>The format of the input image. Supported formats include png, gif, jpeg, and webp.</p>
+    #   @return [String]
+    # @!attribute inline_content
+    #   <p>The base64-encoded image data for inline image content. Maximum size is 5MB.</p>
+    #   @return [String]
+    class InputImage < Struct.new(
+      nil,
+      :format,
+      :inline_content,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Contains information about the prompt to optimize.</p>
     # @!attribute text_prompt
     #   <p>Contains information about the text prompt to optimize.</p>
@@ -3429,24 +4469,42 @@ module Aws::BedrockAgentRuntime
 
     # <p>Contains the query made to the knowledge base.</p> <p>This data type is used in the following API operations:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_RequestSyntax">Retrieve request</a> – in the <code>retrievalQuery</code> field</p> </li> </ul>
     # @note This shape contains sensitive data and should be treated as such.
+    # @!attribute type
+    #   <p>The type of query being performed.</p>
+    #   @return [String]
     # @!attribute text
     #   <p>The text of the query made to the knowledge base.</p>
     #   @return [String]
+    # @!attribute image
+    #   <p>An image to include in the knowledge base query for multimodal retrieval.</p>
+    #   @return [Types::InputImage]
     class KnowledgeBaseQuery < Struct.new(
       nil,
+      :type,
       :text,
+      :image,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:type] = 'TEXT' unless options.key?(:type)
+        options[:text] = '' unless options.key?(:text)
+        super
+      end
     end
 
     # <p>Contains configurations for knowledge base query. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html">Query configurations</a>.</p> <p>This data type is used in the following API operations:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_RequestSyntax">Retrieve request</a> – in the <code>retrievalConfiguration</code> field</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_RequestSyntax">RetrieveAndGenerate request</a> – in the <code>retrievalConfiguration</code> field</p> </li> </ul>
     # @!attribute vector_search_configuration
     #   <p>Contains details about how the results from the vector search should be returned. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html">Query configurations</a>.</p>
     #   @return [Types::KnowledgeBaseVectorSearchConfiguration]
+    # @!attribute managed_search_configuration
+    #   <p>Contains configurations for managed search. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html">Query configurations</a>.</p>
+    #   @return [Types::ManagedSearchConfiguration]
     class KnowledgeBaseRetrievalConfiguration < Struct.new(
       nil,
       :vector_search_configuration,
+      :managed_search_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3465,12 +4523,16 @@ module Aws::BedrockAgentRuntime
     # @!attribute metadata
     #   <p>Contains metadata attributes and their values for the file in the data source. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-ds.html#kb-ds-metadata">Metadata and filtering</a>.</p>
     #   @return [Hash<String, JSON>]
+    # @!attribute document_id
+    #   <p>The unique identifier of the document. Use with <code>GetDocumentContent</code> to retrieve the full document.</p>
+    #   @return [String]
     class KnowledgeBaseRetrievalResult < Struct.new(
       nil,
       :content,
       :location,
       :score,
       :metadata,
+      :document_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3499,6 +4561,22 @@ module Aws::BedrockAgentRuntime
       :retrieval_configuration,
       :generation_configuration,
       :orchestration_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration for retrieving from a Bedrock knowledge base.</p>
+    # @!attribute knowledge_base_id
+    #   <p>The unique identifier of the knowledge base.</p>
+    #   @return [String]
+    # @!attribute retrieval_overrides
+    #   <p>Overrides for retrieval behavior such as filters and result limits.</p>
+    #   @return [Types::RetrievalOverrides]
+    class KnowledgeBaseRetrieverConfiguration < Struct.new(
+      nil,
+      :knowledge_base_id,
+      :retrieval_overrides,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3740,6 +4818,110 @@ module Aws::BedrockAgentRuntime
     class ListTagsForResourceResponse < Struct.new(
       nil,
       :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration for a Bedrock reranking model used in managed search.</p>
+    # @!attribute model_configuration
+    #   <p>The model configuration containing the model ARN for reranking.</p>
+    #   @return [Types::ManagedSearchBedrockRerankingModelConfiguration]
+    # @!attribute number_of_reranked_results
+    #   <p>The number of results to return after reranking.</p>
+    #   @return [Integer]
+    # @!attribute metadata_configuration
+    #   <p>The metadata configuration for reranking.</p>
+    #   @return [Types::MetadataConfigurationForReranking]
+    class ManagedSearchBedrockRerankingConfiguration < Struct.new(
+      nil,
+      :model_configuration,
+      :number_of_reranked_results,
+      :metadata_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Model configuration for a Bedrock reranking model used in managed search.</p>
+    # @!attribute model_arn
+    #   <p>The ARN of the Bedrock reranking model.</p>
+    #   @return [String]
+    # @!attribute additional_model_request_fields
+    #   <p>Additional request fields to pass to the reranking model.</p>
+    #   @return [Hash<String, JSON>]
+    class ManagedSearchBedrockRerankingModelConfiguration < Struct.new(
+      nil,
+      :model_arn,
+      :additional_model_request_fields,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration for managed search in a knowledge base. Managed search automatically determines the best search strategy based on your data store configuration.</p>
+    # @!attribute number_of_results
+    #   <p>The number of results to retrieve.</p>
+    #   @return [Integer]
+    # @!attribute filter
+    #   <p>Filters the metadata of the retrieved results so that Amazon Bedrock returns only results that match the filter.</p>
+    #   @return [Types::RetrievalFilter]
+    # @!attribute reranking_model_type
+    #   <p>The type of reranking model to use when reranking results retrieved from the managed search. Use <code>CUSTOM</code> to specify a model, <code>MANAGED</code> to use the service default, or <code>NONE</code> to disable reranking.</p>
+    #   @return [String]
+    # @!attribute reranking_configuration
+    #   <p>Contains configurations for reranking the results retrieved from the managed search.</p>
+    #   @return [Types::ManagedSearchRerankingConfiguration]
+    class ManagedSearchConfiguration < Struct.new(
+      nil,
+      :number_of_results,
+      :filter,
+      :reranking_model_type,
+      :reranking_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration for the reranking model used in managed search.</p>
+    # @!attribute type
+    #   <p>The type of reranking configuration.</p>
+    #   @return [String]
+    # @!attribute bedrock_reranking_configuration
+    #   <p>The Bedrock reranking model configuration for managed search.</p>
+    #   @return [Types::ManagedSearchBedrockRerankingConfiguration]
+    class ManagedSearchRerankingConfiguration < Struct.new(
+      nil,
+      :type,
+      :bedrock_reranking_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration for a Mantle foundation model.</p>
+    # @!attribute model_configuration
+    #   <p>The model configuration containing the model ARN and project ID.</p>
+    #   @return [Types::MantleFoundationModelModelConfiguration]
+    class MantleFoundationModelConfiguration < Struct.new(
+      nil,
+      :model_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Model configuration for a Mantle foundation model.</p>
+    # @!attribute model_arn
+    #   <p>The ARN of the Mantle foundation model.</p>
+    #   @return [String]
+    # @!attribute project_id
+    #   <p>The Amazon Bedrock project ID used for billing and usage attribution. If you don't specify a value, the service uses the default project.</p>
+    #   @return [String]
+    class MantleFoundationModelModelConfiguration < Struct.new(
+      nil,
+      :model_arn,
+      :project_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4764,7 +5946,7 @@ module Aws::BedrockAgentRuntime
 
     # <p>Contains the template for the prompt that's sent to the model for response generation. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html#kb-test-config-sysprompt">Knowledge base prompt templates</a>.</p> <p>This data type is used in the following API operations:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_RequestSyntax">RetrieveAndGenerate request</a> – in the <code>filter</code> field</p> </li> </ul>
     # @!attribute text_prompt_template
-    #   <p>The template for the prompt that's sent to the model for response generation. You can include prompt placeholders, which become replaced before the prompt is sent to the model to provide instructions and context to the model. In addition, you can include XML tags to delineate meaningful sections of the prompt template.</p> <p>For more information, see the following resources:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html#kb-test-config-sysprompt">Knowledge base prompt templates</a> </p> </li> <li> <p> <a href="https://docs.anthropic.com/claude/docs/use-xml-tags">Use XML tags with Anthropic Claude models</a> </p> </li> </ul>
+    #   <p>The template for the prompt that's sent to the model for response generation. You can include prompt placeholders, which become replaced before the prompt is sent to the model to provide instructions and context to the model. In addition, you can include XML tags to delineate meaningful sections of the prompt template.</p> <p>For more information, see the following resources:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html#kb-test-config-sysprompt">Knowledge base prompt templates</a> </p> </li> <li> <p> <a href="https://docs.claude.com/en/docs/build-with-claude/prompt-engineering/use-xml-tags">Use XML tags with Anthropic Claude models</a> </p> </li> </ul>
     #   @return [String]
     class PromptTemplate < Struct.new(
       nil,
@@ -5028,7 +6210,7 @@ module Aws::BedrockAgentRuntime
 
     # <p>Contains information about a document that was reranked.</p>
     # @!attribute index
-    #   <p>The ranking of the document. The lower a number, the higher the document is ranked.</p>
+    #   <p>The original index of the document from the input sources array.</p>
     #   @return [Integer]
     # @!attribute relevance_score
     #   <p>The relevance score of the document.</p>
@@ -5203,6 +6385,26 @@ module Aws::BedrockAgentRuntime
       class Unknown < ResponseStream; end
     end
 
+    # <p>The content retrieved from a knowledge source.</p>
+    # @!attribute byte_content
+    #   <p>The binary content of the retrieved item.</p>
+    #   @return [String]
+    # @!attribute text
+    #   <p>The text content of the retrieved item.</p>
+    #   @return [String]
+    # @!attribute mime_type
+    #   <p>The MIME type of the retrieved content.</p>
+    #   @return [String]
+    class RetrievalContent < Struct.new(
+      nil,
+      :byte_content,
+      :text,
+      :mime_type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Specifies the filters to use on the metadata attributes in the knowledge base data sources before returning results. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html">Query configurations</a>. See the examples below to see how to use these filters.</p> <p>This data type is used in the following API operations:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_RequestSyntax">Retrieve request</a> – in the <code>filter</code> field</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_RequestSyntax">RetrieveAndGenerate request</a> – in the <code>filter</code> field</p> </li> </ul>
     # @note This shape contains sensitive data and should be treated as such.
     # @!attribute equals
@@ -5279,6 +6481,22 @@ module Aws::BedrockAgentRuntime
       class Unknown < RetrievalFilter; end
     end
 
+    # <p>Overrides for retrieval behavior.</p>
+    # @!attribute filter
+    #   <p>A filter to apply to the retrieval results.</p>
+    #   @return [Types::RetrievalFilter]
+    # @!attribute max_number_of_results
+    #   <p>The maximum number of results to return.</p>
+    #   @return [Integer]
+    class RetrievalOverrides < Struct.new(
+      nil,
+      :filter,
+      :max_number_of_results,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The Confluence data source location.</p>
     # @!attribute url
     #   <p>The Confluence host URL for the data source location.</p>
@@ -5302,6 +6520,12 @@ module Aws::BedrockAgentRuntime
     # @!attribute byte_content
     #   <p>A data URI with base64-encoded content from the data source. The URI is in the following format: returned in the following format: <code>data:image/jpeg;base64,${base64-encoded string}</code>.</p>
     #   @return [String]
+    # @!attribute video
+    #   <p>Video segment information when the retrieval result contains video content.</p>
+    #   @return [Types::VideoSegment]
+    # @!attribute audio
+    #   <p>Audio segment information when the retrieval result contains audio content.</p>
+    #   @return [Types::AudioSegment]
     # @!attribute row
     #   <p>Specifies information about the rows with the cells to return in retrieval.</p>
     #   @return [Array<Types::RetrievalResultContentColumn>]
@@ -5310,6 +6534,8 @@ module Aws::BedrockAgentRuntime
       :type,
       :text,
       :byte_content,
+      :video,
+      :audio,
       :row,
       keyword_init: true
     )
@@ -5349,6 +6575,18 @@ module Aws::BedrockAgentRuntime
     class RetrievalResultCustomDocumentLocation < Struct.new(
       nil,
       :id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The Google Drive location of a retrieval result.</p>
+    # @!attribute url
+    #   <p>The Google Drive URL for the data source location.</p>
+    #   @return [String]
+    class RetrievalResultGoogleDriveLocation < Struct.new(
+      nil,
+      :url,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5395,6 +6633,12 @@ module Aws::BedrockAgentRuntime
     # @!attribute sql_location
     #   <p>Specifies information about the SQL query used to retrieve the result.</p>
     #   @return [Types::RetrievalResultSqlLocation]
+    # @!attribute one_drive_location
+    #   <p>The Microsoft OneDrive data source location.</p>
+    #   @return [Types::RetrievalResultOneDriveLocation]
+    # @!attribute google_drive_location
+    #   <p>The Google Drive data source location.</p>
+    #   @return [Types::RetrievalResultGoogleDriveLocation]
     class RetrievalResultLocation < Struct.new(
       nil,
       :type,
@@ -5406,6 +6650,20 @@ module Aws::BedrockAgentRuntime
       :custom_document_location,
       :kendra_document_location,
       :sql_location,
+      :one_drive_location,
+      :google_drive_location,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The Microsoft OneDrive location of a retrieval result.</p>
+    # @!attribute url
+    #   <p>The OneDrive URL for the data source location.</p>
+    #   @return [String]
+    class RetrievalResultOneDriveLocation < Struct.new(
+      nil,
+      :url,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5494,7 +6752,7 @@ module Aws::BedrockAgentRuntime
     # <p>Contains the query made to the knowledge base.</p> <p>This data type is used in the following API operations:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_RequestSyntax">RetrieveAndGenerate request</a> – in the <code>input</code> field</p> </li> </ul>
     # @note This shape contains sensitive data and should be treated as such.
     # @!attribute text
-    #   <p>The query made to the knowledge base.</p>
+    #   <p>The query made to the knowledge base, in characters.</p>
     #   @return [String]
     class RetrieveAndGenerateInput < Struct.new(
       nil,
@@ -5542,12 +6800,16 @@ module Aws::BedrockAgentRuntime
     # @!attribute session_configuration
     #   <p>Contains details about the session with the knowledge base.</p>
     #   @return [Types::RetrieveAndGenerateSessionConfiguration]
+    # @!attribute user_context
+    #   <p>Contains information about the user making the request. This is used for access control filtering to ensure that retrieval results only include documents the user is authorized to access.</p>
+    #   @return [Types::UserContext]
     class RetrieveAndGenerateRequest < Struct.new(
       nil,
       :session_id,
       :input,
       :retrieve_and_generate_configuration,
       :session_configuration,
+      :user_context,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5600,12 +6862,16 @@ module Aws::BedrockAgentRuntime
     # @!attribute session_configuration
     #   <p>Contains details about the session with the knowledge base.</p>
     #   @return [Types::RetrieveAndGenerateSessionConfiguration]
+    # @!attribute user_context
+    #   <p>Contains information about the user making the request. This is used for access control filtering to ensure that retrieval results only include documents the user is authorized to access.</p>
+    #   @return [Types::UserContext]
     class RetrieveAndGenerateStreamRequest < Struct.new(
       nil,
       :session_id,
       :input,
       :retrieve_and_generate_configuration,
       :session_configuration,
+      :user_context,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5711,6 +6977,9 @@ module Aws::BedrockAgentRuntime
     # @!attribute next_token
     #   <p>If there are more results than can fit in the response, the response returns a <code>nextToken</code>. Use this token in the <code>nextToken</code> field of another request to retrieve the next batch of results.</p>
     #   @return [String]
+    # @!attribute user_context
+    #   <p>Contains information about the user making the request. This is used for access control filtering to ensure that retrieval results only include documents the user is authorized to access.</p>
+    #   @return [Types::UserContext]
     class RetrieveRequest < Struct.new(
       nil,
       :knowledge_base_id,
@@ -5718,6 +6987,7 @@ module Aws::BedrockAgentRuntime
       :retrieval_configuration,
       :guardrail_configuration,
       :next_token,
+      :user_context,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5760,6 +7030,21 @@ module Aws::BedrockAgentRuntime
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration for a retriever, specified as a union of retriever types.</p>
+    # @!attribute knowledge_base
+    #   <p>Configuration for a knowledge base retriever.</p>
+    #   @return [Types::KnowledgeBaseRetrieverConfiguration]
+    class RetrieverConfiguration < Struct.new(
+      :knowledge_base,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class KnowledgeBase < RetrieverConfiguration; end
+      class Unknown < RetrieverConfiguration; end
     end
 
     # <p>Contains information to return from the action group that the agent has predicted to invoke.</p> <p>This data type is used in the following API operations:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax">InvokeAgent response</a> </p> </li> </ul>
@@ -6411,6 +7696,19 @@ module Aws::BedrockAgentRuntime
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Contains information about the user making the request. Use this to pass user identity information for access control filtering, so that retrieval results only include documents the user is authorized to access.</p>
+    # @note This shape contains sensitive data and should be treated as such.
+    # @!attribute user_id
+    #   <p>The identifier of the user making the retrieval request.</p>
+    #   @return [String]
+    class UserContext < Struct.new(
+      nil,
+      :user_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Input validation failed. Check your request parameters and retry the request.</p>
     # @!attribute message
     #   @return [String]
@@ -6469,6 +7767,22 @@ module Aws::BedrockAgentRuntime
       nil,
       :type,
       :bedrock_reranking_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains information about a video segment retrieved from a knowledge base, including its location and summary.</p> <p>This data type is used in the following API operations:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax">Retrieve response</a> – in the <code>video</code> field</p> </li> </ul>
+    # @!attribute s3_uri
+    #   <p>The S3 URI where this specific video segment is stored in the multimodal storage destination.</p>
+    #   @return [String]
+    # @!attribute summary
+    #   <p>A text summary describing the content of the video segment.</p>
+    #   @return [String]
+    class VideoSegment < Struct.new(
+      nil,
+      :s3_uri,
+      :summary,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

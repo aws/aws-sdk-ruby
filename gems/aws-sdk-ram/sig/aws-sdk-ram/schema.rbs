@@ -10,6 +10,8 @@ module Aws::RAM
     AssociateResourceShareResponse: StructureShape
     AssociatedPermission: StructureShape
     AssociatedPermissionList: ListShape
+    AssociatedSource: StructureShape
+    AssociatedSourceList: ListShape
     Boolean: BooleanShape
     CreatePermissionRequest: StructureShape
     CreatePermissionResponse: StructureShape
@@ -67,6 +69,8 @@ module Aws::RAM
     ListResourceTypesResponse: StructureShape
     ListResourcesRequest: StructureShape
     ListResourcesResponse: StructureShape
+    ListSourceAssociationsRequest: StructureShape
+    ListSourceAssociationsResponse: StructureShape
     MalformedArnException: StructureShape
     MalformedPolicyTemplateException: StructureShape
     MaxResults: IntegerShape
@@ -111,6 +115,7 @@ module Aws::RAM
     ResourceShareAssociationList: ListShape
     ResourceShareAssociationStatus: EnumShape
     ResourceShareAssociationType: EnumShape
+    ResourceShareConfiguration: StructureShape
     ResourceShareFeatureSet: EnumShape
     ResourceShareInvitation: StructureShape
     ResourceShareInvitationAlreadyAcceptedException: StructureShape

@@ -82,7 +82,13 @@ module Aws::AppIntegrations
     #   @return [Time]
     # @!attribute is_service
     #   <p>Indicates whether the application is a service.</p>
+    #   @deprecated
+    #     IsService has been deprecated in favor of ApplicationType
+    #     Since: 2025-12-01
     #   @return [Boolean]
+    # @!attribute application_type
+    #   <p>The type of application.</p>
+    #   @return [String]
     class ApplicationSummary < Struct.new(
       nil,
       :arn,
@@ -92,6 +98,7 @@ module Aws::AppIntegrations
       :created_time,
       :last_modified_time,
       :is_service,
+      :application_type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -100,6 +107,48 @@ module Aws::AppIntegrations
         options[:is_service] = false unless options.key?(:is_service)
         super
       end
+    end
+
+    # <p>Contains the authentication settings that Connect Customer uses to call an external application endpoint.</p>
+    # @!attribute auth_type
+    #   <p>The type of authentication that Connect Customer uses to call the external application endpoint. You must specify an authentication type for <code>A2A_SERVER</code> applications. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>API_KEY</code>: Connect Customer sends an API key that is stored in the Secrets Manager secret that you specify in <code>CredentialProviderIdentifier</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>CONNECT_JWT</code>: Connect Customer issues a short-lived, signed JSON Web Token (JWT). This authentication type doesn't require a stored credential.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute credential_provider_identifier
+    #   <p>The ARN of the Secrets Manager secret that stores the credentials. The secret must be accessible to Connect Customer.</p>
+    #            <p>You must specify this ARN when <code>AuthType</code> is <code>API_KEY</code>. Don't specify it when <code>AuthType</code> is <code>CONNECT_JWT</code>.</p>
+    #   @return [String]
+    # @!attribute audience_override
+    #   <p>The value that Connect Customer uses as the audience (<code>aud</code>) claim of the JSON Web Token (JWT) that it issues. You can specify this parameter only when <code>AuthType</code> is <code>CONNECT_JWT</code>. If you don't specify it, the audience is the <code>AccessUrl</code> of the application. The value can't contain <code>connect.amazonaws.com</code>.</p>
+    #   @return [String]
+    class AuthConfig < Struct.new(
+      nil,
+      :auth_type,
+      :credential_provider_identifier,
+      :audience_override,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The request conflicts with the current state of the resource. Verify the application's current state and retry the request.</p>
+    # @!attribute message
+    #   @return [String]
+    class ConflictException < Struct.new(
+      nil,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The contact handling configuration for the application.</p>
@@ -150,6 +199,9 @@ module Aws::AppIntegrations
     #   @return [Array<String>]
     # @!attribute is_service
     #   <p>Indicates whether the application is a service.</p>
+    #   @deprecated
+    #     IsService has been deprecated in favor of ApplicationType
+    #     Since: 2025-12-01
     #   @return [Boolean]
     # @!attribute initialization_timeout
     #   <p>The maximum time in milliseconds allowed to establish a connection with the workspace.</p>
@@ -160,6 +212,12 @@ module Aws::AppIntegrations
     # @!attribute iframe_config
     #   <p>The iframe configuration for the application.</p>
     #   @return [Types::IframeConfig]
+    # @!attribute application_type
+    #   <p>The type of application.</p>
+    #   @return [String]
+    # @!attribute auth_config
+    #   <p>The authentication settings that Connect Customer uses when calling the external application.</p>
+    #   @return [Types::AuthConfig]
     class CreateApplicationRequest < Struct.new(
       nil,
       :name,
@@ -175,6 +233,8 @@ module Aws::AppIntegrations
       :initialization_timeout,
       :application_config,
       :iframe_config,
+      :application_type,
+      :auth_config,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -450,9 +510,20 @@ module Aws::AppIntegrations
     # @!attribute arn
     #   <p>The Amazon Resource Name (ARN) of the Application.</p>
     #   @return [String]
+    # @!attribute force
+    #   <p>Specifies whether to delete the application even if it still has application associations.
+    #         If <code>true</code>, the operation removes the application and its associations. If
+    #         <code>false</code> or absent, the delete fails when associations exist.</p>
+    #            <important>
+    #               <p>Setting this parameter to <code>true</code> permanently removes all of the
+    #           application's associations. Doing so might impact other resources that rely on and
+    #           reference the application. This action can't be undone.</p>
+    #            </important>
+    #   @return [Boolean]
     class DeleteApplicationRequest < Struct.new(
       nil,
       :arn,
+      :force,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -693,6 +764,9 @@ module Aws::AppIntegrations
     #   @return [Array<String>]
     # @!attribute is_service
     #   <p>Indicates whether the application is a service.</p>
+    #   @deprecated
+    #     IsService has been deprecated in favor of ApplicationType
+    #     Since: 2025-12-01
     #   @return [Boolean]
     # @!attribute initialization_timeout
     #   <p>The maximum time in milliseconds allowed to establish a connection with the workspace.</p>
@@ -703,6 +777,12 @@ module Aws::AppIntegrations
     # @!attribute iframe_config
     #   <p>The iframe configuration for the application.</p>
     #   @return [Types::IframeConfig]
+    # @!attribute application_type
+    #   <p>The type of application.</p>
+    #   @return [String]
+    # @!attribute auth_config
+    #   <p>The authentication settings that Connect Customer uses when calling the external application.</p>
+    #   @return [Types::AuthConfig]
     class GetApplicationResponse < Struct.new(
       nil,
       :arn,
@@ -721,6 +801,8 @@ module Aws::AppIntegrations
       :initialization_timeout,
       :application_config,
       :iframe_config,
+      :application_type,
+      :auth_config,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -889,7 +971,7 @@ module Aws::AppIntegrations
     #   <p>A unique identifier for the Application.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous 
+    #   <p>The token for the next set of results. Use the value returned in the previous
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -921,16 +1003,20 @@ module Aws::AppIntegrations
     end
 
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous 
+    #   <p>The token for the next set of results. Use the value returned in the previous
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
     #   <p>The maximum number of results to return per page.</p>
     #   @return [Integer]
+    # @!attribute application_type
+    #   <p>The type of application.</p>
+    #   @return [String]
     class ListApplicationsRequest < Struct.new(
       nil,
       :next_token,
       :max_results,
+      :application_type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -955,7 +1041,7 @@ module Aws::AppIntegrations
     #   <p>A unique identifier for the DataIntegration.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous 
+    #   <p>The token for the next set of results. Use the value returned in the previous
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -987,7 +1073,7 @@ module Aws::AppIntegrations
     end
 
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous 
+    #   <p>The token for the next set of results. Use the value returned in the previous
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -1021,7 +1107,7 @@ module Aws::AppIntegrations
     #   <p>The name of the event integration. </p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous 
+    #   <p>The token for the next set of results. Use the value returned in the previous
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -1053,7 +1139,7 @@ module Aws::AppIntegrations
     end
 
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous 
+    #   <p>The token for the next set of results. Use the value returned in the previous
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -1295,6 +1381,9 @@ module Aws::AppIntegrations
     #   @return [Array<String>]
     # @!attribute is_service
     #   <p>Indicates whether the application is a service.</p>
+    #   @deprecated
+    #     IsService has been deprecated in favor of ApplicationType
+    #     Since: 2025-12-01
     #   @return [Boolean]
     # @!attribute initialization_timeout
     #   <p>The maximum time in milliseconds allowed to establish a connection with the workspace.</p>
@@ -1305,6 +1394,12 @@ module Aws::AppIntegrations
     # @!attribute iframe_config
     #   <p>The iframe configuration for the application.</p>
     #   @return [Types::IframeConfig]
+    # @!attribute application_type
+    #   <p>The type of application.</p>
+    #   @return [String]
+    # @!attribute auth_config
+    #   <p>The authentication settings that Connect Customer uses when calling the external application.</p>
+    #   @return [Types::AuthConfig]
     class UpdateApplicationRequest < Struct.new(
       nil,
       :arn,
@@ -1318,6 +1413,8 @@ module Aws::AppIntegrations
       :initialization_timeout,
       :application_config,
       :iframe_config,
+      :application_type,
+      :auth_config,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

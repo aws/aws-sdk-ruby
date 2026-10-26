@@ -144,18 +144,18 @@ module Aws::EKSAuth
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -209,20 +209,25 @@ module Aws::EKSAuth
       super
     end
 
-    # <p>The Amazon EKS Auth API and the <code>AssumeRoleForPodIdentity</code> action are only used
-    #             by the EKS Pod Identity Agent.</p>
-    #          <p>We recommend that applications use the Amazon Web Services SDKs to connect to Amazon Web Services services; if
-    #             credentials from an EKS Pod Identity association are available in the pod, the latest versions of the
-    #             SDKs use them automatically.</p>
+    # <p>The Amazon EKS Auth API and the <code>AssumeRoleForPodIdentity</code> action are only used by the EKS Pod Identity Agent.</p> <p>We recommend that applications use the Amazon Web Services SDKs to connect to Amazon Web Services services; if credentials from an EKS Pod Identity association are available in the pod, the latest versions of the SDKs use them automatically.</p>
     # @param [Hash, Types::AssumeRoleForPodIdentityRequest] params
     # @option params [String] :cluster_name
     #   <p>The name of the cluster for the request.</p>
     # @option params [String] :token
     #   <p>The token of the Kubernetes service account for the pod.</p>
+    # @option params [String] :eks_node_name
+    #   <p>The Kubernetes node name of the worker node where the pod is running.</p>
+    # @option params [String] :instance_id
+    #   <p>The Amazon EC2 instance ID of the worker node where the pod is running.</p>
+    # @option params [String] :zone
+    #   <p>The Availability Zone ID of the worker node where the pod is running.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     cluster_name: "ClusterName", # required
     #     token: "JwtToken", # required
+    #     eks_node_name: "String",
+    #     instance_id: "String",
+    #     zone: "String"
     #   }
     #   options = {}
     #   response = client.assume_role_for_pod_identity(params, options)

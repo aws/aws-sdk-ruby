@@ -143,6 +143,8 @@ module Aws::DocDB
     FailoverDBClusterResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.docdb#FailoverDBClusterResult", name: "FailoverDBClusterResult")
     FailoverGlobalClusterMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.docdb#FailoverGlobalClusterMessage", name: "FailoverGlobalClusterMessage")
     FailoverGlobalClusterResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.docdb#FailoverGlobalClusterResult", name: "FailoverGlobalClusterResult")
+    FailoverState = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.docdb#FailoverState", name: "FailoverState")
+    FailoverStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.docdb#FailoverStatus", name: "FailoverStatus")
     Filter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.docdb#Filter", name: "Filter")
     FilterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.docdb#FilterList", name: "FilterList")
     FilterValueList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.docdb#FilterValueList", name: "FilterValueList")
@@ -152,6 +154,7 @@ module Aws::DocDB
     GlobalClusterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.docdb#GlobalClusterList", name: "GlobalClusterList")
     GlobalClusterMember = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.docdb#GlobalClusterMember", name: "GlobalClusterMember")
     GlobalClusterMemberList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.docdb#GlobalClusterMemberList", name: "GlobalClusterMemberList")
+    GlobalClusterMemberSynchronizationStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.docdb#GlobalClusterMemberSynchronizationStatus", name: "GlobalClusterMemberSynchronizationStatus")
     GlobalClusterNotFoundFault = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.docdb#GlobalClusterNotFoundFault", name: "GlobalClusterNotFoundFault", traits: {"aws.protocols#awsQueryError" => {"code" => "GlobalClusterNotFoundFault", "httpResponseCode" => 404}, "smithy.api#error" => "client", "smithy.api#httpError" => 404})
     GlobalClusterQuotaExceededFault = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.docdb#GlobalClusterQuotaExceededFault", name: "GlobalClusterQuotaExceededFault", traits: {"aws.protocols#awsQueryError" => {"code" => "GlobalClusterQuotaExceededFault", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
     GlobalClustersMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.docdb#GlobalClustersMessage", name: "GlobalClustersMessage")
@@ -192,6 +195,8 @@ module Aws::DocDB
     ModifyEventSubscriptionResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.docdb#ModifyEventSubscriptionResult", name: "ModifyEventSubscriptionResult")
     ModifyGlobalClusterMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.docdb#ModifyGlobalClusterMessage", name: "ModifyGlobalClusterMessage")
     ModifyGlobalClusterResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.docdb#ModifyGlobalClusterResult", name: "ModifyGlobalClusterResult")
+    NetworkTypeList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.docdb#NetworkTypeList", name: "NetworkTypeList")
+    NetworkTypeNotSupported = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.docdb#NetworkTypeNotSupported", name: "NetworkTypeNotSupported", traits: {"aws.protocols#awsQueryError" => {"code" => "NetworkTypeNotSupported", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
     OrderableDBInstanceOption = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.docdb#OrderableDBInstanceOption", name: "OrderableDBInstanceOption")
     OrderableDBInstanceOptionsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.docdb#OrderableDBInstanceOptionsList", name: "OrderableDBInstanceOptionsList")
     OrderableDBInstanceOptionsMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.docdb#OrderableDBInstanceOptionsMessage", name: "OrderableDBInstanceOptionsMessage")
@@ -345,6 +350,8 @@ module Aws::DocDB
     CreateDBClusterMessage.add_member(:serverless_v2_scaling_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerlessV2ScalingConfiguration, name: "ServerlessV2ScalingConfiguration"))
     CreateDBClusterMessage.add_member(:manage_master_user_password, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "ManageMasterUserPassword"))
     CreateDBClusterMessage.add_member(:master_user_secret_kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "MasterUserSecretKmsKeyId"))
+    CreateDBClusterMessage.add_member(:network_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NetworkType"))
+    CreateDBClusterMessage.add_member(:copy_tags_to_snapshot, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "CopyTagsToSnapshot"))
     CreateDBClusterMessage.add_member(:source_region, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SourceRegion"))
     CreateDBClusterMessage.type = Types::CreateDBClusterMessage
     CreateDBClusterParameterGroupMessage.add_member(:db_cluster_parameter_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBClusterParameterGroupName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -437,9 +444,12 @@ module Aws::DocDB
     DBCluster.add_member(:cluster_create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TStamp, name: "ClusterCreateTime"))
     DBCluster.add_member(:enabled_cloudwatch_logs_exports, ::Smithy::Schema::Shapes::MemberShape.new(target: LogTypeList, name: "EnabledCloudwatchLogsExports"))
     DBCluster.add_member(:deletion_protection, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "DeletionProtection"))
+    DBCluster.add_member(:io_optimized_next_allowed_modification_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TStamp, name: "IOOptimizedNextAllowedModificationTime"))
     DBCluster.add_member(:storage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "StorageType"))
     DBCluster.add_member(:serverless_v2_scaling_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerlessV2ScalingConfigurationInfo, name: "ServerlessV2ScalingConfiguration"))
     DBCluster.add_member(:master_user_secret, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterMasterUserSecret, name: "MasterUserSecret"))
+    DBCluster.add_member(:network_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NetworkType"))
+    DBCluster.add_member(:copy_tags_to_snapshot, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "CopyTagsToSnapshot"))
     DBCluster.type = Types::DBCluster
     DBClusterAlreadyExistsFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     DBClusterAlreadyExistsFault.type = Types::DBClusterAlreadyExistsFault
@@ -585,6 +595,7 @@ module Aws::DocDB
     DBSubnetGroup.add_member(:subnet_group_status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SubnetGroupStatus"))
     DBSubnetGroup.add_member(:subnets, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetList, name: "Subnets"))
     DBSubnetGroup.add_member(:db_subnet_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBSubnetGroupArn"))
+    DBSubnetGroup.add_member(:supported_network_types, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkTypeList, name: "SupportedNetworkTypes"))
     DBSubnetGroup.type = Types::DBSubnetGroup
     DBSubnetGroupAlreadyExistsFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     DBSubnetGroupAlreadyExistsFault.type = Types::DBSubnetGroupAlreadyExistsFault
@@ -784,6 +795,14 @@ module Aws::DocDB
     FailoverGlobalClusterMessage.type = Types::FailoverGlobalClusterMessage
     FailoverGlobalClusterResult.add_member(:global_cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalCluster, name: "GlobalCluster"))
     FailoverGlobalClusterResult.type = Types::FailoverGlobalClusterResult
+    FailoverState.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: FailoverStatus, name: "Status"))
+    FailoverState.add_member(:from_db_cluster_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "FromDbClusterArn"))
+    FailoverState.add_member(:to_db_cluster_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ToDbClusterArn"))
+    FailoverState.add_member(:is_data_loss_allowed, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "IsDataLossAllowed"))
+    FailoverState.type = Types::FailoverState
+    FailoverStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "pending"}))
+    FailoverStatus.add_member(:failing_over, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILING_OVER", traits: {"smithy.api#enumValue" => "failing-over"}))
+    FailoverStatus.add_member(:cancelling, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANCELLING", traits: {"smithy.api#enumValue" => "cancelling"}))
     Filter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     Filter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValueList, name: "Values", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     Filter.type = Types::Filter
@@ -799,6 +818,8 @@ module Aws::DocDB
     GlobalCluster.add_member(:storage_encrypted, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "StorageEncrypted"))
     GlobalCluster.add_member(:deletion_protection, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "DeletionProtection"))
     GlobalCluster.add_member(:global_cluster_members, ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalClusterMemberList, name: "GlobalClusterMembers"))
+    GlobalCluster.add_member(:failover_state, ::Smithy::Schema::Shapes::MemberShape.new(target: FailoverState, name: "FailoverState"))
+    GlobalCluster.add_member(:tag_list, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "TagList"))
     GlobalCluster.type = Types::GlobalCluster
     GlobalClusterAlreadyExistsFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     GlobalClusterAlreadyExistsFault.type = Types::GlobalClusterAlreadyExistsFault
@@ -806,8 +827,11 @@ module Aws::DocDB
     GlobalClusterMember.add_member(:db_cluster_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBClusterArn"))
     GlobalClusterMember.add_member(:readers, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadersArnList, name: "Readers"))
     GlobalClusterMember.add_member(:is_writer, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "IsWriter"))
+    GlobalClusterMember.add_member(:synchronization_status, ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalClusterMemberSynchronizationStatus, name: "SynchronizationStatus"))
     GlobalClusterMember.type = Types::GlobalClusterMember
     GlobalClusterMemberList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalClusterMember, name: "member", traits: {"smithy.api#xmlName" => "GlobalClusterMember"}))
+    GlobalClusterMemberSynchronizationStatus.add_member(:connected, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONNECTED", traits: {"smithy.api#enumValue" => "connected"}))
+    GlobalClusterMemberSynchronizationStatus.add_member(:pending_resync, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING_RESYNC", traits: {"smithy.api#enumValue" => "pending-resync"}))
     GlobalClusterNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     GlobalClusterNotFoundFault.type = Types::GlobalClusterNotFoundFault
     GlobalClusterQuotaExceededFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
@@ -875,6 +899,8 @@ module Aws::DocDB
     ModifyDBClusterMessage.add_member(:manage_master_user_password, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "ManageMasterUserPassword"))
     ModifyDBClusterMessage.add_member(:master_user_secret_kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "MasterUserSecretKmsKeyId"))
     ModifyDBClusterMessage.add_member(:rotate_master_user_password, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "RotateMasterUserPassword"))
+    ModifyDBClusterMessage.add_member(:network_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NetworkType"))
+    ModifyDBClusterMessage.add_member(:copy_tags_to_snapshot, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "CopyTagsToSnapshot"))
     ModifyDBClusterMessage.type = Types::ModifyDBClusterMessage
     ModifyDBClusterParameterGroupMessage.add_member(:db_cluster_parameter_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBClusterParameterGroupName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ModifyDBClusterParameterGroupMessage.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ParametersList, name: "Parameters", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -925,6 +951,9 @@ module Aws::DocDB
     ModifyGlobalClusterMessage.type = Types::ModifyGlobalClusterMessage
     ModifyGlobalClusterResult.add_member(:global_cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalCluster, name: "GlobalCluster"))
     ModifyGlobalClusterResult.type = Types::ModifyGlobalClusterResult
+    NetworkTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
+    NetworkTypeNotSupported.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
+    NetworkTypeNotSupported.type = Types::NetworkTypeNotSupported
     OrderableDBInstanceOption.add_member(:engine, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Engine"))
     OrderableDBInstanceOption.add_member(:engine_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "EngineVersion"))
     OrderableDBInstanceOption.add_member(:db_instance_class, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBInstanceClass"))
@@ -1025,6 +1054,8 @@ module Aws::DocDB
     RestoreDBClusterFromSnapshotMessage.add_member(:db_cluster_parameter_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBClusterParameterGroupName"))
     RestoreDBClusterFromSnapshotMessage.add_member(:serverless_v2_scaling_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerlessV2ScalingConfiguration, name: "ServerlessV2ScalingConfiguration"))
     RestoreDBClusterFromSnapshotMessage.add_member(:storage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "StorageType"))
+    RestoreDBClusterFromSnapshotMessage.add_member(:network_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NetworkType"))
+    RestoreDBClusterFromSnapshotMessage.add_member(:copy_tags_to_snapshot, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "CopyTagsToSnapshot"))
     RestoreDBClusterFromSnapshotMessage.type = Types::RestoreDBClusterFromSnapshotMessage
     RestoreDBClusterFromSnapshotResult.add_member(:db_cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: DBCluster, name: "DBCluster"))
     RestoreDBClusterFromSnapshotResult.type = Types::RestoreDBClusterFromSnapshotResult
@@ -1042,6 +1073,8 @@ module Aws::DocDB
     RestoreDBClusterToPointInTimeMessage.add_member(:deletion_protection, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "DeletionProtection"))
     RestoreDBClusterToPointInTimeMessage.add_member(:serverless_v2_scaling_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerlessV2ScalingConfiguration, name: "ServerlessV2ScalingConfiguration"))
     RestoreDBClusterToPointInTimeMessage.add_member(:storage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "StorageType"))
+    RestoreDBClusterToPointInTimeMessage.add_member(:network_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NetworkType"))
+    RestoreDBClusterToPointInTimeMessage.add_member(:copy_tags_to_snapshot, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "CopyTagsToSnapshot"))
     RestoreDBClusterToPointInTimeMessage.type = Types::RestoreDBClusterToPointInTimeMessage
     RestoreDBClusterToPointInTimeResult.add_member(:db_cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: DBCluster, name: "DBCluster"))
     RestoreDBClusterToPointInTimeResult.type = Types::RestoreDBClusterToPointInTimeResult
@@ -1127,7 +1160,7 @@ module Aws::DocDB
       service.id = "com.amazonaws.docdb#AmazonRDSv19"
       service.name = "AmazonRDSv19"
       service.version = "2014-10-31"
-      service.traits = {"aws.api#service" => {"sdkId" => "DocDB", "arnNamespace" => "rds", "cloudFormationName" => "DocDB", "cloudTrailEventSource" => "docdb.amazonaws.com", "endpointPrefix" => "rds"}, "aws.auth#sigv4" => {"name" => "rds"}, "aws.protocols#awsQuery" => {}, "smithy.api#title" => "Amazon DocumentDB with MongoDB compatibility", "smithy.api#xmlNamespace" => {"uri" => "http://rds.amazonaws.com/doc/2014-10-31/"}}
+      service.traits = {"aws.api#service" => {"sdkId" => "DocDB", "arnNamespace" => "rds", "cloudFormationName" => "DocDB", "cloudTrailEventSource" => "docdb.amazonaws.com", "endpointPrefix" => "rds"}, "aws.auth#sigv4" => {"name" => "rds"}, "aws.protocols#awsQuery" => {}, "smithy.api#title" => "Amazon DocumentDB with MongoDB compatibility", "smithy.api#xmlNamespace" => {"uri" => "http://rds.amazonaws.com/doc/2014-10-31/"}, "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws-us-gov"]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://rds-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://rds.{Region}.amazonaws.com", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://rds-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://rds.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://rds.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 14, "nodes" => "/////wAAAAH/////AAAAAAAAAA0AAAADAAAAAQAAAAQF9eEMAAAAAgAAAAUF9eEMAAAAAwAAAAgAAAAGAAAABAAAAAcF9eELAAAABQX14QkF9eEKAAAABAAAAAsAAAAJAAAABgAAAAoF9eEIAAAABwX14QYF9eEHAAAABQAAAAwF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAAOAAAABAX14QIF9eED"}}
       service.add_operation(:add_source_identifier_to_subscription, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.docdb#AddSourceIdentifierToSubscription"
         operation.name = "AddSourceIdentifierToSubscription"
@@ -1201,6 +1234,7 @@ module Aws::DocDB
         operation.errors << InvalidSubnet
         operation.errors << InvalidVPCNetworkStateFault
         operation.errors << KMSKeyNotAccessibleFault
+        operation.errors << NetworkTypeNotSupported
         operation.errors << StorageQuotaExceededFault
         operation.traits = {}
       end)
@@ -1421,7 +1455,7 @@ module Aws::DocDB
         operation.input = DescribeDBInstancesMessage
         operation.output = DBInstanceMessage
         operation.errors << DBInstanceNotFoundFault
-        operation.traits = {"smithy.api#suppress" => ["WaitableTraitInvalidErrorType"], "smithy.test#smokeTests" => [{"id" => "DescribeDBInstancesFailure", "params" => {"DBInstanceIdentifier" => "fake-id"}, "vendorParams" => {"region" => "us-west-2"}, "vendorParamsShape" => "aws.test#AwsVendorParams", "expect" => {"failure" => {}}}]}
+        operation.traits = {"smithy.api#suppress" => ["WaitableTraitInvalidErrorType"]}
         operation[:paginator] = Paginators::DescribeDBInstances.new
       end)
       service.add_operation(:describe_db_subnet_groups, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -1536,6 +1570,7 @@ module Aws::DocDB
         operation.errors << InvalidDBSubnetGroupStateFault
         operation.errors << InvalidSubnet
         operation.errors << InvalidVPCNetworkStateFault
+        operation.errors << NetworkTypeNotSupported
         operation.errors << StorageQuotaExceededFault
         operation.traits = {}
       end)
@@ -1677,6 +1712,7 @@ module Aws::DocDB
         operation.errors << InvalidSubnet
         operation.errors << InvalidVPCNetworkStateFault
         operation.errors << KMSKeyNotAccessibleFault
+        operation.errors << NetworkTypeNotSupported
         operation.errors << StorageQuotaExceededFault
         operation.traits = {}
       end)
@@ -1699,6 +1735,7 @@ module Aws::DocDB
         operation.errors << InvalidSubnet
         operation.errors << InvalidVPCNetworkStateFault
         operation.errors << KMSKeyNotAccessibleFault
+        operation.errors << NetworkTypeNotSupported
         operation.errors << StorageQuotaExceededFault
         operation.traits = {}
       end)

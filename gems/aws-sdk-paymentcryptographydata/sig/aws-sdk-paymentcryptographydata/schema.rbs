@@ -7,6 +7,9 @@ module Aws::PaymentCryptographyData
     AmexCardSecurityCodeVersion1: StructureShape
     AmexCardSecurityCodeVersion2: StructureShape
     ApplicationCryptogramType: StringShape
+    As2805KekValidationType: UnionShape
+    As2805PekDerivationAttributes: StructureShape
+    As2805RandomKeyMaterial: StringShape
     AsymmetricEncryptionAttributes: StructureShape
     AuthRequestCryptogramType: StringShape
     AuthResponseValueType: StringShape
@@ -48,6 +51,10 @@ module Aws::PaymentCryptographyData
     EncryptedPinBlockType: StringShape
     EncryptionDecryptionAttributes: UnionShape
     EncryptionMode: EnumShape
+    GenerateAs2805KekValidationInput: StructureShape
+    GenerateAs2805KekValidationOutput: StructureShape
+    GenerateAuthRequestCryptogramInput: StructureShape
+    GenerateAuthRequestCryptogramOutput: StructureShape
     GenerateCardValidationDataInput: StructureShape
     GenerateCardValidationDataOutput: StructureShape
     GenerateMacEmvPinChangeInput: StructureShape
@@ -74,8 +81,10 @@ module Aws::PaymentCryptographyData
     IntegerRangeBetween0And6: IntegerShape
     IntegerRangeBetween3And5Type: IntegerShape
     IntegerRangeBetween4And12: IntegerShape
-    IntegerRangeBetween4And16: IntegerShape
+    IntegerRangeBetween4And32: IntegerShape
     InternalServerException: StructureShape
+    KekValidationRequest: StructureShape
+    KekValidationResponse: StructureShape
     KeyArn: StringShape
     KeyArnOrKeyAliasType: StringShape
     KeyCheckValue: StringShape
@@ -111,6 +120,8 @@ module Aws::PaymentCryptographyData
     PlainTextType: StringShape
     PrimaryAccountNumberType: StringShape
     ProprietaryAuthenticationDataType: StringShape
+    RandomKeyMaxLength: EnumShape
+    RandomKeySendVariantMask: EnumShape
     ReEncryptDataInput: StructureShape
     ReEncryptDataOutput: StructureShape
     ReEncryptionAttributes: UnionShape
@@ -124,19 +135,23 @@ module Aws::PaymentCryptographyData
     SessionKeyEmv2000: StructureShape
     SessionKeyEmvCommon: StructureShape
     SessionKeyMastercard: StructureShape
+    SessionKeyUnionPay: StructureShape
     SessionKeyVisa: StructureShape
     SharedInformation: StringShape
     SymmetricEncryptionAttributes: StructureShape
     SymmetricKeyAlgorithm: EnumShape
+    SystemTraceAuditNumberType: StringShape
     ThrottlingException: StructureShape
     Tr31WrappedKeyBlock: StringShape
     TrackDataType: StringShape
+    TransactionAmountType: StringShape
     TransactionDataType: StringShape
     TranslateKeyMaterialInput: StructureShape
     TranslateKeyMaterialOutput: StructureShape
     TranslatePinDataInput: StructureShape
     TranslatePinDataOutput: StructureShape
     TranslationIsoFormats: UnionShape
+    TranslationPinDataAs2805Format0: StructureShape
     TranslationPinDataIsoFormat034: StructureShape
     TranslationPinDataIsoFormat1: StructureShape
     ValidationDataType: StringShape

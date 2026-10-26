@@ -172,6 +172,11 @@ module Aws::ChimeSDKVoice
       attr_accessor is_caller: bool?
     end
 
+    module CallDistributionType
+      PriorityWeightedDistribution: String
+      LoadBalancedDistribution: String
+    end
+
     module CallLegType
       CALLER: String
       CALLEE: String
@@ -388,11 +393,13 @@ module Aws::ChimeSDKVoice
       def initialize: (
         ?name: String,
         ?voice_connector_items: Array[Types::VoiceConnectorItem],
+        ?call_distribution_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor name: String?
       attr_accessor voice_connector_items: Array[Types::VoiceConnectorItem]?
+      attr_accessor call_distribution_type: String?
     end
 
     class CreateVoiceConnectorGroupResponse
@@ -763,6 +770,7 @@ module Aws::ChimeSDKVoice
       VoiceConnectorGroupAssociationsExist: String
       PhoneNumberAssociationsExist: String
       Gone: String
+      Validation: String
     end
 
     class ExternalSystemsConfiguration
@@ -1777,6 +1785,7 @@ module Aws::ChimeSDKVoice
       def initialize: (
         ?phone_number_id: String,
         ?e164_phone_number: String,
+        ?phone_number_arn: String,
         ?country: String,
         ?type: String,
         ?product_type: String,
@@ -1795,6 +1804,7 @@ module Aws::ChimeSDKVoice
 
       attr_accessor phone_number_id: String?
       attr_accessor e164_phone_number: String?
+      attr_accessor phone_number_arn: String?
       attr_accessor country: String?
       attr_accessor type: String?
       attr_accessor product_type: String?
@@ -1891,7 +1901,7 @@ module Aws::ChimeSDKVoice
         ?ordered_phone_numbers: Array[Types::OrderedPhoneNumber],
         ?created_timestamp: Time,
         ?updated_timestamp: Time,
-        ?foc_date: Time,
+        ?foc_date: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1902,7 +1912,7 @@ module Aws::ChimeSDKVoice
       attr_accessor ordered_phone_numbers: Array[Types::OrderedPhoneNumber]?
       attr_accessor created_timestamp: Time?
       attr_accessor updated_timestamp: Time?
-      attr_accessor foc_date: Time?
+      attr_accessor foc_date: String?
     end
 
     module PhoneNumberOrderStatus
@@ -2930,12 +2940,14 @@ module Aws::ChimeSDKVoice
         ?voice_connector_group_id: String,
         ?name: String,
         ?voice_connector_items: Array[Types::VoiceConnectorItem],
+        ?call_distribution_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor voice_connector_group_id: String?
       attr_accessor name: String?
       attr_accessor voice_connector_items: Array[Types::VoiceConnectorItem]?
+      attr_accessor call_distribution_type: String?
     end
 
     class UpdateVoiceConnectorGroupResponse
@@ -3117,6 +3129,7 @@ module Aws::ChimeSDKVoice
         ?created_timestamp: Time,
         ?updated_timestamp: Time,
         ?voice_connector_group_arn: String,
+        ?call_distribution_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3126,6 +3139,7 @@ module Aws::ChimeSDKVoice
       attr_accessor created_timestamp: Time?
       attr_accessor updated_timestamp: Time?
       attr_accessor voice_connector_group_arn: String?
+      attr_accessor call_distribution_type: String?
     end
 
     module VoiceConnectorIntegrationType

@@ -2,16 +2,19 @@ module Aws::ApiGatewayV2
   module Schema
     include Smithy::Schema::Shapes
 
+    ACMManaged: StructureShape
     AccessDeniedException: StructureShape
     AccessLogSettings: StructureShape
     Api: StructureShape
     ApiMapping: StructureShape
     Arn: StringShape
+    Authorization: StructureShape
     AuthorizationScopes: ListShape
     AuthorizationType: EnumShape
     Authorizer: StructureShape
     AuthorizerType: EnumShape
     BadRequestException: StructureShape
+    CognitoConfig: StructureShape
     ConflictException: StructureShape
     ConnectionType: EnumShape
     ContentHandlingStrategy: EnumShape
@@ -35,6 +38,14 @@ module Aws::ApiGatewayV2
     CreateIntegrationResult: StructureShape
     CreateModelRequest: StructureShape
     CreateModelResponse: StructureShape
+    CreatePortalProductRequest: StructureShape
+    CreatePortalProductResponse: StructureShape
+    CreatePortalRequest: StructureShape
+    CreatePortalResponse: StructureShape
+    CreateProductPageRequest: StructureShape
+    CreateProductPageResponse: StructureShape
+    CreateProductRestEndpointPageRequest: StructureShape
+    CreateProductRestEndpointPageResponse: StructureShape
     CreateRouteRequest: StructureShape
     CreateRouteResponseRequest: StructureShape
     CreateRouteResponseResponse: StructureShape
@@ -45,6 +56,7 @@ module Aws::ApiGatewayV2
     CreateStageResponse: StructureShape
     CreateVpcLinkRequest: StructureShape
     CreateVpcLinkResponse: StructureShape
+    CustomColors: StructureShape
     DeleteAccessLogSettingsRequest: StructureShape
     DeleteApiMappingRequest: StructureShape
     DeleteApiRequest: StructureShape
@@ -55,6 +67,11 @@ module Aws::ApiGatewayV2
     DeleteIntegrationRequest: StructureShape
     DeleteIntegrationResponseRequest: StructureShape
     DeleteModelRequest: StructureShape
+    DeletePortalProductRequest: StructureShape
+    DeletePortalProductSharingPolicyRequest: StructureShape
+    DeletePortalRequest: StructureShape
+    DeleteProductPageRequest: StructureShape
+    DeleteProductRestEndpointPageRequest: StructureShape
     DeleteRouteRequest: StructureShape
     DeleteRouteRequestParameterRequest: StructureShape
     DeleteRouteResponseRequest: StructureShape
@@ -65,10 +82,18 @@ module Aws::ApiGatewayV2
     DeleteVpcLinkResponse: StructureShape
     Deployment: StructureShape
     DeploymentStatus: EnumShape
+    DisablePortalRequest: StructureShape
+    DisplayContent: StructureShape
+    DisplayContentOverrides: StructureShape
+    DisplayOrder: StructureShape
     DomainName: StructureShape
     DomainNameConfiguration: StructureShape
     DomainNameConfigurations: ListShape
     DomainNameStatus: EnumShape
+    EndpointConfigurationRequest: StructureShape
+    EndpointConfigurationResponse: StructureShape
+    EndpointDisplayContent: StructureShape
+    EndpointDisplayContentResponse: StructureShape
     EndpointType: EnumShape
     ExportApiRequest: StructureShape
     ExportApiResponse: StructureShape
@@ -107,6 +132,16 @@ module Aws::ApiGatewayV2
     GetModelTemplateResponse: StructureShape
     GetModelsRequest: StructureShape
     GetModelsResponse: StructureShape
+    GetPortalProductRequest: StructureShape
+    GetPortalProductResponse: StructureShape
+    GetPortalProductSharingPolicyRequest: StructureShape
+    GetPortalProductSharingPolicyResponse: StructureShape
+    GetPortalRequest: StructureShape
+    GetPortalResponse: StructureShape
+    GetProductPageRequest: StructureShape
+    GetProductPageResponse: StructureShape
+    GetProductRestEndpointPageRequest: StructureShape
+    GetProductRestEndpointPageResponse: StructureShape
     GetRouteRequest: StructureShape
     GetRouteResponseRequest: StructureShape
     GetRouteResponseResponse: StructureShape
@@ -128,6 +163,7 @@ module Aws::ApiGatewayV2
     GetVpcLinksRequest: StructureShape
     GetVpcLinksResponse: StructureShape
     Id: StringShape
+    IdentifierParts: StructureShape
     IdentitySourceList: ListShape
     ImportApiRequest: StructureShape
     ImportApiResponse: StructureShape
@@ -140,6 +176,14 @@ module Aws::ApiGatewayV2
     IntegrationType: EnumShape
     IpAddressType: EnumShape
     JWTConfiguration: StructureShape
+    ListPortalProductsRequest: StructureShape
+    ListPortalProductsResponse: StructureShape
+    ListPortalsRequest: StructureShape
+    ListPortalsResponse: StructureShape
+    ListProductPagesRequest: StructureShape
+    ListProductPagesResponse: StructureShape
+    ListProductRestEndpointPagesRequest: StructureShape
+    ListProductRestEndpointPagesResponse: StructureShape
     ListRoutingRulesRequest: StructureShape
     ListRoutingRulesResponse: StructureShape
     LoggingLevel: EnumShape
@@ -148,16 +192,33 @@ module Aws::ApiGatewayV2
     MutualTlsAuthentication: StructureShape
     MutualTlsAuthenticationInput: StructureShape
     NextToken: StringShape
+    None: StructureShape
     NotFoundException: StructureShape
     ParameterConstraints: StructureShape
     PassthroughBehavior: EnumShape
+    PortalContent: StructureShape
+    PortalProductSummary: StructureShape
+    PortalSummary: StructureShape
+    PortalTheme: StructureShape
+    Preview: StructureShape
+    PreviewPortalRequest: StructureShape
+    PreviewPortalResponse: StructureShape
+    PreviewStatus: EnumShape
+    ProductPageSummaryNoBody: StructureShape
+    ProductRestEndpointPageSummaryNoBody: StructureShape
     ProtocolType: EnumShape
+    PublishPortalRequest: StructureShape
+    PublishPortalResponse: StructureShape
+    PublishStatus: EnumShape
+    PutPortalProductSharingPolicyRequest: StructureShape
+    PutPortalProductSharingPolicyResponse: StructureShape
     PutRoutingRuleRequest: StructureShape
     PutRoutingRuleResponse: StructureShape
     ReimportApiRequest: StructureShape
     ReimportApiResponse: StructureShape
     ResetAuthorizersCacheRequest: StructureShape
     ResponseParameters: MapShape
+    RestEndpointIdentifier: StructureShape
     Route: StructureShape
     RouteModels: MapShape
     RouteParameters: MapShape
@@ -173,12 +234,15 @@ module Aws::ApiGatewayV2
     RoutingRuleMatchHeaderValue: StructureShape
     RoutingRuleMatchHeaders: StructureShape
     RoutingRulePriority: IntegerShape
+    Section: StructureShape
     SecurityGroupIdList: ListShape
     SecurityPolicy: EnumShape
     SelectionExpression: StringShape
     SelectionKey: StringShape
     Stage: StructureShape
     StageVariablesMap: MapShape
+    Status: EnumShape
+    StatusException: StructureShape
     StringWithLengthBetween0And1024: StringShape
     StringWithLengthBetween0And2048: StringShape
     StringWithLengthBetween0And32K: StringShape
@@ -196,6 +260,7 @@ module Aws::ApiGatewayV2
     TlsConfig: StructureShape
     TlsConfigInput: StructureShape
     TooManyRequestsException: StructureShape
+    TryItState: EnumShape
     UntagResourceRequest: StructureShape
     UpdateApiMappingRequest: StructureShape
     UpdateApiMappingResponse: StructureShape
@@ -213,6 +278,14 @@ module Aws::ApiGatewayV2
     UpdateIntegrationResult: StructureShape
     UpdateModelRequest: StructureShape
     UpdateModelResponse: StructureShape
+    UpdatePortalProductRequest: StructureShape
+    UpdatePortalProductResponse: StructureShape
+    UpdatePortalRequest: StructureShape
+    UpdatePortalResponse: StructureShape
+    UpdateProductPageRequest: StructureShape
+    UpdateProductPageResponse: StructureShape
+    UpdateProductRestEndpointPageRequest: StructureShape
+    UpdateProductRestEndpointPageResponse: StructureShape
     UpdateRouteRequest: StructureShape
     UpdateRouteResponseRequest: StructureShape
     UpdateRouteResponseResponse: StructureShape
@@ -236,17 +309,43 @@ module Aws::ApiGatewayV2
     Listofintegration: ListShape
     Listofintegrationresponse: ListShape
     Listofmodel: ListShape
+    Listofportalproductsummary: ListShape
+    Listofportalsummary: ListShape
+    Listofproductpagesummarynobody: ListShape
+    Listofproductrestendpointpagesummarynobody: ListShape
     Listofroute: ListShape
     Listofrouteresponse: ListShape
     Listofroutingrule: ListShape
     Listofroutingruleaction: ListShape
     Listofroutingrulecondition: ListShape
     Listofroutingrulematchheadervalue: ListShape
+    Listofsection: ListShape
     Listofselectionkey: ListShape
     Listofstage: ListShape
     Listofvpclink: ListShape
     ListofString: ListShape
+    ListofStringmin20max2048: ListShape
     String: StringShape
+    Stringmin0max1024: StringShape
+    Stringmin0max1092: StringShape
+    Stringmin0max255: StringShape
+    Stringmin10max2048: StringShape
+    Stringmin10max30patternaz09: StringShape
+    Stringmin1max1024: StringShape
+    Stringmin1max128: StringShape
+    Stringmin1max16: StringShape
+    Stringmin1max20: StringShape
+    Stringmin1max2048: StringShape
+    Stringmin1max255: StringShape
+    Stringmin1max256: StringShape
+    Stringmin1max307200: StringShape
+    Stringmin1max32768: StringShape
+    Stringmin1max4096: StringShape
+    Stringmin1max50: StringShape
+    Stringmin1max64: StringShape
+    Stringmin20max2048: StringShape
+    Stringmin3max255: StringShape
+    Stringmin3max256: StringShape
     Timestampiso8601: TimestampShape
 
     ApiGatewayV2: ServiceShape

@@ -36,6 +36,7 @@ module Aws::KafkaConnect
         ?min_worker_count: Integer,
         ?scale_in_policy: Types::ScaleInPolicy,
         ?scale_out_policy: Types::ScaleOutPolicy,
+        ?max_autoscaling_task_count: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -44,6 +45,7 @@ module Aws::KafkaConnect
       attr_accessor min_worker_count: Integer?
       attr_accessor scale_in_policy: Types::ScaleInPolicy?
       attr_accessor scale_out_policy: Types::ScaleOutPolicy?
+      attr_accessor max_autoscaling_task_count: Integer?
     end
 
     class AutoScalingDescription
@@ -55,6 +57,7 @@ module Aws::KafkaConnect
         ?min_worker_count: Integer,
         ?scale_in_policy: Types::ScaleInPolicyDescription,
         ?scale_out_policy: Types::ScaleOutPolicyDescription,
+        ?max_autoscaling_task_count: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -63,6 +66,7 @@ module Aws::KafkaConnect
       attr_accessor min_worker_count: Integer?
       attr_accessor scale_in_policy: Types::ScaleInPolicyDescription?
       attr_accessor scale_out_policy: Types::ScaleOutPolicyDescription?
+      attr_accessor max_autoscaling_task_count: Integer?
     end
 
     class AutoScalingUpdate
@@ -74,6 +78,7 @@ module Aws::KafkaConnect
         ?min_worker_count: Integer,
         ?scale_in_policy: Types::ScaleInPolicyUpdate,
         ?scale_out_policy: Types::ScaleOutPolicyUpdate,
+        ?max_autoscaling_task_count: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -82,6 +87,7 @@ module Aws::KafkaConnect
       attr_accessor min_worker_count: Integer?
       attr_accessor scale_in_policy: Types::ScaleInPolicyUpdate?
       attr_accessor scale_out_policy: Types::ScaleOutPolicyUpdate?
+      attr_accessor max_autoscaling_task_count: Integer?
     end
 
     class BadRequestException
@@ -219,6 +225,7 @@ module Aws::KafkaConnect
         ?kafka_cluster_encryption_in_transit: Types::KafkaClusterEncryptionInTransitDescription,
         ?kafka_connect_version: String,
         ?log_delivery: Types::LogDeliveryDescription,
+        ?network_type: String,
         ?plugins: Array[Types::PluginDescription],
         ?service_execution_role_arn: String,
         ?worker_configuration: Types::WorkerConfigurationDescription,
@@ -237,6 +244,7 @@ module Aws::KafkaConnect
       attr_accessor kafka_cluster_encryption_in_transit: Types::KafkaClusterEncryptionInTransitDescription?
       attr_accessor kafka_connect_version: String?
       attr_accessor log_delivery: Types::LogDeliveryDescription?
+      attr_accessor network_type: String?
       attr_accessor plugins: Array[Types::PluginDescription]?
       attr_accessor service_execution_role_arn: String?
       attr_accessor worker_configuration: Types::WorkerConfigurationDescription?
@@ -270,6 +278,7 @@ module Aws::KafkaConnect
         ?kafka_cluster_encryption_in_transit: Types::KafkaClusterEncryptionInTransit,
         ?kafka_connect_version: String,
         ?log_delivery: Types::LogDelivery,
+        ?network_type: String,
         ?plugins: Array[Types::Plugin],
         ?service_execution_role_arn: String,
         ?worker_configuration: Types::WorkerConfiguration,
@@ -286,6 +295,7 @@ module Aws::KafkaConnect
       attr_accessor kafka_cluster_encryption_in_transit: Types::KafkaClusterEncryptionInTransit?
       attr_accessor kafka_connect_version: String?
       attr_accessor log_delivery: Types::LogDelivery?
+      attr_accessor network_type: String?
       attr_accessor plugins: Array[Types::Plugin]?
       attr_accessor service_execution_role_arn: String?
       attr_accessor worker_configuration: Types::WorkerConfiguration?
@@ -602,6 +612,7 @@ module Aws::KafkaConnect
         ?kafka_cluster_encryption_in_transit: Types::KafkaClusterEncryptionInTransitDescription,
         ?kafka_connect_version: String,
         ?log_delivery: Types::LogDeliveryDescription,
+        ?network_type: String,
         ?plugins: Array[Types::PluginDescription],
         ?service_execution_role_arn: String,
         ?worker_configuration: Types::WorkerConfigurationDescription,
@@ -622,6 +633,7 @@ module Aws::KafkaConnect
       attr_accessor kafka_cluster_encryption_in_transit: Types::KafkaClusterEncryptionInTransitDescription?
       attr_accessor kafka_connect_version: String?
       attr_accessor log_delivery: Types::LogDeliveryDescription?
+      attr_accessor network_type: String?
       attr_accessor plugins: Array[Types::PluginDescription]?
       attr_accessor service_execution_role_arn: String?
       attr_accessor worker_configuration: Types::WorkerConfigurationDescription?
@@ -1045,6 +1057,32 @@ module Aws::KafkaConnect
 
       attr_accessor mcu_count: Integer?
       attr_accessor worker_count: Integer?
+    end
+
+    class RestartConnectorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_arn: String,
+        ?only_failed_tasks: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_arn: String?
+      attr_accessor only_failed_tasks: bool?
+    end
+
+    class RestartConnectorResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_arn: String,
+        ?connector_operation_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_arn: String?
+      attr_accessor connector_operation_arn: String?
     end
 
     class S3Location

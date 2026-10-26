@@ -65,6 +65,7 @@ module Aws::SFN
     EvaluationFailedEventDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sfn#EvaluationFailedEventDetails", name: "EvaluationFailedEventDetails")
     EvaluationFailureLocation = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sfn#EvaluationFailureLocation", name: "EvaluationFailureLocation", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#sensitive" => {}})
     EventId = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sfn#EventId", name: "EventId", traits: {"smithy.api#default" => 0})
+    ExceptionHandlerIndex = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sfn#ExceptionHandlerIndex", name: "ExceptionHandlerIndex", traits: {"smithy.api#range" => {"min" => 0}, "smithy.api#sensitive" => {}})
     ExecutionAbortedEventDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sfn#ExecutionAbortedEventDetails", name: "ExecutionAbortedEventDetails")
     ExecutionAlreadyExists = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sfn#ExecutionAlreadyExists", name: "ExecutionAlreadyExists", traits: {"smithy.api#error" => "client"})
     ExecutionDoesNotExist = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sfn#ExecutionDoesNotExist", name: "ExecutionDoesNotExist", traits: {"smithy.api#error" => "client"})
@@ -101,7 +102,11 @@ module Aws::SFN
     InspectionData = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sfn#InspectionData", name: "InspectionData", traits: {"smithy.api#sensitive" => {}})
     InspectionDataRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sfn#InspectionDataRequest", name: "InspectionDataRequest")
     InspectionDataResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sfn#InspectionDataResponse", name: "InspectionDataResponse")
+    InspectionErrorDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sfn#InspectionErrorDetails", name: "InspectionErrorDetails")
     InspectionLevel = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sfn#InspectionLevel", name: "InspectionLevel")
+    InspectionMaxConcurrency = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sfn#InspectionMaxConcurrency", name: "InspectionMaxConcurrency", traits: {"smithy.api#range" => {"min" => 0}, "smithy.api#sensitive" => {}})
+    InspectionToleratedFailureCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sfn#InspectionToleratedFailureCount", name: "InspectionToleratedFailureCount", traits: {"smithy.api#range" => {"min" => 0}, "smithy.api#sensitive" => {}})
+    InspectionToleratedFailurePercentage = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.sfn#InspectionToleratedFailurePercentage", name: "InspectionToleratedFailurePercentage", traits: {"smithy.api#range" => {"min" => 0, "max" => 100}, "smithy.api#sensitive" => {}})
     InvalidArn = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sfn#InvalidArn", name: "InvalidArn", traits: {"smithy.api#error" => "client"})
     InvalidDefinition = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sfn#InvalidDefinition", name: "InvalidDefinition", traits: {"smithy.api#error" => "client"})
     InvalidEncryptionConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sfn#InvalidEncryptionConfiguration", name: "InvalidEncryptionConfiguration", traits: {"smithy.api#error" => "client"})
@@ -145,6 +150,7 @@ module Aws::SFN
     LongArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sfn#LongArn", name: "LongArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 2000}})
     LongObject = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sfn#LongObject", name: "LongObject")
     MapIterationEventDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sfn#MapIterationEventDetails", name: "MapIterationEventDetails")
+    MapIterationFailureCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sfn#MapIterationFailureCount", name: "MapIterationFailureCount", traits: {"smithy.api#range" => {"min" => 0}})
     MapRunExecutionCounts = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sfn#MapRunExecutionCounts", name: "MapRunExecutionCounts")
     MapRunFailedEventDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sfn#MapRunFailedEventDetails", name: "MapRunFailedEventDetails")
     MapRunItemCounts = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sfn#MapRunItemCounts", name: "MapRunItemCounts")
@@ -157,6 +163,9 @@ module Aws::SFN
     MapStateStartedEventDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sfn#MapStateStartedEventDetails", name: "MapStateStartedEventDetails")
     MaxConcurrency = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sfn#MaxConcurrency", name: "MaxConcurrency", traits: {"smithy.api#default" => 0, "smithy.api#range" => {"min" => 0}})
     MissingRequiredParameter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sfn#MissingRequiredParameter", name: "MissingRequiredParameter", traits: {"smithy.api#error" => "client"})
+    MockErrorOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sfn#MockErrorOutput", name: "MockErrorOutput")
+    MockInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sfn#MockInput", name: "MockInput")
+    MockResponseValidationMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sfn#MockResponseValidationMode", name: "MockResponseValidationMode")
     Name = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sfn#Name", name: "Name", traits: {"smithy.api#length" => {"min" => 1, "max" => 80}})
     PageSize = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sfn#PageSize", name: "PageSize", traits: {"smithy.api#default" => 0, "smithy.api#range" => {"min" => 0, "max" => 1000}})
     PageToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sfn#PageToken", name: "PageToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}})
@@ -167,6 +176,8 @@ module Aws::SFN
     RedriveExecutionInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sfn#RedriveExecutionInput", name: "RedriveExecutionInput")
     RedriveExecutionOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sfn#RedriveExecutionOutput", name: "RedriveExecutionOutput")
     ResourceNotFound = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sfn#ResourceNotFound", name: "ResourceNotFound", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 404})
+    RetrierRetryCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sfn#RetrierRetryCount", name: "RetrierRetryCount", traits: {"smithy.api#range" => {"min" => 0}})
+    RetryBackoffIntervalSeconds = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sfn#RetryBackoffIntervalSeconds", name: "RetryBackoffIntervalSeconds", traits: {"smithy.api#range" => {"min" => 0}, "smithy.api#sensitive" => {}})
     RevealSecrets = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.sfn#RevealSecrets", name: "RevealSecrets", traits: {"smithy.api#default" => false})
     ReverseOrder = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.sfn#ReverseOrder", name: "ReverseOrder", traits: {"smithy.api#default" => false})
     RevisionId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sfn#RevisionId", name: "RevisionId")
@@ -180,7 +191,7 @@ module Aws::SFN
     SendTaskSuccessOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sfn#SendTaskSuccessOutput", name: "SendTaskSuccessOutput")
     SensitiveCause = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sfn#SensitiveCause", name: "SensitiveCause", traits: {"smithy.api#length" => {"min" => 0, "max" => 32768}, "smithy.api#sensitive" => {}})
     SensitiveData = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sfn#SensitiveData", name: "SensitiveData", traits: {"smithy.api#length" => {"min" => 0, "max" => 262144}, "smithy.api#sensitive" => {}})
-    SensitiveDataJobInput = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sfn#SensitiveDataJobInput", name: "SensitiveDataJobInput", traits: {"smithy.api#length" => {"min" => 0, "max" => 262144}, "smithy.api#sensitive" => {}})
+    SensitiveDataJobInput = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sfn#SensitiveDataJobInput", name: "SensitiveDataJobInput", traits: {"smithy.api#length" => {"min" => 0, "max" => 1048576}, "smithy.api#sensitive" => {}})
     SensitiveError = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sfn#SensitiveError", name: "SensitiveError", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#sensitive" => {}})
     ServiceQuotaExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sfn#ServiceQuotaExceededException", name: "ServiceQuotaExceededException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 402})
     StartExecutionInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sfn#StartExecutionInput", name: "StartExecutionInput")
@@ -226,8 +237,10 @@ module Aws::SFN
     TaskTimedOutEventDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sfn#TaskTimedOutEventDetails", name: "TaskTimedOutEventDetails")
     TaskToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sfn#TaskToken", name: "TaskToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}})
     TestExecutionStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sfn#TestExecutionStatus", name: "TestExecutionStatus")
+    TestStateConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sfn#TestStateConfiguration", name: "TestStateConfiguration")
     TestStateInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sfn#TestStateInput", name: "TestStateInput")
     TestStateOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sfn#TestStateOutput", name: "TestStateOutput")
+    TestStateStateName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sfn#TestStateStateName", name: "TestStateStateName", traits: {"smithy.api#length" => {"min" => 1, "max" => 80}, "smithy.api#sensitive" => {}})
     TimeoutInSeconds = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sfn#TimeoutInSeconds", name: "TimeoutInSeconds", traits: {"smithy.api#default" => 0})
     Timestamp = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.sfn#Timestamp", name: "Timestamp")
     ToleratedFailureCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sfn#ToleratedFailureCount", name: "ToleratedFailureCount", traits: {"smithy.api#default" => 0, "smithy.api#range" => {"min" => 0}})
@@ -642,6 +655,14 @@ module Aws::SFN
     InspectionData.add_member(:request, ::Smithy::Schema::Shapes::MemberShape.new(target: InspectionDataRequest, name: "request"))
     InspectionData.add_member(:response, ::Smithy::Schema::Shapes::MemberShape.new(target: InspectionDataResponse, name: "response"))
     InspectionData.add_member(:variables, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveData, name: "variables"))
+    InspectionData.add_member(:error_details, ::Smithy::Schema::Shapes::MemberShape.new(target: InspectionErrorDetails, name: "errorDetails"))
+    InspectionData.add_member(:after_items_path, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveData, name: "afterItemsPath"))
+    InspectionData.add_member(:after_item_selector, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveData, name: "afterItemSelector"))
+    InspectionData.add_member(:after_item_batcher, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveData, name: "afterItemBatcher"))
+    InspectionData.add_member(:after_items_pointer, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveData, name: "afterItemsPointer"))
+    InspectionData.add_member(:tolerated_failure_count, ::Smithy::Schema::Shapes::MemberShape.new(target: InspectionToleratedFailureCount, name: "toleratedFailureCount"))
+    InspectionData.add_member(:tolerated_failure_percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: InspectionToleratedFailurePercentage, name: "toleratedFailurePercentage"))
+    InspectionData.add_member(:max_concurrency, ::Smithy::Schema::Shapes::MemberShape.new(target: InspectionMaxConcurrency, name: "maxConcurrency"))
     InspectionData.type = Types::InspectionData
     InspectionDataRequest.add_member(:protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: HTTPProtocol, name: "protocol"))
     InspectionDataRequest.add_member(:method, ::Smithy::Schema::Shapes::MemberShape.new(target: HTTPMethod, name: "method"))
@@ -655,6 +676,10 @@ module Aws::SFN
     InspectionDataResponse.add_member(:headers, ::Smithy::Schema::Shapes::MemberShape.new(target: HTTPHeaders, name: "headers"))
     InspectionDataResponse.add_member(:body, ::Smithy::Schema::Shapes::MemberShape.new(target: HTTPBody, name: "body"))
     InspectionDataResponse.type = Types::InspectionDataResponse
+    InspectionErrorDetails.add_member(:catch_index, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionHandlerIndex, name: "catchIndex"))
+    InspectionErrorDetails.add_member(:retry_index, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionHandlerIndex, name: "retryIndex"))
+    InspectionErrorDetails.add_member(:retry_backoff_interval_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: RetryBackoffIntervalSeconds, name: "retryBackoffIntervalSeconds"))
+    InspectionErrorDetails.type = Types::InspectionErrorDetails
     InspectionLevel.add_member(:info, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INFO", traits: {"smithy.api#enumValue" => "INFO"}))
     InspectionLevel.add_member(:debug, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEBUG", traits: {"smithy.api#enumValue" => "DEBUG"}))
     InspectionLevel.add_member(:trace, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TRACE", traits: {"smithy.api#enumValue" => "TRACE"}))
@@ -815,6 +840,16 @@ module Aws::SFN
     MapStateStartedEventDetails.type = Types::MapStateStartedEventDetails
     MissingRequiredParameter.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     MissingRequiredParameter.type = Types::MissingRequiredParameter
+    MockErrorOutput.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveError, name: "error"))
+    MockErrorOutput.add_member(:cause, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveCause, name: "cause"))
+    MockErrorOutput.type = Types::MockErrorOutput
+    MockInput.add_member(:result, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveData, name: "result"))
+    MockInput.add_member(:error_output, ::Smithy::Schema::Shapes::MemberShape.new(target: MockErrorOutput, name: "errorOutput"))
+    MockInput.add_member(:field_validation_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: MockResponseValidationMode, name: "fieldValidationMode"))
+    MockInput.type = Types::MockInput
+    MockResponseValidationMode.add_member(:strict, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STRICT", traits: {"smithy.api#enumValue" => "STRICT"}))
+    MockResponseValidationMode.add_member(:present, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRESENT", traits: {"smithy.api#enumValue" => "PRESENT"}))
+    MockResponseValidationMode.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
     PublishStateMachineVersionInput.add_member(:state_machine_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "stateMachineArn", traits: {"smithy.api#required" => {}}))
     PublishStateMachineVersionInput.add_member(:revision_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RevisionId, name: "revisionId"))
     PublishStateMachineVersionInput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionDescription, name: "description"))
@@ -984,12 +1019,21 @@ module Aws::SFN
     TestExecutionStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
     TestExecutionStatus.add_member(:retriable, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RETRIABLE", traits: {"smithy.api#enumValue" => "RETRIABLE"}))
     TestExecutionStatus.add_member(:caught_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CAUGHT_ERROR", traits: {"smithy.api#enumValue" => "CAUGHT_ERROR"}))
+    TestStateConfiguration.add_member(:retrier_retry_count, ::Smithy::Schema::Shapes::MemberShape.new(target: RetrierRetryCount, name: "retrierRetryCount"))
+    TestStateConfiguration.add_member(:error_caused_by_state, ::Smithy::Schema::Shapes::MemberShape.new(target: TestStateStateName, name: "errorCausedByState"))
+    TestStateConfiguration.add_member(:map_iteration_failure_count, ::Smithy::Schema::Shapes::MemberShape.new(target: MapIterationFailureCount, name: "mapIterationFailureCount"))
+    TestStateConfiguration.add_member(:map_item_reader_data, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveData, name: "mapItemReaderData"))
+    TestStateConfiguration.type = Types::TestStateConfiguration
     TestStateInput.add_member(:definition, ::Smithy::Schema::Shapes::MemberShape.new(target: Definition, name: "definition", traits: {"smithy.api#required" => {}}))
     TestStateInput.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "roleArn"))
     TestStateInput.add_member(:input, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveData, name: "input"))
     TestStateInput.add_member(:inspection_level, ::Smithy::Schema::Shapes::MemberShape.new(target: InspectionLevel, name: "inspectionLevel"))
     TestStateInput.add_member(:reveal_secrets, ::Smithy::Schema::Shapes::MemberShape.new(target: RevealSecrets, name: "revealSecrets", traits: {"smithy.api#default" => false}))
     TestStateInput.add_member(:variables, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveData, name: "variables"))
+    TestStateInput.add_member(:state_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TestStateStateName, name: "stateName"))
+    TestStateInput.add_member(:mock, ::Smithy::Schema::Shapes::MemberShape.new(target: MockInput, name: "mock"))
+    TestStateInput.add_member(:context, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveData, name: "context"))
+    TestStateInput.add_member(:state_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: TestStateConfiguration, name: "stateConfiguration"))
     TestStateInput.type = Types::TestStateInput
     TestStateOutput.add_member(:output, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveData, name: "output"))
     TestStateOutput.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveError, name: "error"))
@@ -1066,7 +1110,7 @@ module Aws::SFN
       service.id = "com.amazonaws.sfn#AWSStepFunctions"
       service.name = "AWSStepFunctions"
       service.version = "2016-11-23"
-      service.traits = {"aws.api#service" => {"sdkId" => "SFN", "arnNamespace" => "states", "cloudFormationName" => "StepFunctions", "cloudTrailEventSource" => "states.amazonaws.com", "docId" => "states-2016-11-23", "endpointPrefix" => "states"}, "aws.auth#sigv4" => {"name" => "states"}, "aws.protocols#awsJson1_0" => {}, "smithy.api#title" => "AWS Step Functions", "smithy.api#xmlNamespace" => {"uri" => "http://swf.amazonaws.com/doc/2015-07-20/"}}
+      service.traits = {"aws.api#service" => {"sdkId" => "SFN", "arnNamespace" => "states", "cloudFormationName" => "StepFunctions", "cloudTrailEventSource" => "states.amazonaws.com", "docId" => "states-2016-11-23", "endpointPrefix" => "states"}, "aws.auth#sigv4" => {"name" => "states"}, "aws.protocols#awsJson1_0" => {}, "smithy.api#title" => "AWS Step Functions", "smithy.api#xmlNamespace" => {"uri" => "http://swf.amazonaws.com/doc/2015-07-20/"}, "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}, "Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "stringEquals", "argv" => [{"ref" => "Region"}, "us-gov-west-1"]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws-us-gov"]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://states.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://states-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://states-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://states.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 15, "nodes" => "/////wAAAAH/////AAAAAAAAAA4AAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAkAAAAGAAAABAAAAAcF9eEEAAAABwX14QUAAAAIAAAACAX14QkF9eEKAAAABAAAAAwAAAAKAAAABQX14QQAAAALAAAABgX14QcF9eEIAAAABgAAAA0F9eEGAAAACAX14QUF9eEGAAAAAwX14QEAAAAPAAAABAX14QIF9eED"}}
       service.add_operation(:create_activity, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.sfn#CreateActivity"
         operation.name = "CreateActivity"

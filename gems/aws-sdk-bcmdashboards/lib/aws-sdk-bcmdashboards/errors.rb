@@ -23,6 +23,7 @@ module Aws::BCMDashboards
   # ## Error Classes
   #
   # * {AccessDeniedException}
+  # * {ConflictException}
   # * {InternalServerException}
   # * {ResourceNotFoundException}
   # * {ServiceQuotaExceededException}
@@ -38,6 +39,19 @@ module Aws::BCMDashboards
     class AccessDeniedException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::BCMDashboards::Types::AccessDeniedException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>The request could not be completed due to a conflict with the current state of the resource. For example, attempting to create a resource that already exists or is being created.</p>
+    class ConflictException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::BCMDashboards::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
         super
       end
@@ -73,7 +87,7 @@ module Aws::BCMDashboards
       end
     end
 
-    # <p>The request would exceed service quotas. For example, attempting to create more than 20 widgets in a dashboard or exceeding the maximum number of dashboards per account.</p>
+    # <p>The request would exceed a service quota. Review the service quotas for Amazon Web Services Billing and Cost Management Dashboards and retry your request.</p>
     class ServiceQuotaExceededException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::BCMDashboards::Types::ServiceQuotaExceededException] data

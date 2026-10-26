@@ -24,6 +24,7 @@ module Aws::RedshiftServerless
   #
   # * {AccessDeniedException}
   # * {ConflictException}
+  # * {DryRunException}
   # * {InsufficientCapacityException}
   # * {InternalServerException}
   # * {InvalidPaginationException}
@@ -60,6 +61,19 @@ module Aws::RedshiftServerless
     class ConflictException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RedshiftServerless::Types::ConflictException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>This exception is thrown when the request was successful, but dry run was enabled so no action was taken.</p>
+    class DryRunException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::RedshiftServerless::Types::DryRunException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
         super
       end
@@ -199,7 +213,7 @@ module Aws::RedshiftServerless
       end
     end
 
-    # <p>The input failed to satisfy the constraints specified by an AWS service.</p>
+    # <p>The input failed to satisfy the constraints specified by an Amazon Web Services service.</p>
     class ValidationException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RedshiftServerless::Types::ValidationException] data

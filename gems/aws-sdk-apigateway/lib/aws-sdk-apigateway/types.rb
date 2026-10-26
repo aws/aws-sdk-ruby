@@ -698,7 +698,7 @@ module Aws::APIGateway
     #   @return [String]
     # @!attribute access_association_source
     #   <p>
-    #     The ARN of the domain name access association source. For a VPCE, the ARN must be a VPC endpoint. 
+    #     The ARN of the domain name access association source. For a VPCE, the ARN must be a VPC endpoint.
     #   </p>
     #   @return [String]
     # @!attribute tags
@@ -795,7 +795,12 @@ module Aws::APIGateway
     #   <p>An optional text message containing detailed information about status of the DomainName migration.</p>
     #   @return [String]
     # @!attribute security_policy
-    #   <p>The Transport Layer Security (TLS) version + cipher suite for this DomainName. The valid values are <code>TLS_1_0</code> and <code>TLS_1_2</code>.</p>
+    #   <p>The Transport Layer Security (TLS) version + cipher suite for this DomainName.</p>
+    #   @return [String]
+    # @!attribute endpoint_access_mode
+    #   <p>
+    #   The endpoint access mode of the DomainName.
+    #   </p>
     #   @return [String]
     # @!attribute tags
     #   <p>The collection of tags. Each tag element is associated with a given resource.</p>
@@ -839,6 +844,7 @@ module Aws::APIGateway
       :domain_name_status,
       :domain_name_status_message,
       :security_policy,
+      :endpoint_access_mode,
       :tags,
       :mutual_tls_authentication,
       :ownership_verification_certificate_arn,
@@ -882,7 +888,12 @@ module Aws::APIGateway
     #   <p>The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with <code>aws:</code>. The tag value can be up to 256 characters.</p>
     #   @return [Hash<String, String>]
     # @!attribute security_policy
-    #   <p>The Transport Layer Security (TLS) version + cipher suite for this DomainName. The valid values are <code>TLS_1_0</code> and <code>TLS_1_2</code>.</p>
+    #   <p>The Transport Layer Security (TLS) version + cipher suite for this DomainName.</p>
+    #   @return [String]
+    # @!attribute endpoint_access_mode
+    #   <p>
+    #   The endpoint access mode of the DomainName. Only available for DomainNames that use security policies that start with <code>SecurityPolicy_</code>.
+    #   </p>
     #   @return [String]
     # @!attribute mutual_tls_authentication
     #   <p>The mutual TLS authentication configuration for a custom domain name. If specified, API Gateway
@@ -917,6 +928,7 @@ module Aws::APIGateway
       :endpoint_configuration,
       :tags,
       :security_policy,
+      :endpoint_access_mode,
       :mutual_tls_authentication,
       :ownership_verification_certificate_arn,
       :policy,
@@ -1133,6 +1145,25 @@ module Aws::APIGateway
     # @!attribute root_resource_id
     #   <p>The API's root resource ID.</p>
     #   @return [String]
+    # @!attribute security_policy
+    #   <p>
+    #   The Transport Layer Security (TLS) version + cipher suite for this RestApi.
+    #   </p>
+    #   @return [String]
+    # @!attribute endpoint_access_mode
+    #   <p>
+    #   The endpoint access mode of the RestApi.
+    #   </p>
+    #   @return [String]
+    # @!attribute api_status
+    #   <p>The ApiStatus of the RestApi.
+    #   </p>
+    #   @return [String]
+    # @!attribute api_status_message
+    #   <p>
+    #   The status message of the RestApi. When the status message is <code>UPDATING</code> you can still invoke it.
+    #   </p>
+    #   @return [String]
     class CreateRestApiOutput < Struct.new(
       nil,
       :id,
@@ -1149,6 +1180,10 @@ module Aws::APIGateway
       :tags,
       :disable_execute_api_endpoint,
       :root_resource_id,
+      :security_policy,
+      :endpoint_access_mode,
+      :api_status,
+      :api_status_message,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1199,6 +1234,15 @@ module Aws::APIGateway
     #         <code>https://{api_id}.execute-api.{region}.amazonaws.com</code> endpoint. To require that clients use a
     #         custom domain name to invoke your API, disable the default endpoint</p>
     #   @return [Boolean]
+    # @!attribute security_policy
+    #   <p>
+    #   The Transport Layer Security (TLS) version + cipher suite for this RestApi.
+    #   </p>
+    #   @return [String]
+    # @!attribute endpoint_access_mode
+    #   <p>
+    #   The endpoint access mode of the RestApi. Only available for RestApis that use security policies that start with <code>SecurityPolicy_</code>.</p>
+    #   @return [String]
     class CreateRestApiRequest < Struct.new(
       nil,
       :name,
@@ -1212,6 +1256,8 @@ module Aws::APIGateway
       :policy,
       :tags,
       :disable_execute_api_endpoint,
+      :security_policy,
+      :endpoint_access_mode,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1398,9 +1444,9 @@ module Aws::APIGateway
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Represents a usage plan used to specify who can assess associated API stages. Optionally, target request rate and quota limits can be set. 
-    #         In some cases clients can exceed the targets that you set. Don’t rely on usage plans to control costs. 
-    #         Consider using <a href="https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html">Amazon Web Services Budgets</a> to monitor costs 
+    # <p>Represents a usage plan used to specify who can assess associated API stages. Optionally, target request rate and quota limits can be set.
+    #         In some cases clients can exceed the targets that you set. Don’t rely on usage plans to control costs.
+    #         Consider using <a href="https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html">Amazon Web Services Budgets</a> to monitor costs
     #         and <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">WAF</a> to manage API requests.</p>
     # @!attribute id
     #   <p>The identifier of a UsagePlan resource.</p>
@@ -2060,7 +2106,12 @@ module Aws::APIGateway
     #   <p>An optional text message containing detailed information about status of the DomainName migration.</p>
     #   @return [String]
     # @!attribute security_policy
-    #   <p>The Transport Layer Security (TLS) version + cipher suite for this DomainName. The valid values are <code>TLS_1_0</code> and <code>TLS_1_2</code>.</p>
+    #   <p>The Transport Layer Security (TLS) version + cipher suite for this DomainName.</p>
+    #   @return [String]
+    # @!attribute endpoint_access_mode
+    #   <p>
+    #   The endpoint access mode of the DomainName.
+    #   </p>
     #   @return [String]
     # @!attribute tags
     #   <p>The collection of tags. Each tag element is associated with a given resource.</p>
@@ -2104,6 +2155,7 @@ module Aws::APIGateway
       :domain_name_status,
       :domain_name_status_message,
       :security_policy,
+      :endpoint_access_mode,
       :tags,
       :mutual_tls_authentication,
       :ownership_verification_certificate_arn,
@@ -2131,7 +2183,7 @@ module Aws::APIGateway
     #   @return [String]
     # @!attribute access_association_source
     #   <p>
-    #     The ARN of the domain name access association source. For a VPCE, the ARN must be a VPC endpoint. 
+    #     The ARN of the domain name access association source. For a VPCE, the ARN must be a VPC endpoint.
     #   </p>
     #   @return [String]
     # @!attribute tags
@@ -3058,7 +3110,12 @@ module Aws::APIGateway
     #   <p>An optional text message containing detailed information about status of the DomainName migration.</p>
     #   @return [String]
     # @!attribute security_policy
-    #   <p>The Transport Layer Security (TLS) version + cipher suite for this DomainName. The valid values are <code>TLS_1_0</code> and <code>TLS_1_2</code>.</p>
+    #   <p>The Transport Layer Security (TLS) version + cipher suite for this DomainName.</p>
+    #   @return [String]
+    # @!attribute endpoint_access_mode
+    #   <p>
+    #   The endpoint access mode of the DomainName.
+    #   </p>
     #   @return [String]
     # @!attribute tags
     #   <p>The collection of tags. Each tag element is associated with a given resource.</p>
@@ -3102,6 +3159,7 @@ module Aws::APIGateway
       :domain_name_status,
       :domain_name_status_message,
       :security_policy,
+      :endpoint_access_mode,
       :tags,
       :mutual_tls_authentication,
       :ownership_verification_certificate_arn,
@@ -3303,7 +3361,7 @@ module Aws::APIGateway
     #         action-based API, using an Action={name}&{p1}={v1}&p2={v2}... query string. The ensuing
     #         {service_api} refers to a supported action {name} plus any required input parameters.
     #         Alternatively, path can be used for an Amazon Web Services service path-based API. The ensuing service_api
-    #         refers to the path to an Amazon Web Services  service resource, including the region of the integrated Amazon Web Services 
+    #         refers to the path to an Amazon Web Services  service resource, including the region of the integrated Amazon Web Services
     #         service, if applicable. For example, for integration with the S3 API of GetObject, the uri can
     #         be either <code>arn:aws:apigateway:us-west-2:s3:action/GetObject&Bucket={bucket}&Key={key}</code> or
     #         <code>arn:aws:apigateway:us-west-2:s3:path/{bucket}/{key}</code>
@@ -3360,6 +3418,16 @@ module Aws::APIGateway
     # @!attribute tls_config
     #   <p>Specifies the TLS configuration for an integration.</p>
     #   @return [Types::TlsConfig]
+    # @!attribute response_transfer_mode
+    #   <p>
+    #   The response transfer mode of the integration.
+    #   </p>
+    #   @return [String]
+    # @!attribute integration_target
+    #   <p>
+    #   The ALB or NLB listener to send the request to.
+    #   </p>
+    #   @return [String]
     class GetIntegrationOutput < Struct.new(
       nil,
       :type,
@@ -3377,6 +3445,8 @@ module Aws::APIGateway
       :cache_key_parameters,
       :integration_responses,
       :tls_config,
+      :response_transfer_mode,
+      :integration_target,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3915,6 +3985,25 @@ module Aws::APIGateway
     # @!attribute root_resource_id
     #   <p>The API's root resource ID.</p>
     #   @return [String]
+    # @!attribute security_policy
+    #   <p>
+    #   The Transport Layer Security (TLS) version + cipher suite for this RestApi.
+    #   </p>
+    #   @return [String]
+    # @!attribute endpoint_access_mode
+    #   <p>
+    #   The endpoint access mode of the RestApi.
+    #   </p>
+    #   @return [String]
+    # @!attribute api_status
+    #   <p>The ApiStatus of the RestApi.
+    #   </p>
+    #   @return [String]
+    # @!attribute api_status_message
+    #   <p>
+    #   The status message of the RestApi. When the status message is <code>UPDATING</code> you can still invoke it.
+    #   </p>
+    #   @return [String]
     class GetRestApiOutput < Struct.new(
       nil,
       :id,
@@ -3931,6 +4020,10 @@ module Aws::APIGateway
       :tags,
       :disable_execute_api_endpoint,
       :root_resource_id,
+      :security_policy,
+      :endpoint_access_mode,
+      :api_status,
+      :api_status_message,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4340,9 +4433,9 @@ module Aws::APIGateway
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Represents a usage plan used to specify who can assess associated API stages. Optionally, target request rate and quota limits can be set. 
-    #         In some cases clients can exceed the targets that you set. Don’t rely on usage plans to control costs. 
-    #         Consider using <a href="https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html">Amazon Web Services Budgets</a> to monitor costs 
+    # <p>Represents a usage plan used to specify who can assess associated API stages. Optionally, target request rate and quota limits can be set.
+    #         In some cases clients can exceed the targets that you set. Don’t rely on usage plans to control costs.
+    #         Consider using <a href="https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html">Amazon Web Services Budgets</a> to monitor costs
     #         and <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">WAF</a> to manage API requests.</p>
     # @!attribute id
     #   <p>The identifier of a UsagePlan resource.</p>
@@ -4668,6 +4761,25 @@ module Aws::APIGateway
     # @!attribute root_resource_id
     #   <p>The API's root resource ID.</p>
     #   @return [String]
+    # @!attribute security_policy
+    #   <p>
+    #   The Transport Layer Security (TLS) version + cipher suite for this RestApi.
+    #   </p>
+    #   @return [String]
+    # @!attribute endpoint_access_mode
+    #   <p>
+    #   The endpoint access mode of the RestApi.
+    #   </p>
+    #   @return [String]
+    # @!attribute api_status
+    #   <p>The ApiStatus of the RestApi.
+    #   </p>
+    #   @return [String]
+    # @!attribute api_status_message
+    #   <p>
+    #   The status message of the RestApi. When the status message is <code>UPDATING</code> you can still invoke it.
+    #   </p>
+    #   @return [String]
     class ImportRestApiOutput < Struct.new(
       nil,
       :id,
@@ -4684,6 +4796,10 @@ module Aws::APIGateway
       :tags,
       :disable_execute_api_endpoint,
       :root_resource_id,
+      :security_policy,
+      :endpoint_access_mode,
+      :api_status,
+      :api_status_message,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4738,7 +4854,7 @@ module Aws::APIGateway
     #         action-based API, using an Action={name}&{p1}={v1}&p2={v2}... query string. The ensuing
     #         {service_api} refers to a supported action {name} plus any required input parameters.
     #         Alternatively, path can be used for an Amazon Web Services service path-based API. The ensuing service_api
-    #         refers to the path to an Amazon Web Services  service resource, including the region of the integrated Amazon Web Services 
+    #         refers to the path to an Amazon Web Services  service resource, including the region of the integrated Amazon Web Services
     #         service, if applicable. For example, for integration with the S3 API of GetObject, the uri can
     #         be either <code>arn:aws:apigateway:us-west-2:s3:action/GetObject&Bucket={bucket}&Key={key}</code> or
     #         <code>arn:aws:apigateway:us-west-2:s3:path/{bucket}/{key}</code>
@@ -4795,6 +4911,16 @@ module Aws::APIGateway
     # @!attribute tls_config
     #   <p>Specifies the TLS configuration for an integration.</p>
     #   @return [Types::TlsConfig]
+    # @!attribute response_transfer_mode
+    #   <p>
+    #   The response transfer mode of the integration.
+    #   </p>
+    #   @return [String]
+    # @!attribute integration_target
+    #   <p>
+    #   The ALB or NLB listener to send the request to.
+    #   </p>
+    #   @return [String]
     class Integration < Struct.new(
       nil,
       :type,
@@ -4812,6 +4938,8 @@ module Aws::APIGateway
       :cache_key_parameters,
       :integration_responses,
       :tls_config,
+      :response_transfer_mode,
+      :integration_target,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5237,7 +5365,7 @@ module Aws::APIGateway
     #         action-based API, using an Action={name}&{p1}={v1}&p2={v2}... query string. The ensuing
     #         {service_api} refers to a supported action {name} plus any required input parameters.
     #         Alternatively, path can be used for an Amazon Web Services service path-based API. The ensuing service_api
-    #         refers to the path to an Amazon Web Services  service resource, including the region of the integrated Amazon Web Services 
+    #         refers to the path to an Amazon Web Services  service resource, including the region of the integrated Amazon Web Services
     #         service, if applicable. For example, for integration with the S3 API of GetObject, the uri can
     #         be either <code>arn:aws:apigateway:us-west-2:s3:action/GetObject&Bucket={bucket}&Key={key}</code> or
     #         <code>arn:aws:apigateway:us-west-2:s3:path/{bucket}/{key}</code>
@@ -5294,6 +5422,16 @@ module Aws::APIGateway
     # @!attribute tls_config
     #   <p>Specifies the TLS configuration for an integration.</p>
     #   @return [Types::TlsConfig]
+    # @!attribute response_transfer_mode
+    #   <p>
+    #   The response transfer mode of the integration.
+    #   </p>
+    #   @return [String]
+    # @!attribute integration_target
+    #   <p>
+    #   The ALB or NLB listener to send the request to.
+    #   </p>
+    #   @return [String]
     class PutIntegrationOutput < Struct.new(
       nil,
       :type,
@@ -5311,6 +5449,8 @@ module Aws::APIGateway
       :cache_key_parameters,
       :integration_responses,
       :tls_config,
+      :response_transfer_mode,
+      :integration_target,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5390,6 +5530,16 @@ module Aws::APIGateway
     # @!attribute tls_config
     #   <p>Specifies the TLS configuration for an integration.</p>
     #   @return [Types::TlsConfig]
+    # @!attribute response_transfer_mode
+    #   <p>
+    #   The response transfer mode of the integration.
+    #   </p>
+    #   @return [String]
+    # @!attribute integration_target
+    #   <p>
+    #   The ALB or NLB listener to send the request to.
+    #   </p>
+    #   @return [String]
     class PutIntegrationRequest < Struct.new(
       nil,
       :rest_api_id,
@@ -5409,6 +5559,8 @@ module Aws::APIGateway
       :content_handling,
       :timeout_in_millis,
       :tls_config,
+      :response_transfer_mode,
+      :integration_target,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5698,6 +5850,25 @@ module Aws::APIGateway
     # @!attribute root_resource_id
     #   <p>The API's root resource ID.</p>
     #   @return [String]
+    # @!attribute security_policy
+    #   <p>
+    #   The Transport Layer Security (TLS) version + cipher suite for this RestApi.
+    #   </p>
+    #   @return [String]
+    # @!attribute endpoint_access_mode
+    #   <p>
+    #   The endpoint access mode of the RestApi.
+    #   </p>
+    #   @return [String]
+    # @!attribute api_status
+    #   <p>The ApiStatus of the RestApi.
+    #   </p>
+    #   @return [String]
+    # @!attribute api_status_message
+    #   <p>
+    #   The status message of the RestApi. When the status message is <code>UPDATING</code> you can still invoke it.
+    #   </p>
+    #   @return [String]
     class PutRestApiOutput < Struct.new(
       nil,
       :id,
@@ -5714,6 +5885,10 @@ module Aws::APIGateway
       :tags,
       :disable_execute_api_endpoint,
       :root_resource_id,
+      :security_policy,
+      :endpoint_access_mode,
+      :api_status,
+      :api_status_message,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5905,6 +6080,25 @@ module Aws::APIGateway
     # @!attribute root_resource_id
     #   <p>The API's root resource ID.</p>
     #   @return [String]
+    # @!attribute security_policy
+    #   <p>
+    #   The Transport Layer Security (TLS) version + cipher suite for this RestApi.
+    #   </p>
+    #   @return [String]
+    # @!attribute endpoint_access_mode
+    #   <p>
+    #   The endpoint access mode of the RestApi.
+    #   </p>
+    #   @return [String]
+    # @!attribute api_status
+    #   <p>The ApiStatus of the RestApi.
+    #   </p>
+    #   @return [String]
+    # @!attribute api_status_message
+    #   <p>
+    #   The status message of the RestApi. When the status message is <code>UPDATING</code> you can still invoke it.
+    #   </p>
+    #   @return [String]
     class RestApi < Struct.new(
       nil,
       :id,
@@ -5921,6 +6115,10 @@ module Aws::APIGateway
       :tags,
       :disable_execute_api_endpoint,
       :root_resource_id,
+      :security_policy,
+      :endpoint_access_mode,
+      :api_status,
+      :api_status_message,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6845,7 +7043,12 @@ module Aws::APIGateway
     #   <p>An optional text message containing detailed information about status of the DomainName migration.</p>
     #   @return [String]
     # @!attribute security_policy
-    #   <p>The Transport Layer Security (TLS) version + cipher suite for this DomainName. The valid values are <code>TLS_1_0</code> and <code>TLS_1_2</code>.</p>
+    #   <p>The Transport Layer Security (TLS) version + cipher suite for this DomainName.</p>
+    #   @return [String]
+    # @!attribute endpoint_access_mode
+    #   <p>
+    #   The endpoint access mode of the DomainName.
+    #   </p>
     #   @return [String]
     # @!attribute tags
     #   <p>The collection of tags. Each tag element is associated with a given resource.</p>
@@ -6889,6 +7092,7 @@ module Aws::APIGateway
       :domain_name_status,
       :domain_name_status_message,
       :security_policy,
+      :endpoint_access_mode,
       :tags,
       :mutual_tls_authentication,
       :ownership_verification_certificate_arn,
@@ -6996,7 +7200,7 @@ module Aws::APIGateway
     #         action-based API, using an Action={name}&{p1}={v1}&p2={v2}... query string. The ensuing
     #         {service_api} refers to a supported action {name} plus any required input parameters.
     #         Alternatively, path can be used for an Amazon Web Services service path-based API. The ensuing service_api
-    #         refers to the path to an Amazon Web Services  service resource, including the region of the integrated Amazon Web Services 
+    #         refers to the path to an Amazon Web Services  service resource, including the region of the integrated Amazon Web Services
     #         service, if applicable. For example, for integration with the S3 API of GetObject, the uri can
     #         be either <code>arn:aws:apigateway:us-west-2:s3:action/GetObject&Bucket={bucket}&Key={key}</code> or
     #         <code>arn:aws:apigateway:us-west-2:s3:path/{bucket}/{key}</code>
@@ -7053,6 +7257,16 @@ module Aws::APIGateway
     # @!attribute tls_config
     #   <p>Specifies the TLS configuration for an integration.</p>
     #   @return [Types::TlsConfig]
+    # @!attribute response_transfer_mode
+    #   <p>
+    #   The response transfer mode of the integration.
+    #   </p>
+    #   @return [String]
+    # @!attribute integration_target
+    #   <p>
+    #   The ALB or NLB listener to send the request to.
+    #   </p>
+    #   @return [String]
     class UpdateIntegrationOutput < Struct.new(
       nil,
       :type,
@@ -7070,6 +7284,8 @@ module Aws::APIGateway
       :cache_key_parameters,
       :integration_responses,
       :tls_config,
+      :response_transfer_mode,
+      :integration_target,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7488,6 +7704,25 @@ module Aws::APIGateway
     # @!attribute root_resource_id
     #   <p>The API's root resource ID.</p>
     #   @return [String]
+    # @!attribute security_policy
+    #   <p>
+    #   The Transport Layer Security (TLS) version + cipher suite for this RestApi.
+    #   </p>
+    #   @return [String]
+    # @!attribute endpoint_access_mode
+    #   <p>
+    #   The endpoint access mode of the RestApi.
+    #   </p>
+    #   @return [String]
+    # @!attribute api_status
+    #   <p>The ApiStatus of the RestApi.
+    #   </p>
+    #   @return [String]
+    # @!attribute api_status_message
+    #   <p>
+    #   The status message of the RestApi. When the status message is <code>UPDATING</code> you can still invoke it.
+    #   </p>
+    #   @return [String]
     class UpdateRestApiOutput < Struct.new(
       nil,
       :id,
@@ -7504,6 +7739,10 @@ module Aws::APIGateway
       :tags,
       :disable_execute_api_endpoint,
       :root_resource_id,
+      :security_policy,
+      :endpoint_access_mode,
+      :api_status,
+      :api_status_message,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7661,9 +7900,9 @@ module Aws::APIGateway
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Represents a usage plan used to specify who can assess associated API stages. Optionally, target request rate and quota limits can be set. 
-    #         In some cases clients can exceed the targets that you set. Don’t rely on usage plans to control costs. 
-    #         Consider using <a href="https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html">Amazon Web Services Budgets</a> to monitor costs 
+    # <p>Represents a usage plan used to specify who can assess associated API stages. Optionally, target request rate and quota limits can be set.
+    #         In some cases clients can exceed the targets that you set. Don’t rely on usage plans to control costs.
+    #         Consider using <a href="https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html">Amazon Web Services Budgets</a> to monitor costs
     #         and <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">WAF</a> to manage API requests.</p>
     # @!attribute id
     #   <p>The identifier of a UsagePlan resource.</p>
@@ -7792,9 +8031,9 @@ module Aws::APIGateway
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Represents a usage plan used to specify who can assess associated API stages. Optionally, target request rate and quota limits can be set. 
-    #         In some cases clients can exceed the targets that you set. Don’t rely on usage plans to control costs. 
-    #         Consider using <a href="https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html">Amazon Web Services Budgets</a> to monitor costs 
+    # <p>Represents a usage plan used to specify who can assess associated API stages. Optionally, target request rate and quota limits can be set.
+    #         In some cases clients can exceed the targets that you set. Don’t rely on usage plans to control costs.
+    #         Consider using <a href="https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html">Amazon Web Services Budgets</a> to monitor costs
     #         and <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">WAF</a> to manage API requests.</p>
     # @!attribute id
     #   <p>The identifier of a UsagePlan resource.</p>

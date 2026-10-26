@@ -20,27 +20,38 @@ module Aws::ARCRegionswitch
     ArcRoutingControlState = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#ArcRoutingControlState", name: "ArcRoutingControlState")
     ArcRoutingControlStates = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.arcregionswitch#ArcRoutingControlStates", name: "ArcRoutingControlStates")
     Asg = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#Asg", name: "Asg")
-    AsgArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.arcregionswitch#AsgArn", name: "AsgArn", traits: {"smithy.api#pattern" => "^arn:aws:autoscaling:[a-z0-9-]+:\\d{12}:autoScalingGroup:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}:autoScalingGroupName/[\\S\\s]{1,255}$"})
+    AsgArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.arcregionswitch#AsgArn", name: "AsgArn", traits: {"smithy.api#pattern" => "^arn:aws[a-zA-Z-]*:autoscaling:[a-z0-9-]+:\\d{12}:autoScalingGroup:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}:autoScalingGroupName/[\\S\\s]{1,255}$"})
     AsgList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.arcregionswitch#AsgList", name: "AsgList", traits: {"smithy.api#length" => {"min" => 2, "max" => 2}})
     AssociatedAlarm = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#AssociatedAlarm", name: "AssociatedAlarm")
     AssociatedAlarmMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.arcregionswitch#AssociatedAlarmMap", name: "AssociatedAlarmMap")
-    AuroraClusterArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.arcregionswitch#AuroraClusterArn", name: "AuroraClusterArn")
+    AuroraClusterArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.arcregionswitch#AuroraClusterArn", name: "AuroraClusterArn", traits: {"smithy.api#pattern" => "^arn:aws[a-zA-Z-]*:rds:[a-z0-9-]+:\\d{12}:cluster:[A-Za-z][0-9A-Za-z-:._]*$"})
     AuroraClusterArns = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.arcregionswitch#AuroraClusterArns", name: "AuroraClusterArns")
+    AuroraInstanceArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.arcregionswitch#AuroraInstanceArn", name: "AuroraInstanceArn", traits: {"smithy.api#pattern" => "^arn:aws[a-zA-Z-]*:rds:[a-z0-9-]+:\\d{12}:db:[A-Za-z][0-9A-Za-z-]{0,62}$"})
+    AuroraProvisionedScalingConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#AuroraProvisionedScalingConfiguration", name: "AuroraProvisionedScalingConfiguration")
+    AuroraServerlessScalingConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#AuroraServerlessScalingConfiguration", name: "AuroraServerlessScalingConfiguration")
     CancelPlanExecutionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#CancelPlanExecutionRequest", name: "CancelPlanExecutionRequest")
     CancelPlanExecutionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#CancelPlanExecutionResponse", name: "CancelPlanExecutionResponse")
+    ConflictException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#ConflictException", name: "ConflictException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 409})
     CreatePlanRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#CreatePlanRequest", name: "CreatePlanRequest")
     CreatePlanResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#CreatePlanResponse", name: "CreatePlanResponse")
     CustomActionLambdaConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#CustomActionLambdaConfiguration", name: "CustomActionLambdaConfiguration")
     DeletePlanRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#DeletePlanRequest", name: "DeletePlanRequest")
     DeletePlanResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#DeletePlanResponse", name: "DeletePlanResponse")
+    DocumentDbClusterArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.arcregionswitch#DocumentDbClusterArn", name: "DocumentDbClusterArn", traits: {"smithy.api#pattern" => "^arn:aws[a-zA-Z-]*:rds:[a-z0-9-]+:\\d{12}:cluster:[a-zA-Z0-9][a-zA-Z0-9-_]{0,99}$"})
+    DocumentDbClusterArns = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.arcregionswitch#DocumentDbClusterArns", name: "DocumentDbClusterArns")
+    DocumentDbConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#DocumentDbConfiguration", name: "DocumentDbConfiguration")
+    DocumentDbDefaultBehavior = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.arcregionswitch#DocumentDbDefaultBehavior", name: "DocumentDbDefaultBehavior")
+    DocumentDbGlobalClusterIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.arcregionswitch#DocumentDbGlobalClusterIdentifier", name: "DocumentDbGlobalClusterIdentifier", traits: {"smithy.api#pattern" => "^[A-Za-z][0-9A-Za-z-:._]*$"})
+    DocumentDbUngraceful = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#DocumentDbUngraceful", name: "DocumentDbUngraceful")
+    DocumentDbUngracefulBehavior = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.arcregionswitch#DocumentDbUngracefulBehavior", name: "DocumentDbUngracefulBehavior")
     Duration = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.arcregionswitch#Duration", name: "Duration", traits: {"smithy.api#pattern" => "^P(?!$)(\\d+Y)?(\\d+M)?(\\d+D)?(T(?=\\d)(\\d+H)?(\\d+M)?(\\d+S)?)?$"})
     Ec2AsgCapacityIncreaseConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#Ec2AsgCapacityIncreaseConfiguration", name: "Ec2AsgCapacityIncreaseConfiguration")
     Ec2AsgCapacityMonitoringApproach = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.arcregionswitch#Ec2AsgCapacityMonitoringApproach", name: "Ec2AsgCapacityMonitoringApproach")
     Ec2Ungraceful = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#Ec2Ungraceful", name: "Ec2Ungraceful")
     EcsCapacityIncreaseConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#EcsCapacityIncreaseConfiguration", name: "EcsCapacityIncreaseConfiguration")
     EcsCapacityMonitoringApproach = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.arcregionswitch#EcsCapacityMonitoringApproach", name: "EcsCapacityMonitoringApproach")
-    EcsClusterArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.arcregionswitch#EcsClusterArn", name: "EcsClusterArn", traits: {"smithy.api#pattern" => "^arn:aws:ecs:[a-z0-9-]+:\\d{12}:cluster/[a-zA-Z0-9_-]{1,255}$"})
-    EcsServiceArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.arcregionswitch#EcsServiceArn", name: "EcsServiceArn", traits: {"smithy.api#pattern" => "^arn:aws:ecs:[a-z0-9-]+:\\d{12}:service/[a-zA-Z0-9_-]+/[a-zA-Z0-9_-]{1,255}$"})
+    EcsClusterArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.arcregionswitch#EcsClusterArn", name: "EcsClusterArn", traits: {"smithy.api#pattern" => "^arn:aws[a-zA-Z-]*:ecs:[a-z0-9-]+:\\d{12}:cluster/[a-zA-Z0-9_-]{1,255}$"})
+    EcsServiceArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.arcregionswitch#EcsServiceArn", name: "EcsServiceArn", traits: {"smithy.api#pattern" => "^arn:aws[a-zA-Z-]*:ecs:[a-z0-9-]+:\\d{12}:service/[a-zA-Z0-9_-]+/[a-zA-Z0-9_-]{1,255}$"})
     EcsUngraceful = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#EcsUngraceful", name: "EcsUngraceful")
     EksCapacityMonitoringApproach = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.arcregionswitch#EksCapacityMonitoringApproach", name: "EksCapacityMonitoringApproach")
     EksCluster = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#EksCluster", name: "EksCluster")
@@ -49,6 +60,9 @@ module Aws::ARCRegionswitch
     EksResourceScalingConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#EksResourceScalingConfiguration", name: "EksResourceScalingConfiguration")
     EksResourceScalingUngraceful = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#EksResourceScalingUngraceful", name: "EksResourceScalingUngraceful")
     EvaluationStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.arcregionswitch#EvaluationStatus", name: "EvaluationStatus")
+    EventSourceMapping = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#EventSourceMapping", name: "EventSourceMapping")
+    EventSourceMappingAction = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.arcregionswitch#EventSourceMappingAction", name: "EventSourceMappingAction")
+    EventSourceMappingArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.arcregionswitch#EventSourceMappingArn", name: "EventSourceMappingArn", traits: {"smithy.api#pattern" => "^arn:aws[a-zA-Z-]*:lambda:[a-z0-9-]+:\\d{12}:event-source-mapping:[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"})
     ExecutionAction = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.arcregionswitch#ExecutionAction", name: "ExecutionAction")
     ExecutionApprovalConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#ExecutionApprovalConfiguration", name: "ExecutionApprovalConfiguration")
     ExecutionBlockConfiguration = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.arcregionswitch#ExecutionBlockConfiguration", name: "ExecutionBlockConfiguration")
@@ -60,6 +74,10 @@ module Aws::ARCRegionswitch
     ExecutionId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.arcregionswitch#ExecutionId", name: "ExecutionId")
     ExecutionMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.arcregionswitch#ExecutionMode", name: "ExecutionMode")
     ExecutionState = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.arcregionswitch#ExecutionState", name: "ExecutionState")
+    FailedReportErrorCode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.arcregionswitch#FailedReportErrorCode", name: "FailedReportErrorCode")
+    FailedReportOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#FailedReportOutput", name: "FailedReportOutput")
+    GeneratedReport = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#GeneratedReport", name: "GeneratedReport")
+    GeneratedReportDetails = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.arcregionswitch#GeneratedReportDetails", name: "GeneratedReportDetails", traits: {"smithy.api#length" => {"min" => 0, "max" => 1}})
     GetPlanEvaluationStatusRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#GetPlanEvaluationStatusRequest", name: "GetPlanEvaluationStatusRequest")
     GetPlanEvaluationStatusResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#GetPlanEvaluationStatusResponse", name: "GetPlanEvaluationStatusResponse")
     GetPlanExecutionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#GetPlanExecutionRequest", name: "GetPlanExecutionRequest")
@@ -73,7 +91,7 @@ module Aws::ARCRegionswitch
     GlobalAuroraDefaultBehavior = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.arcregionswitch#GlobalAuroraDefaultBehavior", name: "GlobalAuroraDefaultBehavior")
     GlobalAuroraUngraceful = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#GlobalAuroraUngraceful", name: "GlobalAuroraUngraceful")
     GlobalAuroraUngracefulBehavior = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.arcregionswitch#GlobalAuroraUngracefulBehavior", name: "GlobalAuroraUngracefulBehavior")
-    GlobalClusterIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.arcregionswitch#GlobalClusterIdentifier", name: "GlobalClusterIdentifier")
+    GlobalClusterIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.arcregionswitch#GlobalClusterIdentifier", name: "GlobalClusterIdentifier", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => "^[A-Za-z][0-9A-Za-z-:._]*$"})
     IamRoleArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.arcregionswitch#IamRoleArn", name: "IamRoleArn", traits: {"smithy.api#pattern" => "^arn:aws[a-zA-Z0-9-]*:iam::[0-9]{12}:role/.+$"})
     IllegalArgumentException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#IllegalArgumentException", name: "IllegalArgumentException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     IllegalStateException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#IllegalStateException", name: "IllegalStateException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
@@ -84,7 +102,11 @@ module Aws::ARCRegionswitch
     KubernetesScalingApps = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.arcregionswitch#KubernetesScalingApps", name: "KubernetesScalingApps", traits: {"smithy.api#length" => {"min" => 1}})
     KubernetesScalingResource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#KubernetesScalingResource", name: "KubernetesScalingResource")
     LambdaArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.arcregionswitch#LambdaArn", name: "LambdaArn")
+    LambdaEventSourceMappingConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#LambdaEventSourceMappingConfiguration", name: "LambdaEventSourceMappingConfiguration")
+    LambdaEventSourceMappingUngraceful = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#LambdaEventSourceMappingUngraceful", name: "LambdaEventSourceMappingUngraceful")
+    LambdaEventSourceMappingUngracefulBehavior = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.arcregionswitch#LambdaEventSourceMappingUngracefulBehavior", name: "LambdaEventSourceMappingUngracefulBehavior")
     LambdaList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.arcregionswitch#LambdaList", name: "LambdaList", traits: {"smithy.api#length" => {"min" => 1, "max" => 2}})
+    LambdaPayload = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.arcregionswitch#LambdaPayload", name: "LambdaPayload", traits: {"smithy.api#length" => {"min" => 1, "max" => 786432}, "smithy.api#sensitive" => {}})
     LambdaUngraceful = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#LambdaUngraceful", name: "LambdaUngraceful")
     LambdaUngracefulBehavior = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.arcregionswitch#LambdaUngracefulBehavior", name: "LambdaUngracefulBehavior")
     Lambdas = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#Lambdas", name: "Lambdas")
@@ -98,26 +120,54 @@ module Aws::ARCRegionswitch
     ListPlansInRegionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#ListPlansInRegionResponse", name: "ListPlansInRegionResponse")
     ListPlansRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#ListPlansRequest", name: "ListPlansRequest")
     ListPlansResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#ListPlansResponse", name: "ListPlansResponse")
+    ListRoute53HealthChecksInRegionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#ListRoute53HealthChecksInRegionRequest", name: "ListRoute53HealthChecksInRegionRequest")
+    ListRoute53HealthChecksInRegionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#ListRoute53HealthChecksInRegionResponse", name: "ListRoute53HealthChecksInRegionResponse")
     ListRoute53HealthChecksRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#ListRoute53HealthChecksRequest", name: "ListRoute53HealthChecksRequest")
     ListRoute53HealthChecksResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#ListRoute53HealthChecksResponse", name: "ListRoute53HealthChecksResponse")
+    ListServiceQuotaWarningsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#ListServiceQuotaWarningsRequest", name: "ListServiceQuotaWarningsRequest")
+    ListServiceQuotaWarningsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#ListServiceQuotaWarningsResponse", name: "ListServiceQuotaWarningsResponse")
     ListTagsForResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#ListTagsForResourceRequest", name: "ListTagsForResourceRequest")
     ListTagsForResourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#ListTagsForResourceResponse", name: "ListTagsForResourceResponse")
     MaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.arcregionswitch#MaxResults", name: "MaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}})
     MinimalWorkflow = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#MinimalWorkflow", name: "MinimalWorkflow")
+    NeptuneClusterArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.arcregionswitch#NeptuneClusterArn", name: "NeptuneClusterArn", traits: {"smithy.api#pattern" => "^arn:aws[a-zA-Z-]*:rds:[a-z0-9-]+:\\d{12}:cluster:[A-Za-z][0-9A-Za-z-]{0,62}$"})
+    NeptuneDefaultBehavior = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.arcregionswitch#NeptuneDefaultBehavior", name: "NeptuneDefaultBehavior")
+    NeptuneGlobalClusterIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.arcregionswitch#NeptuneGlobalClusterIdentifier", name: "NeptuneGlobalClusterIdentifier", traits: {"smithy.api#length" => {"min" => 1, "max" => 63}, "smithy.api#pattern" => "^[A-Za-z][0-9A-Za-z-]*$"})
+    NeptuneGlobalDatabaseConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#NeptuneGlobalDatabaseConfiguration", name: "NeptuneGlobalDatabaseConfiguration")
+    NeptuneUngraceful = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#NeptuneUngraceful", name: "NeptuneUngraceful")
+    NeptuneUngracefulBehavior = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.arcregionswitch#NeptuneUngracefulBehavior", name: "NeptuneUngracefulBehavior")
     NextToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.arcregionswitch#NextToken", name: "NextToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}})
     ParallelExecutionBlockConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#ParallelExecutionBlockConfiguration", name: "ParallelExecutionBlockConfiguration")
     Plan = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#Plan", name: "Plan")
     PlanArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.arcregionswitch#PlanArn", name: "PlanArn", traits: {"smithy.api#pattern" => "^arn:aws[a-zA-Z-]*:arc-region-switch::[0-9]{12}:plan/([a-zA-Z0-9](?:[a-zA-Z0-9-]{0,30}[a-zA-Z0-9])?):([a-z0-9]{6})$"})
+    PlanArnList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.arcregionswitch#PlanArnList", name: "PlanArnList", traits: {"smithy.api#length" => {"max" => 100}})
     PlanList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.arcregionswitch#PlanList", name: "PlanList")
     PlanName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.arcregionswitch#PlanName", name: "PlanName", traits: {"smithy.api#length" => {"min" => 1, "max" => 32}, "smithy.api#pattern" => "^[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,30}[a-zA-Z0-9])?$"})
     PlanWarnings = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.arcregionswitch#PlanWarnings", name: "PlanWarnings")
+    RdsCreateCrossRegionReplicaConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#RdsCreateCrossRegionReplicaConfiguration", name: "RdsCreateCrossRegionReplicaConfiguration")
+    RdsDbInstanceArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.arcregionswitch#RdsDbInstanceArn", name: "RdsDbInstanceArn", traits: {"smithy.api#pattern" => "^arn:aws[a-zA-Z-]*:rds:[a-z0-9-]+:\\d{12}:db:[a-zA-Z][a-zA-Z0-9]*(-[a-zA-Z0-9]+)*$"})
+    RdsDbInstanceArnMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.arcregionswitch#RdsDbInstanceArnMap", name: "RdsDbInstanceArnMap")
+    RdsPromoteReadReplicaConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#RdsPromoteReadReplicaConfiguration", name: "RdsPromoteReadReplicaConfiguration")
+    RdsSwitchoverReadReplicaConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#RdsSwitchoverReadReplicaConfiguration", name: "RdsSwitchoverReadReplicaConfiguration")
+    RdsUngraceful = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#RdsUngraceful", name: "RdsUngraceful")
+    RdsUngracefulBehavior = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.arcregionswitch#RdsUngracefulBehavior", name: "RdsUngracefulBehavior")
     RecoveryApproach = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.arcregionswitch#RecoveryApproach", name: "RecoveryApproach")
+    RecoveryExecutionId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.arcregionswitch#RecoveryExecutionId", name: "RecoveryExecutionId", traits: {"smithy.api#pattern" => "^[a-z]{2}(-[a-z]+)+-[0-9]+/[0-9a-fA-F]{16}$"})
     Region = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.arcregionswitch#Region", name: "Region", traits: {"smithy.api#pattern" => "^[a-z]{2}-[a-z-]+-\\d+$"})
     RegionAndRoutingControls = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.arcregionswitch#RegionAndRoutingControls", name: "RegionAndRoutingControls")
+    RegionAuroraClusterMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.arcregionswitch#RegionAuroraClusterMap", name: "RegionAuroraClusterMap", traits: {"smithy.api#length" => {"min" => 2, "max" => 2}})
+    RegionAuroraInstanceArnMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.arcregionswitch#RegionAuroraInstanceArnMap", name: "RegionAuroraInstanceArnMap", traits: {"smithy.api#length" => {"min" => 1, "max" => 2}})
+    RegionEventSourceMappingMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.arcregionswitch#RegionEventSourceMappingMap", name: "RegionEventSourceMappingMap", traits: {"smithy.api#length" => {"min" => 1, "max" => 2}})
     RegionList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.arcregionswitch#RegionList", name: "RegionList", traits: {"smithy.api#length" => {"min" => 2, "max" => 2}})
+    RegionNeptuneClusterArnMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.arcregionswitch#RegionNeptuneClusterArnMap", name: "RegionNeptuneClusterArnMap", traits: {"smithy.api#length" => {"min" => 2, "max" => 2}})
+    RegionSsmDocumentMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.arcregionswitch#RegionSsmDocumentMap", name: "RegionSsmDocumentMap", traits: {"smithy.api#length" => {"min" => 1, "max" => 2}})
     RegionSwitchPlanConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#RegionSwitchPlanConfiguration", name: "RegionSwitchPlanConfiguration")
     RegionToRunIn = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.arcregionswitch#RegionToRunIn", name: "RegionToRunIn")
     RegionalScalingResource = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.arcregionswitch#RegionalScalingResource", name: "RegionalScalingResource")
+    ReportConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#ReportConfiguration", name: "ReportConfiguration")
+    ReportOutput = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.arcregionswitch#ReportOutput", name: "ReportOutput")
+    ReportOutputConfiguration = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.arcregionswitch#ReportOutputConfiguration", name: "ReportOutputConfiguration")
+    ReportOutputList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.arcregionswitch#ReportOutputList", name: "ReportOutputList", traits: {"smithy.api#length" => {"min" => 1, "max" => 1}})
     ResourceArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.arcregionswitch#ResourceArn", name: "ResourceArn")
     ResourceNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#ResourceNotFoundException", name: "ResourceNotFoundException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 404})
     ResourceWarning = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#ResourceWarning", name: "ResourceWarning")
@@ -128,6 +178,7 @@ module Aws::ARCRegionswitch
     Route53HealthCheckConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#Route53HealthCheckConfiguration", name: "Route53HealthCheckConfiguration")
     Route53HealthCheckId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.arcregionswitch#Route53HealthCheckId", name: "Route53HealthCheckId", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}})
     Route53HealthCheckList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.arcregionswitch#Route53HealthCheckList", name: "Route53HealthCheckList")
+    Route53HealthCheckStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.arcregionswitch#Route53HealthCheckStatus", name: "Route53HealthCheckStatus")
     Route53HostedZoneId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.arcregionswitch#Route53HostedZoneId", name: "Route53HostedZoneId", traits: {"smithy.api#length" => {"min" => 1, "max" => 32}})
     Route53RecordName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.arcregionswitch#Route53RecordName", name: "Route53RecordName", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}})
     Route53ResourceRecordSet = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#Route53ResourceRecordSet", name: "Route53ResourceRecordSet")
@@ -135,8 +186,28 @@ module Aws::ARCRegionswitch
     Route53ResourceRecordSetList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.arcregionswitch#Route53ResourceRecordSetList", name: "Route53ResourceRecordSetList")
     RoutingControlArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.arcregionswitch#RoutingControlArn", name: "RoutingControlArn")
     RoutingControlStateChange = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.arcregionswitch#RoutingControlStateChange", name: "RoutingControlStateChange")
+    S3ReportOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#S3ReportOutput", name: "S3ReportOutput")
+    S3ReportOutputConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#S3ReportOutputConfiguration", name: "S3ReportOutputConfiguration")
     Service = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#Service", name: "Service")
     ServiceList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.arcregionswitch#ServiceList", name: "ServiceList", traits: {"smithy.api#length" => {"min" => 2, "max" => 2}})
+    ServiceQuotaWarningStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.arcregionswitch#ServiceQuotaWarningStatus", name: "ServiceQuotaWarningStatus")
+    ServiceQuotaWarningSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#ServiceQuotaWarningSummary", name: "ServiceQuotaWarningSummary")
+    ServiceQuotaWarningSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.arcregionswitch#ServiceQuotaWarningSummaryList", name: "ServiceQuotaWarningSummaryList")
+    SsmDocumentArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.arcregionswitch#SsmDocumentArn", name: "SsmDocumentArn", traits: {"smithy.api#length" => {"min" => 20, "max" => 256}, "smithy.api#pattern" => "^arn:[a-z0-9\\-]+:ssm:[a-z0-9\\-]+:([0-9]{12})?:document/[a-zA-Z0-9_.\\-]+$"})
+    SsmDocumentConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#SsmDocumentConfig", name: "SsmDocumentConfig")
+    SsmDocumentParameters = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.arcregionswitch#SsmDocumentParameters", name: "SsmDocumentParameters", traits: {"smithy.api#length" => {"max" => 30}})
+    SsmDocumentVersion = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.arcregionswitch#SsmDocumentVersion", name: "SsmDocumentVersion", traits: {"smithy.api#length" => {"min" => 1, "max" => 8}, "smithy.api#pattern" => "^([$]LATEST|[$]DEFAULT|[1-9][0-9]*)$"})
+    SsmParameterKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.arcregionswitch#SsmParameterKey", name: "SsmParameterKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}})
+    SsmParameterValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.arcregionswitch#SsmParameterValue", name: "SsmParameterValue", traits: {"smithy.api#length" => {"min" => 1, "max" => 65535}, "smithy.api#pattern" => "^.{1,65535}$"})
+    SsmParameterValues = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.arcregionswitch#SsmParameterValues", name: "SsmParameterValues", traits: {"smithy.api#length" => {"min" => 1, "max" => 50}})
+    SsmSendCommandConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#SsmSendCommandConfiguration", name: "SsmSendCommandConfiguration")
+    SsmSendCommandUngraceful = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#SsmSendCommandUngraceful", name: "SsmSendCommandUngraceful")
+    SsmSendCommandUngracefulBehavior = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.arcregionswitch#SsmSendCommandUngracefulBehavior", name: "SsmSendCommandUngracefulBehavior")
+    SsmTarget = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#SsmTarget", name: "SsmTarget")
+    SsmTargetKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.arcregionswitch#SsmTargetKey", name: "SsmTargetKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 163}, "smithy.api#pattern" => "^[\\p{L}\\p{Z}\\p{N}_.:/=\\-@]*$"})
+    SsmTargetList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.arcregionswitch#SsmTargetList", name: "SsmTargetList", traits: {"smithy.api#length" => {"min" => 1, "max" => 5}})
+    SsmTargetValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.arcregionswitch#SsmTargetValue", name: "SsmTargetValue", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}})
+    SsmTargetValueList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.arcregionswitch#SsmTargetValueList", name: "SsmTargetValueList", traits: {"smithy.api#length" => {"min" => 1, "max" => 50}})
     StartPlanExecutionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#StartPlanExecutionRequest", name: "StartPlanExecutionRequest")
     StartPlanExecutionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#StartPlanExecutionResponse", name: "StartPlanExecutionResponse")
     Step = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#Step", name: "Step")
@@ -165,6 +236,7 @@ module Aws::ARCRegionswitch
     UpdatePlanExecutionStepResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#UpdatePlanExecutionStepResponse", name: "UpdatePlanExecutionStepResponse")
     UpdatePlanRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#UpdatePlanRequest", name: "UpdatePlanRequest")
     UpdatePlanResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#UpdatePlanResponse", name: "UpdatePlanResponse")
+    WaitELBTargetGroupHealthy = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.arcregionswitch#WaitELBTargetGroupHealthy", name: "WaitELBTargetGroupHealthy")
     Workflow = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.arcregionswitch#Workflow", name: "Workflow")
     WorkflowList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.arcregionswitch#WorkflowList", name: "WorkflowList")
     WorkflowTargetAction = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.arcregionswitch#WorkflowTargetAction", name: "WorkflowTargetAction")
@@ -180,6 +252,7 @@ module Aws::ARCRegionswitch
     AbbreviatedExecution.add_member(:execution_state, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionState, name: "executionState", traits: {"smithy.api#required" => {}}))
     AbbreviatedExecution.add_member(:execution_action, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionAction, name: "executionAction", traits: {"smithy.api#required" => {}}))
     AbbreviatedExecution.add_member(:execution_region, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "executionRegion", traits: {"smithy.api#required" => {}}))
+    AbbreviatedExecution.add_member(:recovery_execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "recoveryExecutionId"))
     AbbreviatedExecution.add_member(:actual_recovery_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Duration, name: "actualRecoveryTime"))
     AbbreviatedExecution.type = Types::AbbreviatedExecution
     AbbreviatedExecutionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AbbreviatedExecution, name: "member"))
@@ -233,17 +306,37 @@ module Aws::ARCRegionswitch
     AssociatedAlarmMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
     AssociatedAlarmMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociatedAlarm, name: "value"))
     AuroraClusterArns.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AuroraClusterArn, name: "member"))
+    AuroraProvisionedScalingConfiguration.add_member(:timeout_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "timeoutMinutes", traits: {"smithy.api#default" => 60, "smithy.api#range" => {"min" => 1}}))
+    AuroraProvisionedScalingConfiguration.add_member(:cross_account_role, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, name: "crossAccountRole"))
+    AuroraProvisionedScalingConfiguration.add_member(:external_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "externalId"))
+    AuroraProvisionedScalingConfiguration.add_member(:global_cluster_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalClusterIdentifier, name: "globalClusterIdentifier", traits: {"smithy.api#required" => {}}))
+    AuroraProvisionedScalingConfiguration.add_member(:region_database_cluster_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionAuroraClusterMap, name: "regionDatabaseClusterArns", traits: {"smithy.api#required" => {}}))
+    AuroraProvisionedScalingConfiguration.add_member(:instance_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionAuroraInstanceArnMap, name: "instanceArns", traits: {"smithy.api#required" => {}}))
+    AuroraProvisionedScalingConfiguration.type = Types::AuroraProvisionedScalingConfiguration
+    AuroraServerlessScalingConfiguration.add_member(:timeout_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "timeoutMinutes", traits: {"smithy.api#default" => 60, "smithy.api#range" => {"min" => 1}}))
+    AuroraServerlessScalingConfiguration.add_member(:cross_account_role, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, name: "crossAccountRole"))
+    AuroraServerlessScalingConfiguration.add_member(:external_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "externalId"))
+    AuroraServerlessScalingConfiguration.add_member(:global_cluster_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalClusterIdentifier, name: "globalClusterIdentifier", traits: {"smithy.api#required" => {}}))
+    AuroraServerlessScalingConfiguration.add_member(:region_database_cluster_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionAuroraClusterMap, name: "regionDatabaseClusterArns", traits: {"smithy.api#required" => {}}))
+    AuroraServerlessScalingConfiguration.add_member(:target_percent, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "targetPercent", traits: {"smithy.api#default" => 100}))
+    AuroraServerlessScalingConfiguration.type = Types::AuroraServerlessScalingConfiguration
     CancelPlanExecutionRequest.add_member(:plan_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PlanArn, name: "planArn", traits: {"smithy.api#required" => {}}))
     CancelPlanExecutionRequest.add_member(:execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionId, name: "executionId", traits: {"smithy.api#required" => {}}))
     CancelPlanExecutionRequest.add_member(:comment, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionComment, name: "comment"))
     CancelPlanExecutionRequest.type = Types::CancelPlanExecutionRequest
     CancelPlanExecutionResponse.type = Types::CancelPlanExecutionResponse
+    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
+    ConflictException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceId"))
+    ConflictException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceType"))
+    ConflictException.type = Types::ConflictException
     CreatePlanRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "description", traits: {"aws.cloudformation#cfnMutability" => "full"}))
     CreatePlanRequest.add_member(:workflows, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowList, name: "workflows", traits: {"aws.cloudformation#cfnMutability" => "full", "smithy.api#required" => {}}))
     CreatePlanRequest.add_member(:execution_role, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, name: "executionRole", traits: {"aws.cloudformation#cfnMutability" => "full", "smithy.api#required" => {}}))
     CreatePlanRequest.add_member(:recovery_time_objective_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "recoveryTimeObjectiveMinutes", traits: {"aws.cloudformation#cfnMutability" => "full", "smithy.api#range" => {"min" => 1, "max" => 10080}}))
     CreatePlanRequest.add_member(:associated_alarms, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociatedAlarmMap, name: "associatedAlarms", traits: {"aws.cloudformation#cfnMutability" => "full"}))
     CreatePlanRequest.add_member(:triggers, ::Smithy::Schema::Shapes::MemberShape.new(target: TriggerList, name: "triggers", traits: {"aws.cloudformation#cfnMutability" => "full"}))
+    CreatePlanRequest.add_member(:report_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportConfiguration, name: "reportConfiguration", traits: {"aws.cloudformation#cfnMutability" => "full"}))
+    CreatePlanRequest.add_member(:service_quota_checks_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "serviceQuotaChecksEnabled", traits: {"aws.cloudformation#cfnMutability" => "full"}))
     CreatePlanRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: PlanName, name: "name", traits: {"aws.cloudformation#cfnMutability" => "create-and-read", "smithy.api#required" => {}}))
     CreatePlanRequest.add_member(:regions, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionList, name: "regions", traits: {"aws.cloudformation#cfnMutability" => "create-and-read", "smithy.api#required" => {}}))
     CreatePlanRequest.add_member(:recovery_approach, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryApproach, name: "recoveryApproach", traits: {"aws.cloudformation#cfnMutability" => "create-and-read", "smithy.api#required" => {}}))
@@ -261,11 +354,26 @@ module Aws::ARCRegionswitch
     DeletePlanRequest.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PlanArn, name: "arn", traits: {"smithy.api#required" => {}}))
     DeletePlanRequest.type = Types::DeletePlanRequest
     DeletePlanResponse.type = Types::DeletePlanResponse
+    DocumentDbClusterArns.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentDbClusterArn, name: "member"))
+    DocumentDbConfiguration.add_member(:timeout_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "timeoutMinutes", traits: {"smithy.api#default" => 60, "smithy.api#range" => {"min" => 1}}))
+    DocumentDbConfiguration.add_member(:cross_account_role, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, name: "crossAccountRole"))
+    DocumentDbConfiguration.add_member(:external_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "externalId"))
+    DocumentDbConfiguration.add_member(:behavior, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentDbDefaultBehavior, name: "behavior", traits: {"smithy.api#default" => "switchoverOnly", "smithy.api#required" => {}}))
+    DocumentDbConfiguration.add_member(:ungraceful, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentDbUngraceful, name: "ungraceful"))
+    DocumentDbConfiguration.add_member(:global_cluster_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentDbGlobalClusterIdentifier, name: "globalClusterIdentifier", traits: {"smithy.api#required" => {}}))
+    DocumentDbConfiguration.add_member(:database_cluster_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentDbClusterArns, name: "databaseClusterArns", traits: {"smithy.api#required" => {}}))
+    DocumentDbConfiguration.type = Types::DocumentDbConfiguration
+    DocumentDbDefaultBehavior.add_member(:switchover_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SWITCHOVER_ONLY", traits: {"smithy.api#enumValue" => "switchoverOnly"}))
+    DocumentDbDefaultBehavior.add_member(:failover, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILOVER", traits: {"smithy.api#enumValue" => "failover"}))
+    DocumentDbUngraceful.add_member(:ungraceful, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentDbUngracefulBehavior, name: "ungraceful"))
+    DocumentDbUngraceful.type = Types::DocumentDbUngraceful
+    DocumentDbUngracefulBehavior.add_member(:failover, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILOVER", traits: {"smithy.api#enumValue" => "failover"}))
     Ec2AsgCapacityIncreaseConfiguration.add_member(:timeout_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "timeoutMinutes", traits: {"smithy.api#default" => 60, "smithy.api#range" => {"min" => 1}}))
     Ec2AsgCapacityIncreaseConfiguration.add_member(:asgs, ::Smithy::Schema::Shapes::MemberShape.new(target: AsgList, name: "asgs", traits: {"smithy.api#required" => {}}))
     Ec2AsgCapacityIncreaseConfiguration.add_member(:ungraceful, ::Smithy::Schema::Shapes::MemberShape.new(target: Ec2Ungraceful, name: "ungraceful"))
     Ec2AsgCapacityIncreaseConfiguration.add_member(:target_percent, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "targetPercent", traits: {"smithy.api#default" => 100}))
     Ec2AsgCapacityIncreaseConfiguration.add_member(:capacity_monitoring_approach, ::Smithy::Schema::Shapes::MemberShape.new(target: Ec2AsgCapacityMonitoringApproach, name: "capacityMonitoringApproach", traits: {"smithy.api#default" => "sampledMaxInLast24Hours"}))
+    Ec2AsgCapacityIncreaseConfiguration.add_member(:wait_elb_target_group_healthy, ::Smithy::Schema::Shapes::MemberShape.new(target: WaitELBTargetGroupHealthy, name: "waitELBTargetGroupHealthy"))
     Ec2AsgCapacityIncreaseConfiguration.type = Types::Ec2AsgCapacityIncreaseConfiguration
     Ec2AsgCapacityMonitoringApproach.add_member(:sampled_max_in_last_24_hours, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SAMPLED_MAX_IN_LAST_24_HOURS", traits: {"smithy.api#enumValue" => "sampledMaxInLast24Hours"}))
     Ec2AsgCapacityMonitoringApproach.add_member(:autoscaling_max_in_last_24_hours, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AUTOSCALING_MAX_IN_LAST_24_HOURS", traits: {"smithy.api#enumValue" => "autoscalingMaxInLast24Hours"}))
@@ -276,6 +384,7 @@ module Aws::ARCRegionswitch
     EcsCapacityIncreaseConfiguration.add_member(:ungraceful, ::Smithy::Schema::Shapes::MemberShape.new(target: EcsUngraceful, name: "ungraceful"))
     EcsCapacityIncreaseConfiguration.add_member(:target_percent, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "targetPercent", traits: {"smithy.api#default" => 100}))
     EcsCapacityIncreaseConfiguration.add_member(:capacity_monitoring_approach, ::Smithy::Schema::Shapes::MemberShape.new(target: EcsCapacityMonitoringApproach, name: "capacityMonitoringApproach", traits: {"smithy.api#default" => "sampledMaxInLast24Hours"}))
+    EcsCapacityIncreaseConfiguration.add_member(:wait_elb_target_group_healthy, ::Smithy::Schema::Shapes::MemberShape.new(target: WaitELBTargetGroupHealthy, name: "waitELBTargetGroupHealthy"))
     EcsCapacityIncreaseConfiguration.type = Types::EcsCapacityIncreaseConfiguration
     EcsCapacityMonitoringApproach.add_member(:sampled_max_in_last_24_hours, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SAMPLED_MAX_IN_LAST_24_HOURS", traits: {"smithy.api#enumValue" => "sampledMaxInLast24Hours"}))
     EcsCapacityMonitoringApproach.add_member(:container_insights_max_in_last_24_hours, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONTAINER_INSIGHTS_MAX_IN_LAST_24_HOURS", traits: {"smithy.api#enumValue" => "containerInsightsMaxInLast24Hours"}))
@@ -301,8 +410,15 @@ module Aws::ARCRegionswitch
     EvaluationStatus.add_member(:action_required, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTION_REQUIRED", traits: {"smithy.api#enumValue" => "actionRequired"}))
     EvaluationStatus.add_member(:pending_evaluation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING_EVALUATION", traits: {"smithy.api#enumValue" => "pendingEvaluation"}))
     EvaluationStatus.add_member(:unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNKNOWN", traits: {"smithy.api#enumValue" => "unknown"}))
+    EventSourceMapping.add_member(:cross_account_role, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, name: "crossAccountRole"))
+    EventSourceMapping.add_member(:external_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "externalId"))
+    EventSourceMapping.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EventSourceMappingArn, name: "arn", traits: {"smithy.api#required" => {}}))
+    EventSourceMapping.type = Types::EventSourceMapping
+    EventSourceMappingAction.add_member(:enable, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLE", traits: {"smithy.api#enumValue" => "enable"}))
+    EventSourceMappingAction.add_member(:disable, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLE", traits: {"smithy.api#enumValue" => "disable"}))
     ExecutionAction.add_member(:activate, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVATE", traits: {"smithy.api#enumValue" => "activate"}))
     ExecutionAction.add_member(:deactivate, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEACTIVATE", traits: {"smithy.api#enumValue" => "deactivate"}))
+    ExecutionAction.add_member(:post_recovery, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POST_RECOVERY", traits: {"smithy.api#enumValue" => "postRecovery"}))
     ExecutionApprovalConfiguration.add_member(:timeout_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "timeoutMinutes", traits: {"smithy.api#default" => 60, "smithy.api#range" => {"min" => 1}}))
     ExecutionApprovalConfiguration.add_member(:approval_role, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "approvalRole", traits: {"smithy.api#required" => {}}))
     ExecutionApprovalConfiguration.type = Types::ExecutionApprovalConfiguration
@@ -316,6 +432,15 @@ module Aws::ARCRegionswitch
     ExecutionBlockConfiguration.add_member(:ecs_capacity_increase_config, Types::ExecutionBlockConfiguration::EcsCapacityIncreaseConfig, ::Smithy::Schema::Shapes::MemberShape.new(target: EcsCapacityIncreaseConfiguration, name: "ecsCapacityIncreaseConfig"))
     ExecutionBlockConfiguration.add_member(:eks_resource_scaling_config, Types::ExecutionBlockConfiguration::EksResourceScalingConfig, ::Smithy::Schema::Shapes::MemberShape.new(target: EksResourceScalingConfiguration, name: "eksResourceScalingConfig"))
     ExecutionBlockConfiguration.add_member(:route53_health_check_config, Types::ExecutionBlockConfiguration::Route53HealthCheckConfig, ::Smithy::Schema::Shapes::MemberShape.new(target: Route53HealthCheckConfiguration, name: "route53HealthCheckConfig"))
+    ExecutionBlockConfiguration.add_member(:document_db_config, Types::ExecutionBlockConfiguration::DocumentDbConfig, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentDbConfiguration, name: "documentDbConfig"))
+    ExecutionBlockConfiguration.add_member(:rds_promote_read_replica_config, Types::ExecutionBlockConfiguration::RdsPromoteReadReplicaConfig, ::Smithy::Schema::Shapes::MemberShape.new(target: RdsPromoteReadReplicaConfiguration, name: "rdsPromoteReadReplicaConfig"))
+    ExecutionBlockConfiguration.add_member(:rds_create_cross_region_read_replica_config, Types::ExecutionBlockConfiguration::RdsCreateCrossRegionReadReplicaConfig, ::Smithy::Schema::Shapes::MemberShape.new(target: RdsCreateCrossRegionReplicaConfiguration, name: "rdsCreateCrossRegionReadReplicaConfig"))
+    ExecutionBlockConfiguration.add_member(:lambda_event_source_mapping_config, Types::ExecutionBlockConfiguration::LambdaEventSourceMappingConfig, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaEventSourceMappingConfiguration, name: "lambdaEventSourceMappingConfig"))
+    ExecutionBlockConfiguration.add_member(:aurora_serverless_scaling_config, Types::ExecutionBlockConfiguration::AuroraServerlessScalingConfig, ::Smithy::Schema::Shapes::MemberShape.new(target: AuroraServerlessScalingConfiguration, name: "auroraServerlessScalingConfig"))
+    ExecutionBlockConfiguration.add_member(:aurora_provisioned_scaling_config, Types::ExecutionBlockConfiguration::AuroraProvisionedScalingConfig, ::Smithy::Schema::Shapes::MemberShape.new(target: AuroraProvisionedScalingConfiguration, name: "auroraProvisionedScalingConfig"))
+    ExecutionBlockConfiguration.add_member(:neptune_global_database_config, Types::ExecutionBlockConfiguration::NeptuneGlobalDatabaseConfig, ::Smithy::Schema::Shapes::MemberShape.new(target: NeptuneGlobalDatabaseConfiguration, name: "neptuneGlobalDatabaseConfig"))
+    ExecutionBlockConfiguration.add_member(:rds_switchover_read_replica_config, Types::ExecutionBlockConfiguration::RdsSwitchoverReadReplicaConfig, ::Smithy::Schema::Shapes::MemberShape.new(target: RdsSwitchoverReadReplicaConfiguration, name: "rdsSwitchoverReadReplicaConfig"))
+    ExecutionBlockConfiguration.add_member(:ssm_send_command_config, Types::ExecutionBlockConfiguration::SsmSendCommandConfig, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmSendCommandConfiguration, name: "ssmSendCommandConfig"))
     ExecutionBlockConfiguration.add_member(:unknown, Types::ExecutionBlockConfiguration::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     ExecutionBlockConfiguration.type = Types::ExecutionBlockConfiguration
     ExecutionBlockType.add_member(:custom_action_lambda, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOM_ACTION_LAMBDA", traits: {"smithy.api#enumValue" => "CustomActionLambda"}))
@@ -328,6 +453,15 @@ module Aws::ARCRegionswitch
     ExecutionBlockType.add_member(:ecs, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ECS", traits: {"smithy.api#enumValue" => "ECSServiceScaling"}))
     ExecutionBlockType.add_member(:eks_resource_scaling, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EKS_RESOURCE_SCALING", traits: {"smithy.api#enumValue" => "EKSResourceScaling"}))
     ExecutionBlockType.add_member(:route53_health_check, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ROUTE53_HEALTH_CHECK", traits: {"smithy.api#enumValue" => "Route53HealthCheck"}))
+    ExecutionBlockType.add_member(:documentdb, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DOCUMENTDB", traits: {"smithy.api#enumValue" => "DocumentDb"}))
+    ExecutionBlockType.add_member(:rds_promote_read_replica, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RDS_PROMOTE_READ_REPLICA", traits: {"smithy.api#enumValue" => "RdsPromoteReadReplica"}))
+    ExecutionBlockType.add_member(:rds_create_cross_region_replica, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RDS_CREATE_CROSS_REGION_REPLICA", traits: {"smithy.api#enumValue" => "RdsCreateCrossRegionReplica"}))
+    ExecutionBlockType.add_member(:lambda_event_source_mapping, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LAMBDA_EVENT_SOURCE_MAPPING", traits: {"smithy.api#enumValue" => "LambdaEventSourceMapping"}))
+    ExecutionBlockType.add_member(:aurora_serverless_scaling, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AURORA_SERVERLESS_SCALING", traits: {"smithy.api#enumValue" => "AuroraServerlessScaling"}))
+    ExecutionBlockType.add_member(:aurora_provisioned_scaling, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AURORA_PROVISIONED_SCALING", traits: {"smithy.api#enumValue" => "AuroraProvisionedScaling"}))
+    ExecutionBlockType.add_member(:neptune, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NEPTUNE", traits: {"smithy.api#enumValue" => "NeptuneGlobalDatabase"}))
+    ExecutionBlockType.add_member(:rds_switchover_read_replica, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RDS_SWITCHOVER_READ_REPLICA", traits: {"smithy.api#enumValue" => "RdsSwitchoverReadReplica"}))
+    ExecutionBlockType.add_member(:ssm_send_command, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SSM_SEND_COMMAND", traits: {"smithy.api#enumValue" => "SSMSendCommand"}))
     ExecutionEvent.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "timestamp"))
     ExecutionEvent.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionEventType, name: "type"))
     ExecutionEvent.add_member(:step_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StepName, name: "stepName"))
@@ -364,6 +498,7 @@ module Aws::ARCRegionswitch
     ExecutionEventType.add_member(:step_pending_approval, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STEP_PENDING_APPROVAL", traits: {"smithy.api#enumValue" => "stepPendingApproval"}))
     ExecutionEventType.add_member(:step_execution_behavior_changed_to_ungraceful, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STEP_EXECUTION_BEHAVIOR_CHANGED_TO_UNGRACEFUL", traits: {"smithy.api#enumValue" => "stepExecutionBehaviorChangedToUngraceful"}))
     ExecutionEventType.add_member(:step_pending_application_health_monitor, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STEP_PENDING_APPLICATION_HEALTH_MONITOR", traits: {"smithy.api#enumValue" => "stepPendingApplicationHealthMonitor"}))
+    ExecutionEventType.add_member(:plan_evaluation_warning, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PLAN_EVALUATION_WARNING", traits: {"smithy.api#enumValue" => "planEvaluationWarning"}))
     ExecutionMode.add_member(:graceful, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GRACEFUL", traits: {"smithy.api#enumValue" => "graceful"}))
     ExecutionMode.add_member(:ungraceful, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNGRACEFUL", traits: {"smithy.api#enumValue" => "ungraceful"}))
     ExecutionState.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "inProgress"}))
@@ -377,6 +512,16 @@ module Aws::ARCRegionswitch
     ExecutionState.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "failed"}))
     ExecutionState.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "pending"}))
     ExecutionState.add_member(:completed_monitoring_application_health, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED_MONITORING_APPLICATION_HEALTH", traits: {"smithy.api#enumValue" => "completedMonitoringApplicationHealth"}))
+    FailedReportErrorCode.add_member(:insufficient_permissions, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INSUFFICIENT_PERMISSIONS", traits: {"smithy.api#enumValue" => "insufficientPermissions"}))
+    FailedReportErrorCode.add_member(:invalid_resource, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INVALID_RESOURCE", traits: {"smithy.api#enumValue" => "invalidResource"}))
+    FailedReportErrorCode.add_member(:configuration_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONFIGURATION_ERROR", traits: {"smithy.api#enumValue" => "configurationError"}))
+    FailedReportOutput.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: FailedReportErrorCode, name: "errorCode"))
+    FailedReportOutput.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "errorMessage"))
+    FailedReportOutput.type = Types::FailedReportOutput
+    GeneratedReport.add_member(:report_generation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "reportGenerationTime"))
+    GeneratedReport.add_member(:report_output, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportOutput, name: "reportOutput"))
+    GeneratedReport.type = Types::GeneratedReport
+    GeneratedReportDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GeneratedReport, name: "member"))
     GetPlanEvaluationStatusRequest.add_member(:plan_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PlanArn, name: "planArn", traits: {"smithy.api#required" => {}}))
     GetPlanEvaluationStatusRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "maxResults"))
     GetPlanEvaluationStatusRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
@@ -405,9 +550,11 @@ module Aws::ARCRegionswitch
     GetPlanExecutionResponse.add_member(:execution_state, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionState, name: "executionState", traits: {"smithy.api#required" => {}}))
     GetPlanExecutionResponse.add_member(:execution_action, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionAction, name: "executionAction", traits: {"smithy.api#required" => {}}))
     GetPlanExecutionResponse.add_member(:execution_region, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "executionRegion", traits: {"smithy.api#required" => {}}))
+    GetPlanExecutionResponse.add_member(:recovery_execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "recoveryExecutionId"))
     GetPlanExecutionResponse.add_member(:step_states, ::Smithy::Schema::Shapes::MemberShape.new(target: StepStates, name: "stepStates"))
     GetPlanExecutionResponse.add_member(:plan, ::Smithy::Schema::Shapes::MemberShape.new(target: Plan, name: "plan"))
     GetPlanExecutionResponse.add_member(:actual_recovery_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Duration, name: "actualRecoveryTime"))
+    GetPlanExecutionResponse.add_member(:generated_report_details, ::Smithy::Schema::Shapes::MemberShape.new(target: GeneratedReportDetails, name: "generatedReportDetails"))
     GetPlanExecutionResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "nextToken"))
     GetPlanExecutionResponse.type = Types::GetPlanExecutionResponse
     GetPlanInRegionRequest.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PlanArn, name: "arn", traits: {"smithy.api#required" => {}}))
@@ -447,6 +594,14 @@ module Aws::ARCRegionswitch
     KubernetesScalingResource.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "name", traits: {"smithy.api#required" => {}}))
     KubernetesScalingResource.add_member(:hpa_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "hpaName"))
     KubernetesScalingResource.type = Types::KubernetesScalingResource
+    LambdaEventSourceMappingConfiguration.add_member(:timeout_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "timeoutMinutes", traits: {"smithy.api#default" => 60, "smithy.api#range" => {"min" => 1}}))
+    LambdaEventSourceMappingConfiguration.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: EventSourceMappingAction, name: "action", traits: {"smithy.api#required" => {}}))
+    LambdaEventSourceMappingConfiguration.add_member(:region_event_source_mappings, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionEventSourceMappingMap, name: "regionEventSourceMappings", traits: {"smithy.api#required" => {}}))
+    LambdaEventSourceMappingConfiguration.add_member(:ungraceful, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaEventSourceMappingUngraceful, name: "ungraceful"))
+    LambdaEventSourceMappingConfiguration.type = Types::LambdaEventSourceMappingConfiguration
+    LambdaEventSourceMappingUngraceful.add_member(:behavior, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaEventSourceMappingUngracefulBehavior, name: "behavior", traits: {"smithy.api#default" => "skip"}))
+    LambdaEventSourceMappingUngraceful.type = Types::LambdaEventSourceMappingUngraceful
+    LambdaEventSourceMappingUngracefulBehavior.add_member(:skip, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SKIP", traits: {"smithy.api#enumValue" => "skip"}))
     LambdaList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Lambdas, name: "member"))
     LambdaUngraceful.add_member(:behavior, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaUngracefulBehavior, name: "behavior", traits: {"smithy.api#default" => "skip"}))
     LambdaUngraceful.type = Types::LambdaUngraceful
@@ -454,6 +609,7 @@ module Aws::ARCRegionswitch
     Lambdas.add_member(:cross_account_role, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, name: "crossAccountRole"))
     Lambdas.add_member(:external_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "externalId"))
     Lambdas.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaArn, name: "arn"))
+    Lambdas.add_member(:payload, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaPayload, name: "payload"))
     Lambdas.type = Types::Lambdas
     ListPlanExecutionEventsRequest.add_member(:plan_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PlanArn, name: "planArn", traits: {"smithy.api#required" => {}}))
     ListPlanExecutionEventsRequest.add_member(:execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionId, name: "executionId", traits: {"smithy.api#required" => {}}))
@@ -484,15 +640,31 @@ module Aws::ARCRegionswitch
     ListPlansResponse.add_member(:plans, ::Smithy::Schema::Shapes::MemberShape.new(target: PlanList, name: "plans"))
     ListPlansResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
     ListPlansResponse.type = Types::ListPlansResponse
+    ListRoute53HealthChecksInRegionRequest.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PlanArn, name: "arn", traits: {"smithy.api#required" => {}}))
+    ListRoute53HealthChecksInRegionRequest.add_member(:hosted_zone_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Route53HostedZoneId, name: "hostedZoneId"))
+    ListRoute53HealthChecksInRegionRequest.add_member(:record_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Route53RecordName, name: "recordName"))
+    ListRoute53HealthChecksInRegionRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "maxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}}))
+    ListRoute53HealthChecksInRegionRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
+    ListRoute53HealthChecksInRegionRequest.type = Types::ListRoute53HealthChecksInRegionRequest
+    ListRoute53HealthChecksInRegionResponse.add_member(:health_checks, ::Smithy::Schema::Shapes::MemberShape.new(target: Route53HealthCheckList, name: "healthChecks"))
+    ListRoute53HealthChecksInRegionResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
+    ListRoute53HealthChecksInRegionResponse.type = Types::ListRoute53HealthChecksInRegionResponse
     ListRoute53HealthChecksRequest.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PlanArn, name: "arn", traits: {"smithy.api#required" => {}}))
     ListRoute53HealthChecksRequest.add_member(:hosted_zone_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Route53HostedZoneId, name: "hostedZoneId"))
     ListRoute53HealthChecksRequest.add_member(:record_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Route53RecordName, name: "recordName"))
-    ListRoute53HealthChecksRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "maxResults", traits: {"smithy.api#range" => {"min" => 10, "max" => 100}}))
+    ListRoute53HealthChecksRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "maxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}}))
     ListRoute53HealthChecksRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
     ListRoute53HealthChecksRequest.type = Types::ListRoute53HealthChecksRequest
     ListRoute53HealthChecksResponse.add_member(:health_checks, ::Smithy::Schema::Shapes::MemberShape.new(target: Route53HealthCheckList, name: "healthChecks"))
     ListRoute53HealthChecksResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
     ListRoute53HealthChecksResponse.type = Types::ListRoute53HealthChecksResponse
+    ListServiceQuotaWarningsRequest.add_member(:plan_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: PlanArnList, name: "planArns"))
+    ListServiceQuotaWarningsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "maxResults"))
+    ListServiceQuotaWarningsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
+    ListServiceQuotaWarningsRequest.type = Types::ListServiceQuotaWarningsRequest
+    ListServiceQuotaWarningsResponse.add_member(:service_quota_warning_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceQuotaWarningSummaryList, name: "serviceQuotaWarningSummaries", traits: {"smithy.api#required" => {}}))
+    ListServiceQuotaWarningsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
+    ListServiceQuotaWarningsResponse.type = Types::ListServiceQuotaWarningsResponse
     ListTagsForResourceRequest.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PlanArn, name: "arn", traits: {"smithy.api#required" => {}}))
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
     ListTagsForResourceResponse.add_member(:resource_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "resourceTags"))
@@ -500,6 +672,19 @@ module Aws::ARCRegionswitch
     MinimalWorkflow.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionAction, name: "action"))
     MinimalWorkflow.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "name"))
     MinimalWorkflow.type = Types::MinimalWorkflow
+    NeptuneDefaultBehavior.add_member(:switchover_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SWITCHOVER_ONLY", traits: {"smithy.api#enumValue" => "switchoverOnly"}))
+    NeptuneDefaultBehavior.add_member(:failover, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILOVER", traits: {"smithy.api#enumValue" => "failover"}))
+    NeptuneGlobalDatabaseConfiguration.add_member(:timeout_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "timeoutMinutes", traits: {"smithy.api#default" => 60, "smithy.api#range" => {"min" => 1}}))
+    NeptuneGlobalDatabaseConfiguration.add_member(:cross_account_role, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, name: "crossAccountRole"))
+    NeptuneGlobalDatabaseConfiguration.add_member(:external_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "externalId"))
+    NeptuneGlobalDatabaseConfiguration.add_member(:behavior, ::Smithy::Schema::Shapes::MemberShape.new(target: NeptuneDefaultBehavior, name: "behavior", traits: {"smithy.api#default" => "switchoverOnly", "smithy.api#required" => {}}))
+    NeptuneGlobalDatabaseConfiguration.add_member(:ungraceful, ::Smithy::Schema::Shapes::MemberShape.new(target: NeptuneUngraceful, name: "ungraceful"))
+    NeptuneGlobalDatabaseConfiguration.add_member(:global_cluster_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: NeptuneGlobalClusterIdentifier, name: "globalClusterIdentifier", traits: {"smithy.api#required" => {}}))
+    NeptuneGlobalDatabaseConfiguration.add_member(:region_database_cluster_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionNeptuneClusterArnMap, name: "regionDatabaseClusterArns", traits: {"smithy.api#required" => {}}))
+    NeptuneGlobalDatabaseConfiguration.type = Types::NeptuneGlobalDatabaseConfiguration
+    NeptuneUngraceful.add_member(:ungraceful, ::Smithy::Schema::Shapes::MemberShape.new(target: NeptuneUngracefulBehavior, name: "ungraceful"))
+    NeptuneUngraceful.type = Types::NeptuneUngraceful
+    NeptuneUngracefulBehavior.add_member(:failover, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILOVER", traits: {"smithy.api#enumValue" => "failover"}))
     ParallelExecutionBlockConfiguration.add_member(:steps, ::Smithy::Schema::Shapes::MemberShape.new(target: Steps, name: "steps", traits: {"smithy.api#required" => {}}))
     ParallelExecutionBlockConfiguration.type = Types::ParallelExecutionBlockConfiguration
     Plan.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PlanArn, name: "arn", traits: {"smithy.api#required" => {}}))
@@ -509,6 +694,8 @@ module Aws::ARCRegionswitch
     Plan.add_member(:recovery_time_objective_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "recoveryTimeObjectiveMinutes", traits: {"aws.cloudformation#cfnMutability" => "full", "smithy.api#range" => {"min" => 1, "max" => 10080}}))
     Plan.add_member(:associated_alarms, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociatedAlarmMap, name: "associatedAlarms", traits: {"aws.cloudformation#cfnMutability" => "full"}))
     Plan.add_member(:triggers, ::Smithy::Schema::Shapes::MemberShape.new(target: TriggerList, name: "triggers", traits: {"aws.cloudformation#cfnMutability" => "full"}))
+    Plan.add_member(:report_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportConfiguration, name: "reportConfiguration", traits: {"aws.cloudformation#cfnMutability" => "full"}))
+    Plan.add_member(:service_quota_checks_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "serviceQuotaChecksEnabled", traits: {"aws.cloudformation#cfnMutability" => "full"}))
     Plan.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: PlanName, name: "name", traits: {"aws.cloudformation#cfnMutability" => "create-and-read", "smithy.api#required" => {}}))
     Plan.add_member(:regions, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionList, name: "regions", traits: {"aws.cloudformation#cfnMutability" => "create-and-read", "smithy.api#required" => {}}))
     Plan.add_member(:recovery_approach, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryApproach, name: "recoveryApproach", traits: {"aws.cloudformation#cfnMutability" => "create-and-read", "smithy.api#required" => {}}))
@@ -517,21 +704,65 @@ module Aws::ARCRegionswitch
     Plan.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "version", traits: {"aws.cloudformation#cfnMutability" => "read"}))
     Plan.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "updatedAt", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
     Plan.type = Types::Plan
+    PlanArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PlanArn, name: "member"))
     PlanList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AbbreviatedPlan, name: "member"))
     PlanWarnings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceWarning, name: "member"))
+    RdsCreateCrossRegionReplicaConfiguration.add_member(:timeout_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "timeoutMinutes", traits: {"smithy.api#default" => 60, "smithy.api#range" => {"min" => 1}}))
+    RdsCreateCrossRegionReplicaConfiguration.add_member(:cross_account_role, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, name: "crossAccountRole"))
+    RdsCreateCrossRegionReplicaConfiguration.add_member(:external_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "externalId"))
+    RdsCreateCrossRegionReplicaConfiguration.add_member(:db_instance_arn_map, ::Smithy::Schema::Shapes::MemberShape.new(target: RdsDbInstanceArnMap, name: "dbInstanceArnMap", traits: {"smithy.api#required" => {}}))
+    RdsCreateCrossRegionReplicaConfiguration.type = Types::RdsCreateCrossRegionReplicaConfiguration
+    RdsDbInstanceArnMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "key"))
+    RdsDbInstanceArnMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: RdsDbInstanceArn, name: "value"))
+    RdsPromoteReadReplicaConfiguration.add_member(:timeout_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "timeoutMinutes", traits: {"smithy.api#default" => 60, "smithy.api#range" => {"min" => 1}}))
+    RdsPromoteReadReplicaConfiguration.add_member(:cross_account_role, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, name: "crossAccountRole"))
+    RdsPromoteReadReplicaConfiguration.add_member(:external_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "externalId"))
+    RdsPromoteReadReplicaConfiguration.add_member(:db_instance_arn_map, ::Smithy::Schema::Shapes::MemberShape.new(target: RdsDbInstanceArnMap, name: "dbInstanceArnMap", traits: {"smithy.api#required" => {}}))
+    RdsPromoteReadReplicaConfiguration.type = Types::RdsPromoteReadReplicaConfiguration
+    RdsSwitchoverReadReplicaConfiguration.add_member(:timeout_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "timeoutMinutes", traits: {"smithy.api#default" => 60, "smithy.api#range" => {"min" => 1}}))
+    RdsSwitchoverReadReplicaConfiguration.add_member(:cross_account_role, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, name: "crossAccountRole"))
+    RdsSwitchoverReadReplicaConfiguration.add_member(:external_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "externalId"))
+    RdsSwitchoverReadReplicaConfiguration.add_member(:db_instance_arn_map, ::Smithy::Schema::Shapes::MemberShape.new(target: RdsDbInstanceArnMap, name: "dbInstanceArnMap", traits: {"smithy.api#required" => {}}))
+    RdsSwitchoverReadReplicaConfiguration.add_member(:ungraceful, ::Smithy::Schema::Shapes::MemberShape.new(target: RdsUngraceful, name: "ungraceful"))
+    RdsSwitchoverReadReplicaConfiguration.type = Types::RdsSwitchoverReadReplicaConfiguration
+    RdsUngraceful.add_member(:ungraceful, ::Smithy::Schema::Shapes::MemberShape.new(target: RdsUngracefulBehavior, name: "ungraceful"))
+    RdsUngraceful.type = Types::RdsUngraceful
+    RdsUngracefulBehavior.add_member(:promote_read_replica, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PROMOTE_READ_REPLICA", traits: {"smithy.api#enumValue" => "promoteReadReplica"}))
     RecoveryApproach.add_member(:active_active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE_ACTIVE", traits: {"smithy.api#enumValue" => "activeActive"}))
     RecoveryApproach.add_member(:active_passive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE_PASSIVE", traits: {"smithy.api#enumValue" => "activePassive"}))
     RegionAndRoutingControls.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
     RegionAndRoutingControls.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ArcRoutingControlStates, name: "value"))
+    RegionAuroraClusterMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "key"))
+    RegionAuroraClusterMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AuroraClusterArn, name: "value"))
+    RegionAuroraInstanceArnMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "key"))
+    RegionAuroraInstanceArnMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AuroraInstanceArn, name: "value"))
+    RegionEventSourceMappingMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "key"))
+    RegionEventSourceMappingMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: EventSourceMapping, name: "value"))
     RegionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "member"))
+    RegionNeptuneClusterArnMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "key"))
+    RegionNeptuneClusterArnMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: NeptuneClusterArn, name: "value"))
+    RegionSsmDocumentMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "key"))
+    RegionSsmDocumentMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmDocumentConfig, name: "value"))
     RegionSwitchPlanConfiguration.add_member(:cross_account_role, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, name: "crossAccountRole"))
     RegionSwitchPlanConfiguration.add_member(:external_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "externalId"))
     RegionSwitchPlanConfiguration.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PlanArn, name: "arn", traits: {"smithy.api#required" => {}}))
     RegionSwitchPlanConfiguration.type = Types::RegionSwitchPlanConfiguration
     RegionToRunIn.add_member(:activating_region, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVATING_REGION", traits: {"smithy.api#enumValue" => "activatingRegion"}))
     RegionToRunIn.add_member(:deactivating_region, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEACTIVATING_REGION", traits: {"smithy.api#enumValue" => "deactivatingRegion"}))
+    RegionToRunIn.add_member(:active_region, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE_REGION", traits: {"smithy.api#enumValue" => "activeRegion"}))
+    RegionToRunIn.add_member(:inactive_region, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INACTIVE_REGION", traits: {"smithy.api#enumValue" => "inactiveRegion"}))
     RegionalScalingResource.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "key"))
     RegionalScalingResource.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: KubernetesScalingResource, name: "value"))
+    ReportConfiguration.add_member(:report_output, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportOutputList, name: "reportOutput"))
+    ReportConfiguration.type = Types::ReportConfiguration
+    ReportOutput.add_member(:s3_report_output, Types::ReportOutput::S3ReportOutput, ::Smithy::Schema::Shapes::MemberShape.new(target: S3ReportOutput, name: "s3ReportOutput"))
+    ReportOutput.add_member(:failed_report_output, Types::ReportOutput::FailedReportOutput, ::Smithy::Schema::Shapes::MemberShape.new(target: FailedReportOutput, name: "failedReportOutput"))
+    ReportOutput.add_member(:unknown, Types::ReportOutput::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    ReportOutput.type = Types::ReportOutput
+    ReportOutputConfiguration.add_member(:s3_configuration, Types::ReportOutputConfiguration::S3Configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: S3ReportOutputConfiguration, name: "s3Configuration"))
+    ReportOutputConfiguration.add_member(:unknown, Types::ReportOutputConfiguration::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    ReportOutputConfiguration.type = Types::ReportOutputConfiguration
+    ReportOutputList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportOutputConfiguration, name: "member"))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
     ResourceWarning.add_member(:workflow, ::Smithy::Schema::Shapes::MemberShape.new(target: MinimalWorkflow, name: "workflow"))
@@ -548,6 +779,7 @@ module Aws::ARCRegionswitch
     Route53HealthCheck.add_member(:hosted_zone_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Route53HostedZoneId, name: "hostedZoneId", traits: {"smithy.api#required" => {}}))
     Route53HealthCheck.add_member(:record_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Route53RecordName, name: "recordName", traits: {"smithy.api#required" => {}}))
     Route53HealthCheck.add_member(:health_check_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Route53HealthCheckId, name: "healthCheckId"))
+    Route53HealthCheck.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: Route53HealthCheckStatus, name: "status"))
     Route53HealthCheck.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "region", traits: {"smithy.api#required" => {}}))
     Route53HealthCheck.type = Types::Route53HealthCheck
     Route53HealthCheckConfiguration.add_member(:timeout_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "timeoutMinutes", traits: {"smithy.api#default" => 60, "smithy.api#range" => {"min" => 1}}))
@@ -558,24 +790,76 @@ module Aws::ARCRegionswitch
     Route53HealthCheckConfiguration.add_member(:record_sets, ::Smithy::Schema::Shapes::MemberShape.new(target: Route53ResourceRecordSetList, name: "recordSets"))
     Route53HealthCheckConfiguration.type = Types::Route53HealthCheckConfiguration
     Route53HealthCheckList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Route53HealthCheck, name: "member"))
+    Route53HealthCheckStatus.add_member(:healthy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HEALTHY", traits: {"smithy.api#enumValue" => "healthy"}))
+    Route53HealthCheckStatus.add_member(:unhealthy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNHEALTHY", traits: {"smithy.api#enumValue" => "unhealthy"}))
+    Route53HealthCheckStatus.add_member(:unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNKNOWN", traits: {"smithy.api#enumValue" => "unknown"}))
     Route53ResourceRecordSet.add_member(:record_set_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Route53ResourceRecordSetIdentifier, name: "recordSetIdentifier"))
     Route53ResourceRecordSet.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "region"))
     Route53ResourceRecordSet.type = Types::Route53ResourceRecordSet
     Route53ResourceRecordSetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Route53ResourceRecordSet, name: "member"))
     RoutingControlStateChange.add_member(:on, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ON", traits: {"smithy.api#enumValue" => "On"}))
     RoutingControlStateChange.add_member(:off, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OFF", traits: {"smithy.api#enumValue" => "Off"}))
+    S3ReportOutput.add_member(:s3_object_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "s3ObjectKey"))
+    S3ReportOutput.type = Types::S3ReportOutput
+    S3ReportOutputConfiguration.add_member(:bucket_path, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "bucketPath", traits: {"smithy.api#length" => {"min" => 3, "max" => 512}, "smithy.api#pattern" => "^(?:s3://)?[a-z0-9][a-z0-9-]{1,61}[a-z0-9](?:/[^/ ][^/]*)*/?$"}))
+    S3ReportOutputConfiguration.add_member(:bucket_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "bucketOwner"))
+    S3ReportOutputConfiguration.type = Types::S3ReportOutputConfiguration
     Service.add_member(:cross_account_role, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, name: "crossAccountRole"))
     Service.add_member(:external_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "externalId"))
     Service.add_member(:cluster_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EcsClusterArn, name: "clusterArn"))
     Service.add_member(:service_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EcsServiceArn, name: "serviceArn"))
     Service.type = Types::Service
     ServiceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Service, name: "member"))
+    ServiceQuotaWarningStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "pending"}))
+    ServiceQuotaWarningStatus.add_member(:denied, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DENIED", traits: {"smithy.api#enumValue" => "denied"}))
+    ServiceQuotaWarningStatus.add_member(:insufficient_permissions, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INSUFFICIENT_PERMISSIONS", traits: {"smithy.api#enumValue" => "insufficientPermissions"}))
+    ServiceQuotaWarningStatus.add_member(:max_region_switch_requests_exceeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MAX_REGION_SWITCH_REQUESTS_EXCEEDED", traits: {"smithy.api#enumValue" => "maxRegionSwitchRequestsExceeded"}))
+    ServiceQuotaWarningStatus.add_member(:max_account_requests_exceeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MAX_ACCOUNT_REQUESTS_EXCEEDED", traits: {"smithy.api#enumValue" => "maxAccountRequestsExceeded"}))
+    ServiceQuotaWarningSummary.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "accountId", traits: {"smithy.api#required" => {}}))
+    ServiceQuotaWarningSummary.add_member(:quota_region, ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "quotaRegion", traits: {"smithy.api#required" => {}}))
+    ServiceQuotaWarningSummary.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "serviceCode"))
+    ServiceQuotaWarningSummary.add_member(:quota_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "quotaCode"))
+    ServiceQuotaWarningSummary.add_member(:quota_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "quotaName"))
+    ServiceQuotaWarningSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceQuotaWarningStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    ServiceQuotaWarningSummary.add_member(:plan_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PlanArn, name: "planArn", traits: {"smithy.api#required" => {}}))
+    ServiceQuotaWarningSummary.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "requestId"))
+    ServiceQuotaWarningSummary.add_member(:case_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "caseId"))
+    ServiceQuotaWarningSummary.add_member(:warning_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "warningMessage"))
+    ServiceQuotaWarningSummary.add_member(:last_checked_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "lastCheckedAt"))
+    ServiceQuotaWarningSummary.add_member(:warning_created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "warningCreatedAt"))
+    ServiceQuotaWarningSummary.type = Types::ServiceQuotaWarningSummary
+    ServiceQuotaWarningSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceQuotaWarningSummary, name: "member"))
+    SsmDocumentConfig.add_member(:cross_account_role, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, name: "crossAccountRole"))
+    SsmDocumentConfig.add_member(:external_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "externalId"))
+    SsmDocumentConfig.add_member(:document_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmDocumentArn, name: "documentArn", traits: {"smithy.api#required" => {}}))
+    SsmDocumentConfig.add_member(:targets, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmTargetList, name: "targets", traits: {"smithy.api#required" => {}}))
+    SsmDocumentConfig.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmDocumentParameters, name: "parameters"))
+    SsmDocumentConfig.add_member(:document_version, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmDocumentVersion, name: "documentVersion"))
+    SsmDocumentConfig.type = Types::SsmDocumentConfig
+    SsmDocumentParameters.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmParameterKey, name: "key"))
+    SsmDocumentParameters.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmParameterValues, name: "value"))
+    SsmParameterValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmParameterValue, name: "member"))
+    SsmSendCommandConfiguration.add_member(:timeout_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "timeoutMinutes", traits: {"smithy.api#default" => 60, "smithy.api#range" => {"min" => 1}}))
+    SsmSendCommandConfiguration.add_member(:region_documents, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionSsmDocumentMap, name: "regionDocuments", traits: {"smithy.api#required" => {}}))
+    SsmSendCommandConfiguration.add_member(:retry_interval_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Float, name: "retryIntervalMinutes", traits: {"smithy.api#required" => {}}))
+    SsmSendCommandConfiguration.add_member(:ungraceful, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmSendCommandUngraceful, name: "ungraceful"))
+    SsmSendCommandConfiguration.type = Types::SsmSendCommandConfiguration
+    SsmSendCommandUngraceful.add_member(:behavior, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmSendCommandUngracefulBehavior, name: "behavior"))
+    SsmSendCommandUngraceful.type = Types::SsmSendCommandUngraceful
+    SsmSendCommandUngracefulBehavior.add_member(:skip, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SKIP", traits: {"smithy.api#enumValue" => "skip"}))
+    SsmTarget.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmTargetKey, name: "key", traits: {"smithy.api#required" => {}}))
+    SsmTarget.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmTargetValueList, name: "values", traits: {"smithy.api#required" => {}}))
+    SsmTarget.type = Types::SsmTarget
+    SsmTargetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmTarget, name: "member"))
+    SsmTargetValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmTargetValue, name: "member"))
     StartPlanExecutionRequest.add_member(:plan_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PlanArn, name: "planArn", traits: {"smithy.api#required" => {}}))
     StartPlanExecutionRequest.add_member(:target_region, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "targetRegion", traits: {"smithy.api#required" => {}}))
     StartPlanExecutionRequest.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionAction, name: "action", traits: {"smithy.api#required" => {}}))
     StartPlanExecutionRequest.add_member(:mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionMode, name: "mode", traits: {"smithy.api#default" => "graceful"}))
     StartPlanExecutionRequest.add_member(:comment, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionComment, name: "comment"))
     StartPlanExecutionRequest.add_member(:latest_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "latestVersion"))
+    StartPlanExecutionRequest.add_member(:recovery_execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryExecutionId, name: "recoveryExecutionId"))
+    StartPlanExecutionRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[\\x21-\\x7E]+$"}))
     StartPlanExecutionRequest.type = Types::StartPlanExecutionRequest
     StartPlanExecutionResponse.add_member(:execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionId, name: "executionId"))
     StartPlanExecutionResponse.add_member(:plan, ::Smithy::Schema::Shapes::MemberShape.new(target: PlanArn, name: "plan"))
@@ -651,9 +935,13 @@ module Aws::ARCRegionswitch
     UpdatePlanRequest.add_member(:recovery_time_objective_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "recoveryTimeObjectiveMinutes", traits: {"aws.cloudformation#cfnMutability" => "full", "smithy.api#range" => {"min" => 1, "max" => 10080}}))
     UpdatePlanRequest.add_member(:associated_alarms, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociatedAlarmMap, name: "associatedAlarms", traits: {"aws.cloudformation#cfnMutability" => "full"}))
     UpdatePlanRequest.add_member(:triggers, ::Smithy::Schema::Shapes::MemberShape.new(target: TriggerList, name: "triggers", traits: {"aws.cloudformation#cfnMutability" => "full"}))
+    UpdatePlanRequest.add_member(:report_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportConfiguration, name: "reportConfiguration", traits: {"aws.cloudformation#cfnMutability" => "full"}))
+    UpdatePlanRequest.add_member(:service_quota_checks_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "serviceQuotaChecksEnabled", traits: {"aws.cloudformation#cfnMutability" => "full"}))
     UpdatePlanRequest.type = Types::UpdatePlanRequest
     UpdatePlanResponse.add_member(:plan, ::Smithy::Schema::Shapes::MemberShape.new(target: Plan, name: "plan"))
     UpdatePlanResponse.type = Types::UpdatePlanResponse
+    WaitELBTargetGroupHealthy.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "enabled"}))
+    WaitELBTargetGroupHealthy.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "disabled"}))
     Workflow.add_member(:steps, ::Smithy::Schema::Shapes::MemberShape.new(target: Steps, name: "steps"))
     Workflow.add_member(:workflow_target_action, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowTargetAction, name: "workflowTargetAction", traits: {"smithy.api#required" => {}}))
     Workflow.add_member(:workflow_target_region, ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "workflowTargetRegion"))
@@ -662,12 +950,13 @@ module Aws::ARCRegionswitch
     WorkflowList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Workflow, name: "member"))
     WorkflowTargetAction.add_member(:activate, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVATE", traits: {"smithy.api#enumValue" => "activate"}))
     WorkflowTargetAction.add_member(:deactivate, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEACTIVATE", traits: {"smithy.api#enumValue" => "deactivate"}))
+    WorkflowTargetAction.add_member(:post_recovery, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POST_RECOVERY", traits: {"smithy.api#enumValue" => "postRecovery"}))
 
     ArcRegionSwitch = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.arcregionswitch#ArcRegionSwitch"
       service.name = "ArcRegionSwitch"
       service.version = "2022-07-26"
-      service.traits = {"aws.api#service" => {"sdkId" => "ARC Region switch", "endpointPrefix" => "arc-region-switch", "arnNamespace" => "arc-region-switch", "cloudFormationName" => "ARCRegionSwitch"}, "aws.auth#sigv4" => {"name" => "arc-region-switch"}, "aws.endpoints#dualStackOnlyEndpoints" => {}, "aws.endpoints#rulesBasedEndpoints" => {}, "aws.endpoints#standardRegionalEndpoints" => {}, "aws.iam#defineConditionKeys" => {"aws:ResourceTag/${TagKey}" => {"type" => "String", "documentation" => "Filters access by a tag's key and value in a request", "externalDocumentation" => "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-resourcetag"}, "aws:RequestTag/${TagKey}" => {"type" => "String", "documentation" => "Filters access by tag key-value pairs attached to the resource", "externalDocumentation" => "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-requesttag"}, "aws:TagKeys" => {"type" => "ArrayOfString", "documentation" => "Filters access by the presence of tag keys in the request", "externalDocumentation" => "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-tagkeys"}}, "aws.iam#supportedPrincipalTypes" => ["Root", "IAMUser", "IAMRole", "FederatedUser"], "aws.protocols#awsJson1_0" => {}, "smithy.api#title" => "ARC - Region switch", "smithy.protocols#rpcv2Cbor" => {}}
+      service.traits = {"aws.api#service" => {"sdkId" => "ARC Region switch", "endpointPrefix" => "arc-region-switch", "arnNamespace" => "arc-region-switch", "cloudFormationName" => "ARCRegionSwitch"}, "aws.auth#sigv4" => {"name" => "arc-region-switch"}, "aws.endpoints#dualStackOnlyEndpoints" => {}, "aws.endpoints#rulesBasedEndpoints" => {}, "aws.endpoints#standardRegionalEndpoints" => {}, "aws.iam#defineConditionKeys" => {"aws:ResourceTag/${TagKey}" => {"type" => "String", "documentation" => "Filters access by a tag's key and value in a request", "externalDocumentation" => "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-resourcetag"}, "aws:RequestTag/${TagKey}" => {"type" => "String", "documentation" => "Filters access by tag key-value pairs attached to the resource", "externalDocumentation" => "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-requesttag"}, "aws:TagKeys" => {"type" => "ArrayOfString", "documentation" => "Filters access by the presence of tag keys in the request", "externalDocumentation" => "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-tagkeys"}}, "aws.iam#supportedPrincipalTypes" => ["Root", "IAMUser", "IAMRole", "FederatedUser"], "aws.protocols#awsJson1_0" => {}, "smithy.api#title" => "ARC - Region switch", "smithy.protocols#rpcv2Cbor" => {}, "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}, "Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseControlPlaneEndpoint" => {"required" => false, "documentation" => "Whether the operation is a control plane operation. Control plane operations are routed to a centralized endpoint in the partition leader.", "type" => "boolean"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "coalesce", "argv" => [{"ref" => "UseControlPlaneEndpoint"}, false]}, true]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws-cn"]}], "results" => [{"conditions" => [], "endpoint" => {"url" => "https://arc-region-switch-control-plane.cn-north-1.{PartitionResult#dualStackDnsSuffix}", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "arc-region-switch", "signingRegion" => "cn-north-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: FIPS is not supported in this partition", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://arc-region-switch-control-plane-fips.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dualStackDnsSuffix}", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "arc-region-switch", "signingRegion" => "{PartitionResult#implicitGlobalRegion}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://arc-region-switch-control-plane.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dualStackDnsSuffix}", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "arc-region-switch", "signingRegion" => "{PartitionResult#implicitGlobalRegion}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://arc-region-switch-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://arc-region-switch.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 10, "nodes" => "/////wAAAAH/////AAAAAAAAAAoAAAADAAAAAQAAAAQF9eEJAAAAAgAAAAUF9eEJAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEIAAAABQX14QEF9eEEAAAABAAAAAkF9eEHAAAABQX14QIF9eEDAAAAAwX14QUF9eEG"}}
       service.add_operation(:approve_plan_execution_step, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.arcregionswitch#ApprovePlanExecutionStep"
         operation.name = "ApprovePlanExecutionStep"
@@ -782,10 +1071,33 @@ module Aws::ARCRegionswitch
         operation.input = ListRoute53HealthChecksRequest
         operation.output = ListRoute53HealthChecksResponse
         operation.errors << AccessDeniedException
+        operation.errors << IllegalArgumentException
         operation.errors << InternalServerException
         operation.errors << ResourceNotFoundException
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Lists Route 53 health checks created by ARC region switch for a given plan"}, "smithy.api#readonly" => {}, "smithy.rules#staticContextParams" => {"UseControlPlaneEndpoint" => {"value" => true}}}
         operation[:paginator] = Paginators::ListRoute53HealthChecks.new
+      end)
+      service.add_operation(:list_route53_health_checks_in_region, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.arcregionswitch#ListRoute53HealthChecksInRegion"
+        operation.name = "ListRoute53HealthChecksInRegion"
+        operation.input = ListRoute53HealthChecksInRegionRequest
+        operation.output = ListRoute53HealthChecksInRegionResponse
+        operation.errors << AccessDeniedException
+        operation.errors << IllegalArgumentException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to list Route 53 health checks created by ARC region switch for a plan in a specific AWS Region using the Region switch Regional data plane"}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListRoute53HealthChecksInRegion.new
+      end)
+      service.add_operation(:list_service_quota_warnings, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.arcregionswitch#ListServiceQuotaWarnings"
+        operation.name = "ListServiceQuotaWarnings"
+        operation.input = ListServiceQuotaWarningsRequest
+        operation.output = ListServiceQuotaWarningsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to list service quota warnings for a plan in a specific AWS Region using the Region switch Regional data plane"}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListServiceQuotaWarnings.new
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.arcregionswitch#ListTagsForResource"
@@ -802,6 +1114,7 @@ module Aws::ARCRegionswitch
         operation.input = StartPlanExecutionRequest
         operation.output = StartPlanExecutionResponse
         operation.errors << AccessDeniedException
+        operation.errors << ConflictException
         operation.errors << IllegalArgumentException
         operation.errors << IllegalStateException
         operation.errors << ResourceNotFoundException

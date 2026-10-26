@@ -144,18 +144,18 @@ module Aws::MediaLive
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -918,6 +918,12 @@ module Aws::MediaLive
     #   The desired engine version for this channel.
     # @option params [Boolean] :dry_run
     #   Placeholder documentation for __boolean
+    # @option params [Types::LinkedChannelSettings] :linked_channel_settings
+    #   The linked channel settings for the channel.
+    # @option params [Array<String>] :channel_security_groups
+    #   A list of IDs for all the Input Security Groups attached to the channel.
+    # @option params [Types::InferenceSettings] :inference_settings
+    #   Include this setting to include Elemental Inference features in this channel.
     # @example Request syntax with placeholder values
     #   params = {
     #     cdi_input_specification: {
@@ -931,7 +937,9 @@ module Aws::MediaLive
     #           {
     #             channel_id: "__stringMin1",
     #             channel_group: "__stringMin1",
-    #             channel_name: "__stringMin1"
+    #             channel_name: "__stringMin1",
+    #             channel_endpoint_id: "__stringMin1",
+    #             media_package_region_name: "__stringMin1"
     #           }
     #         ],
     #         multiplex_settings: {
@@ -943,26 +951,37 @@ module Aws::MediaLive
     #             password_param: "__string",
     #             stream_name: "__string",
     #             url: "__string",
-    #             username: "__string"
+    #             username: "__string",
+    #             virtual_source_address: "__string"
     #           }
     #         ],
     #         srt_settings: [
     #           {
     #             encryption_passphrase_secret_arn: "__string",
     #             stream_id: "__string",
-    #             url: "__string"
+    #             url: "__string",
+    #             connection_mode: "CALLER" # One of: ["CALLER", "LISTENER"],
+    #             listener_port: 1
     #           }
     #         ],
-    #         logical_interface_names: ["__string"]
+    #         logical_interface_names: ["__string"],
+    #         media_connect_router_settings: [
+    #           {
+    #             encryption_type: "AUTOMATIC" # One of: ["AUTOMATIC", "SECRETS_MANAGER"],
+    #             secret_arn: "__string"
+    #           }
+    #         ]
     #       }
     #     ],
     #     encoder_settings: {
     #       audio_descriptions: [ # required
     #         {
     #           audio_normalization_settings: {
-    #             algorithm: "ITU_1770_1" # One of: ["ITU_1770_1", "ITU_1770_2"],
+    #             algorithm: "ITU_1770_1" # One of: ["ITU_1770_1", "ITU_1770_2", "ITU_1770_3", "ITU_1770_4"],
     #             algorithm_control: "CORRECT_AUDIO" # One of: ["CORRECT_AUDIO"],
-    #             target_lkfs: 1.0
+    #             target_lkfs: 1.0,
+    #             peak_calculation: "NONE" # One of: ["NONE", "TRUE_PEAK"],
+    #             peak_limiter_threshold: 1.0
     #           },
     #           audio_selector_name: "__string", # required
     #           audio_type: "CLEAN_EFFECTS" # One of: ["CLEAN_EFFECTS", "HEARING_IMPAIRED", "UNDEFINED", "VISUAL_IMPAIRED_COMMENTARY"],
@@ -976,6 +995,11 @@ module Aws::MediaLive
     #               },
     #               nielsen_distribution_type: "FINAL_DISTRIBUTOR" # One of: ["FINAL_DISTRIBUTOR", "PROGRAM_CONTENT"],
     #               nielsen_naes_ii_nw_settings: {
+    #                 check_digit_string: "__stringMin2Max2", # required
+    #                 sid: 1.0, # required
+    #                 timezone: "AMERICA_PUERTO_RICO" # One of: ["AMERICA_PUERTO_RICO", "US_ALASKA", "US_ARIZONA", "US_CENTRAL", "US_EASTERN", "US_HAWAII", "US_MOUNTAIN", "US_PACIFIC", "US_SAMOA", "UTC"]
+    #               },
+    #               nielsen_nw_only_settings: {
     #                 check_digit_string: "__stringMin2Max2", # required
     #                 sid: 1.0, # required
     #                 timezone: "AMERICA_PUERTO_RICO" # One of: ["AMERICA_PUERTO_RICO", "US_ALASKA", "US_ARIZONA", "US_CENTRAL", "US_EASTERN", "US_HAWAII", "US_MOUNTAIN", "US_PACIFIC", "US_SAMOA", "UTC"]
@@ -1181,6 +1205,10 @@ module Aws::MediaLive
     #               default_line_height: 1
     #             },
     #             embedded_destination_settings: {
+    #               position: {
+    #                 y_position_line: 1
+    #               },
+    #               style_control: "MANUAL" # One of: ["MANUAL", "PASSTHROUGH"]
     #             },
     #             embedded_plus_scte20_destination_settings: {
     #             },
@@ -1195,10 +1223,16 @@ module Aws::MediaLive
     #             teletext_destination_settings: {
     #             },
     #             ttml_destination_settings: {
-    #               style_control: "PASSTHROUGH" # One of: ["PASSTHROUGH", "USE_CONFIGURED"]
+    #               style_control: "PASSTHROUGH" # One of: ["PASSTHROUGH", "USE_CONFIGURED", "MANUAL"],
+    #               position: {
+    #                 y_position_percentage: 1
+    #               }
     #             },
     #             webvtt_destination_settings: {
-    #               style_control: "NO_STYLE_DATA" # One of: ["NO_STYLE_DATA", "PASSTHROUGH"]
+    #               style_control: "NO_STYLE_DATA" # One of: ["NO_STYLE_DATA", "PASSTHROUGH", "MANUAL"],
+    #               position: {
+    #                 y_position_percentage: 1
+    #               }
     #             }
     #           },
     #           language_code: "__string",
@@ -1235,6 +1269,11 @@ module Aws::MediaLive
     #             jam_sync_time: "__string"
     #           },
     #           pipeline_locking_settings: {
+    #             pipeline_locking_method: "SOURCE_TIMECODE" # One of: ["SOURCE_TIMECODE", "VIDEO_ALIGNMENT"],
+    #             custom_epoch: "__string"
+    #           },
+    #           disabled_locking_settings: {
+    #             custom_epoch: "__string"
     #           }
     #         }
     #       },
@@ -1384,12 +1423,41 @@ module Aws::MediaLive
     #                 id3_behavior: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                 klv_behavior: "NO_PASSTHROUGH" # One of: ["NO_PASSTHROUGH", "PASSTHROUGH"],
     #                 nielsen_id3_behavior: "NO_PASSTHROUGH" # One of: ["NO_PASSTHROUGH", "PASSTHROUGH"],
-    #                 scte35_type: "NONE" # One of: ["NONE", "SCTE_35_WITHOUT_SEGMENTATION"],
+    #                 scte35_type: "NONE" # One of: ["NONE", "SCTE_35_WITHOUT_SEGMENTATION", "SCTE_35_WITHOUT_IDR"],
     #                 segment_length: 1,
     #                 segment_length_units: "MILLISECONDS" # One of: ["MILLISECONDS", "SECONDS"],
     #                 timed_metadata_id3_frame: "NONE" # One of: ["NONE", "PRIV", "TDRL"],
     #                 timed_metadata_id3_period: 1,
-    #                 timed_metadata_passthrough: "DISABLED" # One of: ["DISABLED", "ENABLED"]
+    #                 timed_metadata_passthrough: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                 additional_destinations: [
+    #                   {
+    #                     destination: { # required
+    #                       destination_ref_id: "__string"
+    #                     }
+    #                   }
+    #                 ],
+    #                 watermarking_settings: {
+    #                   media_package_v2_ab_watermarker_irdeto_settings: {
+    #                     additional_destinations_alternate_destinations: [
+    #                       {
+    #                         destination_ref_id: "__string"
+    #                       }
+    #                     ],
+    #                     alternate_destination: { # required
+    #                       destination_ref_id: "__string"
+    #                     },
+    #                     custom_profile: {
+    #                       embedding_frequency: 1.0, # required
+    #                       scene_cut: 1.0, # required
+    #                       target_psnr: 1.0, # required
+    #                     },
+    #                     license: "__string",
+    #                     operator_id: 1, # required
+    #                     poly_period: 1,
+    #                     profile: "CAMCORDING" # One of: ["CAMCORDING", "CUSTOM", "DEFAULT", "HQ", "MEZZANINE", "ROBUST"], # required
+    #                     watermark_id_length: "ID_2048" # One of: ["ID_2048", "ID_512"]
+    #                   }
+    #                 }
     #               }
     #             },
     #             ms_smooth_group_settings: {
@@ -1437,7 +1505,7 @@ module Aws::MediaLive
     #                 destination_ref_id: "__string"
     #               },
     #               nielsen_id3_behavior: "NO_PASSTHROUGH" # One of: ["NO_PASSTHROUGH", "PASSTHROUGH"],
-    #               scte35_type: "NONE" # One of: ["NONE", "SCTE_35_WITHOUT_SEGMENTATION"],
+    #               scte35_type: "NONE" # One of: ["NONE", "SCTE_35_WITHOUT_SEGMENTATION", "SCTE_35_WITHOUT_IDR"],
     #               segment_length: 1,
     #               segment_length_units: "MILLISECONDS" # One of: ["MILLISECONDS", "SECONDS"],
     #               send_delay_ms: 1,
@@ -1462,10 +1530,35 @@ module Aws::MediaLive
     #                     destination_ref_id: "__string"
     #                   }
     #                 }
-    #               ]
+    #               ],
+    #               watermarking_settings: {
+    #                 cmaf_ingest_ab_watermarker_irdeto_settings: {
+    #                   additional_destinations_alternate_destinations: [
+    #                     {
+    #                       destination_ref_id: "__string"
+    #                     }
+    #                   ],
+    #                   alternate_destination: { # required
+    #                     destination_ref_id: "__string"
+    #                   },
+    #                   custom_profile: {
+    #                     embedding_frequency: 1.0, # required
+    #                     scene_cut: 1.0, # required
+    #                     target_psnr: 1.0, # required
+    #                   },
+    #                   license: "__string",
+    #                   operator_id: 1, # required
+    #                   poly_period: 1,
+    #                   profile: "CAMCORDING" # One of: ["CAMCORDING", "CUSTOM", "DEFAULT", "HQ", "MEZZANINE", "ROBUST"], # required
+    #                   watermark_id_length: "ID_2048" # One of: ["ID_2048", "ID_512"]
+    #                 }
+    #               }
     #             },
     #             srt_group_settings: {
     #               input_loss_action: "DROP_PROGRAM" # One of: ["DROP_PROGRAM", "DROP_TS", "EMIT_PROGRAM"]
+    #             },
+    #             media_connect_router_group_settings: {
+    #               availability_zones: ["__string"]
     #             }
     #           },
     #           outputs: [ # required
@@ -1526,7 +1619,7 @@ module Aws::MediaLive
     #                       program_num: 1,
     #                       rate_mode: "CBR" # One of: ["CBR", "VBR"],
     #                       scte27_pids: "__string",
-    #                       scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH"],
+    #                       scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH", "SCTE_35_WITHOUT_IDR"],
     #                       scte35_pid: "__string",
     #                       segmentation_markers: "EBP" # One of: ["EBP", "EBP_LEGACY", "NONE", "PSI_SEGSTART", "RAI_ADAPT", "RAI_SEGSTART"],
     #                       segmentation_style: "MAINTAIN_CADENCE" # One of: ["MAINTAIN_CADENCE", "RESET_CADENCE"],
@@ -1599,7 +1692,8 @@ module Aws::MediaLive
     #                     audio_group_id: "__string",
     #                     audio_rendition_sets: "__string",
     #                     hls_auto_select: "NO" # One of: ["NO", "OMIT", "YES"],
-    #                     hls_default: "NO" # One of: ["NO", "OMIT", "YES"]
+    #                     hls_default: "NO" # One of: ["NO", "OMIT", "YES"],
+    #                     output_usage: ["MULTIVIEW_EQUAL_SIZE_VIEW" # One of: ["MULTIVIEW_EQUAL_SIZE_VIEW", "MULTIVIEW_PRIMARY_VIEW", "MULTIVIEW_SECONDARY_VIEW"]]
     #                   }
     #                 },
     #                 ms_smooth_output_settings: {
@@ -1624,7 +1718,7 @@ module Aws::MediaLive
     #                       nielsen_id3_behavior: "NO_PASSTHROUGH" # One of: ["NO_PASSTHROUGH", "PASSTHROUGH"],
     #                       pcr_control: "CONFIGURED_PCR_PERIOD" # One of: ["CONFIGURED_PCR_PERIOD", "PCR_EVERY_PES_PACKET"],
     #                       pcr_period: 1,
-    #                       scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH"],
+    #                       scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH", "SCTE_35_WITHOUT_IDR"],
     #                       scte35_preroll_pullup_milliseconds: 1.0
     #                     }
     #                   }
@@ -1690,7 +1784,7 @@ module Aws::MediaLive
     #                       program_num: 1,
     #                       rate_mode: "CBR" # One of: ["CBR", "VBR"],
     #                       scte27_pids: "__string",
-    #                       scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH"],
+    #                       scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH", "SCTE_35_WITHOUT_IDR"],
     #                       scte35_pid: "__string",
     #                       segmentation_markers: "EBP" # One of: ["EBP", "EBP_LEGACY", "NONE", "PSI_SEGSTART", "RAI_ADAPT", "RAI_SEGSTART"],
     #                       segmentation_style: "MAINTAIN_CADENCE" # One of: ["MAINTAIN_CADENCE", "RESET_CADENCE"],
@@ -1767,7 +1861,7 @@ module Aws::MediaLive
     #                       program_num: 1,
     #                       rate_mode: "CBR" # One of: ["CBR", "VBR"],
     #                       scte27_pids: "__string",
-    #                       scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH"],
+    #                       scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH", "SCTE_35_WITHOUT_IDR"],
     #                       scte35_pid: "__string",
     #                       segmentation_markers: "EBP" # One of: ["EBP", "EBP_LEGACY", "NONE", "PSI_SEGSTART", "RAI_ADAPT", "RAI_SEGSTART"],
     #                       segmentation_style: "MAINTAIN_CADENCE" # One of: ["MAINTAIN_CADENCE", "RESET_CADENCE"],
@@ -1784,6 +1878,78 @@ module Aws::MediaLive
     #                   },
     #                   encryption_type: "AES128" # One of: ["AES128", "AES192", "AES256"],
     #                   latency: 1
+    #                 },
+    #                 media_connect_router_output_settings: {
+    #                   connected_router_inputs: {
+    #                     pipeline0: "__string",
+    #                     pipeline1: "__string"
+    #                   },
+    #                   container_settings: { # required
+    #                     m2ts_settings: {
+    #                       absent_input_audio_behavior: "DROP" # One of: ["DROP", "ENCODE_SILENCE"],
+    #                       arib: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                       arib_captions_pid: "__string",
+    #                       arib_captions_pid_control: "AUTO" # One of: ["AUTO", "USE_CONFIGURED"],
+    #                       audio_buffer_model: "ATSC" # One of: ["ATSC", "DVB"],
+    #                       audio_frames_per_pes: 1,
+    #                       audio_pids: "__string",
+    #                       audio_stream_type: "ATSC" # One of: ["ATSC", "DVB"],
+    #                       bitrate: 1,
+    #                       buffer_model: "MULTIPLEX" # One of: ["MULTIPLEX", "NONE"],
+    #                       cc_descriptor: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                       dvb_nit_settings: {
+    #                         network_id: 1, # required
+    #                         network_name: "__stringMin1Max256", # required
+    #                         rep_interval: 1
+    #                       },
+    #                       dvb_sdt_settings: {
+    #                         output_sdt: "SDT_FOLLOW" # One of: ["SDT_FOLLOW", "SDT_FOLLOW_IF_PRESENT", "SDT_MANUAL", "SDT_NONE"],
+    #                         rep_interval: 1,
+    #                         service_name: "__stringMin1Max256",
+    #                         service_provider_name: "__stringMin1Max256"
+    #                       },
+    #                       dvb_sub_pids: "__string",
+    #                       dvb_tdt_settings: {
+    #                         rep_interval: 1
+    #                       },
+    #                       dvb_teletext_pid: "__string",
+    #                       ebif: "NONE" # One of: ["NONE", "PASSTHROUGH"],
+    #                       ebp_audio_interval: "VIDEO_AND_FIXED_INTERVALS" # One of: ["VIDEO_AND_FIXED_INTERVALS", "VIDEO_INTERVAL"],
+    #                       ebp_lookahead_ms: 1,
+    #                       ebp_placement: "VIDEO_AND_AUDIO_PIDS" # One of: ["VIDEO_AND_AUDIO_PIDS", "VIDEO_PID"],
+    #                       ecm_pid: "__string",
+    #                       es_rate_in_pes: "EXCLUDE" # One of: ["EXCLUDE", "INCLUDE"],
+    #                       etv_platform_pid: "__string",
+    #                       etv_signal_pid: "__string",
+    #                       fragment_time: 1.0,
+    #                       klv: "NONE" # One of: ["NONE", "PASSTHROUGH"],
+    #                       klv_data_pids: "__string",
+    #                       nielsen_id3_behavior: "NO_PASSTHROUGH" # One of: ["NO_PASSTHROUGH", "PASSTHROUGH"],
+    #                       null_packet_bitrate: 1.0,
+    #                       pat_interval: 1,
+    #                       pcr_control: "CONFIGURED_PCR_PERIOD" # One of: ["CONFIGURED_PCR_PERIOD", "PCR_EVERY_PES_PACKET"],
+    #                       pcr_period: 1,
+    #                       pcr_pid: "__string",
+    #                       pmt_interval: 1,
+    #                       pmt_pid: "__string",
+    #                       program_num: 1,
+    #                       rate_mode: "CBR" # One of: ["CBR", "VBR"],
+    #                       scte27_pids: "__string",
+    #                       scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH", "SCTE_35_WITHOUT_IDR"],
+    #                       scte35_pid: "__string",
+    #                       segmentation_markers: "EBP" # One of: ["EBP", "EBP_LEGACY", "NONE", "PSI_SEGSTART", "RAI_ADAPT", "RAI_SEGSTART"],
+    #                       segmentation_style: "MAINTAIN_CADENCE" # One of: ["MAINTAIN_CADENCE", "RESET_CADENCE"],
+    #                       segmentation_time: 1.0,
+    #                       timed_metadata_behavior: "NO_PASSTHROUGH" # One of: ["NO_PASSTHROUGH", "PASSTHROUGH"],
+    #                       timed_metadata_pid: "__string",
+    #                       transport_stream_id: 1,
+    #                       video_pid: "__string",
+    #                       scte35_preroll_pullup_milliseconds: 1.0
+    #                     }
+    #                   },
+    #                   destination: { # required
+    #                     destination_ref_id: "__string"
+    #                   }
     #                 }
     #               },
     #               video_description_name: "__string"
@@ -1892,6 +2058,8 @@ module Aws::MediaLive
     #                 rec601_settings: {
     #                 },
     #                 rec709_settings: {
+    #                 },
+    #                 hlg2020_settings: {
     #                 }
     #               },
     #               filter_settings: {
@@ -1984,6 +2152,8 @@ module Aws::MediaLive
     #                 rec601_settings: {
     #                 },
     #                 rec709_settings: {
+    #                 },
+    #                 hlg2020_settings: {
     #                 }
     #               },
     #               fixed_afd: "AFD_0000" # One of: ["AFD_0000", "AFD_0010", "AFD_0011", "AFD_0100", "AFD_1000", "AFD_1001", "AFD_1010", "AFD_1011", "AFD_1101", "AFD_1110", "AFD_1111"],
@@ -2006,15 +2176,32 @@ module Aws::MediaLive
     #               },
     #               bitrate: 1,
     #               rate_control_mode: "CBR" # One of: ["CBR", "QVBR"],
-    #               min_bitrate: 1
+    #               min_bitrate: 1,
+    #               spatial_aq: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #               temporal_aq: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #               timecode_insertion: "DISABLED" # One of: ["DISABLED", "METADATA_OBU"],
+    #               bit_depth: "DEPTH_10" # One of: ["DEPTH_10", "DEPTH_8"]
     #             }
     #           },
     #           height: 1,
     #           name: "__string", # required
     #           respond_to_afd: "NONE" # One of: ["NONE", "PASSTHROUGH", "RESPOND"],
-    #           scaling_behavior: "DEFAULT" # One of: ["DEFAULT", "STRETCH_TO_OUTPUT"],
+    #           scaling_behavior: "DEFAULT" # One of: ["DEFAULT", "STRETCH_TO_OUTPUT", "SMART_CROP"],
     #           sharpness: 1,
-    #           width: 1
+    #           width: 1,
+    #           crop_rectangle: {
+    #             height: 1, # required
+    #             width: 1, # required
+    #             x: 1, # required
+    #             y: 1, # required
+    #           },
+    #           output_position_rectangle: {
+    #             height: 1, # required
+    #             width: 1, # required
+    #             x: 1, # required
+    #             y: 1, # required
+    #           },
+    #           border: 1
     #         }
     #       ],
     #       thumbnail_configuration: {
@@ -2071,11 +2258,71 @@ module Aws::MediaLive
     #                 },
     #                 audio_pid_selection: {
     #                   pid: 1, # required
+    #                   pids: [
+    #                     {
+    #                       dolby_e_decode: {
+    #                         program_selection: "ALL_CHANNELS" # One of: ["ALL_CHANNELS", "PROGRAM_1", "PROGRAM_2", "PROGRAM_3", "PROGRAM_4", "PROGRAM_5", "PROGRAM_6", "PROGRAM_7", "PROGRAM_8"], # required
+    #                       },
+    #                       pid: 1, # required
+    #                       premix_settings: {
+    #                         audio_normalization_settings: {
+    #                           algorithm: "ITU_1770_1" # One of: ["ITU_1770_1", "ITU_1770_2", "ITU_1770_3", "ITU_1770_4"],
+    #                           algorithm_control: "CORRECT_AUDIO" # One of: ["CORRECT_AUDIO"],
+    #                           target_lkfs: 1.0,
+    #                           peak_calculation: "NONE" # One of: ["NONE", "TRUE_PEAK"],
+    #                           peak_limiter_threshold: 1.0
+    #                         },
+    #                         channels: 1,
+    #                         gain_db: 1.0,
+    #                         remix_settings: {
+    #                           channel_mappings: [ # required
+    #                             {
+    #                               input_channel_levels: [ # required
+    #                                 {
+    #                                   gain: 1, # required
+    #                                   input_channel: 1, # required
+    #                                 }
+    #                               ],
+    #                               output_channel: 1, # required
+    #                             }
+    #                           ],
+    #                           channels_in: 1,
+    #                           channels_out: 1
+    #                         }
+    #                       }
+    #                     }
+    #                   ]
     #                 },
     #                 audio_track_selection: {
     #                   tracks: [ # required
     #                     {
     #                       track: 1, # required
+    #                       premix_settings: {
+    #                         audio_normalization_settings: {
+    #                           algorithm: "ITU_1770_1" # One of: ["ITU_1770_1", "ITU_1770_2", "ITU_1770_3", "ITU_1770_4"],
+    #                           algorithm_control: "CORRECT_AUDIO" # One of: ["CORRECT_AUDIO"],
+    #                           target_lkfs: 1.0,
+    #                           peak_calculation: "NONE" # One of: ["NONE", "TRUE_PEAK"],
+    #                           peak_limiter_threshold: 1.0
+    #                         },
+    #                         channels: 1,
+    #                         gain_db: 1.0,
+    #                         remix_settings: {
+    #                           channel_mappings: [ # required
+    #                             {
+    #                               input_channel_levels: [ # required
+    #                                 {
+    #                                   gain: 1, # required
+    #                                   input_channel: 1, # required
+    #                                 }
+    #                               ],
+    #                               output_channel: 1, # required
+    #                             }
+    #                           ],
+    #                           channels_in: 1,
+    #                           channels_out: 1
+    #                         }
+    #                       }
     #                     }
     #                   ],
     #                   dolby_e_decode: {
@@ -2121,6 +2368,10 @@ module Aws::MediaLive
     #                     width: 1.0, # required
     #                   },
     #                   page_number: "__string"
+    #                 },
+    #                 smart_subtitle_source_settings: {
+    #                   caption_synchronization_mode: "NO_VIDEO_DELAY" # One of: ["NO_VIDEO_DELAY", "VIDEO_ALIGNED_CAPTIONS"],
+    #                   inference_feed_output: "__string"
     #                 }
     #               }
     #             }
@@ -2196,7 +2447,27 @@ module Aws::MediaLive
     #     channel_engine_version: {
     #       version: "__string"
     #     },
-    #     dry_run: false
+    #     dry_run: false,
+    #     linked_channel_settings: {
+    #       follower_channel_settings: {
+    #         linked_channel_type: "FOLLOWING_CHANNEL" # One of: ["FOLLOWING_CHANNEL", "PRIMARY_CHANNEL"],
+    #         primary_channel_arn: "__string"
+    #       },
+    #       primary_channel_settings: {
+    #         linked_channel_type: "FOLLOWING_CHANNEL" # One of: ["FOLLOWING_CHANNEL", "PRIMARY_CHANNEL"]
+    #       }
+    #     },
+    #     channel_security_groups: ["__string"],
+    #     inference_settings: {
+    #       feed_arn: "__string",
+    #       audio_feed_inputs: [
+    #         {
+    #           audio_selector_name: "__string",
+    #           feed_input: "__string"
+    #         }
+    #       ],
+    #       enrichment_methods: ["SCTE35_ELEMENTAL_INFERENCE_QUERY_PARAMS" # One of: ["SCTE35_ELEMENTAL_INFERENCE_QUERY_PARAMS"]]
+    #     }
     #   }
     #   options = {}
     #   response = client.create_channel(params, options)
@@ -2216,7 +2487,9 @@ module Aws::MediaLive
     #             {
     #               channel_id: "__stringMin1",
     #               channel_group: "__stringMin1",
-    #               channel_name: "__stringMin1"
+    #               channel_name: "__stringMin1",
+    #               channel_endpoint_id: "__stringMin1",
+    #               media_package_region_name: "__stringMin1"
     #             }
     #           ],
     #           multiplex_settings: {
@@ -2228,17 +2501,26 @@ module Aws::MediaLive
     #               password_param: "__string",
     #               stream_name: "__string",
     #               url: "__string",
-    #               username: "__string"
+    #               username: "__string",
+    #               virtual_source_address: "__string"
     #             }
     #           ],
     #           srt_settings: [
     #             {
     #               encryption_passphrase_secret_arn: "__string",
     #               stream_id: "__string",
-    #               url: "__string"
+    #               url: "__string",
+    #               connection_mode: "CALLER" # One of: ["CALLER", "LISTENER"],
+    #               listener_port: 1
     #             }
     #           ],
-    #           logical_interface_names: ["__string"]
+    #           logical_interface_names: ["__string"],
+    #           media_connect_router_settings: [
+    #             {
+    #               encryption_type: "AUTOMATIC" # One of: ["AUTOMATIC", "SECRETS_MANAGER"],
+    #               secret_arn: "__string"
+    #             }
+    #           ]
     #         }
     #       ],
     #       egress_endpoints: [
@@ -2250,9 +2532,11 @@ module Aws::MediaLive
     #         audio_descriptions: [ # required
     #           {
     #             audio_normalization_settings: {
-    #               algorithm: "ITU_1770_1" # One of: ["ITU_1770_1", "ITU_1770_2"],
+    #               algorithm: "ITU_1770_1" # One of: ["ITU_1770_1", "ITU_1770_2", "ITU_1770_3", "ITU_1770_4"],
     #               algorithm_control: "CORRECT_AUDIO" # One of: ["CORRECT_AUDIO"],
-    #               target_lkfs: 1.0
+    #               target_lkfs: 1.0,
+    #               peak_calculation: "NONE" # One of: ["NONE", "TRUE_PEAK"],
+    #               peak_limiter_threshold: 1.0
     #             },
     #             audio_selector_name: "__string", # required
     #             audio_type: "CLEAN_EFFECTS" # One of: ["CLEAN_EFFECTS", "HEARING_IMPAIRED", "UNDEFINED", "VISUAL_IMPAIRED_COMMENTARY"],
@@ -2266,6 +2550,11 @@ module Aws::MediaLive
     #                 },
     #                 nielsen_distribution_type: "FINAL_DISTRIBUTOR" # One of: ["FINAL_DISTRIBUTOR", "PROGRAM_CONTENT"],
     #                 nielsen_naes_ii_nw_settings: {
+    #                   check_digit_string: "__stringMin2Max2", # required
+    #                   sid: 1.0, # required
+    #                   timezone: "AMERICA_PUERTO_RICO" # One of: ["AMERICA_PUERTO_RICO", "US_ALASKA", "US_ARIZONA", "US_CENTRAL", "US_EASTERN", "US_HAWAII", "US_MOUNTAIN", "US_PACIFIC", "US_SAMOA", "UTC"]
+    #                 },
+    #                 nielsen_nw_only_settings: {
     #                   check_digit_string: "__stringMin2Max2", # required
     #                   sid: 1.0, # required
     #                   timezone: "AMERICA_PUERTO_RICO" # One of: ["AMERICA_PUERTO_RICO", "US_ALASKA", "US_ARIZONA", "US_CENTRAL", "US_EASTERN", "US_HAWAII", "US_MOUNTAIN", "US_PACIFIC", "US_SAMOA", "UTC"]
@@ -2471,6 +2760,10 @@ module Aws::MediaLive
     #                 default_line_height: 1
     #               },
     #               embedded_destination_settings: {
+    #                 position: {
+    #                   y_position_line: 1
+    #                 },
+    #                 style_control: "MANUAL" # One of: ["MANUAL", "PASSTHROUGH"]
     #               },
     #               embedded_plus_scte20_destination_settings: {
     #               },
@@ -2485,10 +2778,16 @@ module Aws::MediaLive
     #               teletext_destination_settings: {
     #               },
     #               ttml_destination_settings: {
-    #                 style_control: "PASSTHROUGH" # One of: ["PASSTHROUGH", "USE_CONFIGURED"]
+    #                 style_control: "PASSTHROUGH" # One of: ["PASSTHROUGH", "USE_CONFIGURED", "MANUAL"],
+    #                 position: {
+    #                   y_position_percentage: 1
+    #                 }
     #               },
     #               webvtt_destination_settings: {
-    #                 style_control: "NO_STYLE_DATA" # One of: ["NO_STYLE_DATA", "PASSTHROUGH"]
+    #                 style_control: "NO_STYLE_DATA" # One of: ["NO_STYLE_DATA", "PASSTHROUGH", "MANUAL"],
+    #                 position: {
+    #                   y_position_percentage: 1
+    #                 }
     #               }
     #             },
     #             language_code: "__string",
@@ -2525,6 +2824,11 @@ module Aws::MediaLive
     #               jam_sync_time: "__string"
     #             },
     #             pipeline_locking_settings: {
+    #               pipeline_locking_method: "SOURCE_TIMECODE" # One of: ["SOURCE_TIMECODE", "VIDEO_ALIGNMENT"],
+    #               custom_epoch: "__string"
+    #             },
+    #             disabled_locking_settings: {
+    #               custom_epoch: "__string"
     #             }
     #           }
     #         },
@@ -2674,12 +2978,41 @@ module Aws::MediaLive
     #                   id3_behavior: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                   klv_behavior: "NO_PASSTHROUGH" # One of: ["NO_PASSTHROUGH", "PASSTHROUGH"],
     #                   nielsen_id3_behavior: "NO_PASSTHROUGH" # One of: ["NO_PASSTHROUGH", "PASSTHROUGH"],
-    #                   scte35_type: "NONE" # One of: ["NONE", "SCTE_35_WITHOUT_SEGMENTATION"],
+    #                   scte35_type: "NONE" # One of: ["NONE", "SCTE_35_WITHOUT_SEGMENTATION", "SCTE_35_WITHOUT_IDR"],
     #                   segment_length: 1,
     #                   segment_length_units: "MILLISECONDS" # One of: ["MILLISECONDS", "SECONDS"],
     #                   timed_metadata_id3_frame: "NONE" # One of: ["NONE", "PRIV", "TDRL"],
     #                   timed_metadata_id3_period: 1,
-    #                   timed_metadata_passthrough: "DISABLED" # One of: ["DISABLED", "ENABLED"]
+    #                   timed_metadata_passthrough: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                   additional_destinations: [
+    #                     {
+    #                       destination: { # required
+    #                         destination_ref_id: "__string"
+    #                       }
+    #                     }
+    #                   ],
+    #                   watermarking_settings: {
+    #                     media_package_v2_ab_watermarker_irdeto_settings: {
+    #                       additional_destinations_alternate_destinations: [
+    #                         {
+    #                           destination_ref_id: "__string"
+    #                         }
+    #                       ],
+    #                       alternate_destination: { # required
+    #                         destination_ref_id: "__string"
+    #                       },
+    #                       custom_profile: {
+    #                         embedding_frequency: 1.0, # required
+    #                         scene_cut: 1.0, # required
+    #                         target_psnr: 1.0, # required
+    #                       },
+    #                       license: "__string",
+    #                       operator_id: 1, # required
+    #                       poly_period: 1,
+    #                       profile: "CAMCORDING" # One of: ["CAMCORDING", "CUSTOM", "DEFAULT", "HQ", "MEZZANINE", "ROBUST"], # required
+    #                       watermark_id_length: "ID_2048" # One of: ["ID_2048", "ID_512"]
+    #                     }
+    #                   }
     #                 }
     #               },
     #               ms_smooth_group_settings: {
@@ -2727,7 +3060,7 @@ module Aws::MediaLive
     #                   destination_ref_id: "__string"
     #                 },
     #                 nielsen_id3_behavior: "NO_PASSTHROUGH" # One of: ["NO_PASSTHROUGH", "PASSTHROUGH"],
-    #                 scte35_type: "NONE" # One of: ["NONE", "SCTE_35_WITHOUT_SEGMENTATION"],
+    #                 scte35_type: "NONE" # One of: ["NONE", "SCTE_35_WITHOUT_SEGMENTATION", "SCTE_35_WITHOUT_IDR"],
     #                 segment_length: 1,
     #                 segment_length_units: "MILLISECONDS" # One of: ["MILLISECONDS", "SECONDS"],
     #                 send_delay_ms: 1,
@@ -2752,10 +3085,35 @@ module Aws::MediaLive
     #                       destination_ref_id: "__string"
     #                     }
     #                   }
-    #                 ]
+    #                 ],
+    #                 watermarking_settings: {
+    #                   cmaf_ingest_ab_watermarker_irdeto_settings: {
+    #                     additional_destinations_alternate_destinations: [
+    #                       {
+    #                         destination_ref_id: "__string"
+    #                       }
+    #                     ],
+    #                     alternate_destination: { # required
+    #                       destination_ref_id: "__string"
+    #                     },
+    #                     custom_profile: {
+    #                       embedding_frequency: 1.0, # required
+    #                       scene_cut: 1.0, # required
+    #                       target_psnr: 1.0, # required
+    #                     },
+    #                     license: "__string",
+    #                     operator_id: 1, # required
+    #                     poly_period: 1,
+    #                     profile: "CAMCORDING" # One of: ["CAMCORDING", "CUSTOM", "DEFAULT", "HQ", "MEZZANINE", "ROBUST"], # required
+    #                     watermark_id_length: "ID_2048" # One of: ["ID_2048", "ID_512"]
+    #                   }
+    #                 }
     #               },
     #               srt_group_settings: {
     #                 input_loss_action: "DROP_PROGRAM" # One of: ["DROP_PROGRAM", "DROP_TS", "EMIT_PROGRAM"]
+    #               },
+    #               media_connect_router_group_settings: {
+    #                 availability_zones: ["__string"]
     #               }
     #             },
     #             outputs: [ # required
@@ -2816,7 +3174,7 @@ module Aws::MediaLive
     #                         program_num: 1,
     #                         rate_mode: "CBR" # One of: ["CBR", "VBR"],
     #                         scte27_pids: "__string",
-    #                         scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH"],
+    #                         scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH", "SCTE_35_WITHOUT_IDR"],
     #                         scte35_pid: "__string",
     #                         segmentation_markers: "EBP" # One of: ["EBP", "EBP_LEGACY", "NONE", "PSI_SEGSTART", "RAI_ADAPT", "RAI_SEGSTART"],
     #                         segmentation_style: "MAINTAIN_CADENCE" # One of: ["MAINTAIN_CADENCE", "RESET_CADENCE"],
@@ -2889,7 +3247,8 @@ module Aws::MediaLive
     #                       audio_group_id: "__string",
     #                       audio_rendition_sets: "__string",
     #                       hls_auto_select: "NO" # One of: ["NO", "OMIT", "YES"],
-    #                       hls_default: "NO" # One of: ["NO", "OMIT", "YES"]
+    #                       hls_default: "NO" # One of: ["NO", "OMIT", "YES"],
+    #                       output_usage: ["MULTIVIEW_EQUAL_SIZE_VIEW" # One of: ["MULTIVIEW_EQUAL_SIZE_VIEW", "MULTIVIEW_PRIMARY_VIEW", "MULTIVIEW_SECONDARY_VIEW"]]
     #                     }
     #                   },
     #                   ms_smooth_output_settings: {
@@ -2914,7 +3273,7 @@ module Aws::MediaLive
     #                         nielsen_id3_behavior: "NO_PASSTHROUGH" # One of: ["NO_PASSTHROUGH", "PASSTHROUGH"],
     #                         pcr_control: "CONFIGURED_PCR_PERIOD" # One of: ["CONFIGURED_PCR_PERIOD", "PCR_EVERY_PES_PACKET"],
     #                         pcr_period: 1,
-    #                         scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH"],
+    #                         scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH", "SCTE_35_WITHOUT_IDR"],
     #                         scte35_preroll_pullup_milliseconds: 1.0
     #                       }
     #                     }
@@ -2980,7 +3339,7 @@ module Aws::MediaLive
     #                         program_num: 1,
     #                         rate_mode: "CBR" # One of: ["CBR", "VBR"],
     #                         scte27_pids: "__string",
-    #                         scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH"],
+    #                         scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH", "SCTE_35_WITHOUT_IDR"],
     #                         scte35_pid: "__string",
     #                         segmentation_markers: "EBP" # One of: ["EBP", "EBP_LEGACY", "NONE", "PSI_SEGSTART", "RAI_ADAPT", "RAI_SEGSTART"],
     #                         segmentation_style: "MAINTAIN_CADENCE" # One of: ["MAINTAIN_CADENCE", "RESET_CADENCE"],
@@ -3057,7 +3416,7 @@ module Aws::MediaLive
     #                         program_num: 1,
     #                         rate_mode: "CBR" # One of: ["CBR", "VBR"],
     #                         scte27_pids: "__string",
-    #                         scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH"],
+    #                         scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH", "SCTE_35_WITHOUT_IDR"],
     #                         scte35_pid: "__string",
     #                         segmentation_markers: "EBP" # One of: ["EBP", "EBP_LEGACY", "NONE", "PSI_SEGSTART", "RAI_ADAPT", "RAI_SEGSTART"],
     #                         segmentation_style: "MAINTAIN_CADENCE" # One of: ["MAINTAIN_CADENCE", "RESET_CADENCE"],
@@ -3074,6 +3433,78 @@ module Aws::MediaLive
     #                     },
     #                     encryption_type: "AES128" # One of: ["AES128", "AES192", "AES256"],
     #                     latency: 1
+    #                   },
+    #                   media_connect_router_output_settings: {
+    #                     connected_router_inputs: {
+    #                       pipeline0: "__string",
+    #                       pipeline1: "__string"
+    #                     },
+    #                     container_settings: { # required
+    #                       m2ts_settings: {
+    #                         absent_input_audio_behavior: "DROP" # One of: ["DROP", "ENCODE_SILENCE"],
+    #                         arib: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                         arib_captions_pid: "__string",
+    #                         arib_captions_pid_control: "AUTO" # One of: ["AUTO", "USE_CONFIGURED"],
+    #                         audio_buffer_model: "ATSC" # One of: ["ATSC", "DVB"],
+    #                         audio_frames_per_pes: 1,
+    #                         audio_pids: "__string",
+    #                         audio_stream_type: "ATSC" # One of: ["ATSC", "DVB"],
+    #                         bitrate: 1,
+    #                         buffer_model: "MULTIPLEX" # One of: ["MULTIPLEX", "NONE"],
+    #                         cc_descriptor: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                         dvb_nit_settings: {
+    #                           network_id: 1, # required
+    #                           network_name: "__stringMin1Max256", # required
+    #                           rep_interval: 1
+    #                         },
+    #                         dvb_sdt_settings: {
+    #                           output_sdt: "SDT_FOLLOW" # One of: ["SDT_FOLLOW", "SDT_FOLLOW_IF_PRESENT", "SDT_MANUAL", "SDT_NONE"],
+    #                           rep_interval: 1,
+    #                           service_name: "__stringMin1Max256",
+    #                           service_provider_name: "__stringMin1Max256"
+    #                         },
+    #                         dvb_sub_pids: "__string",
+    #                         dvb_tdt_settings: {
+    #                           rep_interval: 1
+    #                         },
+    #                         dvb_teletext_pid: "__string",
+    #                         ebif: "NONE" # One of: ["NONE", "PASSTHROUGH"],
+    #                         ebp_audio_interval: "VIDEO_AND_FIXED_INTERVALS" # One of: ["VIDEO_AND_FIXED_INTERVALS", "VIDEO_INTERVAL"],
+    #                         ebp_lookahead_ms: 1,
+    #                         ebp_placement: "VIDEO_AND_AUDIO_PIDS" # One of: ["VIDEO_AND_AUDIO_PIDS", "VIDEO_PID"],
+    #                         ecm_pid: "__string",
+    #                         es_rate_in_pes: "EXCLUDE" # One of: ["EXCLUDE", "INCLUDE"],
+    #                         etv_platform_pid: "__string",
+    #                         etv_signal_pid: "__string",
+    #                         fragment_time: 1.0,
+    #                         klv: "NONE" # One of: ["NONE", "PASSTHROUGH"],
+    #                         klv_data_pids: "__string",
+    #                         nielsen_id3_behavior: "NO_PASSTHROUGH" # One of: ["NO_PASSTHROUGH", "PASSTHROUGH"],
+    #                         null_packet_bitrate: 1.0,
+    #                         pat_interval: 1,
+    #                         pcr_control: "CONFIGURED_PCR_PERIOD" # One of: ["CONFIGURED_PCR_PERIOD", "PCR_EVERY_PES_PACKET"],
+    #                         pcr_period: 1,
+    #                         pcr_pid: "__string",
+    #                         pmt_interval: 1,
+    #                         pmt_pid: "__string",
+    #                         program_num: 1,
+    #                         rate_mode: "CBR" # One of: ["CBR", "VBR"],
+    #                         scte27_pids: "__string",
+    #                         scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH", "SCTE_35_WITHOUT_IDR"],
+    #                         scte35_pid: "__string",
+    #                         segmentation_markers: "EBP" # One of: ["EBP", "EBP_LEGACY", "NONE", "PSI_SEGSTART", "RAI_ADAPT", "RAI_SEGSTART"],
+    #                         segmentation_style: "MAINTAIN_CADENCE" # One of: ["MAINTAIN_CADENCE", "RESET_CADENCE"],
+    #                         segmentation_time: 1.0,
+    #                         timed_metadata_behavior: "NO_PASSTHROUGH" # One of: ["NO_PASSTHROUGH", "PASSTHROUGH"],
+    #                         timed_metadata_pid: "__string",
+    #                         transport_stream_id: 1,
+    #                         video_pid: "__string",
+    #                         scte35_preroll_pullup_milliseconds: 1.0
+    #                       }
+    #                     },
+    #                     destination: { # required
+    #                       destination_ref_id: "__string"
+    #                     }
     #                   }
     #                 },
     #                 video_description_name: "__string"
@@ -3182,6 +3613,8 @@ module Aws::MediaLive
     #                   rec601_settings: {
     #                   },
     #                   rec709_settings: {
+    #                   },
+    #                   hlg2020_settings: {
     #                   }
     #                 },
     #                 filter_settings: {
@@ -3274,6 +3707,8 @@ module Aws::MediaLive
     #                   rec601_settings: {
     #                   },
     #                   rec709_settings: {
+    #                   },
+    #                   hlg2020_settings: {
     #                   }
     #                 },
     #                 fixed_afd: "AFD_0000" # One of: ["AFD_0000", "AFD_0010", "AFD_0011", "AFD_0100", "AFD_1000", "AFD_1001", "AFD_1010", "AFD_1011", "AFD_1101", "AFD_1110", "AFD_1111"],
@@ -3296,15 +3731,32 @@ module Aws::MediaLive
     #                 },
     #                 bitrate: 1,
     #                 rate_control_mode: "CBR" # One of: ["CBR", "QVBR"],
-    #                 min_bitrate: 1
+    #                 min_bitrate: 1,
+    #                 spatial_aq: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                 temporal_aq: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                 timecode_insertion: "DISABLED" # One of: ["DISABLED", "METADATA_OBU"],
+    #                 bit_depth: "DEPTH_10" # One of: ["DEPTH_10", "DEPTH_8"]
     #               }
     #             },
     #             height: 1,
     #             name: "__string", # required
     #             respond_to_afd: "NONE" # One of: ["NONE", "PASSTHROUGH", "RESPOND"],
-    #             scaling_behavior: "DEFAULT" # One of: ["DEFAULT", "STRETCH_TO_OUTPUT"],
+    #             scaling_behavior: "DEFAULT" # One of: ["DEFAULT", "STRETCH_TO_OUTPUT", "SMART_CROP"],
     #             sharpness: 1,
-    #             width: 1
+    #             width: 1,
+    #             crop_rectangle: {
+    #               height: 1, # required
+    #               width: 1, # required
+    #               x: 1, # required
+    #               y: 1, # required
+    #             },
+    #             output_position_rectangle: {
+    #               height: 1, # required
+    #               width: 1, # required
+    #               x: 1, # required
+    #               y: 1, # required
+    #             },
+    #             border: 1
     #           }
     #         ],
     #         thumbnail_configuration: {
@@ -3362,11 +3814,71 @@ module Aws::MediaLive
     #                   },
     #                   audio_pid_selection: {
     #                     pid: 1, # required
+    #                     pids: [
+    #                       {
+    #                         dolby_e_decode: {
+    #                           program_selection: "ALL_CHANNELS" # One of: ["ALL_CHANNELS", "PROGRAM_1", "PROGRAM_2", "PROGRAM_3", "PROGRAM_4", "PROGRAM_5", "PROGRAM_6", "PROGRAM_7", "PROGRAM_8"], # required
+    #                         },
+    #                         pid: 1, # required
+    #                         premix_settings: {
+    #                           audio_normalization_settings: {
+    #                             algorithm: "ITU_1770_1" # One of: ["ITU_1770_1", "ITU_1770_2", "ITU_1770_3", "ITU_1770_4"],
+    #                             algorithm_control: "CORRECT_AUDIO" # One of: ["CORRECT_AUDIO"],
+    #                             target_lkfs: 1.0,
+    #                             peak_calculation: "NONE" # One of: ["NONE", "TRUE_PEAK"],
+    #                             peak_limiter_threshold: 1.0
+    #                           },
+    #                           channels: 1,
+    #                           gain_db: 1.0,
+    #                           remix_settings: {
+    #                             channel_mappings: [ # required
+    #                               {
+    #                                 input_channel_levels: [ # required
+    #                                   {
+    #                                     gain: 1, # required
+    #                                     input_channel: 1, # required
+    #                                   }
+    #                                 ],
+    #                                 output_channel: 1, # required
+    #                               }
+    #                             ],
+    #                             channels_in: 1,
+    #                             channels_out: 1
+    #                           }
+    #                         }
+    #                       }
+    #                     ]
     #                   },
     #                   audio_track_selection: {
     #                     tracks: [ # required
     #                       {
     #                         track: 1, # required
+    #                         premix_settings: {
+    #                           audio_normalization_settings: {
+    #                             algorithm: "ITU_1770_1" # One of: ["ITU_1770_1", "ITU_1770_2", "ITU_1770_3", "ITU_1770_4"],
+    #                             algorithm_control: "CORRECT_AUDIO" # One of: ["CORRECT_AUDIO"],
+    #                             target_lkfs: 1.0,
+    #                             peak_calculation: "NONE" # One of: ["NONE", "TRUE_PEAK"],
+    #                             peak_limiter_threshold: 1.0
+    #                           },
+    #                           channels: 1,
+    #                           gain_db: 1.0,
+    #                           remix_settings: {
+    #                             channel_mappings: [ # required
+    #                               {
+    #                                 input_channel_levels: [ # required
+    #                                   {
+    #                                     gain: 1, # required
+    #                                     input_channel: 1, # required
+    #                                   }
+    #                                 ],
+    #                                 output_channel: 1, # required
+    #                               }
+    #                             ],
+    #                             channels_in: 1,
+    #                             channels_out: 1
+    #                           }
+    #                         }
     #                       }
     #                     ],
     #                     dolby_e_decode: {
@@ -3412,6 +3924,10 @@ module Aws::MediaLive
     #                       width: 1.0, # required
     #                     },
     #                     page_number: "__string"
+    #                   },
+    #                   smart_subtitle_source_settings: {
+    #                     caption_synchronization_mode: "NO_VIDEO_DELAY" # One of: ["NO_VIDEO_DELAY", "VIDEO_ALIGNED_CAPTIONS"],
+    #                     inference_feed_output: "__string"
     #                   }
     #                 }
     #               }
@@ -3481,6 +3997,11 @@ module Aws::MediaLive
     #           channel_engine_version: {
     #             expiration_date: Time.now,
     #             version: "__string"
+    #           },
+    #           media_connect_router_output_connection_map: {
+    #             "__string" => {
+    #               router_input_arn: "__string"
+    #             }
     #           }
     #         }
     #       ],
@@ -3503,6 +4024,27 @@ module Aws::MediaLive
     #       channel_engine_version: {
     #         expiration_date: Time.now,
     #         version: "__string"
+    #       },
+    #       linked_channel_settings: {
+    #         follower_channel_settings: {
+    #           linked_channel_type: "FOLLOWING_CHANNEL" # One of: ["FOLLOWING_CHANNEL", "PRIMARY_CHANNEL"],
+    #           primary_channel_arn: "__string"
+    #         },
+    #         primary_channel_settings: {
+    #           following_channel_arns: ["__string"],
+    #           linked_channel_type: "FOLLOWING_CHANNEL" # One of: ["FOLLOWING_CHANNEL", "PRIMARY_CHANNEL"]
+    #         }
+    #       },
+    #       channel_security_groups: ["__string"],
+    #       inference_settings: {
+    #         feed_arn: "__string",
+    #         audio_feed_inputs: [
+    #           {
+    #             audio_selector_name: "__string",
+    #             feed_input: "__string"
+    #           }
+    #         ],
+    #         enrichment_methods: ["SCTE35_ELEMENTAL_INFERENCE_QUERY_PARAMS" # One of: ["SCTE35_ELEMENTAL_INFERENCE_QUERY_PARAMS"]]
     #       }
     #     }
     #   }
@@ -3597,7 +4139,7 @@ module Aws::MediaLive
     #     tags: {
     #       "__string" => "__string"
     #     },
-    #     target_resource_type: "CLOUDFRONT_DISTRIBUTION" # One of: ["CLOUDFRONT_DISTRIBUTION", "MEDIALIVE_MULTIPLEX", "MEDIALIVE_CHANNEL", "MEDIALIVE_INPUT_DEVICE", "MEDIAPACKAGE_CHANNEL", "MEDIAPACKAGE_ORIGIN_ENDPOINT", "MEDIACONNECT_FLOW", "S3_BUCKET", "MEDIATAILOR_PLAYBACK_CONFIGURATION"], # required
+    #     target_resource_type: "CLOUDFRONT_DISTRIBUTION" # One of: ["CLOUDFRONT_DISTRIBUTION", "MEDIALIVE_MULTIPLEX", "MEDIALIVE_CHANNEL", "MEDIALIVE_INPUT_DEVICE", "MEDIAPACKAGE_CHANNEL", "MEDIAPACKAGE_ORIGIN_ENDPOINT", "MEDIACONNECT_FLOW", "S3_BUCKET", "MEDIATAILOR_PLAYBACK_CONFIGURATION", "ELEMENTAL_INFERENCE_FEED"], # required
     #     threshold: 1.0, # required
     #     treat_missing_data: "notBreaching" # One of: ["notBreaching", "breaching", "ignore", "missing"], # required
     #     request_id: "__stringMin1Max256PatternS"
@@ -3623,7 +4165,7 @@ module Aws::MediaLive
     #     tags: {
     #       "__string" => "__string"
     #     },
-    #     target_resource_type: "CLOUDFRONT_DISTRIBUTION" # One of: ["CLOUDFRONT_DISTRIBUTION", "MEDIALIVE_MULTIPLEX", "MEDIALIVE_CHANNEL", "MEDIALIVE_INPUT_DEVICE", "MEDIAPACKAGE_CHANNEL", "MEDIAPACKAGE_ORIGIN_ENDPOINT", "MEDIACONNECT_FLOW", "S3_BUCKET", "MEDIATAILOR_PLAYBACK_CONFIGURATION"],
+    #     target_resource_type: "CLOUDFRONT_DISTRIBUTION" # One of: ["CLOUDFRONT_DISTRIBUTION", "MEDIALIVE_MULTIPLEX", "MEDIALIVE_CHANNEL", "MEDIALIVE_INPUT_DEVICE", "MEDIAPACKAGE_CHANNEL", "MEDIAPACKAGE_ORIGIN_ENDPOINT", "MEDIACONNECT_FLOW", "S3_BUCKET", "MEDIATAILOR_PLAYBACK_CONFIGURATION", "ELEMENTAL_INFERENCE_FEED"],
     #     threshold: 1.0,
     #     treat_missing_data: "notBreaching" # One of: ["notBreaching", "breaching", "ignore", "missing"]
     #   }
@@ -3877,6 +4419,8 @@ module Aws::MediaLive
     #   Include this parameter if the input is a SMPTE 2110 input, to identify the stream sources for this input.
     # @option params [Array<String>] :sdi_sources
     #   SDI Sources for this Input.
+    # @option params [Types::RouterSettings] :router_settings
+    #   This is the collection of settings that are used during the creation of a MediaConnect router input.
     # @example Request syntax with placeholder values
     #   params = {
     #     destinations: [
@@ -3916,7 +4460,7 @@ module Aws::MediaLive
     #     tags: {
     #       "__string" => "__string"
     #     },
-    #     type: "UDP_PUSH" # One of: ["UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT", "INPUT_DEVICE", "AWS_CDI", "TS_FILE", "SRT_CALLER", "MULTICAST", "SMPTE_2110_RECEIVER_GROUP", "SDI"],
+    #     type: "UDP_PUSH" # One of: ["UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT", "INPUT_DEVICE", "AWS_CDI", "TS_FILE", "SRT_CALLER", "MULTICAST", "SMPTE_2110_RECEIVER_GROUP", "SDI", "MEDIACONNECT_ROUTER", "SRT_LISTENER"],
     #     vpc: {
     #       security_group_ids: ["__string"],
     #       subnet_ids: ["__string"], # required
@@ -3933,7 +4477,15 @@ module Aws::MediaLive
     #           srt_listener_port: "__string",
     #           stream_id: "__string"
     #         }
-    #       ]
+    #       ],
+    #       srt_listener_settings: {
+    #         decryption: { # required
+    #           algorithm: "AES128" # One of: ["AES128", "AES192", "AES256"], # required
+    #           passphrase_secret_arn: "__string", # required
+    #         },
+    #         minimum_latency: 1, # required
+    #         stream_id: "__string"
+    #       }
     #     },
     #     input_network_location: "AWS" # One of: ["AWS", "ON_PREMISES"],
     #     multicast_settings: {
@@ -3968,7 +4520,16 @@ module Aws::MediaLive
     #         }
     #       ]
     #     },
-    #     sdi_sources: ["__string"]
+    #     sdi_sources: ["__string"],
+    #     router_settings: {
+    #       destinations: [
+    #         {
+    #           availability_zone_name: "__string", # required
+    #         }
+    #       ],
+    #       encryption_type: "AUTOMATIC" # One of: ["AUTOMATIC", "SECRETS_MANAGER"],
+    #       secret_arn: "__string"
+    #     }
     #   }
     #   options = {}
     #   response = client.create_input(params, options)
@@ -4024,7 +4585,7 @@ module Aws::MediaLive
     #       tags: {
     #         "__string" => "__string"
     #       },
-    #       type: "UDP_PUSH" # One of: ["UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT", "INPUT_DEVICE", "AWS_CDI", "TS_FILE", "SRT_CALLER", "MULTICAST", "SMPTE_2110_RECEIVER_GROUP", "SDI"],
+    #       type: "UDP_PUSH" # One of: ["UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT", "INPUT_DEVICE", "AWS_CDI", "TS_FILE", "SRT_CALLER", "MULTICAST", "SMPTE_2110_RECEIVER_GROUP", "SDI", "MEDIACONNECT_ROUTER", "SRT_LISTENER"],
     #       srt_settings: {
     #         srt_caller_sources: [
     #           {
@@ -4037,7 +4598,15 @@ module Aws::MediaLive
     #             srt_listener_port: "__string",
     #             stream_id: "__string"
     #           }
-    #         ]
+    #         ],
+    #         srt_listener_settings: {
+    #           decryption: {
+    #             algorithm: "AES128" # One of: ["AES128", "AES192", "AES256"], # required
+    #             passphrase_secret_arn: "__string", # required
+    #           },
+    #           minimum_latency: 1,
+    #           stream_id: "__string"
+    #         }
     #       },
     #       input_network_location: "AWS" # One of: ["AWS", "ON_PREMISES"],
     #       multicast_settings: {
@@ -4072,7 +4641,17 @@ module Aws::MediaLive
     #           }
     #         ]
     #       },
-    #       sdi_sources: ["__string"]
+    #       sdi_sources: ["__string"],
+    #       router_settings: {
+    #         destinations: [
+    #           {
+    #             availability_zone_name: "__string",
+    #             router_output_arn: "__string"
+    #           }
+    #         ],
+    #         encryption_type: "AUTOMATIC" # One of: ["AUTOMATIC", "SECRETS_MANAGER"],
+    #         secret_arn: "__string"
+    #       }
     #     }
     #   }
     # @return [Types::CreateInputResponse]
@@ -4115,7 +4694,8 @@ module Aws::MediaLive
     #         {
     #           cidr: "__string"
     #         }
-    #       ]
+    #       ],
+    #       channels: ["__string"]
     #     }
     #   }
     # @return [Types::CreateInputSecurityGroupResponse]
@@ -4385,7 +4965,8 @@ module Aws::MediaLive
     #       {
     #         logical_interface_name: "__string",
     #         network_interface_mode: "NAT" # One of: ["NAT", "BRIDGE"],
-    #         physical_interface_name: "__string"
+    #         physical_interface_name: "__string",
+    #         physical_interface_ip_addresses: ["__string"]
     #       }
     #     ],
     #     role: "BACKUP" # One of: ["BACKUP", "ACTIVE"],
@@ -4427,7 +5008,8 @@ module Aws::MediaLive
     #       {
     #         logical_interface_name: "__string",
     #         network_interface_mode: "NAT" # One of: ["NAT", "BRIDGE"],
-    #         physical_interface_name: "__string"
+    #         physical_interface_name: "__string",
+    #         physical_interface_ip_addresses: ["__string"]
     #       }
     #     ],
     #     request_id: "__string",
@@ -4517,7 +5099,7 @@ module Aws::MediaLive
     #       tags: {
     #         "__string" => "__string"
     #       },
-    #       type: "UDP_PUSH" # One of: ["UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT", "INPUT_DEVICE", "AWS_CDI", "TS_FILE", "SRT_CALLER", "MULTICAST", "SMPTE_2110_RECEIVER_GROUP", "SDI"],
+    #       type: "UDP_PUSH" # One of: ["UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT", "INPUT_DEVICE", "AWS_CDI", "TS_FILE", "SRT_CALLER", "MULTICAST", "SMPTE_2110_RECEIVER_GROUP", "SDI", "MEDIACONNECT_ROUTER", "SRT_LISTENER"],
     #       srt_settings: {
     #         srt_caller_sources: [
     #           {
@@ -4530,7 +5112,15 @@ module Aws::MediaLive
     #             srt_listener_port: "__string",
     #             stream_id: "__string"
     #           }
-    #         ]
+    #         ],
+    #         srt_listener_settings: {
+    #           decryption: {
+    #             algorithm: "AES128" # One of: ["AES128", "AES192", "AES256"], # required
+    #             passphrase_secret_arn: "__string", # required
+    #           },
+    #           minimum_latency: 1,
+    #           stream_id: "__string"
+    #         }
     #       },
     #       input_network_location: "AWS" # One of: ["AWS", "ON_PREMISES"],
     #       multicast_settings: {
@@ -4565,7 +5155,17 @@ module Aws::MediaLive
     #           }
     #         ]
     #       },
-    #       sdi_sources: ["__string"]
+    #       sdi_sources: ["__string"],
+    #       router_settings: {
+    #         destinations: [
+    #           {
+    #             availability_zone_name: "__string",
+    #             router_output_arn: "__string"
+    #           }
+    #         ],
+    #         encryption_type: "AUTOMATIC" # One of: ["AUTOMATIC", "SECRETS_MANAGER"],
+    #         secret_arn: "__string"
+    #       }
     #     }
     #   }
     # @return [Types::CreatePartnerInputResponse]
@@ -4765,7 +5365,9 @@ module Aws::MediaLive
     #           {
     #             channel_id: "__stringMin1",
     #             channel_group: "__stringMin1",
-    #             channel_name: "__stringMin1"
+    #             channel_name: "__stringMin1",
+    #             channel_endpoint_id: "__stringMin1",
+    #             media_package_region_name: "__stringMin1"
     #           }
     #         ],
     #         multiplex_settings: {
@@ -4777,17 +5379,26 @@ module Aws::MediaLive
     #             password_param: "__string",
     #             stream_name: "__string",
     #             url: "__string",
-    #             username: "__string"
+    #             username: "__string",
+    #             virtual_source_address: "__string"
     #           }
     #         ],
     #         srt_settings: [
     #           {
     #             encryption_passphrase_secret_arn: "__string",
     #             stream_id: "__string",
-    #             url: "__string"
+    #             url: "__string",
+    #             connection_mode: "CALLER" # One of: ["CALLER", "LISTENER"],
+    #             listener_port: 1
     #           }
     #         ],
-    #         logical_interface_names: ["__string"]
+    #         logical_interface_names: ["__string"],
+    #         media_connect_router_settings: [
+    #           {
+    #             encryption_type: "AUTOMATIC" # One of: ["AUTOMATIC", "SECRETS_MANAGER"],
+    #             secret_arn: "__string"
+    #           }
+    #         ]
     #       }
     #     ],
     #     egress_endpoints: [
@@ -4799,9 +5410,11 @@ module Aws::MediaLive
     #       audio_descriptions: [ # required
     #         {
     #           audio_normalization_settings: {
-    #             algorithm: "ITU_1770_1" # One of: ["ITU_1770_1", "ITU_1770_2"],
+    #             algorithm: "ITU_1770_1" # One of: ["ITU_1770_1", "ITU_1770_2", "ITU_1770_3", "ITU_1770_4"],
     #             algorithm_control: "CORRECT_AUDIO" # One of: ["CORRECT_AUDIO"],
-    #             target_lkfs: 1.0
+    #             target_lkfs: 1.0,
+    #             peak_calculation: "NONE" # One of: ["NONE", "TRUE_PEAK"],
+    #             peak_limiter_threshold: 1.0
     #           },
     #           audio_selector_name: "__string", # required
     #           audio_type: "CLEAN_EFFECTS" # One of: ["CLEAN_EFFECTS", "HEARING_IMPAIRED", "UNDEFINED", "VISUAL_IMPAIRED_COMMENTARY"],
@@ -4815,6 +5428,11 @@ module Aws::MediaLive
     #               },
     #               nielsen_distribution_type: "FINAL_DISTRIBUTOR" # One of: ["FINAL_DISTRIBUTOR", "PROGRAM_CONTENT"],
     #               nielsen_naes_ii_nw_settings: {
+    #                 check_digit_string: "__stringMin2Max2", # required
+    #                 sid: 1.0, # required
+    #                 timezone: "AMERICA_PUERTO_RICO" # One of: ["AMERICA_PUERTO_RICO", "US_ALASKA", "US_ARIZONA", "US_CENTRAL", "US_EASTERN", "US_HAWAII", "US_MOUNTAIN", "US_PACIFIC", "US_SAMOA", "UTC"]
+    #               },
+    #               nielsen_nw_only_settings: {
     #                 check_digit_string: "__stringMin2Max2", # required
     #                 sid: 1.0, # required
     #                 timezone: "AMERICA_PUERTO_RICO" # One of: ["AMERICA_PUERTO_RICO", "US_ALASKA", "US_ARIZONA", "US_CENTRAL", "US_EASTERN", "US_HAWAII", "US_MOUNTAIN", "US_PACIFIC", "US_SAMOA", "UTC"]
@@ -5020,6 +5638,10 @@ module Aws::MediaLive
     #               default_line_height: 1
     #             },
     #             embedded_destination_settings: {
+    #               position: {
+    #                 y_position_line: 1
+    #               },
+    #               style_control: "MANUAL" # One of: ["MANUAL", "PASSTHROUGH"]
     #             },
     #             embedded_plus_scte20_destination_settings: {
     #             },
@@ -5034,10 +5656,16 @@ module Aws::MediaLive
     #             teletext_destination_settings: {
     #             },
     #             ttml_destination_settings: {
-    #               style_control: "PASSTHROUGH" # One of: ["PASSTHROUGH", "USE_CONFIGURED"]
+    #               style_control: "PASSTHROUGH" # One of: ["PASSTHROUGH", "USE_CONFIGURED", "MANUAL"],
+    #               position: {
+    #                 y_position_percentage: 1
+    #               }
     #             },
     #             webvtt_destination_settings: {
-    #               style_control: "NO_STYLE_DATA" # One of: ["NO_STYLE_DATA", "PASSTHROUGH"]
+    #               style_control: "NO_STYLE_DATA" # One of: ["NO_STYLE_DATA", "PASSTHROUGH", "MANUAL"],
+    #               position: {
+    #                 y_position_percentage: 1
+    #               }
     #             }
     #           },
     #           language_code: "__string",
@@ -5074,6 +5702,11 @@ module Aws::MediaLive
     #             jam_sync_time: "__string"
     #           },
     #           pipeline_locking_settings: {
+    #             pipeline_locking_method: "SOURCE_TIMECODE" # One of: ["SOURCE_TIMECODE", "VIDEO_ALIGNMENT"],
+    #             custom_epoch: "__string"
+    #           },
+    #           disabled_locking_settings: {
+    #             custom_epoch: "__string"
     #           }
     #         }
     #       },
@@ -5223,12 +5856,41 @@ module Aws::MediaLive
     #                 id3_behavior: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                 klv_behavior: "NO_PASSTHROUGH" # One of: ["NO_PASSTHROUGH", "PASSTHROUGH"],
     #                 nielsen_id3_behavior: "NO_PASSTHROUGH" # One of: ["NO_PASSTHROUGH", "PASSTHROUGH"],
-    #                 scte35_type: "NONE" # One of: ["NONE", "SCTE_35_WITHOUT_SEGMENTATION"],
+    #                 scte35_type: "NONE" # One of: ["NONE", "SCTE_35_WITHOUT_SEGMENTATION", "SCTE_35_WITHOUT_IDR"],
     #                 segment_length: 1,
     #                 segment_length_units: "MILLISECONDS" # One of: ["MILLISECONDS", "SECONDS"],
     #                 timed_metadata_id3_frame: "NONE" # One of: ["NONE", "PRIV", "TDRL"],
     #                 timed_metadata_id3_period: 1,
-    #                 timed_metadata_passthrough: "DISABLED" # One of: ["DISABLED", "ENABLED"]
+    #                 timed_metadata_passthrough: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                 additional_destinations: [
+    #                   {
+    #                     destination: { # required
+    #                       destination_ref_id: "__string"
+    #                     }
+    #                   }
+    #                 ],
+    #                 watermarking_settings: {
+    #                   media_package_v2_ab_watermarker_irdeto_settings: {
+    #                     additional_destinations_alternate_destinations: [
+    #                       {
+    #                         destination_ref_id: "__string"
+    #                       }
+    #                     ],
+    #                     alternate_destination: { # required
+    #                       destination_ref_id: "__string"
+    #                     },
+    #                     custom_profile: {
+    #                       embedding_frequency: 1.0, # required
+    #                       scene_cut: 1.0, # required
+    #                       target_psnr: 1.0, # required
+    #                     },
+    #                     license: "__string",
+    #                     operator_id: 1, # required
+    #                     poly_period: 1,
+    #                     profile: "CAMCORDING" # One of: ["CAMCORDING", "CUSTOM", "DEFAULT", "HQ", "MEZZANINE", "ROBUST"], # required
+    #                     watermark_id_length: "ID_2048" # One of: ["ID_2048", "ID_512"]
+    #                   }
+    #                 }
     #               }
     #             },
     #             ms_smooth_group_settings: {
@@ -5276,7 +5938,7 @@ module Aws::MediaLive
     #                 destination_ref_id: "__string"
     #               },
     #               nielsen_id3_behavior: "NO_PASSTHROUGH" # One of: ["NO_PASSTHROUGH", "PASSTHROUGH"],
-    #               scte35_type: "NONE" # One of: ["NONE", "SCTE_35_WITHOUT_SEGMENTATION"],
+    #               scte35_type: "NONE" # One of: ["NONE", "SCTE_35_WITHOUT_SEGMENTATION", "SCTE_35_WITHOUT_IDR"],
     #               segment_length: 1,
     #               segment_length_units: "MILLISECONDS" # One of: ["MILLISECONDS", "SECONDS"],
     #               send_delay_ms: 1,
@@ -5301,10 +5963,35 @@ module Aws::MediaLive
     #                     destination_ref_id: "__string"
     #                   }
     #                 }
-    #               ]
+    #               ],
+    #               watermarking_settings: {
+    #                 cmaf_ingest_ab_watermarker_irdeto_settings: {
+    #                   additional_destinations_alternate_destinations: [
+    #                     {
+    #                       destination_ref_id: "__string"
+    #                     }
+    #                   ],
+    #                   alternate_destination: { # required
+    #                     destination_ref_id: "__string"
+    #                   },
+    #                   custom_profile: {
+    #                     embedding_frequency: 1.0, # required
+    #                     scene_cut: 1.0, # required
+    #                     target_psnr: 1.0, # required
+    #                   },
+    #                   license: "__string",
+    #                   operator_id: 1, # required
+    #                   poly_period: 1,
+    #                   profile: "CAMCORDING" # One of: ["CAMCORDING", "CUSTOM", "DEFAULT", "HQ", "MEZZANINE", "ROBUST"], # required
+    #                   watermark_id_length: "ID_2048" # One of: ["ID_2048", "ID_512"]
+    #                 }
+    #               }
     #             },
     #             srt_group_settings: {
     #               input_loss_action: "DROP_PROGRAM" # One of: ["DROP_PROGRAM", "DROP_TS", "EMIT_PROGRAM"]
+    #             },
+    #             media_connect_router_group_settings: {
+    #               availability_zones: ["__string"]
     #             }
     #           },
     #           outputs: [ # required
@@ -5365,7 +6052,7 @@ module Aws::MediaLive
     #                       program_num: 1,
     #                       rate_mode: "CBR" # One of: ["CBR", "VBR"],
     #                       scte27_pids: "__string",
-    #                       scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH"],
+    #                       scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH", "SCTE_35_WITHOUT_IDR"],
     #                       scte35_pid: "__string",
     #                       segmentation_markers: "EBP" # One of: ["EBP", "EBP_LEGACY", "NONE", "PSI_SEGSTART", "RAI_ADAPT", "RAI_SEGSTART"],
     #                       segmentation_style: "MAINTAIN_CADENCE" # One of: ["MAINTAIN_CADENCE", "RESET_CADENCE"],
@@ -5438,7 +6125,8 @@ module Aws::MediaLive
     #                     audio_group_id: "__string",
     #                     audio_rendition_sets: "__string",
     #                     hls_auto_select: "NO" # One of: ["NO", "OMIT", "YES"],
-    #                     hls_default: "NO" # One of: ["NO", "OMIT", "YES"]
+    #                     hls_default: "NO" # One of: ["NO", "OMIT", "YES"],
+    #                     output_usage: ["MULTIVIEW_EQUAL_SIZE_VIEW" # One of: ["MULTIVIEW_EQUAL_SIZE_VIEW", "MULTIVIEW_PRIMARY_VIEW", "MULTIVIEW_SECONDARY_VIEW"]]
     #                   }
     #                 },
     #                 ms_smooth_output_settings: {
@@ -5463,7 +6151,7 @@ module Aws::MediaLive
     #                       nielsen_id3_behavior: "NO_PASSTHROUGH" # One of: ["NO_PASSTHROUGH", "PASSTHROUGH"],
     #                       pcr_control: "CONFIGURED_PCR_PERIOD" # One of: ["CONFIGURED_PCR_PERIOD", "PCR_EVERY_PES_PACKET"],
     #                       pcr_period: 1,
-    #                       scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH"],
+    #                       scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH", "SCTE_35_WITHOUT_IDR"],
     #                       scte35_preroll_pullup_milliseconds: 1.0
     #                     }
     #                   }
@@ -5529,7 +6217,7 @@ module Aws::MediaLive
     #                       program_num: 1,
     #                       rate_mode: "CBR" # One of: ["CBR", "VBR"],
     #                       scte27_pids: "__string",
-    #                       scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH"],
+    #                       scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH", "SCTE_35_WITHOUT_IDR"],
     #                       scte35_pid: "__string",
     #                       segmentation_markers: "EBP" # One of: ["EBP", "EBP_LEGACY", "NONE", "PSI_SEGSTART", "RAI_ADAPT", "RAI_SEGSTART"],
     #                       segmentation_style: "MAINTAIN_CADENCE" # One of: ["MAINTAIN_CADENCE", "RESET_CADENCE"],
@@ -5606,7 +6294,7 @@ module Aws::MediaLive
     #                       program_num: 1,
     #                       rate_mode: "CBR" # One of: ["CBR", "VBR"],
     #                       scte27_pids: "__string",
-    #                       scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH"],
+    #                       scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH", "SCTE_35_WITHOUT_IDR"],
     #                       scte35_pid: "__string",
     #                       segmentation_markers: "EBP" # One of: ["EBP", "EBP_LEGACY", "NONE", "PSI_SEGSTART", "RAI_ADAPT", "RAI_SEGSTART"],
     #                       segmentation_style: "MAINTAIN_CADENCE" # One of: ["MAINTAIN_CADENCE", "RESET_CADENCE"],
@@ -5623,6 +6311,78 @@ module Aws::MediaLive
     #                   },
     #                   encryption_type: "AES128" # One of: ["AES128", "AES192", "AES256"],
     #                   latency: 1
+    #                 },
+    #                 media_connect_router_output_settings: {
+    #                   connected_router_inputs: {
+    #                     pipeline0: "__string",
+    #                     pipeline1: "__string"
+    #                   },
+    #                   container_settings: { # required
+    #                     m2ts_settings: {
+    #                       absent_input_audio_behavior: "DROP" # One of: ["DROP", "ENCODE_SILENCE"],
+    #                       arib: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                       arib_captions_pid: "__string",
+    #                       arib_captions_pid_control: "AUTO" # One of: ["AUTO", "USE_CONFIGURED"],
+    #                       audio_buffer_model: "ATSC" # One of: ["ATSC", "DVB"],
+    #                       audio_frames_per_pes: 1,
+    #                       audio_pids: "__string",
+    #                       audio_stream_type: "ATSC" # One of: ["ATSC", "DVB"],
+    #                       bitrate: 1,
+    #                       buffer_model: "MULTIPLEX" # One of: ["MULTIPLEX", "NONE"],
+    #                       cc_descriptor: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                       dvb_nit_settings: {
+    #                         network_id: 1, # required
+    #                         network_name: "__stringMin1Max256", # required
+    #                         rep_interval: 1
+    #                       },
+    #                       dvb_sdt_settings: {
+    #                         output_sdt: "SDT_FOLLOW" # One of: ["SDT_FOLLOW", "SDT_FOLLOW_IF_PRESENT", "SDT_MANUAL", "SDT_NONE"],
+    #                         rep_interval: 1,
+    #                         service_name: "__stringMin1Max256",
+    #                         service_provider_name: "__stringMin1Max256"
+    #                       },
+    #                       dvb_sub_pids: "__string",
+    #                       dvb_tdt_settings: {
+    #                         rep_interval: 1
+    #                       },
+    #                       dvb_teletext_pid: "__string",
+    #                       ebif: "NONE" # One of: ["NONE", "PASSTHROUGH"],
+    #                       ebp_audio_interval: "VIDEO_AND_FIXED_INTERVALS" # One of: ["VIDEO_AND_FIXED_INTERVALS", "VIDEO_INTERVAL"],
+    #                       ebp_lookahead_ms: 1,
+    #                       ebp_placement: "VIDEO_AND_AUDIO_PIDS" # One of: ["VIDEO_AND_AUDIO_PIDS", "VIDEO_PID"],
+    #                       ecm_pid: "__string",
+    #                       es_rate_in_pes: "EXCLUDE" # One of: ["EXCLUDE", "INCLUDE"],
+    #                       etv_platform_pid: "__string",
+    #                       etv_signal_pid: "__string",
+    #                       fragment_time: 1.0,
+    #                       klv: "NONE" # One of: ["NONE", "PASSTHROUGH"],
+    #                       klv_data_pids: "__string",
+    #                       nielsen_id3_behavior: "NO_PASSTHROUGH" # One of: ["NO_PASSTHROUGH", "PASSTHROUGH"],
+    #                       null_packet_bitrate: 1.0,
+    #                       pat_interval: 1,
+    #                       pcr_control: "CONFIGURED_PCR_PERIOD" # One of: ["CONFIGURED_PCR_PERIOD", "PCR_EVERY_PES_PACKET"],
+    #                       pcr_period: 1,
+    #                       pcr_pid: "__string",
+    #                       pmt_interval: 1,
+    #                       pmt_pid: "__string",
+    #                       program_num: 1,
+    #                       rate_mode: "CBR" # One of: ["CBR", "VBR"],
+    #                       scte27_pids: "__string",
+    #                       scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH", "SCTE_35_WITHOUT_IDR"],
+    #                       scte35_pid: "__string",
+    #                       segmentation_markers: "EBP" # One of: ["EBP", "EBP_LEGACY", "NONE", "PSI_SEGSTART", "RAI_ADAPT", "RAI_SEGSTART"],
+    #                       segmentation_style: "MAINTAIN_CADENCE" # One of: ["MAINTAIN_CADENCE", "RESET_CADENCE"],
+    #                       segmentation_time: 1.0,
+    #                       timed_metadata_behavior: "NO_PASSTHROUGH" # One of: ["NO_PASSTHROUGH", "PASSTHROUGH"],
+    #                       timed_metadata_pid: "__string",
+    #                       transport_stream_id: 1,
+    #                       video_pid: "__string",
+    #                       scte35_preroll_pullup_milliseconds: 1.0
+    #                     }
+    #                   },
+    #                   destination: { # required
+    #                     destination_ref_id: "__string"
+    #                   }
     #                 }
     #               },
     #               video_description_name: "__string"
@@ -5731,6 +6491,8 @@ module Aws::MediaLive
     #                 rec601_settings: {
     #                 },
     #                 rec709_settings: {
+    #                 },
+    #                 hlg2020_settings: {
     #                 }
     #               },
     #               filter_settings: {
@@ -5823,6 +6585,8 @@ module Aws::MediaLive
     #                 rec601_settings: {
     #                 },
     #                 rec709_settings: {
+    #                 },
+    #                 hlg2020_settings: {
     #                 }
     #               },
     #               fixed_afd: "AFD_0000" # One of: ["AFD_0000", "AFD_0010", "AFD_0011", "AFD_0100", "AFD_1000", "AFD_1001", "AFD_1010", "AFD_1011", "AFD_1101", "AFD_1110", "AFD_1111"],
@@ -5845,15 +6609,32 @@ module Aws::MediaLive
     #               },
     #               bitrate: 1,
     #               rate_control_mode: "CBR" # One of: ["CBR", "QVBR"],
-    #               min_bitrate: 1
+    #               min_bitrate: 1,
+    #               spatial_aq: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #               temporal_aq: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #               timecode_insertion: "DISABLED" # One of: ["DISABLED", "METADATA_OBU"],
+    #               bit_depth: "DEPTH_10" # One of: ["DEPTH_10", "DEPTH_8"]
     #             }
     #           },
     #           height: 1,
     #           name: "__string", # required
     #           respond_to_afd: "NONE" # One of: ["NONE", "PASSTHROUGH", "RESPOND"],
-    #           scaling_behavior: "DEFAULT" # One of: ["DEFAULT", "STRETCH_TO_OUTPUT"],
+    #           scaling_behavior: "DEFAULT" # One of: ["DEFAULT", "STRETCH_TO_OUTPUT", "SMART_CROP"],
     #           sharpness: 1,
-    #           width: 1
+    #           width: 1,
+    #           crop_rectangle: {
+    #             height: 1, # required
+    #             width: 1, # required
+    #             x: 1, # required
+    #             y: 1, # required
+    #           },
+    #           output_position_rectangle: {
+    #             height: 1, # required
+    #             width: 1, # required
+    #             x: 1, # required
+    #             y: 1, # required
+    #           },
+    #           border: 1
     #         }
     #       ],
     #       thumbnail_configuration: {
@@ -5911,11 +6692,71 @@ module Aws::MediaLive
     #                 },
     #                 audio_pid_selection: {
     #                   pid: 1, # required
+    #                   pids: [
+    #                     {
+    #                       dolby_e_decode: {
+    #                         program_selection: "ALL_CHANNELS" # One of: ["ALL_CHANNELS", "PROGRAM_1", "PROGRAM_2", "PROGRAM_3", "PROGRAM_4", "PROGRAM_5", "PROGRAM_6", "PROGRAM_7", "PROGRAM_8"], # required
+    #                       },
+    #                       pid: 1, # required
+    #                       premix_settings: {
+    #                         audio_normalization_settings: {
+    #                           algorithm: "ITU_1770_1" # One of: ["ITU_1770_1", "ITU_1770_2", "ITU_1770_3", "ITU_1770_4"],
+    #                           algorithm_control: "CORRECT_AUDIO" # One of: ["CORRECT_AUDIO"],
+    #                           target_lkfs: 1.0,
+    #                           peak_calculation: "NONE" # One of: ["NONE", "TRUE_PEAK"],
+    #                           peak_limiter_threshold: 1.0
+    #                         },
+    #                         channels: 1,
+    #                         gain_db: 1.0,
+    #                         remix_settings: {
+    #                           channel_mappings: [ # required
+    #                             {
+    #                               input_channel_levels: [ # required
+    #                                 {
+    #                                   gain: 1, # required
+    #                                   input_channel: 1, # required
+    #                                 }
+    #                               ],
+    #                               output_channel: 1, # required
+    #                             }
+    #                           ],
+    #                           channels_in: 1,
+    #                           channels_out: 1
+    #                         }
+    #                       }
+    #                     }
+    #                   ]
     #                 },
     #                 audio_track_selection: {
     #                   tracks: [ # required
     #                     {
     #                       track: 1, # required
+    #                       premix_settings: {
+    #                         audio_normalization_settings: {
+    #                           algorithm: "ITU_1770_1" # One of: ["ITU_1770_1", "ITU_1770_2", "ITU_1770_3", "ITU_1770_4"],
+    #                           algorithm_control: "CORRECT_AUDIO" # One of: ["CORRECT_AUDIO"],
+    #                           target_lkfs: 1.0,
+    #                           peak_calculation: "NONE" # One of: ["NONE", "TRUE_PEAK"],
+    #                           peak_limiter_threshold: 1.0
+    #                         },
+    #                         channels: 1,
+    #                         gain_db: 1.0,
+    #                         remix_settings: {
+    #                           channel_mappings: [ # required
+    #                             {
+    #                               input_channel_levels: [ # required
+    #                                 {
+    #                                   gain: 1, # required
+    #                                   input_channel: 1, # required
+    #                                 }
+    #                               ],
+    #                               output_channel: 1, # required
+    #                             }
+    #                           ],
+    #                           channels_in: 1,
+    #                           channels_out: 1
+    #                         }
+    #                       }
     #                     }
     #                   ],
     #                   dolby_e_decode: {
@@ -5961,6 +6802,10 @@ module Aws::MediaLive
     #                     width: 1.0, # required
     #                   },
     #                   page_number: "__string"
+    #                 },
+    #                 smart_subtitle_source_settings: {
+    #                   caption_synchronization_mode: "NO_VIDEO_DELAY" # One of: ["NO_VIDEO_DELAY", "VIDEO_ALIGNED_CAPTIONS"],
+    #                   inference_feed_output: "__string"
     #                 }
     #               }
     #             }
@@ -6030,6 +6875,11 @@ module Aws::MediaLive
     #         channel_engine_version: {
     #           expiration_date: Time.now,
     #           version: "__string"
+    #         },
+    #         media_connect_router_output_connection_map: {
+    #           "__string" => {
+    #             router_input_arn: "__string"
+    #           }
     #         }
     #       }
     #     ],
@@ -6052,6 +6902,27 @@ module Aws::MediaLive
     #     channel_engine_version: {
     #       expiration_date: Time.now,
     #       version: "__string"
+    #     },
+    #     linked_channel_settings: {
+    #       follower_channel_settings: {
+    #         linked_channel_type: "FOLLOWING_CHANNEL" # One of: ["FOLLOWING_CHANNEL", "PRIMARY_CHANNEL"],
+    #         primary_channel_arn: "__string"
+    #       },
+    #       primary_channel_settings: {
+    #         following_channel_arns: ["__string"],
+    #         linked_channel_type: "FOLLOWING_CHANNEL" # One of: ["FOLLOWING_CHANNEL", "PRIMARY_CHANNEL"]
+    #       }
+    #     },
+    #     channel_security_groups: ["__string"],
+    #     inference_settings: {
+    #       feed_arn: "__string",
+    #       audio_feed_inputs: [
+    #         {
+    #           audio_selector_name: "__string",
+    #           feed_input: "__string"
+    #         }
+    #       ],
+    #       enrichment_methods: ["SCTE35_ELEMENTAL_INFERENCE_QUERY_PARAMS" # One of: ["SCTE35_ELEMENTAL_INFERENCE_QUERY_PARAMS"]]
     #     }
     #   }
     # @return [Types::DeleteChannelResponse]
@@ -6412,7 +7283,8 @@ module Aws::MediaLive
     #       {
     #         logical_interface_name: "__string",
     #         network_interface_mode: "NAT" # One of: ["NAT", "BRIDGE"],
-    #         physical_interface_name: "__string"
+    #         physical_interface_name: "__string",
+    #         physical_interface_ip_addresses: ["__string"]
     #       }
     #     ],
     #     role: "BACKUP" # One of: ["BACKUP", "ACTIVE"],
@@ -6617,7 +7489,9 @@ module Aws::MediaLive
     #           {
     #             channel_id: "__stringMin1",
     #             channel_group: "__stringMin1",
-    #             channel_name: "__stringMin1"
+    #             channel_name: "__stringMin1",
+    #             channel_endpoint_id: "__stringMin1",
+    #             media_package_region_name: "__stringMin1"
     #           }
     #         ],
     #         multiplex_settings: {
@@ -6629,17 +7503,26 @@ module Aws::MediaLive
     #             password_param: "__string",
     #             stream_name: "__string",
     #             url: "__string",
-    #             username: "__string"
+    #             username: "__string",
+    #             virtual_source_address: "__string"
     #           }
     #         ],
     #         srt_settings: [
     #           {
     #             encryption_passphrase_secret_arn: "__string",
     #             stream_id: "__string",
-    #             url: "__string"
+    #             url: "__string",
+    #             connection_mode: "CALLER" # One of: ["CALLER", "LISTENER"],
+    #             listener_port: 1
     #           }
     #         ],
-    #         logical_interface_names: ["__string"]
+    #         logical_interface_names: ["__string"],
+    #         media_connect_router_settings: [
+    #           {
+    #             encryption_type: "AUTOMATIC" # One of: ["AUTOMATIC", "SECRETS_MANAGER"],
+    #             secret_arn: "__string"
+    #           }
+    #         ]
     #       }
     #     ],
     #     egress_endpoints: [
@@ -6651,9 +7534,11 @@ module Aws::MediaLive
     #       audio_descriptions: [ # required
     #         {
     #           audio_normalization_settings: {
-    #             algorithm: "ITU_1770_1" # One of: ["ITU_1770_1", "ITU_1770_2"],
+    #             algorithm: "ITU_1770_1" # One of: ["ITU_1770_1", "ITU_1770_2", "ITU_1770_3", "ITU_1770_4"],
     #             algorithm_control: "CORRECT_AUDIO" # One of: ["CORRECT_AUDIO"],
-    #             target_lkfs: 1.0
+    #             target_lkfs: 1.0,
+    #             peak_calculation: "NONE" # One of: ["NONE", "TRUE_PEAK"],
+    #             peak_limiter_threshold: 1.0
     #           },
     #           audio_selector_name: "__string", # required
     #           audio_type: "CLEAN_EFFECTS" # One of: ["CLEAN_EFFECTS", "HEARING_IMPAIRED", "UNDEFINED", "VISUAL_IMPAIRED_COMMENTARY"],
@@ -6667,6 +7552,11 @@ module Aws::MediaLive
     #               },
     #               nielsen_distribution_type: "FINAL_DISTRIBUTOR" # One of: ["FINAL_DISTRIBUTOR", "PROGRAM_CONTENT"],
     #               nielsen_naes_ii_nw_settings: {
+    #                 check_digit_string: "__stringMin2Max2", # required
+    #                 sid: 1.0, # required
+    #                 timezone: "AMERICA_PUERTO_RICO" # One of: ["AMERICA_PUERTO_RICO", "US_ALASKA", "US_ARIZONA", "US_CENTRAL", "US_EASTERN", "US_HAWAII", "US_MOUNTAIN", "US_PACIFIC", "US_SAMOA", "UTC"]
+    #               },
+    #               nielsen_nw_only_settings: {
     #                 check_digit_string: "__stringMin2Max2", # required
     #                 sid: 1.0, # required
     #                 timezone: "AMERICA_PUERTO_RICO" # One of: ["AMERICA_PUERTO_RICO", "US_ALASKA", "US_ARIZONA", "US_CENTRAL", "US_EASTERN", "US_HAWAII", "US_MOUNTAIN", "US_PACIFIC", "US_SAMOA", "UTC"]
@@ -6872,6 +7762,10 @@ module Aws::MediaLive
     #               default_line_height: 1
     #             },
     #             embedded_destination_settings: {
+    #               position: {
+    #                 y_position_line: 1
+    #               },
+    #               style_control: "MANUAL" # One of: ["MANUAL", "PASSTHROUGH"]
     #             },
     #             embedded_plus_scte20_destination_settings: {
     #             },
@@ -6886,10 +7780,16 @@ module Aws::MediaLive
     #             teletext_destination_settings: {
     #             },
     #             ttml_destination_settings: {
-    #               style_control: "PASSTHROUGH" # One of: ["PASSTHROUGH", "USE_CONFIGURED"]
+    #               style_control: "PASSTHROUGH" # One of: ["PASSTHROUGH", "USE_CONFIGURED", "MANUAL"],
+    #               position: {
+    #                 y_position_percentage: 1
+    #               }
     #             },
     #             webvtt_destination_settings: {
-    #               style_control: "NO_STYLE_DATA" # One of: ["NO_STYLE_DATA", "PASSTHROUGH"]
+    #               style_control: "NO_STYLE_DATA" # One of: ["NO_STYLE_DATA", "PASSTHROUGH", "MANUAL"],
+    #               position: {
+    #                 y_position_percentage: 1
+    #               }
     #             }
     #           },
     #           language_code: "__string",
@@ -6926,6 +7826,11 @@ module Aws::MediaLive
     #             jam_sync_time: "__string"
     #           },
     #           pipeline_locking_settings: {
+    #             pipeline_locking_method: "SOURCE_TIMECODE" # One of: ["SOURCE_TIMECODE", "VIDEO_ALIGNMENT"],
+    #             custom_epoch: "__string"
+    #           },
+    #           disabled_locking_settings: {
+    #             custom_epoch: "__string"
     #           }
     #         }
     #       },
@@ -7075,12 +7980,41 @@ module Aws::MediaLive
     #                 id3_behavior: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                 klv_behavior: "NO_PASSTHROUGH" # One of: ["NO_PASSTHROUGH", "PASSTHROUGH"],
     #                 nielsen_id3_behavior: "NO_PASSTHROUGH" # One of: ["NO_PASSTHROUGH", "PASSTHROUGH"],
-    #                 scte35_type: "NONE" # One of: ["NONE", "SCTE_35_WITHOUT_SEGMENTATION"],
+    #                 scte35_type: "NONE" # One of: ["NONE", "SCTE_35_WITHOUT_SEGMENTATION", "SCTE_35_WITHOUT_IDR"],
     #                 segment_length: 1,
     #                 segment_length_units: "MILLISECONDS" # One of: ["MILLISECONDS", "SECONDS"],
     #                 timed_metadata_id3_frame: "NONE" # One of: ["NONE", "PRIV", "TDRL"],
     #                 timed_metadata_id3_period: 1,
-    #                 timed_metadata_passthrough: "DISABLED" # One of: ["DISABLED", "ENABLED"]
+    #                 timed_metadata_passthrough: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                 additional_destinations: [
+    #                   {
+    #                     destination: { # required
+    #                       destination_ref_id: "__string"
+    #                     }
+    #                   }
+    #                 ],
+    #                 watermarking_settings: {
+    #                   media_package_v2_ab_watermarker_irdeto_settings: {
+    #                     additional_destinations_alternate_destinations: [
+    #                       {
+    #                         destination_ref_id: "__string"
+    #                       }
+    #                     ],
+    #                     alternate_destination: { # required
+    #                       destination_ref_id: "__string"
+    #                     },
+    #                     custom_profile: {
+    #                       embedding_frequency: 1.0, # required
+    #                       scene_cut: 1.0, # required
+    #                       target_psnr: 1.0, # required
+    #                     },
+    #                     license: "__string",
+    #                     operator_id: 1, # required
+    #                     poly_period: 1,
+    #                     profile: "CAMCORDING" # One of: ["CAMCORDING", "CUSTOM", "DEFAULT", "HQ", "MEZZANINE", "ROBUST"], # required
+    #                     watermark_id_length: "ID_2048" # One of: ["ID_2048", "ID_512"]
+    #                   }
+    #                 }
     #               }
     #             },
     #             ms_smooth_group_settings: {
@@ -7128,7 +8062,7 @@ module Aws::MediaLive
     #                 destination_ref_id: "__string"
     #               },
     #               nielsen_id3_behavior: "NO_PASSTHROUGH" # One of: ["NO_PASSTHROUGH", "PASSTHROUGH"],
-    #               scte35_type: "NONE" # One of: ["NONE", "SCTE_35_WITHOUT_SEGMENTATION"],
+    #               scte35_type: "NONE" # One of: ["NONE", "SCTE_35_WITHOUT_SEGMENTATION", "SCTE_35_WITHOUT_IDR"],
     #               segment_length: 1,
     #               segment_length_units: "MILLISECONDS" # One of: ["MILLISECONDS", "SECONDS"],
     #               send_delay_ms: 1,
@@ -7153,10 +8087,35 @@ module Aws::MediaLive
     #                     destination_ref_id: "__string"
     #                   }
     #                 }
-    #               ]
+    #               ],
+    #               watermarking_settings: {
+    #                 cmaf_ingest_ab_watermarker_irdeto_settings: {
+    #                   additional_destinations_alternate_destinations: [
+    #                     {
+    #                       destination_ref_id: "__string"
+    #                     }
+    #                   ],
+    #                   alternate_destination: { # required
+    #                     destination_ref_id: "__string"
+    #                   },
+    #                   custom_profile: {
+    #                     embedding_frequency: 1.0, # required
+    #                     scene_cut: 1.0, # required
+    #                     target_psnr: 1.0, # required
+    #                   },
+    #                   license: "__string",
+    #                   operator_id: 1, # required
+    #                   poly_period: 1,
+    #                   profile: "CAMCORDING" # One of: ["CAMCORDING", "CUSTOM", "DEFAULT", "HQ", "MEZZANINE", "ROBUST"], # required
+    #                   watermark_id_length: "ID_2048" # One of: ["ID_2048", "ID_512"]
+    #                 }
+    #               }
     #             },
     #             srt_group_settings: {
     #               input_loss_action: "DROP_PROGRAM" # One of: ["DROP_PROGRAM", "DROP_TS", "EMIT_PROGRAM"]
+    #             },
+    #             media_connect_router_group_settings: {
+    #               availability_zones: ["__string"]
     #             }
     #           },
     #           outputs: [ # required
@@ -7217,7 +8176,7 @@ module Aws::MediaLive
     #                       program_num: 1,
     #                       rate_mode: "CBR" # One of: ["CBR", "VBR"],
     #                       scte27_pids: "__string",
-    #                       scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH"],
+    #                       scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH", "SCTE_35_WITHOUT_IDR"],
     #                       scte35_pid: "__string",
     #                       segmentation_markers: "EBP" # One of: ["EBP", "EBP_LEGACY", "NONE", "PSI_SEGSTART", "RAI_ADAPT", "RAI_SEGSTART"],
     #                       segmentation_style: "MAINTAIN_CADENCE" # One of: ["MAINTAIN_CADENCE", "RESET_CADENCE"],
@@ -7290,7 +8249,8 @@ module Aws::MediaLive
     #                     audio_group_id: "__string",
     #                     audio_rendition_sets: "__string",
     #                     hls_auto_select: "NO" # One of: ["NO", "OMIT", "YES"],
-    #                     hls_default: "NO" # One of: ["NO", "OMIT", "YES"]
+    #                     hls_default: "NO" # One of: ["NO", "OMIT", "YES"],
+    #                     output_usage: ["MULTIVIEW_EQUAL_SIZE_VIEW" # One of: ["MULTIVIEW_EQUAL_SIZE_VIEW", "MULTIVIEW_PRIMARY_VIEW", "MULTIVIEW_SECONDARY_VIEW"]]
     #                   }
     #                 },
     #                 ms_smooth_output_settings: {
@@ -7315,7 +8275,7 @@ module Aws::MediaLive
     #                       nielsen_id3_behavior: "NO_PASSTHROUGH" # One of: ["NO_PASSTHROUGH", "PASSTHROUGH"],
     #                       pcr_control: "CONFIGURED_PCR_PERIOD" # One of: ["CONFIGURED_PCR_PERIOD", "PCR_EVERY_PES_PACKET"],
     #                       pcr_period: 1,
-    #                       scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH"],
+    #                       scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH", "SCTE_35_WITHOUT_IDR"],
     #                       scte35_preroll_pullup_milliseconds: 1.0
     #                     }
     #                   }
@@ -7381,7 +8341,7 @@ module Aws::MediaLive
     #                       program_num: 1,
     #                       rate_mode: "CBR" # One of: ["CBR", "VBR"],
     #                       scte27_pids: "__string",
-    #                       scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH"],
+    #                       scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH", "SCTE_35_WITHOUT_IDR"],
     #                       scte35_pid: "__string",
     #                       segmentation_markers: "EBP" # One of: ["EBP", "EBP_LEGACY", "NONE", "PSI_SEGSTART", "RAI_ADAPT", "RAI_SEGSTART"],
     #                       segmentation_style: "MAINTAIN_CADENCE" # One of: ["MAINTAIN_CADENCE", "RESET_CADENCE"],
@@ -7458,7 +8418,7 @@ module Aws::MediaLive
     #                       program_num: 1,
     #                       rate_mode: "CBR" # One of: ["CBR", "VBR"],
     #                       scte27_pids: "__string",
-    #                       scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH"],
+    #                       scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH", "SCTE_35_WITHOUT_IDR"],
     #                       scte35_pid: "__string",
     #                       segmentation_markers: "EBP" # One of: ["EBP", "EBP_LEGACY", "NONE", "PSI_SEGSTART", "RAI_ADAPT", "RAI_SEGSTART"],
     #                       segmentation_style: "MAINTAIN_CADENCE" # One of: ["MAINTAIN_CADENCE", "RESET_CADENCE"],
@@ -7475,6 +8435,78 @@ module Aws::MediaLive
     #                   },
     #                   encryption_type: "AES128" # One of: ["AES128", "AES192", "AES256"],
     #                   latency: 1
+    #                 },
+    #                 media_connect_router_output_settings: {
+    #                   connected_router_inputs: {
+    #                     pipeline0: "__string",
+    #                     pipeline1: "__string"
+    #                   },
+    #                   container_settings: { # required
+    #                     m2ts_settings: {
+    #                       absent_input_audio_behavior: "DROP" # One of: ["DROP", "ENCODE_SILENCE"],
+    #                       arib: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                       arib_captions_pid: "__string",
+    #                       arib_captions_pid_control: "AUTO" # One of: ["AUTO", "USE_CONFIGURED"],
+    #                       audio_buffer_model: "ATSC" # One of: ["ATSC", "DVB"],
+    #                       audio_frames_per_pes: 1,
+    #                       audio_pids: "__string",
+    #                       audio_stream_type: "ATSC" # One of: ["ATSC", "DVB"],
+    #                       bitrate: 1,
+    #                       buffer_model: "MULTIPLEX" # One of: ["MULTIPLEX", "NONE"],
+    #                       cc_descriptor: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                       dvb_nit_settings: {
+    #                         network_id: 1, # required
+    #                         network_name: "__stringMin1Max256", # required
+    #                         rep_interval: 1
+    #                       },
+    #                       dvb_sdt_settings: {
+    #                         output_sdt: "SDT_FOLLOW" # One of: ["SDT_FOLLOW", "SDT_FOLLOW_IF_PRESENT", "SDT_MANUAL", "SDT_NONE"],
+    #                         rep_interval: 1,
+    #                         service_name: "__stringMin1Max256",
+    #                         service_provider_name: "__stringMin1Max256"
+    #                       },
+    #                       dvb_sub_pids: "__string",
+    #                       dvb_tdt_settings: {
+    #                         rep_interval: 1
+    #                       },
+    #                       dvb_teletext_pid: "__string",
+    #                       ebif: "NONE" # One of: ["NONE", "PASSTHROUGH"],
+    #                       ebp_audio_interval: "VIDEO_AND_FIXED_INTERVALS" # One of: ["VIDEO_AND_FIXED_INTERVALS", "VIDEO_INTERVAL"],
+    #                       ebp_lookahead_ms: 1,
+    #                       ebp_placement: "VIDEO_AND_AUDIO_PIDS" # One of: ["VIDEO_AND_AUDIO_PIDS", "VIDEO_PID"],
+    #                       ecm_pid: "__string",
+    #                       es_rate_in_pes: "EXCLUDE" # One of: ["EXCLUDE", "INCLUDE"],
+    #                       etv_platform_pid: "__string",
+    #                       etv_signal_pid: "__string",
+    #                       fragment_time: 1.0,
+    #                       klv: "NONE" # One of: ["NONE", "PASSTHROUGH"],
+    #                       klv_data_pids: "__string",
+    #                       nielsen_id3_behavior: "NO_PASSTHROUGH" # One of: ["NO_PASSTHROUGH", "PASSTHROUGH"],
+    #                       null_packet_bitrate: 1.0,
+    #                       pat_interval: 1,
+    #                       pcr_control: "CONFIGURED_PCR_PERIOD" # One of: ["CONFIGURED_PCR_PERIOD", "PCR_EVERY_PES_PACKET"],
+    #                       pcr_period: 1,
+    #                       pcr_pid: "__string",
+    #                       pmt_interval: 1,
+    #                       pmt_pid: "__string",
+    #                       program_num: 1,
+    #                       rate_mode: "CBR" # One of: ["CBR", "VBR"],
+    #                       scte27_pids: "__string",
+    #                       scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH", "SCTE_35_WITHOUT_IDR"],
+    #                       scte35_pid: "__string",
+    #                       segmentation_markers: "EBP" # One of: ["EBP", "EBP_LEGACY", "NONE", "PSI_SEGSTART", "RAI_ADAPT", "RAI_SEGSTART"],
+    #                       segmentation_style: "MAINTAIN_CADENCE" # One of: ["MAINTAIN_CADENCE", "RESET_CADENCE"],
+    #                       segmentation_time: 1.0,
+    #                       timed_metadata_behavior: "NO_PASSTHROUGH" # One of: ["NO_PASSTHROUGH", "PASSTHROUGH"],
+    #                       timed_metadata_pid: "__string",
+    #                       transport_stream_id: 1,
+    #                       video_pid: "__string",
+    #                       scte35_preroll_pullup_milliseconds: 1.0
+    #                     }
+    #                   },
+    #                   destination: { # required
+    #                     destination_ref_id: "__string"
+    #                   }
     #                 }
     #               },
     #               video_description_name: "__string"
@@ -7583,6 +8615,8 @@ module Aws::MediaLive
     #                 rec601_settings: {
     #                 },
     #                 rec709_settings: {
+    #                 },
+    #                 hlg2020_settings: {
     #                 }
     #               },
     #               filter_settings: {
@@ -7675,6 +8709,8 @@ module Aws::MediaLive
     #                 rec601_settings: {
     #                 },
     #                 rec709_settings: {
+    #                 },
+    #                 hlg2020_settings: {
     #                 }
     #               },
     #               fixed_afd: "AFD_0000" # One of: ["AFD_0000", "AFD_0010", "AFD_0011", "AFD_0100", "AFD_1000", "AFD_1001", "AFD_1010", "AFD_1011", "AFD_1101", "AFD_1110", "AFD_1111"],
@@ -7697,15 +8733,32 @@ module Aws::MediaLive
     #               },
     #               bitrate: 1,
     #               rate_control_mode: "CBR" # One of: ["CBR", "QVBR"],
-    #               min_bitrate: 1
+    #               min_bitrate: 1,
+    #               spatial_aq: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #               temporal_aq: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #               timecode_insertion: "DISABLED" # One of: ["DISABLED", "METADATA_OBU"],
+    #               bit_depth: "DEPTH_10" # One of: ["DEPTH_10", "DEPTH_8"]
     #             }
     #           },
     #           height: 1,
     #           name: "__string", # required
     #           respond_to_afd: "NONE" # One of: ["NONE", "PASSTHROUGH", "RESPOND"],
-    #           scaling_behavior: "DEFAULT" # One of: ["DEFAULT", "STRETCH_TO_OUTPUT"],
+    #           scaling_behavior: "DEFAULT" # One of: ["DEFAULT", "STRETCH_TO_OUTPUT", "SMART_CROP"],
     #           sharpness: 1,
-    #           width: 1
+    #           width: 1,
+    #           crop_rectangle: {
+    #             height: 1, # required
+    #             width: 1, # required
+    #             x: 1, # required
+    #             y: 1, # required
+    #           },
+    #           output_position_rectangle: {
+    #             height: 1, # required
+    #             width: 1, # required
+    #             x: 1, # required
+    #             y: 1, # required
+    #           },
+    #           border: 1
     #         }
     #       ],
     #       thumbnail_configuration: {
@@ -7763,11 +8816,71 @@ module Aws::MediaLive
     #                 },
     #                 audio_pid_selection: {
     #                   pid: 1, # required
+    #                   pids: [
+    #                     {
+    #                       dolby_e_decode: {
+    #                         program_selection: "ALL_CHANNELS" # One of: ["ALL_CHANNELS", "PROGRAM_1", "PROGRAM_2", "PROGRAM_3", "PROGRAM_4", "PROGRAM_5", "PROGRAM_6", "PROGRAM_7", "PROGRAM_8"], # required
+    #                       },
+    #                       pid: 1, # required
+    #                       premix_settings: {
+    #                         audio_normalization_settings: {
+    #                           algorithm: "ITU_1770_1" # One of: ["ITU_1770_1", "ITU_1770_2", "ITU_1770_3", "ITU_1770_4"],
+    #                           algorithm_control: "CORRECT_AUDIO" # One of: ["CORRECT_AUDIO"],
+    #                           target_lkfs: 1.0,
+    #                           peak_calculation: "NONE" # One of: ["NONE", "TRUE_PEAK"],
+    #                           peak_limiter_threshold: 1.0
+    #                         },
+    #                         channels: 1,
+    #                         gain_db: 1.0,
+    #                         remix_settings: {
+    #                           channel_mappings: [ # required
+    #                             {
+    #                               input_channel_levels: [ # required
+    #                                 {
+    #                                   gain: 1, # required
+    #                                   input_channel: 1, # required
+    #                                 }
+    #                               ],
+    #                               output_channel: 1, # required
+    #                             }
+    #                           ],
+    #                           channels_in: 1,
+    #                           channels_out: 1
+    #                         }
+    #                       }
+    #                     }
+    #                   ]
     #                 },
     #                 audio_track_selection: {
     #                   tracks: [ # required
     #                     {
     #                       track: 1, # required
+    #                       premix_settings: {
+    #                         audio_normalization_settings: {
+    #                           algorithm: "ITU_1770_1" # One of: ["ITU_1770_1", "ITU_1770_2", "ITU_1770_3", "ITU_1770_4"],
+    #                           algorithm_control: "CORRECT_AUDIO" # One of: ["CORRECT_AUDIO"],
+    #                           target_lkfs: 1.0,
+    #                           peak_calculation: "NONE" # One of: ["NONE", "TRUE_PEAK"],
+    #                           peak_limiter_threshold: 1.0
+    #                         },
+    #                         channels: 1,
+    #                         gain_db: 1.0,
+    #                         remix_settings: {
+    #                           channel_mappings: [ # required
+    #                             {
+    #                               input_channel_levels: [ # required
+    #                                 {
+    #                                   gain: 1, # required
+    #                                   input_channel: 1, # required
+    #                                 }
+    #                               ],
+    #                               output_channel: 1, # required
+    #                             }
+    #                           ],
+    #                           channels_in: 1,
+    #                           channels_out: 1
+    #                         }
+    #                       }
     #                     }
     #                   ],
     #                   dolby_e_decode: {
@@ -7813,6 +8926,10 @@ module Aws::MediaLive
     #                     width: 1.0, # required
     #                   },
     #                   page_number: "__string"
+    #                 },
+    #                 smart_subtitle_source_settings: {
+    #                   caption_synchronization_mode: "NO_VIDEO_DELAY" # One of: ["NO_VIDEO_DELAY", "VIDEO_ALIGNED_CAPTIONS"],
+    #                   inference_feed_output: "__string"
     #                 }
     #               }
     #             }
@@ -7882,6 +8999,11 @@ module Aws::MediaLive
     #         channel_engine_version: {
     #           expiration_date: Time.now,
     #           version: "__string"
+    #         },
+    #         media_connect_router_output_connection_map: {
+    #           "__string" => {
+    #             router_input_arn: "__string"
+    #           }
     #         }
     #       }
     #     ],
@@ -7904,6 +9026,27 @@ module Aws::MediaLive
     #     channel_engine_version: {
     #       expiration_date: Time.now,
     #       version: "__string"
+    #     },
+    #     linked_channel_settings: {
+    #       follower_channel_settings: {
+    #         linked_channel_type: "FOLLOWING_CHANNEL" # One of: ["FOLLOWING_CHANNEL", "PRIMARY_CHANNEL"],
+    #         primary_channel_arn: "__string"
+    #       },
+    #       primary_channel_settings: {
+    #         following_channel_arns: ["__string"],
+    #         linked_channel_type: "FOLLOWING_CHANNEL" # One of: ["FOLLOWING_CHANNEL", "PRIMARY_CHANNEL"]
+    #       }
+    #     },
+    #     channel_security_groups: ["__string"],
+    #     inference_settings: {
+    #       feed_arn: "__string",
+    #       audio_feed_inputs: [
+    #         {
+    #           audio_selector_name: "__string",
+    #           feed_input: "__string"
+    #         }
+    #       ],
+    #       enrichment_methods: ["SCTE35_ELEMENTAL_INFERENCE_QUERY_PARAMS" # One of: ["SCTE35_ELEMENTAL_INFERENCE_QUERY_PARAMS"]]
     #     }
     #   }
     # @return [Types::DescribeChannelResponse]
@@ -8039,7 +9182,7 @@ module Aws::MediaLive
     #     tags: {
     #       "__string" => "__string"
     #     },
-    #     type: "UDP_PUSH" # One of: ["UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT", "INPUT_DEVICE", "AWS_CDI", "TS_FILE", "SRT_CALLER", "MULTICAST", "SMPTE_2110_RECEIVER_GROUP", "SDI"],
+    #     type: "UDP_PUSH" # One of: ["UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT", "INPUT_DEVICE", "AWS_CDI", "TS_FILE", "SRT_CALLER", "MULTICAST", "SMPTE_2110_RECEIVER_GROUP", "SDI", "MEDIACONNECT_ROUTER", "SRT_LISTENER"],
     #     srt_settings: {
     #       srt_caller_sources: [
     #         {
@@ -8052,7 +9195,15 @@ module Aws::MediaLive
     #           srt_listener_port: "__string",
     #           stream_id: "__string"
     #         }
-    #       ]
+    #       ],
+    #       srt_listener_settings: {
+    #         decryption: {
+    #           algorithm: "AES128" # One of: ["AES128", "AES192", "AES256"], # required
+    #           passphrase_secret_arn: "__string", # required
+    #         },
+    #         minimum_latency: 1,
+    #         stream_id: "__string"
+    #       }
     #     },
     #     input_network_location: "AWS" # One of: ["AWS", "ON_PREMISES"],
     #     multicast_settings: {
@@ -8087,7 +9238,17 @@ module Aws::MediaLive
     #         }
     #       ]
     #     },
-    #     sdi_sources: ["__string"]
+    #     sdi_sources: ["__string"],
+    #     router_settings: {
+    #       destinations: [
+    #         {
+    #           availability_zone_name: "__string",
+    #           router_output_arn: "__string"
+    #         }
+    #       ],
+    #       encryption_type: "AUTOMATIC" # One of: ["AUTOMATIC", "SECRETS_MANAGER"],
+    #       secret_arn: "__string"
+    #     }
     #   }
     # @return [Types::DescribeInputResponse]
     def describe_input(params = {}, options = {})
@@ -8225,7 +9386,8 @@ module Aws::MediaLive
     #       {
     #         cidr: "__string"
     #       }
-    #     ]
+    #     ],
+    #     channels: ["__string"]
     #   }
     # @return [Types::DescribeInputSecurityGroupResponse]
     def describe_input_security_group(params = {}, options = {})
@@ -8405,7 +9567,8 @@ module Aws::MediaLive
     #       {
     #         logical_interface_name: "__string",
     #         network_interface_mode: "NAT" # One of: ["NAT", "BRIDGE"],
-    #         physical_interface_name: "__string"
+    #         physical_interface_name: "__string",
+    #         physical_interface_ip_addresses: ["__string"]
     #       }
     #     ],
     #     role: "BACKUP" # One of: ["BACKUP", "ACTIVE"],
@@ -8795,7 +9958,7 @@ module Aws::MediaLive
     #     tags: {
     #       "__string" => "__string"
     #     },
-    #     target_resource_type: "CLOUDFRONT_DISTRIBUTION" # One of: ["CLOUDFRONT_DISTRIBUTION", "MEDIALIVE_MULTIPLEX", "MEDIALIVE_CHANNEL", "MEDIALIVE_INPUT_DEVICE", "MEDIAPACKAGE_CHANNEL", "MEDIAPACKAGE_ORIGIN_ENDPOINT", "MEDIACONNECT_FLOW", "S3_BUCKET", "MEDIATAILOR_PLAYBACK_CONFIGURATION"],
+    #     target_resource_type: "CLOUDFRONT_DISTRIBUTION" # One of: ["CLOUDFRONT_DISTRIBUTION", "MEDIALIVE_MULTIPLEX", "MEDIALIVE_CHANNEL", "MEDIALIVE_INPUT_DEVICE", "MEDIAPACKAGE_CHANNEL", "MEDIAPACKAGE_ORIGIN_ENDPOINT", "MEDIACONNECT_FLOW", "S3_BUCKET", "MEDIATAILOR_PLAYBACK_CONFIGURATION", "ELEMENTAL_INFERENCE_FEED"],
     #     threshold: 1.0,
     #     treat_missing_data: "notBreaching" # One of: ["notBreaching", "breaching", "ignore", "missing"]
     #   }
@@ -8978,6 +10141,47 @@ module Aws::MediaLive
       request.send_request(options)
     end
 
+    # List the alerts for a channel with optional filtering based on alert state.
+    # @param [Hash, Types::ListAlertsRequest] params
+    # @option params [String] :channel_id
+    #   The unique ID of the channel
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return
+    # @option params [String] :next_token
+    #   The next pagination token
+    # @option params [String] :state_filter
+    #   Specifies the set of alerts to return based on their state. SET - Return only alerts with SET state. CLEARED - Return only alerts with CLEARED state. ALL - Return all alerts.
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     channel_id: "__string", # required
+    #     max_results: 1,
+    #     next_token: "__string",
+    #     state_filter: "__string"
+    #   }
+    #   options = {}
+    #   response = client.list_alerts(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     alerts: [
+    #       {
+    #         alert_type: "__string",
+    #         cleared_timestamp: Time.now,
+    #         id: "__string",
+    #         message: "__string",
+    #         pipeline_id: "__string",
+    #         set_timestamp: Time.now,
+    #         state: "SET" # One of: ["SET", "CLEARED"]
+    #       }
+    #     ],
+    #     next_token: "__string"
+    #   }
+    # @return [Types::ListAlertsResponse]
+    def list_alerts(params = {}, options = {})
+      request = build_request(:list_alerts, params)
+      request.send_request(options)
+    end
+
     # Retrieve the list of ChannelPlacementGroups in the specified Cluster.
     # @param [Hash, Types::ListChannelPlacementGroupsRequest] params
     # @option params [String] :cluster_id
@@ -9046,7 +10250,9 @@ module Aws::MediaLive
     #               {
     #                 channel_id: "__stringMin1",
     #                 channel_group: "__stringMin1",
-    #                 channel_name: "__stringMin1"
+    #                 channel_name: "__stringMin1",
+    #                 channel_endpoint_id: "__stringMin1",
+    #                 media_package_region_name: "__stringMin1"
     #               }
     #             ],
     #             multiplex_settings: {
@@ -9058,17 +10264,26 @@ module Aws::MediaLive
     #                 password_param: "__string",
     #                 stream_name: "__string",
     #                 url: "__string",
-    #                 username: "__string"
+    #                 username: "__string",
+    #                 virtual_source_address: "__string"
     #               }
     #             ],
     #             srt_settings: [
     #               {
     #                 encryption_passphrase_secret_arn: "__string",
     #                 stream_id: "__string",
-    #                 url: "__string"
+    #                 url: "__string",
+    #                 connection_mode: "CALLER" # One of: ["CALLER", "LISTENER"],
+    #                 listener_port: 1
     #               }
     #             ],
-    #             logical_interface_names: ["__string"]
+    #             logical_interface_names: ["__string"],
+    #             media_connect_router_settings: [
+    #               {
+    #                 encryption_type: "AUTOMATIC" # One of: ["AUTOMATIC", "SECRETS_MANAGER"],
+    #                 secret_arn: "__string"
+    #               }
+    #             ]
     #           }
     #         ],
     #         egress_endpoints: [
@@ -9118,11 +10333,71 @@ module Aws::MediaLive
     #                     },
     #                     audio_pid_selection: {
     #                       pid: 1, # required
+    #                       pids: [
+    #                         {
+    #                           dolby_e_decode: {
+    #                             program_selection: "ALL_CHANNELS" # One of: ["ALL_CHANNELS", "PROGRAM_1", "PROGRAM_2", "PROGRAM_3", "PROGRAM_4", "PROGRAM_5", "PROGRAM_6", "PROGRAM_7", "PROGRAM_8"], # required
+    #                           },
+    #                           pid: 1, # required
+    #                           premix_settings: {
+    #                             audio_normalization_settings: {
+    #                               algorithm: "ITU_1770_1" # One of: ["ITU_1770_1", "ITU_1770_2", "ITU_1770_3", "ITU_1770_4"],
+    #                               algorithm_control: "CORRECT_AUDIO" # One of: ["CORRECT_AUDIO"],
+    #                               target_lkfs: 1.0,
+    #                               peak_calculation: "NONE" # One of: ["NONE", "TRUE_PEAK"],
+    #                               peak_limiter_threshold: 1.0
+    #                             },
+    #                             channels: 1,
+    #                             gain_db: 1.0,
+    #                             remix_settings: {
+    #                               channel_mappings: [ # required
+    #                                 {
+    #                                   input_channel_levels: [ # required
+    #                                     {
+    #                                       gain: 1, # required
+    #                                       input_channel: 1, # required
+    #                                     }
+    #                                   ],
+    #                                   output_channel: 1, # required
+    #                                 }
+    #                               ],
+    #                               channels_in: 1,
+    #                               channels_out: 1
+    #                             }
+    #                           }
+    #                         }
+    #                       ]
     #                     },
     #                     audio_track_selection: {
     #                       tracks: [ # required
     #                         {
     #                           track: 1, # required
+    #                           premix_settings: {
+    #                             audio_normalization_settings: {
+    #                               algorithm: "ITU_1770_1" # One of: ["ITU_1770_1", "ITU_1770_2", "ITU_1770_3", "ITU_1770_4"],
+    #                               algorithm_control: "CORRECT_AUDIO" # One of: ["CORRECT_AUDIO"],
+    #                               target_lkfs: 1.0,
+    #                               peak_calculation: "NONE" # One of: ["NONE", "TRUE_PEAK"],
+    #                               peak_limiter_threshold: 1.0
+    #                             },
+    #                             channels: 1,
+    #                             gain_db: 1.0,
+    #                             remix_settings: {
+    #                               channel_mappings: [ # required
+    #                                 {
+    #                                   input_channel_levels: [ # required
+    #                                     {
+    #                                       gain: 1, # required
+    #                                       input_channel: 1, # required
+    #                                     }
+    #                                   ],
+    #                                   output_channel: 1, # required
+    #                                 }
+    #                               ],
+    #                               channels_in: 1,
+    #                               channels_out: 1
+    #                             }
+    #                           }
     #                         }
     #                       ],
     #                       dolby_e_decode: {
@@ -9168,6 +10443,10 @@ module Aws::MediaLive
     #                         width: 1.0, # required
     #                       },
     #                       page_number: "__string"
+    #                     },
+    #                     smart_subtitle_source_settings: {
+    #                       caption_synchronization_mode: "NO_VIDEO_DELAY" # One of: ["NO_VIDEO_DELAY", "VIDEO_ALIGNED_CAPTIONS"],
+    #                       inference_feed_output: "__string"
     #                     }
     #                   }
     #                 }
@@ -9252,7 +10531,28 @@ module Aws::MediaLive
     #             expiration_date: Time.now,
     #             version: "__string"
     #           }
-    #         ]
+    #         ],
+    #         linked_channel_settings: {
+    #           follower_channel_settings: {
+    #             linked_channel_type: "FOLLOWING_CHANNEL" # One of: ["FOLLOWING_CHANNEL", "PRIMARY_CHANNEL"],
+    #             primary_channel_arn: "__string"
+    #           },
+    #           primary_channel_settings: {
+    #             following_channel_arns: ["__string"],
+    #             linked_channel_type: "FOLLOWING_CHANNEL" # One of: ["FOLLOWING_CHANNEL", "PRIMARY_CHANNEL"]
+    #           }
+    #         },
+    #         channel_security_groups: ["__string"],
+    #         inference_settings: {
+    #           feed_arn: "__string",
+    #           audio_feed_inputs: [
+    #             {
+    #               audio_selector_name: "__string",
+    #               feed_input: "__string"
+    #             }
+    #           ],
+    #           enrichment_methods: ["SCTE35_ELEMENTAL_INFERENCE_QUERY_PARAMS" # One of: ["SCTE35_ELEMENTAL_INFERENCE_QUERY_PARAMS"]]
+    #         }
     #       }
     #     ],
     #     next_token: "__string"
@@ -9350,7 +10650,7 @@ module Aws::MediaLive
     #         tags: {
     #           "__string" => "__string"
     #         },
-    #         target_resource_type: "CLOUDFRONT_DISTRIBUTION" # One of: ["CLOUDFRONT_DISTRIBUTION", "MEDIALIVE_MULTIPLEX", "MEDIALIVE_CHANNEL", "MEDIALIVE_INPUT_DEVICE", "MEDIAPACKAGE_CHANNEL", "MEDIAPACKAGE_ORIGIN_ENDPOINT", "MEDIACONNECT_FLOW", "S3_BUCKET", "MEDIATAILOR_PLAYBACK_CONFIGURATION"], # required
+    #         target_resource_type: "CLOUDFRONT_DISTRIBUTION" # One of: ["CLOUDFRONT_DISTRIBUTION", "MEDIALIVE_MULTIPLEX", "MEDIALIVE_CHANNEL", "MEDIALIVE_INPUT_DEVICE", "MEDIAPACKAGE_CHANNEL", "MEDIAPACKAGE_ORIGIN_ENDPOINT", "MEDIACONNECT_FLOW", "S3_BUCKET", "MEDIATAILOR_PLAYBACK_CONFIGURATION", "ELEMENTAL_INFERENCE_FEED"], # required
     #         threshold: 1.0, # required
     #         treat_missing_data: "notBreaching" # One of: ["notBreaching", "breaching", "ignore", "missing"], # required
     #       }
@@ -9360,6 +10660,48 @@ module Aws::MediaLive
     # @return [Types::ListCloudWatchAlarmTemplatesResponse]
     def list_cloud_watch_alarm_templates(params = {}, options = {})
       request = build_request(:list_cloud_watch_alarm_templates, params)
+      request.send_request(options)
+    end
+
+    # List the alerts for a cluster with optional filtering based on alert state.
+    # @param [Hash, Types::ListClusterAlertsRequest] params
+    # @option params [String] :cluster_id
+    #   The unique ID of the cluster
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return
+    # @option params [String] :next_token
+    #   The next pagination token
+    # @option params [String] :state_filter
+    #   Specifies the set of alerts to return based on their state. SET - Return only alerts with SET state. CLEARED - Return only alerts with CLEARED state. ALL - Return all alerts.
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     cluster_id: "__string", # required
+    #     max_results: 1,
+    #     next_token: "__string",
+    #     state_filter: "__string"
+    #   }
+    #   options = {}
+    #   response = client.list_cluster_alerts(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     alerts: [
+    #       {
+    #         alert_type: "__string",
+    #         channel_id: "__string",
+    #         cleared_timestamp: Time.now,
+    #         id: "__string",
+    #         message: "__string",
+    #         node_id: "__string",
+    #         set_timestamp: Time.now,
+    #         state: "SET" # One of: ["SET", "CLEARED"]
+    #       }
+    #     ],
+    #     next_token: "__string"
+    #   }
+    # @return [Types::ListClusterAlertsResponse]
+    def list_cluster_alerts(params = {}, options = {})
+      request = build_request(:list_cluster_alerts, params)
       request.send_request(options)
     end
 
@@ -9644,7 +10986,8 @@ module Aws::MediaLive
     #           {
     #             cidr: "__string"
     #           }
-    #         ]
+    #         ],
+    #         channels: ["__string"]
     #       }
     #     ],
     #     next_token: "__string"
@@ -9721,7 +11064,7 @@ module Aws::MediaLive
     #         tags: {
     #           "__string" => "__string"
     #         },
-    #         type: "UDP_PUSH" # One of: ["UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT", "INPUT_DEVICE", "AWS_CDI", "TS_FILE", "SRT_CALLER", "MULTICAST", "SMPTE_2110_RECEIVER_GROUP", "SDI"],
+    #         type: "UDP_PUSH" # One of: ["UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT", "INPUT_DEVICE", "AWS_CDI", "TS_FILE", "SRT_CALLER", "MULTICAST", "SMPTE_2110_RECEIVER_GROUP", "SDI", "MEDIACONNECT_ROUTER", "SRT_LISTENER"],
     #         srt_settings: {
     #           srt_caller_sources: [
     #             {
@@ -9734,7 +11077,15 @@ module Aws::MediaLive
     #               srt_listener_port: "__string",
     #               stream_id: "__string"
     #             }
-    #           ]
+    #           ],
+    #           srt_listener_settings: {
+    #             decryption: {
+    #               algorithm: "AES128" # One of: ["AES128", "AES192", "AES256"], # required
+    #               passphrase_secret_arn: "__string", # required
+    #             },
+    #             minimum_latency: 1,
+    #             stream_id: "__string"
+    #           }
     #         },
     #         input_network_location: "AWS" # One of: ["AWS", "ON_PREMISES"],
     #         multicast_settings: {
@@ -9769,7 +11120,17 @@ module Aws::MediaLive
     #             }
     #           ]
     #         },
-    #         sdi_sources: ["__string"]
+    #         sdi_sources: ["__string"],
+    #         router_settings: {
+    #           destinations: [
+    #             {
+    #               availability_zone_name: "__string",
+    #               router_output_arn: "__string"
+    #             }
+    #           ],
+    #           encryption_type: "AUTOMATIC" # One of: ["AUTOMATIC", "SECRETS_MANAGER"],
+    #           secret_arn: "__string"
+    #         }
     #       }
     #     ],
     #     next_token: "__string"
@@ -9777,6 +11138,47 @@ module Aws::MediaLive
     # @return [Types::ListInputsResponse]
     def list_inputs(params = {}, options = {})
       request = build_request(:list_inputs, params)
+      request.send_request(options)
+    end
+
+    # List the alerts for a multiplex with optional filtering based on alert state.
+    # @param [Hash, Types::ListMultiplexAlertsRequest] params
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return
+    # @option params [String] :multiplex_id
+    #   The unique ID of the multiplex
+    # @option params [String] :next_token
+    #   The next pagination token
+    # @option params [String] :state_filter
+    #   Specifies the set of alerts to return based on their state. SET - Return only alerts with SET state. CLEARED - Return only alerts with CLEARED state. ALL - Return all alerts.
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     max_results: 1,
+    #     multiplex_id: "__string", # required
+    #     next_token: "__string",
+    #     state_filter: "__string"
+    #   }
+    #   options = {}
+    #   response = client.list_multiplex_alerts(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     alerts: [
+    #       {
+    #         alert_type: "__string",
+    #         cleared_timestamp: Time.now,
+    #         id: "__string",
+    #         message: "__string",
+    #         pipeline_id: "__string",
+    #         set_timestamp: Time.now,
+    #         state: "SET" # One of: ["SET", "CLEARED"]
+    #       }
+    #     ],
+    #     next_token: "__string"
+    #   }
+    # @return [Types::ListMultiplexAlertsResponse]
+    def list_multiplex_alerts(params = {}, options = {})
+      request = build_request(:list_multiplex_alerts, params)
       request.send_request(options)
     end
 
@@ -9932,7 +11334,8 @@ module Aws::MediaLive
     #           {
     #             logical_interface_name: "__string",
     #             network_interface_mode: "NAT" # One of: ["NAT", "BRIDGE"],
-    #             physical_interface_name: "__string"
+    #             physical_interface_name: "__string",
+    #             physical_interface_ip_addresses: ["__string"]
     #           }
     #         ],
     #         role: "BACKUP" # One of: ["BACKUP", "ACTIVE"],
@@ -10388,7 +11791,9 @@ module Aws::MediaLive
     #           {
     #             channel_id: "__stringMin1",
     #             channel_group: "__stringMin1",
-    #             channel_name: "__stringMin1"
+    #             channel_name: "__stringMin1",
+    #             channel_endpoint_id: "__stringMin1",
+    #             media_package_region_name: "__stringMin1"
     #           }
     #         ],
     #         multiplex_settings: {
@@ -10400,17 +11805,26 @@ module Aws::MediaLive
     #             password_param: "__string",
     #             stream_name: "__string",
     #             url: "__string",
-    #             username: "__string"
+    #             username: "__string",
+    #             virtual_source_address: "__string"
     #           }
     #         ],
     #         srt_settings: [
     #           {
     #             encryption_passphrase_secret_arn: "__string",
     #             stream_id: "__string",
-    #             url: "__string"
+    #             url: "__string",
+    #             connection_mode: "CALLER" # One of: ["CALLER", "LISTENER"],
+    #             listener_port: 1
     #           }
     #         ],
-    #         logical_interface_names: ["__string"]
+    #         logical_interface_names: ["__string"],
+    #         media_connect_router_settings: [
+    #           {
+    #             encryption_type: "AUTOMATIC" # One of: ["AUTOMATIC", "SECRETS_MANAGER"],
+    #             secret_arn: "__string"
+    #           }
+    #         ]
     #       }
     #     ],
     #     egress_endpoints: [
@@ -10422,9 +11836,11 @@ module Aws::MediaLive
     #       audio_descriptions: [ # required
     #         {
     #           audio_normalization_settings: {
-    #             algorithm: "ITU_1770_1" # One of: ["ITU_1770_1", "ITU_1770_2"],
+    #             algorithm: "ITU_1770_1" # One of: ["ITU_1770_1", "ITU_1770_2", "ITU_1770_3", "ITU_1770_4"],
     #             algorithm_control: "CORRECT_AUDIO" # One of: ["CORRECT_AUDIO"],
-    #             target_lkfs: 1.0
+    #             target_lkfs: 1.0,
+    #             peak_calculation: "NONE" # One of: ["NONE", "TRUE_PEAK"],
+    #             peak_limiter_threshold: 1.0
     #           },
     #           audio_selector_name: "__string", # required
     #           audio_type: "CLEAN_EFFECTS" # One of: ["CLEAN_EFFECTS", "HEARING_IMPAIRED", "UNDEFINED", "VISUAL_IMPAIRED_COMMENTARY"],
@@ -10438,6 +11854,11 @@ module Aws::MediaLive
     #               },
     #               nielsen_distribution_type: "FINAL_DISTRIBUTOR" # One of: ["FINAL_DISTRIBUTOR", "PROGRAM_CONTENT"],
     #               nielsen_naes_ii_nw_settings: {
+    #                 check_digit_string: "__stringMin2Max2", # required
+    #                 sid: 1.0, # required
+    #                 timezone: "AMERICA_PUERTO_RICO" # One of: ["AMERICA_PUERTO_RICO", "US_ALASKA", "US_ARIZONA", "US_CENTRAL", "US_EASTERN", "US_HAWAII", "US_MOUNTAIN", "US_PACIFIC", "US_SAMOA", "UTC"]
+    #               },
+    #               nielsen_nw_only_settings: {
     #                 check_digit_string: "__stringMin2Max2", # required
     #                 sid: 1.0, # required
     #                 timezone: "AMERICA_PUERTO_RICO" # One of: ["AMERICA_PUERTO_RICO", "US_ALASKA", "US_ARIZONA", "US_CENTRAL", "US_EASTERN", "US_HAWAII", "US_MOUNTAIN", "US_PACIFIC", "US_SAMOA", "UTC"]
@@ -10643,6 +12064,10 @@ module Aws::MediaLive
     #               default_line_height: 1
     #             },
     #             embedded_destination_settings: {
+    #               position: {
+    #                 y_position_line: 1
+    #               },
+    #               style_control: "MANUAL" # One of: ["MANUAL", "PASSTHROUGH"]
     #             },
     #             embedded_plus_scte20_destination_settings: {
     #             },
@@ -10657,10 +12082,16 @@ module Aws::MediaLive
     #             teletext_destination_settings: {
     #             },
     #             ttml_destination_settings: {
-    #               style_control: "PASSTHROUGH" # One of: ["PASSTHROUGH", "USE_CONFIGURED"]
+    #               style_control: "PASSTHROUGH" # One of: ["PASSTHROUGH", "USE_CONFIGURED", "MANUAL"],
+    #               position: {
+    #                 y_position_percentage: 1
+    #               }
     #             },
     #             webvtt_destination_settings: {
-    #               style_control: "NO_STYLE_DATA" # One of: ["NO_STYLE_DATA", "PASSTHROUGH"]
+    #               style_control: "NO_STYLE_DATA" # One of: ["NO_STYLE_DATA", "PASSTHROUGH", "MANUAL"],
+    #               position: {
+    #                 y_position_percentage: 1
+    #               }
     #             }
     #           },
     #           language_code: "__string",
@@ -10697,6 +12128,11 @@ module Aws::MediaLive
     #             jam_sync_time: "__string"
     #           },
     #           pipeline_locking_settings: {
+    #             pipeline_locking_method: "SOURCE_TIMECODE" # One of: ["SOURCE_TIMECODE", "VIDEO_ALIGNMENT"],
+    #             custom_epoch: "__string"
+    #           },
+    #           disabled_locking_settings: {
+    #             custom_epoch: "__string"
     #           }
     #         }
     #       },
@@ -10846,12 +12282,41 @@ module Aws::MediaLive
     #                 id3_behavior: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                 klv_behavior: "NO_PASSTHROUGH" # One of: ["NO_PASSTHROUGH", "PASSTHROUGH"],
     #                 nielsen_id3_behavior: "NO_PASSTHROUGH" # One of: ["NO_PASSTHROUGH", "PASSTHROUGH"],
-    #                 scte35_type: "NONE" # One of: ["NONE", "SCTE_35_WITHOUT_SEGMENTATION"],
+    #                 scte35_type: "NONE" # One of: ["NONE", "SCTE_35_WITHOUT_SEGMENTATION", "SCTE_35_WITHOUT_IDR"],
     #                 segment_length: 1,
     #                 segment_length_units: "MILLISECONDS" # One of: ["MILLISECONDS", "SECONDS"],
     #                 timed_metadata_id3_frame: "NONE" # One of: ["NONE", "PRIV", "TDRL"],
     #                 timed_metadata_id3_period: 1,
-    #                 timed_metadata_passthrough: "DISABLED" # One of: ["DISABLED", "ENABLED"]
+    #                 timed_metadata_passthrough: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                 additional_destinations: [
+    #                   {
+    #                     destination: { # required
+    #                       destination_ref_id: "__string"
+    #                     }
+    #                   }
+    #                 ],
+    #                 watermarking_settings: {
+    #                   media_package_v2_ab_watermarker_irdeto_settings: {
+    #                     additional_destinations_alternate_destinations: [
+    #                       {
+    #                         destination_ref_id: "__string"
+    #                       }
+    #                     ],
+    #                     alternate_destination: { # required
+    #                       destination_ref_id: "__string"
+    #                     },
+    #                     custom_profile: {
+    #                       embedding_frequency: 1.0, # required
+    #                       scene_cut: 1.0, # required
+    #                       target_psnr: 1.0, # required
+    #                     },
+    #                     license: "__string",
+    #                     operator_id: 1, # required
+    #                     poly_period: 1,
+    #                     profile: "CAMCORDING" # One of: ["CAMCORDING", "CUSTOM", "DEFAULT", "HQ", "MEZZANINE", "ROBUST"], # required
+    #                     watermark_id_length: "ID_2048" # One of: ["ID_2048", "ID_512"]
+    #                   }
+    #                 }
     #               }
     #             },
     #             ms_smooth_group_settings: {
@@ -10899,7 +12364,7 @@ module Aws::MediaLive
     #                 destination_ref_id: "__string"
     #               },
     #               nielsen_id3_behavior: "NO_PASSTHROUGH" # One of: ["NO_PASSTHROUGH", "PASSTHROUGH"],
-    #               scte35_type: "NONE" # One of: ["NONE", "SCTE_35_WITHOUT_SEGMENTATION"],
+    #               scte35_type: "NONE" # One of: ["NONE", "SCTE_35_WITHOUT_SEGMENTATION", "SCTE_35_WITHOUT_IDR"],
     #               segment_length: 1,
     #               segment_length_units: "MILLISECONDS" # One of: ["MILLISECONDS", "SECONDS"],
     #               send_delay_ms: 1,
@@ -10924,10 +12389,35 @@ module Aws::MediaLive
     #                     destination_ref_id: "__string"
     #                   }
     #                 }
-    #               ]
+    #               ],
+    #               watermarking_settings: {
+    #                 cmaf_ingest_ab_watermarker_irdeto_settings: {
+    #                   additional_destinations_alternate_destinations: [
+    #                     {
+    #                       destination_ref_id: "__string"
+    #                     }
+    #                   ],
+    #                   alternate_destination: { # required
+    #                     destination_ref_id: "__string"
+    #                   },
+    #                   custom_profile: {
+    #                     embedding_frequency: 1.0, # required
+    #                     scene_cut: 1.0, # required
+    #                     target_psnr: 1.0, # required
+    #                   },
+    #                   license: "__string",
+    #                   operator_id: 1, # required
+    #                   poly_period: 1,
+    #                   profile: "CAMCORDING" # One of: ["CAMCORDING", "CUSTOM", "DEFAULT", "HQ", "MEZZANINE", "ROBUST"], # required
+    #                   watermark_id_length: "ID_2048" # One of: ["ID_2048", "ID_512"]
+    #                 }
+    #               }
     #             },
     #             srt_group_settings: {
     #               input_loss_action: "DROP_PROGRAM" # One of: ["DROP_PROGRAM", "DROP_TS", "EMIT_PROGRAM"]
+    #             },
+    #             media_connect_router_group_settings: {
+    #               availability_zones: ["__string"]
     #             }
     #           },
     #           outputs: [ # required
@@ -10988,7 +12478,7 @@ module Aws::MediaLive
     #                       program_num: 1,
     #                       rate_mode: "CBR" # One of: ["CBR", "VBR"],
     #                       scte27_pids: "__string",
-    #                       scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH"],
+    #                       scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH", "SCTE_35_WITHOUT_IDR"],
     #                       scte35_pid: "__string",
     #                       segmentation_markers: "EBP" # One of: ["EBP", "EBP_LEGACY", "NONE", "PSI_SEGSTART", "RAI_ADAPT", "RAI_SEGSTART"],
     #                       segmentation_style: "MAINTAIN_CADENCE" # One of: ["MAINTAIN_CADENCE", "RESET_CADENCE"],
@@ -11061,7 +12551,8 @@ module Aws::MediaLive
     #                     audio_group_id: "__string",
     #                     audio_rendition_sets: "__string",
     #                     hls_auto_select: "NO" # One of: ["NO", "OMIT", "YES"],
-    #                     hls_default: "NO" # One of: ["NO", "OMIT", "YES"]
+    #                     hls_default: "NO" # One of: ["NO", "OMIT", "YES"],
+    #                     output_usage: ["MULTIVIEW_EQUAL_SIZE_VIEW" # One of: ["MULTIVIEW_EQUAL_SIZE_VIEW", "MULTIVIEW_PRIMARY_VIEW", "MULTIVIEW_SECONDARY_VIEW"]]
     #                   }
     #                 },
     #                 ms_smooth_output_settings: {
@@ -11086,7 +12577,7 @@ module Aws::MediaLive
     #                       nielsen_id3_behavior: "NO_PASSTHROUGH" # One of: ["NO_PASSTHROUGH", "PASSTHROUGH"],
     #                       pcr_control: "CONFIGURED_PCR_PERIOD" # One of: ["CONFIGURED_PCR_PERIOD", "PCR_EVERY_PES_PACKET"],
     #                       pcr_period: 1,
-    #                       scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH"],
+    #                       scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH", "SCTE_35_WITHOUT_IDR"],
     #                       scte35_preroll_pullup_milliseconds: 1.0
     #                     }
     #                   }
@@ -11152,7 +12643,7 @@ module Aws::MediaLive
     #                       program_num: 1,
     #                       rate_mode: "CBR" # One of: ["CBR", "VBR"],
     #                       scte27_pids: "__string",
-    #                       scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH"],
+    #                       scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH", "SCTE_35_WITHOUT_IDR"],
     #                       scte35_pid: "__string",
     #                       segmentation_markers: "EBP" # One of: ["EBP", "EBP_LEGACY", "NONE", "PSI_SEGSTART", "RAI_ADAPT", "RAI_SEGSTART"],
     #                       segmentation_style: "MAINTAIN_CADENCE" # One of: ["MAINTAIN_CADENCE", "RESET_CADENCE"],
@@ -11229,7 +12720,7 @@ module Aws::MediaLive
     #                       program_num: 1,
     #                       rate_mode: "CBR" # One of: ["CBR", "VBR"],
     #                       scte27_pids: "__string",
-    #                       scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH"],
+    #                       scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH", "SCTE_35_WITHOUT_IDR"],
     #                       scte35_pid: "__string",
     #                       segmentation_markers: "EBP" # One of: ["EBP", "EBP_LEGACY", "NONE", "PSI_SEGSTART", "RAI_ADAPT", "RAI_SEGSTART"],
     #                       segmentation_style: "MAINTAIN_CADENCE" # One of: ["MAINTAIN_CADENCE", "RESET_CADENCE"],
@@ -11246,6 +12737,78 @@ module Aws::MediaLive
     #                   },
     #                   encryption_type: "AES128" # One of: ["AES128", "AES192", "AES256"],
     #                   latency: 1
+    #                 },
+    #                 media_connect_router_output_settings: {
+    #                   connected_router_inputs: {
+    #                     pipeline0: "__string",
+    #                     pipeline1: "__string"
+    #                   },
+    #                   container_settings: { # required
+    #                     m2ts_settings: {
+    #                       absent_input_audio_behavior: "DROP" # One of: ["DROP", "ENCODE_SILENCE"],
+    #                       arib: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                       arib_captions_pid: "__string",
+    #                       arib_captions_pid_control: "AUTO" # One of: ["AUTO", "USE_CONFIGURED"],
+    #                       audio_buffer_model: "ATSC" # One of: ["ATSC", "DVB"],
+    #                       audio_frames_per_pes: 1,
+    #                       audio_pids: "__string",
+    #                       audio_stream_type: "ATSC" # One of: ["ATSC", "DVB"],
+    #                       bitrate: 1,
+    #                       buffer_model: "MULTIPLEX" # One of: ["MULTIPLEX", "NONE"],
+    #                       cc_descriptor: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                       dvb_nit_settings: {
+    #                         network_id: 1, # required
+    #                         network_name: "__stringMin1Max256", # required
+    #                         rep_interval: 1
+    #                       },
+    #                       dvb_sdt_settings: {
+    #                         output_sdt: "SDT_FOLLOW" # One of: ["SDT_FOLLOW", "SDT_FOLLOW_IF_PRESENT", "SDT_MANUAL", "SDT_NONE"],
+    #                         rep_interval: 1,
+    #                         service_name: "__stringMin1Max256",
+    #                         service_provider_name: "__stringMin1Max256"
+    #                       },
+    #                       dvb_sub_pids: "__string",
+    #                       dvb_tdt_settings: {
+    #                         rep_interval: 1
+    #                       },
+    #                       dvb_teletext_pid: "__string",
+    #                       ebif: "NONE" # One of: ["NONE", "PASSTHROUGH"],
+    #                       ebp_audio_interval: "VIDEO_AND_FIXED_INTERVALS" # One of: ["VIDEO_AND_FIXED_INTERVALS", "VIDEO_INTERVAL"],
+    #                       ebp_lookahead_ms: 1,
+    #                       ebp_placement: "VIDEO_AND_AUDIO_PIDS" # One of: ["VIDEO_AND_AUDIO_PIDS", "VIDEO_PID"],
+    #                       ecm_pid: "__string",
+    #                       es_rate_in_pes: "EXCLUDE" # One of: ["EXCLUDE", "INCLUDE"],
+    #                       etv_platform_pid: "__string",
+    #                       etv_signal_pid: "__string",
+    #                       fragment_time: 1.0,
+    #                       klv: "NONE" # One of: ["NONE", "PASSTHROUGH"],
+    #                       klv_data_pids: "__string",
+    #                       nielsen_id3_behavior: "NO_PASSTHROUGH" # One of: ["NO_PASSTHROUGH", "PASSTHROUGH"],
+    #                       null_packet_bitrate: 1.0,
+    #                       pat_interval: 1,
+    #                       pcr_control: "CONFIGURED_PCR_PERIOD" # One of: ["CONFIGURED_PCR_PERIOD", "PCR_EVERY_PES_PACKET"],
+    #                       pcr_period: 1,
+    #                       pcr_pid: "__string",
+    #                       pmt_interval: 1,
+    #                       pmt_pid: "__string",
+    #                       program_num: 1,
+    #                       rate_mode: "CBR" # One of: ["CBR", "VBR"],
+    #                       scte27_pids: "__string",
+    #                       scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH", "SCTE_35_WITHOUT_IDR"],
+    #                       scte35_pid: "__string",
+    #                       segmentation_markers: "EBP" # One of: ["EBP", "EBP_LEGACY", "NONE", "PSI_SEGSTART", "RAI_ADAPT", "RAI_SEGSTART"],
+    #                       segmentation_style: "MAINTAIN_CADENCE" # One of: ["MAINTAIN_CADENCE", "RESET_CADENCE"],
+    #                       segmentation_time: 1.0,
+    #                       timed_metadata_behavior: "NO_PASSTHROUGH" # One of: ["NO_PASSTHROUGH", "PASSTHROUGH"],
+    #                       timed_metadata_pid: "__string",
+    #                       transport_stream_id: 1,
+    #                       video_pid: "__string",
+    #                       scte35_preroll_pullup_milliseconds: 1.0
+    #                     }
+    #                   },
+    #                   destination: { # required
+    #                     destination_ref_id: "__string"
+    #                   }
     #                 }
     #               },
     #               video_description_name: "__string"
@@ -11354,6 +12917,8 @@ module Aws::MediaLive
     #                 rec601_settings: {
     #                 },
     #                 rec709_settings: {
+    #                 },
+    #                 hlg2020_settings: {
     #                 }
     #               },
     #               filter_settings: {
@@ -11446,6 +13011,8 @@ module Aws::MediaLive
     #                 rec601_settings: {
     #                 },
     #                 rec709_settings: {
+    #                 },
+    #                 hlg2020_settings: {
     #                 }
     #               },
     #               fixed_afd: "AFD_0000" # One of: ["AFD_0000", "AFD_0010", "AFD_0011", "AFD_0100", "AFD_1000", "AFD_1001", "AFD_1010", "AFD_1011", "AFD_1101", "AFD_1110", "AFD_1111"],
@@ -11468,15 +13035,32 @@ module Aws::MediaLive
     #               },
     #               bitrate: 1,
     #               rate_control_mode: "CBR" # One of: ["CBR", "QVBR"],
-    #               min_bitrate: 1
+    #               min_bitrate: 1,
+    #               spatial_aq: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #               temporal_aq: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #               timecode_insertion: "DISABLED" # One of: ["DISABLED", "METADATA_OBU"],
+    #               bit_depth: "DEPTH_10" # One of: ["DEPTH_10", "DEPTH_8"]
     #             }
     #           },
     #           height: 1,
     #           name: "__string", # required
     #           respond_to_afd: "NONE" # One of: ["NONE", "PASSTHROUGH", "RESPOND"],
-    #           scaling_behavior: "DEFAULT" # One of: ["DEFAULT", "STRETCH_TO_OUTPUT"],
+    #           scaling_behavior: "DEFAULT" # One of: ["DEFAULT", "STRETCH_TO_OUTPUT", "SMART_CROP"],
     #           sharpness: 1,
-    #           width: 1
+    #           width: 1,
+    #           crop_rectangle: {
+    #             height: 1, # required
+    #             width: 1, # required
+    #             x: 1, # required
+    #             y: 1, # required
+    #           },
+    #           output_position_rectangle: {
+    #             height: 1, # required
+    #             width: 1, # required
+    #             x: 1, # required
+    #             y: 1, # required
+    #           },
+    #           border: 1
     #         }
     #       ],
     #       thumbnail_configuration: {
@@ -11534,11 +13118,71 @@ module Aws::MediaLive
     #                 },
     #                 audio_pid_selection: {
     #                   pid: 1, # required
+    #                   pids: [
+    #                     {
+    #                       dolby_e_decode: {
+    #                         program_selection: "ALL_CHANNELS" # One of: ["ALL_CHANNELS", "PROGRAM_1", "PROGRAM_2", "PROGRAM_3", "PROGRAM_4", "PROGRAM_5", "PROGRAM_6", "PROGRAM_7", "PROGRAM_8"], # required
+    #                       },
+    #                       pid: 1, # required
+    #                       premix_settings: {
+    #                         audio_normalization_settings: {
+    #                           algorithm: "ITU_1770_1" # One of: ["ITU_1770_1", "ITU_1770_2", "ITU_1770_3", "ITU_1770_4"],
+    #                           algorithm_control: "CORRECT_AUDIO" # One of: ["CORRECT_AUDIO"],
+    #                           target_lkfs: 1.0,
+    #                           peak_calculation: "NONE" # One of: ["NONE", "TRUE_PEAK"],
+    #                           peak_limiter_threshold: 1.0
+    #                         },
+    #                         channels: 1,
+    #                         gain_db: 1.0,
+    #                         remix_settings: {
+    #                           channel_mappings: [ # required
+    #                             {
+    #                               input_channel_levels: [ # required
+    #                                 {
+    #                                   gain: 1, # required
+    #                                   input_channel: 1, # required
+    #                                 }
+    #                               ],
+    #                               output_channel: 1, # required
+    #                             }
+    #                           ],
+    #                           channels_in: 1,
+    #                           channels_out: 1
+    #                         }
+    #                       }
+    #                     }
+    #                   ]
     #                 },
     #                 audio_track_selection: {
     #                   tracks: [ # required
     #                     {
     #                       track: 1, # required
+    #                       premix_settings: {
+    #                         audio_normalization_settings: {
+    #                           algorithm: "ITU_1770_1" # One of: ["ITU_1770_1", "ITU_1770_2", "ITU_1770_3", "ITU_1770_4"],
+    #                           algorithm_control: "CORRECT_AUDIO" # One of: ["CORRECT_AUDIO"],
+    #                           target_lkfs: 1.0,
+    #                           peak_calculation: "NONE" # One of: ["NONE", "TRUE_PEAK"],
+    #                           peak_limiter_threshold: 1.0
+    #                         },
+    #                         channels: 1,
+    #                         gain_db: 1.0,
+    #                         remix_settings: {
+    #                           channel_mappings: [ # required
+    #                             {
+    #                               input_channel_levels: [ # required
+    #                                 {
+    #                                   gain: 1, # required
+    #                                   input_channel: 1, # required
+    #                                 }
+    #                               ],
+    #                               output_channel: 1, # required
+    #                             }
+    #                           ],
+    #                           channels_in: 1,
+    #                           channels_out: 1
+    #                         }
+    #                       }
     #                     }
     #                   ],
     #                   dolby_e_decode: {
@@ -11584,6 +13228,10 @@ module Aws::MediaLive
     #                     width: 1.0, # required
     #                   },
     #                   page_number: "__string"
+    #                 },
+    #                 smart_subtitle_source_settings: {
+    #                   caption_synchronization_mode: "NO_VIDEO_DELAY" # One of: ["NO_VIDEO_DELAY", "VIDEO_ALIGNED_CAPTIONS"],
+    #                   inference_feed_output: "__string"
     #                 }
     #               }
     #             }
@@ -11654,6 +13302,11 @@ module Aws::MediaLive
     #         channel_engine_version: {
     #           expiration_date: Time.now,
     #           version: "__string"
+    #         },
+    #         media_connect_router_output_connection_map: {
+    #           "__string" => {
+    #             router_input_arn: "__string"
+    #           }
     #         }
     #       }
     #     ],
@@ -11676,6 +13329,27 @@ module Aws::MediaLive
     #     channel_engine_version: {
     #       expiration_date: Time.now,
     #       version: "__string"
+    #     },
+    #     linked_channel_settings: {
+    #       follower_channel_settings: {
+    #         linked_channel_type: "FOLLOWING_CHANNEL" # One of: ["FOLLOWING_CHANNEL", "PRIMARY_CHANNEL"],
+    #         primary_channel_arn: "__string"
+    #       },
+    #       primary_channel_settings: {
+    #         following_channel_arns: ["__string"],
+    #         linked_channel_type: "FOLLOWING_CHANNEL" # One of: ["FOLLOWING_CHANNEL", "PRIMARY_CHANNEL"]
+    #       }
+    #     },
+    #     channel_security_groups: ["__string"],
+    #     inference_settings: {
+    #       feed_arn: "__string",
+    #       audio_feed_inputs: [
+    #         {
+    #           audio_selector_name: "__string",
+    #           feed_input: "__string"
+    #         }
+    #       ],
+    #       enrichment_methods: ["SCTE35_ELEMENTAL_INFERENCE_QUERY_PARAMS" # One of: ["SCTE35_ELEMENTAL_INFERENCE_QUERY_PARAMS"]]
     #     }
     #   }
     # @return [Types::RestartChannelPipelinesResponse]
@@ -11709,7 +13383,9 @@ module Aws::MediaLive
     #           {
     #             channel_id: "__stringMin1",
     #             channel_group: "__stringMin1",
-    #             channel_name: "__stringMin1"
+    #             channel_name: "__stringMin1",
+    #             channel_endpoint_id: "__stringMin1",
+    #             media_package_region_name: "__stringMin1"
     #           }
     #         ],
     #         multiplex_settings: {
@@ -11721,17 +13397,26 @@ module Aws::MediaLive
     #             password_param: "__string",
     #             stream_name: "__string",
     #             url: "__string",
-    #             username: "__string"
+    #             username: "__string",
+    #             virtual_source_address: "__string"
     #           }
     #         ],
     #         srt_settings: [
     #           {
     #             encryption_passphrase_secret_arn: "__string",
     #             stream_id: "__string",
-    #             url: "__string"
+    #             url: "__string",
+    #             connection_mode: "CALLER" # One of: ["CALLER", "LISTENER"],
+    #             listener_port: 1
     #           }
     #         ],
-    #         logical_interface_names: ["__string"]
+    #         logical_interface_names: ["__string"],
+    #         media_connect_router_settings: [
+    #           {
+    #             encryption_type: "AUTOMATIC" # One of: ["AUTOMATIC", "SECRETS_MANAGER"],
+    #             secret_arn: "__string"
+    #           }
+    #         ]
     #       }
     #     ],
     #     egress_endpoints: [
@@ -11743,9 +13428,11 @@ module Aws::MediaLive
     #       audio_descriptions: [ # required
     #         {
     #           audio_normalization_settings: {
-    #             algorithm: "ITU_1770_1" # One of: ["ITU_1770_1", "ITU_1770_2"],
+    #             algorithm: "ITU_1770_1" # One of: ["ITU_1770_1", "ITU_1770_2", "ITU_1770_3", "ITU_1770_4"],
     #             algorithm_control: "CORRECT_AUDIO" # One of: ["CORRECT_AUDIO"],
-    #             target_lkfs: 1.0
+    #             target_lkfs: 1.0,
+    #             peak_calculation: "NONE" # One of: ["NONE", "TRUE_PEAK"],
+    #             peak_limiter_threshold: 1.0
     #           },
     #           audio_selector_name: "__string", # required
     #           audio_type: "CLEAN_EFFECTS" # One of: ["CLEAN_EFFECTS", "HEARING_IMPAIRED", "UNDEFINED", "VISUAL_IMPAIRED_COMMENTARY"],
@@ -11759,6 +13446,11 @@ module Aws::MediaLive
     #               },
     #               nielsen_distribution_type: "FINAL_DISTRIBUTOR" # One of: ["FINAL_DISTRIBUTOR", "PROGRAM_CONTENT"],
     #               nielsen_naes_ii_nw_settings: {
+    #                 check_digit_string: "__stringMin2Max2", # required
+    #                 sid: 1.0, # required
+    #                 timezone: "AMERICA_PUERTO_RICO" # One of: ["AMERICA_PUERTO_RICO", "US_ALASKA", "US_ARIZONA", "US_CENTRAL", "US_EASTERN", "US_HAWAII", "US_MOUNTAIN", "US_PACIFIC", "US_SAMOA", "UTC"]
+    #               },
+    #               nielsen_nw_only_settings: {
     #                 check_digit_string: "__stringMin2Max2", # required
     #                 sid: 1.0, # required
     #                 timezone: "AMERICA_PUERTO_RICO" # One of: ["AMERICA_PUERTO_RICO", "US_ALASKA", "US_ARIZONA", "US_CENTRAL", "US_EASTERN", "US_HAWAII", "US_MOUNTAIN", "US_PACIFIC", "US_SAMOA", "UTC"]
@@ -11964,6 +13656,10 @@ module Aws::MediaLive
     #               default_line_height: 1
     #             },
     #             embedded_destination_settings: {
+    #               position: {
+    #                 y_position_line: 1
+    #               },
+    #               style_control: "MANUAL" # One of: ["MANUAL", "PASSTHROUGH"]
     #             },
     #             embedded_plus_scte20_destination_settings: {
     #             },
@@ -11978,10 +13674,16 @@ module Aws::MediaLive
     #             teletext_destination_settings: {
     #             },
     #             ttml_destination_settings: {
-    #               style_control: "PASSTHROUGH" # One of: ["PASSTHROUGH", "USE_CONFIGURED"]
+    #               style_control: "PASSTHROUGH" # One of: ["PASSTHROUGH", "USE_CONFIGURED", "MANUAL"],
+    #               position: {
+    #                 y_position_percentage: 1
+    #               }
     #             },
     #             webvtt_destination_settings: {
-    #               style_control: "NO_STYLE_DATA" # One of: ["NO_STYLE_DATA", "PASSTHROUGH"]
+    #               style_control: "NO_STYLE_DATA" # One of: ["NO_STYLE_DATA", "PASSTHROUGH", "MANUAL"],
+    #               position: {
+    #                 y_position_percentage: 1
+    #               }
     #             }
     #           },
     #           language_code: "__string",
@@ -12018,6 +13720,11 @@ module Aws::MediaLive
     #             jam_sync_time: "__string"
     #           },
     #           pipeline_locking_settings: {
+    #             pipeline_locking_method: "SOURCE_TIMECODE" # One of: ["SOURCE_TIMECODE", "VIDEO_ALIGNMENT"],
+    #             custom_epoch: "__string"
+    #           },
+    #           disabled_locking_settings: {
+    #             custom_epoch: "__string"
     #           }
     #         }
     #       },
@@ -12167,12 +13874,41 @@ module Aws::MediaLive
     #                 id3_behavior: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                 klv_behavior: "NO_PASSTHROUGH" # One of: ["NO_PASSTHROUGH", "PASSTHROUGH"],
     #                 nielsen_id3_behavior: "NO_PASSTHROUGH" # One of: ["NO_PASSTHROUGH", "PASSTHROUGH"],
-    #                 scte35_type: "NONE" # One of: ["NONE", "SCTE_35_WITHOUT_SEGMENTATION"],
+    #                 scte35_type: "NONE" # One of: ["NONE", "SCTE_35_WITHOUT_SEGMENTATION", "SCTE_35_WITHOUT_IDR"],
     #                 segment_length: 1,
     #                 segment_length_units: "MILLISECONDS" # One of: ["MILLISECONDS", "SECONDS"],
     #                 timed_metadata_id3_frame: "NONE" # One of: ["NONE", "PRIV", "TDRL"],
     #                 timed_metadata_id3_period: 1,
-    #                 timed_metadata_passthrough: "DISABLED" # One of: ["DISABLED", "ENABLED"]
+    #                 timed_metadata_passthrough: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                 additional_destinations: [
+    #                   {
+    #                     destination: { # required
+    #                       destination_ref_id: "__string"
+    #                     }
+    #                   }
+    #                 ],
+    #                 watermarking_settings: {
+    #                   media_package_v2_ab_watermarker_irdeto_settings: {
+    #                     additional_destinations_alternate_destinations: [
+    #                       {
+    #                         destination_ref_id: "__string"
+    #                       }
+    #                     ],
+    #                     alternate_destination: { # required
+    #                       destination_ref_id: "__string"
+    #                     },
+    #                     custom_profile: {
+    #                       embedding_frequency: 1.0, # required
+    #                       scene_cut: 1.0, # required
+    #                       target_psnr: 1.0, # required
+    #                     },
+    #                     license: "__string",
+    #                     operator_id: 1, # required
+    #                     poly_period: 1,
+    #                     profile: "CAMCORDING" # One of: ["CAMCORDING", "CUSTOM", "DEFAULT", "HQ", "MEZZANINE", "ROBUST"], # required
+    #                     watermark_id_length: "ID_2048" # One of: ["ID_2048", "ID_512"]
+    #                   }
+    #                 }
     #               }
     #             },
     #             ms_smooth_group_settings: {
@@ -12220,7 +13956,7 @@ module Aws::MediaLive
     #                 destination_ref_id: "__string"
     #               },
     #               nielsen_id3_behavior: "NO_PASSTHROUGH" # One of: ["NO_PASSTHROUGH", "PASSTHROUGH"],
-    #               scte35_type: "NONE" # One of: ["NONE", "SCTE_35_WITHOUT_SEGMENTATION"],
+    #               scte35_type: "NONE" # One of: ["NONE", "SCTE_35_WITHOUT_SEGMENTATION", "SCTE_35_WITHOUT_IDR"],
     #               segment_length: 1,
     #               segment_length_units: "MILLISECONDS" # One of: ["MILLISECONDS", "SECONDS"],
     #               send_delay_ms: 1,
@@ -12245,10 +13981,35 @@ module Aws::MediaLive
     #                     destination_ref_id: "__string"
     #                   }
     #                 }
-    #               ]
+    #               ],
+    #               watermarking_settings: {
+    #                 cmaf_ingest_ab_watermarker_irdeto_settings: {
+    #                   additional_destinations_alternate_destinations: [
+    #                     {
+    #                       destination_ref_id: "__string"
+    #                     }
+    #                   ],
+    #                   alternate_destination: { # required
+    #                     destination_ref_id: "__string"
+    #                   },
+    #                   custom_profile: {
+    #                     embedding_frequency: 1.0, # required
+    #                     scene_cut: 1.0, # required
+    #                     target_psnr: 1.0, # required
+    #                   },
+    #                   license: "__string",
+    #                   operator_id: 1, # required
+    #                   poly_period: 1,
+    #                   profile: "CAMCORDING" # One of: ["CAMCORDING", "CUSTOM", "DEFAULT", "HQ", "MEZZANINE", "ROBUST"], # required
+    #                   watermark_id_length: "ID_2048" # One of: ["ID_2048", "ID_512"]
+    #                 }
+    #               }
     #             },
     #             srt_group_settings: {
     #               input_loss_action: "DROP_PROGRAM" # One of: ["DROP_PROGRAM", "DROP_TS", "EMIT_PROGRAM"]
+    #             },
+    #             media_connect_router_group_settings: {
+    #               availability_zones: ["__string"]
     #             }
     #           },
     #           outputs: [ # required
@@ -12309,7 +14070,7 @@ module Aws::MediaLive
     #                       program_num: 1,
     #                       rate_mode: "CBR" # One of: ["CBR", "VBR"],
     #                       scte27_pids: "__string",
-    #                       scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH"],
+    #                       scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH", "SCTE_35_WITHOUT_IDR"],
     #                       scte35_pid: "__string",
     #                       segmentation_markers: "EBP" # One of: ["EBP", "EBP_LEGACY", "NONE", "PSI_SEGSTART", "RAI_ADAPT", "RAI_SEGSTART"],
     #                       segmentation_style: "MAINTAIN_CADENCE" # One of: ["MAINTAIN_CADENCE", "RESET_CADENCE"],
@@ -12382,7 +14143,8 @@ module Aws::MediaLive
     #                     audio_group_id: "__string",
     #                     audio_rendition_sets: "__string",
     #                     hls_auto_select: "NO" # One of: ["NO", "OMIT", "YES"],
-    #                     hls_default: "NO" # One of: ["NO", "OMIT", "YES"]
+    #                     hls_default: "NO" # One of: ["NO", "OMIT", "YES"],
+    #                     output_usage: ["MULTIVIEW_EQUAL_SIZE_VIEW" # One of: ["MULTIVIEW_EQUAL_SIZE_VIEW", "MULTIVIEW_PRIMARY_VIEW", "MULTIVIEW_SECONDARY_VIEW"]]
     #                   }
     #                 },
     #                 ms_smooth_output_settings: {
@@ -12407,7 +14169,7 @@ module Aws::MediaLive
     #                       nielsen_id3_behavior: "NO_PASSTHROUGH" # One of: ["NO_PASSTHROUGH", "PASSTHROUGH"],
     #                       pcr_control: "CONFIGURED_PCR_PERIOD" # One of: ["CONFIGURED_PCR_PERIOD", "PCR_EVERY_PES_PACKET"],
     #                       pcr_period: 1,
-    #                       scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH"],
+    #                       scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH", "SCTE_35_WITHOUT_IDR"],
     #                       scte35_preroll_pullup_milliseconds: 1.0
     #                     }
     #                   }
@@ -12473,7 +14235,7 @@ module Aws::MediaLive
     #                       program_num: 1,
     #                       rate_mode: "CBR" # One of: ["CBR", "VBR"],
     #                       scte27_pids: "__string",
-    #                       scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH"],
+    #                       scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH", "SCTE_35_WITHOUT_IDR"],
     #                       scte35_pid: "__string",
     #                       segmentation_markers: "EBP" # One of: ["EBP", "EBP_LEGACY", "NONE", "PSI_SEGSTART", "RAI_ADAPT", "RAI_SEGSTART"],
     #                       segmentation_style: "MAINTAIN_CADENCE" # One of: ["MAINTAIN_CADENCE", "RESET_CADENCE"],
@@ -12550,7 +14312,7 @@ module Aws::MediaLive
     #                       program_num: 1,
     #                       rate_mode: "CBR" # One of: ["CBR", "VBR"],
     #                       scte27_pids: "__string",
-    #                       scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH"],
+    #                       scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH", "SCTE_35_WITHOUT_IDR"],
     #                       scte35_pid: "__string",
     #                       segmentation_markers: "EBP" # One of: ["EBP", "EBP_LEGACY", "NONE", "PSI_SEGSTART", "RAI_ADAPT", "RAI_SEGSTART"],
     #                       segmentation_style: "MAINTAIN_CADENCE" # One of: ["MAINTAIN_CADENCE", "RESET_CADENCE"],
@@ -12567,6 +14329,78 @@ module Aws::MediaLive
     #                   },
     #                   encryption_type: "AES128" # One of: ["AES128", "AES192", "AES256"],
     #                   latency: 1
+    #                 },
+    #                 media_connect_router_output_settings: {
+    #                   connected_router_inputs: {
+    #                     pipeline0: "__string",
+    #                     pipeline1: "__string"
+    #                   },
+    #                   container_settings: { # required
+    #                     m2ts_settings: {
+    #                       absent_input_audio_behavior: "DROP" # One of: ["DROP", "ENCODE_SILENCE"],
+    #                       arib: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                       arib_captions_pid: "__string",
+    #                       arib_captions_pid_control: "AUTO" # One of: ["AUTO", "USE_CONFIGURED"],
+    #                       audio_buffer_model: "ATSC" # One of: ["ATSC", "DVB"],
+    #                       audio_frames_per_pes: 1,
+    #                       audio_pids: "__string",
+    #                       audio_stream_type: "ATSC" # One of: ["ATSC", "DVB"],
+    #                       bitrate: 1,
+    #                       buffer_model: "MULTIPLEX" # One of: ["MULTIPLEX", "NONE"],
+    #                       cc_descriptor: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                       dvb_nit_settings: {
+    #                         network_id: 1, # required
+    #                         network_name: "__stringMin1Max256", # required
+    #                         rep_interval: 1
+    #                       },
+    #                       dvb_sdt_settings: {
+    #                         output_sdt: "SDT_FOLLOW" # One of: ["SDT_FOLLOW", "SDT_FOLLOW_IF_PRESENT", "SDT_MANUAL", "SDT_NONE"],
+    #                         rep_interval: 1,
+    #                         service_name: "__stringMin1Max256",
+    #                         service_provider_name: "__stringMin1Max256"
+    #                       },
+    #                       dvb_sub_pids: "__string",
+    #                       dvb_tdt_settings: {
+    #                         rep_interval: 1
+    #                       },
+    #                       dvb_teletext_pid: "__string",
+    #                       ebif: "NONE" # One of: ["NONE", "PASSTHROUGH"],
+    #                       ebp_audio_interval: "VIDEO_AND_FIXED_INTERVALS" # One of: ["VIDEO_AND_FIXED_INTERVALS", "VIDEO_INTERVAL"],
+    #                       ebp_lookahead_ms: 1,
+    #                       ebp_placement: "VIDEO_AND_AUDIO_PIDS" # One of: ["VIDEO_AND_AUDIO_PIDS", "VIDEO_PID"],
+    #                       ecm_pid: "__string",
+    #                       es_rate_in_pes: "EXCLUDE" # One of: ["EXCLUDE", "INCLUDE"],
+    #                       etv_platform_pid: "__string",
+    #                       etv_signal_pid: "__string",
+    #                       fragment_time: 1.0,
+    #                       klv: "NONE" # One of: ["NONE", "PASSTHROUGH"],
+    #                       klv_data_pids: "__string",
+    #                       nielsen_id3_behavior: "NO_PASSTHROUGH" # One of: ["NO_PASSTHROUGH", "PASSTHROUGH"],
+    #                       null_packet_bitrate: 1.0,
+    #                       pat_interval: 1,
+    #                       pcr_control: "CONFIGURED_PCR_PERIOD" # One of: ["CONFIGURED_PCR_PERIOD", "PCR_EVERY_PES_PACKET"],
+    #                       pcr_period: 1,
+    #                       pcr_pid: "__string",
+    #                       pmt_interval: 1,
+    #                       pmt_pid: "__string",
+    #                       program_num: 1,
+    #                       rate_mode: "CBR" # One of: ["CBR", "VBR"],
+    #                       scte27_pids: "__string",
+    #                       scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH", "SCTE_35_WITHOUT_IDR"],
+    #                       scte35_pid: "__string",
+    #                       segmentation_markers: "EBP" # One of: ["EBP", "EBP_LEGACY", "NONE", "PSI_SEGSTART", "RAI_ADAPT", "RAI_SEGSTART"],
+    #                       segmentation_style: "MAINTAIN_CADENCE" # One of: ["MAINTAIN_CADENCE", "RESET_CADENCE"],
+    #                       segmentation_time: 1.0,
+    #                       timed_metadata_behavior: "NO_PASSTHROUGH" # One of: ["NO_PASSTHROUGH", "PASSTHROUGH"],
+    #                       timed_metadata_pid: "__string",
+    #                       transport_stream_id: 1,
+    #                       video_pid: "__string",
+    #                       scte35_preroll_pullup_milliseconds: 1.0
+    #                     }
+    #                   },
+    #                   destination: { # required
+    #                     destination_ref_id: "__string"
+    #                   }
     #                 }
     #               },
     #               video_description_name: "__string"
@@ -12675,6 +14509,8 @@ module Aws::MediaLive
     #                 rec601_settings: {
     #                 },
     #                 rec709_settings: {
+    #                 },
+    #                 hlg2020_settings: {
     #                 }
     #               },
     #               filter_settings: {
@@ -12767,6 +14603,8 @@ module Aws::MediaLive
     #                 rec601_settings: {
     #                 },
     #                 rec709_settings: {
+    #                 },
+    #                 hlg2020_settings: {
     #                 }
     #               },
     #               fixed_afd: "AFD_0000" # One of: ["AFD_0000", "AFD_0010", "AFD_0011", "AFD_0100", "AFD_1000", "AFD_1001", "AFD_1010", "AFD_1011", "AFD_1101", "AFD_1110", "AFD_1111"],
@@ -12789,15 +14627,32 @@ module Aws::MediaLive
     #               },
     #               bitrate: 1,
     #               rate_control_mode: "CBR" # One of: ["CBR", "QVBR"],
-    #               min_bitrate: 1
+    #               min_bitrate: 1,
+    #               spatial_aq: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #               temporal_aq: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #               timecode_insertion: "DISABLED" # One of: ["DISABLED", "METADATA_OBU"],
+    #               bit_depth: "DEPTH_10" # One of: ["DEPTH_10", "DEPTH_8"]
     #             }
     #           },
     #           height: 1,
     #           name: "__string", # required
     #           respond_to_afd: "NONE" # One of: ["NONE", "PASSTHROUGH", "RESPOND"],
-    #           scaling_behavior: "DEFAULT" # One of: ["DEFAULT", "STRETCH_TO_OUTPUT"],
+    #           scaling_behavior: "DEFAULT" # One of: ["DEFAULT", "STRETCH_TO_OUTPUT", "SMART_CROP"],
     #           sharpness: 1,
-    #           width: 1
+    #           width: 1,
+    #           crop_rectangle: {
+    #             height: 1, # required
+    #             width: 1, # required
+    #             x: 1, # required
+    #             y: 1, # required
+    #           },
+    #           output_position_rectangle: {
+    #             height: 1, # required
+    #             width: 1, # required
+    #             x: 1, # required
+    #             y: 1, # required
+    #           },
+    #           border: 1
     #         }
     #       ],
     #       thumbnail_configuration: {
@@ -12855,11 +14710,71 @@ module Aws::MediaLive
     #                 },
     #                 audio_pid_selection: {
     #                   pid: 1, # required
+    #                   pids: [
+    #                     {
+    #                       dolby_e_decode: {
+    #                         program_selection: "ALL_CHANNELS" # One of: ["ALL_CHANNELS", "PROGRAM_1", "PROGRAM_2", "PROGRAM_3", "PROGRAM_4", "PROGRAM_5", "PROGRAM_6", "PROGRAM_7", "PROGRAM_8"], # required
+    #                       },
+    #                       pid: 1, # required
+    #                       premix_settings: {
+    #                         audio_normalization_settings: {
+    #                           algorithm: "ITU_1770_1" # One of: ["ITU_1770_1", "ITU_1770_2", "ITU_1770_3", "ITU_1770_4"],
+    #                           algorithm_control: "CORRECT_AUDIO" # One of: ["CORRECT_AUDIO"],
+    #                           target_lkfs: 1.0,
+    #                           peak_calculation: "NONE" # One of: ["NONE", "TRUE_PEAK"],
+    #                           peak_limiter_threshold: 1.0
+    #                         },
+    #                         channels: 1,
+    #                         gain_db: 1.0,
+    #                         remix_settings: {
+    #                           channel_mappings: [ # required
+    #                             {
+    #                               input_channel_levels: [ # required
+    #                                 {
+    #                                   gain: 1, # required
+    #                                   input_channel: 1, # required
+    #                                 }
+    #                               ],
+    #                               output_channel: 1, # required
+    #                             }
+    #                           ],
+    #                           channels_in: 1,
+    #                           channels_out: 1
+    #                         }
+    #                       }
+    #                     }
+    #                   ]
     #                 },
     #                 audio_track_selection: {
     #                   tracks: [ # required
     #                     {
     #                       track: 1, # required
+    #                       premix_settings: {
+    #                         audio_normalization_settings: {
+    #                           algorithm: "ITU_1770_1" # One of: ["ITU_1770_1", "ITU_1770_2", "ITU_1770_3", "ITU_1770_4"],
+    #                           algorithm_control: "CORRECT_AUDIO" # One of: ["CORRECT_AUDIO"],
+    #                           target_lkfs: 1.0,
+    #                           peak_calculation: "NONE" # One of: ["NONE", "TRUE_PEAK"],
+    #                           peak_limiter_threshold: 1.0
+    #                         },
+    #                         channels: 1,
+    #                         gain_db: 1.0,
+    #                         remix_settings: {
+    #                           channel_mappings: [ # required
+    #                             {
+    #                               input_channel_levels: [ # required
+    #                                 {
+    #                                   gain: 1, # required
+    #                                   input_channel: 1, # required
+    #                                 }
+    #                               ],
+    #                               output_channel: 1, # required
+    #                             }
+    #                           ],
+    #                           channels_in: 1,
+    #                           channels_out: 1
+    #                         }
+    #                       }
     #                     }
     #                   ],
     #                   dolby_e_decode: {
@@ -12905,6 +14820,10 @@ module Aws::MediaLive
     #                     width: 1.0, # required
     #                   },
     #                   page_number: "__string"
+    #                 },
+    #                 smart_subtitle_source_settings: {
+    #                   caption_synchronization_mode: "NO_VIDEO_DELAY" # One of: ["NO_VIDEO_DELAY", "VIDEO_ALIGNED_CAPTIONS"],
+    #                   inference_feed_output: "__string"
     #                 }
     #               }
     #             }
@@ -12974,6 +14893,11 @@ module Aws::MediaLive
     #         channel_engine_version: {
     #           expiration_date: Time.now,
     #           version: "__string"
+    #         },
+    #         media_connect_router_output_connection_map: {
+    #           "__string" => {
+    #             router_input_arn: "__string"
+    #           }
     #         }
     #       }
     #     ],
@@ -12996,6 +14920,27 @@ module Aws::MediaLive
     #     channel_engine_version: {
     #       expiration_date: Time.now,
     #       version: "__string"
+    #     },
+    #     linked_channel_settings: {
+    #       follower_channel_settings: {
+    #         linked_channel_type: "FOLLOWING_CHANNEL" # One of: ["FOLLOWING_CHANNEL", "PRIMARY_CHANNEL"],
+    #         primary_channel_arn: "__string"
+    #       },
+    #       primary_channel_settings: {
+    #         following_channel_arns: ["__string"],
+    #         linked_channel_type: "FOLLOWING_CHANNEL" # One of: ["FOLLOWING_CHANNEL", "PRIMARY_CHANNEL"]
+    #       }
+    #     },
+    #     channel_security_groups: ["__string"],
+    #     inference_settings: {
+    #       feed_arn: "__string",
+    #       audio_feed_inputs: [
+    #         {
+    #           audio_selector_name: "__string",
+    #           feed_input: "__string"
+    #         }
+    #       ],
+    #       enrichment_methods: ["SCTE35_ELEMENTAL_INFERENCE_QUERY_PARAMS" # One of: ["SCTE35_ELEMENTAL_INFERENCE_QUERY_PARAMS"]]
     #     }
     #   }
     # @return [Types::StartChannelResponse]
@@ -13368,7 +15313,9 @@ module Aws::MediaLive
     #           {
     #             channel_id: "__stringMin1",
     #             channel_group: "__stringMin1",
-    #             channel_name: "__stringMin1"
+    #             channel_name: "__stringMin1",
+    #             channel_endpoint_id: "__stringMin1",
+    #             media_package_region_name: "__stringMin1"
     #           }
     #         ],
     #         multiplex_settings: {
@@ -13380,17 +15327,26 @@ module Aws::MediaLive
     #             password_param: "__string",
     #             stream_name: "__string",
     #             url: "__string",
-    #             username: "__string"
+    #             username: "__string",
+    #             virtual_source_address: "__string"
     #           }
     #         ],
     #         srt_settings: [
     #           {
     #             encryption_passphrase_secret_arn: "__string",
     #             stream_id: "__string",
-    #             url: "__string"
+    #             url: "__string",
+    #             connection_mode: "CALLER" # One of: ["CALLER", "LISTENER"],
+    #             listener_port: 1
     #           }
     #         ],
-    #         logical_interface_names: ["__string"]
+    #         logical_interface_names: ["__string"],
+    #         media_connect_router_settings: [
+    #           {
+    #             encryption_type: "AUTOMATIC" # One of: ["AUTOMATIC", "SECRETS_MANAGER"],
+    #             secret_arn: "__string"
+    #           }
+    #         ]
     #       }
     #     ],
     #     egress_endpoints: [
@@ -13402,9 +15358,11 @@ module Aws::MediaLive
     #       audio_descriptions: [ # required
     #         {
     #           audio_normalization_settings: {
-    #             algorithm: "ITU_1770_1" # One of: ["ITU_1770_1", "ITU_1770_2"],
+    #             algorithm: "ITU_1770_1" # One of: ["ITU_1770_1", "ITU_1770_2", "ITU_1770_3", "ITU_1770_4"],
     #             algorithm_control: "CORRECT_AUDIO" # One of: ["CORRECT_AUDIO"],
-    #             target_lkfs: 1.0
+    #             target_lkfs: 1.0,
+    #             peak_calculation: "NONE" # One of: ["NONE", "TRUE_PEAK"],
+    #             peak_limiter_threshold: 1.0
     #           },
     #           audio_selector_name: "__string", # required
     #           audio_type: "CLEAN_EFFECTS" # One of: ["CLEAN_EFFECTS", "HEARING_IMPAIRED", "UNDEFINED", "VISUAL_IMPAIRED_COMMENTARY"],
@@ -13418,6 +15376,11 @@ module Aws::MediaLive
     #               },
     #               nielsen_distribution_type: "FINAL_DISTRIBUTOR" # One of: ["FINAL_DISTRIBUTOR", "PROGRAM_CONTENT"],
     #               nielsen_naes_ii_nw_settings: {
+    #                 check_digit_string: "__stringMin2Max2", # required
+    #                 sid: 1.0, # required
+    #                 timezone: "AMERICA_PUERTO_RICO" # One of: ["AMERICA_PUERTO_RICO", "US_ALASKA", "US_ARIZONA", "US_CENTRAL", "US_EASTERN", "US_HAWAII", "US_MOUNTAIN", "US_PACIFIC", "US_SAMOA", "UTC"]
+    #               },
+    #               nielsen_nw_only_settings: {
     #                 check_digit_string: "__stringMin2Max2", # required
     #                 sid: 1.0, # required
     #                 timezone: "AMERICA_PUERTO_RICO" # One of: ["AMERICA_PUERTO_RICO", "US_ALASKA", "US_ARIZONA", "US_CENTRAL", "US_EASTERN", "US_HAWAII", "US_MOUNTAIN", "US_PACIFIC", "US_SAMOA", "UTC"]
@@ -13623,6 +15586,10 @@ module Aws::MediaLive
     #               default_line_height: 1
     #             },
     #             embedded_destination_settings: {
+    #               position: {
+    #                 y_position_line: 1
+    #               },
+    #               style_control: "MANUAL" # One of: ["MANUAL", "PASSTHROUGH"]
     #             },
     #             embedded_plus_scte20_destination_settings: {
     #             },
@@ -13637,10 +15604,16 @@ module Aws::MediaLive
     #             teletext_destination_settings: {
     #             },
     #             ttml_destination_settings: {
-    #               style_control: "PASSTHROUGH" # One of: ["PASSTHROUGH", "USE_CONFIGURED"]
+    #               style_control: "PASSTHROUGH" # One of: ["PASSTHROUGH", "USE_CONFIGURED", "MANUAL"],
+    #               position: {
+    #                 y_position_percentage: 1
+    #               }
     #             },
     #             webvtt_destination_settings: {
-    #               style_control: "NO_STYLE_DATA" # One of: ["NO_STYLE_DATA", "PASSTHROUGH"]
+    #               style_control: "NO_STYLE_DATA" # One of: ["NO_STYLE_DATA", "PASSTHROUGH", "MANUAL"],
+    #               position: {
+    #                 y_position_percentage: 1
+    #               }
     #             }
     #           },
     #           language_code: "__string",
@@ -13677,6 +15650,11 @@ module Aws::MediaLive
     #             jam_sync_time: "__string"
     #           },
     #           pipeline_locking_settings: {
+    #             pipeline_locking_method: "SOURCE_TIMECODE" # One of: ["SOURCE_TIMECODE", "VIDEO_ALIGNMENT"],
+    #             custom_epoch: "__string"
+    #           },
+    #           disabled_locking_settings: {
+    #             custom_epoch: "__string"
     #           }
     #         }
     #       },
@@ -13826,12 +15804,41 @@ module Aws::MediaLive
     #                 id3_behavior: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                 klv_behavior: "NO_PASSTHROUGH" # One of: ["NO_PASSTHROUGH", "PASSTHROUGH"],
     #                 nielsen_id3_behavior: "NO_PASSTHROUGH" # One of: ["NO_PASSTHROUGH", "PASSTHROUGH"],
-    #                 scte35_type: "NONE" # One of: ["NONE", "SCTE_35_WITHOUT_SEGMENTATION"],
+    #                 scte35_type: "NONE" # One of: ["NONE", "SCTE_35_WITHOUT_SEGMENTATION", "SCTE_35_WITHOUT_IDR"],
     #                 segment_length: 1,
     #                 segment_length_units: "MILLISECONDS" # One of: ["MILLISECONDS", "SECONDS"],
     #                 timed_metadata_id3_frame: "NONE" # One of: ["NONE", "PRIV", "TDRL"],
     #                 timed_metadata_id3_period: 1,
-    #                 timed_metadata_passthrough: "DISABLED" # One of: ["DISABLED", "ENABLED"]
+    #                 timed_metadata_passthrough: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                 additional_destinations: [
+    #                   {
+    #                     destination: { # required
+    #                       destination_ref_id: "__string"
+    #                     }
+    #                   }
+    #                 ],
+    #                 watermarking_settings: {
+    #                   media_package_v2_ab_watermarker_irdeto_settings: {
+    #                     additional_destinations_alternate_destinations: [
+    #                       {
+    #                         destination_ref_id: "__string"
+    #                       }
+    #                     ],
+    #                     alternate_destination: { # required
+    #                       destination_ref_id: "__string"
+    #                     },
+    #                     custom_profile: {
+    #                       embedding_frequency: 1.0, # required
+    #                       scene_cut: 1.0, # required
+    #                       target_psnr: 1.0, # required
+    #                     },
+    #                     license: "__string",
+    #                     operator_id: 1, # required
+    #                     poly_period: 1,
+    #                     profile: "CAMCORDING" # One of: ["CAMCORDING", "CUSTOM", "DEFAULT", "HQ", "MEZZANINE", "ROBUST"], # required
+    #                     watermark_id_length: "ID_2048" # One of: ["ID_2048", "ID_512"]
+    #                   }
+    #                 }
     #               }
     #             },
     #             ms_smooth_group_settings: {
@@ -13879,7 +15886,7 @@ module Aws::MediaLive
     #                 destination_ref_id: "__string"
     #               },
     #               nielsen_id3_behavior: "NO_PASSTHROUGH" # One of: ["NO_PASSTHROUGH", "PASSTHROUGH"],
-    #               scte35_type: "NONE" # One of: ["NONE", "SCTE_35_WITHOUT_SEGMENTATION"],
+    #               scte35_type: "NONE" # One of: ["NONE", "SCTE_35_WITHOUT_SEGMENTATION", "SCTE_35_WITHOUT_IDR"],
     #               segment_length: 1,
     #               segment_length_units: "MILLISECONDS" # One of: ["MILLISECONDS", "SECONDS"],
     #               send_delay_ms: 1,
@@ -13904,10 +15911,35 @@ module Aws::MediaLive
     #                     destination_ref_id: "__string"
     #                   }
     #                 }
-    #               ]
+    #               ],
+    #               watermarking_settings: {
+    #                 cmaf_ingest_ab_watermarker_irdeto_settings: {
+    #                   additional_destinations_alternate_destinations: [
+    #                     {
+    #                       destination_ref_id: "__string"
+    #                     }
+    #                   ],
+    #                   alternate_destination: { # required
+    #                     destination_ref_id: "__string"
+    #                   },
+    #                   custom_profile: {
+    #                     embedding_frequency: 1.0, # required
+    #                     scene_cut: 1.0, # required
+    #                     target_psnr: 1.0, # required
+    #                   },
+    #                   license: "__string",
+    #                   operator_id: 1, # required
+    #                   poly_period: 1,
+    #                   profile: "CAMCORDING" # One of: ["CAMCORDING", "CUSTOM", "DEFAULT", "HQ", "MEZZANINE", "ROBUST"], # required
+    #                   watermark_id_length: "ID_2048" # One of: ["ID_2048", "ID_512"]
+    #                 }
+    #               }
     #             },
     #             srt_group_settings: {
     #               input_loss_action: "DROP_PROGRAM" # One of: ["DROP_PROGRAM", "DROP_TS", "EMIT_PROGRAM"]
+    #             },
+    #             media_connect_router_group_settings: {
+    #               availability_zones: ["__string"]
     #             }
     #           },
     #           outputs: [ # required
@@ -13968,7 +16000,7 @@ module Aws::MediaLive
     #                       program_num: 1,
     #                       rate_mode: "CBR" # One of: ["CBR", "VBR"],
     #                       scte27_pids: "__string",
-    #                       scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH"],
+    #                       scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH", "SCTE_35_WITHOUT_IDR"],
     #                       scte35_pid: "__string",
     #                       segmentation_markers: "EBP" # One of: ["EBP", "EBP_LEGACY", "NONE", "PSI_SEGSTART", "RAI_ADAPT", "RAI_SEGSTART"],
     #                       segmentation_style: "MAINTAIN_CADENCE" # One of: ["MAINTAIN_CADENCE", "RESET_CADENCE"],
@@ -14041,7 +16073,8 @@ module Aws::MediaLive
     #                     audio_group_id: "__string",
     #                     audio_rendition_sets: "__string",
     #                     hls_auto_select: "NO" # One of: ["NO", "OMIT", "YES"],
-    #                     hls_default: "NO" # One of: ["NO", "OMIT", "YES"]
+    #                     hls_default: "NO" # One of: ["NO", "OMIT", "YES"],
+    #                     output_usage: ["MULTIVIEW_EQUAL_SIZE_VIEW" # One of: ["MULTIVIEW_EQUAL_SIZE_VIEW", "MULTIVIEW_PRIMARY_VIEW", "MULTIVIEW_SECONDARY_VIEW"]]
     #                   }
     #                 },
     #                 ms_smooth_output_settings: {
@@ -14066,7 +16099,7 @@ module Aws::MediaLive
     #                       nielsen_id3_behavior: "NO_PASSTHROUGH" # One of: ["NO_PASSTHROUGH", "PASSTHROUGH"],
     #                       pcr_control: "CONFIGURED_PCR_PERIOD" # One of: ["CONFIGURED_PCR_PERIOD", "PCR_EVERY_PES_PACKET"],
     #                       pcr_period: 1,
-    #                       scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH"],
+    #                       scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH", "SCTE_35_WITHOUT_IDR"],
     #                       scte35_preroll_pullup_milliseconds: 1.0
     #                     }
     #                   }
@@ -14132,7 +16165,7 @@ module Aws::MediaLive
     #                       program_num: 1,
     #                       rate_mode: "CBR" # One of: ["CBR", "VBR"],
     #                       scte27_pids: "__string",
-    #                       scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH"],
+    #                       scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH", "SCTE_35_WITHOUT_IDR"],
     #                       scte35_pid: "__string",
     #                       segmentation_markers: "EBP" # One of: ["EBP", "EBP_LEGACY", "NONE", "PSI_SEGSTART", "RAI_ADAPT", "RAI_SEGSTART"],
     #                       segmentation_style: "MAINTAIN_CADENCE" # One of: ["MAINTAIN_CADENCE", "RESET_CADENCE"],
@@ -14209,7 +16242,7 @@ module Aws::MediaLive
     #                       program_num: 1,
     #                       rate_mode: "CBR" # One of: ["CBR", "VBR"],
     #                       scte27_pids: "__string",
-    #                       scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH"],
+    #                       scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH", "SCTE_35_WITHOUT_IDR"],
     #                       scte35_pid: "__string",
     #                       segmentation_markers: "EBP" # One of: ["EBP", "EBP_LEGACY", "NONE", "PSI_SEGSTART", "RAI_ADAPT", "RAI_SEGSTART"],
     #                       segmentation_style: "MAINTAIN_CADENCE" # One of: ["MAINTAIN_CADENCE", "RESET_CADENCE"],
@@ -14226,6 +16259,78 @@ module Aws::MediaLive
     #                   },
     #                   encryption_type: "AES128" # One of: ["AES128", "AES192", "AES256"],
     #                   latency: 1
+    #                 },
+    #                 media_connect_router_output_settings: {
+    #                   connected_router_inputs: {
+    #                     pipeline0: "__string",
+    #                     pipeline1: "__string"
+    #                   },
+    #                   container_settings: { # required
+    #                     m2ts_settings: {
+    #                       absent_input_audio_behavior: "DROP" # One of: ["DROP", "ENCODE_SILENCE"],
+    #                       arib: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                       arib_captions_pid: "__string",
+    #                       arib_captions_pid_control: "AUTO" # One of: ["AUTO", "USE_CONFIGURED"],
+    #                       audio_buffer_model: "ATSC" # One of: ["ATSC", "DVB"],
+    #                       audio_frames_per_pes: 1,
+    #                       audio_pids: "__string",
+    #                       audio_stream_type: "ATSC" # One of: ["ATSC", "DVB"],
+    #                       bitrate: 1,
+    #                       buffer_model: "MULTIPLEX" # One of: ["MULTIPLEX", "NONE"],
+    #                       cc_descriptor: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                       dvb_nit_settings: {
+    #                         network_id: 1, # required
+    #                         network_name: "__stringMin1Max256", # required
+    #                         rep_interval: 1
+    #                       },
+    #                       dvb_sdt_settings: {
+    #                         output_sdt: "SDT_FOLLOW" # One of: ["SDT_FOLLOW", "SDT_FOLLOW_IF_PRESENT", "SDT_MANUAL", "SDT_NONE"],
+    #                         rep_interval: 1,
+    #                         service_name: "__stringMin1Max256",
+    #                         service_provider_name: "__stringMin1Max256"
+    #                       },
+    #                       dvb_sub_pids: "__string",
+    #                       dvb_tdt_settings: {
+    #                         rep_interval: 1
+    #                       },
+    #                       dvb_teletext_pid: "__string",
+    #                       ebif: "NONE" # One of: ["NONE", "PASSTHROUGH"],
+    #                       ebp_audio_interval: "VIDEO_AND_FIXED_INTERVALS" # One of: ["VIDEO_AND_FIXED_INTERVALS", "VIDEO_INTERVAL"],
+    #                       ebp_lookahead_ms: 1,
+    #                       ebp_placement: "VIDEO_AND_AUDIO_PIDS" # One of: ["VIDEO_AND_AUDIO_PIDS", "VIDEO_PID"],
+    #                       ecm_pid: "__string",
+    #                       es_rate_in_pes: "EXCLUDE" # One of: ["EXCLUDE", "INCLUDE"],
+    #                       etv_platform_pid: "__string",
+    #                       etv_signal_pid: "__string",
+    #                       fragment_time: 1.0,
+    #                       klv: "NONE" # One of: ["NONE", "PASSTHROUGH"],
+    #                       klv_data_pids: "__string",
+    #                       nielsen_id3_behavior: "NO_PASSTHROUGH" # One of: ["NO_PASSTHROUGH", "PASSTHROUGH"],
+    #                       null_packet_bitrate: 1.0,
+    #                       pat_interval: 1,
+    #                       pcr_control: "CONFIGURED_PCR_PERIOD" # One of: ["CONFIGURED_PCR_PERIOD", "PCR_EVERY_PES_PACKET"],
+    #                       pcr_period: 1,
+    #                       pcr_pid: "__string",
+    #                       pmt_interval: 1,
+    #                       pmt_pid: "__string",
+    #                       program_num: 1,
+    #                       rate_mode: "CBR" # One of: ["CBR", "VBR"],
+    #                       scte27_pids: "__string",
+    #                       scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH", "SCTE_35_WITHOUT_IDR"],
+    #                       scte35_pid: "__string",
+    #                       segmentation_markers: "EBP" # One of: ["EBP", "EBP_LEGACY", "NONE", "PSI_SEGSTART", "RAI_ADAPT", "RAI_SEGSTART"],
+    #                       segmentation_style: "MAINTAIN_CADENCE" # One of: ["MAINTAIN_CADENCE", "RESET_CADENCE"],
+    #                       segmentation_time: 1.0,
+    #                       timed_metadata_behavior: "NO_PASSTHROUGH" # One of: ["NO_PASSTHROUGH", "PASSTHROUGH"],
+    #                       timed_metadata_pid: "__string",
+    #                       transport_stream_id: 1,
+    #                       video_pid: "__string",
+    #                       scte35_preroll_pullup_milliseconds: 1.0
+    #                     }
+    #                   },
+    #                   destination: { # required
+    #                     destination_ref_id: "__string"
+    #                   }
     #                 }
     #               },
     #               video_description_name: "__string"
@@ -14334,6 +16439,8 @@ module Aws::MediaLive
     #                 rec601_settings: {
     #                 },
     #                 rec709_settings: {
+    #                 },
+    #                 hlg2020_settings: {
     #                 }
     #               },
     #               filter_settings: {
@@ -14426,6 +16533,8 @@ module Aws::MediaLive
     #                 rec601_settings: {
     #                 },
     #                 rec709_settings: {
+    #                 },
+    #                 hlg2020_settings: {
     #                 }
     #               },
     #               fixed_afd: "AFD_0000" # One of: ["AFD_0000", "AFD_0010", "AFD_0011", "AFD_0100", "AFD_1000", "AFD_1001", "AFD_1010", "AFD_1011", "AFD_1101", "AFD_1110", "AFD_1111"],
@@ -14448,15 +16557,32 @@ module Aws::MediaLive
     #               },
     #               bitrate: 1,
     #               rate_control_mode: "CBR" # One of: ["CBR", "QVBR"],
-    #               min_bitrate: 1
+    #               min_bitrate: 1,
+    #               spatial_aq: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #               temporal_aq: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #               timecode_insertion: "DISABLED" # One of: ["DISABLED", "METADATA_OBU"],
+    #               bit_depth: "DEPTH_10" # One of: ["DEPTH_10", "DEPTH_8"]
     #             }
     #           },
     #           height: 1,
     #           name: "__string", # required
     #           respond_to_afd: "NONE" # One of: ["NONE", "PASSTHROUGH", "RESPOND"],
-    #           scaling_behavior: "DEFAULT" # One of: ["DEFAULT", "STRETCH_TO_OUTPUT"],
+    #           scaling_behavior: "DEFAULT" # One of: ["DEFAULT", "STRETCH_TO_OUTPUT", "SMART_CROP"],
     #           sharpness: 1,
-    #           width: 1
+    #           width: 1,
+    #           crop_rectangle: {
+    #             height: 1, # required
+    #             width: 1, # required
+    #             x: 1, # required
+    #             y: 1, # required
+    #           },
+    #           output_position_rectangle: {
+    #             height: 1, # required
+    #             width: 1, # required
+    #             x: 1, # required
+    #             y: 1, # required
+    #           },
+    #           border: 1
     #         }
     #       ],
     #       thumbnail_configuration: {
@@ -14514,11 +16640,71 @@ module Aws::MediaLive
     #                 },
     #                 audio_pid_selection: {
     #                   pid: 1, # required
+    #                   pids: [
+    #                     {
+    #                       dolby_e_decode: {
+    #                         program_selection: "ALL_CHANNELS" # One of: ["ALL_CHANNELS", "PROGRAM_1", "PROGRAM_2", "PROGRAM_3", "PROGRAM_4", "PROGRAM_5", "PROGRAM_6", "PROGRAM_7", "PROGRAM_8"], # required
+    #                       },
+    #                       pid: 1, # required
+    #                       premix_settings: {
+    #                         audio_normalization_settings: {
+    #                           algorithm: "ITU_1770_1" # One of: ["ITU_1770_1", "ITU_1770_2", "ITU_1770_3", "ITU_1770_4"],
+    #                           algorithm_control: "CORRECT_AUDIO" # One of: ["CORRECT_AUDIO"],
+    #                           target_lkfs: 1.0,
+    #                           peak_calculation: "NONE" # One of: ["NONE", "TRUE_PEAK"],
+    #                           peak_limiter_threshold: 1.0
+    #                         },
+    #                         channels: 1,
+    #                         gain_db: 1.0,
+    #                         remix_settings: {
+    #                           channel_mappings: [ # required
+    #                             {
+    #                               input_channel_levels: [ # required
+    #                                 {
+    #                                   gain: 1, # required
+    #                                   input_channel: 1, # required
+    #                                 }
+    #                               ],
+    #                               output_channel: 1, # required
+    #                             }
+    #                           ],
+    #                           channels_in: 1,
+    #                           channels_out: 1
+    #                         }
+    #                       }
+    #                     }
+    #                   ]
     #                 },
     #                 audio_track_selection: {
     #                   tracks: [ # required
     #                     {
     #                       track: 1, # required
+    #                       premix_settings: {
+    #                         audio_normalization_settings: {
+    #                           algorithm: "ITU_1770_1" # One of: ["ITU_1770_1", "ITU_1770_2", "ITU_1770_3", "ITU_1770_4"],
+    #                           algorithm_control: "CORRECT_AUDIO" # One of: ["CORRECT_AUDIO"],
+    #                           target_lkfs: 1.0,
+    #                           peak_calculation: "NONE" # One of: ["NONE", "TRUE_PEAK"],
+    #                           peak_limiter_threshold: 1.0
+    #                         },
+    #                         channels: 1,
+    #                         gain_db: 1.0,
+    #                         remix_settings: {
+    #                           channel_mappings: [ # required
+    #                             {
+    #                               input_channel_levels: [ # required
+    #                                 {
+    #                                   gain: 1, # required
+    #                                   input_channel: 1, # required
+    #                                 }
+    #                               ],
+    #                               output_channel: 1, # required
+    #                             }
+    #                           ],
+    #                           channels_in: 1,
+    #                           channels_out: 1
+    #                         }
+    #                       }
     #                     }
     #                   ],
     #                   dolby_e_decode: {
@@ -14564,6 +16750,10 @@ module Aws::MediaLive
     #                     width: 1.0, # required
     #                   },
     #                   page_number: "__string"
+    #                 },
+    #                 smart_subtitle_source_settings: {
+    #                   caption_synchronization_mode: "NO_VIDEO_DELAY" # One of: ["NO_VIDEO_DELAY", "VIDEO_ALIGNED_CAPTIONS"],
+    #                   inference_feed_output: "__string"
     #                 }
     #               }
     #             }
@@ -14633,6 +16823,11 @@ module Aws::MediaLive
     #         channel_engine_version: {
     #           expiration_date: Time.now,
     #           version: "__string"
+    #         },
+    #         media_connect_router_output_connection_map: {
+    #           "__string" => {
+    #             router_input_arn: "__string"
+    #           }
     #         }
     #       }
     #     ],
@@ -14655,6 +16850,27 @@ module Aws::MediaLive
     #     channel_engine_version: {
     #       expiration_date: Time.now,
     #       version: "__string"
+    #     },
+    #     linked_channel_settings: {
+    #       follower_channel_settings: {
+    #         linked_channel_type: "FOLLOWING_CHANNEL" # One of: ["FOLLOWING_CHANNEL", "PRIMARY_CHANNEL"],
+    #         primary_channel_arn: "__string"
+    #       },
+    #       primary_channel_settings: {
+    #         following_channel_arns: ["__string"],
+    #         linked_channel_type: "FOLLOWING_CHANNEL" # One of: ["FOLLOWING_CHANNEL", "PRIMARY_CHANNEL"]
+    #       }
+    #     },
+    #     channel_security_groups: ["__string"],
+    #     inference_settings: {
+    #       feed_arn: "__string",
+    #       audio_feed_inputs: [
+    #         {
+    #           audio_selector_name: "__string",
+    #           feed_input: "__string"
+    #         }
+    #       ],
+    #       enrichment_methods: ["SCTE35_ELEMENTAL_INFERENCE_QUERY_PARAMS" # One of: ["SCTE35_ELEMENTAL_INFERENCE_QUERY_PARAMS"]]
     #     }
     #   }
     # @return [Types::StopChannelResponse]
@@ -14806,6 +17022,16 @@ module Aws::MediaLive
     #   Placeholder documentation for __boolean
     # @option params [Types::AnywhereSettings] :anywhere_settings
     #   The Elemental Anywhere settings for this channel.
+    # @option params [Types::LinkedChannelSettings] :linked_channel_settings
+    #   The linked channel settings for the channel.
+    # @option params [Array<String>] :channel_security_groups
+    #   A list of IDs for all the Input Security Groups attached to the channel.
+    # @option params [Types::InferenceSettings] :inference_settings
+    #   Include this setting to include Elemental Inference features in this channel.
+    # @option params [Types::SpecialRouterSettings] :special_router_settings
+    #   When using MediaConnect Router as the source of a MediaLive input there's a special handoff that occurs when a router output
+    #   is created. This group of settings is set on your behalf by the MediaConnect Router service using this set of settings. This
+    #   setting object can only by used by that service.
     # @example Request syntax with placeholder values
     #   params = {
     #     cdi_input_specification: {
@@ -14819,7 +17045,9 @@ module Aws::MediaLive
     #           {
     #             channel_id: "__stringMin1",
     #             channel_group: "__stringMin1",
-    #             channel_name: "__stringMin1"
+    #             channel_name: "__stringMin1",
+    #             channel_endpoint_id: "__stringMin1",
+    #             media_package_region_name: "__stringMin1"
     #           }
     #         ],
     #         multiplex_settings: {
@@ -14831,26 +17059,37 @@ module Aws::MediaLive
     #             password_param: "__string",
     #             stream_name: "__string",
     #             url: "__string",
-    #             username: "__string"
+    #             username: "__string",
+    #             virtual_source_address: "__string"
     #           }
     #         ],
     #         srt_settings: [
     #           {
     #             encryption_passphrase_secret_arn: "__string",
     #             stream_id: "__string",
-    #             url: "__string"
+    #             url: "__string",
+    #             connection_mode: "CALLER" # One of: ["CALLER", "LISTENER"],
+    #             listener_port: 1
     #           }
     #         ],
-    #         logical_interface_names: ["__string"]
+    #         logical_interface_names: ["__string"],
+    #         media_connect_router_settings: [
+    #           {
+    #             encryption_type: "AUTOMATIC" # One of: ["AUTOMATIC", "SECRETS_MANAGER"],
+    #             secret_arn: "__string"
+    #           }
+    #         ]
     #       }
     #     ],
     #     encoder_settings: {
     #       audio_descriptions: [ # required
     #         {
     #           audio_normalization_settings: {
-    #             algorithm: "ITU_1770_1" # One of: ["ITU_1770_1", "ITU_1770_2"],
+    #             algorithm: "ITU_1770_1" # One of: ["ITU_1770_1", "ITU_1770_2", "ITU_1770_3", "ITU_1770_4"],
     #             algorithm_control: "CORRECT_AUDIO" # One of: ["CORRECT_AUDIO"],
-    #             target_lkfs: 1.0
+    #             target_lkfs: 1.0,
+    #             peak_calculation: "NONE" # One of: ["NONE", "TRUE_PEAK"],
+    #             peak_limiter_threshold: 1.0
     #           },
     #           audio_selector_name: "__string", # required
     #           audio_type: "CLEAN_EFFECTS" # One of: ["CLEAN_EFFECTS", "HEARING_IMPAIRED", "UNDEFINED", "VISUAL_IMPAIRED_COMMENTARY"],
@@ -14864,6 +17103,11 @@ module Aws::MediaLive
     #               },
     #               nielsen_distribution_type: "FINAL_DISTRIBUTOR" # One of: ["FINAL_DISTRIBUTOR", "PROGRAM_CONTENT"],
     #               nielsen_naes_ii_nw_settings: {
+    #                 check_digit_string: "__stringMin2Max2", # required
+    #                 sid: 1.0, # required
+    #                 timezone: "AMERICA_PUERTO_RICO" # One of: ["AMERICA_PUERTO_RICO", "US_ALASKA", "US_ARIZONA", "US_CENTRAL", "US_EASTERN", "US_HAWAII", "US_MOUNTAIN", "US_PACIFIC", "US_SAMOA", "UTC"]
+    #               },
+    #               nielsen_nw_only_settings: {
     #                 check_digit_string: "__stringMin2Max2", # required
     #                 sid: 1.0, # required
     #                 timezone: "AMERICA_PUERTO_RICO" # One of: ["AMERICA_PUERTO_RICO", "US_ALASKA", "US_ARIZONA", "US_CENTRAL", "US_EASTERN", "US_HAWAII", "US_MOUNTAIN", "US_PACIFIC", "US_SAMOA", "UTC"]
@@ -15069,6 +17313,10 @@ module Aws::MediaLive
     #               default_line_height: 1
     #             },
     #             embedded_destination_settings: {
+    #               position: {
+    #                 y_position_line: 1
+    #               },
+    #               style_control: "MANUAL" # One of: ["MANUAL", "PASSTHROUGH"]
     #             },
     #             embedded_plus_scte20_destination_settings: {
     #             },
@@ -15083,10 +17331,16 @@ module Aws::MediaLive
     #             teletext_destination_settings: {
     #             },
     #             ttml_destination_settings: {
-    #               style_control: "PASSTHROUGH" # One of: ["PASSTHROUGH", "USE_CONFIGURED"]
+    #               style_control: "PASSTHROUGH" # One of: ["PASSTHROUGH", "USE_CONFIGURED", "MANUAL"],
+    #               position: {
+    #                 y_position_percentage: 1
+    #               }
     #             },
     #             webvtt_destination_settings: {
-    #               style_control: "NO_STYLE_DATA" # One of: ["NO_STYLE_DATA", "PASSTHROUGH"]
+    #               style_control: "NO_STYLE_DATA" # One of: ["NO_STYLE_DATA", "PASSTHROUGH", "MANUAL"],
+    #               position: {
+    #                 y_position_percentage: 1
+    #               }
     #             }
     #           },
     #           language_code: "__string",
@@ -15123,6 +17377,11 @@ module Aws::MediaLive
     #             jam_sync_time: "__string"
     #           },
     #           pipeline_locking_settings: {
+    #             pipeline_locking_method: "SOURCE_TIMECODE" # One of: ["SOURCE_TIMECODE", "VIDEO_ALIGNMENT"],
+    #             custom_epoch: "__string"
+    #           },
+    #           disabled_locking_settings: {
+    #             custom_epoch: "__string"
     #           }
     #         }
     #       },
@@ -15272,12 +17531,41 @@ module Aws::MediaLive
     #                 id3_behavior: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                 klv_behavior: "NO_PASSTHROUGH" # One of: ["NO_PASSTHROUGH", "PASSTHROUGH"],
     #                 nielsen_id3_behavior: "NO_PASSTHROUGH" # One of: ["NO_PASSTHROUGH", "PASSTHROUGH"],
-    #                 scte35_type: "NONE" # One of: ["NONE", "SCTE_35_WITHOUT_SEGMENTATION"],
+    #                 scte35_type: "NONE" # One of: ["NONE", "SCTE_35_WITHOUT_SEGMENTATION", "SCTE_35_WITHOUT_IDR"],
     #                 segment_length: 1,
     #                 segment_length_units: "MILLISECONDS" # One of: ["MILLISECONDS", "SECONDS"],
     #                 timed_metadata_id3_frame: "NONE" # One of: ["NONE", "PRIV", "TDRL"],
     #                 timed_metadata_id3_period: 1,
-    #                 timed_metadata_passthrough: "DISABLED" # One of: ["DISABLED", "ENABLED"]
+    #                 timed_metadata_passthrough: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                 additional_destinations: [
+    #                   {
+    #                     destination: { # required
+    #                       destination_ref_id: "__string"
+    #                     }
+    #                   }
+    #                 ],
+    #                 watermarking_settings: {
+    #                   media_package_v2_ab_watermarker_irdeto_settings: {
+    #                     additional_destinations_alternate_destinations: [
+    #                       {
+    #                         destination_ref_id: "__string"
+    #                       }
+    #                     ],
+    #                     alternate_destination: { # required
+    #                       destination_ref_id: "__string"
+    #                     },
+    #                     custom_profile: {
+    #                       embedding_frequency: 1.0, # required
+    #                       scene_cut: 1.0, # required
+    #                       target_psnr: 1.0, # required
+    #                     },
+    #                     license: "__string",
+    #                     operator_id: 1, # required
+    #                     poly_period: 1,
+    #                     profile: "CAMCORDING" # One of: ["CAMCORDING", "CUSTOM", "DEFAULT", "HQ", "MEZZANINE", "ROBUST"], # required
+    #                     watermark_id_length: "ID_2048" # One of: ["ID_2048", "ID_512"]
+    #                   }
+    #                 }
     #               }
     #             },
     #             ms_smooth_group_settings: {
@@ -15325,7 +17613,7 @@ module Aws::MediaLive
     #                 destination_ref_id: "__string"
     #               },
     #               nielsen_id3_behavior: "NO_PASSTHROUGH" # One of: ["NO_PASSTHROUGH", "PASSTHROUGH"],
-    #               scte35_type: "NONE" # One of: ["NONE", "SCTE_35_WITHOUT_SEGMENTATION"],
+    #               scte35_type: "NONE" # One of: ["NONE", "SCTE_35_WITHOUT_SEGMENTATION", "SCTE_35_WITHOUT_IDR"],
     #               segment_length: 1,
     #               segment_length_units: "MILLISECONDS" # One of: ["MILLISECONDS", "SECONDS"],
     #               send_delay_ms: 1,
@@ -15350,10 +17638,35 @@ module Aws::MediaLive
     #                     destination_ref_id: "__string"
     #                   }
     #                 }
-    #               ]
+    #               ],
+    #               watermarking_settings: {
+    #                 cmaf_ingest_ab_watermarker_irdeto_settings: {
+    #                   additional_destinations_alternate_destinations: [
+    #                     {
+    #                       destination_ref_id: "__string"
+    #                     }
+    #                   ],
+    #                   alternate_destination: { # required
+    #                     destination_ref_id: "__string"
+    #                   },
+    #                   custom_profile: {
+    #                     embedding_frequency: 1.0, # required
+    #                     scene_cut: 1.0, # required
+    #                     target_psnr: 1.0, # required
+    #                   },
+    #                   license: "__string",
+    #                   operator_id: 1, # required
+    #                   poly_period: 1,
+    #                   profile: "CAMCORDING" # One of: ["CAMCORDING", "CUSTOM", "DEFAULT", "HQ", "MEZZANINE", "ROBUST"], # required
+    #                   watermark_id_length: "ID_2048" # One of: ["ID_2048", "ID_512"]
+    #                 }
+    #               }
     #             },
     #             srt_group_settings: {
     #               input_loss_action: "DROP_PROGRAM" # One of: ["DROP_PROGRAM", "DROP_TS", "EMIT_PROGRAM"]
+    #             },
+    #             media_connect_router_group_settings: {
+    #               availability_zones: ["__string"]
     #             }
     #           },
     #           outputs: [ # required
@@ -15414,7 +17727,7 @@ module Aws::MediaLive
     #                       program_num: 1,
     #                       rate_mode: "CBR" # One of: ["CBR", "VBR"],
     #                       scte27_pids: "__string",
-    #                       scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH"],
+    #                       scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH", "SCTE_35_WITHOUT_IDR"],
     #                       scte35_pid: "__string",
     #                       segmentation_markers: "EBP" # One of: ["EBP", "EBP_LEGACY", "NONE", "PSI_SEGSTART", "RAI_ADAPT", "RAI_SEGSTART"],
     #                       segmentation_style: "MAINTAIN_CADENCE" # One of: ["MAINTAIN_CADENCE", "RESET_CADENCE"],
@@ -15487,7 +17800,8 @@ module Aws::MediaLive
     #                     audio_group_id: "__string",
     #                     audio_rendition_sets: "__string",
     #                     hls_auto_select: "NO" # One of: ["NO", "OMIT", "YES"],
-    #                     hls_default: "NO" # One of: ["NO", "OMIT", "YES"]
+    #                     hls_default: "NO" # One of: ["NO", "OMIT", "YES"],
+    #                     output_usage: ["MULTIVIEW_EQUAL_SIZE_VIEW" # One of: ["MULTIVIEW_EQUAL_SIZE_VIEW", "MULTIVIEW_PRIMARY_VIEW", "MULTIVIEW_SECONDARY_VIEW"]]
     #                   }
     #                 },
     #                 ms_smooth_output_settings: {
@@ -15512,7 +17826,7 @@ module Aws::MediaLive
     #                       nielsen_id3_behavior: "NO_PASSTHROUGH" # One of: ["NO_PASSTHROUGH", "PASSTHROUGH"],
     #                       pcr_control: "CONFIGURED_PCR_PERIOD" # One of: ["CONFIGURED_PCR_PERIOD", "PCR_EVERY_PES_PACKET"],
     #                       pcr_period: 1,
-    #                       scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH"],
+    #                       scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH", "SCTE_35_WITHOUT_IDR"],
     #                       scte35_preroll_pullup_milliseconds: 1.0
     #                     }
     #                   }
@@ -15578,7 +17892,7 @@ module Aws::MediaLive
     #                       program_num: 1,
     #                       rate_mode: "CBR" # One of: ["CBR", "VBR"],
     #                       scte27_pids: "__string",
-    #                       scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH"],
+    #                       scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH", "SCTE_35_WITHOUT_IDR"],
     #                       scte35_pid: "__string",
     #                       segmentation_markers: "EBP" # One of: ["EBP", "EBP_LEGACY", "NONE", "PSI_SEGSTART", "RAI_ADAPT", "RAI_SEGSTART"],
     #                       segmentation_style: "MAINTAIN_CADENCE" # One of: ["MAINTAIN_CADENCE", "RESET_CADENCE"],
@@ -15655,7 +17969,7 @@ module Aws::MediaLive
     #                       program_num: 1,
     #                       rate_mode: "CBR" # One of: ["CBR", "VBR"],
     #                       scte27_pids: "__string",
-    #                       scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH"],
+    #                       scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH", "SCTE_35_WITHOUT_IDR"],
     #                       scte35_pid: "__string",
     #                       segmentation_markers: "EBP" # One of: ["EBP", "EBP_LEGACY", "NONE", "PSI_SEGSTART", "RAI_ADAPT", "RAI_SEGSTART"],
     #                       segmentation_style: "MAINTAIN_CADENCE" # One of: ["MAINTAIN_CADENCE", "RESET_CADENCE"],
@@ -15672,6 +17986,78 @@ module Aws::MediaLive
     #                   },
     #                   encryption_type: "AES128" # One of: ["AES128", "AES192", "AES256"],
     #                   latency: 1
+    #                 },
+    #                 media_connect_router_output_settings: {
+    #                   connected_router_inputs: {
+    #                     pipeline0: "__string",
+    #                     pipeline1: "__string"
+    #                   },
+    #                   container_settings: { # required
+    #                     m2ts_settings: {
+    #                       absent_input_audio_behavior: "DROP" # One of: ["DROP", "ENCODE_SILENCE"],
+    #                       arib: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                       arib_captions_pid: "__string",
+    #                       arib_captions_pid_control: "AUTO" # One of: ["AUTO", "USE_CONFIGURED"],
+    #                       audio_buffer_model: "ATSC" # One of: ["ATSC", "DVB"],
+    #                       audio_frames_per_pes: 1,
+    #                       audio_pids: "__string",
+    #                       audio_stream_type: "ATSC" # One of: ["ATSC", "DVB"],
+    #                       bitrate: 1,
+    #                       buffer_model: "MULTIPLEX" # One of: ["MULTIPLEX", "NONE"],
+    #                       cc_descriptor: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                       dvb_nit_settings: {
+    #                         network_id: 1, # required
+    #                         network_name: "__stringMin1Max256", # required
+    #                         rep_interval: 1
+    #                       },
+    #                       dvb_sdt_settings: {
+    #                         output_sdt: "SDT_FOLLOW" # One of: ["SDT_FOLLOW", "SDT_FOLLOW_IF_PRESENT", "SDT_MANUAL", "SDT_NONE"],
+    #                         rep_interval: 1,
+    #                         service_name: "__stringMin1Max256",
+    #                         service_provider_name: "__stringMin1Max256"
+    #                       },
+    #                       dvb_sub_pids: "__string",
+    #                       dvb_tdt_settings: {
+    #                         rep_interval: 1
+    #                       },
+    #                       dvb_teletext_pid: "__string",
+    #                       ebif: "NONE" # One of: ["NONE", "PASSTHROUGH"],
+    #                       ebp_audio_interval: "VIDEO_AND_FIXED_INTERVALS" # One of: ["VIDEO_AND_FIXED_INTERVALS", "VIDEO_INTERVAL"],
+    #                       ebp_lookahead_ms: 1,
+    #                       ebp_placement: "VIDEO_AND_AUDIO_PIDS" # One of: ["VIDEO_AND_AUDIO_PIDS", "VIDEO_PID"],
+    #                       ecm_pid: "__string",
+    #                       es_rate_in_pes: "EXCLUDE" # One of: ["EXCLUDE", "INCLUDE"],
+    #                       etv_platform_pid: "__string",
+    #                       etv_signal_pid: "__string",
+    #                       fragment_time: 1.0,
+    #                       klv: "NONE" # One of: ["NONE", "PASSTHROUGH"],
+    #                       klv_data_pids: "__string",
+    #                       nielsen_id3_behavior: "NO_PASSTHROUGH" # One of: ["NO_PASSTHROUGH", "PASSTHROUGH"],
+    #                       null_packet_bitrate: 1.0,
+    #                       pat_interval: 1,
+    #                       pcr_control: "CONFIGURED_PCR_PERIOD" # One of: ["CONFIGURED_PCR_PERIOD", "PCR_EVERY_PES_PACKET"],
+    #                       pcr_period: 1,
+    #                       pcr_pid: "__string",
+    #                       pmt_interval: 1,
+    #                       pmt_pid: "__string",
+    #                       program_num: 1,
+    #                       rate_mode: "CBR" # One of: ["CBR", "VBR"],
+    #                       scte27_pids: "__string",
+    #                       scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH", "SCTE_35_WITHOUT_IDR"],
+    #                       scte35_pid: "__string",
+    #                       segmentation_markers: "EBP" # One of: ["EBP", "EBP_LEGACY", "NONE", "PSI_SEGSTART", "RAI_ADAPT", "RAI_SEGSTART"],
+    #                       segmentation_style: "MAINTAIN_CADENCE" # One of: ["MAINTAIN_CADENCE", "RESET_CADENCE"],
+    #                       segmentation_time: 1.0,
+    #                       timed_metadata_behavior: "NO_PASSTHROUGH" # One of: ["NO_PASSTHROUGH", "PASSTHROUGH"],
+    #                       timed_metadata_pid: "__string",
+    #                       transport_stream_id: 1,
+    #                       video_pid: "__string",
+    #                       scte35_preroll_pullup_milliseconds: 1.0
+    #                     }
+    #                   },
+    #                   destination: { # required
+    #                     destination_ref_id: "__string"
+    #                   }
     #                 }
     #               },
     #               video_description_name: "__string"
@@ -15780,6 +18166,8 @@ module Aws::MediaLive
     #                 rec601_settings: {
     #                 },
     #                 rec709_settings: {
+    #                 },
+    #                 hlg2020_settings: {
     #                 }
     #               },
     #               filter_settings: {
@@ -15872,6 +18260,8 @@ module Aws::MediaLive
     #                 rec601_settings: {
     #                 },
     #                 rec709_settings: {
+    #                 },
+    #                 hlg2020_settings: {
     #                 }
     #               },
     #               fixed_afd: "AFD_0000" # One of: ["AFD_0000", "AFD_0010", "AFD_0011", "AFD_0100", "AFD_1000", "AFD_1001", "AFD_1010", "AFD_1011", "AFD_1101", "AFD_1110", "AFD_1111"],
@@ -15894,15 +18284,32 @@ module Aws::MediaLive
     #               },
     #               bitrate: 1,
     #               rate_control_mode: "CBR" # One of: ["CBR", "QVBR"],
-    #               min_bitrate: 1
+    #               min_bitrate: 1,
+    #               spatial_aq: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #               temporal_aq: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #               timecode_insertion: "DISABLED" # One of: ["DISABLED", "METADATA_OBU"],
+    #               bit_depth: "DEPTH_10" # One of: ["DEPTH_10", "DEPTH_8"]
     #             }
     #           },
     #           height: 1,
     #           name: "__string", # required
     #           respond_to_afd: "NONE" # One of: ["NONE", "PASSTHROUGH", "RESPOND"],
-    #           scaling_behavior: "DEFAULT" # One of: ["DEFAULT", "STRETCH_TO_OUTPUT"],
+    #           scaling_behavior: "DEFAULT" # One of: ["DEFAULT", "STRETCH_TO_OUTPUT", "SMART_CROP"],
     #           sharpness: 1,
-    #           width: 1
+    #           width: 1,
+    #           crop_rectangle: {
+    #             height: 1, # required
+    #             width: 1, # required
+    #             x: 1, # required
+    #             y: 1, # required
+    #           },
+    #           output_position_rectangle: {
+    #             height: 1, # required
+    #             width: 1, # required
+    #             x: 1, # required
+    #             y: 1, # required
+    #           },
+    #           border: 1
     #         }
     #       ],
     #       thumbnail_configuration: {
@@ -15959,11 +18366,71 @@ module Aws::MediaLive
     #                 },
     #                 audio_pid_selection: {
     #                   pid: 1, # required
+    #                   pids: [
+    #                     {
+    #                       dolby_e_decode: {
+    #                         program_selection: "ALL_CHANNELS" # One of: ["ALL_CHANNELS", "PROGRAM_1", "PROGRAM_2", "PROGRAM_3", "PROGRAM_4", "PROGRAM_5", "PROGRAM_6", "PROGRAM_7", "PROGRAM_8"], # required
+    #                       },
+    #                       pid: 1, # required
+    #                       premix_settings: {
+    #                         audio_normalization_settings: {
+    #                           algorithm: "ITU_1770_1" # One of: ["ITU_1770_1", "ITU_1770_2", "ITU_1770_3", "ITU_1770_4"],
+    #                           algorithm_control: "CORRECT_AUDIO" # One of: ["CORRECT_AUDIO"],
+    #                           target_lkfs: 1.0,
+    #                           peak_calculation: "NONE" # One of: ["NONE", "TRUE_PEAK"],
+    #                           peak_limiter_threshold: 1.0
+    #                         },
+    #                         channels: 1,
+    #                         gain_db: 1.0,
+    #                         remix_settings: {
+    #                           channel_mappings: [ # required
+    #                             {
+    #                               input_channel_levels: [ # required
+    #                                 {
+    #                                   gain: 1, # required
+    #                                   input_channel: 1, # required
+    #                                 }
+    #                               ],
+    #                               output_channel: 1, # required
+    #                             }
+    #                           ],
+    #                           channels_in: 1,
+    #                           channels_out: 1
+    #                         }
+    #                       }
+    #                     }
+    #                   ]
     #                 },
     #                 audio_track_selection: {
     #                   tracks: [ # required
     #                     {
     #                       track: 1, # required
+    #                       premix_settings: {
+    #                         audio_normalization_settings: {
+    #                           algorithm: "ITU_1770_1" # One of: ["ITU_1770_1", "ITU_1770_2", "ITU_1770_3", "ITU_1770_4"],
+    #                           algorithm_control: "CORRECT_AUDIO" # One of: ["CORRECT_AUDIO"],
+    #                           target_lkfs: 1.0,
+    #                           peak_calculation: "NONE" # One of: ["NONE", "TRUE_PEAK"],
+    #                           peak_limiter_threshold: 1.0
+    #                         },
+    #                         channels: 1,
+    #                         gain_db: 1.0,
+    #                         remix_settings: {
+    #                           channel_mappings: [ # required
+    #                             {
+    #                               input_channel_levels: [ # required
+    #                                 {
+    #                                   gain: 1, # required
+    #                                   input_channel: 1, # required
+    #                                 }
+    #                               ],
+    #                               output_channel: 1, # required
+    #                             }
+    #                           ],
+    #                           channels_in: 1,
+    #                           channels_out: 1
+    #                         }
+    #                       }
     #                     }
     #                   ],
     #                   dolby_e_decode: {
@@ -16009,6 +18476,10 @@ module Aws::MediaLive
     #                     width: 1.0, # required
     #                   },
     #                   page_number: "__string"
+    #                 },
+    #                 smart_subtitle_source_settings: {
+    #                   caption_synchronization_mode: "NO_VIDEO_DELAY" # One of: ["NO_VIDEO_DELAY", "VIDEO_ALIGNED_CAPTIONS"],
+    #                   inference_feed_output: "__string"
     #                 }
     #               }
     #             }
@@ -16075,6 +18546,29 @@ module Aws::MediaLive
     #     anywhere_settings: {
     #       channel_placement_group_id: "__string",
     #       cluster_id: "__string"
+    #     },
+    #     linked_channel_settings: {
+    #       follower_channel_settings: {
+    #         linked_channel_type: "FOLLOWING_CHANNEL" # One of: ["FOLLOWING_CHANNEL", "PRIMARY_CHANNEL"],
+    #         primary_channel_arn: "__string"
+    #       },
+    #       primary_channel_settings: {
+    #         linked_channel_type: "FOLLOWING_CHANNEL" # One of: ["FOLLOWING_CHANNEL", "PRIMARY_CHANNEL"]
+    #       }
+    #     },
+    #     channel_security_groups: ["__string"],
+    #     inference_settings: {
+    #       feed_arn: "__string",
+    #       audio_feed_inputs: [
+    #         {
+    #           audio_selector_name: "__string",
+    #           feed_input: "__string"
+    #         }
+    #       ],
+    #       enrichment_methods: ["SCTE35_ELEMENTAL_INFERENCE_QUERY_PARAMS" # One of: ["SCTE35_ELEMENTAL_INFERENCE_QUERY_PARAMS"]]
+    #     },
+    #     special_router_settings: {
+    #       router_arn: "__string"
     #     }
     #   }
     #   options = {}
@@ -16095,7 +18589,9 @@ module Aws::MediaLive
     #             {
     #               channel_id: "__stringMin1",
     #               channel_group: "__stringMin1",
-    #               channel_name: "__stringMin1"
+    #               channel_name: "__stringMin1",
+    #               channel_endpoint_id: "__stringMin1",
+    #               media_package_region_name: "__stringMin1"
     #             }
     #           ],
     #           multiplex_settings: {
@@ -16107,17 +18603,26 @@ module Aws::MediaLive
     #               password_param: "__string",
     #               stream_name: "__string",
     #               url: "__string",
-    #               username: "__string"
+    #               username: "__string",
+    #               virtual_source_address: "__string"
     #             }
     #           ],
     #           srt_settings: [
     #             {
     #               encryption_passphrase_secret_arn: "__string",
     #               stream_id: "__string",
-    #               url: "__string"
+    #               url: "__string",
+    #               connection_mode: "CALLER" # One of: ["CALLER", "LISTENER"],
+    #               listener_port: 1
     #             }
     #           ],
-    #           logical_interface_names: ["__string"]
+    #           logical_interface_names: ["__string"],
+    #           media_connect_router_settings: [
+    #             {
+    #               encryption_type: "AUTOMATIC" # One of: ["AUTOMATIC", "SECRETS_MANAGER"],
+    #               secret_arn: "__string"
+    #             }
+    #           ]
     #         }
     #       ],
     #       egress_endpoints: [
@@ -16129,9 +18634,11 @@ module Aws::MediaLive
     #         audio_descriptions: [ # required
     #           {
     #             audio_normalization_settings: {
-    #               algorithm: "ITU_1770_1" # One of: ["ITU_1770_1", "ITU_1770_2"],
+    #               algorithm: "ITU_1770_1" # One of: ["ITU_1770_1", "ITU_1770_2", "ITU_1770_3", "ITU_1770_4"],
     #               algorithm_control: "CORRECT_AUDIO" # One of: ["CORRECT_AUDIO"],
-    #               target_lkfs: 1.0
+    #               target_lkfs: 1.0,
+    #               peak_calculation: "NONE" # One of: ["NONE", "TRUE_PEAK"],
+    #               peak_limiter_threshold: 1.0
     #             },
     #             audio_selector_name: "__string", # required
     #             audio_type: "CLEAN_EFFECTS" # One of: ["CLEAN_EFFECTS", "HEARING_IMPAIRED", "UNDEFINED", "VISUAL_IMPAIRED_COMMENTARY"],
@@ -16145,6 +18652,11 @@ module Aws::MediaLive
     #                 },
     #                 nielsen_distribution_type: "FINAL_DISTRIBUTOR" # One of: ["FINAL_DISTRIBUTOR", "PROGRAM_CONTENT"],
     #                 nielsen_naes_ii_nw_settings: {
+    #                   check_digit_string: "__stringMin2Max2", # required
+    #                   sid: 1.0, # required
+    #                   timezone: "AMERICA_PUERTO_RICO" # One of: ["AMERICA_PUERTO_RICO", "US_ALASKA", "US_ARIZONA", "US_CENTRAL", "US_EASTERN", "US_HAWAII", "US_MOUNTAIN", "US_PACIFIC", "US_SAMOA", "UTC"]
+    #                 },
+    #                 nielsen_nw_only_settings: {
     #                   check_digit_string: "__stringMin2Max2", # required
     #                   sid: 1.0, # required
     #                   timezone: "AMERICA_PUERTO_RICO" # One of: ["AMERICA_PUERTO_RICO", "US_ALASKA", "US_ARIZONA", "US_CENTRAL", "US_EASTERN", "US_HAWAII", "US_MOUNTAIN", "US_PACIFIC", "US_SAMOA", "UTC"]
@@ -16350,6 +18862,10 @@ module Aws::MediaLive
     #                 default_line_height: 1
     #               },
     #               embedded_destination_settings: {
+    #                 position: {
+    #                   y_position_line: 1
+    #                 },
+    #                 style_control: "MANUAL" # One of: ["MANUAL", "PASSTHROUGH"]
     #               },
     #               embedded_plus_scte20_destination_settings: {
     #               },
@@ -16364,10 +18880,16 @@ module Aws::MediaLive
     #               teletext_destination_settings: {
     #               },
     #               ttml_destination_settings: {
-    #                 style_control: "PASSTHROUGH" # One of: ["PASSTHROUGH", "USE_CONFIGURED"]
+    #                 style_control: "PASSTHROUGH" # One of: ["PASSTHROUGH", "USE_CONFIGURED", "MANUAL"],
+    #                 position: {
+    #                   y_position_percentage: 1
+    #                 }
     #               },
     #               webvtt_destination_settings: {
-    #                 style_control: "NO_STYLE_DATA" # One of: ["NO_STYLE_DATA", "PASSTHROUGH"]
+    #                 style_control: "NO_STYLE_DATA" # One of: ["NO_STYLE_DATA", "PASSTHROUGH", "MANUAL"],
+    #                 position: {
+    #                   y_position_percentage: 1
+    #                 }
     #               }
     #             },
     #             language_code: "__string",
@@ -16404,6 +18926,11 @@ module Aws::MediaLive
     #               jam_sync_time: "__string"
     #             },
     #             pipeline_locking_settings: {
+    #               pipeline_locking_method: "SOURCE_TIMECODE" # One of: ["SOURCE_TIMECODE", "VIDEO_ALIGNMENT"],
+    #               custom_epoch: "__string"
+    #             },
+    #             disabled_locking_settings: {
+    #               custom_epoch: "__string"
     #             }
     #           }
     #         },
@@ -16553,12 +19080,41 @@ module Aws::MediaLive
     #                   id3_behavior: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                   klv_behavior: "NO_PASSTHROUGH" # One of: ["NO_PASSTHROUGH", "PASSTHROUGH"],
     #                   nielsen_id3_behavior: "NO_PASSTHROUGH" # One of: ["NO_PASSTHROUGH", "PASSTHROUGH"],
-    #                   scte35_type: "NONE" # One of: ["NONE", "SCTE_35_WITHOUT_SEGMENTATION"],
+    #                   scte35_type: "NONE" # One of: ["NONE", "SCTE_35_WITHOUT_SEGMENTATION", "SCTE_35_WITHOUT_IDR"],
     #                   segment_length: 1,
     #                   segment_length_units: "MILLISECONDS" # One of: ["MILLISECONDS", "SECONDS"],
     #                   timed_metadata_id3_frame: "NONE" # One of: ["NONE", "PRIV", "TDRL"],
     #                   timed_metadata_id3_period: 1,
-    #                   timed_metadata_passthrough: "DISABLED" # One of: ["DISABLED", "ENABLED"]
+    #                   timed_metadata_passthrough: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                   additional_destinations: [
+    #                     {
+    #                       destination: { # required
+    #                         destination_ref_id: "__string"
+    #                       }
+    #                     }
+    #                   ],
+    #                   watermarking_settings: {
+    #                     media_package_v2_ab_watermarker_irdeto_settings: {
+    #                       additional_destinations_alternate_destinations: [
+    #                         {
+    #                           destination_ref_id: "__string"
+    #                         }
+    #                       ],
+    #                       alternate_destination: { # required
+    #                         destination_ref_id: "__string"
+    #                       },
+    #                       custom_profile: {
+    #                         embedding_frequency: 1.0, # required
+    #                         scene_cut: 1.0, # required
+    #                         target_psnr: 1.0, # required
+    #                       },
+    #                       license: "__string",
+    #                       operator_id: 1, # required
+    #                       poly_period: 1,
+    #                       profile: "CAMCORDING" # One of: ["CAMCORDING", "CUSTOM", "DEFAULT", "HQ", "MEZZANINE", "ROBUST"], # required
+    #                       watermark_id_length: "ID_2048" # One of: ["ID_2048", "ID_512"]
+    #                     }
+    #                   }
     #                 }
     #               },
     #               ms_smooth_group_settings: {
@@ -16606,7 +19162,7 @@ module Aws::MediaLive
     #                   destination_ref_id: "__string"
     #                 },
     #                 nielsen_id3_behavior: "NO_PASSTHROUGH" # One of: ["NO_PASSTHROUGH", "PASSTHROUGH"],
-    #                 scte35_type: "NONE" # One of: ["NONE", "SCTE_35_WITHOUT_SEGMENTATION"],
+    #                 scte35_type: "NONE" # One of: ["NONE", "SCTE_35_WITHOUT_SEGMENTATION", "SCTE_35_WITHOUT_IDR"],
     #                 segment_length: 1,
     #                 segment_length_units: "MILLISECONDS" # One of: ["MILLISECONDS", "SECONDS"],
     #                 send_delay_ms: 1,
@@ -16631,10 +19187,35 @@ module Aws::MediaLive
     #                       destination_ref_id: "__string"
     #                     }
     #                   }
-    #                 ]
+    #                 ],
+    #                 watermarking_settings: {
+    #                   cmaf_ingest_ab_watermarker_irdeto_settings: {
+    #                     additional_destinations_alternate_destinations: [
+    #                       {
+    #                         destination_ref_id: "__string"
+    #                       }
+    #                     ],
+    #                     alternate_destination: { # required
+    #                       destination_ref_id: "__string"
+    #                     },
+    #                     custom_profile: {
+    #                       embedding_frequency: 1.0, # required
+    #                       scene_cut: 1.0, # required
+    #                       target_psnr: 1.0, # required
+    #                     },
+    #                     license: "__string",
+    #                     operator_id: 1, # required
+    #                     poly_period: 1,
+    #                     profile: "CAMCORDING" # One of: ["CAMCORDING", "CUSTOM", "DEFAULT", "HQ", "MEZZANINE", "ROBUST"], # required
+    #                     watermark_id_length: "ID_2048" # One of: ["ID_2048", "ID_512"]
+    #                   }
+    #                 }
     #               },
     #               srt_group_settings: {
     #                 input_loss_action: "DROP_PROGRAM" # One of: ["DROP_PROGRAM", "DROP_TS", "EMIT_PROGRAM"]
+    #               },
+    #               media_connect_router_group_settings: {
+    #                 availability_zones: ["__string"]
     #               }
     #             },
     #             outputs: [ # required
@@ -16695,7 +19276,7 @@ module Aws::MediaLive
     #                         program_num: 1,
     #                         rate_mode: "CBR" # One of: ["CBR", "VBR"],
     #                         scte27_pids: "__string",
-    #                         scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH"],
+    #                         scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH", "SCTE_35_WITHOUT_IDR"],
     #                         scte35_pid: "__string",
     #                         segmentation_markers: "EBP" # One of: ["EBP", "EBP_LEGACY", "NONE", "PSI_SEGSTART", "RAI_ADAPT", "RAI_SEGSTART"],
     #                         segmentation_style: "MAINTAIN_CADENCE" # One of: ["MAINTAIN_CADENCE", "RESET_CADENCE"],
@@ -16768,7 +19349,8 @@ module Aws::MediaLive
     #                       audio_group_id: "__string",
     #                       audio_rendition_sets: "__string",
     #                       hls_auto_select: "NO" # One of: ["NO", "OMIT", "YES"],
-    #                       hls_default: "NO" # One of: ["NO", "OMIT", "YES"]
+    #                       hls_default: "NO" # One of: ["NO", "OMIT", "YES"],
+    #                       output_usage: ["MULTIVIEW_EQUAL_SIZE_VIEW" # One of: ["MULTIVIEW_EQUAL_SIZE_VIEW", "MULTIVIEW_PRIMARY_VIEW", "MULTIVIEW_SECONDARY_VIEW"]]
     #                     }
     #                   },
     #                   ms_smooth_output_settings: {
@@ -16793,7 +19375,7 @@ module Aws::MediaLive
     #                         nielsen_id3_behavior: "NO_PASSTHROUGH" # One of: ["NO_PASSTHROUGH", "PASSTHROUGH"],
     #                         pcr_control: "CONFIGURED_PCR_PERIOD" # One of: ["CONFIGURED_PCR_PERIOD", "PCR_EVERY_PES_PACKET"],
     #                         pcr_period: 1,
-    #                         scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH"],
+    #                         scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH", "SCTE_35_WITHOUT_IDR"],
     #                         scte35_preroll_pullup_milliseconds: 1.0
     #                       }
     #                     }
@@ -16859,7 +19441,7 @@ module Aws::MediaLive
     #                         program_num: 1,
     #                         rate_mode: "CBR" # One of: ["CBR", "VBR"],
     #                         scte27_pids: "__string",
-    #                         scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH"],
+    #                         scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH", "SCTE_35_WITHOUT_IDR"],
     #                         scte35_pid: "__string",
     #                         segmentation_markers: "EBP" # One of: ["EBP", "EBP_LEGACY", "NONE", "PSI_SEGSTART", "RAI_ADAPT", "RAI_SEGSTART"],
     #                         segmentation_style: "MAINTAIN_CADENCE" # One of: ["MAINTAIN_CADENCE", "RESET_CADENCE"],
@@ -16936,7 +19518,7 @@ module Aws::MediaLive
     #                         program_num: 1,
     #                         rate_mode: "CBR" # One of: ["CBR", "VBR"],
     #                         scte27_pids: "__string",
-    #                         scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH"],
+    #                         scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH", "SCTE_35_WITHOUT_IDR"],
     #                         scte35_pid: "__string",
     #                         segmentation_markers: "EBP" # One of: ["EBP", "EBP_LEGACY", "NONE", "PSI_SEGSTART", "RAI_ADAPT", "RAI_SEGSTART"],
     #                         segmentation_style: "MAINTAIN_CADENCE" # One of: ["MAINTAIN_CADENCE", "RESET_CADENCE"],
@@ -16953,6 +19535,78 @@ module Aws::MediaLive
     #                     },
     #                     encryption_type: "AES128" # One of: ["AES128", "AES192", "AES256"],
     #                     latency: 1
+    #                   },
+    #                   media_connect_router_output_settings: {
+    #                     connected_router_inputs: {
+    #                       pipeline0: "__string",
+    #                       pipeline1: "__string"
+    #                     },
+    #                     container_settings: { # required
+    #                       m2ts_settings: {
+    #                         absent_input_audio_behavior: "DROP" # One of: ["DROP", "ENCODE_SILENCE"],
+    #                         arib: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                         arib_captions_pid: "__string",
+    #                         arib_captions_pid_control: "AUTO" # One of: ["AUTO", "USE_CONFIGURED"],
+    #                         audio_buffer_model: "ATSC" # One of: ["ATSC", "DVB"],
+    #                         audio_frames_per_pes: 1,
+    #                         audio_pids: "__string",
+    #                         audio_stream_type: "ATSC" # One of: ["ATSC", "DVB"],
+    #                         bitrate: 1,
+    #                         buffer_model: "MULTIPLEX" # One of: ["MULTIPLEX", "NONE"],
+    #                         cc_descriptor: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                         dvb_nit_settings: {
+    #                           network_id: 1, # required
+    #                           network_name: "__stringMin1Max256", # required
+    #                           rep_interval: 1
+    #                         },
+    #                         dvb_sdt_settings: {
+    #                           output_sdt: "SDT_FOLLOW" # One of: ["SDT_FOLLOW", "SDT_FOLLOW_IF_PRESENT", "SDT_MANUAL", "SDT_NONE"],
+    #                           rep_interval: 1,
+    #                           service_name: "__stringMin1Max256",
+    #                           service_provider_name: "__stringMin1Max256"
+    #                         },
+    #                         dvb_sub_pids: "__string",
+    #                         dvb_tdt_settings: {
+    #                           rep_interval: 1
+    #                         },
+    #                         dvb_teletext_pid: "__string",
+    #                         ebif: "NONE" # One of: ["NONE", "PASSTHROUGH"],
+    #                         ebp_audio_interval: "VIDEO_AND_FIXED_INTERVALS" # One of: ["VIDEO_AND_FIXED_INTERVALS", "VIDEO_INTERVAL"],
+    #                         ebp_lookahead_ms: 1,
+    #                         ebp_placement: "VIDEO_AND_AUDIO_PIDS" # One of: ["VIDEO_AND_AUDIO_PIDS", "VIDEO_PID"],
+    #                         ecm_pid: "__string",
+    #                         es_rate_in_pes: "EXCLUDE" # One of: ["EXCLUDE", "INCLUDE"],
+    #                         etv_platform_pid: "__string",
+    #                         etv_signal_pid: "__string",
+    #                         fragment_time: 1.0,
+    #                         klv: "NONE" # One of: ["NONE", "PASSTHROUGH"],
+    #                         klv_data_pids: "__string",
+    #                         nielsen_id3_behavior: "NO_PASSTHROUGH" # One of: ["NO_PASSTHROUGH", "PASSTHROUGH"],
+    #                         null_packet_bitrate: 1.0,
+    #                         pat_interval: 1,
+    #                         pcr_control: "CONFIGURED_PCR_PERIOD" # One of: ["CONFIGURED_PCR_PERIOD", "PCR_EVERY_PES_PACKET"],
+    #                         pcr_period: 1,
+    #                         pcr_pid: "__string",
+    #                         pmt_interval: 1,
+    #                         pmt_pid: "__string",
+    #                         program_num: 1,
+    #                         rate_mode: "CBR" # One of: ["CBR", "VBR"],
+    #                         scte27_pids: "__string",
+    #                         scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH", "SCTE_35_WITHOUT_IDR"],
+    #                         scte35_pid: "__string",
+    #                         segmentation_markers: "EBP" # One of: ["EBP", "EBP_LEGACY", "NONE", "PSI_SEGSTART", "RAI_ADAPT", "RAI_SEGSTART"],
+    #                         segmentation_style: "MAINTAIN_CADENCE" # One of: ["MAINTAIN_CADENCE", "RESET_CADENCE"],
+    #                         segmentation_time: 1.0,
+    #                         timed_metadata_behavior: "NO_PASSTHROUGH" # One of: ["NO_PASSTHROUGH", "PASSTHROUGH"],
+    #                         timed_metadata_pid: "__string",
+    #                         transport_stream_id: 1,
+    #                         video_pid: "__string",
+    #                         scte35_preroll_pullup_milliseconds: 1.0
+    #                       }
+    #                     },
+    #                     destination: { # required
+    #                       destination_ref_id: "__string"
+    #                     }
     #                   }
     #                 },
     #                 video_description_name: "__string"
@@ -17061,6 +19715,8 @@ module Aws::MediaLive
     #                   rec601_settings: {
     #                   },
     #                   rec709_settings: {
+    #                   },
+    #                   hlg2020_settings: {
     #                   }
     #                 },
     #                 filter_settings: {
@@ -17153,6 +19809,8 @@ module Aws::MediaLive
     #                   rec601_settings: {
     #                   },
     #                   rec709_settings: {
+    #                   },
+    #                   hlg2020_settings: {
     #                   }
     #                 },
     #                 fixed_afd: "AFD_0000" # One of: ["AFD_0000", "AFD_0010", "AFD_0011", "AFD_0100", "AFD_1000", "AFD_1001", "AFD_1010", "AFD_1011", "AFD_1101", "AFD_1110", "AFD_1111"],
@@ -17175,15 +19833,32 @@ module Aws::MediaLive
     #                 },
     #                 bitrate: 1,
     #                 rate_control_mode: "CBR" # One of: ["CBR", "QVBR"],
-    #                 min_bitrate: 1
+    #                 min_bitrate: 1,
+    #                 spatial_aq: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                 temporal_aq: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                 timecode_insertion: "DISABLED" # One of: ["DISABLED", "METADATA_OBU"],
+    #                 bit_depth: "DEPTH_10" # One of: ["DEPTH_10", "DEPTH_8"]
     #               }
     #             },
     #             height: 1,
     #             name: "__string", # required
     #             respond_to_afd: "NONE" # One of: ["NONE", "PASSTHROUGH", "RESPOND"],
-    #             scaling_behavior: "DEFAULT" # One of: ["DEFAULT", "STRETCH_TO_OUTPUT"],
+    #             scaling_behavior: "DEFAULT" # One of: ["DEFAULT", "STRETCH_TO_OUTPUT", "SMART_CROP"],
     #             sharpness: 1,
-    #             width: 1
+    #             width: 1,
+    #             crop_rectangle: {
+    #               height: 1, # required
+    #               width: 1, # required
+    #               x: 1, # required
+    #               y: 1, # required
+    #             },
+    #             output_position_rectangle: {
+    #               height: 1, # required
+    #               width: 1, # required
+    #               x: 1, # required
+    #               y: 1, # required
+    #             },
+    #             border: 1
     #           }
     #         ],
     #         thumbnail_configuration: {
@@ -17241,11 +19916,71 @@ module Aws::MediaLive
     #                   },
     #                   audio_pid_selection: {
     #                     pid: 1, # required
+    #                     pids: [
+    #                       {
+    #                         dolby_e_decode: {
+    #                           program_selection: "ALL_CHANNELS" # One of: ["ALL_CHANNELS", "PROGRAM_1", "PROGRAM_2", "PROGRAM_3", "PROGRAM_4", "PROGRAM_5", "PROGRAM_6", "PROGRAM_7", "PROGRAM_8"], # required
+    #                         },
+    #                         pid: 1, # required
+    #                         premix_settings: {
+    #                           audio_normalization_settings: {
+    #                             algorithm: "ITU_1770_1" # One of: ["ITU_1770_1", "ITU_1770_2", "ITU_1770_3", "ITU_1770_4"],
+    #                             algorithm_control: "CORRECT_AUDIO" # One of: ["CORRECT_AUDIO"],
+    #                             target_lkfs: 1.0,
+    #                             peak_calculation: "NONE" # One of: ["NONE", "TRUE_PEAK"],
+    #                             peak_limiter_threshold: 1.0
+    #                           },
+    #                           channels: 1,
+    #                           gain_db: 1.0,
+    #                           remix_settings: {
+    #                             channel_mappings: [ # required
+    #                               {
+    #                                 input_channel_levels: [ # required
+    #                                   {
+    #                                     gain: 1, # required
+    #                                     input_channel: 1, # required
+    #                                   }
+    #                                 ],
+    #                                 output_channel: 1, # required
+    #                               }
+    #                             ],
+    #                             channels_in: 1,
+    #                             channels_out: 1
+    #                           }
+    #                         }
+    #                       }
+    #                     ]
     #                   },
     #                   audio_track_selection: {
     #                     tracks: [ # required
     #                       {
     #                         track: 1, # required
+    #                         premix_settings: {
+    #                           audio_normalization_settings: {
+    #                             algorithm: "ITU_1770_1" # One of: ["ITU_1770_1", "ITU_1770_2", "ITU_1770_3", "ITU_1770_4"],
+    #                             algorithm_control: "CORRECT_AUDIO" # One of: ["CORRECT_AUDIO"],
+    #                             target_lkfs: 1.0,
+    #                             peak_calculation: "NONE" # One of: ["NONE", "TRUE_PEAK"],
+    #                             peak_limiter_threshold: 1.0
+    #                           },
+    #                           channels: 1,
+    #                           gain_db: 1.0,
+    #                           remix_settings: {
+    #                             channel_mappings: [ # required
+    #                               {
+    #                                 input_channel_levels: [ # required
+    #                                   {
+    #                                     gain: 1, # required
+    #                                     input_channel: 1, # required
+    #                                   }
+    #                                 ],
+    #                                 output_channel: 1, # required
+    #                               }
+    #                             ],
+    #                             channels_in: 1,
+    #                             channels_out: 1
+    #                           }
+    #                         }
     #                       }
     #                     ],
     #                     dolby_e_decode: {
@@ -17291,6 +20026,10 @@ module Aws::MediaLive
     #                       width: 1.0, # required
     #                     },
     #                     page_number: "__string"
+    #                   },
+    #                   smart_subtitle_source_settings: {
+    #                     caption_synchronization_mode: "NO_VIDEO_DELAY" # One of: ["NO_VIDEO_DELAY", "VIDEO_ALIGNED_CAPTIONS"],
+    #                     inference_feed_output: "__string"
     #                   }
     #                 }
     #               }
@@ -17360,6 +20099,11 @@ module Aws::MediaLive
     #           channel_engine_version: {
     #             expiration_date: Time.now,
     #             version: "__string"
+    #           },
+    #           media_connect_router_output_connection_map: {
+    #             "__string" => {
+    #               router_input_arn: "__string"
+    #             }
     #           }
     #         }
     #       ],
@@ -17382,6 +20126,27 @@ module Aws::MediaLive
     #       channel_engine_version: {
     #         expiration_date: Time.now,
     #         version: "__string"
+    #       },
+    #       linked_channel_settings: {
+    #         follower_channel_settings: {
+    #           linked_channel_type: "FOLLOWING_CHANNEL" # One of: ["FOLLOWING_CHANNEL", "PRIMARY_CHANNEL"],
+    #           primary_channel_arn: "__string"
+    #         },
+    #         primary_channel_settings: {
+    #           following_channel_arns: ["__string"],
+    #           linked_channel_type: "FOLLOWING_CHANNEL" # One of: ["FOLLOWING_CHANNEL", "PRIMARY_CHANNEL"]
+    #         }
+    #       },
+    #       channel_security_groups: ["__string"],
+    #       inference_settings: {
+    #         feed_arn: "__string",
+    #         audio_feed_inputs: [
+    #           {
+    #             audio_selector_name: "__string",
+    #             feed_input: "__string"
+    #           }
+    #         ],
+    #         enrichment_methods: ["SCTE35_ELEMENTAL_INFERENCE_QUERY_PARAMS" # One of: ["SCTE35_ELEMENTAL_INFERENCE_QUERY_PARAMS"]]
     #       }
     #     }
     #   }
@@ -17410,7 +20175,9 @@ module Aws::MediaLive
     #           {
     #             channel_id: "__stringMin1",
     #             channel_group: "__stringMin1",
-    #             channel_name: "__stringMin1"
+    #             channel_name: "__stringMin1",
+    #             channel_endpoint_id: "__stringMin1",
+    #             media_package_region_name: "__stringMin1"
     #           }
     #         ],
     #         multiplex_settings: {
@@ -17422,17 +20189,26 @@ module Aws::MediaLive
     #             password_param: "__string",
     #             stream_name: "__string",
     #             url: "__string",
-    #             username: "__string"
+    #             username: "__string",
+    #             virtual_source_address: "__string"
     #           }
     #         ],
     #         srt_settings: [
     #           {
     #             encryption_passphrase_secret_arn: "__string",
     #             stream_id: "__string",
-    #             url: "__string"
+    #             url: "__string",
+    #             connection_mode: "CALLER" # One of: ["CALLER", "LISTENER"],
+    #             listener_port: 1
     #           }
     #         ],
-    #         logical_interface_names: ["__string"]
+    #         logical_interface_names: ["__string"],
+    #         media_connect_router_settings: [
+    #           {
+    #             encryption_type: "AUTOMATIC" # One of: ["AUTOMATIC", "SECRETS_MANAGER"],
+    #             secret_arn: "__string"
+    #           }
+    #         ]
     #       }
     #     ]
     #   }
@@ -17454,7 +20230,9 @@ module Aws::MediaLive
     #             {
     #               channel_id: "__stringMin1",
     #               channel_group: "__stringMin1",
-    #               channel_name: "__stringMin1"
+    #               channel_name: "__stringMin1",
+    #               channel_endpoint_id: "__stringMin1",
+    #               media_package_region_name: "__stringMin1"
     #             }
     #           ],
     #           multiplex_settings: {
@@ -17466,17 +20244,26 @@ module Aws::MediaLive
     #               password_param: "__string",
     #               stream_name: "__string",
     #               url: "__string",
-    #               username: "__string"
+    #               username: "__string",
+    #               virtual_source_address: "__string"
     #             }
     #           ],
     #           srt_settings: [
     #             {
     #               encryption_passphrase_secret_arn: "__string",
     #               stream_id: "__string",
-    #               url: "__string"
+    #               url: "__string",
+    #               connection_mode: "CALLER" # One of: ["CALLER", "LISTENER"],
+    #               listener_port: 1
     #             }
     #           ],
-    #           logical_interface_names: ["__string"]
+    #           logical_interface_names: ["__string"],
+    #           media_connect_router_settings: [
+    #             {
+    #               encryption_type: "AUTOMATIC" # One of: ["AUTOMATIC", "SECRETS_MANAGER"],
+    #               secret_arn: "__string"
+    #             }
+    #           ]
     #         }
     #       ],
     #       egress_endpoints: [
@@ -17488,9 +20275,11 @@ module Aws::MediaLive
     #         audio_descriptions: [ # required
     #           {
     #             audio_normalization_settings: {
-    #               algorithm: "ITU_1770_1" # One of: ["ITU_1770_1", "ITU_1770_2"],
+    #               algorithm: "ITU_1770_1" # One of: ["ITU_1770_1", "ITU_1770_2", "ITU_1770_3", "ITU_1770_4"],
     #               algorithm_control: "CORRECT_AUDIO" # One of: ["CORRECT_AUDIO"],
-    #               target_lkfs: 1.0
+    #               target_lkfs: 1.0,
+    #               peak_calculation: "NONE" # One of: ["NONE", "TRUE_PEAK"],
+    #               peak_limiter_threshold: 1.0
     #             },
     #             audio_selector_name: "__string", # required
     #             audio_type: "CLEAN_EFFECTS" # One of: ["CLEAN_EFFECTS", "HEARING_IMPAIRED", "UNDEFINED", "VISUAL_IMPAIRED_COMMENTARY"],
@@ -17504,6 +20293,11 @@ module Aws::MediaLive
     #                 },
     #                 nielsen_distribution_type: "FINAL_DISTRIBUTOR" # One of: ["FINAL_DISTRIBUTOR", "PROGRAM_CONTENT"],
     #                 nielsen_naes_ii_nw_settings: {
+    #                   check_digit_string: "__stringMin2Max2", # required
+    #                   sid: 1.0, # required
+    #                   timezone: "AMERICA_PUERTO_RICO" # One of: ["AMERICA_PUERTO_RICO", "US_ALASKA", "US_ARIZONA", "US_CENTRAL", "US_EASTERN", "US_HAWAII", "US_MOUNTAIN", "US_PACIFIC", "US_SAMOA", "UTC"]
+    #                 },
+    #                 nielsen_nw_only_settings: {
     #                   check_digit_string: "__stringMin2Max2", # required
     #                   sid: 1.0, # required
     #                   timezone: "AMERICA_PUERTO_RICO" # One of: ["AMERICA_PUERTO_RICO", "US_ALASKA", "US_ARIZONA", "US_CENTRAL", "US_EASTERN", "US_HAWAII", "US_MOUNTAIN", "US_PACIFIC", "US_SAMOA", "UTC"]
@@ -17709,6 +20503,10 @@ module Aws::MediaLive
     #                 default_line_height: 1
     #               },
     #               embedded_destination_settings: {
+    #                 position: {
+    #                   y_position_line: 1
+    #                 },
+    #                 style_control: "MANUAL" # One of: ["MANUAL", "PASSTHROUGH"]
     #               },
     #               embedded_plus_scte20_destination_settings: {
     #               },
@@ -17723,10 +20521,16 @@ module Aws::MediaLive
     #               teletext_destination_settings: {
     #               },
     #               ttml_destination_settings: {
-    #                 style_control: "PASSTHROUGH" # One of: ["PASSTHROUGH", "USE_CONFIGURED"]
+    #                 style_control: "PASSTHROUGH" # One of: ["PASSTHROUGH", "USE_CONFIGURED", "MANUAL"],
+    #                 position: {
+    #                   y_position_percentage: 1
+    #                 }
     #               },
     #               webvtt_destination_settings: {
-    #                 style_control: "NO_STYLE_DATA" # One of: ["NO_STYLE_DATA", "PASSTHROUGH"]
+    #                 style_control: "NO_STYLE_DATA" # One of: ["NO_STYLE_DATA", "PASSTHROUGH", "MANUAL"],
+    #                 position: {
+    #                   y_position_percentage: 1
+    #                 }
     #               }
     #             },
     #             language_code: "__string",
@@ -17763,6 +20567,11 @@ module Aws::MediaLive
     #               jam_sync_time: "__string"
     #             },
     #             pipeline_locking_settings: {
+    #               pipeline_locking_method: "SOURCE_TIMECODE" # One of: ["SOURCE_TIMECODE", "VIDEO_ALIGNMENT"],
+    #               custom_epoch: "__string"
+    #             },
+    #             disabled_locking_settings: {
+    #               custom_epoch: "__string"
     #             }
     #           }
     #         },
@@ -17912,12 +20721,41 @@ module Aws::MediaLive
     #                   id3_behavior: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                   klv_behavior: "NO_PASSTHROUGH" # One of: ["NO_PASSTHROUGH", "PASSTHROUGH"],
     #                   nielsen_id3_behavior: "NO_PASSTHROUGH" # One of: ["NO_PASSTHROUGH", "PASSTHROUGH"],
-    #                   scte35_type: "NONE" # One of: ["NONE", "SCTE_35_WITHOUT_SEGMENTATION"],
+    #                   scte35_type: "NONE" # One of: ["NONE", "SCTE_35_WITHOUT_SEGMENTATION", "SCTE_35_WITHOUT_IDR"],
     #                   segment_length: 1,
     #                   segment_length_units: "MILLISECONDS" # One of: ["MILLISECONDS", "SECONDS"],
     #                   timed_metadata_id3_frame: "NONE" # One of: ["NONE", "PRIV", "TDRL"],
     #                   timed_metadata_id3_period: 1,
-    #                   timed_metadata_passthrough: "DISABLED" # One of: ["DISABLED", "ENABLED"]
+    #                   timed_metadata_passthrough: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                   additional_destinations: [
+    #                     {
+    #                       destination: { # required
+    #                         destination_ref_id: "__string"
+    #                       }
+    #                     }
+    #                   ],
+    #                   watermarking_settings: {
+    #                     media_package_v2_ab_watermarker_irdeto_settings: {
+    #                       additional_destinations_alternate_destinations: [
+    #                         {
+    #                           destination_ref_id: "__string"
+    #                         }
+    #                       ],
+    #                       alternate_destination: { # required
+    #                         destination_ref_id: "__string"
+    #                       },
+    #                       custom_profile: {
+    #                         embedding_frequency: 1.0, # required
+    #                         scene_cut: 1.0, # required
+    #                         target_psnr: 1.0, # required
+    #                       },
+    #                       license: "__string",
+    #                       operator_id: 1, # required
+    #                       poly_period: 1,
+    #                       profile: "CAMCORDING" # One of: ["CAMCORDING", "CUSTOM", "DEFAULT", "HQ", "MEZZANINE", "ROBUST"], # required
+    #                       watermark_id_length: "ID_2048" # One of: ["ID_2048", "ID_512"]
+    #                     }
+    #                   }
     #                 }
     #               },
     #               ms_smooth_group_settings: {
@@ -17965,7 +20803,7 @@ module Aws::MediaLive
     #                   destination_ref_id: "__string"
     #                 },
     #                 nielsen_id3_behavior: "NO_PASSTHROUGH" # One of: ["NO_PASSTHROUGH", "PASSTHROUGH"],
-    #                 scte35_type: "NONE" # One of: ["NONE", "SCTE_35_WITHOUT_SEGMENTATION"],
+    #                 scte35_type: "NONE" # One of: ["NONE", "SCTE_35_WITHOUT_SEGMENTATION", "SCTE_35_WITHOUT_IDR"],
     #                 segment_length: 1,
     #                 segment_length_units: "MILLISECONDS" # One of: ["MILLISECONDS", "SECONDS"],
     #                 send_delay_ms: 1,
@@ -17990,10 +20828,35 @@ module Aws::MediaLive
     #                       destination_ref_id: "__string"
     #                     }
     #                   }
-    #                 ]
+    #                 ],
+    #                 watermarking_settings: {
+    #                   cmaf_ingest_ab_watermarker_irdeto_settings: {
+    #                     additional_destinations_alternate_destinations: [
+    #                       {
+    #                         destination_ref_id: "__string"
+    #                       }
+    #                     ],
+    #                     alternate_destination: { # required
+    #                       destination_ref_id: "__string"
+    #                     },
+    #                     custom_profile: {
+    #                       embedding_frequency: 1.0, # required
+    #                       scene_cut: 1.0, # required
+    #                       target_psnr: 1.0, # required
+    #                     },
+    #                     license: "__string",
+    #                     operator_id: 1, # required
+    #                     poly_period: 1,
+    #                     profile: "CAMCORDING" # One of: ["CAMCORDING", "CUSTOM", "DEFAULT", "HQ", "MEZZANINE", "ROBUST"], # required
+    #                     watermark_id_length: "ID_2048" # One of: ["ID_2048", "ID_512"]
+    #                   }
+    #                 }
     #               },
     #               srt_group_settings: {
     #                 input_loss_action: "DROP_PROGRAM" # One of: ["DROP_PROGRAM", "DROP_TS", "EMIT_PROGRAM"]
+    #               },
+    #               media_connect_router_group_settings: {
+    #                 availability_zones: ["__string"]
     #               }
     #             },
     #             outputs: [ # required
@@ -18054,7 +20917,7 @@ module Aws::MediaLive
     #                         program_num: 1,
     #                         rate_mode: "CBR" # One of: ["CBR", "VBR"],
     #                         scte27_pids: "__string",
-    #                         scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH"],
+    #                         scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH", "SCTE_35_WITHOUT_IDR"],
     #                         scte35_pid: "__string",
     #                         segmentation_markers: "EBP" # One of: ["EBP", "EBP_LEGACY", "NONE", "PSI_SEGSTART", "RAI_ADAPT", "RAI_SEGSTART"],
     #                         segmentation_style: "MAINTAIN_CADENCE" # One of: ["MAINTAIN_CADENCE", "RESET_CADENCE"],
@@ -18127,7 +20990,8 @@ module Aws::MediaLive
     #                       audio_group_id: "__string",
     #                       audio_rendition_sets: "__string",
     #                       hls_auto_select: "NO" # One of: ["NO", "OMIT", "YES"],
-    #                       hls_default: "NO" # One of: ["NO", "OMIT", "YES"]
+    #                       hls_default: "NO" # One of: ["NO", "OMIT", "YES"],
+    #                       output_usage: ["MULTIVIEW_EQUAL_SIZE_VIEW" # One of: ["MULTIVIEW_EQUAL_SIZE_VIEW", "MULTIVIEW_PRIMARY_VIEW", "MULTIVIEW_SECONDARY_VIEW"]]
     #                     }
     #                   },
     #                   ms_smooth_output_settings: {
@@ -18152,7 +21016,7 @@ module Aws::MediaLive
     #                         nielsen_id3_behavior: "NO_PASSTHROUGH" # One of: ["NO_PASSTHROUGH", "PASSTHROUGH"],
     #                         pcr_control: "CONFIGURED_PCR_PERIOD" # One of: ["CONFIGURED_PCR_PERIOD", "PCR_EVERY_PES_PACKET"],
     #                         pcr_period: 1,
-    #                         scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH"],
+    #                         scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH", "SCTE_35_WITHOUT_IDR"],
     #                         scte35_preroll_pullup_milliseconds: 1.0
     #                       }
     #                     }
@@ -18218,7 +21082,7 @@ module Aws::MediaLive
     #                         program_num: 1,
     #                         rate_mode: "CBR" # One of: ["CBR", "VBR"],
     #                         scte27_pids: "__string",
-    #                         scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH"],
+    #                         scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH", "SCTE_35_WITHOUT_IDR"],
     #                         scte35_pid: "__string",
     #                         segmentation_markers: "EBP" # One of: ["EBP", "EBP_LEGACY", "NONE", "PSI_SEGSTART", "RAI_ADAPT", "RAI_SEGSTART"],
     #                         segmentation_style: "MAINTAIN_CADENCE" # One of: ["MAINTAIN_CADENCE", "RESET_CADENCE"],
@@ -18295,7 +21159,7 @@ module Aws::MediaLive
     #                         program_num: 1,
     #                         rate_mode: "CBR" # One of: ["CBR", "VBR"],
     #                         scte27_pids: "__string",
-    #                         scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH"],
+    #                         scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH", "SCTE_35_WITHOUT_IDR"],
     #                         scte35_pid: "__string",
     #                         segmentation_markers: "EBP" # One of: ["EBP", "EBP_LEGACY", "NONE", "PSI_SEGSTART", "RAI_ADAPT", "RAI_SEGSTART"],
     #                         segmentation_style: "MAINTAIN_CADENCE" # One of: ["MAINTAIN_CADENCE", "RESET_CADENCE"],
@@ -18312,6 +21176,78 @@ module Aws::MediaLive
     #                     },
     #                     encryption_type: "AES128" # One of: ["AES128", "AES192", "AES256"],
     #                     latency: 1
+    #                   },
+    #                   media_connect_router_output_settings: {
+    #                     connected_router_inputs: {
+    #                       pipeline0: "__string",
+    #                       pipeline1: "__string"
+    #                     },
+    #                     container_settings: { # required
+    #                       m2ts_settings: {
+    #                         absent_input_audio_behavior: "DROP" # One of: ["DROP", "ENCODE_SILENCE"],
+    #                         arib: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                         arib_captions_pid: "__string",
+    #                         arib_captions_pid_control: "AUTO" # One of: ["AUTO", "USE_CONFIGURED"],
+    #                         audio_buffer_model: "ATSC" # One of: ["ATSC", "DVB"],
+    #                         audio_frames_per_pes: 1,
+    #                         audio_pids: "__string",
+    #                         audio_stream_type: "ATSC" # One of: ["ATSC", "DVB"],
+    #                         bitrate: 1,
+    #                         buffer_model: "MULTIPLEX" # One of: ["MULTIPLEX", "NONE"],
+    #                         cc_descriptor: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                         dvb_nit_settings: {
+    #                           network_id: 1, # required
+    #                           network_name: "__stringMin1Max256", # required
+    #                           rep_interval: 1
+    #                         },
+    #                         dvb_sdt_settings: {
+    #                           output_sdt: "SDT_FOLLOW" # One of: ["SDT_FOLLOW", "SDT_FOLLOW_IF_PRESENT", "SDT_MANUAL", "SDT_NONE"],
+    #                           rep_interval: 1,
+    #                           service_name: "__stringMin1Max256",
+    #                           service_provider_name: "__stringMin1Max256"
+    #                         },
+    #                         dvb_sub_pids: "__string",
+    #                         dvb_tdt_settings: {
+    #                           rep_interval: 1
+    #                         },
+    #                         dvb_teletext_pid: "__string",
+    #                         ebif: "NONE" # One of: ["NONE", "PASSTHROUGH"],
+    #                         ebp_audio_interval: "VIDEO_AND_FIXED_INTERVALS" # One of: ["VIDEO_AND_FIXED_INTERVALS", "VIDEO_INTERVAL"],
+    #                         ebp_lookahead_ms: 1,
+    #                         ebp_placement: "VIDEO_AND_AUDIO_PIDS" # One of: ["VIDEO_AND_AUDIO_PIDS", "VIDEO_PID"],
+    #                         ecm_pid: "__string",
+    #                         es_rate_in_pes: "EXCLUDE" # One of: ["EXCLUDE", "INCLUDE"],
+    #                         etv_platform_pid: "__string",
+    #                         etv_signal_pid: "__string",
+    #                         fragment_time: 1.0,
+    #                         klv: "NONE" # One of: ["NONE", "PASSTHROUGH"],
+    #                         klv_data_pids: "__string",
+    #                         nielsen_id3_behavior: "NO_PASSTHROUGH" # One of: ["NO_PASSTHROUGH", "PASSTHROUGH"],
+    #                         null_packet_bitrate: 1.0,
+    #                         pat_interval: 1,
+    #                         pcr_control: "CONFIGURED_PCR_PERIOD" # One of: ["CONFIGURED_PCR_PERIOD", "PCR_EVERY_PES_PACKET"],
+    #                         pcr_period: 1,
+    #                         pcr_pid: "__string",
+    #                         pmt_interval: 1,
+    #                         pmt_pid: "__string",
+    #                         program_num: 1,
+    #                         rate_mode: "CBR" # One of: ["CBR", "VBR"],
+    #                         scte27_pids: "__string",
+    #                         scte35_control: "NONE" # One of: ["NONE", "PASSTHROUGH", "SCTE_35_WITHOUT_IDR"],
+    #                         scte35_pid: "__string",
+    #                         segmentation_markers: "EBP" # One of: ["EBP", "EBP_LEGACY", "NONE", "PSI_SEGSTART", "RAI_ADAPT", "RAI_SEGSTART"],
+    #                         segmentation_style: "MAINTAIN_CADENCE" # One of: ["MAINTAIN_CADENCE", "RESET_CADENCE"],
+    #                         segmentation_time: 1.0,
+    #                         timed_metadata_behavior: "NO_PASSTHROUGH" # One of: ["NO_PASSTHROUGH", "PASSTHROUGH"],
+    #                         timed_metadata_pid: "__string",
+    #                         transport_stream_id: 1,
+    #                         video_pid: "__string",
+    #                         scte35_preroll_pullup_milliseconds: 1.0
+    #                       }
+    #                     },
+    #                     destination: { # required
+    #                       destination_ref_id: "__string"
+    #                     }
     #                   }
     #                 },
     #                 video_description_name: "__string"
@@ -18420,6 +21356,8 @@ module Aws::MediaLive
     #                   rec601_settings: {
     #                   },
     #                   rec709_settings: {
+    #                   },
+    #                   hlg2020_settings: {
     #                   }
     #                 },
     #                 filter_settings: {
@@ -18512,6 +21450,8 @@ module Aws::MediaLive
     #                   rec601_settings: {
     #                   },
     #                   rec709_settings: {
+    #                   },
+    #                   hlg2020_settings: {
     #                   }
     #                 },
     #                 fixed_afd: "AFD_0000" # One of: ["AFD_0000", "AFD_0010", "AFD_0011", "AFD_0100", "AFD_1000", "AFD_1001", "AFD_1010", "AFD_1011", "AFD_1101", "AFD_1110", "AFD_1111"],
@@ -18534,15 +21474,32 @@ module Aws::MediaLive
     #                 },
     #                 bitrate: 1,
     #                 rate_control_mode: "CBR" # One of: ["CBR", "QVBR"],
-    #                 min_bitrate: 1
+    #                 min_bitrate: 1,
+    #                 spatial_aq: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                 temporal_aq: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                 timecode_insertion: "DISABLED" # One of: ["DISABLED", "METADATA_OBU"],
+    #                 bit_depth: "DEPTH_10" # One of: ["DEPTH_10", "DEPTH_8"]
     #               }
     #             },
     #             height: 1,
     #             name: "__string", # required
     #             respond_to_afd: "NONE" # One of: ["NONE", "PASSTHROUGH", "RESPOND"],
-    #             scaling_behavior: "DEFAULT" # One of: ["DEFAULT", "STRETCH_TO_OUTPUT"],
+    #             scaling_behavior: "DEFAULT" # One of: ["DEFAULT", "STRETCH_TO_OUTPUT", "SMART_CROP"],
     #             sharpness: 1,
-    #             width: 1
+    #             width: 1,
+    #             crop_rectangle: {
+    #               height: 1, # required
+    #               width: 1, # required
+    #               x: 1, # required
+    #               y: 1, # required
+    #             },
+    #             output_position_rectangle: {
+    #               height: 1, # required
+    #               width: 1, # required
+    #               x: 1, # required
+    #               y: 1, # required
+    #             },
+    #             border: 1
     #           }
     #         ],
     #         thumbnail_configuration: {
@@ -18600,11 +21557,71 @@ module Aws::MediaLive
     #                   },
     #                   audio_pid_selection: {
     #                     pid: 1, # required
+    #                     pids: [
+    #                       {
+    #                         dolby_e_decode: {
+    #                           program_selection: "ALL_CHANNELS" # One of: ["ALL_CHANNELS", "PROGRAM_1", "PROGRAM_2", "PROGRAM_3", "PROGRAM_4", "PROGRAM_5", "PROGRAM_6", "PROGRAM_7", "PROGRAM_8"], # required
+    #                         },
+    #                         pid: 1, # required
+    #                         premix_settings: {
+    #                           audio_normalization_settings: {
+    #                             algorithm: "ITU_1770_1" # One of: ["ITU_1770_1", "ITU_1770_2", "ITU_1770_3", "ITU_1770_4"],
+    #                             algorithm_control: "CORRECT_AUDIO" # One of: ["CORRECT_AUDIO"],
+    #                             target_lkfs: 1.0,
+    #                             peak_calculation: "NONE" # One of: ["NONE", "TRUE_PEAK"],
+    #                             peak_limiter_threshold: 1.0
+    #                           },
+    #                           channels: 1,
+    #                           gain_db: 1.0,
+    #                           remix_settings: {
+    #                             channel_mappings: [ # required
+    #                               {
+    #                                 input_channel_levels: [ # required
+    #                                   {
+    #                                     gain: 1, # required
+    #                                     input_channel: 1, # required
+    #                                   }
+    #                                 ],
+    #                                 output_channel: 1, # required
+    #                               }
+    #                             ],
+    #                             channels_in: 1,
+    #                             channels_out: 1
+    #                           }
+    #                         }
+    #                       }
+    #                     ]
     #                   },
     #                   audio_track_selection: {
     #                     tracks: [ # required
     #                       {
     #                         track: 1, # required
+    #                         premix_settings: {
+    #                           audio_normalization_settings: {
+    #                             algorithm: "ITU_1770_1" # One of: ["ITU_1770_1", "ITU_1770_2", "ITU_1770_3", "ITU_1770_4"],
+    #                             algorithm_control: "CORRECT_AUDIO" # One of: ["CORRECT_AUDIO"],
+    #                             target_lkfs: 1.0,
+    #                             peak_calculation: "NONE" # One of: ["NONE", "TRUE_PEAK"],
+    #                             peak_limiter_threshold: 1.0
+    #                           },
+    #                           channels: 1,
+    #                           gain_db: 1.0,
+    #                           remix_settings: {
+    #                             channel_mappings: [ # required
+    #                               {
+    #                                 input_channel_levels: [ # required
+    #                                   {
+    #                                     gain: 1, # required
+    #                                     input_channel: 1, # required
+    #                                   }
+    #                                 ],
+    #                                 output_channel: 1, # required
+    #                               }
+    #                             ],
+    #                             channels_in: 1,
+    #                             channels_out: 1
+    #                           }
+    #                         }
     #                       }
     #                     ],
     #                     dolby_e_decode: {
@@ -18650,6 +21667,10 @@ module Aws::MediaLive
     #                       width: 1.0, # required
     #                     },
     #                     page_number: "__string"
+    #                   },
+    #                   smart_subtitle_source_settings: {
+    #                     caption_synchronization_mode: "NO_VIDEO_DELAY" # One of: ["NO_VIDEO_DELAY", "VIDEO_ALIGNED_CAPTIONS"],
+    #                     inference_feed_output: "__string"
     #                   }
     #                 }
     #               }
@@ -18719,6 +21740,11 @@ module Aws::MediaLive
     #           channel_engine_version: {
     #             expiration_date: Time.now,
     #             version: "__string"
+    #           },
+    #           media_connect_router_output_connection_map: {
+    #             "__string" => {
+    #               router_input_arn: "__string"
+    #             }
     #           }
     #         }
     #       ],
@@ -18741,6 +21767,27 @@ module Aws::MediaLive
     #       channel_engine_version: {
     #         expiration_date: Time.now,
     #         version: "__string"
+    #       },
+    #       linked_channel_settings: {
+    #         follower_channel_settings: {
+    #           linked_channel_type: "FOLLOWING_CHANNEL" # One of: ["FOLLOWING_CHANNEL", "PRIMARY_CHANNEL"],
+    #           primary_channel_arn: "__string"
+    #         },
+    #         primary_channel_settings: {
+    #           following_channel_arns: ["__string"],
+    #           linked_channel_type: "FOLLOWING_CHANNEL" # One of: ["FOLLOWING_CHANNEL", "PRIMARY_CHANNEL"]
+    #         }
+    #       },
+    #       channel_security_groups: ["__string"],
+    #       inference_settings: {
+    #         feed_arn: "__string",
+    #         audio_feed_inputs: [
+    #           {
+    #             audio_selector_name: "__string",
+    #             feed_input: "__string"
+    #           }
+    #         ],
+    #         enrichment_methods: ["SCTE35_ELEMENTAL_INFERENCE_QUERY_PARAMS" # One of: ["SCTE35_ELEMENTAL_INFERENCE_QUERY_PARAMS"]]
     #       }
     #     }
     #   }
@@ -18826,7 +21873,7 @@ module Aws::MediaLive
     #     name: "__stringMin1Max255PatternS",
     #     period: 1,
     #     statistic: "SampleCount" # One of: ["SampleCount", "Average", "Sum", "Minimum", "Maximum"],
-    #     target_resource_type: "CLOUDFRONT_DISTRIBUTION" # One of: ["CLOUDFRONT_DISTRIBUTION", "MEDIALIVE_MULTIPLEX", "MEDIALIVE_CHANNEL", "MEDIALIVE_INPUT_DEVICE", "MEDIAPACKAGE_CHANNEL", "MEDIAPACKAGE_ORIGIN_ENDPOINT", "MEDIACONNECT_FLOW", "S3_BUCKET", "MEDIATAILOR_PLAYBACK_CONFIGURATION"],
+    #     target_resource_type: "CLOUDFRONT_DISTRIBUTION" # One of: ["CLOUDFRONT_DISTRIBUTION", "MEDIALIVE_MULTIPLEX", "MEDIALIVE_CHANNEL", "MEDIALIVE_INPUT_DEVICE", "MEDIAPACKAGE_CHANNEL", "MEDIAPACKAGE_ORIGIN_ENDPOINT", "MEDIACONNECT_FLOW", "S3_BUCKET", "MEDIATAILOR_PLAYBACK_CONFIGURATION", "ELEMENTAL_INFERENCE_FEED"],
     #     threshold: 1.0,
     #     treat_missing_data: "notBreaching" # One of: ["notBreaching", "breaching", "ignore", "missing"]
     #   }
@@ -18851,7 +21898,7 @@ module Aws::MediaLive
     #     tags: {
     #       "__string" => "__string"
     #     },
-    #     target_resource_type: "CLOUDFRONT_DISTRIBUTION" # One of: ["CLOUDFRONT_DISTRIBUTION", "MEDIALIVE_MULTIPLEX", "MEDIALIVE_CHANNEL", "MEDIALIVE_INPUT_DEVICE", "MEDIAPACKAGE_CHANNEL", "MEDIAPACKAGE_ORIGIN_ENDPOINT", "MEDIACONNECT_FLOW", "S3_BUCKET", "MEDIATAILOR_PLAYBACK_CONFIGURATION"],
+    #     target_resource_type: "CLOUDFRONT_DISTRIBUTION" # One of: ["CLOUDFRONT_DISTRIBUTION", "MEDIALIVE_MULTIPLEX", "MEDIALIVE_CHANNEL", "MEDIALIVE_INPUT_DEVICE", "MEDIAPACKAGE_CHANNEL", "MEDIAPACKAGE_ORIGIN_ENDPOINT", "MEDIACONNECT_FLOW", "S3_BUCKET", "MEDIATAILOR_PLAYBACK_CONFIGURATION", "ELEMENTAL_INFERENCE_FEED"],
     #     threshold: 1.0,
     #     treat_missing_data: "notBreaching" # One of: ["notBreaching", "breaching", "ignore", "missing"]
     #   }
@@ -19059,6 +22106,10 @@ module Aws::MediaLive
     #   Include this parameter if the input is a SMPTE 2110 input, to identify the stream sources for this input.
     # @option params [Array<String>] :sdi_sources
     #   SDI Sources for this Input.
+    # @option params [Types::SpecialRouterSettings] :special_router_settings
+    #   When using MediaConnect Router as the source of a MediaLive input there's a special handoff that occurs when a router output
+    #   is created. This group of settings is set on your behalf by the MediaConnect Router service using this set of settings. This
+    #   setting object can only by used by that service.
     # @example Request syntax with placeholder values
     #   params = {
     #     destinations: [
@@ -19107,7 +22158,15 @@ module Aws::MediaLive
     #           srt_listener_port: "__string",
     #           stream_id: "__string"
     #         }
-    #       ]
+    #       ],
+    #       srt_listener_settings: {
+    #         decryption: { # required
+    #           algorithm: "AES128" # One of: ["AES128", "AES192", "AES256"], # required
+    #           passphrase_secret_arn: "__string", # required
+    #         },
+    #         minimum_latency: 1, # required
+    #         stream_id: "__string"
+    #       }
     #     },
     #     multicast_settings: {
     #       sources: [
@@ -19141,7 +22200,10 @@ module Aws::MediaLive
     #         }
     #       ]
     #     },
-    #     sdi_sources: ["__string"]
+    #     sdi_sources: ["__string"],
+    #     special_router_settings: {
+    #       router_arn: "__string"
+    #     }
     #   }
     #   options = {}
     #   response = client.update_input(params, options)
@@ -19197,7 +22259,7 @@ module Aws::MediaLive
     #       tags: {
     #         "__string" => "__string"
     #       },
-    #       type: "UDP_PUSH" # One of: ["UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT", "INPUT_DEVICE", "AWS_CDI", "TS_FILE", "SRT_CALLER", "MULTICAST", "SMPTE_2110_RECEIVER_GROUP", "SDI"],
+    #       type: "UDP_PUSH" # One of: ["UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT", "INPUT_DEVICE", "AWS_CDI", "TS_FILE", "SRT_CALLER", "MULTICAST", "SMPTE_2110_RECEIVER_GROUP", "SDI", "MEDIACONNECT_ROUTER", "SRT_LISTENER"],
     #       srt_settings: {
     #         srt_caller_sources: [
     #           {
@@ -19210,7 +22272,15 @@ module Aws::MediaLive
     #             srt_listener_port: "__string",
     #             stream_id: "__string"
     #           }
-    #         ]
+    #         ],
+    #         srt_listener_settings: {
+    #           decryption: {
+    #             algorithm: "AES128" # One of: ["AES128", "AES192", "AES256"], # required
+    #             passphrase_secret_arn: "__string", # required
+    #           },
+    #           minimum_latency: 1,
+    #           stream_id: "__string"
+    #         }
     #       },
     #       input_network_location: "AWS" # One of: ["AWS", "ON_PREMISES"],
     #       multicast_settings: {
@@ -19245,7 +22315,17 @@ module Aws::MediaLive
     #           }
     #         ]
     #       },
-    #       sdi_sources: ["__string"]
+    #       sdi_sources: ["__string"],
+    #       router_settings: {
+    #         destinations: [
+    #           {
+    #             availability_zone_name: "__string",
+    #             router_output_arn: "__string"
+    #           }
+    #         ],
+    #         encryption_type: "AUTOMATIC" # One of: ["AUTOMATIC", "SECRETS_MANAGER"],
+    #         secret_arn: "__string"
+    #       }
     #     }
     #   }
     # @return [Types::UpdateInputResponse]
@@ -19417,7 +22497,8 @@ module Aws::MediaLive
     #         {
     #           cidr: "__string"
     #         }
-    #       ]
+    #       ],
+    #       channels: ["__string"]
     #     }
     #   }
     # @return [Types::UpdateInputSecurityGroupResponse]
@@ -19687,7 +22768,8 @@ module Aws::MediaLive
     #       {
     #         logical_interface_name: "__string",
     #         network_interface_mode: "NAT" # One of: ["NAT", "BRIDGE"],
-    #         physical_interface_name: "__string"
+    #         physical_interface_name: "__string",
+    #         physical_interface_ip_addresses: ["__string"]
     #       }
     #     ],
     #     role: "BACKUP" # One of: ["BACKUP", "ACTIVE"],
@@ -19736,7 +22818,8 @@ module Aws::MediaLive
     #       {
     #         logical_interface_name: "__string",
     #         network_interface_mode: "NAT" # One of: ["NAT", "BRIDGE"],
-    #         physical_interface_name: "__string"
+    #         physical_interface_name: "__string",
+    #         physical_interface_ip_addresses: ["__string"]
     #       }
     #     ],
     #     role: "BACKUP" # One of: ["BACKUP", "ACTIVE"],

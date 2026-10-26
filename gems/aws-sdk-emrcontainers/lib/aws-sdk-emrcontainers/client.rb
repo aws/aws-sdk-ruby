@@ -144,18 +144,18 @@ module Aws::EMRcontainers
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -344,6 +344,8 @@ module Aws::EMRcontainers
     #   <p>The client idempotency token for this create call.</p>
     # @option params [Hash<String, String>] :tags
     #   <p>The tags of the managed endpoint. </p>
+    # @option params [Integer] :session_idle_timeout_in_minutes
+    #   <p>The number of idle minutes before the managed endpoint session times out.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     name: "ResourceNameString", # required
@@ -376,6 +378,7 @@ module Aws::EMRcontainers
     #         },
     #         s3_monitoring_configuration: {
     #           log_uri: "UriString", # required
+    #           encryption_key_arn: "KmsKeyArn"
     #         },
     #         container_log_rotation_configuration: {
     #           rotation_size: "RotationSize", # required
@@ -386,7 +389,8 @@ module Aws::EMRcontainers
     #     client_token: "ClientToken", # required
     #     tags: {
     #       "String128" => "StringEmpty256"
-    #     }
+    #     },
+    #     session_idle_timeout_in_minutes: 1
     #   }
     #   options = {}
     #   response = client.create_managed_endpoint(params, options)
@@ -430,7 +434,7 @@ module Aws::EMRcontainers
     #         # One of:
     #         eks_info: {
     #           namespace: "KubernetesNamespace",
-    #           node_label: "ResourceNameString"
+    #           node_label: "NodeLabelString"
     #         }
     #       }
     #     },
@@ -453,6 +457,17 @@ module Aws::EMRcontainers
     #             }
     #           }
     #         }
+    #       },
+    #       authentication_configuration: {
+    #         identity_center_configuration: {
+    #           enable_identity_center: false,
+    #           identity_center_application_assignment_required: false,
+    #           identity_center_instance_arn: "IdentityCenterInstanceARN",
+    #           emr_identity_center_application_arn: "EmrIdentityCenterApplicationARN"
+    #         },
+    #         iam_configuration: {
+    #           system_role: "IAMRoleArn"
+    #         }
     #       }
     #     },
     #     tags: {
@@ -474,7 +489,7 @@ module Aws::EMRcontainers
       request.send_request(options)
     end
 
-    # <p>Creates a virtual cluster. Virtual cluster is a managed entity on Amazon EMR on EKS. You can create, describe, list and delete virtual clusters. They do not consume any
+    # <p>Creates a virtual cluster. Virtual cluster is a managed entity on Amazon EMR on EKS. You can create, update, describe, list and delete virtual clusters. They do not consume any
     #          additional resource in your system. A single virtual cluster maps to a single Kubernetes
     #          namespace. Given this relationship, you can model virtual clusters the same way you model
     #          Kubernetes namespaces to meet your requirements.</p>
@@ -489,6 +504,11 @@ module Aws::EMRcontainers
     #   <p>The tags assigned to the virtual cluster.</p>
     # @option params [String] :security_configuration_id
     #   <p>The ID of the security configuration.</p>
+    # @option params [Boolean] :session_enabled
+    #   <p>Indicates whether the virtual cluster has session support enabled.</p>
+    # @option params [Types::SchedulerConfiguration] :scheduler_configuration
+    #   <p>The scheduler configuration (concurrency and queue limits) to apply to the virtual
+    #            cluster at creation time. When omitted, no limits are applied.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     name: "ResourceNameString", # required
@@ -499,7 +519,7 @@ module Aws::EMRcontainers
     #         # One of:
     #         eks_info: {
     #           namespace: "KubernetesNamespace",
-    #           node_label: "ResourceNameString"
+    #           node_label: "NodeLabelString"
     #         }
     #       }
     #     },
@@ -507,7 +527,12 @@ module Aws::EMRcontainers
     #     tags: {
     #       "String128" => "StringEmpty256"
     #     },
-    #     security_configuration_id: "ResourceIdString"
+    #     security_configuration_id: "ResourceIdString",
+    #     session_enabled: false,
+    #     scheduler_configuration: {
+    #       max_in_queue_job_runs: 1,
+    #       max_concurrent_job_runs: 1
+    #     }
     #   }
     #   options = {}
     #   response = client.create_virtual_cluster(params, options)
@@ -574,7 +599,28 @@ module Aws::EMRcontainers
       request.send_request(options)
     end
 
-    # <p>Deletes a virtual cluster. Virtual cluster is a managed entity on Amazon EMR on EKS. You can create, describe, list and delete virtual clusters. They do not consume any
+    # <p>Deletes a security configuration.</p>
+    # @param [Hash, Types::DeleteSecurityConfigurationRequest] params
+    # @option params [String] :id
+    #   <p>The ID of the security configuration to delete.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     id: "ResourceIdString", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_security_configuration(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     id: "ResourceIdString"
+    #   }
+    # @return [Types::DeleteSecurityConfigurationResponse]
+    def delete_security_configuration(params = {}, options = {})
+      request = build_request(:delete_security_configuration, params)
+      request.send_request(options)
+    end
+
+    # <p>Deletes a virtual cluster. Virtual cluster is a managed entity on Amazon EMR on EKS. You can create, update, describe, list and delete virtual clusters. They do not consume any
     #          additional resource in your system. A single virtual cluster maps to a single Kubernetes
     #          namespace. Given this relationship, you can model virtual clusters the same way you model
     #          Kubernetes namespaces to meet your requirements.</p>
@@ -648,6 +694,7 @@ module Aws::EMRcontainers
     #           },
     #           s3_monitoring_configuration: {
     #             log_uri: "UriString", # required
+    #             encryption_key_arn: "KmsKeyArn"
     #           },
     #           container_log_rotation_configuration: {
     #             rotation_size: "RotationSize", # required
@@ -825,6 +872,7 @@ module Aws::EMRcontainers
     #           },
     #           s3_monitoring_configuration: {
     #             log_uri: "UriString", # required
+    #             encryption_key_arn: "KmsKeyArn"
     #           },
     #           container_log_rotation_configuration: {
     #             rotation_size: "RotationSize", # required
@@ -833,6 +881,7 @@ module Aws::EMRcontainers
     #         }
     #       },
     #       server_url: "UriString",
+    #       auth_proxy_url: "UriString",
     #       created_at: Time.now,
     #       security_group: "String256",
     #       subnet_ids: ["String256"],
@@ -891,6 +940,17 @@ module Aws::EMRcontainers
     #               }
     #             }
     #           }
+    #         },
+    #         authentication_configuration: {
+    #           identity_center_configuration: {
+    #             enable_identity_center: false,
+    #             identity_center_application_assignment_required: false,
+    #             identity_center_instance_arn: "IdentityCenterInstanceARN",
+    #             emr_identity_center_application_arn: "EmrIdentityCenterApplicationARN"
+    #           },
+    #           iam_configuration: {
+    #             system_role: "IAMRoleArn"
+    #           }
     #         }
     #       },
     #       tags: {
@@ -905,7 +965,7 @@ module Aws::EMRcontainers
     end
 
     # <p>Displays detailed information about a specified virtual cluster. Virtual cluster is a
-    #          managed entity on Amazon EMR on EKS. You can create, describe, list and delete virtual
+    #          managed entity on Amazon EMR on EKS. You can create, update, describe, list and delete virtual
     #          clusters. They do not consume any additional resource in your system. A single virtual
     #          cluster maps to a single Kubernetes namespace. Given this relationship, you can model
     #          virtual clusters the same way you model Kubernetes namespaces to meet your
@@ -934,7 +994,7 @@ module Aws::EMRcontainers
     #           # One of:
     #           eks_info: {
     #             namespace: "KubernetesNamespace",
-    #             node_label: "ResourceNameString"
+    #             node_label: "NodeLabelString"
     #           }
     #         }
     #       },
@@ -942,7 +1002,16 @@ module Aws::EMRcontainers
     #       tags: {
     #         "String128" => "StringEmpty256"
     #       },
-    #       security_configuration_id: "ResourceIdString"
+    #       security_configuration_id: "ResourceIdString",
+    #       session_enabled: false,
+    #       scheduler_configuration: {
+    #         max_in_queue_job_runs: 1,
+    #         max_concurrent_job_runs: 1
+    #       },
+    #       scheduler_status: {
+    #         current_in_queue_job_runs: 1,
+    #         current_concurrent_job_runs: 1
+    #       }
     #     }
     #   }
     # @return [Types::DescribeVirtualClusterResponse]
@@ -986,6 +1055,10 @@ module Aws::EMRcontainers
     #   {
     #     id: "ResourceIdString",
     #     credentials: {
+    #       # One of:
+    #       token: "Token"
+    #     },
+    #     endpoint_credentials: {
     #       # One of:
     #       token: "Token"
     #     },
@@ -1063,6 +1136,7 @@ module Aws::EMRcontainers
     #             },
     #             s3_monitoring_configuration: {
     #               log_uri: "UriString", # required
+    #               encryption_key_arn: "KmsKeyArn"
     #             },
     #             container_log_rotation_configuration: {
     #               rotation_size: "RotationSize", # required
@@ -1270,6 +1344,7 @@ module Aws::EMRcontainers
     #             },
     #             s3_monitoring_configuration: {
     #               log_uri: "UriString", # required
+    #               encryption_key_arn: "KmsKeyArn"
     #             },
     #             container_log_rotation_configuration: {
     #               rotation_size: "RotationSize", # required
@@ -1278,6 +1353,7 @@ module Aws::EMRcontainers
     #           }
     #         },
     #         server_url: "UriString",
+    #         auth_proxy_url: "UriString",
     #         created_at: Time.now,
     #         security_group: "String256",
     #         subnet_ids: ["String256"],
@@ -1348,6 +1424,17 @@ module Aws::EMRcontainers
     #                 }
     #               }
     #             }
+    #           },
+    #           authentication_configuration: {
+    #             identity_center_configuration: {
+    #               enable_identity_center: false,
+    #               identity_center_application_assignment_required: false,
+    #               identity_center_instance_arn: "IdentityCenterInstanceARN",
+    #               emr_identity_center_application_arn: "EmrIdentityCenterApplicationARN"
+    #             },
+    #             iam_configuration: {
+    #               system_role: "IAMRoleArn"
+    #             }
     #           }
     #         },
     #         tags: {
@@ -1387,7 +1474,7 @@ module Aws::EMRcontainers
     end
 
     # <p>Lists information about the specified virtual cluster. Virtual cluster is a managed
-    #          entity on Amazon EMR on EKS. You can create, describe, list and delete virtual
+    #          entity on Amazon EMR on EKS. You can create, update, describe, list and delete virtual
     #          clusters. They do not consume any additional resource in your system. A single virtual
     #          cluster maps to a single Kubernetes namespace. Given this relationship, you can model
     #          virtual clusters the same way you model Kubernetes namespaces to meet your
@@ -1409,7 +1496,7 @@ module Aws::EMRcontainers
     # @option params [String] :next_token
     #   <p>The token for the next set of virtual clusters to return. </p>
     # @option params [Boolean] :eks_access_entry_integrated
-    #   <p>Optional Boolean that specifies whether the operation should return the 
+    #   <p>Optional Boolean that specifies whether the operation should return the
     #            virtual clusters that have the access entry integration enabled or disabled. If not specified,
     #         the operation returns all applicable virtual clusters.</p>
     # @example Request syntax with placeholder values
@@ -1441,7 +1528,7 @@ module Aws::EMRcontainers
     #             # One of:
     #             eks_info: {
     #               namespace: "KubernetesNamespace",
-    #               node_label: "ResourceNameString"
+    #               node_label: "NodeLabelString"
     #             }
     #           }
     #         },
@@ -1449,7 +1536,16 @@ module Aws::EMRcontainers
     #         tags: {
     #           "String128" => "StringEmpty256"
     #         },
-    #         security_configuration_id: "ResourceIdString"
+    #         security_configuration_id: "ResourceIdString",
+    #         session_enabled: false,
+    #         scheduler_configuration: {
+    #           max_in_queue_job_runs: 1,
+    #           max_concurrent_job_runs: 1
+    #         },
+    #         scheduler_status: {
+    #           current_in_queue_job_runs: 1,
+    #           current_concurrent_job_runs: 1
+    #         }
     #       }
     #     ],
     #     next_token: "NextToken"
@@ -1527,6 +1623,7 @@ module Aws::EMRcontainers
     #         },
     #         s3_monitoring_configuration: {
     #           log_uri: "UriString", # required
+    #           encryption_key_arn: "KmsKeyArn"
     #         },
     #         container_log_rotation_configuration: {
     #           rotation_size: "RotationSize", # required
@@ -1612,6 +1709,72 @@ module Aws::EMRcontainers
     # @return [Types::UntagResourceResponse]
     def untag_resource(params = {}, options = {})
       request = build_request(:untag_resource, params)
+      request.send_request(options)
+    end
+
+    # <p>Updates a virtual cluster. Virtual cluster is a managed entity on Amazon EMR on EKS. You can create, update, describe, list and delete virtual clusters. They do not consume any
+    #          additional resource in your system. A single virtual cluster maps to a single Kubernetes
+    #          namespace. Given this relationship, you can model virtual clusters the same way you model
+    #          Kubernetes namespaces to meet your requirements.</p>
+    # @param [Hash, Types::UpdateVirtualClusterRequest] params
+    # @option params [String] :id
+    #   <p>The ID of the virtual cluster to update.</p>
+    # @option params [Types::SchedulerConfiguration] :scheduler_configuration
+    #   <p>The scheduler configuration to apply to the virtual cluster. The new configuration fully
+    #            replaces the existing one. If you omit a field, the corresponding limit is removed.</p>
+    # @option params [String] :client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure that the operation
+    #            completes no more than one time. If this token matches a previous request, the service
+    #            ignores the request, but does not return an error.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     id: "ResourceIdString", # required
+    #     scheduler_configuration: {
+    #       max_in_queue_job_runs: 1,
+    #       max_concurrent_job_runs: 1
+    #     },
+    #     client_token: "ClientToken", # required
+    #   }
+    #   options = {}
+    #   response = client.update_virtual_cluster(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     virtual_cluster: {
+    #       id: "ResourceIdString",
+    #       name: "ResourceNameString",
+    #       arn: "VirtualClusterArn",
+    #       state: "RUNNING" # One of: ["RUNNING", "TERMINATING", "TERMINATED", "ARRESTED"],
+    #       container_provider: {
+    #         type: "EKS" # One of: ["EKS"], # required
+    #         id: "ClusterId", # required
+    #         info: {
+    #           # One of:
+    #           eks_info: {
+    #             namespace: "KubernetesNamespace",
+    #             node_label: "NodeLabelString"
+    #           }
+    #         }
+    #       },
+    #       created_at: Time.now,
+    #       tags: {
+    #         "String128" => "StringEmpty256"
+    #       },
+    #       security_configuration_id: "ResourceIdString",
+    #       session_enabled: false,
+    #       scheduler_configuration: {
+    #         max_in_queue_job_runs: 1,
+    #         max_concurrent_job_runs: 1
+    #       },
+    #       scheduler_status: {
+    #         current_in_queue_job_runs: 1,
+    #         current_concurrent_job_runs: 1
+    #       }
+    #     }
+    #   }
+    # @return [Types::UpdateVirtualClusterResponse]
+    def update_virtual_cluster(params = {}, options = {})
+      request = build_request(:update_virtual_cluster, params)
       request.send_request(options)
     end
 

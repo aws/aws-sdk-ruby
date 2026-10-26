@@ -1,15 +1,30 @@
 module Aws::ECR
   module Errors
+    class BlockedByOrganizationPolicyException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
     class EmptyUploadException < Smithy::Client::ServiceError
       def message: () -> String?
     end
+    class ExclusionAlreadyExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ExclusionNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
     class ImageAlreadyExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ImageArchivedException < Smithy::Client::ServiceError
       def message: () -> String?
     end
     class ImageDigestDoesNotMatchException < Smithy::Client::ServiceError
       def message: () -> String?
     end
     class ImageNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ImageStorageClassUpdateNotSupportedException < Smithy::Client::ServiceError
       def message: () -> String?
     end
     class ImageTagAlreadyExistsException < Smithy::Client::ServiceError
@@ -92,6 +107,9 @@ module Aws::ECR
     class ServerException < Smithy::Client::ServiceError
       def message: () -> String?
     end
+    class SigningConfigurationNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
     class TemplateAlreadyExistsException < Smithy::Client::ServiceError
       def message: () -> String?
     end
@@ -111,6 +129,9 @@ module Aws::ECR
       def message: () -> String?
     end
     class UnableToGetUpstreamLayerException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UnableToListUpstreamImageReferrersException < Smithy::Client::ServiceError
       def message: () -> String?
     end
     class UnsupportedImageTypeException < Smithy::Client::ServiceError

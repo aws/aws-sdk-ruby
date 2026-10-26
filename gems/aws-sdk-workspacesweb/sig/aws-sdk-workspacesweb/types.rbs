@@ -220,6 +220,69 @@ module Aws::WorkSpacesWeb
       attr_accessor user_settings_arn: String?
     end
 
+    class BrandingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?logo: Types::ImageMetadata,
+        ?wallpaper: Types::ImageMetadata,
+        ?favicon: Types::ImageMetadata,
+        ?localized_strings: Hash[String, Types::LocalizedBrandingStrings],
+        ?color_theme: String,
+        ?terms_of_service: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor logo: Types::ImageMetadata?
+      attr_accessor wallpaper: Types::ImageMetadata?
+      attr_accessor favicon: Types::ImageMetadata?
+      attr_accessor localized_strings: Hash[String, Types::LocalizedBrandingStrings]?
+      attr_accessor color_theme: String?
+      attr_accessor terms_of_service: String?
+    end
+
+    class BrandingConfigurationCreateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?logo: Types::IconImageInput,
+        ?wallpaper: Types::WallpaperImageInput,
+        ?favicon: Types::IconImageInput,
+        ?localized_strings: Hash[String, Types::LocalizedBrandingStrings],
+        ?color_theme: String,
+        ?terms_of_service: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor logo: Types::IconImageInput?
+      attr_accessor wallpaper: Types::WallpaperImageInput?
+      attr_accessor favicon: Types::IconImageInput?
+      attr_accessor localized_strings: Hash[String, Types::LocalizedBrandingStrings]?
+      attr_accessor color_theme: String?
+      attr_accessor terms_of_service: String?
+    end
+
+    class BrandingConfigurationUpdateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?logo: Types::IconImageInput,
+        ?wallpaper: Types::WallpaperImageInput,
+        ?favicon: Types::IconImageInput,
+        ?localized_strings: Hash[String, Types::LocalizedBrandingStrings],
+        ?color_theme: String,
+        ?terms_of_service: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor logo: Types::IconImageInput?
+      attr_accessor wallpaper: Types::WallpaperImageInput?
+      attr_accessor favicon: Types::IconImageInput?
+      attr_accessor localized_strings: Hash[String, Types::LocalizedBrandingStrings]?
+      attr_accessor color_theme: String?
+      attr_accessor terms_of_service: String?
+    end
+
     class BrowserSettings
       include Smithy::Schema::Structure
 
@@ -229,6 +292,7 @@ module Aws::WorkSpacesWeb
         ?browser_policy: String,
         ?customer_managed_key: String,
         ?additional_encryption_context: Hash[String, String],
+        ?web_content_filtering_policy: Types::WebContentFilteringPolicy,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -237,6 +301,7 @@ module Aws::WorkSpacesWeb
       attr_accessor browser_policy: String?
       attr_accessor customer_managed_key: String?
       attr_accessor additional_encryption_context: Hash[String, String]?
+      attr_accessor web_content_filtering_policy: Types::WebContentFilteringPolicy?
     end
 
     class BrowserSettingsSummary
@@ -248,6 +313,36 @@ module Aws::WorkSpacesWeb
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor browser_settings_arn: String?
+    end
+
+    module Category
+      CULTS: String
+      GAMBLING: String
+      NUDITY: String
+      PORNOGRAPHY: String
+      SEX_EDUCATION: String
+      TASTELESS: String
+      VIOLENCE: String
+      DOWNLOAD_SITES: String
+      IMAGE_SHARING: String
+      PEER_TO_PEER: String
+      STREAMING_MEDIA_AND_DOWNLOADS: String
+      GENERATIVE_AI: String
+      CRIMINAL_ACTIVITY: String
+      HACKING: String
+      HATE_AND_INTOLERANCE: String
+      ILLEGAL_DRUG: String
+      ILLEGAL_SOFTWARE: String
+      SCHOOL_CHEATING: String
+      SELF_HARM: String
+      WEAPONS: String
+      CHAT: String
+      GAMES: String
+      INSTANT_MESSAGING: String
+      PROFESSIONAL_NETWORK: String
+      SOCIAL_NETWORKING: String
+      WEB_BASED_EMAIL: String
+      PARKED_DOMAINS: String
     end
 
     class Certificate
@@ -288,6 +383,11 @@ module Aws::WorkSpacesWeb
       attr_accessor issuer: String?
       attr_accessor not_valid_before: Time?
       attr_accessor not_valid_after: Time?
+    end
+
+    module ColorTheme
+      LIGHT: String
+      DARK: String
     end
 
     class ConflictException
@@ -342,6 +442,7 @@ module Aws::WorkSpacesWeb
         ?additional_encryption_context: Hash[String, String],
         ?browser_policy: String,
         ?client_token: String,
+        ?web_content_filtering_policy: Types::WebContentFilteringPolicy,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -350,6 +451,7 @@ module Aws::WorkSpacesWeb
       attr_accessor additional_encryption_context: Hash[String, String]?
       attr_accessor browser_policy: String?
       attr_accessor client_token: String?
+      attr_accessor web_content_filtering_policy: Types::WebContentFilteringPolicy?
     end
 
     class CreateBrowserSettingsResponse
@@ -505,6 +607,7 @@ module Aws::WorkSpacesWeb
         ?authentication_type: String,
         ?instance_type: String,
         ?max_concurrent_sessions: Integer,
+        ?portal_custom_domain: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -516,6 +619,7 @@ module Aws::WorkSpacesWeb
       attr_accessor authentication_type: String?
       attr_accessor instance_type: String?
       attr_accessor max_concurrent_sessions: Integer?
+      attr_accessor portal_custom_domain: String?
     end
 
     class CreatePortalResponse
@@ -635,6 +739,8 @@ module Aws::WorkSpacesWeb
         ?additional_encryption_context: Hash[String, String],
         ?deep_link_allowed: String,
         ?toolbar_configuration: Types::ToolbarConfiguration,
+        ?branding_configuration_input: Types::BrandingConfigurationCreateInput,
+        ?web_authn_allowed: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -652,6 +758,8 @@ module Aws::WorkSpacesWeb
       attr_accessor additional_encryption_context: Hash[String, String]?
       attr_accessor deep_link_allowed: String?
       attr_accessor toolbar_configuration: Types::ToolbarConfiguration?
+      attr_accessor branding_configuration_input: Types::BrandingConfigurationCreateInput?
+      attr_accessor web_authn_allowed: String?
     end
 
     class CreateUserSettingsResponse
@@ -1101,6 +1209,7 @@ module Aws::WorkSpacesWeb
       SESSION_START: String
       SESSION_DISCONNECT: String
       SESSION_END: String
+      URL_BLOCK_BY_CONTENT_FILTER: String
     end
 
     class EventFilter
@@ -1444,6 +1553,26 @@ module Aws::WorkSpacesWeb
       attr_accessor user_settings: Types::UserSettings?
     end
 
+    class IconImageInput
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?blob: String,
+        ?s3_uri: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor blob: String?
+      attr_accessor s3_uri: String?
+
+      class Blob < IconImageInput
+      end
+      class S3Uri < IconImageInput
+      end
+      class Unknown < IconImageInput
+      end
+    end
+
     class IdentityProvider
       include Smithy::Schema::Structure
 
@@ -1474,6 +1603,21 @@ module Aws::WorkSpacesWeb
       attr_accessor identity_provider_arn: String?
       attr_accessor identity_provider_name: String?
       attr_accessor identity_provider_type: String?
+    end
+
+    class ImageMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mime_type: String,
+        ?file_extension: String,
+        ?last_upload_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mime_type: String?
+      attr_accessor file_extension: String?
+      attr_accessor last_upload_timestamp: Time?
     end
 
     class InlineRedactionConfiguration
@@ -1932,6 +2076,45 @@ module Aws::WorkSpacesWeb
       attr_accessor next_token: String?
     end
 
+    module Locale
+      DE: String
+      EN: String
+      ES: String
+      FR: String
+      ID: String
+      IT: String
+      JP: String
+      KR: String
+      BR: String
+      CN: String
+      TW: String
+    end
+
+    class LocalizedBrandingStrings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?browser_tab_title: String,
+        ?welcome_text: String,
+        ?login_title: String,
+        ?login_description: String,
+        ?login_button_text: String,
+        ?contact_link: String,
+        ?contact_button_text: String,
+        ?loading_text: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor browser_tab_title: String?
+      attr_accessor welcome_text: String?
+      attr_accessor login_title: String?
+      attr_accessor login_description: String?
+      attr_accessor login_button_text: String?
+      attr_accessor contact_link: String?
+      attr_accessor contact_button_text: String?
+      attr_accessor loading_text: String?
+    end
+
     class LogConfiguration
       include Smithy::Schema::Structure
 
@@ -1946,6 +2129,12 @@ module Aws::WorkSpacesWeb
     module LogFileFormat
       JSON_LINES: String
       JSON: String
+    end
+
+    module MimeType
+      PNG: String
+      JPEG: String
+      ICO: String
     end
 
     class NetworkSettings
@@ -2005,6 +2194,7 @@ module Aws::WorkSpacesWeb
         ?additional_encryption_context: Hash[String, String],
         ?instance_type: String,
         ?max_concurrent_sessions: Integer,
+        ?portal_custom_domain: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2029,6 +2219,7 @@ module Aws::WorkSpacesWeb
       attr_accessor additional_encryption_context: Hash[String, String]?
       attr_accessor instance_type: String?
       attr_accessor max_concurrent_sessions: Integer?
+      attr_accessor portal_custom_domain: String?
     end
 
     class PortalSummary
@@ -2053,6 +2244,7 @@ module Aws::WorkSpacesWeb
         ?ip_access_settings_arn: String,
         ?instance_type: String,
         ?max_concurrent_sessions: Integer,
+        ?portal_custom_domain: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2074,6 +2266,7 @@ module Aws::WorkSpacesWeb
       attr_accessor ip_access_settings_arn: String?
       attr_accessor instance_type: String?
       attr_accessor max_concurrent_sessions: Integer?
+      attr_accessor portal_custom_domain: String?
     end
 
     class RedactionPlaceHolder
@@ -2375,12 +2568,14 @@ module Aws::WorkSpacesWeb
         ?browser_settings_arn: String,
         ?browser_policy: String,
         ?client_token: String,
+        ?web_content_filtering_policy: Types::WebContentFilteringPolicy,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor browser_settings_arn: String?
       attr_accessor browser_policy: String?
       attr_accessor client_token: String?
+      attr_accessor web_content_filtering_policy: Types::WebContentFilteringPolicy?
     end
 
     class UpdateBrowserSettingsResponse
@@ -2523,6 +2718,7 @@ module Aws::WorkSpacesWeb
         ?authentication_type: String,
         ?instance_type: String,
         ?max_concurrent_sessions: Integer,
+        ?portal_custom_domain: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2531,6 +2727,7 @@ module Aws::WorkSpacesWeb
       attr_accessor authentication_type: String?
       attr_accessor instance_type: String?
       attr_accessor max_concurrent_sessions: Integer?
+      attr_accessor portal_custom_domain: String?
     end
 
     class UpdatePortalResponse
@@ -2642,6 +2839,8 @@ module Aws::WorkSpacesWeb
         ?cookie_synchronization_configuration: Types::CookieSynchronizationConfiguration,
         ?deep_link_allowed: String,
         ?toolbar_configuration: Types::ToolbarConfiguration,
+        ?branding_configuration_input: Types::BrandingConfigurationUpdateInput,
+        ?web_authn_allowed: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2657,6 +2856,8 @@ module Aws::WorkSpacesWeb
       attr_accessor cookie_synchronization_configuration: Types::CookieSynchronizationConfiguration?
       attr_accessor deep_link_allowed: String?
       attr_accessor toolbar_configuration: Types::ToolbarConfiguration?
+      attr_accessor branding_configuration_input: Types::BrandingConfigurationUpdateInput?
+      attr_accessor web_authn_allowed: String?
     end
 
     class UpdateUserSettingsResponse
@@ -2716,6 +2917,8 @@ module Aws::WorkSpacesWeb
         ?additional_encryption_context: Hash[String, String],
         ?deep_link_allowed: String,
         ?toolbar_configuration: Types::ToolbarConfiguration,
+        ?branding_configuration: Types::BrandingConfiguration,
+        ?web_authn_allowed: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2733,6 +2936,8 @@ module Aws::WorkSpacesWeb
       attr_accessor additional_encryption_context: Hash[String, String]?
       attr_accessor deep_link_allowed: String?
       attr_accessor toolbar_configuration: Types::ToolbarConfiguration?
+      attr_accessor branding_configuration: Types::BrandingConfiguration?
+      attr_accessor web_authn_allowed: String?
     end
 
     class UserSettingsSummary
@@ -2750,6 +2955,8 @@ module Aws::WorkSpacesWeb
         ?cookie_synchronization_configuration: Types::CookieSynchronizationConfiguration,
         ?deep_link_allowed: String,
         ?toolbar_configuration: Types::ToolbarConfiguration,
+        ?branding_configuration: Types::BrandingConfiguration,
+        ?web_authn_allowed: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2764,6 +2971,8 @@ module Aws::WorkSpacesWeb
       attr_accessor cookie_synchronization_configuration: Types::CookieSynchronizationConfiguration?
       attr_accessor deep_link_allowed: String?
       attr_accessor toolbar_configuration: Types::ToolbarConfiguration?
+      attr_accessor branding_configuration: Types::BrandingConfiguration?
+      attr_accessor web_authn_allowed: String?
     end
 
     class ValidationException
@@ -2792,6 +3001,41 @@ module Aws::WorkSpacesWeb
 
       attr_accessor name: String?
       attr_accessor message: String?
+    end
+
+    class WallpaperImageInput
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?blob: String,
+        ?s3_uri: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor blob: String?
+      attr_accessor s3_uri: String?
+
+      class Blob < WallpaperImageInput
+      end
+      class S3Uri < WallpaperImageInput
+      end
+      class Unknown < WallpaperImageInput
+      end
+    end
+
+    class WebContentFilteringPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?blocked_categories: Array[String],
+        ?allowed_urls: Array[String],
+        ?blocked_urls: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor blocked_categories: Array[String]?
+      attr_accessor allowed_urls: Array[String]?
+      attr_accessor blocked_urls: Array[String]?
     end
   end
 end

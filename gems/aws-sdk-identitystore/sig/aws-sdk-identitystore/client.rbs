@@ -45,9 +45,11 @@ module Aws::Identitystore
     ) -> void | (?Hash[Symbol, untyped]) -> void
 
     interface _CreateGroupResponse
-      include Smithy::Client::_Response[Types::CreateGroupOutput]
-      def group_id: () -> String?
+      include Smithy::Client::_Response[Types::CreateGroupResponse]
       def identity_store_id: () -> String?
+      def group_id: () -> String?
+      def group_arn: () -> String?
+      def revision: () -> String?
     end
     def create_group: (
       ?identity_store_id: String,
@@ -56,9 +58,10 @@ module Aws::Identitystore
     ) -> _CreateGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateGroupResponse
 
     interface _CreateGroupMembershipResponse
-      include Smithy::Client::_Response[Types::CreateGroupMembershipOutput]
-      def membership_id: () -> String?
+      include Smithy::Client::_Response[Types::CreateGroupMembershipResponse]
       def identity_store_id: () -> String?
+      def membership_id: () -> String?
+      def membership_arn: () -> String?
     end
     def create_group_membership: (
       ?identity_store_id: String,
@@ -69,9 +72,11 @@ module Aws::Identitystore
     ) -> _CreateGroupMembershipResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateGroupMembershipResponse
 
     interface _CreateUserResponse
-      include Smithy::Client::_Response[Types::CreateUserOutput]
-      def user_id: () -> String?
+      include Smithy::Client::_Response[Types::CreateUserResponse]
       def identity_store_id: () -> String?
+      def user_id: () -> String?
+      def user_arn: () -> String?
+      def revision: () -> String?
     end
     def create_user: (
       ?identity_store_id: String,
@@ -117,19 +122,38 @@ module Aws::Identitystore
       ?title: String,
       ?preferred_language: String,
       ?locale: String,
-      ?timezone: String
+      ?timezone: String,
+      ?photos: Array[
+        {
+          value: String,
+          type: untyped,
+          display: untyped,
+          primary: bool
+        }
+      ],
+      ?website: String,
+      ?birthdate: String,
+      ?roles: Array[
+        {
+          value: String,
+          type: untyped,
+          primary: bool
+        }
+      ],
+      ?extensions: Hash[String, Smithy::Schema::document]
     ) -> _CreateUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateUserResponse
 
     interface _DeleteGroupResponse
-      include Smithy::Client::_Response[Types::DeleteGroupOutput]
+      include Smithy::Client::_Response[Types::DeleteGroupResponse]
     end
     def delete_group: (
       ?identity_store_id: String,
-      ?group_id: String
+      ?group_id: String,
+      ?revision: String
     ) -> _DeleteGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteGroupResponse
 
     interface _DeleteGroupMembershipResponse
-      include Smithy::Client::_Response[Types::DeleteGroupMembershipOutput]
+      include Smithy::Client::_Response[Types::DeleteGroupMembershipResponse]
     end
     def delete_group_membership: (
       ?identity_store_id: String,
@@ -137,20 +161,27 @@ module Aws::Identitystore
     ) -> _DeleteGroupMembershipResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteGroupMembershipResponse
 
     interface _DeleteUserResponse
-      include Smithy::Client::_Response[Types::DeleteUserOutput]
+      include Smithy::Client::_Response[Types::DeleteUserResponse]
     end
     def delete_user: (
       ?identity_store_id: String,
-      ?user_id: String
+      ?user_id: String,
+      ?revision: String
     ) -> _DeleteUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteUserResponse
 
     interface _DescribeGroupResponse
-      include Smithy::Client::_Response[Types::DescribeGroupOutput]
+      include Smithy::Client::_Response[Types::DescribeGroupResponse]
+      def identity_store_id: () -> String?
       def group_id: () -> String?
+      def group_arn: () -> String?
+      def revision: () -> String?
       def display_name: () -> String?
       def external_ids: () -> Array[Types::ExternalId]?
       def description: () -> String?
-      def identity_store_id: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def created_by: () -> String?
+      def updated_by: () -> String?
     end
     def describe_group: (
       ?identity_store_id: String,
@@ -158,21 +189,39 @@ module Aws::Identitystore
     ) -> _DescribeGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeGroupResponse
 
     interface _DescribeGroupMembershipResponse
-      include Smithy::Client::_Response[Types::DescribeGroupMembershipOutput]
+      include Smithy::Client::_Response[Types::DescribeGroupMembershipResponse]
       def identity_store_id: () -> String?
       def membership_id: () -> String?
+      def membership_arn: () -> String?
       def group_id: () -> String?
       def member_id: () -> Types::MemberId?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def created_by: () -> String?
+      def updated_by: () -> String?
     end
     def describe_group_membership: (
       ?identity_store_id: String,
       ?membership_id: String
     ) -> _DescribeGroupMembershipResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeGroupMembershipResponse
 
+    interface _DescribeIdentityStoreResponse
+      include Smithy::Client::_Response[Types::DescribeIdentityStoreResponse]
+      def identity_store_id: () -> String?
+      def identity_store_arn: () -> String?
+      def network_configuration: () -> Types::NetworkConfigurationDetails?
+    end
+    def describe_identity_store: (
+      ?identity_store_id: String
+    ) -> _DescribeIdentityStoreResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeIdentityStoreResponse
+
     interface _DescribeUserResponse
-      include Smithy::Client::_Response[Types::DescribeUserOutput]
-      def user_name: () -> String?
+      include Smithy::Client::_Response[Types::DescribeUserResponse]
+      def identity_store_id: () -> String?
       def user_id: () -> String?
+      def user_arn: () -> String?
+      def revision: () -> String?
+      def user_name: () -> String?
       def external_ids: () -> Array[Types::ExternalId]?
       def name: () -> Types::Name?
       def display_name: () -> String?
@@ -186,17 +235,28 @@ module Aws::Identitystore
       def preferred_language: () -> String?
       def locale: () -> String?
       def timezone: () -> String?
-      def identity_store_id: () -> String?
+      def user_status: () -> String?
+      def photos: () -> Array[Types::Photo]?
+      def website: () -> String?
+      def birthdate: () -> String?
+      def roles: () -> Array[Types::Role]?
+      def created_at: () -> Time?
+      def created_by: () -> String?
+      def updated_at: () -> Time?
+      def updated_by: () -> String?
+      def extensions: () -> Hash[String, Smithy::Schema::document]?
     end
     def describe_user: (
       ?identity_store_id: String,
-      ?user_id: String
+      ?user_id: String,
+      ?extensions: Array[String]
     ) -> _DescribeUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeUserResponse
 
     interface _GetGroupIdResponse
-      include Smithy::Client::_Response[Types::GetGroupIdOutput]
-      def group_id: () -> String?
+      include Smithy::Client::_Response[Types::GetGroupIdResponse]
       def identity_store_id: () -> String?
+      def group_id: () -> String?
+      def group_arn: () -> String?
     end
     def get_group_id: (
       ?identity_store_id: String,
@@ -213,9 +273,10 @@ module Aws::Identitystore
     ) -> _GetGroupIdResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetGroupIdResponse
 
     interface _GetGroupMembershipIdResponse
-      include Smithy::Client::_Response[Types::GetGroupMembershipIdOutput]
-      def membership_id: () -> String?
+      include Smithy::Client::_Response[Types::GetGroupMembershipIdResponse]
       def identity_store_id: () -> String?
+      def membership_id: () -> String?
+      def membership_arn: () -> String?
     end
     def get_group_membership_id: (
       ?identity_store_id: String,
@@ -226,9 +287,10 @@ module Aws::Identitystore
     ) -> _GetGroupMembershipIdResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetGroupMembershipIdResponse
 
     interface _GetUserIdResponse
-      include Smithy::Client::_Response[Types::GetUserIdOutput]
-      def user_id: () -> String?
+      include Smithy::Client::_Response[Types::GetUserIdResponse]
       def identity_store_id: () -> String?
+      def user_id: () -> String?
+      def user_arn: () -> String?
     end
     def get_user_id: (
       ?identity_store_id: String,
@@ -245,7 +307,7 @@ module Aws::Identitystore
     ) -> _GetUserIdResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetUserIdResponse
 
     interface _IsMemberInGroupsResponse
-      include Smithy::Client::_Response[Types::IsMemberInGroupsOutput]
+      include Smithy::Client::_Response[Types::IsMemberInGroupsResponse]
       def results: () -> Array[Types::GroupMembershipExistenceResult]?
     end
     def is_member_in_groups: (
@@ -257,7 +319,7 @@ module Aws::Identitystore
     ) -> _IsMemberInGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _IsMemberInGroupsResponse
 
     interface _ListGroupMembershipsResponse
-      include Smithy::Client::_Response[Types::ListGroupMembershipsOutput]
+      include Smithy::Client::_Response[Types::ListGroupMembershipsResponse]
       def group_memberships: () -> Array[Types::GroupMembership]?
       def next_token: () -> String?
     end
@@ -269,7 +331,7 @@ module Aws::Identitystore
     ) -> _ListGroupMembershipsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListGroupMembershipsResponse
 
     interface _ListGroupMembershipsForMemberResponse
-      include Smithy::Client::_Response[Types::ListGroupMembershipsForMemberOutput]
+      include Smithy::Client::_Response[Types::ListGroupMembershipsForMemberResponse]
       def group_memberships: () -> Array[Types::GroupMembership]?
       def next_token: () -> String?
     end
@@ -283,7 +345,7 @@ module Aws::Identitystore
     ) -> _ListGroupMembershipsForMemberResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListGroupMembershipsForMemberResponse
 
     interface _ListGroupsResponse
-      include Smithy::Client::_Response[Types::ListGroupsOutput]
+      include Smithy::Client::_Response[Types::ListGroupsResponse]
       def groups: () -> Array[Types::Group]?
       def next_token: () -> String?
     end
@@ -299,13 +361,24 @@ module Aws::Identitystore
       ]
     ) -> _ListGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListGroupsResponse
 
+    interface _ListIdentityStoresResponse
+      include Smithy::Client::_Response[Types::ListIdentityStoresResponse]
+      def identity_stores: () -> Array[Types::IdentityStore]?
+      def next_token: () -> String?
+    end
+    def list_identity_stores: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListIdentityStoresResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListIdentityStoresResponse
+
     interface _ListUsersResponse
-      include Smithy::Client::_Response[Types::ListUsersOutput]
+      include Smithy::Client::_Response[Types::ListUsersResponse]
       def users: () -> Array[Types::User]?
       def next_token: () -> String?
     end
     def list_users: (
       ?identity_store_id: String,
+      ?extensions: Array[String],
       ?max_results: Integer,
       ?next_token: String,
       ?filters: Array[
@@ -317,7 +390,11 @@ module Aws::Identitystore
     ) -> _ListUsersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListUsersResponse
 
     interface _UpdateGroupResponse
-      include Smithy::Client::_Response[Types::UpdateGroupOutput]
+      include Smithy::Client::_Response[Types::UpdateGroupResponse]
+      def identity_store_id: () -> String?
+      def group_id: () -> String?
+      def group_arn: () -> String?
+      def revision: () -> String?
     end
     def update_group: (
       ?identity_store_id: String,
@@ -327,11 +404,31 @@ module Aws::Identitystore
           attribute_path: String,
           attribute_value: Smithy::Schema::document
         }
-      ]
+      ],
+      ?revision: String
     ) -> _UpdateGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateGroupResponse
 
+    interface _UpdateIdentityStoreResponse
+      include Smithy::Client::_Response[Types::UpdateIdentityStoreResponse]
+      def identity_store_id: () -> String?
+      def identity_store_arn: () -> String?
+    end
+    def update_identity_store: (
+      ?identity_store_id: String,
+      ?network_configuration: {
+        vpce_access_required: bool,
+        api_restrict_source_vpcs: Array[String],
+        api_allow_source_ips: Array[String],
+        scim_allow_source_ips: untyped
+      }
+    ) -> _UpdateIdentityStoreResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateIdentityStoreResponse
+
     interface _UpdateUserResponse
-      include Smithy::Client::_Response[Types::UpdateUserOutput]
+      include Smithy::Client::_Response[Types::UpdateUserResponse]
+      def identity_store_id: () -> String?
+      def user_id: () -> String?
+      def user_arn: () -> String?
+      def revision: () -> String?
     end
     def update_user: (
       ?identity_store_id: String,
@@ -341,7 +438,8 @@ module Aws::Identitystore
           attribute_path: String,
           attribute_value: Smithy::Schema::document
         }
-      ]
+      ],
+      ?revision: String
     ) -> _UpdateUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateUserResponse
   end
 end

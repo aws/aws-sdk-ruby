@@ -14,6 +14,11 @@ module Aws::CustomerProfiles
     AppflowIntegrationWorkflowAttributes: StructureShape
     AppflowIntegrationWorkflowMetrics: StructureShape
     AppflowIntegrationWorkflowStep: StructureShape
+    Arn: StringShape
+    AssociateStreamForSegmentsRequest: StructureShape
+    AssociateStreamForSegmentsResponse: StructureShape
+    AssociatedSegment: StructureShape
+    AssociatedSegmentsList: ListShape
     AttributeDetails: StructureShape
     AttributeDimension: StructureShape
     AttributeDimensionType: EnumShape
@@ -39,6 +44,14 @@ module Aws::CustomerProfiles
     BatchGetProfileIdList: ListShape
     BatchGetProfileRequest: StructureShape
     BatchGetProfileResponse: StructureShape
+    BatchPutProfileObjectErrorItem: StructureShape
+    BatchPutProfileObjectErrorList: ListShape
+    BatchPutProfileObjectRequest: StructureShape
+    BatchPutProfileObjectRequestItem: StructureShape
+    BatchPutProfileObjectRequestItemList: ListShape
+    BatchPutProfileObjectResponse: StructureShape
+    BatchPutProfileObjectResponseItem: StructureShape
+    BatchPutProfileObjectResponseList: ListShape
     Batches: ListShape
     BucketName: StringShape
     BucketPrefix: StringShape
@@ -48,6 +61,9 @@ module Aws::CustomerProfiles
     CalculatedAttributeValueList: ListShape
     CalculatedAttributesForProfileList: ListShape
     CalculatedCustomAttributes: MapShape
+    CandidateIdList: ListShape
+    CatalogItem: StructureShape
+    ColumnNamesList: ListShape
     ComparisonOperator: EnumShape
     ConditionOverrides: StructureShape
     Conditions: StructureShape
@@ -58,6 +74,8 @@ module Aws::CustomerProfiles
     Consolidation: StructureShape
     ContactPreference: StructureShape
     ContactType: EnumShape
+    ContentType: EnumShape
+    ContextKey: StringShape
     CreateCalculatedAttributeDefinitionRequest: StructureShape
     CreateCalculatedAttributeDefinitionResponse: StructureShape
     CreateDomainLayoutRequest: StructureShape
@@ -72,6 +90,12 @@ module Aws::CustomerProfiles
     CreateIntegrationWorkflowResponse: StructureShape
     CreateProfileRequest: StructureShape
     CreateProfileResponse: StructureShape
+    CreateRecommenderFilterRequest: StructureShape
+    CreateRecommenderFilterResponse: StructureShape
+    CreateRecommenderRequest: StructureShape
+    CreateRecommenderResponse: StructureShape
+    CreateRecommenderSchemaRequest: StructureShape
+    CreateRecommenderSchemaResponse: StructureShape
     CreateSegmentDefinitionRequest: StructureShape
     CreateSegmentDefinitionResponse: StructureShape
     CreateSegmentEstimateRequest: StructureShape
@@ -83,6 +107,8 @@ module Aws::CustomerProfiles
     CustomAttributes: MapShape
     DataFormat: EnumShape
     DataPullMode: EnumShape
+    DataStoreRequest: StructureShape
+    DataStoreResponse: StructureShape
     Date: TimestampShape
     DateDimension: StructureShape
     DateDimensionType: EnumShape
@@ -92,6 +118,8 @@ module Aws::CustomerProfiles
     DeleteCalculatedAttributeDefinitionResponse: StructureShape
     DeleteDomainLayoutRequest: StructureShape
     DeleteDomainLayoutResponse: StructureShape
+    DeleteDomainObjectTypeRequest: StructureShape
+    DeleteDomainObjectTypeResponse: StructureShape
     DeleteDomainRequest: StructureShape
     DeleteDomainResponse: StructureShape
     DeleteEventStreamRequest: StructureShape
@@ -108,11 +136,21 @@ module Aws::CustomerProfiles
     DeleteProfileObjectTypeResponse: StructureShape
     DeleteProfileRequest: StructureShape
     DeleteProfileResponse: StructureShape
+    DeleteRecommenderFilterRequest: StructureShape
+    DeleteRecommenderFilterResponse: StructureShape
+    DeleteRecommenderRequest: StructureShape
+    DeleteRecommenderResponse: StructureShape
+    DeleteRecommenderSchemaRequest: StructureShape
+    DeleteRecommenderSchemaResponse: StructureShape
     DeleteSegmentDefinitionRequest: StructureShape
     DeleteSegmentDefinitionResponse: StructureShape
+    DeleteSegmentSubscriptionRequest: StructureShape
+    DeleteSegmentSubscriptionResponse: StructureShape
     DeleteWorkflowRequest: StructureShape
     DeleteWorkflowResponse: StructureShape
+    DestinationArnString: StringShape
     DestinationField: StringShape
+    DestinationRoleArn: StringShape
     DestinationSummary: StructureShape
     DetectProfileObjectTypeRequest: StructureShape
     DetectProfileObjectTypeResponse: StructureShape
@@ -120,7 +158,22 @@ module Aws::CustomerProfiles
     DetectedProfileObjectTypes: ListShape
     Dimension: UnionShape
     DimensionList: ListShape
+    DisassociateStreamForSegmentsRequest: StructureShape
+    DisassociateStreamForSegmentsResponse: StructureShape
+    DiversityCapType: EnumShape
+    DiversityCapValue: IntegerShape
+    DiversityColumn: StructureShape
+    DiversityColumnsList: ListShape
+    DiversityConfig: StructureShape
+    DiversityPlaceholderName: StringShape
+    DiversityTargetExpression: StringShape
+    DiversityValuesMap: MapShape
     DomainList: ListShape
+    DomainObjectTypeField: StructureShape
+    DomainObjectTypeFieldName: StringShape
+    DomainObjectTypeFields: MapShape
+    DomainObjectTypesList: ListShape
+    DomainObjectTypesListItem: StructureShape
     DomainStats: StructureShape
     Double: FloatShape
     Double0To1: FloatShape
@@ -129,11 +182,17 @@ module Aws::CustomerProfiles
     End: IntegerShape
     EngagementPreferences: StructureShape
     EstimateStatus: EnumShape
+    EventParameters: StructureShape
+    EventParametersEventTypeString: StringShape
+    EventParametersEventWeightDouble: FloatShape
+    EventParametersList: ListShape
     EventStreamDestinationDetails: StructureShape
     EventStreamDestinationStatus: EnumShape
     EventStreamState: EnumShape
     EventStreamSummary: StructureShape
     EventStreamSummaryList: ListShape
+    EventSubscriptionSegmentStatus: EnumShape
+    EventSubscriptionState: EnumShape
     EventTriggerCondition: StructureShape
     EventTriggerConditions: ListShape
     EventTriggerDimension: StructureShape
@@ -144,11 +203,13 @@ module Aws::CustomerProfiles
     EventTriggerSummaryItem: StructureShape
     EventTriggerSummaryList: ListShape
     EventTriggerValues: ListShape
+    EventsConfig: StructureShape
     ExportingConfig: StructureShape
     ExportingLocation: StructureShape
     ExtraLengthValueProfileDimension: StructureShape
     ExtraLengthValues: ListShape
     Failures: ListShape
+    FeatureType: EnumShape
     FieldContentType: EnumShape
     FieldMap: MapShape
     FieldNameList: ListShape
@@ -172,6 +233,8 @@ module Aws::CustomerProfiles
     GetCalculatedAttributeForProfileResponse: StructureShape
     GetDomainLayoutRequest: StructureShape
     GetDomainLayoutResponse: StructureShape
+    GetDomainObjectTypeRequest: StructureShape
+    GetDomainObjectTypeResponse: StructureShape
     GetDomainRequest: StructureShape
     GetDomainResponse: StructureShape
     GetEventStreamRequest: StructureShape
@@ -184,12 +247,25 @@ module Aws::CustomerProfiles
     GetIntegrationResponse: StructureShape
     GetMatchesRequest: StructureShape
     GetMatchesResponse: StructureShape
+    GetObjectTypeAttributeStatisticsPercentiles: StructureShape
+    GetObjectTypeAttributeStatisticsRequest: StructureShape
+    GetObjectTypeAttributeStatisticsResponse: StructureShape
+    GetObjectTypeAttributeStatisticsStats: StructureShape
     GetProfileHistoryRecordRequest: StructureShape
     GetProfileHistoryRecordResponse: StructureShape
     GetProfileObjectTypeRequest: StructureShape
     GetProfileObjectTypeResponse: StructureShape
     GetProfileObjectTypeTemplateRequest: StructureShape
     GetProfileObjectTypeTemplateResponse: StructureShape
+    GetProfileRecommendationsRequest: StructureShape
+    GetProfileRecommendationsResponse: StructureShape
+    GetRecommenderFilterRequest: StructureShape
+    GetRecommenderFilterResponse: StructureShape
+    GetRecommenderRequest: StructureShape
+    GetRecommenderRequestTrainingMetricsCountInteger: IntegerShape
+    GetRecommenderResponse: StructureShape
+    GetRecommenderSchemaRequest: StructureShape
+    GetRecommenderSchemaResponse: StructureShape
     GetSegmentDefinitionRequest: StructureShape
     GetSegmentDefinitionResponse: StructureShape
     GetSegmentEstimateRequest: StructureShape
@@ -200,8 +276,12 @@ module Aws::CustomerProfiles
     GetSegmentMembershipStatus: IntegerShape
     GetSegmentSnapshotRequest: StructureShape
     GetSegmentSnapshotResponse: StructureShape
+    GetSegmentSubscriptionRequest: StructureShape
+    GetSegmentSubscriptionResponse: StructureShape
     GetSimilarProfilesRequest: StructureShape
     GetSimilarProfilesResponse: StructureShape
+    GetStreamForSegmentsRequest: StructureShape
+    GetStreamForSegmentsResponse: StructureShape
     GetUploadJobPathRequest: StructureShape
     GetUploadJobPathResponse: StructureShape
     GetUploadJobRequest: StructureShape
@@ -217,15 +297,20 @@ module Aws::CustomerProfiles
     IdentityResolutionJobsList: ListShape
     Include: EnumShape
     IncludeOptions: EnumShape
+    IncludedColumns: MapShape
     IncrementalPullConfig: StructureShape
+    InferenceConfig: StructureShape
+    InferenceConfigMinProvisionedTPSInteger: IntegerShape
     IntegrationConfig: StructureShape
     IntegrationList: ListShape
     InternalServerException: StructureShape
+    IntervalValue: IntegerShape
     JobSchedule: StructureShape
     JobScheduleDayOfTheWeek: EnumShape
     JobScheduleTime: StringShape
     JobStats: StructureShape
     KeyMap: MapShape
+    KeyValuesList: ListShape
     KmsArn: StringShape
     LayoutItem: StructureShape
     LayoutList: ListShape
@@ -241,6 +326,8 @@ module Aws::CustomerProfiles
     ListDomainItem: StructureShape
     ListDomainLayoutsRequest: StructureShape
     ListDomainLayoutsResponse: StructureShape
+    ListDomainObjectTypesRequest: StructureShape
+    ListDomainObjectTypesResponse: StructureShape
     ListDomainsRequest: StructureShape
     ListDomainsResponse: StructureShape
     ListEventStreamsRequest: StructureShape
@@ -253,6 +340,10 @@ module Aws::CustomerProfiles
     ListIntegrationsRequest: StructureShape
     ListIntegrationsResponse: StructureShape
     ListObjectTypeAttributeItem: StructureShape
+    ListObjectTypeAttributeValuesItem: StructureShape
+    ListObjectTypeAttributeValuesList: ListShape
+    ListObjectTypeAttributeValuesRequest: StructureShape
+    ListObjectTypeAttributeValuesResponse: StructureShape
     ListObjectTypeAttributesList: ListShape
     ListObjectTypeAttributesRequest: StructureShape
     ListObjectTypeAttributesResponse: StructureShape
@@ -267,10 +358,22 @@ module Aws::CustomerProfiles
     ListProfileObjectsItem: StructureShape
     ListProfileObjectsRequest: StructureShape
     ListProfileObjectsResponse: StructureShape
+    ListRecommenderFiltersRequest: StructureShape
+    ListRecommenderFiltersResponse: StructureShape
+    ListRecommenderRecipesRequest: StructureShape
+    ListRecommenderRecipesRequestMaxResultsInteger: IntegerShape
+    ListRecommenderRecipesResponse: StructureShape
+    ListRecommenderSchemasRequest: StructureShape
+    ListRecommenderSchemasResponse: StructureShape
+    ListRecommendersRequest: StructureShape
+    ListRecommendersRequestMaxResultsInteger: IntegerShape
+    ListRecommendersResponse: StructureShape
     ListRuleBasedMatchesRequest: StructureShape
     ListRuleBasedMatchesResponse: StructureShape
     ListSegmentDefinitionsRequest: StructureShape
     ListSegmentDefinitionsResponse: StructureShape
+    ListSegmentSubscriptionEventsRequest: StructureShape
+    ListSegmentSubscriptionEventsResponse: StructureShape
     ListTagsForResourceRequest: StructureShape
     ListTagsForResourceResponse: StructureShape
     ListUploadJobsRequest: StructureShape
@@ -296,6 +399,10 @@ module Aws::CustomerProfiles
     MaxSize500: IntegerShape
     MergeProfilesRequest: StructureShape
     MergeProfilesResponse: StructureShape
+    MetadataColumnName: StringShape
+    MetadataColumnsList: ListShape
+    MetadataConfig: StructureShape
+    Metrics: MapShape
     Object: StringShape
     ObjectAttribute: StructureShape
     ObjectAttributes: ListShape
@@ -309,6 +416,7 @@ module Aws::CustomerProfiles
     Operator: EnumShape
     OperatorPropertiesKeys: EnumShape
     PartyType: EnumShape
+    PercentPromotedItems: IntegerShape
     Period: StructureShape
     PeriodUnit: EnumShape
     Periods: ListShape
@@ -337,18 +445,56 @@ module Aws::CustomerProfiles
     ProfileTypeValues: ListShape
     Profiles: ListShape
     Property: StringShape
+    PutDomainObjectTypeRequest: StructureShape
+    PutDomainObjectTypeResponse: StructureShape
     PutIntegrationRequest: StructureShape
     PutIntegrationResponse: StructureShape
     PutProfileObjectRequest: StructureShape
     PutProfileObjectResponse: StructureShape
     PutProfileObjectTypeRequest: StructureShape
     PutProfileObjectTypeResponse: StructureShape
+    PutSegmentSubscriptionRequest: StructureShape
+    PutSegmentSubscriptionResponse: StructureShape
     QueryResult: EnumShape
     Range: StructureShape
     RangeOverride: StructureShape
     RangeUnit: EnumShape
     Readiness: StructureShape
     ReadinessStatus: EnumShape
+    Recommendation: StructureShape
+    RecommendationDiversityConfig: StructureShape
+    RecommendationMetadata: StructureShape
+    Recommendations: ListShape
+    Recommender: StructureShape
+    RecommenderConfig: StructureShape
+    RecommenderConfigTrainingFrequencyInteger: IntegerShape
+    RecommenderContext: MapShape
+    RecommenderFilter: StructureShape
+    RecommenderFilterAttributeName: StringShape
+    RecommenderFilterAttributeValue: StringShape
+    RecommenderFilterExpression: StringShape
+    RecommenderFilterName: StringShape
+    RecommenderFilterStatus: EnumShape
+    RecommenderFilterSummary: StructureShape
+    RecommenderFilterSummaryList: ListShape
+    RecommenderFilterValues: MapShape
+    RecommenderFilters: ListShape
+    RecommenderPromotionalFilter: StructureShape
+    RecommenderPromotionalFilters: ListShape
+    RecommenderRecipe: StructureShape
+    RecommenderRecipeName: EnumShape
+    RecommenderRecipesList: ListShape
+    RecommenderSchemaField: StructureShape
+    RecommenderSchemaFieldList: ListShape
+    RecommenderSchemaFields: MapShape
+    RecommenderSchemaStatus: EnumShape
+    RecommenderSchemaSummary: StructureShape
+    RecommenderSchemaSummaryList: ListShape
+    RecommenderStatus: EnumShape
+    RecommenderSummary: StructureShape
+    RecommenderSummaryList: ListShape
+    RecommenderUpdate: StructureShape
+    RecommenderVersionName: StringShape
     ResourceNotFoundException: StructureShape
     ResultsSummary: StructureShape
     RoleArn: StringShape
@@ -362,11 +508,17 @@ module Aws::CustomerProfiles
     S3SourceProperties: StructureShape
     SalesforceConnectorOperator: EnumShape
     SalesforceSourceProperties: StructureShape
+    ScheduleConfiguration: StructureShape
+    ScheduleConfigurationUnit: EnumShape
     ScheduleExpression: StringShape
     ScheduleOffset: IntegerShape
+    ScheduledExecutions: StructureShape
     ScheduledTriggerProperties: StructureShape
+    Scope: EnumShape
     SearchProfilesRequest: StructureShape
     SearchProfilesResponse: StructureShape
+    SearchRecommendationsRequest: StructureShape
+    SearchRecommendationsResponse: StructureShape
     SegmentDefinitionArn: StringShape
     SegmentDefinitionItem: StructureShape
     SegmentDefinitionsList: ListShape
@@ -374,8 +526,16 @@ module Aws::CustomerProfiles
     SegmentGroupList: ListShape
     SegmentGroupStructure: StructureShape
     SegmentSnapshotStatus: EnumShape
+    SegmentSort: StructureShape
+    SegmentSortDataType: EnumShape
+    SegmentSortOrder: EnumShape
+    SegmentSubscriptionStatus: EnumShape
+    SegmentType: EnumShape
     ServiceNowConnectorOperator: EnumShape
     ServiceNowSourceProperties: StructureShape
+    SortAttribute: StructureShape
+    SortAttributeList: ListShape
+    SortAttributeType: EnumShape
     SourceConnectorProperties: StructureShape
     SourceConnectorType: EnumShape
     SourceFields: ListShape
@@ -385,15 +545,23 @@ module Aws::CustomerProfiles
     StandardIdentifier: EnumShape
     StandardIdentifierList: ListShape
     Start: IntegerShape
+    StartRecommenderRequest: StructureShape
+    StartRecommenderResponse: StructureShape
     StartUploadJobRequest: StructureShape
     StartUploadJobResponse: StructureShape
     Statistic: EnumShape
     Status: EnumShape
     StatusCode: IntegerShape
     StatusReason: EnumShape
+    StopRecommenderRequest: StructureShape
+    StopRecommenderResponse: StructureShape
     StopUploadJobRequest: StructureShape
     StopUploadJobResponse: StructureShape
     StringDimensionType: EnumShape
+    SubscriptionEvent: EnumShape
+    SubscriptionEventItem: StructureShape
+    SubscriptionEventType: EnumShape
+    SubscriptionEventsList: ListShape
     TagArn: StringShape
     TagKey: StringShape
     TagKeyList: ListShape
@@ -408,6 +576,9 @@ module Aws::CustomerProfiles
     Threshold: StructureShape
     ThrottlingException: StructureShape
     Timezone: StringShape
+    TrainingMetricName: EnumShape
+    TrainingMetrics: StructureShape
+    TrainingMetricsList: ListShape
     TriggerConfig: StructureShape
     TriggerProperties: StructureShape
     TriggerType: EnumShape
@@ -427,6 +598,8 @@ module Aws::CustomerProfiles
     UpdateEventTriggerResponse: StructureShape
     UpdateProfileRequest: StructureShape
     UpdateProfileResponse: StructureShape
+    UpdateRecommenderRequest: StructureShape
+    UpdateRecommenderResponse: StructureShape
     UploadJobItem: StructureShape
     UploadJobStatus: EnumShape
     UploadJobsList: ListShape
@@ -457,7 +630,7 @@ module Aws::CustomerProfiles
     MatchesNumber: IntegerShape
     MaxSize100: IntegerShape
     MaxSize1000: IntegerShape
-    MaxSize24: IntegerShape
+    MaxSize60: IntegerShape
     Message: StringShape
     MinSize0: IntegerShape
     MinSize1: IntegerShape
@@ -466,14 +639,18 @@ module Aws::CustomerProfiles
     OptionalLong: IntegerShape
     PercentageInteger: IntegerShape
     RequestValueList: ListShape
+    ResponseCode: IntegerShape
     S3BucketName: StringShape
     S3KeyName: StringShape
     S3KeyNameCustomerOutputConfig: StringShape
     SensitiveString0To1000: StringShape
     SensitiveString0To255: StringShape
     SensitiveString1To1000: StringShape
+    SensitiveString1To10000: StringShape
     SensitiveString1To2000000: StringShape
     SensitiveString1To255: StringShape
+    SensitiveString1To4000: StringShape
+    SensitiveString1To50000: StringShape
     SensitiveText: StringShape
     SqsQueueUrl: StringShape
     String0To255: StringShape

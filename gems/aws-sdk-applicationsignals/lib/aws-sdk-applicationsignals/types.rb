@@ -65,9 +65,9 @@ module Aws::ApplicationSignals
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A structure that specifies the target entity for audit analysis, such as a <code>service</code>, <code>SLO</code>, or <code>service_operation</code>.</p>
+    # <p>A structure that specifies the target entity for audit analysis, such as a <code>service</code>, <code>SLO</code>, <code>service_operation</code>, or <code>canary</code>.</p>
     # @!attribute type
-    #   <p>The type of entity being audited, such as <code>Service</code>, <code>SLO</code>, or <code>ServiceOperation</code>.</p>
+    #   <p>The type of entity being audited, such as <code>service</code>, <code>SLO</code>, <code>service_operation</code>, or <code>canary</code>. </p>
     #   @return [String]
     # @!attribute data
     #   <p>The specific data identifying the audit target entity.</p>
@@ -91,10 +91,14 @@ module Aws::ApplicationSignals
     # @!attribute service_operation
     #   <p>Service operation entity information when the audit target is a specific service operation.</p>
     #   @return [Types::ServiceOperationEntity]
+    # @!attribute canary
+    #   <p>Canary entity information when the audit target is a CloudWatch Synthetics canary.</p>
+    #   @return [Types::CanaryEntity]
     class AuditTargetEntity < Struct.new(
       :service,
       :slo,
       :service_operation,
+      :canary,
       :unknown,
       keyword_init: true
     )
@@ -103,16 +107,20 @@ module Aws::ApplicationSignals
       class Service < AuditTargetEntity; end
       class Slo < AuditTargetEntity; end
       class ServiceOperation < AuditTargetEntity; end
+      class Canary < AuditTargetEntity; end
       class Unknown < AuditTargetEntity; end
     end
 
-    # <p>A structure that contains the result of an automated audit analysis, including the auditor name, description of findings, and severity level.</p>
+    # <p>A structure that contains the result of an automated audit analysis, including the auditor name, description of findings, additional data, and severity level.</p>
     # @!attribute auditor
     #   <p>The name of the auditor algorithm that generated this result.</p>
     #   @return [String]
     # @!attribute description
     #   <p>A detailed description of the audit finding, explaining what was observed and potential implications.</p>
     #   @return [String]
+    # @!attribute data
+    #   <p>This is a string-to-string map. It contains additional data about the result of an automated audit analysis.</p>
+    #   @return [Hash<String, String>]
     # @!attribute severity
     #   <p>The severity level of this audit finding, indicating the importance and potential impact of the issue.</p>
     #   @return [String]
@@ -120,7 +128,139 @@ module Aws::ApplicationSignals
       nil,
       :auditor,
       :description,
+      :data,
       :severity,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # Parameters for targeted delete by ARN list.
+    # @!attribute resource_arns
+    #   List of resource ARNs to delete.
+    #   @return [Array<String>]
+    # @!attribute instrumentation_type
+    #   Instrumentation type: BREAKPOINT or PROBE.
+    #   @return [String]
+    class BatchDeleteByResourceArns < Struct.new(
+      nil,
+      :resource_arns,
+      :instrumentation_type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # Union type for batch delete target selection.
+    # Exactly one of the two modes must be specified.
+    # @!attribute scope
+    #   Delete all configurations matching the specified scope.
+    #   @return [Types::BatchDeleteScope]
+    # @!attribute resource_arns
+    #   Delete specific configurations by ARN list.
+    #   @return [Types::BatchDeleteByResourceArns]
+    class BatchDeleteDeletionTarget < Struct.new(
+      :scope,
+      :resource_arns,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class Scope < BatchDeleteDeletionTarget; end
+      class ResourceArns < BatchDeleteDeletionTarget; end
+      class Unknown < BatchDeleteDeletionTarget; end
+    end
+
+    # Represents an error that occurred when attempting to delete a configuration.
+    # @!attribute resource_arn
+    #   ARN of the configuration that failed to delete.
+    #   @return [String]
+    # @!attribute code
+    #   Error code indicating the type of failure.
+    #   @return [String]
+    # @!attribute message
+    #   Descriptive error message.
+    #   @return [String]
+    class BatchDeleteError < Struct.new(
+      nil,
+      :resource_arn,
+      :code,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute deletion_target
+    #   The deletion target - either bulk by scope or targeted by ARN list.
+    #   @return [Types::BatchDeleteDeletionTarget]
+    class BatchDeleteInstrumentationConfigurationsRequest < Struct.new(
+      nil,
+      :deletion_target,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute deleted_count
+    #   Number of configurations successfully deleted.
+    #   When deleting by scope, this is the total count of deleted items.
+    #   When deleting by ARN list, this equals the length of SuccessfulDeletions.
+    #   @return [Integer]
+    # @!attribute successful_deletions
+    #   List of successfully deleted configurations.
+    #   Deleting by scope populates SignalType and LocationHash per item.
+    #   Deleting by ARN list populates ResourceArn per item.
+    #   @return [Array<Types::BatchDeleteSuccessfulDeletion>]
+    # @!attribute errors
+    #   List of configurations that failed to delete.
+    #   @return [Array<Types::BatchDeleteError>]
+    class BatchDeleteInstrumentationConfigurationsResponse < Struct.new(
+      nil,
+      :deleted_count,
+      :successful_deletions,
+      :errors,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # Scope parameters for bulk delete by scope.
+    # @!attribute service
+    #   Service name for the instrumentation configurations.
+    #   @return [String]
+    # @!attribute environment
+    #   Environment identifier for the instrumentation configurations.
+    #   @return [String]
+    # @!attribute instrumentation_type
+    #   Instrumentation type: BREAKPOINT or PROBE.
+    #   @return [String]
+    class BatchDeleteScope < Struct.new(
+      nil,
+      :service,
+      :environment,
+      :instrumentation_type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # Represents a successfully deleted instrumentation configuration.
+    # @!attribute resource_arn
+    #   ARN of the deleted configuration (populated only when deleting by ARN list).
+    #   @return [String]
+    # @!attribute signal_type
+    #   Signal type of the deleted configuration (populated only when deleting by scope).
+    #   @return [String]
+    # @!attribute location_hash
+    #   Location hash of the deleted configuration (populated only when deleting by scope).
+    #   @return [String]
+    class BatchDeleteSuccessfulDeletion < Struct.new(
+      nil,
+      :resource_arn,
+      :signal_type,
+      :location_hash,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -246,6 +386,73 @@ module Aws::ApplicationSignals
       include ::Smithy::Schema::Structure
     end
 
+    # <p>A structure that contains identifying information for a CloudWatch Synthetics canary entity used in audit targeting.</p>
+    # @!attribute canary_name
+    #   <p>The name of the CloudWatch Synthetics canary.</p>
+    #   @return [String]
+    class CanaryEntity < Struct.new(
+      nil,
+      :canary_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A union that defines what data to capture when the instrumentation point is hit. Specify <code>CodeCapture</code> for code-level capture settings.</p>
+    # @!attribute code_capture
+    #   <p>Capture settings for code-level instrumentation, including arguments, return values, stack traces, local variables, and safety limits.</p>
+    #   @return [Types::CodeCaptureConfiguration]
+    class CaptureConfiguration < Struct.new(
+      :code_capture,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class CodeCapture < CaptureConfiguration; end
+      class Unknown < CaptureConfiguration; end
+    end
+
+    # <p>Guardrails that prevent instrumentation from impacting application performance by limiting how much data is captured.</p>
+    # @!attribute max_hits
+    #   <p>The maximum number of times the instrumentation point can be hit before it is automatically disabled. Defaults to 100.</p>
+    #   @return [Integer]
+    # @!attribute max_string_length
+    #   <p>The maximum length of captured string values in characters. Strings longer than this are truncated. Defaults to 128.</p>
+    #   @return [Integer]
+    # @!attribute max_collection_width
+    #   <p>The maximum number of items to capture from any collection to prevent large payloads. Defaults to 10.</p>
+    #   @return [Integer]
+    # @!attribute max_collection_depth
+    #   <p>The maximum nesting depth to traverse inside collections. Defaults to 3.</p>
+    #   @return [Integer]
+    # @!attribute max_stack_frames
+    #   <p>The maximum number of stack frames to capture in stack traces. Defaults to 2.</p>
+    #   @return [Integer]
+    # @!attribute max_stack_trace_size
+    #   <p>The maximum total size, in bytes, of a captured stack trace. Defaults to 1000.</p>
+    #   @return [Integer]
+    # @!attribute max_object_depth
+    #   <p>The maximum depth for nested object traversal when capturing structured data. Defaults to 3.</p>
+    #   @return [Integer]
+    # @!attribute max_fields_per_object
+    #   <p>The maximum number of fields to capture for any object. Defaults to 10.</p>
+    #   @return [Integer]
+    class CaptureLimitsConfig < Struct.new(
+      nil,
+      :max_hits,
+      :max_string_length,
+      :max_collection_width,
+      :max_collection_depth,
+      :max_stack_frames,
+      :max_stack_trace_size,
+      :max_object_depth,
+      :max_fields_per_object,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>A structure that contains information about a change event that occurred for a service, such as a deployment or configuration change.</p>
     # @!attribute timestamp
     #   <p>The timestamp when this change event occurred. When used in a raw HTTP Query API, it is formatted as epoch time in seconds.</p>
@@ -257,13 +464,13 @@ module Aws::ApplicationSignals
     #   <p>The Amazon Web Services region where this change event occurred.</p>
     #   @return [String]
     # @!attribute entity
-    #   <p>The entity (service or resource) that was affected by this change event, including its key attributes.</p>
+    #   <p>The entity (service or resource) that was affected by this change event, including its key attributes.</p> <p>This is a string-to-string map. It can include the following fields.</p> <ul> <li> <p> <code>Type</code> designates the type of object this is.</p> </li> <li> <p> <code>ResourceType</code> specifies the type of the resource. This field is used only when the value of the <code>Type</code> field is <code>Resource</code> or <code>AWS::Resource</code>.</p> </li> <li> <p> <code>Name</code> specifies the name of the object. This is used only if the value of the <code>Type</code> field is <code>Service</code>, <code>RemoteService</code>, or <code>AWS::Service</code>.</p> </li> <li> <p> <code>Identifier</code> identifies the resource objects of this resource. This is used only if the value of the <code>Type</code> field is <code>Resource</code> or <code>AWS::Resource</code>.</p> </li> <li> <p> <code>Environment</code> specifies the location where this object is hosted, or what it belongs to.</p> </li> <li> <p> <code>AwsAccountId</code> specifies the account where this object is in.</p> </li> </ul> <p>Below is an example of a service.</p> <p> <code>{ "Type": "Service", "Name": "visits-service", "Environment": "petclinic-test" }</code> </p> <p>Below is an example of a resource.</p> <p> <code>{ "Type": "AWS::Resource", "ResourceType": "AWS::DynamoDB::Table", "Identifier": "Customers" }</code> </p>
     #   @return [Hash<String, String>]
     # @!attribute change_event_type
     #   <p>The type of change event that occurred, such as <code>DEPLOYMENT</code>.</p>
     #   @return [String]
     # @!attribute event_id
-    #   <p>A unique identifier for this change event.</p>
+    #   <p>A unique identifier for this change event. For CloudTrail-based events, this is the CloudTrail event id. For other events, this will be <code>Unknown</code>.</p>
     #   @return [String]
     # @!attribute user_name
     #   <p>The name of the user who initiated this change event, if available.</p>
@@ -286,12 +493,206 @@ module Aws::ApplicationSignals
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Defines what data to capture for code-level instrumentation, including arguments, return values, stack traces, local variables, and safety limits.</p>
+    # @!attribute capture_arguments
+    #   <p>The function arguments to capture. Omit to capture defaults, use an empty list to capture none, use <code>["*"]</code> to capture all arguments, or specify argument names to capture selectively (up to 10 entries).</p>
+    #   @return [Array<String>]
+    # @!attribute capture_return
+    #   <p>Whether to capture the return value. Defaults to false.</p>
+    #   @return [Boolean]
+    # @!attribute capture_stack_trace
+    #   <p>Whether to capture a stack trace when the instrumentation point is hit. Defaults to true.</p>
+    #   @return [Boolean]
+    # @!attribute capture_locals
+    #   <p>The local variables to capture by name. Omit or pass an empty list to capture none. You can specify up to 20 names.</p>
+    #   @return [Array<String>]
+    # @!attribute capture_limits
+    #   <p>Safety limits that bound what is captured, including hit counts, string length, collection depth, and stack trace size.</p>
+    #   @return [Types::CaptureLimitsConfig]
+    class CodeCaptureConfiguration < Struct.new(
+      nil,
+      :capture_arguments,
+      :capture_return,
+      :capture_stack_trace,
+      :capture_locals,
+      :capture_limits,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Identifies a code location to instrument, including the programming language, code unit, class, method, file path, and optional line number.</p>
+    # @!attribute language
+    #   <p>The programming language for this instrumentation point, such as Java, Python, or JavaScript.</p>
+    #   @return [String]
+    # @!attribute code_unit
+    #   <p>The package, module, or namespace that contains the target code, for example <code>com.amazon.payment</code> or <code>payment_service</code>.</p>
+    #   @return [String]
+    # @!attribute class_name
+    #   <p>The class or type name that contains the method. This is required for Java and optional for Python module-level functions.</p>
+    #   @return [String]
+    # @!attribute method_name
+    #   <p>The method or function name to instrument, such as <code>validateCreditCard</code> or <code>__init__</code>.</p>
+    #   @return [String]
+    # @!attribute file_path
+    #   <p>The source file path relative to the project or source root, such as <code>src/payment/PaymentProcessor.java</code> or <code>src/payment/PaymentProcessor.py</code>.</p>
+    #   @return [String]
+    # @!attribute line_number
+    #   <p>The line number to instrument. Provide this to disambiguate overloaded methods and to target a specific line when needed.</p>
+    #   @return [Integer]
+    class CodeLocation < Struct.new(
+      nil,
+      :language,
+      :code_unit,
+      :class_name,
+      :method_name,
+      :file_path,
+      :line_number,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Identifies a single operation to include in a composite SLI for a service-level SLO. Used as an element of the <code>Components</code> list in <code>CompositeSliConfig</code>.</p>
+    # @!attribute operation_name
+    #   <p>The name of the operation to include in the composite SLI.</p>
+    #   @return [String]
+    class CompositeSliComponent < Struct.new(
+      :operation_name,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class OperationName < CompositeSliComponent; end
+      class Unknown < CompositeSliComponent; end
+    end
+
+    # <p>This structure contains the configuration for a composite service level indicator (SLI) that aggregates metrics across multiple operations of a service for service-level SLOs.</p>
+    # @!attribute selection_config
+    #   <p>Specifies how operations are selected for this service-level SLO. Operations can be selected explicitly by listing them, by specifying a prefix to match operation names, or by providing a regular expression pattern.</p>
+    #   @return [Types::SelectionConfig]
+    # @!attribute components
+    #   <p>The list of operations included in this composite SLI. You must specify between 2 and 20 components. Each component is a <code>CompositeSliComponent</code> that identifies a single operation by its <code>OperationName</code>.</p>
+    #   @return [Array<Types::CompositeSliComponent>]
+    class CompositeSliConfig < Struct.new(
+      nil,
+      :selection_config,
+      :components,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>This operation attempted to create a resource that already exists.</p>
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
       nil,
       :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute instrumentation_type
+    #   Type of instrumentation: BREAKPOINT (temporary) or PROBE (permanent)
+    #   @return [String]
+    # @!attribute service
+    #   <p>The name of the service to instrument. This should match the <code>service.name</code> resource attribute reported by the application.</p>
+    #   @return [String]
+    # @!attribute environment
+    #   <p>The environment that the service is running in, such as <code>eks:cluster-prod/namespace</code> or <code>ec2:production</code>.</p>
+    #   @return [String]
+    # @!attribute signal_type
+    #   <p>The telemetry signal type to emit for this instrumentation. The supported value is <code>SNAPSHOT</code>.</p>
+    #   @return [String]
+    # @!attribute location
+    #   <p>The location where instrumentation should be applied. Specify a <code>CodeLocation</code> for code-level instrumentation.</p>
+    #   @return [Types::Location]
+    # @!attribute description
+    #   <p>An optional short description (up to 50 characters) that explains the purpose of this instrumentation.</p>
+    #   @return [String]
+    # @!attribute expires_at
+    #   For BREAKPOINT: optional, defaults to 24 hours, must be between 5 min and 24 hours.
+    #   For PROBE: not supported. PROBE configurations are permanent and persist until explicitly deleted.
+    #   @return [Time]
+    # @!attribute attribute_filters
+    #   <p>Client-side filters that target specific instances. Each object in the array is AND-matched on its keys, and multiple objects are OR-matched to decide where to apply the instrumentation.</p>
+    #   @return [Array<Hash<String, String>>]
+    # @!attribute capture_configuration
+    #   <p>Specifies what to capture when the instrumentation point is hit. Specify <code>CodeCapture</code> for code-level capture settings.</p>
+    #   @return [Types::CaptureConfiguration]
+    # @!attribute tags
+    #   <p>An optional list of key-value pairs to associate with the instrumentation configuration. Tags can help you organize and categorize your resources.</p>
+    #   @return [Array<Types::Tag>]
+    class CreateInstrumentationConfigurationRequest < Struct.new(
+      nil,
+      :instrumentation_type,
+      :service,
+      :environment,
+      :signal_type,
+      :location,
+      :description,
+      :expires_at,
+      :attribute_filters,
+      :capture_configuration,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute instrumentation_type
+    #   <p>The type of instrumentation that was created, echoed from the request.</p>
+    #   @return [String]
+    # @!attribute service
+    #   <p>The service name for the instrumentation configuration, echoed from the request.</p>
+    #   @return [String]
+    # @!attribute environment
+    #   <p>The environment for the instrumentation configuration, echoed from the request.</p>
+    #   @return [String]
+    # @!attribute signal_type
+    #   <p>The telemetry signal type for the instrumentation configuration, echoed from the request.</p>
+    #   @return [String]
+    # @!attribute location
+    #   <p>The location where instrumentation is applied, echoed from the request.</p>
+    #   @return [Types::Location]
+    # @!attribute location_hash
+    #   <p>A stable hash computed from the location that uniquely identifies this instrumentation point within the service, environment, and signal type.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>The optional description that was stored with the instrumentation configuration.</p>
+    #   @return [String]
+    # @!attribute expires_at
+    #   <p>The timestamp after which this configuration is no longer served to clients. Present only for <code>BREAKPOINT</code> configurations; <code>PROBE</code> configurations do not expire.</p>
+    #   @return [Time]
+    # @!attribute attribute_filters
+    #   <p>The attribute filters returned with the configuration so SDKs can perform client-side targeting.</p>
+    #   @return [Array<Hash<String, String>>]
+    # @!attribute capture_configuration
+    #   <p>The capture settings that were stored for this instrumentation configuration.</p>
+    #   @return [Types::CaptureConfiguration]
+    # @!attribute created_at
+    #   <p>The server-generated creation timestamp for this instrumentation configuration.</p>
+    #   @return [Time]
+    # @!attribute arn
+    #   ARN for the created instrumentation configuration
+    #   @return [String]
+    class CreateInstrumentationConfigurationResponse < Struct.new(
+      nil,
+      :instrumentation_type,
+      :service,
+      :environment,
+      :signal_type,
+      :location,
+      :location_hash,
+      :description,
+      :expires_at,
+      :attribute_filters,
+      :capture_configuration,
+      :created_at,
+      :arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -318,6 +719,12 @@ module Aws::ApplicationSignals
     # @!attribute burn_rate_configurations
     #   <p>Use this array to create <i>burn rates</i> for this SLO. Each burn rate is a metric that indicates how fast the service is consuming the error budget, relative to the attainment goal of the SLO.</p>
     #   @return [Array<Types::BurnRateConfiguration>]
+    # @!attribute create_recommended_slo
+    #   <p>Set this to <code>true</code> to create a recommended SLO out of the box. When set to <code>true</code>, you don't need to specify the <code>MetricThreshold</code> or <code>ComparisonOperator</code> in the <code>SliConfig</code> or <code>RequestBasedSliConfig</code>. The default value is <code>false</code>.</p> <p>This is supported for SLOs on a service, service operation, or a dependency.</p>
+    #   @return [Boolean]
+    # @!attribute auto_investigation_enabled
+    #   Indicates whether DevOps Agent will automatically investigate this SLO when it is breached
+    #   @return [Boolean]
     class CreateServiceLevelObjectiveInput < Struct.new(
       nil,
       :name,
@@ -327,6 +734,8 @@ module Aws::ApplicationSignals
       :goal,
       :tags,
       :burn_rate_configurations,
+      :create_recommended_slo,
+      :auto_investigation_enabled,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -345,6 +754,45 @@ module Aws::ApplicationSignals
 
     class DeleteGroupingConfigurationOutput < Struct.new(
       nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute instrumentation_type
+    #   Type of instrumentation configuration (BREAKPOINT or PROBE).
+    #   Required to identify the configuration to delete.
+    #   @return [String]
+    # @!attribute service
+    #   Service name for the instrumentation configuration.
+    #   @return [String]
+    # @!attribute environment
+    #   Environment name for the instrumentation configuration.
+    #   @return [String]
+    # @!attribute signal_type
+    #   Signal type for the instrumentation configuration.
+    #   @return [String]
+    # @!attribute location_identifier
+    #   Location identifier - either full code location or a pre-computed hash.
+    #   @return [Types::LocationIdentifier]
+    class DeleteInstrumentationConfigurationRequest < Struct.new(
+      nil,
+      :instrumentation_type,
+      :service,
+      :environment,
+      :signal_type,
+      :location_identifier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute deletion_status
+    #   <p>The result of the delete request. The value is <code>DELETED</code> when the configuration has been removed.</p>
+    #   @return [String]
+    class DeleteInstrumentationConfigurationResponse < Struct.new(
+      nil,
+      :deletion_status,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -459,6 +907,128 @@ module Aws::ApplicationSignals
       :start_time,
       :recurrence_rule,
       :reason,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute instrumentation_type
+    #   Type of instrumentation configuration (BREAKPOINT or PROBE).
+    #   Required to identify the configuration to retrieve.
+    #   @return [String]
+    # @!attribute service
+    #   Service name for the instrumentation configuration.
+    #   @return [String]
+    # @!attribute environment
+    #   Environment name for the instrumentation configuration.
+    #   @return [String]
+    # @!attribute signal_type
+    #   Signal type for the instrumentation configuration.
+    #   @return [String]
+    # @!attribute location_identifier
+    #   Location identifier - either full code location or a pre-computed hash.
+    #   @return [Types::LocationIdentifier]
+    class GetInstrumentationConfigurationRequest < Struct.new(
+      nil,
+      :instrumentation_type,
+      :service,
+      :environment,
+      :signal_type,
+      :location_identifier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute configuration
+    #   <p>The complete instrumentation configuration, including its location hash, capture settings, filters, expiration, and creation time.</p>
+    #   @return [Types::InstrumentationConfiguration]
+    class GetInstrumentationConfigurationResponse < Struct.new(
+      nil,
+      :configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute instrumentation_type
+    #   Type of instrumentation configuration (BREAKPOINT or PROBE).
+    #   Required to identify the configuration to retrieve.
+    #   @return [String]
+    # @!attribute service
+    #   Service name for the instrumentation configuration.
+    #   @return [String]
+    # @!attribute environment
+    #   Environment name for the instrumentation configuration.
+    #   @return [String]
+    # @!attribute signal_type
+    #   Signal type for the instrumentation configuration.
+    #   @return [String]
+    # @!attribute location_identifier
+    #   Location identifier - either full code location or a pre-computed hash.
+    #   @return [Types::LocationIdentifier]
+    # @!attribute status
+    #   <p>The single status to query for. If omitted, only <code>ACTIVE</code> status events are returned.</p>
+    #   @return [String]
+    # @!attribute start_time
+    #   <p>The start of the time range to retrieve status events for. <code>StartTime</code> and <code>EndTime</code> must both be provided together or both be omitted. When both are omitted, the time range defaults to the last hour.</p>
+    #   @return [Time]
+    # @!attribute end_time
+    #   <p>The end of the time range to retrieve status events for. <code>StartTime</code> and <code>EndTime</code> must both be provided together or both be omitted. When both are omitted, the time range defaults to the last hour.</p>
+    #   @return [Time]
+    # @!attribute max_results
+    #   <p>The maximum number of status events to return in one call. The default is 60.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>Use the token returned by a previous call to retrieve the next page of status events.</p>
+    #   @return [String]
+    class GetInstrumentationConfigurationStatusRequest < Struct.new(
+      nil,
+      :instrumentation_type,
+      :service,
+      :environment,
+      :signal_type,
+      :location_identifier,
+      :status,
+      :start_time,
+      :end_time,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute service
+    #   <p>The service name echoed from the request.</p>
+    #   @return [String]
+    # @!attribute environment
+    #   <p>The environment echoed from the request.</p>
+    #   @return [String]
+    # @!attribute signal_type
+    #   <p>The telemetry signal type echoed from the request.</p>
+    #   @return [String]
+    # @!attribute location
+    #   <p>The code location echoed from the request.</p>
+    #   @return [Types::Location]
+    # @!attribute status
+    #   <p>The status that was queried. If not specified in the request, this is <code>ACTIVE</code>.</p>
+    #   @return [String]
+    # @!attribute events
+    #   <p>The list of status events within the requested time window, sorted with the most recent first. Error events include an error cause.</p>
+    #   @return [Array<Types::InstrumentationStatusEvent>]
+    # @!attribute next_token
+    #   <p>Pagination token to continue retrieving status events.</p>
+    #   @return [String]
+    class GetInstrumentationConfigurationStatusResponse < Struct.new(
+      nil,
+      :service,
+      :environment,
+      :signal_type,
+      :location,
+      :status,
+      :events,
+      :next_token,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -584,6 +1154,193 @@ module Aws::ApplicationSignals
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The full instrumentation configuration, including the instrumentation type, service, environment, signal type, location details, stable location hash, capture settings, filters, expiration, creation time, and ARN.</p>
+    # @!attribute instrumentation_type
+    #   <p>The type of instrumentation for this configuration.</p>
+    #   @return [String]
+    # @!attribute service
+    #   <p>The service that this instrumentation configuration targets.</p>
+    #   @return [String]
+    # @!attribute environment
+    #   <p>The environment where the service is running.</p>
+    #   @return [String]
+    # @!attribute signal_type
+    #   <p>The telemetry signal type for this instrumentation configuration.</p>
+    #   @return [String]
+    # @!attribute location
+    #   <p>The location where this instrumentation is applied.</p>
+    #   @return [Types::Location]
+    # @!attribute location_hash
+    #   <p>The stable hash derived from the location that uniquely identifies this instrumentation point within the service and environment.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>An optional short description of the instrumentation configuration.</p>
+    #   @return [String]
+    # @!attribute expires_at
+    #   <p>The timestamp when this configuration expires.</p>
+    #   @return [Time]
+    # @!attribute attribute_filters
+    #   <p>Client-side filters that determine which instances apply this instrumentation.</p>
+    #   @return [Array<Hash<String, String>>]
+    # @!attribute capture_configuration
+    #   <p>The capture settings for this instrumentation configuration.</p>
+    #   @return [Types::CaptureConfiguration]
+    # @!attribute created_at
+    #   <p>The timestamp when this instrumentation configuration was created.</p>
+    #   @return [Time]
+    # @!attribute arn
+    #   ARN for the instrumentation configuration
+    #   @return [String]
+    class InstrumentationConfiguration < Struct.new(
+      nil,
+      :instrumentation_type,
+      :service,
+      :environment,
+      :signal_type,
+      :location,
+      :location_hash,
+      :description,
+      :expires_at,
+      :attribute_filters,
+      :capture_configuration,
+      :created_at,
+      :arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The status of a single instrumentation configuration reported by an SDK instance.</p>
+    # @!attribute instrumentation_type
+    #   <p>The type of instrumentation configuration being reported.</p>
+    #   @return [String]
+    # @!attribute signal_type
+    #   <p>The telemetry signal type for this instrumentation configuration.</p>
+    #   @return [String]
+    # @!attribute location_hash
+    #   <p>The stable hash of the instrumentation location that identifies the configuration being reported.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status of the instrumentation configuration: <code>READY</code>, <code>ERROR</code>, <code>ACTIVE</code>, or <code>DISABLED</code>.</p>
+    #   @return [String]
+    # @!attribute time
+    #   <p>The timestamp when the status event occurred.</p>
+    #   @return [Time]
+    # @!attribute error_cause
+    #   <p>The error cause when the status is <code>ERROR</code>, such as the file or method not being found.</p>
+    #   @return [String]
+    class InstrumentationConfigurationStatusReport < Struct.new(
+      nil,
+      :instrumentation_type,
+      :signal_type,
+      :location_hash,
+      :status,
+      :time,
+      :error_cause,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>An instrumentation configuration that omits service and environment because they are provided at a higher level, such as in a list response.</p>
+    # @!attribute instrumentation_type
+    #   <p>The type of instrumentation for this configuration.</p>
+    #   @return [String]
+    # @!attribute signal_type
+    #   <p>The telemetry signal type for this instrumentation configuration.</p>
+    #   @return [String]
+    # @!attribute location
+    #   <p>The location where this instrumentation is applied.</p>
+    #   @return [Types::Location]
+    # @!attribute location_hash
+    #   <p>The stable hash derived from the location that identifies this instrumentation point.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>An optional short description of the instrumentation configuration.</p>
+    #   @return [String]
+    # @!attribute expires_at
+    #   <p>The timestamp when this configuration expires.</p>
+    #   @return [Time]
+    # @!attribute attribute_filters
+    #   <p>Client-side filters that determine which instances apply this instrumentation.</p>
+    #   @return [Array<Hash<String, String>>]
+    # @!attribute capture_configuration
+    #   <p>The capture settings for this instrumentation configuration.</p>
+    #   @return [Types::CaptureConfiguration]
+    # @!attribute created_at
+    #   <p>The timestamp when this instrumentation configuration was created.</p>
+    #   @return [Time]
+    # @!attribute arn
+    #   ARN for the instrumentation configuration
+    #   @return [String]
+    class InstrumentationConfigurationWithoutServiceEnv < Struct.new(
+      nil,
+      :instrumentation_type,
+      :signal_type,
+      :location,
+      :location_hash,
+      :description,
+      :expires_at,
+      :attribute_filters,
+      :capture_configuration,
+      :created_at,
+      :arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute service
+    #   <p>The service name associated with the returned configurations.</p>
+    #   @return [String]
+    # @!attribute environment
+    #   <p>The environment associated with the returned configurations.</p>
+    #   @return [String]
+    # @!attribute changed
+    #   <p>Indicates whether there are configuration changes since the provided <code>SyncedAt</code> timestamp.</p>
+    #   @return [Boolean]
+    # @!attribute latest_configurations
+    #   <p>The current set of active instrumentation configurations for the service and environment. Items omit service and environment because they are provided in the request.</p>
+    #   @return [Array<Types::InstrumentationConfigurationWithoutServiceEnv>]
+    # @!attribute synced_at
+    #   <p>The server timestamp to supply on the next sync call.</p>
+    #   @return [Time]
+    # @!attribute sync_interval
+    #   <p>The suggested number of seconds to wait before the next sync request. This is at least 60 seconds to prevent excessive polling.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>Pagination token to continue listing configurations when more results are available.</p>
+    #   @return [String]
+    class InstrumentationConfigurationsPage < Struct.new(
+      nil,
+      :service,
+      :environment,
+      :changed,
+      :latest_configurations,
+      :synced_at,
+      :sync_interval,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A status event for an instrumentation configuration returned by <code>GetInstrumentationConfigurationStatus</code>. Events include the timestamp and, for errors, an error cause.</p>
+    # @!attribute time
+    #   <p>The time when the status was reported, rounded to the nearest minute.</p>
+    #   @return [Time]
+    # @!attribute error_cause
+    #   <p>The error cause when the status is <code>ERROR</code>.</p>
+    #   @return [String]
+    class InstrumentationStatusEvent < Struct.new(
+      nil,
+      :time,
+      :error_cause,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The time period used to evaluate the SLO. It can be either a calendar interval or rolling interval.</p>
     # @!attribute rolling_interval
     #   <p>If the interval is a rolling interval, this structure contains the interval specifications.</p>
@@ -611,11 +1368,14 @@ module Aws::ApplicationSignals
     #   <p>The end of the time period to retrieve audit findings for. When used in a raw HTTP Query API, it is formatted as epoch time in seconds. For example, <code>1698778057</code> </p>
     #   @return [Time]
     # @!attribute auditors
-    #   <p>A list of auditor names to filter the findings by. Only findings generated by the specified auditors will be returned.</p> <p>The following auditors are available for configuration:</p> <ul> <li> <p> <code>slo</code> - SloAuditor: Identifies SLO violations and detects breached thresholds during the Assessment phase.</p> </li> <li> <p> <code>operation_metric</code> - OperationMetricAuditor: Detects anomalies in service operation metrics from Application Signals RED metrics during the Assessment phase</p> </li> <li> <p> <code>service_quota</code> - ServiceQuotaAuditor: Monitors resource utilization against service quotas during the Assessment phase</p> </li> <li> <p> <code>trace</code> - TraceAuditor: Performs deep-dive analysis of distributed traces, correlating traces with breached SLOs or abnormal RED metrics during the Analysis phase</p> </li> <li> <p> <code>dependency_metric</code> - CriticalPathAuditor: Analyzes service dependency impacts and maps dependency relationships from Application Signals RED metrics during the Analysis phase</p> </li> <li> <p> <code>top_contributor</code> - TopContributorAuditor: Identifies infrastructure-level contributors to issues by analyzing EMF logs of Application Signals RED metrics during the Analysis phase</p> </li> <li> <p> <code>log</code> - LogAuditor: Extracts insights from application logs, categorizing error types and ranking severity by frequency during the Analysis phase</p> </li> </ul> <note> <p> <code>InitAuditor</code> and <code>Summarizer</code> auditors are not configurable as they are automatically triggered during the audit process.</p> </note>
+    #   <p>A list of auditor names to filter the findings by. Only findings generated by the specified auditors will be returned.</p> <p>The following auditors are available for configuration:</p> <ul> <li> <p> <code>slo</code> - SloAuditor: Identifies SLO violations and detects breached thresholds during the Assessment phase.</p> </li> <li> <p> <code>operation_metric</code> - OperationMetricAuditor: Detects anomalies in service operation metrics from Application Signals RED metrics during the Assessment phase</p> <note> <p>Anomaly detection is not supported for sparse metrics (those missing more than 80% of datapoints within the given time period).</p> </note> </li> <li> <p> <code>service_quota</code> - ServiceQuotaAuditor: Monitors resource utilization against service quotas during the Assessment phase</p> </li> <li> <p> <code>trace</code> - TraceAuditor: Performs deep-dive analysis of distributed traces, correlating traces with breached SLOs or abnormal RED metrics during the Analysis phase</p> </li> <li> <p> <code>dependency_metric</code> - CriticalPathAuditor: Analyzes service dependency impacts and maps dependency relationships from Application Signals RED metrics during the Analysis phase</p> </li> <li> <p> <code>top_contributor</code> - TopContributorAuditor: Identifies infrastructure-level contributors to issues by analyzing EMF logs of Application Signals RED metrics during the Analysis phase</p> </li> <li> <p> <code>log</code> - LogAuditor: Extracts insights from application logs, categorizing error types and ranking severity by frequency during the Analysis phase</p> </li> <li> <p> <code>change_indicator</code> - ChangeIndicatorAuditor: Detects change events (deployments, configuration changes) that occurred within 10 minutes before and during a detected anomaly, and surfaces them as findings with deployment timestamps in the Analysis phase. When changes are detected, the <code>top_contributor</code> auditor skips its analysis to avoid redundancy.</p> </li> </ul> <note> <p> <code>InitAuditor</code> and <code>Summarizer</code> auditors are not configurable as they are automatically triggered during the audit process.</p> </note>
     #   @return [Array<String>]
     # @!attribute audit_targets
     #   <p>A list of audit targets to filter the findings by. You can specify services, SLOs, or service operations to limit the audit findings to specific entities.</p>
     #   @return [Array<Types::AuditTarget>]
+    # @!attribute detail_level
+    #   <p>The level of details of the audit findings. Supported values: <code>BRIEF</code>, <code>DETAILED</code>.</p>
+    #   @return [String]
     # @!attribute next_token
     #   <p>Include this value, if it was returned by the previous operation, to get the next set of audit findings.</p>
     #   @return [String]
@@ -628,6 +1388,7 @@ module Aws::ApplicationSignals
       :end_time,
       :auditors,
       :audit_targets,
+      :detail_level,
       :next_token,
       :max_results,
       keyword_init: true
@@ -635,6 +1396,12 @@ module Aws::ApplicationSignals
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute start_time
+    #   <p>The start of the time period that the returned audit findings apply to. When used in a raw HTTP Query API, it is formatted as epoch time in seconds. For example, <code>1698778057</code> </p>
+    #   @return [Time]
+    # @!attribute end_time
+    #   <p>The end of the time period that the returned audit findings apply to. When used in a raw HTTP Query API, it is formatted as epoch time in seconds. For example, <code>1698778057</code> </p>
+    #   @return [Time]
     # @!attribute audit_findings
     #   <p>An array of structures, where each structure contains information about one audit finding, including the auditor results, severity, and associated metric and dependency graphs.</p>
     #   @return [Array<Types::AuditFinding>]
@@ -643,7 +1410,59 @@ module Aws::ApplicationSignals
     #   @return [String]
     class ListAuditFindingsOutput < Struct.new(
       nil,
+      :start_time,
+      :end_time,
       :audit_findings,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute entity
+    #   <p>The entity for which to retrieve change events. This specifies the service, resource, or other entity whose event history you want to examine.</p> <p>This is a string-to-string map. It can include the following fields.</p> <ul> <li> <p> <code>Type</code> designates the type of object this is.</p> </li> <li> <p> <code>ResourceType</code> specifies the type of the resource. This field is used only when the value of the <code>Type</code> field is <code>Resource</code> or <code>AWS::Resource</code>.</p> </li> <li> <p> <code>Name</code> specifies the name of the object. This is used only if the value of the <code>Type</code> field is <code>Service</code>, <code>RemoteService</code>, or <code>AWS::Service</code>.</p> </li> <li> <p> <code>Identifier</code> identifies the resource objects of this resource. This is used only if the value of the <code>Type</code> field is <code>Resource</code> or <code>AWS::Resource</code>.</p> </li> <li> <p> <code>Environment</code> specifies the location where this object is hosted, or what it belongs to.</p> </li> <li> <p> <code>AwsAccountId</code> specifies the account where this object is in.</p> </li> </ul> <p>Below is an example of a service.</p> <p> <code>{ "Type": "Service", "Name": "visits-service", "Environment": "petclinic-test" }</code> </p> <p>Below is an example of a resource.</p> <p> <code>{ "Type": "AWS::Resource", "ResourceType": "AWS::DynamoDB::Table", "Identifier": "Customers" }</code> </p>
+    #   @return [Hash<String, String>]
+    # @!attribute start_time
+    #   <p>The start of the time period to retrieve change events for. When used in a raw HTTP Query API, it is formatted as epoch time in seconds. For example: <code>1698778057</code> </p>
+    #   @return [Time]
+    # @!attribute end_time
+    #   <p>The end of the time period to retrieve change events for. When used in a raw HTTP Query API, it is formatted as epoch time in seconds. For example: <code>1698778057</code> </p>
+    #   @return [Time]
+    # @!attribute max_results
+    #   <p>The maximum number of change events to return in one operation. If you omit this parameter, the default of 50 is used.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>Include this value, if it was returned by the previous operation, to get the next set of change events.</p>
+    #   @return [String]
+    class ListEntityEventsInput < Struct.new(
+      nil,
+      :entity,
+      :start_time,
+      :end_time,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute start_time
+    #   <p>The start of the time period that the returned change events apply to. When used in a raw HTTP Query API, it is formatted as epoch time in seconds. For example: <code>1698778057</code> </p>
+    #   @return [Time]
+    # @!attribute end_time
+    #   <p>The end of the time period that the returned change events apply to. When used in a raw HTTP Query API, it is formatted as epoch time in seconds. For example: <code>1698778057</code> </p>
+    #   @return [Time]
+    # @!attribute change_events
+    #   <p>An array of structures, where each structure contains information about one change event that occurred for the specified entity during the requested time period.</p>
+    #   @return [Array<Types::ChangeEvent>]
+    # @!attribute next_token
+    #   <p>Include this value in your next use of this API to get the next set of change events.</p>
+    #   @return [String]
+    class ListEntityEventsOutput < Struct.new(
+      nil,
+      :start_time,
+      :end_time,
+      :change_events,
       :next_token,
       keyword_init: true
     )
@@ -653,9 +1472,17 @@ module Aws::ApplicationSignals
     # @!attribute next_token
     #   <p>Include this value, if it was returned by the previous operation, to get the next set of grouping attribute definitions.</p>
     #   @return [String]
+    # @!attribute aws_account_id
+    #   <p>The Amazon Web Services account ID to retrieve grouping attribute definitions for. Use this when accessing grouping configurations from a different account in cross-account monitoring scenarios.</p>
+    #   @return [String]
+    # @!attribute include_linked_accounts
+    #   <p>If you are using this operation in a monitoring account, specify <code>true</code> to include grouping attributes from source accounts in the returned data.</p>
+    #   @return [Boolean]
     class ListGroupingAttributeDefinitionsInput < Struct.new(
       nil,
       :next_token,
+      :aws_account_id,
+      :include_linked_accounts,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -674,6 +1501,38 @@ module Aws::ApplicationSignals
       nil,
       :grouping_attribute_definitions,
       :updated_at,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute service
+    #   <p>The name of the service to retrieve instrumentation configurations for.</p>
+    #   @return [String]
+    # @!attribute environment
+    #   <p>The environment that the service is running in.</p>
+    #   @return [String]
+    # @!attribute instrumentation_type
+    #   Type of instrumentation configuration (BREAKPOINT or PROBE).
+    #   Required to determine which backing store to query.
+    #   @return [String]
+    # @!attribute synced_at
+    #   <p>The timestamp from the last successful sync. When provided, the response returns <code>Changed</code> as <code>false</code> if nothing is new since this time, or returns the latest configurations when changes exist.</p>
+    #   @return [Time]
+    # @!attribute max_results
+    #   <p>The maximum number of configurations to return in one call. The default is 50 and the maximum is 100.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>Use the token returned by a previous call to retrieve the next page of configurations.</p>
+    #   @return [String]
+    class ListInstrumentationConfigurationsRequest < Struct.new(
+      nil,
+      :service,
+      :environment,
+      :instrumentation_type,
+      :synced_at,
+      :max_results,
       :next_token,
       keyword_init: true
     )
@@ -829,15 +1688,18 @@ module Aws::ApplicationSignals
     # @!attribute next_token
     #   <p>Include this value, if it was returned by the previous operation, to get the next set of service level objectives.</p>
     #   @return [String]
+    # @!attribute metric_source_types
+    #   <p>Use this optional field to only include SLOs with the specified metric source types in the output. Supported types are:</p> <ul> <li> <p>Service operation</p> </li> <li> <p>Service dependency</p> </li> <li> <p>Service</p> </li> <li> <p>CloudWatch metric</p> </li> <li> <p>AppMonitor</p> </li> <li> <p>Canary</p> </li> </ul>
+    #   @return [Array<String>]
     # @!attribute include_linked_accounts
     #   <p>If you are using this operation in a monitoring account, specify <code>true</code> to include SLO from source accounts in the returned data. </p> <p>When you are monitoring an account, you can use Amazon Web Services account ID in <code>KeyAttribute</code> filter for service source account and <code>SloOwnerawsaccountID</code> for SLO source account with <code>IncludeLinkedAccounts</code> to filter the returned data to only a single source account. </p>
     #   @return [Boolean]
     # @!attribute slo_owner_aws_account_id
     #   <p>SLO's Amazon Web Services account ID.</p>
     #   @return [String]
-    # @!attribute metric_source_types
-    #   <p>Use this optional field to only include SLOs with the specified metric source types in the output. Supported types are:</p> <ul> <li> <p>Service operation</p> </li> <li> <p>Service dependency</p> </li> <li> <p>CloudWatch metric</p> </li> </ul>
-    #   @return [Array<String>]
+    # @!attribute metric_source
+    #   <p>Identifies the metric source to filter SLOs by.</p>
+    #   @return [Types::MetricSource]
     class ListServiceLevelObjectivesInput < Struct.new(
       nil,
       :key_attributes,
@@ -845,9 +1707,10 @@ module Aws::ApplicationSignals
       :dependency_config,
       :max_results,
       :next_token,
+      :metric_source_types,
       :include_linked_accounts,
       :slo_owner_aws_account_id,
-      :metric_source_types,
+      :metric_source,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1052,6 +1915,42 @@ module Aws::ApplicationSignals
       include ::Smithy::Schema::Structure
     end
 
+    # <p>A union that identifies the location to instrument. Specify a <code>CodeLocation</code> for code-level instrumentation.</p>
+    # @!attribute code_location
+    #   <p>A code location for code-level instrumentation, including language, code unit, class, method, file path, and optional line number.</p>
+    #   @return [Types::CodeLocation]
+    class Location < Struct.new(
+      :code_location,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class CodeLocation < Location; end
+      class Unknown < Location; end
+    end
+
+    # Union type for identifying an instrumentation configuration by code location or locationHash.
+    # Used in Get/Delete/GetStatus operations to allow flexible identification.
+    # @!attribute code_location
+    #   The full code location specification (will be hashed internally)
+    #   @return [Types::CodeLocation]
+    # @!attribute location_hash
+    #   The pre-computed location hash (16-character hex string)
+    #   @return [String]
+    class LocationIdentifier < Struct.new(
+      :code_location,
+      :location_hash,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class CodeLocation < LocationIdentifier; end
+      class LocationHash < LocationIdentifier; end
+      class Unknown < LocationIdentifier; end
+    end
+
     # <p>This structure defines the metric used for a service level indicator, including the metric name, namespace, and dimensions</p>
     # @!attribute namespace
     #   <p>The namespace of the metric. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Namespace">Namespaces</a>.</p>
@@ -1157,6 +2056,22 @@ module Aws::ApplicationSignals
       :dimensions,
       :metric_name,
       :account_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Identifies the metric source for SLOs on resources other than Application Signals services.</p>
+    # @!attribute metric_source_key_attributes
+    #   <p>Key attributes that identify the metric source.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute metric_source_attributes
+    #   <p>Additional attributes for the metric source.</p>
+    #   @return [Hash<String, String>]
+    class MetricSource < Struct.new(
+      nil,
+      :metric_source_key_attributes,
+      :metric_source_attributes,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1276,6 +2191,44 @@ module Aws::ApplicationSignals
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute service
+    #   <p>The service that the reported configurations belong to.</p>
+    #   @return [String]
+    # @!attribute environment
+    #   <p>The environment that the service is running in.</p>
+    #   @return [String]
+    # @!attribute configurations
+    #   <p>An array of configuration status reports (up to 100) that include the instrumentation type, signal type, location hash, status, timestamp, and optional error cause.</p>
+    #   @return [Array<Types::InstrumentationConfigurationStatusReport>]
+    class ReportInstrumentationConfigurationStatusRequest < Struct.new(
+      nil,
+      :service,
+      :environment,
+      :configurations,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute service
+    #   <p>The service name echoed from the request.</p>
+    #   @return [String]
+    # @!attribute environment
+    #   <p>The environment echoed from the request.</p>
+    #   @return [String]
+    # @!attribute unprocessed_status_events
+    #   <p>Status events that failed to be processed. Each entry includes the configuration identifiers, status, timestamp, and a reason for the failure.</p>
+    #   @return [Array<Types::UnprocessedStatusEvent>]
+    class ReportInstrumentationConfigurationStatusResponse < Struct.new(
+      nil,
+      :service,
+      :environment,
+      :unprocessed_status_events,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>This structure contains information about the performance metric that a request-based SLO monitors.</p>
     # @!attribute request_based_sli_metric
     #   <p>A structure that contains information about the metric that the SLO monitors. </p>
@@ -1335,6 +2288,12 @@ module Aws::ApplicationSignals
     # @!attribute dependency_config
     #   <p>Identifies the dependency using the <code>DependencyKeyAttributes</code> and <code>DependencyOperationName</code>. </p>
     #   @return [Types::DependencyConfig]
+    # @!attribute metric_source
+    #   <p>Identifies the metric source for SLOs on resources other than Application Signals services.</p>
+    #   @return [Types::MetricSource]
+    # @!attribute composite_sli_config
+    #   <p>The composite SLI configuration for service-level SLOs that monitor multiple operations of a service.</p>
+    #   @return [Types::CompositeSliConfig]
     class RequestBasedServiceLevelIndicatorMetric < Struct.new(
       nil,
       :key_attributes,
@@ -1343,6 +2302,8 @@ module Aws::ApplicationSignals
       :total_request_count_metric,
       :monitored_request_count_metric,
       :dependency_config,
+      :metric_source,
+      :composite_sli_config,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1367,6 +2328,15 @@ module Aws::ApplicationSignals
     # @!attribute dependency_config
     #   <p>Identifies the dependency using the <code>DependencyKeyAttributes</code> and <code>DependencyOperationName</code>. </p>
     #   @return [Types::DependencyConfig]
+    # @!attribute metric_source
+    #   <p>Identifies the metric source for SLOs on resources other than Application Signals services.</p>
+    #   @return [Types::MetricSource]
+    # @!attribute metric_name
+    #   <p>The name of the metric for SLOs on resources other than Application Signals services.</p>
+    #   @return [String]
+    # @!attribute composite_sli_config
+    #   <p>The composite SLI configuration for service-level SLOs that monitor multiple operations of a service.</p>
+    #   @return [Types::CompositeSliConfig]
     class RequestBasedServiceLevelIndicatorMetricConfig < Struct.new(
       nil,
       :key_attributes,
@@ -1375,6 +2345,9 @@ module Aws::ApplicationSignals
       :total_request_count_metric,
       :monitored_request_count_metric,
       :dependency_config,
+      :metric_source,
+      :metric_name,
+      :composite_sli_config,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1410,6 +2383,22 @@ module Aws::ApplicationSignals
       nil,
       :duration_unit,
       :duration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Defines how operations are selected for a service-level SLO.</p>
+    # @!attribute type
+    #   <p>The strategy for selecting operations to include in a service-level SLO.</p> <ul> <li> <p> <code>EXPLICIT</code> — You provide a specific list of operations in the <code>Components</code> field of <code>CompositeSliConfig</code>.</p> </li> <li> <p> <code>PREFIX</code> — You provide a prefix string in the <code>Pattern</code> field of <code>SelectionConfig</code>, and all operations whose names start with the prefix are included.</p> </li> <li> <p> <code>REGEX</code> — You provide a regular expression in the <code>Pattern</code> field of <code>SelectionConfig</code>, and all operations whose names match the pattern are included.</p> </li> </ul>
+    #   @return [String]
+    # @!attribute pattern
+    #   <p>A prefix string or regular expression that specifies which operations to include in a service-level SLO. When <code>SelectionType</code> is <code>PREFIX</code>, this value is a prefix string that matches the beginning of operation names. When <code>SelectionType</code> is <code>REGEX</code>, this value is a regular expression that matches operation names.</p>
+    #   @return [String]
+    class SelectionConfig < Struct.new(
+      nil,
+      :type,
+      :pattern,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1564,10 +2553,10 @@ module Aws::ApplicationSignals
     #   <p>Use this structure to specify the metric to be used for the SLO.</p>
     #   @return [Types::ServiceLevelIndicatorMetricConfig]
     # @!attribute metric_threshold
-    #   <p>This parameter is used only when a request-based SLO tracks the <code>Latency</code> metric. Specify the threshold value that the observed <code>Latency</code> metric values are to be compared to.</p>
+    #   <p>This parameter is used only when a request-based SLO tracks the <code>Latency</code> metric. Specify the threshold value that the observed <code>Latency</code> metric values are to be compared to.</p> <p>This is not required if <code>CreateRecommendedSlo</code> is set to <code>true</code>.</p>
     #   @return [Float]
     # @!attribute comparison_operator
-    #   <p>The arithmetic operation to use when comparing the specified metric to the threshold.</p>
+    #   <p>The arithmetic operation to use when comparing the specified metric to the threshold.</p> <p>This is not required if <code>CreateRecommendedSlo</code> is set to <code>true</code>.</p>
     #   @return [String]
     class ServiceLevelIndicatorConfig < Struct.new(
       nil,
@@ -1577,6 +2566,12 @@ module Aws::ApplicationSignals
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:metric_threshold] = 0 unless options.key?(:metric_threshold)
+        options[:comparison_operator] = 'LessThan' unless options.key?(:comparison_operator)
+        super
+      end
     end
 
     # <p>This structure contains the information about the metric that is used for a period-based SLO.</p>
@@ -1595,6 +2590,12 @@ module Aws::ApplicationSignals
     # @!attribute dependency_config
     #   <p>Identifies the dependency using the <code>DependencyKeyAttributes</code> and <code>DependencyOperationName</code>. </p>
     #   @return [Types::DependencyConfig]
+    # @!attribute metric_source
+    #   <p>Identifies the metric source for SLOs on resources other than Application Signals services.</p>
+    #   @return [Types::MetricSource]
+    # @!attribute composite_sli_config
+    #   <p>The composite SLI configuration for service-level SLOs that monitor multiple operations of a service.</p>
+    #   @return [Types::CompositeSliConfig]
     class ServiceLevelIndicatorMetric < Struct.new(
       nil,
       :key_attributes,
@@ -1602,6 +2603,8 @@ module Aws::ApplicationSignals
       :metric_type,
       :metric_data_queries,
       :dependency_config,
+      :metric_source,
+      :composite_sli_config,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1626,12 +2629,18 @@ module Aws::ApplicationSignals
     # @!attribute period_seconds
     #   <p>The number of seconds to use as the period for SLO evaluation. Your application's performance is compared to the SLI during each period. For each period, the application is determined to have either achieved or not achieved the necessary performance.</p>
     #   @return [Integer]
+    # @!attribute metric_source
+    #   <p>Identifies the metric source for SLOs on resources other than Application Signals services.</p>
+    #   @return [Types::MetricSource]
     # @!attribute metric_data_queries
     #   <p>If this SLO monitors a CloudWatch metric or the result of a CloudWatch metric math expression, use this structure to specify that metric or expression. </p>
     #   @return [Array<Types::MetricDataQuery>]
     # @!attribute dependency_config
     #   <p>Identifies the dependency using the <code>DependencyKeyAttributes</code> and <code>DependencyOperationName</code>. </p>
     #   @return [Types::DependencyConfig]
+    # @!attribute composite_sli_config
+    #   <p>The composite SLI configuration for service-level SLOs that monitor multiple operations of a service.</p>
+    #   @return [Types::CompositeSliConfig]
     class ServiceLevelIndicatorMetricConfig < Struct.new(
       nil,
       :key_attributes,
@@ -1640,8 +2649,10 @@ module Aws::ApplicationSignals
       :metric_name,
       :statistic,
       :period_seconds,
+      :metric_source,
       :metric_data_queries,
       :dependency_config,
+      :composite_sli_config,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1679,8 +2690,11 @@ module Aws::ApplicationSignals
     #   <p>Each object in this array defines the length of the look-back window used to calculate one burn rate metric for this SLO. The burn rate measures how fast the service is consuming the error budget, relative to the attainment goal of the SLO.</p>
     #   @return [Array<Types::BurnRateConfiguration>]
     # @!attribute metric_source_type
-    #   <p>Displays the SLI metric source type for this SLO. Supported types are:</p> <ul> <li> <p>Service operation</p> </li> <li> <p>Service dependency</p> </li> <li> <p>CloudWatch metric</p> </li> </ul>
+    #   <p>Displays the SLI metric source type for this SLO. Supported types are:</p> <ul> <li> <p>Service operation</p> </li> <li> <p>Service dependency</p> </li> <li> <p>Service</p> </li> <li> <p>CloudWatch metric</p> </li> <li> <p>AppMonitor</p> </li> <li> <p>Canary</p> </li> </ul>
     #   @return [String]
+    # @!attribute auto_investigation_enabled
+    #   Indicates whether DevOps Agent will automatically investigate this SLO when it is breached
+    #   @return [Boolean]
     class ServiceLevelObjective < Struct.new(
       nil,
       :arn,
@@ -1694,6 +2708,7 @@ module Aws::ApplicationSignals
       :goal,
       :burn_rate_configurations,
       :metric_source_type,
+      :auto_investigation_enabled,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1818,8 +2833,14 @@ module Aws::ApplicationSignals
     #   <p>Displays whether this is a period-based SLO or a request-based SLO.</p>
     #   @return [String]
     # @!attribute metric_source_type
-    #   <p>Displays the SLI metric source type for this SLO. Supported types are:</p> <ul> <li> <p>Service operation</p> </li> <li> <p>Service dependency</p> </li> <li> <p>CloudWatch metric</p> </li> </ul>
+    #   <p>Displays the SLI metric source type for this SLO. Supported types are:</p> <ul> <li> <p>Service operation</p> </li> <li> <p>Service dependency</p> </li> <li> <p>Service</p> </li> <li> <p>CloudWatch metric</p> </li> <li> <p>AppMonitor</p> </li> <li> <p>Canary</p> </li> </ul>
     #   @return [String]
+    # @!attribute metric_source
+    #   <p>Identifies the metric source for SLOs on resources other than Application Signals services.</p>
+    #   @return [Types::MetricSource]
+    # @!attribute composite_sli_config
+    #   <p>The composite SLI configuration for service-level SLOs that monitor multiple operations of a service.</p>
+    #   @return [Types::CompositeSliConfig]
     class ServiceLevelObjectiveSummary < Struct.new(
       nil,
       :arn,
@@ -1830,6 +2851,8 @@ module Aws::ApplicationSignals
       :created_time,
       :evaluation_type,
       :metric_source_type,
+      :metric_source,
+      :composite_sli_config,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1989,6 +3012,38 @@ module Aws::ApplicationSignals
       include ::Smithy::Schema::Structure
     end
 
+    # <p>A status event that could not be processed by the service.</p>
+    # @!attribute instrumentation_type
+    #   <p>The type of instrumentation configuration for the unprocessed status event.</p>
+    #   @return [String]
+    # @!attribute signal_type
+    #   <p>The telemetry signal type for the unprocessed status event.</p>
+    #   @return [String]
+    # @!attribute location_hash
+    #   <p>The stable hash of the instrumentation location for the unprocessed event.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status that failed to be processed.</p>
+    #   @return [String]
+    # @!attribute time
+    #   <p>The timestamp of the status event that failed to be processed.</p>
+    #   @return [Time]
+    # @!attribute failed_reason
+    #   <p>The reason why this status event could not be processed, such as throttling or validation errors.</p>
+    #   @return [String]
+    class UnprocessedStatusEvent < Struct.new(
+      nil,
+      :instrumentation_type,
+      :signal_type,
+      :location_hash,
+      :status,
+      :time,
+      :failed_reason,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute resource_arn
     #   <p>The Amazon Resource Name (ARN) of the CloudWatch resource that you want to delete tags from.</p> <p>The ARN format of an Application Signals SLO is <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:slo:<i>slo-name</i> </code> </p> <p>For more information about ARN format, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazoncloudwatch.html#amazoncloudwatch-resources-for-iam-policies"> Resource Types Defined by Amazon CloudWatch</a> in the <i>Amazon Web Services General Reference</i>.</p>
     #   @return [String]
@@ -2029,6 +3084,9 @@ module Aws::ApplicationSignals
     # @!attribute burn_rate_configurations
     #   <p>Use this array to create <i>burn rates</i> for this SLO. Each burn rate is a metric that indicates how fast the service is consuming the error budget, relative to the attainment goal of the SLO.</p>
     #   @return [Array<Types::BurnRateConfiguration>]
+    # @!attribute auto_investigation_enabled
+    #   Indicates whether DevOps Agent will automatically investigate this SLO when it is breached
+    #   @return [Boolean]
     class UpdateServiceLevelObjectiveInput < Struct.new(
       nil,
       :id,
@@ -2037,6 +3095,7 @@ module Aws::ApplicationSignals
       :request_based_sli_config,
       :goal,
       :burn_rate_configurations,
+      :auto_investigation_enabled,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

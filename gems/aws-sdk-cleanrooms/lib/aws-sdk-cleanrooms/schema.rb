@@ -16,6 +16,7 @@ module Aws::CleanRooms
     AccessDeniedException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#AccessDeniedException", name: "AccessDeniedException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 403})
     AccessDeniedExceptionReason = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanrooms#AccessDeniedExceptionReason", name: "AccessDeniedExceptionReason", traits: {"smithy.api#enum" => [{"value" => "INSUFFICIENT_PERMISSIONS", "name" => "INSUFFICIENT_PERMISSIONS"}]})
     AccountId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanrooms#AccountId", name: "AccountId", traits: {"smithy.api#length" => {"min" => 12, "max" => 12}, "smithy.api#pattern" => "^\\d+$"})
+    AccountIdList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cleanrooms#AccountIdList", name: "AccountIdList")
     AdditionalAnalyses = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cleanrooms#AdditionalAnalyses", name: "AdditionalAnalyses")
     AdditionalAnalysesResourceArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanrooms#AdditionalAnalysesResourceArn", name: "AdditionalAnalysesResourceArn", traits: {"smithy.api#length" => {"max" => 256}, "smithy.api#pattern" => "^arn:aws:cleanrooms:[\\w]{2}-[\\w]{4,9}-[\\d]:([\\d]{12}|\\*):membership\\/[\\*\\d\\w-]+\\/configuredaudiencemodelassociation\\/[\\*\\d\\w-]+$|^arn:aws[-a-z]*:cleanrooms-ml:[-a-z0-9]+:([0-9]{12}|\\*):membership\\/[\\*\\d\\w-]+\\/configured-model-algorithm-association\\/([-a-zA-Z0-9_\\/.]+|\\*)$"})
     AggregateColumn = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#AggregateColumn", name: "AggregateColumn")
@@ -23,17 +24,31 @@ module Aws::CleanRooms
     AggregateFunctionName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanrooms#AggregateFunctionName", name: "AggregateFunctionName", traits: {"smithy.api#enum" => [{"name" => "SUM", "value" => "SUM"}, {"name" => "SUM_DISTINCT", "value" => "SUM_DISTINCT"}, {"name" => "COUNT", "value" => "COUNT"}, {"name" => "COUNT_DISTINCT", "value" => "COUNT_DISTINCT"}, {"name" => "AVG", "value" => "AVG"}]})
     AggregationConstraint = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#AggregationConstraint", name: "AggregationConstraint")
     AggregationConstraints = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cleanrooms#AggregationConstraints", name: "AggregationConstraints", traits: {"smithy.api#length" => {"min" => 1}})
+    AggregationThreshold = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#AggregationThreshold", name: "AggregationThreshold")
+    AggregationThresholdList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cleanrooms#AggregationThresholdList", name: "AggregationThresholdList", traits: {"smithy.api#length" => {"min" => 1, "max" => 1}})
+    AggregationThresholdType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cleanrooms#AggregationThresholdType", name: "AggregationThresholdType")
     AggregationType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanrooms#AggregationType", name: "AggregationType", traits: {"smithy.api#enum" => [{"name" => "COUNT_DISTINCT", "value" => "COUNT_DISTINCT"}]})
     AllowedAdditionalAnalyses = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cleanrooms#AllowedAdditionalAnalyses", name: "AllowedAdditionalAnalyses", traits: {"smithy.api#length" => {"min" => 0, "max" => 25}})
+    AllowedAggregateExpressionType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cleanrooms#AllowedAggregateExpressionType", name: "AllowedAggregateExpressionType")
     AllowedAnalysesList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cleanrooms#AllowedAnalysesList", name: "AllowedAnalysesList")
     AllowedAnalysisProviderList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cleanrooms#AllowedAnalysisProviderList", name: "AllowedAnalysisProviderList")
     AllowedColumnList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cleanrooms#AllowedColumnList", name: "AllowedColumnList", traits: {"smithy.api#length" => {"min" => 1}})
     AllowedResultReceivers = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cleanrooms#AllowedResultReceivers", name: "AllowedResultReceivers")
     AllowedResultRegions = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cleanrooms#AllowedResultRegions", name: "AllowedResultRegions", traits: {"smithy.api#uniqueItems" => {}})
     AnalysisFormat = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cleanrooms#AnalysisFormat", name: "AnalysisFormat")
+    AnalysisIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanrooms#AnalysisIdentifier", name: "AnalysisIdentifier", traits: {"smithy.api#length" => {"min" => 36, "max" => 36}, "smithy.api#pattern" => "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"})
+    AnalysisLogExport = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#AnalysisLogExport", name: "AnalysisLogExport")
+    AnalysisLogExportError = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#AnalysisLogExportError", name: "AnalysisLogExportError")
+    AnalysisLogExportIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanrooms#AnalysisLogExportIdentifier", name: "AnalysisLogExportIdentifier", traits: {"smithy.api#length" => {"min" => 36, "max" => 36}, "smithy.api#pattern" => "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"})
+    AnalysisLogExportOutputConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#AnalysisLogExportOutputConfiguration", name: "AnalysisLogExportOutputConfiguration")
+    AnalysisLogExportResultConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#AnalysisLogExportResultConfiguration", name: "AnalysisLogExportResultConfiguration")
+    AnalysisLogExportS3OutputConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#AnalysisLogExportS3OutputConfiguration", name: "AnalysisLogExportS3OutputConfiguration")
+    AnalysisLogExportStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cleanrooms#AnalysisLogExportStatus", name: "AnalysisLogExportStatus")
+    AnalysisLogExportSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#AnalysisLogExportSummary", name: "AnalysisLogExportSummary")
+    AnalysisLogExportSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cleanrooms#AnalysisLogExportSummaryList", name: "AnalysisLogExportSummaryList")
     AnalysisMethod = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cleanrooms#AnalysisMethod", name: "AnalysisMethod")
     AnalysisParameter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#AnalysisParameter", name: "AnalysisParameter", traits: {"smithy.api#sensitive" => {}})
-    AnalysisParameterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cleanrooms#AnalysisParameterList", name: "AnalysisParameterList", traits: {"smithy.api#length" => {"min" => 0, "max" => 10}})
+    AnalysisParameterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cleanrooms#AnalysisParameterList", name: "AnalysisParameterList", traits: {"smithy.api#length" => {"min" => 0, "max" => 50}})
     AnalysisRule = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#AnalysisRule", name: "AnalysisRule")
     AnalysisRuleAggregation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#AnalysisRuleAggregation", name: "AnalysisRuleAggregation")
     AnalysisRuleColumnList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cleanrooms#AnalysisRuleColumnList", name: "AnalysisRuleColumnList")
@@ -50,7 +65,7 @@ module Aws::CleanRooms
     AnalysisSource = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.cleanrooms#AnalysisSource", name: "AnalysisSource")
     AnalysisSourceMetadata = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.cleanrooms#AnalysisSourceMetadata", name: "AnalysisSourceMetadata")
     AnalysisTemplate = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#AnalysisTemplate", name: "AnalysisTemplate")
-    AnalysisTemplateArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanrooms#AnalysisTemplateArn", name: "AnalysisTemplateArn", traits: {"smithy.api#length" => {"max" => 200}, "smithy.api#pattern" => "^arn:aws:cleanrooms:[\\w]{2}-[\\w]{4,9}-[\\d]:[\\d]{12}:membership/[\\d\\w-]+/analysistemplate/[\\d\\w-]+$"})
+    AnalysisTemplateArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanrooms#AnalysisTemplateArn", name: "AnalysisTemplateArn", traits: {"smithy.api#length" => {"min" => 0, "max" => 200}, "smithy.api#pattern" => "^arn:aws[-a-z]*:cleanrooms:[\\w]{2}-[\\w]{4,9}-[\\d]:[\\d]{12}:membership/[\\d\\w-]+/analysistemplate/[\\d\\w-]+$"})
     AnalysisTemplateArnList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cleanrooms#AnalysisTemplateArnList", name: "AnalysisTemplateArnList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
     AnalysisTemplateArnOrQueryWildcard = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanrooms#AnalysisTemplateArnOrQueryWildcard", name: "AnalysisTemplateArnOrQueryWildcard", traits: {"smithy.api#length" => {"max" => 200}, "smithy.api#pattern" => "^(ANY_QUERY|ANY_JOB|arn:aws:cleanrooms:[\\w]{2}-[\\w]{4,9}-[\\d]:[\\d]{12}:membership/[\\d\\w-]+/analysistemplate/[\\d\\w-]+)$"})
     AnalysisTemplateArtifact = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#AnalysisTemplateArtifact", name: "AnalysisTemplateArtifact")
@@ -60,7 +75,7 @@ module Aws::CleanRooms
     AnalysisTemplateIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanrooms#AnalysisTemplateIdentifier", name: "AnalysisTemplateIdentifier", traits: {"smithy.api#length" => {"min" => 36, "max" => 36}, "smithy.api#pattern" => "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"})
     AnalysisTemplateSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#AnalysisTemplateSummary", name: "AnalysisTemplateSummary")
     AnalysisTemplateSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cleanrooms#AnalysisTemplateSummaryList", name: "AnalysisTemplateSummaryList")
-    AnalysisTemplateText = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanrooms#AnalysisTemplateText", name: "AnalysisTemplateText", traits: {"smithy.api#length" => {"min" => 0, "max" => 90000}, "smithy.api#sensitive" => {}})
+    AnalysisTemplateText = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanrooms#AnalysisTemplateText", name: "AnalysisTemplateText", traits: {"smithy.api#length" => {"min" => 0, "max" => 500000}, "smithy.api#sensitive" => {}})
     AnalysisTemplateValidationStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cleanrooms#AnalysisTemplateValidationStatus", name: "AnalysisTemplateValidationStatus")
     AnalysisTemplateValidationStatusDetail = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#AnalysisTemplateValidationStatusDetail", name: "AnalysisTemplateValidationStatusDetail")
     AnalysisTemplateValidationStatusDetailList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cleanrooms#AnalysisTemplateValidationStatusDetailList", name: "AnalysisTemplateValidationStatusDetailList")
@@ -69,6 +84,10 @@ module Aws::CleanRooms
     AnalysisTemplateValidationType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cleanrooms#AnalysisTemplateValidationType", name: "AnalysisTemplateValidationType")
     AnalysisType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cleanrooms#AnalysisType", name: "AnalysisType")
     AnalyticsEngine = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cleanrooms#AnalyticsEngine", name: "AnalyticsEngine")
+    ApprovalStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cleanrooms#ApprovalStatus", name: "ApprovalStatus")
+    ApprovalStatusDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#ApprovalStatusDetails", name: "ApprovalStatusDetails")
+    ApprovalStatuses = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.cleanrooms#ApprovalStatuses", name: "ApprovalStatuses", traits: {"smithy.api#length" => {"min" => 1, "max" => 50}})
+    AthenaCatalogName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanrooms#AthenaCatalogName", name: "AthenaCatalogName", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[a-zA-Z0-9_-]+$"})
     AthenaDatabaseName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanrooms#AthenaDatabaseName", name: "AthenaDatabaseName", traits: {"smithy.api#length" => {"max" => 128}, "smithy.api#pattern" => "^[a-zA-Z0-9_](([a-zA-Z0-9_]+-)*([a-zA-Z0-9_]+))?$"})
     AthenaOutputLocation = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanrooms#AthenaOutputLocation", name: "AthenaOutputLocation", traits: {"smithy.api#length" => {"min" => 8, "max" => 1024}, "smithy.api#pattern" => "^s3://[a-z0-9.-]{3,63}(.*)$"})
     AthenaTableName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanrooms#AthenaTableName", name: "AthenaTableName", traits: {"smithy.api#length" => {"max" => 128}, "smithy.api#pattern" => "^[a-zA-Z0-9_](([a-zA-Z0-9_]+)*([a-zA-Z0-9_]+))?$"})
@@ -77,6 +96,8 @@ module Aws::CleanRooms
     AutoApprovedChangeType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cleanrooms#AutoApprovedChangeType", name: "AutoApprovedChangeType")
     AutoApprovedChangeTypeList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cleanrooms#AutoApprovedChangeTypeList", name: "AutoApprovedChangeTypeList", traits: {"smithy.api#uniqueItems" => {}})
     AutoRefreshMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cleanrooms#AutoRefreshMode", name: "AutoRefreshMode")
+    BaseTableDependencyType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cleanrooms#BaseTableDependencyType", name: "BaseTableDependencyType")
+    BaseTableParentType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cleanrooms#BaseTableParentType", name: "BaseTableParentType")
     BatchGetCollaborationAnalysisTemplateError = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#BatchGetCollaborationAnalysisTemplateError", name: "BatchGetCollaborationAnalysisTemplateError")
     BatchGetCollaborationAnalysisTemplateErrorList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cleanrooms#BatchGetCollaborationAnalysisTemplateErrorList", name: "BatchGetCollaborationAnalysisTemplateErrorList", traits: {"smithy.api#length" => {"max" => 10}})
     BatchGetCollaborationAnalysisTemplateOperationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#BatchGetCollaborationAnalysisTemplateOperationInput", name: "BatchGetCollaborationAnalysisTemplateOperationInput")
@@ -94,16 +115,20 @@ module Aws::CleanRooms
     Budget = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.cleanrooms#Budget", name: "Budget", traits: {"smithy.api#range" => {"min" => 0, "max" => 1000000}})
     BudgetParameter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#BudgetParameter", name: "BudgetParameter")
     BudgetParameters = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cleanrooms#BudgetParameters", name: "BudgetParameters", traits: {"smithy.api#length" => {"min" => 1, "max" => 2}})
-    BudgetedResourceArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanrooms#BudgetedResourceArn", name: "BudgetedResourceArn", traits: {"smithy.api#length" => {"max" => 200}, "smithy.api#pattern" => "^arn:aws:[\\w]+:[\\w]{2}-[\\w]{4,9}-[\\d]:[\\d]{12}:membership/[\\d\\w-]+/configuredtableassociation/[\\d\\w-]+$"})
+    BudgetedResourceArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanrooms#BudgetedResourceArn", name: "BudgetedResourceArn", traits: {"smithy.api#length" => {"max" => 200}, "smithy.api#pattern" => "^arn:aws:[\\w]+:[\\w]{2}-[\\w]{4,9}-[\\d]:[\\d]{12}:membership/[\\d\\w-]+/(configuredtableassociation|intermediatetable)/[\\d\\w-]+$"})
     Change = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#Change", name: "Change")
     ChangeInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#ChangeInput", name: "ChangeInput")
     ChangeInputList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cleanrooms#ChangeInputList", name: "ChangeInputList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}, "smithy.api#uniqueItems" => {}})
     ChangeList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cleanrooms#ChangeList", name: "ChangeList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}, "smithy.api#uniqueItems" => {}})
+    ChangeRequestAction = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cleanrooms#ChangeRequestAction", name: "ChangeRequestAction")
     ChangeRequestStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cleanrooms#ChangeRequestStatus", name: "ChangeRequestStatus")
     ChangeSpecification = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.cleanrooms#ChangeSpecification", name: "ChangeSpecification")
     ChangeSpecificationType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cleanrooms#ChangeSpecificationType", name: "ChangeSpecificationType")
     ChangeType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cleanrooms#ChangeType", name: "ChangeType")
     ChangeTypeList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cleanrooms#ChangeTypeList", name: "ChangeTypeList", traits: {"smithy.api#length" => {"min" => 1}, "smithy.api#uniqueItems" => {}})
+    ChildResource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#ChildResource", name: "ChildResource")
+    ChildResourceList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cleanrooms#ChildResourceList", name: "ChildResourceList")
+    ChildResourceType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cleanrooms#ChildResourceType", name: "ChildResourceType")
     CleanroomsArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanrooms#CleanroomsArn", name: "CleanroomsArn", traits: {"smithy.api#length" => {"max" => 100}, "smithy.api#pattern" => "^arn:aws:cleanrooms:[\\w]{2}-[\\w]{4,9}-[\\d]:[\\d]{12}:[\\d\\w/-]+$"})
     Collaboration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#Collaboration", name: "Collaboration")
     CollaborationAnalysisTemplate = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#CollaborationAnalysisTemplate", name: "CollaborationAnalysisTemplate")
@@ -115,10 +140,11 @@ module Aws::CleanRooms
     CollaborationChangeRequestIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanrooms#CollaborationChangeRequestIdentifier", name: "CollaborationChangeRequestIdentifier", traits: {"smithy.api#length" => {"min" => 36, "max" => 36}, "smithy.api#pattern" => "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"})
     CollaborationChangeRequestSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#CollaborationChangeRequestSummary", name: "CollaborationChangeRequestSummary")
     CollaborationChangeRequestSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cleanrooms#CollaborationChangeRequestSummaryList", name: "CollaborationChangeRequestSummaryList")
+    CollaborationChangeSpecification = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#CollaborationChangeSpecification", name: "CollaborationChangeSpecification")
     CollaborationConfiguredAudienceModelAssociation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#CollaborationConfiguredAudienceModelAssociation", name: "CollaborationConfiguredAudienceModelAssociation")
     CollaborationConfiguredAudienceModelAssociationSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#CollaborationConfiguredAudienceModelAssociationSummary", name: "CollaborationConfiguredAudienceModelAssociationSummary")
     CollaborationConfiguredAudienceModelAssociationSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cleanrooms#CollaborationConfiguredAudienceModelAssociationSummaryList", name: "CollaborationConfiguredAudienceModelAssociationSummaryList")
-    CollaborationDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanrooms#CollaborationDescription", name: "CollaborationDescription", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => "^(?!\\s*$)[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDBFF-\\uDC00\\uDFFF\\t\\r\\n]*$"})
+    CollaborationDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanrooms#CollaborationDescription", name: "CollaborationDescription", traits: {"smithy.api#length" => {"min" => 0, "max" => 255}, "smithy.api#pattern" => "^(?!\\s+$)[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDBFF-\\uDC00\\uDFFF\\t\\r\\n]*$"})
     CollaborationIdNamespaceAssociation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#CollaborationIdNamespaceAssociation", name: "CollaborationIdNamespaceAssociation")
     CollaborationIdNamespaceAssociationSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#CollaborationIdNamespaceAssociationSummary", name: "CollaborationIdNamespaceAssociationSummary")
     CollaborationIdNamespaceAssociationSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cleanrooms#CollaborationIdNamespaceAssociationSummaryList", name: "CollaborationIdNamespaceAssociationSummaryList")
@@ -134,10 +160,15 @@ module Aws::CleanRooms
     CollaborationSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#CollaborationSummary", name: "CollaborationSummary")
     CollaborationSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cleanrooms#CollaborationSummaryList", name: "CollaborationSummaryList")
     Column = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#Column", name: "Column")
+    ColumnClassificationDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#ColumnClassificationDetails", name: "ColumnClassificationDetails")
+    ColumnLineageEntry = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#ColumnLineageEntry", name: "ColumnLineageEntry")
+    ColumnLineageList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cleanrooms#ColumnLineageList", name: "ColumnLineageList")
     ColumnList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cleanrooms#ColumnList", name: "ColumnList")
+    ColumnMappingList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cleanrooms#ColumnMappingList", name: "ColumnMappingList", traits: {"smithy.api#length" => {"min" => 5, "max" => 1000}})
     ColumnName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanrooms#ColumnName", name: "ColumnName", traits: {"smithy.api#length" => {"max" => 128}, "smithy.api#pattern" => "^[a-z0-9_](([a-z0-9_ ]+-)*([a-z0-9_ ]+))?$"})
     ColumnTypeString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanrooms#ColumnTypeString", name: "ColumnTypeString", traits: {"smithy.api#length" => {"max" => 255}, "smithy.api#pattern" => "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDBFF-\\uDC00\\uDFFF\\t]*$"})
     CommercialRegion = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cleanrooms#CommercialRegion", name: "CommercialRegion")
+    ComparisonControls = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#ComparisonControls", name: "ComparisonControls")
     ComputeConfiguration = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.cleanrooms#ComputeConfiguration", name: "ComputeConfiguration")
     ConfigurationDetails = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.cleanrooms#ConfigurationDetails", name: "ConfigurationDetails")
     ConfiguredAudienceModelArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanrooms#ConfiguredAudienceModelArn", name: "ConfiguredAudienceModelArn", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "^arn:aws[-a-z]*:cleanrooms-ml:[-a-z0-9]+:[0-9]{12}:configured-audience-model/[-a-zA-Z0-9_/.]+$"})
@@ -165,6 +196,7 @@ module Aws::CleanRooms
     ConfiguredTableAssociationAnalysisRuleTypeList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cleanrooms#ConfiguredTableAssociationAnalysisRuleTypeList", name: "ConfiguredTableAssociationAnalysisRuleTypeList")
     ConfiguredTableAssociationArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanrooms#ConfiguredTableAssociationArn", name: "ConfiguredTableAssociationArn", traits: {"smithy.api#length" => {"max" => 100}, "smithy.api#pattern" => "^arn:aws:[\\w]+:[\\w]{2}-[\\w]{4,9}-[\\d]:[\\d]{12}:configuredtableassociation/[\\d\\w-]+/[\\d\\w-]+$"})
     ConfiguredTableAssociationIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanrooms#ConfiguredTableAssociationIdentifier", name: "ConfiguredTableAssociationIdentifier", traits: {"smithy.api#length" => {"min" => 36, "max" => 36}, "smithy.api#pattern" => "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"})
+    ConfiguredTableAssociationSchemaTypeProperties = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#ConfiguredTableAssociationSchemaTypeProperties", name: "ConfiguredTableAssociationSchemaTypeProperties")
     ConfiguredTableAssociationSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#ConfiguredTableAssociationSummary", name: "ConfiguredTableAssociationSummary")
     ConfiguredTableAssociationSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cleanrooms#ConfiguredTableAssociationSummaryList", name: "ConfiguredTableAssociationSummaryList")
     ConfiguredTableIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanrooms#ConfiguredTableIdentifier", name: "ConfiguredTableIdentifier", traits: {"smithy.api#length" => {"min" => 36, "max" => 36}, "smithy.api#pattern" => "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"})
@@ -197,11 +229,15 @@ module Aws::CleanRooms
     CreateIdMappingTableOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#CreateIdMappingTableOutput", name: "CreateIdMappingTableOutput")
     CreateIdNamespaceAssociationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#CreateIdNamespaceAssociationInput", name: "CreateIdNamespaceAssociationInput")
     CreateIdNamespaceAssociationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#CreateIdNamespaceAssociationOutput", name: "CreateIdNamespaceAssociationOutput")
+    CreateIntermediateTableAnalysisRuleInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#CreateIntermediateTableAnalysisRuleInput", name: "CreateIntermediateTableAnalysisRuleInput")
+    CreateIntermediateTableAnalysisRuleOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#CreateIntermediateTableAnalysisRuleOutput", name: "CreateIntermediateTableAnalysisRuleOutput")
+    CreateIntermediateTableInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#CreateIntermediateTableInput", name: "CreateIntermediateTableInput")
+    CreateIntermediateTableOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#CreateIntermediateTableOutput", name: "CreateIntermediateTableOutput")
     CreateMembershipOperationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#CreateMembershipOperationInput", name: "CreateMembershipOperationInput")
     CreateMembershipOperationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#CreateMembershipOperationOutput", name: "CreateMembershipOperationOutput")
     CreatePrivacyBudgetTemplateInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#CreatePrivacyBudgetTemplateInput", name: "CreatePrivacyBudgetTemplateInput")
     CreatePrivacyBudgetTemplateOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#CreatePrivacyBudgetTemplateOutput", name: "CreatePrivacyBudgetTemplateOutput")
-    CustomMLMemberAbilities = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cleanrooms#CustomMLMemberAbilities", name: "CustomMLMemberAbilities", traits: {"smithy.api#length" => {"min" => 1}, "smithy.api#uniqueItems" => {}})
+    CustomMLMemberAbilities = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cleanrooms#CustomMLMemberAbilities", name: "CustomMLMemberAbilities", traits: {"smithy.api#uniqueItems" => {}})
     CustomMLMemberAbility = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cleanrooms#CustomMLMemberAbility", name: "CustomMLMemberAbility")
     DataEncryptionMetadata = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#DataEncryptionMetadata", name: "DataEncryptionMetadata")
     DeleteAnalysisTemplateOperationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#DeleteAnalysisTemplateOperationInput", name: "DeleteAnalysisTemplateOperationInput")
@@ -222,12 +258,17 @@ module Aws::CleanRooms
     DeleteIdMappingTableOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#DeleteIdMappingTableOutput", name: "DeleteIdMappingTableOutput")
     DeleteIdNamespaceAssociationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#DeleteIdNamespaceAssociationInput", name: "DeleteIdNamespaceAssociationInput")
     DeleteIdNamespaceAssociationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#DeleteIdNamespaceAssociationOutput", name: "DeleteIdNamespaceAssociationOutput")
+    DeleteIntermediateTableAnalysisRuleInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#DeleteIntermediateTableAnalysisRuleInput", name: "DeleteIntermediateTableAnalysisRuleInput")
+    DeleteIntermediateTableAnalysisRuleOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#DeleteIntermediateTableAnalysisRuleOutput", name: "DeleteIntermediateTableAnalysisRuleOutput")
+    DeleteIntermediateTableInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#DeleteIntermediateTableInput", name: "DeleteIntermediateTableInput")
+    DeleteIntermediateTableOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#DeleteIntermediateTableOutput", name: "DeleteIntermediateTableOutput")
     DeleteMemberOperationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#DeleteMemberOperationInput", name: "DeleteMemberOperationInput")
     DeleteMemberOperationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#DeleteMemberOperationOutput", name: "DeleteMemberOperationOutput")
     DeleteMembershipOperationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#DeleteMembershipOperationInput", name: "DeleteMembershipOperationInput")
     DeleteMembershipOperationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#DeleteMembershipOperationOutput", name: "DeleteMembershipOperationOutput")
     DeletePrivacyBudgetTemplateInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#DeletePrivacyBudgetTemplateInput", name: "DeletePrivacyBudgetTemplateInput")
     DeletePrivacyBudgetTemplateOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#DeletePrivacyBudgetTemplateOutput", name: "DeletePrivacyBudgetTemplateOutput")
+    DependencyList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cleanrooms#DependencyList", name: "DependencyList")
     DifferentialPrivacyAggregationExpression = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanrooms#DifferentialPrivacyAggregationExpression", name: "DifferentialPrivacyAggregationExpression", traits: {"smithy.api#length" => {"min" => 1}})
     DifferentialPrivacyAggregationType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cleanrooms#DifferentialPrivacyAggregationType", name: "DifferentialPrivacyAggregationType")
     DifferentialPrivacyColumn = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#DifferentialPrivacyColumn", name: "DifferentialPrivacyColumn")
@@ -247,12 +288,16 @@ module Aws::CleanRooms
     DifferentialPrivacyTemplateParametersOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#DifferentialPrivacyTemplateParametersOutput", name: "DifferentialPrivacyTemplateParametersOutput")
     DifferentialPrivacyTemplateUpdateParameters = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#DifferentialPrivacyTemplateUpdateParameters", name: "DifferentialPrivacyTemplateUpdateParameters")
     DirectAnalysisConfigurationDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#DirectAnalysisConfigurationDetails", name: "DirectAnalysisConfigurationDetails")
+    DisallowIntermediateTableInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#DisallowIntermediateTableInput", name: "DisallowIntermediateTableInput")
+    DisallowIntermediateTableOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#DisallowIntermediateTableOutput", name: "DisallowIntermediateTableOutput")
     DisplayName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanrooms#DisplayName", name: "DisplayName", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#pattern" => "^(?!\\s*$)[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDBFF-\\uDC00\\uDFFF\\t]*$"})
     Epsilon = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.cleanrooms#Epsilon", name: "Epsilon", traits: {"smithy.api#range" => {"min" => 1, "max" => 20}})
     ErrorMessageConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#ErrorMessageConfiguration", name: "ErrorMessageConfiguration")
     ErrorMessageType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cleanrooms#ErrorMessageType", name: "ErrorMessageType")
     FilterableMemberStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanrooms#FilterableMemberStatus", name: "FilterableMemberStatus", traits: {"smithy.api#enum" => [{"name" => "INVITED", "value" => "INVITED"}, {"name" => "ACTIVE", "value" => "ACTIVE"}]})
     GenericResourceName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanrooms#GenericResourceName", name: "GenericResourceName", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#pattern" => "^(?!\\s*$)[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDBFF-\\uDC00\\uDFFF\\t]*$"})
+    GetAnalysisLogExportInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#GetAnalysisLogExportInput", name: "GetAnalysisLogExportInput")
+    GetAnalysisLogExportOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#GetAnalysisLogExportOutput", name: "GetAnalysisLogExportOutput")
     GetAnalysisTemplateOperationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#GetAnalysisTemplateOperationInput", name: "GetAnalysisTemplateOperationInput")
     GetAnalysisTemplateOperationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#GetAnalysisTemplateOperationOutput", name: "GetAnalysisTemplateOperationOutput")
     GetCollaborationAnalysisTemplateOperationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#GetCollaborationAnalysisTemplateOperationInput", name: "GetCollaborationAnalysisTemplateOperationInput")
@@ -281,6 +326,10 @@ module Aws::CleanRooms
     GetIdMappingTableOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#GetIdMappingTableOutput", name: "GetIdMappingTableOutput")
     GetIdNamespaceAssociationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#GetIdNamespaceAssociationInput", name: "GetIdNamespaceAssociationInput")
     GetIdNamespaceAssociationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#GetIdNamespaceAssociationOutput", name: "GetIdNamespaceAssociationOutput")
+    GetIntermediateTableAnalysisRuleInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#GetIntermediateTableAnalysisRuleInput", name: "GetIntermediateTableAnalysisRuleInput")
+    GetIntermediateTableAnalysisRuleOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#GetIntermediateTableAnalysisRuleOutput", name: "GetIntermediateTableAnalysisRuleOutput")
+    GetIntermediateTableInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#GetIntermediateTableInput", name: "GetIntermediateTableInput")
+    GetIntermediateTableOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#GetIntermediateTableOutput", name: "GetIntermediateTableOutput")
     GetMembershipOperationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#GetMembershipOperationInput", name: "GetMembershipOperationInput")
     GetMembershipOperationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#GetMembershipOperationOutput", name: "GetMembershipOperationOutput")
     GetPrivacyBudgetTemplateInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#GetPrivacyBudgetTemplateInput", name: "GetPrivacyBudgetTemplateInput")
@@ -320,14 +369,54 @@ module Aws::CleanRooms
     IdNamespaceAssociationSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#IdNamespaceAssociationSummary", name: "IdNamespaceAssociationSummary")
     IdNamespaceAssociationSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cleanrooms#IdNamespaceAssociationSummaryList", name: "IdNamespaceAssociationSummaryList")
     IdNamespaceType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cleanrooms#IdNamespaceType", name: "IdNamespaceType")
+    InheritedAdditionalAnalyses = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#InheritedAdditionalAnalyses", name: "InheritedAdditionalAnalyses")
+    InheritedAdditionalAnalysesSource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#InheritedAdditionalAnalysesSource", name: "InheritedAdditionalAnalysesSource")
+    InheritedAdditionalAnalysesSourceList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cleanrooms#InheritedAdditionalAnalysesSourceList", name: "InheritedAdditionalAnalysesSourceList")
+    InheritedAllowedAdditionalAnalyses = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#InheritedAllowedAdditionalAnalyses", name: "InheritedAllowedAdditionalAnalyses")
+    InheritedAllowedAdditionalAnalysesSource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#InheritedAllowedAdditionalAnalysesSource", name: "InheritedAllowedAdditionalAnalysesSource")
+    InheritedAllowedAdditionalAnalysesSourceList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cleanrooms#InheritedAllowedAdditionalAnalysesSourceList", name: "InheritedAllowedAdditionalAnalysesSourceList")
+    InheritedAllowedResultReceivers = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#InheritedAllowedResultReceivers", name: "InheritedAllowedResultReceivers")
+    InheritedAllowedResultReceiversSource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#InheritedAllowedResultReceiversSource", name: "InheritedAllowedResultReceiversSource")
+    InheritedAllowedResultReceiversSourceList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cleanrooms#InheritedAllowedResultReceiversSourceList", name: "InheritedAllowedResultReceiversSourceList")
+    InheritedDisallowedOutputColumns = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#InheritedDisallowedOutputColumns", name: "InheritedDisallowedOutputColumns")
+    IntermediateTable = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#IntermediateTable", name: "IntermediateTable")
+    IntermediateTableActiveVersion = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#IntermediateTableActiveVersion", name: "IntermediateTableActiveVersion")
+    IntermediateTableAnalysisRule = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#IntermediateTableAnalysisRule", name: "IntermediateTableAnalysisRule")
+    IntermediateTableAnalysisRuleCustom = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#IntermediateTableAnalysisRuleCustom", name: "IntermediateTableAnalysisRuleCustom")
+    IntermediateTableAnalysisRulePolicy = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.cleanrooms#IntermediateTableAnalysisRulePolicy", name: "IntermediateTableAnalysisRulePolicy")
+    IntermediateTableAnalysisRulePolicyV1 = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.cleanrooms#IntermediateTableAnalysisRulePolicyV1", name: "IntermediateTableAnalysisRulePolicyV1")
+    IntermediateTableAnalysisRuleType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cleanrooms#IntermediateTableAnalysisRuleType", name: "IntermediateTableAnalysisRuleType")
+    IntermediateTableAnalysisRuleTypeList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cleanrooms#IntermediateTableAnalysisRuleTypeList", name: "IntermediateTableAnalysisRuleTypeList")
+    IntermediateTableArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanrooms#IntermediateTableArn", name: "IntermediateTableArn", traits: {"smithy.api#length" => {"max" => 256}, "smithy.api#pattern" => "^arn:aws:cleanrooms:[\\w]{2}-[\\w]{4,9}-[\\d]:[\\d]{12}:membership\\/[\\d\\w-]+\\/intermediatetable\\/[\\d\\w-]+$"})
+    IntermediateTableColumn = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#IntermediateTableColumn", name: "IntermediateTableColumn")
+    IntermediateTableColumnList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cleanrooms#IntermediateTableColumnList", name: "IntermediateTableColumnList")
+    IntermediateTableColumnTypeString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanrooms#IntermediateTableColumnTypeString", name: "IntermediateTableColumnTypeString", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDBFF-\\uDC00\\uDFFF\\t]*$"})
+    IntermediateTableComputeConfiguration = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.cleanrooms#IntermediateTableComputeConfiguration", name: "IntermediateTableComputeConfiguration")
+    IntermediateTableDependency = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#IntermediateTableDependency", name: "IntermediateTableDependency")
+    IntermediateTableIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanrooms#IntermediateTableIdentifier", name: "IntermediateTableIdentifier", traits: {"smithy.api#length" => {"min" => 36, "max" => 36}, "smithy.api#pattern" => "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"})
+    IntermediateTableInheritedConstraints = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#IntermediateTableInheritedConstraints", name: "IntermediateTableInheritedConstraints")
+    IntermediateTableOutputConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#IntermediateTableOutputConfiguration", name: "IntermediateTableOutputConfiguration")
+    IntermediateTableSchema = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#IntermediateTableSchema", name: "IntermediateTableSchema")
+    IntermediateTableSchemaTypeProperties = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#IntermediateTableSchemaTypeProperties", name: "IntermediateTableSchemaTypeProperties")
+    IntermediateTableStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cleanrooms#IntermediateTableStatus", name: "IntermediateTableStatus")
+    IntermediateTableSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#IntermediateTableSummary", name: "IntermediateTableSummary")
+    IntermediateTableSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cleanrooms#IntermediateTableSummaryList", name: "IntermediateTableSummaryList")
+    IntermediateTableVersionStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cleanrooms#IntermediateTableVersionStatus", name: "IntermediateTableVersionStatus")
+    IntermediateTableVersionSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#IntermediateTableVersionSummary", name: "IntermediateTableVersionSummary")
+    IntermediateTableVersionSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cleanrooms#IntermediateTableVersionSummaryList", name: "IntermediateTableVersionSummaryList")
     InternalServerException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#InternalServerException", name: "InternalServerException", traits: {"smithy.api#error" => "server", "smithy.api#httpError" => 500})
     JobComputePaymentConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#JobComputePaymentConfig", name: "JobComputePaymentConfig")
+    JobParameterMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.cleanrooms#JobParameterMap", name: "JobParameterMap", traits: {"smithy.api#sensitive" => {}})
+    JobParameterName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanrooms#JobParameterName", name: "JobParameterName", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#pattern" => "^[0-9a-zA-Z_]+$"})
+    JobParameterValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanrooms#JobParameterValue", name: "JobParameterValue", traits: {"smithy.api#length" => {"min" => 0, "max" => 1000}})
     JobType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cleanrooms#JobType", name: "JobType")
     JoinOperator = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanrooms#JoinOperator", name: "JoinOperator", traits: {"smithy.api#enum" => [{"name" => "OR", "value" => "OR"}, {"name" => "AND", "value" => "AND"}]})
     JoinOperatorsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cleanrooms#JoinOperatorsList", name: "JoinOperatorsList", traits: {"smithy.api#length" => {"max" => 2}})
     JoinRequiredOption = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanrooms#JoinRequiredOption", name: "JoinRequiredOption", traits: {"smithy.api#enum" => [{"name" => "QUERY_RUNNER", "value" => "QUERY_RUNNER"}]})
     KMSKeyArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanrooms#KMSKeyArn", name: "KMSKeyArn", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "^arn:aws:kms:[\\w]{2}-[\\w]{4,9}-[\\d]:[\\d]{12}:key/[a-zA-Z0-9-]+$"})
     KeyPrefix = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanrooms#KeyPrefix", name: "KeyPrefix", traits: {"smithy.api#length" => {"min" => 0, "max" => 512}, "smithy.api#pattern" => "^[\\w!.=*/-]*$"})
+    ListAnalysisLogExportsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#ListAnalysisLogExportsInput", name: "ListAnalysisLogExportsInput")
+    ListAnalysisLogExportsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#ListAnalysisLogExportsOutput", name: "ListAnalysisLogExportsOutput")
     ListAnalysisTemplatesOperationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#ListAnalysisTemplatesOperationInput", name: "ListAnalysisTemplatesOperationInput")
     ListAnalysisTemplatesOperationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#ListAnalysisTemplatesOperationOutput", name: "ListAnalysisTemplatesOperationOutput")
     ListCollaborationAnalysisTemplatesOperationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#ListCollaborationAnalysisTemplatesOperationInput", name: "ListCollaborationAnalysisTemplatesOperationInput")
@@ -354,6 +443,10 @@ module Aws::CleanRooms
     ListIdMappingTablesOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#ListIdMappingTablesOutput", name: "ListIdMappingTablesOutput")
     ListIdNamespaceAssociationsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#ListIdNamespaceAssociationsInput", name: "ListIdNamespaceAssociationsInput")
     ListIdNamespaceAssociationsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#ListIdNamespaceAssociationsOutput", name: "ListIdNamespaceAssociationsOutput")
+    ListIntermediateTableVersionsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#ListIntermediateTableVersionsInput", name: "ListIntermediateTableVersionsInput")
+    ListIntermediateTableVersionsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#ListIntermediateTableVersionsOutput", name: "ListIntermediateTableVersionsOutput")
+    ListIntermediateTablesInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#ListIntermediateTablesInput", name: "ListIntermediateTablesInput")
+    ListIntermediateTablesOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#ListIntermediateTablesOutput", name: "ListIntermediateTablesOutput")
     ListMembersOperationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#ListMembersOperationInput", name: "ListMembersOperationInput")
     ListMembersOperationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#ListMembersOperationOutput", name: "ListMembersOperationOutput")
     ListMembershipsOperationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#ListMembershipsOperationInput", name: "ListMembershipsOperationInput")
@@ -370,13 +463,16 @@ module Aws::CleanRooms
     ListSchemasOperationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#ListSchemasOperationOutput", name: "ListSchemasOperationOutput")
     ListTagsForResourceInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#ListTagsForResourceInput", name: "ListTagsForResourceInput")
     ListTagsForResourceOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#ListTagsForResourceOutput", name: "ListTagsForResourceOutput")
+    LogExportAnalysisType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cleanrooms#LogExportAnalysisType", name: "LogExportAnalysisType")
     MLMemberAbilities = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#MLMemberAbilities", name: "MLMemberAbilities")
     MLPaymentConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#MLPaymentConfig", name: "MLPaymentConfig")
+    MLSyntheticDataParameters = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#MLSyntheticDataParameters", name: "MLSyntheticDataParameters")
+    MaxMembershipInferenceAttackScore = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.cleanrooms#MaxMembershipInferenceAttackScore", name: "MaxMembershipInferenceAttackScore", traits: {"smithy.api#range" => {"min" => 0.5, "max" => 1}})
     MaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.cleanrooms#MaxResults", name: "MaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}})
     MemberAbilities = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cleanrooms#MemberAbilities", name: "MemberAbilities", traits: {"smithy.api#uniqueItems" => {}})
     MemberAbility = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cleanrooms#MemberAbility", name: "MemberAbility")
     MemberChangeSpecification = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#MemberChangeSpecification", name: "MemberChangeSpecification")
-    MemberList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cleanrooms#MemberList", name: "MemberList", traits: {"smithy.api#length" => {"min" => 0, "max" => 9}})
+    MemberList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cleanrooms#MemberList", name: "MemberList", traits: {"smithy.api#length" => {"min" => 0}})
     MemberSpecification = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#MemberSpecification", name: "MemberSpecification")
     MemberStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanrooms#MemberStatus", name: "MemberStatus", traits: {"smithy.api#enum" => [{"name" => "INVITED", "value" => "INVITED"}, {"name" => "ACTIVE", "value" => "ACTIVE"}, {"name" => "LEFT", "value" => "LEFT"}, {"name" => "REMOVED", "value" => "REMOVED"}]})
     MemberSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#MemberSummary", name: "MemberSummary")
@@ -399,16 +495,24 @@ module Aws::CleanRooms
     MembershipStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanrooms#MembershipStatus", name: "MembershipStatus", traits: {"smithy.api#enum" => [{"name" => "ACTIVE", "value" => "ACTIVE"}, {"name" => "REMOVED", "value" => "REMOVED"}, {"name" => "COLLABORATION_DELETED", "value" => "COLLABORATION_DELETED"}]})
     MembershipSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#MembershipSummary", name: "MembershipSummary")
     MembershipSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cleanrooms#MembershipSummaryList", name: "MembershipSummaryList")
+    MembershipSyntheticDataGenerationPaymentConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#MembershipSyntheticDataGenerationPaymentConfig", name: "MembershipSyntheticDataGenerationPaymentConfig")
     ModelInferencePaymentConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#ModelInferencePaymentConfig", name: "ModelInferencePaymentConfig")
     ModelTrainingPaymentConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#ModelTrainingPaymentConfig", name: "ModelTrainingPaymentConfig")
+    OutputColumnThreshold = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#OutputColumnThreshold", name: "OutputColumnThreshold")
+    OutputColumnThresholdList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cleanrooms#OutputColumnThresholdList", name: "OutputColumnThresholdList")
     PaginationToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanrooms#PaginationToken", name: "PaginationToken", traits: {"smithy.api#length" => {"max" => 10240}})
-    ParameterMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.cleanrooms#ParameterMap", name: "ParameterMap")
+    ParameterMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.cleanrooms#ParameterMap", name: "ParameterMap", traits: {"smithy.api#sensitive" => {}})
     ParameterName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanrooms#ParameterName", name: "ParameterName", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#pattern" => "^[0-9a-zA-Z_]+$"})
     ParameterType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cleanrooms#ParameterType", name: "ParameterType")
-    ParameterValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanrooms#ParameterValue", name: "ParameterValue", traits: {"smithy.api#length" => {"min" => 0, "max" => 250}})
+    ParameterValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanrooms#ParameterValue", name: "ParameterValue", traits: {"smithy.api#length" => {"min" => 0, "max" => 1000}})
     PaymentConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#PaymentConfiguration", name: "PaymentConfiguration")
     PopulateIdMappingTableInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#PopulateIdMappingTableInput", name: "PopulateIdMappingTableInput")
     PopulateIdMappingTableOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#PopulateIdMappingTableOutput", name: "PopulateIdMappingTableOutput")
+    PopulateIntermediateTableAnalysisType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cleanrooms#PopulateIntermediateTableAnalysisType", name: "PopulateIntermediateTableAnalysisType")
+    PopulateIntermediateTableInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#PopulateIntermediateTableInput", name: "PopulateIntermediateTableInput")
+    PopulateIntermediateTableOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#PopulateIntermediateTableOutput", name: "PopulateIntermediateTableOutput")
+    PopulationAnalysisConfiguration = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.cleanrooms#PopulationAnalysisConfiguration", name: "PopulationAnalysisConfiguration")
+    PopulationAnalysisSqlParameters = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#PopulationAnalysisSqlParameters", name: "PopulationAnalysisSqlParameters", traits: {"smithy.api#sensitive" => {}})
     PreviewPrivacyImpactInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#PreviewPrivacyImpactInput", name: "PreviewPrivacyImpactInput")
     PreviewPrivacyImpactOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#PreviewPrivacyImpactOutput", name: "PreviewPrivacyImpactOutput")
     PreviewPrivacyImpactParametersInput = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.cleanrooms#PreviewPrivacyImpactParametersInput", name: "PreviewPrivacyImpactParametersInput")
@@ -491,8 +595,9 @@ module Aws::CleanRooms
     ResourceAlias = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanrooms#ResourceAlias", name: "ResourceAlias", traits: {"smithy.api#length" => {"max" => 128}, "smithy.api#pattern" => "^[a-zA-Z0-9_](([a-zA-Z0-9_ ]+-)*([a-zA-Z0-9_ ]+))?$"})
     ResourceDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanrooms#ResourceDescription", name: "ResourceDescription", traits: {"smithy.api#length" => {"max" => 255}, "smithy.api#pattern" => "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDBFF-\\uDC00\\uDFFF\\t\\r\\n]*$"})
     ResourceNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#ResourceNotFoundException", name: "ResourceNotFoundException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 404})
+    ResourceStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cleanrooms#ResourceStatus", name: "ResourceStatus")
     ResourceType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanrooms#ResourceType", name: "ResourceType", traits: {"smithy.api#enum" => [{"value" => "CONFIGURED_TABLE", "name" => "CONFIGURED_TABLE"}, {"value" => "COLLABORATION", "name" => "COLLABORATION"}, {"value" => "MEMBERSHIP", "name" => "MEMBERSHIP"}, {"value" => "CONFIGURED_TABLE_ASSOCIATION", "name" => "CONFIGURED_TABLE_ASSOCIATION"}]})
-    ResultFormat = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanrooms#ResultFormat", name: "ResultFormat", traits: {"smithy.api#enum" => [{"name" => "CSV", "value" => "CSV"}, {"name" => "PARQUET", "value" => "PARQUET"}]})
+    ResultFormat = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cleanrooms#ResultFormat", name: "ResultFormat")
     RoleArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanrooms#RoleArn", name: "RoleArn", traits: {"smithy.api#length" => {"min" => 32, "max" => 512}, "smithy.api#pattern" => "^arn:aws:iam::[\\w]+:role/[\\w+=./@-]+$"})
     S3Location = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#S3Location", name: "S3Location")
     ScalarFunctions = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanrooms#ScalarFunctions", name: "ScalarFunctions", traits: {"smithy.api#enum" => [{"name" => "ABS", "value" => "ABS"}, {"name" => "CAST", "value" => "CAST"}, {"name" => "CEILING", "value" => "CEILING"}, {"name" => "COALESCE", "value" => "COALESCE"}, {"name" => "CONVERT", "value" => "CONVERT"}, {"name" => "CURRENT_DATE", "value" => "CURRENT_DATE"}, {"name" => "DATEADD", "value" => "DATEADD"}, {"name" => "EXTRACT", "value" => "EXTRACT"}, {"name" => "FLOOR", "value" => "FLOOR"}, {"name" => "GETDATE", "value" => "GETDATE"}, {"name" => "LN", "value" => "LN"}, {"name" => "LOG", "value" => "LOG"}, {"name" => "LOWER", "value" => "LOWER"}, {"name" => "ROUND", "value" => "ROUND"}, {"name" => "RTRIM", "value" => "RTRIM"}, {"name" => "SQRT", "value" => "SQRT"}, {"name" => "SUBSTRING", "value" => "SUBSTRING"}, {"name" => "TO_CHAR", "value" => "TO_CHAR"}, {"name" => "TO_DATE", "value" => "TO_DATE"}, {"name" => "TO_NUMBER", "value" => "TO_NUMBER"}, {"name" => "TO_TIMESTAMP", "value" => "TO_TIMESTAMP"}, {"name" => "TRIM", "value" => "TRIM"}, {"name" => "TRUNC", "value" => "TRUNC"}, {"name" => "UPPER", "value" => "UPPER"}]})
@@ -527,11 +632,21 @@ module Aws::CleanRooms
     SnowflakeTableSchema = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.cleanrooms#SnowflakeTableSchema", name: "SnowflakeTableSchema")
     SnowflakeTableSchemaList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cleanrooms#SnowflakeTableSchemaList", name: "SnowflakeTableSchemaList", traits: {"smithy.api#length" => {"min" => 1, "max" => 250}})
     SnowflakeTableSchemaV1 = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#SnowflakeTableSchemaV1", name: "SnowflakeTableSchemaV1")
+    SparkProperties = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.cleanrooms#SparkProperties", name: "SparkProperties", traits: {"smithy.api#length" => {"min" => 0, "max" => 50}})
+    SparkPropertyKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanrooms#SparkPropertyKey", name: "SparkPropertyKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 200}})
+    SparkPropertyValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanrooms#SparkPropertyValue", name: "SparkPropertyValue", traits: {"smithy.api#length" => {"min" => 0, "max" => 500}})
+    StartAnalysisLogExportInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#StartAnalysisLogExportInput", name: "StartAnalysisLogExportInput")
+    StartAnalysisLogExportOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#StartAnalysisLogExportOutput", name: "StartAnalysisLogExportOutput")
     StartProtectedJobInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#StartProtectedJobInput", name: "StartProtectedJobInput")
     StartProtectedJobOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#StartProtectedJobOutput", name: "StartProtectedJobOutput")
     StartProtectedQueryOperationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#StartProtectedQueryOperationInput", name: "StartProtectedQueryOperationInput")
     StartProtectedQueryOperationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#StartProtectedQueryOperationOutput", name: "StartProtectedQueryOperationOutput")
     SupportedS3Region = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cleanrooms#SupportedS3Region", name: "SupportedS3Region")
+    SyntheticDataColumnName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanrooms#SyntheticDataColumnName", name: "SyntheticDataColumnName", traits: {"smithy.api#length" => {"max" => 128}, "smithy.api#pattern" => "^[a-z0-9_](([a-z0-9_]+-)*([a-z0-9_]+))?$"})
+    SyntheticDataColumnProperties = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#SyntheticDataColumnProperties", name: "SyntheticDataColumnProperties")
+    SyntheticDataColumnType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cleanrooms#SyntheticDataColumnType", name: "SyntheticDataColumnType")
+    SyntheticDataGenerationPaymentConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#SyntheticDataGenerationPaymentConfig", name: "SyntheticDataGenerationPaymentConfig")
+    SyntheticDataParameters = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.cleanrooms#SyntheticDataParameters", name: "SyntheticDataParameters")
     TableAlias = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanrooms#TableAlias", name: "TableAlias", traits: {"smithy.api#length" => {"max" => 128}, "smithy.api#pattern" => "^[a-zA-Z0-9_](([a-zA-Z0-9_ ]+-)*([a-zA-Z0-9_ ]+))?$"})
     TableAliasList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cleanrooms#TableAliasList", name: "TableAliasList", traits: {"smithy.api#length" => {"min" => 1, "max" => 25}})
     TableDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanrooms#TableDescription", name: "TableDescription", traits: {"smithy.api#length" => {"max" => 255}, "smithy.api#pattern" => "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDBFF-\\uDC00\\uDFFF\\t\\r\\n]*$"})
@@ -550,6 +665,8 @@ module Aws::CleanRooms
     UntagResourceOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#UntagResourceOutput", name: "UntagResourceOutput")
     UpdateAnalysisTemplateOperationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#UpdateAnalysisTemplateOperationInput", name: "UpdateAnalysisTemplateOperationInput")
     UpdateAnalysisTemplateOperationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#UpdateAnalysisTemplateOperationOutput", name: "UpdateAnalysisTemplateOperationOutput")
+    UpdateCollaborationChangeRequestInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#UpdateCollaborationChangeRequestInput", name: "UpdateCollaborationChangeRequestInput")
+    UpdateCollaborationChangeRequestOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#UpdateCollaborationChangeRequestOutput", name: "UpdateCollaborationChangeRequestOutput")
     UpdateCollaborationOperationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#UpdateCollaborationOperationInput", name: "UpdateCollaborationOperationInput")
     UpdateCollaborationOperationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#UpdateCollaborationOperationOutput", name: "UpdateCollaborationOperationOutput")
     UpdateConfiguredAudienceModelAssociationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#UpdateConfiguredAudienceModelAssociationInput", name: "UpdateConfiguredAudienceModelAssociationInput")
@@ -566,8 +683,13 @@ module Aws::CleanRooms
     UpdateIdMappingTableOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#UpdateIdMappingTableOutput", name: "UpdateIdMappingTableOutput")
     UpdateIdNamespaceAssociationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#UpdateIdNamespaceAssociationInput", name: "UpdateIdNamespaceAssociationInput")
     UpdateIdNamespaceAssociationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#UpdateIdNamespaceAssociationOutput", name: "UpdateIdNamespaceAssociationOutput")
+    UpdateIntermediateTableAnalysisRuleInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#UpdateIntermediateTableAnalysisRuleInput", name: "UpdateIntermediateTableAnalysisRuleInput")
+    UpdateIntermediateTableAnalysisRuleOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#UpdateIntermediateTableAnalysisRuleOutput", name: "UpdateIntermediateTableAnalysisRuleOutput")
+    UpdateIntermediateTableInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#UpdateIntermediateTableInput", name: "UpdateIntermediateTableInput")
+    UpdateIntermediateTableOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#UpdateIntermediateTableOutput", name: "UpdateIntermediateTableOutput")
     UpdateMembershipOperationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#UpdateMembershipOperationInput", name: "UpdateMembershipOperationInput")
     UpdateMembershipOperationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#UpdateMembershipOperationOutput", name: "UpdateMembershipOperationOutput")
+    UpdateMembershipPaymentConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#UpdateMembershipPaymentConfiguration", name: "UpdateMembershipPaymentConfiguration")
     UpdatePrivacyBudgetTemplateInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#UpdatePrivacyBudgetTemplateInput", name: "UpdatePrivacyBudgetTemplateInput")
     UpdatePrivacyBudgetTemplateOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#UpdatePrivacyBudgetTemplateOutput", name: "UpdatePrivacyBudgetTemplateOutput")
     UpdateProtectedJobInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#UpdateProtectedJobInput", name: "UpdateProtectedJobInput")
@@ -580,6 +702,7 @@ module Aws::CleanRooms
     ValidationExceptionFieldList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cleanrooms#ValidationExceptionFieldList", name: "ValidationExceptionFieldList")
     ValidationExceptionReason = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanrooms#ValidationExceptionReason", name: "ValidationExceptionReason", traits: {"smithy.api#enum" => [{"value" => "FIELD_VALIDATION_FAILED", "name" => "FIELD_VALIDATION_FAILED"}, {"value" => "INVALID_CONFIGURATION", "name" => "INVALID_CONFIGURATION"}, {"value" => "INVALID_QUERY", "name" => "INVALID_QUERY"}, {"value" => "IAM_SYNCHRONIZATION_DELAY", "name" => "IAM_SYNCHRONIZATION_DELAY"}]})
     WorkerComputeConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanrooms#WorkerComputeConfiguration", name: "WorkerComputeConfiguration")
+    WorkerComputeConfigurationProperties = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.cleanrooms#WorkerComputeConfigurationProperties", name: "WorkerComputeConfigurationProperties")
     WorkerComputeType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cleanrooms#WorkerComputeType", name: "WorkerComputeType")
 
     AccessBudget.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: BudgetedResourceArn, name: "resourceArn", traits: {"smithy.api#required" => {}}))
@@ -609,6 +732,7 @@ module Aws::CleanRooms
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     AccessDeniedException.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessDeniedExceptionReason, name: "reason"))
     AccessDeniedException.type = Types::AccessDeniedException
+    AccountIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "member"))
     AdditionalAnalyses.add_member(:allowed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALLOWED", traits: {"smithy.api#enumValue" => "ALLOWED"}))
     AdditionalAnalyses.add_member(:required, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REQUIRED", traits: {"smithy.api#enumValue" => "REQUIRED"}))
     AdditionalAnalyses.add_member(:not_allowed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_ALLOWED", traits: {"smithy.api#enumValue" => "NOT_ALLOWED"}))
@@ -621,7 +745,17 @@ module Aws::CleanRooms
     AggregationConstraint.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregationType, name: "type", traits: {"smithy.api#required" => {}}))
     AggregationConstraint.type = Types::AggregationConstraint
     AggregationConstraints.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregationConstraint, name: "member"))
+    AggregationThreshold.add_member(:identity_columns, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisRuleColumnList, name: "identityColumns", traits: {"smithy.api#length" => {"min" => 1, "max" => 1}, "smithy.api#required" => {}}))
+    AggregationThreshold.add_member(:minimum_identity_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "minimumIdentityCount", traits: {"smithy.api#range" => {"min" => 2, "max" => 100000}, "smithy.api#required" => {}}))
+    AggregationThreshold.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregationThresholdType, name: "type", traits: {"smithy.api#required" => {}}))
+    AggregationThreshold.add_member(:output_column_thresholds, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputColumnThresholdList, name: "outputColumnThresholds"))
+    AggregationThreshold.add_member(:allowed_aggregate_expression_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedAggregateExpressionType, name: "allowedAggregateExpressionType", traits: {"smithy.api#required" => {}}))
+    AggregationThreshold.type = Types::AggregationThreshold
+    AggregationThresholdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregationThreshold, name: "member"))
+    AggregationThresholdType.add_member(:count_distinct, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COUNT_DISTINCT", traits: {"smithy.api#enumValue" => "COUNT_DISTINCT"}))
     AllowedAdditionalAnalyses.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalAnalysesResourceArn, name: "member"))
+    AllowedAggregateExpressionType.add_member(:columns_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COLUMNS_ONLY", traits: {"smithy.api#enumValue" => "COLUMNS_ONLY"}))
+    AllowedAggregateExpressionType.add_member(:any_expression, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ANY_EXPRESSION", traits: {"smithy.api#enumValue" => "ANY_EXPRESSION"}))
     AllowedAnalysesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisTemplateArnOrQueryWildcard, name: "member"))
     AllowedAnalysisProviderList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "member"))
     AllowedColumnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnName, name: "member"))
@@ -629,6 +763,36 @@ module Aws::CleanRooms
     AllowedResultRegions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SupportedS3Region, name: "member"))
     AnalysisFormat.add_member(:sql, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SQL", traits: {"smithy.api#enumValue" => "SQL"}))
     AnalysisFormat.add_member(:pyspark_1_0, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PYSPARK_1_0", traits: {"smithy.api#enumValue" => "PYSPARK_1_0"}))
+    AnalysisLogExport.add_member(:analysis_log_export_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisLogExportIdentifier, name: "analysisLogExportId", traits: {"smithy.api#required" => {}}))
+    AnalysisLogExport.add_member(:analysis_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "analysisId", traits: {"smithy.api#required" => {}}))
+    AnalysisLogExport.add_member(:analysis_type, ::Smithy::Schema::Shapes::MemberShape.new(target: LogExportAnalysisType, name: "analysisType", traits: {"smithy.api#required" => {}}))
+    AnalysisLogExport.add_member(:membership_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "membershipId", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "MembershipId"}))
+    AnalysisLogExport.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisLogExportStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    AnalysisLogExport.add_member(:result_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisLogExportResultConfiguration, name: "resultConfiguration", traits: {"smithy.api#required" => {}}))
+    AnalysisLogExport.add_member(:create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createTime", traits: {"smithy.api#required" => {}}))
+    AnalysisLogExport.add_member(:update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "updateTime", traits: {"smithy.api#required" => {}}))
+    AnalysisLogExport.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisLogExportError, name: "error"))
+    AnalysisLogExport.type = Types::AnalysisLogExport
+    AnalysisLogExportError.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "code", traits: {"smithy.api#required" => {}}))
+    AnalysisLogExportError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
+    AnalysisLogExportError.type = Types::AnalysisLogExportError
+    AnalysisLogExportOutputConfiguration.add_member(:s3, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisLogExportS3OutputConfiguration, name: "s3", traits: {"smithy.api#required" => {}}))
+    AnalysisLogExportOutputConfiguration.type = Types::AnalysisLogExportOutputConfiguration
+    AnalysisLogExportResultConfiguration.add_member(:output_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisLogExportOutputConfiguration, name: "outputConfiguration", traits: {"smithy.api#required" => {}}))
+    AnalysisLogExportResultConfiguration.type = Types::AnalysisLogExportResultConfiguration
+    AnalysisLogExportS3OutputConfiguration.add_member(:bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "bucket", traits: {"smithy.api#length" => {"min" => 3, "max" => 63}, "smithy.api#pattern" => "(?!^(\\d+\\.)+\\d+$)(^(([a-z0-9]|[a-z0-9][a-z0-9\\-]*[a-z0-9])\\.)*([a-z0-9]|[a-z0-9][a-z0-9\\-]*[a-z0-9])$)", "smithy.api#required" => {}}))
+    AnalysisLogExportS3OutputConfiguration.add_member(:key_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyPrefix, name: "keyPrefix"))
+    AnalysisLogExportS3OutputConfiguration.type = Types::AnalysisLogExportS3OutputConfiguration
+    AnalysisLogExportStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
+    AnalysisLogExportStatus.add_member(:success, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCESS", traits: {"smithy.api#enumValue" => "SUCCESS"}))
+    AnalysisLogExportStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    AnalysisLogExportSummary.add_member(:analysis_log_export_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisLogExportIdentifier, name: "analysisLogExportId", traits: {"smithy.api#required" => {}}))
+    AnalysisLogExportSummary.add_member(:analysis_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "analysisId", traits: {"smithy.api#required" => {}}))
+    AnalysisLogExportSummary.add_member(:analysis_type, ::Smithy::Schema::Shapes::MemberShape.new(target: LogExportAnalysisType, name: "analysisType", traits: {"smithy.api#required" => {}}))
+    AnalysisLogExportSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisLogExportStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    AnalysisLogExportSummary.add_member(:create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createTime", traits: {"smithy.api#required" => {}}))
+    AnalysisLogExportSummary.type = Types::AnalysisLogExportSummary
+    AnalysisLogExportSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisLogExportSummary, name: "member"))
     AnalysisMethod.add_member(:direct_query, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DIRECT_QUERY", traits: {"smithy.api#enumValue" => "DIRECT_QUERY"}))
     AnalysisMethod.add_member(:direct_job, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DIRECT_JOB", traits: {"smithy.api#enumValue" => "DIRECT_JOB"}))
     AnalysisMethod.add_member(:multiple, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MULTIPLE", traits: {"smithy.api#enumValue" => "MULTIPLE"}))
@@ -662,6 +826,10 @@ module Aws::CleanRooms
     AnalysisRuleCustom.add_member(:additional_analyses, ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalAnalyses, name: "additionalAnalyses"))
     AnalysisRuleCustom.add_member(:disallowed_output_columns, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisRuleColumnList, name: "disallowedOutputColumns"))
     AnalysisRuleCustom.add_member(:differential_privacy, ::Smithy::Schema::Shapes::MemberShape.new(target: DifferentialPrivacyConfiguration, name: "differentialPrivacy"))
+    AnalysisRuleCustom.add_member(:aggregation_thresholds, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregationThresholdList, name: "aggregationThresholds"))
+    AnalysisRuleCustom.add_member(:comparison_controls, ::Smithy::Schema::Shapes::MemberShape.new(target: ComparisonControls, name: "comparisonControls"))
+    AnalysisRuleCustom.add_member(:allowed_result_receivers, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedResultReceivers, name: "allowedResultReceivers"))
+    AnalysisRuleCustom.add_member(:allowed_additional_analyses, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedAdditionalAnalyses, name: "allowedAdditionalAnalyses"))
     AnalysisRuleCustom.type = Types::AnalysisRuleCustom
     AnalysisRuleIdMappingTable.add_member(:join_columns, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisRuleColumnList, name: "joinColumns", traits: {"smithy.api#length" => {"min" => 2, "max" => 2}, "smithy.api#required" => {}}))
     AnalysisRuleIdMappingTable.add_member(:query_constraints, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryConstraintList, name: "queryConstraints", traits: {"smithy.api#required" => {}}))
@@ -712,6 +880,7 @@ module Aws::CleanRooms
     AnalysisTemplate.add_member(:analysis_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisParameterList, name: "analysisParameters"))
     AnalysisTemplate.add_member(:validations, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisTemplateValidationStatusDetailList, name: "validations"))
     AnalysisTemplate.add_member(:error_message_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessageConfiguration, name: "errorMessageConfiguration"))
+    AnalysisTemplate.add_member(:synthetic_data_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: SyntheticDataParameters, name: "syntheticDataParameters"))
     AnalysisTemplate.type = Types::AnalysisTemplate
     AnalysisTemplateArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisTemplateArn, name: "member"))
     AnalysisTemplateArtifact.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Location, name: "location", traits: {"smithy.api#required" => {}}))
@@ -734,6 +903,7 @@ module Aws::CleanRooms
     AnalysisTemplateSummary.add_member(:collaboration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CollaborationArn, name: "collaborationArn", traits: {"smithy.api#required" => {}}))
     AnalysisTemplateSummary.add_member(:collaboration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "collaborationId", traits: {"smithy.api#required" => {}}))
     AnalysisTemplateSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceDescription, name: "description"))
+    AnalysisTemplateSummary.add_member(:is_synthetic_data, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "isSyntheticData"))
     AnalysisTemplateSummary.type = Types::AnalysisTemplateSummary
     AnalysisTemplateSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisTemplateSummary, name: "member"))
     AnalysisTemplateValidationStatus.add_member(:valid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VALID", traits: {"smithy.api#enumValue" => "VALID"}))
@@ -752,16 +922,33 @@ module Aws::CleanRooms
     AnalysisType.add_member(:additional_analysis, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ADDITIONAL_ANALYSIS", traits: {"smithy.api#enumValue" => "ADDITIONAL_ANALYSIS"}))
     AnalyticsEngine.add_member(:spark, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SPARK", traits: {"smithy.api#enumValue" => "SPARK"}))
     AnalyticsEngine.add_member(:clean_rooms_sql, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLEAN_ROOMS_SQL", traits: {"smithy.api#enumValue" => "CLEAN_ROOMS_SQL"}))
+    ApprovalStatus.add_member(:approved, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "APPROVED", traits: {"smithy.api#enumValue" => "APPROVED"}))
+    ApprovalStatus.add_member(:denied, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DENIED", traits: {"smithy.api#enumValue" => "DENIED"}))
+    ApprovalStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
+    ApprovalStatusDetails.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    ApprovalStatusDetails.type = Types::ApprovalStatusDetails
+    ApprovalStatuses.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "key"))
+    ApprovalStatuses.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalStatusDetails, name: "value"))
     AthenaTableReference.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: CommercialRegion, name: "region"))
     AthenaTableReference.add_member(:work_group, ::Smithy::Schema::Shapes::MemberShape.new(target: AthenaWorkGroup, name: "workGroup", traits: {"smithy.api#required" => {}}))
     AthenaTableReference.add_member(:output_location, ::Smithy::Schema::Shapes::MemberShape.new(target: AthenaOutputLocation, name: "outputLocation"))
     AthenaTableReference.add_member(:database_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AthenaDatabaseName, name: "databaseName", traits: {"smithy.api#required" => {}}))
     AthenaTableReference.add_member(:table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AthenaTableName, name: "tableName", traits: {"smithy.api#required" => {}}))
+    AthenaTableReference.add_member(:catalog_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AthenaCatalogName, name: "catalogName"))
     AthenaTableReference.type = Types::AthenaTableReference
     AutoApprovedChangeType.add_member(:add_member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ADD_MEMBER", traits: {"smithy.api#enumValue" => "ADD_MEMBER"}))
+    AutoApprovedChangeType.add_member(:grant_receive_results_ability, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GRANT_RECEIVE_RESULTS_ABILITY", traits: {"smithy.api#enumValue" => "GRANT_RECEIVE_RESULTS_ABILITY"}))
+    AutoApprovedChangeType.add_member(:revoke_receive_results_ability, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REVOKE_RECEIVE_RESULTS_ABILITY", traits: {"smithy.api#enumValue" => "REVOKE_RECEIVE_RESULTS_ABILITY"}))
+    AutoApprovedChangeType.add_member(:grant_export_query_analysis_log_ability, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GRANT_EXPORT_QUERY_ANALYSIS_LOG_ABILITY", traits: {"smithy.api#enumValue" => "GRANT_EXPORT_QUERY_ANALYSIS_LOG_ABILITY"}))
+    AutoApprovedChangeType.add_member(:revoke_export_query_analysis_log_ability, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REVOKE_EXPORT_QUERY_ANALYSIS_LOG_ABILITY", traits: {"smithy.api#enumValue" => "REVOKE_EXPORT_QUERY_ANALYSIS_LOG_ABILITY"}))
     AutoApprovedChangeTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoApprovedChangeType, name: "member"))
     AutoRefreshMode.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     AutoRefreshMode.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
+    BaseTableDependencyType.add_member(:table, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TABLE", traits: {"smithy.api#enumValue" => "TABLE"}))
+    BaseTableDependencyType.add_member(:intermediate_table, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTERMEDIATE_TABLE", traits: {"smithy.api#enumValue" => "INTERMEDIATE_TABLE"}))
+    BaseTableDependencyType.add_member(:id_mapping_table, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ID_MAPPING_TABLE", traits: {"smithy.api#enumValue" => "ID_MAPPING_TABLE"}))
+    BaseTableParentType.add_member(:direct, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DIRECT", traits: {"smithy.api#enumValue" => "DIRECT"}))
+    BaseTableParentType.add_member(:indirect, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INDIRECT", traits: {"smithy.api#enumValue" => "INDIRECT"}))
     BatchGetCollaborationAnalysisTemplateError.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisTemplateArn, name: "arn", traits: {"smithy.api#required" => {}}))
     BatchGetCollaborationAnalysisTemplateError.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "code", traits: {"smithy.api#required" => {}}))
     BatchGetCollaborationAnalysisTemplateError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
@@ -814,17 +1001,42 @@ module Aws::CleanRooms
     ChangeInput.type = Types::ChangeInput
     ChangeInputList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeInput, name: "member"))
     ChangeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Change, name: "member"))
+    ChangeRequestAction.add_member(:approve, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "APPROVE", traits: {"smithy.api#enumValue" => "APPROVE"}))
+    ChangeRequestAction.add_member(:deny, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DENY", traits: {"smithy.api#enumValue" => "DENY"}))
+    ChangeRequestAction.add_member(:cancel, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANCEL", traits: {"smithy.api#enumValue" => "CANCEL"}))
+    ChangeRequestAction.add_member(:commit, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMMIT", traits: {"smithy.api#enumValue" => "COMMIT"}))
     ChangeRequestStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
     ChangeRequestStatus.add_member(:approved, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "APPROVED", traits: {"smithy.api#enumValue" => "APPROVED"}))
     ChangeRequestStatus.add_member(:cancelled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANCELLED", traits: {"smithy.api#enumValue" => "CANCELLED"}))
     ChangeRequestStatus.add_member(:denied, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DENIED", traits: {"smithy.api#enumValue" => "DENIED"}))
     ChangeRequestStatus.add_member(:committed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMMITTED", traits: {"smithy.api#enumValue" => "COMMITTED"}))
     ChangeSpecification.add_member(:member, Types::ChangeSpecification::Member, ::Smithy::Schema::Shapes::MemberShape.new(target: MemberChangeSpecification, name: "member"))
+    ChangeSpecification.add_member(:collaboration, Types::ChangeSpecification::Collaboration, ::Smithy::Schema::Shapes::MemberShape.new(target: CollaborationChangeSpecification, name: "collaboration"))
     ChangeSpecification.add_member(:unknown, Types::ChangeSpecification::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     ChangeSpecification.type = Types::ChangeSpecification
     ChangeSpecificationType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MEMBER", traits: {"smithy.api#enumValue" => "MEMBER"}))
+    ChangeSpecificationType.add_member(:collaboration, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COLLABORATION", traits: {"smithy.api#enumValue" => "COLLABORATION"}))
     ChangeType.add_member(:add_member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ADD_MEMBER", traits: {"smithy.api#enumValue" => "ADD_MEMBER"}))
+    ChangeType.add_member(:grant_receive_results_ability, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GRANT_RECEIVE_RESULTS_ABILITY", traits: {"smithy.api#enumValue" => "GRANT_RECEIVE_RESULTS_ABILITY"}))
+    ChangeType.add_member(:revoke_receive_results_ability, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REVOKE_RECEIVE_RESULTS_ABILITY", traits: {"smithy.api#enumValue" => "REVOKE_RECEIVE_RESULTS_ABILITY"}))
+    ChangeType.add_member(:edit_auto_approved_change_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EDIT_AUTO_APPROVED_CHANGE_TYPES", traits: {"smithy.api#enumValue" => "EDIT_AUTO_APPROVED_CHANGE_TYPES"}))
+    ChangeType.add_member(:add_payer_candidate, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ADD_PAYER_CANDIDATE", traits: {"smithy.api#enumValue" => "ADD_PAYER_CANDIDATE"}))
+    ChangeType.add_member(:remove_payer_candidate, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REMOVE_PAYER_CANDIDATE", traits: {"smithy.api#enumValue" => "REMOVE_PAYER_CANDIDATE"}))
+    ChangeType.add_member(:grant_can_receive_model_output, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GRANT_CAN_RECEIVE_MODEL_OUTPUT", traits: {"smithy.api#enumValue" => "GRANT_CAN_RECEIVE_MODEL_OUTPUT"}))
+    ChangeType.add_member(:grant_can_receive_inference_output, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GRANT_CAN_RECEIVE_INFERENCE_OUTPUT", traits: {"smithy.api#enumValue" => "GRANT_CAN_RECEIVE_INFERENCE_OUTPUT"}))
+    ChangeType.add_member(:revoke_can_receive_model_output, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REVOKE_CAN_RECEIVE_MODEL_OUTPUT", traits: {"smithy.api#enumValue" => "REVOKE_CAN_RECEIVE_MODEL_OUTPUT"}))
+    ChangeType.add_member(:revoke_can_receive_inference_output, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REVOKE_CAN_RECEIVE_INFERENCE_OUTPUT", traits: {"smithy.api#enumValue" => "REVOKE_CAN_RECEIVE_INFERENCE_OUTPUT"}))
+    ChangeType.add_member(:grant_export_query_analysis_log_ability, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GRANT_EXPORT_QUERY_ANALYSIS_LOG_ABILITY", traits: {"smithy.api#enumValue" => "GRANT_EXPORT_QUERY_ANALYSIS_LOG_ABILITY"}))
+    ChangeType.add_member(:revoke_export_query_analysis_log_ability, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REVOKE_EXPORT_QUERY_ANALYSIS_LOG_ABILITY", traits: {"smithy.api#enumValue" => "REVOKE_EXPORT_QUERY_ANALYSIS_LOG_ABILITY"}))
     ChangeTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeType, name: "member"))
+    ChildResource.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "resourceId"))
+    ChildResource.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ChildResourceType, name: "resourceType", traits: {"smithy.api#required" => {}}))
+    ChildResource.add_member(:resource_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DisplayName, name: "resourceName", traits: {"smithy.api#required" => {}}))
+    ChildResource.add_member(:owner_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "ownerAccountId", traits: {"smithy.api#required" => {}}))
+    ChildResource.add_member(:resource_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceStatus, name: "resourceStatus"))
+    ChildResource.type = Types::ChildResource
+    ChildResourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ChildResource, name: "member"))
+    ChildResourceType.add_member(:intermediate_table, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTERMEDIATE_TABLE", traits: {"smithy.api#enumValue" => "INTERMEDIATE_TABLE"}))
     Collaboration.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "id", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "CollaborationId"}))
     Collaboration.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CollaborationArn, name: "arn", traits: {"smithy.api#required" => {}}))
     Collaboration.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: CollaborationName, name: "name", traits: {"smithy.api#required" => {}}))
@@ -842,6 +1054,7 @@ module Aws::CleanRooms
     Collaboration.add_member(:analytics_engine, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsEngine, name: "analyticsEngine"))
     Collaboration.add_member(:auto_approved_change_types, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoApprovedChangeTypeList, name: "autoApprovedChangeTypes"))
     Collaboration.add_member(:allowed_result_regions, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedResultRegions, name: "allowedResultRegions"))
+    Collaboration.add_member(:is_metrics_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "isMetricsEnabled"))
     Collaboration.type = Types::Collaboration
     CollaborationAnalysisTemplate.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisTemplateIdentifier, name: "id", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "AnalysisTemplateId"}))
     CollaborationAnalysisTemplate.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisTemplateArn, name: "arn", traits: {"smithy.api#required" => {}}))
@@ -859,6 +1072,7 @@ module Aws::CleanRooms
     CollaborationAnalysisTemplate.add_member(:analysis_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisParameterList, name: "analysisParameters"))
     CollaborationAnalysisTemplate.add_member(:validations, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisTemplateValidationStatusDetailList, name: "validations"))
     CollaborationAnalysisTemplate.add_member(:error_message_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessageConfiguration, name: "errorMessageConfiguration"))
+    CollaborationAnalysisTemplate.add_member(:synthetic_data_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: SyntheticDataParameters, name: "syntheticDataParameters"))
     CollaborationAnalysisTemplate.type = Types::CollaborationAnalysisTemplate
     CollaborationAnalysisTemplateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CollaborationAnalysisTemplate, name: "member"))
     CollaborationAnalysisTemplateSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisTemplateArn, name: "arn", traits: {"smithy.api#required" => {}}))
@@ -870,6 +1084,7 @@ module Aws::CleanRooms
     CollaborationAnalysisTemplateSummary.add_member(:collaboration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "collaborationId", traits: {"smithy.api#required" => {}}))
     CollaborationAnalysisTemplateSummary.add_member(:creator_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "creatorAccountId", traits: {"smithy.api#required" => {}}))
     CollaborationAnalysisTemplateSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceDescription, name: "description"))
+    CollaborationAnalysisTemplateSummary.add_member(:is_synthetic_data, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "isSyntheticData"))
     CollaborationAnalysisTemplateSummary.type = Types::CollaborationAnalysisTemplateSummary
     CollaborationAnalysisTemplateSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CollaborationAnalysisTemplateSummary, name: "member"))
     CollaborationChangeRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "id", traits: {"smithy.api#required" => {}}))
@@ -879,6 +1094,7 @@ module Aws::CleanRooms
     CollaborationChangeRequest.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeRequestStatus, name: "status", traits: {"smithy.api#required" => {}}))
     CollaborationChangeRequest.add_member(:is_auto_approved, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "isAutoApproved", traits: {"smithy.api#required" => {}}))
     CollaborationChangeRequest.add_member(:changes, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeList, name: "changes", traits: {"smithy.api#required" => {}}))
+    CollaborationChangeRequest.add_member(:approvals, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalStatuses, name: "approvals"))
     CollaborationChangeRequest.type = Types::CollaborationChangeRequest
     CollaborationChangeRequestSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "id", traits: {"smithy.api#required" => {}}))
     CollaborationChangeRequestSummary.add_member(:collaboration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "collaborationId", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "CollaborationId"}))
@@ -887,8 +1103,11 @@ module Aws::CleanRooms
     CollaborationChangeRequestSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeRequestStatus, name: "status", traits: {"smithy.api#required" => {}}))
     CollaborationChangeRequestSummary.add_member(:is_auto_approved, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "isAutoApproved", traits: {"smithy.api#required" => {}}))
     CollaborationChangeRequestSummary.add_member(:changes, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeList, name: "changes", traits: {"smithy.api#required" => {}}))
+    CollaborationChangeRequestSummary.add_member(:approvals, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalStatuses, name: "approvals"))
     CollaborationChangeRequestSummary.type = Types::CollaborationChangeRequestSummary
     CollaborationChangeRequestSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CollaborationChangeRequestSummary, name: "member"))
+    CollaborationChangeSpecification.add_member(:auto_approved_change_types, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoApprovedChangeTypeList, name: "autoApprovedChangeTypes"))
+    CollaborationChangeSpecification.type = Types::CollaborationChangeSpecification
     CollaborationConfiguredAudienceModelAssociation.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfiguredAudienceModelAssociationIdentifier, name: "id", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "ConfiguredAudienceModelAssociationId"}))
     CollaborationConfiguredAudienceModelAssociation.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfiguredAudienceModelAssociationArn, name: "arn", traits: {"smithy.api#required" => {}}))
     CollaborationConfiguredAudienceModelAssociation.add_member(:collaboration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "collaborationId", traits: {"smithy.api#required" => {}}))
@@ -990,7 +1209,18 @@ module Aws::CleanRooms
     Column.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnName, name: "name", traits: {"smithy.api#required" => {}}))
     Column.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnTypeString, name: "type", traits: {"smithy.api#required" => {}}))
     Column.type = Types::Column
+    ColumnClassificationDetails.add_member(:column_mapping, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnMappingList, name: "columnMapping", traits: {"smithy.api#required" => {}}))
+    ColumnClassificationDetails.type = Types::ColumnClassificationDetails
+    ColumnLineageEntry.add_member(:column, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisRuleColumnName, name: "column", traits: {"smithy.api#required" => {}}))
+    ColumnLineageEntry.add_member(:source_column, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisRuleColumnName, name: "sourceColumn", traits: {"smithy.api#required" => {}}))
+    ColumnLineageEntry.add_member(:source_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DisplayName, name: "sourceName", traits: {"smithy.api#required" => {}}))
+    ColumnLineageEntry.add_member(:source_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "sourceId", traits: {"smithy.api#required" => {}}))
+    ColumnLineageEntry.add_member(:source_type, ::Smithy::Schema::Shapes::MemberShape.new(target: BaseTableDependencyType, name: "sourceType", traits: {"smithy.api#required" => {}}))
+    ColumnLineageEntry.add_member(:source_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "sourceAccountId", traits: {"smithy.api#required" => {}}))
+    ColumnLineageEntry.type = Types::ColumnLineageEntry
+    ColumnLineageList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnLineageEntry, name: "member"))
     ColumnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Column, name: "member"))
+    ColumnMappingList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SyntheticDataColumnProperties, name: "member"))
     CommercialRegion.add_member(:us_west_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "US_WEST_1", traits: {"smithy.api#enumValue" => "us-west-1"}))
     CommercialRegion.add_member(:us_west_2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "US_WEST_2", traits: {"smithy.api#enumValue" => "us-west-2"}))
     CommercialRegion.add_member(:us_east_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "US_EAST_1", traits: {"smithy.api#enumValue" => "us-east-1"}))
@@ -1024,6 +1254,9 @@ module Aws::CleanRooms
     CommercialRegion.add_member(:sa_east_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SA_EAST_1", traits: {"smithy.api#enumValue" => "sa-east-1"}))
     CommercialRegion.add_member(:mx_central_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MX_CENTRAL_1", traits: {"smithy.api#enumValue" => "mx-central-1"}))
     CommercialRegion.add_member(:ap_east_2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AP_EAST_2", traits: {"smithy.api#enumValue" => "ap-east-2"}))
+    ComparisonControls.add_member(:allowed_literal_comparison_columns, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisRuleColumnList, name: "allowedLiteralComparisonColumns", traits: {"smithy.api#required" => {}}))
+    ComparisonControls.add_member(:allowed_column_comparison_columns, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisRuleColumnList, name: "allowedColumnComparisonColumns", traits: {"smithy.api#required" => {}}))
+    ComparisonControls.type = Types::ComparisonControls
     ComputeConfiguration.add_member(:worker, Types::ComputeConfiguration::Worker, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkerComputeConfiguration, name: "worker"))
     ComputeConfiguration.add_member(:unknown, Types::ComputeConfiguration::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     ComputeConfiguration.type = Types::ComputeConfiguration
@@ -1099,6 +1332,7 @@ module Aws::CleanRooms
     ConfiguredTableAssociation.add_member(:analysis_rule_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfiguredTableAssociationAnalysisRuleTypeList, name: "analysisRuleTypes"))
     ConfiguredTableAssociation.add_member(:create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createTime", traits: {"smithy.api#required" => {}}))
     ConfiguredTableAssociation.add_member(:update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "updateTime", traits: {"smithy.api#required" => {}}))
+    ConfiguredTableAssociation.add_member(:child_resources, ::Smithy::Schema::Shapes::MemberShape.new(target: ChildResourceList, name: "childResources"))
     ConfiguredTableAssociation.type = Types::ConfiguredTableAssociation
     ConfiguredTableAssociationAnalysisRule.add_member(:membership_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipIdentifier, name: "membershipIdentifier", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "MembershipId"}))
     ConfiguredTableAssociationAnalysisRule.add_member(:configured_table_association_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfiguredTableAssociationIdentifier, name: "configuredTableAssociationId", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "ConfiguredTableAssociationId"}))
@@ -1129,6 +1363,8 @@ module Aws::CleanRooms
     ConfiguredTableAssociationAnalysisRuleType.add_member(:list, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LIST", traits: {"smithy.api#enumValue" => "LIST"}))
     ConfiguredTableAssociationAnalysisRuleType.add_member(:custom, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOM", traits: {"smithy.api#enumValue" => "CUSTOM"}))
     ConfiguredTableAssociationAnalysisRuleTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfiguredTableAssociationAnalysisRuleType, name: "member"))
+    ConfiguredTableAssociationSchemaTypeProperties.add_member(:configured_table_association_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "configuredTableAssociationId", traits: {"smithy.api#required" => {}}))
+    ConfiguredTableAssociationSchemaTypeProperties.type = Types::ConfiguredTableAssociationSchemaTypeProperties
     ConfiguredTableAssociationSummary.add_member(:configured_table_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "configuredTableId", traits: {"smithy.api#required" => {}}))
     ConfiguredTableAssociationSummary.add_member(:membership_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipIdentifier, name: "membershipId", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "MembershipId"}))
     ConfiguredTableAssociationSummary.add_member(:membership_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipArn, name: "membershipArn", traits: {"smithy.api#required" => {}}))
@@ -1174,6 +1410,8 @@ module Aws::CleanRooms
     ConsolidatedPolicyCustom.add_member(:additional_analyses, ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalAnalyses, name: "additionalAnalyses"))
     ConsolidatedPolicyCustom.add_member(:disallowed_output_columns, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisRuleColumnList, name: "disallowedOutputColumns"))
     ConsolidatedPolicyCustom.add_member(:differential_privacy, ::Smithy::Schema::Shapes::MemberShape.new(target: DifferentialPrivacyConfiguration, name: "differentialPrivacy"))
+    ConsolidatedPolicyCustom.add_member(:aggregation_thresholds, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregationThresholdList, name: "aggregationThresholds"))
+    ConsolidatedPolicyCustom.add_member(:comparison_controls, ::Smithy::Schema::Shapes::MemberShape.new(target: ComparisonControls, name: "comparisonControls"))
     ConsolidatedPolicyCustom.add_member(:allowed_result_receivers, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedResultReceivers, name: "allowedResultReceivers"))
     ConsolidatedPolicyCustom.add_member(:allowed_additional_analyses, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedAdditionalAnalyses, name: "allowedAdditionalAnalyses"))
     ConsolidatedPolicyCustom.type = Types::ConsolidatedPolicyCustom
@@ -1198,6 +1436,7 @@ module Aws::CleanRooms
     CreateAnalysisTemplateOperationInput.add_member(:analysis_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisParameterList, name: "analysisParameters"))
     CreateAnalysisTemplateOperationInput.add_member(:schema, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisSchema, name: "schema"))
     CreateAnalysisTemplateOperationInput.add_member(:error_message_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessageConfiguration, name: "errorMessageConfiguration"))
+    CreateAnalysisTemplateOperationInput.add_member(:synthetic_data_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: SyntheticDataParameters, name: "syntheticDataParameters"))
     CreateAnalysisTemplateOperationInput.type = Types::CreateAnalysisTemplateOperationInput
     CreateAnalysisTemplateOperationOutput.add_member(:analysis_template, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisTemplate, name: "analysisTemplate", traits: {"smithy.api#required" => {}}))
     CreateAnalysisTemplateOperationOutput.type = Types::CreateAnalysisTemplateOperationOutput
@@ -1208,7 +1447,7 @@ module Aws::CleanRooms
     CreateCollaborationChangeRequestOutput.type = Types::CreateCollaborationChangeRequestOutput
     CreateCollaborationOperationInput.add_member(:members, ::Smithy::Schema::Shapes::MemberShape.new(target: MemberList, name: "members", traits: {"smithy.api#required" => {}}))
     CreateCollaborationOperationInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: CollaborationName, name: "name", traits: {"smithy.api#required" => {}}))
-    CreateCollaborationOperationInput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: CollaborationDescription, name: "description", traits: {"smithy.api#required" => {}}))
+    CreateCollaborationOperationInput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: CollaborationDescription, name: "description", traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => ""}))
     CreateCollaborationOperationInput.add_member(:creator_member_abilities, ::Smithy::Schema::Shapes::MemberShape.new(target: MemberAbilities, name: "creatorMemberAbilities", traits: {"smithy.api#required" => {}}))
     CreateCollaborationOperationInput.add_member(:creator_ml_member_abilities, ::Smithy::Schema::Shapes::MemberShape.new(target: MLMemberAbilities, name: "creatorMLMemberAbilities"))
     CreateCollaborationOperationInput.add_member(:creator_display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DisplayName, name: "creatorDisplayName", traits: {"smithy.api#required" => {}}))
@@ -1220,6 +1459,7 @@ module Aws::CleanRooms
     CreateCollaborationOperationInput.add_member(:analytics_engine, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsEngine, name: "analyticsEngine"))
     CreateCollaborationOperationInput.add_member(:auto_approved_change_request_types, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoApprovedChangeTypeList, name: "autoApprovedChangeRequestTypes"))
     CreateCollaborationOperationInput.add_member(:allowed_result_regions, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedResultRegions, name: "allowedResultRegions"))
+    CreateCollaborationOperationInput.add_member(:is_metrics_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "isMetricsEnabled"))
     CreateCollaborationOperationInput.type = Types::CreateCollaborationOperationInput
     CreateCollaborationOperationOutput.add_member(:collaboration, ::Smithy::Schema::Shapes::MemberShape.new(target: Collaboration, name: "collaboration", traits: {"smithy.api#required" => {}}))
     CreateCollaborationOperationOutput.type = Types::CreateCollaborationOperationOutput
@@ -1282,6 +1522,23 @@ module Aws::CleanRooms
     CreateIdNamespaceAssociationInput.type = Types::CreateIdNamespaceAssociationInput
     CreateIdNamespaceAssociationOutput.add_member(:id_namespace_association, ::Smithy::Schema::Shapes::MemberShape.new(target: IdNamespaceAssociation, name: "idNamespaceAssociation", traits: {"smithy.api#required" => {}}))
     CreateIdNamespaceAssociationOutput.type = Types::CreateIdNamespaceAssociationOutput
+    CreateIntermediateTableAnalysisRuleInput.add_member(:membership_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipIdentifier, name: "membershipIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "MembershipId"}))
+    CreateIntermediateTableAnalysisRuleInput.add_member(:intermediate_table_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: IntermediateTableIdentifier, name: "intermediateTableIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "IntermediateTableId"}))
+    CreateIntermediateTableAnalysisRuleInput.add_member(:analysis_rule_type, ::Smithy::Schema::Shapes::MemberShape.new(target: IntermediateTableAnalysisRuleType, name: "analysisRuleType", traits: {"smithy.api#required" => {}}))
+    CreateIntermediateTableAnalysisRuleInput.add_member(:analysis_rule_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: IntermediateTableAnalysisRulePolicy, name: "analysisRulePolicy", traits: {"smithy.api#required" => {}}))
+    CreateIntermediateTableAnalysisRuleInput.type = Types::CreateIntermediateTableAnalysisRuleInput
+    CreateIntermediateTableAnalysisRuleOutput.add_member(:analysis_rule, ::Smithy::Schema::Shapes::MemberShape.new(target: IntermediateTableAnalysisRule, name: "analysisRule", traits: {"smithy.api#required" => {}}))
+    CreateIntermediateTableAnalysisRuleOutput.type = Types::CreateIntermediateTableAnalysisRuleOutput
+    CreateIntermediateTableInput.add_member(:membership_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipIdentifier, name: "membershipIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "MembershipId"}))
+    CreateIntermediateTableInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: DisplayName, name: "name", traits: {"smithy.api#required" => {}}))
+    CreateIntermediateTableInput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceDescription, name: "description"))
+    CreateIntermediateTableInput.add_member(:population_analysis_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: PopulationAnalysisConfiguration, name: "populationAnalysisConfiguration", traits: {"smithy.api#required" => {}}))
+    CreateIntermediateTableInput.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KMSKeyArn, name: "kmsKeyArn"))
+    CreateIntermediateTableInput.add_member(:retention_in_days, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "retentionInDays", traits: {"smithy.api#range" => {"min" => 1, "max" => 365}}))
+    CreateIntermediateTableInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
+    CreateIntermediateTableInput.type = Types::CreateIntermediateTableInput
+    CreateIntermediateTableOutput.add_member(:intermediate_table, ::Smithy::Schema::Shapes::MemberShape.new(target: IntermediateTable, name: "intermediateTable", traits: {"smithy.api#required" => {}}))
+    CreateIntermediateTableOutput.type = Types::CreateIntermediateTableOutput
     CreateMembershipOperationInput.add_member(:collaboration_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: CollaborationIdentifier, name: "collaborationIdentifier", traits: {"smithy.api#required" => {}}))
     CreateMembershipOperationInput.add_member(:query_log_status, ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipQueryLogStatus, name: "queryLogStatus", traits: {"smithy.api#required" => {}}))
     CreateMembershipOperationInput.add_member(:job_log_status, ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipJobLogStatus, name: "jobLogStatus"))
@@ -1289,6 +1546,7 @@ module Aws::CleanRooms
     CreateMembershipOperationInput.add_member(:default_result_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipProtectedQueryResultConfiguration, name: "defaultResultConfiguration"))
     CreateMembershipOperationInput.add_member(:default_job_result_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipProtectedJobResultConfiguration, name: "defaultJobResultConfiguration"))
     CreateMembershipOperationInput.add_member(:payment_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipPaymentConfiguration, name: "paymentConfiguration"))
+    CreateMembershipOperationInput.add_member(:is_metrics_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "isMetricsEnabled"))
     CreateMembershipOperationInput.type = Types::CreateMembershipOperationInput
     CreateMembershipOperationOutput.add_member(:membership, ::Smithy::Schema::Shapes::MemberShape.new(target: Membership, name: "membership", traits: {"smithy.api#required" => {}}))
     CreateMembershipOperationOutput.type = Types::CreateMembershipOperationOutput
@@ -1343,6 +1601,15 @@ module Aws::CleanRooms
     DeleteIdNamespaceAssociationInput.add_member(:membership_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipIdentifier, name: "membershipIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "MembershipId"}))
     DeleteIdNamespaceAssociationInput.type = Types::DeleteIdNamespaceAssociationInput
     DeleteIdNamespaceAssociationOutput.type = Types::DeleteIdNamespaceAssociationOutput
+    DeleteIntermediateTableAnalysisRuleInput.add_member(:membership_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipIdentifier, name: "membershipIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "MembershipId"}))
+    DeleteIntermediateTableAnalysisRuleInput.add_member(:intermediate_table_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: IntermediateTableIdentifier, name: "intermediateTableIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "IntermediateTableId"}))
+    DeleteIntermediateTableAnalysisRuleInput.add_member(:analysis_rule_type, ::Smithy::Schema::Shapes::MemberShape.new(target: IntermediateTableAnalysisRuleType, name: "analysisRuleType", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteIntermediateTableAnalysisRuleInput.type = Types::DeleteIntermediateTableAnalysisRuleInput
+    DeleteIntermediateTableAnalysisRuleOutput.type = Types::DeleteIntermediateTableAnalysisRuleOutput
+    DeleteIntermediateTableInput.add_member(:membership_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipIdentifier, name: "membershipIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "MembershipId"}))
+    DeleteIntermediateTableInput.add_member(:intermediate_table_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: IntermediateTableIdentifier, name: "intermediateTableIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "IntermediateTableId"}))
+    DeleteIntermediateTableInput.type = Types::DeleteIntermediateTableInput
+    DeleteIntermediateTableOutput.type = Types::DeleteIntermediateTableOutput
     DeleteMemberOperationInput.add_member(:collaboration_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: CollaborationIdentifier, name: "collaborationIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "CollaborationId"}))
     DeleteMemberOperationInput.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteMemberOperationInput.type = Types::DeleteMemberOperationInput
@@ -1354,12 +1621,13 @@ module Aws::CleanRooms
     DeletePrivacyBudgetTemplateInput.add_member(:privacy_budget_template_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: PrivacyBudgetTemplateIdentifier, name: "privacyBudgetTemplateIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "PrivacyBudgetTemplateId"}))
     DeletePrivacyBudgetTemplateInput.type = Types::DeletePrivacyBudgetTemplateInput
     DeletePrivacyBudgetTemplateOutput.type = Types::DeletePrivacyBudgetTemplateOutput
+    DependencyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IntermediateTableDependency, name: "member"))
     DifferentialPrivacyAggregationType.add_member(:avg, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AVG", traits: {"smithy.api#enumValue" => "AVG"}))
     DifferentialPrivacyAggregationType.add_member(:count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COUNT", traits: {"smithy.api#enumValue" => "COUNT"}))
     DifferentialPrivacyAggregationType.add_member(:count_distinct, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COUNT_DISTINCT", traits: {"smithy.api#enumValue" => "COUNT_DISTINCT"}))
     DifferentialPrivacyAggregationType.add_member(:sum, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUM", traits: {"smithy.api#enumValue" => "SUM"}))
     DifferentialPrivacyAggregationType.add_member(:stddev, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STDDEV", traits: {"smithy.api#enumValue" => "STDDEV"}))
-    DifferentialPrivacyColumn.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "name", traits: {"smithy.api#required" => {}}))
+    DifferentialPrivacyColumn.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnName, name: "name", traits: {"smithy.api#required" => {}}))
     DifferentialPrivacyColumn.type = Types::DifferentialPrivacyColumn
     DifferentialPrivacyColumnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DifferentialPrivacyColumn, name: "member"))
     DifferentialPrivacyConfiguration.add_member(:columns, ::Smithy::Schema::Shapes::MemberShape.new(target: DifferentialPrivacyColumnList, name: "columns", traits: {"smithy.api#required" => {}}))
@@ -1401,9 +1669,19 @@ module Aws::CleanRooms
     DifferentialPrivacyTemplateUpdateParameters.type = Types::DifferentialPrivacyTemplateUpdateParameters
     DirectAnalysisConfigurationDetails.add_member(:receiver_account_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: ReceiverAccountIds, name: "receiverAccountIds"))
     DirectAnalysisConfigurationDetails.type = Types::DirectAnalysisConfigurationDetails
+    DisallowIntermediateTableInput.add_member(:membership_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipIdentifier, name: "membershipIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "MembershipId"}))
+    DisallowIntermediateTableInput.add_member(:intermediate_table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DisplayName, name: "intermediateTableName", traits: {"smithy.api#required" => {}}))
+    DisallowIntermediateTableInput.add_member(:include_descendants, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "includeDescendants", traits: {"smithy.api#default" => true}))
+    DisallowIntermediateTableInput.type = Types::DisallowIntermediateTableInput
+    DisallowIntermediateTableOutput.type = Types::DisallowIntermediateTableOutput
     ErrorMessageConfiguration.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessageType, name: "type", traits: {"smithy.api#required" => {}}))
     ErrorMessageConfiguration.type = Types::ErrorMessageConfiguration
     ErrorMessageType.add_member(:detailed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DETAILED", traits: {"smithy.api#enumValue" => "DETAILED"}))
+    GetAnalysisLogExportInput.add_member(:membership_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipIdentifier, name: "membershipIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "MembershipId"}))
+    GetAnalysisLogExportInput.add_member(:analysis_log_export_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisLogExportIdentifier, name: "analysisLogExportIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetAnalysisLogExportInput.type = Types::GetAnalysisLogExportInput
+    GetAnalysisLogExportOutput.add_member(:analysis_log_export, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisLogExport, name: "analysisLogExport", traits: {"smithy.api#required" => {}}))
+    GetAnalysisLogExportOutput.type = Types::GetAnalysisLogExportOutput
     GetAnalysisTemplateOperationInput.add_member(:membership_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipIdentifier, name: "membershipIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "MembershipId"}))
     GetAnalysisTemplateOperationInput.add_member(:analysis_template_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisTemplateIdentifier, name: "analysisTemplateIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "AnalysisTemplateId"}))
     GetAnalysisTemplateOperationInput.type = Types::GetAnalysisTemplateOperationInput
@@ -1473,6 +1751,17 @@ module Aws::CleanRooms
     GetIdNamespaceAssociationInput.type = Types::GetIdNamespaceAssociationInput
     GetIdNamespaceAssociationOutput.add_member(:id_namespace_association, ::Smithy::Schema::Shapes::MemberShape.new(target: IdNamespaceAssociation, name: "idNamespaceAssociation", traits: {"smithy.api#required" => {}}))
     GetIdNamespaceAssociationOutput.type = Types::GetIdNamespaceAssociationOutput
+    GetIntermediateTableAnalysisRuleInput.add_member(:membership_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipIdentifier, name: "membershipIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "MembershipId"}))
+    GetIntermediateTableAnalysisRuleInput.add_member(:intermediate_table_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: IntermediateTableIdentifier, name: "intermediateTableIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "IntermediateTableId"}))
+    GetIntermediateTableAnalysisRuleInput.add_member(:analysis_rule_type, ::Smithy::Schema::Shapes::MemberShape.new(target: IntermediateTableAnalysisRuleType, name: "analysisRuleType", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetIntermediateTableAnalysisRuleInput.type = Types::GetIntermediateTableAnalysisRuleInput
+    GetIntermediateTableAnalysisRuleOutput.add_member(:analysis_rule, ::Smithy::Schema::Shapes::MemberShape.new(target: IntermediateTableAnalysisRule, name: "analysisRule", traits: {"smithy.api#required" => {}}))
+    GetIntermediateTableAnalysisRuleOutput.type = Types::GetIntermediateTableAnalysisRuleOutput
+    GetIntermediateTableInput.add_member(:intermediate_table_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: IntermediateTableIdentifier, name: "intermediateTableIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "IntermediateTableId"}))
+    GetIntermediateTableInput.add_member(:membership_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipIdentifier, name: "membershipIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "MembershipId"}))
+    GetIntermediateTableInput.type = Types::GetIntermediateTableInput
+    GetIntermediateTableOutput.add_member(:intermediate_table, ::Smithy::Schema::Shapes::MemberShape.new(target: IntermediateTable, name: "intermediateTable", traits: {"smithy.api#required" => {}}))
+    GetIntermediateTableOutput.type = Types::GetIntermediateTableOutput
     GetMembershipOperationInput.add_member(:membership_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipIdentifier, name: "membershipIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "MembershipId"}))
     GetMembershipOperationInput.type = Types::GetMembershipOperationInput
     GetMembershipOperationOutput.add_member(:membership, ::Smithy::Schema::Shapes::MemberShape.new(target: Membership, name: "membership", traits: {"smithy.api#required" => {}}))
@@ -1525,6 +1814,7 @@ module Aws::CleanRooms
     IdMappingTable.add_member(:update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "updateTime", traits: {"smithy.api#required" => {}}))
     IdMappingTable.add_member(:input_reference_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: IdMappingTableInputReferenceProperties, name: "inputReferenceProperties", traits: {"smithy.api#required" => {}}))
     IdMappingTable.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KMSKeyArn, name: "kmsKeyArn"))
+    IdMappingTable.add_member(:child_resources, ::Smithy::Schema::Shapes::MemberShape.new(target: ChildResourceList, name: "childResources"))
     IdMappingTable.type = Types::IdMappingTable
     IdMappingTableInputReferenceConfig.add_member(:input_reference_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IdMappingTableInputReferenceArn, name: "inputReferenceArn", traits: {"smithy.api#required" => {}}))
     IdMappingTableInputReferenceConfig.add_member(:manage_resource_policies, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "manageResourcePolicies", traits: {"smithy.api#required" => {}}))
@@ -1536,6 +1826,7 @@ module Aws::CleanRooms
     IdMappingTableInputSource.type = Types::IdMappingTableInputSource
     IdMappingTableInputSourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IdMappingTableInputSource, name: "member"))
     IdMappingTableSchemaTypeProperties.add_member(:id_mapping_table_input_source, ::Smithy::Schema::Shapes::MemberShape.new(target: IdMappingTableInputSourceList, name: "idMappingTableInputSource", traits: {"smithy.api#required" => {}}))
+    IdMappingTableSchemaTypeProperties.add_member(:id_mapping_table_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "idMappingTableId"))
     IdMappingTableSchemaTypeProperties.type = Types::IdMappingTableSchemaTypeProperties
     IdMappingTableSummary.add_member(:collaboration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CollaborationArn, name: "collaborationArn", traits: {"smithy.api#required" => {}}))
     IdMappingTableSummary.add_member(:collaboration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "collaborationId", traits: {"smithy.api#required" => {}}))
@@ -1589,14 +1880,174 @@ module Aws::CleanRooms
     IdNamespaceAssociationSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IdNamespaceAssociationSummary, name: "member"))
     IdNamespaceType.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SOURCE", traits: {"smithy.api#enumValue" => "SOURCE"}))
     IdNamespaceType.add_member(:target, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TARGET", traits: {"smithy.api#enumValue" => "TARGET"}))
+    InheritedAdditionalAnalyses.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalAnalyses, name: "value", traits: {"smithy.api#required" => {}}))
+    InheritedAdditionalAnalyses.add_member(:sources, ::Smithy::Schema::Shapes::MemberShape.new(target: InheritedAdditionalAnalysesSourceList, name: "sources", traits: {"smithy.api#required" => {}}))
+    InheritedAdditionalAnalyses.type = Types::InheritedAdditionalAnalyses
+    InheritedAdditionalAnalysesSource.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: DisplayName, name: "name", traits: {"smithy.api#required" => {}}))
+    InheritedAdditionalAnalysesSource.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "id", traits: {"smithy.api#required" => {}}))
+    InheritedAdditionalAnalysesSource.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: BaseTableDependencyType, name: "type", traits: {"smithy.api#required" => {}}))
+    InheritedAdditionalAnalysesSource.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalAnalyses, name: "value", traits: {"smithy.api#required" => {}}))
+    InheritedAdditionalAnalysesSource.add_member(:source_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "sourceAccountId", traits: {"smithy.api#required" => {}}))
+    InheritedAdditionalAnalysesSource.type = Types::InheritedAdditionalAnalysesSource
+    InheritedAdditionalAnalysesSourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InheritedAdditionalAnalysesSource, name: "member"))
+    InheritedAllowedAdditionalAnalyses.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedAdditionalAnalyses, name: "value", traits: {"smithy.api#required" => {}}))
+    InheritedAllowedAdditionalAnalyses.add_member(:sources, ::Smithy::Schema::Shapes::MemberShape.new(target: InheritedAllowedAdditionalAnalysesSourceList, name: "sources", traits: {"smithy.api#required" => {}}))
+    InheritedAllowedAdditionalAnalyses.type = Types::InheritedAllowedAdditionalAnalyses
+    InheritedAllowedAdditionalAnalysesSource.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: DisplayName, name: "name", traits: {"smithy.api#required" => {}}))
+    InheritedAllowedAdditionalAnalysesSource.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "id", traits: {"smithy.api#required" => {}}))
+    InheritedAllowedAdditionalAnalysesSource.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: BaseTableDependencyType, name: "type", traits: {"smithy.api#required" => {}}))
+    InheritedAllowedAdditionalAnalysesSource.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedAdditionalAnalyses, name: "value", traits: {"smithy.api#required" => {}}))
+    InheritedAllowedAdditionalAnalysesSource.add_member(:source_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "sourceAccountId", traits: {"smithy.api#required" => {}}))
+    InheritedAllowedAdditionalAnalysesSource.type = Types::InheritedAllowedAdditionalAnalysesSource
+    InheritedAllowedAdditionalAnalysesSourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InheritedAllowedAdditionalAnalysesSource, name: "member"))
+    InheritedAllowedResultReceivers.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountIdList, name: "value", traits: {"smithy.api#required" => {}}))
+    InheritedAllowedResultReceivers.add_member(:sources, ::Smithy::Schema::Shapes::MemberShape.new(target: InheritedAllowedResultReceiversSourceList, name: "sources", traits: {"smithy.api#required" => {}}))
+    InheritedAllowedResultReceivers.type = Types::InheritedAllowedResultReceivers
+    InheritedAllowedResultReceiversSource.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: DisplayName, name: "name", traits: {"smithy.api#required" => {}}))
+    InheritedAllowedResultReceiversSource.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "id", traits: {"smithy.api#required" => {}}))
+    InheritedAllowedResultReceiversSource.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: BaseTableDependencyType, name: "type", traits: {"smithy.api#required" => {}}))
+    InheritedAllowedResultReceiversSource.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountIdList, name: "value", traits: {"smithy.api#required" => {}}))
+    InheritedAllowedResultReceiversSource.add_member(:source_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "sourceAccountId", traits: {"smithy.api#required" => {}}))
+    InheritedAllowedResultReceiversSource.type = Types::InheritedAllowedResultReceiversSource
+    InheritedAllowedResultReceiversSourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InheritedAllowedResultReceiversSource, name: "member"))
+    InheritedDisallowedOutputColumns.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisRuleColumnNameList, name: "value", traits: {"smithy.api#required" => {}}))
+    InheritedDisallowedOutputColumns.add_member(:column_lineage, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnLineageList, name: "columnLineage", traits: {"smithy.api#required" => {}}))
+    InheritedDisallowedOutputColumns.type = Types::InheritedDisallowedOutputColumns
+    IntermediateTable.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "id", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "IntermediateTableId"}))
+    IntermediateTable.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IntermediateTableArn, name: "arn", traits: {"smithy.api#required" => {}}))
+    IntermediateTable.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: DisplayName, name: "name", traits: {"smithy.api#required" => {}}))
+    IntermediateTable.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceDescription, name: "description"))
+    IntermediateTable.add_member(:membership_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipArn, name: "membershipArn", traits: {"smithy.api#required" => {}}))
+    IntermediateTable.add_member(:membership_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "membershipId", traits: {"smithy.api#required" => {}}))
+    IntermediateTable.add_member(:collaboration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CollaborationArn, name: "collaborationArn", traits: {"smithy.api#required" => {}}))
+    IntermediateTable.add_member(:collaboration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "collaborationId", traits: {"smithy.api#required" => {}}))
+    IntermediateTable.add_member(:child_resources, ::Smithy::Schema::Shapes::MemberShape.new(target: ChildResourceList, name: "childResources"))
+    IntermediateTable.add_member(:create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createTime", traits: {"smithy.api#required" => {}}))
+    IntermediateTable.add_member(:update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "updateTime", traits: {"smithy.api#required" => {}}))
+    IntermediateTable.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: IntermediateTableStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    IntermediateTable.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "statusReason"))
+    IntermediateTable.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KMSKeyArn, name: "kmsKeyArn"))
+    IntermediateTable.add_member(:population_analysis_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: PopulationAnalysisConfiguration, name: "populationAnalysisConfiguration", traits: {"smithy.api#required" => {}}))
+    IntermediateTable.add_member(:retention_in_days, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "retentionInDays"))
+    IntermediateTable.add_member(:table_dependencies, ::Smithy::Schema::Shapes::MemberShape.new(target: DependencyList, name: "tableDependencies"))
+    IntermediateTable.add_member(:intermediate_table_version, ::Smithy::Schema::Shapes::MemberShape.new(target: IntermediateTableActiveVersion, name: "intermediateTableVersion"))
+    IntermediateTable.add_member(:analysis_rule_types, ::Smithy::Schema::Shapes::MemberShape.new(target: IntermediateTableAnalysisRuleTypeList, name: "analysisRuleTypes"))
+    IntermediateTable.add_member(:schema, ::Smithy::Schema::Shapes::MemberShape.new(target: IntermediateTableSchema, name: "schema"))
+    IntermediateTable.type = Types::IntermediateTable
+    IntermediateTableActiveVersion.add_member(:version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "versionId", traits: {"smithy.api#required" => {}}))
+    IntermediateTableActiveVersion.add_member(:analysis_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisIdentifier, name: "analysisId", traits: {"smithy.api#required" => {}}))
+    IntermediateTableActiveVersion.add_member(:analysis_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PopulateIntermediateTableAnalysisType, name: "analysisType", traits: {"smithy.api#required" => {}}))
+    IntermediateTableActiveVersion.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KMSKeyArn, name: "kmsKeyArn"))
+    IntermediateTableActiveVersion.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterMap, name: "parameters"))
+    IntermediateTableActiveVersion.add_member(:inherited_constraints, ::Smithy::Schema::Shapes::MemberShape.new(target: IntermediateTableInheritedConstraints, name: "inheritedConstraints", traits: {"smithy.api#required" => {}}))
+    IntermediateTableActiveVersion.add_member(:expiration_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "expirationTime"))
+    IntermediateTableActiveVersion.type = Types::IntermediateTableActiveVersion
+    IntermediateTableAnalysisRule.add_member(:intermediate_table_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "intermediateTableIdentifier", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "IntermediateTableId"}))
+    IntermediateTableAnalysisRule.add_member(:intermediate_table_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IntermediateTableArn, name: "intermediateTableArn", traits: {"smithy.api#required" => {}}))
+    IntermediateTableAnalysisRule.add_member(:analysis_rule_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: IntermediateTableAnalysisRulePolicy, name: "analysisRulePolicy", traits: {"smithy.api#required" => {}}))
+    IntermediateTableAnalysisRule.add_member(:analysis_rule_type, ::Smithy::Schema::Shapes::MemberShape.new(target: IntermediateTableAnalysisRuleType, name: "analysisRuleType", traits: {"smithy.api#required" => {}}))
+    IntermediateTableAnalysisRule.add_member(:create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createTime", traits: {"smithy.api#required" => {}}))
+    IntermediateTableAnalysisRule.add_member(:update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "updateTime", traits: {"smithy.api#required" => {}}))
+    IntermediateTableAnalysisRule.type = Types::IntermediateTableAnalysisRule
+    IntermediateTableAnalysisRuleCustom.add_member(:allowed_analyses, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedAnalysesList, name: "allowedAnalyses"))
+    IntermediateTableAnalysisRuleCustom.add_member(:additional_analyses, ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalAnalyses, name: "additionalAnalyses"))
+    IntermediateTableAnalysisRuleCustom.add_member(:allowed_additional_analyses, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedAdditionalAnalyses, name: "allowedAdditionalAnalyses"))
+    IntermediateTableAnalysisRuleCustom.add_member(:allowed_analysis_providers, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedAnalysisProviderList, name: "allowedAnalysisProviders"))
+    IntermediateTableAnalysisRuleCustom.add_member(:allowed_result_receivers, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedResultReceivers, name: "allowedResultReceivers"))
+    IntermediateTableAnalysisRuleCustom.add_member(:differential_privacy, ::Smithy::Schema::Shapes::MemberShape.new(target: DifferentialPrivacyConfiguration, name: "differentialPrivacy"))
+    IntermediateTableAnalysisRuleCustom.add_member(:disallowed_output_columns, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisRuleColumnList, name: "disallowedOutputColumns"))
+    IntermediateTableAnalysisRuleCustom.add_member(:aggregation_thresholds, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregationThresholdList, name: "aggregationThresholds"))
+    IntermediateTableAnalysisRuleCustom.add_member(:comparison_controls, ::Smithy::Schema::Shapes::MemberShape.new(target: ComparisonControls, name: "comparisonControls"))
+    IntermediateTableAnalysisRuleCustom.type = Types::IntermediateTableAnalysisRuleCustom
+    IntermediateTableAnalysisRulePolicy.add_member(:v1, Types::IntermediateTableAnalysisRulePolicy::V1, ::Smithy::Schema::Shapes::MemberShape.new(target: IntermediateTableAnalysisRulePolicyV1, name: "v1"))
+    IntermediateTableAnalysisRulePolicy.add_member(:unknown, Types::IntermediateTableAnalysisRulePolicy::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    IntermediateTableAnalysisRulePolicy.type = Types::IntermediateTableAnalysisRulePolicy
+    IntermediateTableAnalysisRulePolicyV1.add_member(:custom, Types::IntermediateTableAnalysisRulePolicyV1::Custom, ::Smithy::Schema::Shapes::MemberShape.new(target: IntermediateTableAnalysisRuleCustom, name: "custom"))
+    IntermediateTableAnalysisRulePolicyV1.add_member(:unknown, Types::IntermediateTableAnalysisRulePolicyV1::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    IntermediateTableAnalysisRulePolicyV1.type = Types::IntermediateTableAnalysisRulePolicyV1
+    IntermediateTableAnalysisRuleType.add_member(:custom, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOM", traits: {"smithy.api#enumValue" => "CUSTOM"}))
+    IntermediateTableAnalysisRuleTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IntermediateTableAnalysisRuleType, name: "member"))
+    IntermediateTableColumn.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnName, name: "name", traits: {"smithy.api#required" => {}}))
+    IntermediateTableColumn.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: IntermediateTableColumnTypeString, name: "type", traits: {"smithy.api#required" => {}}))
+    IntermediateTableColumn.type = Types::IntermediateTableColumn
+    IntermediateTableColumnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IntermediateTableColumn, name: "member"))
+    IntermediateTableComputeConfiguration.add_member(:query_compute_configuration, Types::IntermediateTableComputeConfiguration::QueryComputeConfiguration, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkerComputeConfiguration, name: "queryComputeConfiguration"))
+    IntermediateTableComputeConfiguration.add_member(:unknown, Types::IntermediateTableComputeConfiguration::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    IntermediateTableComputeConfiguration.type = Types::IntermediateTableComputeConfiguration
+    IntermediateTableDependency.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "id", traits: {"smithy.api#required" => {}}))
+    IntermediateTableDependency.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: DisplayName, name: "name", traits: {"smithy.api#required" => {}}))
+    IntermediateTableDependency.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: BaseTableDependencyType, name: "type", traits: {"smithy.api#required" => {}}))
+    IntermediateTableDependency.add_member(:parent_type, ::Smithy::Schema::Shapes::MemberShape.new(target: BaseTableParentType, name: "parentType", traits: {"smithy.api#required" => {}}))
+    IntermediateTableDependency.add_member(:creator_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "creatorAccountId", traits: {"smithy.api#required" => {}}))
+    IntermediateTableDependency.type = Types::IntermediateTableDependency
+    IntermediateTableInheritedConstraints.add_member(:additional_analyses, ::Smithy::Schema::Shapes::MemberShape.new(target: InheritedAdditionalAnalyses, name: "additionalAnalyses"))
+    IntermediateTableInheritedConstraints.add_member(:allowed_additional_analyses, ::Smithy::Schema::Shapes::MemberShape.new(target: InheritedAllowedAdditionalAnalyses, name: "allowedAdditionalAnalyses"))
+    IntermediateTableInheritedConstraints.add_member(:allowed_result_receivers, ::Smithy::Schema::Shapes::MemberShape.new(target: InheritedAllowedResultReceivers, name: "allowedResultReceivers"))
+    IntermediateTableInheritedConstraints.add_member(:disallowed_output_columns, ::Smithy::Schema::Shapes::MemberShape.new(target: InheritedDisallowedOutputColumns, name: "disallowedOutputColumns"))
+    IntermediateTableInheritedConstraints.type = Types::IntermediateTableInheritedConstraints
+    IntermediateTableOutputConfiguration.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "id", traits: {"smithy.api#required" => {}}))
+    IntermediateTableOutputConfiguration.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IntermediateTableArn, name: "arn", traits: {"smithy.api#required" => {}}))
+    IntermediateTableOutputConfiguration.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: DisplayName, name: "name", traits: {"smithy.api#required" => {}}))
+    IntermediateTableOutputConfiguration.type = Types::IntermediateTableOutputConfiguration
+    IntermediateTableSchema.add_member(:columns, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnList, name: "columns", traits: {"smithy.api#required" => {}}))
+    IntermediateTableSchema.type = Types::IntermediateTableSchema
+    IntermediateTableSchemaTypeProperties.add_member(:intermediate_table_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "intermediateTableId", traits: {"smithy.api#required" => {}}))
+    IntermediateTableSchemaTypeProperties.type = Types::IntermediateTableSchemaTypeProperties
+    IntermediateTableStatus.add_member(:created, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATED", traits: {"smithy.api#enumValue" => "CREATED"}))
+    IntermediateTableStatus.add_member(:populate_started, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POPULATE_STARTED", traits: {"smithy.api#enumValue" => "POPULATE_STARTED"}))
+    IntermediateTableStatus.add_member(:populate_success, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POPULATE_SUCCESS", traits: {"smithy.api#enumValue" => "POPULATE_SUCCESS"}))
+    IntermediateTableStatus.add_member(:populate_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POPULATE_FAILED", traits: {"smithy.api#enumValue" => "POPULATE_FAILED"}))
+    IntermediateTableStatus.add_member(:disallowed_by_data_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISALLOWED_BY_DATA_PROVIDER", traits: {"smithy.api#enumValue" => "DISALLOWED_BY_DATA_PROVIDER"}))
+    IntermediateTableStatus.add_member(:base_table_removed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BASE_TABLE_REMOVED", traits: {"smithy.api#enumValue" => "BASE_TABLE_REMOVED"}))
+    IntermediateTableStatus.add_member(:retention_period_expired, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RETENTION_PERIOD_EXPIRED", traits: {"smithy.api#enumValue" => "RETENTION_PERIOD_EXPIRED"}))
+    IntermediateTableSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "id", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "IntermediateTableId"}))
+    IntermediateTableSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IntermediateTableArn, name: "arn", traits: {"smithy.api#required" => {}}))
+    IntermediateTableSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: DisplayName, name: "name", traits: {"smithy.api#required" => {}}))
+    IntermediateTableSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceDescription, name: "description"))
+    IntermediateTableSummary.add_member(:membership_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipArn, name: "membershipArn", traits: {"smithy.api#required" => {}}))
+    IntermediateTableSummary.add_member(:membership_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "membershipId", traits: {"smithy.api#required" => {}}))
+    IntermediateTableSummary.add_member(:collaboration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CollaborationArn, name: "collaborationArn", traits: {"smithy.api#required" => {}}))
+    IntermediateTableSummary.add_member(:collaboration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "collaborationId", traits: {"smithy.api#required" => {}}))
+    IntermediateTableSummary.add_member(:create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createTime", traits: {"smithy.api#required" => {}}))
+    IntermediateTableSummary.add_member(:update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "updateTime", traits: {"smithy.api#required" => {}}))
+    IntermediateTableSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: IntermediateTableStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    IntermediateTableSummary.add_member(:retention_in_days, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "retentionInDays"))
+    IntermediateTableSummary.add_member(:analysis_rule_types, ::Smithy::Schema::Shapes::MemberShape.new(target: IntermediateTableAnalysisRuleTypeList, name: "analysisRuleTypes"))
+    IntermediateTableSummary.type = Types::IntermediateTableSummary
+    IntermediateTableSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IntermediateTableSummary, name: "member"))
+    IntermediateTableVersionStatus.add_member(:populate_started, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POPULATE_STARTED", traits: {"smithy.api#enumValue" => "POPULATE_STARTED"}))
+    IntermediateTableVersionStatus.add_member(:populate_success, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POPULATE_SUCCESS", traits: {"smithy.api#enumValue" => "POPULATE_SUCCESS"}))
+    IntermediateTableVersionStatus.add_member(:populate_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POPULATE_FAILED", traits: {"smithy.api#enumValue" => "POPULATE_FAILED"}))
+    IntermediateTableVersionStatus.add_member(:retention_period_expired, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RETENTION_PERIOD_EXPIRED", traits: {"smithy.api#enumValue" => "RETENTION_PERIOD_EXPIRED"}))
+    IntermediateTableVersionSummary.add_member(:version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "versionId", traits: {"smithy.api#required" => {}}))
+    IntermediateTableVersionSummary.add_member(:table_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IntermediateTableIdentifier, name: "tableId", traits: {"smithy.api#required" => {}}))
+    IntermediateTableVersionSummary.add_member(:create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createTime", traits: {"smithy.api#required" => {}}))
+    IntermediateTableVersionSummary.add_member(:analysis_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisIdentifier, name: "analysisId", traits: {"smithy.api#required" => {}}))
+    IntermediateTableVersionSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: IntermediateTableVersionStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    IntermediateTableVersionSummary.add_member(:analysis_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PopulateIntermediateTableAnalysisType, name: "analysisType", traits: {"smithy.api#required" => {}}))
+    IntermediateTableVersionSummary.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KMSKeyArn, name: "kmsKeyArn"))
+    IntermediateTableVersionSummary.add_member(:expiration_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "expirationTime"))
+    IntermediateTableVersionSummary.type = Types::IntermediateTableVersionSummary
+    IntermediateTableVersionSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IntermediateTableVersionSummary, name: "member"))
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     InternalServerException.type = Types::InternalServerException
     JobComputePaymentConfig.add_member(:is_responsible, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "isResponsible", traits: {"smithy.api#required" => {}}))
     JobComputePaymentConfig.type = Types::JobComputePaymentConfig
+    JobParameterMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: JobParameterName, name: "key"))
+    JobParameterMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: JobParameterValue, name: "value"))
     JobType.add_member(:batch, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BATCH", traits: {"smithy.api#enumValue" => "BATCH"}))
     JobType.add_member(:incremental, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INCREMENTAL", traits: {"smithy.api#enumValue" => "INCREMENTAL"}))
     JobType.add_member(:delete_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETE_ONLY", traits: {"smithy.api#enumValue" => "DELETE_ONLY"}))
     JoinOperatorsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: JoinOperator, name: "member"))
+    ListAnalysisLogExportsInput.add_member(:membership_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipIdentifier, name: "membershipIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "MembershipId"}))
+    ListAnalysisLogExportsInput.add_member(:analysis_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "analysisIdentifier", traits: {"smithy.api#httpQuery" => "analysisIdentifier"}))
+    ListAnalysisLogExportsInput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisLogExportStatus, name: "status", traits: {"smithy.api#httpQuery" => "status"}))
+    ListAnalysisLogExportsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListAnalysisLogExportsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListAnalysisLogExportsInput.type = Types::ListAnalysisLogExportsInput
+    ListAnalysisLogExportsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
+    ListAnalysisLogExportsOutput.add_member(:analysis_log_exports, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisLogExportSummaryList, name: "analysisLogExports", traits: {"smithy.api#required" => {}}))
+    ListAnalysisLogExportsOutput.type = Types::ListAnalysisLogExportsOutput
     ListAnalysisTemplatesOperationInput.add_member(:membership_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipIdentifier, name: "membershipIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListAnalysisTemplatesOperationInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
     ListAnalysisTemplatesOperationInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
@@ -1690,6 +2141,21 @@ module Aws::CleanRooms
     ListIdNamespaceAssociationsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
     ListIdNamespaceAssociationsOutput.add_member(:id_namespace_association_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: IdNamespaceAssociationSummaryList, name: "idNamespaceAssociationSummaries", traits: {"smithy.api#required" => {}}))
     ListIdNamespaceAssociationsOutput.type = Types::ListIdNamespaceAssociationsOutput
+    ListIntermediateTableVersionsInput.add_member(:membership_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipIdentifier, name: "membershipIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "MembershipId"}))
+    ListIntermediateTableVersionsInput.add_member(:intermediate_table_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: IntermediateTableIdentifier, name: "intermediateTableIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "IntermediateTableId"}))
+    ListIntermediateTableVersionsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListIntermediateTableVersionsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListIntermediateTableVersionsInput.type = Types::ListIntermediateTableVersionsInput
+    ListIntermediateTableVersionsOutput.add_member(:intermediate_table_version_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: IntermediateTableVersionSummaryList, name: "intermediateTableVersionSummaries", traits: {"smithy.api#required" => {}}))
+    ListIntermediateTableVersionsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
+    ListIntermediateTableVersionsOutput.type = Types::ListIntermediateTableVersionsOutput
+    ListIntermediateTablesInput.add_member(:membership_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipIdentifier, name: "membershipIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListIntermediateTablesInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListIntermediateTablesInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListIntermediateTablesInput.type = Types::ListIntermediateTablesInput
+    ListIntermediateTablesOutput.add_member(:intermediate_table_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: IntermediateTableSummaryList, name: "intermediateTableSummaries", traits: {"smithy.api#required" => {}}))
+    ListIntermediateTablesOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
+    ListIntermediateTablesOutput.type = Types::ListIntermediateTablesOutput
     ListMembersOperationInput.add_member(:collaboration_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: CollaborationIdentifier, name: "collaborationIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "CollaborationId"}))
     ListMembersOperationInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
     ListMembersOperationInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
@@ -1748,17 +2214,26 @@ module Aws::CleanRooms
     ListTagsForResourceInput.type = Types::ListTagsForResourceInput
     ListTagsForResourceOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags", traits: {"smithy.api#required" => {}}))
     ListTagsForResourceOutput.type = Types::ListTagsForResourceOutput
+    LogExportAnalysisType.add_member(:protected_query, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PROTECTED_QUERY", traits: {"smithy.api#enumValue" => "PROTECTED_QUERY"}))
     MLMemberAbilities.add_member(:custom_ml_member_abilities, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomMLMemberAbilities, name: "customMLMemberAbilities", traits: {"smithy.api#required" => {}}))
     MLMemberAbilities.type = Types::MLMemberAbilities
     MLPaymentConfig.add_member(:model_training, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelTrainingPaymentConfig, name: "modelTraining"))
     MLPaymentConfig.add_member(:model_inference, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelInferencePaymentConfig, name: "modelInference"))
+    MLPaymentConfig.add_member(:synthetic_data_generation, ::Smithy::Schema::Shapes::MemberShape.new(target: SyntheticDataGenerationPaymentConfig, name: "syntheticDataGeneration"))
     MLPaymentConfig.type = Types::MLPaymentConfig
+    MLSyntheticDataParameters.add_member(:epsilon, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "epsilon", traits: {"smithy.api#range" => {"min" => 0.0001, "max" => 10}, "smithy.api#required" => {}}))
+    MLSyntheticDataParameters.add_member(:max_membership_inference_attack_score, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxMembershipInferenceAttackScore, name: "maxMembershipInferenceAttackScore", traits: {"smithy.api#required" => {}}))
+    MLSyntheticDataParameters.add_member(:column_classification, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnClassificationDetails, name: "columnClassification", traits: {"smithy.api#required" => {}}))
+    MLSyntheticDataParameters.type = Types::MLSyntheticDataParameters
     MemberAbilities.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MemberAbility, name: "member"))
     MemberAbility.add_member(:can_query, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CAN_QUERY", traits: {"smithy.api#enumValue" => "CAN_QUERY"}))
     MemberAbility.add_member(:can_receive_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CAN_RECEIVE_RESULTS", traits: {"smithy.api#enumValue" => "CAN_RECEIVE_RESULTS"}))
     MemberAbility.add_member(:can_run_job, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CAN_RUN_JOB", traits: {"smithy.api#enumValue" => "CAN_RUN_JOB"}))
+    MemberAbility.add_member(:can_export_query_analysis_log, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CAN_EXPORT_QUERY_ANALYSIS_LOG", traits: {"smithy.api#enumValue" => "CAN_EXPORT_QUERY_ANALYSIS_LOG"}))
     MemberChangeSpecification.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "accountId", traits: {"smithy.api#required" => {}}))
     MemberChangeSpecification.add_member(:member_abilities, ::Smithy::Schema::Shapes::MemberShape.new(target: MemberAbilities, name: "memberAbilities", traits: {"smithy.api#required" => {}}))
+    MemberChangeSpecification.add_member(:ml_member_abilities, ::Smithy::Schema::Shapes::MemberShape.new(target: MLMemberAbilities, name: "mlMemberAbilities"))
+    MemberChangeSpecification.add_member(:payment_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: PaymentConfiguration, name: "paymentConfiguration"))
     MemberChangeSpecification.add_member(:display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DisplayName, name: "displayName"))
     MemberChangeSpecification.type = Types::MemberChangeSpecification
     MemberList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MemberSpecification, name: "member"))
@@ -1797,6 +2272,7 @@ module Aws::CleanRooms
     Membership.add_member(:default_result_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipProtectedQueryResultConfiguration, name: "defaultResultConfiguration"))
     Membership.add_member(:default_job_result_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipProtectedJobResultConfiguration, name: "defaultJobResultConfiguration"))
     Membership.add_member(:payment_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipPaymentConfiguration, name: "paymentConfiguration", traits: {"smithy.api#required" => {}}))
+    Membership.add_member(:is_metrics_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "isMetricsEnabled"))
     Membership.type = Types::Membership
     MembershipJobComputePaymentConfig.add_member(:is_responsible, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "isResponsible", traits: {"smithy.api#required" => {}}))
     MembershipJobComputePaymentConfig.type = Types::MembershipJobComputePaymentConfig
@@ -1804,6 +2280,7 @@ module Aws::CleanRooms
     MembershipJobLogStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
     MembershipMLPaymentConfig.add_member(:model_training, ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipModelTrainingPaymentConfig, name: "modelTraining"))
     MembershipMLPaymentConfig.add_member(:model_inference, ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipModelInferencePaymentConfig, name: "modelInference"))
+    MembershipMLPaymentConfig.add_member(:synthetic_data_generation, ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipSyntheticDataGenerationPaymentConfig, name: "syntheticDataGeneration"))
     MembershipMLPaymentConfig.type = Types::MembershipMLPaymentConfig
     MembershipModelInferencePaymentConfig.add_member(:is_responsible, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "isResponsible", traits: {"smithy.api#required" => {}}))
     MembershipModelInferencePaymentConfig.type = Types::MembershipModelInferencePaymentConfig
@@ -1844,10 +2321,16 @@ module Aws::CleanRooms
     MembershipSummary.add_member(:payment_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipPaymentConfiguration, name: "paymentConfiguration", traits: {"smithy.api#required" => {}}))
     MembershipSummary.type = Types::MembershipSummary
     MembershipSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipSummary, name: "member"))
+    MembershipSyntheticDataGenerationPaymentConfig.add_member(:is_responsible, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "isResponsible", traits: {"smithy.api#required" => {}}))
+    MembershipSyntheticDataGenerationPaymentConfig.type = Types::MembershipSyntheticDataGenerationPaymentConfig
     ModelInferencePaymentConfig.add_member(:is_responsible, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "isResponsible", traits: {"smithy.api#required" => {}}))
     ModelInferencePaymentConfig.type = Types::ModelInferencePaymentConfig
     ModelTrainingPaymentConfig.add_member(:is_responsible, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "isResponsible", traits: {"smithy.api#required" => {}}))
     ModelTrainingPaymentConfig.type = Types::ModelTrainingPaymentConfig
+    OutputColumnThreshold.add_member(:output_column_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisRuleColumnName, name: "outputColumnName", traits: {"smithy.api#required" => {}}))
+    OutputColumnThreshold.add_member(:minimum_identity_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "minimumIdentityCount", traits: {"smithy.api#range" => {"min" => 0, "max" => 100000}, "smithy.api#required" => {}}))
+    OutputColumnThreshold.type = Types::OutputColumnThreshold
+    OutputColumnThresholdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputColumnThreshold, name: "member"))
     ParameterMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterName, name: "key"))
     ParameterMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterValue, name: "value"))
     ParameterType.add_member(:smallint, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SMALLINT", traits: {"smithy.api#enumValue" => "SMALLINT"}))
@@ -1888,6 +2371,23 @@ module Aws::CleanRooms
     PopulateIdMappingTableInput.type = Types::PopulateIdMappingTableInput
     PopulateIdMappingTableOutput.add_member(:id_mapping_job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "idMappingJobId", traits: {"smithy.api#required" => {}}))
     PopulateIdMappingTableOutput.type = Types::PopulateIdMappingTableOutput
+    PopulateIntermediateTableAnalysisType.add_member(:query, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "QUERY", traits: {"smithy.api#enumValue" => "QUERY"}))
+    PopulateIntermediateTableInput.add_member(:intermediate_table_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: IntermediateTableIdentifier, name: "intermediateTableIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "IntermediateTableId"}))
+    PopulateIntermediateTableInput.add_member(:membership_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipIdentifier, name: "membershipIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "MembershipId"}))
+    PopulateIntermediateTableInput.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterMap, name: "parameters"))
+    PopulateIntermediateTableInput.add_member(:compute_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: IntermediateTableComputeConfiguration, name: "computeConfiguration"))
+    PopulateIntermediateTableInput.add_member(:analysis_payer_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "analysisPayerAccountId"))
+    PopulateIntermediateTableInput.type = Types::PopulateIntermediateTableInput
+    PopulateIntermediateTableOutput.add_member(:analysis_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisIdentifier, name: "analysisId", traits: {"smithy.api#required" => {}}))
+    PopulateIntermediateTableOutput.add_member(:analysis_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PopulateIntermediateTableAnalysisType, name: "analysisType", traits: {"smithy.api#required" => {}}))
+    PopulateIntermediateTableOutput.add_member(:version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "versionId", traits: {"smithy.api#required" => {}}))
+    PopulateIntermediateTableOutput.type = Types::PopulateIntermediateTableOutput
+    PopulationAnalysisConfiguration.add_member(:sql_parameters, Types::PopulationAnalysisConfiguration::SqlParameters, ::Smithy::Schema::Shapes::MemberShape.new(target: PopulationAnalysisSqlParameters, name: "sqlParameters"))
+    PopulationAnalysisConfiguration.add_member(:unknown, Types::PopulationAnalysisConfiguration::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    PopulationAnalysisConfiguration.type = Types::PopulationAnalysisConfiguration
+    PopulationAnalysisSqlParameters.add_member(:query_string, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "queryString", traits: {"smithy.api#length" => {"max" => 500000}}))
+    PopulationAnalysisSqlParameters.add_member(:analysis_template_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisTemplateArn, name: "analysisTemplateArn"))
+    PopulationAnalysisSqlParameters.type = Types::PopulationAnalysisSqlParameters
     PreviewPrivacyImpactInput.add_member(:membership_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipIdentifier, name: "membershipIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "MembershipId"}))
     PreviewPrivacyImpactInput.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: PreviewPrivacyImpactParametersInput, name: "parameters", traits: {"smithy.api#required" => {}}))
     PreviewPrivacyImpactInput.type = Types::PreviewPrivacyImpactInput
@@ -1966,6 +2466,7 @@ module Aws::CleanRooms
     ProtectedJob.add_member(:result, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectedJobResult, name: "result"))
     ProtectedJob.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectedJobError, name: "error"))
     ProtectedJob.add_member(:compute_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectedJobComputeConfiguration, name: "computeConfiguration"))
+    ProtectedJob.add_member(:job_compute_payer_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "jobComputePayerAccountId"))
     ProtectedJob.type = Types::ProtectedJob
     ProtectedJobAnalysisType.add_member(:direct_analysis, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DIRECT_ANALYSIS", traits: {"smithy.api#enumValue" => "DIRECT_ANALYSIS"}))
     ProtectedJobComputeConfiguration.add_member(:worker, Types::ProtectedJobComputeConfiguration::Worker, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectedJobWorkerComputeConfiguration, name: "worker"))
@@ -1995,7 +2496,8 @@ module Aws::CleanRooms
     ProtectedJobOutputConfigurationOutput.add_member(:member, Types::ProtectedJobOutputConfigurationOutput::Member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectedJobMemberOutputConfigurationOutput, name: "member"))
     ProtectedJobOutputConfigurationOutput.add_member(:unknown, Types::ProtectedJobOutputConfigurationOutput::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     ProtectedJobOutputConfigurationOutput.type = Types::ProtectedJobOutputConfigurationOutput
-    ProtectedJobParameters.add_member(:analysis_template_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisTemplateArn, name: "analysisTemplateArn"))
+    ProtectedJobParameters.add_member(:analysis_template_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisTemplateArn, name: "analysisTemplateArn", traits: {"smithy.api#required" => {}}))
+    ProtectedJobParameters.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: JobParameterMap, name: "parameters"))
     ProtectedJobParameters.type = Types::ProtectedJobParameters
     ProtectedJobReceiverAccountIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "member"))
     ProtectedJobReceiverConfiguration.add_member(:analysis_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectedJobAnalysisType, name: "analysisType", traits: {"smithy.api#required" => {}}))
@@ -2033,11 +2535,13 @@ module Aws::CleanRooms
     ProtectedJobSummary.add_member(:create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createTime", traits: {"smithy.api#required" => {}}))
     ProtectedJobSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectedJobStatus, name: "status", traits: {"smithy.api#required" => {}}))
     ProtectedJobSummary.add_member(:receiver_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectedJobReceiverConfigurations, name: "receiverConfigurations", traits: {"smithy.api#default" => [], "smithy.api#required" => {}}))
+    ProtectedJobSummary.add_member(:job_compute_payer_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "jobComputePayerAccountId"))
     ProtectedJobSummary.type = Types::ProtectedJobSummary
     ProtectedJobSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectedJobSummary, name: "member"))
     ProtectedJobType.add_member(:pyspark, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PYSPARK", traits: {"smithy.api#enumValue" => "PYSPARK"}))
     ProtectedJobWorkerComputeConfiguration.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectedJobWorkerComputeType, name: "type", traits: {"smithy.api#required" => {}}))
-    ProtectedJobWorkerComputeConfiguration.add_member(:number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "number", traits: {"smithy.api#range" => {"min" => 4, "max" => 128}, "smithy.api#required" => {}}))
+    ProtectedJobWorkerComputeConfiguration.add_member(:number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "number", traits: {"smithy.api#range" => {"min" => 4, "max" => 1024}, "smithy.api#required" => {}}))
+    ProtectedJobWorkerComputeConfiguration.add_member(:properties, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkerComputeConfigurationProperties, name: "properties"))
     ProtectedJobWorkerComputeConfiguration.type = Types::ProtectedJobWorkerComputeConfiguration
     ProtectedJobWorkerComputeType.add_member(:cr1_x, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CR1X", traits: {"smithy.api#enumValue" => "CR.1X"}))
     ProtectedJobWorkerComputeType.add_member(:cr4_x, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CR4X", traits: {"smithy.api#enumValue" => "CR.4X"}))
@@ -2053,6 +2557,7 @@ module Aws::CleanRooms
     ProtectedQuery.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectedQueryError, name: "error"))
     ProtectedQuery.add_member(:differential_privacy, ::Smithy::Schema::Shapes::MemberShape.new(target: DifferentialPrivacyParameters, name: "differentialPrivacy"))
     ProtectedQuery.add_member(:compute_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputeConfiguration, name: "computeConfiguration"))
+    ProtectedQuery.add_member(:query_compute_payer_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "queryComputePayerAccountId"))
     ProtectedQuery.type = Types::ProtectedQuery
     ProtectedQueryDistributeOutput.add_member(:s3, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectedQueryS3Output, name: "s3"))
     ProtectedQueryDistributeOutput.add_member(:member_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectedQueryMemberOutputList, name: "memberList"))
@@ -2078,6 +2583,7 @@ module Aws::CleanRooms
     ProtectedQueryOutputConfiguration.add_member(:s3, Types::ProtectedQueryOutputConfiguration::S3, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectedQueryS3OutputConfiguration, name: "s3"))
     ProtectedQueryOutputConfiguration.add_member(:member, Types::ProtectedQueryOutputConfiguration::Member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectedQueryMemberOutputConfiguration, name: "member"))
     ProtectedQueryOutputConfiguration.add_member(:distribute, Types::ProtectedQueryOutputConfiguration::Distribute, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectedQueryDistributeOutputConfiguration, name: "distribute"))
+    ProtectedQueryOutputConfiguration.add_member(:intermediate_table, Types::ProtectedQueryOutputConfiguration::IntermediateTable, ::Smithy::Schema::Shapes::MemberShape.new(target: IntermediateTableOutputConfiguration, name: "intermediateTable"))
     ProtectedQueryOutputConfiguration.add_member(:unknown, Types::ProtectedQueryOutputConfiguration::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     ProtectedQueryOutputConfiguration.type = Types::ProtectedQueryOutputConfiguration
     ProtectedQueryResult.add_member(:output, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectedQueryOutput, name: "output", traits: {"smithy.api#required" => {}}))
@@ -2106,6 +2612,8 @@ module Aws::CleanRooms
     ProtectedQuerySummary.add_member(:create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createTime", traits: {"smithy.api#required" => {}}))
     ProtectedQuerySummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectedQueryStatus, name: "status", traits: {"smithy.api#required" => {}}))
     ProtectedQuerySummary.add_member(:receiver_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: ReceiverConfigurationsList, name: "receiverConfigurations", traits: {"smithy.api#default" => [], "smithy.api#required" => {}}))
+    ProtectedQuerySummary.add_member(:query_compute_payer_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "queryComputePayerAccountId"))
+    ProtectedQuerySummary.add_member(:intermediate_table_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: IntermediateTableOutputConfiguration, name: "intermediateTableConfiguration"))
     ProtectedQuerySummary.type = Types::ProtectedQuerySummary
     ProtectedQuerySummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectedQuerySummary, name: "member"))
     QueryComputePaymentConfig.add_member(:is_responsible, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "isResponsible", traits: {"smithy.api#required" => {}}))
@@ -2126,8 +2634,17 @@ module Aws::CleanRooms
     ResourceNotFoundException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceId", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "resourceType", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
+    ResourceStatus.add_member(:created, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATED", traits: {"smithy.api#enumValue" => "CREATED"}))
+    ResourceStatus.add_member(:populate_started, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POPULATE_STARTED", traits: {"smithy.api#enumValue" => "POPULATE_STARTED"}))
+    ResourceStatus.add_member(:populate_success, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POPULATE_SUCCESS", traits: {"smithy.api#enumValue" => "POPULATE_SUCCESS"}))
+    ResourceStatus.add_member(:populate_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POPULATE_FAILED", traits: {"smithy.api#enumValue" => "POPULATE_FAILED"}))
+    ResourceStatus.add_member(:disallowed_by_data_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISALLOWED_BY_DATA_PROVIDER", traits: {"smithy.api#enumValue" => "DISALLOWED_BY_DATA_PROVIDER"}))
+    ResourceStatus.add_member(:base_table_removed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BASE_TABLE_REMOVED", traits: {"smithy.api#enumValue" => "BASE_TABLE_REMOVED"}))
+    ResourceStatus.add_member(:retention_period_expired, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RETENTION_PERIOD_EXPIRED", traits: {"smithy.api#enumValue" => "RETENTION_PERIOD_EXPIRED"}))
+    ResultFormat.add_member(:csv, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CSV", traits: {"smithy.api#enumValue" => "CSV"}))
+    ResultFormat.add_member(:parquet, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PARQUET", traits: {"smithy.api#enumValue" => "PARQUET"}))
     S3Location.add_member(:bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "bucket", traits: {"smithy.api#length" => {"min" => 3, "max" => 63}, "smithy.api#pattern" => "(?!^(\\d+\\.)+\\d+$)(^(([a-z0-9]|[a-z0-9][a-z0-9\\-]*[a-z0-9])\\.)*([a-z0-9]|[a-z0-9][a-z0-9\\-]*[a-z0-9])$)", "smithy.api#required" => {}}))
-    S3Location.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key", traits: {"smithy.api#pattern" => "^[a-zA-Z0-9!_.*'()-/]+$", "smithy.api#required" => {}}))
+    S3Location.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => "^[a-zA-Z0-9!_.*'()-/]+$", "smithy.api#required" => {}}))
     S3Location.type = Types::S3Location
     ScalarFunctionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ScalarFunctions, name: "member"))
     Schema.add_member(:columns, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnList, name: "columns", traits: {"smithy.api#required" => {}}))
@@ -2178,6 +2695,12 @@ module Aws::CleanRooms
     SchemaStatusReasonCode.add_member(:additional_analyses_not_allowed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ADDITIONAL_ANALYSES_NOT_ALLOWED", traits: {"smithy.api#enumValue" => "ADDITIONAL_ANALYSES_NOT_ALLOWED"}))
     SchemaStatusReasonCode.add_member(:result_receivers_not_allowed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESULT_RECEIVERS_NOT_ALLOWED", traits: {"smithy.api#enumValue" => "RESULT_RECEIVERS_NOT_ALLOWED"}))
     SchemaStatusReasonCode.add_member(:analysis_rule_types_not_compatible, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ANALYSIS_RULE_TYPES_NOT_COMPATIBLE", traits: {"smithy.api#enumValue" => "ANALYSIS_RULE_TYPES_NOT_COMPATIBLE"}))
+    SchemaStatusReasonCode.add_member(:intermediate_table_not_populated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTERMEDIATE_TABLE_NOT_POPULATED", traits: {"smithy.api#enumValue" => "INTERMEDIATE_TABLE_NOT_POPULATED"}))
+    SchemaStatusReasonCode.add_member(:intermediate_table_analysis_rule_missing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTERMEDIATE_TABLE_ANALYSIS_RULE_MISSING", traits: {"smithy.api#enumValue" => "INTERMEDIATE_TABLE_ANALYSIS_RULE_MISSING"}))
+    SchemaStatusReasonCode.add_member(:intermediate_table_base_table_removed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTERMEDIATE_TABLE_BASE_TABLE_REMOVED", traits: {"smithy.api#enumValue" => "INTERMEDIATE_TABLE_BASE_TABLE_REMOVED"}))
+    SchemaStatusReasonCode.add_member(:intermediate_table_inherited_constraints_violated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTERMEDIATE_TABLE_INHERITED_CONSTRAINTS_VIOLATED", traits: {"smithy.api#enumValue" => "INTERMEDIATE_TABLE_INHERITED_CONSTRAINTS_VIOLATED"}))
+    SchemaStatusReasonCode.add_member(:intermediate_table_disallowed_by_data_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTERMEDIATE_TABLE_DISALLOWED_BY_DATA_PROVIDER", traits: {"smithy.api#enumValue" => "INTERMEDIATE_TABLE_DISALLOWED_BY_DATA_PROVIDER"}))
+    SchemaStatusReasonCode.add_member(:intermediate_table_retention_period_expired, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTERMEDIATE_TABLE_RETENTION_PERIOD_EXPIRED", traits: {"smithy.api#enumValue" => "INTERMEDIATE_TABLE_RETENTION_PERIOD_EXPIRED"}))
     SchemaStatusReasonList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaStatusReason, name: "member"))
     SchemaSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: TableAlias, name: "name", traits: {"smithy.api#required" => {}}))
     SchemaSummary.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaType, name: "type", traits: {"smithy.api#required" => {}}))
@@ -2194,7 +2717,10 @@ module Aws::CleanRooms
     SchemaSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaSummary, name: "member"))
     SchemaType.add_member(:table, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TABLE", traits: {"smithy.api#enumValue" => "TABLE"}))
     SchemaType.add_member(:id_mapping_table, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ID_MAPPING_TABLE", traits: {"smithy.api#enumValue" => "ID_MAPPING_TABLE"}))
+    SchemaType.add_member(:intermediate_table, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTERMEDIATE_TABLE", traits: {"smithy.api#enumValue" => "INTERMEDIATE_TABLE"}))
     SchemaTypeProperties.add_member(:id_mapping_table, Types::SchemaTypeProperties::IdMappingTable, ::Smithy::Schema::Shapes::MemberShape.new(target: IdMappingTableSchemaTypeProperties, name: "idMappingTable"))
+    SchemaTypeProperties.add_member(:intermediate_table, Types::SchemaTypeProperties::IntermediateTable, ::Smithy::Schema::Shapes::MemberShape.new(target: IntermediateTableSchemaTypeProperties, name: "intermediateTable"))
+    SchemaTypeProperties.add_member(:configured_table_association, Types::SchemaTypeProperties::ConfiguredTableAssociation, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfiguredTableAssociationSchemaTypeProperties, name: "configuredTableAssociation"))
     SchemaTypeProperties.add_member(:unknown, Types::SchemaTypeProperties::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     SchemaTypeProperties.type = Types::SchemaTypeProperties
     SelectedAnalysisMethod.add_member(:direct_query, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DIRECT_QUERY", traits: {"smithy.api#enumValue" => "DIRECT_QUERY"}))
@@ -2218,11 +2744,21 @@ module Aws::CleanRooms
     SnowflakeTableSchemaV1.add_member(:column_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnName, name: "columnName", traits: {"smithy.api#required" => {}}))
     SnowflakeTableSchemaV1.add_member(:column_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnTypeString, name: "columnType", traits: {"smithy.api#required" => {}}))
     SnowflakeTableSchemaV1.type = Types::SnowflakeTableSchemaV1
+    SparkProperties.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: SparkPropertyKey, name: "key"))
+    SparkProperties.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: SparkPropertyValue, name: "value"))
+    StartAnalysisLogExportInput.add_member(:membership_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipIdentifier, name: "membershipIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "MembershipId"}))
+    StartAnalysisLogExportInput.add_member(:analysis_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "analysisId", traits: {"smithy.api#required" => {}}))
+    StartAnalysisLogExportInput.add_member(:analysis_type, ::Smithy::Schema::Shapes::MemberShape.new(target: LogExportAnalysisType, name: "analysisType", traits: {"smithy.api#required" => {}}))
+    StartAnalysisLogExportInput.add_member(:result_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisLogExportResultConfiguration, name: "resultConfiguration", traits: {"smithy.api#required" => {}}))
+    StartAnalysisLogExportInput.type = Types::StartAnalysisLogExportInput
+    StartAnalysisLogExportOutput.add_member(:analysis_log_export, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisLogExport, name: "analysisLogExport", traits: {"smithy.api#required" => {}}))
+    StartAnalysisLogExportOutput.type = Types::StartAnalysisLogExportOutput
     StartProtectedJobInput.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectedJobType, name: "type", traits: {"smithy.api#required" => {}}))
     StartProtectedJobInput.add_member(:membership_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipIdentifier, name: "membershipIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "MembershipId"}))
     StartProtectedJobInput.add_member(:job_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectedJobParameters, name: "jobParameters", traits: {"smithy.api#required" => {}}))
     StartProtectedJobInput.add_member(:result_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectedJobResultConfigurationInput, name: "resultConfiguration"))
     StartProtectedJobInput.add_member(:compute_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectedJobComputeConfiguration, name: "computeConfiguration"))
+    StartProtectedJobInput.add_member(:job_compute_payer_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "jobComputePayerAccountId"))
     StartProtectedJobInput.type = Types::StartProtectedJobInput
     StartProtectedJobOutput.add_member(:protected_job, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectedJob, name: "protectedJob", traits: {"smithy.api#required" => {}}))
     StartProtectedJobOutput.type = Types::StartProtectedJobOutput
@@ -2231,6 +2767,7 @@ module Aws::CleanRooms
     StartProtectedQueryOperationInput.add_member(:sql_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectedQuerySQLParameters, name: "sqlParameters", traits: {"smithy.api#required" => {}}))
     StartProtectedQueryOperationInput.add_member(:result_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectedQueryResultConfiguration, name: "resultConfiguration"))
     StartProtectedQueryOperationInput.add_member(:compute_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputeConfiguration, name: "computeConfiguration"))
+    StartProtectedQueryOperationInput.add_member(:query_compute_payer_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "queryComputePayerAccountId"))
     StartProtectedQueryOperationInput.type = Types::StartProtectedQueryOperationInput
     StartProtectedQueryOperationOutput.add_member(:protected_query, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectedQuery, name: "protectedQuery", traits: {"smithy.api#required" => {}}))
     StartProtectedQueryOperationOutput.type = Types::StartProtectedQueryOperationOutput
@@ -2267,6 +2804,17 @@ module Aws::CleanRooms
     SupportedS3Region.add_member(:il_central_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IL_CENTRAL_1", traits: {"smithy.api#enumValue" => "il-central-1"}))
     SupportedS3Region.add_member(:sa_east_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SA_EAST_1", traits: {"smithy.api#enumValue" => "sa-east-1"}))
     SupportedS3Region.add_member(:mx_central_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MX_CENTRAL_1", traits: {"smithy.api#enumValue" => "mx-central-1"}))
+    SyntheticDataColumnProperties.add_member(:column_name, ::Smithy::Schema::Shapes::MemberShape.new(target: SyntheticDataColumnName, name: "columnName", traits: {"smithy.api#required" => {}}))
+    SyntheticDataColumnProperties.add_member(:column_type, ::Smithy::Schema::Shapes::MemberShape.new(target: SyntheticDataColumnType, name: "columnType", traits: {"smithy.api#required" => {}}))
+    SyntheticDataColumnProperties.add_member(:is_predictive_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "isPredictiveValue", traits: {"smithy.api#required" => {}}))
+    SyntheticDataColumnProperties.type = Types::SyntheticDataColumnProperties
+    SyntheticDataColumnType.add_member(:categorical, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CATEGORICAL", traits: {"smithy.api#enumValue" => "CATEGORICAL"}))
+    SyntheticDataColumnType.add_member(:numerical, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NUMERICAL", traits: {"smithy.api#enumValue" => "NUMERICAL"}))
+    SyntheticDataGenerationPaymentConfig.add_member(:is_responsible, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "isResponsible", traits: {"smithy.api#required" => {}}))
+    SyntheticDataGenerationPaymentConfig.type = Types::SyntheticDataGenerationPaymentConfig
+    SyntheticDataParameters.add_member(:ml_synthetic_data_parameters, Types::SyntheticDataParameters::MlSyntheticDataParameters, ::Smithy::Schema::Shapes::MemberShape.new(target: MLSyntheticDataParameters, name: "mlSyntheticDataParameters"))
+    SyntheticDataParameters.add_member(:unknown, Types::SyntheticDataParameters::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    SyntheticDataParameters.type = Types::SyntheticDataParameters
     TableAliasList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TableAlias, name: "member"))
     TableReference.add_member(:glue, Types::TableReference::Glue, ::Smithy::Schema::Shapes::MemberShape.new(target: GlueTableReference, name: "glue"))
     TableReference.add_member(:snowflake, Types::TableReference::Snowflake, ::Smithy::Schema::Shapes::MemberShape.new(target: SnowflakeTableReference, name: "snowflake"))
@@ -2293,6 +2841,12 @@ module Aws::CleanRooms
     UpdateAnalysisTemplateOperationInput.type = Types::UpdateAnalysisTemplateOperationInput
     UpdateAnalysisTemplateOperationOutput.add_member(:analysis_template, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisTemplate, name: "analysisTemplate", traits: {"smithy.api#required" => {}}))
     UpdateAnalysisTemplateOperationOutput.type = Types::UpdateAnalysisTemplateOperationOutput
+    UpdateCollaborationChangeRequestInput.add_member(:collaboration_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: CollaborationIdentifier, name: "collaborationIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "CollaborationId"}))
+    UpdateCollaborationChangeRequestInput.add_member(:change_request_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: CollaborationChangeRequestIdentifier, name: "changeRequestIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "ChangeRequestId"}))
+    UpdateCollaborationChangeRequestInput.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeRequestAction, name: "action", traits: {"smithy.api#required" => {}}))
+    UpdateCollaborationChangeRequestInput.type = Types::UpdateCollaborationChangeRequestInput
+    UpdateCollaborationChangeRequestOutput.add_member(:collaboration_change_request, ::Smithy::Schema::Shapes::MemberShape.new(target: CollaborationChangeRequest, name: "collaborationChangeRequest", traits: {"smithy.api#required" => {}}))
+    UpdateCollaborationChangeRequestOutput.type = Types::UpdateCollaborationChangeRequestOutput
     UpdateCollaborationOperationInput.add_member(:collaboration_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: CollaborationIdentifier, name: "collaborationIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "CollaborationId"}))
     UpdateCollaborationOperationInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: CollaborationName, name: "name"))
     UpdateCollaborationOperationInput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: CollaborationDescription, name: "description"))
@@ -2352,14 +2906,34 @@ module Aws::CleanRooms
     UpdateIdNamespaceAssociationInput.type = Types::UpdateIdNamespaceAssociationInput
     UpdateIdNamespaceAssociationOutput.add_member(:id_namespace_association, ::Smithy::Schema::Shapes::MemberShape.new(target: IdNamespaceAssociation, name: "idNamespaceAssociation", traits: {"smithy.api#required" => {}}))
     UpdateIdNamespaceAssociationOutput.type = Types::UpdateIdNamespaceAssociationOutput
+    UpdateIntermediateTableAnalysisRuleInput.add_member(:membership_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipIdentifier, name: "membershipIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "MembershipId"}))
+    UpdateIntermediateTableAnalysisRuleInput.add_member(:intermediate_table_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: IntermediateTableIdentifier, name: "intermediateTableIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "IntermediateTableId"}))
+    UpdateIntermediateTableAnalysisRuleInput.add_member(:analysis_rule_type, ::Smithy::Schema::Shapes::MemberShape.new(target: IntermediateTableAnalysisRuleType, name: "analysisRuleType", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateIntermediateTableAnalysisRuleInput.add_member(:analysis_rule_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: IntermediateTableAnalysisRulePolicy, name: "analysisRulePolicy", traits: {"smithy.api#required" => {}}))
+    UpdateIntermediateTableAnalysisRuleInput.type = Types::UpdateIntermediateTableAnalysisRuleInput
+    UpdateIntermediateTableAnalysisRuleOutput.add_member(:analysis_rule, ::Smithy::Schema::Shapes::MemberShape.new(target: IntermediateTableAnalysisRule, name: "analysisRule", traits: {"smithy.api#required" => {}}))
+    UpdateIntermediateTableAnalysisRuleOutput.type = Types::UpdateIntermediateTableAnalysisRuleOutput
+    UpdateIntermediateTableInput.add_member(:intermediate_table_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: IntermediateTableIdentifier, name: "intermediateTableIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "IntermediateTableId"}))
+    UpdateIntermediateTableInput.add_member(:membership_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipIdentifier, name: "membershipIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "MembershipId"}))
+    UpdateIntermediateTableInput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceDescription, name: "description"))
+    UpdateIntermediateTableInput.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KMSKeyArn, name: "kmsKeyArn"))
+    UpdateIntermediateTableInput.add_member(:columns, ::Smithy::Schema::Shapes::MemberShape.new(target: IntermediateTableColumnList, name: "columns"))
+    UpdateIntermediateTableInput.type = Types::UpdateIntermediateTableInput
+    UpdateIntermediateTableOutput.add_member(:intermediate_table, ::Smithy::Schema::Shapes::MemberShape.new(target: IntermediateTable, name: "intermediateTable", traits: {"smithy.api#required" => {}}))
+    UpdateIntermediateTableOutput.type = Types::UpdateIntermediateTableOutput
     UpdateMembershipOperationInput.add_member(:membership_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipIdentifier, name: "membershipIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "MembershipId"}))
     UpdateMembershipOperationInput.add_member(:query_log_status, ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipQueryLogStatus, name: "queryLogStatus"))
     UpdateMembershipOperationInput.add_member(:job_log_status, ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipJobLogStatus, name: "jobLogStatus"))
     UpdateMembershipOperationInput.add_member(:default_result_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipProtectedQueryResultConfiguration, name: "defaultResultConfiguration"))
     UpdateMembershipOperationInput.add_member(:default_job_result_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipProtectedJobResultConfiguration, name: "defaultJobResultConfiguration"))
+    UpdateMembershipOperationInput.add_member(:membership_payment_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateMembershipPaymentConfiguration, name: "membershipPaymentConfiguration"))
     UpdateMembershipOperationInput.type = Types::UpdateMembershipOperationInput
     UpdateMembershipOperationOutput.add_member(:membership, ::Smithy::Schema::Shapes::MemberShape.new(target: Membership, name: "membership", traits: {"smithy.api#required" => {}}))
     UpdateMembershipOperationOutput.type = Types::UpdateMembershipOperationOutput
+    UpdateMembershipPaymentConfiguration.add_member(:query_compute, ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipQueryComputePaymentConfig, name: "queryCompute"))
+    UpdateMembershipPaymentConfiguration.add_member(:machine_learning, ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipMLPaymentConfig, name: "machineLearning"))
+    UpdateMembershipPaymentConfiguration.add_member(:job_compute, ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipJobComputePaymentConfig, name: "jobCompute"))
+    UpdateMembershipPaymentConfiguration.type = Types::UpdateMembershipPaymentConfiguration
     UpdatePrivacyBudgetTemplateInput.add_member(:membership_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipIdentifier, name: "membershipIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "MembershipId"}))
     UpdatePrivacyBudgetTemplateInput.add_member(:privacy_budget_template_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: PrivacyBudgetTemplateIdentifier, name: "privacyBudgetTemplateIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "PrivacyBudgetTemplateId"}))
     UpdatePrivacyBudgetTemplateInput.add_member(:privacy_budget_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PrivacyBudgetType, name: "privacyBudgetType", traits: {"smithy.api#required" => {}}))
@@ -2387,17 +2961,22 @@ module Aws::CleanRooms
     ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
     ValidationExceptionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member"))
-    WorkerComputeConfiguration.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkerComputeType, name: "type"))
-    WorkerComputeConfiguration.add_member(:number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "number", traits: {"smithy.api#range" => {"min" => 2, "max" => 400}}))
+    WorkerComputeConfiguration.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkerComputeType, name: "type", traits: {"smithy.api#addedDefault" => {}, "smithy.api#clientOptional" => {}, "smithy.api#default" => "CR.1X"}))
+    WorkerComputeConfiguration.add_member(:number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "number", traits: {"smithy.api#addedDefault" => {}, "smithy.api#clientOptional" => {}, "smithy.api#default" => 16, "smithy.api#range" => {"min" => 2, "max" => 1024}}))
+    WorkerComputeConfiguration.add_member(:properties, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkerComputeConfigurationProperties, name: "properties"))
     WorkerComputeConfiguration.type = Types::WorkerComputeConfiguration
+    WorkerComputeConfigurationProperties.add_member(:spark, Types::WorkerComputeConfigurationProperties::Spark, ::Smithy::Schema::Shapes::MemberShape.new(target: SparkProperties, name: "spark"))
+    WorkerComputeConfigurationProperties.add_member(:unknown, Types::WorkerComputeConfigurationProperties::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    WorkerComputeConfigurationProperties.type = Types::WorkerComputeConfigurationProperties
     WorkerComputeType.add_member(:cr1_x, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CR1X", traits: {"smithy.api#enumValue" => "CR.1X"}))
     WorkerComputeType.add_member(:cr4_x, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CR4X", traits: {"smithy.api#enumValue" => "CR.4X"}))
+    WorkerComputeType.add_member(:cr8_x, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CR8X", traits: {"smithy.api#enumValue" => "CR.8X"}))
 
     AWSBastionControlPlaneServiceLambda = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.cleanrooms#AWSBastionControlPlaneServiceLambda"
       service.name = "AWSBastionControlPlaneServiceLambda"
       service.version = "2022-02-17"
-      service.traits = {"aws.api#service" => {"sdkId" => "CleanRooms", "arnNamespace" => "cleanrooms", "cloudTrailEventSource" => "cleanrooms.amazonaws.com"}, "aws.auth#sigv4" => {"name" => "cleanrooms"}, "aws.iam#supportedPrincipalTypes" => ["Root", "IAMUser", "IAMRole", "FederatedUser"], "aws.protocols#restJson1" => {}, "smithy.api#cors" => {"additionalAllowedHeaders" => ["*", "content-type", "x-amz-content-sha256", "x-amz-user-agent", "x-amzn-platform-id", "x-amzn-trace-id"], "additionalExposedHeaders" => ["x-amzn-errortype", "x-amzn-requestid", "x-amzn-trace-id"], "maxAge" => 86400}, "smithy.api#title" => "AWS Clean Rooms Service"}
+      service.traits = {"aws.api#service" => {"sdkId" => "CleanRooms", "arnNamespace" => "cleanrooms", "cloudTrailEventSource" => "cleanrooms.amazonaws.com"}, "aws.auth#sigv4" => {"name" => "cleanrooms"}, "aws.iam#supportedPrincipalTypes" => ["Root", "IAMUser", "IAMRole", "FederatedUser"], "aws.protocols#restJson1" => {}, "smithy.api#cors" => {"additionalAllowedHeaders" => ["*", "content-type", "x-amz-content-sha256", "x-amz-user-agent", "x-amzn-platform-id", "x-amzn-trace-id"], "additionalExposedHeaders" => ["x-amzn-errortype", "x-amzn-requestid", "x-amzn-trace-id"], "maxAge" => 86400}, "smithy.api#title" => "AWS Clean Rooms Service", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://cleanrooms-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://cleanrooms-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://cleanrooms.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://cleanrooms.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
       service.add_operation(:batch_get_collaboration_analysis_template, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cleanrooms#BatchGetCollaborationAnalysisTemplate"
         operation.name = "BatchGetCollaborationAnalysisTemplate"
@@ -2571,6 +3150,34 @@ module Aws::CleanRooms
         operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to link an AWS Entity Resolution Id Namespace with a collaboration by creating a new association", "smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/memberships/{membershipIdentifier}/idnamespaceassociations"}}
       end)
+      service.add_operation(:create_intermediate_table, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cleanrooms#CreateIntermediateTable"
+        operation.name = "CreateIntermediateTable"
+        operation.input = CreateIntermediateTableInput
+        operation.output = CreateIntermediateTableOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to create a new intermediate table in a membership", "smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/memberships/{membershipIdentifier}/intermediateTables"}}
+      end)
+      service.add_operation(:create_intermediate_table_analysis_rule, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cleanrooms#CreateIntermediateTableAnalysisRule"
+        operation.name = "CreateIntermediateTableAnalysisRule"
+        operation.input = CreateIntermediateTableAnalysisRuleInput
+        operation.output = CreateIntermediateTableAnalysisRuleOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to create analysis rules for intermediate tables", "smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/memberships/{membershipIdentifier}/intermediateTables/{intermediateTableIdentifier}/analysisRule"}, "smithy.api#idempotent" => {}}
+      end)
       service.add_operation(:create_membership, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cleanrooms#CreateMembership"
         operation.name = "CreateMembership"
@@ -2710,6 +3317,32 @@ module Aws::CleanRooms
         operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to remove an Id Namespace Association from a collaboration", "smithy.api#http" => {"code" => 204, "method" => "DELETE", "uri" => "/memberships/{membershipIdentifier}/idnamespaceassociations/{idNamespaceAssociationIdentifier}"}, "smithy.api#idempotent" => {}}
       end)
+      service.add_operation(:delete_intermediate_table, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cleanrooms#DeleteIntermediateTable"
+        operation.name = "DeleteIntermediateTable"
+        operation.input = DeleteIntermediateTableInput
+        operation.output = DeleteIntermediateTableOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to remove an intermediate table from a collaboration", "smithy.api#http" => {"code" => 204, "method" => "DELETE", "uri" => "/memberships/{membershipIdentifier}/intermediateTables/{intermediateTableIdentifier}"}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:delete_intermediate_table_analysis_rule, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cleanrooms#DeleteIntermediateTableAnalysisRule"
+        operation.name = "DeleteIntermediateTableAnalysisRule"
+        operation.input = DeleteIntermediateTableAnalysisRuleInput
+        operation.output = DeleteIntermediateTableAnalysisRuleOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to delete an existing analysis rule for an intermediate table", "smithy.api#http" => {"code" => 204, "method" => "DELETE", "uri" => "/memberships/{membershipIdentifier}/intermediateTables/{intermediateTableIdentifier}/analysisRule/{analysisRuleType}"}, "smithy.api#idempotent" => {}}
+      end)
       service.add_operation(:delete_member, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cleanrooms#DeleteMember"
         operation.name = "DeleteMember"
@@ -2747,6 +3380,31 @@ module Aws::CleanRooms
         operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to remove a privacy budget from a collaboration", "smithy.api#http" => {"code" => 204, "method" => "DELETE", "uri" => "/memberships/{membershipIdentifier}/privacybudgettemplates/{privacyBudgetTemplateIdentifier}"}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:disallow_intermediate_table, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cleanrooms#DisallowIntermediateTable"
+        operation.name = "DisallowIntermediateTable"
+        operation.input = DisallowIntermediateTableInput
+        operation.output = DisallowIntermediateTableOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to invalidate an intermediate table", "smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/memberships/{membershipIdentifier}/disallowIntermediateTable"}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:get_analysis_log_export, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cleanrooms#GetAnalysisLogExport"
+        operation.name = "GetAnalysisLogExport"
+        operation.input = GetAnalysisLogExportInput
+        operation.output = GetAnalysisLogExportOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to get an analysis log export", "smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/memberships/{membershipIdentifier}/analysislogexports/{analysisLogExportIdentifier}"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_analysis_template, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cleanrooms#GetAnalysisTemplate"
@@ -2915,6 +3573,30 @@ module Aws::CleanRooms
         operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to view details of an id namespace association", "smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/memberships/{membershipIdentifier}/idnamespaceassociations/{idNamespaceAssociationIdentifier}"}, "smithy.api#readonly" => {}}
       end)
+      service.add_operation(:get_intermediate_table, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cleanrooms#GetIntermediateTable"
+        operation.name = "GetIntermediateTable"
+        operation.input = GetIntermediateTableInput
+        operation.output = GetIntermediateTableOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to view details of an intermediate table", "smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/memberships/{membershipIdentifier}/intermediateTables/{intermediateTableIdentifier}"}, "smithy.api#readonly" => {}}
+      end)
+      service.add_operation(:get_intermediate_table_analysis_rule, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cleanrooms#GetIntermediateTableAnalysisRule"
+        operation.name = "GetIntermediateTableAnalysisRule"
+        operation.input = GetIntermediateTableAnalysisRuleInput
+        operation.output = GetIntermediateTableAnalysisRuleOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to get analysis rules for an intermediate table", "smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/memberships/{membershipIdentifier}/intermediateTables/{intermediateTableIdentifier}/analysisRule/{analysisRuleType}"}, "smithy.api#readonly" => {}}
+      end)
       service.add_operation(:get_membership, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cleanrooms#GetMembership"
         operation.name = "GetMembership"
@@ -2986,6 +3668,19 @@ module Aws::CleanRooms
         operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to view analysis rules associated with a schema", "smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/collaborations/{collaborationIdentifier}/schemas/{name}/analysisRule/{type}"}, "smithy.api#readonly" => {}}
+      end)
+      service.add_operation(:list_analysis_log_exports, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cleanrooms#ListAnalysisLogExports"
+        operation.name = "ListAnalysisLogExports"
+        operation.input = ListAnalysisLogExportsInput
+        operation.output = ListAnalysisLogExportsOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to list analysis log exports", "smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/memberships/{membershipIdentifier}/analysislogexports"}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListAnalysisLogExports.new
       end)
       service.add_operation(:list_analysis_templates, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cleanrooms#ListAnalysisTemplates"
@@ -3154,6 +3849,32 @@ module Aws::CleanRooms
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to list entity resolution data associations for a membership", "smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/memberships/{membershipIdentifier}/idnamespaceassociations"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListIdNamespaceAssociations.new
       end)
+      service.add_operation(:list_intermediate_table_versions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cleanrooms#ListIntermediateTableVersions"
+        operation.name = "ListIntermediateTableVersions"
+        operation.input = ListIntermediateTableVersionsInput
+        operation.output = ListIntermediateTableVersionsOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to list versions of an intermediate table", "smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/memberships/{membershipIdentifier}/intermediateTables/{intermediateTableIdentifier}/versions"}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListIntermediateTableVersions.new
+      end)
+      service.add_operation(:list_intermediate_tables, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cleanrooms#ListIntermediateTables"
+        operation.name = "ListIntermediateTables"
+        operation.input = ListIntermediateTablesInput
+        operation.output = ListIntermediateTablesOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to list intermediate tables for a membership", "smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/memberships/{membershipIdentifier}/intermediateTables"}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListIntermediateTables.new
+      end)
       service.add_operation(:list_members, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cleanrooms#ListMembers"
         operation.name = "ListMembers"
@@ -3267,6 +3988,20 @@ module Aws::CleanRooms
         operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to link an id mapping workflow with a collaboration by creating a new table", "smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/memberships/{membershipIdentifier}/idmappingtables/{idMappingTableIdentifier}/populate"}}
       end)
+      service.add_operation(:populate_intermediate_table, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cleanrooms#PopulateIntermediateTable"
+        operation.name = "PopulateIntermediateTable"
+        operation.input = PopulateIntermediateTableInput
+        operation.output = PopulateIntermediateTableOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to populate an intermediate table by executing its stored query", "smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/memberships/{membershipIdentifier}/intermediateTables/{intermediateTableIdentifier}/populate"}}
+      end)
       service.add_operation(:preview_privacy_impact, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cleanrooms#PreviewPrivacyImpact"
         operation.name = "PreviewPrivacyImpact"
@@ -3278,6 +4013,19 @@ module Aws::CleanRooms
         operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to preview a new privacy impacting change", "smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/memberships/{membershipIdentifier}/previewprivacyimpact"}}
+      end)
+      service.add_operation(:start_analysis_log_export, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cleanrooms#StartAnalysisLogExport"
+        operation.name = "StartAnalysisLogExport"
+        operation.input = StartAnalysisLogExportInput
+        operation.output = StartAnalysisLogExportOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to start an analysis log export", "smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/memberships/{membershipIdentifier}/analysislogexports"}}
       end)
       service.add_operation(:start_protected_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cleanrooms#StartProtectedJob"
@@ -3346,6 +4094,19 @@ module Aws::CleanRooms
         operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to update details of the collaboration", "smithy.api#http" => {"code" => 200, "method" => "PATCH", "uri" => "/collaborations/{collaborationIdentifier}"}}
       end)
+      service.add_operation(:update_collaboration_change_request, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cleanrooms#UpdateCollaborationChangeRequest"
+        operation.name = "UpdateCollaborationChangeRequest"
+        operation.input = UpdateCollaborationChangeRequestInput
+        operation.output = UpdateCollaborationChangeRequestOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "PATCH", "uri" => "/collaborations/{collaborationIdentifier}/changeRequests/{changeRequestIdentifier}"}}
+      end)
       service.add_operation(:update_configured_audience_model_association, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cleanrooms#UpdateConfiguredAudienceModelAssociation"
         operation.name = "UpdateConfiguredAudienceModelAssociation"
@@ -3381,6 +4142,7 @@ module Aws::CleanRooms
         operation.errors << ConflictException
         operation.errors << InternalServerException
         operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to view update analysis rules for a configured table", "smithy.api#http" => {"code" => 200, "method" => "PATCH", "uri" => "/configuredTables/{configuredTableIdentifier}/analysisRule/{analysisRuleType}"}}
@@ -3434,6 +4196,31 @@ module Aws::CleanRooms
         operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to update a entity resolution input association", "smithy.api#http" => {"code" => 200, "method" => "PATCH", "uri" => "/memberships/{membershipIdentifier}/idnamespaceassociations/{idNamespaceAssociationIdentifier}"}}
+      end)
+      service.add_operation(:update_intermediate_table, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cleanrooms#UpdateIntermediateTable"
+        operation.name = "UpdateIntermediateTable"
+        operation.input = UpdateIntermediateTableInput
+        operation.output = UpdateIntermediateTableOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to update an intermediate table", "smithy.api#http" => {"code" => 200, "method" => "PATCH", "uri" => "/memberships/{membershipIdentifier}/intermediateTables/{intermediateTableIdentifier}"}}
+      end)
+      service.add_operation(:update_intermediate_table_analysis_rule, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cleanrooms#UpdateIntermediateTableAnalysisRule"
+        operation.name = "UpdateIntermediateTableAnalysisRule"
+        operation.input = UpdateIntermediateTableAnalysisRuleInput
+        operation.output = UpdateIntermediateTableAnalysisRuleOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to update analysis rules for an intermediate table", "smithy.api#http" => {"code" => 200, "method" => "PATCH", "uri" => "/memberships/{membershipIdentifier}/intermediateTables/{intermediateTableIdentifier}/analysisRule/{analysisRuleType}"}}
       end)
       service.add_operation(:update_membership, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cleanrooms#UpdateMembership"

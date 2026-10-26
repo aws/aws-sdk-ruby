@@ -9,6 +9,9 @@ module Aws::DirectConnect
     class DuplicateTagKeysException < Smithy::Client::ServiceError
       def message: () -> String?
     end
+    class LimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
     class TooManyTagsException < Smithy::Client::ServiceError
       def message: () -> String?
     end

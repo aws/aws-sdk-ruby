@@ -30,7 +30,9 @@ module Aws::QuickSight
   # * {IdentityTypeNotSupportedException}
   # * {InternalFailureException}
   # * {InternalServerException}
+  # * {InvalidDataSetParameterValueException}
   # * {InvalidNextTokenException}
+  # * {InvalidParameterException}
   # * {InvalidParameterValueException}
   # * {InvalidRequestException}
   # * {LimitExceededException}
@@ -51,7 +53,7 @@ module Aws::QuickSight
 
     # <p>You don't have access to this item. The provided credentials couldn't be
     # 			validated. You might not be authorized to carry out the request. Make sure that your
-    # 			account is authorized to use the Amazon QuickSight service, that your policies have the
+    # 			account is authorized to use the Amazon Quick Sight service, that your policies have the
     # 			correct permissions, and that you are using the correct credentials.</p>
     class AccessDeniedException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
@@ -106,7 +108,7 @@ module Aws::QuickSight
       end
     end
 
-    # <p>The customer managed key that is registered to your QuickSight account is unavailable.</p>
+    # <p>The customer managed key that is registered to your Amazon Quick Sight account is unavailable.</p>
     class CustomerManagedKeyUnavailableException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::QuickSight::Types::CustomerManagedKeyUnavailableException] data
@@ -125,7 +127,7 @@ module Aws::QuickSight
     end
 
     # <p>The domain specified isn't on the allow list. All domains for embedded dashboards must be
-    # 			added to the approved list by an Amazon QuickSight admin.</p>
+    # 			added to the approved list by an Amazon Quick Suite admin.</p>
     class DomainNotWhitelistedException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::QuickSight::Types::DomainNotWhitelistedException] data
@@ -193,10 +195,46 @@ module Aws::QuickSight
       end
     end
 
+    # <p>An exception thrown when an invalid parameter value is provided for dataset operations.</p>
+    class InvalidDataSetParameterValueException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::QuickSight::Types::InvalidDataSetParameterValueException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+
+      # <p>The Amazon Web Services request ID for this request.</p>
+      def request_id
+        @data[:request_id]
+      end
+    end
+
     # <p>The <code>NextToken</code> value isn't valid.</p>
     class InvalidNextTokenException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::QuickSight::Types::InvalidNextTokenException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+
+      # <p>The Amazon Web Services request ID for this request.</p>
+      def request_id
+        @data[:request_id]
+      end
+    end
+
+    # <p>One or more parameter has a value that isn't valid.</p>
+    class InvalidParameterException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::QuickSight::Types::InvalidParameterException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
         super
       end
@@ -414,14 +452,14 @@ module Aws::QuickSight
       end
     end
 
-    # <p>This error indicates that you are calling an embedding operation in Amazon QuickSight
-    # 			without the required pricing plan on your Amazon Web Services account. Before you can use embedding 
-    # 			for anonymous users, a QuickSight administrator needs to add capacity pricing to QuickSight. You 
-    # 		    can do this on the <b>Manage QuickSight</b> page. </p>
-    #          <p>After capacity pricing is added, you can use the 
+    # <p>This error indicates that you are calling an embedding operation in Amazon Quick Sight
+    # 			without the required pricing plan on your Amazon Web Services account. Before you can use embedding
+    # 			for anonymous users, a Quick Suite administrator needs to add capacity pricing to Quick Sight. You
+    # 		    can do this on the <b>Manage Quick Suite</b> page. </p>
+    #          <p>After capacity pricing is added, you can use the
     #             <code>
     #                <a href="https://docs.aws.amazon.com/quicksight/latest/APIReference/API_GetDashboardEmbedUrl.html">GetDashboardEmbedUrl</a>
-    #             </code> API operation with the 
+    #             </code> API operation with the
     #             <code>--identity-type ANONYMOUS</code> option.</p>
     class UnsupportedPricingPlanException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
@@ -440,9 +478,9 @@ module Aws::QuickSight
       end
     end
 
-    # <p>This error indicates that you are calling an operation on an Amazon QuickSight
+    # <p>This error indicates that you are calling an operation on an Amazon Quick Suite
     # 			subscription where the edition doesn't include support for that operation. Amazon
-    # 			QuickSight currently has Standard Edition and Enterprise Edition. Not every operation and
+    # 			Quick Suite currently has Standard Edition and Enterprise Edition. Not every operation and
     # 			capability is available in every edition.</p>
     class UnsupportedUserEditionException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context

@@ -144,18 +144,18 @@ module Aws::TrustedAdvisor
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -209,7 +209,7 @@ module Aws::TrustedAdvisor
       super
     end
 
-    # <p>Update one or more exclusion status for a list of recommendation resources</p>
+    # <p>Update one or more exclusion statuses for a list of recommendation resources. This API supports up to 25 unique recommendation resource ARNs per request. This API currently doesn't support prioritized recommendation resources. This API updates global recommendations, eliminating the need to call the API in each AWS Region. After submitting an exclusion update, note that it might take a few minutes for the changes to be reflected in the system.</p>
     # @param [Hash, Types::BatchUpdateRecommendationResourceExclusionRequest] params
     # @option params [Array<Types::RecommendationResourceExclusion>] :recommendation_resource_exclusions
     #   <p>A list of recommendation resource ARNs and exclusion status to update</p>
@@ -263,9 +263,7 @@ module Aws::TrustedAdvisor
       request.send_request(options)
     end
 
-    # <p>Get a specific recommendation within an AWS Organizations organization. This API supports only prioritized
-    #             recommendations.
-    #         </p>
+    # <p>Get a specific recommendation within an AWS Organizations organization. This API supports only prioritized recommendations and provides global priority recommendations, eliminating the need to call the API in each AWS Region. </p>
     # @param [Hash, Types::GetOrganizationRecommendationRequest] params
     # @option params [String] :organization_recommendation_identifier
     #   <p>The Recommendation identifier</p>
@@ -317,13 +315,14 @@ module Aws::TrustedAdvisor
     #       status: "ok" # One of: ["ok", "warning", "error"], # required
     #       lifecycle_stage: "in_progress" # One of: ["in_progress", "pending_response", "dismissed", "resolved"],
     #       pillars: ["cost_optimizing" # One of: ["cost_optimizing", "performance", "security", "service_limits", "fault_tolerance", "operational_excellence"]], # required
-    #       source: "aws_config" # One of: ["aws_config", "compute_optimizer", "cost_explorer", "lse", "manual", "pse", "rds", "resilience", "resilience_hub", "security_hub", "stir", "ta_check", "well_architected"], # required
+    #       source: "aws_config" # One of: ["aws_config", "compute_optimizer", "cost_explorer", "lse", "manual", "pse", "rds", "resilience", "resilience_hub", "security_hub", "stir", "ta_check", "well_architected", "cost_optimization_hub"], # required
     #       aws_services: ["RecommendationAwsService"],
     #       name: "String", # required
     #       resources_aggregates: { # required
     #         ok_count: 1, # required
     #         warning_count: 1, # required
     #         error_count: 1, # required
+    #         excluded_count: 1
     #       },
     #       pillar_specific_aggregates: {
     #         cost_optimizing: {
@@ -349,10 +348,12 @@ module Aws::TrustedAdvisor
       request.send_request(options)
     end
 
-    # <p>Get a specific Recommendation</p>
+    # <p>Get a specific Recommendation. This API provides global recommendations, eliminating the need to call the API in each AWS Region.</p>
     # @param [Hash, Types::GetRecommendationRequest] params
     # @option params [String] :recommendation_identifier
     #   <p>The Recommendation identifier</p>
+    # @option params [String] :language
+    #   <p>The ISO 639-1 code for the language that you want your recommendations to appear in.</p>
     # @example Get a Recommendation by ARN
     #   # Example operation for get_recommendation
     #   params = {
@@ -394,6 +395,7 @@ module Aws::TrustedAdvisor
     # @example Request syntax with placeholder values
     #   params = {
     #     recommendation_identifier: "AccountRecommendationIdentifier", # required
+    #     language: "en" # One of: ["en", "ja", "zh", "fr", "de", "ko", "zh_TW", "it", "es", "pt_BR", "id"]
     #   }
     #   options = {}
     #   response = client.get_recommendation(params, options)
@@ -407,13 +409,14 @@ module Aws::TrustedAdvisor
     #       status: "ok" # One of: ["ok", "warning", "error"], # required
     #       lifecycle_stage: "in_progress" # One of: ["in_progress", "pending_response", "dismissed", "resolved"],
     #       pillars: ["cost_optimizing" # One of: ["cost_optimizing", "performance", "security", "service_limits", "fault_tolerance", "operational_excellence"]], # required
-    #       source: "aws_config" # One of: ["aws_config", "compute_optimizer", "cost_explorer", "lse", "manual", "pse", "rds", "resilience", "resilience_hub", "security_hub", "stir", "ta_check", "well_architected"], # required
+    #       source: "aws_config" # One of: ["aws_config", "compute_optimizer", "cost_explorer", "lse", "manual", "pse", "rds", "resilience", "resilience_hub", "security_hub", "stir", "ta_check", "well_architected", "cost_optimization_hub"], # required
     #       aws_services: ["RecommendationAwsService"],
     #       name: "String", # required
     #       resources_aggregates: { # required
     #         ok_count: 1, # required
     #         warning_count: 1, # required
     #         error_count: 1, # required
+    #         excluded_count: 1
     #       },
     #       pillar_specific_aggregates: {
     #         cost_optimizing: {
@@ -424,6 +427,7 @@ module Aws::TrustedAdvisor
     #       created_at: Time.now,
     #       last_updated_at: Time.now,
     #       arn: "AccountRecommendationArn", # required
+    #       status_reason: "no_data_ok" # One of: ["no_data_ok"],
     #       description: "String", # required
     #       created_by: "String",
     #       updated_on_behalf_of: "String",
@@ -439,12 +443,10 @@ module Aws::TrustedAdvisor
       request.send_request(options)
     end
 
-    # <p>List a filterable set of Checks</p>
+    # <p>List a filterable set of Checks. This API provides global recommendations, eliminating the need to call the API in each AWS Region.</p>
     # @param [Hash, Types::ListChecksRequest] params
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous response in the next request
-    #               to retrieve the next set of results.
-    #           </p>
+    #   <p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results. </p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
     # @option params [String] :pillar
@@ -483,7 +485,13 @@ module Aws::TrustedAdvisor
     #         pillars: [
     #           security
     #         ],
-    #         source: ta_check
+    #         source: ta_check,
+    #         resource_arn_queryable: true,
+    #         aws_resource_types: [
+    #           "AWS::EC2::SecurityGroup"
+    #         ],
+    #         check_granularity: "resource",
+    #         recommendation_id: "9534ec9b-bf3a-44e8-8213-2ed68b39d9d5"
     #       },
     #       {
     #         arn: "arn:aws:trustedadvisor:::check/1qazXsw23e",
@@ -514,7 +522,12 @@ module Aws::TrustedAdvisor
     #         pillars: [
     #           cost_optimizing
     #         ],
-    #         source: ta_check
+    #         source: ta_check,
+    #         resource_arn_queryable: false,
+    #         aws_resource_types: [
+    #         ],
+    #         check_granularity: "account",
+    #         recommendation_id: "8b602b6f-452d-4cb2-8a9e-c7650955d9cd"
     #       },
     #       {
     #         arn: "arn:aws:trustedadvisor:::check/1qw23er45t",
@@ -541,7 +554,12 @@ module Aws::TrustedAdvisor
     #         pillars: [
     #           cost_optimizing
     #         ],
-    #         source: ta_check
+    #         source: ta_check,
+    #         resource_arn_queryable: false,
+    #         aws_resource_types: [
+    #         ],
+    #         check_granularity: "account",
+    #         recommendation_id: "4ecff4d4-1bc1-4c99-a5b8-0fff9ee500d6"
     #       }
     #     ],
     #     next_token: "<REDACTED>"
@@ -552,7 +570,7 @@ module Aws::TrustedAdvisor
     #     max_results: 1,
     #     pillar: "cost_optimizing" # One of: ["cost_optimizing", "performance", "security", "service_limits", "fault_tolerance", "operational_excellence"],
     #     aws_service: "RecommendationAwsService",
-    #     source: "aws_config" # One of: ["aws_config", "compute_optimizer", "cost_explorer", "lse", "manual", "pse", "rds", "resilience", "resilience_hub", "security_hub", "stir", "ta_check", "well_architected"],
+    #     source: "aws_config" # One of: ["aws_config", "compute_optimizer", "cost_explorer", "lse", "manual", "pse", "rds", "resilience", "resilience_hub", "security_hub", "stir", "ta_check", "well_architected", "cost_optimization_hub"],
     #     language: "en" # One of: ["en", "ja", "zh", "fr", "de", "ko", "zh_TW", "it", "es", "pt_BR", "id"]
     #   }
     #   options = {}
@@ -569,10 +587,14 @@ module Aws::TrustedAdvisor
     #         description: "String", # required
     #         pillars: ["cost_optimizing" # One of: ["cost_optimizing", "performance", "security", "service_limits", "fault_tolerance", "operational_excellence"]], # required
     #         aws_services: ["RecommendationAwsService"], # required
-    #         source: "aws_config" # One of: ["aws_config", "compute_optimizer", "cost_explorer", "lse", "manual", "pse", "rds", "resilience", "resilience_hub", "security_hub", "stir", "ta_check", "well_architected"], # required
+    #         source: "aws_config" # One of: ["aws_config", "compute_optimizer", "cost_explorer", "lse", "manual", "pse", "rds", "resilience", "resilience_hub", "security_hub", "stir", "ta_check", "well_architected", "cost_optimization_hub"], # required
     #         metadata: { # required
     #           "String" => "String"
-    #         }
+    #         },
+    #         resource_arn_queryable: false,
+    #         aws_resource_types: ["String"],
+    #         check_granularity: "String",
+    #         recommendation_id: "String"
     #       }
     #     ]
     #   }
@@ -582,14 +604,10 @@ module Aws::TrustedAdvisor
       request.send_request(options)
     end
 
-    # <p>Lists the accounts that own the resources for an organization aggregate recommendation. This API only
-    #             supports prioritized recommendations.
-    #         </p>
+    # <p>Lists the accounts that own the resources for an organization aggregate recommendation. This API only supports prioritized recommendations and provides global priority recommendations, eliminating the need to call the API in each AWS Region. </p>
     # @param [Hash, Types::ListOrganizationRecommendationAccountsRequest] params
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous response in the next request
-    #               to retrieve the next set of results.
-    #           </p>
+    #   <p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results. </p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
     # @option params [String] :organization_recommendation_identifier
@@ -649,14 +667,10 @@ module Aws::TrustedAdvisor
       request.send_request(options)
     end
 
-    # <p>List Resources of a Recommendation within an Organization. This API only supports prioritized
-    #             recommendations.
-    #         </p>
+    # <p>List Resources of a Recommendation within an Organization. This API only supports prioritized recommendations and provides global priority recommendations, eliminating the need to call the API in each AWS Region. </p>
     # @param [Hash, Types::ListOrganizationRecommendationResourcesRequest] params
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous response in the next request
-    #               to retrieve the next set of results.
-    #           </p>
+    #   <p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results. </p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
     # @option params [String] :status
@@ -781,14 +795,10 @@ module Aws::TrustedAdvisor
       request.send_request(options)
     end
 
-    # <p>List a filterable set of Recommendations within an Organization. This API only supports prioritized
-    #             recommendations.
-    #         </p>
+    # <p>List a filterable set of Recommendations within an Organization. This API only supports prioritized recommendations and provides global priority recommendations, eliminating the need to call the API in each AWS Region. </p>
     # @param [Hash, Types::ListOrganizationRecommendationsRequest] params
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous response in the next request
-    #               to retrieve the next set of results.
-    #           </p>
+    #   <p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results. </p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
     # @option params [String] :type
@@ -938,7 +948,7 @@ module Aws::TrustedAdvisor
     #     status: "ok" # One of: ["ok", "warning", "error"],
     #     pillar: "cost_optimizing" # One of: ["cost_optimizing", "performance", "security", "service_limits", "fault_tolerance", "operational_excellence"],
     #     aws_service: "RecommendationAwsService",
-    #     source: "aws_config" # One of: ["aws_config", "compute_optimizer", "cost_explorer", "lse", "manual", "pse", "rds", "resilience", "resilience_hub", "security_hub", "stir", "ta_check", "well_architected"],
+    #     source: "aws_config" # One of: ["aws_config", "compute_optimizer", "cost_explorer", "lse", "manual", "pse", "rds", "resilience", "resilience_hub", "security_hub", "stir", "ta_check", "well_architected", "cost_optimization_hub"],
     #     check_identifier: "CheckIdentifier",
     #     after_last_updated_at: Time.now,
     #     before_last_updated_at: Time.now
@@ -957,13 +967,14 @@ module Aws::TrustedAdvisor
     #         status: "ok" # One of: ["ok", "warning", "error"], # required
     #         lifecycle_stage: "in_progress" # One of: ["in_progress", "pending_response", "dismissed", "resolved"],
     #         pillars: ["cost_optimizing" # One of: ["cost_optimizing", "performance", "security", "service_limits", "fault_tolerance", "operational_excellence"]], # required
-    #         source: "aws_config" # One of: ["aws_config", "compute_optimizer", "cost_explorer", "lse", "manual", "pse", "rds", "resilience", "resilience_hub", "security_hub", "stir", "ta_check", "well_architected"], # required
+    #         source: "aws_config" # One of: ["aws_config", "compute_optimizer", "cost_explorer", "lse", "manual", "pse", "rds", "resilience", "resilience_hub", "security_hub", "stir", "ta_check", "well_architected", "cost_optimization_hub"], # required
     #         aws_services: ["RecommendationAwsService"],
     #         name: "String", # required
     #         resources_aggregates: { # required
     #           ok_count: 1, # required
     #           warning_count: 1, # required
     #           error_count: 1, # required
+    #           excluded_count: 1
     #         },
     #         pillar_specific_aggregates: {
     #           cost_optimizing: {
@@ -983,12 +994,10 @@ module Aws::TrustedAdvisor
       request.send_request(options)
     end
 
-    # <p>List Resources of a Recommendation</p>
+    # <p>List Resources of a Recommendation. This API provides global recommendations, eliminating the need to call the API in each AWS Region.</p>
     # @param [Hash, Types::ListRecommendationResourcesRequest] params
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous response in the next request
-    #               to retrieve the next set of results.
-    #           </p>
+    #   <p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results. </p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
     # @option params [String] :status
@@ -999,6 +1008,8 @@ module Aws::TrustedAdvisor
     #   <p>The AWS Region code of the resource</p>
     # @option params [String] :recommendation_identifier
     #   <p>The Recommendation identifier</p>
+    # @option params [String] :language
+    #   <p>The ISO 639-1 code for the language that you want your recommendations to appear in.</p>
     # @example List all Resources for a Recommendation
     #   # Example operation for list_recommendation_resources
     #   params = {
@@ -1080,6 +1091,7 @@ module Aws::TrustedAdvisor
     #     exclusion_status: "excluded" # One of: ["excluded", "included"],
     #     region_code: "String",
     #     recommendation_identifier: "AccountRecommendationIdentifier", # required
+    #     language: "en" # One of: ["en", "ja", "zh", "fr", "de", "ko", "zh_TW", "it", "es", "pt_BR", "id"]
     #   }
     #   options = {}
     #   response = client.list_recommendation_resources(params, options)
@@ -1109,12 +1121,10 @@ module Aws::TrustedAdvisor
       request.send_request(options)
     end
 
-    # <p>List a filterable set of Recommendations</p>
+    # <p>List a filterable set of Recommendations. This API provides global recommendations, eliminating the need to call the API in each AWS Region.</p>
     # @param [Hash, Types::ListRecommendationsRequest] params
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous response in the next request
-    #               to retrieve the next set of results.
-    #           </p>
+    #   <p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results. </p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
     # @option params [String] :type
@@ -1133,6 +1143,8 @@ module Aws::TrustedAdvisor
     #   <p>After the last update of the Recommendation</p>
     # @option params [Time] :before_last_updated_at
     #   <p>Before the last update of the Recommendation</p>
+    # @option params [String] :language
+    #   <p>The ISO 639-1 code for the language that you want your recommendations to appear in.</p>
     # @example List all Recommendations
     #   # Example operation for list_recommendations
     #   params = {}
@@ -1288,10 +1300,11 @@ module Aws::TrustedAdvisor
     #     status: "ok" # One of: ["ok", "warning", "error"],
     #     pillar: "cost_optimizing" # One of: ["cost_optimizing", "performance", "security", "service_limits", "fault_tolerance", "operational_excellence"],
     #     aws_service: "RecommendationAwsService",
-    #     source: "aws_config" # One of: ["aws_config", "compute_optimizer", "cost_explorer", "lse", "manual", "pse", "rds", "resilience", "resilience_hub", "security_hub", "stir", "ta_check", "well_architected"],
+    #     source: "aws_config" # One of: ["aws_config", "compute_optimizer", "cost_explorer", "lse", "manual", "pse", "rds", "resilience", "resilience_hub", "security_hub", "stir", "ta_check", "well_architected", "cost_optimization_hub"],
     #     check_identifier: "CheckIdentifier",
     #     after_last_updated_at: Time.now,
-    #     before_last_updated_at: Time.now
+    #     before_last_updated_at: Time.now,
+    #     language: "en" # One of: ["en", "ja", "zh", "fr", "de", "ko", "zh_TW", "it", "es", "pt_BR", "id"]
     #   }
     #   options = {}
     #   response = client.list_recommendations(params, options)
@@ -1307,13 +1320,14 @@ module Aws::TrustedAdvisor
     #         status: "ok" # One of: ["ok", "warning", "error"], # required
     #         lifecycle_stage: "in_progress" # One of: ["in_progress", "pending_response", "dismissed", "resolved"],
     #         pillars: ["cost_optimizing" # One of: ["cost_optimizing", "performance", "security", "service_limits", "fault_tolerance", "operational_excellence"]], # required
-    #         source: "aws_config" # One of: ["aws_config", "compute_optimizer", "cost_explorer", "lse", "manual", "pse", "rds", "resilience", "resilience_hub", "security_hub", "stir", "ta_check", "well_architected"], # required
+    #         source: "aws_config" # One of: ["aws_config", "compute_optimizer", "cost_explorer", "lse", "manual", "pse", "rds", "resilience", "resilience_hub", "security_hub", "stir", "ta_check", "well_architected", "cost_optimization_hub"], # required
     #         aws_services: ["RecommendationAwsService"],
     #         name: "String", # required
     #         resources_aggregates: { # required
     #           ok_count: 1, # required
     #           warning_count: 1, # required
     #           error_count: 1, # required
+    #           excluded_count: 1
     #         },
     #         pillar_specific_aggregates: {
     #           cost_optimizing: {
@@ -1324,6 +1338,7 @@ module Aws::TrustedAdvisor
     #         created_at: Time.now,
     #         last_updated_at: Time.now,
     #         arn: "AccountRecommendationArn", # required
+    #         status_reason: "no_data_ok" # One of: ["no_data_ok"]
     #       }
     #     ]
     #   }
@@ -1333,9 +1348,89 @@ module Aws::TrustedAdvisor
       request.send_request(options)
     end
 
-    # <p>Update the lifecycle of a Recommendation within an Organization. This API only supports prioritized
-    #             recommendations.
-    #         </p>
+    # <p>List all Trusted Advisor recommendations for a given AWS resource ARN.</p>
+    # @param [Hash, Types::ListRecommendationsForResourceRequest] params
+    # @option params [String] :next_token
+    #   <p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results. </p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return per page</p>
+    # @option params [String] :aws_resource_arn
+    #   <p>The ARN of the AWS resource to query recommendations for</p>
+    # @option params [String] :pillar
+    #   <p>The pillar that the recommendation belongs to</p>
+    # @option params [String] :status
+    #   <p>The current status of the Recommendation Resource</p>
+    # @option params [String] :check_arn
+    #   <p>The AWS Trusted Advisor Check ARN that relates to the Recommendation</p>
+    # @option params [String] :language
+    #   <p>The ISO 639-1 code for the language that you want your recommendations to appear in.</p>
+    # @example List all Trusted Advisor Recommendations for an AWS Resource
+    #   # Example operation for list_recommendations_for_resource
+    #   params = {
+    #     aws_resource_arn: "arn:aws:ec2:us-east-1:000000000000:instance/i-0abcd1234efgh5678"
+    #   }
+    #   options = {}
+    #   response = client.list_recommendations_for_resource(params, options)
+    #   response.to_h #=>
+    #   {
+    #     recommendation_for_resource_summaries: [
+    #       {
+    #         check_arn: "arn:aws:trustedadvisor:::check/Qch7DwouX1",
+    #         recommendation_arn: "arn:aws:trustedadvisor::000000000000:recommendation/55fa4d2e-bbb7-491a-833b-5773e9589578",
+    #         aws_resource_arn: "arn:aws:ec2:us-east-1:000000000000:instance/i-0abcd1234efgh5678",
+    #         status: warning,
+    #         last_updated_at: Time.parse("2026-05-21T15:09:51.891Z"),
+    #         exclusion_status: included,
+    #         metadata: {
+    #           "Region" => "us-east-1",
+    #           "Resource" => "i-0abcd1234efgh5678",
+    #           "Status" => "Yellow"
+    #         },
+    #         pillars: [
+    #           cost_optimizing
+    #         ]
+    #       }
+    #     ],
+    #     next_token: "<REDACTED>"
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     next_token: "String",
+    #     max_results: 1,
+    #     aws_resource_arn: "AwsResourceArn", # required
+    #     pillar: "cost_optimizing" # One of: ["cost_optimizing", "performance", "security", "service_limits", "fault_tolerance", "operational_excellence"],
+    #     status: "ok" # One of: ["ok", "warning", "error"],
+    #     check_arn: "CheckArn",
+    #     language: "en" # One of: ["en", "ja", "zh", "fr", "de", "ko", "zh_TW", "it", "es", "pt_BR", "id"]
+    #   }
+    #   options = {}
+    #   response = client.list_recommendations_for_resource(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     next_token: "String",
+    #     recommendation_for_resource_summaries: [ # required
+    #       {
+    #         check_arn: "CheckArn", # required
+    #         recommendation_arn: "AccountRecommendationArn", # required
+    #         aws_resource_arn: "AwsResourceArn", # required
+    #         status: "ok" # One of: ["ok", "warning", "error"], # required
+    #         last_updated_at: Time.now, # required
+    #         exclusion_status: "excluded" # One of: ["excluded", "included"], # required
+    #         metadata: { # required
+    #           "String" => "String"
+    #         },
+    #         pillars: ["cost_optimizing" # One of: ["cost_optimizing", "performance", "security", "service_limits", "fault_tolerance", "operational_excellence"]], # required
+    #       }
+    #     ]
+    #   }
+    # @return [Types::ListRecommendationsForResourceResponse]
+    def list_recommendations_for_resource(params = {}, options = {})
+      request = build_request(:list_recommendations_for_resource, params)
+      request.send_request(options)
+    end
+
+    # <p>Update the lifecycle of a Recommendation within an Organization. This API only supports prioritized recommendations and updates global priority recommendations, eliminating the need to call the API in each AWS Region. </p>
     # @param [Hash, Types::UpdateOrganizationRecommendationLifecycleRequest] params
     # @option params [String] :lifecycle_stage
     #   <p>The new lifecycle stage</p>
@@ -1375,7 +1470,7 @@ module Aws::TrustedAdvisor
       request.send_request(options)
     end
 
-    # <p>Update the lifecyle of a Recommendation. This API only supports prioritized recommendations.</p>
+    # <p>Update the lifecyle of a Recommendation. This API only supports prioritized recommendations and updates global priority recommendations, eliminating the need to call the API in each AWS Region.</p>
     # @param [Hash, Types::UpdateRecommendationLifecycleRequest] params
     # @option params [String] :lifecycle_stage
     #   <p>The new lifecycle stage</p>

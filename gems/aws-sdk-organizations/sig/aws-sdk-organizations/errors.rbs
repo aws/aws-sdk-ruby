@@ -85,6 +85,9 @@ module Aws::Organizations
       def message: () -> String?
       def reason: () -> String?
     end
+    class InvalidResponsibilityTransferTransitionException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
     class MalformedPolicyDocumentException < Smithy::Client::ServiceError
       def message: () -> String?
     end
@@ -125,6 +128,12 @@ module Aws::Organizations
       def message: () -> String?
     end
     class ResourcePolicyNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResponsibilityTransferAlreadyInStatusException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResponsibilityTransferNotFoundException < Smithy::Client::ServiceError
       def message: () -> String?
     end
     class RootNotFoundException < Smithy::Client::ServiceError

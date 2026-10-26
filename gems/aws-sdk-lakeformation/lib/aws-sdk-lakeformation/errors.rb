@@ -25,6 +25,7 @@ module Aws::LakeFormation
   # * {AccessDeniedException}
   # * {AlreadyExistsException}
   # * {ConcurrentModificationException}
+  # * {ConflictException}
   # * {EntityNotFoundException}
   # * {ExpiredException}
   # * {GlueEncryptionException}
@@ -78,6 +79,20 @@ module Aws::LakeFormation
     class ConcurrentModificationException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LakeFormation::Types::ConcurrentModificationException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      # <p>A message describing the problem.</p>
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>Multiple resources exist with the same Amazon S3 location</p>
+    class ConflictException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::LakeFormation::Types::ConflictException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
         super
       end

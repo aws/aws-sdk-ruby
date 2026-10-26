@@ -1,0 +1,124 @@
+module Aws::Sustainability
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?account_id_endpoint_mode: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
+      ?connect_timeout: Numeric,
+      ?convert_params: bool,
+      ?credentials_provider: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Sustainability::EndpointProvider,
+      ?http_proxy: URI::HTTP | String,
+      ?http_wire_trace: bool,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?max_attempts: Integer,
+      ?profile: String,
+      ?protocol: Symbol | Object,
+      ?raise_response_errors: bool,
+      ?read_timeout: Numeric,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_mode: String,
+      ?retry_strategy: Object,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?ssl_ca_bundle: String,
+      ?ssl_ca_directory: String,
+      ?ssl_ca_store: OpenSSL::X509::Store,
+      ?ssl_verify_peer: bool,
+      ?stub_responses: bool,
+      ?transport: Smithy::Client::NetHTTP::Transport,
+      ?use_dualstack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _GetEstimatedCarbonEmissionsResponse
+      include Smithy::Client::_Response[Types::GetEstimatedCarbonEmissionsResponse]
+      def results: () -> Array[Types::EstimatedCarbonEmissions]?
+      def next_token: () -> String?
+    end
+    def get_estimated_carbon_emissions: (
+      ?time_period: {
+        start: Time,
+        end: untyped
+      },
+      ?group_by: Array[String],
+      ?filter_by: {
+        dimensions: Hash[String,
+          Array[String]
+        ]
+      },
+      ?emissions_types: Array[String],
+      ?granularity: String,
+      ?granularity_configuration: {
+        fiscal_year_start_month: Integer
+      },
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetEstimatedCarbonEmissionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEstimatedCarbonEmissionsResponse
+
+    interface _GetEstimatedCarbonEmissionsDimensionValuesResponse
+      include Smithy::Client::_Response[Types::GetEstimatedCarbonEmissionsDimensionValuesResponse]
+      def results: () -> Array[Types::DimensionEntry]?
+      def next_token: () -> String?
+    end
+    def get_estimated_carbon_emissions_dimension_values: (
+      ?time_period: {
+        start: Time,
+        end: untyped
+      },
+      ?dimensions: Array[String],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetEstimatedCarbonEmissionsDimensionValuesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEstimatedCarbonEmissionsDimensionValuesResponse
+
+    interface _GetEstimatedWaterAllocationResponse
+      include Smithy::Client::_Response[Types::GetEstimatedWaterAllocationResponse]
+      def results: () -> Array[Types::EstimatedWaterAllocation]?
+      def next_token: () -> String?
+    end
+    def get_estimated_water_allocation: (
+      ?time_period: {
+        start: Time,
+        end: untyped
+      },
+      ?group_by: Array[String],
+      ?filter_by: {
+        dimensions: Hash[String,
+          Array[String]
+        ]
+      },
+      ?allocation_types: Array[String],
+      ?granularity: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetEstimatedWaterAllocationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEstimatedWaterAllocationResponse
+
+    interface _GetEstimatedWaterAllocationDimensionValuesResponse
+      include Smithy::Client::_Response[Types::GetEstimatedWaterAllocationDimensionValuesResponse]
+      def results: () -> Array[Types::DimensionEntry]?
+      def next_token: () -> String?
+    end
+    def get_estimated_water_allocation_dimension_values: (
+      ?time_period: {
+        start: Time,
+        end: untyped
+      },
+      ?dimensions: Array[String],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetEstimatedWaterAllocationDimensionValuesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEstimatedWaterAllocationDimensionValuesResponse
+  end
+end

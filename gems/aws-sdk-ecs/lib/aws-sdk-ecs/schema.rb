@@ -14,7 +14,8 @@ module Aws::ECS
     AcceleratorTotalMemoryMiBRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#AcceleratorTotalMemoryMiBRequest", name: "AcceleratorTotalMemoryMiBRequest")
     AcceleratorType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecs#AcceleratorType", name: "AcceleratorType")
     AcceleratorTypeSet = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecs#AcceleratorTypeSet", name: "AcceleratorTypeSet")
-    AccessDeniedException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#AccessDeniedException", name: "AccessDeniedException", traits: {"smithy.api#error" => "client"})
+    AccessDeniedException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#AccessDeniedException", name: "AccessDeniedException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 403})
+    AccessType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecs#AccessType", name: "AccessType")
     AdvancedConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#AdvancedConfiguration", name: "AdvancedConfiguration")
     AgentUpdateStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecs#AgentUpdateStatus", name: "AgentUpdateStatus")
     AllowedInstanceType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ecs#AllowedInstanceType", name: "AllowedInstanceType", traits: {"smithy.api#length" => {"min" => 1, "max" => 30}, "smithy.api#pattern" => "^[a-zA-Z0-9\\.\\*\\-]+$"})
@@ -29,6 +30,8 @@ module Aws::ECS
     Attribute = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#Attribute", name: "Attribute")
     AttributeLimitExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#AttributeLimitExceededException", name: "AttributeLimitExceededException", traits: {"smithy.api#error" => "client"})
     Attributes = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecs#Attributes", name: "Attributes")
+    AutoRepairActionsStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecs#AutoRepairActionsStatus", name: "AutoRepairActionsStatus")
+    AutoRepairConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#AutoRepairConfiguration", name: "AutoRepairConfiguration")
     AutoScalingGroupProvider = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#AutoScalingGroupProvider", name: "AutoScalingGroupProvider")
     AutoScalingGroupProviderUpdate = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#AutoScalingGroupProviderUpdate", name: "AutoScalingGroupProviderUpdate")
     AvailabilityZoneRebalancing = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecs#AvailabilityZoneRebalancing", name: "AvailabilityZoneRebalancing")
@@ -42,6 +45,8 @@ module Aws::ECS
     BoxedInteger = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.ecs#BoxedInteger", name: "BoxedInteger")
     BurstablePerformance = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecs#BurstablePerformance", name: "BurstablePerformance")
     CPUArchitecture = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecs#CPUArchitecture", name: "CPUArchitecture")
+    CanaryConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#CanaryConfiguration", name: "CanaryConfiguration")
+    CapacityOptionType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecs#CapacityOptionType", name: "CapacityOptionType")
     CapacityProvider = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#CapacityProvider", name: "CapacityProvider")
     CapacityProviderField = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecs#CapacityProviderField", name: "CapacityProviderField")
     CapacityProviderFieldList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecs#CapacityProviderFieldList", name: "CapacityProviderFieldList")
@@ -53,6 +58,8 @@ module Aws::ECS
     CapacityProviderType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecs#CapacityProviderType", name: "CapacityProviderType")
     CapacityProviderUpdateStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecs#CapacityProviderUpdateStatus", name: "CapacityProviderUpdateStatus")
     CapacityProviders = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecs#CapacityProviders", name: "CapacityProviders")
+    CapacityReservationPreference = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecs#CapacityReservationPreference", name: "CapacityReservationPreference")
+    CapacityReservationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#CapacityReservationRequest", name: "CapacityReservationRequest")
     ClientException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ClientException", name: "ClientException", traits: {"smithy.api#error" => "client"})
     Cluster = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#Cluster", name: "Cluster")
     ClusterConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ClusterConfiguration", name: "ClusterConfiguration")
@@ -93,18 +100,69 @@ module Aws::ECS
     ContainerStateChange = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ContainerStateChange", name: "ContainerStateChange")
     ContainerStateChanges = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecs#ContainerStateChanges", name: "ContainerStateChanges")
     Containers = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecs#Containers", name: "Containers")
+    ContinueServiceDeploymentRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ContinueServiceDeploymentRequest", name: "ContinueServiceDeploymentRequest")
+    ContinueServiceDeploymentResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ContinueServiceDeploymentResponse", name: "ContinueServiceDeploymentResponse")
     CpuManufacturer = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecs#CpuManufacturer", name: "CpuManufacturer")
     CpuManufacturerSet = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecs#CpuManufacturerSet", name: "CpuManufacturerSet")
     CreateCapacityProviderRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#CreateCapacityProviderRequest", name: "CreateCapacityProviderRequest")
     CreateCapacityProviderResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#CreateCapacityProviderResponse", name: "CreateCapacityProviderResponse")
     CreateClusterRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#CreateClusterRequest", name: "CreateClusterRequest")
     CreateClusterResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#CreateClusterResponse", name: "CreateClusterResponse")
+    CreateDaemonRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#CreateDaemonRequest", name: "CreateDaemonRequest")
+    CreateDaemonResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#CreateDaemonResponse", name: "CreateDaemonResponse")
+    CreateExpressGatewayServiceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#CreateExpressGatewayServiceRequest", name: "CreateExpressGatewayServiceRequest")
+    CreateExpressGatewayServiceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#CreateExpressGatewayServiceResponse", name: "CreateExpressGatewayServiceResponse")
     CreateManagedInstancesProviderConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#CreateManagedInstancesProviderConfiguration", name: "CreateManagedInstancesProviderConfiguration")
     CreateServiceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#CreateServiceRequest", name: "CreateServiceRequest")
     CreateServiceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#CreateServiceResponse", name: "CreateServiceResponse")
     CreateTaskSetRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#CreateTaskSetRequest", name: "CreateTaskSetRequest")
     CreateTaskSetResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#CreateTaskSetResponse", name: "CreateTaskSetResponse")
     CreatedAt = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#CreatedAt", name: "CreatedAt")
+    DaemonAlarmConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#DaemonAlarmConfiguration", name: "DaemonAlarmConfiguration")
+    DaemonCapacityProvider = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#DaemonCapacityProvider", name: "DaemonCapacityProvider")
+    DaemonCapacityProviderList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecs#DaemonCapacityProviderList", name: "DaemonCapacityProviderList")
+    DaemonCircuitBreaker = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#DaemonCircuitBreaker", name: "DaemonCircuitBreaker")
+    DaemonContainerDefinition = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#DaemonContainerDefinition", name: "DaemonContainerDefinition")
+    DaemonContainerDefinitionList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecs#DaemonContainerDefinitionList", name: "DaemonContainerDefinitionList")
+    DaemonContainerImage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#DaemonContainerImage", name: "DaemonContainerImage")
+    DaemonContainerImages = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecs#DaemonContainerImages", name: "DaemonContainerImages")
+    DaemonDeployment = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#DaemonDeployment", name: "DaemonDeployment")
+    DaemonDeploymentAlarms = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#DaemonDeploymentAlarms", name: "DaemonDeploymentAlarms")
+    DaemonDeploymentCapacityProvider = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#DaemonDeploymentCapacityProvider", name: "DaemonDeploymentCapacityProvider")
+    DaemonDeploymentCapacityProviderList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecs#DaemonDeploymentCapacityProviderList", name: "DaemonDeploymentCapacityProviderList")
+    DaemonDeploymentConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#DaemonDeploymentConfiguration", name: "DaemonDeploymentConfiguration")
+    DaemonDeploymentList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecs#DaemonDeploymentList", name: "DaemonDeploymentList")
+    DaemonDeploymentRevisionDetail = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#DaemonDeploymentRevisionDetail", name: "DaemonDeploymentRevisionDetail")
+    DaemonDeploymentRevisionDetailList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecs#DaemonDeploymentRevisionDetailList", name: "DaemonDeploymentRevisionDetailList")
+    DaemonDeploymentRollbackMonitorsStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecs#DaemonDeploymentRollbackMonitorsStatus", name: "DaemonDeploymentRollbackMonitorsStatus")
+    DaemonDeploymentStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecs#DaemonDeploymentStatus", name: "DaemonDeploymentStatus")
+    DaemonDeploymentStatusList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecs#DaemonDeploymentStatusList", name: "DaemonDeploymentStatusList")
+    DaemonDeploymentSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#DaemonDeploymentSummary", name: "DaemonDeploymentSummary")
+    DaemonDeploymentSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecs#DaemonDeploymentSummaryList", name: "DaemonDeploymentSummaryList")
+    DaemonDetail = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#DaemonDetail", name: "DaemonDetail")
+    DaemonDrainPercent = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.ecs#DaemonDrainPercent", name: "DaemonDrainPercent", traits: {"smithy.api#range" => {"min" => 0.0, "max" => 100.0}})
+    DaemonIpcMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecs#DaemonIpcMode", name: "DaemonIpcMode")
+    DaemonLinuxParameters = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#DaemonLinuxParameters", name: "DaemonLinuxParameters")
+    DaemonNotActiveException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#DaemonNotActiveException", name: "DaemonNotActiveException", traits: {"smithy.api#error" => "client"})
+    DaemonNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#DaemonNotFoundException", name: "DaemonNotFoundException", traits: {"smithy.api#error" => "client"})
+    DaemonPidMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecs#DaemonPidMode", name: "DaemonPidMode")
+    DaemonPropagateTags = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecs#DaemonPropagateTags", name: "DaemonPropagateTags")
+    DaemonRevision = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#DaemonRevision", name: "DaemonRevision")
+    DaemonRevisionDetail = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#DaemonRevisionDetail", name: "DaemonRevisionDetail")
+    DaemonRevisionDetailList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecs#DaemonRevisionDetailList", name: "DaemonRevisionDetailList")
+    DaemonRevisions = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecs#DaemonRevisions", name: "DaemonRevisions")
+    DaemonRollback = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#DaemonRollback", name: "DaemonRollback")
+    DaemonStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecs#DaemonStatus", name: "DaemonStatus")
+    DaemonSummariesList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecs#DaemonSummariesList", name: "DaemonSummariesList")
+    DaemonSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#DaemonSummary", name: "DaemonSummary")
+    DaemonTaskDefinition = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#DaemonTaskDefinition", name: "DaemonTaskDefinition")
+    DaemonTaskDefinitionRevisionFilter = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecs#DaemonTaskDefinitionRevisionFilter", name: "DaemonTaskDefinitionRevisionFilter")
+    DaemonTaskDefinitionStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecs#DaemonTaskDefinitionStatus", name: "DaemonTaskDefinitionStatus")
+    DaemonTaskDefinitionStatusFilter = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecs#DaemonTaskDefinitionStatusFilter", name: "DaemonTaskDefinitionStatusFilter")
+    DaemonTaskDefinitionSummaries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecs#DaemonTaskDefinitionSummaries", name: "DaemonTaskDefinitionSummaries")
+    DaemonTaskDefinitionSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#DaemonTaskDefinitionSummary", name: "DaemonTaskDefinitionSummary")
+    DaemonVolume = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#DaemonVolume", name: "DaemonVolume")
+    DaemonVolumeList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecs#DaemonVolumeList", name: "DaemonVolumeList")
     DeleteAccountSettingRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#DeleteAccountSettingRequest", name: "DeleteAccountSettingRequest")
     DeleteAccountSettingResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#DeleteAccountSettingResponse", name: "DeleteAccountSettingResponse")
     DeleteAttributesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#DeleteAttributesRequest", name: "DeleteAttributesRequest")
@@ -113,6 +171,12 @@ module Aws::ECS
     DeleteCapacityProviderResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#DeleteCapacityProviderResponse", name: "DeleteCapacityProviderResponse")
     DeleteClusterRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#DeleteClusterRequest", name: "DeleteClusterRequest")
     DeleteClusterResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#DeleteClusterResponse", name: "DeleteClusterResponse")
+    DeleteDaemonRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#DeleteDaemonRequest", name: "DeleteDaemonRequest")
+    DeleteDaemonResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#DeleteDaemonResponse", name: "DeleteDaemonResponse")
+    DeleteDaemonTaskDefinitionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#DeleteDaemonTaskDefinitionRequest", name: "DeleteDaemonTaskDefinitionRequest")
+    DeleteDaemonTaskDefinitionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#DeleteDaemonTaskDefinitionResponse", name: "DeleteDaemonTaskDefinitionResponse")
+    DeleteExpressGatewayServiceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#DeleteExpressGatewayServiceRequest", name: "DeleteExpressGatewayServiceRequest")
+    DeleteExpressGatewayServiceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#DeleteExpressGatewayServiceResponse", name: "DeleteExpressGatewayServiceResponse")
     DeleteServiceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#DeleteServiceRequest", name: "DeleteServiceRequest")
     DeleteServiceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#DeleteServiceResponse", name: "DeleteServiceResponse")
     DeleteTaskDefinitionsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#DeleteTaskDefinitionsRequest", name: "DeleteTaskDefinitionsRequest")
@@ -125,11 +189,19 @@ module Aws::ECS
     DeploymentConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#DeploymentConfiguration", name: "DeploymentConfiguration")
     DeploymentController = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#DeploymentController", name: "DeploymentController")
     DeploymentControllerType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecs#DeploymentControllerType", name: "DeploymentControllerType")
+    DeploymentEarlySuccessCriteria = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#DeploymentEarlySuccessCriteria", name: "DeploymentEarlySuccessCriteria")
     DeploymentEphemeralStorage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#DeploymentEphemeralStorage", name: "DeploymentEphemeralStorage")
     DeploymentLifecycleHook = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#DeploymentLifecycleHook", name: "DeploymentLifecycleHook")
+    DeploymentLifecycleHookAction = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecs#DeploymentLifecycleHookAction", name: "DeploymentLifecycleHookAction")
+    DeploymentLifecycleHookDetail = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#DeploymentLifecycleHookDetail", name: "DeploymentLifecycleHookDetail")
+    DeploymentLifecycleHookDetailList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecs#DeploymentLifecycleHookDetailList", name: "DeploymentLifecycleHookDetailList")
+    DeploymentLifecycleHookDuration = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.ecs#DeploymentLifecycleHookDuration", name: "DeploymentLifecycleHookDuration", traits: {"smithy.api#range" => {"min" => 1, "max" => 20160}})
     DeploymentLifecycleHookList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecs#DeploymentLifecycleHookList", name: "DeploymentLifecycleHookList")
     DeploymentLifecycleHookStage = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecs#DeploymentLifecycleHookStage", name: "DeploymentLifecycleHookStage")
     DeploymentLifecycleHookStageList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecs#DeploymentLifecycleHookStageList", name: "DeploymentLifecycleHookStageList")
+    DeploymentLifecycleHookStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecs#DeploymentLifecycleHookStatus", name: "DeploymentLifecycleHookStatus")
+    DeploymentLifecycleHookTargetType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecs#DeploymentLifecycleHookTargetType", name: "DeploymentLifecycleHookTargetType")
+    DeploymentLifecycleHookTimeoutConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#DeploymentLifecycleHookTimeoutConfiguration", name: "DeploymentLifecycleHookTimeoutConfiguration")
     DeploymentRolloutState = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecs#DeploymentRolloutState", name: "DeploymentRolloutState")
     DeploymentStrategy = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecs#DeploymentStrategy", name: "DeploymentStrategy")
     Deployments = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecs#Deployments", name: "Deployments")
@@ -143,6 +215,16 @@ module Aws::ECS
     DescribeClustersResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#DescribeClustersResponse", name: "DescribeClustersResponse")
     DescribeContainerInstancesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#DescribeContainerInstancesRequest", name: "DescribeContainerInstancesRequest")
     DescribeContainerInstancesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#DescribeContainerInstancesResponse", name: "DescribeContainerInstancesResponse")
+    DescribeDaemonDeploymentsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#DescribeDaemonDeploymentsRequest", name: "DescribeDaemonDeploymentsRequest")
+    DescribeDaemonDeploymentsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#DescribeDaemonDeploymentsResponse", name: "DescribeDaemonDeploymentsResponse")
+    DescribeDaemonRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#DescribeDaemonRequest", name: "DescribeDaemonRequest")
+    DescribeDaemonResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#DescribeDaemonResponse", name: "DescribeDaemonResponse")
+    DescribeDaemonRevisionsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#DescribeDaemonRevisionsRequest", name: "DescribeDaemonRevisionsRequest")
+    DescribeDaemonRevisionsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#DescribeDaemonRevisionsResponse", name: "DescribeDaemonRevisionsResponse")
+    DescribeDaemonTaskDefinitionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#DescribeDaemonTaskDefinitionRequest", name: "DescribeDaemonTaskDefinitionRequest")
+    DescribeDaemonTaskDefinitionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#DescribeDaemonTaskDefinitionResponse", name: "DescribeDaemonTaskDefinitionResponse")
+    DescribeExpressGatewayServiceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#DescribeExpressGatewayServiceRequest", name: "DescribeExpressGatewayServiceRequest")
+    DescribeExpressGatewayServiceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#DescribeExpressGatewayServiceResponse", name: "DescribeExpressGatewayServiceResponse")
     DescribeServiceDeploymentsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#DescribeServiceDeploymentsRequest", name: "DescribeServiceDeploymentsRequest")
     DescribeServiceDeploymentsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#DescribeServiceDeploymentsResponse", name: "DescribeServiceDeploymentsResponse")
     DescribeServiceRevisionsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#DescribeServiceRevisionsRequest", name: "DescribeServiceRevisionsRequest")
@@ -172,6 +254,8 @@ module Aws::ECS
     EBSTagSpecification = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#EBSTagSpecification", name: "EBSTagSpecification")
     EBSTagSpecifications = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecs#EBSTagSpecifications", name: "EBSTagSpecifications")
     EBSVolumeType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ecs#EBSVolumeType", name: "EBSVolumeType")
+    ECSExpressGatewayService = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ECSExpressGatewayService", name: "ECSExpressGatewayService")
+    ECSManagedResources = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ECSManagedResources", name: "ECSManagedResources")
     ECSVolumeName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ecs#ECSVolumeName", name: "ECSVolumeName")
     EFSAuthorizationConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#EFSAuthorizationConfig", name: "EFSAuthorizationConfig")
     EFSAuthorizationConfigIAM = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecs#EFSAuthorizationConfigIAM", name: "EFSAuthorizationConfigIAM")
@@ -180,7 +264,7 @@ module Aws::ECS
     EnvironmentFile = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#EnvironmentFile", name: "EnvironmentFile")
     EnvironmentFileType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecs#EnvironmentFileType", name: "EnvironmentFileType")
     EnvironmentFiles = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecs#EnvironmentFiles", name: "EnvironmentFiles")
-    EnvironmentVariables = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecs#EnvironmentVariables", name: "EnvironmentVariables")
+    EnvironmentVariables = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecs#EnvironmentVariables", name: "EnvironmentVariables", traits: {"smithy.api#sensitive" => {}})
     EphemeralStorage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#EphemeralStorage", name: "EphemeralStorage")
     ExcludedInstanceType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ecs#ExcludedInstanceType", name: "ExcludedInstanceType", traits: {"smithy.api#length" => {"min" => 1, "max" => 30}, "smithy.api#pattern" => "^[a-zA-Z0-9\\.\\*\\-]+$"})
     ExcludedInstanceTypeSet = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecs#ExcludedInstanceTypeSet", name: "ExcludedInstanceTypeSet", traits: {"smithy.api#length" => {"min" => 0, "max" => 400}})
@@ -189,6 +273,19 @@ module Aws::ECS
     ExecuteCommandLogging = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecs#ExecuteCommandLogging", name: "ExecuteCommandLogging")
     ExecuteCommandRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ExecuteCommandRequest", name: "ExecuteCommandRequest")
     ExecuteCommandResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ExecuteCommandResponse", name: "ExecuteCommandResponse")
+    ExpressCpuArchitecture = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecs#ExpressCpuArchitecture", name: "ExpressCpuArchitecture")
+    ExpressGatewayContainer = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ExpressGatewayContainer", name: "ExpressGatewayContainer")
+    ExpressGatewayRepositoryCredentials = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ExpressGatewayRepositoryCredentials", name: "ExpressGatewayRepositoryCredentials")
+    ExpressGatewayScalingTarget = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ExpressGatewayScalingTarget", name: "ExpressGatewayScalingTarget")
+    ExpressGatewayServiceAwsLogsConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ExpressGatewayServiceAwsLogsConfiguration", name: "ExpressGatewayServiceAwsLogsConfiguration")
+    ExpressGatewayServiceConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ExpressGatewayServiceConfiguration", name: "ExpressGatewayServiceConfiguration")
+    ExpressGatewayServiceConfigurations = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecs#ExpressGatewayServiceConfigurations", name: "ExpressGatewayServiceConfigurations")
+    ExpressGatewayServiceInclude = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecs#ExpressGatewayServiceInclude", name: "ExpressGatewayServiceInclude")
+    ExpressGatewayServiceIncludeList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecs#ExpressGatewayServiceIncludeList", name: "ExpressGatewayServiceIncludeList")
+    ExpressGatewayServiceNetworkConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ExpressGatewayServiceNetworkConfiguration", name: "ExpressGatewayServiceNetworkConfiguration")
+    ExpressGatewayServiceScalingMetric = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecs#ExpressGatewayServiceScalingMetric", name: "ExpressGatewayServiceScalingMetric")
+    ExpressGatewayServiceStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ExpressGatewayServiceStatus", name: "ExpressGatewayServiceStatus")
+    ExpressGatewayServiceStatusCode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecs#ExpressGatewayServiceStatusCode", name: "ExpressGatewayServiceStatusCode")
     FSxWindowsFileServerAuthorizationConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#FSxWindowsFileServerAuthorizationConfig", name: "FSxWindowsFileServerAuthorizationConfig")
     FSxWindowsFileServerVolumeConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#FSxWindowsFileServerVolumeConfiguration", name: "FSxWindowsFileServerVolumeConfiguration")
     Failure = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#Failure", name: "Failure")
@@ -201,15 +298,19 @@ module Aws::ECS
     GpuIds = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecs#GpuIds", name: "GpuIds")
     HealthCheck = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#HealthCheck", name: "HealthCheck")
     HealthStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecs#HealthStatus", name: "HealthStatus")
+    HealthyPercentInteger = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.ecs#HealthyPercentInteger", name: "HealthyPercentInteger", traits: {"smithy.api#range" => {"min" => 0, "max" => 100}})
     HookDetails = ::Smithy::Schema::Shapes::DocumentShape.new(id: "com.amazonaws.ecs#HookDetails", name: "HookDetails")
     HostEntry = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#HostEntry", name: "HostEntry")
     HostEntryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecs#HostEntryList", name: "HostEntryList")
     HostVolumeProperties = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#HostVolumeProperties", name: "HostVolumeProperties")
     IAMRoleArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ecs#IAMRoleArn", name: "IAMRoleArn")
-    InferenceAccelerator = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#InferenceAccelerator", name: "InferenceAccelerator")
-    InferenceAcceleratorOverride = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#InferenceAcceleratorOverride", name: "InferenceAcceleratorOverride")
-    InferenceAcceleratorOverrides = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecs#InferenceAcceleratorOverrides", name: "InferenceAcceleratorOverrides")
-    InferenceAccelerators = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecs#InferenceAccelerators", name: "InferenceAccelerators")
+    InferenceAccelerator = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#InferenceAccelerator", name: "InferenceAccelerator", traits: {"smithy.api#deprecated" => {"message" => "This feature is no longer available.", "since" => "2023-04-15"}})
+    InferenceAcceleratorOverride = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#InferenceAcceleratorOverride", name: "InferenceAcceleratorOverride", traits: {"smithy.api#deprecated" => {"message" => "This feature is no longer available.", "since" => "2023-04-15"}})
+    InferenceAcceleratorOverrides = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecs#InferenceAcceleratorOverrides", name: "InferenceAcceleratorOverrides", traits: {"smithy.api#deprecated" => {"message" => "This feature is no longer available.", "since" => "2023-04-15"}})
+    InferenceAccelerators = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecs#InferenceAccelerators", name: "InferenceAccelerators", traits: {"smithy.api#deprecated" => {"message" => "This feature is no longer available.", "since" => "2023-04-15"}})
+    InfrastructureOptimization = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#InfrastructureOptimization", name: "InfrastructureOptimization")
+    IngressPathSummaries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecs#IngressPathSummaries", name: "IngressPathSummaries")
+    IngressPathSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#IngressPathSummary", name: "IngressPathSummary")
     InstanceGeneration = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecs#InstanceGeneration", name: "InstanceGeneration")
     InstanceGenerationSet = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecs#InstanceGenerationSet", name: "InstanceGenerationSet")
     InstanceHealthCheckResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#InstanceHealthCheckResult", name: "InstanceHealthCheckResult")
@@ -227,6 +328,7 @@ module Aws::ECS
     KeyValuePair = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#KeyValuePair", name: "KeyValuePair")
     LaunchType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecs#LaunchType", name: "LaunchType")
     LimitExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#LimitExceededException", name: "LimitExceededException", traits: {"smithy.api#error" => "client"})
+    LinearConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#LinearConfiguration", name: "LinearConfiguration")
     LinuxParameters = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#LinuxParameters", name: "LinuxParameters")
     ListAccountSettingsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ListAccountSettingsRequest", name: "ListAccountSettingsRequest")
     ListAccountSettingsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ListAccountSettingsResponse", name: "ListAccountSettingsResponse")
@@ -236,6 +338,12 @@ module Aws::ECS
     ListClustersResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ListClustersResponse", name: "ListClustersResponse")
     ListContainerInstancesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ListContainerInstancesRequest", name: "ListContainerInstancesRequest")
     ListContainerInstancesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ListContainerInstancesResponse", name: "ListContainerInstancesResponse")
+    ListDaemonDeploymentsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ListDaemonDeploymentsRequest", name: "ListDaemonDeploymentsRequest")
+    ListDaemonDeploymentsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ListDaemonDeploymentsResponse", name: "ListDaemonDeploymentsResponse")
+    ListDaemonTaskDefinitionsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ListDaemonTaskDefinitionsRequest", name: "ListDaemonTaskDefinitionsRequest")
+    ListDaemonTaskDefinitionsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ListDaemonTaskDefinitionsResponse", name: "ListDaemonTaskDefinitionsResponse")
+    ListDaemonsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ListDaemonsRequest", name: "ListDaemonsRequest")
+    ListDaemonsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ListDaemonsResponse", name: "ListDaemonsResponse")
     ListServiceDeploymentsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ListServiceDeploymentsRequest", name: "ListServiceDeploymentsRequest")
     ListServiceDeploymentsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ListServiceDeploymentsResponse", name: "ListServiceDeploymentsResponse")
     ListServicesByNamespaceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ListServicesByNamespaceRequest", name: "ListServicesByNamespaceRequest")
@@ -264,21 +372,47 @@ module Aws::ECS
     ManagedAgentStateChange = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ManagedAgentStateChange", name: "ManagedAgentStateChange")
     ManagedAgentStateChanges = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecs#ManagedAgentStateChanges", name: "ManagedAgentStateChanges")
     ManagedAgents = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecs#ManagedAgents", name: "ManagedAgents")
+    ManagedApplicationAutoScalingPolicies = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecs#ManagedApplicationAutoScalingPolicies", name: "ManagedApplicationAutoScalingPolicies")
+    ManagedApplicationAutoScalingPolicy = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ManagedApplicationAutoScalingPolicy", name: "ManagedApplicationAutoScalingPolicy")
+    ManagedAutoScaling = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ManagedAutoScaling", name: "ManagedAutoScaling")
+    ManagedCertificate = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ManagedCertificate", name: "ManagedCertificate")
     ManagedDraining = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecs#ManagedDraining", name: "ManagedDraining")
+    ManagedIngressPath = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ManagedIngressPath", name: "ManagedIngressPath")
+    ManagedIngressPaths = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecs#ManagedIngressPaths", name: "ManagedIngressPaths")
+    ManagedInstancesLocalStorageConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ManagedInstancesLocalStorageConfiguration", name: "ManagedInstancesLocalStorageConfiguration")
     ManagedInstancesMonitoringOptions = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecs#ManagedInstancesMonitoringOptions", name: "ManagedInstancesMonitoringOptions")
     ManagedInstancesNetworkConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ManagedInstancesNetworkConfiguration", name: "ManagedInstancesNetworkConfiguration")
     ManagedInstancesProvider = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ManagedInstancesProvider", name: "ManagedInstancesProvider")
     ManagedInstancesStorageConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ManagedInstancesStorageConfiguration", name: "ManagedInstancesStorageConfiguration")
+    ManagedListener = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ManagedListener", name: "ManagedListener")
+    ManagedListenerRule = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ManagedListenerRule", name: "ManagedListenerRule")
+    ManagedLoadBalancer = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ManagedLoadBalancer", name: "ManagedLoadBalancer")
+    ManagedLogGroup = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ManagedLogGroup", name: "ManagedLogGroup")
+    ManagedLogGroups = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecs#ManagedLogGroups", name: "ManagedLogGroups")
+    ManagedMetricAlarm = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ManagedMetricAlarm", name: "ManagedMetricAlarm")
+    ManagedMetricAlarms = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecs#ManagedMetricAlarms", name: "ManagedMetricAlarms")
+    ManagedResourceStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecs#ManagedResourceStatus", name: "ManagedResourceStatus")
+    ManagedScalableTarget = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ManagedScalableTarget", name: "ManagedScalableTarget")
     ManagedScaling = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ManagedScaling", name: "ManagedScaling")
     ManagedScalingInstanceWarmupPeriod = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.ecs#ManagedScalingInstanceWarmupPeriod", name: "ManagedScalingInstanceWarmupPeriod", traits: {"smithy.api#range" => {"min" => 0, "max" => 10000}})
     ManagedScalingStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecs#ManagedScalingStatus", name: "ManagedScalingStatus")
     ManagedScalingStepSize = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.ecs#ManagedScalingStepSize", name: "ManagedScalingStepSize", traits: {"smithy.api#range" => {"min" => 1, "max" => 10000}})
     ManagedScalingTargetCapacity = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.ecs#ManagedScalingTargetCapacity", name: "ManagedScalingTargetCapacity", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}})
+    ManagedSecurityGroup = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ManagedSecurityGroup", name: "ManagedSecurityGroup")
+    ManagedSecurityGroups = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecs#ManagedSecurityGroups", name: "ManagedSecurityGroups")
     ManagedStorageConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ManagedStorageConfiguration", name: "ManagedStorageConfiguration")
+    ManagedTargetGroup = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ManagedTargetGroup", name: "ManagedTargetGroup")
+    ManagedTargetGroups = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecs#ManagedTargetGroups", name: "ManagedTargetGroups")
     ManagedTerminationProtection = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecs#ManagedTerminationProtection", name: "ManagedTerminationProtection")
     MemoryGiBPerVCpuRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#MemoryGiBPerVCpuRequest", name: "MemoryGiBPerVCpuRequest")
     MemoryMiBRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#MemoryMiBRequest", name: "MemoryMiBRequest")
+    MetricConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#MetricConfiguration", name: "MetricConfiguration")
+    MetricConfigurationList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecs#MetricConfigurationList", name: "MetricConfigurationList", traits: {"smithy.api#length" => {"min" => 0, "max" => 5}})
+    MetricName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ecs#MetricName", name: "MetricName", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}})
+    MetricNamesList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecs#MetricNamesList", name: "MetricNamesList", traits: {"smithy.api#length" => {"min" => 1, "max" => 5}})
+    MetricResolutionSeconds = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.ecs#MetricResolutionSeconds", name: "MetricResolutionSeconds", traits: {"smithy.api#range" => {"min" => 20, "max" => 60}})
     MissingVersionException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#MissingVersionException", name: "MissingVersionException", traits: {"smithy.api#error" => "client"})
+    MonitoringConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#MonitoringConfiguration", name: "MonitoringConfiguration")
     MountPoint = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#MountPoint", name: "MountPoint")
     MountPointList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecs#MountPointList", name: "MountPointList")
     NamespaceNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#NamespaceNotFoundException", name: "NamespaceNotFoundException", traits: {"smithy.api#error" => "client"})
@@ -290,6 +424,7 @@ module Aws::ECS
     NetworkInterfaceCountRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#NetworkInterfaceCountRequest", name: "NetworkInterfaceCountRequest")
     NetworkInterfaces = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecs#NetworkInterfaces", name: "NetworkInterfaces")
     NetworkMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecs#NetworkMode", name: "NetworkMode")
+    NeuronDeviceIds = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecs#NeuronDeviceIds", name: "NeuronDeviceIds")
     NoUpdateAvailableException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#NoUpdateAvailableException", name: "NoUpdateAvailableException", traits: {"smithy.api#error" => "client"})
     OSFamily = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecs#OSFamily", name: "OSFamily")
     PidMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecs#PidMode", name: "PidMode")
@@ -324,14 +459,17 @@ module Aws::ECS
     PutClusterCapacityProvidersResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#PutClusterCapacityProvidersResponse", name: "PutClusterCapacityProvidersResponse")
     RegisterContainerInstanceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#RegisterContainerInstanceRequest", name: "RegisterContainerInstanceRequest")
     RegisterContainerInstanceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#RegisterContainerInstanceResponse", name: "RegisterContainerInstanceResponse")
+    RegisterDaemonTaskDefinitionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#RegisterDaemonTaskDefinitionRequest", name: "RegisterDaemonTaskDefinitionRequest")
+    RegisterDaemonTaskDefinitionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#RegisterDaemonTaskDefinitionResponse", name: "RegisterDaemonTaskDefinitionResponse")
     RegisterTaskDefinitionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#RegisterTaskDefinitionRequest", name: "RegisterTaskDefinitionRequest")
     RegisterTaskDefinitionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#RegisterTaskDefinitionResponse", name: "RegisterTaskDefinitionResponse")
-    RepositoryCredentials = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#RepositoryCredentials", name: "RepositoryCredentials")
+    RepositoryCredentials = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#RepositoryCredentials", name: "RepositoryCredentials", traits: {"smithy.api#sensitive" => {}})
     RequiresAttributes = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecs#RequiresAttributes", name: "RequiresAttributes")
     ResolvedConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ResolvedConfiguration", name: "ResolvedConfiguration")
     Resource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#Resource", name: "Resource")
     ResourceIds = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecs#ResourceIds", name: "ResourceIds")
     ResourceInUseException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ResourceInUseException", name: "ResourceInUseException", traits: {"smithy.api#error" => "client"})
+    ResourceManagementType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecs#ResourceManagementType", name: "ResourceManagementType")
     ResourceNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ResourceNotFoundException", name: "ResourceNotFoundException", traits: {"smithy.api#error" => "client"})
     ResourceRequirement = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ResourceRequirement", name: "ResourceRequirement")
     ResourceRequirements = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecs#ResourceRequirements", name: "ResourceRequirements")
@@ -341,6 +479,8 @@ module Aws::ECS
     RunTaskRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#RunTaskRequest", name: "RunTaskRequest")
     RunTaskResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#RunTaskResponse", name: "RunTaskResponse")
     RuntimePlatform = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#RuntimePlatform", name: "RuntimePlatform")
+    RuntimePlatformOverride = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#RuntimePlatformOverride", name: "RuntimePlatformOverride")
+    S3FilesVolumeConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#S3FilesVolumeConfiguration", name: "S3FilesVolumeConfiguration")
     Scale = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#Scale", name: "Scale")
     ScaleUnit = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecs#ScaleUnit", name: "ScaleUnit")
     SchedulingStrategy = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecs#SchedulingStrategy", name: "SchedulingStrategy")
@@ -350,9 +490,12 @@ module Aws::ECS
     SensitiveString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ecs#SensitiveString", name: "SensitiveString", traits: {"smithy.api#sensitive" => {}})
     ServerException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ServerException", name: "ServerException", traits: {"smithy.api#error" => "server"})
     Service = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#Service", name: "Service")
+    ServiceConnectAccessLogConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ServiceConnectAccessLogConfiguration", name: "ServiceConnectAccessLogConfiguration")
+    ServiceConnectAccessLoggingFormat = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecs#ServiceConnectAccessLoggingFormat", name: "ServiceConnectAccessLoggingFormat")
     ServiceConnectClientAlias = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ServiceConnectClientAlias", name: "ServiceConnectClientAlias")
     ServiceConnectClientAliasList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecs#ServiceConnectClientAliasList", name: "ServiceConnectClientAliasList")
     ServiceConnectConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ServiceConnectConfiguration", name: "ServiceConnectConfiguration")
+    ServiceConnectIncludeQueryParameters = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecs#ServiceConnectIncludeQueryParameters", name: "ServiceConnectIncludeQueryParameters")
     ServiceConnectService = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ServiceConnectService", name: "ServiceConnectService")
     ServiceConnectServiceList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecs#ServiceConnectServiceList", name: "ServiceConnectServiceList")
     ServiceConnectServiceResource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ServiceConnectServiceResource", name: "ServiceConnectServiceResource")
@@ -362,6 +505,8 @@ module Aws::ECS
     ServiceConnectTestTrafficRules = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ServiceConnectTestTrafficRules", name: "ServiceConnectTestTrafficRules")
     ServiceConnectTlsCertificateAuthority = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ServiceConnectTlsCertificateAuthority", name: "ServiceConnectTlsCertificateAuthority")
     ServiceConnectTlsConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ServiceConnectTlsConfiguration", name: "ServiceConnectTlsConfiguration")
+    ServiceCurrentRevisionSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ServiceCurrentRevisionSummary", name: "ServiceCurrentRevisionSummary")
+    ServiceCurrentRevisionSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecs#ServiceCurrentRevisionSummaryList", name: "ServiceCurrentRevisionSummaryList")
     ServiceDeployment = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ServiceDeployment", name: "ServiceDeployment")
     ServiceDeploymentAlarms = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ServiceDeploymentAlarms", name: "ServiceDeploymentAlarms")
     ServiceDeploymentBrief = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ServiceDeploymentBrief", name: "ServiceDeploymentBrief")
@@ -383,9 +528,13 @@ module Aws::ECS
     ServiceRegistries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecs#ServiceRegistries", name: "ServiceRegistries")
     ServiceRegistry = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ServiceRegistry", name: "ServiceRegistry")
     ServiceRevision = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ServiceRevision", name: "ServiceRevision")
+    ServiceRevisionCleanup = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecs#ServiceRevisionCleanup", name: "ServiceRevisionCleanup")
     ServiceRevisionLoadBalancer = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ServiceRevisionLoadBalancer", name: "ServiceRevisionLoadBalancer")
     ServiceRevisionLoadBalancers = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecs#ServiceRevisionLoadBalancers", name: "ServiceRevisionLoadBalancers")
+    ServiceRevisionOverrides = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ServiceRevisionOverrides", name: "ServiceRevisionOverrides")
     ServiceRevisionSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ServiceRevisionSummary", name: "ServiceRevisionSummary")
+    ServiceRevisionVpcLatticeConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ServiceRevisionVpcLatticeConfiguration", name: "ServiceRevisionVpcLatticeConfiguration")
+    ServiceRevisionVpcLatticeConfigurations = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecs#ServiceRevisionVpcLatticeConfigurations", name: "ServiceRevisionVpcLatticeConfigurations")
     ServiceRevisions = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecs#ServiceRevisions", name: "ServiceRevisions")
     ServiceRevisionsSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecs#ServiceRevisionsSummaryList", name: "ServiceRevisionsSummaryList")
     ServiceVolumeConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ServiceVolumeConfiguration", name: "ServiceVolumeConfiguration")
@@ -454,6 +603,8 @@ module Aws::ECS
     TaskVolumeConfigurations = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecs#TaskVolumeConfigurations", name: "TaskVolumeConfigurations")
     TaskVolumeStorageGiB = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.ecs#TaskVolumeStorageGiB", name: "TaskVolumeStorageGiB", traits: {"smithy.api#range" => {"min" => 1}})
     Tasks = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecs#Tasks", name: "Tasks")
+    ThresholdConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#ThresholdConfiguration", name: "ThresholdConfiguration")
+    ThresholdType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecs#ThresholdType", name: "ThresholdType")
     TimeoutConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#TimeoutConfiguration", name: "TimeoutConfiguration")
     Timestamp = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.ecs#Timestamp", name: "Timestamp")
     Tmpfs = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#Tmpfs", name: "Tmpfs")
@@ -476,6 +627,10 @@ module Aws::ECS
     UpdateContainerAgentResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#UpdateContainerAgentResponse", name: "UpdateContainerAgentResponse")
     UpdateContainerInstancesStateRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#UpdateContainerInstancesStateRequest", name: "UpdateContainerInstancesStateRequest")
     UpdateContainerInstancesStateResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#UpdateContainerInstancesStateResponse", name: "UpdateContainerInstancesStateResponse")
+    UpdateDaemonRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#UpdateDaemonRequest", name: "UpdateDaemonRequest")
+    UpdateDaemonResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#UpdateDaemonResponse", name: "UpdateDaemonResponse")
+    UpdateExpressGatewayServiceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#UpdateExpressGatewayServiceRequest", name: "UpdateExpressGatewayServiceRequest")
+    UpdateExpressGatewayServiceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#UpdateExpressGatewayServiceResponse", name: "UpdateExpressGatewayServiceResponse")
     UpdateInProgressException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#UpdateInProgressException", name: "UpdateInProgressException", traits: {"smithy.api#error" => "client"})
     UpdateManagedInstancesProviderConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#UpdateManagedInstancesProviderConfiguration", name: "UpdateManagedInstancesProviderConfiguration")
     UpdateServicePrimaryTaskSetRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#UpdateServicePrimaryTaskSetRequest", name: "UpdateServicePrimaryTaskSetRequest")
@@ -486,6 +641,7 @@ module Aws::ECS
     UpdateTaskProtectionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#UpdateTaskProtectionResponse", name: "UpdateTaskProtectionResponse")
     UpdateTaskSetRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#UpdateTaskSetRequest", name: "UpdateTaskSetRequest")
     UpdateTaskSetResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#UpdateTaskSetResponse", name: "UpdateTaskSetResponse")
+    UpdatedExpressGatewayService = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#UpdatedExpressGatewayService", name: "UpdatedExpressGatewayService")
     VCpuCountRangeRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#VCpuCountRangeRequest", name: "VCpuCountRangeRequest")
     VersionConsistency = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecs#VersionConsistency", name: "VersionConsistency")
     VersionInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#VersionInfo", name: "VersionInfo")
@@ -493,6 +649,7 @@ module Aws::ECS
     VolumeFrom = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#VolumeFrom", name: "VolumeFrom")
     VolumeFromList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecs#VolumeFromList", name: "VolumeFromList")
     VolumeList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecs#VolumeList", name: "VolumeList")
+    VpcLatticeAdvancedConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#VpcLatticeAdvancedConfiguration", name: "VpcLatticeAdvancedConfiguration")
     VpcLatticeConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecs#VpcLatticeConfiguration", name: "VpcLatticeConfiguration")
     VpcLatticeConfigurations = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecs#VpcLatticeConfigurations", name: "VpcLatticeConfigurations")
 
@@ -527,6 +684,8 @@ module Aws::ECS
     AcceleratorTypeSet.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AcceleratorType, name: "member", traits: {"smithy.api#xmlName" => "item"}))
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     AccessDeniedException.type = Types::AccessDeniedException
+    AccessType.add_member(:public, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PUBLIC", traits: {"smithy.api#enumValue" => "PUBLIC"}))
+    AccessType.add_member(:private, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRIVATE", traits: {"smithy.api#enumValue" => "PRIVATE"}))
     AdvancedConfiguration.add_member(:alternate_target_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "alternateTargetGroupArn"))
     AdvancedConfiguration.add_member(:production_listener_rule, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "productionListenerRule"))
     AdvancedConfiguration.add_member(:test_listener_rule, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "testListenerRule"))
@@ -563,6 +722,10 @@ module Aws::ECS
     AttributeLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     AttributeLimitExceededException.type = Types::AttributeLimitExceededException
     Attributes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Attribute, name: "member"))
+    AutoRepairActionsStatus.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
+    AutoRepairActionsStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
+    AutoRepairConfiguration.add_member(:actions_status, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoRepairActionsStatus, name: "actionsStatus"))
+    AutoRepairConfiguration.type = Types::AutoRepairConfiguration
     AutoScalingGroupProvider.add_member(:auto_scaling_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "autoScalingGroupArn", traits: {"smithy.api#required" => {}}))
     AutoScalingGroupProvider.add_member(:managed_scaling, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedScaling, name: "managedScaling"))
     AutoScalingGroupProvider.add_member(:managed_termination_protection, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedTerminationProtection, name: "managedTerminationProtection"))
@@ -591,6 +754,12 @@ module Aws::ECS
     BurstablePerformance.add_member(:excluded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXCLUDED", traits: {"smithy.api#enumValue" => "excluded"}))
     CPUArchitecture.add_member(:x86_64, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "X86_64", traits: {"smithy.api#enumValue" => "X86_64"}))
     CPUArchitecture.add_member(:arm64, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ARM64", traits: {"smithy.api#enumValue" => "ARM64"}))
+    CanaryConfiguration.add_member(:canary_percent, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "canaryPercent", traits: {"smithy.api#default" => nil}))
+    CanaryConfiguration.add_member(:canary_bake_time_in_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "canaryBakeTimeInMinutes", traits: {"smithy.api#default" => nil}))
+    CanaryConfiguration.type = Types::CanaryConfiguration
+    CapacityOptionType.add_member(:on_demand, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ON_DEMAND", traits: {"smithy.api#enumValue" => "ON_DEMAND"}))
+    CapacityOptionType.add_member(:spot, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SPOT", traits: {"smithy.api#enumValue" => "SPOT"}))
+    CapacityOptionType.add_member(:reserved, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESERVED", traits: {"smithy.api#enumValue" => "RESERVED"}))
     CapacityProvider.add_member(:capacity_provider_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "capacityProviderArn"))
     CapacityProvider.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "name"))
     CapacityProvider.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cluster"))
@@ -627,6 +796,12 @@ module Aws::ECS
     CapacityProviderUpdateStatus.add_member(:update_complete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATE_COMPLETE", traits: {"smithy.api#enumValue" => "UPDATE_COMPLETE"}))
     CapacityProviderUpdateStatus.add_member(:update_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATE_FAILED", traits: {"smithy.api#enumValue" => "UPDATE_FAILED"}))
     CapacityProviders.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityProvider, name: "member"))
+    CapacityReservationPreference.add_member(:reservations_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESERVATIONS_ONLY", traits: {"smithy.api#enumValue" => "RESERVATIONS_ONLY"}))
+    CapacityReservationPreference.add_member(:reservations_first, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESERVATIONS_FIRST", traits: {"smithy.api#enumValue" => "RESERVATIONS_FIRST"}))
+    CapacityReservationPreference.add_member(:reservations_excluded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESERVATIONS_EXCLUDED", traits: {"smithy.api#enumValue" => "RESERVATIONS_EXCLUDED"}))
+    CapacityReservationRequest.add_member(:reservation_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "reservationGroupArn"))
+    CapacityReservationRequest.add_member(:reservation_preference, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityReservationPreference, name: "reservationPreference"))
+    CapacityReservationRequest.type = Types::CapacityReservationRequest
     ClientException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     ClientException.type = Types::ClientException
     Cluster.add_member(:cluster_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "clusterArn"))
@@ -702,6 +877,7 @@ module Aws::ECS
     Container.add_member(:memory, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "memory"))
     Container.add_member(:memory_reservation, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "memoryReservation"))
     Container.add_member(:gpu_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: GpuIds, name: "gpuIds"))
+    Container.add_member(:neuron_device_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: NeuronDeviceIds, name: "neuronDeviceIds"))
     Container.type = Types::Container
     ContainerCondition.add_member(:start, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "START", traits: {"smithy.api#enumValue" => "START"}))
     ContainerCondition.add_member(:complete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETE", traits: {"smithy.api#enumValue" => "COMPLETE"}))
@@ -815,17 +991,23 @@ module Aws::ECS
     ContainerStateChange.type = Types::ContainerStateChange
     ContainerStateChanges.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerStateChange, name: "member"))
     Containers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Container, name: "member"))
+    ContinueServiceDeploymentRequest.add_member(:service_deployment_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "serviceDeploymentArn", traits: {"smithy.api#required" => {}}))
+    ContinueServiceDeploymentRequest.add_member(:hook_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "hookId", traits: {"smithy.api#required" => {}}))
+    ContinueServiceDeploymentRequest.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentLifecycleHookAction, name: "action"))
+    ContinueServiceDeploymentRequest.type = Types::ContinueServiceDeploymentRequest
+    ContinueServiceDeploymentResponse.add_member(:service_deployment_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "serviceDeploymentArn"))
+    ContinueServiceDeploymentResponse.type = Types::ContinueServiceDeploymentResponse
     CpuManufacturer.add_member(:intel, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTEL", traits: {"smithy.api#enumValue" => "intel"}))
     CpuManufacturer.add_member(:amd, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AMD", traits: {"smithy.api#enumValue" => "amd"}))
     CpuManufacturer.add_member(:amazon_web_services, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AMAZON_WEB_SERVICES", traits: {"smithy.api#enumValue" => "amazon-web-services"}))
     CpuManufacturerSet.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CpuManufacturer, name: "member", traits: {"smithy.api#xmlName" => "item"}))
-    CreateCapacityProviderRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "name", traits: {"smithy.api#required" => {}}))
+    CreateCapacityProviderRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "name", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "CapacityProviderName"}))
     CreateCapacityProviderRequest.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cluster"))
     CreateCapacityProviderRequest.add_member(:auto_scaling_group_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoScalingGroupProvider, name: "autoScalingGroupProvider"))
     CreateCapacityProviderRequest.add_member(:managed_instances_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateManagedInstancesProviderConfiguration, name: "managedInstancesProvider"))
     CreateCapacityProviderRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags"))
     CreateCapacityProviderRequest.type = Types::CreateCapacityProviderRequest
-    CreateCapacityProviderResponse.add_member(:capacity_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityProvider, name: "capacityProvider"))
+    CreateCapacityProviderResponse.add_member(:capacity_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityProvider, name: "capacityProvider", traits: {"smithy.api#notProperty" => {}}))
     CreateCapacityProviderResponse.type = Types::CreateCapacityProviderResponse
     CreateClusterRequest.add_member(:cluster_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "clusterName"))
     CreateClusterRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags"))
@@ -835,11 +1017,47 @@ module Aws::ECS
     CreateClusterRequest.add_member(:default_capacity_provider_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityProviderStrategy, name: "defaultCapacityProviderStrategy"))
     CreateClusterRequest.add_member(:service_connect_defaults, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterServiceConnectDefaultsRequest, name: "serviceConnectDefaults"))
     CreateClusterRequest.type = Types::CreateClusterRequest
-    CreateClusterResponse.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: Cluster, name: "cluster"))
+    CreateClusterResponse.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: Cluster, name: "cluster", traits: {"smithy.api#notProperty" => {}}))
     CreateClusterResponse.type = Types::CreateClusterResponse
+    CreateDaemonRequest.add_member(:daemon_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "daemonName", traits: {"smithy.api#required" => {}}))
+    CreateDaemonRequest.add_member(:cluster_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "clusterArn"))
+    CreateDaemonRequest.add_member(:daemon_task_definition_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "daemonTaskDefinitionArn", traits: {"smithy.api#required" => {}}))
+    CreateDaemonRequest.add_member(:capacity_provider_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "capacityProviderArns", traits: {"smithy.api#required" => {}}))
+    CreateDaemonRequest.add_member(:deployment_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: DaemonDeploymentConfiguration, name: "deploymentConfiguration"))
+    CreateDaemonRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags"))
+    CreateDaemonRequest.add_member(:propagate_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: DaemonPropagateTags, name: "propagateTags"))
+    CreateDaemonRequest.add_member(:enable_ecs_managed_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "enableECSManagedTags", traits: {"smithy.api#default" => false}))
+    CreateDaemonRequest.add_member(:enable_execute_command, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "enableExecuteCommand", traits: {"smithy.api#default" => false}))
+    CreateDaemonRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "clientToken"))
+    CreateDaemonRequest.add_member(:critical, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedBoolean, name: "critical"))
+    CreateDaemonRequest.type = Types::CreateDaemonRequest
+    CreateDaemonResponse.add_member(:daemon_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "daemonArn", traits: {"smithy.api#notProperty" => {}}))
+    CreateDaemonResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: DaemonStatus, name: "status", traits: {"smithy.api#notProperty" => {}}))
+    CreateDaemonResponse.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "createdAt", traits: {"smithy.api#notProperty" => {}}))
+    CreateDaemonResponse.add_member(:deployment_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "deploymentArn", traits: {"smithy.api#notProperty" => {}}))
+    CreateDaemonResponse.type = Types::CreateDaemonResponse
+    CreateExpressGatewayServiceRequest.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "executionRoleArn"))
+    CreateExpressGatewayServiceRequest.add_member(:infrastructure_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "infrastructureRoleArn", traits: {"smithy.api#required" => {}}))
+    CreateExpressGatewayServiceRequest.add_member(:service_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "serviceName"))
+    CreateExpressGatewayServiceRequest.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cluster"))
+    CreateExpressGatewayServiceRequest.add_member(:health_check_path, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "healthCheckPath"))
+    CreateExpressGatewayServiceRequest.add_member(:primary_container, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpressGatewayContainer, name: "primaryContainer"))
+    CreateExpressGatewayServiceRequest.add_member(:task_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "taskRoleArn"))
+    CreateExpressGatewayServiceRequest.add_member(:network_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpressGatewayServiceNetworkConfiguration, name: "networkConfiguration"))
+    CreateExpressGatewayServiceRequest.add_member(:cpu, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cpu"))
+    CreateExpressGatewayServiceRequest.add_member(:memory, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "memory"))
+    CreateExpressGatewayServiceRequest.add_member(:cpu_architecture, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpressCpuArchitecture, name: "cpuArchitecture"))
+    CreateExpressGatewayServiceRequest.add_member(:scaling_target, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpressGatewayScalingTarget, name: "scalingTarget"))
+    CreateExpressGatewayServiceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags"))
+    CreateExpressGatewayServiceRequest.add_member(:task_definition_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "taskDefinitionArn"))
+    CreateExpressGatewayServiceRequest.type = Types::CreateExpressGatewayServiceRequest
+    CreateExpressGatewayServiceResponse.add_member(:service, ::Smithy::Schema::Shapes::MemberShape.new(target: ECSExpressGatewayService, name: "service", traits: {"smithy.api#notProperty" => {}}))
+    CreateExpressGatewayServiceResponse.type = Types::CreateExpressGatewayServiceResponse
     CreateManagedInstancesProviderConfiguration.add_member(:infrastructure_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "infrastructureRoleArn", traits: {"smithy.api#required" => {}}))
     CreateManagedInstancesProviderConfiguration.add_member(:instance_launch_template, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceLaunchTemplate, name: "instanceLaunchTemplate", traits: {"smithy.api#required" => {}}))
     CreateManagedInstancesProviderConfiguration.add_member(:propagate_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: PropagateMITags, name: "propagateTags"))
+    CreateManagedInstancesProviderConfiguration.add_member(:infrastructure_optimization, ::Smithy::Schema::Shapes::MemberShape.new(target: InfrastructureOptimization, name: "infrastructureOptimization"))
+    CreateManagedInstancesProviderConfiguration.add_member(:auto_repair_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoRepairConfiguration, name: "autoRepairConfiguration"))
     CreateManagedInstancesProviderConfiguration.type = Types::CreateManagedInstancesProviderConfiguration
     CreateServiceRequest.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cluster"))
     CreateServiceRequest.add_member(:service_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "serviceName", traits: {"smithy.api#required" => {}}))
@@ -867,8 +1085,9 @@ module Aws::ECS
     CreateServiceRequest.add_member(:service_connect_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceConnectConfiguration, name: "serviceConnectConfiguration"))
     CreateServiceRequest.add_member(:volume_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceVolumeConfigurations, name: "volumeConfigurations"))
     CreateServiceRequest.add_member(:vpc_lattice_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcLatticeConfigurations, name: "vpcLatticeConfigurations"))
+    CreateServiceRequest.add_member(:monitoring, ::Smithy::Schema::Shapes::MemberShape.new(target: MonitoringConfiguration, name: "monitoring"))
     CreateServiceRequest.type = Types::CreateServiceRequest
-    CreateServiceResponse.add_member(:service, ::Smithy::Schema::Shapes::MemberShape.new(target: Service, name: "service"))
+    CreateServiceResponse.add_member(:service, ::Smithy::Schema::Shapes::MemberShape.new(target: Service, name: "service", traits: {"smithy.api#notProperty" => {}}))
     CreateServiceResponse.type = Types::CreateServiceResponse
     CreateTaskSetRequest.add_member(:service, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "service", traits: {"smithy.api#required" => {}}))
     CreateTaskSetRequest.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cluster", traits: {"smithy.api#required" => {}}))
@@ -884,11 +1103,209 @@ module Aws::ECS
     CreateTaskSetRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "clientToken"))
     CreateTaskSetRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags"))
     CreateTaskSetRequest.type = Types::CreateTaskSetRequest
-    CreateTaskSetResponse.add_member(:task_set, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskSet, name: "taskSet"))
+    CreateTaskSetResponse.add_member(:task_set, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskSet, name: "taskSet", traits: {"smithy.api#notProperty" => {}}))
     CreateTaskSetResponse.type = Types::CreateTaskSetResponse
     CreatedAt.add_member(:before, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "before"))
     CreatedAt.add_member(:after, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "after"))
     CreatedAt.type = Types::CreatedAt
+    DaemonAlarmConfiguration.add_member(:alarm_names, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "alarmNames"))
+    DaemonAlarmConfiguration.add_member(:enable, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "enable", traits: {"smithy.api#default" => false}))
+    DaemonAlarmConfiguration.type = Types::DaemonAlarmConfiguration
+    DaemonCapacityProvider.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "arn"))
+    DaemonCapacityProvider.add_member(:running_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "runningCount", traits: {"smithy.api#default" => 0}))
+    DaemonCapacityProvider.add_member(:without_daemon_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "withoutDaemonCount", traits: {"smithy.api#default" => 0}))
+    DaemonCapacityProvider.type = Types::DaemonCapacityProvider
+    DaemonCapacityProviderList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DaemonCapacityProvider, name: "member"))
+    DaemonCircuitBreaker.add_member(:failure_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "failureCount", traits: {"smithy.api#default" => 0}))
+    DaemonCircuitBreaker.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: DaemonDeploymentRollbackMonitorsStatus, name: "status"))
+    DaemonCircuitBreaker.add_member(:threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "threshold", traits: {"smithy.api#default" => 0}))
+    DaemonCircuitBreaker.type = Types::DaemonCircuitBreaker
+    DaemonContainerDefinition.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "name"))
+    DaemonContainerDefinition.add_member(:image, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "image", traits: {"smithy.api#required" => {}}))
+    DaemonContainerDefinition.add_member(:memory, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedInteger, name: "memory"))
+    DaemonContainerDefinition.add_member(:memory_reservation, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedInteger, name: "memoryReservation"))
+    DaemonContainerDefinition.add_member(:repository_credentials, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryCredentials, name: "repositoryCredentials"))
+    DaemonContainerDefinition.add_member(:health_check, ::Smithy::Schema::Shapes::MemberShape.new(target: HealthCheck, name: "healthCheck"))
+    DaemonContainerDefinition.add_member(:cpu, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "cpu", traits: {"smithy.api#default" => 0}))
+    DaemonContainerDefinition.add_member(:essential, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedBoolean, name: "essential"))
+    DaemonContainerDefinition.add_member(:entry_point, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "entryPoint"))
+    DaemonContainerDefinition.add_member(:command, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "command"))
+    DaemonContainerDefinition.add_member(:working_directory, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "workingDirectory"))
+    DaemonContainerDefinition.add_member(:environment_files, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentFiles, name: "environmentFiles"))
+    DaemonContainerDefinition.add_member(:environment, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentVariables, name: "environment"))
+    DaemonContainerDefinition.add_member(:secrets, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretList, name: "secrets"))
+    DaemonContainerDefinition.add_member(:readonly_root_filesystem, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedBoolean, name: "readonlyRootFilesystem"))
+    DaemonContainerDefinition.add_member(:mount_points, ::Smithy::Schema::Shapes::MemberShape.new(target: MountPointList, name: "mountPoints"))
+    DaemonContainerDefinition.add_member(:log_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: LogConfiguration, name: "logConfiguration"))
+    DaemonContainerDefinition.add_member(:firelens_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: FirelensConfiguration, name: "firelensConfiguration"))
+    DaemonContainerDefinition.add_member(:privileged, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedBoolean, name: "privileged"))
+    DaemonContainerDefinition.add_member(:user, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "user"))
+    DaemonContainerDefinition.add_member(:ulimits, ::Smithy::Schema::Shapes::MemberShape.new(target: UlimitList, name: "ulimits"))
+    DaemonContainerDefinition.add_member(:linux_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: DaemonLinuxParameters, name: "linuxParameters"))
+    DaemonContainerDefinition.add_member(:depends_on, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerDependencies, name: "dependsOn"))
+    DaemonContainerDefinition.add_member(:start_timeout, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedInteger, name: "startTimeout"))
+    DaemonContainerDefinition.add_member(:stop_timeout, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedInteger, name: "stopTimeout"))
+    DaemonContainerDefinition.add_member(:system_controls, ::Smithy::Schema::Shapes::MemberShape.new(target: SystemControls, name: "systemControls"))
+    DaemonContainerDefinition.add_member(:interactive, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedBoolean, name: "interactive"))
+    DaemonContainerDefinition.add_member(:pseudo_terminal, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedBoolean, name: "pseudoTerminal"))
+    DaemonContainerDefinition.add_member(:restart_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerRestartPolicy, name: "restartPolicy"))
+    DaemonContainerDefinition.type = Types::DaemonContainerDefinition
+    DaemonContainerDefinitionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DaemonContainerDefinition, name: "member"))
+    DaemonContainerImage.add_member(:container_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "containerName"))
+    DaemonContainerImage.add_member(:image_digest, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "imageDigest"))
+    DaemonContainerImage.add_member(:image, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "image"))
+    DaemonContainerImage.type = Types::DaemonContainerImage
+    DaemonContainerImages.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DaemonContainerImage, name: "member"))
+    DaemonDeployment.add_member(:daemon_deployment_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "daemonDeploymentArn"))
+    DaemonDeployment.add_member(:cluster_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "clusterArn"))
+    DaemonDeployment.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: DaemonDeploymentStatus, name: "status"))
+    DaemonDeployment.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "statusReason"))
+    DaemonDeployment.add_member(:target_daemon_revision, ::Smithy::Schema::Shapes::MemberShape.new(target: DaemonDeploymentRevisionDetail, name: "targetDaemonRevision"))
+    DaemonDeployment.add_member(:source_daemon_revisions, ::Smithy::Schema::Shapes::MemberShape.new(target: DaemonDeploymentRevisionDetailList, name: "sourceDaemonRevisions"))
+    DaemonDeployment.add_member(:circuit_breaker, ::Smithy::Schema::Shapes::MemberShape.new(target: DaemonCircuitBreaker, name: "circuitBreaker"))
+    DaemonDeployment.add_member(:alarms, ::Smithy::Schema::Shapes::MemberShape.new(target: DaemonDeploymentAlarms, name: "alarms"))
+    DaemonDeployment.add_member(:rollback, ::Smithy::Schema::Shapes::MemberShape.new(target: DaemonRollback, name: "rollback"))
+    DaemonDeployment.add_member(:deployment_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: DaemonDeploymentConfiguration, name: "deploymentConfiguration"))
+    DaemonDeployment.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "createdAt"))
+    DaemonDeployment.add_member(:started_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "startedAt"))
+    DaemonDeployment.add_member(:stopped_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "stoppedAt"))
+    DaemonDeployment.add_member(:finished_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "finishedAt"))
+    DaemonDeployment.type = Types::DaemonDeployment
+    DaemonDeploymentAlarms.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: DaemonDeploymentRollbackMonitorsStatus, name: "status"))
+    DaemonDeploymentAlarms.add_member(:alarm_names, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "alarmNames"))
+    DaemonDeploymentAlarms.add_member(:triggered_alarm_names, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "triggeredAlarmNames"))
+    DaemonDeploymentAlarms.type = Types::DaemonDeploymentAlarms
+    DaemonDeploymentCapacityProvider.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "arn"))
+    DaemonDeploymentCapacityProvider.add_member(:running_instance_count, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedInteger, name: "runningInstanceCount"))
+    DaemonDeploymentCapacityProvider.add_member(:without_daemon_instance_count, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedInteger, name: "withoutDaemonInstanceCount"))
+    DaemonDeploymentCapacityProvider.add_member(:draining_instance_count, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedInteger, name: "drainingInstanceCount"))
+    DaemonDeploymentCapacityProvider.type = Types::DaemonDeploymentCapacityProvider
+    DaemonDeploymentCapacityProviderList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DaemonDeploymentCapacityProvider, name: "member"))
+    DaemonDeploymentConfiguration.add_member(:drain_percent, ::Smithy::Schema::Shapes::MemberShape.new(target: DaemonDrainPercent, name: "drainPercent"))
+    DaemonDeploymentConfiguration.add_member(:alarms, ::Smithy::Schema::Shapes::MemberShape.new(target: DaemonAlarmConfiguration, name: "alarms"))
+    DaemonDeploymentConfiguration.add_member(:bake_time_in_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "bakeTimeInMinutes", traits: {"smithy.api#default" => 0}))
+    DaemonDeploymentConfiguration.type = Types::DaemonDeploymentConfiguration
+    DaemonDeploymentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DaemonDeployment, name: "member"))
+    DaemonDeploymentRevisionDetail.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "arn"))
+    DaemonDeploymentRevisionDetail.add_member(:capacity_providers, ::Smithy::Schema::Shapes::MemberShape.new(target: DaemonDeploymentCapacityProviderList, name: "capacityProviders"))
+    DaemonDeploymentRevisionDetail.add_member(:total_running_instance_count, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedInteger, name: "totalRunningInstanceCount"))
+    DaemonDeploymentRevisionDetail.add_member(:total_without_daemon_instance_count, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedInteger, name: "totalWithoutDaemonInstanceCount"))
+    DaemonDeploymentRevisionDetail.add_member(:total_draining_instance_count, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedInteger, name: "totalDrainingInstanceCount"))
+    DaemonDeploymentRevisionDetail.type = Types::DaemonDeploymentRevisionDetail
+    DaemonDeploymentRevisionDetailList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DaemonDeploymentRevisionDetail, name: "member"))
+    DaemonDeploymentRollbackMonitorsStatus.add_member(:triggered, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TRIGGERED", traits: {"smithy.api#enumValue" => "TRIGGERED"}))
+    DaemonDeploymentRollbackMonitorsStatus.add_member(:monitoring, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MONITORING", traits: {"smithy.api#enumValue" => "MONITORING"}))
+    DaemonDeploymentRollbackMonitorsStatus.add_member(:monitoring_complete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MONITORING_COMPLETE", traits: {"smithy.api#enumValue" => "MONITORING_COMPLETE"}))
+    DaemonDeploymentRollbackMonitorsStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
+    DaemonDeploymentStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
+    DaemonDeploymentStatus.add_member(:successful, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCESSFUL", traits: {"smithy.api#enumValue" => "SUCCESSFUL"}))
+    DaemonDeploymentStatus.add_member(:stopped, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STOPPED", traits: {"smithy.api#enumValue" => "STOPPED"}))
+    DaemonDeploymentStatus.add_member(:stop_requested, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STOP_REQUESTED", traits: {"smithy.api#enumValue" => "STOP_REQUESTED"}))
+    DaemonDeploymentStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
+    DaemonDeploymentStatus.add_member(:rollback_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ROLLBACK_IN_PROGRESS", traits: {"smithy.api#enumValue" => "ROLLBACK_IN_PROGRESS"}))
+    DaemonDeploymentStatus.add_member(:rollback_successful, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ROLLBACK_SUCCESSFUL", traits: {"smithy.api#enumValue" => "ROLLBACK_SUCCESSFUL"}))
+    DaemonDeploymentStatus.add_member(:rollback_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ROLLBACK_FAILED", traits: {"smithy.api#enumValue" => "ROLLBACK_FAILED"}))
+    DaemonDeploymentStatusList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DaemonDeploymentStatus, name: "member"))
+    DaemonDeploymentSummary.add_member(:daemon_deployment_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "daemonDeploymentArn"))
+    DaemonDeploymentSummary.add_member(:daemon_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "daemonArn"))
+    DaemonDeploymentSummary.add_member(:cluster_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "clusterArn"))
+    DaemonDeploymentSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: DaemonDeploymentStatus, name: "status"))
+    DaemonDeploymentSummary.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "statusReason"))
+    DaemonDeploymentSummary.add_member(:target_daemon_revision_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "targetDaemonRevisionArn"))
+    DaemonDeploymentSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "createdAt"))
+    DaemonDeploymentSummary.add_member(:started_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "startedAt"))
+    DaemonDeploymentSummary.add_member(:stopped_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "stoppedAt"))
+    DaemonDeploymentSummary.add_member(:finished_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "finishedAt"))
+    DaemonDeploymentSummary.type = Types::DaemonDeploymentSummary
+    DaemonDeploymentSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DaemonDeploymentSummary, name: "member"))
+    DaemonDetail.add_member(:daemon_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "daemonArn"))
+    DaemonDetail.add_member(:cluster_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "clusterArn"))
+    DaemonDetail.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: DaemonStatus, name: "status"))
+    DaemonDetail.add_member(:current_revisions, ::Smithy::Schema::Shapes::MemberShape.new(target: DaemonRevisionDetailList, name: "currentRevisions"))
+    DaemonDetail.add_member(:deployment_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "deploymentArn"))
+    DaemonDetail.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "createdAt"))
+    DaemonDetail.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "updatedAt"))
+    DaemonDetail.type = Types::DaemonDetail
+    DaemonIpcMode.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NONE", traits: {"smithy.api#enumValue" => "none"}))
+    DaemonIpcMode.add_member(:shared, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SHARED", traits: {"smithy.api#enumValue" => "shared"}))
+    DaemonLinuxParameters.add_member(:capabilities, ::Smithy::Schema::Shapes::MemberShape.new(target: KernelCapabilities, name: "capabilities"))
+    DaemonLinuxParameters.add_member(:devices, ::Smithy::Schema::Shapes::MemberShape.new(target: DevicesList, name: "devices"))
+    DaemonLinuxParameters.add_member(:init_process_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedBoolean, name: "initProcessEnabled"))
+    DaemonLinuxParameters.add_member(:tmpfs, ::Smithy::Schema::Shapes::MemberShape.new(target: TmpfsList, name: "tmpfs"))
+    DaemonLinuxParameters.type = Types::DaemonLinuxParameters
+    DaemonNotActiveException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
+    DaemonNotActiveException.type = Types::DaemonNotActiveException
+    DaemonNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
+    DaemonNotFoundException.type = Types::DaemonNotFoundException
+    DaemonPidMode.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NONE", traits: {"smithy.api#enumValue" => "none"}))
+    DaemonPidMode.add_member(:shared, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SHARED", traits: {"smithy.api#enumValue" => "shared"}))
+    DaemonPropagateTags.add_member(:daemon, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DAEMON", traits: {"smithy.api#enumValue" => "DAEMON"}))
+    DaemonPropagateTags.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
+    DaemonRevision.add_member(:daemon_revision_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "daemonRevisionArn"))
+    DaemonRevision.add_member(:cluster_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "clusterArn"))
+    DaemonRevision.add_member(:daemon_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "daemonArn"))
+    DaemonRevision.add_member(:daemon_task_definition_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "daemonTaskDefinitionArn"))
+    DaemonRevision.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "createdAt"))
+    DaemonRevision.add_member(:container_images, ::Smithy::Schema::Shapes::MemberShape.new(target: DaemonContainerImages, name: "containerImages"))
+    DaemonRevision.add_member(:propagate_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: DaemonPropagateTags, name: "propagateTags"))
+    DaemonRevision.add_member(:enable_ecs_managed_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedBoolean, name: "enableECSManagedTags"))
+    DaemonRevision.add_member(:enable_execute_command, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedBoolean, name: "enableExecuteCommand"))
+    DaemonRevision.add_member(:critical, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedBoolean, name: "critical"))
+    DaemonRevision.type = Types::DaemonRevision
+    DaemonRevisionDetail.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "arn"))
+    DaemonRevisionDetail.add_member(:capacity_providers, ::Smithy::Schema::Shapes::MemberShape.new(target: DaemonCapacityProviderList, name: "capacityProviders"))
+    DaemonRevisionDetail.add_member(:total_running_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "totalRunningCount", traits: {"smithy.api#default" => 0}))
+    DaemonRevisionDetail.add_member(:total_without_daemon_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "totalWithoutDaemonCount", traits: {"smithy.api#default" => 0}))
+    DaemonRevisionDetail.type = Types::DaemonRevisionDetail
+    DaemonRevisionDetailList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DaemonRevisionDetail, name: "member"))
+    DaemonRevisions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DaemonRevision, name: "member"))
+    DaemonRollback.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "reason"))
+    DaemonRollback.add_member(:started_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "startedAt"))
+    DaemonRollback.add_member(:rollback_target_daemon_revision_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "rollbackTargetDaemonRevisionArn"))
+    DaemonRollback.add_member(:rollback_capacity_providers, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "rollbackCapacityProviders"))
+    DaemonRollback.type = Types::DaemonRollback
+    DaemonStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
+    DaemonStatus.add_member(:delete_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETE_IN_PROGRESS", traits: {"smithy.api#enumValue" => "DELETE_IN_PROGRESS"}))
+    DaemonSummariesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DaemonSummary, name: "member"))
+    DaemonSummary.add_member(:daemon_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "daemonArn"))
+    DaemonSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: DaemonStatus, name: "status"))
+    DaemonSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "createdAt"))
+    DaemonSummary.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "updatedAt"))
+    DaemonSummary.type = Types::DaemonSummary
+    DaemonTaskDefinition.add_member(:daemon_task_definition_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "daemonTaskDefinitionArn"))
+    DaemonTaskDefinition.add_member(:family, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "family"))
+    DaemonTaskDefinition.add_member(:revision, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "revision", traits: {"smithy.api#default" => 0}))
+    DaemonTaskDefinition.add_member(:task_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "taskRoleArn"))
+    DaemonTaskDefinition.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "executionRoleArn"))
+    DaemonTaskDefinition.add_member(:container_definitions, ::Smithy::Schema::Shapes::MemberShape.new(target: DaemonContainerDefinitionList, name: "containerDefinitions"))
+    DaemonTaskDefinition.add_member(:volumes, ::Smithy::Schema::Shapes::MemberShape.new(target: DaemonVolumeList, name: "volumes"))
+    DaemonTaskDefinition.add_member(:cpu, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cpu"))
+    DaemonTaskDefinition.add_member(:memory, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "memory"))
+    DaemonTaskDefinition.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: DaemonTaskDefinitionStatus, name: "status"))
+    DaemonTaskDefinition.add_member(:registered_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "registeredAt"))
+    DaemonTaskDefinition.add_member(:delete_requested_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "deleteRequestedAt"))
+    DaemonTaskDefinition.add_member(:registered_by, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "registeredBy"))
+    DaemonTaskDefinition.add_member(:pid_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: DaemonPidMode, name: "pidMode"))
+    DaemonTaskDefinition.add_member(:ipc_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: DaemonIpcMode, name: "ipcMode"))
+    DaemonTaskDefinition.type = Types::DaemonTaskDefinition
+    DaemonTaskDefinitionRevisionFilter.add_member(:last_registered, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LAST_REGISTERED", traits: {"smithy.api#enumValue" => "LAST_REGISTERED"}))
+    DaemonTaskDefinitionStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
+    DaemonTaskDefinitionStatus.add_member(:delete_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETE_IN_PROGRESS", traits: {"smithy.api#enumValue" => "DELETE_IN_PROGRESS"}))
+    DaemonTaskDefinitionStatus.add_member(:deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETED", traits: {"smithy.api#enumValue" => "DELETED"}))
+    DaemonTaskDefinitionStatusFilter.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
+    DaemonTaskDefinitionStatusFilter.add_member(:delete_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETE_IN_PROGRESS", traits: {"smithy.api#enumValue" => "DELETE_IN_PROGRESS"}))
+    DaemonTaskDefinitionStatusFilter.add_member(:all, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALL", traits: {"smithy.api#enumValue" => "ALL"}))
+    DaemonTaskDefinitionSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DaemonTaskDefinitionSummary, name: "member"))
+    DaemonTaskDefinitionSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "arn"))
+    DaemonTaskDefinitionSummary.add_member(:registered_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "registeredAt"))
+    DaemonTaskDefinitionSummary.add_member(:registered_by, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "registeredBy"))
+    DaemonTaskDefinitionSummary.add_member(:delete_requested_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "deleteRequestedAt"))
+    DaemonTaskDefinitionSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: DaemonTaskDefinitionStatus, name: "status"))
+    DaemonTaskDefinitionSummary.type = Types::DaemonTaskDefinitionSummary
+    DaemonVolume.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "name"))
+    DaemonVolume.add_member(:host, ::Smithy::Schema::Shapes::MemberShape.new(target: HostVolumeProperties, name: "host"))
+    DaemonVolume.type = Types::DaemonVolume
+    DaemonVolumeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DaemonVolume, name: "member"))
     DeleteAccountSettingRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SettingName, name: "name", traits: {"smithy.api#required" => {}}))
     DeleteAccountSettingRequest.add_member(:principal_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "principalArn"))
     DeleteAccountSettingRequest.type = Types::DeleteAccountSettingRequest
@@ -897,34 +1314,50 @@ module Aws::ECS
     DeleteAttributesRequest.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cluster"))
     DeleteAttributesRequest.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: Attributes, name: "attributes", traits: {"smithy.api#required" => {}}))
     DeleteAttributesRequest.type = Types::DeleteAttributesRequest
-    DeleteAttributesResponse.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: Attributes, name: "attributes"))
+    DeleteAttributesResponse.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: Attributes, name: "attributes", traits: {"smithy.api#notProperty" => {}}))
     DeleteAttributesResponse.type = Types::DeleteAttributesResponse
-    DeleteCapacityProviderRequest.add_member(:capacity_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "capacityProvider", traits: {"smithy.api#required" => {}}))
+    DeleteCapacityProviderRequest.add_member(:capacity_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "capacityProvider", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "CapacityProviderName"}))
     DeleteCapacityProviderRequest.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cluster"))
     DeleteCapacityProviderRequest.type = Types::DeleteCapacityProviderRequest
-    DeleteCapacityProviderResponse.add_member(:capacity_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityProvider, name: "capacityProvider"))
+    DeleteCapacityProviderResponse.add_member(:capacity_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityProvider, name: "capacityProvider", traits: {"smithy.api#notProperty" => {}}))
     DeleteCapacityProviderResponse.type = Types::DeleteCapacityProviderResponse
-    DeleteClusterRequest.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cluster", traits: {"smithy.api#required" => {}}))
+    DeleteClusterRequest.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cluster", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "ClusterName"}))
     DeleteClusterRequest.type = Types::DeleteClusterRequest
-    DeleteClusterResponse.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: Cluster, name: "cluster"))
+    DeleteClusterResponse.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: Cluster, name: "cluster", traits: {"smithy.api#notProperty" => {}}))
     DeleteClusterResponse.type = Types::DeleteClusterResponse
+    DeleteDaemonRequest.add_member(:daemon_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "daemonArn", traits: {"smithy.api#required" => {}}))
+    DeleteDaemonRequest.type = Types::DeleteDaemonRequest
+    DeleteDaemonResponse.add_member(:daemon_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "daemonArn", traits: {"smithy.api#notProperty" => {}}))
+    DeleteDaemonResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: DaemonStatus, name: "status", traits: {"smithy.api#notProperty" => {}}))
+    DeleteDaemonResponse.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "createdAt", traits: {"smithy.api#notProperty" => {}}))
+    DeleteDaemonResponse.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "updatedAt", traits: {"smithy.api#notProperty" => {}}))
+    DeleteDaemonResponse.add_member(:deployment_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "deploymentArn", traits: {"smithy.api#notProperty" => {}}))
+    DeleteDaemonResponse.type = Types::DeleteDaemonResponse
+    DeleteDaemonTaskDefinitionRequest.add_member(:daemon_task_definition, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "daemonTaskDefinition", traits: {"smithy.api#required" => {}}))
+    DeleteDaemonTaskDefinitionRequest.type = Types::DeleteDaemonTaskDefinitionRequest
+    DeleteDaemonTaskDefinitionResponse.add_member(:daemon_task_definition_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "daemonTaskDefinitionArn", traits: {"smithy.api#notProperty" => {}}))
+    DeleteDaemonTaskDefinitionResponse.type = Types::DeleteDaemonTaskDefinitionResponse
+    DeleteExpressGatewayServiceRequest.add_member(:service_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "serviceArn", traits: {"smithy.api#required" => {}}))
+    DeleteExpressGatewayServiceRequest.type = Types::DeleteExpressGatewayServiceRequest
+    DeleteExpressGatewayServiceResponse.add_member(:service, ::Smithy::Schema::Shapes::MemberShape.new(target: ECSExpressGatewayService, name: "service", traits: {"smithy.api#notProperty" => {}}))
+    DeleteExpressGatewayServiceResponse.type = Types::DeleteExpressGatewayServiceResponse
     DeleteServiceRequest.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cluster"))
     DeleteServiceRequest.add_member(:service, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "service", traits: {"smithy.api#required" => {}}))
     DeleteServiceRequest.add_member(:force, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedBoolean, name: "force"))
     DeleteServiceRequest.type = Types::DeleteServiceRequest
-    DeleteServiceResponse.add_member(:service, ::Smithy::Schema::Shapes::MemberShape.new(target: Service, name: "service"))
+    DeleteServiceResponse.add_member(:service, ::Smithy::Schema::Shapes::MemberShape.new(target: Service, name: "service", traits: {"smithy.api#notProperty" => {}}))
     DeleteServiceResponse.type = Types::DeleteServiceResponse
     DeleteTaskDefinitionsRequest.add_member(:task_definitions, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "taskDefinitions", traits: {"smithy.api#required" => {}}))
     DeleteTaskDefinitionsRequest.type = Types::DeleteTaskDefinitionsRequest
-    DeleteTaskDefinitionsResponse.add_member(:task_definitions, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskDefinitionList, name: "taskDefinitions"))
-    DeleteTaskDefinitionsResponse.add_member(:failures, ::Smithy::Schema::Shapes::MemberShape.new(target: Failures, name: "failures"))
+    DeleteTaskDefinitionsResponse.add_member(:task_definitions, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskDefinitionList, name: "taskDefinitions", traits: {"smithy.api#notProperty" => {}}))
+    DeleteTaskDefinitionsResponse.add_member(:failures, ::Smithy::Schema::Shapes::MemberShape.new(target: Failures, name: "failures", traits: {"smithy.api#notProperty" => {}}))
     DeleteTaskDefinitionsResponse.type = Types::DeleteTaskDefinitionsResponse
-    DeleteTaskSetRequest.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cluster", traits: {"smithy.api#required" => {}}))
-    DeleteTaskSetRequest.add_member(:service, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "service", traits: {"smithy.api#required" => {}}))
-    DeleteTaskSetRequest.add_member(:task_set, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "taskSet", traits: {"smithy.api#required" => {}}))
+    DeleteTaskSetRequest.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cluster", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "ClusterName"}))
+    DeleteTaskSetRequest.add_member(:service, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "service", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "ServiceName"}))
+    DeleteTaskSetRequest.add_member(:task_set, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "taskSet", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "TaskSetId"}))
     DeleteTaskSetRequest.add_member(:force, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedBoolean, name: "force"))
     DeleteTaskSetRequest.type = Types::DeleteTaskSetRequest
-    DeleteTaskSetResponse.add_member(:task_set, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskSet, name: "taskSet"))
+    DeleteTaskSetResponse.add_member(:task_set, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskSet, name: "taskSet", traits: {"smithy.api#notProperty" => {}}))
     DeleteTaskSetResponse.type = Types::DeleteTaskSetResponse
     Deployment.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "id"))
     Deployment.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "status"))
@@ -954,6 +1387,8 @@ module Aws::ECS
     DeploymentAlarms.type = Types::DeploymentAlarms
     DeploymentCircuitBreaker.add_member(:enable, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "enable", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
     DeploymentCircuitBreaker.add_member(:rollback, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "rollback", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    DeploymentCircuitBreaker.add_member(:reset_on_healthy_task, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedBoolean, name: "resetOnHealthyTask"))
+    DeploymentCircuitBreaker.add_member(:threshold_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ThresholdConfiguration, name: "thresholdConfiguration"))
     DeploymentCircuitBreaker.type = Types::DeploymentCircuitBreaker
     DeploymentConfiguration.add_member(:deployment_circuit_breaker, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentCircuitBreaker, name: "deploymentCircuitBreaker"))
     DeploymentConfiguration.add_member(:maximum_percent, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedInteger, name: "maximumPercent"))
@@ -962,39 +1397,71 @@ module Aws::ECS
     DeploymentConfiguration.add_member(:strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentStrategy, name: "strategy"))
     DeploymentConfiguration.add_member(:bake_time_in_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedInteger, name: "bakeTimeInMinutes"))
     DeploymentConfiguration.add_member(:lifecycle_hooks, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentLifecycleHookList, name: "lifecycleHooks"))
+    DeploymentConfiguration.add_member(:linear_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: LinearConfiguration, name: "linearConfiguration"))
+    DeploymentConfiguration.add_member(:canary_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: CanaryConfiguration, name: "canaryConfiguration"))
+    DeploymentConfiguration.add_member(:early_success_criteria, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentEarlySuccessCriteria, name: "earlySuccessCriteria"))
     DeploymentConfiguration.type = Types::DeploymentConfiguration
     DeploymentController.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentControllerType, name: "type", traits: {"smithy.api#required" => {}}))
     DeploymentController.type = Types::DeploymentController
     DeploymentControllerType.add_member(:ecs, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ECS", traits: {"smithy.api#enumValue" => "ECS"}))
     DeploymentControllerType.add_member(:code_deploy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CODE_DEPLOY", traits: {"smithy.api#enumValue" => "CODE_DEPLOY"}))
     DeploymentControllerType.add_member(:external, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXTERNAL", traits: {"smithy.api#enumValue" => "EXTERNAL"}))
+    DeploymentEarlySuccessCriteria.add_member(:enable, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "enable", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    DeploymentEarlySuccessCriteria.add_member(:healthy_percent, ::Smithy::Schema::Shapes::MemberShape.new(target: HealthyPercentInteger, name: "healthyPercent"))
+    DeploymentEarlySuccessCriteria.add_member(:source_service_revision_cleanup, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceRevisionCleanup, name: "sourceServiceRevisionCleanup"))
+    DeploymentEarlySuccessCriteria.type = Types::DeploymentEarlySuccessCriteria
     DeploymentEphemeralStorage.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "kmsKeyId"))
     DeploymentEphemeralStorage.type = Types::DeploymentEphemeralStorage
+    DeploymentLifecycleHook.add_member(:target_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentLifecycleHookTargetType, name: "targetType"))
     DeploymentLifecycleHook.add_member(:hook_target_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "hookTargetArn"))
     DeploymentLifecycleHook.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IAMRoleArn, name: "roleArn"))
     DeploymentLifecycleHook.add_member(:lifecycle_stages, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentLifecycleHookStageList, name: "lifecycleStages"))
     DeploymentLifecycleHook.add_member(:hook_details, ::Smithy::Schema::Shapes::MemberShape.new(target: HookDetails, name: "hookDetails"))
+    DeploymentLifecycleHook.add_member(:timeout_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentLifecycleHookTimeoutConfiguration, name: "timeoutConfiguration"))
     DeploymentLifecycleHook.type = Types::DeploymentLifecycleHook
+    DeploymentLifecycleHookAction.add_member(:rollback, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ROLLBACK", traits: {"smithy.api#enumValue" => "ROLLBACK"}))
+    DeploymentLifecycleHookAction.add_member(:continue, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONTINUE", traits: {"smithy.api#enumValue" => "CONTINUE"}))
+    DeploymentLifecycleHookDetail.add_member(:hook_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "hookId"))
+    DeploymentLifecycleHookDetail.add_member(:target_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentLifecycleHookTargetType, name: "targetType"))
+    DeploymentLifecycleHookDetail.add_member(:target_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "targetArn"))
+    DeploymentLifecycleHookDetail.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentLifecycleHookStatus, name: "status"))
+    DeploymentLifecycleHookDetail.add_member(:expires_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "expiresAt"))
+    DeploymentLifecycleHookDetail.add_member(:timeout_action, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentLifecycleHookAction, name: "timeoutAction"))
+    DeploymentLifecycleHookDetail.type = Types::DeploymentLifecycleHookDetail
+    DeploymentLifecycleHookDetailList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentLifecycleHookDetail, name: "member"))
     DeploymentLifecycleHookList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentLifecycleHook, name: "member"))
     DeploymentLifecycleHookStage.add_member(:reconcile_service, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RECONCILE_SERVICE", traits: {"smithy.api#enumValue" => "RECONCILE_SERVICE"}))
     DeploymentLifecycleHookStage.add_member(:pre_scale_up, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRE_SCALE_UP", traits: {"smithy.api#enumValue" => "PRE_SCALE_UP"}))
     DeploymentLifecycleHookStage.add_member(:post_scale_up, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POST_SCALE_UP", traits: {"smithy.api#enumValue" => "POST_SCALE_UP"}))
     DeploymentLifecycleHookStage.add_member(:test_traffic_shift, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TEST_TRAFFIC_SHIFT", traits: {"smithy.api#enumValue" => "TEST_TRAFFIC_SHIFT"}))
     DeploymentLifecycleHookStage.add_member(:post_test_traffic_shift, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POST_TEST_TRAFFIC_SHIFT", traits: {"smithy.api#enumValue" => "POST_TEST_TRAFFIC_SHIFT"}))
+    DeploymentLifecycleHookStage.add_member(:pre_production_traffic_shift, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRE_PRODUCTION_TRAFFIC_SHIFT", traits: {"smithy.api#enumValue" => "PRE_PRODUCTION_TRAFFIC_SHIFT"}))
     DeploymentLifecycleHookStage.add_member(:production_traffic_shift, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRODUCTION_TRAFFIC_SHIFT", traits: {"smithy.api#enumValue" => "PRODUCTION_TRAFFIC_SHIFT"}))
     DeploymentLifecycleHookStage.add_member(:post_production_traffic_shift, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POST_PRODUCTION_TRAFFIC_SHIFT", traits: {"smithy.api#enumValue" => "POST_PRODUCTION_TRAFFIC_SHIFT"}))
     DeploymentLifecycleHookStageList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentLifecycleHookStage, name: "member"))
+    DeploymentLifecycleHookStatus.add_member(:awaiting_action, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWAITING_ACTION", traits: {"smithy.api#enumValue" => "AWAITING_ACTION"}))
+    DeploymentLifecycleHookStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
+    DeploymentLifecycleHookStatus.add_member(:succeeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCEEDED", traits: {"smithy.api#enumValue" => "SUCCEEDED"}))
+    DeploymentLifecycleHookStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    DeploymentLifecycleHookStatus.add_member(:timed_out, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TIMED_OUT", traits: {"smithy.api#enumValue" => "TIMED_OUT"}))
+    DeploymentLifecycleHookTargetType.add_member(:aws_lambda, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_LAMBDA", traits: {"smithy.api#enumValue" => "AWS_LAMBDA"}))
+    DeploymentLifecycleHookTargetType.add_member(:pause, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PAUSE", traits: {"smithy.api#enumValue" => "PAUSE"}))
+    DeploymentLifecycleHookTimeoutConfiguration.add_member(:timeout_in_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentLifecycleHookDuration, name: "timeoutInMinutes"))
+    DeploymentLifecycleHookTimeoutConfiguration.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentLifecycleHookAction, name: "action"))
+    DeploymentLifecycleHookTimeoutConfiguration.type = Types::DeploymentLifecycleHookTimeoutConfiguration
     DeploymentRolloutState.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
     DeploymentRolloutState.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
     DeploymentRolloutState.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
     DeploymentStrategy.add_member(:rolling, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ROLLING", traits: {"smithy.api#enumValue" => "ROLLING"}))
     DeploymentStrategy.add_member(:blue_green, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BLUE_GREEN", traits: {"smithy.api#enumValue" => "BLUE_GREEN"}))
+    DeploymentStrategy.add_member(:linear, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LINEAR", traits: {"smithy.api#enumValue" => "LINEAR"}))
+    DeploymentStrategy.add_member(:canary, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANARY", traits: {"smithy.api#enumValue" => "CANARY"}))
     Deployments.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Deployment, name: "member"))
     DeregisterContainerInstanceRequest.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cluster"))
     DeregisterContainerInstanceRequest.add_member(:container_instance, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "containerInstance", traits: {"smithy.api#required" => {}}))
     DeregisterContainerInstanceRequest.add_member(:force, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedBoolean, name: "force"))
     DeregisterContainerInstanceRequest.type = Types::DeregisterContainerInstanceRequest
-    DeregisterContainerInstanceResponse.add_member(:container_instance, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerInstance, name: "containerInstance"))
+    DeregisterContainerInstanceResponse.add_member(:container_instance, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerInstance, name: "containerInstance", traits: {"smithy.api#notProperty" => {}}))
     DeregisterContainerInstanceResponse.type = Types::DeregisterContainerInstanceResponse
     DeregisterTaskDefinitionRequest.add_member(:task_definition, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "taskDefinition", traits: {"smithy.api#required" => {}}))
     DeregisterTaskDefinitionRequest.type = Types::DeregisterTaskDefinitionRequest
@@ -1006,39 +1473,62 @@ module Aws::ECS
     DescribeCapacityProvidersRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedInteger, name: "maxResults"))
     DescribeCapacityProvidersRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "nextToken"))
     DescribeCapacityProvidersRequest.type = Types::DescribeCapacityProvidersRequest
-    DescribeCapacityProvidersResponse.add_member(:capacity_providers, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityProviders, name: "capacityProviders"))
-    DescribeCapacityProvidersResponse.add_member(:failures, ::Smithy::Schema::Shapes::MemberShape.new(target: Failures, name: "failures"))
-    DescribeCapacityProvidersResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "nextToken"))
+    DescribeCapacityProvidersResponse.add_member(:capacity_providers, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityProviders, name: "capacityProviders", traits: {"smithy.api#notProperty" => {}}))
+    DescribeCapacityProvidersResponse.add_member(:failures, ::Smithy::Schema::Shapes::MemberShape.new(target: Failures, name: "failures", traits: {"smithy.api#notProperty" => {}}))
+    DescribeCapacityProvidersResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "nextToken", traits: {"smithy.api#notProperty" => {}}))
     DescribeCapacityProvidersResponse.type = Types::DescribeCapacityProvidersResponse
     DescribeClustersRequest.add_member(:clusters, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "clusters"))
     DescribeClustersRequest.add_member(:include, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterFieldList, name: "include"))
     DescribeClustersRequest.type = Types::DescribeClustersRequest
-    DescribeClustersResponse.add_member(:clusters, ::Smithy::Schema::Shapes::MemberShape.new(target: Clusters, name: "clusters"))
-    DescribeClustersResponse.add_member(:failures, ::Smithy::Schema::Shapes::MemberShape.new(target: Failures, name: "failures"))
+    DescribeClustersResponse.add_member(:clusters, ::Smithy::Schema::Shapes::MemberShape.new(target: Clusters, name: "clusters", traits: {"smithy.api#notProperty" => {}}))
+    DescribeClustersResponse.add_member(:failures, ::Smithy::Schema::Shapes::MemberShape.new(target: Failures, name: "failures", traits: {"smithy.api#notProperty" => {}}))
     DescribeClustersResponse.type = Types::DescribeClustersResponse
     DescribeContainerInstancesRequest.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cluster"))
     DescribeContainerInstancesRequest.add_member(:container_instances, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "containerInstances", traits: {"smithy.api#required" => {}}))
     DescribeContainerInstancesRequest.add_member(:include, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerInstanceFieldList, name: "include"))
     DescribeContainerInstancesRequest.type = Types::DescribeContainerInstancesRequest
-    DescribeContainerInstancesResponse.add_member(:container_instances, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerInstances, name: "containerInstances"))
-    DescribeContainerInstancesResponse.add_member(:failures, ::Smithy::Schema::Shapes::MemberShape.new(target: Failures, name: "failures"))
+    DescribeContainerInstancesResponse.add_member(:container_instances, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerInstances, name: "containerInstances", traits: {"smithy.api#notProperty" => {}}))
+    DescribeContainerInstancesResponse.add_member(:failures, ::Smithy::Schema::Shapes::MemberShape.new(target: Failures, name: "failures", traits: {"smithy.api#notProperty" => {}}))
     DescribeContainerInstancesResponse.type = Types::DescribeContainerInstancesResponse
+    DescribeDaemonDeploymentsRequest.add_member(:daemon_deployment_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "daemonDeploymentArns", traits: {"smithy.api#required" => {}}))
+    DescribeDaemonDeploymentsRequest.type = Types::DescribeDaemonDeploymentsRequest
+    DescribeDaemonDeploymentsResponse.add_member(:failures, ::Smithy::Schema::Shapes::MemberShape.new(target: Failures, name: "failures", traits: {"smithy.api#notProperty" => {}}))
+    DescribeDaemonDeploymentsResponse.add_member(:daemon_deployments, ::Smithy::Schema::Shapes::MemberShape.new(target: DaemonDeploymentList, name: "daemonDeployments", traits: {"smithy.api#notProperty" => {}}))
+    DescribeDaemonDeploymentsResponse.type = Types::DescribeDaemonDeploymentsResponse
+    DescribeDaemonRequest.add_member(:daemon_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "daemonArn", traits: {"smithy.api#required" => {}}))
+    DescribeDaemonRequest.type = Types::DescribeDaemonRequest
+    DescribeDaemonResponse.add_member(:daemon, ::Smithy::Schema::Shapes::MemberShape.new(target: DaemonDetail, name: "daemon", traits: {"smithy.api#notProperty" => {}}))
+    DescribeDaemonResponse.type = Types::DescribeDaemonResponse
+    DescribeDaemonRevisionsRequest.add_member(:daemon_revision_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "daemonRevisionArns", traits: {"smithy.api#required" => {}}))
+    DescribeDaemonRevisionsRequest.type = Types::DescribeDaemonRevisionsRequest
+    DescribeDaemonRevisionsResponse.add_member(:daemon_revisions, ::Smithy::Schema::Shapes::MemberShape.new(target: DaemonRevisions, name: "daemonRevisions", traits: {"smithy.api#notProperty" => {}}))
+    DescribeDaemonRevisionsResponse.add_member(:failures, ::Smithy::Schema::Shapes::MemberShape.new(target: Failures, name: "failures", traits: {"smithy.api#notProperty" => {}}))
+    DescribeDaemonRevisionsResponse.type = Types::DescribeDaemonRevisionsResponse
+    DescribeDaemonTaskDefinitionRequest.add_member(:daemon_task_definition, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "daemonTaskDefinition", traits: {"smithy.api#required" => {}}))
+    DescribeDaemonTaskDefinitionRequest.type = Types::DescribeDaemonTaskDefinitionRequest
+    DescribeDaemonTaskDefinitionResponse.add_member(:daemon_task_definition, ::Smithy::Schema::Shapes::MemberShape.new(target: DaemonTaskDefinition, name: "daemonTaskDefinition", traits: {"smithy.api#notProperty" => {}}))
+    DescribeDaemonTaskDefinitionResponse.type = Types::DescribeDaemonTaskDefinitionResponse
+    DescribeExpressGatewayServiceRequest.add_member(:service_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "serviceArn", traits: {"smithy.api#required" => {}}))
+    DescribeExpressGatewayServiceRequest.add_member(:include, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpressGatewayServiceIncludeList, name: "include"))
+    DescribeExpressGatewayServiceRequest.type = Types::DescribeExpressGatewayServiceRequest
+    DescribeExpressGatewayServiceResponse.add_member(:service, ::Smithy::Schema::Shapes::MemberShape.new(target: ECSExpressGatewayService, name: "service", traits: {"smithy.api#notProperty" => {}}))
+    DescribeExpressGatewayServiceResponse.type = Types::DescribeExpressGatewayServiceResponse
     DescribeServiceDeploymentsRequest.add_member(:service_deployment_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "serviceDeploymentArns", traits: {"smithy.api#required" => {}}))
     DescribeServiceDeploymentsRequest.type = Types::DescribeServiceDeploymentsRequest
-    DescribeServiceDeploymentsResponse.add_member(:service_deployments, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceDeployments, name: "serviceDeployments"))
-    DescribeServiceDeploymentsResponse.add_member(:failures, ::Smithy::Schema::Shapes::MemberShape.new(target: Failures, name: "failures"))
+    DescribeServiceDeploymentsResponse.add_member(:service_deployments, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceDeployments, name: "serviceDeployments", traits: {"smithy.api#notProperty" => {}}))
+    DescribeServiceDeploymentsResponse.add_member(:failures, ::Smithy::Schema::Shapes::MemberShape.new(target: Failures, name: "failures", traits: {"smithy.api#notProperty" => {}}))
     DescribeServiceDeploymentsResponse.type = Types::DescribeServiceDeploymentsResponse
     DescribeServiceRevisionsRequest.add_member(:service_revision_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "serviceRevisionArns", traits: {"smithy.api#required" => {}}))
     DescribeServiceRevisionsRequest.type = Types::DescribeServiceRevisionsRequest
-    DescribeServiceRevisionsResponse.add_member(:service_revisions, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceRevisions, name: "serviceRevisions"))
-    DescribeServiceRevisionsResponse.add_member(:failures, ::Smithy::Schema::Shapes::MemberShape.new(target: Failures, name: "failures"))
+    DescribeServiceRevisionsResponse.add_member(:service_revisions, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceRevisions, name: "serviceRevisions", traits: {"smithy.api#notProperty" => {}}))
+    DescribeServiceRevisionsResponse.add_member(:failures, ::Smithy::Schema::Shapes::MemberShape.new(target: Failures, name: "failures", traits: {"smithy.api#notProperty" => {}}))
     DescribeServiceRevisionsResponse.type = Types::DescribeServiceRevisionsResponse
     DescribeServicesRequest.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cluster"))
     DescribeServicesRequest.add_member(:services, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "services", traits: {"smithy.api#required" => {}}))
     DescribeServicesRequest.add_member(:include, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceFieldList, name: "include"))
     DescribeServicesRequest.type = Types::DescribeServicesRequest
-    DescribeServicesResponse.add_member(:services, ::Smithy::Schema::Shapes::MemberShape.new(target: Services, name: "services"))
-    DescribeServicesResponse.add_member(:failures, ::Smithy::Schema::Shapes::MemberShape.new(target: Failures, name: "failures"))
+    DescribeServicesResponse.add_member(:services, ::Smithy::Schema::Shapes::MemberShape.new(target: Services, name: "services", traits: {"smithy.api#notProperty" => {}}))
+    DescribeServicesResponse.add_member(:failures, ::Smithy::Schema::Shapes::MemberShape.new(target: Failures, name: "failures", traits: {"smithy.api#notProperty" => {}}))
     DescribeServicesResponse.type = Types::DescribeServicesResponse
     DescribeTaskDefinitionRequest.add_member(:task_definition, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "taskDefinition", traits: {"smithy.api#required" => {}}))
     DescribeTaskDefinitionRequest.add_member(:include, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskDefinitionFieldList, name: "include"))
@@ -1051,15 +1541,15 @@ module Aws::ECS
     DescribeTaskSetsRequest.add_member(:task_sets, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "taskSets"))
     DescribeTaskSetsRequest.add_member(:include, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskSetFieldList, name: "include"))
     DescribeTaskSetsRequest.type = Types::DescribeTaskSetsRequest
-    DescribeTaskSetsResponse.add_member(:task_sets, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskSets, name: "taskSets"))
-    DescribeTaskSetsResponse.add_member(:failures, ::Smithy::Schema::Shapes::MemberShape.new(target: Failures, name: "failures"))
+    DescribeTaskSetsResponse.add_member(:task_sets, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskSets, name: "taskSets", traits: {"smithy.api#notProperty" => {}}))
+    DescribeTaskSetsResponse.add_member(:failures, ::Smithy::Schema::Shapes::MemberShape.new(target: Failures, name: "failures", traits: {"smithy.api#notProperty" => {}}))
     DescribeTaskSetsResponse.type = Types::DescribeTaskSetsResponse
     DescribeTasksRequest.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cluster"))
     DescribeTasksRequest.add_member(:tasks, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "tasks", traits: {"smithy.api#required" => {}}))
     DescribeTasksRequest.add_member(:include, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskFieldList, name: "include"))
     DescribeTasksRequest.type = Types::DescribeTasksRequest
-    DescribeTasksResponse.add_member(:tasks, ::Smithy::Schema::Shapes::MemberShape.new(target: Tasks, name: "tasks"))
-    DescribeTasksResponse.add_member(:failures, ::Smithy::Schema::Shapes::MemberShape.new(target: Failures, name: "failures"))
+    DescribeTasksResponse.add_member(:tasks, ::Smithy::Schema::Shapes::MemberShape.new(target: Tasks, name: "tasks", traits: {"smithy.api#notProperty" => {}}))
+    DescribeTasksResponse.add_member(:failures, ::Smithy::Schema::Shapes::MemberShape.new(target: Failures, name: "failures", traits: {"smithy.api#notProperty" => {}}))
     DescribeTasksResponse.type = Types::DescribeTasksResponse
     DesiredStatus.add_member(:running, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RUNNING", traits: {"smithy.api#enumValue" => "RUNNING"}))
     DesiredStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
@@ -1094,6 +1584,23 @@ module Aws::ECS
     EBSTagSpecification.add_member(:propagate_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: PropagateTags, name: "propagateTags"))
     EBSTagSpecification.type = Types::EBSTagSpecification
     EBSTagSpecifications.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EBSTagSpecification, name: "member"))
+    ECSExpressGatewayService.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cluster"))
+    ECSExpressGatewayService.add_member(:service_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "serviceName"))
+    ECSExpressGatewayService.add_member(:service_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "serviceArn"))
+    ECSExpressGatewayService.add_member(:infrastructure_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "infrastructureRoleArn"))
+    ECSExpressGatewayService.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpressGatewayServiceStatus, name: "status"))
+    ECSExpressGatewayService.add_member(:current_deployment, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "currentDeployment"))
+    ECSExpressGatewayService.add_member(:active_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpressGatewayServiceConfigurations, name: "activeConfigurations"))
+    ECSExpressGatewayService.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags"))
+    ECSExpressGatewayService.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "createdAt"))
+    ECSExpressGatewayService.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "updatedAt"))
+    ECSExpressGatewayService.type = Types::ECSExpressGatewayService
+    ECSManagedResources.add_member(:ingress_paths, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedIngressPaths, name: "ingressPaths"))
+    ECSManagedResources.add_member(:auto_scaling, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedAutoScaling, name: "autoScaling"))
+    ECSManagedResources.add_member(:metric_alarms, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedMetricAlarms, name: "metricAlarms"))
+    ECSManagedResources.add_member(:service_security_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedSecurityGroups, name: "serviceSecurityGroups"))
+    ECSManagedResources.add_member(:log_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedLogGroups, name: "logGroups"))
+    ECSManagedResources.type = Types::ECSManagedResources
     EFSAuthorizationConfig.add_member(:access_point_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "accessPointId"))
     EFSAuthorizationConfig.add_member(:iam, ::Smithy::Schema::Shapes::MemberShape.new(target: EFSAuthorizationConfigIAM, name: "iam"))
     EFSAuthorizationConfig.type = Types::EFSAuthorizationConfig
@@ -1135,13 +1642,62 @@ module Aws::ECS
     ExecuteCommandRequest.add_member(:interactive, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "interactive", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
     ExecuteCommandRequest.add_member(:task, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "task", traits: {"smithy.api#required" => {}}))
     ExecuteCommandRequest.type = Types::ExecuteCommandRequest
-    ExecuteCommandResponse.add_member(:cluster_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "clusterArn"))
-    ExecuteCommandResponse.add_member(:container_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "containerArn"))
-    ExecuteCommandResponse.add_member(:container_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "containerName"))
-    ExecuteCommandResponse.add_member(:interactive, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "interactive", traits: {"smithy.api#default" => false}))
-    ExecuteCommandResponse.add_member(:session, ::Smithy::Schema::Shapes::MemberShape.new(target: Session, name: "session"))
-    ExecuteCommandResponse.add_member(:task_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "taskArn"))
+    ExecuteCommandResponse.add_member(:cluster_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "clusterArn", traits: {"smithy.api#notProperty" => {}}))
+    ExecuteCommandResponse.add_member(:container_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "containerArn", traits: {"smithy.api#notProperty" => {}}))
+    ExecuteCommandResponse.add_member(:container_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "containerName", traits: {"smithy.api#notProperty" => {}}))
+    ExecuteCommandResponse.add_member(:interactive, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "interactive", traits: {"smithy.api#default" => false, "smithy.api#notProperty" => {}}))
+    ExecuteCommandResponse.add_member(:session, ::Smithy::Schema::Shapes::MemberShape.new(target: Session, name: "session", traits: {"smithy.api#notProperty" => {}}))
+    ExecuteCommandResponse.add_member(:task_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "taskArn", traits: {"smithy.api#notProperty" => {}}))
     ExecuteCommandResponse.type = Types::ExecuteCommandResponse
+    ExpressCpuArchitecture.add_member(:x86_64, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "X86_64", traits: {"smithy.api#enumValue" => "X86_64"}))
+    ExpressCpuArchitecture.add_member(:arm64, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ARM64", traits: {"smithy.api#enumValue" => "ARM64"}))
+    ExpressGatewayContainer.add_member(:image, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "image", traits: {"smithy.api#required" => {}}))
+    ExpressGatewayContainer.add_member(:container_port, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedInteger, name: "containerPort"))
+    ExpressGatewayContainer.add_member(:aws_logs_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpressGatewayServiceAwsLogsConfiguration, name: "awsLogsConfiguration"))
+    ExpressGatewayContainer.add_member(:repository_credentials, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpressGatewayRepositoryCredentials, name: "repositoryCredentials"))
+    ExpressGatewayContainer.add_member(:command, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "command"))
+    ExpressGatewayContainer.add_member(:environment, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentVariables, name: "environment"))
+    ExpressGatewayContainer.add_member(:secrets, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretList, name: "secrets"))
+    ExpressGatewayContainer.type = Types::ExpressGatewayContainer
+    ExpressGatewayRepositoryCredentials.add_member(:credentials_parameter, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "credentialsParameter"))
+    ExpressGatewayRepositoryCredentials.type = Types::ExpressGatewayRepositoryCredentials
+    ExpressGatewayScalingTarget.add_member(:min_task_count, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedInteger, name: "minTaskCount"))
+    ExpressGatewayScalingTarget.add_member(:max_task_count, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedInteger, name: "maxTaskCount"))
+    ExpressGatewayScalingTarget.add_member(:auto_scaling_metric, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpressGatewayServiceScalingMetric, name: "autoScalingMetric"))
+    ExpressGatewayScalingTarget.add_member(:auto_scaling_target_value, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedInteger, name: "autoScalingTargetValue"))
+    ExpressGatewayScalingTarget.type = Types::ExpressGatewayScalingTarget
+    ExpressGatewayServiceAwsLogsConfiguration.add_member(:log_group, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "logGroup", traits: {"smithy.api#required" => {}}))
+    ExpressGatewayServiceAwsLogsConfiguration.add_member(:log_stream_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "logStreamPrefix", traits: {"smithy.api#required" => {}}))
+    ExpressGatewayServiceAwsLogsConfiguration.type = Types::ExpressGatewayServiceAwsLogsConfiguration
+    ExpressGatewayServiceConfiguration.add_member(:service_revision_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "serviceRevisionArn"))
+    ExpressGatewayServiceConfiguration.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "executionRoleArn"))
+    ExpressGatewayServiceConfiguration.add_member(:task_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "taskRoleArn"))
+    ExpressGatewayServiceConfiguration.add_member(:task_definition_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "taskDefinitionArn"))
+    ExpressGatewayServiceConfiguration.add_member(:cpu, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cpu"))
+    ExpressGatewayServiceConfiguration.add_member(:memory, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "memory"))
+    ExpressGatewayServiceConfiguration.add_member(:cpu_architecture, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpressCpuArchitecture, name: "cpuArchitecture"))
+    ExpressGatewayServiceConfiguration.add_member(:network_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpressGatewayServiceNetworkConfiguration, name: "networkConfiguration"))
+    ExpressGatewayServiceConfiguration.add_member(:health_check_path, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "healthCheckPath"))
+    ExpressGatewayServiceConfiguration.add_member(:primary_container, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpressGatewayContainer, name: "primaryContainer"))
+    ExpressGatewayServiceConfiguration.add_member(:scaling_target, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpressGatewayScalingTarget, name: "scalingTarget"))
+    ExpressGatewayServiceConfiguration.add_member(:ingress_paths, ::Smithy::Schema::Shapes::MemberShape.new(target: IngressPathSummaries, name: "ingressPaths"))
+    ExpressGatewayServiceConfiguration.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "createdAt"))
+    ExpressGatewayServiceConfiguration.type = Types::ExpressGatewayServiceConfiguration
+    ExpressGatewayServiceConfigurations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpressGatewayServiceConfiguration, name: "member"))
+    ExpressGatewayServiceInclude.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TAGS", traits: {"smithy.api#enumValue" => "TAGS"}))
+    ExpressGatewayServiceIncludeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpressGatewayServiceInclude, name: "member"))
+    ExpressGatewayServiceNetworkConfiguration.add_member(:security_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "securityGroups"))
+    ExpressGatewayServiceNetworkConfiguration.add_member(:subnets, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "subnets"))
+    ExpressGatewayServiceNetworkConfiguration.type = Types::ExpressGatewayServiceNetworkConfiguration
+    ExpressGatewayServiceScalingMetric.add_member(:average_cpu_utilization, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AverageCPUUtilization", traits: {"smithy.api#enumValue" => "AVERAGE_CPU"}))
+    ExpressGatewayServiceScalingMetric.add_member(:average_memory_utilization, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AverageMemoryUtilization", traits: {"smithy.api#enumValue" => "AVERAGE_MEMORY"}))
+    ExpressGatewayServiceScalingMetric.add_member(:request_count_per_target, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RequestCountPerTarget", traits: {"smithy.api#enumValue" => "REQUEST_COUNT_PER_TARGET"}))
+    ExpressGatewayServiceStatus.add_member(:status_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpressGatewayServiceStatusCode, name: "statusCode"))
+    ExpressGatewayServiceStatus.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "statusReason"))
+    ExpressGatewayServiceStatus.type = Types::ExpressGatewayServiceStatus
+    ExpressGatewayServiceStatusCode.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
+    ExpressGatewayServiceStatusCode.add_member(:draining, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DRAINING", traits: {"smithy.api#enumValue" => "DRAINING"}))
+    ExpressGatewayServiceStatusCode.add_member(:inactive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INACTIVE", traits: {"smithy.api#enumValue" => "INACTIVE"}))
     FSxWindowsFileServerAuthorizationConfig.add_member(:credentials_parameter, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "credentialsParameter", traits: {"smithy.api#required" => {}}))
     FSxWindowsFileServerAuthorizationConfig.add_member(:domain, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "domain", traits: {"smithy.api#required" => {}}))
     FSxWindowsFileServerAuthorizationConfig.type = Types::FSxWindowsFileServerAuthorizationConfig
@@ -1164,8 +1720,8 @@ module Aws::ECS
     GetTaskProtectionRequest.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cluster", traits: {"smithy.api#required" => {}}))
     GetTaskProtectionRequest.add_member(:tasks, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "tasks"))
     GetTaskProtectionRequest.type = Types::GetTaskProtectionRequest
-    GetTaskProtectionResponse.add_member(:protected_tasks, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectedTasks, name: "protectedTasks"))
-    GetTaskProtectionResponse.add_member(:failures, ::Smithy::Schema::Shapes::MemberShape.new(target: Failures, name: "failures"))
+    GetTaskProtectionResponse.add_member(:protected_tasks, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectedTasks, name: "protectedTasks", traits: {"smithy.api#notProperty" => {}}))
+    GetTaskProtectionResponse.add_member(:failures, ::Smithy::Schema::Shapes::MemberShape.new(target: Failures, name: "failures", traits: {"smithy.api#notProperty" => {}}))
     GetTaskProtectionResponse.type = Types::GetTaskProtectionResponse
     GpuIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     HealthCheck.add_member(:command, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "command", traits: {"smithy.api#required" => {}}))
@@ -1191,11 +1747,18 @@ module Aws::ECS
     InferenceAcceleratorOverride.type = Types::InferenceAcceleratorOverride
     InferenceAcceleratorOverrides.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InferenceAcceleratorOverride, name: "member"))
     InferenceAccelerators.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InferenceAccelerator, name: "member"))
+    InfrastructureOptimization.add_member(:scale_in_after, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedInteger, name: "scaleInAfter"))
+    InfrastructureOptimization.type = Types::InfrastructureOptimization
+    IngressPathSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IngressPathSummary, name: "member"))
+    IngressPathSummary.add_member(:access_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessType, name: "accessType", traits: {"smithy.api#required" => {}}))
+    IngressPathSummary.add_member(:endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "endpoint", traits: {"smithy.api#required" => {}}))
+    IngressPathSummary.type = Types::IngressPathSummary
     InstanceGeneration.add_member(:current, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CURRENT", traits: {"smithy.api#enumValue" => "current"}))
     InstanceGeneration.add_member(:previous, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PREVIOUS", traits: {"smithy.api#enumValue" => "previous"}))
     InstanceGenerationSet.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceGeneration, name: "member", traits: {"smithy.api#xmlName" => "item"}))
     InstanceHealthCheckResult.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceHealthCheckType, name: "type"))
     InstanceHealthCheckResult.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceHealthCheckState, name: "status"))
+    InstanceHealthCheckResult.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "statusReason"))
     InstanceHealthCheckResult.add_member(:last_updated, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastUpdated"))
     InstanceHealthCheckResult.add_member(:last_status_change, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastStatusChange"))
     InstanceHealthCheckResult.type = Types::InstanceHealthCheckResult
@@ -1205,17 +1768,28 @@ module Aws::ECS
     InstanceHealthCheckState.add_member(:insufficient_data, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INSUFFICIENT_DATA", traits: {"smithy.api#enumValue" => "INSUFFICIENT_DATA"}))
     InstanceHealthCheckState.add_member(:initializing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INITIALIZING", traits: {"smithy.api#enumValue" => "INITIALIZING"}))
     InstanceHealthCheckType.add_member(:container_runtime, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONTAINER_RUNTIME", traits: {"smithy.api#enumValue" => "CONTAINER_RUNTIME"}))
+    InstanceHealthCheckType.add_member(:accelerated_compute, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCELERATED_COMPUTE", traits: {"smithy.api#enumValue" => "ACCELERATED_COMPUTE"}))
+    InstanceHealthCheckType.add_member(:daemon, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DAEMON", traits: {"smithy.api#enumValue" => "DAEMON"}))
+    InstanceHealthCheckType.add_member(:agent_connectivity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AGENT_CONNECTIVITY", traits: {"smithy.api#enumValue" => "AGENT_CONNECTIVITY"}))
     InstanceLaunchTemplate.add_member(:ec2_instance_profile_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ec2InstanceProfileArn", traits: {"smithy.api#required" => {}}))
     InstanceLaunchTemplate.add_member(:network_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedInstancesNetworkConfiguration, name: "networkConfiguration", traits: {"smithy.api#required" => {}}))
     InstanceLaunchTemplate.add_member(:storage_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedInstancesStorageConfiguration, name: "storageConfiguration"))
+    InstanceLaunchTemplate.add_member(:local_storage_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedInstancesLocalStorageConfiguration, name: "localStorageConfiguration"))
     InstanceLaunchTemplate.add_member(:monitoring, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedInstancesMonitoringOptions, name: "monitoring"))
+    InstanceLaunchTemplate.add_member(:capacity_option_type, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityOptionType, name: "capacityOptionType"))
+    InstanceLaunchTemplate.add_member(:instance_metadata_tags_propagation, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedBoolean, name: "instanceMetadataTagsPropagation"))
     InstanceLaunchTemplate.add_member(:instance_requirements, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceRequirementsRequest, name: "instanceRequirements"))
+    InstanceLaunchTemplate.add_member(:fips_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedBoolean, name: "fipsEnabled"))
+    InstanceLaunchTemplate.add_member(:capacity_reservations, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityReservationRequest, name: "capacityReservations"))
     InstanceLaunchTemplate.type = Types::InstanceLaunchTemplate
     InstanceLaunchTemplateUpdate.add_member(:ec2_instance_profile_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ec2InstanceProfileArn"))
     InstanceLaunchTemplateUpdate.add_member(:network_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedInstancesNetworkConfiguration, name: "networkConfiguration"))
     InstanceLaunchTemplateUpdate.add_member(:storage_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedInstancesStorageConfiguration, name: "storageConfiguration"))
+    InstanceLaunchTemplateUpdate.add_member(:instance_metadata_tags_propagation, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedBoolean, name: "instanceMetadataTagsPropagation"))
+    InstanceLaunchTemplateUpdate.add_member(:local_storage_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedInstancesLocalStorageConfiguration, name: "localStorageConfiguration"))
     InstanceLaunchTemplateUpdate.add_member(:monitoring, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedInstancesMonitoringOptions, name: "monitoring"))
     InstanceLaunchTemplateUpdate.add_member(:instance_requirements, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceRequirementsRequest, name: "instanceRequirements"))
+    InstanceLaunchTemplateUpdate.add_member(:capacity_reservations, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityReservationRequest, name: "capacityReservations"))
     InstanceLaunchTemplateUpdate.type = Types::InstanceLaunchTemplateUpdate
     InstanceRequirementsRequest.add_member(:v_cpu_count, ::Smithy::Schema::Shapes::MemberShape.new(target: VCpuCountRangeRequest, name: "vCpuCount", traits: {"smithy.api#required" => {}}))
     InstanceRequirementsRequest.add_member(:memory_mi_b, ::Smithy::Schema::Shapes::MemberShape.new(target: MemoryMiBRequest, name: "memoryMiB", traits: {"smithy.api#required" => {}}))
@@ -1260,6 +1834,9 @@ module Aws::ECS
     LaunchType.add_member(:managed_instances, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MANAGED_INSTANCES", traits: {"smithy.api#enumValue" => "MANAGED_INSTANCES"}))
     LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     LimitExceededException.type = Types::LimitExceededException
+    LinearConfiguration.add_member(:step_percent, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "stepPercent", traits: {"smithy.api#default" => nil}))
+    LinearConfiguration.add_member(:step_bake_time_in_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "stepBakeTimeInMinutes", traits: {"smithy.api#default" => nil}))
+    LinearConfiguration.type = Types::LinearConfiguration
     LinuxParameters.add_member(:capabilities, ::Smithy::Schema::Shapes::MemberShape.new(target: KernelCapabilities, name: "capabilities"))
     LinuxParameters.add_member(:devices, ::Smithy::Schema::Shapes::MemberShape.new(target: DevicesList, name: "devices"))
     LinuxParameters.add_member(:init_process_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedBoolean, name: "initProcessEnabled"))
@@ -1285,14 +1862,14 @@ module Aws::ECS
     ListAttributesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "nextToken"))
     ListAttributesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedInteger, name: "maxResults"))
     ListAttributesRequest.type = Types::ListAttributesRequest
-    ListAttributesResponse.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: Attributes, name: "attributes"))
-    ListAttributesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "nextToken"))
+    ListAttributesResponse.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: Attributes, name: "attributes", traits: {"smithy.api#notProperty" => {}}))
+    ListAttributesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "nextToken", traits: {"smithy.api#notProperty" => {}}))
     ListAttributesResponse.type = Types::ListAttributesResponse
     ListClustersRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "nextToken"))
     ListClustersRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedInteger, name: "maxResults"))
     ListClustersRequest.type = Types::ListClustersRequest
-    ListClustersResponse.add_member(:cluster_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "clusterArns"))
-    ListClustersResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "nextToken"))
+    ListClustersResponse.add_member(:cluster_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "clusterArns", traits: {"smithy.api#notProperty" => {}}))
+    ListClustersResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "nextToken", traits: {"smithy.api#notProperty" => {}}))
     ListClustersResponse.type = Types::ListClustersResponse
     ListContainerInstancesRequest.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cluster"))
     ListContainerInstancesRequest.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "filter"))
@@ -1300,9 +1877,37 @@ module Aws::ECS
     ListContainerInstancesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedInteger, name: "maxResults"))
     ListContainerInstancesRequest.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerInstanceStatus, name: "status"))
     ListContainerInstancesRequest.type = Types::ListContainerInstancesRequest
-    ListContainerInstancesResponse.add_member(:container_instance_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "containerInstanceArns"))
-    ListContainerInstancesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "nextToken"))
+    ListContainerInstancesResponse.add_member(:container_instance_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "containerInstanceArns", traits: {"smithy.api#notProperty" => {}}))
+    ListContainerInstancesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "nextToken", traits: {"smithy.api#notProperty" => {}}))
     ListContainerInstancesResponse.type = Types::ListContainerInstancesResponse
+    ListDaemonDeploymentsRequest.add_member(:daemon_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "daemonArn", traits: {"smithy.api#required" => {}}))
+    ListDaemonDeploymentsRequest.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: DaemonDeploymentStatusList, name: "status"))
+    ListDaemonDeploymentsRequest.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedAt, name: "createdAt"))
+    ListDaemonDeploymentsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedInteger, name: "maxResults"))
+    ListDaemonDeploymentsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "nextToken"))
+    ListDaemonDeploymentsRequest.type = Types::ListDaemonDeploymentsRequest
+    ListDaemonDeploymentsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "nextToken", traits: {"smithy.api#notProperty" => {}}))
+    ListDaemonDeploymentsResponse.add_member(:daemon_deployments, ::Smithy::Schema::Shapes::MemberShape.new(target: DaemonDeploymentSummaryList, name: "daemonDeployments", traits: {"smithy.api#notProperty" => {}}))
+    ListDaemonDeploymentsResponse.type = Types::ListDaemonDeploymentsResponse
+    ListDaemonTaskDefinitionsRequest.add_member(:family_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "familyPrefix"))
+    ListDaemonTaskDefinitionsRequest.add_member(:family, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "family"))
+    ListDaemonTaskDefinitionsRequest.add_member(:revision, ::Smithy::Schema::Shapes::MemberShape.new(target: DaemonTaskDefinitionRevisionFilter, name: "revision"))
+    ListDaemonTaskDefinitionsRequest.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: DaemonTaskDefinitionStatusFilter, name: "status"))
+    ListDaemonTaskDefinitionsRequest.add_member(:sort, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrder, name: "sort"))
+    ListDaemonTaskDefinitionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "nextToken"))
+    ListDaemonTaskDefinitionsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedInteger, name: "maxResults"))
+    ListDaemonTaskDefinitionsRequest.type = Types::ListDaemonTaskDefinitionsRequest
+    ListDaemonTaskDefinitionsResponse.add_member(:daemon_task_definitions, ::Smithy::Schema::Shapes::MemberShape.new(target: DaemonTaskDefinitionSummaries, name: "daemonTaskDefinitions", traits: {"smithy.api#notProperty" => {}}))
+    ListDaemonTaskDefinitionsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "nextToken", traits: {"smithy.api#notProperty" => {}}))
+    ListDaemonTaskDefinitionsResponse.type = Types::ListDaemonTaskDefinitionsResponse
+    ListDaemonsRequest.add_member(:cluster_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "clusterArn"))
+    ListDaemonsRequest.add_member(:capacity_provider_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "capacityProviderArns"))
+    ListDaemonsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedInteger, name: "maxResults"))
+    ListDaemonsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "nextToken"))
+    ListDaemonsRequest.type = Types::ListDaemonsRequest
+    ListDaemonsResponse.add_member(:daemon_summaries_list, ::Smithy::Schema::Shapes::MemberShape.new(target: DaemonSummariesList, name: "daemonSummariesList", traits: {"smithy.api#notProperty" => {}}))
+    ListDaemonsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "nextToken", traits: {"smithy.api#notProperty" => {}}))
+    ListDaemonsResponse.type = Types::ListDaemonsResponse
     ListServiceDeploymentsRequest.add_member(:service, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "service", traits: {"smithy.api#required" => {}}))
     ListServiceDeploymentsRequest.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cluster"))
     ListServiceDeploymentsRequest.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceDeploymentStatusList, name: "status"))
@@ -1310,8 +1915,8 @@ module Aws::ECS
     ListServiceDeploymentsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "nextToken"))
     ListServiceDeploymentsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedInteger, name: "maxResults"))
     ListServiceDeploymentsRequest.type = Types::ListServiceDeploymentsRequest
-    ListServiceDeploymentsResponse.add_member(:service_deployments, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceDeploymentsBrief, name: "serviceDeployments"))
-    ListServiceDeploymentsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "nextToken"))
+    ListServiceDeploymentsResponse.add_member(:service_deployments, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceDeploymentsBrief, name: "serviceDeployments", traits: {"smithy.api#notProperty" => {}}))
+    ListServiceDeploymentsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "nextToken", traits: {"smithy.api#notProperty" => {}}))
     ListServiceDeploymentsResponse.type = Types::ListServiceDeploymentsResponse
     ListServicesByNamespaceRequest.add_member(:namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "namespace", traits: {"smithy.api#required" => {}}))
     ListServicesByNamespaceRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "nextToken"))
@@ -1325,9 +1930,10 @@ module Aws::ECS
     ListServicesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedInteger, name: "maxResults"))
     ListServicesRequest.add_member(:launch_type, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchType, name: "launchType"))
     ListServicesRequest.add_member(:scheduling_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: SchedulingStrategy, name: "schedulingStrategy"))
+    ListServicesRequest.add_member(:resource_management_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceManagementType, name: "resourceManagementType"))
     ListServicesRequest.type = Types::ListServicesRequest
-    ListServicesResponse.add_member(:service_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "serviceArns"))
-    ListServicesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "nextToken"))
+    ListServicesResponse.add_member(:service_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "serviceArns", traits: {"smithy.api#notProperty" => {}}))
+    ListServicesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "nextToken", traits: {"smithy.api#notProperty" => {}}))
     ListServicesResponse.type = Types::ListServicesResponse
     ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "resourceArn", traits: {"smithy.api#required" => {}}))
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
@@ -1347,8 +1953,8 @@ module Aws::ECS
     ListTaskDefinitionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "nextToken"))
     ListTaskDefinitionsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedInteger, name: "maxResults"))
     ListTaskDefinitionsRequest.type = Types::ListTaskDefinitionsRequest
-    ListTaskDefinitionsResponse.add_member(:task_definition_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "taskDefinitionArns"))
-    ListTaskDefinitionsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "nextToken"))
+    ListTaskDefinitionsResponse.add_member(:task_definition_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "taskDefinitionArns", traits: {"smithy.api#notProperty" => {}}))
+    ListTaskDefinitionsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "nextToken", traits: {"smithy.api#notProperty" => {}}))
     ListTaskDefinitionsResponse.type = Types::ListTaskDefinitionsResponse
     ListTasksRequest.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cluster"))
     ListTasksRequest.add_member(:container_instance, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "containerInstance"))
@@ -1359,9 +1965,10 @@ module Aws::ECS
     ListTasksRequest.add_member(:service_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "serviceName"))
     ListTasksRequest.add_member(:desired_status, ::Smithy::Schema::Shapes::MemberShape.new(target: DesiredStatus, name: "desiredStatus"))
     ListTasksRequest.add_member(:launch_type, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchType, name: "launchType"))
+    ListTasksRequest.add_member(:daemon_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "daemonName"))
     ListTasksRequest.type = Types::ListTasksRequest
-    ListTasksResponse.add_member(:task_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "taskArns"))
-    ListTasksResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "nextToken"))
+    ListTasksResponse.add_member(:task_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "taskArns", traits: {"smithy.api#notProperty" => {}}))
+    ListTasksResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "nextToken", traits: {"smithy.api#notProperty" => {}}))
     ListTasksResponse.type = Types::ListTasksResponse
     LoadBalancer.add_member(:target_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "targetGroupArn"))
     LoadBalancer.add_member(:load_balancer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "loadBalancerName"))
@@ -1403,8 +2010,38 @@ module Aws::ECS
     ManagedAgentStateChange.type = Types::ManagedAgentStateChange
     ManagedAgentStateChanges.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedAgentStateChange, name: "member"))
     ManagedAgents.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedAgent, name: "member"))
+    ManagedApplicationAutoScalingPolicies.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedApplicationAutoScalingPolicy, name: "member"))
+    ManagedApplicationAutoScalingPolicy.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "arn"))
+    ManagedApplicationAutoScalingPolicy.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedResourceStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    ManagedApplicationAutoScalingPolicy.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "statusReason"))
+    ManagedApplicationAutoScalingPolicy.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "updatedAt", traits: {"smithy.api#required" => {}}))
+    ManagedApplicationAutoScalingPolicy.add_member(:policy_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "policyType", traits: {"smithy.api#required" => {}}))
+    ManagedApplicationAutoScalingPolicy.add_member(:target_value, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "targetValue", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    ManagedApplicationAutoScalingPolicy.add_member(:metric, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "metric", traits: {"smithy.api#required" => {}}))
+    ManagedApplicationAutoScalingPolicy.type = Types::ManagedApplicationAutoScalingPolicy
+    ManagedAutoScaling.add_member(:scalable_target, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedScalableTarget, name: "scalableTarget"))
+    ManagedAutoScaling.add_member(:application_auto_scaling_policies, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedApplicationAutoScalingPolicies, name: "applicationAutoScalingPolicies"))
+    ManagedAutoScaling.type = Types::ManagedAutoScaling
+    ManagedCertificate.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "arn"))
+    ManagedCertificate.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedResourceStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    ManagedCertificate.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "statusReason"))
+    ManagedCertificate.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "updatedAt", traits: {"smithy.api#required" => {}}))
+    ManagedCertificate.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "domainName", traits: {"smithy.api#required" => {}}))
+    ManagedCertificate.type = Types::ManagedCertificate
     ManagedDraining.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     ManagedDraining.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
+    ManagedIngressPath.add_member(:access_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessType, name: "accessType", traits: {"smithy.api#required" => {}}))
+    ManagedIngressPath.add_member(:endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "endpoint", traits: {"smithy.api#required" => {}}))
+    ManagedIngressPath.add_member(:load_balancer, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedLoadBalancer, name: "loadBalancer"))
+    ManagedIngressPath.add_member(:load_balancer_security_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedSecurityGroups, name: "loadBalancerSecurityGroups"))
+    ManagedIngressPath.add_member(:certificate, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedCertificate, name: "certificate"))
+    ManagedIngressPath.add_member(:listener, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedListener, name: "listener"))
+    ManagedIngressPath.add_member(:rule, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedListenerRule, name: "rule"))
+    ManagedIngressPath.add_member(:target_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedTargetGroups, name: "targetGroups"))
+    ManagedIngressPath.type = Types::ManagedIngressPath
+    ManagedIngressPaths.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedIngressPath, name: "member"))
+    ManagedInstancesLocalStorageConfiguration.add_member(:use_local_storage, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "useLocalStorage", traits: {"smithy.api#default" => false}))
+    ManagedInstancesLocalStorageConfiguration.type = Types::ManagedInstancesLocalStorageConfiguration
     ManagedInstancesMonitoringOptions.add_member(:basic, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BASIC", traits: {"smithy.api#enumValue" => "BASIC"}))
     ManagedInstancesMonitoringOptions.add_member(:detailed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DETAILED", traits: {"smithy.api#enumValue" => "DETAILED"}))
     ManagedInstancesNetworkConfiguration.add_member(:subnets, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "subnets"))
@@ -1413,9 +2050,54 @@ module Aws::ECS
     ManagedInstancesProvider.add_member(:infrastructure_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "infrastructureRoleArn"))
     ManagedInstancesProvider.add_member(:instance_launch_template, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceLaunchTemplate, name: "instanceLaunchTemplate"))
     ManagedInstancesProvider.add_member(:propagate_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: PropagateMITags, name: "propagateTags"))
+    ManagedInstancesProvider.add_member(:infrastructure_optimization, ::Smithy::Schema::Shapes::MemberShape.new(target: InfrastructureOptimization, name: "infrastructureOptimization"))
+    ManagedInstancesProvider.add_member(:auto_repair_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoRepairConfiguration, name: "autoRepairConfiguration"))
     ManagedInstancesProvider.type = Types::ManagedInstancesProvider
     ManagedInstancesStorageConfiguration.add_member(:storage_size_gi_b, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskVolumeStorageGiB, name: "storageSizeGiB"))
     ManagedInstancesStorageConfiguration.type = Types::ManagedInstancesStorageConfiguration
+    ManagedListener.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "arn"))
+    ManagedListener.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedResourceStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    ManagedListener.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "statusReason"))
+    ManagedListener.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "updatedAt", traits: {"smithy.api#required" => {}}))
+    ManagedListener.type = Types::ManagedListener
+    ManagedListenerRule.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "arn"))
+    ManagedListenerRule.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedResourceStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    ManagedListenerRule.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "statusReason"))
+    ManagedListenerRule.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "updatedAt", traits: {"smithy.api#required" => {}}))
+    ManagedListenerRule.type = Types::ManagedListenerRule
+    ManagedLoadBalancer.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "arn"))
+    ManagedLoadBalancer.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedResourceStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    ManagedLoadBalancer.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "statusReason"))
+    ManagedLoadBalancer.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "updatedAt", traits: {"smithy.api#required" => {}}))
+    ManagedLoadBalancer.add_member(:scheme, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "scheme", traits: {"smithy.api#required" => {}}))
+    ManagedLoadBalancer.add_member(:subnet_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "subnetIds"))
+    ManagedLoadBalancer.add_member(:security_group_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "securityGroupIds"))
+    ManagedLoadBalancer.type = Types::ManagedLoadBalancer
+    ManagedLogGroup.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "arn"))
+    ManagedLogGroup.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedResourceStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    ManagedLogGroup.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "statusReason"))
+    ManagedLogGroup.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "updatedAt", traits: {"smithy.api#required" => {}}))
+    ManagedLogGroup.add_member(:log_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "logGroupName", traits: {"smithy.api#required" => {}}))
+    ManagedLogGroup.type = Types::ManagedLogGroup
+    ManagedLogGroups.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedLogGroup, name: "member"))
+    ManagedMetricAlarm.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "arn"))
+    ManagedMetricAlarm.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedResourceStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    ManagedMetricAlarm.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "statusReason"))
+    ManagedMetricAlarm.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "updatedAt", traits: {"smithy.api#required" => {}}))
+    ManagedMetricAlarm.type = Types::ManagedMetricAlarm
+    ManagedMetricAlarms.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedMetricAlarm, name: "member"))
+    ManagedResourceStatus.add_member(:provisioning, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PROVISIONING", traits: {"smithy.api#enumValue" => "PROVISIONING"}))
+    ManagedResourceStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
+    ManagedResourceStatus.add_member(:deprovisioning, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEPROVISIONING", traits: {"smithy.api#enumValue" => "DEPROVISIONING"}))
+    ManagedResourceStatus.add_member(:deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETED", traits: {"smithy.api#enumValue" => "DELETED"}))
+    ManagedResourceStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    ManagedScalableTarget.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "arn"))
+    ManagedScalableTarget.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedResourceStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    ManagedScalableTarget.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "statusReason"))
+    ManagedScalableTarget.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "updatedAt", traits: {"smithy.api#required" => {}}))
+    ManagedScalableTarget.add_member(:min_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "minCapacity", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    ManagedScalableTarget.add_member(:max_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "maxCapacity", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    ManagedScalableTarget.type = Types::ManagedScalableTarget
     ManagedScaling.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedScalingStatus, name: "status"))
     ManagedScaling.add_member(:target_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedScalingTargetCapacity, name: "targetCapacity"))
     ManagedScaling.add_member(:minimum_scaling_step_size, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedScalingStepSize, name: "minimumScalingStepSize"))
@@ -1424,9 +2106,24 @@ module Aws::ECS
     ManagedScaling.type = Types::ManagedScaling
     ManagedScalingStatus.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     ManagedScalingStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
+    ManagedSecurityGroup.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "arn"))
+    ManagedSecurityGroup.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedResourceStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    ManagedSecurityGroup.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "statusReason"))
+    ManagedSecurityGroup.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "updatedAt", traits: {"smithy.api#required" => {}}))
+    ManagedSecurityGroup.type = Types::ManagedSecurityGroup
+    ManagedSecurityGroups.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedSecurityGroup, name: "member"))
     ManagedStorageConfiguration.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "kmsKeyId"))
     ManagedStorageConfiguration.add_member(:fargate_ephemeral_storage_kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "fargateEphemeralStorageKmsKeyId"))
     ManagedStorageConfiguration.type = Types::ManagedStorageConfiguration
+    ManagedTargetGroup.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "arn"))
+    ManagedTargetGroup.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedResourceStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    ManagedTargetGroup.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "statusReason"))
+    ManagedTargetGroup.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "updatedAt", traits: {"smithy.api#required" => {}}))
+    ManagedTargetGroup.add_member(:health_check_path, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "healthCheckPath", traits: {"smithy.api#required" => {}}))
+    ManagedTargetGroup.add_member(:health_check_port, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "healthCheckPort", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    ManagedTargetGroup.add_member(:port, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "port", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    ManagedTargetGroup.type = Types::ManagedTargetGroup
+    ManagedTargetGroups.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedTargetGroup, name: "member"))
     ManagedTerminationProtection.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     ManagedTerminationProtection.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
     MemoryGiBPerVCpuRequest.add_member(:min, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedDouble, name: "min"))
@@ -1435,8 +2132,15 @@ module Aws::ECS
     MemoryMiBRequest.add_member(:min, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedInteger, name: "min", traits: {"smithy.api#required" => {}}))
     MemoryMiBRequest.add_member(:max, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedInteger, name: "max"))
     MemoryMiBRequest.type = Types::MemoryMiBRequest
+    MetricConfiguration.add_member(:metric_names, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricNamesList, name: "metricNames", traits: {"smithy.api#required" => {}}))
+    MetricConfiguration.add_member(:resolution_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricResolutionSeconds, name: "resolutionSeconds", traits: {"smithy.api#required" => {}}))
+    MetricConfiguration.type = Types::MetricConfiguration
+    MetricConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricConfiguration, name: "member"))
+    MetricNamesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricName, name: "member"))
     MissingVersionException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     MissingVersionException.type = Types::MissingVersionException
+    MonitoringConfiguration.add_member(:metric_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricConfigurationList, name: "metricConfigurations"))
+    MonitoringConfiguration.type = Types::MonitoringConfiguration
     MountPoint.add_member(:source_volume, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "sourceVolume"))
     MountPoint.add_member(:container_path, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "containerPath"))
     MountPoint.add_member(:read_only, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedBoolean, name: "readOnly"))
@@ -1469,6 +2173,7 @@ module Aws::ECS
     NetworkMode.add_member(:host, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HOST", traits: {"smithy.api#enumValue" => "host"}))
     NetworkMode.add_member(:awsvpc, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWSVPC", traits: {"smithy.api#enumValue" => "awsvpc"}))
     NetworkMode.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NONE", traits: {"smithy.api#enumValue" => "none"}))
+    NeuronDeviceIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     NoUpdateAvailableException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     NoUpdateAvailableException.type = Types::NoUpdateAvailableException
     OSFamily.add_member(:windows_server_2019_full, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WINDOWS_SERVER_2019_FULL", traits: {"smithy.api#enumValue" => "WINDOWS_SERVER_2019_FULL"}))
@@ -1500,6 +2205,7 @@ module Aws::ECS
     PlatformDevice.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: PlatformDeviceType, name: "type", traits: {"smithy.api#required" => {}}))
     PlatformDevice.type = Types::PlatformDevice
     PlatformDeviceType.add_member(:gpu, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GPU", traits: {"smithy.api#enumValue" => "GPU"}))
+    PlatformDeviceType.add_member(:neuron_device, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NEURON_DEVICE", traits: {"smithy.api#enumValue" => "NEURON_DEVICE"}))
     PlatformDevices.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PlatformDevice, name: "member"))
     PlatformTaskDefinitionIncompatibilityException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     PlatformTaskDefinitionIncompatibilityException.type = Types::PlatformTaskDefinitionIncompatibilityException
@@ -1543,13 +2249,13 @@ module Aws::ECS
     PutAttributesRequest.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cluster"))
     PutAttributesRequest.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: Attributes, name: "attributes", traits: {"smithy.api#required" => {}}))
     PutAttributesRequest.type = Types::PutAttributesRequest
-    PutAttributesResponse.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: Attributes, name: "attributes"))
+    PutAttributesResponse.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: Attributes, name: "attributes", traits: {"smithy.api#notProperty" => {}}))
     PutAttributesResponse.type = Types::PutAttributesResponse
-    PutClusterCapacityProvidersRequest.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cluster", traits: {"smithy.api#required" => {}}))
+    PutClusterCapacityProvidersRequest.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cluster", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "ClusterName"}))
     PutClusterCapacityProvidersRequest.add_member(:capacity_providers, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "capacityProviders", traits: {"smithy.api#required" => {}}))
     PutClusterCapacityProvidersRequest.add_member(:default_capacity_provider_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityProviderStrategy, name: "defaultCapacityProviderStrategy", traits: {"smithy.api#required" => {}}))
     PutClusterCapacityProvidersRequest.type = Types::PutClusterCapacityProvidersRequest
-    PutClusterCapacityProvidersResponse.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: Cluster, name: "cluster"))
+    PutClusterCapacityProvidersResponse.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: Cluster, name: "cluster", traits: {"smithy.api#notProperty" => {}}))
     PutClusterCapacityProvidersResponse.type = Types::PutClusterCapacityProvidersResponse
     RegisterContainerInstanceRequest.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cluster"))
     RegisterContainerInstanceRequest.add_member(:instance_identity_document, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "instanceIdentityDocument"))
@@ -1561,8 +2267,21 @@ module Aws::ECS
     RegisterContainerInstanceRequest.add_member(:platform_devices, ::Smithy::Schema::Shapes::MemberShape.new(target: PlatformDevices, name: "platformDevices"))
     RegisterContainerInstanceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags"))
     RegisterContainerInstanceRequest.type = Types::RegisterContainerInstanceRequest
-    RegisterContainerInstanceResponse.add_member(:container_instance, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerInstance, name: "containerInstance"))
+    RegisterContainerInstanceResponse.add_member(:container_instance, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerInstance, name: "containerInstance", traits: {"smithy.api#notProperty" => {}}))
     RegisterContainerInstanceResponse.type = Types::RegisterContainerInstanceResponse
+    RegisterDaemonTaskDefinitionRequest.add_member(:family, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "family", traits: {"smithy.api#required" => {}}))
+    RegisterDaemonTaskDefinitionRequest.add_member(:task_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "taskRoleArn"))
+    RegisterDaemonTaskDefinitionRequest.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "executionRoleArn"))
+    RegisterDaemonTaskDefinitionRequest.add_member(:container_definitions, ::Smithy::Schema::Shapes::MemberShape.new(target: DaemonContainerDefinitionList, name: "containerDefinitions", traits: {"smithy.api#required" => {}}))
+    RegisterDaemonTaskDefinitionRequest.add_member(:cpu, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cpu"))
+    RegisterDaemonTaskDefinitionRequest.add_member(:memory, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "memory"))
+    RegisterDaemonTaskDefinitionRequest.add_member(:volumes, ::Smithy::Schema::Shapes::MemberShape.new(target: DaemonVolumeList, name: "volumes"))
+    RegisterDaemonTaskDefinitionRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags"))
+    RegisterDaemonTaskDefinitionRequest.add_member(:pid_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: DaemonPidMode, name: "pidMode"))
+    RegisterDaemonTaskDefinitionRequest.add_member(:ipc_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: DaemonIpcMode, name: "ipcMode"))
+    RegisterDaemonTaskDefinitionRequest.type = Types::RegisterDaemonTaskDefinitionRequest
+    RegisterDaemonTaskDefinitionResponse.add_member(:daemon_task_definition_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "daemonTaskDefinitionArn", traits: {"smithy.api#notProperty" => {}}))
+    RegisterDaemonTaskDefinitionResponse.type = Types::RegisterDaemonTaskDefinitionResponse
     RegisterTaskDefinitionRequest.add_member(:family, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "family", traits: {"smithy.api#required" => {}}))
     RegisterTaskDefinitionRequest.add_member(:task_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "taskRoleArn"))
     RegisterTaskDefinitionRequest.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "executionRoleArn"))
@@ -1577,18 +2296,19 @@ module Aws::ECS
     RegisterTaskDefinitionRequest.add_member(:pid_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: PidMode, name: "pidMode"))
     RegisterTaskDefinitionRequest.add_member(:ipc_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: IpcMode, name: "ipcMode"))
     RegisterTaskDefinitionRequest.add_member(:proxy_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ProxyConfiguration, name: "proxyConfiguration"))
-    RegisterTaskDefinitionRequest.add_member(:inference_accelerators, ::Smithy::Schema::Shapes::MemberShape.new(target: InferenceAccelerators, name: "inferenceAccelerators"))
+    RegisterTaskDefinitionRequest.add_member(:inference_accelerators, ::Smithy::Schema::Shapes::MemberShape.new(target: InferenceAccelerators, name: "inferenceAccelerators", traits: {"smithy.api#deprecated" => {"message" => "This feature is no longer available.", "since" => "2023-04-15"}}))
     RegisterTaskDefinitionRequest.add_member(:ephemeral_storage, ::Smithy::Schema::Shapes::MemberShape.new(target: EphemeralStorage, name: "ephemeralStorage"))
     RegisterTaskDefinitionRequest.add_member(:runtime_platform, ::Smithy::Schema::Shapes::MemberShape.new(target: RuntimePlatform, name: "runtimePlatform"))
     RegisterTaskDefinitionRequest.add_member(:enable_fault_injection, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedBoolean, name: "enableFaultInjection"))
     RegisterTaskDefinitionRequest.type = Types::RegisterTaskDefinitionRequest
-    RegisterTaskDefinitionResponse.add_member(:task_definition, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskDefinition, name: "taskDefinition"))
-    RegisterTaskDefinitionResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags"))
+    RegisterTaskDefinitionResponse.add_member(:task_definition, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskDefinition, name: "taskDefinition", traits: {"smithy.api#notProperty" => {}}))
+    RegisterTaskDefinitionResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags", traits: {"smithy.api#notProperty" => {}}))
     RegisterTaskDefinitionResponse.type = Types::RegisterTaskDefinitionResponse
     RepositoryCredentials.add_member(:credentials_parameter, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "credentialsParameter", traits: {"smithy.api#required" => {}}))
     RepositoryCredentials.type = Types::RepositoryCredentials
     RequiresAttributes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Attribute, name: "member"))
     ResolvedConfiguration.add_member(:load_balancers, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceRevisionLoadBalancers, name: "loadBalancers"))
+    ResolvedConfiguration.add_member(:vpc_lattice_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceRevisionVpcLatticeConfigurations, name: "vpcLatticeConfigurations"))
     ResolvedConfiguration.type = Types::ResolvedConfiguration
     Resource.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "name"))
     Resource.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "type"))
@@ -1600,6 +2320,8 @@ module Aws::ECS
     ResourceIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     ResourceInUseException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     ResourceInUseException.type = Types::ResourceInUseException
+    ResourceManagementType.add_member(:customer, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOMER", traits: {"smithy.api#enumValue" => "CUSTOMER"}))
+    ResourceManagementType.add_member(:ecs, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ECS", traits: {"smithy.api#enumValue" => "ECS"}))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
     ResourceRequirement.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value", traits: {"smithy.api#required" => {}}))
@@ -1608,6 +2330,7 @@ module Aws::ECS
     ResourceRequirements.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceRequirement, name: "member"))
     ResourceType.add_member(:gpu, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GPU", traits: {"smithy.api#enumValue" => "GPU"}))
     ResourceType.add_member(:inference_accelerator, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INFERENCE_ACCELERATOR", traits: {"smithy.api#enumValue" => "InferenceAccelerator"}))
+    ResourceType.add_member(:neuron_device, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NEURON_DEVICE", traits: {"smithy.api#enumValue" => "NeuronDevice"}))
     Resources.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Resource, name: "member"))
     Rollback.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "reason"))
     Rollback.add_member(:started_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "startedAt"))
@@ -1633,12 +2356,19 @@ module Aws::ECS
     RunTaskRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     RunTaskRequest.add_member(:volume_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskVolumeConfigurations, name: "volumeConfigurations"))
     RunTaskRequest.type = Types::RunTaskRequest
-    RunTaskResponse.add_member(:tasks, ::Smithy::Schema::Shapes::MemberShape.new(target: Tasks, name: "tasks"))
-    RunTaskResponse.add_member(:failures, ::Smithy::Schema::Shapes::MemberShape.new(target: Failures, name: "failures"))
+    RunTaskResponse.add_member(:tasks, ::Smithy::Schema::Shapes::MemberShape.new(target: Tasks, name: "tasks", traits: {"smithy.api#notProperty" => {}}))
+    RunTaskResponse.add_member(:failures, ::Smithy::Schema::Shapes::MemberShape.new(target: Failures, name: "failures", traits: {"smithy.api#notProperty" => {}}))
     RunTaskResponse.type = Types::RunTaskResponse
     RuntimePlatform.add_member(:cpu_architecture, ::Smithy::Schema::Shapes::MemberShape.new(target: CPUArchitecture, name: "cpuArchitecture"))
     RuntimePlatform.add_member(:operating_system_family, ::Smithy::Schema::Shapes::MemberShape.new(target: OSFamily, name: "operatingSystemFamily"))
     RuntimePlatform.type = Types::RuntimePlatform
+    RuntimePlatformOverride.add_member(:cpu_architecture, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cpuArchitecture"))
+    RuntimePlatformOverride.type = Types::RuntimePlatformOverride
+    S3FilesVolumeConfiguration.add_member(:file_system_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "fileSystemArn", traits: {"smithy.api#required" => {}}))
+    S3FilesVolumeConfiguration.add_member(:root_directory, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "rootDirectory"))
+    S3FilesVolumeConfiguration.add_member(:transit_encryption_port, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedInteger, name: "transitEncryptionPort"))
+    S3FilesVolumeConfiguration.add_member(:access_point_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "accessPointArn"))
+    S3FilesVolumeConfiguration.type = Types::S3FilesVolumeConfiguration
     Scale.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "value", traits: {"smithy.api#default" => 0}))
     Scale.add_member(:unit, ::Smithy::Schema::Shapes::MemberShape.new(target: ScaleUnit, name: "unit"))
     Scale.type = Types::Scale
@@ -1673,6 +2403,8 @@ module Aws::ECS
     Service.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "roleArn"))
     Service.add_member(:events, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceEvents, name: "events"))
     Service.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "createdAt"))
+    Service.add_member(:current_service_deployment, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "currentServiceDeployment"))
+    Service.add_member(:current_service_revisions, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceCurrentRevisionSummaryList, name: "currentServiceRevisions"))
     Service.add_member(:placement_constraints, ::Smithy::Schema::Shapes::MemberShape.new(target: PlacementConstraints, name: "placementConstraints"))
     Service.add_member(:placement_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: PlacementStrategies, name: "placementStrategy"))
     Service.add_member(:network_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkConfiguration, name: "networkConfiguration"))
@@ -1685,7 +2417,13 @@ module Aws::ECS
     Service.add_member(:propagate_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: PropagateTags, name: "propagateTags"))
     Service.add_member(:enable_execute_command, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "enableExecuteCommand", traits: {"smithy.api#default" => false}))
     Service.add_member(:availability_zone_rebalancing, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZoneRebalancing, name: "availabilityZoneRebalancing"))
+    Service.add_member(:resource_management_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceManagementType, name: "resourceManagementType"))
     Service.type = Types::Service
+    ServiceConnectAccessLogConfiguration.add_member(:format, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceConnectAccessLoggingFormat, name: "format", traits: {"smithy.api#required" => {}}))
+    ServiceConnectAccessLogConfiguration.add_member(:include_query_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceConnectIncludeQueryParameters, name: "includeQueryParameters"))
+    ServiceConnectAccessLogConfiguration.type = Types::ServiceConnectAccessLogConfiguration
+    ServiceConnectAccessLoggingFormat.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TEXT", traits: {"smithy.api#enumValue" => "TEXT"}))
+    ServiceConnectAccessLoggingFormat.add_member(:json, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "JSON", traits: {"smithy.api#enumValue" => "JSON"}))
     ServiceConnectClientAlias.add_member(:port, ::Smithy::Schema::Shapes::MemberShape.new(target: PortNumber, name: "port", traits: {"smithy.api#required" => {}}))
     ServiceConnectClientAlias.add_member(:dns_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "dnsName"))
     ServiceConnectClientAlias.add_member(:test_traffic_rules, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceConnectTestTrafficRules, name: "testTrafficRules"))
@@ -1695,7 +2433,10 @@ module Aws::ECS
     ServiceConnectConfiguration.add_member(:namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "namespace"))
     ServiceConnectConfiguration.add_member(:services, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceConnectServiceList, name: "services"))
     ServiceConnectConfiguration.add_member(:log_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: LogConfiguration, name: "logConfiguration"))
+    ServiceConnectConfiguration.add_member(:access_log_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceConnectAccessLogConfiguration, name: "accessLogConfiguration"))
     ServiceConnectConfiguration.type = Types::ServiceConnectConfiguration
+    ServiceConnectIncludeQueryParameters.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
+    ServiceConnectIncludeQueryParameters.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     ServiceConnectService.add_member(:port_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "portName", traits: {"smithy.api#required" => {}}))
     ServiceConnectService.add_member(:discovery_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "discoveryName"))
     ServiceConnectService.add_member(:client_aliases, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceConnectClientAliasList, name: "clientAliases"))
@@ -1721,6 +2462,12 @@ module Aws::ECS
     ServiceConnectTlsConfiguration.add_member(:kms_key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "kmsKey"))
     ServiceConnectTlsConfiguration.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "roleArn"))
     ServiceConnectTlsConfiguration.type = Types::ServiceConnectTlsConfiguration
+    ServiceCurrentRevisionSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "arn"))
+    ServiceCurrentRevisionSummary.add_member(:requested_task_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "requestedTaskCount", traits: {"smithy.api#default" => 0}))
+    ServiceCurrentRevisionSummary.add_member(:running_task_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "runningTaskCount", traits: {"smithy.api#default" => 0}))
+    ServiceCurrentRevisionSummary.add_member(:pending_task_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "pendingTaskCount", traits: {"smithy.api#default" => 0}))
+    ServiceCurrentRevisionSummary.type = Types::ServiceCurrentRevisionSummary
+    ServiceCurrentRevisionSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceCurrentRevisionSummary, name: "member"))
     ServiceDeployment.add_member(:service_deployment_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "serviceDeploymentArn"))
     ServiceDeployment.add_member(:service_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "serviceArn"))
     ServiceDeployment.add_member(:cluster_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "clusterArn"))
@@ -1734,6 +2481,7 @@ module Aws::ECS
     ServiceDeployment.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceDeploymentStatus, name: "status"))
     ServiceDeployment.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "statusReason"))
     ServiceDeployment.add_member(:lifecycle_stage, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceDeploymentLifecycleStage, name: "lifecycleStage"))
+    ServiceDeployment.add_member(:lifecycle_hook_details, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentLifecycleHookDetailList, name: "lifecycleHookDetails"))
     ServiceDeployment.add_member(:deployment_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentConfiguration, name: "deploymentConfiguration"))
     ServiceDeployment.add_member(:rollback, ::Smithy::Schema::Shapes::MemberShape.new(target: Rollback, name: "rollback"))
     ServiceDeployment.add_member(:deployment_circuit_breaker, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceDeploymentCircuitBreaker, name: "deploymentCircuitBreaker"))
@@ -1833,16 +2581,29 @@ module Aws::ECS
     ServiceRevision.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "createdAt"))
     ServiceRevision.add_member(:vpc_lattice_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcLatticeConfigurations, name: "vpcLatticeConfigurations"))
     ServiceRevision.add_member(:resolved_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ResolvedConfiguration, name: "resolvedConfiguration"))
+    ServiceRevision.add_member(:ecs_managed_resources, ::Smithy::Schema::Shapes::MemberShape.new(target: ECSManagedResources, name: "ecsManagedResources"))
+    ServiceRevision.add_member(:overrides, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceRevisionOverrides, name: "overrides"))
+    ServiceRevision.add_member(:monitoring, ::Smithy::Schema::Shapes::MemberShape.new(target: MonitoringConfiguration, name: "monitoring"))
     ServiceRevision.type = Types::ServiceRevision
+    ServiceRevisionCleanup.add_member(:blocking, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BLOCKING", traits: {"smithy.api#enumValue" => "BLOCKING"}))
+    ServiceRevisionCleanup.add_member(:deferred, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEFERRED", traits: {"smithy.api#enumValue" => "DEFERRED"}))
     ServiceRevisionLoadBalancer.add_member(:target_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "targetGroupArn"))
     ServiceRevisionLoadBalancer.add_member(:production_listener_rule, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "productionListenerRule"))
     ServiceRevisionLoadBalancer.type = Types::ServiceRevisionLoadBalancer
     ServiceRevisionLoadBalancers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceRevisionLoadBalancer, name: "member"))
+    ServiceRevisionOverrides.add_member(:runtime_platform, ::Smithy::Schema::Shapes::MemberShape.new(target: RuntimePlatformOverride, name: "runtimePlatform"))
+    ServiceRevisionOverrides.type = Types::ServiceRevisionOverrides
     ServiceRevisionSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "arn"))
     ServiceRevisionSummary.add_member(:requested_task_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "requestedTaskCount", traits: {"smithy.api#default" => 0}))
     ServiceRevisionSummary.add_member(:running_task_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "runningTaskCount", traits: {"smithy.api#default" => 0}))
     ServiceRevisionSummary.add_member(:pending_task_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "pendingTaskCount", traits: {"smithy.api#default" => 0}))
+    ServiceRevisionSummary.add_member(:requested_test_traffic_weight, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "requestedTestTrafficWeight", traits: {"smithy.api#default" => nil}))
+    ServiceRevisionSummary.add_member(:requested_production_traffic_weight, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "requestedProductionTrafficWeight", traits: {"smithy.api#default" => nil}))
     ServiceRevisionSummary.type = Types::ServiceRevisionSummary
+    ServiceRevisionVpcLatticeConfiguration.add_member(:target_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "targetGroupArn"))
+    ServiceRevisionVpcLatticeConfiguration.add_member(:production_listener_rule, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "productionListenerRule"))
+    ServiceRevisionVpcLatticeConfiguration.type = Types::ServiceRevisionVpcLatticeConfiguration
+    ServiceRevisionVpcLatticeConfigurations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceRevisionVpcLatticeConfiguration, name: "member"))
     ServiceRevisions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceRevision, name: "member"))
     ServiceRevisionsSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceRevisionSummary, name: "member"))
     ServiceVolumeConfiguration.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ECSVolumeName, name: "name", traits: {"smithy.api#required" => {}}))
@@ -1869,6 +2630,7 @@ module Aws::ECS
     SettingName.add_member(:fargate_task_retirement_wait_period, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FARGATE_TASK_RETIREMENT_WAIT_PERIOD", traits: {"smithy.api#enumValue" => "fargateTaskRetirementWaitPeriod"}))
     SettingName.add_member(:guard_duty_activate, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GUARD_DUTY_ACTIVATE", traits: {"smithy.api#enumValue" => "guardDutyActivate"}))
     SettingName.add_member(:default_log_driver_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEFAULT_LOG_DRIVER_MODE", traits: {"smithy.api#enumValue" => "defaultLogDriverMode"}))
+    SettingName.add_member(:fargate_event_windows, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FARGATE_EVENT_WINDOWS", traits: {"smithy.api#enumValue" => "fargateEventWindows"}))
     SettingType.add_member(:user, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "USER", traits: {"smithy.api#enumValue" => "user"}))
     SettingType.add_member(:aws_managed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_MANAGED", traits: {"smithy.api#enumValue" => "aws_managed"}))
     Settings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Setting, name: "member"))
@@ -1890,14 +2652,14 @@ module Aws::ECS
     StartTaskRequest.add_member(:task_definition, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "taskDefinition", traits: {"smithy.api#required" => {}}))
     StartTaskRequest.add_member(:volume_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskVolumeConfigurations, name: "volumeConfigurations"))
     StartTaskRequest.type = Types::StartTaskRequest
-    StartTaskResponse.add_member(:tasks, ::Smithy::Schema::Shapes::MemberShape.new(target: Tasks, name: "tasks"))
-    StartTaskResponse.add_member(:failures, ::Smithy::Schema::Shapes::MemberShape.new(target: Failures, name: "failures"))
+    StartTaskResponse.add_member(:tasks, ::Smithy::Schema::Shapes::MemberShape.new(target: Tasks, name: "tasks", traits: {"smithy.api#notProperty" => {}}))
+    StartTaskResponse.add_member(:failures, ::Smithy::Schema::Shapes::MemberShape.new(target: Failures, name: "failures", traits: {"smithy.api#notProperty" => {}}))
     StartTaskResponse.type = Types::StartTaskResponse
     Statistics.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyValuePair, name: "member"))
     StopServiceDeploymentRequest.add_member(:service_deployment_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "serviceDeploymentArn", traits: {"smithy.api#required" => {}}))
     StopServiceDeploymentRequest.add_member(:stop_type, ::Smithy::Schema::Shapes::MemberShape.new(target: StopServiceDeploymentStopType, name: "stopType"))
     StopServiceDeploymentRequest.type = Types::StopServiceDeploymentRequest
-    StopServiceDeploymentResponse.add_member(:service_deployment_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "serviceDeploymentArn"))
+    StopServiceDeploymentResponse.add_member(:service_deployment_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "serviceDeploymentArn", traits: {"smithy.api#notProperty" => {}}))
     StopServiceDeploymentResponse.type = Types::StopServiceDeploymentResponse
     StopServiceDeploymentStopType.add_member(:abort, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ABORT", traits: {"smithy.api#enumValue" => "ABORT"}))
     StopServiceDeploymentStopType.add_member(:rollback, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ROLLBACK", traits: {"smithy.api#enumValue" => "ROLLBACK"}))
@@ -1905,7 +2667,7 @@ module Aws::ECS
     StopTaskRequest.add_member(:task, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "task", traits: {"smithy.api#required" => {}}))
     StopTaskRequest.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "reason"))
     StopTaskRequest.type = Types::StopTaskRequest
-    StopTaskResponse.add_member(:task, ::Smithy::Schema::Shapes::MemberShape.new(target: Task, name: "task"))
+    StopTaskResponse.add_member(:task, ::Smithy::Schema::Shapes::MemberShape.new(target: Task, name: "task", traits: {"smithy.api#notProperty" => {}}))
     StopTaskResponse.type = Types::StopTaskResponse
     StringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     StringMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
@@ -1913,7 +2675,7 @@ module Aws::ECS
     SubmitAttachmentStateChangesRequest.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cluster"))
     SubmitAttachmentStateChangesRequest.add_member(:attachments, ::Smithy::Schema::Shapes::MemberShape.new(target: AttachmentStateChanges, name: "attachments", traits: {"smithy.api#required" => {}}))
     SubmitAttachmentStateChangesRequest.type = Types::SubmitAttachmentStateChangesRequest
-    SubmitAttachmentStateChangesResponse.add_member(:acknowledgment, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "acknowledgment"))
+    SubmitAttachmentStateChangesResponse.add_member(:acknowledgment, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "acknowledgment", traits: {"smithy.api#notProperty" => {}}))
     SubmitAttachmentStateChangesResponse.type = Types::SubmitAttachmentStateChangesResponse
     SubmitContainerStateChangeRequest.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cluster"))
     SubmitContainerStateChangeRequest.add_member(:task, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "task"))
@@ -1924,7 +2686,7 @@ module Aws::ECS
     SubmitContainerStateChangeRequest.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "reason"))
     SubmitContainerStateChangeRequest.add_member(:network_bindings, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkBindings, name: "networkBindings"))
     SubmitContainerStateChangeRequest.type = Types::SubmitContainerStateChangeRequest
-    SubmitContainerStateChangeResponse.add_member(:acknowledgment, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "acknowledgment"))
+    SubmitContainerStateChangeResponse.add_member(:acknowledgment, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "acknowledgment", traits: {"smithy.api#notProperty" => {}}))
     SubmitContainerStateChangeResponse.type = Types::SubmitContainerStateChangeResponse
     SubmitTaskStateChangeRequest.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cluster"))
     SubmitTaskStateChangeRequest.add_member(:task, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "task"))
@@ -1937,7 +2699,7 @@ module Aws::ECS
     SubmitTaskStateChangeRequest.add_member(:pull_stopped_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "pullStoppedAt"))
     SubmitTaskStateChangeRequest.add_member(:execution_stopped_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "executionStoppedAt"))
     SubmitTaskStateChangeRequest.type = Types::SubmitTaskStateChangeRequest
-    SubmitTaskStateChangeResponse.add_member(:acknowledgment, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "acknowledgment"))
+    SubmitTaskStateChangeResponse.add_member(:acknowledgment, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "acknowledgment", traits: {"smithy.api#notProperty" => {}}))
     SubmitTaskStateChangeResponse.type = Types::SubmitTaskStateChangeResponse
     SystemControl.add_member(:namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "namespace"))
     SystemControl.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
@@ -2017,6 +2779,7 @@ module Aws::ECS
     TaskDefinition.add_member(:proxy_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ProxyConfiguration, name: "proxyConfiguration"))
     TaskDefinition.add_member(:registered_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "registeredAt"))
     TaskDefinition.add_member(:deregistered_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "deregisteredAt"))
+    TaskDefinition.add_member(:delete_requested_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "deleteRequestedAt"))
     TaskDefinition.add_member(:registered_by, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "registeredBy"))
     TaskDefinition.add_member(:ephemeral_storage, ::Smithy::Schema::Shapes::MemberShape.new(target: EphemeralStorage, name: "ephemeralStorage"))
     TaskDefinition.add_member(:enable_fault_injection, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedBoolean, name: "enableFaultInjection"))
@@ -2104,11 +2867,18 @@ module Aws::ECS
     TaskStopCode.add_member(:service_scheduler_initiated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SERVICE_SCHEDULER_INITIATED", traits: {"smithy.api#enumValue" => "ServiceSchedulerInitiated"}))
     TaskStopCode.add_member(:spot_interruption, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SPOT_INTERRUPTION", traits: {"smithy.api#enumValue" => "SpotInterruption"}))
     TaskStopCode.add_member(:termination_notice, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TERMINATION_NOTICE", traits: {"smithy.api#enumValue" => "TerminationNotice"}))
+    TaskStopCode.add_member(:infrastructure_health, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INFRASTRUCTURE_HEALTH", traits: {"smithy.api#enumValue" => "InfrastructureHealth"}))
     TaskVolumeConfiguration.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ECSVolumeName, name: "name", traits: {"smithy.api#required" => {}}))
     TaskVolumeConfiguration.add_member(:managed_ebs_volume, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskManagedEBSVolumeConfiguration, name: "managedEBSVolume"))
     TaskVolumeConfiguration.type = Types::TaskVolumeConfiguration
     TaskVolumeConfigurations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskVolumeConfiguration, name: "member"))
     Tasks.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Task, name: "member"))
+    ThresholdConfiguration.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ThresholdType, name: "type", traits: {"smithy.api#required" => {}}))
+    ThresholdConfiguration.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "value", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    ThresholdConfiguration.type = Types::ThresholdConfiguration
+    ThresholdType.add_member(:count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COUNT", traits: {"smithy.api#enumValue" => "COUNT"}))
+    ThresholdType.add_member(:bounded_percent, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BOUNDED_PERCENT", traits: {"smithy.api#enumValue" => "BOUNDED_PERCENT"}))
+    ThresholdType.add_member(:unbounded_percent, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNBOUNDED_PERCENT", traits: {"smithy.api#enumValue" => "UNBOUNDED_PERCENT"}))
     TimeoutConfiguration.add_member(:idle_timeout_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: Duration, name: "idleTimeoutSeconds"))
     TimeoutConfiguration.add_member(:per_request_timeout_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: Duration, name: "perRequestTimeoutSeconds"))
     TimeoutConfiguration.type = Types::TimeoutConfiguration
@@ -2148,48 +2918,79 @@ module Aws::ECS
     UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeys, name: "tagKeys", traits: {"smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
     UntagResourceResponse.type = Types::UntagResourceResponse
-    UpdateCapacityProviderRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "name", traits: {"smithy.api#required" => {}}))
+    UpdateCapacityProviderRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "name", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "CapacityProviderName"}))
     UpdateCapacityProviderRequest.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cluster"))
     UpdateCapacityProviderRequest.add_member(:auto_scaling_group_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoScalingGroupProviderUpdate, name: "autoScalingGroupProvider"))
     UpdateCapacityProviderRequest.add_member(:managed_instances_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateManagedInstancesProviderConfiguration, name: "managedInstancesProvider"))
     UpdateCapacityProviderRequest.type = Types::UpdateCapacityProviderRequest
-    UpdateCapacityProviderResponse.add_member(:capacity_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityProvider, name: "capacityProvider"))
+    UpdateCapacityProviderResponse.add_member(:capacity_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityProvider, name: "capacityProvider", traits: {"smithy.api#notProperty" => {}}))
     UpdateCapacityProviderResponse.type = Types::UpdateCapacityProviderResponse
-    UpdateClusterRequest.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cluster", traits: {"smithy.api#required" => {}}))
+    UpdateClusterRequest.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cluster", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "ClusterName"}))
     UpdateClusterRequest.add_member(:settings, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterSettings, name: "settings"))
     UpdateClusterRequest.add_member(:configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterConfiguration, name: "configuration"))
     UpdateClusterRequest.add_member(:service_connect_defaults, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterServiceConnectDefaultsRequest, name: "serviceConnectDefaults"))
     UpdateClusterRequest.type = Types::UpdateClusterRequest
-    UpdateClusterResponse.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: Cluster, name: "cluster"))
+    UpdateClusterResponse.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: Cluster, name: "cluster", traits: {"smithy.api#notProperty" => {}}))
     UpdateClusterResponse.type = Types::UpdateClusterResponse
-    UpdateClusterSettingsRequest.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cluster", traits: {"smithy.api#required" => {}}))
+    UpdateClusterSettingsRequest.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cluster", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "ClusterName"}))
     UpdateClusterSettingsRequest.add_member(:settings, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterSettings, name: "settings", traits: {"smithy.api#required" => {}}))
     UpdateClusterSettingsRequest.type = Types::UpdateClusterSettingsRequest
-    UpdateClusterSettingsResponse.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: Cluster, name: "cluster"))
+    UpdateClusterSettingsResponse.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: Cluster, name: "cluster", traits: {"smithy.api#notProperty" => {}}))
     UpdateClusterSettingsResponse.type = Types::UpdateClusterSettingsResponse
     UpdateContainerAgentRequest.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cluster"))
     UpdateContainerAgentRequest.add_member(:container_instance, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "containerInstance", traits: {"smithy.api#required" => {}}))
     UpdateContainerAgentRequest.type = Types::UpdateContainerAgentRequest
-    UpdateContainerAgentResponse.add_member(:container_instance, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerInstance, name: "containerInstance"))
+    UpdateContainerAgentResponse.add_member(:container_instance, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerInstance, name: "containerInstance", traits: {"smithy.api#notProperty" => {}}))
     UpdateContainerAgentResponse.type = Types::UpdateContainerAgentResponse
     UpdateContainerInstancesStateRequest.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cluster"))
     UpdateContainerInstancesStateRequest.add_member(:container_instances, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "containerInstances", traits: {"smithy.api#required" => {}}))
     UpdateContainerInstancesStateRequest.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerInstanceStatus, name: "status", traits: {"smithy.api#required" => {}}))
     UpdateContainerInstancesStateRequest.type = Types::UpdateContainerInstancesStateRequest
-    UpdateContainerInstancesStateResponse.add_member(:container_instances, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerInstances, name: "containerInstances"))
-    UpdateContainerInstancesStateResponse.add_member(:failures, ::Smithy::Schema::Shapes::MemberShape.new(target: Failures, name: "failures"))
+    UpdateContainerInstancesStateResponse.add_member(:container_instances, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerInstances, name: "containerInstances", traits: {"smithy.api#notProperty" => {}}))
+    UpdateContainerInstancesStateResponse.add_member(:failures, ::Smithy::Schema::Shapes::MemberShape.new(target: Failures, name: "failures", traits: {"smithy.api#notProperty" => {}}))
     UpdateContainerInstancesStateResponse.type = Types::UpdateContainerInstancesStateResponse
+    UpdateDaemonRequest.add_member(:daemon_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "daemonArn", traits: {"smithy.api#required" => {}}))
+    UpdateDaemonRequest.add_member(:daemon_task_definition_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "daemonTaskDefinitionArn", traits: {"smithy.api#required" => {}}))
+    UpdateDaemonRequest.add_member(:capacity_provider_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "capacityProviderArns", traits: {"smithy.api#required" => {}}))
+    UpdateDaemonRequest.add_member(:deployment_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: DaemonDeploymentConfiguration, name: "deploymentConfiguration"))
+    UpdateDaemonRequest.add_member(:propagate_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: DaemonPropagateTags, name: "propagateTags"))
+    UpdateDaemonRequest.add_member(:enable_ecs_managed_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "enableECSManagedTags", traits: {"smithy.api#default" => false}))
+    UpdateDaemonRequest.add_member(:enable_execute_command, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "enableExecuteCommand", traits: {"smithy.api#default" => false}))
+    UpdateDaemonRequest.add_member(:critical, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedBoolean, name: "critical"))
+    UpdateDaemonRequest.type = Types::UpdateDaemonRequest
+    UpdateDaemonResponse.add_member(:daemon_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "daemonArn", traits: {"smithy.api#notProperty" => {}}))
+    UpdateDaemonResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: DaemonStatus, name: "status", traits: {"smithy.api#notProperty" => {}}))
+    UpdateDaemonResponse.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "createdAt", traits: {"smithy.api#notProperty" => {}}))
+    UpdateDaemonResponse.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "updatedAt", traits: {"smithy.api#notProperty" => {}}))
+    UpdateDaemonResponse.add_member(:deployment_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "deploymentArn", traits: {"smithy.api#notProperty" => {}}))
+    UpdateDaemonResponse.type = Types::UpdateDaemonResponse
+    UpdateExpressGatewayServiceRequest.add_member(:service_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "serviceArn", traits: {"smithy.api#required" => {}}))
+    UpdateExpressGatewayServiceRequest.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "executionRoleArn"))
+    UpdateExpressGatewayServiceRequest.add_member(:health_check_path, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "healthCheckPath"))
+    UpdateExpressGatewayServiceRequest.add_member(:primary_container, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpressGatewayContainer, name: "primaryContainer"))
+    UpdateExpressGatewayServiceRequest.add_member(:task_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "taskRoleArn"))
+    UpdateExpressGatewayServiceRequest.add_member(:network_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpressGatewayServiceNetworkConfiguration, name: "networkConfiguration"))
+    UpdateExpressGatewayServiceRequest.add_member(:cpu, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cpu"))
+    UpdateExpressGatewayServiceRequest.add_member(:memory, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "memory"))
+    UpdateExpressGatewayServiceRequest.add_member(:cpu_architecture, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpressCpuArchitecture, name: "cpuArchitecture"))
+    UpdateExpressGatewayServiceRequest.add_member(:scaling_target, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpressGatewayScalingTarget, name: "scalingTarget"))
+    UpdateExpressGatewayServiceRequest.add_member(:task_definition_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "taskDefinitionArn"))
+    UpdateExpressGatewayServiceRequest.type = Types::UpdateExpressGatewayServiceRequest
+    UpdateExpressGatewayServiceResponse.add_member(:service, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdatedExpressGatewayService, name: "service", traits: {"smithy.api#notProperty" => {}}))
+    UpdateExpressGatewayServiceResponse.type = Types::UpdateExpressGatewayServiceResponse
     UpdateInProgressException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     UpdateInProgressException.type = Types::UpdateInProgressException
     UpdateManagedInstancesProviderConfiguration.add_member(:infrastructure_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "infrastructureRoleArn", traits: {"smithy.api#required" => {}}))
     UpdateManagedInstancesProviderConfiguration.add_member(:instance_launch_template, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceLaunchTemplateUpdate, name: "instanceLaunchTemplate", traits: {"smithy.api#required" => {}}))
     UpdateManagedInstancesProviderConfiguration.add_member(:propagate_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: PropagateMITags, name: "propagateTags"))
+    UpdateManagedInstancesProviderConfiguration.add_member(:infrastructure_optimization, ::Smithy::Schema::Shapes::MemberShape.new(target: InfrastructureOptimization, name: "infrastructureOptimization"))
+    UpdateManagedInstancesProviderConfiguration.add_member(:auto_repair_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoRepairConfiguration, name: "autoRepairConfiguration"))
     UpdateManagedInstancesProviderConfiguration.type = Types::UpdateManagedInstancesProviderConfiguration
-    UpdateServicePrimaryTaskSetRequest.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cluster", traits: {"smithy.api#required" => {}}))
-    UpdateServicePrimaryTaskSetRequest.add_member(:service, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "service", traits: {"smithy.api#required" => {}}))
+    UpdateServicePrimaryTaskSetRequest.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cluster", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "ClusterName"}))
+    UpdateServicePrimaryTaskSetRequest.add_member(:service, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "service", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "ServiceName"}))
     UpdateServicePrimaryTaskSetRequest.add_member(:primary_task_set, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "primaryTaskSet", traits: {"smithy.api#required" => {}}))
     UpdateServicePrimaryTaskSetRequest.type = Types::UpdateServicePrimaryTaskSetRequest
-    UpdateServicePrimaryTaskSetResponse.add_member(:task_set, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskSet, name: "taskSet"))
+    UpdateServicePrimaryTaskSetResponse.add_member(:task_set, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskSet, name: "taskSet", traits: {"smithy.api#notProperty" => {}}))
     UpdateServicePrimaryTaskSetResponse.type = Types::UpdateServicePrimaryTaskSetResponse
     UpdateServiceRequest.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cluster"))
     UpdateServiceRequest.add_member(:service, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "service", traits: {"smithy.api#required" => {}}))
@@ -2213,24 +3014,33 @@ module Aws::ECS
     UpdateServiceRequest.add_member(:service_connect_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceConnectConfiguration, name: "serviceConnectConfiguration"))
     UpdateServiceRequest.add_member(:volume_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceVolumeConfigurations, name: "volumeConfigurations"))
     UpdateServiceRequest.add_member(:vpc_lattice_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcLatticeConfigurations, name: "vpcLatticeConfigurations"))
+    UpdateServiceRequest.add_member(:monitoring, ::Smithy::Schema::Shapes::MemberShape.new(target: MonitoringConfiguration, name: "monitoring"))
     UpdateServiceRequest.type = Types::UpdateServiceRequest
-    UpdateServiceResponse.add_member(:service, ::Smithy::Schema::Shapes::MemberShape.new(target: Service, name: "service"))
+    UpdateServiceResponse.add_member(:service, ::Smithy::Schema::Shapes::MemberShape.new(target: Service, name: "service", traits: {"smithy.api#notProperty" => {}}))
     UpdateServiceResponse.type = Types::UpdateServiceResponse
     UpdateTaskProtectionRequest.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cluster", traits: {"smithy.api#required" => {}}))
     UpdateTaskProtectionRequest.add_member(:tasks, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "tasks", traits: {"smithy.api#required" => {}}))
     UpdateTaskProtectionRequest.add_member(:protection_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "protectionEnabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
     UpdateTaskProtectionRequest.add_member(:expires_in_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedInteger, name: "expiresInMinutes"))
     UpdateTaskProtectionRequest.type = Types::UpdateTaskProtectionRequest
-    UpdateTaskProtectionResponse.add_member(:protected_tasks, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectedTasks, name: "protectedTasks"))
-    UpdateTaskProtectionResponse.add_member(:failures, ::Smithy::Schema::Shapes::MemberShape.new(target: Failures, name: "failures"))
+    UpdateTaskProtectionResponse.add_member(:protected_tasks, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectedTasks, name: "protectedTasks", traits: {"smithy.api#notProperty" => {}}))
+    UpdateTaskProtectionResponse.add_member(:failures, ::Smithy::Schema::Shapes::MemberShape.new(target: Failures, name: "failures", traits: {"smithy.api#notProperty" => {}}))
     UpdateTaskProtectionResponse.type = Types::UpdateTaskProtectionResponse
-    UpdateTaskSetRequest.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cluster", traits: {"smithy.api#required" => {}}))
-    UpdateTaskSetRequest.add_member(:service, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "service", traits: {"smithy.api#required" => {}}))
-    UpdateTaskSetRequest.add_member(:task_set, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "taskSet", traits: {"smithy.api#required" => {}}))
+    UpdateTaskSetRequest.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cluster", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "ClusterName"}))
+    UpdateTaskSetRequest.add_member(:service, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "service", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "ServiceName"}))
+    UpdateTaskSetRequest.add_member(:task_set, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "taskSet", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "TaskSetId"}))
     UpdateTaskSetRequest.add_member(:scale, ::Smithy::Schema::Shapes::MemberShape.new(target: Scale, name: "scale", traits: {"smithy.api#required" => {}}))
     UpdateTaskSetRequest.type = Types::UpdateTaskSetRequest
-    UpdateTaskSetResponse.add_member(:task_set, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskSet, name: "taskSet"))
+    UpdateTaskSetResponse.add_member(:task_set, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskSet, name: "taskSet", traits: {"smithy.api#notProperty" => {}}))
     UpdateTaskSetResponse.type = Types::UpdateTaskSetResponse
+    UpdatedExpressGatewayService.add_member(:service_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "serviceArn"))
+    UpdatedExpressGatewayService.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cluster"))
+    UpdatedExpressGatewayService.add_member(:service_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "serviceName"))
+    UpdatedExpressGatewayService.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpressGatewayServiceStatus, name: "status"))
+    UpdatedExpressGatewayService.add_member(:target_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpressGatewayServiceConfiguration, name: "targetConfiguration"))
+    UpdatedExpressGatewayService.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "createdAt"))
+    UpdatedExpressGatewayService.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "updatedAt"))
+    UpdatedExpressGatewayService.type = Types::UpdatedExpressGatewayService
     VCpuCountRangeRequest.add_member(:min, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedInteger, name: "min", traits: {"smithy.api#required" => {}}))
     VCpuCountRangeRequest.add_member(:max, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedInteger, name: "max"))
     VCpuCountRangeRequest.type = Types::VCpuCountRangeRequest
@@ -2244,6 +3054,7 @@ module Aws::ECS
     Volume.add_member(:host, ::Smithy::Schema::Shapes::MemberShape.new(target: HostVolumeProperties, name: "host"))
     Volume.add_member(:docker_volume_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: DockerVolumeConfiguration, name: "dockerVolumeConfiguration"))
     Volume.add_member(:efs_volume_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: EFSVolumeConfiguration, name: "efsVolumeConfiguration"))
+    Volume.add_member(:s3files_volume_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: S3FilesVolumeConfiguration, name: "s3filesVolumeConfiguration"))
     Volume.add_member(:fsx_windows_file_server_volume_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: FSxWindowsFileServerVolumeConfiguration, name: "fsxWindowsFileServerVolumeConfiguration"))
     Volume.add_member(:configured_at_launch, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedBoolean, name: "configuredAtLaunch"))
     Volume.type = Types::Volume
@@ -2252,9 +3063,14 @@ module Aws::ECS
     VolumeFrom.type = Types::VolumeFrom
     VolumeFromList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeFrom, name: "member"))
     VolumeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Volume, name: "member"))
+    VpcLatticeAdvancedConfiguration.add_member(:alternate_target_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "alternateTargetGroupArn"))
+    VpcLatticeAdvancedConfiguration.add_member(:production_listener_rule, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "productionListenerRule"))
+    VpcLatticeAdvancedConfiguration.add_member(:test_listener_rule, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "testListenerRule"))
+    VpcLatticeAdvancedConfiguration.type = Types::VpcLatticeAdvancedConfiguration
     VpcLatticeConfiguration.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IAMRoleArn, name: "roleArn", traits: {"smithy.api#required" => {}}))
     VpcLatticeConfiguration.add_member(:target_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "targetGroupArn", traits: {"smithy.api#required" => {}}))
     VpcLatticeConfiguration.add_member(:port_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "portName", traits: {"smithy.api#required" => {}}))
+    VpcLatticeConfiguration.add_member(:advanced_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcLatticeAdvancedConfiguration, name: "advancedConfiguration"))
     VpcLatticeConfiguration.type = Types::VpcLatticeConfiguration
     VpcLatticeConfigurations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcLatticeConfiguration, name: "member"))
 
@@ -2262,12 +3078,26 @@ module Aws::ECS
       service.id = "com.amazonaws.ecs#AmazonEC2ContainerServiceV20141113"
       service.name = "AmazonEC2ContainerServiceV20141113"
       service.version = "2014-11-13"
-      service.traits = {"aws.api#service" => {"sdkId" => "ECS", "arnNamespace" => "ecs", "cloudFormationName" => "ECS", "cloudTrailEventSource" => "ecs.amazonaws.com", "endpointPrefix" => "ecs"}, "aws.auth#sigv4" => {"name" => "ecs"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "Amazon EC2 Container Service", "smithy.api#xmlNamespace" => {"uri" => "http://ecs.amazonaws.com/doc/2014-11-13/"}}
+      service.traits = {"aws.api#service" => {"sdkId" => "ECS", "arnNamespace" => "ecs", "cloudFormationName" => "ECS", "cloudTrailEventSource" => "ecs.amazonaws.com", "endpointPrefix" => "ecs", "cloudWatchNamespace" => "AWS/ECS"}, "aws.api#tagEnabled" => {}, "aws.auth#sigv4" => {"name" => "ecs"}, "aws.iam#defineConditionKeys" => {"ecs:cluster" => {"type" => "ARN", "documentation" => "Filters access by the ARN of an Amazon ECS cluster", "relativeDocumentation" => "security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-conditionkeys"}, "ecs:service" => {"type" => "ARN", "documentation" => "Filters access by the ARN of an Amazon ECS service", "relativeDocumentation" => "security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-conditionkeys"}, "ecs:task-definition" => {"type" => "ARN", "documentation" => "Filters access by the ARN of an Amazon ECS task definition", "relativeDocumentation" => "security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-conditionkeys"}, "ecs:container-instances" => {"type" => "ARN", "documentation" => "Filters access by the ARN of an Amazon ECS container instance", "relativeDocumentation" => "security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-conditionkeys"}, "ecs:capacity-provider" => {"type" => "ArrayOfARN", "documentation" => "Filters access by the ARN of an Amazon ECS capacity provider", "relativeDocumentation" => "security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-conditionkeys"}, "ecs:task" => {"type" => "ARN", "documentation" => "Filters access by the ARN of an Amazon ECS task", "relativeDocumentation" => "security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-conditionkeys"}, "ecs:container-name" => {"type" => "String", "documentation" => "Filters access by the name of an Amazon ECS container which is defined in the ECS task definition", "relativeDocumentation" => "security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-conditionkeys"}, "ecs:enable-ebs-volumes" => {"type" => "String", "documentation" => "Filters access by the Amazon ECS managed Amazon EBS volume capability of your ECS task or service", "relativeDocumentation" => "security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-conditionkeys"}, "ecs:enable-execute-command" => {"type" => "String", "documentation" => "Filters access by the execute-command capability of your Amazon ECS task or Amazon ECS service", "relativeDocumentation" => "security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-conditionkeys"}, "ecs:enable-service-connect" => {"type" => "String", "documentation" => "Filters access by the enable field value in the Service Connect configuration", "relativeDocumentation" => "security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-conditionkeys"}, "ecs:enable-vpc-lattice" => {"type" => "String", "documentation" => "Filters access by the VPC lattice capability of your Amazon ECS service", "relativeDocumentation" => "security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-conditionkeys"}, "ecs:namespace" => {"type" => "ARN", "documentation" => "Filters access by the ARN of AWS Cloud Map namespace which is defined in the Service Connect Configuration", "relativeDocumentation" => "security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-conditionkeys"}, "ecs:ResourceTag/${TagKey}" => {"type" => "String", "documentation" => "Filters access by the tag key-value pairs attached to the resource", "relativeDocumentation" => "security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies"}, "aws:ResourceTag/${TagKey}" => {"type" => "String", "documentation" => "Filters access by the tag key-value pairs attached to the resource", "externalDocumentation" => "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-resourcetag"}, "aws:RequestTag/${TagKey}" => {"type" => "String", "documentation" => "Filters access by the tags that are passed in the request", "externalDocumentation" => "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-requesttag"}, "aws:TagKeys" => {"type" => "ArrayOfString", "documentation" => "Filters access by the tag keys that are passed in the request", "externalDocumentation" => "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-tagkeys"}, "ecs:CreateAction" => {"type" => "String", "documentation" => "Filters access by the name of a resource-creating API action", "externalDocumentation" => "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-createaction"}, "ecs:account-setting" => {"type" => "String", "documentation" => "Filters access by the Amazon ECS account setting name", "relativeDocumentation" => "security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-conditionkeys"}, "ecs:fargate-ephemeral-storage-kms-key" => {"type" => "String", "documentation" => "Filters access by the AWS KMS key id provided in the request", "relativeDocumentation" => "security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-conditionkeys"}, "ecs:enable-ecs-managed-tags" => {"type" => "Bool", "documentation" => "Filters access by the enableECSManagedTags configuration of your Amazon ECS task or Amazon ECS service", "relativeDocumentation" => "security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-conditionkeys"}, "ecs:auto-assign-public-ip" => {"type" => "Bool", "documentation" => "Filters access by the public IP assignment configuration of your Amazon ECS task or Amazon ECS service that uses awsvpc network mode", "relativeDocumentation" => "security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-conditionkeys"}, "ecs:propagate-tags" => {"type" => "String", "documentation" => "Filters access by the tag propagation configuration of your Amazon ECS task or Amazon ECS service", "relativeDocumentation" => "security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-conditionkeys"}, "ecs:instance-metadata-tags-propagation" => {"type" => "Bool", "documentation" => "Filters access by the instance metadata tags propagation setting of your Amazon ECS capacity provider", "relativeDocumentation" => "security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-conditionkeys"}, "ecs:subnet" => {"type" => "ArrayOfString", "documentation" => "Filters access by the subnet configuration of your Amazon ECS task or Amazon ECS service that uses awsvpc network mode", "relativeDocumentation" => "security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-conditionkeys"}, "ecs:compute-compatibility" => {"type" => "ArrayOfString", "documentation" => "Filters access by the required compatibilities field provided in the request", "relativeDocumentation" => "security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-conditionkeys"}, "ecs:privileged" => {"type" => "String", "documentation" => "Filters access by the privileged field provided in the request", "relativeDocumentation" => "security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-conditionkeys"}, "ecs:task-cpu" => {"type" => "Numeric", "documentation" => "Filters access by the task cpu, as an integer with 1024 = 1 vCPU, provided in the request", "relativeDocumentation" => "security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-conditionkeys"}, "ecs:task-memory" => {"type" => "Numeric", "documentation" => "Filters access by the task memory, as an integer representing MiB, provided in the request", "relativeDocumentation" => "security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-conditionkeys"}, "ecs:daemon" => {"type" => "ARN", "documentation" => "Filters access by the ARN of an Amazon ECS daemon", "relativeDocumentation" => "security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-conditionkeys"}, "ecs:daemon-task-definition" => {"type" => "ARN", "documentation" => "Filters access by the ARN of an Amazon ECS daemon task definition", "relativeDocumentation" => "security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-conditionkeys"}}, "aws.iam#disableConditionKeyInference" => {}, "aws.iam#supportedPrincipalTypes" => ["Root", "IAMUser", "IAMRole", "FederatedUser"], "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "Amazon EC2 Container Service", "smithy.api#xmlNamespace" => {"uri" => "http://ecs.amazonaws.com/doc/2014-11-13/"}, "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://ecs-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://ecs-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://ecs.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://ecs.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
+      service.add_operation(:continue_service_deployment, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ecs#ContinueServiceDeployment"
+        operation.name = "ContinueServiceDeployment"
+        operation.input = ContinueServiceDeploymentRequest
+        operation.output = ContinueServiceDeploymentResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ClientException
+        operation.errors << InvalidParameterException
+        operation.errors << ServerException
+        operation.errors << ServiceDeploymentNotFoundException
+        operation.errors << UnsupportedFeatureException
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to continue a paused service deployment", "relativeDocumentation" => "API_ContinueServiceDeployment.html", "resources" => {"required" => {"service-deployment" => {"conditionKeys" => ["ecs:service", "ecs:cluster", "aws:ResourceTag/${TagKey}"]}, "service" => {"conditionKeys" => ["ecs:cluster", "aws:ResourceTag/${TagKey}"]}}}}}
+      end)
       service.add_operation(:create_capacity_provider, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecs#CreateCapacityProvider"
         operation.name = "CreateCapacityProvider"
         operation.input = CreateCapacityProviderRequest
         operation.output = CreateCapacityProviderResponse
+        operation.errors << AccessDeniedException
         operation.errors << ClientException
         operation.errors << ClusterNotFoundException
         operation.errors << InvalidParameterException
@@ -2275,18 +3105,48 @@ module Aws::ECS
         operation.errors << ServerException
         operation.errors << UnsupportedFeatureException
         operation.errors << UpdateInProgressException
-        operation.traits = {}
+        operation.traits = {"aws.iam#conditionKeys" => ["ecs:instance-metadata-tags-propagation", "ecs:propagate-tags", "aws:RequestTag/${TagKey}", "aws:TagKeys"], "aws.iam#iamAction" => {"createsResources" => ["capacity-provider"], "documentation" => "Grants permission to create a new capacity provider. Capacity providers are associated with an Amazon ECS cluster and are used in capacity provider strategies to facilitate cluster auto scaling", "relativeDocumentation" => "API_CreateCapacityProvider.html", "resources" => {"required" => {"capacity-provider" => {"conditionKeys" => ["aws:ResourceTag/${TagKey}"]}}}}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:create_cluster, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecs#CreateCluster"
         operation.name = "CreateCluster"
         operation.input = CreateClusterRequest
         operation.output = CreateClusterResponse
+        operation.errors << AccessDeniedException
         operation.errors << ClientException
         operation.errors << InvalidParameterException
         operation.errors << NamespaceNotFoundException
         operation.errors << ServerException
-        operation.traits = {}
+        operation.traits = {"aws.iam#conditionKeys" => ["ecs:capacity-provider", "ecs:fargate-ephemeral-storage-kms-key", "aws:RequestTag/${TagKey}", "aws:TagKeys"], "aws.iam#iamAction" => {"createsResources" => ["cluster"], "documentation" => "Grants permission to create a new Amazon ECS cluster", "relativeDocumentation" => "API_CreateCluster.html", "resources" => {"required" => {"cluster" => {"conditionKeys" => ["aws:ResourceTag/${TagKey}"]}}}}}
+      end)
+      service.add_operation(:create_daemon, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ecs#CreateDaemon"
+        operation.name = "CreateDaemon"
+        operation.input = CreateDaemonRequest
+        operation.output = CreateDaemonResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ClientException
+        operation.errors << ClusterNotFoundException
+        operation.errors << InvalidParameterException
+        operation.errors << PlatformUnknownException
+        operation.errors << ServerException
+        operation.errors << UnsupportedFeatureException
+        operation.traits = {"aws.iam#conditionKeys" => ["aws:RequestTag/${TagKey}", "aws:TagKeys", "ecs:capacity-provider", "ecs:daemon-task-definition", "ecs:enable-ecs-managed-tags", "ecs:enable-execute-command", "ecs:propagate-tags", "ecs:task-cpu", "ecs:task-memory"], "aws.iam#iamAction" => {"documentation" => "Grants permission to create a new daemon in a specified cluster", "createsResources" => ["daemon"], "resources" => {"required" => {"daemon" => {"conditionKeys" => ["ecs:cluster", "aws:ResourceTag/${TagKey}"]}}}}}
+      end)
+      service.add_operation(:create_express_gateway_service, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ecs#CreateExpressGatewayService"
+        operation.name = "CreateExpressGatewayService"
+        operation.input = CreateExpressGatewayServiceRequest
+        operation.output = CreateExpressGatewayServiceResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ClientException
+        operation.errors << ClusterNotFoundException
+        operation.errors << InvalidParameterException
+        operation.errors << PlatformTaskDefinitionIncompatibilityException
+        operation.errors << PlatformUnknownException
+        operation.errors << ServerException
+        operation.errors << UnsupportedFeatureException
+        operation.traits = {"aws.iam#conditionKeys" => ["ecs:task-cpu", "ecs:task-memory", "ecs:task-definition", "aws:RequestTag/${TagKey}", "aws:TagKeys", "ecs:propagate-tags", "ecs:subnet", "ecs:enable-ecs-managed-tags"], "aws.iam#iamAction" => {"createsResources" => ["service"], "documentation" => "Grants permission to create a new Amazon ECS Express Gateway service with cluster and task definition", "relativeDocumentation" => "API_CreateExpressGatewayService.html", "requiredActions" => ["iam:PassRole", "ecs:RegisterTaskDefinition"], "resources" => {"required" => {"service" => {"conditionKeys" => ["ecs:cluster", "aws:ResourceTag/${TagKey}"]}}}}}
       end)
       service.add_operation(:create_service, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecs#CreateService"
@@ -2302,7 +3162,7 @@ module Aws::ECS
         operation.errors << PlatformUnknownException
         operation.errors << ServerException
         operation.errors << UnsupportedFeatureException
-        operation.traits = {}
+        operation.traits = {"aws.iam#conditionKeys" => ["ecs:enable-ebs-volumes", "ecs:enable-execute-command", "ecs:task-cpu", "aws:RequestTag/${TagKey}", "ecs:enable-service-connect", "ecs:enable-ecs-managed-tags", "ecs:capacity-provider", "ecs:namespace", "ecs:auto-assign-public-ip", "ecs:enable-vpc-lattice", "ecs:task-memory", "ecs:task-definition", "aws:TagKeys", "ecs:propagate-tags", "ecs:subnet"], "aws.iam#iamAction" => {"createsResources" => ["service"], "documentation" => "Grants permission to run and maintain a desired number of tasks from a specified task definition via service creation", "relativeDocumentation" => "API_CreateService.html", "resources" => {"required" => {"service" => {"conditionKeys" => ["ecs:cluster", "aws:ResourceTag/${TagKey}"]}}}}}
       end)
       service.add_operation(:create_task_set, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecs#CreateTaskSet"
@@ -2313,6 +3173,7 @@ module Aws::ECS
         operation.errors << ClientException
         operation.errors << ClusterNotFoundException
         operation.errors << InvalidParameterException
+        operation.errors << LimitExceededException
         operation.errors << NamespaceNotFoundException
         operation.errors << PlatformTaskDefinitionIncompatibilityException
         operation.errors << PlatformUnknownException
@@ -2320,45 +3181,52 @@ module Aws::ECS
         operation.errors << ServiceNotActiveException
         operation.errors << ServiceNotFoundException
         operation.errors << UnsupportedFeatureException
-        operation.traits = {}
+        operation.traits = {"aws.iam#conditionKeys" => ["ecs:capacity-provider", "ecs:task-definition", "aws:RequestTag/${TagKey}", "ecs:cluster", "aws:TagKeys", "ecs:service"], "aws.iam#iamAction" => {"createsResources" => ["task-set"], "documentation" => "Grants permission to create a new Amazon ECS task set", "relativeDocumentation" => "API_CreateTaskSet.html", "resources" => {"required" => {"task-set" => {}}}}}
       end)
       service.add_operation(:delete_account_setting, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecs#DeleteAccountSetting"
         operation.name = "DeleteAccountSetting"
         operation.input = DeleteAccountSettingRequest
         operation.output = DeleteAccountSettingResponse
+        operation.errors << AccessDeniedException
         operation.errors << ClientException
         operation.errors << InvalidParameterException
         operation.errors << ServerException
-        operation.traits = {}
+        operation.traits = {"aws.iam#conditionKeys" => ["ecs:account-setting"], "aws.iam#iamAction" => {"documentation" => "Grants permission to modify the ARN and resource ID format of a resource for a specified IAM user, IAM role, or the root user for an account. You can specify whether the new ARN and resource ID format are disabled for new resources that are created", "relativeDocumentation" => "API_DeleteAccountSetting.html"}}
       end)
       service.add_operation(:delete_attributes, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecs#DeleteAttributes"
         operation.name = "DeleteAttributes"
         operation.input = DeleteAttributesRequest
         operation.output = DeleteAttributesResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ClientException
         operation.errors << ClusterNotFoundException
         operation.errors << InvalidParameterException
+        operation.errors << ServerException
         operation.errors << TargetNotFoundException
-        operation.traits = {}
+        operation.traits = {"aws.iam#conditionKeys" => ["aws:ResourceTag/${TagKey}", "ecs:cluster"], "aws.iam#iamAction" => {"documentation" => "Grants permission to delete one or more custom attributes from an Amazon ECS resource", "relativeDocumentation" => "API_DeleteAttributes.html", "resources" => {"required" => {"container-instance" => {}}}}}
       end)
       service.add_operation(:delete_capacity_provider, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecs#DeleteCapacityProvider"
         operation.name = "DeleteCapacityProvider"
         operation.input = DeleteCapacityProviderRequest
         operation.output = DeleteCapacityProviderResponse
+        operation.errors << AccessDeniedException
         operation.errors << ClientException
         operation.errors << ClusterNotFoundException
         operation.errors << InvalidParameterException
         operation.errors << ServerException
         operation.errors << UnsupportedFeatureException
-        operation.traits = {}
+        operation.errors << UpdateInProgressException
+        operation.traits = {"aws.iam#conditionKeys" => ["aws:ResourceTag/${TagKey}"], "aws.iam#iamAction" => {"documentation" => "Grants permission to delete the specified capacity provider", "relativeDocumentation" => "API_DeleteCapacityProvider.html", "resources" => {"required" => {"capacity-provider" => {}}}}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_cluster, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecs#DeleteCluster"
         operation.name = "DeleteCluster"
         operation.input = DeleteClusterRequest
         operation.output = DeleteClusterResponse
+        operation.errors << AccessDeniedException
         operation.errors << ClientException
         operation.errors << ClusterContainsCapacityProviderException
         operation.errors << ClusterContainsContainerInstancesException
@@ -2368,19 +3236,61 @@ module Aws::ECS
         operation.errors << InvalidParameterException
         operation.errors << ServerException
         operation.errors << UpdateInProgressException
-        operation.traits = {}
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to delete the specified cluster", "relativeDocumentation" => "API_DeleteCluster.html", "resources" => {"required" => {"cluster" => {"conditionKeys" => ["aws:ResourceTag/${TagKey}"]}}}}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:delete_daemon, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ecs#DeleteDaemon"
+        operation.name = "DeleteDaemon"
+        operation.input = DeleteDaemonRequest
+        operation.output = DeleteDaemonResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ClientException
+        operation.errors << ClusterNotFoundException
+        operation.errors << DaemonNotActiveException
+        operation.errors << DaemonNotFoundException
+        operation.errors << InvalidParameterException
+        operation.errors << ServerException
+        operation.errors << UnsupportedFeatureException
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to delete a specified daemon within a cluster", "resources" => {"required" => {"daemon" => {"conditionKeys" => ["ecs:cluster", "aws:ResourceTag/${TagKey}"]}}}}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:delete_daemon_task_definition, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ecs#DeleteDaemonTaskDefinition"
+        operation.name = "DeleteDaemonTaskDefinition"
+        operation.input = DeleteDaemonTaskDefinitionRequest
+        operation.output = DeleteDaemonTaskDefinitionResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ClientException
+        operation.errors << InvalidParameterException
+        operation.errors << ServerException
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to delete the specified daemon task definition", "resources" => {"required" => {"daemon-task-definition" => {"conditionKeys" => ["aws:ResourceTag/${TagKey}"]}}}}}
+      end)
+      service.add_operation(:delete_express_gateway_service, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ecs#DeleteExpressGatewayService"
+        operation.name = "DeleteExpressGatewayService"
+        operation.input = DeleteExpressGatewayServiceRequest
+        operation.output = DeleteExpressGatewayServiceResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ClientException
+        operation.errors << ClusterNotFoundException
+        operation.errors << InvalidParameterException
+        operation.errors << ServerException
+        operation.errors << ServiceNotActiveException
+        operation.errors << ServiceNotFoundException
+        operation.errors << UnsupportedFeatureException
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to delete a specified Express Gateway service", "relativeDocumentation" => "API_DeleteExpressGatewayService.html", "resources" => {"required" => {"service" => {"conditionKeys" => ["ecs:cluster", "aws:ResourceTag/${TagKey}"]}}}}}
       end)
       service.add_operation(:delete_service, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecs#DeleteService"
         operation.name = "DeleteService"
         operation.input = DeleteServiceRequest
         operation.output = DeleteServiceResponse
+        operation.errors << AccessDeniedException
         operation.errors << ClientException
         operation.errors << ClusterNotFoundException
         operation.errors << InvalidParameterException
         operation.errors << ServerException
         operation.errors << ServiceNotFoundException
-        operation.traits = {}
+        operation.traits = {"aws.iam#conditionKeys" => ["aws:ResourceTag/${TagKey}", "ecs:cluster"], "aws.iam#iamAction" => {"documentation" => "Grants permission to delete a specified service within a cluster", "relativeDocumentation" => "API_DeleteService.html", "resources" => {"required" => {"service" => {}}}}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_task_definitions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecs#DeleteTaskDefinitions"
@@ -2391,7 +3301,7 @@ module Aws::ECS
         operation.errors << ClientException
         operation.errors << InvalidParameterException
         operation.errors << ServerException
-        operation.traits = {}
+        operation.traits = {"aws.iam#conditionKeys" => ["aws:ResourceTag/${TagKey}"], "aws.iam#iamAction" => {"documentation" => "Grants permission to delete the specified task definitions by family and revision", "relativeDocumentation" => "API_DeleteTaskDefinitions.html", "resources" => {"required" => {"task-definition" => {}}}}}
       end)
       service.add_operation(:delete_task_set, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecs#DeleteTaskSet"
@@ -2402,66 +3312,137 @@ module Aws::ECS
         operation.errors << ClientException
         operation.errors << ClusterNotFoundException
         operation.errors << InvalidParameterException
+        operation.errors << LimitExceededException
         operation.errors << ServerException
         operation.errors << ServiceNotActiveException
         operation.errors << ServiceNotFoundException
         operation.errors << TaskSetNotFoundException
         operation.errors << UnsupportedFeatureException
-        operation.traits = {}
+        operation.traits = {"aws.iam#conditionKeys" => ["aws:ResourceTag/${TagKey}", "ecs:cluster", "ecs:service"], "aws.iam#iamAction" => {"documentation" => "Grants permission to delete the specified task set", "relativeDocumentation" => "API_DeleteTaskSet.html", "resources" => {"required" => {"task-set" => {}}}}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:deregister_container_instance, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecs#DeregisterContainerInstance"
         operation.name = "DeregisterContainerInstance"
         operation.input = DeregisterContainerInstanceRequest
         operation.output = DeregisterContainerInstanceResponse
+        operation.errors << AccessDeniedException
         operation.errors << ClientException
         operation.errors << ClusterNotFoundException
         operation.errors << InvalidParameterException
         operation.errors << ServerException
-        operation.traits = {}
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to deregister an Amazon ECS container instance from the specified cluster", "relativeDocumentation" => "API_DeregisterContainerInstance.html", "resources" => {"required" => {"cluster" => {"conditionKeys" => ["aws:ResourceTag/${TagKey}"]}}}}}
       end)
       service.add_operation(:deregister_task_definition, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecs#DeregisterTaskDefinition"
         operation.name = "DeregisterTaskDefinition"
         operation.input = DeregisterTaskDefinitionRequest
         operation.output = DeregisterTaskDefinitionResponse
+        operation.errors << AccessDeniedException
         operation.errors << ClientException
         operation.errors << InvalidParameterException
         operation.errors << ServerException
-        operation.traits = {}
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to deregister the specified task definition by family and revision", "relativeDocumentation" => "API_DeregisterTaskDefinition.html"}}
       end)
       service.add_operation(:describe_capacity_providers, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecs#DescribeCapacityProviders"
         operation.name = "DescribeCapacityProviders"
         operation.input = DescribeCapacityProvidersRequest
         operation.output = DescribeCapacityProvidersResponse
+        operation.errors << AccessDeniedException
         operation.errors << ClientException
         operation.errors << ClusterNotFoundException
         operation.errors << InvalidParameterException
         operation.errors << ServerException
         operation.errors << UnsupportedFeatureException
-        operation.traits = {}
+        operation.traits = {"aws.iam#conditionKeys" => ["aws:ResourceTag/${TagKey}"], "aws.iam#iamAction" => {"documentation" => "Grants permission to describe one or more Amazon ECS capacity providers", "relativeDocumentation" => "API_DescribeCapacityProviders.html", "resources" => {"required" => {"capacity-provider" => {}}}}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:describe_clusters, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecs#DescribeClusters"
         operation.name = "DescribeClusters"
         operation.input = DescribeClustersRequest
         operation.output = DescribeClustersResponse
+        operation.errors << AccessDeniedException
         operation.errors << ClientException
         operation.errors << InvalidParameterException
         operation.errors << ServerException
-        operation.traits = {}
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to describes one or more of your clusters", "relativeDocumentation" => "API_DescribeClusters.html", "resources" => {"required" => {"cluster" => {"conditionKeys" => ["aws:ResourceTag/${TagKey}"]}}}}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:describe_container_instances, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecs#DescribeContainerInstances"
         operation.name = "DescribeContainerInstances"
         operation.input = DescribeContainerInstancesRequest
         operation.output = DescribeContainerInstancesResponse
+        operation.errors << AccessDeniedException
         operation.errors << ClientException
         operation.errors << ClusterNotFoundException
         operation.errors << InvalidParameterException
         operation.errors << ServerException
-        operation.traits = {}
+        operation.traits = {"aws.iam#conditionKeys" => ["aws:ResourceTag/${TagKey}", "ecs:cluster"], "aws.iam#iamAction" => {"documentation" => "Grants permission to describes Amazon ECS container instances", "relativeDocumentation" => "API_DescribeContainerInstances.html", "resources" => {"required" => {"container-instance" => {}}}}, "smithy.api#readonly" => {}}
+      end)
+      service.add_operation(:describe_daemon, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ecs#DescribeDaemon"
+        operation.name = "DescribeDaemon"
+        operation.input = DescribeDaemonRequest
+        operation.output = DescribeDaemonResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ClientException
+        operation.errors << ClusterNotFoundException
+        operation.errors << DaemonNotFoundException
+        operation.errors << InvalidParameterException
+        operation.errors << ServerException
+        operation.errors << UnsupportedFeatureException
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to describe the specified daemon running in your cluster", "resources" => {"required" => {"daemon" => {"conditionKeys" => ["ecs:cluster", "aws:ResourceTag/${TagKey}"]}}}}, "smithy.api#readonly" => {}}
+      end)
+      service.add_operation(:describe_daemon_deployments, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ecs#DescribeDaemonDeployments"
+        operation.name = "DescribeDaemonDeployments"
+        operation.input = DescribeDaemonDeploymentsRequest
+        operation.output = DescribeDaemonDeploymentsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ClientException
+        operation.errors << ClusterNotFoundException
+        operation.errors << InvalidParameterException
+        operation.errors << ServerException
+        operation.errors << UnsupportedFeatureException
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to describe one or more of your daemon deployments", "resources" => {"required" => {"daemon-deployment" => {"conditionKeys" => ["ecs:cluster", "ecs:daemon", "aws:ResourceTag/${TagKey}"]}, "daemon" => {"conditionKeys" => ["ecs:cluster", "aws:ResourceTag/${TagKey}"]}}}}, "smithy.api#readonly" => {}}
+      end)
+      service.add_operation(:describe_daemon_revisions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ecs#DescribeDaemonRevisions"
+        operation.name = "DescribeDaemonRevisions"
+        operation.input = DescribeDaemonRevisionsRequest
+        operation.output = DescribeDaemonRevisionsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ClientException
+        operation.errors << ClusterNotFoundException
+        operation.errors << InvalidParameterException
+        operation.errors << ServerException
+        operation.errors << UnsupportedFeatureException
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to describe one or more of your daemon revisions", "resources" => {"required" => {"daemon-revision" => {"conditionKeys" => ["ecs:cluster", "ecs:daemon", "aws:ResourceTag/${TagKey}"]}, "daemon" => {"conditionKeys" => ["ecs:cluster", "aws:ResourceTag/${TagKey}"]}}}}, "smithy.api#readonly" => {}}
+      end)
+      service.add_operation(:describe_daemon_task_definition, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ecs#DescribeDaemonTaskDefinition"
+        operation.name = "DescribeDaemonTaskDefinition"
+        operation.input = DescribeDaemonTaskDefinitionRequest
+        operation.output = DescribeDaemonTaskDefinitionResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ClientException
+        operation.errors << InvalidParameterException
+        operation.errors << ServerException
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to describe a daemon task definition", "resources" => {"required" => {"daemon-task-definition" => {"conditionKeys" => ["aws:ResourceTag/${TagKey}"]}}}}, "smithy.api#readonly" => {}}
+      end)
+      service.add_operation(:describe_express_gateway_service, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ecs#DescribeExpressGatewayService"
+        operation.name = "DescribeExpressGatewayService"
+        operation.input = DescribeExpressGatewayServiceRequest
+        operation.output = DescribeExpressGatewayServiceResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ClientException
+        operation.errors << ClusterNotFoundException
+        operation.errors << InvalidParameterException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServerException
+        operation.errors << UnsupportedFeatureException
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to describe the specified Express Gateway service", "relativeDocumentation" => "API_DescribeExpressGatewayService.html", "resources" => {"required" => {"service" => {"conditionKeys" => ["ecs:cluster", "aws:ResourceTag/${TagKey}"]}}}}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:describe_service_deployments, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecs#DescribeServiceDeployments"
@@ -2475,7 +3456,7 @@ module Aws::ECS
         operation.errors << ServerException
         operation.errors << ServiceNotFoundException
         operation.errors << UnsupportedFeatureException
-        operation.traits = {}
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to describe one or more of your service deployments", "relativeDocumentation" => "API_DescribeServiceDeployments.html", "resources" => {"required" => {"service-deployment" => {"conditionKeys" => ["ecs:service", "ecs:cluster", "aws:ResourceTag/${TagKey}"]}, "service" => {"conditionKeys" => ["ecs:cluster", "aws:ResourceTag/${TagKey}"]}}}}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:describe_service_revisions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecs#DescribeServiceRevisions"
@@ -2489,28 +3470,30 @@ module Aws::ECS
         operation.errors << ServerException
         operation.errors << ServiceNotFoundException
         operation.errors << UnsupportedFeatureException
-        operation.traits = {}
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to describe one or more of your service revisions", "relativeDocumentation" => "API_DescribeServiceRevisions.html", "resources" => {"required" => {"service" => {"conditionKeys" => ["ecs:cluster", "aws:ResourceTag/${TagKey}"]}, "service-revision" => {"conditionKeys" => ["ecs:service", "ecs:cluster", "aws:ResourceTag/${TagKey}"]}}}}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:describe_services, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecs#DescribeServices"
         operation.name = "DescribeServices"
         operation.input = DescribeServicesRequest
         operation.output = DescribeServicesResponse
+        operation.errors << AccessDeniedException
         operation.errors << ClientException
         operation.errors << ClusterNotFoundException
         operation.errors << InvalidParameterException
         operation.errors << ServerException
-        operation.traits = {}
+        operation.traits = {"aws.iam#conditionKeys" => ["aws:ResourceTag/${TagKey}", "ecs:cluster"], "aws.iam#iamAction" => {"documentation" => "Grants permission to describe the specified services running in your cluster", "relativeDocumentation" => "API_DescribeServices.html", "resources" => {"required" => {"service" => {}}}}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:describe_task_definition, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecs#DescribeTaskDefinition"
         operation.name = "DescribeTaskDefinition"
         operation.input = DescribeTaskDefinitionRequest
         operation.output = DescribeTaskDefinitionResponse
+        operation.errors << AccessDeniedException
         operation.errors << ClientException
         operation.errors << InvalidParameterException
         operation.errors << ServerException
-        operation.traits = {}
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to describe a task definition. You can specify a family and revision to find information about a specific task definition, or you can simply specify the family to find the latest ACTIVE revision in that family", "relativeDocumentation" => "API_DescribeTaskDefinition.html"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:describe_task_sets, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecs#DescribeTaskSets"
@@ -2525,27 +3508,30 @@ module Aws::ECS
         operation.errors << ServiceNotActiveException
         operation.errors << ServiceNotFoundException
         operation.errors << UnsupportedFeatureException
-        operation.traits = {}
+        operation.traits = {"aws.iam#conditionKeys" => ["aws:ResourceTag/${TagKey}", "ecs:cluster", "ecs:service"], "aws.iam#iamAction" => {"documentation" => "Grants permission to describe Amazon ECS task sets", "relativeDocumentation" => "API_DescribeTaskSets.html", "resources" => {"required" => {"task-set" => {}}}}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:describe_tasks, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecs#DescribeTasks"
         operation.name = "DescribeTasks"
         operation.input = DescribeTasksRequest
         operation.output = DescribeTasksResponse
+        operation.errors << AccessDeniedException
         operation.errors << ClientException
         operation.errors << ClusterNotFoundException
         operation.errors << InvalidParameterException
         operation.errors << ServerException
-        operation.traits = {}
+        operation.traits = {"aws.iam#conditionKeys" => ["aws:ResourceTag/${TagKey}", "ecs:cluster"], "aws.iam#iamAction" => {"documentation" => "Grants permission to describe a specified task or tasks", "relativeDocumentation" => "API_DescribeTasks.html", "resources" => {"required" => {"task" => {}}}}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:discover_poll_endpoint, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecs#DiscoverPollEndpoint"
         operation.name = "DiscoverPollEndpoint"
         operation.input = DiscoverPollEndpointRequest
         operation.output = DiscoverPollEndpointResponse
+        operation.errors << AccessDeniedException
         operation.errors << ClientException
+        operation.errors << InvalidParameterException
         operation.errors << ServerException
-        operation.traits = {}
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to get an endpoint for the Amazon ECS agent to poll for updates", "relativeDocumentation" => "API_DiscoverPollEndpoint.html"}}
       end)
       service.add_operation(:execute_command, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecs#ExecuteCommand"
@@ -2558,7 +3544,7 @@ module Aws::ECS
         operation.errors << InvalidParameterException
         operation.errors << ServerException
         operation.errors << TargetNotConnectedException
-        operation.traits = {}
+        operation.traits = {"aws.iam#conditionKeys" => ["ecs:cluster", "ecs:container-name", "ecs:task", "aws:ResourceTag/${TagKey}"], "aws.iam#iamAction" => {"documentation" => "Grants permission to run a command remotely on an Amazon ECS container", "relativeDocumentation" => "API_ExecuteCommand.html", "resources" => {"required" => {"cluster" => {}, "task" => {}}}}}
       end)
       service.add_operation(:get_task_protection, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecs#GetTaskProtection"
@@ -2572,17 +3558,18 @@ module Aws::ECS
         operation.errors << ResourceNotFoundException
         operation.errors << ServerException
         operation.errors << UnsupportedFeatureException
-        operation.traits = {}
+        operation.traits = {"aws.iam#conditionKeys" => ["aws:ResourceTag/${TagKey}", "ecs:cluster"], "aws.iam#iamAction" => {"documentation" => "Grants permission to retrieve the protection status of tasks in an Amazon ECS service", "relativeDocumentation" => "API_GetTaskProtection.html", "resources" => {"required" => {"task" => {}}}}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:list_account_settings, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecs#ListAccountSettings"
         operation.name = "ListAccountSettings"
         operation.input = ListAccountSettingsRequest
         operation.output = ListAccountSettingsResponse
+        operation.errors << AccessDeniedException
         operation.errors << ClientException
         operation.errors << InvalidParameterException
         operation.errors << ServerException
-        operation.traits = {}
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to list the account settings for an Amazon ECS resource for a specified principal", "relativeDocumentation" => "API_ListAccountSettings.html"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListAccountSettings.new
       end)
       service.add_operation(:list_attributes, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -2590,9 +3577,12 @@ module Aws::ECS
         operation.name = "ListAttributes"
         operation.input = ListAttributesRequest
         operation.output = ListAttributesResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ClientException
         operation.errors << ClusterNotFoundException
         operation.errors << InvalidParameterException
-        operation.traits = {}
+        operation.errors << ServerException
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to lists the attributes for Amazon ECS resources within a specified target type and cluster", "relativeDocumentation" => "API_ListAttributes.html", "resources" => {"required" => {"cluster" => {"conditionKeys" => ["aws:ResourceTag/${TagKey}"]}}}}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListAttributes.new
       end)
       service.add_operation(:list_clusters, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -2600,10 +3590,11 @@ module Aws::ECS
         operation.name = "ListClusters"
         operation.input = ListClustersRequest
         operation.output = ListClustersResponse
+        operation.errors << AccessDeniedException
         operation.errors << ClientException
         operation.errors << InvalidParameterException
         operation.errors << ServerException
-        operation.traits = {"smithy.test#smokeTests" => [{"id" => "ListClustersSuccess", "params" => {}, "vendorParams" => {"region" => "us-west-2"}, "vendorParamsShape" => "aws.test#AwsVendorParams", "expect" => {"success" => {}}}]}
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to get a list of existing clusters", "relativeDocumentation" => "API_ListClusters.html"}, "smithy.api#readonly" => {}, "smithy.test#smokeTests" => [{"id" => "ListClustersSuccess", "params" => {}, "vendorParams" => {"region" => "us-west-2"}, "vendorParamsShape" => "aws.test#AwsVendorParams", "expect" => {"success" => {}}}]}
         operation[:paginator] = Paginators::ListClusters.new
       end)
       service.add_operation(:list_container_instances, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -2611,12 +3602,50 @@ module Aws::ECS
         operation.name = "ListContainerInstances"
         operation.input = ListContainerInstancesRequest
         operation.output = ListContainerInstancesResponse
+        operation.errors << AccessDeniedException
         operation.errors << ClientException
         operation.errors << ClusterNotFoundException
         operation.errors << InvalidParameterException
         operation.errors << ServerException
-        operation.traits = {}
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to get a list of container instances in a specified cluster", "relativeDocumentation" => "API_ListContainerInstances.html", "resources" => {"required" => {"cluster" => {"conditionKeys" => ["aws:ResourceTag/${TagKey}"]}}}}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListContainerInstances.new
+      end)
+      service.add_operation(:list_daemon_deployments, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ecs#ListDaemonDeployments"
+        operation.name = "ListDaemonDeployments"
+        operation.input = ListDaemonDeploymentsRequest
+        operation.output = ListDaemonDeploymentsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ClientException
+        operation.errors << ClusterNotFoundException
+        operation.errors << InvalidParameterException
+        operation.errors << ServerException
+        operation.errors << UnsupportedFeatureException
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to get a list of daemon deployments for a specified daemon", "resources" => {"required" => {"daemon" => {"conditionKeys" => ["aws:ResourceTag/${TagKey}", "ecs:cluster"]}}}}, "smithy.api#readonly" => {}}
+      end)
+      service.add_operation(:list_daemon_task_definitions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ecs#ListDaemonTaskDefinitions"
+        operation.name = "ListDaemonTaskDefinitions"
+        operation.input = ListDaemonTaskDefinitionsRequest
+        operation.output = ListDaemonTaskDefinitionsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ClientException
+        operation.errors << InvalidParameterException
+        operation.errors << ServerException
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to get a list of daemon task definitions that are registered to your account"}, "smithy.api#readonly" => {}}
+      end)
+      service.add_operation(:list_daemons, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ecs#ListDaemons"
+        operation.name = "ListDaemons"
+        operation.input = ListDaemonsRequest
+        operation.output = ListDaemonsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ClientException
+        operation.errors << ClusterNotFoundException
+        operation.errors << InvalidParameterException
+        operation.errors << ServerException
+        operation.errors << UnsupportedFeatureException
+        operation.traits = {"aws.iam#conditionKeys" => ["ecs:cluster"], "aws.iam#iamAction" => {"documentation" => "Grants permission to get a list of daemons that are running in a specified cluster"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:list_service_deployments, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecs#ListServiceDeployments"
@@ -2625,22 +3654,24 @@ module Aws::ECS
         operation.output = ListServiceDeploymentsResponse
         operation.errors << AccessDeniedException
         operation.errors << ClientException
+        operation.errors << ClusterNotFoundException
         operation.errors << InvalidParameterException
         operation.errors << ServerException
         operation.errors << ServiceNotFoundException
         operation.errors << UnsupportedFeatureException
-        operation.traits = {}
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to get a list of service deployments for a specified service", "relativeDocumentation" => "API_ListServiceDeployments.html", "resources" => {"required" => {"service" => {"conditionKeys" => ["ecs:cluster", "aws:ResourceTag/${TagKey}"]}}}}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:list_services, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecs#ListServices"
         operation.name = "ListServices"
         operation.input = ListServicesRequest
         operation.output = ListServicesResponse
+        operation.errors << AccessDeniedException
         operation.errors << ClientException
         operation.errors << ClusterNotFoundException
         operation.errors << InvalidParameterException
         operation.errors << ServerException
-        operation.traits = {}
+        operation.traits = {"aws.iam#conditionKeys" => ["ecs:cluster"], "aws.iam#iamAction" => {"documentation" => "Grants permission to get a list of services that are running in a specified cluster", "relativeDocumentation" => "API_ListServices.html"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListServices.new
       end)
       service.add_operation(:list_services_by_namespace, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -2648,11 +3679,12 @@ module Aws::ECS
         operation.name = "ListServicesByNamespace"
         operation.input = ListServicesByNamespaceRequest
         operation.output = ListServicesByNamespaceResponse
+        operation.errors << AccessDeniedException
         operation.errors << ClientException
         operation.errors << InvalidParameterException
         operation.errors << NamespaceNotFoundException
         operation.errors << ServerException
-        operation.traits = {}
+        operation.traits = {"aws.iam#conditionKeys" => ["ecs:namespace"], "aws.iam#iamAction" => {"documentation" => "Grants permission to get a list of services that are running in a specified AWS Cloud Map Namespace", "relativeDocumentation" => "API_ListServicesByNamespace.html"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListServicesByNamespace.new
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -2660,21 +3692,23 @@ module Aws::ECS
         operation.name = "ListTagsForResource"
         operation.input = ListTagsForResourceRequest
         operation.output = ListTagsForResourceResponse
+        operation.errors << AccessDeniedException
         operation.errors << ClientException
         operation.errors << ClusterNotFoundException
         operation.errors << InvalidParameterException
         operation.errors << ServerException
-        operation.traits = {}
+        operation.traits = {"aws.iam#conditionKeys" => ["aws:ResourceTag/${TagKey}"], "aws.iam#iamAction" => {"documentation" => "Grants permission to get a list of tags for the specified resource", "relativeDocumentation" => "API_ListTagsForResource.html", "resources" => {"optional" => {"cluster" => {}, "task" => {}, "container-instance" => {}, "task-definition" => {}, "service" => {}, "task-set" => {}, "capacity-provider" => {}}}}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:list_task_definition_families, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecs#ListTaskDefinitionFamilies"
         operation.name = "ListTaskDefinitionFamilies"
         operation.input = ListTaskDefinitionFamiliesRequest
         operation.output = ListTaskDefinitionFamiliesResponse
+        operation.errors << AccessDeniedException
         operation.errors << ClientException
         operation.errors << InvalidParameterException
         operation.errors << ServerException
-        operation.traits = {}
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to get a list of task definition families that are registered to your account (which may include task definition families that no longer have any ACTIVE task definitions)", "relativeDocumentation" => "API_ListTaskDefinitionFamilies.html"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListTaskDefinitionFamilies.new
       end)
       service.add_operation(:list_task_definitions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -2682,10 +3716,11 @@ module Aws::ECS
         operation.name = "ListTaskDefinitions"
         operation.input = ListTaskDefinitionsRequest
         operation.output = ListTaskDefinitionsResponse
+        operation.errors << AccessDeniedException
         operation.errors << ClientException
         operation.errors << InvalidParameterException
         operation.errors << ServerException
-        operation.traits = {}
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to get a list of task definitions that are registered to your account", "relativeDocumentation" => "API_ListTaskDefinitions.html"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListTaskDefinitions.new
       end)
       service.add_operation(:list_tasks, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -2693,12 +3728,13 @@ module Aws::ECS
         operation.name = "ListTasks"
         operation.input = ListTasksRequest
         operation.output = ListTasksResponse
+        operation.errors << AccessDeniedException
         operation.errors << ClientException
         operation.errors << ClusterNotFoundException
         operation.errors << InvalidParameterException
         operation.errors << ServerException
         operation.errors << ServiceNotFoundException
-        operation.traits = {}
+        operation.traits = {"aws.iam#conditionKeys" => ["aws:ResourceTag/${TagKey}", "ecs:cluster"], "aws.iam#iamAction" => {"documentation" => "Grants permission to get a list of tasks for a specified cluster", "relativeDocumentation" => "API_ListTasks.html", "resources" => {"required" => {"container-instance" => {}}}}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListTasks.new
       end)
       service.add_operation(:put_account_setting, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -2706,64 +3742,86 @@ module Aws::ECS
         operation.name = "PutAccountSetting"
         operation.input = PutAccountSettingRequest
         operation.output = PutAccountSettingResponse
+        operation.errors << AccessDeniedException
         operation.errors << ClientException
         operation.errors << InvalidParameterException
         operation.errors << ServerException
-        operation.traits = {}
+        operation.traits = {"aws.iam#conditionKeys" => ["ecs:account-setting"], "aws.iam#iamAction" => {"documentation" => "Grants permission to modify the ARN and resource ID format of a resource for a specified IAM user, IAM role, or the root user for an account. You can specify whether the new ARN and resource ID format are enabled for new resources that are created. Enabling this setting is required to use new Amazon ECS features such as resource tagging", "relativeDocumentation" => "API_PutAccountSetting.html"}}
       end)
       service.add_operation(:put_account_setting_default, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecs#PutAccountSettingDefault"
         operation.name = "PutAccountSettingDefault"
         operation.input = PutAccountSettingDefaultRequest
         operation.output = PutAccountSettingDefaultResponse
+        operation.errors << AccessDeniedException
         operation.errors << ClientException
         operation.errors << InvalidParameterException
         operation.errors << ServerException
-        operation.traits = {}
+        operation.traits = {"aws.iam#conditionKeys" => ["ecs:account-setting"], "aws.iam#iamAction" => {"documentation" => "Grants permission to modify the ARN and resource ID format of a resource type for all IAM users on an account for which no individual account setting has been set. Enabling this setting is required to use new Amazon ECS features such as resource tagging", "relativeDocumentation" => "API_PutAccountSettingDefault.html"}}
       end)
       service.add_operation(:put_attributes, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecs#PutAttributes"
         operation.name = "PutAttributes"
         operation.input = PutAttributesRequest
         operation.output = PutAttributesResponse
+        operation.errors << AccessDeniedException
         operation.errors << AttributeLimitExceededException
+        operation.errors << ClientException
         operation.errors << ClusterNotFoundException
         operation.errors << InvalidParameterException
+        operation.errors << ServerException
         operation.errors << TargetNotFoundException
-        operation.traits = {}
+        operation.traits = {"aws.iam#conditionKeys" => ["aws:ResourceTag/${TagKey}", "ecs:cluster"], "aws.iam#iamAction" => {"documentation" => "Grants permission to create or update an attribute on an Amazon ECS resource", "relativeDocumentation" => "API_PutAttributes.html", "resources" => {"required" => {"container-instance" => {}}}}}
       end)
       service.add_operation(:put_cluster_capacity_providers, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecs#PutClusterCapacityProviders"
         operation.name = "PutClusterCapacityProviders"
         operation.input = PutClusterCapacityProvidersRequest
         operation.output = PutClusterCapacityProvidersResponse
+        operation.errors << AccessDeniedException
         operation.errors << ClientException
         operation.errors << ClusterNotFoundException
         operation.errors << InvalidParameterException
         operation.errors << ResourceInUseException
         operation.errors << ServerException
         operation.errors << UpdateInProgressException
-        operation.traits = {}
+        operation.traits = {"aws.iam#conditionKeys" => ["ecs:capacity-provider"], "aws.iam#iamAction" => {"documentation" => "Grants permission to modify the available capacity providers and the default capacity provider strategy for a cluster", "relativeDocumentation" => "API_PutClusterCapacityProviders.html", "resources" => {"required" => {"cluster" => {"conditionKeys" => ["aws:ResourceTag/${TagKey}"]}}}}}
       end)
       service.add_operation(:register_container_instance, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecs#RegisterContainerInstance"
         operation.name = "RegisterContainerInstance"
         operation.input = RegisterContainerInstanceRequest
         operation.output = RegisterContainerInstanceResponse
+        operation.errors << AccessDeniedException
         operation.errors << ClientException
+        operation.errors << ClusterNotFoundException
         operation.errors << InvalidParameterException
         operation.errors << ServerException
-        operation.traits = {}
+        operation.traits = {"aws.iam#conditionKeys" => ["aws:TagKeys", "aws:RequestTag/${TagKey}"], "aws.iam#iamAction" => {"createsResources" => ["container-instance"], "documentation" => "Grants permission to register an EC2 instance into the specified cluster", "relativeDocumentation" => "API_RegisterContainerInstance.html", "resources" => {"required" => {"cluster" => {"conditionKeys" => ["aws:ResourceTag/${TagKey}"]}}}}}
+      end)
+      service.add_operation(:register_daemon_task_definition, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ecs#RegisterDaemonTaskDefinition"
+        operation.name = "RegisterDaemonTaskDefinition"
+        operation.input = RegisterDaemonTaskDefinitionRequest
+        operation.output = RegisterDaemonTaskDefinitionResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ClientException
+        operation.errors << InvalidParameterException
+        operation.errors << LimitExceededException
+        operation.errors << ServerException
+        operation.traits = {"aws.iam#conditionKeys" => ["aws:RequestTag/${TagKey}", "aws:TagKeys", "ecs:privileged", "ecs:task-cpu", "ecs:task-memory"], "aws.iam#iamAction" => {"documentation" => "Grants permission to register a new daemon task definition from the supplied family and containerDefinitions", "createsResources" => ["daemon-task-definition"], "resources" => {"required" => {"daemon-task-definition" => {"conditionKeys" => ["aws:ResourceTag/${TagKey}"]}}}}}
       end)
       service.add_operation(:register_task_definition, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecs#RegisterTaskDefinition"
         operation.name = "RegisterTaskDefinition"
         operation.input = RegisterTaskDefinitionRequest
         operation.output = RegisterTaskDefinitionResponse
+        operation.errors << AccessDeniedException
         operation.errors << ClientException
         operation.errors << InvalidParameterException
+        operation.errors << LimitExceededException
         operation.errors << ServerException
-        operation.traits = {}
+        operation.traits = {"aws.iam#conditionKeys" => ["ecs:task-memory", "ecs:compute-compatibility", "aws:RequestTag/${TagKey}", "aws:TagKeys", "ecs:privileged", "ecs:task-cpu"], "aws.iam#iamAction" => {"createsResources" => ["task-definition"], "documentation" => "Grants permission to register a new task definition from the supplied family and containerDefinitions", "relativeDocumentation" => "API_RegisterTaskDefinition.html", "resources" => {"required" => {"task-definition" => {"conditionKeys" => ["aws:ResourceTag/${TagKey}"]}}}}}
       end)
       service.add_operation(:run_task, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecs#RunTask"
@@ -2780,19 +3838,21 @@ module Aws::ECS
         operation.errors << PlatformUnknownException
         operation.errors << ServerException
         operation.errors << UnsupportedFeatureException
-        operation.traits = {}
+        operation.traits = {"aws.iam#conditionKeys" => ["ecs:capacity-provider", "ecs:enable-ebs-volumes", "ecs:enable-execute-command", "aws:RequestTag/${TagKey}", "ecs:cluster", "aws:TagKeys", "aws:ResourceTag/${TagKey}"], "aws.iam#iamAction" => {"createsResources" => ["task"], "documentation" => "Grants permission to start a task using random placement and the default Amazon ECS scheduler", "relativeDocumentation" => "API_RunTask.html", "requiredActions" => ["iam:PassRole"], "resources" => {"required" => {"task-definition" => {}}}}}
       end)
       service.add_operation(:start_task, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecs#StartTask"
         operation.name = "StartTask"
         operation.input = StartTaskRequest
         operation.output = StartTaskResponse
+        operation.errors << AccessDeniedException
         operation.errors << ClientException
         operation.errors << ClusterNotFoundException
         operation.errors << InvalidParameterException
+        operation.errors << NamespaceNotFoundException
         operation.errors << ServerException
         operation.errors << UnsupportedFeatureException
-        operation.traits = {}
+        operation.traits = {"aws.iam#conditionKeys" => ["ecs:enable-ebs-volumes", "ecs:container-instances", "ecs:enable-execute-command", "aws:RequestTag/${TagKey}", "ecs:cluster", "aws:TagKeys", "aws:ResourceTag/${TagKey}"], "aws.iam#iamAction" => {"createsResources" => ["task"], "documentation" => "Grants permission to start a new task from the specified task definition on the specified container instance or instances", "relativeDocumentation" => "API_StartTask.html", "requiredActions" => ["iam:PassRole"], "resources" => {"required" => {"task-definition" => {}}}}}
       end)
       service.add_operation(:stop_service_deployment, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecs#StopServiceDeployment"
@@ -2806,18 +3866,19 @@ module Aws::ECS
         operation.errors << ServerException
         operation.errors << ServiceDeploymentNotFoundException
         operation.errors << UnsupportedFeatureException
-        operation.traits = {}
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to stop an ongoing service deployment", "relativeDocumentation" => "API_StopServiceDeployment.html", "resources" => {"required" => {"service-deployment" => {"conditionKeys" => ["ecs:service", "ecs:cluster", "aws:ResourceTag/${TagKey}"]}, "service" => {"conditionKeys" => ["ecs:cluster", "aws:ResourceTag/${TagKey}"]}}}}}
       end)
       service.add_operation(:stop_task, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecs#StopTask"
         operation.name = "StopTask"
         operation.input = StopTaskRequest
         operation.output = StopTaskResponse
+        operation.errors << AccessDeniedException
         operation.errors << ClientException
         operation.errors << ClusterNotFoundException
         operation.errors << InvalidParameterException
         operation.errors << ServerException
-        operation.traits = {}
+        operation.traits = {"aws.iam#conditionKeys" => ["aws:ResourceTag/${TagKey}", "ecs:cluster"], "aws.iam#iamAction" => {"documentation" => "Grants permission to stop a running task", "relativeDocumentation" => "API_StopTask.html", "resources" => {"required" => {"task" => {}}}}}
       end)
       service.add_operation(:submit_attachment_state_changes, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecs#SubmitAttachmentStateChanges"
@@ -2826,9 +3887,10 @@ module Aws::ECS
         operation.output = SubmitAttachmentStateChangesResponse
         operation.errors << AccessDeniedException
         operation.errors << ClientException
+        operation.errors << ClusterNotFoundException
         operation.errors << InvalidParameterException
         operation.errors << ServerException
-        operation.traits = {}
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to send an acknowledgement that attachments changed states", "relativeDocumentation" => "API_SubmitAttachmentStateChanges.html", "resources" => {"required" => {"cluster" => {"conditionKeys" => ["aws:ResourceTag/${TagKey}"]}}}}}
       end)
       service.add_operation(:submit_container_state_change, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecs#SubmitContainerStateChange"
@@ -2837,8 +3899,10 @@ module Aws::ECS
         operation.output = SubmitContainerStateChangeResponse
         operation.errors << AccessDeniedException
         operation.errors << ClientException
+        operation.errors << ClusterNotFoundException
+        operation.errors << InvalidParameterException
         operation.errors << ServerException
-        operation.traits = {}
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to send an acknowledgement that a container changed states", "relativeDocumentation" => "API_SubmitContainerStateChange.html", "resources" => {"required" => {"cluster" => {"conditionKeys" => ["aws:ResourceTag/${TagKey}"]}}}}}
       end)
       service.add_operation(:submit_task_state_change, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecs#SubmitTaskStateChange"
@@ -2847,74 +3911,83 @@ module Aws::ECS
         operation.output = SubmitTaskStateChangeResponse
         operation.errors << AccessDeniedException
         operation.errors << ClientException
+        operation.errors << ClusterNotFoundException
         operation.errors << InvalidParameterException
         operation.errors << ServerException
-        operation.traits = {}
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to send an acknowledgement that a task changed states", "relativeDocumentation" => "API_SubmitTaskStateChange.html", "resources" => {"required" => {"cluster" => {"conditionKeys" => ["aws:ResourceTag/${TagKey}"]}}}}}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecs#TagResource"
         operation.name = "TagResource"
         operation.input = TagResourceRequest
         operation.output = TagResourceResponse
+        operation.errors << AccessDeniedException
         operation.errors << ClientException
         operation.errors << ClusterNotFoundException
         operation.errors << InvalidParameterException
+        operation.errors << LimitExceededException
         operation.errors << ResourceNotFoundException
         operation.errors << ServerException
-        operation.traits = {}
+        operation.traits = {"aws.iam#conditionKeys" => ["ecs:CreateAction", "aws:RequestTag/${TagKey}", "aws:TagKeys", "aws:ResourceTag/${TagKey}"], "aws.iam#iamAction" => {"documentation" => "Grants permission to tag the specified resource", "relativeDocumentation" => "API_TagResource.html", "resources" => {"optional" => {"cluster" => {}, "task" => {}, "container-instance" => {}, "task-definition" => {}, "service" => {}, "task-set" => {}, "capacity-provider" => {}, "daemon" => {}, "daemon-task-definition" => {}}}}}
       end)
       service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecs#UntagResource"
         operation.name = "UntagResource"
         operation.input = UntagResourceRequest
         operation.output = UntagResourceResponse
+        operation.errors << AccessDeniedException
         operation.errors << ClientException
         operation.errors << ClusterNotFoundException
         operation.errors << InvalidParameterException
         operation.errors << ResourceNotFoundException
         operation.errors << ServerException
-        operation.traits = {}
+        operation.traits = {"aws.iam#conditionKeys" => ["aws:TagKeys", "aws:ResourceTag/${TagKey}"], "aws.iam#iamAction" => {"documentation" => "Grants permission to untag the specified resource", "relativeDocumentation" => "API_UntagResource.html", "resources" => {"optional" => {"cluster" => {}, "task" => {}, "container-instance" => {}, "task-definition" => {}, "service" => {}, "task-set" => {}, "capacity-provider" => {}, "daemon" => {}, "daemon-task-definition" => {}}}}}
       end)
       service.add_operation(:update_capacity_provider, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecs#UpdateCapacityProvider"
         operation.name = "UpdateCapacityProvider"
         operation.input = UpdateCapacityProviderRequest
         operation.output = UpdateCapacityProviderResponse
+        operation.errors << AccessDeniedException
         operation.errors << ClientException
         operation.errors << ClusterNotFoundException
         operation.errors << InvalidParameterException
         operation.errors << ServerException
         operation.errors << UnsupportedFeatureException
-        operation.traits = {}
+        operation.traits = {"aws.iam#conditionKeys" => ["ecs:instance-metadata-tags-propagation", "ecs:propagate-tags", "aws:ResourceTag/${TagKey}"], "aws.iam#iamAction" => {"documentation" => "Grants permission to update the specified capacity provider", "relativeDocumentation" => "API_UpdateCapacityProvider.html", "resources" => {"required" => {"capacity-provider" => {}}}}}
       end)
       service.add_operation(:update_cluster, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecs#UpdateCluster"
         operation.name = "UpdateCluster"
         operation.input = UpdateClusterRequest
         operation.output = UpdateClusterResponse
+        operation.errors << AccessDeniedException
         operation.errors << ClientException
         operation.errors << ClusterNotFoundException
         operation.errors << InvalidParameterException
         operation.errors << NamespaceNotFoundException
         operation.errors << ServerException
-        operation.traits = {}
+        operation.traits = {"aws.iam#conditionKeys" => ["ecs:fargate-ephemeral-storage-kms-key"], "aws.iam#iamAction" => {"documentation" => "Grants permission to modify the configuration or settings to use for a cluster", "relativeDocumentation" => "API_UpdateCluster.html", "resources" => {"required" => {"cluster" => {"conditionKeys" => ["aws:ResourceTag/${TagKey}"]}}}}}
       end)
       service.add_operation(:update_cluster_settings, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecs#UpdateClusterSettings"
         operation.name = "UpdateClusterSettings"
         operation.input = UpdateClusterSettingsRequest
         operation.output = UpdateClusterSettingsResponse
+        operation.errors << AccessDeniedException
         operation.errors << ClientException
         operation.errors << ClusterNotFoundException
         operation.errors << InvalidParameterException
         operation.errors << ServerException
-        operation.traits = {}
+        operation.errors << UpdateInProgressException
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to modify the settings to use for a cluster", "relativeDocumentation" => "API_UpdateClusterSettings.html", "resources" => {"required" => {"cluster" => {"conditionKeys" => ["aws:ResourceTag/${TagKey}"]}}}}}
       end)
       service.add_operation(:update_container_agent, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecs#UpdateContainerAgent"
         operation.name = "UpdateContainerAgent"
         operation.input = UpdateContainerAgentRequest
         operation.output = UpdateContainerAgentResponse
+        operation.errors << AccessDeniedException
         operation.errors << ClientException
         operation.errors << ClusterNotFoundException
         operation.errors << InvalidParameterException
@@ -2922,18 +3995,50 @@ module Aws::ECS
         operation.errors << NoUpdateAvailableException
         operation.errors << ServerException
         operation.errors << UpdateInProgressException
-        operation.traits = {}
+        operation.traits = {"aws.iam#conditionKeys" => ["aws:ResourceTag/${TagKey}", "ecs:cluster"], "aws.iam#iamAction" => {"documentation" => "Grants permission to update the Amazon ECS container agent on a specified container instance", "relativeDocumentation" => "API_UpdateContainerAgent.html", "resources" => {"required" => {"container-instance" => {}}}}}
       end)
       service.add_operation(:update_container_instances_state, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecs#UpdateContainerInstancesState"
         operation.name = "UpdateContainerInstancesState"
         operation.input = UpdateContainerInstancesStateRequest
         operation.output = UpdateContainerInstancesStateResponse
+        operation.errors << AccessDeniedException
         operation.errors << ClientException
         operation.errors << ClusterNotFoundException
         operation.errors << InvalidParameterException
         operation.errors << ServerException
-        operation.traits = {}
+        operation.traits = {"aws.iam#conditionKeys" => ["aws:ResourceTag/${TagKey}", "ecs:cluster"], "aws.iam#iamAction" => {"documentation" => "Grants permission to the user to modify the status of an Amazon ECS container instance", "relativeDocumentation" => "API_UpdateContainerInstancesState.html", "resources" => {"required" => {"container-instance" => {}}}}}
+      end)
+      service.add_operation(:update_daemon, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ecs#UpdateDaemon"
+        operation.name = "UpdateDaemon"
+        operation.input = UpdateDaemonRequest
+        operation.output = UpdateDaemonResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ClientException
+        operation.errors << ClusterNotFoundException
+        operation.errors << DaemonNotActiveException
+        operation.errors << DaemonNotFoundException
+        operation.errors << InvalidParameterException
+        operation.errors << PlatformUnknownException
+        operation.errors << ServerException
+        operation.errors << UnsupportedFeatureException
+        operation.traits = {"aws.iam#conditionKeys" => ["ecs:capacity-provider", "ecs:daemon-task-definition", "ecs:enable-ecs-managed-tags", "ecs:enable-execute-command", "ecs:propagate-tags", "ecs:task-cpu", "ecs:task-memory"], "aws.iam#iamAction" => {"documentation" => "Grants permission to modify the parameters of a daemon", "resources" => {"required" => {"daemon" => {"conditionKeys" => ["ecs:cluster", "aws:ResourceTag/${TagKey}"]}}}}}
+      end)
+      service.add_operation(:update_express_gateway_service, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ecs#UpdateExpressGatewayService"
+        operation.name = "UpdateExpressGatewayService"
+        operation.input = UpdateExpressGatewayServiceRequest
+        operation.output = UpdateExpressGatewayServiceResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ClientException
+        operation.errors << ClusterNotFoundException
+        operation.errors << InvalidParameterException
+        operation.errors << ServerException
+        operation.errors << ServiceNotActiveException
+        operation.errors << ServiceNotFoundException
+        operation.errors << UnsupportedFeatureException
+        operation.traits = {"aws.iam#conditionKeys" => ["ecs:task-memory", "ecs:propagate-tags", "ecs:subnet", "ecs:enable-ecs-managed-tags", "ecs:task-cpu", "ecs:task-definition"], "aws.iam#iamAction" => {"documentation" => "Grants permission to modify the parameters of an Express Gateway service", "relativeDocumentation" => "API_UpdateExpressGatewayService.html", "resources" => {"required" => {"service" => {"conditionKeys" => ["ecs:cluster", "aws:ResourceTag/${TagKey}"]}}}}}
       end)
       service.add_operation(:update_service, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecs#UpdateService"
@@ -2951,7 +4056,7 @@ module Aws::ECS
         operation.errors << ServiceNotActiveException
         operation.errors << ServiceNotFoundException
         operation.errors << UnsupportedFeatureException
-        operation.traits = {}
+        operation.traits = {"aws.iam#conditionKeys" => ["ecs:enable-ebs-volumes", "ecs:enable-execute-command", "ecs:task-cpu", "ecs:enable-service-connect", "ecs:enable-ecs-managed-tags", "ecs:capacity-provider", "ecs:namespace", "ecs:auto-assign-public-ip", "ecs:enable-vpc-lattice", "ecs:task-memory", "ecs:task-definition", "ecs:propagate-tags", "ecs:subnet"], "aws.iam#iamAction" => {"documentation" => "Grants permission to modify the parameters of a service", "relativeDocumentation" => "API_UpdateService.html", "resources" => {"required" => {"service" => {"conditionKeys" => ["ecs:cluster", "aws:ResourceTag/${TagKey}"]}}}}}
       end)
       service.add_operation(:update_service_primary_task_set, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecs#UpdateServicePrimaryTaskSet"
@@ -2967,7 +4072,7 @@ module Aws::ECS
         operation.errors << ServiceNotFoundException
         operation.errors << TaskSetNotFoundException
         operation.errors << UnsupportedFeatureException
-        operation.traits = {}
+        operation.traits = {"aws.iam#conditionKeys" => ["aws:ResourceTag/${TagKey}", "ecs:cluster"], "aws.iam#iamAction" => {"documentation" => "Grants permission to modify the primary task set used in a service", "relativeDocumentation" => "API_UpdateServicePrimaryTaskSet.html", "resources" => {"required" => {"service" => {}}}}}
       end)
       service.add_operation(:update_task_protection, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecs#UpdateTaskProtection"
@@ -2981,7 +4086,7 @@ module Aws::ECS
         operation.errors << ResourceNotFoundException
         operation.errors << ServerException
         operation.errors << UnsupportedFeatureException
-        operation.traits = {}
+        operation.traits = {"aws.iam#conditionKeys" => ["aws:ResourceTag/${TagKey}", "ecs:cluster"], "aws.iam#iamAction" => {"documentation" => "Grants permission to modify the protection status of a task", "relativeDocumentation" => "API_UpdateTaskProtection.html", "resources" => {"required" => {"task" => {}}}}}
       end)
       service.add_operation(:update_task_set, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecs#UpdateTaskSet"
@@ -2992,12 +4097,13 @@ module Aws::ECS
         operation.errors << ClientException
         operation.errors << ClusterNotFoundException
         operation.errors << InvalidParameterException
+        operation.errors << LimitExceededException
         operation.errors << ServerException
         operation.errors << ServiceNotActiveException
         operation.errors << ServiceNotFoundException
         operation.errors << TaskSetNotFoundException
         operation.errors << UnsupportedFeatureException
-        operation.traits = {}
+        operation.traits = {"aws.iam#conditionKeys" => ["aws:ResourceTag/${TagKey}", "ecs:cluster", "ecs:service"], "aws.iam#iamAction" => {"documentation" => "Grants permission to update the specified task set", "relativeDocumentation" => "API_UpdateTaskSet.html", "resources" => {"required" => {"task-set" => {}}}}}
       end)
     end
 

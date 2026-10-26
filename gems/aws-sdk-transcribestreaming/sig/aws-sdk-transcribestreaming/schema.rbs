@@ -113,6 +113,7 @@ module Aws::TranscribeStreaming
     Sentiment: EnumShape
     ServiceUnavailableException: StructureShape
     SessionId: StringShape
+    SessionResumeWindow: IntegerShape
     Specialty: EnumShape
     Stable: BooleanShape
     StartCallAnalyticsStreamTranscriptionRequest: StructureShape
@@ -129,6 +130,7 @@ module Aws::TranscribeStreaming
     TimestampRanges: ListShape
     Transcript: StructureShape
     TranscriptEvent: StructureShape
+    TranscriptFormat: EnumShape
     TranscriptResultStream: UnionShape
     Type: EnumShape
     Uri: StringShape

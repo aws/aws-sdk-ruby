@@ -144,18 +144,18 @@ module Aws::CleanRoomsML
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -514,6 +514,8 @@ module Aws::CleanRoomsML
     #   <p>The Amazon Resource Name (ARN) of the KMS key that is used to access the input channel.</p>
     # @option params [Hash<String, String>] :tags
     #   <p>The optional metadata that you apply to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p> <p>The following basic restrictions apply to tags:</p> <ul> <li> <p>Maximum number of tags per resource - 50.</p> </li> <li> <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p> </li> <li> <p>Maximum key length - 128 Unicode characters in UTF-8.</p> </li> <li> <p>Maximum value length - 256 Unicode characters in UTF-8.</p> </li> <li> <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p> </li> <li> <p>Tag keys and values are case sensitive.</p> </li> <li> <p>Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Clean Rooms ML considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.</p> </li> </ul>
+    # @option params [Types::PayerConfiguration] :payer_configuration
+    #   <p>The payer configuration for the ML input channel. Determines which member account pays for compute and synthetic data costs.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     membership_identifier: "UUID", # required
@@ -526,14 +528,20 @@ module Aws::CleanRoomsML
     #             query_string: "String",
     #             analysis_template_arn: "AnalysisTemplateArn",
     #             parameters: {
-    #               "ParameterKey" => "ParameterValue"
+    #               "ParameterName" => "ParameterValue"
     #             }
     #           },
     #           compute_configuration: {
     #             # One of:
     #             worker: {
-    #               type: "CR.1X" # One of: ["CR.1X", "CR.4X"],
-    #               number: 1
+    #               type: "CR.1X" # One of: ["CR.1X", "CR.4X", "CR.8X"],
+    #               number: 1,
+    #               properties: {
+    #                 # One of:
+    #                 spark: {
+    #                   "SparkPropertyKey" => "SparkPropertyValue"
+    #                 }
+    #               }
     #             }
     #           },
     #           result_format: "CSV" # One of: ["CSV", "PARQUET"]
@@ -547,6 +555,10 @@ module Aws::CleanRoomsML
     #     kms_key_arn: "KmsKeyArn",
     #     tags: {
     #       "TagKey" => "TagValue"
+    #     },
+    #     payer_configuration: {
+    #       compute_payer_account_id: "AccountId",
+    #       synthetic_data_payer_account_id: "AccountId"
     #     }
     #   }
     #   options = {}
@@ -590,6 +602,8 @@ module Aws::CleanRoomsML
     #   <p>The Amazon Resource Name (ARN) of the KMS key. This key is used to encrypt and decrypt customer-owned data in the trained ML model and the associated data.</p>
     # @option params [Hash<String, String>] :tags
     #   <p>The optional metadata that you apply to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p> <p>The following basic restrictions apply to tags:</p> <ul> <li> <p>Maximum number of tags per resource - 50.</p> </li> <li> <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p> </li> <li> <p>Maximum key length - 128 Unicode characters in UTF-8.</p> </li> <li> <p>Maximum value length - 256 Unicode characters in UTF-8.</p> </li> <li> <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p> </li> <li> <p>Tag keys and values are case sensitive.</p> </li> <li> <p>Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Clean Rooms ML considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.</p> </li> </ul>
+    # @option params [String] :ml_model_training_payer_account_id
+    #   <p>The account ID of the member that is responsible for paying for model training costs.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     membership_identifier: "UUID", # required
@@ -628,7 +642,8 @@ module Aws::CleanRoomsML
     #     kms_key_arn: "KmsKeyArn",
     #     tags: {
     #       "TagKey" => "TagValue"
-    #     }
+    #     },
+    #     ml_model_training_payer_account_id: "AccountId"
     #   }
     #   options = {}
     #   response = client.create_trained_model(params, options)
@@ -933,14 +948,20 @@ module Aws::CleanRoomsML
     #         query_string: "String",
     #         analysis_template_arn: "AnalysisTemplateArn",
     #         parameters: {
-    #           "ParameterKey" => "ParameterValue"
+    #           "ParameterName" => "ParameterValue"
     #         }
     #       },
     #       sql_compute_configuration: {
     #         # One of:
     #         worker: {
-    #           type: "CR.1X" # One of: ["CR.1X", "CR.4X"],
-    #           number: 1
+    #           type: "CR.1X" # One of: ["CR.1X", "CR.4X", "CR.8X"],
+    #           number: 1,
+    #           properties: {
+    #             # One of:
+    #             spark: {
+    #               "SparkPropertyKey" => "SparkPropertyValue"
+    #             }
+    #           }
     #         }
     #       }
     #     },
@@ -1139,6 +1160,35 @@ module Aws::CleanRoomsML
     #       ]
     #     },
     #     description: "ResourceDescription",
+    #     synthetic_data_configuration: {
+    #       synthetic_data_parameters: { # required
+    #         epsilon: 1.0, # required
+    #         max_membership_inference_attack_score: 1.0, # required
+    #         column_classification: {
+    #           column_mapping: [ # required
+    #             {
+    #               column_name: "SyntheticDataColumnName", # required
+    #               column_type: "CATEGORICAL" # One of: ["CATEGORICAL", "NUMERICAL"], # required
+    #               is_predictive_value: false, # required
+    #             }
+    #           ]
+    #         }
+    #       },
+    #       synthetic_data_evaluation_scores: {
+    #         data_privacy_scores: { # required
+    #           membership_inference_attack_scores: [ # required
+    #             {
+    #               attack_version: "DISTANCE_TO_CLOSEST_RECORD_V1" # One of: ["DISTANCE_TO_CLOSEST_RECORD_V1"], # required
+    #               score: 1.0, # required
+    #             }
+    #           ]
+    #         }
+    #       }
+    #     },
+    #     payer_configuration: {
+    #       compute_payer_account_id: "AccountId",
+    #       synthetic_data_payer_account_id: "AccountId"
+    #     },
     #     create_time: Time.now, # required
     #     update_time: Time.now, # required
     #     creator_account_id: "AccountId", # required
@@ -1201,6 +1251,7 @@ module Aws::CleanRoomsML
     #     logs_status: "PUBLISH_SUCCEEDED" # One of: ["PUBLISH_SUCCEEDED", "PUBLISH_FAILED"],
     #     logs_status_details: "String",
     #     training_container_image_digest: "String",
+    #     ml_model_training_payer_account_id: "AccountId",
     #     create_time: Time.now, # required
     #     update_time: Time.now, # required
     #     creator_account_id: "AccountId", # required
@@ -1488,6 +1539,35 @@ module Aws::CleanRoomsML
     #       ]
     #     },
     #     description: "ResourceDescription",
+    #     synthetic_data_configuration: {
+    #       synthetic_data_parameters: { # required
+    #         epsilon: 1.0, # required
+    #         max_membership_inference_attack_score: 1.0, # required
+    #         column_classification: {
+    #           column_mapping: [ # required
+    #             {
+    #               column_name: "SyntheticDataColumnName", # required
+    #               column_type: "CATEGORICAL" # One of: ["CATEGORICAL", "NUMERICAL"], # required
+    #               is_predictive_value: false, # required
+    #             }
+    #           ]
+    #         }
+    #       },
+    #       synthetic_data_evaluation_scores: {
+    #         data_privacy_scores: { # required
+    #           membership_inference_attack_scores: [ # required
+    #             {
+    #               attack_version: "DISTANCE_TO_CLOSEST_RECORD_V1" # One of: ["DISTANCE_TO_CLOSEST_RECORD_V1"], # required
+    #               score: 1.0, # required
+    #             }
+    #           ]
+    #         }
+    #       }
+    #     },
+    #     payer_configuration: {
+    #       compute_payer_account_id: "AccountId",
+    #       synthetic_data_payer_account_id: "AccountId"
+    #     },
     #     create_time: Time.now, # required
     #     update_time: Time.now, # required
     #     input_channel: { # required
@@ -1498,14 +1578,20 @@ module Aws::CleanRoomsML
     #             query_string: "String",
     #             analysis_template_arn: "AnalysisTemplateArn",
     #             parameters: {
-    #               "ParameterKey" => "ParameterValue"
+    #               "ParameterName" => "ParameterValue"
     #             }
     #           },
     #           compute_configuration: {
     #             # One of:
     #             worker: {
-    #               type: "CR.1X" # One of: ["CR.1X", "CR.4X"],
-    #               number: 1
+    #               type: "CR.1X" # One of: ["CR.1X", "CR.4X", "CR.8X"],
+    #               number: 1,
+    #               properties: {
+    #                 # One of:
+    #                 spark: {
+    #                   "SparkPropertyKey" => "SparkPropertyValue"
+    #                 }
+    #               }
     #             }
     #           },
     #           result_format: "CSV" # One of: ["CSV", "PARQUET"]
@@ -1579,6 +1665,7 @@ module Aws::CleanRoomsML
     #     logs_status: "PUBLISH_SUCCEEDED" # One of: ["PUBLISH_SUCCEEDED", "PUBLISH_FAILED"],
     #     logs_status_details: "String",
     #     training_container_image_digest: "String",
+    #     ml_model_training_payer_account_id: "AccountId",
     #     create_time: Time.now, # required
     #     update_time: Time.now, # required
     #     hyperparameters: {
@@ -1664,7 +1751,8 @@ module Aws::CleanRoomsML
     #     logs_status_details: "String",
     #     tags: {
     #       "TagKey" => "TagValue"
-    #     }
+    #     },
+    #     ml_model_inference_payer_account_id: "AccountId"
     #   }
     # @return [Types::GetTrainedModelInferenceJobResponse]
     def get_trained_model_inference_job(params = {}, options = {})
@@ -1917,7 +2005,11 @@ module Aws::CleanRoomsML
     #         ml_input_channel_arn: "MLInputChannelArn", # required
     #         status: "CREATE_PENDING" # One of: ["CREATE_PENDING", "CREATE_IN_PROGRESS", "CREATE_FAILED", "ACTIVE", "DELETE_PENDING", "DELETE_IN_PROGRESS", "DELETE_FAILED", "INACTIVE"], # required
     #         creator_account_id: "AccountId", # required
-    #         description: "ResourceDescription"
+    #         description: "ResourceDescription",
+    #         payer_configuration: {
+    #           compute_payer_account_id: "AccountId",
+    #           synthetic_data_payer_account_id: "AccountId"
+    #         }
     #       }
     #     ]
     #   }
@@ -2034,6 +2126,7 @@ module Aws::CleanRoomsML
     #         metrics_status_details: "String",
     #         logs_status: "PUBLISH_SUCCEEDED" # One of: ["PUBLISH_SUCCEEDED", "PUBLISH_FAILED"],
     #         logs_status_details: "String",
+    #         ml_model_inference_payer_account_id: "AccountId",
     #         create_time: Time.now, # required
     #         update_time: Time.now, # required
     #         creator_account_id: "AccountId", # required
@@ -2086,6 +2179,7 @@ module Aws::CleanRoomsML
     #         status: "CREATE_PENDING" # One of: ["CREATE_PENDING", "CREATE_IN_PROGRESS", "CREATE_FAILED", "ACTIVE", "DELETE_PENDING", "DELETE_IN_PROGRESS", "DELETE_FAILED", "INACTIVE", "CANCEL_PENDING", "CANCEL_IN_PROGRESS", "CANCEL_FAILED"], # required
     #         configured_model_algorithm_association_arn: "ConfiguredModelAlgorithmAssociationArn", # required
     #         creator_account_id: "AccountId", # required
+    #         ml_model_training_payer_account_id: "AccountId"
     #       }
     #     ]
     #   }
@@ -2241,7 +2335,11 @@ module Aws::CleanRoomsML
     #         protected_query_identifier: "UUID",
     #         ml_input_channel_arn: "MLInputChannelArn", # required
     #         status: "CREATE_PENDING" # One of: ["CREATE_PENDING", "CREATE_IN_PROGRESS", "CREATE_FAILED", "ACTIVE", "DELETE_PENDING", "DELETE_IN_PROGRESS", "DELETE_FAILED", "INACTIVE"], # required
-    #         description: "ResourceDescription"
+    #         description: "ResourceDescription",
+    #         payer_configuration: {
+    #           compute_payer_account_id: "AccountId",
+    #           synthetic_data_payer_account_id: "AccountId"
+    #         }
     #       }
     #     ]
     #   }
@@ -2323,6 +2421,7 @@ module Aws::CleanRoomsML
     #         metrics_status_details: "String",
     #         logs_status: "PUBLISH_SUCCEEDED" # One of: ["PUBLISH_SUCCEEDED", "PUBLISH_FAILED"],
     #         logs_status_details: "String",
+    #         ml_model_inference_payer_account_id: "AccountId",
     #         create_time: Time.now, # required
     #         update_time: Time.now, # required
     #       }
@@ -2379,6 +2478,7 @@ module Aws::CleanRoomsML
     #         collaboration_identifier: "UUID", # required
     #         status: "CREATE_PENDING" # One of: ["CREATE_PENDING", "CREATE_IN_PROGRESS", "CREATE_FAILED", "ACTIVE", "DELETE_PENDING", "DELETE_IN_PROGRESS", "DELETE_FAILED", "INACTIVE", "CANCEL_PENDING", "CANCEL_IN_PROGRESS", "CANCEL_FAILED"], # required
     #         configured_model_algorithm_association_arn: "ConfiguredModelAlgorithmAssociationArn", # required
+    #         ml_model_training_payer_account_id: "AccountId"
     #       }
     #     ]
     #   }
@@ -2427,6 +2527,7 @@ module Aws::CleanRoomsML
     #         collaboration_identifier: "UUID", # required
     #         status: "CREATE_PENDING" # One of: ["CREATE_PENDING", "CREATE_IN_PROGRESS", "CREATE_FAILED", "ACTIVE", "DELETE_PENDING", "DELETE_IN_PROGRESS", "DELETE_FAILED", "INACTIVE", "CANCEL_PENDING", "CANCEL_IN_PROGRESS", "CANCEL_FAILED"], # required
     #         configured_model_algorithm_association_arn: "ConfiguredModelAlgorithmAssociationArn", # required
+    #         ml_model_training_payer_account_id: "AccountId"
     #       }
     #     ]
     #   }
@@ -2590,14 +2691,20 @@ module Aws::CleanRoomsML
     #         query_string: "String",
     #         analysis_template_arn: "AnalysisTemplateArn",
     #         parameters: {
-    #           "ParameterKey" => "ParameterValue"
+    #           "ParameterName" => "ParameterValue"
     #         }
     #       },
     #       sql_compute_configuration: {
     #         # One of:
     #         worker: {
-    #           type: "CR.1X" # One of: ["CR.1X", "CR.4X"],
-    #           number: 1
+    #           type: "CR.1X" # One of: ["CR.1X", "CR.4X", "CR.8X"],
+    #           number: 1,
+    #           properties: {
+    #             # One of:
+    #             spark: {
+    #               "SparkPropertyKey" => "SparkPropertyValue"
+    #             }
+    #           }
     #         }
     #       }
     #     },
@@ -2689,6 +2796,8 @@ module Aws::CleanRoomsML
     #   <p>The Amazon Resource Name (ARN) of the KMS key. This key is used to encrypt and decrypt customer-owned data in the ML inference job and associated data.</p>
     # @option params [Hash<String, String>] :tags
     #   <p>The optional metadata that you apply to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p> <p>The following basic restrictions apply to tags:</p> <ul> <li> <p>Maximum number of tags per resource - 50.</p> </li> <li> <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p> </li> <li> <p>Maximum key length - 128 Unicode characters in UTF-8.</p> </li> <li> <p>Maximum value length - 256 Unicode characters in UTF-8.</p> </li> <li> <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p> </li> <li> <p>Tag keys and values are case sensitive.</p> </li> <li> <p>Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Clean Rooms ML considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.</p> </li> </ul>
+    # @option params [String] :ml_model_inference_payer_account_id
+    #   <p>The account ID of the member that is responsible for paying for model inference costs.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     membership_identifier: "UUID", # required
@@ -2721,7 +2830,8 @@ module Aws::CleanRoomsML
     #     kms_key_arn: "KmsKeyArn",
     #     tags: {
     #       "TagKey" => "TagValue"
-    #     }
+    #     },
+    #     ml_model_inference_payer_account_id: "AccountId"
     #   }
     #   options = {}
     #   response = client.start_trained_model_inference_job(params, options)

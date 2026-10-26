@@ -12,6 +12,7 @@ module Aws::APIGateway
     ApiKeySourceType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.apigateway#ApiKeySourceType", name: "ApiKeySourceType")
     ApiKeysFormat = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.apigateway#ApiKeysFormat", name: "ApiKeysFormat")
     ApiStage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigateway#ApiStage", name: "ApiStage")
+    ApiStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.apigateway#ApiStatus", name: "ApiStatus")
     Authorizer = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigateway#Authorizer", name: "Authorizer")
     AuthorizerType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.apigateway#AuthorizerType", name: "AuthorizerType")
     BadRequestException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigateway#BadRequestException", name: "BadRequestException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
@@ -90,6 +91,7 @@ module Aws::APIGateway
     DomainNameAccessAssociation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigateway#DomainNameAccessAssociation", name: "DomainNameAccessAssociation")
     DomainNameStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.apigateway#DomainNameStatus", name: "DomainNameStatus")
     Double = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.apigateway#Double", name: "Double", traits: {"smithy.api#default" => 0})
+    EndpointAccessMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.apigateway#EndpointAccessMode", name: "EndpointAccessMode")
     EndpointConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigateway#EndpointConfiguration", name: "EndpointConfiguration")
     EndpointType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.apigateway#EndpointType", name: "EndpointType")
     ExportResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigateway#ExportResponse", name: "ExportResponse")
@@ -276,6 +278,7 @@ module Aws::APIGateway
     RequestValidator = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigateway#RequestValidator", name: "RequestValidator")
     Resource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigateway#Resource", name: "Resource")
     ResourceOwner = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.apigateway#ResourceOwner", name: "ResourceOwner")
+    ResponseTransferMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.apigateway#ResponseTransferMode", name: "ResponseTransferMode")
     RestApi = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigateway#RestApi", name: "RestApi")
     RoutingMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.apigateway#RoutingMode", name: "RoutingMode")
     SdkConfigurationProperty = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigateway#SdkConfigurationProperty", name: "SdkConfigurationProperty")
@@ -370,6 +373,10 @@ module Aws::APIGateway
     ApiStage.add_member(:stage, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "stage"))
     ApiStage.add_member(:throttle, ::Smithy::Schema::Shapes::MemberShape.new(target: MapOfApiStageThrottleSettings, name: "throttle"))
     ApiStage.type = Types::ApiStage
+    ApiStatus.add_member(:updating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATING", traits: {"smithy.api#enumValue" => "UPDATING"}))
+    ApiStatus.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AVAILABLE", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
+    ApiStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
+    ApiStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
     Authorizer.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "id"))
     Authorizer.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "name"))
     Authorizer.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthorizerType, name: "type"))
@@ -532,6 +539,7 @@ module Aws::APIGateway
     CreateDomainNameOutput.add_member(:domain_name_status, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainNameStatus, name: "domainNameStatus"))
     CreateDomainNameOutput.add_member(:domain_name_status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "domainNameStatusMessage"))
     CreateDomainNameOutput.add_member(:security_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityPolicy, name: "securityPolicy"))
+    CreateDomainNameOutput.add_member(:endpoint_access_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointAccessMode, name: "endpointAccessMode"))
     CreateDomainNameOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: MapOfStringToString, name: "tags"))
     CreateDomainNameOutput.add_member(:mutual_tls_authentication, ::Smithy::Schema::Shapes::MemberShape.new(target: MutualTlsAuthentication, name: "mutualTlsAuthentication"))
     CreateDomainNameOutput.add_member(:ownership_verification_certificate_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ownershipVerificationCertificateArn"))
@@ -550,6 +558,7 @@ module Aws::APIGateway
     CreateDomainNameRequest.add_member(:endpoint_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointConfiguration, name: "endpointConfiguration"))
     CreateDomainNameRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: MapOfStringToString, name: "tags"))
     CreateDomainNameRequest.add_member(:security_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityPolicy, name: "securityPolicy"))
+    CreateDomainNameRequest.add_member(:endpoint_access_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointAccessMode, name: "endpointAccessMode"))
     CreateDomainNameRequest.add_member(:mutual_tls_authentication, ::Smithy::Schema::Shapes::MemberShape.new(target: MutualTlsAuthenticationInput, name: "mutualTlsAuthentication"))
     CreateDomainNameRequest.add_member(:ownership_verification_certificate_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ownershipVerificationCertificateArn"))
     CreateDomainNameRequest.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "policy"))
@@ -601,6 +610,10 @@ module Aws::APIGateway
     CreateRestApiOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: MapOfStringToString, name: "tags"))
     CreateRestApiOutput.add_member(:disable_execute_api_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "disableExecuteApiEndpoint", traits: {"smithy.api#default" => false}))
     CreateRestApiOutput.add_member(:root_resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "rootResourceId"))
+    CreateRestApiOutput.add_member(:security_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityPolicy, name: "securityPolicy"))
+    CreateRestApiOutput.add_member(:endpoint_access_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointAccessMode, name: "endpointAccessMode"))
+    CreateRestApiOutput.add_member(:api_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ApiStatus, name: "apiStatus"))
+    CreateRestApiOutput.add_member(:api_status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "apiStatusMessage"))
     CreateRestApiOutput.type = Types::CreateRestApiOutput
     CreateRestApiRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "name", traits: {"smithy.api#required" => {}}))
     CreateRestApiRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "description"))
@@ -613,6 +626,8 @@ module Aws::APIGateway
     CreateRestApiRequest.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "policy"))
     CreateRestApiRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: MapOfStringToString, name: "tags"))
     CreateRestApiRequest.add_member(:disable_execute_api_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "disableExecuteApiEndpoint", traits: {"smithy.api#default" => false}))
+    CreateRestApiRequest.add_member(:security_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityPolicy, name: "securityPolicy"))
+    CreateRestApiRequest.add_member(:endpoint_access_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointAccessMode, name: "endpointAccessMode"))
     CreateRestApiRequest.type = Types::CreateRestApiRequest
     CreateStageOutput.add_member(:deployment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "deploymentId"))
     CreateStageOutput.add_member(:client_certificate_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "clientCertificateId"))
@@ -800,6 +815,7 @@ module Aws::APIGateway
     DomainName.add_member(:domain_name_status, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainNameStatus, name: "domainNameStatus"))
     DomainName.add_member(:domain_name_status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "domainNameStatusMessage"))
     DomainName.add_member(:security_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityPolicy, name: "securityPolicy"))
+    DomainName.add_member(:endpoint_access_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointAccessMode, name: "endpointAccessMode"))
     DomainName.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: MapOfStringToString, name: "tags"))
     DomainName.add_member(:mutual_tls_authentication, ::Smithy::Schema::Shapes::MemberShape.new(target: MutualTlsAuthentication, name: "mutualTlsAuthentication"))
     DomainName.add_member(:ownership_verification_certificate_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ownershipVerificationCertificateArn"))
@@ -818,6 +834,9 @@ module Aws::APIGateway
     DomainNameStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
     DomainNameStatus.add_member(:pending_certificate_reimport, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING_CERTIFICATE_REIMPORT", traits: {"smithy.api#enumValue" => "PENDING_CERTIFICATE_REIMPORT"}))
     DomainNameStatus.add_member(:pending_ownership_verification, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING_OWNERSHIP_VERIFICATION", traits: {"smithy.api#enumValue" => "PENDING_OWNERSHIP_VERIFICATION"}))
+    DomainNameStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    EndpointAccessMode.add_member(:basic, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BASIC", traits: {"smithy.api#enumValue" => "BASIC"}))
+    EndpointAccessMode.add_member(:strict, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STRICT", traits: {"smithy.api#enumValue" => "STRICT"}))
     EndpointConfiguration.add_member(:types, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfEndpointType, name: "types"))
     EndpointConfiguration.add_member(:ip_address_type, ::Smithy::Schema::Shapes::MemberShape.new(target: IpAddressType, name: "ipAddressType"))
     EndpointConfiguration.add_member(:vpc_endpoint_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfString, name: "vpcEndpointIds"))
@@ -1027,6 +1046,7 @@ module Aws::APIGateway
     GetDomainNameOutput.add_member(:domain_name_status, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainNameStatus, name: "domainNameStatus"))
     GetDomainNameOutput.add_member(:domain_name_status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "domainNameStatusMessage"))
     GetDomainNameOutput.add_member(:security_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityPolicy, name: "securityPolicy"))
+    GetDomainNameOutput.add_member(:endpoint_access_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointAccessMode, name: "endpointAccessMode"))
     GetDomainNameOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: MapOfStringToString, name: "tags"))
     GetDomainNameOutput.add_member(:mutual_tls_authentication, ::Smithy::Schema::Shapes::MemberShape.new(target: MutualTlsAuthentication, name: "mutualTlsAuthentication"))
     GetDomainNameOutput.add_member(:ownership_verification_certificate_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ownershipVerificationCertificateArn"))
@@ -1081,6 +1101,8 @@ module Aws::APIGateway
     GetIntegrationOutput.add_member(:cache_key_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfString, name: "cacheKeyParameters"))
     GetIntegrationOutput.add_member(:integration_responses, ::Smithy::Schema::Shapes::MemberShape.new(target: MapOfIntegrationResponse, name: "integrationResponses"))
     GetIntegrationOutput.add_member(:tls_config, ::Smithy::Schema::Shapes::MemberShape.new(target: TlsConfig, name: "tlsConfig"))
+    GetIntegrationOutput.add_member(:response_transfer_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseTransferMode, name: "responseTransferMode"))
+    GetIntegrationOutput.add_member(:integration_target, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "integrationTarget"))
     GetIntegrationOutput.type = Types::GetIntegrationOutput
     GetIntegrationRequest.add_member(:rest_api_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "restApiId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetIntegrationRequest.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "resourceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -1191,6 +1213,10 @@ module Aws::APIGateway
     GetRestApiOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: MapOfStringToString, name: "tags"))
     GetRestApiOutput.add_member(:disable_execute_api_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "disableExecuteApiEndpoint", traits: {"smithy.api#default" => false}))
     GetRestApiOutput.add_member(:root_resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "rootResourceId"))
+    GetRestApiOutput.add_member(:security_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityPolicy, name: "securityPolicy"))
+    GetRestApiOutput.add_member(:endpoint_access_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointAccessMode, name: "endpointAccessMode"))
+    GetRestApiOutput.add_member(:api_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ApiStatus, name: "apiStatus"))
+    GetRestApiOutput.add_member(:api_status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "apiStatusMessage"))
     GetRestApiOutput.type = Types::GetRestApiOutput
     GetRestApiRequest.add_member(:rest_api_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "restApiId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetRestApiRequest.type = Types::GetRestApiRequest
@@ -1345,6 +1371,10 @@ module Aws::APIGateway
     ImportRestApiOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: MapOfStringToString, name: "tags"))
     ImportRestApiOutput.add_member(:disable_execute_api_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "disableExecuteApiEndpoint", traits: {"smithy.api#default" => false}))
     ImportRestApiOutput.add_member(:root_resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "rootResourceId"))
+    ImportRestApiOutput.add_member(:security_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityPolicy, name: "securityPolicy"))
+    ImportRestApiOutput.add_member(:endpoint_access_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointAccessMode, name: "endpointAccessMode"))
+    ImportRestApiOutput.add_member(:api_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ApiStatus, name: "apiStatus"))
+    ImportRestApiOutput.add_member(:api_status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "apiStatusMessage"))
     ImportRestApiOutput.type = Types::ImportRestApiOutput
     ImportRestApiRequest.add_member(:fail_on_warnings, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "failOnWarnings", traits: {"smithy.api#default" => false, "smithy.api#httpQuery" => "failonwarnings"}))
     ImportRestApiRequest.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: MapOfStringToString, name: "parameters", traits: {"smithy.api#httpQueryParams" => {}}))
@@ -1367,6 +1397,8 @@ module Aws::APIGateway
     Integration.add_member(:cache_key_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfString, name: "cacheKeyParameters"))
     Integration.add_member(:integration_responses, ::Smithy::Schema::Shapes::MemberShape.new(target: MapOfIntegrationResponse, name: "integrationResponses"))
     Integration.add_member(:tls_config, ::Smithy::Schema::Shapes::MemberShape.new(target: TlsConfig, name: "tlsConfig"))
+    Integration.add_member(:response_transfer_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseTransferMode, name: "responseTransferMode"))
+    Integration.add_member(:integration_target, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "integrationTarget"))
     Integration.type = Types::Integration
     IntegrationResponse.add_member(:status_code, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusCode, name: "statusCode"))
     IntegrationResponse.add_member(:selection_pattern, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "selectionPattern"))
@@ -1519,6 +1551,8 @@ module Aws::APIGateway
     PutIntegrationOutput.add_member(:cache_key_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfString, name: "cacheKeyParameters"))
     PutIntegrationOutput.add_member(:integration_responses, ::Smithy::Schema::Shapes::MemberShape.new(target: MapOfIntegrationResponse, name: "integrationResponses"))
     PutIntegrationOutput.add_member(:tls_config, ::Smithy::Schema::Shapes::MemberShape.new(target: TlsConfig, name: "tlsConfig"))
+    PutIntegrationOutput.add_member(:response_transfer_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseTransferMode, name: "responseTransferMode"))
+    PutIntegrationOutput.add_member(:integration_target, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "integrationTarget"))
     PutIntegrationOutput.type = Types::PutIntegrationOutput
     PutIntegrationRequest.add_member(:rest_api_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "restApiId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     PutIntegrationRequest.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "resourceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -1537,6 +1571,8 @@ module Aws::APIGateway
     PutIntegrationRequest.add_member(:content_handling, ::Smithy::Schema::Shapes::MemberShape.new(target: ContentHandlingStrategy, name: "contentHandling"))
     PutIntegrationRequest.add_member(:timeout_in_millis, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableInteger, name: "timeoutInMillis"))
     PutIntegrationRequest.add_member(:tls_config, ::Smithy::Schema::Shapes::MemberShape.new(target: TlsConfig, name: "tlsConfig"))
+    PutIntegrationRequest.add_member(:response_transfer_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseTransferMode, name: "responseTransferMode"))
+    PutIntegrationRequest.add_member(:integration_target, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "integrationTarget"))
     PutIntegrationRequest.type = Types::PutIntegrationRequest
     PutIntegrationResponseOutput.add_member(:status_code, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusCode, name: "statusCode"))
     PutIntegrationResponseOutput.add_member(:selection_pattern, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "selectionPattern"))
@@ -1604,6 +1640,10 @@ module Aws::APIGateway
     PutRestApiOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: MapOfStringToString, name: "tags"))
     PutRestApiOutput.add_member(:disable_execute_api_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "disableExecuteApiEndpoint", traits: {"smithy.api#default" => false}))
     PutRestApiOutput.add_member(:root_resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "rootResourceId"))
+    PutRestApiOutput.add_member(:security_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityPolicy, name: "securityPolicy"))
+    PutRestApiOutput.add_member(:endpoint_access_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointAccessMode, name: "endpointAccessMode"))
+    PutRestApiOutput.add_member(:api_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ApiStatus, name: "apiStatus"))
+    PutRestApiOutput.add_member(:api_status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "apiStatusMessage"))
     PutRestApiOutput.type = Types::PutRestApiOutput
     PutRestApiRequest.add_member(:rest_api_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "restApiId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     PutRestApiRequest.add_member(:mode, ::Smithy::Schema::Shapes::MemberShape.new(target: PutMode, name: "mode", traits: {"smithy.api#httpQuery" => "mode"}))
@@ -1636,6 +1676,8 @@ module Aws::APIGateway
     Resource.type = Types::Resource
     ResourceOwner.add_member(:self, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SELF", traits: {"smithy.api#enumValue" => "SELF"}))
     ResourceOwner.add_member(:other_accounts, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OTHER_ACCOUNTS", traits: {"smithy.api#enumValue" => "OTHER_ACCOUNTS"}))
+    ResponseTransferMode.add_member(:buffered, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BUFFERED", traits: {"smithy.api#enumValue" => "BUFFERED"}))
+    ResponseTransferMode.add_member(:stream, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STREAM", traits: {"smithy.api#enumValue" => "STREAM"}))
     RestApi.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "id"))
     RestApi.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "name"))
     RestApi.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "description"))
@@ -1650,6 +1692,10 @@ module Aws::APIGateway
     RestApi.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: MapOfStringToString, name: "tags"))
     RestApi.add_member(:disable_execute_api_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "disableExecuteApiEndpoint", traits: {"smithy.api#default" => false}))
     RestApi.add_member(:root_resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "rootResourceId"))
+    RestApi.add_member(:security_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityPolicy, name: "securityPolicy"))
+    RestApi.add_member(:endpoint_access_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointAccessMode, name: "endpointAccessMode"))
+    RestApi.add_member(:api_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ApiStatus, name: "apiStatus"))
+    RestApi.add_member(:api_status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "apiStatusMessage"))
     RestApi.type = Types::RestApi
     RoutingMode.add_member(:base_path_mapping_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BASE_PATH_MAPPING_ONLY", traits: {"smithy.api#enumValue" => "BASE_PATH_MAPPING_ONLY"}))
     RoutingMode.add_member(:routing_rule_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ROUTING_RULE_ONLY", traits: {"smithy.api#enumValue" => "ROUTING_RULE_ONLY"}))
@@ -1673,6 +1719,18 @@ module Aws::APIGateway
     SdkType.type = Types::SdkType
     SecurityPolicy.add_member(:tls_1_0, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TLS_1_0", traits: {"smithy.api#enumValue" => "TLS_1_0"}))
     SecurityPolicy.add_member(:tls_1_2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TLS_1_2", traits: {"smithy.api#enumValue" => "TLS_1_2"}))
+    SecurityPolicy.add_member(:security_policy_tls13_1_3_2025_09, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SecurityPolicy_TLS13_1_3_2025_09", traits: {"smithy.api#enumValue" => "SecurityPolicy_TLS13_1_3_2025_09"}))
+    SecurityPolicy.add_member(:security_policy_tls13_1_3_fips_2025_09, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SecurityPolicy_TLS13_1_3_FIPS_2025_09", traits: {"smithy.api#enumValue" => "SecurityPolicy_TLS13_1_3_FIPS_2025_09"}))
+    SecurityPolicy.add_member(:security_policy_tls13_1_2_pfs_pq_2025_09, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SecurityPolicy_TLS13_1_2_PFS_PQ_2025_09", traits: {"smithy.api#enumValue" => "SecurityPolicy_TLS13_1_2_PFS_PQ_2025_09"}))
+    SecurityPolicy.add_member(:security_policy_tls13_1_2_fips_pq_2025_09, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SecurityPolicy_TLS13_1_2_FIPS_PQ_2025_09", traits: {"smithy.api#enumValue" => "SecurityPolicy_TLS13_1_2_FIPS_PQ_2025_09"}))
+    SecurityPolicy.add_member(:security_policy_tls13_1_2_fips_pfs_pq_2025_09, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SecurityPolicy_TLS13_1_2_FIPS_PFS_PQ_2025_09", traits: {"smithy.api#enumValue" => "SecurityPolicy_TLS13_1_2_FIPS_PFS_PQ_2025_09"}))
+    SecurityPolicy.add_member(:security_policy_tls13_1_2_ext2_pq_2025_09, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SecurityPolicy_TLS13_1_2_Ext2_PQ_2025_09", traits: {"smithy.api#enumValue" => "SecurityPolicy_TLS13_1_2_Ext2_PQ_2025_09"}))
+    SecurityPolicy.add_member(:security_policy_tls13_1_2_ext2_fips_pq_2025_09, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SecurityPolicy_TLS13_1_2_Ext2_FIPS_PQ_2025_09", traits: {"smithy.api#enumValue" => "SecurityPolicy_TLS13_1_2_Ext2_FIPS_PQ_2025_09"}))
+    SecurityPolicy.add_member(:security_policy_tls13_1_2_pq_2025_09, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SecurityPolicy_TLS13_1_2_PQ_2025_09", traits: {"smithy.api#enumValue" => "SecurityPolicy_TLS13_1_2_PQ_2025_09"}))
+    SecurityPolicy.add_member(:security_policy_tls13_1_2_2021_06, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SecurityPolicy_TLS13_1_2_2021_06", traits: {"smithy.api#enumValue" => "SecurityPolicy_TLS13_1_2_2021_06"}))
+    SecurityPolicy.add_member(:security_policy_tls13_2025_edge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SecurityPolicy_TLS13_2025_EDGE", traits: {"smithy.api#enumValue" => "SecurityPolicy_TLS13_2025_EDGE"}))
+    SecurityPolicy.add_member(:security_policy_tls12_pfs_2025_edge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SecurityPolicy_TLS12_PFS_2025_EDGE", traits: {"smithy.api#enumValue" => "SecurityPolicy_TLS12_PFS_2025_EDGE"}))
+    SecurityPolicy.add_member(:security_policy_tls12_2018_edge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SecurityPolicy_TLS12_2018_EDGE", traits: {"smithy.api#enumValue" => "SecurityPolicy_TLS12_2018_EDGE"}))
     ServiceUnavailableException.add_member(:retry_after_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "retryAfterSeconds", traits: {"smithy.api#httpHeader" => "Retry-After"}))
     ServiceUnavailableException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     ServiceUnavailableException.type = Types::ServiceUnavailableException
@@ -1846,6 +1904,7 @@ module Aws::APIGateway
     UpdateDomainNameOutput.add_member(:domain_name_status, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainNameStatus, name: "domainNameStatus"))
     UpdateDomainNameOutput.add_member(:domain_name_status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "domainNameStatusMessage"))
     UpdateDomainNameOutput.add_member(:security_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityPolicy, name: "securityPolicy"))
+    UpdateDomainNameOutput.add_member(:endpoint_access_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointAccessMode, name: "endpointAccessMode"))
     UpdateDomainNameOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: MapOfStringToString, name: "tags"))
     UpdateDomainNameOutput.add_member(:mutual_tls_authentication, ::Smithy::Schema::Shapes::MemberShape.new(target: MutualTlsAuthentication, name: "mutualTlsAuthentication"))
     UpdateDomainNameOutput.add_member(:ownership_verification_certificate_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ownershipVerificationCertificateArn"))
@@ -1882,6 +1941,8 @@ module Aws::APIGateway
     UpdateIntegrationOutput.add_member(:cache_key_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfString, name: "cacheKeyParameters"))
     UpdateIntegrationOutput.add_member(:integration_responses, ::Smithy::Schema::Shapes::MemberShape.new(target: MapOfIntegrationResponse, name: "integrationResponses"))
     UpdateIntegrationOutput.add_member(:tls_config, ::Smithy::Schema::Shapes::MemberShape.new(target: TlsConfig, name: "tlsConfig"))
+    UpdateIntegrationOutput.add_member(:response_transfer_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseTransferMode, name: "responseTransferMode"))
+    UpdateIntegrationOutput.add_member(:integration_target, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "integrationTarget"))
     UpdateIntegrationOutput.type = Types::UpdateIntegrationOutput
     UpdateIntegrationRequest.add_member(:rest_api_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "restApiId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdateIntegrationRequest.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "resourceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -1970,6 +2031,10 @@ module Aws::APIGateway
     UpdateRestApiOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: MapOfStringToString, name: "tags"))
     UpdateRestApiOutput.add_member(:disable_execute_api_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "disableExecuteApiEndpoint", traits: {"smithy.api#default" => false}))
     UpdateRestApiOutput.add_member(:root_resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "rootResourceId"))
+    UpdateRestApiOutput.add_member(:security_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityPolicy, name: "securityPolicy"))
+    UpdateRestApiOutput.add_member(:endpoint_access_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointAccessMode, name: "endpointAccessMode"))
+    UpdateRestApiOutput.add_member(:api_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ApiStatus, name: "apiStatus"))
+    UpdateRestApiOutput.add_member(:api_status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "apiStatusMessage"))
     UpdateRestApiOutput.type = Types::UpdateRestApiOutput
     UpdateRestApiRequest.add_member(:rest_api_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "restApiId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdateRestApiRequest.add_member(:patch_operations, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfPatchOperation, name: "patchOperations"))
@@ -2060,7 +2125,7 @@ module Aws::APIGateway
       service.id = "com.amazonaws.apigateway#BackplaneControlService"
       service.name = "BackplaneControlService"
       service.version = "2015-07-09"
-      service.traits = {"aws.api#service" => {"sdkId" => "API Gateway", "arnNamespace" => "apigateway", "cloudFormationName" => "ApiGateway", "cloudTrailEventSource" => "apigateway.amazonaws.com", "docId" => "apigateway-2015-07-09", "endpointPrefix" => "apigateway"}, "aws.auth#sigv4" => {"name" => "apigateway"}, "aws.protocols#restJson1" => {}, "smithy.api#title" => "Amazon API Gateway"}
+      service.traits = {"aws.api#service" => {"sdkId" => "API Gateway", "arnNamespace" => "apigateway", "cloudFormationName" => "ApiGateway", "cloudTrailEventSource" => "apigateway.amazonaws.com", "docId" => "apigateway-2015-07-09", "endpointPrefix" => "apigateway"}, "aws.auth#sigv4" => {"name" => "apigateway"}, "aws.protocols#restJson1" => {}, "smithy.api#title" => "Amazon API Gateway", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://apigateway-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://apigateway-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://apigateway.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://apigateway.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
       service.add_operation(:create_api_key, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.apigateway#CreateApiKey"
         operation.name = "CreateApiKey"

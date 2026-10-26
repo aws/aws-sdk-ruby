@@ -1,0 +1,1338 @@
+module Aws::EndUserMessaging
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class BrandProfileAttributeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attribute_name: String,
+        ?attribute_type: String,
+        ?attribute_value: String,
+        ?attachment_body: String,
+        ?description: String,
+        ?category: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute_name: String?
+      attr_accessor attribute_type: String?
+      attr_accessor attribute_value: String?
+      attr_accessor attachment_body: String?
+      attr_accessor description: String?
+      attr_accessor category: String?
+    end
+
+    class BrandProfileAttributeOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attribute_name: String,
+        ?attribute_type: String,
+        ?media_download_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute_name: String?
+      attr_accessor attribute_type: String?
+      attr_accessor media_download_url: String?
+    end
+
+    class BrandProfileAttributeSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attribute_name: String,
+        ?attribute_type: String,
+        ?description: String,
+        ?category: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute_name: String?
+      attr_accessor attribute_type: String?
+      attr_accessor description: String?
+      attr_accessor category: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    module BrandProfileAttributeType
+      TEXT: String
+      IMAGE: String
+      DOCUMENT: String
+    end
+
+    class BrandProfileInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?brand_profile_id: String,
+        ?brand_profile_arn: String,
+        ?brand_profile_name: String,
+        ?status: String,
+        ?deletion_protection_enabled: bool,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor brand_profile_id: String?
+      attr_accessor brand_profile_arn: String?
+      attr_accessor brand_profile_name: String?
+      attr_accessor status: String?
+      attr_accessor deletion_protection_enabled: bool?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class ChannelParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?text: Types::TextParameters,
+        ?voice: Types::VoiceParameters,
+        ?notify: Types::NotifyParameters,
+        ?whats_app: Types::WhatsAppParameters,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor text: Types::TextParameters?
+      attr_accessor voice: Types::VoiceParameters?
+      attr_accessor notify: Types::NotifyParameters?
+      attr_accessor whats_app: Types::WhatsAppParameters?
+    end
+
+    class CodeConfigurationParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code_type: String,
+        ?code_length: Integer,
+        ?validity_period_minutes: Integer,
+        ?max_attempts: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code_type: String?
+      attr_accessor code_length: Integer?
+      attr_accessor validity_period_minutes: Integer?
+      attr_accessor max_attempts: Integer?
+    end
+
+    module CodeType
+      NUMERIC: String
+      ALPHA: String
+      ALPHANUMERIC: String
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class CreateBrandProfileAttributesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?brand_profile_id: String,
+        ?attributes: Array[Types::BrandProfileAttributeInput],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor brand_profile_id: String?
+      attr_accessor attributes: Array[Types::BrandProfileAttributeInput]?
+      attr_accessor client_token: String?
+    end
+
+    class CreateBrandProfileAttributesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attributes: Array[Types::BrandProfileAttributeOutput],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attributes: Array[Types::BrandProfileAttributeOutput]?
+    end
+
+    class CreateBrandProfileFromRegistrationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registration_id: String,
+        ?brand_profile_name: String,
+        ?smart_match: bool,
+        ?tags: Array[Types::Tag],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registration_id: String?
+      attr_accessor brand_profile_name: String?
+      attr_accessor smart_match: bool?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor client_token: String?
+    end
+
+    class CreateBrandProfileFromRegistrationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?results: Array[Types::JobResult],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor results: Array[Types::JobResult]?
+    end
+
+    class CreateBrandProfileInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?brand_profile_name: String,
+        ?client_token: String,
+        ?deletion_protection_enabled: bool,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor brand_profile_name: String?
+      attr_accessor client_token: String?
+      attr_accessor deletion_protection_enabled: bool?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateBrandProfileOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?brand_profile_id: String,
+        ?brand_profile_arn: String,
+        ?brand_profile_name: String,
+        ?status: String,
+        ?deletion_protection_enabled: bool,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?attributes_created: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor brand_profile_id: String?
+      attr_accessor brand_profile_arn: String?
+      attr_accessor brand_profile_name: String?
+      attr_accessor status: String?
+      attr_accessor deletion_protection_enabled: bool?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor attributes_created: Integer?
+    end
+
+    class CreateNotifyCodeConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notify_code_configuration_name: String,
+        ?code_configuration_parameters: Types::CodeConfigurationParameters,
+        ?channel_parameters: Types::ChannelParameters,
+        ?deletion_protection_enabled: bool,
+        ?client_token: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notify_code_configuration_name: String?
+      attr_accessor code_configuration_parameters: Types::CodeConfigurationParameters?
+      attr_accessor channel_parameters: Types::ChannelParameters?
+      attr_accessor deletion_protection_enabled: bool?
+      attr_accessor client_token: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateNotifyCodeConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notify_code_configuration: Types::NotifyCodeConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notify_code_configuration: Types::NotifyCodeConfiguration?
+    end
+
+    class CreateRegistrationsFromBrandProfileInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?brand_profile_id: String,
+        ?registration_types: Array[String],
+        ?smart_match: bool,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor brand_profile_id: String?
+      attr_accessor registration_types: Array[String]?
+      attr_accessor smart_match: bool?
+      attr_accessor client_token: String?
+    end
+
+    class CreateRegistrationsFromBrandProfileOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?results: Array[Types::JobResult],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor results: Array[Types::JobResult]?
+    end
+
+    class DeleteBrandProfileAttributeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?brand_profile_id: String,
+        ?attribute_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor brand_profile_id: String?
+      attr_accessor attribute_name: String?
+    end
+
+    class DeleteBrandProfileAttributeOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?brand_profile_id: String,
+        ?attribute_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor brand_profile_id: String?
+      attr_accessor attribute_name: String?
+    end
+
+    class DeleteBrandProfileInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?brand_profile_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor brand_profile_id: String?
+    end
+
+    class DeleteBrandProfileOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?brand_profile_id: String,
+        ?brand_profile_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor brand_profile_id: String?
+      attr_accessor brand_profile_arn: String?
+    end
+
+    class DeleteNotifyCodeConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notify_code_configuration_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notify_code_configuration_id: String?
+    end
+
+    class DeleteNotifyCodeConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetBrandProfileAttributeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?brand_profile_id: String,
+        ?attribute_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor brand_profile_id: String?
+      attr_accessor attribute_name: String?
+    end
+
+    class GetBrandProfileAttributeOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attribute_name: String,
+        ?attribute_type: String,
+        ?attribute_value: String,
+        ?description: String,
+        ?category: String,
+        ?media_content_type: String,
+        ?media_size_bytes: Integer,
+        ?media_download_url: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute_name: String?
+      attr_accessor attribute_type: String?
+      attr_accessor attribute_value: String?
+      attr_accessor description: String?
+      attr_accessor category: String?
+      attr_accessor media_content_type: String?
+      attr_accessor media_size_bytes: Integer?
+      attr_accessor media_download_url: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class GetBrandProfileInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?brand_profile_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor brand_profile_id: String?
+    end
+
+    class GetBrandProfileOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?brand_profile_id: String,
+        ?brand_profile_arn: String,
+        ?brand_profile_name: String,
+        ?status: String,
+        ?deletion_protection_enabled: bool,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor brand_profile_id: String?
+      attr_accessor brand_profile_arn: String?
+      attr_accessor brand_profile_name: String?
+      attr_accessor status: String?
+      attr_accessor deletion_protection_enabled: bool?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class GetJobInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class GetNotifyCodeConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notify_code_configuration_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notify_code_configuration_id: String?
+    end
+
+    class GetNotifyCodeConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notify_code_configuration: Types::NotifyCodeConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notify_code_configuration: Types::NotifyCodeConfiguration?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Job
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?status: String,
+        ?operation_type: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?brand_profile_id: String,
+        ?error_code: String,
+        ?error_message: String,
+        ?resources: Array[Types::JobResource],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor status: String?
+      attr_accessor operation_type: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor brand_profile_id: String?
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+      attr_accessor resources: Array[Types::JobResource]?
+    end
+
+    class JobResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?resource_id: String,
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_arn: String?
+    end
+
+    module JobResourceType
+      REGISTRATION: String
+      BRAND_PROFILE: String
+    end
+
+    class JobResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?resource_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor resource_identifier: String?
+    end
+
+    module JobStatus
+      SUCCESS: String
+      PROCESSING: String
+      FAILED: String
+    end
+
+    class JobSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?status: String,
+        ?operation_type: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?brand_profile_id: String,
+        ?error_code: String,
+        ?error_message: String,
+        ?resources: Array[Types::JobResource],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor status: String?
+      attr_accessor operation_type: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor brand_profile_id: String?
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+      attr_accessor resources: Array[Types::JobResource]?
+    end
+
+    class ListBrandProfileAttributesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?brand_profile_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor brand_profile_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListBrandProfileAttributesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?brand_profile_attributes: Array[Types::BrandProfileAttributeSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor brand_profile_attributes: Array[Types::BrandProfileAttributeSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListBrandProfilesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListBrandProfilesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?brand_profiles: Array[Types::BrandProfileInfo],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor brand_profiles: Array[Types::BrandProfileInfo]?
+      attr_accessor next_token: String?
+    end
+
+    class ListJobsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?status: String,
+        ?brand_profile_id: String,
+        ?operation_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor status: String?
+      attr_accessor brand_profile_id: String?
+      attr_accessor operation_type: String?
+    end
+
+    class ListJobsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?jobs: Array[Types::JobSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor jobs: Array[Types::JobSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListNotifyCodeConfigurationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListNotifyCodeConfigurationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notify_code_configurations: Array[Types::NotifyCodeConfiguration],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notify_code_configurations: Array[Types::NotifyCodeConfiguration]?
+      attr_accessor next_token: String?
+    end
+
+    class ListRegistrationsFromBrandProfileInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?brand_profile_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor brand_profile_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListRegistrationsFromBrandProfileOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registration_associations: Array[Types::RegistrationAssociationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registration_associations: Array[Types::RegistrationAssociationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    module NotifyChannel
+      TEXT: String
+      VOICE: String
+      WHATSAPP: String
+    end
+
+    class NotifyCodeConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notify_code_configuration_id: String,
+        ?notify_code_configuration_arn: String,
+        ?notify_code_configuration_name: String,
+        ?code_configuration_parameters: Types::CodeConfigurationParameters,
+        ?channel_parameters: Types::ChannelParameters,
+        ?deletion_protection_enabled: bool,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notify_code_configuration_id: String?
+      attr_accessor notify_code_configuration_arn: String?
+      attr_accessor notify_code_configuration_name: String?
+      attr_accessor code_configuration_parameters: Types::CodeConfigurationParameters?
+      attr_accessor channel_parameters: Types::ChannelParameters?
+      attr_accessor deletion_protection_enabled: bool?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class NotifyParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notify_template_id: String,
+        ?voice_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notify_template_id: String?
+      attr_accessor voice_id: String?
+    end
+
+    module OnAttributeConflict
+      REPLACE: String
+      PRESERVE: String
+    end
+
+    class RegistrationAssociationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registration_id: String,
+        ?registration_type: String,
+        ?created_at: Time,
+        ?smart_match_used: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registration_id: String?
+      attr_accessor registration_type: String?
+      attr_accessor created_at: Time?
+      attr_accessor smart_match_used: bool?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class SendNotifyCodeVerificationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel: String,
+        ?destination_identity: String,
+        ?origination_identity: String,
+        ?notify_code_configuration: String,
+        ?override_channel_parameters: Types::ChannelParameters,
+        ?override_code_configuration_parameters: Types::CodeConfigurationParameters,
+        ?configuration_set_name: String,
+        ?context: Hash[String, String],
+        ?reference_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel: String?
+      attr_accessor destination_identity: String?
+      attr_accessor origination_identity: String?
+      attr_accessor notify_code_configuration: String?
+      attr_accessor override_channel_parameters: Types::ChannelParameters?
+      attr_accessor override_code_configuration_parameters: Types::CodeConfigurationParameters?
+      attr_accessor configuration_set_name: String?
+      attr_accessor context: Hash[String, String]?
+      attr_accessor reference_id: String?
+    end
+
+    class SendNotifyCodeVerificationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?verification_id: String,
+        ?message_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor verification_id: String?
+      attr_accessor message_id: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module Status
+      ACTIVE: String
+      BLOCKED: String
+      PAUSED: String
+      CANCELLED: String
+      FAILED: String
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TextParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?inline_template_body: String,
+        ?destination_country_parameters: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor inline_template_body: String?
+      attr_accessor destination_country_parameters: Hash[String, String]?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateBrandProfileAttributeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?brand_profile_id: String,
+        ?attribute_name: String,
+        ?attribute_value: String,
+        ?attachment_body: String,
+        ?description: String,
+        ?category: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor brand_profile_id: String?
+      attr_accessor attribute_name: String?
+      attr_accessor attribute_value: String?
+      attr_accessor attachment_body: String?
+      attr_accessor description: String?
+      attr_accessor category: String?
+    end
+
+    class UpdateBrandProfileAttributeOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attribute_name: String,
+        ?attribute_type: String,
+        ?attribute_value: String,
+        ?description: String,
+        ?category: String,
+        ?media_content_type: String,
+        ?media_size_bytes: Integer,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute_name: String?
+      attr_accessor attribute_type: String?
+      attr_accessor attribute_value: String?
+      attr_accessor description: String?
+      attr_accessor category: String?
+      attr_accessor media_content_type: String?
+      attr_accessor media_size_bytes: Integer?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class UpdateBrandProfileFromRegistrationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?brand_profile_id: String,
+        ?registration_id: String,
+        ?smart_match: bool,
+        ?on_attribute_conflict: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor brand_profile_id: String?
+      attr_accessor registration_id: String?
+      attr_accessor smart_match: bool?
+      attr_accessor on_attribute_conflict: String?
+      attr_accessor client_token: String?
+    end
+
+    class UpdateBrandProfileFromRegistrationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?results: Array[Types::JobResult],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor results: Array[Types::JobResult]?
+    end
+
+    class UpdateBrandProfileInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?brand_profile_id: String,
+        ?brand_profile_name: String,
+        ?deletion_protection_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor brand_profile_id: String?
+      attr_accessor brand_profile_name: String?
+      attr_accessor deletion_protection_enabled: bool?
+    end
+
+    class UpdateBrandProfileOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?brand_profile_id: String,
+        ?brand_profile_arn: String,
+        ?brand_profile_name: String,
+        ?status: String,
+        ?deletion_protection_enabled: bool,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor brand_profile_id: String?
+      attr_accessor brand_profile_arn: String?
+      attr_accessor brand_profile_name: String?
+      attr_accessor status: String?
+      attr_accessor deletion_protection_enabled: bool?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class UpdateChannelParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?text: Types::UpdateTextParameters,
+        ?voice: Types::UpdateVoiceParameters,
+        ?notify: Types::UpdateNotifyParameters,
+        ?whats_app: Types::UpdateWhatsAppParameters,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor text: Types::UpdateTextParameters?
+      attr_accessor voice: Types::UpdateVoiceParameters?
+      attr_accessor notify: Types::UpdateNotifyParameters?
+      attr_accessor whats_app: Types::UpdateWhatsAppParameters?
+    end
+
+    class UpdateCodeConfigurationParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code_type: String,
+        ?code_length: Integer,
+        ?validity_period_minutes: Integer,
+        ?max_attempts: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code_type: String?
+      attr_accessor code_length: Integer?
+      attr_accessor validity_period_minutes: Integer?
+      attr_accessor max_attempts: Integer?
+    end
+
+    class UpdateNotifyCodeConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notify_code_configuration_id: String,
+        ?notify_code_configuration_name: String,
+        ?code_configuration_parameters: Types::UpdateCodeConfigurationParameters,
+        ?channel_parameters: Types::UpdateChannelParameters,
+        ?deletion_protection_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notify_code_configuration_id: String?
+      attr_accessor notify_code_configuration_name: String?
+      attr_accessor code_configuration_parameters: Types::UpdateCodeConfigurationParameters?
+      attr_accessor channel_parameters: Types::UpdateChannelParameters?
+      attr_accessor deletion_protection_enabled: bool?
+    end
+
+    class UpdateNotifyCodeConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notify_code_configuration: Types::NotifyCodeConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notify_code_configuration: Types::NotifyCodeConfiguration?
+    end
+
+    class UpdateNotifyParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notify_template_id: String,
+        ?voice_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notify_template_id: String?
+      attr_accessor voice_id: String?
+    end
+
+    class UpdateRegistrationsFromBrandProfileInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?brand_profile_id: String,
+        ?registration_ids: Array[String],
+        ?smart_match: bool,
+        ?on_attribute_conflict: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor brand_profile_id: String?
+      attr_accessor registration_ids: Array[String]?
+      attr_accessor smart_match: bool?
+      attr_accessor on_attribute_conflict: String?
+      attr_accessor client_token: String?
+    end
+
+    class UpdateRegistrationsFromBrandProfileOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?results: Array[Types::JobResult],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor results: Array[Types::JobResult]?
+    end
+
+    class UpdateTextParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?inline_template_body: String,
+        ?destination_country_parameters: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor inline_template_body: String?
+      attr_accessor destination_country_parameters: Hash[String, String]?
+    end
+
+    class UpdateVoiceParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?inline_template_body: String,
+        ?language_code: String,
+        ?voice_id: String,
+        ?voice_message_body_text_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor inline_template_body: String?
+      attr_accessor language_code: String?
+      attr_accessor voice_id: String?
+      attr_accessor voice_message_body_text_type: String?
+    end
+
+    class UpdateWhatsAppParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?whats_app_template_name: String,
+        ?language_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor whats_app_template_name: String?
+      attr_accessor language_code: String?
+    end
+
+    class ValidateNotifyCodeVerificationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination_identity: String,
+        ?reference_id: String,
+        ?code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination_identity: String?
+      attr_accessor reference_id: String?
+      attr_accessor code: String?
+    end
+
+    class ValidateNotifyCodeVerificationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?field_list: Array[Types::ValidationExceptionField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor field_list: Array[Types::ValidationExceptionField]?
+    end
+
+    class ValidationExceptionField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?path: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor path: String?
+      attr_accessor message: String?
+    end
+
+    module VerificationStatus
+      VALID: String
+      INVALID: String
+    end
+
+    module VoiceMessageBodyTextType
+      TEXT: String
+      SSML: String
+    end
+
+    class VoiceParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?inline_template_body: String,
+        ?language_code: String,
+        ?voice_id: String,
+        ?voice_message_body_text_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor inline_template_body: String?
+      attr_accessor language_code: String?
+      attr_accessor voice_id: String?
+      attr_accessor voice_message_body_text_type: String?
+    end
+
+    class WhatsAppParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?whats_app_template_name: String,
+        ?language_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor whats_app_template_name: String?
+      attr_accessor language_code: String?
+    end
+  end
+end

@@ -6,6 +6,7 @@ module Aws::SecurityHub
   # This module contains a schema composed of shapes used by the client.
   module Schema
 
+    AIDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#AIDetails", name: "AIDetails")
     AcceptAdministratorInvitationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#AcceptAdministratorInvitationRequest", name: "AcceptAdministratorInvitationRequest")
     AcceptAdministratorInvitationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#AcceptAdministratorInvitationResponse", name: "AcceptAdministratorInvitationResponse")
     AcceptInvitationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#AcceptInvitationRequest", name: "AcceptInvitationRequest")
@@ -13,6 +14,8 @@ module Aws::SecurityHub
     AccessDeniedException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#AccessDeniedException", name: "AccessDeniedException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 403})
     AccountDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#AccountDetails", name: "AccountDetails")
     AccountDetailsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#AccountDetailsList", name: "AccountDetailsList", traits: {"smithy.api#length" => {"min" => 1, "max" => 50}})
+    AccountFreeTrialStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#AccountFreeTrialStatus", name: "AccountFreeTrialStatus")
+    AccountFreeTrialStatusList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#AccountFreeTrialStatusList", name: "AccountFreeTrialStatusList", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}})
     AccountId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.securityhub#AccountId", name: "AccountId")
     AccountIdList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#AccountIdList", name: "AccountIdList")
     Action = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#Action", name: "Action")
@@ -65,6 +68,7 @@ module Aws::SecurityHub
     AutomationRulesMetadataList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#AutomationRulesMetadataList", name: "AutomationRulesMetadataList")
     AutomationRulesMetadataListV2 = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#AutomationRulesMetadataListV2", name: "AutomationRulesMetadataListV2")
     AutomationRulesMetadataV2 = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#AutomationRulesMetadataV2", name: "AutomationRulesMetadataV2")
+    AutomationRulesResourceFieldsUpdateV2 = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#AutomationRulesResourceFieldsUpdateV2", name: "AutomationRulesResourceFieldsUpdateV2")
     AvailabilityZone = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#AvailabilityZone", name: "AvailabilityZone")
     AvailabilityZones = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#AvailabilityZones", name: "AvailabilityZones")
     AwsAmazonMqBrokerDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#AwsAmazonMqBrokerDetails", name: "AwsAmazonMqBrokerDetails")
@@ -536,6 +540,8 @@ module Aws::SecurityHub
     AwsOpenSearchServiceDomainNodeToNodeEncryptionOptionsDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#AwsOpenSearchServiceDomainNodeToNodeEncryptionOptionsDetails", name: "AwsOpenSearchServiceDomainNodeToNodeEncryptionOptionsDetails")
     AwsOpenSearchServiceDomainServiceSoftwareOptionsDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#AwsOpenSearchServiceDomainServiceSoftwareOptionsDetails", name: "AwsOpenSearchServiceDomainServiceSoftwareOptionsDetails")
     AwsOpenSearchServiceDomainVpcOptionsDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#AwsOpenSearchServiceDomainVpcOptionsDetails", name: "AwsOpenSearchServiceDomainVpcOptionsDetails")
+    AwsOrganizationScope = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#AwsOrganizationScope", name: "AwsOrganizationScope")
+    AwsOrganizationScopeList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#AwsOrganizationScopeList", name: "AwsOrganizationScopeList")
     AwsRdsDbClusterAssociatedRole = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#AwsRdsDbClusterAssociatedRole", name: "AwsRdsDbClusterAssociatedRole")
     AwsRdsDbClusterAssociatedRoles = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#AwsRdsDbClusterAssociatedRoles", name: "AwsRdsDbClusterAssociatedRoles")
     AwsRdsDbClusterDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#AwsRdsDbClusterDetails", name: "AwsRdsDbClusterDetails")
@@ -716,6 +722,12 @@ module Aws::SecurityHub
     AwsWafv2WebAclCaptchaConfigImmunityTimePropertyDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#AwsWafv2WebAclCaptchaConfigImmunityTimePropertyDetails", name: "AwsWafv2WebAclCaptchaConfigImmunityTimePropertyDetails")
     AwsWafv2WebAclDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#AwsWafv2WebAclDetails", name: "AwsWafv2WebAclDetails")
     AwsXrayEncryptionConfigDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#AwsXrayEncryptionConfigDetails", name: "AwsXrayEncryptionConfigDetails")
+    AzureDetail = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#AzureDetail", name: "AzureDetail")
+    AzureProviderConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#AzureProviderConfiguration", name: "AzureProviderConfiguration")
+    AzureRegionList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#AzureRegionList", name: "AzureRegionList", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
+    AzureResourceDetails = ::Smithy::Schema::Shapes::DocumentShape.new(id: "com.amazonaws.securityhub#AzureResourceDetails", name: "AzureResourceDetails")
+    AzureScopeConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#AzureScopeConfiguration", name: "AzureScopeConfiguration")
+    AzureUpdateConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#AzureUpdateConfiguration", name: "AzureUpdateConfiguration")
     BatchDeleteAutomationRulesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#BatchDeleteAutomationRulesRequest", name: "BatchDeleteAutomationRulesRequest")
     BatchDeleteAutomationRulesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#BatchDeleteAutomationRulesResponse", name: "BatchDeleteAutomationRulesResponse")
     BatchDisableStandardsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#BatchDisableStandardsRequest", name: "BatchDisableStandardsRequest")
@@ -752,6 +764,8 @@ module Aws::SecurityHub
     BooleanConfigurationOptions = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#BooleanConfigurationOptions", name: "BooleanConfigurationOptions")
     BooleanFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#BooleanFilter", name: "BooleanFilter")
     BooleanFilterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#BooleanFilterList", name: "BooleanFilterList")
+    CancelExportJobV2Request = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#CancelExportJobV2Request", name: "CancelExportJobV2Request")
+    CancelExportJobV2Response = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#CancelExportJobV2Response", name: "CancelExportJobV2Response")
     CategoryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#CategoryList", name: "CategoryList")
     Cell = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#Cell", name: "Cell")
     Cells = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#Cells", name: "Cells")
@@ -761,6 +775,7 @@ module Aws::SecurityHub
     ClassificationResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#ClassificationResult", name: "ClassificationResult")
     ClassificationStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#ClassificationStatus", name: "ClassificationStatus")
     ClientToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.securityhub#ClientToken", name: "ClientToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 63}, "smithy.api#pattern" => "^[\\x21-\\x7E]{1,64}$"})
+    CloudProviderName = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.securityhub#CloudProviderName", name: "CloudProviderName")
     CloudWatchLogsLogGroupArnConfigDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#CloudWatchLogsLogGroupArnConfigDetails", name: "CloudWatchLogsLogGroupArnConfigDetails")
     CodeRepositoryDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#CodeRepositoryDetails", name: "CodeRepositoryDetails")
     CodeVulnerabilitiesFilePath = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#CodeVulnerabilitiesFilePath", name: "CodeVulnerabilitiesFilePath")
@@ -781,8 +796,6 @@ module Aws::SecurityHub
     ConnectionDirection = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.securityhub#ConnectionDirection", name: "ConnectionDirection")
     ConnectorAuthStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.securityhub#ConnectorAuthStatus", name: "ConnectorAuthStatus")
     ConnectorProviderName = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.securityhub#ConnectorProviderName", name: "ConnectorProviderName")
-    ConnectorRegistrationsV2Request = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#ConnectorRegistrationsV2Request", name: "ConnectorRegistrationsV2Request")
-    ConnectorRegistrationsV2Response = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#ConnectorRegistrationsV2Response", name: "ConnectorRegistrationsV2Response")
     ConnectorStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.securityhub#ConnectorStatus", name: "ConnectorStatus")
     ConnectorSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#ConnectorSummary", name: "ConnectorSummary")
     ConnectorSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#ConnectorSummaryList", name: "ConnectorSummaryList")
@@ -800,6 +813,8 @@ module Aws::SecurityHub
     CreateAutomationRuleV2Response = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#CreateAutomationRuleV2Response", name: "CreateAutomationRuleV2Response")
     CreateConfigurationPolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#CreateConfigurationPolicyRequest", name: "CreateConfigurationPolicyRequest")
     CreateConfigurationPolicyResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#CreateConfigurationPolicyResponse", name: "CreateConfigurationPolicyResponse")
+    CreateConnectorRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#CreateConnectorRequest", name: "CreateConnectorRequest")
+    CreateConnectorResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#CreateConnectorResponse", name: "CreateConnectorResponse")
     CreateConnectorV2Request = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#CreateConnectorV2Request", name: "CreateConnectorV2Request")
     CreateConnectorV2Response = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#CreateConnectorV2Response", name: "CreateConnectorV2Response")
     CreateFindingAggregatorRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#CreateFindingAggregatorRequest", name: "CreateFindingAggregatorRequest")
@@ -811,7 +826,20 @@ module Aws::SecurityHub
     CreateTicketV2Request = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#CreateTicketV2Request", name: "CreateTicketV2Request")
     CreateTicketV2Response = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#CreateTicketV2Response", name: "CreateTicketV2Response")
     Criteria = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.securityhub#Criteria", name: "Criteria")
+    CriticalitySource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#CriticalitySource", name: "CriticalitySource")
+    CriticalitySourceList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#CriticalitySourceList", name: "CriticalitySourceList", traits: {"smithy.api#length" => {"min" => 0, "max" => 3}})
+    CriticalitySourceType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.securityhub#CriticalitySourceType", name: "CriticalitySourceType")
     CrossAccountMaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.securityhub#CrossAccountMaxResults", name: "CrossAccountMaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 50}})
+    CspmConnectorProviderName = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.securityhub#CspmConnectorProviderName", name: "CspmConnectorProviderName")
+    CspmConnectorStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.securityhub#CspmConnectorStatus", name: "CspmConnectorStatus")
+    CspmConnectorSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#CspmConnectorSummary", name: "CspmConnectorSummary")
+    CspmConnectorSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#CspmConnectorSummaryList", name: "CspmConnectorSummaryList")
+    CspmEnablementStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.securityhub#CspmEnablementStatus", name: "CspmEnablementStatus")
+    CspmHealthCheck = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#CspmHealthCheck", name: "CspmHealthCheck")
+    CspmProviderConfiguration = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.securityhub#CspmProviderConfiguration", name: "CspmProviderConfiguration")
+    CspmProviderDetail = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.securityhub#CspmProviderDetail", name: "CspmProviderDetail")
+    CspmProviderSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#CspmProviderSummary", name: "CspmProviderSummary")
+    CspmProviderUpdateConfiguration = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.securityhub#CspmProviderUpdateConfiguration", name: "CspmProviderUpdateConfiguration")
     CustomDataIdentifiersDetections = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#CustomDataIdentifiersDetections", name: "CustomDataIdentifiersDetections")
     CustomDataIdentifiersDetectionsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#CustomDataIdentifiersDetectionsList", name: "CustomDataIdentifiersDetectionsList")
     CustomDataIdentifiersResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#CustomDataIdentifiersResult", name: "CustomDataIdentifiersResult")
@@ -822,6 +850,7 @@ module Aws::SecurityHub
     DateFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#DateFilter", name: "DateFilter")
     DateFilterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#DateFilterList", name: "DateFilterList")
     DateRange = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#DateRange", name: "DateRange")
+    DateRangeComparison = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.securityhub#DateRangeComparison", name: "DateRangeComparison")
     DateRangeUnit = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.securityhub#DateRangeUnit", name: "DateRangeUnit")
     DeclineInvitationsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#DeclineInvitationsRequest", name: "DeclineInvitationsRequest")
     DeclineInvitationsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#DeclineInvitationsResponse", name: "DeclineInvitationsResponse")
@@ -833,6 +862,8 @@ module Aws::SecurityHub
     DeleteAutomationRuleV2Response = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#DeleteAutomationRuleV2Response", name: "DeleteAutomationRuleV2Response")
     DeleteConfigurationPolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#DeleteConfigurationPolicyRequest", name: "DeleteConfigurationPolicyRequest")
     DeleteConfigurationPolicyResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#DeleteConfigurationPolicyResponse", name: "DeleteConfigurationPolicyResponse")
+    DeleteConnectorRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#DeleteConnectorRequest", name: "DeleteConnectorRequest")
+    DeleteConnectorResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#DeleteConnectorResponse", name: "DeleteConnectorResponse")
     DeleteConnectorV2Request = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#DeleteConnectorV2Request", name: "DeleteConnectorV2Request")
     DeleteConnectorV2Response = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#DeleteConnectorV2Response", name: "DeleteConnectorV2Response")
     DeleteFindingAggregatorRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#DeleteFindingAggregatorRequest", name: "DeleteFindingAggregatorRequest")
@@ -864,6 +895,8 @@ module Aws::SecurityHub
     DisableImportFindingsForProductResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#DisableImportFindingsForProductResponse", name: "DisableImportFindingsForProductResponse")
     DisableOrganizationAdminAccountRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#DisableOrganizationAdminAccountRequest", name: "DisableOrganizationAdminAccountRequest")
     DisableOrganizationAdminAccountResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#DisableOrganizationAdminAccountResponse", name: "DisableOrganizationAdminAccountResponse")
+    DisableSecurityHubFeatureV2Request = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#DisableSecurityHubFeatureV2Request", name: "DisableSecurityHubFeatureV2Request")
+    DisableSecurityHubFeatureV2Response = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#DisableSecurityHubFeatureV2Response", name: "DisableSecurityHubFeatureV2Response")
     DisableSecurityHubRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#DisableSecurityHubRequest", name: "DisableSecurityHubRequest")
     DisableSecurityHubResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#DisableSecurityHubResponse", name: "DisableSecurityHubResponse")
     DisableSecurityHubV2Request = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#DisableSecurityHubV2Request", name: "DisableSecurityHubV2Request")
@@ -875,6 +908,7 @@ module Aws::SecurityHub
     DisassociateFromMasterAccountResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#DisassociateFromMasterAccountResponse", name: "DisassociateFromMasterAccountResponse")
     DisassociateMembersRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#DisassociateMembersRequest", name: "DisassociateMembersRequest")
     DisassociateMembersResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#DisassociateMembersResponse", name: "DisassociateMembersResponse")
+    DiscoveryType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.securityhub#DiscoveryType", name: "DiscoveryType")
     DnsRequestAction = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#DnsRequestAction", name: "DnsRequestAction")
     Double = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.securityhub#Double", name: "Double")
     DoubleConfigurationOptions = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#DoubleConfigurationOptions", name: "DoubleConfigurationOptions")
@@ -882,15 +916,39 @@ module Aws::SecurityHub
     EnableImportFindingsForProductResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#EnableImportFindingsForProductResponse", name: "EnableImportFindingsForProductResponse")
     EnableOrganizationAdminAccountRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#EnableOrganizationAdminAccountRequest", name: "EnableOrganizationAdminAccountRequest")
     EnableOrganizationAdminAccountResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#EnableOrganizationAdminAccountResponse", name: "EnableOrganizationAdminAccountResponse")
+    EnableSecurityHubFeatureV2Request = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#EnableSecurityHubFeatureV2Request", name: "EnableSecurityHubFeatureV2Request")
+    EnableSecurityHubFeatureV2Response = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#EnableSecurityHubFeatureV2Response", name: "EnableSecurityHubFeatureV2Response")
     EnableSecurityHubRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#EnableSecurityHubRequest", name: "EnableSecurityHubRequest")
     EnableSecurityHubResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#EnableSecurityHubResponse", name: "EnableSecurityHubResponse")
     EnableSecurityHubV2Request = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#EnableSecurityHubV2Request", name: "EnableSecurityHubV2Request")
     EnableSecurityHubV2Response = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#EnableSecurityHubV2Response", name: "EnableSecurityHubV2Response")
     EnabledSecurityControlIdentifierList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#EnabledSecurityControlIdentifierList", name: "EnabledSecurityControlIdentifierList")
     EnabledStandardIdentifierList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#EnabledStandardIdentifierList", name: "EnabledStandardIdentifierList")
+    EnablementStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.securityhub#EnablementStatus", name: "EnablementStatus")
     EnumConfigurationOptions = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#EnumConfigurationOptions", name: "EnumConfigurationOptions")
     EnumListConfigurationOptions = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#EnumListConfigurationOptions", name: "EnumListConfigurationOptions")
+    ExportDataType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.securityhub#ExportDataType", name: "ExportDataType")
+    ExportDestination = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.securityhub#ExportDestination", name: "ExportDestination")
+    ExportFailureCode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.securityhub#ExportFailureCode", name: "ExportFailureCode")
+    ExportJobId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.securityhub#ExportJobId", name: "ExportJobId", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[a-z0-9]+$"})
+    ExportMaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.securityhub#ExportMaxResults", name: "ExportMaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 20}})
+    ExportName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.securityhub#ExportName", name: "ExportName", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}})
+    ExportOutput = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.securityhub#ExportOutput", name: "ExportOutput")
+    ExportOutputSummary = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.securityhub#ExportOutputSummary", name: "ExportOutputSummary")
+    ExportScopes = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#ExportScopes", name: "ExportScopes")
+    ExportStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.securityhub#ExportStatus", name: "ExportStatus")
+    ExportSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#ExportSummary", name: "ExportSummary")
+    ExportSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#ExportSummaryList", name: "ExportSummaryList")
+    ExposureFinding = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#ExposureFinding", name: "ExposureFinding")
+    ExposureFindingItemsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#ExposureFindingItemsList", name: "ExposureFindingItemsList", traits: {"smithy.api#length" => {"min" => 0, "max" => 1000}})
+    ExposureImpact = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.securityhub#ExposureImpact", name: "ExposureImpact")
+    ExposureSeverity = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.securityhub#ExposureSeverity", name: "ExposureSeverity")
     ExternalIntegrationConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#ExternalIntegrationConfiguration", name: "ExternalIntegrationConfiguration")
+    FeatureDetail = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#FeatureDetail", name: "FeatureDetail")
+    FeatureName = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.securityhub#FeatureName", name: "FeatureName")
+    FeatureNameKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.securityhub#FeatureNameKey", name: "FeatureNameKey")
+    FeatureStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.securityhub#FeatureStatus", name: "FeatureStatus")
+    Features = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.securityhub#Features", name: "Features")
     FieldMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.securityhub#FieldMap", name: "FieldMap")
     FilePathList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#FilePathList", name: "FilePathList")
     FilePaths = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#FilePaths", name: "FilePaths")
@@ -904,6 +962,18 @@ module Aws::SecurityHub
     FindingHistoryUpdatesList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#FindingHistoryUpdatesList", name: "FindingHistoryUpdatesList")
     FindingProviderFields = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#FindingProviderFields", name: "FindingProviderFields")
     FindingProviderSeverity = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#FindingProviderSeverity", name: "FindingProviderSeverity")
+    FindingScopes = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#FindingScopes", name: "FindingScopes")
+    FindingsExportFormat = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.securityhub#FindingsExportFormat", name: "FindingsExportFormat")
+    FindingsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#FindingsOutput", name: "FindingsOutput")
+    FindingsOutputSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#FindingsOutputSummary", name: "FindingsOutputSummary")
+    FindingsSelectableField = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.securityhub#FindingsSelectableField", name: "FindingsSelectableField")
+    FindingsSelectedFieldList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#FindingsSelectedFieldList", name: "FindingsSelectedFieldList", traits: {"smithy.api#length" => {"min" => 1, "max" => 50}})
+    FindingsTrendsCompositeFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#FindingsTrendsCompositeFilter", name: "FindingsTrendsCompositeFilter")
+    FindingsTrendsCompositeFilterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#FindingsTrendsCompositeFilterList", name: "FindingsTrendsCompositeFilterList")
+    FindingsTrendsFilters = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#FindingsTrendsFilters", name: "FindingsTrendsFilters")
+    FindingsTrendsStringField = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.securityhub#FindingsTrendsStringField", name: "FindingsTrendsStringField")
+    FindingsTrendsStringFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#FindingsTrendsStringFilter", name: "FindingsTrendsStringFilter")
+    FindingsTrendsStringFilterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#FindingsTrendsStringFilterList", name: "FindingsTrendsStringFilterList")
     FirewallPolicyDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#FirewallPolicyDetails", name: "FirewallPolicyDetails")
     FirewallPolicyStatefulRuleGroupReferencesDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#FirewallPolicyStatefulRuleGroupReferencesDetails", name: "FirewallPolicyStatefulRuleGroupReferencesDetails")
     FirewallPolicyStatefulRuleGroupReferencesList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#FirewallPolicyStatefulRuleGroupReferencesList", name: "FirewallPolicyStatefulRuleGroupReferencesList")
@@ -911,6 +981,15 @@ module Aws::SecurityHub
     FirewallPolicyStatelessCustomActionsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#FirewallPolicyStatelessCustomActionsList", name: "FirewallPolicyStatelessCustomActionsList")
     FirewallPolicyStatelessRuleGroupReferencesDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#FirewallPolicyStatelessRuleGroupReferencesDetails", name: "FirewallPolicyStatelessRuleGroupReferencesDetails")
     FirewallPolicyStatelessRuleGroupReferencesList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#FirewallPolicyStatelessRuleGroupReferencesList", name: "FirewallPolicyStatelessRuleGroupReferencesList")
+    FreeTrialAccountId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.securityhub#FreeTrialAccountId", name: "FreeTrialAccountId", traits: {"smithy.api#pattern" => "^[0-9]{12}$"})
+    FreeTrialAccountIdList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#FreeTrialAccountIdList", name: "FreeTrialAccountIdList", traits: {"smithy.api#length" => {"min" => 1, "max" => 50}})
+    FreeTrialStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#FreeTrialStatus", name: "FreeTrialStatus")
+    FreeTrialStatusList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#FreeTrialStatusList", name: "FreeTrialStatusList", traits: {"smithy.api#length" => {"min" => 0, "max" => 50}})
+    FreeTrialStatusValue = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.securityhub#FreeTrialStatusValue", name: "FreeTrialStatusValue")
+    FreeTrialStatusValueList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#FreeTrialStatusValueList", name: "FreeTrialStatusValueList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
+    FreeTrialType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.securityhub#FreeTrialType", name: "FreeTrialType")
+    GenerateRecommendedPolicyV2Request = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#GenerateRecommendedPolicyV2Request", name: "GenerateRecommendedPolicyV2Request")
+    GenerateRecommendedPolicyV2Response = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#GenerateRecommendedPolicyV2Response", name: "GenerateRecommendedPolicyV2Response")
     GeneratorDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#GeneratorDetails", name: "GeneratorDetails")
     GeoLocation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#GeoLocation", name: "GeoLocation")
     GetAdministratorAccountRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#GetAdministratorAccountRequest", name: "GetAdministratorAccountRequest")
@@ -923,10 +1002,14 @@ module Aws::SecurityHub
     GetConfigurationPolicyAssociationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#GetConfigurationPolicyAssociationResponse", name: "GetConfigurationPolicyAssociationResponse")
     GetConfigurationPolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#GetConfigurationPolicyRequest", name: "GetConfigurationPolicyRequest")
     GetConfigurationPolicyResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#GetConfigurationPolicyResponse", name: "GetConfigurationPolicyResponse")
+    GetConnectorRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#GetConnectorRequest", name: "GetConnectorRequest")
+    GetConnectorResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#GetConnectorResponse", name: "GetConnectorResponse")
     GetConnectorV2Request = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#GetConnectorV2Request", name: "GetConnectorV2Request")
     GetConnectorV2Response = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#GetConnectorV2Response", name: "GetConnectorV2Response")
     GetEnabledStandardsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#GetEnabledStandardsRequest", name: "GetEnabledStandardsRequest")
     GetEnabledStandardsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#GetEnabledStandardsResponse", name: "GetEnabledStandardsResponse")
+    GetExportJobV2Request = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#GetExportJobV2Request", name: "GetExportJobV2Request")
+    GetExportJobV2Response = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#GetExportJobV2Response", name: "GetExportJobV2Response")
     GetFindingAggregatorRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#GetFindingAggregatorRequest", name: "GetFindingAggregatorRequest")
     GetFindingAggregatorResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#GetFindingAggregatorResponse", name: "GetFindingAggregatorResponse")
     GetFindingHistoryRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#GetFindingHistoryRequest", name: "GetFindingHistoryRequest")
@@ -935,6 +1018,8 @@ module Aws::SecurityHub
     GetFindingStatisticsV2Response = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#GetFindingStatisticsV2Response", name: "GetFindingStatisticsV2Response")
     GetFindingsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#GetFindingsRequest", name: "GetFindingsRequest")
     GetFindingsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#GetFindingsResponse", name: "GetFindingsResponse")
+    GetFindingsTrendsV2Request = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#GetFindingsTrendsV2Request", name: "GetFindingsTrendsV2Request")
+    GetFindingsTrendsV2Response = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#GetFindingsTrendsV2Response", name: "GetFindingsTrendsV2Response")
     GetFindingsV2Request = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#GetFindingsV2Request", name: "GetFindingsV2Request")
     GetFindingsV2Response = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#GetFindingsV2Response", name: "GetFindingsV2Response")
     GetInsightResultsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#GetInsightResultsRequest", name: "GetInsightResultsRequest")
@@ -947,12 +1032,19 @@ module Aws::SecurityHub
     GetMasterAccountResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#GetMasterAccountResponse", name: "GetMasterAccountResponse")
     GetMembersRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#GetMembersRequest", name: "GetMembersRequest")
     GetMembersResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#GetMembersResponse", name: "GetMembersResponse")
+    GetRecommendedPolicyV2Request = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#GetRecommendedPolicyV2Request", name: "GetRecommendedPolicyV2Request")
+    GetRecommendedPolicyV2Response = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#GetRecommendedPolicyV2Response", name: "GetRecommendedPolicyV2Response")
+    GetRemediationsV2Request = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#GetRemediationsV2Request", name: "GetRemediationsV2Request")
+    GetRemediationsV2Response = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#GetRemediationsV2Response", name: "GetRemediationsV2Response")
     GetResourcesStatisticsV2Request = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#GetResourcesStatisticsV2Request", name: "GetResourcesStatisticsV2Request")
     GetResourcesStatisticsV2Response = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#GetResourcesStatisticsV2Response", name: "GetResourcesStatisticsV2Response")
+    GetResourcesTrendsV2Request = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#GetResourcesTrendsV2Request", name: "GetResourcesTrendsV2Request")
+    GetResourcesTrendsV2Response = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#GetResourcesTrendsV2Response", name: "GetResourcesTrendsV2Response")
     GetResourcesV2Request = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#GetResourcesV2Request", name: "GetResourcesV2Request")
     GetResourcesV2Response = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#GetResourcesV2Response", name: "GetResourcesV2Response")
     GetSecurityControlDefinitionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#GetSecurityControlDefinitionRequest", name: "GetSecurityControlDefinitionRequest")
     GetSecurityControlDefinitionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#GetSecurityControlDefinitionResponse", name: "GetSecurityControlDefinitionResponse")
+    GranularityField = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.securityhub#GranularityField", name: "GranularityField")
     GroupByField = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.securityhub#GroupByField", name: "GroupByField")
     GroupByResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#GroupByResult", name: "GroupByResult")
     GroupByResults = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#GroupByResults", name: "GroupByResults")
@@ -960,7 +1052,11 @@ module Aws::SecurityHub
     GroupByRules = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#GroupByRules", name: "GroupByRules")
     GroupByValue = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#GroupByValue", name: "GroupByValue")
     GroupByValues = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#GroupByValues", name: "GroupByValues")
+    GuidanceFormat = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.securityhub#GuidanceFormat", name: "GuidanceFormat")
     HealthCheck = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#HealthCheck", name: "HealthCheck")
+    HealthIssue = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#HealthIssue", name: "HealthIssue")
+    HealthIssueCode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.securityhub#HealthIssueCode", name: "HealthIssueCode")
+    HealthIssueList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#HealthIssueList", name: "HealthIssueList")
     IcmpTypeCode = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#IcmpTypeCode", name: "IcmpTypeCode")
     ImportFindingsError = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#ImportFindingsError", name: "ImportFindingsError")
     ImportFindingsErrorList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#ImportFindingsErrorList", name: "ImportFindingsErrorList")
@@ -992,9 +1088,12 @@ module Aws::SecurityHub
     IpOrganizationDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#IpOrganizationDetails", name: "IpOrganizationDetails")
     Ipv6CidrBlockAssociation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#Ipv6CidrBlockAssociation", name: "Ipv6CidrBlockAssociation")
     Ipv6CidrBlockAssociationList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#Ipv6CidrBlockAssociationList", name: "Ipv6CidrBlockAssociationList")
+    IsoString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.securityhub#IsoString", name: "IsoString")
     JiraCloudDetail = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#JiraCloudDetail", name: "JiraCloudDetail")
     JiraCloudProviderConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#JiraCloudProviderConfiguration", name: "JiraCloudProviderConfiguration")
     JiraCloudUpdateConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#JiraCloudUpdateConfiguration", name: "JiraCloudUpdateConfiguration")
+    KbArticle = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#KbArticle", name: "KbArticle")
+    KbArticleList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#KbArticleList", name: "KbArticleList", traits: {"smithy.api#length" => {"min" => 0, "max" => 10}})
     KeywordFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#KeywordFilter", name: "KeywordFilter")
     KeywordFilterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#KeywordFilterList", name: "KeywordFilterList")
     LimitExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#LimitExceededException", name: "LimitExceededException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 429})
@@ -1008,12 +1107,20 @@ module Aws::SecurityHub
     ListConfigurationPoliciesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#ListConfigurationPoliciesResponse", name: "ListConfigurationPoliciesResponse")
     ListConfigurationPolicyAssociationsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#ListConfigurationPolicyAssociationsRequest", name: "ListConfigurationPolicyAssociationsRequest")
     ListConfigurationPolicyAssociationsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#ListConfigurationPolicyAssociationsResponse", name: "ListConfigurationPolicyAssociationsResponse")
+    ListConnectorsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#ListConnectorsRequest", name: "ListConnectorsRequest")
+    ListConnectorsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#ListConnectorsResponse", name: "ListConnectorsResponse")
     ListConnectorsV2Request = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#ListConnectorsV2Request", name: "ListConnectorsV2Request")
     ListConnectorsV2Response = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#ListConnectorsV2Response", name: "ListConnectorsV2Response")
     ListEnabledProductsForImportRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#ListEnabledProductsForImportRequest", name: "ListEnabledProductsForImportRequest")
     ListEnabledProductsForImportResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#ListEnabledProductsForImportResponse", name: "ListEnabledProductsForImportResponse")
+    ListExportJobsV2Request = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#ListExportJobsV2Request", name: "ListExportJobsV2Request")
+    ListExportJobsV2Response = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#ListExportJobsV2Response", name: "ListExportJobsV2Response")
+    ListExposuresByRemediationV2Request = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#ListExposuresByRemediationV2Request", name: "ListExposuresByRemediationV2Request")
+    ListExposuresByRemediationV2Response = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#ListExposuresByRemediationV2Response", name: "ListExposuresByRemediationV2Response")
     ListFindingAggregatorsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#ListFindingAggregatorsRequest", name: "ListFindingAggregatorsRequest")
     ListFindingAggregatorsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#ListFindingAggregatorsResponse", name: "ListFindingAggregatorsResponse")
+    ListFreeTrialStatusesV2Request = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#ListFreeTrialStatusesV2Request", name: "ListFreeTrialStatusesV2Request")
+    ListFreeTrialStatusesV2Response = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#ListFreeTrialStatusesV2Response", name: "ListFreeTrialStatusesV2Response")
     ListInvitationsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#ListInvitationsRequest", name: "ListInvitationsRequest")
     ListInvitationsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#ListInvitationsResponse", name: "ListInvitationsResponse")
     ListMembersRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#ListMembersRequest", name: "ListMembersRequest")
@@ -1071,6 +1178,9 @@ module Aws::SecurityHub
     OcsfFindingIdentifier = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#OcsfFindingIdentifier", name: "OcsfFindingIdentifier")
     OcsfFindingIdentifierList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#OcsfFindingIdentifierList", name: "OcsfFindingIdentifierList", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}})
     OcsfFindingsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#OcsfFindingsList", name: "OcsfFindingsList")
+    OcsfIpField = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.securityhub#OcsfIpField", name: "OcsfIpField")
+    OcsfIpFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#OcsfIpFilter", name: "OcsfIpFilter")
+    OcsfIpFilterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#OcsfIpFilterList", name: "OcsfIpFilterList")
     OcsfMapField = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.securityhub#OcsfMapField", name: "OcsfMapField")
     OcsfMapFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#OcsfMapFilter", name: "OcsfMapFilter")
     OcsfMapFilterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#OcsfMapFilterList", name: "OcsfMapFilterList")
@@ -1083,6 +1193,8 @@ module Aws::SecurityHub
     OrganizationConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#OrganizationConfiguration", name: "OrganizationConfiguration")
     OrganizationConfigurationConfigurationType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.securityhub#OrganizationConfigurationConfigurationType", name: "OrganizationConfigurationConfigurationType")
     OrganizationConfigurationStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.securityhub#OrganizationConfigurationStatus", name: "OrganizationConfigurationStatus")
+    OrganizationNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#OrganizationNotFoundException", name: "OrganizationNotFoundException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
+    OrganizationalUnitNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#OrganizationalUnitNotFoundException", name: "OrganizationalUnitNotFoundException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     Page = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#Page", name: "Page")
     Pages = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#Pages", name: "Pages")
     ParameterConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#ParameterConfiguration", name: "ParameterConfiguration")
@@ -1116,19 +1228,53 @@ module Aws::SecurityHub
     Ranges = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#Ranges", name: "Ranges")
     RatioScale = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.securityhub#RatioScale", name: "RatioScale", traits: {"smithy.api#range" => {"min" => 0, "max" => 100}})
     Recommendation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#Recommendation", name: "Recommendation")
+    RecommendationError = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#RecommendationError", name: "RecommendationError")
+    RecommendationStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.securityhub#RecommendationStatus", name: "RecommendationStatus")
+    RecommendationStep = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.securityhub#RecommendationStep", name: "RecommendationStep")
+    RecommendationSteps = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#RecommendationSteps", name: "RecommendationSteps")
+    RecommendationType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.securityhub#RecommendationType", name: "RecommendationType")
     Record = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#Record", name: "Record")
     RecordState = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.securityhub#RecordState", name: "RecordState")
     Records = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#Records", name: "Records")
     RegionAvailabilityStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.securityhub#RegionAvailabilityStatus", name: "RegionAvailabilityStatus")
+    RegisterConnectorV2Request = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#RegisterConnectorV2Request", name: "RegisterConnectorV2Request")
+    RegisterConnectorV2Response = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#RegisterConnectorV2Response", name: "RegisterConnectorV2Response")
     RelatedFinding = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#RelatedFinding", name: "RelatedFinding")
     RelatedFindingList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#RelatedFindingList", name: "RelatedFindingList")
     RelatedRequirementsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#RelatedRequirementsList", name: "RelatedRequirementsList")
     Remediation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#Remediation", name: "Remediation")
+    RemediationCompositeFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#RemediationCompositeFilter", name: "RemediationCompositeFilter")
+    RemediationCompositeFilterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#RemediationCompositeFilterList", name: "RemediationCompositeFilterList", traits: {"smithy.api#length" => {"min" => 0, "max" => 1}})
+    RemediationFilters = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#RemediationFilters", name: "RemediationFilters")
+    RemediationGuidance = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#RemediationGuidance", name: "RemediationGuidance")
+    RemediationGuidanceContext = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#RemediationGuidanceContext", name: "RemediationGuidanceContext")
+    RemediationGuidanceExamples = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#RemediationGuidanceExamples", name: "RemediationGuidanceExamples")
+    RemediationGuidanceMetadata = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#RemediationGuidanceMetadata", name: "RemediationGuidanceMetadata")
+    RemediationGuidanceSpecification = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#RemediationGuidanceSpecification", name: "RemediationGuidanceSpecification")
+    RemediationOutcome = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#RemediationOutcome", name: "RemediationOutcome")
+    RemediationParameter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#RemediationParameter", name: "RemediationParameter")
+    RemediationParameterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#RemediationParameterList", name: "RemediationParameterList", traits: {"smithy.api#length" => {"min" => 0, "max" => 50}})
+    RemediationPriority = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.securityhub#RemediationPriority", name: "RemediationPriority")
+    RemediationResource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#RemediationResource", name: "RemediationResource")
+    RemediationStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.securityhub#RemediationStatus", name: "RemediationStatus")
+    RemediationStep = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#RemediationStep", name: "RemediationStep")
+    RemediationStepList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#RemediationStepList", name: "RemediationStepList", traits: {"smithy.api#length" => {"min" => 0, "max" => 50}})
+    RemediationStringField = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.securityhub#RemediationStringField", name: "RemediationStringField")
+    RemediationStringFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#RemediationStringFilter", name: "RemediationStringFilter")
+    RemediationStringFilterCondition = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#RemediationStringFilterCondition", name: "RemediationStringFilterCondition")
+    RemediationStringFilterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#RemediationStringFilterList", name: "RemediationStringFilterList", traits: {"smithy.api#length" => {"min" => 0, "max" => 2}})
+    RemediationStringList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#RemediationStringList", name: "RemediationStringList", traits: {"smithy.api#length" => {"min" => 0, "max" => 50}})
+    RemediationStringUid = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.securityhub#RemediationStringUid", name: "RemediationStringUid", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}})
+    RemediationSummaryDetail = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#RemediationSummaryDetail", name: "RemediationSummaryDetail")
+    RemediationTrait = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#RemediationTrait", name: "RemediationTrait")
+    RemediationV2Item = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#RemediationV2Item", name: "RemediationV2Item")
+    RemediationV2ItemList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#RemediationV2ItemList", name: "RemediationV2ItemList", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}})
     Resource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#Resource", name: "Resource")
     ResourceArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.securityhub#ResourceArn", name: "ResourceArn", traits: {"smithy.api#pattern" => "^arn:aws:securityhub:"})
     ResourceCategory = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.securityhub#ResourceCategory", name: "ResourceCategory")
     ResourceConfig = ::Smithy::Schema::Shapes::DocumentShape.new(id: "com.amazonaws.securityhub#ResourceConfig", name: "ResourceConfig")
     ResourceConflictException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#ResourceConflictException", name: "ResourceConflictException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 409})
+    ResourceCriticality = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.securityhub#ResourceCriticality", name: "ResourceCriticality")
     ResourceDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#ResourceDetails", name: "ResourceDetails")
     ResourceFindingsSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#ResourceFindingsSummary", name: "ResourceFindingsSummary")
     ResourceFindingsSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#ResourceFindingsSummaryList", name: "ResourceFindingsSummaryList")
@@ -1136,15 +1282,22 @@ module Aws::SecurityHub
     ResourceGroupByRule = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#ResourceGroupByRule", name: "ResourceGroupByRule")
     ResourceGroupByRules = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#ResourceGroupByRules", name: "ResourceGroupByRules")
     ResourceInUseException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#ResourceInUseException", name: "ResourceInUseException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
+    ResourceInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#ResourceInfo", name: "ResourceInfo")
     ResourceList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#ResourceList", name: "ResourceList")
     ResourceNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#ResourceNotFoundException", name: "ResourceNotFoundException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 404})
+    ResourceOwner = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#ResourceOwner", name: "ResourceOwner")
+    ResourceOwnerAccount = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#ResourceOwnerAccount", name: "ResourceOwnerAccount")
+    ResourceOwnerOrg = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#ResourceOwnerOrg", name: "ResourceOwnerOrg")
     ResourceResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#ResourceResult", name: "ResourceResult")
+    ResourceScopes = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#ResourceScopes", name: "ResourceScopes")
     ResourceSeverityBreakdown = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#ResourceSeverityBreakdown", name: "ResourceSeverityBreakdown")
+    ResourceSubCategory = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.securityhub#ResourceSubCategory", name: "ResourceSubCategory")
     ResourceTag = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#ResourceTag", name: "ResourceTag")
     ResourceTagList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#ResourceTagList", name: "ResourceTagList")
     Resources = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#Resources", name: "Resources")
     ResourcesCompositeFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#ResourcesCompositeFilter", name: "ResourcesCompositeFilter")
     ResourcesCompositeFilterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#ResourcesCompositeFilterList", name: "ResourcesCompositeFilterList")
+    ResourcesCount = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#ResourcesCount", name: "ResourcesCount")
     ResourcesDateField = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.securityhub#ResourcesDateField", name: "ResourcesDateField")
     ResourcesDateFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#ResourcesDateFilter", name: "ResourcesDateFilter")
     ResourcesDateFilterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#ResourcesDateFilterList", name: "ResourcesDateFilterList")
@@ -1158,6 +1311,15 @@ module Aws::SecurityHub
     ResourcesStringField = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.securityhub#ResourcesStringField", name: "ResourcesStringField")
     ResourcesStringFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#ResourcesStringFilter", name: "ResourcesStringFilter")
     ResourcesStringFilterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#ResourcesStringFilterList", name: "ResourcesStringFilterList")
+    ResourcesTrendsCompositeFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#ResourcesTrendsCompositeFilter", name: "ResourcesTrendsCompositeFilter")
+    ResourcesTrendsCompositeFilterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#ResourcesTrendsCompositeFilterList", name: "ResourcesTrendsCompositeFilterList")
+    ResourcesTrendsFilters = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#ResourcesTrendsFilters", name: "ResourcesTrendsFilters")
+    ResourcesTrendsMetrics = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#ResourcesTrendsMetrics", name: "ResourcesTrendsMetrics")
+    ResourcesTrendsMetricsResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#ResourcesTrendsMetricsResult", name: "ResourcesTrendsMetricsResult")
+    ResourcesTrendsStringField = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.securityhub#ResourcesTrendsStringField", name: "ResourcesTrendsStringField")
+    ResourcesTrendsStringFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#ResourcesTrendsStringFilter", name: "ResourcesTrendsStringFilter")
+    ResourcesTrendsStringFilterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#ResourcesTrendsStringFilterList", name: "ResourcesTrendsStringFilterList")
+    ResourcesTrendsValues = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#ResourcesTrendsValues", name: "ResourcesTrendsValues")
     Result = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#Result", name: "Result")
     ResultList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#ResultList", name: "ResultList")
     RouteSetDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#RouteSetDetails", name: "RouteSetDetails")
@@ -1196,6 +1358,10 @@ module Aws::SecurityHub
     RuleOrderValueV2 = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.securityhub#RuleOrderValueV2", name: "RuleOrderValueV2", traits: {"smithy.api#range" => {"min" => 1.0, "max" => 1000.0}})
     RuleStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.securityhub#RuleStatus", name: "RuleStatus")
     RuleStatusV2 = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.securityhub#RuleStatusV2", name: "RuleStatusV2")
+    S3ExportDestination = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#S3ExportDestination", name: "S3ExportDestination")
+    S3ObjectPrefix = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.securityhub#S3ObjectPrefix", name: "S3ObjectPrefix", traits: {"smithy.api#length" => {"min" => 0, "max" => 512}})
+    ScopeType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.securityhub#ScopeType", name: "ScopeType")
+    ScopeValueList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#ScopeValueList", name: "ScopeValueList", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}})
     SecurityControl = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#SecurityControl", name: "SecurityControl")
     SecurityControlCustomParameter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#SecurityControlCustomParameter", name: "SecurityControlCustomParameter")
     SecurityControlCustomParametersList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#SecurityControlCustomParametersList", name: "SecurityControlCustomParametersList")
@@ -1206,6 +1372,8 @@ module Aws::SecurityHub
     SecurityControlProperty = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.securityhub#SecurityControlProperty", name: "SecurityControlProperty")
     SecurityControls = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#SecurityControls", name: "SecurityControls")
     SecurityControlsConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#SecurityControlsConfiguration", name: "SecurityControlsConfiguration")
+    SecurityControlsProvider = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.securityhub#SecurityControlsProvider", name: "SecurityControlsProvider")
+    SecurityControlsProviders = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#SecurityControlsProviders", name: "SecurityControlsProviders")
     SecurityGroups = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#SecurityGroups", name: "SecurityGroups")
     SecurityHubFeature = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.securityhub#SecurityHubFeature", name: "SecurityHubFeature")
     SecurityHubPolicy = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#SecurityHubPolicy", name: "SecurityHubPolicy")
@@ -1213,13 +1381,15 @@ module Aws::SecurityHub
     SensitiveDataDetectionsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#SensitiveDataDetectionsList", name: "SensitiveDataDetectionsList")
     SensitiveDataResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#SensitiveDataResult", name: "SensitiveDataResult")
     SensitiveDataResultList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#SensitiveDataResultList", name: "SensitiveDataResultList")
-    SensitiveNonEmptyString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.securityhub#SensitiveNonEmptyString", name: "SensitiveNonEmptyString", traits: {"smithy.api#pattern" => "\\S", "smithy.api#sensitive" => {}})
     Sequence = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#Sequence", name: "Sequence")
     ServiceNowDetail = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#ServiceNowDetail", name: "ServiceNowDetail")
     ServiceNowProviderConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#ServiceNowProviderConfiguration", name: "ServiceNowProviderConfiguration")
+    ServiceNowUpdateConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#ServiceNowUpdateConfiguration", name: "ServiceNowUpdateConfiguration")
+    ServiceQuotaExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#ServiceQuotaExceededException", name: "ServiceQuotaExceededException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 402})
     Severity = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#Severity", name: "Severity")
     SeverityLabel = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.securityhub#SeverityLabel", name: "SeverityLabel")
     SeverityRating = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.securityhub#SeverityRating", name: "SeverityRating")
+    SeverityTrendsCount = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#SeverityTrendsCount", name: "SeverityTrendsCount")
     SeverityUpdate = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#SeverityUpdate", name: "SeverityUpdate")
     Signal = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#Signal", name: "Signal")
     SignalsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#SignalsList", name: "SignalsList", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
@@ -1245,6 +1415,8 @@ module Aws::SecurityHub
     StandardsControlsUpdatable = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.securityhub#StandardsControlsUpdatable", name: "StandardsControlsUpdatable")
     StandardsInputParameterMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.securityhub#StandardsInputParameterMap", name: "StandardsInputParameterMap")
     StandardsManagedBy = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#StandardsManagedBy", name: "StandardsManagedBy")
+    StandardsProvider = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.securityhub#StandardsProvider", name: "StandardsProvider")
+    StandardsProviders = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#StandardsProviders", name: "StandardsProviders")
     StandardsStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.securityhub#StandardsStatus", name: "StandardsStatus")
     StandardsStatusReason = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#StandardsStatusReason", name: "StandardsStatusReason")
     StandardsSubscription = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#StandardsSubscription", name: "StandardsSubscription")
@@ -1256,6 +1428,8 @@ module Aws::SecurityHub
     StartConfigurationPolicyAssociationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#StartConfigurationPolicyAssociationResponse", name: "StartConfigurationPolicyAssociationResponse")
     StartConfigurationPolicyDisassociationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#StartConfigurationPolicyDisassociationRequest", name: "StartConfigurationPolicyDisassociationRequest")
     StartConfigurationPolicyDisassociationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#StartConfigurationPolicyDisassociationResponse", name: "StartConfigurationPolicyDisassociationResponse")
+    StartExportJobV2Request = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#StartExportJobV2Request", name: "StartExportJobV2Request")
+    StartExportJobV2Response = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#StartExportJobV2Response", name: "StartExportJobV2Response")
     StatelessCustomActionDefinition = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#StatelessCustomActionDefinition", name: "StatelessCustomActionDefinition")
     StatelessCustomPublishMetricAction = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#StatelessCustomPublishMetricAction", name: "StatelessCustomPublishMetricAction")
     StatelessCustomPublishMetricActionDimension = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#StatelessCustomPublishMetricActionDimension", name: "StatelessCustomPublishMetricActionDimension")
@@ -1284,7 +1458,12 @@ module Aws::SecurityHub
     ThreatIntelIndicatorType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.securityhub#ThreatIntelIndicatorType", name: "ThreatIntelIndicatorType")
     ThreatList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#ThreatList", name: "ThreatList")
     ThrottlingException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#ThrottlingException", name: "ThrottlingException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 429})
+    TicketCreationMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.securityhub#TicketCreationMode", name: "TicketCreationMode")
     Timestamp = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.securityhub#Timestamp", name: "Timestamp", traits: {"smithy.api#timestampFormat" => "date-time"})
+    TrendsMetrics = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#TrendsMetrics", name: "TrendsMetrics")
+    TrendsMetricsResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#TrendsMetricsResult", name: "TrendsMetricsResult")
+    TrendsValueCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.securityhub#TrendsValueCount", name: "TrendsValueCount", traits: {"smithy.api#range" => {"min" => 0}})
+    TrendsValues = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#TrendsValues", name: "TrendsValues")
     TypeList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#TypeList", name: "TypeList")
     UnprocessedAutomationRule = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#UnprocessedAutomationRule", name: "UnprocessedAutomationRule")
     UnprocessedAutomationRulesList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#UnprocessedAutomationRulesList", name: "UnprocessedAutomationRulesList")
@@ -1299,6 +1478,7 @@ module Aws::SecurityHub
     UnprocessedStandardsControlAssociations = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#UnprocessedStandardsControlAssociations", name: "UnprocessedStandardsControlAssociations")
     UntagResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#UntagResourceRequest", name: "UntagResourceRequest")
     UntagResourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#UntagResourceResponse", name: "UntagResourceResponse")
+    UnusedPermissionsRecommendationStep = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#UnusedPermissionsRecommendationStep", name: "UnusedPermissionsRecommendationStep")
     UpdateActionTargetRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#UpdateActionTargetRequest", name: "UpdateActionTargetRequest")
     UpdateActionTargetResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#UpdateActionTargetResponse", name: "UpdateActionTargetResponse")
     UpdateAggregatorV2Request = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#UpdateAggregatorV2Request", name: "UpdateAggregatorV2Request")
@@ -1309,6 +1489,8 @@ module Aws::SecurityHub
     UpdateAutomationRulesRequestItemsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityhub#UpdateAutomationRulesRequestItemsList", name: "UpdateAutomationRulesRequestItemsList", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
     UpdateConfigurationPolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#UpdateConfigurationPolicyRequest", name: "UpdateConfigurationPolicyRequest")
     UpdateConfigurationPolicyResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#UpdateConfigurationPolicyResponse", name: "UpdateConfigurationPolicyResponse")
+    UpdateConnectorRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#UpdateConnectorRequest", name: "UpdateConnectorRequest")
+    UpdateConnectorResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#UpdateConnectorResponse", name: "UpdateConnectorResponse")
     UpdateConnectorV2Request = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#UpdateConnectorV2Request", name: "UpdateConnectorV2Request")
     UpdateConnectorV2Response = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#UpdateConnectorV2Response", name: "UpdateConnectorV2Response")
     UpdateFindingAggregatorRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#UpdateFindingAggregatorRequest", name: "UpdateFindingAggregatorRequest")
@@ -1352,6 +1534,18 @@ module Aws::SecurityHub
     WorkflowStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.securityhub#WorkflowStatus", name: "WorkflowStatus")
     WorkflowUpdate = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityhub#WorkflowUpdate", name: "WorkflowUpdate")
 
+    AIDetails.add_member(:host_resource_guid, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "HostResourceGuid"))
+    AIDetails.add_member(:host_resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "HostResourceType"))
+    AIDetails.add_member(:canonical_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "CanonicalId"))
+    AIDetails.add_member(:self_hosted_ai_model_resource_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "SelfHostedAIModelResourceCount"))
+    AIDetails.add_member(:self_hosted_ai_agent_resource_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "SelfHostedAIAgentResourceCount"))
+    AIDetails.add_member(:self_hosted_ai_model_serving_resource_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "SelfHostedAIModelServingResourceCount"))
+    AIDetails.add_member(:self_hosted_ai_external_endpoint_resource_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "SelfHostedAIExternalEndpointResourceCount"))
+    AIDetails.add_member(:self_hosted_ai_development_resource_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "SelfHostedAIDevelopmentResourceCount"))
+    AIDetails.add_member(:self_hosted_ai_agent_framework_resource_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "SelfHostedAIAgentFrameworkResourceCount"))
+    AIDetails.add_member(:self_hosted_ai_agent_tools_and_identity_resource_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "SelfHostedAIAgentToolsAndIdentityResourceCount"))
+    AIDetails.add_member(:self_hosted_total_ai_resource_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "SelfHostedTotalAIResourceCount"))
+    AIDetails.type = Types::AIDetails
     AcceptAdministratorInvitationRequest.add_member(:administrator_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "AdministratorId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     AcceptAdministratorInvitationRequest.add_member(:invitation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "InvitationId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     AcceptAdministratorInvitationRequest.type = Types::AcceptAdministratorInvitationRequest
@@ -1367,6 +1561,11 @@ module Aws::SecurityHub
     AccountDetails.add_member(:email, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Email"))
     AccountDetails.type = Types::AccountDetails
     AccountDetailsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountDetails, name: "member"))
+    AccountFreeTrialStatus.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FreeTrialAccountId, name: "AccountId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    AccountFreeTrialStatus.add_member(:evaluated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "EvaluatedAt", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    AccountFreeTrialStatus.add_member(:free_trial_statuses, ::Smithy::Schema::Shapes::MemberShape.new(target: FreeTrialStatusList, name: "FreeTrialStatuses", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    AccountFreeTrialStatus.type = Types::AccountFreeTrialStatus
+    AccountFreeTrialStatusList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountFreeTrialStatus, name: "member"))
     AccountIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member"))
     Action.add_member(:action_type, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ActionType"))
     Action.add_member(:network_connection_action, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkConnectionAction, name: "NetworkConnectionAction"))
@@ -1462,9 +1661,11 @@ module Aws::SecurityHub
     AutomationRulesActionTypeObjectV2.type = Types::AutomationRulesActionTypeObjectV2
     AutomationRulesActionTypeV2.add_member(:finding_fields_update, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FINDING_FIELDS_UPDATE", traits: {"smithy.api#enumValue" => "FINDING_FIELDS_UPDATE"}))
     AutomationRulesActionTypeV2.add_member(:external_integration, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXTERNAL_INTEGRATION", traits: {"smithy.api#enumValue" => "EXTERNAL_INTEGRATION"}))
+    AutomationRulesActionTypeV2.add_member(:resource_fields_update, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_FIELDS_UPDATE", traits: {"smithy.api#enumValue" => "RESOURCE_FIELDS_UPDATE"}))
     AutomationRulesActionV2.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomationRulesActionTypeV2, name: "Type", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     AutomationRulesActionV2.add_member(:finding_fields_update, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomationRulesFindingFieldsUpdateV2, name: "FindingFieldsUpdate"))
     AutomationRulesActionV2.add_member(:external_integration_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalIntegrationConfiguration, name: "ExternalIntegrationConfiguration"))
+    AutomationRulesActionV2.add_member(:resource_fields_update, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomationRulesResourceFieldsUpdateV2, name: "ResourceFieldsUpdate"))
     AutomationRulesActionV2.type = Types::AutomationRulesActionV2
     AutomationRulesArnsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member"))
     AutomationRulesConfig.add_member(:rule_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "RuleArn"))
@@ -1532,6 +1733,9 @@ module Aws::SecurityHub
     AutomationRulesFindingFilters.add_member(:resource_application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "ResourceApplicationArn"))
     AutomationRulesFindingFilters.add_member(:resource_application_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "ResourceApplicationName"))
     AutomationRulesFindingFilters.add_member(:aws_account_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "AwsAccountName"))
+    AutomationRulesFindingFilters.add_member(:resource_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "ResourceProvider"))
+    AutomationRulesFindingFilters.add_member(:resource_owner_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "ResourceOwnerAccountId"))
+    AutomationRulesFindingFilters.add_member(:resource_owner_org_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "ResourceOwnerOrgId"))
     AutomationRulesFindingFilters.type = Types::AutomationRulesFindingFilters
     AutomationRulesMetadata.add_member(:rule_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "RuleArn"))
     AutomationRulesMetadata.add_member(:rule_status, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleStatus, name: "RuleStatus"))
@@ -1555,6 +1759,8 @@ module Aws::SecurityHub
     AutomationRulesMetadataV2.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedAt"))
     AutomationRulesMetadataV2.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "UpdatedAt"))
     AutomationRulesMetadataV2.type = Types::AutomationRulesMetadataV2
+    AutomationRulesResourceFieldsUpdateV2.add_member(:criticality, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceCriticality, name: "Criticality", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    AutomationRulesResourceFieldsUpdateV2.type = Types::AutomationRulesResourceFieldsUpdateV2
     AvailabilityZone.add_member(:zone_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ZoneName"))
     AvailabilityZone.add_member(:subnet_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "SubnetId"))
     AvailabilityZone.type = Types::AvailabilityZone
@@ -3666,6 +3872,10 @@ module Aws::SecurityHub
     AwsOpenSearchServiceDomainVpcOptionsDetails.add_member(:security_group_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyStringList, name: "SecurityGroupIds"))
     AwsOpenSearchServiceDomainVpcOptionsDetails.add_member(:subnet_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyStringList, name: "SubnetIds"))
     AwsOpenSearchServiceDomainVpcOptionsDetails.type = Types::AwsOpenSearchServiceDomainVpcOptionsDetails
+    AwsOrganizationScope.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "OrganizationId"))
+    AwsOrganizationScope.add_member(:organizational_unit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "OrganizationalUnitId"))
+    AwsOrganizationScope.type = Types::AwsOrganizationScope
+    AwsOrganizationScopeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsOrganizationScope, name: "member"))
     AwsRdsDbClusterAssociatedRole.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "RoleArn"))
     AwsRdsDbClusterAssociatedRole.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Status"))
     AwsRdsDbClusterAssociatedRole.type = Types::AwsRdsDbClusterAssociatedRole
@@ -4396,6 +4606,9 @@ module Aws::SecurityHub
     AwsSecurityFindingFilters.add_member(:aws_account_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "AwsAccountName"))
     AwsSecurityFindingFilters.add_member(:resource_application_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "ResourceApplicationName"))
     AwsSecurityFindingFilters.add_member(:resource_application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "ResourceApplicationArn"))
+    AwsSecurityFindingFilters.add_member(:resource_owner_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "ResourceOwnerAccountId"))
+    AwsSecurityFindingFilters.add_member(:resource_owner_org_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "ResourceOwnerOrgId"))
+    AwsSecurityFindingFilters.add_member(:resource_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "ResourceProvider"))
     AwsSecurityFindingFilters.type = Types::AwsSecurityFindingFilters
     AwsSecurityFindingIdentifier.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Id", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     AwsSecurityFindingIdentifier.add_member(:product_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ProductArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -4631,6 +4844,21 @@ module Aws::SecurityHub
     AwsXrayEncryptionConfigDetails.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Status"))
     AwsXrayEncryptionConfigDetails.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Type"))
     AwsXrayEncryptionConfigDetails.type = Types::AwsXrayEncryptionConfigDetails
+    AzureDetail.add_member(:aws_config_connector_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "AWSConfigConnectorArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    AzureDetail.add_member(:scope_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AzureScopeConfiguration, name: "ScopeConfiguration", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    AzureDetail.add_member(:azure_regions, ::Smithy::Schema::Shapes::MemberShape.new(target: AzureRegionList, name: "AzureRegions", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    AzureDetail.type = Types::AzureDetail
+    AzureProviderConfiguration.add_member(:aws_config_connector_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "AWSConfigConnectorArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    AzureProviderConfiguration.add_member(:scope_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AzureScopeConfiguration, name: "ScopeConfiguration", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    AzureProviderConfiguration.add_member(:azure_regions, ::Smithy::Schema::Shapes::MemberShape.new(target: AzureRegionList, name: "AzureRegions", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    AzureProviderConfiguration.type = Types::AzureProviderConfiguration
+    AzureRegionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member"))
+    AzureScopeConfiguration.add_member(:scope_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ScopeType, name: "ScopeType", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    AzureScopeConfiguration.add_member(:scope_values, ::Smithy::Schema::Shapes::MemberShape.new(target: ScopeValueList, name: "ScopeValues"))
+    AzureScopeConfiguration.type = Types::AzureScopeConfiguration
+    AzureUpdateConfiguration.add_member(:scope_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AzureScopeConfiguration, name: "ScopeConfiguration", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    AzureUpdateConfiguration.add_member(:azure_regions, ::Smithy::Schema::Shapes::MemberShape.new(target: AzureRegionList, name: "AzureRegions", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    AzureUpdateConfiguration.type = Types::AzureUpdateConfiguration
     BatchDeleteAutomationRulesRequest.add_member(:automation_rules_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomationRulesArnsList, name: "AutomationRulesArns", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     BatchDeleteAutomationRulesRequest.type = Types::BatchDeleteAutomationRulesRequest
     BatchDeleteAutomationRulesResponse.add_member(:processed_automation_rules, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomationRulesArnsList, name: "ProcessedAutomationRules"))
@@ -4727,6 +4955,11 @@ module Aws::SecurityHub
     BooleanFilter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Value"))
     BooleanFilter.type = Types::BooleanFilter
     BooleanFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanFilter, name: "member"))
+    CancelExportJobV2Request.add_member(:export_job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportJobId, name: "ExportJobId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CancelExportJobV2Request.type = Types::CancelExportJobV2Request
+    CancelExportJobV2Response.add_member(:export_job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportJobId, name: "ExportJobId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CancelExportJobV2Response.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportStatus, name: "Status", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CancelExportJobV2Response.type = Types::CancelExportJobV2Response
     CategoryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member"))
     Cell.add_member(:column, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "Column"))
     Cell.add_member(:row, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "Row"))
@@ -4751,6 +4984,8 @@ module Aws::SecurityHub
     ClassificationStatus.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Code"))
     ClassificationStatus.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Reason"))
     ClassificationStatus.type = Types::ClassificationStatus
+    CloudProviderName.add_member(:azure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AZURE", traits: {"smithy.api#enumValue" => "Azure"}))
+    CloudProviderName.add_member(:aws, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS", traits: {"smithy.api#enumValue" => "AWS"}))
     CloudWatchLogsLogGroupArnConfigDetails.add_member(:cloud_watch_logs_log_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "CloudWatchLogsLogGroupArn"))
     CloudWatchLogsLogGroupArnConfigDetails.add_member(:hosted_zone_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "HostedZoneId"))
     CloudWatchLogsLogGroupArnConfigDetails.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Id"))
@@ -4780,6 +5015,8 @@ module Aws::SecurityHub
     CompositeFilter.add_member(:boolean_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: OcsfBooleanFilterList, name: "BooleanFilters"))
     CompositeFilter.add_member(:number_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: OcsfNumberFilterList, name: "NumberFilters"))
     CompositeFilter.add_member(:map_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: OcsfMapFilterList, name: "MapFilters"))
+    CompositeFilter.add_member(:ip_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: OcsfIpFilterList, name: "IpFilters"))
+    CompositeFilter.add_member(:nested_composite_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: CompositeFilterList, name: "NestedCompositeFilters"))
     CompositeFilter.add_member(:operator, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedOperators, name: "Operator"))
     CompositeFilter.type = Types::CompositeFilter
     CompositeFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CompositeFilter, name: "member"))
@@ -4826,22 +5063,21 @@ module Aws::SecurityHub
     ConnectorAuthStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
     ConnectorProviderName.add_member(:jira_cloud, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "JIRA_CLOUD", traits: {"smithy.api#enumValue" => "JIRA_CLOUD"}))
     ConnectorProviderName.add_member(:servicenow, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SERVICENOW", traits: {"smithy.api#enumValue" => "SERVICENOW"}))
-    ConnectorRegistrationsV2Request.add_member(:auth_code, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "AuthCode", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    ConnectorRegistrationsV2Request.add_member(:auth_state, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "AuthState", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    ConnectorRegistrationsV2Request.type = Types::ConnectorRegistrationsV2Request
-    ConnectorRegistrationsV2Response.add_member(:connector_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ConnectorArn"))
-    ConnectorRegistrationsV2Response.add_member(:connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ConnectorId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    ConnectorRegistrationsV2Response.type = Types::ConnectorRegistrationsV2Response
+    ConnectorProviderName.add_member(:azure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AZURE", traits: {"smithy.api#enumValue" => "AZURE"}))
     ConnectorStatus.add_member(:connected, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONNECTED", traits: {"smithy.api#enumValue" => "CONNECTED"}))
+    ConnectorStatus.add_member(:degraded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEGRADED", traits: {"smithy.api#enumValue" => "DEGRADED"}))
     ConnectorStatus.add_member(:failed_to_connect, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED_TO_CONNECT", traits: {"smithy.api#enumValue" => "FAILED_TO_CONNECT"}))
-    ConnectorStatus.add_member(:pending_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING_CONFIGURATION", traits: {"smithy.api#enumValue" => "PENDING_CONFIGURATION"}))
     ConnectorStatus.add_member(:pending_authorization, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING_AUTHORIZATION", traits: {"smithy.api#enumValue" => "PENDING_AUTHORIZATION"}))
+    ConnectorStatus.add_member(:pending_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING_CONFIGURATION", traits: {"smithy.api#enumValue" => "PENDING_CONFIGURATION"}))
+    ConnectorStatus.add_member(:unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNKNOWN", traits: {"smithy.api#enumValue" => "UNKNOWN"}))
     ConnectorSummary.add_member(:connector_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ConnectorArn"))
     ConnectorSummary.add_member(:connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ConnectorId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ConnectorSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Name", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ConnectorSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Description"))
     ConnectorSummary.add_member(:provider_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderSummary, name: "ProviderSummary", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ConnectorSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedAt", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ConnectorSummary.add_member(:enablement_status, ::Smithy::Schema::Shapes::MemberShape.new(target: EnablementStatus, name: "EnablementStatus"))
+    ConnectorSummary.add_member(:enablement_status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "EnablementStatusReason"))
     ConnectorSummary.type = Types::ConnectorSummary
     ConnectorSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorSummary, name: "member"))
     ContainerDetails.add_member(:container_runtime, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ContainerRuntime"))
@@ -4911,6 +5147,17 @@ module Aws::SecurityHub
     CreateConfigurationPolicyResponse.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedAt"))
     CreateConfigurationPolicyResponse.add_member(:configuration_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: Policy, name: "ConfigurationPolicy"))
     CreateConfigurationPolicyResponse.type = Types::CreateConfigurationPolicyResponse
+    CreateConnectorRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Name", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateConnectorRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Description"))
+    CreateConnectorRequest.add_member(:provider, ::Smithy::Schema::Shapes::MemberShape.new(target: CspmProviderConfiguration, name: "Provider", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateConnectorRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags"))
+    CreateConnectorRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateConnectorRequest.type = Types::CreateConnectorRequest
+    CreateConnectorResponse.add_member(:connector_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ConnectorArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateConnectorResponse.add_member(:connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ConnectorId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateConnectorResponse.add_member(:connector_status, ::Smithy::Schema::Shapes::MemberShape.new(target: CspmConnectorStatus, name: "ConnectorStatus"))
+    CreateConnectorResponse.add_member(:enablement_status, ::Smithy::Schema::Shapes::MemberShape.new(target: CspmEnablementStatus, name: "EnablementStatus"))
+    CreateConnectorResponse.type = Types::CreateConnectorResponse
     CreateConnectorV2Request.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Name", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreateConnectorV2Request.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Description"))
     CreateConnectorV2Request.add_member(:provider, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderConfiguration, name: "Provider", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -4918,9 +5165,11 @@ module Aws::SecurityHub
     CreateConnectorV2Request.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags"))
     CreateConnectorV2Request.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     CreateConnectorV2Request.type = Types::CreateConnectorV2Request
-    CreateConnectorV2Response.add_member(:connector_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ConnectorArn"))
+    CreateConnectorV2Response.add_member(:connector_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ConnectorArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreateConnectorV2Response.add_member(:connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ConnectorId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreateConnectorV2Response.add_member(:auth_url, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "AuthUrl"))
+    CreateConnectorV2Response.add_member(:connector_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorStatus, name: "ConnectorStatus"))
+    CreateConnectorV2Response.add_member(:enablement_status, ::Smithy::Schema::Shapes::MemberShape.new(target: EnablementStatus, name: "EnablementStatus"))
     CreateConnectorV2Response.type = Types::CreateConnectorV2Response
     CreateFindingAggregatorRequest.add_member(:region_linking_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "RegionLinkingMode", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreateFindingAggregatorRequest.add_member(:regions, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "Regions"))
@@ -4943,13 +5192,59 @@ module Aws::SecurityHub
     CreateTicketV2Request.add_member(:connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ConnectorId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreateTicketV2Request.add_member(:finding_metadata_uid, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "FindingMetadataUid", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreateTicketV2Request.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateTicketV2Request.add_member(:mode, ::Smithy::Schema::Shapes::MemberShape.new(target: TicketCreationMode, name: "Mode"))
     CreateTicketV2Request.type = Types::CreateTicketV2Request
     CreateTicketV2Response.add_member(:ticket_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "TicketId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreateTicketV2Response.add_member(:ticket_src_url, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "TicketSrcUrl"))
     CreateTicketV2Response.type = Types::CreateTicketV2Response
     Criteria.add_member(:ocsf_finding_criteria, Types::Criteria::OcsfFindingCriteria, ::Smithy::Schema::Shapes::MemberShape.new(target: OcsfFindingFilters, name: "OcsfFindingCriteria"))
+    Criteria.add_member(:resource_criteria, Types::Criteria::ResourceCriteria, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcesFilters, name: "ResourceCriteria"))
     Criteria.add_member(:unknown, Types::Criteria::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     Criteria.type = Types::Criteria
+    CriticalitySource.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: CriticalitySourceType, name: "Source", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CriticalitySource.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Reason", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CriticalitySource.type = Types::CriticalitySource
+    CriticalitySourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CriticalitySource, name: "member"))
+    CriticalitySourceType.add_member(:automation_rule, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AUTOMATION_RULE", traits: {"smithy.api#enumValue" => "AutomationRule"}))
+    CriticalitySourceType.add_member(:resource_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_NAME", traits: {"smithy.api#enumValue" => "ResourceName"}))
+    CriticalitySourceType.add_member(:tag_inference, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TAG_INFERENCE", traits: {"smithy.api#enumValue" => "TagInference"}))
+    CspmConnectorProviderName.add_member(:azure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AZURE", traits: {"smithy.api#enumValue" => "AZURE"}))
+    CspmConnectorStatus.add_member(:connected, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONNECTED", traits: {"smithy.api#enumValue" => "CONNECTED"}))
+    CspmConnectorStatus.add_member(:degraded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEGRADED", traits: {"smithy.api#enumValue" => "DEGRADED"}))
+    CspmConnectorStatus.add_member(:failed_to_connect, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED_TO_CONNECT", traits: {"smithy.api#enumValue" => "FAILED_TO_CONNECT"}))
+    CspmConnectorStatus.add_member(:unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNKNOWN", traits: {"smithy.api#enumValue" => "UNKNOWN"}))
+    CspmConnectorSummary.add_member(:connector_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ConnectorArn"))
+    CspmConnectorSummary.add_member(:connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ConnectorId"))
+    CspmConnectorSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Name"))
+    CspmConnectorSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Description"))
+    CspmConnectorSummary.add_member(:provider_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: CspmProviderSummary, name: "ProviderSummary"))
+    CspmConnectorSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedAt"))
+    CspmConnectorSummary.add_member(:created_by, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "CreatedBy"))
+    CspmConnectorSummary.add_member(:enablement_status, ::Smithy::Schema::Shapes::MemberShape.new(target: CspmEnablementStatus, name: "EnablementStatus"))
+    CspmConnectorSummary.type = Types::CspmConnectorSummary
+    CspmConnectorSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CspmConnectorSummary, name: "member"))
+    CspmEnablementStatus.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
+    CspmEnablementStatus.add_member(:pending_enablement, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING_ENABLEMENT", traits: {"smithy.api#enumValue" => "PENDING_ENABLEMENT"}))
+    CspmEnablementStatus.add_member(:pending_update, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING_UPDATE", traits: {"smithy.api#enumValue" => "PENDING_UPDATE"}))
+    CspmEnablementStatus.add_member(:pending_deletion, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING_DELETION", traits: {"smithy.api#enumValue" => "PENDING_DELETION"}))
+    CspmHealthCheck.add_member(:connector_status, ::Smithy::Schema::Shapes::MemberShape.new(target: CspmConnectorStatus, name: "ConnectorStatus", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CspmHealthCheck.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Message"))
+    CspmHealthCheck.add_member(:last_checked_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastCheckedAt", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CspmHealthCheck.add_member(:issues, ::Smithy::Schema::Shapes::MemberShape.new(target: HealthIssueList, name: "Issues"))
+    CspmHealthCheck.type = Types::CspmHealthCheck
+    CspmProviderConfiguration.add_member(:azure, Types::CspmProviderConfiguration::Azure, ::Smithy::Schema::Shapes::MemberShape.new(target: AzureProviderConfiguration, name: "Azure"))
+    CspmProviderConfiguration.add_member(:unknown, Types::CspmProviderConfiguration::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    CspmProviderConfiguration.type = Types::CspmProviderConfiguration
+    CspmProviderDetail.add_member(:azure, Types::CspmProviderDetail::Azure, ::Smithy::Schema::Shapes::MemberShape.new(target: AzureDetail, name: "Azure"))
+    CspmProviderDetail.add_member(:unknown, Types::CspmProviderDetail::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    CspmProviderDetail.type = Types::CspmProviderDetail
+    CspmProviderSummary.add_member(:provider_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CspmConnectorProviderName, name: "ProviderName"))
+    CspmProviderSummary.add_member(:connector_status, ::Smithy::Schema::Shapes::MemberShape.new(target: CspmConnectorStatus, name: "ConnectorStatus"))
+    CspmProviderSummary.add_member(:provider_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: CspmProviderDetail, name: "ProviderConfiguration"))
+    CspmProviderSummary.type = Types::CspmProviderSummary
+    CspmProviderUpdateConfiguration.add_member(:azure, Types::CspmProviderUpdateConfiguration::Azure, ::Smithy::Schema::Shapes::MemberShape.new(target: AzureUpdateConfiguration, name: "Azure"))
+    CspmProviderUpdateConfiguration.add_member(:unknown, Types::CspmProviderUpdateConfiguration::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    CspmProviderUpdateConfiguration.type = Types::CspmProviderUpdateConfiguration
     CustomDataIdentifiersDetections.add_member(:count, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "Count"))
     CustomDataIdentifiersDetections.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Arn"))
     CustomDataIdentifiersDetections.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Name"))
@@ -4977,7 +5272,10 @@ module Aws::SecurityHub
     DateFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DateFilter, name: "member"))
     DateRange.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Value"))
     DateRange.add_member(:unit, ::Smithy::Schema::Shapes::MemberShape.new(target: DateRangeUnit, name: "Unit"))
+    DateRange.add_member(:comparison, ::Smithy::Schema::Shapes::MemberShape.new(target: DateRangeComparison, name: "Comparison"))
     DateRange.type = Types::DateRange
+    DateRangeComparison.add_member(:within, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WITHIN", traits: {"smithy.api#enumValue" => "WITHIN"}))
+    DateRangeComparison.add_member(:older_than, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OLDER_THAN", traits: {"smithy.api#enumValue" => "OLDER_THAN"}))
     DateRangeUnit.add_member(:days, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DAYS", traits: {"smithy.api#enumValue" => "DAYS"}))
     DeclineInvitationsRequest.add_member(:account_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountIdList, name: "AccountIds", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     DeclineInvitationsRequest.type = Types::DeclineInvitationsRequest
@@ -4996,8 +5294,13 @@ module Aws::SecurityHub
     DeleteConfigurationPolicyRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteConfigurationPolicyRequest.type = Types::DeleteConfigurationPolicyRequest
     DeleteConfigurationPolicyResponse.type = Types::DeleteConfigurationPolicyResponse
+    DeleteConnectorRequest.add_member(:connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteConnectorRequest.type = Types::DeleteConnectorRequest
+    DeleteConnectorResponse.add_member(:enablement_status, ::Smithy::Schema::Shapes::MemberShape.new(target: CspmEnablementStatus, name: "EnablementStatus"))
+    DeleteConnectorResponse.type = Types::DeleteConnectorResponse
     DeleteConnectorV2Request.add_member(:connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteConnectorV2Request.type = Types::DeleteConnectorV2Request
+    DeleteConnectorV2Response.add_member(:enablement_status, ::Smithy::Schema::Shapes::MemberShape.new(target: EnablementStatus, name: "EnablementStatus"))
     DeleteConnectorV2Response.type = Types::DeleteConnectorV2Response
     DeleteFindingAggregatorRequest.add_member(:finding_aggregator_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "FindingAggregatorArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteFindingAggregatorRequest.type = Types::DeleteFindingAggregatorRequest
@@ -5049,7 +5352,8 @@ module Aws::SecurityHub
     DescribeProductsV2Response.type = Types::DescribeProductsV2Response
     DescribeSecurityHubV2Request.type = Types::DescribeSecurityHubV2Request
     DescribeSecurityHubV2Response.add_member(:hub_v2_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "HubV2Arn"))
-    DescribeSecurityHubV2Response.add_member(:subscribed_at, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "SubscribedAt"))
+    DescribeSecurityHubV2Response.add_member(:subscribed_at, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoString, name: "SubscribedAt"))
+    DescribeSecurityHubV2Response.add_member(:features, ::Smithy::Schema::Shapes::MemberShape.new(target: Features, name: "Features"))
     DescribeSecurityHubV2Response.type = Types::DescribeSecurityHubV2Response
     DescribeStandardsControlsRequest.add_member(:standards_subscription_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "StandardsSubscriptionArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DescribeStandardsControlsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
@@ -5060,6 +5364,7 @@ module Aws::SecurityHub
     DescribeStandardsControlsResponse.type = Types::DescribeStandardsControlsResponse
     DescribeStandardsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
     DescribeStandardsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults", traits: {"smithy.api#httpQuery" => "MaxResults"}))
+    DescribeStandardsRequest.add_member(:providers, ::Smithy::Schema::Shapes::MemberShape.new(target: StandardsProviders, name: "Providers", traits: {"smithy.api#httpQuery" => "Providers"}))
     DescribeStandardsRequest.type = Types::DescribeStandardsRequest
     DescribeStandardsResponse.add_member(:standards, ::Smithy::Schema::Shapes::MemberShape.new(target: Standards, name: "Standards"))
     DescribeStandardsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
@@ -5073,6 +5378,9 @@ module Aws::SecurityHub
     DisableOrganizationAdminAccountRequest.add_member(:feature, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityHubFeature, name: "Feature"))
     DisableOrganizationAdminAccountRequest.type = Types::DisableOrganizationAdminAccountRequest
     DisableOrganizationAdminAccountResponse.type = Types::DisableOrganizationAdminAccountResponse
+    DisableSecurityHubFeatureV2Request.add_member(:feature_name, ::Smithy::Schema::Shapes::MemberShape.new(target: FeatureName, name: "FeatureName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DisableSecurityHubFeatureV2Request.type = Types::DisableSecurityHubFeatureV2Request
+    DisableSecurityHubFeatureV2Response.type = Types::DisableSecurityHubFeatureV2Response
     DisableSecurityHubRequest.type = Types::DisableSecurityHubRequest
     DisableSecurityHubResponse.type = Types::DisableSecurityHubResponse
     DisableSecurityHubV2Request.type = Types::DisableSecurityHubV2Request
@@ -5085,6 +5393,8 @@ module Aws::SecurityHub
     DisassociateMembersRequest.add_member(:account_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountIdList, name: "AccountIds", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     DisassociateMembersRequest.type = Types::DisassociateMembersRequest
     DisassociateMembersResponse.type = Types::DisassociateMembersResponse
+    DiscoveryType.add_member(:managed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MANAGED", traits: {"smithy.api#enumValue" => "Managed"}))
+    DiscoveryType.add_member(:self_hosted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SELF_HOSTED", traits: {"smithy.api#enumValue" => "SelfHosted"}))
     DnsRequestAction.add_member(:domain, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Domain"))
     DnsRequestAction.add_member(:protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Protocol"))
     DnsRequestAction.add_member(:blocked, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Blocked"))
@@ -5103,6 +5413,9 @@ module Aws::SecurityHub
     EnableOrganizationAdminAccountResponse.add_member(:admin_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "AdminAccountId"))
     EnableOrganizationAdminAccountResponse.add_member(:feature, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityHubFeature, name: "Feature"))
     EnableOrganizationAdminAccountResponse.type = Types::EnableOrganizationAdminAccountResponse
+    EnableSecurityHubFeatureV2Request.add_member(:feature_name, ::Smithy::Schema::Shapes::MemberShape.new(target: FeatureName, name: "FeatureName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    EnableSecurityHubFeatureV2Request.type = Types::EnableSecurityHubFeatureV2Request
+    EnableSecurityHubFeatureV2Response.type = Types::EnableSecurityHubFeatureV2Response
     EnableSecurityHubRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags"))
     EnableSecurityHubRequest.add_member(:enable_default_standards, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "EnableDefaultStandards"))
     EnableSecurityHubRequest.add_member(:control_finding_generator, ::Smithy::Schema::Shapes::MemberShape.new(target: ControlFindingGenerator, name: "ControlFindingGenerator"))
@@ -5114,6 +5427,13 @@ module Aws::SecurityHub
     EnableSecurityHubV2Response.type = Types::EnableSecurityHubV2Response
     EnabledSecurityControlIdentifierList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member"))
     EnabledStandardIdentifierList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member"))
+    EnablementStatus.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
+    EnablementStatus.add_member(:pending_enablement, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING_ENABLEMENT", traits: {"smithy.api#enumValue" => "PENDING_ENABLEMENT"}))
+    EnablementStatus.add_member(:failed_to_enable, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED_TO_ENABLE", traits: {"smithy.api#enumValue" => "FAILED_TO_ENABLE"}))
+    EnablementStatus.add_member(:pending_update, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING_UPDATE", traits: {"smithy.api#enumValue" => "PENDING_UPDATE"}))
+    EnablementStatus.add_member(:failed_to_update, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED_TO_UPDATE", traits: {"smithy.api#enumValue" => "FAILED_TO_UPDATE"}))
+    EnablementStatus.add_member(:pending_deletion, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING_DELETION", traits: {"smithy.api#enumValue" => "PENDING_DELETION"}))
+    EnablementStatus.add_member(:failed_to_delete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED_TO_DELETE", traits: {"smithy.api#enumValue" => "FAILED_TO_DELETE"}))
     EnumConfigurationOptions.add_member(:default_value, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "DefaultValue"))
     EnumConfigurationOptions.add_member(:allowed_values, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "AllowedValues"))
     EnumConfigurationOptions.type = Types::EnumConfigurationOptions
@@ -5121,8 +5441,63 @@ module Aws::SecurityHub
     EnumListConfigurationOptions.add_member(:max_items, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "MaxItems"))
     EnumListConfigurationOptions.add_member(:allowed_values, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "AllowedValues"))
     EnumListConfigurationOptions.type = Types::EnumListConfigurationOptions
+    ExportDataType.add_member(:findings, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FINDINGS", traits: {"smithy.api#enumValue" => "FINDINGS"}))
+    ExportDestination.add_member(:s3, Types::ExportDestination::S3, ::Smithy::Schema::Shapes::MemberShape.new(target: S3ExportDestination, name: "S3"))
+    ExportDestination.add_member(:unknown, Types::ExportDestination::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    ExportDestination.type = Types::ExportDestination
+    ExportFailureCode.add_member(:access_denied, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCESS_DENIED", traits: {"smithy.api#enumValue" => "ACCESS_DENIED"}))
+    ExportFailureCode.add_member(:resource_not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_NOT_FOUND", traits: {"smithy.api#enumValue" => "RESOURCE_NOT_FOUND"}))
+    ExportFailureCode.add_member(:internal_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTERNAL_ERROR", traits: {"smithy.api#enumValue" => "INTERNAL_ERROR"}))
+    ExportOutput.add_member(:findings, Types::ExportOutput::Findings, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingsOutput, name: "Findings"))
+    ExportOutput.add_member(:unknown, Types::ExportOutput::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    ExportOutput.type = Types::ExportOutput
+    ExportOutputSummary.add_member(:findings, Types::ExportOutputSummary::Findings, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingsOutputSummary, name: "Findings"))
+    ExportOutputSummary.add_member(:unknown, Types::ExportOutputSummary::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    ExportOutputSummary.type = Types::ExportOutputSummary
+    ExportScopes.add_member(:aws_organizations, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsOrganizationScopeList, name: "AwsOrganizations"))
+    ExportScopes.type = Types::ExportScopes
+    ExportStatus.add_member(:running, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RUNNING", traits: {"smithy.api#enumValue" => "RUNNING"}))
+    ExportStatus.add_member(:succeeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCEEDED", traits: {"smithy.api#enumValue" => "SUCCEEDED"}))
+    ExportStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    ExportStatus.add_member(:cancelled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANCELLED", traits: {"smithy.api#enumValue" => "CANCELLED"}))
+    ExportSummary.add_member(:export_job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportJobId, name: "ExportJobId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ExportSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportName, name: "Name"))
+    ExportSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportStatus, name: "Status", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ExportSummary.add_member(:data_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportDataType, name: "DataType", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ExportSummary.add_member(:output_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportOutputSummary, name: "OutputConfiguration"))
+    ExportSummary.add_member(:scopes, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportScopes, name: "Scopes"))
+    ExportSummary.add_member(:destination, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportDestination, name: "Destination", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ExportSummary.add_member(:failure_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportFailureCode, name: "FailureCode"))
+    ExportSummary.add_member(:failure_message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "FailureMessage"))
+    ExportSummary.add_member(:started_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "StartedAt", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ExportSummary.add_member(:ended_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "EndedAt"))
+    ExportSummary.type = Types::ExportSummary
+    ExportSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportSummary, name: "member"))
+    ExposureFinding.add_member(:metadata_uid, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "MetadataUid", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ExposureFinding.add_member(:title, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Title", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ExposureFinding.add_member(:previous_severity, ::Smithy::Schema::Shapes::MemberShape.new(target: ExposureSeverity, name: "PreviousSeverity", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ExposureFinding.add_member(:projected_severity, ::Smithy::Schema::Shapes::MemberShape.new(target: ExposureSeverity, name: "ProjectedSeverity", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ExposureFinding.add_member(:impact, ::Smithy::Schema::Shapes::MemberShape.new(target: ExposureImpact, name: "Impact", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ExposureFinding.type = Types::ExposureFinding
+    ExposureFindingItemsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExposureFinding, name: "member"))
+    ExposureImpact.add_member(:reduces, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REDUCES", traits: {"smithy.api#enumValue" => "Reduces"}))
+    ExposureImpact.add_member(:resolves, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOLVES", traits: {"smithy.api#enumValue" => "Resolves"}))
+    ExposureImpact.add_member(:unchanged, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNCHANGED", traits: {"smithy.api#enumValue" => "Unchanged"}))
+    ExposureSeverity.add_member(:informational, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INFORMATIONAL", traits: {"smithy.api#enumValue" => "Informational"}))
+    ExposureSeverity.add_member(:low, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOW", traits: {"smithy.api#enumValue" => "Low"}))
+    ExposureSeverity.add_member(:medium, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MEDIUM", traits: {"smithy.api#enumValue" => "Medium"}))
+    ExposureSeverity.add_member(:high, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HIGH", traits: {"smithy.api#enumValue" => "High"}))
+    ExposureSeverity.add_member(:critical, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CRITICAL", traits: {"smithy.api#enumValue" => "Critical"}))
     ExternalIntegrationConfiguration.add_member(:connector_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ConnectorArn"))
     ExternalIntegrationConfiguration.type = Types::ExternalIntegrationConfiguration
+    FeatureDetail.add_member(:feature_status, ::Smithy::Schema::Shapes::MemberShape.new(target: FeatureStatus, name: "FeatureStatus"))
+    FeatureDetail.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "UpdatedAt"))
+    FeatureDetail.type = Types::FeatureDetail
+    FeatureName.add_member(:network_scanning, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NETWORK_SCANNING", traits: {"smithy.api#enumValue" => "NETWORK_SCANNING"}))
+    FeatureStatus.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
+    FeatureStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
+    Features.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: FeatureNameKey, name: "key"))
+    Features.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: FeatureDetail, name: "value"))
     FieldMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "key"))
     FieldMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "value"))
     FilePathList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FilePaths, name: "member"))
@@ -5161,6 +5536,152 @@ module Aws::SecurityHub
     FindingProviderSeverity.add_member(:label, ::Smithy::Schema::Shapes::MemberShape.new(target: SeverityLabel, name: "Label"))
     FindingProviderSeverity.add_member(:original, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Original"))
     FindingProviderSeverity.type = Types::FindingProviderSeverity
+    FindingScopes.add_member(:aws_organizations, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsOrganizationScopeList, name: "AwsOrganizations"))
+    FindingScopes.type = Types::FindingScopes
+    FindingsExportFormat.add_member(:csv, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CSV", traits: {"smithy.api#enumValue" => "CSV"}))
+    FindingsExportFormat.add_member(:ocsf_json, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OCSF_JSON", traits: {"smithy.api#enumValue" => "OCSF_JSON"}))
+    FindingsOutput.add_member(:format, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingsExportFormat, name: "Format", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    FindingsOutput.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: OcsfFindingFilters, name: "Filters"))
+    FindingsOutput.add_member(:selected_fields, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingsSelectedFieldList, name: "SelectedFields"))
+    FindingsOutput.type = Types::FindingsOutput
+    FindingsOutputSummary.add_member(:format, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingsExportFormat, name: "Format", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    FindingsOutputSummary.type = Types::FindingsOutputSummary
+    FindingsSelectableField.add_member(:metadata_uid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "METADATA_UID", traits: {"smithy.api#enumValue" => "metadata.uid"}))
+    FindingsSelectableField.add_member(:activity_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVITY_NAME", traits: {"smithy.api#enumValue" => "activity_name"}))
+    FindingsSelectableField.add_member(:cloud_account_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLOUD_ACCOUNT_NAME", traits: {"smithy.api#enumValue" => "cloud.account.name"}))
+    FindingsSelectableField.add_member(:cloud_account_uid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLOUD_ACCOUNT_UID", traits: {"smithy.api#enumValue" => "cloud.account.uid"}))
+    FindingsSelectableField.add_member(:cloud_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLOUD_PROVIDER", traits: {"smithy.api#enumValue" => "cloud.provider"}))
+    FindingsSelectableField.add_member(:cloud_region, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLOUD_REGION", traits: {"smithy.api#enumValue" => "cloud.region"}))
+    FindingsSelectableField.add_member(:compliance_assessments_category, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLIANCE_ASSESSMENTS_CATEGORY", traits: {"smithy.api#enumValue" => "compliance.assessments.category"}))
+    FindingsSelectableField.add_member(:compliance_assessments_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLIANCE_ASSESSMENTS_NAME", traits: {"smithy.api#enumValue" => "compliance.assessments.name"}))
+    FindingsSelectableField.add_member(:compliance_control, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLIANCE_CONTROL", traits: {"smithy.api#enumValue" => "compliance.control"}))
+    FindingsSelectableField.add_member(:compliance_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLIANCE_STATUS", traits: {"smithy.api#enumValue" => "compliance.status"}))
+    FindingsSelectableField.add_member(:compliance_standards, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLIANCE_STANDARDS", traits: {"smithy.api#enumValue" => "compliance.standards"}))
+    FindingsSelectableField.add_member(:finding_info_desc, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FINDING_INFO_DESC", traits: {"smithy.api#enumValue" => "finding_info.desc"}))
+    FindingsSelectableField.add_member(:finding_info_src_url, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FINDING_INFO_SRC_URL", traits: {"smithy.api#enumValue" => "finding_info.src_url"}))
+    FindingsSelectableField.add_member(:finding_info_title, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FINDING_INFO_TITLE", traits: {"smithy.api#enumValue" => "finding_info.title"}))
+    FindingsSelectableField.add_member(:finding_info_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FINDING_INFO_TYPES", traits: {"smithy.api#enumValue" => "finding_info.types"}))
+    FindingsSelectableField.add_member(:finding_info_uid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FINDING_INFO_UID", traits: {"smithy.api#enumValue" => "finding_info.uid"}))
+    FindingsSelectableField.add_member(:finding_info_related_events_traits_category, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FINDING_INFO_RELATED_EVENTS_TRAITS_CATEGORY", traits: {"smithy.api#enumValue" => "finding_info.related_events.traits.category"}))
+    FindingsSelectableField.add_member(:finding_info_related_events_uid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FINDING_INFO_RELATED_EVENTS_UID", traits: {"smithy.api#enumValue" => "finding_info.related_events.uid"}))
+    FindingsSelectableField.add_member(:finding_info_related_events_product_uid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FINDING_INFO_RELATED_EVENTS_PRODUCT_UID", traits: {"smithy.api#enumValue" => "finding_info.related_events.product.uid"}))
+    FindingsSelectableField.add_member(:finding_info_related_events_title, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FINDING_INFO_RELATED_EVENTS_TITLE", traits: {"smithy.api#enumValue" => "finding_info.related_events.title"}))
+    FindingsSelectableField.add_member(:metadata_product_feature_uid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "METADATA_PRODUCT_FEATURE_UID", traits: {"smithy.api#enumValue" => "metadata.product.feature.uid"}))
+    FindingsSelectableField.add_member(:metadata_product_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "METADATA_PRODUCT_NAME", traits: {"smithy.api#enumValue" => "metadata.product.name"}))
+    FindingsSelectableField.add_member(:metadata_product_uid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "METADATA_PRODUCT_UID", traits: {"smithy.api#enumValue" => "metadata.product.uid"}))
+    FindingsSelectableField.add_member(:metadata_product_vendor_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "METADATA_PRODUCT_VENDOR_NAME", traits: {"smithy.api#enumValue" => "metadata.product.vendor_name"}))
+    FindingsSelectableField.add_member(:remediation_desc, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REMEDIATION_DESC", traits: {"smithy.api#enumValue" => "remediation.desc"}))
+    FindingsSelectableField.add_member(:remediation_references, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REMEDIATION_REFERENCES", traits: {"smithy.api#enumValue" => "remediation.references"}))
+    FindingsSelectableField.add_member(:resources_cloud_partition, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCES_CLOUD_PARTITION", traits: {"smithy.api#enumValue" => "resources.cloud_partition"}))
+    FindingsSelectableField.add_member(:resources_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCES_NAME", traits: {"smithy.api#enumValue" => "resources.name"}))
+    FindingsSelectableField.add_member(:resources_owner_account_uid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCES_OWNER_ACCOUNT_UID", traits: {"smithy.api#enumValue" => "resources.owner.account.uid"}))
+    FindingsSelectableField.add_member(:resources_owner_org_uid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCES_OWNER_ORG_UID", traits: {"smithy.api#enumValue" => "resources.owner.org.uid"}))
+    FindingsSelectableField.add_member(:resources_owner_account_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCES_OWNER_ACCOUNT_NAME", traits: {"smithy.api#enumValue" => "resources.owner.account.name"}))
+    FindingsSelectableField.add_member(:resources_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCES_PROVIDER", traits: {"smithy.api#enumValue" => "resources.provider"}))
+    FindingsSelectableField.add_member(:resources_region, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCES_REGION", traits: {"smithy.api#enumValue" => "resources.region"}))
+    FindingsSelectableField.add_member(:resources_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCES_TYPE", traits: {"smithy.api#enumValue" => "resources.type"}))
+    FindingsSelectableField.add_member(:resources_uid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCES_UID", traits: {"smithy.api#enumValue" => "resources.uid"}))
+    FindingsSelectableField.add_member(:severity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SEVERITY", traits: {"smithy.api#enumValue" => "severity"}))
+    FindingsSelectableField.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STATUS", traits: {"smithy.api#enumValue" => "status"}))
+    FindingsSelectableField.add_member(:comment, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMMENT", traits: {"smithy.api#enumValue" => "comment"}))
+    FindingsSelectableField.add_member(:vulnerabilities_fix_coverage, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VULNERABILITIES_FIX_COVERAGE", traits: {"smithy.api#enumValue" => "vulnerabilities.fix_coverage"}))
+    FindingsSelectableField.add_member(:class_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLASS_NAME", traits: {"smithy.api#enumValue" => "class_name"}))
+    FindingsSelectableField.add_member(:databucket_encryption_details_algorithm, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DATABUCKET_ENCRYPTION_DETAILS_ALGORITHM", traits: {"smithy.api#enumValue" => "databucket.encryption_details.algorithm"}))
+    FindingsSelectableField.add_member(:databucket_encryption_details_key_uid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DATABUCKET_ENCRYPTION_DETAILS_KEY_UID", traits: {"smithy.api#enumValue" => "databucket.encryption_details.key_uid"}))
+    FindingsSelectableField.add_member(:databucket_file_data_classifications_classifier_details_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DATABUCKET_FILE_DATA_CLASSIFICATIONS_CLASSIFIER_DETAILS_TYPE", traits: {"smithy.api#enumValue" => "databucket.file.data_classifications.classifier_details.type"}))
+    FindingsSelectableField.add_member(:evidences_actor_user_account_uid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EVIDENCES_ACTOR_USER_ACCOUNT_UID", traits: {"smithy.api#enumValue" => "evidences.actor.user.account.uid"}))
+    FindingsSelectableField.add_member(:evidences_api_operation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EVIDENCES_API_OPERATION", traits: {"smithy.api#enumValue" => "evidences.api.operation"}))
+    FindingsSelectableField.add_member(:evidences_api_response_error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EVIDENCES_API_RESPONSE_ERROR_MESSAGE", traits: {"smithy.api#enumValue" => "evidences.api.response.error_message"}))
+    FindingsSelectableField.add_member(:evidences_api_service_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EVIDENCES_API_SERVICE_NAME", traits: {"smithy.api#enumValue" => "evidences.api.service.name"}))
+    FindingsSelectableField.add_member(:evidences_connection_info_direction, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EVIDENCES_CONNECTION_INFO_DIRECTION", traits: {"smithy.api#enumValue" => "evidences.connection_info.direction"}))
+    FindingsSelectableField.add_member(:evidences_connection_info_protocol_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EVIDENCES_CONNECTION_INFO_PROTOCOL_NAME", traits: {"smithy.api#enumValue" => "evidences.connection_info.protocol_name"}))
+    FindingsSelectableField.add_member(:evidences_dst_endpoint_autonomous_system_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EVIDENCES_DST_ENDPOINT_AUTONOMOUS_SYSTEM_NAME", traits: {"smithy.api#enumValue" => "evidences.dst_endpoint.autonomous_system.name"}))
+    FindingsSelectableField.add_member(:evidences_dst_endpoint_location_city, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EVIDENCES_DST_ENDPOINT_LOCATION_CITY", traits: {"smithy.api#enumValue" => "evidences.dst_endpoint.location.city"}))
+    FindingsSelectableField.add_member(:evidences_dst_endpoint_location_country, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EVIDENCES_DST_ENDPOINT_LOCATION_COUNTRY", traits: {"smithy.api#enumValue" => "evidences.dst_endpoint.location.country"}))
+    FindingsSelectableField.add_member(:evidences_src_endpoint_autonomous_system_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EVIDENCES_SRC_ENDPOINT_AUTONOMOUS_SYSTEM_NAME", traits: {"smithy.api#enumValue" => "evidences.src_endpoint.autonomous_system.name"}))
+    FindingsSelectableField.add_member(:evidences_src_endpoint_hostname, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EVIDENCES_SRC_ENDPOINT_HOSTNAME", traits: {"smithy.api#enumValue" => "evidences.src_endpoint.hostname"}))
+    FindingsSelectableField.add_member(:evidences_src_endpoint_location_city, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EVIDENCES_SRC_ENDPOINT_LOCATION_CITY", traits: {"smithy.api#enumValue" => "evidences.src_endpoint.location.city"}))
+    FindingsSelectableField.add_member(:evidences_src_endpoint_location_country, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EVIDENCES_SRC_ENDPOINT_LOCATION_COUNTRY", traits: {"smithy.api#enumValue" => "evidences.src_endpoint.location.country"}))
+    FindingsSelectableField.add_member(:finding_info_analytic_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FINDING_INFO_ANALYTIC_NAME", traits: {"smithy.api#enumValue" => "finding_info.analytic.name"}))
+    FindingsSelectableField.add_member(:malware_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MALWARE_NAME", traits: {"smithy.api#enumValue" => "malware.name"}))
+    FindingsSelectableField.add_member(:malware_scan_info_uid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MALWARE_SCAN_INFO_UID", traits: {"smithy.api#enumValue" => "malware_scan_info.uid"}))
+    FindingsSelectableField.add_member(:malware_severity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MALWARE_SEVERITY", traits: {"smithy.api#enumValue" => "malware.severity"}))
+    FindingsSelectableField.add_member(:resources_cloud_function_layers_uid_alt, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCES_CLOUD_FUNCTION_LAYERS_UID_ALT", traits: {"smithy.api#enumValue" => "resources.cloud_function.layers.uid_alt"}))
+    FindingsSelectableField.add_member(:resources_cloud_function_runtime, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCES_CLOUD_FUNCTION_RUNTIME", traits: {"smithy.api#enumValue" => "resources.cloud_function.runtime"}))
+    FindingsSelectableField.add_member(:resources_cloud_function_user_uid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCES_CLOUD_FUNCTION_USER_UID", traits: {"smithy.api#enumValue" => "resources.cloud_function.user.uid"}))
+    FindingsSelectableField.add_member(:resources_device_encryption_details_key_uid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCES_DEVICE_ENCRYPTION_DETAILS_KEY_UID", traits: {"smithy.api#enumValue" => "resources.device.encryption_details.key_uid"}))
+    FindingsSelectableField.add_member(:resources_device_image_uid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCES_DEVICE_IMAGE_UID", traits: {"smithy.api#enumValue" => "resources.device.image.uid"}))
+    FindingsSelectableField.add_member(:resources_image_architecture, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCES_IMAGE_ARCHITECTURE", traits: {"smithy.api#enumValue" => "resources.image.architecture"}))
+    FindingsSelectableField.add_member(:resources_image_registry_uid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCES_IMAGE_REGISTRY_UID", traits: {"smithy.api#enumValue" => "resources.image.registry_uid"}))
+    FindingsSelectableField.add_member(:resources_image_repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCES_IMAGE_REPOSITORY_NAME", traits: {"smithy.api#enumValue" => "resources.image.repository_name"}))
+    FindingsSelectableField.add_member(:resources_image_uid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCES_IMAGE_UID", traits: {"smithy.api#enumValue" => "resources.image.uid"}))
+    FindingsSelectableField.add_member(:resources_subnet_info_uid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCES_SUBNET_INFO_UID", traits: {"smithy.api#enumValue" => "resources.subnet_info.uid"}))
+    FindingsSelectableField.add_member(:resources_vpc_uid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCES_VPC_UID", traits: {"smithy.api#enumValue" => "resources.vpc_uid"}))
+    FindingsSelectableField.add_member(:vulnerabilities_affected_code_file_path, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VULNERABILITIES_AFFECTED_CODE_FILE_PATH", traits: {"smithy.api#enumValue" => "vulnerabilities.affected_code.file.path"}))
+    FindingsSelectableField.add_member(:vulnerabilities_affected_packages_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VULNERABILITIES_AFFECTED_PACKAGES_NAME", traits: {"smithy.api#enumValue" => "vulnerabilities.affected_packages.name"}))
+    FindingsSelectableField.add_member(:vulnerabilities_cve_cvss_vendor_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VULNERABILITIES_CVE_CVSS_VENDOR_NAME", traits: {"smithy.api#enumValue" => "vulnerabilities.cve.cvss.vendor_name"}))
+    FindingsSelectableField.add_member(:vulnerabilities_cve_cvss_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VULNERABILITIES_CVE_CVSS_VERSION", traits: {"smithy.api#enumValue" => "vulnerabilities.cve.cvss.version"}))
+    FindingsSelectableField.add_member(:vulnerabilities_cve_epss_score, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VULNERABILITIES_CVE_EPSS_SCORE", traits: {"smithy.api#enumValue" => "vulnerabilities.cve.epss.score"}))
+    FindingsSelectableField.add_member(:vulnerabilities_cve_uid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VULNERABILITIES_CVE_UID", traits: {"smithy.api#enumValue" => "vulnerabilities.cve.uid"}))
+    FindingsSelectableField.add_member(:vulnerabilities_related_vulnerabilities, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VULNERABILITIES_RELATED_VULNERABILITIES", traits: {"smithy.api#enumValue" => "vulnerabilities.related_vulnerabilities"}))
+    FindingsSelectableField.add_member(:vendor_attributes_severity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VENDOR_ATTRIBUTES_SEVERITY", traits: {"smithy.api#enumValue" => "vendor_attributes.severity"}))
+    FindingsSelectableField.add_member(:activity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVITY_ID", traits: {"smithy.api#enumValue" => "activity_id"}))
+    FindingsSelectableField.add_member(:compliance_status_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLIANCE_STATUS_ID", traits: {"smithy.api#enumValue" => "compliance.status_id"}))
+    FindingsSelectableField.add_member(:confidence_score, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONFIDENCE_SCORE", traits: {"smithy.api#enumValue" => "confidence_score"}))
+    FindingsSelectableField.add_member(:severity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SEVERITY_ID", traits: {"smithy.api#enumValue" => "severity_id"}))
+    FindingsSelectableField.add_member(:status_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STATUS_ID", traits: {"smithy.api#enumValue" => "status_id"}))
+    FindingsSelectableField.add_member(:finding_info_related_events_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FINDING_INFO_RELATED_EVENTS_COUNT", traits: {"smithy.api#enumValue" => "finding_info.related_events_count"}))
+    FindingsSelectableField.add_member(:evidences_api_response_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EVIDENCES_API_RESPONSE_CODE", traits: {"smithy.api#enumValue" => "evidences.api.response.code"}))
+    FindingsSelectableField.add_member(:evidences_dst_endpoint_autonomous_system_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EVIDENCES_DST_ENDPOINT_AUTONOMOUS_SYSTEM_NUMBER", traits: {"smithy.api#enumValue" => "evidences.dst_endpoint.autonomous_system.number"}))
+    FindingsSelectableField.add_member(:evidences_dst_endpoint_port, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EVIDENCES_DST_ENDPOINT_PORT", traits: {"smithy.api#enumValue" => "evidences.dst_endpoint.port"}))
+    FindingsSelectableField.add_member(:evidences_src_endpoint_autonomous_system_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EVIDENCES_SRC_ENDPOINT_AUTONOMOUS_SYSTEM_NUMBER", traits: {"smithy.api#enumValue" => "evidences.src_endpoint.autonomous_system.number"}))
+    FindingsSelectableField.add_member(:evidences_src_endpoint_port, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EVIDENCES_SRC_ENDPOINT_PORT", traits: {"smithy.api#enumValue" => "evidences.src_endpoint.port"}))
+    FindingsSelectableField.add_member(:resources_image_in_use_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCES_IMAGE_IN_USE_COUNT", traits: {"smithy.api#enumValue" => "resources.image.in_use_count"}))
+    FindingsSelectableField.add_member(:vulnerabilities_cve_cvss_base_score, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VULNERABILITIES_CVE_CVSS_BASE_SCORE", traits: {"smithy.api#enumValue" => "vulnerabilities.cve.cvss.base_score"}))
+    FindingsSelectableField.add_member(:vendor_attributes_severity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VENDOR_ATTRIBUTES_SEVERITY_ID", traits: {"smithy.api#enumValue" => "vendor_attributes.severity_id"}))
+    FindingsSelectableField.add_member(:finding_info_created_time_dt, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FINDING_INFO_CREATED_TIME_DT", traits: {"smithy.api#enumValue" => "finding_info.created_time_dt"}))
+    FindingsSelectableField.add_member(:finding_info_first_seen_time_dt, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FINDING_INFO_FIRST_SEEN_TIME_DT", traits: {"smithy.api#enumValue" => "finding_info.first_seen_time_dt"}))
+    FindingsSelectableField.add_member(:finding_info_last_seen_time_dt, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FINDING_INFO_LAST_SEEN_TIME_DT", traits: {"smithy.api#enumValue" => "finding_info.last_seen_time_dt"}))
+    FindingsSelectableField.add_member(:finding_info_modified_time_dt, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FINDING_INFO_MODIFIED_TIME_DT", traits: {"smithy.api#enumValue" => "finding_info.modified_time_dt"}))
+    FindingsSelectableField.add_member(:resources_image_created_time_dt, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCES_IMAGE_CREATED_TIME_DT", traits: {"smithy.api#enumValue" => "resources.image.created_time_dt"}))
+    FindingsSelectableField.add_member(:resources_image_last_used_time_dt, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCES_IMAGE_LAST_USED_TIME_DT", traits: {"smithy.api#enumValue" => "resources.image.last_used_time_dt"}))
+    FindingsSelectableField.add_member(:resources_modified_time_dt, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCES_MODIFIED_TIME_DT", traits: {"smithy.api#enumValue" => "resources.modified_time_dt"}))
+    FindingsSelectableField.add_member(:compliance_assessments_meets_criteria, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLIANCE_ASSESSMENTS_MEETS_CRITERIA", traits: {"smithy.api#enumValue" => "compliance.assessments.meets_criteria"}))
+    FindingsSelectableField.add_member(:vulnerabilities_is_exploit_available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VULNERABILITIES_IS_EXPLOIT_AVAILABLE", traits: {"smithy.api#enumValue" => "vulnerabilities.is_exploit_available"}))
+    FindingsSelectableField.add_member(:vulnerabilities_is_fix_available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VULNERABILITIES_IS_FIX_AVAILABLE", traits: {"smithy.api#enumValue" => "vulnerabilities.is_fix_available"}))
+    FindingsSelectableField.add_member(:resources_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCES_TAGS", traits: {"smithy.api#enumValue" => "resources.tags"}))
+    FindingsSelectableField.add_member(:compliance_control_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLIANCE_CONTROL_PARAMETERS", traits: {"smithy.api#enumValue" => "compliance.control_parameters"}))
+    FindingsSelectableField.add_member(:databucket_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DATABUCKET_TAGS", traits: {"smithy.api#enumValue" => "databucket.tags"}))
+    FindingsSelectableField.add_member(:finding_info_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FINDING_INFO_TAGS", traits: {"smithy.api#enumValue" => "finding_info.tags"}))
+    FindingsSelectableField.add_member(:evidences_dst_endpoint_ip, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EVIDENCES_DST_ENDPOINT_IP", traits: {"smithy.api#enumValue" => "evidences.dst_endpoint.ip"}))
+    FindingsSelectableField.add_member(:evidences_src_endpoint_ip, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EVIDENCES_SRC_ENDPOINT_IP", traits: {"smithy.api#enumValue" => "evidences.src_endpoint.ip"}))
+    FindingsSelectedFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingsSelectableField, name: "member"))
+    FindingsTrendsCompositeFilter.add_member(:string_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingsTrendsStringFilterList, name: "StringFilters"))
+    FindingsTrendsCompositeFilter.add_member(:nested_composite_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingsTrendsCompositeFilterList, name: "NestedCompositeFilters"))
+    FindingsTrendsCompositeFilter.add_member(:operator, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedOperators, name: "Operator"))
+    FindingsTrendsCompositeFilter.type = Types::FindingsTrendsCompositeFilter
+    FindingsTrendsCompositeFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingsTrendsCompositeFilter, name: "member"))
+    FindingsTrendsFilters.add_member(:composite_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingsTrendsCompositeFilterList, name: "CompositeFilters"))
+    FindingsTrendsFilters.add_member(:composite_operator, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedOperators, name: "CompositeOperator"))
+    FindingsTrendsFilters.type = Types::FindingsTrendsFilters
+    FindingsTrendsStringField.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCOUNT_ID", traits: {"smithy.api#enumValue" => "account_id"}))
+    FindingsTrendsStringField.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REGION", traits: {"smithy.api#enumValue" => "region"}))
+    FindingsTrendsStringField.add_member(:finding_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FINDING_TYPE", traits: {"smithy.api#enumValue" => "finding_types"}))
+    FindingsTrendsStringField.add_member(:finding_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FINDING_STATUS", traits: {"smithy.api#enumValue" => "finding_status"}))
+    FindingsTrendsStringField.add_member(:cve_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CVE_ID", traits: {"smithy.api#enumValue" => "finding_cve_ids"}))
+    FindingsTrendsStringField.add_member(:compliance_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLIANCE_STATUS", traits: {"smithy.api#enumValue" => "finding_compliance_status"}))
+    FindingsTrendsStringField.add_member(:compliance_control, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLIANCE_CONTROL", traits: {"smithy.api#enumValue" => "finding_control_id"}))
+    FindingsTrendsStringField.add_member(:finding_class, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FINDING_CLASS", traits: {"smithy.api#enumValue" => "finding_class_name"}))
+    FindingsTrendsStringField.add_member(:provider_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PROVIDER_NAME", traits: {"smithy.api#enumValue" => "finding_provider"}))
+    FindingsTrendsStringField.add_member(:finding_activity_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FINDING_ACTIVITY_NAME", traits: {"smithy.api#enumValue" => "finding_activity_name"}))
+    FindingsTrendsStringField.add_member(:resource_cloud_providers, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_CLOUD_PROVIDERS", traits: {"smithy.api#enumValue" => "resource_cloud_providers"}))
+    FindingsTrendsStringField.add_member(:resource_regions, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_REGIONS", traits: {"smithy.api#enumValue" => "resource_regions"}))
+    FindingsTrendsStringField.add_member(:resource_owner_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_OWNER_IDS", traits: {"smithy.api#enumValue" => "resource_owner_ids"}))
+    FindingsTrendsStringField.add_member(:resource_owner_organization_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_OWNER_ORGANIZATION_IDS", traits: {"smithy.api#enumValue" => "resource_owner_organization_ids"}))
+    FindingsTrendsStringFilter.add_member(:field_name, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingsTrendsStringField, name: "FieldName"))
+    FindingsTrendsStringFilter.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilter, name: "Filter"))
+    FindingsTrendsStringFilter.type = Types::FindingsTrendsStringFilter
+    FindingsTrendsStringFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingsTrendsStringFilter, name: "member"))
     FirewallPolicyDetails.add_member(:stateful_rule_group_references, ::Smithy::Schema::Shapes::MemberShape.new(target: FirewallPolicyStatefulRuleGroupReferencesList, name: "StatefulRuleGroupReferences"))
     FirewallPolicyDetails.add_member(:stateless_custom_actions, ::Smithy::Schema::Shapes::MemberShape.new(target: FirewallPolicyStatelessCustomActionsList, name: "StatelessCustomActions"))
     FirewallPolicyDetails.add_member(:stateless_default_actions, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyStringList, name: "StatelessDefaultActions"))
@@ -5178,6 +5699,21 @@ module Aws::SecurityHub
     FirewallPolicyStatelessRuleGroupReferencesDetails.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ResourceArn"))
     FirewallPolicyStatelessRuleGroupReferencesDetails.type = Types::FirewallPolicyStatelessRuleGroupReferencesDetails
     FirewallPolicyStatelessRuleGroupReferencesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FirewallPolicyStatelessRuleGroupReferencesDetails, name: "member"))
+    FreeTrialAccountIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FreeTrialAccountId, name: "member"))
+    FreeTrialStatus.add_member(:feature_type, ::Smithy::Schema::Shapes::MemberShape.new(target: FreeTrialType, name: "FeatureType", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    FreeTrialStatus.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: FreeTrialStatusValue, name: "Status", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    FreeTrialStatus.add_member(:started_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "StartedAt", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    FreeTrialStatus.add_member(:expires_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "ExpiresAt", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    FreeTrialStatus.type = Types::FreeTrialStatus
+    FreeTrialStatusList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FreeTrialStatus, name: "member"))
+    FreeTrialStatusValue.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
+    FreeTrialStatusValue.add_member(:inactive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INACTIVE", traits: {"smithy.api#enumValue" => "INACTIVE"}))
+    FreeTrialStatusValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FreeTrialStatusValue, name: "member"))
+    FreeTrialType.add_member(:security_hub_v2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SECURITY_HUB_V2", traits: {"smithy.api#enumValue" => "SECURITY_HUB_V2"}))
+    FreeTrialType.add_member(:security_hub_v2_multi_cloud_azure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SECURITY_HUB_V2_MULTI_CLOUD_AZURE", traits: {"smithy.api#enumValue" => "SECURITY_HUB_V2_MULTI_CLOUD_AZURE"}))
+    GenerateRecommendedPolicyV2Request.add_member(:metadata_uid, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "MetadataUid", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GenerateRecommendedPolicyV2Request.type = Types::GenerateRecommendedPolicyV2Request
+    GenerateRecommendedPolicyV2Response.type = Types::GenerateRecommendedPolicyV2Response
     GeneratorDetails.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Name"))
     GeneratorDetails.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Description"))
     GeneratorDetails.add_member(:labels, ::Smithy::Schema::Shapes::MemberShape.new(target: TypeList, name: "Labels"))
@@ -5228,6 +5764,19 @@ module Aws::SecurityHub
     GetConfigurationPolicyResponse.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedAt"))
     GetConfigurationPolicyResponse.add_member(:configuration_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: Policy, name: "ConfigurationPolicy"))
     GetConfigurationPolicyResponse.type = Types::GetConfigurationPolicyResponse
+    GetConnectorRequest.add_member(:connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetConnectorRequest.type = Types::GetConnectorRequest
+    GetConnectorResponse.add_member(:connector_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ConnectorArn"))
+    GetConnectorResponse.add_member(:connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ConnectorId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    GetConnectorResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Name", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    GetConnectorResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Description"))
+    GetConnectorResponse.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedAt", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    GetConnectorResponse.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastUpdatedAt", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    GetConnectorResponse.add_member(:health, ::Smithy::Schema::Shapes::MemberShape.new(target: CspmHealthCheck, name: "Health", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    GetConnectorResponse.add_member(:provider_detail, ::Smithy::Schema::Shapes::MemberShape.new(target: CspmProviderDetail, name: "ProviderDetail", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    GetConnectorResponse.add_member(:created_by, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "CreatedBy"))
+    GetConnectorResponse.add_member(:enablement_status, ::Smithy::Schema::Shapes::MemberShape.new(target: CspmEnablementStatus, name: "EnablementStatus"))
+    GetConnectorResponse.type = Types::GetConnectorResponse
     GetConnectorV2Request.add_member(:connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetConnectorV2Request.type = Types::GetConnectorV2Request
     GetConnectorV2Response.add_member(:connector_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ConnectorArn"))
@@ -5239,14 +5788,31 @@ module Aws::SecurityHub
     GetConnectorV2Response.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastUpdatedAt", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     GetConnectorV2Response.add_member(:health, ::Smithy::Schema::Shapes::MemberShape.new(target: HealthCheck, name: "Health", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     GetConnectorV2Response.add_member(:provider_detail, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderDetail, name: "ProviderDetail", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    GetConnectorV2Response.add_member(:enablement_status, ::Smithy::Schema::Shapes::MemberShape.new(target: EnablementStatus, name: "EnablementStatus"))
+    GetConnectorV2Response.add_member(:enablement_status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "EnablementStatusReason"))
     GetConnectorV2Response.type = Types::GetConnectorV2Response
     GetEnabledStandardsRequest.add_member(:standards_subscription_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: StandardsSubscriptionArns, name: "StandardsSubscriptionArns"))
     GetEnabledStandardsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     GetEnabledStandardsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults"))
+    GetEnabledStandardsRequest.add_member(:providers, ::Smithy::Schema::Shapes::MemberShape.new(target: StandardsProviders, name: "Providers"))
     GetEnabledStandardsRequest.type = Types::GetEnabledStandardsRequest
     GetEnabledStandardsResponse.add_member(:standards_subscriptions, ::Smithy::Schema::Shapes::MemberShape.new(target: StandardsSubscriptions, name: "StandardsSubscriptions"))
     GetEnabledStandardsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     GetEnabledStandardsResponse.type = Types::GetEnabledStandardsResponse
+    GetExportJobV2Request.add_member(:export_job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportJobId, name: "ExportJobId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetExportJobV2Request.type = Types::GetExportJobV2Request
+    GetExportJobV2Response.add_member(:export_job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportJobId, name: "ExportJobId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    GetExportJobV2Response.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportName, name: "Name"))
+    GetExportJobV2Response.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportStatus, name: "Status", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    GetExportJobV2Response.add_member(:data_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportDataType, name: "DataType", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    GetExportJobV2Response.add_member(:output_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportOutput, name: "OutputConfiguration"))
+    GetExportJobV2Response.add_member(:scopes, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportScopes, name: "Scopes"))
+    GetExportJobV2Response.add_member(:destination, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportDestination, name: "Destination", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    GetExportJobV2Response.add_member(:failure_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportFailureCode, name: "FailureCode"))
+    GetExportJobV2Response.add_member(:failure_message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "FailureMessage"))
+    GetExportJobV2Response.add_member(:started_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "StartedAt", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    GetExportJobV2Response.add_member(:ended_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "EndedAt"))
+    GetExportJobV2Response.type = Types::GetExportJobV2Response
     GetFindingAggregatorRequest.add_member(:finding_aggregator_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "FindingAggregatorArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetFindingAggregatorRequest.type = Types::GetFindingAggregatorRequest
     GetFindingAggregatorResponse.add_member(:finding_aggregator_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "FindingAggregatorArn"))
@@ -5264,6 +5830,7 @@ module Aws::SecurityHub
     GetFindingHistoryResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     GetFindingHistoryResponse.type = Types::GetFindingHistoryResponse
     GetFindingStatisticsV2Request.add_member(:group_by_rules, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupByRules, name: "GroupByRules", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    GetFindingStatisticsV2Request.add_member(:scopes, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingScopes, name: "Scopes"))
     GetFindingStatisticsV2Request.add_member(:sort_order, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrder, name: "SortOrder"))
     GetFindingStatisticsV2Request.add_member(:max_statistic_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxStatisticResults, name: "MaxStatisticResults"))
     GetFindingStatisticsV2Request.type = Types::GetFindingStatisticsV2Request
@@ -5277,7 +5844,18 @@ module Aws::SecurityHub
     GetFindingsResponse.add_member(:findings, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsSecurityFindingList, name: "Findings", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     GetFindingsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     GetFindingsResponse.type = Types::GetFindingsResponse
+    GetFindingsTrendsV2Request.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingsTrendsFilters, name: "Filters"))
+    GetFindingsTrendsV2Request.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "StartTime", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    GetFindingsTrendsV2Request.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "EndTime", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    GetFindingsTrendsV2Request.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    GetFindingsTrendsV2Request.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults"))
+    GetFindingsTrendsV2Request.type = Types::GetFindingsTrendsV2Request
+    GetFindingsTrendsV2Response.add_member(:granularity, ::Smithy::Schema::Shapes::MemberShape.new(target: GranularityField, name: "Granularity", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    GetFindingsTrendsV2Response.add_member(:trends_metrics, ::Smithy::Schema::Shapes::MemberShape.new(target: TrendsMetrics, name: "TrendsMetrics", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    GetFindingsTrendsV2Response.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    GetFindingsTrendsV2Response.type = Types::GetFindingsTrendsV2Response
     GetFindingsV2Request.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: OcsfFindingFilters, name: "Filters"))
+    GetFindingsV2Request.add_member(:scopes, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingScopes, name: "Scopes"))
     GetFindingsV2Request.add_member(:sort_criteria, ::Smithy::Schema::Shapes::MemberShape.new(target: SortCriteria, name: "SortCriteria"))
     GetFindingsV2Request.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     GetFindingsV2Request.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults"))
@@ -5307,13 +5885,47 @@ module Aws::SecurityHub
     GetMembersResponse.add_member(:members, ::Smithy::Schema::Shapes::MemberShape.new(target: MemberList, name: "Members"))
     GetMembersResponse.add_member(:unprocessed_accounts, ::Smithy::Schema::Shapes::MemberShape.new(target: ResultList, name: "UnprocessedAccounts"))
     GetMembersResponse.type = Types::GetMembersResponse
+    GetRecommendedPolicyV2Request.add_member(:metadata_uid, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "MetadataUid", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetRecommendedPolicyV2Request.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
+    GetRecommendedPolicyV2Request.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults", traits: {"smithy.api#httpQuery" => "MaxResults"}))
+    GetRecommendedPolicyV2Request.type = Types::GetRecommendedPolicyV2Request
+    GetRecommendedPolicyV2Response.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    GetRecommendedPolicyV2Response.add_member(:recommendation_type, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationType, name: "RecommendationType"))
+    GetRecommendedPolicyV2Response.add_member(:recommendation_steps, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationSteps, name: "RecommendationSteps"))
+    GetRecommendedPolicyV2Response.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationError, name: "Error"))
+    GetRecommendedPolicyV2Response.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationStatus, name: "Status"))
+    GetRecommendedPolicyV2Response.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ResourceArn"))
+    GetRecommendedPolicyV2Response.type = Types::GetRecommendedPolicyV2Response
+    GetRemediationsV2Request.add_member(:target_uid, ::Smithy::Schema::Shapes::MemberShape.new(target: RemediationStringUid, name: "TargetUid"))
+    GetRemediationsV2Request.add_member(:metadata_uid, ::Smithy::Schema::Shapes::MemberShape.new(target: RemediationStringUid, name: "MetadataUid"))
+    GetRemediationsV2Request.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: RemediationFilters, name: "Filters"))
+    GetRemediationsV2Request.add_member(:show_guidance, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "ShowGuidance"))
+    GetRemediationsV2Request.add_member(:guidance_format, ::Smithy::Schema::Shapes::MemberShape.new(target: GuidanceFormat, name: "GuidanceFormat"))
+    GetRemediationsV2Request.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults"))
+    GetRemediationsV2Request.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    GetRemediationsV2Request.type = Types::GetRemediationsV2Request
+    GetRemediationsV2Response.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: RemediationV2ItemList, name: "Items", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    GetRemediationsV2Response.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    GetRemediationsV2Response.type = Types::GetRemediationsV2Response
     GetResourcesStatisticsV2Request.add_member(:group_by_rules, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceGroupByRules, name: "GroupByRules", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    GetResourcesStatisticsV2Request.add_member(:scopes, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceScopes, name: "Scopes"))
     GetResourcesStatisticsV2Request.add_member(:sort_order, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrder, name: "SortOrder"))
     GetResourcesStatisticsV2Request.add_member(:max_statistic_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxStatisticResults, name: "MaxStatisticResults"))
     GetResourcesStatisticsV2Request.type = Types::GetResourcesStatisticsV2Request
     GetResourcesStatisticsV2Response.add_member(:group_by_results, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupByResults, name: "GroupByResults", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     GetResourcesStatisticsV2Response.type = Types::GetResourcesStatisticsV2Response
+    GetResourcesTrendsV2Request.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcesTrendsFilters, name: "Filters"))
+    GetResourcesTrendsV2Request.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "StartTime", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    GetResourcesTrendsV2Request.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "EndTime", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    GetResourcesTrendsV2Request.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    GetResourcesTrendsV2Request.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults"))
+    GetResourcesTrendsV2Request.type = Types::GetResourcesTrendsV2Request
+    GetResourcesTrendsV2Response.add_member(:granularity, ::Smithy::Schema::Shapes::MemberShape.new(target: GranularityField, name: "Granularity", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    GetResourcesTrendsV2Response.add_member(:trends_metrics, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcesTrendsMetrics, name: "TrendsMetrics", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    GetResourcesTrendsV2Response.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    GetResourcesTrendsV2Response.type = Types::GetResourcesTrendsV2Response
     GetResourcesV2Request.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcesFilters, name: "Filters"))
+    GetResourcesV2Request.add_member(:scopes, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceScopes, name: "Scopes"))
     GetResourcesV2Request.add_member(:sort_criteria, ::Smithy::Schema::Shapes::MemberShape.new(target: SortCriteria, name: "SortCriteria"))
     GetResourcesV2Request.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     GetResourcesV2Request.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults"))
@@ -5325,6 +5937,9 @@ module Aws::SecurityHub
     GetSecurityControlDefinitionRequest.type = Types::GetSecurityControlDefinitionRequest
     GetSecurityControlDefinitionResponse.add_member(:security_control_definition, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityControlDefinition, name: "SecurityControlDefinition", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     GetSecurityControlDefinitionResponse.type = Types::GetSecurityControlDefinitionResponse
+    GranularityField.add_member(:daily, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DAILY", traits: {"smithy.api#enumValue" => "Daily"}))
+    GranularityField.add_member(:weekly, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WEEKLY", traits: {"smithy.api#enumValue" => "Weekly"}))
+    GranularityField.add_member(:monthly, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MONTHLY", traits: {"smithy.api#enumValue" => "Monthly"}))
     GroupByField.add_member(:activity_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVITY_NAME", traits: {"smithy.api#enumValue" => "activity_name"}))
     GroupByField.add_member(:cloud_account_uid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLOUD_ACCOUNT_UID", traits: {"smithy.api#enumValue" => "cloud.account.uid"}))
     GroupByField.add_member(:cloud_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLOUD_PROVIDER", traits: {"smithy.api#enumValue" => "cloud.provider"}))
@@ -5333,15 +5948,32 @@ module Aws::SecurityHub
     GroupByField.add_member(:compliance_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLIANCE_STATUS", traits: {"smithy.api#enumValue" => "compliance.status"}))
     GroupByField.add_member(:compliance_control, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLIANCE_CONTROL", traits: {"smithy.api#enumValue" => "compliance.control"}))
     GroupByField.add_member(:finding_info_title, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FINDING_INFO_TITLE", traits: {"smithy.api#enumValue" => "finding_info.title"}))
+    GroupByField.add_member(:finding_info_related_events_traits_category, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FINDING_INFO_RELATED_EVENTS_TRAITS_CATEGORY", traits: {"smithy.api#enumValue" => "finding_info.related_events.traits.category"}))
     GroupByField.add_member(:finding_info_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FINDING_INFO_TYPES", traits: {"smithy.api#enumValue" => "finding_info.types"}))
+    GroupByField.add_member(:impact, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IMPACT", traits: {"smithy.api#enumValue" => "impact"}))
+    GroupByField.add_member(:likelihood, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LIKELIHOOD", traits: {"smithy.api#enumValue" => "likelihood"}))
     GroupByField.add_member(:metadata_product_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "METADATA_PRODUCT_NAME", traits: {"smithy.api#enumValue" => "metadata.product.name"}))
     GroupByField.add_member(:metadata_product_uid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "METADATA_PRODUCT_UID", traits: {"smithy.api#enumValue" => "metadata.product.uid"}))
     GroupByField.add_member(:resources_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCES_TYPE", traits: {"smithy.api#enumValue" => "resources.type"}))
+    GroupByField.add_member(:resources_cloud_partition, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCES_CLOUD_PARTITION", traits: {"smithy.api#enumValue" => "resources.cloud_partition"}))
+    GroupByField.add_member(:resources_criticality, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCES_CRITICALITY", traits: {"smithy.api#enumValue" => "resources.criticality"}))
+    GroupByField.add_member(:resources_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCES_NAME", traits: {"smithy.api#enumValue" => "resources.name"}))
+    GroupByField.add_member(:resources_owner_account_uid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCES_OWNER_ACCOUNT_UID", traits: {"smithy.api#enumValue" => "resources.owner.account.uid"}))
+    GroupByField.add_member(:resources_owner_org_uid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCES_OWNER_ORG_UID", traits: {"smithy.api#enumValue" => "resources.owner.org.uid"}))
+    GroupByField.add_member(:resources_owner_account_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCES_OWNER_ACCOUNT_NAME", traits: {"smithy.api#enumValue" => "resources.owner.account.name"}))
+    GroupByField.add_member(:resources_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCES_PROVIDER", traits: {"smithy.api#enumValue" => "resources.provider"}))
+    GroupByField.add_member(:resources_region, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCES_REGION", traits: {"smithy.api#enumValue" => "resources.region"}))
     GroupByField.add_member(:resources_uid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCES_UID", traits: {"smithy.api#enumValue" => "resources.uid"}))
     GroupByField.add_member(:severity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SEVERITY", traits: {"smithy.api#enumValue" => "severity"}))
     GroupByField.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STATUS", traits: {"smithy.api#enumValue" => "status"}))
     GroupByField.add_member(:vulnerabilities_fix_coverage, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VULNERABILITIES_FIX_COVERAGE", traits: {"smithy.api#enumValue" => "vulnerabilities.fix_coverage"}))
     GroupByField.add_member(:class_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLASS_NAME", traits: {"smithy.api#enumValue" => "class_name"}))
+    GroupByField.add_member(:vulnerabilities_affected_packages_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VULNERABILITIES_AFFECTED_PACKAGES_NAME", traits: {"smithy.api#enumValue" => "vulnerabilities.affected_packages.name"}))
+    GroupByField.add_member(:finding_info_analytic_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FINDING_INFO_ANALYTIC_NAME", traits: {"smithy.api#enumValue" => "finding_info.analytic.name"}))
+    GroupByField.add_member(:compliance_standards, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLIANCE_STANDARDS", traits: {"smithy.api#enumValue" => "compliance.standards"}))
+    GroupByField.add_member(:cloud_account_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLOUD_ACCOUNT_NAME", traits: {"smithy.api#enumValue" => "cloud.account.name"}))
+    GroupByField.add_member(:vendor_attributes_severity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VENDOR_ATTRIBUTES_SEVERITY", traits: {"smithy.api#enumValue" => "vendor_attributes.severity"}))
+    GroupByField.add_member(:metadata_product_vendor_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "METADATA_PRODUCT_VENDOR_NAME", traits: {"smithy.api#enumValue" => "metadata.product.vendor_name"}))
     GroupByResult.add_member(:group_by_field, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "GroupByField"))
     GroupByResult.add_member(:group_by_values, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupByValues, name: "GroupByValues"))
     GroupByResult.type = Types::GroupByResult
@@ -5354,10 +5986,31 @@ module Aws::SecurityHub
     GroupByValue.add_member(:count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Count"))
     GroupByValue.type = Types::GroupByValue
     GroupByValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupByValue, name: "member"))
+    GuidanceFormat.add_member(:all, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALL", traits: {"smithy.api#enumValue" => "All"}))
+    GuidanceFormat.add_member(:aws_cli, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_CLI", traits: {"smithy.api#enumValue" => "AwsCli"}))
+    GuidanceFormat.add_member(:cli, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLI", traits: {"smithy.api#enumValue" => "Cli"}))
+    GuidanceFormat.add_member(:python, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PYTHON", traits: {"smithy.api#enumValue" => "Python"}))
+    GuidanceFormat.add_member(:terraform, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TERRAFORM", traits: {"smithy.api#enumValue" => "Terraform"}))
+    GuidanceFormat.add_member(:cdk, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CDK", traits: {"smithy.api#enumValue" => "Cdk"}))
+    GuidanceFormat.add_member(:cloudformation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLOUDFORMATION", traits: {"smithy.api#enumValue" => "CloudFormation"}))
+    GuidanceFormat.add_member(:iac, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IAC", traits: {"smithy.api#enumValue" => "IaC"}))
+    GuidanceFormat.add_member(:template, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TEMPLATE", traits: {"smithy.api#enumValue" => "Template"}))
     HealthCheck.add_member(:connector_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorStatus, name: "ConnectorStatus", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     HealthCheck.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Message"))
     HealthCheck.add_member(:last_checked_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastCheckedAt", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    HealthCheck.add_member(:issues, ::Smithy::Schema::Shapes::MemberShape.new(target: HealthIssueList, name: "Issues"))
     HealthCheck.type = Types::HealthCheck
+    HealthIssue.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: HealthIssueCode, name: "Code", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    HealthIssue.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Message", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    HealthIssue.type = Types::HealthIssue
+    HealthIssueCode.add_member(:authentication_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AUTHENTICATION_FAILURE", traits: {"smithy.api#enumValue" => "AUTHENTICATION_FAILURE"}))
+    HealthIssueCode.add_member(:stream_authorization_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STREAM_AUTHORIZATION_FAILURE", traits: {"smithy.api#enumValue" => "STREAM_AUTHORIZATION_FAILURE"}))
+    HealthIssueCode.add_member(:discovery_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISCOVERY_FAILURE", traits: {"smithy.api#enumValue" => "DISCOVERY_FAILURE"}))
+    HealthIssueCode.add_member(:stream_limit_exceeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STREAM_LIMIT_EXCEEDED", traits: {"smithy.api#enumValue" => "STREAM_LIMIT_EXCEEDED"}))
+    HealthIssueCode.add_member(:stream_disconnected, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STREAM_DISCONNECTED", traits: {"smithy.api#enumValue" => "STREAM_DISCONNECTED"}))
+    HealthIssueCode.add_member(:recording_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RECORDING_FAILURE", traits: {"smithy.api#enumValue" => "RECORDING_FAILURE"}))
+    HealthIssueCode.add_member(:no_health_data, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NO_HEALTH_DATA", traits: {"smithy.api#enumValue" => "NO_HEALTH_DATA"}))
+    HealthIssueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HealthIssue, name: "member"))
     IcmpTypeCode.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Code"))
     IcmpTypeCode.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Type"))
     IcmpTypeCode.type = Types::IcmpTypeCode
@@ -5403,6 +6056,7 @@ module Aws::SecurityHub
     IntegrationV2Type.add_member(:send_findings_to_security_hub, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SEND_FINDINGS_TO_SECURITY_HUB", traits: {"smithy.api#enumValue" => "SEND_FINDINGS_TO_SECURITY_HUB"}))
     IntegrationV2Type.add_member(:receive_findings_from_security_hub, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RECEIVE_FINDINGS_FROM_SECURITY_HUB", traits: {"smithy.api#enumValue" => "RECEIVE_FINDINGS_FROM_SECURITY_HUB"}))
     IntegrationV2Type.add_member(:update_findings_in_security_hub, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATE_FINDINGS_IN_SECURITY_HUB", traits: {"smithy.api#enumValue" => "UPDATE_FINDINGS_IN_SECURITY_HUB"}))
+    IntegrationV2Type.add_member(:extended_plan, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXTENDED_PLAN", traits: {"smithy.api#enumValue" => "EXTENDED_PLAN"}))
     IntegrationV2TypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegrationV2Type, name: "member"))
     InternalException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Message"))
     InternalException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Code"))
@@ -5447,8 +6101,12 @@ module Aws::SecurityHub
     JiraCloudDetail.type = Types::JiraCloudDetail
     JiraCloudProviderConfiguration.add_member(:project_key, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ProjectKey"))
     JiraCloudProviderConfiguration.type = Types::JiraCloudProviderConfiguration
-    JiraCloudUpdateConfiguration.add_member(:project_key, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ProjectKey", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    JiraCloudUpdateConfiguration.add_member(:project_key, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ProjectKey"))
     JiraCloudUpdateConfiguration.type = Types::JiraCloudUpdateConfiguration
+    KbArticle.add_member(:title, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Title", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    KbArticle.add_member(:url, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Url", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    KbArticle.type = Types::KbArticle
+    KbArticleList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: KbArticle, name: "member"))
     KeywordFilter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Value"))
     KeywordFilter.type = Types::KeywordFilter
     KeywordFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: KeywordFilter, name: "member"))
@@ -5486,10 +6144,20 @@ module Aws::SecurityHub
     ListConfigurationPolicyAssociationsResponse.add_member(:configuration_policy_association_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationPolicyAssociationSummaryList, name: "ConfigurationPolicyAssociationSummaries"))
     ListConfigurationPolicyAssociationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     ListConfigurationPolicyAssociationsResponse.type = Types::ListConfigurationPolicyAssociationsResponse
+    ListConnectorsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
+    ListConnectorsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults", traits: {"smithy.api#httpQuery" => "MaxResults"}))
+    ListConnectorsRequest.add_member(:provider_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CspmConnectorProviderName, name: "ProviderName", traits: {"smithy.api#httpQuery" => "ProviderName"}))
+    ListConnectorsRequest.add_member(:connector_status, ::Smithy::Schema::Shapes::MemberShape.new(target: CspmConnectorStatus, name: "ConnectorStatus", traits: {"smithy.api#httpQuery" => "ConnectorStatus"}))
+    ListConnectorsRequest.add_member(:enablement_status, ::Smithy::Schema::Shapes::MemberShape.new(target: CspmEnablementStatus, name: "EnablementStatus", traits: {"smithy.api#httpQuery" => "EnablementStatus"}))
+    ListConnectorsRequest.type = Types::ListConnectorsRequest
+    ListConnectorsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    ListConnectorsResponse.add_member(:connectors, ::Smithy::Schema::Shapes::MemberShape.new(target: CspmConnectorSummaryList, name: "Connectors", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ListConnectorsResponse.type = Types::ListConnectorsResponse
     ListConnectorsV2Request.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
     ListConnectorsV2Request.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults", traits: {"smithy.api#httpQuery" => "MaxResults"}))
     ListConnectorsV2Request.add_member(:provider_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorProviderName, name: "ProviderName", traits: {"smithy.api#httpQuery" => "ProviderName"}))
     ListConnectorsV2Request.add_member(:connector_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorStatus, name: "ConnectorStatus", traits: {"smithy.api#httpQuery" => "ConnectorStatus"}))
+    ListConnectorsV2Request.add_member(:enablement_status, ::Smithy::Schema::Shapes::MemberShape.new(target: EnablementStatus, name: "EnablementStatus", traits: {"smithy.api#httpQuery" => "EnablementStatus"}))
     ListConnectorsV2Request.type = Types::ListConnectorsV2Request
     ListConnectorsV2Response.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     ListConnectorsV2Response.add_member(:connectors, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorSummaryList, name: "Connectors", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -5500,12 +6168,39 @@ module Aws::SecurityHub
     ListEnabledProductsForImportResponse.add_member(:product_subscriptions, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductSubscriptionArnList, name: "ProductSubscriptions"))
     ListEnabledProductsForImportResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     ListEnabledProductsForImportResponse.type = Types::ListEnabledProductsForImportResponse
+    ListExportJobsV2Request.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportStatus, name: "Status", traits: {"smithy.api#httpQuery" => "Status"}))
+    ListExportJobsV2Request.add_member(:data_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportDataType, name: "DataType", traits: {"smithy.api#httpQuery" => "DataType"}))
+    ListExportJobsV2Request.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportMaxResults, name: "MaxResults", traits: {"smithy.api#httpQuery" => "MaxResults"}))
+    ListExportJobsV2Request.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
+    ListExportJobsV2Request.type = Types::ListExportJobsV2Request
+    ListExportJobsV2Response.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportSummaryList, name: "Items", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ListExportJobsV2Response.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    ListExportJobsV2Response.type = Types::ListExportJobsV2Response
+    ListExposuresByRemediationV2Request.add_member(:target_uid, ::Smithy::Schema::Shapes::MemberShape.new(target: RemediationStringUid, name: "TargetUid", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ListExposuresByRemediationV2Request.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults"))
+    ListExposuresByRemediationV2Request.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    ListExposuresByRemediationV2Request.type = Types::ListExposuresByRemediationV2Request
+    ListExposuresByRemediationV2Response.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: ExposureFindingItemsList, name: "Items", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ListExposuresByRemediationV2Response.add_member(:target_uid, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "TargetUid", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ListExposuresByRemediationV2Response.add_member(:resource, ::Smithy::Schema::Shapes::MemberShape.new(target: RemediationResource, name: "Resource", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ListExposuresByRemediationV2Response.add_member(:total_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "TotalCount", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ListExposuresByRemediationV2Response.add_member(:trait, ::Smithy::Schema::Shapes::MemberShape.new(target: RemediationTrait, name: "Trait", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ListExposuresByRemediationV2Response.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    ListExposuresByRemediationV2Response.type = Types::ListExposuresByRemediationV2Response
     ListFindingAggregatorsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
     ListFindingAggregatorsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults", traits: {"smithy.api#httpQuery" => "MaxResults"}))
     ListFindingAggregatorsRequest.type = Types::ListFindingAggregatorsRequest
     ListFindingAggregatorsResponse.add_member(:finding_aggregators, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingAggregatorList, name: "FindingAggregators"))
     ListFindingAggregatorsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     ListFindingAggregatorsResponse.type = Types::ListFindingAggregatorsResponse
+    ListFreeTrialStatusesV2Request.add_member(:account_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: FreeTrialAccountIdList, name: "AccountIds"))
+    ListFreeTrialStatusesV2Request.add_member(:statuses, ::Smithy::Schema::Shapes::MemberShape.new(target: FreeTrialStatusValueList, name: "Statuses"))
+    ListFreeTrialStatusesV2Request.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults"))
+    ListFreeTrialStatusesV2Request.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    ListFreeTrialStatusesV2Request.type = Types::ListFreeTrialStatusesV2Request
+    ListFreeTrialStatusesV2Response.add_member(:account_free_trial_statuses, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountFreeTrialStatusList, name: "AccountFreeTrialStatuses", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ListFreeTrialStatusesV2Response.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    ListFreeTrialStatusesV2Response.type = Types::ListFreeTrialStatusesV2Response
     ListInvitationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: CrossAccountMaxResults, name: "MaxResults", traits: {"smithy.api#httpQuery" => "MaxResults"}))
     ListInvitationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
     ListInvitationsRequest.type = Types::ListInvitationsRequest
@@ -5530,6 +6225,7 @@ module Aws::SecurityHub
     ListSecurityControlDefinitionsRequest.add_member(:standards_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "StandardsArn", traits: {"smithy.api#httpQuery" => "StandardsArn"}))
     ListSecurityControlDefinitionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
     ListSecurityControlDefinitionsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults", traits: {"smithy.api#httpQuery" => "MaxResults"}))
+    ListSecurityControlDefinitionsRequest.add_member(:providers, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityControlsProviders, name: "Providers", traits: {"smithy.api#httpQuery" => "Providers"}))
     ListSecurityControlDefinitionsRequest.type = Types::ListSecurityControlDefinitionsRequest
     ListSecurityControlDefinitionsResponse.add_member(:security_control_definitions, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityControlDefinitions, name: "SecurityControlDefinitions", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ListSecurityControlDefinitionsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
@@ -5677,6 +6373,9 @@ module Aws::SecurityHub
     OcsfDateField.add_member(:finding_info_first_seen_time_dt, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FINDING_INFO_FIRST_SEEN_TIME_DT", traits: {"smithy.api#enumValue" => "finding_info.first_seen_time_dt"}))
     OcsfDateField.add_member(:finding_info_last_seen_time_dt, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FINDING_INFO_LAST_SEEN_TIME_DT", traits: {"smithy.api#enumValue" => "finding_info.last_seen_time_dt"}))
     OcsfDateField.add_member(:finding_info_modified_time_dt, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FINDING_INFO_MODIFIED_TIME_DT", traits: {"smithy.api#enumValue" => "finding_info.modified_time_dt"}))
+    OcsfDateField.add_member(:resources_image_created_time_dt, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCES_IMAGE_CREATED_TIME_DT", traits: {"smithy.api#enumValue" => "resources.image.created_time_dt"}))
+    OcsfDateField.add_member(:resources_image_last_used_time_dt, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCES_IMAGE_LAST_USED_TIME_DT", traits: {"smithy.api#enumValue" => "resources.image.last_used_time_dt"}))
+    OcsfDateField.add_member(:resources_modified_time_dt, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCES_MODIFIED_TIME_DT", traits: {"smithy.api#enumValue" => "resources.modified_time_dt"}))
     OcsfDateFilter.add_member(:field_name, ::Smithy::Schema::Shapes::MemberShape.new(target: OcsfDateField, name: "FieldName"))
     OcsfDateFilter.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: DateFilter, name: "Filter"))
     OcsfDateFilter.type = Types::OcsfDateFilter
@@ -5690,7 +6389,16 @@ module Aws::SecurityHub
     OcsfFindingIdentifier.type = Types::OcsfFindingIdentifier
     OcsfFindingIdentifierList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OcsfFindingIdentifier, name: "member"))
     OcsfFindingsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OcsfFinding, name: "member"))
+    OcsfIpField.add_member(:evidences_dst_endpoint_ip, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EVIDENCES_DST_ENDPOINT_IP", traits: {"smithy.api#enumValue" => "evidences.dst_endpoint.ip"}))
+    OcsfIpField.add_member(:evidences_src_endpoint_ip, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EVIDENCES_SRC_ENDPOINT_IP", traits: {"smithy.api#enumValue" => "evidences.src_endpoint.ip"}))
+    OcsfIpFilter.add_member(:field_name, ::Smithy::Schema::Shapes::MemberShape.new(target: OcsfIpField, name: "FieldName"))
+    OcsfIpFilter.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: IpFilter, name: "Filter"))
+    OcsfIpFilter.type = Types::OcsfIpFilter
+    OcsfIpFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OcsfIpFilter, name: "member"))
     OcsfMapField.add_member(:resources_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCES_TAGS", traits: {"smithy.api#enumValue" => "resources.tags"}))
+    OcsfMapField.add_member(:compliance_control_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLIANCE_CONTROL_PARAMETERS", traits: {"smithy.api#enumValue" => "compliance.control_parameters"}))
+    OcsfMapField.add_member(:databucket_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DATABUCKET_TAGS", traits: {"smithy.api#enumValue" => "databucket.tags"}))
+    OcsfMapField.add_member(:finding_info_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FINDING_INFO_TAGS", traits: {"smithy.api#enumValue" => "finding_info.tags"}))
     OcsfMapFilter.add_member(:field_name, ::Smithy::Schema::Shapes::MemberShape.new(target: OcsfMapField, name: "FieldName"))
     OcsfMapFilter.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: MapFilter, name: "Filter"))
     OcsfMapFilter.type = Types::OcsfMapFilter
@@ -5701,6 +6409,14 @@ module Aws::SecurityHub
     OcsfNumberField.add_member(:severity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SEVERITY_ID", traits: {"smithy.api#enumValue" => "severity_id"}))
     OcsfNumberField.add_member(:status_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STATUS_ID", traits: {"smithy.api#enumValue" => "status_id"}))
     OcsfNumberField.add_member(:finding_info_related_events_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FINDING_INFO_RELATED_EVENTS_COUNT", traits: {"smithy.api#enumValue" => "finding_info.related_events_count"}))
+    OcsfNumberField.add_member(:evidences_api_response_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EVIDENCES_API_RESPONSE_CODE", traits: {"smithy.api#enumValue" => "evidences.api.response.code"}))
+    OcsfNumberField.add_member(:evidences_dst_endpoint_autonomous_system_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EVIDENCES_DST_ENDPOINT_AUTONOMOUS_SYSTEM_NUMBER", traits: {"smithy.api#enumValue" => "evidences.dst_endpoint.autonomous_system.number"}))
+    OcsfNumberField.add_member(:evidences_dst_endpoint_port, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EVIDENCES_DST_ENDPOINT_PORT", traits: {"smithy.api#enumValue" => "evidences.dst_endpoint.port"}))
+    OcsfNumberField.add_member(:evidences_src_endpoint_autonomous_system_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EVIDENCES_SRC_ENDPOINT_AUTONOMOUS_SYSTEM_NUMBER", traits: {"smithy.api#enumValue" => "evidences.src_endpoint.autonomous_system.number"}))
+    OcsfNumberField.add_member(:evidences_src_endpoint_port, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EVIDENCES_SRC_ENDPOINT_PORT", traits: {"smithy.api#enumValue" => "evidences.src_endpoint.port"}))
+    OcsfNumberField.add_member(:resources_image_in_use_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCES_IMAGE_IN_USE_COUNT", traits: {"smithy.api#enumValue" => "resources.image.in_use_count"}))
+    OcsfNumberField.add_member(:vulnerabilities_cve_cvss_base_score, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VULNERABILITIES_CVE_CVSS_BASE_SCORE", traits: {"smithy.api#enumValue" => "vulnerabilities.cve.cvss.base_score"}))
+    OcsfNumberField.add_member(:vendor_attributes_severity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VENDOR_ATTRIBUTES_SEVERITY_ID", traits: {"smithy.api#enumValue" => "vendor_attributes.severity_id"}))
     OcsfNumberFilter.add_member(:field_name, ::Smithy::Schema::Shapes::MemberShape.new(target: OcsfNumberField, name: "FieldName"))
     OcsfNumberFilter.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberFilter, name: "Filter"))
     OcsfNumberFilter.type = Types::OcsfNumberFilter
@@ -5720,15 +6436,24 @@ module Aws::SecurityHub
     OcsfStringField.add_member(:finding_info_title, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FINDING_INFO_TITLE", traits: {"smithy.api#enumValue" => "finding_info.title"}))
     OcsfStringField.add_member(:finding_info_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FINDING_INFO_TYPES", traits: {"smithy.api#enumValue" => "finding_info.types"}))
     OcsfStringField.add_member(:finding_info_uid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FINDING_INFO_UID", traits: {"smithy.api#enumValue" => "finding_info.uid"}))
+    OcsfStringField.add_member(:finding_info_related_events_traits_category, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FINDING_INFO_RELATED_EVENTS_TRAITS_CATEGORY", traits: {"smithy.api#enumValue" => "finding_info.related_events.traits.category"}))
     OcsfStringField.add_member(:finding_info_related_events_uid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FINDING_INFO_RELATED_EVENTS_UID", traits: {"smithy.api#enumValue" => "finding_info.related_events.uid"}))
     OcsfStringField.add_member(:finding_info_related_events_product_uid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FINDING_INFO_RELATED_EVENTS_PRODUCT_UID", traits: {"smithy.api#enumValue" => "finding_info.related_events.product.uid"}))
     OcsfStringField.add_member(:finding_info_related_events_title, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FINDING_INFO_RELATED_EVENTS_TITLE", traits: {"smithy.api#enumValue" => "finding_info.related_events.title"}))
+    OcsfStringField.add_member(:impact, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IMPACT", traits: {"smithy.api#enumValue" => "impact"}))
+    OcsfStringField.add_member(:likelihood, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LIKELIHOOD", traits: {"smithy.api#enumValue" => "likelihood"}))
     OcsfStringField.add_member(:metadata_product_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "METADATA_PRODUCT_NAME", traits: {"smithy.api#enumValue" => "metadata.product.name"}))
     OcsfStringField.add_member(:metadata_product_uid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "METADATA_PRODUCT_UID", traits: {"smithy.api#enumValue" => "metadata.product.uid"}))
     OcsfStringField.add_member(:metadata_product_vendor_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "METADATA_PRODUCT_VENDOR_NAME", traits: {"smithy.api#enumValue" => "metadata.product.vendor_name"}))
     OcsfStringField.add_member(:remediation_desc, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REMEDIATION_DESC", traits: {"smithy.api#enumValue" => "remediation.desc"}))
     OcsfStringField.add_member(:remediation_references, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REMEDIATION_REFERENCES", traits: {"smithy.api#enumValue" => "remediation.references"}))
     OcsfStringField.add_member(:resources_cloud_partition, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCES_CLOUD_PARTITION", traits: {"smithy.api#enumValue" => "resources.cloud_partition"}))
+    OcsfStringField.add_member(:resources_criticality, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCES_CRITICALITY", traits: {"smithy.api#enumValue" => "resources.criticality"}))
+    OcsfStringField.add_member(:resources_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCES_NAME", traits: {"smithy.api#enumValue" => "resources.name"}))
+    OcsfStringField.add_member(:resources_owner_account_uid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCES_OWNER_ACCOUNT_UID", traits: {"smithy.api#enumValue" => "resources.owner.account.uid"}))
+    OcsfStringField.add_member(:resources_owner_org_uid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCES_OWNER_ORG_UID", traits: {"smithy.api#enumValue" => "resources.owner.org.uid"}))
+    OcsfStringField.add_member(:resources_owner_account_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCES_OWNER_ACCOUNT_NAME", traits: {"smithy.api#enumValue" => "resources.owner.account.name"}))
+    OcsfStringField.add_member(:resources_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCES_PROVIDER", traits: {"smithy.api#enumValue" => "resources.provider"}))
     OcsfStringField.add_member(:resources_region, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCES_REGION", traits: {"smithy.api#enumValue" => "resources.region"}))
     OcsfStringField.add_member(:resources_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCES_TYPE", traits: {"smithy.api#enumValue" => "resources.type"}))
     OcsfStringField.add_member(:resources_uid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCES_UID", traits: {"smithy.api#enumValue" => "resources.uid"}))
@@ -5737,6 +6462,44 @@ module Aws::SecurityHub
     OcsfStringField.add_member(:comment, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMMENT", traits: {"smithy.api#enumValue" => "comment"}))
     OcsfStringField.add_member(:vulnerabilities_fix_coverage, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VULNERABILITIES_FIX_COVERAGE", traits: {"smithy.api#enumValue" => "vulnerabilities.fix_coverage"}))
     OcsfStringField.add_member(:class_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLASS_NAME", traits: {"smithy.api#enumValue" => "class_name"}))
+    OcsfStringField.add_member(:databucket_encryption_details_algorithm, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DATABUCKET_ENCRYPTION_DETAILS_ALGORITHM", traits: {"smithy.api#enumValue" => "databucket.encryption_details.algorithm"}))
+    OcsfStringField.add_member(:databucket_encryption_details_key_uid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DATABUCKET_ENCRYPTION_DETAILS_KEY_UID", traits: {"smithy.api#enumValue" => "databucket.encryption_details.key_uid"}))
+    OcsfStringField.add_member(:databucket_file_data_classifications_classifier_details_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DATABUCKET_FILE_DATA_CLASSIFICATIONS_CLASSIFIER_DETAILS_TYPE", traits: {"smithy.api#enumValue" => "databucket.file.data_classifications.classifier_details.type"}))
+    OcsfStringField.add_member(:evidences_actor_user_account_uid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EVIDENCES_ACTOR_USER_ACCOUNT_UID", traits: {"smithy.api#enumValue" => "evidences.actor.user.account.uid"}))
+    OcsfStringField.add_member(:evidences_api_operation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EVIDENCES_API_OPERATION", traits: {"smithy.api#enumValue" => "evidences.api.operation"}))
+    OcsfStringField.add_member(:evidences_api_response_error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EVIDENCES_API_RESPONSE_ERROR_MESSAGE", traits: {"smithy.api#enumValue" => "evidences.api.response.error_message"}))
+    OcsfStringField.add_member(:evidences_api_service_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EVIDENCES_API_SERVICE_NAME", traits: {"smithy.api#enumValue" => "evidences.api.service.name"}))
+    OcsfStringField.add_member(:evidences_connection_info_direction, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EVIDENCES_CONNECTION_INFO_DIRECTION", traits: {"smithy.api#enumValue" => "evidences.connection_info.direction"}))
+    OcsfStringField.add_member(:evidences_connection_info_protocol_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EVIDENCES_CONNECTION_INFO_PROTOCOL_NAME", traits: {"smithy.api#enumValue" => "evidences.connection_info.protocol_name"}))
+    OcsfStringField.add_member(:evidences_dst_endpoint_autonomous_system_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EVIDENCES_DST_ENDPOINT_AUTONOMOUS_SYSTEM_NAME", traits: {"smithy.api#enumValue" => "evidences.dst_endpoint.autonomous_system.name"}))
+    OcsfStringField.add_member(:evidences_dst_endpoint_location_city, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EVIDENCES_DST_ENDPOINT_LOCATION_CITY", traits: {"smithy.api#enumValue" => "evidences.dst_endpoint.location.city"}))
+    OcsfStringField.add_member(:evidences_dst_endpoint_location_country, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EVIDENCES_DST_ENDPOINT_LOCATION_COUNTRY", traits: {"smithy.api#enumValue" => "evidences.dst_endpoint.location.country"}))
+    OcsfStringField.add_member(:evidences_src_endpoint_autonomous_system_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EVIDENCES_SRC_ENDPOINT_AUTONOMOUS_SYSTEM_NAME", traits: {"smithy.api#enumValue" => "evidences.src_endpoint.autonomous_system.name"}))
+    OcsfStringField.add_member(:evidences_src_endpoint_hostname, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EVIDENCES_SRC_ENDPOINT_HOSTNAME", traits: {"smithy.api#enumValue" => "evidences.src_endpoint.hostname"}))
+    OcsfStringField.add_member(:evidences_src_endpoint_location_city, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EVIDENCES_SRC_ENDPOINT_LOCATION_CITY", traits: {"smithy.api#enumValue" => "evidences.src_endpoint.location.city"}))
+    OcsfStringField.add_member(:evidences_src_endpoint_location_country, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EVIDENCES_SRC_ENDPOINT_LOCATION_COUNTRY", traits: {"smithy.api#enumValue" => "evidences.src_endpoint.location.country"}))
+    OcsfStringField.add_member(:finding_info_analytic_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FINDING_INFO_ANALYTIC_NAME", traits: {"smithy.api#enumValue" => "finding_info.analytic.name"}))
+    OcsfStringField.add_member(:malware_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MALWARE_NAME", traits: {"smithy.api#enumValue" => "malware.name"}))
+    OcsfStringField.add_member(:malware_scan_info_uid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MALWARE_SCAN_INFO_UID", traits: {"smithy.api#enumValue" => "malware_scan_info.uid"}))
+    OcsfStringField.add_member(:malware_severity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MALWARE_SEVERITY", traits: {"smithy.api#enumValue" => "malware.severity"}))
+    OcsfStringField.add_member(:resources_cloud_function_layers_uid_alt, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCES_CLOUD_FUNCTION_LAYERS_UID_ALT", traits: {"smithy.api#enumValue" => "resources.cloud_function.layers.uid_alt"}))
+    OcsfStringField.add_member(:resources_cloud_function_runtime, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCES_CLOUD_FUNCTION_RUNTIME", traits: {"smithy.api#enumValue" => "resources.cloud_function.runtime"}))
+    OcsfStringField.add_member(:resources_cloud_function_user_uid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCES_CLOUD_FUNCTION_USER_UID", traits: {"smithy.api#enumValue" => "resources.cloud_function.user.uid"}))
+    OcsfStringField.add_member(:resources_device_encryption_details_key_uid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCES_DEVICE_ENCRYPTION_DETAILS_KEY_UID", traits: {"smithy.api#enumValue" => "resources.device.encryption_details.key_uid"}))
+    OcsfStringField.add_member(:resources_device_image_uid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCES_DEVICE_IMAGE_UID", traits: {"smithy.api#enumValue" => "resources.device.image.uid"}))
+    OcsfStringField.add_member(:resources_image_architecture, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCES_IMAGE_ARCHITECTURE", traits: {"smithy.api#enumValue" => "resources.image.architecture"}))
+    OcsfStringField.add_member(:resources_image_registry_uid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCES_IMAGE_REGISTRY_UID", traits: {"smithy.api#enumValue" => "resources.image.registry_uid"}))
+    OcsfStringField.add_member(:resources_image_repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCES_IMAGE_REPOSITORY_NAME", traits: {"smithy.api#enumValue" => "resources.image.repository_name"}))
+    OcsfStringField.add_member(:resources_image_uid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCES_IMAGE_UID", traits: {"smithy.api#enumValue" => "resources.image.uid"}))
+    OcsfStringField.add_member(:resources_subnet_info_uid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCES_SUBNET_INFO_UID", traits: {"smithy.api#enumValue" => "resources.subnet_info.uid"}))
+    OcsfStringField.add_member(:resources_vpc_uid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCES_VPC_UID", traits: {"smithy.api#enumValue" => "resources.vpc_uid"}))
+    OcsfStringField.add_member(:vulnerabilities_affected_code_file_path, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VULNERABILITIES_AFFECTED_CODE_FILE_PATH", traits: {"smithy.api#enumValue" => "vulnerabilities.affected_code.file.path"}))
+    OcsfStringField.add_member(:vulnerabilities_affected_packages_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VULNERABILITIES_AFFECTED_PACKAGES_NAME", traits: {"smithy.api#enumValue" => "vulnerabilities.affected_packages.name"}))
+    OcsfStringField.add_member(:vulnerabilities_cve_epss_score, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VULNERABILITIES_CVE_EPSS_SCORE", traits: {"smithy.api#enumValue" => "vulnerabilities.cve.epss.score"}))
+    OcsfStringField.add_member(:vulnerabilities_cve_uid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VULNERABILITIES_CVE_UID", traits: {"smithy.api#enumValue" => "vulnerabilities.cve.uid"}))
+    OcsfStringField.add_member(:vulnerabilities_related_vulnerabilities, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VULNERABILITIES_RELATED_VULNERABILITIES", traits: {"smithy.api#enumValue" => "vulnerabilities.related_vulnerabilities"}))
+    OcsfStringField.add_member(:cloud_account_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLOUD_ACCOUNT_NAME", traits: {"smithy.api#enumValue" => "cloud.account.name"}))
+    OcsfStringField.add_member(:vendor_attributes_severity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VENDOR_ATTRIBUTES_SEVERITY", traits: {"smithy.api#enumValue" => "vendor_attributes.severity"}))
     OcsfStringFilter.add_member(:field_name, ::Smithy::Schema::Shapes::MemberShape.new(target: OcsfStringField, name: "FieldName"))
     OcsfStringFilter.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilter, name: "Filter"))
     OcsfStringFilter.type = Types::OcsfStringFilter
@@ -5750,6 +6513,12 @@ module Aws::SecurityHub
     OrganizationConfigurationStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
     OrganizationConfigurationStatus.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     OrganizationConfigurationStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    OrganizationNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Message"))
+    OrganizationNotFoundException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Code"))
+    OrganizationNotFoundException.type = Types::OrganizationNotFoundException
+    OrganizationalUnitNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Message"))
+    OrganizationalUnitNotFoundException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Code"))
+    OrganizationalUnitNotFoundException.type = Types::OrganizationalUnitNotFoundException
     Page.add_member(:page_number, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "PageNumber"))
     Page.add_member(:line_range, ::Smithy::Schema::Shapes::MemberShape.new(target: Range, name: "LineRange"))
     Page.add_member(:offset_range, ::Smithy::Schema::Shapes::MemberShape.new(target: Range, name: "OffsetRange"))
@@ -5780,6 +6549,9 @@ module Aws::SecurityHub
     Partition.add_member(:aws, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS", traits: {"smithy.api#enumValue" => "aws"}))
     Partition.add_member(:aws_cn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_CN", traits: {"smithy.api#enumValue" => "aws-cn"}))
     Partition.add_member(:aws_us_gov, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_US_GOV", traits: {"smithy.api#enumValue" => "aws-us-gov"}))
+    Partition.add_member(:aws_us_iso, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_US_ISO", traits: {"smithy.api#enumValue" => "aws-us-iso"}))
+    Partition.add_member(:aws_us_iso_b, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_US_ISO_B", traits: {"smithy.api#enumValue" => "aws-us-iso-b"}))
+    Partition.add_member(:azure_cloud, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AZURE_CLOUD", traits: {"smithy.api#enumValue" => "AzureCloud"}))
     PatchSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Id", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     PatchSummary.add_member(:installed_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "InstalledCount"))
     PatchSummary.add_member(:missing_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "MissingCount"))
@@ -5835,6 +6607,7 @@ module Aws::SecurityHub
     ProductV2.add_member(:integration_v2_types, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegrationV2TypeList, name: "IntegrationV2Types"))
     ProductV2.add_member(:marketplace_url, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "MarketplaceUrl"))
     ProductV2.add_member(:activation_url, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ActivationUrl"))
+    ProductV2.add_member(:marketplace_product_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "MarketplaceProductId"))
     ProductV2.type = Types::ProductV2
     ProductsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Product, name: "member"))
     ProductsV2List.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductV2, name: "member"))
@@ -5843,16 +6616,21 @@ module Aws::SecurityHub
     PropagatingVgwSetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PropagatingVgwSetDetails, name: "member"))
     ProviderConfiguration.add_member(:jira_cloud, Types::ProviderConfiguration::JiraCloud, ::Smithy::Schema::Shapes::MemberShape.new(target: JiraCloudProviderConfiguration, name: "JiraCloud"))
     ProviderConfiguration.add_member(:service_now, Types::ProviderConfiguration::ServiceNow, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceNowProviderConfiguration, name: "ServiceNow"))
+    ProviderConfiguration.add_member(:azure, Types::ProviderConfiguration::Azure, ::Smithy::Schema::Shapes::MemberShape.new(target: AzureProviderConfiguration, name: "Azure"))
     ProviderConfiguration.add_member(:unknown, Types::ProviderConfiguration::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     ProviderConfiguration.type = Types::ProviderConfiguration
     ProviderDetail.add_member(:jira_cloud, Types::ProviderDetail::JiraCloud, ::Smithy::Schema::Shapes::MemberShape.new(target: JiraCloudDetail, name: "JiraCloud"))
     ProviderDetail.add_member(:service_now, Types::ProviderDetail::ServiceNow, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceNowDetail, name: "ServiceNow"))
+    ProviderDetail.add_member(:azure, Types::ProviderDetail::Azure, ::Smithy::Schema::Shapes::MemberShape.new(target: AzureDetail, name: "Azure"))
     ProviderDetail.add_member(:unknown, Types::ProviderDetail::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     ProviderDetail.type = Types::ProviderDetail
     ProviderSummary.add_member(:provider_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorProviderName, name: "ProviderName"))
     ProviderSummary.add_member(:connector_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorStatus, name: "ConnectorStatus"))
+    ProviderSummary.add_member(:provider_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderDetail, name: "ProviderConfiguration"))
     ProviderSummary.type = Types::ProviderSummary
     ProviderUpdateConfiguration.add_member(:jira_cloud, Types::ProviderUpdateConfiguration::JiraCloud, ::Smithy::Schema::Shapes::MemberShape.new(target: JiraCloudUpdateConfiguration, name: "JiraCloud"))
+    ProviderUpdateConfiguration.add_member(:service_now, Types::ProviderUpdateConfiguration::ServiceNow, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceNowUpdateConfiguration, name: "ServiceNow"))
+    ProviderUpdateConfiguration.add_member(:azure, Types::ProviderUpdateConfiguration::Azure, ::Smithy::Schema::Shapes::MemberShape.new(target: AzureUpdateConfiguration, name: "Azure"))
     ProviderUpdateConfiguration.add_member(:unknown, Types::ProviderUpdateConfiguration::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     ProviderUpdateConfiguration.type = Types::ProviderUpdateConfiguration
     Range.add_member(:start, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "Start"))
@@ -5863,6 +6641,17 @@ module Aws::SecurityHub
     Recommendation.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Text"))
     Recommendation.add_member(:url, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Url"))
     Recommendation.type = Types::Recommendation
+    RecommendationError.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Code"))
+    RecommendationError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Message"))
+    RecommendationError.type = Types::RecommendationError
+    RecommendationStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
+    RecommendationStatus.add_member(:succeeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCEEDED", traits: {"smithy.api#enumValue" => "SUCCEEDED"}))
+    RecommendationStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    RecommendationStep.add_member(:unused_permissions, Types::RecommendationStep::UnusedPermissions, ::Smithy::Schema::Shapes::MemberShape.new(target: UnusedPermissionsRecommendationStep, name: "UnusedPermissions"))
+    RecommendationStep.add_member(:unknown, Types::RecommendationStep::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    RecommendationStep.type = Types::RecommendationStep
+    RecommendationSteps.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationStep, name: "member"))
+    RecommendationType.add_member(:unused_permission_recommendation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNUSED_PERMISSION_RECOMMENDATION", traits: {"smithy.api#enumValue" => "UNUSED_PERMISSION_RECOMMENDATION"}))
     Record.add_member(:json_path, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "JsonPath"))
     Record.add_member(:record_index, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "RecordIndex"))
     Record.type = Types::Record
@@ -5871,6 +6660,12 @@ module Aws::SecurityHub
     Records.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Record, name: "member"))
     RegionAvailabilityStatus.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AVAILABLE", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
     RegionAvailabilityStatus.add_member(:unavailable, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNAVAILABLE", traits: {"smithy.api#enumValue" => "UNAVAILABLE"}))
+    RegisterConnectorV2Request.add_member(:auth_code, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "AuthCode", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    RegisterConnectorV2Request.add_member(:auth_state, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "AuthState", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    RegisterConnectorV2Request.type = Types::RegisterConnectorV2Request
+    RegisterConnectorV2Response.add_member(:connector_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ConnectorArn"))
+    RegisterConnectorV2Response.add_member(:connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ConnectorId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    RegisterConnectorV2Response.type = Types::RegisterConnectorV2Response
     RelatedFinding.add_member(:product_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ProductArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     RelatedFinding.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Id", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     RelatedFinding.type = Types::RelatedFinding
@@ -5878,10 +6673,125 @@ module Aws::SecurityHub
     RelatedRequirementsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member"))
     Remediation.add_member(:recommendation, ::Smithy::Schema::Shapes::MemberShape.new(target: Recommendation, name: "Recommendation"))
     Remediation.type = Types::Remediation
+    RemediationCompositeFilter.add_member(:string_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: RemediationStringFilterList, name: "StringFilters"))
+    RemediationCompositeFilter.type = Types::RemediationCompositeFilter
+    RemediationCompositeFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RemediationCompositeFilter, name: "member"))
+    RemediationFilters.add_member(:composite_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: RemediationCompositeFilterList, name: "CompositeFilters"))
+    RemediationFilters.type = Types::RemediationFilters
+    RemediationGuidance.add_member(:target_type_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "TargetTypeName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    RemediationGuidance.add_member(:pattern, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Pattern", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    RemediationGuidance.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Version", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    RemediationGuidance.add_member(:context, ::Smithy::Schema::Shapes::MemberShape.new(target: RemediationGuidanceContext, name: "Context", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    RemediationGuidance.add_member(:specification, ::Smithy::Schema::Shapes::MemberShape.new(target: RemediationGuidanceSpecification, name: "Specification", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    RemediationGuidance.add_member(:examples, ::Smithy::Schema::Shapes::MemberShape.new(target: RemediationGuidanceExamples, name: "Examples", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    RemediationGuidance.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: RemediationGuidanceMetadata, name: "Metadata", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    RemediationGuidance.type = Types::RemediationGuidance
+    RemediationGuidanceContext.add_member(:problem_statement, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ProblemStatement"))
+    RemediationGuidanceContext.add_member(:risk_assessment, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "RiskAssessment"))
+    RemediationGuidanceContext.add_member(:affected_scope, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "AffectedScope"))
+    RemediationGuidanceContext.add_member(:prerequisites, ::Smithy::Schema::Shapes::MemberShape.new(target: RemediationStringList, name: "Prerequisites"))
+    RemediationGuidanceContext.type = Types::RemediationGuidanceContext
+    RemediationGuidanceExamples.add_member(:aws_cli, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "AwsCli"))
+    RemediationGuidanceExamples.add_member(:cli, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Cli"))
+    RemediationGuidanceExamples.add_member(:python, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Python"))
+    RemediationGuidanceExamples.add_member(:terraform, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Terraform"))
+    RemediationGuidanceExamples.add_member(:cdk, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Cdk"))
+    RemediationGuidanceExamples.add_member(:cloud_formation, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "CloudFormation"))
+    RemediationGuidanceExamples.add_member(:ia_c, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "IaC"))
+    RemediationGuidanceExamples.add_member(:template, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Template"))
+    RemediationGuidanceExamples.type = Types::RemediationGuidanceExamples
+    RemediationGuidanceMetadata.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ResourceType", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    RemediationGuidanceMetadata.add_member(:exposure_type, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ExposureType", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    RemediationGuidanceMetadata.add_member(:trait_titles, ::Smithy::Schema::Shapes::MemberShape.new(target: RemediationStringList, name: "TraitTitles", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    RemediationGuidanceMetadata.add_member(:reversibility, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Reversibility", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    RemediationGuidanceMetadata.add_member(:fix_effect, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "FixEffect", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    RemediationGuidanceMetadata.add_member(:risk_level, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "RiskLevel", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    RemediationGuidanceMetadata.add_member(:automation_level, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "AutomationLevel"))
+    RemediationGuidanceMetadata.add_member(:human_review_required, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "HumanReviewRequired"))
+    RemediationGuidanceMetadata.add_member(:generated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "GeneratedAt"))
+    RemediationGuidanceMetadata.add_member(:verification_status, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "VerificationStatus"))
+    RemediationGuidanceMetadata.type = Types::RemediationGuidanceMetadata
+    RemediationGuidanceSpecification.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: RemediationParameterList, name: "Parameters"))
+    RemediationGuidanceSpecification.add_member(:steps, ::Smithy::Schema::Shapes::MemberShape.new(target: RemediationStepList, name: "Steps"))
+    RemediationGuidanceSpecification.add_member(:expected_end_state, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ExpectedEndState"))
+    RemediationGuidanceSpecification.add_member(:required_permissions, ::Smithy::Schema::Shapes::MemberShape.new(target: RemediationStringList, name: "RequiredPermissions"))
+    RemediationGuidanceSpecification.type = Types::RemediationGuidanceSpecification
+    RemediationOutcome.add_member(:resolved_findings_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "ResolvedFindingsCount", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    RemediationOutcome.add_member(:severity_reduction_findings_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "SeverityReductionFindingsCount", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    RemediationOutcome.add_member(:severity_unchanged_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "SeverityUnchangedCount", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    RemediationOutcome.type = Types::RemediationOutcome
+    RemediationParameter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Name", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    RemediationParameter.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Type", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    RemediationParameter.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Description", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    RemediationParameter.add_member(:required, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Required"))
+    RemediationParameter.type = Types::RemediationParameter
+    RemediationParameterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RemediationParameter, name: "member"))
+    RemediationPriority.add_member(:critical, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CRITICAL", traits: {"smithy.api#enumValue" => "Critical"}))
+    RemediationPriority.add_member(:high, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HIGH", traits: {"smithy.api#enumValue" => "High"}))
+    RemediationPriority.add_member(:medium, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MEDIUM", traits: {"smithy.api#enumValue" => "Medium"}))
+    RemediationPriority.add_member(:low, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOW", traits: {"smithy.api#enumValue" => "Low"}))
+    RemediationResource.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "AccountId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    RemediationResource.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Region", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    RemediationResource.add_member(:resource_owner_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ResourceOwnerAccountId"))
+    RemediationResource.add_member(:resource_owner_org_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ResourceOwnerOrgId"))
+    RemediationResource.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Type", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    RemediationResource.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Name"))
+    RemediationResource.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Id", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    RemediationResource.add_member(:resource_guid, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ResourceGuid"))
+    RemediationResource.add_member(:resource_region, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ResourceRegion", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    RemediationResource.add_member(:cloud_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudProviderName, name: "CloudProvider", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    RemediationResource.type = Types::RemediationResource
+    RemediationStatus.add_member(:new, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NEW", traits: {"smithy.api#enumValue" => "New"}))
+    RemediationStatus.add_member(:updated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATED", traits: {"smithy.api#enumValue" => "Updated"}))
+    RemediationStatus.add_member(:resolved, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOLVED", traits: {"smithy.api#enumValue" => "Resolved"}))
+    RemediationStep.add_member(:phase, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Phase", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    RemediationStep.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Description", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    RemediationStep.add_member(:service, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Service", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    RemediationStep.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Action", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    RemediationStep.add_member(:logic, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Logic"))
+    RemediationStep.add_member(:inverse, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Inverse"))
+    RemediationStep.add_member(:verify_after, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "VerifyAfter"))
+    RemediationStep.type = Types::RemediationStep
+    RemediationStepList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RemediationStep, name: "member"))
+    RemediationStringField.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_TYPE", traits: {"smithy.api#enumValue" => "Resource.Type"}))
+    RemediationStringField.add_member(:priority, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRIORITY", traits: {"smithy.api#enumValue" => "Priority"}))
+    RemediationStringField.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STATUS", traits: {"smithy.api#enumValue" => "Status"}))
+    RemediationStringField.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_ID", traits: {"smithy.api#enumValue" => "Resource.Id"}))
+    RemediationStringField.add_member(:resource_owner_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_OWNER_ACCOUNT_ID", traits: {"smithy.api#enumValue" => "Resource.ResourceOwnerAccountId"}))
+    RemediationStringField.add_member(:resource_cloud_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_CLOUD_PROVIDER", traits: {"smithy.api#enumValue" => "Resource.CloudProvider"}))
+    RemediationStringFilter.add_member(:field_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RemediationStringField, name: "FieldName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    RemediationStringFilter.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: RemediationStringFilterCondition, name: "Filter", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    RemediationStringFilter.type = Types::RemediationStringFilter
+    RemediationStringFilterCondition.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Value", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    RemediationStringFilterCondition.type = Types::RemediationStringFilterCondition
+    RemediationStringFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RemediationStringFilter, name: "member"))
+    RemediationStringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member"))
+    RemediationSummaryDetail.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Action", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    RemediationSummaryDetail.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Description"))
+    RemediationSummaryDetail.add_member(:is_immediate, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "IsImmediate", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    RemediationSummaryDetail.add_member(:post_remediation_steps, ::Smithy::Schema::Shapes::MemberShape.new(target: RemediationStringList, name: "PostRemediationSteps"))
+    RemediationSummaryDetail.add_member(:kb_articles, ::Smithy::Schema::Shapes::MemberShape.new(target: KbArticleList, name: "KbArticles"))
+    RemediationSummaryDetail.type = Types::RemediationSummaryDetail
+    RemediationTrait.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Type", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    RemediationTrait.add_member(:title, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Title", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    RemediationTrait.type = Types::RemediationTrait
+    RemediationV2Item.add_member(:target_uid, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "TargetUid", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    RemediationV2Item.add_member(:outcome, ::Smithy::Schema::Shapes::MemberShape.new(target: RemediationOutcome, name: "Outcome", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    RemediationV2Item.add_member(:priority, ::Smithy::Schema::Shapes::MemberShape.new(target: RemediationPriority, name: "Priority", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    RemediationV2Item.add_member(:remediation_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: RemediationSummaryDetail, name: "RemediationSummary", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    RemediationV2Item.add_member(:resource, ::Smithy::Schema::Shapes::MemberShape.new(target: RemediationResource, name: "Resource", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    RemediationV2Item.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: RemediationStatus, name: "Status", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    RemediationV2Item.add_member(:trait, ::Smithy::Schema::Shapes::MemberShape.new(target: RemediationTrait, name: "Trait", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    RemediationV2Item.add_member(:guidance, ::Smithy::Schema::Shapes::MemberShape.new(target: RemediationGuidance, name: "Guidance"))
+    RemediationV2Item.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "UpdatedAt"))
+    RemediationV2Item.type = Types::RemediationV2Item
+    RemediationV2ItemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RemediationV2Item, name: "member"))
     Resource.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Type", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     Resource.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Id", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     Resource.add_member(:partition, ::Smithy::Schema::Shapes::MemberShape.new(target: Partition, name: "Partition"))
     Resource.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Region"))
+    Resource.add_member(:provider, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudProviderName, name: "Provider"))
+    Resource.add_member(:owner, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceOwner, name: "Owner"))
     Resource.add_member(:resource_role, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ResourceRole"))
     Resource.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldMap, name: "Tags"))
     Resource.add_member(:data_classification, ::Smithy::Schema::Shapes::MemberShape.new(target: DataClassificationDetails, name: "DataClassification"))
@@ -5896,10 +6806,16 @@ module Aws::SecurityHub
     ResourceCategory.add_member(:ai_ml, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AI_ML", traits: {"smithy.api#enumValue" => "AI/ML"}))
     ResourceCategory.add_member(:identity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IDENTITY", traits: {"smithy.api#enumValue" => "Identity"}))
     ResourceCategory.add_member(:network, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NETWORK", traits: {"smithy.api#enumValue" => "Network"}))
+    ResourceCategory.add_member(:messaging, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MESSAGING", traits: {"smithy.api#enumValue" => "Messaging"}))
     ResourceCategory.add_member(:other, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OTHER", traits: {"smithy.api#enumValue" => "Other"}))
     ResourceConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Message"))
     ResourceConflictException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Code"))
     ResourceConflictException.type = Types::ResourceConflictException
+    ResourceCriticality.add_member(:very_high, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VERY_HIGH", traits: {"smithy.api#enumValue" => "Very High"}))
+    ResourceCriticality.add_member(:high, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HIGH", traits: {"smithy.api#enumValue" => "High"}))
+    ResourceCriticality.add_member(:medium, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MEDIUM", traits: {"smithy.api#enumValue" => "Medium"}))
+    ResourceCriticality.add_member(:low, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOW", traits: {"smithy.api#enumValue" => "Low"}))
+    ResourceCriticality.add_member(:unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNKNOWN", traits: {"smithy.api#enumValue" => "Unknown"}))
     ResourceDetails.add_member(:aws_auto_scaling_auto_scaling_group, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAutoScalingAutoScalingGroupDetails, name: "AwsAutoScalingAutoScalingGroup"))
     ResourceDetails.add_member(:aws_code_build_project, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsCodeBuildProjectDetails, name: "AwsCodeBuildProject"))
     ResourceDetails.add_member(:aws_cloud_front_distribution, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsCloudFrontDistributionDetails, name: "AwsCloudFrontDistribution"))
@@ -6000,6 +6916,7 @@ module Aws::SecurityHub
     ResourceDetails.add_member(:aws_s3_access_point, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsS3AccessPointDetails, name: "AwsS3AccessPoint"))
     ResourceDetails.add_member(:aws_ec2_client_vpn_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEc2ClientVpnEndpointDetails, name: "AwsEc2ClientVpnEndpoint"))
     ResourceDetails.add_member(:code_repository, ::Smithy::Schema::Shapes::MemberShape.new(target: CodeRepositoryDetails, name: "CodeRepository"))
+    ResourceDetails.add_member(:azure_resource, ::Smithy::Schema::Shapes::MemberShape.new(target: AzureResourceDetails, name: "AzureResource"))
     ResourceDetails.type = Types::ResourceDetails
     ResourceFindingsSummary.add_member(:finding_type, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "FindingType", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ResourceFindingsSummary.add_member(:product_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ProductName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -6007,12 +6924,23 @@ module Aws::SecurityHub
     ResourceFindingsSummary.add_member(:severities, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceSeverityBreakdown, name: "Severities"))
     ResourceFindingsSummary.type = Types::ResourceFindingsSummary
     ResourceFindingsSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceFindingsSummary, name: "member"))
-    ResourceGroupByField.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCOUNT_ID", traits: {"smithy.api#enumValue" => "account_id"}))
-    ResourceGroupByField.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REGION", traits: {"smithy.api#enumValue" => "region"}))
-    ResourceGroupByField.add_member(:resource_category, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_CATEGORY", traits: {"smithy.api#enumValue" => "resource_category"}))
-    ResourceGroupByField.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_TYPE", traits: {"smithy.api#enumValue" => "resource_type"}))
-    ResourceGroupByField.add_member(:resource_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_NAME", traits: {"smithy.api#enumValue" => "resource_name"}))
-    ResourceGroupByField.add_member(:finding_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FINDING_TYPE", traits: {"smithy.api#enumValue" => "findings_summary.finding_type"}))
+    ResourceGroupByField.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCOUNT_ID", traits: {"smithy.api#enumValue" => "AccountId"}))
+    ResourceGroupByField.add_member(:account_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCOUNT_NAME", traits: {"smithy.api#enumValue" => "AccountName"}))
+    ResourceGroupByField.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REGION", traits: {"smithy.api#enumValue" => "Region"}))
+    ResourceGroupByField.add_member(:resource_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_PROVIDER", traits: {"smithy.api#enumValue" => "ResourceProvider"}))
+    ResourceGroupByField.add_member(:resource_owner_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_OWNER_ACCOUNT_ID", traits: {"smithy.api#enumValue" => "ResourceOwnerAccountId"}))
+    ResourceGroupByField.add_member(:resource_owner_org_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_OWNER_ORG_ID", traits: {"smithy.api#enumValue" => "ResourceOwnerOrgId"}))
+    ResourceGroupByField.add_member(:resource_cloud_partition, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_CLOUD_PARTITION", traits: {"smithy.api#enumValue" => "ResourceCloudPartition"}))
+    ResourceGroupByField.add_member(:resource_region, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_REGION", traits: {"smithy.api#enumValue" => "ResourceRegion"}))
+    ResourceGroupByField.add_member(:resource_category, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_CATEGORY", traits: {"smithy.api#enumValue" => "ResourceCategory"}))
+    ResourceGroupByField.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_TYPE", traits: {"smithy.api#enumValue" => "ResourceType"}))
+    ResourceGroupByField.add_member(:resource_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_NAME", traits: {"smithy.api#enumValue" => "ResourceName"}))
+    ResourceGroupByField.add_member(:finding_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FINDING_TYPE", traits: {"smithy.api#enumValue" => "FindingsSummary.FindingType"}))
+    ResourceGroupByField.add_member(:resource_sub_category, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_SUB_CATEGORY", traits: {"smithy.api#enumValue" => "ResourceSubCategory"}))
+    ResourceGroupByField.add_member(:discovery_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISCOVERY_TYPE", traits: {"smithy.api#enumValue" => "DiscoveryType"}))
+    ResourceGroupByField.add_member(:host_resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HOST_RESOURCE_TYPE", traits: {"smithy.api#enumValue" => "ResourceInfo.AIDetails.HostResourceType"}))
+    ResourceGroupByField.add_member(:canonical_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANONICAL_ID", traits: {"smithy.api#enumValue" => "ResourceInfo.AIDetails.CanonicalId"}))
+    ResourceGroupByField.add_member(:resource_criticality, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_CRITICALITY", traits: {"smithy.api#enumValue" => "ResourceCriticality"}))
     ResourceGroupByRule.add_member(:group_by_field, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceGroupByField, name: "GroupByField", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ResourceGroupByRule.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcesFilters, name: "Filters"))
     ResourceGroupByRule.type = Types::ResourceGroupByRule
@@ -6020,23 +6948,45 @@ module Aws::SecurityHub
     ResourceInUseException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Message"))
     ResourceInUseException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Code"))
     ResourceInUseException.type = Types::ResourceInUseException
+    ResourceInfo.add_member(:ai_details, ::Smithy::Schema::Shapes::MemberShape.new(target: AIDetails, name: "AIDetails"))
+    ResourceInfo.type = Types::ResourceInfo
     ResourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Resource, name: "member"))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Message"))
     ResourceNotFoundException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Code"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    ResourceResult.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ResourceArn"))
+    ResourceOwner.add_member(:account, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceOwnerAccount, name: "Account"))
+    ResourceOwner.add_member(:org, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceOwnerOrg, name: "Org"))
+    ResourceOwner.type = Types::ResourceOwner
+    ResourceOwnerAccount.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Id"))
+    ResourceOwnerAccount.type = Types::ResourceOwnerAccount
+    ResourceOwnerOrg.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Id"))
+    ResourceOwnerOrg.type = Types::ResourceOwnerOrg
+    ResourceResult.add_member(:resource_guid, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ResourceGuid"))
     ResourceResult.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ResourceId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ResourceResult.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "AccountId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ResourceResult.add_member(:account_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "AccountName"))
     ResourceResult.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Region", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ResourceResult.add_member(:resource_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ResourceProvider"))
+    ResourceResult.add_member(:resource_owner_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ResourceOwnerAccountId"))
+    ResourceResult.add_member(:resource_owner_org_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ResourceOwnerOrgId"))
+    ResourceResult.add_member(:resource_cloud_partition, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ResourceCloudPartition"))
+    ResourceResult.add_member(:resource_region, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ResourceRegion"))
     ResourceResult.add_member(:resource_category, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceCategory, name: "ResourceCategory"))
-    ResourceResult.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ResourceType"))
+    ResourceResult.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ResourceType", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ResourceResult.add_member(:resource_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ResourceName"))
     ResourceResult.add_member(:resource_creation_time_dt, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ResourceCreationTimeDt"))
     ResourceResult.add_member(:resource_detail_capture_time_dt, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ResourceDetailCaptureTimeDt", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ResourceResult.add_member(:findings_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceFindingsSummaryList, name: "FindingsSummary"))
     ResourceResult.add_member(:resource_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTagList, name: "ResourceTags"))
     ResourceResult.add_member(:resource_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceConfig, name: "ResourceConfig", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ResourceResult.add_member(:resource_sub_category, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceSubCategory, name: "ResourceSubCategory"))
+    ResourceResult.add_member(:discovery_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DiscoveryType, name: "DiscoveryType"))
+    ResourceResult.add_member(:resource_info, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceInfo, name: "ResourceInfo"))
+    ResourceResult.add_member(:resource_criticality, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceCriticality, name: "ResourceCriticality"))
+    ResourceResult.add_member(:criticality_sources, ::Smithy::Schema::Shapes::MemberShape.new(target: CriticalitySourceList, name: "CriticalitySources"))
     ResourceResult.type = Types::ResourceResult
+    ResourceScopes.add_member(:aws_organizations, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsOrganizationScopeList, name: "AwsOrganizations"))
+    ResourceScopes.type = Types::ResourceScopes
     ResourceSeverityBreakdown.add_member(:other, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Other"))
     ResourceSeverityBreakdown.add_member(:fatal, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Fatal"))
     ResourceSeverityBreakdown.add_member(:critical, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Critical"))
@@ -6046,6 +6996,17 @@ module Aws::SecurityHub
     ResourceSeverityBreakdown.add_member(:informational, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Informational"))
     ResourceSeverityBreakdown.add_member(:unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Unknown"))
     ResourceSeverityBreakdown.type = Types::ResourceSeverityBreakdown
+    ResourceSubCategory.add_member(:model, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MODEL", traits: {"smithy.api#enumValue" => "Model"}))
+    ResourceSubCategory.add_member(:model_serving, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MODEL_SERVING", traits: {"smithy.api#enumValue" => "ModelServing"}))
+    ResourceSubCategory.add_member(:agent, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AGENT", traits: {"smithy.api#enumValue" => "Agent"}))
+    ResourceSubCategory.add_member(:agent_framework, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AGENT_FRAMEWORK", traits: {"smithy.api#enumValue" => "AgentFramework"}))
+    ResourceSubCategory.add_member(:agent_tools_and_identity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AGENT_TOOLS_AND_IDENTITY", traits: {"smithy.api#enumValue" => "AgentToolsAndIdentity"}))
+    ResourceSubCategory.add_member(:safety_and_guardrail, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SAFETY_AND_GUARDRAIL", traits: {"smithy.api#enumValue" => "SafetyAndGuardrail"}))
+    ResourceSubCategory.add_member(:knowledge_and_data, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "KNOWLEDGE_AND_DATA", traits: {"smithy.api#enumValue" => "KnowledgeAndData"}))
+    ResourceSubCategory.add_member(:orchestration_and_pipeline, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ORCHESTRATION_AND_PIPELINE", traits: {"smithy.api#enumValue" => "OrchestrationAndPipeline"}))
+    ResourceSubCategory.add_member(:external_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXTERNAL_ENDPOINT", traits: {"smithy.api#enumValue" => "ExternalEndpoint"}))
+    ResourceSubCategory.add_member(:development, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEVELOPMENT", traits: {"smithy.api#enumValue" => "Development"}))
+    ResourceSubCategory.add_member(:other, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OTHER", traits: {"smithy.api#enumValue" => "Other"}))
     ResourceTag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Key", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ResourceTag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Value", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ResourceTag.type = Types::ResourceTag
@@ -6055,11 +7016,14 @@ module Aws::SecurityHub
     ResourcesCompositeFilter.add_member(:date_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcesDateFilterList, name: "DateFilters"))
     ResourcesCompositeFilter.add_member(:number_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcesNumberFilterList, name: "NumberFilters"))
     ResourcesCompositeFilter.add_member(:map_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcesMapFilterList, name: "MapFilters"))
+    ResourcesCompositeFilter.add_member(:nested_composite_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcesCompositeFilterList, name: "NestedCompositeFilters"))
     ResourcesCompositeFilter.add_member(:operator, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedOperators, name: "Operator"))
     ResourcesCompositeFilter.type = Types::ResourcesCompositeFilter
     ResourcesCompositeFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcesCompositeFilter, name: "member"))
-    ResourcesDateField.add_member(:resource_detail_capture_time_dt, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_DETAIL_CAPTURE_TIME_DT", traits: {"smithy.api#enumValue" => "resource_detail_capture_time_dt"}))
-    ResourcesDateField.add_member(:resource_creation_time_dt, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_CREATION_TIME_DT", traits: {"smithy.api#enumValue" => "resource_creation_time_dt"}))
+    ResourcesCount.add_member(:all_resources, ::Smithy::Schema::Shapes::MemberShape.new(target: TrendsValueCount, name: "AllResources", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ResourcesCount.type = Types::ResourcesCount
+    ResourcesDateField.add_member(:resource_detail_capture_time_dt, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_DETAIL_CAPTURE_TIME_DT", traits: {"smithy.api#enumValue" => "ResourceDetailCaptureTime"}))
+    ResourcesDateField.add_member(:resource_creation_time_dt, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_CREATION_TIME_DT", traits: {"smithy.api#enumValue" => "ResourceCreationTime"}))
     ResourcesDateFilter.add_member(:field_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcesDateField, name: "FieldName"))
     ResourcesDateFilter.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: DateFilter, name: "Filter"))
     ResourcesDateFilter.type = Types::ResourcesDateFilter
@@ -6067,37 +7031,83 @@ module Aws::SecurityHub
     ResourcesFilters.add_member(:composite_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcesCompositeFilterList, name: "CompositeFilters"))
     ResourcesFilters.add_member(:composite_operator, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedOperators, name: "CompositeOperator"))
     ResourcesFilters.type = Types::ResourcesFilters
-    ResourcesMapField.add_member(:tag, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TAG", traits: {"smithy.api#enumValue" => "tags"}))
+    ResourcesMapField.add_member(:tag, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TAG", traits: {"smithy.api#enumValue" => "ResourceTags"}))
     ResourcesMapFilter.add_member(:field_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcesMapField, name: "FieldName"))
     ResourcesMapFilter.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: MapFilter, name: "Filter"))
     ResourcesMapFilter.type = Types::ResourcesMapFilter
     ResourcesMapFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcesMapFilter, name: "member"))
-    ResourcesNumberField.add_member(:total_findings, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TOTAL_FINDINGS", traits: {"smithy.api#enumValue" => "findings_summary.total_findings"}))
-    ResourcesNumberField.add_member(:severity_other, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SEVERITY_OTHER", traits: {"smithy.api#enumValue" => "findings_summary.severities.other"}))
-    ResourcesNumberField.add_member(:severity_fatal, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SEVERITY_FATAL", traits: {"smithy.api#enumValue" => "findings_summary.severities.fatal"}))
-    ResourcesNumberField.add_member(:severity_critical, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SEVERITY_CRITICAL", traits: {"smithy.api#enumValue" => "findings_summary.severities.critical"}))
-    ResourcesNumberField.add_member(:severity_high, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SEVERITY_HIGH", traits: {"smithy.api#enumValue" => "findings_summary.severities.high"}))
-    ResourcesNumberField.add_member(:severity_medium, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SEVERITY_MEDIUM", traits: {"smithy.api#enumValue" => "findings_summary.severities.medium"}))
-    ResourcesNumberField.add_member(:severity_low, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SEVERITY_LOW", traits: {"smithy.api#enumValue" => "findings_summary.severities.low"}))
-    ResourcesNumberField.add_member(:severity_informational, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SEVERITY_INFORMATIONAL", traits: {"smithy.api#enumValue" => "findings_summary.severities.informational"}))
-    ResourcesNumberField.add_member(:severity_unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SEVERITY_UNKNOWN", traits: {"smithy.api#enumValue" => "findings_summary.severities.unknown"}))
+    ResourcesNumberField.add_member(:total_findings, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TOTAL_FINDINGS", traits: {"smithy.api#enumValue" => "FindingsSummary.TotalFindings"}))
+    ResourcesNumberField.add_member(:severity_other, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SEVERITY_OTHER", traits: {"smithy.api#enumValue" => "FindingsSummary.Severities.Other"}))
+    ResourcesNumberField.add_member(:severity_fatal, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SEVERITY_FATAL", traits: {"smithy.api#enumValue" => "FindingsSummary.Severities.Fatal"}))
+    ResourcesNumberField.add_member(:severity_critical, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SEVERITY_CRITICAL", traits: {"smithy.api#enumValue" => "FindingsSummary.Severities.Critical"}))
+    ResourcesNumberField.add_member(:severity_high, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SEVERITY_HIGH", traits: {"smithy.api#enumValue" => "FindingsSummary.Severities.High"}))
+    ResourcesNumberField.add_member(:severity_medium, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SEVERITY_MEDIUM", traits: {"smithy.api#enumValue" => "FindingsSummary.Severities.Medium"}))
+    ResourcesNumberField.add_member(:severity_low, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SEVERITY_LOW", traits: {"smithy.api#enumValue" => "FindingsSummary.Severities.Low"}))
+    ResourcesNumberField.add_member(:severity_informational, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SEVERITY_INFORMATIONAL", traits: {"smithy.api#enumValue" => "FindingsSummary.Severities.Informational"}))
+    ResourcesNumberField.add_member(:severity_unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SEVERITY_UNKNOWN", traits: {"smithy.api#enumValue" => "FindingsSummary.Severities.Unknown"}))
+    ResourcesNumberField.add_member(:self_hosted_ai_model_resource_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SELF_HOSTED_AI_MODEL_RESOURCE_COUNT", traits: {"smithy.api#enumValue" => "ResourceInfo.AIDetails.SelfHostedAIModelResourceCount"}))
+    ResourcesNumberField.add_member(:self_hosted_ai_agent_resource_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SELF_HOSTED_AI_AGENT_RESOURCE_COUNT", traits: {"smithy.api#enumValue" => "ResourceInfo.AIDetails.SelfHostedAIAgentResourceCount"}))
+    ResourcesNumberField.add_member(:self_hosted_ai_model_serving_resource_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SELF_HOSTED_AI_MODEL_SERVING_RESOURCE_COUNT", traits: {"smithy.api#enumValue" => "ResourceInfo.AIDetails.SelfHostedAIModelServingResourceCount"}))
+    ResourcesNumberField.add_member(:self_hosted_ai_external_endpoint_resource_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SELF_HOSTED_AI_EXTERNAL_ENDPOINT_RESOURCE_COUNT", traits: {"smithy.api#enumValue" => "ResourceInfo.AIDetails.SelfHostedAIExternalEndpointResourceCount"}))
+    ResourcesNumberField.add_member(:self_hosted_ai_development_resource_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SELF_HOSTED_AI_DEVELOPMENT_RESOURCE_COUNT", traits: {"smithy.api#enumValue" => "ResourceInfo.AIDetails.SelfHostedAIDevelopmentResourceCount"}))
+    ResourcesNumberField.add_member(:self_hosted_ai_agent_framework_resource_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SELF_HOSTED_AI_AGENT_FRAMEWORK_RESOURCE_COUNT", traits: {"smithy.api#enumValue" => "ResourceInfo.AIDetails.SelfHostedAIAgentFrameworkResourceCount"}))
+    ResourcesNumberField.add_member(:self_hosted_ai_agent_tools_and_identity_resource_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SELF_HOSTED_AI_AGENT_TOOLS_AND_IDENTITY_RESOURCE_COUNT", traits: {"smithy.api#enumValue" => "ResourceInfo.AIDetails.SelfHostedAIAgentToolsAndIdentityResourceCount"}))
+    ResourcesNumberField.add_member(:self_hosted_total_ai_resource_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SELF_HOSTED_TOTAL_AI_RESOURCE_COUNT", traits: {"smithy.api#enumValue" => "ResourceInfo.AIDetails.SelfHostedTotalAIResourceCount"}))
     ResourcesNumberFilter.add_member(:field_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcesNumberField, name: "FieldName"))
     ResourcesNumberFilter.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberFilter, name: "Filter"))
     ResourcesNumberFilter.type = Types::ResourcesNumberFilter
     ResourcesNumberFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcesNumberFilter, name: "member"))
-    ResourcesStringField.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_ARN", traits: {"smithy.api#enumValue" => "resource_arn"}))
-    ResourcesStringField.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_ID", traits: {"smithy.api#enumValue" => "resource_id"}))
-    ResourcesStringField.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCOUNT_ID", traits: {"smithy.api#enumValue" => "account_id"}))
-    ResourcesStringField.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REGION", traits: {"smithy.api#enumValue" => "region"}))
-    ResourcesStringField.add_member(:resource_category, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_CATEGORY", traits: {"smithy.api#enumValue" => "resource_category"}))
-    ResourcesStringField.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_TYPE", traits: {"smithy.api#enumValue" => "resource_type"}))
-    ResourcesStringField.add_member(:resource_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_NAME", traits: {"smithy.api#enumValue" => "resource_name"}))
-    ResourcesStringField.add_member(:finding_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FINDING_TYPE", traits: {"smithy.api#enumValue" => "findings_summary.finding_type"}))
-    ResourcesStringField.add_member(:product_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRODUCT_NAME", traits: {"smithy.api#enumValue" => "findings_summary.product_name"}))
+    ResourcesStringField.add_member(:resource_guid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_GUID", traits: {"smithy.api#enumValue" => "ResourceGuid"}))
+    ResourcesStringField.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_ID", traits: {"smithy.api#enumValue" => "ResourceId"}))
+    ResourcesStringField.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCOUNT_ID", traits: {"smithy.api#enumValue" => "AccountId"}))
+    ResourcesStringField.add_member(:account_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCOUNT_NAME", traits: {"smithy.api#enumValue" => "AccountName"}))
+    ResourcesStringField.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REGION", traits: {"smithy.api#enumValue" => "Region"}))
+    ResourcesStringField.add_member(:resource_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_PROVIDER", traits: {"smithy.api#enumValue" => "ResourceProvider"}))
+    ResourcesStringField.add_member(:resource_owner_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_OWNER_ACCOUNT_ID", traits: {"smithy.api#enumValue" => "ResourceOwnerAccountId"}))
+    ResourcesStringField.add_member(:resource_owner_org_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_OWNER_ORG_ID", traits: {"smithy.api#enumValue" => "ResourceOwnerOrgId"}))
+    ResourcesStringField.add_member(:resource_cloud_partition, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_CLOUD_PARTITION", traits: {"smithy.api#enumValue" => "ResourceCloudPartition"}))
+    ResourcesStringField.add_member(:resource_region, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_REGION", traits: {"smithy.api#enumValue" => "ResourceRegion"}))
+    ResourcesStringField.add_member(:resource_category, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_CATEGORY", traits: {"smithy.api#enumValue" => "ResourceCategory"}))
+    ResourcesStringField.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_TYPE", traits: {"smithy.api#enumValue" => "ResourceType"}))
+    ResourcesStringField.add_member(:resource_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_NAME", traits: {"smithy.api#enumValue" => "ResourceName"}))
+    ResourcesStringField.add_member(:finding_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FINDING_TYPE", traits: {"smithy.api#enumValue" => "FindingsSummary.FindingType"}))
+    ResourcesStringField.add_member(:product_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRODUCT_NAME", traits: {"smithy.api#enumValue" => "FindingsSummary.ProductName"}))
+    ResourcesStringField.add_member(:resource_sub_category, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_SUB_CATEGORY", traits: {"smithy.api#enumValue" => "ResourceSubCategory"}))
+    ResourcesStringField.add_member(:discovery_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISCOVERY_TYPE", traits: {"smithy.api#enumValue" => "DiscoveryType"}))
+    ResourcesStringField.add_member(:host_resource_guid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HOST_RESOURCE_GUID", traits: {"smithy.api#enumValue" => "ResourceInfo.AIDetails.HostResourceGuid"}))
+    ResourcesStringField.add_member(:host_resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HOST_RESOURCE_TYPE", traits: {"smithy.api#enumValue" => "ResourceInfo.AIDetails.HostResourceType"}))
+    ResourcesStringField.add_member(:canonical_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANONICAL_ID", traits: {"smithy.api#enumValue" => "ResourceInfo.AIDetails.CanonicalId"}))
+    ResourcesStringField.add_member(:resource_criticality, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_CRITICALITY", traits: {"smithy.api#enumValue" => "ResourceCriticality"}))
     ResourcesStringFilter.add_member(:field_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcesStringField, name: "FieldName"))
     ResourcesStringFilter.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilter, name: "Filter"))
     ResourcesStringFilter.type = Types::ResourcesStringFilter
     ResourcesStringFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcesStringFilter, name: "member"))
+    ResourcesTrendsCompositeFilter.add_member(:string_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcesTrendsStringFilterList, name: "StringFilters"))
+    ResourcesTrendsCompositeFilter.add_member(:nested_composite_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcesTrendsCompositeFilterList, name: "NestedCompositeFilters"))
+    ResourcesTrendsCompositeFilter.add_member(:operator, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedOperators, name: "Operator"))
+    ResourcesTrendsCompositeFilter.type = Types::ResourcesTrendsCompositeFilter
+    ResourcesTrendsCompositeFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcesTrendsCompositeFilter, name: "member"))
+    ResourcesTrendsFilters.add_member(:composite_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcesTrendsCompositeFilterList, name: "CompositeFilters"))
+    ResourcesTrendsFilters.add_member(:composite_operator, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedOperators, name: "CompositeOperator"))
+    ResourcesTrendsFilters.type = Types::ResourcesTrendsFilters
+    ResourcesTrendsMetrics.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcesTrendsMetricsResult, name: "member"))
+    ResourcesTrendsMetricsResult.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "Timestamp", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ResourcesTrendsMetricsResult.add_member(:trends_values, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcesTrendsValues, name: "TrendsValues", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ResourcesTrendsMetricsResult.type = Types::ResourcesTrendsMetricsResult
+    ResourcesTrendsStringField.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCOUNT_ID", traits: {"smithy.api#enumValue" => "account_id"}))
+    ResourcesTrendsStringField.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REGION", traits: {"smithy.api#enumValue" => "region"}))
+    ResourcesTrendsStringField.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_TYPE", traits: {"smithy.api#enumValue" => "resource_type"}))
+    ResourcesTrendsStringField.add_member(:resource_category, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_CATEGORY", traits: {"smithy.api#enumValue" => "resource_category"}))
+    ResourcesTrendsStringField.add_member(:resource_cloud_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_CLOUD_PROVIDER", traits: {"smithy.api#enumValue" => "resource_cloud_provider"}))
+    ResourcesTrendsStringField.add_member(:resource_region, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_REGION", traits: {"smithy.api#enumValue" => "resource_region"}))
+    ResourcesTrendsStringField.add_member(:resource_owner_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_OWNER_ID", traits: {"smithy.api#enumValue" => "resource_owner_id"}))
+    ResourcesTrendsStringField.add_member(:resource_owner_organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_OWNER_ORGANIZATION_ID", traits: {"smithy.api#enumValue" => "resource_owner_organization_id"}))
+    ResourcesTrendsStringFilter.add_member(:field_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcesTrendsStringField, name: "FieldName"))
+    ResourcesTrendsStringFilter.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilter, name: "Filter"))
+    ResourcesTrendsStringFilter.type = Types::ResourcesTrendsStringFilter
+    ResourcesTrendsStringFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcesTrendsStringFilter, name: "member"))
+    ResourcesTrendsValues.add_member(:resources_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcesCount, name: "ResourcesCount", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ResourcesTrendsValues.type = Types::ResourcesTrendsValues
     Result.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "AccountId"))
     Result.add_member(:processing_result, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ProcessingResult"))
     Result.type = Types::Result
@@ -6200,6 +7210,13 @@ module Aws::SecurityHub
     RuleStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
     RuleStatusV2.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     RuleStatusV2.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
+    S3ExportDestination.add_member(:bucket_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "BucketArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    S3ExportDestination.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "KmsKeyArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    S3ExportDestination.add_member(:object_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: S3ObjectPrefix, name: "ObjectPrefix"))
+    S3ExportDestination.type = Types::S3ExportDestination
+    ScopeType.add_member(:tenant, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TENANT", traits: {"smithy.api#enumValue" => "TENANT"}))
+    ScopeType.add_member(:subscription, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUBSCRIPTION", traits: {"smithy.api#enumValue" => "SUBSCRIPTION"}))
+    ScopeValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member"))
     SecurityControl.add_member(:security_control_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "SecurityControlId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     SecurityControl.add_member(:security_control_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "SecurityControlArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     SecurityControl.add_member(:title, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Title", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -6210,6 +7227,7 @@ module Aws::SecurityHub
     SecurityControl.add_member(:update_status, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateStatus, name: "UpdateStatus"))
     SecurityControl.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: Parameters, name: "Parameters"))
     SecurityControl.add_member(:last_update_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: AlphaNumericNonEmptyString, name: "LastUpdateReason"))
+    SecurityControl.add_member(:provider, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityControlsProvider, name: "Provider"))
     SecurityControl.type = Types::SecurityControl
     SecurityControlCustomParameter.add_member(:security_control_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "SecurityControlId"))
     SecurityControlCustomParameter.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: Parameters, name: "Parameters"))
@@ -6223,6 +7241,7 @@ module Aws::SecurityHub
     SecurityControlDefinition.add_member(:current_region_availability, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionAvailabilityStatus, name: "CurrentRegionAvailability", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     SecurityControlDefinition.add_member(:customizable_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomizableProperties, name: "CustomizableProperties"))
     SecurityControlDefinition.add_member(:parameter_definitions, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterDefinitions, name: "ParameterDefinitions"))
+    SecurityControlDefinition.add_member(:provider, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityControlsProvider, name: "Provider"))
     SecurityControlDefinition.type = Types::SecurityControlDefinition
     SecurityControlDefinitions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityControlDefinition, name: "member"))
     SecurityControlParameter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Name"))
@@ -6235,6 +7254,9 @@ module Aws::SecurityHub
     SecurityControlsConfiguration.add_member(:disabled_security_control_identifiers, ::Smithy::Schema::Shapes::MemberShape.new(target: DisabledSecurityControlIdentifierList, name: "DisabledSecurityControlIdentifiers"))
     SecurityControlsConfiguration.add_member(:security_control_custom_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityControlCustomParametersList, name: "SecurityControlCustomParameters"))
     SecurityControlsConfiguration.type = Types::SecurityControlsConfiguration
+    SecurityControlsProvider.add_member(:aws, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS", traits: {"smithy.api#enumValue" => "AWS"}))
+    SecurityControlsProvider.add_member(:azure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Azure", traits: {"smithy.api#enumValue" => "Azure"}))
+    SecurityControlsProviders.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityControlsProvider, name: "member"))
     SecurityGroups.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member"))
     SecurityHubFeature.add_member(:security_hub, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SECURITY_HUB", traits: {"smithy.api#enumValue" => "SecurityHub"}))
     SecurityHubFeature.add_member(:security_hub_v2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SECURITY_HUB_V2", traits: {"smithy.api#enumValue" => "SecurityHubV2"}))
@@ -6259,13 +7281,17 @@ module Aws::SecurityHub
     Sequence.add_member(:sequence_indicators, ::Smithy::Schema::Shapes::MemberShape.new(target: IndicatorsList, name: "SequenceIndicators"))
     Sequence.type = Types::Sequence
     ServiceNowDetail.add_member(:instance_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "InstanceName"))
-    ServiceNowDetail.add_member(:client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ClientId"))
+    ServiceNowDetail.add_member(:secret_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "SecretArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ServiceNowDetail.add_member(:auth_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorAuthStatus, name: "AuthStatus", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ServiceNowDetail.type = Types::ServiceNowDetail
     ServiceNowProviderConfiguration.add_member(:instance_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "InstanceName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    ServiceNowProviderConfiguration.add_member(:client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ClientId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    ServiceNowProviderConfiguration.add_member(:client_secret, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveNonEmptyString, name: "ClientSecret", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ServiceNowProviderConfiguration.add_member(:secret_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "SecretArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ServiceNowProviderConfiguration.type = Types::ServiceNowProviderConfiguration
+    ServiceNowUpdateConfiguration.add_member(:secret_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "SecretArn"))
+    ServiceNowUpdateConfiguration.type = Types::ServiceNowUpdateConfiguration
+    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Message"))
+    ServiceQuotaExceededException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Code"))
+    ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
     Severity.add_member(:product, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "Product"))
     Severity.add_member(:label, ::Smithy::Schema::Shapes::MemberShape.new(target: SeverityLabel, name: "Label"))
     Severity.add_member(:normalized, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Normalized"))
@@ -6280,6 +7306,15 @@ module Aws::SecurityHub
     SeverityRating.add_member(:medium, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MEDIUM", traits: {"smithy.api#enumValue" => "MEDIUM"}))
     SeverityRating.add_member(:high, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HIGH", traits: {"smithy.api#enumValue" => "HIGH"}))
     SeverityRating.add_member(:critical, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CRITICAL", traits: {"smithy.api#enumValue" => "CRITICAL"}))
+    SeverityTrendsCount.add_member(:unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: TrendsValueCount, name: "Unknown", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    SeverityTrendsCount.add_member(:informational, ::Smithy::Schema::Shapes::MemberShape.new(target: TrendsValueCount, name: "Informational", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    SeverityTrendsCount.add_member(:low, ::Smithy::Schema::Shapes::MemberShape.new(target: TrendsValueCount, name: "Low", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    SeverityTrendsCount.add_member(:medium, ::Smithy::Schema::Shapes::MemberShape.new(target: TrendsValueCount, name: "Medium", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    SeverityTrendsCount.add_member(:high, ::Smithy::Schema::Shapes::MemberShape.new(target: TrendsValueCount, name: "High", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    SeverityTrendsCount.add_member(:critical, ::Smithy::Schema::Shapes::MemberShape.new(target: TrendsValueCount, name: "Critical", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    SeverityTrendsCount.add_member(:fatal, ::Smithy::Schema::Shapes::MemberShape.new(target: TrendsValueCount, name: "Fatal", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    SeverityTrendsCount.add_member(:other, ::Smithy::Schema::Shapes::MemberShape.new(target: TrendsValueCount, name: "Other", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    SeverityTrendsCount.type = Types::SeverityTrendsCount
     SeverityUpdate.add_member(:normalized, ::Smithy::Schema::Shapes::MemberShape.new(target: RatioScale, name: "Normalized"))
     SeverityUpdate.add_member(:product, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "Product"))
     SeverityUpdate.add_member(:label, ::Smithy::Schema::Shapes::MemberShape.new(target: SeverityLabel, name: "Label"))
@@ -6324,6 +7359,7 @@ module Aws::SecurityHub
     Standard.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Name"))
     Standard.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Description"))
     Standard.add_member(:enabled_by_default, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "EnabledByDefault"))
+    Standard.add_member(:provider, ::Smithy::Schema::Shapes::MemberShape.new(target: StandardsProvider, name: "Provider"))
     Standard.add_member(:standards_managed_by, ::Smithy::Schema::Shapes::MemberShape.new(target: StandardsManagedBy, name: "StandardsManagedBy"))
     Standard.type = Types::Standard
     Standards.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Standard, name: "member"))
@@ -6380,6 +7416,9 @@ module Aws::SecurityHub
     StandardsManagedBy.add_member(:company, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Company"))
     StandardsManagedBy.add_member(:product, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Product"))
     StandardsManagedBy.type = Types::StandardsManagedBy
+    StandardsProvider.add_member(:aws, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS", traits: {"smithy.api#enumValue" => "AWS"}))
+    StandardsProvider.add_member(:azure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Azure", traits: {"smithy.api#enumValue" => "Azure"}))
+    StandardsProviders.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StandardsProvider, name: "member"))
     StandardsStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
     StandardsStatus.add_member(:ready, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "READY", traits: {"smithy.api#enumValue" => "READY"}))
     StandardsStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
@@ -6393,6 +7432,7 @@ module Aws::SecurityHub
     StandardsSubscription.add_member(:standards_status, ::Smithy::Schema::Shapes::MemberShape.new(target: StandardsStatus, name: "StandardsStatus", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     StandardsSubscription.add_member(:standards_controls_updatable, ::Smithy::Schema::Shapes::MemberShape.new(target: StandardsControlsUpdatable, name: "StandardsControlsUpdatable"))
     StandardsSubscription.add_member(:standards_status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: StandardsStatusReason, name: "StandardsStatusReason"))
+    StandardsSubscription.add_member(:provider, ::Smithy::Schema::Shapes::MemberShape.new(target: StandardsProvider, name: "Provider"))
     StandardsSubscription.type = Types::StandardsSubscription
     StandardsSubscriptionArns.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member"))
     StandardsSubscriptionRequest.add_member(:standards_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "StandardsArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -6415,6 +7455,14 @@ module Aws::SecurityHub
     StartConfigurationPolicyDisassociationRequest.add_member(:configuration_policy_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ConfigurationPolicyIdentifier", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     StartConfigurationPolicyDisassociationRequest.type = Types::StartConfigurationPolicyDisassociationRequest
     StartConfigurationPolicyDisassociationResponse.type = Types::StartConfigurationPolicyDisassociationResponse
+    StartExportJobV2Request.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportName, name: "Name"))
+    StartExportJobV2Request.add_member(:destination, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportDestination, name: "Destination", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    StartExportJobV2Request.add_member(:output_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportOutput, name: "OutputConfiguration", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    StartExportJobV2Request.add_member(:scopes, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportScopes, name: "Scopes"))
+    StartExportJobV2Request.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    StartExportJobV2Request.type = Types::StartExportJobV2Request
+    StartExportJobV2Response.add_member(:export_job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportJobId, name: "ExportJobId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    StartExportJobV2Response.type = Types::StartExportJobV2Response
     StatelessCustomActionDefinition.add_member(:publish_metric_action, ::Smithy::Schema::Shapes::MemberShape.new(target: StatelessCustomPublishMetricAction, name: "PublishMetricAction"))
     StatelessCustomActionDefinition.type = Types::StatelessCustomActionDefinition
     StatelessCustomPublishMetricAction.add_member(:dimensions, ::Smithy::Schema::Shapes::MemberShape.new(target: StatelessCustomPublishMetricActionDimensionsList, name: "Dimensions"))
@@ -6427,6 +7475,7 @@ module Aws::SecurityHub
     StatusReason.type = Types::StatusReason
     StatusReasonCode.add_member(:no_available_configuration_recorder, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NO_AVAILABLE_CONFIGURATION_RECORDER", traits: {"smithy.api#enumValue" => "NO_AVAILABLE_CONFIGURATION_RECORDER"}))
     StatusReasonCode.add_member(:maximum_number_of_config_rules_exceeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MAXIMUM_NUMBER_OF_CONFIG_RULES_EXCEEDED", traits: {"smithy.api#enumValue" => "MAXIMUM_NUMBER_OF_CONFIG_RULES_EXCEEDED"}))
+    StatusReasonCode.add_member(:no_available_multicloud_connector, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NO_AVAILABLE_MULTICLOUD_CONNECTOR", traits: {"smithy.api#enumValue" => "NO_AVAILABLE_MULTICLOUD_CONNECTOR"}))
     StatusReasonCode.add_member(:internal_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTERNAL_ERROR", traits: {"smithy.api#enumValue" => "INTERNAL_ERROR"}))
     StatusReasonsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusReason, name: "member"))
     StringConfigurationOptions.add_member(:default_value, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "DefaultValue"))
@@ -6499,6 +7548,13 @@ module Aws::SecurityHub
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Message"))
     ThrottlingException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Code"))
     ThrottlingException.type = Types::ThrottlingException
+    TicketCreationMode.add_member(:dryrun, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DRYRUN", traits: {"smithy.api#enumValue" => "DRYRUN"}))
+    TrendsMetrics.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TrendsMetricsResult, name: "member"))
+    TrendsMetricsResult.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "Timestamp", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    TrendsMetricsResult.add_member(:trends_values, ::Smithy::Schema::Shapes::MemberShape.new(target: TrendsValues, name: "TrendsValues", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    TrendsMetricsResult.type = Types::TrendsMetricsResult
+    TrendsValues.add_member(:severity_trends, ::Smithy::Schema::Shapes::MemberShape.new(target: SeverityTrendsCount, name: "SeverityTrends", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    TrendsValues.type = Types::TrendsValues
     TypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member"))
     UnprocessedAutomationRule.add_member(:rule_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "RuleArn"))
     UnprocessedAutomationRule.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "ErrorCode"))
@@ -6534,6 +7590,12 @@ module Aws::SecurityHub
     UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, name: "TagKeys", traits: {"smithy.api#clientOptional" => {}, "smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
     UntagResourceResponse.type = Types::UntagResourceResponse
+    UnusedPermissionsRecommendationStep.add_member(:recommended_action, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "RecommendedAction"))
+    UnusedPermissionsRecommendationStep.add_member(:existing_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ExistingPolicy"))
+    UnusedPermissionsRecommendationStep.add_member(:existing_policy_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ExistingPolicyId"))
+    UnusedPermissionsRecommendationStep.add_member(:policy_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "PolicyUpdatedAt"))
+    UnusedPermissionsRecommendationStep.add_member(:recommended_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "RecommendedPolicy"))
+    UnusedPermissionsRecommendationStep.type = Types::UnusedPermissionsRecommendationStep
     UpdateActionTargetRequest.add_member(:action_target_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ActionTargetArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdateActionTargetRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Name"))
     UpdateActionTargetRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Description"))
@@ -6581,11 +7643,19 @@ module Aws::SecurityHub
     UpdateConfigurationPolicyResponse.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedAt"))
     UpdateConfigurationPolicyResponse.add_member(:configuration_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: Policy, name: "ConfigurationPolicy"))
     UpdateConfigurationPolicyResponse.type = Types::UpdateConfigurationPolicyResponse
+    UpdateConnectorRequest.add_member(:connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateConnectorRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Description"))
+    UpdateConnectorRequest.add_member(:provider, ::Smithy::Schema::Shapes::MemberShape.new(target: CspmProviderUpdateConfiguration, name: "Provider"))
+    UpdateConnectorRequest.type = Types::UpdateConnectorRequest
+    UpdateConnectorResponse.add_member(:connector_status, ::Smithy::Schema::Shapes::MemberShape.new(target: CspmConnectorStatus, name: "ConnectorStatus"))
+    UpdateConnectorResponse.add_member(:enablement_status, ::Smithy::Schema::Shapes::MemberShape.new(target: CspmEnablementStatus, name: "EnablementStatus"))
+    UpdateConnectorResponse.type = Types::UpdateConnectorResponse
     UpdateConnectorV2Request.add_member(:connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateConnectorV2Request.add_member(:client_secret, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveNonEmptyString, name: "ClientSecret"))
     UpdateConnectorV2Request.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Description"))
     UpdateConnectorV2Request.add_member(:provider, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderUpdateConfiguration, name: "Provider"))
     UpdateConnectorV2Request.type = Types::UpdateConnectorV2Request
+    UpdateConnectorV2Response.add_member(:connector_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorStatus, name: "ConnectorStatus"))
+    UpdateConnectorV2Response.add_member(:enablement_status, ::Smithy::Schema::Shapes::MemberShape.new(target: EnablementStatus, name: "EnablementStatus"))
     UpdateConnectorV2Response.type = Types::UpdateConnectorV2Response
     UpdateFindingAggregatorRequest.add_member(:finding_aggregator_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "FindingAggregatorArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     UpdateFindingAggregatorRequest.add_member(:region_linking_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "RegionLinkingMode", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -6706,7 +7776,7 @@ module Aws::SecurityHub
       service.id = "com.amazonaws.securityhub#SecurityHubAPIService"
       service.name = "SecurityHubAPIService"
       service.version = "2018-10-26"
-      service.traits = {"aws.api#service" => {"sdkId" => "SecurityHub", "arnNamespace" => "securityhub", "cloudFormationName" => "SecurityHub", "cloudTrailEventSource" => "securityhub.amazonaws.com", "endpointPrefix" => "securityhub"}, "aws.auth#sigv4" => {"name" => "securityhub"}, "aws.protocols#restJson1" => {}, "smithy.api#title" => "AWS SecurityHub"}
+      service.traits = {"aws.api#service" => {"sdkId" => "SecurityHub", "arnNamespace" => "securityhub", "cloudFormationName" => "SecurityHub", "cloudTrailEventSource" => "securityhub.amazonaws.com", "endpointPrefix" => "securityhub"}, "aws.auth#sigv4" => {"name" => "securityhub"}, "aws.protocols#restJson1" => {}, "smithy.api#title" => "AWS SecurityHub", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://securityhub-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://securityhub-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://securityhub.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://securityhub.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
       service.add_operation(:accept_administrator_invitation, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.securityhub#AcceptAdministratorInvitation"
         operation.name = "AcceptAdministratorInvitation"
@@ -6873,18 +7943,18 @@ module Aws::SecurityHub
         operation.errors << LimitExceededException
         operation.traits = {"smithy.api#http" => {"method" => "PATCH", "uri" => "/associations", "code" => 200}}
       end)
-      service.add_operation(:connector_registrations_v2, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
-        operation.id = "com.amazonaws.securityhub#ConnectorRegistrationsV2"
-        operation.name = "ConnectorRegistrationsV2"
-        operation.input = ConnectorRegistrationsV2Request
-        operation.output = ConnectorRegistrationsV2Response
+      service.add_operation(:cancel_export_job_v2, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.securityhub#CancelExportJobV2"
+        operation.name = "CancelExportJobV2"
+        operation.input = CancelExportJobV2Request
+        operation.output = CancelExportJobV2Response
         operation.errors << AccessDeniedException
         operation.errors << ConflictException
         operation.errors << InternalServerException
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/connectorsv2/registrations", "code" => 200}}
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/exportjobsv2/{ExportJobId}/cancel", "code" => 200}}
       end)
       service.add_operation(:create_action_target, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.securityhub#CreateActionTarget"
@@ -6907,6 +7977,7 @@ module Aws::SecurityHub
         operation.errors << ConflictException
         operation.errors << InternalServerException
         operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/aggregatorv2/create", "code" => 200}}
@@ -6931,6 +8002,7 @@ module Aws::SecurityHub
         operation.errors << AccessDeniedException
         operation.errors << ConflictException
         operation.errors << InternalServerException
+        operation.errors << ServiceQuotaExceededException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/automationrulesv2/create", "code" => 200}}
@@ -6948,6 +8020,21 @@ module Aws::SecurityHub
         operation.errors << ResourceConflictException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/configurationPolicy/create", "code" => 200}}
       end)
+      service.add_operation(:create_connector, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.securityhub#CreateConnector"
+        operation.name = "CreateConnector"
+        operation.input = CreateConnectorRequest
+        operation.output = CreateConnectorResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << InvalidAccessException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/connectors", "code" => 200}}
+      end)
       service.add_operation(:create_connector_v2, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.securityhub#CreateConnectorV2"
         operation.name = "CreateConnectorV2"
@@ -6957,6 +8044,7 @@ module Aws::SecurityHub
         operation.errors << ConflictException
         operation.errors << InternalServerException
         operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/connectorsv2", "code" => 200}}
@@ -7072,6 +8160,20 @@ module Aws::SecurityHub
         operation.errors << ResourceConflictException
         operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/configurationPolicy/{Identifier}", "code" => 200}}
+      end)
+      service.add_operation(:delete_connector, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.securityhub#DeleteConnector"
+        operation.name = "DeleteConnector"
+        operation.input = DeleteConnectorRequest
+        operation.output = DeleteConnectorResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << InvalidAccessException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/connectors/{ConnectorId+}", "code" => 200}}
       end)
       service.add_operation(:delete_connector_v2, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.securityhub#DeleteConnectorV2"
@@ -7265,6 +8367,18 @@ module Aws::SecurityHub
         operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/accounts", "code" => 200}}
       end)
+      service.add_operation(:disable_security_hub_feature_v2, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.securityhub#DisableSecurityHubFeatureV2"
+        operation.name = "DisableSecurityHubFeatureV2"
+        operation.input = DisableSecurityHubFeatureV2Request
+        operation.output = DisableSecurityHubFeatureV2Response
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/hubv2/feature/{FeatureName}", "code" => 200}}
+      end)
       service.add_operation(:disable_security_hub_v2, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.securityhub#DisableSecurityHubV2"
         operation.name = "DisableSecurityHubV2"
@@ -7349,6 +8463,18 @@ module Aws::SecurityHub
         operation.errors << ResourceConflictException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/accounts", "code" => 200}}
       end)
+      service.add_operation(:enable_security_hub_feature_v2, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.securityhub#EnableSecurityHubFeatureV2"
+        operation.name = "EnableSecurityHubFeatureV2"
+        operation.input = EnableSecurityHubFeatureV2Request
+        operation.output = EnableSecurityHubFeatureV2Response
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/hubv2/feature/{FeatureName}", "code" => 200}}
+      end)
       service.add_operation(:enable_security_hub_v2, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.securityhub#EnableSecurityHubV2"
         operation.name = "EnableSecurityHubV2"
@@ -7359,6 +8485,19 @@ module Aws::SecurityHub
         operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/hubv2", "code" => 200}}
+      end)
+      service.add_operation(:generate_recommended_policy_v2, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.securityhub#GenerateRecommendedPolicyV2"
+        operation.name = "GenerateRecommendedPolicyV2"
+        operation.input = GenerateRecommendedPolicyV2Request
+        operation.output = GenerateRecommendedPolicyV2Response
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << InvalidInputException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/recommendedPolicyV2/{MetadataUid}", "code" => 200}}
       end)
       service.add_operation(:get_administrator_account, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.securityhub#GetAdministratorAccount"
@@ -7424,6 +8563,20 @@ module Aws::SecurityHub
         operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/configurationPolicyAssociation/get", "code" => 200}}
       end)
+      service.add_operation(:get_connector, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.securityhub#GetConnector"
+        operation.name = "GetConnector"
+        operation.input = GetConnectorRequest
+        operation.output = GetConnectorResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << InvalidAccessException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/connectors/{ConnectorId+}", "code" => 200}}
+      end)
       service.add_operation(:get_connector_v2, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.securityhub#GetConnectorV2"
         operation.name = "GetConnectorV2"
@@ -7448,6 +8601,18 @@ module Aws::SecurityHub
         operation.errors << LimitExceededException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/standards/get", "code" => 200}}
         operation[:paginator] = Paginators::GetEnabledStandards.new
+      end)
+      service.add_operation(:get_export_job_v2, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.securityhub#GetExportJobV2"
+        operation.name = "GetExportJobV2"
+        operation.input = GetExportJobV2Request
+        operation.output = GetExportJobV2Response
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/exportjobsv2/{ExportJobId}", "code" => 200}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_finding_aggregator, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.securityhub#GetFindingAggregator"
@@ -7482,6 +8647,8 @@ module Aws::SecurityHub
         operation.errors << AccessDeniedException
         operation.errors << ConflictException
         operation.errors << InternalServerException
+        operation.errors << OrganizationalUnitNotFoundException
+        operation.errors << OrganizationNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/findingsv2/statistics", "code" => 200}}
@@ -7498,6 +8665,18 @@ module Aws::SecurityHub
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/findings", "code" => 200}}
         operation[:paginator] = Paginators::GetFindings.new
       end)
+      service.add_operation(:get_findings_trends_v2, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.securityhub#GetFindingsTrendsV2"
+        operation.name = "GetFindingsTrendsV2"
+        operation.input = GetFindingsTrendsV2Request
+        operation.output = GetFindingsTrendsV2Response
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/findingsTrendsv2", "code" => 200}}
+        operation[:paginator] = Paginators::GetFindingsTrendsV2.new
+      end)
       service.add_operation(:get_findings_v2, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.securityhub#GetFindingsV2"
         operation.name = "GetFindingsV2"
@@ -7506,6 +8685,8 @@ module Aws::SecurityHub
         operation.errors << AccessDeniedException
         operation.errors << ConflictException
         operation.errors << InternalServerException
+        operation.errors << OrganizationalUnitNotFoundException
+        operation.errors << OrganizationNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/findingsv2", "code" => 200}}
@@ -7571,6 +8752,33 @@ module Aws::SecurityHub
         operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/members/get", "code" => 200}}
       end)
+      service.add_operation(:get_recommended_policy_v2, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.securityhub#GetRecommendedPolicyV2"
+        operation.name = "GetRecommendedPolicyV2"
+        operation.input = GetRecommendedPolicyV2Request
+        operation.output = GetRecommendedPolicyV2Response
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << InvalidInputException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/recommendedPolicyV2/{MetadataUid}", "code" => 200}}
+        operation[:paginator] = Paginators::GetRecommendedPolicyV2.new
+      end)
+      service.add_operation(:get_remediations_v2, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.securityhub#GetRemediationsV2"
+        operation.name = "GetRemediationsV2"
+        operation.input = GetRemediationsV2Request
+        operation.output = GetRemediationsV2Response
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/GetRemediationsV2", "code" => 200}}
+        operation[:paginator] = Paginators::GetRemediationsV2.new
+      end)
       service.add_operation(:get_resources_statistics_v2, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.securityhub#GetResourcesStatisticsV2"
         operation.name = "GetResourcesStatisticsV2"
@@ -7579,10 +8787,24 @@ module Aws::SecurityHub
         operation.errors << AccessDeniedException
         operation.errors << ConflictException
         operation.errors << InternalServerException
+        operation.errors << OrganizationalUnitNotFoundException
+        operation.errors << OrganizationNotFoundException
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/resourcesv2/statistics", "code" => 200}}
+      end)
+      service.add_operation(:get_resources_trends_v2, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.securityhub#GetResourcesTrendsV2"
+        operation.name = "GetResourcesTrendsV2"
+        operation.input = GetResourcesTrendsV2Request
+        operation.output = GetResourcesTrendsV2Response
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/resourcesTrendsv2", "code" => 200}}
+        operation[:paginator] = Paginators::GetResourcesTrendsV2.new
       end)
       service.add_operation(:get_resources_v2, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.securityhub#GetResourcesV2"
@@ -7592,6 +8814,8 @@ module Aws::SecurityHub
         operation.errors << AccessDeniedException
         operation.errors << ConflictException
         operation.errors << InternalServerException
+        operation.errors << OrganizationalUnitNotFoundException
+        operation.errors << OrganizationNotFoundException
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
@@ -7686,6 +8910,20 @@ module Aws::SecurityHub
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/configurationPolicyAssociation/list", "code" => 200}}
         operation[:paginator] = Paginators::ListConfigurationPolicyAssociations.new
       end)
+      service.add_operation(:list_connectors, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.securityhub#ListConnectors"
+        operation.name = "ListConnectors"
+        operation.input = ListConnectorsRequest
+        operation.output = ListConnectorsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << InvalidAccessException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/connectors", "code" => 200}}
+      end)
       service.add_operation(:list_connectors_v2, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.securityhub#ListConnectorsV2"
         operation.name = "ListConnectorsV2"
@@ -7710,6 +8948,31 @@ module Aws::SecurityHub
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/productSubscriptions", "code" => 200}}
         operation[:paginator] = Paginators::ListEnabledProductsForImport.new
       end)
+      service.add_operation(:list_export_jobs_v2, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.securityhub#ListExportJobsV2"
+        operation.name = "ListExportJobsV2"
+        operation.input = ListExportJobsV2Request
+        operation.output = ListExportJobsV2Response
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/exportjobsv2", "code" => 200}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListExportJobsV2.new
+      end)
+      service.add_operation(:list_exposures_by_remediation_v2, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.securityhub#ListExposuresByRemediationV2"
+        operation.name = "ListExposuresByRemediationV2"
+        operation.input = ListExposuresByRemediationV2Request
+        operation.output = ListExposuresByRemediationV2Response
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/ListExposuresByRemediationV2", "code" => 200}}
+        operation[:paginator] = Paginators::ListExposuresByRemediationV2.new
+      end)
       service.add_operation(:list_finding_aggregators, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.securityhub#ListFindingAggregators"
         operation.name = "ListFindingAggregators"
@@ -7722,6 +8985,19 @@ module Aws::SecurityHub
         operation.errors << LimitExceededException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/findingAggregator/list", "code" => 200}}
         operation[:paginator] = Paginators::ListFindingAggregators.new
+      end)
+      service.add_operation(:list_free_trial_statuses_v2, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.securityhub#ListFreeTrialStatusesV2"
+        operation.name = "ListFreeTrialStatusesV2"
+        operation.input = ListFreeTrialStatusesV2Request
+        operation.output = ListFreeTrialStatusesV2Response
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/freetrial/statusv2/list", "code" => 200}}
+        operation[:paginator] = Paginators::ListFreeTrialStatusesV2.new
       end)
       service.add_operation(:list_invitations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.securityhub#ListInvitations"
@@ -7793,6 +9069,19 @@ module Aws::SecurityHub
         operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/tags/{ResourceArn}", "code" => 200}}
       end)
+      service.add_operation(:register_connector_v2, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.securityhub#RegisterConnectorV2"
+        operation.name = "RegisterConnectorV2"
+        operation.input = RegisterConnectorV2Request
+        operation.output = RegisterConnectorV2Response
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/connectorsv2/register", "code" => 200}}
+      end)
       service.add_operation(:start_configuration_policy_association, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.securityhub#StartConfigurationPolicyAssociation"
         operation.name = "StartConfigurationPolicyAssociation"
@@ -7818,6 +9107,21 @@ module Aws::SecurityHub
         operation.errors << LimitExceededException
         operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/configurationPolicyAssociation/disassociate", "code" => 200}}
+      end)
+      service.add_operation(:start_export_job_v2, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.securityhub#StartExportJobV2"
+        operation.name = "StartExportJobV2"
+        operation.input = StartExportJobV2Request
+        operation.output = StartExportJobV2Response
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << OrganizationalUnitNotFoundException
+        operation.errors << OrganizationNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/exportjobsv2", "code" => 202}}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.securityhub#TagResource"
@@ -7889,6 +9193,20 @@ module Aws::SecurityHub
         operation.errors << ResourceConflictException
         operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.api#http" => {"method" => "PATCH", "uri" => "/configurationPolicy/{Identifier}", "code" => 200}}
+      end)
+      service.add_operation(:update_connector, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.securityhub#UpdateConnector"
+        operation.name = "UpdateConnector"
+        operation.input = UpdateConnectorRequest
+        operation.output = UpdateConnectorResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << InvalidAccessException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "PATCH", "uri" => "/connectors/{ConnectorId+}", "code" => 200}}
       end)
       service.add_operation(:update_connector_v2, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.securityhub#UpdateConnectorV2"

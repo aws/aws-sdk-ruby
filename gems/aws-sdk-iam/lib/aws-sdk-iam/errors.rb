@@ -33,6 +33,8 @@ module Aws::IAM
   # * {DuplicateSSHPublicKeyException}
   # * {EntityAlreadyExistsException}
   # * {EntityTemporarilyUnmodifiableException}
+  # * {FeatureDisabledException}
+  # * {FeatureEnabledException}
   # * {InvalidAuthenticationCodeException}
   # * {InvalidCertificateException}
   # * {InvalidInputException}
@@ -42,6 +44,7 @@ module Aws::IAM
   # * {LimitExceededException}
   # * {MalformedCertificateException}
   # * {MalformedPolicyDocumentException}
+  # * {NameConflictException}
   # * {NoSuchEntityException}
   # * {OpenIdIdpCommunicationErrorException}
   # * {OrganizationNotFoundException}
@@ -50,6 +53,8 @@ module Aws::IAM
   # * {PolicyEvaluationException}
   # * {PolicyNotAttachableException}
   # * {ReportGenerationLimitExceededException}
+  # * {RoleModifiedException}
+  # * {RoleTemplateDisabledException}
   # * {ServiceAccessNotEnabledException}
   # * {ServiceFailureException}
   # * {ServiceNotSupportedException}
@@ -219,6 +224,33 @@ module Aws::IAM
       end
     end
 
+    # <p>The request failed because outbound identity federation is already disabled for your Amazon Web Services account. You cannot disable the feature multiple times</p>
+    class FeatureDisabledException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::IAM::Types::FeatureDisabledException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>The request failed because outbound identity federation is already enabled for your Amazon Web Services account. You
+    #       cannot enable the feature multiple times. To fetch the current configuration (including the unique issuer URL), use the <code>GetOutboundWebIdentityFederationInfo</code> operation.</p>
+    class FeatureEnabledException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::IAM::Types::FeatureEnabledException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
     # <p>The request was rejected because the authentication code was not recognized. The error
     #       message describes the specific error.</p>
     class InvalidAuthenticationCodeException < Smithy::Client::ServiceError
@@ -343,6 +375,20 @@ module Aws::IAM
       end
     end
 
+    # <p>The request was rejected because the resulting role name conflicts with an existing role
+    #       in the account.</p>
+    class NameConflictException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::IAM::Types::NameConflictException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
     # <p>The request was rejected because it referenced a resource entity that does not exist. The
     #       error message describes the resource.</p>
     class NoSuchEntityException < Smithy::Client::ServiceError
@@ -446,6 +492,35 @@ module Aws::IAM
     class ReportGenerationLimitExceededException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IAM::Types::ReportGenerationLimitExceededException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>The request was rejected because someone modified the role template while the service was
+    #       creating the role. Wait a few minutes and try the request again.</p>
+    class RoleModifiedException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::IAM::Types::RoleModifiedException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>The request was rejected because the specified role template is disabled. A disabled
+    #       role template cannot be used to create new roles. Contact your administrator to enable the
+    #       role template, or use a different role template.</p>
+    class RoleTemplateDisabledException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::IAM::Types::RoleTemplateDisabledException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
         super
       end

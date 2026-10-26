@@ -74,6 +74,16 @@ module Aws::LaunchWizard
       ?deployment_id: String
     ) -> _GetDeploymentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDeploymentResponse
 
+    interface _GetDeploymentPatternVersionResponse
+      include Smithy::Client::_Response[Types::GetDeploymentPatternVersionOutput]
+      def deployment_pattern_version: () -> Types::DeploymentPatternVersionDataSummary?
+    end
+    def get_deployment_pattern_version: (
+      ?workload_name: String,
+      ?deployment_pattern_name: String,
+      ?deployment_pattern_version_name: String
+    ) -> _GetDeploymentPatternVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDeploymentPatternVersionResponse
+
     interface _GetWorkloadResponse
       include Smithy::Client::_Response[Types::GetWorkloadOutput]
       def workload: () -> Types::WorkloadData?
@@ -101,6 +111,24 @@ module Aws::LaunchWizard
       ?max_results: Integer,
       ?next_token: String
     ) -> _ListDeploymentEventsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDeploymentEventsResponse
+
+    interface _ListDeploymentPatternVersionsResponse
+      include Smithy::Client::_Response[Types::ListDeploymentPatternVersionsOutput]
+      def deployment_pattern_versions: () -> Array[Types::DeploymentPatternVersionDataSummary]?
+      def next_token: () -> String?
+    end
+    def list_deployment_pattern_versions: (
+      ?workload_name: String,
+      ?deployment_pattern_name: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ]
+    ) -> _ListDeploymentPatternVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDeploymentPatternVersionsResponse
 
     interface _ListDeploymentsResponse
       include Smithy::Client::_Response[Types::ListDeploymentsOutput]
@@ -162,5 +190,18 @@ module Aws::LaunchWizard
       ?resource_arn: String,
       ?tag_keys: Array[String]
     ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateDeploymentResponse
+      include Smithy::Client::_Response[Types::UpdateDeploymentOutput]
+      def deployment: () -> Types::DeploymentDataSummary?
+    end
+    def update_deployment: (
+      ?deployment_id: String,
+      ?specifications: Hash[String, String],
+      ?workload_version_name: String,
+      ?deployment_pattern_version_name: String,
+      ?dry_run: bool,
+      ?force: bool
+    ) -> _UpdateDeploymentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDeploymentResponse
   end
 end

@@ -1,0 +1,2018 @@
+module Aws::PartnerCentralAccount
+  module Types
+
+    class AcceptConnectionInvitationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?identifier: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor identifier: String?
+      attr_accessor client_token: String?
+    end
+
+    class AcceptConnectionInvitationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection: Types::Connection,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection: Types::Connection?
+    end
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+    end
+
+    module AccessDeniedExceptionReason
+      ACCESS_DENIED: String
+      INCOMPATIBLE_BENEFIT_AWS_PARTNER_STATE: String
+    end
+
+    module AccessType
+      ALLOW_ALL: String
+      DENY_ALL: String
+      ALLOW_BY_DEFAULT_DENY_SOME: String
+    end
+
+    class AccountSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class AllianceLeadContact
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?first_name: String,
+        ?last_name: String,
+        ?email: String,
+        ?business_title: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor first_name: String?
+      attr_accessor last_name: String?
+      attr_accessor email: String?
+      attr_accessor business_title: String?
+    end
+
+    class AssociateAwsTrainingCertificationEmailDomainRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?identifier: String,
+        ?client_token: String,
+        ?email: String,
+        ?email_verification_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor identifier: String?
+      attr_accessor client_token: String?
+      attr_accessor email: String?
+      attr_accessor email_verification_code: String?
+    end
+
+    class AssociateAwsTrainingCertificationEmailDomainResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module BusinessValidationCode
+      INCOMPATIBLE_CONNECTION_INVITATION_REQUEST: String
+      INCOMPATIBLE_LEGAL_NAME: String
+      INCOMPATIBLE_KNOW_YOUR_BUSINESS_STATUS: String
+      INCOMPATIBLE_IDENTITY_VERIFICATION_STATUS: String
+      INVALID_ACCOUNT_LINKING_STATUS: String
+      INVALID_ACCOUNT_STATE: String
+      INCOMPATIBLE_DOMAIN: String
+      INELIGIBLE_ACCOUNT_TIER: String
+      MISSING_ACTIVE_SUBSIDIARY_CONNECTION: String
+      INCOMPATIBLE_SUBSIDIARY_CONNECTION: String
+      INCOMPATIBLE_PRIMARY_PARTNER: String
+      QUALIFICATIONS_ASSOCIATION_LIMIT_EXCEEDED: String
+      QUALIFICATIONS_ASSOCIATION_NOT_FOUND: String
+      QUALIFICATIONS_ASSOCIATION_EXISTS: String
+    end
+
+    class BusinessValidationError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor code: String?
+    end
+
+    class BusinessVerificationDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?legal_name: String,
+        ?registration_id: String,
+        ?country_code: String,
+        ?jurisdiction_of_incorporation: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor legal_name: String?
+      attr_accessor registration_id: String?
+      attr_accessor country_code: String?
+      attr_accessor jurisdiction_of_incorporation: String?
+    end
+
+    class BusinessVerificationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?business_verification_details: Types::BusinessVerificationDetails,
+        ?completion_url: String,
+        ?completion_url_expires_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor business_verification_details: Types::BusinessVerificationDetails?
+      attr_accessor completion_url: String?
+      attr_accessor completion_url_expires_at: Time?
+    end
+
+    class CancelConnectionInvitationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?identifier: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor identifier: String?
+      attr_accessor client_token: String?
+    end
+
+    class CancelConnectionInvitationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?id: String,
+        ?arn: String,
+        ?connection_id: String,
+        ?connection_type: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?expires_at: Time,
+        ?other_participant_identifier: String,
+        ?participant_type: String,
+        ?status: String,
+        ?invitation_message: String,
+        ?inviter_email: String,
+        ?inviter_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor connection_id: String?
+      attr_accessor connection_type: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor expires_at: Time?
+      attr_accessor other_participant_identifier: String?
+      attr_accessor participant_type: String?
+      attr_accessor status: String?
+      attr_accessor invitation_message: String?
+      attr_accessor inviter_email: String?
+      attr_accessor inviter_name: String?
+    end
+
+    class CancelConnectionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?identifier: String,
+        ?connection_type: String,
+        ?reason: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor identifier: String?
+      attr_accessor connection_type: String?
+      attr_accessor reason: String?
+      attr_accessor client_token: String?
+    end
+
+    class CancelConnectionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?id: String,
+        ?arn: String,
+        ?other_participant_account_id: String,
+        ?updated_at: Time,
+        ?connection_types: Hash[String, Types::ConnectionTypeDetail],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor other_participant_account_id: String?
+      attr_accessor updated_at: Time?
+      attr_accessor connection_types: Hash[String, Types::ConnectionTypeDetail]?
+    end
+
+    class CancelProfileUpdateTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?identifier: String,
+        ?client_token: String,
+        ?task_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor identifier: String?
+      attr_accessor client_token: String?
+      attr_accessor task_id: String?
+    end
+
+    class CancelProfileUpdateTaskResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?arn: String,
+        ?id: String,
+        ?task_id: String,
+        ?task_details: Types::TaskDetails,
+        ?started_at: Time,
+        ?status: String,
+        ?ended_at: Time,
+        ?error_detail_list: Array[Types::ErrorDetail],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor task_id: String?
+      attr_accessor task_details: Types::TaskDetails?
+      attr_accessor started_at: Time?
+      attr_accessor status: String?
+      attr_accessor ended_at: Time?
+      attr_accessor error_detail_list: Array[Types::ErrorDetail]?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+    end
+
+    module ConflictExceptionReason
+      CONFLICT_CLIENT_TOKEN: String
+      DUPLICATE_PARTNER: String
+      INCOMPATIBLE_PROFILE_STATE: String
+      INCOMPATIBLE_PARTNER_PROFILE_TASK_STATE: String
+      DUPLICATE_CONNECTION_INVITATION: String
+      INCOMPATIBLE_CONNECTION_INVITATION_STATE: String
+      INCOMPATIBLE_CONNECTION_INVITATION_RECEIVER: String
+      DUPLICATE_CONNECTION: String
+      INCOMPATIBLE_CONNECTION_STATE: String
+      INCOMPATIBLE_CONNECTION_PREFERENCES_REVISION: String
+      ACCOUNT_ALREADY_VERIFIED: String
+      VERIFICATION_ALREADY_IN_PROGRESS: String
+      INCOMPATIBLE_QUALIFICATIONS_ASSOCIATION_TASK_STATE: String
+    end
+
+    class Connection
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?id: String,
+        ?arn: String,
+        ?other_participant_account_id: String,
+        ?updated_at: Time,
+        ?connection_types: Hash[String, Types::ConnectionTypeDetail],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor other_participant_account_id: String?
+      attr_accessor updated_at: Time?
+      attr_accessor connection_types: Hash[String, Types::ConnectionTypeDetail]?
+    end
+
+    class ConnectionInvitationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?id: String,
+        ?arn: String,
+        ?connection_id: String,
+        ?connection_type: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?expires_at: Time,
+        ?other_participant_identifier: String,
+        ?participant_type: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor connection_id: String?
+      attr_accessor connection_type: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor expires_at: Time?
+      attr_accessor other_participant_identifier: String?
+      attr_accessor participant_type: String?
+      attr_accessor status: String?
+    end
+
+    class ConnectionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?id: String,
+        ?arn: String,
+        ?other_participant_account_id: String,
+        ?updated_at: Time,
+        ?connection_types: Hash[String, Types::ConnectionTypeSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor other_participant_account_id: String?
+      attr_accessor updated_at: Time?
+      attr_accessor connection_types: Hash[String, Types::ConnectionTypeSummary]?
+    end
+
+    module ConnectionType
+      OPPORTUNITY_COLLABORATION: String
+      SUBSIDIARY: String
+    end
+
+    class ConnectionTypeDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?created_at: Time,
+        ?inviter_email: String,
+        ?inviter_name: String,
+        ?status: String,
+        ?canceled_at: Time,
+        ?canceled_by: String,
+        ?other_participant: Types::Participant,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor created_at: Time?
+      attr_accessor inviter_email: String?
+      attr_accessor inviter_name: String?
+      attr_accessor status: String?
+      attr_accessor canceled_at: Time?
+      attr_accessor canceled_by: String?
+      attr_accessor other_participant: Types::Participant?
+    end
+
+    module ConnectionTypeStatus
+      ACTIVE: String
+      CANCELED: String
+    end
+
+    class ConnectionTypeSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?other_participant: Types::Participant,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor other_participant: Types::Participant?
+    end
+
+    class CreateConnectionInvitationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?client_token: String,
+        ?connection_type: String,
+        ?email: String,
+        ?message: String,
+        ?name: String,
+        ?receiver_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor client_token: String?
+      attr_accessor connection_type: String?
+      attr_accessor email: String?
+      attr_accessor message: String?
+      attr_accessor name: String?
+      attr_accessor receiver_identifier: String?
+    end
+
+    class CreateConnectionInvitationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?id: String,
+        ?arn: String,
+        ?connection_id: String,
+        ?connection_type: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?expires_at: Time,
+        ?other_participant_identifier: String,
+        ?participant_type: String,
+        ?status: String,
+        ?invitation_message: String,
+        ?inviter_email: String,
+        ?inviter_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor connection_id: String?
+      attr_accessor connection_type: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor expires_at: Time?
+      attr_accessor other_participant_identifier: String?
+      attr_accessor participant_type: String?
+      attr_accessor status: String?
+      attr_accessor invitation_message: String?
+      attr_accessor inviter_email: String?
+      attr_accessor inviter_name: String?
+    end
+
+    class CreatePartnerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?client_token: String,
+        ?legal_name: String,
+        ?primary_solution_type: String,
+        ?alliance_lead_contact: Types::AllianceLeadContact,
+        ?email_verification_code: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor client_token: String?
+      attr_accessor legal_name: String?
+      attr_accessor primary_solution_type: String?
+      attr_accessor alliance_lead_contact: Types::AllianceLeadContact?
+      attr_accessor email_verification_code: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreatePartnerResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?arn: String,
+        ?id: String,
+        ?legal_name: String,
+        ?created_at: Time,
+        ?profile: Types::PartnerProfile,
+        ?aws_training_certification_email_domains: Array[Types::PartnerDomain],
+        ?alliance_lead_contact: Types::AllianceLeadContact,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor legal_name: String?
+      attr_accessor created_at: Time?
+      attr_accessor profile: Types::PartnerProfile?
+      attr_accessor aws_training_certification_email_domains: Array[Types::PartnerDomain]?
+      attr_accessor alliance_lead_contact: Types::AllianceLeadContact?
+    end
+
+    class DisassociateAwsTrainingCertificationEmailDomainRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?identifier: String,
+        ?client_token: String,
+        ?domain_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor identifier: String?
+      attr_accessor client_token: String?
+      attr_accessor domain_name: String?
+    end
+
+    class DisassociateAwsTrainingCertificationEmailDomainResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ErrorDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?locale: String,
+        ?message: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor locale: String?
+      attr_accessor message: String?
+      attr_accessor reason: String?
+    end
+
+    module FieldValidationCode
+      REQUIRED_FIELD_MISSING: String
+      DUPLICATE_VALUE: String
+      INVALID_VALUE: String
+      INVALID_STRING_FORMAT: String
+      TOO_MANY_VALUES: String
+      ACTION_NOT_PERMITTED: String
+      INVALID_ENUM_VALUE: String
+    end
+
+    class FieldValidationError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?message: String,
+        ?code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor message: String?
+      attr_accessor code: String?
+    end
+
+    class GetAllianceLeadContactRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor identifier: String?
+    end
+
+    class GetAllianceLeadContactResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?arn: String,
+        ?id: String,
+        ?alliance_lead_contact: Types::AllianceLeadContact,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor alliance_lead_contact: Types::AllianceLeadContact?
+    end
+
+    class GetConnectionInvitationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor identifier: String?
+    end
+
+    class GetConnectionInvitationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?id: String,
+        ?arn: String,
+        ?connection_id: String,
+        ?connection_type: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?expires_at: Time,
+        ?other_participant_identifier: String,
+        ?participant_type: String,
+        ?status: String,
+        ?invitation_message: String,
+        ?inviter_email: String,
+        ?inviter_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor connection_id: String?
+      attr_accessor connection_type: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor expires_at: Time?
+      attr_accessor other_participant_identifier: String?
+      attr_accessor participant_type: String?
+      attr_accessor status: String?
+      attr_accessor invitation_message: String?
+      attr_accessor inviter_email: String?
+      attr_accessor inviter_name: String?
+    end
+
+    class GetConnectionPreferencesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+    end
+
+    class GetConnectionPreferencesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?arn: String,
+        ?access_type: String,
+        ?excluded_participant_ids: Array[String],
+        ?updated_at: Time,
+        ?revision: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor arn: String?
+      attr_accessor access_type: String?
+      attr_accessor excluded_participant_ids: Array[String]?
+      attr_accessor updated_at: Time?
+      attr_accessor revision: Integer?
+    end
+
+    class GetConnectionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor identifier: String?
+    end
+
+    class GetConnectionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?id: String,
+        ?arn: String,
+        ?other_participant_account_id: String,
+        ?updated_at: Time,
+        ?connection_types: Hash[String, Types::ConnectionTypeDetail],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor other_participant_account_id: String?
+      attr_accessor updated_at: Time?
+      attr_accessor connection_types: Hash[String, Types::ConnectionTypeDetail]?
+    end
+
+    class GetPartnerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor identifier: String?
+    end
+
+    class GetPartnerResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?arn: String,
+        ?id: String,
+        ?legal_name: String,
+        ?created_at: Time,
+        ?profile: Types::PartnerProfile,
+        ?aws_training_certification_email_domains: Array[Types::PartnerDomain],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor legal_name: String?
+      attr_accessor created_at: Time?
+      attr_accessor profile: Types::PartnerProfile?
+      attr_accessor aws_training_certification_email_domains: Array[Types::PartnerDomain]?
+    end
+
+    class GetProfileUpdateTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor identifier: String?
+    end
+
+    class GetProfileUpdateTaskResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?arn: String,
+        ?id: String,
+        ?task_id: String,
+        ?task_details: Types::TaskDetails,
+        ?started_at: Time,
+        ?status: String,
+        ?ended_at: Time,
+        ?error_detail_list: Array[Types::ErrorDetail],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor task_id: String?
+      attr_accessor task_details: Types::TaskDetails?
+      attr_accessor started_at: Time?
+      attr_accessor status: String?
+      attr_accessor ended_at: Time?
+      attr_accessor error_detail_list: Array[Types::ErrorDetail]?
+    end
+
+    class GetProfileVisibilityRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor identifier: String?
+    end
+
+    class GetProfileVisibilityResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?arn: String,
+        ?id: String,
+        ?visibility: String,
+        ?profile_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor visibility: String?
+      attr_accessor profile_id: String?
+    end
+
+    class GetQualificationsAssociationDetailsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor identifier: String?
+    end
+
+    class GetQualificationsAssociationDetailsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?arn: String,
+        ?id: String,
+        ?status: String,
+        ?primary_partner: Types::QualificationsAssociationPartner,
+        ?associated_partners: Array[Types::QualificationsAssociationPartner],
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor status: String?
+      attr_accessor primary_partner: Types::QualificationsAssociationPartner?
+      attr_accessor associated_partners: Array[Types::QualificationsAssociationPartner]?
+      attr_accessor updated_at: Time?
+    end
+
+    class GetQualificationsAssociationTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor identifier: String?
+    end
+
+    class GetQualificationsAssociationTaskResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?arn: String,
+        ?id: String,
+        ?task_id: String,
+        ?status: String,
+        ?primary_partner: Types::QualificationsAssociationPartner,
+        ?started_at: Time,
+        ?ended_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor task_id: String?
+      attr_accessor status: String?
+      attr_accessor primary_partner: Types::QualificationsAssociationPartner?
+      attr_accessor started_at: Time?
+      attr_accessor ended_at: Time?
+    end
+
+    class GetQualificationsDisassociationTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor identifier: String?
+    end
+
+    class GetQualificationsDisassociationTaskResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?arn: String,
+        ?id: String,
+        ?task_id: String,
+        ?status: String,
+        ?associated_partner: Types::QualificationsAssociationPartner,
+        ?started_at: Time,
+        ?ended_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor task_id: String?
+      attr_accessor status: String?
+      attr_accessor associated_partner: Types::QualificationsAssociationPartner?
+      attr_accessor started_at: Time?
+      attr_accessor ended_at: Time?
+    end
+
+    class GetVerificationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?verification_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor verification_type: String?
+    end
+
+    class GetVerificationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?verification_type: String,
+        ?verification_status: String,
+        ?verification_status_reason: String,
+        ?verification_response_details: Types::VerificationResponseDetails,
+        ?started_at: Time,
+        ?completed_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor verification_type: String?
+      attr_accessor verification_status: String?
+      attr_accessor verification_status_reason: String?
+      attr_accessor verification_response_details: Types::VerificationResponseDetails?
+      attr_accessor started_at: Time?
+      attr_accessor completed_at: Time?
+    end
+
+    class Headquarters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?country_code: String,
+        ?subdivision_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor country_code: String?
+      attr_accessor subdivision_code: String?
+    end
+
+    module IndustrySegment
+      AGRICULTURE_MINING: String
+      BIOTECHNOLOGY: String
+      BUSINESS_CONSUMER_SERVICES: String
+      BUSINESS_SERV: String
+      COMMUNICATIONS: String
+      COMPUTER_HARDWARE: String
+      COMPUTERS_ELECTRONICS: String
+      COMPUTER_SOFTWARE: String
+      CONSUMER_GOODS: String
+      CONSUMER_RELATED: String
+      EDUCATION: String
+      ENERGY_UTILITIES: String
+      FINANCIAL_SERVICES: String
+      GAMING: String
+      GOVERNMENT: String
+      GOVERNMENT_EDUCATION_PUBLIC_SERVICES: String
+      HEALTHCARE: String
+      HEALTHCARE_PHARMACEUTICALS_BIOTECH: String
+      INDUSTRIAL_ENERGY: String
+      INTERNET_SPECIFIC: String
+      LIFE_SCIENCES: String
+      MANUFACTURING: String
+      MEDIA_ENTERTAINMENT_LEISURE: String
+      MEDIA_ENTERTAINMENT: String
+      MEDICAL_HEALTH: String
+      NON_PROFIT_ORGANIZATION: String
+      OTHER: String
+      PROFESSIONAL_SERVICES: String
+      REAL_ESTATE_CONSTRUCTION: String
+      RETAIL: String
+      RETAIL_WHOLESALE_DISTRIBUTION: String
+      SEMICONDUCTOR_ELECTR: String
+      SOFTWARE_INTERNET: String
+      TELECOMMUNICATIONS: String
+      TRANSPORTATION_LOGISTICS: String
+      TRAVEL_HOSPITALITY: String
+      WHOLESALE_DISTRIBUTION: String
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module InvitationStatus
+      PENDING: String
+      ACCEPTED: String
+      REJECTED: String
+      CANCELED: String
+      EXPIRED: String
+    end
+
+    class ListConnectionInvitationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?next_token: String,
+        ?connection_type: String,
+        ?max_results: Integer,
+        ?other_participant_identifiers: Array[String],
+        ?participant_type: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor next_token: String?
+      attr_accessor connection_type: String?
+      attr_accessor max_results: Integer?
+      attr_accessor other_participant_identifiers: Array[String]?
+      attr_accessor participant_type: String?
+      attr_accessor status: String?
+    end
+
+    class ListConnectionInvitationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_invitation_summaries: Array[Types::ConnectionInvitationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_invitation_summaries: Array[Types::ConnectionInvitationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListConnectionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?next_token: String,
+        ?connection_type: String,
+        ?max_results: Integer,
+        ?other_participant_identifiers: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor next_token: String?
+      attr_accessor connection_type: String?
+      attr_accessor max_results: Integer?
+      attr_accessor other_participant_identifiers: Array[String]?
+    end
+
+    class ListConnectionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_summaries: Array[Types::ConnectionSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_summaries: Array[Types::ConnectionSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListPartnersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListPartnersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?partner_summary_list: Array[Types::PartnerSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor partner_summary_list: Array[Types::PartnerSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class LocalizedContent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?display_name: String,
+        ?description: String,
+        ?website_url: String,
+        ?logo_url: String,
+        ?locale: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor display_name: String?
+      attr_accessor description: String?
+      attr_accessor website_url: String?
+      attr_accessor logo_url: String?
+      attr_accessor locale: String?
+    end
+
+    class Participant
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?partner_profile: Types::PartnerProfileSummary,
+        ?seller_profile: Types::SellerProfileSummary,
+        ?account: Types::AccountSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor partner_profile: Types::PartnerProfileSummary?
+      attr_accessor seller_profile: Types::SellerProfileSummary?
+      attr_accessor account: Types::AccountSummary?
+
+      class PartnerProfile < Participant
+      end
+      class SellerProfile < Participant
+      end
+      class Account < Participant
+      end
+      class Unknown < Participant
+      end
+    end
+
+    module ParticipantType
+      SENDER: String
+      RECEIVER: String
+    end
+
+    class PartnerDomain
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?registered_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor registered_at: Time?
+    end
+
+    class PartnerProfile
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?display_name: String,
+        ?description: String,
+        ?website_url: String,
+        ?logo_url: String,
+        ?primary_solution_type: String,
+        ?industry_segments: Array[String],
+        ?translation_source_locale: String,
+        ?localized_contents: Array[Types::LocalizedContent],
+        ?headquarters: Types::Headquarters,
+        ?profile_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor display_name: String?
+      attr_accessor description: String?
+      attr_accessor website_url: String?
+      attr_accessor logo_url: String?
+      attr_accessor primary_solution_type: String?
+      attr_accessor industry_segments: Array[String]?
+      attr_accessor translation_source_locale: String?
+      attr_accessor localized_contents: Array[Types::LocalizedContent]?
+      attr_accessor headquarters: Types::Headquarters?
+      attr_accessor profile_id: String?
+    end
+
+    class PartnerProfileSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+    end
+
+    class PartnerSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?arn: String,
+        ?id: String,
+        ?legal_name: String,
+        ?created_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor legal_name: String?
+      attr_accessor created_at: Time?
+    end
+
+    module PrimarySolutionType
+      SOFTWARE_PRODUCTS: String
+      CONSULTING_SERVICES: String
+      PROFESSIONAL_SERVICES: String
+      MANAGED_SERVICES: String
+      HARDWARE_PRODUCTS: String
+      COMMUNICATION_SERVICES: String
+      VALUE_ADDED_RESALE_AWS_SERVICES: String
+      TRAINING_SERVICES: String
+    end
+
+    module ProfileTaskStatus
+      IN_PROGRESS: String
+      CANCELED: String
+      SUCCEEDED: String
+      FAILED: String
+    end
+
+    module ProfileValidationErrorReason
+      INVALID_CONTENT: String
+      DUPLICATE_PROFILE: String
+      INVALID_LOGO: String
+      INVALID_LOGO_URL: String
+      INVALID_LOGO_FILE: String
+      INVALID_LOGO_SIZE: String
+      INVALID_WEBSITE_URL: String
+    end
+
+    module ProfileVisibility
+      PRIVATE: String
+      PUBLIC: String
+    end
+
+    class PutAllianceLeadContactRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?identifier: String,
+        ?alliance_lead_contact: Types::AllianceLeadContact,
+        ?email_verification_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor identifier: String?
+      attr_accessor alliance_lead_contact: Types::AllianceLeadContact?
+      attr_accessor email_verification_code: String?
+    end
+
+    class PutAllianceLeadContactResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?arn: String,
+        ?id: String,
+        ?alliance_lead_contact: Types::AllianceLeadContact,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor alliance_lead_contact: Types::AllianceLeadContact?
+    end
+
+    class PutProfileVisibilityRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?identifier: String,
+        ?visibility: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor identifier: String?
+      attr_accessor visibility: String?
+    end
+
+    class PutProfileVisibilityResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?arn: String,
+        ?id: String,
+        ?visibility: String,
+        ?profile_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor visibility: String?
+      attr_accessor profile_id: String?
+    end
+
+    class QualificationsAssociationPartner
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_id: String,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_id: String?
+      attr_accessor account_id: String?
+    end
+
+    module QualificationsAssociationStatus
+      ASSOCIATED: String
+      NOT_ASSOCIATED: String
+    end
+
+    module QualificationsAssociationTaskStatus
+      IN_PROGRESS: String
+      SUCCEEDED: String
+    end
+
+    module QualificationsDisassociationTaskStatus
+      IN_PROGRESS: String
+      SUCCEEDED: String
+    end
+
+    class RegistrantVerificationDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class RegistrantVerificationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?completion_url: String,
+        ?completion_url_expires_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor completion_url: String?
+      attr_accessor completion_url_expires_at: Time?
+    end
+
+    class RejectConnectionInvitationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?identifier: String,
+        ?client_token: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor identifier: String?
+      attr_accessor client_token: String?
+      attr_accessor reason: String?
+    end
+
+    class RejectConnectionInvitationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?id: String,
+        ?arn: String,
+        ?connection_id: String,
+        ?connection_type: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?expires_at: Time,
+        ?other_participant_identifier: String,
+        ?participant_type: String,
+        ?status: String,
+        ?invitation_message: String,
+        ?inviter_email: String,
+        ?inviter_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor connection_id: String?
+      attr_accessor connection_type: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor expires_at: Time?
+      attr_accessor other_participant_identifier: String?
+      attr_accessor participant_type: String?
+      attr_accessor status: String?
+      attr_accessor invitation_message: String?
+      attr_accessor inviter_email: String?
+      attr_accessor inviter_name: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+    end
+
+    module ResourceNotFoundExceptionReason
+      PARTNER_NOT_FOUND: String
+      PARTNER_PROFILE_NOT_FOUND: String
+      PARTNER_PROFILE_TASK_NOT_FOUND: String
+      PARTNER_DOMAIN_NOT_FOUND: String
+      SENDER_PROFILE_NOT_FOUND: String
+      RECEIVER_PROFILE_NOT_FOUND: String
+      CONNECTION_INVITATION_NOT_FOUND: String
+      CONNECTION_NOT_FOUND: String
+      VERIFICATION_NOT_FOUND: String
+      QUALIFICATIONS_ASSOCIATION_TASK_NOT_FOUND: String
+      QUALIFICATIONS_DISASSOCIATION_TASK_NOT_FOUND: String
+    end
+
+    class SellerProfileSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+    end
+
+    class SendEmailVerificationCodeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?email: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor email: String?
+    end
+
+    class SendEmailVerificationCodeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+    end
+
+    module ServiceQuotaExceededExceptionReason
+      LIMIT_EXCEEDED_NUMBER_OF_EMAIL: String
+      LIMIT_EXCEEDED_NUMBER_OF_DOMAIN: String
+      LIMIT_EXCEEDED_NUMBER_OF_CONNECTION_INVITATION_PER_DAY: String
+      LIMIT_EXCEEDED_NUMBER_OF_ACTIVE_CONNECTION: String
+      LIMIT_EXCEEDED_NUMBER_OF_OPEN_CONNECTION_INVITATION: String
+      LIMIT_EXCEEDED_NUMBER_OF_PROFILE_UPDATE_PER_DAY: String
+      LIMIT_EXCEEDED_NUMBER_OF_PROFILE_VISIBILITY_UPDATE_PER_DAY: String
+    end
+
+    class StartProfileUpdateTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?identifier: String,
+        ?client_token: String,
+        ?task_details: Types::TaskDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor identifier: String?
+      attr_accessor client_token: String?
+      attr_accessor task_details: Types::TaskDetails?
+    end
+
+    class StartProfileUpdateTaskResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?arn: String,
+        ?id: String,
+        ?task_id: String,
+        ?task_details: Types::TaskDetails,
+        ?started_at: Time,
+        ?status: String,
+        ?ended_at: Time,
+        ?error_detail_list: Array[Types::ErrorDetail],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor task_id: String?
+      attr_accessor task_details: Types::TaskDetails?
+      attr_accessor started_at: Time?
+      attr_accessor status: String?
+      attr_accessor ended_at: Time?
+      attr_accessor error_detail_list: Array[Types::ErrorDetail]?
+    end
+
+    class StartQualificationsAssociationTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?identifier: String,
+        ?client_token: String,
+        ?primary_partner: Types::QualificationsAssociationPartner,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor identifier: String?
+      attr_accessor client_token: String?
+      attr_accessor primary_partner: Types::QualificationsAssociationPartner?
+    end
+
+    class StartQualificationsAssociationTaskResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?arn: String,
+        ?id: String,
+        ?task_id: String,
+        ?status: String,
+        ?primary_partner: Types::QualificationsAssociationPartner,
+        ?started_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor task_id: String?
+      attr_accessor status: String?
+      attr_accessor primary_partner: Types::QualificationsAssociationPartner?
+      attr_accessor started_at: Time?
+    end
+
+    class StartQualificationsDisassociationTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?identifier: String,
+        ?client_token: String,
+        ?associated_partner: Types::QualificationsAssociationPartner,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor identifier: String?
+      attr_accessor client_token: String?
+      attr_accessor associated_partner: Types::QualificationsAssociationPartner?
+    end
+
+    class StartQualificationsDisassociationTaskResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?arn: String,
+        ?id: String,
+        ?task_id: String,
+        ?status: String,
+        ?associated_partner: Types::QualificationsAssociationPartner,
+        ?started_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor task_id: String?
+      attr_accessor status: String?
+      attr_accessor associated_partner: Types::QualificationsAssociationPartner?
+      attr_accessor started_at: Time?
+    end
+
+    class StartVerificationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?verification_details: Types::VerificationDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor verification_details: Types::VerificationDetails?
+    end
+
+    class StartVerificationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?verification_type: String,
+        ?verification_status: String,
+        ?verification_status_reason: String,
+        ?verification_response_details: Types::VerificationResponseDetails,
+        ?started_at: Time,
+        ?completed_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor verification_type: String?
+      attr_accessor verification_status: String?
+      attr_accessor verification_status_reason: String?
+      attr_accessor verification_response_details: Types::VerificationResponseDetails?
+      attr_accessor started_at: Time?
+      attr_accessor completed_at: Time?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TaskDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?display_name: String,
+        ?description: String,
+        ?website_url: String,
+        ?logo_url: String,
+        ?primary_solution_type: String,
+        ?industry_segments: Array[String],
+        ?translation_source_locale: String,
+        ?localized_contents: Array[Types::LocalizedContent],
+        ?headquarters: Types::Headquarters,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor display_name: String?
+      attr_accessor description: String?
+      attr_accessor website_url: String?
+      attr_accessor logo_url: String?
+      attr_accessor primary_solution_type: String?
+      attr_accessor industry_segments: Array[String]?
+      attr_accessor translation_source_locale: String?
+      attr_accessor localized_contents: Array[Types::LocalizedContent]?
+      attr_accessor headquarters: Types::Headquarters?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?service_code: String,
+        ?quota_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateConnectionPreferencesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?revision: Integer,
+        ?access_type: String,
+        ?excluded_participant_identifiers: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor revision: Integer?
+      attr_accessor access_type: String?
+      attr_accessor excluded_participant_identifiers: Array[String]?
+    end
+
+    class UpdateConnectionPreferencesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?arn: String,
+        ?access_type: String,
+        ?excluded_participant_ids: Array[String],
+        ?updated_at: Time,
+        ?revision: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor arn: String?
+      attr_accessor access_type: String?
+      attr_accessor excluded_participant_ids: Array[String]?
+      attr_accessor updated_at: Time?
+      attr_accessor revision: Integer?
+    end
+
+    class ValidationError
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?field_validation_error: Types::FieldValidationError,
+        ?business_validation_error: Types::BusinessValidationError,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor field_validation_error: Types::FieldValidationError?
+      attr_accessor business_validation_error: Types::BusinessValidationError?
+
+      class FieldValidationError < ValidationError
+      end
+      class BusinessValidationError < ValidationError
+      end
+      class Unknown < ValidationError
+      end
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+        ?error_details: Array[Types::ValidationError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+      attr_accessor error_details: Array[Types::ValidationError]?
+    end
+
+    module ValidationExceptionReason
+      REQUEST_VALIDATION_FAILED: String
+      BUSINESS_VALIDATION_FAILED: String
+    end
+
+    class VerificationDetails
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?business_verification_details: Types::BusinessVerificationDetails,
+        ?registrant_verification_details: Types::RegistrantVerificationDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor business_verification_details: Types::BusinessVerificationDetails?
+      attr_accessor registrant_verification_details: Types::RegistrantVerificationDetails?
+
+      class BusinessVerificationDetails < VerificationDetails
+      end
+      class RegistrantVerificationDetails < VerificationDetails
+      end
+      class Unknown < VerificationDetails
+      end
+    end
+
+    class VerificationResponseDetails
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?business_verification_response: Types::BusinessVerificationResponse,
+        ?registrant_verification_response: Types::RegistrantVerificationResponse,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor business_verification_response: Types::BusinessVerificationResponse?
+      attr_accessor registrant_verification_response: Types::RegistrantVerificationResponse?
+
+      class BusinessVerificationResponse < VerificationResponseDetails
+      end
+      class RegistrantVerificationResponse < VerificationResponseDetails
+      end
+      class Unknown < VerificationResponseDetails
+      end
+    end
+
+    module VerificationStatus
+      PENDING_CUSTOMER_ACTION: String
+      IN_PROGRESS: String
+      FAILED: String
+      SUCCEEDED: String
+      REJECTED: String
+    end
+
+    module VerificationType
+      BUSINESS_VERIFICATION: String
+      REGISTRANT_VERIFICATION: String
+    end
+  end
+end

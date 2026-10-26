@@ -301,7 +301,7 @@ module Aws::EntityResolution
     #   <p>An object which defines the <code>resolutionType</code> and the <code>ruleBasedProperties</code>.</p>
     #   @return [Types::ResolutionTechniques]
     # @!attribute incremental_run_config
-    #   <p>Optional. An object that defines the incremental run type. This object contains only the <code>incrementalRunType</code> field, which appears as "Automatic" in the console. </p> <important> <p>For workflows where <code>resolutionType</code> is <code>ML_MATCHING</code> or <code>PROVIDER</code>, incremental processing is not supported. </p> </important>
+    #   <p>Optional. An object that defines the incremental run type. This object contains only the <code>incrementalRunType</code> field, which appears as "Automatic" in the console. </p> <important> <p>For workflows where <code>resolutionType</code> is <code>PROVIDER</code>, incremental processing is not supported. </p> </important>
     #   @return [Types::IncrementalRunConfig]
     # @!attribute role_arn
     #   <p>The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this role to create resources on your behalf as part of workflow execution.</p>
@@ -404,6 +404,22 @@ module Aws::EntityResolution
       :schema_arn,
       :description,
       :mapped_input_fields,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Specifies the configuration for integrating with Customer Profiles. This configuration enables Entity Resolution to send matched output directly to Customer Profiles instead of Amazon S3, creating a unified customer view by automatically updating customer profiles based on match clusters.</p>
+    # @!attribute domain_arn
+    #   <p>The Amazon Resource Name (ARN) of the Customer Profiles domain where the matched output will be sent.</p>
+    #   @return [String]
+    # @!attribute object_type_arn
+    #   <p>The Amazon Resource Name (ARN) of the Customer Profiles object type that defines the structure for the matched customer data.</p>
+    #   @return [String]
+    class CustomerProfilesIntegrationConfig < Struct.new(
+      nil,
+      :domain_arn,
+      :object_type_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -617,7 +633,7 @@ module Aws::EntityResolution
     #   <p> The records to match.</p>
     #   @return [Array<Types::Record>]
     # @!attribute processing_type
-    #   <p>The processing mode that determines how Match IDs are generated and results are saved. Each mode provides different levels of accuracy, response time, and completeness of results.</p> <p>If not specified, defaults to <code>CONSISTENT</code>.</p> <p> <code>CONSISTENT</code>: Performs immediate lookup and matching against all existing records, with results saved synchronously. Provides highest accuracy but slower response time.</p> <p> <code>EVENTUAL</code> (shown as <i>Background</i> in the console): Performs initial match ID lookup or generation immediately, with record updates processed asynchronously in the background. Offers faster initial response time, with complete matching results available later in S3. </p> <p> <code>EVENTUAL_NO_LOOKUP</code> (shown as <i>Quick ID generation</i> in the console): Generates new match IDs without checking existing matches, with updates processed asynchronously. Provides fastest response time but should only be used for records known to be unique. </p>
+    #   <p>The processing mode that determines how Match IDs are generated and results are saved. Each mode provides different levels of accuracy, response time, and completeness of results.</p> <p>If not specified, defaults to <code>CONSISTENT</code>.</p> <p> <code>CONSISTENT</code>: Performs immediate lookup and matching against all existing records, with results saved synchronously. Provides highest accuracy but slower response time.</p> <p> <code>EVENTUAL</code> (shown as <i>Background</i> in the console): Performs initial match ID lookup or generation immediately, with record updates processed asynchronously in the background. Offers faster initial response time, with complete matching results available later in S3. </p> <p> <code>EVENTUAL_NO_LOOKUP</code> (shown as <i>Quick ID generation</i> in the console): Generates new match IDs without checking existing matches, with updates processed asynchronously. Provides fastest response time but should only be used for records known to be unique. </p> <note> <p>Advanced matching workflows don't support the <code>processingType</code> field.</p> </note>
     #   @return [String]
     class GenerateMatchIdInput < Struct.new(
       nil,
@@ -1288,16 +1304,16 @@ module Aws::EntityResolution
     end
 
     # <p>The output source for the ID mapping workflow.</p>
-    # @!attribute output_s3_path
-    #   <p>The S3 path to which Entity Resolution will write the output table.</p>
-    #   @return [String]
     # @!attribute kms_arn
     #   <p>Customer KMS ARN for encryption at rest. If not provided, system will use an Entity Resolution managed KMS key.</p>
     #   @return [String]
+    # @!attribute output_s3_path
+    #   <p>The S3 path to which Entity Resolution will write the output table.</p>
+    #   @return [String]
     class IdMappingWorkflowOutputSource < Struct.new(
       nil,
-      :output_s3_path,
       :kms_arn,
+      :output_s3_path,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1411,9 +1427,9 @@ module Aws::EntityResolution
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Optional. An object that defines the incremental run type. This object contains only the <code>incrementalRunType</code> field, which appears as "Automatic" in the console. </p> <important> <p>For workflows where <code>resolutionType</code> is <code>ML_MATCHING</code> or <code>PROVIDER</code>, incremental processing is not supported. </p> </important>
+    # <p>Optional. An object that defines the incremental run type. This object contains only the <code>incrementalRunType</code> field, which appears as "Automatic" in the console. </p> <important> <p>For workflows where <code>resolutionType</code> is <code>PROVIDER</code>, incremental processing is not supported. </p> </important>
     # @!attribute incremental_run_type
-    #   <p>The type of incremental run. The only valid value is <code>IMMEDIATE</code>. This appears as "Automatic" in the console.</p> <important> <p>For workflows where <code>resolutionType</code> is <code>ML_MATCHING</code> or <code>PROVIDER</code>, incremental processing is not supported. </p> </important>
+    #   <p>The type of incremental run. The only valid value is <code>IMMEDIATE</code>. This appears as "Automatic" in the console.</p> <important> <p>For workflows where <code>resolutionType</code> is <code>PROVIDER</code>, incremental processing is not supported. </p> </important>
     #   @return [String]
     class IncrementalRunConfig < Struct.new(
       nil,
@@ -1818,6 +1834,18 @@ module Aws::EntityResolution
       include ::Smithy::Schema::Structure
     end
 
+    # <p>An object that contains configuration settings for the matching process in a rule-based matching workflow.</p>
+    # @!attribute enable_transitive_matching
+    #   <p>Enables transitive matching for the rule-based matching workflow. When enabled, records that match through different rules are grouped together into the same match group.</p>
+    #   @return [Boolean]
+    class MatchingConfig < Struct.new(
+      nil,
+      :enable_transitive_matching,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>A list of <code>MatchingWorkflowSummary</code> objects, each of which contain the fields <code>workflowName</code>, <code>workflowArn</code>, <code>resolutionType</code>, <code>createdAt</code>, <code>updatedAt</code>.</p>
     # @!attribute workflow_name
     #   <p>The name of the workflow.</p>
@@ -1903,11 +1931,11 @@ module Aws::EntityResolution
     end
 
     # <p>A list of <code>OutputAttribute</code> objects, each of which have the fields <code>Name</code> and <code>Hashed</code>. Each of these objects selects a column to be included in the output table, and whether the values of the column should be hashed.</p>
-    # @!attribute output_s3_path
-    #   <p>The S3 path to which Entity Resolution will write the output table.</p>
-    #   @return [String]
     # @!attribute kms_arn
     #   <p>Customer KMS ARN for encryption at rest. If not provided, system will use an Entity Resolution managed KMS key.</p>
+    #   @return [String]
+    # @!attribute output_s3_path
+    #   <p>The S3 path to which Entity Resolution will write the output table.</p>
     #   @return [String]
     # @!attribute output
     #   <p>A list of <code>OutputAttribute</code> objects, each of which have the fields <code>Name</code> and <code>Hashed</code>. Each of these objects selects a column to be included in the output table, and whether the values of the column should be hashed.</p>
@@ -1915,15 +1943,24 @@ module Aws::EntityResolution
     # @!attribute apply_normalization
     #   <p>Normalizes the attributes defined in the schema in the input data. For example, if an attribute has an <code>AttributeType</code> of <code>PHONE_NUMBER</code>, and the data in the input table is in a format of 1234567890, Entity Resolution will normalize this field in the output to (123)-456-7890.</p>
     #   @return [Boolean]
+    # @!attribute customer_profiles_integration_config
+    #   <p>Specifies the Customer Profiles integration configuration for sending matched output directly to Customer Profiles. When configured, Entity Resolution automatically creates and updates customer profiles based on match clusters, eliminating the need for manual Amazon S3 integration setup.</p>
+    #   @return [Types::CustomerProfilesIntegrationConfig]
     class OutputSource < Struct.new(
       nil,
-      :output_s3_path,
       :kms_arn,
+      :output_s3_path,
       :output,
       :apply_normalization,
+      :customer_profiles_integration_config,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:output_s3_path] = '' unless options.key?(:output_s3_path)
+        super
+      end
     end
 
     # <p>The input schema supported by provider service.</p>
@@ -2157,6 +2194,9 @@ module Aws::EntityResolution
     # @!attribute rule_condition_properties
     #   <p>An object containing the <code>rules</code> for a matching workflow.</p>
     #   @return [Types::RuleConditionProperties]
+    # @!attribute enable_real_time_matching
+    #   <p>Specifies whether real-time matching is enabled for the rule-based matching workflow. When you enable real-time matching, you can use the <code>GenerateMatchId</code> operation with the workflow.</p>
+    #   @return [Boolean]
     # @!attribute provider_properties
     #   <p>The properties of the provider service.</p>
     #   @return [Types::ProviderProperties]
@@ -2165,6 +2205,7 @@ module Aws::EntityResolution
       :resolution_type,
       :rule_based_properties,
       :rule_condition_properties,
+      :enable_real_time_matching,
       :provider_properties,
       keyword_init: true
     )
@@ -2238,9 +2279,13 @@ module Aws::EntityResolution
     # @!attribute rules
     #   <p> A list of rule objects, each of which have fields <code>ruleName</code> and <code>condition</code>. </p>
     #   @return [Array<Types::RuleCondition>]
+    # @!attribute matching_config
+    #   <p>An object that contains configuration settings for the matching process.</p>
+    #   @return [Types::MatchingConfig]
     class RuleConditionProperties < Struct.new(
       nil,
       :rules,
+      :matching_config,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2586,7 +2631,7 @@ module Aws::EntityResolution
     #   <p>An object which defines the <code>resolutionType</code> and the <code>ruleBasedProperties</code>.</p>
     #   @return [Types::ResolutionTechniques]
     # @!attribute incremental_run_config
-    #   <p>Optional. An object that defines the incremental run type. This object contains only the <code>incrementalRunType</code> field, which appears as "Automatic" in the console. </p> <important> <p>For workflows where <code>resolutionType</code> is <code>ML_MATCHING</code> or <code>PROVIDER</code>, incremental processing is not supported. </p> </important>
+    #   <p>Optional. An object that defines the incremental run type. This object contains only the <code>incrementalRunType</code> field, which appears as "Automatic" in the console. </p> <important> <p>For workflows where <code>resolutionType</code> is <code>PROVIDER</code>, incremental processing is not supported. </p> </important>
     #   @return [Types::IncrementalRunConfig]
     # @!attribute role_arn
     #   <p>The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this role to create resources on your behalf as part of workflow execution.</p>

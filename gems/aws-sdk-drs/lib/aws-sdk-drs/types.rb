@@ -79,6 +79,28 @@ module Aws::Drs
       end
     end
 
+    # @!attribute recovery_plan_execution_arn
+    #   <p>The ARN of the Recovery Plan execution to cancel.</p>
+    #   @return [String]
+    class CancelRecoveryPlanExecutionRequest < Struct.new(
+      nil,
+      :recovery_plan_execution_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute recovery_plan_execution
+    #   <p>The cancelled Recovery Plan execution.</p>
+    #   @return [Types::RecoveryPlanExecution]
+    class CancelRecoveryPlanExecutionResponse < Struct.new(
+      nil,
+      :recovery_plan_execution,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The request could not be completed due to a conflict with the current state of the target resource.</p>
     # @!attribute message
     #   @return [String]
@@ -186,6 +208,9 @@ module Aws::Drs
     # @!attribute launch_into_source_instance
     #   <p>DRS will set the 'launch into instance ID' of any source server when performing a drill, recovery or failback to the previous region or availability zone, using the instance ID of the source instance.</p>
     #   @return [Boolean]
+    # @!attribute recovery_mode
+    #   <p>Recovery mode.</p>
+    #   @return [String]
     class CreateLaunchConfigurationTemplateInput < Struct.new(
       nil,
       :tags,
@@ -197,6 +222,7 @@ module Aws::Drs
       :export_bucket_arn,
       :post_launch_enabled,
       :launch_into_source_instance,
+      :recovery_mode,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -213,68 +239,74 @@ module Aws::Drs
       include ::Smithy::Schema::Structure
     end
 
-    # @!attribute staging_area_subnet_id
-    #   <p>The subnet to be used by the replication staging area.</p>
+    # @!attribute name
+    #   The name of a Recovery Plan.
     #   @return [String]
-    # @!attribute associate_default_security_group
-    #   <p>Whether to associate the default Elastic Disaster Recovery Security group with the Replication Configuration Template.</p>
-    #   @return [Boolean]
-    # @!attribute replication_servers_security_groups_i_ds
-    #   <p>The security group IDs that will be used by the replication server.</p>
-    #   @return [Array<String>]
-    # @!attribute replication_server_instance_type
-    #   <p>The instance type to be used for the replication server.</p>
+    # @!attribute description
+    #   The description of a Recovery Plan.
     #   @return [String]
-    # @!attribute use_dedicated_replication_server
-    #   <p>Whether to use a dedicated Replication Server in the replication staging area.</p>
-    #   @return [Boolean]
-    # @!attribute default_large_staging_disk_type
-    #   <p>The Staging Disk EBS volume type to be used during replication.</p>
+    # @!attribute client_token
+    #   <p>A unique string provided to ensure request idempotency.</p>
     #   @return [String]
-    # @!attribute ebs_encryption
-    #   <p>The type of EBS encryption to be used during replication.</p>
-    #   @return [String]
-    # @!attribute ebs_encryption_key_arn
-    #   <p>The ARN of the EBS encryption key to be used during replication.</p>
-    #   @return [String]
-    # @!attribute bandwidth_throttling
-    #   <p>Configure bandwidth throttling for the outbound data transfer rate of the Source Server in Mbps.</p>
-    #   @return [Integer]
-    # @!attribute data_plane_routing
-    #   <p>The data plane routing mechanism that will be used for replication.</p>
-    #   @return [String]
-    # @!attribute create_public_ip
-    #   <p>Whether to create a Public IP for the Recovery Instance by default.</p>
-    #   @return [Boolean]
-    # @!attribute staging_area_tags
-    #   <p>A set of tags to be associated with all resources created in the replication staging area: EC2 replication server, EBS volumes, EBS snapshots, etc.</p>
-    #   @return [Hash<String, String>]
-    # @!attribute pit_policy
-    #   <p>The Point in time (PIT) policy to manage snapshots taken during replication.</p>
-    #   @return [Array<Types::PITPolicyRule>]
     # @!attribute tags
-    #   <p>A set of tags to be associated with the Replication Configuration Template resource.</p>
+    #   <p>The tags to apply to the Recovery Plan.</p>
     #   @return [Hash<String, String>]
-    # @!attribute auto_replicate_new_disks
-    #   <p>Whether to allow the AWS replication agent to automatically replicate newly added disks.</p>
-    #   @return [Boolean]
-    class CreateReplicationConfigurationTemplateInput < Struct.new(
+    class CreateRecoveryPlanRequest < Struct.new(
       nil,
-      :staging_area_subnet_id,
-      :associate_default_security_group,
-      :replication_servers_security_groups_i_ds,
-      :replication_server_instance_type,
-      :use_dedicated_replication_server,
-      :default_large_staging_disk_type,
-      :ebs_encryption,
-      :ebs_encryption_key_arn,
-      :bandwidth_throttling,
-      :data_plane_routing,
-      :create_public_ip,
-      :staging_area_tags,
-      :pit_policy,
+      :name,
+      :description,
+      :client_token,
       :tags,
-      :auto_replicate_new_disks,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute recovery_plan
+    #   A Recovery Plan resource.
+    #   @return [Types::RecoveryPlan]
+    class CreateRecoveryPlanResponse < Struct.new(
+      nil,
+      :recovery_plan,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute recovery_plan_arn
+    #   <p>The ARN of the Recovery Plan to add the step to.</p>
+    #   @return [String]
+    # @!attribute step_name
+    #   The name of a Recovery Plan Step.
+    #   @return [String]
+    # @!attribute step_order
+    #   The order of a step within a Recovery Plan (1-based).
+    #   @return [Integer]
+    # @!attribute configuration
+    #   Type-specific configuration for a recovery plan step.
+    #   Exactly one member must be set.
+    #   @return [Types::RecoveryPlanStepConfiguration]
+    # @!attribute client_token
+    #   <p>A unique string provided to ensure request idempotency.</p>
+    #   @return [String]
+    class CreateRecoveryPlanStepRequest < Struct.new(
+      nil,
+      :recovery_plan_arn,
+      :step_name,
+      :step_order,
+      :configuration,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute recovery_plan_step
+    #   A Recovery Plan Step resource.
+    #   @return [Types::RecoveryPlanStep]
+    class CreateRecoveryPlanStepResponse < Struct.new(
+      nil,
+      :recovery_plan_step,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -331,6 +363,9 @@ module Aws::Drs
     # @!attribute auto_replicate_new_disks
     #   <p>Whether to allow the AWS replication agent to automatically replicate newly added disks.</p>
     #   @return [Boolean]
+    # @!attribute internet_protocol
+    #   <p>Which version of the Internet Protocol to use for replication of data. (IPv4 or IPv6)</p>
+    #   @return [String]
     class CreateReplicationConfigurationTemplateOutput < Struct.new(
       nil,
       :replication_configuration_template_id,
@@ -350,6 +385,7 @@ module Aws::Drs
       :tags,
       :pit_policy,
       :auto_replicate_new_disks,
+      :internet_protocol,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -358,6 +394,77 @@ module Aws::Drs
         options[:bandwidth_throttling] = 0 unless options.key?(:bandwidth_throttling)
         super
       end
+    end
+
+    # @!attribute staging_area_subnet_id
+    #   <p>The subnet to be used by the replication staging area.</p>
+    #   @return [String]
+    # @!attribute associate_default_security_group
+    #   <p>Whether to associate the default Elastic Disaster Recovery Security group with the Replication Configuration Template.</p>
+    #   @return [Boolean]
+    # @!attribute replication_servers_security_groups_i_ds
+    #   <p>The security group IDs that will be used by the replication server.</p>
+    #   @return [Array<String>]
+    # @!attribute replication_server_instance_type
+    #   <p>The instance type to be used for the replication server.</p>
+    #   @return [String]
+    # @!attribute use_dedicated_replication_server
+    #   <p>Whether to use a dedicated Replication Server in the replication staging area.</p>
+    #   @return [Boolean]
+    # @!attribute default_large_staging_disk_type
+    #   <p>The Staging Disk EBS volume type to be used during replication.</p>
+    #   @return [String]
+    # @!attribute ebs_encryption
+    #   <p>The type of EBS encryption to be used during replication.</p>
+    #   @return [String]
+    # @!attribute ebs_encryption_key_arn
+    #   <p>The ARN of the EBS encryption key to be used during replication.</p>
+    #   @return [String]
+    # @!attribute bandwidth_throttling
+    #   <p>Configure bandwidth throttling for the outbound data transfer rate of the Source Server in Mbps.</p>
+    #   @return [Integer]
+    # @!attribute data_plane_routing
+    #   <p>The data plane routing mechanism that will be used for replication.</p>
+    #   @return [String]
+    # @!attribute create_public_ip
+    #   <p>Whether to create a Public IP for the Recovery Instance by default.</p>
+    #   @return [Boolean]
+    # @!attribute staging_area_tags
+    #   <p>A set of tags to be associated with all resources created in the replication staging area: EC2 replication server, EBS volumes, EBS snapshots, etc.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute pit_policy
+    #   <p>The Point in time (PIT) policy to manage snapshots taken during replication.</p>
+    #   @return [Array<Types::PITPolicyRule>]
+    # @!attribute tags
+    #   <p>A set of tags to be associated with the Replication Configuration Template resource.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute auto_replicate_new_disks
+    #   <p>Whether to allow the AWS replication agent to automatically replicate newly added disks.</p>
+    #   @return [Boolean]
+    # @!attribute internet_protocol
+    #   <p>Which version of the Internet Protocol to use for replication of data. (IPv4 or IPv6)</p>
+    #   @return [String]
+    class CreateReplicationConfigurationTemplateRequest < Struct.new(
+      nil,
+      :staging_area_subnet_id,
+      :associate_default_security_group,
+      :replication_servers_security_groups_i_ds,
+      :replication_server_instance_type,
+      :use_dedicated_replication_server,
+      :default_large_staging_disk_type,
+      :ebs_encryption,
+      :ebs_encryption_key_arn,
+      :bandwidth_throttling,
+      :data_plane_routing,
+      :create_public_ip,
+      :staging_area_tags,
+      :pit_policy,
+      :tags,
+      :auto_replicate_new_disks,
+      :internet_protocol,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_id
@@ -590,6 +697,72 @@ module Aws::Drs
     class DeleteRecoveryInstanceInput < Struct.new(
       nil,
       :recovery_instance_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute recovery_plan_execution_arn
+    #   <p>The ARN of the Recovery Plan execution to delete.</p>
+    #   @return [String]
+    class DeleteRecoveryPlanExecutionRequest < Struct.new(
+      nil,
+      :recovery_plan_execution_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute recovery_plan_execution_arn
+    #   <p>The ARN of the deleted Recovery Plan execution.</p>
+    #   @return [String]
+    class DeleteRecoveryPlanExecutionResponse < Struct.new(
+      nil,
+      :recovery_plan_execution_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute recovery_plan_arn
+    #   <p>The ARN of the Recovery Plan to delete.</p>
+    #   @return [String]
+    class DeleteRecoveryPlanRequest < Struct.new(
+      nil,
+      :recovery_plan_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute recovery_plan_arn
+    #   <p>The ARN of the deleted Recovery Plan.</p>
+    #   @return [String]
+    class DeleteRecoveryPlanResponse < Struct.new(
+      nil,
+      :recovery_plan_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute recovery_plan_step_arn
+    #   <p>The ARN of the Recovery Plan step to delete.</p>
+    #   @return [String]
+    class DeleteRecoveryPlanStepRequest < Struct.new(
+      nil,
+      :recovery_plan_step_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute recovery_plan_step_arn
+    #   <p>The ARN of the deleted Recovery Plan step.</p>
+    #   @return [String]
+    class DeleteRecoveryPlanStepResponse < Struct.new(
+      nil,
+      :recovery_plan_step_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1127,6 +1300,22 @@ module Aws::Drs
       end
     end
 
+    # <p>Error details for a failed operation.</p>
+    # @!attribute message
+    #   <p>The error message.</p>
+    #   @return [String]
+    # @!attribute code
+    #   <p>The error code.</p>
+    #   @return [String]
+    class ErrorDetail < Struct.new(
+      nil,
+      :message,
+      :code,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Properties of resource related to a job event.</p>
     # @!attribute source_network_data
     #   <p>Source Network properties.</p>
@@ -1140,6 +1329,18 @@ module Aws::Drs
 
       class SourceNetworkData < EventResourceData; end
       class Unknown < EventResourceData; end
+    end
+
+    # <p>Configuration for a <code>SERVER</code> type execution step.</p>
+    # @!attribute servers
+    #   <p>The list of servers in this execution step.</p>
+    #   @return [Array<Types::RecoveryPlanExecutionServer>]
+    class ExecutionServerStepConfiguration < Struct.new(
+      nil,
+      :servers,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_network_id
@@ -1187,12 +1388,16 @@ module Aws::Drs
     # @!attribute use_private_ip
     #   <p>Whether to use Private IP for the failback replication of the Recovery Instance.</p>
     #   @return [Boolean]
+    # @!attribute internet_protocol
+    #   <p>Which version of the Internet Protocol to use for replication of data. (IPv4 or IPv6)</p>
+    #   @return [String]
     class GetFailbackReplicationConfigurationOutput < Struct.new(
       nil,
       :recovery_instance_id,
       :name,
       :bandwidth_throttling,
       :use_private_ip,
+      :internet_protocol,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1244,6 +1449,9 @@ module Aws::Drs
     # @!attribute launch_into_instance_properties
     #   <p>Launch into existing instance properties.</p>
     #   @return [Types::LaunchIntoInstanceProperties]
+    # @!attribute recovery_mode
+    #   <p>Recovery mode.</p>
+    #   @return [String]
     class GetLaunchConfigurationOutput < Struct.new(
       nil,
       :source_server_id,
@@ -1256,6 +1464,95 @@ module Aws::Drs
       :licensing,
       :post_launch_enabled,
       :launch_into_instance_properties,
+      :recovery_mode,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute recovery_plan_execution_arn
+    #   <p>The ARN of the Recovery Plan execution.</p>
+    #   @return [String]
+    class GetRecoveryPlanExecutionRequest < Struct.new(
+      nil,
+      :recovery_plan_execution_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute recovery_plan_execution
+    #   <p>The Recovery Plan execution details.</p>
+    #   @return [Types::RecoveryPlanExecution]
+    class GetRecoveryPlanExecutionResponse < Struct.new(
+      nil,
+      :recovery_plan_execution,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute recovery_plan_execution_step_arn
+    #   <p>The ARN of the execution step.</p>
+    #   @return [String]
+    class GetRecoveryPlanExecutionStepRequest < Struct.new(
+      nil,
+      :recovery_plan_execution_step_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute recovery_plan_execution_step
+    #   A Recovery Plan Execution Step resource.
+    #   @return [Types::RecoveryPlanExecutionStep]
+    class GetRecoveryPlanExecutionStepResponse < Struct.new(
+      nil,
+      :recovery_plan_execution_step,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute recovery_plan_arn
+    #   <p>The ARN of the Recovery Plan to retrieve.</p>
+    #   @return [String]
+    class GetRecoveryPlanRequest < Struct.new(
+      nil,
+      :recovery_plan_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute recovery_plan
+    #   A Recovery Plan resource.
+    #   @return [Types::RecoveryPlan]
+    class GetRecoveryPlanResponse < Struct.new(
+      nil,
+      :recovery_plan,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute recovery_plan_step_arn
+    #   <p>The ARN of the Recovery Plan step to retrieve.</p>
+    #   @return [String]
+    class GetRecoveryPlanStepRequest < Struct.new(
+      nil,
+      :recovery_plan_step_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute recovery_plan_step
+    #   A Recovery Plan Step resource.
+    #   @return [Types::RecoveryPlanStep]
+    class GetRecoveryPlanStepResponse < Struct.new(
+      nil,
+      :recovery_plan_step,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1323,6 +1620,9 @@ module Aws::Drs
     # @!attribute auto_replicate_new_disks
     #   <p>Whether to allow the AWS replication agent to automatically replicate newly added disks.</p>
     #   @return [Boolean]
+    # @!attribute internet_protocol
+    #   <p>Which version of the Internet Protocol to use for replication of data. (IPv4 or IPv6)</p>
+    #   @return [String]
     class GetReplicationConfigurationOutput < Struct.new(
       nil,
       :source_server_id,
@@ -1342,6 +1642,7 @@ module Aws::Drs
       :staging_area_tags,
       :pit_policy,
       :auto_replicate_new_disks,
+      :internet_protocol,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1497,6 +1798,12 @@ module Aws::Drs
     # @!attribute event_resource_data
     #   <p>Properties of resource related to a job event.</p>
     #   @return [Types::EventResourceData]
+    # @!attribute attempt_count
+    #   <p>Retries for this operation.</p>
+    #   @return [Integer]
+    # @!attribute max_attempts_count
+    #   <p>The maximum number of retries that will be attempted if this operation failed.</p>
+    #   @return [Integer]
     class JobLogEventData < Struct.new(
       nil,
       :source_server_id,
@@ -1505,9 +1812,17 @@ module Aws::Drs
       :raw_error,
       :conversion_properties,
       :event_resource_data,
+      :attempt_count,
+      :max_attempts_count,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:attempt_count] = 0 unless options.key?(:attempt_count)
+        options[:max_attempts_count] = 0 unless options.key?(:max_attempts_count)
+        super
+      end
     end
 
     # <p>Launch action.</p>
@@ -1664,6 +1979,9 @@ module Aws::Drs
     # @!attribute launch_into_source_instance
     #   <p>DRS will set the 'launch into instance ID' of any source server when performing a drill, recovery or failback to the previous region or availability zone, using the instance ID of the source instance.</p>
     #   @return [Boolean]
+    # @!attribute recovery_mode
+    #   <p>Recovery mode.</p>
+    #   @return [String]
     class LaunchConfigurationTemplate < Struct.new(
       nil,
       :launch_configuration_template_id,
@@ -1677,6 +1995,7 @@ module Aws::Drs
       :export_bucket_arn,
       :post_launch_enabled,
       :launch_into_source_instance,
+      :recovery_mode,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1836,6 +2155,158 @@ module Aws::Drs
     class ListLaunchActionsResponse < Struct.new(
       nil,
       :items,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Filters for listing Recovery Plan execution steps.</p>
+    # @!attribute status
+    #   <p>Filter by execution step status.</p>
+    #   @return [String]
+    class ListRecoveryPlanExecutionStepsFilter < Struct.new(
+      nil,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute recovery_plan_execution_arn
+    #   <p>The ARN of the Recovery Plan execution.</p>
+    #   @return [String]
+    # @!attribute filter
+    #   <p>Filters for listing execution steps.</p>
+    #   @return [Types::ListRecoveryPlanExecutionStepsFilter]
+    # @!attribute max_results
+    #   <p>Maximum number of results to return.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The token for the next page of results.</p>
+    #   @return [String]
+    class ListRecoveryPlanExecutionStepsRequest < Struct.new(
+      nil,
+      :recovery_plan_execution_arn,
+      :filter,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute recovery_plan_execution_steps
+    #   <p>The list of execution steps.</p>
+    #   @return [Array<Types::RecoveryPlanExecutionStepSummary>]
+    # @!attribute next_token
+    #   <p>The token for the next page of results.</p>
+    #   @return [String]
+    class ListRecoveryPlanExecutionStepsResponse < Struct.new(
+      nil,
+      :recovery_plan_execution_steps,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute recovery_plan_arn
+    #   <p>Filter executions by Recovery Plan ARN.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>Filter executions by status.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>Maximum number of results to return.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The token for the next page of results.</p>
+    #   @return [String]
+    class ListRecoveryPlanExecutionsRequest < Struct.new(
+      nil,
+      :recovery_plan_arn,
+      :status,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute recovery_plan_executions
+    #   <p>The list of Recovery Plan executions.</p>
+    #   @return [Array<Types::RecoveryPlanExecutionSummary>]
+    # @!attribute next_token
+    #   <p>The token for the next page of results.</p>
+    #   @return [String]
+    class ListRecoveryPlanExecutionsResponse < Struct.new(
+      nil,
+      :recovery_plan_executions,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute recovery_plan_arn
+    #   <p>The ARN of the Recovery Plan.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>Maximum number of results to return.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The token for the next page of results.</p>
+    #   @return [String]
+    class ListRecoveryPlanStepsRequest < Struct.new(
+      nil,
+      :recovery_plan_arn,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute recovery_plan_steps
+    #   <p>The list of Recovery Plan steps.</p>
+    #   @return [Array<Types::RecoveryPlanStep>]
+    # @!attribute next_token
+    #   <p>The token for the next page of results.</p>
+    #   @return [String]
+    class ListRecoveryPlanStepsResponse < Struct.new(
+      nil,
+      :recovery_plan_steps,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute max_results
+    #   <p>Maximum number of results to return.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The token for the next page of results.</p>
+    #   @return [String]
+    class ListRecoveryPlansRequest < Struct.new(
+      nil,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute recovery_plans
+    #   <p>The list of Recovery Plans.</p>
+    #   @return [Array<Types::RecoveryPlanSummary>]
+    # @!attribute next_token
+    #   <p>The token for the next page of results.</p>
+    #   @return [String]
+    class ListRecoveryPlansResponse < Struct.new(
+      nil,
+      :recovery_plans,
       :next_token,
       keyword_init: true
     )
@@ -2466,6 +2937,347 @@ module Aws::Drs
       include ::Smithy::Schema::Structure
     end
 
+    # A Recovery Plan resource.
+    # @!attribute recovery_plan_arn
+    #   <p>The ARN of the Recovery Plan.</p>
+    #   @return [String]
+    # @!attribute name
+    #   The name of a Recovery Plan.
+    #   @return [String]
+    # @!attribute description
+    #   The description of a Recovery Plan.
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status of the Recovery Plan.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The timestamp when the Recovery Plan was created.</p>
+    #   @return [String]
+    # @!attribute updated_at
+    #   <p>The timestamp when the Recovery Plan was last updated.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>The tags associated with the Recovery Plan.</p>
+    #   @return [Hash<String, String>]
+    class RecoveryPlan < Struct.new(
+      nil,
+      :recovery_plan_arn,
+      :name,
+      :description,
+      :status,
+      :created_at,
+      :updated_at,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A Recovery Plan execution.</p>
+    # @!attribute recovery_plan_execution_arn
+    #   <p>The ARN of the Recovery Plan execution.</p>
+    #   @return [String]
+    # @!attribute recovery_plan_arn
+    #   <p>The ARN of the Recovery Plan being executed.</p>
+    #   @return [String]
+    # @!attribute mode
+    #   <p>The execution mode.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The execution status.</p>
+    #   @return [String]
+    # @!attribute started_at
+    #   <p>The timestamp when the execution started.</p>
+    #   @return [String]
+    # @!attribute completed_at
+    #   <p>The timestamp when the execution completed.</p>
+    #   @return [String]
+    # @!attribute error_detail
+    #   <p>Error details if the execution failed.</p>
+    #   @return [Types::ErrorDetail]
+    # @!attribute tags
+    #   <p>The tags associated with the Recovery Plan execution.</p>
+    #   @return [Hash<String, String>]
+    class RecoveryPlanExecution < Struct.new(
+      nil,
+      :recovery_plan_execution_arn,
+      :recovery_plan_arn,
+      :mode,
+      :status,
+      :started_at,
+      :completed_at,
+      :error_detail,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # A server within a recovery plan execution step, enriched with execution state.
+    # @!attribute server_arn
+    #   <p>The ARN of the source server.</p>
+    #   @return [String]
+    # @!attribute impact_level
+    #   Defaults to CRITICAL if not specified.
+    #   @return [String]
+    # @!attribute job_id
+    #   The DRS recovery job ID. Populated when recovery is initiated for this server.
+    #   @return [String]
+    class RecoveryPlanExecutionServer < Struct.new(
+      nil,
+      :server_arn,
+      :impact_level,
+      :job_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A source server with a specific recovery snapshot for plan execution.</p>
+    # @!attribute source_server_id
+    #   <p>The ID of the source server.</p>
+    #   @return [String]
+    # @!attribute recovery_snapshot_id
+    #   <p>The ID of the recovery snapshot to use.</p>
+    #   @return [String]
+    class RecoveryPlanExecutionSourceServer < Struct.new(
+      nil,
+      :source_server_id,
+      :recovery_snapshot_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # A Recovery Plan Execution Step resource.
+    # @!attribute recovery_plan_execution_step_arn
+    #   <p>The ARN of the execution step.</p>
+    #   @return [String]
+    # @!attribute step_index
+    #   The order of a step within a Recovery Plan (1-based).
+    #   @return [Integer]
+    # @!attribute status
+    #   <p>The status of the execution step.</p>
+    #   @return [String]
+    # @!attribute step_name
+    #   The name of a Recovery Plan Step.
+    #   @return [String]
+    # @!attribute configuration
+    #   Type-specific configuration for an execution step response.
+    #   Mirrors RecoveryPlanStepConfiguration but uses execution-enriched server shapes.
+    #   @return [Types::RecoveryPlanExecutionStepConfiguration]
+    # @!attribute error_detail
+    #   <p>Error details if the step failed.</p>
+    #   @return [Types::ErrorDetail]
+    # @!attribute attempt
+    #   <p>The number of times this step has been attempted.</p>
+    #   @return [Integer]
+    # @!attribute created_at
+    #   <p>The timestamp when the execution step was created.</p>
+    #   @return [String]
+    # @!attribute updated_at
+    #   <p>The timestamp when the execution step was last updated.</p>
+    #   @return [String]
+    class RecoveryPlanExecutionStep < Struct.new(
+      nil,
+      :recovery_plan_execution_step_arn,
+      :step_index,
+      :status,
+      :step_name,
+      :configuration,
+      :error_detail,
+      :attempt,
+      :created_at,
+      :updated_at,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # Type-specific configuration for an execution step response.
+    # Mirrors RecoveryPlanStepConfiguration but uses execution-enriched server shapes.
+    # @!attribute execution_server_step_configuration
+    #   Configuration for a SERVER type step (with execution state like jobID).
+    #   @return [Types::ExecutionServerStepConfiguration]
+    # @!attribute wait_step_configuration
+    #   Configuration for a WAIT type step.
+    #   @return [Types::WaitStepConfiguration]
+    class RecoveryPlanExecutionStepConfiguration < Struct.new(
+      :execution_server_step_configuration,
+      :wait_step_configuration,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class ExecutionServerStepConfiguration < RecoveryPlanExecutionStepConfiguration; end
+      class WaitStepConfiguration < RecoveryPlanExecutionStepConfiguration; end
+      class Unknown < RecoveryPlanExecutionStepConfiguration; end
+    end
+
+    # <p>Summary information about a Recovery Plan execution step.</p>
+    # @!attribute recovery_plan_execution_step_arn
+    #   <p>The ARN of the execution step.</p>
+    #   @return [String]
+    # @!attribute step_name
+    #   The name of a Recovery Plan Step.
+    #   @return [String]
+    # @!attribute step_index
+    #   The order of a step within a Recovery Plan (1-based).
+    #   @return [Integer]
+    # @!attribute status
+    #   <p>The status of the execution step.</p>
+    #   @return [String]
+    # @!attribute configuration
+    #   Type-specific configuration for an execution step response.
+    #   Mirrors RecoveryPlanStepConfiguration but uses execution-enriched server shapes.
+    #   @return [Types::RecoveryPlanExecutionStepConfiguration]
+    # @!attribute error_detail
+    #   <p>Error details if the step failed.</p>
+    #   @return [Types::ErrorDetail]
+    class RecoveryPlanExecutionStepSummary < Struct.new(
+      nil,
+      :recovery_plan_execution_step_arn,
+      :step_name,
+      :step_index,
+      :status,
+      :configuration,
+      :error_detail,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Summary information about a Recovery Plan execution.</p>
+    # @!attribute recovery_plan_execution_arn
+    #   <p>The ARN of the Recovery Plan execution.</p>
+    #   @return [String]
+    # @!attribute recovery_plan_arn
+    #   <p>The ARN of the Recovery Plan.</p>
+    #   @return [String]
+    # @!attribute mode
+    #   <p>The execution mode.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The execution status.</p>
+    #   @return [String]
+    # @!attribute started_at
+    #   <p>The timestamp when the execution started.</p>
+    #   @return [String]
+    # @!attribute error_detail
+    #   <p>Error details if the execution failed.</p>
+    #   @return [Types::ErrorDetail]
+    class RecoveryPlanExecutionSummary < Struct.new(
+      nil,
+      :recovery_plan_execution_arn,
+      :recovery_plan_arn,
+      :mode,
+      :status,
+      :started_at,
+      :error_detail,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # A server associated with a Recovery Plan Step.
+    # @!attribute server_arn
+    #   <p>The ARN of the source server.</p>
+    #   @return [String]
+    # @!attribute impact_level
+    #   Defaults to CRITICAL if not specified.
+    #   @return [String]
+    class RecoveryPlanServer < Struct.new(
+      nil,
+      :server_arn,
+      :impact_level,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # A Recovery Plan Step resource.
+    # @!attribute recovery_plan_step_arn
+    #   <p>The ARN of the Recovery Plan step.</p>
+    #   @return [String]
+    # @!attribute step_order
+    #   The order of a step within a Recovery Plan (1-based).
+    #   @return [Integer]
+    # @!attribute step_name
+    #   The name of a Recovery Plan Step.
+    #   @return [String]
+    # @!attribute configuration
+    #   Type-specific configuration for a recovery plan step.
+    #   Exactly one member must be set.
+    #   @return [Types::RecoveryPlanStepConfiguration]
+    # @!attribute created_at
+    #   <p>The timestamp when the step was created.</p>
+    #   @return [String]
+    # @!attribute updated_at
+    #   <p>The timestamp when the step was last updated.</p>
+    #   @return [String]
+    class RecoveryPlanStep < Struct.new(
+      nil,
+      :recovery_plan_step_arn,
+      :step_order,
+      :step_name,
+      :configuration,
+      :created_at,
+      :updated_at,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # Type-specific configuration for a recovery plan step.
+    # Exactly one member must be set.
+    # @!attribute server_step_configuration
+    #   Configuration for a SERVER type step.
+    #   @return [Types::ServerStepConfiguration]
+    # @!attribute wait_step_configuration
+    #   Configuration for a WAIT type step.
+    #   @return [Types::WaitStepConfiguration]
+    class RecoveryPlanStepConfiguration < Struct.new(
+      :server_step_configuration,
+      :wait_step_configuration,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class ServerStepConfiguration < RecoveryPlanStepConfiguration; end
+      class WaitStepConfiguration < RecoveryPlanStepConfiguration; end
+      class Unknown < RecoveryPlanStepConfiguration; end
+    end
+
+    # <p>Summary information about a Recovery Plan.</p>
+    # @!attribute recovery_plan_arn
+    #   <p>The ARN of the Recovery Plan.</p>
+    #   @return [String]
+    # @!attribute name
+    #   The name of a Recovery Plan.
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status of the Recovery Plan.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The timestamp when the Recovery Plan was created.</p>
+    #   @return [String]
+    # @!attribute updated_at
+    #   <p>The timestamp when the Recovery Plan was last updated.</p>
+    #   @return [String]
+    class RecoveryPlanSummary < Struct.new(
+      nil,
+      :recovery_plan_arn,
+      :name,
+      :status,
+      :created_at,
+      :updated_at,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>A snapshot of a Source Server used during recovery.</p>
     # @!attribute snapshot_id
     #   <p>The ID of the Recovery Snapshot.</p>
@@ -2489,6 +3301,32 @@ module Aws::Drs
       :expected_timestamp,
       :timestamp,
       :ebs_snapshots,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute recovery_plan_arn
+    #   <p>The ARN of the Recovery Plan.</p>
+    #   @return [String]
+    # @!attribute ordered_step_arns
+    #   <p>Ordered list of all step ARNs representing the desired sequence.</p>
+    #   @return [Array<String>]
+    class ReorderRecoveryPlanStepsRequest < Struct.new(
+      nil,
+      :recovery_plan_arn,
+      :ordered_step_arns,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute recovery_plan_steps
+    #   <p>The steps with updated order.</p>
+    #   @return [Array<Types::RecoveryPlanStep>]
+    class ReorderRecoveryPlanStepsResponse < Struct.new(
+      nil,
+      :recovery_plan_steps,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2583,6 +3421,9 @@ module Aws::Drs
     # @!attribute auto_replicate_new_disks
     #   <p>Whether to allow the AWS replication agent to automatically replicate newly added disks.</p>
     #   @return [Boolean]
+    # @!attribute internet_protocol
+    #   <p>Which version of the Internet Protocol to use for replication of data. (IPv4 or IPv6)</p>
+    #   @return [String]
     class ReplicationConfigurationTemplate < Struct.new(
       nil,
       :replication_configuration_template_id,
@@ -2602,6 +3443,7 @@ module Aws::Drs
       :tags,
       :pit_policy,
       :auto_replicate_new_disks,
+      :internet_protocol,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2710,6 +3552,28 @@ module Aws::Drs
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute recovery_plan_execution_step_arn
+    #   <p>The ARN of the execution step to retry.</p>
+    #   @return [String]
+    class RetryRecoveryPlanExecutionStepRequest < Struct.new(
+      nil,
+      :recovery_plan_execution_step_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute recovery_plan_execution_step
+    #   A Recovery Plan Execution Step resource.
+    #   @return [Types::RecoveryPlanExecutionStep]
+    class RetryRecoveryPlanExecutionStepResponse < Struct.new(
+      nil,
+      :recovery_plan_execution_step,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute recovery_instance_id
     #   <p>The ID of the Recovery Instance that we want to reverse the replication for.</p>
     #   @return [String]
@@ -2727,6 +3591,18 @@ module Aws::Drs
     class ReverseReplicationOutput < Struct.new(
       nil,
       :reversed_direction_source_server_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration for a <code>SERVER</code> type step.</p>
+    # @!attribute servers
+    #   <p>The list of servers to recover in this step.</p>
+    #   @return [Array<Types::RecoveryPlanServer>]
+    class ServerStepConfiguration < Struct.new(
+      nil,
+      :servers,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2800,11 +3676,7 @@ module Aws::Drs
     #   <p>A list of tags associated with the Source Network.</p>
     #   @return [Hash<String, String>]
     # @!attribute replication_status
-    #   <p>Status of Source Network Replication. Possible values:
-    #               (a) STOPPED - Source Network is not replicating.
-    #               (b) IN_PROGRESS - Source Network is being replicated.
-    #               (c) PROTECTED - Source Network was replicated successfully and is being synchronized for changes.
-    #               (d) ERROR - Source Network replication has failed</p>
+    #   <p>Status of Source Network Replication. Possible values: (a) STOPPED - Source Network is not replicating. (b) IN_PROGRESS - Source Network is being replicated. (c) PROTECTED - Source Network was replicated successfully and is being synchronized for changes. (d) ERROR - Source Network replication has failed</p>
     #   @return [String]
     # @!attribute replication_status_details
     #   <p>Error details in case Source Network replication status is ERROR.</p>
@@ -2894,6 +3766,9 @@ module Aws::Drs
     # @!attribute supports_nitro_instances
     #   <p>Are EC2 nitro instance types supported when recovering the Source Server.</p>
     #   @return [Boolean]
+    # @!attribute architecture
+    #   <p>The architecture of the Source Server.</p>
+    #   @return [String]
     class SourceProperties < Struct.new(
       nil,
       :last_updated_date_time,
@@ -2905,6 +3780,7 @@ module Aws::Drs
       :ram_bytes,
       :os,
       :supports_nitro_instances,
+      :architecture,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2980,10 +3856,7 @@ module Aws::Drs
 
     # <p>Staging information related to source server.</p>
     # @!attribute status
-    #   <p>Status of Source server extension. Possible values:
-    #               (a) NOT_EXTENDED - This is a source server that is replicating in the current account.
-    #               (b) EXTENDED - Source server is extended from a staging source server. In this case, the value of stagingSourceServerArn is pointing to the Arn of the source server in the staging account.
-    #               (c) EXTENSION_ERROR - Some issue occurred when accessing staging source server. In this case, errorMessage field will contain an error message that explains what happened.</p>
+    #   <p>Status of Source server extension. Possible values: (a) NOT_EXTENDED - This is a source server that is replicating in the current account. (b) EXTENDED - Source server is extended from a staging source server. In this case, the value of stagingSourceServerArn is pointing to the Arn of the source server in the staging account. (c) EXTENSION_ERROR - Some issue occurred when accessing staging source server. In this case, errorMessage field will contain an error message that explains what happened.</p>
     #   @return [String]
     # @!attribute staging_account_id
     #   <p>Account ID of the account to which source server belongs. If this source server is extended - shows Account ID of staging source server.</p>
@@ -3076,6 +3949,44 @@ module Aws::Drs
     class StartRecoveryOutput < Struct.new(
       nil,
       :job,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute recovery_plan_arn
+    #   <p>The ARN of the Recovery Plan to execute.</p>
+    #   @return [String]
+    # @!attribute mode
+    #   <p>The execution mode (<code>DRILL</code> or <code>RECOVERY</code>).</p>
+    #   @return [String]
+    # @!attribute client_token
+    #   <p>A unique string provided to ensure request idempotency.</p>
+    #   @return [String]
+    # @!attribute source_servers
+    #   <p>Optional list of source servers with specific recovery snapshots. If not provided, the latest snapshot is used for each server.</p>
+    #   @return [Array<Types::RecoveryPlanExecutionSourceServer>]
+    # @!attribute tags
+    #   <p>The tags to apply to the Recovery Plan execution.</p>
+    #   @return [Hash<String, String>]
+    class StartRecoveryPlanExecutionRequest < Struct.new(
+      nil,
+      :recovery_plan_arn,
+      :mode,
+      :client_token,
+      :source_servers,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute recovery_plan_execution
+    #   <p>The started Recovery Plan execution.</p>
+    #   @return [Types::RecoveryPlanExecution]
+    class StartRecoveryPlanExecutionResponse < Struct.new(
+      nil,
+      :recovery_plan_execution,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3343,12 +4254,16 @@ module Aws::Drs
     # @!attribute use_private_ip
     #   <p>Whether to use Private IP for the failback replication of the Recovery Instance.</p>
     #   @return [Boolean]
+    # @!attribute internet_protocol
+    #   <p>Which version of the Internet Protocol to use for replication of data. (IPv4 or IPv6)</p>
+    #   @return [String]
     class UpdateFailbackReplicationConfigurationInput < Struct.new(
       nil,
       :recovery_instance_id,
       :name,
       :bandwidth_throttling,
       :use_private_ip,
+      :internet_protocol,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3381,6 +4296,9 @@ module Aws::Drs
     # @!attribute launch_into_instance_properties
     #   <p>Launch into existing instance properties.</p>
     #   @return [Types::LaunchIntoInstanceProperties]
+    # @!attribute recovery_mode
+    #   <p>Recovery mode.</p>
+    #   @return [String]
     class UpdateLaunchConfigurationInput < Struct.new(
       nil,
       :source_server_id,
@@ -3392,6 +4310,7 @@ module Aws::Drs
       :licensing,
       :post_launch_enabled,
       :launch_into_instance_properties,
+      :recovery_mode,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3427,6 +4346,9 @@ module Aws::Drs
     # @!attribute launch_into_instance_properties
     #   <p>Launch into existing instance properties.</p>
     #   @return [Types::LaunchIntoInstanceProperties]
+    # @!attribute recovery_mode
+    #   <p>Recovery mode.</p>
+    #   @return [String]
     class UpdateLaunchConfigurationOutput < Struct.new(
       nil,
       :source_server_id,
@@ -3439,6 +4361,7 @@ module Aws::Drs
       :licensing,
       :post_launch_enabled,
       :launch_into_instance_properties,
+      :recovery_mode,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3471,6 +4394,9 @@ module Aws::Drs
     # @!attribute launch_into_source_instance
     #   <p>DRS will set the 'launch into instance ID' of any source server when performing a drill, recovery or failback to the previous region or availability zone, using the instance ID of the source instance.</p>
     #   @return [Boolean]
+    # @!attribute recovery_mode
+    #   <p>Recovery mode.</p>
+    #   @return [String]
     class UpdateLaunchConfigurationTemplateInput < Struct.new(
       nil,
       :launch_configuration_template_id,
@@ -3482,6 +4408,7 @@ module Aws::Drs
       :export_bucket_arn,
       :post_launch_enabled,
       :launch_into_source_instance,
+      :recovery_mode,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3493,6 +4420,101 @@ module Aws::Drs
     class UpdateLaunchConfigurationTemplateOutput < Struct.new(
       nil,
       :launch_configuration_template,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute recovery_plan_execution_step_arn
+    #   <p>The ARN of the execution step to update.</p>
+    #   @return [String]
+    # @!attribute status
+    #   Only SKIPPED is accepted. Step must be in NOT_STARTED or FAILED status.
+    #   @return [String]
+    # @!attribute servers
+    #   Full replacement of the server list. Only allowed when the step is in NOT_STARTED status (Server type steps only).
+    #   @return [Array<Types::RecoveryPlanServer>]
+    # @!attribute wait_duration_minutes
+    #   Updated wait duration. Only allowed when the step is in NOT_STARTED status (Wait type steps only).
+    #   @return [Integer]
+    class UpdateRecoveryPlanExecutionStepRequest < Struct.new(
+      nil,
+      :recovery_plan_execution_step_arn,
+      :status,
+      :servers,
+      :wait_duration_minutes,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute recovery_plan_execution_step
+    #   A Recovery Plan Execution Step resource.
+    #   @return [Types::RecoveryPlanExecutionStep]
+    class UpdateRecoveryPlanExecutionStepResponse < Struct.new(
+      nil,
+      :recovery_plan_execution_step,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute recovery_plan_arn
+    #   <p>The ARN of the Recovery Plan to update.</p>
+    #   @return [String]
+    # @!attribute name
+    #   The name of a Recovery Plan.
+    #   @return [String]
+    # @!attribute description
+    #   The description of a Recovery Plan.
+    #   @return [String]
+    class UpdateRecoveryPlanRequest < Struct.new(
+      nil,
+      :recovery_plan_arn,
+      :name,
+      :description,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute recovery_plan
+    #   A Recovery Plan resource.
+    #   @return [Types::RecoveryPlan]
+    class UpdateRecoveryPlanResponse < Struct.new(
+      nil,
+      :recovery_plan,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute recovery_plan_step_arn
+    #   <p>The ARN of the Recovery Plan step to update.</p>
+    #   @return [String]
+    # @!attribute step_name
+    #   The name of a Recovery Plan Step.
+    #   @return [String]
+    # @!attribute configuration
+    #   Type-specific configuration for a recovery plan step.
+    #   Exactly one member must be set.
+    #   @return [Types::RecoveryPlanStepConfiguration]
+    class UpdateRecoveryPlanStepRequest < Struct.new(
+      nil,
+      :recovery_plan_step_arn,
+      :step_name,
+      :configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute recovery_plan_step
+    #   A Recovery Plan Step resource.
+    #   @return [Types::RecoveryPlanStep]
+    class UpdateRecoveryPlanStepResponse < Struct.new(
+      nil,
+      :recovery_plan_step,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3549,6 +4571,9 @@ module Aws::Drs
     # @!attribute auto_replicate_new_disks
     #   <p>Whether to allow the AWS replication agent to automatically replicate newly added disks.</p>
     #   @return [Boolean]
+    # @!attribute internet_protocol
+    #   <p>Which version of the Internet Protocol to use for replication of data. (IPv4 or IPv6)</p>
+    #   @return [String]
     class UpdateReplicationConfigurationInput < Struct.new(
       nil,
       :source_server_id,
@@ -3568,6 +4593,7 @@ module Aws::Drs
       :staging_area_tags,
       :pit_policy,
       :auto_replicate_new_disks,
+      :internet_protocol,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3624,6 +4650,9 @@ module Aws::Drs
     # @!attribute auto_replicate_new_disks
     #   <p>Whether to allow the AWS replication agent to automatically replicate newly added disks.</p>
     #   @return [Boolean]
+    # @!attribute internet_protocol
+    #   <p>Which version of the Internet Protocol to use for replication of data. (IPv4 or IPv6)</p>
+    #   @return [String]
     class UpdateReplicationConfigurationOutput < Struct.new(
       nil,
       :source_server_id,
@@ -3643,6 +4672,7 @@ module Aws::Drs
       :staging_area_tags,
       :pit_policy,
       :auto_replicate_new_disks,
+      :internet_protocol,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3701,6 +4731,9 @@ module Aws::Drs
     # @!attribute auto_replicate_new_disks
     #   <p>Whether to allow the AWS replication agent to automatically replicate newly added disks.</p>
     #   @return [Boolean]
+    # @!attribute internet_protocol
+    #   <p>Which version of the Internet Protocol to use for replication of data. (IPv4 or IPv6)</p>
+    #   @return [String]
     class UpdateReplicationConfigurationTemplateInput < Struct.new(
       nil,
       :replication_configuration_template_id,
@@ -3719,6 +4752,7 @@ module Aws::Drs
       :staging_area_tags,
       :pit_policy,
       :auto_replicate_new_disks,
+      :internet_protocol,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3775,6 +4809,9 @@ module Aws::Drs
     # @!attribute auto_replicate_new_disks
     #   <p>Whether to allow the AWS replication agent to automatically replicate newly added disks.</p>
     #   @return [Boolean]
+    # @!attribute internet_protocol
+    #   <p>Which version of the Internet Protocol to use for replication of data. (IPv4 or IPv6)</p>
+    #   @return [String]
     class UpdateReplicationConfigurationTemplateOutput < Struct.new(
       nil,
       :replication_configuration_template_id,
@@ -3794,6 +4831,7 @@ module Aws::Drs
       :tags,
       :pit_policy,
       :auto_replicate_new_disks,
+      :internet_protocol,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3837,6 +4875,18 @@ module Aws::Drs
       nil,
       :name,
       :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration for a <code>WAIT</code> type step.</p>
+    # @!attribute wait_duration_minutes
+    #   The wait duration in minutes for a Wait type step.
+    #   @return [Integer]
+    class WaitStepConfiguration < Struct.new(
+      nil,
+      :wait_duration_minutes,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

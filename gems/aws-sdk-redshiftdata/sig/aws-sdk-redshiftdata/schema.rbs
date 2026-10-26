@@ -4,6 +4,7 @@ module Aws::RedshiftData
 
     ActiveSessionsExceededException: StructureShape
     ActiveStatementsExceededException: StructureShape
+    ActiveWaitingRequestsExceededException: StructureShape
     BatchExecuteStatementException: StructureShape
     BatchExecuteStatementInput: StructureShape
     BatchExecuteStatementOutput: StructureShape
@@ -28,6 +29,7 @@ module Aws::RedshiftData
     ExecuteStatementException: StructureShape
     ExecuteStatementInput: StructureShape
     ExecuteStatementOutput: StructureShape
+    ExecutionMode: StringShape
     Field: UnionShape
     FieldList: ListShape
     FormattedSqlRecords: ListShape
@@ -41,6 +43,8 @@ module Aws::RedshiftData
     ListDatabasesResponse: StructureShape
     ListSchemasRequest: StructureShape
     ListSchemasResponse: StructureShape
+    ListSessionsRequest: StructureShape
+    ListSessionsResponse: StructureShape
     ListStatementsLimit: IntegerShape
     ListStatementsRequest: StructureShape
     ListStatementsResponse: StructureShape
@@ -57,6 +61,9 @@ module Aws::RedshiftData
     SchemaList: ListShape
     SecretArn: StringShape
     SessionAliveSeconds: IntegerShape
+    SessionData: StructureShape
+    SessionList: ListShape
+    SessionStatusString: StringShape
     SqlList: ListShape
     SqlParameter: StructureShape
     SqlParametersList: ListShape
@@ -75,6 +82,7 @@ module Aws::RedshiftData
     TableMember: StructureShape
     UUID: StringShape
     ValidationException: StructureShape
+    WaitTimeSeconds: IntegerShape
     WorkgroupNameString: StringShape
     Bool: BooleanShape
 

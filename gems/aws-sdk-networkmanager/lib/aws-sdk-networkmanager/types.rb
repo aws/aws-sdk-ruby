@@ -308,6 +308,30 @@ module Aws::NetworkManager
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Summary information about routing policy associations for an attachment.</p>
+    # @!attribute attachment_id
+    #   <p>The ID of the attachment associated with the routing policy.</p>
+    #   @return [String]
+    # @!attribute pending_routing_policies
+    #   <p>The list of routing policies that are pending association with the attachment.</p>
+    #   @return [Array<String>]
+    # @!attribute associated_routing_policies
+    #   <p>The list of routing policies currently associated with the attachment.</p>
+    #   @return [Array<String>]
+    # @!attribute routing_policy_label
+    #   <p>The routing policy label associated with the attachment.</p>
+    #   @return [String]
+    class AttachmentRoutingPolicyAssociationSummary < Struct.new(
+      nil,
+      :attachment_id,
+      :pending_routing_policies,
+      :associated_routing_policies,
+      :routing_policy_label,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Describes bandwidth information.</p>
     # @!attribute upload_speed
     #   <p>Upload speed in Mbps.</p>
@@ -768,6 +792,12 @@ module Aws::NetworkManager
     # @!attribute edge_location
     #   <p>The edge location for the core network change event.</p>
     #   @return [String]
+    # @!attribute peer_edge_location
+    #   <p>The edge location of the peer in a core network change event.</p>
+    #   @return [String]
+    # @!attribute routing_policy_direction
+    #   <p>The routing policy direction (inbound/outbound) in a core network change event.</p>
+    #   @return [String]
     # @!attribute segment_name
     #   <p>The segment name if the change event is associated with a segment.</p>
     #   @return [String]
@@ -780,13 +810,19 @@ module Aws::NetworkManager
     # @!attribute cidr
     #   <p>For a <code>STATIC_ROUTE</code> event, this is the IP address.</p>
     #   @return [String]
+    # @!attribute routing_policy_association_details
+    #   <p>The names of the routing policies and other association details in the core network change values.</p>
+    #   @return [Array<Types::RoutingPolicyAssociationDetail>]
     class CoreNetworkChangeEventValues < Struct.new(
       nil,
       :edge_location,
+      :peer_edge_location,
+      :routing_policy_direction,
       :segment_name,
       :network_function_group_name,
       :attachment_id,
       :cidr,
+      :routing_policy_association_details,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -829,6 +865,21 @@ module Aws::NetworkManager
     # @!attribute security_group_referencing_support
     #   <p>Indicates whether security group referencing is enabled for the core network.</p>
     #   @return [Boolean]
+    # @!attribute routing_policy_direction
+    #   <p>The routing policy direction (inbound/outbound) in a core network change event.</p>
+    #   @return [String]
+    # @!attribute routing_policy
+    #   <p>The routing policy configuration in the core network change values.</p>
+    #   @return [String]
+    # @!attribute peer_edge_locations
+    #   <p>The edge locations of peers in the core network change values.</p>
+    #   @return [Array<String>]
+    # @!attribute attachment_id
+    #   <p>The attachment identifier in the core network change values.</p>
+    #   @return [String]
+    # @!attribute routing_policy_association_details
+    #   <p>The names of the routing policies and other association details in the core network change values.</p>
+    #   @return [Array<Types::RoutingPolicyAssociationDetail>]
     class CoreNetworkChangeValues < Struct.new(
       nil,
       :segment_name,
@@ -843,6 +894,11 @@ module Aws::NetworkManager
       :vpn_ecmp_support,
       :dns_support,
       :security_group_referencing_support,
+      :routing_policy_direction,
+      :routing_policy,
+      :peer_edge_locations,
+      :attachment_id,
+      :routing_policy_association_details,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1022,6 +1078,38 @@ module Aws::NetworkManager
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Routing information for a core network, including route details and BGP attributes.</p>
+    # @!attribute prefix
+    #   <p>The IP prefix for the route.</p>
+    #   @return [String]
+    # @!attribute next_hop
+    #   <p>The next hop information for the route.</p>
+    #   @return [Types::RoutingInformationNextHop]
+    # @!attribute local_preference
+    #   <p>The BGP local preference value for the route.</p>
+    #   @return [String]
+    # @!attribute med
+    #   <p>The BGP Multi-Exit Discriminator (MED) value for the route.</p>
+    #   @return [String]
+    # @!attribute as_path
+    #   <p>The BGP AS path for the route.</p>
+    #   @return [Array<String>]
+    # @!attribute communities
+    #   <p>The BGP community values for the route.</p>
+    #   @return [Array<String>]
+    class CoreNetworkRoutingInformation < Struct.new(
+      nil,
+      :prefix,
+      :next_hop,
+      :local_preference,
+      :med,
+      :as_path,
+      :communities,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Describes a core network segment, which are dedicated routes. Only attachments within this segment can communicate with each other.</p>
     # @!attribute name
     #   <p>The name of a core network segment.</p>
@@ -1107,6 +1195,9 @@ module Aws::NetworkManager
     # @!attribute transport_attachment_id
     #   <p>The ID of the attachment between the two connections.</p>
     #   @return [String]
+    # @!attribute routing_policy_label
+    #   <p>The routing policy label to apply to the Connect attachment for traffic routing decisions.</p>
+    #   @return [String]
     # @!attribute options
     #   <p>Options for creating an attachment.</p>
     #   @return [Types::ConnectAttachmentOptions]
@@ -1121,6 +1212,7 @@ module Aws::NetworkManager
       :core_network_id,
       :edge_location,
       :transport_attachment_id,
+      :routing_policy_label,
       :options,
       :tags,
       :client_token,
@@ -1237,6 +1329,48 @@ module Aws::NetworkManager
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute core_network_id
+    #   <p>The ID of the core network to associate with the prefix list.</p>
+    #   @return [String]
+    # @!attribute prefix_list_arn
+    #   <p>The ARN of the prefix list to associate with the core network.</p>
+    #   @return [String]
+    # @!attribute prefix_list_alias
+    #   <p>An optional alias for the prefix list association.</p>
+    #   @return [String]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+    #   @return [String]
+    class CreateCoreNetworkPrefixListAssociationRequest < Struct.new(
+      nil,
+      :core_network_id,
+      :prefix_list_arn,
+      :prefix_list_alias,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute core_network_id
+    #   <p>The ID of the core network associated with the prefix list.</p>
+    #   @return [String]
+    # @!attribute prefix_list_arn
+    #   <p>The ARN of the prefix list that was associated with the core network.</p>
+    #   @return [String]
+    # @!attribute prefix_list_alias
+    #   <p>The alias of the prefix list association, if provided.</p>
+    #   @return [String]
+    class CreateCoreNetworkPrefixListAssociationResponse < Struct.new(
+      nil,
+      :core_network_id,
+      :prefix_list_arn,
+      :prefix_list_alias,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute global_network_id
     #   <p>The ID of the global network that a core network will be a part of. </p>
     #   @return [String]
@@ -1343,6 +1477,9 @@ module Aws::NetworkManager
     # @!attribute direct_connect_gateway_arn
     #   <p>The ARN of the Direct Connect gateway attachment.</p>
     #   @return [String]
+    # @!attribute routing_policy_label
+    #   <p>The routing policy label to apply to the Direct Connect Gateway attachment for traffic routing decisions.</p>
+    #   @return [String]
     # @!attribute edge_locations
     #   <p>One or more core network edge locations that the Direct Connect gateway attachment is associated with. </p>
     #   @return [Array<String>]
@@ -1356,6 +1493,7 @@ module Aws::NetworkManager
       nil,
       :core_network_id,
       :direct_connect_gateway_arn,
+      :routing_policy_label,
       :edge_locations,
       :tags,
       :client_token,
@@ -1506,6 +1644,9 @@ module Aws::NetworkManager
     # @!attribute vpn_connection_arn
     #   <p>The ARN identifying the VPN attachment.</p>
     #   @return [String]
+    # @!attribute routing_policy_label
+    #   <p>The routing policy label to apply to the Site-to-Site VPN attachment for traffic routing decisions.</p>
+    #   @return [String]
     # @!attribute tags
     #   <p>The tags associated with the request.</p>
     #   @return [Array<Types::Tag>]
@@ -1516,6 +1657,7 @@ module Aws::NetworkManager
       nil,
       :core_network_id,
       :vpn_connection_arn,
+      :routing_policy_label,
       :tags,
       :client_token,
       keyword_init: true
@@ -1574,6 +1716,9 @@ module Aws::NetworkManager
     # @!attribute transit_gateway_route_table_arn
     #   <p>The ARN of the transit gateway route table for the attachment request. For example, <code>"TransitGatewayRouteTableArn": "arn:aws:ec2:us-west-2:123456789012:transit-gateway-route-table/tgw-rtb-9876543210123456"</code>.</p>
     #   @return [String]
+    # @!attribute routing_policy_label
+    #   <p>The routing policy label to apply to the Transit Gateway route table attachment for traffic routing decisions.</p>
+    #   @return [String]
     # @!attribute tags
     #   <p>The list of key-value tags associated with the request.</p>
     #   @return [Array<Types::Tag>]
@@ -1584,6 +1729,7 @@ module Aws::NetworkManager
       nil,
       :peering_id,
       :transit_gateway_route_table_arn,
+      :routing_policy_label,
       :tags,
       :client_token,
       keyword_init: true
@@ -1614,6 +1760,9 @@ module Aws::NetworkManager
     # @!attribute options
     #   <p>Options for the VPC attachment.</p>
     #   @return [Types::VpcOptions]
+    # @!attribute routing_policy_label
+    #   <p>The routing policy label to apply to the VPC attachment for traffic routing decisions.</p>
+    #   @return [String]
     # @!attribute tags
     #   <p>The key-value tags associated with the request.</p>
     #   @return [Array<Types::Tag>]
@@ -1626,6 +1775,7 @@ module Aws::NetworkManager
       :vpc_arn,
       :subnet_arns,
       :options,
+      :routing_policy_label,
       :tags,
       :client_token,
       keyword_init: true
@@ -1763,6 +1913,36 @@ module Aws::NetworkManager
     class DeleteCoreNetworkPolicyVersionResponse < Struct.new(
       nil,
       :core_network_policy,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute core_network_id
+    #   <p>The ID of the core network from which to delete the prefix list association.</p>
+    #   @return [String]
+    # @!attribute prefix_list_arn
+    #   <p>The ARN of the prefix list to disassociate from the core network.</p>
+    #   @return [String]
+    class DeleteCoreNetworkPrefixListAssociationRequest < Struct.new(
+      nil,
+      :core_network_id,
+      :prefix_list_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute core_network_id
+    #   <p>The ID of the core network from which the prefix list association was deleted.</p>
+    #   @return [String]
+    # @!attribute prefix_list_arn
+    #   <p>The ARN of the prefix list that was disassociated from the core network.</p>
+    #   @return [String]
+    class DeleteCoreNetworkPrefixListAssociationResponse < Struct.new(
+      nil,
+      :core_network_id,
+      :prefix_list_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3622,6 +3802,44 @@ module Aws::NetworkManager
     end
 
     # @!attribute core_network_id
+    #   <p>The ID of the core network to list attachment routing policy associations for.</p>
+    #   @return [String]
+    # @!attribute attachment_id
+    #   <p>The ID of a specific attachment to filter the routing policy associations.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return in a single page.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The token for the next page of results.</p>
+    #   @return [String]
+    class ListAttachmentRoutingPolicyAssociationsRequest < Struct.new(
+      nil,
+      :core_network_id,
+      :attachment_id,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute attachment_routing_policy_associations
+    #   <p>The list of attachment routing policy associations.</p>
+    #   @return [Array<Types::AttachmentRoutingPolicyAssociationSummary>]
+    # @!attribute next_token
+    #   <p>The token for the next page of results.</p>
+    #   @return [String]
+    class ListAttachmentRoutingPolicyAssociationsResponse < Struct.new(
+      nil,
+      :attachment_routing_policy_associations,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute core_network_id
     #   <p>The ID of a core network.</p>
     #   @return [String]
     # @!attribute attachment_type
@@ -3733,6 +3951,106 @@ module Aws::NetworkManager
     class ListCoreNetworkPolicyVersionsResponse < Struct.new(
       nil,
       :core_network_policy_versions,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute core_network_id
+    #   <p>The ID of the core network to list prefix list associations for.</p>
+    #   @return [String]
+    # @!attribute prefix_list_arn
+    #   <p>The ARN of a specific prefix list to filter the associations.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return in a single page.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The token for the next page of results.</p>
+    #   @return [String]
+    class ListCoreNetworkPrefixListAssociationsRequest < Struct.new(
+      nil,
+      :core_network_id,
+      :prefix_list_arn,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute prefix_list_associations
+    #   <p>The list of prefix list associations for the core network.</p>
+    #   @return [Array<Types::PrefixListAssociation>]
+    # @!attribute next_token
+    #   <p>The token for the next page of results.</p>
+    #   @return [String]
+    class ListCoreNetworkPrefixListAssociationsResponse < Struct.new(
+      nil,
+      :prefix_list_associations,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute core_network_id
+    #   <p>The ID of the core network to retrieve routing information for.</p>
+    #   @return [String]
+    # @!attribute segment_name
+    #   <p>The name of the segment to filter routing information by.</p>
+    #   @return [String]
+    # @!attribute edge_location
+    #   <p>The edge location to filter routing information by.</p>
+    #   @return [String]
+    # @!attribute next_hop_filters
+    #   <p>Filters to apply based on next hop information.</p>
+    #   @return [Hash<String, Array<String>>]
+    # @!attribute local_preference_matches
+    #   <p>Local preference values to match when filtering routing information.</p>
+    #   @return [Array<String>]
+    # @!attribute exact_as_path_matches
+    #   <p>Exact AS path values to match when filtering routing information.</p>
+    #   @return [Array<String>]
+    # @!attribute med_matches
+    #   <p>Multi-Exit Discriminator (MED) values to match when filtering routing information.</p>
+    #   @return [Array<String>]
+    # @!attribute community_matches
+    #   <p>BGP community values to match when filtering routing information.</p>
+    #   @return [Array<String>]
+    # @!attribute max_results
+    #   <p>The maximum number of routing information entries to return in a single page.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The token for the next page of results.</p>
+    #   @return [String]
+    class ListCoreNetworkRoutingInformationRequest < Struct.new(
+      nil,
+      :core_network_id,
+      :segment_name,
+      :edge_location,
+      :next_hop_filters,
+      :local_preference_matches,
+      :exact_as_path_matches,
+      :med_matches,
+      :community_matches,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute core_network_routing_information
+    #   <p>The list of routing information for the core network.</p>
+    #   @return [Array<Types::CoreNetworkRoutingInformation>]
+    # @!attribute next_token
+    #   <p>The token for the next page of results.</p>
+    #   @return [String]
+    class ListCoreNetworkRoutingInformationResponse < Struct.new(
+      nil,
+      :core_network_routing_information,
       :next_token,
       keyword_init: true
     )
@@ -4344,6 +4662,26 @@ module Aws::NetworkManager
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Information about a prefix list association with a core network.</p>
+    # @!attribute core_network_id
+    #   <p>The core network id in the association.</p>
+    #   @return [String]
+    # @!attribute prefix_list_arn
+    #   <p>The ARN of the prefix list in the association.</p>
+    #   @return [String]
+    # @!attribute prefix_list_alias
+    #   <p>The alias of the prefix list in the association.</p>
+    #   @return [String]
+    class PrefixListAssociation < Struct.new(
+      nil,
+      :core_network_id,
+      :prefix_list_arn,
+      :prefix_list_alias,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Describes proposed changes to a network function group. </p>
     # @!attribute tags
     #   <p>The list of proposed changes to the key-value tags associated with the network function group.</p>
@@ -4379,6 +4717,48 @@ module Aws::NetworkManager
       :tags,
       :attachment_policy_rule_number,
       :segment_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute core_network_id
+    #   <p>The ID of the core network containing the attachment.</p>
+    #   @return [String]
+    # @!attribute attachment_id
+    #   <p>The ID of the attachment to apply the routing policy label to.</p>
+    #   @return [String]
+    # @!attribute routing_policy_label
+    #   <p>The routing policy label to apply to the attachment.</p>
+    #   @return [String]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+    #   @return [String]
+    class PutAttachmentRoutingPolicyLabelRequest < Struct.new(
+      nil,
+      :core_network_id,
+      :attachment_id,
+      :routing_policy_label,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute core_network_id
+    #   <p>The ID of the core network containing the attachment.</p>
+    #   @return [String]
+    # @!attribute attachment_id
+    #   <p>The ID of the attachment that received the routing policy label.</p>
+    #   @return [String]
+    # @!attribute routing_policy_label
+    #   <p>The routing policy label that was applied to the attachment.</p>
+    #   @return [String]
+    class PutAttachmentRoutingPolicyLabelResponse < Struct.new(
+      nil,
+      :core_network_id,
+      :attachment_id,
+      :routing_policy_label,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4508,6 +4888,40 @@ module Aws::NetworkManager
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute core_network_id
+    #   <p>The ID of the core network containing the attachment.</p>
+    #   @return [String]
+    # @!attribute attachment_id
+    #   <p>The ID of the attachment to remove the routing policy label from.</p>
+    #   @return [String]
+    class RemoveAttachmentRoutingPolicyLabelRequest < Struct.new(
+      nil,
+      :core_network_id,
+      :attachment_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute core_network_id
+    #   <p>The ID of the core network containing the attachment.</p>
+    #   @return [String]
+    # @!attribute attachment_id
+    #   <p>The ID of the attachment from which the routing policy label was removed.</p>
+    #   @return [String]
+    # @!attribute routing_policy_label
+    #   <p>The routing policy label that was removed from the attachment.</p>
+    #   @return [String]
+    class RemoveAttachmentRoutingPolicyLabelResponse < Struct.new(
+      nil,
+      :core_network_id,
+      :attachment_id,
+      :routing_policy_label,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The specified resource could not be found.</p>
     # @!attribute message
     #   @return [String]
@@ -4618,7 +5032,7 @@ module Aws::NetworkManager
 
     # <p>Describes the status of an analysis at completion.</p>
     # @!attribute result_code
-    #   <p>The result of the analysis. If the status is <code>NOT_CONNECTED</code>, check the 
+    #   <p>The result of the analysis. If the status is <code>NOT_CONNECTED</code>, check the
     #               reason code.</p>
     #   @return [String]
     # @!attribute reason_code
@@ -4747,16 +5161,64 @@ module Aws::NetworkManager
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Information about the next hop for a route in the core network.</p>
+    # @!attribute ip_address
+    #   <p>The IP address of the next hop.</p>
+    #   @return [String]
+    # @!attribute core_network_attachment_id
+    #   <p>The ID of the core network attachment for the next hop.</p>
+    #   @return [String]
+    # @!attribute resource_id
+    #   <p>The ID of the resource for the next hop.</p>
+    #   @return [String]
+    # @!attribute resource_type
+    #   <p>The type of resource for the next hop.</p>
+    #   @return [String]
+    # @!attribute segment_name
+    #   <p>The name of the segment for the next hop.</p>
+    #   @return [String]
+    # @!attribute edge_location
+    #   <p>The edge location for the next hop.</p>
+    #   @return [String]
+    class RoutingInformationNextHop < Struct.new(
+      nil,
+      :ip_address,
+      :core_network_attachment_id,
+      :resource_id,
+      :resource_type,
+      :segment_name,
+      :edge_location,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Information about a routing policy association.</p>
+    # @!attribute routing_policy_names
+    #   <p>The names of the routing policies in the association.</p>
+    #   @return [Array<String>]
+    # @!attribute shared_segments
+    #   <p>The names of the segments that are shared with each other in the association.</p>
+    #   @return [Array<String>]
+    class RoutingPolicyAssociationDetail < Struct.new(
+      nil,
+      :routing_policy_names,
+      :shared_segments,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Describes the action that the service insertion will take for any segments associated with it.</p>
     # @!attribute action
-    #   <p>The action the service insertion takes for traffic. 
-    #               <code>send-via</code> sends east-west traffic between attachments. 
-    #               <code>send-to</code> sends north-south traffic to the 
-    #               security appliance, and then from that to either the Internet or to an on-premesis 
+    #   <p>The action the service insertion takes for traffic.
+    #               <code>send-via</code> sends east-west traffic between attachments.
+    #               <code>send-to</code> sends north-south traffic to the
+    #               security appliance, and then from that to either the Internet or to an on-premesis
     #               location.  </p>
     #   @return [String]
     # @!attribute mode
-    #   <p>Describes the mode packets take for the <code>send-via</code> action. This is not used when the action is <code>send-to</code>. <code>dual-hop</code> packets traverse attachments in both the source to the destination core network edges. This mode requires that an inspection attachment must be present in all Regions of the service insertion-enabled segments. 
+    #   <p>Describes the mode packets take for the <code>send-via</code> action. This is not used when the action is <code>send-to</code>. <code>dual-hop</code> packets traverse attachments in both the source to the destination core network edges. This mode requires that an inspection attachment must be present in all Regions of the service insertion-enabled segments.
     #               For <code>single-hop</code>, packets traverse a single intermediate inserted attachment. You can use <code>EdgeOverride</code> to specify a specific edge to use. </p>
     #   @return [String]
     # @!attribute when_sent_to

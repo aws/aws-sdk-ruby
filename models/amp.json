@@ -205,6 +205,194 @@
                 },
                 "smithy.api#documentation": "<p>Amazon Managed Service for Prometheus is a serverless, Prometheus-compatible monitoring service for container metrics that makes it easier to securely monitor container environments at scale. With Amazon Managed Service for Prometheus, you can use the same open-source Prometheus data model and query language that you use today to monitor the performance of your containerized workloads, and also enjoy improved scalability, availability, and security without having to manage the underlying infrastructure.</p> <p>For more information about Amazon Managed Service for Prometheus, see the <a href=\"https://docs.aws.amazon.com/prometheus/latest/userguide/what-is-Amazon-Managed-Service-Prometheus.html\">Amazon Managed Service for Prometheus</a> User Guide.</p> <p>Amazon Managed Service for Prometheus includes two APIs.</p> <ul> <li> <p>Use the Amazon Web Services API described in this guide to manage Amazon Managed Service for Prometheus resources, such as workspaces, rule groups, and alert managers.</p> </li> <li> <p>Use the <a href=\"https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-APIReference.html#AMP-APIReference-Prometheus-Compatible-Apis\">Prometheus-compatible API</a> to work within your Prometheus workspace.</p> </li> </ul>",
                 "smithy.api#title": "Amazon Prometheus Service",
+                "smithy.rules#endpointBdd": {
+                    "version": "1.1",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        }
+                    },
+                    "conditions": [
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.partition",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ],
+                            "assign": "PartitionResult"
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseDualStack"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsDualStack"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsFIPS"
+                                    ]
+                                },
+                                true
+                            ]
+                        }
+                    ],
+                    "results": [
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://aps-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://aps-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://aps.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://aps.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ],
+                    "root": 2,
+                    "nodeCount": 13,
+                    "nodes": "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"
+                },
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {
@@ -212,27 +400,27 @@
                             "builtIn": "AWS::Region",
                             "required": false,
                             "documentation": "The AWS region used to dispatch the request.",
-                            "type": "String"
+                            "type": "string"
                         },
                         "UseDualStack": {
                             "builtIn": "AWS::UseDualStack",
                             "required": true,
                             "default": false,
                             "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "UseFIPS": {
                             "builtIn": "AWS::UseFIPS",
                             "required": true,
                             "default": false,
                             "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "Endpoint": {
                             "builtIn": "SDK::Endpoint",
                             "required": false,
                             "documentation": "Override the endpoint used to send this request",
-                            "type": "String"
+                            "type": "string"
                         }
                     },
                     "rules": [
@@ -923,6 +1111,343 @@
                 "smithy.api#documentation": "<p>The <code>AmpConfiguration</code> structure defines the Amazon Managed Service for Prometheus instance a scraper should send metrics to.</p>"
             }
         },
+        "com.amazonaws.amp#AnomalyDetector": {
+            "type": "resource",
+            "identifiers": {
+                "workspaceId": {
+                    "target": "com.amazonaws.amp#WorkspaceId"
+                },
+                "anomalyDetectorId": {
+                    "target": "com.amazonaws.amp#AnomalyDetectorId"
+                }
+            },
+            "put": {
+                "target": "com.amazonaws.amp#PutAnomalyDetector"
+            },
+            "create": {
+                "target": "com.amazonaws.amp#CreateAnomalyDetector"
+            },
+            "read": {
+                "target": "com.amazonaws.amp#DescribeAnomalyDetector"
+            },
+            "delete": {
+                "target": "com.amazonaws.amp#DeleteAnomalyDetector"
+            },
+            "list": {
+                "target": "com.amazonaws.amp#ListAnomalyDetectors"
+            },
+            "traits": {
+                "aws.api#arn": {
+                    "template": "anomalydetector/{workspaceId}/{anomalyDetectorId}"
+                }
+            }
+        },
+        "com.amazonaws.amp#AnomalyDetectorAlias": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[0-9A-Za-z][-.0-9A-Z_a-z]*$"
+            }
+        },
+        "com.amazonaws.amp#AnomalyDetectorArn": {
+            "type": "string",
+            "traits": {
+                "aws.api#arnReference": {
+                    "type": "AWS::APS::AnomalyDetector",
+                    "service": "ManagedPrometheusCP",
+                    "resource": "AnomalyDetector"
+                },
+                "smithy.api#pattern": "^arn:aws[-a-z]*:aps:[-a-z0-9]+:[0-9]{12}:anomalydetector/ws-.+/ad-.+$"
+            }
+        },
+        "com.amazonaws.amp#AnomalyDetectorConfiguration": {
+            "type": "union",
+            "members": {
+                "randomCutForest": {
+                    "target": "com.amazonaws.amp#RandomCutForestConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Random Cut Forest algorithm configuration for anomaly detection.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for the anomaly detection algorithm.</p>"
+            }
+        },
+        "com.amazonaws.amp#AnomalyDetectorDescription": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.amp#AnomalyDetectorArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the anomaly detector.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "anomalyDetectorId": {
+                    "target": "com.amazonaws.amp#AnomalyDetectorId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the anomaly detector.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "alias": {
+                    "target": "com.amazonaws.amp#AnomalyDetectorAlias",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user-friendly name of the anomaly detector.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "evaluationIntervalInSeconds": {
+                    "target": "com.amazonaws.amp#AnomalyDetectorEvaluationInterval",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The frequency, in seconds, at which the anomaly detector evaluates metrics.</p>"
+                    }
+                },
+                "missingDataAction": {
+                    "target": "com.amazonaws.amp#AnomalyDetectorMissingDataAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action taken when data is missing during evaluation.</p>"
+                    }
+                },
+                "configuration": {
+                    "target": "com.amazonaws.amp#AnomalyDetectorConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The algorithm configuration of the anomaly detector.</p>"
+                    }
+                },
+                "labels": {
+                    "target": "com.amazonaws.amp#PrometheusMetricLabelMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Managed Service for Prometheus metric labels associated with the anomaly detector.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.amp#AnomalyDetectorStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the anomaly detector.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the anomaly detector was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "modifiedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the anomaly detector was last modified.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.amp#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags applied to the anomaly detector.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Detailed information about an anomaly detector.</p>"
+            }
+        },
+        "com.amazonaws.amp#AnomalyDetectorEvaluationInterval": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 30,
+                    "max": 86400
+                }
+            }
+        },
+        "com.amazonaws.amp#AnomalyDetectorId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^ad-[0-9A-Za-z][-.0-9A-Z_a-z]*$"
+            }
+        },
+        "com.amazonaws.amp#AnomalyDetectorMissingDataAction": {
+            "type": "union",
+            "members": {
+                "markAsAnomaly": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Marks missing data points as anomalies.</p>"
+                    }
+                },
+                "skip": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Skips evaluation when data is missing.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the action to take when data is missing during anomaly detection evaluation.</p>"
+            }
+        },
+        "com.amazonaws.amp#AnomalyDetectorStatus": {
+            "type": "structure",
+            "members": {
+                "statusCode": {
+                    "target": "com.amazonaws.amp#AnomalyDetectorStatusCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status code of the anomaly detector.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "statusReason": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the current status of the anomaly detector.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status information of an anomaly detector.</p>"
+            }
+        },
+        "com.amazonaws.amp#AnomalyDetectorStatusCode": {
+            "type": "enum",
+            "members": {
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
+                    }
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "UPDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATING"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "CREATION_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATION_FAILED"
+                    }
+                },
+                "UPDATE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATE_FAILED"
+                    }
+                },
+                "DELETION_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETION_FAILED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amp#AnomalyDetectorSummary": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.amp#AnomalyDetectorArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the anomaly detector.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "anomalyDetectorId": {
+                    "target": "com.amazonaws.amp#AnomalyDetectorId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the anomaly detector.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "alias": {
+                    "target": "com.amazonaws.amp#AnomalyDetectorAlias",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user-friendly name of the anomaly detector.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.amp#AnomalyDetectorStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the anomaly detector.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the anomaly detector was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "modifiedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the anomaly detector was last modified.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.amp#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags applied to the anomaly detector.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary information about an anomaly detector for list operations.</p>"
+            }
+        },
+        "com.amazonaws.amp#AnomalyDetectorSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.amp#AnomalyDetectorSummary"
+            }
+        },
+        "com.amazonaws.amp#CloudWatchConfiguration": {
+            "type": "structure",
+            "members": {
+                "datasetArn": {
+                    "target": "com.amazonaws.amp#CloudWatchDatasetArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the CloudWatch dataset. To use the default dataset, specify <code>arn:aws:cloudwatch:&lt;region&gt;:&lt;account-id&gt;:dataset/default</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration identifies the CloudWatch dataset used as a scraper destination.</p>"
+            }
+        },
+        "com.amazonaws.amp#CloudWatchDatasetArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>An Amazon Resource Name (ARN) that identifies a dataset in CloudWatch.</p>",
+                "smithy.api#pattern": "^arn:aws[-a-z]*:cloudwatch:[-a-z0-9]+:[0-9]{12}:dataset\\/.+$"
+            }
+        },
         "com.amazonaws.amp#CloudWatchLogDestination": {
             "type": "structure",
             "members": {
@@ -1077,6 +1602,144 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Represents the output of a <code>CreateAlertManagerDefinition</code> operation.</p>"
+            }
+        },
+        "com.amazonaws.amp#CreateAnomalyDetector": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amp#CreateAnomalyDetectorRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amp#CreateAnomalyDetectorResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amp#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.amp#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an anomaly detector within a workspace using the Random Cut Forest algorithm for time-series analysis. The anomaly detector analyzes Amazon Managed Service for Prometheus metrics to identify unusual patterns and behaviors.</p>",
+                "smithy.api#http": {
+                    "code": 202,
+                    "method": "POST",
+                    "uri": "/workspaces/{workspaceId}/anomalydetectors"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.amp#CreateAnomalyDetectorRequest": {
+            "type": "structure",
+            "members": {
+                "workspaceId": {
+                    "target": "com.amazonaws.amp#WorkspaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the workspace where the anomaly detector will be created.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "alias": {
+                    "target": "com.amazonaws.amp#AnomalyDetectorAlias",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A user-friendly name for the anomaly detector.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "evaluationIntervalInSeconds": {
+                    "target": "com.amazonaws.amp#AnomalyDetectorEvaluationInterval",
+                    "traits": {
+                        "smithy.api#default": 60,
+                        "smithy.api#documentation": "<p>The frequency, in seconds, at which the anomaly detector evaluates metrics. The default value is 60 seconds.</p>"
+                    }
+                },
+                "missingDataAction": {
+                    "target": "com.amazonaws.amp#AnomalyDetectorMissingDataAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the action to take when data is missing during evaluation.</p>"
+                    }
+                },
+                "configuration": {
+                    "target": "com.amazonaws.amp#AnomalyDetectorConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The algorithm configuration for the anomaly detector.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "labels": {
+                    "target": "com.amazonaws.amp#PrometheusMetricLabelMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Managed Service for Prometheus metric labels to associate with the anomaly detector.</p>",
+                        "smithy.api#length": {
+                            "max": 140
+                        }
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.amp#IdempotencyToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.amp#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata to apply to the anomaly detector to assist with categorization and organization.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.amp#CreateAnomalyDetectorResponse": {
+            "type": "structure",
+            "members": {
+                "anomalyDetectorId": {
+                    "target": "com.amazonaws.amp#AnomalyDetectorId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the created anomaly detector.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.amp#AnomalyDetectorArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the created anomaly detector.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.amp#AnomalyDetectorStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status information of the created anomaly detector.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.amp#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags applied to the created anomaly detector.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.amp#CreateLoggingConfiguration": {
@@ -1265,7 +1928,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>The <code>CreateRuleGroupsNamespace</code> operation creates a rule groups namespace within a workspace. A rule groups namespace is associated with exactly one rules file. A workspace can have multiple rule groups namespaces.</p> <p>Use this operation only to create new rule groups namespaces. To update an existing rule groups namespace, use <code>PutRuleGroupsNamespace</code>.</p>",
+                "smithy.api#documentation": "<p>The <code>CreateRuleGroupsNamespace</code> operation creates a rule groups namespace within a workspace. A rule groups namespace is associated with exactly one rules file. A workspace can have multiple rule groups namespaces.</p> <important> <p>The combined length of a rule group namespace and a rule group name cannot exceed 721 UTF-8 bytes.</p> </important> <p>Use this operation only to create new rule groups namespaces. To update an existing rule groups namespace, use <code>PutRuleGroupsNamespace</code>.</p>",
                 "smithy.api#http": {
                     "code": 202,
                     "method": "POST",
@@ -1384,7 +2047,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>The <code>CreateScraper</code> operation creates a scraper to collect metrics. A scraper pulls metrics from Prometheus-compatible sources within an Amazon EKS cluster, and sends them to your Amazon Managed Service for Prometheus workspace. Scrapers are flexible, and can be configured to control what metrics are collected, the frequency of collection, what transformations are applied to the metrics, and more.</p> <p>An IAM role will be created for you that Amazon Managed Service for Prometheus uses to access the metrics in your cluster. You must configure this role with a policy that allows it to scrape metrics from your cluster. For more information, see <a href=\"https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-collector-how-to.html#AMP-collector-eks-setup\">Configuring your Amazon EKS cluster</a> in the <i>Amazon Managed Service for Prometheus User Guide</i>.</p> <p>The <code>scrapeConfiguration</code> parameter contains the base-64 encoded YAML configuration for the scraper.</p> <p>When creating a scraper, the service creates a <code>Network Interface</code> in each <b>Availability Zone</b> that are passed into <code>CreateScraper</code> through subnets. These network interfaces are used to connect to the Amazon EKS cluster within the VPC for scraping metrics.</p> <note> <p>For more information about collectors, including what metrics are collected, and how to configure the scraper, see <a href=\"https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-collector-how-to.html\">Using an Amazon Web Services managed collector</a> in the <i>Amazon Managed Service for Prometheus User Guide</i>.</p> </note>",
+                "smithy.api#documentation": "<p>Creates a scraper to collect metrics from Prometheus-compatible sources. The scraper sends the collected metrics to Amazon Managed Service for Prometheus workspaces or CloudWatch datasets. You can configure scrapers to collect metrics from Amazon EKS clusters, Amazon MSK clusters, or from VPC-based sources that support DNS-based service discovery. Scrapers are flexible. You can configure a scraper to control which metrics to collect, the frequency of collection, which transformations to apply to the metrics, and more.</p> <p>An IAM role will be created for you that Amazon Managed Service for Prometheus uses to access the metrics in your source. You must configure this role with a policy that allows it to scrape metrics from your source. For Amazon EKS sources, see <a href=\"https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-collector-how-to.html#AMP-collector-eks-setup\">Configuring your Amazon EKS cluster</a> in the <i>Amazon Managed Service for Prometheus User Guide</i>.</p> <p>The <code>scrapeConfiguration</code> parameter contains the base-64 encoded YAML configuration for the scraper.</p> <p>When creating a scraper, the service creates a <code>Network Interface</code> in each <b>Availability Zone</b> that are passed into <code>CreateScraper</code> through subnets. These network interfaces are used to connect to your source within the VPC for scraping metrics.</p> <note> <p>For more information about collectors, including what metrics are collected, and how to configure the scraper, see <a href=\"https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-collector-how-to.html\">Using an Amazon Web Services managed collector</a> in the <i>Amazon Managed Service for Prometheus User Guide</i>.</p> </note>",
                 "smithy.api#examples": [
                     {
                         "title": "CreateScraper with optional alias input, optional clientToken input, and one set of tags",
@@ -1396,6 +2059,44 @@
                             "source": {
                                 "eksConfiguration": {
                                     "clusterArn": "arn:aws:eks:us-west-2:123456789012:cluster/example",
+                                    "securityGroupIds": [
+                                        "sg-abc123"
+                                    ],
+                                    "subnetIds": [
+                                        "subnet-abc123"
+                                    ]
+                                }
+                            },
+                            "destination": {
+                                "ampConfiguration": {
+                                    "workspaceArn": "arn:aws:aps:us-west-2:123456789012:workspace/ws-ogh2u499-ce12-hg89-v6c7-123412341234"
+                                }
+                            },
+                            "clientToken": "token",
+                            "tags": {
+                                "exampleTag": "exampleValue"
+                            }
+                        },
+                        "output": {
+                            "scraperId": "scraper-123",
+                            "arn": "arn:aws:aps:us-west-2:123456789012:scraper/scraper-123",
+                            "status": {
+                                "statusCode": "CREATING"
+                            },
+                            "tags": {
+                                "exampleTag": "exampleValue"
+                            }
+                        }
+                    },
+                    {
+                        "title": "CreateScraper with generic VPC config with mandatory securityGroupIds and subnetIds",
+                        "input": {
+                            "alias": "alias",
+                            "scrapeConfiguration": {
+                                "configurationBlob": "blob"
+                            },
+                            "source": {
+                                "vpcConfiguration": {
                                     "securityGroupIds": [
                                         "sg-abc123"
                                     ],
@@ -1453,14 +2154,14 @@
                 "source": {
                     "target": "com.amazonaws.amp#Source",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon EKS cluster from which the scraper will collect metrics.</p>",
+                        "smithy.api#documentation": "<p>The Amazon EKS or Amazon Web Services cluster from which the scraper will collect metrics.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "destination": {
                     "target": "com.amazonaws.amp#Destination",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Managed Service for Prometheus workspace to send metrics to.</p>",
+                        "smithy.api#documentation": "<p>The destination where the scraper sends the collected metrics. Valid destinations are Amazon Managed Service for Prometheus workspaces and CloudWatch datasets.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1481,6 +2182,12 @@
                     "target": "com.amazonaws.amp#TagMap",
                     "traits": {
                         "smithy.api#documentation": "<p>(Optional) The list of tag keys and values to associate with the scraper.</p>"
+                    }
+                },
+                "exporters": {
+                    "target": "com.amazonaws.amp#ExporterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The exporter configurations for the scraper. You can configure at most one Amazon OpenSearch Service domain. If you don't specify a value, the scraper is created without an exporter configuration.</p>"
                     }
                 }
             },
@@ -1697,6 +2404,76 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Represents the input of a <code>DeleteAlertManagerDefinition</code> operation.</p>"
+            }
+        },
+        "com.amazonaws.amp#DeleteAnomalyDetector": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amp#DeleteAnomalyDetectorRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amp#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.amp#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes an anomaly detector from a workspace. This operation is idempotent.</p>",
+                "smithy.api#http": {
+                    "code": 202,
+                    "method": "DELETE",
+                    "uri": "/workspaces/{workspaceId}/anomalydetectors/{anomalyDetectorId}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.amp#DeleteAnomalyDetectorRequest": {
+            "type": "structure",
+            "members": {
+                "workspaceId": {
+                    "target": "com.amazonaws.amp#WorkspaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the workspace containing the anomaly detector to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "anomalyDetectorId": {
+                    "target": "com.amazonaws.amp#AnomalyDetectorId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the anomaly detector to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.amp#IdempotencyToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
+                        "smithy.api#httpQuery": "clientToken",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.amp#DeleteLoggingConfiguration": {
@@ -2242,6 +3019,138 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Represents the output of a <code>DescribeAlertManagerDefinition</code> operation.</p>"
+            }
+        },
+        "com.amazonaws.amp#DescribeAnomalyDetector": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amp#DescribeAnomalyDetectorRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amp#DescribeAnomalyDetectorResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amp#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.amp#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves detailed information about a specific anomaly detector, including its status and configuration.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/workspaces/{workspaceId}/anomalydetectors/{anomalyDetectorId}"
+                },
+                "smithy.api#readonly": {},
+                "smithy.waiters#waitable": {
+                    "AnomalyDetectorActive": {
+                        "documentation": "Wait until the anomaly detector reaches ACTIVE status",
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "anomalyDetector.status.statusCode",
+                                        "expected": "ACTIVE",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "retry",
+                                "matcher": {
+                                    "output": {
+                                        "path": "anomalyDetector.status.statusCode",
+                                        "expected": "CREATING",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "retry",
+                                "matcher": {
+                                    "output": {
+                                        "path": "anomalyDetector.status.statusCode",
+                                        "expected": "UPDATING",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    "AnomalyDetectorDeleted": {
+                        "documentation": "Wait until the anomaly detector reaches DELETED status",
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "errorType": "ResourceNotFoundException"
+                                }
+                            },
+                            {
+                                "state": "retry",
+                                "matcher": {
+                                    "output": {
+                                        "path": "anomalyDetector.status.statusCode",
+                                        "expected": "DELETING",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amp#DescribeAnomalyDetectorRequest": {
+            "type": "structure",
+            "members": {
+                "workspaceId": {
+                    "target": "com.amazonaws.amp#WorkspaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the workspace containing the anomaly detector.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "anomalyDetectorId": {
+                    "target": "com.amazonaws.amp#AnomalyDetectorId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the anomaly detector to describe.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.amp#DescribeAnomalyDetectorResponse": {
+            "type": "structure",
+            "members": {
+                "anomalyDetector": {
+                    "target": "com.amazonaws.amp#AnomalyDetectorDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The detailed information about the anomaly detector.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.amp#DescribeLoggingConfiguration": {
@@ -2972,6 +3881,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Managed Service for Prometheus workspace to send metrics to.</p>"
                     }
+                },
+                "cloudWatchConfiguration": {
+                    "target": "com.amazonaws.amp#CloudWatchConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CloudWatch dataset to send metrics to.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3004,6 +3919,32 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The <code>EksConfiguration</code> structure describes the connection to the Amazon EKS cluster from which a scraper collects metrics.</p>"
+            }
+        },
+        "com.amazonaws.amp#ExporterConfiguration": {
+            "type": "union",
+            "members": {
+                "openSearchConfiguration": {
+                    "target": "com.amazonaws.amp#OpenSearchExporterConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration that the scraper uses to export metrics to an Amazon OpenSearch Service domain.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the configuration for an exporter managed by the scraper.</p>"
+            }
+        },
+        "com.amazonaws.amp#ExporterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.amp#ExporterConfiguration"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of exporter configurations for a scraper. You can configure at most one Amazon OpenSearch Service domain.</p>",
+                "smithy.api#length": {
+                    "max": 1
+                }
             }
         },
         "com.amazonaws.amp#FilterKey": {
@@ -3122,6 +4063,32 @@
                 "smithy.api#pattern": "^[!-~]+$"
             }
         },
+        "com.amazonaws.amp#IgnoreNearExpected": {
+            "type": "union",
+            "members": {
+                "amount": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The absolute amount by which values can differ from expected values before being considered anomalous.</p>",
+                        "smithy.api#range": {
+                            "min": 0
+                        }
+                    }
+                },
+                "ratio": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ratio by which values can differ from expected values before being considered anomalous.</p>",
+                        "smithy.api#range": {
+                            "min": 0
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for threshold settings that determine when values near expected values should be ignored during anomaly detection.</p>"
+            }
+        },
         "com.amazonaws.amp#InternalServerException": {
             "type": "structure",
             "members": {
@@ -3230,6 +4197,109 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.amp#LimitsPerLabelSet"
+            }
+        },
+        "com.amazonaws.amp#ListAnomalyDetectors": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amp#ListAnomalyDetectorsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amp#ListAnomalyDetectorsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amp#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.amp#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a paginated list of anomaly detectors for a workspace with optional filtering by alias.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/workspaces/{workspaceId}/anomalydetectors"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "anomalyDetectors"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.amp#ListAnomalyDetectorsRequest": {
+            "type": "structure",
+            "members": {
+                "workspaceId": {
+                    "target": "com.amazonaws.amp#WorkspaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the workspace containing the anomaly detectors to list.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "alias": {
+                    "target": "com.amazonaws.amp#AnomalyDetectorAlias",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters the results to anomaly detectors with the specified alias.</p>",
+                        "smithy.api#httpQuery": "alias"
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in a single call. Valid range is 1 to 1000.</p>",
+                        "smithy.api#httpQuery": "maxResults",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 1000
+                        }
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.amp#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to continue retrieving results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.amp#ListAnomalyDetectorsResponse": {
+            "type": "structure",
+            "members": {
+                "anomalyDetectors": {
+                    "target": "com.amazonaws.amp#AnomalyDetectorSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of anomaly detectors in the workspace.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.amp#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to retrieve the next set of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.amp#ListRuleGroupsNamespaces": {
@@ -3892,12 +4962,62 @@
                 "smithy.api#documentation": "<p>Filtering criteria that determine which queries are logged.</p>"
             }
         },
+        "com.amazonaws.amp#OpenSearchDomainArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>An Amazon Resource Name (ARN) that identifies an Amazon OpenSearch Service domain.</p>",
+                "smithy.api#pattern": "^arn:aws[-a-z]*:es:[-a-z0-9]+:[0-9]{12}:domain\\/.+$"
+            }
+        },
+        "com.amazonaws.amp#OpenSearchExporterConfiguration": {
+            "type": "structure",
+            "members": {
+                "domainArn": {
+                    "target": "com.amazonaws.amp#OpenSearchDomainArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon OpenSearch Service domain.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for exporting metrics to an Amazon OpenSearch Service domain.</p>"
+            }
+        },
         "com.amazonaws.amp#PaginationToken": {
             "type": "string",
             "traits": {
                 "smithy.api#documentation": "<p>A token used to access the next page in a paginated result set.</p>",
                 "smithy.api#length": {
                     "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.amp#PrometheusMetricLabelKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 7168
+                },
+                "smithy.api#pattern": "^(?!__)[a-zA-Z_][a-zA-Z0-9_]*$"
+            }
+        },
+        "com.amazonaws.amp#PrometheusMetricLabelMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.amp#PrometheusMetricLabelKey"
+            },
+            "value": {
+                "target": "com.amazonaws.amp#PrometheusMetricLabelValue"
+            }
+        },
+        "com.amazonaws.amp#PrometheusMetricLabelValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 7168
                 }
             }
         },
@@ -3985,6 +5105,136 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Represents the output of a <code>PutAlertManagerDefinition</code> operation.</p>"
+            }
+        },
+        "com.amazonaws.amp#PutAnomalyDetector": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amp#PutAnomalyDetectorRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amp#PutAnomalyDetectorResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amp#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.amp#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>When you call <code>PutAnomalyDetector</code>, the operation creates a new anomaly detector if one doesn't exist, or updates an existing one. Each call to this operation triggers a complete retraining of the detector, which includes querying the minimum required samples and backfilling the detector with historical data. This process occurs regardless of whether you're making a minor change like updating the evaluation interval or making more substantial modifications. The operation serves as the single method for creating, updating, and retraining anomaly detectors.</p>",
+                "smithy.api#http": {
+                    "code": 202,
+                    "method": "PUT",
+                    "uri": "/workspaces/{workspaceId}/anomalydetectors/{anomalyDetectorId}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.amp#PutAnomalyDetectorRequest": {
+            "type": "structure",
+            "members": {
+                "workspaceId": {
+                    "target": "com.amazonaws.amp#WorkspaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the workspace containing the anomaly detector to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "anomalyDetectorId": {
+                    "target": "com.amazonaws.amp#AnomalyDetectorId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the anomaly detector to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "evaluationIntervalInSeconds": {
+                    "target": "com.amazonaws.amp#AnomalyDetectorEvaluationInterval",
+                    "traits": {
+                        "smithy.api#default": 60,
+                        "smithy.api#documentation": "<p>The frequency, in seconds, at which the anomaly detector evaluates metrics.</p>"
+                    }
+                },
+                "missingDataAction": {
+                    "target": "com.amazonaws.amp#AnomalyDetectorMissingDataAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the action to take when data is missing during evaluation.</p>"
+                    }
+                },
+                "configuration": {
+                    "target": "com.amazonaws.amp#AnomalyDetectorConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The algorithm configuration for the anomaly detector.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "labels": {
+                    "target": "com.amazonaws.amp#PrometheusMetricLabelMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Managed Service for Prometheus metric labels to associate with the anomaly detector.</p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.amp#IdempotencyToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.amp#PutAnomalyDetectorResponse": {
+            "type": "structure",
+            "members": {
+                "anomalyDetectorId": {
+                    "target": "com.amazonaws.amp#AnomalyDetectorId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the updated anomaly detector.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.amp#AnomalyDetectorArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the updated anomaly detector.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.amp#AnomalyDetectorStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status information of the updated anomaly detector.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.amp#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags applied to the updated anomaly detector.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.amp#PutResourcePolicy": {
@@ -4115,7 +5365,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates an existing rule groups namespace within a workspace. A rule groups namespace is associated with exactly one rules file. A workspace can have multiple rule groups namespaces.</p> <p>Use this operation only to update existing rule groups namespaces. To create a new rule groups namespace, use <code>CreateRuleGroupsNamespace</code>.</p> <p>You can't use this operation to add tags to an existing rule groups namespace. Instead, use <code>TagResource</code>.</p>",
+                "smithy.api#documentation": "<p>Updates an existing rule groups namespace within a workspace. A rule groups namespace is associated with exactly one rules file. A workspace can have multiple rule groups namespaces.</p> <important> <p>The combined length of a rule group namespace and a rule group name cannot exceed 721 UTF-8 bytes.</p> </important> <p>Use this operation only to update existing rule groups namespaces. To create a new rule groups namespace, use <code>CreateRuleGroupsNamespace</code>.</p> <p>You can't use this operation to add tags to an existing rule groups namespace. Instead, use <code>TagResource</code>.</p>",
                 "smithy.api#http": {
                     "code": 202,
                     "method": "PUT",
@@ -4321,6 +5571,64 @@
                         "documentation": "Query logging configuration update failed."
                     }
                 ]
+            }
+        },
+        "com.amazonaws.amp#RandomCutForestConfiguration": {
+            "type": "structure",
+            "members": {
+                "query": {
+                    "target": "com.amazonaws.amp#RandomCutForestQuery",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Prometheus query used to retrieve the time-series data for anomaly detection.</p> <important> <p>Random Cut Forest queries must be wrapped by a supported PromQL aggregation operator. For more information, see <a href=\"https://prometheus.io/docs/prometheus/latest/querying/operators/#aggregation-operators\">Aggregation operators</a> on the <i>Prometheus docs</i> website.</p> <p> <b>Supported PromQL aggregation operators</b>: <code>avg</code>, <code>count</code>, <code>group</code>, <code>max</code>, <code>min</code>, <code>quantile</code>, <code>stddev</code>, <code>stdvar</code>, and <code>sum</code>.</p> </important>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "shingleSize": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#default": 8,
+                        "smithy.api#documentation": "<p>The number of consecutive data points used to create a shingle for the Random Cut Forest algorithm. The default number is 8 consecutive data points.</p>",
+                        "smithy.api#range": {
+                            "min": 2,
+                            "max": 1024
+                        }
+                    }
+                },
+                "sampleSize": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#default": 256,
+                        "smithy.api#documentation": "<p>The number of data points sampled from the input stream for the Random Cut Forest algorithm. The default number is 256 consecutive data points.</p>",
+                        "smithy.api#range": {
+                            "min": 256,
+                            "max": 1024
+                        }
+                    }
+                },
+                "ignoreNearExpectedFromAbove": {
+                    "target": "com.amazonaws.amp#IgnoreNearExpected",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for ignoring values that are near expected values from above during anomaly detection.</p>"
+                    }
+                },
+                "ignoreNearExpectedFromBelow": {
+                    "target": "com.amazonaws.amp#IgnoreNearExpected",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for ignoring values that are near expected values from below during anomaly detection.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for the Random Cut Forest algorithm used for anomaly detection in time-series data.</p>"
+            }
+        },
+        "com.amazonaws.amp#RandomCutForestQuery": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 8192
+                }
             }
         },
         "com.amazonaws.amp#ResourceNotFoundException": {
@@ -4652,7 +5960,7 @@
                 "aws.api#arn": {
                     "template": "scraper/{scraperId}"
                 },
-                "smithy.api#documentation": "<p>A scraper is a fully-managed agentless collector that discovers and pulls metrics automatically. A scraper pulls metrics from Prometheus-compatible sources within an Amazon EKS cluster, and sends them to your Amazon Managed Service for Prometheus workspace. Scrapers are flexible. You can configure the scraper to control what metrics are collected, the frequency of collection, what transformations are applied to the metrics, and more.</p> <p>An IAM role will be created for you that Amazon Managed Service for Prometheus uses to access the metrics in your cluster. You must configure this role with a policy that allows it to scrape metrics from your cluster. For more information, see <a href=\"https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-collector-how-to.html#AMP-collector-eks-setup\">Configuring your Amazon EKS cluster</a> in the <i>Amazon Managed Service for Prometheus User Guide</i>.</p> <p>The <code>scrapeConfiguration</code> parameter contains the YAML configuration for the scraper.</p> <note> <p>For more information about collectors, including what metrics are collected, and how to configure the scraper, see <a href=\"https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-collector-how-to.html\">Using an Amazon Web Services managed collector</a> in the <i>Amazon Managed Service for Prometheus User Guide</i>.</p> </note>"
+                "smithy.api#documentation": "<p>A scraper is a fully-managed agentless collector that discovers and pulls metrics automatically. The scraper pulls metrics from Prometheus-compatible sources in Amazon EKS clusters or Amazon MSK clusters. It can also scrape VPC-based sources that support DNS-based service discovery. The scraper sends metrics to Amazon Managed Service for Prometheus workspaces or CloudWatch datasets. Scrapers are flexible. You can configure the scraper to control which metrics to collect, the frequency of collection, which transformations to apply to the metrics, and more.</p> <p>An IAM role will be created for you that Amazon Managed Service for Prometheus uses to access the metrics in your source. You must configure this role with a policy that allows it to scrape metrics from your source. For Amazon EKS sources, see <a href=\"https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-collector-how-to.html#AMP-collector-eks-setup\">Configuring your Amazon EKS cluster</a> in the <i>Amazon Managed Service for Prometheus User Guide</i>.</p> <p>The <code>scrapeConfiguration</code> parameter contains the YAML configuration for the scraper.</p> <note> <p>For more information about collectors, including what metrics are collected, and how to configure the scraper, see <a href=\"https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-collector-how-to.html\">Using an Amazon Web Services managed collector</a> in the <i>Amazon Managed Service for Prometheus User Guide</i>.</p> </note>"
             }
         },
         "com.amazonaws.amp#ScraperAlias": {
@@ -4812,7 +6120,7 @@
                 "destination": {
                     "target": "com.amazonaws.amp#Destination",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Managed Service for Prometheus workspace the scraper sends metrics to.</p>",
+                        "smithy.api#documentation": "<p>The destination where the scraper sends metrics. Valid destinations are Amazon Managed Service for Prometheus workspaces and CloudWatch datasets.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4820,6 +6128,12 @@
                     "target": "com.amazonaws.amp#RoleConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>This structure displays information about the IAM roles used for cross-account scraping configuration.</p>"
+                    }
+                },
+                "exporters": {
+                    "target": "com.amazonaws.amp#ExporterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The exporter configurations for the scraper, if configured. The list contains at most one configuration for an Amazon OpenSearch Service domain.</p>"
                     }
                 }
             },
@@ -5093,7 +6407,7 @@
                 "destination": {
                     "target": "com.amazonaws.amp#Destination",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Managed Service for Prometheus workspace the scraper sends metrics to.</p>",
+                        "smithy.api#documentation": "<p>The destination where the scraper sends metrics. Valid destinations are Amazon Managed Service for Prometheus workspaces and CloudWatch datasets.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5101,6 +6415,12 @@
                     "target": "com.amazonaws.amp#RoleConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>This structure displays information about the IAM roles used for cross-account scraping configuration.</p>"
+                    }
+                },
+                "exporters": {
+                    "target": "com.amazonaws.amp#ExporterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The exporter configurations for the scraper, if configured. The list contains at most one configuration for an Amazon OpenSearch Service domain.</p>"
                     }
                 }
             },
@@ -5198,6 +6518,12 @@
                     "target": "com.amazonaws.amp#EksConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon EKS cluster from which a scraper collects metrics.</p>"
+                    }
+                },
+                "vpcConfiguration": {
+                    "target": "com.amazonaws.amp#VpcConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon VPC configuration for the Prometheus collector when connecting to Amazon MSK clusters. This configuration enables secure, private network connectivity between the collector and your Amazon MSK cluster within your Amazon VPC.</p>"
                     }
                 }
             },
@@ -5782,7 +7108,7 @@
                 "destination": {
                     "target": "com.amazonaws.amp#Destination",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new Amazon Managed Service for Prometheus workspace to send metrics to.</p>"
+                        "smithy.api#documentation": "<p>The new destination where the scraper sends metrics. Valid destinations are Amazon Managed Service for Prometheus workspaces and CloudWatch datasets.</p>"
                     }
                 },
                 "roleConfiguration": {
@@ -5796,6 +7122,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A unique identifier that you can provide to ensure the idempotency of the request. Case-sensitive.</p>",
                         "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "exporters": {
+                    "target": "com.amazonaws.amp#ExporterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The exporter configurations for the scraper. You can configure at most one Amazon OpenSearch Service domain. If you don't specify a value, the existing exporter configuration remains unchanged.</p>"
                     }
                 }
             },
@@ -5981,6 +7313,24 @@
                             "min": 1
                         }
                     }
+                },
+                "outOfOrderTimeWindowInSeconds": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the time window in seconds for accepting out of order samples. Out of order samples older than this window are rejected.</p>",
+                        "smithy.api#range": {
+                            "min": 0
+                        }
+                    }
+                },
+                "ruleQueryOffsetInSeconds": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the duration in seconds to offset rule evaluation queries into the past. This allows ingested samples to be available before rule evaluation.</p>",
+                        "smithy.api#range": {
+                            "min": 0
+                        }
+                    }
                 }
             },
             "traits": {
@@ -6096,6 +7446,28 @@
                 ]
             }
         },
+        "com.amazonaws.amp#VpcConfiguration": {
+            "type": "structure",
+            "members": {
+                "securityGroupIds": {
+                    "target": "com.amazonaws.amp#SecurityGroupIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The security group IDs that control network access for the Prometheus collector. These security groups must allow the collector to communicate with your Amazon MSK cluster on the required ports.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "subnetIds": {
+                    "target": "com.amazonaws.amp#SubnetIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The subnet IDs where the Prometheus collector will be deployed. The subnets must be in the same Amazon VPC as your Amazon MSK cluster and have network connectivity to the cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon VPC configuration that specifies the network settings for a Prometheus collector to securely connect to Amazon MSK clusters. This configuration includes the security groups and subnets that control network access and placement for the collector.</p>"
+            }
+        },
         "com.amazonaws.amp#Workspace": {
             "type": "resource",
             "identifiers": {
@@ -6121,6 +7493,9 @@
             "resources": [
                 {
                     "target": "com.amazonaws.amp#AlertManagerDefinition"
+                },
+                {
+                    "target": "com.amazonaws.amp#AnomalyDetector"
                 },
                 {
                     "target": "com.amazonaws.amp#LoggingConfiguration"
@@ -6208,6 +7583,24 @@
                         "smithy.api#documentation": "<p>This field displays how many days that metrics are retained in the workspace.</p>",
                         "smithy.api#range": {
                             "min": 1
+                        }
+                    }
+                },
+                "outOfOrderTimeWindowInSeconds": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This field displays the out of order time window in seconds for accepting out of order samples.</p>",
+                        "smithy.api#range": {
+                            "min": 0
+                        }
+                    }
+                },
+                "ruleQueryOffsetInSeconds": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This field displays the duration in seconds that rule evaluation queries are offset into the past.</p>",
+                        "smithy.api#range": {
+                            "min": 0
                         }
                     }
                 }

@@ -144,18 +144,18 @@ module Aws::Rbin
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -213,18 +213,18 @@ module Aws::Rbin
     #          <ul>
     #             <li>
     #                <p>
-    #                   <b>Tag-level retention rules</b> - These retention rules use 
-    #           resource tags to identify the resources to protect. For each retention rule, you specify one or 
-    #           more tag key and value pairs. Resources (of the specified type) that have at least one of these 
-    #           tag key and value pairs are automatically retained in the Recycle Bin upon deletion. Use this 
+    #                   <b>Tag-level retention rules</b> - These retention rules use
+    #           resource tags to identify the resources to protect. For each retention rule, you specify one or
+    #           more tag key and value pairs. Resources (of the specified type) that have at least one of these
+    #           tag key and value pairs are automatically retained in the Recycle Bin upon deletion. Use this
     #           type of retention rule to protect specific resources in your account based on their tags.</p>
     #             </li>
     #             <li>
     #                <p>
-    #                   <b>Region-level retention rules</b> - These retention rules, 
-    #           by default, apply to all of the resources (of the specified type) in the Region, even if the 
-    #           resources are not tagged. However, you can specify exclusion tags to exclude resources that have 
-    #           specific tags. Use this type of retention rule to protect all resources of a specific type in a 
+    #                   <b>Region-level retention rules</b> - These retention rules,
+    #           by default, apply to all of the resources (of the specified type) in the Region, even if the
+    #           resources are not tagged. However, you can specify exclusion tags to exclude resources that have
+    #           specific tags. Use this type of retention rule to protect all resources of a specific type in a
     #           Region.</p>
     #             </li>
     #          </ul>
@@ -232,29 +232,41 @@ module Aws::Rbin
     #       Create Recycle Bin retention rules</a> in the <i>Amazon EBS User Guide</i>.</p>
     # @param [Hash, Types::CreateRuleRequest] params
     # @option params [Types::RetentionPeriod] :retention_period
-    #   <p>Information about the retention period for which the retention rule is to retain resources.</p>
+    #   <p>Information about the retention period for which the retention rule is to
+    #     retain resources.</p>
     # @option params [String] :description
     #   <p>The retention rule description.</p>
     # @option params [Array<Types::Tag>] :tags
     #   <p>Information about the tags to assign to the retention rule.</p>
     # @option params [String] :resource_type
-    #   <p>The resource type to be retained by the retention rule. Currently, only Amazon EBS snapshots 
-    #         and EBS-backed AMIs are supported. To retain snapshots, specify <code>EBS_SNAPSHOT</code>. To 
-    #         retain EBS-backed AMIs, specify <code>EC2_IMAGE</code>.</p>
+    #   <p>The resource type to be retained by the retention rule. Currently, only EBS volumes, EBS snapshots, and EBS-backed AMIs
+    #         are supported.</p>
+    #            <ul>
+    #               <li>
+    #                  <p>To retain EBS volumes, specify <code>EBS_VOLUME</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>To retain EBS snapshots, specify <code>EBS_SNAPSHOT</code>
+    #                  </p>
+    #               </li>
+    #               <li>
+    #                  <p>To retain EBS-backed AMIs, specify <code>EC2_IMAGE</code>.</p>
+    #               </li>
+    #            </ul>
     # @option params [Array<Types::ResourceTag>] :resource_tags
-    #   <p>[Tag-level retention rules only] Specifies the resource tags to use to identify resources that are to be retained by a 
-    #     tag-level retention rule. For tag-level retention rules, only deleted resources, of the specified resource type, that 
-    #     have one or more of the specified tag key and value pairs are retained. If a resource is deleted, but it does not have 
+    #   <p>[Tag-level retention rules only] Specifies the resource tags to use to identify resources that are to be retained by a
+    #     tag-level retention rule. For tag-level retention rules, only deleted resources, of the specified resource type, that
+    #     have one or more of the specified tag key and value pairs are retained. If a resource is deleted, but it does not have
     #     any of the specified tag key and value pairs, it is immediately deleted without being retained by the retention rule.</p>
     #            <p>You can add the same tag key and value pair to a maximum or five retention rules.</p>
-    #            <p>To create a Region-level retention rule, omit this parameter. A Region-level retention rule 
-    #         does not have any resource tags specified. It retains all deleted resources of the specified 
+    #            <p>To create a Region-level retention rule, omit this parameter. A Region-level retention rule
+    #         does not have any resource tags specified. It retains all deleted resources of the specified
     #         resource type in the Region in which the rule is created, even if the resources are not tagged.</p>
     # @option params [Types::LockConfiguration] :lock_configuration
     #   <p>Information about the retention rule lock configuration.</p>
     # @option params [Array<Types::ResourceTag>] :exclude_resource_tags
-    #   <p>[Region-level retention rules only] Specifies the exclusion tags to use to identify resources that are to be excluded, 
-    #   or ignored, by a Region-level retention rule. Resources that have any of these tags are not retained by the retention rule 
+    #   <p>[Region-level retention rules only] Specifies the exclusion tags to use to identify resources that are to be excluded,
+    #   or ignored, by a Region-level retention rule. Resources that have any of these tags are not retained by the retention rule
     #   upon deletion.</p>
     #            <p>You can't specify exclusion tags for tag-level retention rules.</p>
     # @example Request syntax with placeholder values
@@ -270,7 +282,7 @@ module Aws::Rbin
     #         value: "TagValue", # required
     #       }
     #     ],
-    #     resource_type: "EBS_SNAPSHOT" # One of: ["EBS_SNAPSHOT", "EC2_IMAGE"], # required
+    #     resource_type: "EBS_SNAPSHOT" # One of: ["EBS_SNAPSHOT", "EC2_IMAGE", "EBS_VOLUME"], # required
     #     resource_tags: [
     #       {
     #         resource_tag_key: "ResourceTagKey", # required
@@ -307,7 +319,7 @@ module Aws::Rbin
     #         value: "TagValue", # required
     #       }
     #     ],
-    #     resource_type: "EBS_SNAPSHOT" # One of: ["EBS_SNAPSHOT", "EC2_IMAGE"],
+    #     resource_type: "EBS_SNAPSHOT" # One of: ["EBS_SNAPSHOT", "EC2_IMAGE", "EBS_VOLUME"],
     #     resource_tags: [
     #       {
     #         resource_tag_key: "ResourceTagKey", # required
@@ -371,7 +383,7 @@ module Aws::Rbin
     #   {
     #     identifier: "RuleIdentifier",
     #     description: "Description",
-    #     resource_type: "EBS_SNAPSHOT" # One of: ["EBS_SNAPSHOT", "EC2_IMAGE"],
+    #     resource_type: "EBS_SNAPSHOT" # One of: ["EBS_SNAPSHOT", "EC2_IMAGE", "EBS_VOLUME"],
     #     retention_period: {
     #       retention_period_value: 1, # required
     #       retention_period_unit: "DAYS" # One of: ["DAYS"], # required
@@ -413,25 +425,33 @@ module Aws::Rbin
     # @option params [String] :next_token
     #   <p>The token for the next page of results.</p>
     # @option params [String] :resource_type
-    #   <p>The resource type retained by the retention rule. Only retention rules that retain 
-    #         the specified resource type are listed. Currently, only Amazon EBS snapshots and EBS-backed 
-    #         AMIs are supported. To list retention rules that retain snapshots, specify 
-    #         <code>EBS_SNAPSHOT</code>. To list retention rules that retain EBS-backed AMIs, specify 
-    #         <code>EC2_IMAGE</code>.</p>
+    #   <p>The resource type retained by the retention rule. Only retention rules that retain
+    #         the specified resource type are listed. Currently, only EBS volumes, EBS snapshots, and EBS-backed AMIs are supported.</p>
+    #            <ul>
+    #               <li>
+    #                  <p>To list retention rules that retain EBS volumes, specify <code>EBS_VOLUME</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>To list retention rules that retain EBS snapshots, specify <code>EBS_SNAPSHOT</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>To list retention rules that retain EBS-backed AMIs, specify <code>EC2_IMAGE</code>.</p>
+    #               </li>
+    #            </ul>
     # @option params [Array<Types::ResourceTag>] :resource_tags
-    #   <p>[Tag-level retention rules only] Information about the resource tags used to identify resources that are retained by the retention 
+    #   <p>[Tag-level retention rules only] Information about the resource tags used to identify resources that are retained by the retention
     #         rule.</p>
     # @option params [String] :lock_state
-    #   <p>The lock state of the retention rules to list. Only retention rules with the specified 
+    #   <p>The lock state of the retention rules to list. Only retention rules with the specified
     #         lock state are returned.</p>
     # @option params [Array<Types::ResourceTag>] :exclude_resource_tags
-    #   <p>[Region-level retention rules only] Information about the exclusion tags used to identify resources that are to be 
+    #   <p>[Region-level retention rules only] Information about the exclusion tags used to identify resources that are to be
     #   excluded, or ignored, by the retention rule.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     max_results: 1,
     #     next_token: "NextToken",
-    #     resource_type: "EBS_SNAPSHOT" # One of: ["EBS_SNAPSHOT", "EC2_IMAGE"], # required
+    #     resource_type: "EBS_SNAPSHOT" # One of: ["EBS_SNAPSHOT", "EC2_IMAGE", "EBS_VOLUME"], # required
     #     resource_tags: [
     #       {
     #         resource_tag_key: "ResourceTagKey", # required
@@ -497,10 +517,10 @@ module Aws::Rbin
       request.send_request(options)
     end
 
-    # <p>Locks a Region-level retention rule. A locked retention rule can't be modified or 
+    # <p>Locks a Region-level retention rule. A locked retention rule can't be modified or
     #       deleted.</p>
     #          <note>
-    #             <p>You can't lock tag-level retention rules, or Region-level retention rules that 
+    #             <p>You can't lock tag-level retention rules, or Region-level retention rules that
     #         have exclusion tags.</p>
     #          </note>
     # @param [Hash, Types::LockRuleRequest] params
@@ -525,7 +545,7 @@ module Aws::Rbin
     #   {
     #     identifier: "RuleIdentifier",
     #     description: "Description",
-    #     resource_type: "EBS_SNAPSHOT" # One of: ["EBS_SNAPSHOT", "EC2_IMAGE"],
+    #     resource_type: "EBS_SNAPSHOT" # One of: ["EBS_SNAPSHOT", "EC2_IMAGE", "EBS_VOLUME"],
     #     retention_period: {
     #       retention_period_value: 1, # required
     #       retention_period_unit: "DAYS" # One of: ["DAYS"], # required
@@ -585,7 +605,7 @@ module Aws::Rbin
       request.send_request(options)
     end
 
-    # <p>Unlocks a retention rule. After a retention rule is unlocked, it can be modified or deleted 
+    # <p>Unlocks a retention rule. After a retention rule is unlocked, it can be modified or deleted
     #       only after the unlock delay period expires.</p>
     # @param [Hash, Types::UnlockRuleRequest] params
     # @option params [String] :identifier
@@ -601,7 +621,7 @@ module Aws::Rbin
     #   {
     #     identifier: "RuleIdentifier",
     #     description: "Description",
-    #     resource_type: "EBS_SNAPSHOT" # One of: ["EBS_SNAPSHOT", "EC2_IMAGE"],
+    #     resource_type: "EBS_SNAPSHOT" # One of: ["EBS_SNAPSHOT", "EC2_IMAGE", "EBS_VOLUME"],
     #     retention_period: {
     #       retention_period_value: 1, # required
     #       retention_period_unit: "DAYS" # One of: ["DAYS"], # required
@@ -657,34 +677,35 @@ module Aws::Rbin
       request.send_request(options)
     end
 
-    # <p>Updates an existing Recycle Bin retention rule. You can update a retention rule's description, 
-    #       resource tags, and retention period at any time after creation. You can't update a retention rule's 
+    # <p>Updates an existing Recycle Bin retention rule. You can update a retention rule's description,
+    #       resource tags, and retention period at any time after creation. You can't update a retention rule's
     #       resource type after creation. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/recycle-bin-working-with-rules.html#recycle-bin-update-rule">
     #       Update Recycle Bin retention rules</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
     # @param [Hash, Types::UpdateRuleRequest] params
     # @option params [String] :identifier
     #   <p>The unique ID of the retention rule.</p>
     # @option params [Types::RetentionPeriod] :retention_period
-    #   <p>Information about the retention period for which the retention rule is to retain resources.</p>
+    #   <p>Information about the retention period for which the retention rule is to
+    #     retain resources.</p>
     # @option params [String] :description
     #   <p>The retention rule description.</p>
     # @option params [String] :resource_type
     #   <note>
-    #               <p>This parameter is currently not supported. You can't update a retention rule's resource type 
+    #               <p>This parameter is currently not supported. You can't update a retention rule's resource type
     #         after creation.</p>
     #            </note>
     # @option params [Array<Types::ResourceTag>] :resource_tags
-    #   <p>[Tag-level retention rules only] Specifies the resource tags to use to identify resources that are to be retained by a 
-    #     tag-level retention rule. For tag-level retention rules, only deleted resources, of the specified resource type, that 
-    #     have one or more of the specified tag key and value pairs are retained. If a resource is deleted, but it does not have 
+    #   <p>[Tag-level retention rules only] Specifies the resource tags to use to identify resources that are to be retained by a
+    #     tag-level retention rule. For tag-level retention rules, only deleted resources, of the specified resource type, that
+    #     have one or more of the specified tag key and value pairs are retained. If a resource is deleted, but it does not have
     #     any of the specified tag key and value pairs, it is immediately deleted without being retained by the retention rule.</p>
     #            <p>You can add the same tag key and value pair to a maximum or five retention rules.</p>
-    #            <p>To create a Region-level retention rule, omit this parameter. A Region-level retention rule 
-    #         does not have any resource tags specified. It retains all deleted resources of the specified 
+    #            <p>To create a Region-level retention rule, omit this parameter. A Region-level retention rule
+    #         does not have any resource tags specified. It retains all deleted resources of the specified
     #         resource type in the Region in which the rule is created, even if the resources are not tagged.</p>
     # @option params [Array<Types::ResourceTag>] :exclude_resource_tags
-    #   <p>[Region-level retention rules only] Specifies the exclusion tags to use to identify resources that are to be excluded, 
-    #   or ignored, by a Region-level retention rule. Resources that have any of these tags are not retained by the retention rule 
+    #   <p>[Region-level retention rules only] Specifies the exclusion tags to use to identify resources that are to be excluded,
+    #   or ignored, by a Region-level retention rule. Resources that have any of these tags are not retained by the retention rule
     #   upon deletion.</p>
     #            <p>You can't specify exclusion tags for tag-level retention rules.</p>
     # @example Request syntax with placeholder values
@@ -695,7 +716,7 @@ module Aws::Rbin
     #       retention_period_unit: "DAYS" # One of: ["DAYS"], # required
     #     },
     #     description: "Description",
-    #     resource_type: "EBS_SNAPSHOT" # One of: ["EBS_SNAPSHOT", "EC2_IMAGE"],
+    #     resource_type: "EBS_SNAPSHOT" # One of: ["EBS_SNAPSHOT", "EC2_IMAGE", "EBS_VOLUME"],
     #     resource_tags: [
     #       {
     #         resource_tag_key: "ResourceTagKey", # required
@@ -720,7 +741,7 @@ module Aws::Rbin
     #       retention_period_unit: "DAYS" # One of: ["DAYS"], # required
     #     },
     #     description: "Description",
-    #     resource_type: "EBS_SNAPSHOT" # One of: ["EBS_SNAPSHOT", "EC2_IMAGE"],
+    #     resource_type: "EBS_SNAPSHOT" # One of: ["EBS_SNAPSHOT", "EC2_IMAGE", "EBS_VOLUME"],
     #     resource_tags: [
     #       {
     #         resource_tag_key: "ResourceTagKey", # required

@@ -9,6 +9,8 @@ module Aws::PCS
     AmiId: StringShape
     Arn: StringShape
     BootstrapId: StringShape
+    CgroupCustomSetting: StructureShape
+    CgroupCustomSettings: ListShape
     Cluster: StructureShape
     ClusterIdentifier: StringShape
     ClusterList: ListShape
@@ -46,16 +48,21 @@ module Aws::PCS
     Endpoints: ListShape
     ErrorInfo: StructureShape
     ErrorInfoList: ListShape
+    ExecutionPolicy: EnumShape
     GetClusterRequest: StructureShape
     GetClusterResponse: StructureShape
     GetComputeNodeGroupRequest: StructureShape
     GetComputeNodeGroupResponse: StructureShape
     GetQueueRequest: StructureShape
     GetQueueResponse: StructureShape
+    GresCustomSettingMap: MapShape
+    GresCustomSettings: ListShape
     InstanceConfig: StructureShape
     InstanceList: ListShape
     InstanceProfileArn: StringShape
     InternalServerException: StructureShape
+    JwtAuth: StructureShape
+    JwtKey: StructureShape
     ListClustersRequest: StructureShape
     ListClustersResponse: StructureShape
     ListComputeNodeGroupsRequest: StructureShape
@@ -68,6 +75,14 @@ module Aws::PCS
     NetworkType: EnumShape
     Networking: StructureShape
     NetworkingRequest: StructureShape
+    NodeLifecycleActions: StructureShape
+    NodeLifecycleActionsRequest: StructureShape
+    NodeLifecycleScript: StructureShape
+    NodeLifecycleScriptArgument: StringShape
+    NodeLifecycleScriptArguments: ListShape
+    NodeLifecycleScriptList: ListShape
+    NodeLifecycleStages: StructureShape
+    OnError: EnumShape
     PurchaseOption: EnumShape
     Queue: StructureShape
     QueueIdentifier: StringShape
@@ -88,6 +103,8 @@ module Aws::PCS
     Scheduler: StructureShape
     SchedulerRequest: StructureShape
     SchedulerType: EnumShape
+    ScriptCachingPolicy: EnumShape
+    ScriptSource: StructureShape
     SecurityGroupId: StringShape
     SecurityGroupIdList: ListShape
     ServiceQuotaExceededException: StructureShape
@@ -96,6 +113,11 @@ module Aws::PCS
     SlurmAuthKey: StructureShape
     SlurmCustomSetting: StructureShape
     SlurmCustomSettings: ListShape
+    SlurmRest: StructureShape
+    SlurmRestMode: EnumShape
+    SlurmRestRequest: StructureShape
+    SlurmdbdCustomSetting: StructureShape
+    SlurmdbdCustomSettings: ListShape
     SpotAllocationStrategy: EnumShape
     SpotOptions: StructureShape
     StringList: ListShape
@@ -104,9 +126,11 @@ module Aws::PCS
     TagKey: StringShape
     TagKeys: ListShape
     TagResourceRequest: StructureShape
+    TagResourceResponse: StructureShape
     TagValue: StringShape
     ThrottlingException: StructureShape
     UntagResourceRequest: StructureShape
+    UntagResourceResponse: StructureShape
     UpdateAccountingRequest: StructureShape
     UpdateClusterRequest: StructureShape
     UpdateClusterResponse: StructureShape
@@ -114,9 +138,12 @@ module Aws::PCS
     UpdateComputeNodeGroupRequest: StructureShape
     UpdateComputeNodeGroupResponse: StructureShape
     UpdateComputeNodeGroupSlurmConfigurationRequest: StructureShape
+    UpdateNodeLifecycleActionsRequest: StructureShape
     UpdateQueueRequest: StructureShape
     UpdateQueueResponse: StructureShape
     UpdateQueueSlurmConfigurationRequest: StructureShape
+    UpdateSchedulerRequest: StructureShape
+    UpdateSlurmRestRequest: StructureShape
     ValidationException: StructureShape
     ValidationExceptionField: StructureShape
     ValidationExceptionFieldList: ListShape

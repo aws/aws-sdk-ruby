@@ -144,18 +144,18 @@ module Aws::PinpointSMSVoiceV2
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -212,18 +212,18 @@ module Aws::PinpointSMSVoiceV2
     # <p>Associates the specified origination identity with a pool.</p> <p>If the origination identity is a phone number and is already associated with another pool, an error is returned. A sender ID can be associated with multiple pools.</p> <p>If the origination identity configuration doesn't match the pool's configuration, an error is returned.</p>
     # @param [Hash, Types::AssociateOriginationIdentityRequest] params
     # @option params [String] :pool_id
-    #   <p>The pool to update with the new Identity. This value can be either the PoolId or PoolArn, and you can find these values using <a>DescribePools</a>.</p> <important> <p>If you are using a shared AWS End User Messaging SMS and Voice resource then you must use the full Amazon Resource Name(ARN).</p> </important>
+    #   <p>The pool to update with the new Identity. This value can be either the PoolId or PoolArn, and you can find these values using <a href="https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_DescribePools.html">DescribePools</a>.</p> <important> <p>If you are using a shared End User Messaging SMS; resource then you must use the full Amazon Resource Name(ARN).</p> </important>
     # @option params [String] :origination_identity
-    #   <p>The origination identity to use, such as PhoneNumberId, PhoneNumberArn, SenderId, or SenderIdArn. You can use <a>DescribePhoneNumbers</a> to find the values for PhoneNumberId and PhoneNumberArn, while <a>DescribeSenderIds</a> can be used to get the values for SenderId and SenderIdArn.</p> <important> <p>If you are using a shared AWS End User Messaging SMS and Voice resource then you must use the full Amazon Resource Name(ARN).</p> </important>
+    #   <p>The origination identity to use, such as PhoneNumberId, PhoneNumberArn, SenderId, or SenderIdArn. You can use <a>DescribePhoneNumbers</a> to find the values for PhoneNumberId and PhoneNumberArn, while <a>DescribeSenderIds</a> can be used to get the values for SenderId and SenderIdArn.</p> <important> <p>If you are using a shared End User Messaging SMS resource then you must use the full Amazon Resource Name(ARN).</p> </important>
     # @option params [String] :iso_country_code
-    #   <p>The new two-character code, in ISO 3166-1 alpha-2 format, for the country or region of the origination identity.</p>
+    #   <p>The new two-character code, in ISO 3166-1 alpha-2 format, for the country or region of the origination identity. This field is optional and is not required for origination identity types that are not country-specific, such as RCS agents.</p>
     # @option params [String] :client_token
     #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don't specify a client token, a randomly generated token is used for the request to ensure idempotency.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     pool_id: "PoolIdOrArn", # required
     #     origination_identity: "PhoneOrSenderIdOrArn", # required
-    #     iso_country_code: "IsoCountryCode", # required
+    #     iso_country_code: "IsoCountryCode",
     #     client_token: "ClientToken"
     #   }
     #   options = {}
@@ -267,6 +267,56 @@ module Aws::PinpointSMSVoiceV2
     # @return [Types::AssociateProtectConfigurationResult]
     def associate_protect_configuration(params = {}, options = {})
       request = build_request(:associate_protect_configuration, params)
+      request.send_request(options)
+    end
+
+    # <p>Returns information about a destination phone number, including whether the number type and whether it is valid, the carrier, and more.</p>
+    # @param [Hash, Types::CarrierLookupRequest] params
+    # @option params [String] :phone_number
+    #   <p>The phone number that you want to retrieve information about. You can provide the phone number in various formats including special characters such as parentheses, brackets, spaces, hyphens, periods, and commas. The service automatically converts the input to E164 format for processing.</p>
+    # @option params [Boolean] :enable_cleansing
+    #   <p>Specifies whether the service cleanses the phone number that you provide. When set to <code>true</code>, the service normalizes the phone number according to the destination country's national numbering plan and dialing rules. The service returns the cleansed number in E.164 format in the <code>E164PhoneNumber</code> field and returns the number that you provided in the <code>OriginalPhoneNumber</code> field.</p>
+    # @example Use CarrierLookup
+    #   # Call the CarrierLookup operation to get information about a customer provided phone number, including if the number is valid. The service accepts phone numbers with various formatting characters and returns the number in E164 format.
+    #   params = {
+    #     phone_number: "+1 (555) 555-5333"
+    #   }
+    #   options = {}
+    #   response = client.carrier_lookup(params, options)
+    #   response.to_h #=>
+    #   {
+    #     e164_phone_number: "+15555555333",
+    #     dialing_country_code: "1",
+    #     iso_country_code: "US",
+    #     country: "United States",
+    #     mcc: "310",
+    #     mnc: "260",
+    #     carrier: "ExampleCorp Mobile",
+    #     phone_number_type: "MOBILE"
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     phone_number: "CarrierLookupInputPhoneNumberType", # required
+    #     enable_cleansing: false
+    #   }
+    #   options = {}
+    #   response = client.carrier_lookup(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     e164_phone_number: "E164PhoneNumberType", # required
+    #     dialing_country_code: "DialingCountryCodeType",
+    #     iso_country_code: "IsoCountryCode",
+    #     country: "String",
+    #     mcc: "MCCType",
+    #     mnc: "MNCType",
+    #     carrier: "String",
+    #     phone_number_type: "PhoneNumberType", # required
+    #     original_phone_number: "CarrierLookupInputPhoneNumberType"
+    #   }
+    # @return [Types::CarrierLookupResult]
+    def carrier_lookup(params = {}, options = {})
+      request = build_request(:carrier_lookup, params)
       request.send_request(options)
     end
 
@@ -317,7 +367,7 @@ module Aws::PinpointSMSVoiceV2
     # @option params [String] :event_destination_name
     #   <p>The name that identifies the event destination.</p>
     # @option params [Array<String>] :matching_event_types
-    #   <p>An array of event types that determine which events to log. If "ALL" is used, then AWS End User Messaging SMS and Voice logs every event type.</p> <note> <p>The <code>TEXT_SENT</code> event type is not supported.</p> </note>
+    #   <p>An array of event types that determine which events to log. If "ALL" is used, then End User Messaging SMS logs every event type.</p> <note> <p>The <code>TEXT_SENT</code> event type is not supported.</p> </note>
     # @option params [Types::CloudWatchLogsDestination] :cloud_watch_logs_destination
     #   <p>An object that contains information about an event destination for logging to Amazon CloudWatch Logs.</p>
     # @option params [Types::KinesisFirehoseDestination] :kinesis_firehose_destination
@@ -374,7 +424,123 @@ module Aws::PinpointSMSVoiceV2
       request.send_request(options)
     end
 
-    # <p>Creates a new opt-out list.</p> <p>If the opt-out list name already exists, an error is returned.</p> <p>An opt-out list is a list of phone numbers that are opted out, meaning you can't send SMS or voice messages to them. If end user replies with the keyword "STOP," an entry for the phone number is added to the opt-out list. In addition to STOP, your recipients can use any supported opt-out keyword, such as CANCEL or OPTOUT. For a list of supported opt-out keywords, see <a href="https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-manage.html#channels-sms-manage-optout"> SMS opt out </a> in the <i>AWS End User Messaging SMS User Guide</i>.</p>
+    # <p>Creates a new notify configuration for managed messaging. A notify configuration defines the settings for sending templated messages, including the display name, use case, enabled channels, and enabled countries.</p>
+    # @param [Hash, Types::CreateNotifyConfigurationRequest] params
+    # @option params [String] :display_name
+    #   <p>The display name to associate with the notify configuration.</p>
+    # @option params [String] :use_case
+    #   <p>The use case for the notify configuration.</p>
+    # @option params [String] :default_template_id
+    #   <p>The default template identifier to associate with the notify configuration. If specified, this template is used when sending messages without an explicit template identifier.</p>
+    # @option params [String] :pool_id
+    #   <p>The identifier of the pool to associate with the notify configuration.</p>
+    # @option params [Array<String>] :enabled_countries
+    #   <p>An array of two-character ISO country codes, in ISO 3166-1 alpha-2 format, that are enabled for the notify configuration.</p>
+    # @option params [Array<String>] :enabled_channels
+    #   <p>An array of channels to enable for the notify configuration. Supported values include <code>SMS</code> and <code>VOICE</code>.</p>
+    # @option params [Boolean] :deletion_protection_enabled
+    #   <p>By default this is set to false. When set to true the notify configuration can't be deleted. You can change this value using the <a>UpdateNotifyConfiguration</a> action.</p>
+    # @option params [String] :client_token
+    #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don't specify a client token, a randomly generated token is used for the request to ensure idempotency.</p>
+    # @option params [Array<Types::Tag>] :tags
+    #   <p>An array of tags (key and value pairs) associated with the notify configuration.</p>
+    # @example CreateNotifyConfiguration
+    #   # Create a notify configuration for OTP code verification over SMS.
+    #   params = {
+    #     display_name: "MyOTPConfig",
+    #     use_case: "CODE_VERIFICATION",
+    #     enabled_channels: [
+    #       "SMS"
+    #     ],
+    #     enabled_countries: [
+    #       "US",
+    #       "CA"
+    #     ],
+    #     deletion_protection_enabled: false,
+    #     tags: [
+    #       {
+    #         key: "Environment",
+    #         value: "Production"
+    #       }
+    #     ]
+    #   }
+    #   options = {}
+    #   response = client.create_notify_configuration(params, options)
+    #   response.to_h #=>
+    #   {
+    #     notify_configuration_arn: "arn:aws:sms-voice:us-east-1:111122223333:notify-configuration/nc-1234567890abcdef0",
+    #     notify_configuration_id: "nc-1234567890abcdef0",
+    #     display_name: "MyOTPConfig",
+    #     use_case: "CODE_VERIFICATION",
+    #     enabled_channels: [
+    #       "SMS"
+    #     ],
+    #     enabled_countries: [
+    #       "US",
+    #       "CA"
+    #     ],
+    #     tier: "BASIC",
+    #     tier_upgrade_status: "BASIC",
+    #     status: "ACTIVE",
+    #     deletion_protection_enabled: false,
+    #     tags: [
+    #       {
+    #         key: "Environment",
+    #         value: "Production"
+    #       }
+    #     ],
+    #     created_timestamp: Time.parse(1704067200)
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     display_name: "NotifyConfigurationDisplayName", # required
+    #     use_case: "NotifyConfigurationUseCase", # required
+    #     default_template_id: "NotifyTemplateId",
+    #     pool_id: "PoolIdOrArn",
+    #     enabled_countries: ["IsoCountryCode"],
+    #     enabled_channels: ["NumberCapability"], # required
+    #     deletion_protection_enabled: false,
+    #     client_token: "ClientToken",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       }
+    #     ]
+    #   }
+    #   options = {}
+    #   response = client.create_notify_configuration(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     notify_configuration_arn: "NotifyConfigurationArn", # required
+    #     notify_configuration_id: "NotifyConfigurationId", # required
+    #     display_name: "NotifyConfigurationDisplayName", # required
+    #     use_case: "NotifyConfigurationUseCase", # required
+    #     default_template_id: "NotifyTemplateId",
+    #     pool_id: "String",
+    #     enabled_countries: ["IsoCountryCode"],
+    #     enabled_channels: ["NumberCapability"], # required
+    #     tier: "NotifyConfigurationTier", # required
+    #     tier_upgrade_status: "TierUpgradeStatus", # required
+    #     status: "NotifyConfigurationStatus", # required
+    #     rejection_reason: "String",
+    #     deletion_protection_enabled: false, # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       }
+    #     ],
+    #     created_timestamp: Time.now, # required
+    #   }
+    # @return [Types::CreateNotifyConfigurationResult]
+    def create_notify_configuration(params = {}, options = {})
+      request = build_request(:create_notify_configuration, params)
+      request.send_request(options)
+    end
+
+    # <p>Creates a new opt-out list.</p> <p>If the opt-out list name already exists, an error is returned.</p> <p>An opt-out list is a list of phone numbers that are opted out, meaning you can't send SMS or voice messages to them. If end user replies with the keyword "STOP," an entry for the phone number is added to the opt-out list. In addition to STOP, your recipients can use any supported opt-out keyword, such as CANCEL or OPTOUT. For a list of supported opt-out keywords, see <a href="https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-manage.html#channels-sms-manage-optout"> SMS opt out </a> in the End User Messaging SMS User Guide.</p>
     # @param [Hash, Types::CreateOptOutListRequest] params
     # @option params [String] :opt_out_list_name
     #   <p>The name of the new OptOutList.</p>
@@ -417,13 +583,13 @@ module Aws::PinpointSMSVoiceV2
     # <p>Creates a new pool and associates the specified origination identity to the pool. A pool can include one or more phone numbers and SenderIds that are associated with your Amazon Web Services account.</p> <p>The new pool inherits its configuration from the specified origination identity. This includes keywords, message type, opt-out list, two-way configuration, and self-managed opt-out configuration. Deletion protection isn't inherited from the origination identity and defaults to false.</p> <p>If the origination identity is a phone number and is already associated with another pool, an error is returned. A sender ID can be associated with multiple pools.</p>
     # @param [Hash, Types::CreatePoolRequest] params
     # @option params [String] :origination_identity
-    #   <p>The origination identity to use such as a PhoneNumberId, PhoneNumberArn, SenderId or SenderIdArn. You can use <a>DescribePhoneNumbers</a> to find the values for PhoneNumberId and PhoneNumberArn while <a>DescribeSenderIds</a> can be used to get the values for SenderId and SenderIdArn.</p> <p>After the pool is created you can add more origination identities to the pool by using <a href="https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_AssociateOriginationIdentity.html">AssociateOriginationIdentity</a>.</p> <important> <p>If you are using a shared AWS End User Messaging SMS and Voice resource then you must use the full Amazon Resource Name(ARN).</p> </important>
+    #   <p>The origination identity to use such as a PhoneNumberId, PhoneNumberArn, SenderId or SenderIdArn. You can use <a href="https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_DescribePhoneNumbers.html">DescribePhoneNumbers</a> to find the values for PhoneNumberId and PhoneNumberArn, and use <a href="https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_DescribeSenderIds.html">DescribeSenderIds</a> can be used to get the values for SenderId and SenderIdArn.</p> <p>After the pool is created you can add more origination identities to the pool by using <a href="https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_AssociateOriginationIdentity.html">AssociateOriginationIdentity</a>.</p> <important> <p>If you are using a shared End User Messaging SMS resource then you must use the full Amazon Resource Name(ARN).</p> </important>
     # @option params [String] :iso_country_code
-    #   <p>The new two-character code, in ISO 3166-1 alpha-2 format, for the country or region of the new pool.</p>
+    #   <p>The new two-character code, in ISO 3166-1 alpha-2 format, for the country or region of the new pool. This field is optional and is not required for origination identity types that are not country-specific, such as RCS agents.</p>
     # @option params [String] :message_type
     #   <p>The type of message. Valid values are TRANSACTIONAL for messages that are critical or time-sensitive and PROMOTIONAL for messages that aren't critical or time-sensitive. After the pool is created the MessageType can't be changed.</p>
     # @option params [Boolean] :deletion_protection_enabled
-    #   <p>By default this is set to false. When set to true the pool can't be deleted. You can change this value using the <a>UpdatePool</a> action.</p>
+    #   <p>By default this is set to false. When set to true the pool can't be deleted. You can change this value using the <a href="https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_UpdatePool.html">UpdatePool</a> action.</p>
     # @option params [Array<Types::Tag>] :tags
     #   <p>An array of tags (key and value pairs) associated with the pool.</p>
     # @option params [String] :client_token
@@ -431,7 +597,7 @@ module Aws::PinpointSMSVoiceV2
     # @example Request syntax with placeholder values
     #   params = {
     #     origination_identity: "PhoneOrSenderIdOrArn", # required
-    #     iso_country_code: "IsoCountryCode", # required
+    #     iso_country_code: "IsoCountryCode",
     #     message_type: "MessageType", # required
     #     deletion_protection_enabled: false,
     #     tags: [
@@ -514,6 +680,60 @@ module Aws::PinpointSMSVoiceV2
       request.send_request(options)
     end
 
+    # <p>Creates a new RCS agent for sending rich messages through the RCS channel. The RCS agent serves as an origination identity for sending RCS messages to your recipients.</p>
+    # @param [Hash, Types::CreateRcsAgentRequest] params
+    # @option params [Boolean] :deletion_protection_enabled
+    #   <p>By default this is set to false. When set to true the RCS agent can't be deleted. You can change this value using the <a>UpdateRcsAgent</a> action.</p>
+    # @option params [String] :opt_out_list_name
+    #   <p>The OptOutList to associate with the RCS agent. Valid values are either OptOutListName or OptOutListArn.</p>
+    # @option params [Array<Types::Tag>] :tags
+    #   <p>An array of tags (key and value pairs) associated with the RCS agent.</p>
+    # @option params [String] :client_token
+    #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don't specify a client token, a randomly generated token is used for the request to ensure idempotency.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     deletion_protection_enabled: false,
+    #     opt_out_list_name: "OptOutListNameOrArn",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       }
+    #     ],
+    #     client_token: "ClientToken"
+    #   }
+    #   options = {}
+    #   response = client.create_rcs_agent(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     rcs_agent_arn: "String", # required
+    #     rcs_agent_id: "String", # required
+    #     status: "RcsAgentStatus", # required
+    #     deletion_protection_enabled: false, # required
+    #     opt_out_list_name: "OptOutListName",
+    #     created_timestamp: Time.now, # required
+    #     self_managed_opt_outs_enabled: false, # required
+    #     two_way_channel_arn: "TwoWayChannelArn",
+    #     two_way_channel_role: "IamRoleArn",
+    #     two_way_enabled: false, # required
+    #     two_way_media_s3_bucket_name: "TwoWayMediaS3BucketName",
+    #     two_way_media_s3_key_prefix: "TwoWayMediaS3KeyPrefix",
+    #     two_way_media_s3_role: "IamRoleArn",
+    #     two_way_rcs_events_enabled: ["RcsEventType"],
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       }
+    #     ]
+    #   }
+    # @return [Types::CreateRcsAgentResult]
+    def create_rcs_agent(params = {}, options = {})
+      request = build_request(:create_rcs_agent, params)
+      request.send_request(options)
+    end
+
     # <p>Creates a new registration based on the <b>RegistrationType</b> field. </p>
     # @param [Hash, Types::CreateRegistrationRequest] params
     # @option params [String] :registration_type
@@ -591,10 +811,10 @@ module Aws::PinpointSMSVoiceV2
       request.send_request(options)
     end
 
-    # <p>Create a new registration attachment to use for uploading a file or a URL to a file. The maximum file size is 500KB and valid file extensions are PDF, JPEG and PNG. For example, many sender ID registrations require a signed “letter of authorization” (LOA) to be submitted.</p> <p>Use either <code>AttachmentUrl</code> or <code>AttachmentBody</code> to upload your attachment. If both are specified then an exception is returned.</p>
+    # <p>Create a new registration attachment to use for uploading a file or a URL to a file. The maximum file size is 5MB and valid file extensions are PDF, JPEG and PNG. For example, many sender ID registrations require a signed “letter of authorization” (LOA) to be submitted.</p> <p>Use either <code>AttachmentUrl</code> or <code>AttachmentBody</code> to upload your attachment. If both are specified then an exception is returned.</p>
     # @param [Hash, Types::CreateRegistrationAttachmentRequest] params
     # @option params [String] :attachment_body
-    #   <p>The registration file to upload. The maximum file size is 500KB and valid file extensions are PDF, JPEG and PNG.</p>
+    #   <p>The registration file to upload. The maximum file size is 5MB and valid file extensions are PDF, JPEG and PNG.</p>
     # @option params [String] :attachment_url
     #   <p>Registration files have to be stored in an Amazon S3 bucket. The URI to use when sending is in the format <code>s3://BucketName/FileName</code>.</p>
     # @option params [Array<Types::Tag>] :tags
@@ -655,6 +875,7 @@ module Aws::PinpointSMSVoiceV2
     #     registration_version_status_history: { # required
     #       draft_timestamp: Time.now, # required
     #       submitted_timestamp: Time.now,
+    #       aws_reviewing_timestamp: Time.now,
     #       reviewing_timestamp: Time.now,
     #       requires_authentication_timestamp: Time.now,
     #       approved_timestamp: Time.now,
@@ -674,6 +895,8 @@ module Aws::PinpointSMSVoiceV2
     # @param [Hash, Types::CreateVerifiedDestinationNumberRequest] params
     # @option params [String] :destination_phone_number
     #   <p>The verified destination phone number, in E.164 format.</p>
+    # @option params [String] :rcs_agent_id
+    #   <p>The unique identifier of the RCS agent to associate with the verified destination number. You can use either the RcsAgentId or RcsAgentArn.</p>
     # @option params [Array<Types::Tag>] :tags
     #   <p>An array of tags (key and value pairs) to associate with the destination number.</p>
     # @option params [String] :client_token
@@ -681,6 +904,7 @@ module Aws::PinpointSMSVoiceV2
     # @example Request syntax with placeholder values
     #   params = {
     #     destination_phone_number: "PhoneNumber", # required
+    #     rcs_agent_id: "RcsAgentIdOrArn",
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -698,6 +922,7 @@ module Aws::PinpointSMSVoiceV2
     #     verified_destination_number_id: "String", # required
     #     destination_phone_number: "PhoneNumber", # required
     #     status: "VerificationStatus", # required
+    #     rcs_agent_id: "String",
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -861,10 +1086,10 @@ module Aws::PinpointSMSVoiceV2
       request.send_request(options)
     end
 
-    # <p>Deletes an existing keyword from an origination phone number or pool.</p> <p>A keyword is a word that you can search for on a particular phone number or pool. It is also a specific word or phrase that an end user can send to your number to elicit a response, such as an informational message or a special offer. When your number receives a message that begins with a keyword, AWS End User Messaging SMS and Voice responds with a customizable message.</p> <p>Keywords "HELP" and "STOP" can't be deleted or modified.</p>
+    # <p>Deletes an existing keyword from an origination phone number or pool.</p> <p>A keyword is a word that you can search for on a particular phone number or pool. It is also a specific word or phrase that an end user can send to your number to elicit a response, such as an informational message or a special offer. When your number receives a message that begins with a keyword, End User Messaging SMS responds with a customizable message.</p> <p>Keywords "HELP" and "STOP" can't be deleted or modified.</p>
     # @param [Hash, Types::DeleteKeywordRequest] params
     # @option params [String] :origination_identity
-    #   <p>The origination identity to use such as a PhoneNumberId, PhoneNumberArn, PoolId or PoolArn. You can use <a>DescribePhoneNumbers</a> to find the values for PhoneNumberId and PhoneNumberArn and <a>DescribePools</a> to find the values of PoolId and PoolArn.</p> <important> <p>If you are using a shared AWS End User Messaging SMS and Voice resource then you must use the full Amazon Resource Name(ARN).</p> </important>
+    #   <p>The origination identity to use such as a PhoneNumberId, PhoneNumberArn, PoolId or PoolArn. You can use <a>DescribePhoneNumbers</a> to find the values for PhoneNumberId and PhoneNumberArn and <a>DescribePools</a> to find the values of PoolId and PoolArn.</p> <important> <p>If you are using a shared End User Messaging SMS resource then you must use the full Amazon Resource Name(ARN).</p> </important>
     # @option params [String] :keyword
     #   <p>The keyword to delete.</p>
     # @example Request syntax with placeholder values
@@ -906,10 +1131,96 @@ module Aws::PinpointSMSVoiceV2
       request.send_request(options)
     end
 
+    # <p>Deletes an existing notify configuration.</p> <p>If deletion protection is enabled, an error is returned.</p>
+    # @param [Hash, Types::DeleteNotifyConfigurationRequest] params
+    # @option params [String] :notify_configuration_id
+    #   <p>The identifier of the notify configuration to delete. The NotifyConfigurationId can be found using the <a>DescribeNotifyConfigurations</a> operation.</p>
+    # @example DeleteNotifyConfiguration
+    #   # Delete an existing notify configuration.
+    #   params = {
+    #     notify_configuration_id: "nc-1234567890abcdef0"
+    #   }
+    #   options = {}
+    #   response = client.delete_notify_configuration(params, options)
+    #   response.to_h #=>
+    #   {
+    #     notify_configuration_arn: "arn:aws:sms-voice:us-east-1:111122223333:notify-configuration/nc-1234567890abcdef0",
+    #     notify_configuration_id: "nc-1234567890abcdef0",
+    #     display_name: "MyOTPConfig",
+    #     use_case: "CODE_VERIFICATION",
+    #     enabled_channels: [
+    #       "SMS"
+    #     ],
+    #     enabled_countries: [
+    #       "US",
+    #       "CA"
+    #     ],
+    #     tier: "BASIC",
+    #     tier_upgrade_status: "BASIC",
+    #     status: "ACTIVE",
+    #     deletion_protection_enabled: false,
+    #     created_timestamp: Time.parse(1704067200)
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     notify_configuration_id: "NotifyConfigurationIdOrArn", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_notify_configuration(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     notify_configuration_arn: "NotifyConfigurationArn", # required
+    #     notify_configuration_id: "NotifyConfigurationId", # required
+    #     display_name: "NotifyConfigurationDisplayName", # required
+    #     use_case: "NotifyConfigurationUseCase", # required
+    #     default_template_id: "NotifyTemplateId",
+    #     pool_id: "String",
+    #     enabled_countries: ["IsoCountryCode"],
+    #     enabled_channels: ["NumberCapability"], # required
+    #     tier: "NotifyConfigurationTier", # required
+    #     tier_upgrade_status: "TierUpgradeStatus", # required
+    #     status: "NotifyConfigurationStatus", # required
+    #     rejection_reason: "String",
+    #     deletion_protection_enabled: false, # required
+    #     created_timestamp: Time.now, # required
+    #   }
+    # @return [Types::DeleteNotifyConfigurationResult]
+    def delete_notify_configuration(params = {}, options = {})
+      request = build_request(:delete_notify_configuration, params)
+      request.send_request(options)
+    end
+
+    # <p>Deletes an account-level monthly spending limit override for sending notify messages. Deleting a spend limit override will set the <code>EnforcedLimit</code> to equal the <code>MaxLimit</code>, which is controlled by Amazon Web Services. For more information on spend limits (quotas) see <a href="https://docs.aws.amazon.com/sms-voice/latest/userguide/quotas.html">Quotas </a> in the <i>End User Messaging SMS User Guide</i>.</p>
+    # @param [Hash, Types::DeleteNotifyMessageSpendLimitOverrideRequest] params
+    # @example DeleteNotifyMessageSpendLimitOverride
+    #   # Delete the monthly spend limit override for notify messages, reverting to the default limit.
+    #   params = {}
+    #   options = {}
+    #   response = client.delete_notify_message_spend_limit_override(params, options)
+    #   response.to_h #=>
+    #   {
+    #     monthly_limit: 1000
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {}
+    #   options = {}
+    #   response = client.delete_notify_message_spend_limit_override(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     monthly_limit: 1
+    #   }
+    # @return [Types::DeleteNotifyMessageSpendLimitOverrideResult]
+    def delete_notify_message_spend_limit_override(params = {}, options = {})
+      request = build_request(:delete_notify_message_spend_limit_override, params)
+      request.send_request(options)
+    end
+
     # <p>Deletes an existing opt-out list. All opted out phone numbers in the opt-out list are deleted.</p> <p>If the specified opt-out list name doesn't exist or is in-use by an origination phone number or pool, an error is returned.</p>
     # @param [Hash, Types::DeleteOptOutListRequest] params
     # @option params [String] :opt_out_list_name
-    #   <p>The OptOutListName or OptOutListArn of the OptOutList to delete. You can use <a>DescribeOptOutLists</a> to find the values for OptOutListName and OptOutListArn.</p> <important> <p>If you are using a shared AWS End User Messaging SMS and Voice resource then you must use the full Amazon Resource Name(ARN).</p> </important>
+    #   <p>The OptOutListName or OptOutListArn of the OptOutList to delete. You can use <a>DescribeOptOutLists</a> to find the values for OptOutListName and OptOutListArn.</p> <important> <p>If you are using a shared End User Messaging SMS resource then you must use the full Amazon Resource Name(ARN).</p> </important>
     # @example Request syntax with placeholder values
     #   params = {
     #     opt_out_list_name: "OptOutListNameOrArn", # required
@@ -932,7 +1243,7 @@ module Aws::PinpointSMSVoiceV2
     # <p>Deletes an existing opted out destination phone number from the specified opt-out list.</p> <p>Each destination phone number can only be deleted once every 30 days.</p> <p>If the specified destination phone number doesn't exist or if the opt-out list doesn't exist, an error is returned.</p>
     # @param [Hash, Types::DeleteOptedOutNumberRequest] params
     # @option params [String] :opt_out_list_name
-    #   <p>The OptOutListName or OptOutListArn to remove the phone number from.</p> <important> <p>If you are using a shared AWS End User Messaging SMS and Voice resource then you must use the full Amazon Resource Name(ARN).</p> </important>
+    #   <p>The OptOutListName or OptOutListArn to remove the phone number from.</p> <important> <p>If you are using a shared End User Messaging SMS resource then you must use the full Amazon Resource Name(ARN).</p> </important>
     # @option params [String] :opted_out_number
     #   <p>The phone number, in E.164 format, to remove from the OptOutList.</p>
     # @example Request syntax with placeholder values
@@ -960,7 +1271,7 @@ module Aws::PinpointSMSVoiceV2
     # <p>Deletes an existing pool. Deleting a pool disassociates all origination identities from that pool.</p> <p>If the pool status isn't active or if deletion protection is enabled, an error is returned.</p> <p>A pool is a collection of phone numbers and SenderIds. A pool can include one or more phone numbers and SenderIds that are associated with your Amazon Web Services account.</p>
     # @param [Hash, Types::DeletePoolRequest] params
     # @option params [String] :pool_id
-    #   <p>The PoolId or PoolArn of the pool to delete. You can use <a>DescribePools</a> to find the values for PoolId and PoolArn .</p> <important> <p>If you are using a shared AWS End User Messaging SMS and Voice resource then you must use the full Amazon Resource Name(ARN).</p> </important>
+    #   <p>The PoolId or PoolArn of the pool to delete. You can use <a>DescribePools</a> to find the values for PoolId and PoolArn .</p> <important> <p>If you are using a shared End User Messaging SMS resource then you must use the full Amazon Resource Name(ARN).</p> </important>
     # @example Request syntax with placeholder values
     #   params = {
     #     pool_id: "PoolIdOrArn", # required
@@ -1040,6 +1351,54 @@ module Aws::PinpointSMSVoiceV2
     # @return [Types::DeleteProtectConfigurationRuleSetNumberOverrideResult]
     def delete_protect_configuration_rule_set_number_override(params = {}, options = {})
       request = build_request(:delete_protect_configuration_rule_set_number_override, params)
+      request.send_request(options)
+    end
+
+    # <p>Deletes an existing RCS agent. If deletion protection is enabled, an error is returned.</p>
+    # @param [Hash, Types::DeleteRcsAgentRequest] params
+    # @option params [String] :rcs_agent_id
+    #   <p>The unique identifier of the RCS agent to delete. You can use either the RcsAgentId or RcsAgentArn.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     rcs_agent_id: "RcsAgentIdOrArn", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_rcs_agent(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     rcs_agent_arn: "String", # required
+    #     rcs_agent_id: "String", # required
+    #     status: "RcsAgentStatus", # required
+    #     created_timestamp: Time.now, # required
+    #     deletion_protection_enabled: false, # required
+    #     opt_out_list_name: "OptOutListName",
+    #     self_managed_opt_outs_enabled: false, # required
+    #     two_way_channel_arn: "TwoWayChannelArn",
+    #     two_way_channel_role: "IamRoleArn",
+    #     two_way_enabled: false, # required
+    #     two_way_rcs_events_enabled: ["RcsEventType"]
+    #   }
+    # @return [Types::DeleteRcsAgentResult]
+    def delete_rcs_agent(params = {}, options = {})
+      request = build_request(:delete_rcs_agent, params)
+      request.send_request(options)
+    end
+
+    # <p>Deletes an account-level monthly spending limit override for sending RCS messages. Deleting a spend limit override sets the <code>EnforcedLimit</code> to equal the <code>MaxLimit</code>, which is set by Amazon Web Services.</p>
+    # @param [Hash, Types::DeleteRcsMessageSpendLimitOverrideRequest] params
+    # @example Request syntax with placeholder values
+    #   params = {}
+    #   options = {}
+    #   response = client.delete_rcs_message_spend_limit_override(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     monthly_limit: 1
+    #   }
+    # @return [Types::DeleteRcsMessageSpendLimitOverrideResult]
+    def delete_rcs_message_spend_limit_override(params = {}, options = {})
+      request = build_request(:delete_rcs_message_spend_limit_override, params)
       request.send_request(options)
     end
 
@@ -1129,10 +1488,10 @@ module Aws::PinpointSMSVoiceV2
       request.send_request(options)
     end
 
-    # <p>Deletes the resource-based policy document attached to the AWS End User Messaging SMS and Voice resource. A shared resource can be a Pool, Opt-out list, Sender Id, or Phone number.</p>
+    # <p>Deletes the resource-based policy document attached to the End User Messaging SMS resource. A shared resource can be a Pool, Opt-out list, Sender Id, or Phone number.</p>
     # @param [Hash, Types::DeleteResourcePolicyRequest] params
     # @option params [String] :resource_arn
-    #   <p>The Amazon Resource Name (ARN) of the AWS End User Messaging SMS and Voice resource you're deleting the resource-based policy from.</p>
+    #   <p>The Amazon Resource Name (ARN) of the End User Messaging SMS resource you're deleting the resource-based policy from.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     resource_arn: "AmazonResourceName", # required
@@ -1152,7 +1511,7 @@ module Aws::PinpointSMSVoiceV2
       request.send_request(options)
     end
 
-    # <p>Deletes an account-level monthly spending limit override for sending text messages. Deleting a spend limit override will set the <code>EnforcedLimit</code> to equal the <code>MaxLimit</code>, which is controlled by Amazon Web Services. For more information on spend limits (quotas) see <a href="https://docs.aws.amazon.com/sms-voice/latest/userguide/quotas.html">Quotas </a> in the <i>AWS End User Messaging SMS User Guide</i>.</p>
+    # <p>Deletes an account-level monthly spending limit override for sending text messages. Deleting a spend limit override will set the <code>EnforcedLimit</code> to equal the <code>MaxLimit</code>, which is controlled by Amazon Web Services. For more information on spend limits (quotas) see <a href="https://docs.aws.amazon.com/sms-voice/latest/userguide/quotas.html">Quotas </a> in the <i>End User Messaging SMS User Guide</i>.</p>
     # @param [Hash, Types::DeleteTextMessageSpendLimitOverrideRequest] params
     # @example Request syntax with placeholder values
     #   params = {}
@@ -1193,7 +1552,7 @@ module Aws::PinpointSMSVoiceV2
       request.send_request(options)
     end
 
-    # <p>Deletes an account level monthly spend limit override for sending voice messages. Deleting a spend limit override sets the <code>EnforcedLimit</code> equal to the <code>MaxLimit</code>, which is controlled by Amazon Web Services. For more information on spending limits (quotas) see <a href="https://docs.aws.amazon.com/sms-voice/latest/userguide/quotas.html">Quotas </a> in the <i>AWS End User Messaging SMS User Guide</i>.</p>
+    # <p>Deletes an account level monthly spend limit override for sending voice messages. Deleting a spend limit override sets the <code>EnforcedLimit</code> equal to the <code>MaxLimit</code>, which is controlled by Amazon Web Services. For more information on spending limits (quotas) see <a href="https://docs.aws.amazon.com/sms-voice/latest/userguide/quotas.html">Quotas </a> in the <i>End User Messaging SMS User Guide</i>.</p>
     # @param [Hash, Types::DeleteVoiceMessageSpendLimitOverrideRequest] params
     # @example Request syntax with placeholder values
     #   params = {}
@@ -1240,7 +1599,7 @@ module Aws::PinpointSMSVoiceV2
       request.send_request(options)
     end
 
-    # <p>Describes the current AWS End User Messaging SMS and Voice SMS Voice V2 resource quotas for your account. The description for a quota includes the quota name, current usage toward that quota, and the quota's maximum value.</p> <p>When you establish an Amazon Web Services account, the account has initial quotas on the maximum number of configuration sets, opt-out lists, phone numbers, and pools that you can create in a given Region. For more information see <a href="https://docs.aws.amazon.com/sms-voice/latest/userguide/quotas.html">Quotas </a> in the <i>AWS End User Messaging SMS User Guide</i>.</p>
+    # <p>Describes the current End User Messaging SMS SMS Voice V2 resource quotas for your account. The description for a quota includes the quota name, current usage toward that quota, and the quota's maximum value.</p> <p>When you establish an Amazon Web Services account, the account has initial quotas on the maximum number of configuration sets, opt-out lists, phone numbers, and pools that you can create in a given Region. For more information see <a href="https://docs.aws.amazon.com/sms-voice/latest/userguide/quotas.html">Quotas </a> in the <i>End User Messaging SMS User Guide</i>.</p>
     # @param [Hash, Types::DescribeAccountLimitsRequest] params
     # @option params [String] :next_token
     #   <p>The token to be used for the next set of paginated results. You don't need to supply a value for this field in the initial request.</p>
@@ -1335,10 +1694,10 @@ module Aws::PinpointSMSVoiceV2
       request.send_request(options)
     end
 
-    # <p>Describes the specified keywords or all keywords on your origination phone number or pool.</p> <p>A keyword is a word that you can search for on a particular phone number or pool. It is also a specific word or phrase that an end user can send to your number to elicit a response, such as an informational message or a special offer. When your number receives a message that begins with a keyword, AWS End User Messaging SMS and Voice responds with a customizable message.</p> <p>If you specify a keyword that isn't valid, an error is returned.</p>
+    # <p>Describes the specified keywords or all keywords on your origination phone number or pool.</p> <p>A keyword is a word that you can search for on a particular phone number or pool. It is also a specific word or phrase that an end user can send to your number to elicit a response, such as an informational message or a special offer. When your number receives a message that begins with a keyword, End User Messaging SMS responds with a customizable message.</p> <p>If you specify a keyword that isn't valid, an error is returned.</p>
     # @param [Hash, Types::DescribeKeywordsRequest] params
     # @option params [String] :origination_identity
-    #   <p>The origination identity to use such as a PhoneNumberId, PhoneNumberArn, SenderId or SenderIdArn. You can use <a>DescribePhoneNumbers</a> to find the values for PhoneNumberId and PhoneNumberArn while <a>DescribeSenderIds</a> can be used to get the values for SenderId and SenderIdArn.</p> <important> <p>If you are using a shared AWS End User Messaging SMS and Voice resource then you must use the full Amazon Resource Name(ARN).</p> </important>
+    #   <p>The origination identity to use such as a PhoneNumberId, PhoneNumberArn, SenderId or SenderIdArn. You can use <a>DescribePhoneNumbers</a> to find the values for PhoneNumberId and PhoneNumberArn while <a>DescribeSenderIds</a> can be used to get the values for SenderId and SenderIdArn.</p> <important> <p>If you are using a shared End User Messaging SMS resource then you must use the full Amazon Resource Name(ARN).</p> </important>
     # @option params [Array<String>] :keywords
     #   <p>An array of keywords to search for.</p>
     # @option params [Array<Types::KeywordFilter>] :filters
@@ -1382,10 +1741,232 @@ module Aws::PinpointSMSVoiceV2
       request.send_request(options)
     end
 
+    # <p>Describes the specified notify configurations or all notify configurations in your account.</p> <p>If you specify notify configuration IDs, the output includes information for only the specified notify configurations. If you specify filters, the output includes information for only those notify configurations that meet the filter criteria. If you don't specify notify configuration IDs or filters, the output includes information for all notify configurations.</p> <p>If you specify a notify configuration ID that isn't valid, an error is returned.</p>
+    # @param [Hash, Types::DescribeNotifyConfigurationsRequest] params
+    # @option params [Array<String>] :notify_configuration_ids
+    #   <p>An array of notify configuration IDs to describe.</p>
+    # @option params [Array<Types::NotifyConfigurationFilter>] :filters
+    #   <p>An array of NotifyConfigurationFilter objects to filter the results on.</p>
+    # @option params [String] :next_token
+    #   <p>The token to be used for the next set of paginated results. You don't need to supply a value for this field in the initial request.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return per each request.</p>
+    # @example DescribeNotifyConfigurations
+    #   # Describe notify configurations filtered by status.
+    #   params = {
+    #     filters: [
+    #       {
+    #         name: "status",
+    #         values: [
+    #           "ACTIVE"
+    #         ]
+    #       }
+    #     ],
+    #     max_results: 10
+    #   }
+    #   options = {}
+    #   response = client.describe_notify_configurations(params, options)
+    #   response.to_h #=>
+    #   {
+    #     notify_configurations: [
+    #       {
+    #         notify_configuration_arn: "arn:aws:sms-voice:us-east-1:111122223333:notify-configuration/nc-1234567890abcdef0",
+    #         notify_configuration_id: "nc-1234567890abcdef0",
+    #         display_name: "MyOTPConfig",
+    #         use_case: "CODE_VERIFICATION",
+    #         enabled_channels: [
+    #           "SMS"
+    #         ],
+    #         enabled_countries: [
+    #           "US",
+    #           "CA"
+    #         ],
+    #         tier: "BASIC",
+    #         tier_upgrade_status: "BASIC",
+    #         status: "ACTIVE",
+    #         deletion_protection_enabled: false,
+    #         created_timestamp: Time.parse(1704067200)
+    #       }
+    #     ]
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     notify_configuration_ids: ["NotifyConfigurationIdOrArn"],
+    #     filters: [
+    #       {
+    #         name: "NotifyConfigurationFilterName", # required
+    #         values: ["FilterValue"], # required
+    #       }
+    #     ],
+    #     next_token: "NextToken",
+    #     max_results: 1
+    #   }
+    #   options = {}
+    #   response = client.describe_notify_configurations(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     notify_configurations: [
+    #       {
+    #         notify_configuration_arn: "NotifyConfigurationArn", # required
+    #         notify_configuration_id: "NotifyConfigurationId", # required
+    #         display_name: "NotifyConfigurationDisplayName", # required
+    #         use_case: "NotifyConfigurationUseCase", # required
+    #         default_template_id: "NotifyTemplateId",
+    #         pool_id: "String",
+    #         enabled_countries: ["IsoCountryCode"],
+    #         enabled_channels: ["NumberCapability"], # required
+    #         tier: "NotifyConfigurationTier", # required
+    #         tier_upgrade_status: "TierUpgradeStatus", # required
+    #         status: "NotifyConfigurationStatus", # required
+    #         rejection_reason: "String",
+    #         deletion_protection_enabled: false, # required
+    #         created_timestamp: Time.now, # required
+    #       }
+    #     ],
+    #     next_token: "NextToken"
+    #   }
+    # @return [Types::DescribeNotifyConfigurationsResult]
+    def describe_notify_configurations(params = {}, options = {})
+      request = build_request(:describe_notify_configurations, params)
+      request.send_request(options)
+    end
+
+    # <p>Describes the specified notify templates or all notify templates in your account.</p> <p>If you specify template IDs, the output includes information for only the specified notify templates. If you specify filters, the output includes information for only those notify templates that meet the filter criteria. If you don't specify template IDs or filters, the output includes information for all notify templates.</p> <p>If you specify a template ID that isn't valid, an error is returned.</p>
+    # @param [Hash, Types::DescribeNotifyTemplatesRequest] params
+    # @option params [Array<String>] :template_ids
+    #   <p>An array of template IDs to describe.</p>
+    # @option params [Array<Types::NotifyTemplateFilter>] :filters
+    #   <p>An array of NotifyTemplateFilter objects to filter the results on.</p>
+    # @option params [String] :next_token
+    #   <p>The token to be used for the next set of paginated results. You don't need to supply a value for this field in the initial request.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return per each request.</p>
+    # @example DescribeNotifyTemplates
+    #   # Describe available notify templates for OTP verification over SMS.
+    #   params = {
+    #     filters: [
+    #       {
+    #         name: "template-type",
+    #         values: [
+    #           "OTP_VERIFICATION"
+    #         ]
+    #       },
+    #       {
+    #         name: "channels",
+    #         values: [
+    #           "SMS"
+    #         ]
+    #       }
+    #     ],
+    #     max_results: 10
+    #   }
+    #   options = {}
+    #   response = client.describe_notify_templates(params, options)
+    #   response.to_h #=>
+    #   {
+    #     notify_templates: [
+    #       {
+    #         template_id: "nt-1234567890abcdef0",
+    #         version: 1,
+    #         template_type: "OTP_VERIFICATION",
+    #         channels: [
+    #           "SMS"
+    #         ],
+    #         tier_access: [
+    #           "BASIC",
+    #           "ADVANCED"
+    #         ],
+    #         status: "ACTIVE",
+    #         supported_countries: [
+    #           "US",
+    #           "CA",
+    #           "GB"
+    #         ],
+    #         language_code: "en",
+    #         content: "Your verification code is {{code}}. It expires in {{expiry}} minutes.",
+    #         variables: {
+    #           "code" => {
+    #             type: "STRING",
+    #             required: true,
+    #             description: "The verification code",
+    #             max_length: 10,
+    #             source: "CUSTOMER",
+    #             sample: "123456"
+    #           },
+    #           "expiry" => {
+    #             type: "INTEGER",
+    #             required: false,
+    #             description: "Expiry time in minutes",
+    #             min_value: 1,
+    #             max_value: 60,
+    #             default_value: "10",
+    #             source: "CUSTOMER",
+    #             sample: "10"
+    #           }
+    #         },
+    #         created_timestamp: Time.parse(1704067200)
+    #       }
+    #     ]
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     template_ids: ["NotifyTemplateId"],
+    #     filters: [
+    #       {
+    #         name: "NotifyTemplateFilterName", # required
+    #         values: ["FilterValue"], # required
+    #       }
+    #     ],
+    #     next_token: "NextToken",
+    #     max_results: 1
+    #   }
+    #   options = {}
+    #   response = client.describe_notify_templates(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     notify_templates: [
+    #       {
+    #         template_id: "NotifyTemplateId", # required
+    #         version: 1, # required
+    #         template_type: "NotifyTemplateType", # required
+    #         channels: ["NumberCapability"], # required
+    #         tier_access: ["NotifyConfigurationTier"],
+    #         status: "NotifyTemplateStatus",
+    #         supported_countries: ["IsoCountryCode"],
+    #         language_code: "NotifyLanguageCode",
+    #         content: "TemplateContent",
+    #         variables: {
+    #           "String" => {
+    #             type: "TemplateVariableType", # required
+    #             required: false, # required
+    #             description: "String",
+    #             max_length: 1,
+    #             min_value: 1,
+    #             max_value: 1,
+    #             default_value: "String",
+    #             pattern: "String",
+    #             sample: "String",
+    #             source: "TemplateVariableSource"
+    #           }
+    #         },
+    #         supported_voice_ids: ["VoiceId"],
+    #         created_timestamp: Time.now, # required
+    #       }
+    #     ],
+    #     next_token: "NextToken"
+    #   }
+    # @return [Types::DescribeNotifyTemplatesResult]
+    def describe_notify_templates(params = {}, options = {})
+      request = build_request(:describe_notify_templates, params)
+      request.send_request(options)
+    end
+
     # <p>Describes the specified opt-out list or all opt-out lists in your account.</p> <p>If you specify opt-out list names, the output includes information for only the specified opt-out lists. Opt-out lists include only those that meet the filter criteria. If you don't specify opt-out list names or filters, the output includes information for all opt-out lists.</p> <p>If you specify an opt-out list name that isn't valid, an error is returned.</p>
     # @param [Hash, Types::DescribeOptOutListsRequest] params
     # @option params [Array<String>] :opt_out_list_names
-    #   <p>The OptOutLists to show the details of. This is an array of strings that can be either the OptOutListName or OptOutListArn.</p> <important> <p>If you are using a shared AWS End User Messaging SMS and Voice resource then you must use the full Amazon Resource Name(ARN).</p> </important>
+    #   <p>The OptOutLists to show the details of. This is an array of strings that can be either the OptOutListName or OptOutListArn.</p> <important> <p>If you are using a shared End User Messaging SMS resource then you must use the full Amazon Resource Name(ARN).</p> </important>
     # @option params [String] :next_token
     #   <p>The token to be used for the next set of paginated results. You don't need to supply a value for this field in the initial request.</p>
     # @option params [Integer] :max_results
@@ -1422,7 +2003,7 @@ module Aws::PinpointSMSVoiceV2
     # <p>Describes the specified opted out destination numbers or all opted out destination numbers in an opt-out list.</p> <p>If you specify opted out numbers, the output includes information for only the specified opted out numbers. If you specify filters, the output includes information for only those opted out numbers that meet the filter criteria. If you don't specify opted out numbers or filters, the output includes information for all opted out destination numbers in your opt-out list.</p> <p>If you specify an opted out number that isn't valid, an exception is returned.</p>
     # @param [Hash, Types::DescribeOptedOutNumbersRequest] params
     # @option params [String] :opt_out_list_name
-    #   <p>The OptOutListName or OptOutListArn of the OptOutList. You can use <a>DescribeOptOutLists</a> to find the values for OptOutListName and OptOutListArn.</p> <important> <p>If you are using a shared AWS End User Messaging SMS and Voice resource then you must use the full Amazon Resource Name(ARN).</p> </important>
+    #   <p>The OptOutListName or OptOutListArn of the OptOutList. You can use <a>DescribeOptOutLists</a> to find the values for OptOutListName and OptOutListArn.</p> <important> <p>If you are using a shared End User Messaging SMS resource then you must use the full Amazon Resource Name(ARN).</p> </important>
     # @option params [Array<String>] :opted_out_numbers
     #   <p>An array of phone numbers to search for in the OptOutList.</p> <p>If you specify an opted out number that isn't valid, an exception is returned.</p>
     # @option params [Array<Types::OptedOutFilter>] :filters
@@ -1469,7 +2050,7 @@ module Aws::PinpointSMSVoiceV2
     # <p>Describes the specified origination phone number, or all the phone numbers in your account.</p> <p>If you specify phone number IDs, the output includes information for only the specified phone numbers. If you specify filters, the output includes information for only those phone numbers that meet the filter criteria. If you don't specify phone number IDs or filters, the output includes information for all phone numbers.</p> <p>If you specify a phone number ID that isn't valid, an error is returned.</p>
     # @param [Hash, Types::DescribePhoneNumbersRequest] params
     # @option params [Array<String>] :phone_number_ids
-    #   <p>The unique identifier of phone numbers to find information about. This is an array of strings that can be either the PhoneNumberId or PhoneNumberArn.</p> <important> <p>If you are using a shared AWS End User Messaging SMS and Voice resource then you must use the full Amazon Resource Name(ARN).</p> </important>
+    #   <p>The unique identifier of phone numbers to find information about. This is an array of strings that can be either the PhoneNumberId or PhoneNumberArn.</p> <important> <p>If you are using a shared End User Messaging SMS resource then you must use the full Amazon Resource Name(ARN).</p> </important>
     # @option params [Array<Types::PhoneNumberFilter>] :filters
     #   <p>An array of PhoneNumberFilter objects to filter the results.</p>
     # @option params [String] :next_token
@@ -1516,6 +2097,15 @@ module Aws::PinpointSMSVoiceV2
     #         deletion_protection_enabled: false, # required
     #         pool_id: "String",
     #         registration_id: "String",
+    #         messaging_limits: {
+    #           rate_limits: {
+    #             "String" => 1
+    #           },
+    #           daily_message_caps: {
+    #             "String" => 1
+    #           }
+    #         },
+    #         pricing_tier: "String",
     #         created_timestamp: Time.now, # required
     #       }
     #     ],
@@ -1530,7 +2120,7 @@ module Aws::PinpointSMSVoiceV2
     # <p>Retrieves the specified pools or all pools associated with your Amazon Web Services account.</p> <p>If you specify pool IDs, the output includes information for only the specified pools. If you specify filters, the output includes information for only those pools that meet the filter criteria. If you don't specify pool IDs or filters, the output includes information for all pools.</p> <p>If you specify a pool ID that isn't valid, an error is returned.</p> <p>A pool is a collection of phone numbers and SenderIds. A pool can include one or more phone numbers and SenderIds that are associated with your Amazon Web Services account.</p>
     # @param [Hash, Types::DescribePoolsRequest] params
     # @option params [Array<String>] :pool_ids
-    #   <p>The unique identifier of pools to find. This is an array of strings that can be either the PoolId or PoolArn.</p> <important> <p>If you are using a shared AWS End User Messaging SMS and Voice resource then you must use the full Amazon Resource Name(ARN).</p> </important>
+    #   <p>The unique identifier of pools to find. This is an array of strings that can be either the PoolId or PoolArn.</p> <important> <p>If you are using a shared End User Messaging SMS resource then you must use the full Amazon Resource Name(ARN).</p> </important>
     # @option params [Array<Types::PoolFilter>] :filters
     #   <p>An array of PoolFilter objects to filter the results.</p>
     # @option params [String] :next_token
@@ -1625,6 +2215,130 @@ module Aws::PinpointSMSVoiceV2
       request.send_request(options)
     end
 
+    # <p>Retrieves the per-country launch status of an RCS agent, including carrier-level details for each country.</p>
+    # @param [Hash, Types::DescribeRcsAgentCountryLaunchStatusRequest] params
+    # @option params [String] :rcs_agent_id
+    #   <p>The unique identifier of the RCS agent. You can use either the RcsAgentId or RcsAgentArn.</p>
+    # @option params [Array<String>] :iso_country_codes
+    #   <p>An array of two-character ISO country codes, in ISO 3166-1 alpha-2 format, to filter the results.</p>
+    # @option params [Array<Types::CountryLaunchStatusFilter>] :filters
+    #   <p>An array of CountryLaunchStatusFilter objects to filter the results.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return per each request.</p>
+    # @option params [String] :next_token
+    #   <p>The token to be used for the next set of paginated results. You don't need to supply a value for this field in the initial request.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     rcs_agent_id: "RcsAgentIdOrArn", # required
+    #     iso_country_codes: ["IsoCountryCode"],
+    #     filters: [
+    #       {
+    #         name: "CountryLaunchStatusFilterName", # required
+    #         values: ["FilterValue"], # required
+    #       }
+    #     ],
+    #     max_results: 1,
+    #     next_token: "NextToken"
+    #   }
+    #   options = {}
+    #   response = client.describe_rcs_agent_country_launch_status(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     rcs_agent_id: "String", # required
+    #     rcs_agent_arn: "String", # required
+    #     country_launch_status: [
+    #       {
+    #         iso_country_code: "IsoCountryCode", # required
+    #         status: "CountryLaunchStatus", # required
+    #         rcs_platform_id: "String",
+    #         registration_id: "String", # required
+    #         carrier_status: [ # required
+    #           {
+    #             carrier_name: "String", # required
+    #             status: "CarrierStatus", # required
+    #           }
+    #         ]
+    #       }
+    #     ],
+    #     next_token: "NextToken"
+    #   }
+    # @return [Types::DescribeRcsAgentCountryLaunchStatusResult]
+    def describe_rcs_agent_country_launch_status(params = {}, options = {})
+      request = build_request(:describe_rcs_agent_country_launch_status, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves the specified RCS agents or all RCS agents associated with your Amazon Web Services account.</p> <p>If you specify RCS agent IDs, the output includes information for only the specified RCS agents. If you specify filters, the output includes information for only those RCS agents that meet the filter criteria. If you don't specify RCS agent IDs or filters, the output includes information for all RCS agents.</p>
+    # @param [Hash, Types::DescribeRcsAgentsRequest] params
+    # @option params [Array<String>] :rcs_agent_ids
+    #   <p>An array of unique identifiers for the RCS agents. This is an array of strings that can be either the RcsAgentId or RcsAgentArn.</p>
+    # @option params [String] :owner
+    #   <p>Use <code>SELF</code> to filter the list of RCS agents to ones your account owns or use <code>SHARED</code> to filter on RCS agents shared with your account. The <code>Owner</code> and <code>RcsAgentIds</code> parameters can't be used at the same time.</p>
+    # @option params [Array<Types::RcsAgentFilter>] :filters
+    #   <p>An array of RcsAgentFilter objects to filter the results.</p>
+    # @option params [String] :next_token
+    #   <p>The token to be used for the next set of paginated results. You don't need to supply a value for this field in the initial request.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return per each request.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     rcs_agent_ids: ["RcsAgentIdOrArn"],
+    #     owner: "Owner",
+    #     filters: [
+    #       {
+    #         name: "RcsAgentFilterName", # required
+    #         values: ["FilterValue"], # required
+    #       }
+    #     ],
+    #     next_token: "NextToken",
+    #     max_results: 1
+    #   }
+    #   options = {}
+    #   response = client.describe_rcs_agents(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     rcs_agents: [
+    #       {
+    #         rcs_agent_arn: "String", # required
+    #         rcs_agent_id: "String", # required
+    #         status: "RcsAgentStatus", # required
+    #         created_timestamp: Time.now, # required
+    #         deletion_protection_enabled: false, # required
+    #         opt_out_list_name: "OptOutListName",
+    #         self_managed_opt_outs_enabled: false, # required
+    #         two_way_channel_arn: "TwoWayChannelArn",
+    #         two_way_channel_role: "IamRoleArn",
+    #         two_way_enabled: false, # required
+    #         pool_id: "String",
+    #         two_way_media_s3_bucket_name: "TwoWayMediaS3BucketName",
+    #         two_way_media_s3_key_prefix: "TwoWayMediaS3KeyPrefix",
+    #         two_way_media_s3_role: "IamRoleArn",
+    #         two_way_rcs_events_enabled: ["RcsEventType"],
+    #         testing_agent: {
+    #           status: "TestingAgentStatus", # required
+    #           testing_agent_id: "String",
+    #           registration_id: "String", # required
+    #         },
+    #         messaging_limits: {
+    #           rate_limits: {
+    #             "String" => 1
+    #           },
+    #           daily_message_caps: {
+    #             "String" => 1
+    #           }
+    #         }
+    #       }
+    #     ],
+    #     next_token: "NextToken"
+    #   }
+    # @return [Types::DescribeRcsAgentsResult]
+    def describe_rcs_agents(params = {}, options = {})
+      request = build_request(:describe_rcs_agents, params)
+      request.send_request(options)
+    end
+
     # <p>Retrieves the specified registration attachments or all registration attachments associated with your Amazon Web Services account.</p>
     # @param [Hash, Types::DescribeRegistrationAttachmentsRequest] params
     # @option params [Array<String>] :registration_attachment_ids
@@ -1659,6 +2373,7 @@ module Aws::PinpointSMSVoiceV2
     #         attachment_status: "AttachmentStatus", # required
     #         attachment_upload_error_reason: "AttachmentUploadErrorReason",
     #         created_timestamp: Time.now, # required
+    #         attachment_url: "String"
     #       }
     #     ],
     #     next_token: "NextToken"
@@ -1726,6 +2441,27 @@ module Aws::PinpointSMSVoiceV2
     #           ],
     #           text_validation_description: "String",
     #           example_text_value: "String"
+    #         },
+    #         conditional_behavior: {
+    #           rules: [ # required
+    #             {
+    #               conditions: [ # required
+    #                 {
+    #                   depends_on_field_path: "FieldPath", # required
+    #                   operator: "ConditionOperator", # required
+    #                   values: ["ConditionValue"]
+    #                 }
+    #               ],
+    #               rule_behavior: "ConditionalFieldBehavior", # required
+    #               conditional_validation: {
+    #                 min_length: 1,
+    #                 max_length: 1,
+    #                 pattern: "String",
+    #                 allowed_values: ["SelectChoice"]
+    #               }
+    #             }
+    #           ],
+    #           default_behavior: "ConditionalFieldBehavior", # required
     #         }
     #       }
     #     ],
@@ -1774,7 +2510,8 @@ module Aws::PinpointSMSVoiceV2
     #         select_choices: ["SelectChoice"],
     #         text_value: "TextValue",
     #         registration_attachment_id: "RegistrationAttachmentIdOrArn",
-    #         denied_reason: "String"
+    #         denied_reason: "String",
+    #         feedback: "String"
     #       }
     #     ],
     #     next_token: "NextToken"
@@ -1922,6 +2659,7 @@ module Aws::PinpointSMSVoiceV2
     #         registration_version_status_history: { # required
     #           draft_timestamp: Time.now, # required
     #           submitted_timestamp: Time.now,
+    #           aws_reviewing_timestamp: Time.now,
     #           reviewing_timestamp: Time.now,
     #           requires_authentication_timestamp: Time.now,
     #           approved_timestamp: Time.now,
@@ -1938,7 +2676,8 @@ module Aws::PinpointSMSVoiceV2
     #             documentation_title: "String",
     #             documentation_link: "String"
     #           }
-    #         ]
+    #         ],
+    #         feedback: "String"
     #       }
     #     ],
     #     next_token: "NextToken"
@@ -2002,7 +2741,7 @@ module Aws::PinpointSMSVoiceV2
     # <p>Describes the specified SenderIds or all SenderIds associated with your Amazon Web Services account.</p> <p>If you specify SenderIds, the output includes information for only the specified SenderIds. If you specify filters, the output includes information for only those SenderIds that meet the filter criteria. If you don't specify SenderIds or filters, the output includes information for all SenderIds.</p> <p>f you specify a sender ID that isn't valid, an error is returned.</p>
     # @param [Hash, Types::DescribeSenderIdsRequest] params
     # @option params [Array<Types::SenderIdAndCountry>] :sender_ids
-    #   <p>An array of SenderIdAndCountry objects to search for.</p> <important> <p>If you are using a shared AWS End User Messaging SMS and Voice resource then you must use the full Amazon Resource Name(ARN).</p> </important>
+    #   <p>An array of SenderIdAndCountry objects to search for.</p> <important> <p>If you are using a shared End User Messaging SMS resource then you must use the full Amazon Resource Name(ARN).</p> </important>
     # @option params [Array<Types::SenderIdFilter>] :filters
     #   <p>An array of SenderIdFilter objects to filter the results.</p>
     # @option params [String] :next_token
@@ -2043,7 +2782,16 @@ module Aws::PinpointSMSVoiceV2
     #         monthly_leasing_price: "String", # required
     #         deletion_protection_enabled: false, # required
     #         registered: false, # required
-    #         registration_id: "String"
+    #         registration_id: "String",
+    #         messaging_limits: {
+    #           rate_limits: {
+    #             "String" => 1
+    #           },
+    #           daily_message_caps: {
+    #             "String" => 1
+    #           }
+    #         },
+    #         pricing_tier: "String"
     #       }
     #     ],
     #     next_token: "NextToken"
@@ -2054,7 +2802,7 @@ module Aws::PinpointSMSVoiceV2
       request.send_request(options)
     end
 
-    # <p>Describes the current monthly spend limits for sending voice and text messages.</p> <p>When you establish an Amazon Web Services account, the account has initial monthly spend limit in a given Region. For more information on increasing your monthly spend limit, see <a href="https://docs.aws.amazon.com/sms-voice/latest/userguide/awssupport-spend-threshold.html"> Requesting increases to your monthly SMS, MMS, or Voice spending quota </a> in the <i>AWS End User Messaging SMS User Guide</i>.</p>
+    # <p>Describes the current monthly spend limits for sending voice and text messages.</p> <p>When you establish an Amazon Web Services account, the account has initial monthly spend limit in a given Region. For more information on increasing your monthly spend limit, see <a href="https://docs.aws.amazon.com/sms-voice/latest/userguide/awssupport-spend-threshold.html"> Requesting increases to your monthly SMS, MMS, or Voice spending quota </a> in the <i>End User Messaging SMS User Guide</i>.</p>
     # @param [Hash, Types::DescribeSpendLimitsRequest] params
     # @option params [String] :next_token
     #   <p>The token to be used for the next set of paginated results. You don't need to supply a value for this field in the initial request.</p>
@@ -2122,6 +2870,7 @@ module Aws::PinpointSMSVoiceV2
     #         verified_destination_number_id: "String", # required
     #         destination_phone_number: "PhoneNumber", # required
     #         status: "VerificationStatus", # required
+    #         rcs_agent_id: "String",
     #         created_timestamp: Time.now, # required
     #       }
     #     ],
@@ -2136,18 +2885,18 @@ module Aws::PinpointSMSVoiceV2
     # <p>Removes the specified origination identity from an existing pool.</p> <p>If the origination identity isn't associated with the specified pool, an error is returned.</p>
     # @param [Hash, Types::DisassociateOriginationIdentityRequest] params
     # @option params [String] :pool_id
-    #   <p>The unique identifier for the pool to disassociate with the origination identity. This value can be either the PoolId or PoolArn.</p> <important> <p>If you are using a shared AWS End User Messaging SMS and Voice resource then you must use the full Amazon Resource Name(ARN).</p> </important>
+    #   <p>The unique identifier for the pool to disassociate with the origination identity. This value can be either the PoolId or PoolArn.</p> <important> <p>If you are using a shared End User Messaging SMS resource then you must use the full Amazon Resource Name(ARN).</p> </important>
     # @option params [String] :origination_identity
-    #   <p>The origination identity to use such as a PhoneNumberId, PhoneNumberArn, SenderId or SenderIdArn. You can use <a>DescribePhoneNumbers</a> find the values for PhoneNumberId and PhoneNumberArn, or use <a>DescribeSenderIds</a> to get the values for SenderId and SenderIdArn.</p> <important> <p>If you are using a shared AWS End User Messaging SMS and Voice resource then you must use the full Amazon Resource Name(ARN).</p> </important>
+    #   <p>The origination identity to use such as a PhoneNumberId, PhoneNumberArn, SenderId or SenderIdArn. You can use <a>DescribePhoneNumbers</a> find the values for PhoneNumberId and PhoneNumberArn, or use <a>DescribeSenderIds</a> to get the values for SenderId and SenderIdArn.</p> <important> <p>If you are using a shared End User Messaging SMS resource then you must use the full Amazon Resource Name(ARN).</p> </important>
     # @option params [String] :iso_country_code
-    #   <p>The two-character code, in ISO 3166-1 alpha-2 format, for the country or region. </p>
+    #   <p>The two-character code, in ISO 3166-1 alpha-2 format, for the country or region. This field is optional and is not required for origination identity types that are not country-specific, such as RCS agents.</p>
     # @option params [String] :client_token
     #   <p>Unique, case-sensitive identifier you provide to ensure the idempotency of the request. If you don't specify a client token, a randomly generated token is used for the request to ensure idempotency.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     pool_id: "PoolIdOrArn", # required
     #     origination_identity: "PhoneOrSenderIdOrArn", # required
-    #     iso_country_code: "IsoCountryCode", # required
+    #     iso_country_code: "IsoCountryCode",
     #     client_token: "ClientToken"
     #   }
     #   options = {}
@@ -2214,6 +2963,7 @@ module Aws::PinpointSMSVoiceV2
     #     registration_version_status_history: { # required
     #       draft_timestamp: Time.now, # required
     #       submitted_timestamp: Time.now,
+    #       aws_reviewing_timestamp: Time.now,
     #       reviewing_timestamp: Time.now,
     #       requires_authentication_timestamp: Time.now,
     #       approved_timestamp: Time.now,
@@ -2260,10 +3010,10 @@ module Aws::PinpointSMSVoiceV2
       request.send_request(options)
     end
 
-    # <p>Retrieves the JSON text of the resource-based policy document attached to the AWS End User Messaging SMS and Voice resource. A shared resource can be a Pool, Opt-out list, Sender Id, or Phone number.</p>
+    # <p>Retrieves the JSON text of the resource-based policy document attached to the End User Messaging SMS resource. A shared resource can be a Pool, Opt-out list, Sender Id, or Phone number.</p>
     # @param [Hash, Types::GetResourcePolicyRequest] params
     # @option params [String] :resource_arn
-    #   <p>The Amazon Resource Name (ARN) of the AWS End User Messaging SMS and Voice resource attached to the resource-based policy.</p>
+    #   <p>The Amazon Resource Name (ARN) of the End User Messaging SMS resource attached to the resource-based policy.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     resource_arn: "AmazonResourceName", # required
@@ -2283,10 +3033,174 @@ module Aws::PinpointSMSVoiceV2
       request.send_request(options)
     end
 
+    # <p>Retrieves a list of phone numbers that are available to request, based on the country, capabilities, and number type that you specify. You can optionally provide a number preference to return only numbers that match a specific digit pattern.</p> <p>If no numbers match your search, this operation returns an empty list rather than an error. This operation currently supports only <code>TEN_DLC</code> number types in the <code>US</code>.</p>
+    # @param [Hash, Types::ListAvailablePhoneNumbersRequest] params
+    # @option params [String] :iso_country_code
+    #   <p>The two-character code, in ISO 3166-1 alpha-2 format, for the country or region in which to search for available phone numbers. This operation currently supports only <code>US</code>.</p>
+    # @option params [Array<String>] :number_capabilities
+    #   <p>The capabilities to filter by, such as SMS. Only phone numbers that support all of the specified capabilities are returned.</p>
+    # @option params [String] :number_type
+    #   <p>The type of phone number to search for.</p>
+    # @option params [String] :registration_id
+    #   <p>The registration associated with the request. A registration is required for regulated number types. You can specify either:</p> <ul> <li> <p>The unique identifier of the registration.</p> </li> <li> <p>The Amazon Resource Name (ARN) of the registration.</p> </li> </ul>
+    # @option params [Array<Types::NumberPreferenceItem>] :number_preference
+    #   <p>An optional selection preference used to return only phone numbers that match a specific digit pattern, such as numbers that start with, end with, or contain a particular sequence. You can specify at most one preference. Number preferences apply only to <code>TEN_DLC</code> numbers in the <code>US</code>.</p>
+    # @option params [String] :next_token
+    #   <p>The token returned from a previous request to retrieve the next page of results.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return per page. If you don't specify a value, the default is 10.</p>
+    # @example ListAvailablePhoneNumbers
+    #   # Search for available TEN_DLC phone numbers in the US that start with a specific area code.
+    #   params = {
+    #     iso_country_code: "US",
+    #     number_capabilities: [
+    #       "SMS"
+    #     ],
+    #     number_type: "TEN_DLC",
+    #     registration_id: "reg-1234567890abcdef0",
+    #     number_preference: [
+    #       {
+    #         preference_type: [
+    #           "StartsWith"
+    #         ],
+    #         filter: [
+    #           "+1206"
+    #         ]
+    #       }
+    #     ],
+    #     max_results: 10
+    #   }
+    #   options = {}
+    #   response = client.list_available_phone_numbers(params, options)
+    #   response.to_h #=>
+    #   {
+    #     available_phone_numbers: [
+    #       "+12065550100",
+    #       "+12065550142",
+    #       "+12065550187"
+    #     ]
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     iso_country_code: "IsoCountryCode", # required
+    #     number_capabilities: ["NumberCapability"], # required
+    #     number_type: "SearchableNumberType", # required
+    #     registration_id: "RegistrationIdOrArn",
+    #     number_preference: [
+    #       {
+    #         preference_type: ["PreferenceType"], # required
+    #         filter: ["NumberFilterValue"], # required
+    #       }
+    #     ],
+    #     next_token: "NextToken",
+    #     max_results: 1
+    #   }
+    #   options = {}
+    #   response = client.list_available_phone_numbers(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     available_phone_numbers: ["PhoneNumber"], # required
+    #     next_token: "NextToken"
+    #   }
+    # @return [Types::ListAvailablePhoneNumbersResult]
+    def list_available_phone_numbers(params = {}, options = {})
+      request = build_request(:list_available_phone_numbers, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists countries that support notify messaging. You can optionally filter by channel, use case, or tier.</p>
+    # @param [Hash, Types::ListNotifyCountriesRequest] params
+    # @option params [Array<String>] :channels
+    #   <p>An array of channels to filter the results by.</p>
+    # @option params [Array<String>] :use_cases
+    #   <p>An array of use cases to filter the results by.</p>
+    # @option params [String] :tier
+    #   <p>The tier to filter the results by.</p>
+    # @option params [String] :next_token
+    #   <p>The token to be used for the next set of paginated results. You don't need to supply a value for this field in the initial request.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return per each request.</p>
+    # @example ListNotifyCountries
+    #   # List countries that support notify messaging over SMS.
+    #   params = {
+    #     channels: [
+    #       "SMS"
+    #     ],
+    #     max_results: 10
+    #   }
+    #   options = {}
+    #   response = client.list_notify_countries(params, options)
+    #   response.to_h #=>
+    #   {
+    #     notify_countries: [
+    #       {
+    #         iso_country_code: "US",
+    #         country_name: "United States",
+    #         supported_channels: [
+    #           "SMS",
+    #           "VOICE"
+    #         ],
+    #         supported_use_cases: [
+    #           "CODE_VERIFICATION"
+    #         ],
+    #         supported_tiers: [
+    #           "BASIC",
+    #           "ADVANCED"
+    #         ],
+    #         customer_owned_identity_required: false
+    #       },
+    #       {
+    #         iso_country_code: "CA",
+    #         country_name: "Canada",
+    #         supported_channels: [
+    #           "SMS"
+    #         ],
+    #         supported_use_cases: [
+    #           "CODE_VERIFICATION"
+    #         ],
+    #         supported_tiers: [
+    #           "BASIC"
+    #         ],
+    #         customer_owned_identity_required: false
+    #       }
+    #     ]
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     channels: ["NumberCapability"],
+    #     use_cases: ["NotifyConfigurationUseCase"],
+    #     tier: "NotifyConfigurationTier",
+    #     next_token: "NextToken",
+    #     max_results: 1
+    #   }
+    #   options = {}
+    #   response = client.list_notify_countries(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     notify_countries: [
+    #       {
+    #         iso_country_code: "IsoCountryCode", # required
+    #         country_name: "String", # required
+    #         supported_channels: ["NumberCapability"], # required
+    #         supported_use_cases: ["NotifyConfigurationUseCase"], # required
+    #         supported_tiers: ["NotifyConfigurationTier"], # required
+    #         customer_owned_identity_required: false, # required
+    #       }
+    #     ],
+    #     next_token: "NextToken"
+    #   }
+    # @return [Types::ListNotifyCountriesResult]
+    def list_notify_countries(params = {}, options = {})
+      request = build_request(:list_notify_countries, params)
+      request.send_request(options)
+    end
+
     # <p>Lists all associated origination identities in your pool.</p> <p>If you specify filters, the output includes information for only those origination identities that meet the filter criteria.</p>
     # @param [Hash, Types::ListPoolOriginationIdentitiesRequest] params
     # @option params [String] :pool_id
-    #   <p>The unique identifier for the pool. This value can be either the PoolId or PoolArn.</p> <important> <p>If you are using a shared AWS End User Messaging SMS and Voice resource then you must use the full Amazon Resource Name(ARN).</p> </important>
+    #   <p>The unique identifier for the pool. This value can be either the PoolId or PoolArn.</p> <important> <p>If you are using a shared End User Messaging SMS resource then you must use the full Amazon Resource Name(ARN).</p> </important>
     # @option params [Array<Types::PoolOriginationIdentitiesFilter>] :filters
     #   <p>An array of PoolOriginationIdentitiesFilter objects to filter the results..</p>
     # @option params [String] :next_token
@@ -2449,10 +3363,10 @@ module Aws::PinpointSMSVoiceV2
       request.send_request(options)
     end
 
-    # <p>Creates or updates a keyword configuration on an origination phone number or pool.</p> <p> A keyword is a word that you can search for on a particular phone number or pool. It is also a specific word or phrase that an end user can send to your number to elicit a response, such as an informational message or a special offer. When your number receives a message that begins with a keyword, AWS End User Messaging SMS and Voice responds with a customizable message.</p> <p>If you specify a keyword that isn't valid, an error is returned.</p>
+    # <p>Creates or updates a keyword configuration on an origination phone number or pool.</p> <p> A keyword is a word that you can search for on a particular phone number or pool. It is also a specific word or phrase that an end user can send to your number to elicit a response, such as an informational message or a special offer. When your number receives a message that begins with a keyword, End User Messaging SMS responds with a customizable message.</p> <p>If you specify a keyword that isn't valid, an error is returned.</p>
     # @param [Hash, Types::PutKeywordRequest] params
     # @option params [String] :origination_identity
-    #   <p>The origination identity to use such as a PhoneNumberId, PhoneNumberArn, SenderId or SenderIdArn. You can use <a>DescribePhoneNumbers</a> get the values for PhoneNumberId and PhoneNumberArn while <a>DescribeSenderIds</a> can be used to get the values for SenderId and SenderIdArn.</p> <important> <p>If you are using a shared AWS End User Messaging SMS and Voice resource then you must use the full Amazon Resource Name(ARN).</p> </important>
+    #   <p>The origination identity to use such as a PhoneNumberId, PhoneNumberArn, SenderId or SenderIdArn. You can use <a>DescribePhoneNumbers</a> get the values for PhoneNumberId and PhoneNumberArn while <a>DescribeSenderIds</a> can be used to get the values for SenderId and SenderIdArn.</p> <important> <p>If you are using a shared End User Messaging SMS resource then you must use the full Amazon Resource Name(ARN).</p> </important>
     # @option params [String] :keyword
     #   <p>The new keyword to add.</p>
     # @option params [String] :keyword_message
@@ -2511,7 +3425,7 @@ module Aws::PinpointSMSVoiceV2
     # <p>Creates an opted out destination phone number in the opt-out list.</p> <p>If the destination phone number isn't valid or if the specified opt-out list doesn't exist, an error is returned.</p>
     # @param [Hash, Types::PutOptedOutNumberRequest] params
     # @option params [String] :opt_out_list_name
-    #   <p>The OptOutListName or OptOutListArn to add the phone number to.</p> <important> <p>If you are using a shared AWS End User Messaging SMS and Voice resource then you must use the full Amazon Resource Name(ARN).</p> </important>
+    #   <p>The OptOutListName or OptOutListArn to add the phone number to.</p> <important> <p>If you are using a shared End User Messaging SMS resource then you must use the full Amazon Resource Name(ARN).</p> </important>
     # @option params [String] :opted_out_number
     #   <p>The phone number to add to the OptOutList in E.164 format.</p>
     # @example Request syntax with placeholder values
@@ -2614,10 +3528,10 @@ module Aws::PinpointSMSVoiceV2
       request.send_request(options)
     end
 
-    # <p>Attaches a resource-based policy to a AWS End User Messaging SMS and Voice resource(phone number, sender Id, phone poll, or opt-out list) that is used for sharing the resource. A shared resource can be a Pool, Opt-out list, Sender Id, or Phone number. For more information about resource-based policies, see <a href="https://docs.aws.amazon.com/sms-voice/latest/userguide/shared-resources.html">Working with shared resources</a> in the <i>AWS End User Messaging SMS User Guide</i>. </p>
+    # <p>Attaches a resource-based policy to a End User Messaging SMS resource(phone number, sender Id, phone poll, or opt-out list) that is used for sharing the resource. A shared resource can be a Pool, Opt-out list, Sender Id, or Phone number. For more information about resource-based policies, see <a href="https://docs.aws.amazon.com/sms-voice/latest/userguide/shared-resources.html">Working with shared resources</a> in the <i>End User Messaging SMS User Guide</i>. </p>
     # @param [Hash, Types::PutResourcePolicyRequest] params
     # @option params [String] :resource_arn
-    #   <p>The Amazon Resource Name (ARN) of the AWS End User Messaging SMS and Voice resource to attach the resource-based policy to.</p>
+    #   <p>The Amazon Resource Name (ARN) of the End User Messaging SMS resource to attach the resource-based policy to.</p>
     # @option params [String] :policy
     #   <p>The JSON formatted resource-based policy to attach.</p>
     # @example Request syntax with placeholder values
@@ -2643,7 +3557,7 @@ module Aws::PinpointSMSVoiceV2
     # <p>Releases an existing origination phone number in your account. Once released, a phone number is no longer available for sending messages.</p> <p>If the origination phone number has deletion protection enabled or is associated with a pool, an error is returned.</p>
     # @param [Hash, Types::ReleasePhoneNumberRequest] params
     # @option params [String] :phone_number_id
-    #   <p>The PhoneNumberId or PhoneNumberArn of the phone number to release. You can use <a>DescribePhoneNumbers</a> to get the values for PhoneNumberId and PhoneNumberArn.</p> <important> <p>If you are using a shared AWS End User Messaging SMS and Voice resource then you must use the full Amazon Resource Name(ARN).</p> </important>
+    #   <p>The PhoneNumberId or PhoneNumberArn of the phone number to release. You can use <a>DescribePhoneNumbers</a> to get the values for PhoneNumberId and PhoneNumberArn.</p> <important> <p>If you are using a shared End User Messaging SMS resource then you must use the full Amazon Resource Name(ARN).</p> </important>
     # @example Request syntax with placeholder values
     #   params = {
     #     phone_number_id: "PhoneNumberIdOrArn", # required
@@ -2706,7 +3620,7 @@ module Aws::PinpointSMSVoiceV2
       request.send_request(options)
     end
 
-    # <p>Request an origination phone number for use in your account. For more information on phone number request see <a href="https://docs.aws.amazon.com/sms-voice/latest/userguide/phone-numbers-request.html">Request a phone number</a> in the <i>AWS End User Messaging SMS User Guide</i>.</p>
+    # <p>Request an origination phone number for use in your account. For more information on phone number request see <a href="https://docs.aws.amazon.com/sms-voice/latest/userguide/phone-numbers-request.html">Request a phone number</a> in the <i>End User Messaging SMS User Guide</i>.</p>
     # @param [Hash, Types::RequestPhoneNumberRequest] params
     # @option params [String] :iso_country_code
     #   <p>The two-character code, in ISO 3166-1 alpha-2 format, for the country or region. </p>
@@ -2717,17 +3631,19 @@ module Aws::PinpointSMSVoiceV2
     # @option params [String] :number_type
     #   <p>The type of phone number to request.</p> <p>When you request a <code>SIMULATOR</code> phone number, you must set <b>MessageType</b> as <code>TRANSACTIONAL</code>. </p>
     # @option params [String] :opt_out_list_name
-    #   <p>The name of the OptOutList to associate with the phone number. You can use the OptOutListName or OptOutListArn.</p> <important> <p>If you are using a shared AWS End User Messaging SMS and Voice resource then you must use the full Amazon Resource Name(ARN).</p> </important>
+    #   <p>The name of the OptOutList to associate with the phone number. You can use the OptOutListName or OptOutListArn.</p> <important> <p>If you are using a shared End User Messaging SMS resource then you must use the full Amazon Resource Name(ARN).</p> </important>
     # @option params [String] :pool_id
-    #   <p>The pool to associated with the phone number. You can use the PoolId or PoolArn. </p> <important> <p>If you are using a shared AWS End User Messaging SMS and Voice resource then you must use the full Amazon Resource Name(ARN).</p> </important>
+    #   <p>The pool to associated with the phone number. You can use the PoolId or PoolArn. </p> <important> <p>If you are using a shared End User Messaging SMS resource then you must use the full Amazon Resource Name(ARN).</p> </important>
     # @option params [String] :registration_id
     #   <p>Use this field to attach your phone number for an external registration process.</p>
+    # @option params [Array<Types::NumberPreferenceItem>] :number_preference
+    #   <p>An optional selection preference used to request a specific phone number, such as a number that starts with, ends with, or contains a particular digit pattern. You can specify at most one preference. Number preferences apply only to <code>TEN_DLC</code> requests in the <code>US</code>.</p>
     # @option params [Boolean] :international_sending_enabled
     #   <p>By default this is set to false. When set to true the international sending of phone number is Enabled. </p>
     # @option params [Boolean] :deletion_protection_enabled
     #   <p>By default this is set to false. When set to true the phone number can't be deleted.</p>
     # @option params [Array<Types::Tag>] :tags
-    #   <p>An array of tags (key and value pairs) associate with the requested phone number. </p>
+    #   <p>An array of tags (key and value pairs) to associate with the requested phone number. </p>
     # @option params [String] :client_token
     #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don't specify a client token, a randomly generated token is used for the request to ensure idempotency.</p>
     # @example Request syntax with placeholder values
@@ -2739,6 +3655,12 @@ module Aws::PinpointSMSVoiceV2
     #     opt_out_list_name: "OptOutListNameOrArn",
     #     pool_id: "PoolIdOrArn",
     #     registration_id: "RegistrationIdOrArn",
+    #     number_preference: [
+    #       {
+    #         preference_type: ["PreferenceType"], # required
+    #         filter: ["NumberFilterValue"], # required
+    #       }
+    #     ],
     #     international_sending_enabled: false,
     #     deletion_protection_enabled: false,
     #     tags: [
@@ -2789,7 +3711,7 @@ module Aws::PinpointSMSVoiceV2
     # <p>Request a new sender ID that doesn't require registration. </p>
     # @param [Hash, Types::RequestSenderIdRequest] params
     # @option params [String] :sender_id
-    #   <p>The sender ID string to request.</p>
+    #   <p>The sender ID string to request. The sender ID can be 1-11 alphanumeric characters including letters (A-Z, a-z), numbers (0-9), or hyphens (-). The sender ID must contain at least one letter and cannot start or end with a hyphen.</p>
     # @option params [String] :iso_country_code
     #   <p>The two-character code, in ISO 3166-1 alpha-2 format, for the country or region.</p>
     # @option params [Array<String>] :message_types
@@ -2848,7 +3770,7 @@ module Aws::PinpointSMSVoiceV2
     # @option params [String] :language_code
     #   <p>Choose the language to use for the message.</p>
     # @option params [String] :origination_identity
-    #   <p>The origination identity of the message. This can be either the PhoneNumber, PhoneNumberId, PhoneNumberArn, SenderId, SenderIdArn, PoolId, or PoolArn.</p> <important> <p>If you are using a shared AWS End User Messaging SMS and Voice resource then you must use the full Amazon Resource Name(ARN).</p> </important>
+    #   <p>The origination identity of the message. This can be either the PhoneNumber, PhoneNumberId, PhoneNumberArn, SenderId, SenderIdArn, PoolId, or PoolArn.</p> <important> <p>If you are using a shared End User Messaging SMS resource then you must use the full Amazon Resource Name(ARN).</p> </important>
     # @option params [String] :configuration_set_name
     #   <p>The name of the configuration set to use. This can be either the ConfigurationSetName or ConfigurationSetArn.</p>
     # @option params [Hash<String, String>] :context
@@ -2887,7 +3809,7 @@ module Aws::PinpointSMSVoiceV2
     # @option params [String] :destination_phone_number
     #   <p>The destination phone number in E.164 format.</p>
     # @option params [String] :origination_identity
-    #   <p>The origination identity of the message. This can be either the PhoneNumber, PhoneNumberId, PhoneNumberArn, SenderId, SenderIdArn, PoolId, or PoolArn.</p> <important> <p>If you are using a shared AWS End User Messaging SMS and Voice resource then you must use the full Amazon Resource Name(ARN).</p> </important>
+    #   <p>The origination identity of the message. This can be either the PhoneNumber, PhoneNumberId, PhoneNumberArn, SenderId, SenderIdArn, PoolId, or PoolArn.</p> <important> <p>If you are using a shared End User Messaging SMS resource then you must use the full Amazon Resource Name(ARN).</p> </important>
     # @option params [String] :message_body
     #   <p>The text body of the message.</p>
     # @option params [Array<String>] :media_urls
@@ -2935,12 +3857,367 @@ module Aws::PinpointSMSVoiceV2
       request.send_request(options)
     end
 
-    # <p>Creates a new text message and sends it to a recipient's phone number. SendTextMessage only sends an SMS message to one recipient each time it is invoked.</p> <p>SMS throughput limits are measured in Message Parts per Second (MPS). Your MPS limit depends on the destination country of your messages, as well as the type of phone number (origination number) that you use to send the message. For more information about MPS, see <a href="https://docs.aws.amazon.com/sms-voice/latest/userguide/sms-limitations-mps.html">Message Parts per Second (MPS) limits</a> in the <i>AWS End User Messaging SMS User Guide</i>.</p>
+    # <p>Sends a templated text message through a notify configuration to a recipient's phone number.</p>
+    # @param [Hash, Types::SendNotifyTextMessageRequest] params
+    # @option params [String] :notify_configuration_id
+    #   <p>The unique identifier of the notify configuration to use for sending the message. This can be either the NotifyConfigurationId or NotifyConfigurationArn.</p>
+    # @option params [String] :destination_phone_number
+    #   <p>The destination phone number in E.164 format.</p>
+    # @option params [String] :template_id
+    #   <p>The unique identifier of the template to use for the message.</p>
+    # @option params [Hash<String, String>] :template_variables
+    #   <p>A map of template variable names and their values. All variable values are passed as strings regardless of the declared variable type. For example, pass <code>INTEGER</code> values as <code>"42"</code> and <code>BOOLEAN</code> values as <code>"true"</code> or <code>"false"</code>.</p>
+    # @option params [Integer] :time_to_live
+    #   <p>How long the text message is valid for, in seconds. By default this is 72 hours.</p>
+    # @option params [Hash<String, String>] :context
+    #   <p>You can specify custom data in this field. If you do, that data is logged to the event destination.</p>
+    # @option params [String] :configuration_set_name
+    #   <p>The name of the configuration set to use. This can be either the ConfigurationSetName or ConfigurationSetArn.</p>
+    # @option params [Boolean] :dry_run
+    #   <p>When set to true, the message is checked and validated, but isn't sent to the end recipient.</p>
+    # @option params [Boolean] :message_feedback_enabled
+    #   <p>Set to true to enable message feedback for the message. When a user receives the message you need to update the message status using <a>PutMessageFeedback</a>.</p>
+    # @example SendNotifyTextMessage
+    #   # Send an OTP verification code via SMS using a notify configuration.
+    #   params = {
+    #     notify_configuration_id: "nc-1234567890abcdef0",
+    #     destination_phone_number: "+12065550100",
+    #     template_variables: {
+    #       "code" => "123456",
+    #       "expiry" => "10"
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.send_notify_text_message(params, options)
+    #   response.to_h #=>
+    #   {
+    #     message_id: "msg-1234567890abcdef0",
+    #     template_id: "nt-1234567890abcdef0",
+    #     resolved_message_body: "Your verification code is 123456. It expires in 10 minutes."
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     notify_configuration_id: "NotifyConfigurationIdOrArn", # required
+    #     destination_phone_number: "PhoneNumber", # required
+    #     template_id: "NotifyTemplateId",
+    #     template_variables: { # required
+    #       "TemplateVariableName" => "TemplateVariableValue"
+    #     },
+    #     time_to_live: 1,
+    #     context: {
+    #       "ContextKey" => "ContextValue"
+    #     },
+    #     configuration_set_name: "ConfigurationSetNameOrArn",
+    #     dry_run: false,
+    #     message_feedback_enabled: false
+    #   }
+    #   options = {}
+    #   response = client.send_notify_text_message(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     message_id: "String",
+    #     template_id: "NotifyTemplateId",
+    #     resolved_message_body: "String"
+    #   }
+    # @return [Types::SendNotifyTextMessageResult]
+    def send_notify_text_message(params = {}, options = {})
+      request = build_request(:send_notify_text_message, params)
+      request.send_request(options)
+    end
+
+    # <p>Sends a templated voice message through a notify configuration to a recipient's phone number.</p>
+    # @param [Hash, Types::SendNotifyVoiceMessageRequest] params
+    # @option params [String] :notify_configuration_id
+    #   <p>The unique identifier of the notify configuration to use for sending the message. This can be either the NotifyConfigurationId or NotifyConfigurationArn.</p>
+    # @option params [String] :destination_phone_number
+    #   <p>The destination phone number in E.164 format.</p>
+    # @option params [String] :template_id
+    #   <p>The unique identifier of the template to use for the message.</p>
+    # @option params [Hash<String, String>] :template_variables
+    #   <p>A map of template variable names and their values. All variable values are passed as strings regardless of the declared variable type. For example, pass <code>INTEGER</code> values as <code>"42"</code> and <code>BOOLEAN</code> values as <code>"true"</code> or <code>"false"</code>.</p>
+    # @option params [String] :voice_id
+    #   <p>The voice ID to use for the voice message.</p>
+    # @option params [Integer] :time_to_live
+    #   <p>How long the voice message is valid for, in seconds. By default this is 72 hours.</p>
+    # @option params [Hash<String, String>] :context
+    #   <p>You can specify custom data in this field. If you do, that data is logged to the event destination.</p>
+    # @option params [String] :configuration_set_name
+    #   <p>The name of the configuration set to use. This can be either the ConfigurationSetName or ConfigurationSetArn.</p>
+    # @option params [Boolean] :dry_run
+    #   <p>When set to true, the message is checked and validated, but isn't sent to the end recipient.</p>
+    # @option params [Boolean] :message_feedback_enabled
+    #   <p>Set to true to enable message feedback for the message. When a user receives the message you need to update the message status using <a>PutMessageFeedback</a>.</p>
+    # @example SendNotifyVoiceMessage
+    #   # Send an OTP verification code via voice call using a notify configuration.
+    #   params = {
+    #     notify_configuration_id: "nc-1234567890abcdef0",
+    #     destination_phone_number: "+12065550100",
+    #     template_variables: {
+    #       "code" => "123456",
+    #       "expiry" => "10"
+    #     },
+    #     voice_id: "JOANNA"
+    #   }
+    #   options = {}
+    #   response = client.send_notify_voice_message(params, options)
+    #   response.to_h #=>
+    #   {
+    #     message_id: "msg-0987654321fedcba0",
+    #     template_id: "nt-1234567890abcdef0",
+    #     resolved_message_body: "Your verification code is 123456. It expires in 10 minutes."
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     notify_configuration_id: "NotifyConfigurationIdOrArn", # required
+    #     destination_phone_number: "PhoneNumber", # required
+    #     template_id: "NotifyTemplateId",
+    #     template_variables: { # required
+    #       "TemplateVariableName" => "TemplateVariableValue"
+    #     },
+    #     voice_id: "VoiceId",
+    #     time_to_live: 1,
+    #     context: {
+    #       "ContextKey" => "ContextValue"
+    #     },
+    #     configuration_set_name: "ConfigurationSetNameOrArn",
+    #     dry_run: false,
+    #     message_feedback_enabled: false
+    #   }
+    #   options = {}
+    #   response = client.send_notify_voice_message(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     message_id: "String",
+    #     template_id: "NotifyTemplateId",
+    #     resolved_message_body: "String"
+    #   }
+    # @return [Types::SendNotifyVoiceMessageResult]
+    def send_notify_voice_message(params = {}, options = {})
+      request = build_request(:send_notify_voice_message, params)
+      request.send_request(options)
+    end
+
+    # <p>Creates a new RCS message and sends it to a recipient's phone number. RCS messages support rich content including text, files, rich cards, and carousels with interactive suggested actions.</p>
+    # @param [Hash, Types::SendRcsMessageRequest] params
+    # @option params [String] :destination_phone_number
+    #   <p>The destination phone number in E.164 format.</p>
+    # @option params [String] :origination_identity
+    #   <p>The origination identity of the message. This can be either the RcsAgentId, RcsAgentArn, PoolId, or PoolArn.</p>
+    # @option params [Types::RcsMessageContent] :rcs_message_content
+    #   <p>The content of the RCS message. Contains the message content (text, file, rich card, or carousel) and optional message-level suggested actions.</p>
+    # @option params [Integer] :time_to_live
+    #   <p>The duration in seconds that the RCS message is valid for delivery. If the message cannot be delivered within this duration, it is considered expired. Valid values are 1 to 172800 (48 hours). If a FallbackConfiguration is provided, the fallback is triggered when the duration expires without delivery confirmation.</p>
+    # @option params [String] :message_traffic_type
+    #   <p>The traffic type of the RCS message. Valid values are AUTHENTICATION, TRANSACTION, PROMOTION, SERVICE_REQUEST, and ACKNOWLEDGEMENT. This field is reserved for future use.</p>
+    # @option params [Types::RcsFallbackConfiguration] :fallback_configuration
+    #   <p>Configuration for SMS or MMS fallback when RCS delivery fails. If provided, the service sends a fallback message via the specified channel when the RCS message fails or the TimeToLive expires.</p>
+    # @option params [String] :protect_configuration_id
+    #   <p>The unique identifier of the protect configuration to use.</p>
+    # @option params [String] :configuration_set_name
+    #   <p>The name of the configuration set to use. This can be either the ConfigurationSetName or ConfigurationSetArn.</p>
+    # @option params [String] :max_price
+    #   <p>The maximum amount that you want to spend, in US dollars, per each RCS message.</p>
+    # @option params [Boolean] :dry_run
+    #   <p>When set to true, the message is checked and validated, but isn't sent to the end recipient.</p>
+    # @option params [Hash<String, String>] :context
+    #   <p>You can specify custom data in this field. If you do, that data is logged to the event destination.</p>
+    # @option params [Boolean] :message_feedback_enabled
+    #   <p>Set to true to enable message feedback for the message. When a user receives the message you need to update the message status using <a>PutMessageFeedback</a>.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     destination_phone_number: "PhoneNumber", # required
+    #     origination_identity: "RcsMessageOriginationIdentity", # required
+    #     rcs_message_content: {
+    #       content: { # required
+    #         # One of:
+    #         text_message: {
+    #           body: "RcsTextBody", # required
+    #         },
+    #         file_message: {
+    #           file_url: "RcsMediaUrl", # required
+    #           thumbnail_url: "RcsMediaUrl"
+    #         },
+    #         rich_card: {
+    #           card_orientation: "String", # required
+    #           thumbnail_image_alignment: "String",
+    #           card_content: { # required
+    #             title: "RcsCardTitle",
+    #             description: "RcsCardDescription",
+    #             media: {
+    #               file_url: "RcsMediaUrl", # required
+    #               thumbnail_url: "RcsMediaUrl",
+    #               height: "String"
+    #             },
+    #             suggestions: [{
+    #               # One of:
+    #               reply: {
+    #                 text: "RcsSuggestedActionText", # required
+    #                 postback_data: "RcsPostbackData", # required
+    #               },
+    #               open_url: {
+    #                 text: "RcsSuggestedActionText", # required
+    #                 postback_data: "RcsPostbackData", # required
+    #                 url: "RcsOpenUrlValue", # required
+    #                 application: "String",
+    #                 webview_view_mode: "String"
+    #               },
+    #               dial_phone: {
+    #                 text: "RcsSuggestedActionText", # required
+    #                 postback_data: "RcsPostbackData", # required
+    #                 phone_number: "PhoneNumber", # required
+    #               },
+    #               show_location: {
+    #                 text: "RcsSuggestedActionText", # required
+    #                 postback_data: "RcsPostbackData", # required
+    #                 latitude: 1.0, # required
+    #                 longitude: 1.0, # required
+    #                 label: "RcsLocationLabel"
+    #               },
+    #               request_location: {
+    #                 text: "RcsSuggestedActionText", # required
+    #                 postback_data: "RcsPostbackData", # required
+    #               },
+    #               create_calendar_event: {
+    #                 text: "RcsSuggestedActionText", # required
+    #                 postback_data: "RcsPostbackData", # required
+    #                 title: "RcsCalendarEventTitle", # required
+    #                 start_time: Time.now, # required
+    #                 end_time: Time.now, # required
+    #                 description: "RcsCalendarEventDescription"
+    #               }
+    #             }]
+    #           }
+    #         },
+    #         carousel: {
+    #           card_width: "String", # required
+    #           card_contents: [ # required
+    #             {
+    #               title: "RcsCardTitle",
+    #               description: "RcsCardDescription",
+    #               media: {
+    #                 file_url: "RcsMediaUrl", # required
+    #                 thumbnail_url: "RcsMediaUrl",
+    #                 height: "String"
+    #               },
+    #               suggestions: [{
+    #                 # One of:
+    #                 reply: {
+    #                   text: "RcsSuggestedActionText", # required
+    #                   postback_data: "RcsPostbackData", # required
+    #                 },
+    #                 open_url: {
+    #                   text: "RcsSuggestedActionText", # required
+    #                   postback_data: "RcsPostbackData", # required
+    #                   url: "RcsOpenUrlValue", # required
+    #                   application: "String",
+    #                   webview_view_mode: "String"
+    #                 },
+    #                 dial_phone: {
+    #                   text: "RcsSuggestedActionText", # required
+    #                   postback_data: "RcsPostbackData", # required
+    #                   phone_number: "PhoneNumber", # required
+    #                 },
+    #                 show_location: {
+    #                   text: "RcsSuggestedActionText", # required
+    #                   postback_data: "RcsPostbackData", # required
+    #                   latitude: 1.0, # required
+    #                   longitude: 1.0, # required
+    #                   label: "RcsLocationLabel"
+    #                 },
+    #                 request_location: {
+    #                   text: "RcsSuggestedActionText", # required
+    #                   postback_data: "RcsPostbackData", # required
+    #                 },
+    #                 create_calendar_event: {
+    #                   text: "RcsSuggestedActionText", # required
+    #                   postback_data: "RcsPostbackData", # required
+    #                   title: "RcsCalendarEventTitle", # required
+    #                   start_time: Time.now, # required
+    #                   end_time: Time.now, # required
+    #                   description: "RcsCalendarEventDescription"
+    #                 }
+    #               }]
+    #             }
+    #           ]
+    #         }
+    #       },
+    #       suggestions: [{
+    #         # One of:
+    #         reply: {
+    #           text: "RcsSuggestedActionText", # required
+    #           postback_data: "RcsPostbackData", # required
+    #         },
+    #         open_url: {
+    #           text: "RcsSuggestedActionText", # required
+    #           postback_data: "RcsPostbackData", # required
+    #           url: "RcsOpenUrlValue", # required
+    #           application: "String",
+    #           webview_view_mode: "String"
+    #         },
+    #         dial_phone: {
+    #           text: "RcsSuggestedActionText", # required
+    #           postback_data: "RcsPostbackData", # required
+    #           phone_number: "PhoneNumber", # required
+    #         },
+    #         show_location: {
+    #           text: "RcsSuggestedActionText", # required
+    #           postback_data: "RcsPostbackData", # required
+    #           latitude: 1.0, # required
+    #           longitude: 1.0, # required
+    #           label: "RcsLocationLabel"
+    #         },
+    #         request_location: {
+    #           text: "RcsSuggestedActionText", # required
+    #           postback_data: "RcsPostbackData", # required
+    #         },
+    #         create_calendar_event: {
+    #           text: "RcsSuggestedActionText", # required
+    #           postback_data: "RcsPostbackData", # required
+    #           title: "RcsCalendarEventTitle", # required
+    #           start_time: Time.now, # required
+    #           end_time: Time.now, # required
+    #           description: "RcsCalendarEventDescription"
+    #         }
+    #       }]
+    #     },
+    #     time_to_live: 1,
+    #     message_traffic_type: "RcsMessageTrafficType",
+    #     fallback_configuration: {
+    #       channel: "RcsFallbackChannel", # required
+    #       message_body: "RcsFallbackMessageBody",
+    #       media_urls: ["MediaUrlValue"],
+    #       origination_identity: "RcsFallbackOriginationIdentity"
+    #     },
+    #     protect_configuration_id: "ProtectConfigurationIdOrArn",
+    #     configuration_set_name: "ConfigurationSetNameOrArn",
+    #     max_price: "MaxPrice",
+    #     dry_run: false,
+    #     context: {
+    #       "ContextKey" => "ContextValue"
+    #     },
+    #     message_feedback_enabled: false
+    #   }
+    #   options = {}
+    #   response = client.send_rcs_message(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     message_id: "String"
+    #   }
+    # @return [Types::SendRcsMessageResult]
+    def send_rcs_message(params = {}, options = {})
+      request = build_request(:send_rcs_message, params)
+      request.send_request(options)
+    end
+
+    # <p>Creates a new text message and sends it to a recipient's phone number. SendTextMessage only sends an SMS message to one recipient each time it is invoked.</p> <p>SMS throughput limits are measured in Message Parts per Second (MPS). Your MPS limit depends on the destination country of your messages, as well as the type of phone number (origination number) that you use to send the message. For more information about MPS, see <a href="https://docs.aws.amazon.com/sms-voice/latest/userguide/sms-limitations-mps.html">Message Parts per Second (MPS) limits</a> in the <i>End User Messaging SMS User Guide</i>.</p>
     # @param [Hash, Types::SendTextMessageRequest] params
     # @option params [String] :destination_phone_number
     #   <p>The destination phone number in E.164 format.</p>
     # @option params [String] :origination_identity
-    #   <p>The origination identity of the message. This can be either the PhoneNumber, PhoneNumberId, PhoneNumberArn, SenderId, SenderIdArn, PoolId, or PoolArn.</p> <important> <p>If you are using a shared AWS End User Messaging SMS and Voice resource then you must use the full Amazon Resource Name(ARN).</p> </important>
+    #   <p>The origination identity of the message. This can be either the PhoneNumber, PhoneNumberId, PhoneNumberArn, RcsAgentId, RcsAgentArn, SenderId, SenderIdArn, PoolId, or PoolArn.</p> <important> <p>If you are using a shared End User Messaging SMS resource then you must use the full Amazon Resource Name(ARN).</p> </important>
     # @option params [String] :message_body
     #   <p>The body of the text message.</p>
     # @option params [String] :message_type
@@ -2958,7 +4235,7 @@ module Aws::PinpointSMSVoiceV2
     # @option params [Hash<String, String>] :destination_country_parameters
     #   <p>This field is used for any country-specific registration requirements. Currently, this setting is only used when you send messages to recipients in India using a sender ID. For more information see <a href="https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-senderid-india.html">Special requirements for sending SMS messages to recipients in India</a>. </p> <ul> <li> <p> <code>IN_ENTITY_ID</code> The entity ID or Principal Entity (PE) ID that you received after completing the sender ID registration process.</p> </li> <li> <p> <code>IN_TEMPLATE_ID</code> The template ID that you received after completing the sender ID registration process.</p> <important> <p>Make sure that the Template ID that you specify matches your message template exactly. If your message doesn't match the template that you provided during the registration process, the mobile carriers might reject your message.</p> </important> </li> </ul>
     # @option params [Boolean] :dry_run
-    #   <p>When set to true, the message is checked and validated, but isn't sent to the end recipient. You are not charged for using <code>DryRun</code>.</p> <p>The Message Parts per Second (MPS) limit when using <code>DryRun</code> is five. If your origination identity has a lower MPS limit then the lower MPS limit is used. For more information about MPS limits, see <a href="https://docs.aws.amazon.com/sms-voice/latest/userguide/sms-limitations-mps.html">Message Parts per Second (MPS) limits</a> in the <i>AWS End User Messaging SMS User Guide</i>..</p>
+    #   <p>When set to true, the message is checked and validated, but isn't sent to the end recipient. You are not charged for using <code>DryRun</code>.</p> <p>The Message Parts per Second (MPS) limit when using <code>DryRun</code> is five. If your origination identity has a lower MPS limit then the lower MPS limit is used. For more information about MPS limits, see <a href="https://docs.aws.amazon.com/sms-voice/latest/userguide/sms-limitations-mps.html">Message Parts per Second (MPS) limits</a> in the <i>End User Messaging SMS User Guide</i>..</p>
     # @option params [String] :protect_configuration_id
     #   <p>The unique identifier for the protect configuration.</p>
     # @option params [Boolean] :message_feedback_enabled
@@ -3001,7 +4278,7 @@ module Aws::PinpointSMSVoiceV2
     # @option params [String] :destination_phone_number
     #   <p>The destination phone number in E.164 format.</p>
     # @option params [String] :origination_identity
-    #   <p>The origination identity to use for the voice call. This can be the PhoneNumber, PhoneNumberId, PhoneNumberArn, PoolId, or PoolArn.</p> <important> <p>If you are using a shared AWS End User Messaging SMS and Voice resource then you must use the full Amazon Resource Name(ARN).</p> </important>
+    #   <p>The origination identity to use for the voice call. This can be the PhoneNumber, PhoneNumberId, PhoneNumberArn, PoolId, or PoolArn.</p> <important> <p>If you are using a shared End User Messaging SMS resource then you must use the full Amazon Resource Name(ARN).</p> </important>
     # @option params [String] :message_body
     #   <p>The text to convert to a voice message.</p>
     # @option params [String] :message_body_text_type
@@ -3173,6 +4450,59 @@ module Aws::PinpointSMSVoiceV2
       request.send_request(options)
     end
 
+    # <p>Sets an account level monthly spend limit override for sending notify messages. The requested spend limit must be less than or equal to the <code>MaxLimit</code>, which is set by Amazon Web Services. </p>
+    # @param [Hash, Types::SetNotifyMessageSpendLimitOverrideRequest] params
+    # @option params [Integer] :monthly_limit
+    #   <p>The new monthly limit to enforce on notify messages.</p>
+    # @example SetNotifyMessageSpendLimitOverride
+    #   # Set a monthly spend limit override for notify messages.
+    #   params = {
+    #     monthly_limit: 1000
+    #   }
+    #   options = {}
+    #   response = client.set_notify_message_spend_limit_override(params, options)
+    #   response.to_h #=>
+    #   {
+    #     monthly_limit: 1000
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     monthly_limit: 1, # required
+    #   }
+    #   options = {}
+    #   response = client.set_notify_message_spend_limit_override(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     monthly_limit: 1
+    #   }
+    # @return [Types::SetNotifyMessageSpendLimitOverrideResult]
+    def set_notify_message_spend_limit_override(params = {}, options = {})
+      request = build_request(:set_notify_message_spend_limit_override, params)
+      request.send_request(options)
+    end
+
+    # <p>Sets an account level monthly spend limit override for sending RCS messages. The requested spend limit must be less than or equal to the <code>MaxLimit</code>, which is set by Amazon Web Services.</p>
+    # @param [Hash, Types::SetRcsMessageSpendLimitOverrideRequest] params
+    # @option params [Integer] :monthly_limit
+    #   <p>The new monthly limit to enforce on RCS message spending.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     monthly_limit: 1, # required
+    #   }
+    #   options = {}
+    #   response = client.set_rcs_message_spend_limit_override(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     monthly_limit: 1
+    #   }
+    # @return [Types::SetRcsMessageSpendLimitOverrideResult]
+    def set_rcs_message_spend_limit_override(params = {}, options = {})
+      request = build_request(:set_rcs_message_spend_limit_override, params)
+      request.send_request(options)
+    end
+
     # <p>Sets an account level monthly spend limit override for sending text messages. The requested spend limit must be less than or equal to the <code>MaxLimit</code>, which is set by Amazon Web Services. </p>
     # @param [Hash, Types::SetTextMessageSpendLimitOverrideRequest] params
     # @option params [Integer] :monthly_limit
@@ -3219,9 +4549,12 @@ module Aws::PinpointSMSVoiceV2
     # @param [Hash, Types::SubmitRegistrationVersionRequest] params
     # @option params [String] :registration_id
     #   <p>The unique identifier for the registration.</p>
+    # @option params [Boolean] :aws_review
+    #   <p>Set to true to request AWS review of the registration. When enabled, AWS will perform additional validation and review of the registration submission before processing.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     registration_id: "RegistrationIdOrArn", # required
+    #     aws_review: false
     #   }
     #   options = {}
     #   response = client.submit_registration_version(params, options)
@@ -3235,6 +4568,7 @@ module Aws::PinpointSMSVoiceV2
     #     registration_version_status_history: { # required
     #       draft_timestamp: Time.now, # required
     #       submitted_timestamp: Time.now,
+    #       aws_reviewing_timestamp: Time.now,
     #       reviewing_timestamp: Time.now,
     #       requires_authentication_timestamp: Time.now,
     #       approved_timestamp: Time.now,
@@ -3242,7 +4576,8 @@ module Aws::PinpointSMSVoiceV2
     #       denied_timestamp: Time.now,
     #       revoked_timestamp: Time.now,
     #       archived_timestamp: Time.now
-    #     }
+    #     },
+    #     aws_review: false, # required
     #   }
     # @return [Types::SubmitRegistrationVersionResult]
     def submit_registration_version(params = {}, options = {})
@@ -3250,7 +4585,7 @@ module Aws::PinpointSMSVoiceV2
       request.send_request(options)
     end
 
-    # <p>Adds or overwrites only the specified tags for the specified resource. When you specify an existing tag key, the value is overwritten with the new value. Each tag consists of a key and an optional value. Tag keys must be unique per resource. For more information about tags, see <a href="https://docs.aws.amazon.com/sms-voice/latest/userguide/phone-numbers-tags.html">Tags </a> in the <i>AWS End User Messaging SMS User Guide</i>.</p>
+    # <p>Adds or overwrites only the specified tags for the specified resource. When you specify an existing tag key, the value is overwritten with the new value. Each tag consists of a key and an optional value. Tag keys must be unique per resource. For more information about tags, see <a href="https://docs.aws.amazon.com/sms-voice/latest/userguide/phone-numbers-tags.html">Tags </a> in the <i>End User Messaging SMS User Guide</i>.</p>
     # @param [Hash, Types::TagResourceRequest] params
     # @option params [String] :resource_arn
     #   <p>The Amazon Resource Name (ARN) of the resource.</p>
@@ -3277,7 +4612,7 @@ module Aws::PinpointSMSVoiceV2
       request.send_request(options)
     end
 
-    # <p>Removes the association of the specified tags from a resource. For more information on tags see <a href="https://docs.aws.amazon.com/sms-voice/latest/userguide/phone-numbers-tags.html">Tags </a> in the <i>AWS End User Messaging SMS User Guide</i>.</p>
+    # <p>Removes the association of the specified tags from a resource. For more information on tags see <a href="https://docs.aws.amazon.com/sms-voice/latest/userguide/phone-numbers-tags.html">Tags </a> in the <i>End User Messaging SMS User Guide</i>.</p>
     # @param [Hash, Types::UntagResourceRequest] params
     # @option params [String] :resource_arn
     #   <p>The Amazon Resource Name (ARN) of the resource.</p>
@@ -3363,10 +4698,97 @@ module Aws::PinpointSMSVoiceV2
       request.send_request(options)
     end
 
+    # <p>Updates an existing notify configuration. You can update the default template, pool association, enabled channels, enabled countries, and deletion protection settings.</p>
+    # @param [Hash, Types::UpdateNotifyConfigurationRequest] params
+    # @option params [String] :notify_configuration_id
+    #   <p>The identifier of the notify configuration to update. The NotifyConfigurationId can be found using the <a>DescribeNotifyConfigurations</a> operation.</p>
+    # @option params [String] :default_template_id
+    #   <p>The default template identifier to associate with the notify configuration. If specified, this template is used when sending messages without an explicit template identifier. Pass the special value <code>UNSET_DEFAULT_TEMPLATE</code> to clear the current default template from the notify configuration.</p>
+    # @option params [String] :pool_id
+    #   <p>The pool identifier or Amazon Resource Name (ARN) to associate with the notify configuration. Pass the special value <code>UNSET_DEFAULT_POOL_FOR_NOTIFY</code> to clear the current default pool from the notify configuration.</p>
+    # @option params [Array<String>] :enabled_countries
+    #   <p>An array of two-character ISO country codes, in ISO 3166-1 alpha-2 format, that are enabled for the notify configuration.</p>
+    # @option params [Array<String>] :enabled_channels
+    #   <p>An array of channels to enable for the notify configuration. Supported values include <code>SMS</code> and <code>VOICE</code>.</p>
+    # @option params [Boolean] :deletion_protection_enabled
+    #   <p>When set to true the notify configuration can't be deleted.</p>
+    # @example UpdateNotifyConfiguration
+    #   # Update a notify configuration to add voice channel and additional countries.
+    #   params = {
+    #     notify_configuration_id: "nc-1234567890abcdef0",
+    #     enabled_channels: [
+    #       "SMS",
+    #       "VOICE"
+    #     ],
+    #     enabled_countries: [
+    #       "US",
+    #       "CA",
+    #       "GB"
+    #     ],
+    #     deletion_protection_enabled: true
+    #   }
+    #   options = {}
+    #   response = client.update_notify_configuration(params, options)
+    #   response.to_h #=>
+    #   {
+    #     notify_configuration_arn: "arn:aws:sms-voice:us-east-1:111122223333:notify-configuration/nc-1234567890abcdef0",
+    #     notify_configuration_id: "nc-1234567890abcdef0",
+    #     display_name: "MyOTPConfig",
+    #     use_case: "CODE_VERIFICATION",
+    #     enabled_channels: [
+    #       "SMS",
+    #       "VOICE"
+    #     ],
+    #     enabled_countries: [
+    #       "US",
+    #       "CA",
+    #       "GB"
+    #     ],
+    #     tier: "BASIC",
+    #     tier_upgrade_status: "BASIC",
+    #     status: "ACTIVE",
+    #     deletion_protection_enabled: true,
+    #     created_timestamp: Time.parse(1704067200)
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     notify_configuration_id: "NotifyConfigurationIdOrArn", # required
+    #     default_template_id: "NotifyTemplateId",
+    #     pool_id: "NotifyPoolIdOrUnset",
+    #     enabled_countries: ["IsoCountryCode"],
+    #     enabled_channels: ["NumberCapability"],
+    #     deletion_protection_enabled: false
+    #   }
+    #   options = {}
+    #   response = client.update_notify_configuration(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     notify_configuration_arn: "NotifyConfigurationArn", # required
+    #     notify_configuration_id: "NotifyConfigurationId", # required
+    #     display_name: "NotifyConfigurationDisplayName", # required
+    #     use_case: "NotifyConfigurationUseCase", # required
+    #     default_template_id: "NotifyTemplateId",
+    #     pool_id: "String",
+    #     enabled_countries: ["IsoCountryCode"],
+    #     enabled_channels: ["NumberCapability"], # required
+    #     tier: "NotifyConfigurationTier", # required
+    #     tier_upgrade_status: "TierUpgradeStatus", # required
+    #     status: "NotifyConfigurationStatus", # required
+    #     rejection_reason: "String",
+    #     deletion_protection_enabled: false, # required
+    #     created_timestamp: Time.now, # required
+    #   }
+    # @return [Types::UpdateNotifyConfigurationResult]
+    def update_notify_configuration(params = {}, options = {})
+      request = build_request(:update_notify_configuration, params)
+      request.send_request(options)
+    end
+
     # <p>Updates the configuration of an existing origination phone number. You can update the opt-out list, enable or disable two-way messaging, change the TwoWayChannelArn, enable or disable self-managed opt-outs, and enable or disable deletion protection.</p> <p>If the origination phone number is associated with a pool, an error is returned.</p>
     # @param [Hash, Types::UpdatePhoneNumberRequest] params
     # @option params [String] :phone_number_id
-    #   <p>The unique identifier of the phone number. Valid values for this field can be either the PhoneNumberId or PhoneNumberArn.</p> <important> <p>If you are using a shared AWS End User Messaging SMS and Voice resource then you must use the full Amazon Resource Name(ARN).</p> </important>
+    #   <p>The unique identifier of the phone number. Valid values for this field can be either the PhoneNumberId or PhoneNumberArn.</p> <important> <p>If you are using a shared End User Messaging SMS resource then you must use the full Amazon Resource Name(ARN).</p> </important>
     # @option params [Boolean] :two_way_enabled
     #   <p>By default this is set to false. When set to true you can receive incoming text messages from your end recipients.</p>
     # @option params [String] :two_way_channel_arn
@@ -3374,9 +4796,9 @@ module Aws::PinpointSMSVoiceV2
     # @option params [String] :two_way_channel_role
     #   <p>An optional IAM Role Arn for a service to assume, to be able to post inbound SMS messages.</p>
     # @option params [Boolean] :self_managed_opt_outs_enabled
-    #   <p>By default this is set to false. When an end recipient sends a message that begins with HELP or STOP to one of your dedicated numbers, AWS End User Messaging SMS and Voice automatically replies with a customizable message and adds the end recipient to the OptOutList. When set to true you're responsible for responding to HELP and STOP requests. You're also responsible for tracking and honoring opt-out requests.</p>
+    #   <p>By default this is set to false. When set to false and an end recipient sends a message that begins with HELP or STOP to one of your dedicated numbers, End User Messaging SMS automatically replies with a customizable message and adds the end recipient to the OptOutList. When set to true you're responsible for responding to HELP and STOP requests. You're also responsible for tracking and honoring opt-out requests.</p>
     # @option params [String] :opt_out_list_name
-    #   <p>The OptOutList to add the phone number to. Valid values for this field can be either the OutOutListName or OutOutListArn.</p>
+    #   <p>The OptOutList to add the phone number to. You can use either the opt out list name or the opt out list ARN.</p>
     # @option params [Boolean] :international_sending_enabled
     #   <p>By default this is set to false. When set to true the international sending of phone number is Enabled. </p>
     # @option params [Boolean] :deletion_protection_enabled
@@ -3425,7 +4847,7 @@ module Aws::PinpointSMSVoiceV2
     # <p>Updates the configuration of an existing pool. You can update the opt-out list, enable or disable two-way messaging, change the <code>TwoWayChannelArn</code>, enable or disable self-managed opt-outs, enable or disable deletion protection, and enable or disable shared routes.</p>
     # @param [Hash, Types::UpdatePoolRequest] params
     # @option params [String] :pool_id
-    #   <p>The unique identifier of the pool to update. Valid values are either the PoolId or PoolArn.</p> <important> <p>If you are using a shared AWS End User Messaging SMS and Voice resource then you must use the full Amazon Resource Name(ARN).</p> </important>
+    #   <p>The unique identifier of the pool to update. Valid values are either the PoolId or PoolArn.</p> <important> <p>If you are using a shared End User Messaging SMS resource then you must use the full Amazon Resource Name(ARN).</p> </important>
     # @option params [Boolean] :two_way_enabled
     #   <p>By default this is set to false. When set to true you can receive incoming text messages from your end recipients.</p>
     # @option params [String] :two_way_channel_arn
@@ -3433,9 +4855,9 @@ module Aws::PinpointSMSVoiceV2
     # @option params [String] :two_way_channel_role
     #   <p>An optional IAM Role Arn for a service to assume, to be able to post inbound SMS messages.</p>
     # @option params [Boolean] :self_managed_opt_outs_enabled
-    #   <p>By default this is set to false. When an end recipient sends a message that begins with HELP or STOP to one of your dedicated numbers, AWS End User Messaging SMS and Voice automatically replies with a customizable message and adds the end recipient to the OptOutList. When set to true you're responsible for responding to HELP and STOP requests. You're also responsible for tracking and honoring opt-out requests.</p>
+    #   <p>By default this is set to false. When set to false and an end recipient sends a message that begins with HELP or STOP to one of your dedicated numbers, End User Messaging SMS automatically replies with a customizable message and adds the end recipient to the OptOutList. When set to true you're responsible for responding to HELP and STOP requests. You're also responsible for tracking and honoring opt-out requests.</p>
     # @option params [String] :opt_out_list_name
-    #   <p>The OptOutList to associate with the pool. Valid values are either OptOutListName or OptOutListArn.</p> <important> <p>If you are using a shared AWS End User Messaging SMS and Voice resource then you must use the full Amazon Resource Name(ARN).</p> </important>
+    #   <p>The OptOutList to associate with the pool. Valid values are either OptOutListName or OptOutListArn.</p> <important> <p>If you are using a shared End User Messaging SMS resource then you must use the full Amazon Resource Name(ARN).</p> </important>
     # @option params [Boolean] :shared_routes_enabled
     #   <p>Indicates whether shared routes are enabled for the pool.</p>
     # @option params [Boolean] :deletion_protection_enabled
@@ -3510,7 +4932,7 @@ module Aws::PinpointSMSVoiceV2
     # @option params [String] :number_capability
     #   <p>The number capability to apply the CountryRuleSetUpdates updates to.</p>
     # @option params [Hash<String, Types::ProtectConfigurationCountryRuleSetInformation>] :country_rule_set_updates
-    #   <p>A map of ProtectConfigurationCountryRuleSetInformation objects that contain the details for the requested NumberCapability. The Key is the two-letter ISO country code. For a list of supported ISO country codes, see <a href="https://docs.aws.amazon.com/sms-voice/latest/userguide/phone-numbers-sms-by-country.html">Supported countries and regions (SMS channel)</a> in the AWS End User Messaging SMS User Guide.</p> <p>For example, to set the United States as allowed and Canada as blocked, the <code>CountryRuleSetUpdates</code> would be formatted as: <code>"CountryRuleSetUpdates": { "US" : { "ProtectStatus": "ALLOW" } "CA" : { "ProtectStatus": "BLOCK" } }</code> </p>
+    #   <p>A map of ProtectConfigurationCountryRuleSetInformation objects that contain the details for the requested NumberCapability. The Key is the two-letter ISO country code. For a list of supported ISO country codes, see <a href="https://docs.aws.amazon.com/sms-voice/latest/userguide/phone-numbers-sms-by-country.html">Supported countries and regions (SMS channel)</a> in the End User Messaging SMS User Guide.</p> <p>For example, to set the United States as allowed and Canada as blocked, the <code>CountryRuleSetUpdates</code> would be formatted as: <code>"CountryRuleSetUpdates": { "US" : { "ProtectStatus": "ALLOW" } "CA" : { "ProtectStatus": "BLOCK" } }</code> </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     protect_configuration_id: "ProtectConfigurationIdOrArn", # required
@@ -3538,6 +4960,70 @@ module Aws::PinpointSMSVoiceV2
     # @return [Types::UpdateProtectConfigurationCountryRuleSetResult]
     def update_protect_configuration_country_rule_set(params = {}, options = {})
       request = build_request(:update_protect_configuration_country_rule_set, params)
+      request.send_request(options)
+    end
+
+    # <p>Updates the configuration of an existing RCS agent. You can update the opt-out list, deletion protection, two-way messaging settings, and self-managed opt-outs configuration.</p>
+    # @param [Hash, Types::UpdateRcsAgentRequest] params
+    # @option params [String] :rcs_agent_id
+    #   <p>The unique identifier of the RCS agent to update. You can use either the RcsAgentId or RcsAgentArn.</p>
+    # @option params [Boolean] :deletion_protection_enabled
+    #   <p>By default this is set to false. When set to true the RCS agent can't be deleted.</p>
+    # @option params [String] :opt_out_list_name
+    #   <p>The OptOutList to associate with the RCS agent. Valid values are either OptOutListName or OptOutListArn.</p>
+    # @option params [Boolean] :self_managed_opt_outs_enabled
+    #   <p>By default this is set to false. When set to true you're responsible for responding to HELP and STOP requests. You're also responsible for tracking and honoring opt-out requests.</p>
+    # @option params [String] :two_way_channel_arn
+    #   <p>The Amazon Resource Name (ARN) of the two way channel.</p>
+    # @option params [String] :two_way_channel_role
+    #   <p>An optional IAM Role Arn for a service to assume, to be able to post inbound SMS messages.</p>
+    # @option params [Boolean] :two_way_enabled
+    #   <p>By default this is set to false. When set to true you can receive incoming text messages from your end recipients.</p>
+    # @option params [String] :two_way_media_s3_bucket_name
+    #   <p>The name of the S3 bucket where inbound RCS media files are stored. Two-way messaging must be enabled on the agent. To remove the media configuration, pass the sentinel value <code>UNSET_RCS_MEDIA_CONFIGURATION</code> for both this field and TwoWayMediaS3Role.</p>
+    # @option params [String] :two_way_media_s3_key_prefix
+    #   <p>The key prefix used for inbound RCS media objects in the S3 bucket.</p>
+    # @option params [String] :two_way_media_s3_role
+    #   <p>The ARN of the IAM role used to write inbound RCS media files to the S3 bucket. The role must have <code>s3:PutObject</code> permission on the bucket and a trust policy allowing <code>sms-voice.amazonaws.com</code> to assume it. To remove the media configuration, pass the sentinel value <code>UNSET_RCS_MEDIA_CONFIGURATION</code> for both this field and TwoWayMediaS3BucketName.</p>
+    # @option params [Array<String>] :two_way_rcs_events_enabled
+    #   <p>The list of RCS event types to enable for two-way messaging. Pass an empty list to disable all event types. The special value <code>ALL</code> enables all current and future event types and must be the sole element if used.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     rcs_agent_id: "RcsAgentIdOrArn", # required
+    #     deletion_protection_enabled: false,
+    #     opt_out_list_name: "OptOutListNameOrArn",
+    #     self_managed_opt_outs_enabled: false,
+    #     two_way_channel_arn: "TwoWayChannelArn",
+    #     two_way_channel_role: "IamRoleArn",
+    #     two_way_enabled: false,
+    #     two_way_media_s3_bucket_name: "TwoWayMediaS3BucketNameOrUnset",
+    #     two_way_media_s3_key_prefix: "TwoWayMediaS3KeyPrefix",
+    #     two_way_media_s3_role: "IamRoleArnOrUnset",
+    #     two_way_rcs_events_enabled: ["RcsEventType"]
+    #   }
+    #   options = {}
+    #   response = client.update_rcs_agent(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     rcs_agent_arn: "String", # required
+    #     rcs_agent_id: "String", # required
+    #     status: "RcsAgentStatus", # required
+    #     created_timestamp: Time.now, # required
+    #     deletion_protection_enabled: false, # required
+    #     opt_out_list_name: "OptOutListName",
+    #     self_managed_opt_outs_enabled: false, # required
+    #     two_way_channel_arn: "TwoWayChannelArn",
+    #     two_way_channel_role: "IamRoleArn",
+    #     two_way_enabled: false, # required
+    #     two_way_media_s3_bucket_name: "TwoWayMediaS3BucketName",
+    #     two_way_media_s3_key_prefix: "TwoWayMediaS3KeyPrefix",
+    #     two_way_media_s3_role: "IamRoleArn",
+    #     two_way_rcs_events_enabled: ["RcsEventType"]
+    #   }
+    # @return [Types::UpdateRcsAgentResult]
+    def update_rcs_agent(params = {}, options = {})
+      request = build_request(:update_rcs_agent, params)
       request.send_request(options)
     end
 

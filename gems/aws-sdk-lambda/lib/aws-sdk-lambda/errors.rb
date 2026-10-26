@@ -22,9 +22,16 @@ module Aws::Lambda
   #
   # ## Error Classes
   #
+  # * {AliasLimitExceededException}
+  # * {CallbackTimeoutException}
+  # * {CapacityProviderLimitExceededException}
+  # * {CodeArtifactUserDeletedException}
+  # * {CodeArtifactUserFailedException}
+  # * {CodeArtifactUserPendingException}
   # * {CodeSigningConfigNotFoundException}
   # * {CodeStorageExceededException}
   # * {CodeVerificationFailedException}
+  # * {DurableExecutionAlreadyStartedException}
   # * {EC2AccessDeniedException}
   # * {EC2ThrottledException}
   # * {EC2UnexpectedException}
@@ -33,6 +40,8 @@ module Aws::Lambda
   # * {EFSMountFailureException}
   # * {EFSMountTimeoutException}
   # * {ENILimitReachedException}
+  # * {ENINotReadyException}
+  # * {FunctionVersionsPerCapacityProviderLimitExceededException}
   # * {InvalidCodeSignatureException}
   # * {InvalidParameterValueException}
   # * {InvalidRequestContentException}
@@ -44,18 +53,27 @@ module Aws::Lambda
   # * {KMSDisabledException}
   # * {KMSInvalidStateException}
   # * {KMSNotFoundException}
+  # * {ModeNotSupportedException}
+  # * {NoPublishedVersionException}
   # * {PolicyLengthExceededException}
   # * {PreconditionFailedException}
   # * {ProvisionedConcurrencyConfigNotFoundException}
+  # * {PublicPolicyException}
   # * {RecursiveInvocationException}
   # * {RequestTooLargeException}
   # * {ResourceConflictException}
   # * {ResourceInUseException}
   # * {ResourceNotFoundException}
   # * {ResourceNotReadyException}
+  # * {S3FilesMountConnectivityException}
+  # * {S3FilesMountFailureException}
+  # * {S3FilesMountTimeoutException}
+  # * {SerializedRequestEntityTooLargeException}
   # * {ServiceException}
+  # * {ServiceQuotaExceededException}
   # * {SnapStartException}
   # * {SnapStartNotReadyException}
+  # * {SnapStartRegenerationFailureException}
   # * {SnapStartTimeoutException}
   # * {SubnetIPAddressLimitReachedException}
   # * {TooManyRequestsException}
@@ -65,6 +83,118 @@ module Aws::Lambda
   # if they are not defined above.
   module Errors
     extend Smithy::Client::DynamicErrors
+
+    # <p>Lambda couldn't create the alias because your Amazon Web Services account has exceeded the maximum number of aliases allowed per Lambda function. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html">Lambda quotas</a>.</p>
+    class AliasLimitExceededException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::Lambda::Types::AliasLimitExceededException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      # <p>The exception type.</p>
+      def type
+        @data[:type]
+      end
+
+      # <p>The exception message.</p>
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>The callback ID token has either expired or the callback associated with the token has already been closed.</p>
+    class CallbackTimeoutException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::Lambda::Types::CallbackTimeoutException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      # <p>The exception type.</p>
+      def type
+        @data[:type]
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>The maximum number of capacity providers for your account has been exceeded. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html">Lambda quotas</a> </p>
+    class CapacityProviderLimitExceededException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::Lambda::Types::CapacityProviderLimitExceededException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      # <p>The exception type.</p>
+      def type
+        @data[:type]
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>The Lambda function couldn't be invoked because its code artifact user has been deleted. Wait for Lambda to provision a new code artifact user, or update the function's code package to recreate it.</p>
+    class CodeArtifactUserDeletedException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::Lambda::Types::CodeArtifactUserDeletedException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      # <p>The exception type.</p>
+      def type
+        @data[:type]
+      end
+
+      # <p>The exception message.</p>
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>The Lambda function couldn't be invoked because provisioning of its code artifact user failed. Update the function's code package or check the Lambda function's <code>State</code> and <code>StateReasonCode</code> for additional context.</p>
+    class CodeArtifactUserFailedException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::Lambda::Types::CodeArtifactUserFailedException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      # <p>The exception type.</p>
+      def type
+        @data[:type]
+      end
+
+      # <p>The exception message.</p>
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>The Lambda function couldn't be invoked because its code artifact user is still being provisioned. Wait for the function's <code>State</code> to become <code>Active</code> and try the request again.</p>
+    class CodeArtifactUserPendingException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::Lambda::Types::CodeArtifactUserPendingException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      # <p>The exception type.</p>
+      def type
+        @data[:type]
+      end
+
+      # <p>The exception message.</p>
+      def message
+        @data[:message]
+      end
+    end
 
     # <p>The specified code signing configuration does not exist.</p>
     class CodeSigningConfigNotFoundException < Smithy::Client::ServiceError
@@ -109,6 +239,24 @@ module Aws::Lambda
         super
       end
 
+      def type
+        @data[:type]
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>The durable execution with the specified name has already been started. Each durable execution name must be unique within the function. Use a different name or check the status of the existing execution.</p>
+    class DurableExecutionAlreadyStartedException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::Lambda::Types::DurableExecutionAlreadyStartedException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      # <p>The exception type.</p>
       def type
         @data[:type]
       end
@@ -249,6 +397,43 @@ module Aws::Lambda
         super
       end
 
+      def type
+        @data[:type]
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>Lambda couldn't invoke the Lambda function because the elastic network interface (ENI) configured for its VPC connection isn't ready yet. Wait a few moments and try the request again. For more information about VPC configuration, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html">Configuring a Lambda function to access resources in a VPC</a>.</p>
+    class ENINotReadyException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::Lambda::Types::ENINotReadyException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      # <p>The exception type.</p>
+      def type
+        @data[:type]
+      end
+
+      # <p>The exception message.</p>
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>The maximum number of function versions that can be associated with a single capacity provider has been exceeded. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html">Lambda quotas</a>.</p>
+    class FunctionVersionsPerCapacityProviderLimitExceededException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::Lambda::Types::FunctionVersionsPerCapacityProviderLimitExceededException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      # <p>The exception type.</p>
       def type
         @data[:type]
       end
@@ -449,6 +634,43 @@ module Aws::Lambda
       end
     end
 
+    # <p>The Lambda function doesn't support the invocation mode requested. For example, calling <code>Invoke</code> with <code>InvocationType=RequestResponse</code> on a function configured for asynchronous-only invocation, or vice versa. For more information about invocation types, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-options.html">Invoking Lambda functions</a>.</p>
+    class ModeNotSupportedException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::Lambda::Types::ModeNotSupportedException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      # <p>The exception type.</p>
+      def type
+        @data[:type]
+      end
+
+      # <p>The exception message.</p>
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>The function has no published versions available.</p>
+    class NoPublishedVersionException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::Lambda::Types::NoPublishedVersionException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      # <p>The exception type.</p>
+      def type
+        @data[:type]
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
     # <p>The permissions policy for the resource is too large. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html">Lambda quotas</a>.</p>
     class PolicyLengthExceededException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
@@ -497,6 +719,25 @@ module Aws::Lambda
         @data[:type]
       end
 
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>The resource-based policy you tried to add to the Lambda resource would grant public access to it, which isn't allowed.</p>
+    class PublicPolicyException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::Lambda::Types::PublicPolicyException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      # <p>The exception type.</p>
+      def type
+        @data[:type]
+      end
+
+      # <p>The exception message.</p>
       def message
         @data[:message]
       end
@@ -610,6 +851,81 @@ module Aws::Lambda
       end
     end
 
+    # <p>The Lambda function couldn't make a network connection to the configured S3 Files access point.</p>
+    class S3FilesMountConnectivityException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::Lambda::Types::S3FilesMountConnectivityException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      # <p>The exception type.</p>
+      def type
+        @data[:type]
+      end
+
+      # <p>The exception message.</p>
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>The Lambda function couldn't mount the configured S3 Files access point due to a permission or configuration issue.</p>
+    class S3FilesMountFailureException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::Lambda::Types::S3FilesMountFailureException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      # <p>The exception type.</p>
+      def type
+        @data[:type]
+      end
+
+      # <p>The exception message.</p>
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>The Lambda function made a network connection to the configured S3 Files access point, but the mount operation timed out.</p>
+    class S3FilesMountTimeoutException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::Lambda::Types::S3FilesMountTimeoutException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      # <p>The exception type.</p>
+      def type
+        @data[:type]
+      end
+
+      # <p>The exception message.</p>
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>The request payload exceeded the maximum allowed size for serialized request entities.</p>
+    class SerializedRequestEntityTooLargeException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::Lambda::Types::SerializedRequestEntityTooLargeException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      # <p>The error type.</p>
+      def type
+        @data[:type]
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
     # <p>The Lambda service encountered an internal error.</p>
     class ServiceException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
@@ -622,6 +938,25 @@ module Aws::Lambda
         @data[:type]
       end
 
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>The request would exceed a service quota. For more information about Lambda service quotas, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html">Lambda quotas</a>. To request a quota increase, see <a href="https://docs.aws.amazon.com/servicequotas/latest/userguide/request-quota-increase.html">Requesting a quota increase</a> in the <i>Service Quotas User Guide</i>.</p>
+    class ServiceQuotaExceededException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::Lambda::Types::ServiceQuotaExceededException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      # <p>The exception type.</p>
+      def type
+        @data[:type]
+      end
+
+      # <p>The exception message.</p>
       def message
         @data[:message]
       end
@@ -656,6 +991,25 @@ module Aws::Lambda
         @data[:type]
       end
 
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>Lambda couldn't regenerate the SnapStart snapshot for the function. SnapStart-enabled functions periodically regenerate snapshots when their underlying runtime or dependencies change; this regeneration failed. Wait for Lambda to retry, or update the function's configuration to trigger a new snapshot. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html">Lambda SnapStart</a>.</p>
+    class SnapStartRegenerationFailureException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::Lambda::Types::SnapStartRegenerationFailureException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      # <p>The exception type.</p>
+      def type
+        @data[:type]
+      end
+
+      # <p>The exception message.</p>
       def message
         @data[:message]
       end

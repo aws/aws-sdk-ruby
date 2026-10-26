@@ -8,8 +8,11 @@ module Aws::LicenseManager
     ActivationOverrideBehavior: EnumShape
     AllowedOperation: EnumShape
     AllowedOperationList: ListShape
+    AndRuleStatement: StructureShape
     Arn: StringShape
     ArnList: ListShape
+    Asset: StructureShape
+    AssetList: ListShape
     AuthorizationException: StructureShape
     AutomatedDiscoveryInformation: StructureShape
     Boolean: BooleanShape
@@ -34,6 +37,10 @@ module Aws::LicenseManager
     CreateGrantResponse: StructureShape
     CreateGrantVersionRequest: StructureShape
     CreateGrantVersionResponse: StructureShape
+    CreateLicenseAssetGroupRequest: StructureShape
+    CreateLicenseAssetGroupResponse: StructureShape
+    CreateLicenseAssetRulesetRequest: StructureShape
+    CreateLicenseAssetRulesetResponse: StructureShape
     CreateLicenseConfigurationRequest: StructureShape
     CreateLicenseConfigurationResponse: StructureShape
     CreateLicenseConversionTaskForResourceRequest: StructureShape
@@ -46,10 +53,16 @@ module Aws::LicenseManager
     CreateLicenseVersionResponse: StructureShape
     CreateTokenRequest: StructureShape
     CreateTokenResponse: StructureShape
+    CrossAccountDiscoveryServiceStatus: StructureShape
+    CrossRegionDiscoveryStatus: StructureShape
     DateTime: TimestampShape
     DatetimeRange: StructureShape
     DeleteGrantRequest: StructureShape
     DeleteGrantResponse: StructureShape
+    DeleteLicenseAssetGroupRequest: StructureShape
+    DeleteLicenseAssetGroupResponse: StructureShape
+    DeleteLicenseAssetRulesetRequest: StructureShape
+    DeleteLicenseAssetRulesetResponse: StructureShape
     DeleteLicenseConfigurationRequest: StructureShape
     DeleteLicenseConfigurationResponse: StructureShape
     DeleteLicenseManagerReportGeneratorRequest: StructureShape
@@ -82,6 +95,10 @@ module Aws::LicenseManager
     GetAccessTokenResponse: StructureShape
     GetGrantRequest: StructureShape
     GetGrantResponse: StructureShape
+    GetLicenseAssetGroupRequest: StructureShape
+    GetLicenseAssetGroupResponse: StructureShape
+    GetLicenseAssetRulesetRequest: StructureShape
+    GetLicenseAssetRulesetResponse: StructureShape
     GetLicenseConfigurationRequest: StructureShape
     GetLicenseConfigurationResponse: StructureShape
     GetLicenseConversionTaskRequest: StructureShape
@@ -100,6 +117,7 @@ module Aws::LicenseManager
     GrantedLicense: StructureShape
     GrantedLicenseList: ListShape
     ISO8601DateTime: StringShape
+    InstanceRuleStatement: StructureShape
     Integer: IntegerShape
     InvalidParameterValueException: StructureShape
     InvalidResourceStateException: StructureShape
@@ -109,9 +127,24 @@ module Aws::LicenseManager
     Issuer: StructureShape
     IssuerDetails: StructureShape
     License: StructureShape
+    LicenseAssetGroup: StructureShape
+    LicenseAssetGroupConfiguration: StructureShape
+    LicenseAssetGroupConfigurationList: ListShape
+    LicenseAssetGroupList: ListShape
+    LicenseAssetGroupProperty: StructureShape
+    LicenseAssetGroupPropertyList: ListShape
+    LicenseAssetGroupStatus: EnumShape
+    LicenseAssetResourceDescription: StringShape
+    LicenseAssetResourceName: StringShape
+    LicenseAssetRule: StructureShape
+    LicenseAssetRuleList: ListShape
+    LicenseAssetRuleset: StructureShape
+    LicenseAssetRulesetArnList: ListShape
+    LicenseAssetRulesetList: ListShape
     LicenseConfiguration: StructureShape
     LicenseConfigurationAssociation: StructureShape
     LicenseConfigurationAssociations: ListShape
+    LicenseConfigurationRuleStatement: StructureShape
     LicenseConfigurationStatus: EnumShape
     LicenseConfigurationUsage: StructureShape
     LicenseConfigurationUsageList: ListShape
@@ -126,17 +159,26 @@ module Aws::LicenseManager
     LicenseList: ListShape
     LicenseOperationFailure: StructureShape
     LicenseOperationFailureList: ListShape
+    LicenseRuleStatement: StructureShape
     LicenseSpecification: StructureShape
     LicenseSpecifications: ListShape
     LicenseStatus: EnumShape
     LicenseUsage: StructureShape
     LicenseUsageException: StructureShape
+    ListAssetsForLicenseAssetGroupRequest: StructureShape
+    ListAssetsForLicenseAssetGroupResponse: StructureShape
     ListAssociationsForLicenseConfigurationRequest: StructureShape
     ListAssociationsForLicenseConfigurationResponse: StructureShape
     ListDistributedGrantsRequest: StructureShape
     ListDistributedGrantsResponse: StructureShape
     ListFailuresForLicenseConfigurationOperationsRequest: StructureShape
     ListFailuresForLicenseConfigurationOperationsResponse: StructureShape
+    ListLicenseAssetGroupsRequest: StructureShape
+    ListLicenseAssetGroupsResponse: StructureShape
+    ListLicenseAssetRulesetsRequest: StructureShape
+    ListLicenseAssetRulesetsResponse: StructureShape
+    ListLicenseConfigurationsForOrganizationRequest: StructureShape
+    ListLicenseConfigurationsForOrganizationResponse: StructureShape
     ListLicenseConfigurationsRequest: StructureShape
     ListLicenseConfigurationsResponse: StructureShape
     ListLicenseConversionTasksRequest: StructureShape
@@ -169,6 +211,8 @@ module Aws::LicenseManager
     Long: IntegerShape
     ManagedResourceSummary: StructureShape
     ManagedResourceSummaryList: ListShape
+    MatchingRuleStatement: StructureShape
+    MatchingRuleStatementList: ListShape
     MaxSize100: IntegerShape
     MaxSize3StringList: ListShape
     Message: StringShape
@@ -176,6 +220,7 @@ module Aws::LicenseManager
     MetadataList: ListShape
     NoEntitlementsAllowedException: StructureShape
     Options: StructureShape
+    OrRuleStatement: StructureShape
     OrganizationConfiguration: StructureShape
     PrincipalArnList: ListShape
     ProductCodeId: StringShape
@@ -191,6 +236,8 @@ module Aws::LicenseManager
     ReceivedMetadata: StructureShape
     ReceivedStatus: EnumShape
     RedirectException: StructureShape
+    RegionStatus: StructureShape
+    RegionStatusMap: MapShape
     RejectGrantRequest: StructureShape
     RejectGrantResponse: StructureShape
     RenewType: EnumShape
@@ -207,8 +254,12 @@ module Aws::LicenseManager
     ResourceLimitExceededException: StructureShape
     ResourceNotFoundException: StructureShape
     ResourceType: EnumShape
+    RuleStatement: StructureShape
     S3Location: StructureShape
+    ScriptRuleStatement: StructureShape
+    ScriptRuleStatementList: ListShape
     ServerInternalException: StructureShape
+    ServiceStatus: StructureShape
     SignedToken: StringShape
     StatusReasonMessage: StringShape
     String: StringShape
@@ -225,6 +276,10 @@ module Aws::LicenseManager
     UnsupportedDigitalSignatureMethodException: StructureShape
     UntagResourceRequest: StructureShape
     UntagResourceResponse: StructureShape
+    UpdateLicenseAssetGroupRequest: StructureShape
+    UpdateLicenseAssetGroupResponse: StructureShape
+    UpdateLicenseAssetRulesetRequest: StructureShape
+    UpdateLicenseAssetRulesetResponse: StructureShape
     UpdateLicenseConfigurationRequest: StructureShape
     UpdateLicenseConfigurationResponse: StructureShape
     UpdateLicenseManagerReportGeneratorRequest: StructureShape

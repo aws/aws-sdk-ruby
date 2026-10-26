@@ -17,6 +17,22 @@ module Aws::Transfer
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Contains the configuration details for asynchronous Message Disposition Notification (MDN) responses in AS2 connectors. This configuration specifies where asynchronous MDN responses should be sent and which servers should handle them.</p>
+    # @!attribute url
+    #   <p>The URL endpoint where asynchronous MDN responses should be sent.</p>
+    #   @return [String]
+    # @!attribute server_ids
+    #   <p>A list of server identifiers that can handle asynchronous MDN responses. You can specify between 1 and 10 server IDs.</p>
+    #   @return [Array<String>]
+    class As2AsyncMdnConnectorConfig < Struct.new(
+      nil,
+      :url,
+      :server_ids,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Contains the details for an AS2 connector object. The connector object is used for AS2 outbound processes, to connect the Transfer Family customer with the trading partner.</p>
     # @!attribute local_profile_id
     #   <p>A unique identifier for the AS2 local profile.</p>
@@ -40,7 +56,7 @@ module Aws::Transfer
     #   <p>The signing algorithm for the MDN response.</p> <note> <p>If set to DEFAULT (or not set at all), the value for <code>SigningAlgorithm</code> is used.</p> </note>
     #   @return [String]
     # @!attribute mdn_response
-    #   <p>Used for outbound requests (from an Transfer Family connector to a partner AS2 server) to determine whether the partner response for transfers is synchronous or asynchronous. Specify either of the following values:</p> <ul> <li> <p> <code>SYNC</code>: The system expects a synchronous MDN response, confirming that the file was transferred successfully (or not).</p> </li> <li> <p> <code>NONE</code>: Specifies that no MDN response is required.</p> </li> </ul>
+    #   <p>Used for outbound requests (from an Transfer Family connector to a partner AS2 server) to determine whether the partner response for transfers is synchronous or asynchronous. Specify either of the following values:</p> <ul> <li> <p> <code>ASYNC</code>: The system expects an asynchronous MDN response, confirming that the file was transferred successfully (or not).</p> </li> <li> <p> <code>SYNC</code>: The system expects a synchronous MDN response, confirming that the file was transferred successfully (or not).</p> </li> <li> <p> <code>NONE</code>: Specifies that no MDN response is required.</p> </li> </ul>
     #   @return [String]
     # @!attribute basic_auth_secret_id
     #   <p>Provides Basic authentication support to the AS2 Connectors API. To use Basic authentication, you must provide the name or Amazon Resource Name (ARN) of a secret in Secrets Manager.</p> <p>The default value for this parameter is <code>null</code>, which indicates that Basic authentication is not enabled for the connector.</p> <p>If the connector should use Basic authentication, the secret needs to be in the following format:</p> <p> <code>{ "Username": "user-name", "Password": "user-password" }</code> </p> <p>Replace <code>user-name</code> and <code>user-password</code> with the credentials for the actual user that is being authenticated.</p> <p>Note the following:</p> <ul> <li> <p>You are storing these credentials in Secrets Manager, <i>not passing them directly</i> into this API.</p> </li> <li> <p>If you are using the API, SDKs, or CloudFormation to configure your connector, then you must create the secret before you can enable Basic authentication. However, if you are using the Amazon Web Services management console, you can have the system create the secret for you.</p> </li> </ul> <p>If you have previously enabled Basic authentication for a connector, you can disable it by using the <code>UpdateConnector</code> API call. For example, if you are using the CLI, you can run the following command to remove Basic authentication:</p> <p> <code>update-connector --connector-id my-connector-id --as2-config 'BasicAuthSecretId=""'</code> </p>
@@ -48,6 +64,9 @@ module Aws::Transfer
     # @!attribute preserve_content_type
     #   <p>Allows you to use the Amazon S3 <code>Content-Type</code> that is associated with objects in S3 instead of having the content type mapped based on the file extension. This parameter is enabled by default when you create an AS2 connector from the console, but disabled by default when you create an AS2 connector by calling the API directly.</p>
     #   @return [String]
+    # @!attribute async_mdn_config
+    #   <p>Configuration settings for asynchronous Message Disposition Notification (MDN) responses. This allows you to configure where asynchronous MDN responses should be sent and which servers should handle them.</p>
+    #   @return [Types::As2AsyncMdnConnectorConfig]
     class As2ConnectorConfig < Struct.new(
       nil,
       :local_profile_id,
@@ -60,6 +79,7 @@ module Aws::Transfer
       :mdn_response,
       :basic_auth_secret_id,
       :preserve_content_type,
+      :async_mdn_config,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -74,6 +94,21 @@ module Aws::Transfer
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration structure that defines how traffic is routed from the connector to the SFTP server. Contains VPC Lattice settings when using VPC_LATTICE egress type for private connectivity through customer VPCs.</p>
+    # @!attribute vpc_lattice
+    #   <p>VPC_LATTICE configuration for routing connector traffic through customer VPCs. Enables private connectivity to SFTP servers without requiring public internet access or complex network configurations.</p>
+    #   @return [Types::ConnectorVpcLatticeEgressConfig]
+    class ConnectorEgressConfig < Struct.new(
+      :vpc_lattice,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class VpcLattice < ConnectorEgressConfig; end
+      class Unknown < ConnectorEgressConfig; end
     end
 
     # <p>A structure that contains the details for files transferred using an SFTP connector, during a single transfer.</p>
@@ -95,6 +130,22 @@ module Aws::Transfer
       :status_code,
       :failure_code,
       :failure_message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>VPC_LATTICE egress configuration that specifies the Resource Configuration ARN and port for connecting to SFTP servers through customer VPCs. Requires a valid Resource Configuration with appropriate network access.</p>
+    # @!attribute resource_configuration_arn
+    #   <p>ARN of the VPC_LATTICE Resource Configuration that defines the target SFTP server location. Must point to a valid Resource Configuration in the customer's VPC with appropriate network connectivity to the SFTP server.</p>
+    #   @return [String]
+    # @!attribute port_number
+    #   <p>Port number for connecting to the SFTP server through VPC_LATTICE. Defaults to 22 if not specified. Must match the port on which the target SFTP server is listening.</p>
+    #   @return [Integer]
+    class ConnectorVpcLatticeEgressConfig < Struct.new(
+      nil,
+      :resource_configuration_arn,
+      :port_number,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -241,7 +292,7 @@ module Aws::Transfer
     end
 
     # @!attribute url
-    #   <p>The URL of the partner's AS2 or SFTP endpoint.</p>
+    #   <p>The URL of the partner's AS2 or SFTP endpoint.</p> <p>When creating AS2 connectors or service-managed SFTP connectors (connectors without egress configuration), you must provide a URL to specify the remote server endpoint. For VPC Lattice type connectors, the URL must be null.</p>
     #   @return [String]
     # @!attribute as2_config
     #   <p>A structure that contains the parameters for an AS2 connector object.</p>
@@ -261,6 +312,12 @@ module Aws::Transfer
     # @!attribute security_policy_name
     #   <p>Specifies the name of the security policy for the connector.</p>
     #   @return [String]
+    # @!attribute egress_config
+    #   <p>Specifies the egress configuration for the connector, which determines how traffic is routed from the connector to the SFTP server. When set to VPC, enables routing through customer VPCs using VPC_LATTICE for private connectivity.</p>
+    #   @return [Types::ConnectorEgressConfig]
+    # @!attribute ip_address_type
+    #   <p>Specifies the IP address type for the connector's network connections. When set to <code>IPV4</code>, the connector uses IPv4 addresses only. When set to <code>DUALSTACK</code>, the connector supports both IPv4 and IPv6 addresses, with IPv6 preferred when available.</p>
+    #   @return [String]
     class CreateConnectorRequest < Struct.new(
       nil,
       :url,
@@ -270,6 +327,8 @@ module Aws::Transfer
       :tags,
       :sftp_config,
       :security_policy_name,
+      :egress_config,
+      :ip_address_type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -354,7 +413,7 @@ module Aws::Transfer
     #   <p>Specifies the file transfer protocol or protocols over which your file transfer protocol client can connect to your server's endpoint. The available protocols are:</p> <ul> <li> <p> <code>SFTP</code> (Secure Shell (SSH) File Transfer Protocol): File transfer over SSH</p> </li> <li> <p> <code>FTPS</code> (File Transfer Protocol Secure): File transfer with TLS encryption</p> </li> <li> <p> <code>FTP</code> (File Transfer Protocol): Unencrypted file transfer</p> </li> <li> <p> <code>AS2</code> (Applicability Statement 2): used for transporting structured business-to-business data</p> </li> </ul> <note> <ul> <li> <p>If you select <code>FTPS</code>, you must choose a certificate stored in Certificate Manager (ACM) which is used to identify your server when clients connect to it over FTPS.</p> </li> <li> <p>If <code>Protocol</code> includes either <code>FTP</code> or <code>FTPS</code>, then the <code>EndpointType</code> must be <code>VPC</code> and the <code>IdentityProviderType</code> must be either <code>AWS_DIRECTORY_SERVICE</code>, <code>AWS_LAMBDA</code>, or <code>API_GATEWAY</code>.</p> </li> <li> <p>If <code>Protocol</code> includes <code>FTP</code>, then <code>AddressAllocationIds</code> cannot be associated.</p> </li> <li> <p>If <code>Protocol</code> is set only to <code>SFTP</code>, the <code>EndpointType</code> can be set to <code>PUBLIC</code> and the <code>IdentityProviderType</code> can be set any of the supported identity types: <code>SERVICE_MANAGED</code>, <code>AWS_DIRECTORY_SERVICE</code>, <code>AWS_LAMBDA</code>, or <code>API_GATEWAY</code>.</p> </li> <li> <p>If <code>Protocol</code> includes <code>AS2</code>, then the <code>EndpointType</code> must be <code>VPC</code>, and domain must be Amazon S3.</p> </li> </ul> </note>
     #   @return [Array<String>]
     # @!attribute protocol_details
-    #   <p>The protocol settings that are configured for your server.</p> <ul> <li> <p> To indicate passive mode (for FTP and FTPS protocols), use the <code>PassiveIp</code> parameter. Enter a single dotted-quad IPv4 address, such as the external IP address of a firewall, router, or load balancer. </p> </li> <li> <p>To ignore the error that is generated when the client attempts to use the <code>SETSTAT</code> command on a file that you are uploading to an Amazon S3 bucket, use the <code>SetStatOption</code> parameter. To have the Transfer Family server ignore the <code>SETSTAT</code> command and upload files without needing to make any changes to your SFTP client, set the value to <code>ENABLE_NO_OP</code>. If you set the <code>SetStatOption</code> parameter to <code>ENABLE_NO_OP</code>, Transfer Family generates a log entry to Amazon CloudWatch Logs, so that you can determine when the client is making a <code>SETSTAT</code> call.</p> </li> <li> <p>To determine whether your Transfer Family server resumes recent, negotiated sessions through a unique session ID, use the <code>TlsSessionResumptionMode</code> parameter.</p> </li> <li> <p> <code>As2Transports</code> indicates the transport method for the AS2 messages. Currently, only HTTP is supported.</p> </li> </ul>
+    #   <p>The protocol settings that are configured for your server.</p> <note> <p>Avoid placing Network Load Balancers (NLBs) or NAT gateways in front of Transfer Family servers, as this increases costs and can cause performance issues, including reduced connection limits for FTPS. For more details, see <a href="https://docs.aws.amazon.com/transfer/latest/userguide/infrastructure-security.html#nlb-considerations"> Avoid placing NLBs and NATs in front of Transfer Family</a>.</p> </note> <ul> <li> <p> To indicate passive mode (for FTP and FTPS protocols), use the <code>PassiveIp</code> parameter. Enter a single dotted-quad IPv4 address, such as the external IP address of a firewall, router, or load balancer. </p> </li> <li> <p>To ignore the error that is generated when the client attempts to use the <code>SETSTAT</code> command on a file that you are uploading to an Amazon S3 bucket, use the <code>SetStatOption</code> parameter. To have the Transfer Family server ignore the <code>SETSTAT</code> command and upload files without needing to make any changes to your SFTP client, set the value to <code>ENABLE_NO_OP</code>. If you set the <code>SetStatOption</code> parameter to <code>ENABLE_NO_OP</code>, Transfer Family generates a log entry to Amazon CloudWatch Logs, so that you can determine when the client is making a <code>SETSTAT</code> call.</p> </li> <li> <p>To specify which ports your Transfer Family server listens to, use the <code>SftpPorts</code> parameter.</p> </li> <li> <p>To determine whether your Transfer Family server resumes recent, negotiated sessions through a unique session ID, use the <code>TlsSessionResumptionMode</code> parameter.</p> </li> <li> <p> <code>As2Transports</code> indicates the transport method for the AS2 messages. Currently, only HTTP is supported.</p> </li> </ul>
     #   @return [Types::ProtocolDetails]
     # @!attribute security_policy_name
     #   <p>Specifies the name of the security policy for the server.</p>
@@ -366,13 +425,16 @@ module Aws::Transfer
     #   <p>Specifies the workflow ID for the workflow to assign and the execution role that's used for executing the workflow.</p> <p>In addition to a workflow to execute when a file is uploaded completely, <code>WorkflowDetails</code> can also contain a workflow ID (and execution role) for a workflow to execute on partial upload. A partial upload occurs when the server session disconnects while the file is still being uploaded.</p>
     #   @return [Types::WorkflowDetails]
     # @!attribute structured_log_destinations
-    #   <p>Specifies the log groups to which your server logs are sent.</p> <p>To specify a log group, you must provide the ARN for an existing log group. In this case, the format of the log group is as follows:</p> <p> <code>arn:aws:logs:region-name:amazon-account-id:log-group:log-group-name:*</code> </p> <p>For example, <code>arn:aws:logs:us-east-1:111122223333:log-group:mytestgroup:*</code> </p> <p>If you have previously specified a log group for a server, you can clear it, and in effect turn off structured logging, by providing an empty value for this parameter in an <code>update-server</code> call. For example:</p> <p> <code>update-server --server-id s-1234567890abcdef0 --structured-log-destinations</code> </p>
+    #   <p>Specifies the log groups to which your server logs are sent.</p> <p>To specify a log group, you must provide the ARN for an existing log group. In this case, the format of the log group is as follows:</p> <p> <code>arn:partition:logs:region-name:amazon-account-id:log-group:log-group-name:*</code> </p> <p>For example, <code>arn:aws:logs:us-east-1:111122223333:log-group:mytestgroup:*</code> </p> <p>If you have previously specified a log group for a server, you can clear it, and in effect turn off structured logging, by providing an empty value for this parameter in an <code>update-server</code> call. For example:</p> <p> <code>update-server --server-id s-1234567890abcdef0 --structured-log-destinations</code> </p>
     #   @return [Array<String>]
     # @!attribute s3_storage_options
     #   <p>Specifies whether or not performance for your Amazon S3 directories is optimized.</p> <ul> <li> <p>If using the console, this is enabled by default.</p> </li> <li> <p>If using the API or CLI, this is disabled by default.</p> </li> </ul> <p>By default, home directory mappings have a <code>TYPE</code> of <code>DIRECTORY</code>. If you enable this option, you would then need to explicitly set the <code>HomeDirectoryMapEntry</code> <code>Type</code> to <code>FILE</code> if you want a mapping to have a file target.</p>
     #   @return [Types::S3StorageOptions]
     # @!attribute ip_address_type
     #   <p>Specifies whether to use IPv4 only, or to use dual-stack (IPv4 and IPv6) for your Transfer Family endpoint. The default value is <code>IPV4</code>.</p> <important> <p>The <code>IpAddressType</code> parameter has the following limitations:</p> <ul> <li> <p>It cannot be changed while the server is online. You must stop the server before modifying this parameter.</p> </li> <li> <p>It cannot be updated to <code>DUALSTACK</code> if the server has <code>AddressAllocationIds</code> specified.</p> </li> </ul> </important> <note> <p>When using <code>DUALSTACK</code> as the <code>IpAddressType</code>, you cannot set the <code>AddressAllocationIds</code> parameter for the <a href="https://docs.aws.amazon.com/transfer/latest/APIReference/API_EndpointDetails.html">EndpointDetails</a> for the server.</p> </note>
+    #   @return [String]
+    # @!attribute host_key_storage_type
+    #   <p>Specifies whether the host key is stored by Transfer Family (<code>SERVICE_MANAGED</code>) or in Secrets Manager (<code>SECRETS_MANAGER</code>). When you specify <code>SECRETS_MANAGER</code>, Transfer Family stores the private host key material in an Secrets Manager secret.</p>
     #   @return [String]
     class CreateServerRequest < Struct.new(
       nil,
@@ -394,6 +456,7 @@ module Aws::Transfer
       :structured_log_destinations,
       :s3_storage_options,
       :ip_address_type,
+      :host_key_storage_type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -487,6 +550,9 @@ module Aws::Transfer
     # @!attribute web_app_endpoint_policy
     #   <p> Setting for the type of endpoint policy for the web app. The default value is <code>STANDARD</code>. </p> <p>If you are creating the web app in an Amazon Web Services GovCloud (US) Region, you can set this parameter to <code>FIPS</code>.</p>
     #   @return [String]
+    # @!attribute endpoint_details
+    #   <p>The endpoint configuration for the web app. You can specify whether the web app endpoint is publicly accessible or hosted within a VPC.</p>
+    #   @return [Types::WebAppEndpointDetails]
     class CreateWebAppRequest < Struct.new(
       nil,
       :identity_provider_details,
@@ -494,6 +560,7 @@ module Aws::Transfer
       :web_app_units,
       :tags,
       :web_app_endpoint_policy,
+      :endpoint_details,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -522,12 +589,16 @@ module Aws::Transfer
     # @!attribute tags
     #   <p>Key-value pairs that can be used to group and search for workflows. Tags are metadata attached to workflows for any purpose.</p>
     #   @return [Array<Types::Tag>]
+    # @!attribute structured_log_destinations
+    #   <p>Specifies the log groups to which your workflow logs are sent.</p> <p>To specify a log group, you must provide the ARN for an existing log group. In this case, the format of the log group is as follows:</p> <p> <code>arn:partition:logs:region-name:amazon-account-id:log-group:log-group-name:*</code> </p> <p>For example, <code>arn:aws:logs:us-east-1:111122223333:log-group:mytestgroup:*</code> </p>
+    #   @return [Array<String>]
     class CreateWorkflowRequest < Struct.new(
       nil,
       :description,
       :steps,
       :on_exception_steps,
       :tags,
+      :structured_log_destinations,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -567,6 +638,23 @@ module Aws::Transfer
       :payload_files_directory,
       :status_files_directory,
       :temporary_files_directory,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Represents a custom HTTP header that can be included in AS2 messages. Each header consists of a key-value pair.</p>
+    # @note This shape contains sensitive data and should be treated as such.
+    # @!attribute key
+    #   <p>The name of the custom HTTP header.</p>
+    #   @return [String]
+    # @!attribute value
+    #   <p>The value of the custom HTTP header.</p>
+    #   @return [String]
+    class CustomHttpHeader < Struct.new(
+      nil,
+      :key,
+      :value,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1282,7 +1370,7 @@ module Aws::Transfer
     #   <p>The unique identifier for the connector.</p>
     #   @return [String]
     # @!attribute url
-    #   <p>The URL of the partner's AS2 or SFTP endpoint.</p>
+    #   <p>The URL of the partner's AS2 or SFTP endpoint.</p> <p>When creating AS2 connectors or service-managed SFTP connectors (connectors without egress configuration), you must provide a URL to specify the remote server endpoint. For VPC Lattice type connectors, the URL must be null.</p>
     #   @return [String]
     # @!attribute as2_config
     #   <p>A structure that contains the parameters for an AS2 connector object.</p>
@@ -1305,6 +1393,21 @@ module Aws::Transfer
     # @!attribute security_policy_name
     #   <p>The text name of the security policy for the specified connector.</p>
     #   @return [String]
+    # @!attribute egress_config
+    #   <p>Current egress configuration of the connector, showing how traffic is routed to the SFTP server. Contains VPC Lattice settings when using VPC_LATTICE egress type.</p> <p>When using the VPC_LATTICE egress type, Transfer Family uses a managed Service Network to simplify the resource sharing process.</p>
+    #   @return [Types::DescribedConnectorEgressConfig]
+    # @!attribute egress_type
+    #   <p>Type of egress configuration for the connector. SERVICE_MANAGED uses Transfer Family managed NAT gateways, while VPC_LATTICE routes traffic through customer VPCs using VPC Lattice.</p>
+    #   @return [String]
+    # @!attribute error_message
+    #   <p>Error message providing details when the connector is in ERRORED status. Contains information to help troubleshoot connector creation or operation failures.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>Current status of the connector. PENDING indicates creation/update in progress, ACTIVE means ready for operations, and ERRORED indicates a failure requiring attention.</p>
+    #   @return [String]
+    # @!attribute ip_address_type
+    #   <p>IP address type for the connector's network connections. When set to <code>IPV4</code>, the connector uses IPv4 addresses only. When set to <code>DUALSTACK</code>, the connector supports both IPv4 and IPv6 addresses, with IPv6 preferred when available.</p>
+    #   @return [String]
     class DescribedConnector < Struct.new(
       nil,
       :arn,
@@ -1317,6 +1420,48 @@ module Aws::Transfer
       :sftp_config,
       :service_managed_egress_ip_addresses,
       :security_policy_name,
+      :egress_config,
+      :egress_type,
+      :error_message,
+      :status,
+      :ip_address_type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:egress_type] = 'SERVICE_MANAGED' unless options.key?(:egress_type)
+        options[:status] = 'ACTIVE' unless options.key?(:status)
+        super
+      end
+    end
+
+    # <p>Response structure containing the current egress configuration details for the connector. Shows how traffic is currently routed from the connector to the SFTP server.</p>
+    # @!attribute vpc_lattice
+    #   <p>VPC_LATTICE configuration details in the response, showing the current Resource Configuration ARN and port settings for VPC-based connectivity.</p>
+    #   @return [Types::DescribedConnectorVpcLatticeEgressConfig]
+    class DescribedConnectorEgressConfig < Struct.new(
+      :vpc_lattice,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class VpcLattice < DescribedConnectorEgressConfig; end
+      class Unknown < DescribedConnectorEgressConfig; end
+    end
+
+    # <p>VPC_LATTICE egress configuration details in the response, containing the Resource Configuration ARN and port number currently configured for the connector.</p>
+    # @!attribute resource_configuration_arn
+    #   <p>ARN of the VPC_LATTICE Resource Configuration currently used by the connector. This Resource Configuration defines the network path to the SFTP server through the customer's VPC.</p>
+    #   @return [String]
+    # @!attribute port_number
+    #   <p>Port number currently configured for SFTP connections through VPC_LATTICE. Shows the port on which the connector attempts to connect to the target SFTP server.</p>
+    #   @return [Integer]
+    class DescribedConnectorVpcLatticeEgressConfig < Struct.new(
+      nil,
+      :resource_configuration_arn,
+      :port_number,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1384,6 +1529,12 @@ module Aws::Transfer
     # @!attribute tags
     #   <p>Key-value pairs that can be used to group and search for host keys.</p>
     #   @return [Array<Types::Tag>]
+    # @!attribute storage_type
+    #   <p>Specifies whether the host key is stored by Transfer Family (<code>SERVICE_MANAGED</code>) or in Secrets Manager (<code>SECRETS_MANAGER</code>).</p>
+    #   @return [String]
+    # @!attribute secret_id
+    #   <p>The ARN of the Secrets Manager secret that stores the host key material, when <code>StorageType</code> is <code>SECRETS_MANAGER</code>.</p>
+    #   @return [String]
     class DescribedHostKey < Struct.new(
       nil,
       :arn,
@@ -1393,6 +1544,8 @@ module Aws::Transfer
       :type,
       :date_imported,
       :tags,
+      :storage_type,
+      :secret_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1502,7 +1655,7 @@ module Aws::Transfer
     #   <p>Specifies the ARN of the Amazon Web ServicesCertificate Manager (ACM) certificate. Required when <code>Protocols</code> is set to <code>FTPS</code>.</p>
     #   @return [String]
     # @!attribute protocol_details
-    #   <p>The protocol settings that are configured for your server.</p> <ul> <li> <p> To indicate passive mode (for FTP and FTPS protocols), use the <code>PassiveIp</code> parameter. Enter a single dotted-quad IPv4 address, such as the external IP address of a firewall, router, or load balancer. </p> </li> <li> <p>To ignore the error that is generated when the client attempts to use the <code>SETSTAT</code> command on a file that you are uploading to an Amazon S3 bucket, use the <code>SetStatOption</code> parameter. To have the Transfer Family server ignore the <code>SETSTAT</code> command and upload files without needing to make any changes to your SFTP client, set the value to <code>ENABLE_NO_OP</code>. If you set the <code>SetStatOption</code> parameter to <code>ENABLE_NO_OP</code>, Transfer Family generates a log entry to Amazon CloudWatch Logs, so that you can determine when the client is making a <code>SETSTAT</code> call.</p> </li> <li> <p>To determine whether your Transfer Family server resumes recent, negotiated sessions through a unique session ID, use the <code>TlsSessionResumptionMode</code> parameter.</p> </li> <li> <p> <code>As2Transports</code> indicates the transport method for the AS2 messages. Currently, only HTTP is supported.</p> </li> </ul>
+    #   <p>The protocol settings that are configured for your server.</p> <note> <p>Avoid placing Network Load Balancers (NLBs) or NAT gateways in front of Transfer Family servers, as this increases costs and can cause performance issues, including reduced connection limits for FTPS. For more details, see <a href="https://docs.aws.amazon.com/transfer/latest/userguide/infrastructure-security.html#nlb-considerations"> Avoid placing NLBs and NATs in front of Transfer Family</a>.</p> </note> <ul> <li> <p> To indicate passive mode (for FTP and FTPS protocols), use the <code>PassiveIp</code> parameter. Enter a single dotted-quad IPv4 address, such as the external IP address of a firewall, router, or load balancer. </p> </li> <li> <p>To ignore the error that is generated when the client attempts to use the <code>SETSTAT</code> command on a file that you are uploading to an Amazon S3 bucket, use the <code>SetStatOption</code> parameter. To have the Transfer Family server ignore the <code>SETSTAT</code> command and upload files without needing to make any changes to your SFTP client, set the value to <code>ENABLE_NO_OP</code>. If you set the <code>SetStatOption</code> parameter to <code>ENABLE_NO_OP</code>, Transfer Family generates a log entry to Amazon CloudWatch Logs, so that you can determine when the client is making a <code>SETSTAT</code> call.</p> </li> <li> <p>To specify which ports your Transfer Family server listens to, use the <code>SftpPorts</code> parameter.</p> </li> <li> <p>To determine whether your Transfer Family server resumes recent, negotiated sessions through a unique session ID, use the <code>TlsSessionResumptionMode</code> parameter.</p> </li> <li> <p> <code>As2Transports</code> indicates the transport method for the AS2 messages. Currently, only HTTP is supported.</p> </li> </ul>
     #   @return [Types::ProtocolDetails]
     # @!attribute domain
     #   <p>Specifies the domain of the storage system that is used for file transfers. There are two domains available: Amazon Simple Storage Service (Amazon S3) and Amazon Elastic File System (Amazon EFS). The default value is S3.</p>
@@ -1553,7 +1706,7 @@ module Aws::Transfer
     #   <p>Specifies the workflow ID for the workflow to assign and the execution role that's used for executing the workflow.</p> <p>In addition to a workflow to execute when a file is uploaded completely, <code>WorkflowDetails</code> can also contain a workflow ID (and execution role) for a workflow to execute on partial upload. A partial upload occurs when the server session disconnects while the file is still being uploaded.</p>
     #   @return [Types::WorkflowDetails]
     # @!attribute structured_log_destinations
-    #   <p>Specifies the log groups to which your server logs are sent.</p> <p>To specify a log group, you must provide the ARN for an existing log group. In this case, the format of the log group is as follows:</p> <p> <code>arn:aws:logs:region-name:amazon-account-id:log-group:log-group-name:*</code> </p> <p>For example, <code>arn:aws:logs:us-east-1:111122223333:log-group:mytestgroup:*</code> </p> <p>If you have previously specified a log group for a server, you can clear it, and in effect turn off structured logging, by providing an empty value for this parameter in an <code>update-server</code> call. For example:</p> <p> <code>update-server --server-id s-1234567890abcdef0 --structured-log-destinations</code> </p>
+    #   <p>Specifies the log groups to which your server logs are sent.</p> <p>To specify a log group, you must provide the ARN for an existing log group. In this case, the format of the log group is as follows:</p> <p> <code>arn:partition:logs:region-name:amazon-account-id:log-group:log-group-name:*</code> </p> <p>For example, <code>arn:aws:logs:us-east-1:111122223333:log-group:mytestgroup:*</code> </p> <p>If you have previously specified a log group for a server, you can clear it, and in effect turn off structured logging, by providing an empty value for this parameter in an <code>update-server</code> call. For example:</p> <p> <code>update-server --server-id s-1234567890abcdef0 --structured-log-destinations</code> </p>
     #   @return [Array<String>]
     # @!attribute s3_storage_options
     #   <p>Specifies whether or not performance for your Amazon S3 directories is optimized.</p> <ul> <li> <p>If using the console, this is enabled by default.</p> </li> <li> <p>If using the API or CLI, this is disabled by default.</p> </li> </ul> <p>By default, home directory mappings have a <code>TYPE</code> of <code>DIRECTORY</code>. If you enable this option, you would then need to explicitly set the <code>HomeDirectoryMapEntry</code> <code>Type</code> to <code>FILE</code> if you want a mapping to have a file target.</p>
@@ -1667,6 +1820,12 @@ module Aws::Transfer
     # @!attribute web_app_endpoint_policy
     #   <p> Setting for the type of endpoint policy for the web app. The default value is <code>STANDARD</code>. </p> <p>If your web app was created in an Amazon Web Services GovCloud (US) Region, the value of this parameter can be <code>FIPS</code>, which indicates the web app endpoint is FIPS-compliant.</p>
     #   @return [String]
+    # @!attribute endpoint_type
+    #   <p>The type of endpoint hosting the web app. Valid values are <code>PUBLIC</code> for publicly accessible endpoints and <code>VPC</code> for VPC-hosted endpoints that provide network isolation.</p>
+    #   @return [String]
+    # @!attribute described_endpoint_details
+    #   <p>The endpoint configuration details for the web app, including VPC settings if the endpoint is hosted within a VPC.</p>
+    #   @return [Types::DescribedWebAppEndpointDetails]
     class DescribedWebApp < Struct.new(
       nil,
       :arn,
@@ -1677,6 +1836,8 @@ module Aws::Transfer
       :web_app_units,
       :tags,
       :web_app_endpoint_policy,
+      :endpoint_type,
+      :described_endpoint_details,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1710,6 +1871,21 @@ module Aws::Transfer
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Contains the endpoint configuration details for a web app, including VPC configuration when the endpoint is hosted within a VPC.</p>
+    # @!attribute vpc
+    #   <p>The VPC configuration details when the web app endpoint is hosted within a VPC. This includes the VPC ID, subnet IDs, and VPC endpoint ID.</p>
+    #   @return [Types::DescribedWebAppVpcConfig]
+    class DescribedWebAppEndpointDetails < Struct.new(
+      :vpc,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class Vpc < DescribedWebAppEndpointDetails; end
+      class Unknown < DescribedWebAppEndpointDetails; end
+    end
+
     # <p>Returns a structure that contains the identity provider details for your web app.</p>
     # @!attribute identity_center_config
     #   <p>Returns a structure for your identity provider details. This structure contains the instance ARN and role being used for the web app.</p>
@@ -1723,6 +1899,26 @@ module Aws::Transfer
 
       class IdentityCenterConfig < DescribedWebAppIdentityProviderDetails; end
       class Unknown < DescribedWebAppIdentityProviderDetails; end
+    end
+
+    # <p>Contains the VPC configuration details for a web app endpoint, including the VPC identifier, subnet IDs, and VPC endpoint ID used for hosting the endpoint.</p>
+    # @!attribute subnet_ids
+    #   <p>The list of subnet IDs within the VPC where the web app endpoint is deployed. These subnets must be in the same VPC and provide network connectivity for the endpoint.</p>
+    #   @return [Array<String>]
+    # @!attribute vpc_id
+    #   <p>The identifier of the VPC where the web app endpoint is hosted.</p>
+    #   @return [String]
+    # @!attribute vpc_endpoint_id
+    #   <p>The identifier of the VPC endpoint created for the web app.</p>
+    #   @return [String]
+    class DescribedWebAppVpcConfig < Struct.new(
+      nil,
+      :subnet_ids,
+      :vpc_id,
+      :vpc_endpoint_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the properties of the specified workflow</p>
@@ -1744,6 +1940,9 @@ module Aws::Transfer
     # @!attribute tags
     #   <p>Key-value pairs that can be used to group and search for workflows. Tags are metadata attached to workflows for any purpose.</p>
     #   @return [Array<Types::Tag>]
+    # @!attribute structured_log_destinations
+    #   <p>Specifies the log groups to which your workflow logs are sent.</p> <p>To specify a log group, you must provide the ARN for an existing log group. In this case, the format of the log group is as follows:</p> <p> <code>arn:partition:logs:region-name:amazon-account-id:log-group:log-group-name:*</code> </p> <p>For example, <code>arn:aws:logs:us-east-1:111122223333:log-group:mytestgroup:*</code> </p>
+    #   @return [Array<String>]
     class DescribedWorkflow < Struct.new(
       nil,
       :arn,
@@ -1752,6 +1951,7 @@ module Aws::Transfer
       :on_exception_steps,
       :workflow_id,
       :tags,
+      :structured_log_destinations,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1995,12 +2195,20 @@ module Aws::Transfer
     # @!attribute tags
     #   <p>Key-value pairs that can be used to group and search for host keys.</p>
     #   @return [Array<Types::Tag>]
+    # @!attribute storage_type
+    #   <p>Specifies whether the host key is stored by Transfer Family (<code>SERVICE_MANAGED</code>) or in Secrets Manager (<code>SECRETS_MANAGER</code>). When you specify <code>SECRETS_MANAGER</code>, Transfer Family stores the private host key material in an Secrets Manager secret.</p>
+    #   @return [String]
+    # @!attribute kms_key
+    #   <p>The Amazon Resource Name (ARN) of the KMS key used to encrypt the Secrets Manager secret that stores the host key. If you specify a customer managed key, its key policy must allow the <code>AWSServiceRoleForTransfer</code> service-linked role to decrypt the secret. If you don't specify a value, Transfer Family uses the Amazon Web Services managed key for Secrets Manager.</p>
+    #   @return [String]
     class ImportHostKeyRequest < Struct.new(
       nil,
       :server_id,
       :host_key_body,
       :description,
       :tags,
+      :storage_type,
+      :kms_key,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2693,7 +2901,7 @@ module Aws::Transfer
     #   <p>The unique identifier for the connector.</p>
     #   @return [String]
     # @!attribute url
-    #   <p>The URL of the partner's AS2 or SFTP endpoint.</p>
+    #   <p>The URL of the partner's AS2 or SFTP endpoint.</p> <p>When creating AS2 connectors or service-managed SFTP connectors (connectors without egress configuration), you must provide a URL to specify the remote server endpoint. For VPC Lattice type connectors, the URL must be null.</p>
     #   @return [String]
     class ListedConnector < Struct.new(
       nil,
@@ -2748,6 +2956,12 @@ module Aws::Transfer
     # @!attribute date_imported
     #   <p>The date on which the host key was added to the server.</p>
     #   @return [Time]
+    # @!attribute storage_type
+    #   <p>Specifies whether the host key is stored by Transfer Family (<code>SERVICE_MANAGED</code>) or in Secrets Manager (<code>SECRETS_MANAGER</code>).</p>
+    #   @return [String]
+    # @!attribute secret_id
+    #   <p>The ARN of the Secrets Manager secret that stores the host key material, when <code>StorageType</code> is <code>SECRETS_MANAGER</code>.</p>
+    #   @return [String]
     class ListedHostKey < Struct.new(
       nil,
       :arn,
@@ -2756,6 +2970,8 @@ module Aws::Transfer
       :description,
       :type,
       :date_imported,
+      :storage_type,
+      :secret_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2870,12 +3086,16 @@ module Aws::Transfer
     # @!attribute web_app_endpoint
     #   <p>The <code>WebAppEndpoint</code> is the unique URL for your Transfer Family web app. This is the value that you use when you configure <b>Origins</b> on CloudFront.</p>
     #   @return [String]
+    # @!attribute endpoint_type
+    #   <p>The type of endpoint hosting the web app. Valid values are <code>PUBLIC</code> for publicly accessible endpoints and <code>VPC</code> for VPC-hosted endpoints.</p>
+    #   @return [String]
     class ListedWebApp < Struct.new(
       nil,
       :arn,
       :web_app_id,
       :access_endpoint,
       :web_app_endpoint,
+      :endpoint_type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2939,7 +3159,7 @@ module Aws::Transfer
 
     # <p> The protocol settings that are configured for your server. </p>
     # @!attribute passive_ip
-    #   <p> Indicates passive mode, for FTP and FTPS protocols. Enter a single IPv4 address, such as the public IP address of a firewall, router, or load balancer. For example: </p> <p> <code>aws transfer update-server --protocol-details PassiveIp=0.0.0.0</code> </p> <p>Replace <code>0.0.0.0</code> in the example above with the actual IP address you want to use.</p> <note> <p> If you change the <code>PassiveIp</code> value, you must stop and then restart your Transfer Family server for the change to take effect. For details on using passive mode (PASV) in a NAT environment, see <a href="http://aws.amazon.com/blogs/storage/configuring-your-ftps-server-behind-a-firewall-or-nat-with-aws-transfer-family/">Configuring your FTPS server behind a firewall or NAT with Transfer Family</a>. </p> </note> <p> <i>Special values</i> </p> <p>The <code>AUTO</code> and <code>0.0.0.0</code> are special values for the <code>PassiveIp</code> parameter. The value <code>PassiveIp=AUTO</code> is assigned by default to FTP and FTPS type servers. In this case, the server automatically responds with one of the endpoint IPs within the PASV response. <code>PassiveIp=0.0.0.0</code> has a more unique application for its usage. For example, if you have a High Availability (HA) Network Load Balancer (NLB) environment, where you have 3 subnets, you can only specify a single IP address using the <code>PassiveIp</code> parameter. This reduces the effectiveness of having High Availability. In this case, you can specify <code>PassiveIp=0.0.0.0</code>. This tells the client to use the same IP address as the Control connection and utilize all AZs for their connections. Note, however, that not all FTP clients support the <code>PassiveIp=0.0.0.0</code> response. FileZilla and WinSCP do support it. If you are using other clients, check to see if your client supports the <code>PassiveIp=0.0.0.0</code> response.</p>
+    #   <p> Indicates passive mode, for FTP and FTPS protocols. Enter a single IPv4 address, such as the public IP address of a firewall, router, or load balancer. For example: </p> <p> <code>aws transfer update-server --protocol-details PassiveIp=0.0.0.0</code> </p> <p>Replace <code>0.0.0.0</code> in the example above with the actual IP address you want to use.</p> <note> <p> If you change the <code>PassiveIp</code> value, you must stop and then restart your Transfer Family server for the change to take effect. For details on using passive mode (PASV) in a NAT environment, see <a href="http://aws.amazon.com/blogs/storage/configuring-your-ftps-server-behind-a-firewall-or-nat-with-aws-transfer-family/">Configuring your FTPS server behind a firewall or NAT with Transfer Family</a>. </p> <p>Additionally, avoid placing Network Load Balancers (NLBs) or NAT gateways in front of Transfer Family servers. This configuration increases costs and can cause performance issues. When NLBs or NATs are in the communication path, Transfer Family cannot accurately recognize client IP addresses, which impacts connection sharding and limits FTPS servers to only 300 simultaneous connections instead of 10,000. If you must use an NLB, use port 21 for health checks and enable TLS session resumption by setting <code>TlsSessionResumptionMode = ENFORCED</code>. For optimal performance, migrate to VPC endpoints with Elastic IP addresses instead of using NLBs. For more details, see <a href="https://docs.aws.amazon.com/transfer/latest/userguide/infrastructure-security.html#nlb-considerations"> Avoid placing NLBs and NATs in front of Transfer Family</a>. </p> </note> <p> <i>Special values</i> </p> <p>The <code>AUTO</code> and <code>0.0.0.0</code> are special values for the <code>PassiveIp</code> parameter. The value <code>PassiveIp=AUTO</code> is assigned by default to FTP and FTPS type servers. In this case, the server automatically responds with one of the endpoint IPs within the PASV response. <code>PassiveIp=0.0.0.0</code> has a more unique application for its usage. For example, if you have a High Availability (HA) Network Load Balancer (NLB) environment, where you have 3 subnets, you can only specify a single IP address using the <code>PassiveIp</code> parameter. This reduces the effectiveness of having High Availability. In this case, you can specify <code>PassiveIp=0.0.0.0</code>. This tells the client to use the same IP address as the Control connection and utilize all AZs for their connections. Note, however, that not all FTP clients support the <code>PassiveIp=0.0.0.0</code> response. FileZilla and WinSCP do support it. If you are using other clients, check to see if your client supports the <code>PassiveIp=0.0.0.0</code> response.</p>
     #   @return [String]
     # @!attribute tls_session_resumption_mode
     #   <p>A property used with Transfer Family servers that use the FTPS protocol. TLS Session Resumption provides a mechanism to resume or share a negotiated secret key between the control and data connection for an FTPS session. <code>TlsSessionResumptionMode</code> determines whether or not the server resumes recent, negotiated sessions through a unique session ID. This property is available during <code>CreateServer</code> and <code>UpdateServer</code> calls. If a <code>TlsSessionResumptionMode</code> value is not specified during <code>CreateServer</code>, it is set to <code>ENFORCED</code> by default.</p> <ul> <li> <p> <code>DISABLED</code>: the server does not process TLS session resumption client requests and creates a new TLS session for each request. </p> </li> <li> <p> <code>ENABLED</code>: the server processes and accepts clients that are performing TLS session resumption. The server doesn't reject client data connections that do not perform the TLS session resumption client processing.</p> </li> <li> <p> <code>ENFORCED</code>: the server processes and accepts clients that are performing TLS session resumption. The server rejects client data connections that do not perform the TLS session resumption client processing. Before you set the value to <code>ENFORCED</code>, test your clients.</p> <note> <p>Not all FTPS clients perform TLS session resumption. So, if you choose to enforce TLS session resumption, you prevent any connections from FTPS clients that don't perform the protocol negotiation. To determine whether or not you can use the <code>ENFORCED</code> value, you need to test your clients.</p> </note> </li> </ul>
@@ -2947,15 +3167,35 @@ module Aws::Transfer
     # @!attribute set_stat_option
     #   <p>Use the <code>SetStatOption</code> to ignore the error that is generated when the client attempts to use <code>SETSTAT</code> on a file you are uploading to an S3 bucket.</p> <p>Some SFTP file transfer clients can attempt to change the attributes of remote files, including timestamp and permissions, using commands, such as <code>SETSTAT</code> when uploading the file. However, these commands are not compatible with object storage systems, such as Amazon S3. Due to this incompatibility, file uploads from these clients can result in errors even when the file is otherwise successfully uploaded.</p> <p>Set the value to <code>ENABLE_NO_OP</code> to have the Transfer Family server ignore the <code>SETSTAT</code> command, and upload files without needing to make any changes to your SFTP client. While the <code>SetStatOption</code> <code>ENABLE_NO_OP</code> setting ignores the error, it does generate a log entry in Amazon CloudWatch Logs, so you can determine when the client is making a <code>SETSTAT</code> call.</p> <note> <p>If you want to preserve the original timestamp for your file, and modify other file attributes using <code>SETSTAT</code>, you can use Amazon EFS as backend storage with Transfer Family.</p> </note>
     #   @return [String]
+    # @!attribute sftp_ports
+    #   <p>A property used with Transfer Family servers that use the SFTP protocol and have <code>PUBLIC</code> endpoints. This property accepts a list of up to three port configurations that the service opens on the server endpoint.</p> <p>Each entry in the list consists of two parameters, the <code>SftpPort</code> and the <code>CommunicationMode</code>. The <code>SftpPort</code> takes any integer from 2000 to 65535, or 22. <code>CommunicationMode</code> can be one of the following options:</p> <ul> <li> <p> <code>SERVER_TALK_FIRST</code>: The server responds to initial TCP connections first. Many older clients expect that an SFTP server responds with its server string before starting SSH negotiations.</p> </li> <li> <p> <code>CLIENT_TALK_FIRST</code>: The server responds to the initial TCP connection only after receiving a data packet. Most modern clients support this behavior and send their client string along with the initial data packets for SSH negotiation. Additionally, this mode is more resilient to TCP retransmissions that can occur during the initial TCP connection.</p> </li> </ul> <p>The following is an <code>SftpPorts</code> example for port 2222 with <code>CLIENT_TALK_FIRST</code>.</p> <p> <code>[ { "SftpPort": 2222, "CommunicationMode": "CLIENT_TALK_FIRST" } ]</code> </p> <p>If you don't specify any configurations during <code>CreateServer</code>, the service uses port 22 with <code>SERVER_TALK_FIRST</code> by default.</p>
+    #   @return [Array<Types::SftpPortWithOptions>]
     # @!attribute as2_transports
     #   <p>Indicates the transport method for the AS2 messages. Currently, only HTTP is supported.</p>
     #   @return [Array<String>]
+    # @!attribute proxy_config
+    #   <p>The configuration for PROXY protocol version 2 (PPv2) support on the Transfer Family server. For more information, see <a href="https://docs.aws.amazon.com/transfer/latest/userguide/working-with-nlb.html">Working with Network Load Balancers</a>.</p>
+    #   @return [Types::ProxyConfig]
     class ProtocolDetails < Struct.new(
       nil,
       :passive_ip,
       :tls_session_resumption_mode,
       :set_stat_option,
+      :sftp_ports,
       :as2_transports,
+      :proxy_config,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains configuration for PROXY protocol version 2 (PPv2) support on an Transfer Family server. When enabled, Transfer Family reads the added PPv2 header from incoming connections to extract the client's source IP address. This address is then available in Amazon CloudWatch Logs entries and is passed to custom identity providers during authentication, enabling IP-based access policies. For more information, see <a href="https://docs.aws.amazon.com/transfer/latest/userguide/working-with-nlb.html">Working with Network Load Balancers</a>.</p>
+    # @!attribute sftp_mode
+    #   <p>Specifies whether the Transfer Family server requires or ignores a PPv2 header containing the client's source IP address on incoming SFTP connections. If you don't specify a value, the default is <code>NONE</code> </p> <ul> <li> <p> <code>NONE</code>: the server reads and ignores any PPv2 header on incoming SFTP connections. This is the default value. Use this value when your SFTP server is not behind an NLB, or when you do not need to preserve the client's source IP address through an NLB.</p> </li> <li> <p> <code>PROXY_PROTOCOL_V2_ENFORCED</code>: the server requires a valid PPv2 header on every incoming SFTP connection. When a valid header is present, the server applies it and uses the source IP address from the header. If a connection arrives without a PPv2 header, the server refuses the connection and logs an error to Amazon CloudWatch Logs indicating that the expected PPv2 header was missing. Use this value when your SFTP server is behind an NLB with PPv2 enabled on the target group.</p> <important> <p>With <code>PROXY_PROTOCOL_V2_ENFORCED</code> you must restrict the server's VPC endpoint security group to allow inbound traffic only via the trusted NLB. For more information, see <a href="https://docs.aws.amazon.com/transfer/latest/userguide/working-with-nlb.html">Working with Network Load Balancers</a>.</p> </important> </li> </ul>
+    #   @return [String]
+    class ProxyConfig < Struct.new(
+      nil,
+      :sftp_mode,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3121,16 +3361,20 @@ module Aws::Transfer
     #   <p>The identifier for the secret (in Amazon Web Services Secrets Manager) that contains the SFTP user's private key, password, or both. The identifier must be the Amazon Resource Name (ARN) of the secret.</p> <note> <ul> <li> <p>Required when creating an SFTP connector</p> </li> <li> <p>Optional when updating an existing SFTP connector</p> </li> </ul> </note>
     #   @return [String]
     # @!attribute trusted_host_keys
-    #   <p>The public portion of the host key, or keys, that are used to identify the external server to which you are connecting. You can use the <code>ssh-keyscan</code> command against the SFTP server to retrieve the necessary key.</p> <note> <p> <code>TrustedHostKeys</code> is optional for <code>CreateConnector</code>. If not provided, you can use <code>TestConnection</code> to retrieve the server host key during the initial connection attempt, and subsequently update the connector with the observed host key.</p> </note> <p>The three standard SSH public key format elements are <code>&lt;key type&gt;</code>, <code>&lt;body base64&gt;</code>, and an optional <code>&lt;comment&gt;</code>, with spaces between each element. Specify only the <code>&lt;key type&gt;</code> and <code>&lt;body base64&gt;</code>: do not enter the <code>&lt;comment&gt;</code> portion of the key.</p> <p>For the trusted host key, Transfer Family accepts RSA and ECDSA keys.</p> <ul> <li> <p>For RSA keys, the <code>&lt;key type&gt;</code> string is <code>ssh-rsa</code>.</p> </li> <li> <p>For ECDSA keys, the <code>&lt;key type&gt;</code> string is either <code>ecdsa-sha2-nistp256</code>, <code>ecdsa-sha2-nistp384</code>, or <code>ecdsa-sha2-nistp521</code>, depending on the size of the key you generated.</p> </li> </ul> <p>Run this command to retrieve the SFTP server host key, where your SFTP server name is <code>ftp.host.com</code>.</p> <p> <code>ssh-keyscan ftp.host.com</code> </p> <p>This prints the public host key to standard output.</p> <p> <code>ftp.host.com ssh-rsa AAAAB3Nza...&lt;long-string-for-public-key</code> </p> <p>Copy and paste this string into the <code>TrustedHostKeys</code> field for the <code>create-connector</code> command or into the <b>Trusted host keys</b> field in the console.</p>
+    #   <p>The public portion of the host key, or keys, that are used to identify the external server to which you are connecting. You can use the <code>ssh-keyscan</code> command against the SFTP server to retrieve the necessary key.</p> <note> <p> <code>TrustedHostKeys</code> is optional for <code>CreateConnector</code>. If not provided, you can use <code>TestConnection</code> to retrieve the server host key during the initial connection attempt, and subsequently update the connector with the observed host key.</p> </note> <p>When creating connectors with egress config (VPC_LATTICE type connectors), since host name is not something we can verify, the only accepted trusted host key format is <code>key-type key-body</code> without the host name. For example: <code>ssh-rsa AAAAB3Nza...&lt;long-string-for-public-key&gt;</code> </p> <p>The three standard SSH public key format elements are <code>&lt;key type&gt;</code>, <code>&lt;body base64&gt;</code>, and an optional <code>&lt;comment&gt;</code>, with spaces between each element. Specify only the <code>&lt;key type&gt;</code> and <code>&lt;body base64&gt;</code>: do not enter the <code>&lt;comment&gt;</code> portion of the key.</p> <p>For the trusted host key, Transfer Family accepts RSA and ECDSA keys.</p> <ul> <li> <p>For RSA keys, the <code>&lt;key type&gt;</code> string is <code>ssh-rsa</code>.</p> </li> <li> <p>For ECDSA keys, the <code>&lt;key type&gt;</code> string is either <code>ecdsa-sha2-nistp256</code>, <code>ecdsa-sha2-nistp384</code>, or <code>ecdsa-sha2-nistp521</code>, depending on the size of the key you generated.</p> </li> </ul> <p>Run this command to retrieve the SFTP server host key, where your SFTP server name is <code>ftp.host.com</code>.</p> <p> <code>ssh-keyscan ftp.host.com</code> </p> <p>This prints the public host key to standard output.</p> <p> <code>ftp.host.com ssh-rsa AAAAB3Nza...&lt;long-string-for-public-key&gt;</code> </p> <p>Copy and paste this string into the <code>TrustedHostKeys</code> field for the <code>create-connector</code> command or into the <b>Trusted host keys</b> field in the console.</p> <p>For VPC Lattice type connectors (VPC_LATTICE), remove the hostname from the key and use only the <code>key-type key-body</code> format. In this example, it should be: <code>ssh-rsa AAAAB3Nza...&lt;long-string-for-public-key&gt;</code> </p>
     #   @return [Array<String>]
     # @!attribute max_concurrent_connections
     #   <p>Specify the number of concurrent connections that your connector creates to the remote server. The default value is <code>1</code>. The maximum values is <code>5</code>.</p> <note> <p>If you are using the Amazon Web Services Management Console, the default value is <code>5</code>.</p> </note> <p>This parameter specifies the number of active connections that your connector can establish with the remote server at the same time. Increasing this value can enhance connector performance when transferring large file batches by enabling parallel operations.</p>
     #   @return [Integer]
+    # @!attribute ordered_user_secret_version_stages
+    #   <p>An ordered list of Amazon Web Services Secrets Manager version stages (staging labels, such as <code>AWSCURRENT</code> and <code>AWSPREVIOUS</code>) for the secret identified by <code>UserSecretId</code>. When establishing a connection, the connector attempts to retrieve the SFTP user's credentials from each version stage in the order listed, and uses the first version it can successfully retrieve. This lets you rotate the user secret without interrupting connector operations.</p>
+    #   @return [Array<String>]
     class SftpConnectorConfig < Struct.new(
       nil,
       :user_secret_id,
       :trusted_host_keys,
       :max_concurrent_connections,
+      :ordered_user_secret_version_stages,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3148,6 +3392,22 @@ module Aws::Transfer
     class SftpConnectorConnectionDetails < Struct.new(
       nil,
       :host_key,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Specifies the configuration for a single SFTP port on a Transfer Family server that uses the SFTP protocol and has a <code>PUBLIC</code> endpoint. Each entry in the <code>SftpPorts</code> list is an <code>SftpPortWithOptions</code> object that pairs a port number with a communication mode.</p>
+    # @!attribute sftp_port
+    #   <p>The port on which the Transfer Family server listens for SFTP connections. Specify any integer from 2000 to 65535, or 22. This value is required for each entry in the <code>SftpPorts</code> list.</p>
+    #   @return [Integer]
+    # @!attribute communication_mode
+    #   <p>Determines whether the server or the client sends data first when a client establishes an SFTP connection on this port. Valid values are <code>SERVER_TALK_FIRST</code> and <code>CLIENT_TALK_FIRST</code>. For a description of each mode, see the <code>SftpPorts</code> property. This value is optional.</p>
+    #   @return [String]
+    class SftpPortWithOptions < Struct.new(
+      nil,
+      :sftp_port,
+      :communication_mode,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3226,6 +3486,9 @@ module Aws::Transfer
     # @!attribute remote_directory_path
     #   <p>For an outbound transfer, the <code>RemoteDirectoryPath</code> specifies the destination for one or more files that are transferred to the partner's SFTP server. If you don't specify a <code>RemoteDirectoryPath</code>, the destination for transferred files is the SFTP user's home directory.</p>
     #   @return [String]
+    # @!attribute custom_http_headers
+    #   <p>An array of key-value pairs that represent custom HTTP headers to include in AS2 messages. These headers are added to the AS2 message when sending files to your trading partner.</p>
+    #   @return [Array<Types::CustomHttpHeader>]
     class StartFileTransferRequest < Struct.new(
       nil,
       :connector_id,
@@ -3233,6 +3496,7 @@ module Aws::Transfer
       :retrieve_file_paths,
       :local_directory_path,
       :remote_directory_path,
+      :custom_http_headers,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3643,11 +3907,26 @@ module Aws::Transfer
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Structure for updating the egress configuration of an existing connector. Allows modification of how traffic is routed from the connector to the SFTP server, including VPC_LATTICE settings.</p>
+    # @!attribute vpc_lattice
+    #   <p>VPC_LATTICE configuration updates for the connector. Use this to modify the Resource Configuration ARN or port number for VPC-based connectivity.</p>
+    #   @return [Types::UpdateConnectorVpcLatticeEgressConfig]
+    class UpdateConnectorEgressConfig < Struct.new(
+      :vpc_lattice,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class VpcLattice < UpdateConnectorEgressConfig; end
+      class Unknown < UpdateConnectorEgressConfig; end
+    end
+
     # @!attribute connector_id
     #   <p>The unique identifier for the connector.</p>
     #   @return [String]
     # @!attribute url
-    #   <p>The URL of the partner's AS2 or SFTP endpoint.</p>
+    #   <p>The URL of the partner's AS2 or SFTP endpoint.</p> <p>When creating AS2 connectors or service-managed SFTP connectors (connectors without egress configuration), you must provide a URL to specify the remote server endpoint. For VPC Lattice type connectors, the URL must be null.</p>
     #   @return [String]
     # @!attribute as2_config
     #   <p>A structure that contains the parameters for an AS2 connector object.</p>
@@ -3664,6 +3943,12 @@ module Aws::Transfer
     # @!attribute security_policy_name
     #   <p>Specifies the name of the security policy for the connector.</p>
     #   @return [String]
+    # @!attribute egress_config
+    #   <p>Updates the egress configuration for the connector, allowing you to modify how traffic is routed from the connector to the SFTP server. Changes to VPC configuration may require connector restart.</p>
+    #   @return [Types::UpdateConnectorEgressConfig]
+    # @!attribute ip_address_type
+    #   <p>Specifies the IP address type for the connector's network connections. When set to <code>IPV4</code>, the connector uses IPv4 addresses only. When set to <code>DUALSTACK</code>, the connector supports both IPv4 and IPv6 addresses, with IPv6 preferred when available.</p>
+    #   @return [String]
     class UpdateConnectorRequest < Struct.new(
       nil,
       :connector_id,
@@ -3673,6 +3958,8 @@ module Aws::Transfer
       :logging_role,
       :sftp_config,
       :security_policy_name,
+      :egress_config,
+      :ip_address_type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3689,6 +3976,22 @@ module Aws::Transfer
       include ::Smithy::Schema::Structure
     end
 
+    # <p>VPC_LATTICE egress configuration updates for modifying how the connector routes traffic through customer VPCs. Changes to these settings may require connector restart to take effect.</p>
+    # @!attribute resource_configuration_arn
+    #   <p>Updated ARN of the VPC_LATTICE Resource Configuration. Use this to change the target SFTP server location or modify the network path through the customer's VPC infrastructure.</p>
+    #   @return [String]
+    # @!attribute port_number
+    #   <p>Updated port number for SFTP connections through VPC_LATTICE. Change this if the target SFTP server port has been modified or if connecting to a different server endpoint.</p>
+    #   @return [Integer]
+    class UpdateConnectorVpcLatticeEgressConfig < Struct.new(
+      nil,
+      :resource_configuration_arn,
+      :port_number,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute server_id
     #   <p>The identifier of the server that contains the host key that you are updating.</p>
     #   @return [String]
@@ -3698,11 +4001,19 @@ module Aws::Transfer
     # @!attribute description
     #   <p>An updated description for the host key.</p>
     #   @return [String]
+    # @!attribute storage_type
+    #   <p>Specifies whether the host key is stored by Transfer Family (<code>SERVICE_MANAGED</code>) or in Secrets Manager (<code>SECRETS_MANAGER</code>). When you specify <code>SECRETS_MANAGER</code>, Transfer Family stores the private host key material in an Secrets Manager secret.</p>
+    #   @return [String]
+    # @!attribute kms_key
+    #   <p>The Amazon Resource Name (ARN) of the KMS key used to encrypt the Secrets Manager secret that stores the host key. If you specify a customer managed key, its key policy must allow the <code>AWSServiceRoleForTransfer</code> service-linked role to decrypt the secret. If you don't specify a value, Transfer Family uses the Amazon Web Services managed key for Secrets Manager.</p>
+    #   @return [String]
     class UpdateHostKeyRequest < Struct.new(
       nil,
       :server_id,
       :host_key_id,
       :description,
+      :storage_type,
+      :kms_key,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3753,7 +4064,7 @@ module Aws::Transfer
     #   <p>The Amazon Resource Name (ARN) of the Amazon Web ServicesCertificate Manager (ACM) certificate. Required when <code>Protocols</code> is set to <code>FTPS</code>.</p> <p>To request a new public certificate, see <a href="https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html">Request a public certificate</a> in the <i> Amazon Web ServicesCertificate Manager User Guide</i>.</p> <p>To import an existing certificate into ACM, see <a href="https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html">Importing certificates into ACM</a> in the <i> Amazon Web ServicesCertificate Manager User Guide</i>.</p> <p>To request a private certificate to use FTPS through private IP addresses, see <a href="https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-private.html">Request a private certificate</a> in the <i> Amazon Web ServicesCertificate Manager User Guide</i>.</p> <p>Certificates with the following cryptographic algorithms and key sizes are supported:</p> <ul> <li> <p>2048-bit RSA (RSA_2048)</p> </li> <li> <p>4096-bit RSA (RSA_4096)</p> </li> <li> <p>Elliptic Prime Curve 256 bit (EC_prime256v1)</p> </li> <li> <p>Elliptic Prime Curve 384 bit (EC_secp384r1)</p> </li> <li> <p>Elliptic Prime Curve 521 bit (EC_secp521r1)</p> </li> </ul> <note> <p>The certificate must be a valid SSL/TLS X.509 version 3 certificate with FQDN or IP address specified and information about the issuer.</p> </note>
     #   @return [String]
     # @!attribute protocol_details
-    #   <p>The protocol settings that are configured for your server.</p> <ul> <li> <p> To indicate passive mode (for FTP and FTPS protocols), use the <code>PassiveIp</code> parameter. Enter a single dotted-quad IPv4 address, such as the external IP address of a firewall, router, or load balancer. </p> </li> <li> <p>To ignore the error that is generated when the client attempts to use the <code>SETSTAT</code> command on a file that you are uploading to an Amazon S3 bucket, use the <code>SetStatOption</code> parameter. To have the Transfer Family server ignore the <code>SETSTAT</code> command and upload files without needing to make any changes to your SFTP client, set the value to <code>ENABLE_NO_OP</code>. If you set the <code>SetStatOption</code> parameter to <code>ENABLE_NO_OP</code>, Transfer Family generates a log entry to Amazon CloudWatch Logs, so that you can determine when the client is making a <code>SETSTAT</code> call.</p> </li> <li> <p>To determine whether your Transfer Family server resumes recent, negotiated sessions through a unique session ID, use the <code>TlsSessionResumptionMode</code> parameter.</p> </li> <li> <p> <code>As2Transports</code> indicates the transport method for the AS2 messages. Currently, only HTTP is supported.</p> </li> </ul>
+    #   <p>The protocol settings that are configured for your server.</p> <note> <p>Avoid placing Network Load Balancers (NLBs) or NAT gateways in front of Transfer Family servers, as this increases costs and can cause performance issues, including reduced connection limits for FTPS. For more details, see <a href="https://docs.aws.amazon.com/transfer/latest/userguide/infrastructure-security.html#nlb-considerations"> Avoid placing NLBs and NATs in front of Transfer Family</a>.</p> </note> <ul> <li> <p> To indicate passive mode (for FTP and FTPS protocols), use the <code>PassiveIp</code> parameter. Enter a single dotted-quad IPv4 address, such as the external IP address of a firewall, router, or load balancer. </p> </li> <li> <p>To ignore the error that is generated when the client attempts to use the <code>SETSTAT</code> command on a file that you are uploading to an Amazon S3 bucket, use the <code>SetStatOption</code> parameter. To have the Transfer Family server ignore the <code>SETSTAT</code> command and upload files without needing to make any changes to your SFTP client, set the value to <code>ENABLE_NO_OP</code>. If you set the <code>SetStatOption</code> parameter to <code>ENABLE_NO_OP</code>, Transfer Family generates a log entry to Amazon CloudWatch Logs, so that you can determine when the client is making a <code>SETSTAT</code> call.</p> </li> <li> <p>To specify which ports your Transfer Family server listens to, use the <code>SftpPorts</code> parameter.</p> </li> <li> <p>To determine whether your Transfer Family server resumes recent, negotiated sessions through a unique session ID, use the <code>TlsSessionResumptionMode</code> parameter.</p> </li> <li> <p> <code>As2Transports</code> indicates the transport method for the AS2 messages. Currently, only HTTP is supported.</p> </li> </ul>
     #   @return [Types::ProtocolDetails]
     # @!attribute endpoint_details
     #   <p>The virtual private cloud (VPC) endpoint settings that are configured for your server. When you host your endpoint within your VPC, you can make your endpoint accessible only to resources within your VPC, or you can attach Elastic IP addresses and make your endpoint accessible to clients over the internet. Your VPC's default security groups are automatically assigned to your endpoint.</p>
@@ -3789,7 +4100,7 @@ module Aws::Transfer
     #   <p>Specifies the workflow ID for the workflow to assign and the execution role that's used for executing the workflow.</p> <p>In addition to a workflow to execute when a file is uploaded completely, <code>WorkflowDetails</code> can also contain a workflow ID (and execution role) for a workflow to execute on partial upload. A partial upload occurs when the server session disconnects while the file is still being uploaded.</p> <p>To remove an associated workflow from a server, you can provide an empty <code>OnUpload</code> object, as in the following example.</p> <p> <code>aws transfer update-server --server-id s-01234567890abcdef --workflow-details '{"OnUpload":[]}'</code> </p>
     #   @return [Types::WorkflowDetails]
     # @!attribute structured_log_destinations
-    #   <p>Specifies the log groups to which your server logs are sent.</p> <p>To specify a log group, you must provide the ARN for an existing log group. In this case, the format of the log group is as follows:</p> <p> <code>arn:aws:logs:region-name:amazon-account-id:log-group:log-group-name:*</code> </p> <p>For example, <code>arn:aws:logs:us-east-1:111122223333:log-group:mytestgroup:*</code> </p> <p>If you have previously specified a log group for a server, you can clear it, and in effect turn off structured logging, by providing an empty value for this parameter in an <code>update-server</code> call. For example:</p> <p> <code>update-server --server-id s-1234567890abcdef0 --structured-log-destinations</code> </p>
+    #   <p>Specifies the log groups to which your server logs are sent.</p> <p>To specify a log group, you must provide the ARN for an existing log group. In this case, the format of the log group is as follows:</p> <p> <code>arn:partition:logs:region-name:amazon-account-id:log-group:log-group-name:*</code> </p> <p>For example, <code>arn:aws:logs:us-east-1:111122223333:log-group:mytestgroup:*</code> </p> <p>If you have previously specified a log group for a server, you can clear it, and in effect turn off structured logging, by providing an empty value for this parameter in an <code>update-server</code> call. For example:</p> <p> <code>update-server --server-id s-1234567890abcdef0 --structured-log-destinations</code> </p>
     #   @return [Array<String>]
     # @!attribute s3_storage_options
     #   <p>Specifies whether or not performance for your Amazon S3 directories is optimized.</p> <ul> <li> <p>If using the console, this is enabled by default.</p> </li> <li> <p>If using the API or CLI, this is disabled by default.</p> </li> </ul> <p>By default, home directory mappings have a <code>TYPE</code> of <code>DIRECTORY</code>. If you enable this option, you would then need to explicitly set the <code>HomeDirectoryMapEntry</code> <code>Type</code> to <code>FILE</code> if you want a mapping to have a file target.</p>
@@ -3924,6 +4235,21 @@ module Aws::Transfer
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Contains the endpoint configuration details for updating a web app, including VPC settings for endpoints hosted within a VPC.</p>
+    # @!attribute vpc
+    #   <p>The VPC configuration details for updating a web app endpoint hosted within a VPC. This includes the subnet IDs for endpoint deployment.</p>
+    #   @return [Types::UpdateWebAppVpcConfig]
+    class UpdateWebAppEndpointDetails < Struct.new(
+      :vpc,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class Vpc < UpdateWebAppEndpointDetails; end
+      class Unknown < UpdateWebAppEndpointDetails; end
+    end
+
     # <p>A structure that describes the values to use for the IAM Identity Center settings when you update a web app.</p>
     # @!attribute role
     #   <p>The IAM role used to access IAM Identity Center.</p>
@@ -3963,12 +4289,16 @@ module Aws::Transfer
     # @!attribute web_app_units
     #   <p>A union that contains the value for number of concurrent connections or the user sessions on your web app.</p>
     #   @return [Types::WebAppUnits]
+    # @!attribute endpoint_details
+    #   <p>The updated endpoint configuration for the web app. You can modify the endpoint type and VPC configuration settings.</p>
+    #   @return [Types::UpdateWebAppEndpointDetails]
     class UpdateWebAppRequest < Struct.new(
       nil,
       :web_app_id,
       :identity_provider_details,
       :access_endpoint,
       :web_app_units,
+      :endpoint_details,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3980,6 +4310,22 @@ module Aws::Transfer
     class UpdateWebAppResponse < Struct.new(
       nil,
       :web_app_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the VPC configuration settings for updating a web app endpoint, including the subnet IDs where the endpoint should be deployed.</p>
+    # @!attribute subnet_ids
+    #   <p>The list of subnet IDs within the VPC where the web app endpoint should be deployed during the update operation.</p>
+    #   @return [Array<String>]
+    # @!attribute ip_address_type
+    #   <p>The IP address type for the web app's VPC endpoint. This determines whether the endpoint is accessible over IPv4 only, or over both IPv4 and IPv6.</p>
+    #   @return [String]
+    class UpdateWebAppVpcConfig < Struct.new(
+      nil,
+      :subnet_ids,
+      :ip_address_type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4003,6 +4349,21 @@ module Aws::Transfer
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the endpoint configuration for a web app, including VPC settings when the endpoint is hosted within a VPC.</p>
+    # @!attribute vpc
+    #   <p>The VPC configuration for hosting the web app endpoint within a VPC.</p>
+    #   @return [Types::WebAppVpcConfig]
+    class WebAppEndpointDetails < Struct.new(
+      :vpc,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class Vpc < WebAppEndpointDetails; end
+      class Unknown < WebAppEndpointDetails; end
     end
 
     # <p>A union that contains the <code>IdentityCenterConfig</code> object.</p>
@@ -4033,6 +4394,30 @@ module Aws::Transfer
 
       class Provisioned < WebAppUnits; end
       class Unknown < WebAppUnits; end
+    end
+
+    # <p>Contains the VPC configuration settings for hosting a web app endpoint, including the VPC ID, subnet IDs, and security group IDs for access control.</p>
+    # @!attribute subnet_ids
+    #   <p>The list of subnet IDs within the VPC where the web app endpoint will be deployed. These subnets must be in the same VPC specified in the VpcId parameter.</p>
+    #   @return [Array<String>]
+    # @!attribute vpc_id
+    #   <p>The identifier of the VPC where the web app endpoint will be hosted.</p>
+    #   @return [String]
+    # @!attribute security_group_ids
+    #   <p>The list of security group IDs that control access to the web app endpoint. These security groups determine which sources can access the endpoint based on IP addresses and port configurations.</p>
+    #   @return [Array<String>]
+    # @!attribute ip_address_type
+    #   <p>The IP address type for the web app's VPC endpoint. This determines whether the endpoint is accessible over IPv4 only, or over both IPv4 and IPv6.</p>
+    #   @return [String]
+    class WebAppVpcConfig < Struct.new(
+      nil,
+      :subnet_ids,
+      :vpc_id,
+      :security_group_ids,
+      :ip_address_type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the workflow ID for the workflow to assign and the execution role that's used for executing the workflow.</p> <p>In addition to a workflow to execute when a file is uploaded completely, <code>WorkflowDetails</code> can also contain a workflow ID (and execution role) for a workflow to execute on partial upload. A partial upload occurs when the server session disconnects while the file is still being uploaded.</p>

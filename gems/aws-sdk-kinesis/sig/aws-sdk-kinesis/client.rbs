@@ -50,8 +50,78 @@ module Aws::Kinesis
     def add_tags_to_stream: (
       ?stream_name: String,
       ?tags: Hash[String, String],
-      ?stream_arn: String
+      ?stream_arn: String,
+      ?stream_id: String
     ) -> _AddTagsToStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddTagsToStreamResponse
+
+    interface _CreateChannelResponse
+      include Smithy::Client::_Response[Types::CreateChannelOutput]
+      def channel_description: () -> Types::ChannelDescription?
+    end
+    def create_channel: (
+      ?channel_name: String,
+      ?service_execution_role_arn: String,
+      ?stream_configuration_list: Array[
+        {
+          stream_arn: String,
+          record_configuration: {
+            record_format_type: String,
+            gsr_schema_arn: String
+          }
+        }
+      ],
+      ?s3_destination_configuration: {
+        data_freshness_in_seconds: Integer,
+        dead_letter_queue_s3_configuration: {
+          bucket_arn: String,
+          expected_bucket_owner: String,
+          error_output_prefix: String
+        },
+        storage_configuration: {
+          bucket_arn: untyped,
+          expected_bucket_owner: untyped,
+          output_key_template: String,
+          storage_class: String,
+          compression_type: String
+        }
+      },
+      ?s3_tables_destination_configuration: {
+        data_freshness_in_seconds: Integer,
+        dead_letter_queue_s3_configuration: {
+          bucket_arn: String,
+          expected_bucket_owner: String,
+          error_output_prefix: String
+        },
+        s3_tables_configuration_list: Array[
+          {
+            table_bucket_arn: String,
+            namespace: String,
+            table_name: String,
+            compression_type: String,
+            partition_spec: {
+              partition_fields: Array[
+                {
+                  transform: String,
+                  source_name: String
+                }
+              ]
+            }
+          }
+        ]
+      },
+      ?encryption_configuration: {
+        encryption_type: String,
+        key_id: String
+      },
+      ?tags: Hash[String, String],
+      ?logging_configuration: {
+        cloud_watch_logs: {
+          enabled: bool,
+          log_group_name: String,
+          log_stream_name: String
+        }
+      }
+    ) -> _CreateChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateChannelResponse
 
     interface _CreateStreamResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
@@ -62,7 +132,10 @@ module Aws::Kinesis
       ?stream_mode_details: {
         stream_mode: String
       },
-      ?tags: Hash[String, String]
+      ?tags: Hash[String, String],
+      ?warm_throughput_mi_bps: Integer,
+      ?max_record_size_in_ki_b: Integer,
+      ?record_distribution_strategy: String
     ) -> _CreateStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateStreamResponse
 
     interface _DecreaseStreamRetentionPeriodResponse
@@ -71,14 +144,23 @@ module Aws::Kinesis
     def decrease_stream_retention_period: (
       ?stream_name: String,
       ?retention_period_hours: Integer,
-      ?stream_arn: String
+      ?stream_arn: String,
+      ?stream_id: String
     ) -> _DecreaseStreamRetentionPeriodResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DecreaseStreamRetentionPeriodResponse
+
+    interface _DeleteChannelResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_channel: (
+      ?channel_arn: String
+    ) -> _DeleteChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteChannelResponse
 
     interface _DeleteResourcePolicyResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
     end
     def delete_resource_policy: (
-      ?resource_arn: String
+      ?resource_arn: String,
+      ?stream_id: String
     ) -> _DeleteResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteResourcePolicyResponse
 
     interface _DeleteStreamResponse
@@ -87,7 +169,8 @@ module Aws::Kinesis
     def delete_stream: (
       ?stream_name: String,
       ?enforce_consumer_deletion: bool,
-      ?stream_arn: String
+      ?stream_arn: String,
+      ?stream_id: String
     ) -> _DeleteStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteStreamResponse
 
     interface _DeregisterStreamConsumerResponse
@@ -96,8 +179,23 @@ module Aws::Kinesis
     def deregister_stream_consumer: (
       ?stream_arn: String,
       ?consumer_name: String,
-      ?consumer_arn: String
+      ?consumer_arn: String,
+      ?stream_id: String
     ) -> _DeregisterStreamConsumerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeregisterStreamConsumerResponse
+
+    interface _DescribeAccountSettingsResponse
+      include Smithy::Client::_Response[Types::DescribeAccountSettingsOutput]
+      def minimum_throughput_billing_commitment: () -> Types::MinimumThroughputBillingCommitmentOutput?
+    end
+    def describe_account_settings: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAccountSettingsResponse
+
+    interface _DescribeChannelResponse
+      include Smithy::Client::_Response[Types::DescribeChannelOutput]
+      def channel_description: () -> Types::ChannelDescription?
+    end
+    def describe_channel: (
+      ?channel_arn: String
+    ) -> _DescribeChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeChannelResponse
 
     interface _DescribeLimitsResponse
       include Smithy::Client::_Response[Types::DescribeLimitsOutput]
@@ -105,6 +203,8 @@ module Aws::Kinesis
       def open_shard_count: () -> Integer?
       def on_demand_stream_count: () -> Integer?
       def on_demand_stream_count_limit: () -> Integer?
+      def channel_count: () -> Integer?
+      def channel_count_limit: () -> Integer?
     end
     def describe_limits: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeLimitsResponse
 
@@ -116,7 +216,8 @@ module Aws::Kinesis
       ?stream_name: String,
       ?limit: Integer,
       ?exclusive_start_shard_id: String,
-      ?stream_arn: String
+      ?stream_arn: String,
+      ?stream_id: String
     ) -> _DescribeStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeStreamResponse
 
     interface _DescribeStreamConsumerResponse
@@ -126,7 +227,8 @@ module Aws::Kinesis
     def describe_stream_consumer: (
       ?stream_arn: String,
       ?consumer_name: String,
-      ?consumer_arn: String
+      ?consumer_arn: String,
+      ?stream_id: String
     ) -> _DescribeStreamConsumerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeStreamConsumerResponse
 
     interface _DescribeStreamSummaryResponse
@@ -135,7 +237,8 @@ module Aws::Kinesis
     end
     def describe_stream_summary: (
       ?stream_name: String,
-      ?stream_arn: String
+      ?stream_arn: String,
+      ?stream_id: String
     ) -> _DescribeStreamSummaryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeStreamSummaryResponse
 
     interface _DisableEnhancedMonitoringResponse
@@ -148,7 +251,8 @@ module Aws::Kinesis
     def disable_enhanced_monitoring: (
       ?stream_name: String,
       ?shard_level_metrics: Array[String],
-      ?stream_arn: String
+      ?stream_arn: String,
+      ?stream_id: String
     ) -> _DisableEnhancedMonitoringResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisableEnhancedMonitoringResponse
 
     interface _EnableEnhancedMonitoringResponse
@@ -161,7 +265,8 @@ module Aws::Kinesis
     def enable_enhanced_monitoring: (
       ?stream_name: String,
       ?shard_level_metrics: Array[String],
-      ?stream_arn: String
+      ?stream_arn: String,
+      ?stream_id: String
     ) -> _EnableEnhancedMonitoringResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnableEnhancedMonitoringResponse
 
     interface _GetRecordsResponse
@@ -174,7 +279,9 @@ module Aws::Kinesis
     def get_records: (
       ?shard_iterator: String,
       ?limit: Integer,
-      ?stream_arn: String
+      ?stream_arn: String,
+      ?stream_id: String,
+      ?dry_run: bool
     ) -> _GetRecordsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRecordsResponse
 
     interface _GetResourcePolicyResponse
@@ -182,7 +289,8 @@ module Aws::Kinesis
       def policy: () -> String?
     end
     def get_resource_policy: (
-      ?resource_arn: String
+      ?resource_arn: String,
+      ?stream_id: String
     ) -> _GetResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResourcePolicyResponse
 
     interface _GetShardIteratorResponse
@@ -195,7 +303,9 @@ module Aws::Kinesis
       ?shard_iterator_type: String,
       ?starting_sequence_number: String,
       ?timestamp: Time,
-      ?stream_arn: String
+      ?stream_arn: String,
+      ?stream_id: String,
+      ?dry_run: bool
     ) -> _GetShardIteratorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetShardIteratorResponse
 
     interface _IncreaseStreamRetentionPeriodResponse
@@ -204,8 +314,25 @@ module Aws::Kinesis
     def increase_stream_retention_period: (
       ?stream_name: String,
       ?retention_period_hours: Integer,
-      ?stream_arn: String
+      ?stream_arn: String,
+      ?stream_id: String
     ) -> _IncreaseStreamRetentionPeriodResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _IncreaseStreamRetentionPeriodResponse
+
+    interface _ListChannelsResponse
+      include Smithy::Client::_Response[Types::ListChannelsOutput]
+      def channel_summaries: () -> Array[Types::ChannelSummary]?
+      def next_token: () -> String?
+    end
+    def list_channels: (
+      ?stream_filter: Array[
+        {
+          stream_arn: String,
+          stream_creation_timestamp: Time
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListChannelsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListChannelsResponse
 
     interface _ListShardsResponse
       include Smithy::Client::_Response[Types::ListShardsOutput]
@@ -223,7 +350,8 @@ module Aws::Kinesis
         shard_id: String,
         timestamp: Time
       },
-      ?stream_arn: String
+      ?stream_arn: String,
+      ?stream_id: String
     ) -> _ListShardsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListShardsResponse
 
     interface _ListStreamConsumersResponse
@@ -235,7 +363,8 @@ module Aws::Kinesis
       ?stream_arn: String,
       ?next_token: String,
       ?max_results: Integer,
-      ?stream_creation_timestamp: Time
+      ?stream_creation_timestamp: Time,
+      ?stream_id: String
     ) -> _ListStreamConsumersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListStreamConsumersResponse
 
     interface _ListStreamsResponse
@@ -256,7 +385,8 @@ module Aws::Kinesis
       def tags: () -> Array[Types::Tag]?
     end
     def list_tags_for_resource: (
-      ?resource_arn: String
+      ?resource_arn: String,
+      ?stream_id: String
     ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
 
     interface _ListTagsForStreamResponse
@@ -268,7 +398,8 @@ module Aws::Kinesis
       ?stream_name: String,
       ?exclusive_start_tag_key: String,
       ?limit: Integer,
-      ?stream_arn: String
+      ?stream_arn: String,
+      ?stream_id: String
     ) -> _ListTagsForStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForStreamResponse
 
     interface _MergeShardsResponse
@@ -278,7 +409,8 @@ module Aws::Kinesis
       ?stream_name: String,
       ?shard_to_merge: String,
       ?adjacent_shard_to_merge: String,
-      ?stream_arn: String
+      ?stream_arn: String,
+      ?stream_id: String
     ) -> _MergeShardsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _MergeShardsResponse
 
     interface _PutRecordResponse
@@ -293,7 +425,9 @@ module Aws::Kinesis
       ?partition_key: String,
       ?explicit_hash_key: String,
       ?sequence_number_for_ordering: String,
-      ?stream_arn: String
+      ?stream_arn: String,
+      ?stream_id: String,
+      ?dry_run: bool
     ) -> _PutRecordResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutRecordResponse
 
     interface _PutRecordsResponse
@@ -311,7 +445,9 @@ module Aws::Kinesis
         }
       ],
       ?stream_name: String,
-      ?stream_arn: String
+      ?stream_arn: String,
+      ?stream_id: String,
+      ?dry_run: bool
     ) -> _PutRecordsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutRecordsResponse
 
     interface _PutResourcePolicyResponse
@@ -319,6 +455,7 @@ module Aws::Kinesis
     end
     def put_resource_policy: (
       ?resource_arn: String,
+      ?stream_id: String,
       ?policy: String
     ) -> _PutResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutResourcePolicyResponse
 
@@ -329,6 +466,7 @@ module Aws::Kinesis
     def register_stream_consumer: (
       ?stream_arn: String,
       ?consumer_name: String,
+      ?stream_id: String,
       ?tags: Hash[String, String]
     ) -> _RegisterStreamConsumerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterStreamConsumerResponse
 
@@ -338,7 +476,8 @@ module Aws::Kinesis
     def remove_tags_from_stream: (
       ?stream_name: String,
       ?tag_keys: Array[String],
-      ?stream_arn: String
+      ?stream_arn: String,
+      ?stream_id: String
     ) -> _RemoveTagsFromStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemoveTagsFromStreamResponse
 
     interface _SplitShardResponse
@@ -348,7 +487,8 @@ module Aws::Kinesis
       ?stream_name: String,
       ?shard_to_split: String,
       ?new_starting_hash_key: String,
-      ?stream_arn: String
+      ?stream_arn: String,
+      ?stream_id: String
     ) -> _SplitShardResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SplitShardResponse
 
     interface _StartStreamEncryptionResponse
@@ -358,7 +498,8 @@ module Aws::Kinesis
       ?stream_name: String,
       ?encryption_type: String,
       ?key_id: String,
-      ?stream_arn: String
+      ?stream_arn: String,
+      ?stream_id: String
     ) -> _StartStreamEncryptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartStreamEncryptionResponse
 
     interface _StopStreamEncryptionResponse
@@ -368,7 +509,8 @@ module Aws::Kinesis
       ?stream_name: String,
       ?encryption_type: String,
       ?key_id: String,
-      ?stream_arn: String
+      ?stream_arn: String,
+      ?stream_id: String
     ) -> _StopStreamEncryptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopStreamEncryptionResponse
 
     interface _SubscribeToShardResponse
@@ -377,12 +519,14 @@ module Aws::Kinesis
     end
     def subscribe_to_shard: (
       ?consumer_arn: String,
+      ?stream_id: String,
       ?shard_id: String,
       ?starting_position: {
         type: String,
         sequence_number: String,
         timestamp: Time
-      }
+      },
+      ?dry_run: bool
     ) -> _SubscribeToShardResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SubscribeToShardResponse
 
     interface _TagResourceResponse
@@ -390,7 +534,8 @@ module Aws::Kinesis
     end
     def tag_resource: (
       ?tags: Hash[String, String],
-      ?resource_arn: String
+      ?resource_arn: String,
+      ?stream_id: String
     ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
 
     interface _UntagResourceResponse
@@ -398,8 +543,49 @@ module Aws::Kinesis
     end
     def untag_resource: (
       ?tag_keys: Array[String],
-      ?resource_arn: String
+      ?resource_arn: String,
+      ?stream_id: String
     ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateAccountSettingsResponse
+      include Smithy::Client::_Response[Types::UpdateAccountSettingsOutput]
+      def minimum_throughput_billing_commitment: () -> Types::MinimumThroughputBillingCommitmentOutput?
+    end
+    def update_account_settings: (
+      ?minimum_throughput_billing_commitment: {
+        status: String
+      }
+    ) -> _UpdateAccountSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAccountSettingsResponse
+
+    interface _UpdateChannelResponse
+      include Smithy::Client::_Response[Types::UpdateChannelOutput]
+      def channel_description: () -> Types::ChannelDescription?
+    end
+    def update_channel: (
+      ?channel_arn: String,
+      ?s3_destination_configuration: {
+        data_freshness_in_seconds: Integer
+      },
+      ?s3_tables_destination_configuration: {
+        data_freshness_in_seconds: Integer
+      },
+      ?logging_configuration: {
+        cloud_watch_logs: {
+          enabled: bool,
+          log_group_name: String,
+          log_stream_name: String
+        }
+      }
+    ) -> _UpdateChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateChannelResponse
+
+    interface _UpdateMaxRecordSizeResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_max_record_size: (
+      ?stream_arn: String,
+      ?stream_id: String,
+      ?max_record_size_in_ki_b: Integer
+    ) -> _UpdateMaxRecordSizeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateMaxRecordSizeResponse
 
     interface _UpdateShardCountResponse
       include Smithy::Client::_Response[Types::UpdateShardCountOutput]
@@ -412,7 +598,8 @@ module Aws::Kinesis
       ?stream_name: String,
       ?target_shard_count: Integer,
       ?scaling_type: String,
-      ?stream_arn: String
+      ?stream_arn: String,
+      ?stream_id: String
     ) -> _UpdateShardCountResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateShardCountResponse
 
     interface _UpdateStreamModeResponse
@@ -420,9 +607,33 @@ module Aws::Kinesis
     end
     def update_stream_mode: (
       ?stream_arn: String,
+      ?stream_id: String,
       ?stream_mode_details: {
         stream_mode: String
-      }
+      },
+      ?warm_throughput_mi_bps: Integer
     ) -> _UpdateStreamModeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateStreamModeResponse
+
+    interface _UpdateStreamRecordDistributionStrategyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_stream_record_distribution_strategy: (
+      ?stream_arn: String,
+      ?stream_id: String,
+      ?record_distribution_strategy: String
+    ) -> _UpdateStreamRecordDistributionStrategyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateStreamRecordDistributionStrategyResponse
+
+    interface _UpdateStreamWarmThroughputResponse
+      include Smithy::Client::_Response[Types::UpdateStreamWarmThroughputOutput]
+      def stream_arn: () -> String?
+      def stream_name: () -> String?
+      def warm_throughput: () -> Types::WarmThroughputObject?
+    end
+    def update_stream_warm_throughput: (
+      ?stream_arn: String,
+      ?stream_name: String,
+      ?stream_id: String,
+      ?warm_throughput_mi_bps: Integer
+    ) -> _UpdateStreamWarmThroughputResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateStreamWarmThroughputResponse
   end
 end

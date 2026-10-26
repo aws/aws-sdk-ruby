@@ -6,7 +6,7 @@ module Aws::IVSRealTime
   # This module contains the types returned by client operations.
   module Types
 
-    # <p/>
+    # <p>User does not have sufficient access to perform this action.</p>
     # @!attribute access_control_allow_origin
     #   <p/>
     #   @return [String]
@@ -52,32 +52,22 @@ module Aws::IVSRealTime
 
     # <p>Object specifying a configuration for individual participant recording.</p>
     # @!attribute storage_configuration_arn
-    #   <p>ARN of the <a>StorageConfiguration</a> resource to use for individual
-    #            participant recording. Default: <code>""</code> (empty string, no storage configuration is
-    #            specified). Individual participant recording cannot be started unless a storage
-    #            configuration is specified, when a <a>Stage</a> is created or updated. To
-    #            disable individual participant recording, set this to <code>""</code>; other fields in this object will
-    #            get reset to their defaults when sending <code>""</code>. </p>
+    #   <p>ARN of the <a>StorageConfiguration</a> resource to use for individual participant recording. Default: <code>""</code> (empty string, no storage configuration is specified). Individual participant recording cannot be started unless a storage configuration is specified, when a <a>Stage</a> is created or updated. To disable individual participant recording, set this to <code>""</code>; other fields in this object will get reset to their defaults when sending <code>""</code>. </p>
     #   @return [String]
     # @!attribute media_types
     #   <p>Types of media to be recorded. Default: <code>AUDIO_VIDEO</code>.</p>
     #   @return [Array<String>]
     # @!attribute thumbnail_configuration
-    #   <p>A complex type that allows you to enable/disable the recording of thumbnails for
-    #            individual participant recording and modify the interval at which thumbnails are generated
-    #            for the live session.</p>
+    #   <p>A complex type that allows you to enable/disable the recording of thumbnails for individual participant recording and modify the interval at which thumbnails are generated for the live session.</p>
     #   @return [Types::ParticipantThumbnailConfiguration]
     # @!attribute recording_reconnect_window_seconds
-    #   <p>If a stage publisher disconnects and then reconnects within the specified interval, 
-    #   	  the multiple recordings will be considered a single recording and merged together.</p>
-    #            <p>The default value is 0, which disables merging.</p>
+    #   <p>If a stage publisher disconnects and then reconnects within the specified interval, the multiple recordings will be considered a single recording and merged together.</p> <p>The default value is 0, which disables merging.</p>
     #   @return [Integer]
     # @!attribute hls_configuration
     #   <p>HLS configuration object for individual participant recording.</p>
     #   @return [Types::ParticipantRecordingHlsConfiguration]
     # @!attribute record_participant_replicas
-    #   <p>Optional field to disable replica participant recording. If this is set to <code>false</code> when a 
-    #   	  participant is a replica, replica participants are not recorded. Default: <code>true</code>.</p>
+    #   <p>Optional field to disable replica participant recording. If this is set to <code>false</code> when a participant is a replica, replica participants are not recorded. Default: <code>true</code>.</p>
     #   @return [Boolean]
     class AutoParticipantRecordingConfiguration < Struct.new(
       nil,
@@ -100,12 +90,10 @@ module Aws::IVSRealTime
 
     # <p>Object specifying a channel as a destination.</p>
     # @!attribute channel_arn
-    #   <p>ARN of the channel to use for broadcasting. The channel and stage resources must be in
-    #            the same AWS account and region. The channel must be offline (not broadcasting).</p>
+    #   <p>ARN of the channel to use for broadcasting. The channel and stage resources must be in the same AWS account and region. The channel must be offline (not broadcasting).</p>
     #   @return [String]
     # @!attribute encoder_configuration_arn
-    #   <p>ARN of the <a>EncoderConfiguration</a> resource. The encoder configuration
-    #            and stage resources must be in the same AWS account and region.</p>
+    #   <p>ARN of the <a>EncoderConfiguration</a> resource. The encoder configuration and stage resources must be in the same AWS account and region.</p>
     #   @return [String]
     class ChannelDestinationConfiguration < Struct.new(
       nil,
@@ -130,24 +118,16 @@ module Aws::IVSRealTime
     #   <p>Layout object to configure composition parameters.</p>
     #   @return [Types::LayoutConfiguration]
     # @!attribute destinations
-    #   <p>Array of Destination objects. A Composition can contain either one destination
-    #               (<code>channel</code> or <code>s3</code>) or two (one <code>channel</code> and one
-    #               <code>s3</code>).</p>
+    #   <p>Array of Destination objects. A Composition can contain either one destination (<code>channel</code> or <code>s3</code>) or two (one <code>channel</code> and one <code>s3</code>).</p>
     #   @return [Array<Types::Destination>]
     # @!attribute tags
-    #   <p>Tags attached to the resource. Array of maps, each of the form <code>string:string
-    #               (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging AWS Resources and Tag
-    #               Editor</i> for details, including restrictions that apply to tags and "Tag naming
-    #            limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented
-    #            there.</p>
+    #   <p>Tags attached to the resource. Array of maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented there.</p>
     #   @return [Hash<String, String>]
     # @!attribute start_time
-    #   <p>UTC time of the Composition start. This is an ISO 8601 timestamp; <i>note that
-    #               this is returned as a string</i>.</p>
+    #   <p>UTC time of the Composition start. This is an ISO 8601 timestamp; <i>note that this is returned as a string</i>.</p>
     #   @return [Time]
     # @!attribute end_time
-    #   <p>UTC time of the Composition end. This is an ISO 8601 timestamp; <i>note that this
-    #               is returned as a string</i>.</p>
+    #   <p>UTC time of the Composition end. This is an ISO 8601 timestamp; <i>note that this is returned as a string</i>.</p>
     #   @return [Time]
     class Composition < Struct.new(
       nil,
@@ -195,19 +175,13 @@ module Aws::IVSRealTime
     #   <p>State of the Composition resource.</p>
     #   @return [String]
     # @!attribute tags
-    #   <p>Tags attached to the resource. Array of maps, each of the form <code>string:string
-    #               (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging AWS Resources and Tag
-    #               Editor</i> for details, including restrictions that apply to tags and "Tag naming
-    #            limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented
-    #            there.</p>
+    #   <p>Tags attached to the resource. Array of maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented there.</p>
     #   @return [Hash<String, String>]
     # @!attribute start_time
-    #   <p>UTC time of the Composition start. This is an ISO 8601 timestamp; <i>note that
-    #               this is returned as a string</i>.</p>
+    #   <p>UTC time of the Composition start. This is an ISO 8601 timestamp; <i>note that this is returned as a string</i>.</p>
     #   @return [Time]
     # @!attribute end_time
-    #   <p>UTC time of the Composition end. This is an ISO 8601 timestamp; <i>note that this
-    #               is returned as a string</i>.</p>
+    #   <p>UTC time of the Composition end. This is an ISO 8601 timestamp; <i>note that this is returned as a string</i>.</p>
     #   @return [Time]
     class CompositionSummary < Struct.new(
       nil,
@@ -228,14 +202,7 @@ module Aws::IVSRealTime
     #   <p>The targeted thumbnail-generation interval in seconds. Default: 60.</p>
     #   @return [Integer]
     # @!attribute storage
-    #   <p>Indicates the format in which thumbnails are recorded. <code>SEQUENTIAL</code> records
-    #            all generated thumbnails in a serial manner, to the media/thumbnails/(width)x(height)
-    #            directory, where (width) and (height) are the width and height of the thumbnail.
-    #               <code>LATEST</code> saves the latest thumbnail in
-    #            media/latest_thumbnail/(width)x(height)/thumb.jpg and overwrites it at the interval
-    #            specified by <code>targetIntervalSeconds</code>. You can enable both
-    #               <code>SEQUENTIAL</code> and <code>LATEST</code>. Default:
-    #            <code>SEQUENTIAL</code>.</p>
+    #   <p>Indicates the format in which thumbnails are recorded. <code>SEQUENTIAL</code> records all generated thumbnails in a serial manner, to the media/thumbnails/(width)x(height) directory, where (width) and (height) are the width and height of the thumbnail. <code>LATEST</code> saves the latest thumbnail in media/latest_thumbnail/(width)x(height)/thumb.jpg and overwrites it at the interval specified by <code>targetIntervalSeconds</code>. You can enable both <code>SEQUENTIAL</code> and <code>LATEST</code>. Default: <code>SEQUENTIAL</code>.</p>
     #   @return [Array<String>]
     class CompositionThumbnailConfiguration < Struct.new(
       nil,
@@ -246,7 +213,7 @@ module Aws::IVSRealTime
       include ::Smithy::Schema::Structure
     end
 
-    # <p/>
+    # <p>Updating or deleting a resource can cause an inconsistent state.</p>
     # @!attribute access_control_allow_origin
     #   <p/>
     #   @return [String]
@@ -294,15 +261,10 @@ module Aws::IVSRealTime
     #   <p>Optional name to identify the resource.</p>
     #   @return [String]
     # @!attribute video
-    #   <p>Video configuration. Default: video resolution 1280x720, bitrate 2500 kbps, 30
-    #            fps.</p>
+    #   <p>Video configuration. Default: video resolution 1280x720, bitrate 2500 kbps, 30 fps.</p>
     #   @return [Types::Video]
     # @!attribute tags
-    #   <p>Tags attached to the resource. Array of maps, each of the form <code>string:string
-    #            (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a>
-    #            in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming
-    #            limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented
-    #            there.</p>
+    #   <p>Tags attached to the resource. Array of maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented there.</p>
     #   @return [Hash<String, String>]
     class CreateEncoderConfigurationRequest < Struct.new(
       nil,
@@ -332,14 +294,10 @@ module Aws::IVSRealTime
     #   <p>ARN of the stage with which the IngestConfiguration is associated.</p>
     #   @return [String]
     # @!attribute user_id
-    #   <p>Customer-assigned name to help identify the participant using the IngestConfiguration; this can be used to link a participant to a user in the customer’s own systems. This can be any UTF-8 encoded text.
-    #         <i>This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information.</i>
-    #            </p>
+    #   <p>Customer-assigned name to help identify the participant using the IngestConfiguration; this can be used to link a participant to a user in the customer’s own systems. This can be any UTF-8 encoded text. <i>This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information.</i> </p>
     #   @return [String]
     # @!attribute attributes
-    #   <p>Application-provided attributes to store in the IngestConfiguration and attach to a stage. Map keys and values can contain UTF-8 encoded text. The maximum length of this field is 1 KB total.
-    #         <i>This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information.</i>
-    #            </p>
+    #   <p>Application-provided attributes to store in the IngestConfiguration and attach to a stage. Map keys and values can contain UTF-8 encoded text. The maximum length of this field is 1 KB total. <i>This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information.</i> </p>
     #   @return [Hash<String, String>]
     # @!attribute ingest_protocol
     #   <p>Type of ingest protocol that the user employs to broadcast. If this is set to <code>RTMP</code>, <code>insecureIngest</code> must be set to <code>true</code>.</p>
@@ -347,12 +305,11 @@ module Aws::IVSRealTime
     # @!attribute insecure_ingest
     #   <p>Whether the stage allows insecure RTMP ingest. This must be set to <code>true</code>, if <code>ingestProtocol</code> is set to <code>RTMP</code>. Default: <code>false</code>. </p>
     #   @return [Boolean]
+    # @!attribute redundant_ingest
+    #   <p>Indicates whether redundant ingest is enabled for the ingest configuration. Default: <code>false</code>. </p>
+    #   @return [Boolean]
     # @!attribute tags
-    #   <p>Tags attached to the resource. Array of maps, each of the form <code>string:string
-    #            (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a>
-    #            in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming
-    #            limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented
-    #   	 there.</p>
+    #   <p>Tags attached to the resource. Array of maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented there.</p>
     #   @return [Hash<String, String>]
     class CreateIngestConfigurationRequest < Struct.new(
       nil,
@@ -362,17 +319,46 @@ module Aws::IVSRealTime
       :attributes,
       :ingest_protocol,
       :insecure_ingest,
+      :redundant_ingest,
       :tags,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute access_control_allow_origin
+    #   <p>See <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Access-Control-Allow-Origin">Access-Control-Allow-Origin</a> in the MDN Web Docs.</p>
+    #   @return [String]
+    # @!attribute access_control_expose_headers
+    #   <p>See <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Access-Control-Expose-Headers">Access-Control-Expose-Headers</a> in the MDN Web Docs.</p>
+    #   @return [String]
+    # @!attribute cache_control
+    #   <p>See <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Cache-Control">Cache-Control</a> in the MDN Web Docs.</p>
+    #   @return [String]
+    # @!attribute content_security_policy
+    #   <p>See <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy">Content-Security-Policy</a> in the MDN Web Docs.</p>
+    #   @return [String]
+    # @!attribute strict_transport_security
+    #   <p>See <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Strict-Transport-Security">Strict-Transport-Security</a> in the MDN Web Docs.</p>
+    #   @return [String]
+    # @!attribute x_content_type_options
+    #   <p>See <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/X-Content-Type-Options">X-Content-Type-Options</a> in the MDN Web Docs.</p>
+    #   @return [String]
+    # @!attribute x_frame_options
+    #   <p>See <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/X-Frame-Options">X-Frame-Options</a> in the MDN Web Docs.</p>
+    #   @return [String]
     # @!attribute ingest_configuration
     #   <p>The IngestConfiguration that was created.</p>
     #   @return [Types::IngestConfiguration]
     class CreateIngestConfigurationResponse < Struct.new(
       nil,
+      :access_control_allow_origin,
+      :access_control_expose_headers,
+      :cache_control,
+      :content_security_policy,
+      :strict_transport_security,
+      :x_content_type_options,
+      :x_frame_options,
       :ingest_configuration,
       keyword_init: true
     )
@@ -386,21 +372,13 @@ module Aws::IVSRealTime
     #   <p>Duration (in minutes), after which the token expires. Default: 720 (12 hours).</p>
     #   @return [Integer]
     # @!attribute user_id
-    #   <p>Name that can be specified to help identify the token. This can be any UTF-8 encoded
-    #            text. <i>This field is exposed to all stage participants and should not be used for
-    #               personally identifying, confidential, or sensitive information.</i>
-    #            </p>
+    #   <p>Name that can be specified to help identify the token. This can be any UTF-8 encoded text. <i>This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information.</i> </p>
     #   @return [String]
     # @!attribute attributes
-    #   <p>Application-provided attributes to encode into the token and attach to a stage. Map keys
-    #            and values can contain UTF-8 encoded text. The maximum length of this field is 1 KB total.
-    #               <i>This field is exposed to all stage participants and should not be used for
-    #               personally identifying, confidential, or sensitive information.</i>
-    #            </p>
+    #   <p>Application-provided attributes to encode into the token and attach to a stage. Map keys and values can contain UTF-8 encoded text. The maximum length of this field is 1 KB total. <i>This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information.</i> </p>
     #   @return [Hash<String, String>]
     # @!attribute capabilities
-    #   <p>Set of capabilities that the user is allowed to perform in the stage. Default:
-    #               <code>PUBLISH, SUBSCRIBE</code>.</p>
+    #   <p>Set of capabilities that the user is allowed to perform in the stage. Default: <code>PUBLISH, SUBSCRIBE</code>.</p>
     #   @return [Array<String>]
     class CreateParticipantTokenInput < Struct.new(
       nil,
@@ -432,11 +410,7 @@ module Aws::IVSRealTime
     #   <p>Array of participant token configuration objects to attach to the new stage.</p>
     #   @return [Array<Types::ParticipantTokenConfiguration>]
     # @!attribute tags
-    #   <p>Tags attached to the resource. Array of maps, each of the form <code>string:string
-    #            (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a>
-    #            in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming
-    #            limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented
-    #            there. </p>
+    #   <p>Tags attached to the resource. Array of maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented there. </p>
     #   @return [Hash<String, String>]
     # @!attribute auto_participant_recording_configuration
     #   <p>Configuration object for individual participant recording, to attach to the new stage.</p>
@@ -456,8 +430,7 @@ module Aws::IVSRealTime
     #   <p>The stage that was created.</p>
     #   @return [Types::Stage]
     # @!attribute participant_tokens
-    #   <p>Participant tokens attached to the stage. These correspond to the
-    #               <code>participants</code> in the request.</p>
+    #   <p>Participant tokens attached to the stage. These correspond to the <code>participants</code> in the request.</p>
     #   @return [Array<Types::ParticipantToken>]
     class CreateStageOutput < Struct.new(
       nil,
@@ -475,11 +448,7 @@ module Aws::IVSRealTime
     #   <p>A complex type that contains a storage configuration for where recorded video will be stored.</p>
     #   @return [Types::S3StorageConfiguration]
     # @!attribute tags
-    #   <p>Tags attached to the resource. Array of maps, each of the form <code>string:string
-    #            (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a>
-    #   	 in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming
-    #            limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented
-    #            there.</p>
+    #   <p>Tags attached to the resource. Array of maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented there.</p>
     #   @return [Hash<String, String>]
     class CreateStorageConfigurationRequest < Struct.new(
       nil,
@@ -604,12 +573,10 @@ module Aws::IVSRealTime
     #   <p>State of the Composition Destination.</p>
     #   @return [String]
     # @!attribute start_time
-    #   <p>UTC time of the destination start. This is an ISO 8601 timestamp; <i>note that
-    #               this is returned as a string</i>.</p>
+    #   <p>UTC time of the destination start. This is an ISO 8601 timestamp; <i>note that this is returned as a string</i>.</p>
     #   @return [Time]
     # @!attribute end_time
-    #   <p>UTC time of the destination end. This is an ISO 8601 timestamp; <i>note that this
-    #               is returned as a string</i>.</p>
+    #   <p>UTC time of the destination end. This is an ISO 8601 timestamp; <i>note that this is returned as a string</i>.</p>
     #   @return [Time]
     # @!attribute configuration
     #   <p>Configuration used to create this destination.</p>
@@ -635,12 +602,10 @@ module Aws::IVSRealTime
     #   <p>Name that can be specified to help identify the destination.</p>
     #   @return [String]
     # @!attribute channel
-    #   <p>An IVS channel to be used for broadcasting, for server-side composition. Either a
-    #               <code>channel</code> or an <code>s3</code> must be specified. </p>
+    #   <p>An IVS channel to be used for broadcasting, for server-side composition. Either a <code>channel</code> or an <code>s3</code> must be specified. </p>
     #   @return [Types::ChannelDestinationConfiguration]
     # @!attribute s3
-    #   <p>An S3 storage configuration to be used for recording video data. Either a
-    #               <code>channel</code> or an <code>s3</code> must be specified.</p>
+    #   <p>An S3 storage configuration to be used for recording video data. Either a <code>channel</code> or an <code>s3</code> must be specified.</p>
     #   @return [Types::S3DestinationConfiguration]
     class DestinationConfiguration < Struct.new(
       nil,
@@ -672,12 +637,10 @@ module Aws::IVSRealTime
     #   <p>State of the Composition Destination.</p>
     #   @return [String]
     # @!attribute start_time
-    #   <p>UTC time of the destination start. This is an ISO 8601 timestamp; <i>note that
-    #               this is returned as a string</i>.</p>
+    #   <p>UTC time of the destination start. This is an ISO 8601 timestamp; <i>note that this is returned as a string</i>.</p>
     #   @return [Time]
     # @!attribute end_time
-    #   <p>UTC time of the destination end. This is an ISO 8601 timestamp; <i>note that this
-    #               is returned as a string</i>.</p>
+    #   <p>UTC time of the destination end. This is an ISO 8601 timestamp; <i>note that this is returned as a string</i>.</p>
     #   @return [Time]
     class DestinationSummary < Struct.new(
       nil,
@@ -694,9 +657,7 @@ module Aws::IVSRealTime
     #   <p>ARN of the stage to which the participant is attached.</p>
     #   @return [String]
     # @!attribute participant_id
-    #   <p>Identifier of the participant to be disconnected. IVS assigns this; it is returned
-    #               by <a>CreateParticipantToken</a> (for streams using WebRTC ingest) or <a>CreateIngestConfiguration</a> (for
-    #   	    streams using RTMP ingest).</p>
+    #   <p>Identifier of the participant to be disconnected. IVS assigns this; it is returned by <a>CreateParticipantToken</a> (for streams using WebRTC ingest) or <a>CreateIngestConfiguration</a> (for streams using RTMP ingest).</p>
     #   @return [String]
     # @!attribute reason
     #   <p>Description of why this participant is being disconnected.</p>
@@ -726,15 +687,10 @@ module Aws::IVSRealTime
     #   <p>Optional name to identify the resource.</p>
     #   @return [String]
     # @!attribute video
-    #   <p>Video configuration. Default: video resolution 1280x720, bitrate 2500 kbps, 30
-    #            fps</p>
+    #   <p>Video configuration. Default: video resolution 1280x720, bitrate 2500 kbps, 30 fps</p>
     #   @return [Types::Video]
     # @!attribute tags
-    #   <p>Tags attached to the resource. Array of maps, each of the form <code>string:string
-    #               (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging AWS Resources and Tag
-    #               Editor</i> for details, including restrictions that apply to tags and "Tag naming
-    #            limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented
-    #            there.</p>
+    #   <p>Tags attached to the resource. Array of maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented there.</p>
     #   @return [Hash<String, String>]
     class EncoderConfiguration < Struct.new(
       nil,
@@ -755,11 +711,7 @@ module Aws::IVSRealTime
     #   <p>Optional name to identify the resource.</p>
     #   @return [String]
     # @!attribute tags
-    #   <p>Tags attached to the resource. Array of maps, each of the form <code>string:string
-    #               (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging AWS Resources and Tag
-    #               Editor</i> for details, including restrictions that apply to tags and "Tag naming
-    #            limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented
-    #            there.</p>
+    #   <p>Tags attached to the resource. Array of maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented there.</p>
     #   @return [Hash<String, String>]
     class EncoderConfigurationSummary < Struct.new(
       nil,
@@ -776,116 +728,32 @@ module Aws::IVSRealTime
     #   <p>The name of the event.</p>
     #   @return [String]
     # @!attribute participant_id
-    #   <p>Unique identifier for the participant who triggered the event. This is assigned by
-    #            IVS.</p>
+    #   <p>Unique identifier for the participant who triggered the event. This is assigned by IVS.</p>
     #   @return [String]
     # @!attribute event_time
     #   <p>ISO 8601 timestamp (returned as a string) for when the event occurred.</p>
     #   @return [Time]
     # @!attribute remote_participant_id
-    #   <p>Unique identifier for the remote participant. For a subscribe event, this is the
-    #            publisher. For a publish or join event, this is null. This is assigned by IVS.</p>
+    #   <p>Unique identifier for the remote participant. For a subscribe event, this is the publisher. For a publish or join event, this is null. This is assigned by IVS.</p>
     #   @return [String]
     # @!attribute error_code
-    #   <p>If the event is an error event, the error code is provided to give insight into the
-    #            specific error that occurred. If the event is not an error event, this field is
-    #            null.</p>
-    #            <ul>
-    #               <li>
-    #                  <p>
-    #                     <code>B_FRAME_PRESENT</code> — The participant's stream includes B-frames.
-    #                  For details, see <a href="https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/rt-rtmp-publishing.html"> IVS RTMP
-    #                     Publishing</a>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>BITRATE_EXCEEDED</code> — The participant exceeded the maximum
-    #                  supported bitrate. For details, see <a href="https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/service-quotas.html"> Service
-    #                  Quotas</a>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>INSUFFICIENT_CAPABILITIES</code> — The participant tried to take an
-    #                  action that the participant’s token is not allowed to do. For details on participant
-    #                  capabilities, see the <code>capabilities</code> field in <a>CreateParticipantToken</a>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>INTERNAL_SERVER_EXCEPTION</code> — The participant failed to publish
-    #                  to the stage due to an internal server error.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>INVALID_AUDIO_CODEC</code> — The participant is using an invalid audio
-    #                  codec. For details, see <a href="https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/rt-stream-ingest.html"> Stream
-    #                  Ingest</a>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>INVALID_INPUT</code> — The participant is using an invalid input
-    #                  stream.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>INVALID_PROTOCOL</code> — The participant's IngestConfiguration
-    #                  resource is configured for RTMPS but they tried streaming with RTMP. For details, see
-    #                     <a href="https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/rt-rtmp-publishing.html"> IVS RTMP
-    #                     Publishing</a>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>INVALID_STREAM_KEY</code> — The participant is using an invalid stream
-    #                  key. For details, see <a href="https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/rt-rtmp-publishing.html"> IVS RTMP
-    #                     Publishing</a>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>INVALID_VIDEO_CODEC</code> — The participant is using an invalid video
-    #                  codec. For details, see <a href="https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/rt-stream-ingest.html"> Stream
-    #                  Ingest</a>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>PUBLISHER_NOT_FOUND</code> — The participant tried to subscribe to a
-    #                  publisher that doesn’t exist.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>QUOTA_EXCEEDED</code> — The number of participants who want to
-    #                  publish/subscribe to a stage exceeds the quota. For details, see <a href="https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/service-quotas.html">
-    #                     Service Quotas</a>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>RESOLUTION_EXCEEDED</code> — The participant exceeded the maximum
-    #                  supported resolution. For details, see <a href="https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/service-quotas.html"> Service
-    #                  Quotas</a>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>REUSE_OF_STREAM_KEY</code> — The participant tried to use a stream key
-    #                  that is associated with another active stage session.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>STREAM_DURATION_EXCEEDED</code> — The participant exceeded the maximum
-    #                  allowed stream duration. For details, see <a href="https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/service-quotas.html"> Service
-    #                  Quotas</a>.</p>
-    #               </li>
-    #            </ul>
+    #   <p>If the event is an error event, the error code is provided to give insight into the specific error that occurred. If the event is not an error event, this field is null.</p> <ul> <li> <p> <code>B_FRAME_PRESENT</code> — The participant's stream includes B-frames. For details, see <a href="https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/rt-rtmp-publishing.html"> IVS RTMP Publishing</a>.</p> </li> <li> <p> <code>BITRATE_EXCEEDED</code> — The participant exceeded the maximum supported bitrate. For details, see <a href="https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/service-quotas.html"> Service Quotas</a>.</p> </li> <li> <p> <code>INSUFFICIENT_CAPABILITIES</code> — The participant tried to take an action that the participant’s token is not allowed to do. For details on participant capabilities, see the <code>capabilities</code> field in <a>CreateParticipantToken</a>.</p> </li> <li> <p> <code>INTERNAL_SERVER_EXCEPTION</code> — The participant failed to publish to the stage due to an internal server error.</p> </li> <li> <p> <code>INVALID_AUDIO_CODEC</code> — The participant is using an invalid audio codec. For details, see <a href="https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/rt-stream-ingest.html"> Stream Ingest</a>.</p> </li> <li> <p> <code>INVALID_INPUT</code> — The participant is using an invalid input stream.</p> </li> <li> <p> <code>INVALID_PROTOCOL</code> — The participant's IngestConfiguration resource is configured for RTMPS but they tried streaming with RTMP. For details, see <a href="https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/rt-rtmp-publishing.html"> IVS RTMP Publishing</a>.</p> </li> <li> <p> <code>INVALID_STREAM_KEY</code> — The participant is using an invalid stream key. For details, see <a href="https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/rt-rtmp-publishing.html"> IVS RTMP Publishing</a>.</p> </li> <li> <p> <code>INVALID_VIDEO_CODEC</code> — The participant is using an invalid video codec. For details, see <a href="https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/rt-stream-ingest.html"> Stream Ingest</a>.</p> </li> <li> <p> <code>PUBLISHER_NOT_FOUND</code> — The participant tried to subscribe to a publisher that doesn’t exist.</p> </li> <li> <p> <code>QUOTA_EXCEEDED</code> — The number of participants who want to publish/subscribe to a stage exceeds the quota. For details, see <a href="https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/service-quotas.html"> Service Quotas</a>.</p> </li> <li> <p> <code>RESOLUTION_EXCEEDED</code> — The participant exceeded the maximum supported resolution. For details, see <a href="https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/service-quotas.html"> Service Quotas</a>.</p> </li> <li> <p> <code>REUSE_OF_STREAM_KEY</code> — The participant tried to use a stream key that is associated with another active stage session.</p> </li> <li> <p> <code>STREAM_DURATION_EXCEEDED</code> — The participant exceeded the maximum allowed stream duration. For details, see <a href="https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/service-quotas.html"> Service Quotas</a>.</p> </li> </ul>
     #   @return [String]
     # @!attribute destination_stage_arn
-    #   <p>ARN of the stage where the participant is replicated. Applicable only if the event name is 
-    #   	  <code>REPLICATION_STARTED</code> or <code>REPLICATION_STOPPED</code>.</p>
+    #   <p>ARN of the stage where the participant is replicated. Applicable only if the event name is <code>REPLICATION_STARTED</code> or <code>REPLICATION_STOPPED</code>.</p>
     #   @return [String]
     # @!attribute destination_session_id
-    #   <p>ID of the session within the destination stage. Applicable only if the event name is 
-    #   	  <code>REPLICATION_STARTED</code> or <code>REPLICATION_STOPPED</code>.</p>
+    #   <p>ID of the session within the destination stage. Applicable only if the event name is <code>REPLICATION_STARTED</code> or <code>REPLICATION_STOPPED</code>.</p>
     #   @return [String]
     # @!attribute replica
-    #   <p>If true, this indicates the <code>participantId</code> is a replicated participant. 
-    #   	  If this is a subscribe event, then this flag refers to <code>remoteParticipantId</code>. Default: <code>false</code>.</p>
+    #   <p>If true, this indicates the <code>participantId</code> is a replicated participant. If this is a subscribe event, then this flag refers to <code>remoteParticipantId</code>. Default: <code>false</code>.</p>
     #   @return [Boolean]
+    # @!attribute previous_token
+    #   <p>Source participant token for <code>TOKEN_EXCHANGED</code> event.</p>
+    #   @return [Types::ExchangedParticipantToken]
+    # @!attribute new_token
+    #   <p>Participant token created during <code>TOKEN_EXCHANGED</code> event.</p>
+    #   @return [Types::ExchangedParticipantToken]
     class Event < Struct.new(
       nil,
       :name,
@@ -896,6 +764,8 @@ module Aws::IVSRealTime
       :destination_stage_arn,
       :destination_session_id,
       :replica,
+      :previous_token,
+      :new_token,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -904,6 +774,30 @@ module Aws::IVSRealTime
         options[:replica] = false unless options.key?(:replica)
         super
       end
+    end
+
+    # <p>Object specifying an exchanged participant token in a stage, created when an original participant token is updated.</p> <p> <b>Important</b>: Treat tokens as opaque; i.e., do not build functionality based on token contents. The format of tokens could change in the future.</p>
+    # @!attribute capabilities
+    #   <p>Set of capabilities that the user is allowed to perform in the stage.</p>
+    #   @return [Array<String>]
+    # @!attribute attributes
+    #   <p>Application-provided attributes to encode into the token and attach to a stage. Map keys and values can contain UTF-8 encoded text. The maximum length of this field is 1 KB total. <i>This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information.</i> </p>
+    #   @return [Hash<String, String>]
+    # @!attribute user_id
+    #   <p>Customer-assigned name to help identify the token; this can be used to link a participant to a user in the customer’s own systems. This can be any UTF-8 encoded text. <i>This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information.</i> </p>
+    #   @return [String]
+    # @!attribute expiration_time
+    #   <p>ISO 8601 timestamp (returned as a string) for when this token expires.</p>
+    #   @return [Time]
+    class ExchangedParticipantToken < Struct.new(
+      nil,
+      :capabilities,
+      :attributes,
+      :user_id,
+      :expiration_time,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1094,37 +988,24 @@ module Aws::IVSRealTime
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Configuration information specific to Grid layout, for server-side composition. See
-    #          "Layouts" in <a href="https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/server-side-composition.html">Server-Side
-    #             Composition</a>.</p>
+    # <p>Configuration information specific to Grid layout, for server-side composition. See "Layouts" in <a href="https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/server-side-composition.html">Server-Side Composition</a>.</p>
     # @!attribute featured_participant_attribute
-    #   <p>This attribute name identifies the featured slot. A participant with this attribute set
-    #            to <code>"true"</code> (as a string value) in <a>ParticipantTokenConfiguration</a> is placed in the featured slot. Default: <code>""</code> (no featured
-    #            participant).</p>
+    #   <p>This attribute name identifies the featured slot. A participant with this attribute set to <code>"true"</code> (as a string value) in <a>ParticipantTokenConfiguration</a> is placed in the featured slot. Default: <code>""</code> (no featured participant).</p>
     #   @return [String]
     # @!attribute omit_stopped_video
-    #   <p>Determines whether to omit participants with stopped video in the composition. Default:
-    #               <code>false</code>.</p>
+    #   <p>Determines whether to omit participants with stopped video in the composition. Default: <code>false</code>.</p>
     #   @return [Boolean]
     # @!attribute video_aspect_ratio
-    #   <p>Sets the non-featured participant display mode, to control the aspect ratio of video
-    #            tiles. <code>VIDEO</code> is 16:9, <code>SQUARE</code> is 1:1, and <code>PORTRAIT</code> is
-    #            3:4. Default: <code>VIDEO</code>.</p>
+    #   <p>Sets the non-featured participant display mode, to control the aspect ratio of video tiles. <code>VIDEO</code> is 16:9, <code>SQUARE</code> is 1:1, and <code>PORTRAIT</code> is 3:4. Default: <code>VIDEO</code>.</p>
     #   @return [String]
     # @!attribute video_fill_mode
-    #   <p>Defines how video content fits within the participant tile: <code>FILL</code>
-    #            (stretched), <code>COVER</code> (cropped), or <code>CONTAIN</code> (letterboxed). When not
-    #            set, <code>videoFillMode</code> defaults to <code>COVER</code> fill mode for participants
-    #            in the grid and to <code>CONTAIN</code> fill mode for featured participants.</p>
+    #   <p>Defines how video content fits within the participant tile: <code>FILL</code> (stretched), <code>COVER</code> (cropped), or <code>CONTAIN</code> (letterboxed). When not set, <code>videoFillMode</code> defaults to <code>COVER</code> fill mode for participants in the grid and to <code>CONTAIN</code> fill mode for featured participants.</p>
     #   @return [String]
     # @!attribute grid_gap
-    #   <p>Specifies the spacing between participant tiles in pixels. Default:
-    #            <code>2</code>.</p>
+    #   <p>Specifies the spacing between participant tiles in pixels. Default: <code>2</code>.</p>
     #   @return [Integer]
     # @!attribute participant_order_attribute
-    #   <p>Attribute name in  <a>ParticipantTokenConfiguration</a> identifying the participant ordering key.
-    #           Participants with <code>participantOrderAttribute</code> set to <code>""</code> or not specified are ordered based
-    #   	on their arrival time into the stage.</p>
+    #   <p>Attribute name in <a>ParticipantTokenConfiguration</a> identifying the participant ordering key. Participants with <code>participantOrderAttribute</code> set to <code>""</code> or not specified are ordered based on their arrival time into the stage.</p>
     #   @return [String]
     class GridConfiguration < Struct.new(
       nil,
@@ -1152,11 +1033,7 @@ module Aws::IVSRealTime
     #   <p>Name of the public key to be imported.</p>
     #   @return [String]
     # @!attribute tags
-    #   <p>Tags attached to the resource. Array of maps, each of the form <code>string:string
-    #            (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a>
-    #            in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming
-    #            limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented
-    #            there.</p>
+    #   <p>Tags attached to the resource. Array of maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented there.</p>
     #   @return [Hash<String, String>]
     class ImportPublicKeyRequest < Struct.new(
       nil,
@@ -1199,31 +1076,22 @@ module Aws::IVSRealTime
     #   <p>ID of the participant within the stage.</p>
     #   @return [String]
     # @!attribute state
-    #   <p>State of the ingest configuration. It is <code>ACTIVE</code> if a publisher currently is
-    #            publishing to the stage associated with the ingest configuration.</p>
+    #   <p>State of the ingest configuration. It is <code>ACTIVE</code> if a publisher currently is publishing to the stage associated with the ingest configuration.</p>
     #   @return [String]
     # @!attribute user_id
-    #   <p>Customer-assigned name to help identify the participant using the IngestConfiguration;
-    #            this can be used to link a participant to a user in the customer’s own systems. This can be
-    #            any UTF-8 encoded text. <i>This field is exposed to all stage participants and
-    #               should not be used for personally identifying, confidential, or sensitive
-    #               information.</i>
-    #            </p>
+    #   <p>Customer-assigned name to help identify the participant using the IngestConfiguration; this can be used to link a participant to a user in the customer’s own systems. This can be any UTF-8 encoded text. <i>This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information.</i> </p>
     #   @return [String]
+    # @!attribute redundant_ingest
+    #   <p>Indicates whether redundant ingest is enabled for the ingest configuration.</p>
+    #   @return [Boolean]
+    # @!attribute redundant_ingest_credentials
+    #   <p>A list of redundant ingest credentials, present only when <code>redundantIngest</code> is set to <code>true</code>. See <a href="https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/rt-rtmp-publishing.html#redundant-ingest">Redundant Ingest</a> in <i>IVS RTMP Publishing</i> for details.</p>
+    #   @return [Array<Types::RedundantIngestCredential>]
     # @!attribute attributes
-    #   <p>Application-provided attributes to to store in the IngestConfiguration and attach to a
-    #            stage. Map keys and values can contain UTF-8 encoded text. The maximum length of this field
-    #            is 1 KB total. <i>This field is exposed to all stage participants and should not be
-    #               used for personally identifying, confidential, or sensitive
-    #            information.</i>
-    #            </p>
+    #   <p>Application-provided attributes to to store in the IngestConfiguration and attach to a stage. Map keys and values can contain UTF-8 encoded text. The maximum length of this field is 1 KB total. <i>This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information.</i> </p>
     #   @return [Hash<String, String>]
     # @!attribute tags
-    #   <p>Tags attached to the resource. Array of maps, each of the form <code>string:string
-    #               (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging AWS Resources and Tag
-    #               Editor</i> for details, including restrictions that apply to tags and "Tag naming
-    #            limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented
-    #            there.</p>
+    #   <p>Tags attached to the resource. Array of maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented there.</p>
     #   @return [Hash<String, String>]
     class IngestConfiguration < Struct.new(
       nil,
@@ -1235,11 +1103,18 @@ module Aws::IVSRealTime
       :participant_id,
       :state,
       :user_id,
+      :redundant_ingest,
+      :redundant_ingest_credentials,
       :attributes,
       :tags,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:redundant_ingest] = false unless options.key?(:redundant_ingest)
+        super
+      end
     end
 
     # <p>Summary information about an IngestConfiguration.</p>
@@ -1259,17 +1134,14 @@ module Aws::IVSRealTime
     #   <p>ID of the participant within the stage.</p>
     #   @return [String]
     # @!attribute state
-    #   <p>State of the ingest configuration. It is <code>ACTIVE</code> if a publisher currently is
-    #            publishing to the stage associated with the ingest configuration.</p>
+    #   <p>State of the ingest configuration. It is <code>ACTIVE</code> if a publisher currently is publishing to the stage associated with the ingest configuration.</p>
     #   @return [String]
     # @!attribute user_id
-    #   <p>Customer-assigned name to help identify the participant using the IngestConfiguration;
-    #            this can be used to link a participant to a user in the customer’s own systems. This can be
-    #            any UTF-8 encoded text. <i>This field is exposed to all stage participants and
-    #               should not be used for personally identifying, confidential, or sensitive
-    #               information.</i>
-    #            </p>
+    #   <p>Customer-assigned name to help identify the participant using the IngestConfiguration; this can be used to link a participant to a user in the customer’s own systems. This can be any UTF-8 encoded text. <i>This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information.</i> </p>
     #   @return [String]
+    # @!attribute redundant_ingest
+    #   <p>Indicates whether redundant ingest is enabled for the ingest configuration.</p>
+    #   @return [Boolean]
     class IngestConfigurationSummary < Struct.new(
       nil,
       :name,
@@ -1279,12 +1151,18 @@ module Aws::IVSRealTime
       :participant_id,
       :state,
       :user_id,
+      :redundant_ingest,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:redundant_ingest] = false unless options.key?(:redundant_ingest)
+        super
+      end
     end
 
-    # <p/>
+    # <p>Unexpected error during processing of request.</p>
     # @!attribute access_control_allow_origin
     #   <p/>
     #   @return [String]
@@ -1348,12 +1226,10 @@ module Aws::IVSRealTime
     #   <p>Filters the Composition list to match the specified Stage ARN.</p>
     #   @return [String]
     # @!attribute filter_by_encoder_configuration_arn
-    #   <p>Filters the Composition list to match the specified EncoderConfiguration attached to at
-    #            least one of its output.</p>
+    #   <p>Filters the Composition list to match the specified EncoderConfiguration attached to at least one of its output.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The first Composition to retrieve. This is used for pagination; see the
-    #            <code>nextToken</code> response field.</p>
+    #   <p>The first Composition to retrieve. This is used for pagination; see the <code>nextToken</code> response field.</p>
     #   @return [String]
     # @!attribute max_results
     #   <p>Maximum number of results to return. Default: 100.</p>
@@ -1373,8 +1249,7 @@ module Aws::IVSRealTime
     #   <p>List of the matching Compositions (summary information only).</p>
     #   @return [Array<Types::CompositionSummary>]
     # @!attribute next_token
-    #   <p>If there are more compositions than <code>maxResults</code>, use <code>nextToken</code>
-    #            in the request to get the next set.</p>
+    #   <p>If there are more compositions than <code>maxResults</code>, use <code>nextToken</code> in the request to get the next set.</p>
     #   @return [String]
     class ListCompositionsResponse < Struct.new(
       nil,
@@ -1386,8 +1261,7 @@ module Aws::IVSRealTime
     end
 
     # @!attribute next_token
-    #   <p>The first encoder configuration to retrieve. This is used for pagination; see the
-    #               <code>nextToken</code> response field.</p>
+    #   <p>The first encoder configuration to retrieve. This is used for pagination; see the <code>nextToken</code> response field.</p>
     #   @return [String]
     # @!attribute max_results
     #   <p>Maximum number of results to return. Default: 100.</p>
@@ -1405,8 +1279,7 @@ module Aws::IVSRealTime
     #   <p>List of the matching EncoderConfigurations (summary information only).</p>
     #   @return [Array<Types::EncoderConfigurationSummary>]
     # @!attribute next_token
-    #   <p>If there are more encoder configurations than <code>maxResults</code>, use
-    #               <code>nextToken</code> in the request to get the next set.</p>
+    #   <p>If there are more encoder configurations than <code>maxResults</code>, use <code>nextToken</code> in the request to get the next set.</p>
     #   @return [String]
     class ListEncoderConfigurationsResponse < Struct.new(
       nil,
@@ -1465,8 +1338,7 @@ module Aws::IVSRealTime
     #   <p>Unique identifier for this participant. This is assigned by IVS and returned by <a>CreateParticipantToken</a>.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The first participant event to retrieve. This is used for pagination; see the
-    #               <code>nextToken</code> response field.</p>
+    #   <p>The first participant event to retrieve. This is used for pagination; see the <code>nextToken</code> response field.</p>
     #   @return [String]
     # @!attribute max_results
     #   <p>Maximum number of results to return. Default: 50.</p>
@@ -1487,8 +1359,7 @@ module Aws::IVSRealTime
     #   <p>List of the matching events.</p>
     #   @return [Array<Types::Event>]
     # @!attribute next_token
-    #   <p>If there are more events than <code>maxResults</code>, use <code>nextToken</code> in the
-    #            request to get the next set. </p>
+    #   <p>If there are more events than <code>maxResults</code>, use <code>nextToken</code> in the request to get the next set. </p>
     #   @return [String]
     class ListParticipantEventsResponse < Struct.new(
       nil,
@@ -1503,9 +1374,7 @@ module Aws::IVSRealTime
     #   <p>ARN of the stage where the participant is publishing.</p>
     #   @return [String]
     # @!attribute participant_id
-    #   <p>Participant ID of the publisher that has been replicated. This is assigned by IVS and returned by 
-    #   		<a>CreateParticipantToken</a> 
-    #   		or the <code>jti</code> (JWT ID) used to <a href="https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/getting-started-distribute-tokens.html#getting-started-distribute-tokens-self-signed">create a self signed token</a>.</p>
+    #   <p>Participant ID of the publisher that has been replicated. This is assigned by IVS and returned by <a>CreateParticipantToken</a> or the <code>jti</code> (JWT ID) used to <a href="https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/getting-started-distribute-tokens.html#getting-started-distribute-tokens-self-signed">create a self signed token</a>.</p>
     #   @return [String]
     # @!attribute next_token
     #   <p>The first participant to retrieve. This is used for pagination; see the <code>nextToken</code> response field.</p>
@@ -1546,34 +1415,22 @@ module Aws::IVSRealTime
     #   <p>ID of the session within the stage.</p>
     #   @return [String]
     # @!attribute filter_by_user_id
-    #   <p>Filters the response list to match the specified user ID. 
-    #               Only one of <code>filterByUserId</code>, <code>filterByPublished</code>, 
-    #               <code>filterByState</code>, or <code>filterByRecordingState</code> can be provided per request.
-    #   	    A <code>userId</code> is a
-    #               customer-assigned name to help identify the token; this can be used to link a participant
-    #               to a user in the customer’s own systems.</p>
+    #   <p>Filters the response list to match the specified user ID. Only one of <code>filterByUserId</code>, <code>filterByPublished</code>, <code>filterByState</code>, or <code>filterByRecordingState</code> can be provided per request. A <code>userId</code> is a customer-assigned name to help identify the token; this can be used to link a participant to a user in the customer’s own systems.</p>
     #   @return [String]
     # @!attribute filter_by_published
-    #   <p>Filters the response list to only show participants who published during the stage session.
-    #               Only one of <code>filterByUserId</code>, <code>filterByPublished</code>, 
-    #               <code>filterByState</code>, or <code>filterByRecordingState</code> can be provided per request.</p>
+    #   <p>Filters the response list to only show participants who published during the stage session. Only one of <code>filterByUserId</code>, <code>filterByPublished</code>, <code>filterByState</code>, or <code>filterByRecordingState</code> can be provided per request.</p>
     #   @return [Boolean]
     # @!attribute filter_by_state
-    #   <p>Filters the response list to only show participants in the specified state. 
-    #               Only one of <code>filterByUserId</code>, <code>filterByPublished</code>, 
-    #               <code>filterByState</code>, or <code>filterByRecordingState</code> can be provided per request.</p>
+    #   <p>Filters the response list to only show participants in the specified state. Only one of <code>filterByUserId</code>, <code>filterByPublished</code>, <code>filterByState</code>, or <code>filterByRecordingState</code> can be provided per request.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The first participant to retrieve. This is used for pagination; see the
-    #               <code>nextToken</code> response field.</p>
+    #   <p>The first participant to retrieve. This is used for pagination; see the <code>nextToken</code> response field.</p>
     #   @return [String]
     # @!attribute max_results
     #   <p>Maximum number of results to return. Default: 50.</p>
     #   @return [Integer]
     # @!attribute filter_by_recording_state
-    #   <p>Filters the response list to only show participants with the specified recording state.
-    #               Only one of <code>filterByUserId</code>, <code>filterByPublished</code>, 
-    #               <code>filterByState</code>, or <code>filterByRecordingState</code> can be provided per request.</p>
+    #   <p>Filters the response list to only show participants with the specified recording state. Only one of <code>filterByUserId</code>, <code>filterByPublished</code>, <code>filterByState</code>, or <code>filterByRecordingState</code> can be provided per request.</p>
     #   @return [String]
     class ListParticipantsRequest < Struct.new(
       nil,
@@ -1594,8 +1451,7 @@ module Aws::IVSRealTime
     #   <p>List of the matching participants (summary information only).</p>
     #   @return [Array<Types::ParticipantSummary>]
     # @!attribute next_token
-    #   <p>If there are more participants than <code>maxResults</code>, use <code>nextToken</code>
-    #            in the request to get the next set.</p>
+    #   <p>If there are more participants than <code>maxResults</code>, use <code>nextToken</code> in the request to get the next set.</p>
     #   @return [String]
     class ListParticipantsResponse < Struct.new(
       nil,
@@ -1640,8 +1496,7 @@ module Aws::IVSRealTime
     #   <p>Stage ARN.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The first stage session to retrieve. This is used for pagination; see the
-    #               <code>nextToken</code> response field.</p>
+    #   <p>The first stage session to retrieve. This is used for pagination; see the <code>nextToken</code> response field.</p>
     #   @return [String]
     # @!attribute max_results
     #   <p>Maximum number of results to return. Default: 50.</p>
@@ -1660,8 +1515,7 @@ module Aws::IVSRealTime
     #   <p>List of matching stage sessions.</p>
     #   @return [Array<Types::StageSessionSummary>]
     # @!attribute next_token
-    #   <p>If there are more stage sessions than <code>maxResults</code>, use
-    #               <code>nextToken</code> in the request to get the next set.</p>
+    #   <p>If there are more stage sessions than <code>maxResults</code>, use <code>nextToken</code> in the request to get the next set.</p>
     #   @return [String]
     class ListStageSessionsResponse < Struct.new(
       nil,
@@ -1673,8 +1527,7 @@ module Aws::IVSRealTime
     end
 
     # @!attribute next_token
-    #   <p>The first stage to retrieve. This is used for pagination; see the <code>nextToken</code>
-    #            response field.</p>
+    #   <p>The first stage to retrieve. This is used for pagination; see the <code>nextToken</code> response field.</p>
     #   @return [String]
     # @!attribute max_results
     #   <p>Maximum number of results to return. Default: 50.</p>
@@ -1692,8 +1545,7 @@ module Aws::IVSRealTime
     #   <p>List of the matching stages (summary information only).</p>
     #   @return [Array<Types::StageSummary>]
     # @!attribute next_token
-    #   <p>If there are more stages than <code>maxResults</code>, use <code>nextToken</code> in the
-    #            request to get the next set.</p>
+    #   <p>If there are more stages than <code>maxResults</code>, use <code>nextToken</code> in the request to get the next set.</p>
     #   @return [String]
     class ListStagesOutput < Struct.new(
       nil,
@@ -1705,12 +1557,10 @@ module Aws::IVSRealTime
     end
 
     # @!attribute next_token
-    #   <p>The first storage configuration to retrieve. This is used for pagination; 
-    #   	  see the <code>nextToken</code> response field.</p>
+    #   <p>The first storage configuration to retrieve. This is used for pagination; see the <code>nextToken</code> response field.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>Maximum number of storage configurations to return. Default: your service quota or 100, 
-    #   	  whichever is smaller.</p>
+    #   <p>Maximum number of storage configurations to return. Default: your service quota or 100, whichever is smaller.</p>
     #   @return [Integer]
     class ListStorageConfigurationsRequest < Struct.new(
       nil,
@@ -1725,8 +1575,7 @@ module Aws::IVSRealTime
     #   <p>List of the matching storage configurations.</p>
     #   @return [Array<Types::StorageConfigurationSummary>]
     # @!attribute next_token
-    #   <p>If there are more storage configurations than <code>maxResults</code>, use <code>nextToken</code>
-    #        in the request to get the next set.</p>
+    #   <p>If there are more storage configurations than <code>maxResults</code>, use <code>nextToken</code> in the request to get the next set.</p>
     #   @return [String]
     class ListStorageConfigurationsResponse < Struct.new(
       nil,
@@ -1749,8 +1598,7 @@ module Aws::IVSRealTime
     end
 
     # @!attribute tags
-    #   <p>Tags attached to the resource. Array of maps, each of the form <code>string:string
-    #               (key:value)</code>.</p>
+    #   <p>Tags attached to the resource. Array of maps, each of the form <code>string:string (key:value)</code>.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
       nil,
@@ -1765,23 +1613,16 @@ module Aws::IVSRealTime
     #   <p>Unique identifier for this participant, assigned by IVS.</p>
     #   @return [String]
     # @!attribute user_id
-    #   <p>Customer-assigned name to help identify the token; this can be used to link a
-    #            participant to a user in the customer’s own systems. This can be any UTF-8 encoded text.
-    #               <i>This field is exposed to all stage participants and should not be used for
-    #               personally identifying, confidential, or sensitive information</i>.</p>
+    #   <p>Customer-assigned name to help identify the token; this can be used to link a participant to a user in the customer’s own systems. This can be any UTF-8 encoded text. <i>This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information</i>.</p>
     #   @return [String]
     # @!attribute state
     #   <p>Whether the participant is connected to or disconnected from the stage.</p>
     #   @return [String]
     # @!attribute first_join_time
-    #   <p>ISO 8601 timestamp (returned as a string) when the participant first joined the stage
-    #            session.</p>
+    #   <p>ISO 8601 timestamp (returned as a string) when the participant first joined the stage session.</p>
     #   @return [Time]
     # @!attribute attributes
-    #   <p>Application-provided attributes to encode into the token and attach to a stage. Map keys
-    #            and values can contain UTF-8 encoded text. The maximum length of this field is 1 KB total.
-    #               <i>This field is exposed to all stage participants and should not be used for
-    #               personally identifying, confidential, or sensitive information</i>.</p>
+    #   <p>Application-provided attributes to encode into the token and attach to a stage. Map keys and values can contain UTF-8 encoded text. The maximum length of this field is 1 KB total. <i>This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information</i>.</p>
     #   @return [Hash<String, String>]
     # @!attribute published
     #   <p>Whether the participant ever published to the stage session.</p>
@@ -1805,18 +1646,10 @@ module Aws::IVSRealTime
     #   <p>The participant’s SDK version.</p>
     #   @return [String]
     # @!attribute recording_s3_bucket_name
-    #   <p>Name of the S3 bucket to where the participant is being recorded, if individual
-    #            participant recording is enabled, or <code>""</code> (empty string), if recording is not
-    #            enabled.</p>
+    #   <p>Name of the S3 bucket to where the participant is being recorded, if individual participant recording is enabled, or <code>""</code> (empty string), if recording is not enabled.</p>
     #   @return [String]
     # @!attribute recording_s3_prefix
-    #   <p>S3 prefix of the S3 bucket where the participant is being recorded, if individual
-    #            participant recording is enabled, or <code>""</code> (empty string), if recording is not
-    #            enabled. If individual participant recording merge is enabled, and if a stage publisher 
-    #   		 disconnects from a stage and then reconnects, IVS tries to record to the same S3 prefix as 
-    #   		 the previous session. See 
-    #   		 <a href="/ivs/latest/RealTimeUserGuide/rt-individual-participant-recording.html#ind-part-rec-merge-frag">
-    #   		 Merge Fragmented Individual Participant Recordings</a>.</p>
+    #   <p>S3 prefix of the S3 bucket where the participant is being recorded, if individual participant recording is enabled, or <code>""</code> (empty string), if recording is not enabled. If individual participant recording merge is enabled, and if a stage publisher disconnects from a stage and then reconnects, IVS tries to record to the same S3 prefix as the previous session. See <a href="/ivs/latest/RealTimeUserGuide/rt-individual-participant-recording.html#ind-part-rec-merge-frag"> Merge Fragmented Individual Participant Recordings</a>.</p>
     #   @return [String]
     # @!attribute recording_state
     #   <p>The participant’s recording state.</p>
@@ -1831,11 +1664,16 @@ module Aws::IVSRealTime
     #   <p>The participant's replication state.</p>
     #   @return [String]
     # @!attribute source_stage_arn
-    #   <p>Source stage ARN from which this participant is replicated, if <code>replicationType</code> is <code>REPLICA</code>.
-    #   </p>
+    #   <p>Source stage ARN from which this participant is replicated, if <code>replicationType</code> is <code>REPLICA</code>. </p>
     #   @return [String]
     # @!attribute source_session_id
     #   <p>ID of the session within the source stage, if <code>replicationType</code> is <code>REPLICA</code>.</p>
+    #   @return [String]
+    # @!attribute redundant_ingest
+    #   <p>Indicates whether redundant ingest is enabled for the participant.</p>
+    #   @return [Boolean]
+    # @!attribute ingest_configuration_arn
+    #   <p>The participant’s ingest configuration.</p>
     #   @return [String]
     class Participant < Struct.new(
       nil,
@@ -1859,21 +1697,22 @@ module Aws::IVSRealTime
       :replication_state,
       :source_stage_arn,
       :source_session_id,
+      :redundant_ingest,
+      :ingest_configuration_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:published] = false unless options.key?(:published)
+        options[:redundant_ingest] = false unless options.key?(:redundant_ingest)
         super
       end
     end
 
     # <p>An object representing a configuration of participant HLS recordings for individual participant recording.</p>
     # @!attribute target_segment_duration_seconds
-    #   <p>Defines the target duration for recorded segments generated when recording a stage participant. 
-    #   	  Segments may have durations longer than the specified value when needed to ensure each segment begins with a keyframe. 
-    #   	  Default: 6.</p>
+    #   <p>Defines the target duration for recorded segments generated when recording a stage participant. Segments may have durations longer than the specified value when needed to ensure each segment begins with a keyframe. Default: 6.</p>
     #   @return [Integer]
     class ParticipantRecordingHlsConfiguration < Struct.new(
       nil,
@@ -1893,10 +1732,7 @@ module Aws::IVSRealTime
     #   <p>ARN of the stage from which this participant is replicated.</p>
     #   @return [String]
     # @!attribute participant_id
-    #   <p>Participant ID of the publisher that will be replicated. This is assigned by IVS and returned by 
-    #   		<a>CreateParticipantToken</a> 
-    #   		or the <code>jti</code> (JWT ID) used to <a href="https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/getting-started-distribute-tokens.html#getting-started-distribute-tokens-self-signed">
-    #   				  create a self signed token</a>.</p>
+    #   <p>Participant ID of the publisher that will be replicated. This is assigned by IVS and returned by <a>CreateParticipantToken</a> or the <code>jti</code> (JWT ID) used to <a href="https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/getting-started-distribute-tokens.html#getting-started-distribute-tokens-self-signed"> create a self signed token</a>.</p>
     #   @return [String]
     # @!attribute source_session_id
     #   <p>ID of the session within the source stage.</p>
@@ -1928,17 +1764,13 @@ module Aws::IVSRealTime
     #   <p>Unique identifier for this participant, assigned by IVS.</p>
     #   @return [String]
     # @!attribute user_id
-    #   <p>Customer-assigned name to help identify the token; this can be used to link a
-    #            participant to a user in the customer’s own systems. This can be any UTF-8 encoded text.
-    #               <i>This field is exposed to all stage participants and should not be used for
-    #               personally identifying, confidential, or sensitive information</i>.</p>
+    #   <p>Customer-assigned name to help identify the token; this can be used to link a participant to a user in the customer’s own systems. This can be any UTF-8 encoded text. <i>This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information</i>.</p>
     #   @return [String]
     # @!attribute state
     #   <p>Whether the participant is connected to or disconnected from the stage.</p>
     #   @return [String]
     # @!attribute first_join_time
-    #   <p>ISO 8601 timestamp (returned as a string) when the participant first joined the stage
-    #            session.</p>
+    #   <p>ISO 8601 timestamp (returned as a string) when the participant first joined the stage session.</p>
     #   @return [Time]
     # @!attribute published
     #   <p>Whether the participant ever published to the stage session.</p>
@@ -1958,6 +1790,12 @@ module Aws::IVSRealTime
     # @!attribute source_session_id
     #   <p>ID of the session within the source stage, if <code>replicationType</code> is <code>REPLICA</code>.</p>
     #   @return [String]
+    # @!attribute redundant_ingest
+    #   <p>Indicates whether redundant ingest is enabled for the participant.</p>
+    #   @return [Boolean]
+    # @!attribute ingest_configuration_arn
+    #   <p>The participant’s ingest configuration.</p>
+    #   @return [String]
     class ParticipantSummary < Struct.new(
       nil,
       :participant_id,
@@ -1970,29 +1808,25 @@ module Aws::IVSRealTime
       :replication_state,
       :source_stage_arn,
       :source_session_id,
+      :redundant_ingest,
+      :ingest_configuration_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:published] = false unless options.key?(:published)
+        options[:redundant_ingest] = false unless options.key?(:redundant_ingest)
         super
       end
     end
 
-    # <p>An object representing a configuration of thumbnails for recorded video from an
-    #          individual participant.</p>
+    # <p>An object representing a configuration of thumbnails for recorded video from an individual participant.</p>
     # @!attribute target_interval_seconds
-    #   <p>The targeted thumbnail-generation interval in seconds. This is configurable only if
-    #               <code>recordingMode</code> is <code>INTERVAL</code>. Default: 60.</p>
+    #   <p>The targeted thumbnail-generation interval in seconds. This is configurable only if <code>recordingMode</code> is <code>INTERVAL</code>. Default: 60.</p>
     #   @return [Integer]
     # @!attribute storage
-    #   <p>Indicates the format in which thumbnails are recorded. <code>SEQUENTIAL</code> records
-    #            all generated thumbnails in a serial manner, to the media/thumbnails/high directory.
-    #               <code>LATEST</code> saves the latest thumbnail in media/latest_thumbnail/high/thumb.jpg
-    #            and overwrites it at the interval specified by <code>targetIntervalSeconds</code>. You can
-    #            enable both <code>SEQUENTIAL</code> and <code>LATEST</code>. Default:
-    #               <code>SEQUENTIAL</code>.</p>
+    #   <p>Indicates the format in which thumbnails are recorded. <code>SEQUENTIAL</code> records all generated thumbnails in a serial manner, to the media/thumbnails/high directory. <code>LATEST</code> saves the latest thumbnail in media/latest_thumbnail/high/thumb.jpg and overwrites it at the interval specified by <code>targetIntervalSeconds</code>. You can enable both <code>SEQUENTIAL</code> and <code>LATEST</code>. Default: <code>SEQUENTIAL</code>.</p>
     #   @return [Array<String>]
     # @!attribute recording_mode
     #   <p>Thumbnail recording mode. Default: <code>DISABLED</code>.</p>
@@ -2007,11 +1841,7 @@ module Aws::IVSRealTime
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Object specifying a participant token in a stage.</p>
-    #          <p>
-    #             <b>Important</b>: Treat tokens as opaque; i.e., do not build
-    #          functionality based on token contents. The format of tokens could change in the
-    #          future.</p>
+    # <p>Object specifying a participant token in a stage.</p> <p> <b>Important</b>: Treat tokens as opaque; i.e., do not build functionality based on token contents. The format of tokens could change in the future.</p>
     # @!attribute participant_id
     #   <p>Unique identifier for this participant token, assigned by IVS.</p>
     #   @return [String]
@@ -2019,21 +1849,13 @@ module Aws::IVSRealTime
     #   <p>The issued client token, encrypted.</p>
     #   @return [String]
     # @!attribute user_id
-    #   <p>Customer-assigned name to help identify the token; this can be used to link a
-    #            participant to a user in the customer’s own systems. This can be any UTF-8 encoded text.
-    #               <i>This field is exposed to all stage participants and should not be used for
-    #               personally identifying, confidential, or sensitive information.</i>
-    #            </p>
+    #   <p>Customer-assigned name to help identify the token; this can be used to link a participant to a user in the customer’s own systems. This can be any UTF-8 encoded text. <i>This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information.</i> </p>
     #   @return [String]
     # @!attribute attributes
-    #   <p>Application-provided attributes to encode into the token and attach to a stage.
-    #               <i>This field is exposed to all stage participants and should not be used for
-    #               personally identifying, confidential, or sensitive information.</i>
-    #            </p>
+    #   <p>Application-provided attributes to encode into the token and attach to a stage. Map keys and values can contain UTF-8 encoded text. The maximum length of this field is 1 KB total. <i>This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information.</i> </p>
     #   @return [Hash<String, String>]
     # @!attribute duration
-    #   <p>Duration (in minutes), after which the participant token expires. Default: 720 (12
-    #            hours).</p>
+    #   <p>Duration (in minutes), after which the participant token expires. Default: 720 (12 hours).</p>
     #   @return [Integer]
     # @!attribute capabilities
     #   <p>Set of capabilities that the user is allowed to perform in the stage.</p>
@@ -2057,23 +1879,13 @@ module Aws::IVSRealTime
 
     # <p>Object specifying a participant token configuration in a stage.</p>
     # @!attribute duration
-    #   <p>Duration (in minutes), after which the corresponding participant token expires. Default:
-    #            720 (12 hours).</p>
+    #   <p>Duration (in minutes), after which the corresponding participant token expires. Default: 720 (12 hours).</p>
     #   @return [Integer]
     # @!attribute user_id
-    #   <p>Customer-assigned name to help identify the token; this can be used to link a
-    #            participant to a user in the customer’s own systems. This can be any UTF-8 encoded text.
-    #               <i>This field is exposed to all stage participants and should not be used for
-    #               personally identifying, confidential, or sensitive information.</i>
-    #            </p>
+    #   <p>Customer-assigned name to help identify the token; this can be used to link a participant to a user in the customer’s own systems. This can be any UTF-8 encoded text. <i>This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information.</i> </p>
     #   @return [String]
     # @!attribute attributes
-    #   <p>Application-provided attributes to encode into the corresponding participant token and
-    #            attach to a stage. Map keys and values can contain UTF-8 encoded text. The maximum length
-    #            of this field is 1 KB total. <i>This field is exposed to all stage participants and
-    #               should not be used for personally identifying, confidential, or sensitive
-    #               information.</i>
-    #            </p>
+    #   <p>Application-provided attributes to encode into the corresponding participant token and attach to a stage. Map keys and values can contain UTF-8 encoded text. The maximum length of this field is 1 KB total. <i>This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information.</i> </p>
     #   @return [Hash<String, String>]
     # @!attribute capabilities
     #   <p>Set of capabilities that the user is allowed to perform in the stage.</p>
@@ -2089,7 +1901,7 @@ module Aws::IVSRealTime
       include ::Smithy::Schema::Structure
     end
 
-    # <p/>
+    # <p>Your account is pending verification.</p>
     # @!attribute access_control_allow_origin
     #   <p/>
     #   @return [String]
@@ -2135,54 +1947,37 @@ module Aws::IVSRealTime
 
     # <p>Configuration information specific to Picture-in-Picture (PiP) layout, for <a href="https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/server-side-composition.html">server-side composition</a>. </p>
     # @!attribute featured_participant_attribute
-    #   <p>This attribute name identifies the featured slot. A participant with this attribute set
-    #            to <code>"true"</code> (as a string value) in <a>ParticipantTokenConfiguration</a> is placed in the featured slot. Default: <code>""</code> (no featured
-    #            participant).</p>
+    #   <p>This attribute name identifies the featured slot. A participant with this attribute set to <code>"true"</code> (as a string value) in <a>ParticipantTokenConfiguration</a> is placed in the featured slot. Default: <code>""</code> (no featured participant).</p>
     #   @return [String]
     # @!attribute omit_stopped_video
-    #   <p>Determines whether to omit participants with stopped video in the composition. Default:
-    #               <code>false</code>.</p>
+    #   <p>Determines whether to omit participants with stopped video in the composition. Default: <code>false</code>.</p>
     #   @return [Boolean]
     # @!attribute video_fill_mode
-    #   <p>Defines how video content fits within the participant tile: <code>FILL</code>
-    #            (stretched), <code>COVER</code> (cropped), or <code>CONTAIN</code> (letterboxed). Default:
-    #               <code>COVER</code>.</p>
+    #   <p>Defines how video content fits within the participant tile: <code>FILL</code> (stretched), <code>COVER</code> (cropped), or <code>CONTAIN</code> (letterboxed). Default: <code>COVER</code>.</p>
     #   @return [String]
     # @!attribute grid_gap
-    #   <p>Specifies the spacing between participant tiles in pixels. Default:
-    #            <code>0</code>.</p>
+    #   <p>Specifies the spacing between participant tiles in pixels. Default: <code>0</code>.</p>
     #   @return [Integer]
     # @!attribute pip_participant_attribute
-    #   <p>Specifies the participant for the PiP window. A participant with this attribute set to
-    #               <code>"true"</code> (as a string value) in <a>ParticipantTokenConfiguration</a> is placed in the PiP slot. Default: <code>""</code> (no PiP participant).</p>
+    #   <p>Specifies the participant for the PiP window. A participant with this attribute set to <code>"true"</code> (as a string value) in <a>ParticipantTokenConfiguration</a> is placed in the PiP slot. Default: <code>""</code> (no PiP participant).</p>
     #   @return [String]
     # @!attribute pip_behavior
-    #   <p>Defines PiP behavior when all participants have left: <code>STATIC</code> (maintains
-    #            original position/size) or <code>DYNAMIC</code> (expands to full composition). Default:
-    #               <code>STATIC</code>.</p>
+    #   <p>Defines PiP behavior when all participants have left: <code>STATIC</code> (maintains original position/size) or <code>DYNAMIC</code> (expands to full composition). Default: <code>STATIC</code>.</p>
     #   @return [String]
     # @!attribute pip_offset
-    #   <p>Sets the PiP window’s offset position in pixels from the closest edges determined by
-    #               <code>PipPosition</code>. Default: <code>0</code>.</p>
+    #   <p>Sets the PiP window’s offset position in pixels from the closest edges determined by <code>PipPosition</code>. Default: <code>0</code>.</p>
     #   @return [Integer]
     # @!attribute pip_position
-    #   <p>Determines the corner position of the PiP window. Default:
-    #            <code>BOTTOM_RIGHT</code>.</p>
+    #   <p>Determines the corner position of the PiP window. Default: <code>BOTTOM_RIGHT</code>.</p>
     #   @return [String]
     # @!attribute pip_width
-    #   <p>Specifies the width of the PiP window in pixels. When this is not set explicitly,
-    #               <code>pipWidth</code>’s value will be based on the size of the composition and the
-    #            aspect ratio of the participant’s video.</p>
+    #   <p>Specifies the width of the PiP window in pixels. When this is not set explicitly, <code>pipWidth</code>’s value will be based on the size of the composition and the aspect ratio of the participant’s video.</p>
     #   @return [Integer]
     # @!attribute pip_height
-    #   <p>Specifies the height of the PiP window in pixels. When this is not set explicitly,
-    #               <code>pipHeight</code>’s value will be based on the size of the composition and the
-    #            aspect ratio of the participant’s video.</p>
+    #   <p>Specifies the height of the PiP window in pixels. When this is not set explicitly, <code>pipHeight</code>’s value will be based on the size of the composition and the aspect ratio of the participant’s video.</p>
     #   @return [Integer]
     # @!attribute participant_order_attribute
-    #   <p>Attribute name in  <a>ParticipantTokenConfiguration</a> identifying the participant ordering key.
-    #           Participants with <code>participantOrderAttribute</code> set to <code>""</code> or not specified are ordered based
-    #   	on their arrival time into the stage.</p>
+    #   <p>Attribute name in <a>ParticipantTokenConfiguration</a> identifying the participant ordering key. Participants with <code>participantOrderAttribute</code> set to <code>""</code> or not specified are ordered based on their arrival time into the stage.</p>
     #   @return [String]
     class PipConfiguration < Struct.new(
       nil,
@@ -2220,15 +2015,10 @@ module Aws::IVSRealTime
     #   <p>Public key material.</p>
     #   @return [String]
     # @!attribute fingerprint
-    #   <p>The public key fingerprint, a short string used to identify or verify the full public
-    #            key.</p>
+    #   <p>The public key fingerprint, a short string used to identify or verify the full public key.</p>
     #   @return [String]
     # @!attribute tags
-    #   <p>Tags attached to the resource. Array of maps, each of the form <code>string:string
-    #               (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging AWS Resources and Tag
-    #               Editor</i> for details, including restrictions that apply to tags and "Tag naming
-    #            limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented
-    #            there.</p>
+    #   <p>Tags attached to the resource. Array of maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented there.</p>
     #   @return [Hash<String, String>]
     class PublicKey < Struct.new(
       nil,
@@ -2250,11 +2040,7 @@ module Aws::IVSRealTime
     #   <p>Public key name.</p>
     #   @return [String]
     # @!attribute tags
-    #   <p>Tags attached to the resource. Array of maps, each of the form <code>string:string
-    #               (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging AWS Resources and Tag
-    #               Editor</i> for details, including restrictions that apply to tags and "Tag naming
-    #            limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented
-    #            there.</p>
+    #   <p>Tags attached to the resource. Array of maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented there.</p>
     #   @return [Hash<String, String>]
     class PublicKeySummary < Struct.new(
       nil,
@@ -2282,7 +2068,23 @@ module Aws::IVSRealTime
       include ::Smithy::Schema::Structure
     end
 
-    # <p/>
+    # <p>An object representing a redundant ingest credential.</p>
+    # @!attribute participant_id
+    #   <p>ID of the participant within the stage.</p>
+    #   @return [String]
+    # @!attribute stream_key
+    #   <p>Ingest-key value.</p>
+    #   @return [String]
+    class RedundantIngestCredential < Struct.new(
+      nil,
+      :participant_id,
+      :stream_key,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Request references a resource which does not exist.</p>
     # @!attribute access_control_allow_origin
     #   <p/>
     #   @return [String]
@@ -2326,24 +2128,18 @@ module Aws::IVSRealTime
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A complex type that describes an S3 location where recorded videos will be
-    #          stored.</p>
+    # <p>A complex type that describes an S3 location where recorded videos will be stored.</p>
     # @!attribute storage_configuration_arn
-    #   <p>ARN of the <a>StorageConfiguration</a> where recorded videos will be
-    #            stored.</p>
+    #   <p>ARN of the <a>StorageConfiguration</a> where recorded videos will be stored.</p>
     #   @return [String]
     # @!attribute encoder_configuration_arns
-    #   <p>ARNs of the <a>EncoderConfiguration</a> resource. The encoder configuration
-    #            and stage resources must be in the same AWS account and region. </p>
+    #   <p>ARNs of the <a>EncoderConfiguration</a> resource. The encoder configuration and stage resources must be in the same AWS account and region. </p>
     #   @return [Array<String>]
     # @!attribute recording_configuration
-    #   <p>Array of maps, each of the form <code>string:string (key:value)</code>. This is an
-    #            optional customer specification, currently used only to specify the recording format for
-    #            storing a recording in Amazon S3.</p>
+    #   <p>Array of maps, each of the form <code>string:string (key:value)</code>. This is an optional customer specification, currently used only to specify the recording format for storing a recording in Amazon S3.</p>
     #   @return [Types::RecordingConfiguration]
     # @!attribute thumbnail_configurations
-    #   <p>A complex type that allows you to enable/disable the recording of thumbnails for a <a>Composition</a> and modify the interval at which thumbnails are generated for
-    #            the live session.</p>
+    #   <p>A complex type that allows you to enable/disable the recording of thumbnails for a <a>Composition</a> and modify the interval at which thumbnails are generated for the live session.</p>
     #   @return [Array<Types::CompositionThumbnailConfiguration>]
     class S3DestinationConfiguration < Struct.new(
       nil,
@@ -2368,11 +2164,9 @@ module Aws::IVSRealTime
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A complex type that describes an S3 location where recorded videos will be
-    #          stored.</p>
+    # <p>A complex type that describes an S3 location where recorded videos will be stored.</p>
     # @!attribute bucket_name
-    #   <p>Location (S3 bucket name) where recorded videos will be stored. Note that the
-    #            StorageConfiguration and S3 bucket must be in the same region as the Composition.</p>
+    #   <p>Location (S3 bucket name) where recorded videos will be stored. Note that the StorageConfiguration and S3 bucket must be in the same region as the Composition.</p>
     #   @return [String]
     class S3StorageConfiguration < Struct.new(
       nil,
@@ -2382,7 +2176,7 @@ module Aws::IVSRealTime
       include ::Smithy::Schema::Structure
     end
 
-    # <p/>
+    # <p>Request would cause a service quota to be exceeded.</p>
     # @!attribute access_control_allow_origin
     #   <p/>
     #   @return [String]
@@ -2437,11 +2231,7 @@ module Aws::IVSRealTime
     #   <p>ID of the active session within the stage.</p>
     #   @return [String]
     # @!attribute tags
-    #   <p>Tags attached to the resource. Array of maps, each of the form <code>string:string
-    #               (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging AWS Resources and Tag
-    #               Editor</i> for details, including restrictions that apply to tags and "Tag naming
-    #            limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented
-    #            there.</p>
+    #   <p>Tags attached to the resource. Array of maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented there.</p>
     #   @return [Hash<String, String>]
     # @!attribute auto_participant_recording_configuration
     #   <p>Configuration object for individual participant recording, attached to the stage.</p>
@@ -2462,8 +2252,7 @@ module Aws::IVSRealTime
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Summary information about various endpoints for a stage. We recommend that you cache
-    #          these values at stage creation; the values can be cached for up to 14 days.</p>
+    # <p>Summary information about various endpoints for a stage. We recommend that you cache these values at stage creation; the values can be cached for up to 14 days.</p>
     # @!attribute events
     #   <p>Events endpoint.</p>
     #   @return [String]
@@ -2487,10 +2276,7 @@ module Aws::IVSRealTime
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A stage session begins when the first participant joins a stage and ends after the last
-    #          participant leaves the stage. A stage session helps with debugging stages by grouping
-    #          events and participants into shorter periods of time (i.e., a session), which is helpful
-    #          when stages are used over long periods of time.</p>
+    # <p>A stage session begins when the first participant joins a stage and ends after the last participant leaves the stage. A stage session helps with debugging stages by grouping events and participants into shorter periods of time (i.e., a session), which is helpful when stages are used over long periods of time.</p>
     # @!attribute session_id
     #   <p>ID of the session within the stage.</p>
     #   @return [String]
@@ -2498,8 +2284,7 @@ module Aws::IVSRealTime
     #   <p> ISO 8601 timestamp (returned as a string) when this stage session began.</p>
     #   @return [Time]
     # @!attribute end_time
-    #   <p>ISO 8601 timestamp (returned as a string) when the stage session ended. This is null if
-    #            the stage is active.</p>
+    #   <p>ISO 8601 timestamp (returned as a string) when the stage session ended. This is null if the stage is active.</p>
     #   @return [Time]
     class StageSession < Struct.new(
       nil,
@@ -2519,8 +2304,7 @@ module Aws::IVSRealTime
     #   <p> ISO 8601 timestamp (returned as a string) when this stage session began.</p>
     #   @return [Time]
     # @!attribute end_time
-    #   <p>ISO 8601 timestamp (returned as a string) when the stage session ended. This is null if
-    #            the stage is active.</p>
+    #   <p>ISO 8601 timestamp (returned as a string) when the stage session ended. This is null if the stage is active.</p>
     #   @return [Time]
     class StageSessionSummary < Struct.new(
       nil,
@@ -2543,11 +2327,7 @@ module Aws::IVSRealTime
     #   <p>ID of the active session within the stage.</p>
     #   @return [String]
     # @!attribute tags
-    #   <p>Tags attached to the resource. Array of maps, each of the form <code>string:string
-    #               (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging AWS Resources and Tag
-    #               Editor</i> for details, including restrictions that apply to tags and "Tag naming
-    #            limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented
-    #            there.</p>
+    #   <p>Tags attached to the resource. Array of maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented there.</p>
     #   @return [Hash<String, String>]
     class StageSummary < Struct.new(
       nil,
@@ -2573,11 +2353,7 @@ module Aws::IVSRealTime
     #   <p>Array of destination configuration.</p>
     #   @return [Array<Types::DestinationConfiguration>]
     # @!attribute tags
-    #   <p>Tags attached to the resource. Array of maps, each of the form <code>string:string
-    #            (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a>
-    #            in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming
-    #            limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented
-    #            there.</p>
+    #   <p>Tags attached to the resource. Array of maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented there.</p>
     #   @return [Hash<String, String>]
     class StartCompositionRequest < Struct.new(
       nil,
@@ -2609,23 +2385,13 @@ module Aws::IVSRealTime
     #   <p>ARN of the stage to which the participant will be replicated.</p>
     #   @return [String]
     # @!attribute participant_id
-    #   <p>Participant ID of the publisher that will be replicated. This is assigned by IVS and returned by 
-    #   		<a>CreateParticipantToken</a> 
-    #   		or the <code>jti</code> (JWT ID) used to <a href="https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/getting-started-distribute-tokens.html#getting-started-distribute-tokens-self-signed">create a self signed token</a>.
-    #   	  </p>
+    #   <p>Participant ID of the publisher that will be replicated. This is assigned by IVS and returned by <a>CreateParticipantToken</a> or the <code>jti</code> (JWT ID) used to <a href="https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/getting-started-distribute-tokens.html#getting-started-distribute-tokens-self-signed">create a self signed token</a>. </p>
     #   @return [String]
     # @!attribute reconnect_window_seconds
-    #   <p>If the participant disconnects and then reconnects within the specified interval, replication will continue to be <code>ACTIVE</code>. 
-    #   	  Default: 0.</p>
+    #   <p>If the participant disconnects and then reconnects within the specified interval, replication will continue to be <code>ACTIVE</code>. Default: 0.</p>
     #   @return [Integer]
     # @!attribute attributes
-    #   <p>Application-provided attributes to set on the replicated participant in the destination stage. 
-    #   	  Map keys and values can contain UTF-8 encoded text. The maximum length of this field is 1 KB total. 
-    #   	  <i>This field is exposed to all stage participants and should not be used for personally identifying, 
-    #   	  confidential, or sensitive information.</i>
-    #            </p>
-    #            <p>These attributes are merged with any attributes set for this participant when creating the token. 
-    #   	  If there is overlap in keys, the values in these attributes are replaced.</p>
+    #   <p>Application-provided attributes to set on the replicated participant in the destination stage. Map keys and values can contain UTF-8 encoded text. The maximum length of this field is 1 KB total. <i>This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information.</i> </p> <p>These attributes are merged with any attributes set for this participant when creating the token. If there is overlap in keys, the values in these attributes are replaced.</p>
     #   @return [Hash<String, String>]
     class StartParticipantReplicationRequest < Struct.new(
       nil,
@@ -2640,25 +2406,25 @@ module Aws::IVSRealTime
     end
 
     # @!attribute access_control_allow_origin
-    #   <p/>
+    #   <p>See <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Access-Control-Allow-Origin">Access-Control-Allow-Origin</a> in the MDN Web Docs.</p>
     #   @return [String]
     # @!attribute access_control_expose_headers
-    #   <p/>
+    #   <p>See <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Access-Control-Expose-Headers">Access-Control-Expose-Headers</a> in the MDN Web Docs.</p>
     #   @return [String]
     # @!attribute cache_control
-    #   <p/>
+    #   <p>See <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Cache-Control">Cache-Control</a> in the MDN Web Docs.</p>
     #   @return [String]
     # @!attribute content_security_policy
-    #   <p/>
+    #   <p>See <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy">Content-Security-Policy</a> in the MDN Web Docs.</p>
     #   @return [String]
     # @!attribute strict_transport_security
-    #   <p/>
+    #   <p>See <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Strict-Transport-Security">Strict-Transport-Security</a> in the MDN Web Docs.</p>
     #   @return [String]
     # @!attribute x_content_type_options
-    #   <p/>
+    #   <p>See <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/X-Content-Type-Options">X-Content-Type-Options</a> in the MDN Web Docs.</p>
     #   @return [String]
     # @!attribute x_frame_options
-    #   <p/>
+    #   <p>See <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/X-Frame-Options">X-Frame-Options</a> in the MDN Web Docs.</p>
     #   @return [String]
     class StartParticipantReplicationResponse < Struct.new(
       nil,
@@ -2699,10 +2465,7 @@ module Aws::IVSRealTime
     #   <p>ARN of the stage where the participant has been replicated.</p>
     #   @return [String]
     # @!attribute participant_id
-    #   <p>Participant ID of the publisher that has been replicated. This is assigned by IVS and returned by 
-    #   		<a>CreateParticipantToken</a> 
-    #   		or the <code>jti</code> (JWT ID) used to <a href="https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/getting-started-distribute-tokens.html#getting-started-distribute-tokens-self-signed">
-    #   				  create a self signed token</a>.</p>
+    #   <p>Participant ID of the publisher that has been replicated. This is assigned by IVS and returned by <a>CreateParticipantToken</a> or the <code>jti</code> (JWT ID) used to <a href="https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/getting-started-distribute-tokens.html#getting-started-distribute-tokens-self-signed"> create a self signed token</a>.</p>
     #   @return [String]
     class StopParticipantReplicationRequest < Struct.new(
       nil,
@@ -2715,25 +2478,25 @@ module Aws::IVSRealTime
     end
 
     # @!attribute access_control_allow_origin
-    #   <p/>
+    #   <p>See <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Access-Control-Allow-Origin">Access-Control-Allow-Origin</a> in the MDN Web Docs.</p>
     #   @return [String]
     # @!attribute access_control_expose_headers
-    #   <p/>
+    #   <p>See <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Access-Control-Expose-Headers">Access-Control-Expose-Headers</a> in the MDN Web Docs.</p>
     #   @return [String]
     # @!attribute cache_control
-    #   <p/>
+    #   <p>See <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Cache-Control">Cache-Control</a> in the MDN Web Docs.</p>
     #   @return [String]
     # @!attribute content_security_policy
-    #   <p/>
+    #   <p>See <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy">Content-Security-Policy</a> in the MDN Web Docs.</p>
     #   @return [String]
     # @!attribute strict_transport_security
-    #   <p/>
+    #   <p>See <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Strict-Transport-Security">Strict-Transport-Security</a> in the MDN Web Docs.</p>
     #   @return [String]
     # @!attribute x_content_type_options
-    #   <p/>
+    #   <p>See <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/X-Content-Type-Options">X-Content-Type-Options</a> in the MDN Web Docs.</p>
     #   @return [String]
     # @!attribute x_frame_options
-    #   <p/>
+    #   <p>See <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/X-Frame-Options">X-Frame-Options</a> in the MDN Web Docs.</p>
     #   @return [String]
     class StopParticipantReplicationResponse < Struct.new(
       nil,
@@ -2760,11 +2523,7 @@ module Aws::IVSRealTime
     #   <p>An S3 destination configuration where recorded videos will be stored.</p>
     #   @return [Types::S3StorageConfiguration]
     # @!attribute tags
-    #   <p>Tags attached to the resource. Array of maps, each of the form <code>string:string
-    #               (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging AWS Resources and Tag
-    #               Editor</i> for details, including restrictions that apply to tags and "Tag naming
-    #            limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented
-    #            there.</p>
+    #   <p>Tags attached to the resource. Array of maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented there.</p>
     #   @return [Hash<String, String>]
     class StorageConfiguration < Struct.new(
       nil,
@@ -2788,11 +2547,7 @@ module Aws::IVSRealTime
     #   <p>An S3 destination configuration where recorded videos will be stored.</p>
     #   @return [Types::S3StorageConfiguration]
     # @!attribute tags
-    #   <p>Tags attached to the resource. Array of maps, each of the form <code>string:string
-    #               (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging AWS Resources and Tag
-    #               Editor</i> for details, including restrictions that apply to tags and "Tag naming
-    #            limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented
-    #            there.</p>
+    #   <p>Tags attached to the resource. Array of maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented there.</p>
     #   @return [Hash<String, String>]
     class StorageConfigurationSummary < Struct.new(
       nil,
@@ -2809,11 +2564,7 @@ module Aws::IVSRealTime
     #   <p>The ARN of the resource to be tagged. The ARN must be URL-encoded.</p>
     #   @return [String]
     # @!attribute tags
-    #   <p>Array of tags to be added or updated. Array of maps, each of the form
-    #            <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a>
-    #            in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming
-    #            limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented
-    #            there.</p>
+    #   <p>Array of tags to be added or updated. Array of maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented there.</p>
     #   @return [Hash<String, String>]
     class TagResourceInput < Struct.new(
       nil,
@@ -2835,11 +2586,7 @@ module Aws::IVSRealTime
     #   <p>The ARN of the resource to be untagged. The ARN must be URL-encoded.</p>
     #   @return [String]
     # @!attribute tag_keys
-    #   <p>Array of tag keys (strings) for the tags to be removed.
-    #            See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a>
-    #            in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming
-    #            limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented
-    #            there.</p>
+    #   <p>Array of tag keys (strings) for the tags to be removed. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented there.</p>
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
       nil,
@@ -2863,20 +2610,52 @@ module Aws::IVSRealTime
     # @!attribute stage_arn
     #   <p>Stage ARN that needs to be updated.</p>
     #   @return [String]
+    # @!attribute redundant_ingest
+    #   <p>Indicates whether redundant ingest is enabled for the ingest configuration. Default: <code>false</code>. </p>
+    #   @return [Boolean]
     class UpdateIngestConfigurationRequest < Struct.new(
       nil,
       :arn,
       :stage_arn,
+      :redundant_ingest,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute access_control_allow_origin
+    #   <p>See <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Access-Control-Allow-Origin">Access-Control-Allow-Origin</a> in the MDN Web Docs.</p>
+    #   @return [String]
+    # @!attribute access_control_expose_headers
+    #   <p>See <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Access-Control-Expose-Headers">Access-Control-Expose-Headers</a> in the MDN Web Docs.</p>
+    #   @return [String]
+    # @!attribute cache_control
+    #   <p>See <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Cache-Control">Cache-Control</a> in the MDN Web Docs.</p>
+    #   @return [String]
+    # @!attribute content_security_policy
+    #   <p>See <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy">Content-Security-Policy</a> in the MDN Web Docs.</p>
+    #   @return [String]
+    # @!attribute strict_transport_security
+    #   <p>See <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Strict-Transport-Security">Strict-Transport-Security</a> in the MDN Web Docs.</p>
+    #   @return [String]
+    # @!attribute x_content_type_options
+    #   <p>See <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/X-Content-Type-Options">X-Content-Type-Options</a> in the MDN Web Docs.</p>
+    #   @return [String]
+    # @!attribute x_frame_options
+    #   <p>See <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/X-Frame-Options">X-Frame-Options</a> in the MDN Web Docs.</p>
+    #   @return [String]
     # @!attribute ingest_configuration
     #   <p>The updated IngestConfiguration.</p>
     #   @return [Types::IngestConfiguration]
     class UpdateIngestConfigurationResponse < Struct.new(
       nil,
+      :access_control_allow_origin,
+      :access_control_expose_headers,
+      :cache_control,
+      :content_security_policy,
+      :strict_transport_security,
+      :x_content_type_options,
+      :x_frame_options,
       :ingest_configuration,
       keyword_init: true
     )
@@ -2913,7 +2692,7 @@ module Aws::IVSRealTime
       include ::Smithy::Schema::Structure
     end
 
-    # <p/>
+    # <p>The input fails to satisfy the constraints specified by an Amazon Web Services service.</p>
     # @!attribute access_control_allow_origin
     #   <p/>
     #   @return [String]
@@ -2959,14 +2738,10 @@ module Aws::IVSRealTime
 
     # <p>Settings for video.</p>
     # @!attribute width
-    #   <p>Video-resolution width. This must be an even number. Note that the maximum value is
-    #            determined by <code>width</code> times <code>height</code>, such that the maximum total
-    #            pixels is 2073600 (1920x1080 or 1080x1920). Default: 1280.</p>
+    #   <p>Video-resolution width. This must be an even number. Note that the maximum value is determined by <code>width</code> times <code>height</code>, such that the maximum total pixels is 2073600 (1920x1080 or 1080x1920). Default: 1280.</p>
     #   @return [Integer]
     # @!attribute height
-    #   <p>Video-resolution height. This must be an even number. Note that the maximum value is
-    #            determined by <code>width</code> times <code>height</code>, such that the maximum total
-    #            pixels is 2073600 (1920x1080 or 1080x1920). Default: 720.</p>
+    #   <p>Video-resolution height. This must be an even number. Note that the maximum value is determined by <code>width</code> times <code>height</code>, such that the maximum total pixels is 2073600 (1920x1080 or 1080x1920). Default: 720.</p>
     #   @return [Integer]
     # @!attribute framerate
     #   <p>Video frame rate, in fps. Default: 30.</p>

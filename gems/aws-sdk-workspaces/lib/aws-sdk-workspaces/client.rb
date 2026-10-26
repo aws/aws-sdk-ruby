@@ -144,18 +144,18 @@ module Aws::WorkSpaces
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -317,7 +317,7 @@ module Aws::WorkSpaces
     #       last_updated_time: Time.now,
     #       state: "PENDING_INSTALL" # One of: ["PENDING_INSTALL", "PENDING_INSTALL_DEPLOYMENT", "PENDING_UNINSTALL", "PENDING_UNINSTALL_DEPLOYMENT", "INSTALLING", "UNINSTALLING", "ERROR", "COMPLETED", "REMOVED"],
     #       state_reason: {
-    #         error_code: "ValidationError.InsufficientDiskSpace" # One of: ["ValidationError.InsufficientDiskSpace", "ValidationError.InsufficientMemory", "ValidationError.UnsupportedOperatingSystem", "DeploymentError.InternalServerError", "DeploymentError.WorkspaceUnreachable"],
+    #         error_code: "ValidationError.InsufficientDiskSpace" # One of: ["ValidationError.InsufficientDiskSpace", "ValidationError.InsufficientMemory", "ValidationError.UnsupportedOperatingSystem", "DeploymentError.InternalServerError", "DeploymentError.WorkspaceUnreachable", "ValidationError.ApplicationOldVersionExists"],
     #         error_message: "String2048"
     #       },
     #       workspace_id: "WorkspaceId"
@@ -362,7 +362,7 @@ module Aws::WorkSpaces
     #          information about copying images, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/copy-custom-image.html"> Copy a Custom WorkSpaces
     #             Image</a>.</p>
     #          <p>In the China (Ningxia) Region, you can copy images only within the same Region.</p>
-    #          <p>In Amazon Web Services GovCloud (US), to copy images to and from other Regions, contact Amazon Web ServicesSupport.</p>
+    #          <p>In Amazon Web Services GovCloud (US), to copy images to and from other Regions, contact Amazon Web Services Support.</p>
     #          <important>
     #             <p>Before copying a shared image, be sure to verify that it has been shared from the
     #             correct Amazon Web Services account. To determine if an image has been shared and to see
@@ -434,16 +434,16 @@ module Aws::WorkSpaces
       request.send_request(options)
     end
 
-    # <p>Creates a client-add-in for Amazon Connect within a directory. You can create only
-    #          one Amazon Connect client add-in within a directory.</p>
-    #          <p>This client add-in allows WorkSpaces users to seamlessly connect to Amazon Connect.</p>
+    # <p>Creates a client-add-in for Connect Customer within a directory. You can create only
+    #          one Connect Customer client add-in within a directory.</p>
+    #          <p>This client add-in allows WorkSpaces users to seamlessly connect to Connect Customer.</p>
     # @param [Hash, Types::CreateConnectClientAddInRequest] params
     # @option params [String] :resource_id
     #   <p>The directory identifier for which to configure the client add-in.</p>
     # @option params [String] :name
     #   <p>The name of the client add-in.</p>
     # @option params [String] :url
-    #   <p>The endpoint URL of the Amazon Connect client add-in.</p>
+    #   <p>The endpoint URL of the Connect Customer client add-in.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     resource_id: "DirectoryId", # required
@@ -640,7 +640,7 @@ module Aws::WorkSpaces
     end
 
     # <p>Creates a new updated WorkSpace image based on the specified source image. The new
-    #          updated WorkSpace image has the latest drivers and other updates required by the 
+    #          updated WorkSpace image has the latest drivers and other updates required by the
     #          Amazon WorkSpaces components.</p>
     #          <p>To determine which WorkSpace images need to be updated with the latest Amazon WorkSpaces
     #          requirements, use <a href="https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaceImages.html">
@@ -700,7 +700,7 @@ module Aws::WorkSpaces
       request.send_request(options)
     end
 
-    # <p>Creates the specified WorkSpace bundle. For more information about creating WorkSpace bundles, see 
+    # <p>Creates the specified WorkSpace bundle. For more information about creating WorkSpace bundles, see
     #          <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/create-custom-bundle.html">
     #             Create a Custom WorkSpaces Image and Bundle</a>.</p>
     # @param [Hash, Types::CreateWorkspaceBundleRequest] params
@@ -719,7 +719,7 @@ module Aws::WorkSpaces
     # @option params [Array<Types::Tag>] :tags
     #   <p>The tags associated with the bundle.</p>
     #            <note>
-    #               <p>To add tags at the same time when you're creating the bundle, you must create an IAM policy that 
+    #               <p>To add tags at the same time when you're creating the bundle, you must create an IAM policy that
     #               grants your IAM user permissions to use <code>workspaces:CreateTags</code>. </p>
     #            </note>
     # @example Request syntax with placeholder values
@@ -728,7 +728,7 @@ module Aws::WorkSpaces
     #     bundle_description: "WorkspaceBundleDescription", # required
     #     image_id: "WorkspaceImageId", # required
     #     compute_type: { # required
-    #       name: "VALUE" # One of: ["VALUE", "STANDARD", "PERFORMANCE", "POWER", "GRAPHICS", "POWERPRO", "GENERALPURPOSE_4XLARGE", "GENERALPURPOSE_8XLARGE", "GRAPHICSPRO", "GRAPHICS_G4DN", "GRAPHICSPRO_G4DN"]
+    #       name: "VALUE" # One of: ["VALUE", "STANDARD", "PERFORMANCE", "POWER", "GRAPHICS", "POWERPRO", "GENERALPURPOSE_4XLARGE", "GENERALPURPOSE_8XLARGE", "GRAPHICSPRO", "GRAPHICS_G4DN", "GRAPHICSPRO_G4DN", "GRAPHICS_G6_XLARGE", "GRAPHICS_G6_2XLARGE", "GRAPHICS_G6_4XLARGE", "GRAPHICS_G6_8XLARGE", "GRAPHICS_G6_16XLARGE", "GRAPHICS_GR6_4XLARGE", "GRAPHICS_GR6_8XLARGE", "GRAPHICS_G6F_LARGE", "GRAPHICS_G6F_XLARGE", "GRAPHICS_G6F_2XLARGE", "GRAPHICS_G6F_4XLARGE", "GRAPHICS_GR6F_4XLARGE", "GRAPHICS_G7_2XLARGE", "GRAPHICS_G7_4XLARGE", "GRAPHICS_G7_8XLARGE", "GRAPHICS_G7_12XLARGE"]
     #     },
     #     user_storage: { # required
     #       capacity: "NonEmptyString", # required
@@ -761,7 +761,7 @@ module Aws::WorkSpaces
     #         capacity: "NonEmptyString", # required
     #       },
     #       compute_type: {
-    #         name: "VALUE" # One of: ["VALUE", "STANDARD", "PERFORMANCE", "POWER", "GRAPHICS", "POWERPRO", "GENERALPURPOSE_4XLARGE", "GENERALPURPOSE_8XLARGE", "GRAPHICSPRO", "GRAPHICS_G4DN", "GRAPHICSPRO_G4DN"]
+    #         name: "VALUE" # One of: ["VALUE", "STANDARD", "PERFORMANCE", "POWER", "GRAPHICS", "POWERPRO", "GENERALPURPOSE_4XLARGE", "GENERALPURPOSE_8XLARGE", "GRAPHICSPRO", "GRAPHICS_G4DN", "GRAPHICSPRO_G4DN", "GRAPHICS_G6_XLARGE", "GRAPHICS_G6_2XLARGE", "GRAPHICS_G6_4XLARGE", "GRAPHICS_G6_8XLARGE", "GRAPHICS_G6_16XLARGE", "GRAPHICS_GR6_4XLARGE", "GRAPHICS_GR6_8XLARGE", "GRAPHICS_G6F_LARGE", "GRAPHICS_G6F_XLARGE", "GRAPHICS_G6F_2XLARGE", "GRAPHICS_G6F_4XLARGE", "GRAPHICS_GR6F_4XLARGE", "GRAPHICS_G7_2XLARGE", "GRAPHICS_G7_4XLARGE", "GRAPHICS_G7_8XLARGE", "GRAPHICS_G7_12XLARGE"]
     #       },
     #       last_updated_time: Time.now,
     #       creation_time: Time.now,
@@ -784,8 +784,8 @@ module Aws::WorkSpaces
     # @option params [String] :workspace_id
     #   <p>The identifier of the source WorkSpace</p>
     # @option params [Array<Types::Tag>] :tags
-    #   <p>The tags that you want to add to the new WorkSpace image. 
-    #            To add tags when you're creating the image, you must create an IAM policy that grants 
+    #   <p>The tags that you want to add to the new WorkSpace image.
+    #            To add tags when you're creating the image, you must create an IAM policy that grants
     #            your IAM user permission to use <code>workspaces:CreateTags</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -841,7 +841,7 @@ module Aws::WorkSpaces
     #                </li>
     #                <li>
     #                   <p>Review your running mode to ensure you are using one that is optimal for your needs and budget.
-    #                   For more information on switching running modes, see 
+    #                   For more information on switching running modes, see
     #                   <a href="http://aws.amazon.com/workspaces-family/workspaces/faqs/#:~:text=Can%20I%20switch%20between%20hourly%20and%20monthly%20billing%20on%20WorkSpaces%20Personal%3F">
     #                      Can I switch between hourly and monthly billing?</a>
     #                   </p>
@@ -866,13 +866,14 @@ module Aws::WorkSpaces
     #           running_mode_auto_stop_timeout_in_minutes: 1,
     #           root_volume_size_gib: 1,
     #           user_volume_size_gib: 1,
-    #           compute_type_name: "VALUE" # One of: ["VALUE", "STANDARD", "PERFORMANCE", "POWER", "GRAPHICS", "POWERPRO", "GENERALPURPOSE_4XLARGE", "GENERALPURPOSE_8XLARGE", "GRAPHICSPRO", "GRAPHICS_G4DN", "GRAPHICSPRO_G4DN"],
+    #           compute_type_name: "VALUE" # One of: ["VALUE", "STANDARD", "PERFORMANCE", "POWER", "GRAPHICS", "POWERPRO", "GENERALPURPOSE_4XLARGE", "GENERALPURPOSE_8XLARGE", "GRAPHICSPRO", "GRAPHICS_G4DN", "GRAPHICSPRO_G4DN", "GRAPHICS_G6_XLARGE", "GRAPHICS_G6_2XLARGE", "GRAPHICS_G6_4XLARGE", "GRAPHICS_G6_8XLARGE", "GRAPHICS_G6_16XLARGE", "GRAPHICS_GR6_4XLARGE", "GRAPHICS_GR6_8XLARGE", "GRAPHICS_G6F_LARGE", "GRAPHICS_G6F_XLARGE", "GRAPHICS_G6F_2XLARGE", "GRAPHICS_G6F_4XLARGE", "GRAPHICS_GR6F_4XLARGE", "GRAPHICS_G7_2XLARGE", "GRAPHICS_G7_4XLARGE", "GRAPHICS_G7_8XLARGE", "GRAPHICS_G7_12XLARGE"],
     #           protocols: ["PCOIP" # One of: ["PCOIP", "WSP"]],
-    #           operating_system_name: "AMAZON_LINUX_2" # One of: ["AMAZON_LINUX_2", "UBUNTU_18_04", "UBUNTU_20_04", "UBUNTU_22_04", "UNKNOWN", "WINDOWS_10", "WINDOWS_11", "WINDOWS_7", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "RHEL_8", "ROCKY_8"],
+    #           operating_system_name: "AMAZON_LINUX_2" # One of: ["AMAZON_LINUX_2", "UBUNTU_18_04", "UBUNTU_20_04", "UBUNTU_22_04", "UNKNOWN", "WINDOWS_10", "WINDOWS_11", "WINDOWS_7", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "RHEL_8", "ROCKY_8"],
     #           global_accelerator: {
     #             mode: "ENABLED_AUTO" # One of: ["ENABLED_AUTO", "DISABLED", "INHERITED"], # required
     #             preferred_protocol: "TCP" # One of: ["TCP", "NONE", "INHERITED"]
-    #           }
+    #           },
+    #           nested_virtualization_enabled: false
     #         },
     #         tags: [
     #           {
@@ -880,7 +881,8 @@ module Aws::WorkSpaces
     #             value: "TagValue"
     #           }
     #         ],
-    #         workspace_name: "WorkspaceName"
+    #         workspace_name: "WorkspaceName",
+    #         ipv6_address: "Ipv6Address"
     #       }
     #     ]
     #   }
@@ -903,13 +905,14 @@ module Aws::WorkSpaces
     #             running_mode_auto_stop_timeout_in_minutes: 1,
     #             root_volume_size_gib: 1,
     #             user_volume_size_gib: 1,
-    #             compute_type_name: "VALUE" # One of: ["VALUE", "STANDARD", "PERFORMANCE", "POWER", "GRAPHICS", "POWERPRO", "GENERALPURPOSE_4XLARGE", "GENERALPURPOSE_8XLARGE", "GRAPHICSPRO", "GRAPHICS_G4DN", "GRAPHICSPRO_G4DN"],
+    #             compute_type_name: "VALUE" # One of: ["VALUE", "STANDARD", "PERFORMANCE", "POWER", "GRAPHICS", "POWERPRO", "GENERALPURPOSE_4XLARGE", "GENERALPURPOSE_8XLARGE", "GRAPHICSPRO", "GRAPHICS_G4DN", "GRAPHICSPRO_G4DN", "GRAPHICS_G6_XLARGE", "GRAPHICS_G6_2XLARGE", "GRAPHICS_G6_4XLARGE", "GRAPHICS_G6_8XLARGE", "GRAPHICS_G6_16XLARGE", "GRAPHICS_GR6_4XLARGE", "GRAPHICS_GR6_8XLARGE", "GRAPHICS_G6F_LARGE", "GRAPHICS_G6F_XLARGE", "GRAPHICS_G6F_2XLARGE", "GRAPHICS_G6F_4XLARGE", "GRAPHICS_GR6F_4XLARGE", "GRAPHICS_G7_2XLARGE", "GRAPHICS_G7_4XLARGE", "GRAPHICS_G7_8XLARGE", "GRAPHICS_G7_12XLARGE"],
     #             protocols: ["PCOIP" # One of: ["PCOIP", "WSP"]],
-    #             operating_system_name: "AMAZON_LINUX_2" # One of: ["AMAZON_LINUX_2", "UBUNTU_18_04", "UBUNTU_20_04", "UBUNTU_22_04", "UNKNOWN", "WINDOWS_10", "WINDOWS_11", "WINDOWS_7", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "RHEL_8", "ROCKY_8"],
+    #             operating_system_name: "AMAZON_LINUX_2" # One of: ["AMAZON_LINUX_2", "UBUNTU_18_04", "UBUNTU_20_04", "UBUNTU_22_04", "UNKNOWN", "WINDOWS_10", "WINDOWS_11", "WINDOWS_7", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "RHEL_8", "ROCKY_8"],
     #             global_accelerator: {
     #               mode: "ENABLED_AUTO" # One of: ["ENABLED_AUTO", "DISABLED", "INHERITED"], # required
     #               preferred_protocol: "TCP" # One of: ["TCP", "NONE", "INHERITED"]
-    #             }
+    #             },
+    #             nested_virtualization_enabled: false
     #           },
     #           tags: [
     #             {
@@ -917,7 +920,8 @@ module Aws::WorkSpaces
     #               value: "TagValue"
     #             }
     #           ],
-    #           workspace_name: "WorkspaceName"
+    #           workspace_name: "WorkspaceName",
+    #           ipv6_address: "Ipv6Address"
     #         },
     #         error_code: "ErrorType",
     #         error_message: "Description"
@@ -929,6 +933,7 @@ module Aws::WorkSpaces
     #         directory_id: "DirectoryId",
     #         user_name: "UserName",
     #         ip_address: "IpAddress",
+    #         ipv6_address: "Ipv6Address",
     #         state: "PENDING" # One of: ["PENDING", "AVAILABLE", "IMPAIRED", "UNHEALTHY", "REBOOTING", "STARTING", "REBUILDING", "RESTORING", "MAINTENANCE", "ADMIN_MAINTENANCE", "TERMINATING", "TERMINATED", "SUSPENDED", "UPDATING", "STOPPING", "STOPPED", "ERROR"],
     #         bundle_id: "BundleId",
     #         subnet_id: "SubnetId",
@@ -944,18 +949,19 @@ module Aws::WorkSpaces
     #           running_mode_auto_stop_timeout_in_minutes: 1,
     #           root_volume_size_gib: 1,
     #           user_volume_size_gib: 1,
-    #           compute_type_name: "VALUE" # One of: ["VALUE", "STANDARD", "PERFORMANCE", "POWER", "GRAPHICS", "POWERPRO", "GENERALPURPOSE_4XLARGE", "GENERALPURPOSE_8XLARGE", "GRAPHICSPRO", "GRAPHICS_G4DN", "GRAPHICSPRO_G4DN"],
+    #           compute_type_name: "VALUE" # One of: ["VALUE", "STANDARD", "PERFORMANCE", "POWER", "GRAPHICS", "POWERPRO", "GENERALPURPOSE_4XLARGE", "GENERALPURPOSE_8XLARGE", "GRAPHICSPRO", "GRAPHICS_G4DN", "GRAPHICSPRO_G4DN", "GRAPHICS_G6_XLARGE", "GRAPHICS_G6_2XLARGE", "GRAPHICS_G6_4XLARGE", "GRAPHICS_G6_8XLARGE", "GRAPHICS_G6_16XLARGE", "GRAPHICS_GR6_4XLARGE", "GRAPHICS_GR6_8XLARGE", "GRAPHICS_G6F_LARGE", "GRAPHICS_G6F_XLARGE", "GRAPHICS_G6F_2XLARGE", "GRAPHICS_G6F_4XLARGE", "GRAPHICS_GR6F_4XLARGE", "GRAPHICS_G7_2XLARGE", "GRAPHICS_G7_4XLARGE", "GRAPHICS_G7_8XLARGE", "GRAPHICS_G7_12XLARGE"],
     #           protocols: ["PCOIP" # One of: ["PCOIP", "WSP"]],
-    #           operating_system_name: "AMAZON_LINUX_2" # One of: ["AMAZON_LINUX_2", "UBUNTU_18_04", "UBUNTU_20_04", "UBUNTU_22_04", "UNKNOWN", "WINDOWS_10", "WINDOWS_11", "WINDOWS_7", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "RHEL_8", "ROCKY_8"],
+    #           operating_system_name: "AMAZON_LINUX_2" # One of: ["AMAZON_LINUX_2", "UBUNTU_18_04", "UBUNTU_20_04", "UBUNTU_22_04", "UNKNOWN", "WINDOWS_10", "WINDOWS_11", "WINDOWS_7", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "RHEL_8", "ROCKY_8"],
     #           global_accelerator: {
     #             mode: "ENABLED_AUTO" # One of: ["ENABLED_AUTO", "DISABLED", "INHERITED"], # required
     #             preferred_protocol: "TCP" # One of: ["TCP", "NONE", "INHERITED"]
-    #           }
+    #           },
+    #           nested_virtualization_enabled: false
     #         },
     #         modification_states: [
     #           {
-    #             resource: "ROOT_VOLUME" # One of: ["ROOT_VOLUME", "USER_VOLUME", "COMPUTE_TYPE"],
-    #             state: "UPDATE_INITIATED" # One of: ["UPDATE_INITIATED", "UPDATE_IN_PROGRESS"]
+    #             resource: "ROOT_VOLUME" # One of: ["ROOT_VOLUME", "USER_VOLUME", "COMPUTE_TYPE", "PROTOCOL", "NESTED_VIRTUALIZATION"],
+    #             state: "UPDATE_INITIATED" # One of: ["UPDATE_INITIATED", "UPDATE_IN_PROGRESS", "UPDATE_FAILED"]
     #           }
     #         ],
     #         related_workspaces: [
@@ -986,7 +992,13 @@ module Aws::WorkSpaces
       request.send_request(options)
     end
 
-    # <p>Creates a pool of WorkSpaces.</p>
+    # <note>
+    #             <p>End of support notice: On December 31, 2027, Amazon Web Services will end support for Amazon WorkSpaces Pools. After December 31, 2027,
+    # you will no longer be able to access the Amazon WorkSpaces Pools console or Amazon WorkSpaces Pools resources. For more information, see
+    # <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/wsp-pools-end-of-support.html">Amazon WorkSpaces Pools end of support</a>.
+    #  </p>
+    #          </note>
+    #          <p>Creates a pool of WorkSpaces.</p>
     # @param [Hash, Types::CreateWorkspacesPoolRequest] params
     # @option params [String] :pool_name
     #   <p>The name of the pool.</p>
@@ -1134,7 +1146,7 @@ module Aws::WorkSpaces
       request.send_request(options)
     end
 
-    # <p>Deletes a client-add-in for Amazon Connect that is configured within a
+    # <p>Deletes a client-add-in for Connect Customer that is configured within a
     #          directory.</p>
     # @param [Hash, Types::DeleteConnectClientAddInRequest] params
     # @option params [String] :add_in_id
@@ -1235,7 +1247,7 @@ module Aws::WorkSpaces
       request.send_request(options)
     end
 
-    # <p>Deletes the specified WorkSpace bundle. For more information about deleting WorkSpace bundles, see 
+    # <p>Deletes the specified WorkSpace bundle. For more information about deleting WorkSpace bundles, see
     #          <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/delete_bundle.html">
     #             Delete a Custom WorkSpaces Bundle or Image</a>.</p>
     # @param [Hash, Types::DeleteWorkspaceBundleRequest] params
@@ -1282,7 +1294,7 @@ module Aws::WorkSpaces
     # @option params [String] :workspace_id
     #   <p>The identifier of the WorkSpace.</p>
     # @option params [Boolean] :force
-    #   <p>Indicates whether the force flag is applied for the specified WorkSpace. When the force flag is enabled, 
+    #   <p>Indicates whether the force flag is applied for the specified WorkSpace. When the force flag is enabled,
     #            it allows previously failed deployments to be retried.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -1303,7 +1315,7 @@ module Aws::WorkSpaces
     #           last_updated_time: Time.now,
     #           state: "PENDING_INSTALL" # One of: ["PENDING_INSTALL", "PENDING_INSTALL_DEPLOYMENT", "PENDING_UNINSTALL", "PENDING_UNINSTALL_DEPLOYMENT", "INSTALLING", "UNINSTALLING", "ERROR", "COMPLETED", "REMOVED"],
     #           state_reason: {
-    #             error_code: "ValidationError.InsufficientDiskSpace" # One of: ["ValidationError.InsufficientDiskSpace", "ValidationError.InsufficientMemory", "ValidationError.UnsupportedOperatingSystem", "DeploymentError.InternalServerError", "DeploymentError.WorkspaceUnreachable"],
+    #             error_code: "ValidationError.InsufficientDiskSpace" # One of: ["ValidationError.InsufficientDiskSpace", "ValidationError.InsufficientMemory", "ValidationError.UnsupportedOperatingSystem", "DeploymentError.InternalServerError", "DeploymentError.WorkspaceUnreachable", "ValidationError.ApplicationOldVersionExists"],
     #             error_message: "String2048"
     #           },
     #           workspace_id: "WorkspaceId"
@@ -1436,7 +1448,7 @@ module Aws::WorkSpaces
     #         last_updated_time: Time.now,
     #         state: "PENDING_INSTALL" # One of: ["PENDING_INSTALL", "PENDING_INSTALL_DEPLOYMENT", "PENDING_UNINSTALL", "PENDING_UNINSTALL_DEPLOYMENT", "INSTALLING", "UNINSTALLING", "ERROR", "COMPLETED", "REMOVED"],
     #         state_reason: {
-    #           error_code: "ValidationError.InsufficientDiskSpace" # One of: ["ValidationError.InsufficientDiskSpace", "ValidationError.InsufficientMemory", "ValidationError.UnsupportedOperatingSystem", "DeploymentError.InternalServerError", "DeploymentError.WorkspaceUnreachable"],
+    #           error_code: "ValidationError.InsufficientDiskSpace" # One of: ["ValidationError.InsufficientDiskSpace", "ValidationError.InsufficientMemory", "ValidationError.UnsupportedOperatingSystem", "DeploymentError.InternalServerError", "DeploymentError.WorkspaceUnreachable", "ValidationError.ApplicationOldVersionExists"],
     #           error_message: "String2048"
     #         }
     #       }
@@ -1468,9 +1480,9 @@ module Aws::WorkSpaces
     # @example Request syntax with placeholder values
     #   params = {
     #     application_ids: ["WorkSpaceApplicationId"],
-    #     compute_type_names: ["VALUE" # One of: ["VALUE", "STANDARD", "PERFORMANCE", "POWER", "GRAPHICS", "POWERPRO", "GENERALPURPOSE_4XLARGE", "GENERALPURPOSE_8XLARGE", "GRAPHICSPRO", "GRAPHICS_G4DN", "GRAPHICSPRO_G4DN"]],
+    #     compute_type_names: ["VALUE" # One of: ["VALUE", "STANDARD", "PERFORMANCE", "POWER", "GRAPHICS", "POWERPRO", "GENERALPURPOSE_4XLARGE", "GENERALPURPOSE_8XLARGE", "GRAPHICSPRO", "GRAPHICS_G4DN", "GRAPHICSPRO_G4DN", "GRAPHICS_G6_XLARGE", "GRAPHICS_G6_2XLARGE", "GRAPHICS_G6_4XLARGE", "GRAPHICS_G6_8XLARGE", "GRAPHICS_G6_16XLARGE", "GRAPHICS_GR6_4XLARGE", "GRAPHICS_GR6_8XLARGE", "GRAPHICS_G6F_LARGE", "GRAPHICS_G6F_XLARGE", "GRAPHICS_G6F_2XLARGE", "GRAPHICS_G6F_4XLARGE", "GRAPHICS_GR6F_4XLARGE", "GRAPHICS_G7_2XLARGE", "GRAPHICS_G7_4XLARGE", "GRAPHICS_G7_8XLARGE", "GRAPHICS_G7_12XLARGE"]],
     #     license_type: "LICENSED" # One of: ["LICENSED", "UNLICENSED"],
-    #     operating_system_names: ["AMAZON_LINUX_2" # One of: ["AMAZON_LINUX_2", "UBUNTU_18_04", "UBUNTU_20_04", "UBUNTU_22_04", "UNKNOWN", "WINDOWS_10", "WINDOWS_11", "WINDOWS_7", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "RHEL_8", "ROCKY_8"]],
+    #     operating_system_names: ["AMAZON_LINUX_2" # One of: ["AMAZON_LINUX_2", "UBUNTU_18_04", "UBUNTU_20_04", "UBUNTU_22_04", "UNKNOWN", "WINDOWS_10", "WINDOWS_11", "WINDOWS_7", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "RHEL_8", "ROCKY_8"]],
     #     owner: "WorkSpaceApplicationOwner",
     #     max_results: 1,
     #     next_token: "PaginationToken"
@@ -1489,8 +1501,8 @@ module Aws::WorkSpaces
     #         name: "NonEmptyString",
     #         owner: "WorkSpaceApplicationOwner",
     #         state: "PENDING" # One of: ["PENDING", "ERROR", "AVAILABLE", "UNINSTALL_ONLY"],
-    #         supported_compute_type_names: ["VALUE" # One of: ["VALUE", "STANDARD", "PERFORMANCE", "POWER", "GRAPHICS", "POWERPRO", "GENERALPURPOSE_4XLARGE", "GENERALPURPOSE_8XLARGE", "GRAPHICSPRO", "GRAPHICS_G4DN", "GRAPHICSPRO_G4DN"]],
-    #         supported_operating_system_names: ["AMAZON_LINUX_2" # One of: ["AMAZON_LINUX_2", "UBUNTU_18_04", "UBUNTU_20_04", "UBUNTU_22_04", "UNKNOWN", "WINDOWS_10", "WINDOWS_11", "WINDOWS_7", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "RHEL_8", "ROCKY_8"]]
+    #         supported_compute_type_names: ["VALUE" # One of: ["VALUE", "STANDARD", "PERFORMANCE", "POWER", "GRAPHICS", "POWERPRO", "GENERALPURPOSE_4XLARGE", "GENERALPURPOSE_8XLARGE", "GRAPHICSPRO", "GRAPHICS_G4DN", "GRAPHICSPRO_G4DN", "GRAPHICS_G6_XLARGE", "GRAPHICS_G6_2XLARGE", "GRAPHICS_G6_4XLARGE", "GRAPHICS_G6_8XLARGE", "GRAPHICS_G6_16XLARGE", "GRAPHICS_GR6_4XLARGE", "GRAPHICS_GR6_8XLARGE", "GRAPHICS_G6F_LARGE", "GRAPHICS_G6F_XLARGE", "GRAPHICS_G6F_2XLARGE", "GRAPHICS_G6F_4XLARGE", "GRAPHICS_GR6F_4XLARGE", "GRAPHICS_G7_2XLARGE", "GRAPHICS_G7_4XLARGE", "GRAPHICS_G7_8XLARGE", "GRAPHICS_G7_12XLARGE"]],
+    #         supported_operating_system_names: ["AMAZON_LINUX_2" # One of: ["AMAZON_LINUX_2", "UBUNTU_18_04", "UBUNTU_20_04", "UBUNTU_22_04", "UNKNOWN", "WINDOWS_10", "WINDOWS_11", "WINDOWS_7", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "RHEL_8", "ROCKY_8"]]
     #       }
     #     ],
     #     next_token: "PaginationToken"
@@ -1526,7 +1538,7 @@ module Aws::WorkSpaces
     #         last_updated_time: Time.now,
     #         state: "PENDING_INSTALL" # One of: ["PENDING_INSTALL", "PENDING_INSTALL_DEPLOYMENT", "PENDING_UNINSTALL", "PENDING_UNINSTALL_DEPLOYMENT", "INSTALLING", "UNINSTALLING", "ERROR", "COMPLETED", "REMOVED"],
     #         state_reason: {
-    #           error_code: "ValidationError.InsufficientDiskSpace" # One of: ["ValidationError.InsufficientDiskSpace", "ValidationError.InsufficientMemory", "ValidationError.UnsupportedOperatingSystem", "DeploymentError.InternalServerError", "DeploymentError.WorkspaceUnreachable"],
+    #           error_code: "ValidationError.InsufficientDiskSpace" # One of: ["ValidationError.InsufficientDiskSpace", "ValidationError.InsufficientMemory", "ValidationError.UnsupportedOperatingSystem", "DeploymentError.InternalServerError", "DeploymentError.WorkspaceUnreachable", "ValidationError.ApplicationOldVersionExists"],
     #           error_message: "String2048"
     #         }
     #       }
@@ -1640,7 +1652,8 @@ module Aws::WorkSpaces
     #         resource_id: "NonEmptyString",
     #         client_properties: {
     #           reconnect_enabled: "ENABLED" # One of: ["ENABLED", "DISABLED"],
-    #           log_upload_enabled: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #           log_upload_enabled: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #           client_experience_policy: "ClientExperiencePolicy"
     #         }
     #       }
     #     ]
@@ -1651,7 +1664,7 @@ module Aws::WorkSpaces
       request.send_request(options)
     end
 
-    # <p>Retrieves a list of Amazon Connect client add-ins that have been created.</p>
+    # <p>Retrieves a list of Connect Customer client add-ins that have been created.</p>
     # @param [Hash, Types::DescribeConnectClientAddInsRequest] params
     # @option params [String] :resource_id
     #   <p>The directory identifier for which the client add-in is configured.</p>
@@ -1789,7 +1802,9 @@ module Aws::WorkSpaces
     #   {
     #     image_id: "WorkspaceImageId",
     #     infrastructure_configuration_arn: "InfrastructureConfigurationArn",
-    #     state: "PENDING" # One of: ["PENDING", "IN_PROGRESS", "COMPLETED", "ERROR"],
+    #     state: "PENDING" # One of: ["PENDING", "IN_PROGRESS", "PROCESSING_SOURCE_IMAGE", "IMAGE_TESTING_START", "UPDATING_OPERATING_SYSTEM", "IMAGE_COMPATIBILITY_CHECKING", "IMAGE_TESTING_GENERALIZATION", "CREATING_TEST_INSTANCE", "INSTALLING_COMPONENTS", "GENERALIZING", "VALIDATING", "PUBLISHING", "COMPLETED", "ERROR"],
+    #     state_message: "WorkflowStateMessage",
+    #     progress_percentage: 1,
     #     created: Time.now,
     #     last_updated_time: Time.now,
     #     image_source: {
@@ -1837,7 +1852,7 @@ module Aws::WorkSpaces
     #         image_id: "WorkspaceImageId",
     #         state: "PENDING_INSTALL" # One of: ["PENDING_INSTALL", "PENDING_INSTALL_DEPLOYMENT", "PENDING_UNINSTALL", "PENDING_UNINSTALL_DEPLOYMENT", "INSTALLING", "UNINSTALLING", "ERROR", "COMPLETED", "REMOVED"],
     #         state_reason: {
-    #           error_code: "ValidationError.InsufficientDiskSpace" # One of: ["ValidationError.InsufficientDiskSpace", "ValidationError.InsufficientMemory", "ValidationError.UnsupportedOperatingSystem", "DeploymentError.InternalServerError", "DeploymentError.WorkspaceUnreachable"],
+    #           error_code: "ValidationError.InsufficientDiskSpace" # One of: ["ValidationError.InsufficientDiskSpace", "ValidationError.InsufficientMemory", "ValidationError.UnsupportedOperatingSystem", "DeploymentError.InternalServerError", "DeploymentError.WorkspaceUnreachable", "ValidationError.ApplicationOldVersionExists"],
     #           error_message: "String2048"
     #         }
     #       }
@@ -1942,7 +1957,7 @@ module Aws::WorkSpaces
     #         last_updated_time: Time.now,
     #         state: "PENDING_INSTALL" # One of: ["PENDING_INSTALL", "PENDING_INSTALL_DEPLOYMENT", "PENDING_UNINSTALL", "PENDING_UNINSTALL_DEPLOYMENT", "INSTALLING", "UNINSTALLING", "ERROR", "COMPLETED", "REMOVED"],
     #         state_reason: {
-    #           error_code: "ValidationError.InsufficientDiskSpace" # One of: ["ValidationError.InsufficientDiskSpace", "ValidationError.InsufficientMemory", "ValidationError.UnsupportedOperatingSystem", "DeploymentError.InternalServerError", "DeploymentError.WorkspaceUnreachable"],
+    #           error_code: "ValidationError.InsufficientDiskSpace" # One of: ["ValidationError.InsufficientDiskSpace", "ValidationError.InsufficientMemory", "ValidationError.UnsupportedOperatingSystem", "DeploymentError.InternalServerError", "DeploymentError.WorkspaceUnreachable", "ValidationError.ApplicationOldVersionExists"],
     #           error_message: "String2048"
     #         },
     #         workspace_id: "WorkspaceId"
@@ -1962,7 +1977,7 @@ module Aws::WorkSpaces
     #   <p>The identifiers of the bundles. You cannot combine this parameter with any other filter.</p>
     # @option params [String] :owner
     #   <p>The owner of the bundles. You cannot combine this parameter with any other filter.</p>
-    #            <p>To describe the bundles provided by Amazon Web Services, specify <code>AMAZON</code>. 
+    #            <p>To describe the bundles provided by Amazon Web Services, specify <code>AMAZON</code>.
     #            To describe the bundles that belong to your account, don't specify a value.</p>
     # @option params [String] :next_token
     #   <p>The token for the next set of results. (You received this token from a previous call.)</p>
@@ -1991,7 +2006,7 @@ module Aws::WorkSpaces
     #           capacity: "NonEmptyString", # required
     #         },
     #         compute_type: {
-    #           name: "VALUE" # One of: ["VALUE", "STANDARD", "PERFORMANCE", "POWER", "GRAPHICS", "POWERPRO", "GENERALPURPOSE_4XLARGE", "GENERALPURPOSE_8XLARGE", "GRAPHICSPRO", "GRAPHICS_G4DN", "GRAPHICSPRO_G4DN"]
+    #           name: "VALUE" # One of: ["VALUE", "STANDARD", "PERFORMANCE", "POWER", "GRAPHICS", "POWERPRO", "GENERALPURPOSE_4XLARGE", "GENERALPURPOSE_8XLARGE", "GRAPHICSPRO", "GRAPHICS_G4DN", "GRAPHICSPRO_G4DN", "GRAPHICS_G6_XLARGE", "GRAPHICS_G6_2XLARGE", "GRAPHICS_G6_4XLARGE", "GRAPHICS_G6_8XLARGE", "GRAPHICS_G6_16XLARGE", "GRAPHICS_GR6_4XLARGE", "GRAPHICS_GR6_8XLARGE", "GRAPHICS_G6F_LARGE", "GRAPHICS_G6F_XLARGE", "GRAPHICS_G6F_2XLARGE", "GRAPHICS_G6F_4XLARGE", "GRAPHICS_GR6F_4XLARGE", "GRAPHICS_G7_2XLARGE", "GRAPHICS_G7_4XLARGE", "GRAPHICS_G7_8XLARGE", "GRAPHICS_G7_12XLARGE"]
     #         },
     #         last_updated_time: Time.now,
     #         creation_time: Time.now,
@@ -2047,6 +2062,7 @@ module Aws::WorkSpaces
     #         registration_code: "RegistrationCode",
     #         subnet_ids: ["SubnetId"],
     #         dns_ip_addresses: ["IpAddress"],
+    #         dns_ipv6_addresses: ["Ipv6Address"],
     #         customer_user_name: "UserName",
     #         iam_role_id: "ARN",
     #         directory_type: "SIMPLE_AD" # One of: ["SIMPLE_AD", "AD_CONNECTOR", "CUSTOMER_MANAGED", "AWS_IAM_IDENTITY_CENTER"],
@@ -2315,6 +2331,7 @@ module Aws::WorkSpaces
     #         directory_id: "DirectoryId",
     #         user_name: "UserName",
     #         ip_address: "IpAddress",
+    #         ipv6_address: "Ipv6Address",
     #         state: "PENDING" # One of: ["PENDING", "AVAILABLE", "IMPAIRED", "UNHEALTHY", "REBOOTING", "STARTING", "REBUILDING", "RESTORING", "MAINTENANCE", "ADMIN_MAINTENANCE", "TERMINATING", "TERMINATED", "SUSPENDED", "UPDATING", "STOPPING", "STOPPED", "ERROR"],
     #         bundle_id: "BundleId",
     #         subnet_id: "SubnetId",
@@ -2330,18 +2347,19 @@ module Aws::WorkSpaces
     #           running_mode_auto_stop_timeout_in_minutes: 1,
     #           root_volume_size_gib: 1,
     #           user_volume_size_gib: 1,
-    #           compute_type_name: "VALUE" # One of: ["VALUE", "STANDARD", "PERFORMANCE", "POWER", "GRAPHICS", "POWERPRO", "GENERALPURPOSE_4XLARGE", "GENERALPURPOSE_8XLARGE", "GRAPHICSPRO", "GRAPHICS_G4DN", "GRAPHICSPRO_G4DN"],
+    #           compute_type_name: "VALUE" # One of: ["VALUE", "STANDARD", "PERFORMANCE", "POWER", "GRAPHICS", "POWERPRO", "GENERALPURPOSE_4XLARGE", "GENERALPURPOSE_8XLARGE", "GRAPHICSPRO", "GRAPHICS_G4DN", "GRAPHICSPRO_G4DN", "GRAPHICS_G6_XLARGE", "GRAPHICS_G6_2XLARGE", "GRAPHICS_G6_4XLARGE", "GRAPHICS_G6_8XLARGE", "GRAPHICS_G6_16XLARGE", "GRAPHICS_GR6_4XLARGE", "GRAPHICS_GR6_8XLARGE", "GRAPHICS_G6F_LARGE", "GRAPHICS_G6F_XLARGE", "GRAPHICS_G6F_2XLARGE", "GRAPHICS_G6F_4XLARGE", "GRAPHICS_GR6F_4XLARGE", "GRAPHICS_G7_2XLARGE", "GRAPHICS_G7_4XLARGE", "GRAPHICS_G7_8XLARGE", "GRAPHICS_G7_12XLARGE"],
     #           protocols: ["PCOIP" # One of: ["PCOIP", "WSP"]],
-    #           operating_system_name: "AMAZON_LINUX_2" # One of: ["AMAZON_LINUX_2", "UBUNTU_18_04", "UBUNTU_20_04", "UBUNTU_22_04", "UNKNOWN", "WINDOWS_10", "WINDOWS_11", "WINDOWS_7", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "RHEL_8", "ROCKY_8"],
+    #           operating_system_name: "AMAZON_LINUX_2" # One of: ["AMAZON_LINUX_2", "UBUNTU_18_04", "UBUNTU_20_04", "UBUNTU_22_04", "UNKNOWN", "WINDOWS_10", "WINDOWS_11", "WINDOWS_7", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "RHEL_8", "ROCKY_8"],
     #           global_accelerator: {
     #             mode: "ENABLED_AUTO" # One of: ["ENABLED_AUTO", "DISABLED", "INHERITED"], # required
     #             preferred_protocol: "TCP" # One of: ["TCP", "NONE", "INHERITED"]
-    #           }
+    #           },
+    #           nested_virtualization_enabled: false
     #         },
     #         modification_states: [
     #           {
-    #             resource: "ROOT_VOLUME" # One of: ["ROOT_VOLUME", "USER_VOLUME", "COMPUTE_TYPE"],
-    #             state: "UPDATE_INITIATED" # One of: ["UPDATE_INITIATED", "UPDATE_IN_PROGRESS"]
+    #             resource: "ROOT_VOLUME" # One of: ["ROOT_VOLUME", "USER_VOLUME", "COMPUTE_TYPE", "PROTOCOL", "NESTED_VIRTUALIZATION"],
+    #             state: "UPDATE_INITIATED" # One of: ["UPDATE_INITIATED", "UPDATE_IN_PROGRESS", "UPDATE_FAILED"]
     #           }
     #         ],
     #         related_workspaces: [
@@ -2406,7 +2424,13 @@ module Aws::WorkSpaces
       request.send_request(options)
     end
 
-    # <p>Retrieves a list that describes the streaming sessions for a specified pool.</p>
+    # <note>
+    #             <p>End of support notice: On December 31, 2027, Amazon Web Services will end support for Amazon WorkSpaces Pools. After December 31, 2027,
+    # you will no longer be able to access the Amazon WorkSpaces Pools console or Amazon WorkSpaces Pools resources. For more information, see
+    # <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/wsp-pools-end-of-support.html">Amazon WorkSpaces Pools end of support</a>.
+    #  </p>
+    #          </note>
+    #          <p>Retrieves a list that describes the streaming sessions for a specified pool.</p>
     # @param [Hash, Types::DescribeWorkspacesPoolSessionsRequest] params
     # @option params [String] :pool_id
     #   <p>The identifier of the pool.</p>
@@ -2416,7 +2440,7 @@ module Aws::WorkSpaces
     #   <p>The maximum size of each page of results. The default value is 20 and the maximum value
     #            is 50.</p>
     # @option params [String] :next_token
-    #   <p>If you received a <code>NextToken</code> from a previous call that was paginated, 
+    #   <p>If you received a <code>NextToken</code> from a previous call that was paginated,
     #            provide this token to receive the next set of results.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -2454,7 +2478,13 @@ module Aws::WorkSpaces
       request.send_request(options)
     end
 
-    # <p>Describes the specified WorkSpaces Pools.</p>
+    # <note>
+    #             <p>End of support notice: On December 31, 2027, Amazon Web Services will end support for Amazon WorkSpaces Pools. After December 31, 2027,
+    # you will no longer be able to access the Amazon WorkSpaces Pools console or Amazon WorkSpaces Pools resources. For more information, see
+    # <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/wsp-pools-end-of-support.html">Amazon WorkSpaces Pools end of support</a>.
+    #  </p>
+    #          </note>
+    #          <p>Describes the specified WorkSpaces Pools.</p>
     # @param [Hash, Types::DescribeWorkspacesPoolsRequest] params
     # @option params [Array<String>] :pool_ids
     #   <p>The identifier of the WorkSpaces Pools.</p>
@@ -2463,7 +2493,7 @@ module Aws::WorkSpaces
     # @option params [Integer] :limit
     #   <p>The maximum number of items to return.</p>
     # @option params [String] :next_token
-    #   <p>If you received a <code>NextToken</code> from a previous call that was paginated, 
+    #   <p>If you received a <code>NextToken</code> from a previous call that was paginated,
     #            provide this token to receive the next set of results.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -2598,7 +2628,7 @@ module Aws::WorkSpaces
     #       last_updated_time: Time.now,
     #       state: "PENDING_INSTALL" # One of: ["PENDING_INSTALL", "PENDING_INSTALL_DEPLOYMENT", "PENDING_UNINSTALL", "PENDING_UNINSTALL_DEPLOYMENT", "INSTALLING", "UNINSTALLING", "ERROR", "COMPLETED", "REMOVED"],
     #       state_reason: {
-    #         error_code: "ValidationError.InsufficientDiskSpace" # One of: ["ValidationError.InsufficientDiskSpace", "ValidationError.InsufficientMemory", "ValidationError.UnsupportedOperatingSystem", "DeploymentError.InternalServerError", "DeploymentError.WorkspaceUnreachable"],
+    #         error_code: "ValidationError.InsufficientDiskSpace" # One of: ["ValidationError.InsufficientDiskSpace", "ValidationError.InsufficientMemory", "ValidationError.UnsupportedOperatingSystem", "DeploymentError.InternalServerError", "DeploymentError.WorkspaceUnreachable", "ValidationError.ApplicationOldVersionExists"],
     #         error_message: "String2048"
     #       },
     #       workspace_id: "WorkspaceId"
@@ -2840,7 +2870,7 @@ module Aws::WorkSpaces
     #   params = {
     #     image_name: "WorkspaceImageName", # required
     #     image_description: "WorkspaceImageDescription", # required
-    #     compute_type: "BASE" # One of: ["BASE", "GRAPHICS_G4DN"], # required
+    #     compute_type: "BASE" # One of: ["BASE", "GRAPHICS_G4DN", "GRAPHICS_G6", "GRAPHICS_G7"], # required
     #     protocol: "PCOIP" # One of: ["PCOIP", "DCV", "BYOP"], # required
     #     image_source: { # required
     #       # One of:
@@ -2864,7 +2894,7 @@ module Aws::WorkSpaces
     #   response.to_h #=>
     #   {
     #     image_id: "WorkspaceImageId",
-    #     state: "PENDING" # One of: ["PENDING", "IN_PROGRESS", "COMPLETED", "ERROR"]
+    #     state: "PENDING" # One of: ["PENDING", "IN_PROGRESS", "PROCESSING_SOURCE_IMAGE", "IMAGE_TESTING_START", "UPDATING_OPERATING_SYSTEM", "IMAGE_COMPATIBILITY_CHECKING", "IMAGE_TESTING_GENERALIZATION", "CREATING_TEST_INSTANCE", "INSTALLING_COMPONENTS", "GENERALIZING", "VALIDATING", "PUBLISHING", "COMPLETED", "ERROR"]
     #   }
     # @return [Types::ImportCustomWorkspaceImageResult]
     def import_custom_workspace_image(params = {}, options = {})
@@ -2872,9 +2902,9 @@ module Aws::WorkSpaces
       request.send_request(options)
     end
 
-    # <p>Imports the specified Windows 10 or 11 Bring Your Own License (BYOL) 
-    #          image into Amazon WorkSpaces. The image must be an already licensed Amazon EC2 image that is 
-    #          in your Amazon Web Services account, and you must own the image. For more information about 
+    # <p>Imports the specified Windows 10 or 11 Bring Your Own License (BYOL)
+    #          image into Amazon WorkSpaces. The image must be an already licensed Amazon EC2 image that is
+    #          in your Amazon Web Services account, and you must own the image. For more information about
     #          creating BYOL images, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html"> Bring Your Own Windows
     #             Desktop Licenses</a>.</p>
     # @param [Hash, Types::ImportWorkspaceImageRequest] params
@@ -2882,12 +2912,12 @@ module Aws::WorkSpaces
     #   <p>The identifier of the EC2 image.</p>
     # @option params [String] :ingestion_process
     #   <p>The ingestion process to be used when importing the image, depending on which protocol
-    #            you want to use for your BYOL Workspace image, either PCoIP, WSP, or 
-    #            bring your own protocol (BYOP). To use DCV, specify a value that ends in 
-    #            <code>_WSP</code>. To use PCoIP, specify a value that does not end in <code>_WSP</code>. 
+    #            you want to use for your BYOL Workspace image, either PCoIP, WSP, or
+    #            bring your own protocol (BYOP). To use DCV, specify a value that ends in
+    #            <code>_WSP</code>. To use PCoIP, specify a value that does not end in <code>_WSP</code>.
     #            To use BYOP, specify a value that ends in <code>_BYOP</code>.</p>
-    #            <p>For non-GPU-enabled bundles (bundles other than Graphics or GraphicsPro), specify 
-    #            <code>BYOL_REGULAR</code>, <code>BYOL_REGULAR_WSP</code>, or <code>BYOL_REGULAR_BYOP</code>, 
+    #            <p>For non-GPU-enabled bundles (bundles other than Graphics or GraphicsPro), specify
+    #            <code>BYOL_REGULAR</code>, <code>BYOL_REGULAR_WSP</code>, or <code>BYOL_REGULAR_BYOP</code>,
     #            depending on the protocol.</p>
     #            <note>
     #               <p>The <code>BYOL_REGULAR_BYOP</code> and <code>BYOL_GRAPHICS_G4DN_BYOP</code> values
@@ -3027,6 +3057,10 @@ module Aws::WorkSpaces
     #          <p>For available migration scenarios, details about what happens during migration, and best
     #          practices, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/migrate-workspaces.html">Migrate a
     #          WorkSpace</a>.</p>
+    #          <note>
+    #             <p>If the source WorkSpace has nested virtualization enabled and the target bundle does
+    #             not support nested virtualization, the migration fails.</p>
+    #          </note>
     # @param [Hash, Types::MigrateWorkspaceRequest] params
     # @option params [String] :source_workspace_id
     #   <p>The identifier of the WorkSpace to migrate from.</p>
@@ -3120,7 +3154,8 @@ module Aws::WorkSpaces
     #     resource_id: "NonEmptyString", # required
     #     client_properties: { # required
     #       reconnect_enabled: "ENABLED" # One of: ["ENABLED", "DISABLED"],
-    #       log_upload_enabled: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #       log_upload_enabled: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #       client_experience_policy: "ClientExperiencePolicy"
     #     }
     #   }
     #   options = {}
@@ -3158,8 +3193,8 @@ module Aws::WorkSpaces
       request.send_request(options)
     end
 
-    # <p>Modifies multiple properties related to SAML 2.0 authentication, including the enablement status, 
-    #          user access URL, and relay state parameter name that are used for configuring federation with an 
+    # <p>Modifies multiple properties related to SAML 2.0 authentication, including the enablement status,
+    #          user access URL, and relay state parameter name that are used for configuring federation with an
     #          SAML 2.0 identity provider.</p>
     # @param [Hash, Types::ModifySamlPropertiesRequest] params
     # @option params [String] :resource_id
@@ -3367,13 +3402,14 @@ module Aws::WorkSpaces
     #       running_mode_auto_stop_timeout_in_minutes: 1,
     #       root_volume_size_gib: 1,
     #       user_volume_size_gib: 1,
-    #       compute_type_name: "VALUE" # One of: ["VALUE", "STANDARD", "PERFORMANCE", "POWER", "GRAPHICS", "POWERPRO", "GENERALPURPOSE_4XLARGE", "GENERALPURPOSE_8XLARGE", "GRAPHICSPRO", "GRAPHICS_G4DN", "GRAPHICSPRO_G4DN"],
+    #       compute_type_name: "VALUE" # One of: ["VALUE", "STANDARD", "PERFORMANCE", "POWER", "GRAPHICS", "POWERPRO", "GENERALPURPOSE_4XLARGE", "GENERALPURPOSE_8XLARGE", "GRAPHICSPRO", "GRAPHICS_G4DN", "GRAPHICSPRO_G4DN", "GRAPHICS_G6_XLARGE", "GRAPHICS_G6_2XLARGE", "GRAPHICS_G6_4XLARGE", "GRAPHICS_G6_8XLARGE", "GRAPHICS_G6_16XLARGE", "GRAPHICS_GR6_4XLARGE", "GRAPHICS_GR6_8XLARGE", "GRAPHICS_G6F_LARGE", "GRAPHICS_G6F_XLARGE", "GRAPHICS_G6F_2XLARGE", "GRAPHICS_G6F_4XLARGE", "GRAPHICS_GR6F_4XLARGE", "GRAPHICS_G7_2XLARGE", "GRAPHICS_G7_4XLARGE", "GRAPHICS_G7_8XLARGE", "GRAPHICS_G7_12XLARGE"],
     #       protocols: ["PCOIP" # One of: ["PCOIP", "WSP"]],
-    #       operating_system_name: "AMAZON_LINUX_2" # One of: ["AMAZON_LINUX_2", "UBUNTU_18_04", "UBUNTU_20_04", "UBUNTU_22_04", "UNKNOWN", "WINDOWS_10", "WINDOWS_11", "WINDOWS_7", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "RHEL_8", "ROCKY_8"],
+    #       operating_system_name: "AMAZON_LINUX_2" # One of: ["AMAZON_LINUX_2", "UBUNTU_18_04", "UBUNTU_20_04", "UBUNTU_22_04", "UNKNOWN", "WINDOWS_10", "WINDOWS_11", "WINDOWS_7", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "RHEL_8", "ROCKY_8"],
     #       global_accelerator: {
     #         mode: "ENABLED_AUTO" # One of: ["ENABLED_AUTO", "DISABLED", "INHERITED"], # required
     #         preferred_protocol: "TCP" # One of: ["TCP", "NONE", "INHERITED"]
-    #       }
+    #       },
+    #       nested_virtualization_enabled: false
     #     },
     #     data_replication: "NO_REPLICATION" # One of: ["NO_REPLICATION", "PRIMARY_AS_SOURCE"]
     #   }
@@ -3417,7 +3453,7 @@ module Aws::WorkSpaces
 
     # <p>Reboots the specified WorkSpaces.</p>
     #          <p>You cannot reboot a WorkSpace unless its state is <code>AVAILABLE</code>,
-    #          <code>UNHEALTHY</code>, or <code>REBOOTING</code>. Reboot a WorkSpace in the <code>REBOOTING</code> 
+    #          <code>UNHEALTHY</code>, or <code>REBOOTING</code>. Reboot a WorkSpace in the <code>REBOOTING</code>
     #          state only if your WorkSpace has been stuck in the <code>REBOOTING</code> state for over 20 minutes.</p>
     #          <p>This operation is asynchronous and returns before the WorkSpaces have rebooted.</p>
     # @param [Hash, Types::RebootWorkspacesRequest] params
@@ -3681,8 +3717,14 @@ module Aws::WorkSpaces
       request.send_request(options)
     end
 
-    # <p>Starts the specified pool.</p>
-    #          <p>You cannot start a pool unless it has a running mode of 
+    # <note>
+    #             <p>End of support notice: On December 31, 2027, Amazon Web Services will end support for Amazon WorkSpaces Pools. After December 31, 2027,
+    # you will no longer be able to access the Amazon WorkSpaces Pools console or Amazon WorkSpaces Pools resources. For more information, see
+    # <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/wsp-pools-end-of-support.html">Amazon WorkSpaces Pools end of support</a>.
+    #  </p>
+    #          </note>
+    #          <p>Starts the specified pool.</p>
+    #          <p>You cannot start a pool unless it has a running mode of
     #          <code>AutoStop</code> and a state of <code>STOPPED</code>.</p>
     # @param [Hash, Types::StartWorkspacesPoolRequest] params
     # @option params [String] :pool_id
@@ -3736,8 +3778,14 @@ module Aws::WorkSpaces
       request.send_request(options)
     end
 
-    # <p>Stops the specified pool.</p>
-    #          <p>You cannot stop a WorkSpace pool unless it has a running mode of <code>AutoStop</code> 
+    # <note>
+    #             <p>End of support notice: On December 31, 2027, Amazon Web Services will end support for Amazon WorkSpaces Pools. After December 31, 2027,
+    # you will no longer be able to access the Amazon WorkSpaces Pools console or Amazon WorkSpaces Pools resources. For more information, see
+    # <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/wsp-pools-end-of-support.html">Amazon WorkSpaces Pools end of support</a>.
+    #  </p>
+    #          </note>
+    #          <p>Stops the specified pool.</p>
+    #          <p>You cannot stop a WorkSpace pool unless it has a running mode of <code>AutoStop</code>
     #          and a state of <code>AVAILABLE</code>, <code>IMPAIRED</code>, <code>UNHEALTHY</code>, or <code>ERROR</code>.</p>
     # @param [Hash, Types::StopWorkspacesPoolRequest] params
     # @option params [String] :pool_id
@@ -3760,7 +3808,7 @@ module Aws::WorkSpaces
     # <p>Terminates the specified WorkSpaces.</p>
     #          <important>
     #             <p>Terminating a WorkSpace is a permanent action and cannot be undone. The user's data
-    #             is destroyed. If you need to archive any user data, contact Amazon Web ServicesSupport before
+    #             is destroyed. If you need to archive any user data, contact Amazon Web Services Support before
     #             terminating the WorkSpace.</p>
     #          </important>
     #          <p>You can terminate a WorkSpace that is in any state except <code>SUSPENDED</code>.</p>
@@ -3812,7 +3860,13 @@ module Aws::WorkSpaces
       request.send_request(options)
     end
 
-    # <p>Terminates the specified pool.</p>
+    # <note>
+    #             <p>End of support notice: On December 31, 2027, Amazon Web Services will end support for Amazon WorkSpaces Pools. After December 31, 2027,
+    # you will no longer be able to access the Amazon WorkSpaces Pools console or Amazon WorkSpaces Pools resources. For more information, see
+    # <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/wsp-pools-end-of-support.html">Amazon WorkSpaces Pools end of support</a>.
+    #  </p>
+    #          </note>
+    #          <p>Terminates the specified pool.</p>
     # @param [Hash, Types::TerminateWorkspacesPoolRequest] params
     # @option params [String] :pool_id
     #   <p>The identifier of the pool.</p>
@@ -3831,7 +3885,13 @@ module Aws::WorkSpaces
       request.send_request(options)
     end
 
-    # <p>Terminates the pool session.</p>
+    # <note>
+    #             <p>End of support notice: On December 31, 2027, Amazon Web Services will end support for Amazon WorkSpaces Pools. After December 31, 2027,
+    # you will no longer be able to access the Amazon WorkSpaces Pools console or Amazon WorkSpaces Pools resources. For more information, see
+    # <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/wsp-pools-end-of-support.html">Amazon WorkSpaces Pools end of support</a>.
+    #  </p>
+    #          </note>
+    #          <p>Terminates the pool session.</p>
     # @param [Hash, Types::TerminateWorkspacesPoolSessionRequest] params
     # @option params [String] :session_id
     #   <p>The identifier of the pool session.</p>
@@ -3850,8 +3910,8 @@ module Aws::WorkSpaces
       request.send_request(options)
     end
 
-    # <p>Updates a Amazon Connect client add-in. Use this action to update the name and
-    #          endpoint URL of a Amazon Connect client add-in.</p>
+    # <p>Updates a Connect Customer client add-in. Use this action to update the name and
+    #          endpoint URL of a Connect Customer client add-in.</p>
     # @param [Hash, Types::UpdateConnectClientAddInRequest] params
     # @option params [String] :add_in_id
     #   <p>The identifier of the client add-in to update.</p>
@@ -3860,7 +3920,7 @@ module Aws::WorkSpaces
     # @option params [String] :name
     #   <p>The name of the client add-in.</p>
     # @option params [String] :url
-    #   <p>The endpoint URL of the Amazon Connect client add-in.</p>
+    #   <p>The endpoint URL of the Connect Customer client add-in.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     add_in_id: "AmazonUuid", # required
@@ -3953,12 +4013,12 @@ module Aws::WorkSpaces
       request.send_request(options)
     end
 
-    # <p>Updates a WorkSpace bundle with a new image. For more information about updating WorkSpace bundles, see 
+    # <p>Updates a WorkSpace bundle with a new image. For more information about updating WorkSpace bundles, see
     #          <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/update-custom-bundle.html">
     #             Update a Custom WorkSpaces Bundle</a>.</p>
     #          <important>
-    #             <p>Existing WorkSpaces aren't automatically updated when you update the bundle that they're 
-    #             based on. To update existing WorkSpaces that are based on a bundle that you've updated, you 
+    #             <p>Existing WorkSpaces aren't automatically updated when you update the bundle that they're
+    #             based on. To update existing WorkSpaces that are based on a bundle that you've updated, you
     #             must either rebuild the WorkSpaces or delete and recreate them.</p>
     #          </important>
     # @param [Hash, Types::UpdateWorkspaceBundleRequest] params
@@ -3989,7 +4049,7 @@ module Aws::WorkSpaces
     #          <p>After an image has been shared, the recipient account can copy the image to other
     #          Regions as needed.</p>
     #          <p>In the China (Ningxia) Region, you can copy images only within the same Region.</p>
-    #          <p>In Amazon Web Services GovCloud (US), to copy images to and from other Regions, contact Amazon Web ServicesSupport.</p>
+    #          <p>In Amazon Web Services GovCloud (US), to copy images to and from other Regions, contact Amazon Web Services Support.</p>
     #          <p>For more information about sharing images, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/share-custom-image.html"> Share or Unshare a Custom
     #             WorkSpaces Image</a>.</p>
     #          <note>
@@ -4001,7 +4061,7 @@ module Aws::WorkSpaces
     #                <li>
     #                   <p>Sharing Bring Your Own License (BYOL) images across Amazon Web Services accounts
     #                   isn't supported at this time in Amazon Web Services GovCloud (US). To share BYOL images
-    #                   across accounts in Amazon Web Services GovCloud (US), contact Amazon Web ServicesSupport.</p>
+    #                   across accounts in Amazon Web Services GovCloud (US), contact Amazon Web Services Support.</p>
     #                </li>
     #             </ul>
     #          </note>
@@ -4034,7 +4094,13 @@ module Aws::WorkSpaces
       request.send_request(options)
     end
 
-    # <p>Updates the specified pool.</p>
+    # <note>
+    #             <p>End of support notice: On December 31, 2027, Amazon Web Services will end support for Amazon WorkSpaces Pools. After December 31, 2027,
+    # you will no longer be able to access the Amazon WorkSpaces Pools console or Amazon WorkSpaces Pools resources. For more information, see
+    # <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/wsp-pools-end-of-support.html">Amazon WorkSpaces Pools end of support</a>.
+    #  </p>
+    #          </note>
+    #          <p>Updates the specified pool.</p>
     # @param [Hash, Types::UpdateWorkspacesPoolRequest] params
     # @option params [String] :pool_id
     #   <p>The identifier of the specified pool to update.</p>

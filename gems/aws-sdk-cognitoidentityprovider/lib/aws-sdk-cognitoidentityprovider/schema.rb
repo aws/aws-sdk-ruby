@@ -7,6 +7,7 @@ module Aws::CognitoIdentityProvider
   module Schema
 
     AWSAccountIdType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cognitoidentityprovider#AWSAccountIdType", name: "AWSAccountIdType", traits: {"smithy.api#length" => {"min" => 0, "max" => 12}, "smithy.api#pattern" => "^[0-9]+$"})
+    AccessDeniedException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#AccessDeniedException", name: "AccessDeniedException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 403})
     AccessTokenValidityType = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.cognitoidentityprovider#AccessTokenValidityType", name: "AccessTokenValidityType", traits: {"smithy.api#range" => {"min" => 1, "max" => 86400}})
     AccountRecoverySettingType = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#AccountRecoverySettingType", name: "AccountRecoverySettingType")
     AccountTakeoverActionNotifyType = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.cognitoidentityprovider#AccountTakeoverActionNotifyType", name: "AccountTakeoverActionNotifyType", traits: {"smithy.api#default" => false})
@@ -14,8 +15,16 @@ module Aws::CognitoIdentityProvider
     AccountTakeoverActionsType = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#AccountTakeoverActionsType", name: "AccountTakeoverActionsType")
     AccountTakeoverEventActionType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cognitoidentityprovider#AccountTakeoverEventActionType", name: "AccountTakeoverEventActionType")
     AccountTakeoverRiskConfigurationType = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#AccountTakeoverRiskConfigurationType", name: "AccountTakeoverRiskConfigurationType")
+    AcrConfigurationType = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.cognitoidentityprovider#AcrConfigurationType", name: "AcrConfigurationType", traits: {"smithy.api#length" => {"min" => 0, "max" => 4}})
+    AcrLevelConfigType = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#AcrLevelConfigType", name: "AcrLevelConfigType")
+    AcrLevelKeyType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cognitoidentityprovider#AcrLevelKeyType", name: "AcrLevelKeyType", traits: {"smithy.api#pattern" => "^Level[1-4]$"})
+    AcrMappingKeyType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cognitoidentityprovider#AcrMappingKeyType", name: "AcrMappingKeyType", traits: {"smithy.api#pattern" => "^Level[1-4]$"})
+    AcrMappingType = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.cognitoidentityprovider#AcrMappingType", name: "AcrMappingType", traits: {"smithy.api#length" => {"min" => 0, "max" => 4}})
+    AcrValueType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cognitoidentityprovider#AcrValueType", name: "AcrValueType", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[\\x21\\x23-\\x5B\\x5D-\\x7E]+$"})
     AddCustomAttributesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#AddCustomAttributesRequest", name: "AddCustomAttributesRequest")
     AddCustomAttributesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#AddCustomAttributesResponse", name: "AddCustomAttributesResponse")
+    AddUserPoolClientSecretRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#AddUserPoolClientSecretRequest", name: "AddUserPoolClientSecretRequest")
+    AddUserPoolClientSecretResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#AddUserPoolClientSecretResponse", name: "AddUserPoolClientSecretResponse")
     AdminAddUserToGroupRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#AdminAddUserToGroupRequest", name: "AdminAddUserToGroupRequest")
     AdminConfirmSignUpRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#AdminConfirmSignUpRequest", name: "AdminConfirmSignUpRequest")
     AdminConfirmSignUpResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#AdminConfirmSignUpResponse", name: "AdminConfirmSignUpResponse")
@@ -23,6 +32,8 @@ module Aws::CognitoIdentityProvider
     AdminCreateUserRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#AdminCreateUserRequest", name: "AdminCreateUserRequest")
     AdminCreateUserResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#AdminCreateUserResponse", name: "AdminCreateUserResponse")
     AdminCreateUserUnusedAccountValidityDaysType = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.cognitoidentityprovider#AdminCreateUserUnusedAccountValidityDaysType", name: "AdminCreateUserUnusedAccountValidityDaysType", traits: {"smithy.api#default" => 0, "smithy.api#range" => {"min" => 0, "max" => 365}})
+    AdminDeleteSoftwareTokenRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#AdminDeleteSoftwareTokenRequest", name: "AdminDeleteSoftwareTokenRequest")
+    AdminDeleteSoftwareTokenResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#AdminDeleteSoftwareTokenResponse", name: "AdminDeleteSoftwareTokenResponse")
     AdminDeleteUserAttributesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#AdminDeleteUserAttributesRequest", name: "AdminDeleteUserAttributesRequest")
     AdminDeleteUserAttributesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#AdminDeleteUserAttributesResponse", name: "AdminDeleteUserAttributesResponse")
     AdminDeleteUserRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#AdminDeleteUserRequest", name: "AdminDeleteUserRequest")
@@ -35,6 +46,8 @@ module Aws::CognitoIdentityProvider
     AdminForgetDeviceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#AdminForgetDeviceRequest", name: "AdminForgetDeviceRequest")
     AdminGetDeviceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#AdminGetDeviceRequest", name: "AdminGetDeviceRequest")
     AdminGetDeviceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#AdminGetDeviceResponse", name: "AdminGetDeviceResponse")
+    AdminGetUserAuthFactorsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#AdminGetUserAuthFactorsRequest", name: "AdminGetUserAuthFactorsRequest")
+    AdminGetUserAuthFactorsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#AdminGetUserAuthFactorsResponse", name: "AdminGetUserAuthFactorsResponse")
     AdminGetUserRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#AdminGetUserRequest", name: "AdminGetUserRequest")
     AdminGetUserResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#AdminGetUserResponse", name: "AdminGetUserResponse")
     AdminInitiateAuthRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#AdminInitiateAuthRequest", name: "AdminInitiateAuthRequest")
@@ -72,7 +85,7 @@ module Aws::CognitoIdentityProvider
     AliasAttributeType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cognitoidentityprovider#AliasAttributeType", name: "AliasAttributeType")
     AliasAttributesListType = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cognitoidentityprovider#AliasAttributesListType", name: "AliasAttributesListType")
     AliasExistsException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#AliasExistsException", name: "AliasExistsException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
-    AllowedFirstAuthFactorsListType = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cognitoidentityprovider#AllowedFirstAuthFactorsListType", name: "AllowedFirstAuthFactorsListType", traits: {"smithy.api#length" => {"min" => 1, "max" => 4}})
+    AllowedFirstAuthFactorsListType = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cognitoidentityprovider#AllowedFirstAuthFactorsListType", name: "AllowedFirstAuthFactorsListType", traits: {"smithy.api#length" => {"min" => 1, "max" => 5}})
     AnalyticsConfigurationType = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#AnalyticsConfigurationType", name: "AnalyticsConfigurationType")
     AnalyticsMetadataType = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#AnalyticsMetadataType", name: "AnalyticsMetadataType")
     ArnType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cognitoidentityprovider#ArnType", name: "ArnType", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "^arn:[\\w+=/,.@-]+:[\\w+=/,.@-]+:([\\w+=/,.@-]*)?:[0-9]+:[\\w+=/,.@-]+(:[\\w+=/,.@-]+)?(:[\\w+=/,.@-]+)?$"})
@@ -88,7 +101,7 @@ module Aws::CognitoIdentityProvider
     AttributeMappingKeyType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cognitoidentityprovider#AttributeMappingKeyType", name: "AttributeMappingKeyType", traits: {"smithy.api#length" => {"min" => 1, "max" => 32}})
     AttributeMappingType = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.cognitoidentityprovider#AttributeMappingType", name: "AttributeMappingType")
     AttributeNameListType = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cognitoidentityprovider#AttributeNameListType", name: "AttributeNameListType")
-    AttributeNameType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cognitoidentityprovider#AttributeNameType", name: "AttributeNameType", traits: {"smithy.api#length" => {"min" => 1, "max" => 32}, "smithy.api#pattern" => "^[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}]+$"})
+    AttributeNameType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cognitoidentityprovider#AttributeNameType", name: "AttributeNameType", traits: {"smithy.api#length" => {"min" => 1, "max" => 32}, "smithy.api#pattern" => "^[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}\\t\\n\\r ]+$"})
     AttributeType = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#AttributeType", name: "AttributeType")
     AttributeValueType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cognitoidentityprovider#AttributeValueType", name: "AttributeValueType", traits: {"smithy.api#length" => {"min" => 0, "max" => 2048}, "smithy.api#sensitive" => {}})
     AttributesRequireVerificationBeforeUpdateType = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cognitoidentityprovider#AttributesRequireVerificationBeforeUpdateType", name: "AttributesRequireVerificationBeforeUpdateType")
@@ -114,12 +127,16 @@ module Aws::CognitoIdentityProvider
     ChallengeResponsesType = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.cognitoidentityprovider#ChallengeResponsesType", name: "ChallengeResponsesType", traits: {"smithy.api#sensitive" => {}})
     ChangePasswordRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#ChangePasswordRequest", name: "ChangePasswordRequest")
     ChangePasswordResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#ChangePasswordResponse", name: "ChangePasswordResponse")
+    ClientAuthenticationResultType = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#ClientAuthenticationResultType", name: "ClientAuthenticationResultType")
     ClientIdType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cognitoidentityprovider#ClientIdType", name: "ClientIdType", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[\\w+]+$", "smithy.api#sensitive" => {}})
     ClientMetadataType = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.cognitoidentityprovider#ClientMetadataType", name: "ClientMetadataType")
     ClientNameType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cognitoidentityprovider#ClientNameType", name: "ClientNameType", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[\\w\\s+=,.@-]+$"})
     ClientPermissionListType = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cognitoidentityprovider#ClientPermissionListType", name: "ClientPermissionListType")
     ClientPermissionType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cognitoidentityprovider#ClientPermissionType", name: "ClientPermissionType", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}})
-    ClientSecretType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cognitoidentityprovider#ClientSecretType", name: "ClientSecretType", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[\\w+]+$", "smithy.api#sensitive" => {}})
+    ClientSecretDescriptorListType = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cognitoidentityprovider#ClientSecretDescriptorListType", name: "ClientSecretDescriptorListType")
+    ClientSecretDescriptorType = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#ClientSecretDescriptorType", name: "ClientSecretDescriptorType")
+    ClientSecretIdType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cognitoidentityprovider#ClientSecretIdType", name: "ClientSecretIdType", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}})
+    ClientSecretType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cognitoidentityprovider#ClientSecretType", name: "ClientSecretType", traits: {"smithy.api#length" => {"min" => 24, "max" => 64}, "smithy.api#pattern" => "^[\\w+]+$", "smithy.api#sensitive" => {}})
     CloudWatchLogsConfigurationType = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#CloudWatchLogsConfigurationType", name: "CloudWatchLogsConfigurationType")
     CodeDeliveryDetailsListType = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cognitoidentityprovider#CodeDeliveryDetailsListType", name: "CodeDeliveryDetailsListType")
     CodeDeliveryDetailsType = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#CodeDeliveryDetailsType", name: "CodeDeliveryDetailsType")
@@ -158,6 +175,8 @@ module Aws::CognitoIdentityProvider
     CreateUserPoolClientResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#CreateUserPoolClientResponse", name: "CreateUserPoolClientResponse")
     CreateUserPoolDomainRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#CreateUserPoolDomainRequest", name: "CreateUserPoolDomainRequest")
     CreateUserPoolDomainResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#CreateUserPoolDomainResponse", name: "CreateUserPoolDomainResponse")
+    CreateUserPoolReplicaRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#CreateUserPoolReplicaRequest", name: "CreateUserPoolReplicaRequest")
+    CreateUserPoolReplicaResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#CreateUserPoolReplicaResponse", name: "CreateUserPoolReplicaResponse")
     CreateUserPoolRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#CreateUserPoolRequest", name: "CreateUserPoolRequest")
     CreateUserPoolResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#CreateUserPoolResponse", name: "CreateUserPoolResponse")
     CustomAttributeNameType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cognitoidentityprovider#CustomAttributeNameType", name: "CustomAttributeNameType", traits: {"smithy.api#length" => {"min" => 1, "max" => 20}, "smithy.api#pattern" => "^[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}]+$"})
@@ -177,8 +196,12 @@ module Aws::CognitoIdentityProvider
     DeleteUserAttributesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#DeleteUserAttributesRequest", name: "DeleteUserAttributesRequest")
     DeleteUserAttributesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#DeleteUserAttributesResponse", name: "DeleteUserAttributesResponse")
     DeleteUserPoolClientRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#DeleteUserPoolClientRequest", name: "DeleteUserPoolClientRequest")
+    DeleteUserPoolClientSecretRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#DeleteUserPoolClientSecretRequest", name: "DeleteUserPoolClientSecretRequest")
+    DeleteUserPoolClientSecretResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#DeleteUserPoolClientSecretResponse", name: "DeleteUserPoolClientSecretResponse")
     DeleteUserPoolDomainRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#DeleteUserPoolDomainRequest", name: "DeleteUserPoolDomainRequest")
     DeleteUserPoolDomainResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#DeleteUserPoolDomainResponse", name: "DeleteUserPoolDomainResponse")
+    DeleteUserPoolReplicaRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#DeleteUserPoolReplicaRequest", name: "DeleteUserPoolReplicaRequest")
+    DeleteUserPoolReplicaResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#DeleteUserPoolReplicaResponse", name: "DeleteUserPoolReplicaResponse")
     DeleteUserPoolRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#DeleteUserPoolRequest", name: "DeleteUserPoolRequest")
     DeleteUserRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#DeleteUserRequest", name: "DeleteUserRequest")
     DeleteWebAuthnCredentialRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#DeleteWebAuthnCredentialRequest", name: "DeleteWebAuthnCredentialRequest")
@@ -196,6 +219,8 @@ module Aws::CognitoIdentityProvider
     DescribeResourceServerResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#DescribeResourceServerResponse", name: "DescribeResourceServerResponse")
     DescribeRiskConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#DescribeRiskConfigurationRequest", name: "DescribeRiskConfigurationRequest")
     DescribeRiskConfigurationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#DescribeRiskConfigurationResponse", name: "DescribeRiskConfigurationResponse")
+    DescribeTermsByClientRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#DescribeTermsByClientRequest", name: "DescribeTermsByClientRequest")
+    DescribeTermsByClientResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#DescribeTermsByClientResponse", name: "DescribeTermsByClientResponse")
     DescribeTermsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#DescribeTermsRequest", name: "DescribeTermsRequest")
     DescribeTermsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#DescribeTermsResponse", name: "DescribeTermsResponse")
     DescribeUserImportJobRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#DescribeUserImportJobRequest", name: "DescribeUserImportJobRequest")
@@ -236,6 +261,9 @@ module Aws::CognitoIdentityProvider
     EmailVerificationSubjectByLinkType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cognitoidentityprovider#EmailVerificationSubjectByLinkType", name: "EmailVerificationSubjectByLinkType", traits: {"smithy.api#length" => {"min" => 1, "max" => 140}, "smithy.api#pattern" => "^[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}\\s]+$"})
     EmailVerificationSubjectType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cognitoidentityprovider#EmailVerificationSubjectType", name: "EmailVerificationSubjectType", traits: {"smithy.api#length" => {"min" => 1, "max" => 140}, "smithy.api#pattern" => "^[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}\\s]+$"})
     EnableSoftwareTokenMFAException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#EnableSoftwareTokenMFAException", name: "EnableSoftwareTokenMFAException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
+    EncryptionKeyArnType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cognitoidentityprovider#EncryptionKeyArnType", name: "EncryptionKeyArnType", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "^arn:[\\w+=/,.@-]+:[\\w+=/,.@-]+:([\\w+=/,.@-]*)?:[0-9]+:[\\w+=/,.@-]+(:[\\w+=/,.@-]+)?(:[\\w+=/,.@-]+)?$"})
+    EncryptionKeyType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cognitoidentityprovider#EncryptionKeyType", name: "EncryptionKeyType")
+    EumsSmsConfigurationType = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#EumsSmsConfigurationType", name: "EumsSmsConfigurationType")
     EventContextDataType = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#EventContextDataType", name: "EventContextDataType")
     EventFeedbackType = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#EventFeedbackType", name: "EventFeedbackType")
     EventFilterType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cognitoidentityprovider#EventFilterType", name: "EventFilterType")
@@ -248,6 +276,7 @@ module Aws::CognitoIdentityProvider
     ExpiredCodeException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#ExpiredCodeException", name: "ExpiredCodeException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     ExplicitAuthFlowsListType = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cognitoidentityprovider#ExplicitAuthFlowsListType", name: "ExplicitAuthFlowsListType")
     ExplicitAuthFlowsType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cognitoidentityprovider#ExplicitAuthFlowsType", name: "ExplicitAuthFlowsType")
+    FailoverType = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#FailoverType", name: "FailoverType")
     FeatureType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cognitoidentityprovider#FeatureType", name: "FeatureType")
     FeatureUnavailableInTierException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#FeatureUnavailableInTierException", name: "FeatureUnavailableInTierException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 403})
     FeedbackValueType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cognitoidentityprovider#FeedbackValueType", name: "FeedbackValueType")
@@ -260,6 +289,8 @@ module Aws::CognitoIdentityProvider
     GenerateSecret = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.cognitoidentityprovider#GenerateSecret", name: "GenerateSecret", traits: {"smithy.api#default" => false})
     GetCSVHeaderRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#GetCSVHeaderRequest", name: "GetCSVHeaderRequest")
     GetCSVHeaderResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#GetCSVHeaderResponse", name: "GetCSVHeaderResponse")
+    GetClientTokenRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#GetClientTokenRequest", name: "GetClientTokenRequest")
+    GetClientTokenResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#GetClientTokenResponse", name: "GetClientTokenResponse")
     GetDeviceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#GetDeviceRequest", name: "GetDeviceRequest")
     GetDeviceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#GetDeviceResponse", name: "GetDeviceResponse")
     GetGroupRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#GetGroupRequest", name: "GetGroupRequest")
@@ -268,6 +299,8 @@ module Aws::CognitoIdentityProvider
     GetIdentityProviderByIdentifierResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#GetIdentityProviderByIdentifierResponse", name: "GetIdentityProviderByIdentifierResponse")
     GetLogDeliveryConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#GetLogDeliveryConfigurationRequest", name: "GetLogDeliveryConfigurationRequest")
     GetLogDeliveryConfigurationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#GetLogDeliveryConfigurationResponse", name: "GetLogDeliveryConfigurationResponse")
+    GetProvisionedLimitRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#GetProvisionedLimitRequest", name: "GetProvisionedLimitRequest")
+    GetProvisionedLimitResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#GetProvisionedLimitResponse", name: "GetProvisionedLimitResponse")
     GetSigningCertificateRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#GetSigningCertificateRequest", name: "GetSigningCertificateRequest")
     GetSigningCertificateResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#GetSigningCertificateResponse", name: "GetSigningCertificateResponse")
     GetTokensFromRefreshTokenRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#GetTokensFromRefreshTokenRequest", name: "GetTokensFromRefreshTokenRequest")
@@ -288,6 +321,7 @@ module Aws::CognitoIdentityProvider
     GroupListType = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cognitoidentityprovider#GroupListType", name: "GroupListType")
     GroupNameType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cognitoidentityprovider#GroupNameType", name: "GroupNameType", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}]+$"})
     GroupType = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#GroupType", name: "GroupType")
+    HealthCheckIdType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cognitoidentityprovider#HealthCheckIdType", name: "HealthCheckIdType", traits: {"smithy.api#length" => {"min" => 0, "max" => 64}})
     HexStringType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cognitoidentityprovider#HexStringType", name: "HexStringType", traits: {"smithy.api#pattern" => "^[0-9a-fA-F]+$"})
     HttpHeader = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#HttpHeader", name: "HttpHeader")
     HttpHeaderList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cognitoidentityprovider#HttpHeaderList", name: "HttpHeaderList")
@@ -298,10 +332,13 @@ module Aws::CognitoIdentityProvider
     IdpIdentifiersListType = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cognitoidentityprovider#IdpIdentifiersListType", name: "IdpIdentifiersListType", traits: {"smithy.api#length" => {"min" => 0, "max" => 50}})
     ImageFileType = ::Smithy::Schema::Shapes::BlobShape.new(id: "com.amazonaws.cognitoidentityprovider#ImageFileType", name: "ImageFileType", traits: {"smithy.api#length" => {"min" => 0, "max" => 131072}})
     ImageUrlType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cognitoidentityprovider#ImageUrlType", name: "ImageUrlType")
+    InboundFederationLambdaType = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#InboundFederationLambdaType", name: "InboundFederationLambdaType")
+    InboundFederationLambdaVersionType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cognitoidentityprovider#InboundFederationLambdaVersionType", name: "InboundFederationLambdaVersionType")
     InitiateAuthRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#InitiateAuthRequest", name: "InitiateAuthRequest")
     InitiateAuthResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#InitiateAuthResponse", name: "InitiateAuthResponse")
     IntegerType = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.cognitoidentityprovider#IntegerType", name: "IntegerType", traits: {"smithy.api#default" => 0})
     InternalErrorException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#InternalErrorException", name: "InternalErrorException", traits: {"smithy.api#error" => "server"})
+    InternalServerException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#InternalServerException", name: "InternalServerException", traits: {"smithy.api#error" => "server"})
     InvalidEmailRoleAccessPolicyException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#InvalidEmailRoleAccessPolicyException", name: "InvalidEmailRoleAccessPolicyException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     InvalidLambdaResponseException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#InvalidLambdaResponseException", name: "InvalidLambdaResponseException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     InvalidOAuthFlowException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#InvalidOAuthFlowException", name: "InvalidOAuthFlowException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
@@ -311,11 +348,17 @@ module Aws::CognitoIdentityProvider
     InvalidSmsRoleAccessPolicyException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#InvalidSmsRoleAccessPolicyException", name: "InvalidSmsRoleAccessPolicyException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     InvalidSmsRoleTrustRelationshipException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#InvalidSmsRoleTrustRelationshipException", name: "InvalidSmsRoleTrustRelationshipException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     InvalidUserPoolConfigurationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#InvalidUserPoolConfigurationException", name: "InvalidUserPoolConfigurationException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
+    IssuerConfigurationType = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#IssuerConfigurationType", name: "IssuerConfigurationType")
+    IssuerType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cognitoidentityprovider#IssuerType", name: "IssuerType")
+    KeyConfigurationType = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#KeyConfigurationType", name: "KeyConfigurationType")
     LambdaConfigType = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#LambdaConfigType", name: "LambdaConfigType")
-    LanguageIdType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cognitoidentityprovider#LanguageIdType", name: "LanguageIdType", traits: {"smithy.api#pattern" => "^cognito:(default|english|french|spanish|german|bahasa-indonesia|italian|japanese|korean|portuguese-brazil|chinese-(simplified|traditional))$"})
+    LanguageIdType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cognitoidentityprovider#LanguageIdType", name: "LanguageIdType", traits: {"smithy.api#pattern" => "^cognito:(default|dutch|english|french|spanish|german|bahasa-indonesia|italian|japanese|korean|portuguese-brazil|chinese-(simplified|traditional))$"})
+    LimitClass = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cognitoidentityprovider#LimitClass", name: "LimitClass")
+    LimitDefinitionType = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#LimitDefinitionType", name: "LimitDefinitionType")
     LimitExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#LimitExceededException", name: "LimitExceededException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
+    LimitType = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#LimitType", name: "LimitType")
     LinkUrlType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cognitoidentityprovider#LinkUrlType", name: "LinkUrlType", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => "^[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}]+$"})
-    LinksType = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.cognitoidentityprovider#LinksType", name: "LinksType", traits: {"smithy.api#length" => {"min" => 1, "max" => 12}})
+    LinksType = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.cognitoidentityprovider#LinksType", name: "LinksType", traits: {"smithy.api#length" => {"min" => 1, "max" => 13}})
     ListDevicesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#ListDevicesRequest", name: "ListDevicesRequest")
     ListDevicesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#ListDevicesResponse", name: "ListDevicesResponse")
     ListGroupsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#ListGroupsRequest", name: "ListGroupsRequest")
@@ -334,8 +377,12 @@ module Aws::CognitoIdentityProvider
     ListTermsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#ListTermsResponse", name: "ListTermsResponse")
     ListUserImportJobsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#ListUserImportJobsRequest", name: "ListUserImportJobsRequest")
     ListUserImportJobsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#ListUserImportJobsResponse", name: "ListUserImportJobsResponse")
+    ListUserPoolClientSecretsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#ListUserPoolClientSecretsRequest", name: "ListUserPoolClientSecretsRequest")
+    ListUserPoolClientSecretsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#ListUserPoolClientSecretsResponse", name: "ListUserPoolClientSecretsResponse")
     ListUserPoolClientsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#ListUserPoolClientsRequest", name: "ListUserPoolClientsRequest")
     ListUserPoolClientsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#ListUserPoolClientsResponse", name: "ListUserPoolClientsResponse")
+    ListUserPoolReplicasRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#ListUserPoolReplicasRequest", name: "ListUserPoolReplicasRequest")
+    ListUserPoolReplicasResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#ListUserPoolReplicasResponse", name: "ListUserPoolReplicasResponse")
     ListUserPoolsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#ListUserPoolsRequest", name: "ListUserPoolsRequest")
     ListUserPoolsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#ListUserPoolsResponse", name: "ListUserPoolsResponse")
     ListUsersInGroupRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#ListUsersInGroupRequest", name: "ListUsersInGroupRequest")
@@ -366,8 +413,11 @@ module Aws::CognitoIdentityProvider
     NumberAttributeConstraintsType = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#NumberAttributeConstraintsType", name: "NumberAttributeConstraintsType")
     OAuthFlowType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cognitoidentityprovider#OAuthFlowType", name: "OAuthFlowType")
     OAuthFlowsType = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cognitoidentityprovider#OAuthFlowsType", name: "OAuthFlowsType", traits: {"smithy.api#length" => {"min" => 0, "max" => 3}})
+    OperationNotEnabledException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException", name: "OperationNotEnabledException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
+    OptionalArnType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cognitoidentityprovider#OptionalArnType", name: "OptionalArnType", traits: {"smithy.api#length" => {"min" => 0, "max" => 2048}, "smithy.api#pattern" => "^(arn:[\\w+=/,.@-]+:[\\w+=/,.@-]+:([\\w+=/,.@-]*)?:[0-9]+:[\\w+=/,.@-]+(:[\\w+=/,.@-]+)?(:[\\w+=/,.@-]+)?)?$"})
     PaginationKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cognitoidentityprovider#PaginationKey", name: "PaginationKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 131072}, "smithy.api#pattern" => "^[\\S]+$"})
     PaginationKeyType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cognitoidentityprovider#PaginationKeyType", name: "PaginationKeyType", traits: {"smithy.api#length" => {"min" => 1}, "smithy.api#pattern" => "^[\\S]+$"})
+    PasswordHashingAlgorithmType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cognitoidentityprovider#PasswordHashingAlgorithmType", name: "PasswordHashingAlgorithmType")
     PasswordHistoryPolicyViolationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#PasswordHistoryPolicyViolationException", name: "PasswordHistoryPolicyViolationException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     PasswordHistorySizeType = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.cognitoidentityprovider#PasswordHistorySizeType", name: "PasswordHistorySizeType", traits: {"smithy.api#range" => {"min" => 0, "max" => 24}})
     PasswordPolicyMinLengthType = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.cognitoidentityprovider#PasswordPolicyMinLengthType", name: "PasswordPolicyMinLengthType", traits: {"smithy.api#range" => {"min" => 6, "max" => 99}})
@@ -398,7 +448,11 @@ module Aws::CognitoIdentityProvider
     RefreshTokenRotationType = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#RefreshTokenRotationType", name: "RefreshTokenRotationType")
     RefreshTokenValidityType = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.cognitoidentityprovider#RefreshTokenValidityType", name: "RefreshTokenValidityType", traits: {"smithy.api#default" => 0, "smithy.api#range" => {"min" => 0, "max" => 315360000}})
     RegionCodeType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cognitoidentityprovider#RegionCodeType", name: "RegionCodeType", traits: {"smithy.api#length" => {"min" => 5, "max" => 32}})
+    RegionNameType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cognitoidentityprovider#RegionNameType", name: "RegionNameType", traits: {"smithy.api#length" => {"min" => 5, "max" => 32}})
     RelyingPartyIdType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cognitoidentityprovider#RelyingPartyIdType", name: "RelyingPartyIdType", traits: {"smithy.api#length" => {"min" => 1, "max" => 127}})
+    ReplicaRegionsType = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cognitoidentityprovider#ReplicaRegionsType", name: "ReplicaRegionsType")
+    ReplicaRoleType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cognitoidentityprovider#ReplicaRoleType", name: "ReplicaRoleType")
+    ReplicaStatusType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cognitoidentityprovider#ReplicaStatusType", name: "ReplicaStatusType")
     ResendConfirmationCodeRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#ResendConfirmationCodeRequest", name: "ResendConfirmationCodeRequest")
     ResendConfirmationCodeResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#ResendConfirmationCodeResponse", name: "ResendConfirmationCodeResponse")
     ResourceIdType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cognitoidentityprovider#ResourceIdType", name: "ResourceIdType", traits: {"smithy.api#length" => {"min" => 1, "max" => 40}, "smithy.api#pattern" => "^[\\w\\- ]+$"})
@@ -420,6 +474,7 @@ module Aws::CognitoIdentityProvider
     RiskDecisionType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cognitoidentityprovider#RiskDecisionType", name: "RiskDecisionType")
     RiskExceptionConfigurationType = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#RiskExceptionConfigurationType", name: "RiskExceptionConfigurationType")
     RiskLevelType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cognitoidentityprovider#RiskLevelType", name: "RiskLevelType")
+    RoutingType = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#RoutingType", name: "RoutingType")
     S3ArnType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cognitoidentityprovider#S3ArnType", name: "S3ArnType", traits: {"smithy.api#length" => {"min" => 3, "max" => 1024}, "smithy.api#pattern" => "^arn:[\\w+=/,.@-]+:[\\w+=/,.@-]+:::[\\w+=/,.@-]+(:[\\w+=/,.@-]+)?(:[\\w+=/,.@-]+)?$"})
     S3BucketType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cognitoidentityprovider#S3BucketType", name: "S3BucketType", traits: {"smithy.api#length" => {"min" => 3, "max" => 1024}, "smithy.api#pattern" => "^[0-9A-Za-z\\.\\-_]*(?<!\\.)$"})
     S3ConfigurationType = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#S3ConfigurationType", name: "S3ConfigurationType")
@@ -434,7 +489,9 @@ module Aws::CognitoIdentityProvider
     SearchedAttributeNamesListType = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cognitoidentityprovider#SearchedAttributeNamesListType", name: "SearchedAttributeNamesListType")
     SecretCodeType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cognitoidentityprovider#SecretCodeType", name: "SecretCodeType", traits: {"smithy.api#length" => {"min" => 16}, "smithy.api#pattern" => "^[A-Za-z0-9]+$", "smithy.api#sensitive" => {}})
     SecretHashType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cognitoidentityprovider#SecretHashType", name: "SecretHashType", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[\\w+=/]+$", "smithy.api#sensitive" => {}})
-    SessionType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cognitoidentityprovider#SessionType", name: "SessionType", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#sensitive" => {}})
+    SecurityPolicyType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cognitoidentityprovider#SecurityPolicyType", name: "SecurityPolicyType")
+    ServiceQuotaExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#ServiceQuotaExceededException", name: "ServiceQuotaExceededException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
+    SessionType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cognitoidentityprovider#SessionType", name: "SessionType", traits: {"smithy.api#length" => {"min" => 20, "max" => 4096}, "smithy.api#sensitive" => {}})
     SetLogDeliveryConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#SetLogDeliveryConfigurationRequest", name: "SetLogDeliveryConfigurationRequest")
     SetLogDeliveryConfigurationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#SetLogDeliveryConfigurationResponse", name: "SetLogDeliveryConfigurationResponse")
     SetRiskConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#SetRiskConfigurationRequest", name: "SetRiskConfigurationRequest")
@@ -467,6 +524,7 @@ module Aws::CognitoIdentityProvider
     StopUserImportJobRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#StopUserImportJobRequest", name: "StopUserImportJobRequest")
     StopUserImportJobResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#StopUserImportJobResponse", name: "StopUserImportJobResponse")
     StringAttributeConstraintsType = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#StringAttributeConstraintsType", name: "StringAttributeConstraintsType")
+    StringToStringMapType = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.cognitoidentityprovider#StringToStringMapType", name: "StringToStringMapType")
     StringType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cognitoidentityprovider#StringType", name: "StringType", traits: {"smithy.api#length" => {"min" => 0, "max" => 131072}})
     SupportedIdentityProvidersListType = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cognitoidentityprovider#SupportedIdentityProvidersListType", name: "SupportedIdentityProvidersListType")
     TagKeysType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cognitoidentityprovider#TagKeysType", name: "TagKeysType", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}})
@@ -507,6 +565,9 @@ module Aws::CognitoIdentityProvider
     UpdateIdentityProviderResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#UpdateIdentityProviderResponse", name: "UpdateIdentityProviderResponse")
     UpdateManagedLoginBrandingRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#UpdateManagedLoginBrandingRequest", name: "UpdateManagedLoginBrandingRequest")
     UpdateManagedLoginBrandingResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#UpdateManagedLoginBrandingResponse", name: "UpdateManagedLoginBrandingResponse")
+    UpdateProvisionedLimitRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#UpdateProvisionedLimitRequest", name: "UpdateProvisionedLimitRequest")
+    UpdateProvisionedLimitResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#UpdateProvisionedLimitResponse", name: "UpdateProvisionedLimitResponse")
+    UpdateReplicaStatusType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cognitoidentityprovider#UpdateReplicaStatusType", name: "UpdateReplicaStatusType")
     UpdateResourceServerRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#UpdateResourceServerRequest", name: "UpdateResourceServerRequest")
     UpdateResourceServerResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#UpdateResourceServerResponse", name: "UpdateResourceServerResponse")
     UpdateTermsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#UpdateTermsRequest", name: "UpdateTermsRequest")
@@ -517,6 +578,8 @@ module Aws::CognitoIdentityProvider
     UpdateUserPoolClientResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#UpdateUserPoolClientResponse", name: "UpdateUserPoolClientResponse")
     UpdateUserPoolDomainRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#UpdateUserPoolDomainRequest", name: "UpdateUserPoolDomainRequest")
     UpdateUserPoolDomainResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#UpdateUserPoolDomainResponse", name: "UpdateUserPoolDomainResponse")
+    UpdateUserPoolReplicaRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#UpdateUserPoolReplicaRequest", name: "UpdateUserPoolReplicaRequest")
+    UpdateUserPoolReplicaResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#UpdateUserPoolReplicaResponse", name: "UpdateUserPoolReplicaResponse")
     UpdateUserPoolRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#UpdateUserPoolRequest", name: "UpdateUserPoolRequest")
     UpdateUserPoolResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#UpdateUserPoolResponse", name: "UpdateUserPoolResponse")
     UserAttributeUpdateSettingsType = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#UserAttributeUpdateSettingsType", name: "UserAttributeUpdateSettingsType")
@@ -543,6 +606,8 @@ module Aws::CognitoIdentityProvider
     UserPoolMfaType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cognitoidentityprovider#UserPoolMfaType", name: "UserPoolMfaType")
     UserPoolNameType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cognitoidentityprovider#UserPoolNameType", name: "UserPoolNameType", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[\\w\\s+=,.@-]+$"})
     UserPoolPolicyType = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#UserPoolPolicyType", name: "UserPoolPolicyType")
+    UserPoolReplicaListType = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cognitoidentityprovider#UserPoolReplicaListType", name: "UserPoolReplicaListType")
+    UserPoolReplicaType = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#UserPoolReplicaType", name: "UserPoolReplicaType")
     UserPoolTaggingException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#UserPoolTaggingException", name: "UserPoolTaggingException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     UserPoolTagsListType = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cognitoidentityprovider#UserPoolTagsListType", name: "UserPoolTagsListType")
     UserPoolTagsType = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.cognitoidentityprovider#UserPoolTagsType", name: "UserPoolTagsType")
@@ -576,12 +641,16 @@ module Aws::CognitoIdentityProvider
     WebAuthnCredentialDescriptionListType = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cognitoidentityprovider#WebAuthnCredentialDescriptionListType", name: "WebAuthnCredentialDescriptionListType")
     WebAuthnCredentialNotSupportedException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#WebAuthnCredentialNotSupportedException", name: "WebAuthnCredentialNotSupportedException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     WebAuthnCredentialsQueryLimitType = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.cognitoidentityprovider#WebAuthnCredentialsQueryLimitType", name: "WebAuthnCredentialsQueryLimitType", traits: {"smithy.api#range" => {"min" => 0, "max" => 20}})
+    WebAuthnFactorConfigurationType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cognitoidentityprovider#WebAuthnFactorConfigurationType", name: "WebAuthnFactorConfigurationType")
+    WebAuthnMfaSettingsType = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#WebAuthnMfaSettingsType", name: "WebAuthnMfaSettingsType")
     WebAuthnNotEnabledException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#WebAuthnNotEnabledException", name: "WebAuthnNotEnabledException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     WebAuthnOriginNotAllowedException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#WebAuthnOriginNotAllowedException", name: "WebAuthnOriginNotAllowedException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     WebAuthnRelyingPartyMismatchException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cognitoidentityprovider#WebAuthnRelyingPartyMismatchException", name: "WebAuthnRelyingPartyMismatchException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     WrappedBooleanType = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.cognitoidentityprovider#WrappedBooleanType", name: "WrappedBooleanType")
     WrappedIntegerType = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.cognitoidentityprovider#WrappedIntegerType", name: "WrappedIntegerType")
 
+    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, name: "message"))
+    AccessDeniedException.type = Types::AccessDeniedException
     AccountRecoverySettingType.add_member(:recovery_mechanisms, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryMechanismsType, name: "RecoveryMechanisms"))
     AccountRecoverySettingType.type = Types::AccountRecoverySettingType
     AccountTakeoverActionType.add_member(:notify, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountTakeoverActionNotifyType, name: "Notify", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
@@ -598,10 +667,22 @@ module Aws::CognitoIdentityProvider
     AccountTakeoverRiskConfigurationType.add_member(:notify_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyConfigurationType, name: "NotifyConfiguration"))
     AccountTakeoverRiskConfigurationType.add_member(:actions, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountTakeoverActionsType, name: "Actions", traits: {"smithy.api#required" => {}}))
     AccountTakeoverRiskConfigurationType.type = Types::AccountTakeoverRiskConfigurationType
+    AcrConfigurationType.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AcrLevelKeyType, name: "key"))
+    AcrConfigurationType.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AcrLevelConfigType, name: "value"))
+    AcrLevelConfigType.add_member(:acr_value, ::Smithy::Schema::Shapes::MemberShape.new(target: AcrValueType, name: "AcrValue", traits: {"smithy.api#required" => {}}))
+    AcrLevelConfigType.type = Types::AcrLevelConfigType
+    AcrMappingType.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AcrMappingKeyType, name: "key"))
+    AcrMappingType.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AcrValueType, name: "value"))
     AddCustomAttributesRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, name: "UserPoolId", traits: {"smithy.api#required" => {}}))
     AddCustomAttributesRequest.add_member(:custom_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomAttributesListType, name: "CustomAttributes", traits: {"smithy.api#required" => {}}))
     AddCustomAttributesRequest.type = Types::AddCustomAttributesRequest
     AddCustomAttributesResponse.type = Types::AddCustomAttributesResponse
+    AddUserPoolClientSecretRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    AddUserPoolClientSecretRequest.add_member(:client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientIdType, name: "ClientId", traits: {"smithy.api#required" => {}}))
+    AddUserPoolClientSecretRequest.add_member(:client_secret, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientSecretType, name: "ClientSecret"))
+    AddUserPoolClientSecretRequest.type = Types::AddUserPoolClientSecretRequest
+    AddUserPoolClientSecretResponse.add_member(:client_secret_descriptor, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientSecretDescriptorType, name: "ClientSecretDescriptor"))
+    AddUserPoolClientSecretResponse.type = Types::AddUserPoolClientSecretResponse
     AdminAddUserToGroupRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, name: "UserPoolId", traits: {"smithy.api#required" => {}}))
     AdminAddUserToGroupRequest.add_member(:username, ::Smithy::Schema::Shapes::MemberShape.new(target: UsernameType, name: "Username", traits: {"smithy.api#required" => {}}))
     AdminAddUserToGroupRequest.add_member(:group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupNameType, name: "GroupName", traits: {"smithy.api#required" => {}}))
@@ -627,6 +708,10 @@ module Aws::CognitoIdentityProvider
     AdminCreateUserRequest.type = Types::AdminCreateUserRequest
     AdminCreateUserResponse.add_member(:user, ::Smithy::Schema::Shapes::MemberShape.new(target: UserType, name: "User"))
     AdminCreateUserResponse.type = Types::AdminCreateUserResponse
+    AdminDeleteSoftwareTokenRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    AdminDeleteSoftwareTokenRequest.add_member(:username, ::Smithy::Schema::Shapes::MemberShape.new(target: UsernameType, name: "Username", traits: {"smithy.api#required" => {}}))
+    AdminDeleteSoftwareTokenRequest.type = Types::AdminDeleteSoftwareTokenRequest
+    AdminDeleteSoftwareTokenResponse.type = Types::AdminDeleteSoftwareTokenResponse
     AdminDeleteUserAttributesRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, name: "UserPoolId", traits: {"smithy.api#required" => {}}))
     AdminDeleteUserAttributesRequest.add_member(:username, ::Smithy::Schema::Shapes::MemberShape.new(target: UsernameType, name: "Username", traits: {"smithy.api#required" => {}}))
     AdminDeleteUserAttributesRequest.add_member(:user_attribute_names, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeNameListType, name: "UserAttributeNames", traits: {"smithy.api#required" => {}}))
@@ -657,6 +742,14 @@ module Aws::CognitoIdentityProvider
     AdminGetDeviceRequest.type = Types::AdminGetDeviceRequest
     AdminGetDeviceResponse.add_member(:device, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceType, name: "Device", traits: {"smithy.api#required" => {}}))
     AdminGetDeviceResponse.type = Types::AdminGetDeviceResponse
+    AdminGetUserAuthFactorsRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    AdminGetUserAuthFactorsRequest.add_member(:username, ::Smithy::Schema::Shapes::MemberShape.new(target: UsernameType, name: "Username", traits: {"smithy.api#required" => {}}))
+    AdminGetUserAuthFactorsRequest.type = Types::AdminGetUserAuthFactorsRequest
+    AdminGetUserAuthFactorsResponse.add_member(:username, ::Smithy::Schema::Shapes::MemberShape.new(target: UsernameType, name: "Username", traits: {"smithy.api#required" => {}}))
+    AdminGetUserAuthFactorsResponse.add_member(:preferred_mfa_setting, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "PreferredMfaSetting"))
+    AdminGetUserAuthFactorsResponse.add_member(:user_mfa_setting_list, ::Smithy::Schema::Shapes::MemberShape.new(target: UserMFASettingListType, name: "UserMFASettingList"))
+    AdminGetUserAuthFactorsResponse.add_member(:configured_user_auth_factors, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfiguredUserAuthFactorsListType, name: "ConfiguredUserAuthFactors"))
+    AdminGetUserAuthFactorsResponse.type = Types::AdminGetUserAuthFactorsResponse
     AdminGetUserRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, name: "UserPoolId", traits: {"smithy.api#required" => {}}))
     AdminGetUserRequest.add_member(:username, ::Smithy::Schema::Shapes::MemberShape.new(target: UsernameType, name: "Username", traits: {"smithy.api#required" => {}}))
     AdminGetUserRequest.type = Types::AdminGetUserRequest
@@ -736,10 +829,12 @@ module Aws::CognitoIdentityProvider
     AdminRespondToAuthChallengeResponse.add_member(:session, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionType, name: "Session"))
     AdminRespondToAuthChallengeResponse.add_member(:challenge_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ChallengeParametersType, name: "ChallengeParameters"))
     AdminRespondToAuthChallengeResponse.add_member(:authentication_result, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthenticationResultType, name: "AuthenticationResult"))
+    AdminRespondToAuthChallengeResponse.add_member(:available_challenges, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailableChallengeListType, name: "AvailableChallenges"))
     AdminRespondToAuthChallengeResponse.type = Types::AdminRespondToAuthChallengeResponse
     AdminSetUserMFAPreferenceRequest.add_member(:sms_mfa_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: SMSMfaSettingsType, name: "SMSMfaSettings"))
     AdminSetUserMFAPreferenceRequest.add_member(:software_token_mfa_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: SoftwareTokenMfaSettingsType, name: "SoftwareTokenMfaSettings"))
     AdminSetUserMFAPreferenceRequest.add_member(:email_mfa_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailMfaSettingsType, name: "EmailMfaSettings"))
+    AdminSetUserMFAPreferenceRequest.add_member(:web_authn_mfa_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: WebAuthnMfaSettingsType, name: "WebAuthnMfaSettings"))
     AdminSetUserMFAPreferenceRequest.add_member(:username, ::Smithy::Schema::Shapes::MemberShape.new(target: UsernameType, name: "Username", traits: {"smithy.api#required" => {}}))
     AdminSetUserMFAPreferenceRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, name: "UserPoolId", traits: {"smithy.api#required" => {}}))
     AdminSetUserMFAPreferenceRequest.type = Types::AdminSetUserMFAPreferenceRequest
@@ -858,6 +953,7 @@ module Aws::CognitoIdentityProvider
     AuthFactorType.add_member(:email_otp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EMAIL_OTP", traits: {"smithy.api#enumValue" => "EMAIL_OTP"}))
     AuthFactorType.add_member(:sms_otp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SMS_OTP", traits: {"smithy.api#enumValue" => "SMS_OTP"}))
     AuthFactorType.add_member(:web_authn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WEB_AUTHN", traits: {"smithy.api#enumValue" => "WEB_AUTHN"}))
+    AuthFactorType.add_member(:software_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SOFTWARE_TOKEN", traits: {"smithy.api#enumValue" => "SOFTWARE_TOKEN"}))
     AuthFlowType.add_member(:user_srp_auth, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "USER_SRP_AUTH", traits: {"smithy.api#enumValue" => "USER_SRP_AUTH"}))
     AuthFlowType.add_member(:refresh_token_auth, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REFRESH_TOKEN_AUTH", traits: {"smithy.api#enumValue" => "REFRESH_TOKEN_AUTH"}))
     AuthFlowType.add_member(:refresh_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REFRESH_TOKEN", traits: {"smithy.api#enumValue" => "REFRESH_TOKEN"}))
@@ -911,9 +1007,18 @@ module Aws::CognitoIdentityProvider
     ChangePasswordRequest.add_member(:access_token, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenModelType, name: "AccessToken", traits: {"smithy.api#required" => {}}))
     ChangePasswordRequest.type = Types::ChangePasswordRequest
     ChangePasswordResponse.type = Types::ChangePasswordResponse
+    ClientAuthenticationResultType.add_member(:access_token, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenModelType, name: "AccessToken"))
+    ClientAuthenticationResultType.add_member(:expires_in, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerType, name: "ExpiresIn", traits: {"smithy.api#default" => 0}))
+    ClientAuthenticationResultType.add_member(:token_type, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "TokenType"))
+    ClientAuthenticationResultType.type = Types::ClientAuthenticationResultType
     ClientMetadataType.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "key"))
     ClientMetadataType.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "value"))
     ClientPermissionListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientPermissionType, name: "member"))
+    ClientSecretDescriptorListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientSecretDescriptorType, name: "member"))
+    ClientSecretDescriptorType.add_member(:client_secret_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientSecretIdType, name: "ClientSecretId"))
+    ClientSecretDescriptorType.add_member(:client_secret_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientSecretType, name: "ClientSecretValue"))
+    ClientSecretDescriptorType.add_member(:client_secret_create_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, name: "ClientSecretCreateDate"))
+    ClientSecretDescriptorType.type = Types::ClientSecretDescriptorType
     CloudWatchLogsConfigurationType.add_member(:log_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, name: "LogGroupArn"))
     CloudWatchLogsConfigurationType.type = Types::CloudWatchLogsConfigurationType
     CodeDeliveryDetailsListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CodeDeliveryDetailsType, name: "member"))
@@ -991,6 +1096,7 @@ module Aws::CognitoIdentityProvider
     CreateIdentityProviderRequest.add_member(:provider_details, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderDetailsType, name: "ProviderDetails", traits: {"smithy.api#required" => {}}))
     CreateIdentityProviderRequest.add_member(:attribute_mapping, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeMappingType, name: "AttributeMapping"))
     CreateIdentityProviderRequest.add_member(:idp_identifiers, ::Smithy::Schema::Shapes::MemberShape.new(target: IdpIdentifiersListType, name: "IdpIdentifiers"))
+    CreateIdentityProviderRequest.add_member(:acr_mapping, ::Smithy::Schema::Shapes::MemberShape.new(target: AcrMappingType, name: "AcrMapping"))
     CreateIdentityProviderRequest.type = Types::CreateIdentityProviderRequest
     CreateIdentityProviderResponse.add_member(:identity_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityProviderType, name: "IdentityProvider", traits: {"smithy.api#required" => {}}))
     CreateIdentityProviderResponse.type = Types::CreateIdentityProviderResponse
@@ -1021,12 +1127,14 @@ module Aws::CognitoIdentityProvider
     CreateUserImportJobRequest.add_member(:job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: UserImportJobNameType, name: "JobName", traits: {"smithy.api#required" => {}}))
     CreateUserImportJobRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, name: "UserPoolId", traits: {"smithy.api#required" => {}}))
     CreateUserImportJobRequest.add_member(:cloud_watch_logs_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, name: "CloudWatchLogsRoleArn", traits: {"smithy.api#required" => {}}))
+    CreateUserImportJobRequest.add_member(:password_hashing_algorithm, ::Smithy::Schema::Shapes::MemberShape.new(target: PasswordHashingAlgorithmType, name: "PasswordHashingAlgorithm"))
     CreateUserImportJobRequest.type = Types::CreateUserImportJobRequest
     CreateUserImportJobResponse.add_member(:user_import_job, ::Smithy::Schema::Shapes::MemberShape.new(target: UserImportJobType, name: "UserImportJob"))
     CreateUserImportJobResponse.type = Types::CreateUserImportJobResponse
     CreateUserPoolClientRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, name: "UserPoolId", traits: {"smithy.api#required" => {}}))
     CreateUserPoolClientRequest.add_member(:client_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientNameType, name: "ClientName", traits: {"smithy.api#required" => {}}))
     CreateUserPoolClientRequest.add_member(:generate_secret, ::Smithy::Schema::Shapes::MemberShape.new(target: GenerateSecret, name: "GenerateSecret", traits: {"smithy.api#default" => false}))
+    CreateUserPoolClientRequest.add_member(:client_secret, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientSecretType, name: "ClientSecret"))
     CreateUserPoolClientRequest.add_member(:refresh_token_validity, ::Smithy::Schema::Shapes::MemberShape.new(target: RefreshTokenValidityType, name: "RefreshTokenValidity", traits: {"smithy.api#default" => 0}))
     CreateUserPoolClientRequest.add_member(:access_token_validity, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessTokenValidityType, name: "AccessTokenValidity"))
     CreateUserPoolClientRequest.add_member(:id_token_validity, ::Smithy::Schema::Shapes::MemberShape.new(target: IdTokenValidityType, name: "IdTokenValidity"))
@@ -1054,10 +1162,18 @@ module Aws::CognitoIdentityProvider
     CreateUserPoolDomainRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, name: "UserPoolId", traits: {"smithy.api#required" => {}}))
     CreateUserPoolDomainRequest.add_member(:managed_login_version, ::Smithy::Schema::Shapes::MemberShape.new(target: WrappedIntegerType, name: "ManagedLoginVersion"))
     CreateUserPoolDomainRequest.add_member(:custom_domain_config, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomDomainConfigType, name: "CustomDomainConfig"))
+    CreateUserPoolDomainRequest.add_member(:routing, ::Smithy::Schema::Shapes::MemberShape.new(target: RoutingType, name: "Routing"))
     CreateUserPoolDomainRequest.type = Types::CreateUserPoolDomainRequest
     CreateUserPoolDomainResponse.add_member(:managed_login_version, ::Smithy::Schema::Shapes::MemberShape.new(target: WrappedIntegerType, name: "ManagedLoginVersion"))
     CreateUserPoolDomainResponse.add_member(:cloud_front_domain, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainType, name: "CloudFrontDomain"))
+    CreateUserPoolDomainResponse.add_member(:routing, ::Smithy::Schema::Shapes::MemberShape.new(target: RoutingType, name: "Routing"))
     CreateUserPoolDomainResponse.type = Types::CreateUserPoolDomainResponse
+    CreateUserPoolReplicaRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    CreateUserPoolReplicaRequest.add_member(:region_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionNameType, name: "RegionName", traits: {"smithy.api#required" => {}}))
+    CreateUserPoolReplicaRequest.add_member(:user_pool_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolTagsType, name: "UserPoolTags"))
+    CreateUserPoolReplicaRequest.type = Types::CreateUserPoolReplicaRequest
+    CreateUserPoolReplicaResponse.add_member(:user_pool_replica, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolReplicaType, name: "UserPoolReplica"))
+    CreateUserPoolReplicaResponse.type = Types::CreateUserPoolReplicaResponse
     CreateUserPoolRequest.add_member(:pool_name, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolNameType, name: "PoolName", traits: {"smithy.api#required" => {}}))
     CreateUserPoolRequest.add_member(:policies, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolPolicyType, name: "Policies"))
     CreateUserPoolRequest.add_member(:deletion_protection, ::Smithy::Schema::Shapes::MemberShape.new(target: DeletionProtectionType, name: "DeletionProtection"))
@@ -1082,11 +1198,15 @@ module Aws::CognitoIdentityProvider
     CreateUserPoolRequest.add_member(:username_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: UsernameConfigurationType, name: "UsernameConfiguration"))
     CreateUserPoolRequest.add_member(:account_recovery_setting, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountRecoverySettingType, name: "AccountRecoverySetting"))
     CreateUserPoolRequest.add_member(:user_pool_tier, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolTierType, name: "UserPoolTier"))
+    CreateUserPoolRequest.add_member(:key_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyConfigurationType, name: "KeyConfiguration"))
+    CreateUserPoolRequest.add_member(:issuer_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: IssuerConfigurationType, name: "IssuerConfiguration"))
+    CreateUserPoolRequest.add_member(:acr_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AcrConfigurationType, name: "AcrConfiguration"))
     CreateUserPoolRequest.type = Types::CreateUserPoolRequest
     CreateUserPoolResponse.add_member(:user_pool, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolType, name: "UserPool"))
     CreateUserPoolResponse.type = Types::CreateUserPoolResponse
     CustomAttributesListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaAttributeType, name: "member"))
     CustomDomainConfigType.add_member(:certificate_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, name: "CertificateArn", traits: {"smithy.api#required" => {}}))
+    CustomDomainConfigType.add_member(:security_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityPolicyType, name: "SecurityPolicy"))
     CustomDomainConfigType.type = Types::CustomDomainConfigType
     CustomEmailLambdaVersionConfigType.add_member(:lambda_version, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomEmailSenderLambdaVersionType, name: "LambdaVersion", traits: {"smithy.api#required" => {}}))
     CustomEmailLambdaVersionConfigType.add_member(:lambda_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, name: "LambdaArn", traits: {"smithy.api#required" => {}}))
@@ -1120,10 +1240,20 @@ module Aws::CognitoIdentityProvider
     DeleteUserPoolClientRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, name: "UserPoolId", traits: {"smithy.api#required" => {}}))
     DeleteUserPoolClientRequest.add_member(:client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientIdType, name: "ClientId", traits: {"smithy.api#required" => {}}))
     DeleteUserPoolClientRequest.type = Types::DeleteUserPoolClientRequest
+    DeleteUserPoolClientSecretRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    DeleteUserPoolClientSecretRequest.add_member(:client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientIdType, name: "ClientId", traits: {"smithy.api#required" => {}}))
+    DeleteUserPoolClientSecretRequest.add_member(:client_secret_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientSecretIdType, name: "ClientSecretId", traits: {"smithy.api#required" => {}}))
+    DeleteUserPoolClientSecretRequest.type = Types::DeleteUserPoolClientSecretRequest
+    DeleteUserPoolClientSecretResponse.type = Types::DeleteUserPoolClientSecretResponse
     DeleteUserPoolDomainRequest.add_member(:domain, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainType, name: "Domain", traits: {"smithy.api#required" => {}}))
     DeleteUserPoolDomainRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, name: "UserPoolId", traits: {"smithy.api#required" => {}}))
     DeleteUserPoolDomainRequest.type = Types::DeleteUserPoolDomainRequest
     DeleteUserPoolDomainResponse.type = Types::DeleteUserPoolDomainResponse
+    DeleteUserPoolReplicaRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    DeleteUserPoolReplicaRequest.add_member(:region_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionNameType, name: "RegionName", traits: {"smithy.api#required" => {}}))
+    DeleteUserPoolReplicaRequest.type = Types::DeleteUserPoolReplicaRequest
+    DeleteUserPoolReplicaResponse.add_member(:user_pool_replica, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolReplicaType, name: "UserPoolReplica"))
+    DeleteUserPoolReplicaResponse.type = Types::DeleteUserPoolReplicaResponse
     DeleteUserPoolRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, name: "UserPoolId", traits: {"smithy.api#required" => {}}))
     DeleteUserPoolRequest.type = Types::DeleteUserPoolRequest
     DeleteUserRequest.add_member(:access_token, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenModelType, name: "AccessToken", traits: {"smithy.api#required" => {}}))
@@ -1164,6 +1294,12 @@ module Aws::CognitoIdentityProvider
     DescribeRiskConfigurationRequest.type = Types::DescribeRiskConfigurationRequest
     DescribeRiskConfigurationResponse.add_member(:risk_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: RiskConfigurationType, name: "RiskConfiguration", traits: {"smithy.api#required" => {}}))
     DescribeRiskConfigurationResponse.type = Types::DescribeRiskConfigurationResponse
+    DescribeTermsByClientRequest.add_member(:client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientIdType, name: "ClientId", traits: {"smithy.api#required" => {}}))
+    DescribeTermsByClientRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    DescribeTermsByClientRequest.add_member(:terms_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TermsNameType, name: "TermsName", traits: {"smithy.api#required" => {}}))
+    DescribeTermsByClientRequest.type = Types::DescribeTermsByClientRequest
+    DescribeTermsByClientResponse.add_member(:terms, ::Smithy::Schema::Shapes::MemberShape.new(target: TermsType, name: "Terms"))
+    DescribeTermsByClientResponse.type = Types::DescribeTermsByClientResponse
     DescribeTermsRequest.add_member(:terms_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TermsIdType, name: "TermsId", traits: {"smithy.api#required" => {}}))
     DescribeTermsRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, name: "UserPoolId", traits: {"smithy.api#required" => {}}))
     DescribeTermsRequest.type = Types::DescribeTermsRequest
@@ -1213,6 +1349,7 @@ module Aws::CognitoIdentityProvider
     DomainDescriptionType.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainStatusType, name: "Status"))
     DomainDescriptionType.add_member(:custom_domain_config, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomDomainConfigType, name: "CustomDomainConfig"))
     DomainDescriptionType.add_member(:managed_login_version, ::Smithy::Schema::Shapes::MemberShape.new(target: WrappedIntegerType, name: "ManagedLoginVersion"))
+    DomainDescriptionType.add_member(:routing, ::Smithy::Schema::Shapes::MemberShape.new(target: RoutingType, name: "Routing"))
     DomainDescriptionType.type = Types::DomainDescriptionType
     DomainStatusType.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
     DomainStatusType.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
@@ -1237,6 +1374,16 @@ module Aws::CognitoIdentityProvider
     EmailSendingAccountType.add_member(:developer, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEVELOPER", traits: {"smithy.api#enumValue" => "DEVELOPER"}))
     EnableSoftwareTokenMFAException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, name: "message"))
     EnableSoftwareTokenMFAException.type = Types::EnableSoftwareTokenMFAException
+    EncryptionKeyType.add_member(:aws_owned_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_OWNED_KEY", traits: {"smithy.api#enumValue" => "AWS_OWNED_KEY"}))
+    EncryptionKeyType.add_member(:customer_managed_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOMER_MANAGED_KEY", traits: {"smithy.api#enumValue" => "CUSTOMER_MANAGED_KEY"}))
+    EumsSmsConfigurationType.add_member(:caller_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, name: "CallerArn", traits: {"smithy.api#required" => {}}))
+    EumsSmsConfigurationType.add_member(:external_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "ExternalId"))
+    EumsSmsConfigurationType.add_member(:origination_identity, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "OriginationIdentity"))
+    EumsSmsConfigurationType.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "ConfigurationSetName"))
+    EumsSmsConfigurationType.add_member(:in_entity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "InEntityId"))
+    EumsSmsConfigurationType.add_member(:in_template_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "InTemplateId"))
+    EumsSmsConfigurationType.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionCodeType, name: "Region"))
+    EumsSmsConfigurationType.type = Types::EumsSmsConfigurationType
     EventContextDataType.add_member(:ip_address, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "IpAddress"))
     EventContextDataType.add_member(:device_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "DeviceName"))
     EventContextDataType.add_member(:timezone, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "Timezone"))
@@ -1277,6 +1424,9 @@ module Aws::CognitoIdentityProvider
     ExplicitAuthFlowsType.add_member(:allow_user_srp_auth, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALLOW_USER_SRP_AUTH", traits: {"smithy.api#enumValue" => "ALLOW_USER_SRP_AUTH"}))
     ExplicitAuthFlowsType.add_member(:allow_refresh_token_auth, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALLOW_REFRESH_TOKEN_AUTH", traits: {"smithy.api#enumValue" => "ALLOW_REFRESH_TOKEN_AUTH"}))
     ExplicitAuthFlowsType.add_member(:allow_user_auth, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALLOW_USER_AUTH", traits: {"smithy.api#enumValue" => "ALLOW_USER_AUTH"}))
+    FailoverType.add_member(:secondary_region, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionNameType, name: "SecondaryRegion", traits: {"smithy.api#required" => {}}))
+    FailoverType.add_member(:primary_route53_health_check_id, ::Smithy::Schema::Shapes::MemberShape.new(target: HealthCheckIdType, name: "PrimaryRoute53HealthCheckId", traits: {"smithy.api#required" => {}}))
+    FailoverType.type = Types::FailoverType
     FeatureType.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     FeatureType.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
     FeatureUnavailableInTierException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, name: "message"))
@@ -1304,6 +1454,13 @@ module Aws::CognitoIdentityProvider
     GetCSVHeaderResponse.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, name: "UserPoolId"))
     GetCSVHeaderResponse.add_member(:csv_header, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfStringTypes, name: "CSVHeader"))
     GetCSVHeaderResponse.type = Types::GetCSVHeaderResponse
+    GetClientTokenRequest.add_member(:client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientIdType, name: "ClientId", traits: {"smithy.api#required" => {}}))
+    GetClientTokenRequest.add_member(:secret, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientSecretType, name: "Secret", traits: {"smithy.api#required" => {}}))
+    GetClientTokenRequest.add_member(:scopes, ::Smithy::Schema::Shapes::MemberShape.new(target: ScopeListType, name: "Scopes"))
+    GetClientTokenRequest.add_member(:client_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientMetadataType, name: "ClientMetadata"))
+    GetClientTokenRequest.type = Types::GetClientTokenRequest
+    GetClientTokenResponse.add_member(:client_authentication_result, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientAuthenticationResultType, name: "ClientAuthenticationResult"))
+    GetClientTokenResponse.type = Types::GetClientTokenResponse
     GetDeviceRequest.add_member(:device_key, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceKeyType, name: "DeviceKey", traits: {"smithy.api#required" => {}}))
     GetDeviceRequest.add_member(:access_token, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenModelType, name: "AccessToken"))
     GetDeviceRequest.type = Types::GetDeviceRequest
@@ -1323,6 +1480,10 @@ module Aws::CognitoIdentityProvider
     GetLogDeliveryConfigurationRequest.type = Types::GetLogDeliveryConfigurationRequest
     GetLogDeliveryConfigurationResponse.add_member(:log_delivery_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: LogDeliveryConfigurationType, name: "LogDeliveryConfiguration"))
     GetLogDeliveryConfigurationResponse.type = Types::GetLogDeliveryConfigurationResponse
+    GetProvisionedLimitRequest.add_member(:limit_definition, ::Smithy::Schema::Shapes::MemberShape.new(target: LimitDefinitionType, name: "LimitDefinition", traits: {"smithy.api#required" => {}}))
+    GetProvisionedLimitRequest.type = Types::GetProvisionedLimitRequest
+    GetProvisionedLimitResponse.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: LimitType, name: "Limit", traits: {"smithy.api#required" => {}}))
+    GetProvisionedLimitResponse.type = Types::GetProvisionedLimitResponse
     GetSigningCertificateRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, name: "UserPoolId", traits: {"smithy.api#required" => {}}))
     GetSigningCertificateRequest.type = Types::GetSigningCertificateRequest
     GetSigningCertificateResponse.add_member(:certificate, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "Certificate"))
@@ -1393,6 +1554,7 @@ module Aws::CognitoIdentityProvider
     IdentityProviderType.add_member(:provider_details, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderDetailsType, name: "ProviderDetails"))
     IdentityProviderType.add_member(:attribute_mapping, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeMappingType, name: "AttributeMapping"))
     IdentityProviderType.add_member(:idp_identifiers, ::Smithy::Schema::Shapes::MemberShape.new(target: IdpIdentifiersListType, name: "IdpIdentifiers"))
+    IdentityProviderType.add_member(:acr_mapping, ::Smithy::Schema::Shapes::MemberShape.new(target: AcrMappingType, name: "AcrMapping"))
     IdentityProviderType.add_member(:last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, name: "LastModifiedDate"))
     IdentityProviderType.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, name: "CreationDate"))
     IdentityProviderType.type = Types::IdentityProviderType
@@ -1403,6 +1565,10 @@ module Aws::CognitoIdentityProvider
     IdentityProviderTypeType.add_member(:sign_in_with_apple, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SignInWithApple", traits: {"smithy.api#enumValue" => "SignInWithApple"}))
     IdentityProviderTypeType.add_member(:oidc, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OIDC", traits: {"smithy.api#enumValue" => "OIDC"}))
     IdpIdentifiersListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IdpIdentifierType, name: "member"))
+    InboundFederationLambdaType.add_member(:lambda_version, ::Smithy::Schema::Shapes::MemberShape.new(target: InboundFederationLambdaVersionType, name: "LambdaVersion", traits: {"smithy.api#required" => {}}))
+    InboundFederationLambdaType.add_member(:lambda_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, name: "LambdaArn", traits: {"smithy.api#required" => {}}))
+    InboundFederationLambdaType.type = Types::InboundFederationLambdaType
+    InboundFederationLambdaVersionType.add_member(:v1_0, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "V1_0", traits: {"smithy.api#enumValue" => "V1_0"}))
     InitiateAuthRequest.add_member(:auth_flow, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthFlowType, name: "AuthFlow", traits: {"smithy.api#required" => {}}))
     InitiateAuthRequest.add_member(:auth_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthParametersType, name: "AuthParameters"))
     InitiateAuthRequest.add_member(:client_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientMetadataType, name: "ClientMetadata"))
@@ -1419,6 +1585,8 @@ module Aws::CognitoIdentityProvider
     InitiateAuthResponse.type = Types::InitiateAuthResponse
     InternalErrorException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, name: "message"))
     InternalErrorException.type = Types::InternalErrorException
+    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, name: "message"))
+    InternalServerException.type = Types::InternalServerException
     InvalidEmailRoleAccessPolicyException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, name: "message"))
     InvalidEmailRoleAccessPolicyException.type = Types::InvalidEmailRoleAccessPolicyException
     InvalidLambdaResponseException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, name: "message"))
@@ -1436,6 +1604,13 @@ module Aws::CognitoIdentityProvider
     InvalidSmsRoleTrustRelationshipException.type = Types::InvalidSmsRoleTrustRelationshipException
     InvalidUserPoolConfigurationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, name: "message"))
     InvalidUserPoolConfigurationException.type = Types::InvalidUserPoolConfigurationException
+    IssuerConfigurationType.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: IssuerType, name: "Type"))
+    IssuerConfigurationType.type = Types::IssuerConfigurationType
+    IssuerType.add_member(:original, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ORIGINAL", traits: {"smithy.api#enumValue" => "ORIGINAL"}))
+    IssuerType.add_member(:updated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATED", traits: {"smithy.api#enumValue" => "UPDATED"}))
+    KeyConfigurationType.add_member(:key_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionKeyType, name: "KeyType"))
+    KeyConfigurationType.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionKeyArnType, name: "KmsKeyArn"))
+    KeyConfigurationType.type = Types::KeyConfigurationType
     LambdaConfigType.add_member(:pre_sign_up, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, name: "PreSignUp"))
     LambdaConfigType.add_member(:custom_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, name: "CustomMessage"))
     LambdaConfigType.add_member(:post_confirmation, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, name: "PostConfirmation"))
@@ -1450,9 +1625,18 @@ module Aws::CognitoIdentityProvider
     LambdaConfigType.add_member(:custom_sms_sender, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomSMSLambdaVersionConfigType, name: "CustomSMSSender"))
     LambdaConfigType.add_member(:custom_email_sender, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomEmailLambdaVersionConfigType, name: "CustomEmailSender"))
     LambdaConfigType.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, name: "KMSKeyID"))
+    LambdaConfigType.add_member(:inbound_federation, ::Smithy::Schema::Shapes::MemberShape.new(target: InboundFederationLambdaType, name: "InboundFederation"))
     LambdaConfigType.type = Types::LambdaConfigType
+    LimitClass.add_member(:api_category, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "API_CATEGORY", traits: {"smithy.api#enumValue" => "API_CATEGORY"}))
+    LimitDefinitionType.add_member(:limit_class, ::Smithy::Schema::Shapes::MemberShape.new(target: LimitClass, name: "LimitClass", traits: {"smithy.api#required" => {}}))
+    LimitDefinitionType.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: StringToStringMapType, name: "Attributes", traits: {"smithy.api#required" => {}}))
+    LimitDefinitionType.type = Types::LimitDefinitionType
     LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, name: "message"))
     LimitExceededException.type = Types::LimitExceededException
+    LimitType.add_member(:limit_definition, ::Smithy::Schema::Shapes::MemberShape.new(target: LimitDefinitionType, name: "LimitDefinition", traits: {"smithy.api#required" => {}}))
+    LimitType.add_member(:provisioned_limit_value, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerType, name: "ProvisionedLimitValue", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    LimitType.add_member(:free_limit_value, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerType, name: "FreeLimitValue", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    LimitType.type = Types::LimitType
     LinksType.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageIdType, name: "key"))
     LinksType.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: LinkUrlType, name: "value"))
     ListDevicesRequest.add_member(:access_token, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenModelType, name: "AccessToken", traits: {"smithy.api#required" => {}}))
@@ -1502,6 +1686,13 @@ module Aws::CognitoIdentityProvider
     ListUserImportJobsResponse.add_member(:user_import_jobs, ::Smithy::Schema::Shapes::MemberShape.new(target: UserImportJobsListType, name: "UserImportJobs"))
     ListUserImportJobsResponse.add_member(:pagination_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationKeyType, name: "PaginationToken"))
     ListUserImportJobsResponse.type = Types::ListUserImportJobsResponse
+    ListUserPoolClientSecretsRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    ListUserPoolClientSecretsRequest.add_member(:client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientIdType, name: "ClientId", traits: {"smithy.api#required" => {}}))
+    ListUserPoolClientSecretsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationKey, name: "NextToken"))
+    ListUserPoolClientSecretsRequest.type = Types::ListUserPoolClientSecretsRequest
+    ListUserPoolClientSecretsResponse.add_member(:client_secrets, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientSecretDescriptorListType, name: "ClientSecrets"))
+    ListUserPoolClientSecretsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationKey, name: "NextToken"))
+    ListUserPoolClientSecretsResponse.type = Types::ListUserPoolClientSecretsResponse
     ListUserPoolClientsRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, name: "UserPoolId", traits: {"smithy.api#required" => {}}))
     ListUserPoolClientsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryLimit, name: "MaxResults"))
     ListUserPoolClientsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationKey, name: "NextToken"))
@@ -1509,6 +1700,12 @@ module Aws::CognitoIdentityProvider
     ListUserPoolClientsResponse.add_member(:user_pool_clients, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolClientListType, name: "UserPoolClients"))
     ListUserPoolClientsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationKey, name: "NextToken"))
     ListUserPoolClientsResponse.type = Types::ListUserPoolClientsResponse
+    ListUserPoolReplicasRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    ListUserPoolReplicasRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationKeyType, name: "NextToken"))
+    ListUserPoolReplicasRequest.type = Types::ListUserPoolReplicasRequest
+    ListUserPoolReplicasResponse.add_member(:user_pool_replicas, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolReplicaListType, name: "UserPoolReplicas"))
+    ListUserPoolReplicasResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationKeyType, name: "NextToken"))
+    ListUserPoolReplicasResponse.type = Types::ListUserPoolReplicasResponse
     ListUserPoolsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationKeyType, name: "NextToken"))
     ListUserPoolsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: PoolQueryLimitType, name: "MaxResults", traits: {"smithy.api#required" => {}}))
     ListUserPoolsRequest.type = Types::ListUserPoolsRequest
@@ -1597,6 +1794,12 @@ module Aws::CognitoIdentityProvider
     OAuthFlowType.add_member(:implicit, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "implicit", traits: {"smithy.api#enumValue" => "implicit"}))
     OAuthFlowType.add_member(:client_credentials, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "client_credentials", traits: {"smithy.api#enumValue" => "client_credentials"}))
     OAuthFlowsType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OAuthFlowType, name: "member"))
+    OperationNotEnabledException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, name: "message"))
+    OperationNotEnabledException.type = Types::OperationNotEnabledException
+    PasswordHashingAlgorithmType.add_member(:bcrypt, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BCRYPT", traits: {"smithy.api#enumValue" => "BCRYPT"}))
+    PasswordHashingAlgorithmType.add_member(:scrypt, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SCRYPT", traits: {"smithy.api#enumValue" => "SCRYPT"}))
+    PasswordHashingAlgorithmType.add_member(:argon2_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ARGON2ID", traits: {"smithy.api#enumValue" => "ARGON2ID"}))
+    PasswordHashingAlgorithmType.add_member(:pbkdf2_sha256, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PBKDF2_SHA256", traits: {"smithy.api#enumValue" => "PBKDF2_SHA256"}))
     PasswordHistoryPolicyViolationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, name: "message"))
     PasswordHistoryPolicyViolationException.type = Types::PasswordHistoryPolicyViolationException
     PasswordPolicyType.add_member(:minimum_length, ::Smithy::Schema::Shapes::MemberShape.new(target: PasswordPolicyMinLengthType, name: "MinimumLength"))
@@ -1643,6 +1846,13 @@ module Aws::CognitoIdentityProvider
     RefreshTokenRotationType.add_member(:feature, ::Smithy::Schema::Shapes::MemberShape.new(target: FeatureType, name: "Feature", traits: {"smithy.api#required" => {}}))
     RefreshTokenRotationType.add_member(:retry_grace_period_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: RetryGracePeriodSecondsType, name: "RetryGracePeriodSeconds"))
     RefreshTokenRotationType.type = Types::RefreshTokenRotationType
+    ReplicaRegionsType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "member"))
+    ReplicaRoleType.add_member(:primary, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRIMARY", traits: {"smithy.api#enumValue" => "PRIMARY"}))
+    ReplicaRoleType.add_member(:secondary, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SECONDARY", traits: {"smithy.api#enumValue" => "SECONDARY"}))
+    ReplicaStatusType.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
+    ReplicaStatusType.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
+    ReplicaStatusType.add_member(:inactive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INACTIVE", traits: {"smithy.api#enumValue" => "INACTIVE"}))
+    ReplicaStatusType.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
     ResendConfirmationCodeRequest.add_member(:client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientIdType, name: "ClientId", traits: {"smithy.api#required" => {}}))
     ResendConfirmationCodeRequest.add_member(:secret_hash, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretHashType, name: "SecretHash"))
     ResendConfirmationCodeRequest.add_member(:user_context_data, ::Smithy::Schema::Shapes::MemberShape.new(target: UserContextDataType, name: "UserContextData"))
@@ -1676,6 +1886,7 @@ module Aws::CognitoIdentityProvider
     RespondToAuthChallengeResponse.add_member(:session, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionType, name: "Session"))
     RespondToAuthChallengeResponse.add_member(:challenge_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ChallengeParametersType, name: "ChallengeParameters"))
     RespondToAuthChallengeResponse.add_member(:authentication_result, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthenticationResultType, name: "AuthenticationResult"))
+    RespondToAuthChallengeResponse.add_member(:available_challenges, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailableChallengeListType, name: "AvailableChallenges"))
     RespondToAuthChallengeResponse.type = Types::RespondToAuthChallengeResponse
     RevokeTokenRequest.add_member(:token, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenModelType, name: "Token", traits: {"smithy.api#required" => {}}))
     RevokeTokenRequest.add_member(:client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientIdType, name: "ClientId", traits: {"smithy.api#required" => {}}))
@@ -1698,6 +1909,8 @@ module Aws::CognitoIdentityProvider
     RiskLevelType.add_member(:low, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Low", traits: {"smithy.api#enumValue" => "Low"}))
     RiskLevelType.add_member(:medium, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Medium", traits: {"smithy.api#enumValue" => "Medium"}))
     RiskLevelType.add_member(:high, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "High", traits: {"smithy.api#enumValue" => "High"}))
+    RoutingType.add_member(:failover, ::Smithy::Schema::Shapes::MemberShape.new(target: FailoverType, name: "Failover"))
+    RoutingType.type = Types::RoutingType
     S3ConfigurationType.add_member(:bucket_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: S3ArnType, name: "BucketArn"))
     S3ConfigurationType.type = Types::S3ConfigurationType
     SMSMfaSettingsType.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanType, name: "Enabled", traits: {"smithy.api#default" => false}))
@@ -1716,6 +1929,11 @@ module Aws::CognitoIdentityProvider
     ScopeDoesNotExistException.type = Types::ScopeDoesNotExistException
     ScopeListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ScopeType, name: "member"))
     SearchedAttributeNamesListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeNameType, name: "member"))
+    SecurityPolicyType.add_member(:tls_v1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TLS_V1", traits: {"smithy.api#enumValue" => "TLS_V1"}))
+    SecurityPolicyType.add_member(:tls_v1_2_2021, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TLS_V1_2_2021", traits: {"smithy.api#enumValue" => "TLS_V1_2_2021"}))
+    SecurityPolicyType.add_member(:tls_v1_3_2025, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TLS_V1_3_2025", traits: {"smithy.api#enumValue" => "TLS_V1_3_2025"}))
+    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, name: "message"))
+    ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
     SetLogDeliveryConfigurationRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, name: "UserPoolId", traits: {"smithy.api#required" => {}}))
     SetLogDeliveryConfigurationRequest.add_member(:log_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: LogConfigurationListType, name: "LogConfigurations", traits: {"smithy.api#required" => {}}))
     SetLogDeliveryConfigurationRequest.type = Types::SetLogDeliveryConfigurationRequest
@@ -1739,6 +1957,7 @@ module Aws::CognitoIdentityProvider
     SetUserMFAPreferenceRequest.add_member(:sms_mfa_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: SMSMfaSettingsType, name: "SMSMfaSettings"))
     SetUserMFAPreferenceRequest.add_member(:software_token_mfa_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: SoftwareTokenMfaSettingsType, name: "SoftwareTokenMfaSettings"))
     SetUserMFAPreferenceRequest.add_member(:email_mfa_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailMfaSettingsType, name: "EmailMfaSettings"))
+    SetUserMFAPreferenceRequest.add_member(:web_authn_mfa_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: WebAuthnMfaSettingsType, name: "WebAuthnMfaSettings"))
     SetUserMFAPreferenceRequest.add_member(:access_token, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenModelType, name: "AccessToken", traits: {"smithy.api#required" => {}}))
     SetUserMFAPreferenceRequest.type = Types::SetUserMFAPreferenceRequest
     SetUserMFAPreferenceResponse.type = Types::SetUserMFAPreferenceResponse
@@ -1777,9 +1996,10 @@ module Aws::CognitoIdentityProvider
     SignUpResponse.add_member(:session, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionType, name: "Session"))
     SignUpResponse.type = Types::SignUpResponse
     SkippedIPRangeListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "member"))
-    SmsConfigurationType.add_member(:sns_caller_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, name: "SnsCallerArn", traits: {"smithy.api#required" => {}}))
+    SmsConfigurationType.add_member(:sns_caller_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionalArnType, name: "SnsCallerArn", traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => ""}))
     SmsConfigurationType.add_member(:external_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "ExternalId"))
     SmsConfigurationType.add_member(:sns_region, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionCodeType, name: "SnsRegion"))
+    SmsConfigurationType.add_member(:eums_sms, ::Smithy::Schema::Shapes::MemberShape.new(target: EumsSmsConfigurationType, name: "EumsSms"))
     SmsConfigurationType.type = Types::SmsConfigurationType
     SmsMfaConfigType.add_member(:sms_authentication_message, ::Smithy::Schema::Shapes::MemberShape.new(target: SmsVerificationMessageType, name: "SmsAuthenticationMessage"))
     SmsMfaConfigType.add_member(:sms_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SmsConfigurationType, name: "SmsConfiguration"))
@@ -1810,6 +2030,8 @@ module Aws::CognitoIdentityProvider
     StringAttributeConstraintsType.add_member(:min_length, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "MinLength"))
     StringAttributeConstraintsType.add_member(:max_length, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "MaxLength"))
     StringAttributeConstraintsType.type = Types::StringAttributeConstraintsType
+    StringToStringMapType.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "key"))
+    StringToStringMapType.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "value"))
     SupportedIdentityProvidersListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderNameType, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolTagsType, name: "Tags", traits: {"smithy.api#required" => {}}))
@@ -1899,6 +2121,7 @@ module Aws::CognitoIdentityProvider
     UpdateIdentityProviderRequest.add_member(:provider_details, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderDetailsType, name: "ProviderDetails"))
     UpdateIdentityProviderRequest.add_member(:attribute_mapping, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeMappingType, name: "AttributeMapping"))
     UpdateIdentityProviderRequest.add_member(:idp_identifiers, ::Smithy::Schema::Shapes::MemberShape.new(target: IdpIdentifiersListType, name: "IdpIdentifiers"))
+    UpdateIdentityProviderRequest.add_member(:acr_mapping, ::Smithy::Schema::Shapes::MemberShape.new(target: AcrMappingType, name: "AcrMapping"))
     UpdateIdentityProviderRequest.type = Types::UpdateIdentityProviderRequest
     UpdateIdentityProviderResponse.add_member(:identity_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityProviderType, name: "IdentityProvider", traits: {"smithy.api#required" => {}}))
     UpdateIdentityProviderResponse.type = Types::UpdateIdentityProviderResponse
@@ -1910,6 +2133,13 @@ module Aws::CognitoIdentityProvider
     UpdateManagedLoginBrandingRequest.type = Types::UpdateManagedLoginBrandingRequest
     UpdateManagedLoginBrandingResponse.add_member(:managed_login_branding, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedLoginBrandingType, name: "ManagedLoginBranding"))
     UpdateManagedLoginBrandingResponse.type = Types::UpdateManagedLoginBrandingResponse
+    UpdateProvisionedLimitRequest.add_member(:limit_definition, ::Smithy::Schema::Shapes::MemberShape.new(target: LimitDefinitionType, name: "LimitDefinition", traits: {"smithy.api#required" => {}}))
+    UpdateProvisionedLimitRequest.add_member(:requested_limit_value, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerType, name: "RequestedLimitValue", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    UpdateProvisionedLimitRequest.type = Types::UpdateProvisionedLimitRequest
+    UpdateProvisionedLimitResponse.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: LimitType, name: "Limit", traits: {"smithy.api#required" => {}}))
+    UpdateProvisionedLimitResponse.type = Types::UpdateProvisionedLimitResponse
+    UpdateReplicaStatusType.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
+    UpdateReplicaStatusType.add_member(:inactive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INACTIVE", traits: {"smithy.api#enumValue" => "INACTIVE"}))
     UpdateResourceServerRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, name: "UserPoolId", traits: {"smithy.api#required" => {}}))
     UpdateResourceServerRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceServerIdentifierType, name: "Identifier", traits: {"smithy.api#required" => {}}))
     UpdateResourceServerRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceServerNameType, name: "Name", traits: {"smithy.api#required" => {}}))
@@ -1962,10 +2192,18 @@ module Aws::CognitoIdentityProvider
     UpdateUserPoolDomainRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, name: "UserPoolId", traits: {"smithy.api#required" => {}}))
     UpdateUserPoolDomainRequest.add_member(:managed_login_version, ::Smithy::Schema::Shapes::MemberShape.new(target: WrappedIntegerType, name: "ManagedLoginVersion"))
     UpdateUserPoolDomainRequest.add_member(:custom_domain_config, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomDomainConfigType, name: "CustomDomainConfig"))
+    UpdateUserPoolDomainRequest.add_member(:routing, ::Smithy::Schema::Shapes::MemberShape.new(target: RoutingType, name: "Routing"))
     UpdateUserPoolDomainRequest.type = Types::UpdateUserPoolDomainRequest
     UpdateUserPoolDomainResponse.add_member(:managed_login_version, ::Smithy::Schema::Shapes::MemberShape.new(target: WrappedIntegerType, name: "ManagedLoginVersion"))
     UpdateUserPoolDomainResponse.add_member(:cloud_front_domain, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainType, name: "CloudFrontDomain"))
+    UpdateUserPoolDomainResponse.add_member(:routing, ::Smithy::Schema::Shapes::MemberShape.new(target: RoutingType, name: "Routing"))
     UpdateUserPoolDomainResponse.type = Types::UpdateUserPoolDomainResponse
+    UpdateUserPoolReplicaRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, name: "UserPoolId", traits: {"smithy.api#required" => {}}))
+    UpdateUserPoolReplicaRequest.add_member(:region_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionNameType, name: "RegionName", traits: {"smithy.api#required" => {}}))
+    UpdateUserPoolReplicaRequest.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateReplicaStatusType, name: "Status", traits: {"smithy.api#required" => {}}))
+    UpdateUserPoolReplicaRequest.type = Types::UpdateUserPoolReplicaRequest
+    UpdateUserPoolReplicaResponse.add_member(:user_pool_replica, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolReplicaType, name: "UserPoolReplica"))
+    UpdateUserPoolReplicaResponse.type = Types::UpdateUserPoolReplicaResponse
     UpdateUserPoolRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, name: "UserPoolId", traits: {"smithy.api#required" => {}}))
     UpdateUserPoolRequest.add_member(:policies, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolPolicyType, name: "Policies"))
     UpdateUserPoolRequest.add_member(:deletion_protection, ::Smithy::Schema::Shapes::MemberShape.new(target: DeletionProtectionType, name: "DeletionProtection"))
@@ -1987,6 +2225,9 @@ module Aws::CognitoIdentityProvider
     UpdateUserPoolRequest.add_member(:account_recovery_setting, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountRecoverySettingType, name: "AccountRecoverySetting"))
     UpdateUserPoolRequest.add_member(:pool_name, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolNameType, name: "PoolName"))
     UpdateUserPoolRequest.add_member(:user_pool_tier, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolTierType, name: "UserPoolTier"))
+    UpdateUserPoolRequest.add_member(:key_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyConfigurationType, name: "KeyConfiguration"))
+    UpdateUserPoolRequest.add_member(:issuer_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: IssuerConfigurationType, name: "IssuerConfiguration"))
+    UpdateUserPoolRequest.add_member(:acr_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AcrConfigurationType, name: "AcrConfiguration"))
     UpdateUserPoolRequest.type = Types::UpdateUserPoolRequest
     UpdateUserPoolResponse.type = Types::UpdateUserPoolResponse
     UserAttributeUpdateSettingsType.add_member(:attributes_require_verification_before_update, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributesRequireVerificationBeforeUpdateType, name: "AttributesRequireVerificationBeforeUpdate"))
@@ -2017,6 +2258,7 @@ module Aws::CognitoIdentityProvider
     UserImportJobType.add_member(:skipped_users, ::Smithy::Schema::Shapes::MemberShape.new(target: LongType, name: "SkippedUsers", traits: {"smithy.api#default" => 0}))
     UserImportJobType.add_member(:failed_users, ::Smithy::Schema::Shapes::MemberShape.new(target: LongType, name: "FailedUsers", traits: {"smithy.api#default" => 0}))
     UserImportJobType.add_member(:completion_message, ::Smithy::Schema::Shapes::MemberShape.new(target: CompletionMessageType, name: "CompletionMessage"))
+    UserImportJobType.add_member(:password_hashing_algorithm, ::Smithy::Schema::Shapes::MemberShape.new(target: PasswordHashingAlgorithmType, name: "PasswordHashingAlgorithm"))
     UserImportJobType.type = Types::UserImportJobType
     UserImportJobsListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UserImportJobType, name: "member"))
     UserLambdaValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, name: "message"))
@@ -2069,6 +2311,7 @@ module Aws::CognitoIdentityProvider
     UserPoolDescriptionType.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusType, name: "Status", traits: {"smithy.api#deprecated" => {"message" => "This property is no longer available."}}))
     UserPoolDescriptionType.add_member(:last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, name: "LastModifiedDate"))
     UserPoolDescriptionType.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, name: "CreationDate"))
+    UserPoolDescriptionType.add_member(:replica_regions, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicaRegionsType, name: "ReplicaRegions"))
     UserPoolDescriptionType.type = Types::UserPoolDescriptionType
     UserPoolListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolDescriptionType, name: "member"))
     UserPoolMfaType.add_member(:off, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OFF", traits: {"smithy.api#enumValue" => "OFF"}))
@@ -2077,6 +2320,12 @@ module Aws::CognitoIdentityProvider
     UserPoolPolicyType.add_member(:password_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: PasswordPolicyType, name: "PasswordPolicy"))
     UserPoolPolicyType.add_member(:sign_in_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: SignInPolicyType, name: "SignInPolicy"))
     UserPoolPolicyType.type = Types::UserPoolPolicyType
+    UserPoolReplicaListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolReplicaType, name: "member"))
+    UserPoolReplicaType.add_member(:region_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionNameType, name: "RegionName"))
+    UserPoolReplicaType.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicaStatusType, name: "Status"))
+    UserPoolReplicaType.add_member(:role, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicaRoleType, name: "Role"))
+    UserPoolReplicaType.add_member(:user_pool_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, name: "UserPoolArn"))
+    UserPoolReplicaType.type = Types::UserPoolReplicaType
     UserPoolTaggingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, name: "message"))
     UserPoolTaggingException.type = Types::UserPoolTaggingException
     UserPoolTagsListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeysType, name: "member"))
@@ -2119,6 +2368,9 @@ module Aws::CognitoIdentityProvider
     UserPoolType.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, name: "Arn"))
     UserPoolType.add_member(:account_recovery_setting, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountRecoverySettingType, name: "AccountRecoverySetting"))
     UserPoolType.add_member(:user_pool_tier, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolTierType, name: "UserPoolTier"))
+    UserPoolType.add_member(:key_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyConfigurationType, name: "KeyConfiguration"))
+    UserPoolType.add_member(:issuer_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: IssuerConfigurationType, name: "IssuerConfiguration"))
+    UserPoolType.add_member(:acr_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AcrConfigurationType, name: "AcrConfiguration"))
     UserPoolType.type = Types::UserPoolType
     UserStatusType.add_member(:unconfirmed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNCONFIRMED", traits: {"smithy.api#enumValue" => "UNCONFIRMED"}))
     UserStatusType.add_member(:confirmed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONFIRMED", traits: {"smithy.api#enumValue" => "CONFIRMED"}))
@@ -2180,6 +2432,7 @@ module Aws::CognitoIdentityProvider
     WebAuthnConfigurationMissingException.type = Types::WebAuthnConfigurationMissingException
     WebAuthnConfigurationType.add_member(:relying_party_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RelyingPartyIdType, name: "RelyingPartyId"))
     WebAuthnConfigurationType.add_member(:user_verification, ::Smithy::Schema::Shapes::MemberShape.new(target: UserVerificationType, name: "UserVerification"))
+    WebAuthnConfigurationType.add_member(:factor_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: WebAuthnFactorConfigurationType, name: "FactorConfiguration"))
     WebAuthnConfigurationType.type = Types::WebAuthnConfigurationType
     WebAuthnCredentialDescription.add_member(:credential_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "CredentialId", traits: {"smithy.api#required" => {}}))
     WebAuthnCredentialDescription.add_member(:friendly_credential_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "FriendlyCredentialName", traits: {"smithy.api#required" => {}}))
@@ -2191,6 +2444,10 @@ module Aws::CognitoIdentityProvider
     WebAuthnCredentialDescriptionListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WebAuthnCredentialDescription, name: "member"))
     WebAuthnCredentialNotSupportedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, name: "message"))
     WebAuthnCredentialNotSupportedException.type = Types::WebAuthnCredentialNotSupportedException
+    WebAuthnFactorConfigurationType.add_member(:single_factor, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SINGLE_FACTOR", traits: {"smithy.api#enumValue" => "SINGLE_FACTOR"}))
+    WebAuthnFactorConfigurationType.add_member(:multi_factor_with_user_verification, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MULTI_FACTOR_WITH_USER_VERIFICATION", traits: {"smithy.api#enumValue" => "MULTI_FACTOR_WITH_USER_VERIFICATION"}))
+    WebAuthnMfaSettingsType.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanType, name: "Enabled", traits: {"smithy.api#default" => false}))
+    WebAuthnMfaSettingsType.type = Types::WebAuthnMfaSettingsType
     WebAuthnNotEnabledException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, name: "message"))
     WebAuthnNotEnabledException.type = Types::WebAuthnNotEnabledException
     WebAuthnOriginNotAllowedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, name: "message"))
@@ -2202,7 +2459,7 @@ module Aws::CognitoIdentityProvider
       service.id = "com.amazonaws.cognitoidentityprovider#AWSCognitoIdentityProviderService"
       service.name = "AWSCognitoIdentityProviderService"
       service.version = "2016-04-18"
-      service.traits = {"aws.api#service" => {"sdkId" => "Cognito Identity Provider", "arnNamespace" => "cognito-idp", "cloudFormationName" => "Cognito", "cloudTrailEventSource" => "cognito-idp.amazonaws.com", "docId" => "cognito-idp-2016-04-18", "endpointPrefix" => "cognito-idp"}, "aws.auth#sigv4" => {"name" => "cognito-idp"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "Amazon Cognito Identity Provider", "smithy.api#xmlNamespace" => {"uri" => "http://cognito-idp.amazonaws.com/doc/2016-04-18/"}}
+      service.traits = {"aws.api#service" => {"sdkId" => "Cognito Identity Provider", "arnNamespace" => "cognito-idp", "cloudFormationName" => "Cognito", "cloudTrailEventSource" => "cognito-idp.amazonaws.com", "docId" => "cognito-idp-2016-04-18", "endpointPrefix" => "cognito-idp"}, "aws.auth#sigv4" => {"name" => "cognito-idp"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "Amazon Cognito Identity Provider", "smithy.api#xmlNamespace" => {"uri" => "http://cognito-idp.amazonaws.com/doc/2016-04-18/"}, "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws"]}, {"fn" => "stringEquals", "argv" => [{"ref" => "Region"}, "us-east-1"]}, {"fn" => "stringEquals", "argv" => [{"ref" => "Region"}, "us-east-2"]}, {"fn" => "stringEquals", "argv" => [{"ref" => "Region"}, "us-west-1"]}, {"fn" => "stringEquals", "argv" => [{"ref" => "Region"}, "us-west-2"]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://cognito-idp-fips.us-east-1.amazonaws.com", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://cognito-idp-fips.us-east-2.amazonaws.com", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://cognito-idp-fips.us-west-1.amazonaws.com", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://cognito-idp-fips.us-west-2.amazonaws.com", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://cognito-idp-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://cognito-idp-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://cognito-idp.{Region}.amazonaws.com", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://cognito-idp.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://cognito-idp.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 18, "nodes" => "/////wAAAAH/////AAAAAAAAABEAAAADAAAAAQAAAAQF9eEQAAAAAgAAAAUF9eEQAAAAAwAAAAkAAAAGAAAABQAAAAcF9eEPAAAABgAAAAgF9eEOAAAABwX14QwF9eENAAAABAAAAAsAAAAKAAAABQX14QkF9eELAAAABQAAAAwF9eEKAAAABgAAAA0F9eEJAAAACAX14QQAAAAOAAAACQX14QUAAAAPAAAACgX14QYAAAAQAAAACwX14QcF9eEIAAAAAwX14QEAAAASAAAABQX14QIF9eED"}}
       service.add_operation(:add_custom_attributes, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#AddCustomAttributes"
         operation.name = "AddCustomAttributes"
@@ -2211,9 +2468,23 @@ module Aws::CognitoIdentityProvider
         operation.errors << InternalErrorException
         operation.errors << InvalidParameterException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
         operation.errors << UserImportInProgressException
+        operation.traits = {}
+      end)
+      service.add_operation(:add_user_pool_client_secret, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cognitoidentityprovider#AddUserPoolClientSecret"
+        operation.name = "AddUserPoolClientSecret"
+        operation.input = AddUserPoolClientSecretRequest
+        operation.output = AddUserPoolClientSecretResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << InvalidParameterException
+        operation.errors << LimitExceededException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:admin_add_user_to_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -2224,6 +2495,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InternalErrorException
         operation.errors << InvalidParameterException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
         operation.errors << UserNotFoundException
@@ -2239,6 +2511,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InvalidParameterException
         operation.errors << LimitExceededException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyFailedAttemptsException
         operation.errors << TooManyRequestsException
@@ -2260,6 +2533,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InvalidSmsRoleAccessPolicyException
         operation.errors << InvalidSmsRoleTrustRelationshipException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << PreconditionNotMetException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
@@ -2267,6 +2541,21 @@ module Aws::CognitoIdentityProvider
         operation.errors << UnsupportedUserStateException
         operation.errors << UserLambdaValidationException
         operation.errors << UsernameExistsException
+        operation.errors << UserNotFoundException
+        operation.traits = {}
+      end)
+      service.add_operation(:admin_delete_software_token, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cognitoidentityprovider#AdminDeleteSoftwareToken"
+        operation.name = "AdminDeleteSoftwareToken"
+        operation.input = AdminDeleteSoftwareTokenRequest
+        operation.output = AdminDeleteSoftwareTokenResponse
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
+        operation.errors << UserNotConfirmedException
         operation.errors << UserNotFoundException
         operation.traits = {}
       end)
@@ -2278,6 +2567,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InternalErrorException
         operation.errors << InvalidParameterException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
         operation.errors << UserNotFoundException
@@ -2291,6 +2581,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InternalErrorException
         operation.errors << InvalidParameterException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
         operation.errors << UserNotFoundException
@@ -2305,6 +2596,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InternalErrorException
         operation.errors << InvalidParameterException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
         operation.errors << UserNotFoundException
@@ -2318,6 +2610,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InternalErrorException
         operation.errors << InvalidParameterException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
         operation.errors << UserNotFoundException
@@ -2331,6 +2624,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InternalErrorException
         operation.errors << InvalidParameterException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
         operation.errors << UserNotFoundException
@@ -2345,6 +2639,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InvalidParameterException
         operation.errors << InvalidUserPoolConfigurationException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
         operation.errors << UserNotFoundException
@@ -2359,6 +2654,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InvalidParameterException
         operation.errors << InvalidUserPoolConfigurationException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
         operation.traits = {}
@@ -2371,6 +2667,21 @@ module Aws::CognitoIdentityProvider
         operation.errors << InternalErrorException
         operation.errors << InvalidParameterException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
+        operation.errors << UserNotFoundException
+        operation.traits = {}
+      end)
+      service.add_operation(:admin_get_user_auth_factors, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cognitoidentityprovider#AdminGetUserAuthFactors"
+        operation.name = "AdminGetUserAuthFactors"
+        operation.input = AdminGetUserAuthFactorsRequest
+        operation.output = AdminGetUserAuthFactorsResponse
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
         operation.errors << UserNotFoundException
@@ -2381,6 +2692,7 @@ module Aws::CognitoIdentityProvider
         operation.name = "AdminInitiateAuth"
         operation.input = AdminInitiateAuthRequest
         operation.output = AdminInitiateAuthResponse
+        operation.errors << FeatureUnavailableInTierException
         operation.errors << InternalErrorException
         operation.errors << InvalidEmailRoleAccessPolicyException
         operation.errors << InvalidLambdaResponseException
@@ -2390,6 +2702,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InvalidUserPoolConfigurationException
         operation.errors << MFAMethodNotFoundException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << PasswordResetRequiredException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
@@ -2410,6 +2723,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InvalidParameterException
         operation.errors << LimitExceededException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
         operation.errors << UserNotFoundException
@@ -2424,6 +2738,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InvalidParameterException
         operation.errors << InvalidUserPoolConfigurationException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
         operation.traits = {}
@@ -2436,6 +2751,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InternalErrorException
         operation.errors << InvalidParameterException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
         operation.errors << UserNotFoundException
@@ -2450,6 +2766,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InternalErrorException
         operation.errors << InvalidParameterException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
         operation.errors << UserNotFoundException
@@ -2465,6 +2782,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InternalErrorException
         operation.errors << InvalidParameterException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
         operation.errors << UserNotFoundException
@@ -2483,6 +2801,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InvalidSmsRoleTrustRelationshipException
         operation.errors << LimitExceededException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
         operation.errors << UnexpectedLambdaException
@@ -2508,6 +2827,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InvalidUserPoolConfigurationException
         operation.errors << MFAMethodNotFoundException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << PasswordHistoryPolicyViolationException
         operation.errors << PasswordResetRequiredException
         operation.errors << ResourceNotFoundException
@@ -2527,6 +2847,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InternalErrorException
         operation.errors << InvalidParameterException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << PasswordResetRequiredException
         operation.errors << ResourceNotFoundException
         operation.errors << UserNotConfirmedException
@@ -2542,6 +2863,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InvalidParameterException
         operation.errors << InvalidPasswordException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << PasswordHistoryPolicyViolationException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
@@ -2556,6 +2878,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InternalErrorException
         operation.errors << InvalidParameterException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
         operation.errors << UserNotFoundException
         operation.traits = {}
@@ -2568,6 +2891,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InternalErrorException
         operation.errors << InvalidParameterException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
         operation.errors << UserNotFoundException
@@ -2583,6 +2907,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InvalidParameterException
         operation.errors << InvalidUserPoolConfigurationException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
         operation.errors << UserNotFoundException
@@ -2601,6 +2926,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InvalidSmsRoleAccessPolicyException
         operation.errors << InvalidSmsRoleTrustRelationshipException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
         operation.errors << UnexpectedLambdaException
@@ -2616,6 +2942,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InternalErrorException
         operation.errors << InvalidParameterException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
         operation.errors << UserNotFoundException
@@ -2631,6 +2958,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InternalErrorException
         operation.errors << InvalidParameterException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
         operation.errors << SoftwareTokenMFANotFoundException
         operation.traits = {"smithy.api#auth" => [], "smithy.api#optionalAuth" => {}}
@@ -2646,6 +2974,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InvalidPasswordException
         operation.errors << LimitExceededException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << PasswordHistoryPolicyViolationException
         operation.errors << PasswordResetRequiredException
         operation.errors << ResourceNotFoundException
@@ -2664,6 +2993,8 @@ module Aws::CognitoIdentityProvider
         operation.errors << InvalidParameterException
         operation.errors << LimitExceededException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
+        operation.errors << PasswordResetRequiredException
         operation.errors << TooManyRequestsException
         operation.errors << WebAuthnChallengeNotFoundException
         operation.errors << WebAuthnClientMismatchException
@@ -2686,6 +3017,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InvalidPasswordException
         operation.errors << InvalidUserPoolConfigurationException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << PasswordResetRequiredException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
@@ -2708,6 +3040,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InvalidPasswordException
         operation.errors << LimitExceededException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << PasswordHistoryPolicyViolationException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyFailedAttemptsException
@@ -2732,6 +3065,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InvalidParameterException
         operation.errors << LimitExceededException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyFailedAttemptsException
         operation.errors << TooManyRequestsException
@@ -2750,6 +3084,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InvalidParameterException
         operation.errors << LimitExceededException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
         operation.traits = {}
@@ -2779,6 +3114,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << LimitExceededException
         operation.errors << ManagedLoginBrandingExistsException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
         operation.traits = {}
@@ -2792,6 +3128,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InvalidParameterException
         operation.errors << LimitExceededException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
         operation.traits = {}
@@ -2806,6 +3143,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InvalidParameterException
         operation.errors << LimitExceededException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
         operation.errors << TermsExistsException
         operation.errors << TooManyRequestsException
@@ -2820,6 +3158,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InvalidParameterException
         operation.errors << LimitExceededException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << PreconditionNotMetException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
@@ -2854,6 +3193,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InvalidParameterException
         operation.errors << LimitExceededException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
         operation.errors << ScopeDoesNotExistException
         operation.errors << TooManyRequestsException
@@ -2870,7 +3210,24 @@ module Aws::CognitoIdentityProvider
         operation.errors << InvalidParameterException
         operation.errors << LimitExceededException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
+        operation.traits = {}
+      end)
+      service.add_operation(:create_user_pool_replica, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cognitoidentityprovider#CreateUserPoolReplica"
+        operation.name = "CreateUserPoolReplica"
+        operation.input = CreateUserPoolReplicaRequest
+        operation.output = CreateUserPoolReplicaResponse
+        operation.errors << FeatureUnavailableInTierException
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << LimitExceededException
+        operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
+        operation.errors << UserPoolTaggingException
         operation.traits = {}
       end)
       service.add_operation(:delete_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -2881,6 +3238,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InternalErrorException
         operation.errors << InvalidParameterException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
         operation.traits = {}
@@ -2908,6 +3266,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InternalErrorException
         operation.errors << InvalidParameterException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
         operation.traits = {}
@@ -2920,6 +3279,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InternalErrorException
         operation.errors << InvalidParameterException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
         operation.traits = {}
@@ -2933,6 +3293,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InternalErrorException
         operation.errors << InvalidParameterException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
         operation.traits = {}
@@ -2946,6 +3307,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InternalErrorException
         operation.errors << InvalidParameterException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << PasswordResetRequiredException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
@@ -2962,6 +3324,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InternalErrorException
         operation.errors << InvalidParameterException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << PasswordResetRequiredException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
@@ -2977,6 +3340,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InternalErrorException
         operation.errors << InvalidParameterException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
         operation.errors << UserImportInProgressException
@@ -2991,6 +3355,19 @@ module Aws::CognitoIdentityProvider
         operation.errors << InternalErrorException
         operation.errors << InvalidParameterException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
+        operation.traits = {}
+      end)
+      service.add_operation(:delete_user_pool_client_secret, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cognitoidentityprovider#DeleteUserPoolClientSecret"
+        operation.name = "DeleteUserPoolClientSecret"
+        operation.input = DeleteUserPoolClientSecretRequest
+        operation.output = DeleteUserPoolClientSecretResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidParameterException
+        operation.errors << LimitExceededException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
         operation.traits = {}
@@ -3004,7 +3381,21 @@ module Aws::CognitoIdentityProvider
         operation.errors << InternalErrorException
         operation.errors << InvalidParameterException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
+        operation.traits = {}
+      end)
+      service.add_operation(:delete_user_pool_replica, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cognitoidentityprovider#DeleteUserPoolReplica"
+        operation.name = "DeleteUserPoolReplica"
+        operation.input = DeleteUserPoolReplicaRequest
+        operation.output = DeleteUserPoolReplicaResponse
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
       service.add_operation(:delete_web_authn_credential, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -3017,6 +3408,8 @@ module Aws::CognitoIdentityProvider
         operation.errors << InvalidParameterException
         operation.errors << LimitExceededException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
+        operation.errors << PasswordResetRequiredException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#auth" => [], "smithy.api#optionalAuth" => {}}
@@ -3041,6 +3434,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InternalErrorException
         operation.errors << InvalidParameterException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
         operation.traits = {}
@@ -3053,6 +3447,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InternalErrorException
         operation.errors << InvalidParameterException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
         operation.traits = {}
@@ -3065,6 +3460,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InternalErrorException
         operation.errors << InvalidParameterException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
         operation.traits = {}
@@ -3077,6 +3473,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InternalErrorException
         operation.errors << InvalidParameterException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
         operation.errors << UserPoolAddOnNotEnabledException
@@ -3090,6 +3487,20 @@ module Aws::CognitoIdentityProvider
         operation.errors << InternalErrorException
         operation.errors << InvalidParameterException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
+        operation.traits = {}
+      end)
+      service.add_operation(:describe_terms_by_client, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cognitoidentityprovider#DescribeTermsByClient"
+        operation.name = "DescribeTermsByClient"
+        operation.input = DescribeTermsByClientRequest
+        operation.output = DescribeTermsByClientResponse
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
         operation.traits = {}
@@ -3102,6 +3513,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InternalErrorException
         operation.errors << InvalidParameterException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
         operation.traits = {}
@@ -3114,6 +3526,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InternalErrorException
         operation.errors << InvalidParameterException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
         operation.errors << UserPoolTaggingException
@@ -3127,6 +3540,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InternalErrorException
         operation.errors << InvalidParameterException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
         operation.traits = {}
@@ -3139,6 +3553,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InternalErrorException
         operation.errors << InvalidParameterException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
         operation.traits = {}
       end)
@@ -3152,6 +3567,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InvalidParameterException
         operation.errors << InvalidUserPoolConfigurationException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << PasswordResetRequiredException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
@@ -3174,6 +3590,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InvalidSmsRoleTrustRelationshipException
         operation.errors << LimitExceededException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
         operation.errors << UnexpectedLambdaException
@@ -3189,6 +3606,21 @@ module Aws::CognitoIdentityProvider
         operation.errors << InternalErrorException
         operation.errors << InvalidParameterException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
+        operation.traits = {}
+      end)
+      service.add_operation(:get_client_token, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cognitoidentityprovider#GetClientToken"
+        operation.name = "GetClientToken"
+        operation.input = GetClientTokenRequest
+        operation.output = GetClientTokenResponse
+        operation.errors << ForbiddenException
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
         operation.traits = {}
@@ -3203,6 +3635,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InvalidParameterException
         operation.errors << InvalidUserPoolConfigurationException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << PasswordResetRequiredException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
@@ -3218,6 +3651,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InternalErrorException
         operation.errors << InvalidParameterException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
         operation.traits = {}
@@ -3246,6 +3680,18 @@ module Aws::CognitoIdentityProvider
         operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
+      service.add_operation(:get_provisioned_limit, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cognitoidentityprovider#GetProvisionedLimit"
+        operation.name = "GetProvisionedLimit"
+        operation.input = GetProvisionedLimitRequest
+        operation.output = GetProvisionedLimitResponse
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
+        operation.traits = {}
+      end)
       service.add_operation(:get_signing_certificate, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#GetSigningCertificate"
         operation.name = "GetSigningCertificate"
@@ -3253,6 +3699,7 @@ module Aws::CognitoIdentityProvider
         operation.output = GetSigningCertificateResponse
         operation.errors << InternalErrorException
         operation.errors << InvalidParameterException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
         operation.traits = {}
       end)
@@ -3266,6 +3713,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InvalidLambdaResponseException
         operation.errors << InvalidParameterException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << RefreshTokenReuseException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
@@ -3282,6 +3730,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InternalErrorException
         operation.errors << InvalidParameterException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
         operation.traits = {}
@@ -3295,6 +3744,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InternalErrorException
         operation.errors << InvalidParameterException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << PasswordResetRequiredException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
@@ -3317,6 +3767,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InvalidSmsRoleTrustRelationshipException
         operation.errors << LimitExceededException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << PasswordResetRequiredException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
@@ -3335,6 +3786,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InternalErrorException
         operation.errors << InvalidParameterException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << PasswordResetRequiredException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
@@ -3363,6 +3815,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InternalErrorException
         operation.errors << InvalidParameterException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << PasswordResetRequiredException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
@@ -3374,6 +3827,7 @@ module Aws::CognitoIdentityProvider
         operation.name = "InitiateAuth"
         operation.input = InitiateAuthRequest
         operation.output = InitiateAuthResponse
+        operation.errors << FeatureUnavailableInTierException
         operation.errors << ForbiddenException
         operation.errors << InternalErrorException
         operation.errors << InvalidEmailRoleAccessPolicyException
@@ -3383,6 +3837,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InvalidSmsRoleTrustRelationshipException
         operation.errors << InvalidUserPoolConfigurationException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << PasswordResetRequiredException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
@@ -3403,6 +3858,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InvalidParameterException
         operation.errors << InvalidUserPoolConfigurationException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << PasswordResetRequiredException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
@@ -3418,6 +3874,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InternalErrorException
         operation.errors << InvalidParameterException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
         operation.traits = {}
@@ -3444,6 +3901,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InternalErrorException
         operation.errors << InvalidParameterException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
         operation.traits = {}
@@ -3457,6 +3915,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InternalErrorException
         operation.errors << InvalidParameterException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
         operation.traits = {}
@@ -3469,6 +3928,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InternalErrorException
         operation.errors << InvalidParameterException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
         operation.traits = {}
@@ -3481,6 +3941,19 @@ module Aws::CognitoIdentityProvider
         operation.errors << InternalErrorException
         operation.errors << InvalidParameterException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
+        operation.traits = {}
+      end)
+      service.add_operation(:list_user_pool_client_secrets, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cognitoidentityprovider#ListUserPoolClientSecrets"
+        operation.name = "ListUserPoolClientSecrets"
+        operation.input = ListUserPoolClientSecretsRequest
+        operation.output = ListUserPoolClientSecretsResponse
+        operation.errors << InternalServerException
+        operation.errors << InvalidParameterException
+        operation.errors << LimitExceededException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
         operation.traits = {}
@@ -3493,10 +3966,24 @@ module Aws::CognitoIdentityProvider
         operation.errors << InternalErrorException
         operation.errors << InvalidParameterException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
         operation.traits = {}
         operation[:paginator] = Paginators::ListUserPoolClients.new
+      end)
+      service.add_operation(:list_user_pool_replicas, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cognitoidentityprovider#ListUserPoolReplicas"
+        operation.name = "ListUserPoolReplicas"
+        operation.input = ListUserPoolReplicasRequest
+        operation.output = ListUserPoolReplicasResponse
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
+        operation.traits = {}
       end)
       service.add_operation(:list_user_pools, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cognitoidentityprovider#ListUserPools"
@@ -3518,6 +4005,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InternalErrorException
         operation.errors << InvalidParameterException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
         operation.traits = {}
@@ -3531,6 +4019,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InternalErrorException
         operation.errors << InvalidParameterException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
         operation.traits = {}
@@ -3546,6 +4035,8 @@ module Aws::CognitoIdentityProvider
         operation.errors << InvalidParameterException
         operation.errors << LimitExceededException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
+        operation.errors << PasswordResetRequiredException
         operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#auth" => [], "smithy.api#optionalAuth" => {}}
       end)
@@ -3564,6 +4055,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InvalidSmsRoleTrustRelationshipException
         operation.errors << LimitExceededException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
         operation.errors << UnexpectedLambdaException
@@ -3590,6 +4082,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InvalidUserPoolConfigurationException
         operation.errors << MFAMethodNotFoundException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << PasswordHistoryPolicyViolationException
         operation.errors << PasswordResetRequiredException
         operation.errors << ResourceNotFoundException
@@ -3609,6 +4102,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << ForbiddenException
         operation.errors << InternalErrorException
         operation.errors << InvalidParameterException
+        operation.errors << OperationNotEnabledException
         operation.errors << TooManyRequestsException
         operation.errors << UnauthorizedException
         operation.errors << UnsupportedOperationException
@@ -3638,6 +4132,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InvalidEmailRoleAccessPolicyException
         operation.errors << InvalidParameterException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
         operation.errors << UserPoolAddOnNotEnabledException
@@ -3651,6 +4146,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InternalErrorException
         operation.errors << InvalidParameterException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
         operation.traits = {}
@@ -3664,6 +4160,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InternalErrorException
         operation.errors << InvalidParameterException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << PasswordResetRequiredException
         operation.errors << ResourceNotFoundException
         operation.errors << UserNotConfirmedException
@@ -3682,6 +4179,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InvalidSmsRoleAccessPolicyException
         operation.errors << InvalidSmsRoleTrustRelationshipException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
         operation.traits = {}
@@ -3695,6 +4193,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InternalErrorException
         operation.errors << InvalidParameterException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << PasswordResetRequiredException
         operation.errors << ResourceNotFoundException
         operation.errors << UserNotConfirmedException
@@ -3717,6 +4216,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InvalidSmsRoleTrustRelationshipException
         operation.errors << LimitExceededException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
         operation.errors << UnexpectedLambdaException
@@ -3732,6 +4232,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InternalErrorException
         operation.errors << InvalidParameterException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << PreconditionNotMetException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
@@ -3747,6 +4248,8 @@ module Aws::CognitoIdentityProvider
         operation.errors << InvalidParameterException
         operation.errors << LimitExceededException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
+        operation.errors << PasswordResetRequiredException
         operation.errors << TooManyRequestsException
         operation.errors << WebAuthnConfigurationMissingException
         operation.errors << WebAuthnNotEnabledException
@@ -3760,6 +4263,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InternalErrorException
         operation.errors << InvalidParameterException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << PreconditionNotMetException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
@@ -3773,6 +4277,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InternalErrorException
         operation.errors << InvalidParameterException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
         operation.traits = {}
@@ -3785,6 +4290,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InternalErrorException
         operation.errors << InvalidParameterException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
         operation.traits = {}
@@ -3797,6 +4303,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InternalErrorException
         operation.errors << InvalidParameterException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
         operation.errors << UserNotFoundException
@@ -3813,6 +4320,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InvalidParameterException
         operation.errors << InvalidUserPoolConfigurationException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << PasswordResetRequiredException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
@@ -3828,6 +4336,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InternalErrorException
         operation.errors << InvalidParameterException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
         operation.traits = {}
@@ -3855,7 +4364,21 @@ module Aws::CognitoIdentityProvider
         operation.errors << InternalErrorException
         operation.errors << InvalidParameterException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
+        operation.traits = {}
+      end)
+      service.add_operation(:update_provisioned_limit, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cognitoidentityprovider#UpdateProvisionedLimit"
+        operation.name = "UpdateProvisionedLimit"
+        operation.input = UpdateProvisionedLimitRequest
+        operation.output = UpdateProvisionedLimitResponse
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
         operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
@@ -3867,6 +4390,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InternalErrorException
         operation.errors << InvalidParameterException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
         operation.traits = {}
@@ -3880,6 +4404,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InternalErrorException
         operation.errors << InvalidParameterException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
         operation.errors << TermsExistsException
         operation.errors << TooManyRequestsException
@@ -3902,6 +4427,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InvalidSmsRoleAccessPolicyException
         operation.errors << InvalidSmsRoleTrustRelationshipException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << PasswordResetRequiredException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
@@ -3924,6 +4450,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InvalidSmsRoleAccessPolicyException
         operation.errors << InvalidSmsRoleTrustRelationshipException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
         operation.errors << TierChangeNotAllowedException
         operation.errors << TooManyRequestsException
@@ -3942,6 +4469,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InvalidOAuthFlowException
         operation.errors << InvalidParameterException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
         operation.errors << ScopeDoesNotExistException
         operation.errors << TooManyRequestsException
@@ -3957,6 +4485,20 @@ module Aws::CognitoIdentityProvider
         operation.errors << InternalErrorException
         operation.errors << InvalidParameterException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
+        operation.errors << ResourceNotFoundException
+        operation.errors << TooManyRequestsException
+        operation.traits = {}
+      end)
+      service.add_operation(:update_user_pool_replica, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cognitoidentityprovider#UpdateUserPoolReplica"
+        operation.name = "UpdateUserPoolReplica"
+        operation.input = UpdateUserPoolReplicaRequest
+        operation.output = UpdateUserPoolReplicaResponse
+        operation.errors << InternalErrorException
+        operation.errors << InvalidParameterException
+        operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException
         operation.traits = {}
@@ -3973,6 +4515,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InvalidParameterException
         operation.errors << InvalidUserPoolConfigurationException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << PasswordResetRequiredException
         operation.errors << ResourceNotFoundException
         operation.errors << SoftwareTokenMFANotFoundException
@@ -3994,6 +4537,7 @@ module Aws::CognitoIdentityProvider
         operation.errors << InvalidParameterException
         operation.errors << LimitExceededException
         operation.errors << NotAuthorizedException
+        operation.errors << OperationNotEnabledException
         operation.errors << PasswordResetRequiredException
         operation.errors << ResourceNotFoundException
         operation.errors << TooManyRequestsException

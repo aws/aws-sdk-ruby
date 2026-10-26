@@ -82,6 +82,8 @@ module Aws::Organizations
     DescribePolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.organizations#DescribePolicyRequest", name: "DescribePolicyRequest")
     DescribePolicyResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.organizations#DescribePolicyResponse", name: "DescribePolicyResponse")
     DescribeResourcePolicyResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.organizations#DescribeResourcePolicyResponse", name: "DescribeResourcePolicyResponse")
+    DescribeResponsibilityTransferRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.organizations#DescribeResponsibilityTransferRequest", name: "DescribeResponsibilityTransferRequest")
+    DescribeResponsibilityTransferResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.organizations#DescribeResponsibilityTransferResponse", name: "DescribeResponsibilityTransferResponse")
     DestinationParentNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.organizations#DestinationParentNotFoundException", name: "DestinationParentNotFoundException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 404})
     DetachPolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.organizations#DetachPolicyRequest", name: "DetachPolicyRequest")
     DisableAWSServiceAccessRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.organizations#DisableAWSServiceAccessRequest", name: "DisableAWSServiceAccessRequest")
@@ -134,8 +136,11 @@ module Aws::Organizations
     InvalidHandshakeTransitionException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.organizations#InvalidHandshakeTransitionException", name: "InvalidHandshakeTransitionException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 409})
     InvalidInputException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.organizations#InvalidInputException", name: "InvalidInputException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     InvalidInputExceptionReason = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.organizations#InvalidInputExceptionReason", name: "InvalidInputExceptionReason")
+    InvalidResponsibilityTransferTransitionException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.organizations#InvalidResponsibilityTransferTransitionException", name: "InvalidResponsibilityTransferTransitionException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 409})
     InviteAccountToOrganizationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.organizations#InviteAccountToOrganizationRequest", name: "InviteAccountToOrganizationRequest")
     InviteAccountToOrganizationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.organizations#InviteAccountToOrganizationResponse", name: "InviteAccountToOrganizationResponse")
+    InviteOrganizationToTransferResponsibilityRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.organizations#InviteOrganizationToTransferResponsibilityRequest", name: "InviteOrganizationToTransferResponsibilityRequest")
+    InviteOrganizationToTransferResponsibilityResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.organizations#InviteOrganizationToTransferResponsibilityResponse", name: "InviteOrganizationToTransferResponsibilityResponse")
     ListAWSServiceAccessForOrganizationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.organizations#ListAWSServiceAccessForOrganizationRequest", name: "ListAWSServiceAccessForOrganizationRequest")
     ListAWSServiceAccessForOrganizationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.organizations#ListAWSServiceAccessForOrganizationResponse", name: "ListAWSServiceAccessForOrganizationResponse")
     ListAccountsForParentRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.organizations#ListAccountsForParentRequest", name: "ListAccountsForParentRequest")
@@ -158,8 +163,12 @@ module Aws::Organizations
     ListHandshakesForAccountResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.organizations#ListHandshakesForAccountResponse", name: "ListHandshakesForAccountResponse")
     ListHandshakesForOrganizationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.organizations#ListHandshakesForOrganizationRequest", name: "ListHandshakesForOrganizationRequest")
     ListHandshakesForOrganizationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.organizations#ListHandshakesForOrganizationResponse", name: "ListHandshakesForOrganizationResponse")
+    ListInboundResponsibilityTransfersRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.organizations#ListInboundResponsibilityTransfersRequest", name: "ListInboundResponsibilityTransfersRequest")
+    ListInboundResponsibilityTransfersResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.organizations#ListInboundResponsibilityTransfersResponse", name: "ListInboundResponsibilityTransfersResponse")
     ListOrganizationalUnitsForParentRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.organizations#ListOrganizationalUnitsForParentRequest", name: "ListOrganizationalUnitsForParentRequest")
     ListOrganizationalUnitsForParentResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.organizations#ListOrganizationalUnitsForParentResponse", name: "ListOrganizationalUnitsForParentResponse")
+    ListOutboundResponsibilityTransfersRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.organizations#ListOutboundResponsibilityTransfersRequest", name: "ListOutboundResponsibilityTransfersRequest")
+    ListOutboundResponsibilityTransfersResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.organizations#ListOutboundResponsibilityTransfersResponse", name: "ListOutboundResponsibilityTransfersResponse")
     ListParentsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.organizations#ListParentsRequest", name: "ListParentsRequest")
     ListParentsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.organizations#ListParentsResponse", name: "ListParentsResponse")
     ListPoliciesForTargetRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.organizations#ListPoliciesForTargetRequest", name: "ListPoliciesForTargetRequest")
@@ -196,6 +205,7 @@ module Aws::Organizations
     Parents = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.organizations#Parents", name: "Parents")
     Path = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.organizations#Path", name: "Path", traits: {"smithy.api#pattern" => "^(o-[a-z0-9]{10,32}\\/r-[0-9a-z]{4,32}(\\/ou\\-[0-9a-z]{4,32}-[a-z0-9]{8,32})*(\\/\\d{12})*)\\/$"})
     PathToError = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.organizations#PathToError", name: "PathToError")
+    Paths = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.organizations#Paths", name: "Paths")
     Policies = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.organizations#Policies", name: "Policies")
     Policy = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.organizations#Policy", name: "Policy")
     PolicyArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.organizations#PolicyArn", name: "PolicyArn", traits: {"smithy.api#pattern" => "^(arn:aws:organizations::\\d{12}:policy\\/o-[a-z0-9]{10,32}\\/[0-9a-z_]+\\/p-[0-9a-z]{10,32})|(arn:aws:organizations::aws:policy\\/[0-9a-z_]+\\/p-[0-9a-zA-Z_]{10,128})$"})
@@ -229,6 +239,15 @@ module Aws::Organizations
     ResourcePolicyId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.organizations#ResourcePolicyId", name: "ResourcePolicyId", traits: {"smithy.api#length" => {"min" => 0, "max" => 131}, "smithy.api#pattern" => "^rp-[0-9a-zA-Z_]{4,128}$"})
     ResourcePolicyNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.organizations#ResourcePolicyNotFoundException", name: "ResourcePolicyNotFoundException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 404})
     ResourcePolicySummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.organizations#ResourcePolicySummary", name: "ResourcePolicySummary")
+    ResponsibilityTransfer = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.organizations#ResponsibilityTransfer", name: "ResponsibilityTransfer")
+    ResponsibilityTransferAlreadyInStatusException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.organizations#ResponsibilityTransferAlreadyInStatusException", name: "ResponsibilityTransferAlreadyInStatusException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 409})
+    ResponsibilityTransferArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.organizations#ResponsibilityTransferArn", name: "ResponsibilityTransferArn", traits: {"smithy.api#pattern" => "^arn:[a-z0-9][a-z0-9-.]{0,62}:organizations::\\d{12}:transfer\\/o-[a-z0-9]{10,32}\\/(billing)\\/(inbound|outbound)\\/rt-[0-9a-z]{8,32}$"})
+    ResponsibilityTransferId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.organizations#ResponsibilityTransferId", name: "ResponsibilityTransferId", traits: {"smithy.api#pattern" => "^rt-[0-9a-z]{8,32}$"})
+    ResponsibilityTransferName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.organizations#ResponsibilityTransferName", name: "ResponsibilityTransferName", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[ -~]+$", "smithy.api#sensitive" => {}})
+    ResponsibilityTransferNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.organizations#ResponsibilityTransferNotFoundException", name: "ResponsibilityTransferNotFoundException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 404})
+    ResponsibilityTransferStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.organizations#ResponsibilityTransferStatus", name: "ResponsibilityTransferStatus")
+    ResponsibilityTransferType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.organizations#ResponsibilityTransferType", name: "ResponsibilityTransferType")
+    ResponsibilityTransfers = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.organizations#ResponsibilityTransfers", name: "ResponsibilityTransfers")
     RoleName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.organizations#RoleName", name: "RoleName", traits: {"smithy.api#length" => {"min" => 0, "max" => 64}, "smithy.api#pattern" => "^[\\w+=,.@-]{1,64}$"})
     Root = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.organizations#Root", name: "Root")
     RootArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.organizations#RootArn", name: "RootArn", traits: {"smithy.api#pattern" => "^arn:aws:organizations::\\d{12}:root\\/o-[a-z0-9]{10,32}\\/r-[0-9a-z]{4,32}$"})
@@ -244,19 +263,24 @@ module Aws::Organizations
     TagKeys = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.organizations#TagKeys", name: "TagKeys")
     TagResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.organizations#TagResourceRequest", name: "TagResourceRequest")
     TagValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.organizations#TagValue", name: "TagValue", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#pattern" => "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"})
-    TaggableResourceId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.organizations#TaggableResourceId", name: "TaggableResourceId", traits: {"smithy.api#length" => {"min" => 0, "max" => 130}, "smithy.api#pattern" => "^(r-[0-9a-z]{4,32})|(\\d{12})|(ou-[0-9a-z]{4,32}-[a-z0-9]{8,32})|(^p-[0-9a-zA-Z_]{8,128})|(^rp-[0-9a-zA-Z_]{4,128})$"})
+    TaggableResourceId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.organizations#TaggableResourceId", name: "TaggableResourceId", traits: {"smithy.api#length" => {"min" => 0, "max" => 130}, "smithy.api#pattern" => "^(r-[0-9a-z]{4,32})|(\\d{12})|(ou-[0-9a-z]{4,32}-[a-z0-9]{8,32})|(^p-[0-9a-zA-Z_]{8,128})|(^rp-[0-9a-zA-Z_]{4,128})|(^rt-[0-9a-zA-Z_]{8,32})$"})
     Tags = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.organizations#Tags", name: "Tags")
     TargetName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.organizations#TargetName", name: "TargetName", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}})
     TargetNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.organizations#TargetNotFoundException", name: "TargetNotFoundException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 404})
     TargetType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.organizations#TargetType", name: "TargetType")
+    TerminateResponsibilityTransferRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.organizations#TerminateResponsibilityTransferRequest", name: "TerminateResponsibilityTransferRequest")
+    TerminateResponsibilityTransferResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.organizations#TerminateResponsibilityTransferResponse", name: "TerminateResponsibilityTransferResponse")
     Timestamp = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.organizations#Timestamp", name: "Timestamp")
     TooManyRequestsException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.organizations#TooManyRequestsException", name: "TooManyRequestsException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 429})
+    TransferParticipant = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.organizations#TransferParticipant", name: "TransferParticipant")
     UnsupportedAPIEndpointException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.organizations#UnsupportedAPIEndpointException", name: "UnsupportedAPIEndpointException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 403})
     UntagResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.organizations#UntagResourceRequest", name: "UntagResourceRequest")
     UpdateOrganizationalUnitRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.organizations#UpdateOrganizationalUnitRequest", name: "UpdateOrganizationalUnitRequest")
     UpdateOrganizationalUnitResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.organizations#UpdateOrganizationalUnitResponse", name: "UpdateOrganizationalUnitResponse")
     UpdatePolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.organizations#UpdatePolicyRequest", name: "UpdatePolicyRequest")
     UpdatePolicyResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.organizations#UpdatePolicyResponse", name: "UpdatePolicyResponse")
+    UpdateResponsibilityTransferRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.organizations#UpdateResponsibilityTransferRequest", name: "UpdateResponsibilityTransferRequest")
+    UpdateResponsibilityTransferResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.organizations#UpdateResponsibilityTransferResponse", name: "UpdateResponsibilityTransferResponse")
 
     AWSOrganizationsNotInUseException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))
     AWSOrganizationsNotInUseException.type = Types::AWSOrganizationsNotInUseException
@@ -276,6 +300,7 @@ module Aws::Organizations
     Account.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountName, name: "Name"))
     Account.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountStatus, name: "Status"))
     Account.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountState, name: "State"))
+    Account.add_member(:paths, ::Smithy::Schema::Shapes::MemberShape.new(target: Paths, name: "Paths"))
     Account.add_member(:joined_method, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountJoinedMethod, name: "JoinedMethod"))
     Account.add_member(:joined_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "JoinedTimestamp"))
     Account.type = Types::Account
@@ -304,6 +329,7 @@ module Aws::Organizations
     ActionType.add_member(:enable_all_features, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLE_ALL_FEATURES", traits: {"smithy.api#enumValue" => "ENABLE_ALL_FEATURES"}))
     ActionType.add_member(:approve_all_features, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "APPROVE_ALL_FEATURES", traits: {"smithy.api#enumValue" => "APPROVE_ALL_FEATURES"}))
     ActionType.add_member(:add_organizations_service_linked_role, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ADD_ORGANIZATIONS_SERVICE_LINKED_ROLE", traits: {"smithy.api#enumValue" => "ADD_ORGANIZATIONS_SERVICE_LINKED_ROLE"}))
+    ActionType.add_member(:transfer_responsibility, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TRANSFER_RESPONSIBILITY", traits: {"smithy.api#enumValue" => "TRANSFER_RESPONSIBILITY"}))
     AlreadyInOrganizationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))
     AlreadyInOrganizationException.type = Types::AlreadyInOrganizationException
     AttachPolicyRequest.add_member(:policy_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyId, name: "PolicyId", traits: {"smithy.api#required" => {}}))
@@ -367,6 +393,17 @@ module Aws::Organizations
     ConstraintViolationExceptionReason.add_member(:account_creation_not_complete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCOUNT_CREATION_NOT_COMPLETE", traits: {"smithy.api#enumValue" => "ACCOUNT_CREATION_NOT_COMPLETE"}))
     ConstraintViolationExceptionReason.add_member(:cannot_register_suspended_account_as_delegated_administrator, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANNOT_REGISTER_SUSPENDED_ACCOUNT_AS_DELEGATED_ADMINISTRATOR", traits: {"smithy.api#enumValue" => "CANNOT_REGISTER_SUSPENDED_ACCOUNT_AS_DELEGATED_ADMINISTRATOR"}))
     ConstraintViolationExceptionReason.add_member(:all_features_migration_organization_size_limit_exceeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALL_FEATURES_MIGRATION_ORGANIZATION_SIZE_LIMIT_EXCEEDED", traits: {"smithy.api#enumValue" => "ALL_FEATURES_MIGRATION_ORGANIZATION_SIZE_LIMIT_EXCEEDED"}))
+    ConstraintViolationExceptionReason.add_member(:responsibility_transfer_max_level_violation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESPONSIBILITY_TRANSFER_MAX_LEVEL_VIOLATION", traits: {"smithy.api#enumValue" => "RESPONSIBILITY_TRANSFER_MAX_LEVEL_VIOLATION"}))
+    ConstraintViolationExceptionReason.add_member(:responsibility_transfer_max_inbound_quota_violation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESPONSIBILITY_TRANSFER_MAX_INBOUND_QUOTA_VIOLATION", traits: {"smithy.api#enumValue" => "RESPONSIBILITY_TRANSFER_MAX_INBOUND_QUOTA_VIOLATION"}))
+    ConstraintViolationExceptionReason.add_member(:responsibility_transfer_max_outbound_quota_violation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESPONSIBILITY_TRANSFER_MAX_OUTBOUND_QUOTA_VIOLATION", traits: {"smithy.api#enumValue" => "RESPONSIBILITY_TRANSFER_MAX_OUTBOUND_QUOTA_VIOLATION"}))
+    ConstraintViolationExceptionReason.add_member(:responsibility_transfer_max_transfers_quota_violation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESPONSIBILITY_TRANSFER_MAX_TRANSFERS_QUOTA_VIOLATION", traits: {"smithy.api#enumValue" => "RESPONSIBILITY_TRANSFER_MAX_TRANSFERS_QUOTA_VIOLATION"}))
+    ConstraintViolationExceptionReason.add_member(:active_responsibility_transfer_process, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE_RESPONSIBILITY_TRANSFER_PROCESS", traits: {"smithy.api#enumValue" => "ACTIVE_RESPONSIBILITY_TRANSFER_PROCESS"}))
+    ConstraintViolationExceptionReason.add_member(:transfer_responsibility_target_deletion_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TRANSFER_RESPONSIBILITY_TARGET_DELETION_IN_PROGRESS", traits: {"smithy.api#enumValue" => "TRANSFER_RESPONSIBILITY_TARGET_DELETION_IN_PROGRESS"}))
+    ConstraintViolationExceptionReason.add_member(:transfer_responsibility_source_deletion_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TRANSFER_RESPONSIBILITY_SOURCE_DELETION_IN_PROGRESS", traits: {"smithy.api#enumValue" => "TRANSFER_RESPONSIBILITY_SOURCE_DELETION_IN_PROGRESS"}))
+    ConstraintViolationExceptionReason.add_member(:unsupported_pricing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNSUPPORTED_PRICING", traits: {"smithy.api#enumValue" => "UNSUPPORTED_PRICING"}))
+    ConstraintViolationExceptionReason.add_member(:unmet_billing_prerequisite, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNMET_BILLING_PREREQUISITE", traits: {"smithy.api#enumValue" => "UNMET_BILLING_PREREQUISITE"}))
+    ConstraintViolationExceptionReason.add_member(:account_not_active_for_transfer_responsibility, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCOUNT_NOT_ACTIVE_FOR_TRANSFER_RESPONSIBILITY", traits: {"smithy.api#enumValue" => "ACCOUNT_NOT_ACTIVE_FOR_TRANSFER_RESPONSIBILITY"}))
+    ConstraintViolationExceptionReason.add_member(:transfer_responsibility_update_not_allowed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TRANSFER_RESPONSIBILITY_UPDATE_NOT_ALLOWED", traits: {"smithy.api#enumValue" => "TRANSFER_RESPONSIBILITY_UPDATE_NOT_ALLOWED"}))
     CreateAccountFailureReason.add_member(:account_limit_exceeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCOUNT_LIMIT_EXCEEDED", traits: {"smithy.api#enumValue" => "ACCOUNT_LIMIT_EXCEEDED"}))
     CreateAccountFailureReason.add_member(:email_already_exists, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EMAIL_ALREADY_EXISTS", traits: {"smithy.api#enumValue" => "EMAIL_ALREADY_EXISTS"}))
     CreateAccountFailureReason.add_member(:invalid_address, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INVALID_ADDRESS", traits: {"smithy.api#enumValue" => "INVALID_ADDRESS"}))
@@ -441,6 +478,7 @@ module Aws::Organizations
     DelegatedAdministrator.add_member(:email, ::Smithy::Schema::Shapes::MemberShape.new(target: Email, name: "Email"))
     DelegatedAdministrator.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountName, name: "Name"))
     DelegatedAdministrator.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountStatus, name: "Status"))
+    DelegatedAdministrator.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountState, name: "State"))
     DelegatedAdministrator.add_member(:joined_method, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountJoinedMethod, name: "JoinedMethod"))
     DelegatedAdministrator.add_member(:joined_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "JoinedTimestamp"))
     DelegatedAdministrator.add_member(:delegation_enabled_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "DelegationEnabledDate"))
@@ -486,6 +524,10 @@ module Aws::Organizations
     DescribePolicyResponse.type = Types::DescribePolicyResponse
     DescribeResourcePolicyResponse.add_member(:resource_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcePolicy, name: "ResourcePolicy"))
     DescribeResourcePolicyResponse.type = Types::DescribeResourcePolicyResponse
+    DescribeResponsibilityTransferRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponsibilityTransferId, name: "Id", traits: {"smithy.api#required" => {}}))
+    DescribeResponsibilityTransferRequest.type = Types::DescribeResponsibilityTransferRequest
+    DescribeResponsibilityTransferResponse.add_member(:responsibility_transfer, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponsibilityTransfer, name: "ResponsibilityTransfer"))
+    DescribeResponsibilityTransferResponse.type = Types::DescribeResponsibilityTransferResponse
     DestinationParentNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))
     DestinationParentNotFoundException.type = Types::DestinationParentNotFoundException
     DetachPolicyRequest.add_member(:policy_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyId, name: "PolicyId", traits: {"smithy.api#required" => {}}))
@@ -521,6 +563,12 @@ module Aws::Organizations
     EffectivePolicyType.add_member(:chatbot_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CHATBOT_POLICY", traits: {"smithy.api#enumValue" => "CHATBOT_POLICY"}))
     EffectivePolicyType.add_member(:declarative_policy_ec2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DECLARATIVE_POLICY_EC2", traits: {"smithy.api#enumValue" => "DECLARATIVE_POLICY_EC2"}))
     EffectivePolicyType.add_member(:securityhub_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SECURITYHUB_POLICY", traits: {"smithy.api#enumValue" => "SECURITYHUB_POLICY"}))
+    EffectivePolicyType.add_member(:inspector_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INSPECTOR_POLICY", traits: {"smithy.api#enumValue" => "INSPECTOR_POLICY"}))
+    EffectivePolicyType.add_member(:upgrade_rollout_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPGRADE_ROLLOUT_POLICY", traits: {"smithy.api#enumValue" => "UPGRADE_ROLLOUT_POLICY"}))
+    EffectivePolicyType.add_member(:bedrock_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BEDROCK_POLICY", traits: {"smithy.api#enumValue" => "BEDROCK_POLICY"}))
+    EffectivePolicyType.add_member(:s3_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "S3_POLICY", traits: {"smithy.api#enumValue" => "S3_POLICY"}))
+    EffectivePolicyType.add_member(:network_security_director_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NETWORK_SECURITY_DIRECTOR_POLICY", traits: {"smithy.api#enumValue" => "NETWORK_SECURITY_DIRECTOR_POLICY"}))
+    EffectivePolicyType.add_member(:guardduty_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GUARDDUTY_POLICY", traits: {"smithy.api#enumValue" => "GUARDDUTY_POLICY"}))
     EffectivePolicyValidationError.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "ErrorCode"))
     EffectivePolicyValidationError.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "ErrorMessage"))
     EffectivePolicyValidationError.add_member(:path_to_error, ::Smithy::Schema::Shapes::MemberShape.new(target: PathToError, name: "PathToError"))
@@ -567,6 +615,12 @@ module Aws::Organizations
     HandshakeConstraintViolationExceptionReason.add_member(:organization_from_different_seller_of_record, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ORGANIZATION_FROM_DIFFERENT_SELLER_OF_RECORD", traits: {"smithy.api#enumValue" => "ORGANIZATION_FROM_DIFFERENT_SELLER_OF_RECORD"}))
     HandshakeConstraintViolationExceptionReason.add_member(:organization_membership_change_rate_limit_exceeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ORGANIZATION_MEMBERSHIP_CHANGE_RATE_LIMIT_EXCEEDED", traits: {"smithy.api#enumValue" => "ORGANIZATION_MEMBERSHIP_CHANGE_RATE_LIMIT_EXCEEDED"}))
     HandshakeConstraintViolationExceptionReason.add_member(:management_account_email_not_verified, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MANAGEMENT_ACCOUNT_EMAIL_NOT_VERIFIED", traits: {"smithy.api#enumValue" => "MANAGEMENT_ACCOUNT_EMAIL_NOT_VERIFIED"}))
+    HandshakeConstraintViolationExceptionReason.add_member(:responsibility_transfer_already_exists, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESPONSIBILITY_TRANSFER_ALREADY_EXISTS", traits: {"smithy.api#enumValue" => "RESPONSIBILITY_TRANSFER_ALREADY_EXISTS"}))
+    HandshakeConstraintViolationExceptionReason.add_member(:source_and_target_cannot_match, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SOURCE_AND_TARGET_CANNOT_MATCH", traits: {"smithy.api#enumValue" => "SOURCE_AND_TARGET_CANNOT_MATCH"}))
+    HandshakeConstraintViolationExceptionReason.add_member(:unused_prepayment_balance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNUSED_PREPAYMENT_BALANCE", traits: {"smithy.api#enumValue" => "UNUSED_PREPAYMENT_BALANCE"}))
+    HandshakeConstraintViolationExceptionReason.add_member(:legacy_permissions_still_in_use, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LEGACY_PERMISSIONS_STILL_IN_USE", traits: {"smithy.api#enumValue" => "LEGACY_PERMISSIONS_STILL_IN_USE"}))
+    HandshakeConstraintViolationExceptionReason.add_member(:past_due_invoice, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PAST_DUE_INVOICE", traits: {"smithy.api#enumValue" => "PAST_DUE_INVOICE"}))
+    HandshakeConstraintViolationExceptionReason.add_member(:target_account_validation_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TARGET_ACCOUNT_VALIDATION_FAILURE", traits: {"smithy.api#enumValue" => "TARGET_ACCOUNT_VALIDATION_FAILURE"}))
     HandshakeFilter.add_member(:action_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionType, name: "ActionType"))
     HandshakeFilter.add_member(:parent_handshake_id, ::Smithy::Schema::Shapes::MemberShape.new(target: HandshakeId, name: "ParentHandshakeId"))
     HandshakeFilter.type = Types::HandshakeFilter
@@ -591,6 +645,12 @@ module Aws::Organizations
     HandshakeResourceType.add_member(:master_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MASTER_NAME", traits: {"smithy.api#enumValue" => "MASTER_NAME"}))
     HandshakeResourceType.add_member(:notes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOTES", traits: {"smithy.api#enumValue" => "NOTES"}))
     HandshakeResourceType.add_member(:parent_handshake, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PARENT_HANDSHAKE", traits: {"smithy.api#enumValue" => "PARENT_HANDSHAKE"}))
+    HandshakeResourceType.add_member(:responsibility_transfer, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESPONSIBILITY_TRANSFER", traits: {"smithy.api#enumValue" => "RESPONSIBILITY_TRANSFER"}))
+    HandshakeResourceType.add_member(:transfer_start_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TRANSFER_START_TIMESTAMP", traits: {"smithy.api#enumValue" => "TRANSFER_START_TIMESTAMP"}))
+    HandshakeResourceType.add_member(:transfer_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TRANSFER_TYPE", traits: {"smithy.api#enumValue" => "TRANSFER_TYPE"}))
+    HandshakeResourceType.add_member(:management_account, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MANAGEMENT_ACCOUNT", traits: {"smithy.api#enumValue" => "MANAGEMENT_ACCOUNT"}))
+    HandshakeResourceType.add_member(:management_email, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MANAGEMENT_EMAIL", traits: {"smithy.api#enumValue" => "MANAGEMENT_EMAIL"}))
+    HandshakeResourceType.add_member(:management_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MANAGEMENT_NAME", traits: {"smithy.api#enumValue" => "MANAGEMENT_NAME"}))
     HandshakeResources.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HandshakeResource, name: "member"))
     HandshakeState.add_member(:requested, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REQUESTED", traits: {"smithy.api#enumValue" => "REQUESTED"}))
     HandshakeState.add_member(:open, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OPEN", traits: {"smithy.api#enumValue" => "OPEN"}))
@@ -636,12 +696,34 @@ module Aws::Organizations
     InvalidInputExceptionReason.add_member(:unsupported_policy_type_in_resource_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNSUPPORTED_POLICY_TYPE_IN_RESOURCE_POLICY", traits: {"smithy.api#enumValue" => "UNSUPPORTED_POLICY_TYPE_IN_RESOURCE_POLICY"}))
     InvalidInputExceptionReason.add_member(:unsupported_resource_in_resource_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNSUPPORTED_RESOURCE_IN_RESOURCE_POLICY", traits: {"smithy.api#enumValue" => "UNSUPPORTED_RESOURCE_IN_RESOURCE_POLICY"}))
     InvalidInputExceptionReason.add_member(:non_detachable_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NON_DETACHABLE_POLICY", traits: {"smithy.api#enumValue" => "NON_DETACHABLE_POLICY"}))
+    InvalidInputExceptionReason.add_member(:caller_required_field_missing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CALLER_REQUIRED_FIELD_MISSING", traits: {"smithy.api#enumValue" => "CALLER_REQUIRED_FIELD_MISSING"}))
+    InvalidInputExceptionReason.add_member(:unsupported_action_in_responsibility_transfer, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNSUPPORTED_ACTION_IN_RESPONSIBILITY_TRANSFER", traits: {"smithy.api#enumValue" => "UNSUPPORTED_ACTION_IN_RESPONSIBILITY_TRANSFER"}))
+    InvalidInputExceptionReason.add_member(:start_date_not_beginning_of_month, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "START_DATE_NOT_BEGINNING_OF_MONTH", traits: {"smithy.api#enumValue" => "START_DATE_NOT_BEGINNING_OF_MONTH"}))
+    InvalidInputExceptionReason.add_member(:start_date_not_beginning_of_day, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "START_DATE_NOT_BEGINNING_OF_DAY", traits: {"smithy.api#enumValue" => "START_DATE_NOT_BEGINNING_OF_DAY"}))
+    InvalidInputExceptionReason.add_member(:start_date_too_early, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "START_DATE_TOO_EARLY", traits: {"smithy.api#enumValue" => "START_DATE_TOO_EARLY"}))
+    InvalidInputExceptionReason.add_member(:start_date_too_late, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "START_DATE_TOO_LATE", traits: {"smithy.api#enumValue" => "START_DATE_TOO_LATE"}))
+    InvalidInputExceptionReason.add_member(:invalid_start_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INVALID_START_DATE", traits: {"smithy.api#enumValue" => "INVALID_START_DATE"}))
+    InvalidInputExceptionReason.add_member(:end_date_not_end_of_month, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "END_DATE_NOT_END_OF_MONTH", traits: {"smithy.api#enumValue" => "END_DATE_NOT_END_OF_MONTH"}))
+    InvalidInputExceptionReason.add_member(:end_date_too_early, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "END_DATE_TOO_EARLY", traits: {"smithy.api#enumValue" => "END_DATE_TOO_EARLY"}))
+    InvalidInputExceptionReason.add_member(:end_date_too_late, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "END_DATE_TOO_LATE", traits: {"smithy.api#enumValue" => "END_DATE_TOO_LATE"}))
+    InvalidInputExceptionReason.add_member(:invalid_end_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INVALID_END_DATE", traits: {"smithy.api#enumValue" => "INVALID_END_DATE"}))
+    InvalidResponsibilityTransferTransitionException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))
+    InvalidResponsibilityTransferTransitionException.type = Types::InvalidResponsibilityTransferTransitionException
     InviteAccountToOrganizationRequest.add_member(:target, ::Smithy::Schema::Shapes::MemberShape.new(target: HandshakeParty, name: "Target", traits: {"smithy.api#required" => {}}))
     InviteAccountToOrganizationRequest.add_member(:notes, ::Smithy::Schema::Shapes::MemberShape.new(target: HandshakeNotes, name: "Notes"))
     InviteAccountToOrganizationRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "Tags"))
     InviteAccountToOrganizationRequest.type = Types::InviteAccountToOrganizationRequest
     InviteAccountToOrganizationResponse.add_member(:handshake, ::Smithy::Schema::Shapes::MemberShape.new(target: Handshake, name: "Handshake"))
     InviteAccountToOrganizationResponse.type = Types::InviteAccountToOrganizationResponse
+    InviteOrganizationToTransferResponsibilityRequest.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponsibilityTransferType, name: "Type", traits: {"smithy.api#required" => {}}))
+    InviteOrganizationToTransferResponsibilityRequest.add_member(:target, ::Smithy::Schema::Shapes::MemberShape.new(target: HandshakeParty, name: "Target", traits: {"smithy.api#required" => {}}))
+    InviteOrganizationToTransferResponsibilityRequest.add_member(:notes, ::Smithy::Schema::Shapes::MemberShape.new(target: HandshakeNotes, name: "Notes"))
+    InviteOrganizationToTransferResponsibilityRequest.add_member(:start_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "StartTimestamp", traits: {"smithy.api#required" => {}}))
+    InviteOrganizationToTransferResponsibilityRequest.add_member(:source_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponsibilityTransferName, name: "SourceName", traits: {"smithy.api#required" => {}}))
+    InviteOrganizationToTransferResponsibilityRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "Tags"))
+    InviteOrganizationToTransferResponsibilityRequest.type = Types::InviteOrganizationToTransferResponsibilityRequest
+    InviteOrganizationToTransferResponsibilityResponse.add_member(:handshake, ::Smithy::Schema::Shapes::MemberShape.new(target: Handshake, name: "Handshake"))
+    InviteOrganizationToTransferResponsibilityResponse.type = Types::InviteOrganizationToTransferResponsibilityResponse
     ListAWSServiceAccessForOrganizationRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     ListAWSServiceAccessForOrganizationRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults"))
     ListAWSServiceAccessForOrganizationRequest.type = Types::ListAWSServiceAccessForOrganizationRequest
@@ -724,6 +806,14 @@ module Aws::Organizations
     ListHandshakesForOrganizationResponse.add_member(:handshakes, ::Smithy::Schema::Shapes::MemberShape.new(target: Handshakes, name: "Handshakes"))
     ListHandshakesForOrganizationResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     ListHandshakesForOrganizationResponse.type = Types::ListHandshakesForOrganizationResponse
+    ListInboundResponsibilityTransfersRequest.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponsibilityTransferType, name: "Type", traits: {"smithy.api#required" => {}}))
+    ListInboundResponsibilityTransfersRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponsibilityTransferId, name: "Id"))
+    ListInboundResponsibilityTransfersRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    ListInboundResponsibilityTransfersRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults"))
+    ListInboundResponsibilityTransfersRequest.type = Types::ListInboundResponsibilityTransfersRequest
+    ListInboundResponsibilityTransfersResponse.add_member(:responsibility_transfers, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponsibilityTransfers, name: "ResponsibilityTransfers"))
+    ListInboundResponsibilityTransfersResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    ListInboundResponsibilityTransfersResponse.type = Types::ListInboundResponsibilityTransfersResponse
     ListOrganizationalUnitsForParentRequest.add_member(:parent_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ParentId, name: "ParentId", traits: {"smithy.api#required" => {}}))
     ListOrganizationalUnitsForParentRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     ListOrganizationalUnitsForParentRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults"))
@@ -731,6 +821,13 @@ module Aws::Organizations
     ListOrganizationalUnitsForParentResponse.add_member(:organizational_units, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationalUnits, name: "OrganizationalUnits"))
     ListOrganizationalUnitsForParentResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     ListOrganizationalUnitsForParentResponse.type = Types::ListOrganizationalUnitsForParentResponse
+    ListOutboundResponsibilityTransfersRequest.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponsibilityTransferType, name: "Type", traits: {"smithy.api#required" => {}}))
+    ListOutboundResponsibilityTransfersRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    ListOutboundResponsibilityTransfersRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults"))
+    ListOutboundResponsibilityTransfersRequest.type = Types::ListOutboundResponsibilityTransfersRequest
+    ListOutboundResponsibilityTransfersResponse.add_member(:responsibility_transfers, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponsibilityTransfers, name: "ResponsibilityTransfers"))
+    ListOutboundResponsibilityTransfersResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    ListOutboundResponsibilityTransfersResponse.type = Types::ListOutboundResponsibilityTransfersResponse
     ListParentsRequest.add_member(:child_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ChildId, name: "ChildId", traits: {"smithy.api#required" => {}}))
     ListParentsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     ListParentsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults"))
@@ -795,6 +892,7 @@ module Aws::Organizations
     OrganizationalUnit.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationalUnitId, name: "Id"))
     OrganizationalUnit.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationalUnitArn, name: "Arn"))
     OrganizationalUnit.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationalUnitName, name: "Name"))
+    OrganizationalUnit.add_member(:path, ::Smithy::Schema::Shapes::MemberShape.new(target: Path, name: "Path"))
     OrganizationalUnit.type = Types::OrganizationalUnit
     OrganizationalUnitNotEmptyException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))
     OrganizationalUnitNotEmptyException.type = Types::OrganizationalUnitNotEmptyException
@@ -809,6 +907,7 @@ module Aws::Organizations
     ParentType.add_member(:root, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ROOT", traits: {"smithy.api#enumValue" => "ROOT"}))
     ParentType.add_member(:organizational_unit, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ORGANIZATIONAL_UNIT", traits: {"smithy.api#enumValue" => "ORGANIZATIONAL_UNIT"}))
     Parents.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Parent, name: "member"))
+    Paths.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Path, name: "member"))
     Policies.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicySummary, name: "member"))
     Policy.add_member(:policy_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicySummary, name: "PolicySummary"))
     Policy.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyContent, name: "Content"))
@@ -843,6 +942,12 @@ module Aws::Organizations
     PolicyType.add_member(:chatbot_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CHATBOT_POLICY", traits: {"smithy.api#enumValue" => "CHATBOT_POLICY"}))
     PolicyType.add_member(:declarative_policy_ec2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DECLARATIVE_POLICY_EC2", traits: {"smithy.api#enumValue" => "DECLARATIVE_POLICY_EC2"}))
     PolicyType.add_member(:securityhub_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SECURITYHUB_POLICY", traits: {"smithy.api#enumValue" => "SECURITYHUB_POLICY"}))
+    PolicyType.add_member(:inspector_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INSPECTOR_POLICY", traits: {"smithy.api#enumValue" => "INSPECTOR_POLICY"}))
+    PolicyType.add_member(:upgrade_rollout_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPGRADE_ROLLOUT_POLICY", traits: {"smithy.api#enumValue" => "UPGRADE_ROLLOUT_POLICY"}))
+    PolicyType.add_member(:bedrock_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BEDROCK_POLICY", traits: {"smithy.api#enumValue" => "BEDROCK_POLICY"}))
+    PolicyType.add_member(:s3_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "S3_POLICY", traits: {"smithy.api#enumValue" => "S3_POLICY"}))
+    PolicyType.add_member(:network_security_director_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NETWORK_SECURITY_DIRECTOR_POLICY", traits: {"smithy.api#enumValue" => "NETWORK_SECURITY_DIRECTOR_POLICY"}))
+    PolicyType.add_member(:guardduty_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GUARDDUTY_POLICY", traits: {"smithy.api#enumValue" => "GUARDDUTY_POLICY"}))
     PolicyTypeAlreadyEnabledException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))
     PolicyTypeAlreadyEnabledException.type = Types::PolicyTypeAlreadyEnabledException
     PolicyTypeNotAvailableForOrganizationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))
@@ -874,6 +979,29 @@ module Aws::Organizations
     ResourcePolicySummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcePolicyId, name: "Id"))
     ResourcePolicySummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcePolicyArn, name: "Arn"))
     ResourcePolicySummary.type = Types::ResourcePolicySummary
+    ResponsibilityTransfer.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponsibilityTransferArn, name: "Arn"))
+    ResponsibilityTransfer.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponsibilityTransferName, name: "Name"))
+    ResponsibilityTransfer.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponsibilityTransferId, name: "Id"))
+    ResponsibilityTransfer.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponsibilityTransferType, name: "Type"))
+    ResponsibilityTransfer.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponsibilityTransferStatus, name: "Status"))
+    ResponsibilityTransfer.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: TransferParticipant, name: "Source"))
+    ResponsibilityTransfer.add_member(:target, ::Smithy::Schema::Shapes::MemberShape.new(target: TransferParticipant, name: "Target"))
+    ResponsibilityTransfer.add_member(:start_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "StartTimestamp"))
+    ResponsibilityTransfer.add_member(:end_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "EndTimestamp"))
+    ResponsibilityTransfer.add_member(:active_handshake_id, ::Smithy::Schema::Shapes::MemberShape.new(target: HandshakeId, name: "ActiveHandshakeId"))
+    ResponsibilityTransfer.type = Types::ResponsibilityTransfer
+    ResponsibilityTransferAlreadyInStatusException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))
+    ResponsibilityTransferAlreadyInStatusException.type = Types::ResponsibilityTransferAlreadyInStatusException
+    ResponsibilityTransferNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))
+    ResponsibilityTransferNotFoundException.type = Types::ResponsibilityTransferNotFoundException
+    ResponsibilityTransferStatus.add_member(:requested, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REQUESTED", traits: {"smithy.api#enumValue" => "REQUESTED"}))
+    ResponsibilityTransferStatus.add_member(:declined, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DECLINED", traits: {"smithy.api#enumValue" => "DECLINED"}))
+    ResponsibilityTransferStatus.add_member(:canceled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANCELED", traits: {"smithy.api#enumValue" => "CANCELED"}))
+    ResponsibilityTransferStatus.add_member(:expired, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXPIRED", traits: {"smithy.api#enumValue" => "EXPIRED"}))
+    ResponsibilityTransferStatus.add_member(:accepted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCEPTED", traits: {"smithy.api#enumValue" => "ACCEPTED"}))
+    ResponsibilityTransferStatus.add_member(:withdrawn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WITHDRAWN", traits: {"smithy.api#enumValue" => "WITHDRAWN"}))
+    ResponsibilityTransferType.add_member(:billing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BILLING", traits: {"smithy.api#enumValue" => "BILLING"}))
+    ResponsibilityTransfers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponsibilityTransfer, name: "member"))
     Root.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: RootId, name: "Id"))
     Root.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RootArn, name: "Arn"))
     Root.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RootName, name: "Name"))
@@ -899,9 +1027,17 @@ module Aws::Organizations
     TargetType.add_member(:account, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCOUNT", traits: {"smithy.api#enumValue" => "ACCOUNT"}))
     TargetType.add_member(:organizational_unit, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ORGANIZATIONAL_UNIT", traits: {"smithy.api#enumValue" => "ORGANIZATIONAL_UNIT"}))
     TargetType.add_member(:root, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ROOT", traits: {"smithy.api#enumValue" => "ROOT"}))
+    TerminateResponsibilityTransferRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponsibilityTransferId, name: "Id", traits: {"smithy.api#required" => {}}))
+    TerminateResponsibilityTransferRequest.add_member(:end_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "EndTimestamp"))
+    TerminateResponsibilityTransferRequest.type = Types::TerminateResponsibilityTransferRequest
+    TerminateResponsibilityTransferResponse.add_member(:responsibility_transfer, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponsibilityTransfer, name: "ResponsibilityTransfer"))
+    TerminateResponsibilityTransferResponse.type = Types::TerminateResponsibilityTransferResponse
     TooManyRequestsException.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionType, name: "Type"))
     TooManyRequestsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))
     TooManyRequestsException.type = Types::TooManyRequestsException
+    TransferParticipant.add_member(:management_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "ManagementAccountId"))
+    TransferParticipant.add_member(:management_account_email, ::Smithy::Schema::Shapes::MemberShape.new(target: Email, name: "ManagementAccountEmail"))
+    TransferParticipant.type = Types::TransferParticipant
     UnsupportedAPIEndpointException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))
     UnsupportedAPIEndpointException.type = Types::UnsupportedAPIEndpointException
     UntagResourceRequest.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TaggableResourceId, name: "ResourceId", traits: {"smithy.api#required" => {}}))
@@ -919,12 +1055,17 @@ module Aws::Organizations
     UpdatePolicyRequest.type = Types::UpdatePolicyRequest
     UpdatePolicyResponse.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: Policy, name: "Policy"))
     UpdatePolicyResponse.type = Types::UpdatePolicyResponse
+    UpdateResponsibilityTransferRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponsibilityTransferId, name: "Id", traits: {"smithy.api#required" => {}}))
+    UpdateResponsibilityTransferRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponsibilityTransferName, name: "Name", traits: {"smithy.api#required" => {}}))
+    UpdateResponsibilityTransferRequest.type = Types::UpdateResponsibilityTransferRequest
+    UpdateResponsibilityTransferResponse.add_member(:responsibility_transfer, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponsibilityTransfer, name: "ResponsibilityTransfer"))
+    UpdateResponsibilityTransferResponse.type = Types::UpdateResponsibilityTransferResponse
 
     AWSOrganizationsV20161128 = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.organizations#AWSOrganizationsV20161128"
       service.name = "AWSOrganizationsV20161128"
       service.version = "2016-11-28"
-      service.traits = {"aws.api#service" => {"sdkId" => "Organizations", "arnNamespace" => "organizations", "cloudFormationName" => "Organizations", "cloudTrailEventSource" => "organizations.amazonaws.com", "endpointPrefix" => "organizations"}, "aws.auth#sigv4" => {"name" => "organizations"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "AWS Organizations", "smithy.api#xmlNamespace" => {"uri" => "http://organizations.amazonaws.com/doc/2016-11-28/"}}
+      service.traits = {"aws.api#service" => {"sdkId" => "Organizations", "arnNamespace" => "organizations", "cloudFormationName" => "Organizations", "cloudTrailEventSource" => "organizations.amazonaws.com", "endpointPrefix" => "organizations"}, "aws.auth#sigv4" => {"name" => "organizations"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "AWS Organizations", "smithy.api#xmlNamespace" => {"uri" => "http://organizations.amazonaws.com/doc/2016-11-28/"}, "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}, "Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws-us-gov"]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://organizations.us-gov-west-1.amazonaws.com", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "us-gov-west-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://organizations.us-gov-west-1.api.aws", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "us-gov-west-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://organizations-fips.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dualStackDnsSuffix}", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "{PartitionResult#implicitGlobalRegion}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://organizations-fips.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dnsSuffix}", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "{PartitionResult#implicitGlobalRegion}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://organizations.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dualStackDnsSuffix}", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "{PartitionResult#implicitGlobalRegion}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://organizations.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dnsSuffix}", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "{PartitionResult#implicitGlobalRegion}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 15, "nodes" => "/////wAAAAH/////AAAAAAAAAA4AAAADAAAAAQAAAAQF9eENAAAAAgAAAAUF9eENAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEMAAAABwX14QoF9eELAAAABAAAAAsAAAAJAAAABQX14QQAAAAKAAAABgX14QgF9eEJAAAABQX14QUAAAAMAAAABgAAAA0F9eEHAAAABwX14QYF9eEHAAAAAwX14QEAAAAPAAAABAX14QIF9eED"}}
       service.add_operation(:accept_handshake, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.organizations#AcceptHandshake"
         operation.name = "AcceptHandshake"
@@ -934,11 +1075,13 @@ module Aws::Organizations
         operation.errors << AccessDeniedForDependencyException
         operation.errors << AWSOrganizationsNotInUseException
         operation.errors << ConcurrentModificationException
+        operation.errors << ConstraintViolationException
         operation.errors << HandshakeAlreadyInStateException
         operation.errors << HandshakeConstraintViolationException
         operation.errors << HandshakeNotFoundException
         operation.errors << InvalidHandshakeTransitionException
         operation.errors << InvalidInputException
+        operation.errors << MasterCannotLeaveOrganizationException
         operation.errors << ServiceException
         operation.errors << TooManyRequestsException
         operation.traits = {}
@@ -1100,6 +1243,7 @@ module Aws::Organizations
         operation.errors << AccessDeniedException
         operation.errors << AWSOrganizationsNotInUseException
         operation.errors << ConcurrentModificationException
+        operation.errors << ConstraintViolationException
         operation.errors << InvalidInputException
         operation.errors << OrganizationNotEmptyException
         operation.errors << ServiceException
@@ -1278,6 +1422,20 @@ module Aws::Organizations
         operation.errors << UnsupportedAPIEndpointException
         operation.traits = {}
       end)
+      service.add_operation(:describe_responsibility_transfer, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.organizations#DescribeResponsibilityTransfer"
+        operation.name = "DescribeResponsibilityTransfer"
+        operation.input = DescribeResponsibilityTransferRequest
+        operation.output = DescribeResponsibilityTransferResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AWSOrganizationsNotInUseException
+        operation.errors << InvalidInputException
+        operation.errors << ResponsibilityTransferNotFoundException
+        operation.errors << ServiceException
+        operation.errors << TooManyRequestsException
+        operation.errors << UnsupportedAPIEndpointException
+        operation.traits = {}
+      end)
       service.add_operation(:detach_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.organizations#DetachPolicy"
         operation.name = "DetachPolicy"
@@ -1395,6 +1553,23 @@ module Aws::Organizations
         operation.errors << InvalidInputException
         operation.errors << ServiceException
         operation.errors << TooManyRequestsException
+        operation.traits = {}
+      end)
+      service.add_operation(:invite_organization_to_transfer_responsibility, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.organizations#InviteOrganizationToTransferResponsibility"
+        operation.name = "InviteOrganizationToTransferResponsibility"
+        operation.input = InviteOrganizationToTransferResponsibilityRequest
+        operation.output = InviteOrganizationToTransferResponsibilityResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AWSOrganizationsNotInUseException
+        operation.errors << ConcurrentModificationException
+        operation.errors << ConstraintViolationException
+        operation.errors << DuplicateHandshakeException
+        operation.errors << HandshakeConstraintViolationException
+        operation.errors << InvalidInputException
+        operation.errors << ServiceException
+        operation.errors << TooManyRequestsException
+        operation.errors << UnsupportedAPIEndpointException
         operation.traits = {}
       end)
       service.add_operation(:leave_organization, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -1575,6 +1750,21 @@ module Aws::Organizations
         operation.traits = {}
         operation[:paginator] = Paginators::ListHandshakesForOrganization.new
       end)
+      service.add_operation(:list_inbound_responsibility_transfers, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.organizations#ListInboundResponsibilityTransfers"
+        operation.name = "ListInboundResponsibilityTransfers"
+        operation.input = ListInboundResponsibilityTransfersRequest
+        operation.output = ListInboundResponsibilityTransfersResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AWSOrganizationsNotInUseException
+        operation.errors << ConstraintViolationException
+        operation.errors << InvalidInputException
+        operation.errors << ResponsibilityTransferNotFoundException
+        operation.errors << ServiceException
+        operation.errors << TooManyRequestsException
+        operation.errors << UnsupportedAPIEndpointException
+        operation.traits = {}
+      end)
       service.add_operation(:list_organizational_units_for_parent, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.organizations#ListOrganizationalUnitsForParent"
         operation.name = "ListOrganizationalUnitsForParent"
@@ -1588,6 +1778,20 @@ module Aws::Organizations
         operation.errors << TooManyRequestsException
         operation.traits = {}
         operation[:paginator] = Paginators::ListOrganizationalUnitsForParent.new
+      end)
+      service.add_operation(:list_outbound_responsibility_transfers, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.organizations#ListOutboundResponsibilityTransfers"
+        operation.name = "ListOutboundResponsibilityTransfers"
+        operation.input = ListOutboundResponsibilityTransfersRequest
+        operation.output = ListOutboundResponsibilityTransfersResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AWSOrganizationsNotInUseException
+        operation.errors << ConstraintViolationException
+        operation.errors << InvalidInputException
+        operation.errors << ServiceException
+        operation.errors << TooManyRequestsException
+        operation.errors << UnsupportedAPIEndpointException
+        operation.traits = {}
       end)
       service.add_operation(:list_parents, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.organizations#ListParents"
@@ -1754,6 +1958,24 @@ module Aws::Organizations
         operation.errors << TooManyRequestsException
         operation.traits = {}
       end)
+      service.add_operation(:terminate_responsibility_transfer, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.organizations#TerminateResponsibilityTransfer"
+        operation.name = "TerminateResponsibilityTransfer"
+        operation.input = TerminateResponsibilityTransferRequest
+        operation.output = TerminateResponsibilityTransferResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AWSOrganizationsNotInUseException
+        operation.errors << ConcurrentModificationException
+        operation.errors << ConstraintViolationException
+        operation.errors << InvalidInputException
+        operation.errors << InvalidResponsibilityTransferTransitionException
+        operation.errors << ResponsibilityTransferAlreadyInStatusException
+        operation.errors << ResponsibilityTransferNotFoundException
+        operation.errors << ServiceException
+        operation.errors << TooManyRequestsException
+        operation.errors << UnsupportedAPIEndpointException
+        operation.traits = {}
+      end)
       service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.organizations#UntagResource"
         operation.name = "UntagResource"
@@ -1798,6 +2020,21 @@ module Aws::Organizations
         operation.errors << MalformedPolicyDocumentException
         operation.errors << PolicyChangesInProgressException
         operation.errors << PolicyNotFoundException
+        operation.errors << ServiceException
+        operation.errors << TooManyRequestsException
+        operation.errors << UnsupportedAPIEndpointException
+        operation.traits = {}
+      end)
+      service.add_operation(:update_responsibility_transfer, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.organizations#UpdateResponsibilityTransfer"
+        operation.name = "UpdateResponsibilityTransfer"
+        operation.input = UpdateResponsibilityTransferRequest
+        operation.output = UpdateResponsibilityTransferResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AWSOrganizationsNotInUseException
+        operation.errors << ConstraintViolationException
+        operation.errors << InvalidInputException
+        operation.errors << ResponsibilityTransferNotFoundException
         operation.errors << ServiceException
         operation.errors << TooManyRequestsException
         operation.errors << UnsupportedAPIEndpointException

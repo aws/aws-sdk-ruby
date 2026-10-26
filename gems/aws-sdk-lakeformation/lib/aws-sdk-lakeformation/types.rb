@@ -144,6 +144,40 @@ module Aws::LakeFormation
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute name
+    #   <p>The name of the row-level security policy to attach.</p>
+    #   @return [String]
+    # @!attribute resource
+    #   <p>The resource to which the row-level security policy is attached.</p>
+    #   @return [Types::Resource]
+    # @!attribute principal
+    #   <p>The principal to which the row-level security policy applies.</p>
+    #   @return [Types::DataLakePrincipal]
+    # @!attribute condition
+    #   <p>A Lake Formation condition, which applies to the row-level security policy attachment and contains an expression.</p>
+    #   @return [Types::Condition]
+    # @!attribute set_default
+    #   <p>Indicates whether this policy becomes the default row-level security policy for the resource. The default policy applies to all principals by default.</p>
+    #   @return [Boolean]
+    class AttachRLSPolicyRequest < Struct.new(
+      nil,
+      :name,
+      :resource,
+      :principal,
+      :condition,
+      :set_default,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class AttachRLSPolicyResponse < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>A structure used to include auditing information on the privileged API. </p>
     # @!attribute additional_audit_context
     #   <p>The filter engine can populate the 'AdditionalAuditContext' information with the request ID for you to track. This information will be displayed in CloudTrail log in your account.</p>
@@ -286,6 +320,22 @@ module Aws::LakeFormation
       include ::Smithy::Schema::Structure
     end
 
+    # <p>A column in a table that a row-level security policy's filter expression can reference.</p>
+    # @!attribute name
+    #   <p>The name of the column.</p>
+    #   @return [String]
+    # @!attribute type
+    #   <p>The data type of the column.</p>
+    #   @return [String]
+    class Column < Struct.new(
+      nil,
+      :name,
+      :type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>A structure containing the name of a column resource and the LF-tags attached to it.</p>
     # @!attribute name
     #   <p>The name of a column resource.</p>
@@ -355,6 +405,18 @@ module Aws::LakeFormation
     class Condition < Struct.new(
       nil,
       :expression,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Multiple resources exist with the same Amazon S3 location</p>
+    # @!attribute message
+    #   <p>A message describing the problem.</p>
+    #   @return [String]
+    class ConflictException < Struct.new(
+      nil,
+      :message,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -455,12 +517,16 @@ module Aws::LakeFormation
     #            <p>If the <code>ShareRecipients</code> list includes valid values, a resource share is created with the principals you want to have access to the resources.</p>
     #            <p>If the <code>ShareRecipients</code> value is null or the list is empty, no resource share is created.</p>
     #   @return [Array<Types::DataLakePrincipal>]
+    # @!attribute service_integrations
+    #   <p>A list of service integrations for enabling trusted identity propagation with external services such as Redshift.</p>
+    #   @return [Array<Types::ServiceIntegrationUnion>]
     class CreateLakeFormationIdentityCenterConfigurationRequest < Struct.new(
       nil,
       :catalog_id,
       :instance_arn,
       :external_filtering,
       :share_recipients,
+      :service_integrations,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -498,6 +564,32 @@ module Aws::LakeFormation
     end
 
     class CreateLakeFormationOptInResponse < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute name
+    #   <p>A unique name for the row-level security policy within the Data Catalog.</p>
+    #   @return [String]
+    # @!attribute attachment_columns
+    #   <p>The list of columns that the filter expression references. These columns define the shape of the data that the policy can be attached to.</p>
+    #   @return [Array<Types::Column>]
+    # @!attribute filter_expression
+    #   <p>A filter predicate, written in a SQL-like syntax, that Lake Formation evaluates against each row. Only the rows for which the expression evaluates to true are returned to the principal.</p>
+    #   @return [String]
+    class CreateRLSPolicyRequest < Struct.new(
+      nil,
+      :name,
+      :attachment_columns,
+      :filter_expression,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class CreateRLSPolicyResponse < Struct.new(
       nil,
       keyword_init: true
     )
@@ -603,7 +695,17 @@ module Aws::LakeFormation
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/lake-formation/latest/dg/change-settings.html">Changing the Default Security Settings for Your Data Lake</a>.</p>
     #   @return [Array<Types::PrincipalPermissions>]
     # @!attribute parameters
-    #   <p>A key-value map that provides an additional configuration on your data lake. CROSS_ACCOUNT_VERSION is the key you can configure in the Parameters field. Accepted values for the CrossAccountVersion key are 1, 2, 3, and 4.</p>
+    #   <p>A key-value map that provides an additional configuration on your data lake. The following key-value pairs are supported:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>CROSS_ACCOUNT_VERSION</code> - Accepted values are 1, 2, 3, 4, and 5.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>SET_SOURCE_IDENTITY</code> - Accepted values are <code>TRUE</code> and <code>FALSE</code>. When set to <code>TRUE</code>, Lake Formation includes the IAM role identifier that was used to query in the S3 data event CloudTrail logs for <code>s3:GetObject</code> calls. For more information, see <a href="https://docs.aws.amazon.com/lake-formation/latest/dg/cloudtrail-logging.html#source-identity-cloudtrail">Tracking query engine IAM roles in S3 data events</a>.</p>
+    #               </li>
+    #            </ul>
     #   @return [Hash<String, String>]
     # @!attribute trusted_resource_owners
     #   <p>A list of the resource-owning account IDs that the caller's account can use to share their user access details (user ARNs). The user ARNs can be logged in the resource owner's CloudTrail log.</p>
@@ -848,6 +950,24 @@ module Aws::LakeFormation
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute name
+    #   <p>The name of the row-level security policy to delete.</p>
+    #   @return [String]
+    class DeleteRLSPolicyRequest < Struct.new(
+      nil,
+      :name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class DeleteRLSPolicyResponse < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute resource_arn
     #   <p>The Amazon Resource Name (ARN) of the resource that you want to deregister.</p>
     #   @return [String]
@@ -895,6 +1015,9 @@ module Aws::LakeFormation
     #            <p>If the <code>ShareRecipients</code> list includes valid values, a resource share is created with the principals you want to have access to the resources as the <code>ShareRecipients</code>.</p>
     #            <p>If the <code>ShareRecipients</code> value is null or the list is empty, no resource share is created.</p>
     #   @return [Array<Types::DataLakePrincipal>]
+    # @!attribute service_integrations
+    #   <p>A list of service integrations for enabling trusted identity propagation with external services such as Redshift.</p>
+    #   @return [Array<Types::ServiceIntegrationUnion>]
     # @!attribute resource_share
     #   <p>The Amazon Resource Name (ARN) of the RAM share.</p>
     #   @return [String]
@@ -905,6 +1028,7 @@ module Aws::LakeFormation
       :application_arn,
       :external_filtering,
       :share_recipients,
+      :service_integrations,
       :resource_share,
       keyword_init: true
     )
@@ -950,6 +1074,40 @@ module Aws::LakeFormation
     class DescribeTransactionResponse < Struct.new(
       nil,
       :transaction_description,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute name
+    #   <p>The name of the row-level security policy to detach.</p>
+    #   @return [String]
+    # @!attribute resource
+    #   <p>The resource from which the row-level security policy is detached.</p>
+    #   @return [Types::Resource]
+    # @!attribute principal
+    #   <p>The principal for which the row-level security policy is detached.</p>
+    #   @return [Types::DataLakePrincipal]
+    # @!attribute condition
+    #   <p>A Lake Formation condition, which applies to the row-level security policy attachment and contains an expression.</p>
+    #   @return [Types::Condition]
+    # @!attribute remove_default
+    #   <p>Indicates whether to remove this policy as the default row-level security policy for the resource.</p>
+    #   @return [Boolean]
+    class DetachRLSPolicyRequest < Struct.new(
+      nil,
+      :name,
+      :resource,
+      :principal,
+      :condition,
+      :remove_default,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class DetachRLSPolicyResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1346,6 +1504,28 @@ module Aws::LakeFormation
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute name
+    #   <p>The name of the row-level security policy to retrieve.</p>
+    #   @return [String]
+    class GetRLSPolicyRequest < Struct.new(
+      nil,
+      :name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute rls_policy
+    #   <p>An <code>RLSPolicy</code> structure containing the definition of the requested row-level security policy.</p>
+    #   @return [Types::RLSPolicy]
+    class GetRLSPolicyResponse < Struct.new(
+      nil,
+      :rls_policy,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute catalog_id
     #   <p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your Lake Formation environment. </p>
     #   @return [String]
@@ -1444,6 +1624,66 @@ module Aws::LakeFormation
       nil,
       :objects,
       :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute duration_seconds
+    #   <p>The time period, between 900 and 43,200 seconds, for the timeout of the temporary credentials.</p>
+    #   @return [Integer]
+    # @!attribute audit_context
+    #   <p>A structure used to include auditing information on the privileged API. </p>
+    #   @return [Types::AuditContext]
+    # @!attribute data_locations
+    #   <p>The Amazon S3 data location that you want to access.</p>
+    #   @return [Array<String>]
+    # @!attribute credentials_scope
+    #   <p>The credential scope is determined by the caller's Lake Formation permission on the associated table. Credential scope can be either:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>READ - Provides read-only access to the data location.</p>
+    #               </li>
+    #               <li>
+    #                  <p>READ_WRITE - Provides both read and write access to the data location.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    class GetTemporaryDataLocationCredentialsRequest < Struct.new(
+      nil,
+      :duration_seconds,
+      :audit_context,
+      :data_locations,
+      :credentials_scope,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute credentials
+    #   <p>A temporary set of credentials for an Lake Formation user. These credentials are scoped down to only access the raw data sources that the user has access to. </p>
+    #            <p>The temporary security credentials consist of an access key and a session token. The access key consists of an access key ID and a secret key. When the credentials are created, they are associated with an IAM access control policy that limits what the user can do when using the credentials.</p>
+    #   @return [Types::TemporaryCredentials]
+    # @!attribute accessible_data_locations
+    #   <p>Refers to the Amazon S3 locations that can be
+    #         accessed through the <code>GetTemporaryCredentialsForLocation</code> API operation.</p>
+    #   @return [Array<String>]
+    # @!attribute credentials_scope
+    #   <p>The credential scope is determined by the caller's Lake Formation permission on the associated table. Credential scope can be either:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>READ - Provides read-only access to the data location.</p>
+    #               </li>
+    #               <li>
+    #                  <p>READ_WRITE - Provides both read and write access to the data location.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    class GetTemporaryDataLocationCredentialsResponse < Struct.new(
+      nil,
+      :credentials,
+      :accessible_data_locations,
+      :credentials_scope,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2054,7 +2294,10 @@ module Aws::LakeFormation
     #   <p>The maximum number of results to return.</p>
     #   @return [Integer]
     # @!attribute include_related
-    #   <p>Indicates that related permissions should be included in the results.</p>
+    #   <p>Indicates that related permissions should be included in the results when listing permissions on a table resource.</p>
+    #            <p>Set the field to <code>TRUE</code> to show the cell filters on a table resource. Default
+    #         is <code>FALSE</code>. The Principal parameter must not be specified when requesting cell
+    #         filter information.</p>
     #   @return [String]
     class ListPermissionsRequest < Struct.new(
       nil,
@@ -2079,6 +2322,78 @@ module Aws::LakeFormation
     class ListPermissionsResponse < Struct.new(
       nil,
       :principal_resource_permissions,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute max_results
+    #   <p>The maximum number of row-level security policies to return in a single response.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>A continuation token, if this is a continuation call.</p>
+    #   @return [String]
+    class ListRLSPoliciesRequest < Struct.new(
+      nil,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute rls_policies
+    #   <p>A list of <code>RLSPolicy</code> structures.</p>
+    #   @return [Array<Types::RLSPolicy>]
+    # @!attribute next_token
+    #   <p>A continuation token, if not all row-level security policies have been returned.</p>
+    #   @return [String]
+    class ListRLSPoliciesResponse < Struct.new(
+      nil,
+      :rls_policies,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute resource
+    #   <p>If specified, returns only the attachments for the given resource.</p>
+    #   @return [Types::Resource]
+    # @!attribute principal
+    #   <p>If specified, returns only the attachments for the given principal.</p>
+    #   @return [Types::DataLakePrincipal]
+    # @!attribute policy_name
+    #   <p>If specified, returns only the attachments for the row-level security policy with this name.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of attachments to return in a single response.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>A continuation token, if this is a continuation call.</p>
+    #   @return [String]
+    class ListRLSPolicyAttachmentsRequest < Struct.new(
+      nil,
+      :resource,
+      :principal,
+      :policy_name,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute rls_policy_attachments
+    #   <p>A list of <code>RLSPolicyAttachment</code> structures.</p>
+    #   @return [Array<Types::RLSPolicyAttachment>]
+    # @!attribute next_token
+    #   <p>A continuation token, if not all attachments have been returned.</p>
+    #   @return [String]
+    class ListRLSPolicyAttachmentsResponse < Struct.new(
+      nil,
+      :rls_policy_attachments,
       :next_token,
       keyword_init: true
     )
@@ -2394,6 +2709,8 @@ module Aws::LakeFormation
     end
 
     # <p>A structure used as a protocol between query engines and Lake Formation or Glue. Contains both a Lake Formation generated authorization identifier and information from the request's authorization context.</p>
+    #          <p>For more information about how to utilize QuerySessionContext, see
+    #         <a href="https://docs.aws.amazon.com/lake-formation/latest/dg/api-overview.html">Lake Formation workflow for application integration API operations</a> in the developer guide.</p>
     # @!attribute query_id
     #   <p>A unique identifier generated by the query engine for the query.</p>
     #   @return [String]
@@ -2421,6 +2738,105 @@ module Aws::LakeFormation
       include ::Smithy::Schema::Structure
     end
 
+    # <p>A structure that describes a row-level security policy, including the columns its filter expression references and the filter expression itself.</p>
+    # @!attribute catalog_id
+    #   <p>The identifier for the Data Catalog that contains the policy. By default, the account ID.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the row-level security policy.</p>
+    #   @return [String]
+    # @!attribute attachment_columns
+    #   <p>The list of columns that the filter expression references.</p>
+    #   @return [Array<Types::Column>]
+    # @!attribute filter_expression
+    #   <p>The filter predicate, written in a SQL-like syntax, that determines which rows are returned to the principal.</p>
+    #   @return [String]
+    class RLSPolicy < Struct.new(
+      nil,
+      :catalog_id,
+      :name,
+      :attachment_columns,
+      :filter_expression,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A structure that describes the attachment of a row-level security policy to a resource for a principal.</p>
+    # @!attribute catalog_id
+    #   <p>The identifier for the Data Catalog that contains the attachment. By default, the account ID.</p>
+    #   @return [String]
+    # @!attribute policy_name
+    #   <p>The name of the attached row-level security policy.</p>
+    #   @return [String]
+    # @!attribute principal
+    #   <p>The principal to which the attached policy applies.</p>
+    #   @return [Types::DataLakePrincipal]
+    # @!attribute resource
+    #   <p>The resource to which the policy is attached.</p>
+    #   @return [Types::Resource]
+    # @!attribute condition
+    #   <p>A Lake Formation condition, which applies to the row-level security policy attachment and contains an expression.</p>
+    #   @return [Types::Condition]
+    # @!attribute default_rls_policy
+    #   <p>Indicates whether this attachment is the default row-level security policy for the resource.</p>
+    #   @return [Boolean]
+    class RLSPolicyAttachment < Struct.new(
+      nil,
+      :catalog_id,
+      :policy_name,
+      :principal,
+      :resource,
+      :condition,
+      :default_rls_policy,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A structure that identifies a row-level security policy as a resource, used when granting permissions on the policy.</p>
+    # @!attribute catalog_id
+    #   <p>The identifier for the Data Catalog that contains the policy. By default, the account ID.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the row-level security policy.</p>
+    #   @return [String]
+    class RLSPolicyResource < Struct.new(
+      nil,
+      :catalog_id,
+      :name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration for enabling trusted identity propagation with Redshift Connect.</p>
+    # @!attribute authorization
+    #   <p>The authorization status for Redshift Connect. Valid values are ENABLED or DISABLED.</p>
+    #   @return [String]
+    class RedshiftConnect < Struct.new(
+      nil,
+      :authorization,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A union structure representing different Redshift integration scopes.</p>
+    # @!attribute redshift_connect
+    #   <p>Configuration for Redshift Connect integration.</p>
+    #   @return [Types::RedshiftConnect]
+    class RedshiftScopeUnion < Struct.new(
+      :redshift_connect,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class RedshiftConnect < RedshiftScopeUnion; end
+      class Unknown < RedshiftScopeUnion; end
+    end
+
     # @!attribute resource_arn
     #   <p>The Amazon Resource Name (ARN) of the resource that you want to register.</p>
     #   @return [String]
@@ -2442,6 +2858,10 @@ module Aws::LakeFormation
     # @!attribute with_privileged_access
     #   <p>Grants the calling principal the permissions to perform all supported Lake Formation operations on the registered data location. </p>
     #   @return [Boolean]
+    # @!attribute expected_resource_owner_account
+    #   <p>The Amazon Web Services account that owns the Glue tables associated with specific Amazon S3 locations.
+    #       </p>
+    #   @return [String]
     class RegisterResourceRequest < Struct.new(
       nil,
       :resource_arn,
@@ -2450,6 +2870,7 @@ module Aws::LakeFormation
       :with_federation,
       :hybrid_access_enabled,
       :with_privileged_access,
+      :expected_resource_owner_account,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2512,7 +2933,7 @@ module Aws::LakeFormation
     #   <p>A data cell filter.</p>
     #   @return [Types::DataCellsFilterResource]
     # @!attribute lf_tag
-    #   <p>The LF-tag key and values attached to a resource.</p>
+    #   <p>The LF-Tag key and values attached to a resource.</p>
     #   @return [Types::LFTagKeyResource]
     # @!attribute lf_tag_policy
     #   <p>A list of LF-tag conditions or saved LF-Tag expressions that define a resource's LF-tag policy.</p>
@@ -2520,6 +2941,9 @@ module Aws::LakeFormation
     # @!attribute lf_tag_expression
     #   <p>LF-Tag expression resource. A logical expression composed of one or more LF-Tag key:value pairs.</p>
     #   @return [Types::LFTagExpressionResource]
+    # @!attribute rls_policy
+    #   <p>A row-level security policy resource. Specify this when granting or revoking permissions on a row-level security policy.</p>
+    #   @return [Types::RLSPolicyResource]
     class Resource < Struct.new(
       nil,
       :catalog,
@@ -2531,6 +2955,7 @@ module Aws::LakeFormation
       :lf_tag,
       :lf_tag_policy,
       :lf_tag_expression,
+      :rls_policy,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2557,6 +2982,23 @@ module Aws::LakeFormation
     # @!attribute with_privileged_access
     #   <p>Grants the calling principal the permissions to perform all supported Lake Formation operations on the registered data location. </p>
     #   @return [Boolean]
+    # @!attribute verification_status
+    #   <p>Indicates whether the registered role has sufficient permissions to access registered Amazon S3 location. Verification Status can be one of the following: </p>
+    #            <ul>
+    #               <li>
+    #                  <p>VERIFIED - Registered role has sufficient permissions to access registered Amazon S3 location.</p>
+    #               </li>
+    #               <li>
+    #                  <p>NOT_VERIFIED - Registered role does not have sufficient permissions to access registered Amazon S3 location.</p>
+    #               </li>
+    #               <li>
+    #                  <p>VERIFICATION_FAILED - Unable to verify if the registered role can access the registered Amazon S3 location.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute expected_resource_owner_account
+    #   <p>The Amazon Web Services account that owns the Glue tables associated with specific Amazon S3 locations. </p>
+    #   @return [String]
     class ResourceInfo < Struct.new(
       nil,
       :resource_arn,
@@ -2565,6 +3007,8 @@ module Aws::LakeFormation
       :with_federation,
       :hybrid_access_enabled,
       :with_privileged_access,
+      :verification_status,
+      :expected_resource_owner_account,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2723,6 +3167,21 @@ module Aws::LakeFormation
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+    end
+
+    # <p>A union structure representing different service integration types.</p>
+    # @!attribute redshift
+    #   <p>Redshift service integration configuration.</p>
+    #   @return [Array<Types::RedshiftScopeUnion>]
+    class ServiceIntegrationUnion < Struct.new(
+      :redshift,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class Redshift < ServiceIntegrationUnion; end
+      class Unknown < ServiceIntegrationUnion; end
     end
 
     # @!attribute query_planning_context
@@ -2943,6 +3402,31 @@ module Aws::LakeFormation
       include ::Smithy::Schema::Structure
     end
 
+    # <p>A temporary set of credentials for an Lake Formation user. These credentials are scoped down to only access the raw data sources that the user has access to. </p>
+    #          <p>The temporary security credentials consist of an access key and a session token. The access key consists of an access key ID and a secret key. When the credentials are created, they are associated with an IAM access control policy that limits what the user can do when using the credentials.</p>
+    # @!attribute access_key_id
+    #   <p>The access key ID for the temporary credentials.</p>
+    #   @return [String]
+    # @!attribute secret_access_key
+    #   <p>The secret key for the temporary credentials.</p>
+    #   @return [String]
+    # @!attribute session_token
+    #   <p>The session token for the temporary credentials.</p>
+    #   @return [String]
+    # @!attribute expiration
+    #   <p>The date and time when the temporary credentials expire.</p>
+    #   @return [Time]
+    class TemporaryCredentials < Struct.new(
+      nil,
+      :access_key_id,
+      :secret_access_key,
+      :session_token,
+      :expiration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Contains details about an error where the query request was throttled.</p>
     # @!attribute message
     #   <p>A message describing the error.</p>
@@ -3108,6 +3592,9 @@ module Aws::LakeFormation
     #            <p>If the <code>ShareRecipients</code> value is an empty list, then the existing share
     #            recipients list will be cleared, and the resource share will be deleted.</p>
     #   @return [Array<Types::DataLakePrincipal>]
+    # @!attribute service_integrations
+    #   <p>A list of service integrations for enabling trusted identity propagation with external services such as Redshift.</p>
+    #   @return [Array<Types::ServiceIntegrationUnion>]
     # @!attribute application_status
     #   <p>Allows to enable or disable the IAM Identity Center connection.</p>
     #   @return [String]
@@ -3119,6 +3606,7 @@ module Aws::LakeFormation
       nil,
       :catalog_id,
       :share_recipients,
+      :service_integrations,
       :application_status,
       :external_filtering,
       keyword_init: true
@@ -3127,6 +3615,28 @@ module Aws::LakeFormation
     end
 
     class UpdateLakeFormationIdentityCenterConfigurationResponse < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute name
+    #   <p>The name of the row-level security policy to update.</p>
+    #   @return [String]
+    # @!attribute filter_expression
+    #   <p>The new filter predicate, written in a SQL-like syntax, that replaces the policy's current filter expression.</p>
+    #   @return [String]
+    class UpdateRLSPolicyRequest < Struct.new(
+      nil,
+      :name,
+      :filter_expression,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class UpdateRLSPolicyResponse < Struct.new(
       nil,
       keyword_init: true
     )
@@ -3147,12 +3657,17 @@ module Aws::LakeFormation
     #         Specifies whether the data access of tables pointing to the location can be managed by both Lake Formation permissions as well as Amazon S3 bucket policies.
     #       </p>
     #   @return [Boolean]
+    # @!attribute expected_resource_owner_account
+    #   <p>The Amazon Web Services account that owns the Glue tables associated with specific Amazon S3 locations.
+    #       </p>
+    #   @return [String]
     class UpdateResourceRequest < Struct.new(
       nil,
       :role_arn,
       :resource_arn,
       :with_federation,
       :hybrid_access_enabled,
+      :expected_resource_owner_account,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3233,7 +3748,7 @@ module Aws::LakeFormation
       include ::Smithy::Schema::Structure
     end
 
-    # <p>An object that defines an Amazon S3 object to be deleted if a transaction cancels, provided that 
+    # <p>An object that defines an Amazon S3 object to be deleted if a transaction cancels, provided that
     #       <code>VirtualPut</code> was called before writing the object.</p>
     # @!attribute uri
     #   <p>The path to the Amazon S3 object. Must start with s3://</p>

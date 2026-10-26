@@ -22,13 +22,24 @@ module Aws::ARCRegionswitch
     AssociatedAlarmMap: MapShape
     AuroraClusterArn: StringShape
     AuroraClusterArns: ListShape
+    AuroraInstanceArn: StringShape
+    AuroraProvisionedScalingConfiguration: StructureShape
+    AuroraServerlessScalingConfiguration: StructureShape
     CancelPlanExecutionRequest: StructureShape
     CancelPlanExecutionResponse: StructureShape
+    ConflictException: StructureShape
     CreatePlanRequest: StructureShape
     CreatePlanResponse: StructureShape
     CustomActionLambdaConfiguration: StructureShape
     DeletePlanRequest: StructureShape
     DeletePlanResponse: StructureShape
+    DocumentDbClusterArn: StringShape
+    DocumentDbClusterArns: ListShape
+    DocumentDbConfiguration: StructureShape
+    DocumentDbDefaultBehavior: EnumShape
+    DocumentDbGlobalClusterIdentifier: StringShape
+    DocumentDbUngraceful: StructureShape
+    DocumentDbUngracefulBehavior: EnumShape
     Duration: StringShape
     Ec2AsgCapacityIncreaseConfiguration: StructureShape
     Ec2AsgCapacityMonitoringApproach: EnumShape
@@ -45,6 +56,9 @@ module Aws::ARCRegionswitch
     EksResourceScalingConfiguration: StructureShape
     EksResourceScalingUngraceful: StructureShape
     EvaluationStatus: EnumShape
+    EventSourceMapping: StructureShape
+    EventSourceMappingAction: EnumShape
+    EventSourceMappingArn: StringShape
     ExecutionAction: EnumShape
     ExecutionApprovalConfiguration: StructureShape
     ExecutionBlockConfiguration: UnionShape
@@ -56,6 +70,10 @@ module Aws::ARCRegionswitch
     ExecutionId: StringShape
     ExecutionMode: EnumShape
     ExecutionState: EnumShape
+    FailedReportErrorCode: EnumShape
+    FailedReportOutput: StructureShape
+    GeneratedReport: StructureShape
+    GeneratedReportDetails: ListShape
     GetPlanEvaluationStatusRequest: StructureShape
     GetPlanEvaluationStatusResponse: StructureShape
     GetPlanExecutionRequest: StructureShape
@@ -80,7 +98,11 @@ module Aws::ARCRegionswitch
     KubernetesScalingApps: ListShape
     KubernetesScalingResource: StructureShape
     LambdaArn: StringShape
+    LambdaEventSourceMappingConfiguration: StructureShape
+    LambdaEventSourceMappingUngraceful: StructureShape
+    LambdaEventSourceMappingUngracefulBehavior: EnumShape
     LambdaList: ListShape
+    LambdaPayload: StringShape
     LambdaUngraceful: StructureShape
     LambdaUngracefulBehavior: EnumShape
     Lambdas: StructureShape
@@ -94,26 +116,54 @@ module Aws::ARCRegionswitch
     ListPlansInRegionResponse: StructureShape
     ListPlansRequest: StructureShape
     ListPlansResponse: StructureShape
+    ListRoute53HealthChecksInRegionRequest: StructureShape
+    ListRoute53HealthChecksInRegionResponse: StructureShape
     ListRoute53HealthChecksRequest: StructureShape
     ListRoute53HealthChecksResponse: StructureShape
+    ListServiceQuotaWarningsRequest: StructureShape
+    ListServiceQuotaWarningsResponse: StructureShape
     ListTagsForResourceRequest: StructureShape
     ListTagsForResourceResponse: StructureShape
     MaxResults: IntegerShape
     MinimalWorkflow: StructureShape
+    NeptuneClusterArn: StringShape
+    NeptuneDefaultBehavior: EnumShape
+    NeptuneGlobalClusterIdentifier: StringShape
+    NeptuneGlobalDatabaseConfiguration: StructureShape
+    NeptuneUngraceful: StructureShape
+    NeptuneUngracefulBehavior: EnumShape
     NextToken: StringShape
     ParallelExecutionBlockConfiguration: StructureShape
     Plan: StructureShape
     PlanArn: StringShape
+    PlanArnList: ListShape
     PlanList: ListShape
     PlanName: StringShape
     PlanWarnings: ListShape
+    RdsCreateCrossRegionReplicaConfiguration: StructureShape
+    RdsDbInstanceArn: StringShape
+    RdsDbInstanceArnMap: MapShape
+    RdsPromoteReadReplicaConfiguration: StructureShape
+    RdsSwitchoverReadReplicaConfiguration: StructureShape
+    RdsUngraceful: StructureShape
+    RdsUngracefulBehavior: EnumShape
     RecoveryApproach: EnumShape
+    RecoveryExecutionId: StringShape
     Region: StringShape
     RegionAndRoutingControls: MapShape
+    RegionAuroraClusterMap: MapShape
+    RegionAuroraInstanceArnMap: MapShape
+    RegionEventSourceMappingMap: MapShape
     RegionList: ListShape
+    RegionNeptuneClusterArnMap: MapShape
+    RegionSsmDocumentMap: MapShape
     RegionSwitchPlanConfiguration: StructureShape
     RegionToRunIn: EnumShape
     RegionalScalingResource: MapShape
+    ReportConfiguration: StructureShape
+    ReportOutput: UnionShape
+    ReportOutputConfiguration: UnionShape
+    ReportOutputList: ListShape
     ResourceArn: StringShape
     ResourceNotFoundException: StructureShape
     ResourceWarning: StructureShape
@@ -124,6 +174,7 @@ module Aws::ARCRegionswitch
     Route53HealthCheckConfiguration: StructureShape
     Route53HealthCheckId: StringShape
     Route53HealthCheckList: ListShape
+    Route53HealthCheckStatus: EnumShape
     Route53HostedZoneId: StringShape
     Route53RecordName: StringShape
     Route53ResourceRecordSet: StructureShape
@@ -131,8 +182,28 @@ module Aws::ARCRegionswitch
     Route53ResourceRecordSetList: ListShape
     RoutingControlArn: StringShape
     RoutingControlStateChange: EnumShape
+    S3ReportOutput: StructureShape
+    S3ReportOutputConfiguration: StructureShape
     Service: StructureShape
     ServiceList: ListShape
+    ServiceQuotaWarningStatus: EnumShape
+    ServiceQuotaWarningSummary: StructureShape
+    ServiceQuotaWarningSummaryList: ListShape
+    SsmDocumentArn: StringShape
+    SsmDocumentConfig: StructureShape
+    SsmDocumentParameters: MapShape
+    SsmDocumentVersion: StringShape
+    SsmParameterKey: StringShape
+    SsmParameterValue: StringShape
+    SsmParameterValues: ListShape
+    SsmSendCommandConfiguration: StructureShape
+    SsmSendCommandUngraceful: StructureShape
+    SsmSendCommandUngracefulBehavior: EnumShape
+    SsmTarget: StructureShape
+    SsmTargetKey: StringShape
+    SsmTargetList: ListShape
+    SsmTargetValue: StringShape
+    SsmTargetValueList: ListShape
     StartPlanExecutionRequest: StructureShape
     StartPlanExecutionResponse: StructureShape
     Step: StructureShape
@@ -161,6 +232,7 @@ module Aws::ARCRegionswitch
     UpdatePlanExecutionStepResponse: StructureShape
     UpdatePlanRequest: StructureShape
     UpdatePlanResponse: StructureShape
+    WaitELBTargetGroupHealthy: EnumShape
     Workflow: StructureShape
     WorkflowList: ListShape
     WorkflowTargetAction: EnumShape

@@ -12,6 +12,348 @@ module Aws::ACM
       attr_accessor message: String?
     end
 
+    class AcmCertificateMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?created_at: Time,
+        ?exported: bool,
+        ?imported_at: Time,
+        ?in_use: bool,
+        ?issued_at: Time,
+        ?renewal_eligibility: String,
+        ?revoked_at: Time,
+        ?status: String,
+        ?renewal_status: String,
+        ?type: String,
+        ?export_option: String,
+        ?managed_by: String,
+        ?validation_method: String,
+        ?certificate_key_pair_origin: String,
+        ?acme_endpoint_arn: String,
+        ?acme_account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor created_at: Time?
+      attr_accessor exported: bool?
+      attr_accessor imported_at: Time?
+      attr_accessor in_use: bool?
+      attr_accessor issued_at: Time?
+      attr_accessor renewal_eligibility: String?
+      attr_accessor revoked_at: Time?
+      attr_accessor status: String?
+      attr_accessor renewal_status: String?
+      attr_accessor type: String?
+      attr_accessor export_option: String?
+      attr_accessor managed_by: String?
+      attr_accessor validation_method: String?
+      attr_accessor certificate_key_pair_origin: String?
+      attr_accessor acme_endpoint_arn: String?
+      attr_accessor acme_account_id: String?
+    end
+
+    class AcmCertificateMetadataFilter
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?status: String,
+        ?renewal_status: String,
+        ?type: String,
+        ?in_use: bool,
+        ?exported: bool,
+        ?export_option: String,
+        ?managed_by: String,
+        ?validation_method: String,
+        ?certificate_key_pair_origin: String,
+        ?acme_endpoint_arn: String,
+        ?acme_account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor renewal_status: String?
+      attr_accessor type: String?
+      attr_accessor in_use: bool?
+      attr_accessor exported: bool?
+      attr_accessor export_option: String?
+      attr_accessor managed_by: String?
+      attr_accessor validation_method: String?
+      attr_accessor certificate_key_pair_origin: String?
+      attr_accessor acme_endpoint_arn: String?
+      attr_accessor acme_account_id: String?
+
+      class Status < AcmCertificateMetadataFilter
+      end
+      class RenewalStatus < AcmCertificateMetadataFilter
+      end
+      class Type < AcmCertificateMetadataFilter
+      end
+      class InUse < AcmCertificateMetadataFilter
+      end
+      class Exported < AcmCertificateMetadataFilter
+      end
+      class ExportOption < AcmCertificateMetadataFilter
+      end
+      class ManagedBy < AcmCertificateMetadataFilter
+      end
+      class ValidationMethod < AcmCertificateMetadataFilter
+      end
+      class CertificateKeyPairOrigin < AcmCertificateMetadataFilter
+      end
+      class AcmeEndpointArn < AcmCertificateMetadataFilter
+      end
+      class AcmeAccountId < AcmCertificateMetadataFilter
+      end
+      class Unknown < AcmCertificateMetadataFilter
+      end
+    end
+
+    class AcmeAccount
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_url: String,
+        ?public_key_thumbprint: String,
+        ?status: String,
+        ?created_at: Time,
+        ?acme_external_account_binding_arn: String,
+        ?contacts: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_url: String?
+      attr_accessor public_key_thumbprint: String?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor acme_external_account_binding_arn: String?
+      attr_accessor contacts: Array[String]?
+    end
+
+    module AcmeAccountStatus
+      VALID: String
+      DEACTIVATED: String
+      REVOKED: String
+    end
+
+    class AcmeAccountSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_url: String,
+        ?public_key_thumbprint: String,
+        ?status: String,
+        ?created_at: Time,
+        ?acme_external_account_binding_arn: String,
+        ?contacts: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_url: String?
+      attr_accessor public_key_thumbprint: String?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor acme_external_account_binding_arn: String?
+      attr_accessor contacts: Array[String]?
+    end
+
+    module AcmeAuthorizationBehavior
+      PRE_APPROVED: String
+    end
+
+    module AcmeContact
+      REQUIRED: String
+      NOT_REQUIRED: String
+    end
+
+    class AcmeDomainValidation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?acme_domain_validation_arn: String,
+        ?acme_endpoint_arn: String,
+        ?domain_name: String,
+        ?prevalidation_type: String,
+        ?prevalidation_details: Types::PrevalidationDetails,
+        ?status: String,
+        ?failure_details: Types::FailureDetails,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor acme_domain_validation_arn: String?
+      attr_accessor acme_endpoint_arn: String?
+      attr_accessor domain_name: String?
+      attr_accessor prevalidation_type: String?
+      attr_accessor prevalidation_details: Types::PrevalidationDetails?
+      attr_accessor status: String?
+      attr_accessor failure_details: Types::FailureDetails?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    module AcmeDomainValidationFailureReason
+      ACCESS_DENIED: String
+      DOMAIN_MISMATCH: String
+      DOMAIN_NOT_ALLOWED: String
+      ENDPOINT_NOT_ACTIVE: String
+      HOSTED_ZONE_NOT_FOUND: String
+      INTERNAL_FAILURE: String
+      INVALID_CHANGE_BATCH: String
+      INVALID_PUBLIC_DOMAIN: String
+      TIMED_OUT: String
+    end
+
+    module AcmeDomainValidationStatus
+      VALIDATING: String
+      VALID: String
+      INVALID: String
+      DELETING: String
+    end
+
+    class AcmeDomainValidationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?acme_domain_validation_arn: String,
+        ?acme_endpoint_arn: String,
+        ?domain_name: String,
+        ?prevalidation_type: String,
+        ?prevalidation_details: Types::PrevalidationDetails,
+        ?status: String,
+        ?failure_details: Types::FailureDetails,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor acme_domain_validation_arn: String?
+      attr_accessor acme_endpoint_arn: String?
+      attr_accessor domain_name: String?
+      attr_accessor prevalidation_type: String?
+      attr_accessor prevalidation_details: Types::PrevalidationDetails?
+      attr_accessor status: String?
+      attr_accessor failure_details: Types::FailureDetails?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class AcmeEndpoint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?acme_endpoint_arn: String,
+        ?endpoint_url: String,
+        ?status: String,
+        ?failure_reason: String,
+        ?authorization_behavior: String,
+        ?contact: String,
+        ?certificate_authority: Types::CertificateAuthority,
+        ?certificate_tags: Array[Types::Tag],
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor acme_endpoint_arn: String?
+      attr_accessor endpoint_url: String?
+      attr_accessor status: String?
+      attr_accessor failure_reason: String?
+      attr_accessor authorization_behavior: String?
+      attr_accessor contact: String?
+      attr_accessor certificate_authority: Types::CertificateAuthority?
+      attr_accessor certificate_tags: Array[Types::Tag]?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    module AcmeEndpointStatus
+      CREATING: String
+      ACTIVE: String
+      DELETING: String
+      FAILED: String
+    end
+
+    class AcmeEndpointSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?acme_endpoint_arn: String,
+        ?endpoint_url: String,
+        ?status: String,
+        ?failure_reason: String,
+        ?authorization_behavior: String,
+        ?contact: String,
+        ?certificate_authority: Types::CertificateAuthority,
+        ?certificate_tags: Array[Types::Tag],
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor acme_endpoint_arn: String?
+      attr_accessor endpoint_url: String?
+      attr_accessor status: String?
+      attr_accessor failure_reason: String?
+      attr_accessor authorization_behavior: String?
+      attr_accessor contact: String?
+      attr_accessor certificate_authority: Types::CertificateAuthority?
+      attr_accessor certificate_tags: Array[Types::Tag]?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class AcmeExternalAccountBinding
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?acme_external_account_binding_arn: String,
+        ?acme_endpoint_arn: String,
+        ?role_arn: String,
+        ?expires_at: Time,
+        ?revoked_at: Time,
+        ?last_used_at: Time,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor acme_external_account_binding_arn: String?
+      attr_accessor acme_endpoint_arn: String?
+      attr_accessor role_arn: String?
+      attr_accessor expires_at: Time?
+      attr_accessor revoked_at: Time?
+      attr_accessor last_used_at: Time?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class AcmeExternalAccountBindingSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?acme_external_account_binding_arn: String,
+        ?acme_endpoint_arn: String,
+        ?role_arn: String,
+        ?expires_at: Time,
+        ?revoked_at: Time,
+        ?last_used_at: Time,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor acme_external_account_binding_arn: String?
+      attr_accessor acme_endpoint_arn: String?
+      attr_accessor role_arn: String?
+      attr_accessor expires_at: Time?
+      attr_accessor revoked_at: Time?
+      attr_accessor last_used_at: Time?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
     class AddTagsToCertificateRequest
       include Smithy::Schema::Structure
 
@@ -23,6 +365,22 @@ module Aws::ACM
 
       attr_accessor certificate_arn: String?
       attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CertificateAuthority
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?public_certificate_authority: Types::PublicCertificateAuthority,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor public_certificate_authority: Types::PublicCertificateAuthority?
+
+      class PublicCertificateAuthority < CertificateAuthority
+      end
+      class Unknown < CertificateAuthority
+      end
     end
 
     class CertificateDetail
@@ -56,6 +414,10 @@ module Aws::ACM
         ?certificate_authority_arn: String,
         ?renewal_eligibility: String,
         ?options: Types::CertificateOptions,
+        ?update_summary: Types::UpdateSummary,
+        ?certificate_key_pair_origin: String,
+        ?acme_endpoint_arn: String,
+        ?acme_account_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -86,6 +448,10 @@ module Aws::ACM
       attr_accessor certificate_authority_arn: String?
       attr_accessor renewal_eligibility: String?
       attr_accessor options: Types::CertificateOptions?
+      attr_accessor update_summary: Types::UpdateSummary?
+      attr_accessor certificate_key_pair_origin: String?
+      attr_accessor acme_endpoint_arn: String?
+      attr_accessor acme_account_id: String?
     end
 
     module CertificateExport
@@ -93,8 +459,82 @@ module Aws::ACM
       DISABLED: String
     end
 
+    class CertificateFilter
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?certificate_arn: String,
+        ?x509_attribute_filter: Types::X509AttributeFilter,
+        ?acm_certificate_metadata_filter: Types::AcmCertificateMetadataFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_arn: String?
+      attr_accessor x509_attribute_filter: Types::X509AttributeFilter?
+      attr_accessor acm_certificate_metadata_filter: Types::AcmCertificateMetadataFilter?
+
+      class CertificateArn < CertificateFilter
+      end
+      class X509AttributeFilter < CertificateFilter
+      end
+      class AcmCertificateMetadataFilter < CertificateFilter
+      end
+      class Unknown < CertificateFilter
+      end
+    end
+
+    class CertificateFilterStatement
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?and: Array[Types::CertificateFilterStatement],
+        ?or: Array[Types::CertificateFilterStatement],
+        ?not: Types::CertificateFilterStatement,
+        ?filter: Types::CertificateFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor and: Array[Types::CertificateFilterStatement]?
+      attr_accessor or: Array[Types::CertificateFilterStatement]?
+      attr_accessor not: Types::CertificateFilterStatement?
+      attr_accessor filter: Types::CertificateFilter?
+
+      class And < CertificateFilterStatement
+      end
+      class Or < CertificateFilterStatement
+      end
+      class Not < CertificateFilterStatement
+      end
+      class Filter < CertificateFilterStatement
+      end
+      class Unknown < CertificateFilterStatement
+      end
+    end
+
+    module CertificateKeyPairOrigin
+      AWS_MANAGED: String
+      ACME: String
+      CUSTOMER_PROVIDED: String
+    end
+
     module CertificateManagedBy
       CLOUDFRONT: String
+    end
+
+    class CertificateMetadata
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?acm_certificate_metadata: Types::AcmCertificateMetadata,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor acm_certificate_metadata: Types::AcmCertificateMetadata?
+
+      class AcmCertificateMetadata < CertificateMetadata
+      end
+      class Unknown < CertificateMetadata
+      end
     end
 
     class CertificateOptions
@@ -103,11 +543,28 @@ module Aws::ACM
       def initialize: (
         ?certificate_transparency_logging_preference: String,
         ?export: String,
+        ?validation_method: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor certificate_transparency_logging_preference: String?
       attr_accessor export: String?
+      attr_accessor validation_method: String?
+    end
+
+    class CertificateSearchResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_arn: String,
+        ?x509_attributes: Types::X509Attributes,
+        ?certificate_metadata: Types::CertificateMetadata,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_arn: String?
+      attr_accessor x509_attributes: Types::X509Attributes?
+      attr_accessor certificate_metadata: Types::CertificateMetadata?
     end
 
     module CertificateStatus
@@ -144,6 +601,7 @@ module Aws::ACM
         ?imported_at: Time,
         ?revoked_at: Time,
         ?managed_by: String,
+        ?certificate_key_pair_origin: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -167,6 +625,7 @@ module Aws::ACM
       attr_accessor imported_at: Time?
       attr_accessor revoked_at: Time?
       attr_accessor managed_by: String?
+      attr_accessor certificate_key_pair_origin: String?
     end
 
     module CertificateTransparencyLoggingPreference
@@ -180,6 +639,24 @@ module Aws::ACM
       PRIVATE: String
     end
 
+    class CommonNameFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: String,
+        ?comparison_operator: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: String?
+      attr_accessor comparison_operator: String?
+    end
+
+    module ComparisonOperator
+      CONTAINS: String
+      EQUALS: String
+    end
+
     class ConflictException
       include Smithy::Schema::Structure
 
@@ -191,6 +668,144 @@ module Aws::ACM
       attr_accessor message: String?
     end
 
+    class CreateAcmeDomainValidationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?idempotency_token: String,
+        ?acme_endpoint_arn: String,
+        ?domain_name: String,
+        ?prevalidation_options: Types::PrevalidationOptions,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor idempotency_token: String?
+      attr_accessor acme_endpoint_arn: String?
+      attr_accessor domain_name: String?
+      attr_accessor prevalidation_options: Types::PrevalidationOptions?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateAcmeDomainValidationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?acme_domain_validation_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor acme_domain_validation_arn: String?
+    end
+
+    class CreateAcmeEndpointRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?idempotency_token: String,
+        ?authorization_behavior: String,
+        ?contact: String,
+        ?certificate_authority: Types::CertificateAuthority,
+        ?tags: Array[Types::Tag],
+        ?certificate_tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor idempotency_token: String?
+      attr_accessor authorization_behavior: String?
+      attr_accessor contact: String?
+      attr_accessor certificate_authority: Types::CertificateAuthority?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor certificate_tags: Array[Types::Tag]?
+    end
+
+    class CreateAcmeEndpointResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?acme_endpoint_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor acme_endpoint_arn: String?
+    end
+
+    class CreateAcmeExternalAccountBindingRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?idempotency_token: String,
+        ?acme_endpoint_arn: String,
+        ?role_arn: String,
+        ?expiration: Types::Expiration,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor idempotency_token: String?
+      attr_accessor acme_endpoint_arn: String?
+      attr_accessor role_arn: String?
+      attr_accessor expiration: Types::Expiration?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateAcmeExternalAccountBindingResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?external_account_binding: Types::AcmeExternalAccountBinding,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor external_account_binding: Types::AcmeExternalAccountBinding?
+    end
+
+    class CustomAttribute
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?object_identifier: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor object_identifier: String?
+      attr_accessor value: String?
+    end
+
+    class DeleteAcmeDomainValidationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?acme_domain_validation_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor acme_domain_validation_arn: String?
+    end
+
+    class DeleteAcmeEndpointRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?acme_endpoint_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor acme_endpoint_arn: String?
+    end
+
+    class DeleteAcmeExternalAccountBindingRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?acme_external_account_binding_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor acme_external_account_binding_arn: String?
+    end
+
     class DeleteCertificateRequest
       include Smithy::Schema::Structure
 
@@ -200,6 +815,96 @@ module Aws::ACM
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor certificate_arn: String?
+    end
+
+    class DescribeAcmeAccountRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?acme_endpoint_arn: String,
+        ?account_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor acme_endpoint_arn: String?
+      attr_accessor account_url: String?
+    end
+
+    class DescribeAcmeAccountResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?acme_account: Types::AcmeAccount,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor acme_account: Types::AcmeAccount?
+    end
+
+    class DescribeAcmeDomainValidationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?acme_domain_validation_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor acme_domain_validation_arn: String?
+    end
+
+    class DescribeAcmeDomainValidationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?acme_domain_validation: Types::AcmeDomainValidation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor acme_domain_validation: Types::AcmeDomainValidation?
+    end
+
+    class DescribeAcmeEndpointRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?acme_endpoint_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor acme_endpoint_arn: String?
+    end
+
+    class DescribeAcmeEndpointResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?acme_endpoint: Types::AcmeEndpoint,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor acme_endpoint: Types::AcmeEndpoint?
+    end
+
+    class DescribeAcmeExternalAccountBindingRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?acme_external_account_binding_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor acme_external_account_binding_arn: String?
+    end
+
+    class DescribeAcmeExternalAccountBindingResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?external_account_binding: Types::AcmeExternalAccountBinding,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor external_account_binding: Types::AcmeExternalAccountBinding?
     end
 
     class DescribeCertificateRequest
@@ -222,6 +927,119 @@ module Aws::ACM
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor certificate: Types::CertificateDetail?
+    end
+
+    class DistinguishedName
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?common_name: String,
+        ?domain_components: Array[String],
+        ?country: String,
+        ?custom_attributes: Array[Types::CustomAttribute],
+        ?distinguished_name_qualifier: String,
+        ?generation_qualifier: String,
+        ?given_name: String,
+        ?initials: String,
+        ?locality: String,
+        ?organization: String,
+        ?organizational_unit: String,
+        ?pseudonym: String,
+        ?serial_number: String,
+        ?state: String,
+        ?surname: String,
+        ?title: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor common_name: String?
+      attr_accessor domain_components: Array[String]?
+      attr_accessor country: String?
+      attr_accessor custom_attributes: Array[Types::CustomAttribute]?
+      attr_accessor distinguished_name_qualifier: String?
+      attr_accessor generation_qualifier: String?
+      attr_accessor given_name: String?
+      attr_accessor initials: String?
+      attr_accessor locality: String?
+      attr_accessor organization: String?
+      attr_accessor organizational_unit: String?
+      attr_accessor pseudonym: String?
+      attr_accessor serial_number: String?
+      attr_accessor state: String?
+      attr_accessor surname: String?
+      attr_accessor title: String?
+    end
+
+    class DnsNameFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: String,
+        ?comparison_operator: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: String?
+      attr_accessor comparison_operator: String?
+    end
+
+    class DnsPrevalidationDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_scope: Types::DomainScope,
+        ?hosted_zone_id: String,
+        ?resource_record: Types::ResourceRecord,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_scope: Types::DomainScope?
+      attr_accessor hosted_zone_id: String?
+      attr_accessor resource_record: Types::ResourceRecord?
+    end
+
+    class DnsPrevalidationOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_scope: Types::DomainScope,
+        ?hosted_zone_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_scope: Types::DomainScope?
+      attr_accessor hosted_zone_id: String?
+    end
+
+    class DnsValidationChallenge
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_record: Types::ResourceRecord,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_record: Types::ResourceRecord?
+    end
+
+    class DomainScope
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?exact_domain: String,
+        ?subdomains: String,
+        ?wildcards: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor exact_domain: String?
+      attr_accessor subdomains: String?
+      attr_accessor wildcards: String?
+    end
+
+    module DomainScopeOption
+      ENABLED: String
+      DISABLED: String
     end
 
     module DomainStatus
@@ -253,6 +1071,19 @@ module Aws::ACM
       attr_accessor validation_method: String?
     end
 
+    class DomainValidationMethodUpdateSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?from: String,
+        ?to: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor from: String?
+      attr_accessor to: String?
+    end
+
     class DomainValidationOption
       include Smithy::Schema::Structure
 
@@ -264,6 +1095,47 @@ module Aws::ACM
 
       attr_accessor domain_name: String?
       attr_accessor validation_domain: String?
+    end
+
+    class DomainValidationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?active_validation_configuration: Types::ValidationConfiguration,
+        ?requested_validation_configuration: Types::ValidationConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor active_validation_configuration: Types::ValidationConfiguration?
+      attr_accessor requested_validation_configuration: Types::ValidationConfiguration?
+    end
+
+    class EmailValidationChallenge
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?validation_emails: Array[String],
+        ?validation_domain: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor validation_emails: Array[String]?
+      attr_accessor validation_domain: String?
+    end
+
+    class Expiration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: Integer,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: Integer?
+      attr_accessor type: String?
     end
 
     class ExpiryEventsConfiguration
@@ -333,6 +1205,19 @@ module Aws::ACM
       CUSTOM: String
     end
 
+    class FailureDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reason: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reason: String?
+      attr_accessor message: String?
+    end
+
     module FailureReason
       NO_AVAILABLE_CONTACTS: String
       ADDITIONAL_VERIFICATION_REQUIRED: String
@@ -372,6 +1257,46 @@ module Aws::ACM
       attr_accessor managed_by: String?
     end
 
+    class GeneralName
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?directory_name: Types::DistinguishedName,
+        ?dns_name: String,
+        ?ip_address: String,
+        ?other_name: Types::OtherName,
+        ?registered_id: String,
+        ?rfc822_name: String,
+        ?uniform_resource_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_name: Types::DistinguishedName?
+      attr_accessor dns_name: String?
+      attr_accessor ip_address: String?
+      attr_accessor other_name: Types::OtherName?
+      attr_accessor registered_id: String?
+      attr_accessor rfc822_name: String?
+      attr_accessor uniform_resource_identifier: String?
+
+      class DirectoryName < GeneralName
+      end
+      class DnsName < GeneralName
+      end
+      class IpAddress < GeneralName
+      end
+      class OtherName < GeneralName
+      end
+      class RegisteredId < GeneralName
+      end
+      class Rfc822Name < GeneralName
+      end
+      class UniformResourceIdentifier < GeneralName
+      end
+      class Unknown < GeneralName
+      end
+    end
+
     class GetAccountConfigurationResponse
       include Smithy::Schema::Structure
 
@@ -381,6 +1306,30 @@ module Aws::ACM
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor expiry_events: Types::ExpiryEventsConfiguration?
+    end
+
+    class GetAcmeExternalAccountBindingCredentialsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?acme_external_account_binding_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor acme_external_account_binding_arn: String?
+    end
+
+    class GetAcmeExternalAccountBindingCredentialsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_id: String,
+        ?mac_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_id: String?
+      attr_accessor mac_key: String?
     end
 
     class GetCertificateRequest
@@ -448,6 +1397,17 @@ module Aws::ACM
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor certificate_arn: String?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
     end
 
     class InvalidArgsException
@@ -562,11 +1522,150 @@ module Aws::ACM
       attr_accessor message: String?
     end
 
+    class ListAcmeAccountsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?acme_endpoint_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor acme_endpoint_arn: String?
+    end
+
+    class ListAcmeAccountsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?acme_accounts: Array[Types::AcmeAccountSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor acme_accounts: Array[Types::AcmeAccountSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAcmeDomainValidationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?acme_endpoint_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor acme_endpoint_arn: String?
+    end
+
+    class ListAcmeDomainValidationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?acme_domain_validations: Array[Types::AcmeDomainValidationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor acme_domain_validations: Array[Types::AcmeDomainValidationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAcmeEndpointsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListAcmeEndpointsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?acme_endpoints: Array[Types::AcmeEndpointSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor acme_endpoints: Array[Types::AcmeEndpointSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAcmeExternalAccountBindingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?acme_endpoint_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor acme_endpoint_arn: String?
+    end
+
+    class ListAcmeExternalAccountBindingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?external_account_bindings: Array[Types::AcmeExternalAccountBindingSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor external_account_bindings: Array[Types::AcmeExternalAccountBindingSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListCertificateDomainValidationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_arn: String,
+        ?next_token: String,
+        ?max_items: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_items: Integer?
+    end
+
+    class ListCertificateDomainValidationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_validation_summary_list: Array[Types::DomainValidationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_validation_summary_list: Array[Types::DomainValidationSummary]?
+      attr_accessor next_token: String?
+    end
+
     class ListCertificatesRequest
       include Smithy::Schema::Structure
 
       def initialize: (
         ?certificate_statuses: Array[String],
+        ?certificate_key_pair_origins: Array[String],
         ?includes: Types::Filters,
         ?next_token: String,
         ?max_items: Integer,
@@ -576,6 +1675,7 @@ module Aws::ACM
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor certificate_statuses: Array[String]?
+      attr_accessor certificate_key_pair_origins: Array[String]?
       attr_accessor includes: Types::Filters?
       attr_accessor next_token: String?
       attr_accessor max_items: Integer?
@@ -616,6 +1716,94 @@ module Aws::ACM
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class OtherName
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?object_identifier: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor object_identifier: String?
+      attr_accessor value: String?
+    end
+
+    class PrevalidationDetails
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?dns_prevalidation: Types::DnsPrevalidationDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dns_prevalidation: Types::DnsPrevalidationDetails?
+
+      class DnsPrevalidation < PrevalidationDetails
+      end
+      class Unknown < PrevalidationDetails
+      end
+    end
+
+    class PrevalidationOptions
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?dns_prevalidation: Types::DnsPrevalidationOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dns_prevalidation: Types::DnsPrevalidationOptions?
+
+      class DnsPrevalidation < PrevalidationOptions
+      end
+      class Unknown < PrevalidationOptions
+      end
+    end
+
+    module PrevalidationType
+      DNS_PREVALIDATION: String
+    end
+
+    class PublicCertificateAuthority
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?allowed_key_algorithms: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor allowed_key_algorithms: Array[String]?
+    end
+
+    module PublicKeyAlgorithm
+      RSA_2048: String
+      EC_PRIME256_V1: String
+      EC_SECP384_R1: String
     end
 
     class PutAccountConfigurationRequest
@@ -805,6 +1993,30 @@ module Aws::ACM
       A_A_COMPROMISE: String
     end
 
+    class RevokeAcmeAccountRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?acme_endpoint_arn: String,
+        ?account_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor acme_endpoint_arn: String?
+      attr_accessor account_url: String?
+    end
+
+    class RevokeAcmeExternalAccountBindingRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?acme_external_account_binding_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor acme_external_account_binding_arn: String?
+    end
+
     class RevokeCertificateRequest
       include Smithy::Schema::Structure
 
@@ -829,6 +2041,78 @@ module Aws::ACM
       attr_accessor certificate_arn: String?
     end
 
+    class SearchCertificatesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filter_statement: Types::CertificateFilterStatement,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?sort_by: String,
+        ?sort_order: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filter_statement: Types::CertificateFilterStatement?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor sort_by: String?
+      attr_accessor sort_order: String?
+    end
+
+    class SearchCertificatesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?results: Array[Types::CertificateSearchResult],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor results: Array[Types::CertificateSearchResult]?
+      attr_accessor next_token: String?
+    end
+
+    module SearchCertificatesSortBy
+      CREATED_AT: String
+      NOT_AFTER: String
+      STATUS: String
+      RENEWAL_STATUS: String
+      EXPORTED: String
+      IN_USE: String
+      NOT_BEFORE: String
+      KEY_ALGORITHM: String
+      TYPE: String
+      CERTIFICATE_ARN: String
+      COMMON_NAME: String
+      REVOKED_AT: String
+      RENEWAL_ELIGIBILITY: String
+      ISSUED_AT: String
+      MANAGED_BY: String
+      EXPORT_OPTION: String
+      VALIDATION_METHOD: String
+      IMPORTED_AT: String
+      ACME_ENDPOINT_ARN: String
+      ACME_ACCOUNT_ID: String
+      CERTIFICATE_KEY_PAIR_ORIGIN: String
+    end
+
+    module SearchCertificatesSortOrder
+      ASCENDING: String
+      DESCENDING: String
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
     module SortBy
       CREATED_AT: String
     end
@@ -836,6 +2120,38 @@ module Aws::ACM
     module SortOrder
       ASCENDING: String
       DESCENDING: String
+    end
+
+    class SubjectAlternativeNameFilter
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?dns_name: Types::DnsNameFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dns_name: Types::DnsNameFilter?
+
+      class DnsName < SubjectAlternativeNameFilter
+      end
+      class Unknown < SubjectAlternativeNameFilter
+      end
+    end
+
+    class SubjectFilter
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?common_name: Types::CommonNameFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor common_name: Types::CommonNameFilter?
+
+      class CommonName < SubjectFilter
+      end
+      class Unknown < SubjectFilter
+      end
     end
 
     class Tag
@@ -862,15 +2178,62 @@ module Aws::ACM
       attr_accessor message: String?
     end
 
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
     class ThrottlingException
       include Smithy::Schema::Structure
 
       def initialize: (
         ?message: String,
+        ?throttling_reasons: Array[Types::ThrottlingReason],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+      attr_accessor throttling_reasons: Array[Types::ThrottlingReason]?
+    end
+
+    class ThrottlingReason
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reason: String,
+        ?resource: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reason: String?
+      attr_accessor resource: String?
+    end
+
+    module TimeType
+      MINUTES: String
+      HOURS: String
+      DAYS: String
+    end
+
+    class TimestampRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start: Time,
+        ?end: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start: Time?
+      attr_accessor end: Time?
     end
 
     class TooManyTagsException
@@ -884,6 +2247,49 @@ module Aws::ACM
       attr_accessor message: String?
     end
 
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UpdateAcmeDomainValidationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?acme_domain_validation_arn: String,
+        ?prevalidation_options: Types::PrevalidationOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor acme_domain_validation_arn: String?
+      attr_accessor prevalidation_options: Types::PrevalidationOptions?
+    end
+
+    class UpdateAcmeEndpointRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?acme_endpoint_arn: String,
+        ?authorization_behavior: String,
+        ?contact: String,
+        ?certificate_authority: Types::CertificateAuthority,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor acme_endpoint_arn: String?
+      attr_accessor authorization_behavior: String?
+      attr_accessor contact: String?
+      attr_accessor certificate_authority: Types::CertificateAuthority?
+    end
+
     class UpdateCertificateOptionsRequest
       include Smithy::Schema::Structure
 
@@ -895,6 +2301,70 @@ module Aws::ACM
 
       attr_accessor certificate_arn: String?
       attr_accessor options: Types::CertificateOptions?
+    end
+
+    module UpdateStatus
+      PENDING_DOMAIN_VALIDATION: String
+      SUCCESS: String
+      FAILED: String
+    end
+
+    class UpdateSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?type: String,
+        ?domain_validation_method_update_summary: Types::DomainValidationMethodUpdateSummary,
+        ?requested_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor type: String?
+      attr_accessor domain_validation_method_update_summary: Types::DomainValidationMethodUpdateSummary?
+      attr_accessor requested_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    module UpdateType
+      DOMAIN_VALIDATION_METHOD: String
+    end
+
+    class ValidationChallenge
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?email_validation_challenge: Types::EmailValidationChallenge,
+        ?dns_validation_challenge: Types::DnsValidationChallenge,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor email_validation_challenge: Types::EmailValidationChallenge?
+      attr_accessor dns_validation_challenge: Types::DnsValidationChallenge?
+
+      class EmailValidationChallenge < ValidationChallenge
+      end
+      class DnsValidationChallenge < ValidationChallenge
+      end
+      class Unknown < ValidationChallenge
+      end
+    end
+
+    class ValidationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?validation_method: String,
+        ?validation_challenge: Types::ValidationChallenge,
+        ?validation_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor validation_method: String?
+      attr_accessor validation_challenge: Types::ValidationChallenge?
+      attr_accessor validation_status: String?
     end
 
     class ValidationException
@@ -912,6 +2382,77 @@ module Aws::ACM
       EMAIL: String
       DNS: String
       HTTP: String
+    end
+
+    class X509AttributeFilter
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?subject: Types::SubjectFilter,
+        ?subject_alternative_name: Types::SubjectAlternativeNameFilter,
+        ?extended_key_usage: String,
+        ?key_usage: String,
+        ?key_algorithm: String,
+        ?serial_number: String,
+        ?not_after: Types::TimestampRange,
+        ?not_before: Types::TimestampRange,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subject: Types::SubjectFilter?
+      attr_accessor subject_alternative_name: Types::SubjectAlternativeNameFilter?
+      attr_accessor extended_key_usage: String?
+      attr_accessor key_usage: String?
+      attr_accessor key_algorithm: String?
+      attr_accessor serial_number: String?
+      attr_accessor not_after: Types::TimestampRange?
+      attr_accessor not_before: Types::TimestampRange?
+
+      class Subject < X509AttributeFilter
+      end
+      class SubjectAlternativeName < X509AttributeFilter
+      end
+      class ExtendedKeyUsage < X509AttributeFilter
+      end
+      class KeyUsage < X509AttributeFilter
+      end
+      class KeyAlgorithm < X509AttributeFilter
+      end
+      class SerialNumber < X509AttributeFilter
+      end
+      class NotAfter < X509AttributeFilter
+      end
+      class NotBefore < X509AttributeFilter
+      end
+      class Unknown < X509AttributeFilter
+      end
+    end
+
+    class X509Attributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?issuer: Types::DistinguishedName,
+        ?subject: Types::DistinguishedName,
+        ?subject_alternative_names: Array[Types::GeneralName],
+        ?extended_key_usages: Array[String],
+        ?key_algorithm: String,
+        ?key_usages: Array[String],
+        ?serial_number: String,
+        ?not_after: Time,
+        ?not_before: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor issuer: Types::DistinguishedName?
+      attr_accessor subject: Types::DistinguishedName?
+      attr_accessor subject_alternative_names: Array[Types::GeneralName]?
+      attr_accessor extended_key_usages: Array[String]?
+      attr_accessor key_algorithm: String?
+      attr_accessor key_usages: Array[String]?
+      attr_accessor serial_number: String?
+      attr_accessor not_after: Time?
+      attr_accessor not_before: Time?
     end
   end
 end

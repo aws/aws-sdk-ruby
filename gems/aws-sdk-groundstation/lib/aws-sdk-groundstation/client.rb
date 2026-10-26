@@ -144,18 +144,18 @@ module Aws::GroundStation
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -209,8 +209,8 @@ module Aws::GroundStation
       super
     end
 
-    # <p>Cancels a contact with a specified contact ID.</p>
-    # @param [Hash, Types::CancelContactInput] params
+    # <p>Cancels or stops a contact with a specified contact ID based on its position in the <a href="https://docs.aws.amazon.com/ground-station/latest/ug/contacts.lifecycle.html">contact lifecycle</a>.</p> <p>For contacts that:</p> <ul> <li> <p>Have yet to start, the contact will be cancelled.</p> </li> <li> <p>Have started but have yet to finish, the contact will be stopped.</p> </li> </ul>
+    # @param [Hash, Types::CancelContactRequest] params
     # @option params [String] :contact_id
     #   <p>UUID of a contact.</p>
     # @example Request syntax with placeholder values
@@ -222,7 +222,8 @@ module Aws::GroundStation
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {
-    #     contact_id: "Uuid"
+    #     contact_id: "Uuid",
+    #     version_id: 1
     #   }
     # @return [Types::CancelContactOutput]
     def cancel_contact(params = {}, options = {})
@@ -230,9 +231,8 @@ module Aws::GroundStation
       request.send_request(options)
     end
 
-    # <p>Creates a <code>Config</code> with the specified <code>configData</code> parameters.</p>
-    #          <p>Only one type of <code>configData</code> can be specified.</p>
-    # @param [Hash, Types::CreateConfigInput] params
+    # <p>Creates a <code>Config</code> with the specified <code>configData</code> parameters.</p> <p>Only one type of <code>configData</code> can be specified.</p>
+    # @param [Hash, Types::CreateConfigRequest] params
     # @option params [String] :name
     #   <p>Name of a <code>Config</code>.</p>
     # @option params [Types::ConfigTypeData] :config_data
@@ -305,6 +305,16 @@ module Aws::GroundStation
     #         bucket_arn: "BucketArn", # required
     #         role_arn: "RoleArn", # required
     #         prefix: "S3KeyPrefix"
+    #       },
+    #       telemetry_sink_config: {
+    #         telemetry_sink_type: "KINESIS_DATA_STREAM" # One of: ["KINESIS_DATA_STREAM"], # required
+    #         telemetry_sink_data: { # required
+    #           # One of:
+    #           kinesis_data_stream_data: {
+    #             kinesis_role_arn: "RoleArn", # required
+    #             kinesis_data_stream_arn: "KinesisDataStreamArn", # required
+    #           }
+    #         }
     #       }
     #     },
     #     tags: {
@@ -317,7 +327,7 @@ module Aws::GroundStation
     #   response.to_h #=>
     #   {
     #     config_id: "String",
-    #     config_type: "antenna-downlink" # One of: ["antenna-downlink", "antenna-downlink-demod-decode", "tracking", "dataflow-endpoint", "antenna-uplink", "uplink-echo", "s3-recording"],
+    #     config_type: "antenna-downlink" # One of: ["antenna-downlink", "antenna-downlink-demod-decode", "tracking", "dataflow-endpoint", "antenna-uplink", "uplink-echo", "s3-recording", "telemetry-sink"],
     #     config_arn: "ConfigArn"
     #   }
     # @return [Types::CreateConfigOutput]
@@ -326,28 +336,16 @@ module Aws::GroundStation
       request.send_request(options)
     end
 
-    # <p>Creates a <code>DataflowEndpoint</code> group containing the specified list of <code>DataflowEndpoint</code> objects.</p>
-    #          <p>The <code>name</code> field in each endpoint is used in your mission profile <code>DataflowEndpointConfig</code> 
-    #          to specify which endpoints to use during a contact.</p>
-    #          <p>When a contact uses multiple <code>DataflowEndpointConfig</code> objects, each <code>Config</code> 
-    #          must match a <code>DataflowEndpoint</code> in the same group.</p>
-    # @param [Hash, Types::CreateDataflowEndpointGroupInput] params
+    # <p>Creates a <code>DataflowEndpoint</code> group containing the specified list of <code> DataflowEndpoint</code> objects.</p> <p>The <code>name</code> field in each endpoint is used in your mission profile <code> DataflowEndpointConfig</code> to specify which endpoints to use during a contact.</p> <p>When a contact uses multiple <code>DataflowEndpointConfig</code> objects, each <code> Config</code> must match a <code>DataflowEndpoint</code> in the same group.</p>
+    # @param [Hash, Types::CreateDataflowEndpointGroupRequest] params
     # @option params [Array<Types::EndpointDetails>] :endpoint_details
-    #   <p>Endpoint details of each endpoint in the dataflow endpoint group.
-    #   
-    #            All dataflow endpoints within a single dataflow endpoint group must be of the same type.
-    #            You cannot mix <a href="https://docs.aws.amazon.com/ground-station/latest/APIReference/API_AwsGroundStationAgentEndpoint.html">
-    #               AWS Ground Station Agent endpoints</a> with
-    #            <a href="https://docs.aws.amazon.com/ground-station/latest/APIReference/API_DataflowEndpoint.html">Dataflow endpoints</a> in the same group.
-    #            If your use case requires both types of endpoints, you must create separate dataflow endpoint
-    #            groups for each type.
-    #         </p>
+    #   <p>Endpoint details of each endpoint in the dataflow endpoint group. All dataflow endpoints within a single dataflow endpoint group must be of the same type. You cannot mix <a href="https://docs.aws.amazon.com/ground-station/latest/APIReference/API_AwsGroundStationAgentEndpoint.html"> AWS Ground Station Agent endpoints</a> with <a href="https://docs.aws.amazon.com/ground-station/latest/APIReference/API_DataflowEndpoint.html">Dataflow endpoints</a> in the same group. If your use case requires both types of endpoints, you must create separate dataflow endpoint groups for each type. </p>
     # @option params [Hash<String, String>] :tags
     #   <p>Tags of a dataflow endpoint group.</p>
     # @option params [Integer] :contact_pre_pass_duration_seconds
-    #   <p>Amount of time, in seconds, before a contact starts that the Ground Station Dataflow Endpoint Group will be in a <code>PREPASS</code> state. A Ground Station Dataflow Endpoint Group State Change event will be emitted when the Dataflow Endpoint Group enters and exits the <code>PREPASS</code> state.</p>
+    #   <p> Amount of time, in seconds, before a contact starts that the Ground Station Dataflow Endpoint Group will be in a <code>PREPASS</code> state. A <a href="https://docs.aws.amazon.com/ground-station/latest/ug/monitoring.automating-events.html">Ground Station Dataflow Endpoint Group State Change event</a> will be emitted when the Dataflow Endpoint Group enters and exits the <code>PREPASS</code> state. </p>
     # @option params [Integer] :contact_post_pass_duration_seconds
-    #   <p>Amount of time, in seconds, after a contact ends that the Ground Station Dataflow Endpoint Group will be in a <code>POSTPASS</code> state. A Ground Station Dataflow Endpoint Group State Change event will be emitted when the Dataflow Endpoint Group enters and exits the <code>POSTPASS</code> state.</p>
+    #   <p> Amount of time, in seconds, after a contact ends that the Ground Station Dataflow Endpoint Group will be in a <code>POSTPASS</code> state. A <a href="https://docs.aws.amazon.com/ground-station/latest/ug/monitoring.automating-events.html">Ground Station Dataflow Endpoint Group State Change event</a> will be emitted when the Dataflow Endpoint Group enters and exits the <code>POSTPASS</code> state. </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     endpoint_details: [ # required
@@ -388,6 +386,60 @@ module Aws::GroundStation
     #           agent_status: "SUCCESS" # One of: ["SUCCESS", "FAILED", "ACTIVE", "INACTIVE"],
     #           audit_results: "HEALTHY" # One of: ["HEALTHY", "UNHEALTHY"]
     #         },
+    #         uplink_aws_ground_station_agent_endpoint: {
+    #           name: "SafeName", # required
+    #           dataflow_details: { # required
+    #             # One of:
+    #             agent_connection_details: {
+    #               ingress_address_and_port: { # required
+    #                 socket_address: { # required
+    #                   name: "String", # required
+    #                   port: 1, # required
+    #                 },
+    #                 mtu: 1
+    #               },
+    #               agent_ip_and_port_address: { # required
+    #                 socket_address: { # required
+    #                   name: "IpV4Address", # required
+    #                   port_range: { # required
+    #                     minimum: 1, # required
+    #                     maximum: 1, # required
+    #                   }
+    #                 },
+    #                 mtu: 1
+    #               }
+    #             }
+    #           },
+    #           agent_status: "SUCCESS" # One of: ["SUCCESS", "FAILED", "ACTIVE", "INACTIVE"],
+    #           audit_results: "HEALTHY" # One of: ["HEALTHY", "UNHEALTHY"]
+    #         },
+    #         downlink_aws_ground_station_agent_endpoint: {
+    #           name: "SafeName", # required
+    #           dataflow_details: { # required
+    #             # One of:
+    #             agent_connection_details: {
+    #               agent_ip_and_port_address: { # required
+    #                 socket_address: { # required
+    #                   name: "IpV4Address", # required
+    #                   port_range: { # required
+    #                     minimum: 1, # required
+    #                     maximum: 1, # required
+    #                   }
+    #                 },
+    #                 mtu: 1
+    #               },
+    #               egress_address_and_port: { # required
+    #                 socket_address: { # required
+    #                   name: "String", # required
+    #                   port: 1, # required
+    #                 },
+    #                 mtu: 1
+    #               }
+    #             }
+    #           },
+    #           agent_status: "SUCCESS" # One of: ["SUCCESS", "FAILED", "ACTIVE", "INACTIVE"],
+    #           audit_results: "HEALTHY" # One of: ["HEALTHY", "UNHEALTHY"]
+    #         },
     #         health_status: "HEALTHY" # One of: ["HEALTHY", "UNHEALTHY"],
     #         health_reasons: ["NO_REGISTERED_AGENT" # One of: ["NO_REGISTERED_AGENT", "INVALID_IP_OWNERSHIP", "NOT_AUTHORIZED_TO_CREATE_SLR", "UNVERIFIED_IP_OWNERSHIP", "INITIALIZING_DATAPLANE", "DATAPLANE_FAILURE", "HEALTHY"]]
     #       }
@@ -411,30 +463,111 @@ module Aws::GroundStation
       request.send_request(options)
     end
 
-    # <p>Creates an Ephemeris with the specified <code>EphemerisData</code>.</p>
-    # @param [Hash, Types::CreateEphemerisInput] params
+    # <p>Creates a <code>DataflowEndpoint</code> group containing the specified list of Ground Station Agent based endpoints.</p> <p>The <code>name</code> field in each endpoint is used in your mission profile <code> DataflowEndpointConfig</code> to specify which endpoints to use during a contact.</p> <p>When a contact uses multiple <code>DataflowEndpointConfig</code> objects, each <code> Config</code> must match a <code>DataflowEndpoint</code> in the same group.</p>
+    # @param [Hash, Types::CreateDataflowEndpointGroupV2Request] params
+    # @option params [Array<Types::CreateEndpointDetails>] :endpoints
+    #   <p>Dataflow endpoint group's endpoint definitions</p>
+    # @option params [Integer] :contact_pre_pass_duration_seconds
+    #   <p> Amount of time, in seconds, before a contact starts that the Ground Station Dataflow Endpoint Group will be in a <code>PREPASS</code> state. A <a href="https://docs.aws.amazon.com/ground-station/latest/ug/monitoring.automating-events.html">Ground Station Dataflow Endpoint Group State Change event</a> will be emitted when the Dataflow Endpoint Group enters and exits the <code>PREPASS</code> state. </p>
+    # @option params [Integer] :contact_post_pass_duration_seconds
+    #   <p> Amount of time, in seconds, after a contact ends that the Ground Station Dataflow Endpoint Group will be in a <code>POSTPASS</code> state. A <a href="https://docs.aws.amazon.com/ground-station/latest/ug/monitoring.automating-events.html">Ground Station Dataflow Endpoint Group State Change event</a> will be emitted when the Dataflow Endpoint Group enters and exits the <code>POSTPASS</code> state. </p>
+    # @option params [Hash<String, String>] :tags
+    #   <p>Tags of a V2 dataflow endpoint group.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     endpoints: [{ # required
+    #       # One of:
+    #       uplink_aws_ground_station_agent_endpoint: {
+    #         name: "SafeName", # required
+    #         dataflow_details: { # required
+    #           # One of:
+    #           agent_connection_details: {
+    #             ingress_address_and_port: { # required
+    #               socket_address: { # required
+    #                 name: "String", # required
+    #                 port: 1, # required
+    #               },
+    #               mtu: 1
+    #             },
+    #             agent_ip_and_port_address: { # required
+    #               socket_address: { # required
+    #                 name: "IpV4Address", # required
+    #                 port_range: { # required
+    #                   minimum: 1, # required
+    #                   maximum: 1, # required
+    #                 }
+    #               },
+    #               mtu: 1
+    #             }
+    #           }
+    #         }
+    #       },
+    #       downlink_aws_ground_station_agent_endpoint: {
+    #         name: "SafeName", # required
+    #         dataflow_details: { # required
+    #           # One of:
+    #           agent_connection_details: {
+    #             agent_ip_and_port_address: { # required
+    #               socket_address: { # required
+    #                 name: "IpV4Address", # required
+    #                 port_range: { # required
+    #                   minimum: 1, # required
+    #                   maximum: 1, # required
+    #                 }
+    #               },
+    #               mtu: 1
+    #             },
+    #             egress_address_and_port: { # required
+    #               socket_address: { # required
+    #                 name: "String", # required
+    #                 port: 1, # required
+    #               },
+    #               mtu: 1
+    #             }
+    #           }
+    #         }
+    #       }
+    #     }],
+    #     contact_pre_pass_duration_seconds: 1,
+    #     contact_post_pass_duration_seconds: 1,
+    #     tags: {
+    #       "String" => "String"
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.create_dataflow_endpoint_group_v2(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     dataflow_endpoint_group_id: "Uuid"
+    #   }
+    # @return [Types::CreateDataflowEndpointGroupV2Response]
+    def create_dataflow_endpoint_group_v2(params = {}, options = {})
+      request = build_request(:create_dataflow_endpoint_group_v2, params)
+      request.send_request(options)
+    end
+
+    # <p>Create an ephemeris with your specified <a>EphemerisData</a>.</p>
+    # @param [Hash, Types::CreateEphemerisRequest] params
     # @option params [String] :satellite_id
-    #   <p>AWS Ground Station satellite ID for this ephemeris.</p>
+    #   <p>The satellite ID that associates this ephemeris with a satellite in AWS Ground Station.</p>
     # @option params [Boolean] :enabled
-    #   <p>Whether to set the ephemeris status to <code>ENABLED</code> after validation.</p>
-    #            <p>Setting this to false will set the ephemeris status to <code>DISABLED</code> after validation.</p>
+    #   <p>Set to <code>true</code> to enable the ephemeris after validation. Set to <code>false</code> to keep it disabled.</p>
     # @option params [Integer] :priority
-    #   <p>Customer-provided priority score to establish the order in which overlapping ephemerides should be used.</p>
-    #            <p>The default for customer-provided ephemeris priority is 1, and higher numbers take precedence.</p>
-    #            <p>Priority must be 1 or greater</p>
+    #   <p>A priority score that determines which ephemeris to use when multiple ephemerides overlap.</p> <p>Higher numbers take precedence. The default is 1. Must be 1 or greater.</p>
     # @option params [Time] :expiration_time
     #   <p>An overall expiration time for the ephemeris in UTC, after which it will become <code>EXPIRED</code>.</p>
     # @option params [String] :name
-    #   <p>A name string associated with the ephemeris. Used as a human-readable identifier for the ephemeris.</p>
+    #   <p>A name that you can use to identify the ephemeris.</p>
     # @option params [String] :kms_key_arn
-    #   <p>The ARN of a KMS key used to encrypt the ephemeris in Ground Station.</p>
+    #   <p>The ARN of the KMS key to use for encrypting the ephemeris.</p>
     # @option params [Types::EphemerisData] :ephemeris
     #   <p>Ephemeris data.</p>
     # @option params [Hash<String, String>] :tags
     #   <p>Tags assigned to an ephemeris.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     satellite_id: "Uuid", # required
+    #     satellite_id: "Uuid",
     #     enabled: false,
     #     priority: 1,
     #     expiration_time: Time.now,
@@ -466,6 +599,36 @@ module Aws::GroundStation
     #           version: "S3VersionId"
     #         },
     #         oem_data: "UnboundedString"
+    #       },
+    #       az_el: {
+    #         ground_station: "GroundStationName", # required
+    #         data: { # required
+    #           # One of:
+    #           s3_object: {
+    #             bucket: "S3BucketName",
+    #             key: "S3ObjectKey",
+    #             version: "S3VersionId"
+    #           },
+    #           az_el_data: {
+    #             angle_unit: "DEGREE_ANGLE" # One of: ["DEGREE_ANGLE", "RADIAN"], # required
+    #             az_el_segment_list: [ # required
+    #               {
+    #                 reference_epoch: Time.now, # required
+    #                 valid_time_range: { # required
+    #                   start_time: Time.now, # required
+    #                   end_time: Time.now, # required
+    #                 },
+    #                 az_el_list: [ # required
+    #                   {
+    #                     dt: 1.0, # required
+    #                     az: 1.0, # required
+    #                     el: 1.0, # required
+    #                   }
+    #                 ]
+    #               }
+    #             ]
+    #           }
+    #         }
     #       }
     #     },
     #     tags: {
@@ -485,25 +648,22 @@ module Aws::GroundStation
       request.send_request(options)
     end
 
-    # <p>Creates a mission profile.</p>
-    #          <p>
-    #             <code>dataflowEdges</code> is a list of lists of strings. Each lower level list of strings
-    #          has two elements: a <i>from</i> ARN and a <i>to</i> ARN.</p>
-    # @param [Hash, Types::CreateMissionProfileInput] params
+    # <p>Creates a mission profile.</p> <p> <code>dataflowEdges</code> is a list of lists of strings. Each lower level list of strings has two elements: a <i>from</i> ARN and a <i>to</i> ARN.</p>
+    # @param [Hash, Types::CreateMissionProfileRequest] params
     # @option params [String] :name
     #   <p>Name of a mission profile.</p>
     # @option params [Integer] :contact_pre_pass_duration_seconds
-    #   <p>Amount of time prior to contact start you’d like to receive a Ground Station Contact State Change event indicating an upcoming pass.</p>
+    #   <p>Amount of time prior to contact start you'd like to receive a Ground Station Contact State Change event indicating an upcoming pass.</p>
     # @option params [Integer] :contact_post_pass_duration_seconds
-    #   <p>Amount of time after a contact ends that you’d like to receive a Ground Station Contact State Change event indicating the pass has finished.</p>
+    #   <p>Amount of time after a contact ends that you'd like to receive a Ground Station Contact State Change event indicating the pass has finished.</p>
     # @option params [Integer] :minimum_viable_contact_duration_seconds
-    #   <p>Smallest amount of time in seconds that you’d like to see for an available contact. AWS Ground Station will not present you with contacts shorter than this duration.</p>
+    #   <p>Smallest amount of time in seconds that you'd like to see for an available contact. AWS Ground Station will not present you with contacts shorter than this duration.</p>
     # @option params [Array<Array<String>>] :dataflow_edges
-    #   <p>A list of lists of ARNs. Each list of ARNs is an edge, with a <i>from</i>
-    #               <code>Config</code> and a <i>to</i>
-    #               <code>Config</code>.</p>
+    #   <p>A list of lists of ARNs. Each list of ARNs is an edge, with a <i>from</i> <code> Config</code> and a <i>to</i> <code>Config</code>.</p>
     # @option params [String] :tracking_config_arn
     #   <p>ARN of a tracking <code>Config</code>.</p>
+    # @option params [String] :telemetry_sink_config_arn
+    #   <p>ARN of a telemetry sink <code>Config</code>.</p>
     # @option params [Hash<String, String>] :tags
     #   <p>Tags assigned to a mission profile.</p>
     # @option params [Types::KmsKey] :streams_kms_key
@@ -520,6 +680,7 @@ module Aws::GroundStation
     #       ["ConfigArn"]
     #     ],
     #     tracking_config_arn: "ConfigArn", # required
+    #     telemetry_sink_config_arn: "ConfigArn",
     #     tags: {
     #       "String" => "String"
     #     },
@@ -545,7 +706,7 @@ module Aws::GroundStation
     end
 
     # <p>Deletes a <code>Config</code>.</p>
-    # @param [Hash, Types::DeleteConfigInput] params
+    # @param [Hash, Types::DeleteConfigRequest] params
     # @option params [String] :config_id
     #   <p>UUID of a <code>Config</code>.</p>
     # @option params [String] :config_type
@@ -553,7 +714,7 @@ module Aws::GroundStation
     # @example Request syntax with placeholder values
     #   params = {
     #     config_id: "Uuid", # required
-    #     config_type: "antenna-downlink" # One of: ["antenna-downlink", "antenna-downlink-demod-decode", "tracking", "dataflow-endpoint", "antenna-uplink", "uplink-echo", "s3-recording"], # required
+    #     config_type: "antenna-downlink" # One of: ["antenna-downlink", "antenna-downlink-demod-decode", "tracking", "dataflow-endpoint", "antenna-uplink", "uplink-echo", "s3-recording", "telemetry-sink"], # required
     #   }
     #   options = {}
     #   response = client.delete_config(params, options)
@@ -561,7 +722,7 @@ module Aws::GroundStation
     #   response.to_h #=>
     #   {
     #     config_id: "String",
-    #     config_type: "antenna-downlink" # One of: ["antenna-downlink", "antenna-downlink-demod-decode", "tracking", "dataflow-endpoint", "antenna-uplink", "uplink-echo", "s3-recording"],
+    #     config_type: "antenna-downlink" # One of: ["antenna-downlink", "antenna-downlink-demod-decode", "tracking", "dataflow-endpoint", "antenna-uplink", "uplink-echo", "s3-recording", "telemetry-sink"],
     #     config_arn: "ConfigArn"
     #   }
     # @return [Types::DeleteConfigOutput]
@@ -571,7 +732,7 @@ module Aws::GroundStation
     end
 
     # <p>Deletes a dataflow endpoint group.</p>
-    # @param [Hash, Types::DeleteDataflowEndpointGroupInput] params
+    # @param [Hash, Types::DeleteDataflowEndpointGroupRequest] params
     # @option params [String] :dataflow_endpoint_group_id
     #   <p>UUID of a dataflow endpoint group.</p>
     # @example Request syntax with placeholder values
@@ -591,8 +752,8 @@ module Aws::GroundStation
       request.send_request(options)
     end
 
-    # <p>Deletes an ephemeris</p>
-    # @param [Hash, Types::DeleteEphemerisInput] params
+    # <p>Delete an ephemeris.</p>
+    # @param [Hash, Types::DeleteEphemerisRequest] params
     # @option params [String] :ephemeris_id
     #   <p>The AWS Ground Station ephemeris ID.</p>
     # @example Request syntax with placeholder values
@@ -613,7 +774,7 @@ module Aws::GroundStation
     end
 
     # <p>Deletes a mission profile.</p>
-    # @param [Hash, Types::DeleteMissionProfileInput] params
+    # @param [Hash, Types::DeleteMissionProfileRequest] params
     # @option params [String] :mission_profile_id
     #   <p>UUID of a mission profile.</p>
     # @example Request syntax with placeholder values
@@ -634,7 +795,7 @@ module Aws::GroundStation
     end
 
     # <p>Describes an existing contact.</p>
-    # @param [Hash, Types::DescribeContactInput] params
+    # @param [Hash, Types::DescribeContactRequest] params
     # @option params [String] :contact_id
     #   <p>UUID of a contact.</p>
     # @example Request syntax with placeholder values
@@ -667,7 +828,7 @@ module Aws::GroundStation
     #     dataflow_list: [
     #       {
     #         source: {
-    #           config_type: "antenna-downlink" # One of: ["antenna-downlink", "antenna-downlink-demod-decode", "tracking", "dataflow-endpoint", "antenna-uplink", "uplink-echo", "s3-recording"],
+    #           config_type: "antenna-downlink" # One of: ["antenna-downlink", "antenna-downlink-demod-decode", "tracking", "dataflow-endpoint", "antenna-uplink", "uplink-echo", "s3-recording", "telemetry-sink"],
     #           config_id: "String",
     #           config_details: {
     #             # One of:
@@ -708,6 +869,60 @@ module Aws::GroundStation
     #                 agent_status: "SUCCESS" # One of: ["SUCCESS", "FAILED", "ACTIVE", "INACTIVE"],
     #                 audit_results: "HEALTHY" # One of: ["HEALTHY", "UNHEALTHY"]
     #               },
+    #               uplink_aws_ground_station_agent_endpoint: {
+    #                 name: "SafeName", # required
+    #                 dataflow_details: { # required
+    #                   # One of:
+    #                   agent_connection_details: {
+    #                     ingress_address_and_port: { # required
+    #                       socket_address: { # required
+    #                         name: "String", # required
+    #                         port: 1, # required
+    #                       },
+    #                       mtu: 1
+    #                     },
+    #                     agent_ip_and_port_address: { # required
+    #                       socket_address: { # required
+    #                         name: "IpV4Address", # required
+    #                         port_range: { # required
+    #                           minimum: 1, # required
+    #                           maximum: 1, # required
+    #                         }
+    #                       },
+    #                       mtu: 1
+    #                     }
+    #                   }
+    #                 },
+    #                 agent_status: "SUCCESS" # One of: ["SUCCESS", "FAILED", "ACTIVE", "INACTIVE"],
+    #                 audit_results: "HEALTHY" # One of: ["HEALTHY", "UNHEALTHY"]
+    #               },
+    #               downlink_aws_ground_station_agent_endpoint: {
+    #                 name: "SafeName", # required
+    #                 dataflow_details: { # required
+    #                   # One of:
+    #                   agent_connection_details: {
+    #                     agent_ip_and_port_address: { # required
+    #                       socket_address: { # required
+    #                         name: "IpV4Address", # required
+    #                         port_range: { # required
+    #                           minimum: 1, # required
+    #                           maximum: 1, # required
+    #                         }
+    #                       },
+    #                       mtu: 1
+    #                     },
+    #                     egress_address_and_port: { # required
+    #                       socket_address: { # required
+    #                         name: "String", # required
+    #                         port: 1, # required
+    #                       },
+    #                       mtu: 1
+    #                     }
+    #                   }
+    #                 },
+    #                 agent_status: "SUCCESS" # One of: ["SUCCESS", "FAILED", "ACTIVE", "INACTIVE"],
+    #                 audit_results: "HEALTHY" # One of: ["HEALTHY", "UNHEALTHY"]
+    #               },
     #               health_status: "HEALTHY" # One of: ["HEALTHY", "UNHEALTHY"],
     #               health_reasons: ["NO_REGISTERED_AGENT" # One of: ["NO_REGISTERED_AGENT", "INVALID_IP_OWNERSHIP", "NOT_AUTHORIZED_TO_CREATE_SLR", "UNVERIFIED_IP_OWNERSHIP", "INITIALIZING_DATAPLANE", "DATAPLANE_FAILURE", "HEALTHY"]]
     #             },
@@ -722,7 +937,7 @@ module Aws::GroundStation
     #           dataflow_source_region: "String"
     #         },
     #         destination: {
-    #           config_type: "antenna-downlink" # One of: ["antenna-downlink", "antenna-downlink-demod-decode", "tracking", "dataflow-endpoint", "antenna-uplink", "uplink-echo", "s3-recording"],
+    #           config_type: "antenna-downlink" # One of: ["antenna-downlink", "antenna-downlink-demod-decode", "tracking", "dataflow-endpoint", "antenna-uplink", "uplink-echo", "s3-recording", "telemetry-sink"],
     #           config_id: "Uuid",
     #           config_details: {
     #             # One of:
@@ -763,6 +978,60 @@ module Aws::GroundStation
     #                 agent_status: "SUCCESS" # One of: ["SUCCESS", "FAILED", "ACTIVE", "INACTIVE"],
     #                 audit_results: "HEALTHY" # One of: ["HEALTHY", "UNHEALTHY"]
     #               },
+    #               uplink_aws_ground_station_agent_endpoint: {
+    #                 name: "SafeName", # required
+    #                 dataflow_details: { # required
+    #                   # One of:
+    #                   agent_connection_details: {
+    #                     ingress_address_and_port: { # required
+    #                       socket_address: { # required
+    #                         name: "String", # required
+    #                         port: 1, # required
+    #                       },
+    #                       mtu: 1
+    #                     },
+    #                     agent_ip_and_port_address: { # required
+    #                       socket_address: { # required
+    #                         name: "IpV4Address", # required
+    #                         port_range: { # required
+    #                           minimum: 1, # required
+    #                           maximum: 1, # required
+    #                         }
+    #                       },
+    #                       mtu: 1
+    #                     }
+    #                   }
+    #                 },
+    #                 agent_status: "SUCCESS" # One of: ["SUCCESS", "FAILED", "ACTIVE", "INACTIVE"],
+    #                 audit_results: "HEALTHY" # One of: ["HEALTHY", "UNHEALTHY"]
+    #               },
+    #               downlink_aws_ground_station_agent_endpoint: {
+    #                 name: "SafeName", # required
+    #                 dataflow_details: { # required
+    #                   # One of:
+    #                   agent_connection_details: {
+    #                     agent_ip_and_port_address: { # required
+    #                       socket_address: { # required
+    #                         name: "IpV4Address", # required
+    #                         port_range: { # required
+    #                           minimum: 1, # required
+    #                           maximum: 1, # required
+    #                         }
+    #                       },
+    #                       mtu: 1
+    #                     },
+    #                     egress_address_and_port: { # required
+    #                       socket_address: { # required
+    #                         name: "String", # required
+    #                         port: 1, # required
+    #                       },
+    #                       mtu: 1
+    #                     }
+    #                   }
+    #                 },
+    #                 agent_status: "SUCCESS" # One of: ["SUCCESS", "FAILED", "ACTIVE", "INACTIVE"],
+    #                 audit_results: "HEALTHY" # One of: ["HEALTHY", "UNHEALTHY"]
+    #               },
     #               health_status: "HEALTHY" # One of: ["HEALTHY", "UNHEALTHY"],
     #               health_reasons: ["NO_REGISTERED_AGENT" # One of: ["NO_REGISTERED_AGENT", "INVALID_IP_OWNERSHIP", "NOT_AUTHORIZED_TO_CREATE_SLR", "UNVERIFIED_IP_OWNERSHIP", "INITIALIZING_DATAPLANE", "DATAPLANE_FAILURE", "HEALTHY"]]
     #             },
@@ -780,16 +1049,338 @@ module Aws::GroundStation
     #       }
     #     ],
     #     visibility_start_time: Time.now,
-    #     visibility_end_time: Time.now
+    #     visibility_end_time: Time.now,
+    #     tracking_overrides: {
+    #       program_track_settings: {
+    #         # One of:
+    #         az_el: {
+    #           ephemeris_id: "Uuid", # required
+    #         },
+    #         oem: {
+    #           ephemeris_id: "Uuid", # required
+    #         },
+    #         tle: {
+    #           ephemeris_id: "Uuid", # required
+    #         }
+    #       }
+    #     },
+    #     ephemeris: {
+    #       ephemeris_id: "Uuid",
+    #       ephemeris_type: "TLE" # One of: ["TLE", "OEM", "AZ_EL", "SERVICE_MANAGED"], # required
+    #     },
+    #     version: {
+    #       version_id: 1,
+    #       created: Time.now,
+    #       activated: Time.now,
+    #       superseded: Time.now,
+    #       last_updated: Time.now,
+    #       status: "UPDATING" # One of: ["UPDATING", "ACTIVE", "SUPERSEDED", "FAILED_TO_UPDATE"],
+    #       failure_codes: ["INTERNAL_ERROR" # One of: ["INTERNAL_ERROR", "INVALID_SATELLITE_ARN", "INVALID_UPDATE_CONTACT_REQUEST", "EPHEMERIS_NOT_FOUND", "EPHEMERIS_TIME_RANGE_INVALID", "EPHEMERIS_NOT_ENABLED", "SATELLITE_DOES_NOT_MATCH_EPHEMERIS", "NOT_ONBOARDED_TO_AZEL_EPHEMERIS", "AZEL_EPHEMERIS_NOT_FOUND", "AZEL_EPHEMERIS_WRONG_GROUND_STATION", "AZEL_EPHEMERIS_INVALID_STATUS", "AZEL_EPHEMERIS_TIME_RANGE_INVALID"]],
+    #       failure_message: "String"
+    #     }
     #   }
-    # @return [Types::DescribeContactOutput]
+    # @return [Types::DescribeContactResponse]
     def describe_contact(params = {}, options = {})
       request = build_request(:describe_contact, params)
       request.send_request(options)
     end
 
-    # <p>Describes an existing ephemeris.</p>
-    # @param [Hash, Types::DescribeEphemerisInput] params
+    # <p>Describes a specific version of a contact.</p>
+    # @param [Hash, Types::DescribeContactVersionRequest] params
+    # @option params [String] :contact_id
+    #   <p>UUID of a contact.</p>
+    # @option params [Integer] :version_id
+    #   <p>Version ID of a contact.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     contact_id: "Uuid", # required
+    #     version_id: 1, # required
+    #   }
+    #   options = {}
+    #   response = client.describe_contact_version(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     contact_id: "Uuid",
+    #     mission_profile_arn: "MissionProfileArn",
+    #     satellite_arn: "satelliteArn",
+    #     start_time: Time.now,
+    #     end_time: Time.now,
+    #     pre_pass_start_time: Time.now,
+    #     post_pass_end_time: Time.now,
+    #     ground_station: "String",
+    #     contact_status: "SCHEDULING" # One of: ["SCHEDULING", "FAILED_TO_SCHEDULE", "SCHEDULED", "CANCELLED", "AWS_CANCELLED", "PREPASS", "PASS", "POSTPASS", "COMPLETED", "FAILED", "AVAILABLE", "CANCELLING", "AWS_FAILED"],
+    #     error_message: "String",
+    #     maximum_elevation: {
+    #       value: 1.0, # required
+    #       unit: "DEGREE_ANGLE" # One of: ["DEGREE_ANGLE", "RADIAN"], # required
+    #     },
+    #     tags: {
+    #       "String" => "String"
+    #     },
+    #     region: "String",
+    #     dataflow_list: [
+    #       {
+    #         source: {
+    #           config_type: "antenna-downlink" # One of: ["antenna-downlink", "antenna-downlink-demod-decode", "tracking", "dataflow-endpoint", "antenna-uplink", "uplink-echo", "s3-recording", "telemetry-sink"],
+    #           config_id: "String",
+    #           config_details: {
+    #             # One of:
+    #             endpoint_details: {
+    #               security_details: {
+    #                 subnet_ids: ["String"], # required
+    #                 security_group_ids: ["String"], # required
+    #                 role_arn: "RoleArn", # required
+    #               },
+    #               endpoint: {
+    #                 name: "SafeName",
+    #                 address: {
+    #                   name: "String", # required
+    #                   port: 1, # required
+    #                 },
+    #                 status: "created" # One of: ["created", "creating", "deleted", "deleting", "failed"],
+    #                 mtu: 1
+    #               },
+    #               aws_ground_station_agent_endpoint: {
+    #                 name: "SafeName", # required
+    #                 egress_address: { # required
+    #                   socket_address: { # required
+    #                     name: "String", # required
+    #                     port: 1, # required
+    #                   },
+    #                   mtu: 1
+    #                 },
+    #                 ingress_address: { # required
+    #                   socket_address: { # required
+    #                     name: "IpV4Address", # required
+    #                     port_range: { # required
+    #                       minimum: 1, # required
+    #                       maximum: 1, # required
+    #                     }
+    #                   },
+    #                   mtu: 1
+    #                 },
+    #                 agent_status: "SUCCESS" # One of: ["SUCCESS", "FAILED", "ACTIVE", "INACTIVE"],
+    #                 audit_results: "HEALTHY" # One of: ["HEALTHY", "UNHEALTHY"]
+    #               },
+    #               uplink_aws_ground_station_agent_endpoint: {
+    #                 name: "SafeName", # required
+    #                 dataflow_details: { # required
+    #                   # One of:
+    #                   agent_connection_details: {
+    #                     ingress_address_and_port: { # required
+    #                       socket_address: { # required
+    #                         name: "String", # required
+    #                         port: 1, # required
+    #                       },
+    #                       mtu: 1
+    #                     },
+    #                     agent_ip_and_port_address: { # required
+    #                       socket_address: { # required
+    #                         name: "IpV4Address", # required
+    #                         port_range: { # required
+    #                           minimum: 1, # required
+    #                           maximum: 1, # required
+    #                         }
+    #                       },
+    #                       mtu: 1
+    #                     }
+    #                   }
+    #                 },
+    #                 agent_status: "SUCCESS" # One of: ["SUCCESS", "FAILED", "ACTIVE", "INACTIVE"],
+    #                 audit_results: "HEALTHY" # One of: ["HEALTHY", "UNHEALTHY"]
+    #               },
+    #               downlink_aws_ground_station_agent_endpoint: {
+    #                 name: "SafeName", # required
+    #                 dataflow_details: { # required
+    #                   # One of:
+    #                   agent_connection_details: {
+    #                     agent_ip_and_port_address: { # required
+    #                       socket_address: { # required
+    #                         name: "IpV4Address", # required
+    #                         port_range: { # required
+    #                           minimum: 1, # required
+    #                           maximum: 1, # required
+    #                         }
+    #                       },
+    #                       mtu: 1
+    #                     },
+    #                     egress_address_and_port: { # required
+    #                       socket_address: { # required
+    #                         name: "String", # required
+    #                         port: 1, # required
+    #                       },
+    #                       mtu: 1
+    #                     }
+    #                   }
+    #                 },
+    #                 agent_status: "SUCCESS" # One of: ["SUCCESS", "FAILED", "ACTIVE", "INACTIVE"],
+    #                 audit_results: "HEALTHY" # One of: ["HEALTHY", "UNHEALTHY"]
+    #               },
+    #               health_status: "HEALTHY" # One of: ["HEALTHY", "UNHEALTHY"],
+    #               health_reasons: ["NO_REGISTERED_AGENT" # One of: ["NO_REGISTERED_AGENT", "INVALID_IP_OWNERSHIP", "NOT_AUTHORIZED_TO_CREATE_SLR", "UNVERIFIED_IP_OWNERSHIP", "INITIALIZING_DATAPLANE", "DATAPLANE_FAILURE", "HEALTHY"]]
+    #             },
+    #             antenna_demod_decode_details: {
+    #               output_node: "String"
+    #             },
+    #             s3_recording_details: {
+    #               bucket_arn: "BucketArn",
+    #               key_template: "String"
+    #             }
+    #           },
+    #           dataflow_source_region: "String"
+    #         },
+    #         destination: {
+    #           config_type: "antenna-downlink" # One of: ["antenna-downlink", "antenna-downlink-demod-decode", "tracking", "dataflow-endpoint", "antenna-uplink", "uplink-echo", "s3-recording", "telemetry-sink"],
+    #           config_id: "Uuid",
+    #           config_details: {
+    #             # One of:
+    #             endpoint_details: {
+    #               security_details: {
+    #                 subnet_ids: ["String"], # required
+    #                 security_group_ids: ["String"], # required
+    #                 role_arn: "RoleArn", # required
+    #               },
+    #               endpoint: {
+    #                 name: "SafeName",
+    #                 address: {
+    #                   name: "String", # required
+    #                   port: 1, # required
+    #                 },
+    #                 status: "created" # One of: ["created", "creating", "deleted", "deleting", "failed"],
+    #                 mtu: 1
+    #               },
+    #               aws_ground_station_agent_endpoint: {
+    #                 name: "SafeName", # required
+    #                 egress_address: { # required
+    #                   socket_address: { # required
+    #                     name: "String", # required
+    #                     port: 1, # required
+    #                   },
+    #                   mtu: 1
+    #                 },
+    #                 ingress_address: { # required
+    #                   socket_address: { # required
+    #                     name: "IpV4Address", # required
+    #                     port_range: { # required
+    #                       minimum: 1, # required
+    #                       maximum: 1, # required
+    #                     }
+    #                   },
+    #                   mtu: 1
+    #                 },
+    #                 agent_status: "SUCCESS" # One of: ["SUCCESS", "FAILED", "ACTIVE", "INACTIVE"],
+    #                 audit_results: "HEALTHY" # One of: ["HEALTHY", "UNHEALTHY"]
+    #               },
+    #               uplink_aws_ground_station_agent_endpoint: {
+    #                 name: "SafeName", # required
+    #                 dataflow_details: { # required
+    #                   # One of:
+    #                   agent_connection_details: {
+    #                     ingress_address_and_port: { # required
+    #                       socket_address: { # required
+    #                         name: "String", # required
+    #                         port: 1, # required
+    #                       },
+    #                       mtu: 1
+    #                     },
+    #                     agent_ip_and_port_address: { # required
+    #                       socket_address: { # required
+    #                         name: "IpV4Address", # required
+    #                         port_range: { # required
+    #                           minimum: 1, # required
+    #                           maximum: 1, # required
+    #                         }
+    #                       },
+    #                       mtu: 1
+    #                     }
+    #                   }
+    #                 },
+    #                 agent_status: "SUCCESS" # One of: ["SUCCESS", "FAILED", "ACTIVE", "INACTIVE"],
+    #                 audit_results: "HEALTHY" # One of: ["HEALTHY", "UNHEALTHY"]
+    #               },
+    #               downlink_aws_ground_station_agent_endpoint: {
+    #                 name: "SafeName", # required
+    #                 dataflow_details: { # required
+    #                   # One of:
+    #                   agent_connection_details: {
+    #                     agent_ip_and_port_address: { # required
+    #                       socket_address: { # required
+    #                         name: "IpV4Address", # required
+    #                         port_range: { # required
+    #                           minimum: 1, # required
+    #                           maximum: 1, # required
+    #                         }
+    #                       },
+    #                       mtu: 1
+    #                     },
+    #                     egress_address_and_port: { # required
+    #                       socket_address: { # required
+    #                         name: "String", # required
+    #                         port: 1, # required
+    #                       },
+    #                       mtu: 1
+    #                     }
+    #                   }
+    #                 },
+    #                 agent_status: "SUCCESS" # One of: ["SUCCESS", "FAILED", "ACTIVE", "INACTIVE"],
+    #                 audit_results: "HEALTHY" # One of: ["HEALTHY", "UNHEALTHY"]
+    #               },
+    #               health_status: "HEALTHY" # One of: ["HEALTHY", "UNHEALTHY"],
+    #               health_reasons: ["NO_REGISTERED_AGENT" # One of: ["NO_REGISTERED_AGENT", "INVALID_IP_OWNERSHIP", "NOT_AUTHORIZED_TO_CREATE_SLR", "UNVERIFIED_IP_OWNERSHIP", "INITIALIZING_DATAPLANE", "DATAPLANE_FAILURE", "HEALTHY"]]
+    #             },
+    #             antenna_demod_decode_details: {
+    #               output_node: "String"
+    #             },
+    #             s3_recording_details: {
+    #               bucket_arn: "BucketArn",
+    #               key_template: "String"
+    #             }
+    #           },
+    #           dataflow_destination_region: "String"
+    #         },
+    #         error_message: "String"
+    #       }
+    #     ],
+    #     visibility_start_time: Time.now,
+    #     visibility_end_time: Time.now,
+    #     tracking_overrides: {
+    #       program_track_settings: {
+    #         # One of:
+    #         az_el: {
+    #           ephemeris_id: "Uuid", # required
+    #         },
+    #         oem: {
+    #           ephemeris_id: "Uuid", # required
+    #         },
+    #         tle: {
+    #           ephemeris_id: "Uuid", # required
+    #         }
+    #       }
+    #     },
+    #     ephemeris: {
+    #       ephemeris_id: "Uuid",
+    #       ephemeris_type: "TLE" # One of: ["TLE", "OEM", "AZ_EL", "SERVICE_MANAGED"], # required
+    #     },
+    #     version: {
+    #       version_id: 1,
+    #       created: Time.now,
+    #       activated: Time.now,
+    #       superseded: Time.now,
+    #       last_updated: Time.now,
+    #       status: "UPDATING" # One of: ["UPDATING", "ACTIVE", "SUPERSEDED", "FAILED_TO_UPDATE"],
+    #       failure_codes: ["INTERNAL_ERROR" # One of: ["INTERNAL_ERROR", "INVALID_SATELLITE_ARN", "INVALID_UPDATE_CONTACT_REQUEST", "EPHEMERIS_NOT_FOUND", "EPHEMERIS_TIME_RANGE_INVALID", "EPHEMERIS_NOT_ENABLED", "SATELLITE_DOES_NOT_MATCH_EPHEMERIS", "NOT_ONBOARDED_TO_AZEL_EPHEMERIS", "AZEL_EPHEMERIS_NOT_FOUND", "AZEL_EPHEMERIS_WRONG_GROUND_STATION", "AZEL_EPHEMERIS_INVALID_STATUS", "AZEL_EPHEMERIS_TIME_RANGE_INVALID"]],
+    #       failure_message: "String"
+    #     }
+    #   }
+    # @return [Types::DescribeContactVersionResponse]
+    def describe_contact_version(params = {}, options = {})
+      request = build_request(:describe_contact_version, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieve information about an existing ephemeris.</p>
+    # @param [Hash, Types::DescribeEphemerisRequest] params
     # @option params [String] :ephemeris_id
     #   <p>The AWS Ground Station ephemeris ID.</p>
     # @example Request syntax with placeholder values
@@ -828,21 +1419,32 @@ module Aws::GroundStation
     #           version: "S3VersionId"
     #         },
     #         ephemeris_data: "UnboundedString"
+    #       },
+    #       az_el: {
+    #         source_s3_object: {
+    #           bucket: "S3BucketName",
+    #           key: "S3ObjectKey",
+    #           version: "S3VersionId"
+    #         },
+    #         ephemeris_data: "UnboundedString"
     #       }
     #     },
-    #     invalid_reason: "METADATA_INVALID" # One of: ["METADATA_INVALID", "TIME_RANGE_INVALID", "TRAJECTORY_INVALID", "KMS_KEY_INVALID", "VALIDATION_ERROR"]
+    #     invalid_reason: "METADATA_INVALID" # One of: ["METADATA_INVALID", "TIME_RANGE_INVALID", "TRAJECTORY_INVALID", "KMS_KEY_INVALID", "VALIDATION_ERROR"],
+    #     error_reasons: [
+    #       {
+    #         error_code: "INTERNAL_ERROR" # One of: ["INTERNAL_ERROR", "MISMATCHED_SATCAT_ID", "OEM_VERSION_UNSUPPORTED", "ORIGINATOR_MISSING", "CREATION_DATE_MISSING", "OBJECT_NAME_MISSING", "OBJECT_ID_MISSING", "REF_FRAME_UNSUPPORTED", "REF_FRAME_EPOCH_UNSUPPORTED", "TIME_SYSTEM_UNSUPPORTED", "CENTER_BODY_UNSUPPORTED", "INTERPOLATION_MISSING", "INTERPOLATION_DEGREE_INVALID", "AZ_EL_SEGMENT_LIST_MISSING", "INSUFFICIENT_TIME_AZ_EL", "START_TIME_IN_FUTURE", "END_TIME_IN_PAST", "EXPIRATION_TIME_TOO_EARLY", "START_TIME_METADATA_TOO_EARLY", "STOP_TIME_METADATA_TOO_LATE", "AZ_EL_SEGMENT_END_TIME_BEFORE_START_TIME", "AZ_EL_SEGMENT_TIMES_OVERLAP", "AZ_EL_SEGMENTS_OUT_OF_ORDER", "TIME_AZ_EL_ITEMS_OUT_OF_ORDER", "MEAN_MOTION_INVALID", "TIME_AZ_EL_AZ_RADIAN_RANGE_INVALID", "TIME_AZ_EL_EL_RADIAN_RANGE_INVALID", "TIME_AZ_EL_AZ_DEGREE_RANGE_INVALID", "TIME_AZ_EL_EL_DEGREE_RANGE_INVALID", "TIME_AZ_EL_ANGLE_UNITS_INVALID", "INSUFFICIENT_KMS_PERMISSIONS", "FILE_FORMAT_INVALID", "AZ_EL_SEGMENT_REFERENCE_EPOCH_INVALID", "AZ_EL_SEGMENT_START_TIME_INVALID", "AZ_EL_SEGMENT_END_TIME_INVALID", "AZ_EL_SEGMENT_VALID_TIME_RANGE_INVALID", "AZ_EL_SEGMENT_END_TIME_TOO_LATE", "AZ_EL_TOTAL_DURATION_EXCEEDED"], # required
+    #         error_message: "ErrorString", # required
+    #       }
+    #     ]
     #   }
-    # @return [Types::DescribeEphemerisOutput]
+    # @return [Types::DescribeEphemerisResponse]
     def describe_ephemeris(params = {}, options = {})
       request = build_request(:describe_ephemeris, params)
       request.send_request(options)
     end
 
-    # <note>
-    #             <p> For use by AWS Ground Station Agent and shouldn't be called directly.</p>
-    #          </note>
-    #          <p>Gets the latest configuration information for a registered agent.</p>
-    # @param [Hash, Types::GetAgentConfigurationInput] params
+    # <note> <p> For use by AWS Ground Station Agent and shouldn't be called directly.</p> </note> <p>Gets the latest configuration information for a registered agent.</p>
+    # @param [Hash, Types::GetAgentConfigurationRequest] params
     # @option params [String] :agent_id
     #   <p>UUID of agent to get configuration information for.</p>
     # @example Request syntax with placeholder values
@@ -857,15 +1459,40 @@ module Aws::GroundStation
     #     agent_id: "Uuid",
     #     tasking_document: "String"
     #   }
-    # @return [Types::GetAgentConfigurationOutput]
+    # @return [Types::GetAgentConfigurationResponse]
     def get_agent_configuration(params = {}, options = {})
       request = build_request(:get_agent_configuration, params)
       request.send_request(options)
     end
 
-    # <p>Returns <code>Config</code> information.</p>
-    #          <p>Only one <code>Config</code> response can be returned.</p>
-    # @param [Hash, Types::GetConfigInput] params
+    # <note> <p> For use by AWS Ground Station Agent and shouldn't be called directly.</p> </note> <p>Gets a presigned URL for uploading agent task response logs.</p>
+    # @param [Hash, Types::GetAgentTaskResponseUrlRequest] params
+    # @option params [String] :agent_id
+    #   <p>UUID of agent requesting the response URL.</p>
+    # @option params [String] :task_id
+    #   <p>GUID of the agent task for which the response URL is being requested.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     agent_id: "Uuid", # required
+    #     task_id: "Uuid", # required
+    #   }
+    #   options = {}
+    #   response = client.get_agent_task_response_url(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     agent_id: "Uuid", # required
+    #     task_id: "Uuid", # required
+    #     presigned_log_url: "String", # required
+    #   }
+    # @return [Types::GetAgentTaskResponseUrlResponse]
+    def get_agent_task_response_url(params = {}, options = {})
+      request = build_request(:get_agent_task_response_url, params)
+      request.send_request(options)
+    end
+
+    # <p>Returns <code>Config</code> information.</p> <p>Only one <code>Config</code> response can be returned.</p>
+    # @param [Hash, Types::GetConfigRequest] params
     # @option params [String] :config_id
     #   <p>UUID of a <code>Config</code>.</p>
     # @option params [String] :config_type
@@ -873,7 +1500,7 @@ module Aws::GroundStation
     # @example Request syntax with placeholder values
     #   params = {
     #     config_id: "Uuid", # required
-    #     config_type: "antenna-downlink" # One of: ["antenna-downlink", "antenna-downlink-demod-decode", "tracking", "dataflow-endpoint", "antenna-uplink", "uplink-echo", "s3-recording"], # required
+    #     config_type: "antenna-downlink" # One of: ["antenna-downlink", "antenna-downlink-demod-decode", "tracking", "dataflow-endpoint", "antenna-uplink", "uplink-echo", "s3-recording", "telemetry-sink"], # required
     #   }
     #   options = {}
     #   response = client.get_config(params, options)
@@ -883,7 +1510,7 @@ module Aws::GroundStation
     #     config_id: "String", # required
     #     config_arn: "ConfigArn", # required
     #     name: "String", # required
-    #     config_type: "antenna-downlink" # One of: ["antenna-downlink", "antenna-downlink-demod-decode", "tracking", "dataflow-endpoint", "antenna-uplink", "uplink-echo", "s3-recording"],
+    #     config_type: "antenna-downlink" # One of: ["antenna-downlink", "antenna-downlink-demod-decode", "tracking", "dataflow-endpoint", "antenna-uplink", "uplink-echo", "s3-recording", "telemetry-sink"],
     #     config_data: { # required
     #       # One of:
     #       antenna_downlink_config: {
@@ -947,20 +1574,30 @@ module Aws::GroundStation
     #         bucket_arn: "BucketArn", # required
     #         role_arn: "RoleArn", # required
     #         prefix: "S3KeyPrefix"
+    #       },
+    #       telemetry_sink_config: {
+    #         telemetry_sink_type: "KINESIS_DATA_STREAM" # One of: ["KINESIS_DATA_STREAM"], # required
+    #         telemetry_sink_data: { # required
+    #           # One of:
+    #           kinesis_data_stream_data: {
+    #             kinesis_role_arn: "RoleArn", # required
+    #             kinesis_data_stream_arn: "KinesisDataStreamArn", # required
+    #           }
+    #         }
     #       }
     #     },
     #     tags: {
     #       "String" => "String"
     #     }
     #   }
-    # @return [Types::GetConfigOutput]
+    # @return [Types::GetConfigResponse]
     def get_config(params = {}, options = {})
       request = build_request(:get_config, params)
       request.send_request(options)
     end
 
     # <p>Returns the dataflow endpoint group.</p>
-    # @param [Hash, Types::GetDataflowEndpointGroupInput] params
+    # @param [Hash, Types::GetDataflowEndpointGroupRequest] params
     # @option params [String] :dataflow_endpoint_group_id
     #   <p>UUID of a dataflow endpoint group.</p>
     # @example Request syntax with placeholder values
@@ -1012,6 +1649,60 @@ module Aws::GroundStation
     #           agent_status: "SUCCESS" # One of: ["SUCCESS", "FAILED", "ACTIVE", "INACTIVE"],
     #           audit_results: "HEALTHY" # One of: ["HEALTHY", "UNHEALTHY"]
     #         },
+    #         uplink_aws_ground_station_agent_endpoint: {
+    #           name: "SafeName", # required
+    #           dataflow_details: { # required
+    #             # One of:
+    #             agent_connection_details: {
+    #               ingress_address_and_port: { # required
+    #                 socket_address: { # required
+    #                   name: "String", # required
+    #                   port: 1, # required
+    #                 },
+    #                 mtu: 1
+    #               },
+    #               agent_ip_and_port_address: { # required
+    #                 socket_address: { # required
+    #                   name: "IpV4Address", # required
+    #                   port_range: { # required
+    #                     minimum: 1, # required
+    #                     maximum: 1, # required
+    #                   }
+    #                 },
+    #                 mtu: 1
+    #               }
+    #             }
+    #           },
+    #           agent_status: "SUCCESS" # One of: ["SUCCESS", "FAILED", "ACTIVE", "INACTIVE"],
+    #           audit_results: "HEALTHY" # One of: ["HEALTHY", "UNHEALTHY"]
+    #         },
+    #         downlink_aws_ground_station_agent_endpoint: {
+    #           name: "SafeName", # required
+    #           dataflow_details: { # required
+    #             # One of:
+    #             agent_connection_details: {
+    #               agent_ip_and_port_address: { # required
+    #                 socket_address: { # required
+    #                   name: "IpV4Address", # required
+    #                   port_range: { # required
+    #                     minimum: 1, # required
+    #                     maximum: 1, # required
+    #                   }
+    #                 },
+    #                 mtu: 1
+    #               },
+    #               egress_address_and_port: { # required
+    #                 socket_address: { # required
+    #                   name: "String", # required
+    #                   port: 1, # required
+    #                 },
+    #                 mtu: 1
+    #               }
+    #             }
+    #           },
+    #           agent_status: "SUCCESS" # One of: ["SUCCESS", "FAILED", "ACTIVE", "INACTIVE"],
+    #           audit_results: "HEALTHY" # One of: ["HEALTHY", "UNHEALTHY"]
+    #         },
     #         health_status: "HEALTHY" # One of: ["HEALTHY", "UNHEALTHY"],
     #         health_reasons: ["NO_REGISTERED_AGENT" # One of: ["NO_REGISTERED_AGENT", "INVALID_IP_OWNERSHIP", "NOT_AUTHORIZED_TO_CREATE_SLR", "UNVERIFIED_IP_OWNERSHIP", "INITIALIZING_DATAPLANE", "DATAPLANE_FAILURE", "HEALTHY"]]
     #       }
@@ -1022,14 +1713,14 @@ module Aws::GroundStation
     #     contact_pre_pass_duration_seconds: 1,
     #     contact_post_pass_duration_seconds: 1
     #   }
-    # @return [Types::GetDataflowEndpointGroupOutput]
+    # @return [Types::GetDataflowEndpointGroupResponse]
     def get_dataflow_endpoint_group(params = {}, options = {})
       request = build_request(:get_dataflow_endpoint_group, params)
       request.send_request(options)
     end
 
     # <p>Returns the number of reserved minutes used by account.</p>
-    # @param [Hash, Types::GetMinuteUsageInput] params
+    # @param [Hash, Types::GetMinuteUsageRequest] params
     # @option params [Integer] :month
     #   <p>The month being requested, with a value of 1-12.</p>
     # @option params [Integer] :year
@@ -1050,14 +1741,14 @@ module Aws::GroundStation
     #     total_scheduled_minutes: 1,
     #     estimated_minutes_remaining: 1
     #   }
-    # @return [Types::GetMinuteUsageOutput]
+    # @return [Types::GetMinuteUsageResponse]
     def get_minute_usage(params = {}, options = {})
       request = build_request(:get_minute_usage, params)
       request.send_request(options)
     end
 
     # <p>Returns a mission profile.</p>
-    # @param [Hash, Types::GetMissionProfileInput] params
+    # @param [Hash, Types::GetMissionProfileRequest] params
     # @option params [String] :mission_profile_id
     #   <p>UUID of a mission profile.</p>
     # @example Request syntax with placeholder values
@@ -1080,6 +1771,7 @@ module Aws::GroundStation
     #       ["ConfigArn"]
     #     ],
     #     tracking_config_arn: "ConfigArn",
+    #     telemetry_sink_config_arn: "ConfigArn",
     #     tags: {
     #       "String" => "String"
     #     },
@@ -1091,14 +1783,14 @@ module Aws::GroundStation
     #     },
     #     streams_kms_role: "RoleArn"
     #   }
-    # @return [Types::GetMissionProfileOutput]
+    # @return [Types::GetMissionProfileResponse]
     def get_mission_profile(params = {}, options = {})
       request = build_request(:get_mission_profile, params)
       request.send_request(options)
     end
 
     # <p>Returns a satellite.</p>
-    # @param [Hash, Types::GetSatelliteInput] params
+    # @param [Hash, Types::GetSatelliteRequest] params
     # @option params [String] :satellite_id
     #   <p>UUID of a satellite.</p>
     # @example Request syntax with placeholder values
@@ -1127,8 +1819,42 @@ module Aws::GroundStation
       request.send_request(options)
     end
 
+    # <p>Returns a list of antennas at a specified ground station.</p>
+    # @param [Hash, Types::ListAntennasRequest] params
+    # @option params [String] :ground_station_id
+    #   <p>ID of a ground station.</p>
+    # @option params [Integer] :max_results
+    #   <p>Maximum number of antennas returned.</p>
+    # @option params [String] :next_token
+    #   <p>Next token returned in the request of a previous <code>ListAntennas</code> call. Used to get the next page of results.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     ground_station_id: "GroundStationName", # required
+    #     max_results: 1,
+    #     next_token: "PaginationToken"
+    #   }
+    #   options = {}
+    #   response = client.list_antennas(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     antenna_list: [ # required
+    #       {
+    #         ground_station_name: "GroundStationName", # required
+    #         antenna_name: "AntennaName", # required
+    #         region: "AWSRegion", # required
+    #       }
+    #     ],
+    #     next_token: "PaginationToken"
+    #   }
+    # @return [Types::ListAntennasResponse]
+    def list_antennas(params = {}, options = {})
+      request = build_request(:list_antennas, params)
+      request.send_request(options)
+    end
+
     # <p>Returns a list of <code>Config</code> objects.</p>
-    # @param [Hash, Types::ListConfigsInput] params
+    # @param [Hash, Types::ListConfigsRequest] params
     # @option params [Integer] :max_results
     #   <p>Maximum number of <code>Configs</code> returned.</p>
     # @option params [String] :next_token
@@ -1147,23 +1873,59 @@ module Aws::GroundStation
     #     config_list: [
     #       {
     #         config_id: "String",
-    #         config_type: "antenna-downlink" # One of: ["antenna-downlink", "antenna-downlink-demod-decode", "tracking", "dataflow-endpoint", "antenna-uplink", "uplink-echo", "s3-recording"],
+    #         config_type: "antenna-downlink" # One of: ["antenna-downlink", "antenna-downlink-demod-decode", "tracking", "dataflow-endpoint", "antenna-uplink", "uplink-echo", "s3-recording", "telemetry-sink"],
     #         config_arn: "ConfigArn",
     #         name: "String"
     #       }
     #     ]
     #   }
-    # @return [Types::ListConfigsOutput]
+    # @return [Types::ListConfigsResponse]
     def list_configs(params = {}, options = {})
       request = build_request(:list_configs, params)
       request.send_request(options)
     end
 
-    # <p>Returns a list of contacts.</p>
-    #          <p>If <code>statusList</code> contains AVAILABLE, the request must include
-    #       <code>groundStation</code>, <code>missionprofileArn</code>, and <code>satelliteArn</code>.
-    #       </p>
-    # @param [Hash, Types::ListContactsInput] params
+    # <p>Returns a list of versions for a specified contact.</p>
+    # @param [Hash, Types::ListContactVersionsRequest] params
+    # @option params [String] :contact_id
+    #   <p>UUID of a contact.</p>
+    # @option params [Integer] :max_results
+    #   <p>Maximum number of contact versions returned.</p>
+    # @option params [String] :next_token
+    #   <p>Next token returned in the request of a previous <code>ListContactVersions</code> call. Used to get the next page of results.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     contact_id: "Uuid", # required
+    #     max_results: 1,
+    #     next_token: "PaginationToken"
+    #   }
+    #   options = {}
+    #   response = client.list_contact_versions(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     next_token: "PaginationToken",
+    #     contact_versions_list: [
+    #       {
+    #         version_id: 1,
+    #         created: Time.now,
+    #         activated: Time.now,
+    #         superseded: Time.now,
+    #         last_updated: Time.now,
+    #         status: "UPDATING" # One of: ["UPDATING", "ACTIVE", "SUPERSEDED", "FAILED_TO_UPDATE"],
+    #         failure_codes: ["INTERNAL_ERROR" # One of: ["INTERNAL_ERROR", "INVALID_SATELLITE_ARN", "INVALID_UPDATE_CONTACT_REQUEST", "EPHEMERIS_NOT_FOUND", "EPHEMERIS_TIME_RANGE_INVALID", "EPHEMERIS_NOT_ENABLED", "SATELLITE_DOES_NOT_MATCH_EPHEMERIS", "NOT_ONBOARDED_TO_AZEL_EPHEMERIS", "AZEL_EPHEMERIS_NOT_FOUND", "AZEL_EPHEMERIS_WRONG_GROUND_STATION", "AZEL_EPHEMERIS_INVALID_STATUS", "AZEL_EPHEMERIS_TIME_RANGE_INVALID"]],
+    #         failure_message: "String"
+    #       }
+    #     ]
+    #   }
+    # @return [Types::ListContactVersionsResponse]
+    def list_contact_versions(params = {}, options = {})
+      request = build_request(:list_contact_versions, params)
+      request.send_request(options)
+    end
+
+    # <p>Returns a list of contacts.</p> <p>If <code>statusList</code> contains AVAILABLE, the request must include <code> groundStation</code>, <code>missionprofileArn</code>, and <code>satelliteArn</code>. </p>
+    # @param [Hash, Types::ListContactsRequest] params
     # @option params [Integer] :max_results
     #   <p>Maximum number of contacts returned.</p>
     # @option params [String] :next_token
@@ -1180,6 +1942,8 @@ module Aws::GroundStation
     #   <p>ARN of a satellite.</p>
     # @option params [String] :mission_profile_arn
     #   <p>ARN of a mission profile.</p>
+    # @option params [Types::EphemerisFilter] :ephemeris
+    #   <p>Filter for selecting contacts that use a specific ephemeris".</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     max_results: 1,
@@ -1189,7 +1953,13 @@ module Aws::GroundStation
     #     end_time: Time.now, # required
     #     ground_station: "GroundStationName",
     #     satellite_arn: "satelliteArn",
-    #     mission_profile_arn: "MissionProfileArn"
+    #     mission_profile_arn: "MissionProfileArn",
+    #     ephemeris: {
+    #       # One of:
+    #       az_el: {
+    #         id: "Uuid", # required
+    #       }
+    #     }
     #   }
     #   options = {}
     #   response = client.list_contacts(params, options)
@@ -1218,18 +1988,32 @@ module Aws::GroundStation
     #           "String" => "String"
     #         },
     #         visibility_start_time: Time.now,
-    #         visibility_end_time: Time.now
+    #         visibility_end_time: Time.now,
+    #         ephemeris: {
+    #           ephemeris_id: "Uuid",
+    #           ephemeris_type: "TLE" # One of: ["TLE", "OEM", "AZ_EL", "SERVICE_MANAGED"], # required
+    #         },
+    #         version: {
+    #           version_id: 1,
+    #           created: Time.now,
+    #           activated: Time.now,
+    #           superseded: Time.now,
+    #           last_updated: Time.now,
+    #           status: "UPDATING" # One of: ["UPDATING", "ACTIVE", "SUPERSEDED", "FAILED_TO_UPDATE"],
+    #           failure_codes: ["INTERNAL_ERROR" # One of: ["INTERNAL_ERROR", "INVALID_SATELLITE_ARN", "INVALID_UPDATE_CONTACT_REQUEST", "EPHEMERIS_NOT_FOUND", "EPHEMERIS_TIME_RANGE_INVALID", "EPHEMERIS_NOT_ENABLED", "SATELLITE_DOES_NOT_MATCH_EPHEMERIS", "NOT_ONBOARDED_TO_AZEL_EPHEMERIS", "AZEL_EPHEMERIS_NOT_FOUND", "AZEL_EPHEMERIS_WRONG_GROUND_STATION", "AZEL_EPHEMERIS_INVALID_STATUS", "AZEL_EPHEMERIS_TIME_RANGE_INVALID"]],
+    #           failure_message: "String"
+    #         }
     #       }
     #     ]
     #   }
-    # @return [Types::ListContactsOutput]
+    # @return [Types::ListContactsResponse]
     def list_contacts(params = {}, options = {})
       request = build_request(:list_contacts, params)
       request.send_request(options)
     end
 
     # <p>Returns a list of <code>DataflowEndpoint</code> groups.</p>
-    # @param [Hash, Types::ListDataflowEndpointGroupsInput] params
+    # @param [Hash, Types::ListDataflowEndpointGroupsRequest] params
     # @option params [Integer] :max_results
     #   <p>Maximum number of dataflow endpoint groups returned.</p>
     # @option params [String] :next_token
@@ -1252,20 +2036,22 @@ module Aws::GroundStation
     #       }
     #     ]
     #   }
-    # @return [Types::ListDataflowEndpointGroupsOutput]
+    # @return [Types::ListDataflowEndpointGroupsResponse]
     def list_dataflow_endpoint_groups(params = {}, options = {})
       request = build_request(:list_dataflow_endpoint_groups, params)
       request.send_request(options)
     end
 
-    # <p>List existing ephemerides.</p>
-    # @param [Hash, Types::ListEphemeridesInput] params
+    # <p>List your existing ephemerides.</p>
+    # @param [Hash, Types::ListEphemeridesRequest] params
     # @option params [String] :satellite_id
     #   <p>The AWS Ground Station satellite ID to list ephemeris for.</p>
+    # @option params [String] :ephemeris_type
+    #   <p>Filter ephemerides by type. If not specified, all ephemeris types will be returned.</p>
     # @option params [Time] :start_time
-    #   <p>The start time to list in UTC. The operation will return an ephemeris if its expiration time is within the time range defined by the <code>startTime</code> and <code>endTime</code>.</p>
+    #   <p>The start time for the list operation in UTC. Returns ephemerides with expiration times within your specified time range.</p>
     # @option params [Time] :end_time
-    #   <p>The end time to list in UTC. The operation will return an ephemeris if its expiration time is within the time range defined by the <code>startTime</code> and <code>endTime</code>.</p>
+    #   <p>The end time for the list operation in UTC. Returns ephemerides with expiration times within your specified time range.</p>
     # @option params [Array<String>] :status_list
     #   <p>The list of ephemeris status to return.</p>
     # @option params [Integer] :max_results
@@ -1274,7 +2060,8 @@ module Aws::GroundStation
     #   <p>Pagination token.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     satellite_id: "Uuid", # required
+    #     satellite_id: "Uuid",
+    #     ephemeris_type: "TLE" # One of: ["TLE", "OEM", "AZ_EL", "SERVICE_MANAGED"],
     #     start_time: Time.now, # required
     #     end_time: Time.now, # required
     #     status_list: ["VALIDATING" # One of: ["VALIDATING", "INVALID", "ERROR", "ENABLED", "DISABLED", "EXPIRED"]],
@@ -1290,6 +2077,7 @@ module Aws::GroundStation
     #     ephemerides: [
     #       {
     #         ephemeris_id: "Uuid",
+    #         ephemeris_type: "TLE" # One of: ["TLE", "OEM", "AZ_EL", "SERVICE_MANAGED"],
     #         status: "VALIDATING" # One of: ["VALIDATING", "INVALID", "ERROR", "ENABLED", "DISABLED", "EXPIRED"],
     #         priority: 1,
     #         enabled: false,
@@ -1303,9 +2091,63 @@ module Aws::GroundStation
     #       }
     #     ]
     #   }
-    # @return [Types::ListEphemeridesOutput]
+    # @return [Types::ListEphemeridesResponse]
     def list_ephemerides(params = {}, options = {})
       request = build_request(:list_ephemerides, params)
+      request.send_request(options)
+    end
+
+    # <p>Returns a list of reservations for a specified ground station.</p>
+    # @param [Hash, Types::ListGroundStationReservationsRequest] params
+    # @option params [String] :ground_station_id
+    #   <p>ID of a ground station.</p>
+    # @option params [Time] :start_time
+    #   <p>Start time of the reservation window in UTC.</p>
+    # @option params [Time] :end_time
+    #   <p>End time of the reservation window in UTC.</p>
+    # @option params [Array<String>] :reservation_types
+    #   <p>Types of reservations to filter by.</p>
+    # @option params [Integer] :max_results
+    #   <p>Maximum number of ground station reservations returned.</p>
+    # @option params [String] :next_token
+    #   <p>Next token returned in the request of a previous <code>ListGroundStationReservations</code> call. Used to get the next page of results.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     ground_station_id: "GroundStationName", # required
+    #     start_time: Time.now, # required
+    #     end_time: Time.now, # required
+    #     reservation_types: ["MAINTENANCE" # One of: ["MAINTENANCE", "CONTACT"]],
+    #     max_results: 1,
+    #     next_token: "PaginationToken"
+    #   }
+    #   options = {}
+    #   response = client.list_ground_station_reservations(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     reservation_list: [ # required
+    #       {
+    #         reservation_type: "MAINTENANCE" # One of: ["MAINTENANCE", "CONTACT"], # required
+    #         ground_station_id: "GroundStationName", # required
+    #         antenna_name: "AntennaName", # required
+    #         start_time: Time.now, # required
+    #         end_time: Time.now, # required
+    #         reservation_details: { # required
+    #           # One of:
+    #           maintenance: {
+    #             maintenance_type: "PLANNED" # One of: ["PLANNED", "UNPLANNED"], # required
+    #           },
+    #           contact: {
+    #             contact_id: "Uuid"
+    #           }
+    #         }
+    #       }
+    #     ],
+    #     next_token: "PaginationToken"
+    #   }
+    # @return [Types::ListGroundStationReservationsResponse]
+    def list_ground_station_reservations(params = {}, options = {})
+      request = build_request(:list_ground_station_reservations, params)
       request.send_request(options)
     end
 
@@ -1337,14 +2179,14 @@ module Aws::GroundStation
     #       }
     #     ]
     #   }
-    # @return [Types::ListGroundStationsOutput]
+    # @return [Types::ListGroundStationsResponse]
     def list_ground_stations(params = {}, options = {})
       request = build_request(:list_ground_stations, params)
       request.send_request(options)
     end
 
     # <p>Returns a list of mission profiles.</p>
-    # @param [Hash, Types::ListMissionProfilesInput] params
+    # @param [Hash, Types::ListMissionProfilesRequest] params
     # @option params [Integer] :max_results
     #   <p>Maximum number of mission profiles returned.</p>
     # @option params [String] :next_token
@@ -1369,14 +2211,14 @@ module Aws::GroundStation
     #       }
     #     ]
     #   }
-    # @return [Types::ListMissionProfilesOutput]
+    # @return [Types::ListMissionProfilesResponse]
     def list_mission_profiles(params = {}, options = {})
       request = build_request(:list_mission_profiles, params)
       request.send_request(options)
     end
 
     # <p>Returns a list of satellites.</p>
-    # @param [Hash, Types::ListSatellitesInput] params
+    # @param [Hash, Types::ListSatellitesRequest] params
     # @option params [Integer] :max_results
     #   <p>Maximum number of satellites returned.</p>
     # @option params [String] :next_token
@@ -1407,14 +2249,14 @@ module Aws::GroundStation
     #       }
     #     ]
     #   }
-    # @return [Types::ListSatellitesOutput]
+    # @return [Types::ListSatellitesResponse]
     def list_satellites(params = {}, options = {})
       request = build_request(:list_satellites, params)
       request.send_request(options)
     end
 
     # <p>Returns a list of tags for a specified resource.</p>
-    # @param [Hash, Types::ListTagsForResourceInput] params
+    # @param [Hash, Types::ListTagsForResourceRequest] params
     # @option params [String] :resource_arn
     #   <p>ARN of a resource.</p>
     # @example Request syntax with placeholder values
@@ -1430,17 +2272,14 @@ module Aws::GroundStation
     #       "String" => "String"
     #     }
     #   }
-    # @return [Types::ListTagsForResourceOutput]
+    # @return [Types::ListTagsForResourceResponse]
     def list_tags_for_resource(params = {}, options = {})
       request = build_request(:list_tags_for_resource, params)
       request.send_request(options)
     end
 
-    # <note>
-    #             <p> For use by AWS Ground Station Agent and shouldn't be called directly.</p>
-    #          </note>
-    #          <p> Registers a new agent with AWS Ground Station. </p>
-    # @param [Hash, Types::RegisterAgentInput] params
+    # <note> <p> For use by AWS Ground Station Agent and shouldn't be called directly.</p> </note> <p> Registers a new agent with AWS Ground Station. </p>
+    # @param [Hash, Types::RegisterAgentRequest] params
     # @option params [Types::DiscoveryData] :discovery_data
     #   <p>Data for associating an agent with the capabilities it is managing.</p>
     # @option params [Types::AgentDetails] :agent_details
@@ -1478,14 +2317,14 @@ module Aws::GroundStation
     #   {
     #     agent_id: "Uuid"
     #   }
-    # @return [Types::RegisterAgentOutput]
+    # @return [Types::RegisterAgentResponse]
     def register_agent(params = {}, options = {})
       request = build_request(:register_agent, params)
       request.send_request(options)
     end
 
     # <p>Reserves a contact using specified parameters.</p>
-    # @param [Hash, Types::ReserveContactInput] params
+    # @param [Hash, Types::ReserveContactRequest] params
     # @option params [String] :mission_profile_arn
     #   <p>ARN of a mission profile.</p>
     # @option params [String] :satellite_arn
@@ -1498,15 +2337,31 @@ module Aws::GroundStation
     #   <p>Name of a ground station.</p>
     # @option params [Hash<String, String>] :tags
     #   <p>Tags assigned to a contact.</p>
+    # @option params [Types::TrackingOverrides] :tracking_overrides
+    #   <p>Tracking configuration overrides for the contact.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     mission_profile_arn: "MissionProfileArn", # required
-    #     satellite_arn: "satelliteArn", # required
+    #     satellite_arn: "satelliteArn",
     #     start_time: Time.now, # required
     #     end_time: Time.now, # required
     #     ground_station: "GroundStationName", # required
     #     tags: {
     #       "String" => "String"
+    #     },
+    #     tracking_overrides: {
+    #       program_track_settings: {
+    #         # One of:
+    #         az_el: {
+    #           ephemeris_id: "Uuid", # required
+    #         },
+    #         oem: {
+    #           ephemeris_id: "Uuid", # required
+    #         },
+    #         tle: {
+    #           ephemeris_id: "Uuid", # required
+    #         }
+    #       }
     #     }
     #   }
     #   options = {}
@@ -1514,7 +2369,8 @@ module Aws::GroundStation
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {
-    #     contact_id: "Uuid"
+    #     contact_id: "Uuid",
+    #     version_id: 1
     #   }
     # @return [Types::ReserveContactOutput]
     def reserve_contact(params = {}, options = {})
@@ -1523,7 +2379,7 @@ module Aws::GroundStation
     end
 
     # <p>Assigns a tag to a resource.</p>
-    # @param [Hash, Types::TagResourceInput] params
+    # @param [Hash, Types::TagResourceRequest] params
     # @option params [String] :resource_arn
     #   <p>ARN of a resource tag.</p>
     # @option params [Hash<String, String>] :tags
@@ -1540,14 +2396,14 @@ module Aws::GroundStation
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {}
-    # @return [Types::TagResourceOutput]
+    # @return [Types::TagResourceResponse]
     def tag_resource(params = {}, options = {})
       request = build_request(:tag_resource, params)
       request.send_request(options)
     end
 
     # <p>Deassigns a resource tag.</p>
-    # @param [Hash, Types::UntagResourceInput] params
+    # @param [Hash, Types::UntagResourceRequest] params
     # @option params [String] :resource_arn
     #   <p>ARN of a resource.</p>
     # @option params [Array<String>] :tag_keys
@@ -1562,17 +2418,14 @@ module Aws::GroundStation
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {}
-    # @return [Types::UntagResourceOutput]
+    # @return [Types::UntagResourceResponse]
     def untag_resource(params = {}, options = {})
       request = build_request(:untag_resource, params)
       request.send_request(options)
     end
 
-    # <note>
-    #             <p> For use by AWS Ground Station Agent and shouldn't be called directly.</p>
-    #          </note>
-    #          <p>Update the status of the agent.</p>
-    # @param [Hash, Types::UpdateAgentStatusInput] params
+    # <note> <p> For use by AWS Ground Station Agent and shouldn't be called directly.</p> </note> <p>Update the status of the agent.</p>
+    # @param [Hash, Types::UpdateAgentStatusRequest] params
     # @option params [String] :agent_id
     #   <p>UUID of agent to update.</p>
     # @option params [String] :task_id
@@ -1610,16 +2463,14 @@ module Aws::GroundStation
     #   {
     #     agent_id: "Uuid", # required
     #   }
-    # @return [Types::UpdateAgentStatusOutput]
+    # @return [Types::UpdateAgentStatusResponse]
     def update_agent_status(params = {}, options = {})
       request = build_request(:update_agent_status, params)
       request.send_request(options)
     end
 
-    # <p>Updates the <code>Config</code> used when scheduling contacts.</p>
-    #          <p>Updating a <code>Config</code> will not update the execution parameters
-    #          for existing future contacts scheduled with this <code>Config</code>.</p>
-    # @param [Hash, Types::UpdateConfigInput] params
+    # <p>Updates the <code>Config</code> used when scheduling contacts.</p> <p>Updating a <code>Config</code> will not update the execution parameters for existing future contacts scheduled with this <code>Config</code>.</p>
+    # @param [Hash, Types::UpdateConfigRequest] params
     # @option params [String] :config_id
     #   <p>UUID of a <code>Config</code>.</p>
     # @option params [String] :name
@@ -1632,7 +2483,7 @@ module Aws::GroundStation
     #   params = {
     #     config_id: "Uuid", # required
     #     name: "SafeName", # required
-    #     config_type: "antenna-downlink" # One of: ["antenna-downlink", "antenna-downlink-demod-decode", "tracking", "dataflow-endpoint", "antenna-uplink", "uplink-echo", "s3-recording"], # required
+    #     config_type: "antenna-downlink" # One of: ["antenna-downlink", "antenna-downlink-demod-decode", "tracking", "dataflow-endpoint", "antenna-uplink", "uplink-echo", "s3-recording", "telemetry-sink"], # required
     #     config_data: { # required
     #       # One of:
     #       antenna_downlink_config: {
@@ -1696,6 +2547,16 @@ module Aws::GroundStation
     #         bucket_arn: "BucketArn", # required
     #         role_arn: "RoleArn", # required
     #         prefix: "S3KeyPrefix"
+    #       },
+    #       telemetry_sink_config: {
+    #         telemetry_sink_type: "KINESIS_DATA_STREAM" # One of: ["KINESIS_DATA_STREAM"], # required
+    #         telemetry_sink_data: { # required
+    #           # One of:
+    #           kinesis_data_stream_data: {
+    #             kinesis_role_arn: "RoleArn", # required
+    #             kinesis_data_stream_arn: "KinesisDataStreamArn", # required
+    #           }
+    #         }
     #       }
     #     }
     #   }
@@ -1705,7 +2566,7 @@ module Aws::GroundStation
     #   response.to_h #=>
     #   {
     #     config_id: "String",
-    #     config_type: "antenna-downlink" # One of: ["antenna-downlink", "antenna-downlink-demod-decode", "tracking", "dataflow-endpoint", "antenna-uplink", "uplink-echo", "s3-recording"],
+    #     config_type: "antenna-downlink" # One of: ["antenna-downlink", "antenna-downlink-demod-decode", "tracking", "dataflow-endpoint", "antenna-uplink", "uplink-echo", "s3-recording", "telemetry-sink"],
     #     config_arn: "ConfigArn"
     #   }
     # @return [Types::UpdateConfigOutput]
@@ -1714,18 +2575,60 @@ module Aws::GroundStation
       request.send_request(options)
     end
 
-    # <p>Updates an existing ephemeris</p>
-    # @param [Hash, Types::UpdateEphemerisInput] params
+    # <p>Updates a specific contact.</p>
+    # @param [Hash, Types::UpdateContactRequest] params
+    # @option params [String] :contact_id
+    #   <p>UUID of a contact.</p>
+    # @option params [String] :client_token
+    #   <p>A client token is a unique, case-sensitive string of up to 64 ASCII characters. It is generated by the client to ensure idempotent operations, allowing safe retries without unintended side effects.</p>
+    # @option params [Types::TrackingOverrides] :tracking_overrides
+    #   <p>Overrides the default tracking configuration on an antenna during a contact.</p>
+    # @option params [String] :satellite_arn
+    #   <p>ARN of a satellite.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     contact_id: "Uuid", # required
+    #     client_token: "ClientToken",
+    #     tracking_overrides: {
+    #       program_track_settings: {
+    #         # One of:
+    #         az_el: {
+    #           ephemeris_id: "Uuid", # required
+    #         },
+    #         oem: {
+    #           ephemeris_id: "Uuid", # required
+    #         },
+    #         tle: {
+    #           ephemeris_id: "Uuid", # required
+    #         }
+    #       }
+    #     },
+    #     satellite_arn: "satelliteArn"
+    #   }
+    #   options = {}
+    #   response = client.update_contact(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     contact_id: "Uuid",
+    #     version_id: 1
+    #   }
+    # @return [Types::UpdateContactResponse]
+    def update_contact(params = {}, options = {})
+      request = build_request(:update_contact, params)
+      request.send_request(options)
+    end
+
+    # <p>Update an existing ephemeris.</p>
+    # @param [Hash, Types::UpdateEphemerisRequest] params
     # @option params [String] :ephemeris_id
     #   <p>The AWS Ground Station ephemeris ID.</p>
     # @option params [Boolean] :enabled
-    #   <p>Whether the ephemeris is enabled or not. Changing this value will not require the ephemeris to be re-validated.</p>
+    #   <p>Enable or disable the ephemeris. Changing this value doesn't require re-validation.</p>
     # @option params [String] :name
-    #   <p>A name string associated with the ephemeris. Used as a human-readable identifier for the ephemeris.</p>
+    #   <p>A name that you can use to identify the ephemeris.</p>
     # @option params [Integer] :priority
-    #   <p>Customer-provided priority score to establish the order in which overlapping ephemerides should be used.</p>
-    #            <p>The default for customer-provided ephemeris priority is 1, and higher numbers take precedence.</p>
-    #            <p>Priority must be 1 or greater</p>
+    #   <p>A priority score that determines which ephemeris to use when multiple ephemerides overlap.</p> <p>Higher numbers take precedence. The default is 1. Must be 1 or greater.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     ephemeris_id: "Uuid", # required
@@ -1746,26 +2649,24 @@ module Aws::GroundStation
       request.send_request(options)
     end
 
-    # <p>Updates a mission profile.</p>
-    #          <p>Updating a mission profile will not update the execution parameters
-    #          for existing future contacts.</p>
-    # @param [Hash, Types::UpdateMissionProfileInput] params
+    # <p>Updates a mission profile.</p> <p>Updating a mission profile will not update the execution parameters for existing future contacts.</p>
+    # @param [Hash, Types::UpdateMissionProfileRequest] params
     # @option params [String] :mission_profile_id
     #   <p>UUID of a mission profile.</p>
     # @option params [String] :name
     #   <p>Name of a mission profile.</p>
     # @option params [Integer] :contact_pre_pass_duration_seconds
-    #   <p>Amount of time after a contact ends that you’d like to receive a Ground Station Contact State Change event indicating the pass has finished.</p>
+    #   <p>Amount of time after a contact ends that you'd like to receive a Ground Station Contact State Change event indicating the pass has finished.</p>
     # @option params [Integer] :contact_post_pass_duration_seconds
-    #   <p>Amount of time after a contact ends that you’d like to receive a Ground Station Contact State Change event indicating the pass has finished.</p>
+    #   <p>Amount of time after a contact ends that you'd like to receive a Ground Station Contact State Change event indicating the pass has finished.</p>
     # @option params [Integer] :minimum_viable_contact_duration_seconds
-    #   <p>Smallest amount of time in seconds that you’d like to see for an available contact. AWS Ground Station will not present you with contacts shorter than this duration.</p>
+    #   <p>Smallest amount of time in seconds that you'd like to see for an available contact. AWS Ground Station will not present you with contacts shorter than this duration.</p>
     # @option params [Array<Array<String>>] :dataflow_edges
-    #   <p>A list of lists of ARNs. Each list of ARNs is an edge, with a <i>from</i>
-    #               <code>Config</code> and a <i>to</i>
-    #               <code>Config</code>.</p>
+    #   <p>A list of lists of ARNs. Each list of ARNs is an edge, with a <i>from</i> <code> Config</code> and a <i>to</i> <code>Config</code>.</p>
     # @option params [String] :tracking_config_arn
     #   <p>ARN of a tracking <code>Config</code>.</p>
+    # @option params [String] :telemetry_sink_config_arn
+    #   <p>ARN of a telemetry sink <code>Config</code>.</p>
     # @option params [Types::KmsKey] :streams_kms_key
     #   <p>KMS key to use for encrypting streams.</p>
     # @option params [String] :streams_kms_role
@@ -1781,6 +2682,7 @@ module Aws::GroundStation
     #       ["ConfigArn"]
     #     ],
     #     tracking_config_arn: "ConfigArn",
+    #     telemetry_sink_config_arn: "ConfigArn",
     #     streams_kms_key: {
     #       # One of:
     #       kms_key_arn: "KeyArn",
@@ -1886,7 +2788,8 @@ module Aws::GroundStation
 
     def waiters
       {
-        contact_scheduled: Waiters::ContactScheduled
+        contact_scheduled: Waiters::ContactScheduled,
+        contact_updated: Waiters::ContactUpdated
       }
     end
 

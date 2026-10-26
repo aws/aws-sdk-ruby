@@ -24,6 +24,8 @@ module Aws::AutoScaling
   #
   # * {ActiveInstanceRefreshNotFoundFault}
   # * {AlreadyExistsFault}
+  # * {IdempotentCallInProgressFault}
+  # * {IdempotentParameterMismatchError}
   # * {InstanceRefreshInProgressFault}
   # * {InvalidNextToken}
   # * {IrreversibleInstanceRefreshFault}
@@ -61,6 +63,38 @@ module Aws::AutoScaling
       end
 
       # <p></p>
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>
+    #             The service is currently processing another request with the same client token. Retry
+    #             the request with the same client token—the in-flight operation will complete and return
+    #             its result.
+    #         </p>
+    class IdempotentCallInProgressFault < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::AutoScaling::Types::IdempotentCallInProgressFault] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>
+    #             Indicates that the parameters in the current request do not match the parameters from a previous request with the same client token within the idempotency window.
+    #         </p>
+    class IdempotentParameterMismatchError < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::AutoScaling::Types::IdempotentParameterMismatchError] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
       def message
         @data[:message]
       end

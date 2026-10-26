@@ -8,7 +8,7 @@ module Aws::Keyspaces
 
     # <p>You don't have sufficient access permissions to perform this action. </p>
     # @!attribute message
-    #   <p>Description of the error.</p>
+    #   <p>You don't have the required permissions to perform this operation. Verify your IAM permissions and try again.</p>
     #   @return [String]
     class AccessDeniedException < Struct.new(
       nil,
@@ -217,7 +217,7 @@ module Aws::Keyspaces
 
     # <p>Amazon Keyspaces couldn't complete the requested action. This error may occur if you try to perform an action and the same or a different action is already in progress, or if you try to create a resource that already exists. </p>
     # @!attribute message
-    #   <p>Description of the error.</p>
+    #   <p>The requested operation conflicts with the current state of the resource or another concurrent operation.</p>
     #   @return [String]
     class ConflictException < Struct.new(
       nil,
@@ -299,6 +299,9 @@ module Aws::Keyspaces
     # @!attribute cdc_specification
     #   <p>The CDC stream settings of the table.</p>
     #   @return [Types::CdcSpecification]
+    # @!attribute warm_throughput_specification
+    #   <p>Specifies the warm throughput settings for the table. Pre-warming a table helps you avoid capacity exceeded exceptions by pre-provisioning read and write capacity units to reduce cold start latency when your table receives traffic.</p> <p>For more information about pre-warming in Amazon Keyspaces, see <a href="https://docs.aws.amazon.com/keyspaces/latest/devguide/warm-throughput.html">Pre-warm a table in Amazon Keyspaces</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p>
+    #   @return [Types::WarmThroughputSpecification]
     class CreateTableInput < Struct.new(
       nil,
       :keyspace_name,
@@ -315,6 +318,7 @@ module Aws::Keyspaces
       :auto_scaling_specification,
       :replica_specifications,
       :cdc_specification,
+      :warm_throughput_specification,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -610,6 +614,9 @@ module Aws::Keyspaces
     # @!attribute cdc_specification
     #   <p>The CDC stream settings of the table.</p>
     #   @return [Types::CdcSpecificationSummary]
+    # @!attribute warm_throughput_specification
+    #   <p>The warm throughput settings for the table, including the current status and configured read and write capacity units.</p>
+    #   @return [Types::WarmThroughputSpecificationSummary]
     class GetTableOutput < Struct.new(
       nil,
       :keyspace_name,
@@ -628,6 +635,7 @@ module Aws::Keyspaces
       :replica_specifications,
       :latest_stream_arn,
       :cdc_specification,
+      :warm_throughput_specification,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -698,7 +706,7 @@ module Aws::Keyspaces
 
     # <p>Amazon Keyspaces was unable to fully process this request because of an internal server error.</p>
     # @!attribute message
-    #   <p>Description of the error.</p>
+    #   <p>An internal service error occurred. Retry your request. If the problem persists, contact Amazon Web Services Support.</p>
     #   @return [String]
     class InternalServerException < Struct.new(
       nil,
@@ -950,11 +958,15 @@ module Aws::Keyspaces
     # @!attribute capacity_specification
     #   <p>The read/write throughput capacity mode for a table. The options are:</p> <ul> <li> <p> <code>throughputMode:PAY_PER_REQUEST</code> and </p> </li> <li> <p> <code>throughputMode:PROVISIONED</code>.</p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/keyspaces/latest/devguide/ReadWriteCapacityMode.html">Read/write capacity modes</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p>
     #   @return [Types::CapacitySpecificationSummary]
+    # @!attribute warm_throughput_specification
+    #   <p>The warm throughput settings for this replica, including the current status and configured read and write capacity units.</p>
+    #   @return [Types::WarmThroughputSpecificationSummary]
     class ReplicaSpecificationSummary < Struct.new(
       nil,
       :region,
       :status,
       :capacity_specification,
+      :warm_throughput_specification,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -998,10 +1010,10 @@ module Aws::Keyspaces
 
     # <p>The operation tried to access a keyspace, table, or type that doesn't exist. The resource might not be specified correctly, or its status might not be <code>ACTIVE</code>.</p>
     # @!attribute message
-    #   <p>Description of the error.</p>
+    #   <p>The specified resource was not found. Verify the resource identifier and ensure the resource exists and is in an ACTIVE state.</p>
     #   @return [String]
     # @!attribute resource_arn
-    #   <p>The unique identifier in the format of Amazon Resource Name (ARN) for the resource couldn’t be found.</p>
+    #   <p>The unique identifier in the format of Amazon Resource Name (ARN) for the resource couldn't be found.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       nil,
@@ -1100,7 +1112,7 @@ module Aws::Keyspaces
 
     # <p>The operation exceeded the service quota for this resource. For more information on service quotas, see <a href="https://docs.aws.amazon.com/keyspaces/latest/devguide/quotas.html">Quotas</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p>
     # @!attribute message
-    #   <p>Description of the error.</p>
+    #   <p>The requested operation would exceed the service quota for this resource. Review the service quotas and adjust your request accordingly.</p>
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       nil,
@@ -1312,6 +1324,9 @@ module Aws::Keyspaces
     # @!attribute cdc_specification
     #   <p>The CDC stream settings of the table.</p>
     #   @return [Types::CdcSpecification]
+    # @!attribute warm_throughput_specification
+    #   <p>Modifies the warm throughput settings for the table. You can update the read and write capacity units to adjust the pre-provisioned throughput.</p>
+    #   @return [Types::WarmThroughputSpecification]
     class UpdateTableInput < Struct.new(
       nil,
       :keyspace_name,
@@ -1326,6 +1341,7 @@ module Aws::Keyspaces
       :auto_scaling_specification,
       :replica_specifications,
       :cdc_specification,
+      :warm_throughput_specification,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1344,11 +1360,53 @@ module Aws::Keyspaces
 
     # <p>The operation failed due to an invalid or malformed request.</p>
     # @!attribute message
-    #   <p>Description of the error.</p>
+    #   <p>The request parameters are invalid or malformed. Review the API documentation and correct the request format.</p>
     #   @return [String]
     class ValidationException < Struct.new(
       nil,
       :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Specifies the warm throughput settings for a table. Pre-warming a table by specifying warm throughput pre-provisions read and write capacity units to help avoid capacity exceeded exceptions and reduce latency when your table starts receiving traffic.</p> <p>For more information about pre-warming in Amazon Keyspaces, see <a href="https://docs.aws.amazon.com/keyspaces/latest/devguide/warm-throughput.html">Pre-warm a table in Amazon Keyspaces</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p>
+    # @!attribute read_units_per_second
+    #   <p>The number of read capacity units per second to pre-warm the table for read capacity throughput. The minimum value is 1.</p>
+    #   @return [Integer]
+    # @!attribute write_units_per_second
+    #   <p>The number of write capacity units per second to pre-warm the table for write capacity throughput. The minimum value is 1.</p>
+    #   @return [Integer]
+    class WarmThroughputSpecification < Struct.new(
+      nil,
+      :read_units_per_second,
+      :write_units_per_second,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:read_units_per_second] = nil unless options.key?(:read_units_per_second)
+        options[:write_units_per_second] = nil unless options.key?(:write_units_per_second)
+        super
+      end
+    end
+
+    # <p>Contains the current warm throughput settings for a table, including the configured capacity units and the current status of the warm throughput configuration.</p>
+    # @!attribute read_units_per_second
+    #   <p>The number of read capacity units per second currently configured for warm throughput.</p>
+    #   @return [Integer]
+    # @!attribute write_units_per_second
+    #   <p>The number of write capacity units per second currently configured for warm throughput.</p>
+    #   @return [Integer]
+    # @!attribute status
+    #   <p>The current status of the warm throughput configuration. Valid values are <code>AVAILABLE</code> when the configuration is active, and <code>UPDATING</code> when changes are being applied.</p>
+    #   @return [String]
+    class WarmThroughputSpecificationSummary < Struct.new(
+      nil,
+      :read_units_per_second,
+      :write_units_per_second,
+      :status,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

@@ -144,18 +144,18 @@ module Aws::CloudFront
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -384,10 +384,14 @@ module Aws::CloudFront
     #                 },
     #                 origin_read_timeout: 1,
     #                 origin_keepalive_timeout: 1,
-    #                 ip_address_type: "ipv4" # One of: ["ipv4", "ipv6", "dualstack"]
+    #                 ip_address_type: "ipv4" # One of: ["ipv4", "ipv6", "dualstack"],
+    #                 origin_mtls_config: {
+    #                   client_certificate_arn: "string", # required
+    #                 }
     #               },
     #               vpc_origin_config: {
     #                 vpc_origin_id: "string", # required
+    #                 owner_account_id: "string",
     #                 origin_read_timeout: 1,
     #                 origin_keepalive_timeout: 1
     #               },
@@ -600,7 +604,7 @@ module Aws::CloudFront
     #           iam_certificate_id: "ServerCertificateId",
     #           acm_certificate_arn: "string",
     #           ssl_support_method: "sni-only" # One of: ["sni-only", "vip", "static-ip"],
-    #           minimum_protocol_version: "SSLv3" # One of: ["SSLv3", "TLSv1", "TLSv1_2016", "TLSv1.1_2016", "TLSv1.2_2018", "TLSv1.2_2019", "TLSv1.2_2021", "TLSv1.3_2025"],
+    #           minimum_protocol_version: "SSLv3" # One of: ["SSLv3", "TLSv1", "TLSv1_2016", "TLSv1.1_2016", "TLSv1.2_2018", "TLSv1.2_2019", "TLSv1.2_2021", "TLSv1.3_2025", "TLSv1.2_2025"],
     #           certificate: "string",
     #           certificate_source: "cloudfront" # One of: ["cloudfront", "iam", "acm"]
     #         },
@@ -631,7 +635,21 @@ module Aws::CloudFront
     #             }
     #           ]
     #         },
-    #         connection_mode: "direct" # One of: ["direct", "tenant-only"]
+    #         connection_mode: "direct" # One of: ["direct", "tenant-only"],
+    #         viewer_mtls_config: {
+    #           mode: "required" # One of: ["required", "optional", "passthrough"],
+    #           trust_store_config: {
+    #             trust_store_id: "string", # required
+    #             advertise_trust_store_ca_names: false,
+    #             ignore_certificate_expiry: false
+    #           }
+    #         },
+    #         connection_function_association: {
+    #           id: "ResourceId", # required
+    #         },
+    #         cache_tag_config: {
+    #           header_name: "string", # required
+    #         }
     #       },
     #       alias_icp_recordals: [
     #         {
@@ -657,6 +675,10 @@ module Aws::CloudFront
     #   <p>The number of static IP addresses that are allocated to the Anycast static IP list. Valid values: 21 or 3.</p>
     # @option params [Types::Tags] :tags
     #   <p>A complex type that contains zero or more <code>Tag</code> elements.</p>
+    # @option params [String] :ip_address_type
+    #   <p>The IP address type for the Anycast static IP list. You can specify one of the following options:</p> <ul> <li> <p> <code>ipv4</code> only</p> </li> <li> <p> <code>ipv6</code> only </p> </li> <li> <p> <code>dualstack</code> - Allocate a list of both IPv4 and IPv6 addresses</p> </li> </ul>
+    # @option params [Array<Types::IpamCidrConfig>] :ipam_cidr_configs
+    #   <p> A list of IPAM CIDR configurations that specify the IP address ranges and IPAM pool settings for creating the Anycast static IP list. </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     name: "AnycastIpListName", # required
@@ -668,7 +690,16 @@ module Aws::CloudFront
     #           value: "TagValue"
     #         }
     #       ]
-    #     }
+    #     },
+    #     ip_address_type: "ipv4" # One of: ["ipv4", "ipv6", "dualstack"],
+    #     ipam_cidr_configs: [
+    #       {
+    #         cidr: "string", # required
+    #         ipam_pool_arn: "string", # required
+    #         anycast_ip: "string",
+    #         status: "provisioned" # One of: ["provisioned", "failed-provision", "provisioning", "deprovisioned", "failed-deprovision", "deprovisioning", "advertised", "failed-advertise", "advertising", "withdrawn", "failed-withdraw", "withdrawing"]
+    #       }
+    #     ]
     #   }
     #   options = {}
     #   response = client.create_anycast_ip_list(params, options)
@@ -680,6 +711,18 @@ module Aws::CloudFront
     #       name: "AnycastIpListName", # required
     #       status: "string", # required
     #       arn: "string", # required
+    #       ip_address_type: "ipv4" # One of: ["ipv4", "ipv6", "dualstack"],
+    #       ipam_config: {
+    #         quantity: 1, # required
+    #         ipam_cidr_configs: [ # required
+    #           {
+    #             cidr: "string", # required
+    #             ipam_pool_arn: "string", # required
+    #             anycast_ip: "string",
+    #             status: "provisioned" # One of: ["provisioned", "failed-provision", "provisioning", "deprovisioned", "failed-deprovision", "deprovisioning", "advertised", "failed-advertise", "advertising", "withdrawn", "failed-withdraw", "withdrawing"]
+    #           }
+    #         ]
+    #       },
     #       anycast_ips: ["string"], # required
     #       ip_count: 1, # required
     #       last_modified_time: Time.now, # required
@@ -811,6 +854,76 @@ module Aws::CloudFront
     # @return [Types::CreateCloudFrontOriginAccessIdentityResult]
     def create_cloud_front_origin_access_identity(params = {}, options = {})
       request = build_request(:create_cloud_front_origin_access_identity, params)
+      request.send_request(options)
+    end
+
+    # <p>Creates a connection function.</p>
+    # @param [Hash, Types::CreateConnectionFunctionRequest] params
+    # @option params [String] :name
+    #   <p>A name for the connection function.</p>
+    # @option params [Types::FunctionConfig] :connection_function_config
+    #   <p>Contains configuration information about a CloudFront function.</p>
+    # @option params [String] :connection_function_code
+    #   <p>The code for the connection function.</p>
+    # @option params [Types::Tags] :tags
+    #   <p>A complex type that contains zero or more <code>Tag</code> elements.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     name: "FunctionName", # required
+    #     connection_function_config: { # required
+    #       comment: "string", # required
+    #       runtime: "cloudfront-js-1.0" # One of: ["cloudfront-js-1.0", "cloudfront-js-2.0"], # required
+    #       key_value_store_associations: {
+    #         quantity: 1, # required
+    #         items: [
+    #           {
+    #             key_value_store_arn: "KeyValueStoreARN", # required
+    #           }
+    #         ]
+    #       }
+    #     },
+    #     connection_function_code: "data", # required
+    #     tags: {
+    #       items: [
+    #         {
+    #           key: "TagKey", # required
+    #           value: "TagValue"
+    #         }
+    #       ]
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.create_connection_function(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     connection_function_summary: {
+    #       name: "FunctionName", # required
+    #       id: "ResourceId", # required
+    #       connection_function_config: { # required
+    #         comment: "string", # required
+    #         runtime: "cloudfront-js-1.0" # One of: ["cloudfront-js-1.0", "cloudfront-js-2.0"], # required
+    #         key_value_store_associations: {
+    #           quantity: 1, # required
+    #           items: [
+    #             {
+    #               key_value_store_arn: "KeyValueStoreARN", # required
+    #             }
+    #           ]
+    #         }
+    #       },
+    #       connection_function_arn: "string", # required
+    #       status: "string", # required
+    #       stage: "DEVELOPMENT" # One of: ["DEVELOPMENT", "LIVE"], # required
+    #       created_time: Time.now, # required
+    #       last_modified_time: Time.now, # required
+    #     },
+    #     location: "string",
+    #     e_tag: "string"
+    #   }
+    # @return [Types::CreateConnectionFunctionResult]
+    def create_connection_function(params = {}, options = {})
+      request = build_request(:create_connection_function, params)
       request.send_request(options)
     end
 
@@ -985,10 +1098,14 @@ module Aws::CloudFront
     #               },
     #               origin_read_timeout: 1,
     #               origin_keepalive_timeout: 1,
-    #               ip_address_type: "ipv4" # One of: ["ipv4", "ipv6", "dualstack"]
+    #               ip_address_type: "ipv4" # One of: ["ipv4", "ipv6", "dualstack"],
+    #               origin_mtls_config: {
+    #                 client_certificate_arn: "string", # required
+    #               }
     #             },
     #             vpc_origin_config: {
     #               vpc_origin_id: "string", # required
+    #               owner_account_id: "string",
     #               origin_read_timeout: 1,
     #               origin_keepalive_timeout: 1
     #             },
@@ -1201,7 +1318,7 @@ module Aws::CloudFront
     #         iam_certificate_id: "ServerCertificateId",
     #         acm_certificate_arn: "string",
     #         ssl_support_method: "sni-only" # One of: ["sni-only", "vip", "static-ip"],
-    #         minimum_protocol_version: "SSLv3" # One of: ["SSLv3", "TLSv1", "TLSv1_2016", "TLSv1.1_2016", "TLSv1.2_2018", "TLSv1.2_2019", "TLSv1.2_2021", "TLSv1.3_2025"],
+    #         minimum_protocol_version: "SSLv3" # One of: ["SSLv3", "TLSv1", "TLSv1_2016", "TLSv1.1_2016", "TLSv1.2_2018", "TLSv1.2_2019", "TLSv1.2_2021", "TLSv1.3_2025", "TLSv1.2_2025"],
     #         certificate: "string",
     #         certificate_source: "cloudfront" # One of: ["cloudfront", "iam", "acm"]
     #       },
@@ -1232,7 +1349,21 @@ module Aws::CloudFront
     #           }
     #         ]
     #       },
-    #       connection_mode: "direct" # One of: ["direct", "tenant-only"]
+    #       connection_mode: "direct" # One of: ["direct", "tenant-only"],
+    #       viewer_mtls_config: {
+    #         mode: "required" # One of: ["required", "optional", "passthrough"],
+    #         trust_store_config: {
+    #           trust_store_id: "string", # required
+    #           advertise_trust_store_ca_names: false,
+    #           ignore_certificate_expiry: false
+    #         }
+    #       },
+    #       connection_function_association: {
+    #         id: "ResourceId", # required
+    #       },
+    #       cache_tag_config: {
+    #         header_name: "string", # required
+    #       }
     #     }
     #   }
     #   options = {}
@@ -1310,10 +1441,14 @@ module Aws::CloudFront
     #                 },
     #                 origin_read_timeout: 1,
     #                 origin_keepalive_timeout: 1,
-    #                 ip_address_type: "ipv4" # One of: ["ipv4", "ipv6", "dualstack"]
+    #                 ip_address_type: "ipv4" # One of: ["ipv4", "ipv6", "dualstack"],
+    #                 origin_mtls_config: {
+    #                   client_certificate_arn: "string", # required
+    #                 }
     #               },
     #               vpc_origin_config: {
     #                 vpc_origin_id: "string", # required
+    #                 owner_account_id: "string",
     #                 origin_read_timeout: 1,
     #                 origin_keepalive_timeout: 1
     #               },
@@ -1526,7 +1661,7 @@ module Aws::CloudFront
     #           iam_certificate_id: "ServerCertificateId",
     #           acm_certificate_arn: "string",
     #           ssl_support_method: "sni-only" # One of: ["sni-only", "vip", "static-ip"],
-    #           minimum_protocol_version: "SSLv3" # One of: ["SSLv3", "TLSv1", "TLSv1_2016", "TLSv1.1_2016", "TLSv1.2_2018", "TLSv1.2_2019", "TLSv1.2_2021", "TLSv1.3_2025"],
+    #           minimum_protocol_version: "SSLv3" # One of: ["SSLv3", "TLSv1", "TLSv1_2016", "TLSv1.1_2016", "TLSv1.2_2018", "TLSv1.2_2019", "TLSv1.2_2021", "TLSv1.3_2025", "TLSv1.2_2025"],
     #           certificate: "string",
     #           certificate_source: "cloudfront" # One of: ["cloudfront", "iam", "acm"]
     #         },
@@ -1557,7 +1692,21 @@ module Aws::CloudFront
     #             }
     #           ]
     #         },
-    #         connection_mode: "direct" # One of: ["direct", "tenant-only"]
+    #         connection_mode: "direct" # One of: ["direct", "tenant-only"],
+    #         viewer_mtls_config: {
+    #           mode: "required" # One of: ["required", "optional", "passthrough"],
+    #           trust_store_config: {
+    #             trust_store_id: "string", # required
+    #             advertise_trust_store_ca_names: false,
+    #             ignore_certificate_expiry: false
+    #           }
+    #         },
+    #         connection_function_association: {
+    #           id: "ResourceId", # required
+    #         },
+    #         cache_tag_config: {
+    #           header_name: "string", # required
+    #         }
     #       },
     #       alias_icp_recordals: [
     #         {
@@ -1740,10 +1889,14 @@ module Aws::CloudFront
     #                 },
     #                 origin_read_timeout: 1,
     #                 origin_keepalive_timeout: 1,
-    #                 ip_address_type: "ipv4" # One of: ["ipv4", "ipv6", "dualstack"]
+    #                 ip_address_type: "ipv4" # One of: ["ipv4", "ipv6", "dualstack"],
+    #                 origin_mtls_config: {
+    #                   client_certificate_arn: "string", # required
+    #                 }
     #               },
     #               vpc_origin_config: {
     #                 vpc_origin_id: "string", # required
+    #                 owner_account_id: "string",
     #                 origin_read_timeout: 1,
     #                 origin_keepalive_timeout: 1
     #               },
@@ -1956,7 +2109,7 @@ module Aws::CloudFront
     #           iam_certificate_id: "ServerCertificateId",
     #           acm_certificate_arn: "string",
     #           ssl_support_method: "sni-only" # One of: ["sni-only", "vip", "static-ip"],
-    #           minimum_protocol_version: "SSLv3" # One of: ["SSLv3", "TLSv1", "TLSv1_2016", "TLSv1.1_2016", "TLSv1.2_2018", "TLSv1.2_2019", "TLSv1.2_2021", "TLSv1.3_2025"],
+    #           minimum_protocol_version: "SSLv3" # One of: ["SSLv3", "TLSv1", "TLSv1_2016", "TLSv1.1_2016", "TLSv1.2_2018", "TLSv1.2_2019", "TLSv1.2_2021", "TLSv1.3_2025", "TLSv1.2_2025"],
     #           certificate: "string",
     #           certificate_source: "cloudfront" # One of: ["cloudfront", "iam", "acm"]
     #         },
@@ -1987,7 +2140,21 @@ module Aws::CloudFront
     #             }
     #           ]
     #         },
-    #         connection_mode: "direct" # One of: ["direct", "tenant-only"]
+    #         connection_mode: "direct" # One of: ["direct", "tenant-only"],
+    #         viewer_mtls_config: {
+    #           mode: "required" # One of: ["required", "optional", "passthrough"],
+    #           trust_store_config: {
+    #             trust_store_id: "string", # required
+    #             advertise_trust_store_ca_names: false,
+    #             ignore_certificate_expiry: false
+    #           }
+    #         },
+    #         connection_function_association: {
+    #           id: "ResourceId", # required
+    #         },
+    #         cache_tag_config: {
+    #           header_name: "string", # required
+    #         }
     #       },
     #       tags: { # required
     #         items: [
@@ -2074,10 +2241,14 @@ module Aws::CloudFront
     #                 },
     #                 origin_read_timeout: 1,
     #                 origin_keepalive_timeout: 1,
-    #                 ip_address_type: "ipv4" # One of: ["ipv4", "ipv6", "dualstack"]
+    #                 ip_address_type: "ipv4" # One of: ["ipv4", "ipv6", "dualstack"],
+    #                 origin_mtls_config: {
+    #                   client_certificate_arn: "string", # required
+    #                 }
     #               },
     #               vpc_origin_config: {
     #                 vpc_origin_id: "string", # required
+    #                 owner_account_id: "string",
     #                 origin_read_timeout: 1,
     #                 origin_keepalive_timeout: 1
     #               },
@@ -2290,7 +2461,7 @@ module Aws::CloudFront
     #           iam_certificate_id: "ServerCertificateId",
     #           acm_certificate_arn: "string",
     #           ssl_support_method: "sni-only" # One of: ["sni-only", "vip", "static-ip"],
-    #           minimum_protocol_version: "SSLv3" # One of: ["SSLv3", "TLSv1", "TLSv1_2016", "TLSv1.1_2016", "TLSv1.2_2018", "TLSv1.2_2019", "TLSv1.2_2021", "TLSv1.3_2025"],
+    #           minimum_protocol_version: "SSLv3" # One of: ["SSLv3", "TLSv1", "TLSv1_2016", "TLSv1.1_2016", "TLSv1.2_2018", "TLSv1.2_2019", "TLSv1.2_2021", "TLSv1.3_2025", "TLSv1.2_2025"],
     #           certificate: "string",
     #           certificate_source: "cloudfront" # One of: ["cloudfront", "iam", "acm"]
     #         },
@@ -2321,7 +2492,21 @@ module Aws::CloudFront
     #             }
     #           ]
     #         },
-    #         connection_mode: "direct" # One of: ["direct", "tenant-only"]
+    #         connection_mode: "direct" # One of: ["direct", "tenant-only"],
+    #         viewer_mtls_config: {
+    #           mode: "required" # One of: ["required", "optional", "passthrough"],
+    #           trust_store_config: {
+    #             trust_store_id: "string", # required
+    #             advertise_trust_store_ca_names: false,
+    #             ignore_certificate_expiry: false
+    #           }
+    #         },
+    #         connection_function_association: {
+    #           id: "ResourceId", # required
+    #         },
+    #         cache_tag_config: {
+    #           header_name: "string", # required
+    #         }
     #       },
     #       alias_icp_recordals: [
     #         {
@@ -2491,6 +2676,8 @@ module Aws::CloudFront
     #   <p>Configuration information about the function, including an optional comment and the function's runtime.</p>
     # @option params [String] :function_code
     #   <p>The function code. For more information about writing a CloudFront function, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/writing-function-code.html">Writing function code for CloudFront Functions</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>
+    # @option params [Types::Tags] :tags
+    #   <p>A complex type that contains zero or more <code>Tag</code> elements.</p>
     # @example To create a function
     #   # Use the following command to create a function.
     #   params = {
@@ -2554,6 +2741,14 @@ module Aws::CloudFront
     #       }
     #     },
     #     function_code: "data", # required
+    #     tags: {
+    #       items: [
+    #         {
+    #           key: "TagKey", # required
+    #           value: "TagValue"
+    #         }
+    #       ]
+    #     }
     #   }
     #   options = {}
     #   response = client.create_function(params, options)
@@ -2718,6 +2913,8 @@ module Aws::CloudFront
     #   <p>The comment of the key value store.</p>
     # @option params [Types::ImportSource] :import_source
     #   <p>The S3 bucket that provides the source for the import. The source must be in a valid JSON format.</p>
+    # @option params [Types::Tags] :tags
+    #   <p>A complex type that contains zero or more <code>Tag</code> elements.</p>
     # @example To create a KeyValueStore
     #   # Use the following command to create a KeyValueStore.
     #   params = {
@@ -2750,6 +2947,14 @@ module Aws::CloudFront
     #     import_source: {
     #       source_type: "S3" # One of: ["S3"], # required
     #       source_arn: "string", # required
+    #     },
+    #     tags: {
+    #       items: [
+    #         {
+    #           key: "TagKey", # required
+    #           value: "TagValue"
+    #         }
+    #       ]
     #     }
     #   }
     #   options = {}
@@ -2815,8 +3020,8 @@ module Aws::CloudFront
     #     origin_access_control_config: { # required
     #       name: "string", # required
     #       description: "string",
-    #       signing_protocol: "sigv4" # One of: ["sigv4"], # required
-    #       signing_behavior: "never" # One of: ["never", "always", "no-override"], # required
+    #       signing_protocol: "sigv4" # One of: ["sigv4", "sigv4a"], # required
+    #       signing_behavior: "never" # One of: ["never", "always", "no-override", "always-amz-auth"], # required
     #       origin_access_control_origin_type: "s3" # One of: ["s3", "mediastore", "mediapackagev2", "lambda"], # required
     #     }
     #   }
@@ -2830,8 +3035,8 @@ module Aws::CloudFront
     #       origin_access_control_config: {
     #         name: "string", # required
     #         description: "string",
-    #         signing_protocol: "sigv4" # One of: ["sigv4"], # required
-    #         signing_behavior: "never" # One of: ["never", "always", "no-override"], # required
+    #         signing_protocol: "sigv4" # One of: ["sigv4", "sigv4a"], # required
+    #         signing_behavior: "never" # One of: ["never", "always", "no-override", "always-amz-auth"], # required
     #         origin_access_control_origin_type: "s3" # One of: ["s3", "mediastore", "mediapackagev2", "lambda"], # required
     #       }
     #     },
@@ -3373,6 +3578,61 @@ module Aws::CloudFront
       request.send_request(options)
     end
 
+    # <p>Creates a trust store.</p>
+    # @param [Hash, Types::CreateTrustStoreRequest] params
+    # @option params [String] :name
+    #   <p>A name for the trust store.</p>
+    # @option params [Types::CaCertificatesBundleSource] :ca_certificates_bundle_source
+    #   <p>The CA certificates bundle source for the trust store.</p>
+    # @option params [Boolean] :use_client_certificate_ocsp_endpoint
+    #   <p>A Boolean that determines whether to use the CA certificate's OCSP endpoint to check certificate revocation status.</p>
+    # @option params [Types::Tags] :tags
+    #   <p>A complex type that contains zero or more <code>Tag</code> elements.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     name: "string", # required
+    #     ca_certificates_bundle_source: { # required
+    #       # One of:
+    #       ca_certificates_bundle_s3_location: {
+    #         bucket: "string", # required
+    #         key: "string", # required
+    #         region: "string", # required
+    #         version: "string"
+    #       }
+    #     },
+    #     use_client_certificate_ocsp_endpoint: false,
+    #     tags: {
+    #       items: [
+    #         {
+    #           key: "TagKey", # required
+    #           value: "TagValue"
+    #         }
+    #       ]
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.create_trust_store(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     trust_store: {
+    #       id: "string",
+    #       arn: "string",
+    #       name: "string",
+    #       status: "pending" # One of: ["pending", "active", "failed"],
+    #       number_of_ca_certificates: 1,
+    #       last_modified_time: Time.now,
+    #       reason: "string",
+    #       use_client_certificate_ocsp_endpoint: false
+    #     },
+    #     e_tag: "string"
+    #   }
+    # @return [Types::CreateTrustStoreResult]
+    def create_trust_store(params = {}, options = {})
+      request = build_request(:create_trust_store, params)
+      request.send_request(options)
+    end
+
     # <p>Create an Amazon CloudFront VPC origin.</p>
     # @param [Hash, Types::CreateVpcOriginRequest] params
     # @option params [Types::VpcOriginEndpointConfig] :vpc_origin_endpoint_config
@@ -3436,7 +3696,8 @@ module Aws::CloudFront
     #       origin_ssl_protocols: {
     #         quantity: 1, # required
     #         items: ["SSLv3" # One of: ["SSLv3", "TLSv1", "TLSv1.1", "TLSv1.2"]], # required
-    #       }
+    #       },
+    #       ip_address_type: "ipv4" # One of: ["ipv4", "dualstack"]
     #     },
     #     tags: {
     #       items: [
@@ -3455,6 +3716,7 @@ module Aws::CloudFront
     #     vpc_origin: {
     #       id: "string", # required
     #       arn: "string", # required
+    #       account_id: "string",
     #       status: "string", # required
     #       created_time: Time.now, # required
     #       last_modified_time: Time.now, # required
@@ -3467,7 +3729,8 @@ module Aws::CloudFront
     #         origin_ssl_protocols: {
     #           quantity: 1, # required
     #           items: ["SSLv3" # One of: ["SSLv3", "TLSv1", "TLSv1.1", "TLSv1.2"]], # required
-    #         }
+    #         },
+    #         ip_address_type: "ipv4" # One of: ["ipv4", "dualstack"]
     #       }
     #     },
     #     location: "string",
@@ -3545,6 +3808,28 @@ module Aws::CloudFront
       request.send_request(options)
     end
 
+    # <p>Deletes a connection function.</p>
+    # @param [Hash, Types::DeleteConnectionFunctionRequest] params
+    # @option params [String] :id
+    #   <p>The connection function's ID.</p>
+    # @option params [String] :if_match
+    #   <p>The current version (<code>ETag</code> value) of the connection function you are deleting.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     id: "ResourceId", # required
+    #     if_match: "string", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_connection_function(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Smithy::Schema::EmptyStructure]
+    def delete_connection_function(params = {}, options = {})
+      request = build_request(:delete_connection_function, params)
+      request.send_request(options)
+    end
+
     # <p>Deletes a connection group.</p>
     # @param [Hash, Types::DeleteConnectionGroupRequest] params
     # @option params [String] :id
@@ -3589,7 +3874,7 @@ module Aws::CloudFront
       request.send_request(options)
     end
 
-    # <p>Delete a distribution.</p>
+    # <p>Delete a distribution.</p> <important> <p>Before you can delete a distribution, you must disable it, which requires permission to update the distribution. Once deleted, a distribution cannot be recovered.</p> </important>
     # @param [Hash, Types::DeleteDistributionRequest] params
     # @option params [String] :id
     #   <p>The distribution ID.</p>
@@ -3860,6 +4145,25 @@ module Aws::CloudFront
       request.send_request(options)
     end
 
+    # <p>Deletes the resource policy attached to the CloudFront resource.</p>
+    # @param [Hash, Types::DeleteResourcePolicyRequest] params
+    # @option params [String] :resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the CloudFront resource for which the resource policy should be deleted.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     resource_arn: "string", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_resource_policy(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Smithy::Schema::EmptyStructure]
+    def delete_resource_policy(params = {}, options = {})
+      request = build_request(:delete_resource_policy, params)
+      request.send_request(options)
+    end
+
     # <p>Deletes a response headers policy.</p> <p>You cannot delete a response headers policy if it's attached to a cache behavior. First update your distributions to remove the response headers policy from all cache behaviors, then delete the response headers policy.</p> <p>To delete a response headers policy, you must provide the policy's identifier and version. To get these values, you can use <code>ListResponseHeadersPolicies</code> or <code>GetResponseHeadersPolicy</code>.</p>
     # @param [Hash, Types::DeleteResponseHeadersPolicyRequest] params
     # @option params [String] :id
@@ -3901,6 +4205,28 @@ module Aws::CloudFront
     # @return [Smithy::Schema::EmptyStructure]
     def delete_streaming_distribution(params = {}, options = {})
       request = build_request(:delete_streaming_distribution, params)
+      request.send_request(options)
+    end
+
+    # <p>Deletes a trust store.</p>
+    # @param [Hash, Types::DeleteTrustStoreRequest] params
+    # @option params [String] :id
+    #   <p>The trust store's ID.</p>
+    # @option params [String] :if_match
+    #   <p>The current version (<code>ETag</code> value) of the trust store you are deleting.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     id: "ResourceId", # required
+    #     if_match: "string", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_trust_store(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Smithy::Schema::EmptyStructure]
+    def delete_trust_store(params = {}, options = {})
+      request = build_request(:delete_trust_store, params)
       request.send_request(options)
     end
 
@@ -3956,6 +4282,7 @@ module Aws::CloudFront
     #     vpc_origin: {
     #       id: "string", # required
     #       arn: "string", # required
+    #       account_id: "string",
     #       status: "string", # required
     #       created_time: Time.now, # required
     #       last_modified_time: Time.now, # required
@@ -3968,7 +4295,8 @@ module Aws::CloudFront
     #         origin_ssl_protocols: {
     #           quantity: 1, # required
     #           items: ["SSLv3" # One of: ["SSLv3", "TLSv1", "TLSv1.1", "TLSv1.2"]], # required
-    #         }
+    #         },
+    #         ip_address_type: "ipv4" # One of: ["ipv4", "dualstack"]
     #       }
     #     },
     #     e_tag: "string"
@@ -3976,6 +4304,51 @@ module Aws::CloudFront
     # @return [Types::DeleteVpcOriginResult]
     def delete_vpc_origin(params = {}, options = {})
       request = build_request(:delete_vpc_origin, params)
+      request.send_request(options)
+    end
+
+    # <p>Describes a connection function.</p>
+    # @param [Hash, Types::DescribeConnectionFunctionRequest] params
+    # @option params [String] :identifier
+    #   <p>The connection function's identifier.</p>
+    # @option params [String] :stage
+    #   <p>The connection function's stage.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     identifier: "string", # required
+    #     stage: "DEVELOPMENT" # One of: ["DEVELOPMENT", "LIVE"]
+    #   }
+    #   options = {}
+    #   response = client.describe_connection_function(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     connection_function_summary: {
+    #       name: "FunctionName", # required
+    #       id: "ResourceId", # required
+    #       connection_function_config: { # required
+    #         comment: "string", # required
+    #         runtime: "cloudfront-js-1.0" # One of: ["cloudfront-js-1.0", "cloudfront-js-2.0"], # required
+    #         key_value_store_associations: {
+    #           quantity: 1, # required
+    #           items: [
+    #             {
+    #               key_value_store_arn: "KeyValueStoreARN", # required
+    #             }
+    #           ]
+    #         }
+    #       },
+    #       connection_function_arn: "string", # required
+    #       status: "string", # required
+    #       stage: "DEVELOPMENT" # One of: ["DEVELOPMENT", "LIVE"], # required
+    #       created_time: Time.now, # required
+    #       last_modified_time: Time.now, # required
+    #     },
+    #     e_tag: "string"
+    #   }
+    # @return [Types::DescribeConnectionFunctionResult]
+    def describe_connection_function(params = {}, options = {})
+      request = build_request(:describe_connection_function, params)
       request.send_request(options)
     end
 
@@ -4141,6 +4514,18 @@ module Aws::CloudFront
     #       name: "AnycastIpListName", # required
     #       status: "string", # required
     #       arn: "string", # required
+    #       ip_address_type: "ipv4" # One of: ["ipv4", "ipv6", "dualstack"],
+    #       ipam_config: {
+    #         quantity: 1, # required
+    #         ipam_cidr_configs: [ # required
+    #           {
+    #             cidr: "string", # required
+    #             ipam_pool_arn: "string", # required
+    #             anycast_ip: "string",
+    #             status: "provisioned" # One of: ["provisioned", "failed-provision", "provisioning", "deprovisioned", "failed-deprovision", "deprovisioning", "advertised", "failed-advertise", "advertising", "withdrawn", "failed-withdraw", "withdrawing"]
+    #           }
+    #         ]
+    #       },
     #       anycast_ips: ["string"], # required
     #       ip_count: 1, # required
     #       last_modified_time: Time.now, # required
@@ -4314,6 +4699,32 @@ module Aws::CloudFront
     # @return [Types::GetCloudFrontOriginAccessIdentityConfigResult]
     def get_cloud_front_origin_access_identity_config(params = {}, options = {})
       request = build_request(:get_cloud_front_origin_access_identity_config, params)
+      request.send_request(options)
+    end
+
+    # <p>Gets a connection function.</p>
+    # @param [Hash, Types::GetConnectionFunctionRequest] params
+    # @option params [String] :identifier
+    #   <p>The connection function's identifier.</p>
+    # @option params [String] :stage
+    #   <p>The connection function's stage.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     identifier: "string", # required
+    #     stage: "DEVELOPMENT" # One of: ["DEVELOPMENT", "LIVE"]
+    #   }
+    #   options = {}
+    #   response = client.get_connection_function(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     connection_function_code: "data",
+    #     e_tag: "string",
+    #     content_type: "string"
+    #   }
+    # @return [Types::GetConnectionFunctionResult]
+    def get_connection_function(params = {}, options = {})
+      request = build_request(:get_connection_function, params)
       request.send_request(options)
     end
 
@@ -4572,10 +4983,14 @@ module Aws::CloudFront
     #                 },
     #                 origin_read_timeout: 1,
     #                 origin_keepalive_timeout: 1,
-    #                 ip_address_type: "ipv4" # One of: ["ipv4", "ipv6", "dualstack"]
+    #                 ip_address_type: "ipv4" # One of: ["ipv4", "ipv6", "dualstack"],
+    #                 origin_mtls_config: {
+    #                   client_certificate_arn: "string", # required
+    #                 }
     #               },
     #               vpc_origin_config: {
     #                 vpc_origin_id: "string", # required
+    #                 owner_account_id: "string",
     #                 origin_read_timeout: 1,
     #                 origin_keepalive_timeout: 1
     #               },
@@ -4788,7 +5203,7 @@ module Aws::CloudFront
     #           iam_certificate_id: "ServerCertificateId",
     #           acm_certificate_arn: "string",
     #           ssl_support_method: "sni-only" # One of: ["sni-only", "vip", "static-ip"],
-    #           minimum_protocol_version: "SSLv3" # One of: ["SSLv3", "TLSv1", "TLSv1_2016", "TLSv1.1_2016", "TLSv1.2_2018", "TLSv1.2_2019", "TLSv1.2_2021", "TLSv1.3_2025"],
+    #           minimum_protocol_version: "SSLv3" # One of: ["SSLv3", "TLSv1", "TLSv1_2016", "TLSv1.1_2016", "TLSv1.2_2018", "TLSv1.2_2019", "TLSv1.2_2021", "TLSv1.3_2025", "TLSv1.2_2025"],
     #           certificate: "string",
     #           certificate_source: "cloudfront" # One of: ["cloudfront", "iam", "acm"]
     #         },
@@ -4819,7 +5234,21 @@ module Aws::CloudFront
     #             }
     #           ]
     #         },
-    #         connection_mode: "direct" # One of: ["direct", "tenant-only"]
+    #         connection_mode: "direct" # One of: ["direct", "tenant-only"],
+    #         viewer_mtls_config: {
+    #           mode: "required" # One of: ["required", "optional", "passthrough"],
+    #           trust_store_config: {
+    #             trust_store_id: "string", # required
+    #             advertise_trust_store_ca_names: false,
+    #             ignore_certificate_expiry: false
+    #           }
+    #         },
+    #         connection_function_association: {
+    #           id: "ResourceId", # required
+    #         },
+    #         cache_tag_config: {
+    #           header_name: "string", # required
+    #         }
     #       },
     #       alias_icp_recordals: [
     #         {
@@ -4886,10 +5315,14 @@ module Aws::CloudFront
     #               },
     #               origin_read_timeout: 1,
     #               origin_keepalive_timeout: 1,
-    #               ip_address_type: "ipv4" # One of: ["ipv4", "ipv6", "dualstack"]
+    #               ip_address_type: "ipv4" # One of: ["ipv4", "ipv6", "dualstack"],
+    #               origin_mtls_config: {
+    #                 client_certificate_arn: "string", # required
+    #               }
     #             },
     #             vpc_origin_config: {
     #               vpc_origin_id: "string", # required
+    #               owner_account_id: "string",
     #               origin_read_timeout: 1,
     #               origin_keepalive_timeout: 1
     #             },
@@ -5102,7 +5535,7 @@ module Aws::CloudFront
     #         iam_certificate_id: "ServerCertificateId",
     #         acm_certificate_arn: "string",
     #         ssl_support_method: "sni-only" # One of: ["sni-only", "vip", "static-ip"],
-    #         minimum_protocol_version: "SSLv3" # One of: ["SSLv3", "TLSv1", "TLSv1_2016", "TLSv1.1_2016", "TLSv1.2_2018", "TLSv1.2_2019", "TLSv1.2_2021", "TLSv1.3_2025"],
+    #         minimum_protocol_version: "SSLv3" # One of: ["SSLv3", "TLSv1", "TLSv1_2016", "TLSv1.1_2016", "TLSv1.2_2018", "TLSv1.2_2019", "TLSv1.2_2021", "TLSv1.3_2025", "TLSv1.2_2025"],
     #         certificate: "string",
     #         certificate_source: "cloudfront" # One of: ["cloudfront", "iam", "acm"]
     #       },
@@ -5133,7 +5566,21 @@ module Aws::CloudFront
     #           }
     #         ]
     #       },
-    #       connection_mode: "direct" # One of: ["direct", "tenant-only"]
+    #       connection_mode: "direct" # One of: ["direct", "tenant-only"],
+    #       viewer_mtls_config: {
+    #         mode: "required" # One of: ["required", "optional", "passthrough"],
+    #         trust_store_config: {
+    #           trust_store_id: "string", # required
+    #           advertise_trust_store_ca_names: false,
+    #           ignore_certificate_expiry: false
+    #         }
+    #       },
+    #       connection_function_association: {
+    #         id: "ResourceId", # required
+    #       },
+    #       cache_tag_config: {
+    #         header_name: "string", # required
+    #       }
     #     },
     #     e_tag: "string"
     #   }
@@ -5686,8 +6133,8 @@ module Aws::CloudFront
     #       origin_access_control_config: {
     #         name: "string", # required
     #         description: "string",
-    #         signing_protocol: "sigv4" # One of: ["sigv4"], # required
-    #         signing_behavior: "never" # One of: ["never", "always", "no-override"], # required
+    #         signing_protocol: "sigv4" # One of: ["sigv4", "sigv4a"], # required
+    #         signing_behavior: "never" # One of: ["never", "always", "no-override", "always-amz-auth"], # required
     #         origin_access_control_origin_type: "s3" # One of: ["s3", "mediastore", "mediapackagev2", "lambda"], # required
     #       }
     #     },
@@ -5715,8 +6162,8 @@ module Aws::CloudFront
     #     origin_access_control_config: {
     #       name: "string", # required
     #       description: "string",
-    #       signing_protocol: "sigv4" # One of: ["sigv4"], # required
-    #       signing_behavior: "never" # One of: ["never", "always", "no-override"], # required
+    #       signing_protocol: "sigv4" # One of: ["sigv4", "sigv4a"], # required
+    #       signing_behavior: "never" # One of: ["never", "always", "no-override", "always-amz-auth"], # required
     #       origin_access_control_origin_type: "s3" # One of: ["s3", "mediastore", "mediapackagev2", "lambda"], # required
     #     },
     #     e_tag: "string"
@@ -5916,6 +6363,28 @@ module Aws::CloudFront
     # @return [Types::GetRealtimeLogConfigResult]
     def get_realtime_log_config(params = {}, options = {})
       request = build_request(:get_realtime_log_config, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves the resource policy for the specified CloudFront resource that you own and have shared.</p>
+    # @param [Hash, Types::GetResourcePolicyRequest] params
+    # @option params [String] :resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the CloudFront resource that is associated with the resource policy.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     resource_arn: "string", # required
+    #   }
+    #   options = {}
+    #   response = client.get_resource_policy(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     resource_arn: "string",
+    #     policy_document: "string"
+    #   }
+    # @return [Types::GetResourcePolicyResult]
+    def get_resource_policy(params = {}, options = {})
+      request = build_request(:get_resource_policy, params)
       request.send_request(options)
     end
 
@@ -6227,6 +6696,37 @@ module Aws::CloudFront
       request.send_request(options)
     end
 
+    # <p>Gets a trust store.</p>
+    # @param [Hash, Types::GetTrustStoreRequest] params
+    # @option params [String] :identifier
+    #   <p>The trust store's identifier.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     identifier: "string", # required
+    #   }
+    #   options = {}
+    #   response = client.get_trust_store(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     trust_store: {
+    #       id: "string",
+    #       arn: "string",
+    #       name: "string",
+    #       status: "pending" # One of: ["pending", "active", "failed"],
+    #       number_of_ca_certificates: 1,
+    #       last_modified_time: Time.now,
+    #       reason: "string",
+    #       use_client_certificate_ocsp_endpoint: false
+    #     },
+    #     e_tag: "string"
+    #   }
+    # @return [Types::GetTrustStoreResult]
+    def get_trust_store(params = {}, options = {})
+      request = build_request(:get_trust_store, params)
+      request.send_request(options)
+    end
+
     # <p>Get the details of an Amazon CloudFront VPC origin.</p>
     # @param [Hash, Types::GetVpcOriginRequest] params
     # @option params [String] :id
@@ -6275,6 +6775,7 @@ module Aws::CloudFront
     #     vpc_origin: {
     #       id: "string", # required
     #       arn: "string", # required
+    #       account_id: "string",
     #       status: "string", # required
     #       created_time: Time.now, # required
     #       last_modified_time: Time.now, # required
@@ -6287,7 +6788,8 @@ module Aws::CloudFront
     #         origin_ssl_protocols: {
     #           quantity: 1, # required
     #           items: ["SSLv3" # One of: ["SSLv3", "TLSv1", "TLSv1.1", "TLSv1.2"]], # required
-    #         }
+    #         },
+    #         ip_address_type: "ipv4" # One of: ["ipv4", "dualstack"]
     #       }
     #     },
     #     e_tag: "string"
@@ -6323,6 +6825,19 @@ module Aws::CloudFront
     #           arn: "string", # required
     #           ip_count: 1, # required
     #           last_modified_time: Time.now, # required
+    #           ip_address_type: "ipv4" # One of: ["ipv4", "ipv6", "dualstack"],
+    #           e_tag: "string",
+    #           ipam_config: {
+    #             quantity: 1, # required
+    #             ipam_cidr_configs: [ # required
+    #               {
+    #                 cidr: "string", # required
+    #                 ipam_pool_arn: "string", # required
+    #                 anycast_ip: "string",
+    #                 status: "provisioned" # One of: ["provisioned", "failed-provision", "provisioning", "deprovisioned", "failed-deprovision", "deprovisioning", "advertised", "failed-advertise", "advertising", "withdrawn", "failed-withdraw", "withdrawing"]
+    #               }
+    #             ]
+    #           }
     #         }
     #       ],
     #       marker: "string", # required
@@ -6485,6 +7000,56 @@ module Aws::CloudFront
     # @return [Types::ListConflictingAliasesResult]
     def list_conflicting_aliases(params = {}, options = {})
       request = build_request(:list_conflicting_aliases, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists connection functions.</p>
+    # @param [Hash, Types::ListConnectionFunctionsRequest] params
+    # @option params [String] :marker
+    #   <p>Use this field when paginating results to indicate where to begin in your list. The response includes items in the list that occur after the marker. To get the next page of the list, set this field's value to the value of <code>NextMarker</code> from the current page's response.</p>
+    # @option params [Integer] :max_items
+    #   <p>The maximum number of connection functions that you want returned in the response.</p>
+    # @option params [String] :stage
+    #   <p>The connection function's stage.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     marker: "string",
+    #     max_items: 1,
+    #     stage: "DEVELOPMENT" # One of: ["DEVELOPMENT", "LIVE"]
+    #   }
+    #   options = {}
+    #   response = client.list_connection_functions(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     next_marker: "string",
+    #     connection_functions: [
+    #       {
+    #         name: "FunctionName", # required
+    #         id: "ResourceId", # required
+    #         connection_function_config: { # required
+    #           comment: "string", # required
+    #           runtime: "cloudfront-js-1.0" # One of: ["cloudfront-js-1.0", "cloudfront-js-2.0"], # required
+    #           key_value_store_associations: {
+    #             quantity: 1, # required
+    #             items: [
+    #               {
+    #                 key_value_store_arn: "KeyValueStoreARN", # required
+    #               }
+    #             ]
+    #           }
+    #         },
+    #         connection_function_arn: "string", # required
+    #         status: "string", # required
+    #         stage: "DEVELOPMENT" # One of: ["DEVELOPMENT", "LIVE"], # required
+    #         created_time: Time.now, # required
+    #         last_modified_time: Time.now, # required
+    #       }
+    #     ]
+    #   }
+    # @return [Types::ListConnectionFunctionsResult]
+    def list_connection_functions(params = {}, options = {})
+      request = build_request(:list_connection_functions, params)
       request.send_request(options)
     end
 
@@ -6779,10 +7344,14 @@ module Aws::CloudFront
     #                   },
     #                   origin_read_timeout: 1,
     #                   origin_keepalive_timeout: 1,
-    #                   ip_address_type: "ipv4" # One of: ["ipv4", "ipv6", "dualstack"]
+    #                   ip_address_type: "ipv4" # One of: ["ipv4", "ipv6", "dualstack"],
+    #                   origin_mtls_config: {
+    #                     client_certificate_arn: "string", # required
+    #                   }
     #                 },
     #                 vpc_origin_config: {
     #                   vpc_origin_id: "string", # required
+    #                   owner_account_id: "string",
     #                   origin_read_timeout: 1,
     #                   origin_keepalive_timeout: 1
     #                 },
@@ -6989,7 +7558,7 @@ module Aws::CloudFront
     #             iam_certificate_id: "ServerCertificateId",
     #             acm_certificate_arn: "string",
     #             ssl_support_method: "sni-only" # One of: ["sni-only", "vip", "static-ip"],
-    #             minimum_protocol_version: "SSLv3" # One of: ["SSLv3", "TLSv1", "TLSv1_2016", "TLSv1.1_2016", "TLSv1.2_2018", "TLSv1.2_2019", "TLSv1.2_2021", "TLSv1.3_2025"],
+    #             minimum_protocol_version: "SSLv3" # One of: ["SSLv3", "TLSv1", "TLSv1_2016", "TLSv1.1_2016", "TLSv1.2_2018", "TLSv1.2_2019", "TLSv1.2_2021", "TLSv1.3_2025", "TLSv1.2_2025"],
     #             certificate: "string",
     #             certificate_source: "cloudfront" # One of: ["cloudfront", "iam", "acm"]
     #           },
@@ -7011,7 +7580,18 @@ module Aws::CloudFront
     #           ],
     #           staging: false, # required
     #           connection_mode: "direct" # One of: ["direct", "tenant-only"],
-    #           anycast_ip_list_id: "string"
+    #           anycast_ip_list_id: "string",
+    #           viewer_mtls_config: {
+    #             mode: "required" # One of: ["required", "optional", "passthrough"],
+    #             trust_store_config: {
+    #               trust_store_id: "string", # required
+    #               advertise_trust_store_ca_names: false,
+    #               ignore_certificate_expiry: false
+    #             }
+    #           },
+    #           connection_function_association: {
+    #             id: "ResourceId", # required
+    #           }
     #         }
     #       ]
     #     }
@@ -7089,10 +7669,14 @@ module Aws::CloudFront
     #                   },
     #                   origin_read_timeout: 1,
     #                   origin_keepalive_timeout: 1,
-    #                   ip_address_type: "ipv4" # One of: ["ipv4", "ipv6", "dualstack"]
+    #                   ip_address_type: "ipv4" # One of: ["ipv4", "ipv6", "dualstack"],
+    #                   origin_mtls_config: {
+    #                     client_certificate_arn: "string", # required
+    #                   }
     #                 },
     #                 vpc_origin_config: {
     #                   vpc_origin_id: "string", # required
+    #                   owner_account_id: "string",
     #                   origin_read_timeout: 1,
     #                   origin_keepalive_timeout: 1
     #                 },
@@ -7299,7 +7883,7 @@ module Aws::CloudFront
     #             iam_certificate_id: "ServerCertificateId",
     #             acm_certificate_arn: "string",
     #             ssl_support_method: "sni-only" # One of: ["sni-only", "vip", "static-ip"],
-    #             minimum_protocol_version: "SSLv3" # One of: ["SSLv3", "TLSv1", "TLSv1_2016", "TLSv1.1_2016", "TLSv1.2_2018", "TLSv1.2_2019", "TLSv1.2_2021", "TLSv1.3_2025"],
+    #             minimum_protocol_version: "SSLv3" # One of: ["SSLv3", "TLSv1", "TLSv1_2016", "TLSv1.1_2016", "TLSv1.2_2018", "TLSv1.2_2019", "TLSv1.2_2021", "TLSv1.3_2025", "TLSv1.2_2025"],
     #             certificate: "string",
     #             certificate_source: "cloudfront" # One of: ["cloudfront", "iam", "acm"]
     #           },
@@ -7321,7 +7905,18 @@ module Aws::CloudFront
     #           ],
     #           staging: false, # required
     #           connection_mode: "direct" # One of: ["direct", "tenant-only"],
-    #           anycast_ip_list_id: "string"
+    #           anycast_ip_list_id: "string",
+    #           viewer_mtls_config: {
+    #             mode: "required" # One of: ["required", "optional", "passthrough"],
+    #             trust_store_config: {
+    #               trust_store_id: "string", # required
+    #               advertise_trust_store_ca_names: false,
+    #               ignore_certificate_expiry: false
+    #             }
+    #           },
+    #           connection_function_association: {
+    #             id: "ResourceId", # required
+    #           }
     #         }
     #       ]
     #     }
@@ -7363,6 +7958,331 @@ module Aws::CloudFront
     # @return [Types::ListDistributionsByCachePolicyIdResult]
     def list_distributions_by_cache_policy_id(params = {}, options = {})
       request = build_request(:list_distributions_by_cache_policy_id, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists distributions by connection function.</p>
+    # @param [Hash, Types::ListDistributionsByConnectionFunctionRequest] params
+    # @option params [String] :marker
+    #   <p>Use this field when paginating results to indicate where to begin in your list. The response includes items in the list that occur after the marker. To get the next page of the list, set this field's value to the value of <code>NextMarker</code> from the current page's response.</p>
+    # @option params [Integer] :max_items
+    #   <p>The maximum number of distributions that you want returned in the response.</p>
+    # @option params [String] :connection_function_identifier
+    #   <p>The distributions by connection function identifier.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     marker: "string",
+    #     max_items: 1,
+    #     connection_function_identifier: "string", # required
+    #   }
+    #   options = {}
+    #   response = client.list_distributions_by_connection_function(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     distribution_list: {
+    #       marker: "string", # required
+    #       next_marker: "string",
+    #       max_items: 1, # required
+    #       is_truncated: false, # required
+    #       quantity: 1, # required
+    #       items: [
+    #         {
+    #           id: "string", # required
+    #           arn: "string", # required
+    #           e_tag: "string",
+    #           status: "string", # required
+    #           last_modified_time: Time.now, # required
+    #           domain_name: "string", # required
+    #           aliases: { # required
+    #             quantity: 1, # required
+    #             items: ["string"]
+    #           },
+    #           origins: { # required
+    #             quantity: 1, # required
+    #             items: [ # required
+    #               {
+    #                 id: "string", # required
+    #                 domain_name: "string", # required
+    #                 origin_path: "string",
+    #                 custom_headers: {
+    #                   quantity: 1, # required
+    #                   items: [
+    #                     {
+    #                       header_name: "string", # required
+    #                       header_value: "sensitiveStringType", # required
+    #                     }
+    #                   ]
+    #                 },
+    #                 s3_origin_config: {
+    #                   origin_access_identity: "string", # required
+    #                   origin_read_timeout: 1
+    #                 },
+    #                 custom_origin_config: {
+    #                   http_port: 1, # required
+    #                   https_port: 1, # required
+    #                   origin_protocol_policy: "http-only" # One of: ["http-only", "match-viewer", "https-only"], # required
+    #                   origin_ssl_protocols: {
+    #                     quantity: 1, # required
+    #                     items: ["SSLv3" # One of: ["SSLv3", "TLSv1", "TLSv1.1", "TLSv1.2"]], # required
+    #                   },
+    #                   origin_read_timeout: 1,
+    #                   origin_keepalive_timeout: 1,
+    #                   ip_address_type: "ipv4" # One of: ["ipv4", "ipv6", "dualstack"],
+    #                   origin_mtls_config: {
+    #                     client_certificate_arn: "string", # required
+    #                   }
+    #                 },
+    #                 vpc_origin_config: {
+    #                   vpc_origin_id: "string", # required
+    #                   owner_account_id: "string",
+    #                   origin_read_timeout: 1,
+    #                   origin_keepalive_timeout: 1
+    #                 },
+    #                 connection_attempts: 1,
+    #                 connection_timeout: 1,
+    #                 response_completion_timeout: 1,
+    #                 origin_shield: {
+    #                   enabled: false, # required
+    #                   origin_shield_region: "OriginShieldRegion"
+    #                 },
+    #                 origin_access_control_id: "string"
+    #               }
+    #             ]
+    #           },
+    #           origin_groups: {
+    #             quantity: 1, # required
+    #             items: [
+    #               {
+    #                 id: "string", # required
+    #                 failover_criteria: { # required
+    #                   status_codes: { # required
+    #                     quantity: 1, # required
+    #                     items: [1], # required
+    #                   }
+    #                 },
+    #                 members: { # required
+    #                   quantity: 1, # required
+    #                   items: [ # required
+    #                     {
+    #                       origin_id: "string", # required
+    #                     }
+    #                   ]
+    #                 },
+    #                 selection_criteria: "default" # One of: ["default", "media-quality-based"]
+    #               }
+    #             ]
+    #           },
+    #           default_cache_behavior: { # required
+    #             target_origin_id: "string", # required
+    #             trusted_signers: {
+    #               enabled: false, # required
+    #               quantity: 1, # required
+    #               items: ["string"]
+    #             },
+    #             trusted_key_groups: {
+    #               enabled: false, # required
+    #               quantity: 1, # required
+    #               items: ["string"]
+    #             },
+    #             viewer_protocol_policy: "allow-all" # One of: ["allow-all", "https-only", "redirect-to-https"], # required
+    #             allowed_methods: {
+    #               quantity: 1, # required
+    #               items: ["GET" # One of: ["GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"]], # required
+    #               cached_methods: {
+    #                 quantity: 1, # required
+    #                 items: ["GET" # One of: ["GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"]], # required
+    #               }
+    #             },
+    #             smooth_streaming: false,
+    #             compress: false,
+    #             lambda_function_associations: {
+    #               quantity: 1, # required
+    #               items: [
+    #                 {
+    #                   lambda_function_arn: "LambdaFunctionARN", # required
+    #                   event_type: "viewer-request" # One of: ["viewer-request", "viewer-response", "origin-request", "origin-response"], # required
+    #                   include_body: false
+    #                 }
+    #               ]
+    #             },
+    #             function_associations: {
+    #               quantity: 1, # required
+    #               items: [
+    #                 {
+    #                   function_arn: "FunctionARN", # required
+    #                   event_type: "viewer-request" # One of: ["viewer-request", "viewer-response", "origin-request", "origin-response"], # required
+    #                 }
+    #               ]
+    #             },
+    #             field_level_encryption_id: "string",
+    #             realtime_log_config_arn: "string",
+    #             cache_policy_id: "string",
+    #             origin_request_policy_id: "string",
+    #             response_headers_policy_id: "string",
+    #             grpc_config: {
+    #               enabled: false, # required
+    #             },
+    #             forwarded_values: {
+    #               query_string: false, # required
+    #               cookies: { # required
+    #                 forward: "none" # One of: ["none", "whitelist", "all"], # required
+    #                 whitelisted_names: {
+    #                   quantity: 1, # required
+    #                   items: ["string"]
+    #                 }
+    #               },
+    #               headers: {
+    #                 quantity: 1, # required
+    #                 items: ["string"]
+    #               },
+    #               query_string_cache_keys: {
+    #                 quantity: 1, # required
+    #                 items: ["string"]
+    #               }
+    #             },
+    #             min_ttl: 1,
+    #             default_ttl: 1,
+    #             max_ttl: 1
+    #           },
+    #           cache_behaviors: { # required
+    #             quantity: 1, # required
+    #             items: [
+    #               {
+    #                 path_pattern: "string", # required
+    #                 target_origin_id: "string", # required
+    #                 trusted_signers: {
+    #                   enabled: false, # required
+    #                   quantity: 1, # required
+    #                   items: ["string"]
+    #                 },
+    #                 trusted_key_groups: {
+    #                   enabled: false, # required
+    #                   quantity: 1, # required
+    #                   items: ["string"]
+    #                 },
+    #                 viewer_protocol_policy: "allow-all" # One of: ["allow-all", "https-only", "redirect-to-https"], # required
+    #                 allowed_methods: {
+    #                   quantity: 1, # required
+    #                   items: ["GET" # One of: ["GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"]], # required
+    #                   cached_methods: {
+    #                     quantity: 1, # required
+    #                     items: ["GET" # One of: ["GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"]], # required
+    #                   }
+    #                 },
+    #                 smooth_streaming: false,
+    #                 compress: false,
+    #                 lambda_function_associations: {
+    #                   quantity: 1, # required
+    #                   items: [
+    #                     {
+    #                       lambda_function_arn: "LambdaFunctionARN", # required
+    #                       event_type: "viewer-request" # One of: ["viewer-request", "viewer-response", "origin-request", "origin-response"], # required
+    #                       include_body: false
+    #                     }
+    #                   ]
+    #                 },
+    #                 function_associations: {
+    #                   quantity: 1, # required
+    #                   items: [
+    #                     {
+    #                       function_arn: "FunctionARN", # required
+    #                       event_type: "viewer-request" # One of: ["viewer-request", "viewer-response", "origin-request", "origin-response"], # required
+    #                     }
+    #                   ]
+    #                 },
+    #                 field_level_encryption_id: "string",
+    #                 realtime_log_config_arn: "string",
+    #                 cache_policy_id: "string",
+    #                 origin_request_policy_id: "string",
+    #                 response_headers_policy_id: "string",
+    #                 grpc_config: {
+    #                   enabled: false, # required
+    #                 },
+    #                 forwarded_values: {
+    #                   query_string: false, # required
+    #                   cookies: { # required
+    #                     forward: "none" # One of: ["none", "whitelist", "all"], # required
+    #                     whitelisted_names: {
+    #                       quantity: 1, # required
+    #                       items: ["string"]
+    #                     }
+    #                   },
+    #                   headers: {
+    #                     quantity: 1, # required
+    #                     items: ["string"]
+    #                   },
+    #                   query_string_cache_keys: {
+    #                     quantity: 1, # required
+    #                     items: ["string"]
+    #                   }
+    #                 },
+    #                 min_ttl: 1,
+    #                 default_ttl: 1,
+    #                 max_ttl: 1
+    #               }
+    #             ]
+    #           },
+    #           custom_error_responses: { # required
+    #             quantity: 1, # required
+    #             items: [
+    #               {
+    #                 error_code: 1, # required
+    #                 response_page_path: "string",
+    #                 response_code: "string",
+    #                 error_caching_min_ttl: 1
+    #               }
+    #             ]
+    #           },
+    #           comment: "sensitiveStringType", # required
+    #           price_class: "PriceClass_100" # One of: ["PriceClass_100", "PriceClass_200", "PriceClass_All", "None"], # required
+    #           enabled: false, # required
+    #           viewer_certificate: { # required
+    #             cloud_front_default_certificate: false,
+    #             iam_certificate_id: "ServerCertificateId",
+    #             acm_certificate_arn: "string",
+    #             ssl_support_method: "sni-only" # One of: ["sni-only", "vip", "static-ip"],
+    #             minimum_protocol_version: "SSLv3" # One of: ["SSLv3", "TLSv1", "TLSv1_2016", "TLSv1.1_2016", "TLSv1.2_2018", "TLSv1.2_2019", "TLSv1.2_2021", "TLSv1.3_2025", "TLSv1.2_2025"],
+    #             certificate: "string",
+    #             certificate_source: "cloudfront" # One of: ["cloudfront", "iam", "acm"]
+    #           },
+    #           restrictions: { # required
+    #             geo_restriction: { # required
+    #               restriction_type: "blacklist" # One of: ["blacklist", "whitelist", "none"], # required
+    #               quantity: 1, # required
+    #               items: ["string"]
+    #             }
+    #           },
+    #           web_acl_id: "string", # required
+    #           http_version: "http1.1" # One of: ["http1.1", "http2", "http3", "http2and3"], # required
+    #           is_ipv6_enabled: false, # required
+    #           alias_icp_recordals: [
+    #             {
+    #               cname: "string",
+    #               icp_recordal_status: "APPROVED" # One of: ["APPROVED", "SUSPENDED", "PENDING"]
+    #             }
+    #           ],
+    #           staging: false, # required
+    #           connection_mode: "direct" # One of: ["direct", "tenant-only"],
+    #           anycast_ip_list_id: "string",
+    #           viewer_mtls_config: {
+    #             mode: "required" # One of: ["required", "optional", "passthrough"],
+    #             trust_store_config: {
+    #               trust_store_id: "string", # required
+    #               advertise_trust_store_ca_names: false,
+    #               ignore_certificate_expiry: false
+    #             }
+    #           },
+    #           connection_function_association: {
+    #             id: "ResourceId", # required
+    #           }
+    #         }
+    #       ]
+    #     }
+    #   }
+    # @return [Types::ListDistributionsByConnectionFunctionResult]
+    def list_distributions_by_connection_function(params = {}, options = {})
+      request = build_request(:list_distributions_by_connection_function, params)
       request.send_request(options)
     end
 
@@ -7433,10 +8353,14 @@ module Aws::CloudFront
     #                   },
     #                   origin_read_timeout: 1,
     #                   origin_keepalive_timeout: 1,
-    #                   ip_address_type: "ipv4" # One of: ["ipv4", "ipv6", "dualstack"]
+    #                   ip_address_type: "ipv4" # One of: ["ipv4", "ipv6", "dualstack"],
+    #                   origin_mtls_config: {
+    #                     client_certificate_arn: "string", # required
+    #                   }
     #                 },
     #                 vpc_origin_config: {
     #                   vpc_origin_id: "string", # required
+    #                   owner_account_id: "string",
     #                   origin_read_timeout: 1,
     #                   origin_keepalive_timeout: 1
     #                 },
@@ -7643,7 +8567,7 @@ module Aws::CloudFront
     #             iam_certificate_id: "ServerCertificateId",
     #             acm_certificate_arn: "string",
     #             ssl_support_method: "sni-only" # One of: ["sni-only", "vip", "static-ip"],
-    #             minimum_protocol_version: "SSLv3" # One of: ["SSLv3", "TLSv1", "TLSv1_2016", "TLSv1.1_2016", "TLSv1.2_2018", "TLSv1.2_2019", "TLSv1.2_2021", "TLSv1.3_2025"],
+    #             minimum_protocol_version: "SSLv3" # One of: ["SSLv3", "TLSv1", "TLSv1_2016", "TLSv1.1_2016", "TLSv1.2_2018", "TLSv1.2_2019", "TLSv1.2_2021", "TLSv1.3_2025", "TLSv1.2_2025"],
     #             certificate: "string",
     #             certificate_source: "cloudfront" # One of: ["cloudfront", "iam", "acm"]
     #           },
@@ -7665,7 +8589,18 @@ module Aws::CloudFront
     #           ],
     #           staging: false, # required
     #           connection_mode: "direct" # One of: ["direct", "tenant-only"],
-    #           anycast_ip_list_id: "string"
+    #           anycast_ip_list_id: "string",
+    #           viewer_mtls_config: {
+    #             mode: "required" # One of: ["required", "optional", "passthrough"],
+    #             trust_store_config: {
+    #               trust_store_id: "string", # required
+    #               advertise_trust_store_ca_names: false,
+    #               ignore_certificate_expiry: false
+    #             }
+    #           },
+    #           connection_function_association: {
+    #             id: "ResourceId", # required
+    #           }
     #         }
     #       ]
     #     }
@@ -7744,6 +8679,45 @@ module Aws::CloudFront
       request.send_request(options)
     end
 
+    # <p>Lists the CloudFront distributions that are associated with the specified resource that you own.</p>
+    # @param [Hash, Types::ListDistributionsByOwnedResourceRequest] params
+    # @option params [String] :resource_arn
+    #   <p>The ARN of the CloudFront resource that you've shared with other Amazon Web Services accounts.</p>
+    # @option params [String] :marker
+    #   <p>Use this field when paginating results to indicate where to begin in your list of distributions. The response includes distributions in the list that occur after the marker. To get the next page of the list, set this field's value to the value of <code>NextMarker</code> from the current page's response.</p>
+    # @option params [Integer] :max_items
+    #   <p>The maximum number of distributions to return.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     resource_arn: "string", # required
+    #     marker: "string",
+    #     max_items: 1
+    #   }
+    #   options = {}
+    #   response = client.list_distributions_by_owned_resource(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     distribution_list: {
+    #       marker: "string", # required
+    #       next_marker: "string",
+    #       max_items: 1, # required
+    #       is_truncated: false, # required
+    #       quantity: 1, # required
+    #       items: [
+    #         {
+    #           distribution_id: "string", # required
+    #           owner_account_id: "string", # required
+    #         }
+    #       ]
+    #     }
+    #   }
+    # @return [Types::ListDistributionsByOwnedResourceResult]
+    def list_distributions_by_owned_resource(params = {}, options = {})
+      request = build_request(:list_distributions_by_owned_resource, params)
+      request.send_request(options)
+    end
+
     # <p>Gets a list of distributions that have a cache behavior that's associated with the specified real-time log configuration.</p> <p>You can specify the real-time log configuration by its name or its Amazon Resource Name (ARN). You must provide at least one. If you provide both, CloudFront uses the name to identify the real-time log configuration to list distributions for.</p> <p>You can optionally specify the maximum number of items to receive in the response. If the total number of items in the list exceeds the maximum that you specify, or the default maximum, the response is paginated. To get the next page of items, send a subsequent request that specifies the <code>NextMarker</code> value from the current response as the <code>Marker</code> value in the subsequent request.</p>
     # @param [Hash, Types::ListDistributionsByRealtimeLogConfigRequest] params
     # @option params [String] :marker
@@ -7814,10 +8788,14 @@ module Aws::CloudFront
     #                   },
     #                   origin_read_timeout: 1,
     #                   origin_keepalive_timeout: 1,
-    #                   ip_address_type: "ipv4" # One of: ["ipv4", "ipv6", "dualstack"]
+    #                   ip_address_type: "ipv4" # One of: ["ipv4", "ipv6", "dualstack"],
+    #                   origin_mtls_config: {
+    #                     client_certificate_arn: "string", # required
+    #                   }
     #                 },
     #                 vpc_origin_config: {
     #                   vpc_origin_id: "string", # required
+    #                   owner_account_id: "string",
     #                   origin_read_timeout: 1,
     #                   origin_keepalive_timeout: 1
     #                 },
@@ -8024,7 +9002,7 @@ module Aws::CloudFront
     #             iam_certificate_id: "ServerCertificateId",
     #             acm_certificate_arn: "string",
     #             ssl_support_method: "sni-only" # One of: ["sni-only", "vip", "static-ip"],
-    #             minimum_protocol_version: "SSLv3" # One of: ["SSLv3", "TLSv1", "TLSv1_2016", "TLSv1.1_2016", "TLSv1.2_2018", "TLSv1.2_2019", "TLSv1.2_2021", "TLSv1.3_2025"],
+    #             minimum_protocol_version: "SSLv3" # One of: ["SSLv3", "TLSv1", "TLSv1_2016", "TLSv1.1_2016", "TLSv1.2_2018", "TLSv1.2_2019", "TLSv1.2_2021", "TLSv1.3_2025", "TLSv1.2_2025"],
     #             certificate: "string",
     #             certificate_source: "cloudfront" # One of: ["cloudfront", "iam", "acm"]
     #           },
@@ -8046,7 +9024,18 @@ module Aws::CloudFront
     #           ],
     #           staging: false, # required
     #           connection_mode: "direct" # One of: ["direct", "tenant-only"],
-    #           anycast_ip_list_id: "string"
+    #           anycast_ip_list_id: "string",
+    #           viewer_mtls_config: {
+    #             mode: "required" # One of: ["required", "optional", "passthrough"],
+    #             trust_store_config: {
+    #               trust_store_id: "string", # required
+    #               advertise_trust_store_ca_names: false,
+    #               ignore_certificate_expiry: false
+    #             }
+    #           },
+    #           connection_function_association: {
+    #             id: "ResourceId", # required
+    #           }
     #         }
     #       ]
     #     }
@@ -8088,6 +9077,331 @@ module Aws::CloudFront
     # @return [Types::ListDistributionsByResponseHeadersPolicyIdResult]
     def list_distributions_by_response_headers_policy_id(params = {}, options = {})
       request = build_request(:list_distributions_by_response_headers_policy_id, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists distributions by trust store.</p>
+    # @param [Hash, Types::ListDistributionsByTrustStoreRequest] params
+    # @option params [String] :trust_store_identifier
+    #   <p>The distributions by trust store identifier.</p>
+    # @option params [String] :marker
+    #   <p>Use this field when paginating results to indicate where to begin in your list. The response includes items in the list that occur after the marker. To get the next page of the list, set this field's value to the value of <code>NextMarker</code> from the current page's response.</p>
+    # @option params [Integer] :max_items
+    #   <p>The maximum number of distributions that you want returned in the response.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     trust_store_identifier: "string", # required
+    #     marker: "string",
+    #     max_items: 1
+    #   }
+    #   options = {}
+    #   response = client.list_distributions_by_trust_store(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     distribution_list: {
+    #       marker: "string", # required
+    #       next_marker: "string",
+    #       max_items: 1, # required
+    #       is_truncated: false, # required
+    #       quantity: 1, # required
+    #       items: [
+    #         {
+    #           id: "string", # required
+    #           arn: "string", # required
+    #           e_tag: "string",
+    #           status: "string", # required
+    #           last_modified_time: Time.now, # required
+    #           domain_name: "string", # required
+    #           aliases: { # required
+    #             quantity: 1, # required
+    #             items: ["string"]
+    #           },
+    #           origins: { # required
+    #             quantity: 1, # required
+    #             items: [ # required
+    #               {
+    #                 id: "string", # required
+    #                 domain_name: "string", # required
+    #                 origin_path: "string",
+    #                 custom_headers: {
+    #                   quantity: 1, # required
+    #                   items: [
+    #                     {
+    #                       header_name: "string", # required
+    #                       header_value: "sensitiveStringType", # required
+    #                     }
+    #                   ]
+    #                 },
+    #                 s3_origin_config: {
+    #                   origin_access_identity: "string", # required
+    #                   origin_read_timeout: 1
+    #                 },
+    #                 custom_origin_config: {
+    #                   http_port: 1, # required
+    #                   https_port: 1, # required
+    #                   origin_protocol_policy: "http-only" # One of: ["http-only", "match-viewer", "https-only"], # required
+    #                   origin_ssl_protocols: {
+    #                     quantity: 1, # required
+    #                     items: ["SSLv3" # One of: ["SSLv3", "TLSv1", "TLSv1.1", "TLSv1.2"]], # required
+    #                   },
+    #                   origin_read_timeout: 1,
+    #                   origin_keepalive_timeout: 1,
+    #                   ip_address_type: "ipv4" # One of: ["ipv4", "ipv6", "dualstack"],
+    #                   origin_mtls_config: {
+    #                     client_certificate_arn: "string", # required
+    #                   }
+    #                 },
+    #                 vpc_origin_config: {
+    #                   vpc_origin_id: "string", # required
+    #                   owner_account_id: "string",
+    #                   origin_read_timeout: 1,
+    #                   origin_keepalive_timeout: 1
+    #                 },
+    #                 connection_attempts: 1,
+    #                 connection_timeout: 1,
+    #                 response_completion_timeout: 1,
+    #                 origin_shield: {
+    #                   enabled: false, # required
+    #                   origin_shield_region: "OriginShieldRegion"
+    #                 },
+    #                 origin_access_control_id: "string"
+    #               }
+    #             ]
+    #           },
+    #           origin_groups: {
+    #             quantity: 1, # required
+    #             items: [
+    #               {
+    #                 id: "string", # required
+    #                 failover_criteria: { # required
+    #                   status_codes: { # required
+    #                     quantity: 1, # required
+    #                     items: [1], # required
+    #                   }
+    #                 },
+    #                 members: { # required
+    #                   quantity: 1, # required
+    #                   items: [ # required
+    #                     {
+    #                       origin_id: "string", # required
+    #                     }
+    #                   ]
+    #                 },
+    #                 selection_criteria: "default" # One of: ["default", "media-quality-based"]
+    #               }
+    #             ]
+    #           },
+    #           default_cache_behavior: { # required
+    #             target_origin_id: "string", # required
+    #             trusted_signers: {
+    #               enabled: false, # required
+    #               quantity: 1, # required
+    #               items: ["string"]
+    #             },
+    #             trusted_key_groups: {
+    #               enabled: false, # required
+    #               quantity: 1, # required
+    #               items: ["string"]
+    #             },
+    #             viewer_protocol_policy: "allow-all" # One of: ["allow-all", "https-only", "redirect-to-https"], # required
+    #             allowed_methods: {
+    #               quantity: 1, # required
+    #               items: ["GET" # One of: ["GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"]], # required
+    #               cached_methods: {
+    #                 quantity: 1, # required
+    #                 items: ["GET" # One of: ["GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"]], # required
+    #               }
+    #             },
+    #             smooth_streaming: false,
+    #             compress: false,
+    #             lambda_function_associations: {
+    #               quantity: 1, # required
+    #               items: [
+    #                 {
+    #                   lambda_function_arn: "LambdaFunctionARN", # required
+    #                   event_type: "viewer-request" # One of: ["viewer-request", "viewer-response", "origin-request", "origin-response"], # required
+    #                   include_body: false
+    #                 }
+    #               ]
+    #             },
+    #             function_associations: {
+    #               quantity: 1, # required
+    #               items: [
+    #                 {
+    #                   function_arn: "FunctionARN", # required
+    #                   event_type: "viewer-request" # One of: ["viewer-request", "viewer-response", "origin-request", "origin-response"], # required
+    #                 }
+    #               ]
+    #             },
+    #             field_level_encryption_id: "string",
+    #             realtime_log_config_arn: "string",
+    #             cache_policy_id: "string",
+    #             origin_request_policy_id: "string",
+    #             response_headers_policy_id: "string",
+    #             grpc_config: {
+    #               enabled: false, # required
+    #             },
+    #             forwarded_values: {
+    #               query_string: false, # required
+    #               cookies: { # required
+    #                 forward: "none" # One of: ["none", "whitelist", "all"], # required
+    #                 whitelisted_names: {
+    #                   quantity: 1, # required
+    #                   items: ["string"]
+    #                 }
+    #               },
+    #               headers: {
+    #                 quantity: 1, # required
+    #                 items: ["string"]
+    #               },
+    #               query_string_cache_keys: {
+    #                 quantity: 1, # required
+    #                 items: ["string"]
+    #               }
+    #             },
+    #             min_ttl: 1,
+    #             default_ttl: 1,
+    #             max_ttl: 1
+    #           },
+    #           cache_behaviors: { # required
+    #             quantity: 1, # required
+    #             items: [
+    #               {
+    #                 path_pattern: "string", # required
+    #                 target_origin_id: "string", # required
+    #                 trusted_signers: {
+    #                   enabled: false, # required
+    #                   quantity: 1, # required
+    #                   items: ["string"]
+    #                 },
+    #                 trusted_key_groups: {
+    #                   enabled: false, # required
+    #                   quantity: 1, # required
+    #                   items: ["string"]
+    #                 },
+    #                 viewer_protocol_policy: "allow-all" # One of: ["allow-all", "https-only", "redirect-to-https"], # required
+    #                 allowed_methods: {
+    #                   quantity: 1, # required
+    #                   items: ["GET" # One of: ["GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"]], # required
+    #                   cached_methods: {
+    #                     quantity: 1, # required
+    #                     items: ["GET" # One of: ["GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"]], # required
+    #                   }
+    #                 },
+    #                 smooth_streaming: false,
+    #                 compress: false,
+    #                 lambda_function_associations: {
+    #                   quantity: 1, # required
+    #                   items: [
+    #                     {
+    #                       lambda_function_arn: "LambdaFunctionARN", # required
+    #                       event_type: "viewer-request" # One of: ["viewer-request", "viewer-response", "origin-request", "origin-response"], # required
+    #                       include_body: false
+    #                     }
+    #                   ]
+    #                 },
+    #                 function_associations: {
+    #                   quantity: 1, # required
+    #                   items: [
+    #                     {
+    #                       function_arn: "FunctionARN", # required
+    #                       event_type: "viewer-request" # One of: ["viewer-request", "viewer-response", "origin-request", "origin-response"], # required
+    #                     }
+    #                   ]
+    #                 },
+    #                 field_level_encryption_id: "string",
+    #                 realtime_log_config_arn: "string",
+    #                 cache_policy_id: "string",
+    #                 origin_request_policy_id: "string",
+    #                 response_headers_policy_id: "string",
+    #                 grpc_config: {
+    #                   enabled: false, # required
+    #                 },
+    #                 forwarded_values: {
+    #                   query_string: false, # required
+    #                   cookies: { # required
+    #                     forward: "none" # One of: ["none", "whitelist", "all"], # required
+    #                     whitelisted_names: {
+    #                       quantity: 1, # required
+    #                       items: ["string"]
+    #                     }
+    #                   },
+    #                   headers: {
+    #                     quantity: 1, # required
+    #                     items: ["string"]
+    #                   },
+    #                   query_string_cache_keys: {
+    #                     quantity: 1, # required
+    #                     items: ["string"]
+    #                   }
+    #                 },
+    #                 min_ttl: 1,
+    #                 default_ttl: 1,
+    #                 max_ttl: 1
+    #               }
+    #             ]
+    #           },
+    #           custom_error_responses: { # required
+    #             quantity: 1, # required
+    #             items: [
+    #               {
+    #                 error_code: 1, # required
+    #                 response_page_path: "string",
+    #                 response_code: "string",
+    #                 error_caching_min_ttl: 1
+    #               }
+    #             ]
+    #           },
+    #           comment: "sensitiveStringType", # required
+    #           price_class: "PriceClass_100" # One of: ["PriceClass_100", "PriceClass_200", "PriceClass_All", "None"], # required
+    #           enabled: false, # required
+    #           viewer_certificate: { # required
+    #             cloud_front_default_certificate: false,
+    #             iam_certificate_id: "ServerCertificateId",
+    #             acm_certificate_arn: "string",
+    #             ssl_support_method: "sni-only" # One of: ["sni-only", "vip", "static-ip"],
+    #             minimum_protocol_version: "SSLv3" # One of: ["SSLv3", "TLSv1", "TLSv1_2016", "TLSv1.1_2016", "TLSv1.2_2018", "TLSv1.2_2019", "TLSv1.2_2021", "TLSv1.3_2025", "TLSv1.2_2025"],
+    #             certificate: "string",
+    #             certificate_source: "cloudfront" # One of: ["cloudfront", "iam", "acm"]
+    #           },
+    #           restrictions: { # required
+    #             geo_restriction: { # required
+    #               restriction_type: "blacklist" # One of: ["blacklist", "whitelist", "none"], # required
+    #               quantity: 1, # required
+    #               items: ["string"]
+    #             }
+    #           },
+    #           web_acl_id: "string", # required
+    #           http_version: "http1.1" # One of: ["http1.1", "http2", "http3", "http2and3"], # required
+    #           is_ipv6_enabled: false, # required
+    #           alias_icp_recordals: [
+    #             {
+    #               cname: "string",
+    #               icp_recordal_status: "APPROVED" # One of: ["APPROVED", "SUSPENDED", "PENDING"]
+    #             }
+    #           ],
+    #           staging: false, # required
+    #           connection_mode: "direct" # One of: ["direct", "tenant-only"],
+    #           anycast_ip_list_id: "string",
+    #           viewer_mtls_config: {
+    #             mode: "required" # One of: ["required", "optional", "passthrough"],
+    #             trust_store_config: {
+    #               trust_store_id: "string", # required
+    #               advertise_trust_store_ca_names: false,
+    #               ignore_certificate_expiry: false
+    #             }
+    #           },
+    #           connection_function_association: {
+    #             id: "ResourceId", # required
+    #           }
+    #         }
+    #       ]
+    #     }
+    #   }
+    # @return [Types::ListDistributionsByTrustStoreResult]
+    def list_distributions_by_trust_store(params = {}, options = {})
+      request = build_request(:list_distributions_by_trust_store, params)
       request.send_request(options)
     end
 
@@ -8210,10 +9524,14 @@ module Aws::CloudFront
     #                   },
     #                   origin_read_timeout: 1,
     #                   origin_keepalive_timeout: 1,
-    #                   ip_address_type: "ipv4" # One of: ["ipv4", "ipv6", "dualstack"]
+    #                   ip_address_type: "ipv4" # One of: ["ipv4", "ipv6", "dualstack"],
+    #                   origin_mtls_config: {
+    #                     client_certificate_arn: "string", # required
+    #                   }
     #                 },
     #                 vpc_origin_config: {
     #                   vpc_origin_id: "string", # required
+    #                   owner_account_id: "string",
     #                   origin_read_timeout: 1,
     #                   origin_keepalive_timeout: 1
     #                 },
@@ -8420,7 +9738,7 @@ module Aws::CloudFront
     #             iam_certificate_id: "ServerCertificateId",
     #             acm_certificate_arn: "string",
     #             ssl_support_method: "sni-only" # One of: ["sni-only", "vip", "static-ip"],
-    #             minimum_protocol_version: "SSLv3" # One of: ["SSLv3", "TLSv1", "TLSv1_2016", "TLSv1.1_2016", "TLSv1.2_2018", "TLSv1.2_2019", "TLSv1.2_2021", "TLSv1.3_2025"],
+    #             minimum_protocol_version: "SSLv3" # One of: ["SSLv3", "TLSv1", "TLSv1_2016", "TLSv1.1_2016", "TLSv1.2_2018", "TLSv1.2_2019", "TLSv1.2_2021", "TLSv1.3_2025", "TLSv1.2_2025"],
     #             certificate: "string",
     #             certificate_source: "cloudfront" # One of: ["cloudfront", "iam", "acm"]
     #           },
@@ -8442,7 +9760,18 @@ module Aws::CloudFront
     #           ],
     #           staging: false, # required
     #           connection_mode: "direct" # One of: ["direct", "tenant-only"],
-    #           anycast_ip_list_id: "string"
+    #           anycast_ip_list_id: "string",
+    #           viewer_mtls_config: {
+    #             mode: "required" # One of: ["required", "optional", "passthrough"],
+    #             trust_store_config: {
+    #               trust_store_id: "string", # required
+    #               advertise_trust_store_ca_names: false,
+    #               ignore_certificate_expiry: false
+    #             }
+    #           },
+    #           connection_function_association: {
+    #             id: "ResourceId", # required
+    #           }
     #         }
     #       ]
     #     }
@@ -8872,8 +10201,8 @@ module Aws::CloudFront
     #           id: "string", # required
     #           description: "string", # required
     #           name: "string", # required
-    #           signing_protocol: "sigv4" # One of: ["sigv4"], # required
-    #           signing_behavior: "never" # One of: ["never", "always", "no-override"], # required
+    #           signing_protocol: "sigv4" # One of: ["sigv4", "sigv4a"], # required
+    #           signing_behavior: "never" # One of: ["never", "always", "no-override", "always-amz-auth"], # required
     #           origin_access_control_origin_type: "s3" # One of: ["s3", "mediastore", "mediapackagev2", "lambda"], # required
     #         }
     #       ]
@@ -9232,6 +10561,42 @@ module Aws::CloudFront
       request.send_request(options)
     end
 
+    # <p>Lists trust stores.</p>
+    # @param [Hash, Types::ListTrustStoresRequest] params
+    # @option params [String] :marker
+    #   <p>Use this field when paginating results to indicate where to begin in your list. The response includes items in the list that occur after the marker. To get the next page of the list, set this field's value to the value of <code>NextMarker</code> from the current page's response.</p>
+    # @option params [Integer] :max_items
+    #   <p>The maximum number of trust stores that you want returned in the response.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     marker: "string",
+    #     max_items: 1
+    #   }
+    #   options = {}
+    #   response = client.list_trust_stores(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     next_marker: "string",
+    #     trust_store_list: [
+    #       {
+    #         id: "string", # required
+    #         arn: "string", # required
+    #         name: "string", # required
+    #         status: "pending" # One of: ["pending", "active", "failed"], # required
+    #         number_of_ca_certificates: 1, # required
+    #         last_modified_time: Time.now, # required
+    #         reason: "string",
+    #         e_tag: "string", # required
+    #       }
+    #     ]
+    #   }
+    # @return [Types::ListTrustStoresResult]
+    def list_trust_stores(params = {}, options = {})
+      request = build_request(:list_trust_stores, params)
+      request.send_request(options)
+    end
+
     # <p>List the CloudFront VPC origins in your account.</p>
     # @param [Hash, Types::ListVpcOriginsRequest] params
     # @option params [String] :marker
@@ -9287,7 +10652,9 @@ module Aws::CloudFront
     #           created_time: Time.now, # required
     #           last_modified_time: Time.now, # required
     #           arn: "string", # required
+    #           account_id: "string",
     #           origin_endpoint_arn: "string", # required
+    #           ip_address_type: "ipv4" # One of: ["ipv4", "dualstack"]
     #         }
     #       ]
     #     }
@@ -9295,6 +10662,50 @@ module Aws::CloudFront
     # @return [Types::ListVpcOriginsResult]
     def list_vpc_origins(params = {}, options = {})
       request = build_request(:list_vpc_origins, params)
+      request.send_request(options)
+    end
+
+    # <p>Publishes a connection function.</p>
+    # @param [Hash, Types::PublishConnectionFunctionRequest] params
+    # @option params [String] :id
+    #   <p>The connection function ID.</p>
+    # @option params [String] :if_match
+    #   <p>The current version (<code>ETag</code> value) of the connection function.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     id: "ResourceId", # required
+    #     if_match: "string", # required
+    #   }
+    #   options = {}
+    #   response = client.publish_connection_function(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     connection_function_summary: {
+    #       name: "FunctionName", # required
+    #       id: "ResourceId", # required
+    #       connection_function_config: { # required
+    #         comment: "string", # required
+    #         runtime: "cloudfront-js-1.0" # One of: ["cloudfront-js-1.0", "cloudfront-js-2.0"], # required
+    #         key_value_store_associations: {
+    #           quantity: 1, # required
+    #           items: [
+    #             {
+    #               key_value_store_arn: "KeyValueStoreARN", # required
+    #             }
+    #           ]
+    #         }
+    #       },
+    #       connection_function_arn: "string", # required
+    #       status: "string", # required
+    #       stage: "DEVELOPMENT" # One of: ["DEVELOPMENT", "LIVE"], # required
+    #       created_time: Time.now, # required
+    #       last_modified_time: Time.now, # required
+    #     }
+    #   }
+    # @return [Types::PublishConnectionFunctionResult]
+    def publish_connection_function(params = {}, options = {})
+      request = build_request(:publish_connection_function, params)
       request.send_request(options)
     end
 
@@ -9343,6 +10754,30 @@ module Aws::CloudFront
       request.send_request(options)
     end
 
+    # <p>Creates a resource control policy for a given CloudFront resource.</p>
+    # @param [Hash, Types::PutResourcePolicyRequest] params
+    # @option params [String] :resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the CloudFront resource for which the policy is being created.</p>
+    # @option params [String] :policy_document
+    #   <p>The JSON-formatted resource policy to create.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     resource_arn: "string", # required
+    #     policy_document: "string", # required
+    #   }
+    #   options = {}
+    #   response = client.put_resource_policy(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     resource_arn: "string"
+    #   }
+    # @return [Types::PutResourcePolicyResult]
+    def put_resource_policy(params = {}, options = {})
+      request = build_request(:put_resource_policy, params)
+      request.send_request(options)
+    end
+
     # <p>Add tags to a CloudFront resource. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/tagging.html">Tagging a distribution</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>
     # @param [Hash, Types::TagResourceRequest] params
     # @option params [String] :resource
@@ -9369,6 +10804,62 @@ module Aws::CloudFront
     # @return [Smithy::Schema::EmptyStructure]
     def tag_resource(params = {}, options = {})
       request = build_request(:tag_resource, params)
+      request.send_request(options)
+    end
+
+    # <p>Tests a connection function.</p>
+    # @param [Hash, Types::TestConnectionFunctionRequest] params
+    # @option params [String] :id
+    #   <p>The connection function ID.</p>
+    # @option params [String] :if_match
+    #   <p>The current version (<code>ETag</code> value) of the connection function.</p>
+    # @option params [String] :stage
+    #   <p>The connection function stage.</p>
+    # @option params [String] :connection_object
+    #   <p>The connection object.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     id: "ResourceId", # required
+    #     if_match: "string", # required
+    #     stage: "DEVELOPMENT" # One of: ["DEVELOPMENT", "LIVE"],
+    #     connection_object: "data", # required
+    #   }
+    #   options = {}
+    #   response = client.test_connection_function(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     connection_function_test_result: {
+    #       connection_function_summary: {
+    #         name: "FunctionName", # required
+    #         id: "ResourceId", # required
+    #         connection_function_config: { # required
+    #           comment: "string", # required
+    #           runtime: "cloudfront-js-1.0" # One of: ["cloudfront-js-1.0", "cloudfront-js-2.0"], # required
+    #           key_value_store_associations: {
+    #             quantity: 1, # required
+    #             items: [
+    #               {
+    #                 key_value_store_arn: "KeyValueStoreARN", # required
+    #               }
+    #             ]
+    #           }
+    #         },
+    #         connection_function_arn: "string", # required
+    #         status: "string", # required
+    #         stage: "DEVELOPMENT" # One of: ["DEVELOPMENT", "LIVE"], # required
+    #         created_time: Time.now, # required
+    #         last_modified_time: Time.now, # required
+    #       },
+    #       compute_utilization: "string",
+    #       connection_function_execution_logs: ["string"],
+    #       connection_function_error_message: "sensitiveStringType",
+    #       connection_function_output: "sensitiveStringType"
+    #     }
+    #   }
+    # @return [Types::TestConnectionFunctionResult]
+    def test_connection_function(params = {}, options = {})
+      request = build_request(:test_connection_function, params)
       request.send_request(options)
     end
 
@@ -9450,6 +10941,64 @@ module Aws::CloudFront
     # @return [Smithy::Schema::EmptyStructure]
     def untag_resource(params = {}, options = {})
       request = build_request(:untag_resource, params)
+      request.send_request(options)
+    end
+
+    # <p>Updates an Anycast static IP list.</p>
+    # @param [Hash, Types::UpdateAnycastIpListRequest] params
+    # @option params [String] :id
+    #   <p>The ID of the Anycast static IP list.</p>
+    # @option params [String] :ip_address_type
+    #   <p>The IP address type for the Anycast static IP list. You can specify one of the following options:</p> <ul> <li> <p> <code>ipv4</code> only</p> </li> <li> <p> <code>ipv6</code> only</p> </li> <li> <p> <code>dualstack</code> - Allocate a list of both IPv4 and IPv6 addresses</p> </li> </ul>
+    # @option params [Array<Types::IpamCidrConfig>] :ipam_cidr_configs
+    #   <p>A list of IPAM CIDR configurations that specify the IP address ranges and IPAM pool settings for updating the Anycast static IP list.</p>
+    # @option params [String] :if_match
+    #   <p>The current version (ETag value) of the Anycast static IP list that you are updating.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     id: "string", # required
+    #     ip_address_type: "ipv4" # One of: ["ipv4", "ipv6", "dualstack"],
+    #     ipam_cidr_configs: [
+    #       {
+    #         cidr: "string", # required
+    #         ipam_pool_arn: "string", # required
+    #         anycast_ip: "string",
+    #         status: "provisioned" # One of: ["provisioned", "failed-provision", "provisioning", "deprovisioned", "failed-deprovision", "deprovisioning", "advertised", "failed-advertise", "advertising", "withdrawn", "failed-withdraw", "withdrawing"]
+    #       }
+    #     ],
+    #     if_match: "string", # required
+    #   }
+    #   options = {}
+    #   response = client.update_anycast_ip_list(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     anycast_ip_list: {
+    #       id: "string", # required
+    #       name: "AnycastIpListName", # required
+    #       status: "string", # required
+    #       arn: "string", # required
+    #       ip_address_type: "ipv4" # One of: ["ipv4", "ipv6", "dualstack"],
+    #       ipam_config: {
+    #         quantity: 1, # required
+    #         ipam_cidr_configs: [ # required
+    #           {
+    #             cidr: "string", # required
+    #             ipam_pool_arn: "string", # required
+    #             anycast_ip: "string",
+    #             status: "provisioned" # One of: ["provisioned", "failed-provision", "provisioning", "deprovisioned", "failed-deprovision", "deprovisioning", "advertised", "failed-advertise", "advertising", "withdrawn", "failed-withdraw", "withdrawing"]
+    #           }
+    #         ]
+    #       },
+    #       anycast_ips: ["string"], # required
+    #       ip_count: 1, # required
+    #       last_modified_time: Time.now, # required
+    #     },
+    #     e_tag: "string"
+    #   }
+    # @return [Types::UpdateAnycastIpListResult]
+    def update_anycast_ip_list(params = {}, options = {})
+      request = build_request(:update_anycast_ip_list, params)
       request.send_request(options)
     end
 
@@ -9582,6 +11131,68 @@ module Aws::CloudFront
     # @return [Types::UpdateCloudFrontOriginAccessIdentityResult]
     def update_cloud_front_origin_access_identity(params = {}, options = {})
       request = build_request(:update_cloud_front_origin_access_identity, params)
+      request.send_request(options)
+    end
+
+    # <p>Updates a connection function.</p>
+    # @param [Hash, Types::UpdateConnectionFunctionRequest] params
+    # @option params [String] :id
+    #   <p>The connection function ID.</p>
+    # @option params [String] :if_match
+    #   <p>The current version (<code>ETag</code> value) of the connection function you are updating.</p>
+    # @option params [Types::FunctionConfig] :connection_function_config
+    #   <p>Contains configuration information about a CloudFront function.</p>
+    # @option params [String] :connection_function_code
+    #   <p>The connection function code.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     id: "ResourceId", # required
+    #     if_match: "string", # required
+    #     connection_function_config: { # required
+    #       comment: "string", # required
+    #       runtime: "cloudfront-js-1.0" # One of: ["cloudfront-js-1.0", "cloudfront-js-2.0"], # required
+    #       key_value_store_associations: {
+    #         quantity: 1, # required
+    #         items: [
+    #           {
+    #             key_value_store_arn: "KeyValueStoreARN", # required
+    #           }
+    #         ]
+    #       }
+    #     },
+    #     connection_function_code: "data", # required
+    #   }
+    #   options = {}
+    #   response = client.update_connection_function(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     connection_function_summary: {
+    #       name: "FunctionName", # required
+    #       id: "ResourceId", # required
+    #       connection_function_config: { # required
+    #         comment: "string", # required
+    #         runtime: "cloudfront-js-1.0" # One of: ["cloudfront-js-1.0", "cloudfront-js-2.0"], # required
+    #         key_value_store_associations: {
+    #           quantity: 1, # required
+    #           items: [
+    #             {
+    #               key_value_store_arn: "KeyValueStoreARN", # required
+    #             }
+    #           ]
+    #         }
+    #       },
+    #       connection_function_arn: "string", # required
+    #       status: "string", # required
+    #       stage: "DEVELOPMENT" # One of: ["DEVELOPMENT", "LIVE"], # required
+    #       created_time: Time.now, # required
+    #       last_modified_time: Time.now, # required
+    #     },
+    #     e_tag: "string"
+    #   }
+    # @return [Types::UpdateConnectionFunctionResult]
+    def update_connection_function(params = {}, options = {})
+      request = build_request(:update_connection_function, params)
       request.send_request(options)
     end
 
@@ -9758,10 +11369,14 @@ module Aws::CloudFront
     #               },
     #               origin_read_timeout: 1,
     #               origin_keepalive_timeout: 1,
-    #               ip_address_type: "ipv4" # One of: ["ipv4", "ipv6", "dualstack"]
+    #               ip_address_type: "ipv4" # One of: ["ipv4", "ipv6", "dualstack"],
+    #               origin_mtls_config: {
+    #                 client_certificate_arn: "string", # required
+    #               }
     #             },
     #             vpc_origin_config: {
     #               vpc_origin_id: "string", # required
+    #               owner_account_id: "string",
     #               origin_read_timeout: 1,
     #               origin_keepalive_timeout: 1
     #             },
@@ -9974,7 +11589,7 @@ module Aws::CloudFront
     #         iam_certificate_id: "ServerCertificateId",
     #         acm_certificate_arn: "string",
     #         ssl_support_method: "sni-only" # One of: ["sni-only", "vip", "static-ip"],
-    #         minimum_protocol_version: "SSLv3" # One of: ["SSLv3", "TLSv1", "TLSv1_2016", "TLSv1.1_2016", "TLSv1.2_2018", "TLSv1.2_2019", "TLSv1.2_2021", "TLSv1.3_2025"],
+    #         minimum_protocol_version: "SSLv3" # One of: ["SSLv3", "TLSv1", "TLSv1_2016", "TLSv1.1_2016", "TLSv1.2_2018", "TLSv1.2_2019", "TLSv1.2_2021", "TLSv1.3_2025", "TLSv1.2_2025"],
     #         certificate: "string",
     #         certificate_source: "cloudfront" # One of: ["cloudfront", "iam", "acm"]
     #       },
@@ -10005,7 +11620,21 @@ module Aws::CloudFront
     #           }
     #         ]
     #       },
-    #       connection_mode: "direct" # One of: ["direct", "tenant-only"]
+    #       connection_mode: "direct" # One of: ["direct", "tenant-only"],
+    #       viewer_mtls_config: {
+    #         mode: "required" # One of: ["required", "optional", "passthrough"],
+    #         trust_store_config: {
+    #           trust_store_id: "string", # required
+    #           advertise_trust_store_ca_names: false,
+    #           ignore_certificate_expiry: false
+    #         }
+    #       },
+    #       connection_function_association: {
+    #         id: "ResourceId", # required
+    #       },
+    #       cache_tag_config: {
+    #         header_name: "string", # required
+    #       }
     #     },
     #     id: "string", # required
     #     if_match: "string"
@@ -10085,10 +11714,14 @@ module Aws::CloudFront
     #                 },
     #                 origin_read_timeout: 1,
     #                 origin_keepalive_timeout: 1,
-    #                 ip_address_type: "ipv4" # One of: ["ipv4", "ipv6", "dualstack"]
+    #                 ip_address_type: "ipv4" # One of: ["ipv4", "ipv6", "dualstack"],
+    #                 origin_mtls_config: {
+    #                   client_certificate_arn: "string", # required
+    #                 }
     #               },
     #               vpc_origin_config: {
     #                 vpc_origin_id: "string", # required
+    #                 owner_account_id: "string",
     #                 origin_read_timeout: 1,
     #                 origin_keepalive_timeout: 1
     #               },
@@ -10301,7 +11934,7 @@ module Aws::CloudFront
     #           iam_certificate_id: "ServerCertificateId",
     #           acm_certificate_arn: "string",
     #           ssl_support_method: "sni-only" # One of: ["sni-only", "vip", "static-ip"],
-    #           minimum_protocol_version: "SSLv3" # One of: ["SSLv3", "TLSv1", "TLSv1_2016", "TLSv1.1_2016", "TLSv1.2_2018", "TLSv1.2_2019", "TLSv1.2_2021", "TLSv1.3_2025"],
+    #           minimum_protocol_version: "SSLv3" # One of: ["SSLv3", "TLSv1", "TLSv1_2016", "TLSv1.1_2016", "TLSv1.2_2018", "TLSv1.2_2019", "TLSv1.2_2021", "TLSv1.3_2025", "TLSv1.2_2025"],
     #           certificate: "string",
     #           certificate_source: "cloudfront" # One of: ["cloudfront", "iam", "acm"]
     #         },
@@ -10332,7 +11965,21 @@ module Aws::CloudFront
     #             }
     #           ]
     #         },
-    #         connection_mode: "direct" # One of: ["direct", "tenant-only"]
+    #         connection_mode: "direct" # One of: ["direct", "tenant-only"],
+    #         viewer_mtls_config: {
+    #           mode: "required" # One of: ["required", "optional", "passthrough"],
+    #           trust_store_config: {
+    #             trust_store_id: "string", # required
+    #             advertise_trust_store_ca_names: false,
+    #             ignore_certificate_expiry: false
+    #           }
+    #         },
+    #         connection_function_association: {
+    #           id: "ResourceId", # required
+    #         },
+    #         cache_tag_config: {
+    #           header_name: "string", # required
+    #         }
     #       },
     #       alias_icp_recordals: [
     #         {
@@ -10552,10 +12199,14 @@ module Aws::CloudFront
     #                 },
     #                 origin_read_timeout: 1,
     #                 origin_keepalive_timeout: 1,
-    #                 ip_address_type: "ipv4" # One of: ["ipv4", "ipv6", "dualstack"]
+    #                 ip_address_type: "ipv4" # One of: ["ipv4", "ipv6", "dualstack"],
+    #                 origin_mtls_config: {
+    #                   client_certificate_arn: "string", # required
+    #                 }
     #               },
     #               vpc_origin_config: {
     #                 vpc_origin_id: "string", # required
+    #                 owner_account_id: "string",
     #                 origin_read_timeout: 1,
     #                 origin_keepalive_timeout: 1
     #               },
@@ -10768,7 +12419,7 @@ module Aws::CloudFront
     #           iam_certificate_id: "ServerCertificateId",
     #           acm_certificate_arn: "string",
     #           ssl_support_method: "sni-only" # One of: ["sni-only", "vip", "static-ip"],
-    #           minimum_protocol_version: "SSLv3" # One of: ["SSLv3", "TLSv1", "TLSv1_2016", "TLSv1.1_2016", "TLSv1.2_2018", "TLSv1.2_2019", "TLSv1.2_2021", "TLSv1.3_2025"],
+    #           minimum_protocol_version: "SSLv3" # One of: ["SSLv3", "TLSv1", "TLSv1_2016", "TLSv1.1_2016", "TLSv1.2_2018", "TLSv1.2_2019", "TLSv1.2_2021", "TLSv1.3_2025", "TLSv1.2_2025"],
     #           certificate: "string",
     #           certificate_source: "cloudfront" # One of: ["cloudfront", "iam", "acm"]
     #         },
@@ -10799,7 +12450,21 @@ module Aws::CloudFront
     #             }
     #           ]
     #         },
-    #         connection_mode: "direct" # One of: ["direct", "tenant-only"]
+    #         connection_mode: "direct" # One of: ["direct", "tenant-only"],
+    #         viewer_mtls_config: {
+    #           mode: "required" # One of: ["required", "optional", "passthrough"],
+    #           trust_store_config: {
+    #             trust_store_id: "string", # required
+    #             advertise_trust_store_ca_names: false,
+    #             ignore_certificate_expiry: false
+    #           }
+    #         },
+    #         connection_function_association: {
+    #           id: "ResourceId", # required
+    #         },
+    #         cache_tag_config: {
+    #           header_name: "string", # required
+    #         }
     #       },
     #       alias_icp_recordals: [
     #         {
@@ -11221,8 +12886,8 @@ module Aws::CloudFront
     #     origin_access_control_config: { # required
     #       name: "string", # required
     #       description: "string",
-    #       signing_protocol: "sigv4" # One of: ["sigv4"], # required
-    #       signing_behavior: "never" # One of: ["never", "always", "no-override"], # required
+    #       signing_protocol: "sigv4" # One of: ["sigv4", "sigv4a"], # required
+    #       signing_behavior: "never" # One of: ["never", "always", "no-override", "always-amz-auth"], # required
     #       origin_access_control_origin_type: "s3" # One of: ["s3", "mediastore", "mediapackagev2", "lambda"], # required
     #     },
     #     id: "string", # required
@@ -11238,8 +12903,8 @@ module Aws::CloudFront
     #       origin_access_control_config: {
     #         name: "string", # required
     #         description: "string",
-    #         signing_protocol: "sigv4" # One of: ["sigv4"], # required
-    #         signing_behavior: "never" # One of: ["never", "always", "no-override"], # required
+    #         signing_protocol: "sigv4" # One of: ["sigv4", "sigv4a"], # required
+    #         signing_behavior: "never" # One of: ["never", "always", "no-override", "always-amz-auth"], # required
     #         origin_access_control_origin_type: "s3" # One of: ["s3", "mediastore", "mediapackagev2", "lambda"], # required
     #       }
     #     },
@@ -11704,6 +13369,54 @@ module Aws::CloudFront
       request.send_request(options)
     end
 
+    # <p>Updates a trust store.</p>
+    # @param [Hash, Types::UpdateTrustStoreRequest] params
+    # @option params [String] :id
+    #   <p>The trust store ID.</p>
+    # @option params [Types::CaCertificatesBundleSource] :ca_certificates_bundle_source
+    #   <p>The CA certificates bundle source.</p>
+    # @option params [Boolean] :use_client_certificate_ocsp_endpoint
+    #   <p>A Boolean that determines whether to use the CA certificate's OCSP endpoint to check certificate revocation status.</p>
+    # @option params [String] :if_match
+    #   <p>The current version (<code>ETag</code> value) of the trust store you are updating.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     id: "ResourceId", # required
+    #     ca_certificates_bundle_source: {
+    #       # One of:
+    #       ca_certificates_bundle_s3_location: {
+    #         bucket: "string", # required
+    #         key: "string", # required
+    #         region: "string", # required
+    #         version: "string"
+    #       }
+    #     },
+    #     use_client_certificate_ocsp_endpoint: false,
+    #     if_match: "string", # required
+    #   }
+    #   options = {}
+    #   response = client.update_trust_store(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     trust_store: {
+    #       id: "string",
+    #       arn: "string",
+    #       name: "string",
+    #       status: "pending" # One of: ["pending", "active", "failed"],
+    #       number_of_ca_certificates: 1,
+    #       last_modified_time: Time.now,
+    #       reason: "string",
+    #       use_client_certificate_ocsp_endpoint: false
+    #     },
+    #     e_tag: "string"
+    #   }
+    # @return [Types::UpdateTrustStoreResult]
+    def update_trust_store(params = {}, options = {})
+      request = build_request(:update_trust_store, params)
+      request.send_request(options)
+    end
+
     # <p>Update an Amazon CloudFront VPC origin in your account.</p>
     # @param [Hash, Types::UpdateVpcOriginRequest] params
     # @option params [Types::VpcOriginEndpointConfig] :vpc_origin_endpoint_config
@@ -11770,7 +13483,8 @@ module Aws::CloudFront
     #       origin_ssl_protocols: {
     #         quantity: 1, # required
     #         items: ["SSLv3" # One of: ["SSLv3", "TLSv1", "TLSv1.1", "TLSv1.2"]], # required
-    #       }
+    #       },
+    #       ip_address_type: "ipv4" # One of: ["ipv4", "dualstack"]
     #     },
     #     id: "string", # required
     #     if_match: "string", # required
@@ -11783,6 +13497,7 @@ module Aws::CloudFront
     #     vpc_origin: {
     #       id: "string", # required
     #       arn: "string", # required
+    #       account_id: "string",
     #       status: "string", # required
     #       created_time: Time.now, # required
     #       last_modified_time: Time.now, # required
@@ -11795,7 +13510,8 @@ module Aws::CloudFront
     #         origin_ssl_protocols: {
     #           quantity: 1, # required
     #           items: ["SSLv3" # One of: ["SSLv3", "TLSv1", "TLSv1.1", "TLSv1.2"]], # required
-    #         }
+    #         },
+    #         ip_address_type: "ipv4" # One of: ["ipv4", "dualstack"]
     #       }
     #     },
     #     e_tag: "string"

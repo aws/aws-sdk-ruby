@@ -3,11 +3,17 @@ module Aws::Location
     include Smithy::Schema::Shapes
 
     AccessDeniedException: StructureShape
+    AndroidApp: StructureShape
+    AndroidAppList: ListShape
+    AndroidPackageName: StringShape
     ApiKey: StringShape
     ApiKeyAction: StringShape
     ApiKeyActionList: ListShape
     ApiKeyFilter: StructureShape
     ApiKeyRestrictions: StructureShape
+    AppleApp: StructureShape
+    AppleAppList: ListShape
+    AppleBundleId: StringShape
     Arn: StringShape
     ArnList: ListShape
     AssociateTrackerConsumerInput: StructureShape
@@ -52,8 +58,11 @@ module Aws::Location
     CalculateRouteOutput: StructureShape
     CalculateRouteSummary: StructureShape
     CalculateRouteTruckModeOptions: StructureShape
+    CancelJobRequest: StructureShape
+    CancelJobResponse: StructureShape
     CellSignals: StructureShape
     Circle: StructureShape
+    ClientToken: StringShape
     ConflictException: StructureShape
     CountryCode3: StringShape
     CountryCode3OrEmpty: StringShape
@@ -126,6 +135,8 @@ module Aws::Location
     GetDevicePositionOutput: StructureShape
     GetGeofenceInput: StructureShape
     GetGeofenceOutput: StructureShape
+    GetJobRequest: StructureShape
+    GetJobResponse: StructureShape
     GetMapGlyphsInput: StructureShape
     GetMapGlyphsOutput: StructureShape
     GetMapSpritesInput: StructureShape
@@ -136,11 +147,27 @@ module Aws::Location
     GetMapTileOutput: StructureShape
     GetPlaceInput: StructureShape
     GetPlaceOutput: StructureShape
+    IamRoleArn: StringShape
     Id: StringShape
     IdList: ListShape
     InferredState: StructureShape
     IntendedUse: StringShape
     InternalServerException: StructureShape
+    JobAction: StringShape
+    JobActionOptions: StructureShape
+    JobError: StructureShape
+    JobErrorCode: StringShape
+    JobErrorMessage: StringShape
+    JobErrorMessagesList: ListShape
+    JobId: StringShape
+    JobInputFormat: StringShape
+    JobInputLocation: StringShape
+    JobInputOptions: StructureShape
+    JobOutputFormat: StringShape
+    JobOutputLocation: StringShape
+    JobOutputOptions: StructureShape
+    JobStatus: StringShape
+    JobsFilter: StructureShape
     KmsKeyId: StringShape
     LanguageTag: StringShape
     LargeToken: StringShape
@@ -162,6 +189,10 @@ module Aws::Location
     ListGeofenceResponseEntryList: ListShape
     ListGeofencesInput: StructureShape
     ListGeofencesOutput: StructureShape
+    ListJobsRequest: StructureShape
+    ListJobsResponse: StructureShape
+    ListJobsResponseEntry: StructureShape
+    ListJobsResponseEntryList: ListShape
     ListKeysInput: StructureShape
     ListKeysOutput: StructureShape
     ListKeysResponseEntry: StructureShape
@@ -242,10 +273,15 @@ module Aws::Location
     SearchPlaceIndexForTextInput: StructureShape
     SearchPlaceIndexForTextOutput: StructureShape
     SearchPlaceIndexForTextSummary: StructureShape
+    SensitiveBoolean: BooleanShape
     SensitiveDouble: FloatShape
+    SensitiveInteger: IntegerShape
     SensitiveString: StringShape
     ServiceQuotaExceededException: StructureShape
+    Sha1CertificateFingerprint: StringShape
     SpeedUnit: StringShape
+    StartJobRequest: StructureShape
+    StartJobResponse: StructureShape
     Status: StringShape
     Step: StructureShape
     StepList: ListShape
@@ -278,6 +314,9 @@ module Aws::Location
     UpdateTrackerInput: StructureShape
     UpdateTrackerOutput: StructureShape
     Uuid: StringShape
+    ValidateAddressActionOptions: StructureShape
+    ValidateAddressAdditionalFeature: StringShape
+    ValidateAddressAdditionalFeatureList: ListShape
     ValidationException: StructureShape
     ValidationExceptionField: StructureShape
     ValidationExceptionFieldList: ListShape

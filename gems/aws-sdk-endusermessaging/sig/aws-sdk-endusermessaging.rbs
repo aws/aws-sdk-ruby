@@ -1,0 +1,5 @@
+  module Aws
+    module EndUserMessaging
+      VERSION: String
+    end
+  end

@@ -91,7 +91,7 @@ module Aws::ControlTower
       end
     end
 
-    # <p>The request would cause a service quota to be exceeded. The limit is 100 concurrent operations.</p>
+    # <p>The request would cause a service quota to be exceeded. See <a href="https://docs.aws.amazon.com/controltower/latest/userguide/request-an-increase.html">Service quotas</a>.</p>
     class ServiceQuotaExceededException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ControlTower::Types::ServiceQuotaExceededException] data

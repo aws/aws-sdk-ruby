@@ -166,6 +166,8 @@ module Aws::Grafana
         ?configuration: String,
         ?network_access_control: Types::NetworkAccessConfiguration,
         ?grafana_version: String,
+        ?ip_address_type: String,
+        ?kms_key_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -186,6 +188,8 @@ module Aws::Grafana
       attr_accessor configuration: String?
       attr_accessor network_access_control: Types::NetworkAccessConfiguration?
       attr_accessor grafana_version: String?
+      attr_accessor ip_address_type: String?
+      attr_accessor kms_key_id: String?
     end
 
     class CreateWorkspaceOutput
@@ -1006,6 +1010,7 @@ module Aws::Grafana
         ?remove_vpc_configuration: bool,
         ?network_access_control: Types::NetworkAccessConfiguration,
         ?remove_network_access_configuration: bool,
+        ?ip_address_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1024,6 +1029,7 @@ module Aws::Grafana
       attr_accessor remove_vpc_configuration: bool?
       attr_accessor network_access_control: Types::NetworkAccessConfiguration?
       attr_accessor remove_network_access_configuration: bool?
+      attr_accessor ip_address_type: String?
     end
 
     class UpdateWorkspaceOutput
@@ -1120,6 +1126,9 @@ module Aws::Grafana
         ?vpc_configuration: Types::VpcConfiguration,
         ?network_access_control: Types::NetworkAccessConfiguration,
         ?grafana_token: String,
+        ?ip_address_type: String,
+        ?kms_key_id: String,
+        ?degraded_workspace_reason: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1148,6 +1157,9 @@ module Aws::Grafana
       attr_accessor vpc_configuration: Types::VpcConfiguration?
       attr_accessor network_access_control: Types::NetworkAccessConfiguration?
       attr_accessor grafana_token: String?
+      attr_accessor ip_address_type: String?
+      attr_accessor kms_key_id: String?
+      attr_accessor degraded_workspace_reason: String?
     end
 
     class WorkspaceSummary

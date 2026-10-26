@@ -144,18 +144,18 @@ module Aws::NeptuneGraph
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -397,7 +397,7 @@ module Aws::NeptuneGraph
     # @option params [Types::VectorSearchConfiguration] :vector_search_configuration
     #   <p>Specifies the number of dimensions for vector embeddings that will be loaded into the graph. The value is specified as <code>dimension=</code>value. Max = 65,535 </p>
     # @option params [Integer] :replica_count
-    #   <p>The number of replicas in other AZs to provision on the new graph after import. Default = 0, Min = 0, Max = 2.</p> <important> <p> Additional charges equivalent to the m-NCUs selected for the graph apply for each replica. </p> </important>
+    #   <p>The number of replicas in other AZs to provision on the new graph after import. Default = 1, Min = 0, Max = 2.</p> <important> <p> Additional charges equivalent to the m-NCUs selected for the graph apply for each replica. </p> </important>
     # @option params [Boolean] :deletion_protection
     #   <p>Indicates whether or not to enable deletion protection on the graph. The graph can’t be deleted when deletion protection is enabled. (<code>true</code> or <code>false</code>).</p>
     # @option params [Types::ImportOptions] :import_options
@@ -477,7 +477,7 @@ module Aws::NeptuneGraph
       request.send_request(options)
     end
 
-    # <p>Create a private graph endpoint to allow private access from to the graph from within a VPC. You can attach security groups to the private graph endpoint.</p> <note> <p>VPC endpoint charges apply.</p> </note>
+    # <p>Create a private graph endpoint to allow private access to the graph from within a VPC. You can attach security groups to the private graph endpoint.</p> <note> <p>VPC endpoint charges apply.</p> </note>
     # @param [Hash, Types::CreatePrivateGraphEndpointInput] params
     # @option params [String] :graph_identifier
     #   <p>The unique identifier of the Neptune Analytics graph.</p>
@@ -486,7 +486,7 @@ module Aws::NeptuneGraph
     # @option params [Array<String>] :subnet_ids
     #   <p>Subnets in which private graph endpoint ENIs are created.</p>
     # @option params [Array<String>] :vpc_security_group_ids
-    #   <p>Security groups to be attached to the private graph endpoint..</p>
+    #   <p>Security groups to be attached to the private graph endpoint.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     graph_identifier: "GraphIdentifier", # required
@@ -550,7 +550,7 @@ module Aws::NeptuneGraph
       request.send_request(options)
     end
 
-    # <p>Deletes the specifed graph snapshot.</p>
+    # <p>Deletes the specified graph snapshot.</p>
     # @param [Hash, Types::DeleteGraphSnapshotInput] params
     # @option params [String] :snapshot_identifier
     #   <p>ID of the graph snapshot to be deleted.</p>
@@ -1050,12 +1050,15 @@ module Aws::NeptuneGraph
 
     # <p>Lists import tasks.</p>
     # @param [Hash, Types::ListImportTasksInput] params
+    # @option params [String] :graph_identifier
+    #   <p>The unique identifier of the Neptune Analytics graph. When provided, the service returns only import tasks associated with this graph. If not specified, the service returns all import tasks.</p>
     # @option params [String] :next_token
     #   <p>Pagination token used to paginate output.</p> <p>When this value is provided as input, the service returns results from where the previous response left off. When this value is present in output, it indicates that there are more results to retrieve.</p>
     # @option params [Integer] :max_results
     #   <p>The total number of records to return in the command's output.</p> <p>If the total number of records available is more than the value specified, <code>nextToken</code> is provided in the command's output. To resume pagination, provide the <code>nextToken</code> output value in the <code>nextToken</code> argument of a subsequent command. Do not use the <code>nextToken</code> response element directly outside of the Amazon CLI.</p>
     # @example Request syntax with placeholder values
     #   params = {
+    #     graph_identifier: "GraphIdentifier",
     #     next_token: "PaginationToken",
     #     max_results: 1
     #   }
@@ -1418,7 +1421,7 @@ module Aws::NeptuneGraph
     # @option params [String] :source
     #   <p>A URL identifying the location of the data to be imported. This can be an Amazon S3 path, or can point to a Neptune database endpoint or snapshot.</p>
     # @option params [String] :format
-    #   <p>Specifies the format of Amazon S3 data to be imported. Valid values are CSV, which identifies the Gremlin CSV format or OPENCYPHER, which identies the openCypher load format.</p>
+    #   <p>Specifies the format of Amazon S3 data to be imported. Valid values are CSV, which identifies the Gremlin CSV format or OPENCYPHER, which identifies the openCypher load format.</p>
     # @option params [String] :parquet_type
     #   <p>The parquet type of the import task.</p>
     # @option params [String] :blank_node_handling

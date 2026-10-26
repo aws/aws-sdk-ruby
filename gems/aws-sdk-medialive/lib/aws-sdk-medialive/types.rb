@@ -15,7 +15,7 @@ module Aws::MediaLive
     #   @return [String]
     # @!attribute input_type
     #   Set to "broadcasterMixedAd" when input contains pre-mixed main audio + AD (narration) as a stereo pair.  The Audio Type field (audioType) will be set to 3, which signals to downstream systems that this stream contains "broadcaster mixed AD". Note that the input received by the encoder must contain pre-mixed audio; the encoder does not perform the mixing. The values in audioTypeControl and audioType (in AudioDescription) are ignored when set to broadcasterMixedAd.
-    #   
+    #
     #   Leave set to "normal" when input does not contain pre-mixed audio + AD.
     #   @return [String]
     # @!attribute profile
@@ -47,6 +47,26 @@ module Aws::MediaLive
       :sample_rate,
       :spec,
       :vbr_quality,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # The vendor-specified custom profile options
+    # @!attribute embedding_frequency
+    #   The frequency with which watermarks will be embedded, in milliseconds.
+    #   @return [Float]
+    # @!attribute scene_cut
+    #   The number of frames after scene-cut to embed the watermark.
+    #   @return [Float]
+    # @!attribute target_psnr
+    #   The target PSNR of the watermarked frame
+    #   @return [Float]
+    class AbWatermarkingCustomProfile < Struct.new(
+      nil,
+      :embedding_frequency,
+      :scene_cut,
+      :target_psnr,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -387,6 +407,22 @@ module Aws::MediaLive
       include ::Smithy::Schema::Structure
     end
 
+    # Maps an audio selector in the channel to a feed input on the associated Elemental Inference feed.
+    # @!attribute audio_selector_name
+    #   The name of the audio selector in the channel that will be sent to the Elemental Inference feed input.
+    #   @return [String]
+    # @!attribute feed_input
+    #   The name of the feed input on the Elemental Inference feed that will receive the audio from the specified audio selector.
+    #   @return [String]
+    class AudioFeedInput < Struct.new(
+      nil,
+      :audio_selector_name,
+      :feed_input,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # Audio Hls Rendition Selection
     # @!attribute group_id
     #   Specifies the GROUP-ID in the #EXT-X-MEDIA tag of the target HLS audio rendition.
@@ -421,19 +457,42 @@ module Aws::MediaLive
 
     # Audio Normalization Settings
     # @!attribute algorithm
-    #   Audio normalization algorithm to use. itu17701 conforms to the CALM Act specification, itu17702 conforms to the EBU R-128 specification.
+    #   Choose one of the following audio normalization algorithms:
+    #
+    #   ITU-R BS.1770-1: Ungated loudness. A measurement of ungated average loudness for an entire piece of content,
+    #   suitable for measurement of short-form content under ATSC recommendation A/85. Supports up to 5.1 audio channels.
+    #
+    #   ITU-R BS.1770-2: Gated loudness. A measurement of gated average loudness compliant with the requirements of
+    #   EBU-R128. Supports up to 5.1 audio channels.
+    #
+    #   ITU-R BS.1770-3: Modified peak. The same loudness measurement algorithm as 1770-2, with an updated true peak
+    #   measurement.
+    #
+    #   ITU-R BS.1770-4: Higher channel count. Allows for more audio channels than the other algorithms, including
+    #   configurations such as 7.1.
     #   @return [String]
     # @!attribute algorithm_control
     #   When set to correctAudio the output audio is corrected using the chosen algorithm. If set to measureOnly, the audio will be measured but not adjusted.
     #   @return [String]
     # @!attribute target_lkfs
-    #   Target LKFS(loudness) to adjust volume to. If no value is entered, a default value will be used according to the chosen algorithm.  The CALM Act (1770-1) recommends a target of -24 LKFS. The EBU R-128 specification (1770-2) recommends a target of -23 LKFS.
+    #   Target LKFS(loudness) to adjust volume to. If no value is entered, a default value will be used according to the chosen algorithm.  The CALM Act recommends a target of -24 LKFS. The EBU R-128 specification recommends a target of -23 LKFS.
+    #   @return [Float]
+    # @!attribute peak_calculation
+    #   If set to TRUE_PEAK, calculate the TruePeak for each output's audio track loudness.
+    #   @return [String]
+    # @!attribute peak_limiter_threshold
+    #   Peak limiter threshold in decibels relative to true peak (dBTP) if TRUE_PEAK is enabled.
+    #   If TRUE_PEAK is not enabled a full scale (dbFS) value is used.
+    #   The peak inter-audio sample loudness in your output will be limited to the value that you specify,
+    #   without affecting the overall target LKFS. Leave blank to use the default value 0.
     #   @return [Float]
     class AudioNormalizationSettings < Struct.new(
       nil,
       :algorithm,
       :algorithm_control,
       :target_lkfs,
+      :peak_calculation,
+      :peak_limiter_threshold,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -445,21 +504,21 @@ module Aws::MediaLive
     #   @return [String]
     # @!attribute audio_only_image
     #   Optional. Specifies the .jpg or .png image to use as the cover art for an audio-only output. We recommend a low bit-size file because the image increases the output audio bandwidth.
-    #   
+    #
     #   The image is attached to the audio as an ID3 tag, frame type APIC, picture type 0x10, as per the "ID3 tag version 2.4.0 - Native Frames" standard.
     #   @return [Types::InputLocation]
     # @!attribute audio_track_type
     #   Four types of audio-only tracks are supported:
-    #   
+    #
     #   Audio-Only Variant Stream
     #   The client can play back this audio-only stream instead of video in low-bandwidth scenarios. Represented as an EXT-X-STREAM-INF in the HLS manifest.
-    #   
+    #
     #   Alternate Audio, Auto Select, Default
     #   Alternate rendition that the client should try to play back by default. Represented as an EXT-X-MEDIA in the HLS manifest with DEFAULT=YES, AUTOSELECT=YES
-    #   
+    #
     #   Alternate Audio, Auto Select, Not Default
     #   Alternate rendition that the client may try to play back by default. Represented as an EXT-X-MEDIA in the HLS manifest with DEFAULT=NO, AUTOSELECT=YES
-    #   
+    #
     #   Alternate Audio, not Auto Select
     #   Alternate rendition that the client will not try to play back by default. Represented as an EXT-X-MEDIA in the HLS manifest with DEFAULT=NO, AUTOSELECT=NO
     #   @return [String]
@@ -477,13 +536,74 @@ module Aws::MediaLive
       include ::Smithy::Schema::Structure
     end
 
+    # Represents a single PID value for audio selection with optional pre-mixer settings
+    # @!attribute dolby_e_decode
+    #   Configure decoding options for Dolby E streams - these should be Dolby E frames carried in PCM streams tagged with SMPTE-337.
+    #   When using the 'pids' array, if this field is not specified and Dolby E content is present,
+    #   the decoder will extract the specified program. To maintain legacy behavior (allPrograms),
+    #   explicitly set programSelection to "allChannels".
+    #   @return [Types::AudioDolbyEDecode]
+    # @!attribute pid
+    #   PID value from within a source.
+    #   @return [Integer]
+    # @!attribute premix_settings
+    #   Optional audio pre-mixer settings for this PID.
+    #   When specified, allows per-PID audio processing including channel remixing,
+    #   gain adjustment, and loudness normalization before interleaving.
+    #   @return [Types::AudioPreMixerSettings]
+    class AudioPid < Struct.new(
+      nil,
+      :dolby_e_decode,
+      :pid,
+      :premix_settings,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # Audio Pid Selection
     # @!attribute pid
     #   Selects a specific PID from within a source.
     #   @return [Integer]
+    # @!attribute pids
+    #   Selects one or more unique PIDs from within a source.
+    #   When using 'pids', you can specify per-PID audio pre-mixer settings.
+    #   @return [Array<Types::AudioPid>]
     class AudioPidSelection < Struct.new(
       nil,
       :pid,
+      :pids,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # Audio pre-mixer settings for normalizing audio before interleaving.
+    # These settings can be applied to individual PIDs or tracks before they are combined.
+    # @!attribute audio_normalization_settings
+    #   Audio normalization settings for loudness control.
+    #   When specified, audio loudness will be normalized according to the chosen algorithm.
+    #   @return [Types::AudioNormalizationSettings]
+    # @!attribute channels
+    #   Number of audio channels.
+    #   If specified, the audio will be remixed to match this channel count.
+    #   Ignored if remixSettings is specified.
+    #   @return [Integer]
+    # @!attribute gain_db
+    #   Gain adjustment in dB to apply.
+    #   Range: -60 to +60 dB
+    #   @return [Float]
+    # @!attribute remix_settings
+    #   Settings that control how input audio channels are remixed.
+    #   When specified, allows fine-grained control over channel mapping and gain levels.
+    #   Takes precedence over the 'channels' setting.
+    #   @return [Types::RemixSettings]
+    class AudioPreMixerSettings < Struct.new(
+      nil,
+      :audio_normalization_settings,
+      :channels,
+      :gain_db,
+      :remix_settings,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -545,13 +665,19 @@ module Aws::MediaLive
       include ::Smithy::Schema::Structure
     end
 
-    # Audio Track
+    # Represents a single audio track for selection with optional pre-mixer settings
     # @!attribute track
     #   1-based integer value that maps to a specific audio track
     #   @return [Integer]
+    # @!attribute premix_settings
+    #   Optional audio pre-mixer settings for this track.
+    #   When specified, allows per-track audio processing including channel remixing,
+    #   gain adjustment, and loudness normalization before interleaving.
+    #   @return [Types::AudioPreMixerSettings]
     class AudioTrack < Struct.new(
       nil,
       :track,
+      :premix_settings,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -622,12 +748,16 @@ module Aws::MediaLive
     # @!attribute rec709_settings
     #   Rec709 Settings
     #   @return [Types::Rec709Settings]
+    # @!attribute hlg2020_settings
+    #   Hlg2020 Settings
+    #   @return [Types::Hlg2020Settings]
     class Av1ColorSpaceSettings < Struct.new(
       nil,
       :color_space_passthrough_settings,
       :hdr10_settings,
       :rec601_settings,
       :rec709_settings,
+      :hlg2020_settings,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -706,10 +836,10 @@ module Aws::MediaLive
     #   @return [Integer]
     # @!attribute rate_control_mode
     #   Rate control mode.
-    #   
+    #
     #   QVBR: Quality will match the specified quality level except when it is constrained by the
     #   maximum bitrate.  Recommended if you or your viewers pay for bandwidth.
-    #   
+    #
     #   CBR: Quality varies, depending on the video complexity. Recommended only if you distribute
     #   your assets to devices that cannot handle variable bitrates.
     #   @return [String]
@@ -718,6 +848,20 @@ module Aws::MediaLive
     #   Optional.
     #   Enter a minimum bitrate if you want to keep the output bitrate about a threshold, in order to prevent the downstream system from de-allocating network bandwidth for this output.
     #   @return [Integer]
+    # @!attribute spatial_aq
+    #   Spatial AQ makes adjustments within each frame based on spatial variation of content complexity. Enabled: MediaLive will determine the appropriate level of spatial AQ to apply. Disabled: No spatial AQ. For more information, see the topic about video adaptive quantization in the MediaLive user guide.
+    #   @return [String]
+    # @!attribute temporal_aq
+    #   Temporal AQ makes adjustments within each frame based on variations in content complexity over time. Enabled: MediaLive will determine the appropriate level of temporal AQ to apply. Disabled: No temporal AQ. For more information, see the topic about video adaptive quantization in the MediaLive user guide.
+    #   @return [String]
+    # @!attribute timecode_insertion
+    #   Controls how MediaLive inserts timecodes into the video output encode.
+    #   DISABLED: Do not insert timecodes.
+    #   METADATA_OBU: Include timecodes. MediaLive inserts timecode metadata based on the timecode from the source specified in the Timecode Config property. The timecode metadata is a metadata OBU (Open Bitstream Unit) of type METADATA_TYPE_TIMECODE, in accordance with https://aomediacodec.github.io/av1-spec/#metadata-timecode-syntax.
+    #   @return [String]
+    # @!attribute bit_depth
+    #   Specifies the bit depth for the output encode. Choose a value. Or leave the field empty to use the default, which is 8 bit.
+    #   @return [String]
     class Av1Settings < Struct.new(
       nil,
       :afd_signaling,
@@ -740,6 +884,10 @@ module Aws::MediaLive
       :bitrate,
       :rate_control_mode,
       :min_bitrate,
+      :spatial_aq,
+      :temporal_aq,
+      :timecode_insertion,
+      :bit_depth,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -767,7 +915,7 @@ module Aws::MediaLive
     #   @return [Types::AvailSettings]
     # @!attribute scte35_segmentation_scope
     #   Configures whether SCTE 35 passthrough triggers segment breaks in all output groups that use segmented outputs. Insertion of a SCTE 35 message typically results in a segment break, in addition to the regular cadence of breaks. The segment breaks appear in video outputs, audio outputs, and captions outputs (if any).
-    #   
+    #
     #   ALL_OUTPUT_GROUPS: Default. Insert the segment break in in all output groups that have segmented outputs. This is the legacy behavior.
     #   SCTE35_ENABLED_OUTPUT_GROUPS: Insert the segment break only in output groups that have SCTE 35 passthrough enabled. This is the recommended value, because it reduces unnecessary segment breaks.
     #   @return [String]
@@ -828,7 +976,7 @@ module Aws::MediaLive
     # @!attribute post_filter_sharpening
     #   Configures the sharpening control, which is available when the bandwidth reduction filter is enabled. This
     #   control sharpens edges and contours, which produces a specific artistic effect that you might want.
-    #   
+    #
     #   We recommend that you test each of the values (including DISABLED) to observe the sharpening effect on the
     #   content.
     #   @return [String]
@@ -1400,6 +1548,9 @@ module Aws::MediaLive
     # @!attribute teletext_source_settings
     #   Teletext Source Settings
     #   @return [Types::TeletextSourceSettings]
+    # @!attribute smart_subtitle_source_settings
+    #   Smart Subtitle Source Settings
+    #   @return [Types::SmartSubtitleSourceSettings]
     class CaptionSelectorSettings < Struct.new(
       nil,
       :ancillary_source_settings,
@@ -1409,6 +1560,7 @@ module Aws::MediaLive
       :scte20_source_settings,
       :scte27_source_settings,
       :teletext_source_settings,
+      :smart_subtitle_source_settings,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1489,6 +1641,15 @@ module Aws::MediaLive
     # @!attribute channel_engine_version
     #   Requested engine version for this channel.
     #   @return [Types::ChannelEngineVersionResponse]
+    # @!attribute linked_channel_settings
+    #   Linked Channel Settings for this channel.
+    #   @return [Types::DescribeLinkedChannelSettings]
+    # @!attribute channel_security_groups
+    #   A list of IDs for all the Input Security Groups attached to the channel.
+    #   @return [Array<String>]
+    # @!attribute inference_settings
+    #   Include this setting to include Elemental Inference features in this channel.
+    #   @return [Types::DescribeInferenceSettings]
     class Channel < Struct.new(
       nil,
       :arn,
@@ -1511,6 +1672,45 @@ module Aws::MediaLive
       :vpc,
       :anywhere_settings,
       :channel_engine_version,
+      :linked_channel_settings,
+      :channel_security_groups,
+      :inference_settings,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # An alert on a channel
+    # @!attribute alert_type
+    #   The type of the alert
+    #   @return [String]
+    # @!attribute cleared_timestamp
+    #   The time when the alert was cleared
+    #   @return [Time]
+    # @!attribute id
+    #   The unique ID for this alert instance
+    #   @return [String]
+    # @!attribute message
+    #   The user facing alert message which can have more context
+    #   @return [String]
+    # @!attribute pipeline_id
+    #   The ID of the pipeline this alert is associated with
+    #   @return [String]
+    # @!attribute set_timestamp
+    #   The time when the alert was set
+    #   @return [Time]
+    # @!attribute state
+    #   The state of the alert
+    #   @return [String]
+    class ChannelAlert < Struct.new(
+      nil,
+      :alert_type,
+      :cleared_timestamp,
+      :id,
+      :message,
+      :pipeline_id,
+      :set_timestamp,
+      :state,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1616,6 +1816,15 @@ module Aws::MediaLive
     # @!attribute used_channel_engine_versions
     #   The engine version that the running pipelines are using.
     #   @return [Array<Types::ChannelEngineVersionResponse>]
+    # @!attribute linked_channel_settings
+    #   Linked Channel Settings for this channel.
+    #   @return [Types::DescribeLinkedChannelSettings]
+    # @!attribute channel_security_groups
+    #   A list of IDs for all the Input Security Groups attached to the channel.
+    #   @return [Array<String>]
+    # @!attribute inference_settings
+    #   Include this setting to include Elemental Inference features in this channel.
+    #   @return [Types::DescribeInferenceSettings]
     class ChannelSummary < Struct.new(
       nil,
       :arn,
@@ -1637,6 +1846,9 @@ module Aws::MediaLive
       :anywhere_settings,
       :channel_engine_version,
       :used_channel_engine_versions,
+      :linked_channel_settings,
+      :channel_security_groups,
+      :inference_settings,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1778,6 +1990,46 @@ module Aws::MediaLive
       include ::Smithy::Schema::Structure
     end
 
+    # An alert on a cluster
+    # @!attribute alert_type
+    #   The type of the alert
+    #   @return [String]
+    # @!attribute channel_id
+    #   The ID of the channel this alert is associated with
+    #   @return [String]
+    # @!attribute cleared_timestamp
+    #   The time when the alert was cleared
+    #   @return [Time]
+    # @!attribute id
+    #   The further subtype of this alert
+    #   @return [String]
+    # @!attribute message
+    #   The user facing alert message which can have more context
+    #   @return [String]
+    # @!attribute node_id
+    #   The ID of the node this alert is associated with
+    #   @return [String]
+    # @!attribute set_timestamp
+    #   The time when the alert was set
+    #   @return [Time]
+    # @!attribute state
+    #   The state of the alert
+    #   @return [String]
+    class ClusterAlert < Struct.new(
+      nil,
+      :alert_type,
+      :channel_id,
+      :cleared_timestamp,
+      :id,
+      :message,
+      :node_id,
+      :set_timestamp,
+      :state,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # Used in DescribeClusterResult, DescribeClusterSummary, UpdateClusterResult.
     # @!attribute default_route
     #   The network interface that is the default route for traffic to and from the node. MediaLive Anywhere uses this default when the destination for the traffic isn't covered by the route table for any of the networks. Specify the value of the appropriate logicalInterfaceName parameter that you create in the interfaceMappings.
@@ -1826,6 +2078,47 @@ module Aws::MediaLive
       include ::Smithy::Schema::Structure
     end
 
+    # A/B Watermarker settings for CMAF Ingest output groups.
+    # @!attribute additional_destinations_alternate_destinations
+    #   The "B" pipeline renditions for the additional destinations.
+    #   @return [Array<Types::OutputLocationRef>]
+    # @!attribute alternate_destination
+    #   The "B" pipeline renditions for the main destination.
+    #   @return [Types::OutputLocationRef]
+    # @!attribute custom_profile
+    #   The vendor-provided custom profile values.
+    #   @return [Types::AbWatermarkingCustomProfile]
+    # @!attribute license
+    #   The name of the Secrets Manager secret containing the license file.
+    #   @return [String]
+    # @!attribute operator_id
+    #   The vendor-provided Operator ID.
+    #   @return [Integer]
+    # @!attribute poly_period
+    #   The number of segments per watermarking bit. The total duration of the watermarking bit
+    #   should be the LCM (least common multiple) of all segments sizes emitted by the downstream packager.
+    #   @return [Integer]
+    # @!attribute profile
+    #   The vendor-provided profile choice.
+    #   @return [String]
+    # @!attribute watermark_id_length
+    #   The number of bits that compose the watermarking identifier to be embedded.
+    #   @return [String]
+    class CmafIngestAbWatermarkerIrdetoSettings < Struct.new(
+      nil,
+      :additional_destinations_alternate_destinations,
+      :alternate_destination,
+      :custom_profile,
+      :license,
+      :operator_id,
+      :poly_period,
+      :profile,
+      :watermark_id_length,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # Add an array item for each language. Follow the order of the caption descriptions. For example, if the first caption description is for German, then the first array item must be for German, and its caption channel must be set to 1. The second array item must be 2, and so on.
     # @!attribute caption_channel
     #   A number for the channel for this caption, 1 to 4.
@@ -1850,7 +2143,7 @@ module Aws::MediaLive
     #   If set to passthrough, Nielsen inaudible tones for media tracking will be detected in the input audio and an equivalent ID3 tag will be inserted in the output.
     #   @return [String]
     # @!attribute scte35_type
-    #   Type of scte35 track to add. none or scte35WithoutSegmentation
+    #   SCTE-35 insertion type. Option "none" indicates that a SCTE-35 marker will not be inserted, nor will an IDR be inserted at the SCTE-35 cue point, nor will the segment be segmented. Option "scte35WithoutIdr" indicates that a SCTE-35 marker will be inserted to indicate the cue point, but MediaLive will not insert an IDR on that frame nor will it introduce a new segment boundary there if it wasn't already going to be one (this option is required for use with downstream multiview bitstream stitching workflows). Option "scte35WithoutSegmentation" indicates that a SCTE-35 marker will be inserted to indicate the cue point, and an IDR will be inserted on that frame so that a downstream re-packager might split the segment there, but MediaLive itself will not introduce a new segment boundary there.
     #   @return [String]
     # @!attribute segment_length
     #   The nominal duration of segments. The units are specified in SegmentLengthUnits. The segments will end on the next keyframe after the specified duration, so the actual segment length might be longer, and it might be a fraction of the units.
@@ -1894,6 +2187,9 @@ module Aws::MediaLive
     # @!attribute additional_destinations
     #   Optional an array of additional destinational HTTP destinations for the OutputGroup outputs
     #   @return [Array<Types::AdditionalDestinations>]
+    # @!attribute watermarking_settings
+    #   Specifies the type of watermarking technology to use.
+    #   @return [Types::CmafIngestWatermarkingSettings]
     class CmafIngestGroupSettings < Struct.new(
       nil,
       :destination,
@@ -1913,6 +2209,7 @@ module Aws::MediaLive
       :timed_metadata_id3_period,
       :timed_metadata_passthrough,
       :additional_destinations,
+      :watermarking_settings,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1925,6 +2222,18 @@ module Aws::MediaLive
     class CmafIngestOutputSettings < Struct.new(
       nil,
       :name_modifier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # A/B Watermarker settings for CMAF Ingest output groups.
+    # @!attribute cmaf_ingest_ab_watermarker_irdeto_settings
+    #   A/B Watermarker settings for CMAF Ingest output groups.
+    #   @return [Types::CmafIngestAbWatermarkerIrdetoSettings]
+    class CmafIngestWatermarkingSettings < Struct.new(
+      nil,
+      :cmaf_ingest_ab_watermarker_irdeto_settings,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2100,6 +2409,15 @@ module Aws::MediaLive
     # @!attribute dry_run
     #   Placeholder documentation for __boolean
     #   @return [Boolean]
+    # @!attribute linked_channel_settings
+    #   The linked channel settings for the channel.
+    #   @return [Types::LinkedChannelSettings]
+    # @!attribute channel_security_groups
+    #   A list of IDs for all the Input Security Groups attached to the channel.
+    #   @return [Array<String>]
+    # @!attribute inference_settings
+    #   Include this setting to include Elemental Inference features in this channel.
+    #   @return [Types::InferenceSettings]
     class CreateChannelRequest < Struct.new(
       nil,
       :cdi_input_specification,
@@ -2119,6 +2437,9 @@ module Aws::MediaLive
       :anywhere_settings,
       :channel_engine_version,
       :dry_run,
+      :linked_channel_settings,
+      :channel_security_groups,
+      :inference_settings,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2610,6 +2931,9 @@ module Aws::MediaLive
     # @!attribute sdi_sources
     #   SDI Sources for this Input.
     #   @return [Array<String>]
+    # @!attribute router_settings
+    #   This is the collection of settings that are used during the creation of a MediaConnect router input.
+    #   @return [Types::RouterSettings]
     class CreateInputRequest < Struct.new(
       nil,
       :destinations,
@@ -2628,6 +2952,7 @@ module Aws::MediaLive
       :multicast_settings,
       :smpte2110_receiver_group_settings,
       :sdi_sources,
+      :router_settings,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3275,6 +3600,15 @@ module Aws::MediaLive
     # @!attribute channel_engine_version
     #   Requested engine version for this channel.
     #   @return [Types::ChannelEngineVersionResponse]
+    # @!attribute linked_channel_settings
+    #   Linked Channel Settings for this channel.
+    #   @return [Types::DescribeLinkedChannelSettings]
+    # @!attribute channel_security_groups
+    #   A list of IDs for all the Input Security Groups attached to the channel.
+    #   @return [Array<String>]
+    # @!attribute inference_settings
+    #   Include this setting to include Elemental Inference features in this channel.
+    #   @return [Types::DescribeInferenceSettings]
     class DeleteChannelResponse < Struct.new(
       nil,
       :arn,
@@ -3297,6 +3631,9 @@ module Aws::MediaLive
       :vpc,
       :anywhere_settings,
       :channel_engine_version,
+      :linked_channel_settings,
+      :channel_security_groups,
+      :inference_settings,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4029,6 +4366,15 @@ module Aws::MediaLive
     # @!attribute channel_engine_version
     #   Requested engine version for this channel.
     #   @return [Types::ChannelEngineVersionResponse]
+    # @!attribute linked_channel_settings
+    #   Linked Channel Settings for this channel.
+    #   @return [Types::DescribeLinkedChannelSettings]
+    # @!attribute channel_security_groups
+    #   A list of IDs for all the Input Security Groups attached to the channel.
+    #   @return [Array<String>]
+    # @!attribute inference_settings
+    #   Include this setting to include Elemental Inference features in this channel.
+    #   @return [Types::DescribeInferenceSettings]
     class DescribeChannelResponse < Struct.new(
       nil,
       :arn,
@@ -4051,6 +4397,9 @@ module Aws::MediaLive
       :vpc,
       :anywhere_settings,
       :channel_engine_version,
+      :linked_channel_settings,
+      :channel_security_groups,
+      :inference_settings,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4143,6 +4492,42 @@ module Aws::MediaLive
       :name,
       :network_settings,
       :state,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # Details of a follower channel in a linked pair
+    # @!attribute linked_channel_type
+    #   Specifies this as a follower channel
+    #   @return [String]
+    # @!attribute primary_channel_arn
+    #   The ARN of the primary channel this channel follows
+    #   @return [String]
+    class DescribeFollowerChannelSettings < Struct.new(
+      nil,
+      :linked_channel_type,
+      :primary_channel_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # Configures Elemental Inference features in a channel.
+    # @!attribute feed_arn
+    #   The ARN of the feed resource that is associated with this channel. The feed is a resource in the Elemental Inference service.
+    #   @return [String]
+    # @!attribute audio_feed_inputs
+    #   A list of audio feed inputs that map audio selectors in the channel to feed inputs on the associated Elemental Inference feed.
+    #   @return [Array<Types::AudioFeedInput>]
+    # @!attribute enrichment_methods
+    #   The set of Contextual Metadata Enrichment methods enabled for this channel. Each method represents a specific way the channel uses the inference feed to augment its output with contextual metadata.
+    #   @return [Array<String>]
+    class DescribeInferenceSettings < Struct.new(
+      nil,
+      :feed_arn,
+      :audio_feed_inputs,
+      :enrichment_methods,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4360,6 +4745,9 @@ module Aws::MediaLive
     # @!attribute sdi_sources
     #   SDI Sources for this Input.
     #   @return [Array<String>]
+    # @!attribute router_settings
+    #   Information about any MediaConnect router association with this input.
+    #   @return [Types::RouterInputSettings]
     class DescribeInputResponse < Struct.new(
       nil,
       :arn,
@@ -4383,6 +4771,7 @@ module Aws::MediaLive
       :multicast_settings,
       :smpte2110_receiver_group_settings,
       :sdi_sources,
+      :router_settings,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4419,6 +4808,9 @@ module Aws::MediaLive
     # @!attribute whitelist_rules
     #   Whitelist rules and their sync status
     #   @return [Array<Types::InputWhitelistRule>]
+    # @!attribute channels
+    #   The list of channels currently using this Input Security Group as their channel security group.
+    #   @return [Array<String>]
     class DescribeInputSecurityGroupResponse < Struct.new(
       nil,
       :arn,
@@ -4427,6 +4819,23 @@ module Aws::MediaLive
       :state,
       :tags,
       :whitelist_rules,
+      :channels,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # Linked channel configuration details
+    # @!attribute follower_channel_settings
+    #   Details of a follower channel in a linked pair
+    #   @return [Types::DescribeFollowerChannelSettings]
+    # @!attribute primary_channel_settings
+    #   Details of a primary (leader) channel in a linked pair
+    #   @return [Types::DescribePrimaryChannelSettings]
+    class DescribeLinkedChannelSettings < Struct.new(
+      nil,
+      :follower_channel_settings,
+      :primary_channel_settings,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4808,6 +5217,22 @@ module Aws::MediaLive
       include ::Smithy::Schema::Structure
     end
 
+    # Details of a primary (leader) channel in a linked pair
+    # @!attribute following_channel_arns
+    #   The ARNs of the following channels for this primary channel
+    #   @return [Array<String>]
+    # @!attribute linked_channel_type
+    #   Specifies this as a primary channel
+    #   @return [String]
+    class DescribePrimaryChannelSettings < Struct.new(
+      nil,
+      :following_channel_arns,
+      :linked_channel_type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # Placeholder documentation for DescribeReservationRequest
     # @!attribute reservation_id
     #   Unique reservation ID, e.g. '1234567'
@@ -4991,6 +5416,18 @@ module Aws::MediaLive
     class DescribeThumbnailsResponse < Struct.new(
       nil,
       :thumbnail_details,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # Disabled Locking Settings
+    # @!attribute custom_epoch
+    #   Optional. Only applies to CMAF Ingest Output Group and MediaPackage V2 Output Group. Enter a value here to use a custom epoch, instead of the standard epoch (which started at 1970-01-01T00:00:00 UTC). Specify the start time of the custom epoch, in YYYY-MM-DDTHH:MM:SS in UTC. The time must be 2000-01-01T00:00:00 or later. Always set the MM:SS portion to 00:00.
+    #   @return [String]
+    class DisabledLockingSettings < Struct.new(
+      nil,
+      :custom_epoch,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5313,9 +5750,32 @@ module Aws::MediaLive
       include ::Smithy::Schema::Structure
     end
 
+    # Embedded Caption Position Settings
+    # @!attribute y_position_line
+    #   Specifies the vertical position of the caption as a row counted from the top of the output. Row 1 is the topmost row. Acceptable values are 1 through 15.
+    #   @return [Integer]
+    class EmbeddedCaptionPositionSettings < Struct.new(
+      nil,
+      :y_position_line,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # Embedded Destination Settings
+    # @!attribute position
+    #   Specifies the position of the output captions. Applies only when styleControl is set to manual.
+    #   @return [Types::EmbeddedCaptionPositionSettings]
+    # @!attribute style_control
+    #   Controls the source of position and style information for the output captions.
+    #
+    #   - "passthrough": Carry the caption position and style from the source captions. When the source captions are embedded, SCTE-20, or ancillary, the position and style are preserved exactly. When the source captions are another format, the position and any supported style are carried over.
+    #   - "manual": Applies the specified styling and positioning. All other styling and positioning is given default values.
+    #   @return [String]
     class EmbeddedDestinationSettings < Struct.new(
       nil,
+      :position,
+      :style_control,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5678,6 +6138,22 @@ module Aws::MediaLive
       nil,
       :follow_point,
       :reference_action_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # Settings for a follower channel in a linked pair
+    # @!attribute linked_channel_type
+    #   Specifies this as a follower channel
+    #   @return [String]
+    # @!attribute primary_channel_arn
+    #   The ARN of the primary channel to follow
+    #   @return [String]
+    class FollowerChannelSettings < Struct.new(
+      nil,
+      :linked_channel_type,
+      :primary_channel_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6135,7 +6611,7 @@ module Aws::MediaLive
     #   @return [Types::InputLossBehavior]
     # @!attribute output_locking_mode
     #   Indicates how MediaLive pipelines are synchronized.
-    #   
+    #
     #   PIPELINE_LOCKING - MediaLive will attempt to synchronize the output of each pipeline to the other.
     #   EPOCH_LOCKING - MediaLive will attempt to synchronize the output of each pipeline to the Unix epoch.
     #   DISABLED - MediaLive will not attempt to synchronize the output of pipelines. We advise against disabling output locking because it has negative side effects in most workflows. For more information, see the section about output locking (pipeline locking) in the Medialive user guide.
@@ -6227,10 +6703,10 @@ module Aws::MediaLive
     # @!attribute filter_settings
     #   Optional. Both filters reduce bandwidth by removing imperceptible details. You can enable one of the filters. We
     #   recommend that you try both filters and observe the results to decide which one to use.
-    #   
+    #
     #   The Temporal Filter reduces bandwidth by removing imperceptible details in the content. It combines perceptual
     #   filtering and motion compensated temporal filtering (MCTF). It operates independently of the compression level.
-    #   
+    #
     #   The Bandwidth Reduction filter is a perceptual filter located within the encoding loop. It adapts to the current
     #   compression level to filter imperceptible signals. This filter works only when the resolution is 1080p or lower.
     #   @return [Types::H264FilterSettings]
@@ -6279,7 +6755,7 @@ module Aws::MediaLive
     #   @return [String]
     # @!attribute max_bitrate
     #   For QVBR: See the tooltip for Quality level
-    #   
+    #
     #   For VBR: Set the maximum bitrate in order to accommodate expected spikes in the complexity of the video.
     #   @return [Integer]
     # @!attribute min_i_interval
@@ -6314,16 +6790,16 @@ module Aws::MediaLive
     #   @return [Integer]
     # @!attribute rate_control_mode
     #   Rate control mode.
-    #   
+    #
     #   QVBR: Quality will match the specified quality level except when it is constrained by the
     #   maximum bitrate.  Recommended if you or your viewers pay for bandwidth.
-    #   
+    #
     #   VBR: Quality and bitrate vary, depending on the video complexity. Recommended instead of QVBR
     #   if you want to maintain a specific average bitrate over the duration of the channel.
-    #   
+    #
     #   CBR: Quality varies, depending on the video complexity. Recommended only if you distribute
     #   your assets to devices that cannot handle variable bitrates.
-    #   
+    #
     #   Multiplex: This rate control mode is only supported (and is required) when the video is being
     #   delivered to a MediaLive Multiplex in which case the rate control configuration is controlled
     #   by the properties within the Multiplex Program.
@@ -6333,7 +6809,7 @@ module Aws::MediaLive
     #   @return [String]
     # @!attribute scene_change_detect
     #   Scene change detection.
-    #   
+    #
     #   - On: inserts I-frames when scene change is detected.
     #   - Off: does not force an I-frame when scene change is detected.
     #   @return [String]
@@ -6440,6 +6916,9 @@ module Aws::MediaLive
     # @!attribute rec709_settings
     #   Rec709 Settings
     #   @return [Types::Rec709Settings]
+    # @!attribute hlg2020_settings
+    #   Hlg2020 Settings
+    #   @return [Types::Hlg2020Settings]
     class H265ColorSpaceSettings < Struct.new(
       nil,
       :color_space_passthrough_settings,
@@ -6447,6 +6926,7 @@ module Aws::MediaLive
       :hdr10_settings,
       :rec601_settings,
       :rec709_settings,
+      :hlg2020_settings,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6493,10 +6973,10 @@ module Aws::MediaLive
     # @!attribute filter_settings
     #   Optional. Both filters reduce bandwidth by removing imperceptible details. You can enable one of the filters. We
     #   recommend that you try both filters and observe the results to decide which one to use.
-    #   
+    #
     #   The Temporal Filter reduces bandwidth by removing imperceptible details in the content. It combines perceptual
     #   filtering and motion compensated temporal filtering (MCTF). It operates independently of the compression level.
-    #   
+    #
     #   The Bandwidth Reduction filter is a perceptual filter located within the encoding loop. It adapts to the current
     #   compression level to filter imperceptible signals. This filter works only when the resolution is 1080p or lower.
     #   @return [Types::H265FilterSettings]
@@ -6552,13 +7032,13 @@ module Aws::MediaLive
     #   @return [Integer]
     # @!attribute rate_control_mode
     #   Rate control mode.
-    #   
+    #
     #   QVBR: Quality will match the specified quality level except when it is constrained by the
     #   maximum bitrate.  Recommended if you or your viewers pay for bandwidth.
-    #   
+    #
     #   CBR: Quality varies, depending on the video complexity. Recommended only if you distribute
     #   your assets to devices that cannot handle variable bitrates.
-    #   
+    #
     #   Multiplex: This rate control mode is only supported (and is required) when the video is being
     #   delivered to a MediaLive Multiplex in which case the rate control configuration is controlled
     #   by the properties within the Multiplex Program.
@@ -6708,6 +7188,14 @@ module Aws::MediaLive
       include ::Smithy::Schema::Structure
     end
 
+    # Hlg2020 Settings
+    class Hlg2020Settings < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # Hls Akamai Settings
     # @!attribute connection_retry_interval
     #   Number of seconds to wait before retrying connection to the CDN if the connection is lost.
@@ -6805,7 +7293,7 @@ module Aws::MediaLive
     #   @return [String]
     # @!attribute base_url_content1
     #   Optional. One value per output group.
-    #   
+    #
     #   This field is required only if you are completing Base URL content A, and the downstream system has notified you that the media files for pipeline 1 of all outputs are in a location different from the media files for pipeline 0.
     #   @return [String]
     # @!attribute base_url_manifest
@@ -6813,7 +7301,7 @@ module Aws::MediaLive
     #   @return [String]
     # @!attribute base_url_manifest1
     #   Optional. One value per output group.
-    #   
+    #
     #   Complete this field only if you are completing Base URL manifest A, and the downstream system has notified you that the child manifest files for pipeline 1 of all outputs are in a location different from the child manifest files for pipeline 0.
     #   @return [String]
     # @!attribute caption_language_mappings
@@ -6856,7 +7344,7 @@ module Aws::MediaLive
     #   @return [String]
     # @!attribute i_frame_only_playlists
     #   DISABLED: Do not create an I-frame-only manifest, but do create the master and media manifests (according to the Output Selection field).
-    #   
+    #
     #   STANDARD: Create an I-frame-only manifest for each output that contains video, as well as the other manifests (according to the Output Selection field). The I-frame manifest contains a #EXT-X-I-FRAMES-ONLY tag to indicate it is I-frame only, and one or more #EXT-X-BYTERANGE entries identifying the I-frame position. For example, #EXT-X-BYTERANGE:160364@1461888"
     #   @return [String]
     # @!attribute incomplete_segment_behavior
@@ -6866,7 +7354,7 @@ module Aws::MediaLive
     #   @return [String]
     # @!attribute index_n_segments
     #   Applies only if Mode field is LIVE.
-    #   
+    #
     #   Specifies the maximum number of segments in the media manifest file. After this maximum, older segments are removed from the media manifest. This number must be smaller than the number in the Keep Segments field.
     #   @return [Integer]
     # @!attribute input_loss_action
@@ -6880,9 +7368,9 @@ module Aws::MediaLive
     #   @return [String]
     # @!attribute keep_segments
     #   Applies only if Mode field is LIVE.
-    #   
+    #
     #   Specifies the number of media segments to retain in the destination directory. This number should be bigger than indexNSegments (Num segments). We recommend (value = (2 x indexNsegments) + 1).
-    #   
+    #
     #   If this "keep segments" number is too low, the following might happen: the player is still reading a media manifest file that lists this segment, but that segment has been removed from the destination directory (as directed by indexNSegments). This situation would result in a 404 HTTP error on the player.
     #   @return [Integer]
     # @!attribute key_format
@@ -6905,14 +7393,14 @@ module Aws::MediaLive
     #   @return [Integer]
     # @!attribute mode
     #   If "vod", all segments are indexed and kept permanently in the destination and manifest. If "live", only the number segments specified in keepSegments and indexNSegments are kept; newer segments replace older segments, which may prevent players from rewinding all the way to the beginning of the event.
-    #   
+    #
     #   VOD mode uses HLS EXT-X-PLAYLIST-TYPE of EVENT while the channel is running, converting it to a "VOD" type manifest on completion of the stream.
     #   @return [String]
     # @!attribute output_selection
     #   MANIFESTS_AND_SEGMENTS: Generates manifests (master manifest, if applicable, and media manifests) for this output group.
-    #   
+    #
     #   VARIANT_MANIFESTS_AND_SEGMENTS: Generates media manifests for this output group, but not a master manifest.
-    #   
+    #
     #   SEGMENTS_ONLY: Does not generate any manifests for this output group.
     #   @return [String]
     # @!attribute program_date_time
@@ -6920,9 +7408,9 @@ module Aws::MediaLive
     #   @return [String]
     # @!attribute program_date_time_clock
     #   Specifies the algorithm used to drive the HLS EXT-X-PROGRAM-DATE-TIME clock. Options include:
-    #   
+    #
     #   INITIALIZE_FROM_OUTPUT_TIMECODE: The PDT clock is initialized as a function of the first output timecode, then incremented by the EXTINF duration of each encoded segment.
-    #   
+    #
     #   SYSTEM_CLOCK: The PDT clock is initialized as a function of the UTC wall clock, then incremented by the EXTINF duration of each encoded segment. If the PDT clock diverges from the wall clock by more than 500ms, it is resynchronized to the wall clock.
     #   @return [String]
     # @!attribute program_date_time_period
@@ -6930,9 +7418,9 @@ module Aws::MediaLive
     #   @return [Integer]
     # @!attribute redundant_manifest
     #   ENABLED: The master manifest (.m3u8 file) for each pipeline includes information about both pipelines: first its own media files, then the media files of the other pipeline. This feature allows playout device that support stale manifest detection to switch from one manifest to the other, when the current manifest seems to be stale. There are still two destinations and two master manifests, but both master manifests reference the media files from both pipelines.
-    #   
+    #
     #   DISABLED: The master manifest (.m3u8 file) for each pipeline includes information about its own pipeline only.
-    #   
+    #
     #   For an HLS output group with MediaPackage as the destination, the DISABLED behavior is always followed. MediaPackage regenerates the manifests it serves to players so a redundant manifest from MediaLive is irrelevant.
     #   @return [String]
     # @!attribute segment_length
@@ -6958,7 +7446,7 @@ module Aws::MediaLive
     #   @return [Integer]
     # @!attribute ts_file_mode
     #   SEGMENTED_FILES: Emit the program as segments - multiple .ts media files.
-    #   
+    #
     #   SINGLE_FILE: Applies only if Mode field is VOD. Emit the program as a single .ts media file. The media manifest includes #EXT-X-BYTERANGE tags to index segments for playback. A typical use for this value is when sending the output to AWS Elemental MediaConvert, which can accept only a single media file. Playback while the channel is running is not guaranteed due to HTTP server caching.
     #   @return [String]
     class HlsGroupSettings < Struct.new(
@@ -7216,6 +7704,26 @@ module Aws::MediaLive
       include ::Smithy::Schema::Structure
     end
 
+    # Configures Elemental Inference features in a channel.
+    # @!attribute feed_arn
+    #   The ARN of the feed resource that is associated with this channel. The feed is a resource in the Elemental Inference service.
+    #   @return [String]
+    # @!attribute audio_feed_inputs
+    #   A list of audio feed inputs that map audio selectors in the channel to feed inputs on the associated Elemental Inference feed.
+    #   @return [Array<Types::AudioFeedInput>]
+    # @!attribute enrichment_methods
+    #   The set of Contextual Metadata Enrichment methods enabled for this channel. Each method represents a specific way the channel will use the inference feed to augment its output with contextual metadata. An empty array (or omitting the field) disables enrichment. Order is not significant; duplicate values are not permitted.
+    #   @return [Array<String>]
+    class InferenceSettings < Struct.new(
+      nil,
+      :feed_arn,
+      :audio_feed_inputs,
+      :enrichment_methods,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # Placeholder documentation for Input
     # @!attribute arn
     #   The Unique ARN of the input (generated, immutable).
@@ -7283,6 +7791,9 @@ module Aws::MediaLive
     # @!attribute sdi_sources
     #   SDI Sources for this Input.
     #   @return [Array<String>]
+    # @!attribute router_settings
+    #   Information about any MediaConnect router association with this input.
+    #   @return [Types::RouterInputSettings]
     class Input < Struct.new(
       nil,
       :arn,
@@ -7306,6 +7817,7 @@ module Aws::MediaLive
       :multicast_settings,
       :smpte2110_receiver_group_settings,
       :sdi_sources,
+      :router_settings,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7944,6 +8456,9 @@ module Aws::MediaLive
     # @!attribute whitelist_rules
     #   Whitelist rules and their sync status
     #   @return [Array<Types::InputWhitelistRule>]
+    # @!attribute channels
+    #   The list of channels currently using this Input Security Group as their channel security group.
+    #   @return [Array<String>]
     class InputSecurityGroup < Struct.new(
       nil,
       :arn,
@@ -7952,6 +8467,7 @@ module Aws::MediaLive
       :state,
       :tags,
       :whitelist_rules,
+      :channels,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8249,6 +8765,62 @@ module Aws::MediaLive
       include ::Smithy::Schema::Structure
     end
 
+    # Configuration for linked channel relationships
+    # @!attribute follower_channel_settings
+    #   Settings for a follower channel in a linked pair
+    #   @return [Types::FollowerChannelSettings]
+    # @!attribute primary_channel_settings
+    #   Settings for a primary (leader) channel in a linked pair
+    #   @return [Types::PrimaryChannelSettings]
+    class LinkedChannelSettings < Struct.new(
+      nil,
+      :follower_channel_settings,
+      :primary_channel_settings,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # Placeholder documentation for ListAlertsRequest
+    # @!attribute channel_id
+    #   The unique ID of the channel
+    #   @return [String]
+    # @!attribute max_results
+    #   The maximum number of items to return
+    #   @return [Integer]
+    # @!attribute next_token
+    #   The next pagination token
+    #   @return [String]
+    # @!attribute state_filter
+    #   Specifies the set of alerts to return based on their state. SET - Return only alerts with SET state. CLEARED - Return only alerts with CLEARED state. ALL - Return all alerts.
+    #   @return [String]
+    class ListAlertsRequest < Struct.new(
+      nil,
+      :channel_id,
+      :max_results,
+      :next_token,
+      :state_filter,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # Placeholder documentation for ListAlertsResponse
+    # @!attribute alerts
+    #   The alerts found for this channel
+    #   @return [Array<Types::ChannelAlert>]
+    # @!attribute next_token
+    #   The token to use to retrieve the next page of results
+    #   @return [String]
+    class ListAlertsResponse < Struct.new(
+      nil,
+      :alerts,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # Placeholder documentation for ListChannelPlacementGroupsRequest
     # @!attribute cluster_id
     #   The ID of the cluster
@@ -8395,6 +8967,46 @@ module Aws::MediaLive
     class ListCloudWatchAlarmTemplatesResponse < Struct.new(
       nil,
       :cloud_watch_alarm_templates,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # Placeholder documentation for ListClusterAlertsRequest
+    # @!attribute cluster_id
+    #   The unique ID of the cluster
+    #   @return [String]
+    # @!attribute max_results
+    #   The maximum number of items to return
+    #   @return [Integer]
+    # @!attribute next_token
+    #   The next pagination token
+    #   @return [String]
+    # @!attribute state_filter
+    #   Specifies the set of alerts to return based on their state. SET - Return only alerts with SET state. CLEARED - Return only alerts with CLEARED state. ALL - Return all alerts.
+    #   @return [String]
+    class ListClusterAlertsRequest < Struct.new(
+      nil,
+      :cluster_id,
+      :max_results,
+      :next_token,
+      :state_filter,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # Placeholder documentation for ListClusterAlertsResponse
+    # @!attribute alerts
+    #   The alerts found for this cluster
+    #   @return [Array<Types::ClusterAlert>]
+    # @!attribute next_token
+    #   The token to use to retrieve the next page of results
+    #   @return [String]
+    class ListClusterAlertsResponse < Struct.new(
+      nil,
+      :alerts,
       :next_token,
       keyword_init: true
     )
@@ -8635,6 +9247,46 @@ module Aws::MediaLive
     class ListInputsResponse < Struct.new(
       nil,
       :inputs,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # Placeholder documentation for ListMultiplexAlertsRequest
+    # @!attribute max_results
+    #   The maximum number of items to return
+    #   @return [Integer]
+    # @!attribute multiplex_id
+    #   The unique ID of the multiplex
+    #   @return [String]
+    # @!attribute next_token
+    #   The next pagination token
+    #   @return [String]
+    # @!attribute state_filter
+    #   Specifies the set of alerts to return based on their state. SET - Return only alerts with SET state. CLEARED - Return only alerts with CLEARED state. ALL - Return all alerts.
+    #   @return [String]
+    class ListMultiplexAlertsRequest < Struct.new(
+      nil,
+      :max_results,
+      :multiplex_id,
+      :next_token,
+      :state_filter,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # Placeholder documentation for ListMultiplexAlertsResponse
+    # @!attribute alerts
+    #   The alerts found for this multiplex
+    #   @return [Array<Types::MultiplexAlert>]
+    # @!attribute next_token
+    #   The token to use to retrieve the next page of results
+    #   @return [String]
+    class ListMultiplexAlertsResponse < Struct.new(
+      nil,
+      :alerts,
       :next_token,
       keyword_init: true
     )
@@ -9145,7 +9797,7 @@ module Aws::MediaLive
     #   Packet Identifier (PID) for input source SCTE-27 data to this output. Multiple values are accepted, and can be entered in ranges and/or by comma separation. Can be entered as decimal or hexadecimal values.  Each PID specified must be in the range of 32 (or 0x20)..8182 (or 0x1ff6).
     #   @return [String]
     # @!attribute scte35_control
-    #   Optionally pass SCTE-35 signals from the input source to this output.
+    #   SCTE-35 control. Option "none" indicates that a SCTE-35 marker will not be inserted, nor will an IDR be inserted at the SCTE-35 cue point, nor will the segment be segmented. Option "scte35WithoutIdr" indicates that a SCTE-35 marker will be inserted to indicate the cue point, but MediaLive will not insert an IDR on that frame nor will it introduce a new segment boundary there if it wasn't already going to be one (this option is required for use with downstream multiview bitstream stitching workflows). Option "passthrough" indicates that a SCTE-35 marker will be inserted to indicate the cue point, and an IDR will be inserted on that frame, and MediaLive itself will introduce a new segment boundary there.
     #   @return [String]
     # @!attribute scte35_pid
     #   Packet Identifier (PID) of the SCTE-35 stream in the transport stream. Can be entered as a decimal or hexadecimal value.  Valid values are 32 (or 0x20)..8182 (or 0x1ff6).
@@ -9155,9 +9807,9 @@ module Aws::MediaLive
     #   @return [String]
     # @!attribute segmentation_style
     #   The segmentation style parameter controls how segmentation markers are inserted into the transport stream. With avails, it is possible that segments may be truncated, which can influence where future segmentation markers are inserted.
-    #   
+    #
     #   When a segmentation style of "resetCadence" is selected and a segment is truncated due to an avail, we will reset the segmentation cadence. This means the subsequent segment will have a duration of $segmentationTime seconds.
-    #   
+    #
     #   When a segmentation style of "maintainCadence" is selected and a segment is truncated due to an avail, we will not reset the segmentation cadence. This means the subsequent segment will likely be truncated as well. However, all segments after that will have a duration of $segmentationTime seconds. Note that EBP lookahead is a slight exception to this rule.
     #   @return [String]
     # @!attribute segmentation_time
@@ -9401,6 +10053,106 @@ module Aws::MediaLive
       include ::Smithy::Schema::Structure
     end
 
+    # Media Connect Router Container Settings
+    # @!attribute m2ts_settings
+    #   M2ts Settings
+    #   @return [Types::M2tsSettings]
+    class MediaConnectRouterContainerSettings < Struct.new(
+      nil,
+      :m2ts_settings,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # Media Connect Router Group Settings
+    # @!attribute availability_zones
+    #   The names of the Availability Zones in which to write output to MediaConnect Router.
+    #   @return [Array<String>]
+    class MediaConnectRouterGroupSettings < Struct.new(
+      nil,
+      :availability_zones,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # Connection details for a single pipeline of a MediaConnect Router output.
+    # @!attribute router_input_arn
+    #   The ARN of the MediaConnect Router Input connected to this pipeline.
+    #   @return [String]
+    class MediaConnectRouterOutputConnection < Struct.new(
+      nil,
+      :router_input_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # Map of MediaLive pipeline IDs to the ARNs of the MediaConnect Router Inputs to which this Output is connected.
+    # @!attribute pipeline0
+    #   The ARN of the MediaConnect Router Input connected to pipeline 0.
+    #   @return [String]
+    # @!attribute pipeline1
+    #   The ARN of the MediaConnect Router Input connected to pipeline 1.
+    #   @return [String]
+    class MediaConnectRouterOutputConnectionMap < Struct.new(
+      nil,
+      :pipeline0,
+      :pipeline1,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # MediaConnect Router Output Destination Settings
+    # @!attribute encryption_type
+    #   Encryption configuration for MediaConnect router. When using SECRETS_MANAGER encryption, you must provide the ARN of the secret used to encrypt data in transit. When using AUTOMATIC encryption, a service-managed secret will be used instead.
+    #   @return [String]
+    # @!attribute secret_arn
+    #   ARN of the secret used to encrypt this input. Used only with the SECRETS_MANAGER encryption type.
+    #   @return [String]
+    class MediaConnectRouterOutputDestinationSettings < Struct.new(
+      nil,
+      :encryption_type,
+      :secret_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # Media Connect Router Output Settings
+    # @!attribute connected_router_inputs
+    #   This parameter is deprecated and unused.
+    #   @return [Types::MediaConnectRouterOutputConnectionMap]
+    # @!attribute container_settings
+    #   Media Connect Router Container Settings
+    #   @return [Types::MediaConnectRouterContainerSettings]
+    # @!attribute destination
+    #   Destination for this MediaConnect Router Output. The referenced OutputDestination must have MediaConnect Router settings configured.
+    #   @return [Types::OutputLocationRef]
+    class MediaConnectRouterOutputSettings < Struct.new(
+      nil,
+      :connected_router_inputs,
+      :container_settings,
+      :destination,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # Additional output destinations for a CMAF Ingest output group
+    # @!attribute destination
+    #   The destination location
+    #   @return [Types::OutputLocationRef]
+    class MediaPackageAdditionalDestinations < Struct.new(
+      nil,
+      :destination,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # Media Package Group Settings
     # @!attribute destination
     #   MediaPackage channel destination.
@@ -9427,11 +10179,19 @@ module Aws::MediaLive
     # @!attribute channel_name
     #   Name of the channel in MediaPackageV2. Only use if you are sending CMAF Ingest output to a CMAF ingest endpoint on a MediaPackage channel that uses MediaPackage v2.
     #   @return [String]
+    # @!attribute channel_endpoint_id
+    #   Endpoint 1 or 2 of the channel in MediaPackageV2. Only use if you are sending CMAF Ingest output to a CMAF ingest endpoint on a MediaPackage channel that uses MediaPackage v2.
+    #   @return [String]
+    # @!attribute media_package_region_name
+    #   Region the channel group and channel are located in for MediaPackageV2. Only use if you are sending CMAF Ingest output to a CMAF ingest endpoint on a MediaPackage channel that uses MediaPackage v2.
+    #   @return [String]
     class MediaPackageOutputDestinationSettings < Struct.new(
       nil,
       :channel_id,
       :channel_group,
       :channel_name,
+      :channel_endpoint_id,
+      :media_package_region_name,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -9444,6 +10204,47 @@ module Aws::MediaLive
     class MediaPackageOutputSettings < Struct.new(
       nil,
       :media_package_v2_destination_settings,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # A/B Watermarker settings for MediaPackage V2 output groups.
+    # @!attribute additional_destinations_alternate_destinations
+    #   The "B" pipeline renditions for the additional destinations.
+    #   @return [Array<Types::OutputLocationRef>]
+    # @!attribute alternate_destination
+    #   The "B" pipeline renditions for the main destination.
+    #   @return [Types::OutputLocationRef]
+    # @!attribute custom_profile
+    #   The vendor-provided custom profile values.
+    #   @return [Types::AbWatermarkingCustomProfile]
+    # @!attribute license
+    #   The name of the Secrets Manager secret containing the license file.
+    #   @return [String]
+    # @!attribute operator_id
+    #   The vendor-provided Operator ID.
+    #   @return [Integer]
+    # @!attribute poly_period
+    #   The number of segments per watermarking bit. The total duration of the watermarking bit
+    #   should be the LCM (least common multiple) of all segments sizes emitted by the downstream packager.
+    #   @return [Integer]
+    # @!attribute profile
+    #   The vendor-provided profile choice.
+    #   @return [String]
+    # @!attribute watermark_id_length
+    #   The number of bits that compose the watermarking identifier to be embedded.
+    #   @return [String]
+    class MediaPackageV2AbWatermarkerIrdetoSettings < Struct.new(
+      nil,
+      :additional_destinations_alternate_destinations,
+      :alternate_destination,
+      :custom_profile,
+      :license,
+      :operator_id,
+      :poly_period,
+      :profile,
+      :watermark_id_length,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -9464,12 +10265,16 @@ module Aws::MediaLive
     #   Specifies whether MediaPackage should set this output as the default rendition in the HLS manifest. YES means this must be the default. NO means this should never be the default. OMIT means MediaPackage decides what to set on this rendition.
     #   When you consider all the renditions, follow these guidelines. You can set zero or one renditions to YES. You can set zero or more renditions to NO, but you can't set all renditions to NO. You can set zero, some, or all to OMIT.
     #   @return [String]
+    # @!attribute output_usage
+    #   List of usage tags declaring how this MediaPackage V2 output is used. Currently these are all multiview-related (multiviewPrimaryView, multiviewSecondaryView, multiviewEqualSizeView) and enable multiview validations and augmentations to help ensure proper multiview configuration and compatibility with MediaPackage. Leave empty (the default) if this output has no multiview role. If any video-carrying MediaPackage V2 output in an output group specifies a multiview value, every video-carrying MediaPackage V2 output in the group must also specify a multiview value; place standalone video outputs in a separate output group.
+    #   @return [Array<String>]
     class MediaPackageV2DestinationSettings < Struct.new(
       nil,
       :audio_group_id,
       :audio_rendition_sets,
       :hls_auto_select,
       :hls_default,
+      :output_usage,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -9489,7 +10294,7 @@ module Aws::MediaLive
     #   If set to passthrough, Nielsen inaudible tones for media tracking will be detected in the input audio and an equivalent ID3 tag will be inserted in the output.
     #   @return [String]
     # @!attribute scte35_type
-    #   Type of scte35 track to add. none or scte35WithoutSegmentation
+    #   SCTE-35 insertion type. Option "none" indicates that a SCTE-35 marker will not be inserted, nor will an IDR be inserted at the SCTE-35 cue point, nor will the segment be segmented. Option "scte35WithoutIdr" indicates that a SCTE-35 marker will be inserted to indicate the cue point, but MediaLive will not insert an IDR on that frame nor will it introduce a new segment boundary there if it wasn't already going to be one (this option is required for use with downstream multiview bitstream stitching workflows). Option "scte35WithoutSegmentation" indicates that a SCTE-35 marker will be inserted to indicate the cue point, and an IDR will be inserted on that frame so that a downstream re-packager might split the segment there, but MediaLive itself will not introduce a new segment boundary there.
     #   @return [String]
     # @!attribute segment_length
     #   The nominal duration of segments. The units are specified in SegmentLengthUnits. The segments will end on the next keyframe after the specified duration, so the actual segment length might be longer, and it might be a fraction of the units.
@@ -9506,6 +10311,12 @@ module Aws::MediaLive
     # @!attribute timed_metadata_passthrough
     #   Set to enabled to pass through ID3 metadata from the input sources.
     #   @return [String]
+    # @!attribute additional_destinations
+    #   Optional an array of additional destinational HTTP destinations for the OutputGroup outputs
+    #   @return [Array<Types::MediaPackageAdditionalDestinations>]
+    # @!attribute watermarking_settings
+    #   Specifies the type of watermarking technology to use.
+    #   @return [Types::MediaPackageV2WatermarkingSettings]
     class MediaPackageV2GroupSettings < Struct.new(
       nil,
       :caption_language_mappings,
@@ -9518,6 +10329,20 @@ module Aws::MediaLive
       :timed_metadata_id3_frame,
       :timed_metadata_id3_period,
       :timed_metadata_passthrough,
+      :additional_destinations,
+      :watermarking_settings,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # A/B Watermarker settings for MediaPackage V2 output groups.
+    # @!attribute media_package_v2_ab_watermarker_irdeto_settings
+    #   A/B Watermarker settings for MediaPackage V2 output groups.
+    #   @return [Types::MediaPackageV2AbWatermarkerIrdetoSettings]
+    class MediaPackageV2WatermarkingSettings < Struct.new(
+      nil,
+      :media_package_v2_ab_watermarker_irdeto_settings,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -9778,12 +10603,12 @@ module Aws::MediaLive
     #   @return [Types::OutputLocationRef]
     # @!attribute event_id
     #   MS Smooth event ID to be sent to the IIS server.
-    #   
+    #
     #   Should only be specified if eventIdMode is set to useConfigured.
     #   @return [String]
     # @!attribute event_id_mode
     #   Specifies whether or not to send an event ID to the IIS server. If no event ID is sent and the same Live Event is used without changing the publishing point, clients might see cached video from the previous run.
-    #   
+    #
     #   Options:
     #   - "useConfigured" - use the value provided in eventId
     #   - "useTimestamp" - generate and send an event ID based on the current timestamp
@@ -10017,6 +10842,42 @@ module Aws::MediaLive
       include ::Smithy::Schema::Structure
     end
 
+    # An alert on a multiplex
+    # @!attribute alert_type
+    #   The type of the alert
+    #   @return [String]
+    # @!attribute cleared_timestamp
+    #   The time when the alert was cleared
+    #   @return [Time]
+    # @!attribute id
+    #   The unique ID for this alert instance
+    #   @return [String]
+    # @!attribute message
+    #   The user facing alert message which can have more context
+    #   @return [String]
+    # @!attribute pipeline_id
+    #   The ID of the pipeline this alert is associated with
+    #   @return [String]
+    # @!attribute set_timestamp
+    #   The time when the alert was set
+    #   @return [Time]
+    # @!attribute state
+    #   The state of the alert
+    #   @return [String]
+    class MultiplexAlert < Struct.new(
+      nil,
+      :alert_type,
+      :cleared_timestamp,
+      :id,
+      :message,
+      :pipeline_id,
+      :set_timestamp,
+      :state,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # Multiplex Container Settings
     # @!attribute multiplex_m2ts_settings
     #   Multiplex M2ts Settings
@@ -10075,7 +10936,7 @@ module Aws::MediaLive
     #   Maximum time in milliseconds between Program Clock Reference (PCRs) inserted into the transport stream.
     #   @return [Integer]
     # @!attribute scte35_control
-    #   Optionally pass SCTE-35 signals from the input source to this output.
+    #   SCTE-35 control. Option "none" indicates that a SCTE-35 marker will not be inserted, nor will an IDR be inserted at the SCTE-35 cue point, nor will the segment be segmented. Option "scte35WithoutIdr" indicates that a SCTE-35 marker will be inserted to indicate the cue point, but MediaLive will not insert an IDR on that frame nor will it introduce a new segment boundary there if it wasn't already going to be one (this option is required for use with downstream multiview bitstream stitching workflows). Option "passthrough" indicates that a SCTE-35 marker will be inserted to indicate the cue point, and an IDR will be inserted on that frame, and MediaLive itself will introduce a new segment boundary there.
     #   @return [String]
     # @!attribute scte35_preroll_pullup_milliseconds
     #   Defines the amount SCTE-35 preroll will be increased (in milliseconds) on the output. Preroll is the amount of time between the presence of a SCTE-35 indication in a transport stream and the PTS of the video frame it references. Zero means don't add pullup (it doesn't mean set the preroll to zero). Negative pullup is not supported, which means that you can't make the preroll shorter. Be aware that latency in the output will increase by the pullup amount.
@@ -10529,6 +11390,27 @@ module Aws::MediaLive
       include ::Smithy::Schema::Structure
     end
 
+    # Nielsen Nw Only
+    # @!attribute check_digit_string
+    #   Enter the check digit string for the watermark
+    #   @return [String]
+    # @!attribute sid
+    #   Enter the Nielsen Source ID (SID) to include in the watermark
+    #   @return [Float]
+    # @!attribute timezone
+    #   Choose the timezone for the time stamps in the watermark. If not provided,
+    #   the timestamps will be in Coordinated Universal Time (UTC)
+    #   @return [String]
+    class NielsenNwOnly < Struct.new(
+      nil,
+      :check_digit_string,
+      :sid,
+      :timezone,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # Nielsen Watermarks Settings
     # @!attribute nielsen_cbet_settings
     #   Complete these fields only if you want to insert watermarks of type Nielsen CBET
@@ -10541,11 +11423,16 @@ module Aws::MediaLive
     # @!attribute nielsen_naes_ii_nw_settings
     #   Complete these fields only if you want to insert watermarks of type Nielsen NAES II (N2) and Nielsen NAES VI (NW).
     #   @return [Types::NielsenNaesIiNw]
+    # @!attribute nielsen_nw_only_settings
+    #   Complete these fields only if you want to insert watermarks of type Nielsen NAES VI (NW) only,
+    #   without inserting NAES II (N2) watermarks.
+    #   @return [Types::NielsenNwOnly]
     class NielsenWatermarksSettings < Struct.new(
       nil,
       :nielsen_cbet_settings,
       :nielsen_distribution_type,
       :nielsen_naes_ii_nw_settings,
+      :nielsen_nw_only_settings,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -10561,11 +11448,15 @@ module Aws::MediaLive
     # @!attribute physical_interface_name
     #   The name of the physical interface on the hardware that will be running Elemental anywhere.
     #   @return [String]
+    # @!attribute physical_interface_ip_addresses
+    #   The IP addresses associated with the physical interface on the node hardware.
+    #   @return [Array<String>]
     class NodeInterfaceMapping < Struct.new(
       nil,
       :logical_interface_name,
       :network_interface_mode,
       :physical_interface_name,
+      :physical_interface_ip_addresses,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -10702,6 +11593,9 @@ module Aws::MediaLive
     # @!attribute logical_interface_names
     #   Optional assignment of an output to a logical interface on the Node. Only applies to on premises channels.
     #   @return [Array<String>]
+    # @!attribute media_connect_router_settings
+    #   Destination settings for a MediaConnect Router output; one destination for each redundant encoder.
+    #   @return [Array<Types::MediaConnectRouterOutputDestinationSettings>]
     class OutputDestination < Struct.new(
       nil,
       :id,
@@ -10710,6 +11604,7 @@ module Aws::MediaLive
       :settings,
       :srt_settings,
       :logical_interface_names,
+      :media_connect_router_settings,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -10728,12 +11623,16 @@ module Aws::MediaLive
     # @!attribute username
     #   username for destination
     #   @return [String]
+    # @!attribute virtual_source_address
+    #   Specifies the source IP address for outbound multicast packets.
+    #   @return [String]
     class OutputDestinationSettings < Struct.new(
       nil,
       :password_param,
       :stream_name,
       :url,
       :username,
+      :virtual_source_address,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -10790,6 +11689,9 @@ module Aws::MediaLive
     # @!attribute srt_group_settings
     #   Srt Group Settings
     #   @return [Types::SrtGroupSettings]
+    # @!attribute media_connect_router_group_settings
+    #   Media Connect Router Group Settings
+    #   @return [Types::MediaConnectRouterGroupSettings]
     class OutputGroupSettings < Struct.new(
       nil,
       :archive_group_settings,
@@ -10802,6 +11704,7 @@ module Aws::MediaLive
       :udp_group_settings,
       :cmaf_ingest_group_settings,
       :srt_group_settings,
+      :media_connect_router_group_settings,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -10826,10 +11729,14 @@ module Aws::MediaLive
     # @!attribute pipeline_locking_settings
     #   Pipeline Locking Settings
     #   @return [Types::PipelineLockingSettings]
+    # @!attribute disabled_locking_settings
+    #   Disabled Locking Settings
+    #   @return [Types::DisabledLockingSettings]
     class OutputLockingSettings < Struct.new(
       nil,
       :epoch_locking_settings,
       :pipeline_locking_settings,
+      :disabled_locking_settings,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -10866,6 +11773,9 @@ module Aws::MediaLive
     # @!attribute srt_output_settings
     #   Srt Output Settings
     #   @return [Types::SrtOutputSettings]
+    # @!attribute media_connect_router_output_settings
+    #   Media Connect Router Output Settings
+    #   @return [Types::MediaConnectRouterOutputSettings]
     class OutputSettings < Struct.new(
       nil,
       :archive_output_settings,
@@ -10878,6 +11788,7 @@ module Aws::MediaLive
       :udp_output_settings,
       :cmaf_ingest_output_settings,
       :srt_output_settings,
+      :media_connect_router_output_settings,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -10922,6 +11833,9 @@ module Aws::MediaLive
     # @!attribute channel_engine_version
     #   Current engine version of the encoder for this pipeline.
     #   @return [Types::ChannelEngineVersionResponse]
+    # @!attribute media_connect_router_output_connection_map
+    #   A map of output names to the MediaConnect Router connection for this pipeline. Only present for channels with MediaConnect Router outputs.
+    #   @return [Hash<String, Types::MediaConnectRouterOutputConnection>]
     class PipelineDetail < Struct.new(
       nil,
       :active_input_attachment_name,
@@ -10930,14 +11844,23 @@ module Aws::MediaLive
       :active_motion_graphics_uri,
       :pipeline_id,
       :channel_engine_version,
+      :media_connect_router_output_connection_map,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     # Pipeline Locking Settings
+    # @!attribute pipeline_locking_method
+    #   The method to use to lock the video frames in the pipelines. sourceTimecode (default): Use the timecode in the source. videoAlignment: Lock frames that the encoder identifies as having matching content. If videoAlignment is selected, existing timecodes will not be used for any locking decisions.
+    #   @return [String]
+    # @!attribute custom_epoch
+    #   Optional. Only applies to CMAF Ingest Output Group and MediaPackage V2 Output Group Only. Enter a value here to use a custom epoch, instead of the standard epoch (which started at 1970-01-01T00:00:00 UTC). Specify the start time of the custom epoch, in YYYY-MM-DDTHH:MM:SS in UTC. The time must be 2000-01-01T00:00:00 or later. Always set the MM:SS portion to 00:00.
+    #   @return [String]
     class PipelineLockingSettings < Struct.new(
       nil,
+      :pipeline_locking_method,
+      :custom_epoch,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -10950,6 +11873,18 @@ module Aws::MediaLive
     class PipelinePauseStateSettings < Struct.new(
       nil,
       :pipeline_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # Settings for a primary (leader) channel in a linked pair
+    # @!attribute linked_channel_type
+    #   Specifies this as a primary channel
+    #   @return [String]
+    class PrimaryChannelSettings < Struct.new(
+      nil,
+      :linked_channel_type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -11314,6 +12249,15 @@ module Aws::MediaLive
     # @!attribute channel_engine_version
     #   Requested engine version for this channel.
     #   @return [Types::ChannelEngineVersionResponse]
+    # @!attribute linked_channel_settings
+    #   Linked Channel Settings for this channel.
+    #   @return [Types::DescribeLinkedChannelSettings]
+    # @!attribute channel_security_groups
+    #   A list of IDs for all the Input Security Groups attached to the channel.
+    #   @return [Array<String>]
+    # @!attribute inference_settings
+    #   Include this setting to include Elemental Inference features in this channel.
+    #   @return [Types::DescribeInferenceSettings]
     class RestartChannelPipelinesResponse < Struct.new(
       nil,
       :arn,
@@ -11337,6 +12281,9 @@ module Aws::MediaLive
       :vpc,
       :anywhere_settings,
       :channel_engine_version,
+      :linked_channel_settings,
+      :channel_security_groups,
+      :inference_settings,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -11390,6 +12337,74 @@ module Aws::MediaLive
       include ::Smithy::Schema::Structure
     end
 
+    # Placeholder documentation for RouterDestination
+    # @!attribute availability_zone_name
+    #   The Availability Zone (AZ) names of the AZs this destination is created in.
+    #   @return [String]
+    # @!attribute router_output_arn
+    #   ARN of the output from MediaConnect Router currently connected to this input.
+    #   @return [String]
+    class RouterDestination < Struct.new(
+      nil,
+      :availability_zone_name,
+      :router_output_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # Placeholder documentation for RouterDestinationSettings
+    # @!attribute availability_zone_name
+    #   Availability Zone for this MediaConnect Router destination.
+    #   @return [String]
+    class RouterDestinationSettings < Struct.new(
+      nil,
+      :availability_zone_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # The settings for a MediaConnect Router Input.
+    # @!attribute destinations
+    #   MediaConnect Router destinations associated with the MediaLive Input.
+    #   @return [Array<Types::RouterDestination>]
+    # @!attribute encryption_type
+    #   Encryption configuration for MediaConnect router. When using SECRETS_MANAGER encryption, you must provide the ARN of the secret used to encrypt data in transit. When using AUTOMATIC encryption, a service-managed secret will be used instead.
+    #   @return [String]
+    # @!attribute secret_arn
+    #   ARN of the secret used to encrypt this input.
+    #   @return [String]
+    class RouterInputSettings < Struct.new(
+      nil,
+      :destinations,
+      :encryption_type,
+      :secret_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # This is the collection of settings that are used during the creation of a MediaConnect router input.
+    # @!attribute destinations
+    #   Destinations for the input from MediaConnect Router. Provide one for a single-pipeline input and two for a standard input.
+    #   @return [Array<Types::RouterDestinationSettings>]
+    # @!attribute encryption_type
+    #   Encryption configuration for MediaConnect router. When using SECRETS_MANAGER encryption, you must provide the ARN of the secret used to encrypt data in transit. When using AUTOMATIC encryption, a service-managed secret will be used instead.
+    #   @return [String]
+    # @!attribute secret_arn
+    #   ARN of the secret used to encrypt this input.
+    #   @return [String]
+    class RouterSettings < Struct.new(
+      nil,
+      :destinations,
+      :encryption_type,
+      :secret_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # Rtmp Caption Info Destination Settings
     class RtmpCaptionInfoDestinationSettings < Struct.new(
       nil,
@@ -11416,7 +12431,7 @@ module Aws::MediaLive
     #   @return [String]
     # @!attribute input_loss_action
     #   Controls the behavior of this RTMP group if input becomes unavailable.
-    #   
+    #
     #   - emitOutput: Emit a slate until input returns.
     #   - pauseOutput: Stop transmitting data until input returns. This does not close the underlying RTMP connection.
     #   @return [String]
@@ -11986,6 +13001,22 @@ module Aws::MediaLive
       include ::Smithy::Schema::Structure
     end
 
+    # Smart Subtitle Source Settings
+    # @!attribute caption_synchronization_mode
+    #   Controls whether MediaLive delays video to synchronize captions with audio and video output.
+    #   @return [String]
+    # @!attribute inference_feed_output
+    #   The name of the Elemental Inference feed output that supplies subtitle input into this caption selector.
+    #   @return [String]
+    class SmartSubtitleSourceSettings < Struct.new(
+      nil,
+      :caption_synchronization_mode,
+      :inference_feed_output,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # A receiver group is a collection of video, audio, and ancillary streams that you want to group together and attach to one input.
     # @!attribute sdp_settings
     #   The single Smpte2110ReceiverGroupSdpSettings that identify the video, audio, and ancillary streams for this receiver group.
@@ -12034,6 +13065,20 @@ module Aws::MediaLive
     # Smpte Tt Destination Settings
     class SmpteTtDestinationSettings < Struct.new(
       nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # When using MediaConnect Router as the source of a MediaLive input there's a special handoff that occurs when a router output
+    # is created. This group of settings is set on your behalf by the MediaConnect Router service using this set of settings. This
+    # setting object can only by used by that service.
+    # @!attribute router_arn
+    #   This is the arn of the MediaConnect Router resource being associated with the MediaLive Input.
+    #   @return [String]
+    class SpecialRouterSettings < Struct.new(
+      nil,
+      :router_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -12139,6 +13184,78 @@ module Aws::MediaLive
       include ::Smithy::Schema::Structure
     end
 
+    # Decryption settings for SRT listener. If present, both algorithm and passphraseSecretArn are required.
+    # @!attribute algorithm
+    #   The algorithm used to decrypt content.
+    #   @return [String]
+    # @!attribute passphrase_secret_arn
+    #   The ARN for the secret in Secrets Manager that holds the passphrase for decryption.
+    #   @return [String]
+    class SrtListenerDecryption < Struct.new(
+      nil,
+      :algorithm,
+      :passphrase_secret_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # Decryption settings. If specified, both algorithm and passphraseSecretArn are required.
+    # @!attribute algorithm
+    #   Required. The decryption algorithm.
+    #   @return [String]
+    # @!attribute passphrase_secret_arn
+    #   Required. The ARN for the secret in Secrets Manager that holds the passphrase.
+    #   @return [String]
+    class SrtListenerDecryptionRequest < Struct.new(
+      nil,
+      :algorithm,
+      :passphrase_secret_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # Settings for SRT Listener input.
+    # @!attribute decryption
+    #   Decryption settings for SRT listener. If present, both algorithm and passphraseSecretArn are required.
+    #   @return [Types::SrtListenerDecryption]
+    # @!attribute minimum_latency
+    #   The preferred latency (in milliseconds) for implementing packet loss and recovery. Range 120-15000.
+    #   @return [Integer]
+    # @!attribute stream_id
+    #   The stream ID, if the upstream system uses this identifier.
+    #   @return [String]
+    class SrtListenerSettings < Struct.new(
+      nil,
+      :decryption,
+      :minimum_latency,
+      :stream_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # Configuration for SRT Listener input. Encryption is REQUIRED for all SRT Listener inputs for security reasons. You must provide decryption settings including algorithm and passphrase secret ARN.
+    # @!attribute decryption
+    #   Decryption settings. If specified, both algorithm and passphraseSecretArn are required.
+    #   @return [Types::SrtListenerDecryptionRequest]
+    # @!attribute minimum_latency
+    #   Required. The preferred latency in milliseconds for packet loss and recovery. Range 120-15000.
+    #   @return [Integer]
+    # @!attribute stream_id
+    #   Optional. The stream ID if the upstream system uses this identifier.
+    #   @return [String]
+    class SrtListenerSettingsRequest < Struct.new(
+      nil,
+      :decryption,
+      :minimum_latency,
+      :stream_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # Placeholder documentation for SrtOutputDestinationSettings
     # @!attribute encryption_passphrase_secret_arn
     #   Arn used to extract the password from Secrets Manager
@@ -12149,11 +13266,19 @@ module Aws::MediaLive
     # @!attribute url
     #   A URL specifying a destination
     #   @return [String]
+    # @!attribute connection_mode
+    #   Specifies the mode the output should use for connection establishment. CALLER mode requires URL, LISTENER mode requires port.
+    #   @return [String]
+    # @!attribute listener_port
+    #   Port number for listener mode connections (required when connectionMode is LISTENER, must not be provided when connectionMode is CALLER).
+    #   @return [Integer]
     class SrtOutputDestinationSettings < Struct.new(
       nil,
       :encryption_passphrase_secret_arn,
       :stream_id,
       :url,
+      :connection_mode,
+      :listener_port,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -12187,25 +13312,33 @@ module Aws::MediaLive
       include ::Smithy::Schema::Structure
     end
 
-    # The configured sources for this SRT input.
+    # The configured settings for SRT inputs (caller and listener).
     # @!attribute srt_caller_sources
     #   Placeholder documentation for __listOfSrtCallerSource
     #   @return [Array<Types::SrtCallerSource>]
+    # @!attribute srt_listener_settings
+    #   Settings for SRT Listener input.
+    #   @return [Types::SrtListenerSettings]
     class SrtSettings < Struct.new(
       nil,
       :srt_caller_sources,
+      :srt_listener_settings,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
-    # Configures the sources for this SRT input. For a single-pipeline input, include one srtCallerSource in the array. For a standard-pipeline input, include two srtCallerSource.
+    # Configures the settings for SRT inputs. Provide either srtCallerSources (for SRT_CALLER type) OR srtListenerSettings (for SRT_LISTENER type), not both.
     # @!attribute srt_caller_sources
     #   Placeholder documentation for __listOfSrtCallerSourceRequest
     #   @return [Array<Types::SrtCallerSourceRequest>]
+    # @!attribute srt_listener_settings
+    #   Configuration for SRT Listener input. Encryption is REQUIRED for all SRT Listener inputs for security reasons. You must provide decryption settings including algorithm and passphrase secret ARN.
+    #   @return [Types::SrtListenerSettingsRequest]
     class SrtSettingsRequest < Struct.new(
       nil,
       :srt_caller_sources,
+      :srt_listener_settings,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -12302,6 +13435,15 @@ module Aws::MediaLive
     # @!attribute channel_engine_version
     #   Requested engine version for this channel.
     #   @return [Types::ChannelEngineVersionResponse]
+    # @!attribute linked_channel_settings
+    #   Linked Channel Settings for this channel.
+    #   @return [Types::DescribeLinkedChannelSettings]
+    # @!attribute channel_security_groups
+    #   A list of IDs for all the Input Security Groups attached to the channel.
+    #   @return [Array<String>]
+    # @!attribute inference_settings
+    #   Include this setting to include Elemental Inference features in this channel.
+    #   @return [Types::DescribeInferenceSettings]
     class StartChannelResponse < Struct.new(
       nil,
       :arn,
@@ -12324,6 +13466,9 @@ module Aws::MediaLive
       :vpc,
       :anywhere_settings,
       :channel_engine_version,
+      :linked_channel_settings,
+      :channel_security_groups,
+      :inference_settings,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -12972,6 +14117,15 @@ module Aws::MediaLive
     # @!attribute channel_engine_version
     #   Requested engine version for this channel.
     #   @return [Types::ChannelEngineVersionResponse]
+    # @!attribute linked_channel_settings
+    #   Linked Channel Settings for this channel.
+    #   @return [Types::DescribeLinkedChannelSettings]
+    # @!attribute channel_security_groups
+    #   A list of IDs for all the Input Security Groups attached to the channel.
+    #   @return [Array<String>]
+    # @!attribute inference_settings
+    #   Include this setting to include Elemental Inference features in this channel.
+    #   @return [Types::DescribeInferenceSettings]
     class StopChannelResponse < Struct.new(
       nil,
       :arn,
@@ -12994,6 +14148,9 @@ module Aws::MediaLive
       :vpc,
       :anywhere_settings,
       :channel_engine_version,
+      :linked_channel_settings,
+      :channel_security_groups,
+      :inference_settings,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -13148,6 +14305,18 @@ module Aws::MediaLive
       nil,
       :post_filter_sharpening,
       :strength,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # Text Caption Position Settings
+    # @!attribute y_position_percentage
+    #   Specifies the vertical position of the top edge of the caption relative to the top of the output as a percentage. A value of 0 places the caption at the top of the output and 100 at the bottom.
+    #   @return [Integer]
+    class TextCaptionPositionSettings < Struct.new(
+      nil,
+      :y_position_percentage,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -13326,11 +14495,15 @@ module Aws::MediaLive
 
     # Ttml Destination Settings
     # @!attribute style_control
-    #   This field is not currently supported and will not affect the output styling. Leave the default value.
+    #   Controls the source of style and position information for the output captions.  PASSTHROUGH - Preserve the style and position from the source captions.  USE_CONFIGURED - Don't pass through the style. The output captions will use the default styling.  MANUAL - Applies the specified styling and positioning. All other styling and positioning is given default values.
     #   @return [String]
+    # @!attribute position
+    #   Specifies the position of the output captions. Applies only when styleControl is set to manual.
+    #   @return [Types::TextCaptionPositionSettings]
     class TtmlDestinationSettings < Struct.new(
       nil,
       :style_control,
+      :position,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -13564,6 +14737,20 @@ module Aws::MediaLive
     # @!attribute anywhere_settings
     #   The Elemental Anywhere settings for this channel.
     #   @return [Types::AnywhereSettings]
+    # @!attribute linked_channel_settings
+    #   The linked channel settings for the channel.
+    #   @return [Types::LinkedChannelSettings]
+    # @!attribute channel_security_groups
+    #   A list of IDs for all the Input Security Groups attached to the channel.
+    #   @return [Array<String>]
+    # @!attribute inference_settings
+    #   Include this setting to include Elemental Inference features in this channel.
+    #   @return [Types::InferenceSettings]
+    # @!attribute special_router_settings
+    #   When using MediaConnect Router as the source of a MediaLive input there's a special handoff that occurs when a router output
+    #   is created. This group of settings is set on your behalf by the MediaConnect Router service using this set of settings. This
+    #   setting object can only by used by that service.
+    #   @return [Types::SpecialRouterSettings]
     class UpdateChannelRequest < Struct.new(
       nil,
       :cdi_input_specification,
@@ -13579,6 +14766,10 @@ module Aws::MediaLive
       :channel_engine_version,
       :dry_run,
       :anywhere_settings,
+      :linked_channel_settings,
+      :channel_security_groups,
+      :inference_settings,
+      :special_router_settings,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -14113,6 +15304,11 @@ module Aws::MediaLive
     # @!attribute sdi_sources
     #   SDI Sources for this Input.
     #   @return [Array<String>]
+    # @!attribute special_router_settings
+    #   When using MediaConnect Router as the source of a MediaLive input there's a special handoff that occurs when a router output
+    #   is created. This group of settings is set on your behalf by the MediaConnect Router service using this set of settings. This
+    #   setting object can only by used by that service.
+    #   @return [Types::SpecialRouterSettings]
     class UpdateInputRequest < Struct.new(
       nil,
       :destinations,
@@ -14127,6 +15323,7 @@ module Aws::MediaLive
       :multicast_settings,
       :smpte2110_receiver_group_settings,
       :sdi_sources,
+      :special_router_settings,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -14604,13 +15801,38 @@ module Aws::MediaLive
     #   NONE: MediaLive does not clip the input video and does not include the AFD values in the output
     #   @return [String]
     # @!attribute scaling_behavior
-    #   STRETCH_TO_OUTPUT configures the output position to stretch the video to the specified output resolution (height and width). This option will override any position value. DEFAULT may insert black boxes (pillar boxes or letter boxes) around the video to provide the specified output resolution.
+    #   Configures how MediaLive transforms the video picture to match the output frame.
+    #   Use STRETCH_TO_OUTPUT to stretch the video to fill the output frame. The video might get distorted.
+    #   Use DEFAULT to insert pillar boxes or letter boxes around the video to fill the output frame. The video won't get distorted.
+    #   Use SMART_CROP to enable the smart crop feature that uses the Elemental Inference service to crop the frame using AI - see the MediaLive User Guide for more information.
     #   @return [String]
     # @!attribute sharpness
     #   Changes the strength of the anti-alias filter used for scaling. 0 is the softest setting, 100 is the sharpest. A setting of 50 is recommended for most content.
     #   @return [Integer]
     # @!attribute width
     #   Output video width, in pixels. Must be an even number. For most codecs, you can leave this field and height blank in order to use the height and width (resolution) from the source. Note, however, that leaving blank is not recommended. For the Frame Capture codec, height and width are required.
+    #   @return [Integer]
+    # @!attribute crop_rectangle
+    #   Region of the input video to crop before scaling. If not specified, the entire input
+    #   frame is used.
+    #
+    #   Note: Unlike {@link outputPositionRectangle}, the bounds of cropRectangle are validated
+    #   at ingest time by the encoder/scaler rather than at the API level, because the input
+    #   resolution is not known until the source is probed. Field-level constraints on (x, y,
+    #   width, height) defined on {@link VideoPositionRectangle} still apply.
+    #   @return [Types::VideoPositionRectangle]
+    # @!attribute output_position_rectangle
+    #   Position of the encoded video within the output frame. The area outside the rectangle
+    #   is filled with black. If not specified, the video fills the entire output frame.
+    #   When used, both {@link width} and {@link height} of the VideoDescription must be
+    #   explicitly specified so that the rectangle can be validated against the output frame.
+    #   @return [Types::VideoPositionRectangle]
+    # @!attribute border
+    #   Specifies the number of pixels of black border that will be inserted around the edge
+    #   of the encoded picture. Must be an even integer from 0 (no border, the default) up
+    #   to 100. The width and height of the VideoDescription must each be greater than twice
+    #   this value. Cannot be used together with {@link outputPositionRectangle} -- both
+    #   govern the position of the encoded content within the output frame.
     #   @return [Integer]
     class VideoDescription < Struct.new(
       nil,
@@ -14621,6 +15843,34 @@ module Aws::MediaLive
       :scaling_behavior,
       :sharpness,
       :width,
+      :crop_rectangle,
+      :output_position_rectangle,
+      :border,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # A rectangle defined by position (x, y) and dimensions (width, height) in pixels.
+    # Used for output positioning and input cropping.
+    # @!attribute height
+    #   Height in pixels. Must be an even number.
+    #   @return [Integer]
+    # @!attribute width
+    #   Width in pixels. Must be an even number.
+    #   @return [Integer]
+    # @!attribute x
+    #   Left offset in pixels. Must be an even number.
+    #   @return [Integer]
+    # @!attribute y
+    #   Top offset in pixels. Must be an even number.
+    #   @return [Integer]
+    class VideoPositionRectangle < Struct.new(
+      nil,
+      :height,
+      :width,
+      :x,
+      :y,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -14775,11 +16025,15 @@ module Aws::MediaLive
 
     # Webvtt Destination Settings
     # @!attribute style_control
-    #   Controls whether the color and position of the source captions is passed through to the WebVTT output captions.  PASSTHROUGH - Valid only if the source captions are EMBEDDED or TELETEXT.  NO_STYLE_DATA - Don't pass through the style. The output captions will not contain any font styling information.
+    #   Controls whether the color and position of the source captions is passed through to the WebVTT output captions.  PASSTHROUGH - Valid only if the source captions are EMBEDDED, TELETEXT, or SMART SUBTITLES.  NO_STYLE_DATA - Don't pass through the style. The output captions will not contain any font styling information. MANUAL - Applies the specified styling and positioning. All other styling and positioning is given default values.
     #   @return [String]
+    # @!attribute position
+    #   Specifies the position of the output captions. Applies only when styleControl is set to manual.
+    #   @return [Types::TextCaptionPositionSettings]
     class WebvttDestinationSettings < Struct.new(
       nil,
       :style_control,
+      :position,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

@@ -75,6 +75,11 @@ module Aws::S3
       def checksum_crc64_nvme: () -> String?
       def checksum_sha1: () -> String?
       def checksum_sha256: () -> String?
+      def checksum_sha512: () -> String?
+      def checksum_md5: () -> String?
+      def checksum_xxhash64: () -> String?
+      def checksum_xxhash3: () -> String?
+      def checksum_xxhash128: () -> String?
       def checksum_type: () -> String?
       def server_side_encryption: () -> String?
       def version_id: () -> String?
@@ -94,6 +99,11 @@ module Aws::S3
             checksum_crc64_nvme: String,
             checksum_sha1: String,
             checksum_sha256: String,
+            checksum_sha512: String,
+            checksum_md5: String,
+            checksum_xxhash64: String,
+            checksum_xxhash3: String,
+            checksum_xxhash128: String,
             part_number: Integer
           }
         ]
@@ -104,6 +114,11 @@ module Aws::S3
       ?checksum_crc64_nvme: String,
       ?checksum_sha1: String,
       ?checksum_sha256: String,
+      ?checksum_sha512: String,
+      ?checksum_md5: String,
+      ?checksum_xxhash64: String,
+      ?checksum_xxhash3: String,
+      ?checksum_xxhash128: String,
       ?checksum_type: String,
       ?mpu_object_size: Integer,
       ?request_payer: String,
@@ -148,10 +163,13 @@ module Aws::S3
       ?grant_read: String,
       ?grant_read_acp: String,
       ?grant_write_acp: String,
+      ?if_match: String,
+      ?if_none_match: String,
       ?key: String,
       ?metadata: Hash[String, String],
       ?metadata_directive: String,
       ?tagging_directive: String,
+      ?annotation_directive: String,
       ?server_side_encryption: String,
       ?storage_class: String,
       ?website_redirect_location: String,
@@ -169,6 +187,9 @@ module Aws::S3
       ?object_lock_mode: String,
       ?object_lock_retain_until_date: Time,
       ?object_lock_legal_hold_status: String,
+      ?object_lock_event_hold: String,
+      ?object_lock_event_hold_duration_days: Integer,
+      ?object_lock_event_hold_duration_years: Integer,
       ?expected_bucket_owner: String,
       ?expected_source_bucket_owner: String
     ) -> _CopyObjectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CopyObjectResponse
@@ -204,7 +225,8 @@ module Aws::S3
       ?grant_write: String,
       ?grant_write_acp: String,
       ?object_lock_enabled_for_bucket: bool,
-      ?object_ownership: String
+      ?object_ownership: String,
+      ?bucket_namespace: String
     ) -> _CreateBucketResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateBucketResponse
 
     interface _CreateBucketMetadataConfigurationResponse
@@ -228,6 +250,11 @@ module Aws::S3
         inventory_table_configuration: {
           configuration_state: String,
           encryption_configuration: untyped
+        },
+        annotation_table_configuration: {
+          configuration_state: String,
+          encryption_configuration: untyped,
+          role: String
         }
       },
       ?expected_bucket_owner: String
@@ -295,6 +322,9 @@ module Aws::S3
       ?object_lock_mode: String,
       ?object_lock_retain_until_date: Time,
       ?object_lock_legal_hold_status: String,
+      ?object_lock_event_hold: String,
+      ?object_lock_event_hold_duration_days: Integer,
+      ?object_lock_event_hold_duration_years: Integer,
       ?expected_bucket_owner: String,
       ?checksum_algorithm: String,
       ?checksum_type: String
@@ -460,6 +490,21 @@ module Aws::S3
       ?if_match_size: Integer
     ) -> _DeleteObjectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteObjectResponse
 
+    interface _DeleteObjectAnnotationResponse
+      include Smithy::Client::_Response[Types::DeleteObjectAnnotationOutput]
+      def object_version_id: () -> String?
+      def request_charged: () -> String?
+    end
+    def delete_object_annotation: (
+      ?bucket: String,
+      ?key: String,
+      ?annotation_name: String,
+      ?version_id: String,
+      ?request_payer: String,
+      ?expected_bucket_owner: String,
+      ?object_if_match: String
+    ) -> _DeleteObjectAnnotationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteObjectAnnotationResponse
+
     interface _DeleteObjectTaggingResponse
       include Smithy::Client::_Response[Types::DeleteObjectTaggingOutput]
       def version_id: () -> String?
@@ -505,6 +550,15 @@ module Aws::S3
       ?bucket: String,
       ?expected_bucket_owner: String
     ) -> _DeletePublicAccessBlockResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePublicAccessBlockResponse
+
+    interface _GetBucketAbacResponse
+      include Smithy::Client::_Response[Types::GetBucketAbacOutput]
+      def abac_status: () -> Types::AbacStatus?
+    end
+    def get_bucket_abac: (
+      ?bucket: String,
+      ?expected_bucket_owner: String
+    ) -> _GetBucketAbacResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBucketAbacResponse
 
     interface _GetBucketAccelerateConfigurationResponse
       include Smithy::Client::_Response[Types::GetBucketAccelerateConfigurationOutput]
@@ -734,6 +788,11 @@ module Aws::S3
       def checksum_crc64_nvme: () -> String?
       def checksum_sha1: () -> String?
       def checksum_sha256: () -> String?
+      def checksum_sha512: () -> String?
+      def checksum_md5: () -> String?
+      def checksum_xxhash64: () -> String?
+      def checksum_xxhash3: () -> String?
+      def checksum_xxhash128: () -> String?
       def checksum_type: () -> String?
       def missing_meta: () -> Integer?
       def version_id: () -> String?
@@ -759,6 +818,9 @@ module Aws::S3
       def object_lock_mode: () -> String?
       def object_lock_retain_until_date: () -> Time?
       def object_lock_legal_hold_status: () -> String?
+      def object_lock_event_hold: () -> String?
+      def object_lock_event_hold_duration_days: () -> Integer?
+      def object_lock_event_hold_duration_years: () -> Integer?
     end
     def get_object: (
       ?bucket: String,
@@ -797,6 +859,38 @@ module Aws::S3
       ?request_payer: String,
       ?expected_bucket_owner: String
     ) -> _GetObjectAclResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetObjectAclResponse
+
+    interface _GetObjectAnnotationResponse
+      include Smithy::Client::_Response[Types::GetObjectAnnotationOutput]
+      def annotation_payload: () -> String?
+      def object_version_id: () -> String?
+      def last_modified: () -> Time?
+      def content_length: () -> Integer?
+      def e_tag: () -> String?
+      def checksum_crc32: () -> String?
+      def checksum_crc32_c: () -> String?
+      def checksum_crc64_nvme: () -> String?
+      def checksum_sha1: () -> String?
+      def checksum_sha256: () -> String?
+      def checksum_sha512: () -> String?
+      def checksum_md5: () -> String?
+      def checksum_xxhash64: () -> String?
+      def checksum_xxhash3: () -> String?
+      def checksum_xxhash128: () -> String?
+      def checksum_type: () -> String?
+      def server_side_encryption: () -> String?
+      def request_charged: () -> String?
+      def replication_status: () -> String?
+    end
+    def get_object_annotation: (
+      ?bucket: String,
+      ?key: String,
+      ?annotation_name: String,
+      ?version_id: String,
+      ?request_payer: String,
+      ?expected_bucket_owner: String,
+      ?checksum_mode: String
+    ) -> _GetObjectAnnotationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetObjectAnnotationResponse
 
     interface _GetObjectAttributesResponse
       include Smithy::Client::_Response[Types::GetObjectAttributesOutput]
@@ -918,6 +1012,11 @@ module Aws::S3
       def checksum_crc64_nvme: () -> String?
       def checksum_sha1: () -> String?
       def checksum_sha256: () -> String?
+      def checksum_sha512: () -> String?
+      def checksum_md5: () -> String?
+      def checksum_xxhash64: () -> String?
+      def checksum_xxhash3: () -> String?
+      def checksum_xxhash128: () -> String?
       def checksum_type: () -> String?
       def e_tag: () -> String?
       def missing_meta: () -> Integer?
@@ -944,6 +1043,9 @@ module Aws::S3
       def object_lock_mode: () -> String?
       def object_lock_retain_until_date: () -> Time?
       def object_lock_legal_hold_status: () -> String?
+      def object_lock_event_hold: () -> String?
+      def object_lock_event_hold_duration_days: () -> Integer?
+      def object_lock_event_hold_duration_years: () -> Integer?
     end
     def head_object: (
       ?bucket: String,
@@ -1073,6 +1175,30 @@ module Aws::S3
       ?request_payer: String
     ) -> _ListMultipartUploadsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMultipartUploadsResponse
 
+    interface _ListObjectAnnotationsResponse
+      include Smithy::Client::_Response[Types::ListObjectAnnotationsOutput]
+      def annotations: () -> Array[Types::AnnotationEntry]?
+      def bucket: () -> String?
+      def key: () -> String?
+      def object_version_id: () -> String?
+      def annotation_prefix: () -> String?
+      def max_annotation_results: () -> Integer?
+      def annotation_count: () -> Integer?
+      def continuation_token: () -> String?
+      def next_continuation_token: () -> String?
+      def request_charged: () -> String?
+    end
+    def list_object_annotations: (
+      ?bucket: String,
+      ?key: String,
+      ?version_id: String,
+      ?max_annotation_results: Integer,
+      ?annotation_prefix: String,
+      ?continuation_token: String,
+      ?request_payer: String,
+      ?expected_bucket_owner: String
+    ) -> _ListObjectAnnotationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListObjectAnnotationsResponse
+
     interface _ListObjectVersionsResponse
       include Smithy::Client::_Response[Types::ListObjectVersionsOutput]
       def is_truncated: () -> bool?
@@ -1190,6 +1316,19 @@ module Aws::S3
       ?sse_customer_key: String,
       ?sse_customer_key_md5: String
     ) -> _ListPartsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPartsResponse
+
+    interface _PutBucketAbacResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_bucket_abac: (
+      ?bucket: String,
+      ?content_md5: String,
+      ?checksum_algorithm: String,
+      ?expected_bucket_owner: String,
+      ?abac_status: {
+        status: String
+      }
+    ) -> _PutBucketAbacResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutBucketAbacResponse
 
     interface _PutBucketAccelerateConfigurationResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
@@ -1314,7 +1453,10 @@ module Aws::S3
               sse_algorithm: String,
               kms_master_key_id: String
             },
-            bucket_key_enabled: bool
+            bucket_key_enabled: bool,
+            blocked_encryption_types: {
+              encryption_type: Array[String]
+            }
           }
         ]
       },
@@ -1763,6 +1905,11 @@ module Aws::S3
       def checksum_crc64_nvme: () -> String?
       def checksum_sha1: () -> String?
       def checksum_sha256: () -> String?
+      def checksum_sha512: () -> String?
+      def checksum_md5: () -> String?
+      def checksum_xxhash64: () -> String?
+      def checksum_xxhash3: () -> String?
+      def checksum_xxhash128: () -> String?
       def checksum_type: () -> String?
       def server_side_encryption: () -> String?
       def version_id: () -> String?
@@ -1791,6 +1938,11 @@ module Aws::S3
       ?checksum_crc64_nvme: String,
       ?checksum_sha1: String,
       ?checksum_sha256: String,
+      ?checksum_sha512: String,
+      ?checksum_md5: String,
+      ?checksum_xxhash64: String,
+      ?checksum_xxhash3: String,
+      ?checksum_xxhash128: String,
       ?expires: String,
       ?if_match: String,
       ?if_none_match: String,
@@ -1815,6 +1967,9 @@ module Aws::S3
       ?object_lock_mode: String,
       ?object_lock_retain_until_date: Time,
       ?object_lock_legal_hold_status: String,
+      ?object_lock_event_hold: String,
+      ?object_lock_event_hold_duration_days: Integer,
+      ?object_lock_event_hold_duration_years: Integer,
       ?expected_bucket_owner: String
     ) -> _PutObjectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutObjectResponse
 
@@ -1856,6 +2011,49 @@ module Aws::S3
       ?expected_bucket_owner: String
     ) -> _PutObjectAclResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutObjectAclResponse
 
+    interface _PutObjectAnnotationResponse
+      include Smithy::Client::_Response[Types::PutObjectAnnotationOutput]
+      def key: () -> String?
+      def annotation_name: () -> String?
+      def object_version_id: () -> String?
+      def e_tag: () -> String?
+      def checksum_crc32: () -> String?
+      def checksum_crc32_c: () -> String?
+      def checksum_crc64_nvme: () -> String?
+      def checksum_sha1: () -> String?
+      def checksum_sha256: () -> String?
+      def checksum_sha512: () -> String?
+      def checksum_md5: () -> String?
+      def checksum_xxhash64: () -> String?
+      def checksum_xxhash3: () -> String?
+      def checksum_xxhash128: () -> String?
+      def checksum_type: () -> String?
+      def server_side_encryption: () -> String?
+      def request_charged: () -> String?
+    end
+    def put_object_annotation: (
+      ?bucket: String,
+      ?key: String,
+      ?version_id: String,
+      ?annotation_name: String,
+      ?annotation_payload: String,
+      ?object_if_match: String,
+      ?checksum_algorithm: String,
+      ?checksum_crc32: String,
+      ?checksum_crc32_c: String,
+      ?checksum_crc64_nvme: String,
+      ?checksum_sha1: String,
+      ?checksum_sha256: String,
+      ?checksum_sha512: String,
+      ?checksum_md5: String,
+      ?checksum_xxhash64: String,
+      ?checksum_xxhash3: String,
+      ?checksum_xxhash128: String,
+      ?content_md5: String,
+      ?request_payer: String,
+      ?expected_bucket_owner: String
+    ) -> _PutObjectAnnotationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutObjectAnnotationResponse
+
     interface _PutObjectLegalHoldResponse
       include Smithy::Client::_Response[Types::PutObjectLegalHoldOutput]
       def request_charged: () -> String?
@@ -1885,7 +2083,11 @@ module Aws::S3
           default_retention: {
             mode: String,
             days: Integer,
-            years: Integer
+            years: Integer,
+            default_event_hold: {
+              days: untyped,
+              years: untyped
+            }
           }
         }
       },
@@ -1905,7 +2107,12 @@ module Aws::S3
       ?key: String,
       ?retention: {
         mode: String,
-        retain_until_date: Time
+        retain_until_date: Time,
+        event_hold: String,
+        event_hold_duration: {
+          days: Integer,
+          years: Integer
+        }
       },
       ?request_payer: String,
       ?version_id: String,
@@ -2117,6 +2324,24 @@ module Aws::S3
       ?expected_bucket_owner: String
     ) -> _SelectObjectContentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SelectObjectContentResponse
 
+    interface _UpdateBucketMetadataAnnotationTableConfigurationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_bucket_metadata_annotation_table_configuration: (
+      ?bucket: String,
+      ?content_md5: String,
+      ?checksum_algorithm: String,
+      ?annotation_table_configuration: {
+        configuration_state: String,
+        encryption_configuration: {
+          sse_algorithm: String,
+          kms_key_arn: String
+        },
+        role: String
+      },
+      ?expected_bucket_owner: String
+    ) -> _UpdateBucketMetadataAnnotationTableConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateBucketMetadataAnnotationTableConfigurationResponse
+
     interface _UpdateBucketMetadataInventoryTableConfigurationResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
     end
@@ -2150,6 +2375,26 @@ module Aws::S3
       ?expected_bucket_owner: String
     ) -> _UpdateBucketMetadataJournalTableConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateBucketMetadataJournalTableConfigurationResponse
 
+    interface _UpdateObjectEncryptionResponse
+      include Smithy::Client::_Response[Types::UpdateObjectEncryptionResponse]
+      def request_charged: () -> String?
+    end
+    def update_object_encryption: (
+      ?bucket: String,
+      ?key: String,
+      ?version_id: String,
+      ?object_encryption: {
+        ssekms: {
+          kms_key_arn: String,
+          bucket_key_enabled: bool
+        }
+      },
+      ?request_payer: String,
+      ?expected_bucket_owner: String,
+      ?content_md5: String,
+      ?checksum_algorithm: String
+    ) -> _UpdateObjectEncryptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateObjectEncryptionResponse
+
     interface _UploadPartResponse
       include Smithy::Client::_Response[Types::UploadPartOutput]
       def server_side_encryption: () -> String?
@@ -2159,6 +2404,11 @@ module Aws::S3
       def checksum_crc64_nvme: () -> String?
       def checksum_sha1: () -> String?
       def checksum_sha256: () -> String?
+      def checksum_sha512: () -> String?
+      def checksum_md5: () -> String?
+      def checksum_xxhash64: () -> String?
+      def checksum_xxhash3: () -> String?
+      def checksum_xxhash128: () -> String?
       def sse_customer_algorithm: () -> String?
       def sse_customer_key_md5: () -> String?
       def ssekms_key_id: () -> String?
@@ -2176,6 +2426,11 @@ module Aws::S3
       ?checksum_crc64_nvme: String,
       ?checksum_sha1: String,
       ?checksum_sha256: String,
+      ?checksum_sha512: String,
+      ?checksum_md5: String,
+      ?checksum_xxhash64: String,
+      ?checksum_xxhash3: String,
+      ?checksum_xxhash128: String,
       ?key: String,
       ?part_number: Integer,
       ?upload_id: String,
@@ -2242,6 +2497,11 @@ module Aws::S3
       ?checksum_crc64_nvme: String,
       ?checksum_sha1: String,
       ?checksum_sha256: String,
+      ?checksum_sha512: String,
+      ?checksum_md5: String,
+      ?checksum_xxhash64: String,
+      ?checksum_xxhash3: String,
+      ?checksum_xxhash128: String,
       ?delete_marker: bool,
       ?e_tag: String,
       ?expires: String,

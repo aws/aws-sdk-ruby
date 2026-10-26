@@ -62,6 +62,7 @@ module Aws::FSx
     CopySnapshotAndUpdateVolumeResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.fsx#CopySnapshotAndUpdateVolumeResponse", name: "CopySnapshotAndUpdateVolumeResponse")
     CopyTagsToDataRepositoryAssociations = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.fsx#CopyTagsToDataRepositoryAssociations", name: "CopyTagsToDataRepositoryAssociations")
     CreateAggregateConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.fsx#CreateAggregateConfiguration", name: "CreateAggregateConfiguration")
+    CreateAndAttachS3AccessPointOntapConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.fsx#CreateAndAttachS3AccessPointOntapConfiguration", name: "CreateAndAttachS3AccessPointOntapConfiguration")
     CreateAndAttachS3AccessPointOpenZFSConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.fsx#CreateAndAttachS3AccessPointOpenZFSConfiguration", name: "CreateAndAttachS3AccessPointOpenZFSConfiguration")
     CreateAndAttachS3AccessPointRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.fsx#CreateAndAttachS3AccessPointRequest", name: "CreateAndAttachS3AccessPointRequest")
     CreateAndAttachS3AccessPointResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.fsx#CreateAndAttachS3AccessPointResponse", name: "CreateAndAttachS3AccessPointResponse")
@@ -99,6 +100,7 @@ module Aws::FSx
     CreateVolumeRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.fsx#CreateVolumeRequest", name: "CreateVolumeRequest")
     CreateVolumeResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.fsx#CreateVolumeResponse", name: "CreateVolumeResponse")
     CreationTime = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.fsx#CreationTime", name: "CreationTime")
+    CustomerSecretsManagerARN = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.fsx#CustomerSecretsManagerARN", name: "CustomerSecretsManagerARN", traits: {"smithy.api#length" => {"min" => 64, "max" => 1024}, "smithy.api#pattern" => "^arn:[^:]{1,63}:secretsmanager:[a-z0-9-]+:[0-9]{12}:secret:[a-zA-Z0-9/_+=.@-]+-[a-zA-Z0-9]{6}$"})
     DNSName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.fsx#DNSName", name: "DNSName", traits: {"smithy.api#length" => {"min" => 16, "max" => 275}, "smithy.api#pattern" => "^((fs|fc)i?-[0-9a-f]{8,}\\..{4,253})$"})
     DailyTime = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.fsx#DailyTime", name: "DailyTime", traits: {"smithy.api#length" => {"min" => 5, "max" => 5}, "smithy.api#pattern" => "^([01]\\d|2[0-3]):?([0-5]\\d)$"})
     DataCompressionType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.fsx#DataCompressionType", name: "DataCompressionType")
@@ -253,7 +255,7 @@ module Aws::FSx
     InvalidRegion = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.fsx#InvalidRegion", name: "InvalidRegion", traits: {"smithy.api#error" => "client"})
     InvalidRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.fsx#InvalidRequest", name: "InvalidRequest", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400, "smithy.api#xmlName" => "Error"})
     InvalidSourceKmsKey = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.fsx#InvalidSourceKmsKey", name: "InvalidSourceKmsKey", traits: {"smithy.api#error" => "client"})
-    Iops = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.fsx#Iops", name: "Iops", traits: {"smithy.api#range" => {"min" => 0, "max" => 2400000}})
+    Iops = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.fsx#Iops", name: "Iops", traits: {"smithy.api#range" => {"min" => 0, "max" => 2147483647}})
     IpAddress = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.fsx#IpAddress", name: "IpAddress", traits: {"smithy.api#length" => {"min" => 1, "max" => 45}, "smithy.api#pattern" => "^(^((([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]))$|^(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))$)$"})
     IpAddressRange = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.fsx#IpAddressRange", name: "IpAddressRange", traits: {"smithy.api#length" => {"min" => 9, "max" => 17}, "smithy.api#pattern" => "^[^\\u0000\\u0085\\u2028\\u2029\\r\\n]{9,17}$"})
     Ipv6AddressRange = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.fsx#Ipv6AddressRange", name: "Ipv6AddressRange", traits: {"smithy.api#length" => {"min" => 4, "max" => 43}, "smithy.api#pattern" => "^[^\\u0000\\u0085\\u2028\\u2029\\r\\n]{4,43}$"})
@@ -278,7 +280,7 @@ module Aws::FSx
     LustreRootSquashConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.fsx#LustreRootSquashConfiguration", name: "LustreRootSquashConfiguration")
     MaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.fsx#MaxResults", name: "MaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 2147483647}})
     Megabytes = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.fsx#Megabytes", name: "Megabytes", traits: {"smithy.api#range" => {"min" => 1, "max" => 512000}})
-    MegabytesPerSecond = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.fsx#MegabytesPerSecond", name: "MegabytesPerSecond", traits: {"smithy.api#range" => {"min" => 8, "max" => 100000}})
+    MegabytesPerSecond = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.fsx#MegabytesPerSecond", name: "MegabytesPerSecond", traits: {"smithy.api#range" => {"min" => 8, "max" => 2147483647}})
     MetadataConfigurationMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.fsx#MetadataConfigurationMode", name: "MetadataConfigurationMode")
     MetadataIops = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.fsx#MetadataIops", name: "MetadataIops", traits: {"smithy.api#range" => {"min" => 1500, "max" => 192000}})
     MetadataStorageCapacity = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.fsx#MetadataStorageCapacity", name: "MetadataStorageCapacity", traits: {"smithy.api#range" => {"min" => 0, "max" => 2147483647}})
@@ -297,8 +299,13 @@ module Aws::FSx
     OntapDeploymentType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.fsx#OntapDeploymentType", name: "OntapDeploymentType")
     OntapEndpointIpAddresses = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.fsx#OntapEndpointIpAddresses", name: "OntapEndpointIpAddresses", traits: {"smithy.api#length" => {"min" => 1, "max" => 24}})
     OntapFileSystemConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.fsx#OntapFileSystemConfiguration", name: "OntapFileSystemConfiguration")
+    OntapFileSystemIdentity = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.fsx#OntapFileSystemIdentity", name: "OntapFileSystemIdentity")
+    OntapFileSystemUserName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.fsx#OntapFileSystemUserName", name: "OntapFileSystemUserName", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[^\\u0000\\u0085\\u2028\\u2029\\r\\n]{1,256}$"})
+    OntapFileSystemUserType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.fsx#OntapFileSystemUserType", name: "OntapFileSystemUserType")
+    OntapUnixFileSystemUser = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.fsx#OntapUnixFileSystemUser", name: "OntapUnixFileSystemUser")
     OntapVolumeConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.fsx#OntapVolumeConfiguration", name: "OntapVolumeConfiguration")
     OntapVolumeType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.fsx#OntapVolumeType", name: "OntapVolumeType")
+    OntapWindowsFileSystemUser = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.fsx#OntapWindowsFileSystemUser", name: "OntapWindowsFileSystemUser")
     OpenZFSClientConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.fsx#OpenZFSClientConfiguration", name: "OpenZFSClientConfiguration")
     OpenZFSClientConfigurations = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.fsx#OpenZFSClientConfigurations", name: "OpenZFSClientConfigurations", traits: {"smithy.api#length" => {"min" => 0, "max" => 25}})
     OpenZFSClients = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.fsx#OpenZFSClients", name: "OpenZFSClients", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[ -~]{1,128}$"})
@@ -364,6 +371,7 @@ module Aws::FSx
     S3AccessPointAttachmentsFilterValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.fsx#S3AccessPointAttachmentsFilterValue", name: "S3AccessPointAttachmentsFilterValue", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[0-9a-zA-Z\\*\\.\\\\/\\?\\-\\_]*$"})
     S3AccessPointAttachmentsFilterValues = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.fsx#S3AccessPointAttachmentsFilterValues", name: "S3AccessPointAttachmentsFilterValues", traits: {"smithy.api#length" => {"min" => 0, "max" => 20}})
     S3AccessPointAttachmentsFilters = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.fsx#S3AccessPointAttachmentsFilters", name: "S3AccessPointAttachmentsFilters", traits: {"smithy.api#length" => {"min" => 0, "max" => 2}})
+    S3AccessPointOntapConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.fsx#S3AccessPointOntapConfiguration", name: "S3AccessPointOntapConfiguration")
     S3AccessPointOpenZFSConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.fsx#S3AccessPointOpenZFSConfiguration", name: "S3AccessPointOpenZFSConfiguration")
     S3AccessPointVpcConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.fsx#S3AccessPointVpcConfiguration", name: "S3AccessPointVpcConfiguration")
     S3DataRepositoryConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.fsx#S3DataRepositoryConfiguration", name: "S3DataRepositoryConfiguration")
@@ -431,7 +439,7 @@ module Aws::FSx
     TaskId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.fsx#TaskId", name: "TaskId", traits: {"smithy.api#length" => {"min" => 12, "max" => 128}, "smithy.api#pattern" => "^(task-[0-9a-f]{17,})$"})
     TaskIds = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.fsx#TaskIds", name: "TaskIds", traits: {"smithy.api#length" => {"min" => 0, "max" => 50}})
     ThroughputCapacityMbps = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.fsx#ThroughputCapacityMbps", name: "ThroughputCapacityMbps", traits: {"smithy.api#range" => {"min" => 4000, "max" => 2000000}})
-    ThroughputCapacityPerHAPair = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.fsx#ThroughputCapacityPerHAPair", name: "ThroughputCapacityPerHAPair", traits: {"smithy.api#range" => {"min" => 128, "max" => 6144}})
+    ThroughputCapacityPerHAPair = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.fsx#ThroughputCapacityPerHAPair", name: "ThroughputCapacityPerHAPair", traits: {"smithy.api#range" => {"min" => 128, "max" => 2147483647}})
     TieringPolicy = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.fsx#TieringPolicy", name: "TieringPolicy")
     TieringPolicyName = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.fsx#TieringPolicyName", name: "TieringPolicyName")
     TooManyAccessPoints = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.fsx#TooManyAccessPoints", name: "TooManyAccessPoints", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400, "smithy.api#xmlName" => "Error"})
@@ -495,6 +503,7 @@ module Aws::FSx
     WindowsAuditLogCreateConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.fsx#WindowsAuditLogCreateConfiguration", name: "WindowsAuditLogCreateConfiguration")
     WindowsDeploymentType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.fsx#WindowsDeploymentType", name: "WindowsDeploymentType")
     WindowsFileSystemConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.fsx#WindowsFileSystemConfiguration", name: "WindowsFileSystemConfiguration")
+    WindowsFsrmConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.fsx#WindowsFsrmConfiguration", name: "WindowsFsrmConfiguration")
 
     AccessPointAlreadyOwnedByYou.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "ErrorCode"))
     AccessPointAlreadyOwnedByYou.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
@@ -655,6 +664,9 @@ module Aws::FSx
     CreateAggregateConfiguration.add_member(:aggregates, ::Smithy::Schema::Shapes::MemberShape.new(target: Aggregates, name: "Aggregates"))
     CreateAggregateConfiguration.add_member(:constituents_per_aggregate, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregateListMultiplier, name: "ConstituentsPerAggregate"))
     CreateAggregateConfiguration.type = Types::CreateAggregateConfiguration
+    CreateAndAttachS3AccessPointOntapConfiguration.add_member(:volume_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeId, name: "VolumeId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateAndAttachS3AccessPointOntapConfiguration.add_member(:file_system_identity, ::Smithy::Schema::Shapes::MemberShape.new(target: OntapFileSystemIdentity, name: "FileSystemIdentity", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateAndAttachS3AccessPointOntapConfiguration.type = Types::CreateAndAttachS3AccessPointOntapConfiguration
     CreateAndAttachS3AccessPointOpenZFSConfiguration.add_member(:volume_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeId, name: "VolumeId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreateAndAttachS3AccessPointOpenZFSConfiguration.add_member(:file_system_identity, ::Smithy::Schema::Shapes::MemberShape.new(target: OpenZFSFileSystemIdentity, name: "FileSystemIdentity", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreateAndAttachS3AccessPointOpenZFSConfiguration.type = Types::CreateAndAttachS3AccessPointOpenZFSConfiguration
@@ -662,6 +674,7 @@ module Aws::FSx
     CreateAndAttachS3AccessPointRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: S3AccessPointAttachmentName, name: "Name", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreateAndAttachS3AccessPointRequest.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: S3AccessPointAttachmentType, name: "Type", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreateAndAttachS3AccessPointRequest.add_member(:open_zfs_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateAndAttachS3AccessPointOpenZFSConfiguration, name: "OpenZFSConfiguration"))
+    CreateAndAttachS3AccessPointRequest.add_member(:ontap_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateAndAttachS3AccessPointOntapConfiguration, name: "OntapConfiguration"))
     CreateAndAttachS3AccessPointRequest.add_member(:s3_access_point, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateAndAttachS3AccessPointS3Configuration, name: "S3AccessPoint"))
     CreateAndAttachS3AccessPointRequest.type = Types::CreateAndAttachS3AccessPointRequest
     CreateAndAttachS3AccessPointResponse.add_member(:s3_access_point_attachment, ::Smithy::Schema::Shapes::MemberShape.new(target: S3AccessPointAttachment, name: "S3AccessPointAttachment"))
@@ -814,6 +827,7 @@ module Aws::FSx
     CreateFileSystemWindowsConfiguration.add_member(:aliases, ::Smithy::Schema::Shapes::MemberShape.new(target: AlternateDNSNames, name: "Aliases"))
     CreateFileSystemWindowsConfiguration.add_member(:audit_log_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: WindowsAuditLogCreateConfiguration, name: "AuditLogConfiguration"))
     CreateFileSystemWindowsConfiguration.add_member(:disk_iops_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: DiskIopsConfiguration, name: "DiskIopsConfiguration"))
+    CreateFileSystemWindowsConfiguration.add_member(:fsrm_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: WindowsFsrmConfiguration, name: "FsrmConfiguration"))
     CreateFileSystemWindowsConfiguration.type = Types::CreateFileSystemWindowsConfiguration
     CreateOntapVolumeConfiguration.add_member(:junction_path, ::Smithy::Schema::Shapes::MemberShape.new(target: JunctionPath, name: "JunctionPath"))
     CreateOntapVolumeConfiguration.add_member(:security_style, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityStyle, name: "SecurityStyle"))
@@ -1429,6 +1443,14 @@ module Aws::FSx
     OntapFileSystemConfiguration.add_member(:throughput_capacity_per_ha_pair, ::Smithy::Schema::Shapes::MemberShape.new(target: ThroughputCapacityPerHAPair, name: "ThroughputCapacityPerHAPair"))
     OntapFileSystemConfiguration.add_member(:endpoint_ipv6_address_range, ::Smithy::Schema::Shapes::MemberShape.new(target: Ipv6AddressRange, name: "EndpointIpv6AddressRange"))
     OntapFileSystemConfiguration.type = Types::OntapFileSystemConfiguration
+    OntapFileSystemIdentity.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: OntapFileSystemUserType, name: "Type", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    OntapFileSystemIdentity.add_member(:unix_user, ::Smithy::Schema::Shapes::MemberShape.new(target: OntapUnixFileSystemUser, name: "UnixUser"))
+    OntapFileSystemIdentity.add_member(:windows_user, ::Smithy::Schema::Shapes::MemberShape.new(target: OntapWindowsFileSystemUser, name: "WindowsUser"))
+    OntapFileSystemIdentity.type = Types::OntapFileSystemIdentity
+    OntapFileSystemUserType.add_member(:unix, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNIX", traits: {"smithy.api#enumValue" => "UNIX"}))
+    OntapFileSystemUserType.add_member(:windows, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WINDOWS", traits: {"smithy.api#enumValue" => "WINDOWS"}))
+    OntapUnixFileSystemUser.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: OntapFileSystemUserName, name: "Name", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    OntapUnixFileSystemUser.type = Types::OntapUnixFileSystemUser
     OntapVolumeConfiguration.add_member(:flex_cache_endpoint_type, ::Smithy::Schema::Shapes::MemberShape.new(target: FlexCacheEndpointType, name: "FlexCacheEndpointType"))
     OntapVolumeConfiguration.add_member(:junction_path, ::Smithy::Schema::Shapes::MemberShape.new(target: JunctionPath, name: "JunctionPath"))
     OntapVolumeConfiguration.add_member(:security_style, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityStyle, name: "SecurityStyle"))
@@ -1449,6 +1471,8 @@ module Aws::FSx
     OntapVolumeType.add_member(:rw, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RW", traits: {"smithy.api#enumValue" => "RW"}))
     OntapVolumeType.add_member(:dp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DP", traits: {"smithy.api#enumValue" => "DP"}))
     OntapVolumeType.add_member(:ls, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LS", traits: {"smithy.api#enumValue" => "LS"}))
+    OntapWindowsFileSystemUser.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: OntapFileSystemUserName, name: "Name", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    OntapWindowsFileSystemUser.type = Types::OntapWindowsFileSystemUser
     OpenZFSClientConfiguration.add_member(:clients, ::Smithy::Schema::Shapes::MemberShape.new(target: OpenZFSClients, name: "Clients", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     OpenZFSClientConfiguration.add_member(:options, ::Smithy::Schema::Shapes::MemberShape.new(target: OpenZFSNfsExportOptions, name: "Options", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     OpenZFSClientConfiguration.type = Types::OpenZFSClientConfiguration
@@ -1590,6 +1614,7 @@ module Aws::FSx
     S3AccessPointAttachment.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: S3AccessPointAttachmentName, name: "Name"))
     S3AccessPointAttachment.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: S3AccessPointAttachmentType, name: "Type"))
     S3AccessPointAttachment.add_member(:open_zfs_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: S3AccessPointOpenZFSConfiguration, name: "OpenZFSConfiguration"))
+    S3AccessPointAttachment.add_member(:ontap_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: S3AccessPointOntapConfiguration, name: "OntapConfiguration"))
     S3AccessPointAttachment.add_member(:s3_access_point, ::Smithy::Schema::Shapes::MemberShape.new(target: S3AccessPoint, name: "S3AccessPoint"))
     S3AccessPointAttachment.type = Types::S3AccessPointAttachment
     S3AccessPointAttachmentLifecycle.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AVAILABLE", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
@@ -1597,10 +1622,12 @@ module Aws::FSx
     S3AccessPointAttachmentLifecycle.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
     S3AccessPointAttachmentLifecycle.add_member(:updating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATING", traits: {"smithy.api#enumValue" => "UPDATING"}))
     S3AccessPointAttachmentLifecycle.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    S3AccessPointAttachmentLifecycle.add_member(:misconfigured, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MISCONFIGURED", traits: {"smithy.api#enumValue" => "MISCONFIGURED"}))
     S3AccessPointAttachmentNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: S3AccessPointAttachmentName, name: "member"))
     S3AccessPointAttachmentNotFound.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     S3AccessPointAttachmentNotFound.type = Types::S3AccessPointAttachmentNotFound
     S3AccessPointAttachmentType.add_member(:openzfs, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OPENZFS", traits: {"smithy.api#enumValue" => "OPENZFS"}))
+    S3AccessPointAttachmentType.add_member(:ontap, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ONTAP", traits: {"smithy.api#enumValue" => "ONTAP"}))
     S3AccessPointAttachments.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: S3AccessPointAttachment, name: "member"))
     S3AccessPointAttachmentsFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: S3AccessPointAttachmentsFilterName, name: "Name"))
     S3AccessPointAttachmentsFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: S3AccessPointAttachmentsFilterValues, name: "Values"))
@@ -1610,6 +1637,9 @@ module Aws::FSx
     S3AccessPointAttachmentsFilterName.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TYPE", traits: {"smithy.api#enumValue" => "type"}))
     S3AccessPointAttachmentsFilterValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: S3AccessPointAttachmentsFilterValue, name: "member"))
     S3AccessPointAttachmentsFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: S3AccessPointAttachmentsFilter, name: "member"))
+    S3AccessPointOntapConfiguration.add_member(:volume_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeId, name: "VolumeId"))
+    S3AccessPointOntapConfiguration.add_member(:file_system_identity, ::Smithy::Schema::Shapes::MemberShape.new(target: OntapFileSystemIdentity, name: "FileSystemIdentity"))
+    S3AccessPointOntapConfiguration.type = Types::S3AccessPointOntapConfiguration
     S3AccessPointOpenZFSConfiguration.add_member(:volume_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeId, name: "VolumeId"))
     S3AccessPointOpenZFSConfiguration.add_member(:file_system_identity, ::Smithy::Schema::Shapes::MemberShape.new(target: OpenZFSFileSystemIdentity, name: "FileSystemIdentity"))
     S3AccessPointOpenZFSConfiguration.type = Types::S3AccessPointOpenZFSConfiguration
@@ -1627,13 +1657,15 @@ module Aws::FSx
     SelfManagedActiveDirectoryAttributes.add_member(:file_system_administrators_group, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemAdministratorsGroupName, name: "FileSystemAdministratorsGroup"))
     SelfManagedActiveDirectoryAttributes.add_member(:user_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryUserName, name: "UserName"))
     SelfManagedActiveDirectoryAttributes.add_member(:dns_ips, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsIps, name: "DnsIps"))
+    SelfManagedActiveDirectoryAttributes.add_member(:domain_join_service_account_secret, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerSecretsManagerARN, name: "DomainJoinServiceAccountSecret"))
     SelfManagedActiveDirectoryAttributes.type = Types::SelfManagedActiveDirectoryAttributes
     SelfManagedActiveDirectoryConfiguration.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ActiveDirectoryFullyQualifiedName, name: "DomainName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     SelfManagedActiveDirectoryConfiguration.add_member(:organizational_unit_distinguished_name, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationalUnitDistinguishedName, name: "OrganizationalUnitDistinguishedName"))
     SelfManagedActiveDirectoryConfiguration.add_member(:file_system_administrators_group, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemAdministratorsGroupName, name: "FileSystemAdministratorsGroup"))
-    SelfManagedActiveDirectoryConfiguration.add_member(:user_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryUserName, name: "UserName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    SelfManagedActiveDirectoryConfiguration.add_member(:password, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryPassword, name: "Password", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    SelfManagedActiveDirectoryConfiguration.add_member(:user_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryUserName, name: "UserName"))
+    SelfManagedActiveDirectoryConfiguration.add_member(:password, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryPassword, name: "Password"))
     SelfManagedActiveDirectoryConfiguration.add_member(:dns_ips, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsIps, name: "DnsIps", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    SelfManagedActiveDirectoryConfiguration.add_member(:domain_join_service_account_secret, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerSecretsManagerARN, name: "DomainJoinServiceAccountSecret"))
     SelfManagedActiveDirectoryConfiguration.type = Types::SelfManagedActiveDirectoryConfiguration
     SelfManagedActiveDirectoryConfigurationUpdates.add_member(:user_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryUserName, name: "UserName"))
     SelfManagedActiveDirectoryConfigurationUpdates.add_member(:password, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryPassword, name: "Password"))
@@ -1641,6 +1673,7 @@ module Aws::FSx
     SelfManagedActiveDirectoryConfigurationUpdates.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ActiveDirectoryFullyQualifiedName, name: "DomainName"))
     SelfManagedActiveDirectoryConfigurationUpdates.add_member(:organizational_unit_distinguished_name, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationalUnitDistinguishedName, name: "OrganizationalUnitDistinguishedName"))
     SelfManagedActiveDirectoryConfigurationUpdates.add_member(:file_system_administrators_group, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemAdministratorsGroupName, name: "FileSystemAdministratorsGroup"))
+    SelfManagedActiveDirectoryConfigurationUpdates.add_member(:domain_join_service_account_secret, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerSecretsManagerARN, name: "DomainJoinServiceAccountSecret"))
     SelfManagedActiveDirectoryConfigurationUpdates.type = Types::SelfManagedActiveDirectoryConfigurationUpdates
     ServiceLimit.add_member(:file_system_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FILE_SYSTEM_COUNT", traits: {"smithy.api#enumValue" => "FILE_SYSTEM_COUNT"}))
     ServiceLimit.add_member(:total_throughput_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TOTAL_THROUGHPUT_CAPACITY", traits: {"smithy.api#enumValue" => "TOTAL_THROUGHPUT_CAPACITY"}))
@@ -1864,6 +1897,7 @@ module Aws::FSx
     UpdateFileSystemWindowsConfiguration.add_member(:self_managed_active_directory_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SelfManagedActiveDirectoryConfigurationUpdates, name: "SelfManagedActiveDirectoryConfiguration"))
     UpdateFileSystemWindowsConfiguration.add_member(:audit_log_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: WindowsAuditLogCreateConfiguration, name: "AuditLogConfiguration"))
     UpdateFileSystemWindowsConfiguration.add_member(:disk_iops_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: DiskIopsConfiguration, name: "DiskIopsConfiguration"))
+    UpdateFileSystemWindowsConfiguration.add_member(:fsrm_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: WindowsFsrmConfiguration, name: "FsrmConfiguration"))
     UpdateFileSystemWindowsConfiguration.type = Types::UpdateFileSystemWindowsConfiguration
     UpdateOntapVolumeConfiguration.add_member(:junction_path, ::Smithy::Schema::Shapes::MemberShape.new(target: JunctionPath, name: "JunctionPath"))
     UpdateOntapVolumeConfiguration.add_member(:security_style, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityStyle, name: "SecurityStyle"))
@@ -1988,13 +2022,17 @@ module Aws::FSx
     WindowsFileSystemConfiguration.add_member(:audit_log_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: WindowsAuditLogConfiguration, name: "AuditLogConfiguration"))
     WindowsFileSystemConfiguration.add_member(:disk_iops_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: DiskIopsConfiguration, name: "DiskIopsConfiguration"))
     WindowsFileSystemConfiguration.add_member(:preferred_file_server_ipv6, ::Smithy::Schema::Shapes::MemberShape.new(target: IpAddress, name: "PreferredFileServerIpv6"))
+    WindowsFileSystemConfiguration.add_member(:fsrm_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: WindowsFsrmConfiguration, name: "FsrmConfiguration"))
     WindowsFileSystemConfiguration.type = Types::WindowsFileSystemConfiguration
+    WindowsFsrmConfiguration.add_member(:fsrm_service_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Flag, name: "FsrmServiceEnabled", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    WindowsFsrmConfiguration.add_member(:event_log_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: GeneralARN, name: "EventLogDestination"))
+    WindowsFsrmConfiguration.type = Types::WindowsFsrmConfiguration
 
     AWSSimbaAPIServiceV20180301 = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.fsx#AWSSimbaAPIService_v20180301"
       service.name = "AWSSimbaAPIServiceV20180301"
       service.version = "2018-03-01"
-      service.traits = {"aws.api#service" => {"sdkId" => "FSx", "arnNamespace" => "fsx", "cloudFormationName" => "FSx", "cloudTrailEventSource" => "fsx.amazonaws.com", "endpointPrefix" => "fsx"}, "aws.auth#sigv4" => {"name" => "fsx"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "Amazon FSx"}
+      service.traits = {"aws.api#service" => {"sdkId" => "FSx", "arnNamespace" => "fsx", "cloudFormationName" => "FSx", "cloudTrailEventSource" => "fsx.amazonaws.com", "endpointPrefix" => "fsx"}, "aws.auth#sigv4" => {"name" => "fsx"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "Amazon FSx", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://fsx-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://fsx-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://fsx.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://fsx.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
       service.add_operation(:associate_file_system_aliases, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.fsx#AssociateFileSystemAliases"
         operation.name = "AssociateFileSystemAliases"

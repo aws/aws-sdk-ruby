@@ -105,9 +105,9 @@ module Aws::IoT
     # @!attribute elasticsearch
     #   <p>Write data to an Amazon OpenSearch Service domain.</p>
     #            <note>
-    #               <p>The <code>Elasticsearch</code> action can only be used by existing rule actions. 
+    #               <p>The <code>Elasticsearch</code> action can only be used by existing rule actions.
     #               To create a new rule action or to update an existing rule action, use the
-    #               <code>OpenSearch</code> rule action instead. For more information, see 
+    #               <code>OpenSearch</code> rule action instead. For more information, see
     #               <a href="https://docs.aws.amazon.com/iot/latest/apireference/API_OpenSearchAction.html">OpenSearchAction</a>.</p>
     #            </note>
     #   @return [Types::ElasticsearchAction]
@@ -145,6 +145,9 @@ module Aws::IoT
     #   <p>The Amazon Location Service rule action sends device location updates from
     #            an MQTT message to an Amazon Location tracker resource.</p>
     #   @return [Types::LocationAction]
+    # @!attribute influx_db
+    #   <p>Write data to an InfluxDB database.</p>
+    #   @return [Types::InfluxDBAction]
     class Action < Struct.new(
       nil,
       :dynamo_db,
@@ -170,6 +173,7 @@ module Aws::IoT
       :kafka,
       :open_search,
       :location,
+      :influx_db,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -332,7 +336,7 @@ module Aws::IoT
     #   <p>The Amazon Resource Name (ARN) of the notification target to which alerts are sent.</p>
     #   @return [String]
     # @!attribute role_arn
-    #   <p>The ARN of the role that grants permission to send alerts to the 
+    #   <p>The ARN of the role that grants permission to send alerts to the
     #           notification target.</p>
     #   @return [String]
     class AlertTarget < Struct.new(
@@ -596,7 +600,7 @@ module Aws::IoT
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>EXCLUSIVE_THING</code> - Attaches the specified principal to the specified thing, exclusively. 
+    #                     <code>EXCLUSIVE_THING</code> - Attaches the specified principal to the specified thing, exclusively.
     #   						The thing will be the only thing that’s attached to the principal.</p>
     #               </li>
     #            </ul>
@@ -883,9 +887,9 @@ module Aws::IoT
 
     # <p> Filters out specific findings of a Device Defender audit. </p>
     # @!attribute check_name
-    #   <p>An audit check name. Checks must be enabled 
+    #   <p>An audit check name. Checks must be enabled
     #           for your account. (Use <code>DescribeAccountAuditConfiguration</code> to see the list
-    #           of all checks, including those that are enabled or use <code>UpdateAccountAuditConfiguration</code> 
+    #           of all checks, including those that are enabled or use <code>UpdateAccountAuditConfiguration</code>
     #           to select which checks are enabled.)</p>
     #   @return [String]
     # @!attribute resource_identifier
@@ -1098,7 +1102,7 @@ module Aws::IoT
     #            <p>Amazon Web Services IoT Core supports up to two digits after the decimal (for example, 10.9 and 10.99, but not 10.999).</p>
     #   @return [Float]
     # @!attribute min_number_of_executed_things
-    #   <p>The minimum number of things which must receive job execution notifications before the job 
+    #   <p>The minimum number of things which must receive job execution notifications before the job
     #             can be aborted.</p>
     #   @return [Integer]
     class AwsJobAbortCriteria < Struct.new(
@@ -1117,7 +1121,7 @@ module Aws::IoT
     #   <p>The maximum number of OTA update job executions started per minute.</p>
     #   @return [Integer]
     # @!attribute exponential_rate
-    #   <p>The rate of increase for a job rollout. This parameter allows you to define an exponential rate 
+    #   <p>The rate of increase for a job rollout. This parameter allows you to define an exponential rate
     #               increase for a job rollout.</p>
     #   @return [Types::AwsJobExponentialRolloutRate]
     class AwsJobExecutionsRolloutConfig < Struct.new(
@@ -1129,14 +1133,14 @@ module Aws::IoT
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The rate of increase for a job rollout. This parameter allows you to define an exponential rate 
+    # <p>The rate of increase for a job rollout. This parameter allows you to define an exponential rate
     #             increase for a job rollout.</p>
     # @!attribute base_rate_per_minute
-    #   <p>The minimum number of things that will be notified of a pending job, per minute, at the start 
+    #   <p>The minimum number of things that will be notified of a pending job, per minute, at the start
     #               of the job rollout. This is the initial rate of the rollout.</p>
     #   @return [Integer]
     # @!attribute increment_factor
-    #   <p>The rate of increase for a job rollout. The number of things notified is multiplied by this 
+    #   <p>The rate of increase for a job rollout. The number of things notified is multiplied by this
     #               factor.</p>
     #   @return [Float]
     # @!attribute rate_increase_criteria
@@ -1178,7 +1182,7 @@ module Aws::IoT
     #               rate.</p>
     #   @return [Integer]
     # @!attribute number_of_succeeded_things
-    #   <p>When this number of things have succeeded in their job execution, it will initiate an 
+    #   <p>When this number of things have succeeded in their job execution, it will initiate an
     #               increase in the rollout rate.</p>
     #   @return [Integer]
     class AwsJobRateIncreaseCriteria < Struct.new(
@@ -1190,15 +1194,15 @@ module Aws::IoT
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Specifies the amount of time each device has to finish its execution of the job.  A timer is 
-    #             started when the job execution status is set to <code>IN_PROGRESS</code>. If the job execution 
-    #             status is not set to another terminal state before the timer expires, it will be automatically 
+    # <p>Specifies the amount of time each device has to finish its execution of the job.  A timer is
+    #             started when the job execution status is set to <code>IN_PROGRESS</code>. If the job execution
+    #             status is not set to another terminal state before the timer expires, it will be automatically
     #             set to <code>TIMED_OUT</code>.</p>
     # @!attribute in_progress_timeout_in_minutes
-    #   <p>Specifies the amount of time, in minutes, this device has to finish execution of this job. The 
-    #               timeout interval can be anywhere between 1 minute and 7 days (1 to 10080 minutes). The in progress 
-    #               timer can't be updated and will apply to all job executions for the job. Whenever a job execution 
-    #               remains in the IN_PROGRESS status for longer than this interval, the job execution will fail and 
+    #   <p>Specifies the amount of time, in minutes, this device has to finish execution of this job. The
+    #               timeout interval can be anywhere between 1 minute and 7 days (1 to 10080 minutes). The in progress
+    #               timer can't be updated and will apply to all job executions for the job. Whenever a job execution
+    #               remains in the IN_PROGRESS status for longer than this interval, the job execution will fail and
     #               switch to the terminal <code>TIMED_OUT</code> status.</p>
     #   @return [Integer]
     class AwsJobTimeoutConfig < Struct.new(
@@ -1207,6 +1211,59 @@ module Aws::IoT
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configures the command to treat the <code>payloadTemplate</code> as a JSON document for preprocessing.
+    #             This preprocessor substitutes placeholders with parameter values to generate the command execution request payload.
+    #             </p>
+    # @!attribute output_format
+    #   <p>Converts the command preprocessor result to the format defined by this parameter, before sending it to the device.</p>
+    #   @return [String]
+    class AwsJsonSubstitutionCommandPreprocessorConfig < Struct.new(
+      nil,
+      :output_format,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration settings for batching.</p>
+    # @!attribute max_batch_open_ms
+    #   <p>The maximum amount of time (in milliseconds) that an outgoing call waits for other calls
+    #            with which it batches messages of the same type. The higher the setting, the longer the
+    #            latency of the batched HTTP Action will be.</p>
+    #   @return [Integer]
+    # @!attribute max_batch_size
+    #   <p>The maximum number of messages that are batched together in a single action
+    #            execution.</p>
+    #   @return [Integer]
+    # @!attribute max_batch_size_bytes
+    #   <p>Maximum size of a message batch, in bytes.</p>
+    #   @return [Integer]
+    # @!attribute batch_across_topics
+    #   <p>Whether to allow batching messages from different MQTT topics into a single HTTP request.
+    #            By default, only messages from the same topic are batched together. The default value is <code>false</code>.</p>
+    #            <note>
+    #               <p>When <code>batchAcrossTopics</code> is enabled, the error payload format changes: the <code>topic</code> field moves from the top level to inside each entry in the <code>payloadsWithMetadata</code> array, since each message in the batch may originate from a different topic.</p>
+    #            </note>
+    #            <note>
+    #               <p>Messages are always batched within the scope of the same account, rule name, target HTTP endpoint URL, and billing group. Messages that differ in any of these attributes are never combined into the same batch, regardless of the <code>batchAcrossTopics</code> setting.</p>
+    #            </note>
+    #   @return [Boolean]
+    class BatchConfig < Struct.new(
+      nil,
+      :max_batch_open_ms,
+      :max_batch_size,
+      :max_batch_size_bytes,
+      :batch_across_topics,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:batch_across_topics] = false unless options.key?(:batch_across_topics)
+        super
+      end
     end
 
     # <p>A Device Defender security profile behavior.</p>
@@ -1250,7 +1307,7 @@ module Aws::IoT
 
     # <p>The criteria by which the behavior is determined to be normal.</p>
     # @!attribute comparison_operator
-    #   <p>The operator that relates the thing measured (<code>metric</code>) to the criteria 
+    #   <p>The operator that relates the thing measured (<code>metric</code>) to the criteria
     #             (containing a <code>value</code> or <code>statisticalThreshold</code>). Valid operators include:</p>
     #            <ul>
     #               <li>
@@ -1287,11 +1344,11 @@ module Aws::IoT
     #         being given a percentile rank. Cannot be used with list-based metric datatypes.</p>
     #   @return [Integer]
     # @!attribute consecutive_datapoints_to_alarm
-    #   <p>If a device is in violation of the behavior for the specified number of consecutive 
+    #   <p>If a device is in violation of the behavior for the specified number of consecutive
     #             datapoints, an alarm occurs. If not specified, the default is 1.</p>
     #   @return [Integer]
     # @!attribute consecutive_datapoints_to_clear
-    #   <p>If an alarm has occurred and the offending device is no longer in violation of the behavior 
+    #   <p>If an alarm has occurred and the offending device is no longer in violation of the behavior
     #             for the specified number of consecutive datapoints, the alarm is cleared. If not specified,
     #             the default is 1.</p>
     #   @return [Integer]
@@ -1302,7 +1359,7 @@ module Aws::IoT
     #   @return [Types::StatisticalThreshold]
     # @!attribute ml_detection_config
     #   <p>
-    #               The configuration of an ML Detect 
+    #               The configuration of an ML Detect
     #           </p>
     #   @return [Types::MachineLearningDetectionConfig]
     class BehaviorCriteria < Struct.new(
@@ -1484,7 +1541,7 @@ module Aws::IoT
     #   @return [Types::CertificateValidity]
     # @!attribute certificate_mode
     #   <p>The mode of the CA. </p>
-    #            <p>All the device certificates that are registered using this CA will be registered 
+    #            <p>All the device certificates that are registered using this CA will be registered
     #            in the same mode as the CA. For more information about certificate mode for device certificates, see <a href="https://docs.aws.amazon.com/iot/latest/apireference/API_CertificateDescription.html#iot-Type-CertificateDescription-certificateMode">certificate mode</a>.</p>
     #   @return [String]
     class CACertificateDescription < Struct.new(
@@ -1687,7 +1744,7 @@ module Aws::IoT
     #            custom domains and VPC endpoints, we recommend that you use the SNI extension when
     #            connecting to Amazon Web Services IoT Core.</p>
     #            <p>
-    #               <code>SNI_ONLY</code>: A certificate in <code>SNI_ONLY</code> mode is registered without an issuer CA. Devices with certificates 
+    #               <code>SNI_ONLY</code>: A certificate in <code>SNI_ONLY</code> mode is registered without an issuer CA. Devices with certificates
     #            in <code>SNI_ONLY</code> mode must send the SNI extension when connecting to Amazon Web Services IoT Core. </p>
     #   @return [String]
     # @!attribute creation_date
@@ -1769,7 +1826,7 @@ module Aws::IoT
     #            custom domains and VPC endpoints, we recommend that you use the SNI extension when
     #            connecting to Amazon Web Services IoT Core.</p>
     #            <p>
-    #               <code>SNI_ONLY</code>: A certificate in <code>SNI_ONLY</code> mode is registered without an issuer CA. Devices with certificates 
+    #               <code>SNI_ONLY</code>: A certificate in <code>SNI_ONLY</code> mode is registered without an issuer CA. Devices with certificates
     #            in <code>SNI_ONLY</code> mode must send the SNI extension when connecting to Amazon Web Services IoT Core. </p>
     #            <p>For more information about the value for SNI extension, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/transport-security.html">Transport security in IoT</a>.</p>
     #   @return [String]
@@ -2077,30 +2134,36 @@ module Aws::IoT
     # @!attribute name
     #   <p>The name of a specific parameter used in a command and command execution.</p>
     #   @return [String]
+    # @!attribute type
+    #   <p>The type of the command parameter.</p>
+    #   @return [String]
     # @!attribute value
-    #   <p>The value used to describe the command. When you assign a value to a parameter, it
-    #               will override any default value that you had already specified.</p>
+    #   <p>Parameter value that overrides the default value, if set.</p>
     #   @return [Types::CommandParameterValue]
     # @!attribute default_value
     #   <p>The default value used to describe the command. This is the value assumed by the
     #               parameter if no other value is assigned to it.</p>
     #   @return [Types::CommandParameterValue]
+    # @!attribute value_conditions
+    #   <p>The list of conditions that a command parameter value must satisfy to create a command execution.</p>
+    #   @return [Array<Types::CommandParameterValueCondition>]
     # @!attribute description
     #   <p>The description of the command parameter.</p>
     #   @return [String]
     class CommandParameter < Struct.new(
       nil,
       :name,
+      :type,
       :value,
       :default_value,
+      :value_conditions,
       :description,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The range of possible values that's used to describe a specific command
-    #             parameter.</p>
+    # <p>The value of a command parameter used to create a command execution.</p>
     #          <note>
     #             <p>The <code>commandParameterValue</code> can only have one of the below fields
     #                 listed.</p>
@@ -2149,6 +2212,69 @@ module Aws::IoT
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The comparison operand used to compare the defined value against the value supplied in request.</p>
+    # @!attribute number
+    #   <p>An operand of number value type, defined as a string.</p>
+    #   @return [String]
+    # @!attribute numbers
+    #   <p>A List of operands of numerical value type, defined as strings.</p>
+    #   @return [Array<String>]
+    # @!attribute string
+    #   <p>An operand of string value type.</p>
+    #   @return [String]
+    # @!attribute strings
+    #   <p>A List of operands of string value type.</p>
+    #   @return [Array<String>]
+    # @!attribute number_range
+    #   <p>An operand of numerical range value type.</p>
+    #   @return [Types::CommandParameterValueNumberRange]
+    class CommandParameterValueComparisonOperand < Struct.new(
+      nil,
+      :number,
+      :numbers,
+      :string,
+      :strings,
+      :number_range,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A condition for the command parameter that must be evaluated to true for successful creation of a command execution.</p>
+    # @!attribute comparison_operator
+    #   <p>The comparison operator for the command parameter.</p>
+    #            <note>
+    #               <p>IN_RANGE, and NOT_IN_RANGE operators include boundary values.</p>
+    #            </note>
+    #   @return [String]
+    # @!attribute operand
+    #   <p>The comparison operand for the command parameter.</p>
+    #   @return [Types::CommandParameterValueComparisonOperand]
+    class CommandParameterValueCondition < Struct.new(
+      nil,
+      :comparison_operator,
+      :operand,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The numerical range value type to compare a command parameter value against.</p>
+    # @!attribute min
+    #   <p>The minimum value of a numerical range of a command parameter value.</p>
+    #   @return [String]
+    # @!attribute max
+    #   <p>The maximum value of a numerical range of a command parameter value.</p>
+    #   @return [String]
+    class CommandParameterValueNumberRange < Struct.new(
+      nil,
+      :min,
+      :max,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The command payload object that contains the instructions for the device
     #         to process.</p>
     # @!attribute content
@@ -2163,6 +2289,19 @@ module Aws::IoT
       nil,
       :content,
       :content_type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration that determines how the <code>payloadTemplate</code> is processed by the service to generate the final payload sent to
+    #             devices at <code>StartCommandExecution</code> API invocation.</p>
+    # @!attribute aws_json_substitution
+    #   <p>Configuration for the JSON substitution preprocessor.</p>
+    #   @return [Types::AwsJsonSubstitutionCommandPreprocessorConfig]
+    class CommandPreprocessor < Struct.new(
+      nil,
+      :aws_json_substitution,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2221,15 +2360,15 @@ module Aws::IoT
       end
     end
 
-    # <p>The encryption configuration details that include the status information of the Amazon Web Services Key Management Service (KMS) key and the KMS access role.</p>
+    # <p>The encryption configuration details that include the status information of the Key Management Service (KMS) key and the KMS access role.</p>
     # @!attribute configuration_status
     #   <p>The health status of KMS key and KMS access role. If either KMS key or KMS access role
     #            is <code>UNHEALTHY</code>, the return value will be <code>UNHEALTHY</code>. To use a
-    #            customer-managed KMS key, the value of <code>configurationStatus</code> must be
+    #            customer managed KMS key, the value of <code>configurationStatus</code> must be
     #               <code>HEALTHY</code>. </p>
     #   @return [String]
     # @!attribute error_code
-    #   <p>The error code that indicates either the KMS key or the KMS access role is <code>UNHEALTHY</code>. 
+    #   <p>The error code that indicates either the KMS key or the KMS access role is <code>UNHEALTHY</code>.
     #            Valid values: <code>KMS_KEY_VALIDATION_ERROR</code> and <code>ROLE_VALIDATION_ERROR</code>.
     #         </p>
     #   @return [String]
@@ -2292,10 +2431,22 @@ module Aws::IoT
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Provides connectivity filter selections for the fleet indexing configuration.</p>
+    # @!attribute include_socket_information
+    #   <p>A list of fleet indexing APIs for which to enable socket information retrieval. Currently, the only supported value is <code>GET_THING_CONNECTIVITY_DATA</code>.</p>
+    #   @return [Array<String>]
+    class ConnectivityFilter < Struct.new(
+      nil,
+      :include_socket_information,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute check_name
-    #   <p>An audit check name. Checks must be enabled 
+    #   <p>An audit check name. Checks must be enabled
     #           for your account. (Use <code>DescribeAccountAuditConfiguration</code> to see the list
-    #           of all checks, including those that are enabled or use <code>UpdateAccountAuditConfiguration</code> 
+    #           of all checks, including those that are enabled or use <code>UpdateAccountAuditConfiguration</code>
     #           to select which checks are enabled.)</p>
     #   @return [String]
     # @!attribute resource_identifier
@@ -2491,11 +2642,11 @@ module Aws::IoT
     #   <p>The ARN of the Lambda function that defines the authentication logic.</p>
     #   @return [String]
     # @!attribute account_default_for_operations
-    #   <p>A list of the operations that the certificate provider will use to generate certificates. 
+    #   <p>A list of the operations that the certificate provider will use to generate certificates.
     #            Valid value: <code>CreateCertificateFromCsr</code>.</p>
     #   @return [Array<String>]
     # @!attribute client_token
-    #   <p>A string that you can optionally pass in the <code>CreateCertificateProvider</code> request to make sure 
+    #   <p>A string that you can optionally pass in the <code>CreateCertificateProvider</code> request to make sure
     #            the request is idempotent.</p>
     #   @return [String]
     # @!attribute tags
@@ -2544,23 +2695,35 @@ module Aws::IoT
     #   <p>A short text decription of the command.</p>
     #   @return [String]
     # @!attribute payload
-    #   <p>The payload object for the command. You must specify this information when using
-    #           the <code>AWS-IoT</code> namespace.</p>
-    #            <p>You can upload a static payload file from your local storage that contains the 
+    #   <p>The payload object for the static command.</p>
+    #            <p>You can upload a static payload file from your local storage that contains the
     #           instructions for the device to process. The payload file can use any format. To
     #           make sure that the device correctly interprets the payload, we recommend you to
     #           specify the payload content type.</p>
     #   @return [Types::CommandPayload]
+    # @!attribute payload_template
+    #   <p>The payload template for the dynamic command.</p>
+    #            <note>
+    #               <p>This parameter is required for dynamic commands where the
+    #                   command execution placeholders are supplied either from <code>mandatoryParameters</code> or when
+    #                       <code>StartCommandExecution</code> is invoked.</p>
+    #            </note>
+    #   @return [String]
+    # @!attribute preprocessor
+    #   <p>Configuration that determines how <code>payloadTemplate</code> is processed to generate command execution payload.</p>
+    #            <note>
+    #               <p>This parameter is required for dynamic commands, along with <code>payloadTemplate</code>,
+    #                   and <code>mandatoryParameters</code>.</p>
+    #            </note>
+    #   @return [Types::CommandPreprocessor]
     # @!attribute mandatory_parameters
-    #   <p>A list of parameters that are required by the <code>StartCommandExecution</code> API.
-    #               These parameters need to be specified only when using the <code>AWS-IoT-FleetWise</code>
-    #               namespace. You can either specify them here or when running the command using the
-    #                   <code>StartCommandExecution</code> API.</p>
+    #   <p>A list of parameters that are used by <code>StartCommandExecution</code> API for
+    #               execution payload generation.</p>
     #   @return [Array<Types::CommandParameter>]
     # @!attribute role_arn
     #   <p>The IAM role that you must provide when using the <code>AWS-IoT-FleetWise</code> namespace.
-    #           The role grants IoT Device Management the permission to access IoT FleetWise resources 
-    #           for generating the payload for the command. This field is not required when you use the
+    #           The role grants IoT Device Management the permission to access IoT FleetWise resources
+    #           for generating the payload for the command. This field is not supported when you use the
     #           <code>AWS-IoT</code> namespace.</p>
     #   @return [String]
     # @!attribute tags
@@ -2573,6 +2736,8 @@ module Aws::IoT
       :display_name,
       :description,
       :payload,
+      :payload_template,
+      :preprocessor,
       :mandatory_parameters,
       :role_arn,
       :tags,
@@ -2674,7 +2839,7 @@ module Aws::IoT
     #   <p>Metadata that can be used to manage the dimension.</p>
     #   @return [Array<Types::Tag>]
     # @!attribute client_request_token
-    #   <p>Each dimension must have a unique client request token. If you try to create a new dimension with the same token as a dimension that already exists, an exception occurs. 
+    #   <p>Each dimension must have a unique client request token. If you try to create a new dimension with the same token as a dimension that already exists, an exception occurs.
     #         If you omit this value, Amazon Web Services SDKs will automatically generate a unique client request.</p>
     #   @return [String]
     class CreateDimensionRequest < Struct.new(
@@ -2714,11 +2879,11 @@ module Aws::IoT
     #   <p>The name of the domain.</p>
     #   @return [String]
     # @!attribute server_certificate_arns
-    #   <p>The ARNs of the certificates that IoT passes to the device during the TLS handshake. Currently you can specify only one certificate ARN. 
+    #   <p>The ARNs of the certificates that IoT passes to the device during the TLS handshake. Currently you can specify only one certificate ARN.
     #         This value is not required for Amazon Web Services-managed domains.</p>
     #   @return [Array<String>]
     # @!attribute validation_certificate_arn
-    #   <p>The certificate used to validate the server certificate and prove domain name ownership. This certificate must be signed by a public certificate authority. 
+    #   <p>The certificate used to validate the server certificate and prove domain name ownership. This certificate must be signed by a public certificate authority.
     #            This value is not required for Amazon Web Services-managed domains.</p>
     #   @return [String]
     # @!attribute authorizer_config
@@ -2805,7 +2970,7 @@ module Aws::IoT
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>DEFAULT</code> - Use a combination of port and Application Layer Protocol Negotiation (ALPN) to specify application_layer protocol. 
+    #                     <code>DEFAULT</code> - Use a combination of port and Application Layer Protocol Negotiation (ALPN) to specify application_layer protocol.
     #                  For more information, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/protocols.html">Device communication protocols</a>.</p>
     #               </li>
     #            </ul>
@@ -3314,20 +3479,20 @@ module Aws::IoT
     #   <p>The criteria that determine when and how a job abort takes place.</p>
     #   @return [Types::AwsJobAbortConfig]
     # @!attribute aws_job_timeout_config
-    #   <p>Specifies the amount of time each device has to finish its execution of the job.  A timer is 
-    #               started when the job execution status is set to <code>IN_PROGRESS</code>. If the job execution 
-    #               status is not set to another terminal state before the timer expires, it will be automatically 
+    #   <p>Specifies the amount of time each device has to finish its execution of the job.  A timer is
+    #               started when the job execution status is set to <code>IN_PROGRESS</code>. If the job execution
+    #               status is not set to another terminal state before the timer expires, it will be automatically
     #               set to <code>TIMED_OUT</code>.</p>
     #   @return [Types::AwsJobTimeoutConfig]
     # @!attribute files
     #   <p>The files to be streamed by the OTA update.</p>
     #   @return [Array<Types::OTAUpdateFile>]
     # @!attribute role_arn
-    #   <p>The IAM role that grants Amazon Web Services IoT Core access to the Amazon S3, IoT jobs and Amazon Web Services Code Signing resources 
+    #   <p>The IAM role that grants Amazon Web Services IoT Core access to the Amazon S3, IoT jobs and Amazon Web Services Code Signing resources
     #               to create an OTA update job.</p>
     #   @return [String]
     # @!attribute additional_parameters
-    #   <p>A list of additional OTA update parameters, which are name-value pairs. 
+    #   <p>A list of additional OTA update parameters, which are name-value pairs.
     #               They won't be sent to devices as a part of the Job document.</p>
     #   @return [Hash<String, String>]
     # @!attribute tags
@@ -3390,7 +3555,7 @@ module Aws::IoT
     #   <p>Metadata that can be used to manage the package.</p>
     #   @return [Hash<String, String>]
     # @!attribute client_token
-    #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. 
+    #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
     #         Don't reuse this client token if a new idempotent request is required.</p>
     #   @return [String]
     class CreatePackageRequest < Struct.new(
@@ -3448,7 +3613,7 @@ module Aws::IoT
     #   <p>Metadata that can be used to manage the package version.</p>
     #   @return [Hash<String, String>]
     # @!attribute client_token
-    #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. 
+    #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
     #         Don't reuse this client token if a new idempotent request is required.</p>
     #   @return [String]
     class CreatePackageVersionRequest < Struct.new(
@@ -3832,9 +3997,9 @@ module Aws::IoT
     #         parameter is set to <code>WEEKLY</code> or <code>BIWEEKLY</code>.</p>
     #   @return [String]
     # @!attribute target_check_names
-    #   <p>Which checks are performed during the scheduled audit. Checks must be enabled 
+    #   <p>Which checks are performed during the scheduled audit. Checks must be enabled
     #               for your account. (Use <code>DescribeAccountAuditConfiguration</code> to see the list
-    #               of all checks, including those that are enabled or use <code>UpdateAccountAuditConfiguration</code> 
+    #               of all checks, including those that are enabled or use <code>UpdateAccountAuditConfiguration</code>
     #               to select which checks are enabled.)</p>
     #   @return [Array<String>]
     # @!attribute scheduled_audit_name
@@ -3877,15 +4042,15 @@ module Aws::IoT
     #   <p>Specifies the behaviors that, when violated by a device (thing), cause an alert.</p>
     #   @return [Array<Types::Behavior>]
     # @!attribute alert_targets
-    #   <p>Specifies the destinations to which alerts are sent. (Alerts are always sent to the 
+    #   <p>Specifies the destinations to which alerts are sent. (Alerts are always sent to the
     #           console.) Alerts are generated when a device (thing) violates a behavior.</p>
     #   @return [Hash<String, Types::AlertTarget>]
     # @!attribute additional_metrics_to_retain
     #   <p>
     #               <i>Please use <a>CreateSecurityProfileRequest$additionalMetricsToRetainV2</a> instead.</i>
     #            </p>
-    #            <p>A list of metrics whose data is retained (stored). By default, data is retained 
-    #           for any metric used in the profile's <code>behaviors</code>, but it is also retained for 
+    #            <p>A list of metrics whose data is retained (stored). By default, data is retained
+    #           for any metric used in the profile's <code>behaviors</code>, but it is also retained for
     #           any metric specified here. Can be used with custom metrics; cannot be used with dimensions.</p>
     #   @deprecated
     #     Use additionalMetricsToRetainV2.
@@ -4205,9 +4370,9 @@ module Aws::IoT
     end
 
     # @!attribute check_name
-    #   <p>An audit check name. Checks must be enabled 
+    #   <p>An audit check name. Checks must be enabled
     #           for your account. (Use <code>DescribeAccountAuditConfiguration</code> to see the list
-    #           of all checks, including those that are enabled or use <code>UpdateAccountAuditConfiguration</code> 
+    #           of all checks, including those that are enabled or use <code>UpdateAccountAuditConfiguration</code>
     #           to select which checks are enabled.)</p>
     #   @return [String]
     # @!attribute resource_identifier
@@ -4369,15 +4534,15 @@ module Aws::IoT
     #           for a successful request.</p>
     #            <ul>
     #               <li>
-    #                  <p>If the command hasn't been deprecated, or has been deprecated for a duration that 
+    #                  <p>If the command hasn't been deprecated, or has been deprecated for a duration that
     #               is shorter than the maximum time out duration of 12 hours, when calling the
     #               <code>DeleteCommand</code> request, the deletion will be scheduled and a 202 status code
-    #               will be returned. While the command is being deleted, it will be in a 
+    #               will be returned. While the command is being deleted, it will be in a
     #               <code>pendingDeletion</code> state. Once the time out duration has been reached,
     #               the command will be permanently removed from your account.</p>
     #               </li>
     #               <li>
-    #                  <p>If the command has been deprecated for a duration that is longer than the 
+    #                  <p>If the command has been deprecated for a duration that is longer than the
     #               maximum time out duration of 12 hours, when calling the <code>DeleteCommand</code> request,
     #               the command will be deleted immediately and a 204 status code will be returned.</p>
     #               </li>
@@ -4627,7 +4792,7 @@ module Aws::IoT
     #               Ignored if the stream specified in the OTAUpdate is supplied by the user.</p>
     #   @return [Boolean]
     # @!attribute force_delete_aws_job
-    #   <p>When true, deletes the IoT job created by the OTAUpdate process even if it is "IN_PROGRESS". Otherwise, if the 
+    #   <p>When true, deletes the IoT job created by the OTAUpdate process even if it is "IN_PROGRESS". Otherwise, if the
     #               job is not in a terminal state ("COMPLETED" or "CANCELED") an exception will occur. The default is false.</p>
     #   @return [Boolean]
     class DeleteOTAUpdateRequest < Struct.new(
@@ -4651,7 +4816,7 @@ module Aws::IoT
     #   <p>The name of the target software package.</p>
     #   @return [String]
     # @!attribute client_token
-    #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. 
+    #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
     #         Don't reuse this client token if a new idempotent request is required.</p>
     #   @return [String]
     class DeletePackageRequest < Struct.new(
@@ -4677,7 +4842,7 @@ module Aws::IoT
     #   <p>The name of the target package version.</p>
     #   @return [String]
     # @!attribute client_token
-    #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. 
+    #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
     #         Don't reuse this client token if a new idempotent request is required.</p>
     #   @return [String]
     class DeletePackageVersionRequest < Struct.new(
@@ -4960,7 +5125,8 @@ module Aws::IoT
 
     # @!attribute target_type
     #   <p>The type of resource for which you are configuring logging. Must be
-    #               <code>THING_Group</code>.</p>
+    #               <code>DEFAULT</code>, <code>THING_GROUP</code>, <code>CLIENT_ID</code>,
+    #               <code>SOURCE_IP</code>, or <code>PRINCIPAL_ID</code>.</p>
     #   @return [String]
     # @!attribute target_name
     #   <p>The name of the resource for which you are configuring logging.</p>
@@ -5026,13 +5192,13 @@ module Aws::IoT
 
     # @!attribute role_arn
     #   <p>The ARN of the role that grants permission to IoT to access information
-    #               about your devices, policies, certificates, and other items as required when 
+    #               about your devices, policies, certificates, and other items as required when
     #               performing an audit.</p>
     #            <p>On the first call to <code>UpdateAccountAuditConfiguration</code>,
     #               this parameter is required.</p>
     #   @return [String]
     # @!attribute audit_notification_target_configurations
-    #   <p>Information about the targets to which audit notifications are sent for 
+    #   <p>Information about the targets to which audit notifications are sent for
     #               this account.</p>
     #   @return [Hash<String, Types::AuditNotificationTarget>]
     # @!attribute audit_check_configurations
@@ -5117,9 +5283,9 @@ module Aws::IoT
     end
 
     # @!attribute check_name
-    #   <p>An audit check name. Checks must be enabled 
+    #   <p>An audit check name. Checks must be enabled
     #           for your account. (Use <code>DescribeAccountAuditConfiguration</code> to see the list
-    #           of all checks, including those that are enabled or use <code>UpdateAccountAuditConfiguration</code> 
+    #           of all checks, including those that are enabled or use <code>UpdateAccountAuditConfiguration</code>
     #           to select which checks are enabled.)</p>
     #   @return [String]
     # @!attribute resource_identifier
@@ -5135,9 +5301,9 @@ module Aws::IoT
     end
 
     # @!attribute check_name
-    #   <p>An audit check name. Checks must be enabled 
+    #   <p>An audit check name. Checks must be enabled
     #           for your account. (Use <code>DescribeAccountAuditConfiguration</code> to see the list
-    #           of all checks, including those that are enabled or use <code>UpdateAccountAuditConfiguration</code> 
+    #           of all checks, including those that are enabled or use <code>UpdateAccountAuditConfiguration</code>
     #           to select which checks are enabled.)</p>
     #   @return [String]
     # @!attribute resource_identifier
@@ -5331,7 +5497,7 @@ module Aws::IoT
     #   <p>The Lambda function ARN that's associated with the certificate provider.</p>
     #   @return [String]
     # @!attribute account_default_for_operations
-    #   <p>A list of the operations that the certificate provider will use to generate certificates. 
+    #   <p>A list of the operations that the certificate provider will use to generate certificates.
     #            Valid value: <code>CreateCertificateFromCsr</code>.</p>
     #   @return [Array<String>]
     # @!attribute creation_date
@@ -5627,7 +5793,7 @@ module Aws::IoT
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>DEFAULT</code> - Use a combination of port and Application Layer Protocol Negotiation (ALPN) to specify application_layer protocol. 
+    #                     <code>DEFAULT</code> - Use a combination of port and Application Layer Protocol Negotiation (ALPN) to specify application_layer protocol.
     #                  For more information, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/protocols.html">Device communication protocols</a>.</p>
     #               </li>
     #            </ul>
@@ -5664,14 +5830,14 @@ module Aws::IoT
     end
 
     # @!attribute encryption_type
-    #   <p>The type of the Amazon Web Services Key Management Service (KMS) key.</p>
+    #   <p>The type of the KMS key.</p>
     #   @return [String]
     # @!attribute kms_key_arn
-    #   <p>The Amazon Resource Name (ARN) of the IAM role assumed by Amazon Web Services IoT Core to call KMS on
-    #            behalf of the customer.</p>
+    #   <p>The ARN of the customer managed KMS key.</p>
     #   @return [String]
     # @!attribute kms_access_role_arn
-    #   <p>The ARN of the customer-managed KMS key.</p>
+    #   <p>The Amazon Resource Name (ARN) of the IAM role assumed by Amazon Web Services IoT Core to call KMS on
+    #            behalf of the customer.</p>
     #   @return [String]
     # @!attribute configuration_details
     #   <p>The encryption configuration details that include the status information of the KMS key
@@ -5721,7 +5887,7 @@ module Aws::IoT
     #                  endpoint.</p>
     #               </li>
     #            </ul>
-    #            <p>We strongly recommend that customers use the newer <code>iot:Data-ATS</code> endpoint type to avoid 
+    #            <p>We strongly recommend that customers use the newer <code>iot:Data-ATS</code> endpoint type to avoid
     #            issues related to the widespread distrust of Symantec certificate authorities. ATS Signed Certificates
     #            are more secure and are trusted by most popular browsers.</p>
     #   @return [String]
@@ -5884,7 +6050,7 @@ module Aws::IoT
     #             data, shadow data, and thing connectivity status data.</p>
     #               </li>
     #               <li>
-    #                  <p>MULTI_INDEXING_MODE - Your thing index contains multiple data sources. For more information, see 
+    #                  <p>MULTI_INDEXING_MODE - Your thing index contains multiple data sources. For more information, see
     #             <a href="https://docs.aws.amazon.com/iot/latest/apireference/API_GetIndexingConfiguration.html">GetIndexingConfiguration</a>.</p>
     #               </li>
     #            </ul>
@@ -6313,9 +6479,9 @@ module Aws::IoT
     #               <code>SUN</code>, <code>MON</code>, <code>TUE</code>, <code>WED</code>, <code>THU</code>, <code>FRI</code>, or <code>SAT</code>.</p>
     #   @return [String]
     # @!attribute target_check_names
-    #   <p>Which checks are performed during the scheduled audit. Checks must be 
+    #   <p>Which checks are performed during the scheduled audit. Checks must be
     #               enabled for your account. (Use <code>DescribeAccountAuditConfiguration</code> to see the list
-    #               of all checks, including those that are enabled or use <code>UpdateAccountAuditConfiguration</code> 
+    #               of all checks, including those that are enabled or use <code>UpdateAccountAuditConfiguration</code>
     #               to select which checks are enabled.)</p>
     #   @return [Array<String>]
     # @!attribute scheduled_audit_name
@@ -6593,8 +6759,8 @@ module Aws::IoT
 
     # <p>The output from the DescribeThing operation.</p>
     # @!attribute default_client_id
-    #   <p>The default MQTT client ID. For a typical device, the thing name is also used as the default MQTT client ID.  
-    #   			Although we don’t require a mapping between a thing's registry name and its use of MQTT client IDs, certificates, or 
+    #   <p>The default MQTT client ID. For a typical device, the thing name is also used as the default MQTT client ID.
+    #   			Although we don’t require a mapping between a thing's registry name and its use of MQTT client IDs, certificates, or
     #   			shadow state, we recommend that you choose a thing name and use it as the MQTT client ID for the registry and the Device Shadow service.</p>
     #            <p>This lets you better organize your IoT fleet without removing the flexibility of the underlying device certificate model or shadows.</p>
     #   @return [String]
@@ -7059,8 +7225,8 @@ module Aws::IoT
       end
     end
 
-    # <p>The summary of a domain configuration. A domain configuration specifies custom IoT-specific information about a domain. 
-    #          A domain configuration can be associated with an Amazon Web Services-managed domain 
+    # <p>The summary of a domain configuration. A domain configuration specifies custom IoT-specific information about a domain.
+    #          A domain configuration can be associated with an Amazon Web Services-managed domain
     #          (for example, dbc123defghijk.iot.us-west-2.amazonaws.com), a customer managed domain, or a default endpoint.</p>
     #          <ul>
     #             <li>
@@ -7688,6 +7854,12 @@ module Aws::IoT
     # @!attribute payload
     #   <p>The payload object that you provided for the command.</p>
     #   @return [Types::CommandPayload]
+    # @!attribute payload_template
+    #   <p>The payload template for the dynamic command.</p>
+    #   @return [String]
+    # @!attribute preprocessor
+    #   <p>Configuration that determines how <code>payloadTemplate</code> is processed to generate command execution payload.</p>
+    #   @return [Types::CommandPreprocessor]
     # @!attribute role_arn
     #   <p>The IAM role that you provided when creating the command with <code>AWS-IoT-FleetWise</code>
     #           as the namespace.</p>
@@ -7713,6 +7885,8 @@ module Aws::IoT
       :description,
       :mandatory_parameters,
       :payload,
+      :payload_template,
+      :preprocessor,
       :role_arn,
       :created_at,
       :last_updated_at,
@@ -8189,9 +8363,13 @@ module Aws::IoT
     # @!attribute thing_name
     #   <p>The name of your IoT thing.</p>
     #   @return [String]
+    # @!attribute include_socket_information
+    #   <p>Specifies if socket information (sourcePort, targetPort, sourceIp, targetIp, vpcEndpointId) should be included in the GetThingConnectivityData response. Set to <code>true</code> to include socket information. Set to <code>false</code> to omit socket information. By default, this is set to <code>false</code>.</p>
+    #   @return [Boolean]
     class GetThingConnectivityDataRequest < Struct.new(
       nil,
       :thing_name,
+      :include_socket_information,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8204,10 +8382,37 @@ module Aws::IoT
     #   <p>A Boolean that indicates the connectivity status.</p>
     #   @return [Boolean]
     # @!attribute timestamp
-    #   <p>The timestamp of when the event occurred.</p>
+    #   <p>The timestamp of when the device connected or disconnected.</p>
     #   @return [Time]
     # @!attribute disconnect_reason
-    #   <p>The reason why the client is disconnecting.</p>
+    #   <p>The reason that the client is disconnected.</p>
+    #   @return [String]
+    # @!attribute source_ip
+    #   <p>The IP address of the client that initiated the connection.</p>
+    #   @return [String]
+    # @!attribute source_port
+    #   <p>The client's source port.</p>
+    #   @return [Integer]
+    # @!attribute target_ip
+    #   <p>The IP address of the Amazon Web Services IoT Core endpoint that the client connected to.</p>
+    #   @return [String]
+    # @!attribute target_port
+    #   <p>The port number of the Amazon Web Services IoT Core endpoint that the client connected to.</p>
+    #   @return [Integer]
+    # @!attribute vpc_endpoint_id
+    #   <p>The ID of the VPC endpoint. Present for clients connected to Amazon Web Services IoT Core via a VPC endpoint.</p>
+    #   @return [String]
+    # @!attribute keep_alive_duration
+    #   <p>The keep-alive interval in seconds that the client specified when establishing the connection.</p>
+    #   @return [Integer]
+    # @!attribute clean_session
+    #   <p>Indicates whether the client is using a clean session. Returns <code>true</code> for clean sessions.</p>
+    #   @return [Boolean]
+    # @!attribute session_expiry
+    #   <p>The session expiry interval in seconds for the MQTT client connection. This value indicates how long the session will remain active after the client disconnects.</p>
+    #   @return [Integer]
+    # @!attribute client_id
+    #   <p>The unique identifier of the MQTT client.</p>
     #   @return [String]
     class GetThingConnectivityDataResponse < Struct.new(
       nil,
@@ -8215,6 +8420,15 @@ module Aws::IoT
       :connected,
       :timestamp,
       :disconnect_reason,
+      :source_ip,
+      :source_port,
+      :target_ip,
+      :target_port,
+      :vpc_endpoint_id,
+      :keep_alive_duration,
+      :clean_session,
+      :session_expiry,
+      :client_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8270,8 +8484,14 @@ module Aws::IoT
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute verbose
+    #   <p>
+    #            The flag is used to get all the event types and their respective configuration that event-based logging supports.
+    #         </p>
+    #   @return [Boolean]
     class GetV2LoggingOptionsRequest < Struct.new(
       nil,
+      :verbose,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8286,11 +8506,17 @@ module Aws::IoT
     # @!attribute disable_all_logs
     #   <p>Disables all logs.</p>
     #   @return [Boolean]
+    # @!attribute event_configurations
+    #   <p>
+    #            The list of event configurations that override account-level logging.
+    #         </p>
+    #   @return [Array<Types::LogEventConfiguration>]
     class GetV2LoggingOptionsResponse < Struct.new(
       nil,
       :role_arn,
       :default_log_level,
       :disable_all_logs,
+      :event_configurations,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8337,12 +8563,21 @@ module Aws::IoT
     # @!attribute auth
     #   <p>The authentication method to use when sending data to an HTTPS endpoint.</p>
     #   @return [Types::HttpAuthorization]
+    # @!attribute enable_batching
+    #   <p>Whether to process the HTTP action messages into a single request. Value can be true or false.</p>
+    #   @return [Boolean]
+    # @!attribute batch_config
+    #   <p>The configuration settings for batching. For more information, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/http_batching.html">
+    #            Batching HTTP action messages</a>.</p>
+    #   @return [Types::BatchConfig]
     class HttpAction < Struct.new(
       nil,
       :url,
       :confirmation_url,
       :headers,
       :auth,
+      :enable_batching,
+      :batch_config,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8476,8 +8711,8 @@ module Aws::IoT
     #             </li>
     #          </ul>
     # @!attribute named_shadow_names
-    #   <p>The shadow names that you select to index. The default maximum number of shadow names for indexing is 10. To increase 
-    #         the limit, see <a href="https://docs.aws.amazon.com/general/latest/gr/iot_device_management.html#fleet-indexing-limits">Amazon Web Services IoT Device Management 
+    #   <p>The shadow names that you select to index. The default maximum number of shadow names for indexing is 10. To increase
+    #         the limit, see <a href="https://docs.aws.amazon.com/general/latest/gr/iot_device_management.html#fleet-indexing-limits">Amazon Web Services IoT Device Management
     #           Quotas</a> in the <i>Amazon Web Services General Reference</i>.
     #       </p>
     #   @return [Array<String>]
@@ -8486,10 +8721,215 @@ module Aws::IoT
     #         geolocation targets for indexing is <code>1</code>. To increase the limit, see <a href="https://docs.aws.amazon.com/general/latest/gr/iot_device_management.html#fleet-indexing-limits">Amazon Web Services IoT Device
     #           Management Quotas</a> in the <i>Amazon Web Services General Reference</i>.</p>
     #   @return [Array<Types::GeoLocationTarget>]
+    # @!attribute connectivity
+    #   <p>Provides additional connectivity filter selections for the fleet indexing configuration.</p>
+    #   @return [Types::ConnectivityFilter]
     class IndexingFilter < Struct.new(
       nil,
       :named_shadow_names,
       :geo_locations,
+      :connectivity,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The InfluxDB rule action converts the message payload into InfluxDB line protocol. It
+    #       writes the result to a table in an InfluxDB database. The database can be an Amazon
+    #       Timestream for InfluxDB instance or a self-managed InfluxDB cluster.</p>
+    #          <p>The action connects to InfluxDB through an InfluxDB topic rule destination, which must
+    #       be in the <code>ENABLED</code> state before the action can write data.</p>
+    # @!attribute destination_arn
+    #   <p>The ARN of the InfluxDB topic rule destination that identifies the InfluxDB instance to
+    #         write to.</p>
+    #   @return [String]
+    # @!attribute role_arn
+    #   <p>The ARN of the role that grants permission to retrieve the InfluxDB API token from
+    #         Amazon Web Services Secrets Manager.</p>
+    #   @return [String]
+    # @!attribute database_name
+    #   <p>The name of the InfluxDB database to write to. In InfluxDB 2, this is the name of the
+    #         bucket.</p>
+    #   @return [String]
+    # @!attribute table_name
+    #   <p>The name of the table to write the data point to. This is the measurement name of the
+    #         InfluxDB line protocol record.</p>
+    #            <p>Accepts substitution templates.</p>
+    #   @return [String]
+    # @!attribute organization
+    #   <p>The name of the InfluxDB organization that owns the database.</p>
+    #            <p>A write to an InfluxDB 2 instance fails if this value isn't set. This value isn't used
+    #         when the destination is an InfluxDB 3 instance.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>The set of tags to write with each data point. Tags are the indexed metadata of an
+    #         InfluxDB data point.</p>
+    #            <p>Tag names and tag values accept substitution templates. A tag name can't use the
+    #           <code>@{...}</code> per-element form. A tag name must resolve to the same value for every
+    #         element of an array payload.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute timestamp_unit
+    #   <p>The precision of the timestamp written with each data point. Valid values are
+    #           <code>s</code> (seconds), <code>ms</code> (milliseconds), <code>us</code> (microseconds),
+    #         and <code>ns</code> (nanoseconds).</p>
+    #            <p>If omitted, the topic rule action uses <code>ms</code>.</p>
+    #   @return [String]
+    # @!attribute batch_config
+    #   <p>The batching configuration for the action. When present, IoT collects data points
+    #         from multiple messages and writes them to InfluxDB in a single request.</p>
+    #            <p>If omitted, each message is written to InfluxDB in its own request.</p>
+    #   @return [Types::InfluxDBBatchConfig]
+    class InfluxDBAction < Struct.new(
+      nil,
+      :destination_arn,
+      :role_arn,
+      :database_name,
+      :table_name,
+      :organization,
+      :tags,
+      :timestamp_unit,
+      :batch_config,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The batching configuration of an InfluxDB rule action. IoT closes a batch and writes
+    #       it to InfluxDB when the first of the configured limits is reached.</p>
+    # @!attribute max_batch_size
+    #   <p>The maximum number of data points to collect in a batch.</p>
+    #            <p>If you don't specify a value, this limit doesn't apply. IoT then closes each batch
+    #         when another configured limit is reached.</p>
+    #   @return [Integer]
+    # @!attribute max_batch_open_ms
+    #   <p>The maximum length of time, in milliseconds, to keep a batch open before writing it to
+    #         InfluxDB.</p>
+    #            <p>If you don't specify a value, this limit doesn't apply. IoT then closes each batch
+    #         when another configured limit is reached.</p>
+    #   @return [Integer]
+    # @!attribute max_batch_size_bytes
+    #   <p>The maximum size of a batch, in bytes, before IoT writes it to InfluxDB.</p>
+    #            <p>If you don't specify a value, this limit doesn't apply. IoT then closes each batch
+    #         when another configured limit is reached.</p>
+    #   @return [Integer]
+    # @!attribute batch_across_topics
+    #   <p>Specifies whether to collect data points from different topics into the same
+    #         batch.</p>
+    #            <p>If omitted or <code>false</code>, IoT batches data points for each topic
+    #         separately.</p>
+    #   @return [Boolean]
+    class InfluxDBBatchConfig < Struct.new(
+      nil,
+      :max_batch_size,
+      :max_batch_open_ms,
+      :max_batch_size_bytes,
+      :batch_across_topics,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:batch_across_topics] = false unless options.key?(:batch_across_topics)
+        super
+      end
+    end
+
+    # <p>The configuration of an InfluxDB topic rule destination.</p>
+    # @!attribute endpoint
+    #   <p>The URL of the InfluxDB instance to write to.</p>
+    #   @return [String]
+    # @!attribute influx_db_version
+    #   <p>The major version of the InfluxDB instance. Valid values are <code>V2</code> and
+    #           <code>V3</code>.</p>
+    #   @return [String]
+    # @!attribute secret_id
+    #   <p>The ARN or name of the Amazon Web Services Secrets Manager secret that contains the InfluxDB API
+    #         token.</p>
+    #   @return [String]
+    # @!attribute secret_type
+    #   <p>The type of the secret that contains the InfluxDB API token. Valid values are
+    #           <code>SecretString</code> and <code>SecretBinary</code>.</p>
+    #            <p>If omitted, IoT reads the secret as a string.</p>
+    #   @return [String]
+    # @!attribute secret_key
+    #   <p>The key to read from the secret value when the secret contains a JSON object. If
+    #         omitted, IoT uses the entire secret value as the InfluxDB API token.</p>
+    #   @return [String]
+    class InfluxDBDestinationConfiguration < Struct.new(
+      nil,
+      :endpoint,
+      :influx_db_version,
+      :secret_id,
+      :secret_type,
+      :secret_key,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The properties of an existing InfluxDB topic rule destination, as returned by
+    #         <code>CreateTopicRuleDestination</code> and
+    #       <code>GetTopicRuleDestination</code>.</p>
+    # @!attribute endpoint
+    #   <p>The URL of the InfluxDB instance that the destination writes to.</p>
+    #   @return [String]
+    # @!attribute influx_db_version
+    #   <p>The major version of the InfluxDB instance. Valid values are <code>V2</code> and
+    #           <code>V3</code>.</p>
+    #   @return [String]
+    # @!attribute secret_id
+    #   <p>The ARN or name of the Amazon Web Services Secrets Manager secret that contains the InfluxDB API
+    #         token.</p>
+    #   @return [String]
+    # @!attribute secret_type
+    #   <p>The type of the secret that contains the InfluxDB API token. Valid values are
+    #           <code>SecretString</code> and <code>SecretBinary</code>.</p>
+    #   @return [String]
+    # @!attribute secret_key
+    #   <p>The key that is read from the secret value when the secret contains a JSON
+    #         object.</p>
+    #   @return [String]
+    class InfluxDBDestinationProperties < Struct.new(
+      nil,
+      :endpoint,
+      :influx_db_version,
+      :secret_id,
+      :secret_type,
+      :secret_key,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A summary of an InfluxDB topic rule destination, as returned by
+    #         <code>ListTopicRuleDestinations</code>. For the full set of destination properties, see
+    #         <code>InfluxDBDestinationProperties</code>.</p>
+    # @!attribute endpoint
+    #   <p>The URL of the InfluxDB instance that the destination writes to.</p>
+    #   @return [String]
+    # @!attribute influx_db_version
+    #   <p>The major version of the InfluxDB instance. Valid values are <code>V2</code> and
+    #           <code>V3</code>.</p>
+    #   @return [String]
+    # @!attribute secret_id
+    #   <p>The ARN or name of the Amazon Web Services Secrets Manager secret that contains the InfluxDB API
+    #         token.</p>
+    #   @return [String]
+    # @!attribute secret_type
+    #   <p>The type of the secret that contains the InfluxDB API token. Valid values are
+    #           <code>SecretString</code> and <code>SecretBinary</code>.</p>
+    #   @return [String]
+    # @!attribute secret_key
+    #   <p>The key that is read from the secret value when the secret contains a JSON
+    #         object.</p>
+    #   @return [String]
+    class InfluxDBDestinationSummary < Struct.new(
+      nil,
+      :endpoint,
+      :influx_db_version,
+      :secret_id,
+      :secret_type,
+      :secret_key,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -9313,7 +9753,7 @@ module Aws::IoT
     #   <p>The list of active violations.</p>
     #   @return [Array<Types::ActiveViolation>]
     # @!attribute next_token
-    #   <p>A token that can be used to retrieve the next set of results, 
+    #   <p>A token that can be used to retrieve the next set of results,
     #               or <code>null</code> if there are no additional results.</p>
     #   @return [String]
     class ListActiveViolationsResponse < Struct.new(
@@ -9412,7 +9852,7 @@ module Aws::IoT
     #   <p>The findings (results) of the audit.</p>
     #   @return [Array<Types::AuditFinding>]
     # @!attribute next_token
-    #   <p>A token that can be used to retrieve the next set of results, or <code>null</code> 
+    #   <p>A token that can be used to retrieve the next set of results, or <code>null</code>
     #               if there are no additional results.</p>
     #   @return [String]
     class ListAuditFindingsResponse < Struct.new(
@@ -9517,9 +9957,9 @@ module Aws::IoT
     end
 
     # @!attribute check_name
-    #   <p>An audit check name. Checks must be enabled 
+    #   <p>An audit check name. Checks must be enabled
     #           for your account. (Use <code>DescribeAccountAuditConfiguration</code> to see the list
-    #           of all checks, including those that are enabled or use <code>UpdateAccountAuditConfiguration</code> 
+    #           of all checks, including those that are enabled or use <code>UpdateAccountAuditConfiguration</code>
     #           to select which checks are enabled.)</p>
     #   @return [String]
     # @!attribute resource_identifier
@@ -9572,8 +10012,8 @@ module Aws::IoT
     end
 
     # @!attribute start_time
-    #   <p>The beginning of the time period. Audit information is retained for a 
-    #                 limited time (90 days). Requesting a start time prior to what is retained 
+    #   <p>The beginning of the time period. Audit information is retained for a
+    #                 limited time (90 days). Requesting a start time prior to what is retained
     #                 results in an "InvalidRequestException".</p>
     #   @return [Time]
     # @!attribute end_time
@@ -9610,7 +10050,7 @@ module Aws::IoT
     #   <p>The audits that were performed during the specified time period.</p>
     #   @return [Array<Types::AuditTaskMetadata>]
     # @!attribute next_token
-    #   <p>A token that can be used to retrieve the next set of results, or <code>null</code> 
+    #   <p>A token that can be used to retrieve the next set of results, or <code>null</code>
     #               if there are no additional results.</p>
     #   @return [String]
     class ListAuditTasksResponse < Struct.new(
@@ -9997,7 +10437,7 @@ module Aws::IoT
     #   @return [Array<String>]
     # @!attribute next_token
     #   <p>
-    #         A token that can be used to retrieve the next set of results, 
+    #         A token that can be used to retrieve the next set of results,
     #         or <code>null</code> if there are no additional results.
     #       </p>
     #   @return [String]
@@ -10193,7 +10633,7 @@ module Aws::IoT
     end
 
     # @!attribute next_token
-    #   <p>To retrieve the next set of results, the <code>nextToken</code> value from a previous response; 
+    #   <p>To retrieve the next set of results, the <code>nextToken</code> value from a previous response;
     #          otherwise <code>null</code> to receive the first set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -10533,7 +10973,7 @@ module Aws::IoT
     #   <p>The data the thing reports for the metric during the specified time period.</p>
     #   @return [Array<Types::MetricDatum>]
     # @!attribute next_token
-    #   <p>A token that can be used to retrieve the next set of results, or <code>null</code> 
+    #   <p>A token that can be used to retrieve the next set of results, or <code>null</code>
     #           if there are no additional results.</p>
     #   @return [String]
     class ListMetricValuesResponse < Struct.new(
@@ -10921,7 +11361,7 @@ module Aws::IoT
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>EXCLUSIVE_THING</code> - Attaches the specified principal to the specified thing, exclusively. 
+    #                     <code>EXCLUSIVE_THING</code> - Attaches the specified principal to the specified thing, exclusively.
     #   						The thing will be the only thing that’s attached to the principal.</p>
     #               </li>
     #            </ul>
@@ -11027,7 +11467,7 @@ module Aws::IoT
     #   <p>The finding Id.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>A token that can be used to retrieve the next set of results, 
+    #   <p>A token that can be used to retrieve the next set of results,
     #         or <code>null</code> if there are no additional results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -11047,7 +11487,7 @@ module Aws::IoT
     #   <p>The related resources.</p>
     #   @return [Array<Types::RelatedResource>]
     # @!attribute next_token
-    #   <p>A token that can be used to retrieve the next set of results, 
+    #   <p>A token that can be used to retrieve the next set of results,
     #         or <code>null</code> for the first API call.</p>
     #   @return [String]
     class ListRelatedResourcesForAuditFindingResponse < Struct.new(
@@ -11154,7 +11594,7 @@ module Aws::IoT
     #   <p>The list of scheduled audits.</p>
     #   @return [Array<Types::ScheduledAuditMetadata>]
     # @!attribute next_token
-    #   <p>A token that can be used to retrieve the next set of results, 
+    #   <p>A token that can be used to retrieve the next set of results,
     #               or <code>null</code> if there are no additional results.</p>
     #   @return [String]
     class ListScheduledAuditsResponse < Struct.new(
@@ -11519,7 +11959,7 @@ module Aws::IoT
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>EXCLUSIVE_THING</code> - Attaches the specified principal to the specified thing, exclusively. 
+    #                     <code>EXCLUSIVE_THING</code> - Attaches the specified principal to the specified thing, exclusively.
     #   						The thing will be the only thing that’s attached to the principal.</p>
     #               </li>
     #            </ul>
@@ -11543,7 +11983,7 @@ module Aws::IoT
     end
 
     # @!attribute thing_principal_objects
-    #   <p>A list of <code>thingPrincipalObject</code> that represents the principal and the type of relation it has 
+    #   <p>A list of <code>thingPrincipalObject</code> that represents the principal and the type of relation it has
     #   				with the thing.</p>
     #   @return [Array<Types::ThingPrincipalObject>]
     # @!attribute next_token
@@ -11883,7 +12323,8 @@ module Aws::IoT
 
     # @!attribute target_type
     #   <p>The type of resource for which you are configuring logging. Must be
-    #               <code>THING_Group</code>.</p>
+    #               <code>DEFAULT</code>, <code>THING_GROUP</code>, <code>CLIENT_ID</code>,
+    #               <code>SOURCE_IP</code>, or <code>PRINCIPAL_ID</code>.</p>
     #   @return [String]
     # @!attribute next_token
     #   <p>To retrieve the next set of results, the <code>nextToken</code>
@@ -11966,7 +12407,7 @@ module Aws::IoT
     end
 
     # @!attribute violation_events
-    #   <p>The security profile violation alerts issued for this account during the given time period, 
+    #   <p>The security profile violation alerts issued for this account during the given time period,
     #         potentially filtered by security profile, behavior violated, or thing (device) violating.</p>
     #   @return [Array<Types::ViolationEvent>]
     # @!attribute next_token
@@ -11994,7 +12435,7 @@ module Aws::IoT
     #   <p>The unique ID of the device providing the location data.</p>
     #   @return [String]
     # @!attribute timestamp
-    #   <p>The time that the location data was sampled. The default value is 
+    #   <p>The time that the location data was sampled. The default value is
     #         the time the MQTT message was processed.</p>
     #   @return [Types::LocationTimestamp]
     # @!attribute latitude
@@ -12034,6 +12475,34 @@ module Aws::IoT
       nil,
       :value,
       :unit,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>
+    #          Configuration for event-based logging that specifies which event types to log and their logging settings. Used for account-level logging overrides.
+    #       </p>
+    # @!attribute event_type
+    #   <p>
+    #            The type of event to log. These include event types like Connect, Publish, and Disconnect.
+    #         </p>
+    #   @return [String]
+    # @!attribute log_level
+    #   <p>
+    #            The logging level for the specified event type. Determines the verbosity of log messages generated for this event type.
+    #         </p>
+    #   @return [String]
+    # @!attribute log_destination
+    #   <p>
+    #            CloudWatch Log Group for event-based logging. Specifies where log events should be sent. The log destination for event-based logging overrides default Log Group for the specified event type and applies to all resources associated with that event.
+    #         </p>
+    #   @return [String]
+    class LogEventConfiguration < Struct.new(
+      nil,
+      :event_type,
+      :log_level,
+      :log_destination,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -12215,7 +12684,7 @@ module Aws::IoT
 
     # <p>The value to be compared with the <code>metric</code>.</p>
     # @!attribute count
-    #   <p>If the <code>comparisonOperator</code> calls for a numeric value, use this 
+    #   <p>If the <code>comparisonOperator</code> calls for a numeric value, use this
     #             to specify that numeric value to be compared with the <code>metric</code>.</p>
     #   @return [Integer]
     # @!attribute cidrs
@@ -12399,8 +12868,8 @@ module Aws::IoT
     #            templates</a>.</p>
     #   @return [String]
     # @!attribute response_topic
-    #   <p>A UTF-8 encoded string that's used as the topic name for a response message. The response topic is used to describe 
-    #            the topic which the receiver should publish to as part of the request-response flow. The topic must not contain wildcard 
+    #   <p>A UTF-8 encoded string that's used as the topic name for a response message. The response topic is used to describe
+    #            the topic which the receiver should publish to as part of the request-response flow. The topic must not contain wildcard
     #            characters.</p>
     #            <p>For more information, see <a href="https://docs.oasis-open.org/mqtt/mqtt/v5.0/os/mqtt-v5.0-os.html#_Toc3901114">
     #            Response Topic</a> from the MQTT Version 5.0 specification.</p>
@@ -12482,7 +12951,7 @@ module Aws::IoT
     #   <p>The name of the file.</p>
     #   @return [String]
     # @!attribute file_type
-    #   <p>An integer value you can include in the job document to allow your devices to identify the type of file received 
+    #   <p>An integer value you can include in the job document to allow your devices to identify the type of file received
     #               from the cloud.</p>
     #   @return [Integer]
     # @!attribute file_version
@@ -12846,7 +13315,7 @@ module Aws::IoT
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>EXCLUSIVE_THING</code> - Attaches the specified principal to the specified thing, exclusively. 
+    #                     <code>EXCLUSIVE_THING</code> - Attaches the specified principal to the specified thing, exclusively.
     #   						The thing will be the only thing that’s attached to the principal.</p>
     #               </li>
     #            </ul>
@@ -13118,7 +13587,7 @@ module Aws::IoT
     #            If the <code>verificationCertificate</code> field is provided, set <code>certificateMode</code> to be <code>DEFAULT</code>.
     #            When <code>certificateMode</code> is not provided, it defaults to <code>DEFAULT</code>.
     #            All the device certificates that are registered using this CA will be registered in the same certificate mode as the CA.
-    #            For more information about certificate mode for device certificates, see 
+    #            For more information about certificate mode for device certificates, see
     #            <a href="https://docs.aws.amazon.com/iot/latest/apireference/API_CertificateDescription.html#iot-Type-CertificateDescription-certificateMode">
     #               certificate mode</a>.
     #         </p>
@@ -13167,7 +13636,7 @@ module Aws::IoT
     #   @deprecated
     #   @return [Boolean]
     # @!attribute status
-    #   <p>The status of the register certificate request. Valid values that you can use include 
+    #   <p>The status of the register certificate request. Valid values that you can use include
     #            <code>ACTIVE</code>, <code>INACTIVE</code>, and <code>REVOKED</code>.</p>
     #   @return [String]
     class RegisterCertificateRequest < Struct.new(
@@ -13864,7 +14333,7 @@ module Aws::IoT
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A target to which an alert is sent when a security profile behavior is 
+    # <p>A target to which an alert is sent when a security profile behavior is
     #           violated.</p>
     # @!attribute arn
     #   <p>The ARN of the security profile.</p>
@@ -14049,11 +14518,17 @@ module Aws::IoT
     # @!attribute disable_all_logs
     #   <p>If true all logs are disabled. The default is false.</p>
     #   @return [Boolean]
+    # @!attribute event_configurations
+    #   <p>
+    #            The list of event configurations that override account-level logging.
+    #         </p>
+    #   @return [Array<Types::LogEventConfiguration>]
     class SetV2LoggingOptionsRequest < Struct.new(
       nil,
       :role_arn,
       :default_log_level,
       :disable_all_logs,
+      :event_configurations,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -14254,9 +14729,9 @@ module Aws::IoT
     end
 
     # @!attribute target_check_names
-    #   <p>Which checks are performed during the audit. The checks you specify must be enabled 
-    #               for your account or an exception occurs. Use <code>DescribeAccountAuditConfiguration</code> 
-    #               to see the list of all checks, including those that are enabled or 
+    #   <p>Which checks are performed during the audit. The checks you specify must be enabled
+    #               for your account or an exception occurs. Use <code>DescribeAccountAuditConfiguration</code>
+    #               to see the list of all checks, including those that are enabled or
     #               <code>UpdateAccountAuditConfiguration</code> to select which checks are enabled.</p>
     #   @return [Array<String>]
     class StartOnDemandAuditTaskRequest < Struct.new(
@@ -14355,7 +14830,7 @@ module Aws::IoT
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A map of key-value pairs for all supported statistics. For issues with missing or unexpected values for this API, 
+    # <p>A map of key-value pairs for all supported statistics. For issues with missing or unexpected values for this API,
     #       consult <a href="https://docs.aws.amazon.com/iot/latest/developerguide/fleet-indexing-troubleshooting.html">
     #         Fleet indexing troubleshooting guide</a>.</p>
     # @!attribute count
@@ -14692,7 +15167,7 @@ module Aws::IoT
     end
 
     # @!attribute principal
-    #   <p>The principal. Valid principals are CertificateArn (arn:aws:iot:<i>region</i>:<i>accountId</i>:cert/<i>certificateId</i>), thingGroupArn (arn:aws:iot:<i>region</i>:<i>accountId</i>:thinggroup/<i>groupName</i>) and CognitoId (<i>region</i>:<i>id</i>).</p>
+    #   <p>The principal. Valid principals are CertificateArn (arn:aws:iot:<i>region</i>:<i>accountId</i>:cert/<i>certificateId</i>) and CognitoId (<i>region</i>:<i>id</i>).</p>
     #   @return [String]
     # @!attribute cognito_identity_pool_id
     #   <p>The Cognito identity pool ID.</p>
@@ -14835,17 +15310,32 @@ module Aws::IoT
     #         connected.</p>
     #   @return [Boolean]
     # @!attribute timestamp
-    #   <p>The epoch time (in milliseconds) when the thing last connected or disconnected. If the
-    #         thing has been disconnected for approximately an hour, the time value might be missing.</p>
+    #   <p>The epoch time (in milliseconds) when the thing last connected or disconnected.</p>
     #   @return [Integer]
     # @!attribute disconnect_reason
-    #   <p>The reason why the client is disconnected. If the thing has been disconnected for approximately an hour, the <code>disconnectReason</code> value might be missing.</p>
+    #   <p>The reason that the client is disconnected.</p>
+    #   @return [String]
+    # @!attribute keep_alive_duration
+    #   <p>The keep-alive interval in seconds that the client specified when establishing the connection.</p>
+    #   @return [Integer]
+    # @!attribute clean_session
+    #   <p>Indicates whether the client is using a clean session. Returns <code>true</code> for clean sessions.</p>
+    #   @return [Boolean]
+    # @!attribute session_expiry
+    #   <p>The session expiry interval in seconds for the MQTT client connection. This value indicates how long the session will remain active after the client disconnects.</p>
+    #   @return [Integer]
+    # @!attribute client_id
+    #   <p>The unique identifier of the MQTT client.</p>
     #   @return [String]
     class ThingConnectivity < Struct.new(
       nil,
       :connected,
       :timestamp,
       :disconnect_reason,
+      :keep_alive_duration,
+      :clean_session,
+      :session_expiry,
+      :client_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -15096,7 +15586,7 @@ module Aws::IoT
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>EXCLUSIVE_THING</code> - Attaches the specified principal to the specified thing, exclusively. 
+    #                     <code>EXCLUSIVE_THING</code> - Attaches the specified principal to the specified thing, exclusively.
     #   						The thing will be the only thing that’s attached to the principal.</p>
     #               </li>
     #            </ul>
@@ -15445,6 +15935,11 @@ module Aws::IoT
     # @!attribute vpc_properties
     #   <p>Properties of the virtual private cloud (VPC) connection.</p>
     #   @return [Types::VpcDestinationProperties]
+    # @!attribute influx_db_properties
+    #   <p>The properties of an InfluxDB topic rule destination, as returned by
+    #           <code>CreateTopicRuleDestination</code> and
+    #         <code>GetTopicRuleDestination</code>.</p>
+    #   @return [Types::InfluxDBDestinationProperties]
     class TopicRuleDestination < Struct.new(
       nil,
       :arn,
@@ -15454,6 +15949,7 @@ module Aws::IoT
       :status_reason,
       :http_url_properties,
       :vpc_properties,
+      :influx_db_properties,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -15466,10 +15962,15 @@ module Aws::IoT
     # @!attribute vpc_configuration
     #   <p>Configuration of the virtual private cloud (VPC) connection.</p>
     #   @return [Types::VpcDestinationConfiguration]
+    # @!attribute influx_db_configuration
+    #   <p>The configuration of an InfluxDB topic rule destination, which you specify when you
+    #         call <code>CreateTopicRuleDestination</code>.</p>
+    #   @return [Types::InfluxDBDestinationConfiguration]
     class TopicRuleDestinationConfiguration < Struct.new(
       nil,
       :http_url_configuration,
       :vpc_configuration,
+      :influx_db_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -15528,6 +16029,10 @@ module Aws::IoT
     # @!attribute vpc_destination_summary
     #   <p>Information about the virtual private cloud (VPC) connection.</p>
     #   @return [Types::VpcDestinationSummary]
+    # @!attribute influx_db_summary
+    #   <p>A summary of an InfluxDB topic rule destination, as returned by
+    #           <code>ListTopicRuleDestinations</code>.</p>
+    #   @return [Types::InfluxDBDestinationSummary]
     class TopicRuleDestinationSummary < Struct.new(
       nil,
       :arn,
@@ -15537,6 +16042,7 @@ module Aws::IoT
       :status_reason,
       :http_url_summary,
       :vpc_destination_summary,
+      :influx_db_summary,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -15738,10 +16244,10 @@ module Aws::IoT
     #   <p>Information about the targets to which audit notifications are sent.</p>
     #   @return [Hash<String, Types::AuditNotificationTarget>]
     # @!attribute audit_check_configurations
-    #   <p>Specifies which audit checks are enabled and disabled for this account. Use 
-    #               <code>DescribeAccountAuditConfiguration</code> to see the list of all checks, including those 
+    #   <p>Specifies which audit checks are enabled and disabled for this account. Use
+    #               <code>DescribeAccountAuditConfiguration</code> to see the list of all checks, including those
     #               that are currently enabled.</p>
-    #            <p>Some data collection might start immediately when certain checks are enabled. 
+    #            <p>Some data collection might start immediately when certain checks are enabled.
     #               When a check is disabled, any data collected so far in relation to the check is deleted.</p>
     #            <p>You
     #         cannot
@@ -15770,9 +16276,9 @@ module Aws::IoT
     end
 
     # @!attribute check_name
-    #   <p>An audit check name. Checks must be enabled 
+    #   <p>An audit check name. Checks must be enabled
     #           for your account. (Use <code>DescribeAccountAuditConfiguration</code> to see the list
-    #           of all checks, including those that are enabled or use <code>UpdateAccountAuditConfiguration</code> 
+    #           of all checks, including those that are enabled or use <code>UpdateAccountAuditConfiguration</code>
     #           to select which checks are enabled.)</p>
     #   @return [String]
     # @!attribute resource_identifier
@@ -15949,7 +16455,7 @@ module Aws::IoT
     #   <p>The Lambda function ARN that's associated with the certificate provider.</p>
     #   @return [String]
     # @!attribute account_default_for_operations
-    #   <p>A list of the operations that the certificate provider will use to generate certificates. 
+    #   <p>A list of the operations that the certificate provider will use to generate certificates.
     #            Valid value: <code>CreateCertificateFromCsr</code>.</p>
     #   @return [Array<String>]
     class UpdateCertificateProviderRequest < Struct.new(
@@ -15986,7 +16492,7 @@ module Aws::IoT
     #   <p>The new status.</p>
     #            <p>
     #               <b>Note:</b> Setting the status to PENDING_TRANSFER  or PENDING_ACTIVATION will result
-    #            in an exception being thrown. PENDING_TRANSFER and PENDING_ACTIVATION are statuses used internally by IoT. They 
+    #            in an exception being thrown. PENDING_TRANSFER and PENDING_ACTIVATION are statuses used internally by IoT. They
     #            are not intended for developer use.</p>
     #            <p>
     #               <b>Note:</b> The status value REGISTER_INACTIVE is deprecated and
@@ -16256,7 +16762,7 @@ module Aws::IoT
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>DEFAULT</code> - Use a combination of port and Application Layer Protocol Negotiation (ALPN) to specify application_layer protocol. 
+    #                     <code>DEFAULT</code> - Use a combination of port and Application Layer Protocol Negotiation (ALPN) to specify application_layer protocol.
     #                  For more information, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/protocols.html">Device communication protocols</a>.</p>
     #               </li>
     #            </ul>
@@ -16350,10 +16856,10 @@ module Aws::IoT
     end
 
     # @!attribute encryption_type
-    #   <p>The type of the Amazon Web Services Key Management Service (KMS) key.</p>
+    #   <p>The type of the KMS key.</p>
     #   @return [String]
     # @!attribute kms_key_arn
-    #   <p>The ARN of the customer-managed KMS key.</p>
+    #   <p>The ARN of the customer managedKMS key.</p>
     #   @return [String]
     # @!attribute kms_access_role_arn
     #   <p>The Amazon Resource Name (ARN) of the IAM role assumed by Amazon Web Services IoT Core to call KMS on
@@ -16557,7 +17063,7 @@ module Aws::IoT
     #   <p>Configuration to manage job's package version reporting. This updates the thing's reserved named shadow that the job targets.</p>
     #   @return [Types::VersionUpdateByJobsConfig]
     # @!attribute client_token
-    #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. 
+    #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
     #         Don't reuse this client token if a new idempotent request is required.</p>
     #   @return [String]
     class UpdatePackageConfigurationRequest < Struct.new(
@@ -16589,14 +17095,14 @@ module Aws::IoT
     #          and set <code>unsetDefaultVersion</code> equal to <code>true</code> at the same time.</p>
     #   @return [String]
     # @!attribute unset_default_version
-    #   <p>Indicates whether you want to remove the named default package version from the software package. 
+    #   <p>Indicates whether you want to remove the named default package version from the software package.
     #         Set as <code>true</code> to remove the default package version. </p>
     #            <p>
     #               <b>Note:</b> You cannot name a <code>defaultVersion</code>
     #          and set <code>unsetDefaultVersion</code> equal to <code>true</code> at the same time.</p>
     #   @return [Boolean]
     # @!attribute client_token
-    #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. 
+    #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
     #         Don't reuse this client token if a new idempotent request is required.</p>
     #   @return [String]
     class UpdatePackageRequest < Struct.new(
@@ -16645,7 +17151,7 @@ module Aws::IoT
     #            deployment.</p>
     #   @return [String]
     # @!attribute client_token
-    #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. 
+    #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
     #         Don't reuse this client token if a new idempotent request is required.</p>
     #   @return [String]
     class UpdatePackageVersionRequest < Struct.new(
@@ -16774,9 +17280,9 @@ module Aws::IoT
     #               "frequency" parameter is set to <code>WEEKLY</code> or <code>BIWEEKLY</code>.</p>
     #   @return [String]
     # @!attribute target_check_names
-    #   <p>Which checks are performed during the scheduled audit. Checks must be enabled 
+    #   <p>Which checks are performed during the scheduled audit. Checks must be enabled
     #               for your account. (Use <code>DescribeAccountAuditConfiguration</code> to see the list
-    #               of all checks, including those that are enabled or use <code>UpdateAccountAuditConfiguration</code> 
+    #               of all checks, including those that are enabled or use <code>UpdateAccountAuditConfiguration</code>
     #               to select which checks are enabled.)</p>
     #   @return [Array<String>]
     # @!attribute scheduled_audit_name
@@ -16835,16 +17341,16 @@ module Aws::IoT
     #   <p>A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's behaviors, but it is also retained for any metric specified here. Can be used with custom metrics; cannot be used with dimensions.</p>
     #   @return [Array<Types::MetricToRetain>]
     # @!attribute delete_behaviors
-    #   <p>If true, delete all <code>behaviors</code> defined for this security profile. 
+    #   <p>If true, delete all <code>behaviors</code> defined for this security profile.
     #           If any <code>behaviors</code> are defined in the current invocation, an exception occurs.</p>
     #   @return [Boolean]
     # @!attribute delete_alert_targets
-    #   <p>If true, delete all <code>alertTargets</code> defined for this security profile. 
+    #   <p>If true, delete all <code>alertTargets</code> defined for this security profile.
     #           If any <code>alertTargets</code> are defined in the current invocation, an exception occurs.</p>
     #   @return [Boolean]
     # @!attribute delete_additional_metrics_to_retain
-    #   <p>If true, delete all <code>additionalMetricsToRetain</code> defined for this 
-    #           security profile. If any <code>additionalMetricsToRetain</code> are defined in the current 
+    #   <p>If true, delete all <code>additionalMetricsToRetain</code> defined for this
+    #           security profile. If any <code>additionalMetricsToRetain</code> are defined in the current
     #           invocation, an exception occurs.</p>
     #   @return [Boolean]
     # @!attribute expected_version

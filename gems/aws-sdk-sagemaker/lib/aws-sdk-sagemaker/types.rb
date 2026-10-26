@@ -6,6 +6,671 @@ module Aws::SageMaker
   # This module contains the types returned by client operations.
   module Types
 
+    # <p>A LoRA adapter entry identified by a model package ARN.</p>
+    # @!attribute adapter_id
+    #   <p>A unique identifier for the adapter. This ID is used as the inference component name when the adapter is deployed. The ID must start and end with an alphanumeric character, can contain hyphens between alphanumeric characters, and can be up to 63 characters long.</p>
+    #   @return [String]
+    # @!attribute model_package_arn
+    #   <p>The Amazon Resource Name (ARN) of the model package that contains the LoRA adapter artifacts.</p>
+    #   @return [String]
+    class AIAdapterModelPackageEntry < Struct.new(
+      nil,
+      :adapter_id,
+      :model_package_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A LoRA adapter entry identified by an Amazon S3 URI.</p>
+    # @!attribute adapter_id
+    #   <p>A unique identifier for the adapter. This ID is used as the inference component name when the adapter is deployed. The ID must start and end with an alphanumeric character, can contain hyphens between alphanumeric characters, and can be up to 63 characters long.</p>
+    #   @return [String]
+    # @!attribute s3_uri
+    #   <p>The Amazon S3 URI of the directory that contains the LoRA adapter artifacts in PEFT format.</p>
+    #   @return [String]
+    class AIAdapterS3Entry < Struct.new(
+      nil,
+      :adapter_id,
+      :s3_uri,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The source of LoRA adapters for an AI recommendation job. This is a union type — specify exactly one of the members.</p>
+    # @!attribute model_package_arns
+    #   <p>A list of LoRA adapters identified by their model package ARNs. Use this when your adapters were produced by a SageMaker AI fine-tuning workflow that registers model packages.</p>
+    #   @return [Array<Types::AIAdapterModelPackageEntry>]
+    # @!attribute s3_uris
+    #   <p>A list of LoRA adapters identified by their Amazon S3 URIs. Use this when your adapters are stored as raw artifacts in Amazon S3.</p>
+    #   @return [Array<Types::AIAdapterS3Entry>]
+    class AIAdapterSource < Struct.new(
+      :model_package_arns,
+      :s3_uris,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class ModelPackageArns < AIAdapterSource; end
+      class S3Uris < AIAdapterSource; end
+      class Unknown < AIAdapterSource; end
+    end
+
+    # <p>The SageMaker endpoint configuration for benchmarking.</p>
+    # @!attribute identifier
+    #   <p>The name or Amazon Resource Name (ARN) of the SageMaker endpoint to benchmark.</p>
+    #   @return [String]
+    # @!attribute target_container_hostname
+    #   <p>The hostname of the specific container to target within a multi-container endpoint.</p>
+    #   @return [String]
+    # @!attribute inference_components
+    #   <p>The list of inference components to benchmark on the endpoint.</p>
+    #   @return [Array<Types::AIBenchmarkInferenceComponent>]
+    class AIBenchmarkEndpoint < Struct.new(
+      nil,
+      :identifier,
+      :target_container_hostname,
+      :inference_components,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>An inference component to benchmark.</p>
+    # @!attribute identifier
+    #   <p>The name or Amazon Resource Name (ARN) of the inference component.</p>
+    #   @return [String]
+    class AIBenchmarkInferenceComponent < Struct.new(
+      nil,
+      :identifier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Summary information about an AI benchmark job.</p>
+    # @!attribute ai_benchmark_job_name
+    #   <p>The name of the benchmark job.</p>
+    #   @return [String]
+    # @!attribute ai_benchmark_job_arn
+    #   <p>The Amazon Resource Name (ARN) of the benchmark job.</p>
+    #   @return [String]
+    # @!attribute ai_benchmark_job_status
+    #   <p>The status of the benchmark job.</p>
+    #   @return [String]
+    # @!attribute creation_time
+    #   <p>A timestamp that indicates when the benchmark job was created.</p>
+    #   @return [Time]
+    # @!attribute end_time
+    #   <p>A timestamp that indicates when the benchmark job completed.</p>
+    #   @return [Time]
+    # @!attribute ai_workload_config_name
+    #   <p>The name of the AI workload configuration used by the benchmark job.</p>
+    #   @return [String]
+    class AIBenchmarkJobSummary < Struct.new(
+      nil,
+      :ai_benchmark_job_name,
+      :ai_benchmark_job_arn,
+      :ai_benchmark_job_status,
+      :creation_time,
+      :end_time,
+      :ai_workload_config_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The network configuration for an AI benchmark job.</p>
+    # @!attribute vpc_config
+    #   <p>The VPC configuration, including security group IDs and subnet IDs.</p>
+    #   @return [Types::VpcConfig]
+    class AIBenchmarkNetworkConfig < Struct.new(
+      nil,
+      :vpc_config,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The output configuration for an AI benchmark job.</p>
+    # @!attribute s3_output_location
+    #   <p>The Amazon S3 URI where benchmark results are stored.</p>
+    #   @return [String]
+    # @!attribute mlflow_config
+    #   <p>The MLflow tracking configuration for the job. If you don't specify this parameter, MLflow tracking is disabled.</p>
+    #   @return [Types::AIMlflowConfig]
+    class AIBenchmarkOutputConfig < Struct.new(
+      nil,
+      :s3_output_location,
+      :mlflow_config,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The output result of an AI benchmark job, including the Amazon S3 location and CloudWatch log information.</p>
+    # @!attribute s3_output_location
+    #   <p>The Amazon S3 URI where benchmark results are stored.</p>
+    #   @return [String]
+    # @!attribute cloud_watch_logs
+    #   <p>The CloudWatch log information for the benchmark job.</p>
+    #   @return [Array<Types::AICloudWatchLogs>]
+    # @!attribute mlflow_config
+    #   <p>The MLflow tracking configuration for the job.</p>
+    #   @return [Types::AIMlflowConfig]
+    class AIBenchmarkOutputResult < Struct.new(
+      nil,
+      :s3_output_location,
+      :cloud_watch_logs,
+      :mlflow_config,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The target for an AI benchmark job. This is a union type — specify one of the members.</p>
+    # @!attribute endpoint
+    #   <p>The SageMaker endpoint to benchmark.</p>
+    #   @return [Types::AIBenchmarkEndpoint]
+    class AIBenchmarkTarget < Struct.new(
+      :endpoint,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class Endpoint < AIBenchmarkTarget; end
+      class Unknown < AIBenchmarkTarget; end
+    end
+
+    # <p>The capacity reservation configuration for an AI recommendation job.</p>
+    # @!attribute capacity_reservation_preference
+    #   <p>The capacity reservation preference. The only valid value is <code>capacity-reservations-only</code>.</p>
+    #   @return [String]
+    # @!attribute ml_reservation_arns
+    #   <p>The list of ML reservation ARNs to use.</p>
+    #   @return [Array<String>]
+    class AICapacityReservationConfig < Struct.new(
+      nil,
+      :capacity_reservation_preference,
+      :ml_reservation_arns,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>CloudWatch log information for an AI benchmark or recommendation job.</p>
+    # @!attribute log_group_arn
+    #   <p>The Amazon Resource Name (ARN) of the CloudWatch log group.</p>
+    #   @return [String]
+    # @!attribute log_stream_name
+    #   <p>The name of the CloudWatch log stream.</p>
+    #   @return [String]
+    class AICloudWatchLogs < Struct.new(
+      nil,
+      :log_group_arn,
+      :log_stream_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The dataset configuration for an AI workload. This is a union type — specify one of the members.</p>
+    # @!attribute input_data_config
+    #   <p>An array of input data channel configurations for the workload.</p>
+    #   @return [Array<Types::AIWorkloadInputDataConfig>]
+    class AIDatasetConfig < Struct.new(
+      :input_data_config,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class InputDataConfig < AIDatasetConfig; end
+      class Unknown < AIDatasetConfig; end
+    end
+
+    # <p>The MLflow tracking configuration for logging metrics and parameters to a SageMaker managed MLflow tracking server.</p>
+    # @!attribute mlflow_resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the SageMaker managed MLflow resource.</p>
+    #   @return [String]
+    # @!attribute mlflow_experiment_name
+    #   <p>The MLflow experiment name used for tracking.</p>
+    #   @return [String]
+    # @!attribute mlflow_run_name
+    #   <p>The MLflow run name used for tracking.</p>
+    #   @return [String]
+    class AIMlflowConfig < Struct.new(
+      nil,
+      :mlflow_resource_arn,
+      :mlflow_experiment_name,
+      :mlflow_run_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The source of the model for an AI recommendation job. This is a union type.</p>
+    # @!attribute s3
+    #   <p>The Amazon S3 location of the model artifacts.</p>
+    #   @return [Types::AIModelSourceS3]
+    class AIModelSource < Struct.new(
+      :s3,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class S3 < AIModelSource; end
+      class Unknown < AIModelSource; end
+    end
+
+    # <p>The Amazon S3 model source configuration.</p>
+    # @!attribute s3_uri
+    #   <p>The Amazon S3 URI of the model artifacts.</p>
+    #   @return [String]
+    class AIModelSourceS3 < Struct.new(
+      nil,
+      :s3_uri,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>An optimization recommendation generated by an AI recommendation job.</p>
+    # @!attribute recommendation_description
+    #   <p>A description of the recommendation.</p>
+    #   @return [String]
+    # @!attribute optimization_details
+    #   <p>The optimization techniques applied in this recommendation.</p>
+    #   @return [Array<Types::AIRecommendationOptimizationDetail>]
+    # @!attribute model_details
+    #   <p>Details about the model package associated with this recommendation.</p>
+    #   @return [Types::AIRecommendationModelDetails]
+    # @!attribute deployment_configuration
+    #   <p>The deployment configuration for this recommendation, including the container image, instance type, instance count, and environment variables.</p>
+    #   @return [Types::AIRecommendationDeploymentConfiguration]
+    # @!attribute ai_benchmark_job_arn
+    #   <p>The Amazon Resource Name (ARN) of the benchmark job associated with this recommendation.</p>
+    #   @return [String]
+    # @!attribute expected_performance
+    #   <p>The expected performance metrics for this recommendation.</p>
+    #   @return [Array<Types::AIRecommendationPerformanceMetric>]
+    # @!attribute adapter_details
+    #   <p>The LoRA adapter details for this recommendation. This field contains both the model package ARNs and Amazon S3 URIs for each adapter, regardless of which form was originally supplied. This field is absent when the job was created without LoRA adapters.</p>
+    #   @return [Types::AIRecommendationAdapterDetails]
+    class AIRecommendation < Struct.new(
+      nil,
+      :recommendation_description,
+      :optimization_details,
+      :model_details,
+      :deployment_configuration,
+      :ai_benchmark_job_arn,
+      :expected_performance,
+      :adapter_details,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The per-recommendation LoRA adapter details. Contains both the model package ARNs and Amazon S3 URIs for each adapter, regardless of which form was originally supplied in the request. When you supply only Amazon S3 URIs, Amazon SageMaker AI creates model packages on your behalf.</p>
+    # @!attribute model_package_arns
+    #   <p>The list of LoRA adapters with their model package ARNs.</p>
+    #   @return [Array<Types::AIAdapterModelPackageEntry>]
+    # @!attribute s3_uris
+    #   <p>The list of LoRA adapters with their Amazon S3 URIs.</p>
+    #   @return [Array<Types::AIAdapterS3Entry>]
+    class AIRecommendationAdapterDetails < Struct.new(
+      nil,
+      :model_package_arns,
+      :s3_uris,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The compute resource specification for an AI recommendation job.</p>
+    # @!attribute instance_types
+    #   <p>The list of instance types to consider for recommendations. You can specify up to 3 instance types.</p>
+    #   @return [Array<String>]
+    # @!attribute capacity_reservation_config
+    #   <p>The capacity reservation configuration.</p>
+    #   @return [Types::AICapacityReservationConfig]
+    class AIRecommendationComputeSpec < Struct.new(
+      nil,
+      :instance_types,
+      :capacity_reservation_config,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A performance constraint for an AI recommendation job.</p>
+    # @!attribute metric
+    #   <p>The performance metric. Valid values are <code>ttft-ms</code> (time to first token in milliseconds), <code>throughput</code>, and <code>cost</code>.</p>
+    #   @return [String]
+    class AIRecommendationConstraint < Struct.new(
+      nil,
+      :metric,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The deployment configuration for a recommendation.</p>
+    # @!attribute s3
+    #   <p>The Amazon S3 data channels for the deployment.</p>
+    #   @return [Array<Types::AIRecommendationDeploymentS3Channel>]
+    # @!attribute image_uri
+    #   <p>The URI of the container image for the deployment.</p>
+    #   @return [String]
+    # @!attribute instance_type
+    #   <p>The recommended instance type for the deployment.</p>
+    #   @return [String]
+    # @!attribute instance_count
+    #   <p>The recommended number of instances for the deployment.</p>
+    #   @return [Integer]
+    # @!attribute copy_count_per_instance
+    #   <p>The number of model copies per instance.</p>
+    #   @return [Integer]
+    # @!attribute environment_variables
+    #   <p>The environment variables for the deployment.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute min_cpu_memory_required_in_mb
+    #   <p>The minimum host (CPU) memory, in MiB, to reserve for each model copy when deploying the recommendation as an Inference Component. This value maps to the Inference Component's <code>ComputeResourceRequirements$MinMemoryRequiredInMb</code> field.</p>
+    #   @return [Integer]
+    class AIRecommendationDeploymentConfiguration < Struct.new(
+      nil,
+      :s3,
+      :image_uri,
+      :instance_type,
+      :instance_count,
+      :copy_count_per_instance,
+      :environment_variables,
+      :min_cpu_memory_required_in_mb,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>An Amazon S3 data channel for a recommended deployment configuration, containing model artifacts or optimized model outputs.</p>
+    # @!attribute channel_name
+    #   <p>A custom name for this Amazon S3 data channel.</p>
+    #   @return [String]
+    # @!attribute uri
+    #   <p>The Amazon S3 URI of the data for this channel.</p>
+    #   @return [String]
+    class AIRecommendationDeploymentS3Channel < Struct.new(
+      nil,
+      :channel_name,
+      :uri,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The inference framework for an AI recommendation job.</p>
+    # @!attribute framework
+    #   <p>The inference framework. Valid values are <code>LMI</code> and <code>VLLM</code>.</p>
+    #   @return [String]
+    class AIRecommendationInferenceSpecification < Struct.new(
+      nil,
+      :framework,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Instance details for a recommendation.</p>
+    # @!attribute instance_type
+    #   <p>The recommended instance type.</p>
+    #   @return [String]
+    # @!attribute instance_count
+    #   <p>The recommended number of instances.</p>
+    #   @return [Integer]
+    # @!attribute copy_count_per_instance
+    #   <p>The number of model copies per instance.</p>
+    #   @return [Integer]
+    class AIRecommendationInstanceDetail < Struct.new(
+      nil,
+      :instance_type,
+      :instance_count,
+      :copy_count_per_instance,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Summary information about an AI recommendation job.</p>
+    # @!attribute ai_recommendation_job_name
+    #   <p>The name of the recommendation job.</p>
+    #   @return [String]
+    # @!attribute ai_recommendation_job_arn
+    #   <p>The Amazon Resource Name (ARN) of the recommendation job.</p>
+    #   @return [String]
+    # @!attribute ai_recommendation_job_status
+    #   <p>The status of the recommendation job.</p>
+    #   @return [String]
+    # @!attribute creation_time
+    #   <p>A timestamp that indicates when the recommendation job was created.</p>
+    #   @return [Time]
+    # @!attribute end_time
+    #   <p>A timestamp that indicates when the recommendation job completed.</p>
+    #   @return [Time]
+    class AIRecommendationJobSummary < Struct.new(
+      nil,
+      :ai_recommendation_job_name,
+      :ai_recommendation_job_arn,
+      :ai_recommendation_job_status,
+      :creation_time,
+      :end_time,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Details about the model package in a recommendation.</p>
+    # @!attribute model_package_arn
+    #   <p>The Amazon Resource Name (ARN) of the model package.</p>
+    #   @return [String]
+    # @!attribute inference_specification_name
+    #   <p>The name of the inference specification within the model package.</p>
+    #   @return [String]
+    # @!attribute instance_details
+    #   <p>The instance details for this recommendation, including instance type, count, and model copies per instance.</p>
+    #   @return [Array<Types::AIRecommendationInstanceDetail>]
+    class AIRecommendationModelDetails < Struct.new(
+      nil,
+      :model_package_arn,
+      :inference_specification_name,
+      :instance_details,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Details about an optimization technique applied in a recommendation.</p>
+    # @!attribute optimization_type
+    #   <p>The type of optimization. Valid values are <code>SpeculativeDecoding</code> and <code>KernelTuning</code>.</p>
+    #   @return [String]
+    # @!attribute optimization_config
+    #   <p>A map of configuration parameters for the optimization technique.</p>
+    #   @return [Hash<String, String>]
+    class AIRecommendationOptimizationDetail < Struct.new(
+      nil,
+      :optimization_type,
+      :optimization_config,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The output configuration for an AI recommendation job.</p>
+    # @!attribute s3_output_location
+    #   <p>The Amazon S3 URI where recommendation results are stored.</p>
+    #   @return [String]
+    # @!attribute model_package_group_identifier
+    #   <p>The name or Amazon Resource Name (ARN) of the model package group where the optimized model is registered as a new model package version.</p>
+    #   @return [String]
+    # @!attribute mlflow_config
+    #   <p>The MLflow tracking configuration for the job. If you don't specify this parameter, MLflow tracking is disabled.</p>
+    #   @return [Types::AIMlflowConfig]
+    class AIRecommendationOutputConfig < Struct.new(
+      nil,
+      :s3_output_location,
+      :model_package_group_identifier,
+      :mlflow_config,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The output configuration for an AI recommendation job, including the S3 location for results and the model package group for deployment.</p>
+    # @!attribute s3_output_location
+    #   <p>The Amazon S3 URI where the recommendation job writes its output results.</p>
+    #   @return [String]
+    # @!attribute model_package_group_identifier
+    #   <p>The name or Amazon Resource Name (ARN) of the model package group where deployment-ready model packages are registered.</p>
+    #   @return [String]
+    # @!attribute mlflow_config
+    #   <p>The MLflow tracking configuration for the job.</p>
+    #   @return [Types::AIMlflowConfig]
+    class AIRecommendationOutputResult < Struct.new(
+      nil,
+      :s3_output_location,
+      :model_package_group_identifier,
+      :mlflow_config,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>An expected performance metric for a recommendation.</p>
+    # @!attribute metric
+    #   <p>The name of the performance metric.</p>
+    #   @return [String]
+    # @!attribute stat
+    #   <p>The statistical measure for the metric.</p>
+    #   @return [String]
+    # @!attribute value
+    #   <p>The value of the metric.</p>
+    #   @return [String]
+    # @!attribute unit
+    #   <p>The unit of the metric value.</p>
+    #   @return [String]
+    class AIRecommendationPerformanceMetric < Struct.new(
+      nil,
+      :metric,
+      :stat,
+      :value,
+      :unit,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The performance targets for an AI recommendation job.</p>
+    # @!attribute constraints
+    #   <p>An array of performance constraints that define the optimization objectives.</p>
+    #   @return [Array<Types::AIRecommendationConstraint>]
+    class AIRecommendationPerformanceTarget < Struct.new(
+      nil,
+      :constraints,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Summary information about an AI workload configuration.</p>
+    # @!attribute ai_workload_config_name
+    #   <p>The name of the AI workload configuration.</p>
+    #   @return [String]
+    # @!attribute ai_workload_config_arn
+    #   <p>The Amazon Resource Name (ARN) of the AI workload configuration.</p>
+    #   @return [String]
+    # @!attribute creation_time
+    #   <p>A timestamp that indicates when the configuration was created.</p>
+    #   @return [Time]
+    class AIWorkloadConfigSummary < Struct.new(
+      nil,
+      :ai_workload_config_name,
+      :ai_workload_config_arn,
+      :creation_time,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The benchmark tool configuration for an AI workload.</p>
+    # @!attribute workload_spec
+    #   <p>The workload specification that defines benchmark parameters.</p>
+    #   @return [Types::WorkloadSpec]
+    class AIWorkloadConfigs < Struct.new(
+      nil,
+      :workload_spec,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The data source for an AI workload input data channel.</p>
+    # @!attribute s3_data_source
+    #   <p>The Amazon S3 data source configuration.</p>
+    #   @return [Types::AIWorkloadS3DataSource]
+    class AIWorkloadDataSource < Struct.new(
+      nil,
+      :s3_data_source,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A channel of input data for an AI workload configuration. Each channel has a name and a data source.</p>
+    # @!attribute channel_name
+    #   <p>The logical name for the data channel.</p>
+    #   @return [String]
+    # @!attribute data_source
+    #   <p>The data source for this channel.</p>
+    #   @return [Types::AIWorkloadDataSource]
+    class AIWorkloadInputDataConfig < Struct.new(
+      nil,
+      :channel_name,
+      :data_source,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The Amazon S3 data source for an AI workload.</p>
+    # @!attribute s3_uri
+    #   <p>The Amazon S3 URI of the data.</p>
+    #   @return [String]
+    class AIWorkloadS3DataSource < Struct.new(
+      nil,
+      :s3_uri,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration for allocating accelerator partitions.</p>
+    # @!attribute type
+    #   <p>The Multi-Instance GPU (MIG) profile type that defines the partition configuration. The profile specifies the compute and memory allocation for each partition instance. The available profile types depend on the instance type specified in the compute quota configuration.</p>
+    #   @return [String]
+    # @!attribute count
+    #   <p>The number of accelerator partitions to allocate with the specified partition type. If you don't specify a value for vCPU and MemoryInGiB, SageMaker AI automatically allocates ratio-based values for those parameters based on the accelerator partition count you provide.</p>
+    #   @return [Integer]
+    class AcceleratorPartitionConfig < Struct.new(
+      nil,
+      :type,
+      :count,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>A structure describing the source of an action.</p>
     # @!attribute source_uri
     #   <p>The URI of the source.</p>
@@ -103,10 +768,18 @@ module Aws::SageMaker
     # @!attribute increment_target_count_by
     #   <p>The number of nodes to add to the specified instance group. The total number of nodes across all instance groups in a single request cannot exceed 50.</p>
     #   @return [Integer]
+    # @!attribute availability_zones
+    #   <p>The availability zones in which to add nodes. Use this to target node placement in specific availability zones within a flexible instance group.</p>
+    #   @return [Array<String>]
+    # @!attribute instance_types
+    #   <p>The instance types to use when adding nodes. Use this to target specific instance types within a flexible instance group.</p>
+    #   @return [Array<String>]
     class AddClusterNodeSpecification < Struct.new(
       nil,
       :instance_group_name,
       :increment_target_count_by,
+      :availability_zones,
+      :instance_types,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -636,6 +1309,22 @@ module Aws::SageMaker
       include ::Smithy::Schema::Structure
     end
 
+    # <p> The data type used to describe the relationship between different sources. </p>
+    # @!attribute source_arn
+    #   <p> The Amazon Resource Name (ARN) of the <code>AssociationInfo</code> source. </p>
+    #   @return [String]
+    # @!attribute destination_arn
+    #   <p> The Amazon Resource Name (ARN) of the <code>AssociationInfo</code> destination. </p>
+    #   @return [String]
+    class AssociationInfo < Struct.new(
+      nil,
+      :source_arn,
+      :destination_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Lists a summary of the properties of an association. An association is an entity that links other lineage or experiment entities. An example would be an association between a training job and a model.</p>
     # @!attribute source_arn
     #   <p>The ARN of the source.</p>
@@ -787,6 +1476,64 @@ module Aws::SageMaker
       :kms_key_id,
       :output_format,
       :output_compression,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The query execution identifier and the result output location for the Amazon Athena query that an Athena step runs.</p>
+    # @!attribute query_execution_id
+    #   <p>The unique identifier of the Amazon Athena query execution that was run by this step execution.</p>
+    #   @return [String]
+    # @!attribute s3_output_location
+    #   <p>The Amazon S3 location of the Amazon Athena query results. This is the effective output location reported by <code>GetQueryExecution</code> for the query. This value can be absent when the query uses Athena managed query results.</p>
+    #   @return [String]
+    class AthenaStepMetadata < Struct.new(
+      nil,
+      :query_execution_id,
+      :s3_output_location,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute cluster_name
+    #   <p> The name or Amazon Resource Name (ARN) of the SageMaker HyperPod cluster that contains the target node. </p>
+    #   @return [String]
+    # @!attribute node_id
+    #   <p> The unique identifier of the cluster node to which you want to attach the network interface. The node must belong to your specified HyperPod cluster and cannot be part of a Restricted Instance Group (RIG). </p>
+    #   @return [String]
+    # @!attribute network_interface_id
+    #   <p> The unique identifier of the elastic network interface (ENI) to attach. </p>
+    #   @return [String]
+    class AttachClusterNodeNetworkInterfaceRequest < Struct.new(
+      nil,
+      :cluster_name,
+      :node_id,
+      :network_interface_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute cluster_arn
+    #   <p> The Amazon Resource Name (ARN) of your SageMaker HyperPod cluster where the network interface attachment operation was performed. </p>
+    #   @return [String]
+    # @!attribute node_id
+    #   <p> The unique identifier of the cluster node where your network interface was attached. </p>
+    #   @return [String]
+    # @!attribute network_interface_id
+    #   <p> The unique identifier of the elastic network interface (ENI) that was attached. </p>
+    #   @return [String]
+    # @!attribute attachment_id
+    #   <p> The unique identifier of the network interface attachment. Use this value to reference or detach the network interface later. </p>
+    #   @return [String]
+    class AttachClusterNodeNetworkInterfaceResponse < Struct.new(
+      nil,
+      :cluster_arn,
+      :node_id,
+      :network_interface_id,
+      :attachment_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1385,6 +2132,42 @@ module Aws::SageMaker
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Contains information about an available upgrade for a SageMaker Partner AI App, including the version number and release notes.</p>
+    # @!attribute version
+    #   <p>The semantic version number of the available upgrade for the SageMaker Partner AI App.</p>
+    #   @return [String]
+    # @!attribute release_notes
+    #   <p>A list of release notes describing the changes and improvements included in the available upgrade version.</p>
+    #   @return [Array<String>]
+    class AvailableUpgrade < Struct.new(
+      nil,
+      :version,
+      :release_notes,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Identifies the foundation model that was used as the starting point for model customization.</p>
+    # @!attribute hub_content_name
+    #   <p> The hub content name of the base model. </p>
+    #   @return [String]
+    # @!attribute hub_content_version
+    #   <p> The hub content version of the base model. </p>
+    #   @return [String]
+    # @!attribute recipe_name
+    #   <p> The recipe name of the base model. </p>
+    #   @return [String]
+    class BaseModel < Struct.new(
+      nil,
+      :hub_content_name,
+      :hub_content_version,
+      :recipe_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Information about an error that occurred during the node addition operation.</p>
     # @!attribute instance_group_name
     #   <p>The name of the instance group for which the error occurred.</p>
@@ -1395,6 +2178,12 @@ module Aws::SageMaker
     # @!attribute failed_count
     #   <p>The number of nodes that failed to be added to the specified instance group.</p>
     #   @return [Integer]
+    # @!attribute availability_zones
+    #   <p>The availability zones associated with the failed node addition request.</p>
+    #   @return [Array<String>]
+    # @!attribute instance_types
+    #   <p>The instance types associated with the failed node addition request.</p>
+    #   @return [Array<String>]
     # @!attribute message
     #   <p>A descriptive message providing additional details about the error.</p>
     #   @return [String]
@@ -1403,6 +2192,8 @@ module Aws::SageMaker
       :instance_group_name,
       :error_code,
       :failed_count,
+      :availability_zones,
+      :instance_types,
       :message,
       keyword_init: true
     )
@@ -1612,6 +2403,9 @@ module Aws::SageMaker
     # @!attribute model_approval_status
     #   <p>The approval status of the model.</p>
     #   @return [String]
+    # @!attribute model_package_registration_type
+    #   <p> The package registration type of the model package summary. </p>
+    #   @return [String]
     class BatchDescribeModelPackageSummary < Struct.new(
       nil,
       :model_package_group_name,
@@ -1622,6 +2416,171 @@ module Aws::SageMaker
       :inference_specification,
       :model_package_status,
       :model_approval_status,
+      :model_package_registration_type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Represents an error encountered when rebooting a node (identified by its logical node ID) from a SageMaker HyperPod cluster.</p>
+    # @!attribute node_logical_id
+    #   <p>The logical node ID of the node that encountered an error during the reboot operation.</p>
+    #   @return [String]
+    # @!attribute error_code
+    #   <p>The error code associated with the error encountered when rebooting a node by logical node ID.</p> <p>Possible values:</p> <ul> <li> <p> <code>InstanceIdNotFound</code>: The node does not exist in the specified cluster.</p> </li> <li> <p> <code>InvalidInstanceStatus</code>: The node is in a state that does not allow rebooting. Wait for the node to finish any ongoing changes before retrying.</p> </li> <li> <p> <code>InstanceIdInUse</code>: Another operation is already in progress for this node. Wait for the operation to complete before retrying.</p> </li> <li> <p> <code>InternalServerError</code>: An internal error occurred while processing this node.</p> </li> </ul>
+    #   @return [String]
+    # @!attribute message
+    #   <p>A human-readable message describing the error encountered when rebooting a node by logical node ID.</p>
+    #   @return [String]
+    class BatchRebootClusterNodeLogicalIdsError < Struct.new(
+      nil,
+      :node_logical_id,
+      :error_code,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Represents an error encountered when rebooting a node from a SageMaker HyperPod cluster.</p>
+    # @!attribute node_id
+    #   <p>The EC2 instance ID of the node that encountered an error during the reboot operation.</p>
+    #   @return [String]
+    # @!attribute error_code
+    #   <p>The error code associated with the error encountered when rebooting a node.</p> <p>Possible values:</p> <ul> <li> <p> <code>InstanceIdNotFound</code>: The instance does not exist in the specified cluster.</p> </li> <li> <p> <code>InvalidInstanceStatus</code>: The instance is in a state that does not allow rebooting. Wait for the instance to finish any ongoing changes before retrying.</p> </li> <li> <p> <code>InstanceIdInUse</code>: Another operation is already in progress for this node. Wait for the operation to complete before retrying.</p> </li> <li> <p> <code>InternalServerError</code>: An internal error occurred while processing this node.</p> </li> </ul>
+    #   @return [String]
+    # @!attribute message
+    #   <p>A human-readable message describing the error encountered when rebooting a node.</p>
+    #   @return [String]
+    class BatchRebootClusterNodesError < Struct.new(
+      nil,
+      :node_id,
+      :error_code,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute cluster_name
+    #   <p>The name or Amazon Resource Name (ARN) of the SageMaker HyperPod cluster containing the nodes to reboot.</p>
+    #   @return [String]
+    # @!attribute node_ids
+    #   <p>A list of EC2 instance IDs to reboot using soft recovery. You can specify between 1 and 25 instance IDs.</p> <note> <ul> <li> <p>Either <code>NodeIds</code> or <code>NodeLogicalIds</code> must be provided (or both), but at least one is required.</p> </li> <li> <p>Each instance ID must follow the pattern <code>i-</code> followed by 17 hexadecimal characters (for example, <code>i-0123456789abcdef0</code>).</p> </li> </ul> </note>
+    #   @return [Array<String>]
+    # @!attribute node_logical_ids
+    #   <p>A list of logical node IDs to reboot using soft recovery. You can specify between 1 and 25 logical node IDs.</p> <p>The <code>NodeLogicalId</code> is a unique identifier that persists throughout the node's lifecycle and can be used to track nodes that are still being provisioned and don't yet have an EC2 instance ID assigned.</p> <important> <ul> <li> <p>This parameter is only supported for clusters using <code>Continuous</code> as the <code>NodeProvisioningMode</code>. For clusters using the default provisioning mode, use <code>NodeIds</code> instead.</p> </li> <li> <p>Either <code>NodeIds</code> or <code>NodeLogicalIds</code> must be provided (or both), but at least one is required.</p> </li> </ul> </important>
+    #   @return [Array<String>]
+    class BatchRebootClusterNodesRequest < Struct.new(
+      nil,
+      :cluster_name,
+      :node_ids,
+      :node_logical_ids,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute successful
+    #   <p>A list of EC2 instance IDs for which the reboot operation was successfully initiated.</p>
+    #   @return [Array<String>]
+    # @!attribute failed
+    #   <p>A list of errors encountered for EC2 instance IDs that could not be rebooted. Each error includes the instance ID, an error code, and a descriptive message.</p>
+    #   @return [Array<Types::BatchRebootClusterNodesError>]
+    # @!attribute failed_node_logical_ids
+    #   <p>A list of errors encountered for logical node IDs that could not be rebooted. Each error includes the logical node ID, an error code, and a descriptive message. This field is only present when <code>NodeLogicalIds</code> were provided in the request.</p>
+    #   @return [Array<Types::BatchRebootClusterNodeLogicalIdsError>]
+    # @!attribute successful_node_logical_ids
+    #   <p>A list of logical node IDs for which the reboot operation was successfully initiated. This field is only present when <code>NodeLogicalIds</code> were provided in the request.</p>
+    #   @return [Array<String>]
+    class BatchRebootClusterNodesResponse < Struct.new(
+      nil,
+      :successful,
+      :failed,
+      :failed_node_logical_ids,
+      :successful_node_logical_ids,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Represents an error encountered when replacing a node (identified by its logical node ID) in a SageMaker HyperPod cluster.</p>
+    # @!attribute node_logical_id
+    #   <p>The logical node ID of the node that encountered an error during the replacement operation.</p>
+    #   @return [String]
+    # @!attribute error_code
+    #   <p>The error code associated with the error encountered when replacing a node by logical node ID.</p> <p>Possible values:</p> <ul> <li> <p> <code>InstanceIdNotFound</code>: The node does not exist in the specified cluster.</p> </li> <li> <p> <code>InvalidInstanceStatus</code>: The node is in a state that does not allow replacement. Wait for the node to finish any ongoing changes before retrying.</p> </li> <li> <p> <code>InstanceIdInUse</code>: Another operation is already in progress for this node. Wait for the operation to complete before retrying.</p> </li> <li> <p> <code>InternalServerError</code>: An internal error occurred while processing this node.</p> </li> </ul>
+    #   @return [String]
+    # @!attribute message
+    #   <p>A human-readable message describing the error encountered when replacing a node by logical node ID.</p>
+    #   @return [String]
+    class BatchReplaceClusterNodeLogicalIdsError < Struct.new(
+      nil,
+      :node_logical_id,
+      :error_code,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Represents an error encountered when replacing a node in a SageMaker HyperPod cluster.</p>
+    # @!attribute node_id
+    #   <p>The EC2 instance ID of the node that encountered an error during the replacement operation.</p>
+    #   @return [String]
+    # @!attribute error_code
+    #   <p>The error code associated with the error encountered when replacing a node.</p> <p>Possible values:</p> <ul> <li> <p> <code>InstanceIdNotFound</code>: The instance does not exist in the specified cluster.</p> </li> <li> <p> <code>InvalidInstanceStatus</code>: The instance is in a state that does not allow replacement. Wait for the instance to finish any ongoing changes before retrying.</p> </li> <li> <p> <code>InstanceIdInUse</code>: Another operation is already in progress for this node. Wait for the operation to complete before retrying.</p> </li> <li> <p> <code>InternalServerError</code>: An internal error occurred while processing this node.</p> </li> </ul>
+    #   @return [String]
+    # @!attribute message
+    #   <p>A human-readable message describing the error encountered when replacing a node.</p>
+    #   @return [String]
+    class BatchReplaceClusterNodesError < Struct.new(
+      nil,
+      :node_id,
+      :error_code,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute cluster_name
+    #   <p>The name or Amazon Resource Name (ARN) of the SageMaker HyperPod cluster containing the nodes to replace.</p>
+    #   @return [String]
+    # @!attribute node_ids
+    #   <p>A list of EC2 instance IDs to replace with new hardware. You can specify between 1 and 25 instance IDs.</p> <important> <p>Replace operations destroy all instance volumes (root and secondary). Ensure you have backed up any important data before proceeding.</p> </important> <note> <ul> <li> <p>Either <code>NodeIds</code> or <code>NodeLogicalIds</code> must be provided (or both), but at least one is required.</p> </li> <li> <p>Each instance ID must follow the pattern <code>i-</code> followed by 17 hexadecimal characters (for example, <code>i-0123456789abcdef0</code>).</p> </li> <li> <p>For SageMaker HyperPod clusters using the Slurm workload manager, you cannot replace instances that are configured as Slurm controller nodes.</p> </li> </ul> </note>
+    #   @return [Array<String>]
+    # @!attribute node_logical_ids
+    #   <p>A list of logical node IDs to replace with new hardware. You can specify between 1 and 25 logical node IDs.</p> <p>The <code>NodeLogicalId</code> is a unique identifier that persists throughout the node's lifecycle and can be used to track nodes that are still being provisioned and don't yet have an EC2 instance ID assigned.</p> <important> <ul> <li> <p>Replace operations destroy all instance volumes (root and secondary). Ensure you have backed up any important data before proceeding.</p> </li> <li> <p>This parameter is only supported for clusters using <code>Continuous</code> as the <code>NodeProvisioningMode</code>. For clusters using the default provisioning mode, use <code>NodeIds</code> instead.</p> </li> <li> <p>Either <code>NodeIds</code> or <code>NodeLogicalIds</code> must be provided (or both), but at least one is required.</p> </li> </ul> </important>
+    #   @return [Array<String>]
+    class BatchReplaceClusterNodesRequest < Struct.new(
+      nil,
+      :cluster_name,
+      :node_ids,
+      :node_logical_ids,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute successful
+    #   <p>A list of EC2 instance IDs for which the replacement operation was successfully initiated.</p>
+    #   @return [Array<String>]
+    # @!attribute failed
+    #   <p>A list of errors encountered for EC2 instance IDs that could not be replaced. Each error includes the instance ID, an error code, and a descriptive message.</p>
+    #   @return [Array<Types::BatchReplaceClusterNodesError>]
+    # @!attribute failed_node_logical_ids
+    #   <p>A list of errors encountered for logical node IDs that could not be replaced. Each error includes the logical node ID, an error code, and a descriptive message. This field is only present when <code>NodeLogicalIds</code> were provided in the request.</p>
+    #   @return [Array<Types::BatchReplaceClusterNodeLogicalIdsError>]
+    # @!attribute successful_node_logical_ids
+    #   <p>A list of logical node IDs for which the replacement operation was successfully initiated. This field is only present when <code>NodeLogicalIds</code> were provided in the request.</p>
+    #   @return [Array<String>]
+    class BatchReplaceClusterNodesResponse < Struct.new(
+      nil,
+      :successful,
+      :failed,
+      :failed_node_logical_ids,
+      :successful_node_logical_ids,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1683,6 +2642,54 @@ module Aws::SageMaker
       include ::Smithy::Schema::Structure
     end
 
+    # <p> The metadata of the Amazon Bedrock custom model deployment. </p>
+    # @!attribute arn
+    #   <p> The Amazon Resource Name (ARN) for the Amazon Bedrock custom model deployment. </p>
+    #   @return [String]
+    class BedrockCustomModelDeploymentMetadata < Struct.new(
+      nil,
+      :arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p> The metadata of the Amazon Bedrock custom model. </p>
+    # @!attribute arn
+    #   <p> The Amazon Resource Name (ARN) of the Amazon Bedrock custom model. </p>
+    #   @return [String]
+    class BedrockCustomModelMetadata < Struct.new(
+      nil,
+      :arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p> The metadata of the Amazon Bedrock model import. </p>
+    # @!attribute arn
+    #   <p> The Amazon Resource Name (ARN) of the Amazon Bedrock model import. </p>
+    #   @return [String]
+    class BedrockModelImportMetadata < Struct.new(
+      nil,
+      :arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p> The metadata of the Amazon Bedrock provisioned model throughput. </p>
+    # @!attribute arn
+    #   <p> The Amazon Resource Name (ARN) of the Amazon Bedrock provisioned model throughput. </p>
+    #   @return [String]
+    class BedrockProvisionedModelThroughputMetadata < Struct.new(
+      nil,
+      :arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>A structure that keeps track of which training jobs launched by your hyperparameter tuning job are not improving model performance as evaluated against an objective function.</p>
     # @!attribute max_number_of_training_jobs_not_improving
     #   <p>The number of training jobs that have failed to improve model performance by 1% or greater over prior training jobs as evaluated against an objective function.</p>
@@ -1710,6 +2717,26 @@ module Aws::SageMaker
       :report,
       :pre_training_report,
       :post_training_report,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The billable token usage for a training session, broken down by operation type.</p>
+    # @!attribute prefill_token_count
+    #   <p>The number of prefill tokens consumed.</p>
+    #   @return [Integer]
+    # @!attribute sample_token_count
+    #   <p>The number of sample tokens consumed.</p>
+    #   @return [Integer]
+    # @!attribute training_token_count
+    #   <p>The number of training tokens consumed.</p>
+    #   @return [Integer]
+    class BillableTokenUsage < Struct.new(
+      nil,
+      :prefill_token_count,
+      :sample_token_count,
+      :training_token_count,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2375,6 +3402,114 @@ module Aws::SageMaker
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The Amazon S3 output resources associated with an upstream step that the Cleanup step could not delete.</p>
+    # @!attribute step_name
+    #   <p>The name of the upstream step whose Amazon S3 output resources the Cleanup step could not delete.</p>
+    #   @return [String]
+    # @!attribute error_code
+    #   <p>The error code that identifies why the Cleanup step could not delete the output resources associated with the upstream step.</p>
+    #   @return [String]
+    # @!attribute error_message
+    #   <p>A message describing why the Cleanup step could not delete the output resources associated with the upstream step.</p>
+    #   @return [String]
+    class CleanupFailure < Struct.new(
+      nil,
+      :step_name,
+      :error_code,
+      :error_message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The cleanup outcomes for Amazon S3 output resources associated with upstream steps.</p>
+    # @!attribute cleaned_steps
+    #   <p>The names of upstream steps whose Amazon S3 output resources the Cleanup step deleted successfully.</p>
+    #   @return [Array<String>]
+    # @!attribute failed_steps
+    #   <p>The upstream steps whose Amazon S3 output resources the Cleanup step could not delete.</p>
+    #   @return [Array<Types::CleanupFailure>]
+    # @!attribute skipped_steps
+    #   <p>The names of upstream steps that the Cleanup step skipped. The Cleanup step skips a step when the output properties needed to locate its resources are unavailable.</p>
+    #   @return [Array<String>]
+    class CleanupStepMetadata < Struct.new(
+      nil,
+      :cleaned_steps,
+      :failed_steps,
+      :skipped_steps,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The external MySQL-compatible database that the Slurm accounting daemon (<code>slurmdbd</code>) connects to for a SageMaker HyperPod cluster. You provide the database credentials in an Amazon Web Services Secrets Manager secret instead of in the request.</p>
+    # @!attribute endpoint
+    #   <p>The hostname or endpoint of the accounting database, such as the endpoint of an Amazon RDS for MySQL or Aurora MySQL database. The database must be reachable from the subnets and security groups that you configure for the cluster.</p>
+    #   @return [String]
+    # @!attribute port
+    #   <p>The port that the accounting database listens on. The default is <code>3306</code>.</p>
+    #   @return [Integer]
+    # @!attribute name
+    #   <p>The name of the database schema that stores the Slurm accounting data. The default is <code>slurm_acct_db_</code> followed by the cluster ID from the cluster ARN, for example <code>slurm_acct_db_a1b2c3d4e5f6</code>.</p>
+    #   @return [String]
+    # @!attribute secret_arn
+    #   <p>The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager secret that contains the user name and password for the accounting database. The database user must be able to create the schema and to read from and write to it.</p>
+    #   @return [String]
+    class ClusterAccountingDatabase < Struct.new(
+      nil,
+      :endpoint,
+      :port,
+      :name,
+      :secret_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration for automatic patching of the instance group. When configured, the system automatically applies security patch AMI updates to the instance group.</p>
+    # @!attribute patching_strategy
+    #   <p>The strategy for applying patches to instances in the group.</p> <ul> <li> <p> <code>WhenIdle</code>: Cordons all instances and patches each instance as it becomes idle (no running jobs). Each instance is uncordoned immediately after patching and becomes available for new jobs. If instances do not become idle, they remain on the previous AMI version. You can then use UpdateClusterSoftware with the desired ImageReleaseVersion to manually update the remaining instances.</p> </li> <li> <p> <code>WhenAllIdle</code>: Cordons all instances and waits for all to become idle before patching. All instances are uncordoned after patching completes. If not all instances become idle, no patching occurs and all instances remain on the previous AMI version.</p> </li> </ul>
+    #   @return [String]
+    # @!attribute patch_schedule
+    #   <p>The schedule for automatic patching, including the next patch date.</p>
+    #   @return [Types::ClusterPatchSchedule]
+    # @!attribute deployment_config
+    #   <p>The deployment configuration for rolling patch updates, including rollback settings and batch sizes. Only applicable when using a rolling patching strategy.</p>
+    #   @return [Types::DeploymentConfiguration]
+    class ClusterAutoPatchConfig < Struct.new(
+      nil,
+      :patching_strategy,
+      :patch_schedule,
+      :deployment_config,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The auto-patching configuration details for the instance group, including the patching strategy and schedule.</p>
+    # @!attribute patching_strategy
+    #   <p>The strategy used for applying patches to instances in the group.</p> <ul> <li> <p> <code>WhenIdle</code>: Cordons all instances and patches each instance as it becomes idle (no running jobs). Each instance is uncordoned immediately after patching and becomes available for new jobs. If instances do not become idle, they remain on the previous AMI version. You can then use UpdateClusterSoftware with the desired ImageReleaseVersion to manually update the remaining instances.</p> </li> <li> <p> <code>WhenAllIdle</code>: Cordons all instances and waits for all to become idle before patching. All instances are uncordoned after patching completes. If not all instances become idle, no patching occurs and all instances remain on the previous AMI version.</p> </li> </ul>
+    #   @return [String]
+    # @!attribute current_patch_schedule
+    #   <p>The currently active patch schedule that the system will execute.</p>
+    #   @return [Types::ClusterPatchScheduleDetails]
+    # @!attribute desired_patch_schedule
+    #   <p>The requested patch schedule. Differs from CurrentPatchSchedule when a reschedule request is pending.</p>
+    #   @return [Types::ClusterPatchScheduleDetails]
+    # @!attribute deployment_config
+    #   <p>The deployment configuration for rolling patch updates.</p>
+    #   @return [Types::DeploymentConfiguration]
+    class ClusterAutoPatchConfigDetails < Struct.new(
+      nil,
+      :patching_strategy,
+      :current_patch_schedule,
+      :desired_patch_schedule,
+      :deployment_config,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Specifies the autoscaling configuration for a HyperPod cluster.</p>
     # @!attribute mode
     #   <p>Describes whether autoscaling is enabled or disabled for the cluster. Valid values are <code>Enable</code> and <code>Disable</code>.</p>
@@ -2410,6 +3545,22 @@ module Aws::SageMaker
       :auto_scaler_type,
       :status,
       :failure_message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Defines the instance capacity requirements for an instance group, including configurations for both Spot and On-Demand capacity types. </p>
+    # @!attribute spot
+    #   <p>Configuration options specific to Spot instances.</p>
+    #   @return [Types::ClusterSpotOptions]
+    # @!attribute on_demand
+    #   <p>Configuration options specific to On-Demand instances.</p>
+    #   @return [Types::ClusterOnDemandOptions]
+    class ClusterCapacityRequirements < Struct.new(
+      nil,
+      :spot,
+      :on_demand,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2463,6 +3614,9 @@ module Aws::SageMaker
     # @!attribute description
     #   <p>A human-readable description of the event.</p>
     #   @return [String]
+    # @!attribute event_level
+    #   <p>The severity level of the event. Valid values are <code>Info</code>, <code>Warn</code>, and <code>Error</code>.</p>
+    #   @return [String]
     class ClusterEventDetail < Struct.new(
       nil,
       :event_id,
@@ -2474,6 +3628,7 @@ module Aws::SageMaker
       :event_time,
       :event_details,
       :description,
+      :event_level,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2504,6 +3659,9 @@ module Aws::SageMaker
     # @!attribute description
     #   <p>A brief, human-readable description of the event.</p>
     #   @return [String]
+    # @!attribute event_level
+    #   <p>The severity level of the event. Valid values are <code>Info</code>, <code>Warn</code>, and <code>Error</code>.</p>
+    #   @return [String]
     class ClusterEventSummary < Struct.new(
       nil,
       :event_id,
@@ -2514,6 +3672,43 @@ module Aws::SageMaker
       :resource_type,
       :event_time,
       :description,
+      :event_level,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Defines the configuration for attaching an Amazon FSx for Lustre file system to instances in a SageMaker HyperPod cluster instance group.</p>
+    # @!attribute dns_name
+    #   <p>The DNS name of the Amazon FSx for Lustre file system.</p>
+    #   @return [String]
+    # @!attribute mount_name
+    #   <p>The mount name of the Amazon FSx for Lustre file system.</p>
+    #   @return [String]
+    # @!attribute mount_path
+    #   <p>The local path where the Amazon FSx for Lustre file system is mounted on instances.</p>
+    #   @return [String]
+    class ClusterFsxLustreConfig < Struct.new(
+      nil,
+      :dns_name,
+      :mount_name,
+      :mount_path,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Defines the configuration for attaching an Amazon FSx for OpenZFS file system to instances in a SageMaker HyperPod cluster instance group.</p>
+    # @!attribute dns_name
+    #   <p>The DNS name of the Amazon FSx for OpenZFS file system.</p>
+    #   @return [String]
+    # @!attribute mount_path
+    #   <p>The local path where the Amazon FSx for OpenZFS file system is mounted on instances.</p>
+    #   @return [String]
+    class ClusterFsxOpenZfsConfig < Struct.new(
+      nil,
+      :dns_name,
+      :mount_path,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2526,12 +3721,21 @@ module Aws::SageMaker
     # @!attribute target_count
     #   <p>The number of instances you specified to add to the instance group of a SageMaker HyperPod cluster.</p>
     #   @return [Integer]
+    # @!attribute min_count
+    #   <p>The minimum number of instances that must be available in the instance group of a SageMaker HyperPod cluster before it transitions to <code>InService</code> status. </p>
+    #   @return [Integer]
     # @!attribute instance_group_name
     #   <p>The name of the instance group of a SageMaker HyperPod cluster.</p>
     #   @return [String]
     # @!attribute instance_type
     #   <p>The instance type of the instance group of a SageMaker HyperPod cluster.</p>
     #   @return [String]
+    # @!attribute instance_requirements
+    #   <p>The instance requirements for the instance group, including the current and desired instance types. This field is present for flexible instance groups that support multiple instance types.</p>
+    #   @return [Types::ClusterInstanceRequirementDetails]
+    # @!attribute instance_type_details
+    #   <p>Details about the instance types in the instance group, including the count and configuration of each instance type. This field is present for flexible instance groups that support multiple instance types.</p>
+    #   @return [Array<Types::ClusterInstanceTypeDetail>]
     # @!attribute life_cycle_config
     #   <p>Details of LifeCycle configuration for the instance group.</p>
     #   @return [Types::ClusterLifeCycleConfig]
@@ -2562,18 +3766,57 @@ module Aws::SageMaker
     # @!attribute scheduled_update_config
     #   <p>The configuration object of the schedule that SageMaker follows when updating the AMI.</p>
     #   @return [Types::ScheduledUpdateConfig]
+    # @!attribute auto_patch_config
+    #   <p>The auto-patching configuration for the instance group, including the current patching strategy and next scheduled patch date.</p>
+    #   @return [Types::ClusterAutoPatchConfigDetails]
     # @!attribute current_image_id
     #   <p>The ID of the Amazon Machine Image (AMI) currently in use by the instance group.</p>
     #   @return [String]
     # @!attribute desired_image_id
     #   <p>The ID of the Amazon Machine Image (AMI) desired for the instance group.</p>
     #   @return [String]
+    # @!attribute current_image_release_version
+    #   <p>The version of the HyperPod-managed AMI currently running on the instance group.</p>
+    #   @return [String]
+    # @!attribute desired_image_release_version
+    #   <p>The desired version of the HyperPod-managed AMI for the instance group. This may differ from the current version when an update is pending.</p>
+    #   @return [String]
+    # @!attribute image_version_status
+    #   <p>The status of the image version for the instance group. Indicates whether the instance group is running the latest image version or if an update is available.</p>
+    #   @return [String]
+    # @!attribute active_operations
+    #   <p>A map indicating active operations currently in progress for the instance group of a SageMaker HyperPod cluster. When there is a scaling operation in progress, this map contains a key <code>Scaling</code> with value 1. </p>
+    #   @return [Hash<String, Integer>]
+    # @!attribute kubernetes_config
+    #   <p>The Kubernetes configuration for the instance group that contains labels and taints to be applied for the nodes in this instance group. </p>
+    #   @return [Types::ClusterKubernetesConfigDetails]
+    # @!attribute capacity_requirements
+    #   <p>The instance capacity requirements for the instance group.</p>
+    #   @return [Types::ClusterCapacityRequirements]
+    # @!attribute target_state_count
+    #   <p>Represents the number of running nodes using the desired Image ID.</p> <ol> <li> <p> <b>During software update operations:</b> This count shows the number of nodes running on the desired Image ID. If a rollback occurs, the current image ID and desired image ID (both included in the describe cluster response) swap values. The TargetStateCount then shows the number of nodes running on the newly designated desired image ID (which was previously the current image ID).</p> </li> <li> <p> <b>During simultaneous scaling and software update operations:</b> This count shows the number of instances running on the desired image ID, including any new instances created as part of the scaling request. New nodes are always created using the desired image ID, so TargetStateCount reflects the total count of nodes running on the desired image ID, even during rollback scenarios.</p> </li> </ol>
+    #   @return [Integer]
+    # @!attribute software_update_status
+    #   <p>Status of the last software udpate request.</p> <p>Status transitions follow these possible sequences:</p> <ul> <li> <p>Pending -&gt; InProgress -&gt; Succeeded</p> </li> <li> <p>Pending -&gt; InProgress -&gt; RollbackInProgress -&gt; RollbackComplete</p> </li> <li> <p>Pending -&gt; InProgress -&gt; RollbackInProgress -&gt; Failed</p> </li> </ul>
+    #   @return [String]
+    # @!attribute active_software_update_config
+    #   <p>The configuration to use when updating the AMI versions.</p>
+    #   @return [Types::DeploymentConfiguration]
+    # @!attribute slurm_config
+    #   <p>The Slurm configuration for the instance group.</p>
+    #   @return [Types::ClusterSlurmConfigDetails]
+    # @!attribute network_interface
+    #   <p>The network interface configuration for the instance group.</p>
+    #   @return [Types::ClusterNetworkInterfaceDetails]
     class ClusterInstanceGroupDetails < Struct.new(
       nil,
       :current_count,
       :target_count,
+      :min_count,
       :instance_group_name,
       :instance_type,
+      :instance_requirements,
+      :instance_type_details,
       :life_cycle_config,
       :execution_role,
       :threads_per_core,
@@ -2584,8 +3827,20 @@ module Aws::SageMaker
       :training_plan_status,
       :override_vpc_config,
       :scheduled_update_config,
+      :auto_patch_config,
       :current_image_id,
       :desired_image_id,
+      :current_image_release_version,
+      :desired_image_release_version,
+      :image_version_status,
+      :active_operations,
+      :kubernetes_config,
+      :capacity_requirements,
+      :target_state_count,
+      :software_update_status,
+      :active_software_update_config,
+      :slurm_config,
+      :network_interface,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2595,12 +3850,18 @@ module Aws::SageMaker
     # @!attribute instance_count
     #   <p>Specifies the number of instances to add to the instance group of a SageMaker HyperPod cluster.</p>
     #   @return [Integer]
+    # @!attribute min_instance_count
+    #   <p>Defines the minimum number of instances required for an instance group to become <code>InService</code>. If this threshold isn't met within 3 hours, the instance group rolls back to its previous state - zero instances for new instance groups, or previous settings for existing instance groups. <code>MinInstanceCount</code> only affects the initial transition to <code>InService</code> and does not guarantee maintaining this minimum afterward. </p>
+    #   @return [Integer]
     # @!attribute instance_group_name
     #   <p>Specifies the name of the instance group.</p>
     #   @return [String]
     # @!attribute instance_type
     #   <p>Specifies the instance type of the instance group.</p>
     #   @return [String]
+    # @!attribute instance_requirements
+    #   <p>The instance requirements for the instance group, including the instance types to use. Use this to create a flexible instance group that supports multiple instance types. The <code>InstanceType</code> and <code>InstanceRequirements</code> properties are mutually exclusive.</p>
+    #   @return [Types::ClusterInstanceRequirements]
     # @!attribute life_cycle_config
     #   <p>Specifies the LifeCycle configuration for the instance group.</p>
     #   @return [Types::ClusterLifeCycleConfig]
@@ -2626,13 +3887,33 @@ module Aws::SageMaker
     #   <p>The configuration object of the schedule that SageMaker uses to update the AMI.</p>
     #   @return [Types::ScheduledUpdateConfig]
     # @!attribute image_id
-    #   <p>When configuring your HyperPod cluster, you can specify an image ID using one of the following options:</p> <ul> <li> <p> <code>HyperPodPublicAmiId</code>: Use a HyperPod public AMI</p> </li> <li> <p> <code>CustomAmiId</code>: Use your custom AMI</p> </li> <li> <p> <code>default</code>: Use the default latest system image</p> </li> </ul> <p>If you choose to use a custom AMI (<code>CustomAmiId</code>), ensure it meets the following requirements:</p> <ul> <li> <p>Encryption: The custom AMI must be unencrypted.</p> </li> <li> <p>Ownership: The custom AMI must be owned by the same Amazon Web Services account that is creating the HyperPod cluster.</p> </li> <li> <p>Volume support: Only the primary AMI snapshot volume is supported; additional AMI volumes are not supported.</p> </li> </ul> <p>When updating the instance group's AMI through the <code>UpdateClusterSoftware</code> operation, if an instance group uses a custom AMI, you must provide an <code>ImageId</code> or use the default as input. Note that if you don't specify an instance group in your <code>UpdateClusterSoftware</code> request, then all of the instance groups are patched with the specified image.</p>
+    #   <p>When configuring your HyperPod cluster, you can specify an image ID using one of the following options:</p> <ul> <li> <p> <code>HyperPodPublicAmiId</code>: Use a HyperPod public AMI</p> </li> <li> <p> <code>CustomAmiId</code>: Use your custom AMI</p> </li> <li> <p> <code>default</code>: Use the default latest system image. For clusters with continuous scaling node provisioning mode, new instance groups inherit the AMI from the earliest existing instance group</p> </li> </ul> <p>If you choose to use a custom AMI (<code>CustomAmiId</code>), ensure it meets the following requirements:</p> <ul> <li> <p>Encryption: The custom AMI must be unencrypted.</p> </li> <li> <p>Ownership: The custom AMI must be owned by the same Amazon Web Services account that is creating the HyperPod cluster.</p> </li> <li> <p>Volume support: Only the primary AMI snapshot volume is supported; additional AMI volumes are not supported.</p> </li> </ul> <p>When updating the instance group's AMI through the <code>UpdateClusterSoftware</code> operation, if an instance group uses a custom AMI, you must provide an <code>ImageId</code> or use the default as input. Note that if you don't specify an instance group in your <code>UpdateClusterSoftware</code> request, then all of the instance groups are patched with the specified image.</p>
     #   @return [String]
+    # @!attribute auto_patch_config
+    #   <p>The configuration for automatic OS security patching. If present, the system automatically applies PATCH AMI updates to this instance group.</p>
+    #   @return [Types::ClusterAutoPatchConfig]
+    # @!attribute image_release_version
+    #   <p>The version of the HyperPod-managed AMI to use for the instance group. Uses semantic versioning in the format <code>MAJOR.MINOR.PATCH</code> (for example, <code>1.2.3</code>). If omitted, the latest available version is used.</p>
+    #   @return [String]
+    # @!attribute kubernetes_config
+    #   <p>Specifies the Kubernetes configuration for the instance group. You describe what you want the labels and taints to look like, and the cluster works to reconcile the actual state with the declared state for nodes in this instance group. </p>
+    #   @return [Types::ClusterKubernetesConfig]
+    # @!attribute slurm_config
+    #   <p>Specifies the Slurm configuration for the instance group.</p>
+    #   @return [Types::ClusterSlurmConfig]
+    # @!attribute capacity_requirements
+    #   <p>Specifies the capacity requirements for the instance group.</p>
+    #   @return [Types::ClusterCapacityRequirements]
+    # @!attribute network_interface
+    #   <p>The network interface configuration for the instance group.</p>
+    #   @return [Types::ClusterNetworkInterface]
     class ClusterInstanceGroupSpecification < Struct.new(
       nil,
       :instance_count,
+      :min_instance_count,
       :instance_group_name,
       :instance_type,
+      :instance_requirements,
       :life_cycle_config,
       :execution_role,
       :threads_per_core,
@@ -2642,6 +3923,12 @@ module Aws::SageMaker
       :override_vpc_config,
       :scheduled_update_config,
       :image_id,
+      :auto_patch_config,
+      :image_release_version,
+      :kubernetes_config,
+      :slurm_config,
+      :capacity_requirements,
+      :network_interface,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2658,6 +3945,34 @@ module Aws::SageMaker
       nil,
       :availability_zone,
       :availability_zone_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The instance requirement details for a flexible instance group, including the current and desired instance types.</p>
+    # @!attribute current_instance_types
+    #   <p>The instance types currently in use by the instance group.</p>
+    #   @return [Array<String>]
+    # @!attribute desired_instance_types
+    #   <p>The desired instance types for the instance group, as specified in the most recent update request.</p>
+    #   @return [Array<String>]
+    class ClusterInstanceRequirementDetails < Struct.new(
+      nil,
+      :current_instance_types,
+      :desired_instance_types,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The instance requirements for a flexible instance group. Use this to specify multiple instance types that the instance group can use. The order of instance types in the list determines the priority for instance provisioning.</p>
+    # @!attribute instance_types
+    #   <p>The list of instance types that the instance group can use. The order of instance types determines the priority—HyperPod attempts to provision instances using the first instance type in the list and falls back to subsequent types if capacity is unavailable.</p>
+    #   @return [Array<String>]
+    class ClusterInstanceRequirements < Struct.new(
+      nil,
+      :instance_types,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2683,15 +3998,129 @@ module Aws::SageMaker
     # @!attribute ebs_volume_config
     #   <p>Defines the configuration for attaching additional Amazon Elastic Block Store (EBS) volumes to the instances in the SageMaker HyperPod cluster instance group. The additional EBS volume is attached to each instance within the SageMaker HyperPod cluster instance group and mounted to <code>/opt/sagemaker</code>.</p>
     #   @return [Types::ClusterEbsVolumeConfig]
+    # @!attribute fsx_lustre_config
+    #   <p>Defines the configuration for attaching an Amazon FSx for Lustre file system to the instances in the SageMaker HyperPod cluster instance group.</p>
+    #   @return [Types::ClusterFsxLustreConfig]
+    # @!attribute fsx_open_zfs_config
+    #   <p>Defines the configuration for attaching an Amazon FSx for OpenZFS file system to the instances in the SageMaker HyperPod cluster instance group.</p>
+    #   @return [Types::ClusterFsxOpenZfsConfig]
     class ClusterInstanceStorageConfig < Struct.new(
       :ebs_volume_config,
+      :fsx_lustre_config,
+      :fsx_open_zfs_config,
       :unknown,
       keyword_init: true
     )
       include ::Smithy::Schema::Union
 
       class EbsVolumeConfig < ClusterInstanceStorageConfig; end
+      class FsxLustreConfig < ClusterInstanceStorageConfig; end
+      class FsxOpenZfsConfig < ClusterInstanceStorageConfig; end
       class Unknown < ClusterInstanceStorageConfig; end
+    end
+
+    # <p>Details about a specific instance type within a flexible instance group, including the count and configuration.</p>
+    # @!attribute instance_type
+    #   <p>The instance type.</p>
+    #   @return [String]
+    # @!attribute current_count
+    #   <p>The number of instances of this type currently running in the instance group.</p>
+    #   @return [Integer]
+    # @!attribute threads_per_core
+    #   <p>The number of threads per CPU core for this instance type.</p>
+    #   @return [Integer]
+    class ClusterInstanceTypeDetail < Struct.new(
+      nil,
+      :instance_type,
+      :current_count,
+      :threads_per_core,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Kubernetes configuration that specifies labels and taints to be applied to cluster nodes in an instance group. </p>
+    # @!attribute labels
+    #   <p>Key-value pairs of labels to be applied to cluster nodes.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute taints
+    #   <p>List of taints to be applied to cluster nodes.</p>
+    #   @return [Array<Types::ClusterKubernetesTaint>]
+    class ClusterKubernetesConfig < Struct.new(
+      nil,
+      :labels,
+      :taints,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Detailed Kubernetes configuration showing both the current and desired state of labels and taints for cluster nodes. </p>
+    # @!attribute current_labels
+    #   <p>The current labels applied to cluster nodes of an instance group.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute desired_labels
+    #   <p>The desired labels to be applied to cluster nodes of an instance group.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute current_taints
+    #   <p>The current taints applied to cluster nodes of an instance group.</p>
+    #   @return [Array<Types::ClusterKubernetesTaint>]
+    # @!attribute desired_taints
+    #   <p>The desired taints to be applied to cluster nodes of an instance group.</p>
+    #   @return [Array<Types::ClusterKubernetesTaint>]
+    class ClusterKubernetesConfigDetails < Struct.new(
+      nil,
+      :current_labels,
+      :desired_labels,
+      :current_taints,
+      :desired_taints,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Node-specific Kubernetes configuration showing both current and desired state of labels and taints for an individual cluster node. </p>
+    # @!attribute current_labels
+    #   <p>The current labels applied to the cluster node.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute desired_labels
+    #   <p>The desired labels to be applied to the cluster node.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute current_taints
+    #   <p>The current taints applied to the cluster node.</p>
+    #   @return [Array<Types::ClusterKubernetesTaint>]
+    # @!attribute desired_taints
+    #   <p>The desired taints to be applied to the cluster node.</p>
+    #   @return [Array<Types::ClusterKubernetesTaint>]
+    class ClusterKubernetesConfigNodeDetails < Struct.new(
+      nil,
+      :current_labels,
+      :desired_labels,
+      :current_taints,
+      :desired_taints,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A Kubernetes taint that can be applied to cluster nodes.</p>
+    # @!attribute key
+    #   <p>The key of the taint.</p>
+    #   @return [String]
+    # @!attribute value
+    #   <p>The value of the taint.</p>
+    #   @return [String]
+    # @!attribute effect
+    #   <p>The effect of the taint. Valid values are <code>NoSchedule</code>, <code>PreferNoSchedule</code>, and <code>NoExecute</code>. </p>
+    #   @return [String]
+    class ClusterKubernetesTaint < Struct.new(
+      nil,
+      :key,
+      :value,
+      :effect,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The lifecycle configuration for a SageMaker HyperPod cluster.</p>
@@ -2701,10 +4130,14 @@ module Aws::SageMaker
     # @!attribute on_create
     #   <p>The file name of the entrypoint script of lifecycle scripts under <code>SourceS3Uri</code>. This entrypoint script runs during cluster creation.</p>
     #   @return [String]
+    # @!attribute on_init_complete
+    #   <p>The file name of the entrypoint script of lifecycle scripts under <code>SourceS3Uri</code>. This script runs on the node after the AMI-based initialization is complete.</p>
+    #   @return [String]
     class ClusterLifeCycleConfig < Struct.new(
       nil,
       :source_s3_uri,
       :on_create,
+      :on_init_complete,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2725,6 +4158,30 @@ module Aws::SageMaker
       :failure_message,
       :eks_role_access_entries,
       :slr_access_entry,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The network interface configuration for a Amazon SageMaker HyperPod cluster instance group.</p>
+    # @!attribute interface_type
+    #   <p>The type of network interface for the instance group. Valid values:</p> <ul> <li> <p> <code>efa</code> – An EFA with ENA interface, which provides both the EFA device for low-latency, high-throughput communication and the ENA device for IP networking.</p> </li> <li> <p> <code>efa-only</code> – An EFA-only interface, which provides only the EFA device capabilities without the ENA device for traditional IP networking.</p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/efa.html">Elastic Fabric Adapter</a>.</p>
+    #   @return [String]
+    class ClusterNetworkInterface < Struct.new(
+      nil,
+      :interface_type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The network interface configuration details for a Amazon SageMaker HyperPod cluster instance group.</p>
+    # @!attribute interface_type
+    #   <p>The type of network interface for the instance group. Valid values are <code>efa</code> and <code>efa-only</code>.</p>
+    #   @return [String]
+    class ClusterNetworkInterfaceDetails < Struct.new(
+      nil,
+      :interface_type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2782,9 +4239,27 @@ module Aws::SageMaker
     # @!attribute desired_image_id
     #   <p>The ID of the Amazon Machine Image (AMI) desired for the node.</p>
     #   @return [String]
+    # @!attribute current_image_release_version
+    #   <p>The version of the HyperPod-managed AMI currently running on the node.</p>
+    #   @return [String]
+    # @!attribute desired_image_release_version
+    #   <p>The desired version of the HyperPod-managed AMI for the node. This may differ from the current version when an update is pending.</p>
+    #   @return [String]
+    # @!attribute image_version_status
+    #   <p>The status of the image version for the cluster node.</p>
+    #   @return [String]
     # @!attribute ultra_server_info
     #   <p>Contains information about the UltraServer.</p>
     #   @return [Types::UltraServerInfo]
+    # @!attribute kubernetes_config
+    #   <p>The Kubernetes configuration applied to this node, showing both the current and desired state of labels and taints. The cluster works to reconcile the actual state with the declared state. </p>
+    #   @return [Types::ClusterKubernetesConfigNodeDetails]
+    # @!attribute capacity_type
+    #   <p>The capacity type of the node. Valid values are <code>OnDemand</code> and <code>Spot</code>. When set to <code>OnDemand</code>, the node is launched as an On-Demand instance. When set to <code>Spot</code>, the node is launched as a Spot instance. </p>
+    #   @return [String]
+    # @!attribute network_interface
+    #   <p>The network interface configuration for the cluster node.</p>
+    #   @return [Types::ClusterNetworkInterfaceDetails]
     class ClusterNodeDetails < Struct.new(
       nil,
       :instance_group_name,
@@ -2804,7 +4279,13 @@ module Aws::SageMaker
       :placement,
       :current_image_id,
       :desired_image_id,
+      :current_image_release_version,
+      :desired_image_release_version,
+      :image_version_status,
       :ultra_server_info,
+      :kubernetes_config,
+      :capacity_type,
+      :network_interface,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2835,6 +4316,15 @@ module Aws::SageMaker
     # @!attribute ultra_server_info
     #   <p>Contains information about the UltraServer.</p>
     #   @return [Types::UltraServerInfo]
+    # @!attribute private_dns_hostname
+    #   <p>The private DNS hostname of the SageMaker HyperPod cluster node.</p>
+    #   @return [String]
+    # @!attribute current_image_release_version
+    #   <p>The version of the HyperPod-managed AMI currently running on the node.</p>
+    #   @return [String]
+    # @!attribute image_version_status
+    #   <p>The status of the image version for the cluster node.</p>
+    #   @return [String]
     class ClusterNodeSummary < Struct.new(
       nil,
       :instance_group_name,
@@ -2845,6 +4335,17 @@ module Aws::SageMaker
       :last_software_update_time,
       :instance_status,
       :ultra_server_info,
+      :private_dns_hostname,
+      :current_image_release_version,
+      :image_version_status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration options specific to On-Demand instances.</p>
+    class ClusterOnDemandOptions < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2854,9 +4355,13 @@ module Aws::SageMaker
     # @!attribute eks
     #   <p>The Amazon EKS cluster used as the orchestrator for the SageMaker HyperPod cluster.</p>
     #   @return [Types::ClusterOrchestratorEksConfig]
+    # @!attribute slurm
+    #   <p>The Slurm orchestrator configuration for the SageMaker HyperPod cluster.</p>
+    #   @return [Types::ClusterOrchestratorSlurmConfig]
     class ClusterOrchestrator < Struct.new(
       nil,
       :eks,
+      :slurm,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2869,6 +4374,46 @@ module Aws::SageMaker
     class ClusterOrchestratorEksConfig < Struct.new(
       nil,
       :cluster_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration settings for the Slurm orchestrator used with the SageMaker HyperPod cluster.</p>
+    # @!attribute slurm_config_strategy
+    #   <p>The strategy for managing partitions for the Slurm configuration. Valid values are <code>Managed</code>, <code>Overwrite</code>, and <code>Merge</code>.</p>
+    #   @return [String]
+    # @!attribute accounting_database
+    #   <p>The external database that stores the Slurm accounting data for the cluster, such as job history, associations, and usage. When you omit this field, Slurm accounting uses a database on the cluster's controller node.</p> <note> <p>This field is only supported for clusters using <code>Continuous</code> as the <code>NodeProvisioningMode</code>.</p> </note>
+    #   @return [Types::ClusterAccountingDatabase]
+    class ClusterOrchestratorSlurmConfig < Struct.new(
+      nil,
+      :slurm_config_strategy,
+      :accounting_database,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The schedule configuration for automatic patching.</p>
+    # @!attribute next_patch_date
+    #   <p>The date and time of the next scheduled automatic patch. The system sets this automatically when a patch is detected. Use this field to reschedule the patch to a different date.</p>
+    #   @return [Time]
+    class ClusterPatchSchedule < Struct.new(
+      nil,
+      :next_patch_date,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The schedule details for automatic patching, including the next scheduled patch date.</p>
+    # @!attribute next_patch_date
+    #   <p>The date and time of the next scheduled automatic patch.</p>
+    #   @return [Time]
+    class ClusterPatchScheduleDetails < Struct.new(
+      nil,
+      :next_patch_date,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2990,6 +4535,30 @@ module Aws::SageMaker
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The configuration for the restricted instance groups (RIG) in the SageMaker HyperPod cluster.</p>
+    # @!attribute shared_environment_config
+    #   <p>The shared environment configuration for the restricted instance groups (RIG).</p>
+    #   @return [Types::ClusterSharedEnvironmentConfig]
+    class ClusterRestrictedInstanceGroupsConfig < Struct.new(
+      nil,
+      :shared_environment_config,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The output configuration for the restricted instance groups (RIG) in the SageMaker HyperPod cluster.</p>
+    # @!attribute shared_environment_config
+    #   <p>The shared environment configuration details for the restricted instance groups (RIG).</p>
+    #   @return [Types::ClusterSharedEnvironmentConfigDetails]
+    class ClusterRestrictedInstanceGroupsConfigOutput < Struct.new(
+      nil,
+      :shared_environment_config,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Summary of the cluster policy.</p>
     # @!attribute cluster_scheduler_config_arn
     #   <p>ARN of the cluster policy.</p>
@@ -3030,6 +4599,86 @@ module Aws::SageMaker
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The shared environment configuration for the restricted instance groups (RIG).</p>
+    # @!attribute f_sx_lustre_deletion_policy
+    #   <p>The deletion policy for the Amazon FSx for Lustre file system in the shared environment.</p>
+    #   @return [String]
+    # @!attribute f_sx_lustre_config
+    #   <p>Configuration settings for an Amazon FSx for Lustre file system in the shared environment.</p>
+    #   @return [Types::FSxLustreConfig]
+    class ClusterSharedEnvironmentConfig < Struct.new(
+      nil,
+      :f_sx_lustre_deletion_policy,
+      :f_sx_lustre_config,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The shared environment configuration details for the restricted instance groups (RIG).</p>
+    # @!attribute current_f_sx_lustre_config
+    #   <p>The current Amazon FSx for Lustre file system configuration in the shared environment.</p>
+    #   @return [Types::FSxLustreConfig]
+    # @!attribute desired_f_sx_lustre_config
+    #   <p>The desired Amazon FSx for Lustre file system configuration in the shared environment.</p>
+    #   @return [Types::FSxLustreConfig]
+    # @!attribute current_f_sx_lustre_deletion_policy
+    #   <p>The current deletion policy for the Amazon FSx for Lustre file system in the shared environment.</p>
+    #   @return [String]
+    # @!attribute desired_f_sx_lustre_deletion_policy
+    #   <p>The desired deletion policy for the Amazon FSx for Lustre file system in the shared environment.</p>
+    #   @return [String]
+    class ClusterSharedEnvironmentConfigDetails < Struct.new(
+      nil,
+      :current_f_sx_lustre_config,
+      :desired_f_sx_lustre_config,
+      :current_f_sx_lustre_deletion_policy,
+      :desired_f_sx_lustre_deletion_policy,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The Slurm configuration for an instance group in a SageMaker HyperPod cluster.</p>
+    # @!attribute node_type
+    #   <p>The type of Slurm node for the instance group. Valid values are <code>Controller</code>, <code>Worker</code>, and <code>Login</code>.</p>
+    #   @return [String]
+    # @!attribute partition_names
+    #   <p>The list of Slurm partition names that the instance group belongs to.</p>
+    #   @return [Array<String>]
+    class ClusterSlurmConfig < Struct.new(
+      nil,
+      :node_type,
+      :partition_names,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The Slurm configuration details for an instance group in a SageMaker HyperPod cluster.</p>
+    # @!attribute node_type
+    #   <p>The type of Slurm node for the instance group. Valid values are <code>Controller</code>, <code>Worker</code>, and <code>Login</code>.</p>
+    #   @return [String]
+    # @!attribute partition_names
+    #   <p>The list of Slurm partition names that the instance group belongs to.</p>
+    #   @return [Array<String>]
+    class ClusterSlurmConfigDetails < Struct.new(
+      nil,
+      :node_type,
+      :partition_names,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration options specific to Spot instances.</p>
+    class ClusterSpotOptions < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Lists a summary of the properties of a SageMaker HyperPod cluster.</p>
     # @!attribute cluster_arn
     #   <p>The Amazon Resource Name (ARN) of the SageMaker HyperPod cluster.</p>
@@ -3046,6 +4695,9 @@ module Aws::SageMaker
     # @!attribute training_plan_arns
     #   <p>A list of Amazon Resource Names (ARNs) of the training plans associated with this cluster.</p> <p>For more information about how to reserve GPU capacity for your SageMaker HyperPod clusters using Amazon SageMaker Training Plan, see <code> <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingPlan.html">CreateTrainingPlan</a> </code>.</p>
     #   @return [Array<String>]
+    # @!attribute image_version_status
+    #   <p>The aggregate status of the image version across the cluster's instance groups.</p>
+    #   @return [String]
     class ClusterSummary < Struct.new(
       nil,
       :cluster_arn,
@@ -3053,6 +4705,7 @@ module Aws::SageMaker
       :creation_time,
       :cluster_status,
       :training_plan_arns,
+      :image_version_status,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3313,6 +4966,9 @@ module Aws::SageMaker
     # @!attribute memory_in_gi_b
     #   <p>The amount of memory in GiB to allocate. If you specify a value only for this parameter, SageMaker AI automatically allocates a ratio-based value for vCPU based on this memory that you provide. For example, if you allocate 200 out of 400 total memory in GiB, SageMaker AI uses the ratio of 0.5 and allocates values to vCPU. Accelerators are set to 0.</p>
     #   @return [Float]
+    # @!attribute accelerator_partition
+    #   <p>The accelerator partition configuration for fractional GPU allocation.</p>
+    #   @return [Types::AcceleratorPartitionConfig]
     class ComputeQuotaResourceConfig < Struct.new(
       nil,
       :instance_type,
@@ -3320,6 +4976,7 @@ module Aws::SageMaker
       :accelerators,
       :v_cpu,
       :memory_in_gi_b,
+      :accelerator_partition,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3470,6 +5127,9 @@ module Aws::SageMaker
     # @!attribute multi_model_config
     #   <p>Specifies additional configuration for multi-model endpoints.</p>
     #   @return [Types::MultiModelConfig]
+    # @!attribute container_metrics_config
+    #   <p>The configuration for container metrics scraping. Specifies the metrics endpoint path and publishing frequency. If not specified when <code>EnableDetailedObservability</code> is <code>True</code>, the default path <code>/metrics</code> on port <code>8080</code> is used. For first-party and Deep Learning Containers (DLC), the endpoint path is determined automatically and this configuration is optional.</p>
+    #   @return [Types::ContainerMetricsConfig]
     class ContainerDefinition < Struct.new(
       nil,
       :container_hostname,
@@ -3483,6 +5143,19 @@ module Aws::SageMaker
       :model_package_name,
       :inference_specification_name,
       :multi_model_config,
+      :container_metrics_config,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration for container-level metrics scraping. Use this configuration to specify a custom metrics endpoint path and publishing frequency for container metrics. When <code>EnableDetailedObservability</code> is set to <code>True</code> in <code>MetricsConfig</code>, metrics are scraped from the container's Prometheus endpoint. If this configuration is not provided, the default path <code>/metrics</code> on port <code>8080</code> is used with a default publishing frequency of <code>60</code> seconds. For first-party and Deep Learning Containers (DLC), the endpoint path is determined automatically and this configuration is optional.</p>
+    # @!attribute metrics_endpoints
+    #   <p>A list of metrics endpoints to scrape from the container. Each endpoint specifies the path where the container exposes Prometheus-formatted metrics and the frequency at which to publish them. You can specify a maximum of 1 endpoint.</p>
+    #   @return [Array<Types::MetricsEndpoint>]
+    class ContainerMetricsConfig < Struct.new(
+      nil,
+      :metrics_endpoints,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3587,6 +5260,148 @@ module Aws::SageMaker
     class ConvergenceDetected < Struct.new(
       nil,
       :complete_on_convergence,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute ai_benchmark_job_name
+    #   <p>The name of the AI benchmark job. The name must be unique within your Amazon Web Services account in the current Amazon Web Services Region.</p>
+    #   @return [String]
+    # @!attribute benchmark_target
+    #   <p>The target endpoint to benchmark. Specify a SageMaker endpoint by providing its name or Amazon Resource Name (ARN).</p>
+    #   @return [Types::AIBenchmarkTarget]
+    # @!attribute output_config
+    #   <p>The output configuration for the benchmark job, including the Amazon S3 location where benchmark results are stored.</p>
+    #   @return [Types::AIBenchmarkOutputConfig]
+    # @!attribute ai_workload_config_identifier
+    #   <p>The name or Amazon Resource Name (ARN) of the AI workload configuration to use for this benchmark job.</p>
+    #   @return [String]
+    # @!attribute role_arn
+    #   <p>The Amazon Resource Name (ARN) of an IAM role that enables Amazon SageMaker AI to perform tasks on your behalf.</p>
+    #   @return [String]
+    # @!attribute network_config
+    #   <p>The network configuration for the benchmark job, including VPC settings.</p>
+    #   @return [Types::AIBenchmarkNetworkConfig]
+    # @!attribute tags
+    #   <p>The metadata that you apply to Amazon Web Services resources to help you categorize and organize them. Each tag consists of a key and a value, both of which you define.</p>
+    #   @return [Array<Types::Tag>]
+    class CreateAIBenchmarkJobRequest < Struct.new(
+      nil,
+      :ai_benchmark_job_name,
+      :benchmark_target,
+      :output_config,
+      :ai_workload_config_identifier,
+      :role_arn,
+      :network_config,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute ai_benchmark_job_arn
+    #   <p>The Amazon Resource Name (ARN) of the created benchmark job.</p>
+    #   @return [String]
+    class CreateAIBenchmarkJobResponse < Struct.new(
+      nil,
+      :ai_benchmark_job_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute ai_recommendation_job_name
+    #   <p>The name of the AI recommendation job. The name must be unique within your Amazon Web Services account in the current Amazon Web Services Region.</p>
+    #   @return [String]
+    # @!attribute model_source
+    #   <p>The source of the model to optimize. Specify the Amazon S3 location of the model artifacts.</p>
+    #   @return [Types::AIModelSource]
+    # @!attribute output_config
+    #   <p>The output configuration for the recommendation job, including the Amazon S3 location for results and an optional model package group where the optimized model is registered.</p>
+    #   @return [Types::AIRecommendationOutputConfig]
+    # @!attribute ai_workload_config_identifier
+    #   <p>The name or Amazon Resource Name (ARN) of the AI workload configuration to use for this recommendation job.</p>
+    #   @return [String]
+    # @!attribute performance_target
+    #   <p>The performance targets for the recommendation job. Specify constraints on metrics such as time to first token (<code>ttft-ms</code>), <code>throughput</code>, or <code>cost</code>.</p>
+    #   @return [Types::AIRecommendationPerformanceTarget]
+    # @!attribute role_arn
+    #   <p>The Amazon Resource Name (ARN) of an IAM role that enables Amazon SageMaker AI to perform tasks on your behalf.</p>
+    #   @return [String]
+    # @!attribute inference_specification
+    #   <p>The inference framework configuration. Specify the framework (such as LMI or vLLM) for the recommendation job.</p>
+    #   @return [Types::AIRecommendationInferenceSpecification]
+    # @!attribute optimize_model
+    #   <p>Whether to allow model optimization techniques such as quantization, speculative decoding, and kernel tuning. The default is <code>true</code>.</p>
+    #   @return [Boolean]
+    # @!attribute compute_spec
+    #   <p>The compute resource specification for the recommendation job. You can specify up to 3 instance types to consider, and optionally provide capacity reservation configuration.</p>
+    #   @return [Types::AIRecommendationComputeSpec]
+    # @!attribute adapter_source
+    #   <p>The LoRA adapter source for the recommendation job. Specify either a list of model package ARNs or Amazon S3 URIs for your LoRA adapters. When this parameter is absent, the recommendation job runs without LoRA adapter support.</p>
+    #   @return [Types::AIAdapterSource]
+    # @!attribute tags
+    #   <p>The metadata that you apply to Amazon Web Services resources to help you categorize and organize them.</p>
+    #   @return [Array<Types::Tag>]
+    class CreateAIRecommendationJobRequest < Struct.new(
+      nil,
+      :ai_recommendation_job_name,
+      :model_source,
+      :output_config,
+      :ai_workload_config_identifier,
+      :performance_target,
+      :role_arn,
+      :inference_specification,
+      :optimize_model,
+      :compute_spec,
+      :adapter_source,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute ai_recommendation_job_arn
+    #   <p>The Amazon Resource Name (ARN) of the created recommendation job.</p>
+    #   @return [String]
+    class CreateAIRecommendationJobResponse < Struct.new(
+      nil,
+      :ai_recommendation_job_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute ai_workload_config_name
+    #   <p>The name of the AI workload configuration. The name must be unique within your Amazon Web Services account in the current Amazon Web Services Region.</p>
+    #   @return [String]
+    # @!attribute dataset_config
+    #   <p>The dataset configuration for the workload. Specify input data channels with their data sources for benchmark workloads.</p>
+    #   @return [Types::AIDatasetConfig]
+    # @!attribute ai_workload_configs
+    #   <p>The benchmark tool configuration and workload specification. Provide the specification as an inline YAML or JSON string.</p>
+    #   @return [Types::AIWorkloadConfigs]
+    # @!attribute tags
+    #   <p>The metadata that you apply to Amazon Web Services resources to help you categorize and organize them. Each tag consists of a key and a value, both of which you define. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services Resources</a> in the Amazon Web Services General Reference.</p>
+    #   @return [Array<Types::Tag>]
+    class CreateAIWorkloadConfigRequest < Struct.new(
+      nil,
+      :ai_workload_config_name,
+      :dataset_config,
+      :ai_workload_configs,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute ai_workload_config_arn
+    #   <p>The Amazon Resource Name (ARN) of the created AI workload configuration.</p>
+    #   @return [String]
+    class CreateAIWorkloadConfigResponse < Struct.new(
+      nil,
+      :ai_workload_config_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3947,6 +5762,9 @@ module Aws::SageMaker
     # @!attribute restricted_instance_groups
     #   <p>The specialized instance groups for training models like Amazon Nova to be created in the SageMaker HyperPod cluster.</p>
     #   @return [Array<Types::ClusterRestrictedInstanceGroupSpecification>]
+    # @!attribute restricted_instance_groups_config
+    #   <p>The configuration for the restricted instance groups (RIG) in the SageMaker HyperPod cluster.</p>
+    #   @return [Types::ClusterRestrictedInstanceGroupsConfig]
     # @!attribute vpc_config
     #   <p>Specifies the Amazon Virtual Private Cloud (VPC) that is associated with the Amazon SageMaker HyperPod cluster. You can control access to and from your resources by configuring your VPC. For more information, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/infrastructure-give-access.html">Give SageMaker access to resources in your Amazon VPC</a>.</p> <note> <p>When your Amazon VPC and subnets support IPv6, network communications differ based on the cluster orchestration platform:</p> <ul> <li> <p>Slurm-orchestrated clusters automatically configure nodes with dual IPv6 and IPv4 addresses, allowing immediate IPv6 network communications.</p> </li> <li> <p>In Amazon EKS-orchestrated clusters, nodes receive dual-stack addressing, but pods can only use IPv6 when the Amazon EKS cluster is explicitly IPv6-enabled. For information about deploying an IPv6 Amazon EKS cluster, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/deploy-ipv6-cluster.html#_deploy_an_ipv6_cluster_with_eksctl">Amazon EKS IPv6 Cluster Deployment</a>.</p> </li> </ul> <p>Additional resources for IPv6 configuration:</p> <ul> <li> <p>For information about adding IPv6 support to your VPC, see to <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-migrate-ipv6.html">IPv6 Support for VPC</a>.</p> </li> <li> <p>For information about creating a new IPv6-compatible VPC, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/create-vpc.html">Amazon VPC Creation Guide</a>.</p> </li> <li> <p>To configure SageMaker HyperPod with a custom Amazon VPC, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-hyperpod-prerequisites.html#sagemaker-hyperpod-prerequisites-optional-vpc">Custom Amazon VPC Setup for SageMaker HyperPod</a>.</p> </li> </ul> </note>
     #   @return [Types::VpcConfig]
@@ -3954,7 +5772,7 @@ module Aws::SageMaker
     #   <p>Custom tags for managing the SageMaker HyperPod cluster as an Amazon Web Services resource. You can add tags to your cluster in the same way you add them in other Amazon Web Services services that support tagging. To learn more about tagging Amazon Web Services resources in general, see <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/tagging.html">Tagging Amazon Web Services Resources User Guide</a>.</p>
     #   @return [Array<Types::Tag>]
     # @!attribute orchestrator
-    #   <p>The type of orchestrator to use for the SageMaker HyperPod cluster. Currently, the only supported value is <code>"eks"</code>, which is to use an Amazon Elastic Kubernetes Service cluster as the orchestrator.</p>
+    #   <p>The type of orchestrator to use for the SageMaker HyperPod cluster. Currently, supported values are <code>"Eks"</code> and <code>"Slurm"</code>, which is to use an Amazon Elastic Kubernetes Service or Slurm cluster as the orchestrator.</p> <note> <p>If you specify the <code>Orchestrator</code> field, you must provide exactly one orchestrator configuration: either <code>Eks</code> or <code>Slurm</code>. Specifying both or providing an empty configuration returns a validation error.</p> </note>
     #   @return [Types::ClusterOrchestrator]
     # @!attribute node_recovery
     #   <p>The node recovery mode for the SageMaker HyperPod cluster. When set to <code>Automatic</code>, SageMaker HyperPod will automatically reboot or replace faulty nodes when issues are detected. When set to <code>None</code>, cluster administrators will need to manually manage any faulty cluster instances.</p>
@@ -3976,6 +5794,7 @@ module Aws::SageMaker
       :cluster_name,
       :instance_groups,
       :restricted_instance_groups,
+      :restricted_instance_groups_config,
       :vpc_config,
       :tags,
       :orchestrator,
@@ -4001,7 +5820,7 @@ module Aws::SageMaker
     end
 
     # @!attribute name
-    #   <p>Name for the cluster policy.</p>
+    #   <p>The name for the cluster policy. The name must be unique within the SageMaker AI HyperPod cluster specified by <code>ClusterArn</code>. You can use the same name in other clusters within a Region or across Regions.</p>
     #   @return [String]
     # @!attribute cluster_arn
     #   <p>ARN of the cluster.</p>
@@ -4123,7 +5942,7 @@ module Aws::SageMaker
     end
 
     # @!attribute name
-    #   <p>Name to the compute allocation definition.</p>
+    #   <p>The name of the compute allocation definition. The name must be unique within the SageMaker AI HyperPod cluster specified by <code>ClusterArn</code>. You can use the same name in other clusters within a Region or across Regions.</p>
     #   @return [String]
     # @!attribute description
     #   <p>Description of the compute allocation definition.</p>
@@ -4338,6 +6157,9 @@ module Aws::SageMaker
     # @!attribute app_security_group_management
     #   <p>The entity that creates and manages the required security groups for inter-app communication in <code>VPCOnly</code> mode. Required when <code>CreateDomain.AppNetworkAccessType</code> is <code>VPCOnly</code> and <code>DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn</code> is provided. If setting up the domain for use with RStudio, this value must be set to <code>Service</code>.</p>
     #   @return [String]
+    # @!attribute home_efs_file_system_creation
+    #   <p>Indicates whether to create a home EFS file system for the domain. Defaults to <code>Enabled</code>. Set to <code>Disabled</code> to skip EFS creation and reduce domain creation time. You can enable EFS later by calling <code>UpdateDomain</code>.</p>
+    #   @return [String]
     # @!attribute tag_propagation
     #   <p>Indicates whether custom tag propagation is supported for the domain. Defaults to <code>DISABLED</code>.</p>
     #   @return [String]
@@ -4357,6 +6179,7 @@ module Aws::SageMaker
       :home_efs_file_system_kms_key_id,
       :kms_key_id,
       :app_security_group_management,
+      :home_efs_file_system_creation,
       :tag_propagation,
       :default_space_settings,
       keyword_init: true
@@ -4488,7 +6311,7 @@ module Aws::SageMaker
     #   <p>An array of key-value pairs. You can use tags to categorize your Amazon Web Services resources in different ways, for example, by purpose, owner, or environment. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services Resources</a>.</p>
     #   @return [Array<Types::Tag>]
     # @!attribute kms_key_id
-    #   <p>The Amazon Resource Name (ARN) of a Amazon Web Services Key Management Service key that SageMaker uses to encrypt data on the storage volume attached to the ML compute instance that hosts the endpoint.</p> <p>The KmsKeyId can be any of the following formats: </p> <ul> <li> <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> <li> <p>Key ARN: <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> <li> <p>Alias name: <code>alias/ExampleAlias</code> </p> </li> <li> <p>Alias name ARN: <code>arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias</code> </p> </li> </ul> <p>The KMS key policy must grant permission to the IAM role that you specify in your <code>CreateEndpoint</code>, <code>UpdateEndpoint</code> requests. For more information, refer to the Amazon Web Services Key Management Service section<a href="https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html"> Using Key Policies in Amazon Web Services KMS </a> </p> <note> <p>Certain Nitro-based instances include local storage, dependent on the instance type. Local storage volumes are encrypted using a hardware module on the instance. You can't request a <code>KmsKeyId</code> when using an instance type with local storage. If any of the models that you specify in the <code>ProductionVariants</code> parameter use nitro-based instances with local storage, do not specify a value for the <code>KmsKeyId</code> parameter. If you specify a value for <code>KmsKeyId</code> when using any nitro-based instances with local storage, the call to <code>CreateEndpointConfig</code> fails.</p> <p>For a list of instance types that support local instance storage, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html#instance-store-volumes">Instance Store Volumes</a>.</p> <p>For more information about local instance storage encryption, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html">SSD Instance Store Volumes</a>.</p> </note>
+    #   <p>The Amazon Resource Name (ARN) of a Amazon Web Services Key Management Service key that SageMaker uses to encrypt data on the storage volume attached to the ML compute instance that hosts the endpoint.</p> <p>The KmsKeyId can be any of the following formats: </p> <ul> <li> <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> <li> <p>Key ARN: <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> <li> <p>Alias name: <code>alias/ExampleAlias</code> </p> </li> <li> <p>Alias name ARN: <code>arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias</code> </p> </li> </ul> <p>The KMS key policy must grant permission to the IAM role that you specify in your <code>CreateEndpoint</code>, <code>UpdateEndpoint</code> requests. For more information, refer to the Amazon Web Services Key Management Service section<a href="https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html"> Using Key Policies in Amazon Web Services KMS </a> </p> <note> <p>Certain Nitro-based instances include local storage, dependent on the instance type. Local storage volumes are encrypted using a hardware module on the instance. If any of the models that you specify in the <code>ProductionVariants</code> parameter use nitro-based instances with local storage, the <code>KmsKeyId</code> parameter does not encrypt instance local storage.</p> <p>For a list of instance types that support local instance storage, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html#instance-store-volumes">Instance Store Volumes</a>.</p> <p>For more information about local instance storage encryption, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html">SSD Instance Store Volumes</a>.</p> </note>
     #   @return [String]
     # @!attribute async_inference_config
     #   <p>Specifies configuration for how an endpoint performs asynchronous inference. This is a required field in order for your Endpoint to be invoked using <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_runtime_InvokeEndpointAsync.html">InvokeEndpointAsync</a>.</p>
@@ -4508,6 +6331,9 @@ module Aws::SageMaker
     # @!attribute enable_network_isolation
     #   <p>Sets whether all model containers deployed to the endpoint are isolated. If they are, no inbound or outbound network calls can be made to or from the model containers.</p>
     #   @return [Boolean]
+    # @!attribute metrics_config
+    #   <p>The configuration parameters for utilization metrics.</p>
+    #   @return [Types::MetricsConfig]
     class CreateEndpointConfigInput < Struct.new(
       nil,
       :endpoint_config_name,
@@ -4521,6 +6347,7 @@ module Aws::SageMaker
       :execution_role_arn,
       :vpc_config,
       :enable_network_isolation,
+      :metrics_config,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5031,6 +6858,9 @@ module Aws::SageMaker
     # @!attribute specification
     #   <p>Details about the resources to deploy with this inference component, including the model, container, and compute resources.</p>
     #   @return [Types::InferenceComponentSpecification]
+    # @!attribute specifications
+    #   <p>A list of specification objects for the inference component, one per instance type. Use this parameter when you want to deploy a different model or resource configuration for the inference component on each instance type. You can use either this parameter or the singular <code>Specification</code> parameter, but not both.</p>
+    #   @return [Array<Types::InferenceComponentSpecification>]
     # @!attribute runtime_config
     #   <p>Runtime settings for a model that is deployed with an inference component.</p>
     #   @return [Types::InferenceComponentRuntimeConfig]
@@ -5043,6 +6873,7 @@ module Aws::SageMaker
       :endpoint_name,
       :variant_name,
       :specification,
+      :specifications,
       :runtime_config,
       :tags,
       keyword_init: true
@@ -5173,6 +7004,48 @@ module Aws::SageMaker
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute job_name
+    #   <p>The name of the job. The name must be unique within your account and Amazon Web Services Region.</p>
+    #   @return [String]
+    # @!attribute role_arn
+    #   <p>The Amazon Resource Name (ARN) of the IAM role that Amazon SageMaker assumes to perform the job. The role must have the necessary permissions to access the resources required by the job configuration.</p>
+    #   @return [String]
+    # @!attribute job_category
+    #   <p>The category of the job. The category determines the type of workload that the job runs.</p>
+    #   @return [String]
+    # @!attribute job_config_schema_version
+    #   <p>The version of the configuration schema to use for the job configuration document. Use <code>ListJobSchemaVersions</code> to get available schema versions for a job category.</p>
+    #   @return [String]
+    # @!attribute job_config_document
+    #   <p>The JSON configuration document for the job. The document must conform to the schema specified by <code>JobConfigSchemaVersion</code>. Use <code>DescribeJobSchemaVersion</code> to retrieve the schema for validation.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>An array of key-value pairs to apply to the job as tags. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services Resources</a>.</p>
+    #   @return [Array<Types::Tag>]
+    class CreateJobRequest < Struct.new(
+      nil,
+      :job_name,
+      :role_arn,
+      :job_category,
+      :job_config_schema_version,
+      :job_config_document,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute job_arn
+    #   <p>The Amazon Resource Name (ARN) of the job.</p>
+    #   @return [String]
+    class CreateJobResponse < Struct.new(
+      nil,
+      :job_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute labeling_job_name
     #   <p>The name of the labeling job. This name is used to identify the job in a list of labeling jobs. Labeling job names must be unique within an Amazon Web Services account and region. <code>LabelingJobName</code> is not case sensitive. For example, Example-job and example-job are considered the same labeling job name by Ground Truth.</p>
     #   @return [String]
@@ -5231,6 +7104,60 @@ module Aws::SageMaker
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute name
+    #   <p>A string identifying the MLflow app name. This string is not part of the tracking server ARN.</p>
+    #   @return [String]
+    # @!attribute artifact_store_uri
+    #   <p>The S3 URI for a general purpose bucket to use as the MLflow App artifact store.</p>
+    #   @return [String]
+    # @!attribute role_arn
+    #   <p>The Amazon Resource Name (ARN) for an IAM role in your account that the MLflow App uses to access the artifact store in Amazon S3. The role should have the <code>AmazonS3FullAccess</code> permission.</p>
+    #   @return [String]
+    # @!attribute kms_key_id
+    #   <p>The ID of the Amazon Web Services KMS key used to encrypt the data at rest associated with the MLflow App. If you don't specify a value, the MLflow App is not encrypted with a customer-managed key.</p>
+    #   @return [String]
+    # @!attribute model_registration_mode
+    #   <p>Whether to enable or disable automatic registration of new MLflow models to the SageMaker Model Registry. To enable automatic model registration, set this value to <code>AutoModelRegistrationEnabled</code>. To disable automatic model registration, set this value to <code>AutoModelRegistrationDisabled</code>. If not specified, <code>AutomaticModelRegistration</code> defaults to <code>AutoModelRegistrationDisabled</code>.</p>
+    #   @return [String]
+    # @!attribute weekly_maintenance_window_start
+    #   <p>The day and time of the week in Coordinated Universal Time (UTC) 24-hour standard time that weekly maintenance updates are scheduled. For example: TUE:03:30.</p>
+    #   @return [String]
+    # @!attribute account_default_status
+    #   <p>Indicates whether this MLflow app is the default for the entire account.</p>
+    #   @return [String]
+    # @!attribute default_domain_id_list
+    #   <p>List of SageMaker domain IDs for which this MLflow App is used as the default.</p>
+    #   @return [Array<String>]
+    # @!attribute tags
+    #   <p>Tags consisting of key-value pairs used to manage metadata for the MLflow App.</p>
+    #   @return [Array<Types::Tag>]
+    class CreateMlflowAppRequest < Struct.new(
+      nil,
+      :name,
+      :artifact_store_uri,
+      :role_arn,
+      :kms_key_id,
+      :model_registration_mode,
+      :weekly_maintenance_window_start,
+      :account_default_status,
+      :default_domain_id_list,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>The ARN of the MLflow App.</p>
+    #   @return [String]
+    class CreateMlflowAppResponse < Struct.new(
+      nil,
+      :arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute tracking_server_name
     #   <p>A unique string identifying the tracking server name. This string is part of the tracking server ARN.</p>
     #   @return [String]
@@ -5255,6 +7182,12 @@ module Aws::SageMaker
     # @!attribute tags
     #   <p>Tags consisting of key-value pairs used to manage metadata for the tracking server.</p>
     #   @return [Array<Types::Tag>]
+    # @!attribute s3_bucket_owner_account_id
+    #   <p>Expected Amazon Web Services account ID that owns the Amazon S3 bucket for artifact storage. Defaults to caller's account ID if not provided.</p>
+    #   @return [String]
+    # @!attribute s3_bucket_owner_verification
+    #   <p>Enable Amazon S3 Ownership checks when interacting with Amazon S3 buckets from a SageMaker Managed MLflow Tracking Server. Defaults to <code>True</code> if not provided. </p>
+    #   @return [Boolean]
     class CreateMlflowTrackingServerRequest < Struct.new(
       nil,
       :tracking_server_name,
@@ -5265,6 +7198,8 @@ module Aws::SageMaker
       :automatic_model_registration,
       :weekly_maintenance_window_start,
       :tags,
+      :s3_bucket_owner_account_id,
+      :s3_bucket_owner_verification,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5528,11 +7463,15 @@ module Aws::SageMaker
     # @!attribute tags
     #   <p>A list of key value pairs associated with the model group. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services resources</a> in the <i>Amazon Web Services General Reference Guide</i>.</p>
     #   @return [Array<Types::Tag>]
+    # @!attribute managed_configuration
+    #   <p>The managed configuration of the model package group.</p>
+    #   @return [Types::ManagedConfiguration]
     class CreateModelPackageGroupInput < Struct.new(
       nil,
       :model_package_group_name,
       :model_package_group_description,
       :tags,
+      :managed_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5557,6 +7496,9 @@ module Aws::SageMaker
     #   @return [String]
     # @!attribute model_package_description
     #   <p>A description of the model package.</p>
+    #   @return [String]
+    # @!attribute model_package_registration_type
+    #   <p> The package registration type of the model package input. </p>
     #   @return [String]
     # @!attribute inference_specification
     #   <p>Specifies details about inference jobs that you can run with models based on this model package, including the following information:</p> <ul> <li> <p>The Amazon ECR paths of containers that contain the inference code and model artifacts.</p> </li> <li> <p>The instance types that the model package supports for transform jobs and real-time endpoints used for inference.</p> </li> <li> <p>The input and output content formats that the model package supports for inference.</p> </li> </ul>
@@ -5618,11 +7560,15 @@ module Aws::SageMaker
     # @!attribute model_life_cycle
     #   <p> A structure describing the current state of the model in its life cycle. </p>
     #   @return [Types::ModelLifeCycle]
+    # @!attribute managed_storage_type
+    #   <p>The storage type of the model package.</p>
+    #   @return [String]
     class CreateModelPackageInput < Struct.new(
       nil,
       :model_package_name,
       :model_package_group_name,
       :model_package_description,
+      :model_package_registration_type,
       :inference_specification,
       :validation_specification,
       :source_algorithm_specification,
@@ -5643,6 +7589,7 @@ module Aws::SageMaker
       :security_config,
       :model_card,
       :model_life_cycle,
+      :managed_storage_type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5793,7 +7740,7 @@ module Aws::SageMaker
     #   <p>Whether root access is enabled or disabled for users of the notebook instance. The default value is <code>Enabled</code>.</p> <note> <p>Lifecycle configurations need root access to be able to set up a notebook instance. Because of this, lifecycle configurations associated with a notebook instance always run with root access even if you disable root access for users.</p> </note>
     #   @return [String]
     # @!attribute platform_identifier
-    #   <p>The platform identifier of the notebook instance runtime environment.</p>
+    #   <p>The platform identifier of the notebook instance runtime environment. The default value is <code>notebook-al2023-v1</code>.</p>
     #   @return [String]
     # @!attribute instance_metadata_service_configuration
     #   <p>Information on the IMDS configuration of the notebook instance</p>
@@ -5879,6 +7826,9 @@ module Aws::SageMaker
     # @!attribute deployment_instance_type
     #   <p>The type of instance that hosts the optimized model that you create with the optimization job.</p>
     #   @return [String]
+    # @!attribute max_instance_count
+    #   <p>The maximum number of instances to use for the optimization job.</p>
+    #   @return [Integer]
     # @!attribute optimization_environment
     #   <p>The environment variables to set in the model container.</p>
     #   @return [Hash<String, String>]
@@ -5897,18 +7847,23 @@ module Aws::SageMaker
     # @!attribute vpc_config
     #   <p>A VPC in Amazon VPC that your optimized model has access to.</p>
     #   @return [Types::OptimizationVpcConfig]
+    # @!attribute training_plan_arns
+    #   <p>The Amazon Resource Name (ARN) of the training plan to use for this optimization job.</p> <p>When you use reserved capacity from a training plan, the optimization job runs on that reserved capacity instead of on-demand capacity. If you omit this field, the job uses on-demand capacity. You can specify at most one training plan.</p> <p>For more information about how to reserve GPU capacity for your optimization jobs using Amazon SageMaker Training Plans, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/reserve-capacity-with-training-plans.html">Reserve capacity with training plans</a>.</p>
+    #   @return [Array<String>]
     class CreateOptimizationJobRequest < Struct.new(
       nil,
       :optimization_job_name,
       :role_arn,
       :model_source,
       :deployment_instance_type,
+      :max_instance_count,
       :optimization_environment,
       :optimization_configs,
       :output_config,
       :stopping_condition,
       :tags,
       :vpc_config,
+      :training_plan_arns,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5976,11 +7931,17 @@ module Aws::SageMaker
     # @!attribute application_config
     #   <p>Configuration settings for the SageMaker Partner AI App.</p>
     #   @return [Types::PartnerAppConfig]
+    # @!attribute idc_config
+    #   <p>Specifies the Amazon Web Services IAM Identity Center configuration for the SageMaker Partner AI App. Specify this parameter when <code>AuthType</code> is <code>IDC</code>. Apps that use <code>IAM</code> authorization don't use this parameter.</p>
+    #   @return [Types::IdcConfigInput]
     # @!attribute auth_type
-    #   <p>The authorization type that users use to access the SageMaker Partner AI App.</p>
+    #   <p>The authorization type that users use to access the SageMaker Partner AI App. Valid values:</p> <ul> <li> <p> <code>IAM</code>: Users access the SageMaker Partner AI App with their Amazon Web Services IAM identity.</p> </li> <li> <p> <code>IDC</code>: Users access the SageMaker Partner AI App with their Amazon Web Services IAM Identity Center identity. Specify the Identity Center instance to use in <code>IdcConfig</code>.</p> </li> </ul>
     #   @return [String]
     # @!attribute enable_iam_session_based_identity
     #   <p>When set to <code>TRUE</code>, the SageMaker Partner AI App sets the Amazon Web Services IAM session name or the authenticated IAM user as the identity of the SageMaker Partner AI App user.</p>
+    #   @return [Boolean]
+    # @!attribute enable_auto_minor_version_upgrade
+    #   <p>When set to <code>TRUE</code>, the SageMaker Partner AI App is automatically upgraded to the latest minor version during the next scheduled maintenance window, if one is available. Default is <code>FALSE</code>.</p>
     #   @return [Boolean]
     # @!attribute client_token
     #   <p>A unique token that guarantees that the call to this API is idempotent.</p>
@@ -5997,8 +7958,10 @@ module Aws::SageMaker
       :maintenance_config,
       :tier,
       :application_config,
+      :idc_config,
       :auth_type,
       :enable_iam_session_based_identity,
+      :enable_auto_minor_version_upgrade,
       :client_token,
       :tags,
       keyword_init: true
@@ -6106,6 +8069,36 @@ module Aws::SageMaker
     #   <p>The presigned URL.</p>
     #   @return [String]
     class CreatePresignedDomainUrlResponse < Struct.new(
+      nil,
+      :authorized_url,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>The ARN of the MLflow App to connect to your MLflow UI.</p>
+    #   @return [String]
+    # @!attribute expires_in_seconds
+    #   <p>The duration in seconds that your presigned URL is valid. The presigned URL can be used only once.</p>
+    #   @return [Integer]
+    # @!attribute session_expiration_duration_in_seconds
+    #   <p>The duration in seconds that your presigned URL is valid. The presigned URL can be used only once.</p>
+    #   @return [Integer]
+    class CreatePresignedMlflowAppUrlRequest < Struct.new(
+      nil,
+      :arn,
+      :expires_in_seconds,
+      :session_expiration_duration_in_seconds,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute authorized_url
+    #   <p>A presigned URL with an authorization token.</p>
+    #   @return [String]
+    class CreatePresignedMlflowAppUrlResponse < Struct.new(
       nil,
       :authorized_url,
       keyword_init: true
@@ -6440,6 +8433,15 @@ module Aws::SageMaker
     # @!attribute session_chaining_config
     #   <p>Contains information about attribute-based access control (ABAC) for the training job.</p>
     #   @return [Types::SessionChainingConfig]
+    # @!attribute serverless_job_config
+    #   <p> The configuration for serverless training jobs. </p>
+    #   @return [Types::ServerlessJobConfig]
+    # @!attribute mlflow_config
+    #   <p> The MLflow configuration using SageMaker managed MLflow. </p>
+    #   @return [Types::MlflowConfig]
+    # @!attribute model_package_config
+    #   <p> The configuration for the model package. </p>
+    #   @return [Types::ModelPackageConfig]
     class CreateTrainingJobRequest < Struct.new(
       nil,
       :training_job_name,
@@ -6467,6 +8469,9 @@ module Aws::SageMaker
       :remote_debug_config,
       :infra_check_config,
       :session_chaining_config,
+      :serverless_job_config,
+      :mlflow_config,
+      :model_package_config,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6512,6 +8517,56 @@ module Aws::SageMaker
     class CreateTrainingPlanResponse < Struct.new(
       nil,
       :training_plan_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute training_session_name
+    #   <p>The name of the training session.</p>
+    #   @return [String]
+    # @!attribute model_package_group_arn
+    #   <p>The Amazon Resource Name (ARN) of the model package group where checkpoints and fine-tuned model artifacts are published.</p>
+    #   @return [String]
+    # @!attribute lora_config
+    #   <p>The Low-Rank Adaptation (LoRA) configuration for the training session, including the rank and alpha parameters.</p>
+    #   @return [Types::LoraConfig]
+    # @!attribute role_arn
+    #   <p>The Amazon Resource Name (ARN) of the IAM role that Amazon SageMaker assumes to access resources on your behalf. The role must have permissions to access the output S3 path and model package group.</p>
+    #   @return [String]
+    # @!attribute vpc_config
+    #   <p>The Virtual Private Cloud (VPC) configuration for the training session. Specify subnets and security groups to run the training session in your VPC.</p>
+    #   @return [Types::VpcConfig]
+    # @!attribute model_config
+    #   <p>The configuration for the base model, including the model ARN and end-user license agreement (EULA) acceptance.</p>
+    #   @return [Types::TrainingSessionModelConfig]
+    # @!attribute output_config
+    #   <p>The output configuration for the training session, including the S3 location and optional encryption settings.</p>
+    #   @return [Types::TrainingSessionOutputConfig]
+    # @!attribute tags
+    #   <p>An array of key-value pairs to apply to the training session as tags. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services Resources</a>.</p>
+    #   @return [Array<Types::Tag>]
+    class CreateTrainingSessionRequest < Struct.new(
+      nil,
+      :training_session_name,
+      :model_package_group_arn,
+      :lora_config,
+      :role_arn,
+      :vpc_config,
+      :model_config,
+      :output_config,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute training_session_arn
+    #   <p>The Amazon Resource Name (ARN) of the training session.</p>
+    #   @return [String]
+    class CreateTrainingSessionResponse < Struct.new(
+      nil,
+      :training_session_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7102,10 +9157,34 @@ module Aws::SageMaker
     # @!attribute file_system_data_source
     #   <p>The file system that is associated with a channel.</p>
     #   @return [Types::FileSystemDataSource]
+    # @!attribute dataset_source
+    #   <p> The dataset resource that's associated with a channel. </p>
+    #   @return [Types::DatasetSource]
     class DataSource < Struct.new(
       nil,
       :s3_data_source,
       :file_system_data_source,
+      :dataset_source,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Metadata information about a change to the external Slurm accounting database of a HyperPod cluster.</p>
+    # @!attribute rollback_status
+    #   <p>Whether HyperPod restored the previous accounting database configuration after the change failed. Valid values:</p> <ul> <li> <p> <code>NotApplicable</code>: The change failed before HyperPod modified the cluster, for example because the database could not be reached or rejected the credentials, so there was nothing to restore.</p> </li> <li> <p> <code>Reverted</code>: The change failed after it was applied, and HyperPod restored the previous configuration. The cluster continues to use the previous accounting database.</p> </li> <li> <p> <code>RevertFailed</code>: The change failed and HyperPod could not restore the previous configuration, so Slurm accounting on the cluster might not be working.</p> </li> </ul> <p>This field is omitted when the change succeeds.</p>
+    #   @return [String]
+    # @!attribute advisory
+    #   <p>Additional information about a change that succeeded, such as an action to take on the cluster.</p>
+    #   @return [String]
+    # @!attribute failure_message
+    #   <p>An error message describing why the accounting database change failed, and how to resolve it.</p>
+    #   @return [String]
+    class DatabaseConfigurationMetadata < Struct.new(
+      nil,
+      :rollback_status,
+      :advisory,
+      :failure_message,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7134,6 +9213,18 @@ module Aws::SageMaker
       :local_path,
       :data_distribution_type,
       :input_mode,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p> Specifies a dataset source for a channel. </p>
+    # @!attribute dataset_arn
+    #   <p> The Amazon Resource Name (ARN) of the dataset resource. </p>
+    #   @return [String]
+    class DatasetSource < Struct.new(
+      nil,
+      :dataset_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7290,6 +9381,72 @@ module Aws::SageMaker
     class DefaultSpaceStorageSettings < Struct.new(
       nil,
       :default_ebs_storage_settings,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute ai_benchmark_job_name
+    #   <p>The name of the AI benchmark job to delete.</p>
+    #   @return [String]
+    class DeleteAIBenchmarkJobRequest < Struct.new(
+      nil,
+      :ai_benchmark_job_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute ai_benchmark_job_arn
+    #   <p>The Amazon Resource Name (ARN) of the deleted benchmark job.</p>
+    #   @return [String]
+    class DeleteAIBenchmarkJobResponse < Struct.new(
+      nil,
+      :ai_benchmark_job_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute ai_recommendation_job_name
+    #   <p>The name of the AI recommendation job to delete.</p>
+    #   @return [String]
+    class DeleteAIRecommendationJobRequest < Struct.new(
+      nil,
+      :ai_recommendation_job_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute ai_recommendation_job_arn
+    #   <p>The Amazon Resource Name (ARN) of the deleted recommendation job.</p>
+    #   @return [String]
+    class DeleteAIRecommendationJobResponse < Struct.new(
+      nil,
+      :ai_recommendation_job_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute ai_workload_config_name
+    #   <p>The name of the AI workload configuration to delete.</p>
+    #   @return [String]
+    class DeleteAIWorkloadConfigRequest < Struct.new(
+      nil,
+      :ai_workload_config_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute ai_workload_config_arn
+    #   <p>The Amazon Resource Name (ARN) of the deleted AI workload configuration.</p>
+    #   @return [String]
+    class DeleteAIWorkloadConfigResponse < Struct.new(
+      nil,
+      :ai_workload_config_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7805,6 +9962,50 @@ module Aws::SageMaker
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute job_name
+    #   <p>The name of the job to delete.</p>
+    #   @return [String]
+    # @!attribute job_category
+    #   <p>The category of the job to delete.</p>
+    #   @return [String]
+    class DeleteJobRequest < Struct.new(
+      nil,
+      :job_name,
+      :job_category,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class DeleteJobResponse < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>The ARN of the MLflow App to delete.</p>
+    #   @return [String]
+    class DeleteMlflowAppRequest < Struct.new(
+      nil,
+      :arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>The ARN of the deleted MLflow App.</p>
+    #   @return [String]
+    class DeleteMlflowAppResponse < Struct.new(
+      nil,
+      :arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute tracking_server_name
     #   <p>The name of the the tracking server to delete.</p>
     #   @return [String]
@@ -8011,6 +10212,17 @@ module Aws::SageMaker
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute processing_job_name
+    #   <p>The name of the processing job to delete.</p>
+    #   @return [String]
+    class DeleteProcessingJobRequest < Struct.new(
+      nil,
+      :processing_job_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute project_name
     #   <p>The name of the project to delete.</p>
     #   @return [String]
@@ -8064,6 +10276,35 @@ module Aws::SageMaker
     end
 
     class DeleteTagsOutput < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute training_job_name
+    #   <p>The name of the training job to delete.</p>
+    #   @return [String]
+    class DeleteTrainingJobRequest < Struct.new(
+      nil,
+      :training_job_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute training_session_name
+    #   <p>The name of the training session to delete.</p>
+    #   @return [String]
+    class DeleteTrainingSessionRequest < Struct.new(
+      nil,
+      :training_session_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class DeleteTrainingSessionResponse < Struct.new(
       nil,
       keyword_init: true
     )
@@ -8311,6 +10552,208 @@ module Aws::SageMaker
     class DerivedInformation < Struct.new(
       nil,
       :derived_data_input_config,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute ai_benchmark_job_name
+    #   <p>The name of the AI benchmark job to describe.</p>
+    #   @return [String]
+    class DescribeAIBenchmarkJobRequest < Struct.new(
+      nil,
+      :ai_benchmark_job_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute ai_benchmark_job_name
+    #   <p>The name of the AI benchmark job.</p>
+    #   @return [String]
+    # @!attribute ai_benchmark_job_arn
+    #   <p>The Amazon Resource Name (ARN) of the AI benchmark job.</p>
+    #   @return [String]
+    # @!attribute ai_benchmark_job_status
+    #   <p>The status of the AI benchmark job.</p>
+    #   @return [String]
+    # @!attribute failure_reason
+    #   <p>If the benchmark job failed, the reason it failed.</p>
+    #   @return [String]
+    # @!attribute benchmark_target
+    #   <p>The target endpoint that was benchmarked.</p>
+    #   @return [Types::AIBenchmarkTarget]
+    # @!attribute output_config
+    #   <p>The output configuration for the benchmark job, including the Amazon S3 output location and CloudWatch log information.</p>
+    #   @return [Types::AIBenchmarkOutputResult]
+    # @!attribute ai_workload_config_identifier
+    #   <p>The name or Amazon Resource Name (ARN) of the AI workload configuration used for this benchmark job.</p>
+    #   @return [String]
+    # @!attribute role_arn
+    #   <p>The Amazon Resource Name (ARN) of the IAM role used by the benchmark job.</p>
+    #   @return [String]
+    # @!attribute network_config
+    #   <p>The network configuration for the benchmark job.</p>
+    #   @return [Types::AIBenchmarkNetworkConfig]
+    # @!attribute creation_time
+    #   <p>A timestamp that indicates when the benchmark job was created.</p>
+    #   @return [Time]
+    # @!attribute start_time
+    #   <p>A timestamp that indicates when the benchmark job started running.</p>
+    #   @return [Time]
+    # @!attribute end_time
+    #   <p>A timestamp that indicates when the benchmark job completed.</p>
+    #   @return [Time]
+    # @!attribute tags
+    #   <p>The tags associated with the benchmark job.</p>
+    #   @return [Array<Types::Tag>]
+    class DescribeAIBenchmarkJobResponse < Struct.new(
+      nil,
+      :ai_benchmark_job_name,
+      :ai_benchmark_job_arn,
+      :ai_benchmark_job_status,
+      :failure_reason,
+      :benchmark_target,
+      :output_config,
+      :ai_workload_config_identifier,
+      :role_arn,
+      :network_config,
+      :creation_time,
+      :start_time,
+      :end_time,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute ai_recommendation_job_name
+    #   <p>The name of the AI recommendation job to describe.</p>
+    #   @return [String]
+    class DescribeAIRecommendationJobRequest < Struct.new(
+      nil,
+      :ai_recommendation_job_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute ai_recommendation_job_name
+    #   <p>The name of the AI recommendation job.</p>
+    #   @return [String]
+    # @!attribute ai_recommendation_job_arn
+    #   <p>The Amazon Resource Name (ARN) of the AI recommendation job.</p>
+    #   @return [String]
+    # @!attribute ai_recommendation_job_status
+    #   <p>The status of the AI recommendation job.</p>
+    #   @return [String]
+    # @!attribute failure_reason
+    #   <p>If the recommendation job failed, the reason it failed.</p>
+    #   @return [String]
+    # @!attribute model_source
+    #   <p>The source of the model that was analyzed.</p>
+    #   @return [Types::AIModelSource]
+    # @!attribute output_config
+    #   <p>The output configuration for the recommendation job.</p>
+    #   @return [Types::AIRecommendationOutputResult]
+    # @!attribute inference_specification
+    #   <p>The inference framework configuration.</p>
+    #   @return [Types::AIRecommendationInferenceSpecification]
+    # @!attribute ai_workload_config_identifier
+    #   <p>The name or Amazon Resource Name (ARN) of the AI workload configuration used for this recommendation job.</p>
+    #   @return [String]
+    # @!attribute optimize_model
+    #   <p>Whether model optimization techniques were allowed.</p>
+    #   @return [Boolean]
+    # @!attribute performance_target
+    #   <p>The performance targets specified for the recommendation job.</p>
+    #   @return [Types::AIRecommendationPerformanceTarget]
+    # @!attribute recommendations
+    #   <p>The list of optimization recommendations generated by the job. Each recommendation includes optimization details, deployment configuration, expected performance metrics, and the associated benchmark job ARN.</p>
+    #   @return [Array<Types::AIRecommendation>]
+    # @!attribute role_arn
+    #   <p>The Amazon Resource Name (ARN) of the IAM role used by the recommendation job.</p>
+    #   @return [String]
+    # @!attribute compute_spec
+    #   <p>The compute resource specification for the recommendation job.</p>
+    #   @return [Types::AIRecommendationComputeSpec]
+    # @!attribute adapter_source
+    #   <p>The LoRA adapter source that you specified when you created the recommendation job. This field is absent when you created the job without LoRA adapters.</p>
+    #   @return [Types::AIAdapterSource]
+    # @!attribute creation_time
+    #   <p>A timestamp that indicates when the recommendation job was created.</p>
+    #   @return [Time]
+    # @!attribute start_time
+    #   <p>A timestamp that indicates when the recommendation job started running.</p>
+    #   @return [Time]
+    # @!attribute end_time
+    #   <p>A timestamp that indicates when the recommendation job completed.</p>
+    #   @return [Time]
+    # @!attribute tags
+    #   <p>The tags associated with the recommendation job.</p>
+    #   @return [Array<Types::Tag>]
+    class DescribeAIRecommendationJobResponse < Struct.new(
+      nil,
+      :ai_recommendation_job_name,
+      :ai_recommendation_job_arn,
+      :ai_recommendation_job_status,
+      :failure_reason,
+      :model_source,
+      :output_config,
+      :inference_specification,
+      :ai_workload_config_identifier,
+      :optimize_model,
+      :performance_target,
+      :recommendations,
+      :role_arn,
+      :compute_spec,
+      :adapter_source,
+      :creation_time,
+      :start_time,
+      :end_time,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute ai_workload_config_name
+    #   <p>The name of the AI workload configuration to describe.</p>
+    #   @return [String]
+    class DescribeAIWorkloadConfigRequest < Struct.new(
+      nil,
+      :ai_workload_config_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute ai_workload_config_name
+    #   <p>The name of the AI workload configuration.</p>
+    #   @return [String]
+    # @!attribute ai_workload_config_arn
+    #   <p>The Amazon Resource Name (ARN) of the AI workload configuration.</p>
+    #   @return [String]
+    # @!attribute dataset_config
+    #   <p>The dataset configuration for the workload.</p>
+    #   @return [Types::AIDatasetConfig]
+    # @!attribute ai_workload_configs
+    #   <p>The benchmark tool configuration and workload specification.</p>
+    #   @return [Types::AIWorkloadConfigs]
+    # @!attribute tags
+    #   <p>The tags associated with the AI workload configuration.</p>
+    #   @return [Array<Types::Tag>]
+    # @!attribute creation_time
+    #   <p>A timestamp that indicates when the AI workload configuration was created.</p>
+    #   @return [Time]
+    class DescribeAIWorkloadConfigResponse < Struct.new(
+      nil,
+      :ai_workload_config_name,
+      :ai_workload_config_arn,
+      :dataset_config,
+      :ai_workload_configs,
+      :tags,
+      :creation_time,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8950,6 +11393,9 @@ module Aws::SageMaker
     # @!attribute restricted_instance_groups
     #   <p>The specialized instance groups for training models like Amazon Nova to be created in the SageMaker HyperPod cluster.</p>
     #   @return [Array<Types::ClusterRestrictedInstanceGroupDetails>]
+    # @!attribute restricted_instance_groups_config
+    #   <p>The configuration for the restricted instance groups (RIG) in the SageMaker HyperPod cluster.</p>
+    #   @return [Types::ClusterRestrictedInstanceGroupsConfigOutput]
     # @!attribute vpc_config
     #   <p>Specifies an Amazon Virtual Private Cloud (VPC) that your SageMaker jobs, hosted models, and compute resources have access to. You can control access to and from your resources by configuring a VPC. For more information, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/infrastructure-give-access.html">Give SageMaker Access to Resources in your Amazon VPC</a>. </p>
     #   @return [Types::VpcConfig]
@@ -8980,6 +11426,7 @@ module Aws::SageMaker
       :failure_message,
       :instance_groups,
       :restricted_instance_groups,
+      :restricted_instance_groups_config,
       :vpc_config,
       :orchestrator,
       :tiered_storage_config,
@@ -9025,6 +11472,9 @@ module Aws::SageMaker
     # @!attribute failure_reason
     #   <p>Failure reason of the cluster policy.</p>
     #   @return [String]
+    # @!attribute status_details
+    #   <p>Additional details about the status of the cluster policy. This field provides context when the policy is in a non-active state, such as during creation, updates, or if failures occur.</p>
+    #   @return [Hash<String, String>]
     # @!attribute cluster_arn
     #   <p>ARN of the cluster where the cluster policy is applied.</p>
     #   @return [String]
@@ -9054,6 +11504,7 @@ module Aws::SageMaker
       :cluster_scheduler_config_version,
       :status,
       :failure_reason,
+      :status_details,
       :cluster_arn,
       :scheduler_config,
       :description,
@@ -9596,6 +12047,9 @@ module Aws::SageMaker
     # @!attribute app_security_group_management
     #   <p>The entity that creates and manages the required security groups for inter-app communication in <code>VPCOnly</code> mode. Required when <code>CreateDomain.AppNetworkAccessType</code> is <code>VPCOnly</code> and <code>DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn</code> is provided.</p>
     #   @return [String]
+    # @!attribute home_efs_file_system_creation
+    #   <p>Indicates whether a home EFS file system is created for the domain.</p>
+    #   @return [String]
     # @!attribute tag_propagation
     #   <p>Indicates whether custom tag propagation is supported for the domain.</p>
     #   @return [String]
@@ -9625,6 +12079,7 @@ module Aws::SageMaker
       :vpc_id,
       :kms_key_id,
       :app_security_group_management,
+      :home_efs_file_system_creation,
       :tag_propagation,
       :default_space_settings,
       keyword_init: true
@@ -9827,6 +12282,9 @@ module Aws::SageMaker
     # @!attribute enable_network_isolation
     #   <p>Indicates whether all model containers deployed to the endpoint are isolated. If they are, no inbound or outbound network calls can be made to or from the model containers.</p>
     #   @return [Boolean]
+    # @!attribute metrics_config
+    #   <p>The configuration parameters for utilization metrics.</p>
+    #   @return [Types::MetricsConfig]
     class DescribeEndpointConfigOutput < Struct.new(
       nil,
       :endpoint_config_name,
@@ -9841,6 +12299,7 @@ module Aws::SageMaker
       :execution_role_arn,
       :vpc_config,
       :enable_network_isolation,
+      :metrics_config,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -9899,6 +12358,9 @@ module Aws::SageMaker
     # @!attribute shadow_production_variants
     #   <p>An array of <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ProductionVariantSummary.html">ProductionVariantSummary</a> objects, one for each model that you want to host at this endpoint in shadow mode with production traffic replicated from the model specified on <code>ProductionVariants</code>.</p>
     #   @return [Array<Types::ProductionVariantSummary>]
+    # @!attribute metrics_config
+    #   <p>The configuration parameters for utilization metrics.</p>
+    #   @return [Types::MetricsConfig]
     class DescribeEndpointOutput < Struct.new(
       nil,
       :endpoint_name,
@@ -9915,6 +12377,7 @@ module Aws::SageMaker
       :pending_deployment_summary,
       :explainer_config,
       :shadow_production_variants,
+      :metrics_config,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -10652,6 +13115,9 @@ module Aws::SageMaker
     # @!attribute specification
     #   <p>Details about the resources that are deployed with this inference component.</p>
     #   @return [Types::InferenceComponentSpecificationSummary]
+    # @!attribute specifications
+    #   <p>A list of specification summaries for the inference component, one per instance type. This parameter is populated when the inference component was created with multiple specifications. When this parameter is populated, the singular <code>Specification</code> parameter is not returned.</p>
+    #   @return [Array<Types::InferenceComponentSpecificationSummary>]
     # @!attribute runtime_config
     #   <p>Details about the runtime settings for the model that is deployed with the inference component.</p>
     #   @return [Types::InferenceComponentRuntimeConfigSummary]
@@ -10676,6 +13142,7 @@ module Aws::SageMaker
       :variant_name,
       :failure_reason,
       :specification,
+      :specifications,
       :runtime_config,
       :creation_time,
       :last_modified_time,
@@ -10842,6 +13309,118 @@ module Aws::SageMaker
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute job_name
+    #   <p>The name of the job to describe.</p>
+    #   @return [String]
+    # @!attribute job_category
+    #   <p>The category of the job.</p>
+    #   @return [String]
+    class DescribeJobRequest < Struct.new(
+      nil,
+      :job_name,
+      :job_category,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute job_name
+    #   <p>The name of the job.</p>
+    #   @return [String]
+    # @!attribute job_arn
+    #   <p>The Amazon Resource Name (ARN) of the job.</p>
+    #   @return [String]
+    # @!attribute role_arn
+    #   <p>The ARN of the IAM role associated with the job.</p>
+    #   @return [String]
+    # @!attribute job_category
+    #   <p>The category of the job.</p>
+    #   @return [String]
+    # @!attribute job_config_schema_version
+    #   <p>The schema version used for the job configuration document.</p>
+    #   @return [String]
+    # @!attribute job_config_document
+    #   <p>The JSON configuration document for the job.</p>
+    #   @return [String]
+    # @!attribute creation_time
+    #   <p>The date and time that the job was created.</p>
+    #   @return [Time]
+    # @!attribute last_modified_time
+    #   <p>The date and time that the job was last modified.</p>
+    #   @return [Time]
+    # @!attribute end_time
+    #   <p>The date and time that the job ended.</p>
+    #   @return [Time]
+    # @!attribute job_status
+    #   <p>The current status of the job.</p>
+    #   @return [String]
+    # @!attribute secondary_status
+    #   <p>The detailed secondary status of the job, providing more granular information about the job's progress. Secondary statuses may change between releases.</p>
+    #   @return [String]
+    # @!attribute secondary_status_transitions
+    #   <p>A list of secondary status transitions for the job, with timestamps and optional status messages.</p>
+    #   @return [Array<Types::JobSecondaryStatusTransition>]
+    # @!attribute failure_reason
+    #   <p>If the job failed, the reason it failed.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>The tags associated with the job.</p>
+    #   @return [Array<Types::Tag>]
+    class DescribeJobResponse < Struct.new(
+      nil,
+      :job_name,
+      :job_arn,
+      :role_arn,
+      :job_category,
+      :job_config_schema_version,
+      :job_config_document,
+      :creation_time,
+      :last_modified_time,
+      :end_time,
+      :job_status,
+      :secondary_status,
+      :secondary_status_transitions,
+      :failure_reason,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute job_category
+    #   <p>The category of the job schema to describe.</p>
+    #   @return [String]
+    # @!attribute job_config_schema_version
+    #   <p>The version of the schema to retrieve. If not specified, the latest version is returned.</p>
+    #   @return [String]
+    class DescribeJobSchemaVersionRequest < Struct.new(
+      nil,
+      :job_category,
+      :job_config_schema_version,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute job_category
+    #   <p>The category of the job schema.</p>
+    #   @return [String]
+    # @!attribute job_config_schema_version
+    #   <p>The version of the schema.</p>
+    #   @return [String]
+    # @!attribute job_config_schema
+    #   <p>The JSON schema document that defines the structure of the job configuration.</p>
+    #   @return [String]
+    class DescribeJobSchemaVersionResponse < Struct.new(
+      nil,
+      :job_category,
+      :job_config_schema_version,
+      :job_config_schema,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute labeling_job_name
     #   <p>The name of the labeling job to return information for.</p>
     #   @return [String]
@@ -10982,6 +13561,88 @@ module Aws::SageMaker
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute arn
+    #   <p>The ARN of the MLflow App for which to get information.</p>
+    #   @return [String]
+    class DescribeMlflowAppRequest < Struct.new(
+      nil,
+      :arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>The ARN of the MLflow App.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the MLflow App.</p>
+    #   @return [String]
+    # @!attribute artifact_store_uri
+    #   <p>The S3 URI of the general purpose bucket used as the MLflow App artifact store.</p>
+    #   @return [String]
+    # @!attribute mlflow_version
+    #   <p>The MLflow version used.</p>
+    #   @return [String]
+    # @!attribute role_arn
+    #   <p>The Amazon Resource Name (ARN) for an IAM role in your account that the MLflow App uses to access the artifact store in Amazon S3.</p>
+    #   @return [String]
+    # @!attribute kms_key_id
+    #   <p>The ID of the Amazon Web Services KMS key used to encrypt the data at rest associated with the MLflow App. This field is absent if the MLflow App is not encrypted with a customer-managed key.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current creation status of the described MLflow App.</p>
+    #   @return [String]
+    # @!attribute model_registration_mode
+    #   <p>Whether automatic registration of new MLflow models to the SageMaker Model Registry is enabled.</p>
+    #   @return [String]
+    # @!attribute account_default_status
+    #   <p>Indicates whether this MLflow app is the default for the entire account.</p>
+    #   @return [String]
+    # @!attribute default_domain_id_list
+    #   <p>List of SageMaker Domain IDs for which this MLflow App is the default.</p>
+    #   @return [Array<String>]
+    # @!attribute creation_time
+    #   <p>The timestamp when the MLflow App was created.</p>
+    #   @return [Time]
+    # @!attribute created_by
+    #   <p>Information about the user who created or modified a SageMaker resource.</p>
+    #   @return [Types::UserContext]
+    # @!attribute last_modified_time
+    #   <p>The timestamp when the MLflow App was last modified.</p>
+    #   @return [Time]
+    # @!attribute last_modified_by
+    #   <p>Information about the user who created or modified a SageMaker resource.</p>
+    #   @return [Types::UserContext]
+    # @!attribute weekly_maintenance_window_start
+    #   <p>The day and time of the week when weekly maintenance occurs.</p>
+    #   @return [String]
+    # @!attribute maintenance_status
+    #   <p>Current maintenance status of the MLflow App.</p>
+    #   @return [String]
+    class DescribeMlflowAppResponse < Struct.new(
+      nil,
+      :arn,
+      :name,
+      :artifact_store_uri,
+      :mlflow_version,
+      :role_arn,
+      :kms_key_id,
+      :status,
+      :model_registration_mode,
+      :account_default_status,
+      :default_domain_id_list,
+      :creation_time,
+      :created_by,
+      :last_modified_time,
+      :last_modified_by,
+      :weekly_maintenance_window_start,
+      :maintenance_status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute tracking_server_name
     #   <p>The name of the MLflow Tracking Server to describe.</p>
     #   @return [String]
@@ -11041,6 +13702,12 @@ module Aws::SageMaker
     # @!attribute last_modified_by
     #   <p>Information about the user who created or modified a SageMaker resource.</p>
     #   @return [Types::UserContext]
+    # @!attribute s3_bucket_owner_account_id
+    #   <p>Expected Amazon Web Services account ID that owns the Amazon S3 bucket for artifact storage.</p>
+    #   @return [String]
+    # @!attribute s3_bucket_owner_verification
+    #   <p>Whether Amazon S3 Bucket Ownership checks are enabled whenever the tracking server interacts with Amazon Amazon S3.</p>
+    #   @return [Boolean]
     class DescribeMlflowTrackingServerResponse < Struct.new(
       nil,
       :tracking_server_arn,
@@ -11059,6 +13726,8 @@ module Aws::SageMaker
       :created_by,
       :last_modified_time,
       :last_modified_by,
+      :s3_bucket_owner_account_id,
+      :s3_bucket_owner_verification,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -11190,10 +13859,14 @@ module Aws::SageMaker
     # @!attribute model_card_version
     #   <p>The version of the model card to describe. If a version is not provided, then the latest version of the model card is described.</p>
     #   @return [Integer]
+    # @!attribute included_data
+    #   <p>Specifies the level of model card data to include in the response. Use this parameter to call <code>DescribeModelCard</code> without requiring <code>kms:Decrypt</code> permission on the customer-managed Amazon Web Services KMS key.</p> <ul> <li> <p> <code>AllData</code>: Returns the full model card <code>Content</code>. This option requires <code>kms:Decrypt</code> permission on the customer-managed key, if one is associated with the model card. This is the default.</p> </li> <li> <p> <code>MetadataOnly</code>: Returns the model card with sanitized <code>Content</code> that includes only a small set of unencrypted metadata fields. This option does not require <code>kms:Decrypt</code> permission. For the list of fields preserved in the response, see <code>Content</code>.</p> </li> </ul> <p>If you don't specify a value, SageMaker returns <code>AllData</code>.</p>
+    #   @return [String]
     class DescribeModelCardRequest < Struct.new(
       nil,
       :model_card_name,
       :model_card_version,
+      :included_data,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -11209,7 +13882,7 @@ module Aws::SageMaker
     #   <p>The version of the model card.</p>
     #   @return [Integer]
     # @!attribute content
-    #   <p>The content of the model card.</p>
+    #   <p>The content of the model card. Content is provided as a string in the <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/model-cards.html#model-cards-json-schema">model card JSON schema</a>.</p> <p>When you set <code>IncludedData</code> to <code>MetadataOnly</code> in the request, SageMaker returns a sanitized version of <code>Content</code> that includes only the following JSON paths, when present in the model card:</p> <ul> <li> <p> <code>model_overview.model_id</code> </p> </li> <li> <p> <code>model_overview.model_name</code> </p> </li> <li> <p> <code>intended_uses.risk_rating</code> </p> </li> <li> <p> <code>model_package_details.model_package_group_name</code> </p> </li> <li> <p> <code>model_package_details.model_package_arn</code> </p> </li> </ul> <p>All other fields are removed from <code>Content</code> when <code>IncludedData</code> is <code>MetadataOnly</code>, including model description, training details, evaluation details, business details, and additional information. To retrieve the complete <code>Content</code>, set <code>IncludedData</code> to <code>AllData</code> or omit the parameter.</p>
     #   @return [String]
     # @!attribute model_card_status
     #   <p>The approval status of the model card within your organization. Different organizations might have different criteria for model card review and approval.</p> <ul> <li> <p> <code>Draft</code>: The model card is a work in progress.</p> </li> <li> <p> <code>PendingReview</code>: The model card is pending review.</p> </li> <li> <p> <code>Approved</code>: The model card is approved.</p> </li> <li> <p> <code>Archived</code>: The model card is archived. No more updates should be made to the model card, but it can still be exported.</p> </li> </ul>
@@ -11399,6 +14072,9 @@ module Aws::SageMaker
     # @!attribute model_package_group_status
     #   <p>The status of the model group.</p>
     #   @return [String]
+    # @!attribute managed_configuration
+    #   <p>The managed configuration of the model package group.</p>
+    #   @return [Types::ManagedConfiguration]
     class DescribeModelPackageGroupOutput < Struct.new(
       nil,
       :model_package_group_name,
@@ -11407,6 +14083,7 @@ module Aws::SageMaker
       :creation_time,
       :created_by,
       :model_package_group_status,
+      :managed_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -11415,9 +14092,13 @@ module Aws::SageMaker
     # @!attribute model_package_name
     #   <p>The name or Amazon Resource Name (ARN) of the model package to describe.</p> <p>When you specify a name, the name must have 1 to 63 characters. Valid characters are a-z, A-Z, 0-9, and - (hyphen).</p>
     #   @return [String]
+    # @!attribute included_data
+    #   <p>Specifies the level of model package data to include in the response. Use this parameter to call <code>DescribeModelPackage</code> on a model package that has an associated model card without requiring <code>kms:Decrypt</code> permission on the customer-managed KMS key associated with the embedded model card.</p> <ul> <li> <p> <code>AllData</code>: Returns the full model package response, including the unredacted <code>ModelCard.ModelCardContent</code>. This option requires <code>kms:Decrypt</code> permission on the customer-managed key, if one is associated with the embedded model card. This is the default.</p> </li> <li> <p> <code>MetadataOnly</code>: Returns the full model package response, but with the embedded <code>ModelCard.ModelCardContent</code> sanitized to include only a small set of unencrypted metadata fields. This option does not require <code>kms:Decrypt</code> permission. All other top-level response fields, including <code>InferenceSpecification</code>, <code>ModelMetrics</code>, <code>DriftCheckBaselines</code>, and <code>SecurityConfig</code>, are returned unchanged. For the list of fields preserved within <code>ModelCardContent</code>, see <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeModelPackage.html#sagemaker-DescribeModelPackage-response-ModelCard">ModelCard</a>.</p> </li> </ul> <p>If you don't specify a value, SageMaker returns <code>AllData</code>.</p>
+    #   @return [String]
     class DescribeModelPackageInput < Struct.new(
       nil,
       :model_package_name,
+      :included_data,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -11432,6 +14113,9 @@ module Aws::SageMaker
     # @!attribute model_package_version
     #   <p>The version of the model package.</p>
     #   @return [Integer]
+    # @!attribute model_package_registration_type
+    #   <p> The package registration type of the model package output. </p>
+    #   @return [String]
     # @!attribute model_package_arn
     #   <p>The Amazon Resource Name (ARN) of the model package.</p>
     #   @return [String]
@@ -11508,16 +14192,20 @@ module Aws::SageMaker
     #   <p>The KMS Key ID (<code>KMSKeyId</code>) used for encryption of model package information.</p>
     #   @return [Types::ModelPackageSecurityConfig]
     # @!attribute model_card
-    #   <p>The model card associated with the model package. Since <code>ModelPackageModelCard</code> is tied to a model package, it is a specific usage of a model card and its schema is simplified compared to the schema of <code>ModelCard</code>. The <code>ModelPackageModelCard</code> schema does not include <code>model_package_details</code>, and <code>model_overview</code> is composed of the <code>model_creator</code> and <code>model_artifact</code> properties. For more information about the model package model card schema, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html#model-card-schema">Model package model card schema</a>. For more information about the model card associated with the model package, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html">View the Details of a Model Version</a>.</p>
+    #   <p>The model card associated with the model package. Since <code>ModelPackageModelCard</code> is tied to a model package, it is a specific usage of a model card and its schema is simplified compared to the schema of <code>ModelCard</code>. The <code>ModelPackageModelCard</code> schema does not include <code>model_package_details</code>, and <code>model_overview</code> is composed of the <code>model_creator</code> and <code>model_artifact</code> properties. For more information about the model package model card schema, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html#model-card-schema">Model package model card schema</a>. For more information about the model card associated with the model package, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html">View the Details of a Model Version</a>.</p> <p>When you set <code>IncludedData</code> to <code>MetadataOnly</code> in the request, <code>ModelCardStatus</code> is preserved and <code>ModelCardContent</code> is sanitized to include only the following JSON paths, when present in the model card:</p> <ul> <li> <p> <code>model_overview.model_id</code> </p> </li> <li> <p> <code>model_overview.model_name</code> </p> </li> <li> <p> <code>intended_uses.risk_rating</code> </p> </li> <li> <p> <code>model_package_details.model_package_group_name</code> </p> </li> <li> <p> <code>model_package_details.model_package_arn</code> </p> </li> </ul> <p>Because the <code>ModelPackageModelCard</code> schema does not include <code>model_package_details</code> and limits <code>model_overview</code> to <code>model_creator</code> and <code>model_artifact</code>, the sanitized <code>ModelCardContent</code> for a model package typically contains only <code>intended_uses.risk_rating</code> if it was provided when the model card was created. To retrieve the complete <code>ModelCardContent</code>, set <code>IncludedData</code> to <code>AllData</code> or omit the parameter.</p>
     #   @return [Types::ModelPackageModelCard]
     # @!attribute model_life_cycle
     #   <p> A structure describing the current state of the model in its life cycle. </p>
     #   @return [Types::ModelLifeCycle]
+    # @!attribute managed_storage_type
+    #   <p>The storage type of the model package.</p>
+    #   @return [String]
     class DescribeModelPackageOutput < Struct.new(
       nil,
       :model_package_name,
       :model_package_group_name,
       :model_package_version,
+      :model_package_registration_type,
       :model_package_arn,
       :model_package_description,
       :creation_time,
@@ -11545,6 +14233,7 @@ module Aws::SageMaker
       :security_config,
       :model_card,
       :model_life_cycle,
+      :managed_storage_type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -11866,6 +14555,9 @@ module Aws::SageMaker
     # @!attribute deployment_instance_type
     #   <p>The type of instance that hosts the optimized model that you create with the optimization job.</p>
     #   @return [String]
+    # @!attribute max_instance_count
+    #   <p>The maximum number of instances to use for the optimization job.</p>
+    #   @return [Integer]
     # @!attribute optimization_configs
     #   <p>Settings for each of the optimization techniques that the job applies.</p>
     #   @return [Array<Types::OptimizationConfig>]
@@ -11884,6 +14576,9 @@ module Aws::SageMaker
     # @!attribute vpc_config
     #   <p>A VPC in Amazon VPC that your optimized model has access to.</p>
     #   @return [Types::OptimizationVpcConfig]
+    # @!attribute training_plan_arns
+    #   <p>The Amazon Resource Name (ARN) of the training plan associated with this optimization job. This field appears only when you specified a training plan when you created the job. Optimization jobs that use on-demand capacity don't return this field.</p>
+    #   @return [Array<String>]
     class DescribeOptimizationJobResponse < Struct.new(
       nil,
       :optimization_job_arn,
@@ -11897,12 +14592,14 @@ module Aws::SageMaker
       :model_source,
       :optimization_environment,
       :deployment_instance_type,
+      :max_instance_count,
       :optimization_configs,
       :output_config,
       :optimization_output,
       :role_arn,
       :stopping_condition,
       :vpc_config,
+      :training_plan_arns,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -11911,9 +14608,13 @@ module Aws::SageMaker
     # @!attribute arn
     #   <p>The ARN of the SageMaker Partner AI App to describe.</p>
     #   @return [String]
+    # @!attribute include_available_upgrade
+    #   <p>When set to <code>TRUE</code>, the response includes available upgrade information for the SageMaker Partner AI App. Default is <code>FALSE</code>.</p>
+    #   @return [Boolean]
     class DescribePartnerAppRequest < Struct.new(
       nil,
       :arn,
+      :include_available_upgrade,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -11959,7 +14660,7 @@ module Aws::SageMaker
     #   <p>Configuration settings for the SageMaker Partner AI App.</p>
     #   @return [Types::PartnerAppConfig]
     # @!attribute auth_type
-    #   <p>The authorization type that users use to access the SageMaker Partner AI App.</p>
+    #   <p>The authorization type that users use to access the SageMaker Partner AI App. Valid values:</p> <ul> <li> <p> <code>IAM</code>: Users access the SageMaker Partner AI App with their Amazon Web Services IAM identity.</p> </li> <li> <p> <code>IDC</code>: Users access the SageMaker Partner AI App with their Amazon Web Services IAM Identity Center identity.</p> </li> </ul>
     #   @return [String]
     # @!attribute enable_iam_session_based_identity
     #   <p>When set to <code>TRUE</code>, the SageMaker Partner AI App sets the Amazon Web Services IAM session name or the authenticated IAM user as the identity of the SageMaker Partner AI App user.</p>
@@ -11967,6 +14668,18 @@ module Aws::SageMaker
     # @!attribute error
     #   <p>This is an error field object that contains the error code and the reason for an operation failure.</p>
     #   @return [Types::ErrorInfo]
+    # @!attribute enable_auto_minor_version_upgrade
+    #   <p>Indicates whether the SageMaker Partner AI App is configured for automatic minor version upgrades during scheduled maintenance windows.</p>
+    #   @return [Boolean]
+    # @!attribute current_version_eol_date
+    #   <p>The end-of-life date for the current version of the SageMaker Partner AI App.</p>
+    #   @return [Time]
+    # @!attribute available_upgrade
+    #   <p>A map of available minor version upgrades for the SageMaker Partner AI App. The key is the semantic version number, and the value is a list of release notes for that version. A null value indicates no upgrades are available.</p>
+    #   @return [Types::AvailableUpgrade]
+    # @!attribute idc_config
+    #   <p>Contains the Amazon Web Services IAM Identity Center configuration for the SageMaker Partner AI App, including the Identity Center instance and the Identity Center application that SageMaker creates for the app. The service returns this field for apps that use <code>IDC</code> authorization.</p>
+    #   @return [Types::IdcConfigOutput]
     class DescribePartnerAppResponse < Struct.new(
       nil,
       :arn,
@@ -11985,6 +14698,10 @@ module Aws::SageMaker
       :auth_type,
       :enable_iam_session_based_identity,
       :error,
+      :enable_auto_minor_version_upgrade,
+      :current_version_eol_date,
+      :available_upgrade,
+      :idc_config,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -12069,6 +14786,9 @@ module Aws::SageMaker
     # @!attribute pipeline_version_id
     #   <p>The ID of the pipeline version.</p>
     #   @return [Integer]
+    # @!attribute m_lflow_config
+    #   <p> The MLflow configuration of the pipeline execution. </p>
+    #   @return [Types::MLflowConfiguration]
     class DescribePipelineExecutionResponse < Struct.new(
       nil,
       :pipeline_arn,
@@ -12085,6 +14805,7 @@ module Aws::SageMaker
       :parallelism_configuration,
       :selective_execution_config,
       :pipeline_version_id,
+      :m_lflow_config,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -12581,7 +15302,7 @@ module Aws::SageMaker
     #   <p>The status of the training job.</p> <p>SageMaker provides the following training job statuses:</p> <ul> <li> <p> <code>InProgress</code> - The training is in progress.</p> </li> <li> <p> <code>Completed</code> - The training job has completed.</p> </li> <li> <p> <code>Failed</code> - The training job has failed. To see the reason for the failure, see the <code>FailureReason</code> field in the response to a <code>DescribeTrainingJobResponse</code> call.</p> </li> <li> <p> <code>Stopping</code> - The training job is stopping.</p> </li> <li> <p> <code>Stopped</code> - The training job has stopped.</p> </li> </ul> <p>For more detailed information, see <code>SecondaryStatus</code>. </p>
     #   @return [String]
     # @!attribute secondary_status
-    #   <p> Provides detailed information about the state of the training job. For detailed information on the secondary status of the training job, see <code>StatusMessage</code> under <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_SecondaryStatusTransition.html">SecondaryStatusTransition</a>.</p> <p>SageMaker provides primary statuses and secondary statuses that apply to each of them:</p> <dl> <dt>InProgress</dt> <dd> <ul> <li> <p> <code>Starting</code> - Starting the training job.</p> </li> <li> <p> <code>Downloading</code> - An optional stage for algorithms that support <code>File</code> training input mode. It indicates that data is being downloaded to the ML storage volumes.</p> </li> <li> <p> <code>Training</code> - Training is in progress.</p> </li> <li> <p> <code>Interrupted</code> - The job stopped because the managed spot training instances were interrupted. </p> </li> <li> <p> <code>Uploading</code> - Training is complete and the model artifacts are being uploaded to the S3 location.</p> </li> </ul> </dd> <dt>Completed</dt> <dd> <ul> <li> <p> <code>Completed</code> - The training job has completed.</p> </li> </ul> </dd> <dt>Failed</dt> <dd> <ul> <li> <p> <code>Failed</code> - The training job has failed. The reason for the failure is returned in the <code>FailureReason</code> field of <code>DescribeTrainingJobResponse</code>.</p> </li> </ul> </dd> <dt>Stopped</dt> <dd> <ul> <li> <p> <code>MaxRuntimeExceeded</code> - The job stopped because it exceeded the maximum allowed runtime.</p> </li> <li> <p> <code>MaxWaitTimeExceeded</code> - The job stopped because it exceeded the maximum allowed wait time.</p> </li> <li> <p> <code>Stopped</code> - The training job has stopped.</p> </li> </ul> </dd> <dt>Stopping</dt> <dd> <ul> <li> <p> <code>Stopping</code> - Stopping the training job.</p> </li> </ul> </dd> </dl> <important> <p>Valid values for <code>SecondaryStatus</code> are subject to change. </p> </important> <p>We no longer support the following secondary statuses:</p> <ul> <li> <p> <code>LaunchingMLInstances</code> </p> </li> <li> <p> <code>PreparingTraining</code> </p> </li> <li> <p> <code>DownloadingTrainingImage</code> </p> </li> </ul>
+    #   <p> Provides detailed information about the state of the training job. For detailed information on the secondary status of the training job, see <code>StatusMessage</code> under <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_SecondaryStatusTransition.html">SecondaryStatusTransition</a>.</p> <p>SageMaker provides primary statuses and secondary statuses that apply to each of them:</p> <dl> <dt>InProgress</dt> <dd> <ul> <li> <p> <code>Starting</code> - Starting the training job.</p> </li> <li> <p> <code>Pending</code> - The training job is waiting for compute capacity or compute resource provision.</p> </li> <li> <p> <code>Downloading</code> - An optional stage for algorithms that support <code>File</code> training input mode. It indicates that data is being downloaded to the ML storage volumes.</p> </li> <li> <p> <code>Training</code> - Training is in progress.</p> </li> <li> <p> <code>Interrupted</code> - The job stopped because the managed spot training instances were interrupted. </p> </li> <li> <p> <code>Uploading</code> - Training is complete and the model artifacts are being uploaded to the S3 location.</p> </li> </ul> </dd> <dt>Completed</dt> <dd> <ul> <li> <p> <code>Completed</code> - The training job has completed.</p> </li> </ul> </dd> <dt>Failed</dt> <dd> <ul> <li> <p> <code>Failed</code> - The training job has failed. The reason for the failure is returned in the <code>FailureReason</code> field of <code>DescribeTrainingJobResponse</code>.</p> </li> </ul> </dd> <dt>Stopped</dt> <dd> <ul> <li> <p> <code>MaxRuntimeExceeded</code> - The job stopped because it exceeded the maximum allowed runtime.</p> </li> <li> <p> <code>MaxWaitTimeExceeded</code> - The job stopped because it exceeded the maximum allowed wait time.</p> </li> <li> <p> <code>Stopped</code> - The training job has stopped.</p> </li> </ul> </dd> <dt>Stopping</dt> <dd> <ul> <li> <p> <code>Stopping</code> - Stopping the training job.</p> </li> </ul> </dd> </dl> <important> <p>Valid values for <code>SecondaryStatus</code> are subject to change. </p> </important> <p>We no longer support the following secondary statuses:</p> <ul> <li> <p> <code>LaunchingMLInstances</code> </p> </li> <li> <p> <code>PreparingTraining</code> </p> </li> <li> <p> <code>DownloadingTrainingImage</code> </p> </li> </ul>
     #   @return [String]
     # @!attribute failure_reason
     #   <p>If the training job failed, the reason it failed. </p>
@@ -12649,6 +15370,9 @@ module Aws::SageMaker
     # @!attribute billable_time_in_seconds
     #   <p>The billable time in seconds. Billable time refers to the absolute wall-clock time.</p> <p>Multiply <code>BillableTimeInSeconds</code> by the number of instances (<code>InstanceCount</code>) in your training cluster to get the total compute time SageMaker bills you if you run distributed training. The formula is as follows: <code>BillableTimeInSeconds * InstanceCount</code> .</p> <p>You can calculate the savings from using managed spot training using the formula <code>(1 - BillableTimeInSeconds / TrainingTimeInSeconds) * 100</code>. For example, if <code>BillableTimeInSeconds</code> is 100 and <code>TrainingTimeInSeconds</code> is 500, the savings is 80%.</p>
     #   @return [Integer]
+    # @!attribute billable_token_count
+    #   <p> The billable token count for eligible serverless training jobs. </p>
+    #   @return [Integer]
     # @!attribute debug_hook_config
     #   <p>Configuration information for the Amazon SageMaker Debugger hook parameters, metric and tensor collections, and storage paths. To learn more about how to configure the <code>DebugHookConfig</code> parameter, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/debugger-createtrainingjob-api.html">Use the SageMaker and Debugger Configuration API Operations to Create, Update, and Debug Your Training Job</a>.</p>
     #   @return [Types::DebugHookConfig]
@@ -12688,6 +15412,24 @@ module Aws::SageMaker
     # @!attribute infra_check_config
     #   <p>Contains information about the infrastructure health check configuration for the training job.</p>
     #   @return [Types::InfraCheckConfig]
+    # @!attribute serverless_job_config
+    #   <p> The configuration for serverless training jobs. </p>
+    #   @return [Types::ServerlessJobConfig]
+    # @!attribute mlflow_config
+    #   <p> The MLflow configuration using SageMaker managed MLflow. </p>
+    #   @return [Types::MlflowConfig]
+    # @!attribute model_package_config
+    #   <p> The configuration for the model package. </p>
+    #   @return [Types::ModelPackageConfig]
+    # @!attribute mlflow_details
+    #   <p> The MLflow details of this job. </p>
+    #   @return [Types::MlflowDetails]
+    # @!attribute progress_info
+    #   <p> The Serverless training job progress information. </p>
+    #   @return [Types::TrainingProgressInfo]
+    # @!attribute output_model_package_arn
+    #   <p> The Amazon Resource Name (ARN) of the output model package containing model weights or checkpoints. </p>
+    #   @return [String]
     class DescribeTrainingJobResponse < Struct.new(
       nil,
       :training_job_name,
@@ -12720,6 +15462,7 @@ module Aws::SageMaker
       :checkpoint_config,
       :training_time_in_seconds,
       :billable_time_in_seconds,
+      :billable_token_count,
       :debug_hook_config,
       :experiment_config,
       :debug_rule_configurations,
@@ -12733,6 +15476,46 @@ module Aws::SageMaker
       :retry_strategy,
       :remote_debug_config,
       :infra_check_config,
+      :serverless_job_config,
+      :mlflow_config,
+      :model_package_config,
+      :mlflow_details,
+      :progress_info,
+      :output_model_package_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute training_plan_arn
+    #   <p>The Amazon Resource Name (ARN); of the training plan to retrieve extension history for.</p>
+    #   @return [String]
+    # @!attribute next_token
+    #   <p>A token to continue pagination if more results are available.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of extensions to return in the response.</p>
+    #   @return [Integer]
+    class DescribeTrainingPlanExtensionHistoryRequest < Struct.new(
+      nil,
+      :training_plan_arn,
+      :next_token,
+      :max_results,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute training_plan_extensions
+    #   <p>A list of extensions for the specified training plan.</p>
+    #   @return [Array<Types::TrainingPlanExtension>]
+    # @!attribute next_token
+    #   <p>A token to continue pagination if more results are available.</p>
+    #   @return [String]
+    class DescribeTrainingPlanExtensionHistoryResponse < Struct.new(
+      nil,
+      :training_plan_extensions,
+      :next_token,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -12798,7 +15581,7 @@ module Aws::SageMaker
     #   <p>The total number of UltraServers reserved to this training plan.</p>
     #   @return [Integer]
     # @!attribute target_resources
-    #   <p>The target resources (e.g., SageMaker Training Jobs, SageMaker HyperPod) that can use this training plan.</p> <p>Training plans are specific to their target resource.</p> <ul> <li> <p>A training plan designed for SageMaker training jobs can only be used to schedule and run training jobs.</p> </li> <li> <p>A training plan for HyperPod clusters can be used exclusively to provide compute resources to a cluster's instance group.</p> </li> </ul>
+    #   <p>The target resources (e.g., SageMaker Training Jobs, SageMaker HyperPod, SageMaker Endpoints, Studio apps) that can use this training plan.</p> <p>Training plans are specific to their target resource.</p> <ul> <li> <p>A training plan designed for SageMaker training jobs can only be used to schedule and run training jobs.</p> </li> <li> <p>A training plan for HyperPod clusters can be used exclusively to provide compute resources to a cluster's instance group.</p> </li> <li> <p>A training plan for SageMaker endpoints can be used exclusively to provide compute resources to SageMaker endpoints for model deployment.</p> </li> <li> <p>A training plan for Studio apps can be used to launch JupyterLab and Code Editor apps on reserved training plan capacity.</p> </li> </ul>
     #   @return [Array<String>]
     # @!attribute reserved_capacity_summaries
     #   <p>The list of Reserved Capacity providing the underlying compute resources of the plan. </p>
@@ -12823,6 +15606,28 @@ module Aws::SageMaker
       :total_ultra_server_count,
       :target_resources,
       :reserved_capacity_summaries,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute training_session_name
+    #   <p>The name of the training session to describe.</p>
+    #   @return [String]
+    class DescribeTrainingSessionRequest < Struct.new(
+      nil,
+      :training_session_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute training_session_detail
+    #   <p>The detailed information about the training session.</p>
+    #   @return [Types::TrainingSessionDetail]
+    class DescribeTrainingSessionResponse < Struct.new(
+      nil,
+      :training_session_detail,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -13782,6 +16587,30 @@ module Aws::SageMaker
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The configurations and outcomes of an Amazon EMR Serverless step execution.</p>
+    # @!attribute application_id
+    #   <p>The identifier of the Amazon EMR Serverless application.</p>
+    #   @return [String]
+    # @!attribute job_run_id
+    #   <p>The identifier of the Amazon EMR Serverless job run.</p>
+    #   @return [String]
+    # @!attribute job_run_name
+    #   <p>The name of the Amazon EMR Serverless job run.</p>
+    #   @return [String]
+    # @!attribute log_file_path
+    #   <p>The path to the log file for the Amazon EMR Serverless job run.</p>
+    #   @return [String]
+    class EMRServerlessStepMetadata < Struct.new(
+      nil,
+      :application_id,
+      :job_run_id,
+      :job_run_name,
+      :log_file_path,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The configurations and outcomes of an Amazon EMR step execution.</p>
     # @!attribute cluster_id
     #   <p>The identifier of the EMR cluster.</p>
@@ -14565,11 +17394,19 @@ module Aws::SageMaker
     # @!attribute instance
     #   <p>Metadata specific to instance-level events.</p>
     #   @return [Types::InstanceMetadata]
+    # @!attribute database_configuration
+    #   <p>Metadata specific to events about the external Slurm accounting database of the cluster.</p>
+    #   @return [Types::DatabaseConfigurationMetadata]
+    # @!attribute slurm_health
+    #   <p>Metadata specific to events about the health of the Slurm components on the controller node of the cluster.</p>
+    #   @return [Types::SlurmHealthMetadata]
     class EventMetadata < Struct.new(
       :cluster,
       :instance_group,
       :instance_group_scaling,
       :instance,
+      :database_configuration,
+      :slurm_health,
       :unknown,
       keyword_init: true
     )
@@ -14579,6 +17416,8 @@ module Aws::SageMaker
       class InstanceGroup < EventMetadata; end
       class InstanceGroupScaling < EventMetadata; end
       class Instance < EventMetadata; end
+      class DatabaseConfiguration < EventMetadata; end
+      class SlurmHealth < EventMetadata; end
       class Unknown < EventMetadata; end
     end
 
@@ -14721,6 +17560,28 @@ module Aws::SageMaker
     class ExplainerConfig < Struct.new(
       nil,
       :clarify_explainer_config,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute training_plan_extension_offering_id
+    #   <p>The unique identifier of the extension offering to purchase. You can retrieve this ID from the <code>TrainingPlanExtensionOfferings</code> in the response of the <code>SearchTrainingPlanOfferings</code> API.</p>
+    #   @return [String]
+    class ExtendTrainingPlanRequest < Struct.new(
+      nil,
+      :training_plan_extension_offering_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute training_plan_extensions
+    #   <p>The list of extensions for the training plan, including the newly created extension.</p>
+    #   @return [Array<Types::TrainingPlanExtension>]
+    class ExtendTrainingPlanResponse < Struct.new(
+      nil,
+      :training_plan_extensions,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -15134,6 +17995,58 @@ module Aws::SageMaker
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The result of the selector that identifies an iteration of a ForEach step.</p>
+    # @!attribute step_name
+    #   <p>The name of the step associated with the iteration.</p>
+    #   @return [String]
+    # @!attribute index
+    #   <p>The index of the iteration within the ForEach step.</p>
+    #   @return [Integer]
+    class ForEachSelectorResult < Struct.new(
+      nil,
+      :step_name,
+      :index,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The status, the iteration-step counts, and the selector information for a ForEach step execution.</p>
+    # @!attribute status
+    #   <p>The status of the ForEach step execution.</p>
+    #   @return [String]
+    # @!attribute input_item_count
+    #   <p>The number of input items that the ForEach step iterates over.</p>
+    #   @return [Integer]
+    # @!attribute total_step_count
+    #   <p>The total number of steps generated across all iterations of the ForEach step.</p>
+    #   @return [Integer]
+    # @!attribute succeeded_step_count
+    #   <p>The number of iteration steps that completed successfully.</p>
+    #   @return [Integer]
+    # @!attribute failed_step_count
+    #   <p>The number of iteration steps that failed.</p>
+    #   @return [Integer]
+    # @!attribute stopped_step_count
+    #   <p>The number of iteration steps that were stopped.</p>
+    #   @return [Integer]
+    # @!attribute selector
+    #   <p>Identifies the body step and iteration selected within the ForEach step.</p>
+    #   @return [Types::ForEachSelectorResult]
+    class ForEachStepMetadata < Struct.new(
+      nil,
+      :status,
+      :input_item_count,
+      :total_step_count,
+      :succeeded_step_count,
+      :failed_step_count,
+      :stopped_step_count,
+      :selector,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The generative AI settings for the SageMaker Canvas application.</p> <p>Configure these settings for Canvas users starting chats with generative AI foundation models. For more information, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/canvas-fm-chat.html"> Use generative AI with foundation models</a>.</p>
     # @!attribute amazon_bedrock_role_arn
     #   <p>The ARN of an Amazon Web Services IAM role that allows fine-tuning of large language models (LLMs) in Amazon Bedrock. The IAM role should have Amazon S3 read and write permissions, as well as a trust relationship that establishes <code>bedrock.amazonaws.com</code> as a service principal.</p>
@@ -15417,6 +18330,98 @@ module Aws::SageMaker
     class HubAccessConfig < Struct.new(
       nil,
       :hub_content_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains information about a hub content resource, including its name, version, type, associated documents, dependencies, and status, as returned by a search result.</p>
+    # @!attribute hub_content_name
+    #   <p>The name of the hub content.</p>
+    #   @return [String]
+    # @!attribute hub_content_arn
+    #   <p>The Amazon Resource Name (ARN) of the hub content.</p>
+    #   @return [String]
+    # @!attribute hub_content_version
+    #   <p>The version of the hub content.</p>
+    #   @return [String]
+    # @!attribute hub_content_type
+    #   <p>The type of hub content.</p>
+    #   @return [String]
+    # @!attribute document_schema_version
+    #   <p>The document schema version for the hub content.</p>
+    #   @return [String]
+    # @!attribute hub_name
+    #   <p>The name of the hub that contains the content.</p>
+    #   @return [String]
+    # @!attribute hub_arn
+    #   <p>The Amazon Resource Name (ARN) of the hub that contains the content.</p>
+    #   @return [String]
+    # @!attribute hub_content_display_name
+    #   <p>The display name of the hub content.</p>
+    #   @return [String]
+    # @!attribute hub_content_description
+    #   <p>A description of the hub content.</p>
+    #   @return [String]
+    # @!attribute hub_content_markdown
+    #   <p>A string that provides a description of the hub content. This string can include links, tables, and standard markdown formatting.</p>
+    #   @return [String]
+    # @!attribute hub_content_document
+    #   <p>The hub content document that describes information about the hub content such as type, associated containers, scripts, and more.</p>
+    #   @return [String]
+    # @!attribute sage_maker_public_hub_content_arn
+    #   <p>The Amazon Resource Name (ARN) of the public hub content.</p>
+    #   @return [String]
+    # @!attribute reference_min_version
+    #   <p>The minimum version of the hub content.</p>
+    #   @return [String]
+    # @!attribute support_status
+    #   <p>The support status of the hub content.</p>
+    #   @return [String]
+    # @!attribute hub_content_search_keywords
+    #   <p>The searchable keywords for the hub content.</p>
+    #   @return [Array<String>]
+    # @!attribute hub_content_dependencies
+    #   <p>The location of any dependencies that the hub content has, such as scripts, model artifacts, datasets, or notebooks.</p>
+    #   @return [Array<Types::HubContentDependency>]
+    # @!attribute hub_content_status
+    #   <p>The status of the hub content.</p>
+    #   @return [String]
+    # @!attribute failure_reason
+    #   <p>The failure reason if importing hub content failed.</p>
+    #   @return [String]
+    # @!attribute creation_time
+    #   <p>The date and time that hub content was created.</p>
+    #   @return [Time]
+    # @!attribute last_modified_time
+    #   <p>The last modified time of the hub content.</p>
+    #   @return [Time]
+    # @!attribute tags
+    #   <p>Any tags associated with the hub content.</p>
+    #   @return [Array<Types::Tag>]
+    class HubContent < Struct.new(
+      nil,
+      :hub_content_name,
+      :hub_content_arn,
+      :hub_content_version,
+      :hub_content_type,
+      :document_schema_version,
+      :hub_name,
+      :hub_arn,
+      :hub_content_display_name,
+      :hub_content_description,
+      :hub_content_markdown,
+      :hub_content_document,
+      :sage_maker_public_hub_content_arn,
+      :reference_min_version,
+      :support_status,
+      :hub_content_search_keywords,
+      :hub_content_dependencies,
+      :hub_content_status,
+      :failure_reason,
+      :creation_time,
+      :last_modified_time,
+      :tags,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -16246,6 +19251,34 @@ module Aws::SageMaker
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Specifies the Amazon Web Services IAM Identity Center configuration to use for a SageMaker Partner AI App that uses <code>IDC</code> authorization.</p>
+    # @!attribute instance_arn
+    #   <p>The ARN of the Amazon Web Services IAM Identity Center instance that the SageMaker Partner AI App uses to authenticate users.</p>
+    #   @return [String]
+    class IdcConfigInput < Struct.new(
+      nil,
+      :instance_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the Amazon Web Services IAM Identity Center configuration of a SageMaker Partner AI App that uses <code>IDC</code> authorization.</p>
+    # @!attribute instance_arn
+    #   <p>The ARN of the Amazon Web Services IAM Identity Center instance that the SageMaker Partner AI App uses to authenticate users.</p>
+    #   @return [String]
+    # @!attribute application_arn
+    #   <p>The ARN of the Amazon Web Services IAM Identity Center application that SageMaker creates for the SageMaker Partner AI App.</p>
+    #   @return [String]
+    class IdcConfigOutput < Struct.new(
+      nil,
+      :instance_arn,
+      :application_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The Amazon SageMaker Canvas application setting where you configure OAuth for connecting to an external data source, such as Snowflake.</p>
     # @!attribute data_source_name
     #   <p>The name of the data source that you're connecting to. Canvas currently supports OAuth for Snowflake and Salesforce Data Cloud.</p>
@@ -16464,6 +19497,22 @@ module Aws::SageMaker
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Configuration for balancing inference component copies across Availability Zones.</p>
+    # @!attribute enforcement_mode
+    #   <p>Determines how strictly the Availability Zone balance constraint is enforced.</p> <dl> <dt>PERMISSIVE</dt> <dd> <p>The endpoint attempts to balance copies across Availability Zones but proceeds with scheduling even if balance can't be achieved due to available capacity or instance distribution across Availability Zones.</p> </dd> </dl>
+    #   @return [String]
+    # @!attribute max_imbalance
+    #   <p>The maximum allowed difference in the number of inference component copies between any two Availability Zones. This parameter applies only when the endpoint has instances across two or more Availability Zones. A copy placement is allowed if it reduces imbalance or the resulting imbalance is within this value.</p> <p>Default value: <code>0</code>.</p>
+    #   @return [Integer]
+    class InferenceComponentAvailabilityZoneBalance < Struct.new(
+      nil,
+      :enforcement_mode,
+      :max_imbalance,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Specifies the type and size of the endpoint capacity to activate for a rolling deployment or a rollback strategy. You can specify your batches as either of the following:</p> <ul> <li> <p>A count of inference component copies </p> </li> <li> <p>The overall percentage or your fleet </p> </li> </ul> <p>For a rollback strategy, if you don't specify the fields in this object, or if you set the <code>Value</code> parameter to 100%, then SageMaker AI uses a blue/green rollback strategy and rolls all traffic back to the blue fleet.</p>
     # @!attribute type
     #   <p>Specifies the endpoint capacity type.</p> <dl> <dt>COPY_COUNT</dt> <dd> <p>The endpoint activates based on the number of inference component copies.</p> </dd> <dt>CAPACITY_PERCENT</dt> <dd> <p>The endpoint activates based on the specified percentage of capacity.</p> </dd> </dl>
@@ -16514,11 +19563,15 @@ module Aws::SageMaker
     # @!attribute environment
     #   <p>The environment variables to set in the Docker container. Each key and value in the Environment string-to-string map can have length of up to 1024. We support up to 16 entries in the map.</p>
     #   @return [Hash<String, String>]
+    # @!attribute container_metrics_config
+    #   <p>The configuration for container metrics scraping. Specifies the metrics endpoint path and publishing frequency for the inference component's container. If not specified when <code>EnableDetailedObservability</code> is <code>True</code>, the default path <code>/metrics</code> on port <code>8080</code> is used. For first-party and Deep Learning Containers (DLC), the endpoint path is determined automatically and this configuration is optional.</p>
+    #   @return [Types::ContainerMetricsConfig]
     class InferenceComponentContainerSpecification < Struct.new(
       nil,
       :image,
       :artifact_url,
       :environment,
+      :container_metrics_config,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -16534,11 +19587,39 @@ module Aws::SageMaker
     # @!attribute environment
     #   <p>The environment variables to set in the Docker container.</p>
     #   @return [Hash<String, String>]
+    # @!attribute container_metrics_config
+    #   <p>The container metrics scraping configuration for this inference component, including the metrics endpoint path and publishing frequency.</p>
+    #   @return [Types::ContainerMetricsConfig]
     class InferenceComponentContainerSpecificationSummary < Struct.new(
       nil,
       :deployed_image,
       :artifact_url,
       :environment,
+      :container_metrics_config,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Settings that affect how the inference component caches data.</p>
+    # @!attribute enable_caching
+    #   <p>Sets whether the endpoint that hosts the inference component caches the model artifacts and container image.</p> <p>With caching enabled, the endpoint caches this data in each instance that it provisions for the inference component. That way, the inference component deploys faster during the auto scaling process. If caching isn't enabled, the inference component takes longer to deploy because of the time it spends downloading the data.</p>
+    #   @return [Boolean]
+    class InferenceComponentDataCacheConfig < Struct.new(
+      nil,
+      :enable_caching,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Settings that affect how the inference component caches data.</p>
+    # @!attribute enable_caching
+    #   <p>Indicates whether the inference component caches model artifacts as part of the auto scaling process.</p>
+    #   @return [Boolean]
+    class InferenceComponentDataCacheConfigSummary < Struct.new(
+      nil,
+      :enable_caching,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -16555,6 +19636,34 @@ module Aws::SageMaker
       nil,
       :rolling_update_policy,
       :auto_rollback_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p> The metadata of the inference component. </p>
+    # @!attribute arn
+    #   <p> The Amazon Resource Name (ARN) of the inference component. </p>
+    #   @return [String]
+    class InferenceComponentMetadata < Struct.new(
+      nil,
+      :arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The placement status of an inference component on a specific instance type. Shows the number of inference component copies currently placed on instances of a given type.</p>
+    # @!attribute instance_type
+    #   <p>The ML compute instance type where the inference component copies are placed.</p>
+    #   @return [String]
+    # @!attribute current_copy_count
+    #   <p>The number of inference component copies currently placed on instances of this type.</p>
+    #   @return [Integer]
+    class InferenceComponentPlacementStatus < Struct.new(
+      nil,
+      :instance_type,
+      :current_copy_count,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -16603,16 +19712,39 @@ module Aws::SageMaker
     # @!attribute current_copy_count
     #   <p>The number of runtime copies of the model container that are currently deployed.</p>
     #   @return [Integer]
+    # @!attribute placement_status
+    #   <p>The placement status of the inference component across instance types. Shows how the inference component copies are distributed across instance types.</p>
+    #   @return [Array<Types::InferenceComponentPlacementStatus>]
     class InferenceComponentRuntimeConfigSummary < Struct.new(
       nil,
       :desired_copy_count,
       :current_copy_count,
+      :placement_status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The scheduling configuration that determines how inference component copies are placed across available instances when copies are added or removed.</p>
+    # @!attribute placement_strategy
+    #   <p>The strategy for placing inference component copies across available instances. If you also set <code>AvailabilityZoneBalance</code>, this strategy applies to placement within each Availability Zone.</p> <dl> <dt>SPREAD</dt> <dd> <p>Distributes copies evenly across available instances for better resilience.</p> </dd> <dt>BINPACK</dt> <dd> <p>Packs copies onto fewer instances to optimize resource utilization.</p> </dd> </dl>
+    #   @return [String]
+    # @!attribute availability_zone_balance
+    #   <p>Configuration for balancing inference component copies across Availability Zones.</p>
+    #   @return [Types::InferenceComponentAvailabilityZoneBalance]
+    class InferenceComponentSchedulingConfig < Struct.new(
+      nil,
+      :placement_strategy,
+      :availability_zone_balance,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the resources to deploy with this inference component, including the model, container, and compute resources.</p>
+    # @!attribute instance_type
+    #   <p>The ML compute instance type for the inference component specification. Specifies which instance type this specification applies to. Required when using the <code>Specifications</code> parameter with multiple entries.</p>
+    #   @return [String]
     # @!attribute model_name
     #   <p>The name of an existing SageMaker AI model object in your account that you want to deploy with the inference component.</p>
     #   @return [String]
@@ -16628,19 +19760,31 @@ module Aws::SageMaker
     # @!attribute base_inference_component_name
     #   <p>The name of an existing inference component that is to contain the inference component that you're creating with your request.</p> <p>Specify this parameter only if your request is meant to create an adapter inference component. An adapter inference component contains the path to an adapter model. The purpose of the adapter model is to tailor the inference output of a base foundation model, which is hosted by the base inference component. The adapter inference component uses the compute resources that you assigned to the base inference component.</p> <p>When you create an adapter inference component, use the <code>Container</code> parameter to specify the location of the adapter artifacts. In the parameter value, use the <code>ArtifactUrl</code> parameter of the <code>InferenceComponentContainerSpecification</code> data type.</p> <p>Before you can create an adapter inference component, you must have an existing inference component that contains the foundation model that you want to adapt.</p>
     #   @return [String]
+    # @!attribute data_cache_config
+    #   <p>Settings that affect how the inference component caches data.</p>
+    #   @return [Types::InferenceComponentDataCacheConfig]
+    # @!attribute scheduling_config
+    #   <p>The scheduling configuration that determines how inference component copies are placed across available instances when copies are added or removed.</p>
+    #   @return [Types::InferenceComponentSchedulingConfig]
     class InferenceComponentSpecification < Struct.new(
       nil,
+      :instance_type,
       :model_name,
       :container,
       :startup_parameters,
       :compute_resource_requirements,
       :base_inference_component_name,
+      :data_cache_config,
+      :scheduling_config,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the resources that are deployed with this inference component.</p>
+    # @!attribute instance_type
+    #   <p>The ML compute instance type associated with this inference component specification.</p>
+    #   @return [String]
     # @!attribute model_name
     #   <p>The name of the SageMaker AI model object that is deployed with the inference component.</p>
     #   @return [String]
@@ -16656,13 +19800,22 @@ module Aws::SageMaker
     # @!attribute base_inference_component_name
     #   <p>The name of the base inference component that contains this inference component.</p>
     #   @return [String]
+    # @!attribute data_cache_config
+    #   <p>Settings that affect how the inference component caches data.</p>
+    #   @return [Types::InferenceComponentDataCacheConfigSummary]
+    # @!attribute scheduling_config
+    #   <p>The scheduling configuration that determines how inference component copies are placed across available instances when copies are added or removed.</p>
+    #   @return [Types::InferenceComponentSchedulingConfig]
     class InferenceComponentSpecificationSummary < Struct.new(
       nil,
+      :instance_type,
       :model_name,
       :container,
       :startup_parameters,
       :compute_resource_requirements,
       :base_inference_component_name,
+      :data_cache_config,
+      :scheduling_config,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -17048,6 +20201,26 @@ module Aws::SageMaker
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The configuration of deep health checks for an instance group.</p> <note> <p>Overlapping deep health check configurations will be merged into a single operation.</p> </note>
+    # @!attribute instance_group_name
+    #   <p>The name of the instance group.</p>
+    #   @return [String]
+    # @!attribute instance_ids
+    #   <p>A list of Amazon Elastic Compute Cloud (EC2) instance IDs on which to perform deep health checks.</p> <note> <p>Leave this field blank to perform deep health checks on the entire instance group.</p> </note>
+    #   @return [Array<String>]
+    # @!attribute deep_health_checks
+    #   <p>A list of deep health checks to be performed.</p>
+    #   @return [Array<String>]
+    class InstanceGroupHealthCheckConfiguration < Struct.new(
+      nil,
+      :instance_group_name,
+      :instance_ids,
+      :deep_health_checks,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Metadata information about an instance group in a HyperPod cluster.</p>
     # @!attribute failure_message
     #   <p>An error message describing why the instance group level operation (such as creating, scaling, or deleting) failed.</p>
@@ -17087,6 +20260,9 @@ module Aws::SageMaker
     # @!attribute target_count
     #   <p>The desired number of instances for the group after scaling.</p>
     #   @return [Integer]
+    # @!attribute min_count
+    #   <p>Minimum instance count of the instance group.</p>
+    #   @return [Integer]
     # @!attribute failure_message
     #   <p>An error message describing why the scaling operation failed, if applicable.</p>
     #   @return [String]
@@ -17094,6 +20270,7 @@ module Aws::SageMaker
       nil,
       :instance_count,
       :target_count,
+      :min_count,
       :failure_message,
       keyword_init: true
     )
@@ -17107,6 +20284,9 @@ module Aws::SageMaker
     # @!attribute additional_enis
     #   <p>Information about additional Elastic Network Interfaces (ENIs) associated with the instance.</p>
     #   @return [Types::AdditionalEnis]
+    # @!attribute instance_requirements_eni_configurations
+    #   <p>The ENI configurations for the instance types in the instance requirements, grouped by network interface category (for example, ENI-only or EFA with ENIs). At most one configuration per category.</p>
+    #   @return [Array<Types::InstanceRequirementsEniConfiguration>]
     # @!attribute capacity_reservation
     #   <p>Information about the Capacity Reservation used by the instance.</p>
     #   @return [Types::CapacityReservation]
@@ -17123,6 +20303,7 @@ module Aws::SageMaker
       nil,
       :customer_eni,
       :additional_enis,
+      :instance_requirements_eni_configurations,
       :capacity_reservation,
       :failure_message,
       :lcs_execution_state,
@@ -17155,6 +20336,78 @@ module Aws::SageMaker
       nil,
       :enable_multiple_jobs,
       :placement_specifications,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Specifies an instance type and its priority for a heterogeneous endpoint. Use instance pools to configure a production variant with multiple instance types, enabling the endpoint to provision instances across different types based on priority.</p>
+    # @!attribute instance_type
+    #   <p>The ML compute instance type for the instance pool.</p>
+    #   @return [String]
+    # @!attribute model_name_override
+    #   <p>The name of a SageMaker model to use for this instance pool instead of the model specified for the production variant. Use this to deploy a different model optimized for the instance type in this pool.</p>
+    #   @return [String]
+    # @!attribute priority
+    #   <p>The priority for the instance pool. SageMaker attempts to provision instances in order of priority, starting with the lowest value. If instances for a higher-priority pool are unavailable, SageMaker attempts to provision from the next pool.</p> <p>Valid values: 1 to 5, where 1 is the highest priority.</p>
+    #   @return [Integer]
+    class InstancePool < Struct.new(
+      nil,
+      :instance_type,
+      :model_name_override,
+      :priority,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A summary of an instance pool for a production variant, including the instance type and the current number of instances.</p>
+    # @!attribute instance_type
+    #   <p>The ML compute instance type for the instance pool.</p>
+    #   @return [String]
+    # @!attribute current_instance_count
+    #   <p>The current number of instances of this type in the instance pool.</p>
+    #   @return [Integer]
+    class InstancePoolSummary < Struct.new(
+      nil,
+      :instance_type,
+      :current_instance_count,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A candidate instance type preference in an <code>InstancePreferences</code> list.</p>
+    # @!attribute instance_type
+    #   <p>The ML compute instance type. An instance type can appear only once in an <code>InstancePreferences</code> list.</p>
+    #   @return [String]
+    # @!attribute instance_count
+    #   <p>The number of instances to launch if this instance type is selected. Specify the instance count for the training job in one of the following two ways:</p> <ol> <li> <p> <b>Per preference</b> – Set <code>InstanceCount</code> on every preference in the <code>InstancePreferences</code> list and don't set <code>ResourceConfig$InstanceCount</code>. Use this when each instance type needs a different number of instances to deliver equivalent compute.</p> </li> <li> <p> <b>One count for the job</b> – Set <code>ResourceConfig$InstanceCount</code> and omit it from every preference. SageMaker applies this to all instance types in the list.</p> </li> </ol> <p>For example, in a list of five preferences, either all five specify <code>InstanceCount</code> or none of them do. SageMaker rejects requests that set <code>InstanceCount</code> on only some preferences, that set it both per preference and in <code>ResourceConfig</code>, or that omit it in both places.</p>
+    #   @return [Integer]
+    # @!attribute training_plan_arns
+    #   <p>The Amazon Resource Name (ARN) of a training plan to use if this instance type is selected. The plan's instance type must match <code>InstanceType</code>. A preference with a training plan uses that plan's reserved capacity; a preference without one uses on-demand capacity. Per-preference <code>TrainingPlanArns</code> is mutually exclusive with the job-level <code>TrainingPlanArn</code> in <code>ResourceConfig</code>.</p>
+    #   @return [Array<String>]
+    class InstancePreference < Struct.new(
+      nil,
+      :instance_type,
+      :instance_count,
+      :training_plan_arns,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The customer ENI and additional ENIs associated with a network interface category.</p>
+    # @!attribute customer_eni
+    #   <p>The ID of the customer-managed Elastic Network Interface (ENI) associated with the instance type category.</p>
+    #   @return [String]
+    # @!attribute additional_enis
+    #   <p>Information about additional Elastic Network Interfaces (ENIs) associated with the instance type category.</p>
+    #   @return [Types::AdditionalEnis]
+    class InstanceRequirementsEniConfiguration < Struct.new(
+      nil,
+      :customer_eni,
+      :additional_enis,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -17195,6 +20448,178 @@ module Aws::SageMaker
       nil,
       :min_value,
       :max_value,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The context for an iteration of a ForEach step.</p>
+    # @!attribute parent_step_name
+    #   <p>The name of the ForEach step that generated this iteration.</p>
+    #   @return [String]
+    # @!attribute index
+    #   <p>The index of the iteration within the ForEach step.</p>
+    #   @return [Integer]
+    # @!attribute item
+    #   <p>The input item that is being processed in this iteration.</p>
+    #   @return [String]
+    class IterationContext < Struct.new(
+      nil,
+      :parent_step_name,
+      :index,
+      :item,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The properties of a job returned by the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Search.html">Search</a> API.</p>
+    # @!attribute job_name
+    #   <p>The name of the job.</p>
+    #   @return [String]
+    # @!attribute job_arn
+    #   <p>The Amazon Resource Name (ARN) of the job.</p>
+    #   @return [String]
+    # @!attribute role_arn
+    #   <p>The ARN of the IAM role associated with the job.</p>
+    #   @return [String]
+    # @!attribute job_category
+    #   <p>The category of the job.</p>
+    #   @return [String]
+    # @!attribute job_config_schema_version
+    #   <p>The schema version used for the job configuration document.</p>
+    #   @return [String]
+    # @!attribute job_config_document
+    #   <p>The JSON configuration document for the job.</p>
+    #   @return [String]
+    # @!attribute creation_time
+    #   <p>The date and time that the job was created.</p>
+    #   @return [Time]
+    # @!attribute last_modified_time
+    #   <p>The date and time that the job was last modified.</p>
+    #   @return [Time]
+    # @!attribute end_time
+    #   <p>The date and time that the job ended.</p>
+    #   @return [Time]
+    # @!attribute job_status
+    #   <p>The current status of the job.</p>
+    #   @return [String]
+    # @!attribute secondary_status
+    #   <p>The detailed secondary status of the job, providing more granular information about the job's progress.</p>
+    #   @return [String]
+    # @!attribute secondary_status_transitions
+    #   <p>A list of secondary status transitions for the job, with timestamps and optional status messages.</p>
+    #   @return [Array<Types::JobSecondaryStatusTransition>]
+    # @!attribute failure_reason
+    #   <p>If the job failed, the reason it failed.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>The tags associated with the job.</p>
+    #   @return [Array<Types::Tag>]
+    class Job < Struct.new(
+      nil,
+      :job_name,
+      :job_arn,
+      :role_arn,
+      :job_category,
+      :job_config_schema_version,
+      :job_config_document,
+      :creation_time,
+      :last_modified_time,
+      :end_time,
+      :job_status,
+      :secondary_status,
+      :secondary_status_transitions,
+      :failure_reason,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Provides summary information about a job configuration schema version.</p>
+    # @!attribute job_config_schema_version
+    #   <p>The version of the job configuration schema.</p>
+    #   @return [String]
+    class JobConfigSchemaVersionSummary < Struct.new(
+      nil,
+      :job_config_schema_version,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Represents a secondary status transition for a job. Jobs progress through multiple secondary statuses during execution. Each transition records the status, start time, optional end time, and an optional message with additional details.</p>
+    # @!attribute status
+    #   <p>The secondary status of the job at this transition point.</p>
+    #   @return [String]
+    # @!attribute start_time
+    #   <p>The date and time that the status transition started.</p>
+    #   @return [Time]
+    # @!attribute end_time
+    #   <p>The date and time that the status transition ended.</p>
+    #   @return [Time]
+    # @!attribute status_message
+    #   <p>A detailed message about the status transition.</p>
+    #   @return [String]
+    class JobSecondaryStatusTransition < Struct.new(
+      nil,
+      :status,
+      :start_time,
+      :end_time,
+      :status_message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Metadata for a SageMaker job step.</p>
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the SageMaker job that was run by this step execution.</p>
+    #   @return [String]
+    class JobStepMetadata < Struct.new(
+      nil,
+      :arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Provides summary information about a job, returned by the <code>ListJobs</code> operation. Use <code>DescribeJob</code> to get full details for a specific job.</p>
+    # @!attribute job_arn
+    #   <p>The Amazon Resource Name (ARN) of the job.</p>
+    #   @return [String]
+    # @!attribute job_name
+    #   <p>The name of the job.</p>
+    #   @return [String]
+    # @!attribute job_category
+    #   <p>The category of the job.</p>
+    #   @return [String]
+    # @!attribute job_status
+    #   <p>The current status of the job.</p>
+    #   @return [String]
+    # @!attribute job_secondary_status
+    #   <p>The secondary status of the job, providing more granular information about the job's progress. Secondary statuses may change between releases.</p>
+    #   @return [String]
+    # @!attribute creation_time
+    #   <p>The date and time that the job was created.</p>
+    #   @return [Time]
+    # @!attribute last_modified_time
+    #   <p>The date and time that the job was last modified.</p>
+    #   @return [Time]
+    # @!attribute end_time
+    #   <p>The date and time that the job ended.</p>
+    #   @return [Time]
+    class JobSummary < Struct.new(
+      nil,
+      :job_arn,
+      :job_name,
+      :job_category,
+      :job_status,
+      :job_secondary_status,
+      :creation_time,
+      :last_modified_time,
+      :end_time,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -17683,6 +21108,188 @@ module Aws::SageMaker
       :display_name,
       :creation_time,
       :last_modified_time,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p> The metadata that tracks relationships between ML artifacts, actions, and contexts. </p>
+    # @!attribute action_arns
+    #   <p> The Amazon Resource Name (ARN) of the lineage action. </p>
+    #   @return [Hash<String, String>]
+    # @!attribute artifact_arns
+    #   <p> The Amazon Resource Name (ARN) of the lineage artifact. </p>
+    #   @return [Hash<String, String>]
+    # @!attribute context_arns
+    #   <p> The Amazon Resource Name (ARN) of the lineage context. </p>
+    #   @return [Hash<String, String>]
+    # @!attribute associations
+    #   <p> The lineage associations. </p>
+    #   @return [Array<Types::AssociationInfo>]
+    class LineageMetadata < Struct.new(
+      nil,
+      :action_arns,
+      :artifact_arns,
+      :context_arns,
+      :associations,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute max_results
+    #   <p>The maximum number of benchmark jobs to return in the response.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>If the previous call to <code>ListAIBenchmarkJobs</code> didn't return the full set of jobs, the call returns a token for getting the next set.</p>
+    #   @return [String]
+    # @!attribute name_contains
+    #   <p>A string in the job name. This filter returns only jobs whose name contains the specified string.</p>
+    #   @return [String]
+    # @!attribute status_equals
+    #   <p>A filter that returns only benchmark jobs with the specified status.</p>
+    #   @return [String]
+    # @!attribute creation_time_after
+    #   <p>A filter that returns only jobs created after the specified time.</p>
+    #   @return [Time]
+    # @!attribute creation_time_before
+    #   <p>A filter that returns only jobs created before the specified time.</p>
+    #   @return [Time]
+    # @!attribute sort_by
+    #   <p>The field to sort results by. The default is <code>CreationTime</code>.</p>
+    #   @return [String]
+    # @!attribute sort_order
+    #   <p>The sort order for results. The default is <code>Descending</code>.</p>
+    #   @return [String]
+    class ListAIBenchmarkJobsRequest < Struct.new(
+      nil,
+      :max_results,
+      :next_token,
+      :name_contains,
+      :status_equals,
+      :creation_time_after,
+      :creation_time_before,
+      :sort_by,
+      :sort_order,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute ai_benchmark_jobs
+    #   <p>An array of <code>AIBenchmarkJobSummary</code> objects, one for each benchmark job that matches the specified filters.</p>
+    #   @return [Array<Types::AIBenchmarkJobSummary>]
+    # @!attribute next_token
+    #   <p>If the response is truncated, Amazon SageMaker AI returns this token. To retrieve the next set of jobs, use it in the subsequent request.</p>
+    #   @return [String]
+    class ListAIBenchmarkJobsResponse < Struct.new(
+      nil,
+      :ai_benchmark_jobs,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute max_results
+    #   <p>The maximum number of recommendation jobs to return in the response.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>If the previous call to <code>ListAIRecommendationJobs</code> didn't return the full set of jobs, the call returns a token for getting the next set.</p>
+    #   @return [String]
+    # @!attribute name_contains
+    #   <p>A string in the job name. This filter returns only jobs whose name contains the specified string.</p>
+    #   @return [String]
+    # @!attribute status_equals
+    #   <p>A filter that returns only recommendation jobs with the specified status.</p>
+    #   @return [String]
+    # @!attribute creation_time_after
+    #   <p>A filter that returns only jobs created after the specified time.</p>
+    #   @return [Time]
+    # @!attribute creation_time_before
+    #   <p>A filter that returns only jobs created before the specified time.</p>
+    #   @return [Time]
+    # @!attribute sort_by
+    #   <p>The field to sort results by. The default is <code>CreationTime</code>.</p>
+    #   @return [String]
+    # @!attribute sort_order
+    #   <p>The sort order for results. The default is <code>Descending</code>.</p>
+    #   @return [String]
+    class ListAIRecommendationJobsRequest < Struct.new(
+      nil,
+      :max_results,
+      :next_token,
+      :name_contains,
+      :status_equals,
+      :creation_time_after,
+      :creation_time_before,
+      :sort_by,
+      :sort_order,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute ai_recommendation_jobs
+    #   <p>An array of <code>AIRecommendationJobSummary</code> objects, one for each recommendation job that matches the specified filters.</p>
+    #   @return [Array<Types::AIRecommendationJobSummary>]
+    # @!attribute next_token
+    #   <p>If the response is truncated, Amazon SageMaker AI returns this token. To retrieve the next set of jobs, use it in the subsequent request.</p>
+    #   @return [String]
+    class ListAIRecommendationJobsResponse < Struct.new(
+      nil,
+      :ai_recommendation_jobs,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute max_results
+    #   <p>The maximum number of AI workload configurations to return in the response.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>If the previous call to <code>ListAIWorkloadConfigs</code> didn't return the full set of configurations, the call returns a token for getting the next set of configurations.</p>
+    #   @return [String]
+    # @!attribute name_contains
+    #   <p>A string in the configuration name. This filter returns only configurations whose name contains the specified string.</p>
+    #   @return [String]
+    # @!attribute creation_time_after
+    #   <p>A filter that returns only configurations created after the specified time.</p>
+    #   @return [Time]
+    # @!attribute creation_time_before
+    #   <p>A filter that returns only configurations created before the specified time.</p>
+    #   @return [Time]
+    # @!attribute sort_by
+    #   <p>The field to sort results by. The default is <code>CreationTime</code>.</p>
+    #   @return [String]
+    # @!attribute sort_order
+    #   <p>The sort order for results. The default is <code>Descending</code>.</p>
+    #   @return [String]
+    class ListAIWorkloadConfigsRequest < Struct.new(
+      nil,
+      :max_results,
+      :next_token,
+      :name_contains,
+      :creation_time_after,
+      :creation_time_before,
+      :sort_by,
+      :sort_order,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute ai_workload_configs
+    #   <p>An array of <code>AIWorkloadConfigSummary</code> objects, one for each AI workload configuration that matches the specified filters.</p>
+    #   @return [Array<Types::AIWorkloadConfigSummary>]
+    # @!attribute next_token
+    #   <p>If the response is truncated, Amazon SageMaker AI returns this token. To retrieve the next set of configurations, use it in the subsequent request.</p>
+    #   @return [String]
+    class ListAIWorkloadConfigsResponse < Struct.new(
+      nil,
+      :ai_workload_configs,
+      :next_token,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -19862,6 +23469,106 @@ module Aws::SageMaker
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute job_category
+    #   <p>The category of job schemas to list.</p>
+    #   @return [String]
+    # @!attribute next_token
+    #   <p>If the previous response was truncated, this token retrieves the next set of results.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of schema versions to return in the response. The default value is 5.</p>
+    #   @return [Integer]
+    class ListJobSchemaVersionsRequest < Struct.new(
+      nil,
+      :job_category,
+      :next_token,
+      :max_results,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute next_token
+    #   <p>If the response is truncated, this token retrieves the next set of results.</p>
+    #   @return [String]
+    # @!attribute job_config_schemas
+    #   <p>An array of <code>JobConfigSchemaVersionSummary</code> objects listing the available schema versions.</p>
+    #   @return [Array<Types::JobConfigSchemaVersionSummary>]
+    class ListJobSchemaVersionsResponse < Struct.new(
+      nil,
+      :next_token,
+      :job_config_schemas,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute job_category
+    #   <p>The category of jobs to list.</p>
+    #   @return [String]
+    # @!attribute next_token
+    #   <p>If the previous response was truncated, this token retrieves the next set of results.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of jobs to return in the response. The default value is 50.</p>
+    #   @return [Integer]
+    # @!attribute creation_time_after
+    #   <p>A filter that returns only jobs created after the specified time.</p>
+    #   @return [Time]
+    # @!attribute creation_time_before
+    #   <p>A filter that returns only jobs created before the specified time.</p>
+    #   @return [Time]
+    # @!attribute last_modified_time_after
+    #   <p>A filter that returns only jobs modified after the specified time.</p>
+    #   @return [Time]
+    # @!attribute last_modified_time_before
+    #   <p>A filter that returns only jobs modified before the specified time.</p>
+    #   @return [Time]
+    # @!attribute name_contains
+    #   <p>A string in the job name to filter results. Only jobs whose name contains the specified string are returned.</p>
+    #   @return [String]
+    # @!attribute sort_by
+    #   <p>The field to sort results by.</p>
+    #   @return [String]
+    # @!attribute sort_order
+    #   <p>The sort order for results. Valid values are <code>Ascending</code> and <code>Descending</code>.</p>
+    #   @return [String]
+    # @!attribute status_equals
+    #   <p>A filter that returns only jobs with the specified status.</p>
+    #   @return [String]
+    class ListJobsRequest < Struct.new(
+      nil,
+      :job_category,
+      :next_token,
+      :max_results,
+      :creation_time_after,
+      :creation_time_before,
+      :last_modified_time_after,
+      :last_modified_time_before,
+      :name_contains,
+      :sort_by,
+      :sort_order,
+      :status_equals,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute next_token
+    #   <p>If the response is truncated, this token retrieves the next set of results.</p>
+    #   @return [String]
+    # @!attribute job_summaries
+    #   <p>An array of <code>JobSummary</code> objects that provide summary information about the jobs.</p>
+    #   @return [Array<Types::JobSummary>]
+    class ListJobsResponse < Struct.new(
+      nil,
+      :next_token,
+      :job_summaries,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute workteam_arn
     #   <p>The Amazon Resource Name (ARN) of the work team for which you want to see labeling jobs for.</p>
     #   @return [String]
@@ -20018,6 +23725,68 @@ module Aws::SageMaker
     class ListLineageGroupsResponse < Struct.new(
       nil,
       :lineage_group_summaries,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute created_after
+    #   <p>Use the <code>CreatedAfter</code> filter to only list MLflow Apps created after a specific date and time. Listed MLflow Apps are shown with a date and time such as <code>"2024-03-16T01:46:56+00:00"</code>. The <code>CreatedAfter</code> parameter takes in a Unix timestamp.</p>
+    #   @return [Time]
+    # @!attribute created_before
+    #   <p>Use the <code>CreatedBefore</code> filter to only list MLflow Apps created before a specific date and time. Listed MLflow Apps are shown with a date and time such as <code>"2024-03-16T01:46:56+00:00"</code>. The <code>CreatedAfter</code> parameter takes in a Unix timestamp.</p>
+    #   @return [Time]
+    # @!attribute status
+    #   <p>Filter for Mlflow apps with a specific creation status.</p>
+    #   @return [String]
+    # @!attribute mlflow_version
+    #   <p>Filter for Mlflow Apps with the specified version.</p>
+    #   @return [String]
+    # @!attribute default_for_domain_id
+    #   <p>Filter for MLflow Apps with the specified default SageMaker Domain ID.</p>
+    #   @return [String]
+    # @!attribute account_default_status
+    #   <p>Filter for MLflow Apps with the specified <code>AccountDefaultStatus</code>.</p>
+    #   @return [String]
+    # @!attribute sort_by
+    #   <p>Filter for MLflow Apps sorting by name, creation time, or creation status.</p>
+    #   @return [String]
+    # @!attribute sort_order
+    #   <p>Change the order of the listed MLflow Apps. By default, MLflow Apps are listed in <code>Descending</code> order by creation time. To change the list order, specify <code>SortOrder</code> to be <code>Ascending</code>.</p>
+    #   @return [String]
+    # @!attribute next_token
+    #   <p>If the previous response was truncated, use this token in your next request to receive the next set of results.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of MLflow Apps to list.</p>
+    #   @return [Integer]
+    class ListMlflowAppsRequest < Struct.new(
+      nil,
+      :created_after,
+      :created_before,
+      :status,
+      :mlflow_version,
+      :default_for_domain_id,
+      :account_default_status,
+      :sort_by,
+      :sort_order,
+      :next_token,
+      :max_results,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute summaries
+    #   <p>A list of MLflow Apps according to chosen filters.</p>
+    #   @return [Array<Types::MlflowAppSummary>]
+    # @!attribute next_token
+    #   <p>If the previous response was truncated, you will receive this token. Use it in your next request to receive the next set of results.</p>
+    #   @return [String]
+    class ListMlflowAppsResponse < Struct.new(
+      nil,
+      :summaries,
       :next_token,
       keyword_init: true
     )
@@ -21850,6 +25619,52 @@ module Aws::SageMaker
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute next_token
+    #   <p>If the response was truncated, use the token returned in the previous response to retrieve the next page of results.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of training sessions to return in the response.</p>
+    #   @return [Integer]
+    # @!attribute creation_time_after
+    #   <p>A filter that returns only training sessions created after the specified time.</p>
+    #   @return [Time]
+    # @!attribute creation_time_before
+    #   <p>A filter that returns only training sessions created before the specified time.</p>
+    #   @return [Time]
+    # @!attribute name_contains
+    #   <p>A string in the training session name to filter results. Only sessions whose name contains the specified string are returned.</p>
+    #   @return [String]
+    # @!attribute status_equals
+    #   <p>A filter that returns only training sessions with the specified status.</p>
+    #   @return [String]
+    class ListTrainingSessionsRequest < Struct.new(
+      nil,
+      :next_token,
+      :max_results,
+      :creation_time_after,
+      :creation_time_before,
+      :name_contains,
+      :status_equals,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute next_token
+    #   <p>If the response is truncated, this token retrieves the next set of results.</p>
+    #   @return [String]
+    # @!attribute training_session_summaries
+    #   <p>An array of <code>TrainingSessionSummary</code> objects that provide summary information about the training sessions.</p>
+    #   @return [Array<Types::TrainingSessionSummary>]
+    class ListTrainingSessionsResponse < Struct.new(
+      nil,
+      :next_token,
+      :training_session_summaries,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute creation_time_after
     #   <p>A filter that returns only transform jobs created after the specified time.</p>
     #   @return [Time]
@@ -22188,6 +26003,50 @@ module Aws::SageMaker
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The Low-Rank Adaptation (LoRA) configuration for a training session, including the rank and alpha parameters.</p>
+    # @!attribute rank
+    #   <p>The rank of the Low-Rank Adaptation (LoRA) adapter matrices.</p>
+    #   @return [Integer]
+    # @!attribute alpha
+    #   <p>The Low-Rank Adaptation (LoRA) scaling factor.</p>
+    #   @return [Integer]
+    class LoraConfig < Struct.new(
+      nil,
+      :rank,
+      :alpha,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p> The MLflow configuration. </p>
+    # @!attribute mlflow_resource_arn
+    #   <p> The Amazon Resource Name (ARN) of MLflow configuration resource. </p>
+    #   @return [String]
+    # @!attribute mlflow_experiment_name
+    #   <p> The name of the MLflow configuration. </p>
+    #   @return [String]
+    class MLflowConfiguration < Struct.new(
+      nil,
+      :mlflow_resource_arn,
+      :mlflow_experiment_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The managed configuration of a model package group.</p>
+    # @!attribute managed_storage_type
+    #   <p>The storage type of the model package.</p>
+    #   @return [String]
+    class ManagedConfiguration < Struct.new(
+      nil,
+      :managed_storage_type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Defines an Amazon Cognito or your own OIDC IdP user group that is part of a work team.</p>
     # @!attribute cognito_member_definition
     #   <p>The Amazon Cognito user group that is part of the work team.</p>
@@ -22308,6 +26167,42 @@ module Aws::SageMaker
       class Unknown < MetricSpecification; end
     end
 
+    # <p>The configuration for Utilization metrics.</p>
+    # @!attribute enable_enhanced_metrics
+    #   <p>Specifies whether to enable enhanced metrics for the endpoint. Enhanced metrics provide utilization and invocation data at instance and container granularity. Container granularity is supported for Inference Components. The default is <code>False</code>.</p>
+    #   @return [Boolean]
+    # @!attribute enable_detailed_observability
+    #   <p>Indicates whether detailed observability is enabled for the endpoint. When set to <code>True</code>, the following metrics are published at the configured frequency:</p> <ul> <li> <p>Container-level inference metrics scraped from the container's Prometheus endpoint (such as request latency, error counts, and throughput). Available metrics vary by framework.</p> </li> <li> <p>Per-GPU metrics (utilization, memory, and temperature) attributed to individual inference components.</p> </li> <li> <p>Per-instance host metrics (CPU, memory, and disk utilization).</p> </li> <li> <p>Inference component placement metrics (copy count per Availability Zone).</p> </li> </ul> <p>For first-party and Deep Learning Containers (DLC), the Prometheus endpoint path is determined automatically. For Bring-Your-Own-Container (BYOC) cases, you can optionally set <code>ContainerMetricsConfig</code> to specify a custom endpoint path. If not specified, the default path <code>/metrics</code> on port <code>8080</code> is used.</p> <p>When set to <code>False</code>, these additional metrics are not published. Standard invocation and utilization metrics controlled by <code>EnableEnhancedMetrics</code> are unaffected.</p> <p>The default value for new endpoint configurations is <code>True</code>. For existing endpoint configurations created before this feature, the value is <code>False</code> unless explicitly set.</p>
+    #   @return [Boolean]
+    # @!attribute metric_publish_frequency_in_seconds
+    #   <p>The interval, in seconds, at which metrics are published to Amazon CloudWatch. Defaults to <code>60</code>. Valid values: <code>10</code>, <code>30</code>, <code>60</code>, <code>120</code>, <code>180</code>, <code>240</code>, <code>300</code>.</p> <p>When <code>EnableEnhancedMetrics</code> is set to <code>False</code>, this interval applies to utilization metrics only. Invocation metrics continue to be published at the default 60-second interval. When <code>EnableEnhancedMetrics</code> is set to <code>True</code>, this interval applies to both utilization and invocation metrics.</p> <p>When <code>EnableDetailedObservability</code> is set to <code>True</code>, this interval applies to per-GPU metrics, per-instance host metrics, container metrics, and fleet-level inference component lifecycle and placement metrics.</p>
+    #   @return [Integer]
+    class MetricsConfig < Struct.new(
+      nil,
+      :enable_enhanced_metrics,
+      :enable_detailed_observability,
+      :metric_publish_frequency_in_seconds,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Specifies a metrics endpoint for a container, including the path where the container exposes Prometheus-formatted metrics and the frequency at which to publish them to Amazon CloudWatch.</p>
+    # @!attribute metrics_endpoint_path
+    #   <p>The path to the metrics endpoint exposed by the container. For example, <code>/metrics</code> or <code>/server/metrics</code>. The path must start with <code>/</code> and can contain alphanumeric characters, forward slashes, underscores, hyphens, and periods. Maximum length is 256 characters. If not specified, defaults to <code>/metrics</code>.</p>
+    #   @return [String]
+    # @!attribute metric_publish_frequency_in_seconds
+    #   <p>The interval, in seconds, at which container metrics scraped from the endpoint are published to Amazon CloudWatch. Valid values: <code>10</code>, <code>30</code>, <code>60</code>, <code>120</code>, <code>180</code>, <code>240</code>, <code>300</code>. Defaults to <code>60</code>.</p>
+    #   @return [Integer]
+    class MetricsEndpoint < Struct.new(
+      nil,
+      :metrics_endpoint_path,
+      :metric_publish_frequency_in_seconds,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Details about the metrics source.</p>
     # @!attribute content_type
     #   <p>The metric source content type.</p>
@@ -22323,6 +26218,74 @@ module Aws::SageMaker
       :content_type,
       :content_digest,
       :s3_uri,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The summary of the Mlflow App to list.</p>
+    # @!attribute arn
+    #   <p>The ARN of a listed MLflow App.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the MLflow App.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status of the MLflow App.</p>
+    #   @return [String]
+    # @!attribute creation_time
+    #   <p>The creation time of a listed MLflow App.</p>
+    #   @return [Time]
+    # @!attribute last_modified_time
+    #   <p>The last modified time of a listed MLflow App.</p>
+    #   @return [Time]
+    # @!attribute mlflow_version
+    #   <p>The version of a listed MLflow App.</p>
+    #   @return [String]
+    class MlflowAppSummary < Struct.new(
+      nil,
+      :arn,
+      :name,
+      :status,
+      :creation_time,
+      :last_modified_time,
+      :mlflow_version,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p> The MLflow configuration using SageMaker managed MLflow. </p>
+    # @!attribute mlflow_resource_arn
+    #   <p> The Amazon Resource Name (ARN) of the MLflow resource. </p>
+    #   @return [String]
+    # @!attribute mlflow_experiment_name
+    #   <p> The MLflow experiment name used for this job. </p>
+    #   @return [String]
+    # @!attribute mlflow_run_name
+    #   <p> The MLflow run name used for this job. </p>
+    #   @return [String]
+    class MlflowConfig < Struct.new(
+      nil,
+      :mlflow_resource_arn,
+      :mlflow_experiment_name,
+      :mlflow_run_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p> The MLflow details of this job. </p>
+    # @!attribute mlflow_experiment_id
+    #   <p> The MLflow experiment ID used for this job. </p>
+    #   @return [String]
+    # @!attribute mlflow_run_id
+    #   <p> The MLflow run ID used for this job. </p>
+    #   @return [String]
+    class MlflowDetails < Struct.new(
+      nil,
+      :mlflow_experiment_id,
+      :mlflow_run_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -23162,6 +27125,9 @@ module Aws::SageMaker
     # @!attribute model_package_version
     #   <p>The version number of a versioned model.</p>
     #   @return [Integer]
+    # @!attribute model_package_registration_type
+    #   <p> The package registration type of the model package. </p>
+    #   @return [String]
     # @!attribute model_package_arn
     #   <p>The Amazon Resource Name (ARN) of the model package.</p>
     #   @return [String]
@@ -23251,6 +27217,7 @@ module Aws::SageMaker
       :model_package_name,
       :model_package_group_name,
       :model_package_version,
+      :model_package_registration_type,
       :model_package_arn,
       :model_package_description,
       :creation_time,
@@ -23279,6 +27246,22 @@ module Aws::SageMaker
       :customer_metadata_properties,
       :drift_check_baselines,
       :skip_model_validation,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p> The configuration for the Model package. </p>
+    # @!attribute model_package_group_arn
+    #   <p> The Amazon Resource Name (ARN) of the model package group of output model package. </p>
+    #   @return [String]
+    # @!attribute source_model_package_arn
+    #   <p> The Amazon Resource Name (ARN) of the source model package used for continued fine-tuning and custom model evaluation. </p>
+    #   @return [String]
+    class ModelPackageConfig < Struct.new(
+      nil,
+      :model_package_group_arn,
+      :source_model_package_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -23318,12 +27301,21 @@ module Aws::SageMaker
     # @!attribute nearest_model_name
     #   <p>The name of a pre-trained machine learning benchmarked by Amazon SageMaker Inference Recommender model that matches your model. You can find a list of benchmarked models by calling <code>ListModelMetadata</code>.</p>
     #   @return [String]
+    # @!attribute additional_model_data_sources
+    #   <p>Data sources that are available to your model in addition to the one that you specify for <code>ModelDataSource</code> when you use the <code>CreateModelPackage</code> action.</p>
+    #   @return [Array<Types::AdditionalModelDataSource>]
     # @!attribute additional_s3_data_source
     #   <p>The additional data source that is used during inference in the Docker container for your model package.</p>
     #   @return [Types::AdditionalS3DataSource]
     # @!attribute model_data_e_tag
     #   <p>The ETag associated with Model Data URL.</p>
     #   @return [String]
+    # @!attribute is_checkpoint
+    #   <p> Specifies whether the model data is a training checkpoint. </p>
+    #   @return [Boolean]
+    # @!attribute base_model
+    #   <p> Identifies the foundation model that was used as the starting point for model customization. </p>
+    #   @return [Types::BaseModel]
     class ModelPackageContainerDefinition < Struct.new(
       nil,
       :container_hostname,
@@ -23337,8 +27329,11 @@ module Aws::SageMaker
       :framework,
       :framework_version,
       :nearest_model_name,
+      :additional_model_data_sources,
       :additional_s3_data_source,
       :model_data_e_tag,
+      :is_checkpoint,
+      :base_model,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -23396,6 +27391,9 @@ module Aws::SageMaker
     # @!attribute model_package_group_status
     #   <p>The status of the model group.</p>
     #   @return [String]
+    # @!attribute managed_configuration
+    #   <p>The managed configuration of the model package group.</p>
+    #   @return [Types::ManagedConfiguration]
     class ModelPackageGroupSummary < Struct.new(
       nil,
       :model_package_group_name,
@@ -23403,6 +27401,7 @@ module Aws::SageMaker
       :model_package_group_description,
       :creation_time,
       :model_package_group_status,
+      :managed_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -23500,6 +27499,9 @@ module Aws::SageMaker
     # @!attribute model_life_cycle
     #   <p> A structure describing the current state of the model in its life cycle. </p>
     #   @return [Types::ModelLifeCycle]
+    # @!attribute model_package_registration_type
+    #   <p> The package registration type of the model package summary. </p>
+    #   @return [String]
     class ModelPackageSummary < Struct.new(
       nil,
       :model_package_name,
@@ -23511,6 +27513,7 @@ module Aws::SageMaker
       :model_package_status,
       :model_approval_status,
       :model_life_cycle,
+      :model_package_registration_type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -23679,6 +27682,38 @@ module Aws::SageMaker
       nil,
       :image,
       :override_environment,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Settings for the model speculative decoding technique that's applied by a model optimization job.</p>
+    # @!attribute technique
+    #   <p>The speculative decoding technique to apply during model optimization.</p>
+    #   @return [String]
+    # @!attribute training_data_source
+    #   <p>The location of the training data to use for speculative decoding. The data must be formatted as ShareGPT, OpenAI Completions or OpenAI Chat Completions. The input can also be unencrypted captured data from a SageMaker endpoint as long as the endpoint uses one of the above formats.</p>
+    #   @return [Types::ModelSpeculativeDecodingTrainingDataSource]
+    class ModelSpeculativeDecodingConfig < Struct.new(
+      nil,
+      :technique,
+      :training_data_source,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains information about the training data source for speculative decoding.</p>
+    # @!attribute s3_uri
+    #   <p>The Amazon S3 URI that points to the training data for speculative decoding.</p>
+    #   @return [String]
+    # @!attribute s3_data_type
+    #   <p>The type of data stored in the Amazon S3 location. Valid values are <code>S3Prefix</code> or <code>ManifestFile</code>.</p>
+    #   @return [String]
+    class ModelSpeculativeDecodingTrainingDataSource < Struct.new(
+      nil,
+      :s3_uri,
+      :s3_data_type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -24406,11 +28441,19 @@ module Aws::SageMaker
     # @!attribute status
     #   <p>The current status of the node. Possible values include <code>Pending</code>, <code>Running</code>, <code>Failed</code>, <code>ShuttingDown</code>, <code>SystemUpdating</code>, <code>DeepHealthCheckInProgress</code>, and <code>NotFound</code>.</p>
     #   @return [String]
+    # @!attribute availability_zones
+    #   <p>The availability zones associated with the successfully added node.</p>
+    #   @return [Array<String>]
+    # @!attribute instance_types
+    #   <p>The instance types associated with the successfully added node.</p>
+    #   @return [Array<String>]
     class NodeAdditionResult < Struct.new(
       nil,
       :node_logical_id,
       :instance_group_name,
       :status,
+      :availability_zones,
+      :instance_types,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -24537,10 +28580,10 @@ module Aws::SageMaker
     #   <p>The Amazon Simple Storage (Amazon S3) location of <code>OfflineStore</code>.</p>
     #   @return [Types::S3StorageConfig]
     # @!attribute disable_glue_table_creation
-    #   <p>Set to <code>True</code> to disable the automatic creation of an Amazon Web Services Glue table when configuring an <code>OfflineStore</code>. If set to <code>False</code>, Feature Store will name the <code>OfflineStore</code> Glue table following <a href="https://docs.aws.amazon.com/athena/latest/ug/tables-databases-columns-names.html">Athena's naming recommendations</a>.</p> <p>The default value is <code>False</code>.</p>
+    #   <p>Set to <code>True</code> to disable the automatic creation of an Amazon Web Services Glue table when configuring an <code>OfflineStore</code>. If set to <code>True</code> and <code>DataCatalogConfig</code> is provided, Feature Store associates the provided catalog configuration with the feature group without creating a table. In this case, you are responsible for creating and managing the Glue table. If set to <code>True</code> without <code>DataCatalogConfig</code>, no Glue table is created or associated with the feature group. The <code>Iceberg</code> table format is only supported when this is set to <code>False</code>.</p> <p>If set to <code>False</code> and <code>DataCatalogConfig</code> is provided, Feature Store creates the table using the specified names. If set to <code>False</code> without <code>DataCatalogConfig</code>, Feature Store auto-generates the table name following <a href="https://docs.aws.amazon.com/athena/latest/ug/tables-databases-columns-names.html">Athena's naming recommendations</a>. This applies to both Glue and Apache Iceberg table formats.</p> <p>The default value is <code>False</code>.</p>
     #   @return [Boolean]
     # @!attribute data_catalog_config
-    #   <p>The meta data of the Glue table that is autogenerated when an <code>OfflineStore</code> is created. </p>
+    #   <p>The meta data of the Glue table for the <code>OfflineStore</code>. If not provided, Feature Store auto-generates the table name, database, and catalog when the <code>OfflineStore</code> is created. You can optionally provide this configuration to specify custom values. This applies to both Glue and Apache Iceberg table formats.</p>
     #   @return [Types::DataCatalogConfig]
     # @!attribute table_format
     #   <p>Format for the offline store table. Supported formats are Glue (Default) and <a href="https://iceberg.apache.org/">Apache Iceberg</a>.</p>
@@ -24687,7 +28730,7 @@ module Aws::SageMaker
     #   <p>Time to live duration, where the record is hard deleted after the expiration time is reached; <code>ExpiresAt</code> = <code>EventTime</code> + <code>TtlDuration</code>. For information on HardDelete, see the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_DeleteRecord.html">DeleteRecord</a> API in the Amazon SageMaker API Reference guide.</p>
     #   @return [Types::TtlDuration]
     # @!attribute storage_type
-    #   <p>Option for different tiers of low latency storage for real-time data retrieval.</p> <ul> <li> <p> <code>Standard</code>: A managed low latency data store for feature groups.</p> </li> <li> <p> <code>InMemory</code>: A managed data store for feature groups that supports very low latency retrieval. </p> </li> </ul>
+    #   <p>Option for different tiers of low latency storage for real-time data retrieval.</p> <ul> <li> <p> <code>Standard</code>: A managed low latency data store for feature groups.</p> </li> <li> <p> <code>Standard_V2</code>: A managed low latency data store for feature groups that supports partial updates to individual features using the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_UpdateRecord.html">UpdateRecord</a> operation. Choose this storage type at feature group creation time if your use case requires updating specific feature values without rewriting the entire record.</p> </li> <li> <p> <code>InMemory</code>: A managed data store for feature groups that supports very low latency retrieval.</p> </li> </ul>
     #   @return [String]
     class OnlineStoreConfig < Struct.new(
       nil,
@@ -24704,9 +28747,13 @@ module Aws::SageMaker
     # @!attribute ttl_duration
     #   <p>Time to live duration, where the record is hard deleted after the expiration time is reached; <code>ExpiresAt</code> = <code>EventTime</code> + <code>TtlDuration</code>. For information on HardDelete, see the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_DeleteRecord.html">DeleteRecord</a> API in the Amazon SageMaker API Reference guide.</p>
     #   @return [Types::TtlDuration]
+    # @!attribute storage_type
+    #   <p>The online store storage type to migrate the feature group to. Use this parameter to migrate an existing feature group from <code>Standard</code> to <code>Standard_V2</code> storage format, enabling support for the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_UpdateRecord.html">UpdateRecord</a> operation. Migration is a one-way operation and cannot be reversed.</p>
+    #   @return [String]
     class OnlineStoreConfigUpdate < Struct.new(
       nil,
       :ttl_duration,
+      :storage_type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -24734,10 +28781,14 @@ module Aws::SageMaker
     # @!attribute model_sharding_config
     #   <p>Settings for the model sharding technique that's applied by a model optimization job.</p>
     #   @return [Types::ModelShardingConfig]
+    # @!attribute model_speculative_decoding_config
+    #   <p>Settings for the model speculative decoding technique that's applied by a model optimization job.</p>
+    #   @return [Types::ModelSpeculativeDecodingConfig]
     class OptimizationConfig < Struct.new(
       :model_quantization_config,
       :model_compilation_config,
       :model_sharding_config,
+      :model_speculative_decoding_config,
       :unknown,
       keyword_init: true
     )
@@ -24746,6 +28797,7 @@ module Aws::SageMaker
       class ModelQuantizationConfig < OptimizationConfig; end
       class ModelCompilationConfig < OptimizationConfig; end
       class ModelShardingConfig < OptimizationConfig; end
+      class ModelSpeculativeDecodingConfig < OptimizationConfig; end
       class Unknown < OptimizationConfig; end
     end
 
@@ -24753,9 +28805,13 @@ module Aws::SageMaker
     # @!attribute s3
     #   <p>The Amazon S3 location of a source model to optimize with an optimization job.</p>
     #   @return [Types::OptimizationJobModelSourceS3]
+    # @!attribute sage_maker_model
+    #   <p>The name of an existing SageMaker model to optimize with an optimization job.</p>
+    #   @return [Types::OptimizationSageMakerModel]
     class OptimizationJobModelSource < Struct.new(
       nil,
       :s3,
+      :sage_maker_model,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -24784,10 +28840,14 @@ module Aws::SageMaker
     # @!attribute s3_output_location
     #   <p>The Amazon S3 URI for where to store the optimized model that you create with an optimization job.</p>
     #   @return [String]
+    # @!attribute sage_maker_model
+    #   <p>The name of a SageMaker model to use as the output destination for an optimization job.</p>
+    #   @return [Types::OptimizationSageMakerModel]
     class OptimizationJobOutputConfig < Struct.new(
       nil,
       :kms_key_id,
       :s3_output_location,
+      :sage_maker_model,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -24818,6 +28878,9 @@ module Aws::SageMaker
     # @!attribute deployment_instance_type
     #   <p>The type of instance that hosts the optimized model that you create with the optimization job.</p>
     #   @return [String]
+    # @!attribute max_instance_count
+    #   <p>The maximum number of instances to use for the optimization job.</p>
+    #   @return [Integer]
     # @!attribute optimization_types
     #   <p>The optimization techniques that are applied by the optimization job.</p>
     #   @return [Array<String>]
@@ -24831,6 +28894,7 @@ module Aws::SageMaker
       :optimization_end_time,
       :last_modified_time,
       :deployment_instance_type,
+      :max_instance_count,
       :optimization_types,
       keyword_init: true
     )
@@ -24856,6 +28920,18 @@ module Aws::SageMaker
     class OptimizationOutput < Struct.new(
       nil,
       :recommended_inference_image,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A SageMaker model to use as the source or destination for an optimization job.</p>
+    # @!attribute model_name
+    #   <p>The name of a SageMaker model.</p>
+    #   @return [String]
+    class OptimizationSageMakerModel < Struct.new(
+      nil,
+      :model_name,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -25072,10 +29148,18 @@ module Aws::SageMaker
     # @!attribute arguments
     #   <p>This is a map of required inputs for a SageMaker Partner AI App. Based on the application type, the map is populated with a key and value pair that is specific to the user and application.</p>
     #   @return [Hash<String, String>]
+    # @!attribute assigned_group_patterns
+    #   <p>A list of Amazon Web Services IAM Identity Center group patterns that can access the SageMaker Partner AI App. Group names support wildcard matching using <code>*</code>. An empty list indicates the app will not use Identity Center group features. All groups specified in <code>RoleGroupAssignments</code> must match patterns in this list.</p>
+    #   @return [Array<String>]
+    # @!attribute role_group_assignments
+    #   <p>A map of in-app roles to Amazon Web Services IAM Identity Center group patterns. Groups assigned to specific roles receive those permissions, while groups in <code>AssignedGroupPatterns</code> but not in this map receive default in-app role depending on app type. Group patterns support wildcard matching using <code>*</code>. Currently supported by Fiddler version 1.3 and later with roles: <code>ORG_MEMBER</code> (default) and <code>ORG_ADMIN</code>.</p>
+    #   @return [Array<Types::RoleGroupAssignment>]
     class PartnerAppConfig < Struct.new(
       nil,
       :admin_users,
       :arguments,
+      :assigned_group_patterns,
+      :role_group_assignments,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -25167,6 +29251,9 @@ module Aws::SageMaker
     # @!attribute instance_type
     #   <p>The type of instances associated with the variant.</p>
     #   @return [String]
+    # @!attribute instance_pools
+    #   <p>A list of instance pools for the production variant. Each pool indicates the instance type and the current number of instances of that type.</p>
+    #   @return [Array<Types::InstancePoolSummary>]
     # @!attribute accelerator_type
     #   <p>This parameter is no longer supported. Elastic Inference (EI) is no longer available.</p> <p>This parameter was used to specify the size of the EI instance to use for the production variant.</p>
     #   @return [String]
@@ -25194,6 +29281,7 @@ module Aws::SageMaker
       :current_instance_count,
       :desired_instance_count,
       :instance_type,
+      :instance_pools,
       :accelerator_type,
       :variant_status,
       :current_serverless_config,
@@ -25411,6 +29499,9 @@ module Aws::SageMaker
     # @!attribute selective_execution_result
     #   <p>The ARN from an execution of the current pipeline from which results are reused for this step.</p>
     #   @return [Types::SelectiveExecutionResult]
+    # @!attribute iteration_context
+    #   <p>The context for the iteration of a ForEach step that generated this step execution.</p>
+    #   @return [Types::IterationContext]
     class PipelineExecutionStep < Struct.new(
       nil,
       :step_name,
@@ -25424,6 +29515,7 @@ module Aws::SageMaker
       :metadata,
       :attempt_count,
       :selective_execution_result,
+      :iteration_context,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -25460,6 +29552,9 @@ module Aws::SageMaker
     # @!attribute emr
     #   <p>The configurations and outcomes of an Amazon EMR step execution.</p>
     #   @return [Types::EMRStepMetadata]
+    # @!attribute emr_serverless
+    #   <p>The configurations and outcomes of an Amazon EMR Serverless step execution.</p>
+    #   @return [Types::EMRServerlessStepMetadata]
     # @!attribute quality_check
     #   <p>The configurations and outcomes of the check step execution. This includes: </p> <ul> <li> <p>The type of the check conducted.</p> </li> <li> <p>The Amazon S3 URIs of baseline constraints and statistics files to be used for the drift check.</p> </li> <li> <p>The Amazon S3 URIs of newly calculated baseline constraints and statistics.</p> </li> <li> <p>The model package group name provided.</p> </li> <li> <p>The Amazon S3 URI of the violation report if violations detected.</p> </li> <li> <p>The Amazon Resource Name (ARN) of check processing job initiated by the step execution.</p> </li> <li> <p>The Boolean flags indicating if the drift check is skipped.</p> </li> <li> <p>If step property <code>BaselineUsedForDriftCheck</code> is set the same as <code>CalculatedBaseline</code>.</p> </li> </ul>
     #   @return [Types::QualityCheckStepMetadata]
@@ -25478,6 +29573,36 @@ module Aws::SageMaker
     # @!attribute endpoint_config
     #   <p>The endpoint configuration used to create an endpoint during this step execution.</p>
     #   @return [Types::EndpointConfigStepMetadata]
+    # @!attribute bedrock_custom_model
+    #   <p> The metadata of the Amazon Bedrock custom model used in the pipeline execution step. </p>
+    #   @return [Types::BedrockCustomModelMetadata]
+    # @!attribute bedrock_custom_model_deployment
+    #   <p> The metadata of the Amazon Bedrock custom model deployment used in pipeline execution step. </p>
+    #   @return [Types::BedrockCustomModelDeploymentMetadata]
+    # @!attribute bedrock_provisioned_model_throughput
+    #   <p> The metadata of the Amazon Bedrock provisioned model throughput used in the pipeline execution step. </p>
+    #   @return [Types::BedrockProvisionedModelThroughputMetadata]
+    # @!attribute bedrock_model_import
+    #   <p> The metadata of Amazon Bedrock model import used in pipeline execution step. </p>
+    #   @return [Types::BedrockModelImportMetadata]
+    # @!attribute inference_component
+    #   <p> The metadata of the inference component used in pipeline execution step. </p>
+    #   @return [Types::InferenceComponentMetadata]
+    # @!attribute lineage
+    #   <p> The metadata of the lineage used in pipeline execution step. </p>
+    #   @return [Types::LineageMetadata]
+    # @!attribute job
+    #   <p>The metadata for a SageMaker job used in a pipeline execution step.</p>
+    #   @return [Types::JobStepMetadata]
+    # @!attribute athena
+    #   <p>The metadata for the Athena step execution.</p>
+    #   @return [Types::AthenaStepMetadata]
+    # @!attribute cleanup
+    #   <p>The metadata for the cleanup step execution.</p>
+    #   @return [Types::CleanupStepMetadata]
+    # @!attribute for_each
+    #   <p>The metadata for the ForEach step execution.</p>
+    #   @return [Types::ForEachStepMetadata]
     class PipelineExecutionStepMetadata < Struct.new(
       nil,
       :training_job,
@@ -25490,12 +29615,23 @@ module Aws::SageMaker
       :callback,
       :lambda,
       :emr,
+      :emr_serverless,
       :quality_check,
       :clarify_check,
       :fail,
       :auto_ml_job,
       :endpoint,
       :endpoint_config,
+      :bedrock_custom_model,
+      :bedrock_custom_model_deployment,
+      :bedrock_provisioned_model_throughput,
+      :bedrock_model_import,
+      :inference_component,
+      :lineage,
+      :job,
+      :athena,
+      :cleanup,
+      :for_each,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -25701,6 +29837,22 @@ module Aws::SageMaker
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The configuration for prefix-aware routing on a SageMaker real-time inference endpoint. Specify <code>PrefixLength</code> and <code>ConcurrencyThreshold</code> to control routing behavior.</p>
+    # @!attribute prefix_length
+    #   <p>The maximum length of the prefix used for routing decisions. Required when <code>RoutingStrategy</code> is <code>PREFIX_AWARE</code>.</p> <ul> <li> <p>For the SageMaker Runtime <code>InvokeEndpoint</code> and <code>InvokeEndpointWithResponseStream</code> APIs, this value specifies the number of bytes from the beginning of the request body.</p> </li> <li> <p>For OpenAI-compatible API, this value specifies the number of characters from the text content of the messages array.</p> </li> </ul> <p>The endpoint routes requests that share the same prefix to the same instance. Set this value to cover shared content (such as system prompts) plus enough unique content to distribute workloads across instances.</p>
+    #   @return [Integer]
+    # @!attribute concurrency_threshold
+    #   <p>The maximum number of in-flight requests on the target instance before the endpoint routes to another instance. Required when <code>RoutingStrategy</code> is <code>PREFIX_AWARE</code>. When in-flight requests on the prefix-selected instance reach this threshold, the endpoint routes the request to an instance with more available capacity.</p>
+    #   @return [Integer]
+    class PrefixAwareRoutingConfig < Struct.new(
+      nil,
+      :prefix_length,
+      :concurrency_threshold,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Configuration for accessing hub content through presigned URLs, including license agreement acceptance and URL validation settings.</p>
     # @!attribute accept_eula
     #   <p>Indicates acceptance of the End User License Agreement (EULA) for gated models. Set to true to acknowledge acceptance of the license terms required for accessing gated content.</p>
@@ -25746,12 +29898,24 @@ module Aws::SageMaker
     # @!attribute volume_kms_key_id
     #   <p>The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that Amazon SageMaker uses to encrypt data on the storage volume attached to the ML compute instance(s) that run the processing job. </p> <note> <p>Certain Nitro-based instances include local storage, dependent on the instance type. Local storage volumes are encrypted using a hardware module on the instance. You can't request a <code>VolumeKmsKeyId</code> when using an instance type with local storage.</p> <p>For a list of instance types that support local instance storage, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html#instance-store-volumes">Instance Store Volumes</a>.</p> <p>For more information about local instance storage encryption, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html">SSD Instance Store Volumes</a>.</p> </note>
     #   @return [String]
+    # @!attribute instance_preferences
+    #   <p>An ordered list of ML compute instance types for the processing job, in priority order. Amazon SageMaker launches the job on the first instance type in the list that has available capacity. If capacity is insufficient, Amazon SageMaker evaluates the next instance type in the list. Exactly one instance type is selected for the job.</p> <p> <code>InstancePreferences</code> is mutually exclusive with <code>InstanceType</code>.</p>
+    #   @return [Array<Types::ProcessingInstancePreference>]
+    # @!attribute selected_instance_type
+    #   <p>The instance type that Amazon SageMaker selected for the job from <code>InstancePreferences</code>. Returned by <code> <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeProcessingJob.html">DescribeProcessingJob</a> </code> after an instance type is selected. This field is read-only and isn't accepted in <code>CreateProcessingJob</code> requests.</p>
+    #   @return [String]
+    # @!attribute selected_instance_count
+    #   <p>The number of instances of <code>SelectedInstanceType</code> that the job launched with. The job is billed for this instance type and count. Returned by <code>DescribeProcessingJob</code> after an instance type is selected. This field is read-only and isn't accepted in <code>CreateProcessingJob</code> requests.</p>
+    #   @return [Integer]
     class ProcessingClusterConfig < Struct.new(
       nil,
       :instance_count,
       :instance_type,
       :volume_size_in_gb,
       :volume_kms_key_id,
+      :instance_preferences,
+      :selected_instance_type,
+      :selected_instance_count,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -25788,6 +29952,22 @@ module Aws::SageMaker
       :app_managed,
       :s3_input,
       :dataset_definition,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A candidate instance type preference in a processing <code>InstancePreferences</code> list.</p>
+    # @!attribute instance_type
+    #   <p>The ML compute instance type. An instance type can appear only once in an <code>InstancePreferences</code> list.</p>
+    #   @return [String]
+    # @!attribute instance_count
+    #   <p>The number of instances to launch if this instance type is selected. Specify the instance count for the processing job in one of the following two ways:</p> <ol> <li> <p> <b>Per preference</b> – Set <code>InstanceCount</code> on every preference in the <code>InstancePreferences</code> list and don't set <code>ProcessingClusterConfig$InstanceCount</code>. Use this when each instance type needs a different number of instances to deliver equivalent compute.</p> </li> <li> <p> <b>One count for the job</b> – Set <code>ProcessingClusterConfig$InstanceCount</code> and omit it from every preference. Amazon SageMaker applies this to all instance types in the list.</p> </li> </ol> <p>For example, in a list of five preferences, either all five specify <code>InstanceCount</code> or none of them do. Amazon SageMaker rejects requests that set <code>InstanceCount</code> on only some preferences, that set it both per preference and in <code>ProcessingClusterConfig</code>, or that omit it in both places.</p>
+    #   @return [Integer]
+    class ProcessingInstancePreference < Struct.new(
+      nil,
+      :instance_type,
+      :instance_count,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -26007,7 +30187,7 @@ module Aws::SageMaker
     #   <p>Whether to use <code>File</code> or <code>Pipe</code> input mode. In File mode, Amazon SageMaker copies the data from the input source onto the local ML storage volume before starting your processing container. This is the most commonly used input mode. In <code>Pipe</code> mode, Amazon SageMaker streams input data from the source directly to your processing container into named pipes without using the ML storage volume.</p>
     #   @return [String]
     # @!attribute s3_data_distribution_type
-    #   <p>Whether to distribute the data from Amazon S3 to all processing instances with <code>FullyReplicated</code>, or whether the data from Amazon S3 is shared by Amazon S3 key, downloading one shard of data to each processing instance.</p>
+    #   <p>Whether to distribute the data from Amazon S3 to all processing instances with <code>FullyReplicated</code>, or whether the data from Amazon S3 is sharded by Amazon S3 key, downloading one shard of data to each processing instance.</p>
     #   @return [String]
     # @!attribute s3_compression_type
     #   <p>Whether to GZIP-decompress the data in Amazon S3 as it is streamed into the processing container. <code>Gzip</code> can only be used when <code>Pipe</code> mode is specified as the <code>S3InputMode</code>. In <code>Pipe</code> mode, Amazon SageMaker streams input data from the source directly to your container without using the EBS volume.</p>
@@ -26070,6 +30250,12 @@ module Aws::SageMaker
     # @!attribute instance_type
     #   <p>The ML compute instance type.</p>
     #   @return [String]
+    # @!attribute instance_pools
+    #   <p>A list of instance pools for the production variant. Each instance pool specifies an instance type and its priority for provisioning. Use instance pools to configure heterogeneous endpoints that deploy models across multiple instance types.</p>
+    #   @return [Array<Types::InstancePool>]
+    # @!attribute variant_instance_provision_timeout_in_seconds
+    #   <p>The timeout value, in seconds, for provisioning instances for the production variant. When SageMaker encounters an insufficient capacity error while provisioning instances, it retries with the next instance pool (if configured) or waits until the timeout expires. This timeout applies only to capacity provisioning and does not include the time for model download or container startup.</p> <p>Valid values: 300 to 3600.</p>
+    #   @return [Integer]
     # @!attribute initial_variant_weight
     #   <p>Determines initial traffic distribution among all of the models that you specify in the endpoint configuration. The traffic to a production variant is determined by the ratio of the <code>VariantWeight</code> to the sum of all <code>VariantWeight</code> values across all ProductionVariants. If unspecified, it defaults to 1.0. </p>
     #   @return [Float]
@@ -26101,7 +30287,7 @@ module Aws::SageMaker
     #   <p>Settings that control how the endpoint routes incoming traffic to the instances that the endpoint hosts.</p>
     #   @return [Types::ProductionVariantRoutingConfig]
     # @!attribute inference_ami_version
-    #   <p>Specifies an option from a collection of preconfigured Amazon Machine Image (AMI) images. Each image is configured by Amazon Web Services with a set of software and driver versions. Amazon Web Services optimizes these configurations for different machine learning workloads.</p> <p>By selecting an AMI version, you can ensure that your inference environment is compatible with specific software requirements, such as CUDA driver versions, Linux kernel versions, or Amazon Web Services Neuron driver versions.</p> <p>The AMI version names, and their configurations, are the following:</p> <dl> <dt>al2-ami-sagemaker-inference-gpu-2</dt> <dd> <ul> <li> <p>Accelerator: GPU</p> </li> <li> <p>NVIDIA driver version: 535</p> </li> <li> <p>CUDA version: 12.2</p> </li> </ul> </dd> <dt>al2-ami-sagemaker-inference-gpu-2-1</dt> <dd> <ul> <li> <p>Accelerator: GPU</p> </li> <li> <p>NVIDIA driver version: 535</p> </li> <li> <p>CUDA version: 12.2</p> </li> <li> <p>NVIDIA Container Toolkit with disabled CUDA-compat mounting</p> </li> </ul> </dd> <dt>al2-ami-sagemaker-inference-gpu-3-1</dt> <dd> <ul> <li> <p>Accelerator: GPU</p> </li> <li> <p>NVIDIA driver version: 550</p> </li> <li> <p>CUDA version: 12.4</p> </li> <li> <p>NVIDIA Container Toolkit with disabled CUDA-compat mounting</p> </li> </ul> </dd> <dt>al2-ami-sagemaker-inference-neuron-2</dt> <dd> <ul> <li> <p>Accelerator: Inferentia2 and Trainium</p> </li> <li> <p>Neuron driver version: 2.19</p> </li> </ul> </dd> </dl>
+    #   <p>Specifies an option from a collection of preconfigured Amazon Machine Image (AMI) images. Each image is configured by Amazon Web Services with a set of software and driver versions. Amazon Web Services optimizes these configurations for different machine learning workloads.</p> <p>By selecting an AMI version, you can ensure that your inference environment is compatible with specific software requirements, such as CUDA driver versions, Linux kernel versions, or Amazon Web Services Neuron driver versions.</p> <p>The AMI version names, and their configurations, are the following:</p> <dl> <dt>al2-ami-sagemaker-inference-gpu-2</dt> <dd> <ul> <li> <p>Accelerator: GPU</p> </li> <li> <p>NVIDIA driver version: 535</p> </li> <li> <p>CUDA version: 12.2</p> </li> </ul> </dd> <dt>al2-ami-sagemaker-inference-gpu-2-1</dt> <dd> <ul> <li> <p>Accelerator: GPU</p> </li> <li> <p>NVIDIA driver version: 535</p> </li> <li> <p>CUDA version: 12.2</p> </li> <li> <p>NVIDIA Container Toolkit with disabled CUDA-compat mounting</p> </li> </ul> </dd> <dt>al2-ami-sagemaker-inference-gpu-3-1</dt> <dd> <ul> <li> <p>Accelerator: GPU</p> </li> <li> <p>NVIDIA driver version: 550</p> </li> <li> <p>CUDA version: 12.4</p> </li> <li> <p>NVIDIA Container Toolkit with disabled CUDA-compat mounting</p> </li> </ul> </dd> <dt>al2023-ami-sagemaker-inference-gpu-4-1</dt> <dd> <ul> <li> <p>Accelerator: GPU</p> </li> <li> <p>NVIDIA driver version: 580</p> </li> <li> <p>CUDA version: 13.0</p> </li> <li> <p>NVIDIA Container Toolkit with disabled CUDA-compat mounting</p> </li> </ul> </dd> <dt>al2-ami-sagemaker-inference-neuron-2</dt> <dd> <ul> <li> <p>Accelerator: Inferentia2 and Trainium</p> </li> <li> <p>Neuron driver version: 2.19</p> </li> </ul> </dd> </dl>
     #   @return [String]
     # @!attribute capacity_reservation_config
     #   <p>Settings for the capacity reservation for the compute instances that SageMaker AI reserves for an endpoint. </p>
@@ -26112,6 +30298,8 @@ module Aws::SageMaker
       :model_name,
       :initial_instance_count,
       :instance_type,
+      :instance_pools,
+      :variant_instance_provision_timeout_in_seconds,
       :initial_variant_weight,
       :accelerator_type,
       :core_dump_config,
@@ -26203,11 +30391,35 @@ module Aws::SageMaker
     # @!attribute max_instance_count
     #   <p>The maximum number of instances that the endpoint can provision when it scales up to accommodate an increase in traffic.</p>
     #   @return [Integer]
+    # @!attribute scale_in_policy
+    #   <p>Configures the scale-in behavior for managed instance scaling.</p>
+    #   @return [Types::ProductionVariantManagedInstanceScalingScaleInPolicy]
     class ProductionVariantManagedInstanceScaling < Struct.new(
       nil,
       :status,
       :min_instance_count,
       :max_instance_count,
+      :scale_in_policy,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configures the scale-in behavior for managed instance scaling.</p>
+    # @!attribute strategy
+    #   <p>The strategy for scaling in instances.</p> <dl> <dt>IDLE_RELEASE</dt> <dd> <p>Releases instances that have no hosted inference component copies.</p> </dd> <dt>CONSOLIDATION</dt> <dd> <p>Consolidates inference component copies onto fewer instances to release more instances. Consolidation honors the scheduling configuration of each inference component. For example, if an inference component specifies Availability Zone balance, consolidation only proceeds when the resulting distribution does not increase the imbalance.</p> </dd> </dl>
+    #   @return [String]
+    # @!attribute maximum_step_size
+    #   <p>The maximum number of instances that the endpoint can terminate at a time during a consolidation scale-in operation.</p> <p>Default value: <code>1</code>.</p>
+    #   @return [Integer]
+    # @!attribute cooldown_in_minutes
+    #   <p>The cooldown period, in minutes, after the last endpoint operation before the endpoint evaluates consolidation scale-in opportunities.</p> <p>Default value: <code>20</code>.</p>
+    #   @return [Integer]
+    class ProductionVariantManagedInstanceScalingScaleInPolicy < Struct.new(
+      nil,
+      :strategy,
+      :maximum_step_size,
+      :cooldown_in_minutes,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -26215,11 +30427,15 @@ module Aws::SageMaker
 
     # <p>Settings that control how the endpoint routes incoming traffic to the instances that the endpoint hosts.</p>
     # @!attribute routing_strategy
-    #   <p>Sets how the endpoint routes incoming traffic:</p> <ul> <li> <p> <code>LEAST_OUTSTANDING_REQUESTS</code>: The endpoint routes requests to the specific instances that have more capacity to process them.</p> </li> <li> <p> <code>RANDOM</code>: The endpoint routes each request to a randomly chosen instance.</p> </li> </ul>
+    #   <p>Sets how the endpoint routes incoming traffic:</p> <ul> <li> <p> <code>LEAST_OUTSTANDING_REQUESTS</code>: The endpoint routes requests to the specific instances that have more capacity to process them.</p> </li> <li> <p> <code>RANDOM</code>: The endpoint routes each request to a randomly chosen instance.</p> </li> <li> <p> <code>PREFIX_AWARE</code>: The endpoint routes requests that share the same prompt prefix to the same instance. When the number of in-flight requests on the selected instance reaches the configured threshold, the endpoint routes the request to an instance with more available capacity.</p> </li> </ul>
     #   @return [String]
+    # @!attribute prefix_aware_routing_config
+    #   <p>The configuration for prefix-aware routing. Specify this parameter only when you set <code>RoutingStrategy</code> to <code>PREFIX_AWARE</code>.</p>
+    #   @return [Types::PrefixAwareRoutingConfig]
     class ProductionVariantRoutingConfig < Struct.new(
       nil,
       :routing_strategy,
+      :prefix_aware_routing_config,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -26300,6 +30516,9 @@ module Aws::SageMaker
     # @!attribute desired_instance_count
     #   <p>The number of instances requested in the <code>UpdateEndpointWeightsAndCapacities</code> request. </p>
     #   @return [Integer]
+    # @!attribute instance_pools
+    #   <p>A list of instance pools for the production variant. Each pool indicates the instance type and the current number of instances of that type.</p>
+    #   @return [Array<Types::InstancePoolSummary>]
     # @!attribute variant_status
     #   <p>The endpoint variant status which describes the current deployment stage status or operational status.</p>
     #   @return [Array<Types::ProductionVariantStatus>]
@@ -26326,6 +30545,7 @@ module Aws::SageMaker
       :desired_weight,
       :current_instance_count,
       :desired_instance_count,
+      :instance_pools,
       :variant_status,
       :current_serverless_config,
       :desired_serverless_config,
@@ -27345,6 +31565,12 @@ module Aws::SageMaker
     # @!attribute end_time
     #   <p>The end time of the reserved capacity offering.</p>
     #   @return [Time]
+    # @!attribute extension_start_time
+    #   <p>The start time of the extension for the reserved capacity offering.</p>
+    #   @return [Time]
+    # @!attribute extension_end_time
+    #   <p>The end time of the extension for the reserved capacity offering.</p>
+    #   @return [Time]
     class ReservedCapacityOffering < Struct.new(
       nil,
       :reserved_capacity_type,
@@ -27357,6 +31583,8 @@ module Aws::SageMaker
       :duration_minutes,
       :start_time,
       :end_time,
+      :extension_start_time,
+      :extension_end_time,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -27387,6 +31615,9 @@ module Aws::SageMaker
     # @!attribute availability_zone
     #   <p>The availability zone for the reserved capacity.</p>
     #   @return [String]
+    # @!attribute availability_zone_id
+    #   <p>The Availability Zone ID of the reserved capacity.</p>
+    #   @return [String]
     # @!attribute duration_hours
     #   <p>The number of whole hours in the total duration for this reserved capacity.</p>
     #   @return [Integer]
@@ -27409,6 +31640,7 @@ module Aws::SageMaker
       :total_instance_count,
       :status,
       :availability_zone,
+      :availability_zone_id,
       :duration_hours,
       :duration_minutes,
       :start_time,
@@ -27470,7 +31702,7 @@ module Aws::SageMaker
     #   <p>The number of ML compute instances to use. For distributed training, provide a value greater than 1. </p>
     #   @return [Integer]
     # @!attribute volume_size_in_gb
-    #   <p>The size of the ML storage volume that you want to provision. </p> <p>ML storage volumes store model artifacts and incremental states. Training algorithms might also use the ML storage volume for scratch space. If you want to store the training data in the ML storage volume, choose <code>File</code> as the <code>TrainingInputMode</code> in the algorithm specification. </p> <p>When using an ML instance with <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html#nvme-ssd-volumes">NVMe SSD volumes</a>, SageMaker doesn't provision Amazon EBS General Purpose SSD (gp2) storage. Available storage is fixed to the NVMe-type instance's storage capacity. SageMaker configures storage paths for training datasets, checkpoints, model artifacts, and outputs to use the entire capacity of the instance storage. For example, ML instance families with the NVMe-type instance storage include <code>ml.p4d</code>, <code>ml.g4dn</code>, and <code>ml.g5</code>. </p> <p>When using an ML instance with the EBS-only storage option and without instance storage, you must define the size of EBS volume through <code>VolumeSizeInGB</code> in the <code>ResourceConfig</code> API. For example, ML instance families that use EBS volumes include <code>ml.c5</code> and <code>ml.p2</code>. </p> <p>To look up instance types and their instance storage types and volumes, see <a href="http://aws.amazon.com/ec2/instance-types/">Amazon EC2 Instance Types</a>.</p> <p>To find the default local paths defined by the SageMaker training platform, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/model-train-storage.html">Amazon SageMaker Training Storage Folders for Training Datasets, Checkpoints, Model Artifacts, and Outputs</a>.</p>
+    #   <p>The size of the ML storage volume that you want to provision. </p> <p>SageMaker automatically selects the volume size for serverless training jobs. You cannot customize this setting.</p> <p>ML storage volumes store model artifacts and incremental states. Training algorithms might also use the ML storage volume for scratch space. If you want to store the training data in the ML storage volume, choose <code>File</code> as the <code>TrainingInputMode</code> in the algorithm specification. </p> <p>When using an ML instance with <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html#nvme-ssd-volumes">NVMe SSD volumes</a>, SageMaker doesn't provision Amazon EBS General Purpose SSD (gp2) storage. Available storage is fixed to the NVMe-type instance's storage capacity. SageMaker configures storage paths for training datasets, checkpoints, model artifacts, and outputs to use the entire capacity of the instance storage. For example, ML instance families with the NVMe-type instance storage include <code>ml.p4d</code>, <code>ml.g4dn</code>, and <code>ml.g5</code>. </p> <p>When using an ML instance with the EBS-only storage option and without instance storage, you must define the size of EBS volume through <code>VolumeSizeInGB</code> in the <code>ResourceConfig</code> API. For example, ML instance families that use EBS volumes include <code>ml.c5</code> and <code>ml.p2</code>. </p> <p>To look up instance types and their instance storage types and volumes, see <a href="http://aws.amazon.com/ec2/instance-types/">Amazon EC2 Instance Types</a>.</p> <p>To find the default local paths defined by the SageMaker training platform, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/model-train-storage.html">Amazon SageMaker Training Storage Folders for Training Datasets, Checkpoints, Model Artifacts, and Outputs</a>.</p>
     #   @return [Integer]
     # @!attribute volume_kms_key_id
     #   <p>The Amazon Web Services KMS key that SageMaker uses to encrypt data on the storage volume attached to the ML compute instance(s) that run the training job.</p> <note> <p>Certain Nitro-based instances include local storage, dependent on the instance type. Local storage volumes are encrypted using a hardware module on the instance. You can't request a <code>VolumeKmsKeyId</code> when using an instance type with local storage.</p> <p>For a list of instance types that support local instance storage, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html#instance-store-volumes">Instance Store Volumes</a>.</p> <p>For more information about local instance storage encryption, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html">SSD Instance Store Volumes</a>.</p> </note> <p>The <code>VolumeKmsKeyId</code> can be in any of the following formats:</p> <ul> <li> <p>// KMS Key ID</p> <p> <code>"1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> <li> <p>// Amazon Resource Name (ARN) of a KMS Key</p> <p> <code>"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> </ul>
@@ -27487,6 +31719,15 @@ module Aws::SageMaker
     # @!attribute instance_placement_config
     #   <p>Configuration for how training job instances are placed and allocated within UltraServers. Only applicable for UltraServer capacity.</p>
     #   @return [Types::InstancePlacementConfig]
+    # @!attribute instance_preferences
+    #   <p>An ordered list of ML compute instance types for the training job, in priority order. SageMaker launches the training job on the first instance type in the list that has available capacity. If capacity is insufficient, SageMaker evaluates the next instance type in the preferred list. Exactly one instance type is selected for the job.</p> <p> <code>InstancePreferences</code> is mutually exclusive with <code>InstanceType</code>, <code>InstanceGroups</code>, <code>InstancePlacementConfig</code>, and <code>EnableManagedSpotTraining</code>, and supports only Flexible Training Plans (FTP) and On-Demand capacity.</p>
+    #   @return [Array<Types::InstancePreference>]
+    # @!attribute selected_instance_type
+    #   <p>The instance type that SageMaker selected for the job from the provided <code>InstancePreferences</code>. The job is billed for this instance type and count. Returned by <code> <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeTrainingJob.html">DescribeTrainingJob</a> </code> after an instance type is selected. This field is read-only and isn't accepted in <code>CreateTrainingJob</code> requests.</p>
+    #   @return [String]
+    # @!attribute selected_instance_count
+    #   <p>The number of instances of <code>SelectedInstanceType</code> that the training job launched with. The job is billed for this instance type and count. Returned by <code>DescribeTrainingJob</code> after an instance type is selected. This field is read-only and isn't accepted in <code>CreateTrainingJob</code> requests.</p>
+    #   @return [Integer]
     class ResourceConfig < Struct.new(
       nil,
       :instance_type,
@@ -27497,6 +31738,9 @@ module Aws::SageMaker
       :instance_groups,
       :training_plan_arn,
       :instance_placement_config,
+      :instance_preferences,
+      :selected_instance_type,
+      :selected_instance_count,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -27574,10 +31818,14 @@ module Aws::SageMaker
     # @!attribute borrow_limit
     #   <p>The limit on how much idle compute can be borrowed.The values can be 1 - 500 percent of idle compute that the team is allowed to borrow.</p> <p>Default is <code>50</code>.</p>
     #   @return [Integer]
+    # @!attribute absolute_borrow_limits
+    #   <p>The absolute limits on compute resources that can be borrowed from idle compute. When specified, these limits define the maximum amount of specific resource types (such as accelerators, vCPU, or memory) that an entity can borrow, regardless of the percentage-based <code>BorrowLimit</code>.</p>
+    #   @return [Array<Types::ComputeQuotaResourceConfig>]
     class ResourceSharingConfig < Struct.new(
       nil,
       :strategy,
       :borrow_limit,
+      :absolute_borrow_limits,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -27599,6 +31847,9 @@ module Aws::SageMaker
     # @!attribute lifecycle_config_arn
     #   <p> The Amazon Resource Name (ARN) of the Lifecycle Configuration attached to the Resource.</p>
     #   @return [String]
+    # @!attribute training_plan_arn
+    #   <p>The ARN of the SageMaker AI Training Plan to use for this app. When you specify a training plan, the app launches on reserved GPU capacity. This field is supported for JupyterLab and CodeEditor app types.</p> <p>For more information about how to reserve GPU capacity with SageMaker AI Training Plans, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/training-plan-utilization-for-studio-apps.html">Using training plans in Studio applications</a>.</p>
+    #   @return [String]
     class ResourceSpec < Struct.new(
       nil,
       :sage_maker_image_arn,
@@ -27606,6 +31857,7 @@ module Aws::SageMaker
       :sage_maker_image_version_alias,
       :instance_type,
       :lifecycle_config_arn,
+      :training_plan_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -27660,6 +31912,22 @@ module Aws::SageMaker
     class RetryStrategy < Struct.new(
       nil,
       :maximum_retry_attempts,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Defines the mapping between an in-app role and the Amazon Web Services IAM Identity Center group patterns that should be assigned to that role within the SageMaker Partner AI App.</p>
+    # @!attribute role_name
+    #   <p>The name of the in-app role within the SageMaker Partner AI App. The specific roles available depend on the app type and version.</p>
+    #   @return [String]
+    # @!attribute group_patterns
+    #   <p>A list of Amazon Web Services IAM Identity Center group patterns that should be assigned to the specified role. Group patterns support wildcard matching using <code>*</code>.</p>
+    #   @return [Array<String>]
+    class RoleGroupAssignment < Struct.new(
+      nil,
+      :role_name,
+      :group_patterns,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -27931,10 +32199,14 @@ module Aws::SageMaker
     # @!attribute fair_share
     #   <p>When enabled, entities borrow idle compute based on their assigned <code>FairShareWeight</code>.</p> <p>When disabled, entities borrow idle compute based on a first-come first-serve basis.</p> <p>Default is <code>Enabled</code>.</p>
     #   @return [String]
+    # @!attribute idle_resource_sharing
+    #   <p>Configuration for sharing idle compute resources across entities in the cluster. When enabled, unallocated resources are automatically calculated and made available for entities to borrow. </p>
+    #   @return [String]
     class SchedulerConfig < Struct.new(
       nil,
       :priority_classes,
       :fair_share,
+      :idle_resource_sharing,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -28013,6 +32285,12 @@ module Aws::SageMaker
     # @!attribute model
     #   <p>A model displayed in the Amazon SageMaker Model Dashboard.</p>
     #   @return [Types::ModelDashboardModel]
+    # @!attribute job
+    #   <p>The properties of a job.</p>
+    #   @return [Types::Job]
+    # @!attribute hub_content
+    #   <p>The properties of a hub content resource.</p>
+    #   @return [Types::HubContent]
     class SearchRecord < Struct.new(
       nil,
       :training_job,
@@ -28031,6 +32309,8 @@ module Aws::SageMaker
       :hyper_parameter_tuning_job,
       :model_card,
       :model,
+      :job,
+      :hub_content,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -28116,8 +32396,11 @@ module Aws::SageMaker
     #   <p>The desired duration in hours for the training plan offerings.</p>
     #   @return [Integer]
     # @!attribute target_resources
-    #   <p>The target resources (e.g., SageMaker Training Jobs, SageMaker HyperPod) to search for in the offerings.</p> <p>Training plans are specific to their target resource.</p> <ul> <li> <p>A training plan designed for SageMaker training jobs can only be used to schedule and run training jobs.</p> </li> <li> <p>A training plan for HyperPod clusters can be used exclusively to provide compute resources to a cluster's instance group.</p> </li> </ul>
+    #   <p>The target resources (e.g., SageMaker Training Jobs, SageMaker HyperPod, SageMaker Endpoints, Studio apps) to search for in the offerings.</p> <p>Training plans are specific to their target resource.</p> <ul> <li> <p>A training plan designed for SageMaker training jobs can only be used to schedule and run training jobs.</p> </li> <li> <p>A training plan for HyperPod clusters can be used exclusively to provide compute resources to a cluster's instance group.</p> </li> <li> <p>A training plan for SageMaker endpoints can be used exclusively to provide compute resources to SageMaker endpoints for model deployment.</p> </li> <li> <p>A training plan for Studio apps can be used to launch JupyterLab and Code Editor apps on reserved training plan capacity.</p> </li> </ul>
     #   @return [Array<String>]
+    # @!attribute training_plan_arn
+    #   <p>The Amazon Resource Name (ARN); of an existing training plan to search for extension offerings. When specified, the API returns extension offerings that can be used to extend the specified training plan.</p>
+    #   @return [String]
     class SearchTrainingPlanOfferingsRequest < Struct.new(
       nil,
       :instance_type,
@@ -28128,6 +32411,7 @@ module Aws::SageMaker
       :end_time_before,
       :duration_hours,
       :target_resources,
+      :training_plan_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -28136,9 +32420,13 @@ module Aws::SageMaker
     # @!attribute training_plan_offerings
     #   <p>A list of training plan offerings that match the search criteria.</p>
     #   @return [Array<Types::TrainingPlanOffering>]
+    # @!attribute training_plan_extension_offerings
+    #   <p>A list of extension offerings available for the specified training plan. These offerings can be used with the <code> <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ExtendTrainingPlan.html">ExtendTrainingPlan</a> </code> API to extend an existing training plan.</p>
+    #   @return [Array<Types::TrainingPlanExtensionOffering>]
     class SearchTrainingPlanOfferingsResponse < Struct.new(
       nil,
       :training_plan_offerings,
+      :training_plan_extension_offerings,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -28263,6 +32551,46 @@ module Aws::SageMaker
     class SendPipelineExecutionStepSuccessResponse < Struct.new(
       nil,
       :pipeline_execution_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p> The configuration for the serverless training job. </p>
+    # @!attribute base_model_arn
+    #   <p> The base model Amazon Resource Name (ARN) in <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/jumpstart-foundation-models-use.html">SageMaker Public Hub</a>. SageMaker always selects the latest version of the provided model. </p>
+    #   @return [String]
+    # @!attribute accept_eula
+    #   <p> Specifies agreement to the model end-user license agreement (EULA). The <code>AcceptEula</code> value must be explicitly defined as <code>True</code> in order to accept the EULA that this model requires. You are responsible for reviewing and complying with any applicable license terms and making sure they are acceptable for your use case before downloading or using a model. For more information, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/jumpstart-foundation-models-choose.html#jumpstart-foundation-models-choose-eula">End-user license agreements</a> section for more details on accepting the EULA. </p>
+    #   @return [Boolean]
+    # @!attribute job_type
+    #   <p> The serverless training job type. </p>
+    #   @return [String]
+    # @!attribute customization_technique
+    #   <p> The model customization technique. </p>
+    #   @return [String]
+    # @!attribute peft
+    #   <p> The parameter-efficient fine-tuning configuration. </p>
+    #   @return [String]
+    # @!attribute evaluation_type
+    #   <p> The evaluation job type. Required when serverless job type is <code>Evaluation</code>. </p>
+    #   @return [String]
+    # @!attribute evaluator_arn
+    #   <p> The evaluator Amazon Resource Name (ARN) used as reward function or reward prompt. </p>
+    #   @return [String]
+    # @!attribute sequence_length
+    #   <p> The maximum sequence length, in tokens, that the customization job supports. SageMaker uses this value to select a training configuration for the base model that you specify. The parameter supports the following values: </p> <ul> <li> <p> <code>1K</code> </p> </li> <li> <p> <code>2K</code> </p> </li> <li> <p> <code>4K</code> </p> </li> <li> <p> <code>8K</code> </p> </li> <li> <p> <code>16K</code> </p> </li> <li> <p> <code>32K</code> </p> </li> <li> <p> <code>64K</code> </p> </li> <li> <p> <code>128K</code> </p> </li> </ul> <p> If you don't specify a value, SageMaker selects a training configuration based on the other values that you specify. The selection is not restricted to a particular sequence length. </p>
+    #   @return [String]
+    class ServerlessJobConfig < Struct.new(
+      nil,
+      :base_model_arn,
+      :accept_eula,
+      :job_type,
+      :customization_technique,
+      :peft,
+      :evaluation_type,
+      :evaluator_arn,
+      :sequence_length,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -28395,6 +32723,26 @@ module Aws::SageMaker
     class ShuffleConfig < Struct.new(
       nil,
       :seed,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Metadata information about the health of a Slurm component on the controller node of a HyperPod cluster.</p>
+    # @!attribute component
+    #   <p>The Slurm component that the health information describes. The valid value is <code>Slurmdbd</code>, the Slurm accounting daemon.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The health of the component. Valid values are <code>Healthy</code> and <code>Unhealthy</code>.</p>
+    #   @return [String]
+    # @!attribute reason
+    #   <p>The reason the component is unhealthy. Valid values:</p> <ul> <li> <p> <code>DaemonDown</code>: The daemon is not running, so job accounting records are not being written.</p> </li> <li> <p> <code>DaemonDisabled</code>: The daemon is running and its accounting database is responding, but the daemon is not enabled to start automatically. Job accounting stops the next time the controller node restarts.</p> </li> <li> <p> <code>DbUnreachable</code>: The daemon is running, but its accounting database did not respond. Job accounting records might not be written.</p> </li> </ul> <p>This field is omitted when the component is healthy.</p>
+    #   @return [String]
+    class SlurmHealthMetadata < Struct.new(
+      nil,
+      :component,
+      :status,
+      :reason,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -28672,6 +33020,32 @@ module Aws::SageMaker
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute cluster_name
+    #   <p>The string name or the Amazon Resource Name (ARN) of the SageMaker HyperPod cluster.</p>
+    #   @return [String]
+    # @!attribute deep_health_check_configurations
+    #   <p>A list of configurations containing instance group names, EC2 instance IDs, and deep health checks to perform.</p>
+    #   @return [Array<Types::InstanceGroupHealthCheckConfiguration>]
+    class StartClusterHealthCheckRequest < Struct.new(
+      nil,
+      :cluster_name,
+      :deep_health_check_configurations,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute cluster_arn
+    #   <p>The Amazon Resource Name (ARN) of the SageMaker HyperPod cluster on which the deep health checks were initiated.</p>
+    #   @return [String]
+    class StartClusterHealthCheckResponse < Struct.new(
+      nil,
+      :cluster_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute edge_deployment_plan_name
     #   <p>The name of the edge deployment plan to start.</p>
     #   @return [String]
@@ -28777,6 +33151,9 @@ module Aws::SageMaker
     # @!attribute pipeline_version_id
     #   <p>The ID of the pipeline version to start execution from.</p>
     #   @return [Integer]
+    # @!attribute mlflow_experiment_name
+    #   <p> The MLflow experiment name of the pipeline execution. </p>
+    #   @return [String]
     class StartPipelineExecutionRequest < Struct.new(
       nil,
       :pipeline_name,
@@ -28787,6 +33164,7 @@ module Aws::SageMaker
       :parallelism_configuration,
       :selective_execution_config,
       :pipeline_version_id,
+      :mlflow_experiment_name,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -28828,6 +33206,50 @@ module Aws::SageMaker
       :session_id,
       :stream_url,
       :token_value,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute ai_benchmark_job_name
+    #   <p>The name of the AI benchmark job to stop.</p>
+    #   @return [String]
+    class StopAIBenchmarkJobRequest < Struct.new(
+      nil,
+      :ai_benchmark_job_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute ai_benchmark_job_arn
+    #   <p>The Amazon Resource Name (ARN) of the stopped benchmark job.</p>
+    #   @return [String]
+    class StopAIBenchmarkJobResponse < Struct.new(
+      nil,
+      :ai_benchmark_job_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute ai_recommendation_job_name
+    #   <p>The name of the AI recommendation job to stop.</p>
+    #   @return [String]
+    class StopAIRecommendationJobRequest < Struct.new(
+      nil,
+      :ai_recommendation_job_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute ai_recommendation_job_arn
+    #   <p>The Amazon Resource Name (ARN) of the stopped recommendation job.</p>
+    #   @return [String]
+    class StopAIRecommendationJobResponse < Struct.new(
+      nil,
+      :ai_recommendation_job_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -28936,6 +33358,28 @@ module Aws::SageMaker
     class StopInferenceRecommendationsJobRequest < Struct.new(
       nil,
       :job_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute job_name
+    #   <p>The name of the job to stop.</p>
+    #   @return [String]
+    # @!attribute job_category
+    #   <p>The category of the job to stop.</p>
+    #   @return [String]
+    class StopJobRequest < Struct.new(
+      nil,
+      :job_name,
+      :job_category,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class StopJobResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -29055,6 +33499,24 @@ module Aws::SageMaker
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute training_session_name
+    #   <p>The name of the training session to stop.</p>
+    #   @return [String]
+    class StopTrainingSessionRequest < Struct.new(
+      nil,
+      :training_session_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class StopTrainingSessionResponse < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute transform_job_name
     #   <p>The name of the batch transform job to stop.</p>
     #   @return [String]
@@ -29074,7 +33536,7 @@ module Aws::SageMaker
     #   <p>The maximum length of time, in seconds, that a managed Spot training job has to complete. It is the amount of time spent waiting for Spot capacity plus the amount of time the job can run. It must be equal to or greater than <code>MaxRuntimeInSeconds</code>. If the job does not complete during this time, SageMaker ends the job.</p> <p>When <code>RetryStrategy</code> is specified in the job request, <code>MaxWaitTimeInSeconds</code> specifies the maximum time for all of the attempts in total, not each individual attempt.</p>
     #   @return [Integer]
     # @!attribute max_pending_time_in_seconds
-    #   <p>The maximum length of time, in seconds, that a training or compilation job can be pending before it is stopped.</p> <note> <p>When working with training jobs that use capacity from <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/reserve-capacity-with-training-plans.html">training plans</a>, not all <code>Pending</code> job states count against the <code>MaxPendingTimeInSeconds</code> limit. The following scenarios do not increment the <code>MaxPendingTimeInSeconds</code> counter:</p> <ul> <li> <p>The plan is in a <code>Scheduled</code> state: Jobs queued (in <code>Pending</code> status) before a plan's start date (waiting for scheduled start time)</p> </li> <li> <p>Between capacity reservations: Jobs temporarily back to <code>Pending</code> status between two capacity reservation periods</p> </li> </ul> <p> <code>MaxPendingTimeInSeconds</code> only increments when jobs are actively waiting for capacity in an <code>Active</code> plan.</p> </note>
+    #   <p>The maximum length of time, in seconds, that a training or compilation job can be pending before it is stopped.</p> <note> <p>When working with training jobs that use capacity from <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/reserve-capacity-with-training-plans.html">training plans</a>, not all <code>Pending</code> job states count against the <code>MaxPendingTimeInSeconds</code> limit. The following scenarios do not increment the <code>MaxPendingTimeInSeconds</code> counter:</p> <ul> <li> <p>The plan is in a <code>Scheduled</code> state: Jobs queued (in <code>Pending</code> status) before a plan's start date (waiting for scheduled start time)</p> </li> <li> <p>Between capacity reservations: Jobs temporarily back to <code>Pending</code> status between two capacity reservation periods</p> </li> </ul> <p> <code>MaxPendingTimeInSeconds</code> only increments when jobs are actively waiting for capacity in an <code>Active</code> plan.</p> </note> <note> <ul> <li> <p> <code>MaxPendingTimeInSeconds</code> takes effect only for jobs that request accelerated computing instance types, such as instances in the <code>ml.p</code>, <code>ml.g</code>, and <code>ml.trn</code> families. It has no effect on jobs that request CPU-only instance types.</p> </li> <li> <p>If the job specifies <code>InstancePreferences</code>, <code>MaxPendingTimeInSeconds</code> bounds the total time SageMaker spends working through your list of instance types. It is not applied per instance type preference, and takes effect only when the list includes at least one accelerated computing instance type.</p> </li> </ul> </note>
     #   @return [Integer]
     class StoppingCondition < Struct.new(
       nil,
@@ -29127,12 +33589,16 @@ module Aws::SageMaker
     # @!attribute hidden_sage_maker_image_version_aliases
     #   <p> The version aliases you are hiding from the Studio user interface. </p>
     #   @return [Array<Types::HiddenSageMakerImage>]
+    # @!attribute execution_role_session_name_mode
+    #   <p>The execution role session name mode. If this value is set to <code>USER_IDENTITY</code>, the session name of the execution role corresponds to the user's identity. For IAM domains, the session name is the IAM session name used to generate the presigned URL. For IAM Identity Center domains, the session name is the username of the associated IAM Identity Center user. If this value is set to <code>STATIC</code> or is not set, the session name defaults to <code>SageMaker</code>.</p>
+    #   @return [String]
     class StudioWebPortalSettings < Struct.new(
       nil,
       :hidden_ml_tools,
       :hidden_app_types,
       :hidden_instance_types,
       :hidden_sage_maker_image_version_aliases,
+      :execution_role_session_name_mode,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -29696,6 +34162,9 @@ module Aws::SageMaker
     # @!attribute resource_config
     #   <p>Resources, including ML compute instances and ML storage volumes, that are configured for model training.</p>
     #   @return [Types::ResourceConfig]
+    # @!attribute warm_pool_status
+    #   <p>The status of the warm pool associated with the training job.</p>
+    #   @return [Types::WarmPoolStatus]
     # @!attribute vpc_config
     #   <p>A <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_VpcConfig.html">VpcConfig</a> object that specifies the VPC that this training job has access to. For more information, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html">Protect Training Jobs by Using an Amazon Virtual Private Cloud</a>.</p>
     #   @return [Types::VpcConfig]
@@ -29753,6 +34222,12 @@ module Aws::SageMaker
     # @!attribute debug_rule_evaluation_statuses
     #   <p>Information about the evaluation status of the rules for the training job.</p>
     #   @return [Array<Types::DebugRuleEvaluationStatus>]
+    # @!attribute output_model_package_arn
+    #   <p> The output model package Amazon Resource Name (ARN) that contains model weights or checkpoint. </p>
+    #   @return [String]
+    # @!attribute model_package_config
+    #   <p> The model package configuration. </p>
+    #   @return [Types::ModelPackageConfig]
     # @!attribute profiler_config
     #   <p>Configuration information for Amazon SageMaker Debugger system monitoring, framework profiling, and storage paths.</p>
     #   @return [Types::ProfilerConfig]
@@ -29782,6 +34257,7 @@ module Aws::SageMaker
       :input_data_config,
       :output_data_config,
       :resource_config,
+      :warm_pool_status,
       :vpc_config,
       :stopping_condition,
       :creation_time,
@@ -29801,6 +34277,8 @@ module Aws::SageMaker
       :debug_rule_configurations,
       :tensor_board_output_config,
       :debug_rule_evaluation_statuses,
+      :output_model_package_arn,
+      :model_package_config,
       :profiler_config,
       :environment,
       :retry_strategy,
@@ -29926,6 +34404,94 @@ module Aws::SageMaker
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Details about an extension to a training plan, including the offering ID, dates, status, and cost information.</p>
+    # @!attribute training_plan_extension_offering_id
+    #   <p>The unique identifier of the extension offering that was used to create this extension.</p>
+    #   @return [String]
+    # @!attribute extended_at
+    #   <p>The timestamp when the extension was created.</p>
+    #   @return [Time]
+    # @!attribute start_date
+    #   <p>The start date of the extension period.</p>
+    #   @return [Time]
+    # @!attribute end_date
+    #   <p>The end date of the extension period.</p>
+    #   @return [Time]
+    # @!attribute status
+    #   <p>The current status of the extension (e.g., Pending, Active, Scheduled, Failed, Expired).</p>
+    #   @return [String]
+    # @!attribute payment_status
+    #   <p>The payment processing status of the extension.</p>
+    #   @return [String]
+    # @!attribute availability_zone
+    #   <p>The Availability Zone of the extension.</p>
+    #   @return [String]
+    # @!attribute availability_zone_id
+    #   <p>The Availability Zone ID of the extension.</p>
+    #   @return [String]
+    # @!attribute duration_hours
+    #   <p>The duration of the extension in hours.</p>
+    #   @return [Integer]
+    # @!attribute upfront_fee
+    #   <p>The upfront fee for the extension.</p>
+    #   @return [String]
+    # @!attribute currency_code
+    #   <p>The currency code for the upfront fee (e.g., USD).</p>
+    #   @return [String]
+    class TrainingPlanExtension < Struct.new(
+      nil,
+      :training_plan_extension_offering_id,
+      :extended_at,
+      :start_date,
+      :end_date,
+      :status,
+      :payment_status,
+      :availability_zone,
+      :availability_zone_id,
+      :duration_hours,
+      :upfront_fee,
+      :currency_code,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Details about an available extension offering for a training plan. Use the offering ID with the <code> <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ExtendTrainingPlan.html">ExtendTrainingPlan</a> </code> API to extend a training plan.</p>
+    # @!attribute training_plan_extension_offering_id
+    #   <p>The unique identifier for this extension offering.</p>
+    #   @return [String]
+    # @!attribute availability_zone
+    #   <p>The Availability Zone for this extension offering.</p>
+    #   @return [String]
+    # @!attribute start_date
+    #   <p>The start date of this extension offering.</p>
+    #   @return [Time]
+    # @!attribute end_date
+    #   <p>The end date of this extension offering.</p>
+    #   @return [Time]
+    # @!attribute duration_hours
+    #   <p>The duration of this extension offering in hours.</p>
+    #   @return [Integer]
+    # @!attribute upfront_fee
+    #   <p>The upfront fee for this extension offering.</p>
+    #   @return [String]
+    # @!attribute currency_code
+    #   <p>The currency code for the upfront fee (e.g., USD).</p>
+    #   @return [String]
+    class TrainingPlanExtensionOffering < Struct.new(
+      nil,
+      :training_plan_extension_offering_id,
+      :availability_zone,
+      :start_date,
+      :end_date,
+      :duration_hours,
+      :upfront_fee,
+      :currency_code,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>A filter to apply when listing or searching for training plans.</p> <p>For more information about how to reserve GPU capacity for your SageMaker HyperPod clusters using Amazon SageMaker Training Plan, see <code> <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingPlan.html">CreateTrainingPlan</a> </code>.</p>
     # @!attribute name
     #   <p>The name of the filter field (e.g., Status, InstanceType).</p>
@@ -29947,7 +34513,7 @@ module Aws::SageMaker
     #   <p>The unique identifier for this training plan offering.</p>
     #   @return [String]
     # @!attribute target_resources
-    #   <p>The target resources (e.g., SageMaker Training Jobs, SageMaker HyperPod) for this training plan offering.</p> <p>Training plans are specific to their target resource.</p> <ul> <li> <p>A training plan designed for SageMaker training jobs can only be used to schedule and run training jobs.</p> </li> <li> <p>A training plan for HyperPod clusters can be used exclusively to provide compute resources to a cluster's instance group.</p> </li> </ul>
+    #   <p>The target resources (e.g., SageMaker Training Jobs, SageMaker HyperPod, SageMaker Endpoints, Studio apps) for this training plan offering.</p> <p>Training plans are specific to their target resource.</p> <ul> <li> <p>A training plan designed for SageMaker training jobs can only be used to schedule and run training jobs.</p> </li> <li> <p>A training plan for HyperPod clusters can be used exclusively to provide compute resources to a cluster's instance group.</p> </li> <li> <p>A training plan for SageMaker endpoints can be used exclusively to provide compute resources to SageMaker endpoints for model deployment.</p> </li> <li> <p>A training plan for Studio apps can be used to launch JupyterLab and Code Editor apps on reserved training plan capacity.</p> </li> </ul>
     #   @return [Array<String>]
     # @!attribute requested_start_time_after
     #   <p>The requested start time that the user specified when searching for the training plan offering.</p>
@@ -30030,7 +34596,7 @@ module Aws::SageMaker
     #   <p>The total number of UltraServers allocated to this training plan.</p>
     #   @return [Integer]
     # @!attribute target_resources
-    #   <p>The target resources (e.g., training jobs, HyperPod clusters) that can use this training plan.</p> <p>Training plans are specific to their target resource.</p> <ul> <li> <p>A training plan designed for SageMaker training jobs can only be used to schedule and run training jobs.</p> </li> <li> <p>A training plan for HyperPod clusters can be used exclusively to provide compute resources to a cluster's instance group.</p> </li> </ul>
+    #   <p>The target resources (e.g., training jobs, HyperPod clusters, Endpoints, Studio apps) that can use this training plan.</p> <p>Training plans are specific to their target resource.</p> <ul> <li> <p>A training plan designed for SageMaker training jobs can only be used to schedule and run training jobs.</p> </li> <li> <p>A training plan for HyperPod clusters can be used exclusively to provide compute resources to a cluster's instance group.</p> </li> <li> <p>A training plan for SageMaker endpoints can be used exclusively to provide compute resources to SageMaker endpoints for model deployment.</p> </li> <li> <p>A training plan for Studio apps can be used to launch JupyterLab and Code Editor apps on reserved training plan capacity.</p> </li> </ul>
     #   @return [Array<String>]
     # @!attribute reserved_capacity_summaries
     #   <p>A list of reserved capacities associated with this training plan, including details such as instance types, counts, and availability zones.</p>
@@ -30058,6 +34624,30 @@ module Aws::SageMaker
       include ::Smithy::Schema::Structure
     end
 
+    # <p> The serverless training job progress information. </p>
+    # @!attribute total_step_count_per_epoch
+    #   <p> The total step count per epoch. </p>
+    #   @return [Integer]
+    # @!attribute current_step
+    #   <p> The current step number. </p>
+    #   @return [Integer]
+    # @!attribute current_epoch
+    #   <p> The current epoch number. </p>
+    #   @return [Integer]
+    # @!attribute max_epoch
+    #   <p> The maximum number of epochs for this job. </p>
+    #   @return [Integer]
+    class TrainingProgressInfo < Struct.new(
+      nil,
+      :total_step_count_per_epoch,
+      :current_step,
+      :current_epoch,
+      :max_epoch,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>An object containing authentication information for a private Docker registry.</p>
     # @!attribute training_repository_credentials_provider_arn
     #   <p>The Amazon Resource Name (ARN) of an Amazon Web Services Lambda function used to give SageMaker access credentials to your private Docker registry.</p>
@@ -30065,6 +34655,146 @@ module Aws::SageMaker
     class TrainingRepositoryAuthConfig < Struct.new(
       nil,
       :training_repository_credentials_provider_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains detailed information about a training session.</p>
+    # @!attribute training_session_arn
+    #   <p>The Amazon Resource Name (ARN) of the training session.</p>
+    #   @return [String]
+    # @!attribute training_session_name
+    #   <p>The name of the training session.</p>
+    #   @return [String]
+    # @!attribute training_session_status
+    #   <p>The current status of the training session.</p>
+    #   @return [String]
+    # @!attribute model_package_group_arn
+    #   <p>The Amazon Resource Name (ARN) of the model package group where checkpoints are published.</p>
+    #   @return [String]
+    # @!attribute creation_time
+    #   <p>The date and time that the training session was created.</p>
+    #   @return [Time]
+    # @!attribute last_modified_time
+    #   <p>The date and time that the training session was last modified.</p>
+    #   @return [Time]
+    # @!attribute end_time
+    #   <p>The date and time that the training session ended.</p>
+    #   @return [Time]
+    # @!attribute error_details
+    #   <p>If the training session failed or is blocked, detailed error information.</p>
+    #   @return [String]
+    # @!attribute last_received_sequence_number
+    #   <p>The sequence number of the last training operation received by the session.</p>
+    #   @return [Integer]
+    # @!attribute billable_token_usage
+    #   <p>The billable token usage for the training session.</p>
+    #   @return [Types::BillableTokenUsage]
+    # @!attribute vpc_config
+    #   <p>The Virtual Private Cloud (VPC) configuration for the training session.</p>
+    #   @return [Types::VpcConfig]
+    # @!attribute role_arn
+    #   <p>The Amazon Resource Name (ARN) of the IAM role associated with the training session.</p>
+    #   @return [String]
+    # @!attribute lora_config
+    #   <p>The Low-Rank Adaptation (LoRA) configuration for the training session.</p>
+    #   @return [Types::LoraConfig]
+    # @!attribute model_config
+    #   <p>The configuration for the base model.</p>
+    #   @return [Types::TrainingSessionModelConfig]
+    # @!attribute output_config
+    #   <p>The output configuration for the training session.</p>
+    #   @return [Types::TrainingSessionOutputConfig]
+    # @!attribute tags
+    #   <p>The tags associated with the training session.</p>
+    #   @return [Array<Types::Tag>]
+    class TrainingSessionDetail < Struct.new(
+      nil,
+      :training_session_arn,
+      :training_session_name,
+      :training_session_status,
+      :model_package_group_arn,
+      :creation_time,
+      :last_modified_time,
+      :end_time,
+      :error_details,
+      :last_received_sequence_number,
+      :billable_token_usage,
+      :vpc_config,
+      :role_arn,
+      :lora_config,
+      :model_config,
+      :output_config,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration for the base model used in a training session.</p>
+    # @!attribute base_model_arn
+    #   <p>The Amazon Resource Name (ARN) of the base foundation model from SageMaker Hub.</p>
+    #   @return [String]
+    # @!attribute accept_eula
+    #   <p>Specifies whether you accept the end-user license agreement (EULA) for gated models.</p>
+    #   @return [Boolean]
+    class TrainingSessionModelConfig < Struct.new(
+      nil,
+      :base_model_arn,
+      :accept_eula,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The output configuration for a training session, including the Amazon S3 location for checkpoints and model artifacts, and optional encryption settings.</p>
+    # @!attribute s3_location
+    #   <p>The Amazon S3 location where training session outputs, including checkpoints and model artifacts, are stored.</p>
+    #   @return [Types::TrainingSessionS3Location]
+    class TrainingSessionOutputConfig < Struct.new(
+      nil,
+      :s3_location,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Specifies the Amazon S3 path and optional encryption settings for training session output data, including checkpoints, model artifacts, and invocation results.</p>
+    # @!attribute path
+    #   <p>The Amazon S3 path where training session outputs are stored.</p>
+    #   @return [String]
+    # @!attribute kms_key_arn
+    #   <p>The Amazon Resource Name (ARN) of the KMS key used to encrypt output data. If not specified, the default Amazon S3 encryption is used.</p>
+    #   @return [String]
+    class TrainingSessionS3Location < Struct.new(
+      nil,
+      :path,
+      :kms_key_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains summary information about a training session.</p>
+    # @!attribute training_session_arn
+    #   <p>The Amazon Resource Name (ARN) of the training session.</p>
+    #   @return [String]
+    # @!attribute training_session_status
+    #   <p>The current status of the training session.</p>
+    #   @return [String]
+    # @!attribute creation_time
+    #   <p>The date and time that the training session was created.</p>
+    #   @return [Time]
+    # @!attribute last_modified_time
+    #   <p>The date and time that the training session was last modified.</p>
+    #   @return [Time]
+    class TrainingSessionSummary < Struct.new(
+      nil,
+      :training_session_arn,
+      :training_session_status,
+      :creation_time,
+      :last_modified_time,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -30986,9 +35716,13 @@ module Aws::SageMaker
     # @!attribute id
     #   <p>The unique identifier of the UltraServer.</p>
     #   @return [String]
+    # @!attribute type
+    #   <p>The type of the UltraServer.</p>
+    #   @return [String]
     class UltraServerInfo < Struct.new(
       nil,
       :id,
+      :type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -31177,6 +35911,9 @@ module Aws::SageMaker
     # @!attribute restricted_instance_groups
     #   <p>The specialized instance groups for training models like Amazon Nova to be created in the SageMaker HyperPod cluster.</p>
     #   @return [Array<Types::ClusterRestrictedInstanceGroupSpecification>]
+    # @!attribute restricted_instance_groups_config
+    #   <p>The configuration for the restricted instance groups (RIG) in the SageMaker HyperPod cluster.</p>
+    #   @return [Types::ClusterRestrictedInstanceGroupsConfig]
     # @!attribute tiered_storage_config
     #   <p>Updates the configuration for managed tier checkpointing on the HyperPod cluster. For example, you can enable or disable the feature and modify the percentage of cluster memory allocated for checkpoint storage.</p>
     #   @return [Types::ClusterTieredStorageConfig]
@@ -31186,22 +35923,31 @@ module Aws::SageMaker
     # @!attribute instance_groups_to_delete
     #   <p>Specify the names of the instance groups to delete. Use a single <code>,</code> as the separator between multiple names.</p>
     #   @return [Array<String>]
+    # @!attribute node_provisioning_mode
+    #   <p>Determines how instance provisioning is handled during cluster operations. In <code>Continuous</code> mode, the cluster provisions available instances incrementally and retries until the target count is reached. The cluster becomes operational once cluster-level resources are ready. Use <code>CurrentCount</code> and <code>TargetCount</code> in <code>DescribeCluster</code> to track provisioning progress.</p>
+    #   @return [String]
     # @!attribute cluster_role
     #   <p>The Amazon Resource Name (ARN) of the IAM role that HyperPod assumes for cluster autoscaling operations. Cannot be updated while autoscaling is enabled.</p>
     #   @return [String]
     # @!attribute auto_scaling
     #   <p>Updates the autoscaling configuration for the cluster. Use to enable or disable automatic node scaling.</p>
     #   @return [Types::ClusterAutoScalingConfig]
+    # @!attribute orchestrator
+    #   <p>The type of orchestrator used for the SageMaker HyperPod cluster.</p>
+    #   @return [Types::ClusterOrchestrator]
     class UpdateClusterRequest < Struct.new(
       nil,
       :cluster_name,
       :instance_groups,
       :restricted_instance_groups,
+      :restricted_instance_groups_config,
       :tiered_storage_config,
       :node_recovery,
       :instance_groups_to_delete,
+      :node_provisioning_mode,
       :cluster_role,
       :auto_scaling,
+      :orchestrator,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -31260,9 +36006,13 @@ module Aws::SageMaker
     # @!attribute instance_group_name
     #   <p>The name of the instance group to update.</p>
     #   @return [String]
+    # @!attribute image_release_version
+    #   <p>The version of the HyperPod-managed AMI to update to for the instance group. Uses semantic versioning in the format <code>MAJOR.MINOR.PATCH</code>.</p>
+    #   @return [String]
     class UpdateClusterSoftwareInstanceGroupSpecification < Struct.new(
       nil,
       :instance_group_name,
+      :image_release_version,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -31474,6 +36224,12 @@ module Aws::SageMaker
     # @!attribute tag_propagation
     #   <p>Indicates whether custom tag propagation is supported for the domain. Defaults to <code>DISABLED</code>.</p>
     #   @return [String]
+    # @!attribute home_efs_file_system_creation
+    #   <p>Indicates whether to create a home EFS file system for the domain. You can change from <code>Disabled</code> to <code>Enabled</code> to provision EFS on demand, but you cannot change from <code>Enabled</code> to <code>Disabled</code>.</p>
+    #   @return [String]
+    # @!attribute vpc_id
+    #   <p>The identifier for the VPC used by the domain for network communication. Use this field only when adding VPC configuration to a SageMaker AI domain used in Amazon SageMaker Unified Studio that was created without VPC settings. SageMaker AI doesn't automatically apply VPC updates to existing applications. Stop and restart your applications to apply the changes.</p>
+    #   @return [String]
     class UpdateDomainRequest < Struct.new(
       nil,
       :domain_id,
@@ -31484,6 +36240,8 @@ module Aws::SageMaker
       :subnet_ids,
       :app_network_access_type,
       :tag_propagation,
+      :home_efs_file_system_creation,
+      :vpc_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -31899,6 +36657,9 @@ module Aws::SageMaker
     # @!attribute specification
     #   <p>Details about the resources to deploy with this inference component, including the model, container, and compute resources.</p>
     #   @return [Types::InferenceComponentSpecification]
+    # @!attribute specifications
+    #   <p>A list of specification objects for the inference component, one per instance type. Use this parameter when you want to specify different model or resource configurations for the inference component on each instance type. You can use either this parameter or the singular <code>Specification</code> parameter, but not both.</p>
+    #   @return [Array<Types::InferenceComponentSpecification>]
     # @!attribute runtime_config
     #   <p>Runtime settings for a model that is deployed with an inference component.</p>
     #   @return [Types::InferenceComponentRuntimeConfig]
@@ -31909,6 +36670,7 @@ module Aws::SageMaker
       nil,
       :inference_component_name,
       :specification,
+      :specifications,
       :runtime_config,
       :deployment_config,
       keyword_init: true
@@ -31995,6 +36757,52 @@ module Aws::SageMaker
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute arn
+    #   <p>The ARN of the MLflow App to update.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the MLflow App to update.</p>
+    #   @return [String]
+    # @!attribute artifact_store_uri
+    #   <p>The new S3 URI for the general purpose bucket to use as the artifact store for the MLflow App.</p>
+    #   @return [String]
+    # @!attribute model_registration_mode
+    #   <p>Whether to enable or disable automatic registration of new MLflow models to the SageMaker Model Registry. To enable automatic model registration, set this value to <code>AutoModelRegistrationEnabled</code>. To disable automatic model registration, set this value to <code>AutoModelRegistrationDisabled</code>. If not specified, <code>AutomaticModelRegistration</code> defaults to <code>AutoModelRegistrationEnabled</code> </p>
+    #   @return [String]
+    # @!attribute weekly_maintenance_window_start
+    #   <p>The new weekly maintenance window start day and time to update. The maintenance window day and time should be in Coordinated Universal Time (UTC) 24-hour standard time. For example: TUE:03:30.</p>
+    #   @return [String]
+    # @!attribute default_domain_id_list
+    #   <p>List of SageMaker Domain IDs for which this MLflow App is the default.</p>
+    #   @return [Array<String>]
+    # @!attribute account_default_status
+    #   <p>Indicates whether this this MLflow App is the default for the account.</p>
+    #   @return [String]
+    class UpdateMlflowAppRequest < Struct.new(
+      nil,
+      :arn,
+      :name,
+      :artifact_store_uri,
+      :model_registration_mode,
+      :weekly_maintenance_window_start,
+      :default_domain_id_list,
+      :account_default_status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>The ARN of the updated MLflow App.</p>
+    #   @return [String]
+    class UpdateMlflowAppResponse < Struct.new(
+      nil,
+      :arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute tracking_server_name
     #   <p>The name of the MLflow Tracking Server to update.</p>
     #   @return [String]
@@ -32010,6 +36818,12 @@ module Aws::SageMaker
     # @!attribute weekly_maintenance_window_start
     #   <p>The new weekly maintenance window start day and time to update. The maintenance window day and time should be in Coordinated Universal Time (UTC) 24-hour standard time. For example: TUE:03:30.</p>
     #   @return [String]
+    # @!attribute s3_bucket_owner_account_id
+    #   <p>The new expected Amazon Web Services account ID that owns the Amazon S3 bucket for artifact storage.</p>
+    #   @return [String]
+    # @!attribute s3_bucket_owner_verification
+    #   <p>Whether to enable or disable Amazon S3 Bucket Owenrship Verifaction whenever the MLflow Tracking Server interacts with Amazon Amazon S3.</p>
+    #   @return [Boolean]
     class UpdateMlflowTrackingServerRequest < Struct.new(
       nil,
       :tracking_server_name,
@@ -32017,6 +36831,8 @@ module Aws::SageMaker
       :tracking_server_size,
       :automatic_model_registration,
       :weekly_maintenance_window_start,
+      :s3_bucket_owner_account_id,
+      :s3_bucket_owner_verification,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -32069,6 +36885,9 @@ module Aws::SageMaker
     # @!attribute model_approval_status
     #   <p>The approval status of the model.</p>
     #   @return [String]
+    # @!attribute model_package_registration_type
+    #   <p> The package registration type of the model package input. </p>
+    #   @return [String]
     # @!attribute approval_description
     #   <p>A description for the approval status of the model.</p>
     #   @return [String]
@@ -32100,6 +36919,7 @@ module Aws::SageMaker
       nil,
       :model_package_arn,
       :model_approval_status,
+      :model_package_registration_type,
       :approval_description,
       :customer_metadata_properties,
       :customer_metadata_properties_to_remove,
@@ -32198,6 +37018,9 @@ module Aws::SageMaker
     # @!attribute ip_address_type
     #   <p>The IP address type for the notebook instance. Specify <code>ipv4</code> for IPv4-only connectivity or <code>dualstack</code> for both IPv4 and IPv6 connectivity. The notebook instance must be stopped before updating this setting. When you specify <code>dualstack</code>, the subnet must support IPv6 addressing.</p>
     #   @return [String]
+    # @!attribute platform_identifier
+    #   <p>The platform identifier of the notebook instance runtime environment.</p>
+    #   @return [String]
     # @!attribute role_arn
     #   <p>The Amazon Resource Name (ARN) of the IAM role that SageMaker AI can assume to access the notebook instance. For more information, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html">SageMaker AI Roles</a>. </p> <note> <p>To be able to pass this role to SageMaker AI, the caller of this API must have the <code>iam:PassRole</code> permission.</p> </note>
     #   @return [String]
@@ -32239,6 +37062,7 @@ module Aws::SageMaker
       :notebook_instance_name,
       :instance_type,
       :ip_address_type,
+      :platform_identifier,
       :role_arn,
       :lifecycle_config_name,
       :disassociate_lifecycle_config,
@@ -32301,9 +37125,21 @@ module Aws::SageMaker
     # @!attribute application_config
     #   <p>Configuration settings for the SageMaker Partner AI App.</p>
     #   @return [Types::PartnerAppConfig]
+    # @!attribute idc_config
+    #   <p>Specifies the Amazon Web Services IAM Identity Center configuration for the SageMaker Partner AI App. Specify this parameter when <code>AuthType</code> is <code>IDC</code>. Apps that use <code>IAM</code> authorization don't use this parameter.</p>
+    #   @return [Types::IdcConfigInput]
+    # @!attribute auth_type
+    #   <p>The authorization type that users use to access the SageMaker Partner AI App. Use this parameter to migrate an existing SageMaker Partner AI App from <code>IAM</code> authorization to <code>IDC</code> authorization. Valid values:</p> <ul> <li> <p> <code>IAM</code>: Users access the SageMaker Partner AI App with their Amazon Web Services IAM identity.</p> </li> <li> <p> <code>IDC</code>: Users access the SageMaker Partner AI App with their Amazon Web Services IAM Identity Center identity. Specify the Identity Center instance to use in <code>IdcConfig</code>.</p> </li> </ul>
+    #   @return [String]
     # @!attribute enable_iam_session_based_identity
     #   <p>When set to <code>TRUE</code>, the SageMaker Partner AI App sets the Amazon Web Services IAM session name or the authenticated IAM user as the identity of the SageMaker Partner AI App user.</p>
     #   @return [Boolean]
+    # @!attribute enable_auto_minor_version_upgrade
+    #   <p>When set to <code>TRUE</code>, the SageMaker Partner AI App is automatically upgraded to the latest minor version during the next scheduled maintenance window, if one is available.</p>
+    #   @return [Boolean]
+    # @!attribute app_version
+    #   <p>The semantic version to upgrade the SageMaker Partner AI App to. Must be the same semantic version returned in the <code>AvailableUpgrade</code> field from <code>DescribePartnerApp</code>. Version skipping and downgrades are not supported.</p>
+    #   @return [String]
     # @!attribute client_token
     #   <p>A unique token that guarantees that the call to this API is idempotent.</p>
     #   @return [String]
@@ -32316,7 +37152,11 @@ module Aws::SageMaker
       :maintenance_config,
       :tier,
       :application_config,
+      :idc_config,
+      :auth_type,
       :enable_iam_session_based_identity,
+      :enable_auto_minor_version_upgrade,
+      :app_version,
       :client_token,
       :tags,
       keyword_init: true
@@ -33111,6 +37951,21 @@ module Aws::SageMaker
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+    end
+
+    # <p>The workload specification for benchmark tool configuration. Provide an inline YAML or JSON string.</p>
+    # @!attribute inline
+    #   <p>An inline YAML or JSON string that defines benchmark parameters.</p>
+    #   @return [String]
+    class WorkloadSpec < Struct.new(
+      :inline,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class Inline < WorkloadSpec; end
+      class Unknown < WorkloadSpec; end
     end
 
     # <p>The workspace settings for the SageMaker Canvas application.</p>

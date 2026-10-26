@@ -482,6 +482,31 @@ module Aws::DatabaseMigrationService
     end
 
     # @api private
+    class DescribeMetadataModelChildren
+      def next_tokens(data)
+        next_token = data.marker
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:marker] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:marker]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:marker] = prev_token
+        tokens
+      end
+
+      def items(data)
+        data.metadata_model_children
+      end
+    end
+
+    # @api private
     class DescribeMetadataModelConversions
       def next_tokens(data)
         next_token = data.marker
@@ -503,6 +528,31 @@ module Aws::DatabaseMigrationService
 
       def items(data)
         raise NotImplementedError, 'item iteration is not implemented for this operation'
+      end
+    end
+
+    # @api private
+    class DescribeMetadataModelCreations
+      def next_tokens(data)
+        next_token = data.marker
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:marker] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:marker]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:marker] = prev_token
+        tokens
+      end
+
+      def items(data)
+        data.requests
       end
     end
 

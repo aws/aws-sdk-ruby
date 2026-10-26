@@ -30,8 +30,10 @@ module Aws::BedrockAgentCoreControl
   # * {InternalServerException}
   # * {ResourceLimitExceededException}
   # * {ResourceNotFoundException}
+  # * {RetryableConflictException}
   # * {ServiceException}
   # * {ServiceQuotaExceededException}
+  # * {SubscriptionRequiredException}
   # * {ThrottledException}
   # * {ThrottlingException}
   # * {UnauthorizedException}
@@ -146,6 +148,23 @@ module Aws::BedrockAgentCoreControl
       end
     end
 
+    # <p>The operation failed because of a conflicting request. Retry the request.</p>
+    class RetryableConflictException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::BedrockAgentCoreControl::Types::RetryableConflictException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+
+      def retryable?
+        true
+      end
+    end
+
     # <p>An internal error occurred.</p>
     class ServiceException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
@@ -173,6 +192,29 @@ module Aws::BedrockAgentCoreControl
 
       def message
         @data[:message]
+      end
+    end
+
+    # <p>The request failed because it requires an active Amazon Web Services Marketplace subscription that is not present. Subscribe to the required product in Amazon Web Services Marketplace and try again.</p>
+    class SubscriptionRequiredException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::BedrockAgentCoreControl::Types::SubscriptionRequiredException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+
+      # URL to the Marketplace listing for subscription
+      def subscription_url
+        @data[:subscription_url]
+      end
+
+      # The product requiring subscription
+      def product_name
+        @data[:product_name]
       end
     end
 

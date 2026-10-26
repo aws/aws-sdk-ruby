@@ -18,6 +18,10 @@ module Aws::RDS
     AddSourceIdentifierToSubscriptionMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rds#AddSourceIdentifierToSubscriptionMessage", name: "AddSourceIdentifierToSubscriptionMessage")
     AddSourceIdentifierToSubscriptionResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rds#AddSourceIdentifierToSubscriptionResult", name: "AddSourceIdentifierToSubscriptionResult")
     AddTagsToResourceMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rds#AddTagsToResourceMessage", name: "AddTagsToResourceMessage")
+    AdditionalStorageVolume = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rds#AdditionalStorageVolume", name: "AdditionalStorageVolume")
+    AdditionalStorageVolumeOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rds#AdditionalStorageVolumeOutput", name: "AdditionalStorageVolumeOutput")
+    AdditionalStorageVolumesList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.rds#AdditionalStorageVolumesList", name: "AdditionalStorageVolumesList")
+    AdditionalStorageVolumesOutputList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.rds#AdditionalStorageVolumesOutputList", name: "AdditionalStorageVolumesOutputList")
     ApplyMethod = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.rds#ApplyMethod", name: "ApplyMethod")
     ApplyPendingMaintenanceActionMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rds#ApplyPendingMaintenanceActionMessage", name: "ApplyPendingMaintenanceActionMessage")
     ApplyPendingMaintenanceActionResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rds#ApplyPendingMaintenanceActionResult", name: "ApplyPendingMaintenanceActionResult")
@@ -35,6 +39,8 @@ module Aws::RDS
     AvailabilityZone = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rds#AvailabilityZone", name: "AvailabilityZone")
     AvailabilityZoneList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.rds#AvailabilityZoneList", name: "AvailabilityZoneList")
     AvailabilityZones = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.rds#AvailabilityZones", name: "AvailabilityZones")
+    AvailableAdditionalStorageVolumesOption = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rds#AvailableAdditionalStorageVolumesOption", name: "AvailableAdditionalStorageVolumesOption")
+    AvailableAdditionalStorageVolumesOptionList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.rds#AvailableAdditionalStorageVolumesOptionList", name: "AvailableAdditionalStorageVolumesOptionList")
     AvailableProcessorFeature = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rds#AvailableProcessorFeature", name: "AvailableProcessorFeature")
     AvailableProcessorFeatureList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.rds#AvailableProcessorFeatureList", name: "AvailableProcessorFeatureList")
     AwsBackupRecoveryPointArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.rds#AwsBackupRecoveryPointArn", name: "AwsBackupRecoveryPointArn", traits: {"smithy.api#length" => {"min" => 43, "max" => 350}, "smithy.api#pattern" => "^arn:aws[a-z-]*:backup:[-a-z0-9]+:[0-9]{12}:[-a-z]+:([a-z0-9\\-]+:)?[a-z][a-z0-9\\-]{0,255}$"})
@@ -133,8 +139,11 @@ module Aws::RDS
     CustomEngineName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.rds#CustomEngineName", name: "CustomEngineName", traits: {"smithy.api#length" => {"min" => 1, "max" => 35}, "smithy.api#pattern" => "^[A-Za-z0-9-]{1,35}$"})
     CustomEngineVersion = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.rds#CustomEngineVersion", name: "CustomEngineVersion", traits: {"smithy.api#length" => {"min" => 1, "max" => 60}, "smithy.api#pattern" => "^[a-z0-9_.-]{1,60}$"})
     CustomEngineVersionStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.rds#CustomEngineVersionStatus", name: "CustomEngineVersionStatus")
+    DBAndClusterArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.rds#DBAndClusterArn", name: "DBAndClusterArn", traits: {"smithy.api#length" => {"min" => 39, "max" => 255}, "smithy.api#pattern" => "^arn:aws[a-z-]*:rds(-[a-z]+)?:[a-z0-9-]*:[0-9]{12}:(cluster|db):[a-zA-Z][a-zA-Z0-9-]{0,62}$"})
     DBCluster = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rds#DBCluster", name: "DBCluster")
     DBClusterAlreadyExistsFault = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rds#DBClusterAlreadyExistsFault", name: "DBClusterAlreadyExistsFault", traits: {"aws.protocols#awsQueryError" => {"code" => "DBClusterAlreadyExistsFault", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
+    DBClusterAssociatedRole = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rds#DBClusterAssociatedRole", name: "DBClusterAssociatedRole")
+    DBClusterAssociatedRoles = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.rds#DBClusterAssociatedRoles", name: "DBClusterAssociatedRoles", traits: {"smithy.api#length" => {"min" => 0, "max" => 15}})
     DBClusterAutomatedBackup = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rds#DBClusterAutomatedBackup", name: "DBClusterAutomatedBackup")
     DBClusterAutomatedBackupList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.rds#DBClusterAutomatedBackupList", name: "DBClusterAutomatedBackupList")
     DBClusterAutomatedBackupMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rds#DBClusterAutomatedBackupMessage", name: "DBClusterAutomatedBackupMessage")
@@ -378,6 +387,7 @@ module Aws::RDS
     DescribePendingMaintenanceActionsMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rds#DescribePendingMaintenanceActionsMessage", name: "DescribePendingMaintenanceActionsMessage")
     DescribeReservedDBInstancesMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rds#DescribeReservedDBInstancesMessage", name: "DescribeReservedDBInstancesMessage")
     DescribeReservedDBInstancesOfferingsMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rds#DescribeReservedDBInstancesOfferingsMessage", name: "DescribeReservedDBInstancesOfferingsMessage")
+    DescribeServerlessV2PlatformVersionsMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rds#DescribeServerlessV2PlatformVersionsMessage", name: "DescribeServerlessV2PlatformVersionsMessage")
     DescribeSourceRegionsMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rds#DescribeSourceRegionsMessage", name: "DescribeSourceRegionsMessage")
     DescribeTenantDatabasesMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rds#DescribeTenantDatabasesMessage", name: "DescribeTenantDatabasesMessage")
     DescribeValidDBInstanceModificationsMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rds#DescribeValidDBInstanceModificationsMessage", name: "DescribeValidDBInstanceModificationsMessage")
@@ -447,6 +457,7 @@ module Aws::RDS
     GlobalClusterQuotaExceededFault = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rds#GlobalClusterQuotaExceededFault", name: "GlobalClusterQuotaExceededFault", traits: {"aws.protocols#awsQueryError" => {"code" => "GlobalClusterQuotaExceededFault", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
     GlobalClustersMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rds#GlobalClustersMessage", name: "GlobalClustersMessage")
     IAMAuthMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.rds#IAMAuthMode", name: "IAMAuthMode")
+    IAMRoleArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.rds#IAMRoleArn", name: "IAMRoleArn", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "^arn:aws[a-z-]*:iam::[0-9]*:role/.*$"})
     IPRange = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rds#IPRange", name: "IPRange")
     IPRangeList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.rds#IPRangeList", name: "IPRangeList")
     IamRoleMissingPermissionsFault = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rds#IamRoleMissingPermissionsFault", name: "IamRoleMissingPermissionsFault", traits: {"aws.protocols#awsQueryError" => {"code" => "IamRoleMissingPermissions", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
@@ -528,6 +539,8 @@ module Aws::RDS
     MinimumEngineVersionPerAllowedValueList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.rds#MinimumEngineVersionPerAllowedValueList", name: "MinimumEngineVersionPerAllowedValueList")
     ModifyActivityStreamRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rds#ModifyActivityStreamRequest", name: "ModifyActivityStreamRequest")
     ModifyActivityStreamResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rds#ModifyActivityStreamResponse", name: "ModifyActivityStreamResponse")
+    ModifyAdditionalStorageVolume = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rds#ModifyAdditionalStorageVolume", name: "ModifyAdditionalStorageVolume")
+    ModifyAdditionalStorageVolumesList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.rds#ModifyAdditionalStorageVolumesList", name: "ModifyAdditionalStorageVolumesList")
     ModifyCertificatesMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rds#ModifyCertificatesMessage", name: "ModifyCertificatesMessage")
     ModifyCertificatesResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rds#ModifyCertificatesResult", name: "ModifyCertificatesResult")
     ModifyCurrentDBClusterCapacityMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rds#ModifyCurrentDBClusterCapacityMessage", name: "ModifyCurrentDBClusterCapacityMessage")
@@ -572,6 +585,7 @@ module Aws::RDS
     ModifyTenantDatabaseMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rds#ModifyTenantDatabaseMessage", name: "ModifyTenantDatabaseMessage")
     ModifyTenantDatabaseResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rds#ModifyTenantDatabaseResult", name: "ModifyTenantDatabaseResult")
     NetworkTypeNotSupported = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rds#NetworkTypeNotSupported", name: "NetworkTypeNotSupported", traits: {"aws.protocols#awsQueryError" => {"code" => "NetworkTypeNotSupported", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
+    OperatorSensitiveString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.rds#OperatorSensitiveString", name: "OperatorSensitiveString", traits: {"smithy.api#sensitive" => {}})
     Option = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rds#Option", name: "Option")
     OptionConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rds#OptionConfiguration", name: "OptionConfiguration")
     OptionConfigurationList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.rds#OptionConfigurationList", name: "OptionConfigurationList")
@@ -694,6 +708,9 @@ module Aws::RDS
     ScalingConfigurationInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rds#ScalingConfigurationInfo", name: "ScalingConfigurationInfo")
     SensitiveString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.rds#SensitiveString", name: "SensitiveString", traits: {"smithy.api#sensitive" => {}})
     ServerlessV2FeaturesSupport = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rds#ServerlessV2FeaturesSupport", name: "ServerlessV2FeaturesSupport")
+    ServerlessV2PlatformVersionInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rds#ServerlessV2PlatformVersionInfo", name: "ServerlessV2PlatformVersionInfo")
+    ServerlessV2PlatformVersionList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.rds#ServerlessV2PlatformVersionList", name: "ServerlessV2PlatformVersionList")
+    ServerlessV2PlatformVersionsMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rds#ServerlessV2PlatformVersionsMessage", name: "ServerlessV2PlatformVersionsMessage")
     ServerlessV2ScalingConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rds#ServerlessV2ScalingConfiguration", name: "ServerlessV2ScalingConfiguration")
     ServerlessV2ScalingConfigurationInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rds#ServerlessV2ScalingConfigurationInfo", name: "ServerlessV2ScalingConfigurationInfo")
     SharedSnapshotQuotaExceededFault = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rds#SharedSnapshotQuotaExceededFault", name: "SharedSnapshotQuotaExceededFault", traits: {"aws.protocols#awsQueryError" => {"code" => "SharedSnapshotQuotaExceeded", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
@@ -725,6 +742,7 @@ module Aws::RDS
     StopDBInstanceAutomatedBackupsReplicationResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rds#StopDBInstanceAutomatedBackupsReplicationResult", name: "StopDBInstanceAutomatedBackupsReplicationResult")
     StopDBInstanceMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rds#StopDBInstanceMessage", name: "StopDBInstanceMessage")
     StopDBInstanceResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rds#StopDBInstanceResult", name: "StopDBInstanceResult")
+    StorageEncryptionType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.rds#StorageEncryptionType", name: "StorageEncryptionType")
     StorageQuotaExceededFault = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rds#StorageQuotaExceededFault", name: "StorageQuotaExceededFault", traits: {"aws.protocols#awsQueryError" => {"code" => "StorageQuotaExceeded", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
     StorageTypeNotAvailableFault = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rds#StorageTypeNotAvailableFault", name: "StorageTypeNotAvailableFault", traits: {"aws.protocols#awsQueryError" => {"code" => "StorageTypeNotAvailableFault", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
     StorageTypeNotSupportedFault = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rds#StorageTypeNotSupportedFault", name: "StorageTypeNotSupportedFault", traits: {"aws.protocols#awsQueryError" => {"code" => "StorageTypeNotSupported", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
@@ -756,6 +774,8 @@ module Aws::RDS
     Tag = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rds#Tag", name: "Tag")
     TagList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.rds#TagList", name: "TagList")
     TagListMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rds#TagListMessage", name: "TagListMessage")
+    TagSpecification = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rds#TagSpecification", name: "TagSpecification")
+    TagSpecificationList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.rds#TagSpecificationList", name: "TagSpecificationList")
     TargetConnectionNetworkType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.rds#TargetConnectionNetworkType", name: "TargetConnectionNetworkType")
     TargetDBClusterParameterGroupName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.rds#TargetDBClusterParameterGroupName", name: "TargetDBClusterParameterGroupName", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => "^[A-Za-z](?!.*--)[0-9A-Za-z-]*[^-]|^default(?!.*--)(?!.*\\.\\.)[0-9A-Za-z-.]*[^-]$"})
     TargetDBInstanceClass = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.rds#TargetDBInstanceClass", name: "TargetDBInstanceClass", traits: {"smithy.api#length" => {"min" => 5, "max" => 20}, "smithy.api#pattern" => "^db\\.[0-9a-z]{2,6}\\.[0-9a-z]{4,9}$"})
@@ -765,6 +785,8 @@ module Aws::RDS
     TargetHealth = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rds#TargetHealth", name: "TargetHealth")
     TargetHealthReason = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.rds#TargetHealthReason", name: "TargetHealthReason")
     TargetList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.rds#TargetList", name: "TargetList")
+    TargetResourceConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rds#TargetResourceConfiguration", name: "TargetResourceConfiguration")
+    TargetResourceConfigurationList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.rds#TargetResourceConfigurationList", name: "TargetResourceConfigurationList", traits: {"smithy.api#length" => {"max" => 20}})
     TargetRole = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.rds#TargetRole", name: "TargetRole")
     TargetState = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.rds#TargetState", name: "TargetState")
     TargetStorageType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.rds#TargetStorageType", name: "TargetStorageType")
@@ -778,15 +800,20 @@ module Aws::RDS
     TenantDatabasesMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rds#TenantDatabasesMessage", name: "TenantDatabasesMessage")
     Timezone = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rds#Timezone", name: "Timezone")
     UnsupportedDBEngineVersionFault = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rds#UnsupportedDBEngineVersionFault", name: "UnsupportedDBEngineVersionFault", traits: {"aws.protocols#awsQueryError" => {"code" => "UnsupportedDBEngineVersion", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
+    UpgradeRolloutOrder = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.rds#UpgradeRolloutOrder", name: "UpgradeRolloutOrder")
     UpgradeTarget = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rds#UpgradeTarget", name: "UpgradeTarget")
     UserAuthConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rds#UserAuthConfig", name: "UserAuthConfig")
     UserAuthConfigInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rds#UserAuthConfigInfo", name: "UserAuthConfigInfo")
     UserAuthConfigInfoList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.rds#UserAuthConfigInfoList", name: "UserAuthConfigInfoList")
     UserAuthConfigList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.rds#UserAuthConfigList", name: "UserAuthConfigList", traits: {"smithy.api#length" => {"min" => 0, "max" => 200}})
+    ValidAdditionalStorageOptions = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rds#ValidAdditionalStorageOptions", name: "ValidAdditionalStorageOptions")
     ValidDBInstanceModificationsMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rds#ValidDBInstanceModificationsMessage", name: "ValidDBInstanceModificationsMessage")
     ValidStorageOptions = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rds#ValidStorageOptions", name: "ValidStorageOptions")
     ValidStorageOptionsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.rds#ValidStorageOptionsList", name: "ValidStorageOptionsList")
     ValidUpgradeTargetList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.rds#ValidUpgradeTargetList", name: "ValidUpgradeTargetList")
+    ValidVolumeOptions = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rds#ValidVolumeOptions", name: "ValidVolumeOptions")
+    ValidVolumeOptionsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.rds#ValidVolumeOptionsList", name: "ValidVolumeOptionsList")
+    VpcEncryptionControlViolationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rds#VpcEncryptionControlViolationException", name: "VpcEncryptionControlViolationException", traits: {"aws.protocols#awsQueryError" => {"code" => "VpcEncryptionControlViolationException", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
     VpcSecurityGroupIdList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.rds#VpcSecurityGroupIdList", name: "VpcSecurityGroupIdList")
     VpcSecurityGroupMembership = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rds#VpcSecurityGroupMembership", name: "VpcSecurityGroupMembership")
     VpcSecurityGroupMembershipList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.rds#VpcSecurityGroupMembershipList", name: "VpcSecurityGroupMembershipList")
@@ -811,7 +838,7 @@ module Aws::RDS
     ActivityStreamStatus.add_member(:started, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "started", traits: {"smithy.api#enumValue" => "started"}))
     ActivityStreamStatus.add_member(:stopping, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "stopping", traits: {"smithy.api#enumValue" => "stopping"}))
     AddRoleToDBClusterMessage.add_member(:db_cluster_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBClusterIdentifier", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    AddRoleToDBClusterMessage.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "RoleArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    AddRoleToDBClusterMessage.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IAMRoleArn, name: "RoleArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     AddRoleToDBClusterMessage.add_member(:feature_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "FeatureName"))
     AddRoleToDBClusterMessage.type = Types::AddRoleToDBClusterMessage
     AddRoleToDBInstanceMessage.add_member(:db_instance_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBInstanceIdentifier", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -826,6 +853,25 @@ module Aws::RDS
     AddTagsToResourceMessage.add_member(:resource_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     AddTagsToResourceMessage.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     AddTagsToResourceMessage.type = Types::AddTagsToResourceMessage
+    AdditionalStorageVolume.add_member(:volume_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "VolumeName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    AdditionalStorageVolume.add_member(:allocated_storage, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "AllocatedStorage"))
+    AdditionalStorageVolume.add_member(:iops, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "IOPS"))
+    AdditionalStorageVolume.add_member(:max_allocated_storage, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "MaxAllocatedStorage"))
+    AdditionalStorageVolume.add_member(:storage_throughput, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "StorageThroughput"))
+    AdditionalStorageVolume.add_member(:storage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "StorageType"))
+    AdditionalStorageVolume.type = Types::AdditionalStorageVolume
+    AdditionalStorageVolumeOutput.add_member(:volume_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "VolumeName"))
+    AdditionalStorageVolumeOutput.add_member(:storage_volume_status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "StorageVolumeStatus"))
+    AdditionalStorageVolumeOutput.add_member(:storage_operation_status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "StorageOperationStatus"))
+    AdditionalStorageVolumeOutput.add_member(:storage_operation_percent_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "StorageOperationPercentProgress"))
+    AdditionalStorageVolumeOutput.add_member(:allocated_storage, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "AllocatedStorage"))
+    AdditionalStorageVolumeOutput.add_member(:iops, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "IOPS"))
+    AdditionalStorageVolumeOutput.add_member(:max_allocated_storage, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "MaxAllocatedStorage"))
+    AdditionalStorageVolumeOutput.add_member(:storage_throughput, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "StorageThroughput"))
+    AdditionalStorageVolumeOutput.add_member(:storage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "StorageType"))
+    AdditionalStorageVolumeOutput.type = Types::AdditionalStorageVolumeOutput
+    AdditionalStorageVolumesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalStorageVolume, name: "member"))
+    AdditionalStorageVolumesOutputList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalStorageVolumeOutput, name: "member"))
     ApplyMethod.add_member(:immediate, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "immediate", traits: {"smithy.api#enumValue" => "immediate"}))
     ApplyMethod.add_member(:pending_reboot, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "pending_reboot", traits: {"smithy.api#enumValue" => "pending-reboot"}))
     ApplyPendingMaintenanceActionMessage.add_member(:resource_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceIdentifier", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -858,6 +904,20 @@ module Aws::RDS
     AvailabilityZone.type = Types::AvailabilityZone
     AvailabilityZoneList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZone, name: "member", traits: {"smithy.api#xmlName" => "AvailabilityZone"}))
     AvailabilityZones.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "AvailabilityZone"}))
+    AvailableAdditionalStorageVolumesOption.add_member(:supports_storage_autoscaling, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "SupportsStorageAutoscaling"))
+    AvailableAdditionalStorageVolumesOption.add_member(:supports_storage_throughput, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "SupportsStorageThroughput"))
+    AvailableAdditionalStorageVolumesOption.add_member(:supports_iops, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "SupportsIops"))
+    AvailableAdditionalStorageVolumesOption.add_member(:storage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "StorageType"))
+    AvailableAdditionalStorageVolumesOption.add_member(:min_storage_size, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "MinStorageSize"))
+    AvailableAdditionalStorageVolumesOption.add_member(:max_storage_size, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "MaxStorageSize"))
+    AvailableAdditionalStorageVolumesOption.add_member(:min_iops, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "MinIops"))
+    AvailableAdditionalStorageVolumesOption.add_member(:max_iops, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "MaxIops"))
+    AvailableAdditionalStorageVolumesOption.add_member(:min_iops_per_gib, ::Smithy::Schema::Shapes::MemberShape.new(target: DoubleOptional, name: "MinIopsPerGib"))
+    AvailableAdditionalStorageVolumesOption.add_member(:max_iops_per_gib, ::Smithy::Schema::Shapes::MemberShape.new(target: DoubleOptional, name: "MaxIopsPerGib"))
+    AvailableAdditionalStorageVolumesOption.add_member(:min_storage_throughput, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "MinStorageThroughput"))
+    AvailableAdditionalStorageVolumesOption.add_member(:max_storage_throughput, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "MaxStorageThroughput"))
+    AvailableAdditionalStorageVolumesOption.type = Types::AvailableAdditionalStorageVolumesOption
+    AvailableAdditionalStorageVolumesOptionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailableAdditionalStorageVolumesOption, name: "member", traits: {"smithy.api#xmlName" => "AvailableAdditionalStorageVolumesOption"}))
     AvailableProcessorFeature.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name"))
     AvailableProcessorFeature.add_member(:default_value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DefaultValue"))
     AvailableProcessorFeature.add_member(:allowed_values, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "AllowedValues"))
@@ -962,18 +1022,17 @@ module Aws::RDS
     ClusterPendingModifiedValues.type = Types::ClusterPendingModifiedValues
     ClusterScalabilityType.add_member(:standard, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STANDARD", traits: {"smithy.api#enumValue" => "standard"}))
     ClusterScalabilityType.add_member(:limitless, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LIMITLESS", traits: {"smithy.api#enumValue" => "limitless"}))
-    ClusterScalabilityType.add_member(:scaleout, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SCALEOUT", traits: {"smithy.api#enumValue" => "scaleout"}))
     ConnectionPoolConfiguration.add_member(:max_connections_percent, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "MaxConnectionsPercent"))
     ConnectionPoolConfiguration.add_member(:max_idle_connections_percent, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "MaxIdleConnectionsPercent"))
     ConnectionPoolConfiguration.add_member(:connection_borrow_timeout, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "ConnectionBorrowTimeout"))
     ConnectionPoolConfiguration.add_member(:session_pinning_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "SessionPinningFilters"))
-    ConnectionPoolConfiguration.add_member(:init_query, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "InitQuery"))
+    ConnectionPoolConfiguration.add_member(:init_query, ::Smithy::Schema::Shapes::MemberShape.new(target: OperatorSensitiveString, name: "InitQuery"))
     ConnectionPoolConfiguration.type = Types::ConnectionPoolConfiguration
     ConnectionPoolConfigurationInfo.add_member(:max_connections_percent, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "MaxConnectionsPercent"))
     ConnectionPoolConfigurationInfo.add_member(:max_idle_connections_percent, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "MaxIdleConnectionsPercent"))
     ConnectionPoolConfigurationInfo.add_member(:connection_borrow_timeout, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "ConnectionBorrowTimeout"))
     ConnectionPoolConfigurationInfo.add_member(:session_pinning_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "SessionPinningFilters"))
-    ConnectionPoolConfigurationInfo.add_member(:init_query, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "InitQuery"))
+    ConnectionPoolConfigurationInfo.add_member(:init_query, ::Smithy::Schema::Shapes::MemberShape.new(target: OperatorSensitiveString, name: "InitQuery"))
     ConnectionPoolConfigurationInfo.type = Types::ConnectionPoolConfigurationInfo
     ContextAttribute.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Key"))
     ContextAttribute.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Value"))
@@ -1037,6 +1096,7 @@ module Aws::RDS
     CreateBlueGreenDeploymentRequest.add_member(:target_storage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetStorageType, name: "TargetStorageType"))
     CreateBlueGreenDeploymentRequest.add_member(:target_allocated_storage, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "TargetAllocatedStorage"))
     CreateBlueGreenDeploymentRequest.add_member(:target_storage_throughput, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "TargetStorageThroughput"))
+    CreateBlueGreenDeploymentRequest.add_member(:target_resource_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetResourceConfigurationList, name: "TargetResourceConfigurations"))
     CreateBlueGreenDeploymentRequest.type = Types::CreateBlueGreenDeploymentRequest
     CreateBlueGreenDeploymentResponse.add_member(:blue_green_deployment, ::Smithy::Schema::Shapes::MemberShape.new(target: BlueGreenDeployment, name: "BlueGreenDeployment"))
     CreateBlueGreenDeploymentResponse.type = Types::CreateBlueGreenDeploymentResponse
@@ -1046,6 +1106,7 @@ module Aws::RDS
     CreateCustomDBEngineVersionMessage.add_member(:engine_version, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomEngineVersion, name: "EngineVersion", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreateCustomDBEngineVersionMessage.add_member(:database_installation_files_s3_bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketName, name: "DatabaseInstallationFilesS3BucketName"))
     CreateCustomDBEngineVersionMessage.add_member(:database_installation_files_s3_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: String255, name: "DatabaseInstallationFilesS3Prefix"))
+    CreateCustomDBEngineVersionMessage.add_member(:database_installation_files, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "DatabaseInstallationFiles"))
     CreateCustomDBEngineVersionMessage.add_member(:image_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String255, name: "ImageId"))
     CreateCustomDBEngineVersionMessage.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyIdOrArn, name: "KMSKeyId"))
     CreateCustomDBEngineVersionMessage.add_member(:source_custom_db_engine_version_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String255, name: "SourceCustomDbEngineVersionIdentifier"))
@@ -1059,12 +1120,14 @@ module Aws::RDS
     CreateCustomDBEngineVersionOutput.add_member(:engine_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "EngineVersion"))
     CreateCustomDBEngineVersionOutput.add_member(:database_installation_files_s3_bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DatabaseInstallationFilesS3BucketName"))
     CreateCustomDBEngineVersionOutput.add_member(:database_installation_files_s3_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DatabaseInstallationFilesS3Prefix"))
+    CreateCustomDBEngineVersionOutput.add_member(:database_installation_files, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "DatabaseInstallationFiles"))
     CreateCustomDBEngineVersionOutput.add_member(:custom_db_engine_version_manifest, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomDBEngineVersionManifest, name: "CustomDBEngineVersionManifest"))
     CreateCustomDBEngineVersionOutput.add_member(:db_parameter_group_family, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBParameterGroupFamily"))
     CreateCustomDBEngineVersionOutput.add_member(:db_engine_description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBEngineDescription"))
     CreateCustomDBEngineVersionOutput.add_member(:db_engine_version_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBEngineVersionArn"))
     CreateCustomDBEngineVersionOutput.add_member(:db_engine_version_description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBEngineVersionDescription"))
     CreateCustomDBEngineVersionOutput.add_member(:default_character_set, ::Smithy::Schema::Shapes::MemberShape.new(target: CharacterSet, name: "DefaultCharacterSet"))
+    CreateCustomDBEngineVersionOutput.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "FailureReason"))
     CreateCustomDBEngineVersionOutput.add_member(:image, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomDBEngineVersionAMI, name: "Image"))
     CreateCustomDBEngineVersionOutput.add_member(:db_engine_media_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBEngineMediaType"))
     CreateCustomDBEngineVersionOutput.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "KMSKeyId"))
@@ -1164,7 +1227,10 @@ module Aws::RDS
     CreateDBClusterMessage.add_member(:master_user_secret_kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "MasterUserSecretKmsKeyId"))
     CreateDBClusterMessage.add_member(:ca_certificate_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CACertificateIdentifier"))
     CreateDBClusterMessage.add_member(:engine_lifecycle_support, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "EngineLifecycleSupport"))
+    CreateDBClusterMessage.add_member(:tag_specifications, ::Smithy::Schema::Shapes::MemberShape.new(target: TagSpecificationList, name: "TagSpecifications"))
     CreateDBClusterMessage.add_member(:master_user_authentication_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MasterUserAuthenticationType, name: "MasterUserAuthenticationType"))
+    CreateDBClusterMessage.add_member(:with_express_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "WithExpressConfiguration"))
+    CreateDBClusterMessage.add_member(:associated_roles, ::Smithy::Schema::Shapes::MemberShape.new(target: DBClusterAssociatedRoles, name: "AssociatedRoles"))
     CreateDBClusterMessage.add_member(:source_region, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SourceRegion"))
     CreateDBClusterMessage.type = Types::CreateDBClusterMessage
     CreateDBClusterParameterGroupMessage.add_member(:db_cluster_parameter_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBClusterParameterGroupName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -1246,6 +1312,8 @@ module Aws::RDS
     CreateDBInstanceMessage.add_member(:multi_tenant, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "MultiTenant"))
     CreateDBInstanceMessage.add_member(:dedicated_log_volume, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "DedicatedLogVolume"))
     CreateDBInstanceMessage.add_member(:engine_lifecycle_support, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "EngineLifecycleSupport"))
+    CreateDBInstanceMessage.add_member(:additional_storage_volumes, ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalStorageVolumesList, name: "AdditionalStorageVolumes"))
+    CreateDBInstanceMessage.add_member(:tag_specifications, ::Smithy::Schema::Shapes::MemberShape.new(target: TagSpecificationList, name: "TagSpecifications"))
     CreateDBInstanceMessage.add_member(:master_user_authentication_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MasterUserAuthenticationType, name: "MasterUserAuthenticationType"))
     CreateDBInstanceMessage.type = Types::CreateDBInstanceMessage
     CreateDBInstanceReadReplicaMessage.add_member(:db_instance_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBInstanceIdentifier", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -1295,6 +1363,8 @@ module Aws::RDS
     CreateDBInstanceReadReplicaMessage.add_member(:dedicated_log_volume, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "DedicatedLogVolume"))
     CreateDBInstanceReadReplicaMessage.add_member(:upgrade_storage_config, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "UpgradeStorageConfig"))
     CreateDBInstanceReadReplicaMessage.add_member(:ca_certificate_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CACertificateIdentifier"))
+    CreateDBInstanceReadReplicaMessage.add_member(:additional_storage_volumes, ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalStorageVolumesList, name: "AdditionalStorageVolumes"))
+    CreateDBInstanceReadReplicaMessage.add_member(:tag_specifications, ::Smithy::Schema::Shapes::MemberShape.new(target: TagSpecificationList, name: "TagSpecifications"))
     CreateDBInstanceReadReplicaMessage.add_member(:source_region, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SourceRegion"))
     CreateDBInstanceReadReplicaMessage.type = Types::CreateDBInstanceReadReplicaMessage
     CreateDBInstanceReadReplicaResult.add_member(:db_instance, ::Smithy::Schema::Shapes::MemberShape.new(target: DBInstance, name: "DBInstance"))
@@ -1474,6 +1544,7 @@ module Aws::RDS
     DBCluster.add_member(:db_cluster_option_group_memberships, ::Smithy::Schema::Shapes::MemberShape.new(target: DBClusterOptionGroupMemberships, name: "DBClusterOptionGroupMemberships"))
     DBCluster.add_member(:preferred_backup_window, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PreferredBackupWindow"))
     DBCluster.add_member(:preferred_maintenance_window, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PreferredMaintenanceWindow"))
+    DBCluster.add_member(:upgrade_rollout_order, ::Smithy::Schema::Shapes::MemberShape.new(target: UpgradeRolloutOrder, name: "UpgradeRolloutOrder"))
     DBCluster.add_member(:replication_source_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ReplicationSourceIdentifier"))
     DBCluster.add_member(:read_replica_identifiers, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadReplicaIdentifierList, name: "ReadReplicaIdentifiers"))
     DBCluster.add_member(:status_infos, ::Smithy::Schema::Shapes::MemberShape.new(target: DBClusterStatusInfoList, name: "StatusInfos"))
@@ -1481,6 +1552,7 @@ module Aws::RDS
     DBCluster.add_member(:vpc_security_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcSecurityGroupMembershipList, name: "VpcSecurityGroups"))
     DBCluster.add_member(:hosted_zone_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "HostedZoneId"))
     DBCluster.add_member(:storage_encrypted, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "StorageEncrypted"))
+    DBCluster.add_member(:storage_encryption_type, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageEncryptionType, name: "StorageEncryptionType"))
     DBCluster.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "KmsKeyId"))
     DBCluster.add_member(:db_cluster_resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DbClusterResourceId"))
     DBCluster.add_member(:db_cluster_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBClusterArn"))
@@ -1535,9 +1607,15 @@ module Aws::RDS
     DBCluster.add_member(:cluster_scalability_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterScalabilityType, name: "ClusterScalabilityType"))
     DBCluster.add_member(:certificate_details, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateDetails, name: "CertificateDetails"))
     DBCluster.add_member(:engine_lifecycle_support, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "EngineLifecycleSupport"))
+    DBCluster.add_member(:vpc_networking_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "VPCNetworkingEnabled"))
+    DBCluster.add_member(:internet_access_gateway_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "InternetAccessGatewayEnabled"))
     DBCluster.type = Types::DBCluster
     DBClusterAlreadyExistsFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     DBClusterAlreadyExistsFault.type = Types::DBClusterAlreadyExistsFault
+    DBClusterAssociatedRole.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IAMRoleArn, name: "RoleArn", traits: {"smithy.api#required" => {}}))
+    DBClusterAssociatedRole.add_member(:feature_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "FeatureName"))
+    DBClusterAssociatedRole.type = Types::DBClusterAssociatedRole
+    DBClusterAssociatedRoles.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DBClusterAssociatedRole, name: "member", traits: {"smithy.api#xmlName" => "DBClusterAssociatedRole"}))
     DBClusterAutomatedBackup.add_member(:engine, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Engine"))
     DBClusterAutomatedBackup.add_member(:vpc_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "VpcId"))
     DBClusterAutomatedBackup.add_member(:db_cluster_automated_backups_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBClusterAutomatedBackupsArn"))
@@ -1551,10 +1629,12 @@ module Aws::RDS
     DBClusterAutomatedBackup.add_member(:iam_database_authentication_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "IAMDatabaseAuthenticationEnabled"))
     DBClusterAutomatedBackup.add_member(:cluster_create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TStamp, name: "ClusterCreateTime"))
     DBClusterAutomatedBackup.add_member(:storage_encrypted, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "StorageEncrypted"))
+    DBClusterAutomatedBackup.add_member(:storage_encryption_type, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageEncryptionType, name: "StorageEncryptionType"))
     DBClusterAutomatedBackup.add_member(:allocated_storage, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "AllocatedStorage"))
     DBClusterAutomatedBackup.add_member(:engine_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "EngineVersion"))
     DBClusterAutomatedBackup.add_member(:db_cluster_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBClusterArn"))
     DBClusterAutomatedBackup.add_member(:backup_retention_period, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "BackupRetentionPeriod"))
+    DBClusterAutomatedBackup.add_member(:preferred_backup_window, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PreferredBackupWindow"))
     DBClusterAutomatedBackup.add_member(:engine_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "EngineMode"))
     DBClusterAutomatedBackup.add_member(:availability_zones, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZones, name: "AvailabilityZones"))
     DBClusterAutomatedBackup.add_member(:port, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Port"))
@@ -1563,6 +1643,7 @@ module Aws::RDS
     DBClusterAutomatedBackup.add_member(:iops, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "Iops"))
     DBClusterAutomatedBackup.add_member(:storage_throughput, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "StorageThroughput"))
     DBClusterAutomatedBackup.add_member(:aws_backup_recovery_point_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "AwsBackupRecoveryPointArn"))
+    DBClusterAutomatedBackup.add_member(:tag_list, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "TagList"))
     DBClusterAutomatedBackup.type = Types::DBClusterAutomatedBackup
     DBClusterAutomatedBackupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DBClusterAutomatedBackup, name: "member", traits: {"smithy.api#xmlName" => "DBClusterAutomatedBackup"}))
     DBClusterAutomatedBackupMessage.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Marker"))
@@ -1663,6 +1744,9 @@ module Aws::RDS
     DBClusterSnapshot.add_member(:snapshot_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SnapshotType"))
     DBClusterSnapshot.add_member(:percent_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "PercentProgress"))
     DBClusterSnapshot.add_member(:storage_encrypted, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "StorageEncrypted"))
+    DBClusterSnapshot.add_member(:storage_encryption_type, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageEncryptionType, name: "StorageEncryptionType"))
+    DBClusterSnapshot.add_member(:backup_retention_period, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "BackupRetentionPeriod"))
+    DBClusterSnapshot.add_member(:preferred_backup_window, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PreferredBackupWindow"))
     DBClusterSnapshot.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "KmsKeyId"))
     DBClusterSnapshot.add_member(:db_cluster_snapshot_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBClusterSnapshotArn"))
     DBClusterSnapshot.add_member(:source_db_cluster_snapshot_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SourceDBClusterSnapshotArn"))
@@ -1699,12 +1783,14 @@ module Aws::RDS
     DBEngineVersion.add_member(:engine_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "EngineVersion"))
     DBEngineVersion.add_member(:database_installation_files_s3_bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DatabaseInstallationFilesS3BucketName"))
     DBEngineVersion.add_member(:database_installation_files_s3_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DatabaseInstallationFilesS3Prefix"))
+    DBEngineVersion.add_member(:database_installation_files, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "DatabaseInstallationFiles"))
     DBEngineVersion.add_member(:custom_db_engine_version_manifest, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomDBEngineVersionManifest, name: "CustomDBEngineVersionManifest"))
     DBEngineVersion.add_member(:db_parameter_group_family, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBParameterGroupFamily"))
     DBEngineVersion.add_member(:db_engine_description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBEngineDescription"))
     DBEngineVersion.add_member(:db_engine_version_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBEngineVersionArn"))
     DBEngineVersion.add_member(:db_engine_version_description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBEngineVersionDescription"))
     DBEngineVersion.add_member(:default_character_set, ::Smithy::Schema::Shapes::MemberShape.new(target: CharacterSet, name: "DefaultCharacterSet"))
+    DBEngineVersion.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "FailureReason"))
     DBEngineVersion.add_member(:image, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomDBEngineVersionAMI, name: "Image"))
     DBEngineVersion.add_member(:db_engine_media_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBEngineMediaType"))
     DBEngineVersion.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "KMSKeyId"))
@@ -1751,6 +1837,7 @@ module Aws::RDS
     DBInstance.add_member(:availability_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "AvailabilityZone"))
     DBInstance.add_member(:db_subnet_group, ::Smithy::Schema::Shapes::MemberShape.new(target: DBSubnetGroup, name: "DBSubnetGroup"))
     DBInstance.add_member(:preferred_maintenance_window, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PreferredMaintenanceWindow"))
+    DBInstance.add_member(:upgrade_rollout_order, ::Smithy::Schema::Shapes::MemberShape.new(target: UpgradeRolloutOrder, name: "UpgradeRolloutOrder"))
     DBInstance.add_member(:pending_modified_values, ::Smithy::Schema::Shapes::MemberShape.new(target: PendingModifiedValues, name: "PendingModifiedValues"))
     DBInstance.add_member(:latest_restorable_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TStamp, name: "LatestRestorableTime"))
     DBInstance.add_member(:multi_az, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "MultiAZ"))
@@ -1770,6 +1857,7 @@ module Aws::RDS
     DBInstance.add_member(:publicly_accessible, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "PubliclyAccessible"))
     DBInstance.add_member(:status_infos, ::Smithy::Schema::Shapes::MemberShape.new(target: DBInstanceStatusInfoList, name: "StatusInfos"))
     DBInstance.add_member(:storage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "StorageType"))
+    DBInstance.add_member(:storage_encryption_type, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageEncryptionType, name: "StorageEncryptionType"))
     DBInstance.add_member(:tde_credential_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "TdeCredentialArn"))
     DBInstance.add_member(:db_instance_port, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "DbInstancePort"))
     DBInstance.add_member(:db_cluster_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBClusterIdentifier"))
@@ -1821,6 +1909,10 @@ module Aws::RDS
     DBInstance.add_member(:dedicated_log_volume, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "DedicatedLogVolume"))
     DBInstance.add_member(:is_storage_config_upgrade_available, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "IsStorageConfigUpgradeAvailable"))
     DBInstance.add_member(:engine_lifecycle_support, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "EngineLifecycleSupport"))
+    DBInstance.add_member(:additional_storage_volumes, ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalStorageVolumesOutputList, name: "AdditionalStorageVolumes"))
+    DBInstance.add_member(:storage_volume_status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "StorageVolumeStatus"))
+    DBInstance.add_member(:storage_operation_status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "StorageOperationStatus"))
+    DBInstance.add_member(:storage_operation_percent_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "StorageOperationPercentProgress"))
     DBInstance.type = Types::DBInstance
     DBInstanceAlreadyExistsFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     DBInstanceAlreadyExistsFault.type = Types::DBInstanceAlreadyExistsFault
@@ -1844,17 +1936,21 @@ module Aws::RDS
     DBInstanceAutomatedBackup.add_member(:option_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "OptionGroupName"))
     DBInstanceAutomatedBackup.add_member(:tde_credential_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "TdeCredentialArn"))
     DBInstanceAutomatedBackup.add_member(:encrypted, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Encrypted"))
+    DBInstanceAutomatedBackup.add_member(:storage_encryption_type, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageEncryptionType, name: "StorageEncryptionType"))
     DBInstanceAutomatedBackup.add_member(:storage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "StorageType"))
     DBInstanceAutomatedBackup.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "KmsKeyId"))
     DBInstanceAutomatedBackup.add_member(:timezone, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Timezone"))
     DBInstanceAutomatedBackup.add_member(:iam_database_authentication_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "IAMDatabaseAuthenticationEnabled"))
     DBInstanceAutomatedBackup.add_member(:backup_retention_period, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "BackupRetentionPeriod"))
+    DBInstanceAutomatedBackup.add_member(:preferred_backup_window, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PreferredBackupWindow"))
     DBInstanceAutomatedBackup.add_member(:db_instance_automated_backups_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBInstanceAutomatedBackupsArn"))
     DBInstanceAutomatedBackup.add_member(:db_instance_automated_backups_replications, ::Smithy::Schema::Shapes::MemberShape.new(target: DBInstanceAutomatedBackupsReplicationList, name: "DBInstanceAutomatedBackupsReplications"))
     DBInstanceAutomatedBackup.add_member(:backup_target, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "BackupTarget"))
     DBInstanceAutomatedBackup.add_member(:multi_tenant, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "MultiTenant"))
     DBInstanceAutomatedBackup.add_member(:aws_backup_recovery_point_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "AwsBackupRecoveryPointArn"))
+    DBInstanceAutomatedBackup.add_member(:tag_list, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "TagList"))
     DBInstanceAutomatedBackup.add_member(:dedicated_log_volume, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "DedicatedLogVolume"))
+    DBInstanceAutomatedBackup.add_member(:additional_storage_volumes, ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalStorageVolumesList, name: "AdditionalStorageVolumes"))
     DBInstanceAutomatedBackup.type = Types::DBInstanceAutomatedBackup
     DBInstanceAutomatedBackupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DBInstanceAutomatedBackup, name: "member", traits: {"smithy.api#xmlName" => "DBInstanceAutomatedBackup"}))
     DBInstanceAutomatedBackupMessage.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Marker"))
@@ -2097,6 +2193,9 @@ module Aws::RDS
     DBSnapshot.add_member(:storage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "StorageType"))
     DBSnapshot.add_member(:tde_credential_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "TdeCredentialArn"))
     DBSnapshot.add_member(:encrypted, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Encrypted"))
+    DBSnapshot.add_member(:storage_encryption_type, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageEncryptionType, name: "StorageEncryptionType"))
+    DBSnapshot.add_member(:backup_retention_period, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "BackupRetentionPeriod"))
+    DBSnapshot.add_member(:preferred_backup_window, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PreferredBackupWindow"))
     DBSnapshot.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "KmsKeyId"))
     DBSnapshot.add_member(:db_snapshot_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBSnapshotArn"))
     DBSnapshot.add_member(:timezone, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Timezone"))
@@ -2110,7 +2209,9 @@ module Aws::RDS
     DBSnapshot.add_member(:db_system_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBSystemId"))
     DBSnapshot.add_member(:multi_tenant, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "MultiTenant"))
     DBSnapshot.add_member(:dedicated_log_volume, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "DedicatedLogVolume"))
+    DBSnapshot.add_member(:additional_storage_volumes, ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalStorageVolumesList, name: "AdditionalStorageVolumes"))
     DBSnapshot.add_member(:snapshot_availability_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SnapshotAvailabilityZone"))
+    DBSnapshot.add_member(:full_snapshot_size_in_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: LongOptional, name: "FullSnapshotSizeInBytes"))
     DBSnapshot.type = Types::DBSnapshot
     DBSnapshotAlreadyExistsFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     DBSnapshotAlreadyExistsFault.type = Types::DBSnapshotAlreadyExistsFault
@@ -2190,12 +2291,14 @@ module Aws::RDS
     DeleteCustomDBEngineVersionOutput.add_member(:engine_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "EngineVersion"))
     DeleteCustomDBEngineVersionOutput.add_member(:database_installation_files_s3_bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DatabaseInstallationFilesS3BucketName"))
     DeleteCustomDBEngineVersionOutput.add_member(:database_installation_files_s3_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DatabaseInstallationFilesS3Prefix"))
+    DeleteCustomDBEngineVersionOutput.add_member(:database_installation_files, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "DatabaseInstallationFiles"))
     DeleteCustomDBEngineVersionOutput.add_member(:custom_db_engine_version_manifest, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomDBEngineVersionManifest, name: "CustomDBEngineVersionManifest"))
     DeleteCustomDBEngineVersionOutput.add_member(:db_parameter_group_family, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBParameterGroupFamily"))
     DeleteCustomDBEngineVersionOutput.add_member(:db_engine_description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBEngineDescription"))
     DeleteCustomDBEngineVersionOutput.add_member(:db_engine_version_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBEngineVersionArn"))
     DeleteCustomDBEngineVersionOutput.add_member(:db_engine_version_description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBEngineVersionDescription"))
     DeleteCustomDBEngineVersionOutput.add_member(:default_character_set, ::Smithy::Schema::Shapes::MemberShape.new(target: CharacterSet, name: "DefaultCharacterSet"))
+    DeleteCustomDBEngineVersionOutput.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "FailureReason"))
     DeleteCustomDBEngineVersionOutput.add_member(:image, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomDBEngineVersionAMI, name: "Image"))
     DeleteCustomDBEngineVersionOutput.add_member(:db_engine_media_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBEngineMediaType"))
     DeleteCustomDBEngineVersionOutput.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "KMSKeyId"))
@@ -2647,6 +2750,14 @@ module Aws::RDS
     DescribeReservedDBInstancesOfferingsMessage.add_member(:max_records, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "MaxRecords"))
     DescribeReservedDBInstancesOfferingsMessage.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Marker"))
     DescribeReservedDBInstancesOfferingsMessage.type = Types::DescribeReservedDBInstancesOfferingsMessage
+    DescribeServerlessV2PlatformVersionsMessage.add_member(:serverless_v2_platform_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ServerlessV2PlatformVersion"))
+    DescribeServerlessV2PlatformVersionsMessage.add_member(:engine, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Engine"))
+    DescribeServerlessV2PlatformVersionsMessage.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterList, name: "Filters"))
+    DescribeServerlessV2PlatformVersionsMessage.add_member(:default_only, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "DefaultOnly"))
+    DescribeServerlessV2PlatformVersionsMessage.add_member(:include_all, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "IncludeAll"))
+    DescribeServerlessV2PlatformVersionsMessage.add_member(:max_records, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "MaxRecords"))
+    DescribeServerlessV2PlatformVersionsMessage.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Marker"))
+    DescribeServerlessV2PlatformVersionsMessage.type = Types::DescribeServerlessV2PlatformVersionsMessage
     DescribeSourceRegionsMessage.add_member(:region_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "RegionName"))
     DescribeSourceRegionsMessage.add_member(:max_records, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "MaxRecords"))
     DescribeSourceRegionsMessage.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Marker"))
@@ -2822,6 +2933,7 @@ module Aws::RDS
     GlobalCluster.add_member(:engine_lifecycle_support, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "EngineLifecycleSupport"))
     GlobalCluster.add_member(:database_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DatabaseName"))
     GlobalCluster.add_member(:storage_encrypted, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "StorageEncrypted"))
+    GlobalCluster.add_member(:storage_encryption_type, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageEncryptionType, name: "StorageEncryptionType"))
     GlobalCluster.add_member(:deletion_protection, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "DeletionProtection"))
     GlobalCluster.add_member(:global_cluster_members, ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalClusterMemberList, name: "GlobalClusterMembers"))
     GlobalCluster.add_member(:endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Endpoint"))
@@ -3022,6 +3134,15 @@ module Aws::RDS
     ModifyActivityStreamResponse.add_member(:engine_native_audit_fields_included, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "EngineNativeAuditFieldsIncluded"))
     ModifyActivityStreamResponse.add_member(:policy_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ActivityStreamPolicyStatus, name: "PolicyStatus"))
     ModifyActivityStreamResponse.type = Types::ModifyActivityStreamResponse
+    ModifyAdditionalStorageVolume.add_member(:volume_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "VolumeName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ModifyAdditionalStorageVolume.add_member(:allocated_storage, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "AllocatedStorage"))
+    ModifyAdditionalStorageVolume.add_member(:iops, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "IOPS"))
+    ModifyAdditionalStorageVolume.add_member(:max_allocated_storage, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "MaxAllocatedStorage"))
+    ModifyAdditionalStorageVolume.add_member(:storage_throughput, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "StorageThroughput"))
+    ModifyAdditionalStorageVolume.add_member(:storage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "StorageType"))
+    ModifyAdditionalStorageVolume.add_member(:set_for_delete, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "SetForDelete"))
+    ModifyAdditionalStorageVolume.type = Types::ModifyAdditionalStorageVolume
+    ModifyAdditionalStorageVolumesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ModifyAdditionalStorageVolume, name: "member"))
     ModifyCertificatesMessage.add_member(:certificate_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CertificateIdentifier"))
     ModifyCertificatesMessage.add_member(:remove_customer_override, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "RemoveCustomerOverride"))
     ModifyCertificatesMessage.type = Types::ModifyCertificatesMessage
@@ -3048,12 +3169,14 @@ module Aws::RDS
     ModifyCustomDBEngineVersionOutput.add_member(:engine_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "EngineVersion"))
     ModifyCustomDBEngineVersionOutput.add_member(:database_installation_files_s3_bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DatabaseInstallationFilesS3BucketName"))
     ModifyCustomDBEngineVersionOutput.add_member(:database_installation_files_s3_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DatabaseInstallationFilesS3Prefix"))
+    ModifyCustomDBEngineVersionOutput.add_member(:database_installation_files, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "DatabaseInstallationFiles"))
     ModifyCustomDBEngineVersionOutput.add_member(:custom_db_engine_version_manifest, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomDBEngineVersionManifest, name: "CustomDBEngineVersionManifest"))
     ModifyCustomDBEngineVersionOutput.add_member(:db_parameter_group_family, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBParameterGroupFamily"))
     ModifyCustomDBEngineVersionOutput.add_member(:db_engine_description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBEngineDescription"))
     ModifyCustomDBEngineVersionOutput.add_member(:db_engine_version_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBEngineVersionArn"))
     ModifyCustomDBEngineVersionOutput.add_member(:db_engine_version_description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBEngineVersionDescription"))
     ModifyCustomDBEngineVersionOutput.add_member(:default_character_set, ::Smithy::Schema::Shapes::MemberShape.new(target: CharacterSet, name: "DefaultCharacterSet"))
+    ModifyCustomDBEngineVersionOutput.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "FailureReason"))
     ModifyCustomDBEngineVersionOutput.add_member(:image, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomDBEngineVersionAMI, name: "Image"))
     ModifyCustomDBEngineVersionOutput.add_member(:db_engine_media_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBEngineMediaType"))
     ModifyCustomDBEngineVersionOutput.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "KMSKeyId"))
@@ -3142,6 +3265,7 @@ module Aws::RDS
     ModifyDBClusterMessage.add_member(:enable_limitless_database, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "EnableLimitlessDatabase"))
     ModifyDBClusterMessage.add_member(:ca_certificate_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CACertificateIdentifier"))
     ModifyDBClusterMessage.add_member(:master_user_authentication_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MasterUserAuthenticationType, name: "MasterUserAuthenticationType"))
+    ModifyDBClusterMessage.add_member(:engine_lifecycle_support, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "EngineLifecycleSupport"))
     ModifyDBClusterMessage.type = Types::ModifyDBClusterMessage
     ModifyDBClusterParameterGroupMessage.add_member(:db_cluster_parameter_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBClusterParameterGroupName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ModifyDBClusterParameterGroupMessage.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ParametersList, name: "Parameters", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -3218,7 +3342,10 @@ module Aws::RDS
     ModifyDBInstanceMessage.add_member(:multi_tenant, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "MultiTenant"))
     ModifyDBInstanceMessage.add_member(:dedicated_log_volume, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "DedicatedLogVolume"))
     ModifyDBInstanceMessage.add_member(:engine, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Engine"))
+    ModifyDBInstanceMessage.add_member(:additional_storage_volumes, ::Smithy::Schema::Shapes::MemberShape.new(target: ModifyAdditionalStorageVolumesList, name: "AdditionalStorageVolumes"))
+    ModifyDBInstanceMessage.add_member(:tag_specifications, ::Smithy::Schema::Shapes::MemberShape.new(target: TagSpecificationList, name: "TagSpecifications"))
     ModifyDBInstanceMessage.add_member(:master_user_authentication_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MasterUserAuthenticationType, name: "MasterUserAuthenticationType"))
+    ModifyDBInstanceMessage.add_member(:engine_lifecycle_support, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "EngineLifecycleSupport"))
     ModifyDBInstanceMessage.type = Types::ModifyDBInstanceMessage
     ModifyDBInstanceResult.add_member(:db_instance, ::Smithy::Schema::Shapes::MemberShape.new(target: DBInstance, name: "DBInstance"))
     ModifyDBInstanceResult.type = Types::ModifyDBInstanceResult
@@ -3475,7 +3602,9 @@ module Aws::RDS
     OrderableDBInstanceOption.add_member(:supported_network_types, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "SupportedNetworkTypes"))
     OrderableDBInstanceOption.add_member(:supports_clusters, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "SupportsClusters"))
     OrderableDBInstanceOption.add_member(:supports_dedicated_log_volume, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "SupportsDedicatedLogVolume"))
+    OrderableDBInstanceOption.add_member(:supports_additional_storage_volumes, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "SupportsAdditionalStorageVolumes"))
     OrderableDBInstanceOption.add_member(:supports_http_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "SupportsHttpEndpoint"))
+    OrderableDBInstanceOption.add_member(:available_additional_storage_volumes_options, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailableAdditionalStorageVolumesOptionList, name: "AvailableAdditionalStorageVolumesOptions"))
     OrderableDBInstanceOption.type = Types::OrderableDBInstanceOption
     OrderableDBInstanceOptionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OrderableDBInstanceOption, name: "member", traits: {"smithy.api#xmlName" => "OrderableDBInstanceOption"}))
     OrderableDBInstanceOptionsMessage.add_member(:orderable_db_instance_options, ::Smithy::Schema::Shapes::MemberShape.new(target: OrderableDBInstanceOptionsList, name: "OrderableDBInstanceOptions"))
@@ -3533,6 +3662,7 @@ module Aws::RDS
     PendingModifiedValues.add_member(:iam_database_authentication_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "IAMDatabaseAuthenticationEnabled"))
     PendingModifiedValues.add_member(:dedicated_log_volume, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "DedicatedLogVolume"))
     PendingModifiedValues.add_member(:engine, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Engine"))
+    PendingModifiedValues.add_member(:additional_storage_volumes, ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalStorageVolumesList, name: "AdditionalStorageVolumes"))
     PendingModifiedValues.type = Types::PendingModifiedValues
     PerformanceInsightsMetricDimensionGroup.add_member(:dimensions, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "Dimensions"))
     PerformanceInsightsMetricDimensionGroup.add_member(:group, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Group"))
@@ -3559,6 +3689,7 @@ module Aws::RDS
     PromoteReadReplicaMessage.add_member(:db_instance_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBInstanceIdentifier", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     PromoteReadReplicaMessage.add_member(:backup_retention_period, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "BackupRetentionPeriod"))
     PromoteReadReplicaMessage.add_member(:preferred_backup_window, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PreferredBackupWindow"))
+    PromoteReadReplicaMessage.add_member(:tag_specifications, ::Smithy::Schema::Shapes::MemberShape.new(target: TagSpecificationList, name: "TagSpecifications"))
     PromoteReadReplicaMessage.type = Types::PromoteReadReplicaMessage
     PromoteReadReplicaResult.add_member(:db_instance, ::Smithy::Schema::Shapes::MemberShape.new(target: DBInstance, name: "DBInstance"))
     PromoteReadReplicaResult.type = Types::PromoteReadReplicaResult
@@ -3645,7 +3776,7 @@ module Aws::RDS
     RemoveFromGlobalClusterResult.add_member(:global_cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalCluster, name: "GlobalCluster"))
     RemoveFromGlobalClusterResult.type = Types::RemoveFromGlobalClusterResult
     RemoveRoleFromDBClusterMessage.add_member(:db_cluster_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBClusterIdentifier", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    RemoveRoleFromDBClusterMessage.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "RoleArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    RemoveRoleFromDBClusterMessage.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IAMRoleArn, name: "RoleArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     RemoveRoleFromDBClusterMessage.add_member(:feature_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "FeatureName"))
     RemoveRoleFromDBClusterMessage.type = Types::RemoveRoleFromDBClusterMessage
     RemoveRoleFromDBInstanceMessage.add_member(:db_instance_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBInstanceIdentifier", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -3760,6 +3891,8 @@ module Aws::RDS
     RestoreDBClusterFromS3Message.add_member(:manage_master_user_password, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "ManageMasterUserPassword"))
     RestoreDBClusterFromS3Message.add_member(:master_user_secret_kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "MasterUserSecretKmsKeyId"))
     RestoreDBClusterFromS3Message.add_member(:engine_lifecycle_support, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "EngineLifecycleSupport"))
+    RestoreDBClusterFromS3Message.add_member(:tag_specifications, ::Smithy::Schema::Shapes::MemberShape.new(target: TagSpecificationList, name: "TagSpecifications"))
+    RestoreDBClusterFromS3Message.add_member(:associated_roles, ::Smithy::Schema::Shapes::MemberShape.new(target: DBClusterAssociatedRoles, name: "AssociatedRoles"))
     RestoreDBClusterFromS3Message.type = Types::RestoreDBClusterFromS3Message
     RestoreDBClusterFromS3Result.add_member(:db_cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: DBCluster, name: "DBCluster"))
     RestoreDBClusterFromS3Result.type = Types::RestoreDBClusterFromS3Result
@@ -3797,7 +3930,13 @@ module Aws::RDS
     RestoreDBClusterFromSnapshotMessage.add_member(:enable_performance_insights, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "EnablePerformanceInsights"))
     RestoreDBClusterFromSnapshotMessage.add_member(:performance_insights_kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PerformanceInsightsKMSKeyId"))
     RestoreDBClusterFromSnapshotMessage.add_member(:performance_insights_retention_period, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "PerformanceInsightsRetentionPeriod"))
+    RestoreDBClusterFromSnapshotMessage.add_member(:backup_retention_period, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "BackupRetentionPeriod"))
+    RestoreDBClusterFromSnapshotMessage.add_member(:preferred_backup_window, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PreferredBackupWindow"))
     RestoreDBClusterFromSnapshotMessage.add_member(:engine_lifecycle_support, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "EngineLifecycleSupport"))
+    RestoreDBClusterFromSnapshotMessage.add_member(:tag_specifications, ::Smithy::Schema::Shapes::MemberShape.new(target: TagSpecificationList, name: "TagSpecifications"))
+    RestoreDBClusterFromSnapshotMessage.add_member(:enable_vpc_networking, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "EnableVPCNetworking"))
+    RestoreDBClusterFromSnapshotMessage.add_member(:enable_internet_access_gateway, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "EnableInternetAccessGateway"))
+    RestoreDBClusterFromSnapshotMessage.add_member(:associated_roles, ::Smithy::Schema::Shapes::MemberShape.new(target: DBClusterAssociatedRoles, name: "AssociatedRoles"))
     RestoreDBClusterFromSnapshotMessage.type = Types::RestoreDBClusterFromSnapshotMessage
     RestoreDBClusterFromSnapshotResult.add_member(:db_cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: DBCluster, name: "DBCluster"))
     RestoreDBClusterFromSnapshotResult.type = Types::RestoreDBClusterFromSnapshotResult
@@ -3835,7 +3974,13 @@ module Aws::RDS
     RestoreDBClusterToPointInTimeMessage.add_member(:enable_performance_insights, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "EnablePerformanceInsights"))
     RestoreDBClusterToPointInTimeMessage.add_member(:performance_insights_kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PerformanceInsightsKMSKeyId"))
     RestoreDBClusterToPointInTimeMessage.add_member(:performance_insights_retention_period, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "PerformanceInsightsRetentionPeriod"))
+    RestoreDBClusterToPointInTimeMessage.add_member(:backup_retention_period, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "BackupRetentionPeriod"))
+    RestoreDBClusterToPointInTimeMessage.add_member(:preferred_backup_window, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PreferredBackupWindow"))
     RestoreDBClusterToPointInTimeMessage.add_member(:engine_lifecycle_support, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "EngineLifecycleSupport"))
+    RestoreDBClusterToPointInTimeMessage.add_member(:tag_specifications, ::Smithy::Schema::Shapes::MemberShape.new(target: TagSpecificationList, name: "TagSpecifications"))
+    RestoreDBClusterToPointInTimeMessage.add_member(:enable_vpc_networking, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "EnableVPCNetworking"))
+    RestoreDBClusterToPointInTimeMessage.add_member(:enable_internet_access_gateway, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "EnableInternetAccessGateway"))
+    RestoreDBClusterToPointInTimeMessage.add_member(:associated_roles, ::Smithy::Schema::Shapes::MemberShape.new(target: DBClusterAssociatedRoles, name: "AssociatedRoles"))
     RestoreDBClusterToPointInTimeMessage.type = Types::RestoreDBClusterToPointInTimeMessage
     RestoreDBClusterToPointInTimeResult.add_member(:db_cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: DBCluster, name: "DBCluster"))
     RestoreDBClusterToPointInTimeResult.type = Types::RestoreDBClusterToPointInTimeResult
@@ -3878,9 +4023,13 @@ module Aws::RDS
     RestoreDBInstanceFromDBSnapshotMessage.add_member(:custom_iam_instance_profile, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CustomIamInstanceProfile"))
     RestoreDBInstanceFromDBSnapshotMessage.add_member(:allocated_storage, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "AllocatedStorage"))
     RestoreDBInstanceFromDBSnapshotMessage.add_member(:db_cluster_snapshot_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBClusterSnapshotIdentifier"))
+    RestoreDBInstanceFromDBSnapshotMessage.add_member(:backup_retention_period, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "BackupRetentionPeriod"))
+    RestoreDBInstanceFromDBSnapshotMessage.add_member(:preferred_backup_window, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PreferredBackupWindow"))
     RestoreDBInstanceFromDBSnapshotMessage.add_member(:dedicated_log_volume, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "DedicatedLogVolume"))
     RestoreDBInstanceFromDBSnapshotMessage.add_member(:ca_certificate_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CACertificateIdentifier"))
     RestoreDBInstanceFromDBSnapshotMessage.add_member(:engine_lifecycle_support, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "EngineLifecycleSupport"))
+    RestoreDBInstanceFromDBSnapshotMessage.add_member(:additional_storage_volumes, ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalStorageVolumesList, name: "AdditionalStorageVolumes"))
+    RestoreDBInstanceFromDBSnapshotMessage.add_member(:tag_specifications, ::Smithy::Schema::Shapes::MemberShape.new(target: TagSpecificationList, name: "TagSpecifications"))
     RestoreDBInstanceFromDBSnapshotMessage.add_member(:manage_master_user_password, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "ManageMasterUserPassword"))
     RestoreDBInstanceFromDBSnapshotMessage.add_member(:master_user_secret_kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "MasterUserSecretKmsKeyId"))
     RestoreDBInstanceFromDBSnapshotMessage.type = Types::RestoreDBInstanceFromDBSnapshotMessage
@@ -3938,6 +4087,8 @@ module Aws::RDS
     RestoreDBInstanceFromS3Message.add_member(:dedicated_log_volume, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "DedicatedLogVolume"))
     RestoreDBInstanceFromS3Message.add_member(:ca_certificate_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CACertificateIdentifier"))
     RestoreDBInstanceFromS3Message.add_member(:engine_lifecycle_support, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "EngineLifecycleSupport"))
+    RestoreDBInstanceFromS3Message.add_member(:additional_storage_volumes, ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalStorageVolumesList, name: "AdditionalStorageVolumes"))
+    RestoreDBInstanceFromS3Message.add_member(:tag_specifications, ::Smithy::Schema::Shapes::MemberShape.new(target: TagSpecificationList, name: "TagSpecifications"))
     RestoreDBInstanceFromS3Message.type = Types::RestoreDBInstanceFromS3Message
     RestoreDBInstanceFromS3Result.add_member(:db_instance, ::Smithy::Schema::Shapes::MemberShape.new(target: DBInstance, name: "DBInstance"))
     RestoreDBInstanceFromS3Result.type = Types::RestoreDBInstanceFromS3Result
@@ -3984,9 +4135,13 @@ module Aws::RDS
     RestoreDBInstanceToPointInTimeMessage.add_member(:backup_target, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "BackupTarget"))
     RestoreDBInstanceToPointInTimeMessage.add_member(:custom_iam_instance_profile, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CustomIamInstanceProfile"))
     RestoreDBInstanceToPointInTimeMessage.add_member(:allocated_storage, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "AllocatedStorage"))
+    RestoreDBInstanceToPointInTimeMessage.add_member(:backup_retention_period, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "BackupRetentionPeriod"))
+    RestoreDBInstanceToPointInTimeMessage.add_member(:preferred_backup_window, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PreferredBackupWindow"))
     RestoreDBInstanceToPointInTimeMessage.add_member(:dedicated_log_volume, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "DedicatedLogVolume"))
     RestoreDBInstanceToPointInTimeMessage.add_member(:ca_certificate_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CACertificateIdentifier"))
     RestoreDBInstanceToPointInTimeMessage.add_member(:engine_lifecycle_support, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "EngineLifecycleSupport"))
+    RestoreDBInstanceToPointInTimeMessage.add_member(:additional_storage_volumes, ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalStorageVolumesList, name: "AdditionalStorageVolumes"))
+    RestoreDBInstanceToPointInTimeMessage.add_member(:tag_specifications, ::Smithy::Schema::Shapes::MemberShape.new(target: TagSpecificationList, name: "TagSpecifications"))
     RestoreDBInstanceToPointInTimeMessage.add_member(:manage_master_user_password, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "ManageMasterUserPassword"))
     RestoreDBInstanceToPointInTimeMessage.add_member(:master_user_secret_kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "MasterUserSecretKmsKeyId"))
     RestoreDBInstanceToPointInTimeMessage.type = Types::RestoreDBInstanceToPointInTimeMessage
@@ -4028,6 +4183,17 @@ module Aws::RDS
     ServerlessV2FeaturesSupport.add_member(:min_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: DoubleOptional, name: "MinCapacity"))
     ServerlessV2FeaturesSupport.add_member(:max_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: DoubleOptional, name: "MaxCapacity"))
     ServerlessV2FeaturesSupport.type = Types::ServerlessV2FeaturesSupport
+    ServerlessV2PlatformVersionInfo.add_member(:serverless_v2_platform_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ServerlessV2PlatformVersion"))
+    ServerlessV2PlatformVersionInfo.add_member(:serverless_v2_platform_version_description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ServerlessV2PlatformVersionDescription"))
+    ServerlessV2PlatformVersionInfo.add_member(:engine, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Engine"))
+    ServerlessV2PlatformVersionInfo.add_member(:serverless_v2_features_support, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerlessV2FeaturesSupport, name: "ServerlessV2FeaturesSupport"))
+    ServerlessV2PlatformVersionInfo.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Status"))
+    ServerlessV2PlatformVersionInfo.add_member(:is_default, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "IsDefault"))
+    ServerlessV2PlatformVersionInfo.type = Types::ServerlessV2PlatformVersionInfo
+    ServerlessV2PlatformVersionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerlessV2PlatformVersionInfo, name: "member"))
+    ServerlessV2PlatformVersionsMessage.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Marker"))
+    ServerlessV2PlatformVersionsMessage.add_member(:serverless_v2_platform_versions, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerlessV2PlatformVersionList, name: "ServerlessV2PlatformVersions"))
+    ServerlessV2PlatformVersionsMessage.type = Types::ServerlessV2PlatformVersionsMessage
     ServerlessV2ScalingConfiguration.add_member(:min_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: DoubleOptional, name: "MinCapacity"))
     ServerlessV2ScalingConfiguration.add_member(:max_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: DoubleOptional, name: "MaxCapacity"))
     ServerlessV2ScalingConfiguration.add_member(:seconds_until_auto_pause, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "SecondsUntilAutoPause"))
@@ -4088,6 +4254,7 @@ module Aws::RDS
     StartDBInstanceAutomatedBackupsReplicationMessage.add_member(:backup_retention_period, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "BackupRetentionPeriod"))
     StartDBInstanceAutomatedBackupsReplicationMessage.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "KmsKeyId"))
     StartDBInstanceAutomatedBackupsReplicationMessage.add_member(:pre_signed_url, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "PreSignedUrl"))
+    StartDBInstanceAutomatedBackupsReplicationMessage.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     StartDBInstanceAutomatedBackupsReplicationMessage.add_member(:source_region, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SourceRegion"))
     StartDBInstanceAutomatedBackupsReplicationMessage.type = Types::StartDBInstanceAutomatedBackupsReplicationMessage
     StartDBInstanceAutomatedBackupsReplicationResult.add_member(:db_instance_automated_backup, ::Smithy::Schema::Shapes::MemberShape.new(target: DBInstanceAutomatedBackup, name: "DBInstanceAutomatedBackup"))
@@ -4141,6 +4308,9 @@ module Aws::RDS
     StopDBInstanceMessage.type = Types::StopDBInstanceMessage
     StopDBInstanceResult.add_member(:db_instance, ::Smithy::Schema::Shapes::MemberShape.new(target: DBInstance, name: "DBInstance"))
     StopDBInstanceResult.type = Types::StopDBInstanceResult
+    StorageEncryptionType.add_member(:unencrypted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNENCRYPTED", traits: {"smithy.api#enumValue" => "none"}))
+    StorageEncryptionType.add_member(:cmk, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CMK", traits: {"smithy.api#enumValue" => "sse-kms"}))
+    StorageEncryptionType.add_member(:sse, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SSE", traits: {"smithy.api#enumValue" => "sse-rds"}))
     StorageQuotaExceededFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     StorageQuotaExceededFault.type = Types::StorageQuotaExceededFault
     StorageTypeNotAvailableFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
@@ -4195,6 +4365,10 @@ module Aws::RDS
     TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member", traits: {"smithy.api#xmlName" => "Tag"}))
     TagListMessage.add_member(:tag_list, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "TagList"))
     TagListMessage.type = Types::TagListMessage
+    TagSpecification.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceType"))
+    TagSpecification.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
+    TagSpecification.type = Types::TagSpecification
+    TagSpecificationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagSpecification, name: "member", traits: {"smithy.api#xmlName" => "item"}))
     TargetConnectionNetworkType.add_member(:ipv4, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IPV4", traits: {"smithy.api#enumValue" => "IPV4"}))
     TargetConnectionNetworkType.add_member(:ipv6, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IPV6", traits: {"smithy.api#enumValue" => "IPV6"}))
     TargetGroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DBProxyTargetGroup, name: "member"))
@@ -4209,6 +4383,10 @@ module Aws::RDS
     TargetHealthReason.add_member(:invalid_replication_state, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INVALID_REPLICATION_STATE", traits: {"smithy.api#enumValue" => "INVALID_REPLICATION_STATE"}))
     TargetHealthReason.add_member(:promoted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PROMOTED", traits: {"smithy.api#enumValue" => "PROMOTED"}))
     TargetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DBProxyTarget, name: "member"))
+    TargetResourceConfiguration.add_member(:source_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DBAndClusterArn, name: "SourceArn", traits: {"smithy.api#required" => {}}))
+    TargetResourceConfiguration.add_member(:target_kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyIdOrArn, name: "TargetKmsKeyId"))
+    TargetResourceConfiguration.type = Types::TargetResourceConfiguration
+    TargetResourceConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetResourceConfiguration, name: "member", traits: {"smithy.api#xmlName" => "TargetResourceConfiguration"}))
     TargetRole.add_member(:read_write, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "READ_WRITE", traits: {"smithy.api#enumValue" => "READ_WRITE"}))
     TargetRole.add_member(:read_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "READ_ONLY", traits: {"smithy.api#enumValue" => "READ_ONLY"}))
     TargetRole.add_member(:unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNKNOWN", traits: {"smithy.api#enumValue" => "UNKNOWN"}))
@@ -4251,6 +4429,9 @@ module Aws::RDS
     Timezone.type = Types::Timezone
     UnsupportedDBEngineVersionFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     UnsupportedDBEngineVersionFault.type = Types::UnsupportedDBEngineVersionFault
+    UpgradeRolloutOrder.add_member(:first, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FIRST", traits: {"smithy.api#enumValue" => "first"}))
+    UpgradeRolloutOrder.add_member(:second, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SECOND", traits: {"smithy.api#enumValue" => "second"}))
+    UpgradeRolloutOrder.add_member(:last, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LAST", traits: {"smithy.api#enumValue" => "last"}))
     UpgradeTarget.add_member(:engine, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Engine"))
     UpgradeTarget.add_member(:engine_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "EngineVersion"))
     UpgradeTarget.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Description"))
@@ -4280,9 +4461,13 @@ module Aws::RDS
     UserAuthConfigInfo.type = Types::UserAuthConfigInfo
     UserAuthConfigInfoList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UserAuthConfigInfo, name: "member"))
     UserAuthConfigList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UserAuthConfig, name: "member"))
+    ValidAdditionalStorageOptions.add_member(:supports_additional_storage_volumes, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "SupportsAdditionalStorageVolumes"))
+    ValidAdditionalStorageOptions.add_member(:volumes, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidVolumeOptionsList, name: "Volumes"))
+    ValidAdditionalStorageOptions.type = Types::ValidAdditionalStorageOptions
     ValidDBInstanceModificationsMessage.add_member(:storage, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidStorageOptionsList, name: "Storage"))
     ValidDBInstanceModificationsMessage.add_member(:valid_processor_features, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailableProcessorFeatureList, name: "ValidProcessorFeatures"))
     ValidDBInstanceModificationsMessage.add_member(:supports_dedicated_log_volume, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "SupportsDedicatedLogVolume"))
+    ValidDBInstanceModificationsMessage.add_member(:additional_storage, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidAdditionalStorageOptions, name: "AdditionalStorage"))
     ValidDBInstanceModificationsMessage.type = Types::ValidDBInstanceModificationsMessage
     ValidStorageOptions.add_member(:storage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "StorageType"))
     ValidStorageOptions.add_member(:storage_size, ::Smithy::Schema::Shapes::MemberShape.new(target: RangeList, name: "StorageSize"))
@@ -4294,6 +4479,12 @@ module Aws::RDS
     ValidStorageOptions.type = Types::ValidStorageOptions
     ValidStorageOptionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidStorageOptions, name: "member", traits: {"smithy.api#xmlName" => "ValidStorageOptions"}))
     ValidUpgradeTargetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UpgradeTarget, name: "member", traits: {"smithy.api#xmlName" => "UpgradeTarget"}))
+    ValidVolumeOptions.add_member(:volume_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "VolumeName"))
+    ValidVolumeOptions.add_member(:storage, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidStorageOptionsList, name: "Storage"))
+    ValidVolumeOptions.type = Types::ValidVolumeOptions
+    ValidVolumeOptionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidVolumeOptions, name: "member"))
+    VpcEncryptionControlViolationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
+    VpcEncryptionControlViolationException.type = Types::VpcEncryptionControlViolationException
     VpcSecurityGroupIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "VpcSecurityGroupId"}))
     VpcSecurityGroupMembership.add_member(:vpc_security_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "VpcSecurityGroupId"))
     VpcSecurityGroupMembership.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Status"))
@@ -4309,7 +4500,7 @@ module Aws::RDS
       service.id = "com.amazonaws.rds#AmazonRDSv19"
       service.name = "AmazonRDSv19"
       service.version = "2014-10-31"
-      service.traits = {"aws.api#service" => {"sdkId" => "RDS", "arnNamespace" => "rds", "cloudFormationName" => "RDS", "cloudTrailEventSource" => "rds.amazonaws.com", "endpointPrefix" => "rds"}, "aws.auth#sigv4" => {"name" => "rds"}, "aws.protocols#awsQuery" => {}, "smithy.api#title" => "Amazon Relational Database Service", "smithy.api#xmlNamespace" => {"uri" => "http://rds.amazonaws.com/doc/2014-10-31/"}}
+      service.traits = {"aws.api#service" => {"sdkId" => "RDS", "arnNamespace" => "rds", "cloudFormationName" => "RDS", "cloudTrailEventSource" => "rds.amazonaws.com", "endpointPrefix" => "rds"}, "aws.auth#sigv4" => {"name" => "rds"}, "aws.protocols#awsQuery" => {}, "smithy.api#title" => "Amazon Relational Database Service", "smithy.api#xmlNamespace" => {"uri" => "http://rds.amazonaws.com/doc/2014-10-31/"}, "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws-us-gov"]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://rds-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://rds.{Region}.amazonaws.com", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://rds-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://rds.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://rds.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 14, "nodes" => "/////wAAAAH/////AAAAAAAAAA0AAAADAAAAAQAAAAQF9eEMAAAAAgAAAAUF9eEMAAAAAwAAAAgAAAAGAAAABAAAAAcF9eELAAAABQX14QkF9eEKAAAABAAAAAsAAAAJAAAABgAAAAoF9eEIAAAABwX14QYF9eEHAAAABQAAAAwF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAAOAAAABAX14QIF9eED"}}
       service.add_operation(:add_role_to_db_cluster, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.rds#AddRoleToDBCluster"
         operation.name = "AddRoleToDBCluster"
@@ -4499,6 +4690,7 @@ module Aws::RDS
         operation.errors << DBClusterNotFoundFault
         operation.errors << DBClusterParameterGroupNotFoundFault
         operation.errors << DBClusterQuotaExceededFault
+        operation.errors << DBClusterRoleQuotaExceededFault
         operation.errors << DBInstanceNotFoundFault
         operation.errors << DBSubnetGroupDoesNotCoverEnoughAZs
         operation.errors << DBSubnetGroupNotFoundFault
@@ -4518,6 +4710,7 @@ module Aws::RDS
         operation.errors << OptionGroupNotFoundFault
         operation.errors << StorageQuotaExceededFault
         operation.errors << StorageTypeNotSupportedFault
+        operation.errors << VpcEncryptionControlViolationException
         operation.traits = {}
       end)
       service.add_operation(:create_db_cluster_endpoint, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -4581,6 +4774,7 @@ module Aws::RDS
         operation.errors << StorageQuotaExceededFault
         operation.errors << StorageTypeNotSupportedFault
         operation.errors << TenantDatabaseQuotaExceededFault
+        operation.errors << VpcEncryptionControlViolationException
         operation.traits = {}
       end)
       service.add_operation(:create_db_instance_read_replica, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -4612,6 +4806,7 @@ module Aws::RDS
         operation.errors << StorageQuotaExceededFault
         operation.errors << StorageTypeNotSupportedFault
         operation.errors << TenantDatabaseQuotaExceededFault
+        operation.errors << VpcEncryptionControlViolationException
         operation.traits = {}
       end)
       service.add_operation(:create_db_parameter_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -5238,6 +5433,7 @@ module Aws::RDS
         operation.input = DescribeEngineDefaultClusterParametersMessage
         operation.output = DescribeEngineDefaultClusterParametersResult
         operation.traits = {}
+        operation[:paginator] = Paginators::DescribeEngineDefaultClusterParameters.new
       end)
       service.add_operation(:describe_engine_default_parameters, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.rds#DescribeEngineDefaultParameters"
@@ -5349,6 +5545,14 @@ module Aws::RDS
         operation.errors << ReservedDBInstancesOfferingNotFoundFault
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeReservedDBInstancesOfferings.new
+      end)
+      service.add_operation(:describe_serverless_v2_platform_versions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.rds#DescribeServerlessV2PlatformVersions"
+        operation.name = "DescribeServerlessV2PlatformVersions"
+        operation.input = DescribeServerlessV2PlatformVersionsMessage
+        operation.output = ServerlessV2PlatformVersionsMessage
+        operation.traits = {}
+        operation[:paginator] = Paginators::DescribeServerlessV2PlatformVersions.new
       end)
       service.add_operation(:describe_source_regions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.rds#DescribeSourceRegions"
@@ -5506,6 +5710,7 @@ module Aws::RDS
         operation.errors << StorageQuotaExceededFault
         operation.errors << StorageTypeNotAvailableFault
         operation.errors << StorageTypeNotSupportedFault
+        operation.errors << VpcEncryptionControlViolationException
         operation.traits = {}
       end)
       service.add_operation(:modify_db_cluster_endpoint, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -5565,6 +5770,7 @@ module Aws::RDS
         operation.errors << StorageQuotaExceededFault
         operation.errors << StorageTypeNotSupportedFault
         operation.errors << TenantDatabaseQuotaExceededFault
+        operation.errors << VpcEncryptionControlViolationException
         operation.traits = {}
       end)
       service.add_operation(:modify_db_parameter_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -5874,6 +6080,7 @@ module Aws::RDS
         operation.errors << DBClusterNotFoundFault
         operation.errors << DBClusterParameterGroupNotFoundFault
         operation.errors << DBClusterQuotaExceededFault
+        operation.errors << DBClusterRoleQuotaExceededFault
         operation.errors << DBSubnetGroupNotFoundFault
         operation.errors << DomainNotFoundFault
         operation.errors << InsufficientStorageClusterCapacityFault
@@ -5896,6 +6103,7 @@ module Aws::RDS
         operation.errors << DBClusterAlreadyExistsFault
         operation.errors << DBClusterParameterGroupNotFoundFault
         operation.errors << DBClusterQuotaExceededFault
+        operation.errors << DBClusterRoleQuotaExceededFault
         operation.errors << DBClusterSnapshotNotFoundFault
         operation.errors << DBSnapshotNotFoundFault
         operation.errors << DBSubnetGroupDoesNotCoverEnoughAZs
@@ -5915,6 +6123,7 @@ module Aws::RDS
         operation.errors << OptionGroupNotFoundFault
         operation.errors << StorageQuotaExceededFault
         operation.errors << StorageTypeNotSupportedFault
+        operation.errors << VpcEncryptionControlViolationException
         operation.traits = {}
       end)
       service.add_operation(:restore_db_cluster_to_point_in_time, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -5927,6 +6136,7 @@ module Aws::RDS
         operation.errors << DBClusterNotFoundFault
         operation.errors << DBClusterParameterGroupNotFoundFault
         operation.errors << DBClusterQuotaExceededFault
+        operation.errors << DBClusterRoleQuotaExceededFault
         operation.errors << DBClusterSnapshotNotFoundFault
         operation.errors << DBSubnetGroupNotFoundFault
         operation.errors << DomainNotFoundFault
@@ -5944,6 +6154,7 @@ module Aws::RDS
         operation.errors << OptionGroupNotFoundFault
         operation.errors << StorageQuotaExceededFault
         operation.errors << StorageTypeNotSupportedFault
+        operation.errors << VpcEncryptionControlViolationException
         operation.traits = {}
       end)
       service.add_operation(:restore_db_instance_from_db_snapshot, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -5975,6 +6186,7 @@ module Aws::RDS
         operation.errors << StorageQuotaExceededFault
         operation.errors << StorageTypeNotSupportedFault
         operation.errors << TenantDatabaseQuotaExceededFault
+        operation.errors << VpcEncryptionControlViolationException
         operation.traits = {}
       end)
       service.add_operation(:restore_db_instance_from_s3, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -6001,6 +6213,7 @@ module Aws::RDS
         operation.errors << ProvisionedIopsNotAvailableInAZFault
         operation.errors << StorageQuotaExceededFault
         operation.errors << StorageTypeNotSupportedFault
+        operation.errors << VpcEncryptionControlViolationException
         operation.traits = {}
       end)
       service.add_operation(:restore_db_instance_to_point_in_time, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -6033,6 +6246,7 @@ module Aws::RDS
         operation.errors << StorageQuotaExceededFault
         operation.errors << StorageTypeNotSupportedFault
         operation.errors << TenantDatabaseQuotaExceededFault
+        operation.errors << VpcEncryptionControlViolationException
         operation.traits = {}
       end)
       service.add_operation(:revoke_db_security_group_ingress, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -6068,6 +6282,7 @@ module Aws::RDS
         operation.errors << InvalidDBInstanceStateFault
         operation.errors << InvalidDBShardGroupStateFault
         operation.errors << KMSKeyNotAccessibleFault
+        operation.errors << VpcEncryptionControlViolationException
         operation.traits = {}
       end)
       service.add_operation(:start_db_instance, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -6086,6 +6301,7 @@ module Aws::RDS
         operation.errors << InvalidSubnet
         operation.errors << InvalidVPCNetworkStateFault
         operation.errors << KMSKeyNotAccessibleFault
+        operation.errors << VpcEncryptionControlViolationException
         operation.traits = {}
       end)
       service.add_operation(:start_db_instance_automated_backups_replication, ::Smithy::Schema::Shapes::OperationShape.new do |operation|

@@ -1,0 +1,737 @@
+module Aws::Wickr
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?account_id_endpoint_mode: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
+      ?connect_timeout: Numeric,
+      ?convert_params: bool,
+      ?credentials_provider: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Wickr::EndpointProvider,
+      ?http_proxy: URI::HTTP | String,
+      ?http_wire_trace: bool,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?max_attempts: Integer,
+      ?profile: String,
+      ?protocol: Symbol | Object,
+      ?raise_response_errors: bool,
+      ?read_timeout: Numeric,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_mode: String,
+      ?retry_strategy: Object,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?ssl_ca_bundle: String,
+      ?ssl_ca_directory: String,
+      ?ssl_ca_store: OpenSSL::X509::Store,
+      ?ssl_verify_peer: bool,
+      ?stub_responses: bool,
+      ?transport: Smithy::Client::NetHTTP::Transport,
+      ?use_dualstack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _BatchCreateUserResponse
+      include Smithy::Client::_Response[Types::BatchCreateUserResponse]
+      def message: () -> String?
+      def successful: () -> Array[Types::User]?
+      def failed: () -> Array[Types::BatchUserErrorResponseItem]?
+    end
+    def batch_create_user: (
+      ?network_id: String,
+      ?users: Array[
+        {
+          first_name: String,
+          last_name: untyped,
+          security_group_ids: Array[String],
+          username: String,
+          invite_code: untyped,
+          invite_code_ttl: Integer,
+          code_validation: bool
+        }
+      ],
+      ?client_token: String
+    ) -> _BatchCreateUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchCreateUserResponse
+
+    interface _BatchDeleteUserResponse
+      include Smithy::Client::_Response[Types::BatchDeleteUserResponse]
+      def message: () -> String?
+      def successful: () -> Array[Types::BatchUserSuccessResponseItem]?
+      def failed: () -> Array[Types::BatchUserErrorResponseItem]?
+    end
+    def batch_delete_user: (
+      ?network_id: String,
+      ?user_ids: Array[String],
+      ?client_token: String
+    ) -> _BatchDeleteUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchDeleteUserResponse
+
+    interface _BatchLookupUserUnameResponse
+      include Smithy::Client::_Response[Types::BatchLookupUserUnameResponse]
+      def message: () -> String?
+      def successful: () -> Array[Types::BatchUnameSuccessResponseItem]?
+      def failed: () -> Array[Types::BatchUnameErrorResponseItem]?
+    end
+    def batch_lookup_user_uname: (
+      ?network_id: String,
+      ?unames: Array[String],
+      ?client_token: String
+    ) -> _BatchLookupUserUnameResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchLookupUserUnameResponse
+
+    interface _BatchReinviteUserResponse
+      include Smithy::Client::_Response[Types::BatchReinviteUserResponse]
+      def message: () -> String?
+      def successful: () -> Array[Types::BatchUserSuccessResponseItem]?
+      def failed: () -> Array[Types::BatchUserErrorResponseItem]?
+    end
+    def batch_reinvite_user: (
+      ?network_id: String,
+      ?user_ids: Array[String],
+      ?client_token: String
+    ) -> _BatchReinviteUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchReinviteUserResponse
+
+    interface _BatchResetDevicesForUserResponse
+      include Smithy::Client::_Response[Types::BatchResetDevicesForUserResponse]
+      def message: () -> String?
+      def successful: () -> Array[Types::BatchDeviceSuccessResponseItem]?
+      def failed: () -> Array[Types::BatchDeviceErrorResponseItem]?
+    end
+    def batch_reset_devices_for_user: (
+      ?network_id: String,
+      ?user_id: String,
+      ?app_ids: Array[String],
+      ?client_token: String
+    ) -> _BatchResetDevicesForUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchResetDevicesForUserResponse
+
+    interface _BatchToggleUserSuspendStatusResponse
+      include Smithy::Client::_Response[Types::BatchToggleUserSuspendStatusResponse]
+      def message: () -> String?
+      def successful: () -> Array[Types::BatchUserSuccessResponseItem]?
+      def failed: () -> Array[Types::BatchUserErrorResponseItem]?
+    end
+    def batch_toggle_user_suspend_status: (
+      ?network_id: String,
+      ?suspend: bool,
+      ?user_ids: Array[String],
+      ?client_token: String
+    ) -> _BatchToggleUserSuspendStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchToggleUserSuspendStatusResponse
+
+    interface _CreateBotResponse
+      include Smithy::Client::_Response[Types::CreateBotResponse]
+      def message: () -> String?
+      def bot_id: () -> String?
+      def network_id: () -> String?
+      def username: () -> String?
+      def display_name: () -> String?
+      def group_id: () -> String?
+    end
+    def create_bot: (
+      ?network_id: String,
+      ?username: String,
+      ?display_name: String,
+      ?group_id: String,
+      ?challenge: String
+    ) -> _CreateBotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateBotResponse
+
+    interface _CreateDataRetentionBotResponse
+      include Smithy::Client::_Response[Types::CreateDataRetentionBotResponse]
+      def message: () -> String?
+    end
+    def create_data_retention_bot: (
+      ?network_id: String
+    ) -> _CreateDataRetentionBotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDataRetentionBotResponse
+
+    interface _CreateDataRetentionBotChallengeResponse
+      include Smithy::Client::_Response[Types::CreateDataRetentionBotChallengeResponse]
+      def challenge: () -> String?
+    end
+    def create_data_retention_bot_challenge: (
+      ?network_id: String
+    ) -> _CreateDataRetentionBotChallengeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDataRetentionBotChallengeResponse
+
+    interface _CreateNetworkResponse
+      include Smithy::Client::_Response[Types::CreateNetworkResponse]
+      def network_id: () -> String?
+      def network_name: () -> String?
+      def encryption_key_arn: () -> String?
+    end
+    def create_network: (
+      ?network_name: String,
+      ?access_level: String,
+      ?enable_premium_free_trial: bool,
+      ?encryption_key_arn: String
+    ) -> _CreateNetworkResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateNetworkResponse
+
+    interface _CreateSecurityGroupResponse
+      include Smithy::Client::_Response[Types::CreateSecurityGroupResponse]
+      def security_group: () -> Types::SecurityGroup?
+    end
+    def create_security_group: (
+      ?network_id: String,
+      ?name: String,
+      ?security_group_settings: {
+        lockout_threshold: Integer,
+        permitted_networks: Array[String],
+        enable_guest_federation: bool,
+        global_federation: untyped,
+        federation_mode: untyped,
+        enable_restricted_global_federation: untyped,
+        permitted_wickr_aws_networks: Array[
+          {
+            region: String,
+            network_id: String
+          }
+        ],
+        permitted_wickr_enterprise_networks: Array[
+          {
+            domain: untyped,
+            network_id: untyped
+          }
+        ]
+      },
+      ?client_token: String
+    ) -> _CreateSecurityGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSecurityGroupResponse
+
+    interface _DeleteBotResponse
+      include Smithy::Client::_Response[Types::DeleteBotResponse]
+      def message: () -> String?
+    end
+    def delete_bot: (
+      ?network_id: String,
+      ?bot_id: String
+    ) -> _DeleteBotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBotResponse
+
+    interface _DeleteDataRetentionBotResponse
+      include Smithy::Client::_Response[Types::DeleteDataRetentionBotResponse]
+      def message: () -> String?
+    end
+    def delete_data_retention_bot: (
+      ?network_id: String
+    ) -> _DeleteDataRetentionBotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDataRetentionBotResponse
+
+    interface _DeleteNetworkResponse
+      include Smithy::Client::_Response[Types::DeleteNetworkResponse]
+      def message: () -> String?
+    end
+    def delete_network: (
+      ?network_id: String,
+      ?client_token: String
+    ) -> _DeleteNetworkResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteNetworkResponse
+
+    interface _DeleteSecurityGroupResponse
+      include Smithy::Client::_Response[Types::DeleteSecurityGroupResponse]
+      def message: () -> String?
+      def network_id: () -> String?
+      def group_id: () -> String?
+    end
+    def delete_security_group: (
+      ?network_id: String,
+      ?group_id: String
+    ) -> _DeleteSecurityGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSecurityGroupResponse
+
+    interface _GetBotResponse
+      include Smithy::Client::_Response[Types::GetBotResponse]
+      def bot_id: () -> String?
+      def display_name: () -> String?
+      def username: () -> String?
+      def uname: () -> String?
+      def pubkey: () -> String?
+      def status: () -> Integer?
+      def group_id: () -> String?
+      def has_challenge: () -> bool?
+      def suspended: () -> bool?
+      def last_login: () -> String?
+    end
+    def get_bot: (
+      ?network_id: String,
+      ?bot_id: String
+    ) -> _GetBotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBotResponse
+
+    interface _GetBotsCountResponse
+      include Smithy::Client::_Response[Types::GetBotsCountResponse]
+      def pending: () -> Integer?
+      def active: () -> Integer?
+      def total: () -> Integer?
+    end
+    def get_bots_count: (
+      ?network_id: String
+    ) -> _GetBotsCountResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBotsCountResponse
+
+    interface _GetDataRetentionBotResponse
+      include Smithy::Client::_Response[Types::GetDataRetentionBotResponse]
+      def bot_name: () -> String?
+      def bot_exists: () -> bool?
+      def is_bot_active: () -> bool?
+      def is_data_retention_bot_registered: () -> bool?
+      def is_data_retention_service_enabled: () -> bool?
+      def is_pubkey_msg_acked: () -> bool?
+    end
+    def get_data_retention_bot: (
+      ?network_id: String
+    ) -> _GetDataRetentionBotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDataRetentionBotResponse
+
+    interface _GetGuestUserHistoryCountResponse
+      include Smithy::Client::_Response[Types::GetGuestUserHistoryCountResponse]
+      def history: () -> Array[Types::GuestUserHistoryCount]?
+    end
+    def get_guest_user_history_count: (
+      ?network_id: String
+    ) -> _GetGuestUserHistoryCountResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetGuestUserHistoryCountResponse
+
+    interface _GetNetworkResponse
+      include Smithy::Client::_Response[Types::GetNetworkResponse]
+      def network_id: () -> String?
+      def network_name: () -> String?
+      def access_level: () -> String?
+      def aws_account_id: () -> String?
+      def network_arn: () -> String?
+      def standing: () -> Integer?
+      def free_trial_expiration: () -> String?
+      def migration_state: () -> Integer?
+      def encryption_key_arn: () -> String?
+    end
+    def get_network: (
+      ?network_id: String
+    ) -> _GetNetworkResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetNetworkResponse
+
+    interface _GetNetworkSettingsResponse
+      include Smithy::Client::_Response[Types::GetNetworkSettingsResponse]
+      def settings: () -> Array[Types::Setting]?
+    end
+    def get_network_settings: (
+      ?network_id: String
+    ) -> _GetNetworkSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetNetworkSettingsResponse
+
+    interface _GetOidcInfoResponse
+      include Smithy::Client::_Response[Types::GetOidcInfoResponse]
+      def openid_connect_info: () -> Types::OidcConfigInfo?
+      def token_info: () -> Types::OidcTokenInfo?
+    end
+    def get_oidc_info: (
+      ?network_id: String,
+      ?client_id: String,
+      ?code: String,
+      ?grant_type: String,
+      ?redirect_uri: String,
+      ?url: String,
+      ?client_secret: String,
+      ?code_verifier: String,
+      ?certificate: String
+    ) -> _GetOidcInfoResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetOidcInfoResponse
+
+    interface _GetOpentdfConfigResponse
+      include Smithy::Client::_Response[Types::GetOpentdfConfigResponse]
+      def client_id: () -> String?
+      def domain: () -> String?
+      def client_secret: () -> String?
+      def provider: () -> String?
+    end
+    def get_opentdf_config: (
+      ?network_id: String
+    ) -> _GetOpentdfConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetOpentdfConfigResponse
+
+    interface _GetSecurityGroupResponse
+      include Smithy::Client::_Response[Types::GetSecurityGroupResponse]
+      def security_group: () -> Types::SecurityGroup?
+    end
+    def get_security_group: (
+      ?network_id: String,
+      ?group_id: String
+    ) -> _GetSecurityGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSecurityGroupResponse
+
+    interface _GetUserResponse
+      include Smithy::Client::_Response[Types::GetUserResponse]
+      def user_id: () -> String?
+      def first_name: () -> String?
+      def last_name: () -> String?
+      def username: () -> String?
+      def is_admin: () -> bool?
+      def suspended: () -> bool?
+      def status: () -> Integer?
+      def last_activity: () -> Integer?
+      def last_login: () -> Integer?
+      def security_group_ids: () -> Array[String]?
+    end
+    def get_user: (
+      ?network_id: String,
+      ?user_id: String,
+      ?start_time: Time,
+      ?end_time: Time
+    ) -> _GetUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetUserResponse
+
+    interface _GetUsersCountResponse
+      include Smithy::Client::_Response[Types::GetUsersCountResponse]
+      def pending: () -> Integer?
+      def active: () -> Integer?
+      def rejected: () -> Integer?
+      def remaining: () -> Integer?
+      def total: () -> Integer?
+    end
+    def get_users_count: (
+      ?network_id: String
+    ) -> _GetUsersCountResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetUsersCountResponse
+
+    interface _ListBlockedGuestUsersResponse
+      include Smithy::Client::_Response[Types::ListBlockedGuestUsersResponse]
+      def next_token: () -> String?
+      def blocklist: () -> Array[Types::BlockedGuestUser]?
+    end
+    def list_blocked_guest_users: (
+      ?network_id: String,
+      ?max_results: Integer,
+      ?sort_direction: String,
+      ?sort_fields: String,
+      ?username: String,
+      ?admin: String,
+      ?next_token: String
+    ) -> _ListBlockedGuestUsersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBlockedGuestUsersResponse
+
+    interface _ListBotsResponse
+      include Smithy::Client::_Response[Types::ListBotsResponse]
+      def bots: () -> Array[Types::Bot]?
+      def next_token: () -> String?
+    end
+    def list_bots: (
+      ?network_id: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?sort_fields: String,
+      ?sort_direction: String,
+      ?display_name: String,
+      ?username: String,
+      ?status: Integer,
+      ?group_id: String
+    ) -> _ListBotsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBotsResponse
+
+    interface _ListDevicesForUserResponse
+      include Smithy::Client::_Response[Types::ListDevicesForUserResponse]
+      def next_token: () -> String?
+      def devices: () -> Array[Types::BasicDeviceObject]?
+    end
+    def list_devices_for_user: (
+      ?network_id: String,
+      ?user_id: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?sort_fields: String,
+      ?sort_direction: String
+    ) -> _ListDevicesForUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDevicesForUserResponse
+
+    interface _ListGuestUsersResponse
+      include Smithy::Client::_Response[Types::ListGuestUsersResponse]
+      def next_token: () -> String?
+      def guestlist: () -> Array[Types::GuestUser]?
+    end
+    def list_guest_users: (
+      ?network_id: String,
+      ?max_results: Integer,
+      ?sort_direction: String,
+      ?sort_fields: String,
+      ?username: String,
+      ?billing_period: String,
+      ?next_token: String
+    ) -> _ListGuestUsersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListGuestUsersResponse
+
+    interface _ListNetworksResponse
+      include Smithy::Client::_Response[Types::ListNetworksResponse]
+      def networks: () -> Array[Types::Network]?
+      def next_token: () -> String?
+    end
+    def list_networks: (
+      ?max_results: Integer,
+      ?sort_fields: String,
+      ?sort_direction: String,
+      ?next_token: String
+    ) -> _ListNetworksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListNetworksResponse
+
+    interface _ListSecurityGroupUsersResponse
+      include Smithy::Client::_Response[Types::ListSecurityGroupUsersResponse]
+      def users: () -> Array[Types::User]?
+      def next_token: () -> String?
+    end
+    def list_security_group_users: (
+      ?network_id: String,
+      ?group_id: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?sort_fields: String,
+      ?sort_direction: String
+    ) -> _ListSecurityGroupUsersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSecurityGroupUsersResponse
+
+    interface _ListSecurityGroupsResponse
+      include Smithy::Client::_Response[Types::ListSecurityGroupsResponse]
+      def security_groups: () -> Array[Types::SecurityGroup]?
+      def next_token: () -> String?
+    end
+    def list_security_groups: (
+      ?network_id: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?sort_fields: String,
+      ?sort_direction: String
+    ) -> _ListSecurityGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSecurityGroupsResponse
+
+    interface _ListUsersResponse
+      include Smithy::Client::_Response[Types::ListUsersResponse]
+      def next_token: () -> String?
+      def users: () -> Array[Types::User]?
+    end
+    def list_users: (
+      ?network_id: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?sort_fields: String,
+      ?sort_direction: String,
+      ?first_name: String,
+      ?last_name: String,
+      ?username: String,
+      ?status: Integer,
+      ?group_id: String
+    ) -> _ListUsersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListUsersResponse
+
+    interface _RegisterOidcConfigResponse
+      include Smithy::Client::_Response[Types::RegisterOidcConfigResponse]
+      def application_name: () -> String?
+      def client_id: () -> String?
+      def company_id: () -> String?
+      def scopes: () -> String?
+      def issuer: () -> String?
+      def client_secret: () -> String?
+      def secret: () -> String?
+      def redirect_url: () -> String?
+      def user_id: () -> String?
+      def custom_username: () -> String?
+      def ca_certificate: () -> String?
+      def application_id: () -> Integer?
+      def sso_token_buffer_minutes: () -> Integer?
+      def extra_auth_params: () -> String?
+    end
+    def register_oidc_config: (
+      ?network_id: String,
+      ?company_id: String,
+      ?custom_username: String,
+      ?extra_auth_params: String,
+      ?issuer: String,
+      ?scopes: String,
+      ?secret: String,
+      ?sso_token_buffer_minutes: Integer,
+      ?user_id: String
+    ) -> _RegisterOidcConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterOidcConfigResponse
+
+    interface _RegisterOidcConfigTestResponse
+      include Smithy::Client::_Response[Types::RegisterOidcConfigTestResponse]
+      def token_endpoint: () -> String?
+      def userinfo_endpoint: () -> String?
+      def response_types_supported: () -> Array[String]?
+      def scopes_supported: () -> Array[String]?
+      def issuer: () -> String?
+      def authorization_endpoint: () -> String?
+      def end_session_endpoint: () -> String?
+      def logout_endpoint: () -> String?
+      def grant_types_supported: () -> Array[String]?
+      def revocation_endpoint: () -> String?
+      def token_endpoint_auth_methods_supported: () -> Array[String]?
+      def microsoft_multi_refresh_token: () -> bool?
+    end
+    def register_oidc_config_test: (
+      ?network_id: String,
+      ?extra_auth_params: String,
+      ?issuer: String,
+      ?scopes: String,
+      ?certificate: String
+    ) -> _RegisterOidcConfigTestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterOidcConfigTestResponse
+
+    interface _RegisterOpentdfConfigResponse
+      include Smithy::Client::_Response[Types::RegisterOpentdfConfigResponse]
+      def client_id: () -> String?
+      def domain: () -> String?
+      def client_secret: () -> String?
+      def provider: () -> String?
+    end
+    def register_opentdf_config: (
+      ?network_id: String,
+      ?client_id: String,
+      ?client_secret: String,
+      ?domain: String,
+      ?provider: String,
+      ?dry_run: bool
+    ) -> _RegisterOpentdfConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterOpentdfConfigResponse
+
+    interface _UpdateBotResponse
+      include Smithy::Client::_Response[Types::UpdateBotResponse]
+      def message: () -> String?
+    end
+    def update_bot: (
+      ?network_id: String,
+      ?bot_id: String,
+      ?display_name: String,
+      ?group_id: String,
+      ?challenge: String,
+      ?suspend: bool
+    ) -> _UpdateBotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateBotResponse
+
+    interface _UpdateDataRetentionResponse
+      include Smithy::Client::_Response[Types::UpdateDataRetentionResponse]
+      def message: () -> String?
+    end
+    def update_data_retention: (
+      ?network_id: String,
+      ?action_type: String
+    ) -> _UpdateDataRetentionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDataRetentionResponse
+
+    interface _UpdateGuestUserResponse
+      include Smithy::Client::_Response[Types::UpdateGuestUserResponse]
+      def message: () -> String?
+    end
+    def update_guest_user: (
+      ?network_id: String,
+      ?username_hash: String,
+      ?block: bool
+    ) -> _UpdateGuestUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateGuestUserResponse
+
+    interface _UpdateNetworkResponse
+      include Smithy::Client::_Response[Types::UpdateNetworkResponse]
+      def message: () -> String?
+    end
+    def update_network: (
+      ?network_id: String,
+      ?network_name: String,
+      ?client_token: String,
+      ?encryption_key_arn: String
+    ) -> _UpdateNetworkResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateNetworkResponse
+
+    interface _UpdateNetworkSettingsResponse
+      include Smithy::Client::_Response[Types::UpdateNetworkSettingsResponse]
+      def settings: () -> Array[Types::Setting]?
+    end
+    def update_network_settings: (
+      ?network_id: String,
+      ?settings: {
+        enable_client_metrics: bool,
+        read_receipt_config: {
+          status: String
+        },
+        data_retention: untyped,
+        enable_trusted_data_format: untyped,
+        consent_popup: {
+          enabled: untyped,
+          header: String,
+          content: untyped,
+          close_button_label: untyped
+        }
+      }
+    ) -> _UpdateNetworkSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateNetworkSettingsResponse
+
+    interface _UpdateSecurityGroupResponse
+      include Smithy::Client::_Response[Types::UpdateSecurityGroupResponse]
+      def security_group: () -> Types::SecurityGroup?
+    end
+    def update_security_group: (
+      ?network_id: String,
+      ?group_id: String,
+      ?name: String,
+      ?security_group_settings: {
+        always_reauthenticate: bool,
+        atak_package_values: Array[String],
+        calling: {
+          can_start11_call: untyped,
+          can_video_call: untyped,
+          force_tcp_call: untyped
+        },
+        check_for_updates: untyped,
+        enable_atak: untyped,
+        enable_crash_reports: untyped,
+        enable_file_download: untyped,
+        enable_guest_federation: untyped,
+        enable_notification_preview: untyped,
+        enable_open_access_option: untyped,
+        enable_restricted_global_federation: untyped,
+        files_enabled: untyped,
+        force_device_lockout: Integer,
+        force_open_access: untyped,
+        force_read_receipts: untyped,
+        global_federation: untyped,
+        is_ato_enabled: untyped,
+        is_link_preview_enabled: untyped,
+        location_allow_maps: untyped,
+        location_enabled: untyped,
+        max_auto_download_size: Integer,
+        max_bor: untyped,
+        max_ttl: untyped,
+        message_forwarding_enabled: untyped,
+        password_requirements: {
+          lowercase: untyped,
+          min_length: untyped,
+          numbers: untyped,
+          symbols: untyped,
+          uppercase: untyped
+        },
+        presence_enabled: untyped,
+        quick_responses: untyped,
+        show_master_recovery_key: untyped,
+        shredder: {
+          can_process_manually: untyped,
+          intensity: untyped
+        },
+        sso_max_idle_minutes: untyped,
+        max_non_sso_session_minutes: untyped,
+        federation_mode: untyped,
+        lockout_threshold: untyped,
+        permitted_networks: Array[String],
+        permitted_wickr_aws_networks: Array[
+          {
+            region: String,
+            network_id: String
+          }
+        ],
+        permitted_wickr_enterprise_networks: Array[
+          {
+            domain: untyped,
+            network_id: untyped
+          }
+        ]
+      }
+    ) -> _UpdateSecurityGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSecurityGroupResponse
+
+    interface _UpdateUserResponse
+      include Smithy::Client::_Response[Types::UpdateUserResponse]
+      def user_id: () -> String?
+      def network_id: () -> String?
+      def security_group_ids: () -> Array[String]?
+      def first_name: () -> String?
+      def last_name: () -> String?
+      def middle_name: () -> String?
+      def suspended: () -> bool?
+      def modified: () -> Integer?
+      def status: () -> Integer?
+      def invite_code: () -> String?
+      def invite_expiration: () -> Integer?
+      def code_validation: () -> bool?
+    end
+    def update_user: (
+      ?network_id: String,
+      ?user_id: String,
+      ?user_details: {
+        first_name: String,
+        last_name: untyped,
+        username: String,
+        security_group_ids: Array[String],
+        invite_code: untyped,
+        invite_code_ttl: Integer,
+        code_validation: bool
+      }
+    ) -> _UpdateUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateUserResponse
+  end
+end

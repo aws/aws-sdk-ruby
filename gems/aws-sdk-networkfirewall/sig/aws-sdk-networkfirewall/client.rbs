@@ -104,6 +104,57 @@ module Aws::NetworkFirewall
       ]
     ) -> _AssociateSubnetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateSubnetsResponse
 
+    interface _AttachRuleGroupsToProxyConfigurationResponse
+      include Smithy::Client::_Response[Types::AttachRuleGroupsToProxyConfigurationResponse]
+      def proxy_configuration: () -> Types::ProxyConfiguration?
+      def update_token: () -> String?
+    end
+    def attach_rule_groups_to_proxy_configuration: (
+      ?proxy_configuration_name: String,
+      ?proxy_configuration_arn: String,
+      ?rule_groups: Array[
+        {
+          proxy_rule_group_name: String,
+          insert_position: Integer
+        }
+      ],
+      ?update_token: String
+    ) -> _AttachRuleGroupsToProxyConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AttachRuleGroupsToProxyConfigurationResponse
+
+    interface _CreateContainerAssociationResponse
+      include Smithy::Client::_Response[Types::CreateContainerAssociationResponse]
+      def container_association_name: () -> String?
+      def container_association_arn: () -> String?
+      def description: () -> String?
+      def type: () -> String?
+      def container_monitoring_configurations: () -> Array[Types::ContainerMonitoringConfiguration]?
+      def status: () -> String?
+      def tags: () -> Array[Types::Tag]?
+      def update_token: () -> String?
+    end
+    def create_container_association: (
+      ?container_association_name: String,
+      ?description: String,
+      ?type: String,
+      ?container_monitoring_configurations: Array[
+        {
+          cluster_arn: String,
+          attribute_filters: Array[
+            {
+              key: String,
+              value: String
+            }
+          ]
+        }
+      ],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateContainerAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateContainerAssociationResponse
+
     interface _CreateFirewallResponse
       include Smithy::Client::_Response[Types::CreateFirewallResponse]
       def firewall: () -> Types::Firewall?
@@ -140,7 +191,30 @@ module Aws::NetworkFirewall
           availability_zone: String
         }
       ],
-      ?availability_zone_change_protection: bool
+      ?availability_zone_change_protection: bool,
+      ?nat_gateway_mappings: Array[
+        {
+          nat_gateway_id: String
+        }
+      ],
+      ?proxy_settings: {
+        listener_properties: Array[
+          {
+            port: Integer,
+            type: String
+          }
+        ]
+      },
+      ?no_source_preservation: bool,
+      ?vpc_endpoint: {
+        vpc_id: String,
+        subnet_mappings: Array[
+          {
+            subnet_id: String,
+            ip_address_type: String
+          }
+        ]
+      }
     ) -> _CreateFirewallResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateFirewallResponse
 
     interface _CreateFirewallPolicyResponse
@@ -214,6 +288,120 @@ module Aws::NetworkFirewall
         type: String
       }
     ) -> _CreateFirewallPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateFirewallPolicyResponse
+
+    interface _CreateProxyResponse
+      include Smithy::Client::_Response[Types::CreateProxyResponse]
+      def proxy: () -> Types::Proxy?
+      def update_token: () -> String?
+    end
+    def create_proxy: (
+      ?proxy_name: String,
+      ?nat_gateway_id: String,
+      ?proxy_configuration_name: String,
+      ?proxy_configuration_arn: String,
+      ?listener_properties: Array[
+        {
+          port: Integer,
+          type: String
+        }
+      ],
+      ?tls_intercept_properties: {
+        pca_arn: String,
+        tls_intercept_mode: String
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateProxyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateProxyResponse
+
+    interface _CreateProxyConfigurationResponse
+      include Smithy::Client::_Response[Types::CreateProxyConfigurationResponse]
+      def proxy_configuration: () -> Types::ProxyConfiguration?
+      def update_token: () -> String?
+    end
+    def create_proxy_configuration: (
+      ?proxy_configuration_name: String,
+      ?description: String,
+      ?rule_group_names: Array[String],
+      ?rule_group_arns: Array[String],
+      ?default_rule_phase_actions: {
+        pre_dns: String,
+        pre_request: untyped,
+        post_response: untyped
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateProxyConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateProxyConfigurationResponse
+
+    interface _CreateProxyRuleGroupResponse
+      include Smithy::Client::_Response[Types::CreateProxyRuleGroupResponse]
+      def proxy_rule_group: () -> Types::ProxyRuleGroup?
+      def update_token: () -> String?
+    end
+    def create_proxy_rule_group: (
+      ?proxy_rule_group_name: String,
+      ?description: String,
+      ?rules: {
+        pre_dns: Array[
+          {
+            proxy_rule_name: String,
+            description: String,
+            action: String,
+            conditions: Array[
+              {
+                condition_operator: String,
+                condition_key: String,
+                condition_values: Array[String]
+              }
+            ]
+          }
+        ],
+        pre_request: untyped,
+        post_response: untyped
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateProxyRuleGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateProxyRuleGroupResponse
+
+    interface _CreateProxyRulesResponse
+      include Smithy::Client::_Response[Types::CreateProxyRulesResponse]
+      def proxy_rule_group: () -> Types::ProxyRuleGroup?
+      def update_token: () -> String?
+    end
+    def create_proxy_rules: (
+      ?proxy_rule_group_arn: String,
+      ?proxy_rule_group_name: String,
+      ?rules: {
+        pre_dns: Array[
+          {
+            proxy_rule_name: String,
+            description: String,
+            action: String,
+            conditions: Array[
+              {
+                condition_operator: String,
+                condition_key: String,
+                condition_values: Array[String]
+              }
+            ],
+            insert_position: Integer
+          }
+        ],
+        pre_request: untyped,
+        post_response: untyped
+      }
+    ) -> _CreateProxyRulesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateProxyRulesResponse
 
     interface _CreateRuleGroupResponse
       include Smithy::Client::_Response[Types::CreateRuleGroupResponse]
@@ -419,6 +607,17 @@ module Aws::NetworkFirewall
       ]
     ) -> _CreateVpcEndpointAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateVpcEndpointAssociationResponse
 
+    interface _DeleteContainerAssociationResponse
+      include Smithy::Client::_Response[Types::DeleteContainerAssociationResponse]
+      def container_association_name: () -> String?
+      def container_association_arn: () -> String?
+      def status: () -> String?
+    end
+    def delete_container_association: (
+      ?container_association_name: String,
+      ?container_association_arn: String
+    ) -> _DeleteContainerAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteContainerAssociationResponse
+
     interface _DeleteFirewallResponse
       include Smithy::Client::_Response[Types::DeleteFirewallResponse]
       def firewall: () -> Types::Firewall?
@@ -446,6 +645,48 @@ module Aws::NetworkFirewall
     def delete_network_firewall_transit_gateway_attachment: (
       ?transit_gateway_attachment_id: String
     ) -> _DeleteNetworkFirewallTransitGatewayAttachmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteNetworkFirewallTransitGatewayAttachmentResponse
+
+    interface _DeleteProxyResponse
+      include Smithy::Client::_Response[Types::DeleteProxyResponse]
+      def nat_gateway_id: () -> String?
+      def proxy_name: () -> String?
+      def proxy_arn: () -> String?
+    end
+    def delete_proxy: (
+      ?nat_gateway_id: String,
+      ?proxy_name: String,
+      ?proxy_arn: String
+    ) -> _DeleteProxyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteProxyResponse
+
+    interface _DeleteProxyConfigurationResponse
+      include Smithy::Client::_Response[Types::DeleteProxyConfigurationResponse]
+      def proxy_configuration_name: () -> String?
+      def proxy_configuration_arn: () -> String?
+    end
+    def delete_proxy_configuration: (
+      ?proxy_configuration_name: String,
+      ?proxy_configuration_arn: String
+    ) -> _DeleteProxyConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteProxyConfigurationResponse
+
+    interface _DeleteProxyRuleGroupResponse
+      include Smithy::Client::_Response[Types::DeleteProxyRuleGroupResponse]
+      def proxy_rule_group_name: () -> String?
+      def proxy_rule_group_arn: () -> String?
+    end
+    def delete_proxy_rule_group: (
+      ?proxy_rule_group_name: String,
+      ?proxy_rule_group_arn: String
+    ) -> _DeleteProxyRuleGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteProxyRuleGroupResponse
+
+    interface _DeleteProxyRulesResponse
+      include Smithy::Client::_Response[Types::DeleteProxyRulesResponse]
+      def proxy_rule_group: () -> Types::ProxyRuleGroup?
+    end
+    def delete_proxy_rules: (
+      ?proxy_rule_group_arn: String,
+      ?proxy_rule_group_name: String,
+      ?rules: Array[String]
+    ) -> _DeleteProxyRulesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteProxyRulesResponse
 
     interface _DeleteResourcePolicyResponse
       include Smithy::Client::_Response[Types::DeleteResourcePolicyResponse]
@@ -481,6 +722,24 @@ module Aws::NetworkFirewall
     def delete_vpc_endpoint_association: (
       ?vpc_endpoint_association_arn: String
     ) -> _DeleteVpcEndpointAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteVpcEndpointAssociationResponse
+
+    interface _DescribeContainerAssociationResponse
+      include Smithy::Client::_Response[Types::DescribeContainerAssociationResponse]
+      def container_association_name: () -> String?
+      def container_association_arn: () -> String?
+      def description: () -> String?
+      def type: () -> String?
+      def container_monitoring_configurations: () -> Array[Types::ContainerMonitoringConfiguration]?
+      def status: () -> String?
+      def resolved_cidr_count: () -> Integer?
+      def last_updated_time: () -> Time?
+      def tags: () -> Array[Types::Tag]?
+      def update_token: () -> String?
+    end
+    def describe_container_association: (
+      ?container_association_name: String,
+      ?container_association_arn: String
+    ) -> _DescribeContainerAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeContainerAssociationResponse
 
     interface _DescribeFirewallResponse
       include Smithy::Client::_Response[Types::DescribeFirewallResponse]
@@ -549,6 +808,47 @@ module Aws::NetworkFirewall
       ?firewall_name: String
     ) -> _DescribeLoggingConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeLoggingConfigurationResponse
 
+    interface _DescribeProxyResponse
+      include Smithy::Client::_Response[Types::DescribeProxyResponse]
+      def proxy: () -> Types::DescribeProxyResource?
+      def update_token: () -> String?
+    end
+    def describe_proxy: (
+      ?proxy_name: String,
+      ?proxy_arn: String
+    ) -> _DescribeProxyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeProxyResponse
+
+    interface _DescribeProxyConfigurationResponse
+      include Smithy::Client::_Response[Types::DescribeProxyConfigurationResponse]
+      def proxy_configuration: () -> Types::ProxyConfiguration?
+      def update_token: () -> String?
+    end
+    def describe_proxy_configuration: (
+      ?proxy_configuration_name: String,
+      ?proxy_configuration_arn: String
+    ) -> _DescribeProxyConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeProxyConfigurationResponse
+
+    interface _DescribeProxyRuleResponse
+      include Smithy::Client::_Response[Types::DescribeProxyRuleResponse]
+      def proxy_rule: () -> Types::ProxyRule?
+      def update_token: () -> String?
+    end
+    def describe_proxy_rule: (
+      ?proxy_rule_name: String,
+      ?proxy_rule_group_name: String,
+      ?proxy_rule_group_arn: String
+    ) -> _DescribeProxyRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeProxyRuleResponse
+
+    interface _DescribeProxyRuleGroupResponse
+      include Smithy::Client::_Response[Types::DescribeProxyRuleGroupResponse]
+      def proxy_rule_group: () -> Types::ProxyRuleGroup?
+      def update_token: () -> String?
+    end
+    def describe_proxy_rule_group: (
+      ?proxy_rule_group_name: String,
+      ?proxy_rule_group_arn: String
+    ) -> _DescribeProxyRuleGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeProxyRuleGroupResponse
+
     interface _DescribeResourcePolicyResponse
       include Smithy::Client::_Response[Types::DescribeResourcePolicyResponse]
       def policy: () -> String?
@@ -579,6 +879,9 @@ module Aws::NetworkFirewall
       def capacity: () -> Integer?
       def stateful_rule_options: () -> Types::StatefulRuleOptions?
       def last_modified_time: () -> Time?
+      def vendor_name: () -> String?
+      def product_id: () -> String?
+      def listing_name: () -> String?
     end
     def describe_rule_group_metadata: (
       ?rule_group_name: String,
@@ -617,6 +920,19 @@ module Aws::NetworkFirewall
     def describe_vpc_endpoint_association: (
       ?vpc_endpoint_association_arn: String
     ) -> _DescribeVpcEndpointAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeVpcEndpointAssociationResponse
+
+    interface _DetachRuleGroupsFromProxyConfigurationResponse
+      include Smithy::Client::_Response[Types::DetachRuleGroupsFromProxyConfigurationResponse]
+      def proxy_configuration: () -> Types::ProxyConfiguration?
+      def update_token: () -> String?
+    end
+    def detach_rule_groups_from_proxy_configuration: (
+      ?proxy_configuration_name: String,
+      ?proxy_configuration_arn: String,
+      ?rule_group_names: Array[String],
+      ?rule_group_arns: Array[String],
+      ?update_token: String
+    ) -> _DetachRuleGroupsFromProxyConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DetachRuleGroupsFromProxyConfigurationResponse
 
     interface _DisassociateAvailabilityZonesResponse
       include Smithy::Client::_Response[Types::DisassociateAvailabilityZonesResponse]
@@ -680,6 +996,16 @@ module Aws::NetworkFirewall
       ?max_results: Integer
     ) -> _ListAnalysisReportsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAnalysisReportsResponse
 
+    interface _ListContainerAssociationsResponse
+      include Smithy::Client::_Response[Types::ListContainerAssociationsResponse]
+      def container_associations: () -> Array[Types::ContainerAssociationSummary]?
+      def next_token: () -> String?
+    end
+    def list_container_associations: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListContainerAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListContainerAssociationsResponse
+
     interface _ListFirewallPoliciesResponse
       include Smithy::Client::_Response[Types::ListFirewallPoliciesResponse]
       def next_token: () -> String?
@@ -739,6 +1065,36 @@ module Aws::NetworkFirewall
       ?max_results: Integer
     ) -> _ListFlowOperationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFlowOperationsResponse
 
+    interface _ListProxiesResponse
+      include Smithy::Client::_Response[Types::ListProxiesResponse]
+      def proxies: () -> Array[Types::ProxyMetadata]?
+      def next_token: () -> String?
+    end
+    def list_proxies: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListProxiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListProxiesResponse
+
+    interface _ListProxyConfigurationsResponse
+      include Smithy::Client::_Response[Types::ListProxyConfigurationsResponse]
+      def proxy_configurations: () -> Array[Types::ProxyConfigurationMetadata]?
+      def next_token: () -> String?
+    end
+    def list_proxy_configurations: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListProxyConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListProxyConfigurationsResponse
+
+    interface _ListProxyRuleGroupsResponse
+      include Smithy::Client::_Response[Types::ListProxyRuleGroupsResponse]
+      def proxy_rule_groups: () -> Array[Types::ProxyRuleGroupMetadata]?
+      def next_token: () -> String?
+    end
+    def list_proxy_rule_groups: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListProxyRuleGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListProxyRuleGroupsResponse
+
     interface _ListRuleGroupsResponse
       include Smithy::Client::_Response[Types::ListRuleGroupsResponse]
       def next_token: () -> String?
@@ -749,6 +1105,7 @@ module Aws::NetworkFirewall
       ?max_results: Integer,
       ?scope: String,
       ?managed_type: String,
+      ?subscription_status: String,
       ?type: String
     ) -> _ListRuleGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRuleGroupsResponse
 
@@ -895,6 +1252,42 @@ module Aws::NetworkFirewall
       ?firewall_name: String,
       ?availability_zone_change_protection: bool
     ) -> _UpdateAvailabilityZoneChangeProtectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAvailabilityZoneChangeProtectionResponse
+
+    interface _UpdateContainerAssociationResponse
+      include Smithy::Client::_Response[Types::UpdateContainerAssociationResponse]
+      def container_association_name: () -> String?
+      def container_association_arn: () -> String?
+      def description: () -> String?
+      def type: () -> String?
+      def container_monitoring_configurations: () -> Array[Types::ContainerMonitoringConfiguration]?
+      def status: () -> String?
+      def tags: () -> Array[Types::Tag]?
+      def update_token: () -> String?
+    end
+    def update_container_association: (
+      ?container_association_name: String,
+      ?container_association_arn: String,
+      ?description: String,
+      ?type: String,
+      ?container_monitoring_configurations: Array[
+        {
+          cluster_arn: String,
+          attribute_filters: Array[
+            {
+              key: String,
+              value: String
+            }
+          ]
+        }
+      ],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?update_token: String
+    ) -> _UpdateContainerAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateContainerAssociationResponse
 
     interface _UpdateFirewallAnalysisSettingsResponse
       include Smithy::Client::_Response[Types::UpdateFirewallAnalysisSettingsResponse]
@@ -1058,6 +1451,138 @@ module Aws::NetworkFirewall
       },
       ?enable_monitoring_dashboard: bool
     ) -> _UpdateLoggingConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateLoggingConfigurationResponse
+
+    interface _UpdateProxyResponse
+      include Smithy::Client::_Response[Types::UpdateProxyResponse]
+      def proxy: () -> Types::Proxy?
+      def update_token: () -> String?
+    end
+    def update_proxy: (
+      ?nat_gateway_id: String,
+      ?proxy_name: String,
+      ?proxy_arn: String,
+      ?listener_properties_to_add: Array[
+        {
+          port: Integer,
+          type: String
+        }
+      ],
+      ?listener_properties_to_remove: Array[
+        {
+          port: Integer,
+          type: String
+        }
+      ],
+      ?tls_intercept_properties: {
+        pca_arn: String,
+        tls_intercept_mode: String
+      },
+      ?update_token: String
+    ) -> _UpdateProxyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateProxyResponse
+
+    interface _UpdateProxyConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateProxyConfigurationResponse]
+      def proxy_configuration: () -> Types::ProxyConfiguration?
+      def update_token: () -> String?
+    end
+    def update_proxy_configuration: (
+      ?proxy_configuration_name: String,
+      ?proxy_configuration_arn: String,
+      ?default_rule_phase_actions: {
+        pre_dns: String,
+        pre_request: untyped,
+        post_response: untyped
+      },
+      ?update_token: String
+    ) -> _UpdateProxyConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateProxyConfigurationResponse
+
+    interface _UpdateProxyRuleResponse
+      include Smithy::Client::_Response[Types::UpdateProxyRuleResponse]
+      def proxy_rule: () -> Types::ProxyRule?
+      def removed_conditions: () -> Array[Types::ProxyRuleCondition]?
+      def update_token: () -> String?
+    end
+    def update_proxy_rule: (
+      ?proxy_rule_group_name: String,
+      ?proxy_rule_group_arn: String,
+      ?proxy_rule_name: String,
+      ?description: String,
+      ?action: String,
+      ?add_conditions: Array[
+        {
+          condition_operator: String,
+          condition_key: String,
+          condition_values: Array[String]
+        }
+      ],
+      ?remove_conditions: Array[
+        {
+          condition_operator: String,
+          condition_key: String,
+          condition_values: Array[String]
+        }
+      ],
+      ?update_token: String
+    ) -> _UpdateProxyRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateProxyRuleResponse
+
+    interface _UpdateProxyRuleGroupPrioritiesResponse
+      include Smithy::Client::_Response[Types::UpdateProxyRuleGroupPrioritiesResponse]
+      def proxy_rule_groups: () -> Array[Types::ProxyRuleGroupPriorityResult]?
+      def update_token: () -> String?
+    end
+    def update_proxy_rule_group_priorities: (
+      ?proxy_configuration_name: String,
+      ?proxy_configuration_arn: String,
+      ?rule_groups: Array[
+        {
+          proxy_rule_group_name: String,
+          new_position: Integer
+        }
+      ],
+      ?update_token: String
+    ) -> _UpdateProxyRuleGroupPrioritiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateProxyRuleGroupPrioritiesResponse
+
+    interface _UpdateProxyRulePrioritiesResponse
+      include Smithy::Client::_Response[Types::UpdateProxyRulePrioritiesResponse]
+      def proxy_rule_group_name: () -> String?
+      def proxy_rule_group_arn: () -> String?
+      def rule_group_request_phase: () -> String?
+      def rules: () -> Array[Types::ProxyRulePriority]?
+      def update_token: () -> String?
+    end
+    def update_proxy_rule_priorities: (
+      ?proxy_rule_group_name: String,
+      ?proxy_rule_group_arn: String,
+      ?rule_group_request_phase: String,
+      ?rules: Array[
+        {
+          proxy_rule_name: String,
+          new_position: Integer
+        }
+      ],
+      ?update_token: String
+    ) -> _UpdateProxyRulePrioritiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateProxyRulePrioritiesResponse
+
+    interface _UpdateProxySettingsResponse
+      include Smithy::Client::_Response[Types::UpdateProxySettingsResponse]
+      def firewall_arn: () -> String?
+      def firewall_name: () -> String?
+      def update_token: () -> String?
+      def proxy_settings: () -> Types::ProxySettings?
+    end
+    def update_proxy_settings: (
+      ?firewall_arn: String,
+      ?firewall_name: String,
+      ?update_token: String,
+      ?proxy_settings: {
+        listener_properties: Array[
+          {
+            port: Integer,
+            type: String
+          }
+        ]
+      }
+    ) -> _UpdateProxySettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateProxySettingsResponse
 
     interface _UpdateRuleGroupResponse
       include Smithy::Client::_Response[Types::UpdateRuleGroupResponse]

@@ -68,6 +68,16 @@ module Aws::CognitoIdentityProvider
       ]
     ) -> _AddCustomAttributesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddCustomAttributesResponse
 
+    interface _AddUserPoolClientSecretResponse
+      include Smithy::Client::_Response[Types::AddUserPoolClientSecretResponse]
+      def client_secret_descriptor: () -> Types::ClientSecretDescriptorType?
+    end
+    def add_user_pool_client_secret: (
+      ?user_pool_id: String,
+      ?client_id: String,
+      ?client_secret: String
+    ) -> _AddUserPoolClientSecretResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddUserPoolClientSecretResponse
+
     interface _AdminAddUserToGroupResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
     end
@@ -111,6 +121,14 @@ module Aws::CognitoIdentityProvider
       ?desired_delivery_mediums: Array[String],
       ?client_metadata: Hash[String, String]
     ) -> _AdminCreateUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AdminCreateUserResponse
+
+    interface _AdminDeleteSoftwareTokenResponse
+      include Smithy::Client::_Response[Types::AdminDeleteSoftwareTokenResponse]
+    end
+    def admin_delete_software_token: (
+      ?user_pool_id: String,
+      ?username: String
+    ) -> _AdminDeleteSoftwareTokenResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AdminDeleteSoftwareTokenResponse
 
     interface _AdminDeleteUserResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
@@ -192,6 +210,18 @@ module Aws::CognitoIdentityProvider
       ?user_pool_id: String,
       ?username: String
     ) -> _AdminGetUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AdminGetUserResponse
+
+    interface _AdminGetUserAuthFactorsResponse
+      include Smithy::Client::_Response[Types::AdminGetUserAuthFactorsResponse]
+      def username: () -> String?
+      def preferred_mfa_setting: () -> String?
+      def user_mfa_setting_list: () -> Array[String]?
+      def configured_user_auth_factors: () -> Array[String]?
+    end
+    def admin_get_user_auth_factors: (
+      ?user_pool_id: String,
+      ?username: String
+    ) -> _AdminGetUserAuthFactorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AdminGetUserAuthFactorsResponse
 
     interface _AdminInitiateAuthResponse
       include Smithy::Client::_Response[Types::AdminInitiateAuthResponse]
@@ -302,6 +332,7 @@ module Aws::CognitoIdentityProvider
       def session: () -> String?
       def challenge_parameters: () -> Hash[String, String]?
       def authentication_result: () -> Types::AuthenticationResultType?
+      def available_challenges: () -> Array[String]?
     end
     def admin_respond_to_auth_challenge: (
       ?user_pool_id: String,
@@ -342,6 +373,9 @@ module Aws::CognitoIdentityProvider
       ?email_mfa_settings: {
         enabled: bool,
         preferred_mfa: untyped
+      },
+      ?web_authn_mfa_settings: {
+        enabled: bool
       },
       ?username: String,
       ?user_pool_id: String
@@ -517,7 +551,8 @@ module Aws::CognitoIdentityProvider
       ?provider_type: String,
       ?provider_details: Hash[String, String],
       ?attribute_mapping: Hash[String, String],
-      ?idp_identifiers: Array[String]
+      ?idp_identifiers: Array[String],
+      ?acr_mapping: Hash[String, String]
     ) -> _CreateIdentityProviderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateIdentityProviderResponse
 
     interface _CreateManagedLoginBrandingResponse
@@ -576,7 +611,8 @@ module Aws::CognitoIdentityProvider
     def create_user_import_job: (
       ?job_name: String,
       ?user_pool_id: String,
-      ?cloud_watch_logs_role_arn: String
+      ?cloud_watch_logs_role_arn: String,
+      ?password_hashing_algorithm: String
     ) -> _CreateUserImportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateUserImportJobResponse
 
     interface _CreateUserPoolResponse
@@ -623,7 +659,11 @@ module Aws::CognitoIdentityProvider
           lambda_version: String,
           lambda_arn: untyped
         },
-        kms_key_id: untyped
+        kms_key_id: untyped,
+        inbound_federation: {
+          lambda_version: String,
+          lambda_arn: untyped
+        }
       },
       ?auto_verified_attributes: Array[String],
       ?alias_attributes: Array[String],
@@ -658,7 +698,16 @@ module Aws::CognitoIdentityProvider
       ?sms_configuration: {
         sns_caller_arn: String,
         external_id: String,
-        sns_region: String
+        sns_region: String,
+        eums_sms: {
+          caller_arn: String,
+          external_id: untyped,
+          origination_identity: untyped,
+          configuration_set_name: untyped,
+          in_entity_id: untyped,
+          in_template_id: untyped,
+          region: untyped
+        }
       },
       ?user_pool_tags: Hash[String, String],
       ?admin_create_user_config: {
@@ -704,7 +753,19 @@ module Aws::CognitoIdentityProvider
           }
         ]
       },
-      ?user_pool_tier: String
+      ?user_pool_tier: String,
+      ?key_configuration: {
+        key_type: String,
+        kms_key_arn: String
+      },
+      ?issuer_configuration: {
+        type: String
+      },
+      ?acr_configuration: Hash[String,
+        {
+          acr_value: String
+        }
+      ]
     ) -> _CreateUserPoolResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateUserPoolResponse
 
     interface _CreateUserPoolClientResponse
@@ -715,6 +776,7 @@ module Aws::CognitoIdentityProvider
       ?user_pool_id: String,
       ?client_name: String,
       ?generate_secret: bool,
+      ?client_secret: String,
       ?refresh_token_validity: Integer,
       ?access_token_validity: Integer,
       ?id_token_validity: Integer,
@@ -754,15 +816,33 @@ module Aws::CognitoIdentityProvider
       include Smithy::Client::_Response[Types::CreateUserPoolDomainResponse]
       def managed_login_version: () -> Integer?
       def cloud_front_domain: () -> String?
+      def routing: () -> Types::RoutingType?
     end
     def create_user_pool_domain: (
       ?domain: String,
       ?user_pool_id: String,
       ?managed_login_version: Integer,
       ?custom_domain_config: {
-        certificate_arn: String
+        certificate_arn: String,
+        security_policy: String
+      },
+      ?routing: {
+        failover: {
+          secondary_region: String,
+          primary_route53_health_check_id: String
+        }
       }
     ) -> _CreateUserPoolDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateUserPoolDomainResponse
+
+    interface _CreateUserPoolReplicaResponse
+      include Smithy::Client::_Response[Types::CreateUserPoolReplicaResponse]
+      def user_pool_replica: () -> Types::UserPoolReplicaType?
+    end
+    def create_user_pool_replica: (
+      ?user_pool_id: String,
+      ?region_name: String,
+      ?user_pool_tags: Hash[String, String]
+    ) -> _CreateUserPoolReplicaResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateUserPoolReplicaResponse
 
     interface _DeleteGroupResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
@@ -834,6 +914,15 @@ module Aws::CognitoIdentityProvider
       ?client_id: String
     ) -> _DeleteUserPoolClientResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteUserPoolClientResponse
 
+    interface _DeleteUserPoolClientSecretResponse
+      include Smithy::Client::_Response[Types::DeleteUserPoolClientSecretResponse]
+    end
+    def delete_user_pool_client_secret: (
+      ?user_pool_id: String,
+      ?client_id: String,
+      ?client_secret_id: String
+    ) -> _DeleteUserPoolClientSecretResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteUserPoolClientSecretResponse
+
     interface _DeleteUserPoolDomainResponse
       include Smithy::Client::_Response[Types::DeleteUserPoolDomainResponse]
     end
@@ -841,6 +930,15 @@ module Aws::CognitoIdentityProvider
       ?domain: String,
       ?user_pool_id: String
     ) -> _DeleteUserPoolDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteUserPoolDomainResponse
+
+    interface _DeleteUserPoolReplicaResponse
+      include Smithy::Client::_Response[Types::DeleteUserPoolReplicaResponse]
+      def user_pool_replica: () -> Types::UserPoolReplicaType?
+    end
+    def delete_user_pool_replica: (
+      ?user_pool_id: String,
+      ?region_name: String
+    ) -> _DeleteUserPoolReplicaResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteUserPoolReplicaResponse
 
     interface _DeleteWebAuthnCredentialResponse
       include Smithy::Client::_Response[Types::DeleteWebAuthnCredentialResponse]
@@ -905,6 +1003,16 @@ module Aws::CognitoIdentityProvider
       ?terms_id: String,
       ?user_pool_id: String
     ) -> _DescribeTermsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeTermsResponse
+
+    interface _DescribeTermsByClientResponse
+      include Smithy::Client::_Response[Types::DescribeTermsByClientResponse]
+      def terms: () -> Types::TermsType?
+    end
+    def describe_terms_by_client: (
+      ?client_id: String,
+      ?user_pool_id: String,
+      ?terms_name: String
+    ) -> _DescribeTermsByClientResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeTermsByClientResponse
 
     interface _DescribeUserImportJobResponse
       include Smithy::Client::_Response[Types::DescribeUserImportJobResponse]
@@ -975,6 +1083,17 @@ module Aws::CognitoIdentityProvider
       ?user_pool_id: String
     ) -> _GetCSVHeaderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCSVHeaderResponse
 
+    interface _GetClientTokenResponse
+      include Smithy::Client::_Response[Types::GetClientTokenResponse]
+      def client_authentication_result: () -> Types::ClientAuthenticationResultType?
+    end
+    def get_client_token: (
+      ?client_id: String,
+      ?secret: String,
+      ?scopes: Array[String],
+      ?client_metadata: Hash[String, String]
+    ) -> _GetClientTokenResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetClientTokenResponse
+
     interface _GetDeviceResponse
       include Smithy::Client::_Response[Types::GetDeviceResponse]
       def device: () -> Types::DeviceType?
@@ -1009,6 +1128,17 @@ module Aws::CognitoIdentityProvider
     def get_log_delivery_configuration: (
       ?user_pool_id: String
     ) -> _GetLogDeliveryConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLogDeliveryConfigurationResponse
+
+    interface _GetProvisionedLimitResponse
+      include Smithy::Client::_Response[Types::GetProvisionedLimitResponse]
+      def limit: () -> Types::LimitType?
+    end
+    def get_provisioned_limit: (
+      ?limit_definition: {
+        limit_class: String,
+        attributes: Hash[String, String]
+      }
+    ) -> _GetProvisionedLimitResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetProvisionedLimitResponse
 
     interface _GetSigningCertificateResponse
       include Smithy::Client::_Response[Types::GetSigningCertificateResponse]
@@ -1188,6 +1318,17 @@ module Aws::CognitoIdentityProvider
       ?pagination_token: String
     ) -> _ListUserImportJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListUserImportJobsResponse
 
+    interface _ListUserPoolClientSecretsResponse
+      include Smithy::Client::_Response[Types::ListUserPoolClientSecretsResponse]
+      def client_secrets: () -> Array[Types::ClientSecretDescriptorType]?
+      def next_token: () -> String?
+    end
+    def list_user_pool_client_secrets: (
+      ?user_pool_id: String,
+      ?client_id: String,
+      ?next_token: String
+    ) -> _ListUserPoolClientSecretsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListUserPoolClientSecretsResponse
+
     interface _ListUserPoolClientsResponse
       include Smithy::Client::_Response[Types::ListUserPoolClientsResponse]
       def user_pool_clients: () -> Array[Types::UserPoolClientDescription]?
@@ -1198,6 +1339,16 @@ module Aws::CognitoIdentityProvider
       ?max_results: Integer,
       ?next_token: String
     ) -> _ListUserPoolClientsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListUserPoolClientsResponse
+
+    interface _ListUserPoolReplicasResponse
+      include Smithy::Client::_Response[Types::ListUserPoolReplicasResponse]
+      def user_pool_replicas: () -> Array[Types::UserPoolReplicaType]?
+      def next_token: () -> String?
+    end
+    def list_user_pool_replicas: (
+      ?user_pool_id: String,
+      ?next_token: String
+    ) -> _ListUserPoolReplicasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListUserPoolReplicasResponse
 
     interface _ListUserPoolsResponse
       include Smithy::Client::_Response[Types::ListUserPoolsResponse]
@@ -1269,6 +1420,7 @@ module Aws::CognitoIdentityProvider
       def session: () -> String?
       def challenge_parameters: () -> Hash[String, String]?
       def authentication_result: () -> Types::AuthenticationResultType?
+      def available_challenges: () -> Array[String]?
     end
     def respond_to_auth_challenge: (
       ?client_id: String,
@@ -1385,6 +1537,9 @@ module Aws::CognitoIdentityProvider
         enabled: bool,
         preferred_mfa: untyped
       },
+      ?web_authn_mfa_settings: {
+        enabled: bool
+      },
       ?access_token: String
     ) -> _SetUserMFAPreferenceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SetUserMFAPreferenceResponse
 
@@ -1403,7 +1558,16 @@ module Aws::CognitoIdentityProvider
         sms_configuration: {
           sns_caller_arn: String,
           external_id: String,
-          sns_region: String
+          sns_region: String,
+          eums_sms: {
+            caller_arn: String,
+            external_id: untyped,
+            origination_identity: untyped,
+            configuration_set_name: untyped,
+            in_entity_id: untyped,
+            in_template_id: untyped,
+            region: untyped
+          }
         }
       },
       ?software_token_mfa_configuration: {
@@ -1416,7 +1580,8 @@ module Aws::CognitoIdentityProvider
       ?mfa_configuration: String,
       ?web_authn_configuration: {
         relying_party_id: String,
-        user_verification: String
+        user_verification: String,
+        factor_configuration: String
       }
     ) -> _SetUserPoolMfaConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SetUserPoolMfaConfigResponse
 
@@ -1550,7 +1715,8 @@ module Aws::CognitoIdentityProvider
       ?provider_name: String,
       ?provider_details: Hash[String, String],
       ?attribute_mapping: Hash[String, String],
-      ?idp_identifiers: Array[String]
+      ?idp_identifiers: Array[String],
+      ?acr_mapping: Hash[String, String]
     ) -> _UpdateIdentityProviderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateIdentityProviderResponse
 
     interface _UpdateManagedLoginBrandingResponse
@@ -1572,6 +1738,18 @@ module Aws::CognitoIdentityProvider
         }
       ]
     ) -> _UpdateManagedLoginBrandingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateManagedLoginBrandingResponse
+
+    interface _UpdateProvisionedLimitResponse
+      include Smithy::Client::_Response[Types::UpdateProvisionedLimitResponse]
+      def limit: () -> Types::LimitType?
+    end
+    def update_provisioned_limit: (
+      ?limit_definition: {
+        limit_class: String,
+        attributes: Hash[String, String]
+      },
+      ?requested_limit_value: Integer
+    ) -> _UpdateProvisionedLimitResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateProvisionedLimitResponse
 
     interface _UpdateResourceServerResponse
       include Smithy::Client::_Response[Types::UpdateResourceServerResponse]
@@ -1660,7 +1838,11 @@ module Aws::CognitoIdentityProvider
           lambda_version: String,
           lambda_arn: untyped
         },
-        kms_key_id: untyped
+        kms_key_id: untyped,
+        inbound_federation: {
+          lambda_version: String,
+          lambda_arn: untyped
+        }
       },
       ?auto_verified_attributes: Array[String],
       ?sms_verification_message: String,
@@ -1693,7 +1875,16 @@ module Aws::CognitoIdentityProvider
       ?sms_configuration: {
         sns_caller_arn: String,
         external_id: String,
-        sns_region: String
+        sns_region: String,
+        eums_sms: {
+          caller_arn: String,
+          external_id: untyped,
+          origination_identity: untyped,
+          configuration_set_name: untyped,
+          in_entity_id: untyped,
+          in_template_id: untyped,
+          region: untyped
+        }
       },
       ?user_pool_tags: Hash[String, String],
       ?admin_create_user_config: {
@@ -1720,7 +1911,19 @@ module Aws::CognitoIdentityProvider
         ]
       },
       ?pool_name: String,
-      ?user_pool_tier: String
+      ?user_pool_tier: String,
+      ?key_configuration: {
+        key_type: String,
+        kms_key_arn: String
+      },
+      ?issuer_configuration: {
+        type: String
+      },
+      ?acr_configuration: Hash[String,
+        {
+          acr_value: String
+        }
+      ]
     ) -> _UpdateUserPoolResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateUserPoolResponse
 
     interface _UpdateUserPoolClientResponse
@@ -1770,15 +1973,33 @@ module Aws::CognitoIdentityProvider
       include Smithy::Client::_Response[Types::UpdateUserPoolDomainResponse]
       def managed_login_version: () -> Integer?
       def cloud_front_domain: () -> String?
+      def routing: () -> Types::RoutingType?
     end
     def update_user_pool_domain: (
       ?domain: String,
       ?user_pool_id: String,
       ?managed_login_version: Integer,
       ?custom_domain_config: {
-        certificate_arn: String
+        certificate_arn: String,
+        security_policy: String
+      },
+      ?routing: {
+        failover: {
+          secondary_region: String,
+          primary_route53_health_check_id: String
+        }
       }
     ) -> _UpdateUserPoolDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateUserPoolDomainResponse
+
+    interface _UpdateUserPoolReplicaResponse
+      include Smithy::Client::_Response[Types::UpdateUserPoolReplicaResponse]
+      def user_pool_replica: () -> Types::UserPoolReplicaType?
+    end
+    def update_user_pool_replica: (
+      ?user_pool_id: String,
+      ?region_name: String,
+      ?status: String
+    ) -> _UpdateUserPoolReplicaResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateUserPoolReplicaResponse
 
     interface _VerifySoftwareTokenResponse
       include Smithy::Client::_Response[Types::VerifySoftwareTokenResponse]

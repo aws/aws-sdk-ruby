@@ -18,6 +18,11 @@ module Aws::CustomerProfiles
     AppflowIntegrationWorkflowAttributes = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#AppflowIntegrationWorkflowAttributes", name: "AppflowIntegrationWorkflowAttributes")
     AppflowIntegrationWorkflowMetrics = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#AppflowIntegrationWorkflowMetrics", name: "AppflowIntegrationWorkflowMetrics")
     AppflowIntegrationWorkflowStep = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#AppflowIntegrationWorkflowStep", name: "AppflowIntegrationWorkflowStep")
+    Arn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.customerprofiles#Arn", name: "Arn", traits: {"smithy.api#pattern" => "^arn:([a-z\\d-]+):profile:.*:.*:.+$"})
+    AssociateStreamForSegmentsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#AssociateStreamForSegmentsRequest", name: "AssociateStreamForSegmentsRequest")
+    AssociateStreamForSegmentsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#AssociateStreamForSegmentsResponse", name: "AssociateStreamForSegmentsResponse")
+    AssociatedSegment = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#AssociatedSegment", name: "AssociatedSegment")
+    AssociatedSegmentsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.customerprofiles#AssociatedSegmentsList", name: "AssociatedSegmentsList")
     AttributeDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#AttributeDetails", name: "AttributeDetails", traits: {"smithy.api#sensitive" => {}})
     AttributeDimension = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#AttributeDimension", name: "AttributeDimension")
     AttributeDimensionType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.customerprofiles#AttributeDimensionType", name: "AttributeDimensionType")
@@ -43,6 +48,14 @@ module Aws::CustomerProfiles
     BatchGetProfileIdList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.customerprofiles#BatchGetProfileIdList", name: "BatchGetProfileIdList", traits: {"smithy.api#length" => {"min" => 1, "max" => 20}})
     BatchGetProfileRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#BatchGetProfileRequest", name: "BatchGetProfileRequest")
     BatchGetProfileResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#BatchGetProfileResponse", name: "BatchGetProfileResponse")
+    BatchPutProfileObjectErrorItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#BatchPutProfileObjectErrorItem", name: "BatchPutProfileObjectErrorItem")
+    BatchPutProfileObjectErrorList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.customerprofiles#BatchPutProfileObjectErrorList", name: "BatchPutProfileObjectErrorList")
+    BatchPutProfileObjectRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#BatchPutProfileObjectRequest", name: "BatchPutProfileObjectRequest")
+    BatchPutProfileObjectRequestItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#BatchPutProfileObjectRequestItem", name: "BatchPutProfileObjectRequestItem")
+    BatchPutProfileObjectRequestItemList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.customerprofiles#BatchPutProfileObjectRequestItemList", name: "BatchPutProfileObjectRequestItemList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
+    BatchPutProfileObjectResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#BatchPutProfileObjectResponse", name: "BatchPutProfileObjectResponse")
+    BatchPutProfileObjectResponseItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#BatchPutProfileObjectResponseItem", name: "BatchPutProfileObjectResponseItem")
+    BatchPutProfileObjectResponseList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.customerprofiles#BatchPutProfileObjectResponseList", name: "BatchPutProfileObjectResponseList")
     Batches = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.customerprofiles#Batches", name: "Batches")
     BucketName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.customerprofiles#BucketName", name: "BucketName", traits: {"smithy.api#length" => {"min" => 3, "max" => 63}, "smithy.api#pattern" => "^\\S+$"})
     BucketPrefix = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.customerprofiles#BucketPrefix", name: "BucketPrefix", traits: {"smithy.api#length" => {"min" => 0, "max" => 512}, "smithy.api#pattern" => ".*"})
@@ -52,6 +65,9 @@ module Aws::CustomerProfiles
     CalculatedAttributeValueList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.customerprofiles#CalculatedAttributeValueList", name: "CalculatedAttributeValueList")
     CalculatedAttributesForProfileList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.customerprofiles#CalculatedAttributesForProfileList", name: "CalculatedAttributesForProfileList")
     CalculatedCustomAttributes = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.customerprofiles#CalculatedCustomAttributes", name: "CalculatedCustomAttributes")
+    CandidateIdList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.customerprofiles#CandidateIdList", name: "CandidateIdList", traits: {"smithy.api#length" => {"min" => 0, "max" => 50}})
+    CatalogItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#CatalogItem", name: "CatalogItem")
+    ColumnNamesList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.customerprofiles#ColumnNamesList", name: "ColumnNamesList", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
     ComparisonOperator = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.customerprofiles#ComparisonOperator", name: "ComparisonOperator")
     ConditionOverrides = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#ConditionOverrides", name: "ConditionOverrides", traits: {"smithy.api#sensitive" => {}})
     Conditions = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#Conditions", name: "Conditions", traits: {"smithy.api#sensitive" => {}})
@@ -62,6 +78,8 @@ module Aws::CustomerProfiles
     Consolidation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#Consolidation", name: "Consolidation")
     ContactPreference = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#ContactPreference", name: "ContactPreference")
     ContactType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.customerprofiles#ContactType", name: "ContactType")
+    ContentType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.customerprofiles#ContentType", name: "ContentType")
+    ContextKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.customerprofiles#ContextKey", name: "ContextKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[a-zA-Z0-9_.-]+$"})
     CreateCalculatedAttributeDefinitionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#CreateCalculatedAttributeDefinitionRequest", name: "CreateCalculatedAttributeDefinitionRequest")
     CreateCalculatedAttributeDefinitionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#CreateCalculatedAttributeDefinitionResponse", name: "CreateCalculatedAttributeDefinitionResponse")
     CreateDomainLayoutRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#CreateDomainLayoutRequest", name: "CreateDomainLayoutRequest")
@@ -76,6 +94,12 @@ module Aws::CustomerProfiles
     CreateIntegrationWorkflowResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#CreateIntegrationWorkflowResponse", name: "CreateIntegrationWorkflowResponse")
     CreateProfileRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#CreateProfileRequest", name: "CreateProfileRequest")
     CreateProfileResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#CreateProfileResponse", name: "CreateProfileResponse")
+    CreateRecommenderFilterRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#CreateRecommenderFilterRequest", name: "CreateRecommenderFilterRequest")
+    CreateRecommenderFilterResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#CreateRecommenderFilterResponse", name: "CreateRecommenderFilterResponse")
+    CreateRecommenderRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#CreateRecommenderRequest", name: "CreateRecommenderRequest")
+    CreateRecommenderResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#CreateRecommenderResponse", name: "CreateRecommenderResponse")
+    CreateRecommenderSchemaRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#CreateRecommenderSchemaRequest", name: "CreateRecommenderSchemaRequest")
+    CreateRecommenderSchemaResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#CreateRecommenderSchemaResponse", name: "CreateRecommenderSchemaResponse")
     CreateSegmentDefinitionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#CreateSegmentDefinitionRequest", name: "CreateSegmentDefinitionRequest")
     CreateSegmentDefinitionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#CreateSegmentDefinitionResponse", name: "CreateSegmentDefinitionResponse")
     CreateSegmentEstimateRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#CreateSegmentEstimateRequest", name: "CreateSegmentEstimateRequest")
@@ -87,6 +111,8 @@ module Aws::CustomerProfiles
     CustomAttributes = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.customerprofiles#CustomAttributes", name: "CustomAttributes")
     DataFormat = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.customerprofiles#DataFormat", name: "DataFormat")
     DataPullMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.customerprofiles#DataPullMode", name: "DataPullMode")
+    DataStoreRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#DataStoreRequest", name: "DataStoreRequest")
+    DataStoreResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#DataStoreResponse", name: "DataStoreResponse")
     Date = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.customerprofiles#Date", name: "Date")
     DateDimension = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#DateDimension", name: "DateDimension")
     DateDimensionType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.customerprofiles#DateDimensionType", name: "DateDimensionType")
@@ -96,6 +122,8 @@ module Aws::CustomerProfiles
     DeleteCalculatedAttributeDefinitionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#DeleteCalculatedAttributeDefinitionResponse", name: "DeleteCalculatedAttributeDefinitionResponse")
     DeleteDomainLayoutRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#DeleteDomainLayoutRequest", name: "DeleteDomainLayoutRequest")
     DeleteDomainLayoutResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#DeleteDomainLayoutResponse", name: "DeleteDomainLayoutResponse")
+    DeleteDomainObjectTypeRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#DeleteDomainObjectTypeRequest", name: "DeleteDomainObjectTypeRequest")
+    DeleteDomainObjectTypeResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#DeleteDomainObjectTypeResponse", name: "DeleteDomainObjectTypeResponse")
     DeleteDomainRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#DeleteDomainRequest", name: "DeleteDomainRequest")
     DeleteDomainResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#DeleteDomainResponse", name: "DeleteDomainResponse")
     DeleteEventStreamRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#DeleteEventStreamRequest", name: "DeleteEventStreamRequest")
@@ -112,11 +140,21 @@ module Aws::CustomerProfiles
     DeleteProfileObjectTypeResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#DeleteProfileObjectTypeResponse", name: "DeleteProfileObjectTypeResponse")
     DeleteProfileRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#DeleteProfileRequest", name: "DeleteProfileRequest")
     DeleteProfileResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#DeleteProfileResponse", name: "DeleteProfileResponse")
+    DeleteRecommenderFilterRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#DeleteRecommenderFilterRequest", name: "DeleteRecommenderFilterRequest")
+    DeleteRecommenderFilterResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#DeleteRecommenderFilterResponse", name: "DeleteRecommenderFilterResponse")
+    DeleteRecommenderRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#DeleteRecommenderRequest", name: "DeleteRecommenderRequest")
+    DeleteRecommenderResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#DeleteRecommenderResponse", name: "DeleteRecommenderResponse")
+    DeleteRecommenderSchemaRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#DeleteRecommenderSchemaRequest", name: "DeleteRecommenderSchemaRequest")
+    DeleteRecommenderSchemaResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#DeleteRecommenderSchemaResponse", name: "DeleteRecommenderSchemaResponse")
     DeleteSegmentDefinitionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#DeleteSegmentDefinitionRequest", name: "DeleteSegmentDefinitionRequest")
     DeleteSegmentDefinitionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#DeleteSegmentDefinitionResponse", name: "DeleteSegmentDefinitionResponse")
+    DeleteSegmentSubscriptionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#DeleteSegmentSubscriptionRequest", name: "DeleteSegmentSubscriptionRequest")
+    DeleteSegmentSubscriptionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#DeleteSegmentSubscriptionResponse", name: "DeleteSegmentSubscriptionResponse")
     DeleteWorkflowRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#DeleteWorkflowRequest", name: "DeleteWorkflowRequest")
     DeleteWorkflowResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#DeleteWorkflowResponse", name: "DeleteWorkflowResponse")
+    DestinationArnString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.customerprofiles#DestinationArnString", name: "DestinationArnString", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}})
     DestinationField = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.customerprofiles#DestinationField", name: "DestinationField", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#pattern" => ".*"})
+    DestinationRoleArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.customerprofiles#DestinationRoleArn", name: "DestinationRoleArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 512}, "smithy.api#pattern" => "arn:aws:iam:.*:[0-9]+:"})
     DestinationSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#DestinationSummary", name: "DestinationSummary")
     DetectProfileObjectTypeRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#DetectProfileObjectTypeRequest", name: "DetectProfileObjectTypeRequest")
     DetectProfileObjectTypeResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#DetectProfileObjectTypeResponse", name: "DetectProfileObjectTypeResponse")
@@ -124,7 +162,22 @@ module Aws::CustomerProfiles
     DetectedProfileObjectTypes = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.customerprofiles#DetectedProfileObjectTypes", name: "DetectedProfileObjectTypes")
     Dimension = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.customerprofiles#Dimension", name: "Dimension")
     DimensionList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.customerprofiles#DimensionList", name: "DimensionList")
+    DisassociateStreamForSegmentsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#DisassociateStreamForSegmentsRequest", name: "DisassociateStreamForSegmentsRequest")
+    DisassociateStreamForSegmentsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#DisassociateStreamForSegmentsResponse", name: "DisassociateStreamForSegmentsResponse")
+    DiversityCapType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.customerprofiles#DiversityCapType", name: "DiversityCapType")
+    DiversityCapValue = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.customerprofiles#DiversityCapValue", name: "DiversityCapValue", traits: {"smithy.api#range" => {"min" => 1, "max" => 200}})
+    DiversityColumn = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#DiversityColumn", name: "DiversityColumn")
+    DiversityColumnsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.customerprofiles#DiversityColumnsList", name: "DiversityColumnsList", traits: {"smithy.api#length" => {"min" => 0, "max" => 2}})
+    DiversityConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#DiversityConfig", name: "DiversityConfig")
+    DiversityPlaceholderName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.customerprofiles#DiversityPlaceholderName", name: "DiversityPlaceholderName", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[a-zA-Z][a-zA-Z0-9_]*$"})
+    DiversityTargetExpression = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.customerprofiles#DiversityTargetExpression", name: "DiversityTargetExpression", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^(\\d+|\\$[a-z_]+)$"})
+    DiversityValuesMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.customerprofiles#DiversityValuesMap", name: "DiversityValuesMap", traits: {"smithy.api#length" => {"min" => 0, "max" => 2}})
     DomainList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.customerprofiles#DomainList", name: "DomainList")
+    DomainObjectTypeField = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#DomainObjectTypeField", name: "DomainObjectTypeField")
+    DomainObjectTypeFieldName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.customerprofiles#DomainObjectTypeFieldName", name: "DomainObjectTypeFieldName", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[a-zA-Z0-9_.-]+$"})
+    DomainObjectTypeFields = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.customerprofiles#DomainObjectTypeFields", name: "DomainObjectTypeFields")
+    DomainObjectTypesList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.customerprofiles#DomainObjectTypesList", name: "DomainObjectTypesList", traits: {"smithy.api#sensitive" => {}})
+    DomainObjectTypesListItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#DomainObjectTypesListItem", name: "DomainObjectTypesListItem")
     DomainStats = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#DomainStats", name: "DomainStats")
     Double = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.customerprofiles#Double", name: "Double")
     Double0To1 = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.customerprofiles#Double0To1", name: "Double0To1", traits: {"smithy.api#range" => {"min" => 0.0, "max" => 1.0}})
@@ -133,11 +186,17 @@ module Aws::CustomerProfiles
     End = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.customerprofiles#End", name: "End", traits: {"smithy.api#default" => 0})
     EngagementPreferences = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#EngagementPreferences", name: "EngagementPreferences", traits: {"smithy.api#sensitive" => {}})
     EstimateStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.customerprofiles#EstimateStatus", name: "EstimateStatus")
+    EventParameters = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#EventParameters", name: "EventParameters")
+    EventParametersEventTypeString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.customerprofiles#EventParametersEventTypeString", name: "EventParametersEventTypeString", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}})
+    EventParametersEventWeightDouble = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.customerprofiles#EventParametersEventWeightDouble", name: "EventParametersEventWeightDouble", traits: {"smithy.api#range" => {"min" => 0.0, "max" => 1.0}})
+    EventParametersList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.customerprofiles#EventParametersList", name: "EventParametersList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
     EventStreamDestinationDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#EventStreamDestinationDetails", name: "EventStreamDestinationDetails")
     EventStreamDestinationStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.customerprofiles#EventStreamDestinationStatus", name: "EventStreamDestinationStatus")
     EventStreamState = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.customerprofiles#EventStreamState", name: "EventStreamState")
     EventStreamSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#EventStreamSummary", name: "EventStreamSummary")
     EventStreamSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.customerprofiles#EventStreamSummaryList", name: "EventStreamSummaryList")
+    EventSubscriptionSegmentStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.customerprofiles#EventSubscriptionSegmentStatus", name: "EventSubscriptionSegmentStatus")
+    EventSubscriptionState = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.customerprofiles#EventSubscriptionState", name: "EventSubscriptionState")
     EventTriggerCondition = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#EventTriggerCondition", name: "EventTriggerCondition")
     EventTriggerConditions = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.customerprofiles#EventTriggerConditions", name: "EventTriggerConditions", traits: {"smithy.api#length" => {"min" => 1, "max" => 5}, "smithy.api#sensitive" => {}})
     EventTriggerDimension = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#EventTriggerDimension", name: "EventTriggerDimension")
@@ -148,11 +207,13 @@ module Aws::CustomerProfiles
     EventTriggerSummaryItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#EventTriggerSummaryItem", name: "EventTriggerSummaryItem")
     EventTriggerSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.customerprofiles#EventTriggerSummaryList", name: "EventTriggerSummaryList", traits: {"smithy.api#sensitive" => {}})
     EventTriggerValues = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.customerprofiles#EventTriggerValues", name: "EventTriggerValues", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
+    EventsConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#EventsConfig", name: "EventsConfig")
     ExportingConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#ExportingConfig", name: "ExportingConfig")
     ExportingLocation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#ExportingLocation", name: "ExportingLocation")
     ExtraLengthValueProfileDimension = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#ExtraLengthValueProfileDimension", name: "ExtraLengthValueProfileDimension")
     ExtraLengthValues = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.customerprofiles#ExtraLengthValues", name: "ExtraLengthValues", traits: {"smithy.api#length" => {"min" => 1, "max" => 50}})
     Failures = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.customerprofiles#Failures", name: "Failures")
+    FeatureType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.customerprofiles#FeatureType", name: "FeatureType")
     FieldContentType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.customerprofiles#FieldContentType", name: "FieldContentType")
     FieldMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.customerprofiles#FieldMap", name: "FieldMap", traits: {"smithy.api#sensitive" => {}})
     FieldNameList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.customerprofiles#FieldNameList", name: "FieldNameList")
@@ -176,6 +237,8 @@ module Aws::CustomerProfiles
     GetCalculatedAttributeForProfileResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#GetCalculatedAttributeForProfileResponse", name: "GetCalculatedAttributeForProfileResponse")
     GetDomainLayoutRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#GetDomainLayoutRequest", name: "GetDomainLayoutRequest")
     GetDomainLayoutResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#GetDomainLayoutResponse", name: "GetDomainLayoutResponse")
+    GetDomainObjectTypeRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#GetDomainObjectTypeRequest", name: "GetDomainObjectTypeRequest")
+    GetDomainObjectTypeResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#GetDomainObjectTypeResponse", name: "GetDomainObjectTypeResponse")
     GetDomainRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#GetDomainRequest", name: "GetDomainRequest")
     GetDomainResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#GetDomainResponse", name: "GetDomainResponse")
     GetEventStreamRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#GetEventStreamRequest", name: "GetEventStreamRequest")
@@ -188,12 +251,25 @@ module Aws::CustomerProfiles
     GetIntegrationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#GetIntegrationResponse", name: "GetIntegrationResponse")
     GetMatchesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#GetMatchesRequest", name: "GetMatchesRequest")
     GetMatchesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#GetMatchesResponse", name: "GetMatchesResponse")
+    GetObjectTypeAttributeStatisticsPercentiles = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#GetObjectTypeAttributeStatisticsPercentiles", name: "GetObjectTypeAttributeStatisticsPercentiles")
+    GetObjectTypeAttributeStatisticsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#GetObjectTypeAttributeStatisticsRequest", name: "GetObjectTypeAttributeStatisticsRequest")
+    GetObjectTypeAttributeStatisticsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#GetObjectTypeAttributeStatisticsResponse", name: "GetObjectTypeAttributeStatisticsResponse")
+    GetObjectTypeAttributeStatisticsStats = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#GetObjectTypeAttributeStatisticsStats", name: "GetObjectTypeAttributeStatisticsStats")
     GetProfileHistoryRecordRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#GetProfileHistoryRecordRequest", name: "GetProfileHistoryRecordRequest")
     GetProfileHistoryRecordResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#GetProfileHistoryRecordResponse", name: "GetProfileHistoryRecordResponse")
     GetProfileObjectTypeRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#GetProfileObjectTypeRequest", name: "GetProfileObjectTypeRequest")
     GetProfileObjectTypeResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#GetProfileObjectTypeResponse", name: "GetProfileObjectTypeResponse")
     GetProfileObjectTypeTemplateRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#GetProfileObjectTypeTemplateRequest", name: "GetProfileObjectTypeTemplateRequest")
     GetProfileObjectTypeTemplateResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#GetProfileObjectTypeTemplateResponse", name: "GetProfileObjectTypeTemplateResponse")
+    GetProfileRecommendationsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#GetProfileRecommendationsRequest", name: "GetProfileRecommendationsRequest")
+    GetProfileRecommendationsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#GetProfileRecommendationsResponse", name: "GetProfileRecommendationsResponse")
+    GetRecommenderFilterRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#GetRecommenderFilterRequest", name: "GetRecommenderFilterRequest")
+    GetRecommenderFilterResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#GetRecommenderFilterResponse", name: "GetRecommenderFilterResponse")
+    GetRecommenderRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#GetRecommenderRequest", name: "GetRecommenderRequest")
+    GetRecommenderRequestTrainingMetricsCountInteger = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.customerprofiles#GetRecommenderRequestTrainingMetricsCountInteger", name: "GetRecommenderRequestTrainingMetricsCountInteger", traits: {"smithy.api#range" => {"min" => 0, "max" => 5}})
+    GetRecommenderResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#GetRecommenderResponse", name: "GetRecommenderResponse")
+    GetRecommenderSchemaRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#GetRecommenderSchemaRequest", name: "GetRecommenderSchemaRequest")
+    GetRecommenderSchemaResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#GetRecommenderSchemaResponse", name: "GetRecommenderSchemaResponse")
     GetSegmentDefinitionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#GetSegmentDefinitionRequest", name: "GetSegmentDefinitionRequest")
     GetSegmentDefinitionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#GetSegmentDefinitionResponse", name: "GetSegmentDefinitionResponse")
     GetSegmentEstimateRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#GetSegmentEstimateRequest", name: "GetSegmentEstimateRequest")
@@ -204,8 +280,12 @@ module Aws::CustomerProfiles
     GetSegmentMembershipStatus = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.customerprofiles#GetSegmentMembershipStatus", name: "GetSegmentMembershipStatus")
     GetSegmentSnapshotRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#GetSegmentSnapshotRequest", name: "GetSegmentSnapshotRequest")
     GetSegmentSnapshotResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#GetSegmentSnapshotResponse", name: "GetSegmentSnapshotResponse")
+    GetSegmentSubscriptionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#GetSegmentSubscriptionRequest", name: "GetSegmentSubscriptionRequest")
+    GetSegmentSubscriptionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#GetSegmentSubscriptionResponse", name: "GetSegmentSubscriptionResponse")
     GetSimilarProfilesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#GetSimilarProfilesRequest", name: "GetSimilarProfilesRequest")
     GetSimilarProfilesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#GetSimilarProfilesResponse", name: "GetSimilarProfilesResponse")
+    GetStreamForSegmentsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#GetStreamForSegmentsRequest", name: "GetStreamForSegmentsRequest")
+    GetStreamForSegmentsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#GetStreamForSegmentsResponse", name: "GetStreamForSegmentsResponse")
     GetUploadJobPathRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#GetUploadJobPathRequest", name: "GetUploadJobPathRequest")
     GetUploadJobPathResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#GetUploadJobPathResponse", name: "GetUploadJobPathResponse")
     GetUploadJobRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#GetUploadJobRequest", name: "GetUploadJobRequest")
@@ -221,15 +301,20 @@ module Aws::CustomerProfiles
     IdentityResolutionJobsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.customerprofiles#IdentityResolutionJobsList", name: "IdentityResolutionJobsList")
     Include = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.customerprofiles#Include", name: "Include")
     IncludeOptions = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.customerprofiles#IncludeOptions", name: "IncludeOptions")
+    IncludedColumns = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.customerprofiles#IncludedColumns", name: "IncludedColumns", traits: {"smithy.api#length" => {"min" => 1, "max" => 2}})
     IncrementalPullConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#IncrementalPullConfig", name: "IncrementalPullConfig")
+    InferenceConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#InferenceConfig", name: "InferenceConfig")
+    InferenceConfigMinProvisionedTPSInteger = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.customerprofiles#InferenceConfigMinProvisionedTPSInteger", name: "InferenceConfigMinProvisionedTPSInteger", traits: {"smithy.api#range" => {"min" => 1, "max" => 1000}})
     IntegrationConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#IntegrationConfig", name: "IntegrationConfig")
     IntegrationList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.customerprofiles#IntegrationList", name: "IntegrationList")
     InternalServerException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#InternalServerException", name: "InternalServerException", traits: {"smithy.api#error" => "server", "smithy.api#httpError" => 500})
+    IntervalValue = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.customerprofiles#IntervalValue", name: "IntervalValue", traits: {"smithy.api#range" => {"min" => 1, "max" => 24}})
     JobSchedule = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#JobSchedule", name: "JobSchedule")
     JobScheduleDayOfTheWeek = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.customerprofiles#JobScheduleDayOfTheWeek", name: "JobScheduleDayOfTheWeek")
     JobScheduleTime = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.customerprofiles#JobScheduleTime", name: "JobScheduleTime", traits: {"smithy.api#length" => {"min" => 3, "max" => 5}, "smithy.api#pattern" => "^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$"})
     JobStats = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#JobStats", name: "JobStats")
     KeyMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.customerprofiles#KeyMap", name: "KeyMap", traits: {"smithy.api#sensitive" => {}})
+    KeyValuesList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.customerprofiles#KeyValuesList", name: "KeyValuesList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}, "smithy.api#sensitive" => {}})
     KmsArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.customerprofiles#KmsArn", name: "KmsArn", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "^arn:aws:kms:.*:[0-9]+:"})
     LayoutItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#LayoutItem", name: "LayoutItem")
     LayoutList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.customerprofiles#LayoutList", name: "LayoutList")
@@ -245,6 +330,8 @@ module Aws::CustomerProfiles
     ListDomainItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#ListDomainItem", name: "ListDomainItem")
     ListDomainLayoutsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#ListDomainLayoutsRequest", name: "ListDomainLayoutsRequest")
     ListDomainLayoutsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#ListDomainLayoutsResponse", name: "ListDomainLayoutsResponse")
+    ListDomainObjectTypesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#ListDomainObjectTypesRequest", name: "ListDomainObjectTypesRequest")
+    ListDomainObjectTypesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#ListDomainObjectTypesResponse", name: "ListDomainObjectTypesResponse")
     ListDomainsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#ListDomainsRequest", name: "ListDomainsRequest")
     ListDomainsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#ListDomainsResponse", name: "ListDomainsResponse")
     ListEventStreamsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#ListEventStreamsRequest", name: "ListEventStreamsRequest")
@@ -257,6 +344,10 @@ module Aws::CustomerProfiles
     ListIntegrationsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#ListIntegrationsRequest", name: "ListIntegrationsRequest")
     ListIntegrationsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#ListIntegrationsResponse", name: "ListIntegrationsResponse")
     ListObjectTypeAttributeItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#ListObjectTypeAttributeItem", name: "ListObjectTypeAttributeItem")
+    ListObjectTypeAttributeValuesItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#ListObjectTypeAttributeValuesItem", name: "ListObjectTypeAttributeValuesItem")
+    ListObjectTypeAttributeValuesList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.customerprofiles#ListObjectTypeAttributeValuesList", name: "ListObjectTypeAttributeValuesList")
+    ListObjectTypeAttributeValuesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#ListObjectTypeAttributeValuesRequest", name: "ListObjectTypeAttributeValuesRequest")
+    ListObjectTypeAttributeValuesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#ListObjectTypeAttributeValuesResponse", name: "ListObjectTypeAttributeValuesResponse")
     ListObjectTypeAttributesList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.customerprofiles#ListObjectTypeAttributesList", name: "ListObjectTypeAttributesList")
     ListObjectTypeAttributesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#ListObjectTypeAttributesRequest", name: "ListObjectTypeAttributesRequest")
     ListObjectTypeAttributesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#ListObjectTypeAttributesResponse", name: "ListObjectTypeAttributesResponse")
@@ -271,10 +362,22 @@ module Aws::CustomerProfiles
     ListProfileObjectsItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#ListProfileObjectsItem", name: "ListProfileObjectsItem")
     ListProfileObjectsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#ListProfileObjectsRequest", name: "ListProfileObjectsRequest")
     ListProfileObjectsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#ListProfileObjectsResponse", name: "ListProfileObjectsResponse")
+    ListRecommenderFiltersRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#ListRecommenderFiltersRequest", name: "ListRecommenderFiltersRequest")
+    ListRecommenderFiltersResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#ListRecommenderFiltersResponse", name: "ListRecommenderFiltersResponse")
+    ListRecommenderRecipesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#ListRecommenderRecipesRequest", name: "ListRecommenderRecipesRequest")
+    ListRecommenderRecipesRequestMaxResultsInteger = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.customerprofiles#ListRecommenderRecipesRequestMaxResultsInteger", name: "ListRecommenderRecipesRequestMaxResultsInteger", traits: {"smithy.api#range" => {"min" => 10, "max" => 100}})
+    ListRecommenderRecipesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#ListRecommenderRecipesResponse", name: "ListRecommenderRecipesResponse")
+    ListRecommenderSchemasRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#ListRecommenderSchemasRequest", name: "ListRecommenderSchemasRequest")
+    ListRecommenderSchemasResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#ListRecommenderSchemasResponse", name: "ListRecommenderSchemasResponse")
+    ListRecommendersRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#ListRecommendersRequest", name: "ListRecommendersRequest")
+    ListRecommendersRequestMaxResultsInteger = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.customerprofiles#ListRecommendersRequestMaxResultsInteger", name: "ListRecommendersRequestMaxResultsInteger", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}})
+    ListRecommendersResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#ListRecommendersResponse", name: "ListRecommendersResponse")
     ListRuleBasedMatchesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#ListRuleBasedMatchesRequest", name: "ListRuleBasedMatchesRequest")
     ListRuleBasedMatchesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#ListRuleBasedMatchesResponse", name: "ListRuleBasedMatchesResponse")
     ListSegmentDefinitionsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#ListSegmentDefinitionsRequest", name: "ListSegmentDefinitionsRequest")
     ListSegmentDefinitionsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#ListSegmentDefinitionsResponse", name: "ListSegmentDefinitionsResponse")
+    ListSegmentSubscriptionEventsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#ListSegmentSubscriptionEventsRequest", name: "ListSegmentSubscriptionEventsRequest")
+    ListSegmentSubscriptionEventsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#ListSegmentSubscriptionEventsResponse", name: "ListSegmentSubscriptionEventsResponse")
     ListTagsForResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#ListTagsForResourceRequest", name: "ListTagsForResourceRequest")
     ListTagsForResourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#ListTagsForResourceResponse", name: "ListTagsForResourceResponse")
     ListUploadJobsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#ListUploadJobsRequest", name: "ListUploadJobsRequest")
@@ -300,6 +403,10 @@ module Aws::CustomerProfiles
     MaxSize500 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.customerprofiles#MaxSize500", name: "MaxSize500", traits: {"smithy.api#range" => {"min" => 1, "max" => 500}})
     MergeProfilesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#MergeProfilesRequest", name: "MergeProfilesRequest")
     MergeProfilesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#MergeProfilesResponse", name: "MergeProfilesResponse")
+    MetadataColumnName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.customerprofiles#MetadataColumnName", name: "MetadataColumnName", traits: {"smithy.api#length" => {"min" => 1, "max" => 150}})
+    MetadataColumnsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.customerprofiles#MetadataColumnsList", name: "MetadataColumnsList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
+    MetadataConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#MetadataConfig", name: "MetadataConfig")
+    Metrics = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.customerprofiles#Metrics", name: "Metrics")
     Object = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.customerprofiles#Object", name: "Object", traits: {"smithy.api#length" => {"min" => 0, "max" => 512}, "smithy.api#pattern" => "^\\S+$"})
     ObjectAttribute = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#ObjectAttribute", name: "ObjectAttribute")
     ObjectAttributes = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.customerprofiles#ObjectAttributes", name: "ObjectAttributes", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
@@ -313,6 +420,7 @@ module Aws::CustomerProfiles
     Operator = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.customerprofiles#Operator", name: "Operator")
     OperatorPropertiesKeys = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.customerprofiles#OperatorPropertiesKeys", name: "OperatorPropertiesKeys")
     PartyType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.customerprofiles#PartyType", name: "PartyType", traits: {"smithy.api#deprecated" => {}, "smithy.api#sensitive" => {}})
+    PercentPromotedItems = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.customerprofiles#PercentPromotedItems", name: "PercentPromotedItems", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}})
     Period = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#Period", name: "Period")
     PeriodUnit = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.customerprofiles#PeriodUnit", name: "PeriodUnit")
     Periods = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.customerprofiles#Periods", name: "Periods", traits: {"smithy.api#length" => {"min" => 1, "max" => 4}})
@@ -341,18 +449,56 @@ module Aws::CustomerProfiles
     ProfileTypeValues = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.customerprofiles#ProfileTypeValues", name: "ProfileTypeValues", traits: {"smithy.api#length" => {"min" => 1, "max" => 1}})
     Profiles = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.customerprofiles#Profiles", name: "Profiles")
     Property = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.customerprofiles#Property", name: "Property", traits: {"smithy.api#length" => {"min" => 0, "max" => 2048}, "smithy.api#pattern" => "^.+$"})
+    PutDomainObjectTypeRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#PutDomainObjectTypeRequest", name: "PutDomainObjectTypeRequest")
+    PutDomainObjectTypeResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#PutDomainObjectTypeResponse", name: "PutDomainObjectTypeResponse")
     PutIntegrationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#PutIntegrationRequest", name: "PutIntegrationRequest")
     PutIntegrationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#PutIntegrationResponse", name: "PutIntegrationResponse")
     PutProfileObjectRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#PutProfileObjectRequest", name: "PutProfileObjectRequest")
     PutProfileObjectResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#PutProfileObjectResponse", name: "PutProfileObjectResponse")
     PutProfileObjectTypeRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#PutProfileObjectTypeRequest", name: "PutProfileObjectTypeRequest")
     PutProfileObjectTypeResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#PutProfileObjectTypeResponse", name: "PutProfileObjectTypeResponse")
+    PutSegmentSubscriptionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#PutSegmentSubscriptionRequest", name: "PutSegmentSubscriptionRequest")
+    PutSegmentSubscriptionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#PutSegmentSubscriptionResponse", name: "PutSegmentSubscriptionResponse")
     QueryResult = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.customerprofiles#QueryResult", name: "QueryResult")
     Range = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#Range", name: "Range")
     RangeOverride = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#RangeOverride", name: "RangeOverride")
     RangeUnit = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.customerprofiles#RangeUnit", name: "RangeUnit")
     Readiness = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#Readiness", name: "Readiness")
     ReadinessStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.customerprofiles#ReadinessStatus", name: "ReadinessStatus")
+    Recommendation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#Recommendation", name: "Recommendation")
+    RecommendationDiversityConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#RecommendationDiversityConfig", name: "RecommendationDiversityConfig")
+    RecommendationMetadata = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#RecommendationMetadata", name: "RecommendationMetadata")
+    Recommendations = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.customerprofiles#Recommendations", name: "Recommendations", traits: {"smithy.api#sensitive" => {}})
+    Recommender = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#Recommender", name: "Recommender")
+    RecommenderConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#RecommenderConfig", name: "RecommenderConfig")
+    RecommenderConfigTrainingFrequencyInteger = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.customerprofiles#RecommenderConfigTrainingFrequencyInteger", name: "RecommenderConfigTrainingFrequencyInteger", traits: {"smithy.api#range" => {"min" => 0, "max" => 30}})
+    RecommenderContext = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.customerprofiles#RecommenderContext", name: "RecommenderContext", traits: {"smithy.api#sensitive" => {}})
+    RecommenderFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#RecommenderFilter", name: "RecommenderFilter")
+    RecommenderFilterAttributeName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.customerprofiles#RecommenderFilterAttributeName", name: "RecommenderFilterAttributeName", traits: {"smithy.api#length" => {"min" => 0, "max" => 50}, "smithy.api#pattern" => "^[A-Za-z0-9_]+$"})
+    RecommenderFilterAttributeValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.customerprofiles#RecommenderFilterAttributeValue", name: "RecommenderFilterAttributeValue", traits: {"smithy.api#length" => {"min" => 0, "max" => 3000}, "smithy.api#sensitive" => {}})
+    RecommenderFilterExpression = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.customerprofiles#RecommenderFilterExpression", name: "RecommenderFilterExpression", traits: {"smithy.api#length" => {"min" => 1, "max" => 2500}, "smithy.api#sensitive" => {}})
+    RecommenderFilterName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.customerprofiles#RecommenderFilterName", name: "RecommenderFilterName", traits: {"smithy.api#length" => {"min" => 1, "max" => 63}, "smithy.api#pattern" => "^[a-zA-Z0-9_-]+$"})
+    RecommenderFilterStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.customerprofiles#RecommenderFilterStatus", name: "RecommenderFilterStatus")
+    RecommenderFilterSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#RecommenderFilterSummary", name: "RecommenderFilterSummary")
+    RecommenderFilterSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.customerprofiles#RecommenderFilterSummaryList", name: "RecommenderFilterSummaryList")
+    RecommenderFilterValues = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.customerprofiles#RecommenderFilterValues", name: "RecommenderFilterValues", traits: {"smithy.api#length" => {"min" => 0, "max" => 25}})
+    RecommenderFilters = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.customerprofiles#RecommenderFilters", name: "RecommenderFilters", traits: {"smithy.api#length" => {"min" => 0, "max" => 1}})
+    RecommenderPromotionalFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#RecommenderPromotionalFilter", name: "RecommenderPromotionalFilter")
+    RecommenderPromotionalFilters = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.customerprofiles#RecommenderPromotionalFilters", name: "RecommenderPromotionalFilters", traits: {"smithy.api#length" => {"min" => 0, "max" => 1}})
+    RecommenderRecipe = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#RecommenderRecipe", name: "RecommenderRecipe")
+    RecommenderRecipeName = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.customerprofiles#RecommenderRecipeName", name: "RecommenderRecipeName")
+    RecommenderRecipesList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.customerprofiles#RecommenderRecipesList", name: "RecommenderRecipesList")
+    RecommenderSchemaField = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#RecommenderSchemaField", name: "RecommenderSchemaField")
+    RecommenderSchemaFieldList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.customerprofiles#RecommenderSchemaFieldList", name: "RecommenderSchemaFieldList", traits: {"smithy.api#length" => {"min" => 1, "max" => 9}})
+    RecommenderSchemaFields = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.customerprofiles#RecommenderSchemaFields", name: "RecommenderSchemaFields", traits: {"smithy.api#length" => {"min" => 1, "max" => 2}})
+    RecommenderSchemaStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.customerprofiles#RecommenderSchemaStatus", name: "RecommenderSchemaStatus")
+    RecommenderSchemaSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#RecommenderSchemaSummary", name: "RecommenderSchemaSummary")
+    RecommenderSchemaSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.customerprofiles#RecommenderSchemaSummaryList", name: "RecommenderSchemaSummaryList")
+    RecommenderStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.customerprofiles#RecommenderStatus", name: "RecommenderStatus")
+    RecommenderSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#RecommenderSummary", name: "RecommenderSummary")
+    RecommenderSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.customerprofiles#RecommenderSummaryList", name: "RecommenderSummaryList")
+    RecommenderUpdate = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#RecommenderUpdate", name: "RecommenderUpdate")
+    RecommenderVersionName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.customerprofiles#RecommenderVersionName", name: "RecommenderVersionName", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#pattern" => "^[a-zA-Z0-9_-]+/\\d{4}-\\d{2}-\\d{2}T\\d{2}-\\d{2}-\\d{2}Z$"})
     ResourceNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#ResourceNotFoundException", name: "ResourceNotFoundException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 404})
     ResultsSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#ResultsSummary", name: "ResultsSummary")
     RoleArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.customerprofiles#RoleArn", name: "RoleArn", traits: {"smithy.api#length" => {"min" => 0, "max" => 512}, "smithy.api#pattern" => "^arn:aws:iam:.*:[0-9]+:"})
@@ -366,11 +512,17 @@ module Aws::CustomerProfiles
     S3SourceProperties = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#S3SourceProperties", name: "S3SourceProperties")
     SalesforceConnectorOperator = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.customerprofiles#SalesforceConnectorOperator", name: "SalesforceConnectorOperator")
     SalesforceSourceProperties = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#SalesforceSourceProperties", name: "SalesforceSourceProperties")
+    ScheduleConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#ScheduleConfiguration", name: "ScheduleConfiguration")
+    ScheduleConfigurationUnit = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.customerprofiles#ScheduleConfigurationUnit", name: "ScheduleConfigurationUnit")
     ScheduleExpression = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.customerprofiles#ScheduleExpression", name: "ScheduleExpression", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#pattern" => ".*"})
     ScheduleOffset = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.customerprofiles#ScheduleOffset", name: "ScheduleOffset", traits: {"smithy.api#default" => 0, "smithy.api#range" => {"min" => 0, "max" => 36000}})
+    ScheduledExecutions = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#ScheduledExecutions", name: "ScheduledExecutions")
     ScheduledTriggerProperties = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#ScheduledTriggerProperties", name: "ScheduledTriggerProperties")
+    Scope = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.customerprofiles#Scope", name: "Scope")
     SearchProfilesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#SearchProfilesRequest", name: "SearchProfilesRequest")
     SearchProfilesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#SearchProfilesResponse", name: "SearchProfilesResponse")
+    SearchRecommendationsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#SearchRecommendationsRequest", name: "SearchRecommendationsRequest")
+    SearchRecommendationsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#SearchRecommendationsResponse", name: "SearchRecommendationsResponse")
     SegmentDefinitionArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.customerprofiles#SegmentDefinitionArn", name: "SegmentDefinitionArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}})
     SegmentDefinitionItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#SegmentDefinitionItem", name: "SegmentDefinitionItem")
     SegmentDefinitionsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.customerprofiles#SegmentDefinitionsList", name: "SegmentDefinitionsList")
@@ -378,8 +530,16 @@ module Aws::CustomerProfiles
     SegmentGroupList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.customerprofiles#SegmentGroupList", name: "SegmentGroupList")
     SegmentGroupStructure = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#SegmentGroupStructure", name: "SegmentGroupStructure")
     SegmentSnapshotStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.customerprofiles#SegmentSnapshotStatus", name: "SegmentSnapshotStatus")
+    SegmentSort = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#SegmentSort", name: "SegmentSort", traits: {"smithy.api#sensitive" => {}})
+    SegmentSortDataType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.customerprofiles#SegmentSortDataType", name: "SegmentSortDataType")
+    SegmentSortOrder = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.customerprofiles#SegmentSortOrder", name: "SegmentSortOrder")
+    SegmentSubscriptionStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.customerprofiles#SegmentSubscriptionStatus", name: "SegmentSubscriptionStatus")
+    SegmentType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.customerprofiles#SegmentType", name: "SegmentType")
     ServiceNowConnectorOperator = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.customerprofiles#ServiceNowConnectorOperator", name: "ServiceNowConnectorOperator")
     ServiceNowSourceProperties = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#ServiceNowSourceProperties", name: "ServiceNowSourceProperties")
+    SortAttribute = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#SortAttribute", name: "SortAttribute")
+    SortAttributeList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.customerprofiles#SortAttributeList", name: "SortAttributeList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
+    SortAttributeType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.customerprofiles#SortAttributeType", name: "SortAttributeType")
     SourceConnectorProperties = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#SourceConnectorProperties", name: "SourceConnectorProperties")
     SourceConnectorType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.customerprofiles#SourceConnectorType", name: "SourceConnectorType")
     SourceFields = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.customerprofiles#SourceFields", name: "SourceFields")
@@ -389,15 +549,23 @@ module Aws::CustomerProfiles
     StandardIdentifier = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.customerprofiles#StandardIdentifier", name: "StandardIdentifier")
     StandardIdentifierList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.customerprofiles#StandardIdentifierList", name: "StandardIdentifierList")
     Start = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.customerprofiles#Start", name: "Start")
+    StartRecommenderRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#StartRecommenderRequest", name: "StartRecommenderRequest")
+    StartRecommenderResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#StartRecommenderResponse", name: "StartRecommenderResponse")
     StartUploadJobRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#StartUploadJobRequest", name: "StartUploadJobRequest")
     StartUploadJobResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#StartUploadJobResponse", name: "StartUploadJobResponse")
     Statistic = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.customerprofiles#Statistic", name: "Statistic", traits: {"smithy.api#sensitive" => {}})
     Status = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.customerprofiles#Status", name: "Status")
     StatusCode = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.customerprofiles#StatusCode", name: "StatusCode", traits: {"smithy.api#default" => 0})
     StatusReason = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.customerprofiles#StatusReason", name: "StatusReason")
+    StopRecommenderRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#StopRecommenderRequest", name: "StopRecommenderRequest")
+    StopRecommenderResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#StopRecommenderResponse", name: "StopRecommenderResponse")
     StopUploadJobRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#StopUploadJobRequest", name: "StopUploadJobRequest")
     StopUploadJobResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#StopUploadJobResponse", name: "StopUploadJobResponse")
     StringDimensionType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.customerprofiles#StringDimensionType", name: "StringDimensionType")
+    SubscriptionEvent = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.customerprofiles#SubscriptionEvent", name: "SubscriptionEvent")
+    SubscriptionEventItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#SubscriptionEventItem", name: "SubscriptionEventItem")
+    SubscriptionEventType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.customerprofiles#SubscriptionEventType", name: "SubscriptionEventType")
+    SubscriptionEventsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.customerprofiles#SubscriptionEventsList", name: "SubscriptionEventsList")
     TagArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.customerprofiles#TagArn", name: "TagArn", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#pattern" => "^arn:[a-z0-9]{1,10}:profile$"})
     TagKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.customerprofiles#TagKey", name: "TagKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^(?!aws:)[a-zA-Z+-=._:/]+$"})
     TagKeyList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.customerprofiles#TagKeyList", name: "TagKeyList", traits: {"smithy.api#length" => {"min" => 1, "max" => 50}})
@@ -412,6 +580,9 @@ module Aws::CustomerProfiles
     Threshold = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#Threshold", name: "Threshold")
     ThrottlingException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#ThrottlingException", name: "ThrottlingException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 429})
     Timezone = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.customerprofiles#Timezone", name: "Timezone", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#pattern" => ".*"})
+    TrainingMetricName = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.customerprofiles#TrainingMetricName", name: "TrainingMetricName")
+    TrainingMetrics = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#TrainingMetrics", name: "TrainingMetrics")
+    TrainingMetricsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.customerprofiles#TrainingMetricsList", name: "TrainingMetricsList")
     TriggerConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#TriggerConfig", name: "TriggerConfig")
     TriggerProperties = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#TriggerProperties", name: "TriggerProperties")
     TriggerType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.customerprofiles#TriggerType", name: "TriggerType")
@@ -431,6 +602,8 @@ module Aws::CustomerProfiles
     UpdateEventTriggerResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#UpdateEventTriggerResponse", name: "UpdateEventTriggerResponse")
     UpdateProfileRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#UpdateProfileRequest", name: "UpdateProfileRequest")
     UpdateProfileResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#UpdateProfileResponse", name: "UpdateProfileResponse")
+    UpdateRecommenderRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#UpdateRecommenderRequest", name: "UpdateRecommenderRequest")
+    UpdateRecommenderResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#UpdateRecommenderResponse", name: "UpdateRecommenderResponse")
     UploadJobItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.customerprofiles#UploadJobItem", name: "UploadJobItem")
     UploadJobStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.customerprofiles#UploadJobStatus", name: "UploadJobStatus")
     UploadJobsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.customerprofiles#UploadJobsList", name: "UploadJobsList")
@@ -461,7 +634,7 @@ module Aws::CustomerProfiles
     MatchesNumber = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.customerprofiles#matchesNumber", name: "MatchesNumber", traits: {"smithy.api#range" => {"min" => 0}})
     MaxSize100 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.customerprofiles#maxSize100", name: "MaxSize100", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}})
     MaxSize1000 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.customerprofiles#maxSize1000", name: "MaxSize1000", traits: {"smithy.api#range" => {"min" => 1, "max" => 1000}})
-    MaxSize24 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.customerprofiles#maxSize24", name: "MaxSize24", traits: {"smithy.api#range" => {"min" => 1, "max" => 24}})
+    MaxSize60 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.customerprofiles#maxSize60", name: "MaxSize60", traits: {"smithy.api#range" => {"min" => 1, "max" => 60}})
     Message = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.customerprofiles#message", name: "Message")
     MinSize0 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.customerprofiles#minSize0", name: "MinSize0", traits: {"smithy.api#range" => {"min" => 0}})
     MinSize1 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.customerprofiles#minSize1", name: "MinSize1", traits: {"smithy.api#range" => {"min" => 1}})
@@ -470,14 +643,18 @@ module Aws::CustomerProfiles
     OptionalLong = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.customerprofiles#optionalLong", name: "OptionalLong")
     PercentageInteger = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.customerprofiles#percentageInteger", name: "PercentageInteger", traits: {"smithy.api#range" => {"min" => 0, "max" => 100}})
     RequestValueList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.customerprofiles#requestValueList", name: "RequestValueList")
+    ResponseCode = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.customerprofiles#responseCode", name: "ResponseCode", traits: {"smithy.api#range" => {"min" => 200, "max" => 599}})
     S3BucketName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.customerprofiles#s3BucketName", name: "S3BucketName", traits: {"smithy.api#length" => {"min" => 3, "max" => 63}, "smithy.api#pattern" => "^[a-z0-9.-]+$"})
     S3KeyName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.customerprofiles#s3KeyName", name: "S3KeyName", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => ".*"})
     S3KeyNameCustomerOutputConfig = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.customerprofiles#s3KeyNameCustomerOutputConfig", name: "S3KeyNameCustomerOutputConfig", traits: {"smithy.api#length" => {"min" => 1, "max" => 800}, "smithy.api#pattern" => ".*"})
     SensitiveString0To1000 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.customerprofiles#sensitiveString0To1000", name: "SensitiveString0To1000", traits: {"smithy.api#length" => {"min" => 0, "max" => 1000}, "smithy.api#sensitive" => {}})
     SensitiveString0To255 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.customerprofiles#sensitiveString0To255", name: "SensitiveString0To255", traits: {"smithy.api#length" => {"min" => 0, "max" => 255}, "smithy.api#sensitive" => {}})
     SensitiveString1To1000 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.customerprofiles#sensitiveString1To1000", name: "SensitiveString1To1000", traits: {"smithy.api#length" => {"min" => 1, "max" => 1000}, "smithy.api#sensitive" => {}})
+    SensitiveString1To10000 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.customerprofiles#sensitiveString1To10000", name: "SensitiveString1To10000", traits: {"smithy.api#length" => {"min" => 1, "max" => 10000}, "smithy.api#sensitive" => {}})
     SensitiveString1To2000000 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.customerprofiles#sensitiveString1To2000000", name: "SensitiveString1To2000000", traits: {"smithy.api#length" => {"min" => 1, "max" => 2000000}, "smithy.api#sensitive" => {}})
     SensitiveString1To255 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.customerprofiles#sensitiveString1To255", name: "SensitiveString1To255", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#sensitive" => {}})
+    SensitiveString1To4000 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.customerprofiles#sensitiveString1To4000", name: "SensitiveString1To4000", traits: {"smithy.api#length" => {"min" => 1, "max" => 4000}, "smithy.api#sensitive" => {}})
+    SensitiveString1To50000 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.customerprofiles#sensitiveString1To50000", name: "SensitiveString1To50000", traits: {"smithy.api#length" => {"min" => 1, "max" => 50000}, "smithy.api#sensitive" => {}})
     SensitiveText = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.customerprofiles#sensitiveText", name: "SensitiveText", traits: {"smithy.api#length" => {"min" => 1, "max" => 1000}, "smithy.api#sensitive" => {}})
     SqsQueueUrl = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.customerprofiles#sqsQueueUrl", name: "SqsQueueUrl", traits: {"smithy.api#length" => {"min" => 0, "max" => 255}})
     String0To255 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.customerprofiles#string0To255", name: "String0To255", traits: {"smithy.api#length" => {"min" => 0, "max" => 255}})
@@ -552,6 +729,16 @@ module Aws::CustomerProfiles
     AppflowIntegrationWorkflowStep.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedAt", traits: {"smithy.api#required" => {}}))
     AppflowIntegrationWorkflowStep.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastUpdatedAt", traits: {"smithy.api#required" => {}}))
     AppflowIntegrationWorkflowStep.type = Types::AppflowIntegrationWorkflowStep
+    AssociateStreamForSegmentsRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "DomainName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    AssociateStreamForSegmentsRequest.add_member(:destination_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DestinationArnString, name: "DestinationArn", traits: {"smithy.api#required" => {}}))
+    AssociateStreamForSegmentsRequest.add_member(:destination_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DestinationRoleArn, name: "DestinationRoleArn", traits: {"smithy.api#required" => {}}))
+    AssociateStreamForSegmentsRequest.type = Types::AssociateStreamForSegmentsRequest
+    AssociateStreamForSegmentsResponse.type = Types::AssociateStreamForSegmentsResponse
+    AssociatedSegment.add_member(:segment_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "SegmentName", traits: {"smithy.api#jsonName" => "SegmentName"}))
+    AssociatedSegment.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: EventSubscriptionSegmentStatus, name: "Status", traits: {"smithy.api#jsonName" => "Status"}))
+    AssociatedSegment.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String1To1000, name: "Message", traits: {"smithy.api#jsonName" => "Message"}))
+    AssociatedSegment.type = Types::AssociatedSegment
+    AssociatedSegmentsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociatedSegment, name: "member"))
     AttributeDetails.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeList, name: "Attributes", traits: {"smithy.api#required" => {}}))
     AttributeDetails.add_member(:expression, ::Smithy::Schema::Shapes::MemberShape.new(target: String1To255, name: "Expression", traits: {"smithy.api#required" => {}}))
     AttributeDetails.type = Types::AttributeDetails
@@ -573,6 +760,8 @@ module Aws::CustomerProfiles
     AttributeDimensionType.add_member(:greater_than_or_equal, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GREATER_THAN_OR_EQUAL", traits: {"smithy.api#enumValue" => "GREATER_THAN_OR_EQUAL"}))
     AttributeDimensionType.add_member(:less_than_or_equal, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LESS_THAN_OR_EQUAL", traits: {"smithy.api#enumValue" => "LESS_THAN_OR_EQUAL"}))
     AttributeDimensionType.add_member(:equal, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EQUAL", traits: {"smithy.api#enumValue" => "EQUAL"}))
+    AttributeDimensionType.add_member(:list_contains, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LIST_CONTAINS", traits: {"smithy.api#enumValue" => "LIST_CONTAINS"}))
+    AttributeDimensionType.add_member(:list_contains_all, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LIST_CONTAINS_ALL", traits: {"smithy.api#enumValue" => "LIST_CONTAINS_ALL"}))
     AttributeItem.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "Name", traits: {"smithy.api#required" => {}}))
     AttributeItem.type = Types::AttributeItem
     AttributeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeItem, name: "member"))
@@ -629,6 +818,26 @@ module Aws::CustomerProfiles
     BatchGetProfileResponse.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetProfileErrorList, name: "Errors"))
     BatchGetProfileResponse.add_member(:profiles, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfileList, name: "Profiles"))
     BatchGetProfileResponse.type = Types::BatchGetProfileResponse
+    BatchPutProfileObjectErrorItem.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "Id", traits: {"smithy.api#required" => {}}))
+    BatchPutProfileObjectErrorItem.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseCode, name: "Code", traits: {"smithy.api#required" => {}}))
+    BatchPutProfileObjectErrorItem.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Text, name: "Message"))
+    BatchPutProfileObjectErrorItem.type = Types::BatchPutProfileObjectErrorItem
+    BatchPutProfileObjectErrorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchPutProfileObjectErrorItem, name: "member"))
+    BatchPutProfileObjectRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "DomainName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    BatchPutProfileObjectRequest.add_member(:object_type_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TypeName, name: "ObjectTypeName", traits: {"smithy.api#required" => {}}))
+    BatchPutProfileObjectRequest.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchPutProfileObjectRequestItemList, name: "Items", traits: {"smithy.api#required" => {}}))
+    BatchPutProfileObjectRequest.type = Types::BatchPutProfileObjectRequest
+    BatchPutProfileObjectRequestItem.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "Id", traits: {"smithy.api#required" => {}}))
+    BatchPutProfileObjectRequestItem.add_member(:object, ::Smithy::Schema::Shapes::MemberShape.new(target: StringifiedJson, name: "Object", traits: {"smithy.api#required" => {}}))
+    BatchPutProfileObjectRequestItem.type = Types::BatchPutProfileObjectRequestItem
+    BatchPutProfileObjectRequestItemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchPutProfileObjectRequestItem, name: "member"))
+    BatchPutProfileObjectResponse.add_member(:successful, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchPutProfileObjectResponseList, name: "Successful"))
+    BatchPutProfileObjectResponse.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchPutProfileObjectErrorList, name: "Failed"))
+    BatchPutProfileObjectResponse.type = Types::BatchPutProfileObjectResponse
+    BatchPutProfileObjectResponseItem.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "Id", traits: {"smithy.api#required" => {}}))
+    BatchPutProfileObjectResponseItem.add_member(:profile_object_unique_key, ::Smithy::Schema::Shapes::MemberShape.new(target: String1To255, name: "ProfileObjectUniqueKey", traits: {"smithy.api#required" => {}}))
+    BatchPutProfileObjectResponseItem.type = Types::BatchPutProfileObjectResponseItem
+    BatchPutProfileObjectResponseList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchPutProfileObjectResponseItem, name: "member"))
     Batches.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Batch, name: "member"))
     CalculatedAttributeDefinitionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListCalculatedAttributeDefinitionItem, name: "member"))
     CalculatedAttributeDimension.add_member(:dimension_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeDimensionType, name: "DimensionType", traits: {"smithy.api#jsonName" => "DimensionType", "smithy.api#required" => {}}))
@@ -646,6 +855,22 @@ module Aws::CustomerProfiles
     CalculatedAttributesForProfileList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListCalculatedAttributeForProfileItem, name: "member"))
     CalculatedCustomAttributes.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TypeName, name: "key"))
     CalculatedCustomAttributes.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: CalculatedAttributeDimension, name: "value"))
+    CandidateIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String1To255, name: "member"))
+    CatalogItem.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString1To255, name: "Id"))
+    CatalogItem.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString1To255, name: "Name"))
+    CatalogItem.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString1To255, name: "Code"))
+    CatalogItem.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString1To255, name: "Type"))
+    CatalogItem.add_member(:category, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString1To255, name: "Category"))
+    CatalogItem.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString1To255, name: "Description"))
+    CatalogItem.add_member(:additional_information, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString1To1000, name: "AdditionalInformation"))
+    CatalogItem.add_member(:image_link, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString1To1000, name: "ImageLink"))
+    CatalogItem.add_member(:link, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString1To1000, name: "Link"))
+    CatalogItem.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedAt"))
+    CatalogItem.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "UpdatedAt"))
+    CatalogItem.add_member(:price, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString1To255, name: "Price"))
+    CatalogItem.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: Attributes, name: "Attributes"))
+    CatalogItem.type = Types::CatalogItem
+    ColumnNamesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Text, name: "member"))
     ComparisonOperator.add_member(:inclusive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INCLUSIVE", traits: {"smithy.api#enumValue" => "INCLUSIVE"}))
     ComparisonOperator.add_member(:exclusive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXCLUSIVE", traits: {"smithy.api#enumValue" => "EXCLUSIVE"}))
     ComparisonOperator.add_member(:contains, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONTAINS", traits: {"smithy.api#enumValue" => "CONTAINS"}))
@@ -692,6 +917,8 @@ module Aws::CustomerProfiles
     ContactType.add_member(:email_address, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EMAIL_ADDRESS", traits: {"smithy.api#enumValue" => "EmailAddress"}))
     ContactType.add_member(:personal_email_address, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PERSONAL_EMAIL_ADDRESS", traits: {"smithy.api#enumValue" => "PersonalEmailAddress"}))
     ContactType.add_member(:business_email_address, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BUSINESS_EMAIL_ADDRESS", traits: {"smithy.api#enumValue" => "BusinessEmailAddress"}))
+    ContentType.add_member(:string, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STRING", traits: {"smithy.api#enumValue" => "STRING"}))
+    ContentType.add_member(:number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NUMBER", traits: {"smithy.api#enumValue" => "NUMBER"}))
     CreateCalculatedAttributeDefinitionRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "DomainName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     CreateCalculatedAttributeDefinitionRequest.add_member(:calculated_attribute_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TypeName, name: "CalculatedAttributeName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     CreateCalculatedAttributeDefinitionRequest.add_member(:display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DisplayName, name: "DisplayName"))
@@ -743,6 +970,7 @@ module Aws::CustomerProfiles
     CreateDomainRequest.add_member(:dead_letter_queue_url, ::Smithy::Schema::Shapes::MemberShape.new(target: SqsQueueUrl, name: "DeadLetterQueueUrl"))
     CreateDomainRequest.add_member(:matching, ::Smithy::Schema::Shapes::MemberShape.new(target: MatchingRequest, name: "Matching"))
     CreateDomainRequest.add_member(:rule_based_matching, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleBasedMatchingRequest, name: "RuleBasedMatching"))
+    CreateDomainRequest.add_member(:data_store, ::Smithy::Schema::Shapes::MemberShape.new(target: DataStoreRequest, name: "DataStore"))
     CreateDomainRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags"))
     CreateDomainRequest.type = Types::CreateDomainRequest
     CreateDomainResponse.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "DomainName", traits: {"smithy.api#required" => {}}))
@@ -751,6 +979,7 @@ module Aws::CustomerProfiles
     CreateDomainResponse.add_member(:dead_letter_queue_url, ::Smithy::Schema::Shapes::MemberShape.new(target: SqsQueueUrl, name: "DeadLetterQueueUrl"))
     CreateDomainResponse.add_member(:matching, ::Smithy::Schema::Shapes::MemberShape.new(target: MatchingResponse, name: "Matching"))
     CreateDomainResponse.add_member(:rule_based_matching, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleBasedMatchingResponse, name: "RuleBasedMatching"))
+    CreateDomainResponse.add_member(:data_store, ::Smithy::Schema::Shapes::MemberShape.new(target: DataStoreResponse, name: "DataStore"))
     CreateDomainResponse.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedAt", traits: {"smithy.api#required" => {}}))
     CreateDomainResponse.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastUpdatedAt", traits: {"smithy.api#required" => {}}))
     CreateDomainResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags"))
@@ -821,22 +1050,58 @@ module Aws::CustomerProfiles
     CreateProfileRequest.type = Types::CreateProfileRequest
     CreateProfileResponse.add_member(:profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "ProfileId", traits: {"smithy.api#required" => {}}))
     CreateProfileResponse.type = Types::CreateProfileResponse
+    CreateRecommenderFilterRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "DomainName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CreateRecommenderFilterRequest.add_member(:recommender_filter_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommenderFilterName, name: "RecommenderFilterName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CreateRecommenderFilterRequest.add_member(:recommender_filter_expression, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommenderFilterExpression, name: "RecommenderFilterExpression", traits: {"smithy.api#required" => {}}))
+    CreateRecommenderFilterRequest.add_member(:recommender_schema_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "RecommenderSchemaName"))
+    CreateRecommenderFilterRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveText, name: "Description"))
+    CreateRecommenderFilterRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags"))
+    CreateRecommenderFilterRequest.type = Types::CreateRecommenderFilterRequest
+    CreateRecommenderFilterResponse.add_member(:recommender_filter_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "RecommenderFilterArn", traits: {"smithy.api#required" => {}}))
+    CreateRecommenderFilterResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags"))
+    CreateRecommenderFilterResponse.type = Types::CreateRecommenderFilterResponse
+    CreateRecommenderRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "DomainName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CreateRecommenderRequest.add_member(:recommender_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "RecommenderName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CreateRecommenderRequest.add_member(:recommender_recipe_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommenderRecipeName, name: "RecommenderRecipeName", traits: {"smithy.api#required" => {}}))
+    CreateRecommenderRequest.add_member(:recommender_config, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommenderConfig, name: "RecommenderConfig"))
+    CreateRecommenderRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveText, name: "Description"))
+    CreateRecommenderRequest.add_member(:recommender_schema_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "RecommenderSchemaName"))
+    CreateRecommenderRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags"))
+    CreateRecommenderRequest.type = Types::CreateRecommenderRequest
+    CreateRecommenderResponse.add_member(:recommender_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "RecommenderArn", traits: {"smithy.api#required" => {}}))
+    CreateRecommenderResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags"))
+    CreateRecommenderResponse.type = Types::CreateRecommenderResponse
+    CreateRecommenderSchemaRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "DomainName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CreateRecommenderSchemaRequest.add_member(:recommender_schema_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "RecommenderSchemaName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CreateRecommenderSchemaRequest.add_member(:fields, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommenderSchemaFields, name: "Fields", traits: {"smithy.api#required" => {}}))
+    CreateRecommenderSchemaRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags"))
+    CreateRecommenderSchemaRequest.type = Types::CreateRecommenderSchemaRequest
+    CreateRecommenderSchemaResponse.add_member(:recommender_schema_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "RecommenderSchemaArn", traits: {"smithy.api#required" => {}}))
+    CreateRecommenderSchemaResponse.add_member(:recommender_schema_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "RecommenderSchemaName", traits: {"smithy.api#required" => {}}))
+    CreateRecommenderSchemaResponse.add_member(:fields, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommenderSchemaFields, name: "Fields", traits: {"smithy.api#required" => {}}))
+    CreateRecommenderSchemaResponse.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedAt", traits: {"smithy.api#required" => {}}))
+    CreateRecommenderSchemaResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommenderSchemaStatus, name: "Status", traits: {"smithy.api#required" => {}}))
+    CreateRecommenderSchemaResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags"))
+    CreateRecommenderSchemaResponse.type = Types::CreateRecommenderSchemaResponse
     CreateSegmentDefinitionRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "DomainName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     CreateSegmentDefinitionRequest.add_member(:segment_definition_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "SegmentDefinitionName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     CreateSegmentDefinitionRequest.add_member(:display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String1To255, name: "DisplayName", traits: {"smithy.api#required" => {}}))
-    CreateSegmentDefinitionRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveText, name: "Description"))
-    CreateSegmentDefinitionRequest.add_member(:segment_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentGroup, name: "SegmentGroups", traits: {"smithy.api#required" => {}}))
+    CreateSegmentDefinitionRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString1To4000, name: "Description"))
+    CreateSegmentDefinitionRequest.add_member(:segment_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentGroup, name: "SegmentGroups"))
+    CreateSegmentDefinitionRequest.add_member(:segment_sql_query, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString1To50000, name: "SegmentSqlQuery"))
+    CreateSegmentDefinitionRequest.add_member(:segment_sort, ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentSort, name: "SegmentSort"))
     CreateSegmentDefinitionRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags"))
     CreateSegmentDefinitionRequest.type = Types::CreateSegmentDefinitionRequest
     CreateSegmentDefinitionResponse.add_member(:segment_definition_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "SegmentDefinitionName", traits: {"smithy.api#jsonName" => "SegmentDefinitionName", "smithy.api#required" => {}}))
     CreateSegmentDefinitionResponse.add_member(:display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String1To255, name: "DisplayName", traits: {"smithy.api#jsonName" => "DisplayName"}))
-    CreateSegmentDefinitionResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveText, name: "Description", traits: {"smithy.api#jsonName" => "Description"}))
+    CreateSegmentDefinitionResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString1To4000, name: "Description", traits: {"smithy.api#jsonName" => "Description"}))
     CreateSegmentDefinitionResponse.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedAt", traits: {"smithy.api#jsonName" => "CreatedAt"}))
     CreateSegmentDefinitionResponse.add_member(:segment_definition_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentDefinitionArn, name: "SegmentDefinitionArn", traits: {"smithy.api#jsonName" => "SegmentDefinitionArn"}))
     CreateSegmentDefinitionResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags", traits: {"smithy.api#jsonName" => "Tags"}))
     CreateSegmentDefinitionResponse.type = Types::CreateSegmentDefinitionResponse
     CreateSegmentEstimateRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "DomainName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    CreateSegmentEstimateRequest.add_member(:segment_query, ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentGroupStructure, name: "SegmentQuery", traits: {"smithy.api#required" => {}}))
+    CreateSegmentEstimateRequest.add_member(:segment_query, ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentGroupStructure, name: "SegmentQuery"))
+    CreateSegmentEstimateRequest.add_member(:segment_sql_query, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString1To50000, name: "SegmentSqlQuery"))
     CreateSegmentEstimateRequest.type = Types::CreateSegmentEstimateRequest
     CreateSegmentEstimateResponse.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "DomainName"))
     CreateSegmentEstimateResponse.add_member(:estimate_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String1To255, name: "EstimateId"))
@@ -859,13 +1124,18 @@ module Aws::CustomerProfiles
     CreateUploadJobRequest.type = Types::CreateUploadJobRequest
     CreateUploadJobResponse.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "JobId", traits: {"smithy.api#jsonName" => "JobId", "smithy.api#required" => {}}))
     CreateUploadJobResponse.type = Types::CreateUploadJobResponse
-    CustomAttributes.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TypeName, name: "key"))
+    CustomAttributes.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String1To255, name: "key"))
     CustomAttributes.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeDimension, name: "value"))
     DataFormat.add_member(:csv, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CSV", traits: {"smithy.api#enumValue" => "CSV"}))
     DataFormat.add_member(:jsonl, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "JSONL", traits: {"smithy.api#enumValue" => "JSONL"}))
     DataFormat.add_member(:orc, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ORC", traits: {"smithy.api#enumValue" => "ORC"}))
     DataPullMode.add_member(:incremental, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INCREMENTAL", traits: {"smithy.api#enumValue" => "Incremental"}))
     DataPullMode.add_member(:complete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETE", traits: {"smithy.api#enumValue" => "Complete"}))
+    DataStoreRequest.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionalBoolean, name: "Enabled"))
+    DataStoreRequest.type = Types::DataStoreRequest
+    DataStoreResponse.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionalBoolean, name: "Enabled"))
+    DataStoreResponse.add_member(:readiness, ::Smithy::Schema::Shapes::MemberShape.new(target: Readiness, name: "Readiness"))
+    DataStoreResponse.type = Types::DataStoreResponse
     DateDimension.add_member(:dimension_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DateDimensionType, name: "DimensionType", traits: {"smithy.api#jsonName" => "DimensionType", "smithy.api#required" => {}}))
     DateDimension.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: DateValues, name: "Values", traits: {"smithy.api#jsonName" => "Values", "smithy.api#required" => {}}))
     DateDimension.type = Types::DateDimension
@@ -884,6 +1154,10 @@ module Aws::CustomerProfiles
     DeleteDomainLayoutRequest.type = Types::DeleteDomainLayoutRequest
     DeleteDomainLayoutResponse.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message", traits: {"smithy.api#required" => {}}))
     DeleteDomainLayoutResponse.type = Types::DeleteDomainLayoutResponse
+    DeleteDomainObjectTypeRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "DomainName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteDomainObjectTypeRequest.add_member(:object_type_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TypeName, name: "ObjectTypeName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteDomainObjectTypeRequest.type = Types::DeleteDomainObjectTypeRequest
+    DeleteDomainObjectTypeResponse.type = Types::DeleteDomainObjectTypeResponse
     DeleteDomainRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "DomainName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteDomainRequest.type = Types::DeleteDomainRequest
     DeleteDomainResponse.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message", traits: {"smithy.api#required" => {}}))
@@ -926,11 +1200,29 @@ module Aws::CustomerProfiles
     DeleteProfileRequest.type = Types::DeleteProfileRequest
     DeleteProfileResponse.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message"))
     DeleteProfileResponse.type = Types::DeleteProfileResponse
+    DeleteRecommenderFilterRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "DomainName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteRecommenderFilterRequest.add_member(:recommender_filter_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommenderFilterName, name: "RecommenderFilterName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteRecommenderFilterRequest.type = Types::DeleteRecommenderFilterRequest
+    DeleteRecommenderFilterResponse.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Message", traits: {"smithy.api#required" => {}}))
+    DeleteRecommenderFilterResponse.type = Types::DeleteRecommenderFilterResponse
+    DeleteRecommenderRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "DomainName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteRecommenderRequest.add_member(:recommender_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "RecommenderName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteRecommenderRequest.type = Types::DeleteRecommenderRequest
+    DeleteRecommenderResponse.type = Types::DeleteRecommenderResponse
+    DeleteRecommenderSchemaRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "DomainName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteRecommenderSchemaRequest.add_member(:recommender_schema_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "RecommenderSchemaName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteRecommenderSchemaRequest.type = Types::DeleteRecommenderSchemaRequest
+    DeleteRecommenderSchemaResponse.type = Types::DeleteRecommenderSchemaResponse
     DeleteSegmentDefinitionRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "DomainName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteSegmentDefinitionRequest.add_member(:segment_definition_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "SegmentDefinitionName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteSegmentDefinitionRequest.type = Types::DeleteSegmentDefinitionRequest
     DeleteSegmentDefinitionResponse.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String1To1000, name: "Message", traits: {"smithy.api#jsonName" => "Message"}))
     DeleteSegmentDefinitionResponse.type = Types::DeleteSegmentDefinitionResponse
+    DeleteSegmentSubscriptionRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "DomainName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteSegmentSubscriptionRequest.add_member(:segment_definition_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "SegmentDefinitionName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteSegmentSubscriptionRequest.type = Types::DeleteSegmentSubscriptionRequest
+    DeleteSegmentSubscriptionResponse.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String1To1000, name: "Message", traits: {"smithy.api#jsonName" => "Message"}))
+    DeleteSegmentSubscriptionResponse.type = Types::DeleteSegmentSubscriptionResponse
     DeleteWorkflowRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "DomainName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteWorkflowRequest.add_member(:workflow_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String1To255, name: "WorkflowId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteWorkflowRequest.type = Types::DeleteWorkflowRequest
@@ -954,7 +1246,36 @@ module Aws::CustomerProfiles
     Dimension.add_member(:unknown, Types::Dimension::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     Dimension.type = Types::Dimension
     DimensionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Dimension, name: "member"))
+    DisassociateStreamForSegmentsRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "DomainName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DisassociateStreamForSegmentsRequest.type = Types::DisassociateStreamForSegmentsRequest
+    DisassociateStreamForSegmentsResponse.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String1To1000, name: "Message", traits: {"smithy.api#jsonName" => "Message"}))
+    DisassociateStreamForSegmentsResponse.type = Types::DisassociateStreamForSegmentsResponse
+    DiversityCapType.add_member(:percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PERCENTAGE", traits: {"smithy.api#enumValue" => "PERCENTAGE"}))
+    DiversityCapType.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VALUE", traits: {"smithy.api#enumValue" => "VALUE"}))
+    DiversityColumn.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Text, name: "Name", traits: {"smithy.api#required" => {}}))
+    DiversityColumn.add_member(:cap_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DiversityCapType, name: "CapType", traits: {"smithy.api#required" => {}}))
+    DiversityColumn.add_member(:target, ::Smithy::Schema::Shapes::MemberShape.new(target: DiversityTargetExpression, name: "Target", traits: {"smithy.api#required" => {}}))
+    DiversityColumn.type = Types::DiversityColumn
+    DiversityColumnsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DiversityColumn, name: "member"))
+    DiversityConfig.add_member(:diversity_columns, ::Smithy::Schema::Shapes::MemberShape.new(target: DiversityColumnsList, name: "DiversityColumns"))
+    DiversityConfig.type = Types::DiversityConfig
+    DiversityValuesMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: DiversityPlaceholderName, name: "key"))
+    DiversityValuesMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: DiversityCapValue, name: "value"))
     DomainList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListDomainItem, name: "member"))
+    DomainObjectTypeField.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: Text, name: "Source", traits: {"smithy.api#required" => {}}))
+    DomainObjectTypeField.add_member(:target, ::Smithy::Schema::Shapes::MemberShape.new(target: Text, name: "Target", traits: {"smithy.api#required" => {}}))
+    DomainObjectTypeField.add_member(:content_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ContentType, name: "ContentType"))
+    DomainObjectTypeField.add_member(:feature_type, ::Smithy::Schema::Shapes::MemberShape.new(target: FeatureType, name: "FeatureType"))
+    DomainObjectTypeField.type = Types::DomainObjectTypeField
+    DomainObjectTypeFields.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainObjectTypeFieldName, name: "key"))
+    DomainObjectTypeFields.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainObjectTypeField, name: "value"))
+    DomainObjectTypesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainObjectTypesListItem, name: "member"))
+    DomainObjectTypesListItem.add_member(:object_type_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TypeName, name: "ObjectTypeName", traits: {"smithy.api#required" => {}}))
+    DomainObjectTypesListItem.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString1To10000, name: "Description"))
+    DomainObjectTypesListItem.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedAt"))
+    DomainObjectTypesListItem.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastUpdatedAt"))
+    DomainObjectTypesListItem.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags"))
+    DomainObjectTypesListItem.type = Types::DomainObjectTypesListItem
     DomainStats.add_member(:profile_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "ProfileCount", traits: {"smithy.api#default" => 0}))
     DomainStats.add_member(:metering_profile_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "MeteringProfileCount", traits: {"smithy.api#default" => 0}))
     DomainStats.add_member(:object_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "ObjectCount", traits: {"smithy.api#default" => 0}))
@@ -968,6 +1289,11 @@ module Aws::CustomerProfiles
     EstimateStatus.add_member(:running, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RUNNING", traits: {"smithy.api#enumValue" => "RUNNING"}))
     EstimateStatus.add_member(:succeeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCEEDED", traits: {"smithy.api#enumValue" => "SUCCEEDED"}))
     EstimateStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    EventParameters.add_member(:event_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EventParametersEventTypeString, name: "EventType", traits: {"smithy.api#required" => {}}))
+    EventParameters.add_member(:event_value_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "EventValueThreshold"))
+    EventParameters.add_member(:event_weight, ::Smithy::Schema::Shapes::MemberShape.new(target: EventParametersEventWeightDouble, name: "EventWeight"))
+    EventParameters.type = Types::EventParameters
+    EventParametersList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EventParameters, name: "member"))
     EventStreamDestinationDetails.add_member(:uri, ::Smithy::Schema::Shapes::MemberShape.new(target: String1To255, name: "Uri", traits: {"smithy.api#required" => {}}))
     EventStreamDestinationDetails.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: EventStreamDestinationStatus, name: "Status", traits: {"smithy.api#required" => {}}))
     EventStreamDestinationDetails.add_member(:unhealthy_since, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "UnhealthySince"))
@@ -986,6 +1312,13 @@ module Aws::CustomerProfiles
     EventStreamSummary.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags"))
     EventStreamSummary.type = Types::EventStreamSummary
     EventStreamSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EventStreamSummary, name: "member"))
+    EventSubscriptionSegmentStatus.add_member(:starting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STARTING", traits: {"smithy.api#enumValue" => "STARTING"}))
+    EventSubscriptionSegmentStatus.add_member(:running, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RUNNING", traits: {"smithy.api#enumValue" => "RUNNING"}))
+    EventSubscriptionSegmentStatus.add_member(:stopped, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STOPPED", traits: {"smithy.api#enumValue" => "STOPPED"}))
+    EventSubscriptionSegmentStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    EventSubscriptionState.add_member(:running, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RUNNING", traits: {"smithy.api#enumValue" => "RUNNING"}))
+    EventSubscriptionState.add_member(:unhealthy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNHEALTHY", traits: {"smithy.api#enumValue" => "UNHEALTHY"}))
+    EventSubscriptionState.add_member(:stopped, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STOPPED", traits: {"smithy.api#enumValue" => "STOPPED"}))
     EventTriggerCondition.add_member(:event_trigger_dimensions, ::Smithy::Schema::Shapes::MemberShape.new(target: EventTriggerDimensions, name: "EventTriggerDimensions", traits: {"smithy.api#required" => {}}))
     EventTriggerCondition.add_member(:logical_operator, ::Smithy::Schema::Shapes::MemberShape.new(target: EventTriggerLogicalOperator, name: "LogicalOperator", traits: {"smithy.api#required" => {}}))
     EventTriggerCondition.type = Types::EventTriggerCondition
@@ -1009,6 +1342,8 @@ module Aws::CustomerProfiles
     EventTriggerSummaryItem.type = Types::EventTriggerSummaryItem
     EventTriggerSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EventTriggerSummaryItem, name: "member"))
     EventTriggerValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String1To255, name: "member"))
+    EventsConfig.add_member(:event_parameters_list, ::Smithy::Schema::Shapes::MemberShape.new(target: EventParametersList, name: "EventParametersList", traits: {"smithy.api#required" => {}}))
+    EventsConfig.type = Types::EventsConfig
     ExportingConfig.add_member(:s3_exporting, ::Smithy::Schema::Shapes::MemberShape.new(target: S3ExportingConfig, name: "S3Exporting"))
     ExportingConfig.type = Types::ExportingConfig
     ExportingLocation.add_member(:s3_exporting, ::Smithy::Schema::Shapes::MemberShape.new(target: S3ExportingLocation, name: "S3Exporting"))
@@ -1018,6 +1353,8 @@ module Aws::CustomerProfiles
     ExtraLengthValueProfileDimension.type = Types::ExtraLengthValueProfileDimension
     ExtraLengthValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String1To1000, name: "member"))
     Failures.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfileQueryFailures, name: "member"))
+    FeatureType.add_member(:textual, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TEXTUAL", traits: {"smithy.api#enumValue" => "TEXTUAL"}))
+    FeatureType.add_member(:categorical, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CATEGORICAL", traits: {"smithy.api#enumValue" => "CATEGORICAL"}))
     FieldContentType.add_member(:string, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STRING", traits: {"smithy.api#enumValue" => "STRING"}))
     FieldContentType.add_member(:number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NUMBER", traits: {"smithy.api#enumValue" => "NUMBER"}))
     FieldContentType.add_member(:phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PHONE_NUMBER", traits: {"smithy.api#enumValue" => "PHONE_NUMBER"}))
@@ -1141,6 +1478,17 @@ module Aws::CustomerProfiles
     GetDomainLayoutResponse.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastUpdatedAt", traits: {"smithy.api#required" => {}}))
     GetDomainLayoutResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags"))
     GetDomainLayoutResponse.type = Types::GetDomainLayoutResponse
+    GetDomainObjectTypeRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "DomainName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetDomainObjectTypeRequest.add_member(:object_type_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TypeName, name: "ObjectTypeName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetDomainObjectTypeRequest.type = Types::GetDomainObjectTypeRequest
+    GetDomainObjectTypeResponse.add_member(:object_type_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TypeName, name: "ObjectTypeName", traits: {"smithy.api#required" => {}}))
+    GetDomainObjectTypeResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString1To10000, name: "Description"))
+    GetDomainObjectTypeResponse.add_member(:encryption_key, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionKey, name: "EncryptionKey"))
+    GetDomainObjectTypeResponse.add_member(:fields, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainObjectTypeFields, name: "Fields"))
+    GetDomainObjectTypeResponse.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedAt"))
+    GetDomainObjectTypeResponse.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastUpdatedAt"))
+    GetDomainObjectTypeResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags"))
+    GetDomainObjectTypeResponse.type = Types::GetDomainObjectTypeResponse
     GetDomainRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "DomainName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetDomainRequest.type = Types::GetDomainRequest
     GetDomainResponse.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "DomainName", traits: {"smithy.api#required" => {}}))
@@ -1150,6 +1498,7 @@ module Aws::CustomerProfiles
     GetDomainResponse.add_member(:stats, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainStats, name: "Stats"))
     GetDomainResponse.add_member(:matching, ::Smithy::Schema::Shapes::MemberShape.new(target: MatchingResponse, name: "Matching"))
     GetDomainResponse.add_member(:rule_based_matching, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleBasedMatchingResponse, name: "RuleBasedMatching"))
+    GetDomainResponse.add_member(:data_store, ::Smithy::Schema::Shapes::MemberShape.new(target: DataStoreResponse, name: "DataStore"))
     GetDomainResponse.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedAt", traits: {"smithy.api#required" => {}}))
     GetDomainResponse.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastUpdatedAt", traits: {"smithy.api#required" => {}}))
     GetDomainResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags"))
@@ -1207,6 +1556,7 @@ module Aws::CustomerProfiles
     GetIntegrationResponse.add_member(:is_unstructured, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionalBoolean, name: "IsUnstructured"))
     GetIntegrationResponse.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "RoleArn"))
     GetIntegrationResponse.add_member(:event_trigger_names, ::Smithy::Schema::Shapes::MemberShape.new(target: EventTriggerNames, name: "EventTriggerNames"))
+    GetIntegrationResponse.add_member(:scope, ::Smithy::Schema::Shapes::MemberShape.new(target: Scope, name: "Scope"))
     GetIntegrationResponse.type = Types::GetIntegrationResponse
     GetMatchesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken", traits: {"smithy.api#httpQuery" => "next-token"}))
     GetMatchesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxSize100, name: "MaxResults", traits: {"smithy.api#httpQuery" => "max-results"}))
@@ -1217,6 +1567,25 @@ module Aws::CustomerProfiles
     GetMatchesResponse.add_member(:potential_matches, ::Smithy::Schema::Shapes::MemberShape.new(target: MatchesNumber, name: "PotentialMatches"))
     GetMatchesResponse.add_member(:matches, ::Smithy::Schema::Shapes::MemberShape.new(target: MatchesList, name: "Matches"))
     GetMatchesResponse.type = Types::GetMatchesResponse
+    GetObjectTypeAttributeStatisticsPercentiles.add_member(:p5, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "P5", traits: {"smithy.api#required" => {}}))
+    GetObjectTypeAttributeStatisticsPercentiles.add_member(:p25, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "P25", traits: {"smithy.api#required" => {}}))
+    GetObjectTypeAttributeStatisticsPercentiles.add_member(:p50, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "P50", traits: {"smithy.api#required" => {}}))
+    GetObjectTypeAttributeStatisticsPercentiles.add_member(:p75, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "P75", traits: {"smithy.api#required" => {}}))
+    GetObjectTypeAttributeStatisticsPercentiles.add_member(:p95, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "P95", traits: {"smithy.api#required" => {}}))
+    GetObjectTypeAttributeStatisticsPercentiles.type = Types::GetObjectTypeAttributeStatisticsPercentiles
+    GetObjectTypeAttributeStatisticsRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "DomainName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetObjectTypeAttributeStatisticsRequest.add_member(:object_type_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TypeName, name: "ObjectTypeName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetObjectTypeAttributeStatisticsRequest.add_member(:attribute_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String1To1000, name: "AttributeName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetObjectTypeAttributeStatisticsRequest.type = Types::GetObjectTypeAttributeStatisticsRequest
+    GetObjectTypeAttributeStatisticsResponse.add_member(:statistics, ::Smithy::Schema::Shapes::MemberShape.new(target: GetObjectTypeAttributeStatisticsStats, name: "Statistics", traits: {"smithy.api#required" => {}}))
+    GetObjectTypeAttributeStatisticsResponse.add_member(:calculated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CalculatedAt", traits: {"smithy.api#required" => {}}))
+    GetObjectTypeAttributeStatisticsResponse.type = Types::GetObjectTypeAttributeStatisticsResponse
+    GetObjectTypeAttributeStatisticsStats.add_member(:maximum, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "Maximum", traits: {"smithy.api#required" => {}}))
+    GetObjectTypeAttributeStatisticsStats.add_member(:minimum, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "Minimum", traits: {"smithy.api#required" => {}}))
+    GetObjectTypeAttributeStatisticsStats.add_member(:average, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "Average", traits: {"smithy.api#required" => {}}))
+    GetObjectTypeAttributeStatisticsStats.add_member(:standard_deviation, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "StandardDeviation", traits: {"smithy.api#required" => {}}))
+    GetObjectTypeAttributeStatisticsStats.add_member(:percentiles, ::Smithy::Schema::Shapes::MemberShape.new(target: GetObjectTypeAttributeStatisticsPercentiles, name: "Percentiles", traits: {"smithy.api#required" => {}}))
+    GetObjectTypeAttributeStatisticsStats.type = Types::GetObjectTypeAttributeStatisticsStats
     GetProfileHistoryRecordRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "DomainName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetProfileHistoryRecordRequest.add_member(:profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "ProfileId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetProfileHistoryRecordRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "Id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -1242,6 +1611,7 @@ module Aws::CustomerProfiles
     GetProfileObjectTypeResponse.add_member(:source_last_updated_timestamp_format, ::Smithy::Schema::Shapes::MemberShape.new(target: String1To255, name: "SourceLastUpdatedTimestampFormat"))
     GetProfileObjectTypeResponse.add_member(:max_available_profile_object_count, ::Smithy::Schema::Shapes::MemberShape.new(target: MinSize0, name: "MaxAvailableProfileObjectCount"))
     GetProfileObjectTypeResponse.add_member(:max_profile_object_count, ::Smithy::Schema::Shapes::MemberShape.new(target: MinSize1, name: "MaxProfileObjectCount"))
+    GetProfileObjectTypeResponse.add_member(:source_priority, ::Smithy::Schema::Shapes::MemberShape.new(target: MinSize1, name: "SourcePriority"))
     GetProfileObjectTypeResponse.add_member(:fields, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldMap, name: "Fields"))
     GetProfileObjectTypeResponse.add_member(:keys, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyMap, name: "Keys"))
     GetProfileObjectTypeResponse.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedAt"))
@@ -1258,16 +1628,70 @@ module Aws::CustomerProfiles
     GetProfileObjectTypeTemplateResponse.add_member(:fields, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldMap, name: "Fields"))
     GetProfileObjectTypeTemplateResponse.add_member(:keys, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyMap, name: "Keys"))
     GetProfileObjectTypeTemplateResponse.type = Types::GetProfileObjectTypeTemplateResponse
+    GetProfileRecommendationsRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "DomainName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetProfileRecommendationsRequest.add_member(:profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "ProfileId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetProfileRecommendationsRequest.add_member(:recommender_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "RecommenderName", traits: {"smithy.api#required" => {}}))
+    GetProfileRecommendationsRequest.add_member(:context, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommenderContext, name: "Context"))
+    GetProfileRecommendationsRequest.add_member(:recommender_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommenderFilters, name: "RecommenderFilters"))
+    GetProfileRecommendationsRequest.add_member(:recommender_promotional_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommenderPromotionalFilters, name: "RecommenderPromotionalFilters"))
+    GetProfileRecommendationsRequest.add_member(:candidate_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: CandidateIdList, name: "CandidateIds"))
+    GetProfileRecommendationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxSize500, name: "MaxResults"))
+    GetProfileRecommendationsRequest.add_member(:metadata_config, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataConfig, name: "MetadataConfig"))
+    GetProfileRecommendationsRequest.add_member(:diversity_config, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationDiversityConfig, name: "DiversityConfig"))
+    GetProfileRecommendationsRequest.type = Types::GetProfileRecommendationsRequest
+    GetProfileRecommendationsResponse.add_member(:recommendations, ::Smithy::Schema::Shapes::MemberShape.new(target: Recommendations, name: "Recommendations"))
+    GetProfileRecommendationsResponse.type = Types::GetProfileRecommendationsResponse
+    GetRecommenderFilterRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "DomainName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetRecommenderFilterRequest.add_member(:recommender_filter_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommenderFilterName, name: "RecommenderFilterName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetRecommenderFilterRequest.type = Types::GetRecommenderFilterRequest
+    GetRecommenderFilterResponse.add_member(:recommender_filter_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommenderFilterName, name: "RecommenderFilterName", traits: {"smithy.api#required" => {}}))
+    GetRecommenderFilterResponse.add_member(:recommender_filter_expression, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommenderFilterExpression, name: "RecommenderFilterExpression", traits: {"smithy.api#required" => {}}))
+    GetRecommenderFilterResponse.add_member(:recommender_schema_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "RecommenderSchemaName"))
+    GetRecommenderFilterResponse.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedAt", traits: {"smithy.api#required" => {}}))
+    GetRecommenderFilterResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommenderFilterStatus, name: "Status", traits: {"smithy.api#required" => {}}))
+    GetRecommenderFilterResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveText, name: "Description"))
+    GetRecommenderFilterResponse.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "FailureReason"))
+    GetRecommenderFilterResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags", traits: {"smithy.api#required" => {}}))
+    GetRecommenderFilterResponse.type = Types::GetRecommenderFilterResponse
+    GetRecommenderRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "DomainName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetRecommenderRequest.add_member(:recommender_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "RecommenderName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetRecommenderRequest.add_member(:training_metrics_count, ::Smithy::Schema::Shapes::MemberShape.new(target: GetRecommenderRequestTrainingMetricsCountInteger, name: "TrainingMetricsCount", traits: {"smithy.api#httpQuery" => "training-metrics-count"}))
+    GetRecommenderRequest.type = Types::GetRecommenderRequest
+    GetRecommenderResponse.add_member(:recommender_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "RecommenderName", traits: {"smithy.api#required" => {}}))
+    GetRecommenderResponse.add_member(:recommender_recipe_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommenderRecipeName, name: "RecommenderRecipeName", traits: {"smithy.api#required" => {}}))
+    GetRecommenderResponse.add_member(:recommender_schema_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "RecommenderSchemaName"))
+    GetRecommenderResponse.add_member(:recommender_config, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommenderConfig, name: "RecommenderConfig"))
+    GetRecommenderResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveText, name: "Description"))
+    GetRecommenderResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommenderStatus, name: "Status"))
+    GetRecommenderResponse.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastUpdatedAt"))
+    GetRecommenderResponse.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedAt"))
+    GetRecommenderResponse.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "FailureReason"))
+    GetRecommenderResponse.add_member(:latest_recommender_update, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommenderUpdate, name: "LatestRecommenderUpdate"))
+    GetRecommenderResponse.add_member(:active_recommender_version_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommenderVersionName, name: "ActiveRecommenderVersionName"))
+    GetRecommenderResponse.add_member(:training_metrics, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingMetricsList, name: "TrainingMetrics"))
+    GetRecommenderResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags"))
+    GetRecommenderResponse.type = Types::GetRecommenderResponse
+    GetRecommenderSchemaRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "DomainName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetRecommenderSchemaRequest.add_member(:recommender_schema_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "RecommenderSchemaName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetRecommenderSchemaRequest.type = Types::GetRecommenderSchemaRequest
+    GetRecommenderSchemaResponse.add_member(:recommender_schema_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "RecommenderSchemaName", traits: {"smithy.api#required" => {}}))
+    GetRecommenderSchemaResponse.add_member(:fields, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommenderSchemaFields, name: "Fields", traits: {"smithy.api#required" => {}}))
+    GetRecommenderSchemaResponse.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedAt", traits: {"smithy.api#required" => {}}))
+    GetRecommenderSchemaResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommenderSchemaStatus, name: "Status", traits: {"smithy.api#required" => {}}))
+    GetRecommenderSchemaResponse.type = Types::GetRecommenderSchemaResponse
     GetSegmentDefinitionRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "DomainName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetSegmentDefinitionRequest.add_member(:segment_definition_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "SegmentDefinitionName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetSegmentDefinitionRequest.type = Types::GetSegmentDefinitionRequest
     GetSegmentDefinitionResponse.add_member(:segment_definition_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "SegmentDefinitionName", traits: {"smithy.api#jsonName" => "SegmentDefinitionName"}))
     GetSegmentDefinitionResponse.add_member(:display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String1To255, name: "DisplayName", traits: {"smithy.api#jsonName" => "DisplayName"}))
-    GetSegmentDefinitionResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveText, name: "Description", traits: {"smithy.api#jsonName" => "Description"}))
+    GetSegmentDefinitionResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString1To4000, name: "Description", traits: {"smithy.api#jsonName" => "Description"}))
     GetSegmentDefinitionResponse.add_member(:segment_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentGroup, name: "SegmentGroups", traits: {"smithy.api#jsonName" => "SegmentGroups"}))
+    GetSegmentDefinitionResponse.add_member(:segment_sort, ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentSort, name: "SegmentSort", traits: {"smithy.api#jsonName" => "SegmentSort"}))
     GetSegmentDefinitionResponse.add_member(:segment_definition_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentDefinitionArn, name: "SegmentDefinitionArn", traits: {"smithy.api#jsonName" => "SegmentDefinitionArn", "smithy.api#required" => {}}))
     GetSegmentDefinitionResponse.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedAt", traits: {"smithy.api#jsonName" => "CreatedAt"}))
     GetSegmentDefinitionResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags", traits: {"smithy.api#jsonName" => "Tags"}))
+    GetSegmentDefinitionResponse.add_member(:segment_sql_query, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString1To50000, name: "SegmentSqlQuery", traits: {"smithy.api#jsonName" => "SegmentSqlQuery"}))
+    GetSegmentDefinitionResponse.add_member(:segment_type, ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentType, name: "SegmentType", traits: {"smithy.api#jsonName" => "SegmentType"}))
     GetSegmentDefinitionResponse.type = Types::GetSegmentDefinitionResponse
     GetSegmentEstimateRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "DomainName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetSegmentEstimateRequest.add_member(:estimate_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String1To255, name: "EstimateId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -1286,6 +1710,7 @@ module Aws::CustomerProfiles
     GetSegmentMembershipResponse.add_member(:segment_definition_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "SegmentDefinitionName", traits: {"smithy.api#jsonName" => "SegmentDefinitionName"}))
     GetSegmentMembershipResponse.add_member(:profiles, ::Smithy::Schema::Shapes::MemberShape.new(target: Profiles, name: "Profiles", traits: {"smithy.api#jsonName" => "Profiles"}))
     GetSegmentMembershipResponse.add_member(:failures, ::Smithy::Schema::Shapes::MemberShape.new(target: Failures, name: "Failures", traits: {"smithy.api#jsonName" => "Failures"}))
+    GetSegmentMembershipResponse.add_member(:last_computed_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastComputedAt", traits: {"smithy.api#jsonName" => "LastComputedAt"}))
     GetSegmentMembershipResponse.type = Types::GetSegmentMembershipResponse
     GetSegmentSnapshotRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "DomainName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetSegmentSnapshotRequest.add_member(:segment_definition_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "SegmentDefinitionName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -1299,6 +1724,16 @@ module Aws::CustomerProfiles
     GetSegmentSnapshotResponse.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "RoleArn"))
     GetSegmentSnapshotResponse.add_member(:destination_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: String1To255, name: "DestinationUri"))
     GetSegmentSnapshotResponse.type = Types::GetSegmentSnapshotResponse
+    GetSegmentSubscriptionRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "DomainName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetSegmentSubscriptionRequest.add_member(:segment_definition_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "SegmentDefinitionName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetSegmentSubscriptionRequest.type = Types::GetSegmentSubscriptionRequest
+    GetSegmentSubscriptionResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentSubscriptionStatus, name: "Status", traits: {"smithy.api#jsonName" => "Status"}))
+    GetSegmentSubscriptionResponse.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String1To1000, name: "Message", traits: {"smithy.api#jsonName" => "Message"}))
+    GetSegmentSubscriptionResponse.add_member(:schedule_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleConfiguration, name: "ScheduleConfiguration", traits: {"smithy.api#jsonName" => "ScheduleConfiguration"}))
+    GetSegmentSubscriptionResponse.add_member(:scheduled_executions, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledExecutions, name: "ScheduledExecutions", traits: {"smithy.api#jsonName" => "ScheduledExecutions"}))
+    GetSegmentSubscriptionResponse.add_member(:started_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "StartedAt", traits: {"smithy.api#jsonName" => "StartedAt"}))
+    GetSegmentSubscriptionResponse.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastUpdatedAt", traits: {"smithy.api#jsonName" => "LastUpdatedAt"}))
+    GetSegmentSubscriptionResponse.type = Types::GetSegmentSubscriptionResponse
     GetSimilarProfilesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken", traits: {"smithy.api#httpQuery" => "next-token"}))
     GetSimilarProfilesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxSize100, name: "MaxResults", traits: {"smithy.api#httpQuery" => "max-results"}))
     GetSimilarProfilesRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "DomainName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -1313,6 +1748,17 @@ module Aws::CustomerProfiles
     GetSimilarProfilesResponse.add_member(:confidence_score, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "ConfidenceScore"))
     GetSimilarProfilesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken"))
     GetSimilarProfilesResponse.type = Types::GetSimilarProfilesResponse
+    GetStreamForSegmentsRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "DomainName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetStreamForSegmentsRequest.type = Types::GetStreamForSegmentsRequest
+    GetStreamForSegmentsResponse.add_member(:associated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "AssociatedAt", traits: {"smithy.api#jsonName" => "AssociatedAt"}))
+    GetStreamForSegmentsResponse.add_member(:associated_segments, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociatedSegmentsList, name: "AssociatedSegments", traits: {"smithy.api#jsonName" => "AssociatedSegments"}))
+    GetStreamForSegmentsResponse.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "DomainName", traits: {"smithy.api#jsonName" => "DomainName"}))
+    GetStreamForSegmentsResponse.add_member(:destination_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DestinationArnString, name: "DestinationArn", traits: {"smithy.api#jsonName" => "DestinationArn"}))
+    GetStreamForSegmentsResponse.add_member(:destination_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DestinationRoleArn, name: "DestinationRoleArn", traits: {"smithy.api#jsonName" => "DestinationRoleArn"}))
+    GetStreamForSegmentsResponse.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: EventSubscriptionState, name: "State", traits: {"smithy.api#jsonName" => "State"}))
+    GetStreamForSegmentsResponse.add_member(:disassociated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "DisassociatedAt", traits: {"smithy.api#jsonName" => "DisassociatedAt"}))
+    GetStreamForSegmentsResponse.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String1To255, name: "FailureReason", traits: {"smithy.api#jsonName" => "FailureReason"}))
+    GetStreamForSegmentsResponse.type = Types::GetStreamForSegmentsResponse
     GetUploadJobPathRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "DomainName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetUploadJobPathRequest.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "JobId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetUploadJobPathRequest.type = Types::GetUploadJobPathRequest
@@ -1385,8 +1831,12 @@ module Aws::CustomerProfiles
     IncludeOptions.add_member(:all, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALL", traits: {"smithy.api#enumValue" => "ALL"}))
     IncludeOptions.add_member(:any, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ANY", traits: {"smithy.api#enumValue" => "ANY"}))
     IncludeOptions.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
+    IncludedColumns.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    IncludedColumns.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnNamesList, name: "value"))
     IncrementalPullConfig.add_member(:datetime_type_field_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DatetimeTypeFieldName, name: "DatetimeTypeFieldName"))
     IncrementalPullConfig.type = Types::IncrementalPullConfig
+    InferenceConfig.add_member(:min_provisioned_tps, ::Smithy::Schema::Shapes::MemberShape.new(target: InferenceConfigMinProvisionedTPSInteger, name: "MinProvisionedTPS"))
+    InferenceConfig.type = Types::InferenceConfig
     IntegrationConfig.add_member(:appflow_integration, ::Smithy::Schema::Shapes::MemberShape.new(target: AppflowIntegration, name: "AppflowIntegration"))
     IntegrationConfig.type = Types::IntegrationConfig
     IntegrationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListIntegrationItem, name: "member"))
@@ -1408,6 +1858,7 @@ module Aws::CustomerProfiles
     JobStats.type = Types::JobStats
     KeyMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "key"))
     KeyMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectTypeKeyList, name: "value"))
+    KeyValuesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String1To255, name: "member"))
     LayoutItem.add_member(:layout_definition_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "LayoutDefinitionName", traits: {"smithy.api#required" => {}}))
     LayoutItem.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveText, name: "Description", traits: {"smithy.api#required" => {}}))
     LayoutItem.add_member(:display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DisplayName, name: "DisplayName", traits: {"smithy.api#required" => {}}))
@@ -1469,6 +1920,13 @@ module Aws::CustomerProfiles
     ListDomainLayoutsResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: LayoutList, name: "Items"))
     ListDomainLayoutsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken"))
     ListDomainLayoutsResponse.type = Types::ListDomainLayoutsResponse
+    ListDomainObjectTypesRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "DomainName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListDomainObjectTypesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxSize100, name: "MaxResults", traits: {"smithy.api#httpQuery" => "max-results"}))
+    ListDomainObjectTypesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken", traits: {"smithy.api#httpQuery" => "next-token"}))
+    ListDomainObjectTypesRequest.type = Types::ListDomainObjectTypesRequest
+    ListDomainObjectTypesResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainObjectTypesList, name: "Items"))
+    ListDomainObjectTypesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken"))
+    ListDomainObjectTypesResponse.type = Types::ListDomainObjectTypesResponse
     ListDomainsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken", traits: {"smithy.api#httpQuery" => "next-token"}))
     ListDomainsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxSize100, name: "MaxResults", traits: {"smithy.api#httpQuery" => "max-results"}))
     ListDomainsRequest.type = Types::ListDomainsRequest
@@ -1507,6 +1965,7 @@ module Aws::CustomerProfiles
     ListIntegrationItem.add_member(:is_unstructured, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionalBoolean, name: "IsUnstructured"))
     ListIntegrationItem.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "RoleArn"))
     ListIntegrationItem.add_member(:event_trigger_names, ::Smithy::Schema::Shapes::MemberShape.new(target: EventTriggerNames, name: "EventTriggerNames"))
+    ListIntegrationItem.add_member(:scope, ::Smithy::Schema::Shapes::MemberShape.new(target: Scope, name: "Scope"))
     ListIntegrationItem.type = Types::ListIntegrationItem
     ListIntegrationsRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "DomainName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListIntegrationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken", traits: {"smithy.api#httpQuery" => "next-token"}))
@@ -1519,6 +1978,19 @@ module Aws::CustomerProfiles
     ListObjectTypeAttributeItem.add_member(:attribute_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "AttributeName", traits: {"smithy.api#required" => {}}))
     ListObjectTypeAttributeItem.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastUpdatedAt", traits: {"smithy.api#required" => {}}))
     ListObjectTypeAttributeItem.type = Types::ListObjectTypeAttributeItem
+    ListObjectTypeAttributeValuesItem.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString1To1000, name: "Value", traits: {"smithy.api#required" => {}}))
+    ListObjectTypeAttributeValuesItem.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastUpdatedAt", traits: {"smithy.api#required" => {}}))
+    ListObjectTypeAttributeValuesItem.type = Types::ListObjectTypeAttributeValuesItem
+    ListObjectTypeAttributeValuesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListObjectTypeAttributeValuesItem, name: "member"))
+    ListObjectTypeAttributeValuesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken", traits: {"smithy.api#httpQuery" => "next-token"}))
+    ListObjectTypeAttributeValuesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxSize100, name: "MaxResults", traits: {"smithy.api#httpQuery" => "max-results"}))
+    ListObjectTypeAttributeValuesRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "DomainName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListObjectTypeAttributeValuesRequest.add_member(:object_type_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TypeName, name: "ObjectTypeName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListObjectTypeAttributeValuesRequest.add_member(:attribute_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String1To1000, name: "AttributeName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListObjectTypeAttributeValuesRequest.type = Types::ListObjectTypeAttributeValuesRequest
+    ListObjectTypeAttributeValuesResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: ListObjectTypeAttributeValuesList, name: "Items"))
+    ListObjectTypeAttributeValuesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken"))
+    ListObjectTypeAttributeValuesResponse.type = Types::ListObjectTypeAttributeValuesResponse
     ListObjectTypeAttributesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListObjectTypeAttributeItem, name: "member"))
     ListObjectTypeAttributesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken", traits: {"smithy.api#httpQuery" => "next-token"}))
     ListObjectTypeAttributesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxSize100, name: "MaxResults", traits: {"smithy.api#httpQuery" => "max-results"}))
@@ -1545,6 +2017,7 @@ module Aws::CustomerProfiles
     ListProfileObjectTypeItem.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastUpdatedAt"))
     ListProfileObjectTypeItem.add_member(:max_profile_object_count, ::Smithy::Schema::Shapes::MemberShape.new(target: MinSize1, name: "MaxProfileObjectCount"))
     ListProfileObjectTypeItem.add_member(:max_available_profile_object_count, ::Smithy::Schema::Shapes::MemberShape.new(target: MinSize0, name: "MaxAvailableProfileObjectCount"))
+    ListProfileObjectTypeItem.add_member(:source_priority, ::Smithy::Schema::Shapes::MemberShape.new(target: MinSize1, name: "SourcePriority"))
     ListProfileObjectTypeItem.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags"))
     ListProfileObjectTypeItem.type = Types::ListProfileObjectTypeItem
     ListProfileObjectTypeTemplateItem.add_member(:template_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "TemplateId"))
@@ -1578,6 +2051,33 @@ module Aws::CustomerProfiles
     ListProfileObjectsResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfileObjectList, name: "Items"))
     ListProfileObjectsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken"))
     ListProfileObjectsResponse.type = Types::ListProfileObjectsResponse
+    ListRecommenderFiltersRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "DomainName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListRecommenderFiltersRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxSize100, name: "MaxResults", traits: {"smithy.api#httpQuery" => "max-results"}))
+    ListRecommenderFiltersRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken", traits: {"smithy.api#httpQuery" => "next-token"}))
+    ListRecommenderFiltersRequest.type = Types::ListRecommenderFiltersRequest
+    ListRecommenderFiltersResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken"))
+    ListRecommenderFiltersResponse.add_member(:recommender_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommenderFilterSummaryList, name: "RecommenderFilters"))
+    ListRecommenderFiltersResponse.type = Types::ListRecommenderFiltersResponse
+    ListRecommenderRecipesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ListRecommenderRecipesRequestMaxResultsInteger, name: "MaxResults", traits: {"smithy.api#httpQuery" => "max-results"}))
+    ListRecommenderRecipesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken", traits: {"smithy.api#httpQuery" => "next-token"}))
+    ListRecommenderRecipesRequest.type = Types::ListRecommenderRecipesRequest
+    ListRecommenderRecipesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken"))
+    ListRecommenderRecipesResponse.add_member(:recommender_recipes, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommenderRecipesList, name: "RecommenderRecipes"))
+    ListRecommenderRecipesResponse.type = Types::ListRecommenderRecipesResponse
+    ListRecommenderSchemasRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "DomainName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListRecommenderSchemasRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxSize100, name: "MaxResults", traits: {"smithy.api#httpQuery" => "max-results"}))
+    ListRecommenderSchemasRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken", traits: {"smithy.api#httpQuery" => "next-token"}))
+    ListRecommenderSchemasRequest.type = Types::ListRecommenderSchemasRequest
+    ListRecommenderSchemasResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken"))
+    ListRecommenderSchemasResponse.add_member(:recommender_schemas, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommenderSchemaSummaryList, name: "RecommenderSchemas"))
+    ListRecommenderSchemasResponse.type = Types::ListRecommenderSchemasResponse
+    ListRecommendersRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "DomainName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListRecommendersRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ListRecommendersRequestMaxResultsInteger, name: "MaxResults", traits: {"smithy.api#httpQuery" => "max-results"}))
+    ListRecommendersRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken", traits: {"smithy.api#httpQuery" => "next-token"}))
+    ListRecommendersRequest.type = Types::ListRecommendersRequest
+    ListRecommendersResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken"))
+    ListRecommendersResponse.add_member(:recommenders, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommenderSummaryList, name: "Recommenders"))
+    ListRecommendersResponse.type = Types::ListRecommendersResponse
     ListRuleBasedMatchesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken", traits: {"smithy.api#httpQuery" => "next-token"}))
     ListRuleBasedMatchesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxSize100, name: "MaxResults", traits: {"smithy.api#httpQuery" => "max-results"}))
     ListRuleBasedMatchesRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "DomainName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -1592,6 +2092,14 @@ module Aws::CustomerProfiles
     ListSegmentDefinitionsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken", traits: {"smithy.api#jsonName" => "NextToken"}))
     ListSegmentDefinitionsResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentDefinitionsList, name: "Items", traits: {"smithy.api#jsonName" => "Items"}))
     ListSegmentDefinitionsResponse.type = Types::ListSegmentDefinitionsResponse
+    ListSegmentSubscriptionEventsRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "DomainName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListSegmentSubscriptionEventsRequest.add_member(:segment_definition_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "SegmentDefinitionName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListSegmentSubscriptionEventsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxSize100, name: "MaxResults", traits: {"smithy.api#httpQuery" => "max-results"}))
+    ListSegmentSubscriptionEventsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken", traits: {"smithy.api#httpQuery" => "next-token"}))
+    ListSegmentSubscriptionEventsRequest.type = Types::ListSegmentSubscriptionEventsRequest
+    ListSegmentSubscriptionEventsResponse.add_member(:events, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionEventsList, name: "Events", traits: {"smithy.api#jsonName" => "Events"}))
+    ListSegmentSubscriptionEventsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken", traits: {"smithy.api#jsonName" => "NextToken"}))
+    ListSegmentSubscriptionEventsResponse.type = Types::ListSegmentSubscriptionEventsResponse
     ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TagArn, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
     ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
@@ -1670,6 +2178,11 @@ module Aws::CustomerProfiles
     MergeProfilesRequest.type = Types::MergeProfilesRequest
     MergeProfilesResponse.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message"))
     MergeProfilesResponse.type = Types::MergeProfilesResponse
+    MetadataColumnsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataColumnName, name: "member"))
+    MetadataConfig.add_member(:metadata_columns, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataColumnsList, name: "MetadataColumns"))
+    MetadataConfig.type = Types::MetadataConfig
+    Metrics.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingMetricName, name: "key"))
+    Metrics.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "value"))
     ObjectAttribute.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: Text, name: "Source"))
     ObjectAttribute.add_member(:field_name, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldName, name: "FieldName"))
     ObjectAttribute.add_member(:comparison_operator, ::Smithy::Schema::Shapes::MemberShape.new(target: ComparisonOperator, name: "ComparisonOperator", traits: {"smithy.api#required" => {}}))
@@ -1712,10 +2225,11 @@ module Aws::CustomerProfiles
     PartyType.add_member(:business, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BUSINESS", traits: {"smithy.api#enumValue" => "BUSINESS"}))
     PartyType.add_member(:other, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OTHER", traits: {"smithy.api#enumValue" => "OTHER"}))
     Period.add_member(:unit, ::Smithy::Schema::Shapes::MemberShape.new(target: PeriodUnit, name: "Unit", traits: {"smithy.api#required" => {}}))
-    Period.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxSize24, name: "Value", traits: {"smithy.api#required" => {}}))
+    Period.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxSize60, name: "Value", traits: {"smithy.api#required" => {}}))
     Period.add_member(:max_invocations_per_profile, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxSize1000, name: "MaxInvocationsPerProfile"))
     Period.add_member(:unlimited, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Unlimited", traits: {"smithy.api#default" => false}))
     Period.type = Types::Period
+    PeriodUnit.add_member(:minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MINUTES", traits: {"smithy.api#enumValue" => "MINUTES"}))
     PeriodUnit.add_member(:hours, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HOURS", traits: {"smithy.api#enumValue" => "HOURS"}))
     PeriodUnit.add_member(:days, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DAYS", traits: {"smithy.api#enumValue" => "DAYS"}))
     PeriodUnit.add_member(:weeks, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WEEKS", traits: {"smithy.api#enumValue" => "WEEKS"}))
@@ -1818,14 +2332,30 @@ module Aws::CustomerProfiles
     ProfileTypeDimensionType.add_member(:exclusive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXCLUSIVE", traits: {"smithy.api#enumValue" => "EXCLUSIVE"}))
     ProfileTypeValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfileType, name: "member"))
     Profiles.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfileQueryResult, name: "member"))
+    PutDomainObjectTypeRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "DomainName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    PutDomainObjectTypeRequest.add_member(:object_type_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TypeName, name: "ObjectTypeName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    PutDomainObjectTypeRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString1To10000, name: "Description"))
+    PutDomainObjectTypeRequest.add_member(:encryption_key, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionKey, name: "EncryptionKey"))
+    PutDomainObjectTypeRequest.add_member(:fields, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainObjectTypeFields, name: "Fields", traits: {"smithy.api#required" => {}}))
+    PutDomainObjectTypeRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags"))
+    PutDomainObjectTypeRequest.type = Types::PutDomainObjectTypeRequest
+    PutDomainObjectTypeResponse.add_member(:object_type_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TypeName, name: "ObjectTypeName"))
+    PutDomainObjectTypeResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString1To10000, name: "Description"))
+    PutDomainObjectTypeResponse.add_member(:encryption_key, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionKey, name: "EncryptionKey"))
+    PutDomainObjectTypeResponse.add_member(:fields, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainObjectTypeFields, name: "Fields"))
+    PutDomainObjectTypeResponse.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedAt"))
+    PutDomainObjectTypeResponse.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastUpdatedAt"))
+    PutDomainObjectTypeResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags"))
+    PutDomainObjectTypeResponse.type = Types::PutDomainObjectTypeResponse
     PutIntegrationRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "DomainName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     PutIntegrationRequest.add_member(:uri, ::Smithy::Schema::Shapes::MemberShape.new(target: String1To255, name: "Uri"))
     PutIntegrationRequest.add_member(:object_type_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TypeName, name: "ObjectTypeName"))
+    PutIntegrationRequest.add_member(:object_type_names, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectTypeNames, name: "ObjectTypeNames"))
     PutIntegrationRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags"))
     PutIntegrationRequest.add_member(:flow_definition, ::Smithy::Schema::Shapes::MemberShape.new(target: FlowDefinition, name: "FlowDefinition"))
-    PutIntegrationRequest.add_member(:object_type_names, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectTypeNames, name: "ObjectTypeNames"))
     PutIntegrationRequest.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "RoleArn"))
     PutIntegrationRequest.add_member(:event_trigger_names, ::Smithy::Schema::Shapes::MemberShape.new(target: EventTriggerNames, name: "EventTriggerNames"))
+    PutIntegrationRequest.add_member(:scope, ::Smithy::Schema::Shapes::MemberShape.new(target: Scope, name: "Scope"))
     PutIntegrationRequest.type = Types::PutIntegrationRequest
     PutIntegrationResponse.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "DomainName", traits: {"smithy.api#required" => {}}))
     PutIntegrationResponse.add_member(:uri, ::Smithy::Schema::Shapes::MemberShape.new(target: String1To255, name: "Uri", traits: {"smithy.api#required" => {}}))
@@ -1838,6 +2368,7 @@ module Aws::CustomerProfiles
     PutIntegrationResponse.add_member(:is_unstructured, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionalBoolean, name: "IsUnstructured"))
     PutIntegrationResponse.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "RoleArn"))
     PutIntegrationResponse.add_member(:event_trigger_names, ::Smithy::Schema::Shapes::MemberShape.new(target: EventTriggerNames, name: "EventTriggerNames"))
+    PutIntegrationResponse.add_member(:scope, ::Smithy::Schema::Shapes::MemberShape.new(target: Scope, name: "Scope"))
     PutIntegrationResponse.type = Types::PutIntegrationResponse
     PutProfileObjectRequest.add_member(:object_type_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TypeName, name: "ObjectTypeName", traits: {"smithy.api#required" => {}}))
     PutProfileObjectRequest.add_member(:object, ::Smithy::Schema::Shapes::MemberShape.new(target: StringifiedJson, name: "Object", traits: {"smithy.api#required" => {}}))
@@ -1854,6 +2385,7 @@ module Aws::CustomerProfiles
     PutProfileObjectTypeRequest.add_member(:allow_profile_creation, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "AllowProfileCreation", traits: {"smithy.api#default" => false}))
     PutProfileObjectTypeRequest.add_member(:source_last_updated_timestamp_format, ::Smithy::Schema::Shapes::MemberShape.new(target: String1To255, name: "SourceLastUpdatedTimestampFormat"))
     PutProfileObjectTypeRequest.add_member(:max_profile_object_count, ::Smithy::Schema::Shapes::MemberShape.new(target: MinSize1, name: "MaxProfileObjectCount"))
+    PutProfileObjectTypeRequest.add_member(:source_priority, ::Smithy::Schema::Shapes::MemberShape.new(target: MinSize1, name: "SourcePriority"))
     PutProfileObjectTypeRequest.add_member(:fields, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldMap, name: "Fields"))
     PutProfileObjectTypeRequest.add_member(:keys, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyMap, name: "Keys"))
     PutProfileObjectTypeRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags"))
@@ -1867,12 +2399,21 @@ module Aws::CustomerProfiles
     PutProfileObjectTypeResponse.add_member(:source_last_updated_timestamp_format, ::Smithy::Schema::Shapes::MemberShape.new(target: String1To255, name: "SourceLastUpdatedTimestampFormat"))
     PutProfileObjectTypeResponse.add_member(:max_profile_object_count, ::Smithy::Schema::Shapes::MemberShape.new(target: MinSize1, name: "MaxProfileObjectCount"))
     PutProfileObjectTypeResponse.add_member(:max_available_profile_object_count, ::Smithy::Schema::Shapes::MemberShape.new(target: MinSize0, name: "MaxAvailableProfileObjectCount"))
+    PutProfileObjectTypeResponse.add_member(:source_priority, ::Smithy::Schema::Shapes::MemberShape.new(target: MinSize1, name: "SourcePriority"))
     PutProfileObjectTypeResponse.add_member(:fields, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldMap, name: "Fields"))
     PutProfileObjectTypeResponse.add_member(:keys, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyMap, name: "Keys"))
     PutProfileObjectTypeResponse.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedAt"))
     PutProfileObjectTypeResponse.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastUpdatedAt"))
     PutProfileObjectTypeResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags"))
     PutProfileObjectTypeResponse.type = Types::PutProfileObjectTypeResponse
+    PutSegmentSubscriptionRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "DomainName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    PutSegmentSubscriptionRequest.add_member(:segment_definition_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "SegmentDefinitionName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    PutSegmentSubscriptionRequest.add_member(:schedule_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleConfiguration, name: "ScheduleConfiguration"))
+    PutSegmentSubscriptionRequest.type = Types::PutSegmentSubscriptionRequest
+    PutSegmentSubscriptionResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentSubscriptionStatus, name: "Status", traits: {"smithy.api#jsonName" => "Status"}))
+    PutSegmentSubscriptionResponse.add_member(:schedule_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleConfiguration, name: "ScheduleConfiguration", traits: {"smithy.api#jsonName" => "ScheduleConfiguration"}))
+    PutSegmentSubscriptionResponse.add_member(:started_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "StartedAt", traits: {"smithy.api#jsonName" => "StartedAt"}))
+    PutSegmentSubscriptionResponse.type = Types::PutSegmentSubscriptionResponse
     QueryResult.add_member(:present, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRESENT", traits: {"smithy.api#enumValue" => "PRESENT"}))
     QueryResult.add_member(:absent, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ABSENT", traits: {"smithy.api#enumValue" => "ABSENT"}))
     Range.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Value, name: "Value", traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => 0}))
@@ -1893,6 +2434,108 @@ module Aws::CustomerProfiles
     ReadinessStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
     ReadinessStatus.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
     ReadinessStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    Recommendation.add_member(:catalog_item, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogItem, name: "CatalogItem"))
+    Recommendation.add_member(:score, ::Smithy::Schema::Shapes::MemberShape.new(target: Double0To1, name: "Score"))
+    Recommendation.type = Types::Recommendation
+    RecommendationDiversityConfig.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionalBoolean, name: "Enabled", traits: {"smithy.api#required" => {}}))
+    RecommendationDiversityConfig.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: DiversityValuesMap, name: "Values"))
+    RecommendationDiversityConfig.type = Types::RecommendationDiversityConfig
+    RecommendationMetadata.add_member(:columns, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataColumnsList, name: "Columns"))
+    RecommendationMetadata.type = Types::RecommendationMetadata
+    Recommendations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Recommendation, name: "member"))
+    Recommender.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "Name", traits: {"smithy.api#required" => {}}))
+    Recommender.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommenderFilters, name: "Filters"))
+    Recommender.add_member(:promotional_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommenderPromotionalFilters, name: "PromotionalFilters"))
+    Recommender.type = Types::Recommender
+    RecommenderConfig.add_member(:events_config, ::Smithy::Schema::Shapes::MemberShape.new(target: EventsConfig, name: "EventsConfig"))
+    RecommenderConfig.add_member(:training_frequency, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommenderConfigTrainingFrequencyInteger, name: "TrainingFrequency"))
+    RecommenderConfig.add_member(:inference_config, ::Smithy::Schema::Shapes::MemberShape.new(target: InferenceConfig, name: "InferenceConfig"))
+    RecommenderConfig.add_member(:included_columns, ::Smithy::Schema::Shapes::MemberShape.new(target: IncludedColumns, name: "IncludedColumns"))
+    RecommenderConfig.add_member(:excluded_columns, ::Smithy::Schema::Shapes::MemberShape.new(target: IncludedColumns, name: "ExcludedColumns"))
+    RecommenderConfig.add_member(:diversity_config, ::Smithy::Schema::Shapes::MemberShape.new(target: DiversityConfig, name: "DiversityConfig"))
+    RecommenderConfig.type = Types::RecommenderConfig
+    RecommenderContext.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ContextKey, name: "key"))
+    RecommenderContext.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String1To255, name: "value"))
+    RecommenderFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "Name"))
+    RecommenderFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommenderFilterValues, name: "Values"))
+    RecommenderFilter.type = Types::RecommenderFilter
+    RecommenderFilterStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
+    RecommenderFilterStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
+    RecommenderFilterStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
+    RecommenderFilterStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    RecommenderFilterStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
+    RecommenderFilterSummary.add_member(:recommender_filter_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommenderFilterName, name: "RecommenderFilterName"))
+    RecommenderFilterSummary.add_member(:recommender_schema_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "RecommenderSchemaName"))
+    RecommenderFilterSummary.add_member(:recommender_filter_expression, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommenderFilterExpression, name: "RecommenderFilterExpression"))
+    RecommenderFilterSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedAt"))
+    RecommenderFilterSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveText, name: "Description"))
+    RecommenderFilterSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommenderFilterStatus, name: "Status"))
+    RecommenderFilterSummary.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "FailureReason"))
+    RecommenderFilterSummary.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags"))
+    RecommenderFilterSummary.type = Types::RecommenderFilterSummary
+    RecommenderFilterSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommenderFilterSummary, name: "member"))
+    RecommenderFilterValues.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommenderFilterAttributeName, name: "key"))
+    RecommenderFilterValues.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommenderFilterAttributeValue, name: "value"))
+    RecommenderFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommenderFilter, name: "member"))
+    RecommenderPromotionalFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "Name"))
+    RecommenderPromotionalFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommenderFilterValues, name: "Values"))
+    RecommenderPromotionalFilter.add_member(:promotion_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "PromotionName"))
+    RecommenderPromotionalFilter.add_member(:percent_promoted_items, ::Smithy::Schema::Shapes::MemberShape.new(target: PercentPromotedItems, name: "PercentPromotedItems"))
+    RecommenderPromotionalFilter.type = Types::RecommenderPromotionalFilter
+    RecommenderPromotionalFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommenderPromotionalFilter, name: "member"))
+    RecommenderRecipe.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommenderRecipeName, name: "name"))
+    RecommenderRecipe.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "description"))
+    RecommenderRecipe.type = Types::RecommenderRecipe
+    RecommenderRecipeName.add_member(:recommended_for_you, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RECOMMENDED_FOR_YOU", traits: {"smithy.api#enumValue" => "recommended-for-you"}))
+    RecommenderRecipeName.add_member(:similar_items, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SIMILAR_ITEMS", traits: {"smithy.api#enumValue" => "similar-items"}))
+    RecommenderRecipeName.add_member(:frequently_paired_items, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FREQUENTLY_PAIRED_ITEMS", traits: {"smithy.api#enumValue" => "frequently-paired-items"}))
+    RecommenderRecipeName.add_member(:popular_items, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POPULAR_ITEMS", traits: {"smithy.api#enumValue" => "popular-items"}))
+    RecommenderRecipeName.add_member(:trending_now, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TRENDING_NOW", traits: {"smithy.api#enumValue" => "trending-now"}))
+    RecommenderRecipeName.add_member(:personalized_ranking, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PERSONALIZED_RANKING", traits: {"smithy.api#enumValue" => "personalized-ranking"}))
+    RecommenderRecipesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommenderRecipe, name: "member"))
+    RecommenderSchemaField.add_member(:target_field_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Text, name: "TargetFieldName", traits: {"smithy.api#required" => {}}))
+    RecommenderSchemaField.add_member(:content_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ContentType, name: "ContentType"))
+    RecommenderSchemaField.add_member(:feature_type, ::Smithy::Schema::Shapes::MemberShape.new(target: FeatureType, name: "FeatureType"))
+    RecommenderSchemaField.type = Types::RecommenderSchemaField
+    RecommenderSchemaFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommenderSchemaField, name: "member"))
+    RecommenderSchemaFields.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    RecommenderSchemaFields.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommenderSchemaFieldList, name: "value"))
+    RecommenderSchemaStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
+    RecommenderSchemaStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
+    RecommenderSchemaSummary.add_member(:recommender_schema_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "RecommenderSchemaName", traits: {"smithy.api#required" => {}}))
+    RecommenderSchemaSummary.add_member(:fields, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommenderSchemaFields, name: "Fields", traits: {"smithy.api#required" => {}}))
+    RecommenderSchemaSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedAt", traits: {"smithy.api#required" => {}}))
+    RecommenderSchemaSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommenderSchemaStatus, name: "Status", traits: {"smithy.api#required" => {}}))
+    RecommenderSchemaSummary.type = Types::RecommenderSchemaSummary
+    RecommenderSchemaSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommenderSchemaSummary, name: "member"))
+    RecommenderStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
+    RecommenderStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
+    RecommenderStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
+    RecommenderStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    RecommenderStatus.add_member(:stopping, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STOPPING", traits: {"smithy.api#enumValue" => "STOPPING"}))
+    RecommenderStatus.add_member(:inactive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INACTIVE", traits: {"smithy.api#enumValue" => "INACTIVE"}))
+    RecommenderStatus.add_member(:starting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STARTING", traits: {"smithy.api#enumValue" => "STARTING"}))
+    RecommenderStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
+    RecommenderSummary.add_member(:recommender_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "RecommenderName"))
+    RecommenderSummary.add_member(:recipe_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommenderRecipeName, name: "RecipeName"))
+    RecommenderSummary.add_member(:recommender_schema_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "RecommenderSchemaName"))
+    RecommenderSummary.add_member(:recommender_config, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommenderConfig, name: "RecommenderConfig"))
+    RecommenderSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedAt"))
+    RecommenderSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveText, name: "Description"))
+    RecommenderSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommenderStatus, name: "Status"))
+    RecommenderSummary.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastUpdatedAt"))
+    RecommenderSummary.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags"))
+    RecommenderSummary.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "FailureReason"))
+    RecommenderSummary.add_member(:latest_recommender_update, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommenderUpdate, name: "LatestRecommenderUpdate"))
+    RecommenderSummary.type = Types::RecommenderSummary
+    RecommenderSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommenderSummary, name: "member"))
+    RecommenderUpdate.add_member(:recommender_config, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommenderConfig, name: "RecommenderConfig"))
+    RecommenderUpdate.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommenderStatus, name: "Status"))
+    RecommenderUpdate.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedAt"))
+    RecommenderUpdate.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastUpdatedAt"))
+    RecommenderUpdate.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "FailureReason"))
+    RecommenderUpdate.add_member(:recommender_version_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommenderVersionName, name: "RecommenderVersionName"))
+    RecommenderUpdate.type = Types::RecommenderUpdate
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
     ResultsSummary.add_member(:updated_records, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionalLong, name: "UpdatedRecords", traits: {"smithy.api#jsonName" => "UpdatedRecords"}))
@@ -1973,6 +2616,13 @@ module Aws::CustomerProfiles
     SalesforceSourceProperties.add_member(:enable_dynamic_field_update, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "EnableDynamicFieldUpdate", traits: {"smithy.api#default" => false}))
     SalesforceSourceProperties.add_member(:include_deleted_records, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "IncludeDeletedRecords", traits: {"smithy.api#default" => false}))
     SalesforceSourceProperties.type = Types::SalesforceSourceProperties
+    ScheduleConfiguration.add_member(:interval, ::Smithy::Schema::Shapes::MemberShape.new(target: IntervalValue, name: "Interval", traits: {"smithy.api#jsonName" => "Interval", "smithy.api#required" => {}}))
+    ScheduleConfiguration.add_member(:unit, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleConfigurationUnit, name: "Unit", traits: {"smithy.api#jsonName" => "Unit"}))
+    ScheduleConfiguration.type = Types::ScheduleConfiguration
+    ScheduleConfigurationUnit.add_member(:hourly, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HOURLY", traits: {"smithy.api#enumValue" => "HOURLY"}))
+    ScheduledExecutions.add_member(:next_executed_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "NextExecutedAt", traits: {"smithy.api#jsonName" => "NextExecutedAt"}))
+    ScheduledExecutions.add_member(:last_executed_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastExecutedAt", traits: {"smithy.api#jsonName" => "LastExecutedAt"}))
+    ScheduledExecutions.type = Types::ScheduledExecutions
     ScheduledTriggerProperties.add_member(:schedule_expression, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleExpression, name: "ScheduleExpression", traits: {"smithy.api#required" => {}}))
     ScheduledTriggerProperties.add_member(:data_pull_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: DataPullMode, name: "DataPullMode"))
     ScheduledTriggerProperties.add_member(:schedule_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "ScheduleStartTime"))
@@ -1981,6 +2631,8 @@ module Aws::CustomerProfiles
     ScheduledTriggerProperties.add_member(:schedule_offset, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleOffset, name: "ScheduleOffset", traits: {"smithy.api#default" => nil}))
     ScheduledTriggerProperties.add_member(:first_execution_from, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "FirstExecutionFrom"))
     ScheduledTriggerProperties.type = Types::ScheduledTriggerProperties
+    Scope.add_member(:profile, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PROFILE", traits: {"smithy.api#enumValue" => "PROFILE"}))
+    Scope.add_member(:domain, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DOMAIN", traits: {"smithy.api#enumValue" => "DOMAIN"}))
     SearchProfilesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken", traits: {"smithy.api#httpQuery" => "next-token"}))
     SearchProfilesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxSize100, name: "MaxResults", traits: {"smithy.api#httpQuery" => "max-results"}))
     SearchProfilesRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "DomainName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -1992,12 +2644,26 @@ module Aws::CustomerProfiles
     SearchProfilesResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfileList, name: "Items"))
     SearchProfilesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken"))
     SearchProfilesResponse.type = Types::SearchProfilesResponse
+    SearchRecommendationsRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "DomainName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    SearchRecommendationsRequest.add_member(:key_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "KeyName", traits: {"smithy.api#required" => {}}))
+    SearchRecommendationsRequest.add_member(:key_values, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyValuesList, name: "KeyValues", traits: {"smithy.api#required" => {}}))
+    SearchRecommendationsRequest.add_member(:recommender, ::Smithy::Schema::Shapes::MemberShape.new(target: Recommender, name: "Recommender", traits: {"smithy.api#required" => {}}))
+    SearchRecommendationsRequest.add_member(:candidate_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: CandidateIdList, name: "CandidateIds"))
+    SearchRecommendationsRequest.add_member(:context, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommenderContext, name: "Context"))
+    SearchRecommendationsRequest.add_member(:diversity, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationDiversityConfig, name: "Diversity"))
+    SearchRecommendationsRequest.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationMetadata, name: "Metadata"))
+    SearchRecommendationsRequest.add_member(:max_recommendations, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxSize500, name: "MaxRecommendations"))
+    SearchRecommendationsRequest.type = Types::SearchRecommendationsRequest
+    SearchRecommendationsResponse.add_member(:profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "ProfileId"))
+    SearchRecommendationsResponse.add_member(:recommendations, ::Smithy::Schema::Shapes::MemberShape.new(target: Recommendations, name: "Recommendations"))
+    SearchRecommendationsResponse.type = Types::SearchRecommendationsResponse
     SegmentDefinitionItem.add_member(:segment_definition_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "SegmentDefinitionName", traits: {"smithy.api#jsonName" => "SegmentDefinitionName"}))
     SegmentDefinitionItem.add_member(:display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String1To255, name: "DisplayName", traits: {"smithy.api#jsonName" => "DisplayName"}))
-    SegmentDefinitionItem.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveText, name: "Description", traits: {"smithy.api#jsonName" => "Description"}))
+    SegmentDefinitionItem.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString1To4000, name: "Description", traits: {"smithy.api#jsonName" => "Description"}))
     SegmentDefinitionItem.add_member(:segment_definition_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentDefinitionArn, name: "SegmentDefinitionArn", traits: {"smithy.api#jsonName" => "SegmentDefinitionArn"}))
     SegmentDefinitionItem.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedAt", traits: {"smithy.api#jsonName" => "CreatedAt"}))
     SegmentDefinitionItem.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags", traits: {"smithy.api#jsonName" => "Tags"}))
+    SegmentDefinitionItem.add_member(:segment_type, ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentType, name: "SegmentType", traits: {"smithy.api#jsonName" => "SegmentType"}))
     SegmentDefinitionItem.type = Types::SegmentDefinitionItem
     SegmentDefinitionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentDefinitionItem, name: "member"))
     SegmentGroup.add_member(:groups, ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentGroupList, name: "Groups", traits: {"smithy.api#jsonName" => "Groups"}))
@@ -2010,6 +2676,19 @@ module Aws::CustomerProfiles
     SegmentSnapshotStatus.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
     SegmentSnapshotStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
     SegmentSnapshotStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    SegmentSort.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: SortAttributeList, name: "Attributes", traits: {"smithy.api#jsonName" => "Attributes", "smithy.api#required" => {}}))
+    SegmentSort.type = Types::SegmentSort
+    SegmentSortDataType.add_member(:string, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STRING", traits: {"smithy.api#enumValue" => "STRING"}))
+    SegmentSortDataType.add_member(:number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NUMBER", traits: {"smithy.api#enumValue" => "NUMBER"}))
+    SegmentSortDataType.add_member(:date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DATE", traits: {"smithy.api#enumValue" => "DATE"}))
+    SegmentSortOrder.add_member(:asc, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ASC", traits: {"smithy.api#enumValue" => "ASC"}))
+    SegmentSortOrder.add_member(:desc, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DESC", traits: {"smithy.api#enumValue" => "DESC"}))
+    SegmentSubscriptionStatus.add_member(:starting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STARTING", traits: {"smithy.api#enumValue" => "STARTING"}))
+    SegmentSubscriptionStatus.add_member(:running, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RUNNING", traits: {"smithy.api#enumValue" => "RUNNING"}))
+    SegmentSubscriptionStatus.add_member(:stopped, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STOPPED", traits: {"smithy.api#enumValue" => "STOPPED"}))
+    SegmentSubscriptionStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    SegmentType.add_member(:classic, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLASSIC", traits: {"smithy.api#enumValue" => "CLASSIC"}))
+    SegmentType.add_member(:enhanced, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENHANCED", traits: {"smithy.api#enumValue" => "ENHANCED"}))
     ServiceNowConnectorOperator.add_member(:projection, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PROJECTION", traits: {"smithy.api#enumValue" => "PROJECTION"}))
     ServiceNowConnectorOperator.add_member(:contains, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONTAINS", traits: {"smithy.api#enumValue" => "CONTAINS"}))
     ServiceNowConnectorOperator.add_member(:less_than, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LESS_THAN", traits: {"smithy.api#enumValue" => "LESS_THAN"}))
@@ -2033,6 +2712,14 @@ module Aws::CustomerProfiles
     ServiceNowConnectorOperator.add_member(:no_op, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NO_OP", traits: {"smithy.api#enumValue" => "NO_OP"}))
     ServiceNowSourceProperties.add_member(:object, ::Smithy::Schema::Shapes::MemberShape.new(target: Object, name: "Object", traits: {"smithy.api#required" => {}}))
     ServiceNowSourceProperties.type = Types::ServiceNowSourceProperties
+    SortAttribute.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldName, name: "Name", traits: {"smithy.api#jsonName" => "Name", "smithy.api#required" => {}}))
+    SortAttribute.add_member(:data_type, ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentSortDataType, name: "DataType", traits: {"smithy.api#jsonName" => "DataType"}))
+    SortAttribute.add_member(:order, ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentSortOrder, name: "Order", traits: {"smithy.api#jsonName" => "Order", "smithy.api#required" => {}}))
+    SortAttribute.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: SortAttributeType, name: "Type", traits: {"smithy.api#default" => "PROFILE", "smithy.api#jsonName" => "Type"}))
+    SortAttribute.type = Types::SortAttribute
+    SortAttributeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SortAttribute, name: "member"))
+    SortAttributeType.add_member(:profile, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PROFILE", traits: {"smithy.api#enumValue" => "PROFILE"}))
+    SortAttributeType.add_member(:calculated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CALCULATED", traits: {"smithy.api#enumValue" => "CALCULATED"}))
     SourceConnectorProperties.add_member(:marketo, ::Smithy::Schema::Shapes::MemberShape.new(target: MarketoSourceProperties, name: "Marketo"))
     SourceConnectorProperties.add_member(:s3, ::Smithy::Schema::Shapes::MemberShape.new(target: S3SourceProperties, name: "S3"))
     SourceConnectorProperties.add_member(:salesforce, ::Smithy::Schema::Shapes::MemberShape.new(target: SalesforceSourceProperties, name: "Salesforce"))
@@ -2056,6 +2743,8 @@ module Aws::CustomerProfiles
     StandardIdentifier.add_member(:profile, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PROFILE", traits: {"smithy.api#enumValue" => "PROFILE"}))
     StandardIdentifier.add_member(:asset, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ASSET", traits: {"smithy.api#enumValue" => "ASSET"}))
     StandardIdentifier.add_member(:case, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CASE", traits: {"smithy.api#enumValue" => "CASE"}))
+    StandardIdentifier.add_member(:device, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEVICE", traits: {"smithy.api#enumValue" => "DEVICE"}))
+    StandardIdentifier.add_member(:web_analytics, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WEB_ANALYTICS", traits: {"smithy.api#enumValue" => "WEB_ANALYTICS"}))
     StandardIdentifier.add_member(:order, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ORDER", traits: {"smithy.api#enumValue" => "ORDER"}))
     StandardIdentifier.add_member(:communication_record, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMMUNICATION_RECORD", traits: {"smithy.api#enumValue" => "COMMUNICATION_RECORD"}))
     StandardIdentifier.add_member(:air_preference, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AIR_PREFERENCE", traits: {"smithy.api#enumValue" => "AIR_PREFERENCE"}))
@@ -2072,6 +2761,10 @@ module Aws::CustomerProfiles
     StandardIdentifier.add_member(:lookup_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOOKUP_ONLY", traits: {"smithy.api#enumValue" => "LOOKUP_ONLY"}))
     StandardIdentifier.add_member(:new_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NEW_ONLY", traits: {"smithy.api#enumValue" => "NEW_ONLY"}))
     StandardIdentifierList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StandardIdentifier, name: "member"))
+    StartRecommenderRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "DomainName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    StartRecommenderRequest.add_member(:recommender_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "RecommenderName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    StartRecommenderRequest.type = Types::StartRecommenderRequest
+    StartRecommenderResponse.type = Types::StartRecommenderResponse
     StartUploadJobRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "DomainName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     StartUploadJobRequest.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "JobId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     StartUploadJobRequest.type = Types::StartUploadJobRequest
@@ -2084,6 +2777,7 @@ module Aws::CustomerProfiles
     Statistic.add_member(:maximum, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MAXIMUM", traits: {"smithy.api#enumValue" => "MAXIMUM"}))
     Statistic.add_member(:average, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AVERAGE", traits: {"smithy.api#enumValue" => "AVERAGE"}))
     Statistic.add_member(:max_occurrence, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MAX_OCCURRENCE", traits: {"smithy.api#enumValue" => "MAX_OCCURRENCE"}))
+    Statistic.add_member(:recent_occurrences, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RECENT_OCCURRENCES", traits: {"smithy.api#enumValue" => "RECENT_OCCURRENCES"}))
     Status.add_member(:not_started, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_STARTED", traits: {"smithy.api#enumValue" => "NOT_STARTED"}))
     Status.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
     Status.add_member(:complete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETE", traits: {"smithy.api#enumValue" => "COMPLETE"}))
@@ -2093,6 +2787,10 @@ module Aws::CustomerProfiles
     Status.add_member(:cancelled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANCELLED", traits: {"smithy.api#enumValue" => "CANCELLED"}))
     StatusReason.add_member(:validation_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VALIDATION_FAILURE", traits: {"smithy.api#enumValue" => "VALIDATION_FAILURE"}))
     StatusReason.add_member(:internal_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTERNAL_FAILURE", traits: {"smithy.api#enumValue" => "INTERNAL_FAILURE"}))
+    StopRecommenderRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "DomainName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    StopRecommenderRequest.add_member(:recommender_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "RecommenderName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    StopRecommenderRequest.type = Types::StopRecommenderRequest
+    StopRecommenderResponse.type = Types::StopRecommenderResponse
     StopUploadJobRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "DomainName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     StopUploadJobRequest.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "JobId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     StopUploadJobRequest.type = Types::StopUploadJobRequest
@@ -2102,6 +2800,16 @@ module Aws::CustomerProfiles
     StringDimensionType.add_member(:contains, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONTAINS", traits: {"smithy.api#enumValue" => "CONTAINS"}))
     StringDimensionType.add_member(:begins_with, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BEGINS_WITH", traits: {"smithy.api#enumValue" => "BEGINS_WITH"}))
     StringDimensionType.add_member(:ends_with, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENDS_WITH", traits: {"smithy.api#enumValue" => "ENDS_WITH"}))
+    SubscriptionEvent.add_member(:joined, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "JOINED", traits: {"smithy.api#enumValue" => "JOINED"}))
+    SubscriptionEvent.add_member(:left, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LEFT", traits: {"smithy.api#enumValue" => "LEFT"}))
+    SubscriptionEventItem.add_member(:profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "ProfileId", traits: {"smithy.api#jsonName" => "ProfileId"}))
+    SubscriptionEventItem.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "UpdatedAt", traits: {"smithy.api#jsonName" => "UpdatedAt"}))
+    SubscriptionEventItem.add_member(:event_type, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionEventType, name: "EventType", traits: {"smithy.api#jsonName" => "EventType"}))
+    SubscriptionEventItem.add_member(:event, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionEvent, name: "Event", traits: {"smithy.api#jsonName" => "Event"}))
+    SubscriptionEventItem.type = Types::SubscriptionEventItem
+    SubscriptionEventType.add_member(:live, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LIVE", traits: {"smithy.api#enumValue" => "LIVE"}))
+    SubscriptionEventType.add_member(:schedule, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SCHEDULE", traits: {"smithy.api#enumValue" => "SCHEDULE"}))
+    SubscriptionEventsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionEventItem, name: "member"))
     TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
     TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
     TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
@@ -2130,6 +2838,24 @@ module Aws::CustomerProfiles
     Threshold.type = Types::Threshold
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message"))
     ThrottlingException.type = Types::ThrottlingException
+    TrainingMetricName.add_member(:hit, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HIT", traits: {"smithy.api#enumValue" => "hit"}))
+    TrainingMetricName.add_member(:coverage, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COVERAGE", traits: {"smithy.api#enumValue" => "coverage"}))
+    TrainingMetricName.add_member(:recall, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RECALL", traits: {"smithy.api#enumValue" => "recall"}))
+    TrainingMetricName.add_member(:popularity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POPULARITY", traits: {"smithy.api#enumValue" => "popularity"}))
+    TrainingMetricName.add_member(:freshness, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FRESHNESS", traits: {"smithy.api#enumValue" => "freshness"}))
+    TrainingMetricName.add_member(:similarity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SIMILARITY", traits: {"smithy.api#enumValue" => "similarity"}))
+    TrainingMetricName.add_member(:mean_reciprocal_rank_at_25, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MEAN_RECIPROCAL_RANK_AT_25", traits: {"smithy.api#enumValue" => "mean_reciprocal_rank_at_25"}))
+    TrainingMetricName.add_member(:normalized_discounted_cumulative_gain_at_5, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NORMALIZED_DISCOUNTED_CUMULATIVE_GAIN_AT_5", traits: {"smithy.api#enumValue" => "normalized_discounted_cumulative_gain_at_5"}))
+    TrainingMetricName.add_member(:normalized_discounted_cumulative_gain_at_10, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NORMALIZED_DISCOUNTED_CUMULATIVE_GAIN_AT_10", traits: {"smithy.api#enumValue" => "normalized_discounted_cumulative_gain_at_10"}))
+    TrainingMetricName.add_member(:normalized_discounted_cumulative_gain_at_25, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NORMALIZED_DISCOUNTED_CUMULATIVE_GAIN_AT_25", traits: {"smithy.api#enumValue" => "normalized_discounted_cumulative_gain_at_25"}))
+    TrainingMetricName.add_member(:precision_at_5, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRECISION_AT_5", traits: {"smithy.api#enumValue" => "precision_at_5"}))
+    TrainingMetricName.add_member(:precision_at_10, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRECISION_AT_10", traits: {"smithy.api#enumValue" => "precision_at_10"}))
+    TrainingMetricName.add_member(:precision_at_25, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRECISION_AT_25", traits: {"smithy.api#enumValue" => "precision_at_25"}))
+    TrainingMetrics.add_member(:time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "Time"))
+    TrainingMetrics.add_member(:metrics, ::Smithy::Schema::Shapes::MemberShape.new(target: Metrics, name: "Metrics"))
+    TrainingMetrics.add_member(:recommender_version_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommenderVersionName, name: "RecommenderVersionName"))
+    TrainingMetrics.type = Types::TrainingMetrics
+    TrainingMetricsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingMetrics, name: "member"))
     TriggerConfig.add_member(:trigger_type, ::Smithy::Schema::Shapes::MemberShape.new(target: TriggerType, name: "TriggerType", traits: {"smithy.api#required" => {}}))
     TriggerConfig.add_member(:trigger_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: TriggerProperties, name: "TriggerProperties"))
     TriggerConfig.type = Types::TriggerConfig
@@ -2203,6 +2929,7 @@ module Aws::CustomerProfiles
     UpdateDomainRequest.add_member(:dead_letter_queue_url, ::Smithy::Schema::Shapes::MemberShape.new(target: SqsQueueUrl, name: "DeadLetterQueueUrl"))
     UpdateDomainRequest.add_member(:matching, ::Smithy::Schema::Shapes::MemberShape.new(target: MatchingRequest, name: "Matching"))
     UpdateDomainRequest.add_member(:rule_based_matching, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleBasedMatchingRequest, name: "RuleBasedMatching"))
+    UpdateDomainRequest.add_member(:data_store, ::Smithy::Schema::Shapes::MemberShape.new(target: DataStoreRequest, name: "DataStore"))
     UpdateDomainRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags"))
     UpdateDomainRequest.type = Types::UpdateDomainRequest
     UpdateDomainResponse.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "DomainName", traits: {"smithy.api#required" => {}}))
@@ -2211,6 +2938,7 @@ module Aws::CustomerProfiles
     UpdateDomainResponse.add_member(:dead_letter_queue_url, ::Smithy::Schema::Shapes::MemberShape.new(target: SqsQueueUrl, name: "DeadLetterQueueUrl"))
     UpdateDomainResponse.add_member(:matching, ::Smithy::Schema::Shapes::MemberShape.new(target: MatchingResponse, name: "Matching"))
     UpdateDomainResponse.add_member(:rule_based_matching, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleBasedMatchingResponse, name: "RuleBasedMatching"))
+    UpdateDomainResponse.add_member(:data_store, ::Smithy::Schema::Shapes::MemberShape.new(target: DataStoreResponse, name: "DataStore"))
     UpdateDomainResponse.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedAt", traits: {"smithy.api#required" => {}}))
     UpdateDomainResponse.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastUpdatedAt", traits: {"smithy.api#required" => {}}))
     UpdateDomainResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags"))
@@ -2263,6 +2991,14 @@ module Aws::CustomerProfiles
     UpdateProfileRequest.type = Types::UpdateProfileRequest
     UpdateProfileResponse.add_member(:profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "ProfileId", traits: {"smithy.api#required" => {}}))
     UpdateProfileResponse.type = Types::UpdateProfileResponse
+    UpdateRecommenderRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "DomainName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateRecommenderRequest.add_member(:recommender_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "RecommenderName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateRecommenderRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveText, name: "Description"))
+    UpdateRecommenderRequest.add_member(:recommender_config, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommenderConfig, name: "RecommenderConfig"))
+    UpdateRecommenderRequest.add_member(:recommender_version_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommenderVersionName, name: "RecommenderVersionName"))
+    UpdateRecommenderRequest.type = Types::UpdateRecommenderRequest
+    UpdateRecommenderResponse.add_member(:recommender_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "RecommenderName", traits: {"smithy.api#required" => {}}))
+    UpdateRecommenderResponse.type = Types::UpdateRecommenderResponse
     UploadJobItem.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "JobId", traits: {"smithy.api#jsonName" => "JobId"}))
     UploadJobItem.add_member(:display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String1To255, name: "DisplayName", traits: {"smithy.api#jsonName" => "DisplayName"}))
     UploadJobItem.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: UploadJobStatus, name: "Status", traits: {"smithy.api#jsonName" => "Status"}))
@@ -2318,7 +3054,7 @@ module Aws::CustomerProfiles
       service.id = "com.amazonaws.customerprofiles#CustomerProfiles_20200815"
       service.name = "CustomerProfiles20200815"
       service.version = "2020-08-15"
-      service.traits = {"aws.api#service" => {"sdkId" => "Customer Profiles", "arnNamespace" => "profile", "cloudFormationName" => "CustomerProfiles", "cloudTrailEventSource" => "profile.amazonaws.com", "endpointPrefix" => "profile"}, "aws.auth#sigv4" => {"name" => "profile"}, "aws.protocols#restJson1" => {}, "smithy.api#title" => "Amazon Connect Customer Profiles"}
+      service.traits = {"aws.api#service" => {"sdkId" => "Customer Profiles", "arnNamespace" => "profile", "cloudFormationName" => "CustomerProfiles", "cloudTrailEventSource" => "profile.amazonaws.com", "endpointPrefix" => "profile"}, "aws.auth#sigv4" => {"name" => "profile"}, "aws.protocols#restJson1" => {}, "smithy.api#title" => "Amazon Connect Customer Profiles", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://profile-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://profile-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://profile.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://profile.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
       service.add_operation(:add_profile_key, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.customerprofiles#AddProfileKey"
         operation.name = "AddProfileKey"
@@ -2330,6 +3066,18 @@ module Aws::CustomerProfiles
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/domains/{DomainName}/profiles/keys", "code" => 200}}
+      end)
+      service.add_operation(:associate_stream_for_segments, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.customerprofiles#AssociateStreamForSegments"
+        operation.name = "AssociateStreamForSegments"
+        operation.input = AssociateStreamForSegmentsRequest
+        operation.output = AssociateStreamForSegmentsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/domains/{DomainName}/segment-streams", "code" => 200}}
       end)
       service.add_operation(:batch_get_calculated_attribute_for_profile, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.customerprofiles#BatchGetCalculatedAttributeForProfile"
@@ -2354,6 +3102,18 @@ module Aws::CustomerProfiles
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/domains/{DomainName}/batch-get-profiles", "code" => 200}}
+      end)
+      service.add_operation(:batch_put_profile_object, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.customerprofiles#BatchPutProfileObject"
+        operation.name = "BatchPutProfileObject"
+        operation.input = BatchPutProfileObjectRequest
+        operation.output = BatchPutProfileObjectResponse
+        operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/domains/{DomainName}/profiles/objects/batch-put-profile-object", "code" => 200}}
       end)
       service.add_operation(:create_calculated_attribute_definition, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.customerprofiles#CreateCalculatedAttributeDefinition"
@@ -2439,6 +3199,42 @@ module Aws::CustomerProfiles
         operation.errors << ThrottlingException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/domains/{DomainName}/profiles", "code" => 200}}
       end)
+      service.add_operation(:create_recommender, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.customerprofiles#CreateRecommender"
+        operation.name = "CreateRecommender"
+        operation.input = CreateRecommenderRequest
+        operation.output = CreateRecommenderResponse
+        operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/domains/{DomainName}/recommenders/{RecommenderName}", "code" => 200}}
+      end)
+      service.add_operation(:create_recommender_filter, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.customerprofiles#CreateRecommenderFilter"
+        operation.name = "CreateRecommenderFilter"
+        operation.input = CreateRecommenderFilterRequest
+        operation.output = CreateRecommenderFilterResponse
+        operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/domains/{DomainName}/recommender-filters/{RecommenderFilterName}", "code" => 200}}
+      end)
+      service.add_operation(:create_recommender_schema, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.customerprofiles#CreateRecommenderSchema"
+        operation.name = "CreateRecommenderSchema"
+        operation.input = CreateRecommenderSchemaRequest
+        operation.output = CreateRecommenderSchemaResponse
+        operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/domains/{DomainName}/recommender-schemas/{RecommenderSchemaName}", "code" => 200}}
+      end)
       service.add_operation(:create_segment_definition, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.customerprofiles#CreateSegmentDefinition"
         operation.name = "CreateSegmentDefinition"
@@ -2522,6 +3318,18 @@ module Aws::CustomerProfiles
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/domains/{DomainName}/layouts/{LayoutDefinitionName}", "code" => 200}}
+      end)
+      service.add_operation(:delete_domain_object_type, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.customerprofiles#DeleteDomainObjectType"
+        operation.name = "DeleteDomainObjectType"
+        operation.input = DeleteDomainObjectTypeRequest
+        operation.output = DeleteDomainObjectTypeResponse
+        operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/domains/{DomainName}/domain-object-types/{ObjectTypeName}", "code" => 200}}
       end)
       service.add_operation(:delete_event_stream, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.customerprofiles#DeleteEventStream"
@@ -2607,6 +3415,42 @@ module Aws::CustomerProfiles
         operation.errors << ThrottlingException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/domains/{DomainName}/object-types/{ObjectTypeName}", "code" => 200}}
       end)
+      service.add_operation(:delete_recommender, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.customerprofiles#DeleteRecommender"
+        operation.name = "DeleteRecommender"
+        operation.input = DeleteRecommenderRequest
+        operation.output = DeleteRecommenderResponse
+        operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/domains/{DomainName}/recommenders/{RecommenderName}", "code" => 200}}
+      end)
+      service.add_operation(:delete_recommender_filter, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.customerprofiles#DeleteRecommenderFilter"
+        operation.name = "DeleteRecommenderFilter"
+        operation.input = DeleteRecommenderFilterRequest
+        operation.output = DeleteRecommenderFilterResponse
+        operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/domains/{DomainName}/recommender-filters/{RecommenderFilterName}", "code" => 200}}
+      end)
+      service.add_operation(:delete_recommender_schema, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.customerprofiles#DeleteRecommenderSchema"
+        operation.name = "DeleteRecommenderSchema"
+        operation.input = DeleteRecommenderSchemaRequest
+        operation.output = DeleteRecommenderSchemaResponse
+        operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/domains/{DomainName}/recommender-schemas/{RecommenderSchemaName}", "code" => 200}}
+      end)
       service.add_operation(:delete_segment_definition, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.customerprofiles#DeleteSegmentDefinition"
         operation.name = "DeleteSegmentDefinition"
@@ -2618,6 +3462,18 @@ module Aws::CustomerProfiles
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/domains/{DomainName}/segment-definitions/{SegmentDefinitionName}", "code" => 200}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:delete_segment_subscription, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.customerprofiles#DeleteSegmentSubscription"
+        operation.name = "DeleteSegmentSubscription"
+        operation.input = DeleteSegmentSubscriptionRequest
+        operation.output = DeleteSegmentSubscriptionResponse
+        operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/domains/{DomainName}/segment-definitions/{SegmentDefinitionName}/subscriptions", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_workflow, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.customerprofiles#DeleteWorkflow"
@@ -2642,6 +3498,18 @@ module Aws::CustomerProfiles
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/domains/{DomainName}/detect/object-types", "code" => 200}}
+      end)
+      service.add_operation(:disassociate_stream_for_segments, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.customerprofiles#DisassociateStreamForSegments"
+        operation.name = "DisassociateStreamForSegments"
+        operation.input = DisassociateStreamForSegmentsRequest
+        operation.output = DisassociateStreamForSegmentsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/domains/{DomainName}/segment-streams", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:get_auto_merging_preview, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.customerprofiles#GetAutoMergingPreview"
@@ -2703,6 +3571,18 @@ module Aws::CustomerProfiles
         operation.errors << ThrottlingException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/domains/{DomainName}/layouts/{LayoutDefinitionName}", "code" => 200}}
       end)
+      service.add_operation(:get_domain_object_type, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.customerprofiles#GetDomainObjectType"
+        operation.name = "GetDomainObjectType"
+        operation.input = GetDomainObjectTypeRequest
+        operation.output = GetDomainObjectTypeResponse
+        operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/domains/{DomainName}/domain-object-types/{ObjectTypeName}", "code" => 200}}
+      end)
       service.add_operation(:get_event_stream, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.customerprofiles#GetEventStream"
         operation.name = "GetEventStream"
@@ -2763,6 +3643,18 @@ module Aws::CustomerProfiles
         operation.errors << ThrottlingException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/domains/{DomainName}/matches", "code" => 200}}
       end)
+      service.add_operation(:get_object_type_attribute_statistics, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.customerprofiles#GetObjectTypeAttributeStatistics"
+        operation.name = "GetObjectTypeAttributeStatistics"
+        operation.input = GetObjectTypeAttributeStatisticsRequest
+        operation.output = GetObjectTypeAttributeStatisticsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/domains/{DomainName}/object-types/{ObjectTypeName}/attributes/{AttributeName}/statistics", "code" => 200}}
+      end)
       service.add_operation(:get_profile_history_record, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.customerprofiles#GetProfileHistoryRecord"
         operation.name = "GetProfileHistoryRecord"
@@ -2798,6 +3690,54 @@ module Aws::CustomerProfiles
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/templates/{TemplateId}", "code" => 200}}
+      end)
+      service.add_operation(:get_profile_recommendations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.customerprofiles#GetProfileRecommendations"
+        operation.name = "GetProfileRecommendations"
+        operation.input = GetProfileRecommendationsRequest
+        operation.output = GetProfileRecommendationsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/domains/{DomainName}/profiles/{ProfileId}/recommendations", "code" => 200}}
+      end)
+      service.add_operation(:get_recommender, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.customerprofiles#GetRecommender"
+        operation.name = "GetRecommender"
+        operation.input = GetRecommenderRequest
+        operation.output = GetRecommenderResponse
+        operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/domains/{DomainName}/recommenders/{RecommenderName}", "code" => 200}, "smithy.api#readonly" => {}}
+      end)
+      service.add_operation(:get_recommender_filter, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.customerprofiles#GetRecommenderFilter"
+        operation.name = "GetRecommenderFilter"
+        operation.input = GetRecommenderFilterRequest
+        operation.output = GetRecommenderFilterResponse
+        operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/domains/{DomainName}/recommender-filters/{RecommenderFilterName}", "code" => 200}, "smithy.api#readonly" => {}}
+      end)
+      service.add_operation(:get_recommender_schema, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.customerprofiles#GetRecommenderSchema"
+        operation.name = "GetRecommenderSchema"
+        operation.input = GetRecommenderSchemaRequest
+        operation.output = GetRecommenderSchemaResponse
+        operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/domains/{DomainName}/recommender-schemas/{RecommenderSchemaName}", "code" => 200}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_segment_definition, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.customerprofiles#GetSegmentDefinition"
@@ -2847,6 +3787,18 @@ module Aws::CustomerProfiles
         operation.errors << ThrottlingException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/domains/{DomainName}/segments/{SegmentDefinitionName}/snapshots/{SnapshotId}", "code" => 200}}
       end)
+      service.add_operation(:get_segment_subscription, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.customerprofiles#GetSegmentSubscription"
+        operation.name = "GetSegmentSubscription"
+        operation.input = GetSegmentSubscriptionRequest
+        operation.output = GetSegmentSubscriptionResponse
+        operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/domains/{DomainName}/segment-definitions/{SegmentDefinitionName}/subscriptions", "code" => 200}, "smithy.api#readonly" => {}}
+      end)
       service.add_operation(:get_similar_profiles, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.customerprofiles#GetSimilarProfiles"
         operation.name = "GetSimilarProfiles"
@@ -2859,6 +3811,18 @@ module Aws::CustomerProfiles
         operation.errors << ThrottlingException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/domains/{DomainName}/matches", "code" => 200}}
         operation[:paginator] = Paginators::GetSimilarProfiles.new
+      end)
+      service.add_operation(:get_stream_for_segments, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.customerprofiles#GetStreamForSegments"
+        operation.name = "GetStreamForSegments"
+        operation.input = GetStreamForSegmentsRequest
+        operation.output = GetStreamForSegmentsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/domains/{DomainName}/segment-streams", "code" => 200}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_upload_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.customerprofiles#GetUploadJob"
@@ -2957,6 +3921,19 @@ module Aws::CustomerProfiles
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/domains/{DomainName}/layouts", "code" => 200}}
         operation[:paginator] = Paginators::ListDomainLayouts.new
       end)
+      service.add_operation(:list_domain_object_types, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.customerprofiles#ListDomainObjectTypes"
+        operation.name = "ListDomainObjectTypes"
+        operation.input = ListDomainObjectTypesRequest
+        operation.output = ListDomainObjectTypesResponse
+        operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/domains/{DomainName}/domain-object-types", "code" => 200}}
+        operation[:paginator] = Paginators::ListDomainObjectTypes.new
+      end)
       service.add_operation(:list_domains, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.customerprofiles#ListDomains"
         operation.name = "ListDomains"
@@ -3018,6 +3995,18 @@ module Aws::CustomerProfiles
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/domains/{DomainName}/integrations", "code" => 200}}
+      end)
+      service.add_operation(:list_object_type_attribute_values, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.customerprofiles#ListObjectTypeAttributeValues"
+        operation.name = "ListObjectTypeAttributeValues"
+        operation.input = ListObjectTypeAttributeValuesRequest
+        operation.output = ListObjectTypeAttributeValuesResponse
+        operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/domains/{DomainName}/object-types/{ObjectTypeName}/attributes/{AttributeName}/values", "code" => 200}}
       end)
       service.add_operation(:list_object_type_attributes, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.customerprofiles#ListObjectTypeAttributes"
@@ -3092,6 +4081,57 @@ module Aws::CustomerProfiles
         operation.errors << ThrottlingException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/domains/{DomainName}/profiles/objects", "code" => 200}}
       end)
+      service.add_operation(:list_recommender_filters, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.customerprofiles#ListRecommenderFilters"
+        operation.name = "ListRecommenderFilters"
+        operation.input = ListRecommenderFiltersRequest
+        operation.output = ListRecommenderFiltersResponse
+        operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/domains/{DomainName}/recommender-filters", "code" => 200}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListRecommenderFilters.new
+      end)
+      service.add_operation(:list_recommender_recipes, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.customerprofiles#ListRecommenderRecipes"
+        operation.name = "ListRecommenderRecipes"
+        operation.input = ListRecommenderRecipesRequest
+        operation.output = ListRecommenderRecipesResponse
+        operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/recommender-recipes", "code" => 200}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListRecommenderRecipes.new
+      end)
+      service.add_operation(:list_recommender_schemas, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.customerprofiles#ListRecommenderSchemas"
+        operation.name = "ListRecommenderSchemas"
+        operation.input = ListRecommenderSchemasRequest
+        operation.output = ListRecommenderSchemasResponse
+        operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/domains/{DomainName}/recommender-schemas", "code" => 200}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListRecommenderSchemas.new
+      end)
+      service.add_operation(:list_recommenders, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.customerprofiles#ListRecommenders"
+        operation.name = "ListRecommenders"
+        operation.input = ListRecommendersRequest
+        operation.output = ListRecommendersResponse
+        operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/domains/{DomainName}/recommenders", "code" => 200}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListRecommenders.new
+      end)
       service.add_operation(:list_rule_based_matches, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.customerprofiles#ListRuleBasedMatches"
         operation.name = "ListRuleBasedMatches"
@@ -3117,6 +4157,19 @@ module Aws::CustomerProfiles
         operation.errors << ThrottlingException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/domains/{DomainName}/segment-definitions", "code" => 200}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListSegmentDefinitions.new
+      end)
+      service.add_operation(:list_segment_subscription_events, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.customerprofiles#ListSegmentSubscriptionEvents"
+        operation.name = "ListSegmentSubscriptionEvents"
+        operation.input = ListSegmentSubscriptionEventsRequest
+        operation.output = ListSegmentSubscriptionEventsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/domains/{DomainName}/segment-definitions/{SegmentDefinitionName}/subscription-events", "code" => 200}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListSegmentSubscriptionEvents.new
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.customerprofiles#ListTagsForResource"
@@ -3164,6 +4217,18 @@ module Aws::CustomerProfiles
         operation.errors << ThrottlingException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/domains/{DomainName}/profiles/objects/merge", "code" => 200}}
       end)
+      service.add_operation(:put_domain_object_type, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.customerprofiles#PutDomainObjectType"
+        operation.name = "PutDomainObjectType"
+        operation.input = PutDomainObjectTypeRequest
+        operation.output = PutDomainObjectTypeResponse
+        operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/domains/{DomainName}/domain-object-types/{ObjectTypeName}", "code" => 200}}
+      end)
       service.add_operation(:put_integration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.customerprofiles#PutIntegration"
         operation.name = "PutIntegration"
@@ -3200,6 +4265,18 @@ module Aws::CustomerProfiles
         operation.errors << ThrottlingException
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/domains/{DomainName}/object-types/{ObjectTypeName}", "code" => 200}}
       end)
+      service.add_operation(:put_segment_subscription, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.customerprofiles#PutSegmentSubscription"
+        operation.name = "PutSegmentSubscription"
+        operation.input = PutSegmentSubscriptionRequest
+        operation.output = PutSegmentSubscriptionResponse
+        operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/domains/{DomainName}/segment-definitions/{SegmentDefinitionName}/subscriptions", "code" => 200}, "smithy.api#idempotent" => {}}
+      end)
       service.add_operation(:search_profiles, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.customerprofiles#SearchProfiles"
         operation.name = "SearchProfiles"
@@ -3212,6 +4289,30 @@ module Aws::CustomerProfiles
         operation.errors << ThrottlingException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/domains/{DomainName}/profiles/search", "code" => 200}}
       end)
+      service.add_operation(:search_recommendations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.customerprofiles#SearchRecommendations"
+        operation.name = "SearchRecommendations"
+        operation.input = SearchRecommendationsRequest
+        operation.output = SearchRecommendationsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/domains/{DomainName}/recommendations", "code" => 200}}
+      end)
+      service.add_operation(:start_recommender, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.customerprofiles#StartRecommender"
+        operation.name = "StartRecommender"
+        operation.input = StartRecommenderRequest
+        operation.output = StartRecommenderResponse
+        operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/domains/{DomainName}/recommenders/{RecommenderName}/start", "code" => 200}}
+      end)
       service.add_operation(:start_upload_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.customerprofiles#StartUploadJob"
         operation.name = "StartUploadJob"
@@ -3223,6 +4324,18 @@ module Aws::CustomerProfiles
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/domains/{DomainName}/upload-jobs/{JobId}", "code" => 200}}
+      end)
+      service.add_operation(:stop_recommender, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.customerprofiles#StopRecommender"
+        operation.name = "StopRecommender"
+        operation.input = StopRecommenderRequest
+        operation.output = StopRecommenderResponse
+        operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/domains/{DomainName}/recommenders/{RecommenderName}/stop", "code" => 200}}
       end)
       service.add_operation(:stop_upload_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.customerprofiles#StopUploadJob"
@@ -3315,6 +4428,18 @@ module Aws::CustomerProfiles
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/domains/{DomainName}/profiles", "code" => 200}}
+      end)
+      service.add_operation(:update_recommender, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.customerprofiles#UpdateRecommender"
+        operation.name = "UpdateRecommender"
+        operation.input = UpdateRecommenderRequest
+        operation.output = UpdateRecommenderResponse
+        operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#http" => {"method" => "PATCH", "uri" => "/domains/{DomainName}/recommenders/{RecommenderName}", "code" => 200}}
       end)
     end
 

@@ -1,0 +1,5 @@
+  module Aws
+    module SageMakerTrainingSessionRuntime
+      VERSION: String
+    end
+  end

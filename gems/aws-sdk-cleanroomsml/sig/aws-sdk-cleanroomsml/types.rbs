@@ -305,6 +305,7 @@ module Aws::CleanRoomsML
         ?status: String,
         ?creator_account_id: String,
         ?description: String,
+        ?payer_configuration: Types::PayerConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -318,6 +319,7 @@ module Aws::CleanRoomsML
       attr_accessor status: String?
       attr_accessor creator_account_id: String?
       attr_accessor description: String?
+      attr_accessor payer_configuration: Types::PayerConfiguration?
     end
 
     class CollaborationTrainedModelExportJobSummary
@@ -371,6 +373,7 @@ module Aws::CleanRoomsML
         ?metrics_status_details: String,
         ?logs_status: String,
         ?logs_status_details: String,
+        ?ml_model_inference_payer_account_id: String,
         ?create_time: Time,
         ?update_time: Time,
         ?creator_account_id: String,
@@ -391,6 +394,7 @@ module Aws::CleanRoomsML
       attr_accessor metrics_status_details: String?
       attr_accessor logs_status: String?
       attr_accessor logs_status_details: String?
+      attr_accessor ml_model_inference_payer_account_id: String?
       attr_accessor create_time: Time?
       attr_accessor update_time: Time?
       attr_accessor creator_account_id: String?
@@ -412,6 +416,7 @@ module Aws::CleanRoomsML
         ?status: String,
         ?configured_model_algorithm_association_arn: String,
         ?creator_account_id: String,
+        ?ml_model_training_payer_account_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -427,6 +432,18 @@ module Aws::CleanRoomsML
       attr_accessor status: String?
       attr_accessor configured_model_algorithm_association_arn: String?
       attr_accessor creator_account_id: String?
+      attr_accessor ml_model_training_payer_account_id: String?
+    end
+
+    class ColumnClassificationDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?column_mapping: Array[Types::SyntheticDataColumnProperties],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor column_mapping: Array[Types::SyntheticDataColumnProperties]?
     end
 
     class ColumnSchema
@@ -730,6 +747,7 @@ module Aws::CleanRoomsML
         ?description: String,
         ?kms_key_arn: String,
         ?tags: Hash[String, String],
+        ?payer_configuration: Types::PayerConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -741,6 +759,7 @@ module Aws::CleanRoomsML
       attr_accessor description: String?
       attr_accessor kms_key_arn: String?
       attr_accessor tags: Hash[String, String]?
+      attr_accessor payer_configuration: Types::PayerConfiguration?
     end
 
     class CreateMLInputChannelResponse
@@ -771,6 +790,7 @@ module Aws::CleanRoomsML
         ?description: String,
         ?kms_key_arn: String,
         ?tags: Hash[String, String],
+        ?ml_model_training_payer_account_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -787,6 +807,7 @@ module Aws::CleanRoomsML
       attr_accessor description: String?
       attr_accessor kms_key_arn: String?
       attr_accessor tags: Hash[String, String]?
+      attr_accessor ml_model_training_payer_account_id: String?
     end
 
     class CreateTrainedModelResponse
@@ -841,6 +862,17 @@ module Aws::CleanRoomsML
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor custom_data_identifiers: Array[String]?
+    end
+
+    class DataPrivacyScores
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_inference_attack_scores: Array[Types::MembershipInferenceAttackScore],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_inference_attack_scores: Array[Types::MembershipInferenceAttackScore]?
     end
 
     class DataSource
@@ -1183,6 +1215,8 @@ module Aws::CleanRoomsML
         ?number_of_records: Integer,
         ?privacy_budgets: Types::PrivacyBudgets,
         ?description: String,
+        ?synthetic_data_configuration: Types::SyntheticDataConfiguration,
+        ?payer_configuration: Types::PayerConfiguration,
         ?create_time: Time,
         ?update_time: Time,
         ?creator_account_id: String,
@@ -1200,6 +1234,8 @@ module Aws::CleanRoomsML
       attr_accessor number_of_records: Integer?
       attr_accessor privacy_budgets: Types::PrivacyBudgets?
       attr_accessor description: String?
+      attr_accessor synthetic_data_configuration: Types::SyntheticDataConfiguration?
+      attr_accessor payer_configuration: Types::PayerConfiguration?
       attr_accessor create_time: Time?
       attr_accessor update_time: Time?
       attr_accessor creator_account_id: String?
@@ -1242,6 +1278,7 @@ module Aws::CleanRoomsML
         ?logs_status: String,
         ?logs_status_details: String,
         ?training_container_image_digest: String,
+        ?ml_model_training_payer_account_id: String,
         ?create_time: Time,
         ?update_time: Time,
         ?creator_account_id: String,
@@ -1266,6 +1303,7 @@ module Aws::CleanRoomsML
       attr_accessor logs_status: String?
       attr_accessor logs_status_details: String?
       attr_accessor training_container_image_digest: String?
+      attr_accessor ml_model_training_payer_account_id: String?
       attr_accessor create_time: Time?
       attr_accessor update_time: Time?
       attr_accessor creator_account_id: String?
@@ -1481,6 +1519,8 @@ module Aws::CleanRoomsML
         ?number_of_records: Integer,
         ?privacy_budgets: Types::PrivacyBudgets,
         ?description: String,
+        ?synthetic_data_configuration: Types::SyntheticDataConfiguration,
+        ?payer_configuration: Types::PayerConfiguration,
         ?create_time: Time,
         ?update_time: Time,
         ?input_channel: Types::InputChannel,
@@ -1503,6 +1543,8 @@ module Aws::CleanRoomsML
       attr_accessor number_of_records: Integer?
       attr_accessor privacy_budgets: Types::PrivacyBudgets?
       attr_accessor description: String?
+      attr_accessor synthetic_data_configuration: Types::SyntheticDataConfiguration?
+      attr_accessor payer_configuration: Types::PayerConfiguration?
       attr_accessor create_time: Time?
       attr_accessor update_time: Time?
       attr_accessor input_channel: Types::InputChannel?
@@ -1553,6 +1595,7 @@ module Aws::CleanRoomsML
         ?logs_status: String,
         ?logs_status_details: String,
         ?tags: Hash[String, String],
+        ?ml_model_inference_payer_account_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1579,6 +1622,7 @@ module Aws::CleanRoomsML
       attr_accessor logs_status: String?
       attr_accessor logs_status_details: String?
       attr_accessor tags: Hash[String, String]?
+      attr_accessor ml_model_inference_payer_account_id: String?
     end
 
     class GetTrainedModelRequest
@@ -1618,6 +1662,7 @@ module Aws::CleanRoomsML
         ?logs_status: String,
         ?logs_status_details: String,
         ?training_container_image_digest: String,
+        ?ml_model_training_payer_account_id: String,
         ?create_time: Time,
         ?update_time: Time,
         ?hyperparameters: Hash[String, String],
@@ -1646,6 +1691,7 @@ module Aws::CleanRoomsML
       attr_accessor logs_status: String?
       attr_accessor logs_status_details: String?
       attr_accessor training_container_image_digest: String?
+      attr_accessor ml_model_training_payer_account_id: String?
       attr_accessor create_time: Time?
       attr_accessor update_time: Time?
       attr_accessor hyperparameters: Hash[String, String]?
@@ -2615,6 +2661,7 @@ module Aws::CleanRoomsML
         ?ml_input_channel_arn: String,
         ?status: String,
         ?description: String,
+        ?payer_configuration: Types::PayerConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2628,6 +2675,7 @@ module Aws::CleanRoomsML
       attr_accessor ml_input_channel_arn: String?
       attr_accessor status: String?
       attr_accessor description: String?
+      attr_accessor payer_configuration: Types::PayerConfiguration?
     end
 
     class MLOutputConfiguration
@@ -2641,6 +2689,38 @@ module Aws::CleanRoomsML
 
       attr_accessor destination: Types::Destination?
       attr_accessor role_arn: String?
+    end
+
+    class MLSyntheticDataParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?epsilon: Float,
+        ?max_membership_inference_attack_score: Float,
+        ?column_classification: Types::ColumnClassificationDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor epsilon: Float?
+      attr_accessor max_membership_inference_attack_score: Float?
+      attr_accessor column_classification: Types::ColumnClassificationDetails?
+    end
+
+    class MembershipInferenceAttackScore
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attack_version: String,
+        ?score: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attack_version: String?
+      attr_accessor score: Float?
+    end
+
+    module MembershipInferenceAttackVersion
+      DISTANCE_TO_CLOSEST_RECORD_V1: String
     end
 
     class MetricDefinition
@@ -2703,6 +2783,19 @@ module Aws::CleanRoomsML
       MEDIUM: String
       LOW: String
       NONE: String
+    end
+
+    class PayerConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?compute_payer_account_id: String,
+        ?synthetic_data_payer_account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor compute_payer_account_id: String?
+      attr_accessor synthetic_data_payer_account_id: String?
     end
 
     module PolicyExistenceCondition
@@ -2994,6 +3087,7 @@ module Aws::CleanRoomsML
         ?environment: Hash[String, String],
         ?kms_key_arn: String,
         ?tags: Hash[String, String],
+        ?ml_model_inference_payer_account_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3010,6 +3104,7 @@ module Aws::CleanRoomsML
       attr_accessor environment: Hash[String, String]?
       attr_accessor kms_key_arn: String?
       attr_accessor tags: Hash[String, String]?
+      attr_accessor ml_model_inference_payer_account_id: String?
     end
 
     class StartTrainedModelInferenceJobResponse
@@ -3045,6 +3140,50 @@ module Aws::CleanRoomsML
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor max_runtime_in_seconds: Integer?
+    end
+
+    class SyntheticDataColumnProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?column_name: String,
+        ?column_type: String,
+        ?is_predictive_value: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor column_name: String?
+      attr_accessor column_type: String?
+      attr_accessor is_predictive_value: bool?
+    end
+
+    module SyntheticDataColumnType
+      CATEGORICAL: String
+      NUMERICAL: String
+    end
+
+    class SyntheticDataConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?synthetic_data_parameters: Types::MLSyntheticDataParameters,
+        ?synthetic_data_evaluation_scores: Types::SyntheticDataEvaluationScores,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor synthetic_data_parameters: Types::MLSyntheticDataParameters?
+      attr_accessor synthetic_data_evaluation_scores: Types::SyntheticDataEvaluationScores?
+    end
+
+    class SyntheticDataEvaluationScores
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_privacy_scores: Types::DataPrivacyScores,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_privacy_scores: Types::DataPrivacyScores?
     end
 
     module TagOnCreatePolicy
@@ -3195,6 +3334,7 @@ module Aws::CleanRoomsML
         ?metrics_status_details: String,
         ?logs_status: String,
         ?logs_status_details: String,
+        ?ml_model_inference_payer_account_id: String,
         ?create_time: Time,
         ?update_time: Time,
       ) -> void
@@ -3214,6 +3354,7 @@ module Aws::CleanRoomsML
       attr_accessor metrics_status_details: String?
       attr_accessor logs_status: String?
       attr_accessor logs_status_details: String?
+      attr_accessor ml_model_inference_payer_account_id: String?
       attr_accessor create_time: Time?
       attr_accessor update_time: Time?
     end
@@ -3277,6 +3418,7 @@ module Aws::CleanRoomsML
         ?collaboration_identifier: String,
         ?status: String,
         ?configured_model_algorithm_association_arn: String,
+        ?ml_model_training_payer_account_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3291,6 +3433,7 @@ module Aws::CleanRoomsML
       attr_accessor collaboration_identifier: String?
       attr_accessor status: String?
       attr_accessor configured_model_algorithm_association_arn: String?
+      attr_accessor ml_model_training_payer_account_id: String?
     end
 
     class TrainedModelsConfigurationPolicy
@@ -3412,16 +3555,35 @@ module Aws::CleanRoomsML
       def initialize: (
         ?type: String,
         ?number: Integer,
+        ?properties: Types::WorkerComputeConfigurationProperties,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor type: String?
       attr_accessor number: Integer?
+      attr_accessor properties: Types::WorkerComputeConfigurationProperties?
+    end
+
+    class WorkerComputeConfigurationProperties
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?spark: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor spark: Hash[String, String]?
+
+      class Spark < WorkerComputeConfigurationProperties
+      end
+      class Unknown < WorkerComputeConfigurationProperties
+      end
     end
 
     module WorkerComputeType
       CR1X: String
       CR4X: String
+      CR8X: String
     end
   end
 end

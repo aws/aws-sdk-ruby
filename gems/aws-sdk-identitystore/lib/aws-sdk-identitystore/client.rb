@@ -144,18 +144,18 @@ module Aws::Identitystore
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -210,13 +210,11 @@ module Aws::Identitystore
     end
 
     # <p>Creates a group within the specified identity store.</p>
-    # @param [Hash, Types::CreateGroupInput] params
+    # @param [Hash, Types::CreateGroupRequest] params
     # @option params [String] :identity_store_id
-    #   <p>The globally unique identifier for the identity store.</p>
+    #   <p>The globally unique identifier for the identity store.</p> <p>You can specify the identity store by ID or by Amazon Resource Name (ARN). For example, identity store ID <code>d-1234567890</code> or identity store ARN <code>arn:aws:identitystore::111122223333:identitystore/d-1234567890</code>.</p>
     # @option params [String] :display_name
-    #   <p>A string containing the name of the group. This value is commonly displayed when the
-    #            group is referenced. <code>Administrator</code> and <code>AWSAdministrators</code> are
-    #            reserved names and can't be used for users or groups.</p>
+    #   <p>A string containing the name of the group. This value is commonly displayed when the group is referenced. <code>Administrator</code> and <code>AWSAdministrators</code> are reserved names and can't be used for users or groups.</p>
     # @option params [String] :description
     #   <p>A string containing the description of the group.</p>
     # @example Request syntax with placeholder values
@@ -230,21 +228,23 @@ module Aws::Identitystore
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {
-    #     group_id: "ResourceId", # required
     #     identity_store_id: "IdentityStoreId", # required
+    #     group_id: "ResourceId", # required
+    #     group_arn: "ResourceArn", # required
+    #     revision: "ResourceRevision", # required
     #   }
-    # @return [Types::CreateGroupOutput]
+    # @return [Types::CreateGroupResponse]
     def create_group(params = {}, options = {})
       request = build_request(:create_group, params)
       request.send_request(options)
     end
 
     # <p>Creates a relationship between a member and a group. The following identifiers must be specified: <code>GroupId</code>, <code>IdentityStoreId</code>, and <code>MemberId</code>.</p>
-    # @param [Hash, Types::CreateGroupMembershipInput] params
+    # @param [Hash, Types::CreateGroupMembershipRequest] params
     # @option params [String] :identity_store_id
-    #   <p>The globally unique identifier for the identity store.</p>
+    #   <p>The globally unique identifier for the identity store.</p> <p>You can specify the identity store by ID or by Amazon Resource Name (ARN). For example, identity store ID <code>d-1234567890</code> or identity store ARN <code>arn:aws:identitystore::111122223333:identitystore/d-1234567890</code>.</p>
     # @option params [String] :group_id
-    #   <p>The identifier for a group in the identity store.</p>
+    #   <p>The identifier for a group in the identity store.</p> <p>You can specify the group by ID or by Amazon Resource Name (ARN). For example, group ID <code>a1b2c3d4-5678-90ab-cdef-EXAMPLE22222</code> or group ARN <code>arn:aws:identitystore:::group/a1b2c3d4-5678-90ab-cdef-EXAMPLE22222</code>.</p>
     # @option params [Types::MemberId] :member_id
     #   <p>An object that contains the identifier of a group member. Setting the <code>UserID</code> field to the specific identifier for a user indicates that the user is a member of the group.</p>
     # @example Request syntax with placeholder values
@@ -261,30 +261,26 @@ module Aws::Identitystore
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {
-    #     membership_id: "ResourceId", # required
     #     identity_store_id: "IdentityStoreId", # required
+    #     membership_id: "ResourceId", # required
+    #     membership_arn: "ResourceArn", # required
     #   }
-    # @return [Types::CreateGroupMembershipOutput]
+    # @return [Types::CreateGroupMembershipResponse]
     def create_group_membership(params = {}, options = {})
       request = build_request(:create_group_membership, params)
       request.send_request(options)
     end
 
     # <p>Creates a user within the specified identity store.</p>
-    # @param [Hash, Types::CreateUserInput] params
+    # @param [Hash, Types::CreateUserRequest] params
     # @option params [String] :identity_store_id
-    #   <p>The globally unique identifier for the identity store.</p>
+    #   <p>The globally unique identifier for the identity store.</p> <p>You can specify the identity store by ID or by Amazon Resource Name (ARN). For example, identity store ID <code>d-1234567890</code> or identity store ARN <code>arn:aws:identitystore::111122223333:identitystore/d-1234567890</code>.</p>
     # @option params [String] :user_name
-    #   <p>A unique string used to identify the user. The length limit is 128 characters. This
-    #            value can consist of letters, accented characters, symbols, numbers, and punctuation. This
-    #            value is specified at the time the user is created and stored as an attribute of the user
-    #            object in the identity store. <code>Administrator</code> and <code>AWSAdministrators</code>
-    #            are reserved names and can't be used for users or groups.</p>
+    #   <p>A unique string used to identify the user. The length limit is 128 characters. This value can consist of letters, accented characters, symbols, numbers, and punctuation. This value is specified at the time the user is created and stored as an attribute of the user object in the identity store. <code>Administrator</code> and <code>AWSAdministrators</code> are reserved names and can't be used for users or groups.</p>
     # @option params [Types::Name] :name
-    #   <p>An object containing the name of the user.</p>
+    #   <p>An object containing the name of the user. When used in IAM Identity Center, this parameter is required.</p>
     # @option params [String] :display_name
-    #   <p>A string containing the name of the user. This value is typically formatted for display
-    #            when the user is referenced. For example, "John Doe." </p>
+    #   <p>A string containing the name of the user. This value is typically formatted for display when the user is referenced. For example, "John Doe." When used in IAM Identity Center, this parameter is required.</p>
     # @option params [String] :nick_name
     #   <p>A string containing an alternate name for the user.</p>
     # @option params [String] :profile_url
@@ -296,18 +292,25 @@ module Aws::Identitystore
     # @option params [Array<Types::PhoneNumber>] :phone_numbers
     #   <p>A list of <code>PhoneNumber</code> objects containing phone numbers associated with the user.</p>
     # @option params [String] :user_type
-    #   <p>A string indicating the type of user. Possible values are left unspecified. The value
-    #            can vary based on your specific use case.</p>
+    #   <p>A string indicating the type of user. Possible values are left unspecified. The value can vary based on your specific use case.</p>
     # @option params [String] :title
-    #   <p>A string containing the title of the user. Possible values are left unspecified. The
-    #            value can vary based on your specific use case.</p>
+    #   <p>A string containing the title of the user. Possible values are left unspecified. The value can vary based on your specific use case.</p>
     # @option params [String] :preferred_language
-    #   <p>A string containing the preferred language of the user. For example, "American English"
-    #            or "en-us."</p>
+    #   <p>A string containing the preferred language of the user. For example, "American English" or "en-us."</p>
     # @option params [String] :locale
     #   <p>A string containing the geographical region or location of the user.</p>
     # @option params [String] :timezone
     #   <p>A string containing the time zone of the user.</p>
+    # @option params [Array<Types::Photo>] :photos
+    #   <p>A list of photos associated with the user. You can add up to 3 photos per user. Each photo can include a value, type, display name, and primary designation.</p>
+    # @option params [String] :website
+    #   <p>The user's personal website or blog URL. This field allows users to provide a link to their personal or professional website.</p>
+    # @option params [String] :birthdate
+    #   <p>The user's birthdate in YYYY-MM-DD format. This field supports standard date format for storing personal information.</p>
+    # @option params [Array<Types::Role>] :roles
+    #   <p>A list of <code>Role</code> objects containing roles associated with the user.</p>
+    # @option params [Hash<String, JSON>] :extensions
+    #   <p>A map with additional attribute extensions for the user. Each map key corresponds to an extension name, while map values represent extension data in <code>Document</code> type (not supported by Java V1, Go V1 and older versions of the CLI). <code>aws:identitystore:enterprise</code> is the only supported extension name.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     identity_store_id: "IdentityStoreId", # required
@@ -353,50 +356,75 @@ module Aws::Identitystore
     #     title: "SensitiveStringType",
     #     preferred_language: "SensitiveStringType",
     #     locale: "SensitiveStringType",
-    #     timezone: "SensitiveStringType"
+    #     timezone: "SensitiveStringType",
+    #     photos: [
+    #       {
+    #         value: "SensitiveStringType", # required
+    #         type: "SensitiveStringType",
+    #         display: "SensitiveStringType",
+    #         primary: false
+    #       }
+    #     ],
+    #     website: "SensitiveStringType",
+    #     birthdate: "SensitiveStringType",
+    #     roles: [
+    #       {
+    #         value: "SensitiveStringType",
+    #         type: "SensitiveStringType",
+    #         primary: false
+    #       }
+    #     ],
+    #     extensions: {
+    #       "ExtensionName" => ""null""
+    #     }
     #   }
     #   options = {}
     #   response = client.create_user(params, options)
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {
-    #     user_id: "ResourceId", # required
     #     identity_store_id: "IdentityStoreId", # required
+    #     user_id: "ResourceId", # required
+    #     user_arn: "ResourceArn", # required
+    #     revision: "ResourceRevision", # required
     #   }
-    # @return [Types::CreateUserOutput]
+    # @return [Types::CreateUserResponse]
     def create_user(params = {}, options = {})
       request = build_request(:create_user, params)
       request.send_request(options)
     end
 
     # <p>Delete a group within an identity store given <code>GroupId</code>.</p>
-    # @param [Hash, Types::DeleteGroupInput] params
+    # @param [Hash, Types::DeleteGroupRequest] params
     # @option params [String] :identity_store_id
-    #   <p>The globally unique identifier for the identity store.</p>
+    #   <p>The globally unique identifier for the identity store.</p> <p>You can specify the identity store by ID or by Amazon Resource Name (ARN). For example, identity store ID <code>d-1234567890</code> or identity store ARN <code>arn:aws:identitystore::111122223333:identitystore/d-1234567890</code>.</p>
     # @option params [String] :group_id
-    #   <p>The identifier for a group in the identity store.</p>
+    #   <p>The identifier for a group in the identity store.</p> <p>You can specify the group by ID or by Amazon Resource Name (ARN). For example, group ID <code>a1b2c3d4-5678-90ab-cdef-EXAMPLE22222</code> or group ARN <code>arn:aws:identitystore:::group/a1b2c3d4-5678-90ab-cdef-EXAMPLE22222</code>.</p>
+    # @option params [String] :revision
+    #   <p>The expected current revision of the group. When you provide this value, the group is deleted only if it matches the current revision of the group in the identity store. If the value doesn't match, the operation fails with a <code>ConflictException</code>. If you don't provide this value, the group is deleted regardless of its current revision.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     identity_store_id: "IdentityStoreId", # required
     #     group_id: "ResourceId", # required
+    #     revision: "ResourceRevision"
     #   }
     #   options = {}
     #   response = client.delete_group(params, options)
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {}
-    # @return [Types::DeleteGroupOutput]
+    # @return [Types::DeleteGroupResponse]
     def delete_group(params = {}, options = {})
       request = build_request(:delete_group, params)
       request.send_request(options)
     end
 
     # <p>Delete a membership within a group given <code>MembershipId</code>.</p>
-    # @param [Hash, Types::DeleteGroupMembershipInput] params
+    # @param [Hash, Types::DeleteGroupMembershipRequest] params
     # @option params [String] :identity_store_id
-    #   <p>The globally unique identifier for the identity store.</p>
+    #   <p>The globally unique identifier for the identity store.</p> <p>You can specify the identity store by ID or by Amazon Resource Name (ARN). For example, identity store ID <code>d-1234567890</code> or identity store ARN <code>arn:aws:identitystore::111122223333:identitystore/d-1234567890</code>.</p>
     # @option params [String] :membership_id
-    #   <p>The identifier for a <code>GroupMembership</code> in an identity store.</p>
+    #   <p>The identifier for a <code>GroupMembership</code> in an identity store.</p> <p>You can specify the group membership by ID or by Amazon Resource Name (ARN). For example, membership ID <code>a1b2c3d4-5678-90ab-cdef-EXAMPLE33333</code> or membership ARN <code>arn:aws:identitystore:::membership/a1b2c3d4-5678-90ab-cdef-EXAMPLE33333</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     identity_store_id: "IdentityStoreId", # required
@@ -407,50 +435,43 @@ module Aws::Identitystore
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {}
-    # @return [Types::DeleteGroupMembershipOutput]
+    # @return [Types::DeleteGroupMembershipResponse]
     def delete_group_membership(params = {}, options = {})
       request = build_request(:delete_group_membership, params)
       request.send_request(options)
     end
 
     # <p>Deletes a user within an identity store given <code>UserId</code>.</p>
-    # @param [Hash, Types::DeleteUserInput] params
+    # @param [Hash, Types::DeleteUserRequest] params
     # @option params [String] :identity_store_id
-    #   <p>The globally unique identifier for the identity store.</p>
+    #   <p>The globally unique identifier for the identity store.</p> <p>You can specify the identity store by ID or by Amazon Resource Name (ARN). For example, identity store ID <code>d-1234567890</code> or identity store ARN <code>arn:aws:identitystore::111122223333:identitystore/d-1234567890</code>.</p>
     # @option params [String] :user_id
-    #   <p>The identifier for a user in the identity store.</p>
+    #   <p>The identifier for a user in the identity store.</p> <p>You can specify the user by ID or by Amazon Resource Name (ARN). For example, user ID <code>a1b2c3d4-5678-90ab-cdef-EXAMPLE11111</code> or user ARN <code>arn:aws:identitystore:::user/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111</code>.</p>
+    # @option params [String] :revision
+    #   <p>The expected current revision of the user. When you provide this value, the user is deleted only if it matches the current revision of the user in the identity store. If the value doesn't match, the operation fails with a <code>ConflictException</code>. If you don't provide this value, the user is deleted regardless of its current revision.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     identity_store_id: "IdentityStoreId", # required
     #     user_id: "ResourceId", # required
+    #     revision: "ResourceRevision"
     #   }
     #   options = {}
     #   response = client.delete_user(params, options)
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {}
-    # @return [Types::DeleteUserOutput]
+    # @return [Types::DeleteUserResponse]
     def delete_user(params = {}, options = {})
       request = build_request(:delete_user, params)
       request.send_request(options)
     end
 
-    # <p>Retrieves the group metadata and attributes from <code>GroupId</code> in an identity
-    #          store.</p>
-    #          <note>
-    #             <p>If you have administrator access to a member account, you can use this API from the member account. 
-    #          Read about <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_access.html">member accounts</a> in the 
-    #          <i>Organizations User Guide</i>. </p>
-    #          </note>
-    # @param [Hash, Types::DescribeGroupInput] params
+    # <p>Retrieves the group metadata and attributes from <code>GroupId</code> in an identity store.</p> <note> <p>If you have access to a member account, you can use this API operation from the member account. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/userguide/manage-your-accounts.html#limiting-access-from-member-accounts">Limiting access to the identity store from member accounts</a> in the <i> IAM Identity Center User Guide</i>.</p> </note>
+    # @param [Hash, Types::DescribeGroupRequest] params
     # @option params [String] :identity_store_id
-    #   <p>The globally unique identifier for the identity store, such as
-    #            <code>d-1234567890</code>. In this example, <code>d-</code> is a fixed prefix, and
-    #               <code>1234567890</code> is a randomly generated string that contains numbers and lower
-    #            case letters. This value is generated at the time that a new identity store is
-    #            created.</p>
+    #   <p>The globally unique identifier for the identity store, such as <code>d-1234567890</code>. In this example, <code>d-</code> is a fixed prefix, and <code>1234567890</code> is a randomly generated string that contains numbers and lower case letters. This value is generated at the time that a new identity store is created.</p> <p>You can specify the identity store by ID or by Amazon Resource Name (ARN). For example, identity store ID <code>d-1234567890</code> or identity store ARN <code>arn:aws:identitystore::111122223333:identitystore/d-1234567890</code>.</p>
     # @option params [String] :group_id
-    #   <p>The identifier for a group in the identity store.</p>
+    #   <p>The identifier for a group in the identity store.</p> <p>You can specify the group by ID or by Amazon Resource Name (ARN). For example, group ID <code>a1b2c3d4-5678-90ab-cdef-EXAMPLE22222</code> or group ARN <code>arn:aws:identitystore:::group/a1b2c3d4-5678-90ab-cdef-EXAMPLE22222</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     identity_store_id: "IdentityStoreId", # required
@@ -461,7 +482,10 @@ module Aws::Identitystore
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {
+    #     identity_store_id: "IdentityStoreId", # required
     #     group_id: "ResourceId", # required
+    #     group_arn: "ResourceArn", # required
+    #     revision: "ResourceRevision", # required
     #     display_name: "GroupDisplayName",
     #     external_ids: [
     #       {
@@ -470,25 +494,23 @@ module Aws::Identitystore
     #       }
     #     ],
     #     description: "SensitiveStringType",
-    #     identity_store_id: "IdentityStoreId", # required
+    #     created_at: Time.now,
+    #     updated_at: Time.now,
+    #     created_by: "StringType",
+    #     updated_by: "StringType"
     #   }
-    # @return [Types::DescribeGroupOutput]
+    # @return [Types::DescribeGroupResponse]
     def describe_group(params = {}, options = {})
       request = build_request(:describe_group, params)
       request.send_request(options)
     end
 
-    # <p>Retrieves membership metadata and attributes from <code>MembershipId</code> in an identity store.</p>
-    #          <note>
-    #             <p>If you have administrator access to a member account, you can use this API from the member account. 
-    #          Read about <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_access.html">member accounts</a> in the 
-    #          <i>Organizations User Guide</i>. </p>
-    #          </note>
-    # @param [Hash, Types::DescribeGroupMembershipInput] params
+    # <p>Retrieves membership metadata and attributes from <code>MembershipId</code> in an identity store.</p> <note> <p>If you have access to a member account, you can use this API operation from the member account. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/userguide/manage-your-accounts.html#limiting-access-from-member-accounts">Limiting access to the identity store from member accounts</a> in the <i> IAM Identity Center User Guide</i>.</p> </note>
+    # @param [Hash, Types::DescribeGroupMembershipRequest] params
     # @option params [String] :identity_store_id
-    #   <p>The globally unique identifier for the identity store.</p>
+    #   <p>The globally unique identifier for the identity store.</p> <p>You can specify the identity store by ID or by Amazon Resource Name (ARN). For example, identity store ID <code>d-1234567890</code> or identity store ARN <code>arn:aws:identitystore::111122223333:identitystore/d-1234567890</code>.</p>
     # @option params [String] :membership_id
-    #   <p>The identifier for a <code>GroupMembership</code> in an identity store.</p>
+    #   <p>The identifier for a <code>GroupMembership</code> in an identity store.</p> <p>You can specify the group membership by ID or by Amazon Resource Name (ARN). For example, membership ID <code>a1b2c3d4-5678-90ab-cdef-EXAMPLE33333</code> or membership ARN <code>arn:aws:identitystore:::membership/a1b2c3d4-5678-90ab-cdef-EXAMPLE33333</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     identity_store_id: "IdentityStoreId", # required
@@ -501,45 +523,75 @@ module Aws::Identitystore
     #   {
     #     identity_store_id: "IdentityStoreId", # required
     #     membership_id: "ResourceId", # required
+    #     membership_arn: "ResourceArn", # required
     #     group_id: "ResourceId", # required
     #     member_id: { # required
     #       # One of:
     #       user_id: "ResourceId"
-    #     }
+    #     },
+    #     created_at: Time.now,
+    #     updated_at: Time.now,
+    #     created_by: "StringType",
+    #     updated_by: "StringType"
     #   }
-    # @return [Types::DescribeGroupMembershipOutput]
+    # @return [Types::DescribeGroupMembershipResponse]
     def describe_group_membership(params = {}, options = {})
       request = build_request(:describe_group_membership, params)
       request.send_request(options)
     end
 
-    # <p>Retrieves the user metadata and attributes from the <code>UserId</code> in an identity store.</p>
-    #          <note>
-    #             <p>If you have administrator access to a member account, you can use this API from the member account. 
-    #          Read about <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_access.html">member accounts</a> in the 
-    #          <i>Organizations User Guide</i>. </p>
-    #          </note>
-    # @param [Hash, Types::DescribeUserInput] params
+    # <p>Retrieves details about the specified identity store, including its Amazon Resource Name (ARN) and network configuration.</p>
+    # @param [Hash, Types::DescribeIdentityStoreRequest] params
     # @option params [String] :identity_store_id
-    #   <p>The globally unique identifier for the identity store, such as
-    #            <code>d-1234567890</code>. In this example, <code>d-</code> is a fixed prefix, and
-    #               <code>1234567890</code> is a randomly generated string that contains numbers and lower
-    #            case letters. This value is generated at the time that a new identity store is
-    #            created.</p>
+    #   <p>The globally unique identifier for the identity store.</p> <p>You can specify the identity store by ID or by Amazon Resource Name (ARN). For example, identity store ID <code>d-1234567890</code> or identity store ARN <code>arn:aws:identitystore::111122223333:identitystore/d-1234567890</code>.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     identity_store_id: "IdentityStoreId", # required
+    #   }
+    #   options = {}
+    #   response = client.describe_identity_store(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     identity_store_id: "IdentityStoreId", # required
+    #     identity_store_arn: "IdentityStoreArn", # required
+    #     network_configuration: {
+    #       vpce_access_required: false, # required
+    #       api_restrict_source_vpcs: ["VpcIdType"],
+    #       api_allow_source_ips: ["IpCidrType"],
+    #       scim_allow_source_ips: ["IpCidrType"]
+    #     }
+    #   }
+    # @return [Types::DescribeIdentityStoreResponse]
+    def describe_identity_store(params = {}, options = {})
+      request = build_request(:describe_identity_store, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves the user metadata and attributes from the <code>UserId</code> in an identity store.</p> <note> <p>If you have access to a member account, you can use this API operation from the member account. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/userguide/manage-your-accounts.html#limiting-access-from-member-accounts">Limiting access to the identity store from member accounts</a> in the <i> IAM Identity Center User Guide</i>.</p> </note>
+    # @param [Hash, Types::DescribeUserRequest] params
+    # @option params [String] :identity_store_id
+    #   <p>The globally unique identifier for the identity store, such as <code>d-1234567890</code>. In this example, <code>d-</code> is a fixed prefix, and <code>1234567890</code> is a randomly generated string that contains numbers and lower case letters. This value is generated at the time that a new identity store is created.</p> <p>You can specify the identity store by ID or by Amazon Resource Name (ARN). For example, identity store ID <code>d-1234567890</code> or identity store ARN <code>arn:aws:identitystore::111122223333:identitystore/d-1234567890</code>.</p>
     # @option params [String] :user_id
-    #   <p>The identifier for a user in the identity store.</p>
+    #   <p>The identifier for a user in the identity store.</p> <p>You can specify the user by ID or by Amazon Resource Name (ARN). For example, user ID <code>a1b2c3d4-5678-90ab-cdef-EXAMPLE11111</code> or user ARN <code>arn:aws:identitystore:::user/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111</code>.</p>
+    # @option params [Array<String>] :extensions
+    #   <p>A collection of extension names indicating what extensions the service should retrieve alongside other user attributes. <code>aws:identitystore:enterprise</code> is the only supported extension name.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     identity_store_id: "IdentityStoreId", # required
     #     user_id: "ResourceId", # required
+    #     extensions: ["ExtensionName"]
     #   }
     #   options = {}
     #   response = client.describe_user(params, options)
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {
-    #     user_name: "UserName",
+    #     identity_store_id: "IdentityStoreId", # required
     #     user_id: "ResourceId", # required
+    #     user_arn: "ResourceArn", # required
+    #     revision: "ResourceRevision", # required
+    #     user_name: "UserName",
     #     external_ids: [
     #       {
     #         issuer: "ExternalIdIssuer", # required
@@ -588,26 +640,44 @@ module Aws::Identitystore
     #     preferred_language: "SensitiveStringType",
     #     locale: "SensitiveStringType",
     #     timezone: "SensitiveStringType",
-    #     identity_store_id: "IdentityStoreId", # required
+    #     user_status: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #     photos: [
+    #       {
+    #         value: "SensitiveStringType", # required
+    #         type: "SensitiveStringType",
+    #         display: "SensitiveStringType",
+    #         primary: false
+    #       }
+    #     ],
+    #     website: "SensitiveStringType",
+    #     birthdate: "SensitiveStringType",
+    #     roles: [
+    #       {
+    #         value: "SensitiveStringType",
+    #         type: "SensitiveStringType",
+    #         primary: false
+    #       }
+    #     ],
+    #     created_at: Time.now,
+    #     created_by: "StringType",
+    #     updated_at: Time.now,
+    #     updated_by: "StringType",
+    #     extensions: {
+    #       "ExtensionName" => ""null""
+    #     }
     #   }
-    # @return [Types::DescribeUserOutput]
+    # @return [Types::DescribeUserResponse]
     def describe_user(params = {}, options = {})
       request = build_request(:describe_user, params)
       request.send_request(options)
     end
 
-    # <p>Retrieves <code>GroupId</code> in an identity store.</p>
-    #          <note>
-    #             <p>If you have administrator access to a member account, you can use this API from the member account. 
-    #          Read about <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_access.html">member accounts</a> in the 
-    #          <i>Organizations User Guide</i>. </p>
-    #          </note>
-    # @param [Hash, Types::GetGroupIdInput] params
+    # <p>Retrieves <code>GroupId</code> in an identity store.</p> <note> <p>If you have access to a member account, you can use this API operation from the member account. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/userguide/manage-your-accounts.html#limiting-access-from-member-accounts">Limiting access to the identity store from member accounts</a> in the <i> IAM Identity Center User Guide</i>.</p> </note>
+    # @param [Hash, Types::GetGroupIdRequest] params
     # @option params [String] :identity_store_id
-    #   <p>The globally unique identifier for the identity store.</p>
+    #   <p>The globally unique identifier for the identity store.</p> <p>You can specify the identity store by ID or by Amazon Resource Name (ARN). For example, identity store ID <code>d-1234567890</code> or identity store ARN <code>arn:aws:identitystore::111122223333:identitystore/d-1234567890</code>.</p>
     # @option params [Types::AlternateIdentifier] :alternate_identifier
-    #   <p>A unique identifier for a user or group that is not the primary identifier. This value can be
-    #            an identifier from an external identity provider (IdP) that is associated with the user, the group, or a unique attribute. For the unique attribute, the only valid path is <code>displayName</code>.</p>
+    #   <p>A unique identifier for a user or group that is not the primary identifier. This value can be an identifier from an external identity provider (IdP) that is associated with the user, the group, or a unique attribute. For the unique attribute, the only valid path is <code> displayName</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     identity_store_id: "IdentityStoreId", # required
@@ -628,26 +698,22 @@ module Aws::Identitystore
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {
-    #     group_id: "ResourceId", # required
     #     identity_store_id: "IdentityStoreId", # required
+    #     group_id: "ResourceId", # required
+    #     group_arn: "ResourceArn", # required
     #   }
-    # @return [Types::GetGroupIdOutput]
+    # @return [Types::GetGroupIdResponse]
     def get_group_id(params = {}, options = {})
       request = build_request(:get_group_id, params)
       request.send_request(options)
     end
 
-    # <p>Retrieves the <code>MembershipId</code> in an identity store.</p>
-    #          <note>
-    #             <p>If you have administrator access to a member account, you can use this API from the member account. 
-    #          Read about <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_access.html">member accounts</a> in the 
-    #          <i>Organizations User Guide</i>. </p>
-    #          </note>
-    # @param [Hash, Types::GetGroupMembershipIdInput] params
+    # <p>Retrieves the <code>MembershipId</code> in an identity store.</p> <note> <p>If you have access to a member account, you can use this API operation from the member account. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/userguide/manage-your-accounts.html#limiting-access-from-member-accounts">Limiting access to the identity store from member accounts</a> in the <i> IAM Identity Center User Guide</i>.</p> </note>
+    # @param [Hash, Types::GetGroupMembershipIdRequest] params
     # @option params [String] :identity_store_id
-    #   <p>The globally unique identifier for the identity store.</p>
+    #   <p>The globally unique identifier for the identity store.</p> <p>You can specify the identity store by ID or by Amazon Resource Name (ARN). For example, identity store ID <code>d-1234567890</code> or identity store ARN <code>arn:aws:identitystore::111122223333:identitystore/d-1234567890</code>.</p>
     # @option params [String] :group_id
-    #   <p>The identifier for a group in the identity store.</p>
+    #   <p>The identifier for a group in the identity store.</p> <p>You can specify the group by ID or by Amazon Resource Name (ARN). For example, group ID <code>a1b2c3d4-5678-90ab-cdef-EXAMPLE22222</code> or group ARN <code>arn:aws:identitystore:::group/a1b2c3d4-5678-90ab-cdef-EXAMPLE22222</code>.</p>
     # @option params [Types::MemberId] :member_id
     #   <p>An object that contains the identifier of a group member. Setting the <code>UserID</code> field to the specific identifier for a user indicates that the user is a member of the group.</p>
     # @example Request syntax with placeholder values
@@ -664,27 +730,22 @@ module Aws::Identitystore
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {
-    #     membership_id: "ResourceId", # required
     #     identity_store_id: "IdentityStoreId", # required
+    #     membership_id: "ResourceId", # required
+    #     membership_arn: "ResourceArn", # required
     #   }
-    # @return [Types::GetGroupMembershipIdOutput]
+    # @return [Types::GetGroupMembershipIdResponse]
     def get_group_membership_id(params = {}, options = {})
       request = build_request(:get_group_membership_id, params)
       request.send_request(options)
     end
 
-    # <p>Retrieves the <code>UserId</code> in an identity store.</p>
-    #          <note>
-    #             <p>If you have administrator access to a member account, you can use this API from the member account. 
-    #          Read about <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_access.html">member accounts</a> in the 
-    #          <i>Organizations User Guide</i>. </p>
-    #          </note>
-    # @param [Hash, Types::GetUserIdInput] params
+    # <p>Retrieves the <code>UserId</code> in an identity store.</p> <note> <p>If you have access to a member account, you can use this API operation from the member account. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/userguide/manage-your-accounts.html#limiting-access-from-member-accounts">Limiting access to the identity store from member accounts</a> in the <i> IAM Identity Center User Guide</i>.</p> </note>
+    # @param [Hash, Types::GetUserIdRequest] params
     # @option params [String] :identity_store_id
-    #   <p>The globally unique identifier for the identity store.</p>
+    #   <p>The globally unique identifier for the identity store.</p> <p>You can specify the identity store by ID or by Amazon Resource Name (ARN). For example, identity store ID <code>d-1234567890</code> or identity store ARN <code>arn:aws:identitystore::111122223333:identitystore/d-1234567890</code>.</p>
     # @option params [Types::AlternateIdentifier] :alternate_identifier
-    #   <p>A unique identifier for a user or group that is not the primary identifier. This value can be
-    #            an identifier from an external identity provider (IdP) that is associated with the user, the group, or a unique attribute. For the unique attribute, the only valid paths are <code>userName</code> and <code>emails.value</code>.</p>
+    #   <p>A unique identifier for a user or group that is not the primary identifier. This value can be an identifier from an external identity provider (IdP) that is associated with the user, the group, or a unique attribute. For the unique attribute, the only valid paths are <code> userName</code> and <code>emails.value</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     identity_store_id: "IdentityStoreId", # required
@@ -705,28 +766,24 @@ module Aws::Identitystore
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {
-    #     user_id: "ResourceId", # required
     #     identity_store_id: "IdentityStoreId", # required
+    #     user_id: "ResourceId", # required
+    #     user_arn: "ResourceArn", # required
     #   }
-    # @return [Types::GetUserIdOutput]
+    # @return [Types::GetUserIdResponse]
     def get_user_id(params = {}, options = {})
       request = build_request(:get_user_id, params)
       request.send_request(options)
     end
 
-    # <p>Checks the user's membership in all requested groups and returns if the member exists in all queried groups.</p>
-    #          <note>
-    #             <p>If you have administrator access to a member account, you can use this API from the member account. 
-    #          Read about <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_access.html">member accounts</a> in the 
-    #          <i>Organizations User Guide</i>. </p>
-    #          </note>
-    # @param [Hash, Types::IsMemberInGroupsInput] params
+    # <p>Checks the user's membership in all requested groups and returns if the member exists in all queried groups.</p> <note> <p>If you have access to a member account, you can use this API operation from the member account. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/userguide/manage-your-accounts.html#limiting-access-from-member-accounts">Limiting access to the identity store from member accounts</a> in the <i> IAM Identity Center User Guide</i>.</p> </note>
+    # @param [Hash, Types::IsMemberInGroupsRequest] params
     # @option params [String] :identity_store_id
-    #   <p>The globally unique identifier for the identity store.</p>
+    #   <p>The globally unique identifier for the identity store.</p> <p>You can specify the identity store by ID or by Amazon Resource Name (ARN). For example, identity store ID <code>d-1234567890</code> or identity store ARN <code>arn:aws:identitystore::111122223333:identitystore/d-1234567890</code>.</p>
     # @option params [Types::MemberId] :member_id
     #   <p>An object containing the identifier of a group member.</p>
     # @option params [Array<String>] :group_ids
-    #   <p>A list of identifiers for groups in the identity store.</p>
+    #   <p>A list of identifiers for groups in the identity store.</p> <p>You can specify each group by ID or by Amazon Resource Name (ARN). For example, group ID <code>a1b2c3d4-5678-90ab-cdef-EXAMPLE22222</code> or group ARN <code>arn:aws:identitystore:::group/a1b2c3d4-5678-90ab-cdef-EXAMPLE22222</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     identity_store_id: "IdentityStoreId", # required
@@ -752,28 +809,22 @@ module Aws::Identitystore
     #       }
     #     ]
     #   }
-    # @return [Types::IsMemberInGroupsOutput]
+    # @return [Types::IsMemberInGroupsResponse]
     def is_member_in_groups(params = {}, options = {})
       request = build_request(:is_member_in_groups, params)
       request.send_request(options)
     end
 
-    # <p>For the specified group in the specified identity store, returns the list of all <code>GroupMembership</code> objects and returns results in paginated form.</p>
-    #          <note>
-    #             <p>If you have administrator access to a member account, you can use this API from the member account. 
-    #          Read about <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_access.html">member accounts</a> in the 
-    #          <i>Organizations User Guide</i>. </p>
-    #          </note>
-    # @param [Hash, Types::ListGroupMembershipsInput] params
+    # <p>For the specified group in the specified identity store, returns the list of all <code> GroupMembership</code> objects and returns results in paginated form.</p> <note> <p>If you have access to a member account, you can use this API operation from the member account. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/userguide/manage-your-accounts.html#limiting-access-from-member-accounts">Limiting access to the identity store from member accounts</a> in the <i> IAM Identity Center User Guide</i>.</p> </note>
+    # @param [Hash, Types::ListGroupMembershipsRequest] params
     # @option params [String] :identity_store_id
-    #   <p>The globally unique identifier for the identity store.</p>
+    #   <p>The globally unique identifier for the identity store.</p> <p>You can specify the identity store by ID or by Amazon Resource Name (ARN). For example, identity store ID <code>d-1234567890</code> or identity store ARN <code>arn:aws:identitystore::111122223333:identitystore/d-1234567890</code>.</p>
     # @option params [String] :group_id
-    #   <p>The identifier for a group in the identity store.</p>
+    #   <p>The identifier for a group in the identity store.</p> <p>You can specify the group by ID or by Amazon Resource Name (ARN). For example, group ID <code>a1b2c3d4-5678-90ab-cdef-EXAMPLE22222</code> or group ARN <code>arn:aws:identitystore:::group/a1b2c3d4-5678-90ab-cdef-EXAMPLE22222</code>.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of results to be returned per request. This parameter is used in all
-    #               <code>List</code> requests to specify how many results to return in one page.</p>
+    #   <p>The maximum number of results to be returned per request. This parameter is used in all <code> List</code> requests to specify how many results to return in one page.</p>
     # @option params [String] :next_token
-    #   <p>The pagination token used for the <code>ListUsers</code>, <code>ListGroups</code> and <code>ListGroupMemberships</code> API operations. This value is generated by the identity store service. It is returned in the API response if the total results are more than the size of one page. This token is also returned when it is used in the API request to search for the next page.</p>
+    #   <p>The pagination token used for the <code>ListUsers</code>, <code>ListGroups</code> and <code> ListGroupMemberships</code> API operations. This value is generated by the identity store service. It is returned in the API response if the total results are more than the size of one page. This token is also returned when it is used in the API request to retrieve the next page of results.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     identity_store_id: "IdentityStoreId", # required
@@ -789,37 +840,37 @@ module Aws::Identitystore
     #     group_memberships: [ # required
     #       {
     #         identity_store_id: "IdentityStoreId", # required
-    #         membership_id: "ResourceId",
+    #         membership_id: "ResourceId", # required
+    #         membership_arn: "ResourceArn", # required
     #         group_id: "ResourceId",
     #         member_id: {
     #           # One of:
     #           user_id: "ResourceId"
-    #         }
+    #         },
+    #         created_at: Time.now,
+    #         updated_at: Time.now,
+    #         created_by: "StringType",
+    #         updated_by: "StringType"
     #       }
     #     ],
     #     next_token: "NextToken"
     #   }
-    # @return [Types::ListGroupMembershipsOutput]
+    # @return [Types::ListGroupMembershipsResponse]
     def list_group_memberships(params = {}, options = {})
       request = build_request(:list_group_memberships, params)
       request.send_request(options)
     end
 
-    # <p>For the specified member in the specified identity store, returns the list of all <code>GroupMembership</code> objects and returns results in paginated form.</p>
-    #          <note>
-    #             <p>If you have administrator access to a member account, you can use this API from the member account. 
-    #          Read about <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_access.html">member accounts</a> in the 
-    #          <i>Organizations User Guide</i>. </p>
-    #          </note>
-    # @param [Hash, Types::ListGroupMembershipsForMemberInput] params
+    # <p>For the specified member in the specified identity store, returns the list of all <code> GroupMembership</code> objects and returns results in paginated form.</p> <note> <p>If you have access to a member account, you can use this API operation from the member account. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/userguide/manage-your-accounts.html#limiting-access-from-member-accounts">Limiting access to the identity store from member accounts</a> in the <i> IAM Identity Center User Guide</i>.</p> </note>
+    # @param [Hash, Types::ListGroupMembershipsForMemberRequest] params
     # @option params [String] :identity_store_id
-    #   <p>The globally unique identifier for the identity store.</p>
+    #   <p>The globally unique identifier for the identity store.</p> <p>You can specify the identity store by ID or by Amazon Resource Name (ARN). For example, identity store ID <code>d-1234567890</code> or identity store ARN <code>arn:aws:identitystore::111122223333:identitystore/d-1234567890</code>.</p>
     # @option params [Types::MemberId] :member_id
     #   <p>An object that contains the identifier of a group member. Setting the <code>UserID</code> field to the specific identifier for a user indicates that the user is a member of the group.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of results to be returned per request. This parameter is used in the <code>ListUsers</code> and <code>ListGroups</code> requests to specify how many results to return in one page. The length limit is 50 characters.</p>
+    #   <p>The maximum number of results to be returned per request. This parameter is used in all <code>List</code> requests to specify how many results to return in one page.</p>
     # @option params [String] :next_token
-    #   <p>The pagination token used for the <code>ListUsers</code>, <code>ListGroups</code>, and <code>ListGroupMemberships</code> API operations. This value is generated by the identity store service. It is returned in the API response if the total results are more than the size of one page. This token is also returned when it is used in the API request to search for the next page.</p>
+    #   <p>The pagination token used for the <code>ListUsers</code>, <code>ListGroups</code>, and <code> ListGroupMemberships</code> API operations. This value is generated by the identity store service. It is returned in the API response if the total results are more than the size of one page. This token is also returned when it is used in the API request to retrieve the next page of results.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     identity_store_id: "IdentityStoreId", # required
@@ -838,48 +889,37 @@ module Aws::Identitystore
     #     group_memberships: [ # required
     #       {
     #         identity_store_id: "IdentityStoreId", # required
-    #         membership_id: "ResourceId",
+    #         membership_id: "ResourceId", # required
+    #         membership_arn: "ResourceArn", # required
     #         group_id: "ResourceId",
     #         member_id: {
     #           # One of:
     #           user_id: "ResourceId"
-    #         }
+    #         },
+    #         created_at: Time.now,
+    #         updated_at: Time.now,
+    #         created_by: "StringType",
+    #         updated_by: "StringType"
     #       }
     #     ],
     #     next_token: "NextToken"
     #   }
-    # @return [Types::ListGroupMembershipsForMemberOutput]
+    # @return [Types::ListGroupMembershipsForMemberResponse]
     def list_group_memberships_for_member(params = {}, options = {})
       request = build_request(:list_group_memberships_for_member, params)
       request.send_request(options)
     end
 
-    # <p>Lists all groups in the identity store. Returns a paginated list of complete <code>Group</code> objects. 
-    #          Filtering for a <code>Group</code> by the <code>DisplayName</code> attribute is deprecated. Instead, use the <code>GetGroupId</code> API action.</p>
-    #          <note>
-    #             <p>If you have administrator access to a member account, you can use this API from the member account. 
-    #          Read about <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_access.html">member accounts</a> in the 
-    #          <i>Organizations User Guide</i>. </p>
-    #          </note>
-    # @param [Hash, Types::ListGroupsInput] params
+    # <p>Lists all groups in the identity store. Returns a paginated list of complete <code>Group</code> objects. Filtering for a <code>Group</code> by the <code>DisplayName</code> attribute is deprecated. Instead, use the <code>GetGroupId</code> API action.</p> <note> <p>If you have access to a member account, you can use this API operation from the member account. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/userguide/manage-your-accounts.html#limiting-access-from-member-accounts">Limiting access to the identity store from member accounts</a> in the <i> IAM Identity Center User Guide</i>.</p> </note>
+    # @param [Hash, Types::ListGroupsRequest] params
     # @option params [String] :identity_store_id
-    #   <p>The globally unique identifier for the identity store, such as
-    #            <code>d-1234567890</code>. In this example, <code>d-</code> is a fixed prefix, and
-    #               <code>1234567890</code> is a randomly generated string that contains numbers and lower
-    #            case letters. This value is generated at the time that a new identity store is
-    #            created.</p>
+    #   <p>The globally unique identifier for the identity store, such as <code>d-1234567890</code>. In this example, <code>d-</code> is a fixed prefix, and <code>1234567890</code> is a randomly generated string that contains numbers and lower case letters. This value is generated at the time that a new identity store is created.</p> <p>You can specify the identity store by ID or by Amazon Resource Name (ARN). For example, identity store ID <code>d-1234567890</code> or identity store ARN <code>arn:aws:identitystore::111122223333:identitystore/d-1234567890</code>.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of results to be returned per request. This parameter is used in the
-    #               <code>ListUsers</code> and <code>ListGroups</code> requests to specify how many results
-    #            to return in one page. The length limit is 50 characters.</p>
+    #   <p>The maximum number of results to be returned per request. This parameter is used in all <code>List</code> requests to specify how many results to return in one page.</p>
     # @option params [String] :next_token
-    #   <p>The pagination token used for the <code>ListUsers</code> and <code>ListGroups</code> API
-    #            operations. This value is generated by the identity store service. It is returned in the
-    #            API response if the total results are more than the size of one page. This token is also
-    #            returned when it is used in the API request to search for the next page.</p>
+    #   <p>The pagination token used for the <code>ListUsers</code> and <code>ListGroups</code> API operations. This value is generated by the identity store service. It is returned in the API response if the total results are more than the size of one page. This token is also returned when it is used in the API request to retrieve the next page of results.</p>
     # @option params [Array<Types::Filter>] :filters
-    #   <p>A list of <code>Filter</code> objects, which is used in the <code>ListUsers</code> and
-    #               <code>ListGroups</code> requests.</p>
+    #   <p>A list of <code>Filter</code> objects, which is used in the <code>ListUsers</code> and <code> ListGroups</code> requests.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     identity_store_id: "IdentityStoreId", # required
@@ -899,7 +939,10 @@ module Aws::Identitystore
     #   {
     #     groups: [ # required
     #       {
+    #         identity_store_id: "IdentityStoreId", # required
     #         group_id: "ResourceId", # required
+    #         group_arn: "ResourceArn", # required
+    #         revision: "ResourceRevision", # required
     #         display_name: "GroupDisplayName",
     #         external_ids: [
     #           {
@@ -908,46 +951,66 @@ module Aws::Identitystore
     #           }
     #         ],
     #         description: "SensitiveStringType",
-    #         identity_store_id: "IdentityStoreId", # required
+    #         created_at: Time.now,
+    #         updated_at: Time.now,
+    #         created_by: "StringType",
+    #         updated_by: "StringType"
     #       }
     #     ],
     #     next_token: "NextToken"
     #   }
-    # @return [Types::ListGroupsOutput]
+    # @return [Types::ListGroupsResponse]
     def list_groups(params = {}, options = {})
       request = build_request(:list_groups, params)
       request.send_request(options)
     end
 
-    # <p>Lists all users in the identity store. Returns a paginated list of complete <code>User</code> objects. 
-    #          Filtering for a <code>User</code> by the <code>UserName</code> attribute is deprecated. Instead, use the <code>GetUserId</code> API action.</p>
-    #          <note>
-    #             <p>If you have administrator access to a member account, you can use this API from the member account. 
-    #          Read about <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_access.html">member accounts</a> in the 
-    #          <i>Organizations User Guide</i>.</p>
-    #          </note>
-    # @param [Hash, Types::ListUsersInput] params
-    # @option params [String] :identity_store_id
-    #   <p>The globally unique identifier for the identity store, such as
-    #            <code>d-1234567890</code>. In this example, <code>d-</code> is a fixed prefix, and
-    #               <code>1234567890</code> is a randomly generated string that contains numbers and lower
-    #            case letters. This value is generated at the time that a new identity store is
-    #            created.</p>
+    # <p>Lists the identity stores that you have access to. This operation returns only the identity store ID and Amazon Resource Name (ARN) of each identity store. To obtain additional information about an identity store, call <code>DescribeIdentityStore</code>.</p> <p>This operation returns results in paginated form. Use the <code>NextToken</code> parameter to retrieve additional pages of results.</p>
+    # @param [Hash, Types::ListIdentityStoresRequest] params
     # @option params [Integer] :max_results
-    #   <p>The maximum number of results to be returned per request. This parameter is used in the
-    #               <code>ListUsers</code> and <code>ListGroups</code> requests to specify how many results
-    #            to return in one page. The length limit is 50 characters.</p>
+    #   <p>The maximum number of results to return per request. This parameter is used in all <code> List</code> operations to specify how many results to return on one page. If you don't specify a value, the operation uses a default page size.</p>
     # @option params [String] :next_token
-    #   <p>The pagination token used for the <code>ListUsers</code> and <code>ListGroups</code> API
-    #            operations. This value is generated by the identity store service. It is returned in the
-    #            API response if the total results are more than the size of one page. This token is also
-    #            returned when it is used in the API request to search for the next page.</p>
+    #   <p>The pagination token used for the <code>ListIdentityStores</code> API operation. This value is generated by the identity store service. It is returned in the API response if the total results are more than the size of one page. This token is also returned when it is used in the API request to retrieve the next page of results.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     max_results: 1,
+    #     next_token: "NextToken"
+    #   }
+    #   options = {}
+    #   response = client.list_identity_stores(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     identity_stores: [ # required
+    #       {
+    #         identity_store_id: "IdentityStoreId", # required
+    #         identity_store_arn: "IdentityStoreArn", # required
+    #       }
+    #     ],
+    #     next_token: "NextToken"
+    #   }
+    # @return [Types::ListIdentityStoresResponse]
+    def list_identity_stores(params = {}, options = {})
+      request = build_request(:list_identity_stores, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists all users in the identity store. Returns a paginated list of complete <code>User</code> objects. Filtering for a <code>User</code> by the <code>UserName</code> attribute is deprecated. Instead, use the <code>GetUserId</code> API action.</p> <note> <p>If you have access to a member account, you can use this API operation from the member account. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/userguide/manage-your-accounts.html#limiting-access-from-member-accounts">Limiting access to the identity store from member accounts</a> in the <i> IAM Identity Center User Guide</i>.</p> </note>
+    # @param [Hash, Types::ListUsersRequest] params
+    # @option params [String] :identity_store_id
+    #   <p>The globally unique identifier for the identity store, such as <code>d-1234567890</code>. In this example, <code>d-</code> is a fixed prefix, and <code>1234567890</code> is a randomly generated string that contains numbers and lower case letters. This value is generated at the time that a new identity store is created.</p> <p>You can specify the identity store by ID or by Amazon Resource Name (ARN). For example, identity store ID <code>d-1234567890</code> or identity store ARN <code>arn:aws:identitystore::111122223333:identitystore/d-1234567890</code>.</p>
+    # @option params [Array<String>] :extensions
+    #   <p>A collection of extension names indicating what extensions the service should retrieve alongside other user attributes. <code>aws:identitystore:enterprise</code> is the only supported extension name.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to be returned per request. This parameter is used in all <code>List</code> requests to specify how many results to return in one page.</p>
+    # @option params [String] :next_token
+    #   <p>The pagination token used for the <code>ListUsers</code> and <code>ListGroups</code> API operations. This value is generated by the identity store service. It is returned in the API response if the total results are more than the size of one page. This token is also returned when it is used in the API request to retrieve the next page of results.</p>
     # @option params [Array<Types::Filter>] :filters
-    #   <p>A list of <code>Filter</code> objects, which is used in the <code>ListUsers</code> and
-    #               <code>ListGroups</code> requests. </p>
+    #   <p>A list of <code>Filter</code> objects, which is used in the <code>ListUsers</code> and <code> ListGroups</code> requests. </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     identity_store_id: "IdentityStoreId", # required
+    #     extensions: ["ExtensionName"],
     #     max_results: 1,
     #     next_token: "NextToken",
     #     filters: [
@@ -964,8 +1027,11 @@ module Aws::Identitystore
     #   {
     #     users: [ # required
     #       {
-    #         user_name: "UserName",
+    #         identity_store_id: "IdentityStoreId", # required
     #         user_id: "ResourceId", # required
+    #         user_arn: "ResourceArn", # required
+    #         revision: "ResourceRevision", # required
+    #         user_name: "UserName",
     #         external_ids: [
     #           {
     #             issuer: "ExternalIdIssuer", # required
@@ -1014,26 +1080,51 @@ module Aws::Identitystore
     #         preferred_language: "SensitiveStringType",
     #         locale: "SensitiveStringType",
     #         timezone: "SensitiveStringType",
-    #         identity_store_id: "IdentityStoreId", # required
+    #         user_status: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #         photos: [
+    #           {
+    #             value: "SensitiveStringType", # required
+    #             type: "SensitiveStringType",
+    #             display: "SensitiveStringType",
+    #             primary: false
+    #           }
+    #         ],
+    #         website: "SensitiveStringType",
+    #         birthdate: "SensitiveStringType",
+    #         roles: [
+    #           {
+    #             value: "SensitiveStringType",
+    #             type: "SensitiveStringType",
+    #             primary: false
+    #           }
+    #         ],
+    #         created_at: Time.now,
+    #         created_by: "StringType",
+    #         updated_at: Time.now,
+    #         updated_by: "StringType",
+    #         extensions: {
+    #           "ExtensionName" => ""null""
+    #         }
     #       }
     #     ],
     #     next_token: "NextToken"
     #   }
-    # @return [Types::ListUsersOutput]
+    # @return [Types::ListUsersResponse]
     def list_users(params = {}, options = {})
       request = build_request(:list_users, params)
       request.send_request(options)
     end
 
-    # <p>For the specified group in the specified identity store, updates the group metadata and attributes.</p>
-    # @param [Hash, Types::UpdateGroupInput] params
+    # <p>Updates the specified group metadata and attributes in the specified identity store.</p>
+    # @param [Hash, Types::UpdateGroupRequest] params
     # @option params [String] :identity_store_id
-    #   <p>The globally unique identifier for the identity store.</p>
+    #   <p>The globally unique identifier for the identity store.</p> <p>You can specify the identity store by ID or by Amazon Resource Name (ARN). For example, identity store ID <code>d-1234567890</code> or identity store ARN <code>arn:aws:identitystore::111122223333:identitystore/d-1234567890</code>.</p>
     # @option params [String] :group_id
-    #   <p>The identifier for a group in the identity store.</p>
+    #   <p>The identifier for a group in the identity store.</p> <p>You can specify the group by ID or by Amazon Resource Name (ARN). For example, group ID <code>a1b2c3d4-5678-90ab-cdef-EXAMPLE22222</code> or group ARN <code>arn:aws:identitystore:::group/a1b2c3d4-5678-90ab-cdef-EXAMPLE22222</code>.</p>
     # @option params [Array<Types::AttributeOperation>] :operations
-    #   <p>A list of <code>AttributeOperation</code> objects to apply to the requested group. These
-    #            operations might add, replace, or remove an attribute.</p>
+    #   <p>A list of <code>AttributeOperation</code> objects to apply to the requested group. These operations might add, replace, or remove an attribute. For more information on the attributes that can be added, replaced, or removed, see <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html">Group</a>.</p>
+    # @option params [String] :revision
+    #   <p>The expected current revision of the group. When you provide this value, the update is applied only if it matches the current revision of the group in the identity store, which prevents you from overwriting concurrent changes. If the value doesn't match, the operation fails with a <code>ConflictException</code>. If you don't provide this value, the update is applied unconditionally.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     identity_store_id: "IdentityStoreId", # required
@@ -1043,28 +1134,65 @@ module Aws::Identitystore
     #         attribute_path: "AttributePath", # required
     #         attribute_value: ""null""
     #       }
-    #     ]
+    #     ],
+    #     revision: "ResourceRevision"
     #   }
     #   options = {}
     #   response = client.update_group(params, options)
     # @example Response structure with placeholder values
     #   response.to_h #=>
-    #   {}
-    # @return [Types::UpdateGroupOutput]
+    #   {
+    #     identity_store_id: "IdentityStoreId", # required
+    #     group_id: "ResourceId", # required
+    #     group_arn: "ResourceArn", # required
+    #     revision: "ResourceRevision", # required
+    #   }
+    # @return [Types::UpdateGroupResponse]
     def update_group(params = {}, options = {})
       request = build_request(:update_group, params)
       request.send_request(options)
     end
 
-    # <p>For the specified user in the specified identity store, updates the user metadata and attributes.</p>
-    # @param [Hash, Types::UpdateUserInput] params
+    # <p>Updates the configuration of the specified identity store, including its network configuration.</p>
+    # @param [Hash, Types::UpdateIdentityStoreRequest] params
     # @option params [String] :identity_store_id
-    #   <p>The globally unique identifier for the identity store.</p>
+    #   <p>The globally unique identifier for the identity store.</p> <p>You can specify the identity store by ID or by Amazon Resource Name (ARN). For example, identity store ID <code>d-1234567890</code> or identity store ARN <code>arn:aws:identitystore::111122223333:identitystore/d-1234567890</code>.</p>
+    # @option params [Types::NetworkConfiguration] :network_configuration
+    #   <p>The network configuration to apply to the identity store. This controls whether access through a virtual private cloud (VPC) endpoint is required and the source VPCs and IP addresses that are allowed to access the identity store.</p> <p>When you provide <code>NetworkConfiguration</code> in a request, the service performs a full replacement of the identity store's current network configuration with the values you specify. Any values that you omit are cleared. To preserve or change the allowed source VPCs or IP address ranges, include the complete set of values that you want in the request. To clear a list, omit it; an empty list is not accepted.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     identity_store_id: "IdentityStoreId", # required
+    #     network_configuration: {
+    #       vpce_access_required: false, # required
+    #       api_restrict_source_vpcs: ["VpcIdType"],
+    #       api_allow_source_ips: ["IpCidrType"],
+    #       scim_allow_source_ips: ["IpCidrType"]
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.update_identity_store(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     identity_store_id: "IdentityStoreId", # required
+    #     identity_store_arn: "IdentityStoreArn", # required
+    #   }
+    # @return [Types::UpdateIdentityStoreResponse]
+    def update_identity_store(params = {}, options = {})
+      request = build_request(:update_identity_store, params)
+      request.send_request(options)
+    end
+
+    # <p>Updates the specified user metadata and attributes in the specified identity store.</p>
+    # @param [Hash, Types::UpdateUserRequest] params
+    # @option params [String] :identity_store_id
+    #   <p>The globally unique identifier for the identity store.</p> <p>You can specify the identity store by ID or by Amazon Resource Name (ARN). For example, identity store ID <code>d-1234567890</code> or identity store ARN <code>arn:aws:identitystore::111122223333:identitystore/d-1234567890</code>.</p>
     # @option params [String] :user_id
-    #   <p>The identifier for a user in the identity store.</p>
+    #   <p>The identifier for a user in the identity store.</p> <p>You can specify the user by ID or by Amazon Resource Name (ARN). For example, user ID <code>a1b2c3d4-5678-90ab-cdef-EXAMPLE11111</code> or user ARN <code>arn:aws:identitystore:::user/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111</code>.</p>
     # @option params [Array<Types::AttributeOperation>] :operations
-    #   <p>A list of <code>AttributeOperation</code> objects to apply to the requested user. These
-    #            operations might add, replace, or remove an attribute.</p>
+    #   <p>A list of <code>AttributeOperation</code> objects to apply to the requested user. These operations might add, replace, or remove an attribute. For more information on the attributes that can be added, replaced, or removed, see <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html">User</a>.</p>
+    # @option params [String] :revision
+    #   <p>The expected current revision of the user. When you provide this value, the update is applied only if it matches the current revision of the user in the identity store, which prevents you from overwriting concurrent changes. If the value doesn't match, the operation fails with a <code>ConflictException</code>. If you don't provide this value, the update is applied unconditionally.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     identity_store_id: "IdentityStoreId", # required
@@ -1074,14 +1202,20 @@ module Aws::Identitystore
     #         attribute_path: "AttributePath", # required
     #         attribute_value: ""null""
     #       }
-    #     ]
+    #     ],
+    #     revision: "ResourceRevision"
     #   }
     #   options = {}
     #   response = client.update_user(params, options)
     # @example Response structure with placeholder values
     #   response.to_h #=>
-    #   {}
-    # @return [Types::UpdateUserOutput]
+    #   {
+    #     identity_store_id: "IdentityStoreId", # required
+    #     user_id: "ResourceId", # required
+    #     user_arn: "ResourceArn", # required
+    #     revision: "ResourceRevision", # required
+    #   }
+    # @return [Types::UpdateUserResponse]
     def update_user(params = {}, options = {})
       request = build_request(:update_user, params)
       request.send_request(options)

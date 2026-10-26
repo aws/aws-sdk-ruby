@@ -394,6 +394,7 @@ module Aws::EventBridge
       def log_config: () -> Types::LogConfig?
       def creation_time: () -> Time?
       def last_modified_time: () -> Time?
+      def managed_by: () -> String?
     end
     def describe_event_bus: (
       ?name: String

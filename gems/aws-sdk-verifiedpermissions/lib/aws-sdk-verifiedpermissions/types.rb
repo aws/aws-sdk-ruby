@@ -33,24 +33,24 @@ module Aws::VerifiedPermissions
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The value of an attribute.</p> <p>Contains information about the runtime context for a request for which an authorization decision is made. </p> <p>This data type is used as a member of the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ContextDefinition.html">ContextDefinition</a> structure which is uses as a request parameter for the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorized.html">IsAuthorized</a>, <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_BatchIsAuthorized.html">BatchIsAuthorized</a>, and <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html">IsAuthorizedWithToken</a> operations.</p>
+    # <p>The value of an attribute.</p> <p>Contains information about the runtime context for a request for which an authorization decision is made. </p> <p>This data type is used as a member of the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ContextDefinition.html">ContextDefinition</a> structure which is used as a request parameter for the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorized.html">IsAuthorized</a>, <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_BatchIsAuthorized.html">BatchIsAuthorized</a>, and <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html">IsAuthorizedWithToken</a> operations.</p>
     # @!attribute boolean
-    #   <p>An attribute value of <a href="https://docs.cedarpolicy.com/policies/syntax-datatypes.html#boolean">Boolean</a> type.</p> <p>Example: <code>{"boolean": true}</code> </p>
+    #   <p>An attribute value of <a href="https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-bool">Boolean</a> type.</p> <p>Example: <code>{"boolean": true}</code> </p>
     #   @return [Boolean]
     # @!attribute entity_identifier
-    #   <p>An attribute value of type <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_EntityIdentifier.html">EntityIdentifier</a>.</p> <p>Example: <code>"entityIdentifier": { "entityId": "&lt;id&gt;", "entityType": "&lt;entity type&gt;"}</code> </p>
+    #   <p>An attribute value of type <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_EntityIdentifier.html">EntityIdentifier</a>.</p> <p>Example: <code>{"entityIdentifier": { "entityId": "alice", "entityType": "User"} }</code> </p>
     #   @return [Types::EntityIdentifier]
     # @!attribute long
-    #   <p>An attribute value of <a href="https://docs.cedarpolicy.com/policies/syntax-datatypes.html#long">Long</a> type.</p> <p>Example: <code>{"long": 0}</code> </p>
+    #   <p>An attribute value of <a href="https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-long">Long</a> type.</p> <p>Example: <code>{"long": 0}</code> </p>
     #   @return [Integer]
     # @!attribute string
-    #   <p>An attribute value of <a href="https://docs.cedarpolicy.com/policies/syntax-datatypes.html#string">String</a> type.</p> <p>Example: <code>{"string": "abc"}</code> </p>
+    #   <p>An attribute value of <a href="https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-string">String</a> type.</p> <p>Example: <code>{"string": "abc"}</code> </p>
     #   @return [String]
     # @!attribute set
-    #   <p>An attribute value of <a href="https://docs.cedarpolicy.com/policies/syntax-datatypes.html#set">Set</a> type.</p> <p>Example: <code>{"set": [ {} ] }</code> </p>
+    #   <p>An attribute value of <a href="https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-set">Set</a> type.</p> <p>Example: <code>{"set": [ {} ] }</code> </p>
     #   @return [Array<Types::AttributeValue>]
     # @!attribute record
-    #   <p>An attribute value of <a href="https://docs.cedarpolicy.com/policies/syntax-datatypes.html#record">Record</a> type.</p> <p>Example: <code>{"record": { "keyName": {} } }</code> </p>
+    #   <p>An attribute value of <a href="https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-record">Record</a> type.</p> <p>Example: <code>{"record": { "keyName": {} } }</code> </p>
     #   @return [Hash<String, Types::AttributeValue>]
     # @!attribute ipaddr
     #   <p>An attribute value of <a href="https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-ipaddr">ipaddr</a> type.</p> <p>Example: <code>{"ip": "192.168.1.100"}</code> </p>
@@ -133,7 +133,7 @@ module Aws::VerifiedPermissions
     #   <p>The identifier of the policy store where the policy you want information about is stored.</p>
     #   @return [String]
     # @!attribute policy_id
-    #   <p>The identifier of the policy you want information about.</p>
+    #   <p>The identifier of the policy you want information about.</p> <p>You can use the policy name in place of the policy ID. When using a name, prefix it with <code>name/</code>. For example:</p> <ul> <li> <p>ID: <code>SPEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Name: <code>name/example-policy</code> </p> </li> </ul>
     #   @return [String]
     class BatchGetPolicyInputItem < Struct.new(
       nil,
@@ -178,6 +178,9 @@ module Aws::VerifiedPermissions
     # @!attribute last_updated_date
     #   <p>The date and time the policy was most recently updated.</p>
     #   @return [Time]
+    # @!attribute name
+    #   <p>The name of the policy, if one was assigned when the policy was created or last updated.</p>
+    #   @return [String]
     class BatchGetPolicyOutputItem < Struct.new(
       nil,
       :policy_store_id,
@@ -186,13 +189,14 @@ module Aws::VerifiedPermissions
       :definition,
       :created_date,
       :last_updated_date,
+      :name,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_store_id
-    #   <p>Specifies the ID of the policy store. Policies in this policy store will be used to make the authorization decisions for the input.</p>
+    #   <p>Specifies the ID of the policy store. Policies in this policy store will be used to make the authorization decisions for the input.</p> <p>To specify a policy store, use its ID or alias name. When using an alias name, prefix it with <code>policy-store-alias/</code>. For example:</p> <ul> <li> <p>ID: <code>PSEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Alias name: <code>policy-store-alias/example-policy-store</code> </p> </li> </ul> <p>To view aliases, use <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html">ListPolicyStoreAliases</a>.</p>
     #   @return [String]
     # @!attribute entities
     #   <p>(Optional) Specifies the list of resources and principals and their associated attributes that Verified Permissions can examine when evaluating the policies. These additional entities and their attributes can be referenced and checked by conditional elements in the policies in the specified policy store.</p> <note> <p>You can include only principal and resource entities in this parameter; you can't include actions. You must specify actions in the schema.</p> </note>
@@ -270,7 +274,7 @@ module Aws::VerifiedPermissions
     end
 
     # @!attribute policy_store_id
-    #   <p>Specifies the ID of the policy store. Policies in this policy store will be used to make an authorization decision for the input.</p>
+    #   <p>Specifies the ID of the policy store. Policies in this policy store will be used to make an authorization decision for the input.</p> <p>To specify a policy store, use its ID or alias name. When using an alias name, prefix it with <code>policy-store-alias/</code>. For example:</p> <ul> <li> <p>ID: <code>PSEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Alias name: <code>policy-store-alias/example-policy-store</code> </p> </li> </ul> <p>To view aliases, use <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html">ListPolicyStoreAliases</a>.</p>
     #   @return [String]
     # @!attribute identity_token
     #   <p>Specifies an identity (ID) token for the principal that you want to authorize in each request. This token is provided to you by the identity provider (IdP) associated with the specified identity source. You must specify either an <code>accessToken</code>, an <code>identityToken</code>, or both.</p> <p>Must be an ID token. Verified Permissions returns an error if the <code>token_use</code> claim in the submitted token isn't <code>id</code>.</p>
@@ -353,6 +357,66 @@ module Aws::VerifiedPermissions
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+    end
+
+    # <p>The value of an entity's Cedar tag.</p> <p>This data type is used as a member of the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_EntityItem.html">EntityItem</a> structure that forms the body of the <code>Entities</code> request parameter for the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorized.html">IsAuthorized</a>, <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_BatchIsAuthorized.html">BatchIsAuthorized</a>, <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html">IsAuthorizedWithToken</a>, and <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_BatchIsAuthorizedWithToken.html">BatchIsAuthorizedWithToken</a> operations.</p>
+    # @!attribute boolean
+    #   <p>A Cedar tag value of <a href="https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-bool">Boolean</a> type.</p> <p>Example: <code>{"boolean": false}</code> </p>
+    #   @return [Boolean]
+    # @!attribute entity_identifier
+    #   <p>A Cedar tag value of type <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_EntityIdentifier.html">EntityIdentifier</a>.</p> <p>Example: <code>{"entityIdentifier": { "entityId": "alice", "entityType": "User"} }</code> </p>
+    #   @return [Types::EntityIdentifier]
+    # @!attribute long
+    #   <p>A Cedar tag value of <a href="https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-long">Long</a> type.</p> <p>Example: <code>{"long": 0}</code> </p>
+    #   @return [Integer]
+    # @!attribute string
+    #   <p>A Cedar tag value of <a href="https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-string">String</a> type.</p> <p>Example: <code>{"string": "abc"}</code> </p>
+    #   @return [String]
+    # @!attribute set
+    #   <p>A Cedar tag value of <a href="https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-set">Set</a> type.</p> <p>Example: <code>{"set": [ { "string": "abc" } ] }</code> </p>
+    #   @return [Array<Types::CedarTagValue>]
+    # @!attribute record
+    #   <p>A Cedar tag value of <a href="https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-record">Record</a> type.</p> <p>Example: <code>{"record": { "keyName": {} } }</code> </p>
+    #   @return [Hash<String, Types::CedarTagValue>]
+    # @!attribute ipaddr
+    #   <p>A Cedar tag value of <a href="https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-ipaddr">ipaddr</a> type.</p> <p>Example: <code>{"ip": "10.50.0.0/24"}</code> </p>
+    #   @return [String]
+    # @!attribute decimal
+    #   <p>A Cedar tag value of <a href="https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-decimal">decimal</a> type.</p> <p>Example: <code>{"decimal": "-2.0"}</code> </p>
+    #   @return [String]
+    # @!attribute datetime
+    #   <p>A Cedar tag value of <a href="https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-datetime">datetime</a> type.</p> <p>Example: <code>{"datetime": "2025-11-04T11:35:00.000+0100"}</code> </p>
+    #   @return [String]
+    # @!attribute duration
+    #   <p>A Cedar tag value of <a href="https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-duration">duration</a> type.</p> <p>Example: <code>{"duration": "-1d12h"}</code> </p>
+    #   @return [String]
+    class CedarTagValue < Struct.new(
+      :boolean,
+      :entity_identifier,
+      :long,
+      :string,
+      :set,
+      :record,
+      :ipaddr,
+      :decimal,
+      :datetime,
+      :duration,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class Boolean < CedarTagValue; end
+      class EntityIdentifier < CedarTagValue; end
+      class Long < CedarTagValue; end
+      class String < CedarTagValue; end
+      class Set < CedarTagValue; end
+      class Record < CedarTagValue; end
+      class Ipaddr < CedarTagValue; end
+      class Decimal < CedarTagValue; end
+      class Datetime < CedarTagValue; end
+      class Duration < CedarTagValue; end
+      class Unknown < CedarTagValue; end
     end
 
     # <p>The type of entity that a policy store maps to groups from an Amazon Cognito user pool identity source.</p> <p>This data type is part of a <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CognitoUserPoolConfiguration.html">CognitoUserPoolConfiguration</a> structure and is a request parameter in <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreateIdentitySource.html">CreateIdentitySource</a>.</p>
@@ -519,7 +583,7 @@ module Aws::VerifiedPermissions
       class Unknown < ConfigurationItem; end
     end
 
-    # <p>The request failed because another request to modify a resource occurred at the same.</p>
+    # <p>The request failed because another request to modify a resource occurred at the same time.</p>
     # @!attribute message
     #   @return [String]
     # @!attribute resources
@@ -558,7 +622,7 @@ module Aws::VerifiedPermissions
     #   <p>Specifies a unique, case-sensitive ID that you provide to ensure the idempotency of the request. This lets you safely retry the request without accidentally performing the same operation a second time. Passing the same value to a later call to an operation requires that you also pass the same value for all other parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of value.</a>.</p> <p>If you don't provide this value, then Amazon Web Services generates a random one for you.</p> <p>If you retry the operation with the same <code>ClientToken</code>, but with different parameters, the retry fails with an <code>ConflictException</code> error.</p> <p>Verified Permissions recognizes a <code>ClientToken</code> for eight hours. After eight hours, the next request with the same parameters performs the operation again regardless of the value of <code>ClientToken</code>.</p>
     #   @return [String]
     # @!attribute policy_store_id
-    #   <p>Specifies the ID of the policy store in which you want to store this identity source. Only policies and requests made using this policy store can reference identities from the identity provider configured in the new identity source.</p>
+    #   <p>Specifies the ID of the policy store in which you want to store this identity source. Only policies and requests made using this policy store can reference identities from the identity provider configured in the new identity source.</p> <p>To specify a policy store, use its ID or alias name. When using an alias name, prefix it with <code>policy-store-alias/</code>. For example:</p> <ul> <li> <p>ID: <code>PSEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Alias name: <code>policy-store-alias/example-policy-store</code> </p> </li> </ul> <p>To view aliases, use <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html">ListPolicyStoreAliases</a>.</p>
     #   @return [String]
     # @!attribute configuration
     #   <p>Specifies the details required to communicate with the identity provider (IdP) associated with this identity source.</p>
@@ -604,16 +668,20 @@ module Aws::VerifiedPermissions
     #   <p>Specifies a unique, case-sensitive ID that you provide to ensure the idempotency of the request. This lets you safely retry the request without accidentally performing the same operation a second time. Passing the same value to a later call to an operation requires that you also pass the same value for all other parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of value.</a>.</p> <p>If you don't provide this value, then Amazon Web Services generates a random one for you.</p> <p>If you retry the operation with the same <code>ClientToken</code>, but with different parameters, the retry fails with an <code>ConflictException</code> error.</p> <p>Verified Permissions recognizes a <code>ClientToken</code> for eight hours. After eight hours, the next request with the same parameters performs the operation again regardless of the value of <code>ClientToken</code>.</p>
     #   @return [String]
     # @!attribute policy_store_id
-    #   <p>Specifies the <code>PolicyStoreId</code> of the policy store you want to store the policy in.</p>
+    #   <p>Specifies the <code>PolicyStoreId</code> of the policy store you want to store the policy in.</p> <p>To specify a policy store, use its ID or alias name. When using an alias name, prefix it with <code>policy-store-alias/</code>. For example:</p> <ul> <li> <p>ID: <code>PSEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Alias name: <code>policy-store-alias/example-policy-store</code> </p> </li> </ul> <p>To view aliases, use <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html">ListPolicyStoreAliases</a>.</p>
     #   @return [String]
     # @!attribute definition
     #   <p>A structure that specifies the policy type and content to use for the new policy. You must include either a static or a templateLinked element. The policy content must be written in the Cedar policy language.</p>
     #   @return [Types::PolicyDefinition]
+    # @!attribute name
+    #   <p>Specifies a name for the policy that is unique among all policies within the policy store. You can use the name in place of the policy ID in API operations that reference the policy. The name must be prefixed with <code>name/</code>.</p> <p>If you specify a name that is already associated with another policy in the policy store, you receive a <code>ConflictException</code> error.</p>
+    #   @return [String]
     class CreatePolicyInput < Struct.new(
       nil,
       :client_token,
       :policy_store_id,
       :definition,
+      :name,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -662,6 +730,44 @@ module Aws::VerifiedPermissions
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute alias_name
+    #   <p>Specifies the name of the policy store alias to create. The name must be unique within your Amazon Web Services account and Amazon Web Services Region.</p> <note> <p>The alias name must always be prefixed with <code>policy-store-alias/</code>.</p> </note>
+    #   @return [String]
+    # @!attribute policy_store_id
+    #   <p>Specifies the ID of the policy store to associate with the alias.</p> <note> <p>The associated policy store must be specified using its ID. The alias name cannot be used.</p> </note>
+    #   @return [String]
+    class CreatePolicyStoreAliasInput < Struct.new(
+      nil,
+      :alias_name,
+      :policy_store_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute alias_name
+    #   <p>The name of the policy store alias.</p>
+    #   @return [String]
+    # @!attribute policy_store_id
+    #   <p>The ID of the policy store associated with the alias.</p>
+    #   @return [String]
+    # @!attribute alias_arn
+    #   <p>The Amazon Resource Name (ARN) of the policy store alias.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The date and time the policy store alias was created.</p>
+    #   @return [Time]
+    class CreatePolicyStoreAliasOutput < Struct.new(
+      nil,
+      :alias_name,
+      :policy_store_id,
+      :alias_arn,
+      :created_at,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute client_token
     #   <p>Specifies a unique, case-sensitive ID that you provide to ensure the idempotency of the request. This lets you safely retry the request without accidentally performing the same operation a second time. Passing the same value to a later call to an operation requires that you also pass the same value for all other parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of value.</a>.</p> <p>If you don't provide this value, then Amazon Web Services generates a random one for you.</p> <p>If you retry the operation with the same <code>ClientToken</code>, but with different parameters, the retry fails with an <code>ConflictException</code> error.</p> <p>Verified Permissions recognizes a <code>ClientToken</code> for eight hours. After eight hours, the next request with the same parameters performs the operation again regardless of the value of <code>ClientToken</code>.</p>
     #   @return [String]
@@ -674,6 +780,9 @@ module Aws::VerifiedPermissions
     # @!attribute deletion_protection
     #   <p>Specifies whether the policy store can be deleted. If enabled, the policy store can't be deleted.</p> <p>The default state is <code>DISABLED</code>.</p>
     #   @return [String]
+    # @!attribute encryption_settings
+    #   <p>Specifies the encryption settings used to encrypt the policy store and their child resources. Allows for the ability to use a customer owned KMS key for encryption of data.</p> <p>This is an optional field to be used when providing a customer-managed KMS key for encryption.</p>
+    #   @return [Types::EncryptionSettings]
     # @!attribute tags
     #   <p>The list of key-value pairs to associate with the policy store.</p>
     #   @return [Hash<String, String>]
@@ -683,6 +792,7 @@ module Aws::VerifiedPermissions
       :validation_settings,
       :description,
       :deletion_protection,
+      :encryption_settings,
       :tags,
       keyword_init: true
     )
@@ -716,7 +826,7 @@ module Aws::VerifiedPermissions
     #   <p>Specifies a unique, case-sensitive ID that you provide to ensure the idempotency of the request. This lets you safely retry the request without accidentally performing the same operation a second time. Passing the same value to a later call to an operation requires that you also pass the same value for all other parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of value.</a>.</p> <p>If you don't provide this value, then Amazon Web Services generates a random one for you.</p> <p>If you retry the operation with the same <code>ClientToken</code>, but with different parameters, the retry fails with an <code>ConflictException</code> error.</p> <p>Verified Permissions recognizes a <code>ClientToken</code> for eight hours. After eight hours, the next request with the same parameters performs the operation again regardless of the value of <code>ClientToken</code>.</p>
     #   @return [String]
     # @!attribute policy_store_id
-    #   <p>The ID of the policy store in which to create the policy template.</p>
+    #   <p>The ID of the policy store in which to create the policy template.</p> <p>To specify a policy store, use its ID or alias name. When using an alias name, prefix it with <code>policy-store-alias/</code>. For example:</p> <ul> <li> <p>ID: <code>PSEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Alias name: <code>policy-store-alias/example-policy-store</code> </p> </li> </ul> <p>To view aliases, use <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html">ListPolicyStoreAliases</a>.</p>
     #   @return [String]
     # @!attribute description
     #   <p>Specifies a description for the policy template.</p>
@@ -724,12 +834,16 @@ module Aws::VerifiedPermissions
     # @!attribute statement
     #   <p>Specifies the content that you want to use for the new policy template, written in the Cedar policy language.</p>
     #   @return [String]
+    # @!attribute name
+    #   <p>Specifies a name for the policy template that is unique among all policy templates within the policy store. You can use the name in place of the policy template ID in API operations that reference the policy template. The name must be prefixed with <code>name/</code>.</p> <p>If you specify a name that is already associated with another policy template in the policy store, you receive a <code>ConflictException</code> error.</p>
+    #   @return [String]
     class CreatePolicyTemplateInput < Struct.new(
       nil,
       :client_token,
       :policy_store_id,
       :description,
       :statement,
+      :name,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -759,7 +873,7 @@ module Aws::VerifiedPermissions
     end
 
     # @!attribute policy_store_id
-    #   <p>Specifies the ID of the policy store that contains the identity source that you want to delete.</p>
+    #   <p>Specifies the ID of the policy store that contains the identity source that you want to delete.</p> <p>To specify a policy store, use its ID or alias name. When using an alias name, prefix it with <code>policy-store-alias/</code>. For example:</p> <ul> <li> <p>ID: <code>PSEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Alias name: <code>policy-store-alias/example-policy-store</code> </p> </li> </ul> <p>To view aliases, use <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html">ListPolicyStoreAliases</a>.</p>
     #   @return [String]
     # @!attribute identity_source_id
     #   <p>Specifies the ID of the identity source that you want to delete.</p>
@@ -781,10 +895,10 @@ module Aws::VerifiedPermissions
     end
 
     # @!attribute policy_store_id
-    #   <p>Specifies the ID of the policy store that contains the policy that you want to delete.</p>
+    #   <p>Specifies the ID of the policy store that contains the policy that you want to delete.</p> <p>To specify a policy store, use its ID or alias name. When using an alias name, prefix it with <code>policy-store-alias/</code>. For example:</p> <ul> <li> <p>ID: <code>PSEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Alias name: <code>policy-store-alias/example-policy-store</code> </p> </li> </ul> <p>To view aliases, use <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html">ListPolicyStoreAliases</a>.</p>
     #   @return [String]
     # @!attribute policy_id
-    #   <p>Specifies the ID of the policy that you want to delete.</p>
+    #   <p>Specifies the ID of the policy that you want to delete.</p> <p>You can use the policy name in place of the policy ID. When using a name, prefix it with <code>name/</code>. For example:</p> <ul> <li> <p>ID: <code>SPEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Name: <code>name/example-policy</code> </p> </li> </ul>
     #   @return [String]
     class DeletePolicyInput < Struct.new(
       nil,
@@ -802,8 +916,30 @@ module Aws::VerifiedPermissions
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute alias_name
+    #   <p>Specifies the name of the policy store alias that you want to delete.</p> <note> <p>The alias name must always be prefixed with <code>policy-store-alias/</code>.</p> </note>
+    #   @return [String]
+    # @!attribute deletion_mode
+    #   <p>Specifies the deletion mode for the policy store alias. The valid values are:</p> <ul> <li> <p> <b>SoftDelete</b> – The policy store alias enters the <code>PendingDeletion</code> state. This is the default behavior when no <code>deletionMode</code> is specified.</p> </li> <li> <p> <b>HardDelete</b> – The policy store alias is immediately deleted, bypassing the <code>PendingDeletion</code> state.</p> </li> </ul>
+    #   @return [String]
+    class DeletePolicyStoreAliasInput < Struct.new(
+      nil,
+      :alias_name,
+      :deletion_mode,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class DeletePolicyStoreAliasOutput < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute policy_store_id
-    #   <p>Specifies the ID of the policy store that you want to delete.</p>
+    #   <p>Specifies the ID of the policy store that you want to delete.</p> <note> <p>To specify a policy store, the alias name cannot be used. Only the ID can be used.</p> </note>
     #   @return [String]
     class DeletePolicyStoreInput < Struct.new(
       nil,
@@ -821,10 +957,10 @@ module Aws::VerifiedPermissions
     end
 
     # @!attribute policy_store_id
-    #   <p>Specifies the ID of the policy store that contains the policy template that you want to delete.</p>
+    #   <p>Specifies the ID of the policy store that contains the policy template that you want to delete.</p> <p>To specify a policy store, use its ID or alias name. When using an alias name, prefix it with <code>policy-store-alias/</code>. For example:</p> <ul> <li> <p>ID: <code>PSEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Alias name: <code>policy-store-alias/example-policy-store</code> </p> </li> </ul> <p>To view aliases, use <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html">ListPolicyStoreAliases</a>.</p>
     #   @return [String]
     # @!attribute policy_template_id
-    #   <p>Specifies the ID of the policy template that you want to delete.</p>
+    #   <p>Specifies the ID of the policy template that you want to delete.</p> <p>You can use the policy template name in place of the policy template ID. When using a name, prefix it with <code>name/</code>. For example:</p> <ul> <li> <p>ID: <code>PTEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Name: <code>name/example-policy-template</code> </p> </li> </ul>
     #   @return [String]
     class DeletePolicyTemplateInput < Struct.new(
       nil,
@@ -852,6 +988,46 @@ module Aws::VerifiedPermissions
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+    end
+
+    # <p>A structure that contains the encryption configuration for the policy store and child resources. </p> <p>This data type is used as a request parameter in the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreatePolicyStore.html">CreatePolicyStore</a> operation.</p>
+    # @!attribute kms_encryption_settings
+    #   <p>The KMS encryption settings for this policy store to encrypt data with. It will contain the customer-managed KMS key, and a user-defined encryption context. </p>
+    #   @return [Types::KmsEncryptionSettings]
+    # @!attribute default
+    #   <p>This is the default encryption setting. The policy store uses an Amazon Web Services owned key for encrypting data.</p>
+    #   @return [Smithy::Schema::EmptyStructure]
+    class EncryptionSettings < Struct.new(
+      :kms_encryption_settings,
+      :default,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class KmsEncryptionSettings < EncryptionSettings; end
+      class Default < EncryptionSettings; end
+      class Unknown < EncryptionSettings; end
+    end
+
+    # <p>A structure that contains the encryption configuration for the policy store and child resources.</p> <p>This data type is used as a response parameter field for the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_GetPolicyStore.html">GetPolicyStore</a> operation.</p>
+    # @!attribute kms_encryption_state
+    #   <p>The KMS encryption settings currently configured for this policy store to encrypt data with. It contains the customer-managed KMS key, and a user-defined encryption context. </p>
+    #   @return [Types::KmsEncryptionState]
+    # @!attribute default
+    #   <p>This is the default encryption state. The policy store is encrypted using an Amazon Web Services owned key.</p>
+    #   @return [Smithy::Schema::EmptyStructure]
+    class EncryptionState < Struct.new(
+      :kms_encryption_state,
+      :default,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class KmsEncryptionState < EncryptionState; end
+      class Default < EncryptionState; end
+      class Unknown < EncryptionState; end
     end
 
     # <p>Contains the list of entities to be considered during an authorization request. This includes all principals, resources, and actions required to successfully evaluate the request.</p> <p>This data type is used as a field in the response parameter for the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorized.html">IsAuthorized</a> and <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html">IsAuthorizedWithToken</a> operations.</p>
@@ -900,11 +1076,15 @@ module Aws::VerifiedPermissions
     # @!attribute parents
     #   <p>The parent entities in the hierarchy that contains the entity. A principal or resource entity can be defined with at most 99 <i>transitive parents</i> per authorization request. </p> <p>A transitive parent is an entity in the hierarchy of entities including all direct parents, and parents of parents. For example, a user can be a member of 91 groups if one of those groups is a member of eight groups, for a total of 100: one entity, 91 entity parents, and eight parents of parents. </p>
     #   @return [Array<Types::EntityIdentifier>]
+    # @!attribute tags
+    #   <p>A list of cedar tags for the entity.</p>
+    #   @return [Hash<String, Types::CedarTagValue>]
     class EntityItem < Struct.new(
       nil,
       :identifier,
       :attributes,
       :parents,
+      :tags,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -944,7 +1124,7 @@ module Aws::VerifiedPermissions
     end
 
     # @!attribute policy_store_id
-    #   <p>Specifies the ID of the policy store that contains the identity source you want information about.</p>
+    #   <p>Specifies the ID of the policy store that contains the identity source you want information about.</p> <p>To specify a policy store, use its ID or alias name. When using an alias name, prefix it with <code>policy-store-alias/</code>. For example:</p> <ul> <li> <p>ID: <code>PSEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Alias name: <code>policy-store-alias/example-policy-store</code> </p> </li> </ul> <p>To view aliases, use <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html">ListPolicyStoreAliases</a>.</p>
     #   @return [String]
     # @!attribute identity_source_id
     #   <p>Specifies the ID of the identity source you want information about.</p>
@@ -996,10 +1176,10 @@ module Aws::VerifiedPermissions
     end
 
     # @!attribute policy_store_id
-    #   <p>Specifies the ID of the policy store that contains the policy that you want information about.</p>
+    #   <p>Specifies the ID of the policy store that contains the policy that you want information about.</p> <p>To specify a policy store, use its ID or alias name. When using an alias name, prefix it with <code>policy-store-alias/</code>. For example:</p> <ul> <li> <p>ID: <code>PSEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Alias name: <code>policy-store-alias/example-policy-store</code> </p> </li> </ul> <p>To view aliases, use <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html">ListPolicyStoreAliases</a>.</p>
     #   @return [String]
     # @!attribute policy_id
-    #   <p>Specifies the ID of the policy you want information about.</p>
+    #   <p>Specifies the ID of the policy you want information about.</p> <p>You can use the policy name in place of the policy ID. When using a name, prefix it with <code>name/</code>. For example:</p> <ul> <li> <p>ID: <code>SPEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Name: <code>name/example-policy</code> </p> </li> </ul>
     #   @return [String]
     class GetPolicyInput < Struct.new(
       nil,
@@ -1040,6 +1220,9 @@ module Aws::VerifiedPermissions
     # @!attribute effect
     #   <p>The effect of the decision that a policy returns to an authorization request. For example, <code>"effect": "Permit"</code>.</p>
     #   @return [String]
+    # @!attribute name
+    #   <p>The name of the policy, if one was assigned when the policy was created or last updated.</p>
+    #   @return [String]
     class GetPolicyOutput < Struct.new(
       nil,
       :policy_store_id,
@@ -1052,13 +1235,52 @@ module Aws::VerifiedPermissions
       :created_date,
       :last_updated_date,
       :effect,
+      :name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute alias_name
+    #   <p>Specifies the name of the policy store alias that you want information about.</p> <note> <p>The alias name must always be prefixed with <code>policy-store-alias/</code>.</p> </note>
+    #   @return [String]
+    class GetPolicyStoreAliasInput < Struct.new(
+      nil,
+      :alias_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute alias_name
+    #   <p>The name of the policy store alias.</p>
+    #   @return [String]
+    # @!attribute policy_store_id
+    #   <p>The ID of the policy store associated with the alias.</p>
+    #   @return [String]
+    # @!attribute alias_arn
+    #   <p>The Amazon Resource Name (ARN) of the policy store alias.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The date and time the policy store alias was created.</p>
+    #   @return [Time]
+    # @!attribute state
+    #   <p>The state of the policy store alias. Policy Store Aliases in the Active state can be used normally. When a policy store alias is deleted, it enters the PendingDeletion state. Policy Store Aliases in the PendingDeletion cannot be used, and creating a policy store alias with the same alias name will fail.</p>
+    #   @return [String]
+    class GetPolicyStoreAliasOutput < Struct.new(
+      nil,
+      :alias_name,
+      :policy_store_id,
+      :alias_arn,
+      :created_at,
+      :state,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_store_id
-    #   <p>Specifies the ID of the policy store that you want information about.</p>
+    #   <p>Specifies the policy store that you want information about.</p> <p>To specify a policy store, use its ID or alias name. When using an alias name, prefix it with <code>policy-store-alias/</code>. For example:</p> <ul> <li> <p>ID: <code>PSEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Alias name: <code>policy-store-alias/example-policy-store</code> </p> </li> </ul> <p>To view aliases, use <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html">ListPolicyStoreAliases</a>.</p>
     #   @return [String]
     # @!attribute tags
     #   <p>Specifies whether to return the tags that are attached to the policy store. If this parameter is included in the API call, the tags are returned, otherwise they are not returned.</p> <note> <p>If this parameter is included in the API call but there are no tags attached to the policy store, the <code>tags</code> response parameter is omitted from the response.</p> </note>
@@ -1093,6 +1315,9 @@ module Aws::VerifiedPermissions
     # @!attribute deletion_protection
     #   <p>Specifies whether the policy store can be deleted. If enabled, the policy store can't be deleted.</p> <p>The default state is <code>DISABLED</code>.</p>
     #   @return [String]
+    # @!attribute encryption_state
+    #   <p>A structure that contains the encryption configuration for the policy store.</p>
+    #   @return [Types::EncryptionState]
     # @!attribute cedar_version
     #   <p>The version of the Cedar language used with policies, policy templates, and schemas in this policy store. For more information, see <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/userguide/cedar4-faq.html">Amazon Verified Permissions upgrade to Cedar v4 FAQ</a>.</p>
     #   @return [String]
@@ -1108,6 +1333,7 @@ module Aws::VerifiedPermissions
       :last_updated_date,
       :description,
       :deletion_protection,
+      :encryption_state,
       :cedar_version,
       :tags,
       keyword_init: true
@@ -1116,10 +1342,10 @@ module Aws::VerifiedPermissions
     end
 
     # @!attribute policy_store_id
-    #   <p>Specifies the ID of the policy store that contains the policy template that you want information about.</p>
+    #   <p>Specifies the ID of the policy store that contains the policy template that you want information about.</p> <p>To specify a policy store, use its ID or alias name. When using an alias name, prefix it with <code>policy-store-alias/</code>. For example:</p> <ul> <li> <p>ID: <code>PSEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Alias name: <code>policy-store-alias/example-policy-store</code> </p> </li> </ul> <p>To view aliases, use <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html">ListPolicyStoreAliases</a>.</p>
     #   @return [String]
     # @!attribute policy_template_id
-    #   <p>Specifies the ID of the policy template that you want information about.</p>
+    #   <p>Specifies the ID of the policy template that you want information about.</p> <p>You can use the policy template name in place of the policy template ID. When using a name, prefix it with <code>name/</code>. For example:</p> <ul> <li> <p>ID: <code>PTEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Name: <code>name/example-policy-template</code> </p> </li> </ul>
     #   @return [String]
     class GetPolicyTemplateInput < Struct.new(
       nil,
@@ -1148,6 +1374,9 @@ module Aws::VerifiedPermissions
     # @!attribute last_updated_date
     #   <p>The date and time that the policy template was most recently updated.</p>
     #   @return [Time]
+    # @!attribute name
+    #   <p>The name of the policy template, if one was assigned when the policy template was created or last updated.</p>
+    #   @return [String]
     class GetPolicyTemplateOutput < Struct.new(
       nil,
       :policy_store_id,
@@ -1156,13 +1385,14 @@ module Aws::VerifiedPermissions
       :statement,
       :created_date,
       :last_updated_date,
+      :name,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_store_id
-    #   <p>Specifies the ID of the policy store that contains the schema.</p>
+    #   <p>Specifies the ID of the policy store that contains the schema.</p> <p>To specify a policy store, use its ID or alias name. When using an alias name, prefix it with <code>policy-store-alias/</code>. For example:</p> <ul> <li> <p>ID: <code>PSEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Alias name: <code>policy-store-alias/example-policy-store</code> </p> </li> </ul> <p>To view aliases, use <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html">ListPolicyStoreAliases</a>.</p>
     #   @return [String]
     class GetSchemaInput < Struct.new(
       nil,
@@ -1340,7 +1570,7 @@ module Aws::VerifiedPermissions
     end
 
     # @!attribute policy_store_id
-    #   <p>Specifies the ID of the policy store. Policies in this policy store will be used to make an authorization decision for the input.</p>
+    #   <p>Specifies the ID of the policy store. Policies in this policy store will be used to make an authorization decision for the input.</p> <p>To specify a policy store, use its ID or alias name. When using an alias name, prefix it with <code>policy-store-alias/</code>. For example:</p> <ul> <li> <p>ID: <code>PSEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Alias name: <code>policy-store-alias/example-policy-store</code> </p> </li> </ul> <p>To view aliases, use <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html">ListPolicyStoreAliases</a>.</p>
     #   @return [String]
     # @!attribute principal
     #   <p>Specifies the principal for which the authorization decision is to be made.</p>
@@ -1390,7 +1620,7 @@ module Aws::VerifiedPermissions
     end
 
     # @!attribute policy_store_id
-    #   <p>Specifies the ID of the policy store. Policies in this policy store will be used to make an authorization decision for the input.</p>
+    #   <p>Specifies the ID of the policy store. Policies in this policy store will be used to make an authorization decision for the input.</p> <p>To specify a policy store, use its ID or alias name. When using an alias name, prefix it with <code>policy-store-alias/</code>. For example:</p> <ul> <li> <p>ID: <code>PSEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Alias name: <code>policy-store-alias/example-policy-store</code> </p> </li> </ul> <p>To view aliases, use <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html">ListPolicyStoreAliases</a>.</p>
     #   @return [String]
     # @!attribute identity_token
     #   <p>Specifies an identity token for the principal to be authorized. This token is provided to you by the identity provider (IdP) associated with the specified identity source. You must specify either an <code>accessToken</code>, an <code>identityToken</code>, or both.</p> <p>Must be an ID token. Verified Permissions returns an error if the <code>token_use</code> claim in the submitted token isn't <code>id</code>.</p>
@@ -1447,8 +1677,40 @@ module Aws::VerifiedPermissions
       include ::Smithy::Schema::Structure
     end
 
+    # <p>A structure that contains the KMS encryption configuration for the policy store. The encryption settings determine what customer-managed KMS key will be used to encrypt all resources within the policy store, and any user-defined context key-value pairs to append during encryption processes.</p> <p>This data type is used as a field that is part of the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_EncryptionSettings.html">EncryptionSettings</a> type.</p>
+    # @!attribute key
+    #   <p>The customer-managed KMS key <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Name (ARN)</a>, alias or ID to be used for encryption processes. </p> <p>Users can provide the full KMS key ARN, a KMS key alias, or a KMS key ID, but it will be mapped to the full KMS key ARN after policy store creation, and referenced when encrypting child resources. </p>
+    #   @return [String]
+    # @!attribute encryption_context
+    #   <p>User-defined, additional context to be added to encryption processes. </p>
+    #   @return [Hash<String, String>]
+    class KmsEncryptionSettings < Struct.new(
+      nil,
+      :key,
+      :encryption_context,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A structure that contains the KMS encryption configuration for the policy store. The encryption state shows what customer-managed KMS key is being used to encrypt all resources within the policy store, and any user-defined context key-value pairs added during encryption processes.</p> <p>This data type is used as a field that is part of the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_EncryptionState.html">EncryptionState</a> type.</p>
+    # @!attribute key
+    #   <p>The customer-managed KMS key <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Name (ARN)</a> being used for encryption processes. </p>
+    #   @return [String]
+    # @!attribute encryption_context
+    #   <p>User-defined, additional context added to encryption processes. </p>
+    #   @return [Hash<String, String>]
+    class KmsEncryptionState < Struct.new(
+      nil,
+      :key,
+      :encryption_context,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute policy_store_id
-    #   <p>Specifies the ID of the policy store that contains the identity sources that you want to list.</p>
+    #   <p>Specifies the ID of the policy store that contains the identity sources that you want to list.</p> <p>To specify a policy store, use its ID or alias name. When using an alias name, prefix it with <code>policy-store-alias/</code>. For example:</p> <ul> <li> <p>ID: <code>PSEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Alias name: <code>policy-store-alias/example-policy-store</code> </p> </li> </ul> <p>To view aliases, use <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html">ListPolicyStoreAliases</a>.</p>
     #   @return [String]
     # @!attribute next_token
     #   <p>Specifies that you want to receive the next page of results. Valid only if you received a <code>NextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call's <code>NextToken</code> response to request the next page of results.</p>
@@ -1486,7 +1748,7 @@ module Aws::VerifiedPermissions
     end
 
     # @!attribute policy_store_id
-    #   <p>Specifies the ID of the policy store you want to list policies from.</p>
+    #   <p>Specifies the ID of the policy store you want to list policies from.</p> <p>To specify a policy store, use its ID or alias name. When using an alias name, prefix it with <code>policy-store-alias/</code>. For example:</p> <ul> <li> <p>ID: <code>PSEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Alias name: <code>policy-store-alias/example-policy-store</code> </p> </li> </ul> <p>To view aliases, use <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html">ListPolicyStoreAliases</a>.</p>
     #   @return [String]
     # @!attribute next_token
     #   <p>Specifies that you want to receive the next page of results. Valid only if you received a <code>NextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call's <code>NextToken</code> response to request the next page of results.</p>
@@ -1527,6 +1789,40 @@ module Aws::VerifiedPermissions
     #   <p>Specifies that you want to receive the next page of results. Valid only if you received a <code>NextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call's <code>NextToken</code> response to request the next page of results.</p>
     #   @return [String]
     # @!attribute max_results
+    #   <p>Specifies the total number of results that you want included in each response. If additional items exist beyond the number you specify, the <code>NextToken</code> response element is returned with a value (not null). Include the specified value as the <code>NextToken</code> request parameter in the next call to the operation to get the next set of results. Note that the service might return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.</p> <p>If you do not specify this parameter, the operation defaults to 5 policy store aliases per response. You can specify a maximum of 50 policy store aliases per response.</p>
+    #   @return [Integer]
+    # @!attribute filter
+    #   <p>Specifies a filter to narrow the results. You can filter by <code>policyStoreId</code> to list only the policy store aliases associated with a specific policy store.</p>
+    #   @return [Types::PolicyStoreAliasFilter]
+    class ListPolicyStoreAliasesInput < Struct.new(
+      nil,
+      :next_token,
+      :max_results,
+      :filter,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute next_token
+    #   <p>If present, this value indicates that more output is available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>. This indicates that this is the last page of results.</p>
+    #   @return [String]
+    # @!attribute policy_store_aliases
+    #   <p>The list of policy store aliases in the account.</p>
+    #   @return [Array<Types::PolicyStoreAliasItem>]
+    class ListPolicyStoreAliasesOutput < Struct.new(
+      nil,
+      :next_token,
+      :policy_store_aliases,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute next_token
+    #   <p>Specifies that you want to receive the next page of results. Valid only if you received a <code>NextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call's <code>NextToken</code> response to request the next page of results.</p>
+    #   @return [String]
+    # @!attribute max_results
     #   <p>Specifies the total number of results that you want included in each response. If additional items exist beyond the number you specify, the <code>NextToken</code> response element is returned with a value (not null). Include the specified value as the <code>NextToken</code> request parameter in the next call to the operation to get the next set of results. Note that the service might return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.</p> <p>If you do not specify this parameter, the operation defaults to 10 policy stores per response. You can specify a maximum of 50 policy stores per response.</p>
     #   @return [Integer]
     class ListPolicyStoresInput < Struct.new(
@@ -1554,7 +1850,7 @@ module Aws::VerifiedPermissions
     end
 
     # @!attribute policy_store_id
-    #   <p>Specifies the ID of the policy store that contains the policy templates you want to list.</p>
+    #   <p>Specifies the ID of the policy store that contains the policy templates you want to list.</p> <p>To specify a policy store, use its ID or alias name. When using an alias name, prefix it with <code>policy-store-alias/</code>. For example:</p> <ul> <li> <p>ID: <code>PSEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Alias name: <code>policy-store-alias/example-policy-store</code> </p> </li> </ul> <p>To view aliases, use <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html">ListPolicyStoreAliases</a>.</p>
     #   @return [String]
     # @!attribute next_token
     #   <p>Specifies that you want to receive the next page of results. Valid only if you received a <code>NextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call's <code>NextToken</code> response to request the next page of results.</p>
@@ -1895,7 +2191,7 @@ module Aws::VerifiedPermissions
       class Unknown < OpenIdConnectTokenSelectionDetail; end
     end
 
-    # <p>The token type that you want to process from your OIDC identity provider. Your policy store can process either identity (ID) or access tokens from a given OIDC identity source.</p> <p>This data type is part of a <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_OpenIdConnectConfigurationItem.html">OpenIdConnectConfigurationItem</a> structure, which is a parameter of <a href="http://amazonaws.com/verifiedpermissions/latest/apireference/API_ListIdentitySources.html">ListIdentitySources</a>.</p>
+    # <p>The token type that you want to process from your OIDC identity provider. Your policy store can process either identity (ID) or access tokens from a given OIDC identity source.</p> <p>This data type is part of a <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_OpenIdConnectConfigurationItem.html">OpenIdConnectConfigurationItem</a> structure, which is a parameter of <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListIdentitySources.html">ListIdentitySources</a>.</p>
     # @!attribute access_token_only
     #   <p>The OIDC configuration for processing access tokens. Contains allowed audience claims, for example <code>https://auth.example.com</code>, and the claim that you want to map to the principal, for example <code>sub</code>.</p>
     #   @return [Types::OpenIdConnectAccessTokenConfigurationItem]
@@ -2030,6 +2326,9 @@ module Aws::VerifiedPermissions
     # @!attribute effect
     #   <p>The effect of the decision that a policy returns to an authorization request. For example, <code>"effect": "Permit"</code>.</p>
     #   @return [String]
+    # @!attribute name
+    #   <p>The name of the policy, if one was assigned when the policy was created or last updated.</p>
+    #   @return [String]
     class PolicyItem < Struct.new(
       nil,
       :policy_store_id,
@@ -2042,6 +2341,47 @@ module Aws::VerifiedPermissions
       :created_date,
       :last_updated_date,
       :effect,
+      :name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains filters for the <code>ListPolicyStoreAliases</code> operation.</p>
+    # @!attribute policy_store_id
+    #   <p>The ID of the policy store to filter by. Only policy store aliases associated with this policy store are returned.</p>
+    #   @return [String]
+    class PolicyStoreAliasFilter < Struct.new(
+      nil,
+      :policy_store_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains information about a policy store alias.</p> <p>This data type is used as a response parameter for the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html">ListPolicyStoreAliases</a> operation.</p>
+    # @!attribute alias_name
+    #   <p>The name of the policy store alias.</p>
+    #   @return [String]
+    # @!attribute policy_store_id
+    #   <p>The ID of the policy store associated with the alias.</p>
+    #   @return [String]
+    # @!attribute alias_arn
+    #   <p>The Amazon Resource Name (ARN) of the policy store alias.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The date and time the policy store alias was created.</p>
+    #   @return [Time]
+    # @!attribute state
+    #   <p>The state of the policy store alias. Policy Store Aliases in the Active state can be used normally. When a policy store alias is deleted, it enters the PendingDeletion state. Policy Store Aliases in the PendingDeletion state cannot be used, and creating a policy store alias with the same alias name will fail.</p>
+    #   @return [String]
+    class PolicyStoreAliasItem < Struct.new(
+      nil,
+      :alias_name,
+      :policy_store_id,
+      :alias_arn,
+      :created_at,
+      :state,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2091,6 +2431,9 @@ module Aws::VerifiedPermissions
     # @!attribute last_updated_date
     #   <p>The date and time that the policy template was most recently updated.</p>
     #   @return [Time]
+    # @!attribute name
+    #   <p>The name of the policy template, if one was assigned when the policy template was created or last updated.</p>
+    #   @return [String]
     class PolicyTemplateItem < Struct.new(
       nil,
       :policy_store_id,
@@ -2098,13 +2441,14 @@ module Aws::VerifiedPermissions
       :description,
       :created_date,
       :last_updated_date,
+      :name,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_store_id
-    #   <p>Specifies the ID of the policy store in which to place the schema.</p>
+    #   <p>Specifies the ID of the policy store in which to place the schema.</p> <p>To specify a policy store, use its ID or alias name. When using an alias name, prefix it with <code>policy-store-alias/</code>. For example:</p> <ul> <li> <p>ID: <code>PSEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Alias name: <code>policy-store-alias/example-policy-store</code> </p> </li> </ul> <p>To view aliases, use <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html">ListPolicyStoreAliases</a>.</p>
     #   @return [String]
     # @!attribute definition
     #   <p>Specifies the definition of the schema to be stored. The schema definition must be written in Cedar schema JSON.</p>
@@ -2453,7 +2797,7 @@ module Aws::VerifiedPermissions
     end
 
     # @!attribute policy_store_id
-    #   <p>Specifies the ID of the policy store that contains the identity source that you want to update.</p>
+    #   <p>Specifies the ID of the policy store that contains the identity source that you want to update.</p> <p>To specify a policy store, use its ID or alias name. When using an alias name, prefix it with <code>policy-store-alias/</code>. For example:</p> <ul> <li> <p>ID: <code>PSEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Alias name: <code>policy-store-alias/example-policy-store</code> </p> </li> </ul> <p>To view aliases, use <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html">ListPolicyStoreAliases</a>.</p>
     #   @return [String]
     # @!attribute identity_source_id
     #   <p>Specifies the ID of the identity source that you want to update.</p>
@@ -2616,19 +2960,23 @@ module Aws::VerifiedPermissions
     end
 
     # @!attribute policy_store_id
-    #   <p>Specifies the ID of the policy store that contains the policy that you want to update.</p>
+    #   <p>Specifies the ID of the policy store that contains the policy that you want to update.</p> <p>To specify a policy store, use its ID or alias name. When using an alias name, prefix it with <code>policy-store-alias/</code>. For example:</p> <ul> <li> <p>ID: <code>PSEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Alias name: <code>policy-store-alias/example-policy-store</code> </p> </li> </ul> <p>To view aliases, use <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html">ListPolicyStoreAliases</a>.</p>
     #   @return [String]
     # @!attribute policy_id
-    #   <p>Specifies the ID of the policy that you want to update. To find this value, you can use <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicies.html">ListPolicies</a>.</p>
+    #   <p>Specifies the ID of the policy that you want to update. To find this value, you can use <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicies.html">ListPolicies</a>.</p> <p>You can use the policy name in place of the policy ID. When using a name, prefix it with <code>name/</code>. For example:</p> <ul> <li> <p>ID: <code>SPEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Name: <code>name/example-policy</code> </p> </li> </ul>
     #   @return [String]
     # @!attribute definition
-    #   <p>Specifies the updated policy content that you want to replace on the specified policy. The content must be valid Cedar policy language text.</p> <p>You can change only the following elements from the policy definition:</p> <ul> <li> <p>The <code>action</code> referenced by the policy.</p> </li> <li> <p>Any conditional clauses, such as <code>when</code> or <code>unless</code> clauses.</p> </li> </ul> <p>You <b>can't</b> change the following elements:</p> <ul> <li> <p>Changing from <code>static</code> to <code>templateLinked</code>.</p> </li> <li> <p>Changing the effect of the policy from <code>permit</code> or <code>forbid</code>.</p> </li> <li> <p>The <code>principal</code> referenced by the policy.</p> </li> <li> <p>The <code>resource</code> referenced by the policy.</p> </li> </ul>
+    #   <p>Specifies the updated policy content that you want to replace on the specified policy. The content must be valid Cedar policy language text.</p> <p>If you don't specify this parameter, the existing policy definition remains unchanged.</p> <p>You can change only the following elements from the policy definition:</p> <ul> <li> <p>The <code>action</code> referenced by the policy.</p> </li> <li> <p>Any conditional clauses, such as <code>when</code> or <code>unless</code> clauses.</p> </li> </ul> <p>You <b>can't</b> change the following elements:</p> <ul> <li> <p>Changing from <code>static</code> to <code>templateLinked</code>.</p> </li> <li> <p>Changing the effect of the policy from <code>permit</code> or <code>forbid</code>.</p> </li> <li> <p>The <code>principal</code> referenced by the policy.</p> </li> <li> <p>The <code>resource</code> referenced by the policy.</p> </li> </ul>
     #   @return [Types::UpdatePolicyDefinition]
+    # @!attribute name
+    #   <p>Specifies a name for the policy that is unique among all policies within the policy store. You can use the name in place of the policy ID in API operations that reference the policy. The name must be prefixed with <code>name/</code>.</p> <note> <p>If you don't include the name in an update request, the existing name is unchanged. To remove a name, set it to an empty string (<code>""</code>).</p> </note> <p>If you specify a name that is already associated with another policy in the policy store, you receive a <code>ConflictException</code> error.</p>
+    #   @return [String]
     class UpdatePolicyInput < Struct.new(
       nil,
       :policy_store_id,
       :policy_id,
       :definition,
+      :name,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2678,7 +3026,7 @@ module Aws::VerifiedPermissions
     end
 
     # @!attribute policy_store_id
-    #   <p>Specifies the ID of the policy store that you want to update</p>
+    #   <p>Specifies the ID of the policy store that you want to update</p> <p>To specify a policy store, use its ID or alias name. When using an alias name, prefix it with <code>policy-store-alias/</code>. For example:</p> <ul> <li> <p>ID: <code>PSEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Alias name: <code>policy-store-alias/example-policy-store</code> </p> </li> </ul> <p>To view aliases, use <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html">ListPolicyStoreAliases</a>.</p>
     #   @return [String]
     # @!attribute validation_settings
     #   <p>A structure that defines the validation settings that want to enable for the policy store.</p>
@@ -2724,10 +3072,10 @@ module Aws::VerifiedPermissions
     end
 
     # @!attribute policy_store_id
-    #   <p>Specifies the ID of the policy store that contains the policy template that you want to update.</p>
+    #   <p>Specifies the ID of the policy store that contains the policy template that you want to update.</p> <p>To specify a policy store, use its ID or alias name. When using an alias name, prefix it with <code>policy-store-alias/</code>. For example:</p> <ul> <li> <p>ID: <code>PSEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Alias name: <code>policy-store-alias/example-policy-store</code> </p> </li> </ul> <p>To view aliases, use <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html">ListPolicyStoreAliases</a>.</p>
     #   @return [String]
     # @!attribute policy_template_id
-    #   <p>Specifies the ID of the policy template that you want to update.</p>
+    #   <p>Specifies the ID of the policy template that you want to update.</p> <p>You can use the policy template name in place of the policy template ID. When using a name, prefix it with <code>name/</code>. For example:</p> <ul> <li> <p>ID: <code>PTEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Name: <code>name/example-policy-template</code> </p> </li> </ul>
     #   @return [String]
     # @!attribute description
     #   <p>Specifies a new description to apply to the policy template.</p>
@@ -2735,12 +3083,16 @@ module Aws::VerifiedPermissions
     # @!attribute statement
     #   <p>Specifies new statement content written in Cedar policy language to replace the current body of the policy template.</p> <p>You can change only the following elements of the policy body:</p> <ul> <li> <p>The <code>action</code> referenced by the policy template.</p> </li> <li> <p>Any conditional clauses, such as <code>when</code> or <code>unless</code> clauses.</p> </li> </ul> <p>You <b>can't</b> change the following elements:</p> <ul> <li> <p>The effect (<code>permit</code> or <code>forbid</code>) of the policy template.</p> </li> <li> <p>The <code>principal</code> referenced by the policy template.</p> </li> <li> <p>The <code>resource</code> referenced by the policy template.</p> </li> </ul>
     #   @return [String]
+    # @!attribute name
+    #   <p>Specifies a name for the policy template that is unique among all policy templates within the policy store. You can use the name in place of the policy template ID in API operations that reference the policy template. The name must be prefixed with <code>name/</code>.</p> <note> <p>If you don't include the name in an update request, the existing name is unchanged. To remove a name, set it to an empty string (<code>""</code>).</p> </note> <p>If you specify a name that is already associated with another policy template in the policy store, you receive a <code>ConflictException</code> error.</p>
+    #   @return [String]
     class UpdatePolicyTemplateInput < Struct.new(
       nil,
       :policy_store_id,
       :policy_template_id,
       :description,
       :statement,
+      :name,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

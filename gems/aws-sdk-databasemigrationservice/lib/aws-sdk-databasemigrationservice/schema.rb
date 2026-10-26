@@ -27,6 +27,10 @@ module Aws::DatabaseMigrationService
     BatchStartRecommendationsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.databasemigrationservice#BatchStartRecommendationsResponse", name: "BatchStartRecommendationsResponse")
     Boolean = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.databasemigrationservice#Boolean", name: "Boolean", traits: {"smithy.api#default" => false})
     BooleanOptional = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.databasemigrationservice#BooleanOptional", name: "BooleanOptional")
+    CancelMetadataModelConversionMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.databasemigrationservice#CancelMetadataModelConversionMessage", name: "CancelMetadataModelConversionMessage")
+    CancelMetadataModelConversionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.databasemigrationservice#CancelMetadataModelConversionResponse", name: "CancelMetadataModelConversionResponse")
+    CancelMetadataModelCreationMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.databasemigrationservice#CancelMetadataModelCreationMessage", name: "CancelMetadataModelCreationMessage")
+    CancelMetadataModelCreationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.databasemigrationservice#CancelMetadataModelCreationResponse", name: "CancelMetadataModelCreationResponse")
     CancelReplicationTaskAssessmentRunMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.databasemigrationservice#CancelReplicationTaskAssessmentRunMessage", name: "CancelReplicationTaskAssessmentRunMessage")
     CancelReplicationTaskAssessmentRunResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.databasemigrationservice#CancelReplicationTaskAssessmentRunResponse", name: "CancelReplicationTaskAssessmentRunResponse")
     CannedAclForObjectsValue = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.databasemigrationservice#CannedAclForObjectsValue", name: "CannedAclForObjectsValue")
@@ -161,14 +165,20 @@ module Aws::DatabaseMigrationService
     DescribeInstanceProfilesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.databasemigrationservice#DescribeInstanceProfilesResponse", name: "DescribeInstanceProfilesResponse")
     DescribeMetadataModelAssessmentsMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.databasemigrationservice#DescribeMetadataModelAssessmentsMessage", name: "DescribeMetadataModelAssessmentsMessage")
     DescribeMetadataModelAssessmentsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.databasemigrationservice#DescribeMetadataModelAssessmentsResponse", name: "DescribeMetadataModelAssessmentsResponse")
+    DescribeMetadataModelChildrenMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.databasemigrationservice#DescribeMetadataModelChildrenMessage", name: "DescribeMetadataModelChildrenMessage")
+    DescribeMetadataModelChildrenResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.databasemigrationservice#DescribeMetadataModelChildrenResponse", name: "DescribeMetadataModelChildrenResponse")
     DescribeMetadataModelConversionsMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.databasemigrationservice#DescribeMetadataModelConversionsMessage", name: "DescribeMetadataModelConversionsMessage")
     DescribeMetadataModelConversionsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.databasemigrationservice#DescribeMetadataModelConversionsResponse", name: "DescribeMetadataModelConversionsResponse")
+    DescribeMetadataModelCreationsMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.databasemigrationservice#DescribeMetadataModelCreationsMessage", name: "DescribeMetadataModelCreationsMessage")
+    DescribeMetadataModelCreationsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.databasemigrationservice#DescribeMetadataModelCreationsResponse", name: "DescribeMetadataModelCreationsResponse")
     DescribeMetadataModelExportsAsScriptMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.databasemigrationservice#DescribeMetadataModelExportsAsScriptMessage", name: "DescribeMetadataModelExportsAsScriptMessage")
     DescribeMetadataModelExportsAsScriptResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.databasemigrationservice#DescribeMetadataModelExportsAsScriptResponse", name: "DescribeMetadataModelExportsAsScriptResponse")
     DescribeMetadataModelExportsToTargetMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.databasemigrationservice#DescribeMetadataModelExportsToTargetMessage", name: "DescribeMetadataModelExportsToTargetMessage")
     DescribeMetadataModelExportsToTargetResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.databasemigrationservice#DescribeMetadataModelExportsToTargetResponse", name: "DescribeMetadataModelExportsToTargetResponse")
     DescribeMetadataModelImportsMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.databasemigrationservice#DescribeMetadataModelImportsMessage", name: "DescribeMetadataModelImportsMessage")
     DescribeMetadataModelImportsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.databasemigrationservice#DescribeMetadataModelImportsResponse", name: "DescribeMetadataModelImportsResponse")
+    DescribeMetadataModelMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.databasemigrationservice#DescribeMetadataModelMessage", name: "DescribeMetadataModelMessage")
+    DescribeMetadataModelResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.databasemigrationservice#DescribeMetadataModelResponse", name: "DescribeMetadataModelResponse")
     DescribeMigrationProjectsMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.databasemigrationservice#DescribeMigrationProjectsMessage", name: "DescribeMigrationProjectsMessage")
     DescribeMigrationProjectsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.databasemigrationservice#DescribeMigrationProjectsResponse", name: "DescribeMigrationProjectsResponse")
     DescribeOrderableReplicationInstancesMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.databasemigrationservice#DescribeOrderableReplicationInstancesMessage", name: "DescribeOrderableReplicationInstancesMessage")
@@ -246,6 +256,8 @@ module Aws::DatabaseMigrationService
     FleetAdvisorSchemaObjectList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.databasemigrationservice#FleetAdvisorSchemaObjectList", name: "FleetAdvisorSchemaObjectList")
     FleetAdvisorSchemaObjectResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.databasemigrationservice#FleetAdvisorSchemaObjectResponse", name: "FleetAdvisorSchemaObjectResponse")
     GcpMySQLSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.databasemigrationservice#GcpMySQLSettings", name: "GcpMySQLSettings")
+    GetTargetSelectionRulesMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.databasemigrationservice#GetTargetSelectionRulesMessage", name: "GetTargetSelectionRulesMessage")
+    GetTargetSelectionRulesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.databasemigrationservice#GetTargetSelectionRulesResponse", name: "GetTargetSelectionRulesResponse")
     IBMDb2Settings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.databasemigrationservice#IBMDb2Settings", name: "IBMDb2Settings")
     IbmDb2LuwDataProviderSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.databasemigrationservice#IbmDb2LuwDataProviderSettings", name: "IbmDb2LuwDataProviderSettings")
     IbmDb2zOsDataProviderSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.databasemigrationservice#IbmDb2zOsDataProviderSettings", name: "IbmDb2zOsDataProviderSettings")
@@ -279,6 +291,7 @@ module Aws::DatabaseMigrationService
     KerberosAuthenticationSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.databasemigrationservice#KerberosAuthenticationSettings", name: "KerberosAuthenticationSettings")
     KeyList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.databasemigrationservice#KeyList", name: "KeyList")
     KinesisSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.databasemigrationservice#KinesisSettings", name: "KinesisSettings")
+    LakehouseSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.databasemigrationservice#LakehouseSettings", name: "LakehouseSettings")
     Limitation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.databasemigrationservice#Limitation", name: "Limitation")
     LimitationList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.databasemigrationservice#LimitationList", name: "LimitationList")
     ListTagsForResourceMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.databasemigrationservice#ListTagsForResourceMessage", name: "ListTagsForResourceMessage")
@@ -289,6 +302,9 @@ module Aws::DatabaseMigrationService
     MariaDbDataProviderSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.databasemigrationservice#MariaDbDataProviderSettings", name: "MariaDbDataProviderSettings")
     Marker = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.databasemigrationservice#Marker", name: "Marker", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}})
     MessageFormatValue = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.databasemigrationservice#MessageFormatValue", name: "MessageFormatValue")
+    MetadataModelProperties = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.databasemigrationservice#MetadataModelProperties", name: "MetadataModelProperties")
+    MetadataModelReference = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.databasemigrationservice#MetadataModelReference", name: "MetadataModelReference")
+    MetadataModelReferenceList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.databasemigrationservice#MetadataModelReferenceList", name: "MetadataModelReferenceList")
     MicrosoftSQLServerSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.databasemigrationservice#MicrosoftSQLServerSettings", name: "MicrosoftSQLServerSettings")
     MicrosoftSqlServerDataProviderSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.databasemigrationservice#MicrosoftSqlServerDataProviderSettings", name: "MicrosoftSqlServerDataProviderSettings")
     MigrationProject = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.databasemigrationservice#MigrationProject", name: "MigrationProject")
@@ -342,6 +358,8 @@ module Aws::DatabaseMigrationService
     PostgreSqlDataProviderSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.databasemigrationservice#PostgreSqlDataProviderSettings", name: "PostgreSqlDataProviderSettings")
     PremigrationAssessmentStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.databasemigrationservice#PremigrationAssessmentStatus", name: "PremigrationAssessmentStatus")
     PremigrationAssessmentStatusList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.databasemigrationservice#PremigrationAssessmentStatusList", name: "PremigrationAssessmentStatusList")
+    ProcessedObject = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.databasemigrationservice#ProcessedObject", name: "ProcessedObject")
+    Progress = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.databasemigrationservice#Progress", name: "Progress")
     ProvisionData = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.databasemigrationservice#ProvisionData", name: "ProvisionData")
     PublicIpAddressList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.databasemigrationservice#PublicIpAddressList", name: "PublicIpAddressList", traits: {"smithy.api#sensitive" => {}})
     RdsConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.databasemigrationservice#RdsConfiguration", name: "RdsConfiguration")
@@ -433,6 +451,8 @@ module Aws::DatabaseMigrationService
     StartMetadataModelAssessmentResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.databasemigrationservice#StartMetadataModelAssessmentResponse", name: "StartMetadataModelAssessmentResponse")
     StartMetadataModelConversionMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.databasemigrationservice#StartMetadataModelConversionMessage", name: "StartMetadataModelConversionMessage")
     StartMetadataModelConversionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.databasemigrationservice#StartMetadataModelConversionResponse", name: "StartMetadataModelConversionResponse")
+    StartMetadataModelCreationMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.databasemigrationservice#StartMetadataModelCreationMessage", name: "StartMetadataModelCreationMessage")
+    StartMetadataModelCreationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.databasemigrationservice#StartMetadataModelCreationResponse", name: "StartMetadataModelCreationResponse")
     StartMetadataModelExportAsScriptMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.databasemigrationservice#StartMetadataModelExportAsScriptMessage", name: "StartMetadataModelExportAsScriptMessage")
     StartMetadataModelExportAsScriptResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.databasemigrationservice#StartMetadataModelExportAsScriptResponse", name: "StartMetadataModelExportAsScriptResponse")
     StartMetadataModelExportToTargetMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.databasemigrationservice#StartMetadataModelExportToTargetMessage", name: "StartMetadataModelExportToTargetMessage")
@@ -452,6 +472,7 @@ module Aws::DatabaseMigrationService
     StartReplicationTaskMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.databasemigrationservice#StartReplicationTaskMessage", name: "StartReplicationTaskMessage")
     StartReplicationTaskResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.databasemigrationservice#StartReplicationTaskResponse", name: "StartReplicationTaskResponse")
     StartReplicationTaskTypeValue = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.databasemigrationservice#StartReplicationTaskTypeValue", name: "StartReplicationTaskTypeValue")
+    StatementProperties = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.databasemigrationservice#StatementProperties", name: "StatementProperties")
     StopDataMigrationMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.databasemigrationservice#StopDataMigrationMessage", name: "StopDataMigrationMessage")
     StopDataMigrationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.databasemigrationservice#StopDataMigrationResponse", name: "StopDataMigrationResponse")
     StopReplicationMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.databasemigrationservice#StopReplicationMessage", name: "StopReplicationMessage")
@@ -467,6 +488,7 @@ module Aws::DatabaseMigrationService
     SubnetList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.databasemigrationservice#SubnetList", name: "SubnetList")
     SupportedEndpointType = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.databasemigrationservice#SupportedEndpointType", name: "SupportedEndpointType")
     SupportedEndpointTypeList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.databasemigrationservice#SupportedEndpointTypeList", name: "SupportedEndpointTypeList")
+    SybaseAseDataProviderSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.databasemigrationservice#SybaseAseDataProviderSettings", name: "SybaseAseDataProviderSettings")
     SybaseSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.databasemigrationservice#SybaseSettings", name: "SybaseSettings")
     TStamp = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.databasemigrationservice#TStamp", name: "TStamp")
     TableListToReload = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.databasemigrationservice#TableListToReload", name: "TableListToReload")
@@ -530,6 +552,16 @@ module Aws::DatabaseMigrationService
     BatchStartRecommendationsRequest.type = Types::BatchStartRecommendationsRequest
     BatchStartRecommendationsResponse.add_member(:error_entries, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchStartRecommendationsErrorEntryList, name: "ErrorEntries"))
     BatchStartRecommendationsResponse.type = Types::BatchStartRecommendationsResponse
+    CancelMetadataModelConversionMessage.add_member(:migration_project_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationProjectIdentifier, name: "MigrationProjectIdentifier", traits: {"smithy.api#required" => {}}))
+    CancelMetadataModelConversionMessage.add_member(:request_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "RequestIdentifier", traits: {"smithy.api#required" => {}}))
+    CancelMetadataModelConversionMessage.type = Types::CancelMetadataModelConversionMessage
+    CancelMetadataModelConversionResponse.add_member(:request, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaConversionRequest, name: "Request"))
+    CancelMetadataModelConversionResponse.type = Types::CancelMetadataModelConversionResponse
+    CancelMetadataModelCreationMessage.add_member(:migration_project_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationProjectIdentifier, name: "MigrationProjectIdentifier", traits: {"smithy.api#required" => {}}))
+    CancelMetadataModelCreationMessage.add_member(:request_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "RequestIdentifier", traits: {"smithy.api#required" => {}}))
+    CancelMetadataModelCreationMessage.type = Types::CancelMetadataModelCreationMessage
+    CancelMetadataModelCreationResponse.add_member(:request, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaConversionRequest, name: "Request"))
+    CancelMetadataModelCreationResponse.type = Types::CancelMetadataModelCreationResponse
     CancelReplicationTaskAssessmentRunMessage.add_member(:replication_task_assessment_run_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ReplicationTaskAssessmentRunArn", traits: {"smithy.api#required" => {}}))
     CancelReplicationTaskAssessmentRunMessage.type = Types::CancelReplicationTaskAssessmentRunMessage
     CancelReplicationTaskAssessmentRunResponse.add_member(:replication_task_assessment_run, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationTaskAssessmentRun, name: "ReplicationTaskAssessmentRun"))
@@ -552,6 +584,7 @@ module Aws::DatabaseMigrationService
     Certificate.add_member(:valid_to_date, ::Smithy::Schema::Shapes::MemberShape.new(target: TStamp, name: "ValidToDate"))
     Certificate.add_member(:signing_algorithm, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SigningAlgorithm"))
     Certificate.add_member(:key_length, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "KeyLength"))
+    Certificate.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "KmsKeyId"))
     Certificate.type = Types::Certificate
     CertificateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Certificate, name: "member", traits: {"smithy.api#xmlName" => "Certificate"}))
     CharLengthSemantics.add_member(:default, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEFAULT", traits: {"smithy.api#enumValue" => "default"}))
@@ -825,6 +858,7 @@ module Aws::DatabaseMigrationService
     DataProviderSettings.add_member(:postgre_sql_settings, Types::DataProviderSettings::PostgreSqlSettings, ::Smithy::Schema::Shapes::MemberShape.new(target: PostgreSqlDataProviderSettings, name: "PostgreSqlSettings"))
     DataProviderSettings.add_member(:my_sql_settings, Types::DataProviderSettings::MySqlSettings, ::Smithy::Schema::Shapes::MemberShape.new(target: MySqlDataProviderSettings, name: "MySqlSettings"))
     DataProviderSettings.add_member(:oracle_settings, Types::DataProviderSettings::OracleSettings, ::Smithy::Schema::Shapes::MemberShape.new(target: OracleDataProviderSettings, name: "OracleSettings"))
+    DataProviderSettings.add_member(:sybase_ase_settings, Types::DataProviderSettings::SybaseAseSettings, ::Smithy::Schema::Shapes::MemberShape.new(target: SybaseAseDataProviderSettings, name: "SybaseAseSettings"))
     DataProviderSettings.add_member(:microsoft_sql_server_settings, Types::DataProviderSettings::MicrosoftSqlServerSettings, ::Smithy::Schema::Shapes::MemberShape.new(target: MicrosoftSqlServerDataProviderSettings, name: "MicrosoftSqlServerSettings"))
     DataProviderSettings.add_member(:doc_db_settings, Types::DataProviderSettings::DocDbSettings, ::Smithy::Schema::Shapes::MemberShape.new(target: DocDbDataProviderSettings, name: "DocDbSettings"))
     DataProviderSettings.add_member(:maria_db_settings, Types::DataProviderSettings::MariaDbSettings, ::Smithy::Schema::Shapes::MemberShape.new(target: MariaDbDataProviderSettings, name: "MariaDbSettings"))
@@ -1087,6 +1121,15 @@ module Aws::DatabaseMigrationService
     DescribeMetadataModelAssessmentsResponse.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Marker"))
     DescribeMetadataModelAssessmentsResponse.add_member(:requests, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaConversionRequestList, name: "Requests"))
     DescribeMetadataModelAssessmentsResponse.type = Types::DescribeMetadataModelAssessmentsResponse
+    DescribeMetadataModelChildrenMessage.add_member(:selection_rules, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SelectionRules", traits: {"smithy.api#required" => {}}))
+    DescribeMetadataModelChildrenMessage.add_member(:migration_project_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationProjectIdentifier, name: "MigrationProjectIdentifier", traits: {"smithy.api#required" => {}}))
+    DescribeMetadataModelChildrenMessage.add_member(:origin, ::Smithy::Schema::Shapes::MemberShape.new(target: OriginTypeValue, name: "Origin", traits: {"smithy.api#required" => {}}))
+    DescribeMetadataModelChildrenMessage.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Marker"))
+    DescribeMetadataModelChildrenMessage.add_member(:max_records, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "MaxRecords"))
+    DescribeMetadataModelChildrenMessage.type = Types::DescribeMetadataModelChildrenMessage
+    DescribeMetadataModelChildrenResponse.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Marker"))
+    DescribeMetadataModelChildrenResponse.add_member(:metadata_model_children, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataModelReferenceList, name: "MetadataModelChildren"))
+    DescribeMetadataModelChildrenResponse.type = Types::DescribeMetadataModelChildrenResponse
     DescribeMetadataModelConversionsMessage.add_member(:migration_project_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationProjectIdentifier, name: "MigrationProjectIdentifier", traits: {"smithy.api#required" => {}}))
     DescribeMetadataModelConversionsMessage.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterList, name: "Filters"))
     DescribeMetadataModelConversionsMessage.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Marker"))
@@ -1095,6 +1138,14 @@ module Aws::DatabaseMigrationService
     DescribeMetadataModelConversionsResponse.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Marker"))
     DescribeMetadataModelConversionsResponse.add_member(:requests, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaConversionRequestList, name: "Requests"))
     DescribeMetadataModelConversionsResponse.type = Types::DescribeMetadataModelConversionsResponse
+    DescribeMetadataModelCreationsMessage.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterList, name: "Filters"))
+    DescribeMetadataModelCreationsMessage.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Marker"))
+    DescribeMetadataModelCreationsMessage.add_member(:max_records, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "MaxRecords"))
+    DescribeMetadataModelCreationsMessage.add_member(:migration_project_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationProjectIdentifier, name: "MigrationProjectIdentifier", traits: {"smithy.api#required" => {}}))
+    DescribeMetadataModelCreationsMessage.type = Types::DescribeMetadataModelCreationsMessage
+    DescribeMetadataModelCreationsResponse.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Marker"))
+    DescribeMetadataModelCreationsResponse.add_member(:requests, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaConversionRequestList, name: "Requests"))
+    DescribeMetadataModelCreationsResponse.type = Types::DescribeMetadataModelCreationsResponse
     DescribeMetadataModelExportsAsScriptMessage.add_member(:migration_project_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationProjectIdentifier, name: "MigrationProjectIdentifier", traits: {"smithy.api#required" => {}}))
     DescribeMetadataModelExportsAsScriptMessage.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterList, name: "Filters"))
     DescribeMetadataModelExportsAsScriptMessage.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Marker"))
@@ -1119,6 +1170,15 @@ module Aws::DatabaseMigrationService
     DescribeMetadataModelImportsResponse.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Marker"))
     DescribeMetadataModelImportsResponse.add_member(:requests, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaConversionRequestList, name: "Requests"))
     DescribeMetadataModelImportsResponse.type = Types::DescribeMetadataModelImportsResponse
+    DescribeMetadataModelMessage.add_member(:selection_rules, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SelectionRules", traits: {"smithy.api#required" => {}}))
+    DescribeMetadataModelMessage.add_member(:migration_project_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationProjectIdentifier, name: "MigrationProjectIdentifier", traits: {"smithy.api#required" => {}}))
+    DescribeMetadataModelMessage.add_member(:origin, ::Smithy::Schema::Shapes::MemberShape.new(target: OriginTypeValue, name: "Origin", traits: {"smithy.api#required" => {}}))
+    DescribeMetadataModelMessage.type = Types::DescribeMetadataModelMessage
+    DescribeMetadataModelResponse.add_member(:metadata_model_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "MetadataModelName"))
+    DescribeMetadataModelResponse.add_member(:metadata_model_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "MetadataModelType"))
+    DescribeMetadataModelResponse.add_member(:target_metadata_models, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataModelReferenceList, name: "TargetMetadataModels"))
+    DescribeMetadataModelResponse.add_member(:definition, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Definition"))
+    DescribeMetadataModelResponse.type = Types::DescribeMetadataModelResponse
     DescribeMigrationProjectsMessage.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterList, name: "Filters"))
     DescribeMigrationProjectsMessage.add_member(:max_records, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "MaxRecords"))
     DescribeMigrationProjectsMessage.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Marker"))
@@ -1306,6 +1366,7 @@ module Aws::DatabaseMigrationService
     Endpoint.add_member(:service_access_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ServiceAccessRoleArn"))
     Endpoint.add_member(:external_table_definition, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ExternalTableDefinition"))
     Endpoint.add_member(:external_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ExternalId"))
+    Endpoint.add_member(:is_read_only, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "IsReadOnly"))
     Endpoint.add_member(:dynamo_db_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: DynamoDbSettings, name: "DynamoDbSettings"))
     Endpoint.add_member(:s3_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Settings, name: "S3Settings"))
     Endpoint.add_member(:dms_transfer_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: DmsTransferSettings, name: "DmsTransferSettings"))
@@ -1325,6 +1386,7 @@ module Aws::DatabaseMigrationService
     Endpoint.add_member(:redis_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: RedisSettings, name: "RedisSettings"))
     Endpoint.add_member(:gcp_my_sql_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: GcpMySQLSettings, name: "GcpMySQLSettings"))
     Endpoint.add_member(:timestream_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestreamSettings, name: "TimestreamSettings"))
+    Endpoint.add_member(:lakehouse_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: LakehouseSettings, name: "LakehouseSettings"))
     Endpoint.type = Types::Endpoint
     EndpointList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Endpoint, name: "member", traits: {"smithy.api#xmlName" => "Endpoint"}))
     EndpointSetting.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name"))
@@ -1428,6 +1490,11 @@ module Aws::DatabaseMigrationService
     GcpMySQLSettings.add_member(:secrets_manager_access_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SecretsManagerAccessRoleArn"))
     GcpMySQLSettings.add_member(:secrets_manager_secret_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SecretsManagerSecretId"))
     GcpMySQLSettings.type = Types::GcpMySQLSettings
+    GetTargetSelectionRulesMessage.add_member(:migration_project_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationProjectIdentifier, name: "MigrationProjectIdentifier", traits: {"smithy.api#required" => {}}))
+    GetTargetSelectionRulesMessage.add_member(:selection_rules, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SelectionRules", traits: {"smithy.api#required" => {}}))
+    GetTargetSelectionRulesMessage.type = Types::GetTargetSelectionRulesMessage
+    GetTargetSelectionRulesResponse.add_member(:target_selection_rules, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "TargetSelectionRules"))
+    GetTargetSelectionRulesResponse.type = Types::GetTargetSelectionRulesResponse
     IBMDb2Settings.add_member(:database_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DatabaseName"))
     IBMDb2Settings.add_member(:password, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretString, name: "Password"))
     IBMDb2Settings.add_member(:port, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "Port"))
@@ -1448,6 +1515,8 @@ module Aws::DatabaseMigrationService
     IbmDb2LuwDataProviderSettings.add_member(:database_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DatabaseName"))
     IbmDb2LuwDataProviderSettings.add_member(:ssl_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: DmsSslModeValue, name: "SslMode"))
     IbmDb2LuwDataProviderSettings.add_member(:certificate_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CertificateArn"))
+    IbmDb2LuwDataProviderSettings.add_member(:encryption_algorithm, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "EncryptionAlgorithm"))
+    IbmDb2LuwDataProviderSettings.add_member(:security_mechanism, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "SecurityMechanism"))
     IbmDb2LuwDataProviderSettings.add_member(:s3_path, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "S3Path"))
     IbmDb2LuwDataProviderSettings.add_member(:s3_access_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "S3AccessRoleArn"))
     IbmDb2LuwDataProviderSettings.type = Types::IbmDb2LuwDataProviderSettings
@@ -1463,6 +1532,7 @@ module Aws::DatabaseMigrationService
     ImportCertificateMessage.add_member(:certificate_pem, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretString, name: "CertificatePem"))
     ImportCertificateMessage.add_member(:certificate_wallet, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateWallet, name: "CertificateWallet"))
     ImportCertificateMessage.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
+    ImportCertificateMessage.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "KmsKeyId"))
     ImportCertificateMessage.type = Types::ImportCertificateMessage
     ImportCertificateResponse.add_member(:certificate, ::Smithy::Schema::Shapes::MemberShape.new(target: Certificate, name: "Certificate"))
     ImportCertificateResponse.type = Types::ImportCertificateResponse
@@ -1555,6 +1625,8 @@ module Aws::DatabaseMigrationService
     KinesisSettings.add_member(:no_hex_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "NoHexPrefix"))
     KinesisSettings.add_member(:use_large_integer_value, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "UseLargeIntegerValue"))
     KinesisSettings.type = Types::KinesisSettings
+    LakehouseSettings.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Arn", traits: {"smithy.api#required" => {}}))
+    LakehouseSettings.type = Types::LakehouseSettings
     Limitation.add_member(:database_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DatabaseId"))
     Limitation.add_member(:engine_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "EngineName"))
     Limitation.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name"))
@@ -1580,6 +1652,13 @@ module Aws::DatabaseMigrationService
     MariaDbDataProviderSettings.type = Types::MariaDbDataProviderSettings
     MessageFormatValue.add_member(:json, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "JSON", traits: {"smithy.api#enumValue" => "json"}))
     MessageFormatValue.add_member(:json_unformatted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "JSON_UNFORMATTED", traits: {"smithy.api#enumValue" => "json-unformatted"}))
+    MetadataModelProperties.add_member(:statement_properties, Types::MetadataModelProperties::StatementProperties, ::Smithy::Schema::Shapes::MemberShape.new(target: StatementProperties, name: "StatementProperties"))
+    MetadataModelProperties.add_member(:unknown, Types::MetadataModelProperties::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    MetadataModelProperties.type = Types::MetadataModelProperties
+    MetadataModelReference.add_member(:metadata_model_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "MetadataModelName"))
+    MetadataModelReference.add_member(:selection_rules, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SelectionRules"))
+    MetadataModelReference.type = Types::MetadataModelReference
+    MetadataModelReferenceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataModelReference, name: "member"))
     MicrosoftSQLServerSettings.add_member(:port, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "Port"))
     MicrosoftSQLServerSettings.add_member(:bcp_packet_size, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "BcpPacketSize"))
     MicrosoftSQLServerSettings.add_member(:database_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DatabaseName"))
@@ -1969,6 +2048,15 @@ module Aws::DatabaseMigrationService
     PremigrationAssessmentStatus.add_member(:result_statistic, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationTaskAssessmentRunResultStatistic, name: "ResultStatistic"))
     PremigrationAssessmentStatus.type = Types::PremigrationAssessmentStatus
     PremigrationAssessmentStatusList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PremigrationAssessmentStatus, name: "member"))
+    ProcessedObject.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name"))
+    ProcessedObject.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Type"))
+    ProcessedObject.add_member(:endpoint_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "EndpointType"))
+    ProcessedObject.type = Types::ProcessedObject
+    Progress.add_member(:progress_percent, ::Smithy::Schema::Shapes::MemberShape.new(target: DoubleOptional, name: "ProgressPercent"))
+    Progress.add_member(:total_objects, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "TotalObjects", traits: {"smithy.api#default" => 0}))
+    Progress.add_member(:progress_step, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ProgressStep"))
+    Progress.add_member(:processed_object, ::Smithy::Schema::Shapes::MemberShape.new(target: ProcessedObject, name: "ProcessedObject"))
+    Progress.type = Types::Progress
     ProvisionData.add_member(:provision_state, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ProvisionState"))
     ProvisionData.add_member(:provisioned_capacity_units, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "ProvisionedCapacityUnits", traits: {"smithy.api#default" => 0}))
     ProvisionData.add_member(:date_provisioned, ::Smithy::Schema::Shapes::MemberShape.new(target: TStamp, name: "DateProvisioned"))
@@ -2121,6 +2209,7 @@ module Aws::DatabaseMigrationService
     Replication.add_member(:replication_update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TStamp, name: "ReplicationUpdateTime"))
     Replication.add_member(:replication_last_stop_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TStamp, name: "ReplicationLastStopTime"))
     Replication.add_member(:replication_deprovision_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TStamp, name: "ReplicationDeprovisionTime"))
+    Replication.add_member(:is_read_only, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "IsReadOnly"))
     Replication.type = Types::Replication
     ReplicationConfig.add_member(:replication_config_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ReplicationConfigIdentifier"))
     ReplicationConfig.add_member(:replication_config_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ReplicationConfigArn"))
@@ -2133,6 +2222,7 @@ module Aws::DatabaseMigrationService
     ReplicationConfig.add_member(:table_mappings, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "TableMappings"))
     ReplicationConfig.add_member(:replication_config_create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TStamp, name: "ReplicationConfigCreateTime"))
     ReplicationConfig.add_member(:replication_config_update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TStamp, name: "ReplicationConfigUpdateTime"))
+    ReplicationConfig.add_member(:is_read_only, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "IsReadOnly"))
     ReplicationConfig.type = Types::ReplicationConfig
     ReplicationConfigList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationConfig, name: "member", traits: {"smithy.api#xmlName" => "ReplicationConfig"}))
     ReplicationEndpointTypeValue.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SOURCE", traits: {"smithy.api#enumValue" => "source"}))
@@ -2198,6 +2288,7 @@ module Aws::DatabaseMigrationService
     ReplicationSubnetGroup.add_member(:subnet_group_status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SubnetGroupStatus"))
     ReplicationSubnetGroup.add_member(:subnets, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetList, name: "Subnets"))
     ReplicationSubnetGroup.add_member(:supported_network_types, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "SupportedNetworkTypes"))
+    ReplicationSubnetGroup.add_member(:is_read_only, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "IsReadOnly"))
     ReplicationSubnetGroup.type = Types::ReplicationSubnetGroup
     ReplicationSubnetGroupDoesNotCoverEnoughAZs.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     ReplicationSubnetGroupDoesNotCoverEnoughAZs.type = Types::ReplicationSubnetGroupDoesNotCoverEnoughAZs
@@ -2352,6 +2443,7 @@ module Aws::DatabaseMigrationService
     SchemaConversionRequest.add_member(:migration_project_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "MigrationProjectArn"))
     SchemaConversionRequest.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDetails, name: "Error"))
     SchemaConversionRequest.add_member(:export_sql_details, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportSqlDetails, name: "ExportSqlDetails"))
+    SchemaConversionRequest.add_member(:progress, ::Smithy::Schema::Shapes::MemberShape.new(target: Progress, name: "Progress"))
     SchemaConversionRequest.type = Types::SchemaConversionRequest
     SchemaConversionRequestList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaConversionRequest, name: "member"))
     SchemaList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
@@ -2406,6 +2498,13 @@ module Aws::DatabaseMigrationService
     StartMetadataModelConversionMessage.type = Types::StartMetadataModelConversionMessage
     StartMetadataModelConversionResponse.add_member(:request_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "RequestIdentifier"))
     StartMetadataModelConversionResponse.type = Types::StartMetadataModelConversionResponse
+    StartMetadataModelCreationMessage.add_member(:migration_project_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationProjectIdentifier, name: "MigrationProjectIdentifier", traits: {"smithy.api#required" => {}}))
+    StartMetadataModelCreationMessage.add_member(:selection_rules, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SelectionRules", traits: {"smithy.api#required" => {}}))
+    StartMetadataModelCreationMessage.add_member(:metadata_model_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "MetadataModelName", traits: {"smithy.api#required" => {}}))
+    StartMetadataModelCreationMessage.add_member(:properties, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataModelProperties, name: "Properties", traits: {"smithy.api#required" => {}}))
+    StartMetadataModelCreationMessage.type = Types::StartMetadataModelCreationMessage
+    StartMetadataModelCreationResponse.add_member(:request_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "RequestIdentifier"))
+    StartMetadataModelCreationResponse.type = Types::StartMetadataModelCreationResponse
     StartMetadataModelExportAsScriptMessage.add_member(:migration_project_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationProjectIdentifier, name: "MigrationProjectIdentifier", traits: {"smithy.api#required" => {}}))
     StartMetadataModelExportAsScriptMessage.add_member(:selection_rules, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SelectionRules", traits: {"smithy.api#required" => {}}))
     StartMetadataModelExportAsScriptMessage.add_member(:origin, ::Smithy::Schema::Shapes::MemberShape.new(target: OriginTypeValue, name: "Origin", traits: {"smithy.api#required" => {}}))
@@ -2473,6 +2572,8 @@ module Aws::DatabaseMigrationService
     StartReplicationTaskTypeValue.add_member(:start_replication, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "START_REPLICATION", traits: {"smithy.api#enumValue" => "start-replication"}))
     StartReplicationTaskTypeValue.add_member(:resume_processing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESUME_PROCESSING", traits: {"smithy.api#enumValue" => "resume-processing"}))
     StartReplicationTaskTypeValue.add_member(:reload_target, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RELOAD_TARGET", traits: {"smithy.api#enumValue" => "reload-target"}))
+    StatementProperties.add_member(:definition, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Definition", traits: {"smithy.api#required" => {}}))
+    StatementProperties.type = Types::StatementProperties
     StopDataMigrationMessage.add_member(:data_migration_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DataMigrationIdentifier", traits: {"smithy.api#required" => {}}))
     StopDataMigrationMessage.type = Types::StopDataMigrationMessage
     StopDataMigrationResponse.add_member(:data_migration, ::Smithy::Schema::Shapes::MemberShape.new(target: DataMigration, name: "DataMigration"))
@@ -2503,6 +2604,13 @@ module Aws::DatabaseMigrationService
     SupportedEndpointType.add_member(:engine_display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "EngineDisplayName"))
     SupportedEndpointType.type = Types::SupportedEndpointType
     SupportedEndpointTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SupportedEndpointType, name: "member", traits: {"smithy.api#xmlName" => "SupportedEndpointType"}))
+    SybaseAseDataProviderSettings.add_member(:server_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ServerName"))
+    SybaseAseDataProviderSettings.add_member(:port, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "Port"))
+    SybaseAseDataProviderSettings.add_member(:database_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DatabaseName"))
+    SybaseAseDataProviderSettings.add_member(:ssl_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: DmsSslModeValue, name: "SslMode"))
+    SybaseAseDataProviderSettings.add_member(:encrypt_password, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "EncryptPassword"))
+    SybaseAseDataProviderSettings.add_member(:certificate_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CertificateArn"))
+    SybaseAseDataProviderSettings.type = Types::SybaseAseDataProviderSettings
     SybaseSettings.add_member(:database_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DatabaseName"))
     SybaseSettings.add_member(:password, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretString, name: "Password"))
     SybaseSettings.add_member(:port, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "Port"))
@@ -2592,7 +2700,7 @@ module Aws::DatabaseMigrationService
       service.id = "com.amazonaws.databasemigrationservice#AmazonDMSv20160101"
       service.name = "AmazonDMSv20160101"
       service.version = "2016-01-01"
-      service.traits = {"aws.api#service" => {"sdkId" => "Database Migration Service", "arnNamespace" => "dms", "cloudFormationName" => "DMS", "cloudTrailEventSource" => "dms.amazonaws.com", "docId" => "dms-2016-01-01", "endpointPrefix" => "dms"}, "aws.auth#sigv4" => {"name" => "dms"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "AWS Database Migration Service", "smithy.api#xmlNamespace" => {"uri" => "http://dms.amazonaws.com/doc/2016-01-01/"}}
+      service.traits = {"aws.api#service" => {"sdkId" => "Database Migration Service", "arnNamespace" => "dms", "cloudFormationName" => "DMS", "cloudTrailEventSource" => "dms.amazonaws.com", "docId" => "dms-2016-01-01", "endpointPrefix" => "dms"}, "aws.auth#sigv4" => {"name" => "dms"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "AWS Database Migration Service", "smithy.api#xmlNamespace" => {"uri" => "http://dms.amazonaws.com/doc/2016-01-01/"}, "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws-us-gov"]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws-iso"]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws-iso-b"]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://dms-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://dms.{Region}.amazonaws.com", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://dms.{Region}.c2s.ic.gov", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://dms.{Region}.sc2s.sgov.gov", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://dms-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://dms.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://dms.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 16, "nodes" => "/////wAAAAH/////AAAAAAAAAA8AAAADAAAAAQAAAAQF9eEOAAAAAgAAAAUF9eEOAAAAAwAAAAgAAAAGAAAABAAAAAcF9eENAAAABQX14QsF9eEMAAAABAAAAA0AAAAJAAAABgAAAAoF9eEKAAAABwX14QYAAAALAAAACAX14QcAAAAMAAAACQX14QgF9eEJAAAABQAAAA4F9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAAQAAAABAX14QIF9eED"}}
       service.add_operation(:add_tags_to_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.databasemigrationservice#AddTagsToResource"
         operation.name = "AddTagsToResource"
@@ -2615,6 +2723,26 @@ module Aws::DatabaseMigrationService
         operation.name = "BatchStartRecommendations"
         operation.input = BatchStartRecommendationsRequest
         operation.output = BatchStartRecommendationsResponse
+        operation.errors << AccessDeniedFault
+        operation.errors << InvalidResourceStateFault
+        operation.errors << ResourceNotFoundFault
+        operation.traits = {}
+      end)
+      service.add_operation(:cancel_metadata_model_conversion, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.databasemigrationservice#CancelMetadataModelConversion"
+        operation.name = "CancelMetadataModelConversion"
+        operation.input = CancelMetadataModelConversionMessage
+        operation.output = CancelMetadataModelConversionResponse
+        operation.errors << AccessDeniedFault
+        operation.errors << InvalidResourceStateFault
+        operation.errors << ResourceNotFoundFault
+        operation.traits = {}
+      end)
+      service.add_operation(:cancel_metadata_model_creation, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.databasemigrationservice#CancelMetadataModelCreation"
+        operation.name = "CancelMetadataModelCreation"
+        operation.input = CancelMetadataModelCreationMessage
+        operation.output = CancelMetadataModelCreationResponse
         operation.errors << AccessDeniedFault
         operation.errors << InvalidResourceStateFault
         operation.errors << ResourceNotFoundFault
@@ -3120,6 +3248,15 @@ module Aws::DatabaseMigrationService
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeInstanceProfiles.new
       end)
+      service.add_operation(:describe_metadata_model, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.databasemigrationservice#DescribeMetadataModel"
+        operation.name = "DescribeMetadataModel"
+        operation.input = DescribeMetadataModelMessage
+        operation.output = DescribeMetadataModelResponse
+        operation.errors << AccessDeniedFault
+        operation.errors << ResourceNotFoundFault
+        operation.traits = {}
+      end)
       service.add_operation(:describe_metadata_model_assessments, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.databasemigrationservice#DescribeMetadataModelAssessments"
         operation.name = "DescribeMetadataModelAssessments"
@@ -3129,6 +3266,16 @@ module Aws::DatabaseMigrationService
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeMetadataModelAssessments.new
       end)
+      service.add_operation(:describe_metadata_model_children, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.databasemigrationservice#DescribeMetadataModelChildren"
+        operation.name = "DescribeMetadataModelChildren"
+        operation.input = DescribeMetadataModelChildrenMessage
+        operation.output = DescribeMetadataModelChildrenResponse
+        operation.errors << AccessDeniedFault
+        operation.errors << ResourceNotFoundFault
+        operation.traits = {}
+        operation[:paginator] = Paginators::DescribeMetadataModelChildren.new
+      end)
       service.add_operation(:describe_metadata_model_conversions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.databasemigrationservice#DescribeMetadataModelConversions"
         operation.name = "DescribeMetadataModelConversions"
@@ -3137,6 +3284,16 @@ module Aws::DatabaseMigrationService
         operation.errors << ResourceNotFoundFault
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeMetadataModelConversions.new
+      end)
+      service.add_operation(:describe_metadata_model_creations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.databasemigrationservice#DescribeMetadataModelCreations"
+        operation.name = "DescribeMetadataModelCreations"
+        operation.input = DescribeMetadataModelCreationsMessage
+        operation.output = DescribeMetadataModelCreationsResponse
+        operation.errors << AccessDeniedFault
+        operation.errors << ResourceNotFoundFault
+        operation.traits = {}
+        operation[:paginator] = Paginators::DescribeMetadataModelCreations.new
       end)
       service.add_operation(:describe_metadata_model_exports_as_script, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.databasemigrationservice#DescribeMetadataModelExportsAsScript"
@@ -3343,12 +3500,23 @@ module Aws::DatabaseMigrationService
         operation.errors << ResourceNotFoundFault
         operation.traits = {}
       end)
+      service.add_operation(:get_target_selection_rules, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.databasemigrationservice#GetTargetSelectionRules"
+        operation.name = "GetTargetSelectionRules"
+        operation.input = GetTargetSelectionRulesMessage
+        operation.output = GetTargetSelectionRulesResponse
+        operation.errors << AccessDeniedFault
+        operation.errors << InvalidResourceStateFault
+        operation.errors << ResourceNotFoundFault
+        operation.traits = {}
+      end)
       service.add_operation(:import_certificate, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.databasemigrationservice#ImportCertificate"
         operation.name = "ImportCertificate"
         operation.input = ImportCertificateMessage
         operation.output = ImportCertificateResponse
         operation.errors << InvalidCertificateFault
+        operation.errors << KMSKeyNotAccessibleFault
         operation.errors << ResourceAlreadyExistsFault
         operation.errors << ResourceQuotaExceededFault
         operation.traits = {}
@@ -3622,6 +3790,17 @@ module Aws::DatabaseMigrationService
         operation.errors << ResourceQuotaExceededFault
         operation.errors << S3AccessDeniedFault
         operation.errors << S3ResourceNotFoundFault
+        operation.traits = {}
+      end)
+      service.add_operation(:start_metadata_model_creation, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.databasemigrationservice#StartMetadataModelCreation"
+        operation.name = "StartMetadataModelCreation"
+        operation.input = StartMetadataModelCreationMessage
+        operation.output = StartMetadataModelCreationResponse
+        operation.errors << AccessDeniedFault
+        operation.errors << ResourceAlreadyExistsFault
+        operation.errors << ResourceNotFoundFault
+        operation.errors << ResourceQuotaExceededFault
         operation.traits = {}
       end)
       service.add_operation(:start_metadata_model_export_as_script, ::Smithy::Schema::Shapes::OperationShape.new do |operation|

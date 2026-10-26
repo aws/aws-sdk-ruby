@@ -42,6 +42,9 @@
             ],
             "resources": [
                 {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbBackupResource"
+                },
+                {
                     "target": "com.amazonaws.timestreaminfluxdb#DbClusterResource"
                 },
                 {
@@ -74,6 +77,10 @@
                         "type": "ArrayOfString",
                         "documentation": "Filters access by a list of tag keys that are allowed in the request",
                         "externalDocumentation": "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-tagkeys"
+                    },
+                    "RestoreMode": {
+                        "type": "String",
+                        "documentation": "Filters access by the restore mode specified in the request. Valid values: NEW_RESOURCE, REPLACE_EXISTING"
                     }
                 },
                 "aws.iam#disableConditionKeyInference": {},
@@ -91,6 +98,194 @@
                 },
                 "smithy.api#documentation": "<p>Amazon Timestream for InfluxDB is a managed time-series database engine that makes it\n            easy for application developers and DevOps teams to run InfluxDB databases on Amazon Web Services for near real-time time-series applications using open-source APIs. With Amazon Timestream for InfluxDB, it is easy to set up, operate, and scale time-series workloads that can answer queries with single-digit millisecond query response time.</p>",
                 "smithy.api#title": "Timestream InfluxDB",
+                "smithy.rules#endpointBdd": {
+                    "version": "1.1",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        }
+                    },
+                    "conditions": [
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.partition",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ],
+                            "assign": "PartitionResult"
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseDualStack"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsDualStack"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsFIPS"
+                                    ]
+                                },
+                                true
+                            ]
+                        }
+                    ],
+                    "results": [
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://timestream-influxdb-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://timestream-influxdb-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://timestream-influxdb.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://timestream-influxdb.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ],
+                    "root": 2,
+                    "nodeCount": 13,
+                    "nodes": "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"
+                },
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {
@@ -98,27 +293,27 @@
                             "builtIn": "AWS::Region",
                             "required": false,
                             "documentation": "The AWS region used to dispatch the request.",
-                            "type": "String"
+                            "type": "string"
                         },
                         "UseDualStack": {
                             "builtIn": "AWS::UseDualStack",
                             "required": true,
                             "default": false,
                             "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "UseFIPS": {
                             "builtIn": "AWS::UseFIPS",
                             "required": true,
                             "default": false,
                             "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "Endpoint": {
                             "builtIn": "SDK::Endpoint",
                             "required": false,
                             "documentation": "Override the endpoint used to send this request",
-                            "type": "String"
+                            "type": "string"
                         }
                     },
                     "rules": [
@@ -720,7 +915,67 @@
                     "min": 1,
                     "max": 1011
                 },
-                "smithy.api#pattern": "^arn:aws[a-z\\-]*:timestream\\-influxdb:[a-z0-9\\-]+:[0-9]{12}:(db\\-instance|db\\-cluster|db\\-parameter\\-group)/[a-zA-Z0-9]{3,64}$"
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:timestream\\-influxdb:[a-z0-9\\-]+:[0-9]{12}:(db\\-instance|db\\-cluster|db\\-parameter\\-group|db\\-backup)/[a-zA-Z0-9]{3,64}$"
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#AutomatedBackupRetentionDays": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 365
+                }
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#AutomatedDbBackupType": {
+            "type": "enum",
+            "members": {
+                "HOURLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HOURLY"
+                    }
+                },
+                "DAILY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DAILY"
+                    }
+                },
+                "WEEKLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WEEKLY"
+                    }
+                },
+                "MONTHLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MONTHLY"
+                    }
+                },
+                "CUSTOM_SCHEDULE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOM_SCHEDULE"
+                    }
+                },
+                "CONTINUOUS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTINUOUS"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#AwsCronSchedule": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 9,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^cron\\(\\S+ \\S+ \\S+ \\S+ \\S+ \\S+\\)$"
             }
         },
         "com.amazonaws.timestreaminfluxdb#Bucket": {
@@ -731,6 +986,32 @@
                     "max": 64
                 },
                 "smithy.api#pattern": "^[^_\"][^\"]*$"
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#ClusterConfiguration": {
+            "type": "structure",
+            "members": {
+                "ingestQueryInstances": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of instances in the DbCluster which can both ingest and query.</p>"
+                    }
+                },
+                "queryOnlyInstances": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of instances in the DbCluster which can only query.</p>"
+                    }
+                },
+                "dedicatedCompactor": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates if the compactor instance is a standalone instance or not.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for node modes in the DbCluster.</p>"
             }
         },
         "com.amazonaws.timestreaminfluxdb#ClusterDeploymentType": {
@@ -788,6 +1069,42 @@
                     "traits": {
                         "smithy.api#enumValue": "MAINTENANCE"
                     }
+                },
+                "UPDATING_INSTANCE_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATING_INSTANCE_TYPE"
+                    }
+                },
+                "REBOOTING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REBOOTING"
+                    }
+                },
+                "REBOOT_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REBOOT_FAILED"
+                    }
+                },
+                "PARTIALLY_AVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PARTIALLY_AVAILABLE"
+                    }
+                },
+                "RESTORING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESTORING"
+                    }
+                },
+                "RESTORE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESTORE_FAILED"
+                    }
                 }
             }
         },
@@ -819,6 +1136,247 @@
                 "smithy.api#documentation": "<p>The request conflicts with an existing resource in Timestream for InfluxDB.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#CreateDbBackup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.timestreaminfluxdb#CreateDbBackupInput"
+            },
+            "output": {
+                "target": "com.amazonaws.timestreaminfluxdb#CreateDbBackupOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys"
+                ],
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to create a Timestream InfluxDB Backup for a DbInstance or DbCluster"
+                },
+                "smithy.api#documentation": "<p>Creates a new on-demand backup of a Timestream for InfluxDB resource.</p>",
+                "smithy.api#idempotent": {},
+                "smithy.api#tags": [
+                    "DbBackup"
+                ]
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#CreateDbBackupInput": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbBackupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backup. Must be unique within the account and region.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "dbResourceId": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The id of the DB instance or DB cluster to back up.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "retentionDays": {
+                    "target": "com.amazonaws.timestreaminfluxdb#RetentionDays",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of days to retain the backup. Valid values are 1 to 3650.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.timestreaminfluxdb#RequestTagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of key-value pairs to associate with the backup.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#CreateDbBackupOutput": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbBackupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Service-generated unique identifier of the backup.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbBackupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer-provided name of the backup.</p>"
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the backup.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbBackupStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the backup.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the backup was created.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "expiresAfter": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date after which the backup will be automatically deleted.</p>"
+                    }
+                },
+                "dbResourceId": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the DB resource that the backup was created from.</p>"
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbBackupType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of backup.</p>"
+                    }
+                },
+                "engineType": {
+                    "target": "com.amazonaws.timestreaminfluxdb#EngineType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The engine type of the resource that the backup was created from.</p>"
+                    }
+                },
+                "deploymentType": {
+                    "target": "com.amazonaws.timestreaminfluxdb#ResourceDeploymentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deployment type of the resource that the backup was created from.</p>"
+                    }
+                },
+                "kmsKeyId": {
+                    "target": "com.amazonaws.timestreaminfluxdb#KmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services KMS key ARN used for encryption of the resource at the time of backup.</p>"
+                    }
+                },
+                "clusterConfiguration": {
+                    "target": "com.amazonaws.timestreaminfluxdb#ClusterConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cluster configuration of the resource at the time of backup.</p>"
+                    }
+                },
+                "dbParameterGroupId": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbParameterGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the DB parameter group associated with the backup.</p>"
+                    }
+                },
+                "dbInstanceType": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbInstanceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DB instance type of the resource at the time of backup.</p>"
+                    }
+                },
+                "logDeliveryConfiguration": {
+                    "target": "com.amazonaws.timestreaminfluxdb#LogDeliveryConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The log delivery configuration of the resource at the time of backup.</p>"
+                    }
+                },
+                "failoverMode": {
+                    "target": "com.amazonaws.timestreaminfluxdb#FailoverMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The failover mode of the resource at the time of backup.</p>"
+                    }
+                },
+                "dbStorageType": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbStorageType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The storage type of the resource at the time of backup.</p>"
+                    }
+                },
+                "allocatedStorage": {
+                    "target": "com.amazonaws.timestreaminfluxdb#AllocatedStorage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The allocated storage of the resource at the time of backup, in GiB.</p>"
+                    }
+                },
+                "vpcSubnetIds": {
+                    "target": "com.amazonaws.timestreaminfluxdb#VpcSubnetIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The VPC subnet IDs associated with the resource at the time of backup.</p>"
+                    }
+                },
+                "vpcSecurityGroupIds": {
+                    "target": "com.amazonaws.timestreaminfluxdb#VpcSecurityGroupIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The VPC security group IDs associated with the resource at the time of backup.</p>"
+                    }
+                },
+                "publiclyAccessible": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the resource was publicly accessible at the time of backup.</p>"
+                    }
+                },
+                "port": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port number of the resource at the time of backup.</p>"
+                    }
+                },
+                "networkType": {
+                    "target": "com.amazonaws.timestreaminfluxdb#NetworkType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network type of the resource at the time of backup.</p>"
+                    }
+                },
+                "influxAuthParametersSecretArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Secrets Manager secret containing the InfluxDB auth parameters.</p>"
+                    }
+                },
+                "maintenanceSchedule": {
+                    "target": "com.amazonaws.timestreaminfluxdb#MaintenanceSchedule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maintenance schedule of the resource at the time of backup.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.timestreaminfluxdb#CreateDbCluster": {
@@ -883,8 +1441,7 @@
                 "password": {
                     "target": "com.amazonaws.timestreaminfluxdb#Password",
                     "traits": {
-                        "smithy.api#documentation": "<p>The password of the initial admin user created in InfluxDB. This password will allow\n            you to access the InfluxDB UI to perform various administrative tasks and also use the\n            InfluxDB CLI to create an operator token. These attributes will be stored in a secret created in Secrets Manager in your account.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The password of the initial admin user created in InfluxDB. This password will allow\n            you to access the InfluxDB UI to perform various administrative tasks and also use the\n            InfluxDB CLI to create an operator token. These attributes will be stored in a secret created in Secrets Manager in your account.</p>"
                     }
                 },
                 "organization": {
@@ -902,8 +1459,7 @@
                 "port": {
                     "target": "com.amazonaws.timestreaminfluxdb#Port",
                     "traits": {
-                        "smithy.api#default": 8086,
-                        "smithy.api#documentation": "<p>The port number on which InfluxDB accepts connections.</p>\n         <p>Valid Values: 1024-65535</p>\n         <p>Default: 8086</p>\n         <p>Constraints: The value can't be 2375-2376, 7788-7799, 8090, or 51678-51680</p>"
+                        "smithy.api#documentation": "<p>The port number on which InfluxDB accepts connections.</p>\n         <p>Valid Values: 1024-65535</p>\n         <p>Default: 8086 for InfluxDB v2, 8181 for InfluxDB v3</p>\n         <p>Constraints: The value can't be 2375-2376, 7788-7799, 8090, or 51678-51680</p>"
                     }
                 },
                 "dbParameterGroupIdentifier": {
@@ -928,8 +1484,7 @@
                 "allocatedStorage": {
                     "target": "com.amazonaws.timestreaminfluxdb#AllocatedStorage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount of storage to allocate for your DB storage type in GiB (gibibytes).</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The amount of storage to allocate for your DB storage type in GiB (gibibytes).</p>"
                     }
                 },
                 "networkType": {
@@ -961,8 +1516,7 @@
                 "deploymentType": {
                     "target": "com.amazonaws.timestreaminfluxdb#ClusterDeploymentType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the type of cluster to create.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Specifies the type of cluster to create.</p>"
                     }
                 },
                 "failoverMode": {
@@ -975,6 +1529,24 @@
                     "target": "com.amazonaws.timestreaminfluxdb#LogDeliveryConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Configuration for sending InfluxDB engine logs to a specified S3 bucket.</p>"
+                    }
+                },
+                "maintenanceSchedule": {
+                    "target": "com.amazonaws.timestreaminfluxdb#MaintenanceSchedule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the maintenance schedule for the DB cluster, including the preferred maintenance window and timezone.</p>"
+                    }
+                },
+                "dbBackupConfigurations": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbBackupConfigurationInputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of backup configurations to enable automated backups for the DB cluster.</p>"
+                    }
+                },
+                "kmsKeyId": {
+                    "target": "com.amazonaws.timestreaminfluxdb#KmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services KMS key identifier to use for encryption of the DB cluster. Can be a key ID, key ARN, alias name, or alias ARN.</p>"
                     }
                 },
                 "tags": {
@@ -1078,7 +1650,7 @@
                 "password": {
                     "target": "com.amazonaws.timestreaminfluxdb#Password",
                     "traits": {
-                        "smithy.api#documentation": "<p>The password of the initial admin user created in InfluxDB. This password will allow\n            you to access the InfluxDB UI to perform various administrative tasks and also use the\n            InfluxDB CLI to create an operator token. These attributes will be stored in a Secret\n            created in Secrets Manager in your account.</p>",
+                        "smithy.api#documentation": "<p>The password of the initial admin user created in InfluxDB v2. This password will allow\n            you to access the InfluxDB UI to perform various administrative tasks and also use the\n            InfluxDB CLI to create an operator token. These attributes will be stored in a Secret\n            created in Secrets Manager in your account.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1152,6 +1724,12 @@
                         "smithy.api#documentation": "<p>Configuration for sending InfluxDB engine logs to a specified S3 bucket.</p>"
                     }
                 },
+                "maintenanceSchedule": {
+                    "target": "com.amazonaws.timestreaminfluxdb#MaintenanceSchedule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the maintenance schedule for the DB instance, including the preferred maintenance window and timezone.</p>"
+                    }
+                },
                 "tags": {
                     "target": "com.amazonaws.timestreaminfluxdb#RequestTagMap",
                     "traits": {
@@ -1169,6 +1747,18 @@
                     "target": "com.amazonaws.timestreaminfluxdb#NetworkType",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether the networkType of the Timestream for InfluxDB instance is IPV4, which can communicate over IPv4 protocol only, or DUAL, which can communicate over both IPv4 and IPv6 protocols.</p>"
+                    }
+                },
+                "dbBackupConfigurations": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbBackupConfigurationInputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of backup configurations to enable automated backups for the DB instance.</p>"
+                    }
+                },
+                "kmsKeyId": {
+                    "target": "com.amazonaws.timestreaminfluxdb#KmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services KMS key identifier to use for encryption of the DB instance. Can be a key ID, key ARN, alias name, or alias ARN.</p>"
                     }
                 }
             },
@@ -1313,6 +1903,44 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the DbInstance's role in the cluster.</p>"
                     }
+                },
+                "instanceModes": {
+                    "target": "com.amazonaws.timestreaminfluxdb#InstanceModeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the DbInstance's roles in the cluster.</p>"
+                    }
+                },
+                "maintenanceSchedule": {
+                    "target": "com.amazonaws.timestreaminfluxdb#MaintenanceSchedule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maintenance schedule for the DB instance.</p>"
+                    }
+                },
+                "lastMaintenanceTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of the last completed maintenance operation on the DB instance.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "nextMaintenanceTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of the next scheduled maintenance operation on the DB instance.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "dbBackupConfigurations": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbBackupConfigurationOutputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The backup configurations for the DB instance.</p>"
+                    }
+                },
+                "kmsKeyId": {
+                    "target": "com.amazonaws.timestreaminfluxdb#KmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services KMS key ARN used for encryption of the DB instance.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1443,6 +2071,348 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.timestreaminfluxdb#DataFusionRuntimeType": {
+            "type": "enum",
+            "members": {
+                "MULTI_THREAD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "multi-thread"
+                    }
+                },
+                "MULTI_THREAD_ALT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "multi-thread-alt"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#Date": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "A calendar date in YYYY-MM-DD format.",
+                "smithy.api#pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#DbBackupConfiguration": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.timestreaminfluxdb#AutomatedDbBackupType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of automated backup schedule. Valid values are HOURLY, DAILY, WEEKLY, MONTHLY, CUSTOM_SCHEDULE, and CONTINUOUS.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "retentionDays": {
+                    "target": "com.amazonaws.timestreaminfluxdb#AutomatedBackupRetentionDays",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of days to retain automated backups. Valid values are 1 to 365.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "enabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether this backup configuration is enabled.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "customSchedule": {
+                    "target": "com.amazonaws.timestreaminfluxdb#AwsCronSchedule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A custom cron schedule expression for the backup. Required when type is CUSTOM_SCHEDULE.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the configuration for an automated backup schedule.</p>"
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#DbBackupConfigurationInputList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.timestreaminfluxdb#DbBackupConfiguration"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 4
+                }
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#DbBackupConfigurationOutput": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.timestreaminfluxdb#AutomatedDbBackupType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of automated backup schedule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "retentionDays": {
+                    "target": "com.amazonaws.timestreaminfluxdb#AutomatedBackupRetentionDays",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of days automated backups are retained.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "enabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether this backup configuration is enabled.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "customSchedule": {
+                    "target": "com.amazonaws.timestreaminfluxdb#AwsCronSchedule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The custom cron schedule expression for the backup, if applicable.</p>"
+                    }
+                },
+                "nextAutomatedBackupTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next scheduled time for an automated backup to be taken.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the configuration and status for an automated backup schedule.</p>"
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#DbBackupConfigurationOutputList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.timestreaminfluxdb#DbBackupConfigurationOutput"
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#DbBackupId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9]+$"
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#DbBackupName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 40
+                },
+                "smithy.api#pattern": "^[a-zA-Z][a-zA-Z0-9]*(-[a-zA-Z0-9]+)*$"
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#DbBackupResource": {
+            "type": "resource",
+            "identifiers": {
+                "dbBackupId": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbBackupId"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.timestreaminfluxdb#CreateDbBackup"
+            },
+            "read": {
+                "target": "com.amazonaws.timestreaminfluxdb#GetDbBackup"
+            },
+            "delete": {
+                "target": "com.amazonaws.timestreaminfluxdb#DeleteDbBackup"
+            },
+            "list": {
+                "target": "com.amazonaws.timestreaminfluxdb#ListDbBackups"
+            },
+            "operations": [
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#RestoreFromDbBackup"
+                }
+            ],
+            "traits": {
+                "aws.api#arn": {
+                    "template": "db-backup/{dbBackupId}"
+                },
+                "aws.iam#conditionKeys": [
+                    "aws:ResourceTag/${TagKey}"
+                ],
+                "aws.iam#iamResource": {
+                    "name": "db-backup",
+                    "relativeDocumentation": "API_DbBackupSummary.html"
+                },
+                "smithy.api#documentation": "Represents a Timestream InfluxDB backup"
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#DbBackupStatus": {
+            "type": "enum",
+            "members": {
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "DELETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#DbBackupSummary": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbBackupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Service-generated unique identifier of the backup.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbBackupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer-provided name of the backup.</p>"
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the backup.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbBackupStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the backup. Valid values are IN_PROGRESS, COMPLETED, FAILED, DELETING, and DELETED.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the backup was created.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "expiresAfter": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date after which the backup will be automatically deleted.</p>"
+                    }
+                },
+                "dbResourceId": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the DB resource that the backup was created from.</p>"
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbBackupType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of backup. Valid values are HOURLY, DAILY, WEEKLY, MONTHLY, CUSTOM_SCHEDULE, ON_DEMAND, and CONTINUOUS.</p>"
+                    }
+                },
+                "engineType": {
+                    "target": "com.amazonaws.timestreaminfluxdb#EngineType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The engine type of the resource that the backup was created from.</p>"
+                    }
+                },
+                "deploymentType": {
+                    "target": "com.amazonaws.timestreaminfluxdb#ResourceDeploymentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deployment type of the resource that the backup was created from.</p>"
+                    }
+                },
+                "kmsKeyId": {
+                    "target": "com.amazonaws.timestreaminfluxdb#KmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services KMS key ARN used for encryption of the resource at the time of backup.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains a summary of a Timestream for InfluxDB backup.</p>"
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#DbBackupSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.timestreaminfluxdb#DbBackupSummary"
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#DbBackupType": {
+            "type": "enum",
+            "members": {
+                "HOURLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HOURLY"
+                    }
+                },
+                "DAILY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DAILY"
+                    }
+                },
+                "WEEKLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WEEKLY"
+                    }
+                },
+                "MONTHLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MONTHLY"
+                    }
+                },
+                "CUSTOM_SCHEDULE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOM_SCHEDULE"
+                    }
+                },
+                "ON_DEMAND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ON_DEMAND"
+                    }
+                },
+                "CONTINUOUS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTINUOUS"
+                    }
+                }
+            }
+        },
         "com.amazonaws.timestreaminfluxdb#DbClusterId": {
             "type": "string",
             "traits": {
@@ -1488,6 +2458,9 @@
             "operations": [
                 {
                     "target": "com.amazonaws.timestreaminfluxdb#ListDbInstancesForCluster"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#RebootDbCluster"
                 }
             ],
             "traits": {
@@ -1581,6 +2554,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The amount of storage allocated for your DB storage type (in gibibytes).</p>"
                     }
+                },
+                "engineType": {
+                    "target": "com.amazonaws.timestreaminfluxdb#EngineType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The engine type of your DB cluster.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1670,6 +2649,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the DB instance's role in the cluster.</p>"
                     }
+                },
+                "instanceModes": {
+                    "target": "com.amazonaws.timestreaminfluxdb#InstanceModeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the DB instance's roles in the cluster.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1690,6 +2675,12 @@
                     "max": 64
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9]+$"
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#DbInstanceIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.timestreaminfluxdb#DbInstanceId"
             }
         },
         "com.amazonaws.timestreaminfluxdb#DbInstanceIdentifier": {
@@ -1734,6 +2725,11 @@
             "list": {
                 "target": "com.amazonaws.timestreaminfluxdb#ListDbInstances"
             },
+            "operations": [
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#RebootDbInstance"
+                }
+            ],
             "traits": {
                 "aws.api#arn": {
                     "template": "db-instance/{dbInstanceIdentifier}"
@@ -1991,6 +2987,26 @@
                 "target": "com.amazonaws.timestreaminfluxdb#DbParameterGroupSummary"
             }
         },
+        "com.amazonaws.timestreaminfluxdb#DbResourceId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9]+$"
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#DbResourceName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 40
+                },
+                "smithy.api#pattern": "^[a-zA-Z][a-zA-Z0-9]*(-[a-zA-Z0-9]+)*$"
+            }
+        },
         "com.amazonaws.timestreaminfluxdb#DbStorageType": {
             "type": "enum",
             "members": {
@@ -2012,6 +3028,222 @@
                         "smithy.api#enumValue": "InfluxIOIncludedT3"
                     }
                 }
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#DeleteDbBackup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.timestreaminfluxdb#DeleteDbBackupInput"
+            },
+            "output": {
+                "target": "com.amazonaws.timestreaminfluxdb#DeleteDbBackupOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to delete a Timestream InfluxDB backup"
+                },
+                "smithy.api#documentation": "<p>Deletes a Timestream for InfluxDB backup.</p>",
+                "smithy.api#idempotent": {},
+                "smithy.api#tags": [
+                    "DbBackup"
+                ]
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#DeleteDbBackupInput": {
+            "type": "structure",
+            "members": {
+                "identifier": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbBackupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the backup to delete.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "dbBackupId"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#DeleteDbBackupOutput": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbBackupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Service-generated unique identifier of the deleted backup.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbBackupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer-provided name of the deleted backup.</p>"
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the deleted backup.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbBackupStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the backup.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the backup was created.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "expiresAfter": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date after which the backup was set to be automatically deleted.</p>"
+                    }
+                },
+                "dbResourceId": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the DB resource that the backup was created from.</p>"
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbBackupType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of backup.</p>"
+                    }
+                },
+                "engineType": {
+                    "target": "com.amazonaws.timestreaminfluxdb#EngineType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The engine type of the resource that the backup was created from.</p>"
+                    }
+                },
+                "deploymentType": {
+                    "target": "com.amazonaws.timestreaminfluxdb#ResourceDeploymentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deployment type of the resource that the backup was created from.</p>"
+                    }
+                },
+                "kmsKeyId": {
+                    "target": "com.amazonaws.timestreaminfluxdb#KmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services KMS key ARN used for encryption of the resource at the time of backup.</p>"
+                    }
+                },
+                "clusterConfiguration": {
+                    "target": "com.amazonaws.timestreaminfluxdb#ClusterConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cluster configuration of the resource at the time of backup.</p>"
+                    }
+                },
+                "dbParameterGroupId": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbParameterGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the DB parameter group associated with the backup.</p>"
+                    }
+                },
+                "dbInstanceType": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbInstanceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DB instance type of the resource at the time of backup.</p>"
+                    }
+                },
+                "logDeliveryConfiguration": {
+                    "target": "com.amazonaws.timestreaminfluxdb#LogDeliveryConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The log delivery configuration of the resource at the time of backup.</p>"
+                    }
+                },
+                "failoverMode": {
+                    "target": "com.amazonaws.timestreaminfluxdb#FailoverMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The failover mode of the resource at the time of backup.</p>"
+                    }
+                },
+                "dbStorageType": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbStorageType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The storage type of the resource at the time of backup.</p>"
+                    }
+                },
+                "allocatedStorage": {
+                    "target": "com.amazonaws.timestreaminfluxdb#AllocatedStorage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The allocated storage of the resource at the time of backup, in GiB.</p>"
+                    }
+                },
+                "vpcSubnetIds": {
+                    "target": "com.amazonaws.timestreaminfluxdb#VpcSubnetIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The VPC subnet IDs associated with the resource at the time of backup.</p>"
+                    }
+                },
+                "vpcSecurityGroupIds": {
+                    "target": "com.amazonaws.timestreaminfluxdb#VpcSecurityGroupIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The VPC security group IDs associated with the resource at the time of backup.</p>"
+                    }
+                },
+                "publiclyAccessible": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the resource was publicly accessible at the time of backup.</p>"
+                    }
+                },
+                "port": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port number of the resource at the time of backup.</p>"
+                    }
+                },
+                "networkType": {
+                    "target": "com.amazonaws.timestreaminfluxdb#NetworkType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network type of the resource at the time of backup.</p>"
+                    }
+                },
+                "influxAuthParametersSecretArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Secrets Manager secret containing the InfluxDB auth parameters.</p>"
+                    }
+                },
+                "maintenanceSchedule": {
+                    "target": "com.amazonaws.timestreaminfluxdb#MaintenanceSchedule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maintenance schedule of the resource at the time of backup.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.timestreaminfluxdb#DeleteDbCluster": {
@@ -2058,6 +3290,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Service-generated unique identifier of the DB cluster.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "retainAutomatedBackups": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to retain automated backups after the DB cluster is deleted. If set to true, automated backups are not deleted and can be restored later.</p>"
                     }
                 }
             },
@@ -2127,6 +3365,12 @@
                         "smithy.api#documentation": "<p>The id of the DB instance.</p>",
                         "smithy.api#required": {},
                         "smithy.api#resourceIdentifier": "dbInstanceIdentifier"
+                    }
+                },
+                "retainAutomatedBackups": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to retain automated backups after the DB instance is deleted. If set to true, automated backups are not deleted and can be restored later.</p>"
                     }
                 }
             },
@@ -2266,6 +3510,44 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the DbInstance's role in the cluster.</p>"
                     }
+                },
+                "instanceModes": {
+                    "target": "com.amazonaws.timestreaminfluxdb#InstanceModeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the DbInstance's roles in the cluster.</p>"
+                    }
+                },
+                "maintenanceSchedule": {
+                    "target": "com.amazonaws.timestreaminfluxdb#MaintenanceSchedule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maintenance schedule for the DB instance.</p>"
+                    }
+                },
+                "lastMaintenanceTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of the last completed maintenance operation on the DB instance.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "nextMaintenanceTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of the next scheduled maintenance operation on the DB instance.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "dbBackupConfigurations": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbBackupConfigurationOutputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The backup configurations that were associated with the deleted DB instance.</p>"
+                    }
+                },
+                "kmsKeyId": {
+                    "target": "com.amazonaws.timestreaminfluxdb#KmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services KMS key ARN that was used for encryption of the deleted DB instance.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2340,6 +3622,35 @@
                     "traits": {
                         "smithy.api#enumValue": "milliseconds"
                     }
+                },
+                "DAYS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "days"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#EngineType": {
+            "type": "enum",
+            "members": {
+                "INFLUXDB_V2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INFLUXDB_V2"
+                    }
+                },
+                "INFLUXDB_V3_CORE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INFLUXDB_V3_CORE"
+                    }
+                },
+                "INFLUXDB_V3_ENTERPRISE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INFLUXDB_V3_ENTERPRISE"
+                    }
                 }
             }
         },
@@ -2358,6 +3669,219 @@
                         "smithy.api#enumValue": "NO_FAILOVER"
                     }
                 }
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#GetDbBackup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.timestreaminfluxdb#GetDbBackupInput"
+            },
+            "output": {
+                "target": "com.amazonaws.timestreaminfluxdb#GetDbBackupOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to get information about a Timestream InfluxDB Backup"
+                },
+                "smithy.api#documentation": "<p>Returns information about a specific Timestream for InfluxDB backup.</p>",
+                "smithy.api#readonly": {},
+                "smithy.api#tags": [
+                    "DbBackup"
+                ]
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#GetDbBackupInput": {
+            "type": "structure",
+            "members": {
+                "identifier": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbBackupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the backup to retrieve information for.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "dbBackupId"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#GetDbBackupOutput": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbBackupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Service-generated unique identifier of the backup.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbBackupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer-provided name of the backup.</p>"
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the backup.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbBackupStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the backup.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the backup was created.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "expiresAfter": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date after which the backup will be automatically deleted.</p>"
+                    }
+                },
+                "dbResourceId": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the DB resource that the backup was created from.</p>"
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbBackupType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of backup.</p>"
+                    }
+                },
+                "engineType": {
+                    "target": "com.amazonaws.timestreaminfluxdb#EngineType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The engine type of the resource that the backup was created from.</p>"
+                    }
+                },
+                "deploymentType": {
+                    "target": "com.amazonaws.timestreaminfluxdb#ResourceDeploymentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deployment type of the resource that the backup was created from.</p>"
+                    }
+                },
+                "kmsKeyId": {
+                    "target": "com.amazonaws.timestreaminfluxdb#KmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services KMS key ARN used for encryption of the resource at the time of backup.</p>"
+                    }
+                },
+                "clusterConfiguration": {
+                    "target": "com.amazonaws.timestreaminfluxdb#ClusterConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cluster configuration of the resource at the time of backup.</p>"
+                    }
+                },
+                "dbParameterGroupId": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbParameterGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the DB parameter group associated with the backup.</p>"
+                    }
+                },
+                "dbInstanceType": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbInstanceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DB instance type of the resource at the time of backup.</p>"
+                    }
+                },
+                "logDeliveryConfiguration": {
+                    "target": "com.amazonaws.timestreaminfluxdb#LogDeliveryConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The log delivery configuration of the resource at the time of backup.</p>"
+                    }
+                },
+                "failoverMode": {
+                    "target": "com.amazonaws.timestreaminfluxdb#FailoverMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The failover mode of the resource at the time of backup.</p>"
+                    }
+                },
+                "dbStorageType": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbStorageType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The storage type of the resource at the time of backup.</p>"
+                    }
+                },
+                "allocatedStorage": {
+                    "target": "com.amazonaws.timestreaminfluxdb#AllocatedStorage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The allocated storage of the resource at the time of backup, in GiB.</p>"
+                    }
+                },
+                "vpcSubnetIds": {
+                    "target": "com.amazonaws.timestreaminfluxdb#VpcSubnetIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The VPC subnet IDs associated with the resource at the time of backup.</p>"
+                    }
+                },
+                "vpcSecurityGroupIds": {
+                    "target": "com.amazonaws.timestreaminfluxdb#VpcSecurityGroupIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The VPC security group IDs associated with the resource at the time of backup.</p>"
+                    }
+                },
+                "publiclyAccessible": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the resource was publicly accessible at the time of backup.</p>"
+                    }
+                },
+                "port": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port number of the resource at the time of backup.</p>"
+                    }
+                },
+                "networkType": {
+                    "target": "com.amazonaws.timestreaminfluxdb#NetworkType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network type of the resource at the time of backup.</p>"
+                    }
+                },
+                "influxAuthParametersSecretArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Secrets Manager secret containing the InfluxDB auth parameters.</p>"
+                    }
+                },
+                "maintenanceSchedule": {
+                    "target": "com.amazonaws.timestreaminfluxdb#MaintenanceSchedule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maintenance schedule of the resource at the time of backup.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.timestreaminfluxdb#GetDbCluster": {
@@ -2489,6 +4013,12 @@
                         "smithy.api#documentation": "<p>The amount of storage allocated for your DB storage type (in gibibytes).</p>"
                     }
                 },
+                "engineType": {
+                    "target": "com.amazonaws.timestreaminfluxdb#EngineType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The engine type of your DB cluster.</p>"
+                    }
+                },
                 "publiclyAccessible": {
                     "target": "smithy.api#Boolean",
                     "traits": {
@@ -2501,10 +4031,36 @@
                         "smithy.api#documentation": "<p>The ID of the DB parameter group assigned to your DB cluster.</p>"
                     }
                 },
+                "effectiveDbParameterGroupIdentifier": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbParameterGroupIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the DB parameter group actually applied to your DB cluster. When the service applies optimized defaults, it creates a service-managed DB parameter group and this field reflects that group, while dbParameterGroupIdentifier reflects the customer-provided DB parameter group. When no service-managed DB parameter group is applied, this value matches dbParameterGroupIdentifier.</p>"
+                    }
+                },
                 "logDeliveryConfiguration": {
                     "target": "com.amazonaws.timestreaminfluxdb#LogDeliveryConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Configuration for sending InfluxDB engine logs to send to specified S3 bucket.</p>"
+                    }
+                },
+                "maintenanceSchedule": {
+                    "target": "com.amazonaws.timestreaminfluxdb#MaintenanceSchedule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maintenance schedule for the DB cluster.</p>"
+                    }
+                },
+                "lastMaintenanceTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of the last completed maintenance operation on the DB cluster.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "nextMaintenanceTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of the next scheduled maintenance operation on the DB cluster.</p>",
+                        "smithy.api#timestampFormat": "date-time"
                     }
                 },
                 "influxAuthParametersSecretArn": {
@@ -2529,6 +4085,24 @@
                     "target": "com.amazonaws.timestreaminfluxdb#FailoverMode",
                     "traits": {
                         "smithy.api#documentation": "<p>The configured failover mode for the DB cluster.</p>"
+                    }
+                },
+                "clusterConfiguration": {
+                    "target": "com.amazonaws.timestreaminfluxdb#ClusterConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for node modes in the DbCluster.</p>"
+                    }
+                },
+                "dbBackupConfigurations": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbBackupConfigurationOutputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The backup configurations for the DB cluster.</p>"
+                    }
+                },
+                "kmsKeyId": {
+                    "target": "com.amazonaws.timestreaminfluxdb#KmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services KMS key ARN used for encryption of the DB cluster.</p>"
                     }
                 }
             },
@@ -2720,6 +4294,44 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the DbInstance's role in the cluster.</p>"
                     }
+                },
+                "instanceModes": {
+                    "target": "com.amazonaws.timestreaminfluxdb#InstanceModeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the DbInstance's roles in the cluster.</p>"
+                    }
+                },
+                "maintenanceSchedule": {
+                    "target": "com.amazonaws.timestreaminfluxdb#MaintenanceSchedule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maintenance schedule for the DB instance.</p>"
+                    }
+                },
+                "lastMaintenanceTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of the last completed maintenance operation on the DB instance.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "nextMaintenanceTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of the next scheduled maintenance operation on the DB instance.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "dbBackupConfigurations": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbBackupConfigurationOutputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The backup configurations for the DB instance.</p>"
+                    }
+                },
+                "kmsKeyId": {
+                    "target": "com.amazonaws.timestreaminfluxdb#KmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services KMS key ARN used for encryption of the DB instance.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2817,6 +4429,17 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#IanaTimezone": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "IANA timezone identifier.\n\nFormat: Region/City or UTC\nSee: https://www.iana.org/time-zones",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^(UTC|[A-Za-z_]+/[A-Za-z0-9_]+(/[A-Za-z0-9_]+)?)$"
             }
         },
         "com.amazonaws.timestreaminfluxdb#InfluxDBv2Parameters": {
@@ -2945,7 +4568,7 @@
                 "queryMaxMemoryBytes": {
                     "target": "smithy.api#Long",
                     "traits": {
-                        "smithy.api#documentation": "<p>Maximum number of queries allowed in execution queue. When queue limit is reached, new queries are rejected. Setting to 0 allows an unlimited number of queries in the queue.</p>\n         <p>Default: 0</p>",
+                        "smithy.api#documentation": "<p>Maximum total bytes of memory allowed for all running queries. When this limit is reached, new queries are rejected. Setting to 0 allows unlimited memory usage.</p>\n         <p>Default: 0</p>",
                         "smithy.api#range": {
                             "min": 0,
                             "max": 1000000000000
@@ -3099,6 +4722,762 @@
                 "smithy.api#documentation": "<p>All the customer-modifiable InfluxDB v2 parameters in Timestream for InfluxDB.</p>"
             }
         },
+        "com.amazonaws.timestreaminfluxdb#InfluxDBv3CoreParameters": {
+            "type": "structure",
+            "members": {
+                "queryFileLimit": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Limits the number of Parquet files a query can access. If a query attempts to read more than this limit, InfluxDB 3 returns an error.</p>\n         <p>Default: 432</p>",
+                        "smithy.api#range": {
+                            "min": 0,
+                            "max": 1024
+                        }
+                    }
+                },
+                "queryLogSize": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the size of the query log. Up to this many queries remain in the log before older queries are evicted to make room for new ones.</p>\n         <p>Default: 1000</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 10000
+                        }
+                    }
+                },
+                "logFilter": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sets the filter directive for logs.</p>",
+                        "smithy.api#length": {
+                            "min": 0,
+                            "max": 1024
+                        }
+                    }
+                },
+                "logFormat": {
+                    "target": "com.amazonaws.timestreaminfluxdb#LogFormats",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the message format for logs.</p>\n         <p>Default: full</p>"
+                    }
+                },
+                "dataFusionNumThreads": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sets the maximum number of DataFusion runtime threads to use.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 2048
+                        }
+                    }
+                },
+                "dataFusionRuntimeType": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DataFusionRuntimeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the DataFusion tokio runtime type.</p>\n         <p>Default: multi-thread</p>"
+                    }
+                },
+                "dataFusionRuntimeDisableLifoSlot": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Disables the LIFO slot of the DataFusion runtime.</p>"
+                    }
+                },
+                "dataFusionRuntimeEventInterval": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sets the number of scheduler ticks after which the scheduler of the DataFusion tokio runtime polls for external events–for example: timers, I/O.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 128
+                        }
+                    }
+                },
+                "dataFusionRuntimeGlobalQueueInterval": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sets the number of scheduler ticks after which the scheduler of the DataFusion runtime polls the global task queue.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 128
+                        }
+                    }
+                },
+                "dataFusionRuntimeMaxBlockingThreads": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the limit for additional threads spawned by the DataFusion runtime.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 1024
+                        }
+                    }
+                },
+                "dataFusionRuntimeMaxIoEventsPerTick": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configures the maximum number of events processed per tick by the tokio DataFusion runtime.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 4096
+                        }
+                    }
+                },
+                "dataFusionRuntimeThreadKeepAlive": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Duration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sets a custom timeout for a thread in the blocking pool of the tokio DataFusion runtime.</p>"
+                    }
+                },
+                "dataFusionRuntimeThreadPriority": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sets the thread priority for tokio DataFusion runtime workers.</p>\n         <p>Default: 10</p>",
+                        "smithy.api#range": {
+                            "min": -20,
+                            "max": 19
+                        }
+                    }
+                },
+                "dataFusionMaxParquetFanout": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When multiple parquet files are required in a sorted way (deduplication for example), specifies the maximum fanout.</p>\n         <p>Default: 1000</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 1000000
+                        }
+                    }
+                },
+                "dataFusionUseCachedParquetLoader": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Uses a cached parquet loader when reading parquet files from the object store.</p>"
+                    }
+                },
+                "dataFusionConfig": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides custom configuration to DataFusion as a comma-separated list of key:value pairs.</p>",
+                        "smithy.api#pattern": "^[a-zA-Z0-9_.]+:[^,\\s]+(?:,[a-zA-Z0-9_.]+:[^,\\s]+)*$"
+                    }
+                },
+                "maxHttpRequestSize": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the maximum size of HTTP requests.</p>\n         <p>Default: 10485760</p>",
+                        "smithy.api#range": {
+                            "min": 1024,
+                            "max": 16777216
+                        }
+                    }
+                },
+                "forceSnapshotMemThreshold": {
+                    "target": "com.amazonaws.timestreaminfluxdb#PercentOrAbsoluteLong",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the threshold for the internal memory buffer. Supports either a percentage (portion of available memory) or absolute value in MB–for example: 70% or 100</p>\n         <p>Default: 70%</p>"
+                    }
+                },
+                "walSnapshotSize": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the number of WAL files to attempt to remove in a snapshot. This, multiplied by the interval, determines how often snapshots are taken.</p>\n         <p>Default: 600</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 10000
+                        }
+                    }
+                },
+                "walMaxWriteBufferSize": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the maximum number of write requests that can be buffered before a flush must be executed and succeed.</p>\n         <p>Default: 100000</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 1000000
+                        }
+                    }
+                },
+                "snapshottedWalFilesToKeep": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the number of snapshotted WAL files to retain in the object store. Flushing the WAL files does not clear the WAL files immediately; they are deleted when the number of snapshotted WAL files exceeds this number.</p>\n         <p>Default: 300</p>",
+                        "smithy.api#range": {
+                            "min": 0,
+                            "max": 10000
+                        }
+                    }
+                },
+                "preemptiveCacheAge": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Duration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the interval to prefetch into the Parquet cache during compaction.</p>\n         <p>Default: 3d</p>"
+                    }
+                },
+                "parquetMemCachePrunePercentage": {
+                    "target": "smithy.api#Float",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the percentage of entries to prune during a prune operation on the in-memory Parquet cache.</p>\n         <p>Default: 0.1</p>",
+                        "smithy.api#range": {
+                            "min": 0,
+                            "max": 1
+                        }
+                    }
+                },
+                "parquetMemCachePruneInterval": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Duration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sets the interval to check if the in-memory Parquet cache needs to be pruned.</p>\n         <p>Default: 1s</p>"
+                    }
+                },
+                "disableParquetMemCache": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Disables the in-memory Parquet cache. By default, the cache is enabled.</p>"
+                    }
+                },
+                "parquetMemCacheQueryPathDuration": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Duration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the time window for caching recent Parquet files in memory.</p>\n         <p>Default: 5h</p>"
+                    }
+                },
+                "lastCacheEvictionInterval": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Duration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the interval to evict expired entries from the Last-N-Value cache, expressed as a human-readable duration–for example: 20s, 1m, 1h.</p>\n         <p>Default: 10s</p>"
+                    }
+                },
+                "distinctCacheEvictionInterval": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Duration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the interval to evict expired entries from the distinct value cache, expressed as a human-readable duration–for example: 20s, 1m, 1h.</p>\n         <p>Default: 10s</p>"
+                    }
+                },
+                "gen1Duration": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Duration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the duration that Parquet files are arranged into. Data timestamps land each row into a file of this duration. Supported durations are 1m, 5m, and 10m. These files are known as “generation 1” files that the compactor in InfluxDB 3 Enterprise can merge into larger generations.</p>\n         <p>Default: 10m</p>"
+                    }
+                },
+                "execMemPoolBytes": {
+                    "target": "com.amazonaws.timestreaminfluxdb#PercentOrAbsoluteLong",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the size of memory pool used during query execution. Can be given as absolute value in bytes or as a percentage of the total available memory–for example: 8000000000 or 10%.</p>\n         <p>Default: 20%</p>"
+                    }
+                },
+                "parquetMemCacheSize": {
+                    "target": "com.amazonaws.timestreaminfluxdb#PercentOrAbsoluteLong",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the size of the in-memory Parquet cache in megabytes or percentage of total available memory.</p>\n         <p>Default: 20%</p>"
+                    }
+                },
+                "walReplayFailOnError": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines whether WAL replay should fail when encountering errors.</p>\n         <p>Default: false</p>"
+                    }
+                },
+                "walReplayConcurrencyLimit": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Concurrency limit during WAL replay. Setting this number too high can lead to OOM. The default is dynamically determined.</p>\n         <p>Default: max(num_cpus, 10)</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                },
+                "tableIndexCacheMaxEntries": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the maximum number of entries in the table index cache.</p>\n         <p>Default: 1000</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 1000
+                        }
+                    }
+                },
+                "tableIndexCacheConcurrencyLimit": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Limits the concurrency level for table index cache operations.</p>\n         <p>Default: 8</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                },
+                "gen1LookbackDuration": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Duration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies how far back to look when creating generation 1 Parquet files.</p>\n         <p>Default: 24h</p>"
+                    }
+                },
+                "retentionCheckInterval": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Duration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The interval at which retention policies are checked and enforced. Enter as a human-readable time–for example: 30m or 1h.</p>\n         <p>Default: 30m</p>"
+                    }
+                },
+                "deleteGracePeriod": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Duration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the grace period before permanently deleting data.</p>\n         <p>Default: 24h</p>"
+                    }
+                },
+                "hardDeleteDefaultDuration": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Duration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sets the default duration for hard deletion of data.</p>\n         <p>Default: 90d</p>"
+                    }
+                },
+                "pluginRepositoryUrl": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the URL of the repository that InfluxDB downloads plugins from.</p>"
+                    }
+                },
+                "pluginRepositorySecretArn": {
+                    "target": "com.amazonaws.timestreaminfluxdb#PluginRepositorySecretArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Secrets Manager secret that holds your repository access token.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>All the customer-modifiable InfluxDB v3 Core parameters in Timestream for InfluxDB.</p>"
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#InfluxDBv3EnterpriseParameters": {
+            "type": "structure",
+            "members": {
+                "queryFileLimit": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Limits the number of Parquet files a query can access. If a query attempts to read more than this limit, InfluxDB 3 returns an error.</p>\n         <p>Default: 432</p>",
+                        "smithy.api#range": {
+                            "min": 0,
+                            "max": 1024
+                        }
+                    }
+                },
+                "queryLogSize": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the size of the query log. Up to this many queries remain in the log before older queries are evicted to make room for new ones.</p>\n         <p>Default: 1000</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 10000
+                        }
+                    }
+                },
+                "logFilter": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sets the filter directive for logs.</p>",
+                        "smithy.api#length": {
+                            "min": 0,
+                            "max": 1024
+                        }
+                    }
+                },
+                "logFormat": {
+                    "target": "com.amazonaws.timestreaminfluxdb#LogFormats",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the message format for logs.</p>\n         <p>Default: full</p>"
+                    }
+                },
+                "dataFusionNumThreads": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sets the maximum number of DataFusion runtime threads to use.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 2048
+                        }
+                    }
+                },
+                "dataFusionRuntimeType": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DataFusionRuntimeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the DataFusion tokio runtime type.</p>\n         <p>Default: multi-thread</p>"
+                    }
+                },
+                "dataFusionRuntimeDisableLifoSlot": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Disables the LIFO slot of the DataFusion runtime.</p>"
+                    }
+                },
+                "dataFusionRuntimeEventInterval": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sets the number of scheduler ticks after which the scheduler of the DataFusion tokio runtime polls for external events–for example: timers, I/O.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 128
+                        }
+                    }
+                },
+                "dataFusionRuntimeGlobalQueueInterval": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sets the number of scheduler ticks after which the scheduler of the DataFusion runtime polls the global task queue.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 128
+                        }
+                    }
+                },
+                "dataFusionRuntimeMaxBlockingThreads": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the limit for additional threads spawned by the DataFusion runtime.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 1024
+                        }
+                    }
+                },
+                "dataFusionRuntimeMaxIoEventsPerTick": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configures the maximum number of events processed per tick by the tokio DataFusion runtime.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 4096
+                        }
+                    }
+                },
+                "dataFusionRuntimeThreadKeepAlive": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Duration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sets a custom timeout for a thread in the blocking pool of the tokio DataFusion runtime.</p>"
+                    }
+                },
+                "dataFusionRuntimeThreadPriority": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sets the thread priority for tokio DataFusion runtime workers.</p>\n         <p>Default: 10</p>",
+                        "smithy.api#range": {
+                            "min": -20,
+                            "max": 19
+                        }
+                    }
+                },
+                "dataFusionMaxParquetFanout": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When multiple parquet files are required in a sorted way (deduplication for example), specifies the maximum fanout.</p>\n         <p>Default: 1000</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 1000000
+                        }
+                    }
+                },
+                "dataFusionUseCachedParquetLoader": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Uses a cached parquet loader when reading parquet files from the object store.</p>"
+                    }
+                },
+                "dataFusionConfig": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides custom configuration to DataFusion as a comma-separated list of key:value pairs.</p>",
+                        "smithy.api#pattern": "^[a-zA-Z0-9_.]+:[^,\\s]+(?:,[a-zA-Z0-9_.]+:[^,\\s]+)*$"
+                    }
+                },
+                "maxHttpRequestSize": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the maximum size of HTTP requests.</p>\n         <p>Default: 10485760</p>",
+                        "smithy.api#range": {
+                            "min": 1024,
+                            "max": 16777216
+                        }
+                    }
+                },
+                "forceSnapshotMemThreshold": {
+                    "target": "com.amazonaws.timestreaminfluxdb#PercentOrAbsoluteLong",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the threshold for the internal memory buffer. Supports either a percentage (portion of available memory) or absolute value in MB–for example: 70% or 100</p>\n         <p>Default: 70%</p>"
+                    }
+                },
+                "walSnapshotSize": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the number of WAL files to attempt to remove in a snapshot. This, multiplied by the interval, determines how often snapshots are taken.</p>\n         <p>Default: 600</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 10000
+                        }
+                    }
+                },
+                "walMaxWriteBufferSize": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the maximum number of write requests that can be buffered before a flush must be executed and succeed.</p>\n         <p>Default: 100000</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 1000000
+                        }
+                    }
+                },
+                "snapshottedWalFilesToKeep": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the number of snapshotted WAL files to retain in the object store. Flushing the WAL files does not clear the WAL files immediately; they are deleted when the number of snapshotted WAL files exceeds this number.</p>\n         <p>Default: 300</p>",
+                        "smithy.api#range": {
+                            "min": 0,
+                            "max": 10000
+                        }
+                    }
+                },
+                "preemptiveCacheAge": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Duration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the interval to prefetch into the Parquet cache during compaction.</p>\n         <p>Default: 3d</p>"
+                    }
+                },
+                "parquetMemCachePrunePercentage": {
+                    "target": "smithy.api#Float",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the percentage of entries to prune during a prune operation on the in-memory Parquet cache.</p>\n         <p>Default: 0.1</p>",
+                        "smithy.api#range": {
+                            "min": 0,
+                            "max": 1
+                        }
+                    }
+                },
+                "parquetMemCachePruneInterval": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Duration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sets the interval to check if the in-memory Parquet cache needs to be pruned.</p>\n         <p>Default: 1s</p>"
+                    }
+                },
+                "disableParquetMemCache": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Disables the in-memory Parquet cache. By default, the cache is enabled.</p>"
+                    }
+                },
+                "parquetMemCacheQueryPathDuration": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Duration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the time window for caching recent Parquet files in memory.</p>\n         <p>Default: 5h</p>"
+                    }
+                },
+                "lastCacheEvictionInterval": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Duration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the interval to evict expired entries from the Last-N-Value cache, expressed as a human-readable duration–for example: 20s, 1m, 1h.</p>\n         <p>Default: 10s</p>"
+                    }
+                },
+                "distinctCacheEvictionInterval": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Duration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the interval to evict expired entries from the distinct value cache, expressed as a human-readable duration–for example: 20s, 1m, 1h.</p>\n         <p>Default: 10s</p>"
+                    }
+                },
+                "gen1Duration": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Duration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the duration that Parquet files are arranged into. Data timestamps land each row into a file of this duration. Supported durations are 1m, 5m, and 10m. These files are known as “generation 1” files, which the compactor can merge into larger generations.</p>\n         <p>Default: 10m</p>"
+                    }
+                },
+                "execMemPoolBytes": {
+                    "target": "com.amazonaws.timestreaminfluxdb#PercentOrAbsoluteLong",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the size of memory pool used during query execution. Can be given as absolute value in bytes or as a percentage of the total available memory–for example: 8000000000 or 10%.</p>\n         <p>Default: 20%</p>"
+                    }
+                },
+                "parquetMemCacheSize": {
+                    "target": "com.amazonaws.timestreaminfluxdb#PercentOrAbsoluteLong",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the size of the in-memory Parquet cache in megabytes or percentage of total available memory.</p>\n         <p>Default: 20%</p>"
+                    }
+                },
+                "walReplayFailOnError": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines whether WAL replay should fail when encountering errors.</p>\n         <p>Default: false</p>"
+                    }
+                },
+                "walReplayConcurrencyLimit": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Concurrency limit during WAL replay. Setting this number too high can lead to OOM. The default is dynamically determined.</p>\n         <p>Default: max(num_cpus, 10)</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                },
+                "tableIndexCacheMaxEntries": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the maximum number of entries in the table index cache.</p>\n         <p>Default: 1000</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 1000
+                        }
+                    }
+                },
+                "tableIndexCacheConcurrencyLimit": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Limits the concurrency level for table index cache operations.</p>\n         <p>Default: 8</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                },
+                "gen1LookbackDuration": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Duration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies how far back to look when creating generation 1 Parquet files.</p>\n         <p>Default: 24h</p>"
+                    }
+                },
+                "retentionCheckInterval": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Duration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The interval at which retention policies are checked and enforced. Enter as a human-readable time–for example: 30m or 1h.</p>\n         <p>Default: 30m</p>"
+                    }
+                },
+                "deleteGracePeriod": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Duration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the grace period before permanently deleting data.</p>\n         <p>Default: 24h</p>"
+                    }
+                },
+                "hardDeleteDefaultDuration": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Duration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sets the default duration for hard deletion of data.</p>\n         <p>Default: 90d</p>"
+                    }
+                },
+                "pluginRepositoryUrl": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the URL of the repository that InfluxDB downloads plugins from.</p>"
+                    }
+                },
+                "pluginRepositorySecretArn": {
+                    "target": "com.amazonaws.timestreaminfluxdb#PluginRepositorySecretArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Secrets Manager secret that holds your repository access token.</p>"
+                    }
+                },
+                "ingestQueryInstances": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies number of instances in the DbCluster which can both ingest and query.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 4
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "queryOnlyInstances": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies number of instances in the DbCluster which can only query.</p>",
+                        "smithy.api#range": {
+                            "min": 0,
+                            "max": 10
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "dedicatedCompactor": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies if the compactor instance should be a standalone instance or not.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "compactionRowLimit": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the soft limit for the number of rows per file that the compactor writes. The compactor may write more rows than this limit.</p>\n         <p>Default: 1000000</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100000000
+                        }
+                    }
+                },
+                "compactionMaxNumFilesPerPlan": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sets the maximum number of files included in any compaction plan.</p>\n         <p>Default: 500</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 10000
+                        }
+                    }
+                },
+                "compactionGen2Duration": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Duration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the duration of the first level of compaction (gen2). Later levels of compaction are multiples of this duration. This value should be equal to or greater than the gen1 duration.</p>\n         <p>Default: 20m</p>"
+                    }
+                },
+                "compactionMultipliers": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a comma-separated list of multiples defining the duration of each level of compaction. The number of elements in the list determines the number of compaction levels. The first element specifies the duration of the first level (gen3); subsequent levels are multiples of the previous level.</p>\n         <p>Default: 3,4,6,5</p>",
+                        "smithy.api#length": {
+                            "min": 7,
+                            "max": 16
+                        },
+                        "smithy.api#pattern": "^\\d+,\\d+,\\d+,\\d+$"
+                    }
+                },
+                "compactionCleanupWait": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Duration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the amount of time that the compactor waits after finishing a compaction run to delete files marked as needing deletion during that compaction run.</p>\n         <p>Default: 10m</p>"
+                    }
+                },
+                "compactionCheckInterval": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Duration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies how often the compactor checks for new compaction work to perform.</p>\n         <p>Default: 10s</p>"
+                    }
+                },
+                "lastValueCacheDisableFromHistory": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Disables populating the last-N-value cache from historical data. If disabled, the cache is still populated with data from the write-ahead log (WAL).</p>"
+                    }
+                },
+                "distinctValueCacheDisableFromHistory": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Disables populating the distinct value cache from historical data. If disabled, the cache is still populated with data from the write-ahead log (WAL).</p>"
+                    }
+                },
+                "replicationInterval": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Duration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the interval at which data replication occurs between cluster nodes.</p>\n         <p>Default: 250ms</p>"
+                    }
+                },
+                "catalogSyncInterval": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Duration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines how often the catalog synchronizes across cluster nodes.</p>\n         <p>Default: 10s</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>All the customer-modifiable InfluxDB v3 Enterprise parameters in Timestream for InfluxDB.</p>"
+            }
+        },
         "com.amazonaws.timestreaminfluxdb#InstanceMode": {
             "type": "enum",
             "members": {
@@ -3119,7 +5498,37 @@
                     "traits": {
                         "smithy.api#enumValue": "REPLICA"
                     }
+                },
+                "INGEST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INGEST"
+                    }
+                },
+                "QUERY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUERY"
+                    }
+                },
+                "COMPACT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPACT"
+                    }
+                },
+                "PROCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROCESS"
+                    }
                 }
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#InstanceModeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.timestreaminfluxdb#InstanceMode"
             }
         },
         "com.amazonaws.timestreaminfluxdb#InternalServerException": {
@@ -3137,6 +5546,105 @@
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500,
                 "smithy.api#retryable": {}
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#KmsKeyId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9:/_\\-]+$"
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#ListDbBackups": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.timestreaminfluxdb#ListDbBackupsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.timestreaminfluxdb#ListDbBackupsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to list information about all Timestream InfluxDB backups in the account"
+                },
+                "smithy.api#documentation": "<p>Returns a list of Timestream for InfluxDB backups.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "items"
+                },
+                "smithy.api#readonly": {},
+                "smithy.api#tags": [
+                    "DbBackup"
+                ]
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#ListDbBackupsInput": {
+            "type": "structure",
+            "members": {
+                "dbResourceId": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the DB instance or DB cluster to list backups for. If not specified, returns all backups in the account and region.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.timestreaminfluxdb#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token. To resume pagination, provide the nextToken value as an argument of a subsequent API invocation.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.timestreaminfluxdb#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of items to return in the output. If the total number of items available is more than the value specified, a nextToken is provided in the output. To resume pagination, provide the nextToken value as an argument of a subsequent API invocation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#ListDbBackupsOutput": {
+            "type": "structure",
+            "members": {
+                "items": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbBackupSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of Timestream for InfluxDB backup summaries.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.timestreaminfluxdb#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Token from a previous call of the operation. When this value is provided, the service returns results from where the previous response left off.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.timestreaminfluxdb#ListDbClusters": {
@@ -3530,6 +6038,12 @@
                         "ids": {
                             "dbClusterId": "resourceArn"
                         }
+                    },
+                    {
+                        "resource": "com.amazonaws.timestreaminfluxdb#DbBackupResource",
+                        "ids": {
+                            "dbBackupId": "resourceArn"
+                        }
                     }
                 ]
             }
@@ -3563,6 +6077,17 @@
                 "smithy.api#documentation": "<p>Configuration for sending InfluxDB engine logs to send to specified S3 bucket.</p>"
             }
         },
+        "com.amazonaws.timestreaminfluxdb#LogFormats": {
+            "type": "enum",
+            "members": {
+                "FULL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "full"
+                    }
+                }
+            }
+        },
         "com.amazonaws.timestreaminfluxdb#LogLevel": {
             "type": "enum",
             "members": {
@@ -3584,6 +6109,39 @@
                         "smithy.api#enumValue": "error"
                     }
                 }
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#MaintenanceSchedule": {
+            "type": "structure",
+            "members": {
+                "timezone": {
+                    "target": "com.amazonaws.timestreaminfluxdb#IanaTimezone",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IANA timezone identifier for the maintenance window. Format: Region/City or UTC. For example, America/New_York or UTC.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "preferredMaintenanceWindow": {
+                    "target": "com.amazonaws.timestreaminfluxdb#MaintenanceWindow",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The preferred maintenance window in the format ddd:HH:MM-ddd:HH:MM (UTC). Day must be one of: Mon, Tue, Wed, Thu, Fri, Sat, Sun. For example, Sun:02:00-Sun:06:00. Provide an empty string to let the system choose a window.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the maintenance schedule for a DB instance or cluster, defining when maintenance operations such as patching can be performed.</p>"
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#MaintenanceWindow": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Preferred maintenance window in format \"ddd:HH:MM-ddd:HH:MM\"\n\nFormat requirements:\n  - Day: Mon, Tue, Wed, Thu, Fri, Sat, Sun\n  - Hour: 00-23 (24-hour format, 2 digits)\n  - Minute: 00-59 (2 digits)\n\nProvide empty string to let the system choose a window.\n\nExamples:\n  - \"Sun:02:00-Sun:06:00\" (4-hour window Sunday morning)\n  - \"Sat:23:00-Sun:03:00\" (cross-midnight window)\n  - \"\" or (system chooses)",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 19
+                },
+                "smithy.api#pattern": "^$|^(Mon|Tue|Wed|Thu|Fri|Sat|Sun):([01]\\d|2[0-3]):[0-5]\\d-(Mon|Tue|Wed|Thu|Fri|Sat|Sun):([01]\\d|2[0-3]):[0-5]\\d$"
             }
         },
         "com.amazonaws.timestreaminfluxdb#MaxResults": {
@@ -3637,6 +6195,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>All the customer-modifiable InfluxDB v2 parameters in Timestream for InfluxDB.</p>"
                     }
+                },
+                "InfluxDBv3Core": {
+                    "target": "com.amazonaws.timestreaminfluxdb#InfluxDBv3CoreParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>All the customer-modifiable InfluxDB v3 Core parameters in Timestream for InfluxDB.</p>"
+                    }
+                },
+                "InfluxDBv3Enterprise": {
+                    "target": "com.amazonaws.timestreaminfluxdb#InfluxDBv3EnterpriseParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>All the customer-modifiable InfluxDB v3 Enterprise parameters in Timestream for InfluxDB.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3654,6 +6224,45 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.timestreaminfluxdb#PercentOrAbsoluteLong": {
+            "type": "union",
+            "members": {
+                "percent": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Percent for InfluxDB parameters.</p>",
+                        "smithy.api#length": {
+                            "min": 2,
+                            "max": 4
+                        },
+                        "smithy.api#pattern": "^(?:100|[1-9]?[0-9])%$"
+                    }
+                },
+                "absolute": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Absolute long for InfluxDB parameters.</p>",
+                        "smithy.api#range": {
+                            "min": 0,
+                            "max": 1610612736000
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Percent or Absolute Long for InfluxDB parameters</p>"
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#PluginRepositorySecretArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:(aws|aws-cn|aws-us-gov):secretsmanager:[a-z0-9\\-]+:[0-9]{12}:secret:[a-zA-Z0-9/_+=.@\\-]+$"
+            }
+        },
         "com.amazonaws.timestreaminfluxdb#Port": {
             "type": "integer",
             "traits": {
@@ -3661,6 +6270,312 @@
                     "min": 1024,
                     "max": 65535
                 }
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#RebootDbCluster": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.timestreaminfluxdb#RebootDbClusterInput"
+            },
+            "output": {
+                "target": "com.amazonaws.timestreaminfluxdb#RebootDbClusterOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Reboots a Timestream for InfluxDB cluster.</p>",
+                "smithy.api#idempotent": {},
+                "smithy.api#tags": [
+                    "DbCluster"
+                ]
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#RebootDbClusterInput": {
+            "type": "structure",
+            "members": {
+                "dbClusterId": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbClusterId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Service-generated unique identifier of the DB cluster to reboot.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "instanceIds": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbInstanceIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of service-generated unique DB Instance Ids belonging to the DB Cluster to reboot.</p>",
+                        "smithy.api#length": {
+                            "min": 0,
+                            "max": 3
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#RebootDbClusterOutput": {
+            "type": "structure",
+            "members": {
+                "dbClusterStatus": {
+                    "target": "com.amazonaws.timestreaminfluxdb#ClusterStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the DB Cluster.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#RebootDbInstance": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.timestreaminfluxdb#RebootDbInstanceInput"
+            },
+            "output": {
+                "target": "com.amazonaws.timestreaminfluxdb#RebootDbInstanceOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to reboot a Timestream InfluxDB instance"
+                },
+                "smithy.api#documentation": "<p>Reboots a Timestream for InfluxDB instance.</p>",
+                "smithy.api#idempotent": {},
+                "smithy.api#tags": [
+                    "DbInstance"
+                ]
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#RebootDbInstanceInput": {
+            "type": "structure",
+            "members": {
+                "identifier": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbInstanceIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The id of the DB instance to reboot.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "dbInstanceIdentifier"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#RebootDbInstanceOutput": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbInstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A service-generated unique identifier.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbInstanceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer-supplied name that uniquely identifies the DB instance when interacting with the Amazon Timestream for InfluxDB API and CLI commands.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the DB instance.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the DB instance.</p>"
+                    }
+                },
+                "endpoint": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The endpoint used to connect to InfluxDB. The default InfluxDB port is 8086.</p>"
+                    }
+                },
+                "port": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Port",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port number on which InfluxDB accepts connections.</p>"
+                    }
+                },
+                "networkType": {
+                    "target": "com.amazonaws.timestreaminfluxdb#NetworkType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the networkType of the Timestream for InfluxDB instance is IPV4, which can communicate over IPv4 protocol only, or DUAL, which can communicate over both IPv4 and IPv6 protocols.</p>"
+                    }
+                },
+                "dbInstanceType": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbInstanceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Timestream for InfluxDB instance type that InfluxDB runs on.</p>"
+                    }
+                },
+                "dbStorageType": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbStorageType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Timestream for InfluxDB DB storage type that InfluxDB stores data on.</p>"
+                    }
+                },
+                "allocatedStorage": {
+                    "target": "com.amazonaws.timestreaminfluxdb#AllocatedStorage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of storage allocated for your DB storage type (in gibibytes).</p>"
+                    }
+                },
+                "deploymentType": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DeploymentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the Timestream for InfluxDB is deployed as Single-AZ or with a MultiAZ Standby for High availability.</p>"
+                    }
+                },
+                "vpcSubnetIds": {
+                    "target": "com.amazonaws.timestreaminfluxdb#VpcSubnetIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of VPC subnet IDs associated with the DB instance.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "publiclyAccessible": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates if the DB instance has a public IP to facilitate access.</p>"
+                    }
+                },
+                "vpcSecurityGroupIds": {
+                    "target": "com.amazonaws.timestreaminfluxdb#VpcSecurityGroupIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of VPC security group IDs associated with the DB instance.</p>"
+                    }
+                },
+                "dbParameterGroupIdentifier": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbParameterGroupIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The id of the DB parameter group assigned to your DB instance.</p>"
+                    }
+                },
+                "availabilityZone": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Availability Zone in which the DB instance resides.</p>"
+                    }
+                },
+                "secondaryAvailabilityZone": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Availability Zone in which the standby instance is located when deploying with a MultiAZ standby instance.</p>"
+                    }
+                },
+                "logDeliveryConfiguration": {
+                    "target": "com.amazonaws.timestreaminfluxdb#LogDeliveryConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for sending InfluxDB engine logs to send to specified S3 bucket.</p>"
+                    }
+                },
+                "influxAuthParametersSecretArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Secrets Manager secret containing the initial InfluxDB authorization parameters. The secret value is a JSON formatted key-value pair holding InfluxDB authorization values: organization, bucket, username, and password.</p>"
+                    }
+                },
+                "dbClusterId": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbClusterId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the DbCluster to which this DbInstance belongs to.</p>"
+                    }
+                },
+                "instanceMode": {
+                    "target": "com.amazonaws.timestreaminfluxdb#InstanceMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the DbInstance's role in the cluster.</p>"
+                    }
+                },
+                "instanceModes": {
+                    "target": "com.amazonaws.timestreaminfluxdb#InstanceModeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the DbInstance's roles in the cluster.</p>"
+                    }
+                },
+                "maintenanceSchedule": {
+                    "target": "com.amazonaws.timestreaminfluxdb#MaintenanceSchedule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maintenance schedule for the DB instance.</p>"
+                    }
+                },
+                "lastMaintenanceTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of the last completed maintenance operation on the DB instance.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "nextMaintenanceTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of the next scheduled maintenance operation on the DB instance.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "dbBackupConfigurations": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbBackupConfigurationOutputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The backup configurations for the DB instance.</p>"
+                    }
+                },
+                "kmsKeyId": {
+                    "target": "com.amazonaws.timestreaminfluxdb#KmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services KMS key ARN used for encryption of the DB instance.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.timestreaminfluxdb#RequestTagMap": {
@@ -3675,6 +6590,29 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 200
+                }
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#ResourceDeploymentType": {
+            "type": "enum",
+            "members": {
+                "SINGLE_AZ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SINGLE_AZ"
+                    }
+                },
+                "WITH_MULTIAZ_STANDBY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WITH_MULTIAZ_STANDBY"
+                    }
+                },
+                "MULTI_NODE_READ_REPLICAS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MULTI_NODE_READ_REPLICAS"
+                    }
                 }
             }
         },
@@ -3708,6 +6646,23 @@
                 "smithy.api#httpError": 404
             }
         },
+        "com.amazonaws.timestreaminfluxdb#ResourceType": {
+            "type": "enum",
+            "members": {
+                "DB_INSTANCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DB_INSTANCE"
+                    }
+                },
+                "DB_CLUSTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DB_CLUSTER"
+                    }
+                }
+            }
+        },
         "com.amazonaws.timestreaminfluxdb#ResponseTagMap": {
             "type": "map",
             "key": {
@@ -3719,6 +6674,230 @@
             "traits": {
                 "smithy.api#length": {
                     "max": 200
+                }
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#RestoreFromDbBackup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.timestreaminfluxdb#RestoreFromDbBackupInput"
+            },
+            "output": {
+                "target": "com.amazonaws.timestreaminfluxdb#RestoreFromDbBackupOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys"
+                ],
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to restore from a Timestream InfluxDB backup"
+                },
+                "smithy.api#documentation": "<p>Restores a Timestream for InfluxDB resource from a backup. By default, a new resource is created. You can optionally restore to the same resource using the REPLACE_EXISTING restore mode.</p>",
+                "smithy.api#idempotent": {},
+                "smithy.api#tags": [
+                    "DbBackup"
+                ]
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#RestoreFromDbBackupInput": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the new resource to create from the restore. If restoring to an existing resource, the name must match the existing resource name.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "dbBackupId": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbBackupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the backup to restore from.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "dbBackupId"
+                    }
+                },
+                "restoreToTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The point in time to restore to, for continuous backups. Must be within the backup's retention window.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "restoreMode": {
+                    "target": "com.amazonaws.timestreaminfluxdb#RestoreMode",
+                    "traits": {
+                        "aws.iam#conditionKeyValue": "timestream-influxdb:RestoreMode",
+                        "smithy.api#documentation": "<p>Specifies whether to restore to a new resource or replace the existing resource. Valid values are NEW_RESOURCE (default) and REPLACE_EXISTING.</p>"
+                    }
+                },
+                "vpcSubnetIds": {
+                    "target": "com.amazonaws.timestreaminfluxdb#VpcSubnetIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of VPC subnet IDs for the restored resource. If not specified, the restored resource uses the same subnets as the backup.</p>"
+                    }
+                },
+                "vpcSecurityGroupIds": {
+                    "target": "com.amazonaws.timestreaminfluxdb#VpcSecurityGroupIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of VPC security group IDs for the restored resource. If not specified, the restored resource uses the same security groups as the backup.</p>"
+                    }
+                },
+                "publiclyAccessible": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the restored resource is publicly accessible.</p>"
+                    }
+                },
+                "logDeliveryConfiguration": {
+                    "target": "com.amazonaws.timestreaminfluxdb#LogDeliveryConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for sending InfluxDB engine logs to the specified S3 bucket for the restored resource.</p>"
+                    }
+                },
+                "maintenanceSchedule": {
+                    "target": "com.amazonaws.timestreaminfluxdb#MaintenanceSchedule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maintenance schedule for the restored resource.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.timestreaminfluxdb#RequestTagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of key-value pairs to associate with the restored resource.</p>"
+                    }
+                },
+                "port": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Port",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port number on which the restored InfluxDB resource accepts connections.</p>"
+                    }
+                },
+                "networkType": {
+                    "target": "com.amazonaws.timestreaminfluxdb#NetworkType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the network type of the restored resource. Valid values are IPV4 and DUAL.</p>"
+                    }
+                },
+                "deploymentType": {
+                    "target": "com.amazonaws.timestreaminfluxdb#ResourceDeploymentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the deployment type of the restored resource. Valid values are SINGLE_AZ, WITH_MULTIAZ_STANDBY, and MULTI_NODE_READ_REPLICAS.</p>"
+                    }
+                },
+                "dbBackupConfigurations": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbBackupConfigurationInputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of backup configurations to apply to the restored resource.</p>"
+                    }
+                },
+                "kmsKeyId": {
+                    "target": "com.amazonaws.timestreaminfluxdb#KmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services KMS key identifier to use for encryption of the restored resource. Can be a key ID, key ARN, alias name, or alias ARN.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#RestoreFromDbBackupOutput": {
+            "type": "structure",
+            "members": {
+                "restoredDbResourceId": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the restored DB resource.</p>"
+                    }
+                },
+                "restoreStatus": {
+                    "target": "com.amazonaws.timestreaminfluxdb#RestoreStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the restore operation.</p>"
+                    }
+                },
+                "resourceType": {
+                    "target": "com.amazonaws.timestreaminfluxdb#ResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the restored resource. Valid values are DB_INSTANCE and DB_CLUSTER.</p>"
+                    }
+                },
+                "engineType": {
+                    "target": "com.amazonaws.timestreaminfluxdb#EngineType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The engine type of the restored resource.</p>"
+                    }
+                },
+                "deploymentType": {
+                    "target": "com.amazonaws.timestreaminfluxdb#ResourceDeploymentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deployment type of the restored resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#RestoreMode": {
+            "type": "enum",
+            "members": {
+                "NEW_RESOURCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NEW_RESOURCE"
+                    }
+                },
+                "REPLACE_EXISTING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REPLACE_EXISTING"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#RestoreStatus": {
+            "type": "enum",
+            "members": {
+                "RESTORING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESTORING"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#RetentionDays": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 3650
                 }
             }
         },
@@ -3827,6 +7006,30 @@
                     "traits": {
                         "smithy.api#enumValue": "MAINTENANCE"
                     }
+                },
+                "REBOOTING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REBOOTING"
+                    }
+                },
+                "REBOOT_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REBOOT_FAILED"
+                    }
+                },
+                "RESTORING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESTORING"
+                    }
+                },
+                "RESTORE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESTORE_FAILED"
+                    }
                 }
             }
         },
@@ -3919,6 +7122,12 @@
                         "ids": {
                             "dbClusterId": "resourceArn"
                         }
+                    },
+                    {
+                        "resource": "com.amazonaws.timestreaminfluxdb#DbBackupResource",
+                        "ids": {
+                            "dbBackupId": "resourceArn"
+                        }
                     }
                 ]
             }
@@ -3969,6 +7178,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "jaeger"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "disabled"
                     }
                 }
             }
@@ -4038,6 +7253,12 @@
                         "resource": "com.amazonaws.timestreaminfluxdb#DbClusterResource",
                         "ids": {
                             "dbClusterId": "resourceArn"
+                        }
+                    },
+                    {
+                        "resource": "com.amazonaws.timestreaminfluxdb#DbBackupResource",
+                        "ids": {
+                            "dbBackupId": "resourceArn"
                         }
                     }
                 ]
@@ -4117,6 +7338,18 @@
                     "target": "com.amazonaws.timestreaminfluxdb#FailoverMode",
                     "traits": {
                         "smithy.api#documentation": "<p>Update the DB cluster's failover behavior.</p>"
+                    }
+                },
+                "maintenanceSchedule": {
+                    "target": "com.amazonaws.timestreaminfluxdb#MaintenanceSchedule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the maintenance schedule for the DB cluster, including the preferred maintenance window and timezone.</p>"
+                    }
+                },
+                "dbBackupConfigurations": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbBackupConfigurationInputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of backup configurations to update for the DB cluster.</p>"
                     }
                 }
             },
@@ -4233,6 +7466,18 @@
                     "target": "com.amazonaws.timestreaminfluxdb#AllocatedStorage",
                     "traits": {
                         "smithy.api#documentation": "<p>The amount of storage to allocate for your DB storage type (in gibibytes).</p>"
+                    }
+                },
+                "maintenanceSchedule": {
+                    "target": "com.amazonaws.timestreaminfluxdb#MaintenanceSchedule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the maintenance schedule for the DB instance, including the preferred maintenance window and timezone.</p>"
+                    }
+                },
+                "dbBackupConfigurations": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbBackupConfigurationInputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of backup configurations to update for the DB instance.</p>"
                     }
                 }
             },
@@ -4377,6 +7622,44 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the DbInstance's role in the cluster.</p>"
                     }
+                },
+                "instanceModes": {
+                    "target": "com.amazonaws.timestreaminfluxdb#InstanceModeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the DbInstance's roles in the cluster.</p>"
+                    }
+                },
+                "maintenanceSchedule": {
+                    "target": "com.amazonaws.timestreaminfluxdb#MaintenanceSchedule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maintenance schedule for the DB instance.</p>"
+                    }
+                },
+                "lastMaintenanceTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of the last completed maintenance operation on the DB instance.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "nextMaintenanceTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of the next scheduled maintenance operation on the DB instance.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "dbBackupConfigurations": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbBackupConfigurationOutputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The backup configurations for the DB instance.</p>"
+                    }
+                },
+                "kmsKeyId": {
+                    "target": "com.amazonaws.timestreaminfluxdb#KmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services KMS key ARN used for encryption of the DB instance.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4471,7 +7754,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 3
+                    "max": 6
                 }
             }
         }

@@ -1195,6 +1195,276 @@
                     "traits": {
                         "smithy.api#enumValue": "zu-ZA"
                     }
+                },
+                "AM_ET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "am-ET"
+                    }
+                },
+                "BE_BY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "be-BY"
+                    }
+                },
+                "BG_BG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "bg-BG"
+                    }
+                },
+                "BN_IN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "bn-IN"
+                    }
+                },
+                "BS_BA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "bs-BA"
+                    }
+                },
+                "CKB_IQ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ckb-IQ"
+                    }
+                },
+                "CKB_IR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ckb-IR"
+                    }
+                },
+                "CY_WL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "cy-WL"
+                    }
+                },
+                "ES_MX": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "es-MX"
+                    }
+                },
+                "ET_ET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "et-ET"
+                    }
+                },
+                "FA_AF": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "fa-AF"
+                    }
+                },
+                "GU_IN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "gu-IN"
+                    }
+                },
+                "HT_HT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ht-HT"
+                    }
+                },
+                "HU_HU": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "hu-HU"
+                    }
+                },
+                "HY_AM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "hy-AM"
+                    }
+                },
+                "IS_IS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "is-IS"
+                    }
+                },
+                "JV_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "jv-ID"
+                    }
+                },
+                "KA_GE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ka-GE"
+                    }
+                },
+                "KAB_DZ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "kab-DZ"
+                    }
+                },
+                "KK_KZ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "kk-KZ"
+                    }
+                },
+                "KM_KH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "km-KH"
+                    }
+                },
+                "KN_IN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "kn-IN"
+                    }
+                },
+                "LG_IN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "lg-IN"
+                    }
+                },
+                "LT_LT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "lt-LT"
+                    }
+                },
+                "MK_MK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "mk-MK"
+                    }
+                },
+                "ML_IN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml-IN"
+                    }
+                },
+                "MR_IN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "mr-IN"
+                    }
+                },
+                "MY_MM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "my-MM"
+                    }
+                },
+                "NE_NP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ne-NP"
+                    }
+                },
+                "OR_IN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "or-IN"
+                    }
+                },
+                "PA_IN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "pa-IN"
+                    }
+                },
+                "PS_AF": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ps-AF"
+                    }
+                },
+                "SI_LK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "si-LK"
+                    }
+                },
+                "SL_SI": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "sl-SI"
+                    }
+                },
+                "SQ_AL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "sq-AL"
+                    }
+                },
+                "SU_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "su-ID"
+                    }
+                },
+                "SW_BI": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "sw-BI"
+                    }
+                },
+                "SW_KE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "sw-KE"
+                    }
+                },
+                "SW_RW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "sw-RW"
+                    }
+                },
+                "SW_TZ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "sw-TZ"
+                    }
+                },
+                "SW_UG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "sw-UG"
+                    }
+                },
+                "TA_IN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ta-IN"
+                    }
+                },
+                "TE_IN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "te-IN"
+                    }
+                },
+                "TR_TR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "tr-TR"
+                    }
+                },
+                "UZ_UZ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "uz-UZ"
+                    }
                 }
             }
         },
@@ -1243,7 +1513,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Your client has exceeded one of the Amazon Transcribe limits. This is typically the audio length\n      limit. Break your audio stream into smaller chunks and try your request again.</p>",
+                "smithy.api#documentation": "<p>Your client has exceeded one of the Amazon Transcribe limits, typically the concurrent stream\n      service quota. This error can also occur if a stream exceeds the maximum session duration. In rare\n      cases, this error can also occur if you increase your number of concurrent streams too quickly.\n      Reduce your number of concurrent streams and try your request again using an exponential backoff\n      strategy.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 429
             }
@@ -1279,6 +1549,24 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "flac"
+                    }
+                },
+                "G711_ALAW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "g711-alaw"
+                    }
+                },
+                "G711_ULAW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "g711-ulaw"
+                    }
+                },
+                "G729": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "g729"
                     }
                 }
             }
@@ -2508,6 +2796,15 @@
                 "smithy.api#pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
             }
         },
+        "com.amazonaws.transcribestreaming#SessionResumeWindow": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 300
+                }
+            }
+        },
         "com.amazonaws.transcribestreaming#Specialty": {
             "type": "enum",
             "members": {
@@ -3398,7 +3695,7 @@
                 "PiiEntityTypes": {
                     "target": "com.amazonaws.transcribestreaming#PiiEntityTypes",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify which types of personally identifiable information (PII) you want to redact in your \n      transcript. You can include as many types as you'd like, or you can select \n      <code>ALL</code>.</p>\n         <p>Values must be comma-separated and can include: <code>ADDRESS</code>, \n      <code>BANK_ACCOUNT_NUMBER</code>, <code>BANK_ROUTING</code>,\n      <code>CREDIT_DEBIT_CVV</code>, <code>CREDIT_DEBIT_EXPIRY</code>,\n      <code>CREDIT_DEBIT_NUMBER</code>, <code>EMAIL</code>, \n      <code>NAME</code>, <code>PHONE</code>, <code>PIN</code>, \n      <code>SSN</code>, or <code>ALL</code>.</p>\n         <p>Note that if you include <code>PiiEntityTypes</code> in your request, you must also include \n      <code>ContentIdentificationType</code> or <code>ContentRedactionType</code>.</p>\n         <p>If you include <code>ContentRedactionType</code> or \n      <code>ContentIdentificationType</code> in your request, but do not include \n      <code>PiiEntityTypes</code>, all PII is redacted or identified.</p>",
+                        "smithy.api#documentation": "<p>Specify which types of personally identifiable information (PII) you want to redact in your \n      transcript. You can include as many types as you'd like, or you can select \n      <code>ALL</code>.</p>\n         <p>Values must be comma-separated and can include: <code>ADDRESS</code>, \n      <code>BANK_ACCOUNT_NUMBER</code>, <code>BANK_ROUTING</code>,\n      <code>CREDIT_DEBIT_CVV</code>, <code>CREDIT_DEBIT_EXPIRY</code>,\n      <code>CREDIT_DEBIT_NUMBER</code>, <code>EMAIL</code>, \n      <code>NAME</code>, <code>PHONE</code>, <code>PIN</code>, \n      <code>SSN</code>, <code>AGE</code>, <code>DATE_TIME</code>,\n      <code>LICENSE_PLATE</code>, <code>PASSPORT_NUMBER</code>,\n      <code>PASSWORD</code>, <code>USERNAME</code>, <code>VEHICLE_IDENTIFICATION_NUMBER</code>, or <code>ALL</code>.</p>\n         <p>Note that if you include <code>PiiEntityTypes</code> in your request, you must also include \n      <code>ContentIdentificationType</code> or <code>ContentRedactionType</code>.</p>\n         <p>If you include <code>ContentRedactionType</code> or \n      <code>ContentIdentificationType</code> in your request, but do not include \n      <code>PiiEntityTypes</code>, all PII is redacted or identified.</p>",
                         "smithy.api#httpHeader": "x-amzn-transcribe-pii-entity-types"
                     }
                 },
@@ -3451,6 +3748,20 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specify the names of the custom vocabulary filters that you want to use when processing\n      your transcription. Note that vocabulary filter names are case sensitive.</p>\n         <p>If none of the languages of the specified custom vocabulary filters match the language identified\n      in your media, your job fails.</p>\n         <important>\n            <p>This parameter is only intended for use <b>with</b> \n        the <code>IdentifyLanguage</code> parameter. If you're <b>not</b> \n        including <code>IdentifyLanguage</code> in your request and want to use a custom vocabulary filter \n        with your transcription, use the <code>VocabularyFilterName</code> parameter instead.</p>\n         </important>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/vocabulary-filtering.html\">Using vocabulary filtering with unwanted \n      words</a>.</p>",
                         "smithy.api#httpHeader": "x-amzn-transcribe-vocabulary-filter-names"
+                    }
+                },
+                "SessionResumeWindow": {
+                    "target": "com.amazonaws.transcribestreaming#SessionResumeWindow",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify the time window, in minutes, during which your transcription session can be resumed,\n       measured from the stream start time. This optional parameter accepts integer values from 1 to 300 (5 hours).</p>\n         <p> For example, if your stream starts at 1 PM and you specify a <code>SessionResumeWindow</code> of 30 minutes,\n      you can reconnect to the session as many times as you want until 1:30 PM. </p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-session-resume-window"
+                    }
+                },
+                "TranscriptFormat": {
+                    "target": "com.amazonaws.transcribestreaming#TranscriptFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify how numbers, dates, and other alphanumeric entities are rendered in your\n      transcription results.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>WRITTEN</code> renders these entities in their standard written form\n        (for example, <code>$50</code>, <code>10:30 AM</code>, and <code>101</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>SPOKEN</code> renders these entities as words, exactly as they were\n        spoken (for example, <code>fifty dollars</code>, <code>ten thirty a m</code>, and\n        <code>one oh one</code>).</p>\n            </li>\n         </ul>\n         <p>If you don't specify a value, Amazon Transcribe uses <code>WRITTEN</code> by default.</p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-transcript-format"
                     }
                 }
             },
@@ -3633,6 +3944,20 @@
                         "smithy.api#documentation": "<p>Provides the names of the custom vocabulary filters that you specified in your\n      request.</p>",
                         "smithy.api#httpHeader": "x-amzn-transcribe-vocabulary-filter-names"
                     }
+                },
+                "SessionResumeWindow": {
+                    "target": "com.amazonaws.transcribestreaming#SessionResumeWindow",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides the session resume window, in minutes, that you specified in your request.</p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-session-resume-window"
+                    }
+                },
+                "TranscriptFormat": {
+                    "target": "com.amazonaws.transcribestreaming#TranscriptFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides the transcript format that you specified in your request.</p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-transcript-format"
+                    }
                 }
             },
             "traits": {
@@ -3716,6 +4041,194 @@
                 },
                 "smithy.api#documentation": "<p>Amazon Transcribe streaming offers four main types of real-time transcription:\n      <b>Standard</b>, <b>Medical</b>,\n      <b>Call Analytics</b>,\n      and <b>Health Scribe</b>.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Standard transcriptions</b> are the most common option. Refer\n      to  for details.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Medical transcriptions</b> are tailored to medical professionals \n      and incorporate medical terms. A common use case for this service is transcribing doctor-patient \n      dialogue in real time, so doctors can focus on their patient instead of taking notes. Refer to\n       for details.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Call Analytics transcriptions</b> are designed for use with call\n          center audio on two different channels; if you're looking for insight into customer service calls, use this \n          option. Refer to  for details.</p>\n            </li>\n            <li>\n               <p>\n                  <b>HealthScribe transcriptions</b> are designed to\n          automatically create clinical notes from patient-clinician conversations using generative AI.\n          Refer to [here] for details.</p>\n            </li>\n         </ul>",
                 "smithy.api#title": "Amazon Transcribe Streaming Service",
+                "smithy.rules#endpointBdd": {
+                    "version": "1.1",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        }
+                    },
+                    "conditions": [
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.partition",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ],
+                            "assign": "PartitionResult"
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseDualStack"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsDualStack"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsFIPS"
+                                    ]
+                                },
+                                true
+                            ]
+                        }
+                    ],
+                    "results": [
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://transcribestreaming-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://transcribestreaming-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://transcribestreaming.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://transcribestreaming.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ],
+                    "root": 2,
+                    "nodeCount": 13,
+                    "nodes": "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"
+                },
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {
@@ -3723,27 +4236,27 @@
                             "builtIn": "AWS::Region",
                             "required": false,
                             "documentation": "The AWS region used to dispatch the request.",
-                            "type": "String"
+                            "type": "string"
                         },
                         "UseDualStack": {
                             "builtIn": "AWS::UseDualStack",
                             "required": true,
                             "default": false,
                             "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "UseFIPS": {
                             "builtIn": "AWS::UseFIPS",
                             "required": true,
                             "default": false,
                             "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "Endpoint": {
                             "builtIn": "SDK::Endpoint",
                             "required": false,
                             "documentation": "Override the endpoint used to send this request",
-                            "type": "String"
+                            "type": "string"
                         }
                     },
                     "rules": [
@@ -4486,6 +4999,23 @@
                 "smithy.api#documentation": "<p>The <code>TranscriptEvent</code> associated with a \n      <code>TranscriptResultStream</code>.</p>\n         <p>Contains a set of transcription results from one or more audio segments, along with additional \n      information per your request parameters.</p>"
             }
         },
+        "com.amazonaws.transcribestreaming#TranscriptFormat": {
+            "type": "enum",
+            "members": {
+                "SPOKEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "spoken"
+                    }
+                },
+                "WRITTEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "written"
+                    }
+                }
+            }
+        },
         "com.amazonaws.transcribestreaming#TranscriptResultStream": {
             "type": "union",
             "members": {
@@ -4504,7 +5034,7 @@
                 "LimitExceededException": {
                     "target": "com.amazonaws.transcribestreaming#LimitExceededException",
                     "traits": {
-                        "smithy.api#documentation": "<p>Your client has exceeded one of the Amazon Transcribe limits. This is typically the audio length\n      limit. Break your audio stream into smaller chunks and try your request again.</p>"
+                        "smithy.api#documentation": "<p>Your client has exceeded one of the Amazon Transcribe limits, typically the concurrent stream\n      service quota. This error can also occur if a stream exceeds the maximum session duration. In rare\n      cases, this error can also occur if you increase your number of concurrent streams too quickly.\n      Reduce your number of concurrent streams and try your request again using an exponential backoff\n      strategy.</p>"
                     }
                 },
                 "InternalFailureException": {

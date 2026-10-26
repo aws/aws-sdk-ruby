@@ -132,6 +132,9 @@ module Aws::DocDB
     class KMSKeyNotAccessibleFault < Smithy::Client::ServiceError
       def message: () -> String?
     end
+    class NetworkTypeNotSupported < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
     class ResourceNotFoundFault < Smithy::Client::ServiceError
       def message: () -> String?
     end

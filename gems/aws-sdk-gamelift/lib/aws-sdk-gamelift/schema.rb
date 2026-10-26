@@ -12,7 +12,7 @@ module Aws::GameLift
     Alias = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#Alias", name: "Alias")
     AliasArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#AliasArn", name: "AliasArn", traits: {"smithy.api#pattern" => "^arn:.*:alias\\/alias-\\S+$"})
     AliasId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#AliasId", name: "AliasId", traits: {"smithy.api#pattern" => "^alias-\\S+$"})
-    AliasIdOrArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#AliasIdOrArn", name: "AliasIdOrArn", traits: {"smithy.api#pattern" => "^alias-\\S+|^arn:.*:alias\\/alias-\\S+$"})
+    AliasIdOrArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#AliasIdOrArn", name: "AliasIdOrArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 512}, "smithy.api#pattern" => "^(alias-\\S+|arn:.*:alias\\/alias-\\S+)$"})
     AliasList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.gamelift#AliasList", name: "AliasList")
     AmazonResourceName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#AmazonResourceName", name: "AmazonResourceName", traits: {"smithy.api#length" => {"min" => 1, "max" => 1011}})
     AnywhereConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#AnywhereConfiguration", name: "AnywhereConfiguration")
@@ -26,7 +26,7 @@ module Aws::GameLift
     Build = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#Build", name: "Build")
     BuildArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#BuildArn", name: "BuildArn", traits: {"smithy.api#pattern" => "^arn:.*:build\\/build-\\S+$"})
     BuildId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#BuildId", name: "BuildId", traits: {"smithy.api#pattern" => "^build-\\S+$"})
-    BuildIdOrArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#BuildIdOrArn", name: "BuildIdOrArn", traits: {"smithy.api#pattern" => "^build-\\S+|^arn:.*:build\\/build-\\S+$"})
+    BuildIdOrArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#BuildIdOrArn", name: "BuildIdOrArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 512}, "smithy.api#pattern" => "^(build-\\S+|arn:.*:build\\/build-\\S+)$"})
     BuildList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.gamelift#BuildList", name: "BuildList")
     BuildStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.gamelift#BuildStatus", name: "BuildStatus")
     CertificateConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#CertificateConfiguration", name: "CertificateConfiguration")
@@ -40,7 +40,7 @@ module Aws::GameLift
     ComputeAuthToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#ComputeAuthToken", name: "ComputeAuthToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[a-zA-Z0-9\\-]+$"})
     ComputeList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.gamelift#ComputeList", name: "ComputeList")
     ComputeName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#ComputeName", name: "ComputeName", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[a-zA-Z0-9\\-]+(\\/[a-zA-Z0-9\\-]+)?$"})
-    ComputeNameOrArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#ComputeNameOrArn", name: "ComputeNameOrArn", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}, "smithy.api#pattern" => "^[a-zA-Z0-9\\-]+(\\/[a-zA-Z0-9\\-]+)?$|^arn:.*:compute\\/[a-zA-Z0-9\\-]+(\\/[a-zA-Z0-9\\-]+)?$"})
+    ComputeNameOrArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#ComputeNameOrArn", name: "ComputeNameOrArn", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}, "smithy.api#pattern" => "^([a-zA-Z0-9\\-]+(\\/[a-zA-Z0-9\\-]+)?|arn:.*:compute\\/[a-zA-Z0-9\\-]+(\\/[a-zA-Z0-9\\-]+)?)$"})
     ComputeStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.gamelift#ComputeStatus", name: "ComputeStatus")
     ComputeType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.gamelift#ComputeType", name: "ComputeType")
     ConflictException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#ConflictException", name: "ConflictException", traits: {"smithy.api#error" => "client"})
@@ -67,7 +67,11 @@ module Aws::GameLift
     ContainerGroupDefinitionList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.gamelift#ContainerGroupDefinitionList", name: "ContainerGroupDefinitionList")
     ContainerGroupDefinitionName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#ContainerGroupDefinitionName", name: "ContainerGroupDefinitionName", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[a-zA-Z0-9\\-]+$"})
     ContainerGroupDefinitionNameOrArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#ContainerGroupDefinitionNameOrArn", name: "ContainerGroupDefinitionNameOrArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 512}, "smithy.api#pattern" => "^[a-zA-Z0-9\\-]+$|^arn:.*:containergroupdefinition\\/[a-zA-Z0-9\\-]+(:[0-9]+)?$"})
+    ContainerGroupDefinitionRemoveAttribute = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.gamelift#ContainerGroupDefinitionRemoveAttribute", name: "ContainerGroupDefinitionRemoveAttribute")
+    ContainerGroupDefinitionRemoveAttributeList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.gamelift#ContainerGroupDefinitionRemoveAttributeList", name: "ContainerGroupDefinitionRemoveAttributeList", traits: {"smithy.api#length" => {"min" => 1, "max" => 1}})
     ContainerGroupDefinitionStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.gamelift#ContainerGroupDefinitionStatus", name: "ContainerGroupDefinitionStatus")
+    ContainerGroupPortMapping = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#ContainerGroupPortMapping", name: "ContainerGroupPortMapping")
+    ContainerGroupPortMappingList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.gamelift#ContainerGroupPortMappingList", name: "ContainerGroupPortMappingList")
     ContainerGroupType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.gamelift#ContainerGroupType", name: "ContainerGroupType")
     ContainerHealthCheck = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#ContainerHealthCheck", name: "ContainerHealthCheck")
     ContainerHealthCheckInterval = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.gamelift#ContainerHealthCheckInterval", name: "ContainerHealthCheckInterval", traits: {"smithy.api#range" => {"min" => 60, "max" => 300}})
@@ -80,9 +84,12 @@ module Aws::GameLift
     ContainerMountPoint = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#ContainerMountPoint", name: "ContainerMountPoint")
     ContainerMountPointAccessLevel = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.gamelift#ContainerMountPointAccessLevel", name: "ContainerMountPointAccessLevel")
     ContainerMountPointList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.gamelift#ContainerMountPointList", name: "ContainerMountPointList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
+    ContainerNameQueryFilter = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#ContainerNameQueryFilter", name: "ContainerNameQueryFilter", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[a-zA-Z0-9\\-_]+$"})
     ContainerOperatingSystem = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.gamelift#ContainerOperatingSystem", name: "ContainerOperatingSystem")
     ContainerPathString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#ContainerPathString", name: "ContainerPathString", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => "^(\\/+[^\\/]+\\/*)+$"})
     ContainerPortConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#ContainerPortConfiguration", name: "ContainerPortConfiguration")
+    ContainerPortMapping = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#ContainerPortMapping", name: "ContainerPortMapping")
+    ContainerPortMappingList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.gamelift#ContainerPortMappingList", name: "ContainerPortMappingList")
     ContainerPortRange = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#ContainerPortRange", name: "ContainerPortRange")
     ContainerPortRangeList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.gamelift#ContainerPortRangeList", name: "ContainerPortRangeList", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
     ContainerTotalMemoryLimit = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.gamelift#ContainerTotalMemoryLimit", name: "ContainerTotalMemoryLimit", traits: {"smithy.api#range" => {"min" => 4, "max" => 1024000}})
@@ -122,9 +129,9 @@ module Aws::GameLift
     CreateVpcPeeringAuthorizationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#CreateVpcPeeringAuthorizationOutput", name: "CreateVpcPeeringAuthorizationOutput")
     CreateVpcPeeringConnectionInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#CreateVpcPeeringConnectionInput", name: "CreateVpcPeeringConnectionInput")
     CreateVpcPeeringConnectionOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#CreateVpcPeeringConnectionOutput", name: "CreateVpcPeeringConnectionOutput")
-    CustomEventData = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#CustomEventData", name: "CustomEventData", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}})
+    CustomEventData = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#CustomEventData", name: "CustomEventData", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#sensitive" => {}})
     CustomInputLocationStringModel = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#CustomInputLocationStringModel", name: "CustomInputLocationStringModel", traits: {"smithy.api#length" => {"min" => 8, "max" => 64}, "smithy.api#pattern" => "^custom-[A-Za-z0-9\\-]+$"})
-    CustomLocationNameOrArnModel = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#CustomLocationNameOrArnModel", name: "CustomLocationNameOrArnModel", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^custom-[A-Za-z0-9\\-]+|^arn:.*:location\\/custom-\\S+$"})
+    CustomLocationNameOrArnModel = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#CustomLocationNameOrArnModel", name: "CustomLocationNameOrArnModel", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^(custom-[A-Za-z0-9\\-]+|arn:.*:location\\/custom-\\S+)$"})
     DeleteAliasInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#DeleteAliasInput", name: "DeleteAliasInput")
     DeleteBuildInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#DeleteBuildInput", name: "DeleteBuildInput")
     DeleteContainerFleetInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#DeleteContainerFleetInput", name: "DeleteContainerFleetInput")
@@ -169,6 +176,8 @@ module Aws::GameLift
     DescribeContainerFleetOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#DescribeContainerFleetOutput", name: "DescribeContainerFleetOutput")
     DescribeContainerGroupDefinitionInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#DescribeContainerGroupDefinitionInput", name: "DescribeContainerGroupDefinitionInput")
     DescribeContainerGroupDefinitionOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#DescribeContainerGroupDefinitionOutput", name: "DescribeContainerGroupDefinitionOutput")
+    DescribeContainerGroupPortMappingsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#DescribeContainerGroupPortMappingsInput", name: "DescribeContainerGroupPortMappingsInput")
+    DescribeContainerGroupPortMappingsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#DescribeContainerGroupPortMappingsOutput", name: "DescribeContainerGroupPortMappingsOutput")
     DescribeEC2InstanceLimitsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#DescribeEC2InstanceLimitsInput", name: "DescribeEC2InstanceLimitsInput")
     DescribeEC2InstanceLimitsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#DescribeEC2InstanceLimitsOutput", name: "DescribeEC2InstanceLimitsOutput")
     DescribeFleetAttributesInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#DescribeFleetAttributesInput", name: "DescribeFleetAttributesInput")
@@ -233,7 +242,7 @@ module Aws::GameLift
     EC2InstanceLimit = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#EC2InstanceLimit", name: "EC2InstanceLimit")
     EC2InstanceLimitList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.gamelift#EC2InstanceLimitList", name: "EC2InstanceLimitList")
     EC2InstanceType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.gamelift#EC2InstanceType", name: "EC2InstanceType")
-    Event = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#Event", name: "Event")
+    Event = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#Event", name: "Event", traits: {"smithy.api#sensitive" => {}})
     EventCode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.gamelift#EventCode", name: "EventCode")
     EventCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.gamelift#EventCount", name: "EventCount", traits: {"smithy.api#range" => {"min" => 1, "max" => 101}})
     EventList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.gamelift#EventList", name: "EventList")
@@ -267,15 +276,15 @@ module Aws::GameLift
     GameProperty = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#GameProperty", name: "GameProperty")
     GamePropertyKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#GamePropertyKey", name: "GamePropertyKey", traits: {"smithy.api#length" => {"min" => 0, "max" => 32}})
     GamePropertyList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.gamelift#GamePropertyList", name: "GamePropertyList", traits: {"smithy.api#length" => {"min" => 0, "max" => 16}})
-    GamePropertyValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#GamePropertyValue", name: "GamePropertyValue", traits: {"smithy.api#length" => {"min" => 0, "max" => 96}})
+    GamePropertyValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#GamePropertyValue", name: "GamePropertyValue", traits: {"smithy.api#length" => {"min" => 0, "max" => 96}, "smithy.api#sensitive" => {}})
     GameServer = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#GameServer", name: "GameServer")
     GameServerClaimStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.gamelift#GameServerClaimStatus", name: "GameServerClaimStatus")
-    GameServerConnectionInfo = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#GameServerConnectionInfo", name: "GameServerConnectionInfo", traits: {"smithy.api#length" => {"min" => 1, "max" => 512}, "smithy.api#pattern" => "\\S"})
+    GameServerConnectionInfo = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#GameServerConnectionInfo", name: "GameServerConnectionInfo", traits: {"smithy.api#length" => {"min" => 1, "max" => 512}, "smithy.api#pattern" => "^.*\\S.*$"})
     GameServerContainerDefinition = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#GameServerContainerDefinition", name: "GameServerContainerDefinition")
     GameServerContainerDefinitionInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#GameServerContainerDefinitionInput", name: "GameServerContainerDefinitionInput")
     GameServerContainerGroupCounts = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#GameServerContainerGroupCounts", name: "GameServerContainerGroupCounts")
     GameServerContainerGroupsPerInstance = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.gamelift#GameServerContainerGroupsPerInstance", name: "GameServerContainerGroupsPerInstance", traits: {"smithy.api#range" => {"min" => 1, "max" => 5000}})
-    GameServerData = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#GameServerData", name: "GameServerData", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => "\\S"})
+    GameServerData = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#GameServerData", name: "GameServerData", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => "^.*\\S.*$", "smithy.api#sensitive" => {}})
     GameServerGroup = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#GameServerGroup", name: "GameServerGroup")
     GameServerGroupAction = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.gamelift#GameServerGroupAction", name: "GameServerGroupAction")
     GameServerGroupActions = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.gamelift#GameServerGroupActions", name: "GameServerGroupActions", traits: {"smithy.api#length" => {"min" => 1, "max" => 1}})
@@ -284,7 +293,7 @@ module Aws::GameLift
     GameServerGroupDeleteOption = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.gamelift#GameServerGroupDeleteOption", name: "GameServerGroupDeleteOption")
     GameServerGroupInstanceType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.gamelift#GameServerGroupInstanceType", name: "GameServerGroupInstanceType")
     GameServerGroupName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#GameServerGroupName", name: "GameServerGroupName", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[a-zA-Z0-9-\\.]+$"})
-    GameServerGroupNameOrArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#GameServerGroupNameOrArn", name: "GameServerGroupNameOrArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[a-zA-Z0-9-\\.]+|^arn:.*:gameservergroup\\/[a-zA-Z0-9-\\.]+$"})
+    GameServerGroupNameOrArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#GameServerGroupNameOrArn", name: "GameServerGroupNameOrArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^([a-zA-Z0-9-\\.]+|arn:.*:gameservergroup\\/[a-zA-Z0-9-\\.]+)$"})
     GameServerGroupStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.gamelift#GameServerGroupStatus", name: "GameServerGroupStatus")
     GameServerGroups = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.gamelift#GameServerGroups", name: "GameServerGroups")
     GameServerHealthCheck = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.gamelift#GameServerHealthCheck", name: "GameServerHealthCheck")
@@ -294,6 +303,7 @@ module Aws::GameLift
     GameServerInstanceIds = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.gamelift#GameServerInstanceIds", name: "GameServerInstanceIds", traits: {"smithy.api#length" => {"min" => 1, "max" => 20}})
     GameServerInstanceStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.gamelift#GameServerInstanceStatus", name: "GameServerInstanceStatus")
     GameServerInstances = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.gamelift#GameServerInstances", name: "GameServerInstances")
+    GameServerIpProtocolSupported = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.gamelift#GameServerIpProtocolSupported", name: "GameServerIpProtocolSupported")
     GameServerProtectionPolicy = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.gamelift#GameServerProtectionPolicy", name: "GameServerProtectionPolicy")
     GameServerUtilizationStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.gamelift#GameServerUtilizationStatus", name: "GameServerUtilizationStatus")
     GameServers = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.gamelift#GameServers", name: "GameServers")
@@ -301,7 +311,7 @@ module Aws::GameLift
     GameSessionActivationTimeoutSeconds = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.gamelift#GameSessionActivationTimeoutSeconds", name: "GameSessionActivationTimeoutSeconds", traits: {"smithy.api#range" => {"min" => 1, "max" => 600}})
     GameSessionConnectionInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#GameSessionConnectionInfo", name: "GameSessionConnectionInfo")
     GameSessionCreationLimitPolicy = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#GameSessionCreationLimitPolicy", name: "GameSessionCreationLimitPolicy")
-    GameSessionData = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#GameSessionData", name: "GameSessionData", traits: {"smithy.api#length" => {"min" => 1, "max" => 4096}})
+    GameSessionData = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#GameSessionData", name: "GameSessionData", traits: {"smithy.api#length" => {"min" => 1, "max" => 4096}, "smithy.api#sensitive" => {}})
     GameSessionDetail = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#GameSessionDetail", name: "GameSessionDetail")
     GameSessionDetailList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.gamelift#GameSessionDetailList", name: "GameSessionDetailList")
     GameSessionFullException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#GameSessionFullException", name: "GameSessionFullException", traits: {"smithy.api#error" => "client"})
@@ -314,7 +324,7 @@ module Aws::GameLift
     GameSessionQueueDestinationList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.gamelift#GameSessionQueueDestinationList", name: "GameSessionQueueDestinationList")
     GameSessionQueueList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.gamelift#GameSessionQueueList", name: "GameSessionQueueList")
     GameSessionQueueName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#GameSessionQueueName", name: "GameSessionQueueName", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[a-zA-Z0-9-]+$"})
-    GameSessionQueueNameOrArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#GameSessionQueueNameOrArn", name: "GameSessionQueueNameOrArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[a-zA-Z0-9-]+|^arn:.*:gamesessionqueue\\/[a-zA-Z0-9-]+$"})
+    GameSessionQueueNameOrArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#GameSessionQueueNameOrArn", name: "GameSessionQueueNameOrArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^([a-zA-Z0-9-]+|arn:.*:gamesessionqueue\\/[a-zA-Z0-9-]+)$"})
     GameSessionQueueNameOrArnList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.gamelift#GameSessionQueueNameOrArnList", name: "GameSessionQueueNameOrArnList")
     GameSessionStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.gamelift#GameSessionStatus", name: "GameSessionStatus")
     GameSessionStatusReason = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.gamelift#GameSessionStatusReason", name: "GameSessionStatusReason")
@@ -323,9 +333,11 @@ module Aws::GameLift
     GetComputeAuthTokenInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#GetComputeAuthTokenInput", name: "GetComputeAuthTokenInput")
     GetComputeAuthTokenOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#GetComputeAuthTokenOutput", name: "GetComputeAuthTokenOutput")
     GetGameSessionLogUrlInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#GetGameSessionLogUrlInput", name: "GetGameSessionLogUrlInput")
-    GetGameSessionLogUrlOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#GetGameSessionLogUrlOutput", name: "GetGameSessionLogUrlOutput")
+    GetGameSessionLogUrlOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#GetGameSessionLogUrlOutput", name: "GetGameSessionLogUrlOutput", traits: {"smithy.api#sensitive" => {}})
     GetInstanceAccessInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#GetInstanceAccessInput", name: "GetInstanceAccessInput")
     GetInstanceAccessOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#GetInstanceAccessOutput", name: "GetInstanceAccessOutput")
+    GetPlayerConnectionDetailsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#GetPlayerConnectionDetailsInput", name: "GetPlayerConnectionDetailsInput")
+    GetPlayerConnectionDetailsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#GetPlayerConnectionDetailsOutput", name: "GetPlayerConnectionDetailsOutput")
     IamRoleArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#IamRoleArn", name: "IamRoleArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^arn:.*:role\\/[\\w+=,.@-]+$"})
     IdStringModel = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#IdStringModel", name: "IdStringModel", traits: {"smithy.api#length" => {"min" => 1, "max" => 48}, "smithy.api#pattern" => "^[a-zA-Z0-9-]+$"})
     IdempotentParameterMismatchException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#IdempotentParameterMismatchException", name: "IdempotentParameterMismatchException", traits: {"smithy.api#error" => "client"})
@@ -335,7 +347,7 @@ module Aws::GameLift
     InstanceCredentials = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#InstanceCredentials", name: "InstanceCredentials", traits: {"smithy.api#sensitive" => {}})
     InstanceDefinition = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#InstanceDefinition", name: "InstanceDefinition")
     InstanceDefinitions = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.gamelift#InstanceDefinitions", name: "InstanceDefinitions", traits: {"smithy.api#length" => {"min" => 2, "max" => 20}})
-    InstanceId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#InstanceId", name: "InstanceId", traits: {"smithy.api#pattern" => "^[a-zA-Z0-9\\.-]+$"})
+    InstanceId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#InstanceId", name: "InstanceId", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[a-zA-Z0-9\\.-]+$"})
     InstanceList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.gamelift#InstanceList", name: "InstanceList")
     InstancePathString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#InstancePathString", name: "InstancePathString", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => "^\\/[\\s\\S]*$"})
     InstanceRoleCredentialsProvider = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.gamelift#InstanceRoleCredentialsProvider", name: "InstanceRoleCredentialsProvider")
@@ -350,7 +362,7 @@ module Aws::GameLift
     IpPermissionsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.gamelift#IpPermissionsList", name: "IpPermissionsList", traits: {"smithy.api#length" => {"min" => 0, "max" => 50}})
     IpProtocol = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.gamelift#IpProtocol", name: "IpProtocol")
     IpRange = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#IpRange", name: "IpRange", traits: {"smithy.api#pattern" => "^[^\\s]+$", "smithy.api#sensitive" => {}})
-    LargeGameSessionData = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#LargeGameSessionData", name: "LargeGameSessionData", traits: {"smithy.api#length" => {"min" => 1, "max" => 262144}})
+    LargeGameSessionData = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#LargeGameSessionData", name: "LargeGameSessionData", traits: {"smithy.api#length" => {"min" => 1, "max" => 262144}, "smithy.api#sensitive" => {}})
     LatencyMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.gamelift#LatencyMap", name: "LatencyMap")
     LaunchParametersStringModel = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#LaunchParametersStringModel", name: "LaunchParametersStringModel", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => "^[A-Za-z0-9_:.+\\/\\\\\\- =@;{},?'\\[\\]\"]+$"})
     LaunchPathStringModel = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#LaunchPathStringModel", name: "LaunchPathStringModel", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => "^[A-Za-z0-9_:.+\\/\\\\\\- ]+$"})
@@ -359,6 +371,9 @@ module Aws::GameLift
     LaunchTemplateSpecification = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#LaunchTemplateSpecification", name: "LaunchTemplateSpecification")
     LaunchTemplateVersion = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#LaunchTemplateVersion", name: "LaunchTemplateVersion", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]+$"})
     LimitExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#LimitExceededException", name: "LimitExceededException", traits: {"smithy.api#error" => "client"})
+    LinuxCapabilities = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#LinuxCapabilities", name: "LinuxCapabilities")
+    LinuxCapability = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.gamelift#LinuxCapability", name: "LinuxCapability")
+    LinuxCapabilityList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.gamelift#LinuxCapabilityList", name: "LinuxCapabilityList", traits: {"smithy.api#length" => {"min" => 0, "max" => 37}})
     ListAliasesInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#ListAliasesInput", name: "ListAliasesInput")
     ListAliasesOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#ListAliasesOutput", name: "ListAliasesOutput")
     ListBuildsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#ListBuildsInput", name: "ListBuildsInput")
@@ -409,14 +424,15 @@ module Aws::GameLift
     LogConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#LogConfiguration", name: "LogConfiguration")
     LogDestination = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.gamelift#LogDestination", name: "LogDestination")
     LogGroupArnStringModel = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#LogGroupArnStringModel", name: "LogGroupArnStringModel", traits: {"smithy.api#length" => {"min" => 1, "max" => 512}, "smithy.api#pattern" => "^[a-zA-Z0-9:/\\-\\*]+$"})
+    ManagedCapacityConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#ManagedCapacityConfiguration", name: "ManagedCapacityConfiguration")
     MatchedPlayerSession = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#MatchedPlayerSession", name: "MatchedPlayerSession")
     MatchedPlayerSessionList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.gamelift#MatchedPlayerSessionList", name: "MatchedPlayerSessionList")
-    MatchmakerData = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#MatchmakerData", name: "MatchmakerData", traits: {"smithy.api#length" => {"min" => 1, "max" => 390000}})
+    MatchmakerData = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#MatchmakerData", name: "MatchmakerData", traits: {"smithy.api#length" => {"min" => 1, "max" => 390000}, "smithy.api#sensitive" => {}})
     MatchmakingAcceptanceTimeoutInteger = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.gamelift#MatchmakingAcceptanceTimeoutInteger", name: "MatchmakingAcceptanceTimeoutInteger", traits: {"smithy.api#range" => {"min" => 1, "max" => 600}})
     MatchmakingConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#MatchmakingConfiguration", name: "MatchmakingConfiguration")
     MatchmakingConfigurationArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#MatchmakingConfigurationArn", name: "MatchmakingConfigurationArn", traits: {"smithy.api#pattern" => "^arn:.*:matchmakingconfiguration\\/[a-zA-Z0-9-\\.]*$"})
     MatchmakingConfigurationList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.gamelift#MatchmakingConfigurationList", name: "MatchmakingConfigurationList")
-    MatchmakingConfigurationName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#MatchmakingConfigurationName", name: "MatchmakingConfigurationName", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[a-zA-Z0-9-\\.]*|^arn:.*:matchmakingconfiguration\\/[a-zA-Z0-9-\\.]*$"})
+    MatchmakingConfigurationName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#MatchmakingConfigurationName", name: "MatchmakingConfigurationName", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^([a-zA-Z0-9-\\.]*|arn:.*:matchmakingconfiguration\\/[a-zA-Z0-9-\\.]*)$"})
     MatchmakingConfigurationNameList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.gamelift#MatchmakingConfigurationNameList", name: "MatchmakingConfigurationNameList")
     MatchmakingConfigurationStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.gamelift#MatchmakingConfigurationStatus", name: "MatchmakingConfigurationStatus")
     MatchmakingIdList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.gamelift#MatchmakingIdList", name: "MatchmakingIdList")
@@ -425,17 +441,19 @@ module Aws::GameLift
     MatchmakingRuleSet = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#MatchmakingRuleSet", name: "MatchmakingRuleSet")
     MatchmakingRuleSetArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#MatchmakingRuleSetArn", name: "MatchmakingRuleSetArn", traits: {"smithy.api#pattern" => "^arn:.*:matchmakingruleset\\/[a-zA-Z0-9-\\.]*$"})
     MatchmakingRuleSetList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.gamelift#MatchmakingRuleSetList", name: "MatchmakingRuleSetList")
-    MatchmakingRuleSetName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#MatchmakingRuleSetName", name: "MatchmakingRuleSetName", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[a-zA-Z0-9-\\.]*|^arn:.*:matchmakingruleset\\/[a-zA-Z0-9-\\.]*$"})
+    MatchmakingRuleSetName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#MatchmakingRuleSetName", name: "MatchmakingRuleSetName", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^([a-zA-Z0-9-\\.]*|arn:.*:matchmakingruleset\\/[a-zA-Z0-9-\\.]*)$"})
     MatchmakingRuleSetNameList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.gamelift#MatchmakingRuleSetNameList", name: "MatchmakingRuleSetNameList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
     MatchmakingTicket = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#MatchmakingTicket", name: "MatchmakingTicket")
     MatchmakingTicketList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.gamelift#MatchmakingTicketList", name: "MatchmakingTicketList")
     MaxConcurrentGameSessionActivations = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.gamelift#MaxConcurrentGameSessionActivations", name: "MaxConcurrentGameSessionActivations", traits: {"smithy.api#range" => {"min" => 1, "max" => 2147483647}})
+    MaxString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#MaxString", name: "MaxString", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}})
     MaximumGameServerContainerGroupsPerInstance = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.gamelift#MaximumGameServerContainerGroupsPerInstance", name: "MaximumGameServerContainerGroupsPerInstance", traits: {"smithy.api#range" => {"min" => 1, "max" => 5000}})
     MetricGroup = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#MetricGroup", name: "MetricGroup", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}})
     MetricGroupList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.gamelift#MetricGroupList", name: "MetricGroupList", traits: {"smithy.api#length" => {"min" => 0, "max" => 1}})
     MetricName = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.gamelift#MetricName", name: "MetricName")
     MinimumHealthyPercentage = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.gamelift#MinimumHealthyPercentage", name: "MinimumHealthyPercentage", traits: {"smithy.api#range" => {"min" => 30, "max" => 75}})
-    NonBlankAndLengthConstraintString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#NonBlankAndLengthConstraintString", name: "NonBlankAndLengthConstraintString", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => "\\S"})
+    NodeJsVersion = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#NodeJsVersion", name: "NodeJsVersion", traits: {"smithy.api#length" => {"min" => 0, "max" => 16}, "smithy.api#pattern" => "^[0-9]+\\.(?:x|[0-9]+)$"})
+    NonBlankAndLengthConstraintString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#NonBlankAndLengthConstraintString", name: "NonBlankAndLengthConstraintString", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => "^.*\\S.*$"})
     NonEmptyString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#NonEmptyString", name: "NonEmptyString", traits: {"smithy.api#length" => {"min" => 1}})
     NonNegativeDouble = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.gamelift#NonNegativeDouble", name: "NonNegativeDouble", traits: {"smithy.api#range" => {"min" => 0}})
     NonNegativeLimitedLengthDouble = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#NonNegativeLimitedLengthDouble", name: "NonNegativeLimitedLengthDouble", traits: {"smithy.api#length" => {"min" => 1, "max" => 11}, "smithy.api#pattern" => "^\\d{1,5}(?:\\.\\d{1,5})?$"})
@@ -455,8 +473,15 @@ module Aws::GameLift
     PlayerAttributeString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#PlayerAttributeString", name: "PlayerAttributeString", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
     PlayerAttributeStringDoubleMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.gamelift#PlayerAttributeStringDoubleMap", name: "PlayerAttributeStringDoubleMap")
     PlayerAttributeStringList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.gamelift#PlayerAttributeStringList", name: "PlayerAttributeStringList")
-    PlayerData = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#PlayerData", name: "PlayerData", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}})
+    PlayerConnectionDetail = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#PlayerConnectionDetail", name: "PlayerConnectionDetail")
+    PlayerConnectionDetailList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.gamelift#PlayerConnectionDetailList", name: "PlayerConnectionDetailList", traits: {"smithy.api#length" => {"min" => 1}})
+    PlayerConnectionEndpoint = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#PlayerConnectionEndpoint", name: "PlayerConnectionEndpoint")
+    PlayerConnectionEndpointList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.gamelift#PlayerConnectionEndpointList", name: "PlayerConnectionEndpointList")
+    PlayerData = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#PlayerData", name: "PlayerData", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#sensitive" => {}})
     PlayerDataMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.gamelift#PlayerDataMap", name: "PlayerDataMap")
+    PlayerGatewayConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#PlayerGatewayConfiguration", name: "PlayerGatewayConfiguration")
+    PlayerGatewayMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.gamelift#PlayerGatewayMode", name: "PlayerGatewayMode")
+    PlayerGatewayStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.gamelift#PlayerGatewayStatus", name: "PlayerGatewayStatus")
     PlayerId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#PlayerId", name: "PlayerId", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#sensitive" => {}})
     PlayerIdList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.gamelift#PlayerIdList", name: "PlayerIdList", traits: {"smithy.api#length" => {"min" => 1, "max" => 25}, "smithy.api#sensitive" => {}})
     PlayerIdsForAcceptMatch = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.gamelift#PlayerIdsForAcceptMatch", name: "PlayerIdsForAcceptMatch", traits: {"smithy.api#sensitive" => {}})
@@ -467,13 +492,12 @@ module Aws::GameLift
     PlayerList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.gamelift#PlayerList", name: "PlayerList")
     PlayerSession = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#PlayerSession", name: "PlayerSession")
     PlayerSessionCreationPolicy = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.gamelift#PlayerSessionCreationPolicy", name: "PlayerSessionCreationPolicy")
-    PlayerSessionId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#PlayerSessionId", name: "PlayerSessionId", traits: {"smithy.api#pattern" => "^psess-\\S+$"})
+    PlayerSessionId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#PlayerSessionId", name: "PlayerSessionId", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^psess-\\S+$"})
     PlayerSessionList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.gamelift#PlayerSessionList", name: "PlayerSessionList")
     PlayerSessionStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.gamelift#PlayerSessionStatus", name: "PlayerSessionStatus")
     PolicyType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.gamelift#PolicyType", name: "PolicyType")
     PortNumber = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.gamelift#PortNumber", name: "PortNumber", traits: {"smithy.api#range" => {"min" => 1, "max" => 60000}, "smithy.api#sensitive" => {}})
     PositiveInteger = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.gamelift#PositiveInteger", name: "PositiveInteger", traits: {"smithy.api#range" => {"min" => 1}})
-    PositiveLong = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.gamelift#PositiveLong", name: "PositiveLong", traits: {"smithy.api#range" => {"min" => 1}})
     PriorityConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#PriorityConfiguration", name: "PriorityConfiguration")
     PriorityConfigurationOverride = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#PriorityConfigurationOverride", name: "PriorityConfigurationOverride")
     PriorityType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.gamelift#PriorityType", name: "PriorityType")
@@ -482,7 +506,7 @@ module Aws::GameLift
     PutScalingPolicyInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#PutScalingPolicyInput", name: "PutScalingPolicyInput")
     PutScalingPolicyOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#PutScalingPolicyOutput", name: "PutScalingPolicyOutput")
     QueueArnsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.gamelift#QueueArnsList", name: "QueueArnsList")
-    QueueCustomEventData = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#QueueCustomEventData", name: "QueueCustomEventData", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#pattern" => "^[\\s\\S]*$"})
+    QueueCustomEventData = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#QueueCustomEventData", name: "QueueCustomEventData", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#pattern" => "^[\\s\\S]*$", "smithy.api#sensitive" => {}})
     QueueSnsArnStringModel = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#QueueSnsArnStringModel", name: "QueueSnsArnStringModel", traits: {"smithy.api#length" => {"min" => 0, "max" => 300}, "smithy.api#pattern" => "^[a-zA-Z0-9:_-]*(\\.fifo)?$"})
     RegisterComputeInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#RegisterComputeInput", name: "RegisterComputeInput")
     RegisterComputeOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#RegisterComputeOutput", name: "RegisterComputeOutput")
@@ -501,6 +525,7 @@ module Aws::GameLift
     RuleSetLimit = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.gamelift#RuleSetLimit", name: "RuleSetLimit", traits: {"smithy.api#range" => {"min" => 1, "max" => 10}})
     RuntimeConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#RuntimeConfiguration", name: "RuntimeConfiguration")
     S3Location = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#S3Location", name: "S3Location")
+    ScaleInAfterInactivityMinutes = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.gamelift#ScaleInAfterInactivityMinutes", name: "ScaleInAfterInactivityMinutes", traits: {"smithy.api#range" => {"min" => 5, "max" => 1440}})
     ScalingAdjustmentType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.gamelift#ScalingAdjustmentType", name: "ScalingAdjustmentType")
     ScalingPolicy = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#ScalingPolicy", name: "ScalingPolicy")
     ScalingPolicyList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.gamelift#ScalingPolicyList", name: "ScalingPolicyList")
@@ -508,7 +533,7 @@ module Aws::GameLift
     Script = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#Script", name: "Script")
     ScriptArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#ScriptArn", name: "ScriptArn", traits: {"smithy.api#pattern" => "^arn:.*:script\\/script-\\S+$"})
     ScriptId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#ScriptId", name: "ScriptId", traits: {"smithy.api#pattern" => "^script-\\S+$"})
-    ScriptIdOrArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#ScriptIdOrArn", name: "ScriptIdOrArn", traits: {"smithy.api#pattern" => "^script-\\S+|^arn:.*:script\\/script-\\S+$"})
+    ScriptIdOrArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#ScriptIdOrArn", name: "ScriptIdOrArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 512}, "smithy.api#pattern" => "^(script-\\S+|arn:.*:script\\/script-\\S+)$"})
     ScriptList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.gamelift#ScriptList", name: "ScriptList")
     SearchGameSessionsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#SearchGameSessionsInput", name: "SearchGameSessionsInput")
     SearchGameSessionsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#SearchGameSessionsOutput", name: "SearchGameSessionsOutput")
@@ -517,7 +542,7 @@ module Aws::GameLift
     ServerSdkVersion = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#ServerSdkVersion", name: "ServerSdkVersion", traits: {"smithy.api#length" => {"min" => 0, "max" => 128}, "smithy.api#pattern" => "^\\d+\\.\\d+\\.\\d+$"})
     SessionTarget = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#SessionTarget", name: "SessionTarget", traits: {"smithy.api#length" => {"min" => 1, "max" => 400}})
     Sha256 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#Sha256", name: "Sha256", traits: {"smithy.api#pattern" => "^sha256:[a-fA-F0-9]{64}$"})
-    SnsArnStringModel = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#SnsArnStringModel", name: "SnsArnStringModel", traits: {"smithy.api#length" => {"min" => 0, "max" => 300}, "smithy.api#pattern" => "^[a-zA-Z0-9:_/-]*(.fifo)?$"})
+    SnsArnStringModel = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#SnsArnStringModel", name: "SnsArnStringModel", traits: {"smithy.api#length" => {"min" => 0, "max" => 300}, "smithy.api#pattern" => "^[a-zA-Z0-9:_/-]*(\\.fifo)?$"})
     SortOrder = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.gamelift#SortOrder", name: "SortOrder")
     StartFleetActionsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#StartFleetActionsInput", name: "StartFleetActionsInput")
     StartFleetActionsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.gamelift#StartFleetActionsOutput", name: "StartFleetActionsOutput")
@@ -600,6 +625,8 @@ module Aws::GameLift
     VpcSubnets = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.gamelift#VpcSubnets", name: "VpcSubnets", traits: {"smithy.api#length" => {"min" => 1, "max" => 20}})
     WeightedCapacity = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.gamelift#WeightedCapacity", name: "WeightedCapacity", traits: {"smithy.api#length" => {"min" => 1, "max" => 3}, "smithy.api#pattern" => "^[\\u0031-\\u0039][\\u0030-\\u0039]{0,2}$"})
     WholeNumber = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.gamelift#WholeNumber", name: "WholeNumber", traits: {"smithy.api#range" => {"min" => 0}})
+    WholeNumberLong = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.gamelift#WholeNumberLong", name: "WholeNumberLong", traits: {"smithy.api#range" => {"min" => 0}})
+    ZeroCapacityStrategy = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.gamelift#ZeroCapacityStrategy", name: "ZeroCapacityStrategy")
     ZipBlob = ::Smithy::Schema::Shapes::BlobShape.new(id: "com.amazonaws.gamelift#ZipBlob", name: "ZipBlob", traits: {"smithy.api#length" => {"min" => 0, "max" => 5000000}})
 
     AcceptMatchInput.add_member(:ticket_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MatchmakingIdStringModel, name: "TicketId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -639,7 +666,7 @@ module Aws::GameLift
     Build.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: FreeText, name: "Name"))
     Build.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: FreeText, name: "Version"))
     Build.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: BuildStatus, name: "Status"))
-    Build.add_member(:size_on_disk, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveLong, name: "SizeOnDisk"))
+    Build.add_member(:size_on_disk, ::Smithy::Schema::Shapes::MemberShape.new(target: WholeNumberLong, name: "SizeOnDisk"))
     Build.add_member(:operating_system, ::Smithy::Schema::Shapes::MemberShape.new(target: OperatingSystem, name: "OperatingSystem"))
     Build.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationTime"))
     Build.add_member(:server_sdk_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerSdkVersion, name: "ServerSdkVersion"))
@@ -733,12 +760,14 @@ module Aws::GameLift
     ContainerFleet.add_member(:deployment_details, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentDetails, name: "DeploymentDetails"))
     ContainerFleet.add_member(:log_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: LogConfiguration, name: "LogConfiguration"))
     ContainerFleet.add_member(:location_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerFleetLocationAttributesList, name: "LocationAttributes"))
+    ContainerFleet.add_member(:player_gateway_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: PlayerGatewayMode, name: "PlayerGatewayMode"))
     ContainerFleet.type = Types::ContainerFleet
     ContainerFleetBillingType.add_member(:on_demand, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ON_DEMAND", traits: {"smithy.api#enumValue" => "ON_DEMAND"}))
     ContainerFleetBillingType.add_member(:spot, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SPOT", traits: {"smithy.api#enumValue" => "SPOT"}))
     ContainerFleetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerFleet, name: "member"))
     ContainerFleetLocationAttributes.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationStringModel, name: "Location"))
     ContainerFleetLocationAttributes.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerFleetLocationStatus, name: "Status"))
+    ContainerFleetLocationAttributes.add_member(:player_gateway_status, ::Smithy::Schema::Shapes::MemberShape.new(target: PlayerGatewayStatus, name: "PlayerGatewayStatus"))
     ContainerFleetLocationAttributes.type = Types::ContainerFleetLocationAttributes
     ContainerFleetLocationAttributesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerFleetLocationAttributes, name: "member"))
     ContainerFleetLocationStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
@@ -748,6 +777,7 @@ module Aws::GameLift
     ContainerFleetLocationStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     ContainerFleetLocationStatus.add_member(:updating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATING", traits: {"smithy.api#enumValue" => "UPDATING"}))
     ContainerFleetLocationStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
+    ContainerFleetLocationStatus.add_member(:expired, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXPIRED", traits: {"smithy.api#enumValue" => "EXPIRED"}))
     ContainerFleetRemoveAttribute.add_member(:per_instance_container_group_definition, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PER_INSTANCE_CONTAINER_GROUP_DEFINITION", traits: {"smithy.api#enumValue" => "PER_INSTANCE_CONTAINER_GROUP_DEFINITION"}))
     ContainerFleetRemoveAttributeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerFleetRemoveAttribute, name: "member"))
     ContainerFleetStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
@@ -757,6 +787,7 @@ module Aws::GameLift
     ContainerFleetStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     ContainerFleetStatus.add_member(:updating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATING", traits: {"smithy.api#enumValue" => "UPDATING"}))
     ContainerFleetStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
+    ContainerFleetStatus.add_member(:expired, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXPIRED", traits: {"smithy.api#enumValue" => "EXPIRED"}))
     ContainerGroupDefinition.add_member(:container_group_definition_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerGroupDefinitionArn, name: "ContainerGroupDefinitionArn"))
     ContainerGroupDefinition.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationTime"))
     ContainerGroupDefinition.add_member(:operating_system, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerOperatingSystem, name: "OperatingSystem"))
@@ -772,9 +803,16 @@ module Aws::GameLift
     ContainerGroupDefinition.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: NonZeroAndMaxString, name: "StatusReason"))
     ContainerGroupDefinition.type = Types::ContainerGroupDefinition
     ContainerGroupDefinitionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerGroupDefinition, name: "member"))
+    ContainerGroupDefinitionRemoveAttribute.add_member(:total_vcpu_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TOTAL_VCPU_LIMIT", traits: {"smithy.api#enumValue" => "TOTAL_VCPU_LIMIT"}))
+    ContainerGroupDefinitionRemoveAttributeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerGroupDefinitionRemoveAttribute, name: "member"))
     ContainerGroupDefinitionStatus.add_member(:ready, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "READY", traits: {"smithy.api#enumValue" => "READY"}))
     ContainerGroupDefinitionStatus.add_member(:copying, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COPYING", traits: {"smithy.api#enumValue" => "COPYING"}))
     ContainerGroupDefinitionStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    ContainerGroupPortMapping.add_member(:container_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonZeroAnd128MaxAsciiString, name: "ContainerName"))
+    ContainerGroupPortMapping.add_member(:container_runtime_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ContainerRuntimeId"))
+    ContainerGroupPortMapping.add_member(:container_port_mappings, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerPortMappingList, name: "ContainerPortMappings"))
+    ContainerGroupPortMapping.type = Types::ContainerGroupPortMapping
+    ContainerGroupPortMappingList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerGroupPortMapping, name: "member"))
     ContainerGroupType.add_member(:game_server, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GAME_SERVER", traits: {"smithy.api#enumValue" => "GAME_SERVER"}))
     ContainerGroupType.add_member(:per_instance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PER_INSTANCE", traits: {"smithy.api#enumValue" => "PER_INSTANCE"}))
     ContainerHealthCheck.add_member(:command, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerCommandStringList, name: "Command", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -797,6 +835,11 @@ module Aws::GameLift
     ContainerOperatingSystem.add_member(:amazon_linux_2023, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AMAZON_LINUX_2023", traits: {"smithy.api#enumValue" => "AMAZON_LINUX_2023"}))
     ContainerPortConfiguration.add_member(:container_port_ranges, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerPortRangeList, name: "ContainerPortRanges", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ContainerPortConfiguration.type = Types::ContainerPortConfiguration
+    ContainerPortMapping.add_member(:container_port, ::Smithy::Schema::Shapes::MemberShape.new(target: PortNumber, name: "ContainerPort"))
+    ContainerPortMapping.add_member(:connection_port, ::Smithy::Schema::Shapes::MemberShape.new(target: PortNumber, name: "ConnectionPort"))
+    ContainerPortMapping.add_member(:protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: IpProtocol, name: "Protocol"))
+    ContainerPortMapping.type = Types::ContainerPortMapping
+    ContainerPortMappingList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerPortMapping, name: "member"))
     ContainerPortRange.add_member(:from_port, ::Smithy::Schema::Shapes::MemberShape.new(target: PortNumber, name: "FromPort", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ContainerPortRange.add_member(:to_port, ::Smithy::Schema::Shapes::MemberShape.new(target: PortNumber, name: "ToPort", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ContainerPortRange.add_member(:protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: IpProtocol, name: "Protocol", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -835,13 +878,14 @@ module Aws::GameLift
     CreateContainerFleetInput.add_member(:game_session_creation_limit_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: GameSessionCreationLimitPolicy, name: "GameSessionCreationLimitPolicy"))
     CreateContainerFleetInput.add_member(:log_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: LogConfiguration, name: "LogConfiguration"))
     CreateContainerFleetInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
+    CreateContainerFleetInput.add_member(:player_gateway_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: PlayerGatewayMode, name: "PlayerGatewayMode"))
     CreateContainerFleetInput.type = Types::CreateContainerFleetInput
     CreateContainerFleetOutput.add_member(:container_fleet, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerFleet, name: "ContainerFleet"))
     CreateContainerFleetOutput.type = Types::CreateContainerFleetOutput
     CreateContainerGroupDefinitionInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerGroupDefinitionName, name: "Name", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreateContainerGroupDefinitionInput.add_member(:container_group_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerGroupType, name: "ContainerGroupType"))
     CreateContainerGroupDefinitionInput.add_member(:total_memory_limit_mebibytes, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerTotalMemoryLimit, name: "TotalMemoryLimitMebibytes", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    CreateContainerGroupDefinitionInput.add_member(:total_vcpu_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerTotalVcpuLimit, name: "TotalVcpuLimit", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateContainerGroupDefinitionInput.add_member(:total_vcpu_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerTotalVcpuLimit, name: "TotalVcpuLimit"))
     CreateContainerGroupDefinitionInput.add_member(:game_server_container_definition, ::Smithy::Schema::Shapes::MemberShape.new(target: GameServerContainerDefinitionInput, name: "GameServerContainerDefinition"))
     CreateContainerGroupDefinitionInput.add_member(:support_container_definitions, ::Smithy::Schema::Shapes::MemberShape.new(target: SupportContainerDefinitionInputList, name: "SupportContainerDefinitions"))
     CreateContainerGroupDefinitionInput.add_member(:operating_system, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerOperatingSystem, name: "OperatingSystem", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -873,6 +917,8 @@ module Aws::GameLift
     CreateFleetInput.add_member(:compute_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputeType, name: "ComputeType"))
     CreateFleetInput.add_member(:anywhere_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AnywhereConfiguration, name: "AnywhereConfiguration"))
     CreateFleetInput.add_member(:instance_role_credentials_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceRoleCredentialsProvider, name: "InstanceRoleCredentialsProvider"))
+    CreateFleetInput.add_member(:player_gateway_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: PlayerGatewayMode, name: "PlayerGatewayMode"))
+    CreateFleetInput.add_member(:player_gateway_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: PlayerGatewayConfiguration, name: "PlayerGatewayConfiguration"))
     CreateFleetInput.type = Types::CreateFleetInput
     CreateFleetLocationsInput.add_member(:fleet_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FleetIdOrArn, name: "FleetId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreateFleetLocationsInput.add_member(:locations, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationConfigurationList, name: "Locations", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -969,6 +1015,7 @@ module Aws::GameLift
     CreateScriptInput.add_member(:storage_location, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Location, name: "StorageLocation"))
     CreateScriptInput.add_member(:zip_file, ::Smithy::Schema::Shapes::MemberShape.new(target: ZipBlob, name: "ZipFile"))
     CreateScriptInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
+    CreateScriptInput.add_member(:node_js_version, ::Smithy::Schema::Shapes::MemberShape.new(target: NodeJsVersion, name: "NodeJsVersion"))
     CreateScriptInput.type = Types::CreateScriptInput
     CreateScriptOutput.add_member(:script, ::Smithy::Schema::Shapes::MemberShape.new(target: Script, name: "Script"))
     CreateScriptOutput.type = Types::CreateScriptOutput
@@ -1079,6 +1126,21 @@ module Aws::GameLift
     DescribeContainerGroupDefinitionInput.type = Types::DescribeContainerGroupDefinitionInput
     DescribeContainerGroupDefinitionOutput.add_member(:container_group_definition, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerGroupDefinition, name: "ContainerGroupDefinition"))
     DescribeContainerGroupDefinitionOutput.type = Types::DescribeContainerGroupDefinitionOutput
+    DescribeContainerGroupPortMappingsInput.add_member(:fleet_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FleetIdOrArn, name: "FleetId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DescribeContainerGroupPortMappingsInput.add_member(:container_group_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerGroupType, name: "ContainerGroupType", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DescribeContainerGroupPortMappingsInput.add_member(:compute_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputeNameOrArn, name: "ComputeName"))
+    DescribeContainerGroupPortMappingsInput.add_member(:instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceId, name: "InstanceId"))
+    DescribeContainerGroupPortMappingsInput.add_member(:container_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerNameQueryFilter, name: "ContainerName"))
+    DescribeContainerGroupPortMappingsInput.type = Types::DescribeContainerGroupPortMappingsInput
+    DescribeContainerGroupPortMappingsOutput.add_member(:fleet_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FleetId, name: "FleetId"))
+    DescribeContainerGroupPortMappingsOutput.add_member(:fleet_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FleetArn, name: "FleetArn"))
+    DescribeContainerGroupPortMappingsOutput.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationStringModel, name: "Location"))
+    DescribeContainerGroupPortMappingsOutput.add_member(:container_group_definition_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerGroupDefinitionArn, name: "ContainerGroupDefinitionArn"))
+    DescribeContainerGroupPortMappingsOutput.add_member(:container_group_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerGroupType, name: "ContainerGroupType"))
+    DescribeContainerGroupPortMappingsOutput.add_member(:compute_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputeName, name: "ComputeName"))
+    DescribeContainerGroupPortMappingsOutput.add_member(:instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceId, name: "InstanceId"))
+    DescribeContainerGroupPortMappingsOutput.add_member(:container_group_port_mappings, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerGroupPortMappingList, name: "ContainerGroupPortMappings"))
+    DescribeContainerGroupPortMappingsOutput.type = Types::DescribeContainerGroupPortMappingsOutput
     DescribeEC2InstanceLimitsInput.add_member(:ec2_instance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EC2InstanceType, name: "EC2InstanceType"))
     DescribeEC2InstanceLimitsInput.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationStringModel, name: "Location"))
     DescribeEC2InstanceLimitsInput.type = Types::DescribeEC2InstanceLimitsInput
@@ -1784,6 +1846,40 @@ module Aws::GameLift
     EC2InstanceType.add_member(:r7a_24xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "r7a_24xlarge", traits: {"smithy.api#enumValue" => "r7a.24xlarge"}))
     EC2InstanceType.add_member(:r7a_32xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "r7a_32xlarge", traits: {"smithy.api#enumValue" => "r7a.32xlarge"}))
     EC2InstanceType.add_member(:r7a_48xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "r7a_48xlarge", traits: {"smithy.api#enumValue" => "r7a.48xlarge"}))
+    EC2InstanceType.add_member(:c8a_medium, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "c8a_medium", traits: {"smithy.api#enumValue" => "c8a.medium"}))
+    EC2InstanceType.add_member(:c8a_large, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "c8a_large", traits: {"smithy.api#enumValue" => "c8a.large"}))
+    EC2InstanceType.add_member(:c8a_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "c8a_xlarge", traits: {"smithy.api#enumValue" => "c8a.xlarge"}))
+    EC2InstanceType.add_member(:c8a_2xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "c8a_2xlarge", traits: {"smithy.api#enumValue" => "c8a.2xlarge"}))
+    EC2InstanceType.add_member(:c8a_4xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "c8a_4xlarge", traits: {"smithy.api#enumValue" => "c8a.4xlarge"}))
+    EC2InstanceType.add_member(:c8a_8xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "c8a_8xlarge", traits: {"smithy.api#enumValue" => "c8a.8xlarge"}))
+    EC2InstanceType.add_member(:c8i_large, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "c8i_large", traits: {"smithy.api#enumValue" => "c8i.large"}))
+    EC2InstanceType.add_member(:c8i_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "c8i_xlarge", traits: {"smithy.api#enumValue" => "c8i.xlarge"}))
+    EC2InstanceType.add_member(:c8i_2xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "c8i_2xlarge", traits: {"smithy.api#enumValue" => "c8i.2xlarge"}))
+    EC2InstanceType.add_member(:c8i_4xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "c8i_4xlarge", traits: {"smithy.api#enumValue" => "c8i.4xlarge"}))
+    EC2InstanceType.add_member(:c8i_8xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "c8i_8xlarge", traits: {"smithy.api#enumValue" => "c8i.8xlarge"}))
+    EC2InstanceType.add_member(:c9g_medium, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "c9g_medium", traits: {"smithy.api#enumValue" => "c9g.medium"}))
+    EC2InstanceType.add_member(:c9g_large, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "c9g_large", traits: {"smithy.api#enumValue" => "c9g.large"}))
+    EC2InstanceType.add_member(:c9g_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "c9g_xlarge", traits: {"smithy.api#enumValue" => "c9g.xlarge"}))
+    EC2InstanceType.add_member(:c9g_2xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "c9g_2xlarge", traits: {"smithy.api#enumValue" => "c9g.2xlarge"}))
+    EC2InstanceType.add_member(:c9g_4xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "c9g_4xlarge", traits: {"smithy.api#enumValue" => "c9g.4xlarge"}))
+    EC2InstanceType.add_member(:c9g_8xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "c9g_8xlarge", traits: {"smithy.api#enumValue" => "c9g.8xlarge"}))
+    EC2InstanceType.add_member(:m8a_medium, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "m8a_medium", traits: {"smithy.api#enumValue" => "m8a.medium"}))
+    EC2InstanceType.add_member(:m8a_large, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "m8a_large", traits: {"smithy.api#enumValue" => "m8a.large"}))
+    EC2InstanceType.add_member(:m8a_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "m8a_xlarge", traits: {"smithy.api#enumValue" => "m8a.xlarge"}))
+    EC2InstanceType.add_member(:m8a_2xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "m8a_2xlarge", traits: {"smithy.api#enumValue" => "m8a.2xlarge"}))
+    EC2InstanceType.add_member(:m8a_4xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "m8a_4xlarge", traits: {"smithy.api#enumValue" => "m8a.4xlarge"}))
+    EC2InstanceType.add_member(:m8a_8xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "m8a_8xlarge", traits: {"smithy.api#enumValue" => "m8a.8xlarge"}))
+    EC2InstanceType.add_member(:m8i_large, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "m8i_large", traits: {"smithy.api#enumValue" => "m8i.large"}))
+    EC2InstanceType.add_member(:m8i_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "m8i_xlarge", traits: {"smithy.api#enumValue" => "m8i.xlarge"}))
+    EC2InstanceType.add_member(:m8i_2xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "m8i_2xlarge", traits: {"smithy.api#enumValue" => "m8i.2xlarge"}))
+    EC2InstanceType.add_member(:m8i_4xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "m8i_4xlarge", traits: {"smithy.api#enumValue" => "m8i.4xlarge"}))
+    EC2InstanceType.add_member(:m8i_8xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "m8i_8xlarge", traits: {"smithy.api#enumValue" => "m8i.8xlarge"}))
+    EC2InstanceType.add_member(:m9g_medium, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "m9g_medium", traits: {"smithy.api#enumValue" => "m9g.medium"}))
+    EC2InstanceType.add_member(:m9g_large, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "m9g_large", traits: {"smithy.api#enumValue" => "m9g.large"}))
+    EC2InstanceType.add_member(:m9g_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "m9g_xlarge", traits: {"smithy.api#enumValue" => "m9g.xlarge"}))
+    EC2InstanceType.add_member(:m9g_2xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "m9g_2xlarge", traits: {"smithy.api#enumValue" => "m9g.2xlarge"}))
+    EC2InstanceType.add_member(:m9g_4xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "m9g_4xlarge", traits: {"smithy.api#enumValue" => "m9g.4xlarge"}))
+    EC2InstanceType.add_member(:m9g_8xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "m9g_8xlarge", traits: {"smithy.api#enumValue" => "m9g.8xlarge"}))
     Event.add_member(:event_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonZeroAndMaxString, name: "EventId"))
     Event.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonZeroAndMaxString, name: "ResourceId"))
     Event.add_member(:event_code, ::Smithy::Schema::Shapes::MemberShape.new(target: EventCode, name: "EventCode"))
@@ -1795,6 +1891,7 @@ module Aws::GameLift
     EventCode.add_member(:generic_event, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GENERIC_EVENT", traits: {"smithy.api#enumValue" => "GENERIC_EVENT"}))
     EventCode.add_member(:fleet_created, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FLEET_CREATED", traits: {"smithy.api#enumValue" => "FLEET_CREATED"}))
     EventCode.add_member(:fleet_deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FLEET_DELETED", traits: {"smithy.api#enumValue" => "FLEET_DELETED"}))
+    EventCode.add_member(:fleet_expired, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FLEET_EXPIRED", traits: {"smithy.api#enumValue" => "FLEET_EXPIRED"}))
     EventCode.add_member(:fleet_scaling_event, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FLEET_SCALING_EVENT", traits: {"smithy.api#enumValue" => "FLEET_SCALING_EVENT"}))
     EventCode.add_member(:fleet_state_downloading, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FLEET_STATE_DOWNLOADING", traits: {"smithy.api#enumValue" => "FLEET_STATE_DOWNLOADING"}))
     EventCode.add_member(:fleet_state_validating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FLEET_STATE_VALIDATING", traits: {"smithy.api#enumValue" => "FLEET_STATE_VALIDATING"}))
@@ -1882,6 +1979,8 @@ module Aws::GameLift
     FleetAttributes.add_member(:compute_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputeType, name: "ComputeType"))
     FleetAttributes.add_member(:anywhere_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AnywhereConfiguration, name: "AnywhereConfiguration"))
     FleetAttributes.add_member(:instance_role_credentials_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceRoleCredentialsProvider, name: "InstanceRoleCredentialsProvider"))
+    FleetAttributes.add_member(:player_gateway_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: PlayerGatewayMode, name: "PlayerGatewayMode"))
+    FleetAttributes.add_member(:player_gateway_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: PlayerGatewayConfiguration, name: "PlayerGatewayConfiguration"))
     FleetAttributes.type = Types::FleetAttributes
     FleetAttributesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FleetAttributes, name: "member"))
     FleetCapacity.add_member(:fleet_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FleetId, name: "FleetId"))
@@ -1890,6 +1989,7 @@ module Aws::GameLift
     FleetCapacity.add_member(:instance_counts, ::Smithy::Schema::Shapes::MemberShape.new(target: EC2InstanceCounts, name: "InstanceCounts"))
     FleetCapacity.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationStringModel, name: "Location"))
     FleetCapacity.add_member(:game_server_container_group_counts, ::Smithy::Schema::Shapes::MemberShape.new(target: GameServerContainerGroupCounts, name: "GameServerContainerGroupCounts"))
+    FleetCapacity.add_member(:managed_capacity_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedCapacityConfiguration, name: "ManagedCapacityConfiguration"))
     FleetCapacity.type = Types::FleetCapacity
     FleetCapacityExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Message"))
     FleetCapacityExceededException.type = Types::FleetCapacityExceededException
@@ -1917,6 +2017,7 @@ module Aws::GameLift
     FleetStatus.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ERROR", traits: {"smithy.api#enumValue" => "ERROR"}))
     FleetStatus.add_member(:terminated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TERMINATED", traits: {"smithy.api#enumValue" => "TERMINATED"}))
     FleetStatus.add_member(:not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_FOUND", traits: {"smithy.api#enumValue" => "NOT_FOUND"}))
+    FleetStatus.add_member(:expired, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXPIRED", traits: {"smithy.api#enumValue" => "EXPIRED"}))
     FleetType.add_member(:on_demand, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OnDemand", traits: {"smithy.api#enumValue" => "ON_DEMAND"}))
     FleetType.add_member(:spot, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Spot", traits: {"smithy.api#enumValue" => "SPOT"}))
     FleetUtilization.add_member(:fleet_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FleetId, name: "FleetId"))
@@ -1955,6 +2056,8 @@ module Aws::GameLift
     GameServerContainerDefinition.add_member(:port_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerPortConfiguration, name: "PortConfiguration"))
     GameServerContainerDefinition.add_member(:resolved_image_digest, ::Smithy::Schema::Shapes::MemberShape.new(target: Sha256, name: "ResolvedImageDigest"))
     GameServerContainerDefinition.add_member(:server_sdk_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerSdkVersion, name: "ServerSdkVersion"))
+    GameServerContainerDefinition.add_member(:linux_capabilities, ::Smithy::Schema::Shapes::MemberShape.new(target: LinuxCapabilities, name: "LinuxCapabilities"))
+    GameServerContainerDefinition.add_member(:vcpu, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerVcpu, name: "Vcpu"))
     GameServerContainerDefinition.type = Types::GameServerContainerDefinition
     GameServerContainerDefinitionInput.add_member(:container_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonZeroAnd128MaxAsciiString, name: "ContainerName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     GameServerContainerDefinitionInput.add_member(:depends_on, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerDependencyList, name: "DependsOn"))
@@ -1963,6 +2066,8 @@ module Aws::GameLift
     GameServerContainerDefinitionInput.add_member(:image_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageUriString, name: "ImageUri", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     GameServerContainerDefinitionInput.add_member(:port_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerPortConfiguration, name: "PortConfiguration", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     GameServerContainerDefinitionInput.add_member(:server_sdk_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerSdkVersion, name: "ServerSdkVersion", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    GameServerContainerDefinitionInput.add_member(:linux_capabilities, ::Smithy::Schema::Shapes::MemberShape.new(target: LinuxCapabilities, name: "LinuxCapabilities"))
+    GameServerContainerDefinitionInput.add_member(:vcpu, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerVcpu, name: "Vcpu"))
     GameServerContainerDefinitionInput.type = Types::GameServerContainerDefinitionInput
     GameServerContainerGroupCounts.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: WholeNumber, name: "PENDING"))
     GameServerContainerGroupCounts.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: WholeNumber, name: "ACTIVE"))
@@ -2097,6 +2202,8 @@ module Aws::GameLift
     GameServerInstanceStatus.add_member(:draining, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DRAINING", traits: {"smithy.api#enumValue" => "DRAINING"}))
     GameServerInstanceStatus.add_member(:spot_terminating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SPOT_TERMINATING", traits: {"smithy.api#enumValue" => "SPOT_TERMINATING"}))
     GameServerInstances.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GameServerInstance, name: "member"))
+    GameServerIpProtocolSupported.add_member(:i_pv4, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IPv4", traits: {"smithy.api#enumValue" => "IPv4"}))
+    GameServerIpProtocolSupported.add_member(:dual_stack, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DUAL_STACK", traits: {"smithy.api#enumValue" => "DUAL_STACK"}))
     GameServerProtectionPolicy.add_member(:no_protection, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NO_PROTECTION", traits: {"smithy.api#enumValue" => "NO_PROTECTION"}))
     GameServerProtectionPolicy.add_member(:full_protection, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FULL_PROTECTION", traits: {"smithy.api#enumValue" => "FULL_PROTECTION"}))
     GameServerUtilizationStatus.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AVAILABLE", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
@@ -2121,12 +2228,15 @@ module Aws::GameLift
     GameSession.add_member(:game_session_data, ::Smithy::Schema::Shapes::MemberShape.new(target: LargeGameSessionData, name: "GameSessionData"))
     GameSession.add_member(:matchmaker_data, ::Smithy::Schema::Shapes::MemberShape.new(target: MatchmakerData, name: "MatchmakerData"))
     GameSession.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationStringModel, name: "Location"))
+    GameSession.add_member(:compute_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputeName, name: "ComputeName"))
+    GameSession.add_member(:player_gateway_status, ::Smithy::Schema::Shapes::MemberShape.new(target: PlayerGatewayStatus, name: "PlayerGatewayStatus"))
     GameSession.type = Types::GameSession
     GameSessionConnectionInfo.add_member(:game_session_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnStringModel, name: "GameSessionArn"))
     GameSessionConnectionInfo.add_member(:ip_address, ::Smithy::Schema::Shapes::MemberShape.new(target: IpAddress, name: "IpAddress"))
     GameSessionConnectionInfo.add_member(:dns_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsName, name: "DnsName"))
     GameSessionConnectionInfo.add_member(:port, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveInteger, name: "Port"))
     GameSessionConnectionInfo.add_member(:matched_player_sessions, ::Smithy::Schema::Shapes::MemberShape.new(target: MatchedPlayerSessionList, name: "MatchedPlayerSessions"))
+    GameSessionConnectionInfo.add_member(:player_gateway_status, ::Smithy::Schema::Shapes::MemberShape.new(target: PlayerGatewayStatus, name: "PlayerGatewayStatus"))
     GameSessionConnectionInfo.type = Types::GameSessionConnectionInfo
     GameSessionCreationLimitPolicy.add_member(:new_game_sessions_per_creator, ::Smithy::Schema::Shapes::MemberShape.new(target: WholeNumber, name: "NewGameSessionsPerCreator"))
     GameSessionCreationLimitPolicy.add_member(:policy_period_in_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: WholeNumber, name: "PolicyPeriodInMinutes"))
@@ -2157,6 +2267,7 @@ module Aws::GameLift
     GameSessionPlacement.add_member(:game_session_data, ::Smithy::Schema::Shapes::MemberShape.new(target: LargeGameSessionData, name: "GameSessionData"))
     GameSessionPlacement.add_member(:matchmaker_data, ::Smithy::Schema::Shapes::MemberShape.new(target: MatchmakerData, name: "MatchmakerData"))
     GameSessionPlacement.add_member(:priority_configuration_override, ::Smithy::Schema::Shapes::MemberShape.new(target: PriorityConfigurationOverride, name: "PriorityConfigurationOverride"))
+    GameSessionPlacement.add_member(:player_gateway_status, ::Smithy::Schema::Shapes::MemberShape.new(target: PlayerGatewayStatus, name: "PlayerGatewayStatus"))
     GameSessionPlacement.type = Types::GameSessionPlacement
     GameSessionPlacementState.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
     GameSessionPlacementState.add_member(:fulfilled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FULFILLED", traits: {"smithy.api#enumValue" => "FULFILLED"}))
@@ -2216,6 +2327,12 @@ module Aws::GameLift
     GetInstanceAccessInput.type = Types::GetInstanceAccessInput
     GetInstanceAccessOutput.add_member(:instance_access, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceAccess, name: "InstanceAccess"))
     GetInstanceAccessOutput.type = Types::GetInstanceAccessOutput
+    GetPlayerConnectionDetailsInput.add_member(:game_session_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnStringModel, name: "GameSessionId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    GetPlayerConnectionDetailsInput.add_member(:player_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: PlayerIdList, name: "PlayerIds", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    GetPlayerConnectionDetailsInput.type = Types::GetPlayerConnectionDetailsInput
+    GetPlayerConnectionDetailsOutput.add_member(:game_session_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnStringModel, name: "GameSessionId"))
+    GetPlayerConnectionDetailsOutput.add_member(:player_connection_details, ::Smithy::Schema::Shapes::MemberShape.new(target: PlayerConnectionDetailList, name: "PlayerConnectionDetails"))
+    GetPlayerConnectionDetailsOutput.type = Types::GetPlayerConnectionDetailsOutput
     IdempotentParameterMismatchException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Message"))
     IdempotentParameterMismatchException.type = Types::IdempotentParameterMismatchException
     Instance.add_member(:fleet_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FleetId, name: "FleetId"))
@@ -2271,6 +2388,46 @@ module Aws::GameLift
     LaunchTemplateSpecification.type = Types::LaunchTemplateSpecification
     LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Message"))
     LimitExceededException.type = Types::LimitExceededException
+    LinuxCapabilities.add_member(:include, ::Smithy::Schema::Shapes::MemberShape.new(target: LinuxCapabilityList, name: "Include"))
+    LinuxCapabilities.type = Types::LinuxCapabilities
+    LinuxCapability.add_member(:audit_control, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AUDIT_CONTROL", traits: {"smithy.api#enumValue" => "AUDIT_CONTROL"}))
+    LinuxCapability.add_member(:audit_write, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AUDIT_WRITE", traits: {"smithy.api#enumValue" => "AUDIT_WRITE"}))
+    LinuxCapability.add_member(:block_suspend, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BLOCK_SUSPEND", traits: {"smithy.api#enumValue" => "BLOCK_SUSPEND"}))
+    LinuxCapability.add_member(:chown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CHOWN", traits: {"smithy.api#enumValue" => "CHOWN"}))
+    LinuxCapability.add_member(:dac_override, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DAC_OVERRIDE", traits: {"smithy.api#enumValue" => "DAC_OVERRIDE"}))
+    LinuxCapability.add_member(:dac_read_search, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DAC_READ_SEARCH", traits: {"smithy.api#enumValue" => "DAC_READ_SEARCH"}))
+    LinuxCapability.add_member(:fowner, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FOWNER", traits: {"smithy.api#enumValue" => "FOWNER"}))
+    LinuxCapability.add_member(:fsetid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FSETID", traits: {"smithy.api#enumValue" => "FSETID"}))
+    LinuxCapability.add_member(:ipc_lock, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IPC_LOCK", traits: {"smithy.api#enumValue" => "IPC_LOCK"}))
+    LinuxCapability.add_member(:ipc_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IPC_OWNER", traits: {"smithy.api#enumValue" => "IPC_OWNER"}))
+    LinuxCapability.add_member(:kill, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "KILL", traits: {"smithy.api#enumValue" => "KILL"}))
+    LinuxCapability.add_member(:lease, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LEASE", traits: {"smithy.api#enumValue" => "LEASE"}))
+    LinuxCapability.add_member(:linux_immutable, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LINUX_IMMUTABLE", traits: {"smithy.api#enumValue" => "LINUX_IMMUTABLE"}))
+    LinuxCapability.add_member(:mac_admin, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MAC_ADMIN", traits: {"smithy.api#enumValue" => "MAC_ADMIN"}))
+    LinuxCapability.add_member(:mac_override, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MAC_OVERRIDE", traits: {"smithy.api#enumValue" => "MAC_OVERRIDE"}))
+    LinuxCapability.add_member(:mknod, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MKNOD", traits: {"smithy.api#enumValue" => "MKNOD"}))
+    LinuxCapability.add_member(:net_admin, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NET_ADMIN", traits: {"smithy.api#enumValue" => "NET_ADMIN"}))
+    LinuxCapability.add_member(:net_bind_service, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NET_BIND_SERVICE", traits: {"smithy.api#enumValue" => "NET_BIND_SERVICE"}))
+    LinuxCapability.add_member(:net_broadcast, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NET_BROADCAST", traits: {"smithy.api#enumValue" => "NET_BROADCAST"}))
+    LinuxCapability.add_member(:net_raw, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NET_RAW", traits: {"smithy.api#enumValue" => "NET_RAW"}))
+    LinuxCapability.add_member(:setfcap, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SETFCAP", traits: {"smithy.api#enumValue" => "SETFCAP"}))
+    LinuxCapability.add_member(:setgid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SETGID", traits: {"smithy.api#enumValue" => "SETGID"}))
+    LinuxCapability.add_member(:setpcap, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SETPCAP", traits: {"smithy.api#enumValue" => "SETPCAP"}))
+    LinuxCapability.add_member(:setuid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SETUID", traits: {"smithy.api#enumValue" => "SETUID"}))
+    LinuxCapability.add_member(:sys_admin, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SYS_ADMIN", traits: {"smithy.api#enumValue" => "SYS_ADMIN"}))
+    LinuxCapability.add_member(:sys_boot, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SYS_BOOT", traits: {"smithy.api#enumValue" => "SYS_BOOT"}))
+    LinuxCapability.add_member(:sys_chroot, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SYS_CHROOT", traits: {"smithy.api#enumValue" => "SYS_CHROOT"}))
+    LinuxCapability.add_member(:sys_module, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SYS_MODULE", traits: {"smithy.api#enumValue" => "SYS_MODULE"}))
+    LinuxCapability.add_member(:sys_nice, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SYS_NICE", traits: {"smithy.api#enumValue" => "SYS_NICE"}))
+    LinuxCapability.add_member(:sys_pacct, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SYS_PACCT", traits: {"smithy.api#enumValue" => "SYS_PACCT"}))
+    LinuxCapability.add_member(:sys_ptrace, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SYS_PTRACE", traits: {"smithy.api#enumValue" => "SYS_PTRACE"}))
+    LinuxCapability.add_member(:sys_rawio, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SYS_RAWIO", traits: {"smithy.api#enumValue" => "SYS_RAWIO"}))
+    LinuxCapability.add_member(:sys_resource, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SYS_RESOURCE", traits: {"smithy.api#enumValue" => "SYS_RESOURCE"}))
+    LinuxCapability.add_member(:sys_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SYS_TIME", traits: {"smithy.api#enumValue" => "SYS_TIME"}))
+    LinuxCapability.add_member(:sys_tty_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SYS_TTY_CONFIG", traits: {"smithy.api#enumValue" => "SYS_TTY_CONFIG"}))
+    LinuxCapability.add_member(:syslog, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SYSLOG", traits: {"smithy.api#enumValue" => "SYSLOG"}))
+    LinuxCapability.add_member(:wake_alarm, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WAKE_ALARM", traits: {"smithy.api#enumValue" => "WAKE_ALARM"}))
+    LinuxCapabilityList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LinuxCapability, name: "member"))
     ListAliasesInput.add_member(:routing_strategy_type, ::Smithy::Schema::Shapes::MemberShape.new(target: RoutingStrategyType, name: "RoutingStrategyType"))
     ListAliasesInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Name"))
     ListAliasesInput.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveInteger, name: "Limit"))
@@ -2385,6 +2542,7 @@ module Aws::GameLift
     LocationOrderOverrideList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationStringModel, name: "member"))
     LocationState.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationStringModel, name: "Location"))
     LocationState.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: FleetStatus, name: "Status"))
+    LocationState.add_member(:player_gateway_status, ::Smithy::Schema::Shapes::MemberShape.new(target: PlayerGatewayStatus, name: "PlayerGatewayStatus"))
     LocationState.type = Types::LocationState
     LocationStateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationState, name: "member"))
     LocationUpdateStatus.add_member(:pending_update, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING_UPDATE", traits: {"smithy.api#enumValue" => "PENDING_UPDATE"}))
@@ -2399,6 +2557,9 @@ module Aws::GameLift
     LogDestination.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
     LogDestination.add_member(:cloudwatch, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLOUDWATCH", traits: {"smithy.api#enumValue" => "CLOUDWATCH"}))
     LogDestination.add_member(:s3, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "S3", traits: {"smithy.api#enumValue" => "S3"}))
+    ManagedCapacityConfiguration.add_member(:zero_capacity_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: ZeroCapacityStrategy, name: "ZeroCapacityStrategy"))
+    ManagedCapacityConfiguration.add_member(:scale_in_after_inactivity_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: ScaleInAfterInactivityMinutes, name: "ScaleInAfterInactivityMinutes"))
+    ManagedCapacityConfiguration.type = Types::ManagedCapacityConfiguration
     MatchedPlayerSession.add_member(:player_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PlayerId, name: "PlayerId"))
     MatchedPlayerSession.add_member(:player_session_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PlayerSessionId, name: "PlayerSessionId"))
     MatchedPlayerSession.type = Types::MatchedPlayerSession
@@ -2474,6 +2635,7 @@ module Aws::GameLift
     OperatingSystem.add_member(:amazon_linux_2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AMAZON_LINUX_2", traits: {"smithy.api#enumValue" => "AMAZON_LINUX_2"}))
     OperatingSystem.add_member(:windows_2016, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WINDOWS_2016", traits: {"smithy.api#enumValue" => "WINDOWS_2016"}))
     OperatingSystem.add_member(:amazon_linux_2023, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AMAZON_LINUX_2023", traits: {"smithy.api#enumValue" => "AMAZON_LINUX_2023"}))
+    OperatingSystem.add_member(:windows_2022, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WINDOWS_2022", traits: {"smithy.api#enumValue" => "WINDOWS_2022"}))
     OutOfCapacityException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Message"))
     OutOfCapacityException.type = Types::OutOfCapacityException
     PingBeacon.add_member(:udp_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: UDPEndpoint, name: "UDPEndpoint"))
@@ -2494,8 +2656,25 @@ module Aws::GameLift
     PlayerAttributeStringDoubleMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: PlayerAttributeString, name: "key"))
     PlayerAttributeStringDoubleMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: DoubleObject, name: "value"))
     PlayerAttributeStringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PlayerAttributeString, name: "member"))
+    PlayerConnectionDetail.add_member(:player_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PlayerId, name: "PlayerId"))
+    PlayerConnectionDetail.add_member(:endpoints, ::Smithy::Schema::Shapes::MemberShape.new(target: PlayerConnectionEndpointList, name: "Endpoints"))
+    PlayerConnectionDetail.add_member(:player_gateway_token, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxString, name: "PlayerGatewayToken"))
+    PlayerConnectionDetail.add_member(:expiration, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "Expiration"))
+    PlayerConnectionDetail.type = Types::PlayerConnectionDetail
+    PlayerConnectionDetailList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PlayerConnectionDetail, name: "member"))
+    PlayerConnectionEndpoint.add_member(:ip_address, ::Smithy::Schema::Shapes::MemberShape.new(target: IpAddress, name: "IpAddress"))
+    PlayerConnectionEndpoint.add_member(:port, ::Smithy::Schema::Shapes::MemberShape.new(target: PortNumber, name: "Port"))
+    PlayerConnectionEndpoint.type = Types::PlayerConnectionEndpoint
+    PlayerConnectionEndpointList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PlayerConnectionEndpoint, name: "member"))
     PlayerDataMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: NonZeroAndMaxString, name: "key"))
     PlayerDataMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: PlayerData, name: "value"))
+    PlayerGatewayConfiguration.add_member(:game_server_ip_protocol_supported, ::Smithy::Schema::Shapes::MemberShape.new(target: GameServerIpProtocolSupported, name: "GameServerIpProtocolSupported"))
+    PlayerGatewayConfiguration.type = Types::PlayerGatewayConfiguration
+    PlayerGatewayMode.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
+    PlayerGatewayMode.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
+    PlayerGatewayMode.add_member(:required, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REQUIRED", traits: {"smithy.api#enumValue" => "REQUIRED"}))
+    PlayerGatewayStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
+    PlayerGatewayStatus.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     PlayerIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PlayerId, name: "member"))
     PlayerIdsForAcceptMatch.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PlayerId, name: "member"))
     PlayerLatency.add_member(:player_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PlayerId, name: "PlayerId"))
@@ -2637,9 +2816,10 @@ module Aws::GameLift
     Script.add_member(:script_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ScriptArn, name: "ScriptArn"))
     Script.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonZeroAndMaxString, name: "Name"))
     Script.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: NonZeroAndMaxString, name: "Version"))
-    Script.add_member(:size_on_disk, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveLong, name: "SizeOnDisk"))
+    Script.add_member(:size_on_disk, ::Smithy::Schema::Shapes::MemberShape.new(target: WholeNumberLong, name: "SizeOnDisk"))
     Script.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationTime"))
     Script.add_member(:storage_location, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Location, name: "StorageLocation"))
+    Script.add_member(:node_js_version, ::Smithy::Schema::Shapes::MemberShape.new(target: NodeJsVersion, name: "NodeJsVersion"))
     Script.type = Types::Script
     ScriptList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Script, name: "member"))
     SearchGameSessionsInput.add_member(:fleet_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FleetIdOrArn, name: "FleetId"))
@@ -2718,6 +2898,7 @@ module Aws::GameLift
     SupportContainerDefinition.add_member(:port_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerPortConfiguration, name: "PortConfiguration"))
     SupportContainerDefinition.add_member(:resolved_image_digest, ::Smithy::Schema::Shapes::MemberShape.new(target: Sha256, name: "ResolvedImageDigest"))
     SupportContainerDefinition.add_member(:vcpu, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerVcpu, name: "Vcpu"))
+    SupportContainerDefinition.add_member(:linux_capabilities, ::Smithy::Schema::Shapes::MemberShape.new(target: LinuxCapabilities, name: "LinuxCapabilities"))
     SupportContainerDefinition.type = Types::SupportContainerDefinition
     SupportContainerDefinitionInput.add_member(:container_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonZeroAnd128MaxAsciiString, name: "ContainerName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     SupportContainerDefinitionInput.add_member(:depends_on, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerDependencyList, name: "DependsOn"))
@@ -2729,6 +2910,7 @@ module Aws::GameLift
     SupportContainerDefinitionInput.add_member(:memory_hard_limit_mebibytes, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerMemoryLimit, name: "MemoryHardLimitMebibytes"))
     SupportContainerDefinitionInput.add_member(:port_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerPortConfiguration, name: "PortConfiguration"))
     SupportContainerDefinitionInput.add_member(:vcpu, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerVcpu, name: "Vcpu"))
+    SupportContainerDefinitionInput.add_member(:linux_capabilities, ::Smithy::Schema::Shapes::MemberShape.new(target: LinuxCapabilities, name: "LinuxCapabilities"))
     SupportContainerDefinitionInput.type = Types::SupportContainerDefinitionInput
     SupportContainerDefinitionInputList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SupportContainerDefinitionInput, name: "member"))
     SupportContainerDefinitionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SupportContainerDefinition, name: "member"))
@@ -2810,6 +2992,7 @@ module Aws::GameLift
     UpdateContainerGroupDefinitionInput.add_member(:version_description, ::Smithy::Schema::Shapes::MemberShape.new(target: NonZeroAndMaxString, name: "VersionDescription"))
     UpdateContainerGroupDefinitionInput.add_member(:source_version_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveInteger, name: "SourceVersionNumber"))
     UpdateContainerGroupDefinitionInput.add_member(:operating_system, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerOperatingSystem, name: "OperatingSystem"))
+    UpdateContainerGroupDefinitionInput.add_member(:remove_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerGroupDefinitionRemoveAttributeList, name: "RemoveAttributes"))
     UpdateContainerGroupDefinitionInput.type = Types::UpdateContainerGroupDefinitionInput
     UpdateContainerGroupDefinitionOutput.add_member(:container_group_definition, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerGroupDefinition, name: "ContainerGroupDefinition"))
     UpdateContainerGroupDefinitionOutput.type = Types::UpdateContainerGroupDefinitionOutput
@@ -2829,10 +3012,12 @@ module Aws::GameLift
     UpdateFleetCapacityInput.add_member(:min_size, ::Smithy::Schema::Shapes::MemberShape.new(target: WholeNumber, name: "MinSize"))
     UpdateFleetCapacityInput.add_member(:max_size, ::Smithy::Schema::Shapes::MemberShape.new(target: WholeNumber, name: "MaxSize"))
     UpdateFleetCapacityInput.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationStringModel, name: "Location"))
+    UpdateFleetCapacityInput.add_member(:managed_capacity_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedCapacityConfiguration, name: "ManagedCapacityConfiguration"))
     UpdateFleetCapacityInput.type = Types::UpdateFleetCapacityInput
     UpdateFleetCapacityOutput.add_member(:fleet_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FleetId, name: "FleetId"))
     UpdateFleetCapacityOutput.add_member(:fleet_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FleetArn, name: "FleetArn"))
     UpdateFleetCapacityOutput.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationStringModel, name: "Location"))
+    UpdateFleetCapacityOutput.add_member(:managed_capacity_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedCapacityConfiguration, name: "ManagedCapacityConfiguration"))
     UpdateFleetCapacityOutput.type = Types::UpdateFleetCapacityOutput
     UpdateFleetPortSettingsInput.add_member(:fleet_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FleetIdOrArn, name: "FleetId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     UpdateFleetPortSettingsInput.add_member(:inbound_permission_authorizations, ::Smithy::Schema::Shapes::MemberShape.new(target: IpPermissionsList, name: "InboundPermissionAuthorizations"))
@@ -2931,12 +3116,14 @@ module Aws::GameLift
     VpcPeeringConnectionStatus.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonZeroAndMaxString, name: "Message"))
     VpcPeeringConnectionStatus.type = Types::VpcPeeringConnectionStatus
     VpcSubnets.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcSubnet, name: "member"))
+    ZeroCapacityStrategy.add_member(:manual, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MANUAL", traits: {"smithy.api#enumValue" => "MANUAL"}))
+    ZeroCapacityStrategy.add_member(:scale_to_and_from_zero, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SCALE_TO_AND_FROM_ZERO", traits: {"smithy.api#enumValue" => "SCALE_TO_AND_FROM_ZERO"}))
 
     GameLift = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.gamelift#GameLift"
       service.name = "GameLift"
       service.version = "2015-10-01"
-      service.traits = {"aws.api#service" => {"sdkId" => "GameLift", "arnNamespace" => "gamelift", "cloudFormationName" => "GameLift", "cloudTrailEventSource" => "gamelift.amazonaws.com", "endpointPrefix" => "gamelift"}, "aws.auth#sigv4" => {"name" => "gamelift"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "Amazon GameLift", "smithy.api#xmlNamespace" => {"uri" => "http://gamelift.amazonaws.com/doc/"}}
+      service.traits = {"aws.api#service" => {"sdkId" => "GameLift", "arnNamespace" => "gamelift", "cloudFormationName" => "GameLift", "cloudTrailEventSource" => "gamelift.amazonaws.com", "endpointPrefix" => "gamelift"}, "aws.auth#sigv4" => {"name" => "gamelift"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "Amazon GameLift", "smithy.api#xmlNamespace" => {"uri" => "http://gamelift.amazonaws.com/doc/"}, "smithy.protocols#rpcv2Cbor" => {}, "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://gamelift-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://gamelift-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://gamelift.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://gamelift.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
       service.add_operation(:accept_match, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.gamelift#AcceptMatch"
         operation.name = "AcceptMatch"
@@ -3100,6 +3287,7 @@ module Aws::GameLift
         operation.errors << LimitExceededException
         operation.errors << TaggingFailedException
         operation.errors << UnauthorizedException
+        operation.errors << UnsupportedRegionException
         operation.traits = {}
       end)
       service.add_operation(:create_matchmaking_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -3296,6 +3484,7 @@ module Aws::GameLift
         operation.errors << InvalidRequestException
         operation.errors << NotFoundException
         operation.errors << UnauthorizedException
+        operation.errors << UnsupportedRegionException
         operation.traits = {}
       end)
       service.add_operation(:delete_matchmaking_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -3377,6 +3566,7 @@ module Aws::GameLift
         operation.errors << InvalidRequestException
         operation.errors << NotFoundException
         operation.errors << UnauthorizedException
+        operation.errors << UnsupportedRegionException
         operation.traits = {}
       end)
       service.add_operation(:deregister_game_server, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -3443,6 +3633,19 @@ module Aws::GameLift
         operation.output = DescribeContainerGroupDefinitionOutput
         operation.errors << InternalServiceException
         operation.errors << InvalidRequestException
+        operation.errors << NotFoundException
+        operation.errors << UnauthorizedException
+        operation.errors << UnsupportedRegionException
+        operation.traits = {}
+      end)
+      service.add_operation(:describe_container_group_port_mappings, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.gamelift#DescribeContainerGroupPortMappings"
+        operation.name = "DescribeContainerGroupPortMappings"
+        operation.input = DescribeContainerGroupPortMappingsInput
+        operation.output = DescribeContainerGroupPortMappingsOutput
+        operation.errors << InternalServiceException
+        operation.errors << InvalidRequestException
+        operation.errors << LimitExceededException
         operation.errors << NotFoundException
         operation.errors << UnauthorizedException
         operation.errors << UnsupportedRegionException
@@ -3815,6 +4018,20 @@ module Aws::GameLift
         operation.errors << UnauthorizedException
         operation.traits = {}
       end)
+      service.add_operation(:get_player_connection_details, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.gamelift#GetPlayerConnectionDetails"
+        operation.name = "GetPlayerConnectionDetails"
+        operation.input = GetPlayerConnectionDetailsInput
+        operation.output = GetPlayerConnectionDetailsOutput
+        operation.errors << InternalServiceException
+        operation.errors << InvalidGameSessionStatusException
+        operation.errors << InvalidRequestException
+        operation.errors << LimitExceededException
+        operation.errors << NotFoundException
+        operation.errors << UnauthorizedException
+        operation.errors << UnsupportedRegionException
+        operation.traits = {}
+      end)
       service.add_operation(:list_aliases, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.gamelift#ListAliases"
         operation.name = "ListAliases"
@@ -3990,6 +4207,7 @@ module Aws::GameLift
         operation.errors << LimitExceededException
         operation.errors << NotReadyException
         operation.errors << UnauthorizedException
+        operation.errors << UnsupportedRegionException
         operation.traits = {}
       end)
       service.add_operation(:register_game_server, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -4304,6 +4522,7 @@ module Aws::GameLift
         operation.errors << InvalidGameSessionStatusException
         operation.errors << InvalidRequestException
         operation.errors << NotFoundException
+        operation.errors << NotReadyException
         operation.errors << UnauthorizedException
         operation.traits = {}
       end)

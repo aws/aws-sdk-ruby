@@ -1,0 +1,5 @@
+  module Aws
+    module S3Files
+      VERSION: String
+    end
+  end

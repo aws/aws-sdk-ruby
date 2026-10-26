@@ -211,6 +211,7 @@ module Aws::CodeCommit
   # * {TipsDivergenceExceededException}
   # * {TitleRequiredException}
   # * {TooManyTagsException}
+  # * {ValidationException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.
@@ -446,8 +447,8 @@ module Aws::CodeCommit
       end
     end
 
-    # <p>Cannot create the branch with the specified name because the commit conflicts with an existing branch with the same name. 
-    # 
+    # <p>Cannot create the branch with the specified name because the commit conflicts with an existing branch with the same name.
+    #
     #             Branch names must be unique.</p>
     class BranchNameExistsException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
@@ -750,7 +751,7 @@ module Aws::CodeCommit
       end
     end
 
-    # <p>A file cannot be added to the repository because the specified path name has the same name as a file that already exists in this repository. 
+    # <p>A file cannot be added to the repository because the specified path name has the same name as a file that already exists in this repository.
     #         Either provide a different name for the file, or specify a different path for the file.</p>
     class DirectoryNameConflictsWithFileNameException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
@@ -1013,7 +1014,7 @@ module Aws::CodeCommit
       end
     end
 
-    # <p>The commit cannot be created because at least one of the overall changes in the commit results in a 
+    # <p>The commit cannot be created because at least one of the overall changes in the commit results in a
     #             folder whose contents exceed the limit of 6 MB. Either reduce the number and size of your changes,
     #         or split the changes across multiple folders.</p>
     class FolderContentSizeLimitExceededException < Smithy::Client::ServiceError
@@ -1117,7 +1118,7 @@ module Aws::CodeCommit
     end
 
     # <p>The description for the approval rule template is not valid because it exceeds the
-    #             maximum characters allowed for a description. For more information about limits in CodeCommit, 
+    #             maximum characters allowed for a description. For more information about limits in CodeCommit,
     #             see <a href="https://docs.aws.amazon.com/codecommit/latest/userguide/limits.html">Quotas</a> in the <i>CodeCommit User Guide</i>.</p>
     class InvalidApprovalRuleTemplateDescriptionException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
@@ -1501,7 +1502,7 @@ module Aws::CodeCommit
       end
     end
 
-    # <p>The parent commit ID is not valid. The commit ID cannot be empty, and must match the head commit ID for the branch of the repository where you 
+    # <p>The parent commit ID is not valid. The commit ID cannot be empty, and must match the head commit ID for the branch of the repository where you
     #         want to add or update a file.</p>
     class InvalidParentCommitIdException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
@@ -1791,7 +1792,7 @@ module Aws::CodeCommit
       end
     end
 
-    # <p>The value for the resource ARN is not valid. For more information about resources in CodeCommit, see 
+    # <p>The value for the resource ARN is not valid. For more information about resources in CodeCommit, see
     #             <a href="https://docs.aws.amazon.com/codecommit/latest/userguide/auth-and-access-control-iam-access-control-identity-based.html#arn-formats">CodeCommit Resources and Operations</a>
     #             in the CodeCommit User Guide.</p>
     class InvalidResourceArnException < Smithy::Client::ServiceError
@@ -1933,7 +1934,7 @@ module Aws::CodeCommit
       end
     end
 
-    # <p>The targets for the pull request is not valid or not in a valid format. Targets are a list of target objects. Each target object must contain the full values for 
+    # <p>The targets for the pull request is not valid or not in a valid format. Targets are a list of target objects. Each target object must contain the full values for
     #             the repository name, source branch, and destination branch for a pull request.</p>
     class InvalidTargetsException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
@@ -2018,7 +2019,7 @@ module Aws::CodeCommit
       end
     end
 
-    # <p>The number of specified files to change as part of this commit exceeds the maximum number of files 
+    # <p>The number of specified files to change as part of this commit exceeds the maximum number of files
     #         that can be changed in a single commit. Consider using a Git client for these changes.</p>
     class MaximumFileEntriesExceededException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
@@ -2061,7 +2062,7 @@ module Aws::CodeCommit
       end
     end
 
-    # <p>You cannot create the pull request because the repository has too many open pull requests. 
+    # <p>You cannot create the pull request because the repository has too many open pull requests.
     #             The maximum number of open pull requests for a repository is 1,000. Close one or more open pull requests, and then try again.</p>
     class MaximumOpenPullRequestsExceededException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
@@ -2104,7 +2105,7 @@ module Aws::CodeCommit
       end
     end
 
-    # <p>The maximum number of approval rule templates for a repository has been exceeded. You cannot associate more than 25 
+    # <p>The maximum number of approval rule templates for a repository has been exceeded. You cannot associate more than 25
     #         approval rule templates with a repository.</p>
     class MaximumRuleTemplatesAssociatedWithRepositoryException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
@@ -2288,7 +2289,7 @@ module Aws::CodeCommit
       end
     end
 
-    # <p>A parent commit ID is required. To view the full commit ID of a branch in a repository, use <a>GetBranch</a> or a Git command 
+    # <p>A parent commit ID is required. To view the full commit ID of a branch in a repository, use <a>GetBranch</a> or a Git command
     #         (for example, git pull or git log).</p>
     class ParentCommitIdRequiredException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
@@ -2359,7 +2360,7 @@ module Aws::CodeCommit
       end
     end
 
-    # <p>The approval cannot be applied because the user approving the pull request matches the user who created the pull request. You cannot approve a pull 
+    # <p>The approval cannot be applied because the user approving the pull request matches the user who created the pull request. You cannot approve a pull
     #         request that you created.</p>
     class PullRequestCannotBeApprovedByAuthorException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
@@ -2684,7 +2685,7 @@ module Aws::CodeCommit
       end
     end
 
-    # <p>A valid Amazon Resource Name (ARN) for an CodeCommit resource is required. For a list of valid resources in CodeCommit, see 
+    # <p>A valid Amazon Resource Name (ARN) for an CodeCommit resource is required. For a list of valid resources in CodeCommit, see
     #             <a href="https://docs.aws.amazon.com/codecommit/latest/userguide/auth-and-access-control-iam-access-control-identity-based.html#arn-formats">CodeCommit Resources and Operations</a>
     #             in the CodeCommit User Guide.</p>
     class ResourceArnRequiredException < Smithy::Client::ServiceError
@@ -2872,7 +2873,7 @@ module Aws::CodeCommit
       end
     end
 
-    # <p>The tip of the source branch in the destination repository does not match the tip of the source branch specified in your request. 
+    # <p>The tip of the source branch in the destination repository does not match the tip of the source branch specified in your request.
     #             The pull request might have been updated. Make sure that you have the latest changes.</p>
     class TipOfSourceReferenceIsDifferentException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
@@ -2887,7 +2888,7 @@ module Aws::CodeCommit
       end
     end
 
-    # <p>The divergence between the tips of the provided commit specifiers is too great to determine whether there might be 
+    # <p>The divergence between the tips of the provided commit specifiers is too great to determine whether there might be
     #             any merge conflicts. Locally compare the specifiers using <code>git diff</code> or a diff tool.</p>
     class TipsDivergenceExceededException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
@@ -2920,6 +2921,20 @@ module Aws::CodeCommit
     class TooManyTagsException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CodeCommit::Types::TooManyTagsException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      # <p>Any message associated with the exception.</p>
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>The specified input is either not valid, or it could not be validated.</p>
+    class ValidationException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::CodeCommit::Types::ValidationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
         super
       end

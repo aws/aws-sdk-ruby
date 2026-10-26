@@ -51,6 +51,9 @@ module Aws::MailManager
     ArchiveStringToEvaluate = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.mailmanager#ArchiveStringToEvaluate", name: "ArchiveStringToEvaluate")
     ArchivedMessageId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mailmanager#ArchivedMessageId", name: "ArchivedMessageId")
     ArchivesList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mailmanager#ArchivesList", name: "ArchivesList")
+    BounceAction = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mailmanager#BounceAction", name: "BounceAction")
+    BounceMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mailmanager#BounceMessage", name: "BounceMessage", traits: {"smithy.api#length" => {"min" => 1, "max" => 500}, "smithy.api#pattern" => "^[\\r\\n\\x20-\\x7e]+$", "smithy.api#sensitive" => {}})
+    CAContent = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mailmanager#CAContent", name: "CAContent", traits: {"smithy.api#length" => {"min" => 1, "max" => 500000}, "smithy.api#pattern" => "^[\\P{C}\\s]*$", "smithy.api#sensitive" => {}})
     ConflictException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mailmanager#ConflictException", name: "ConflictException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 409})
     CreateAddonInstanceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mailmanager#CreateAddonInstanceRequest", name: "CreateAddonInstanceRequest")
     CreateAddonInstanceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mailmanager#CreateAddonInstanceResponse", name: "CreateAddonInstanceResponse")
@@ -70,6 +73,7 @@ module Aws::MailManager
     CreateRuleSetResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mailmanager#CreateRuleSetResponse", name: "CreateRuleSetResponse")
     CreateTrafficPolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mailmanager#CreateTrafficPolicyRequest", name: "CreateTrafficPolicyRequest")
     CreateTrafficPolicyResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mailmanager#CreateTrafficPolicyResponse", name: "CreateTrafficPolicyResponse")
+    CrlContent = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mailmanager#CrlContent", name: "CrlContent", traits: {"smithy.api#length" => {"min" => 1, "max" => 500000}, "smithy.api#pattern" => "^[\\P{C}\\s]*$", "smithy.api#sensitive" => {}})
     DeleteAddonInstanceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mailmanager#DeleteAddonInstanceRequest", name: "DeleteAddonInstanceRequest")
     DeleteAddonInstanceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mailmanager#DeleteAddonInstanceResponse", name: "DeleteAddonInstanceResponse")
     DeleteAddonSubscriptionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mailmanager#DeleteAddonSubscriptionRequest", name: "DeleteAddonSubscriptionRequest")
@@ -90,6 +94,7 @@ module Aws::MailManager
     DeliverToQBusinessAction = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mailmanager#DeliverToQBusinessAction", name: "DeliverToQBusinessAction")
     DeregisterMemberFromAddressListRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mailmanager#DeregisterMemberFromAddressListRequest", name: "DeregisterMemberFromAddressListRequest")
     DeregisterMemberFromAddressListResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mailmanager#DeregisterMemberFromAddressListResponse", name: "DeregisterMemberFromAddressListResponse")
+    DiagnosticMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mailmanager#DiagnosticMessage", name: "DiagnosticMessage", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[\\x20-\\x7e]+$", "smithy.api#sensitive" => {}})
     DropAction = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mailmanager#DropAction", name: "DropAction")
     EmailAddress = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mailmanager#EmailAddress", name: "EmailAddress", traits: {"smithy.api#length" => {"min" => 0, "max" => 254}, "smithy.api#pattern" => "^[a-zA-Z0-9._+-]+@[a-zA-Z0-9.-]+$", "smithy.api#sensitive" => {}})
     EmailReceivedHeadersList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mailmanager#EmailReceivedHeadersList", name: "EmailReceivedHeadersList")
@@ -177,6 +182,7 @@ module Aws::MailManager
     IngressTlsProtocolExpression = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mailmanager#IngressTlsProtocolExpression", name: "IngressTlsProtocolExpression")
     IngressTlsProtocolOperator = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.mailmanager#IngressTlsProtocolOperator", name: "IngressTlsProtocolOperator")
     IngressTlsProtocolToEvaluate = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.mailmanager#IngressTlsProtocolToEvaluate", name: "IngressTlsProtocolToEvaluate")
+    InvokeLambdaAction = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mailmanager#InvokeLambdaAction", name: "InvokeLambdaAction")
     IpType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.mailmanager#IpType", name: "IpType")
     Ipv4Cidr = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mailmanager#Ipv4Cidr", name: "Ipv4Cidr", traits: {"smithy.api#pattern" => "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)/([0-9]|[12][0-9]|3[0-2])$"})
     Ipv4Cidrs = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mailmanager#Ipv4Cidrs", name: "Ipv4Cidrs")
@@ -185,8 +191,11 @@ module Aws::MailManager
     JobId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mailmanager#JobId", name: "JobId", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => "^[a-zA-Z0-9-]+$"})
     JobItemsCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.mailmanager#JobItemsCount", name: "JobItemsCount")
     JobName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mailmanager#JobName", name: "JobName", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => "^[a-zA-Z0-9_.-]+$"})
-    KmsKeyArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mailmanager#KmsKeyArn", name: "KmsKeyArn", traits: {"smithy.api#pattern" => "^arn:aws(|-cn|-us-gov):kms:[a-z0-9-]{1,20}:[0-9]{12}:(key|alias)/.+$"})
+    KmsKeyArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mailmanager#KmsKeyArn", name: "KmsKeyArn", traits: {"smithy.api#pattern" => "^arn:aws(|-cn|-us-gov|-eusc):kms:[a-z0-9-]{1,20}:[0-9]{12}:(key|alias)/.+$"})
     KmsKeyId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mailmanager#KmsKeyId", name: "KmsKeyId", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "^[a-zA-Z0-9-:/]+$"})
+    LambdaFunctionArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mailmanager#LambdaFunctionArn", name: "LambdaFunctionArn", traits: {"aws.api#arnReference" => {"type" => "AWS::Lambda::Function"}, "smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "^[a-zA-Z0-9:_/+=,@.#-]+$"})
+    LambdaInvocationType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.mailmanager#LambdaInvocationType", name: "LambdaInvocationType")
+    LambdaRetryTimeMinutes = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.mailmanager#LambdaRetryTimeMinutes", name: "LambdaRetryTimeMinutes", traits: {"smithy.api#range" => {"min" => 0, "max" => 2160}})
     ListAddonInstancesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mailmanager#ListAddonInstancesRequest", name: "ListAddonInstancesRequest")
     ListAddonInstancesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mailmanager#ListAddonInstancesResponse", name: "ListAddonInstancesResponse")
     ListAddonSubscriptionsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mailmanager#ListAddonSubscriptionsRequest", name: "ListAddonSubscriptionsRequest")
@@ -259,6 +268,7 @@ module Aws::MailManager
     RuleBooleanExpression = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mailmanager#RuleBooleanExpression", name: "RuleBooleanExpression")
     RuleBooleanOperator = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.mailmanager#RuleBooleanOperator", name: "RuleBooleanOperator")
     RuleBooleanToEvaluate = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.mailmanager#RuleBooleanToEvaluate", name: "RuleBooleanToEvaluate")
+    RuleClientCertificateAttribute = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.mailmanager#RuleClientCertificateAttribute", name: "RuleClientCertificateAttribute")
     RuleCondition = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.mailmanager#RuleCondition", name: "RuleCondition")
     RuleConditions = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mailmanager#RuleConditions", name: "RuleConditions", traits: {"smithy.api#length" => {"min" => 0, "max" => 10}})
     RuleDmarcExpression = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mailmanager#RuleDmarcExpression", name: "RuleDmarcExpression")
@@ -287,7 +297,7 @@ module Aws::MailManager
     RuleStringList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mailmanager#RuleStringList", name: "RuleStringList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
     RuleStringOperator = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.mailmanager#RuleStringOperator", name: "RuleStringOperator")
     RuleStringToEvaluate = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.mailmanager#RuleStringToEvaluate", name: "RuleStringToEvaluate")
-    RuleStringValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mailmanager#RuleStringValue", name: "RuleStringValue", traits: {"smithy.api#length" => {"min" => 1, "max" => 4096}})
+    RuleStringValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mailmanager#RuleStringValue", name: "RuleStringValue", traits: {"smithy.api#length" => {"min" => 1, "max" => 4096}, "smithy.api#sensitive" => {}})
     RuleVerdict = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.mailmanager#RuleVerdict", name: "RuleVerdict")
     RuleVerdictAttribute = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.mailmanager#RuleVerdictAttribute", name: "RuleVerdictAttribute")
     RuleVerdictExpression = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mailmanager#RuleVerdictExpression", name: "RuleVerdictExpression")
@@ -309,21 +319,23 @@ module Aws::MailManager
     SearchStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mailmanager#SearchStatus", name: "SearchStatus")
     SearchSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mailmanager#SearchSummary", name: "SearchSummary")
     SearchSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mailmanager#SearchSummaryList", name: "SearchSummaryList")
-    SecretArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mailmanager#SecretArn", name: "SecretArn", traits: {"aws.api#arnReference" => {"type" => "AWS::SecretsManager::Secret"}, "smithy.api#pattern" => "^arn:(aws|aws-cn|aws-us-gov):secretsmanager:[a-z0-9-]+:\\d{12}:secret:[a-zA-Z0-9/_+=,.@-]+$"})
+    SecretArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mailmanager#SecretArn", name: "SecretArn", traits: {"aws.api#arnReference" => {"type" => "AWS::SecretsManager::Secret"}, "smithy.api#pattern" => "^arn:(aws|aws-cn|aws-us-gov|aws-eusc):secretsmanager:[a-z0-9-]+:\\d{12}:secret:[a-zA-Z0-9/_+=,.@-]+$"})
     SendAction = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mailmanager#SendAction", name: "SendAction")
     SenderIpAddress = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mailmanager#SenderIpAddress", name: "SenderIpAddress", traits: {"smithy.api#sensitive" => {}})
     ServiceQuotaExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mailmanager#ServiceQuotaExceededException", name: "ServiceQuotaExceededException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 402})
     SmtpPassword = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mailmanager#SmtpPassword", name: "SmtpPassword", traits: {"smithy.api#length" => {"min" => 8, "max" => 64}, "smithy.api#pattern" => "^[A-Za-z0-9!@\#$%^&*()_+\\-=\\[\\]{}|.,?]+$", "smithy.api#sensitive" => {}})
+    SmtpReplyCode = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mailmanager#SmtpReplyCode", name: "SmtpReplyCode", traits: {"smithy.api#length" => {"min" => 3, "max" => 3}, "smithy.api#pattern" => "^[45][0-9][0-9]$"})
     SnsAction = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mailmanager#SnsAction", name: "SnsAction")
     SnsNotificationEncoding = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.mailmanager#SnsNotificationEncoding", name: "SnsNotificationEncoding")
     SnsNotificationPayloadType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.mailmanager#SnsNotificationPayloadType", name: "SnsNotificationPayloadType")
-    SnsTopicArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mailmanager#SnsTopicArn", name: "SnsTopicArn", traits: {"aws.api#arnReference" => {"type" => "AWS::SNS::Topic"}, "smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "^arn:(aws|aws-cn|aws-us-gov):sns:[a-z]{2}-[a-z]+-\\d{1}:\\d{12}:[\\w\\-]{1,256}$"})
+    SnsTopicArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mailmanager#SnsTopicArn", name: "SnsTopicArn", traits: {"aws.api#arnReference" => {"type" => "AWS::SNS::Topic"}, "smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "^arn:(aws|aws-cn|aws-us-gov|aws-eusc):sns:[a-z0-9-]+:\\d{12}:[\\w\\-]{1,256}$"})
     StartAddressListImportJobRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mailmanager#StartAddressListImportJobRequest", name: "StartAddressListImportJobRequest")
     StartAddressListImportJobResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mailmanager#StartAddressListImportJobResponse", name: "StartAddressListImportJobResponse")
     StartArchiveExportRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mailmanager#StartArchiveExportRequest", name: "StartArchiveExportRequest")
     StartArchiveExportResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mailmanager#StartArchiveExportResponse", name: "StartArchiveExportResponse")
     StartArchiveSearchRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mailmanager#StartArchiveSearchRequest", name: "StartArchiveSearchRequest")
     StartArchiveSearchResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mailmanager#StartArchiveSearchResponse", name: "StartArchiveSearchResponse")
+    StatusCode = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mailmanager#StatusCode", name: "StatusCode", traits: {"smithy.api#length" => {"min" => 5, "max" => 9}, "smithy.api#pattern" => "^[45]\\.[0-9]{1,3}\\.[0-9]{1,3}$"})
     StopAddressListImportJobRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mailmanager#StopAddressListImportJobRequest", name: "StopAddressListImportJobRequest")
     StopAddressListImportJobResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mailmanager#StopAddressListImportJobResponse", name: "StopAddressListImportJobResponse")
     StopArchiveExportRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mailmanager#StopArchiveExportRequest", name: "StopArchiveExportRequest")
@@ -340,13 +352,17 @@ module Aws::MailManager
     TagResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mailmanager#TagResourceRequest", name: "TagResourceRequest")
     TagResourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mailmanager#TagResourceResponse", name: "TagResourceResponse")
     TagValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mailmanager#TagValue", name: "TagValue", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#pattern" => "^[a-zA-Z0-9/_\\+=\\.:@\\-]*$"})
-    TaggableResourceArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mailmanager#TaggableResourceArn", name: "TaggableResourceArn", traits: {"smithy.api#length" => {"min" => 20, "max" => 1011}, "smithy.api#pattern" => "^arn:aws(|-cn|-us-gov):ses:[a-z0-9-]{1,20}:[0-9]{12}:(mailmanager-|addon-).+$"})
+    TaggableResourceArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mailmanager#TaggableResourceArn", name: "TaggableResourceArn", traits: {"smithy.api#length" => {"min" => 20, "max" => 1011}, "smithy.api#pattern" => "^arn:aws(|-cn|-us-gov|-eusc):ses:[a-z0-9-]{1,20}:[0-9]{12}:(mailmanager-|addon-).+$"})
     ThrottlingException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mailmanager#ThrottlingException", name: "ThrottlingException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 429})
+    TlsAuthConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mailmanager#TlsAuthConfiguration", name: "TlsAuthConfiguration")
+    TlsPolicy = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.mailmanager#TlsPolicy", name: "TlsPolicy")
     TrafficPolicy = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mailmanager#TrafficPolicy", name: "TrafficPolicy")
     TrafficPolicyArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mailmanager#TrafficPolicyArn", name: "TrafficPolicyArn", traits: {"aws.api#arnReference" => {}})
     TrafficPolicyId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mailmanager#TrafficPolicyId", name: "TrafficPolicyId", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
     TrafficPolicyList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mailmanager#TrafficPolicyList", name: "TrafficPolicyList")
     TrafficPolicyName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mailmanager#TrafficPolicyName", name: "TrafficPolicyName", traits: {"smithy.api#length" => {"min" => 3, "max" => 63}, "smithy.api#pattern" => "^[A-Za-z0-9_\\-]+$"})
+    TrustStore = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mailmanager#TrustStore", name: "TrustStore")
+    TrustStoreResponseOption = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.mailmanager#TrustStoreResponseOption", name: "TrustStoreResponseOption")
     UntagResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mailmanager#UntagResourceRequest", name: "UntagResourceRequest")
     UntagResourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mailmanager#UntagResourceResponse", name: "UntagResourceResponse")
     UpdateArchiveRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mailmanager#UpdateArchiveRequest", name: "UpdateArchiveRequest")
@@ -441,6 +457,14 @@ module Aws::MailManager
     ArchiveStringToEvaluate.add_member(:unknown, Types::ArchiveStringToEvaluate::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     ArchiveStringToEvaluate.type = Types::ArchiveStringToEvaluate
     ArchivesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Archive, name: "member"))
+    BounceAction.add_member(:action_failure_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionFailurePolicy, name: "ActionFailurePolicy"))
+    BounceAction.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, name: "RoleArn", traits: {"smithy.api#required" => {}}))
+    BounceAction.add_member(:sender, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddress, name: "Sender", traits: {"smithy.api#required" => {}}))
+    BounceAction.add_member(:status_code, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusCode, name: "StatusCode", traits: {"smithy.api#required" => {}}))
+    BounceAction.add_member(:smtp_reply_code, ::Smithy::Schema::Shapes::MemberShape.new(target: SmtpReplyCode, name: "SmtpReplyCode", traits: {"smithy.api#required" => {}}))
+    BounceAction.add_member(:diagnostic_message, ::Smithy::Schema::Shapes::MemberShape.new(target: DiagnosticMessage, name: "DiagnosticMessage", traits: {"smithy.api#required" => {}}))
+    BounceAction.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: BounceMessage, name: "Message"))
+    BounceAction.type = Types::BounceAction
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     ConflictException.type = Types::ConflictException
     CreateAddonInstanceRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: IdempotencyToken, name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
@@ -484,6 +508,7 @@ module Aws::MailManager
     CreateIngressPointRequest.add_member(:traffic_policy_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TrafficPolicyId, name: "TrafficPolicyId", traits: {"smithy.api#required" => {}}))
     CreateIngressPointRequest.add_member(:ingress_point_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: IngressPointConfiguration, name: "IngressPointConfiguration"))
     CreateIngressPointRequest.add_member(:network_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkConfiguration, name: "NetworkConfiguration"))
+    CreateIngressPointRequest.add_member(:tls_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: TlsPolicy, name: "TlsPolicy"))
     CreateIngressPointRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     CreateIngressPointRequest.type = Types::CreateIngressPointRequest
     CreateIngressPointResponse.add_member(:ingress_point_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IngressPointId, name: "IngressPointId", traits: {"smithy.api#required" => {}}))
@@ -655,6 +680,7 @@ module Aws::MailManager
     GetArchiveSearchResultsResponse.add_member(:rows, ::Smithy::Schema::Shapes::MemberShape.new(target: RowsList, name: "Rows"))
     GetArchiveSearchResultsResponse.type = Types::GetArchiveSearchResultsResponse
     GetIngressPointRequest.add_member(:ingress_point_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IngressPointId, name: "IngressPointId", traits: {"smithy.api#required" => {}}))
+    GetIngressPointRequest.add_member(:include_trust_store_contents, ::Smithy::Schema::Shapes::MemberShape.new(target: TrustStoreResponseOption, name: "IncludeTrustStoreContents"))
     GetIngressPointRequest.type = Types::GetIngressPointRequest
     GetIngressPointResponse.add_member(:ingress_point_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IngressPointId, name: "IngressPointId", traits: {"smithy.api#required" => {}}))
     GetIngressPointResponse.add_member(:ingress_point_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IngressPointName, name: "IngressPointName", traits: {"smithy.api#required" => {}}))
@@ -666,6 +692,7 @@ module Aws::MailManager
     GetIngressPointResponse.add_member(:traffic_policy_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TrafficPolicyId, name: "TrafficPolicyId"))
     GetIngressPointResponse.add_member(:ingress_point_auth_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: IngressPointAuthConfiguration, name: "IngressPointAuthConfiguration"))
     GetIngressPointResponse.add_member(:network_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkConfiguration, name: "NetworkConfiguration"))
+    GetIngressPointResponse.add_member(:tls_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: TlsPolicy, name: "TlsPolicy"))
     GetIngressPointResponse.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "CreatedTimestamp"))
     GetIngressPointResponse.add_member(:last_updated_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "LastUpdatedTimestamp"))
     GetIngressPointResponse.type = Types::GetIngressPointResponse
@@ -772,9 +799,11 @@ module Aws::MailManager
     IngressPoint.type = Types::IngressPoint
     IngressPointAuthConfiguration.add_member(:ingress_point_password_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: IngressPointPasswordConfiguration, name: "IngressPointPasswordConfiguration"))
     IngressPointAuthConfiguration.add_member(:secret_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretArn, name: "SecretArn"))
+    IngressPointAuthConfiguration.add_member(:tls_auth_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: TlsAuthConfiguration, name: "TlsAuthConfiguration"))
     IngressPointAuthConfiguration.type = Types::IngressPointAuthConfiguration
     IngressPointConfiguration.add_member(:smtp_password, Types::IngressPointConfiguration::SmtpPassword, ::Smithy::Schema::Shapes::MemberShape.new(target: SmtpPassword, name: "SmtpPassword"))
     IngressPointConfiguration.add_member(:secret_arn, Types::IngressPointConfiguration::SecretArn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretArn, name: "SecretArn"))
+    IngressPointConfiguration.add_member(:tls_auth_configuration, Types::IngressPointConfiguration::TlsAuthConfiguration, ::Smithy::Schema::Shapes::MemberShape.new(target: TlsAuthConfiguration, name: "TlsAuthConfiguration"))
     IngressPointConfiguration.add_member(:unknown, Types::IngressPointConfiguration::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     IngressPointConfiguration.type = Types::IngressPointConfiguration
     IngressPointPasswordConfiguration.add_member(:smtp_password_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "SmtpPasswordVersion"))
@@ -787,10 +816,12 @@ module Aws::MailManager
     IngressPointStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     IngressPointStatus.add_member(:closed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLOSED", traits: {"smithy.api#enumValue" => "CLOSED"}))
     IngressPointStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    IngressPointStatus.add_member(:associated_vpc_endpoint_does_not_exist, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ASSOCIATED_VPC_ENDPOINT_DOES_NOT_EXIST", traits: {"smithy.api#enumValue" => "ASSOCIATED_VPC_ENDPOINT_DOES_NOT_EXIST"}))
     IngressPointStatusToUpdate.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     IngressPointStatusToUpdate.add_member(:closed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLOSED", traits: {"smithy.api#enumValue" => "CLOSED"}))
     IngressPointType.add_member(:open, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OPEN", traits: {"smithy.api#enumValue" => "OPEN"}))
     IngressPointType.add_member(:auth, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AUTH", traits: {"smithy.api#enumValue" => "AUTH"}))
+    IngressPointType.add_member(:mtls, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MTLS", traits: {"smithy.api#enumValue" => "MTLS"}))
     IngressPointsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IngressPoint, name: "member"))
     IngressStringEmailAttribute.add_member(:recipient, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RECIPIENT", traits: {"smithy.api#enumValue" => "RECIPIENT"}))
     IngressStringExpression.add_member(:evaluate, ::Smithy::Schema::Shapes::MemberShape.new(target: IngressStringToEvaluate, name: "Evaluate", traits: {"smithy.api#required" => {}}))
@@ -818,10 +849,18 @@ module Aws::MailManager
     IngressTlsProtocolToEvaluate.add_member(:attribute, Types::IngressTlsProtocolToEvaluate::Attribute, ::Smithy::Schema::Shapes::MemberShape.new(target: IngressTlsAttribute, name: "Attribute"))
     IngressTlsProtocolToEvaluate.add_member(:unknown, Types::IngressTlsProtocolToEvaluate::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     IngressTlsProtocolToEvaluate.type = Types::IngressTlsProtocolToEvaluate
+    InvokeLambdaAction.add_member(:action_failure_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionFailurePolicy, name: "ActionFailurePolicy"))
+    InvokeLambdaAction.add_member(:function_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaFunctionArn, name: "FunctionArn", traits: {"smithy.api#required" => {}}))
+    InvokeLambdaAction.add_member(:invocation_type, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaInvocationType, name: "InvocationType", traits: {"smithy.api#required" => {}}))
+    InvokeLambdaAction.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, name: "RoleArn", traits: {"smithy.api#required" => {}}))
+    InvokeLambdaAction.add_member(:retry_time_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaRetryTimeMinutes, name: "RetryTimeMinutes"))
+    InvokeLambdaAction.type = Types::InvokeLambdaAction
     IpType.add_member(:ipv4, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IPV4", traits: {"smithy.api#enumValue" => "IPV4"}))
     IpType.add_member(:dual_stack, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DUAL_STACK", traits: {"smithy.api#enumValue" => "DUAL_STACK"}))
     Ipv4Cidrs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Ipv4Cidr, name: "member"))
     Ipv6Cidrs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Ipv6Cidr, name: "member"))
+    LambdaInvocationType.add_member(:event, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EVENT", traits: {"smithy.api#enumValue" => "EVENT"}))
+    LambdaInvocationType.add_member(:request_response, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REQUEST_RESPONSE", traits: {"smithy.api#enumValue" => "REQUEST_RESPONSE"}))
     ListAddonInstancesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "NextToken"))
     ListAddonInstancesRequest.add_member(:page_size, ::Smithy::Schema::Shapes::MemberShape.new(target: PageSize, name: "PageSize"))
     ListAddonInstancesRequest.type = Types::ListAddonInstancesRequest
@@ -1018,6 +1057,8 @@ module Aws::MailManager
     RuleAction.add_member(:deliver_to_mailbox, Types::RuleAction::DeliverToMailbox, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliverToMailboxAction, name: "DeliverToMailbox"))
     RuleAction.add_member(:deliver_to_q_business, Types::RuleAction::DeliverToQBusiness, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliverToQBusinessAction, name: "DeliverToQBusiness"))
     RuleAction.add_member(:publish_to_sns, Types::RuleAction::PublishToSns, ::Smithy::Schema::Shapes::MemberShape.new(target: SnsAction, name: "PublishToSns"))
+    RuleAction.add_member(:bounce, Types::RuleAction::Bounce, ::Smithy::Schema::Shapes::MemberShape.new(target: BounceAction, name: "Bounce"))
+    RuleAction.add_member(:invoke_lambda, Types::RuleAction::InvokeLambda, ::Smithy::Schema::Shapes::MemberShape.new(target: InvokeLambdaAction, name: "InvokeLambda"))
     RuleAction.add_member(:unknown, Types::RuleAction::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     RuleAction.type = Types::RuleAction
     RuleActions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleAction, name: "member"))
@@ -1041,6 +1082,14 @@ module Aws::MailManager
     RuleBooleanToEvaluate.add_member(:is_in_address_list, Types::RuleBooleanToEvaluate::IsInAddressList, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleIsInAddressList, name: "IsInAddressList"))
     RuleBooleanToEvaluate.add_member(:unknown, Types::RuleBooleanToEvaluate::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     RuleBooleanToEvaluate.type = Types::RuleBooleanToEvaluate
+    RuleClientCertificateAttribute.add_member(:cn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CN", traits: {"smithy.api#enumValue" => "CN"}))
+    RuleClientCertificateAttribute.add_member(:san_rfc822_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SAN_RFC822_NAME", traits: {"smithy.api#enumValue" => "SAN_RFC822_NAME"}))
+    RuleClientCertificateAttribute.add_member(:san_dns_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SAN_DNS_NAME", traits: {"smithy.api#enumValue" => "SAN_DNS_NAME"}))
+    RuleClientCertificateAttribute.add_member(:san_directory_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SAN_DIRECTORY_NAME", traits: {"smithy.api#enumValue" => "SAN_DIRECTORY_NAME"}))
+    RuleClientCertificateAttribute.add_member(:san_uniform_resource_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SAN_UNIFORM_RESOURCE_IDENTIFIER", traits: {"smithy.api#enumValue" => "SAN_UNIFORM_RESOURCE_IDENTIFIER"}))
+    RuleClientCertificateAttribute.add_member(:san_ip_address, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SAN_IP_ADDRESS", traits: {"smithy.api#enumValue" => "SAN_IP_ADDRESS"}))
+    RuleClientCertificateAttribute.add_member(:san_registered_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SAN_REGISTERED_ID", traits: {"smithy.api#enumValue" => "SAN_REGISTERED_ID"}))
+    RuleClientCertificateAttribute.add_member(:serial_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SERIAL_NUMBER", traits: {"smithy.api#enumValue" => "SERIAL_NUMBER"}))
     RuleCondition.add_member(:boolean_expression, Types::RuleCondition::BooleanExpression, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleBooleanExpression, name: "BooleanExpression"))
     RuleCondition.add_member(:string_expression, Types::RuleCondition::StringExpression, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleStringExpression, name: "StringExpression"))
     RuleCondition.add_member(:number_expression, Types::RuleCondition::NumberExpression, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleNumberExpression, name: "NumberExpression"))
@@ -1113,6 +1162,7 @@ module Aws::MailManager
     RuleStringToEvaluate.add_member(:attribute, Types::RuleStringToEvaluate::Attribute, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleStringEmailAttribute, name: "Attribute"))
     RuleStringToEvaluate.add_member(:mime_header_attribute, Types::RuleStringToEvaluate::MimeHeaderAttribute, ::Smithy::Schema::Shapes::MemberShape.new(target: MimeHeaderAttribute, name: "MimeHeaderAttribute"))
     RuleStringToEvaluate.add_member(:analysis, Types::RuleStringToEvaluate::Analysis, ::Smithy::Schema::Shapes::MemberShape.new(target: Analysis, name: "Analysis"))
+    RuleStringToEvaluate.add_member(:client_certificate_attribute, Types::RuleStringToEvaluate::ClientCertificateAttribute, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleClientCertificateAttribute, name: "ClientCertificateAttribute"))
     RuleStringToEvaluate.add_member(:unknown, Types::RuleStringToEvaluate::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     RuleStringToEvaluate.type = Types::RuleStringToEvaluate
     RuleVerdict.add_member(:pass, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PASS", traits: {"smithy.api#enumValue" => "PASS"}))
@@ -1217,11 +1267,22 @@ module Aws::MailManager
     TagResourceResponse.type = Types::TagResourceResponse
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     ThrottlingException.type = Types::ThrottlingException
+    TlsAuthConfiguration.add_member(:trust_store, ::Smithy::Schema::Shapes::MemberShape.new(target: TrustStore, name: "TrustStore"))
+    TlsAuthConfiguration.type = Types::TlsAuthConfiguration
+    TlsPolicy.add_member(:required, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REQUIRED", traits: {"smithy.api#enumValue" => "REQUIRED"}))
+    TlsPolicy.add_member(:optional, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OPTIONAL", traits: {"smithy.api#enumValue" => "OPTIONAL"}))
+    TlsPolicy.add_member(:fips, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FIPS", traits: {"smithy.api#enumValue" => "FIPS"}))
     TrafficPolicy.add_member(:traffic_policy_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TrafficPolicyName, name: "TrafficPolicyName", traits: {"smithy.api#required" => {}}))
     TrafficPolicy.add_member(:traffic_policy_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TrafficPolicyId, name: "TrafficPolicyId", traits: {"smithy.api#required" => {}}))
     TrafficPolicy.add_member(:default_action, ::Smithy::Schema::Shapes::MemberShape.new(target: AcceptAction, name: "DefaultAction", traits: {"smithy.api#required" => {}}))
     TrafficPolicy.type = Types::TrafficPolicy
     TrafficPolicyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TrafficPolicy, name: "member"))
+    TrustStore.add_member(:ca_content, ::Smithy::Schema::Shapes::MemberShape.new(target: CAContent, name: "CAContent", traits: {"smithy.api#required" => {}}))
+    TrustStore.add_member(:crl_content, ::Smithy::Schema::Shapes::MemberShape.new(target: CrlContent, name: "CrlContent"))
+    TrustStore.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyArn, name: "KmsKeyArn"))
+    TrustStore.type = Types::TrustStore
+    TrustStoreResponseOption.add_member(:exclude, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXCLUDE", traits: {"smithy.api#enumValue" => "EXCLUDE"}))
+    TrustStoreResponseOption.add_member(:include, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INCLUDE", traits: {"smithy.api#enumValue" => "INCLUDE"}))
     UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TaggableResourceArn, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
     UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, name: "TagKeys", traits: {"smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
@@ -1237,6 +1298,7 @@ module Aws::MailManager
     UpdateIngressPointRequest.add_member(:rule_set_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleSetId, name: "RuleSetId"))
     UpdateIngressPointRequest.add_member(:traffic_policy_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TrafficPolicyId, name: "TrafficPolicyId"))
     UpdateIngressPointRequest.add_member(:ingress_point_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: IngressPointConfiguration, name: "IngressPointConfiguration"))
+    UpdateIngressPointRequest.add_member(:tls_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: TlsPolicy, name: "TlsPolicy"))
     UpdateIngressPointRequest.type = Types::UpdateIngressPointRequest
     UpdateIngressPointResponse.type = Types::UpdateIngressPointResponse
     UpdateRelayRequest.add_member(:relay_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RelayId, name: "RelayId", traits: {"smithy.api#required" => {}}))
@@ -1265,7 +1327,7 @@ module Aws::MailManager
       service.id = "com.amazonaws.mailmanager#MailManagerSvc"
       service.name = "MailManagerSvc"
       service.version = "2023-10-17"
-      service.traits = {"aws.api#service" => {"sdkId" => "MailManager", "cloudFormationName" => "SES", "endpointPrefix" => "mail-manager", "arnNamespace" => "ses"}, "aws.auth#sigv4" => {"name" => "ses"}, "aws.protocols#awsJson1_0" => {}, "smithy.api#cors" => {}, "smithy.api#externalDocumentation" => {"API Reference" => "https://w.amazon.com/bin/view/AWS/Border"}, "smithy.api#title" => "MailManager"}
+      service.traits = {"aws.api#service" => {"sdkId" => "MailManager", "cloudFormationName" => "SES", "endpointPrefix" => "mail-manager", "arnNamespace" => "ses"}, "aws.auth#sigv4" => {"name" => "ses"}, "aws.protocols#awsJson1_0" => {}, "smithy.api#cors" => {}, "smithy.api#externalDocumentation" => {"API Reference" => "https://w.amazon.com/bin/view/AWS/Border"}, "smithy.api#title" => "MailManager", "smithy.protocols#rpcv2Cbor" => {}, "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://mail-manager-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://mail-manager-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://mail-manager.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://mail-manager.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
       service.add_operation(:create_addon_instance, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mailmanager#CreateAddonInstance"
         operation.name = "CreateAddonInstance"
@@ -1284,6 +1346,7 @@ module Aws::MailManager
         operation.output = CreateAddonSubscriptionResponse
         operation.errors << ConflictException
         operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
@@ -1388,6 +1451,7 @@ module Aws::MailManager
         operation.errors << AccessDeniedException
         operation.errors << ConflictException
         operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_archive, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -1446,6 +1510,7 @@ module Aws::MailManager
         operation.input = DeregisterMemberFromAddressListRequest
         operation.output = DeregisterMemberFromAddressListResponse
         operation.errors << AccessDeniedException
+        operation.errors << ConflictException
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
@@ -1739,6 +1804,7 @@ module Aws::MailManager
         operation.input = RegisterMemberToAddressListRequest
         operation.output = RegisterMemberToAddressListResponse
         operation.errors << AccessDeniedException
+        operation.errors << ConflictException
         operation.errors << ResourceNotFoundException
         operation.errors << ServiceQuotaExceededException
         operation.errors << ThrottlingException

@@ -144,18 +144,18 @@ module Aws::FSx
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -209,16 +209,16 @@ module Aws::FSx
       super
     end
 
-    # <p>Use this action to associate one or more Domain Name Server (DNS) aliases with an existing Amazon FSx for Windows File Server file system. 
-    #         A file system can have a maximum of 50 DNS aliases associated with it at any one time. If you try to 
-    #         associate a DNS alias that is already associated with the file system, FSx takes no action on that alias in the request. 
-    #         For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-dns-aliases.html">Working with DNS Aliases</a> and 
+    # <p>Use this action to associate one or more Domain Name Server (DNS) aliases with an existing Amazon FSx for Windows File Server file system.
+    #         A file system can have a maximum of 50 DNS aliases associated with it at any one time. If you try to
+    #         associate a DNS alias that is already associated with the file system, FSx takes no action on that alias in the request.
+    #         For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-dns-aliases.html">Working with DNS Aliases</a> and
     #             <a href="https://docs.aws.amazon.com/fsx/latest/WindowsGuide/walkthrough05-file-system-custom-CNAME.html">Walkthrough 5: Using DNS aliases to access your file system</a>, including
     #              additional steps you must take to be able to access your file system using a DNS alias.</p>
-    #          <p>The system response shows the DNS aliases that 
-    #             Amazon FSx is attempting to associate with the file system. 
-    #             Use the  API 
-    #             operation to monitor the status of the aliases Amazon FSx is 
+    #          <p>The system response shows the DNS aliases that
+    #             Amazon FSx is attempting to associate with the file system.
+    #             Use the  API
+    #             operation to monitor the status of the aliases Amazon FSx is
     #             associating with the file system.</p>
     # @param [Hash, Types::AssociateFileSystemAliasesRequest] params
     # @option params [String] :client_request_token
@@ -228,13 +228,13 @@ module Aws::FSx
     # @option params [String] :file_system_id
     #   <p>Specifies the file system with which you want to associate one or more DNS aliases.</p>
     # @option params [Array<String>] :aliases
-    #   <p>An array of one or more DNS alias names to associate with the file system. 
+    #   <p>An array of one or more DNS alias names to associate with the file system.
     #               The alias name has to comply with the following formatting requirements:</p>
     #            <ul>
     #               <li>
     #                  <p>Formatted as a fully-qualified domain name (FQDN), <i>
     #                        <code>hostname.domain</code>
-    #                     </i>, 
+    #                     </i>,
     #                       for example, <code>accounting.corp.example.com</code>.</p>
     #               </li>
     #               <li>
@@ -247,7 +247,7 @@ module Aws::FSx
     #                  <p>Can start with a numeric.</p>
     #               </li>
     #            </ul>
-    #            <p>For DNS alias names, Amazon FSx stores alphabetic characters as lowercase letters (a-z), regardless of how you specify them: 
+    #            <p>For DNS alias names, Amazon FSx stores alphabetic characters as lowercase letters (a-z), regardless of how you specify them:
     #               as uppercase letters, lowercase letters, or the corresponding letters in escape codes.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -273,7 +273,7 @@ module Aws::FSx
       request.send_request(options)
     end
 
-    # <p>Cancels an existing Amazon FSx for Lustre data repository task if that task is in either the 
+    # <p>Cancels an existing Amazon FSx for Lustre data repository task if that task is in either the
     #             <code>PENDING</code> or <code>EXECUTING</code> state. When you cancel an export task, Amazon FSx
     #             does the following.</p>
     #          <ul>
@@ -351,7 +351,7 @@ module Aws::FSx
     #                  <p>Amazon FSx for Lustre <code>PERSISTENT_1</code>
     #                   and <code>PERSISTENT_2</code> deployment types only.</p>
     #                  <p>
-    #                     <code>SCRATCH_1</code> and <code>SCRATCH_2</code> types are encrypted using 
+    #                     <code>SCRATCH_1</code> and <code>SCRATCH_2</code> types are encrypted using
     #                       the Amazon FSx service KMS key for your account.</p>
     #               </li>
     #               <li>
@@ -482,7 +482,8 @@ module Aws::FSx
     #             organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
     #             file_system_administrators_group: "FileSystemAdministratorsGroupName",
     #             user_name: "DirectoryUserName",
-    #             dns_ips: ["IpAddress"]
+    #             dns_ips: ["IpAddress"],
+    #             domain_join_service_account_secret: "CustomerSecretsManagerARN"
     #           },
     #           deployment_type: "MULTI_AZ_1" # One of: ["MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2"],
     #           remote_administration_endpoint: "DNSName",
@@ -509,7 +510,11 @@ module Aws::FSx
     #             mode: "AUTOMATIC" # One of: ["AUTOMATIC", "USER_PROVISIONED"],
     #             iops: 1
     #           },
-    #           preferred_file_server_ipv6: "IpAddress"
+    #           preferred_file_server_ipv6: "IpAddress",
+    #           fsrm_configuration: {
+    #             fsrm_service_enabled: false, # required
+    #             event_log_destination: "GeneralARN"
+    #           }
     #         },
     #         lustre_configuration: {
     #           weekly_maintenance_start_time: "WeeklyTime",
@@ -859,7 +864,8 @@ module Aws::FSx
     #                   organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
     #                   file_system_administrators_group: "FileSystemAdministratorsGroupName",
     #                   user_name: "DirectoryUserName",
-    #                   dns_ips: ["IpAddress"]
+    #                   dns_ips: ["IpAddress"],
+    #                   domain_join_service_account_secret: "CustomerSecretsManagerARN"
     #                 },
     #                 deployment_type: "MULTI_AZ_1" # One of: ["MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2"],
     #                 remote_administration_endpoint: "DNSName",
@@ -886,7 +892,11 @@ module Aws::FSx
     #                   mode: "AUTOMATIC" # One of: ["AUTOMATIC", "USER_PROVISIONED"],
     #                   iops: 1
     #                 },
-    #                 preferred_file_server_ipv6: "IpAddress"
+    #                 preferred_file_server_ipv6: "IpAddress",
+    #                 fsrm_configuration: {
+    #                   fsrm_service_enabled: false, # required
+    #                   event_log_destination: "GeneralARN"
+    #                 }
     #               },
     #               lustre_configuration: {
     #                 weekly_maintenance_start_time: "WeeklyTime",
@@ -1175,7 +1185,8 @@ module Aws::FSx
     #               organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
     #               file_system_administrators_group: "FileSystemAdministratorsGroupName",
     #               user_name: "DirectoryUserName",
-    #               dns_ips: ["IpAddress"]
+    #               dns_ips: ["IpAddress"],
+    #               domain_join_service_account_secret: "CustomerSecretsManagerARN"
     #             },
     #             deployment_type: "MULTI_AZ_1" # One of: ["MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2"],
     #             remote_administration_endpoint: "DNSName",
@@ -1202,7 +1213,11 @@ module Aws::FSx
     #               mode: "AUTOMATIC" # One of: ["AUTOMATIC", "USER_PROVISIONED"],
     #               iops: 1
     #             },
-    #             preferred_file_server_ipv6: "IpAddress"
+    #             preferred_file_server_ipv6: "IpAddress",
+    #             fsrm_configuration: {
+    #               fsrm_service_enabled: false, # required
+    #               event_log_destination: "GeneralARN"
+    #             }
     #           },
     #           lustre_configuration: {
     #             weekly_maintenance_start_time: "WeeklyTime",
@@ -1444,7 +1459,7 @@ module Aws::FSx
       request.send_request(options)
     end
 
-    # <p>Creates an S3 access point and attaches it to an Amazon FSx volume. For FSx for OpenZFS file systems, the 
+    # <p>Creates an S3 access point and attaches it to an Amazon FSx volume. For FSx for OpenZFS file systems, the
     #          volume must be hosted on a high-availability file system, either Single-AZ or Multi-AZ. For more information,
     #          see <a href="https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/s3accesspoints-for-FSx.html">Accessing your data using Amazon S3 access points</a>.
     #          in the Amazon FSx for OpenZFS User Guide.
@@ -1501,14 +1516,16 @@ module Aws::FSx
     #   <p>The type of S3 access point you want to create. Only <code>OpenZFS</code> is supported.</p>
     # @option params [Types::CreateAndAttachS3AccessPointOpenZFSConfiguration] :open_zfs_configuration
     #   <p>Specifies the configuration to use when creating and attaching an S3 access point to an FSx for OpenZFS volume.</p>
+    # @option params [Types::CreateAndAttachS3AccessPointOntapConfiguration] :ontap_configuration
+    #   <p>Specifies the FSx for ONTAP volume that the S3 access point will be attached to, and the file system user identity.</p>
     # @option params [Types::CreateAndAttachS3AccessPointS3Configuration] :s3_access_point
-    #   <p>Specifies the virtual private cloud (VPC) configuration if you're creating an access point that is restricted to a VPC. 
+    #   <p>Specifies the virtual private cloud (VPC) configuration if you're creating an access point that is restricted to a VPC.
     #            For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/access-points-vpc.html">Creating access points restricted to a virtual private cloud</a>.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     client_request_token: "ClientRequestToken",
     #     name: "S3AccessPointAttachmentName", # required
-    #     type: "OPENZFS" # One of: ["OPENZFS"], # required
+    #     type: "OPENZFS" # One of: ["OPENZFS", "ONTAP"], # required
     #     open_zfs_configuration: {
     #       volume_id: "VolumeId", # required
     #       file_system_identity: { # required
@@ -1517,6 +1534,18 @@ module Aws::FSx
     #           uid: 1, # required
     #           gid: 1, # required
     #           secondary_gids: [1]
+    #         }
+    #       }
+    #     },
+    #     ontap_configuration: {
+    #       volume_id: "VolumeId", # required
+    #       file_system_identity: { # required
+    #         type: "UNIX" # One of: ["UNIX", "WINDOWS"], # required
+    #         unix_user: {
+    #           name: "OntapFileSystemUserName", # required
+    #         },
+    #         windows_user: {
+    #           name: "OntapFileSystemUserName", # required
     #         }
     #       }
     #     },
@@ -1533,13 +1562,13 @@ module Aws::FSx
     #   response.to_h #=>
     #   {
     #     s3_access_point_attachment: {
-    #       lifecycle: "AVAILABLE" # One of: ["AVAILABLE", "CREATING", "DELETING", "UPDATING", "FAILED"],
+    #       lifecycle: "AVAILABLE" # One of: ["AVAILABLE", "CREATING", "DELETING", "UPDATING", "FAILED", "MISCONFIGURED"],
     #       lifecycle_transition_reason: {
     #         message: "ErrorMessage"
     #       },
     #       creation_time: Time.now,
     #       name: "S3AccessPointAttachmentName",
-    #       type: "OPENZFS" # One of: ["OPENZFS"],
+    #       type: "OPENZFS" # One of: ["OPENZFS", "ONTAP"],
     #       open_zfs_configuration: {
     #         volume_id: "VolumeId",
     #         file_system_identity: {
@@ -1548,6 +1577,18 @@ module Aws::FSx
     #             uid: 1, # required
     #             gid: 1, # required
     #             secondary_gids: [1]
+    #           }
+    #         }
+    #       },
+    #       ontap_configuration: {
+    #         volume_id: "VolumeId",
+    #         file_system_identity: {
+    #           type: "UNIX" # One of: ["UNIX", "WINDOWS"], # required
+    #           unix_user: {
+    #             name: "OntapFileSystemUserName", # required
+    #           },
+    #           windows_user: {
+    #             name: "OntapFileSystemUserName", # required
     #           }
     #         }
     #       },
@@ -1701,7 +1742,8 @@ module Aws::FSx
     #             organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
     #             file_system_administrators_group: "FileSystemAdministratorsGroupName",
     #             user_name: "DirectoryUserName",
-    #             dns_ips: ["IpAddress"]
+    #             dns_ips: ["IpAddress"],
+    #             domain_join_service_account_secret: "CustomerSecretsManagerARN"
     #           },
     #           deployment_type: "MULTI_AZ_1" # One of: ["MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2"],
     #           remote_administration_endpoint: "DNSName",
@@ -1728,7 +1770,11 @@ module Aws::FSx
     #             mode: "AUTOMATIC" # One of: ["AUTOMATIC", "USER_PROVISIONED"],
     #             iops: 1
     #           },
-    #           preferred_file_server_ipv6: "IpAddress"
+    #           preferred_file_server_ipv6: "IpAddress",
+    #           fsrm_configuration: {
+    #             fsrm_service_enabled: false, # required
+    #             event_log_destination: "GeneralARN"
+    #           }
     #         },
     #         lustre_configuration: {
     #           weekly_maintenance_start_time: "WeeklyTime",
@@ -2078,7 +2124,8 @@ module Aws::FSx
     #                   organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
     #                   file_system_administrators_group: "FileSystemAdministratorsGroupName",
     #                   user_name: "DirectoryUserName",
-    #                   dns_ips: ["IpAddress"]
+    #                   dns_ips: ["IpAddress"],
+    #                   domain_join_service_account_secret: "CustomerSecretsManagerARN"
     #                 },
     #                 deployment_type: "MULTI_AZ_1" # One of: ["MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2"],
     #                 remote_administration_endpoint: "DNSName",
@@ -2105,7 +2152,11 @@ module Aws::FSx
     #                   mode: "AUTOMATIC" # One of: ["AUTOMATIC", "USER_PROVISIONED"],
     #                   iops: 1
     #                 },
-    #                 preferred_file_server_ipv6: "IpAddress"
+    #                 preferred_file_server_ipv6: "IpAddress",
+    #                 fsrm_configuration: {
+    #                   fsrm_service_enabled: false, # required
+    #                   event_log_destination: "GeneralARN"
+    #                 }
     #               },
     #               lustre_configuration: {
     #                 weekly_maintenance_start_time: "WeeklyTime",
@@ -2295,7 +2346,7 @@ module Aws::FSx
     #             system directory and a unique S3 bucket or prefix associated with it. You
     #             can configure a data repository association for automatic import only,
     #             for automatic export only, or for both. To learn more about linking a
-    #             data repository to your file system, see 
+    #             data repository to your file system, see
     #             <a href="https://docs.aws.amazon.com/fsx/latest/LustreGuide/create-dra-linked-data-repo.html">Linking your file system to an S3 bucket</a>.</p>
     #          <note>
     #             <p>
@@ -2437,9 +2488,9 @@ module Aws::FSx
     #             are exported to S3. The metadata of released files remains on the file system so users or applications
     #             can still access released files by reading the files again, which will restore data from
     #             Amazon S3 to the FSx for Lustre file system.</p>
-    #          <p>To learn more about data repository tasks, see 
-    #             <a href="https://docs.aws.amazon.com/fsx/latest/LustreGuide/data-repository-tasks.html">Data Repository Tasks</a>. 
-    #             To learn more about linking a data repository to your file system, see 
+    #          <p>To learn more about data repository tasks, see
+    #             <a href="https://docs.aws.amazon.com/fsx/latest/LustreGuide/data-repository-tasks.html">Data Repository Tasks</a>.
+    #             To learn more about linking a data repository to your file system, see
     #             <a href="https://docs.aws.amazon.com/fsx/latest/LustreGuide/create-dra-linked-data-repo.html">Linking your file system to an S3 bucket</a>.</p>
     # @param [Hash, Types::CreateDataRepositoryTaskRequest] params
     # @option params [String] :type
@@ -2504,9 +2555,9 @@ module Aws::FSx
     # @option params [String] :file_system_id
     #   <p>The globally unique ID of the file system, assigned by Amazon FSx.</p>
     # @option params [Types::CompletionReport] :report
-    #   <p>Defines whether or not Amazon FSx provides a CompletionReport once the task has completed. 
-    #               A CompletionReport provides a detailed  report on the files that Amazon FSx processed that meet the criteria specified by the 
-    #               <code>Scope</code> parameter. For more information, see 
+    #   <p>Defines whether or not Amazon FSx provides a CompletionReport once the task has completed.
+    #               A CompletionReport provides a detailed  report on the files that Amazon FSx processed that meet the criteria specified by the
+    #               <code>Scope</code> parameter. For more information, see
     #               <a href="https://docs.aws.amazon.com/fsx/latest/LustreGuide/task-completion-report.html">Working with Task Completion Reports</a>.</p>
     # @option params [String] :client_request_token
     #   <p>(Optional) An idempotency token for resource creation, in a string of up to 63
@@ -2601,7 +2652,7 @@ module Aws::FSx
 
     # <p>Creates a new Amazon File Cache resource.</p>
     #          <p>You can use this operation with a client request token in the request that
-    #             Amazon File Cache uses to ensure idempotent creation. 
+    #             Amazon File Cache uses to ensure idempotent creation.
     #             If a cache with the specified client request token exists and the parameters
     #             match, <code>CreateFileCache</code> returns the description of the existing
     #             cache. If a cache with the specified client request token exists and the
@@ -2767,7 +2818,7 @@ module Aws::FSx
       request.send_request(options)
     end
 
-    # <p>Creates a new, empty Amazon FSx file system. You can create the following supported 
+    # <p>Creates a new, empty Amazon FSx file system. You can create the following supported
     #         Amazon FSx file systems using the <code>CreateFileSystem</code> API operation:</p>
     #          <ul>
     #             <li>
@@ -2831,23 +2882,23 @@ module Aws::FSx
     #               follows:</p>
     #            <ul>
     #               <li>
-    #                  <p>For <code>SCRATCH_2</code>, <code>PERSISTENT_2</code>, and <code>PERSISTENT_1</code> deployment types 
+    #                  <p>For <code>SCRATCH_2</code>, <code>PERSISTENT_2</code>, and <code>PERSISTENT_1</code> deployment types
     #                   using SSD storage type, the valid values are 1200 GiB, 2400 GiB, and increments of 2400 GiB.</p>
     #               </li>
     #               <li>
-    #                  <p>For <code>PERSISTENT_1</code> HDD file systems, valid values are increments of 6000 GiB for 
+    #                  <p>For <code>PERSISTENT_1</code> HDD file systems, valid values are increments of 6000 GiB for
     #                   12 MB/s/TiB file systems and increments of 1800 GiB for 40 MB/s/TiB file systems.</p>
     #               </li>
     #               <li>
-    #                  <p>For <code>SCRATCH_1</code> deployment type, valid values are 
+    #                  <p>For <code>SCRATCH_1</code> deployment type, valid values are
     #                   1200 GiB, 2400 GiB, and increments of 3600 GiB.</p>
     #               </li>
     #            </ul>
     #            <p>
-    #               <b>FSx for ONTAP file systems</b> - The amount of storage capacity 
+    #               <b>FSx for ONTAP file systems</b> - The amount of storage capacity
     #               that you can configure depends on the value of the <code>HAPairs</code> property. The minimum value is calculated as 1,024 * <code>HAPairs</code> and the maximum is calculated as 524,288 * <code>HAPairs</code>. </p>
     #            <p>
-    #               <b>FSx for OpenZFS file systems</b> - The amount of storage capacity that 
+    #               <b>FSx for OpenZFS file systems</b> - The amount of storage capacity that
     #               you can configure is from 64 GiB up to 524,288 GiB (512 TiB).</p>
     #            <p>
     #               <b>FSx for Windows File Server file systems</b> - The amount
@@ -2870,7 +2921,7 @@ module Aws::FSx
     #                       Lustre, ONTAP, and OpenZFS deployment types.</p>
     #               </li>
     #               <li>
-    #                  <p>Set to <code>HDD</code> to use hard disk drive storage, which is supported on 
+    #                  <p>Set to <code>HDD</code> to use hard disk drive storage, which is supported on
     #                       <code>SINGLE_AZ_2</code> and <code>MULTI_AZ_1</code> Windows file system deployment types,
     #                   and on <code>PERSISTENT_1</code> Lustre file system deployment types.</p>
     #               </li>
@@ -2896,7 +2947,7 @@ module Aws::FSx
     #                   <i>Amazon FSx for Windows User Guide</i> and <a href="https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/high-availability-multiAZ.html">
     #                   Availability and durability</a> in the <i>Amazon FSx for ONTAP User
     #                   Guide</i>.</p>
-    #            <p>For Windows <code>SINGLE_AZ_1</code> and <code>SINGLE_AZ_2</code> and all Lustre 
+    #            <p>For Windows <code>SINGLE_AZ_1</code> and <code>SINGLE_AZ_2</code> and all Lustre
     #               deployment types, provide exactly one subnet ID.
     #              The file server is launched in that subnet's Availability Zone.</p>
     # @option params [Array<String>] :security_group_ids
@@ -2904,7 +2955,7 @@ module Aws::FSx
     #               created for file system access. This list isn't returned in later requests to
     #               describe the file system.</p>
     #            <important>
-    #               <p>You must specify a security group if you are creating a Multi-AZ 
+    #               <p>You must specify a security group if you are creating a Multi-AZ
     #               FSx for ONTAP file system in a VPC subnet that has been shared with you.</p>
     #            </important>
     # @option params [Array<Types::Tag>] :tags
@@ -2918,7 +2969,7 @@ module Aws::FSx
     #                  <p>Amazon FSx for Lustre <code>PERSISTENT_1</code>
     #                   and <code>PERSISTENT_2</code> deployment types only.</p>
     #                  <p>
-    #                     <code>SCRATCH_1</code> and <code>SCRATCH_2</code> types are encrypted using 
+    #                     <code>SCRATCH_1</code> and <code>SCRATCH_2</code> types are encrypted using
     #                       the Amazon FSx service KMS key for your account.</p>
     #               </li>
     #               <li>
@@ -2975,7 +3026,7 @@ module Aws::FSx
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>2.10</code> is supported by the Scratch and Persistent_1 Lustre 
+    #                     <code>2.10</code> is supported by the Scratch and Persistent_1 Lustre
     #                   deployment types.</p>
     #               </li>
     #               <li>
@@ -2992,11 +3043,11 @@ module Aws::FSx
     #            <p>Default value is <code>2.10</code>, except for the following deployments:</p>
     #            <ul>
     #               <li>
-    #                  <p>Default value is <code>2.12</code> when <code>DeploymentType</code> is set to 
+    #                  <p>Default value is <code>2.12</code> when <code>DeploymentType</code> is set to
     #                   <code>PERSISTENT_2</code> without a metadata configuration mode.</p>
     #               </li>
     #               <li>
-    #                  <p>Default value is <code>2.15</code> when <code>DeploymentType</code> is set to 
+    #                  <p>Default value is <code>2.15</code> when <code>DeploymentType</code> is set to
     #                   <code>PERSISTENT_2</code> with a metadata configuration mode.</p>
     #               </li>
     #            </ul>
@@ -3030,9 +3081,10 @@ module Aws::FSx
     #         domain_name: "ActiveDirectoryFullyQualifiedName", # required
     #         organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
     #         file_system_administrators_group: "FileSystemAdministratorsGroupName",
-    #         user_name: "DirectoryUserName", # required
-    #         password: "DirectoryPassword", # required
+    #         user_name: "DirectoryUserName",
+    #         password: "DirectoryPassword",
     #         dns_ips: ["IpAddress"], # required
+    #         domain_join_service_account_secret: "CustomerSecretsManagerARN"
     #       },
     #       deployment_type: "MULTI_AZ_1" # One of: ["MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2"],
     #       preferred_subnet_id: "SubnetId",
@@ -3050,6 +3102,10 @@ module Aws::FSx
     #       disk_iops_configuration: {
     #         mode: "AUTOMATIC" # One of: ["AUTOMATIC", "USER_PROVISIONED"],
     #         iops: 1
+    #       },
+    #       fsrm_configuration: {
+    #         fsrm_service_enabled: false, # required
+    #         event_log_destination: "GeneralARN"
     #       }
     #     },
     #     lustre_configuration: {
@@ -3184,7 +3240,8 @@ module Aws::FSx
     #           organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
     #           file_system_administrators_group: "FileSystemAdministratorsGroupName",
     #           user_name: "DirectoryUserName",
-    #           dns_ips: ["IpAddress"]
+    #           dns_ips: ["IpAddress"],
+    #           domain_join_service_account_secret: "CustomerSecretsManagerARN"
     #         },
     #         deployment_type: "MULTI_AZ_1" # One of: ["MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2"],
     #         remote_administration_endpoint: "DNSName",
@@ -3211,7 +3268,11 @@ module Aws::FSx
     #           mode: "AUTOMATIC" # One of: ["AUTOMATIC", "USER_PROVISIONED"],
     #           iops: 1
     #         },
-    #         preferred_file_server_ipv6: "IpAddress"
+    #         preferred_file_server_ipv6: "IpAddress",
+    #         fsrm_configuration: {
+    #           fsrm_service_enabled: false, # required
+    #           event_log_destination: "GeneralARN"
+    #         }
     #       },
     #       lustre_configuration: {
     #         weekly_maintenance_start_time: "WeeklyTime",
@@ -3500,9 +3561,9 @@ module Aws::FSx
     #               idempotent creation. This string is automatically filled on your behalf when you use the
     #                   Command Line Interface (CLI) or an Amazon Web Services SDK.</p>
     # @option params [Array<String>] :subnet_ids
-    #   <p>Specifies the IDs of the subnets that the file system will be accessible from. For Windows <code>MULTI_AZ_1</code> 
-    #               file system deployment types, provide exactly two subnet IDs, one for the preferred file server 
-    #               and one for the standby file server. You specify one of these subnets as the preferred subnet 
+    #   <p>Specifies the IDs of the subnets that the file system will be accessible from. For Windows <code>MULTI_AZ_1</code>
+    #               file system deployment types, provide exactly two subnet IDs, one for the preferred file server
+    #               and one for the standby file server. You specify one of these subnets as the preferred subnet
     #               using the <code>WindowsConfiguration > PreferredSubnetID</code> property.</p>
     #            <p>Windows <code>SINGLE_AZ_1</code> and <code>SINGLE_AZ_2</code> file system deployment
     #               types, Lustre file systems, and OpenZFS file systems provide exactly one subnet ID. The
@@ -3555,7 +3616,7 @@ module Aws::FSx
     #                       deployment types.</p>
     #               </li>
     #               <li>
-    #                  <p>Set to <code>HDD</code> to use hard disk drive storage. 
+    #                  <p>Set to <code>HDD</code> to use hard disk drive storage.
     #                       HDD is supported on <code>SINGLE_AZ_2</code> and <code>MULTI_AZ_1</code> FSx for Windows File Server file system deployment types.</p>
     #               </li>
     #               <li>
@@ -3566,9 +3627,9 @@ module Aws::FSx
     #            </ul>
     #            <p> The default value is <code>SSD</code>. </p>
     #            <note>
-    #               <p>HDD and SSD storage types have different minimum storage capacity requirements. 
-    #               A restored file system's storage capacity is tied to the file system that was backed up. 
-    #               You can create a file system that uses HDD storage from a backup of a file system that 
+    #               <p>HDD and SSD storage types have different minimum storage capacity requirements.
+    #               A restored file system's storage capacity is tied to the file system that was backed up.
+    #               You can create a file system that uses HDD storage from a backup of a file system that
     #               used SSD storage if the original SSD file system had a storage capacity of at least 2000 GiB.</p>
     #            </note>
     # @option params [String] :kms_key_id
@@ -3579,7 +3640,7 @@ module Aws::FSx
     #                  <p>Amazon FSx for Lustre <code>PERSISTENT_1</code>
     #                   and <code>PERSISTENT_2</code> deployment types only.</p>
     #                  <p>
-    #                     <code>SCRATCH_1</code> and <code>SCRATCH_2</code> types are encrypted using 
+    #                     <code>SCRATCH_1</code> and <code>SCRATCH_2</code> types are encrypted using
     #                       the Amazon FSx service KMS key for your account.</p>
     #               </li>
     #               <li>
@@ -3634,9 +3695,10 @@ module Aws::FSx
     #         domain_name: "ActiveDirectoryFullyQualifiedName", # required
     #         organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
     #         file_system_administrators_group: "FileSystemAdministratorsGroupName",
-    #         user_name: "DirectoryUserName", # required
-    #         password: "DirectoryPassword", # required
+    #         user_name: "DirectoryUserName",
+    #         password: "DirectoryPassword",
     #         dns_ips: ["IpAddress"], # required
+    #         domain_join_service_account_secret: "CustomerSecretsManagerARN"
     #       },
     #       deployment_type: "MULTI_AZ_1" # One of: ["MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2"],
     #       preferred_subnet_id: "SubnetId",
@@ -3654,6 +3716,10 @@ module Aws::FSx
     #       disk_iops_configuration: {
     #         mode: "AUTOMATIC" # One of: ["AUTOMATIC", "USER_PROVISIONED"],
     #         iops: 1
+    #       },
+    #       fsrm_configuration: {
+    #         fsrm_service_enabled: false, # required
+    #         event_log_destination: "GeneralARN"
     #       }
     #     },
     #     lustre_configuration: {
@@ -3773,7 +3839,8 @@ module Aws::FSx
     #           organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
     #           file_system_administrators_group: "FileSystemAdministratorsGroupName",
     #           user_name: "DirectoryUserName",
-    #           dns_ips: ["IpAddress"]
+    #           dns_ips: ["IpAddress"],
+    #           domain_join_service_account_secret: "CustomerSecretsManagerARN"
     #         },
     #         deployment_type: "MULTI_AZ_1" # One of: ["MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2"],
     #         remote_administration_endpoint: "DNSName",
@@ -3800,7 +3867,11 @@ module Aws::FSx
     #           mode: "AUTOMATIC" # One of: ["AUTOMATIC", "USER_PROVISIONED"],
     #           iops: 1
     #         },
-    #         preferred_file_server_ipv6: "IpAddress"
+    #         preferred_file_server_ipv6: "IpAddress",
+    #         fsrm_configuration: {
+    #           fsrm_service_enabled: false, # required
+    #           event_log_destination: "GeneralARN"
+    #         }
     #       },
     #       lustre_configuration: {
     #         weekly_maintenance_start_time: "WeeklyTime",
@@ -4156,7 +4227,8 @@ module Aws::FSx
     #                 organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
     #                 file_system_administrators_group: "FileSystemAdministratorsGroupName",
     #                 user_name: "DirectoryUserName",
-    #                 dns_ips: ["IpAddress"]
+    #                 dns_ips: ["IpAddress"],
+    #                 domain_join_service_account_secret: "CustomerSecretsManagerARN"
     #               },
     #               deployment_type: "MULTI_AZ_1" # One of: ["MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2"],
     #               remote_administration_endpoint: "DNSName",
@@ -4183,7 +4255,11 @@ module Aws::FSx
     #                 mode: "AUTOMATIC" # One of: ["AUTOMATIC", "USER_PROVISIONED"],
     #                 iops: 1
     #               },
-    #               preferred_file_server_ipv6: "IpAddress"
+    #               preferred_file_server_ipv6: "IpAddress",
+    #               fsrm_configuration: {
+    #                 fsrm_service_enabled: false, # required
+    #                 event_log_destination: "GeneralARN"
+    #               }
     #             },
     #             lustre_configuration: {
     #               weekly_maintenance_start_time: "WeeklyTime",
@@ -4412,8 +4488,8 @@ module Aws::FSx
     # <p>Creates a storage virtual machine (SVM) for an Amazon FSx for ONTAP file system.</p>
     # @param [Hash, Types::CreateStorageVirtualMachineRequest] params
     # @option params [Types::CreateSvmActiveDirectoryConfiguration] :active_directory_configuration
-    #   <p>Describes the self-managed Microsoft Active Directory to which you want to join the SVM. 
-    #         Joining an Active Directory provides user authentication and access control for SMB clients, 
+    #   <p>Describes the self-managed Microsoft Active Directory to which you want to join the SVM.
+    #         Joining an Active Directory provides user authentication and access control for SMB clients,
     #         including Microsoft Windows and macOS clients accessing the file system.</p>
     # @option params [String] :client_request_token
     #   <p>(Optional) An idempotency token for resource creation, in a string of up to 63
@@ -4446,7 +4522,7 @@ module Aws::FSx
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>MIXED</code> This is an advanced setting. For more information, see 
+    #                     <code>MIXED</code> This is an advanced setting. For more information, see
     #                   <a href="https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/volume-security-style.html">Volume security style</a>
     #                   in the Amazon FSx for NetApp ONTAP User Guide.</p>
     #               </li>
@@ -4460,9 +4536,10 @@ module Aws::FSx
     #         domain_name: "ActiveDirectoryFullyQualifiedName", # required
     #         organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
     #         file_system_administrators_group: "FileSystemAdministratorsGroupName",
-    #         user_name: "DirectoryUserName", # required
-    #         password: "DirectoryPassword", # required
+    #         user_name: "DirectoryUserName",
+    #         password: "DirectoryPassword",
     #         dns_ips: ["IpAddress"], # required
+    #         domain_join_service_account_secret: "CustomerSecretsManagerARN"
     #       }
     #     },
     #     client_request_token: "ClientRequestToken",
@@ -4490,7 +4567,8 @@ module Aws::FSx
     #           organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
     #           file_system_administrators_group: "FileSystemAdministratorsGroupName",
     #           user_name: "DirectoryUserName",
-    #           dns_ips: ["IpAddress"]
+    #           dns_ips: ["IpAddress"],
+    #           domain_join_service_account_secret: "CustomerSecretsManagerARN"
     #         }
     #       },
     #       creation_time: Time.now,
@@ -4749,7 +4827,8 @@ module Aws::FSx
     #                 organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
     #                 file_system_administrators_group: "FileSystemAdministratorsGroupName",
     #                 user_name: "DirectoryUserName",
-    #                 dns_ips: ["IpAddress"]
+    #                 dns_ips: ["IpAddress"],
+    #                 domain_join_service_account_secret: "CustomerSecretsManagerARN"
     #               },
     #               deployment_type: "MULTI_AZ_1" # One of: ["MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2"],
     #               remote_administration_endpoint: "DNSName",
@@ -4776,7 +4855,11 @@ module Aws::FSx
     #                 mode: "AUTOMATIC" # One of: ["AUTOMATIC", "USER_PROVISIONED"],
     #                 iops: 1
     #               },
-    #               preferred_file_server_ipv6: "IpAddress"
+    #               preferred_file_server_ipv6: "IpAddress",
+    #               fsrm_configuration: {
+    #                 fsrm_service_enabled: false, # required
+    #                 event_log_destination: "GeneralARN"
+    #               }
     #             },
     #             lustre_configuration: {
     #               weekly_maintenance_start_time: "WeeklyTime",
@@ -5130,7 +5213,8 @@ module Aws::FSx
     #                 organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
     #                 file_system_administrators_group: "FileSystemAdministratorsGroupName",
     #                 user_name: "DirectoryUserName",
-    #                 dns_ips: ["IpAddress"]
+    #                 dns_ips: ["IpAddress"],
+    #                 domain_join_service_account_secret: "CustomerSecretsManagerARN"
     #               },
     #               deployment_type: "MULTI_AZ_1" # One of: ["MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2"],
     #               remote_administration_endpoint: "DNSName",
@@ -5157,7 +5241,11 @@ module Aws::FSx
     #                 mode: "AUTOMATIC" # One of: ["AUTOMATIC", "USER_PROVISIONED"],
     #                 iops: 1
     #               },
-    #               preferred_file_server_ipv6: "IpAddress"
+    #               preferred_file_server_ipv6: "IpAddress",
+    #               fsrm_configuration: {
+    #                 fsrm_service_enabled: false, # required
+    #                 event_log_destination: "GeneralARN"
+    #               }
     #             },
     #             lustre_configuration: {
     #               weekly_maintenance_start_time: "WeeklyTime",
@@ -5462,16 +5550,16 @@ module Aws::FSx
     #          <p>To delete an Amazon FSx for NetApp ONTAP file system, first delete all the
     #             volumes and storage virtual machines (SVMs) on the file system. Then provide a
     #                 <code>FileSystemId</code> value to the <code>DeleteFileSystem</code> operation.</p>
-    #          <p>Before deleting an Amazon FSx for OpenZFS file system, make sure that there aren't 
-    #         any Amazon S3 access points attached to any volume. For more information on how to list S3 
-    #         access points that are attached to volumes, see 
-    #             <a href="https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/access-points-list.html">Listing S3 access point attachments</a>. 
-    #         For more information on how to delete S3 access points, see 
+    #          <p>Before deleting an Amazon FSx for OpenZFS file system, make sure that there aren't
+    #         any Amazon S3 access points attached to any volume. For more information on how to list S3
+    #         access points that are attached to volumes, see
+    #             <a href="https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/access-points-list.html">Listing S3 access point attachments</a>.
+    #         For more information on how to delete S3 access points, see
     #             <a href="https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/delete-access-point.html">Deleting an S3 access point attachment</a>.</p>
     #          <p>By default, when you delete an Amazon FSx for Windows File Server file system,
     #             a final backup is created upon deletion. This final backup isn't subject to the file
     #             system's retention policy, and must be manually deleted.</p>
-    #          <p>To delete an Amazon FSx for Lustre file system, first 
+    #          <p>To delete an Amazon FSx for Lustre file system, first
     #             <a href="https://docs.aws.amazon.com/fsx/latest/LustreGuide/unmounting-fs.html">unmount</a>
     #             it from every connected Amazon EC2 instance, then provide a <code>FileSystemId</code>
     #             value to the <code>DeleteFileSystem</code> operation. By default, Amazon FSx will not
@@ -5633,7 +5721,7 @@ module Aws::FSx
       request.send_request(options)
     end
 
-    # <p>Deletes an existing Amazon FSx for ONTAP storage virtual machine (SVM). Prior 
+    # <p>Deletes an existing Amazon FSx for ONTAP storage virtual machine (SVM). Prior
     #         to deleting an SVM, you must delete all non-root volumes in the SVM, otherwise the operation will fail.</p>
     # @param [Hash, Types::DeleteStorageVirtualMachineRequest] params
     # @option params [String] :client_request_token
@@ -5826,7 +5914,8 @@ module Aws::FSx
     #               organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
     #               file_system_administrators_group: "FileSystemAdministratorsGroupName",
     #               user_name: "DirectoryUserName",
-    #               dns_ips: ["IpAddress"]
+    #               dns_ips: ["IpAddress"],
+    #               domain_join_service_account_secret: "CustomerSecretsManagerARN"
     #             },
     #             deployment_type: "MULTI_AZ_1" # One of: ["MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2"],
     #             remote_administration_endpoint: "DNSName",
@@ -5853,7 +5942,11 @@ module Aws::FSx
     #               mode: "AUTOMATIC" # One of: ["AUTOMATIC", "USER_PROVISIONED"],
     #               iops: 1
     #             },
-    #             preferred_file_server_ipv6: "IpAddress"
+    #             preferred_file_server_ipv6: "IpAddress",
+    #             fsrm_configuration: {
+    #               fsrm_service_enabled: false, # required
+    #               event_log_destination: "GeneralARN"
+    #             }
     #           },
     #           lustre_configuration: {
     #             weekly_maintenance_start_time: "WeeklyTime",
@@ -6203,7 +6296,8 @@ module Aws::FSx
     #                     organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
     #                     file_system_administrators_group: "FileSystemAdministratorsGroupName",
     #                     user_name: "DirectoryUserName",
-    #                     dns_ips: ["IpAddress"]
+    #                     dns_ips: ["IpAddress"],
+    #                     domain_join_service_account_secret: "CustomerSecretsManagerARN"
     #                   },
     #                   deployment_type: "MULTI_AZ_1" # One of: ["MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2"],
     #                   remote_administration_endpoint: "DNSName",
@@ -6230,7 +6324,11 @@ module Aws::FSx
     #                     mode: "AUTOMATIC" # One of: ["AUTOMATIC", "USER_PROVISIONED"],
     #                     iops: 1
     #                   },
-    #                   preferred_file_server_ipv6: "IpAddress"
+    #                   preferred_file_server_ipv6: "IpAddress",
+    #                   fsrm_configuration: {
+    #                     fsrm_service_enabled: false, # required
+    #                     event_log_destination: "GeneralARN"
+    #                   }
     #                 },
     #                 lustre_configuration: {
     #                   weekly_maintenance_start_time: "WeeklyTime",
@@ -6510,9 +6608,9 @@ module Aws::FSx
     end
 
     # <p>Returns the description of specific Amazon FSx for Lustre or Amazon File Cache data repository tasks, if
-    #             one or more <code>TaskIds</code> values are provided in the request, or if filters are used in the request. 
-    #             You can use filters to narrow the response to include just tasks for specific file systems or caches, 
-    #             or tasks in a specific lifecycle state. Otherwise, it returns all data repository tasks owned 
+    #             one or more <code>TaskIds</code> values are provided in the request, or if filters are used in the request.
+    #             You can use filters to narrow the response to include just tasks for specific file systems or caches,
+    #             or tasks in a specific lifecycle state. Otherwise, it returns all data repository tasks owned
     #             by your Amazon Web Services account in the Amazon Web Services Region of the endpoint that you're calling.</p>
     #          <p>When retrieving all tasks, you can paginate the response by using  the optional <code>MaxResults</code>
     #             parameter to limit the number of tasks returned in a response. If more tasks remain,
@@ -6524,7 +6622,7 @@ module Aws::FSx
     #   <p>(Optional) IDs of the tasks whose descriptions you want to retrieve
     #               (String).</p>
     # @option params [Array<Types::DataRepositoryTaskFilter>] :filters
-    #   <p>(Optional) You can use filters to narrow the <code>DescribeDataRepositoryTasks</code> response to 
+    #   <p>(Optional) You can use filters to narrow the <code>DescribeDataRepositoryTasks</code> response to
     #               include just tasks for specific file systems, or tasks in a specific lifecycle state.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of resources to return in the response. This value must be an
@@ -6692,8 +6790,8 @@ module Aws::FSx
       request.send_request(options)
     end
 
-    # <p>Returns the DNS aliases that are associated with the specified Amazon FSx for Windows File Server file system. A history of 
-    #             all DNS aliases that have been associated with and disassociated from the file system is available in the list of <a>AdministrativeAction</a> 
+    # <p>Returns the DNS aliases that are associated with the specified Amazon FSx for Windows File Server file system. A history of
+    #             all DNS aliases that have been associated with and disassociated from the file system is available in the list of <a>AdministrativeAction</a>
     #         provided in the <a>DescribeFileSystems</a> operation response.</p>
     # @param [Hash, Types::DescribeFileSystemAliasesRequest] params
     # @option params [String] :client_request_token
@@ -6821,7 +6919,8 @@ module Aws::FSx
     #             organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
     #             file_system_administrators_group: "FileSystemAdministratorsGroupName",
     #             user_name: "DirectoryUserName",
-    #             dns_ips: ["IpAddress"]
+    #             dns_ips: ["IpAddress"],
+    #             domain_join_service_account_secret: "CustomerSecretsManagerARN"
     #           },
     #           deployment_type: "MULTI_AZ_1" # One of: ["MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2"],
     #           remote_administration_endpoint: "DNSName",
@@ -6848,7 +6947,11 @@ module Aws::FSx
     #             mode: "AUTOMATIC" # One of: ["AUTOMATIC", "USER_PROVISIONED"],
     #             iops: 1
     #           },
-    #           preferred_file_server_ipv6: "IpAddress"
+    #           preferred_file_server_ipv6: "IpAddress",
+    #           fsrm_configuration: {
+    #             fsrm_service_enabled: false, # required
+    #             event_log_destination: "GeneralARN"
+    #           }
     #         },
     #         lustre_configuration: {
     #           weekly_maintenance_start_time: "WeeklyTime",
@@ -7138,13 +7241,13 @@ module Aws::FSx
     #   {
     #     s3_access_point_attachments: [
     #       {
-    #         lifecycle: "AVAILABLE" # One of: ["AVAILABLE", "CREATING", "DELETING", "UPDATING", "FAILED"],
+    #         lifecycle: "AVAILABLE" # One of: ["AVAILABLE", "CREATING", "DELETING", "UPDATING", "FAILED", "MISCONFIGURED"],
     #         lifecycle_transition_reason: {
     #           message: "ErrorMessage"
     #         },
     #         creation_time: Time.now,
     #         name: "S3AccessPointAttachmentName",
-    #         type: "OPENZFS" # One of: ["OPENZFS"],
+    #         type: "OPENZFS" # One of: ["OPENZFS", "ONTAP"],
     #         open_zfs_configuration: {
     #           volume_id: "VolumeId",
     #           file_system_identity: {
@@ -7153,6 +7256,18 @@ module Aws::FSx
     #               uid: 1, # required
     #               gid: 1, # required
     #               secondary_gids: [1]
+    #             }
+    #           }
+    #         },
+    #         ontap_configuration: {
+    #           volume_id: "VolumeId",
+    #           file_system_identity: {
+    #             type: "UNIX" # One of: ["UNIX", "WINDOWS"], # required
+    #             unix_user: {
+    #               name: "OntapFileSystemUserName", # required
+    #             },
+    #             windows_user: {
+    #               name: "OntapFileSystemUserName", # required
     #             }
     #           }
     #         },
@@ -7307,7 +7422,8 @@ module Aws::FSx
     #                   organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
     #                   file_system_administrators_group: "FileSystemAdministratorsGroupName",
     #                   user_name: "DirectoryUserName",
-    #                   dns_ips: ["IpAddress"]
+    #                   dns_ips: ["IpAddress"],
+    #                   domain_join_service_account_secret: "CustomerSecretsManagerARN"
     #                 },
     #                 deployment_type: "MULTI_AZ_1" # One of: ["MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2"],
     #                 remote_administration_endpoint: "DNSName",
@@ -7334,7 +7450,11 @@ module Aws::FSx
     #                   mode: "AUTOMATIC" # One of: ["AUTOMATIC", "USER_PROVISIONED"],
     #                   iops: 1
     #                 },
-    #                 preferred_file_server_ipv6: "IpAddress"
+    #                 preferred_file_server_ipv6: "IpAddress",
+    #                 fsrm_configuration: {
+    #                   fsrm_service_enabled: false, # required
+    #                   event_log_destination: "GeneralARN"
+    #                 }
     #               },
     #               lustre_configuration: {
     #                 weekly_maintenance_start_time: "WeeklyTime",
@@ -7601,7 +7721,8 @@ module Aws::FSx
     #             organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
     #             file_system_administrators_group: "FileSystemAdministratorsGroupName",
     #             user_name: "DirectoryUserName",
-    #             dns_ips: ["IpAddress"]
+    #             dns_ips: ["IpAddress"],
+    #             domain_join_service_account_secret: "CustomerSecretsManagerARN"
     #           }
     #         },
     #         creation_time: Time.now,
@@ -7787,7 +7908,8 @@ module Aws::FSx
     #                   organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
     #                   file_system_administrators_group: "FileSystemAdministratorsGroupName",
     #                   user_name: "DirectoryUserName",
-    #                   dns_ips: ["IpAddress"]
+    #                   dns_ips: ["IpAddress"],
+    #                   domain_join_service_account_secret: "CustomerSecretsManagerARN"
     #                 },
     #                 deployment_type: "MULTI_AZ_1" # One of: ["MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2"],
     #                 remote_administration_endpoint: "DNSName",
@@ -7814,7 +7936,11 @@ module Aws::FSx
     #                   mode: "AUTOMATIC" # One of: ["AUTOMATIC", "USER_PROVISIONED"],
     #                   iops: 1
     #                 },
-    #                 preferred_file_server_ipv6: "IpAddress"
+    #                 preferred_file_server_ipv6: "IpAddress",
+    #                 fsrm_configuration: {
+    #                   fsrm_service_enabled: false, # required
+    #                   event_log_destination: "GeneralARN"
+    #                 }
     #               },
     #               lustre_configuration: {
     #                 weekly_maintenance_start_time: "WeeklyTime",
@@ -8025,7 +8151,7 @@ module Aws::FSx
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {
-    #     lifecycle: "AVAILABLE" # One of: ["AVAILABLE", "CREATING", "DELETING", "UPDATING", "FAILED"],
+    #     lifecycle: "AVAILABLE" # One of: ["AVAILABLE", "CREATING", "DELETING", "UPDATING", "FAILED", "MISCONFIGURED"],
     #     name: "S3AccessPointAttachmentName"
     #   }
     # @return [Types::DetachAndDeleteS3AccessPointResponse]
@@ -8034,14 +8160,14 @@ module Aws::FSx
       request.send_request(options)
     end
 
-    # <p>Use this action to disassociate, or remove, one or more Domain Name Service (DNS) aliases 
-    #             from an Amazon FSx for Windows File Server file system. If you attempt to disassociate a DNS alias that is not 
-    #             associated with the file system, Amazon FSx responds with an HTTP status code 400 (Bad Request). For more information, see 
+    # <p>Use this action to disassociate, or remove, one or more Domain Name Service (DNS) aliases
+    #             from an Amazon FSx for Windows File Server file system. If you attempt to disassociate a DNS alias that is not
+    #             associated with the file system, Amazon FSx responds with an HTTP status code 400 (Bad Request). For more information, see
     #             <a href="https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-dns-aliases.html">Working with DNS Aliases</a>.</p>
-    #          <p>The system generated response showing the DNS aliases that 
-    #             Amazon FSx is attempting to disassociate from the file system. 
-    #             Use the  API 
-    #             operation to monitor the status of the aliases Amazon FSx is 
+    #          <p>The system generated response showing the DNS aliases that
+    #             Amazon FSx is attempting to disassociate from the file system.
+    #             Use the  API
+    #             operation to monitor the status of the aliases Amazon FSx is
     #             disassociating with the file system.</p>
     # @param [Hash, Types::DisassociateFileSystemAliasesRequest] params
     # @option params [String] :client_request_token
@@ -8202,7 +8328,8 @@ module Aws::FSx
     #           organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
     #           file_system_administrators_group: "FileSystemAdministratorsGroupName",
     #           user_name: "DirectoryUserName",
-    #           dns_ips: ["IpAddress"]
+    #           dns_ips: ["IpAddress"],
+    #           domain_join_service_account_secret: "CustomerSecretsManagerARN"
     #         },
     #         deployment_type: "MULTI_AZ_1" # One of: ["MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2"],
     #         remote_administration_endpoint: "DNSName",
@@ -8229,7 +8356,11 @@ module Aws::FSx
     #           mode: "AUTOMATIC" # One of: ["AUTOMATIC", "USER_PROVISIONED"],
     #           iops: 1
     #         },
-    #         preferred_file_server_ipv6: "IpAddress"
+    #         preferred_file_server_ipv6: "IpAddress",
+    #         fsrm_configuration: {
+    #           fsrm_service_enabled: false, # required
+    #           event_log_destination: "GeneralARN"
+    #         }
     #       },
     #       lustre_configuration: {
     #         weekly_maintenance_start_time: "WeeklyTime",
@@ -8500,8 +8631,8 @@ module Aws::FSx
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>DELETE_CLONED_VOLUMES</code> - Deletes any dependent clone volumes 
-    #                       created from intermediate snapshots. If there are any dependent clone volumes and this 
+    #                     <code>DELETE_CLONED_VOLUMES</code> - Deletes any dependent clone volumes
+    #                       created from intermediate snapshots. If there are any dependent clone volumes and this
     #                       option isn't used, <code>RestoreVolumeFromSnapshot</code> fails.</p>
     #               </li>
     #            </ul>
@@ -8555,7 +8686,8 @@ module Aws::FSx
     #               organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
     #               file_system_administrators_group: "FileSystemAdministratorsGroupName",
     #               user_name: "DirectoryUserName",
-    #               dns_ips: ["IpAddress"]
+    #               dns_ips: ["IpAddress"],
+    #               domain_join_service_account_secret: "CustomerSecretsManagerARN"
     #             },
     #             deployment_type: "MULTI_AZ_1" # One of: ["MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2"],
     #             remote_administration_endpoint: "DNSName",
@@ -8582,7 +8714,11 @@ module Aws::FSx
     #               mode: "AUTOMATIC" # One of: ["AUTOMATIC", "USER_PROVISIONED"],
     #               iops: 1
     #             },
-    #             preferred_file_server_ipv6: "IpAddress"
+    #             preferred_file_server_ipv6: "IpAddress",
+    #             fsrm_configuration: {
+    #               fsrm_service_enabled: false, # required
+    #               event_log_destination: "GeneralARN"
+    #             }
     #           },
     #           lustre_configuration: {
     #             weekly_maintenance_start_time: "WeeklyTime",
@@ -8824,7 +8960,7 @@ module Aws::FSx
       request.send_request(options)
     end
 
-    # <p>After performing steps to repair the Active Directory configuration of an FSx for Windows File Server file system, use this action to 
+    # <p>After performing steps to repair the Active Directory configuration of an FSx for Windows File Server file system, use this action to
     #       initiate the process of Amazon FSx attempting to reconnect to the file system.</p>
     # @param [Hash, Types::StartMisconfiguredStateRecoveryRequest] params
     # @option params [String] :client_request_token
@@ -8873,7 +9009,8 @@ module Aws::FSx
     #           organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
     #           file_system_administrators_group: "FileSystemAdministratorsGroupName",
     #           user_name: "DirectoryUserName",
-    #           dns_ips: ["IpAddress"]
+    #           dns_ips: ["IpAddress"],
+    #           domain_join_service_account_secret: "CustomerSecretsManagerARN"
     #         },
     #         deployment_type: "MULTI_AZ_1" # One of: ["MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2"],
     #         remote_administration_endpoint: "DNSName",
@@ -8900,7 +9037,11 @@ module Aws::FSx
     #           mode: "AUTOMATIC" # One of: ["AUTOMATIC", "USER_PROVISIONED"],
     #           iops: 1
     #         },
-    #         preferred_file_server_ipv6: "IpAddress"
+    #         preferred_file_server_ipv6: "IpAddress",
+    #         fsrm_configuration: {
+    #           fsrm_service_enabled: false, # required
+    #           event_log_destination: "GeneralARN"
+    #         }
     #       },
     #       lustre_configuration: {
     #         weekly_maintenance_start_time: "WeeklyTime",
@@ -9706,7 +9847,8 @@ module Aws::FSx
     #         dns_ips: ["IpAddress"],
     #         domain_name: "ActiveDirectoryFullyQualifiedName",
     #         organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
-    #         file_system_administrators_group: "FileSystemAdministratorsGroupName"
+    #         file_system_administrators_group: "FileSystemAdministratorsGroupName",
+    #         domain_join_service_account_secret: "CustomerSecretsManagerARN"
     #       },
     #       audit_log_configuration: {
     #         file_access_audit_log_level: "DISABLED" # One of: ["DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"], # required
@@ -9716,6 +9858,10 @@ module Aws::FSx
     #       disk_iops_configuration: {
     #         mode: "AUTOMATIC" # One of: ["AUTOMATIC", "USER_PROVISIONED"],
     #         iops: 1
+    #       },
+    #       fsrm_configuration: {
+    #         fsrm_service_enabled: false, # required
+    #         event_log_destination: "GeneralARN"
     #       }
     #     },
     #     lustre_configuration: {
@@ -9817,7 +9963,8 @@ module Aws::FSx
     #           organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
     #           file_system_administrators_group: "FileSystemAdministratorsGroupName",
     #           user_name: "DirectoryUserName",
-    #           dns_ips: ["IpAddress"]
+    #           dns_ips: ["IpAddress"],
+    #           domain_join_service_account_secret: "CustomerSecretsManagerARN"
     #         },
     #         deployment_type: "MULTI_AZ_1" # One of: ["MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2"],
     #         remote_administration_endpoint: "DNSName",
@@ -9844,7 +9991,11 @@ module Aws::FSx
     #           mode: "AUTOMATIC" # One of: ["AUTOMATIC", "USER_PROVISIONED"],
     #           iops: 1
     #         },
-    #         preferred_file_server_ipv6: "IpAddress"
+    #         preferred_file_server_ipv6: "IpAddress",
+    #         fsrm_configuration: {
+    #           fsrm_service_enabled: false, # required
+    #           event_log_destination: "GeneralARN"
+    #         }
     #       },
     #       lustre_configuration: {
     #         weekly_maintenance_start_time: "WeeklyTime",
@@ -10203,7 +10354,8 @@ module Aws::FSx
     #                 organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
     #                 file_system_administrators_group: "FileSystemAdministratorsGroupName",
     #                 user_name: "DirectoryUserName",
-    #                 dns_ips: ["IpAddress"]
+    #                 dns_ips: ["IpAddress"],
+    #                 domain_join_service_account_secret: "CustomerSecretsManagerARN"
     #               },
     #               deployment_type: "MULTI_AZ_1" # One of: ["MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2"],
     #               remote_administration_endpoint: "DNSName",
@@ -10230,7 +10382,11 @@ module Aws::FSx
     #                 mode: "AUTOMATIC" # One of: ["AUTOMATIC", "USER_PROVISIONED"],
     #                 iops: 1
     #               },
-    #               preferred_file_server_ipv6: "IpAddress"
+    #               preferred_file_server_ipv6: "IpAddress",
+    #               fsrm_configuration: {
+    #                 fsrm_service_enabled: false, # required
+    #                 event_log_destination: "GeneralARN"
+    #               }
     #             },
     #             lustre_configuration: {
     #               weekly_maintenance_start_time: "WeeklyTime",
@@ -10477,7 +10633,8 @@ module Aws::FSx
     #         dns_ips: ["IpAddress"],
     #         domain_name: "ActiveDirectoryFullyQualifiedName",
     #         organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
-    #         file_system_administrators_group: "FileSystemAdministratorsGroupName"
+    #         file_system_administrators_group: "FileSystemAdministratorsGroupName",
+    #         domain_join_service_account_secret: "CustomerSecretsManagerARN"
     #       },
     #       net_bios_name: "NetBiosAlias"
     #     },
@@ -10498,7 +10655,8 @@ module Aws::FSx
     #           organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
     #           file_system_administrators_group: "FileSystemAdministratorsGroupName",
     #           user_name: "DirectoryUserName",
-    #           dns_ips: ["IpAddress"]
+    #           dns_ips: ["IpAddress"],
+    #           domain_join_service_account_secret: "CustomerSecretsManagerARN"
     #         }
     #       },
     #       creation_time: Time.now,
@@ -10737,7 +10895,8 @@ module Aws::FSx
     #                 organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
     #                 file_system_administrators_group: "FileSystemAdministratorsGroupName",
     #                 user_name: "DirectoryUserName",
-    #                 dns_ips: ["IpAddress"]
+    #                 dns_ips: ["IpAddress"],
+    #                 domain_join_service_account_secret: "CustomerSecretsManagerARN"
     #               },
     #               deployment_type: "MULTI_AZ_1" # One of: ["MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2"],
     #               remote_administration_endpoint: "DNSName",
@@ -10764,7 +10923,11 @@ module Aws::FSx
     #                 mode: "AUTOMATIC" # One of: ["AUTOMATIC", "USER_PROVISIONED"],
     #                 iops: 1
     #               },
-    #               preferred_file_server_ipv6: "IpAddress"
+    #               preferred_file_server_ipv6: "IpAddress",
+    #               fsrm_configuration: {
+    #                 fsrm_service_enabled: false, # required
+    #                 event_log_destination: "GeneralARN"
+    #               }
     #             },
     #             lustre_configuration: {
     #               weekly_maintenance_start_time: "WeeklyTime",

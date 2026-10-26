@@ -98,6 +98,10 @@ module Aws::CloudFormation
       attr_accessor arn: String?
     end
 
+    module AfterValueFrom
+      TEMPLATE: String
+    end
+
     class AlreadyExistsException
       include Smithy::Schema::Structure
 
@@ -109,10 +113,46 @@ module Aws::CloudFormation
       attr_accessor message: String?
     end
 
+    class Annotation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?annotation_name: String,
+        ?status: String,
+        ?status_message: String,
+        ?remediation_message: String,
+        ?remediation_link: String,
+        ?severity_level: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor annotation_name: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor remediation_message: String?
+      attr_accessor remediation_link: String?
+      attr_accessor severity_level: String?
+    end
+
+    module AnnotationSeverityLevel
+      INFORMATIONAL: String
+      LOW: String
+      MEDIUM: String
+      HIGH: String
+      CRITICAL: String
+    end
+
+    module AnnotationStatus
+      PASSED: String
+      FAILED: String
+      SKIPPED: String
+    end
+
     module AttributeChangeType
       Add: String
       Remove: String
       Modify: String
+      SyncWithActual: String
     end
 
     class AutoDeployment
@@ -121,11 +161,13 @@ module Aws::CloudFormation
       def initialize: (
         ?enabled: bool,
         ?retain_stacks_on_account_removal: bool,
+        ?depends_on: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor enabled: bool?
       attr_accessor retain_stacks_on_account_removal: bool?
+      attr_accessor depends_on: Array[String]?
     end
 
     class BatchDescribeTypeConfigurationsError
@@ -167,6 +209,17 @@ module Aws::CloudFormation
       attr_accessor errors: Array[Types::BatchDescribeTypeConfigurationsError]?
       attr_accessor unprocessed_type_configurations: Array[Types::TypeConfigurationIdentifier]?
       attr_accessor type_configurations: Array[Types::TypeConfigurationDetails]?
+    end
+
+    module BeaconStackOperationStatus
+      IN_PROGRESS: String
+      SUCCEEDED: String
+      FAILED: String
+    end
+
+    module BeforeValueFrom
+      PREVIOUS_DEPLOYMENT_STATE: String
+      ACTUAL_STATE: String
     end
 
     class CFNRegistryException
@@ -232,6 +285,7 @@ module Aws::CloudFormation
       Remove: String
       Import: String
       Dynamic: String
+      SyncWithActual: String
     end
 
     class ChangeSetHook
@@ -358,6 +412,7 @@ module Aws::CloudFormation
       ResourceAttribute: String
       DirectModification: String
       Automatic: String
+      NoModification: String
     end
 
     module ChangeType
@@ -388,6 +443,7 @@ module Aws::CloudFormation
         ?role_arn: String,
         ?resources_to_skip: Array[String],
         ?client_request_token: String,
+        ?force_rollback: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -395,6 +451,7 @@ module Aws::CloudFormation
       attr_accessor role_arn: String?
       attr_accessor resources_to_skip: Array[String]?
       attr_accessor client_request_token: String?
+      attr_accessor force_rollback: bool?
     end
 
     class ContinueUpdateRollbackOutput
@@ -429,6 +486,9 @@ module Aws::CloudFormation
         ?include_nested_stacks: bool,
         ?on_stack_failure: String,
         ?import_existing_resources: bool,
+        ?deployment_mode: String,
+        ?deployment_config: Types::DeploymentConfig,
+        ?disable_validation: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -451,6 +511,9 @@ module Aws::CloudFormation
       attr_accessor include_nested_stacks: bool?
       attr_accessor on_stack_failure: String?
       attr_accessor import_existing_resources: bool?
+      attr_accessor deployment_mode: String?
+      attr_accessor deployment_config: Types::DeploymentConfig?
+      attr_accessor disable_validation: bool?
     end
 
     class CreateChangeSetOutput
@@ -516,6 +579,8 @@ module Aws::CloudFormation
         ?client_request_token: String,
         ?enable_termination_protection: bool,
         ?retain_except_on_create: bool,
+        ?deployment_config: Types::DeploymentConfig,
+        ?disable_validation: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -537,6 +602,8 @@ module Aws::CloudFormation
       attr_accessor client_request_token: String?
       attr_accessor enable_termination_protection: bool?
       attr_accessor retain_except_on_create: bool?
+      attr_accessor deployment_config: Types::DeploymentConfig?
+      attr_accessor disable_validation: bool?
     end
 
     class CreateStackInstancesInput
@@ -580,10 +647,12 @@ module Aws::CloudFormation
 
       def initialize: (
         ?stack_id: String,
+        ?operation_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor stack_id: String?
+      attr_accessor operation_id: String?
     end
 
     class CreateStackRefactorInput
@@ -759,6 +828,7 @@ module Aws::CloudFormation
         ?role_arn: String,
         ?client_request_token: String,
         ?deletion_mode: String,
+        ?deployment_config: Types::DeploymentConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -767,6 +837,7 @@ module Aws::CloudFormation
       attr_accessor role_arn: String?
       attr_accessor client_request_token: String?
       attr_accessor deletion_mode: String?
+      attr_accessor deployment_config: Types::DeploymentConfig?
     end
 
     class DeleteStackInstancesInput
@@ -830,6 +901,28 @@ module Aws::CloudFormation
     module DeletionMode
       STANDARD: String
       FORCE_DELETE_STACK: String
+    end
+
+    class DeploymentConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mode: String,
+        ?disable_rollback: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mode: String?
+      attr_accessor disable_rollback: bool?
+    end
+
+    module DeploymentConfigMode
+      STANDARD: String
+      EXPRESS: String
+    end
+
+    module DeploymentMode
+      REVERT_DRIFT: String
     end
 
     class DeploymentTargets
@@ -975,6 +1068,7 @@ module Aws::CloudFormation
         ?execution_status: String,
         ?status: String,
         ?status_reason: String,
+        ?stack_drift_status: String,
         ?notification_ar_ns: Array[String],
         ?rollback_configuration: Types::RollbackConfiguration,
         ?capabilities: Array[String],
@@ -986,6 +1080,8 @@ module Aws::CloudFormation
         ?root_change_set_id: String,
         ?on_stack_failure: String,
         ?import_existing_resources: bool,
+        ?deployment_mode: String,
+        ?deployment_config: Types::DeploymentConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -999,6 +1095,7 @@ module Aws::CloudFormation
       attr_accessor execution_status: String?
       attr_accessor status: String?
       attr_accessor status_reason: String?
+      attr_accessor stack_drift_status: String?
       attr_accessor notification_ar_ns: Array[String]?
       attr_accessor rollback_configuration: Types::RollbackConfiguration?
       attr_accessor capabilities: Array[String]?
@@ -1010,6 +1107,40 @@ module Aws::CloudFormation
       attr_accessor root_change_set_id: String?
       attr_accessor on_stack_failure: String?
       attr_accessor import_existing_resources: bool?
+      attr_accessor deployment_mode: String?
+      attr_accessor deployment_config: Types::DeploymentConfig?
+    end
+
+    class DescribeEventsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stack_name: String,
+        ?change_set_name: String,
+        ?operation_id: String,
+        ?filters: Types::EventFilter,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stack_name: String?
+      attr_accessor change_set_name: String?
+      attr_accessor operation_id: String?
+      attr_accessor filters: Types::EventFilter?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeEventsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_events: Array[Types::OperationEvent],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_events: Array[Types::OperationEvent]?
+      attr_accessor next_token: String?
     end
 
     class DescribeGeneratedTemplateInput
@@ -1621,6 +1752,12 @@ module Aws::CloudFormation
       NOT_EQUAL: String
     end
 
+    module DriftIgnoredReason
+      MANAGED_BY_AWS: String
+      WRITE_ONLY_PROPERTY: String
+      SENSITIVE_PROPERTY: String
+    end
+
     class EstimateTemplateCostInput
       include Smithy::Schema::Structure
 
@@ -1650,6 +1787,25 @@ module Aws::CloudFormation
     module EvaluationType
       Static: String
       Dynamic: String
+    end
+
+    class EventFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?failed_events: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor failed_events: bool?
+    end
+
+    module EventType
+      STACK_EVENT: String
+      PROGRESS_EVENT: String
+      VALIDATION_ERROR: String
+      PROVISIONING_ERROR: String
+      HOOK_INVOCATION_ERROR: String
     end
 
     class ExecuteChangeSetInput
@@ -1778,6 +1934,52 @@ module Aws::CloudFormation
 
       attr_accessor status: String?
       attr_accessor template_body: String?
+    end
+
+    class GetHookResultInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hook_result_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hook_result_id: String?
+    end
+
+    class GetHookResultOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hook_result_id: String,
+        ?invocation_point: String,
+        ?failure_mode: String,
+        ?type_name: String,
+        ?original_type_name: String,
+        ?type_version_id: String,
+        ?type_configuration_version_id: String,
+        ?type_arn: String,
+        ?status: String,
+        ?hook_status_reason: String,
+        ?invoked_at: Time,
+        ?target: Types::HookTarget,
+        ?annotations: Array[Types::Annotation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hook_result_id: String?
+      attr_accessor invocation_point: String?
+      attr_accessor failure_mode: String?
+      attr_accessor type_name: String?
+      attr_accessor original_type_name: String?
+      attr_accessor type_version_id: String?
+      attr_accessor type_configuration_version_id: String?
+      attr_accessor type_arn: String?
+      attr_accessor status: String?
+      attr_accessor hook_status_reason: String?
+      attr_accessor invoked_at: Time?
+      attr_accessor target: Types::HookTarget?
+      attr_accessor annotations: Array[Types::Annotation]?
     end
 
     class GetStackPolicyInput
@@ -1962,6 +2164,30 @@ module Aws::CloudFormation
       HOOK_COMPLETE_SUCCEEDED: String
       HOOK_COMPLETE_FAILED: String
       HOOK_FAILED: String
+    end
+
+    class HookTarget
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_type: String,
+        ?target_type_name: String,
+        ?target_id: String,
+        ?action: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_type: String?
+      attr_accessor target_type_name: String?
+      attr_accessor target_id: String?
+      attr_accessor action: String?
+    end
+
+    module HookTargetAction
+      CREATE: String
+      UPDATE: String
+      DELETE: String
+      IMPORT: String
     end
 
     module HookTargetType
@@ -2714,6 +2940,21 @@ module Aws::CloudFormation
       attr_accessor next_token: String?
     end
 
+    class LiveResourceDrift
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?previous_value: String,
+        ?actual_value: String,
+        ?drift_detection_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor previous_value: String?
+      attr_accessor actual_value: String?
+      attr_accessor drift_detection_timestamp: Time?
+    end
+
     class LoggingConfig
       include Smithy::Schema::Structure
 
@@ -2772,6 +3013,82 @@ module Aws::CloudFormation
       DO_NOTHING: String
       ROLLBACK: String
       DELETE: String
+    end
+
+    class OperationEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_type: String,
+        ?operation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_type: String?
+      attr_accessor operation_id: String?
+    end
+
+    class OperationEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_id: String,
+        ?stack_id: String,
+        ?operation_id: String,
+        ?operation_type: String,
+        ?operation_status: String,
+        ?event_type: String,
+        ?logical_resource_id: String,
+        ?physical_resource_id: String,
+        ?resource_type: String,
+        ?timestamp: Time,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?resource_status: String,
+        ?resource_status_reason: String,
+        ?resource_properties: String,
+        ?client_request_token: String,
+        ?hook_type: String,
+        ?hook_status: String,
+        ?hook_status_reason: String,
+        ?hook_invocation_point: String,
+        ?hook_failure_mode: String,
+        ?detailed_status: String,
+        ?validation_failure_mode: String,
+        ?validation_name: String,
+        ?validation_status: String,
+        ?validation_status_reason: String,
+        ?validation_path: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_id: String?
+      attr_accessor stack_id: String?
+      attr_accessor operation_id: String?
+      attr_accessor operation_type: String?
+      attr_accessor operation_status: String?
+      attr_accessor event_type: String?
+      attr_accessor logical_resource_id: String?
+      attr_accessor physical_resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor timestamp: Time?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor resource_status: String?
+      attr_accessor resource_status_reason: String?
+      attr_accessor resource_properties: String?
+      attr_accessor client_request_token: String?
+      attr_accessor hook_type: String?
+      attr_accessor hook_status: String?
+      attr_accessor hook_status_reason: String?
+      attr_accessor hook_invocation_point: String?
+      attr_accessor hook_failure_mode: String?
+      attr_accessor detailed_status: String?
+      attr_accessor validation_failure_mode: String?
+      attr_accessor validation_name: String?
+      attr_accessor validation_status: String?
+      attr_accessor validation_status_reason: String?
+      attr_accessor validation_path: String?
     end
 
     class OperationIdAlreadyExistsException
@@ -2840,6 +3157,15 @@ module Aws::CloudFormation
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    module OperationType
+      CREATE_STACK: String
+      UPDATE_STACK: String
+      DELETE_STACK: String
+      CONTINUE_ROLLBACK: String
+      ROLLBACK: String
+      CREATE_CHANGESET: String
     end
 
     module OrganizationStatus
@@ -3152,11 +3478,14 @@ module Aws::CloudFormation
         ?resource_type: String,
         ?replacement: String,
         ?scope: Array[String],
+        ?resource_drift_status: String,
+        ?resource_drift_ignored_attributes: Array[Types::ResourceDriftIgnoredAttribute],
         ?details: Array[Types::ResourceChangeDetail],
         ?change_set_id: String,
         ?module_info: Types::ModuleInfo,
         ?before_context: String,
         ?after_context: String,
+        ?previous_deployment_context: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3167,11 +3496,14 @@ module Aws::CloudFormation
       attr_accessor resource_type: String?
       attr_accessor replacement: String?
       attr_accessor scope: Array[String]?
+      attr_accessor resource_drift_status: String?
+      attr_accessor resource_drift_ignored_attributes: Array[Types::ResourceDriftIgnoredAttribute]?
       attr_accessor details: Array[Types::ResourceChangeDetail]?
       attr_accessor change_set_id: String?
       attr_accessor module_info: Types::ModuleInfo?
       attr_accessor before_context: String?
       attr_accessor after_context: String?
+      attr_accessor previous_deployment_context: String?
     end
 
     class ResourceChangeDetail
@@ -3225,6 +3557,19 @@ module Aws::CloudFormation
       attr_accessor resource_status: String?
       attr_accessor resource_status_reason: String?
       attr_accessor warnings: Array[Types::WarningDetail]?
+    end
+
+    class ResourceDriftIgnoredAttribute
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?path: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor path: String?
+      attr_accessor reason: String?
     end
 
     class ResourceIdentifierSummary
@@ -3377,6 +3722,9 @@ module Aws::CloudFormation
         ?path: String,
         ?before_value: String,
         ?after_value: String,
+        ?before_value_from: String,
+        ?after_value_from: String,
+        ?drift: Types::LiveResourceDrift,
         ?attribute_change_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -3387,6 +3735,9 @@ module Aws::CloudFormation
       attr_accessor path: String?
       attr_accessor before_value: String?
       attr_accessor after_value: String?
+      attr_accessor before_value_from: String?
+      attr_accessor after_value_from: String?
+      attr_accessor drift: Types::LiveResourceDrift?
       attr_accessor attribute_change_type: String?
     end
 
@@ -3426,6 +3777,7 @@ module Aws::CloudFormation
         ?role_arn: String,
         ?client_request_token: String,
         ?retain_except_on_create: bool,
+        ?deployment_config: Types::DeploymentConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3433,6 +3785,7 @@ module Aws::CloudFormation
       attr_accessor role_arn: String?
       attr_accessor client_request_token: String?
       attr_accessor retain_except_on_create: bool?
+      attr_accessor deployment_config: Types::DeploymentConfig?
     end
 
     class RollbackStackOutput
@@ -3440,10 +3793,12 @@ module Aws::CloudFormation
 
       def initialize: (
         ?stack_id: String,
+        ?operation_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor stack_id: String?
+      attr_accessor operation_id: String?
     end
 
     class RollbackTrigger
@@ -3607,6 +3962,7 @@ module Aws::CloudFormation
         ?stack_status: String,
         ?stack_status_reason: String,
         ?disable_rollback: bool,
+        ?deployment_config: Types::DeploymentConfig,
         ?notification_ar_ns: Array[String],
         ?timeout_in_minutes: Integer,
         ?capabilities: Array[String],
@@ -3620,6 +3976,7 @@ module Aws::CloudFormation
         ?retain_except_on_create: bool,
         ?deletion_mode: String,
         ?detailed_status: String,
+        ?last_operations: Array[Types::OperationEntry],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3635,6 +3992,7 @@ module Aws::CloudFormation
       attr_accessor stack_status: String?
       attr_accessor stack_status_reason: String?
       attr_accessor disable_rollback: bool?
+      attr_accessor deployment_config: Types::DeploymentConfig?
       attr_accessor notification_ar_ns: Array[String]?
       attr_accessor timeout_in_minutes: Integer?
       attr_accessor capabilities: Array[String]?
@@ -3648,6 +4006,7 @@ module Aws::CloudFormation
       attr_accessor retain_except_on_create: bool?
       attr_accessor deletion_mode: String?
       attr_accessor detailed_status: String?
+      attr_accessor last_operations: Array[Types::OperationEntry]?
     end
 
     class StackDefinition
@@ -3711,6 +4070,7 @@ module Aws::CloudFormation
         ?stack_id: String,
         ?event_id: String,
         ?stack_name: String,
+        ?operation_id: String,
         ?logical_resource_id: String,
         ?physical_resource_id: String,
         ?resource_type: String,
@@ -3732,6 +4092,7 @@ module Aws::CloudFormation
       attr_accessor stack_id: String?
       attr_accessor event_id: String?
       attr_accessor stack_name: String?
+      attr_accessor operation_id: String?
       attr_accessor logical_resource_id: String?
       attr_accessor physical_resource_id: String?
       attr_accessor resource_type: String?
@@ -4133,6 +4494,7 @@ module Aws::CloudFormation
       DELETED: String
       NOT_CHECKED: String
       UNKNOWN: String
+      UNSUPPORTED: String
     end
 
     class StackResourceSummary
@@ -4491,6 +4853,7 @@ module Aws::CloudFormation
         ?parent_id: String,
         ?root_id: String,
         ?drift_information: Types::StackDriftInformationSummary,
+        ?last_operations: Array[Types::OperationEntry],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4505,6 +4868,7 @@ module Aws::CloudFormation
       attr_accessor parent_id: String?
       attr_accessor root_id: String?
       attr_accessor drift_information: Types::StackDriftInformationSummary?
+      attr_accessor last_operations: Array[Types::OperationEntry]?
     end
 
     class StaleRequestException
@@ -4917,6 +5281,8 @@ module Aws::CloudFormation
         ?disable_rollback: bool,
         ?client_request_token: String,
         ?retain_except_on_create: bool,
+        ?deployment_config: Types::DeploymentConfig,
+        ?disable_validation: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4938,6 +5304,8 @@ module Aws::CloudFormation
       attr_accessor disable_rollback: bool?
       attr_accessor client_request_token: String?
       attr_accessor retain_except_on_create: bool?
+      attr_accessor deployment_config: Types::DeploymentConfig?
+      attr_accessor disable_validation: bool?
     end
 
     class UpdateStackInstancesInput
@@ -4981,10 +5349,12 @@ module Aws::CloudFormation
 
       def initialize: (
         ?stack_id: String,
+        ?operation_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor stack_id: String?
+      attr_accessor operation_id: String?
     end
 
     class UpdateStackSetInput
@@ -5099,6 +5469,11 @@ module Aws::CloudFormation
       attr_accessor capabilities: Array[String]?
       attr_accessor capabilities_reason: String?
       attr_accessor declared_transforms: Array[String]?
+    end
+
+    module ValidationStatus
+      FAILED: String
+      SKIPPED: String
     end
 
     module VersionBump

@@ -5,6 +5,8 @@ module Aws::Route53
     ARN: StringShape
     AWSAccountID: StringShape
     AWSRegion: StringShape
+    AcceleratedRecoveryEnabled: BooleanShape
+    AcceleratedRecoveryStatus: EnumShape
     AccountLimit: StructureShape
     AccountLimitType: EnumShape
     ActivateKeySigningKeyRequest: StructureShape
@@ -127,6 +129,7 @@ module Aws::Route53
     ErrorMessage: StringShape
     ErrorMessages: ListShape
     EvaluationPeriods: IntegerShape
+    FailureReason: StringShape
     FailureThreshold: IntegerShape
     FullyQualifiedDomainName: StringShape
     GeoLocation: StructureShape
@@ -195,6 +198,8 @@ module Aws::Route53
     HostedZoneAlreadyExists: StructureShape
     HostedZoneConfig: StructureShape
     HostedZoneCount: IntegerShape
+    HostedZoneFailureReasons: StructureShape
+    HostedZoneFeatures: StructureShape
     HostedZoneLimit: StructureShape
     HostedZoneLimitType: EnumShape
     HostedZoneNotEmpty: StructureShape
@@ -392,6 +397,8 @@ module Aws::Route53
     UpdateHealthCheckResponse: StructureShape
     UpdateHostedZoneCommentRequest: StructureShape
     UpdateHostedZoneCommentResponse: StructureShape
+    UpdateHostedZoneFeaturesRequest: StructureShape
+    UpdateHostedZoneFeaturesResponse: StructureShape
     UpdateTrafficPolicyCommentRequest: StructureShape
     UpdateTrafficPolicyCommentResponse: StructureShape
     UpdateTrafficPolicyInstanceRequest: StructureShape

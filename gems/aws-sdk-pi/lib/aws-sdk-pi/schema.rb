@@ -69,6 +69,8 @@ module Aws::PI
     ListAvailableResourceDimensionsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pi#ListAvailableResourceDimensionsResponse", name: "ListAvailableResourceDimensionsResponse")
     ListAvailableResourceMetricsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pi#ListAvailableResourceMetricsRequest", name: "ListAvailableResourceMetricsRequest")
     ListAvailableResourceMetricsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pi#ListAvailableResourceMetricsResponse", name: "ListAvailableResourceMetricsResponse")
+    ListPerformanceAnalysisReportRecommendationsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pi#ListPerformanceAnalysisReportRecommendationsRequest", name: "ListPerformanceAnalysisReportRecommendationsRequest")
+    ListPerformanceAnalysisReportRecommendationsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pi#ListPerformanceAnalysisReportRecommendationsResponse", name: "ListPerformanceAnalysisReportRecommendationsResponse")
     ListPerformanceAnalysisReportsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pi#ListPerformanceAnalysisReportsRequest", name: "ListPerformanceAnalysisReportsRequest")
     ListPerformanceAnalysisReportsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pi#ListPerformanceAnalysisReportsResponse", name: "ListPerformanceAnalysisReportsResponse")
     ListTagsForResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pi#ListTagsForResourceRequest", name: "ListTagsForResourceRequest")
@@ -89,6 +91,7 @@ module Aws::PI
     PerformanceInsightsMetric = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pi#PerformanceInsightsMetric", name: "PerformanceInsightsMetric")
     PeriodAlignment = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.pi#PeriodAlignment", name: "PeriodAlignment")
     Recommendation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pi#Recommendation", name: "Recommendation")
+    RecommendationIdList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.pi#RecommendationIdList", name: "RecommendationIdList")
     RecommendationList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.pi#RecommendationList", name: "RecommendationList")
     RequestString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pi#RequestString", name: "RequestString", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#pattern" => "\\S"})
     RequestedDimensionList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.pi#RequestedDimensionList", name: "RequestedDimensionList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
@@ -143,7 +146,7 @@ module Aws::PI
     CreatePerformanceAnalysisReportRequest.add_member(:service_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceType, name: "ServiceType", traits: {"smithy.api#required" => {}}))
     CreatePerformanceAnalysisReportRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentifierString, name: "Identifier", traits: {"smithy.api#required" => {}}))
     CreatePerformanceAnalysisReportRequest.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ISOTimestamp, name: "StartTime", traits: {"smithy.api#required" => {}}))
-    CreatePerformanceAnalysisReportRequest.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ISOTimestamp, name: "EndTime", traits: {"smithy.api#required" => {}}))
+    CreatePerformanceAnalysisReportRequest.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ISOTimestamp, name: "EndTime"))
     CreatePerformanceAnalysisReportRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     CreatePerformanceAnalysisReportRequest.type = Types::CreatePerformanceAnalysisReportRequest
     CreatePerformanceAnalysisReportResponse.add_member(:analysis_report_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisReportId, name: "AnalysisReportId"))
@@ -296,6 +299,16 @@ module Aws::PI
     ListAvailableResourceMetricsResponse.add_member(:metrics, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseResourceMetricList, name: "Metrics"))
     ListAvailableResourceMetricsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     ListAvailableResourceMetricsResponse.type = Types::ListAvailableResourceMetricsResponse
+    ListPerformanceAnalysisReportRecommendationsRequest.add_member(:service_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceType, name: "ServiceType", traits: {"smithy.api#required" => {}}))
+    ListPerformanceAnalysisReportRecommendationsRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentifierString, name: "Identifier", traits: {"smithy.api#required" => {}}))
+    ListPerformanceAnalysisReportRecommendationsRequest.add_member(:analysis_report_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisReportId, name: "AnalysisReportId", traits: {"smithy.api#required" => {}}))
+    ListPerformanceAnalysisReportRecommendationsRequest.add_member(:recommendation_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationIdList, name: "RecommendationIds"))
+    ListPerformanceAnalysisReportRecommendationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults"))
+    ListPerformanceAnalysisReportRecommendationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    ListPerformanceAnalysisReportRecommendationsRequest.type = Types::ListPerformanceAnalysisReportRecommendationsRequest
+    ListPerformanceAnalysisReportRecommendationsResponse.add_member(:recommendations, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationList, name: "Recommendations"))
+    ListPerformanceAnalysisReportRecommendationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    ListPerformanceAnalysisReportRecommendationsResponse.type = Types::ListPerformanceAnalysisReportRecommendationsResponse
     ListPerformanceAnalysisReportsRequest.add_member(:service_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceType, name: "ServiceType", traits: {"smithy.api#required" => {}}))
     ListPerformanceAnalysisReportsRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentifierString, name: "Identifier", traits: {"smithy.api#required" => {}}))
     ListPerformanceAnalysisReportsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
@@ -339,7 +352,9 @@ module Aws::PI
     PeriodAlignment.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "START_TIME", traits: {"smithy.api#enumValue" => "START_TIME"}))
     Recommendation.add_member(:recommendation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "RecommendationId"))
     Recommendation.add_member(:recommendation_description, ::Smithy::Schema::Shapes::MemberShape.new(target: MarkdownString, name: "RecommendationDescription"))
+    Recommendation.add_member(:recommendation_details, ::Smithy::Schema::Shapes::MemberShape.new(target: MarkdownString, name: "RecommendationDetails"))
     Recommendation.type = Types::Recommendation
+    RecommendationIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     RecommendationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Recommendation, name: "member"))
     RequestedDimensionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SanitizedString, name: "member"))
     ResponsePartitionKey.add_member(:dimensions, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionMap, name: "Dimensions", traits: {"smithy.api#required" => {}}))
@@ -381,7 +396,7 @@ module Aws::PI
       service.id = "com.amazonaws.pi#PerformanceInsightsv20180227"
       service.name = "PerformanceInsightsv20180227"
       service.version = "2018-02-27"
-      service.traits = {"aws.api#service" => {"sdkId" => "PI", "arnNamespace" => "pi", "cloudFormationName" => "PI", "cloudTrailEventSource" => "pi.amazonaws.com", "endpointPrefix" => "pi"}, "aws.auth#sigv4" => {"name" => "pi"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "AWS Performance Insights", "smithy.api#xmlNamespace" => {"uri" => "http://pi.amazonaws.com/doc/2018-02-27/"}}
+      service.traits = {"aws.api#service" => {"sdkId" => "PI", "arnNamespace" => "pi", "cloudFormationName" => "PI", "cloudTrailEventSource" => "pi.amazonaws.com", "endpointPrefix" => "pi"}, "aws.auth#sigv4" => {"name" => "pi"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "AWS Performance Insights", "smithy.api#xmlNamespace" => {"uri" => "http://pi.amazonaws.com/doc/2018-02-27/"}, "smithy.protocols#rpcv2Cbor" => {}, "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://pi-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://pi-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://pi.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://pi.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
       service.add_operation(:create_performance_analysis_report, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pi#CreatePerformanceAnalysisReport"
         operation.name = "CreatePerformanceAnalysisReport"
@@ -475,6 +490,17 @@ module Aws::PI
         operation.errors << NotAuthorizedException
         operation.traits = {}
         operation[:paginator] = Paginators::ListAvailableResourceMetrics.new
+      end)
+      service.add_operation(:list_performance_analysis_report_recommendations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.pi#ListPerformanceAnalysisReportRecommendations"
+        operation.name = "ListPerformanceAnalysisReportRecommendations"
+        operation.input = ListPerformanceAnalysisReportRecommendationsRequest
+        operation.output = ListPerformanceAnalysisReportRecommendationsResponse
+        operation.errors << InternalServiceError
+        operation.errors << InvalidArgumentException
+        operation.errors << NotAuthorizedException
+        operation.traits = {}
+        operation[:paginator] = Paginators::ListPerformanceAnalysisReportRecommendations.new
       end)
       service.add_operation(:list_performance_analysis_reports, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pi#ListPerformanceAnalysisReports"

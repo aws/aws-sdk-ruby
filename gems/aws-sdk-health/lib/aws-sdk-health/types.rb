@@ -61,7 +61,7 @@ module Aws::Health
     #   @return [Time]
     # @!attribute status_code
     #   <p>The most recent status of the entity affected by the event. The possible values are
-    #               <code>IMPAIRED</code>, <code>UNIMPAIRED</code>, and <code>UNKNOWN</code>.</p>
+    #               <code>IMPAIRED</code>, <code>UNIMPAIRED</code>, <code>UNKNOWN</code>, <code>PENDING</code>, and <code>RESOLVED</code>.</p>
     #   @return [String]
     # @!attribute tags
     #   <p>A map of entity tags attached to the affected entity.</p>
@@ -208,7 +208,7 @@ module Aws::Health
     #   When all results have been returned, the response does not contain a pagination token value.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of items to return in one batch, between 10 and 100, inclusive.</p>
+    #   <p>The maximum number of items to return in one batch, between 1 and 100, inclusive.</p>
     #   @return [Integer]
     # @!attribute organization_entity_account_filters
     #   <p>A JSON set of elements including the <code>awsAccountId</code>, <code>eventArn</code> and a set of <code>statusCodes</code>.</p>
@@ -263,7 +263,7 @@ module Aws::Health
     #   When all results have been returned, the response does not contain a pagination token value.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of items to return in one batch, between 10 and 100, inclusive.</p>
+    #   <p>The maximum number of items to return in one batch, between 1 and 100, inclusive.</p>
     #   @return [Integer]
     class DescribeAffectedEntitiesRequest < Struct.new(
       nil,
@@ -514,7 +514,7 @@ module Aws::Health
     #   When all results have been returned, the response does not contain a pagination token value.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of items to return in one batch, between 10 and 100, inclusive.</p>
+    #   <p>The maximum number of items to return in one batch, between 1 and 100, inclusive.</p>
     #   @return [Integer]
     # @!attribute locale
     #   <p>The locale (language) to return information in. English (en) is the default and the only supported value at this time.</p>
@@ -558,7 +558,7 @@ module Aws::Health
     #   When all results have been returned, the response does not contain a pagination token value.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of items to return in one batch, between 10 and 100, inclusive.</p>
+    #   <p>The maximum number of items to return in one batch, between 1 and 100, inclusive.</p>
     #   @return [Integer]
     # @!attribute locale
     #   <p>The locale (language) to return information in. English (en) is the default and the only supported value at this time.</p>
@@ -600,6 +600,46 @@ module Aws::Health
     class DescribeHealthServiceStatusForOrganizationResponse < Struct.new(
       nil,
       :health_service_access_status_for_organization,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute filter
+    #   <p>Values to narrow the results returned.</p>
+    #   @return [Types::ServiceLifecycleFilter]
+    # @!attribute next_token
+    #   <p>If the results of a search are large, only a portion of the
+    #   results are returned, and a <code>nextToken</code> pagination token is returned in the response. To
+    #   retrieve the next batch of results, reissue the search request and include the returned token.
+    #   When all results have been returned, the response does not contain a pagination token value.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of items to return in one batch, between 1 and 20, inclusive.</p>
+    #   @return [Integer]
+    class DescribeServiceLifecycleRequest < Struct.new(
+      nil,
+      :filter,
+      :next_token,
+      :max_results,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute service_lifecycles
+    #   <p>The list of service lifecycle entries matching the filter criteria.</p>
+    #   @return [Array<Types::ServiceLifecycle>]
+    # @!attribute next_token
+    #   <p>If the results of a search are large, only a portion of the
+    #   results are returned, and a <code>nextToken</code> pagination token is returned in the response. To
+    #   retrieve the next batch of results, reissue the search request and include the returned token.
+    #   When all results have been returned, the response does not contain a pagination token value.</p>
+    #   @return [String]
+    class DescribeServiceLifecycleResponse < Struct.new(
+      nil,
+      :service_lifecycles,
+      :next_token,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -783,6 +823,13 @@ module Aws::Health
     #               </li>
     #            </ul>
     #   @return [String]
+    # @!attribute actionability
+    #   <p>The actionability classification of the event. Possible values are <code>ACTION_REQUIRED</code>, <code>ACTION_MAY_BE_REQUIRED</code> and <code>INFORMATIONAL</code>. Events with <code>ACTION_REQUIRED</code> actionability require customer action to resolve or mitigate the event. Events with <code>ACTION_MAY_BE_REQUIRED</code> actionability indicates that the current status is unknown or conditional and inspection is needed to determine if action is required.
+    #   Events with <code>INFORMATIONAL</code> actionability are provided for awareness and do not require immediate action.</p>
+    #   @return [String]
+    # @!attribute personas
+    #   <p>A list of persona classifications that indicate the target audience for the event. Possible values are <code>OPERATIONS</code>, <code>SECURITY</code>, and <code>BILLING</code>. Events can be associated with multiple personas to indicate relevance to different teams or roles within an organization.</p>
+    #   @return [Array<String>]
     class Event < Struct.new(
       nil,
       :arn,
@@ -796,6 +843,8 @@ module Aws::Health
       :last_updated_time,
       :status_code,
       :event_scope_code,
+      :actionability,
+      :personas,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -908,6 +957,9 @@ module Aws::Health
 
     # <p>The values to use to filter results from the <a href="https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEvents.html">DescribeEvents</a> and
     #             <a href="https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventAggregates.html">DescribeEventAggregates</a> operations.</p>
+    # @!attribute actionabilities
+    #   <p>A list of actionability values to filter events. Use this to filter events based on whether they require action (<code>ACTION_REQUIRED</code>), may require action (<code>ACTION_MAY_BE_REQUIRED</code>) or are informational (<code>INFORMATIONAL</code>).</p>
+    #   @return [Array<String>]
     # @!attribute event_arns
     #   <p>A list of event ARNs (unique identifiers). For example: <code>"arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-CDE456", "arn:aws:health:us-west-1::event/EBS/AWS_EBS_LOST_VOLUME/AWS_EBS_LOST_VOLUME_CHI789_JKL101"</code>
     #            </p>
@@ -955,8 +1007,12 @@ module Aws::Health
     # @!attribute event_status_codes
     #   <p>A list of event status codes.</p>
     #   @return [Array<String>]
+    # @!attribute personas
+    #   <p>A list of persona values to filter events. Use this to filter events based on their target audience: <code>OPERATIONS</code>, <code>SECURITY</code>, or <code>BILLING</code>.</p>
+    #   @return [Array<String>]
     class EventFilter < Struct.new(
       nil,
+      :actionabilities,
       :event_arns,
       :event_type_codes,
       :services,
@@ -970,6 +1026,7 @@ module Aws::Health
       :event_type_categories,
       :tags,
       :event_status_codes,
+      :personas,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -997,11 +1054,20 @@ module Aws::Health
     #   <code>issue</code>, <code>accountNotification</code>, or <code>scheduledChange</code>. Currently,
     #   the <code>investigation</code> value isn't supported at this time.</p>
     #   @return [String]
+    # @!attribute actionability
+    #   <p>The actionability classification of the event. Possible values are <code>ACTION_REQUIRED</code>, <code>ACTION_MAY_BE_REQUIRED</code> and <code>INFORMATIONAL</code>. Events with <code>ACTION_REQUIRED</code> actionability require customer action to resolve or mitigate the event. Events with <code>ACTION_MAY_BE_REQUIRED</code> actionability indicates that the current status is unknown or conditional and inspection is needed to determine if action is required.
+    #   Events with <code>INFORMATIONAL</code> actionability are provided for awareness and do not require immediate action.</p>
+    #   @return [String]
+    # @!attribute personas
+    #   <p>A list of persona classifications that indicate the target audience for the event. Possible values are <code>OPERATIONS</code>, <code>SECURITY</code>, and <code>BILLING</code>. Events can be associated with multiple personas to indicate relevance to different teams or roles within an organization.</p>
+    #   @return [Array<String>]
     class EventType < Struct.new(
       nil,
       :service,
       :code,
       :category,
+      :actionability,
+      :personas,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1020,11 +1086,19 @@ module Aws::Health
     #   <code>issue</code>, <code>accountNotification</code>, or <code>scheduledChange</code>. Currently,
     #   the <code>investigation</code> value isn't supported at this time.</p>
     #   @return [Array<String>]
+    # @!attribute actionabilities
+    #   <p>A list of actionability values to filter event types. Possible values are <code>ACTION_REQUIRED</code>, <code>ACTION_MAY_BE_REQUIRED</code> and <code>INFORMATIONAL</code>.</p>
+    #   @return [Array<String>]
+    # @!attribute personas
+    #   <p>A list of persona classifications to filter event types. Possible values are <code>OPERATIONS</code>, <code>SECURITY</code>, and <code>BILLING</code>.</p>
+    #   @return [Array<String>]
     class EventTypeFilter < Struct.new(
       nil,
       :event_type_codes,
       :services,
       :event_type_categories,
+      :actionabilities,
+      :personas,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1036,6 +1110,34 @@ module Aws::Health
     class InvalidPaginationToken < Struct.new(
       nil,
       :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A lifecycle event for an Amazon Web Services service version, such as end-of-support or end-of-life.</p>
+    # @!attribute lifecycle_event_type
+    #   <p>The type of lifecycle event (for example, end-of-support, end-of-life).</p>
+    #   @return [String]
+    # @!attribute date
+    #   <p>The date of the lifecycle event.</p>
+    #   @return [Time]
+    # @!attribute regions
+    #   <p>The Amazon Web Services Regions affected by this lifecycle event.</p>
+    #   @return [Array<String>]
+    # @!attribute impact_risks
+    #   <p>The potential impact risks associated with this lifecycle event.</p>
+    #   @return [Array<String>]
+    # @!attribute description
+    #   <p>A description of the lifecycle event.</p>
+    #   @return [String]
+    class LifecycleEvent < Struct.new(
+      nil,
+      :lifecycle_event_type,
+      :date,
+      :regions,
+      :impact_risks,
+      :description,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1170,6 +1272,13 @@ module Aws::Health
     #   <p>The most recent status of the event. Possible values are <code>open</code>,
     #               <code>closed</code>, and <code>upcoming</code>.</p>
     #   @return [String]
+    # @!attribute actionability
+    #   <p>The actionability classification of the event. Possible values are <code>ACTION_REQUIRED</code>, <code>ACTION_MAY_BE_REQUIRED</code> and <code>INFORMATIONAL</code>. Events with <code>ACTION_REQUIRED</code> actionability require customer action to resolve or mitigate the event. Events with <code>ACTION_MAY_BE_REQUIRED</code> actionability indicates that the current status is unknown or conditional and inspection is needed to determine if action is required.
+    #   Events with <code>INFORMATIONAL</code> actionability are provided for awareness and do not require immediate action.</p>
+    #   @return [String]
+    # @!attribute personas
+    #   <p>A list of persona classifications that indicate the target audience for the event. Possible values are <code>OPERATIONS</code>, <code>SECURITY</code>, and <code>BILLING</code>. Events can be associated with multiple personas to indicate relevance to different teams or roles within an organization.</p>
+    #   @return [Array<String>]
     class OrganizationEvent < Struct.new(
       nil,
       :arn,
@@ -1182,6 +1291,8 @@ module Aws::Health
       :end_time,
       :last_updated_time,
       :status_code,
+      :actionability,
+      :personas,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1279,6 +1390,9 @@ module Aws::Health
     end
 
     # <p>The values to filter results from the <a href="https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventsForOrganization.html">DescribeEventsForOrganization</a> operation.</p>
+    # @!attribute actionabilities
+    #   <p>A list of actionability values to filter events. Use this to filter events based on whether they require action (<code>ACTION_REQUIRED</code>), may require action (<code>ACTION_MAY_BE_REQUIRED</code>) or are informational (<code>INFORMATIONAL</code>).</p>
+    #   @return [Array<String>]
     # @!attribute event_type_codes
     #   <p>A list of unique identifiers for event types. For example, <code>"AWS_EC2_SYSTEM_MAINTENANCE_EVENT","AWS_RDS_MAINTENANCE_SCHEDULED".</code>
     #            </p>
@@ -1333,8 +1447,12 @@ module Aws::Health
     # @!attribute event_status_codes
     #   <p>A list of event status codes.</p>
     #   @return [Array<String>]
+    # @!attribute personas
+    #   <p>A list of persona values to filter events. Use this to filter events based on their target audience: <code>OPERATIONS</code>, <code>SECURITY</code>, or <code>BILLING</code>.</p>
+    #   @return [Array<String>]
     class OrganizationEventFilter < Struct.new(
       nil,
+      :actionabilities,
       :event_type_codes,
       :aws_account_ids,
       :services,
@@ -1346,6 +1464,47 @@ module Aws::Health
       :entity_values,
       :event_type_categories,
       :event_status_codes,
+      :personas,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains lifecycle information for an Amazon Web Services service version, including lifecycle events and version recommendations.</p>
+    # @!attribute service
+    #   <p>The name of the Amazon Web Services service.</p>
+    #   @return [String]
+    # @!attribute version
+    #   <p>The version of the service.</p>
+    #   @return [String]
+    # @!attribute title
+    #   <p>A human-readable title for the lifecycle entry.</p>
+    #   @return [String]
+    # @!attribute recommended_version
+    #   <p>The recommended version to upgrade to.</p>
+    #   @return [String]
+    # @!attribute lifecycle_events
+    #   <p>The list of lifecycle events for this service version.</p>
+    #   @return [Array<Types::LifecycleEvent>]
+    class ServiceLifecycle < Struct.new(
+      nil,
+      :service,
+      :version,
+      :title,
+      :recommended_version,
+      :lifecycle_events,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A filter for narrowing down service lifecycle results.</p>
+    # @!attribute service
+    #   <p>The Amazon Web Services service name to filter by.</p>
+    #   @return [String]
+    class ServiceLifecycleFilter < Struct.new(
+      nil,
+      :service,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

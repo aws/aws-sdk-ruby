@@ -21,6 +21,8 @@ module Aws::SSOAdmin
     AccountId: StringShape
     AccountList: ListShape
     ActorPolicyDocument: DocumentShape
+    AddRegionRequest: StructureShape
+    AddRegionResponse: StructureShape
     Application: StructureShape
     ApplicationArn: StringShape
     ApplicationAssignment: StructureShape
@@ -109,6 +111,8 @@ module Aws::SSOAdmin
     DescribePermissionSetProvisioningStatusResponse: StructureShape
     DescribePermissionSetRequest: StructureShape
     DescribePermissionSetResponse: StructureShape
+    DescribeRegionRequest: StructureShape
+    DescribeRegionResponse: StructureShape
     DescribeTrustedTokenIssuerRequest: StructureShape
     DescribeTrustedTokenIssuerResponse: StructureShape
     Description: StringShape
@@ -142,15 +146,18 @@ module Aws::SSOAdmin
     IamAuthenticationMethod: StructureShape
     IconUrl: StringShape
     Id: StringShape
+    IdentityStoreArn: StringShape
     InstanceAccessControlAttributeConfiguration: StructureShape
     InstanceAccessControlAttributeConfigurationStatus: EnumShape
     InstanceAccessControlAttributeConfigurationStatusReason: StringShape
     InstanceArn: StringShape
+    InstanceIdentityStoreArn: StringShape
     InstanceList: ListShape
     InstanceMetadata: StructureShape
     InstanceStatus: EnumShape
     InternalFailureMessage: StringShape
     InternalServerException: StructureShape
+    IsPrimaryRegion: BooleanShape
     JMESPath: StringShape
     JwksRetrievalOption: EnumShape
     JwtBearerGrant: StructureShape
@@ -196,6 +203,8 @@ module Aws::SSOAdmin
     ListPermissionSetsProvisionedToAccountResponse: StructureShape
     ListPermissionSetsRequest: StructureShape
     ListPermissionSetsResponse: StructureShape
+    ListRegionsRequest: StructureShape
+    ListRegionsResponse: StructureShape
     ListTagsForResourceRequest: StructureShape
     ListTagsForResourceResponse: StructureShape
     ListTrustedTokenIssuersRequest: StructureShape
@@ -240,7 +249,13 @@ module Aws::SSOAdmin
     Reason: StringShape
     RedirectUris: ListShape
     RefreshTokenGrant: StructureShape
+    RegionMetadata: StructureShape
+    RegionMetadataList: ListShape
+    RegionName: StringShape
+    RegionStatus: EnumShape
     RelayState: StringShape
+    RemoveRegionRequest: StructureShape
+    RemoveRegionResponse: StructureShape
     ResourceNotFoundException: StructureShape
     ResourceNotFoundExceptionReason: EnumShape
     ResourceNotFoundMessage: StringShape

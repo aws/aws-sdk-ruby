@@ -301,6 +301,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute name
     #   <p>The name of the bot that you want to create a new version of. The
     #         name is case sensitive. </p>
@@ -322,6 +325,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute name
     #   <p>The name of the bot.</p>
     #   @return [String]
@@ -438,6 +444,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute name
     #   <p>The name of the intent that you want to create a new version of.
     #         The name is case sensitive. </p>
@@ -459,6 +468,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute name
     #   <p>The name of the intent.</p>
     #   @return [String]
@@ -551,6 +563,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute name
     #   <p>The name of the slot type that you want to create a new version
     #         for. The name is case sensitive. </p>
@@ -572,6 +587,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute name
     #   <p>The name of the slot type.</p>
     #   @return [String]
@@ -624,6 +642,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute name
     #   <p>The name of the alias to delete. The name is case sensitive.
     #       </p>
@@ -640,6 +661,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute name
     #   <p>The name of the association. The name is case sensitive. </p>
     #   @return [String]
@@ -660,6 +684,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute name
     #   <p>The name of the bot. The name is case sensitive. </p>
     #   @return [String]
@@ -671,6 +698,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute name
     #   <p>The name of the bot.</p>
     #   @return [String]
@@ -689,6 +719,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute name
     #   <p>The name of the intent. The name is case sensitive. </p>
     #   @return [String]
@@ -700,6 +733,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute name
     #   <p>The name of the intent.</p>
     #   @return [String]
@@ -718,6 +754,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute name
     #   <p>The name of the slot type. The name is case sensitive. </p>
     #   @return [String]
@@ -729,6 +768,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute name
     #   <p>The name of the slot type.</p>
     #   @return [String]
@@ -747,6 +789,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute bot_name
     #   <p>The name of the bot that stored the utterances.</p>
     #   @return [String]
@@ -856,6 +901,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute name
     #   <p>The name of the bot alias. The name is case sensitive.</p>
     #   @return [String]
@@ -871,6 +919,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute name
     #   <p>The name of the bot alias.</p>
     #   @return [String]
@@ -913,6 +964,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute bot_name
     #   <p>The name of the bot.</p>
     #   @return [String]
@@ -942,6 +996,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute bot_aliases
     #   <p>An array of <code>BotAliasMetadata</code> objects, each describing
     #         a bot alias.</p>
@@ -961,6 +1018,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute name
     #   <p>The name of the association between the bot and the channel. The
     #         name is case sensitive. </p>
@@ -982,6 +1042,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute name
     #   <p>The name of the association between the bot and the
     #         channel.</p>
@@ -1049,6 +1112,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute bot_name
     #   <p>The name of the Amazon Lex bot in the association.</p>
     #   @return [String]
@@ -1085,6 +1151,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute bot_channel_associations
     #   <p>An array of objects, one for each association, that provides
     #         information about the Amazon Lex bot and its association with the channel.
@@ -1105,6 +1174,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute name
     #   <p>The name of the bot. The name is case sensitive. </p>
     #   @return [String]
@@ -1120,6 +1192,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute name
     #   <p>The name of the bot.</p>
     #   @return [String]
@@ -1255,6 +1330,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute name
     #   <p>The name of the bot for which versions should be
     #         returned.</p>
@@ -1279,6 +1357,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute bots
     #   <p>An array of <code>BotMetadata</code> objects, one for each numbered
     #         version of the bot plus one for the <code>$LATEST</code>
@@ -1299,6 +1380,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute next_token
     #   <p>A pagination token that fetches the next page of bots. If the
     #         response to this call is truncated, Amazon Lex returns a pagination token in
@@ -1324,6 +1408,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute bots
     #   <p>An array of <code>botMetadata</code> objects, with one entry for
     #         each bot. </p>
@@ -1342,6 +1429,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute signature
     #   <p>The unique identifier for a built-in intent. To find the signature
     #         for an intent, see <a href="https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/built-in-intent-ref/standard-intents">Standard Built-in Intents</a> in the <i>Alexa Skills
@@ -1355,6 +1445,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute signature
     #   <p>The unique identifier for a built-in intent.</p>
     #   @return [String]
@@ -1375,6 +1468,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute locale
     #   <p>A list of locales that the intent supports.</p>
     #   @return [String]
@@ -1406,6 +1502,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute intents
     #   <p>An array of <code>builtinIntentMetadata</code> objects, one for
     #         each intent in the response.</p>
@@ -1425,6 +1524,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute locale
     #   <p>A list of locales that the slot type supports.</p>
     #   @return [String]
@@ -1454,6 +1556,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute slot_types
     #   <p>An array of <code>BuiltInSlotTypeMetadata</code> objects, one entry
     #         for each slot type returned.</p>
@@ -1472,6 +1577,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute name
     #   <p>The name of the bot to export.</p>
     #   @return [String]
@@ -1495,6 +1603,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute name
     #   <p>The name of the bot being exported.</p>
     #   @return [String]
@@ -1549,6 +1660,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute import_id
     #   <p>The identifier of the import job information to return.</p>
     #   @return [String]
@@ -1560,6 +1674,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute name
     #   <p>The name given to the import job.</p>
     #   @return [String]
@@ -1600,6 +1717,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute name
     #   <p>The name of the intent. The name is case sensitive. </p>
     #   @return [String]
@@ -1615,6 +1735,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute name
     #   <p>The name of the intent.</p>
     #   @return [String]
@@ -1708,6 +1831,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute name
     #   <p>The name of the intent for which versions should be
     #         returned.</p>
@@ -1732,6 +1858,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute intents
     #   <p>An array of <code>IntentMetadata</code> objects, one for each
     #         numbered version of the intent plus one for the <code>$LATEST</code>
@@ -1752,6 +1881,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute next_token
     #   <p>A pagination token that fetches the next page of intents. If the
     #         response to this API call is truncated, Amazon Lex returns a pagination token
@@ -1777,6 +1909,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute intents
     #   <p>An array of <code>Intent</code> objects. For more information, see
     #           <a>PutBot</a>.</p>
@@ -1795,6 +1930,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute migration_id
     #   <p>The unique identifier of the migration to view. The
     #           <code>migrationID</code> is returned by the  operation.</p>
@@ -1807,6 +1945,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute migration_id
     #   <p>The unique identifier of the migration. This is the same as the
     #         identifier used when calling the <code>GetMigration</code>
@@ -1878,6 +2019,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute sort_by_attribute
     #   <p>The field to sort the list of migrations by. You can sort by the
     #         Amazon Lex V1 bot name or the date and time that the migration was
@@ -1916,10 +2060,13 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute migration_summaries
     #   <p>An array of summaries for migrations from Amazon Lex V1 to Amazon Lex V2. To see
     #         details of the migration, use the <code>migrationId</code> from the
-    #         summary in a call to the 
+    #         summary in a call to the
     #         operation.</p>
     #   @return [Array<Types::MigrationSummary>]
     # @!attribute next_token
@@ -1936,6 +2083,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute name
     #   <p>The name of the slot type. The name is case sensitive. </p>
     #   @return [String]
@@ -1951,6 +2101,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute name
     #   <p>The name of the slot type.</p>
     #   @return [String]
@@ -2003,6 +2156,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute name
     #   <p>The name of the slot type for which versions should be
     #         returned.</p>
@@ -2027,6 +2183,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute slot_types
     #   <p>An array of <code>SlotTypeMetadata</code> objects, one for each
     #         numbered version of the slot type plus one for the <code>$LATEST</code>
@@ -2047,6 +2206,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute next_token
     #   <p>A pagination token that fetches the next page of slot types. If the
     #         response to this API call is truncated, Amazon Lex returns a pagination token
@@ -2072,6 +2234,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute slot_types
     #   <p>An array of objects, one for each slot type, that provides
     #         information such as the name of the slot type, the version, and a
@@ -2091,6 +2256,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute bot_name
     #   <p>The name of the bot for which utterance information should be
     #         returned.</p>
@@ -2114,6 +2282,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute bot_name
     #   <p>The name of the bot for which utterance information was
     #         returned.</p>
@@ -2254,6 +2425,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute resource_arn
     #   <p>The Amazon Resource Name (ARN) of the resource to get a list of tags
     #         for.</p>
@@ -2266,6 +2440,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute tags
     #   <p>The tags associated with a resource.</p>
     #   @return [Array<Types::Tag>]
@@ -2529,6 +2706,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute name
     #   <p>The name of the alias. The name is <i>not</i> case
     #         sensitive.</p>
@@ -2578,6 +2758,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute name
     #   <p>The name of the alias.</p>
     #   @return [String]
@@ -2624,6 +2807,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute name
     #   <p>The name of the bot. The name is <i>not</i> case
     #         sensitive. </p>
@@ -2890,6 +3076,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute name
     #   <p>The name of the bot.</p>
     #   @return [String]
@@ -3041,6 +3230,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute name
     #   <p>The name of the intent. The name is <i>not</i> case
     #         sensitive. </p>
@@ -3211,6 +3403,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute name
     #   <p>The name of the intent.</p>
     #   @return [String]
@@ -3318,6 +3513,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute name
     #   <p>The name of the slot type. The name is <i>not</i>
     #         case sensitive. </p>
@@ -3412,6 +3610,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute name
     #   <p>The name of the slot type.</p>
     #   @return [String]
@@ -3721,6 +3922,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute payload
     #   <p>A zip archive in binary format. The archive should contain one file, a
     #         JSON file containing the resource to import. The resource should match the
@@ -3771,6 +3975,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute name
     #   <p>The name given to the import job.</p>
     #   @return [String]
@@ -3809,6 +4016,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute v1_bot_name
     #   <p>The name of the Amazon Lex V1 bot that you are migrating to Amazon Lex V2.</p>
     #   @return [String]
@@ -3862,6 +4072,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute v1_bot_name
     #   <p>The name of the Amazon Lex V1 bot that you are migrating to Amazon Lex V2.</p>
     #   @return [String]
@@ -3940,6 +4153,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute resource_arn
     #   <p>The Amazon Resource Name (ARN) of the bot, bot alias, or bot channel
     #         to tag.</p>
@@ -3957,6 +4173,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     class TagResourceResponse < Struct.new(
       nil,
       keyword_init: true
@@ -3964,6 +4183,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @!attribute resource_arn
     #   <p>The Amazon Resource Name (ARN) of the resource to remove the tags
     #         from.</p>
@@ -3981,6 +4203,9 @@ module Aws::LexModelBuildingService
       include ::Smithy::Schema::Structure
     end
 
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     class UntagResourceResponse < Struct.new(
       nil,
       keyword_init: true

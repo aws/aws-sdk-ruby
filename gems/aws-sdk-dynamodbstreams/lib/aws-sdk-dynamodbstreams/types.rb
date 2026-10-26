@@ -219,17 +219,32 @@ module Aws::DynamoDBStreams
     #                     <code>LATEST</code> - Start reading just after the most recent stream record in the
     #             shard, so that you always read the most recent data in the shard.</p>
     #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>AT_TIMESTAMP</code> - Start reading from the position denoted by a specific timestamp, provided in the parameter <code>Timestamp</code>.</p>
+    #               </li>
     #            </ul>
     #   @return [String]
     # @!attribute sequence_number
     #   <p>The sequence number of a stream record in the shard from which to start reading.</p>
     #   @return [String]
+    # @!attribute timestamp
+    #   <p>The timestamp of the stream record from which to start reading. Used with shard
+    #         iterator type <code>AT_TIMESTAMP</code>. A timestamp is the Unix epoch date with precision in
+    #         milliseconds. For example, <code>1791316726.480</code>. The iterator points to the first stream record whose
+    #         <code>ApproximateCreationDateTime</code> is at or after the specified timestamp. If no record
+    #         with that exact timestamp exists, the iterator points to the next (later) record. If the
+    #         timestamp is older than the current trim horizon, the iterator points to the oldest
+    #         untrimmed stream record (<code>TRIM_HORIZON</code>). If the timestamp is in the future,
+    #         the request returns a <code>ValidationException</code>.</p>
+    #   @return [Time]
     class GetShardIteratorInput < Struct.new(
       nil,
       :stream_arn,
       :shard_id,
       :shard_iterator_type,
       :sequence_number,
+      :timestamp,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -503,10 +518,10 @@ module Aws::DynamoDBStreams
       include ::Smithy::Schema::Structure
     end
 
-    # <p>This optional field contains the filter 
+    # <p>This optional field contains the filter
     #             definition for the <code>DescribeStream</code> API.</p>
     # @!attribute type
-    #   <p>Contains the type of filter to be applied on the <code>DescribeStream</code> API. 
+    #   <p>Contains the type of filter to be applied on the <code>DescribeStream</code> API.
     #               Currently, the only value this parameter accepts is <code>CHILD_SHARDS</code>.</p>
     #   @return [String]
     # @!attribute shard_id
@@ -661,7 +676,8 @@ module Aws::DynamoDBStreams
 
     # <p>A description of a single data modification that was performed on an item in a DynamoDB table.</p>
     # @!attribute approximate_creation_date_time
-    #   <p>The approximate date and time when the stream record was created, in <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO 8601</a> format and rounded down to the closest second.</p>
+    #   <p>The approximate date and time when the stream record was created, in <a href="http://www.epochconverter.com/">UNIX epoch time</a> format and rounded down to the closest second.
+    #               Some tools and SDKs may convert this value to a different format, such as <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO 8601</a>.</p>
     #   @return [Time]
     # @!attribute keys
     #   <p>The primary key attribute(s) for the DynamoDB item that was modified.</p>

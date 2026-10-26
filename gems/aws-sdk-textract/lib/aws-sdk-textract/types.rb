@@ -6,7 +6,7 @@ module Aws::Textract
   # This module contains the types returned by client operations.
   module Types
 
-    # <p>You aren't authorized to perform the action. Use the Amazon Resource Name (ARN) 
+    # <p>You aren't authorized to perform the action. Use the Amazon Resource Name (ARN)
     #             of an authorized user or IAM role to perform the operation.</p>
     # @!attribute message
     #   @return [String]
@@ -21,27 +21,27 @@ module Aws::Textract
       include ::Smithy::Schema::Structure
     end
 
-    # <p>An adapter selected for use when analyzing documents. Contains an adapter ID and a version number. 
+    # <p>An adapter selected for use when analyzing documents. Contains an adapter ID and a version number.
     #          Contains information on pages selected for analysis when analyzing documents asychronously.</p>
     # @!attribute adapter_id
     #   <p>A unique identifier for the adapter resource.</p>
     #   @return [String]
     # @!attribute pages
-    #   <p>Pages is a parameter that the user inputs to specify which pages to apply an adapter to. The following is a 
+    #   <p>Pages is a parameter that the user inputs to specify which pages to apply an adapter to. The following is a
     #            list of rules for using this parameter.</p>
     #            <ul>
     #               <li>
     #                  <p>If a page is not specified, it is set to <code>["1"]</code> by default.</p>
     #               </li>
     #               <li>
-    #                  <p>The following characters are allowed in the parameter's string: 
+    #                  <p>The following characters are allowed in the parameter's string:
     #                  <code>0 1 2 3 4 5 6 7 8 9 - *</code>. No whitespace is allowed.</p>
     #               </li>
     #               <li>
     #                  <p>When using * to indicate all pages, it must be the only element in the list.</p>
     #               </li>
     #               <li>
-    #                  <p>You can use page intervals, such as <code>["1-3", "1-1", "4-*"]</code>. Where <code>*</code> indicates last page of 
+    #                  <p>You can use page intervals, such as <code>["1-3", "1-1", "4-*"]</code>. Where <code>*</code> indicates last page of
     #                  document.</p>
     #               </li>
     #               <li>
@@ -86,7 +86,7 @@ module Aws::Textract
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The dataset configuration options for a given version of an adapter. 
+    # <p>The dataset configuration options for a given version of an adapter.
     #          Can include an Amazon S3 bucket if specified.</p>
     # @!attribute manifest_s3_object
     #   <p>The S3 bucket name and file name that identifies the document.</p>
@@ -94,7 +94,7 @@ module Aws::Textract
     #            you use for Amazon Textract operations.</p>
     #            <p>For Amazon Textract to process a file in an S3 bucket, the user must have
     #            permission to access the S3 bucket and file.
-    #            
+    #
     #         </p>
     #   @return [Types::S3Object]
     class AdapterVersionDatasetConfig < Struct.new(
@@ -105,7 +105,7 @@ module Aws::Textract
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Contains information on the metrics used to evalute the peformance of a given adapter version. Includes data for 
+    # <p>Contains information on the metrics used to evalute the peformance of a given adapter version. Includes data for
     #          baseline model performance and individual adapter version perfromance.</p>
     # @!attribute baseline
     #   <p>The F1 score, precision, and recall metrics for the baseline model.</p>
@@ -158,7 +158,7 @@ module Aws::Textract
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Contains information about adapters used when analyzing a document, 
+    # <p>Contains information about adapters used when analyzing a document,
     #          with each adapter specified using an AdapterId and version</p>
     # @!attribute adapters
     #   <p>A list of adapters to be used when analyzing the specified document.</p>
@@ -188,6 +188,15 @@ module Aws::Textract
     # @!attribute human_loop_config
     #   <p>Sets the configuration for the human in the loop workflow for analyzing
     #            documents.</p>
+    #            <note>
+    #               <p>Amazon Textract uses Amazon Augmented AI (A2I) to run the human review
+    #               workflows that you specify in <code>HumanLoopConfig</code>. A2I entered
+    #               maintenance mode in July 2026 and no longer accepts new customers. If your account is not an
+    #               existing A2I customer, requests fail with an
+    #               <code>InvalidParameterException</code>. For more information, see <a href="https://aws.amazon.com/about-aws/whats-new/2026/06/aws-service-availability/">AWS
+    #               service availability</a>. If you're an existing A2I customer but receive
+    #               this error, contact AWS Support and request assistance from the A2I team.</p>
+    #            </note>
     #   @return [Types::HumanLoopConfig]
     # @!attribute queries_config
     #   <p>Contains Queries and the alias for those Queries, as determined by the input. </p>
@@ -324,7 +333,7 @@ module Aws::Textract
     end
 
     # <p>Amazon Textract isn't able to read the document. For more information on the document
-    #          limits in Amazon Textract, see <a>limits</a>.</p>
+    #          limits in Amazon Textract, see <a href="https://docs.aws.amazon.com/textract/latest/dg/limits.html">Hard limits</a>.</p>
     # @!attribute message
     #   @return [String]
     # @!attribute code
@@ -442,7 +451,7 @@ module Aws::Textract
     #               <li>
     #                  <p>
     #                     <i>QUERY_RESULT</i> - A response to a question asked during the call
-    #                  of analyze document. Comes with an alias and ID for ease of locating in a 
+    #                  of analyze document. Comes with an alias and ID for ease of locating in a
     #                  response. Also contains location and confidence score.</p>
     #               </li>
     #            </ul>
@@ -690,8 +699,8 @@ module Aws::Textract
     #   <p>The name to be assigned to the adapter being created.</p>
     #   @return [String]
     # @!attribute client_request_token
-    #   <p>Idempotent token is used to recognize the request. If the same token is used with multiple 
-    #            CreateAdapter requests, the same session is returned. 
+    #   <p>Idempotent token is used to recognize the request. If the same token is used with multiple
+    #            CreateAdapter requests, the same session is returned.
     #            This token is employed to avoid unintentionally creating the same session multiple times.</p>
     #   @return [String]
     # @!attribute description
@@ -736,8 +745,8 @@ module Aws::Textract
     #   <p>A string containing a unique ID for the adapter that will receive a new version.</p>
     #   @return [String]
     # @!attribute client_request_token
-    #   <p>Idempotent token is used to recognize the request. If the same token is used with multiple 
-    #            CreateAdapterVersion requests, the same session is returned. 
+    #   <p>Idempotent token is used to recognize the request. If the same token is used with multiple
+    #            CreateAdapterVersion requests, the same session is returned.
     #            This token is employed to avoid unintentionally creating the same session multiple times.</p>
     #   @return [String]
     # @!attribute dataset_config
@@ -758,8 +767,8 @@ module Aws::Textract
     #            you can download your results. Additionally, you can set the <code>KMSKeyID</code>
     #            parameter to a customer master key (CMK) to encrypt your output. Without this parameter set
     #            Amazon Textract will encrypt server-side using the AWS managed CMK for Amazon S3.</p>
-    #            <p>Decryption of Customer Content is necessary for processing of the documents by Amazon Textract. If your account 
-    #            is opted out under an AI services opt out policy then all unencrypted Customer Content is immediately and permanently deleted after 
+    #            <p>Decryption of Customer Content is necessary for processing of the documents by Amazon Textract. If your account
+    #            is opted out under an AI services opt out policy then all unencrypted Customer Content is immediately and permanently deleted after
     #            the Customer Content has been processed by the service. No copy of of the output is retained by Amazon Textract. For information about how to opt out, see <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html"> Managing AI services opt-out policy. </a>
     #            </p>
     #            <p>For more information on data privacy,
@@ -839,7 +848,7 @@ module Aws::Textract
 
     # @!attribute document
     #   <p>The input document as base64-encoded bytes or an Amazon S3 object. If you use the AWS CLI
-    #            to call Amazon Textract operations, you can't pass image bytes. The document must be an image 
+    #            to call Amazon Textract operations, you can't pass image bytes. The document must be an image
     #         in JPEG or PNG format.</p>
     #            <p>If you're using an AWS SDK to call Amazon Textract, you might not need to base64-encode
     #            image bytes that are passed using the <code>Bytes</code> field. </p>
@@ -1091,7 +1100,7 @@ module Aws::Textract
 
     # <p>The structure holding all the information returned by AnalyzeExpense</p>
     # @!attribute expense_index
-    #   <p>Denotes which invoice or receipt in the document the information is coming from. 
+    #   <p>Denotes which invoice or receipt in the document the information is coming from.
     #         First document will be 1, the second 2, and so on.</p>
     #   @return [Integer]
     # @!attribute summary_fields
@@ -1115,7 +1124,7 @@ module Aws::Textract
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Breakdown of detected information, seperated into 
+    # <p>Breakdown of detected information, seperated into
     #          the catagories Type, LabelDetection, and ValueDetection</p>
     # @!attribute type
     #   <p>The implied label of a detected element. Present alongside LabelDetection for explicit elements.</p>
@@ -1214,7 +1223,8 @@ module Aws::Textract
     #   <p>Within the bounding box, a fine-grained polygon around the recognized item.</p>
     #   @return [Array<Types::Point>]
     # @!attribute rotation_angle
-    #   <p>Provides a numerical value corresponding to the rotation of the text.</p>
+    #   <p>Provides a numerical value corresponding to the rotation of the WORD block.
+    #            Possible values are 0, 90, 180, and 270.</p>
     #   @return [Float]
     class Geometry < Struct.new(
       nil,
@@ -1323,8 +1333,8 @@ module Aws::Textract
     #            you can download your results. Additionally, you can set the <code>KMSKeyID</code>
     #            parameter to a customer master key (CMK) to encrypt your output. Without this parameter set
     #            Amazon Textract will encrypt server-side using the AWS managed CMK for Amazon S3.</p>
-    #            <p>Decryption of Customer Content is necessary for processing of the documents by Amazon Textract. If your account 
-    #            is opted out under an AI services opt out policy then all unencrypted Customer Content is immediately and permanently deleted after 
+    #            <p>Decryption of Customer Content is necessary for processing of the documents by Amazon Textract. If your account
+    #            is opted out under an AI services opt out policy then all unencrypted Customer Content is immediately and permanently deleted after
     #            the Customer Content has been processed by the service. No copy of of the output is retained by Amazon Textract. For information about how to opt out, see <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html"> Managing AI services opt-out policy. </a>
     #            </p>
     #            <p>For more information on data privacy,
@@ -1332,7 +1342,7 @@ module Aws::Textract
     #               FAQ</a>.</p>
     #   @return [Types::OutputConfig]
     # @!attribute evaluation_metrics
-    #   <p>The evaluation metrics (F1 score, Precision, and Recall) for the requested version, 
+    #   <p>The evaluation metrics (F1 score, Precision, and Recall) for the requested version,
     #            grouped by baseline metrics and adapter version.</p>
     #   @return [Array<Types::AdapterVersionEvaluationMetric>]
     # @!attribute tags
@@ -1574,7 +1584,7 @@ module Aws::Textract
     #   <p> The current status of the lending analysis job.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>If the response is truncated, Amazon Textract returns this token. 
+    #   <p>If the response is truncated, Amazon Textract returns this token.
     #               You can use this token in the subsequent request to retrieve the next set of lending results.</p>
     #   @return [String]
     # @!attribute results
@@ -1673,6 +1683,15 @@ module Aws::Textract
 
     # <p>Sets up the human review workflow the document will be sent to if one of the conditions
     #          is met. You can also set certain attributes of the image before review. </p>
+    #          <note>
+    #             <p>Amazon Textract uses Amazon Augmented AI (A2I) to run the human review
+    #             workflows that you specify in <code>HumanLoopConfig</code>. A2I entered
+    #             maintenance mode in July 2026 and no longer accepts new customers. If your account is not an
+    #             existing A2I customer, requests fail with an
+    #             <code>InvalidParameterException</code>. For more information, see <a href="https://aws.amazon.com/about-aws/whats-new/2026/06/aws-service-availability/">AWS
+    #             service availability</a>. If you're an existing A2I customer but receive
+    #             this error, contact AWS Support and request assistance from the A2I team.</p>
+    #          </note>
     # @!attribute human_loop_name
     #   <p>The name of the human workflow used for this image. This should be kept unique within a
     #            region.</p>
@@ -1831,7 +1850,7 @@ module Aws::Textract
       include ::Smithy::Schema::Structure
     end
 
-    # <p>An input parameter violated a constraint. For example, in synchronous operations, 
+    # <p>An input parameter violated a constraint. For example, in synchronous operations,
     #        an <code>InvalidParameterException</code> exception occurs
     #       when neither of the <code>S3Object</code> or <code>Bytes</code> values are supplied in the <code>Document</code>
     #       request parameter.
@@ -2013,11 +2032,11 @@ module Aws::Textract
     #   <p>A string containing a unique ID for the adapter to match for when listing adapter versions.</p>
     #   @return [String]
     # @!attribute after_creation_time
-    #   <p>Specifies the lower bound for the ListAdapterVersions operation. 
+    #   <p>Specifies the lower bound for the ListAdapterVersions operation.
     #            Ensures ListAdapterVersions returns only adapter versions created after the specified creation time.</p>
     #   @return [Time]
     # @!attribute before_creation_time
-    #   <p>Specifies the upper bound for the ListAdapterVersions operation. 
+    #   <p>Specifies the upper bound for the ListAdapterVersions operation.
     #            Ensures ListAdapterVersions returns only adapter versions created after the specified creation time.</p>
     #   @return [Time]
     # @!attribute max_results
@@ -2054,11 +2073,11 @@ module Aws::Textract
     end
 
     # @!attribute after_creation_time
-    #   <p>Specifies the lower bound for the ListAdapters operation. 
+    #   <p>Specifies the lower bound for the ListAdapters operation.
     #            Ensures ListAdapters returns only adapters created after the specified creation time.</p>
     #   @return [Time]
     # @!attribute before_creation_time
-    #   <p>Specifies the upper bound for the ListAdapters operation. 
+    #   <p>Specifies the upper bound for the ListAdapters operation.
     #            Ensures ListAdapters returns only adapters created before the specified creation time.</p>
     #   @return [Time]
     # @!attribute max_results
@@ -2159,8 +2178,8 @@ module Aws::Textract
     #          you can download your results. Additionally, you can set the <code>KMSKeyID</code>
     #          parameter to a customer master key (CMK) to encrypt your output. Without this parameter set
     #          Amazon Textract will encrypt server-side using the AWS managed CMK for Amazon S3.</p>
-    #          <p>Decryption of Customer Content is necessary for processing of the documents by Amazon Textract. If your account 
-    #          is opted out under an AI services opt out policy then all unencrypted Customer Content is immediately and permanently deleted after 
+    #          <p>Decryption of Customer Content is necessary for processing of the documents by Amazon Textract. If your account
+    #          is opted out under an AI services opt out policy then all unencrypted Customer Content is immediately and permanently deleted after
     #          the Customer Content has been processed by the service. No copy of of the output is retained by Amazon Textract. For information about how to opt out, see <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html"> Managing AI services opt-out policy. </a>
     #          </p>
     #          <p>For more information on data privacy,
@@ -2182,11 +2201,11 @@ module Aws::Textract
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The class assigned to a Page object detected in an input document. 
-    #          Contains information regarding the predicted type/class of a document's page and the 
+    # <p>The class assigned to a Page object detected in an input document.
+    #          Contains information regarding the predicted type/class of a document's page and the
     #          page number that the Page object was detected on.</p>
     # @!attribute page_type
-    #   <p>The class, or document type, assigned to a detected Page object. The class, or document type, 
+    #   <p>The class, or document type, assigned to a detected Page object. The class, or document type,
     #            assigned to a detected Page object.</p>
     #   @return [Array<Types::Prediction>]
     # @!attribute page_number
@@ -2230,7 +2249,7 @@ module Aws::Textract
       end
     end
 
-    # <p>Contains information regarding predicted values returned by Amazon Textract operations, including the 
+    # <p>Contains information regarding predicted values returned by Amazon Textract operations, including the
     #          predicted value and the confidence in the predicted value.</p>
     # @!attribute value
     #   <p>The predicted value of a detected object.</p>
@@ -2247,7 +2266,7 @@ module Aws::Textract
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The number of requests exceeded your throughput limit. If you want to increase this limit, 
+    # <p>The number of requests exceeded your throughput limit. If you want to increase this limit,
     #          contact Amazon Textract.</p>
     # @!attribute message
     #   @return [String]
@@ -2282,21 +2301,21 @@ module Aws::Textract
     #   <p>Alias attached to the query, for ease of location.</p>
     #   @return [String]
     # @!attribute pages
-    #   <p>Pages is a parameter that the user inputs to specify which pages to apply a query to. The following is a 
+    #   <p>Pages is a parameter that the user inputs to specify which pages to apply a query to. The following is a
     #            list of rules for using this parameter.</p>
     #            <ul>
     #               <li>
     #                  <p>If a page is not specified, it is set to <code>["1"]</code> by default.</p>
     #               </li>
     #               <li>
-    #                  <p>The following characters are allowed in the parameter's string: 
+    #                  <p>The following characters are allowed in the parameter's string:
     #                  <code>0 1 2 3 4 5 6 7 8 9 - *</code>. No whitespace is allowed.</p>
     #               </li>
     #               <li>
     #                  <p>When using * to indicate all pages, it must be the only element in the list.</p>
     #               </li>
     #               <li>
-    #                  <p>You can use page intervals, such as <code>[“1-3”, “1-1”, “4-*”]</code>. Where <code>*</code> indicates last page of 
+    #                  <p>You can use page intervals, such as <code>[“1-3”, “1-1”, “4-*”]</code>. Where <code>*</code> indicates last page of
     #                  document.</p>
     #               </li>
     #               <li>
@@ -2394,7 +2413,7 @@ module Aws::Textract
     #          you use for Amazon Textract operations.</p>
     #          <p>For Amazon Textract to process a file in an S3 bucket, the user must have
     #          permission to access the S3 bucket and file.
-    #          
+    #
     #       </p>
     # @!attribute bucket
     #   <p>The name of the S3 bucket. Note that the # character is not valid in the file
@@ -2496,10 +2515,10 @@ module Aws::Textract
     #            the results internally to be accessed by the GetDocumentAnalysis operation.</p>
     #   @return [Types::OutputConfig]
     # @!attribute kms_key_id
-    #   <p>The KMS key used to encrypt the inference results. This can be 
-    #            in either Key ID or Key Alias format. When a KMS key is provided, the 
-    #            KMS key will be used for server-side encryption of the objects in the 
-    #            customer bucket. When this parameter is not enabled, the result will 
+    #   <p>The KMS key used to encrypt the inference results. This can be
+    #            in either Key ID or Key Alias format. When a KMS key is provided, the
+    #            KMS key will be used for server-side encryption of the objects in the
+    #            customer bucket. When this parameter is not enabled, the result will
     #            be encrypted server side,using SSE-S3.</p>
     #   @return [String]
     # @!attribute queries_config
@@ -2526,7 +2545,7 @@ module Aws::Textract
 
     # @!attribute job_id
     #   <p>The identifier for the document text detection job. Use <code>JobId</code> to identify
-    #            the job in a subsequent call to <code>GetDocumentAnalysis</code>. A <code>JobId</code> value 
+    #            the job in a subsequent call to <code>GetDocumentAnalysis</code>. A <code>JobId</code> value
     #            is only valid for 7 days.</p>
     #   @return [String]
     class StartDocumentAnalysisResponse < Struct.new(
@@ -2562,10 +2581,10 @@ module Aws::Textract
     #            save the results internally to be accessed with the GetDocumentTextDetection operation.</p>
     #   @return [Types::OutputConfig]
     # @!attribute kms_key_id
-    #   <p>The KMS key used to encrypt the inference results. This can be 
-    #            in either Key ID or Key Alias format. When a KMS key is provided, the 
-    #            KMS key will be used for server-side encryption of the objects in the 
-    #            customer bucket. When this parameter is not enabled, the result will 
+    #   <p>The KMS key used to encrypt the inference results. This can be
+    #            in either Key ID or Key Alias format. When a KMS key is provided, the
+    #            KMS key will be used for server-side encryption of the objects in the
+    #            customer bucket. When this parameter is not enabled, the result will
     #            be encrypted server side,using SSE-S3.</p>
     #   @return [String]
     class StartDocumentTextDetectionRequest < Struct.new(
@@ -2598,8 +2617,8 @@ module Aws::Textract
     #   <p>The location of the document to be processed.</p>
     #   @return [Types::DocumentLocation]
     # @!attribute client_request_token
-    #   <p>The idempotent token that's used to identify the start request. If you use the same token with multiple <code>StartDocumentTextDetection</code> requests, the same <code>JobId</code> is returned. 
-    #      Use <code>ClientRequestToken</code> to prevent the same job from being accidentally started more than once. 
+    #   <p>The idempotent token that's used to identify the start request. If you use the same token with multiple <code>StartDocumentTextDetection</code> requests, the same <code>JobId</code> is returned.
+    #      Use <code>ClientRequestToken</code> to prevent the same job from being accidentally started more than once.
     #      For more information, see <a href="https://docs.aws.amazon.com/textract/latest/dg/api-async.html">Calling Amazon Textract Asynchronous Operations</a>
     #            </p>
     #   @return [String]
@@ -2619,10 +2638,10 @@ module Aws::Textract
     #      operation.</p>
     #   @return [Types::OutputConfig]
     # @!attribute kms_key_id
-    #   <p>The KMS key used to encrypt the inference results. This can be 
-    #      in either Key ID or Key Alias format. When a KMS key is provided, the 
-    #      KMS key will be used for server-side encryption of the objects in the 
-    #      customer bucket. When this parameter is not enabled, the result will 
+    #   <p>The KMS key used to encrypt the inference results. This can be
+    #      in either Key ID or Key Alias format. When a KMS key is provided, the
+    #      KMS key will be used for server-side encryption of the objects in the
+    #      customer bucket. When this parameter is not enabled, the result will
     #      be encrypted server side,using SSE-S3.</p>
     #   @return [String]
     class StartExpenseAnalysisRequest < Struct.new(
@@ -2683,8 +2702,8 @@ module Aws::Textract
     #            you can download your results. Additionally, you can set the <code>KMSKeyID</code>
     #            parameter to a customer master key (CMK) to encrypt your output. Without this parameter set
     #            Amazon Textract will encrypt server-side using the AWS managed CMK for Amazon S3.</p>
-    #            <p>Decryption of Customer Content is necessary for processing of the documents by Amazon Textract. If your account 
-    #            is opted out under an AI services opt out policy then all unencrypted Customer Content is immediately and permanently deleted after 
+    #            <p>Decryption of Customer Content is necessary for processing of the documents by Amazon Textract. If your account
+    #            is opted out under an AI services opt out policy then all unencrypted Customer Content is immediately and permanently deleted after
     #            the Customer Content has been processed by the service. No copy of of the output is retained by Amazon Textract. For information about how to opt out, see <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html"> Managing AI services opt-out policy. </a>
     #            </p>
     #            <p>For more information on data privacy,

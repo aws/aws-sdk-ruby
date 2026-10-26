@@ -25,6 +25,39 @@ module Aws::Billing
       attr_accessor active_before_inclusive: Time?
     end
 
+    class AdditionalCharge
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?amount: String,
+        ?charge_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor amount: String?
+      attr_accessor charge_type: String?
+    end
+
+    class Amount
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?currency_code: String,
+        ?currency_amount: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor currency_code: String?
+      attr_accessor currency_amount: String?
+    end
+
+    module ApplicationType
+      BEFORE_CROSS_SERVICE_DISCOUNTS: String
+      AFTER_DISCOUNTS: String
+    end
+
     class AssociateSourceViewsRequest
       include Smithy::Schema::Structure
 
@@ -47,6 +80,85 @@ module Aws::Billing
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor arn: String?
+    end
+
+    module BillingDomain
+      BILLABLE: String
+      PRO_FORMA: String
+    end
+
+    module BillingFeature
+      RI_SHARING: String
+      RI_SHARING_HISTORY: String
+      CREDIT_SHARING: String
+      CREDIT_SHARING_HISTORY: String
+      CREDIT_LEVEL_SHARING: String
+      BILLING_ALERTS: String
+      CREDIT_PREFERENCE_OPTIONS: String
+    end
+
+    class BillingFeatureFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: Array[String]?
+    end
+
+    module BillingFeatureFilterName
+      PREFERENCE_KEY: String
+    end
+
+    class BillingPeriod
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?year: Integer,
+        ?month: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor year: Integer?
+      attr_accessor month: Integer?
+    end
+
+    class BillingPreferenceForKey
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class BillingPreferenceSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?feature: String,
+        ?key: String,
+        ?value: String,
+        ?account_name: String,
+        ?account_id: String,
+        ?billing_period: Types::BillingPeriod,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor feature: String?
+      attr_accessor key: String?
+      attr_accessor value: String?
+      attr_accessor account_name: String?
+      attr_accessor account_id: String?
+      attr_accessor billing_period: Types::BillingPeriod?
     end
 
     class BillingViewElement
@@ -131,6 +243,38 @@ module Aws::Billing
       attr_accessor health_status: Types::BillingViewHealthStatus?
     end
 
+    class BillingViewSegmentTimeRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?begin_date_inclusive: Time,
+        ?end_date_exclusive: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor begin_date_inclusive: Time?
+      attr_accessor end_date_exclusive: Time?
+    end
+
+    class BillingViewSegmentsListElement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?time_range: Types::BillingViewSegmentTimeRange,
+        ?billing_transfer_account_id: String,
+        ?management_account_id: String,
+        ?billing_group_primary_account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor time_range: Types::BillingViewSegmentTimeRange?
+      attr_accessor billing_transfer_account_id: String?
+      attr_accessor management_account_id: String?
+      attr_accessor billing_group_primary_account_id: String?
+    end
+
     module BillingViewStatus
       HEALTHY: String
       UNHEALTHY: String
@@ -153,6 +297,118 @@ module Aws::Billing
       PRIMARY: String
       BILLING_GROUP: String
       CUSTOM: String
+      BILLING_TRANSFER: String
+      BILLING_TRANSFER_SHOWBACK: String
+    end
+
+    class BusinessSupportAccountCharge
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?support_plan_name: String,
+        ?total_charge: String,
+        ?total_usage_basis: String,
+        ?tier_charges: Array[Types::BusinessSupportTierCharge],
+        ?support_discount: Types::BusinessSupportDiscount,
+        ?support_eligible_spend_by_service: Array[Types::BusinessSupportServiceSpend],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor support_plan_name: String?
+      attr_accessor total_charge: String?
+      attr_accessor total_usage_basis: String?
+      attr_accessor tier_charges: Array[Types::BusinessSupportTierCharge]?
+      attr_accessor support_discount: Types::BusinessSupportDiscount?
+      attr_accessor support_eligible_spend_by_service: Array[Types::BusinessSupportServiceSpend]?
+    end
+
+    class BusinessSupportDiscount
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?discount_amount: String,
+        ?discount_percentage: String,
+        ?discount_type: String,
+        ?discount_source: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor discount_amount: String?
+      attr_accessor discount_percentage: String?
+      attr_accessor discount_type: String?
+      attr_accessor discount_source: String?
+    end
+
+    class BusinessSupportServiceSpend
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?contributing_service: String,
+        ?item_type: String,
+        ?description: String,
+        ?charge_amount: String,
+        ?currency: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contributing_service: String?
+      attr_accessor item_type: String?
+      attr_accessor description: String?
+      attr_accessor charge_amount: String?
+      attr_accessor currency: String?
+    end
+
+    class BusinessSupportSubscriptionContract
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?plan_name: String,
+        ?contract_start_date: Time,
+        ?contract_end_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor plan_name: String?
+      attr_accessor contract_start_date: Time?
+      attr_accessor contract_end_date: Time?
+    end
+
+    class BusinessSupportTierCharge
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tier_description: String,
+        ?tier_rate: String,
+        ?usage_slice: String,
+        ?tier_charge: String,
+        ?charge_period_start_date: Time,
+        ?charge_period_end_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tier_description: String?
+      attr_accessor tier_rate: String?
+      attr_accessor usage_slice: String?
+      attr_accessor tier_charge: String?
+      attr_accessor charge_period_start_date: Time?
+      attr_accessor charge_period_end_date: Time?
+    end
+
+    class ChargeAccount
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?charge_percentage: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor charge_percentage: String?
     end
 
     class ConflictException
@@ -168,6 +424,32 @@ module Aws::Billing
       attr_accessor message: String?
       attr_accessor resource_id: String?
       attr_accessor resource_type: String?
+    end
+
+    class ContractAccount
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?is_gdn: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor is_gdn: bool?
+    end
+
+    class CostCategoryValues
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor values: Array[String]?
     end
 
     class CreateBillingViewRequest
@@ -202,6 +484,90 @@ module Aws::Billing
 
       attr_accessor arn: String?
       attr_accessor created_at: Time?
+    end
+
+    class CreditAllocationHistoryEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?credit_id: String,
+        ?credit_amount: Types::Amount,
+        ?description: String,
+        ?account_id: String,
+        ?applied_service_name: String,
+        ?billing_month: String,
+        ?is_estimated_bill: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor credit_id: String?
+      attr_accessor credit_amount: Types::Amount?
+      attr_accessor description: String?
+      attr_accessor account_id: String?
+      attr_accessor applied_service_name: String?
+      attr_accessor billing_month: String?
+      attr_accessor is_estimated_bill: bool?
+    end
+
+    class CreditData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?credit_id: String,
+        ?account_id: String,
+        ?credit_type: String,
+        ?initial_amount: Types::Amount,
+        ?remaining_amount: Types::Amount,
+        ?estimated_amount: Types::Amount,
+        ?applicable_product_names: Array[String],
+        ?description: String,
+        ?start_date: Time,
+        ?end_date: Time,
+        ?exhaust_date: Time,
+        ?application_type: String,
+        ?shareable_accounts: Array[String],
+        ?account_has_credit_sharing_enabled: bool,
+        ?credit_console_visibility: String,
+        ?credit_sharing_type: String,
+        ?cost_category_arn: String,
+        ?rule_name: String,
+        ?credit_status: String,
+        ?purchase_type_applications: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor credit_id: String?
+      attr_accessor account_id: String?
+      attr_accessor credit_type: String?
+      attr_accessor initial_amount: Types::Amount?
+      attr_accessor remaining_amount: Types::Amount?
+      attr_accessor estimated_amount: Types::Amount?
+      attr_accessor applicable_product_names: Array[String]?
+      attr_accessor description: String?
+      attr_accessor start_date: Time?
+      attr_accessor end_date: Time?
+      attr_accessor exhaust_date: Time?
+      attr_accessor application_type: String?
+      attr_accessor shareable_accounts: Array[String]?
+      attr_accessor account_has_credit_sharing_enabled: bool?
+      attr_accessor credit_console_visibility: String?
+      attr_accessor credit_sharing_type: String?
+      attr_accessor cost_category_arn: String?
+      attr_accessor rule_name: String?
+      attr_accessor credit_status: String?
+      attr_accessor purchase_type_applications: Array[String]?
+    end
+
+    module CreditSharingType
+      DEFAULT: String
+      DISABLED: String
+      CUSTOM: String
+      COST_CATEGORY_RULE: String
+    end
+
+    module CreditStatus
+      ENABLED: String
+      DISABLED: String
     end
 
     class DeleteBillingViewRequest
@@ -269,19 +635,64 @@ module Aws::Billing
       attr_accessor arn: String?
     end
 
+    class EnterpriseSupportTimePeriod
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?begin_date: Time,
+        ?end_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor begin_date: Time?
+      attr_accessor end_date: Time?
+    end
+
     class Expression
       include Smithy::Schema::Structure
 
       def initialize: (
         ?dimensions: Types::DimensionValues,
         ?tags: Types::TagValues,
+        ?cost_categories: Types::CostCategoryValues,
         ?time_range: Types::TimeRange,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor dimensions: Types::DimensionValues?
       attr_accessor tags: Types::TagValues?
+      attr_accessor cost_categories: Types::CostCategoryValues?
       attr_accessor time_range: Types::TimeRange?
+    end
+
+    class GetBillingPreferencesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?features: Array[String],
+        ?filters: Array[Types::BillingFeatureFilter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor features: Array[String]?
+      attr_accessor filters: Array[Types::BillingFeatureFilter]?
+    end
+
+    class GetBillingPreferencesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?billing_preferences: Array[Types::BillingPreferenceSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor billing_preferences: Array[Types::BillingPreferenceSummary]?
+      attr_accessor next_token: String?
     end
 
     class GetBillingViewRequest
@@ -304,6 +715,166 @@ module Aws::Billing
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor billing_view: Types::BillingViewElement?
+    end
+
+    class GetCreditAllocationHistoryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?credit_id: Integer,
+        ?start_date: Time,
+        ?end_date: Time,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor credit_id: Integer?
+      attr_accessor start_date: Time?
+      attr_accessor end_date: Time?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class GetCreditAllocationHistoryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?credit_allocation_history_list: Array[Types::CreditAllocationHistoryEntry],
+        ?partial_results: bool,
+        ?failed_months: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor credit_allocation_history_list: Array[Types::CreditAllocationHistoryEntry]?
+      attr_accessor partial_results: bool?
+      attr_accessor failed_months: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class GetCreditsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?start_date: Time,
+        ?end_date: Time,
+        ?payer_account_flag: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor start_date: Time?
+      attr_accessor end_date: Time?
+      attr_accessor payer_account_flag: bool?
+    end
+
+    class GetCreditsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?credits: Array[Types::CreditData],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor credits: Array[Types::CreditData]?
+    end
+
+    class GetEnterpriseSupportChargeSummaryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?billing_month: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor billing_month: String?
+    end
+
+    class GetEnterpriseSupportChargeSummaryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?payer_account_id: String,
+        ?billing_month: String,
+        ?billing_period_start_date: Time,
+        ?billing_period_end_date: Time,
+        ?is_estimated: bool,
+        ?bill_date: Time,
+        ?support_charge: String,
+        ?total_support_charge: String,
+        ?support_discount: String,
+        ?total_support_eligible_spend: String,
+        ?total_support_eligible_usage_spend: String,
+        ?total_support_eligible_reserved_instance_spend: String,
+        ?total_support_eligible_savings_plan_spend: String,
+        ?support_charge_percentage: String,
+        ?support_effective_pricing_plan: Types::PricingPlan,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor payer_account_id: String?
+      attr_accessor billing_month: String?
+      attr_accessor billing_period_start_date: Time?
+      attr_accessor billing_period_end_date: Time?
+      attr_accessor is_estimated: bool?
+      attr_accessor bill_date: Time?
+      attr_accessor support_charge: String?
+      attr_accessor total_support_charge: String?
+      attr_accessor support_discount: String?
+      attr_accessor total_support_eligible_spend: String?
+      attr_accessor total_support_eligible_usage_spend: String?
+      attr_accessor total_support_eligible_reserved_instance_spend: String?
+      attr_accessor total_support_eligible_savings_plan_spend: String?
+      attr_accessor support_charge_percentage: String?
+      attr_accessor support_effective_pricing_plan: Types::PricingPlan?
+    end
+
+    class GetEnterpriseSupportContractDetailsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?billing_month: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor billing_month: String?
+    end
+
+    class GetEnterpriseSupportContractDetailsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?is_contract_active: bool,
+        ?support_allocation_method: String,
+        ?support_reserved_instance_amortization_start_date: Time,
+        ?support_reserved_instance_treatment_method: String,
+        ?support_savings_plans_amortization_start_date: Time,
+        ?support_savings_plans_treatment_method: String,
+        ?support_prorate_start_date: Time,
+        ?contract_payer_account_ids: Array[Types::ContractAccount],
+        ?charged_payer_account_ids: Array[Types::ChargeAccount],
+        ?additional_support_charge: Array[Types::AdditionalCharge],
+        ?additional_support_eligible_usage_spend: Array[Types::AdditionalCharge],
+        ?pricing_plans: Array[Types::PricingPlan],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor is_contract_active: bool?
+      attr_accessor support_allocation_method: String?
+      attr_accessor support_reserved_instance_amortization_start_date: Time?
+      attr_accessor support_reserved_instance_treatment_method: String?
+      attr_accessor support_savings_plans_amortization_start_date: Time?
+      attr_accessor support_savings_plans_treatment_method: String?
+      attr_accessor support_prorate_start_date: Time?
+      attr_accessor contract_payer_account_ids: Array[Types::ContractAccount]?
+      attr_accessor charged_payer_account_ids: Array[Types::ChargeAccount]?
+      attr_accessor additional_support_charge: Array[Types::AdditionalCharge]?
+      attr_accessor additional_support_eligible_usage_spend: Array[Types::AdditionalCharge]?
+      attr_accessor pricing_plans: Array[Types::PricingPlan]?
     end
 
     class GetResourcePolicyRequest
@@ -341,6 +912,69 @@ module Aws::Billing
       attr_accessor message: String?
     end
 
+    class LinkedAccountCharge
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?payer_account_id: String,
+        ?account_type: String,
+        ?billable_seconds: Integer,
+        ?total_seconds: Integer,
+        ?total_support_eligible_spend: String,
+        ?prorated_total_support_eligible_spend: String,
+        ?linked_time_periods: Array[Types::EnterpriseSupportTimePeriod],
+        ?subscription_time_periods: Array[Types::EnterpriseSupportTimePeriod],
+        ?total_support_eligible_reserved_instance_spend: String,
+        ?total_support_eligible_savings_plan_spend: String,
+        ?support_eligible_spend_by_service: Array[Types::ServiceLevelAccountUsage],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor payer_account_id: String?
+      attr_accessor account_type: String?
+      attr_accessor billable_seconds: Integer?
+      attr_accessor total_seconds: Integer?
+      attr_accessor total_support_eligible_spend: String?
+      attr_accessor prorated_total_support_eligible_spend: String?
+      attr_accessor linked_time_periods: Array[Types::EnterpriseSupportTimePeriod]?
+      attr_accessor subscription_time_periods: Array[Types::EnterpriseSupportTimePeriod]?
+      attr_accessor total_support_eligible_reserved_instance_spend: String?
+      attr_accessor total_support_eligible_savings_plan_spend: String?
+      attr_accessor support_eligible_spend_by_service: Array[Types::ServiceLevelAccountUsage]?
+    end
+
+    class ListBillingViewSegmentsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?time_range: Types::BillingViewSegmentTimeRange,
+        ?arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor time_range: Types::BillingViewSegmentTimeRange?
+      attr_accessor arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListBillingViewSegmentsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::BillingViewSegmentsListElement],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::BillingViewSegmentsListElement]?
+      attr_accessor next_token: String?
+    end
+
     class ListBillingViewsRequest
       include Smithy::Schema::Structure
 
@@ -348,6 +982,7 @@ module Aws::Billing
         ?active_time_range: Types::ActiveTimeRange,
         ?arns: Array[String],
         ?billing_view_types: Array[String],
+        ?names: Array[Types::StringSearch],
         ?owner_account_id: String,
         ?source_account_id: String,
         ?max_results: Integer,
@@ -358,6 +993,7 @@ module Aws::Billing
       attr_accessor active_time_range: Types::ActiveTimeRange?
       attr_accessor arns: Array[String]?
       attr_accessor billing_view_types: Array[String]?
+      attr_accessor names: Array[Types::StringSearch]?
       attr_accessor owner_account_id: String?
       attr_accessor source_account_id: String?
       attr_accessor max_results: Integer?
@@ -374,6 +1010,110 @@ module Aws::Billing
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor billing_views: Array[Types::BillingViewListElement]?
+      attr_accessor next_token: String?
+    end
+
+    class ListBusinessSupportAccountChargesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?billing_month: String,
+        ?account_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor billing_month: String?
+      attr_accessor account_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListBusinessSupportAccountChargesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?billing_month: String,
+        ?is_estimated: bool,
+        ?total_support_charge: String,
+        ?total_support_eligible_spend: String,
+        ?account_count: Integer,
+        ?account_charges: Array[Types::BusinessSupportAccountCharge],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor billing_month: String?
+      attr_accessor is_estimated: bool?
+      attr_accessor total_support_charge: String?
+      attr_accessor total_support_eligible_spend: String?
+      attr_accessor account_count: Integer?
+      attr_accessor account_charges: Array[Types::BusinessSupportAccountCharge]?
+      attr_accessor next_token: String?
+    end
+
+    class ListBusinessSupportSubscriptionHistoryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?billing_month: String,
+        ?account_id: String,
+        ?start_date: Time,
+        ?end_date: Time,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor billing_month: String?
+      attr_accessor account_id: String?
+      attr_accessor start_date: Time?
+      attr_accessor end_date: Time?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListBusinessSupportSubscriptionHistoryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscription_contracts: Array[Types::BusinessSupportSubscriptionContract],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscription_contracts: Array[Types::BusinessSupportSubscriptionContract]?
+      attr_accessor next_token: String?
+    end
+
+    class ListEnterpriseSupportLinkedAccountChargesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?billing_month: String,
+        ?account_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor billing_month: String?
+      attr_accessor account_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListEnterpriseSupportLinkedAccountChargesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?linked_account: Array[Types::LinkedAccountCharge],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor linked_account: Array[Types::LinkedAccountCharge]?
       attr_accessor next_token: String?
     end
 
@@ -427,6 +1167,85 @@ module Aws::Billing
       attr_accessor resource_tags: Array[Types::ResourceTag]?
     end
 
+    module PreferenceValue
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class PricingPlan
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pricing_plan_id: String,
+        ?name: String,
+        ?description: String,
+        ?start_date: Time,
+        ?end_date: Time,
+        ?plan_discount_percent: String,
+        ?discount_applies_to_minimum_charge: bool,
+        ?minimum_charge: String,
+        ?tiered: String,
+        ?tiers: Array[Types::PricingPlanTier],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pricing_plan_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor start_date: Time?
+      attr_accessor end_date: Time?
+      attr_accessor plan_discount_percent: String?
+      attr_accessor discount_applies_to_minimum_charge: bool?
+      attr_accessor minimum_charge: String?
+      attr_accessor tiered: String?
+      attr_accessor tiers: Array[Types::PricingPlanTier]?
+    end
+
+    class PricingPlanTier
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tier_minimum: String,
+        ?tier_maximum: String,
+        ?base_charge: String,
+        ?additional_percentage_of_aggregate_charges: String,
+        ?aggregate_charges_adjustment: String,
+        ?incremental: bool,
+        ?increment: String,
+        ?increment_charge: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tier_minimum: String?
+      attr_accessor tier_maximum: String?
+      attr_accessor base_charge: String?
+      attr_accessor additional_percentage_of_aggregate_charges: String?
+      attr_accessor aggregate_charges_adjustment: String?
+      attr_accessor incremental: bool?
+      attr_accessor increment: String?
+      attr_accessor increment_charge: String?
+    end
+
+    class RedeemCreditsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?promo_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor promo_code: String?
+    end
+
+    class RedeemCreditsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
     class ResourceNotFoundException
       include Smithy::Schema::Structure
 
@@ -455,6 +1274,23 @@ module Aws::Billing
       attr_accessor value: String?
     end
 
+    module SearchOption
+      STARTS_WITH: String
+    end
+
+    class ServiceLevelAccountUsage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_code: String,
+        ?total_support_eligible_spend: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_code: String?
+      attr_accessor total_support_eligible_spend: String?
+    end
+
     class ServiceQuotaExceededException
       include Smithy::Schema::Structure
 
@@ -472,6 +1308,19 @@ module Aws::Billing
       attr_accessor resource_type: String?
       attr_accessor service_code: String?
       attr_accessor quota_code: String?
+    end
+
+    class StringSearch
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?search_option: String,
+        ?search_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor search_option: String?
+      attr_accessor search_value: String?
     end
 
     class TagResourceRequest
@@ -547,6 +1396,28 @@ module Aws::Billing
     end
 
     class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateBillingPreferencesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?feature: String,
+        ?billing_preferences_per_key: Array[Types::BillingPreferenceForKey],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor feature: String?
+      attr_accessor billing_preferences_per_key: Array[Types::BillingPreferenceForKey]?
+    end
+
+    class UpdateBillingPreferencesResponse
       include Smithy::Schema::Structure
 
       def initialize: (

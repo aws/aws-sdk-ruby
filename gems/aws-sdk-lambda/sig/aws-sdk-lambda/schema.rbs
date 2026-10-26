@@ -13,6 +13,7 @@ module Aws::Lambda
     AdditionalVersionWeights: MapShape
     Alias: StringShape
     AliasConfiguration: StructureShape
+    AliasLimitExceededException: StructureShape
     AliasList: ListShape
     AliasRoutingConfiguration: StructureShape
     AllowCredentials: BooleanShape
@@ -24,11 +25,54 @@ module Aws::Lambda
     Architecture: EnumShape
     ArchitecturesList: ListShape
     Arn: StringShape
+    AttemptCount: IntegerShape
     BatchSize: IntegerShape
+    BinaryOperationPayload: BlobShape
     BisectBatchOnFunctionError: BooleanShape
     Blob: BlobShape
     BlobStream: BlobShape
     Boolean: BooleanShape
+    CallbackDetails: StructureShape
+    CallbackFailedDetails: StructureShape
+    CallbackId: StringShape
+    CallbackOptions: StructureShape
+    CallbackStartedDetails: StructureShape
+    CallbackSucceededDetails: StructureShape
+    CallbackTimedOutDetails: StructureShape
+    CallbackTimeoutException: StructureShape
+    CapacityProvider: StructureShape
+    CapacityProviderArn: StringShape
+    CapacityProviderConfig: StructureShape
+    CapacityProviderLimitExceededException: StructureShape
+    CapacityProviderLoggingConfig: StructureShape
+    CapacityProviderMaxVCpuCount: IntegerShape
+    CapacityProviderName: StringShape
+    CapacityProviderPermissionsConfig: StructureShape
+    CapacityProviderPredefinedMetricType: EnumShape
+    CapacityProviderScalingConfig: StructureShape
+    CapacityProviderScalingMode: EnumShape
+    CapacityProviderScalingPoliciesList: ListShape
+    CapacityProviderSecurityGroupIds: ListShape
+    CapacityProviderState: EnumShape
+    CapacityProviderSubnetIds: ListShape
+    CapacityProviderTelemetryConfig: StructureShape
+    CapacityProviderVpcConfig: StructureShape
+    CapacityProvidersList: ListShape
+    ChainedInvokeDetails: StructureShape
+    ChainedInvokeFailedDetails: StructureShape
+    ChainedInvokeOptions: StructureShape
+    ChainedInvokeStartedDetails: StructureShape
+    ChainedInvokeStoppedDetails: StructureShape
+    ChainedInvokeSucceededDetails: StructureShape
+    ChainedInvokeTimedOutDetails: StructureShape
+    CheckpointDurableExecutionRequest: StructureShape
+    CheckpointDurableExecutionResponse: StructureShape
+    CheckpointToken: StringShape
+    CheckpointUpdatedExecutionState: StructureShape
+    ClientToken: StringShape
+    CodeArtifactUserDeletedException: StructureShape
+    CodeArtifactUserFailedException: StructureShape
+    CodeArtifactUserPendingException: StructureShape
     CodeSigningConfig: StructureShape
     CodeSigningConfigArn: StringShape
     CodeSigningConfigId: StringShape
@@ -42,9 +86,16 @@ module Aws::Lambda
     CompatibleArchitectures: ListShape
     CompatibleRuntimes: ListShape
     Concurrency: StructureShape
+    ContextDetails: StructureShape
+    ContextFailedDetails: StructureShape
+    ContextOptions: StructureShape
+    ContextStartedDetails: StructureShape
+    ContextSucceededDetails: StructureShape
     Cors: StructureShape
     CreateAliasOutput: StructureShape
     CreateAliasRequest: StructureShape
+    CreateCapacityProviderRequest: StructureShape
+    CreateCapacityProviderResponse: StructureShape
     CreateCodeSigningConfigRequest: StructureShape
     CreateCodeSigningConfigResponse: StructureShape
     CreateEventSourceMappingOutput: StructureShape
@@ -57,6 +108,8 @@ module Aws::Lambda
     Date: TimestampShape
     DeadLetterConfig: StructureShape
     DeleteAliasRequest: StructureShape
+    DeleteCapacityProviderRequest: StructureShape
+    DeleteCapacityProviderResponse: StructureShape
     DeleteCodeSigningConfigRequest: StructureShape
     DeleteCodeSigningConfigResponse: StructureShape
     DeleteEventSourceMappingOutput: StructureShape
@@ -65,13 +118,22 @@ module Aws::Lambda
     DeleteFunctionConcurrencyRequest: StructureShape
     DeleteFunctionEventInvokeConfigRequest: StructureShape
     DeleteFunctionRequest: StructureShape
+    DeleteFunctionResponse: StructureShape
     DeleteFunctionUrlConfigRequest: StructureShape
     DeleteLayerVersionRequest: StructureShape
     DeleteProvisionedConcurrencyConfigRequest: StructureShape
+    DeleteResourcePolicyRequest: StructureShape
     Description: StringShape
     DestinationArn: StringShape
     DestinationConfig: StructureShape
+    DirectS3Read: EnumShape
     DocumentDBEventSourceConfig: StructureShape
+    DurableConfig: StructureShape
+    DurableExecutionAlreadyStartedException: StructureShape
+    DurableExecutionArn: StringShape
+    DurableExecutionName: StringShape
+    DurableExecutions: ListShape
+    DurationSeconds: IntegerShape
     EC2AccessDeniedException: StructureShape
     EC2ThrottledException: StructureShape
     EC2UnexpectedException: StructureShape
@@ -80,6 +142,7 @@ module Aws::Lambda
     EFSMountFailureException: StructureShape
     EFSMountTimeoutException: StructureShape
     ENILimitReachedException: StructureShape
+    ENINotReadyException: StructureShape
     Enabled: BooleanShape
     EndPointType: EnumShape
     Endpoint: StringShape
@@ -93,14 +156,40 @@ module Aws::Lambda
     EnvironmentVariables: MapShape
     EphemeralStorage: StructureShape
     EphemeralStorageSize: IntegerShape
+    ErrorData: StringShape
+    ErrorMessage: StringShape
+    ErrorObject: StructureShape
+    ErrorType: StringShape
+    Event: StructureShape
+    EventError: StructureShape
+    EventId: IntegerShape
+    EventInput: StructureShape
+    EventResult: StructureShape
     EventSourceMappingArn: StringShape
     EventSourceMappingConfiguration: StructureShape
+    EventSourceMappingLoggingConfig: StructureShape
     EventSourceMappingMetric: EnumShape
     EventSourceMappingMetricList: ListShape
     EventSourceMappingMetricsConfig: StructureShape
+    EventSourceMappingSystemLogLevel: EnumShape
     EventSourceMappingsList: ListShape
     EventSourcePosition: EnumShape
     EventSourceToken: StringShape
+    EventType: EnumShape
+    Events: ListShape
+    Execution: StructureShape
+    ExecutionDataIncluded: BooleanShape
+    ExecutionDetails: StructureShape
+    ExecutionEnvironmentMemoryGiBPerVCpu: FloatShape
+    ExecutionFailedDetails: StructureShape
+    ExecutionStartedDetails: StructureShape
+    ExecutionStatus: EnumShape
+    ExecutionStatusList: ListShape
+    ExecutionStoppedDetails: StructureShape
+    ExecutionSucceededDetails: StructureShape
+    ExecutionTimedOutDetails: StructureShape
+    ExecutionTimeout: IntegerShape
+    ExecutionTimestamp: TimestampShape
     FileSystemArn: StringShape
     FileSystemConfig: StructureShape
     FileSystemConfigList: ListShape
@@ -115,6 +204,7 @@ module Aws::Lambda
     FunctionArnList: ListShape
     FunctionCode: StructureShape
     FunctionCodeLocation: StructureShape
+    FunctionCodeLocationError: StructureShape
     FunctionConfiguration: StructureShape
     FunctionEventInvokeConfig: StructureShape
     FunctionEventInvokeConfigList: ListShape
@@ -122,18 +212,33 @@ module Aws::Lambda
     FunctionName: StringShape
     FunctionResponseType: EnumShape
     FunctionResponseTypeList: ListShape
+    FunctionScalingConfig: StructureShape
+    FunctionScalingConfigExecutionEnvironments: IntegerShape
     FunctionUrl: StringShape
     FunctionUrlAuthType: EnumShape
     FunctionUrlConfig: StructureShape
     FunctionUrlConfigList: ListShape
+    FunctionUrlFunctionName: StringShape
     FunctionUrlQualifier: StringShape
     FunctionVersion: EnumShape
+    FunctionVersionLatestPublished: EnumShape
+    FunctionVersionsByCapacityProviderList: ListShape
+    FunctionVersionsByCapacityProviderListItem: StructureShape
+    FunctionVersionsPerCapacityProviderLimitExceededException: StructureShape
     GetAccountSettingsRequest: StructureShape
     GetAccountSettingsResponse: StructureShape
     GetAliasOutput: StructureShape
     GetAliasRequest: StructureShape
+    GetCapacityProviderRequest: StructureShape
+    GetCapacityProviderResponse: StructureShape
     GetCodeSigningConfigRequest: StructureShape
     GetCodeSigningConfigResponse: StructureShape
+    GetDurableExecutionHistoryRequest: StructureShape
+    GetDurableExecutionHistoryResponse: StructureShape
+    GetDurableExecutionRequest: StructureShape
+    GetDurableExecutionResponse: StructureShape
+    GetDurableExecutionStateRequest: StructureShape
+    GetDurableExecutionStateResponse: StructureShape
     GetEventSourceMappingOutput: StructureShape
     GetEventSourceMappingRequest: StructureShape
     GetFunctionCodeSigningConfigRequest: StructureShape
@@ -148,6 +253,8 @@ module Aws::Lambda
     GetFunctionRecursionConfigResponse: StructureShape
     GetFunctionRequest: StructureShape
     GetFunctionResponse: StructureShape
+    GetFunctionScalingConfigRequest: StructureShape
+    GetFunctionScalingConfigResponse: StructureShape
     GetFunctionUrlConfigRequest: StructureShape
     GetFunctionUrlConfigResponse: StructureShape
     GetLayerVersionByArnOutput: StructureShape
@@ -160,6 +267,8 @@ module Aws::Lambda
     GetPolicyResponse: StructureShape
     GetProvisionedConcurrencyConfigRequest: StructureShape
     GetProvisionedConcurrencyConfigResponse: StructureShape
+    GetResourcePolicyRequest: StructureShape
+    GetResourcePolicyResponse: StructureShape
     GetRuntimeManagementConfigRequest: StructureShape
     GetRuntimeManagementConfigResponse: StructureShape
     Handler: StringShape
@@ -169,6 +278,11 @@ module Aws::Lambda
     ImageConfig: StructureShape
     ImageConfigError: StructureShape
     ImageConfigResponse: StructureShape
+    IncludeExecutionData: BooleanShape
+    InputPayload: StringShape
+    InstanceRequirements: StructureShape
+    InstanceType: StringShape
+    InstanceTypeSet: ListShape
     Integer: IntegerShape
     InvalidCodeSignatureException: StructureShape
     InvalidParameterValueException: StructureShape
@@ -177,6 +291,7 @@ module Aws::Lambda
     InvalidSecurityGroupIDException: StructureShape
     InvalidSubnetIDException: StructureShape
     InvalidZipFileException: StructureShape
+    InvocationCompletedDetails: StructureShape
     InvocationRequest: StructureShape
     InvocationResponse: StructureShape
     InvocationType: EnumShape
@@ -188,10 +303,13 @@ module Aws::Lambda
     InvokeWithResponseStreamRequest: StructureShape
     InvokeWithResponseStreamResponse: StructureShape
     InvokeWithResponseStreamResponseEvent: UnionShape
+    InvokedViaFunctionUrl: BooleanShape
+    ItemCount: IntegerShape
     KMSAccessDeniedException: StructureShape
     KMSDisabledException: StructureShape
     KMSInvalidStateException: StructureShape
     KMSKeyArn: StringShape
+    KMSKeyArnNonEmpty: StringShape
     KMSNotFoundException: StructureShape
     KafkaSchemaRegistryAccessConfig: StructureShape
     KafkaSchemaRegistryAccessConfigList: ListShape
@@ -200,6 +318,7 @@ module Aws::Lambda
     KafkaSchemaValidationAttribute: EnumShape
     KafkaSchemaValidationConfig: StructureShape
     KafkaSchemaValidationConfigList: ListShape
+    LambdaManagedInstancesCapacityProviderConfig: StructureShape
     LastUpdateStatus: EnumShape
     LastUpdateStatusReason: StringShape
     LastUpdateStatusReasonCode: EnumShape
@@ -221,14 +340,20 @@ module Aws::Lambda
     LicenseInfo: StringShape
     ListAliasesRequest: StructureShape
     ListAliasesResponse: StructureShape
+    ListCapacityProvidersRequest: StructureShape
+    ListCapacityProvidersResponse: StructureShape
     ListCodeSigningConfigsRequest: StructureShape
     ListCodeSigningConfigsResponse: StructureShape
+    ListDurableExecutionsByFunctionRequest: StructureShape
+    ListDurableExecutionsByFunctionResponse: StructureShape
     ListEventSourceMappingsRequest: StructureShape
     ListEventSourceMappingsResponse: StructureShape
     ListFunctionEventInvokeConfigsRequest: StructureShape
     ListFunctionEventInvokeConfigsResponse: StructureShape
     ListFunctionUrlConfigsRequest: StructureShape
     ListFunctionUrlConfigsResponse: StructureShape
+    ListFunctionVersionsByCapacityProviderRequest: StructureShape
+    ListFunctionVersionsByCapacityProviderResponse: StructureShape
     ListFunctionsByCodeSigningConfigRequest: StructureShape
     ListFunctionsByCodeSigningConfigResponse: StructureShape
     ListFunctionsRequest: StructureShape
@@ -251,6 +376,7 @@ module Aws::Lambda
     Long: IntegerShape
     MasterRegion: StringShape
     MaxAge: IntegerShape
+    MaxFiftyListItems: IntegerShape
     MaxFunctionEventInvokeConfigListItems: IntegerShape
     MaxItems: IntegerShape
     MaxLayerListItems: IntegerShape
@@ -265,33 +391,56 @@ module Aws::Lambda
     MaximumRetryAttemptsEventSourceMapping: IntegerShape
     MemorySize: IntegerShape
     Method: StringShape
+    MetricTargetValue: FloatShape
     MinimumNumberOfPollers: IntegerShape
+    ModeNotSupportedException: StructureShape
     NameSpacedFunctionArn: StringShape
     NamespacedFunctionName: StringShape
     NamespacedStatementId: StringShape
+    NoPublishedVersionException: StructureShape
     NonNegativeInteger: IntegerShape
     NullableBoolean: BooleanShape
+    NumericLatestPublishedOrAliasQualifier: StringShape
     OnFailure: StructureShape
     OnSuccess: StructureShape
+    Operation: StructureShape
+    OperationAction: EnumShape
+    OperationId: StringShape
+    OperationName: StringShape
+    OperationPayload: StringShape
+    OperationStatus: EnumShape
+    OperationSubType: StringShape
+    OperationType: EnumShape
+    OperationUpdate: StructureShape
+    OperationUpdates: ListShape
+    Operations: ListShape
     OrganizationId: StringShape
     Origin: StringShape
+    OutputPayload: StringShape
     PackageType: EnumShape
     ParallelizationFactor: IntegerShape
     Pattern: StringShape
+    PerExecutionEnvironmentMaxConcurrency: IntegerShape
     PolicyLengthExceededException: StructureShape
+    PolicyResourceArn: StringShape
     PositiveInteger: IntegerShape
     PreconditionFailedException: StructureShape
     Principal: StringShape
     PrincipalOrgID: StringShape
+    PropagateTags: StructureShape
+    PropagateTagsMode: EnumShape
     ProvisionedConcurrencyConfigList: ListShape
     ProvisionedConcurrencyConfigListItem: StructureShape
     ProvisionedConcurrencyConfigNotFoundException: StructureShape
     ProvisionedConcurrencyStatusEnum: EnumShape
     ProvisionedPollerConfig: StructureShape
+    ProvisionedPollerGroupName: StringShape
+    PublicPolicyException: StructureShape
     PublishLayerVersionRequest: StructureShape
     PublishLayerVersionResponse: StructureShape
     PublishVersionOutput: StructureShape
     PublishVersionRequest: StructureShape
+    PublishedFunctionQualifier: StringShape
     PutFunctionCodeSigningConfigRequest: StructureShape
     PutFunctionCodeSigningConfigResponse: StructureShape
     PutFunctionConcurrencyOutput: StructureShape
@@ -300,8 +449,12 @@ module Aws::Lambda
     PutFunctionEventInvokeConfigRequest: StructureShape
     PutFunctionRecursionConfigRequest: StructureShape
     PutFunctionRecursionConfigResponse: StructureShape
+    PutFunctionScalingConfigRequest: StructureShape
+    PutFunctionScalingConfigResponse: StructureShape
     PutProvisionedConcurrencyConfigRequest: StructureShape
     PutProvisionedConcurrencyConfigResponse: StructureShape
+    PutResourcePolicyRequest: StructureShape
+    PutResourcePolicyResponse: StructureShape
     PutRuntimeManagementConfigRequest: StructureShape
     PutRuntimeManagementConfigResponse: StructureShape
     Qualifier: StringShape
@@ -311,21 +464,33 @@ module Aws::Lambda
     RecursiveLoop: EnumShape
     RemoveLayerVersionPermissionRequest: StructureShape
     RemovePermissionRequest: StructureShape
+    ReplayChildren: BooleanShape
     RequestTooLargeException: StructureShape
     ReservedConcurrentExecutions: IntegerShape
+    ResolvedS3Object: StructureShape
     ResourceArn: StringShape
     ResourceConflictException: StructureShape
     ResourceInUseException: StructureShape
     ResourceNotFoundException: StructureShape
     ResourceNotReadyException: StructureShape
+    ResourcePolicy: StringShape
     ResponseStreamingInvocationType: EnumShape
+    RetentionPeriodInDays: IntegerShape
+    RetryDetails: StructureShape
+    ReverseOrder: BooleanShape
+    RevisionId: StringShape
     RoleArn: StringShape
     Runtime: EnumShape
     RuntimeVersionArn: StringShape
     RuntimeVersionConfig: StructureShape
     RuntimeVersionError: StructureShape
     S3Bucket: StringShape
+    S3FilesConfig: StructureShape
+    S3FilesMountConnectivityException: StructureShape
+    S3FilesMountFailureException: StructureShape
+    S3FilesMountTimeoutException: StructureShape
     S3Key: StringShape
+    S3ObjectStorageMode: EnumShape
     S3ObjectVersion: StringShape
     ScalingConfig: StructureShape
     SchemaRegistryEventRecordFormat: EnumShape
@@ -334,24 +499,43 @@ module Aws::Lambda
     SecurityGroupIds: ListShape
     SelfManagedEventSource: StructureShape
     SelfManagedKafkaEventSourceConfig: StructureShape
+    SendDurableExecutionCallbackFailureRequest: StructureShape
+    SendDurableExecutionCallbackFailureResponse: StructureShape
+    SendDurableExecutionCallbackHeartbeatRequest: StructureShape
+    SendDurableExecutionCallbackHeartbeatResponse: StructureShape
+    SendDurableExecutionCallbackSuccessRequest: StructureShape
+    SendDurableExecutionCallbackSuccessResponse: StructureShape
     SensitiveString: StringShape
+    SensitiveStringOnServerOnly: StringShape
+    SerializedRequestEntityTooLargeException: StructureShape
     ServiceException: StructureShape
+    ServiceQuotaExceededException: StructureShape
     SigningProfileVersionArns: ListShape
     SnapStart: StructureShape
     SnapStartApplyOn: EnumShape
     SnapStartException: StructureShape
     SnapStartNotReadyException: StructureShape
     SnapStartOptimizationStatus: EnumShape
+    SnapStartRegenerationFailureException: StructureShape
     SnapStartResponse: StructureShape
     SnapStartTimeoutException: StructureShape
     SourceAccessConfiguration: StructureShape
     SourceAccessConfigurations: ListShape
     SourceAccessType: EnumShape
     SourceOwner: StringShape
+    StackTraceEntries: ListShape
+    StackTraceEntry: StringShape
     State: EnumShape
     StateReason: StringShape
     StateReasonCode: EnumShape
     StatementId: StringShape
+    StepDetails: StructureShape
+    StepFailedDetails: StructureShape
+    StepOptions: StructureShape
+    StepStartedDetails: StructureShape
+    StepSucceededDetails: StructureShape
+    StopDurableExecutionRequest: StructureShape
+    StopDurableExecutionResponse: StructureShape
     String: StringShape
     StringList: ListShape
     SubnetIPAddressLimitReachedException: StructureShape
@@ -367,23 +551,32 @@ module Aws::Lambda
     TagsError: StructureShape
     TagsErrorCode: StringShape
     TagsErrorMessage: StringShape
+    TargetTrackingScalingPolicy: StructureShape
+    TenancyConfig: StructureShape
+    TenantId: StringShape
+    TenantIsolationMode: EnumShape
     ThrottleReason: EnumShape
     Timeout: IntegerShape
     Timestamp: StringShape
     TooManyRequestsException: StructureShape
     Topic: StringShape
     Topics: ListShape
+    TraceHeader: StructureShape
     TracingConfig: StructureShape
     TracingConfigResponse: StructureShape
     TracingMode: EnumShape
+    Truncated: BooleanShape
     TumblingWindowInSeconds: IntegerShape
     URI: StringShape
+    UUIDString: StringShape
     UnqualifiedFunctionName: StringShape
     UnreservedConcurrentExecutions: IntegerShape
     UnsupportedMediaTypeException: StructureShape
     UntagResourceRequest: StructureShape
     UpdateAliasOutput: StructureShape
     UpdateAliasRequest: StructureShape
+    UpdateCapacityProviderRequest: StructureShape
+    UpdateCapacityProviderResponse: StructureShape
     UpdateCodeSigningConfigRequest: StructureShape
     UpdateCodeSigningConfigResponse: StructureShape
     UpdateEventSourceMappingOutput: StructureShape
@@ -398,11 +591,18 @@ module Aws::Lambda
     UpdateFunctionUrlConfigResponse: StructureShape
     UpdateRuntimeOn: EnumShape
     Version: StringShape
+    VersionWithLatestPublished: StringShape
     VpcConfig: StructureShape
     VpcConfigResponse: StructureShape
     VpcId: StringShape
+    WaitCancelledDetails: StructureShape
+    WaitDetails: StructureShape
+    WaitOptions: StructureShape
+    WaitStartedDetails: StructureShape
+    WaitSucceededDetails: StructureShape
     Weight: FloatShape
     WorkingDirectory: StringShape
+    XAmznTraceId: StringShape
 
     AWSGirApiService: ServiceShape
   end

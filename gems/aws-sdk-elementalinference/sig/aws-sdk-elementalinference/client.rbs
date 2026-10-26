@@ -1,0 +1,405 @@
+module Aws::ElementalInference
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?account_id_endpoint_mode: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
+      ?connect_timeout: Numeric,
+      ?convert_params: bool,
+      ?credentials_provider: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::ElementalInference::EndpointProvider,
+      ?http_proxy: URI::HTTP | String,
+      ?http_wire_trace: bool,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?max_attempts: Integer,
+      ?profile: String,
+      ?protocol: Symbol | Object,
+      ?raise_response_errors: bool,
+      ?read_timeout: Numeric,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_mode: String,
+      ?retry_strategy: Object,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?ssl_ca_bundle: String,
+      ?ssl_ca_directory: String,
+      ?ssl_ca_store: OpenSSL::X509::Store,
+      ?ssl_verify_peer: bool,
+      ?stub_responses: bool,
+      ?transport: Smithy::Client::NetHTTP::Transport,
+      ?use_dualstack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AssociateFeedResponse
+      include Smithy::Client::_Response[Types::AssociateFeedResponse]
+      def arn: () -> String?
+      def id: () -> String?
+    end
+    def associate_feed: (
+      ?id: String,
+      ?associated_resource_name: String,
+      ?outputs: Array[
+        {
+          name: String,
+          output_config: {
+            cropping: {
+              template_groups: Array[
+                {
+                  name: untyped,
+                  template_uris: Array[String]
+                }
+              ]
+            },
+            clipping: {
+              callback_metadata: String,
+              data_source_configuration: {
+                fixture_id: String
+              }
+            },
+            subtitling: {
+              language: String,
+              aspect_ratio: {
+                width: Integer,
+                height: untyped
+              },
+              dictionary: String,
+              profanity_filter: String
+            },
+            contextual_metadata: {
+              summary_generation: String,
+              extended_analysis: String
+            }
+          },
+          status: String,
+          description: untyped
+        }
+      ],
+      ?dry_run: bool
+    ) -> _AssociateFeedResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateFeedResponse
+
+    interface _CreateDictionaryResponse
+      include Smithy::Client::_Response[Types::CreateDictionaryResponse]
+      def name: () -> String?
+      def arn: () -> String?
+      def id: () -> String?
+      def language: () -> String?
+      def status: () -> String?
+      def references: () -> Array[String]?
+      def tags: () -> Hash[String, String]?
+    end
+    def create_dictionary: (
+      ?name: String,
+      ?language: String,
+      ?entries: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateDictionaryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDictionaryResponse
+
+    interface _CreateFeedResponse
+      include Smithy::Client::_Response[Types::CreateFeedResponse]
+      def arn: () -> String?
+      def name: () -> String?
+      def id: () -> String?
+      def data_endpoints: () -> Array[String]?
+      def outputs: () -> Array[Types::GetOutput]?
+      def access_role_arn: () -> String?
+      def status: () -> String?
+      def association: () -> Types::FeedAssociation?
+      def tags: () -> Hash[String, String]?
+    end
+    def create_feed: (
+      ?name: String,
+      ?access_role_arn: String,
+      ?outputs: Array[
+        {
+          name: String,
+          output_config: {
+            cropping: {
+              template_groups: Array[
+                {
+                  name: untyped,
+                  template_uris: Array[String]
+                }
+              ]
+            },
+            clipping: {
+              callback_metadata: String,
+              data_source_configuration: {
+                fixture_id: String
+              }
+            },
+            subtitling: {
+              language: String,
+              aspect_ratio: {
+                width: Integer,
+                height: untyped
+              },
+              dictionary: String,
+              profanity_filter: String
+            },
+            contextual_metadata: {
+              summary_generation: String,
+              extended_analysis: String
+            }
+          },
+          status: String,
+          description: untyped
+        }
+      ],
+      ?tags: Hash[String, String]
+    ) -> _CreateFeedResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateFeedResponse
+
+    interface _DeleteDictionaryResponse
+      include Smithy::Client::_Response[Types::DeleteDictionaryResponse]
+      def arn: () -> String?
+      def id: () -> String?
+      def status: () -> String?
+    end
+    def delete_dictionary: (
+      ?id: String
+    ) -> _DeleteDictionaryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDictionaryResponse
+
+    interface _DeleteFeedResponse
+      include Smithy::Client::_Response[Types::DeleteFeedResponse]
+      def arn: () -> String?
+      def id: () -> String?
+      def status: () -> String?
+    end
+    def delete_feed: (
+      ?id: String
+    ) -> _DeleteFeedResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteFeedResponse
+
+    interface _DeleteFeedPolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_feed_policy: (
+      ?id: String
+    ) -> _DeleteFeedPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteFeedPolicyResponse
+
+    interface _DisassociateFeedResponse
+      include Smithy::Client::_Response[Types::DisassociateFeedResponse]
+      def arn: () -> String?
+      def id: () -> String?
+    end
+    def disassociate_feed: (
+      ?id: String,
+      ?associated_resource_name: String,
+      ?dry_run: bool
+    ) -> _DisassociateFeedResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateFeedResponse
+
+    interface _ExportDictionaryEntriesResponse
+      include Smithy::Client::_Response[Types::ExportDictionaryEntriesResponse]
+      def entries: () -> String?
+    end
+    def export_dictionary_entries: (
+      ?id: String
+    ) -> _ExportDictionaryEntriesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ExportDictionaryEntriesResponse
+
+    interface _GetDictionaryResponse
+      include Smithy::Client::_Response[Types::GetDictionaryResponse]
+      def name: () -> String?
+      def arn: () -> String?
+      def id: () -> String?
+      def language: () -> String?
+      def status: () -> String?
+      def references: () -> Array[String]?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_dictionary: (
+      ?id: String
+    ) -> _GetDictionaryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDictionaryResponse
+
+    interface _GetFeedResponse
+      include Smithy::Client::_Response[Types::GetFeedResponse]
+      def arn: () -> String?
+      def name: () -> String?
+      def id: () -> String?
+      def data_endpoints: () -> Array[String]?
+      def outputs: () -> Array[Types::GetOutput]?
+      def access_role_arn: () -> String?
+      def status: () -> String?
+      def association: () -> Types::FeedAssociation?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_feed: (
+      ?id: String
+    ) -> _GetFeedResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFeedResponse
+
+    interface _GetFeedPolicyResponse
+      include Smithy::Client::_Response[Types::GetFeedPolicyResponse]
+      def policy: () -> String?
+    end
+    def get_feed_policy: (
+      ?id: String
+    ) -> _GetFeedPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFeedPolicyResponse
+
+    interface _GetFixtureResponse
+      include Smithy::Client::_Response[Types::GetFixtureResponse]
+      def fixture_id: () -> String?
+      def name: () -> String?
+      def fixture_group: () -> String?
+      def scheduled_start: () -> Time?
+      def status: () -> String?
+      def competitors: () -> Array[Types::Competitor]?
+    end
+    def get_fixture: (
+      ?fixture_id: String
+    ) -> _GetFixtureResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFixtureResponse
+
+    interface _ListDictionariesResponse
+      include Smithy::Client::_Response[Types::ListDictionariesResponse]
+      def dictionaries: () -> Array[Types::DictionarySummary]?
+      def next_token: () -> String?
+    end
+    def list_dictionaries: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListDictionariesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDictionariesResponse
+
+    interface _ListFeedsResponse
+      include Smithy::Client::_Response[Types::ListFeedsResponse]
+      def feeds: () -> Array[Types::FeedSummary]?
+      def next_token: () -> String?
+    end
+    def list_feeds: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListFeedsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFeedsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _PutFeedPolicyResponse
+      include Smithy::Client::_Response[Types::PutFeedPolicyResponse]
+    end
+    def put_feed_policy: (
+      ?id: String,
+      ?policy: String
+    ) -> _PutFeedPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutFeedPolicyResponse
+
+    interface _SearchFixturesResponse
+      include Smithy::Client::_Response[Types::SearchFixturesResponse]
+      def fixtures: () -> Array[Types::FixtureSummary]?
+      def next_token: () -> String?
+    end
+    def search_fixtures: (
+      ?sport: String,
+      ?start_date: String,
+      ?end_date: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _SearchFixturesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchFixturesResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateDictionaryResponse
+      include Smithy::Client::_Response[Types::UpdateDictionaryResponse]
+      def name: () -> String?
+      def arn: () -> String?
+      def id: () -> String?
+      def language: () -> String?
+      def status: () -> String?
+      def references: () -> Array[String]?
+      def tags: () -> Hash[String, String]?
+    end
+    def update_dictionary: (
+      ?id: String,
+      ?name: String,
+      ?language: String,
+      ?entries: String
+    ) -> _UpdateDictionaryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDictionaryResponse
+
+    interface _UpdateFeedResponse
+      include Smithy::Client::_Response[Types::UpdateFeedResponse]
+      def arn: () -> String?
+      def name: () -> String?
+      def id: () -> String?
+      def data_endpoints: () -> Array[String]?
+      def outputs: () -> Array[Types::GetOutput]?
+      def access_role_arn: () -> String?
+      def status: () -> String?
+      def association: () -> Types::FeedAssociation?
+      def tags: () -> Hash[String, String]?
+    end
+    def update_feed: (
+      ?name: String,
+      ?access_role_arn: String,
+      ?id: String,
+      ?outputs: Array[
+        {
+          name: String,
+          output_config: {
+            cropping: {
+              template_groups: Array[
+                {
+                  name: untyped,
+                  template_uris: Array[String]
+                }
+              ]
+            },
+            clipping: {
+              callback_metadata: String,
+              data_source_configuration: {
+                fixture_id: String
+              }
+            },
+            subtitling: {
+              language: String,
+              aspect_ratio: {
+                width: Integer,
+                height: untyped
+              },
+              dictionary: String,
+              profanity_filter: String
+            },
+            contextual_metadata: {
+              summary_generation: String,
+              extended_analysis: String
+            }
+          },
+          status: String,
+          description: untyped,
+          from_association: bool
+        }
+      ]
+    ) -> _UpdateFeedResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFeedResponse
+  end
+end

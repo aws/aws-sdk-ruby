@@ -1,0 +1,2173 @@
+module Aws::Wickr
+  module Types
+
+    module AccessLevel
+      STANDARD: String
+      PREMIUM: String
+    end
+
+    class BadRequestError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class BasicDeviceObject
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+        ?created: String,
+        ?last_login: String,
+        ?status_text: String,
+        ?suspend: bool,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+      attr_accessor created: String?
+      attr_accessor last_login: String?
+      attr_accessor status_text: String?
+      attr_accessor suspend: bool?
+      attr_accessor type: String?
+    end
+
+    class BatchCreateUserRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_id: String,
+        ?users: Array[Types::BatchCreateUserRequestItem],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_id: String?
+      attr_accessor users: Array[Types::BatchCreateUserRequestItem]?
+      attr_accessor client_token: String?
+    end
+
+    class BatchCreateUserRequestItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?first_name: String,
+        ?last_name: String,
+        ?security_group_ids: Array[String],
+        ?username: String,
+        ?invite_code: String,
+        ?invite_code_ttl: Integer,
+        ?code_validation: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor first_name: String?
+      attr_accessor last_name: String?
+      attr_accessor security_group_ids: Array[String]?
+      attr_accessor username: String?
+      attr_accessor invite_code: String?
+      attr_accessor invite_code_ttl: Integer?
+      attr_accessor code_validation: bool?
+    end
+
+    class BatchCreateUserResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?successful: Array[Types::User],
+        ?failed: Array[Types::BatchUserErrorResponseItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor successful: Array[Types::User]?
+      attr_accessor failed: Array[Types::BatchUserErrorResponseItem]?
+    end
+
+    class BatchDeleteUserRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_id: String,
+        ?user_ids: Array[String],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_id: String?
+      attr_accessor user_ids: Array[String]?
+      attr_accessor client_token: String?
+    end
+
+    class BatchDeleteUserResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?successful: Array[Types::BatchUserSuccessResponseItem],
+        ?failed: Array[Types::BatchUserErrorResponseItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor successful: Array[Types::BatchUserSuccessResponseItem]?
+      attr_accessor failed: Array[Types::BatchUserErrorResponseItem]?
+    end
+
+    class BatchDeviceErrorResponseItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?field: String,
+        ?reason: String,
+        ?app_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor field: String?
+      attr_accessor reason: String?
+      attr_accessor app_id: String?
+    end
+
+    class BatchDeviceSuccessResponseItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_id: String?
+    end
+
+    class BatchLookupUserUnameRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_id: String,
+        ?unames: Array[String],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_id: String?
+      attr_accessor unames: Array[String]?
+      attr_accessor client_token: String?
+    end
+
+    class BatchLookupUserUnameResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?successful: Array[Types::BatchUnameSuccessResponseItem],
+        ?failed: Array[Types::BatchUnameErrorResponseItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor successful: Array[Types::BatchUnameSuccessResponseItem]?
+      attr_accessor failed: Array[Types::BatchUnameErrorResponseItem]?
+    end
+
+    class BatchReinviteUserRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_id: String,
+        ?user_ids: Array[String],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_id: String?
+      attr_accessor user_ids: Array[String]?
+      attr_accessor client_token: String?
+    end
+
+    class BatchReinviteUserResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?successful: Array[Types::BatchUserSuccessResponseItem],
+        ?failed: Array[Types::BatchUserErrorResponseItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor successful: Array[Types::BatchUserSuccessResponseItem]?
+      attr_accessor failed: Array[Types::BatchUserErrorResponseItem]?
+    end
+
+    class BatchResetDevicesForUserRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_id: String,
+        ?user_id: String,
+        ?app_ids: Array[String],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_id: String?
+      attr_accessor user_id: String?
+      attr_accessor app_ids: Array[String]?
+      attr_accessor client_token: String?
+    end
+
+    class BatchResetDevicesForUserResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?successful: Array[Types::BatchDeviceSuccessResponseItem],
+        ?failed: Array[Types::BatchDeviceErrorResponseItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor successful: Array[Types::BatchDeviceSuccessResponseItem]?
+      attr_accessor failed: Array[Types::BatchDeviceErrorResponseItem]?
+    end
+
+    class BatchToggleUserSuspendStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_id: String,
+        ?suspend: bool,
+        ?user_ids: Array[String],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_id: String?
+      attr_accessor suspend: bool?
+      attr_accessor user_ids: Array[String]?
+      attr_accessor client_token: String?
+    end
+
+    class BatchToggleUserSuspendStatusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?successful: Array[Types::BatchUserSuccessResponseItem],
+        ?failed: Array[Types::BatchUserErrorResponseItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor successful: Array[Types::BatchUserSuccessResponseItem]?
+      attr_accessor failed: Array[Types::BatchUserErrorResponseItem]?
+    end
+
+    class BatchUnameErrorResponseItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?field: String,
+        ?reason: String,
+        ?uname: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor field: String?
+      attr_accessor reason: String?
+      attr_accessor uname: String?
+    end
+
+    class BatchUnameSuccessResponseItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?uname: String,
+        ?username: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor uname: String?
+      attr_accessor username: String?
+    end
+
+    class BatchUserErrorResponseItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?field: String,
+        ?reason: String,
+        ?user_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor field: String?
+      attr_accessor reason: String?
+      attr_accessor user_id: String?
+    end
+
+    class BatchUserSuccessResponseItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_id: String?
+    end
+
+    class BlockedGuestUser
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?username: String,
+        ?admin: String,
+        ?modified: String,
+        ?username_hash: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor username: String?
+      attr_accessor admin: String?
+      attr_accessor modified: String?
+      attr_accessor username_hash: String?
+    end
+
+    class Bot
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bot_id: String,
+        ?display_name: String,
+        ?username: String,
+        ?uname: String,
+        ?pubkey: String,
+        ?status: Integer,
+        ?group_id: String,
+        ?has_challenge: bool,
+        ?suspended: bool,
+        ?last_login: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bot_id: String?
+      attr_accessor display_name: String?
+      attr_accessor username: String?
+      attr_accessor uname: String?
+      attr_accessor pubkey: String?
+      attr_accessor status: Integer?
+      attr_accessor group_id: String?
+      attr_accessor has_challenge: bool?
+      attr_accessor suspended: bool?
+      attr_accessor last_login: String?
+    end
+
+    module BotStatus
+      PENDING: Integer
+      ACTIVE: Integer
+    end
+
+    class CallingSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?can_start11_call: bool,
+        ?can_video_call: bool,
+        ?force_tcp_call: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor can_start11_call: bool?
+      attr_accessor can_video_call: bool?
+      attr_accessor force_tcp_call: bool?
+    end
+
+    class ConsentPopupConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?header: String,
+        ?content: String,
+        ?close_button_label: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor header: String?
+      attr_accessor content: String?
+      attr_accessor close_button_label: String?
+    end
+
+    class CreateBotRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_id: String,
+        ?username: String,
+        ?display_name: String,
+        ?group_id: String,
+        ?challenge: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_id: String?
+      attr_accessor username: String?
+      attr_accessor display_name: String?
+      attr_accessor group_id: String?
+      attr_accessor challenge: String?
+    end
+
+    class CreateBotResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?bot_id: String,
+        ?network_id: String,
+        ?username: String,
+        ?display_name: String,
+        ?group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor bot_id: String?
+      attr_accessor network_id: String?
+      attr_accessor username: String?
+      attr_accessor display_name: String?
+      attr_accessor group_id: String?
+    end
+
+    class CreateDataRetentionBotChallengeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_id: String?
+    end
+
+    class CreateDataRetentionBotChallengeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?challenge: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor challenge: String?
+    end
+
+    class CreateDataRetentionBotRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_id: String?
+    end
+
+    class CreateDataRetentionBotResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CreateNetworkRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_name: String,
+        ?access_level: String,
+        ?enable_premium_free_trial: bool,
+        ?encryption_key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_name: String?
+      attr_accessor access_level: String?
+      attr_accessor enable_premium_free_trial: bool?
+      attr_accessor encryption_key_arn: String?
+    end
+
+    class CreateNetworkResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_id: String,
+        ?network_name: String,
+        ?encryption_key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_id: String?
+      attr_accessor network_name: String?
+      attr_accessor encryption_key_arn: String?
+    end
+
+    class CreateSecurityGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_id: String,
+        ?name: String,
+        ?security_group_settings: Types::SecurityGroupSettingsRequest,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_id: String?
+      attr_accessor name: String?
+      attr_accessor security_group_settings: Types::SecurityGroupSettingsRequest?
+      attr_accessor client_token: String?
+    end
+
+    class CreateSecurityGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?security_group: Types::SecurityGroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor security_group: Types::SecurityGroup?
+    end
+
+    module DataRetentionActionType
+      ENABLE: String
+      DISABLE: String
+      PUBKEY_MSG_ACK: String
+    end
+
+    class DeleteBotRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_id: String,
+        ?bot_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_id: String?
+      attr_accessor bot_id: String?
+    end
+
+    class DeleteBotResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DeleteDataRetentionBotRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_id: String?
+    end
+
+    class DeleteDataRetentionBotResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DeleteNetworkRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_id: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_id: String?
+      attr_accessor client_token: String?
+    end
+
+    class DeleteNetworkResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DeleteSecurityGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_id: String,
+        ?group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_id: String?
+      attr_accessor group_id: String?
+    end
+
+    class DeleteSecurityGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?network_id: String,
+        ?group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor network_id: String?
+      attr_accessor group_id: String?
+    end
+
+    class ErrorDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?field: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor field: String?
+      attr_accessor reason: String?
+    end
+
+    class ForbiddenError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class GetBotRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_id: String,
+        ?bot_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_id: String?
+      attr_accessor bot_id: String?
+    end
+
+    class GetBotResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bot_id: String,
+        ?display_name: String,
+        ?username: String,
+        ?uname: String,
+        ?pubkey: String,
+        ?status: Integer,
+        ?group_id: String,
+        ?has_challenge: bool,
+        ?suspended: bool,
+        ?last_login: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bot_id: String?
+      attr_accessor display_name: String?
+      attr_accessor username: String?
+      attr_accessor uname: String?
+      attr_accessor pubkey: String?
+      attr_accessor status: Integer?
+      attr_accessor group_id: String?
+      attr_accessor has_challenge: bool?
+      attr_accessor suspended: bool?
+      attr_accessor last_login: String?
+    end
+
+    class GetBotsCountRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_id: String?
+    end
+
+    class GetBotsCountResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pending: Integer,
+        ?active: Integer,
+        ?total: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pending: Integer?
+      attr_accessor active: Integer?
+      attr_accessor total: Integer?
+    end
+
+    class GetDataRetentionBotRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_id: String?
+    end
+
+    class GetDataRetentionBotResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bot_name: String,
+        ?bot_exists: bool,
+        ?is_bot_active: bool,
+        ?is_data_retention_bot_registered: bool,
+        ?is_data_retention_service_enabled: bool,
+        ?is_pubkey_msg_acked: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bot_name: String?
+      attr_accessor bot_exists: bool?
+      attr_accessor is_bot_active: bool?
+      attr_accessor is_data_retention_bot_registered: bool?
+      attr_accessor is_data_retention_service_enabled: bool?
+      attr_accessor is_pubkey_msg_acked: bool?
+    end
+
+    class GetGuestUserHistoryCountRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_id: String?
+    end
+
+    class GetGuestUserHistoryCountResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?history: Array[Types::GuestUserHistoryCount],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor history: Array[Types::GuestUserHistoryCount]?
+    end
+
+    class GetNetworkRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_id: String?
+    end
+
+    class GetNetworkResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_id: String,
+        ?network_name: String,
+        ?access_level: String,
+        ?aws_account_id: String,
+        ?network_arn: String,
+        ?standing: Integer,
+        ?free_trial_expiration: String,
+        ?migration_state: Integer,
+        ?encryption_key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_id: String?
+      attr_accessor network_name: String?
+      attr_accessor access_level: String?
+      attr_accessor aws_account_id: String?
+      attr_accessor network_arn: String?
+      attr_accessor standing: Integer?
+      attr_accessor free_trial_expiration: String?
+      attr_accessor migration_state: Integer?
+      attr_accessor encryption_key_arn: String?
+    end
+
+    class GetNetworkSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_id: String?
+    end
+
+    class GetNetworkSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?settings: Array[Types::Setting],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor settings: Array[Types::Setting]?
+    end
+
+    class GetOidcInfoRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_id: String,
+        ?client_id: String,
+        ?code: String,
+        ?grant_type: String,
+        ?redirect_uri: String,
+        ?url: String,
+        ?client_secret: String,
+        ?code_verifier: String,
+        ?certificate: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_id: String?
+      attr_accessor client_id: String?
+      attr_accessor code: String?
+      attr_accessor grant_type: String?
+      attr_accessor redirect_uri: String?
+      attr_accessor url: String?
+      attr_accessor client_secret: String?
+      attr_accessor code_verifier: String?
+      attr_accessor certificate: String?
+    end
+
+    class GetOidcInfoResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?openid_connect_info: Types::OidcConfigInfo,
+        ?token_info: Types::OidcTokenInfo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor openid_connect_info: Types::OidcConfigInfo?
+      attr_accessor token_info: Types::OidcTokenInfo?
+    end
+
+    class GetOpentdfConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_id: String?
+    end
+
+    class GetOpentdfConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_id: String,
+        ?domain: String,
+        ?client_secret: String,
+        ?provider: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_id: String?
+      attr_accessor domain: String?
+      attr_accessor client_secret: String?
+      attr_accessor provider: String?
+    end
+
+    class GetSecurityGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_id: String,
+        ?group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_id: String?
+      attr_accessor group_id: String?
+    end
+
+    class GetSecurityGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?security_group: Types::SecurityGroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor security_group: Types::SecurityGroup?
+    end
+
+    class GetUserRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_id: String,
+        ?user_id: String,
+        ?start_time: Time,
+        ?end_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_id: String?
+      attr_accessor user_id: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+    end
+
+    class GetUserResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_id: String,
+        ?first_name: String,
+        ?last_name: String,
+        ?username: String,
+        ?is_admin: bool,
+        ?suspended: bool,
+        ?status: Integer,
+        ?last_activity: Integer,
+        ?last_login: Integer,
+        ?security_group_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_id: String?
+      attr_accessor first_name: String?
+      attr_accessor last_name: String?
+      attr_accessor username: String?
+      attr_accessor is_admin: bool?
+      attr_accessor suspended: bool?
+      attr_accessor status: Integer?
+      attr_accessor last_activity: Integer?
+      attr_accessor last_login: Integer?
+      attr_accessor security_group_ids: Array[String]?
+    end
+
+    class GetUsersCountRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_id: String?
+    end
+
+    class GetUsersCountResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pending: Integer,
+        ?active: Integer,
+        ?rejected: Integer,
+        ?remaining: Integer,
+        ?total: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pending: Integer?
+      attr_accessor active: Integer?
+      attr_accessor rejected: Integer?
+      attr_accessor remaining: Integer?
+      attr_accessor total: Integer?
+    end
+
+    class GuestUser
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?billing_period: String,
+        ?username: String,
+        ?username_hash: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor billing_period: String?
+      attr_accessor username: String?
+      attr_accessor username_hash: String?
+    end
+
+    class GuestUserHistoryCount
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?month: String,
+        ?count: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor month: String?
+      attr_accessor count: String?
+    end
+
+    class InternalServerError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListBlockedGuestUsersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_id: String,
+        ?max_results: Integer,
+        ?sort_direction: String,
+        ?sort_fields: String,
+        ?username: String,
+        ?admin: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor sort_direction: String?
+      attr_accessor sort_fields: String?
+      attr_accessor username: String?
+      attr_accessor admin: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListBlockedGuestUsersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?blocklist: Array[Types::BlockedGuestUser],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor blocklist: Array[Types::BlockedGuestUser]?
+    end
+
+    class ListBotsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?sort_fields: String,
+        ?sort_direction: String,
+        ?display_name: String,
+        ?username: String,
+        ?status: Integer,
+        ?group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor sort_fields: String?
+      attr_accessor sort_direction: String?
+      attr_accessor display_name: String?
+      attr_accessor username: String?
+      attr_accessor status: Integer?
+      attr_accessor group_id: String?
+    end
+
+    class ListBotsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bots: Array[Types::Bot],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bots: Array[Types::Bot]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDevicesForUserRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_id: String,
+        ?user_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?sort_fields: String,
+        ?sort_direction: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_id: String?
+      attr_accessor user_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor sort_fields: String?
+      attr_accessor sort_direction: String?
+    end
+
+    class ListDevicesForUserResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?devices: Array[Types::BasicDeviceObject],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor devices: Array[Types::BasicDeviceObject]?
+    end
+
+    class ListGuestUsersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_id: String,
+        ?max_results: Integer,
+        ?sort_direction: String,
+        ?sort_fields: String,
+        ?username: String,
+        ?billing_period: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor sort_direction: String?
+      attr_accessor sort_fields: String?
+      attr_accessor username: String?
+      attr_accessor billing_period: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListGuestUsersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?guestlist: Array[Types::GuestUser],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor guestlist: Array[Types::GuestUser]?
+    end
+
+    class ListNetworksRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?sort_fields: String,
+        ?sort_direction: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor sort_fields: String?
+      attr_accessor sort_direction: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListNetworksResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?networks: Array[Types::Network],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor networks: Array[Types::Network]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSecurityGroupUsersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_id: String,
+        ?group_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?sort_fields: String,
+        ?sort_direction: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_id: String?
+      attr_accessor group_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor sort_fields: String?
+      attr_accessor sort_direction: String?
+    end
+
+    class ListSecurityGroupUsersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?users: Array[Types::User],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor users: Array[Types::User]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSecurityGroupsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?sort_fields: String,
+        ?sort_direction: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor sort_fields: String?
+      attr_accessor sort_direction: String?
+    end
+
+    class ListSecurityGroupsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?security_groups: Array[Types::SecurityGroup],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor security_groups: Array[Types::SecurityGroup]?
+      attr_accessor next_token: String?
+    end
+
+    class ListUsersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?sort_fields: String,
+        ?sort_direction: String,
+        ?first_name: String,
+        ?last_name: String,
+        ?username: String,
+        ?status: Integer,
+        ?group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor sort_fields: String?
+      attr_accessor sort_direction: String?
+      attr_accessor first_name: String?
+      attr_accessor last_name: String?
+      attr_accessor username: String?
+      attr_accessor status: Integer?
+      attr_accessor group_id: String?
+    end
+
+    class ListUsersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?users: Array[Types::User],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor users: Array[Types::User]?
+    end
+
+    class Network
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_id: String,
+        ?network_name: String,
+        ?access_level: String,
+        ?aws_account_id: String,
+        ?network_arn: String,
+        ?standing: Integer,
+        ?free_trial_expiration: String,
+        ?migration_state: Integer,
+        ?encryption_key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_id: String?
+      attr_accessor network_name: String?
+      attr_accessor access_level: String?
+      attr_accessor aws_account_id: String?
+      attr_accessor network_arn: String?
+      attr_accessor standing: Integer?
+      attr_accessor free_trial_expiration: String?
+      attr_accessor migration_state: Integer?
+      attr_accessor encryption_key_arn: String?
+    end
+
+    class NetworkSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enable_client_metrics: bool,
+        ?read_receipt_config: Types::ReadReceiptConfig,
+        ?data_retention: bool,
+        ?enable_trusted_data_format: bool,
+        ?consent_popup: Types::ConsentPopupConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enable_client_metrics: bool?
+      attr_accessor read_receipt_config: Types::ReadReceiptConfig?
+      attr_accessor data_retention: bool?
+      attr_accessor enable_trusted_data_format: bool?
+      attr_accessor consent_popup: Types::ConsentPopupConfig?
+    end
+
+    class OidcConfigInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_name: String,
+        ?client_id: String,
+        ?company_id: String,
+        ?scopes: String,
+        ?issuer: String,
+        ?client_secret: String,
+        ?secret: String,
+        ?redirect_url: String,
+        ?user_id: String,
+        ?custom_username: String,
+        ?ca_certificate: String,
+        ?application_id: Integer,
+        ?sso_token_buffer_minutes: Integer,
+        ?extra_auth_params: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_name: String?
+      attr_accessor client_id: String?
+      attr_accessor company_id: String?
+      attr_accessor scopes: String?
+      attr_accessor issuer: String?
+      attr_accessor client_secret: String?
+      attr_accessor secret: String?
+      attr_accessor redirect_url: String?
+      attr_accessor user_id: String?
+      attr_accessor custom_username: String?
+      attr_accessor ca_certificate: String?
+      attr_accessor application_id: Integer?
+      attr_accessor sso_token_buffer_minutes: Integer?
+      attr_accessor extra_auth_params: String?
+    end
+
+    class OidcTokenInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code_verifier: String,
+        ?code_challenge: String,
+        ?access_token: String,
+        ?id_token: String,
+        ?refresh_token: String,
+        ?token_type: String,
+        ?expires_in: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code_verifier: String?
+      attr_accessor code_challenge: String?
+      attr_accessor access_token: String?
+      attr_accessor id_token: String?
+      attr_accessor refresh_token: String?
+      attr_accessor token_type: String?
+      attr_accessor expires_in: Integer?
+    end
+
+    class PasswordRequirements
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lowercase: Integer,
+        ?min_length: Integer,
+        ?numbers: Integer,
+        ?symbols: Integer,
+        ?uppercase: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lowercase: Integer?
+      attr_accessor min_length: Integer?
+      attr_accessor numbers: Integer?
+      attr_accessor symbols: Integer?
+      attr_accessor uppercase: Integer?
+    end
+
+    class PermittedWickrEnterpriseNetwork
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?network_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor network_id: String?
+    end
+
+    class RateLimitError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ReadReceiptConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    class RegisterOidcConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_id: String,
+        ?company_id: String,
+        ?custom_username: String,
+        ?extra_auth_params: String,
+        ?issuer: String,
+        ?scopes: String,
+        ?secret: String,
+        ?sso_token_buffer_minutes: Integer,
+        ?user_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_id: String?
+      attr_accessor company_id: String?
+      attr_accessor custom_username: String?
+      attr_accessor extra_auth_params: String?
+      attr_accessor issuer: String?
+      attr_accessor scopes: String?
+      attr_accessor secret: String?
+      attr_accessor sso_token_buffer_minutes: Integer?
+      attr_accessor user_id: String?
+    end
+
+    class RegisterOidcConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_name: String,
+        ?client_id: String,
+        ?company_id: String,
+        ?scopes: String,
+        ?issuer: String,
+        ?client_secret: String,
+        ?secret: String,
+        ?redirect_url: String,
+        ?user_id: String,
+        ?custom_username: String,
+        ?ca_certificate: String,
+        ?application_id: Integer,
+        ?sso_token_buffer_minutes: Integer,
+        ?extra_auth_params: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_name: String?
+      attr_accessor client_id: String?
+      attr_accessor company_id: String?
+      attr_accessor scopes: String?
+      attr_accessor issuer: String?
+      attr_accessor client_secret: String?
+      attr_accessor secret: String?
+      attr_accessor redirect_url: String?
+      attr_accessor user_id: String?
+      attr_accessor custom_username: String?
+      attr_accessor ca_certificate: String?
+      attr_accessor application_id: Integer?
+      attr_accessor sso_token_buffer_minutes: Integer?
+      attr_accessor extra_auth_params: String?
+    end
+
+    class RegisterOidcConfigTestRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_id: String,
+        ?extra_auth_params: String,
+        ?issuer: String,
+        ?scopes: String,
+        ?certificate: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_id: String?
+      attr_accessor extra_auth_params: String?
+      attr_accessor issuer: String?
+      attr_accessor scopes: String?
+      attr_accessor certificate: String?
+    end
+
+    class RegisterOidcConfigTestResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?token_endpoint: String,
+        ?userinfo_endpoint: String,
+        ?response_types_supported: Array[String],
+        ?scopes_supported: Array[String],
+        ?issuer: String,
+        ?authorization_endpoint: String,
+        ?end_session_endpoint: String,
+        ?logout_endpoint: String,
+        ?grant_types_supported: Array[String],
+        ?revocation_endpoint: String,
+        ?token_endpoint_auth_methods_supported: Array[String],
+        ?microsoft_multi_refresh_token: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor token_endpoint: String?
+      attr_accessor userinfo_endpoint: String?
+      attr_accessor response_types_supported: Array[String]?
+      attr_accessor scopes_supported: Array[String]?
+      attr_accessor issuer: String?
+      attr_accessor authorization_endpoint: String?
+      attr_accessor end_session_endpoint: String?
+      attr_accessor logout_endpoint: String?
+      attr_accessor grant_types_supported: Array[String]?
+      attr_accessor revocation_endpoint: String?
+      attr_accessor token_endpoint_auth_methods_supported: Array[String]?
+      attr_accessor microsoft_multi_refresh_token: bool?
+    end
+
+    class RegisterOpentdfConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_id: String,
+        ?client_id: String,
+        ?client_secret: String,
+        ?domain: String,
+        ?provider: String,
+        ?dry_run: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_id: String?
+      attr_accessor client_id: String?
+      attr_accessor client_secret: String?
+      attr_accessor domain: String?
+      attr_accessor provider: String?
+      attr_accessor dry_run: bool?
+    end
+
+    class RegisterOpentdfConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_id: String,
+        ?domain: String,
+        ?client_secret: String,
+        ?provider: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_id: String?
+      attr_accessor domain: String?
+      attr_accessor client_secret: String?
+      attr_accessor provider: String?
+    end
+
+    class ResourceNotFoundError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SecurityGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?active_members: Integer,
+        ?bot_members: Integer,
+        ?active_directory_guid: String,
+        ?id: String,
+        ?is_default: bool,
+        ?name: String,
+        ?modified: Integer,
+        ?security_group_settings: Types::SecurityGroupSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor active_members: Integer?
+      attr_accessor bot_members: Integer?
+      attr_accessor active_directory_guid: String?
+      attr_accessor id: String?
+      attr_accessor is_default: bool?
+      attr_accessor name: String?
+      attr_accessor modified: Integer?
+      attr_accessor security_group_settings: Types::SecurityGroupSettings?
+    end
+
+    class SecurityGroupSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?always_reauthenticate: bool,
+        ?atak_package_values: Array[String],
+        ?calling: Types::CallingSettings,
+        ?check_for_updates: bool,
+        ?enable_atak: bool,
+        ?enable_crash_reports: bool,
+        ?enable_file_download: bool,
+        ?enable_guest_federation: bool,
+        ?enable_notification_preview: bool,
+        ?enable_open_access_option: bool,
+        ?enable_restricted_global_federation: bool,
+        ?files_enabled: bool,
+        ?force_device_lockout: Integer,
+        ?force_open_access: bool,
+        ?force_read_receipts: bool,
+        ?global_federation: bool,
+        ?is_ato_enabled: bool,
+        ?is_link_preview_enabled: bool,
+        ?location_allow_maps: bool,
+        ?location_enabled: bool,
+        ?max_auto_download_size: Integer,
+        ?max_bor: Integer,
+        ?max_ttl: Integer,
+        ?message_forwarding_enabled: bool,
+        ?password_requirements: Types::PasswordRequirements,
+        ?presence_enabled: bool,
+        ?quick_responses: Array[String],
+        ?show_master_recovery_key: bool,
+        ?shredder: Types::ShredderSettings,
+        ?sso_max_idle_minutes: Integer,
+        ?max_non_sso_session_minutes: Integer,
+        ?federation_mode: Integer,
+        ?lockout_threshold: Integer,
+        ?permitted_networks: Array[String],
+        ?permitted_wickr_aws_networks: Array[Types::WickrAwsNetworks],
+        ?permitted_wickr_enterprise_networks: Array[Types::PermittedWickrEnterpriseNetwork],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor always_reauthenticate: bool?
+      attr_accessor atak_package_values: Array[String]?
+      attr_accessor calling: Types::CallingSettings?
+      attr_accessor check_for_updates: bool?
+      attr_accessor enable_atak: bool?
+      attr_accessor enable_crash_reports: bool?
+      attr_accessor enable_file_download: bool?
+      attr_accessor enable_guest_federation: bool?
+      attr_accessor enable_notification_preview: bool?
+      attr_accessor enable_open_access_option: bool?
+      attr_accessor enable_restricted_global_federation: bool?
+      attr_accessor files_enabled: bool?
+      attr_accessor force_device_lockout: Integer?
+      attr_accessor force_open_access: bool?
+      attr_accessor force_read_receipts: bool?
+      attr_accessor global_federation: bool?
+      attr_accessor is_ato_enabled: bool?
+      attr_accessor is_link_preview_enabled: bool?
+      attr_accessor location_allow_maps: bool?
+      attr_accessor location_enabled: bool?
+      attr_accessor max_auto_download_size: Integer?
+      attr_accessor max_bor: Integer?
+      attr_accessor max_ttl: Integer?
+      attr_accessor message_forwarding_enabled: bool?
+      attr_accessor password_requirements: Types::PasswordRequirements?
+      attr_accessor presence_enabled: bool?
+      attr_accessor quick_responses: Array[String]?
+      attr_accessor show_master_recovery_key: bool?
+      attr_accessor shredder: Types::ShredderSettings?
+      attr_accessor sso_max_idle_minutes: Integer?
+      attr_accessor max_non_sso_session_minutes: Integer?
+      attr_accessor federation_mode: Integer?
+      attr_accessor lockout_threshold: Integer?
+      attr_accessor permitted_networks: Array[String]?
+      attr_accessor permitted_wickr_aws_networks: Array[Types::WickrAwsNetworks]?
+      attr_accessor permitted_wickr_enterprise_networks: Array[Types::PermittedWickrEnterpriseNetwork]?
+    end
+
+    class SecurityGroupSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lockout_threshold: Integer,
+        ?permitted_networks: Array[String],
+        ?enable_guest_federation: bool,
+        ?global_federation: bool,
+        ?federation_mode: Integer,
+        ?enable_restricted_global_federation: bool,
+        ?permitted_wickr_aws_networks: Array[Types::WickrAwsNetworks],
+        ?permitted_wickr_enterprise_networks: Array[Types::PermittedWickrEnterpriseNetwork],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lockout_threshold: Integer?
+      attr_accessor permitted_networks: Array[String]?
+      attr_accessor enable_guest_federation: bool?
+      attr_accessor global_federation: bool?
+      attr_accessor federation_mode: Integer?
+      attr_accessor enable_restricted_global_federation: bool?
+      attr_accessor permitted_wickr_aws_networks: Array[Types::WickrAwsNetworks]?
+      attr_accessor permitted_wickr_enterprise_networks: Array[Types::PermittedWickrEnterpriseNetwork]?
+    end
+
+    class Setting
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?option_name: String,
+        ?value: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor option_name: String?
+      attr_accessor value: String?
+      attr_accessor type: String?
+    end
+
+    class ShredderSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?can_process_manually: bool,
+        ?intensity: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor can_process_manually: bool?
+      attr_accessor intensity: Integer?
+    end
+
+    module SortDirection
+      ASC: String
+      DESC: String
+    end
+
+    module Status
+      DISABLED: String
+      ENABLED: String
+      FORCE_ENABLED: String
+    end
+
+    class UnauthorizedError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UpdateBotRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_id: String,
+        ?bot_id: String,
+        ?display_name: String,
+        ?group_id: String,
+        ?challenge: String,
+        ?suspend: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_id: String?
+      attr_accessor bot_id: String?
+      attr_accessor display_name: String?
+      attr_accessor group_id: String?
+      attr_accessor challenge: String?
+      attr_accessor suspend: bool?
+    end
+
+    class UpdateBotResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UpdateDataRetentionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_id: String,
+        ?action_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_id: String?
+      attr_accessor action_type: String?
+    end
+
+    class UpdateDataRetentionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UpdateGuestUserRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_id: String,
+        ?username_hash: String,
+        ?block: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_id: String?
+      attr_accessor username_hash: String?
+      attr_accessor block: bool?
+    end
+
+    class UpdateGuestUserResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UpdateNetworkRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_id: String,
+        ?network_name: String,
+        ?client_token: String,
+        ?encryption_key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_id: String?
+      attr_accessor network_name: String?
+      attr_accessor client_token: String?
+      attr_accessor encryption_key_arn: String?
+    end
+
+    class UpdateNetworkResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UpdateNetworkSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_id: String,
+        ?settings: Types::NetworkSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_id: String?
+      attr_accessor settings: Types::NetworkSettings?
+    end
+
+    class UpdateNetworkSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?settings: Array[Types::Setting],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor settings: Array[Types::Setting]?
+    end
+
+    class UpdateSecurityGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_id: String,
+        ?group_id: String,
+        ?name: String,
+        ?security_group_settings: Types::SecurityGroupSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_id: String?
+      attr_accessor group_id: String?
+      attr_accessor name: String?
+      attr_accessor security_group_settings: Types::SecurityGroupSettings?
+    end
+
+    class UpdateSecurityGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?security_group: Types::SecurityGroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor security_group: Types::SecurityGroup?
+    end
+
+    class UpdateUserDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?first_name: String,
+        ?last_name: String,
+        ?username: String,
+        ?security_group_ids: Array[String],
+        ?invite_code: String,
+        ?invite_code_ttl: Integer,
+        ?code_validation: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor first_name: String?
+      attr_accessor last_name: String?
+      attr_accessor username: String?
+      attr_accessor security_group_ids: Array[String]?
+      attr_accessor invite_code: String?
+      attr_accessor invite_code_ttl: Integer?
+      attr_accessor code_validation: bool?
+    end
+
+    class UpdateUserRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_id: String,
+        ?user_id: String,
+        ?user_details: Types::UpdateUserDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_id: String?
+      attr_accessor user_id: String?
+      attr_accessor user_details: Types::UpdateUserDetails?
+    end
+
+    class UpdateUserResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_id: String,
+        ?network_id: String,
+        ?security_group_ids: Array[String],
+        ?first_name: String,
+        ?last_name: String,
+        ?middle_name: String,
+        ?suspended: bool,
+        ?modified: Integer,
+        ?status: Integer,
+        ?invite_code: String,
+        ?invite_expiration: Integer,
+        ?code_validation: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_id: String?
+      attr_accessor network_id: String?
+      attr_accessor security_group_ids: Array[String]?
+      attr_accessor first_name: String?
+      attr_accessor last_name: String?
+      attr_accessor middle_name: String?
+      attr_accessor suspended: bool?
+      attr_accessor modified: Integer?
+      attr_accessor status: Integer?
+      attr_accessor invite_code: String?
+      attr_accessor invite_expiration: Integer?
+      attr_accessor code_validation: bool?
+    end
+
+    class User
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_id: String,
+        ?first_name: String,
+        ?last_name: String,
+        ?username: String,
+        ?security_groups: Array[String],
+        ?is_admin: bool,
+        ?suspended: bool,
+        ?status: Integer,
+        ?otp_enabled: bool,
+        ?scim_id: String,
+        ?type: String,
+        ?cell: String,
+        ?country_code: String,
+        ?challenge_failures: Integer,
+        ?is_invite_expired: bool,
+        ?is_user: bool,
+        ?invite_code: String,
+        ?code_validation: bool,
+        ?uname: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_id: String?
+      attr_accessor first_name: String?
+      attr_accessor last_name: String?
+      attr_accessor username: String?
+      attr_accessor security_groups: Array[String]?
+      attr_accessor is_admin: bool?
+      attr_accessor suspended: bool?
+      attr_accessor status: Integer?
+      attr_accessor otp_enabled: bool?
+      attr_accessor scim_id: String?
+      attr_accessor type: String?
+      attr_accessor cell: String?
+      attr_accessor country_code: String?
+      attr_accessor challenge_failures: Integer?
+      attr_accessor is_invite_expired: bool?
+      attr_accessor is_user: bool?
+      attr_accessor invite_code: String?
+      attr_accessor code_validation: bool?
+      attr_accessor uname: String?
+    end
+
+    module UserStatus
+      PENDING: Integer
+      ACTIVE: Integer
+    end
+
+    class ValidationError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reasons: Array[Types::ErrorDetail],
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reasons: Array[Types::ErrorDetail]?
+      attr_accessor message: String?
+    end
+
+    class WickrAwsNetworks
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?region: String,
+        ?network_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor region: String?
+      attr_accessor network_id: String?
+    end
+  end
+end

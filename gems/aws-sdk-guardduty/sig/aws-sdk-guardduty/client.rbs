@@ -70,6 +70,28 @@ module Aws::GuardDuty
       ?finding_ids: Array[String]
     ) -> _ArchiveFindingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ArchiveFindingsResponse
 
+    interface _CreateCustomDetectionRuleAssociationResponse
+      include Smithy::Client::_Response[Types::CreateCustomDetectionRuleAssociationResponse]
+      def rule_association: () -> Types::AssociationDetail?
+    end
+    def create_custom_detection_rule_association: (
+      ?rule_id: String,
+      ?mode: String,
+      ?client_token: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateCustomDetectionRuleAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCustomDetectionRuleAssociationResponse
+
+    interface _CreateCustomDetectionRuleOrgConfigurationResponse
+      include Smithy::Client::_Response[Types::CreateCustomDetectionRuleOrgConfigurationResponse]
+    end
+    def create_custom_detection_rule_org_configuration: (
+      ?rule_id: String,
+      ?mode: String,
+      ?include_account_ids: Array[String],
+      ?exclude_account_ids: Array[String],
+      ?client_token: String
+    ) -> _CreateCustomDetectionRuleOrgConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCustomDetectionRuleOrgConfigurationResponse
+
     interface _CreateDetectorResponse
       include Smithy::Client::_Response[Types::CreateDetectorResponse]
       def detector_id: () -> String?
@@ -133,7 +155,9 @@ module Aws::GuardDuty
             greater_than: Integer,
             greater_than_or_equal: untyped,
             less_than: untyped,
-            less_than_or_equal: untyped
+            less_than_or_equal: untyped,
+            matches: Array[String],
+            not_matches: Array[String]
           }
         ]
       },
@@ -155,6 +179,16 @@ module Aws::GuardDuty
       ?tags: Hash[String, String],
       ?expected_bucket_owner: String
     ) -> _CreateIPSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateIPSetResponse
+
+    interface _CreateInvestigationResponse
+      include Smithy::Client::_Response[Types::CreateInvestigationResponse]
+      def investigation_id: () -> String?
+    end
+    def create_investigation: (
+      ?detector_id: String,
+      ?trigger_prompt: String,
+      ?client_token: String
+    ) -> _CreateInvestigationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateInvestigationResponse
 
     interface _CreateMalwareProtectionPlanResponse
       include Smithy::Client::_Response[Types::CreateMalwareProtectionPlanResponse]
@@ -202,7 +236,8 @@ module Aws::GuardDuty
         destination_arn: String,
         kms_key_arn: untyped
       },
-      ?client_token: String
+      ?client_token: String,
+      ?tags: Hash[String, String]
     ) -> _CreatePublishingDestinationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePublishingDestinationResponse
 
     interface _CreateSampleFindingsResponse
@@ -265,6 +300,22 @@ module Aws::GuardDuty
     def decline_invitations: (
       ?account_ids: Array[String]
     ) -> _DeclineInvitationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeclineInvitationsResponse
+
+    interface _DeleteCustomDetectionRuleAssociationResponse
+      include Smithy::Client::_Response[Types::DeleteCustomDetectionRuleAssociationResponse]
+    end
+    def delete_custom_detection_rule_association: (
+      ?rule_id: String,
+      ?association_id: String
+    ) -> _DeleteCustomDetectionRuleAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCustomDetectionRuleAssociationResponse
+
+    interface _DeleteCustomDetectionRuleOrgConfigurationResponse
+      include Smithy::Client::_Response[Types::DeleteCustomDetectionRuleOrgConfigurationResponse]
+    end
+    def delete_custom_detection_rule_org_configuration: (
+      ?rule_id: String,
+      ?mode: String
+    ) -> _DeleteCustomDetectionRuleOrgConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCustomDetectionRuleOrgConfigurationResponse
 
     interface _DeleteDetectorResponse
       include Smithy::Client::_Response[Types::DeleteDetectorResponse]
@@ -394,6 +445,7 @@ module Aws::GuardDuty
       def status: () -> String?
       def publishing_failure_start_timestamp: () -> Integer?
       def destination_properties: () -> Types::DestinationProperties?
+      def tags: () -> Hash[String, String]?
     end
     def describe_publishing_destination: (
       ?detector_id: String,
@@ -465,6 +517,33 @@ module Aws::GuardDuty
       ?statistics_type: Array[String]
     ) -> _GetCoverageStatisticsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCoverageStatisticsResponse
 
+    interface _GetCustomDetectionRuleResponse
+      include Smithy::Client::_Response[Types::GetCustomDetectionRuleResponse]
+      def rule: () -> Types::RuleDetail?
+    end
+    def get_custom_detection_rule: (
+      ?rule_id: String
+    ) -> _GetCustomDetectionRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCustomDetectionRuleResponse
+
+    interface _GetCustomDetectionRuleAssociationResponse
+      include Smithy::Client::_Response[Types::GetCustomDetectionRuleAssociationResponse]
+      def rule_association: () -> Types::AssociationDetail?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_custom_detection_rule_association: (
+      ?rule_id: String,
+      ?association_id: String
+    ) -> _GetCustomDetectionRuleAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCustomDetectionRuleAssociationResponse
+
+    interface _GetCustomDetectionRuleOrgConfigurationResponse
+      include Smithy::Client::_Response[Types::GetCustomDetectionRuleOrgConfigurationResponse]
+      def configuration: () -> Types::DetectionRuleOrgConfiguration?
+    end
+    def get_custom_detection_rule_org_configuration: (
+      ?rule_id: String,
+      ?mode: String
+    ) -> _GetCustomDetectionRuleOrgConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCustomDetectionRuleOrgConfigurationResponse
+
     interface _GetDetectorResponse
       include Smithy::Client::_Response[Types::GetDetectorResponse]
       def created_at: () -> String?
@@ -488,6 +567,9 @@ module Aws::GuardDuty
       def rank: () -> Integer?
       def finding_criteria: () -> Types::FindingCriteria?
       def tags: () -> Hash[String, String]?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def version: () -> Integer?
     end
     def get_filter: (
       ?detector_id: String,
@@ -529,7 +611,9 @@ module Aws::GuardDuty
             greater_than: Integer,
             greater_than_or_equal: untyped,
             less_than: untyped,
-            less_than_or_equal: untyped
+            less_than_or_equal: untyped,
+            matches: Array[String],
+            not_matches: Array[String]
           }
         ]
       },
@@ -552,6 +636,15 @@ module Aws::GuardDuty
       ?ip_set_id: String
     ) -> _GetIPSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetIPSetResponse
 
+    interface _GetInvestigationResponse
+      include Smithy::Client::_Response[Types::GetInvestigationResponse]
+      def investigation: () -> Types::Investigation?
+    end
+    def get_investigation: (
+      ?detector_id: String,
+      ?investigation_id: String
+    ) -> _GetInvestigationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetInvestigationResponse
+
     interface _GetInvitationsCountResponse
       include Smithy::Client::_Response[Types::GetInvitationsCountResponse]
       def invitations_count: () -> Integer?
@@ -572,6 +665,30 @@ module Aws::GuardDuty
     def get_malware_protection_plan: (
       ?malware_protection_plan_id: String
     ) -> _GetMalwareProtectionPlanResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMalwareProtectionPlanResponse
+
+    interface _GetMalwareScanResponse
+      include Smithy::Client::_Response[Types::GetMalwareScanResponse]
+      def scan_id: () -> String?
+      def detector_id: () -> String?
+      def admin_detector_id: () -> String?
+      def resource_arn: () -> String?
+      def resource_type: () -> String?
+      def scanned_resources_count: () -> Integer?
+      def skipped_resources_count: () -> Integer?
+      def failed_resources_count: () -> Integer?
+      def scanned_resources: () -> Array[Types::ScannedResource]?
+      def scan_configuration: () -> Types::ScanConfiguration?
+      def scan_category: () -> String?
+      def scan_status: () -> String?
+      def scan_status_reason: () -> String?
+      def scan_type: () -> String?
+      def scan_started_at: () -> Time?
+      def scan_completed_at: () -> Time?
+      def scan_result_details: () -> Types::GetMalwareScanResultDetails?
+    end
+    def get_malware_scan: (
+      ?scan_id: String
+    ) -> _GetMalwareScanResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMalwareScanResponse
 
     interface _GetMalwareScanSettingsResponse
       include Smithy::Client::_Response[Types::GetMalwareScanSettingsResponse]
@@ -730,6 +847,46 @@ module Aws::GuardDuty
       }
     ) -> _ListCoverageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCoverageResponse
 
+    interface _ListCustomDetectionRuleAssociationsResponse
+      include Smithy::Client::_Response[Types::ListCustomDetectionRuleAssociationsResponse]
+      def rule_associations: () -> Array[Types::AssociationSummary]?
+      def next_token: () -> String?
+    end
+    def list_custom_detection_rule_associations: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?rule_id: String,
+      ?mode: String
+    ) -> _ListCustomDetectionRuleAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCustomDetectionRuleAssociationsResponse
+
+    interface _ListCustomDetectionRuleOrgConfigurationsResponse
+      include Smithy::Client::_Response[Types::ListCustomDetectionRuleOrgConfigurationsResponse]
+      def configurations: () -> Array[Types::DetectionRuleOrgConfigurationSummary]?
+      def next_token: () -> String?
+    end
+    def list_custom_detection_rule_org_configurations: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?status: String
+    ) -> _ListCustomDetectionRuleOrgConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCustomDetectionRuleOrgConfigurationsResponse
+
+    interface _ListCustomDetectionRulesResponse
+      include Smithy::Client::_Response[Types::ListCustomDetectionRulesResponse]
+      def rules: () -> Array[Types::RuleSummary]?
+      def next_token: () -> String?
+    end
+    def list_custom_detection_rules: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String],
+          condition: String
+        }
+      ]
+    ) -> _ListCustomDetectionRulesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCustomDetectionRulesResponse
+
     interface _ListDetectorsResponse
       include Smithy::Client::_Response[Types::ListDetectorsResponse]
       def detector_ids: () -> Array[String]?
@@ -772,7 +929,9 @@ module Aws::GuardDuty
             greater_than: Integer,
             greater_than_or_equal: untyped,
             less_than: untyped,
-            less_than_or_equal: untyped
+            less_than_or_equal: untyped,
+            matches: Array[String],
+            not_matches: Array[String]
           }
         ]
       },
@@ -795,6 +954,21 @@ module Aws::GuardDuty
       ?next_token: String
     ) -> _ListIPSetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListIPSetsResponse
 
+    interface _ListInvestigationsResponse
+      include Smithy::Client::_Response[Types::ListInvestigationsResponse]
+      def investigations: () -> Array[Types::InvestigationSummary]?
+      def next_token: () -> String?
+    end
+    def list_investigations: (
+      ?detector_id: String,
+      ?sort_criteria: {
+        attribute_name: String,
+        order_by: String
+      },
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListInvestigationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListInvestigationsResponse
+
     interface _ListInvitationsResponse
       include Smithy::Client::_Response[Types::ListInvitationsResponse]
       def invitations: () -> Array[Types::Invitation]?
@@ -813,6 +987,32 @@ module Aws::GuardDuty
     def list_malware_protection_plans: (
       ?next_token: String
     ) -> _ListMalwareProtectionPlansResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMalwareProtectionPlansResponse
+
+    interface _ListMalwareScansResponse
+      include Smithy::Client::_Response[Types::ListMalwareScansResponse]
+      def scans: () -> Array[Types::MalwareScan]?
+      def next_token: () -> String?
+    end
+    def list_malware_scans: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?filter_criteria: {
+        list_malware_scans_filter_criterion: Array[
+          {
+            list_malware_scans_criterion_key: String,
+            filter_condition: {
+              equals_value: String,
+              greater_than: Integer,
+              less_than: untyped
+            }
+          }
+        ]
+      },
+      ?sort_criteria: {
+        attribute_name: String,
+        order_by: String
+      }
+    ) -> _ListMalwareScansResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMalwareScansResponse
 
     interface _ListMembersResponse
       include Smithy::Client::_Response[Types::ListMembersResponse]
@@ -888,12 +1088,37 @@ module Aws::GuardDuty
       ?next_token: String
     ) -> _ListTrustedEntitySetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTrustedEntitySetsResponse
 
+    interface _SendObjectMalwareScanResponse
+      include Smithy::Client::_Response[Types::SendObjectMalwareScanResponse]
+    end
+    def send_object_malware_scan: (
+      ?s3_object: {
+        bucket: String,
+        key: untyped,
+        version_id: untyped
+      }
+    ) -> _SendObjectMalwareScanResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SendObjectMalwareScanResponse
+
     interface _StartMalwareScanResponse
       include Smithy::Client::_Response[Types::StartMalwareScanResponse]
       def scan_id: () -> String?
     end
     def start_malware_scan: (
-      ?resource_arn: String
+      ?resource_arn: String,
+      ?client_token: String,
+      ?scan_configuration: {
+        role: String,
+        incremental_scan_details: {
+          baseline_resource_arn: untyped
+        },
+        recovery_point: {
+          backup_vault_name: String,
+          continuous_scan_details: {
+            start_time: Time,
+            end_time: untyped
+          }
+        }
+      }
     ) -> _StartMalwareScanResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartMalwareScanResponse
 
     interface _StartMonitoringMembersResponse
@@ -937,6 +1162,25 @@ module Aws::GuardDuty
       ?resource_arn: String,
       ?tag_keys: Array[String]
     ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateCustomDetectionRuleAssociationResponse
+      include Smithy::Client::_Response[Types::UpdateCustomDetectionRuleAssociationResponse]
+    end
+    def update_custom_detection_rule_association: (
+      ?rule_id: String,
+      ?association_id: String,
+      ?mode: String
+    ) -> _UpdateCustomDetectionRuleAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCustomDetectionRuleAssociationResponse
+
+    interface _UpdateCustomDetectionRuleOrgConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateCustomDetectionRuleOrgConfigurationResponse]
+    end
+    def update_custom_detection_rule_org_configuration: (
+      ?rule_id: String,
+      ?mode: String,
+      ?include_account_ids: Array[String],
+      ?exclude_account_ids: Array[String]
+    ) -> _UpdateCustomDetectionRuleOrgConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCustomDetectionRuleOrgConfigurationResponse
 
     interface _UpdateDetectorResponse
       include Smithy::Client::_Response[Types::UpdateDetectorResponse]
@@ -998,7 +1242,9 @@ module Aws::GuardDuty
             greater_than: Integer,
             greater_than_or_equal: untyped,
             less_than: untyped,
-            less_than_or_equal: untyped
+            less_than_or_equal: untyped,
+            matches: Array[String],
+            not_matches: Array[String]
           }
         ]
       }

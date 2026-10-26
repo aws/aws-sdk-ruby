@@ -1,6 +1,17 @@
 module Aws::CognitoIdentityProvider
   module Types
 
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
     class AccountRecoverySettingType
       include Smithy::Schema::Structure
 
@@ -60,6 +71,17 @@ module Aws::CognitoIdentityProvider
       attr_accessor actions: Types::AccountTakeoverActionsType?
     end
 
+    class AcrLevelConfigType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?acr_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor acr_value: String?
+    end
+
     class AddCustomAttributesRequest
       include Smithy::Schema::Structure
 
@@ -80,6 +102,32 @@ module Aws::CognitoIdentityProvider
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+    end
+
+    class AddUserPoolClientSecretRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_pool_id: String,
+        ?client_id: String,
+        ?client_secret: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_pool_id: String?
+      attr_accessor client_id: String?
+      attr_accessor client_secret: String?
+    end
+
+    class AddUserPoolClientSecretResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_secret_descriptor: Types::ClientSecretDescriptorType,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_secret_descriptor: Types::ClientSecretDescriptorType?
     end
 
     class AdminAddUserToGroupRequest
@@ -172,6 +220,28 @@ module Aws::CognitoIdentityProvider
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor user: Types::UserType?
+    end
+
+    class AdminDeleteSoftwareTokenRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_pool_id: String,
+        ?username: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_pool_id: String?
+      attr_accessor username: String?
+    end
+
+    class AdminDeleteSoftwareTokenResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
     end
 
     class AdminDeleteUserAttributesRequest
@@ -316,6 +386,36 @@ module Aws::CognitoIdentityProvider
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor device: Types::DeviceType?
+    end
+
+    class AdminGetUserAuthFactorsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_pool_id: String,
+        ?username: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_pool_id: String?
+      attr_accessor username: String?
+    end
+
+    class AdminGetUserAuthFactorsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?username: String,
+        ?preferred_mfa_setting: String,
+        ?user_mfa_setting_list: Array[String],
+        ?configured_user_auth_factors: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor username: String?
+      attr_accessor preferred_mfa_setting: String?
+      attr_accessor user_mfa_setting_list: Array[String]?
+      attr_accessor configured_user_auth_factors: Array[String]?
     end
 
     class AdminGetUserRequest
@@ -588,6 +688,7 @@ module Aws::CognitoIdentityProvider
         ?session: String,
         ?challenge_parameters: Hash[String, String],
         ?authentication_result: Types::AuthenticationResultType,
+        ?available_challenges: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -595,6 +696,7 @@ module Aws::CognitoIdentityProvider
       attr_accessor session: String?
       attr_accessor challenge_parameters: Hash[String, String]?
       attr_accessor authentication_result: Types::AuthenticationResultType?
+      attr_accessor available_challenges: Array[String]?
     end
 
     class AdminSetUserMFAPreferenceRequest
@@ -604,6 +706,7 @@ module Aws::CognitoIdentityProvider
         ?sms_mfa_settings: Types::SMSMfaSettingsType,
         ?software_token_mfa_settings: Types::SoftwareTokenMfaSettingsType,
         ?email_mfa_settings: Types::EmailMfaSettingsType,
+        ?web_authn_mfa_settings: Types::WebAuthnMfaSettingsType,
         ?username: String,
         ?user_pool_id: String,
       ) -> void
@@ -612,6 +715,7 @@ module Aws::CognitoIdentityProvider
       attr_accessor sms_mfa_settings: Types::SMSMfaSettingsType?
       attr_accessor software_token_mfa_settings: Types::SoftwareTokenMfaSettingsType?
       attr_accessor email_mfa_settings: Types::EmailMfaSettingsType?
+      attr_accessor web_authn_mfa_settings: Types::WebAuthnMfaSettingsType?
       attr_accessor username: String?
       attr_accessor user_pool_id: String?
     end
@@ -965,6 +1069,7 @@ module Aws::CognitoIdentityProvider
       EMAIL_OTP: String
       SMS_OTP: String
       WEB_AUTHN: String
+      SOFTWARE_TOKEN: String
     end
 
     module AuthFlowType
@@ -1063,6 +1168,36 @@ module Aws::CognitoIdentityProvider
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+    end
+
+    class ClientAuthenticationResultType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_token: String,
+        ?expires_in: Integer,
+        ?token_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_token: String?
+      attr_accessor expires_in: Integer?
+      attr_accessor token_type: String?
+    end
+
+    class ClientSecretDescriptorType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_secret_id: String,
+        ?client_secret_value: String,
+        ?client_secret_create_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_secret_id: String?
+      attr_accessor client_secret_value: String?
+      attr_accessor client_secret_create_date: Time?
     end
 
     class CloudWatchLogsConfigurationType
@@ -1340,6 +1475,7 @@ module Aws::CognitoIdentityProvider
         ?provider_details: Hash[String, String],
         ?attribute_mapping: Hash[String, String],
         ?idp_identifiers: Array[String],
+        ?acr_mapping: Hash[String, String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1349,6 +1485,7 @@ module Aws::CognitoIdentityProvider
       attr_accessor provider_details: Hash[String, String]?
       attr_accessor attribute_mapping: Hash[String, String]?
       attr_accessor idp_identifiers: Array[String]?
+      attr_accessor acr_mapping: Hash[String, String]?
     end
 
     class CreateIdentityProviderResponse
@@ -1459,12 +1596,14 @@ module Aws::CognitoIdentityProvider
         ?job_name: String,
         ?user_pool_id: String,
         ?cloud_watch_logs_role_arn: String,
+        ?password_hashing_algorithm: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor job_name: String?
       attr_accessor user_pool_id: String?
       attr_accessor cloud_watch_logs_role_arn: String?
+      attr_accessor password_hashing_algorithm: String?
     end
 
     class CreateUserImportJobResponse
@@ -1485,6 +1624,7 @@ module Aws::CognitoIdentityProvider
         ?user_pool_id: String,
         ?client_name: String,
         ?generate_secret: bool,
+        ?client_secret: String,
         ?refresh_token_validity: Integer,
         ?access_token_validity: Integer,
         ?id_token_validity: Integer,
@@ -1511,6 +1651,7 @@ module Aws::CognitoIdentityProvider
       attr_accessor user_pool_id: String?
       attr_accessor client_name: String?
       attr_accessor generate_secret: bool?
+      attr_accessor client_secret: String?
       attr_accessor refresh_token_validity: Integer?
       attr_accessor access_token_validity: Integer?
       attr_accessor id_token_validity: Integer?
@@ -1552,6 +1693,7 @@ module Aws::CognitoIdentityProvider
         ?user_pool_id: String,
         ?managed_login_version: Integer,
         ?custom_domain_config: Types::CustomDomainConfigType,
+        ?routing: Types::RoutingType,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1559,6 +1701,7 @@ module Aws::CognitoIdentityProvider
       attr_accessor user_pool_id: String?
       attr_accessor managed_login_version: Integer?
       attr_accessor custom_domain_config: Types::CustomDomainConfigType?
+      attr_accessor routing: Types::RoutingType?
     end
 
     class CreateUserPoolDomainResponse
@@ -1567,11 +1710,39 @@ module Aws::CognitoIdentityProvider
       def initialize: (
         ?managed_login_version: Integer,
         ?cloud_front_domain: String,
+        ?routing: Types::RoutingType,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor managed_login_version: Integer?
       attr_accessor cloud_front_domain: String?
+      attr_accessor routing: Types::RoutingType?
+    end
+
+    class CreateUserPoolReplicaRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_pool_id: String,
+        ?region_name: String,
+        ?user_pool_tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_pool_id: String?
+      attr_accessor region_name: String?
+      attr_accessor user_pool_tags: Hash[String, String]?
+    end
+
+    class CreateUserPoolReplicaResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_pool_replica: Types::UserPoolReplicaType,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_pool_replica: Types::UserPoolReplicaType?
     end
 
     class CreateUserPoolRequest
@@ -1602,6 +1773,9 @@ module Aws::CognitoIdentityProvider
         ?username_configuration: Types::UsernameConfigurationType,
         ?account_recovery_setting: Types::AccountRecoverySettingType,
         ?user_pool_tier: String,
+        ?key_configuration: Types::KeyConfigurationType,
+        ?issuer_configuration: Types::IssuerConfigurationType,
+        ?acr_configuration: Hash[String, Types::AcrLevelConfigType],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1629,6 +1803,9 @@ module Aws::CognitoIdentityProvider
       attr_accessor username_configuration: Types::UsernameConfigurationType?
       attr_accessor account_recovery_setting: Types::AccountRecoverySettingType?
       attr_accessor user_pool_tier: String?
+      attr_accessor key_configuration: Types::KeyConfigurationType?
+      attr_accessor issuer_configuration: Types::IssuerConfigurationType?
+      attr_accessor acr_configuration: Hash[String, Types::AcrLevelConfigType]?
     end
 
     class CreateUserPoolResponse
@@ -1647,10 +1824,12 @@ module Aws::CognitoIdentityProvider
 
       def initialize: (
         ?certificate_arn: String,
+        ?security_policy: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor certificate_arn: String?
+      attr_accessor security_policy: String?
     end
 
     class CustomEmailLambdaVersionConfigType
@@ -1792,6 +1971,30 @@ module Aws::CognitoIdentityProvider
       attr_accessor client_id: String?
     end
 
+    class DeleteUserPoolClientSecretRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_pool_id: String,
+        ?client_id: String,
+        ?client_secret_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_pool_id: String?
+      attr_accessor client_id: String?
+      attr_accessor client_secret_id: String?
+    end
+
+    class DeleteUserPoolClientSecretResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
     class DeleteUserPoolDomainRequest
       include Smithy::Schema::Structure
 
@@ -1812,6 +2015,30 @@ module Aws::CognitoIdentityProvider
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+    end
+
+    class DeleteUserPoolReplicaRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_pool_id: String,
+        ?region_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_pool_id: String?
+      attr_accessor region_name: String?
+    end
+
+    class DeleteUserPoolReplicaResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_pool_replica: Types::UserPoolReplicaType,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_pool_replica: Types::UserPoolReplicaType?
     end
 
     class DeleteUserPoolRequest
@@ -1990,6 +2217,32 @@ module Aws::CognitoIdentityProvider
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor risk_configuration: Types::RiskConfigurationType?
+    end
+
+    class DescribeTermsByClientRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_id: String,
+        ?user_pool_id: String,
+        ?terms_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_id: String?
+      attr_accessor user_pool_id: String?
+      attr_accessor terms_name: String?
+    end
+
+    class DescribeTermsByClientResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?terms: Types::TermsType,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor terms: Types::TermsType?
     end
 
     class DescribeTermsRequest
@@ -2182,6 +2435,7 @@ module Aws::CognitoIdentityProvider
         ?status: String,
         ?custom_domain_config: Types::CustomDomainConfigType,
         ?managed_login_version: Integer,
+        ?routing: Types::RoutingType,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2194,6 +2448,7 @@ module Aws::CognitoIdentityProvider
       attr_accessor status: String?
       attr_accessor custom_domain_config: Types::CustomDomainConfigType?
       attr_accessor managed_login_version: Integer?
+      attr_accessor routing: Types::RoutingType?
     end
 
     module DomainStatusType
@@ -2274,6 +2529,34 @@ module Aws::CognitoIdentityProvider
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    module EncryptionKeyType
+      AWS_OWNED_KEY: String
+      CUSTOMER_MANAGED_KEY: String
+    end
+
+    class EumsSmsConfigurationType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?caller_arn: String,
+        ?external_id: String,
+        ?origination_identity: String,
+        ?configuration_set_name: String,
+        ?in_entity_id: String,
+        ?in_template_id: String,
+        ?region: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor caller_arn: String?
+      attr_accessor external_id: String?
+      attr_accessor origination_identity: String?
+      attr_accessor configuration_set_name: String?
+      attr_accessor in_entity_id: String?
+      attr_accessor in_template_id: String?
+      attr_accessor region: String?
     end
 
     class EventContextDataType
@@ -2371,6 +2654,19 @@ module Aws::CognitoIdentityProvider
       ALLOW_USER_SRP_AUTH: String
       ALLOW_REFRESH_TOKEN_AUTH: String
       ALLOW_USER_AUTH: String
+    end
+
+    class FailoverType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?secondary_region: String,
+        ?primary_route53_health_check_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor secondary_region: String?
+      attr_accessor primary_route53_health_check_id: String?
     end
 
     module FeatureType
@@ -2485,6 +2781,34 @@ module Aws::CognitoIdentityProvider
       attr_accessor csv_header: Array[String]?
     end
 
+    class GetClientTokenRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_id: String,
+        ?secret: String,
+        ?scopes: Array[String],
+        ?client_metadata: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_id: String?
+      attr_accessor secret: String?
+      attr_accessor scopes: Array[String]?
+      attr_accessor client_metadata: Hash[String, String]?
+    end
+
+    class GetClientTokenResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_authentication_result: Types::ClientAuthenticationResultType,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_authentication_result: Types::ClientAuthenticationResultType?
+    end
+
     class GetDeviceRequest
       include Smithy::Schema::Structure
 
@@ -2577,6 +2901,28 @@ module Aws::CognitoIdentityProvider
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor log_delivery_configuration: Types::LogDeliveryConfigurationType?
+    end
+
+    class GetProvisionedLimitRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?limit_definition: Types::LimitDefinitionType,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor limit_definition: Types::LimitDefinitionType?
+    end
+
+    class GetProvisionedLimitResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?limit: Types::LimitType,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor limit: Types::LimitType?
     end
 
     class GetSigningCertificateRequest
@@ -2846,6 +3192,7 @@ module Aws::CognitoIdentityProvider
         ?provider_details: Hash[String, String],
         ?attribute_mapping: Hash[String, String],
         ?idp_identifiers: Array[String],
+        ?acr_mapping: Hash[String, String],
         ?last_modified_date: Time,
         ?creation_date: Time,
       ) -> void
@@ -2857,6 +3204,7 @@ module Aws::CognitoIdentityProvider
       attr_accessor provider_details: Hash[String, String]?
       attr_accessor attribute_mapping: Hash[String, String]?
       attr_accessor idp_identifiers: Array[String]?
+      attr_accessor acr_mapping: Hash[String, String]?
       attr_accessor last_modified_date: Time?
       attr_accessor creation_date: Time?
     end
@@ -2868,6 +3216,23 @@ module Aws::CognitoIdentityProvider
       LoginWithAmazon: String
       SignInWithApple: String
       OIDC: String
+    end
+
+    class InboundFederationLambdaType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lambda_version: String,
+        ?lambda_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lambda_version: String?
+      attr_accessor lambda_arn: String?
+    end
+
+    module InboundFederationLambdaVersionType
+      V1_0: String
     end
 
     class InitiateAuthRequest
@@ -2913,6 +3278,17 @@ module Aws::CognitoIdentityProvider
     end
 
     class InternalErrorException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InternalServerException
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -3013,6 +3389,35 @@ module Aws::CognitoIdentityProvider
       attr_accessor message: String?
     end
 
+    class IssuerConfigurationType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+    end
+
+    module IssuerType
+      ORIGINAL: String
+      UPDATED: String
+    end
+
+    class KeyConfigurationType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_type: String,
+        ?kms_key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_type: String?
+      attr_accessor kms_key_arn: String?
+    end
+
     class LambdaConfigType
       include Smithy::Schema::Structure
 
@@ -3031,6 +3436,7 @@ module Aws::CognitoIdentityProvider
         ?custom_sms_sender: Types::CustomSMSLambdaVersionConfigType,
         ?custom_email_sender: Types::CustomEmailLambdaVersionConfigType,
         ?kms_key_id: String,
+        ?inbound_federation: Types::InboundFederationLambdaType,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3048,6 +3454,24 @@ module Aws::CognitoIdentityProvider
       attr_accessor custom_sms_sender: Types::CustomSMSLambdaVersionConfigType?
       attr_accessor custom_email_sender: Types::CustomEmailLambdaVersionConfigType?
       attr_accessor kms_key_id: String?
+      attr_accessor inbound_federation: Types::InboundFederationLambdaType?
+    end
+
+    module LimitClass
+      API_CATEGORY: String
+    end
+
+    class LimitDefinitionType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?limit_class: String,
+        ?attributes: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor limit_class: String?
+      attr_accessor attributes: Hash[String, String]?
     end
 
     class LimitExceededException
@@ -3059,6 +3483,21 @@ module Aws::CognitoIdentityProvider
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    class LimitType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?limit_definition: Types::LimitDefinitionType,
+        ?provisioned_limit_value: Integer,
+        ?free_limit_value: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor limit_definition: Types::LimitDefinitionType?
+      attr_accessor provisioned_limit_value: Integer?
+      attr_accessor free_limit_value: Integer?
     end
 
     class ListDevicesRequest
@@ -3251,6 +3690,34 @@ module Aws::CognitoIdentityProvider
       attr_accessor pagination_token: String?
     end
 
+    class ListUserPoolClientSecretsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_pool_id: String,
+        ?client_id: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_pool_id: String?
+      attr_accessor client_id: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListUserPoolClientSecretsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_secrets: Array[Types::ClientSecretDescriptorType],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_secrets: Array[Types::ClientSecretDescriptorType]?
+      attr_accessor next_token: String?
+    end
+
     class ListUserPoolClientsRequest
       include Smithy::Schema::Structure
 
@@ -3276,6 +3743,32 @@ module Aws::CognitoIdentityProvider
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor user_pool_clients: Array[Types::UserPoolClientDescription]?
+      attr_accessor next_token: String?
+    end
+
+    class ListUserPoolReplicasRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_pool_id: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_pool_id: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListUserPoolReplicasResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_pool_replicas: Array[Types::UserPoolReplicaType],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_pool_replicas: Array[Types::UserPoolReplicaType]?
       attr_accessor next_token: String?
     end
 
@@ -3589,6 +4082,24 @@ module Aws::CognitoIdentityProvider
       client_credentials: String
     end
 
+    class OperationNotEnabledException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module PasswordHashingAlgorithmType
+      BCRYPT: String
+      SCRYPT: String
+      ARGON2ID: String
+      PBKDF2_SHA256: String
+    end
+
     class PasswordHistoryPolicyViolationException
       include Smithy::Schema::Structure
 
@@ -3744,6 +4255,18 @@ module Aws::CognitoIdentityProvider
       attr_accessor retry_grace_period_seconds: Integer?
     end
 
+    module ReplicaRoleType
+      PRIMARY: String
+      SECONDARY: String
+    end
+
+    module ReplicaStatusType
+      CREATING: String
+      ACTIVE: String
+      INACTIVE: String
+      DELETING: String
+    end
+
     class ResendConfirmationCodeRequest
       include Smithy::Schema::Structure
 
@@ -3848,6 +4371,7 @@ module Aws::CognitoIdentityProvider
         ?session: String,
         ?challenge_parameters: Hash[String, String],
         ?authentication_result: Types::AuthenticationResultType,
+        ?available_challenges: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3855,6 +4379,7 @@ module Aws::CognitoIdentityProvider
       attr_accessor session: String?
       attr_accessor challenge_parameters: Hash[String, String]?
       attr_accessor authentication_result: Types::AuthenticationResultType?
+      attr_accessor available_challenges: Array[String]?
     end
 
     class RevokeTokenRequest
@@ -3927,6 +4452,17 @@ module Aws::CognitoIdentityProvider
       High: String
     end
 
+    class RoutingType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?failover: Types::FailoverType,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor failover: Types::FailoverType?
+    end
+
     class S3ConfigurationType
       include Smithy::Schema::Structure
 
@@ -3975,6 +4511,23 @@ module Aws::CognitoIdentityProvider
     end
 
     class ScopeDoesNotExistException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module SecurityPolicyType
+      TLS_V1: String
+      TLS_V1_2_2021: String
+      TLS_V1_3_2025: String
+    end
+
+    class ServiceQuotaExceededException
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -4074,6 +4627,7 @@ module Aws::CognitoIdentityProvider
         ?sms_mfa_settings: Types::SMSMfaSettingsType,
         ?software_token_mfa_settings: Types::SoftwareTokenMfaSettingsType,
         ?email_mfa_settings: Types::EmailMfaSettingsType,
+        ?web_authn_mfa_settings: Types::WebAuthnMfaSettingsType,
         ?access_token: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -4081,6 +4635,7 @@ module Aws::CognitoIdentityProvider
       attr_accessor sms_mfa_settings: Types::SMSMfaSettingsType?
       attr_accessor software_token_mfa_settings: Types::SoftwareTokenMfaSettingsType?
       attr_accessor email_mfa_settings: Types::EmailMfaSettingsType?
+      attr_accessor web_authn_mfa_settings: Types::WebAuthnMfaSettingsType?
       attr_accessor access_token: String?
     end
 
@@ -4217,12 +4772,14 @@ module Aws::CognitoIdentityProvider
         ?sns_caller_arn: String,
         ?external_id: String,
         ?sns_region: String,
+        ?eums_sms: Types::EumsSmsConfigurationType,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor sns_caller_arn: String?
       attr_accessor external_id: String?
       attr_accessor sns_region: String?
+      attr_accessor eums_sms: Types::EumsSmsConfigurationType?
     end
 
     class SmsMfaConfigType
@@ -4705,6 +5262,7 @@ module Aws::CognitoIdentityProvider
         ?provider_details: Hash[String, String],
         ?attribute_mapping: Hash[String, String],
         ?idp_identifiers: Array[String],
+        ?acr_mapping: Hash[String, String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4713,6 +5271,7 @@ module Aws::CognitoIdentityProvider
       attr_accessor provider_details: Hash[String, String]?
       attr_accessor attribute_mapping: Hash[String, String]?
       attr_accessor idp_identifiers: Array[String]?
+      attr_accessor acr_mapping: Hash[String, String]?
     end
 
     class UpdateIdentityProviderResponse
@@ -4754,6 +5313,35 @@ module Aws::CognitoIdentityProvider
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor managed_login_branding: Types::ManagedLoginBrandingType?
+    end
+
+    class UpdateProvisionedLimitRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?limit_definition: Types::LimitDefinitionType,
+        ?requested_limit_value: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor limit_definition: Types::LimitDefinitionType?
+      attr_accessor requested_limit_value: Integer?
+    end
+
+    class UpdateProvisionedLimitResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?limit: Types::LimitType,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor limit: Types::LimitType?
+    end
+
+    module UpdateReplicaStatusType
+      ACTIVE: String
+      INACTIVE: String
     end
 
     class UpdateResourceServerRequest
@@ -4916,6 +5504,7 @@ module Aws::CognitoIdentityProvider
         ?user_pool_id: String,
         ?managed_login_version: Integer,
         ?custom_domain_config: Types::CustomDomainConfigType,
+        ?routing: Types::RoutingType,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4923,6 +5512,7 @@ module Aws::CognitoIdentityProvider
       attr_accessor user_pool_id: String?
       attr_accessor managed_login_version: Integer?
       attr_accessor custom_domain_config: Types::CustomDomainConfigType?
+      attr_accessor routing: Types::RoutingType?
     end
 
     class UpdateUserPoolDomainResponse
@@ -4931,11 +5521,39 @@ module Aws::CognitoIdentityProvider
       def initialize: (
         ?managed_login_version: Integer,
         ?cloud_front_domain: String,
+        ?routing: Types::RoutingType,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor managed_login_version: Integer?
       attr_accessor cloud_front_domain: String?
+      attr_accessor routing: Types::RoutingType?
+    end
+
+    class UpdateUserPoolReplicaRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_pool_id: String,
+        ?region_name: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_pool_id: String?
+      attr_accessor region_name: String?
+      attr_accessor status: String?
+    end
+
+    class UpdateUserPoolReplicaResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_pool_replica: Types::UserPoolReplicaType,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_pool_replica: Types::UserPoolReplicaType?
     end
 
     class UpdateUserPoolRequest
@@ -4963,6 +5581,9 @@ module Aws::CognitoIdentityProvider
         ?account_recovery_setting: Types::AccountRecoverySettingType,
         ?pool_name: String,
         ?user_pool_tier: String,
+        ?key_configuration: Types::KeyConfigurationType,
+        ?issuer_configuration: Types::IssuerConfigurationType,
+        ?acr_configuration: Hash[String, Types::AcrLevelConfigType],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4987,6 +5608,9 @@ module Aws::CognitoIdentityProvider
       attr_accessor account_recovery_setting: Types::AccountRecoverySettingType?
       attr_accessor pool_name: String?
       attr_accessor user_pool_tier: String?
+      attr_accessor key_configuration: Types::KeyConfigurationType?
+      attr_accessor issuer_configuration: Types::IssuerConfigurationType?
+      attr_accessor acr_configuration: Hash[String, Types::AcrLevelConfigType]?
     end
 
     class UpdateUserPoolResponse
@@ -5061,6 +5685,7 @@ module Aws::CognitoIdentityProvider
         ?skipped_users: Integer,
         ?failed_users: Integer,
         ?completion_message: String,
+        ?password_hashing_algorithm: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -5077,6 +5702,7 @@ module Aws::CognitoIdentityProvider
       attr_accessor skipped_users: Integer?
       attr_accessor failed_users: Integer?
       attr_accessor completion_message: String?
+      attr_accessor password_hashing_algorithm: String?
     end
 
     class UserLambdaValidationException
@@ -5222,6 +5848,7 @@ module Aws::CognitoIdentityProvider
         ?status: String,
         ?last_modified_date: Time,
         ?creation_date: Time,
+        ?replica_regions: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -5231,6 +5858,7 @@ module Aws::CognitoIdentityProvider
       attr_accessor status: String?
       attr_accessor last_modified_date: Time?
       attr_accessor creation_date: Time?
+      attr_accessor replica_regions: Array[String]?
     end
 
     module UserPoolMfaType
@@ -5250,6 +5878,23 @@ module Aws::CognitoIdentityProvider
 
       attr_accessor password_policy: Types::PasswordPolicyType?
       attr_accessor sign_in_policy: Types::SignInPolicyType?
+    end
+
+    class UserPoolReplicaType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?region_name: String,
+        ?status: String,
+        ?role: String,
+        ?user_pool_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor region_name: String?
+      attr_accessor status: String?
+      attr_accessor role: String?
+      attr_accessor user_pool_arn: String?
     end
 
     class UserPoolTaggingException
@@ -5307,6 +5952,9 @@ module Aws::CognitoIdentityProvider
         ?arn: String,
         ?account_recovery_setting: Types::AccountRecoverySettingType,
         ?user_pool_tier: String,
+        ?key_configuration: Types::KeyConfigurationType,
+        ?issuer_configuration: Types::IssuerConfigurationType,
+        ?acr_configuration: Hash[String, Types::AcrLevelConfigType],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -5344,6 +5992,9 @@ module Aws::CognitoIdentityProvider
       attr_accessor arn: String?
       attr_accessor account_recovery_setting: Types::AccountRecoverySettingType?
       attr_accessor user_pool_tier: String?
+      attr_accessor key_configuration: Types::KeyConfigurationType?
+      attr_accessor issuer_configuration: Types::IssuerConfigurationType?
+      attr_accessor acr_configuration: Hash[String, Types::AcrLevelConfigType]?
     end
 
     module UserStatusType
@@ -5536,11 +6187,13 @@ module Aws::CognitoIdentityProvider
       def initialize: (
         ?relying_party_id: String,
         ?user_verification: String,
+        ?factor_configuration: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor relying_party_id: String?
       attr_accessor user_verification: String?
+      attr_accessor factor_configuration: String?
     end
 
     class WebAuthnCredentialDescription
@@ -5573,6 +6226,22 @@ module Aws::CognitoIdentityProvider
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    module WebAuthnFactorConfigurationType
+      SINGLE_FACTOR: String
+      MULTI_FACTOR_WITH_USER_VERIFICATION: String
+    end
+
+    class WebAuthnMfaSettingsType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
     end
 
     class WebAuthnNotEnabledException

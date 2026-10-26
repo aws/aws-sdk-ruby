@@ -293,6 +293,7 @@ module Aws::Rbin
     module ResourceType
       EBS_SNAPSHOT: String
       EC2_IMAGE: String
+      EBS_VOLUME: String
     end
 
     class RetentionPeriod

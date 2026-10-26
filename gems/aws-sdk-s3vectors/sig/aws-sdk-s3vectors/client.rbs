@@ -46,6 +46,7 @@ module Aws::S3Vectors
 
     interface _CreateIndexResponse
       include Smithy::Client::_Response[Types::CreateIndexOutput]
+      def index_arn: () -> String?
     end
     def create_index: (
       ?vector_bucket_name: String,
@@ -56,18 +57,25 @@ module Aws::S3Vectors
       ?distance_metric: String,
       ?metadata_configuration: {
         non_filterable_metadata_keys: Array[String]
-      }
+      },
+      ?encryption_configuration: {
+        sse_type: String,
+        kms_key_arn: String
+      },
+      ?tags: Hash[String, String]
     ) -> _CreateIndexResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateIndexResponse
 
     interface _CreateVectorBucketResponse
       include Smithy::Client::_Response[Types::CreateVectorBucketOutput]
+      def vector_bucket_arn: () -> String?
     end
     def create_vector_bucket: (
       ?vector_bucket_name: String,
       ?encryption_configuration: {
         sse_type: String,
         kms_key_arn: String
-      }
+      },
+      ?tags: Hash[String, String]
     ) -> _CreateVectorBucketResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateVectorBucketResponse
 
     interface _DeleteIndexResponse
@@ -159,6 +167,14 @@ module Aws::S3Vectors
       ?prefix: String
     ) -> _ListIndexesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListIndexesResponse
 
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
     interface _ListVectorBucketsResponse
       include Smithy::Client::_Response[Types::ListVectorBucketsOutput]
       def next_token: () -> String?
@@ -186,6 +202,15 @@ module Aws::S3Vectors
       ?return_data: bool,
       ?return_metadata: bool
     ) -> _ListVectorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListVectorsResponse
+
+    interface _PutVectorBucketDefaultIndexModeResponse
+      include Smithy::Client::_Response[Types::PutVectorBucketDefaultIndexModeOutput]
+    end
+    def put_vector_bucket_default_index_mode: (
+      ?vector_bucket_name: String,
+      ?vector_bucket_arn: String,
+      ?default_index_mode: String
+    ) -> _PutVectorBucketDefaultIndexModeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutVectorBucketDefaultIndexModeResponse
 
     interface _PutVectorBucketPolicyResponse
       include Smithy::Client::_Response[Types::PutVectorBucketPolicyOutput]
@@ -217,6 +242,8 @@ module Aws::S3Vectors
     interface _QueryVectorsResponse
       include Smithy::Client::_Response[Types::QueryVectorsOutput]
       def vectors: () -> Array[Types::QueryOutputVector]?
+      def distance_metric: () -> String?
+      def next_token: () -> String?
     end
     def query_vectors: (
       ?vector_bucket_name: String,
@@ -227,8 +254,36 @@ module Aws::S3Vectors
         float32: Array[Float]
       },
       ?filter: Smithy::Schema::document,
+      ?query_mode: String,
       ?return_metadata: bool,
-      ?return_distance: bool
+      ?return_distance: bool,
+      ?next_token: String
     ) -> _QueryVectorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _QueryVectorsResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceOutput]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceOutput]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateIndexModeResponse
+      include Smithy::Client::_Response[Types::UpdateIndexModeOutput]
+    end
+    def update_index_mode: (
+      ?vector_bucket_name: String,
+      ?index_name: String,
+      ?index_arn: String,
+      ?index_mode: String
+    ) -> _UpdateIndexModeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateIndexModeResponse
   end
 end

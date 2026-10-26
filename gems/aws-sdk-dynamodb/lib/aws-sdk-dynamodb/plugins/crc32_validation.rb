@@ -35,7 +35,6 @@ module Aws
           def validate(context)
             return if crc32_is_valid?(context.http_response)
 
-            # TODO: Could be refactored: https://github.com/mullermp/aws-sdk-ruby-v4/pull/40#discussion_r2553209153
             checksum_error = Core::Errors::ChecksumError.new('Response failed CRC32 check.')
             Smithy::Client::NetworkingError.new(checksum_error)
           end

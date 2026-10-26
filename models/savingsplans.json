@@ -78,6 +78,243 @@
                 "aws.protocols#restJson1": {},
                 "smithy.api#documentation": "<p>Savings Plans are a pricing model that offer significant savings on Amazon Web Services usage (for example, on Amazon EC2 instances). You commit to a consistent\n         amount of usage per hour, in the specified currency, for a term of one or three years, and\n         receive a lower price for that usage. For more information, see the <a href=\"https://docs.aws.amazon.com/savingsplans/latest/userguide/\">Amazon Web Services\n            Savings Plans User Guide</a>.</p>",
                 "smithy.api#title": "AWS Savings Plans",
+                "smithy.rules#endpointBdd": {
+                    "version": "1.1",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        }
+                    },
+                    "conditions": [
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.partition",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ],
+                            "assign": "PartitionResult"
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "stringEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "name"
+                                    ]
+                                },
+                                "aws"
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseDualStack"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsFIPS"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsDualStack"
+                                    ]
+                                },
+                                true
+                            ]
+                        }
+                    ],
+                    "results": [
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://savingsplans.global.api.aws",
+                                "properties": {
+                                    "authSchemes": [
+                                        {
+                                            "name": "sigv4",
+                                            "signingName": "savingsplans",
+                                            "signingRegion": "us-east-1"
+                                        }
+                                    ]
+                                },
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://savingsplans.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://savingsplans.amazonaws.com",
+                                "properties": {
+                                    "authSchemes": [
+                                        {
+                                            "name": "sigv4",
+                                            "signingName": "savingsplans",
+                                            "signingRegion": "us-east-1"
+                                        }
+                                    ]
+                                },
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://savingsplans-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://savingsplans-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://savingsplans.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ],
+                    "root": 2,
+                    "nodeCount": 17,
+                    "nodes": "/////wAAAAH/////AAAAAAAAABAAAAADAAAAAQAAAAYAAAAEAAAAAwX14Q0AAAAFAAAABQX14QEF9eENAAAAAgAAAAcF9eENAAAAAwAAAAwAAAAIAAAABAAAAAsAAAAJAAAABQAAAAoF9eEMAAAABwX14QIF9eEDAAAABQX14QEF9eEHAAAABQAAAA4AAAANAAAABgX14QoF9eELAAAABgAAAA8F9eEJAAAABwX14QgF9eEJAAAAAwX14QQAAAARAAAABQX14QUF9eEG"
+                },
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {
@@ -85,30 +322,192 @@
                             "builtIn": "AWS::Region",
                             "required": false,
                             "documentation": "The AWS region used to dispatch the request.",
-                            "type": "String"
+                            "type": "string"
                         },
                         "UseDualStack": {
                             "builtIn": "AWS::UseDualStack",
                             "required": true,
                             "default": false,
                             "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "UseFIPS": {
                             "builtIn": "AWS::UseFIPS",
                             "required": true,
                             "default": false,
                             "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "Endpoint": {
                             "builtIn": "SDK::Endpoint",
                             "required": false,
                             "documentation": "Override the endpoint used to send this request",
-                            "type": "String"
+                            "type": "string"
                         }
                     },
                     "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "not",
+                                    "argv": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "fn": "booleanEquals",
+                                    "argv": [
+                                        {
+                                            "ref": "UseFIPS"
+                                        },
+                                        false
+                                    ]
+                                },
+                                {
+                                    "fn": "booleanEquals",
+                                    "argv": [
+                                        {
+                                            "ref": "UseDualStack"
+                                        },
+                                        true
+                                    ]
+                                }
+                            ],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "fn": "aws.partition",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ],
+                                            "assign": "PartitionResult"
+                                        }
+                                    ],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "stringEquals",
+                                                    "argv": [
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "name"
+                                                            ]
+                                                        },
+                                                        "aws"
+                                                    ]
+                                                }
+                                            ],
+                                            "endpoint": {
+                                                "url": "https://savingsplans.global.api.aws",
+                                                "properties": {
+                                                    "authSchemes": [
+                                                        {
+                                                            "name": "sigv4",
+                                                            "signingName": "savingsplans",
+                                                            "signingRegion": "us-east-1"
+                                                        }
+                                                    ]
+                                                },
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://savingsplans.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ],
+                                            "type": "tree"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                            "type": "error"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "not",
+                                            "argv": [
+                                                {
+                                                    "fn": "isSet",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "endpoint": {
+                                        "url": "https://savingsplans.global.api.aws",
+                                        "properties": {
+                                            "authSchemes": [
+                                                {
+                                                    "name": "sigv4",
+                                                    "signingName": "savingsplans",
+                                                    "signingRegion": "us-east-1"
+                                                }
+                                            ]
+                                        },
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ],
+                            "type": "tree"
+                        },
                         {
                             "conditions": [
                                 {
@@ -494,19 +893,6 @@
                             }
                         },
                         {
-                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://savingsplans.us-east-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
                             "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
@@ -724,21 +1110,88 @@
                             }
                         },
                         {
-                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
-                            "expect": {
-                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
-                            },
-                            "params": {
-                                "Region": "us-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Endpoint": "https://example.com"
-                            }
-                        },
-                        {
                             "documentation": "Missing region",
                             "expect": {
                                 "error": "Invalid Configuration: Missing Region"
+                            }
+                        },
+                        {
+                            "documentation": "For region not set with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingName": "savingsplans",
+                                                "signingRegion": "us-east-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://savingsplans.global.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingName": "savingsplans",
+                                                "signingRegion": "us-east-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://savingsplans.global.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingName": "savingsplans",
+                                                "signingRegion": "us-east-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://savingsplans.global.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "Commercial region with custom SDK endpoint",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://custom.example.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Endpoint": "https://custom.example.com"
                             }
                         }
                     ],
@@ -858,6 +1311,12 @@
                     "traits": {
                         "smithy.api#enumValue": "USD"
                     }
+                },
+                "EUR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EUR"
+                    }
                 }
             }
         },
@@ -933,6 +1392,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.savingsplans#InternalServerException"
+                },
+                {
                     "target": "com.amazonaws.savingsplans#ResourceNotFoundException"
                 },
                 {
@@ -940,7 +1402,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the rates for the specified Savings Plan.</p>",
+                "smithy.api#documentation": "<p>Describes the rates for a specific, existing Savings Plan.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/DescribeSavingsPlanRates",
@@ -1049,7 +1511,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the offering rates for the specified Savings Plans.</p>",
+                "smithy.api#documentation": "<p>Describes the offering rates for Savings Plans you might want to purchase.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/DescribeSavingsPlansOfferingRates",
@@ -1725,7 +2187,7 @@
                 "returnableUntil": {
                     "target": "com.amazonaws.savingsplans#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time until when a return for the Savings Plan can be requested. If the\n            Savings Plan is not returnable, the field reflects the Savings Plan start time.</p>"
+                        "smithy.api#documentation": "<p>The time until when a return for the Savings Plan can be requested. If the\n            Savings Plan is not returnable, the field reflects the Savings Plans start time.</p>"
                     }
                 }
             },
@@ -2159,6 +2621,66 @@
                     "traits": {
                         "smithy.api#enumValue": "SageMaker"
                     }
+                },
+                "RDS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RDS"
+                    }
+                },
+                "DSQL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DSQL"
+                    }
+                },
+                "DYNAMODB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DynamoDB"
+                    }
+                },
+                "ELASTICACHE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ElastiCache"
+                    }
+                },
+                "DOCDB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DocDB"
+                    }
+                },
+                "NEPTUNE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Neptune"
+                    }
+                },
+                "TIMESTREAM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Timestream"
+                    }
+                },
+                "KEYSPACES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Keyspaces"
+                    }
+                },
+                "DMS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DMS"
+                    }
+                },
+                "OPENSEARCH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OpenSearch"
+                    }
                 }
             }
         },
@@ -2462,6 +2984,66 @@
                     "traits": {
                         "smithy.api#enumValue": "AmazonSageMaker"
                     }
+                },
+                "RDS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AmazonRDS"
+                    }
+                },
+                "AURORA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AuroraDSQL"
+                    }
+                },
+                "DYNAMODB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AmazonDynamoDB"
+                    }
+                },
+                "ELASTICACHE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AmazonElastiCache"
+                    }
+                },
+                "DOCDB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AmazonDocDB"
+                    }
+                },
+                "NEPTUNE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AmazonNeptune"
+                    }
+                },
+                "TIMESTREAM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AmazonTimestream"
+                    }
+                },
+                "MCS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AmazonMCS"
+                    }
+                },
+                "DMS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWSDatabaseMigrationSvc"
+                    }
+                },
+                "ES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AmazonES"
+                    }
                 }
             }
         },
@@ -2490,6 +3072,90 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "Request"
+                    }
+                },
+                "ACU_HR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACU-Hr"
+                    }
+                },
+                "READ_REQUEST_UNITS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ReadRequestUnits"
+                    }
+                },
+                "WRITE_REQUEST_UNITS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WriteRequestUnits"
+                    }
+                },
+                "READ_CAPACITY_UNIT_HRS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ReadCapacityUnit-Hrs"
+                    }
+                },
+                "WRITE_CAPACITY_UNIT_HRS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WriteCapacityUnit-Hrs"
+                    }
+                },
+                "REPLICATED_WRITE_REQUEST_UNITS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ReplicatedWriteRequestUnits"
+                    }
+                },
+                "REPLICATED_WRITE_CAPACITY_UNIT_HRS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ReplicatedWriteCapacityUnit-Hrs"
+                    }
+                },
+                "GB_HOURS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GB-Hours"
+                    }
+                },
+                "DPU": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DPU"
+                    }
+                },
+                "ELASTI_CACHE_PROCESSING_UNIT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ElastiCacheProcessingUnit"
+                    }
+                },
+                "DCU_HR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DCU-Hr"
+                    }
+                },
+                "NCU_HR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NCU-hr"
+                    }
+                },
+                "OCU_HRS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OCU-hours"
+                    }
+                },
+                "JOBS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Jobs"
                     }
                 }
             }
@@ -2605,6 +3271,12 @@
                     "traits": {
                         "smithy.api#enumValue": "SageMaker"
                     }
+                },
+                "DATABASE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Database"
+                    }
                 }
             }
         },
@@ -2694,6 +3366,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "end"
+                    }
+                },
+                "INSTANCE_FAMILY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "instance-family"
                     }
                 }
             }

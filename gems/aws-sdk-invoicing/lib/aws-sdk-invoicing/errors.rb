@@ -23,6 +23,7 @@ module Aws::Invoicing
   # ## Error Classes
   #
   # * {AccessDeniedException}
+  # * {ConflictException}
   # * {InternalServerException}
   # * {ResourceNotFoundException}
   # * {ServiceQuotaExceededException}
@@ -49,6 +50,29 @@ module Aws::Invoicing
       # <p>You don't have sufficient access to perform this action. </p>
       def resource_name
         @data[:resource_name]
+      end
+    end
+
+    # <p>The request could not be completed due to a conflict with the current state of the resource. This exception occurs when a concurrent modification is detected during an update operation, or when attempting to create a resource that already exists.</p>
+    class ConflictException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::Invoicing::Types::ConflictException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+
+      # <p>The identifier of the resource that caused the conflict.</p>
+      def resource_id
+        @data[:resource_id]
+      end
+
+      # <p>The type of resource that caused the conflict.</p>
+      def resource_type
+        @data[:resource_type]
       end
     end
 

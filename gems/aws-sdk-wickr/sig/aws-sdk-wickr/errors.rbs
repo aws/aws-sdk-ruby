@@ -1,0 +1,26 @@
+module Aws::Wickr
+  module Errors
+    class BadRequestError < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ForbiddenError < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InternalServerError < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class RateLimitError < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotFoundError < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UnauthorizedError < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ValidationError < Smithy::Client::ServiceError
+      def reasons: () -> Array[Types::ErrorDetail]?
+      def message: () -> String?
+    end
+  end
+end

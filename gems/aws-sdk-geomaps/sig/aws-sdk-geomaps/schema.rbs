@@ -4,8 +4,10 @@ module Aws::GeoMaps
 
     AccessDeniedException: StructureShape
     ApiKey: StringShape
-    ColorScheme: StringShape
+    Buildings: EnumShape
+    ColorScheme: EnumShape
     CompactOverlay: StringShape
+    ContourDensity: EnumShape
     CountryCode: StringShape
     DistanceMeters: IntegerShape
     GeoJsonOverlay: StringShape
@@ -20,25 +22,34 @@ module Aws::GeoMaps
     GetTileRequest: StructureShape
     GetTileResponse: StructureShape
     InternalServerException: StructureShape
-    LabelSize: StringShape
+    LabelSize: EnumShape
     LanguageTag: StringShape
-    MapFeatureMode: StringShape
-    MapStyle: StringShape
+    MapFeatureMode: EnumShape
+    MapStyle: EnumShape
+    PoiCategory: EnumShape
+    PoiCategoryList: ListShape
+    PoiDensity: EnumShape
     PositionListString: StringShape
     PositionString: StringShape
     ResourceNotFoundException: StructureShape
-    ScaleBarUnit: StringShape
+    ScaleBarUnit: EnumShape
     SensitiveFloat: FloatShape
     SensitiveInteger: IntegerShape
     SensitiveString: StringShape
-    StaticMapStyle: StringShape
+    StaticMapStyle: EnumShape
+    Terrain: EnumShape
     ThrottlingException: StructureShape
+    TileAdditionalFeature: EnumShape
+    TileAdditionalFeatureList: ListShape
     Tileset: StringShape
+    Traffic: EnumShape
+    TravelMode: EnumShape
+    TravelModeList: ListShape
     ValidationException: StructureShape
     ValidationExceptionField: StructureShape
     ValidationExceptionFieldList: ListShape
-    ValidationExceptionReason: StringShape
-    Variant: StringShape
+    ValidationExceptionReason: EnumShape
+    Variant: EnumShape
 
     MapsService: ServiceShape
   end

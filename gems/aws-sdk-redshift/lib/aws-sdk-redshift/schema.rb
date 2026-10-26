@@ -16,6 +16,7 @@ module Aws::Redshift
     ActionType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.redshift#ActionType", name: "ActionType")
     AddPartnerInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#AddPartnerInput", name: "AddPartnerInput")
     AddPartnerOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#AddPartnerOutput", name: "AddPartnerOutput")
+    ApplicationType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.redshift#ApplicationType", name: "ApplicationType")
     AquaConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#AquaConfiguration", name: "AquaConfiguration")
     AquaConfigurationStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.redshift#AquaConfigurationStatus", name: "AquaConfigurationStatus")
     AquaStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.redshift#AquaStatus", name: "AquaStatus")
@@ -64,6 +65,7 @@ module Aws::Redshift
     BucketNotFoundFault = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#BucketNotFoundFault", name: "BucketNotFoundFault", traits: {"aws.protocols#awsQueryError" => {"code" => "BucketNotFoundFault", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
     CancelResizeMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#CancelResizeMessage", name: "CancelResizeMessage")
     CancelResizeOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#CancelResizeOutput", name: "CancelResizeOutput")
+    CatalogNameString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.redshift#CatalogNameString", name: "CatalogNameString", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[a-z0-9_-]*[a-z]+[a-z0-9_-]*$"})
     CertificateAssociation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#CertificateAssociation", name: "CertificateAssociation")
     CertificateAssociationList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.redshift#CertificateAssociationList", name: "CertificateAssociationList")
     Cluster = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#Cluster", name: "Cluster")
@@ -74,6 +76,7 @@ module Aws::Redshift
     ClusterDbRevisionsMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#ClusterDbRevisionsMessage", name: "ClusterDbRevisionsMessage")
     ClusterIamRole = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#ClusterIamRole", name: "ClusterIamRole")
     ClusterIamRoleList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.redshift#ClusterIamRoleList", name: "ClusterIamRoleList")
+    ClusterIdentifierList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.redshift#ClusterIdentifierList", name: "ClusterIdentifierList")
     ClusterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.redshift#ClusterList", name: "ClusterList")
     ClusterNode = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#ClusterNode", name: "ClusterNode")
     ClusterNodesList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.redshift#ClusterNodesList", name: "ClusterNodesList")
@@ -114,6 +117,7 @@ module Aws::Redshift
     ClusterVersionsMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#ClusterVersionsMessage", name: "ClusterVersionsMessage")
     ClustersMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#ClustersMessage", name: "ClustersMessage")
     ConflictPolicyUpdateFault = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#ConflictPolicyUpdateFault", name: "ConflictPolicyUpdateFault", traits: {"aws.protocols#awsQueryError" => {"code" => "ConflictPolicyUpdateFault", "httpResponseCode" => 409}, "smithy.api#error" => "client", "smithy.api#httpError" => 409})
+    Connect = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#Connect", name: "Connect")
     ConsumerIdentifierList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.redshift#ConsumerIdentifierList", name: "ConsumerIdentifierList", traits: {"smithy.api#length" => {"min" => 1, "max" => 1}})
     CopyClusterSnapshotMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#CopyClusterSnapshotMessage", name: "CopyClusterSnapshotMessage")
     CopyClusterSnapshotResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#CopyClusterSnapshotResult", name: "CopyClusterSnapshotResult")
@@ -142,6 +146,8 @@ module Aws::Redshift
     CreateHsmConfigurationResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#CreateHsmConfigurationResult", name: "CreateHsmConfigurationResult")
     CreateIntegrationMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#CreateIntegrationMessage", name: "CreateIntegrationMessage")
     CreateIntegrationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#CreateIntegrationOutput", name: "CreateIntegrationOutput")
+    CreateQev2IdcApplicationMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#CreateQev2IdcApplicationMessage", name: "CreateQev2IdcApplicationMessage")
+    CreateQev2IdcApplicationResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#CreateQev2IdcApplicationResult", name: "CreateQev2IdcApplicationResult")
     CreateRedshiftIdcApplicationMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#CreateRedshiftIdcApplicationMessage", name: "CreateRedshiftIdcApplicationMessage")
     CreateRedshiftIdcApplicationResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#CreateRedshiftIdcApplicationResult", name: "CreateRedshiftIdcApplicationResult")
     CreateScheduledActionMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#CreateScheduledActionMessage", name: "CreateScheduledActionMessage")
@@ -195,6 +201,7 @@ module Aws::Redshift
     DeleteIntegrationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#DeleteIntegrationOutput", name: "DeleteIntegrationOutput")
     DeletePartnerInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#DeletePartnerInput", name: "DeletePartnerInput")
     DeletePartnerOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#DeletePartnerOutput", name: "DeletePartnerOutput")
+    DeleteQev2IdcApplicationMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#DeleteQev2IdcApplicationMessage", name: "DeleteQev2IdcApplicationMessage")
     DeleteRedshiftIdcApplicationMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#DeleteRedshiftIdcApplicationMessage", name: "DeleteRedshiftIdcApplicationMessage")
     DeleteResourcePolicyMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#DeleteResourcePolicyMessage", name: "DeleteResourcePolicyMessage")
     DeleteScheduledActionMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#DeleteScheduledActionMessage", name: "DeleteScheduledActionMessage")
@@ -251,6 +258,8 @@ module Aws::Redshift
     DescribeOrderableClusterOptionsMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#DescribeOrderableClusterOptionsMessage", name: "DescribeOrderableClusterOptionsMessage")
     DescribePartnersInputMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#DescribePartnersInputMessage", name: "DescribePartnersInputMessage")
     DescribePartnersOutputMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#DescribePartnersOutputMessage", name: "DescribePartnersOutputMessage")
+    DescribeQev2IdcApplicationsMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#DescribeQev2IdcApplicationsMessage", name: "DescribeQev2IdcApplicationsMessage")
+    DescribeQev2IdcApplicationsResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#DescribeQev2IdcApplicationsResult", name: "DescribeQev2IdcApplicationsResult")
     DescribeRedshiftIdcApplicationsMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#DescribeRedshiftIdcApplicationsMessage", name: "DescribeRedshiftIdcApplicationsMessage")
     DescribeRedshiftIdcApplicationsResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#DescribeRedshiftIdcApplicationsResult", name: "DescribeRedshiftIdcApplicationsResult")
     DescribeReservedNodeExchangeStatusInputMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#DescribeReservedNodeExchangeStatusInputMessage", name: "DescribeReservedNodeExchangeStatusInputMessage")
@@ -317,6 +326,8 @@ module Aws::Redshift
     GetClusterCredentialsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#GetClusterCredentialsOutput", name: "GetClusterCredentialsOutput")
     GetClusterCredentialsWithIAMMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#GetClusterCredentialsWithIAMMessage", name: "GetClusterCredentialsWithIAMMessage")
     GetClusterCredentialsWithIAMOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#GetClusterCredentialsWithIAMOutput", name: "GetClusterCredentialsWithIAMOutput")
+    GetIdentityCenterAuthTokenRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#GetIdentityCenterAuthTokenRequest", name: "GetIdentityCenterAuthTokenRequest")
+    GetIdentityCenterAuthTokenResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#GetIdentityCenterAuthTokenResponse", name: "GetIdentityCenterAuthTokenResponse")
     GetReservedNodeExchangeConfigurationOptionsInputMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#GetReservedNodeExchangeConfigurationOptionsInputMessage", name: "GetReservedNodeExchangeConfigurationOptionsInputMessage")
     GetReservedNodeExchangeConfigurationOptionsOutputMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#GetReservedNodeExchangeConfigurationOptionsOutputMessage", name: "GetReservedNodeExchangeConfigurationOptionsOutputMessage")
     GetReservedNodeExchangeOfferingsInputMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#GetReservedNodeExchangeOfferingsInputMessage", name: "GetReservedNodeExchangeOfferingsInputMessage")
@@ -405,11 +416,14 @@ module Aws::Redshift
     LakeFormationQuery = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#LakeFormationQuery", name: "LakeFormationQuery")
     LakeFormationScopeUnion = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.redshift#LakeFormationScopeUnion", name: "LakeFormationScopeUnion")
     LakeFormationServiceIntegrations = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.redshift#LakeFormationServiceIntegrations", name: "LakeFormationServiceIntegrations")
+    LakehouseIdcRegistration = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.redshift#LakehouseIdcRegistration", name: "LakehouseIdcRegistration")
+    LakehouseRegistration = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.redshift#LakehouseRegistration", name: "LakehouseRegistration")
     LimitExceededFault = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#LimitExceededFault", name: "LimitExceededFault", traits: {"aws.protocols#awsQueryError" => {"code" => "LimitExceededFault", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
     ListRecommendationsMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#ListRecommendationsMessage", name: "ListRecommendationsMessage")
     ListRecommendationsResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#ListRecommendationsResult", name: "ListRecommendationsResult")
     LogDestinationType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.redshift#LogDestinationType", name: "LogDestinationType")
     LogTypeList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.redshift#LogTypeList", name: "LogTypeList")
+    LoggingPublishStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#LoggingPublishStatus", name: "LoggingPublishStatus")
     Long = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.redshift#Long", name: "Long")
     LongOptional = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.redshift#LongOptional", name: "LongOptional")
     MaintenanceTrack = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#MaintenanceTrack", name: "MaintenanceTrack")
@@ -441,6 +455,10 @@ module Aws::Redshift
     ModifyEventSubscriptionResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#ModifyEventSubscriptionResult", name: "ModifyEventSubscriptionResult")
     ModifyIntegrationMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#ModifyIntegrationMessage", name: "ModifyIntegrationMessage")
     ModifyIntegrationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#ModifyIntegrationOutput", name: "ModifyIntegrationOutput")
+    ModifyLakehouseConfigurationMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#ModifyLakehouseConfigurationMessage", name: "ModifyLakehouseConfigurationMessage")
+    ModifyLakehouseConfigurationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#ModifyLakehouseConfigurationOutput", name: "ModifyLakehouseConfigurationOutput")
+    ModifyQev2IdcApplicationMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#ModifyQev2IdcApplicationMessage", name: "ModifyQev2IdcApplicationMessage")
+    ModifyQev2IdcApplicationResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#ModifyQev2IdcApplicationResult", name: "ModifyQev2IdcApplicationResult")
     ModifyRedshiftIdcApplicationMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#ModifyRedshiftIdcApplicationMessage", name: "ModifyRedshiftIdcApplicationMessage")
     ModifyRedshiftIdcApplicationResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#ModifyRedshiftIdcApplicationResult", name: "ModifyRedshiftIdcApplicationResult")
     ModifyScheduledActionMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#ModifyScheduledActionMessage", name: "ModifyScheduledActionMessage")
@@ -490,6 +508,11 @@ module Aws::Redshift
     PurchaseReservedNodeOfferingResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#PurchaseReservedNodeOfferingResult", name: "PurchaseReservedNodeOfferingResult")
     PutResourcePolicyMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#PutResourcePolicyMessage", name: "PutResourcePolicyMessage")
     PutResourcePolicyResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#PutResourcePolicyResult", name: "PutResourcePolicyResult")
+    Qev2IdcApplication = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#Qev2IdcApplication", name: "Qev2IdcApplication")
+    Qev2IdcApplicationAlreadyExistsFault = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#Qev2IdcApplicationAlreadyExistsFault", name: "Qev2IdcApplicationAlreadyExistsFault", traits: {"aws.protocols#awsQueryError" => {"code" => "Qev2IdcApplicationAlreadyExists", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
+    Qev2IdcApplicationList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.redshift#Qev2IdcApplicationList", name: "Qev2IdcApplicationList")
+    Qev2IdcApplicationName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.redshift#Qev2IdcApplicationName", name: "Qev2IdcApplicationName", traits: {"smithy.api#length" => {"min" => 1, "max" => 63}, "smithy.api#pattern" => "^[a-z][a-z0-9]*(-[a-z0-9]+)*$"})
+    Qev2IdcApplicationNotExistsFault = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#Qev2IdcApplicationNotExistsFault", name: "Qev2IdcApplicationNotExistsFault", traits: {"aws.protocols#awsQueryError" => {"code" => "Qev2IdcApplicationNotExists", "httpResponseCode" => 404}, "smithy.api#error" => "client", "smithy.api#httpError" => 404})
     ReadWriteAccess = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#ReadWriteAccess", name: "ReadWriteAccess")
     RebootClusterMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#RebootClusterMessage", name: "RebootClusterMessage")
     RebootClusterResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#RebootClusterResult", name: "RebootClusterResult")
@@ -506,6 +529,9 @@ module Aws::Redshift
     RedshiftIdcApplicationName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.redshift#RedshiftIdcApplicationName", name: "RedshiftIdcApplicationName", traits: {"smithy.api#length" => {"min" => 1, "max" => 63}, "smithy.api#pattern" => "^[a-z][a-z0-9]*(-[a-z0-9]+)*$"})
     RedshiftIdcApplicationNotExistsFault = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#RedshiftIdcApplicationNotExistsFault", name: "RedshiftIdcApplicationNotExistsFault", traits: {"aws.protocols#awsQueryError" => {"code" => "RedshiftIdcApplicationNotExists", "httpResponseCode" => 404}, "smithy.api#error" => "client", "smithy.api#httpError" => 404})
     RedshiftIdcApplicationQuotaExceededFault = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#RedshiftIdcApplicationQuotaExceededFault", name: "RedshiftIdcApplicationQuotaExceededFault", traits: {"aws.protocols#awsQueryError" => {"code" => "RedshiftIdcApplicationQuotaExceeded", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
+    RedshiftInvalidParameterFault = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#RedshiftInvalidParameterFault", name: "RedshiftInvalidParameterFault", traits: {"aws.protocols#awsQueryError" => {"code" => "RedshiftInvalidParameter", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
+    RedshiftScopeUnion = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.redshift#RedshiftScopeUnion", name: "RedshiftScopeUnion")
+    RedshiftServiceIntegrations = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.redshift#RedshiftServiceIntegrations", name: "RedshiftServiceIntegrations")
     ReferenceLink = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#ReferenceLink", name: "ReferenceLink")
     ReferenceLinkList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.redshift#ReferenceLinkList", name: "ReferenceLinkList")
     RegisterNamespaceInputMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#RegisterNamespaceInputMessage", name: "RegisterNamespaceInputMessage")
@@ -562,6 +588,8 @@ module Aws::Redshift
     S3AccessGrantsScopeUnion = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.redshift#S3AccessGrantsScopeUnion", name: "S3AccessGrantsScopeUnion")
     S3AccessGrantsServiceIntegrations = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.redshift#S3AccessGrantsServiceIntegrations", name: "S3AccessGrantsServiceIntegrations")
     S3KeyPrefixValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.redshift#S3KeyPrefixValue", name: "S3KeyPrefixValue", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#pattern" => "^[\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*$"})
+    S3TableLastIngestionTimeMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.redshift#S3TableLastIngestionTimeMap", name: "S3TableLastIngestionTimeMap")
+    S3TablePublishStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#S3TablePublishStatus", name: "S3TablePublishStatus")
     SNSInvalidTopicFault = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#SNSInvalidTopicFault", name: "SNSInvalidTopicFault", traits: {"aws.protocols#awsQueryError" => {"code" => "SNSInvalidTopic", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
     SNSNoAuthorizationFault = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#SNSNoAuthorizationFault", name: "SNSNoAuthorizationFault", traits: {"aws.protocols#awsQueryError" => {"code" => "SNSNoAuthorization", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
     SNSTopicArnNotFoundFault = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshift#SNSTopicArnNotFoundFault", name: "SNSTopicArnNotFoundFault", traits: {"aws.protocols#awsQueryError" => {"code" => "SNSTopicArnNotFound", "httpResponseCode" => 404}, "smithy.api#error" => "client", "smithy.api#httpError" => 404})
@@ -701,6 +729,8 @@ module Aws::Redshift
     AddPartnerOutput.add_member(:database_name, ::Smithy::Schema::Shapes::MemberShape.new(target: PartnerIntegrationDatabaseName, name: "DatabaseName"))
     AddPartnerOutput.add_member(:partner_name, ::Smithy::Schema::Shapes::MemberShape.new(target: PartnerIntegrationPartnerName, name: "PartnerName"))
     AddPartnerOutput.type = Types::AddPartnerOutput
+    ApplicationType.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NONE", traits: {"smithy.api#enumValue" => "None"}))
+    ApplicationType.add_member(:lakehouse, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LAKEHOUSE", traits: {"smithy.api#enumValue" => "Lakehouse"}))
     AquaConfiguration.add_member(:aqua_status, ::Smithy::Schema::Shapes::MemberShape.new(target: AquaStatus, name: "AquaStatus"))
     AquaConfiguration.add_member(:aqua_configuration_status, ::Smithy::Schema::Shapes::MemberShape.new(target: AquaConfigurationStatus, name: "AquaConfigurationStatus"))
     AquaConfiguration.type = Types::AquaConfiguration
@@ -903,6 +933,10 @@ module Aws::Redshift
     Cluster.add_member(:ip_address_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "IpAddressType"))
     Cluster.add_member(:multi_az, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "MultiAZ"))
     Cluster.add_member(:multi_az_secondary, ::Smithy::Schema::Shapes::MemberShape.new(target: SecondaryClusterInfo, name: "MultiAZSecondary"))
+    Cluster.add_member(:lakehouse_registration_status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "LakehouseRegistrationStatus"))
+    Cluster.add_member(:catalog_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CatalogArn"))
+    Cluster.add_member(:extra_compute_for_automatic_optimization, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ExtraComputeForAutomaticOptimization"))
+    Cluster.add_member(:logging_publish_status, ::Smithy::Schema::Shapes::MemberShape.new(target: LoggingPublishStatus, name: "LoggingPublishStatus"))
     Cluster.type = Types::Cluster
     ClusterAlreadyExistsFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     ClusterAlreadyExistsFault.type = Types::ClusterAlreadyExistsFault
@@ -922,6 +956,7 @@ module Aws::Redshift
     ClusterIamRole.add_member(:apply_status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ApplyStatus"))
     ClusterIamRole.type = Types::ClusterIamRole
     ClusterIamRoleList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterIamRole, name: "member", traits: {"smithy.api#xmlName" => "ClusterIamRole"}))
+    ClusterIdentifierList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "ClusterIdentifier"}))
     ClusterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Cluster, name: "member", traits: {"smithy.api#xmlName" => "Cluster"}))
     ClusterNode.add_member(:node_role, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NodeRole"))
     ClusterNode.add_member(:private_ip_address, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PrivateIPAddress"))
@@ -1023,6 +1058,8 @@ module Aws::Redshift
     ClustersMessage.type = Types::ClustersMessage
     ConflictPolicyUpdateFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     ConflictPolicyUpdateFault.type = Types::ConflictPolicyUpdateFault
+    Connect.add_member(:authorization, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceAuthorization, name: "Authorization", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    Connect.type = Types::Connect
     ConsumerIdentifierList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     CopyClusterSnapshotMessage.add_member(:source_snapshot_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SourceSnapshotIdentifier", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CopyClusterSnapshotMessage.add_member(:source_snapshot_cluster_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SourceSnapshotClusterIdentifier"))
@@ -1078,6 +1115,8 @@ module Aws::Redshift
     CreateClusterMessage.add_member(:ip_address_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "IpAddressType"))
     CreateClusterMessage.add_member(:multi_az, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "MultiAZ"))
     CreateClusterMessage.add_member(:redshift_idc_application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "RedshiftIdcApplicationArn"))
+    CreateClusterMessage.add_member(:catalog_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogNameString, name: "CatalogName"))
+    CreateClusterMessage.add_member(:extra_compute_for_automatic_optimization, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "ExtraComputeForAutomaticOptimization"))
     CreateClusterMessage.type = Types::CreateClusterMessage
     CreateClusterParameterGroupMessage.add_member(:parameter_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ParameterGroupName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreateClusterParameterGroupMessage.add_member(:parameter_group_family, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ParameterGroupFamily", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -1180,6 +1219,13 @@ module Aws::Redshift
     CreateIntegrationOutput.add_member(:additional_encryption_context, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionContextMap, name: "AdditionalEncryptionContext"))
     CreateIntegrationOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     CreateIntegrationOutput.type = Types::CreateIntegrationOutput
+    CreateQev2IdcApplicationMessage.add_member(:idc_instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "IdcInstanceArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateQev2IdcApplicationMessage.add_member(:qev2_idc_application_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Qev2IdcApplicationName, name: "Qev2IdcApplicationName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateQev2IdcApplicationMessage.add_member(:idc_display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IdcDisplayNameString, name: "IdcDisplayName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateQev2IdcApplicationMessage.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
+    CreateQev2IdcApplicationMessage.type = Types::CreateQev2IdcApplicationMessage
+    CreateQev2IdcApplicationResult.add_member(:qev2_idc_application, ::Smithy::Schema::Shapes::MemberShape.new(target: Qev2IdcApplication, name: "Qev2IdcApplication"))
+    CreateQev2IdcApplicationResult.type = Types::CreateQev2IdcApplicationResult
     CreateRedshiftIdcApplicationMessage.add_member(:idc_instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "IdcInstanceArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreateRedshiftIdcApplicationMessage.add_member(:redshift_idc_application_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RedshiftIdcApplicationName, name: "RedshiftIdcApplicationName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreateRedshiftIdcApplicationMessage.add_member(:identity_namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityNamespaceString, name: "IdentityNamespace"))
@@ -1187,6 +1233,7 @@ module Aws::Redshift
     CreateRedshiftIdcApplicationMessage.add_member(:iam_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "IamRoleArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreateRedshiftIdcApplicationMessage.add_member(:authorized_token_issuer_list, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthorizedTokenIssuerList, name: "AuthorizedTokenIssuerList"))
     CreateRedshiftIdcApplicationMessage.add_member(:service_integrations, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceIntegrationList, name: "ServiceIntegrations"))
+    CreateRedshiftIdcApplicationMessage.add_member(:application_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationType, name: "ApplicationType"))
     CreateRedshiftIdcApplicationMessage.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     CreateRedshiftIdcApplicationMessage.add_member(:sso_tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, name: "SsoTagKeys"))
     CreateRedshiftIdcApplicationMessage.type = Types::CreateRedshiftIdcApplicationMessage
@@ -1390,6 +1437,8 @@ module Aws::Redshift
     DeletePartnerOutput.add_member(:database_name, ::Smithy::Schema::Shapes::MemberShape.new(target: PartnerIntegrationDatabaseName, name: "DatabaseName"))
     DeletePartnerOutput.add_member(:partner_name, ::Smithy::Schema::Shapes::MemberShape.new(target: PartnerIntegrationPartnerName, name: "PartnerName"))
     DeletePartnerOutput.type = Types::DeletePartnerOutput
+    DeleteQev2IdcApplicationMessage.add_member(:qev2_idc_application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Qev2IdcApplicationArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DeleteQev2IdcApplicationMessage.type = Types::DeleteQev2IdcApplicationMessage
     DeleteRedshiftIdcApplicationMessage.add_member(:redshift_idc_application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "RedshiftIdcApplicationArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     DeleteRedshiftIdcApplicationMessage.type = Types::DeleteRedshiftIdcApplicationMessage
     DeleteResourcePolicyMessage.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -1593,6 +1642,7 @@ module Aws::Redshift
     DescribeLoggingStatusOutput.add_member(:last_failure_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "LastFailureMessage"))
     DescribeLoggingStatusOutput.add_member(:log_destination_type, ::Smithy::Schema::Shapes::MemberShape.new(target: LogDestinationType, name: "LogDestinationType"))
     DescribeLoggingStatusOutput.add_member(:log_exports, ::Smithy::Schema::Shapes::MemberShape.new(target: LogTypeList, name: "LogExports"))
+    DescribeLoggingStatusOutput.add_member(:s3_tables, ::Smithy::Schema::Shapes::MemberShape.new(target: S3TablePublishStatus, name: "S3Tables"))
     DescribeLoggingStatusOutput.type = Types::DescribeLoggingStatusOutput
     DescribeNodeConfigurationOptionsMessage.add_member(:action_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionType, name: "ActionType", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     DescribeNodeConfigurationOptionsMessage.add_member(:cluster_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ClusterIdentifier"))
@@ -1615,6 +1665,13 @@ module Aws::Redshift
     DescribePartnersInputMessage.type = Types::DescribePartnersInputMessage
     DescribePartnersOutputMessage.add_member(:partner_integration_info_list, ::Smithy::Schema::Shapes::MemberShape.new(target: PartnerIntegrationInfoList, name: "PartnerIntegrationInfoList"))
     DescribePartnersOutputMessage.type = Types::DescribePartnersOutputMessage
+    DescribeQev2IdcApplicationsMessage.add_member(:qev2_idc_application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Qev2IdcApplicationArn"))
+    DescribeQev2IdcApplicationsMessage.add_member(:max_records, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "MaxRecords"))
+    DescribeQev2IdcApplicationsMessage.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Marker"))
+    DescribeQev2IdcApplicationsMessage.type = Types::DescribeQev2IdcApplicationsMessage
+    DescribeQev2IdcApplicationsResult.add_member(:qev2_idc_applications, ::Smithy::Schema::Shapes::MemberShape.new(target: Qev2IdcApplicationList, name: "Qev2IdcApplications"))
+    DescribeQev2IdcApplicationsResult.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Marker"))
+    DescribeQev2IdcApplicationsResult.type = Types::DescribeQev2IdcApplicationsResult
     DescribeRedshiftIdcApplicationsMessage.add_member(:redshift_idc_application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "RedshiftIdcApplicationArn"))
     DescribeRedshiftIdcApplicationsMessage.add_member(:max_records, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "MaxRecords"))
     DescribeRedshiftIdcApplicationsMessage.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Marker"))
@@ -1706,6 +1763,8 @@ module Aws::Redshift
     DescribeUsageLimitsOutput.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Marker"))
     DescribeUsageLimitsOutput.type = Types::DescribeUsageLimitsOutput
     DisableLoggingMessage.add_member(:cluster_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ClusterIdentifier", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DisableLoggingMessage.add_member(:log_destination_type, ::Smithy::Schema::Shapes::MemberShape.new(target: LogDestinationType, name: "LogDestinationType"))
+    DisableLoggingMessage.add_member(:log_exports, ::Smithy::Schema::Shapes::MemberShape.new(target: LogTypeList, name: "LogExports"))
     DisableLoggingMessage.type = Types::DisableLoggingMessage
     DisableLoggingOutput.add_member(:logging_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "LoggingEnabled"))
     DisableLoggingOutput.add_member(:bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "BucketName"))
@@ -1715,6 +1774,7 @@ module Aws::Redshift
     DisableLoggingOutput.add_member(:last_failure_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "LastFailureMessage"))
     DisableLoggingOutput.add_member(:log_destination_type, ::Smithy::Schema::Shapes::MemberShape.new(target: LogDestinationType, name: "LogDestinationType"))
     DisableLoggingOutput.add_member(:log_exports, ::Smithy::Schema::Shapes::MemberShape.new(target: LogTypeList, name: "LogExports"))
+    DisableLoggingOutput.add_member(:s3_tables, ::Smithy::Schema::Shapes::MemberShape.new(target: S3TablePublishStatus, name: "S3Tables"))
     DisableLoggingOutput.type = Types::DisableLoggingOutput
     DisableSnapshotCopyMessage.add_member(:cluster_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ClusterIdentifier", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     DisableSnapshotCopyMessage.type = Types::DisableSnapshotCopyMessage
@@ -1747,6 +1807,8 @@ module Aws::Redshift
     EnableLoggingMessage.add_member(:s3_key_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: S3KeyPrefixValue, name: "S3KeyPrefix"))
     EnableLoggingMessage.add_member(:log_destination_type, ::Smithy::Schema::Shapes::MemberShape.new(target: LogDestinationType, name: "LogDestinationType"))
     EnableLoggingMessage.add_member(:log_exports, ::Smithy::Schema::Shapes::MemberShape.new(target: LogTypeList, name: "LogExports"))
+    EnableLoggingMessage.add_member(:s3_table_kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "S3TableKmsKeyId"))
+    EnableLoggingMessage.add_member(:s3_table_granularity, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "S3TableGranularity"))
     EnableLoggingMessage.type = Types::EnableLoggingMessage
     EnableLoggingOutput.add_member(:logging_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "LoggingEnabled"))
     EnableLoggingOutput.add_member(:bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "BucketName"))
@@ -1756,6 +1818,7 @@ module Aws::Redshift
     EnableLoggingOutput.add_member(:last_failure_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "LastFailureMessage"))
     EnableLoggingOutput.add_member(:log_destination_type, ::Smithy::Schema::Shapes::MemberShape.new(target: LogDestinationType, name: "LogDestinationType"))
     EnableLoggingOutput.add_member(:log_exports, ::Smithy::Schema::Shapes::MemberShape.new(target: LogTypeList, name: "LogExports"))
+    EnableLoggingOutput.add_member(:s3_tables, ::Smithy::Schema::Shapes::MemberShape.new(target: S3TablePublishStatus, name: "S3Tables"))
     EnableLoggingOutput.type = Types::EnableLoggingOutput
     EnableSnapshotCopyMessage.add_member(:cluster_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ClusterIdentifier", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     EnableSnapshotCopyMessage.add_member(:destination_region, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DestinationRegion", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -1877,6 +1940,11 @@ module Aws::Redshift
     GetClusterCredentialsWithIAMOutput.add_member(:expiration, ::Smithy::Schema::Shapes::MemberShape.new(target: TStamp, name: "Expiration"))
     GetClusterCredentialsWithIAMOutput.add_member(:next_refresh_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TStamp, name: "NextRefreshTime"))
     GetClusterCredentialsWithIAMOutput.type = Types::GetClusterCredentialsWithIAMOutput
+    GetIdentityCenterAuthTokenRequest.add_member(:cluster_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterIdentifierList, name: "ClusterIds", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    GetIdentityCenterAuthTokenRequest.type = Types::GetIdentityCenterAuthTokenRequest
+    GetIdentityCenterAuthTokenResponse.add_member(:token, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "Token"))
+    GetIdentityCenterAuthTokenResponse.add_member(:expiration_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TStamp, name: "ExpirationTime"))
+    GetIdentityCenterAuthTokenResponse.type = Types::GetIdentityCenterAuthTokenResponse
     GetReservedNodeExchangeConfigurationOptionsInputMessage.add_member(:action_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ReservedNodeExchangeActionType, name: "ActionType", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     GetReservedNodeExchangeConfigurationOptionsInputMessage.add_member(:cluster_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ClusterIdentifier"))
     GetReservedNodeExchangeConfigurationOptionsInputMessage.add_member(:snapshot_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SnapshotIdentifier"))
@@ -2066,6 +2134,10 @@ module Aws::Redshift
     LakeFormationScopeUnion.add_member(:unknown, Types::LakeFormationScopeUnion::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     LakeFormationScopeUnion.type = Types::LakeFormationScopeUnion
     LakeFormationServiceIntegrations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LakeFormationScopeUnion, name: "member"))
+    LakehouseIdcRegistration.add_member(:associate, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ASSOCIATE", traits: {"smithy.api#enumValue" => "Associate"}))
+    LakehouseIdcRegistration.add_member(:disassociate, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISASSOCIATE", traits: {"smithy.api#enumValue" => "Disassociate"}))
+    LakehouseRegistration.add_member(:register, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REGISTER", traits: {"smithy.api#enumValue" => "Register"}))
+    LakehouseRegistration.add_member(:deregister, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEREGISTER", traits: {"smithy.api#enumValue" => "Deregister"}))
     LimitExceededFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     LimitExceededFault.type = Types::LimitExceededFault
     ListRecommendationsMessage.add_member(:cluster_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ClusterIdentifier"))
@@ -2078,7 +2150,10 @@ module Aws::Redshift
     ListRecommendationsResult.type = Types::ListRecommendationsResult
     LogDestinationType.add_member(:s3, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "S3", traits: {"smithy.api#enumValue" => "s3"}))
     LogDestinationType.add_member(:cloudwatch, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLOUDWATCH", traits: {"smithy.api#enumValue" => "cloudwatch"}))
+    LogDestinationType.add_member(:s3_table, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "S3TABLE", traits: {"smithy.api#enumValue" => "s3table"}))
     LogTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
+    LoggingPublishStatus.add_member(:s3_tables, ::Smithy::Schema::Shapes::MemberShape.new(target: S3TablePublishStatus, name: "S3Tables"))
+    LoggingPublishStatus.type = Types::LoggingPublishStatus
     MaintenanceTrack.add_member(:maintenance_track_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "MaintenanceTrackName"))
     MaintenanceTrack.add_member(:database_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DatabaseVersion"))
     MaintenanceTrack.add_member(:update_targets, ::Smithy::Schema::Shapes::MemberShape.new(target: EligibleTracksToUpdateList, name: "UpdateTargets"))
@@ -2146,6 +2221,7 @@ module Aws::Redshift
     ModifyClusterMessage.add_member(:master_password_secret_kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "MasterPasswordSecretKmsKeyId"))
     ModifyClusterMessage.add_member(:ip_address_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "IpAddressType"))
     ModifyClusterMessage.add_member(:multi_az, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "MultiAZ"))
+    ModifyClusterMessage.add_member(:extra_compute_for_automatic_optimization, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "ExtraComputeForAutomaticOptimization"))
     ModifyClusterMessage.type = Types::ModifyClusterMessage
     ModifyClusterParameterGroupMessage.add_member(:parameter_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ParameterGroupName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ModifyClusterParameterGroupMessage.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ParametersList, name: "Parameters", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -2220,6 +2296,23 @@ module Aws::Redshift
     ModifyIntegrationOutput.add_member(:additional_encryption_context, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionContextMap, name: "AdditionalEncryptionContext"))
     ModifyIntegrationOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     ModifyIntegrationOutput.type = Types::ModifyIntegrationOutput
+    ModifyLakehouseConfigurationMessage.add_member(:cluster_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ClusterIdentifier", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ModifyLakehouseConfigurationMessage.add_member(:lakehouse_registration, ::Smithy::Schema::Shapes::MemberShape.new(target: LakehouseRegistration, name: "LakehouseRegistration"))
+    ModifyLakehouseConfigurationMessage.add_member(:catalog_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogNameString, name: "CatalogName"))
+    ModifyLakehouseConfigurationMessage.add_member(:lakehouse_idc_registration, ::Smithy::Schema::Shapes::MemberShape.new(target: LakehouseIdcRegistration, name: "LakehouseIdcRegistration"))
+    ModifyLakehouseConfigurationMessage.add_member(:lakehouse_idc_application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "LakehouseIdcApplicationArn"))
+    ModifyLakehouseConfigurationMessage.add_member(:dry_run, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "DryRun"))
+    ModifyLakehouseConfigurationMessage.type = Types::ModifyLakehouseConfigurationMessage
+    ModifyLakehouseConfigurationOutput.add_member(:cluster_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ClusterIdentifier"))
+    ModifyLakehouseConfigurationOutput.add_member(:lakehouse_idc_application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "LakehouseIdcApplicationArn"))
+    ModifyLakehouseConfigurationOutput.add_member(:lakehouse_registration_status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "LakehouseRegistrationStatus"))
+    ModifyLakehouseConfigurationOutput.add_member(:catalog_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CatalogArn"))
+    ModifyLakehouseConfigurationOutput.type = Types::ModifyLakehouseConfigurationOutput
+    ModifyQev2IdcApplicationMessage.add_member(:qev2_idc_application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Qev2IdcApplicationArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ModifyQev2IdcApplicationMessage.add_member(:idc_display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IdcDisplayNameString, name: "IdcDisplayName"))
+    ModifyQev2IdcApplicationMessage.type = Types::ModifyQev2IdcApplicationMessage
+    ModifyQev2IdcApplicationResult.add_member(:qev2_idc_application, ::Smithy::Schema::Shapes::MemberShape.new(target: Qev2IdcApplication, name: "Qev2IdcApplication"))
+    ModifyQev2IdcApplicationResult.type = Types::ModifyQev2IdcApplicationResult
     ModifyRedshiftIdcApplicationMessage.add_member(:redshift_idc_application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "RedshiftIdcApplicationArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ModifyRedshiftIdcApplicationMessage.add_member(:identity_namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityNamespaceString, name: "IdentityNamespace"))
     ModifyRedshiftIdcApplicationMessage.add_member(:iam_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "IamRoleArn"))
@@ -2388,6 +2481,19 @@ module Aws::Redshift
     PutResourcePolicyMessage.type = Types::PutResourcePolicyMessage
     PutResourcePolicyResult.add_member(:resource_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcePolicy, name: "ResourcePolicy"))
     PutResourcePolicyResult.type = Types::PutResourcePolicyResult
+    Qev2IdcApplication.add_member(:idc_instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "IdcInstanceArn"))
+    Qev2IdcApplication.add_member(:qev2_idc_application_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Qev2IdcApplicationName, name: "Qev2IdcApplicationName"))
+    Qev2IdcApplication.add_member(:qev2_idc_application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Qev2IdcApplicationArn"))
+    Qev2IdcApplication.add_member(:idc_managed_application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "IdcManagedApplicationArn"))
+    Qev2IdcApplication.add_member(:idc_onboard_status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "IdcOnboardStatus"))
+    Qev2IdcApplication.add_member(:idc_display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IdcDisplayNameString, name: "IdcDisplayName"))
+    Qev2IdcApplication.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
+    Qev2IdcApplication.type = Types::Qev2IdcApplication
+    Qev2IdcApplicationAlreadyExistsFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
+    Qev2IdcApplicationAlreadyExistsFault.type = Types::Qev2IdcApplicationAlreadyExistsFault
+    Qev2IdcApplicationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Qev2IdcApplication, name: "member"))
+    Qev2IdcApplicationNotExistsFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
+    Qev2IdcApplicationNotExistsFault.type = Types::Qev2IdcApplicationNotExistsFault
     ReadWriteAccess.add_member(:authorization, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceAuthorization, name: "Authorization", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ReadWriteAccess.type = Types::ReadWriteAccess
     RebootClusterMessage.add_member(:cluster_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ClusterIdentifier", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -2430,6 +2536,7 @@ module Aws::Redshift
     RedshiftIdcApplication.add_member(:idc_onboard_status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "IdcOnboardStatus"))
     RedshiftIdcApplication.add_member(:authorized_token_issuer_list, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthorizedTokenIssuerList, name: "AuthorizedTokenIssuerList"))
     RedshiftIdcApplication.add_member(:service_integrations, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceIntegrationList, name: "ServiceIntegrations"))
+    RedshiftIdcApplication.add_member(:application_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationType, name: "ApplicationType"))
     RedshiftIdcApplication.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     RedshiftIdcApplication.add_member(:sso_tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, name: "SsoTagKeys"))
     RedshiftIdcApplication.type = Types::RedshiftIdcApplication
@@ -2440,6 +2547,12 @@ module Aws::Redshift
     RedshiftIdcApplicationNotExistsFault.type = Types::RedshiftIdcApplicationNotExistsFault
     RedshiftIdcApplicationQuotaExceededFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     RedshiftIdcApplicationQuotaExceededFault.type = Types::RedshiftIdcApplicationQuotaExceededFault
+    RedshiftInvalidParameterFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
+    RedshiftInvalidParameterFault.type = Types::RedshiftInvalidParameterFault
+    RedshiftScopeUnion.add_member(:connect, Types::RedshiftScopeUnion::Connect, ::Smithy::Schema::Shapes::MemberShape.new(target: Connect, name: "Connect"))
+    RedshiftScopeUnion.add_member(:unknown, Types::RedshiftScopeUnion::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    RedshiftScopeUnion.type = Types::RedshiftScopeUnion
+    RedshiftServiceIntegrations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RedshiftScopeUnion, name: "member"))
     ReferenceLink.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Text"))
     ReferenceLink.add_member(:link, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Link"))
     ReferenceLink.type = Types::ReferenceLink
@@ -2601,6 +2714,8 @@ module Aws::Redshift
     RestoreFromClusterSnapshotMessage.add_member(:master_password_secret_kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "MasterPasswordSecretKmsKeyId"))
     RestoreFromClusterSnapshotMessage.add_member(:ip_address_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "IpAddressType"))
     RestoreFromClusterSnapshotMessage.add_member(:multi_az, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "MultiAZ"))
+    RestoreFromClusterSnapshotMessage.add_member(:catalog_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogNameString, name: "CatalogName"))
+    RestoreFromClusterSnapshotMessage.add_member(:redshift_idc_application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "RedshiftIdcApplicationArn"))
     RestoreFromClusterSnapshotMessage.type = Types::RestoreFromClusterSnapshotMessage
     RestoreFromClusterSnapshotResult.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: Cluster, name: "Cluster"))
     RestoreFromClusterSnapshotResult.type = Types::RestoreFromClusterSnapshotResult
@@ -2671,6 +2786,14 @@ module Aws::Redshift
     S3AccessGrantsScopeUnion.add_member(:unknown, Types::S3AccessGrantsScopeUnion::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     S3AccessGrantsScopeUnion.type = Types::S3AccessGrantsScopeUnion
     S3AccessGrantsServiceIntegrations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: S3AccessGrantsScopeUnion, name: "member"))
+    S3TableLastIngestionTimeMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    S3TableLastIngestionTimeMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
+    S3TablePublishStatus.add_member(:s3_tables, ::Smithy::Schema::Shapes::MemberShape.new(target: LogTypeList, name: "S3Tables"))
+    S3TablePublishStatus.add_member(:s3_table_namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "S3TableNamespace"))
+    S3TablePublishStatus.add_member(:s3_table_granularity, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "S3TableGranularity"))
+    S3TablePublishStatus.add_member(:enabled_all, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "EnabledAll"))
+    S3TablePublishStatus.add_member(:last_ingestion_times, ::Smithy::Schema::Shapes::MemberShape.new(target: S3TableLastIngestionTimeMap, name: "LastIngestionTimes"))
+    S3TablePublishStatus.type = Types::S3TablePublishStatus
     SNSInvalidTopicFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     SNSInvalidTopicFault.type = Types::SNSInvalidTopicFault
     SNSNoAuthorizationFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
@@ -2733,6 +2856,7 @@ module Aws::Redshift
     ServiceIntegrationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceIntegrationsUnion, name: "member"))
     ServiceIntegrationsUnion.add_member(:lake_formation, Types::ServiceIntegrationsUnion::LakeFormation, ::Smithy::Schema::Shapes::MemberShape.new(target: LakeFormationServiceIntegrations, name: "LakeFormation"))
     ServiceIntegrationsUnion.add_member(:s3_access_grants, Types::ServiceIntegrationsUnion::S3AccessGrants, ::Smithy::Schema::Shapes::MemberShape.new(target: S3AccessGrantsServiceIntegrations, name: "S3AccessGrants"))
+    ServiceIntegrationsUnion.add_member(:redshift, Types::ServiceIntegrationsUnion::Redshift, ::Smithy::Schema::Shapes::MemberShape.new(target: RedshiftServiceIntegrations, name: "Redshift"))
     ServiceIntegrationsUnion.add_member(:unknown, Types::ServiceIntegrationsUnion::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     ServiceIntegrationsUnion.type = Types::ServiceIntegrationsUnion
     Snapshot.add_member(:snapshot_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SnapshotIdentifier"))
@@ -2950,6 +3074,7 @@ module Aws::Redshift
     UsageLimitFeatureType.add_member(:spectrum, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SPECTRUM", traits: {"smithy.api#enumValue" => "spectrum"}))
     UsageLimitFeatureType.add_member(:concurrency_scaling, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONCURRENCY_SCALING", traits: {"smithy.api#enumValue" => "concurrency-scaling"}))
     UsageLimitFeatureType.add_member(:cross_region_datasharing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CROSS_REGION_DATASHARING", traits: {"smithy.api#enumValue" => "cross-region-datasharing"}))
+    UsageLimitFeatureType.add_member(:extra_compute_for_automatic_optimization, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXTRA_COMPUTE_FOR_AUTOMATIC_OPTIMIZATION", traits: {"smithy.api#enumValue" => "extra-compute-for-automatic-optimization"}))
     UsageLimitLimitType.add_member(:time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TIME", traits: {"smithy.api#enumValue" => "time"}))
     UsageLimitLimitType.add_member(:data_scanned, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DATA_SCANNED", traits: {"smithy.api#enumValue" => "data-scanned"}))
     UsageLimitNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
@@ -2982,7 +3107,7 @@ module Aws::Redshift
       service.id = "com.amazonaws.redshift#RedshiftServiceVersion20121201"
       service.name = "RedshiftServiceVersion20121201"
       service.version = "2012-12-01"
-      service.traits = {"aws.api#service" => {"sdkId" => "Redshift", "arnNamespace" => "redshift", "cloudFormationName" => "Redshift", "cloudTrailEventSource" => "redshift.amazonaws.com", "endpointPrefix" => "redshift"}, "aws.auth#sigv4" => {"name" => "redshift"}, "aws.protocols#awsQuery" => {}, "smithy.api#title" => "Amazon Redshift", "smithy.api#xmlNamespace" => {"uri" => "http://redshift.amazonaws.com/doc/2012-12-01/"}}
+      service.traits = {"aws.api#service" => {"sdkId" => "Redshift", "arnNamespace" => "redshift", "cloudFormationName" => "Redshift", "cloudTrailEventSource" => "redshift.amazonaws.com", "endpointPrefix" => "redshift"}, "aws.auth#sigv4" => {"name" => "redshift"}, "aws.protocols#awsQuery" => {}, "smithy.api#title" => "Amazon Redshift", "smithy.api#xmlNamespace" => {"uri" => "http://redshift.amazonaws.com/doc/2012-12-01/"}, "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws-us-gov"]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://redshift-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://redshift.{Region}.amazonaws.com", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://redshift-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://redshift.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://redshift.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 14, "nodes" => "/////wAAAAH/////AAAAAAAAAA0AAAADAAAAAQAAAAQF9eEMAAAAAgAAAAUF9eEMAAAAAwAAAAgAAAAGAAAABAAAAAcF9eELAAAABQX14QkF9eEKAAAABAAAAAsAAAAJAAAABgAAAAoF9eEIAAAABwX14QYF9eEHAAAABQAAAAwF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAAOAAAABAX14QIF9eED"}}
       service.add_operation(:accept_reserved_node_exchange, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.redshift#AcceptReservedNodeExchange"
         operation.name = "AcceptReservedNodeExchange"
@@ -3124,7 +3249,9 @@ module Aws::Redshift
         operation.errors << ClusterQuotaExceededFault
         operation.errors << ClusterSecurityGroupNotFoundFault
         operation.errors << ClusterSubnetGroupNotFoundFault
+        operation.errors << DependentServiceAccessDeniedFault
         operation.errors << DependentServiceRequestThrottlingFault
+        operation.errors << DependentServiceUnavailableFault
         operation.errors << HsmClientCertificateNotFoundFault
         operation.errors << HsmConfigurationNotFoundFault
         operation.errors << InsufficientClusterCapacityFault
@@ -3277,6 +3404,17 @@ module Aws::Redshift
         operation.errors << InvalidClusterStateFault
         operation.errors << InvalidTagFault
         operation.errors << TagLimitExceededFault
+        operation.errors << UnsupportedOperationFault
+        operation.traits = {}
+      end)
+      service.add_operation(:create_qev2_idc_application, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.redshift#CreateQev2IdcApplication"
+        operation.name = "CreateQev2IdcApplication"
+        operation.input = CreateQev2IdcApplicationMessage
+        operation.output = CreateQev2IdcApplicationResult
+        operation.errors << DependentServiceAccessDeniedFault
+        operation.errors << DependentServiceUnavailableFault
+        operation.errors << Qev2IdcApplicationAlreadyExistsFault
         operation.errors << UnsupportedOperationFault
         operation.traits = {}
       end)
@@ -3495,6 +3633,17 @@ module Aws::Redshift
         operation.errors << ClusterNotFoundFault
         operation.errors << PartnerNotFoundFault
         operation.errors << UnauthorizedPartnerIntegrationFault
+        operation.errors << UnsupportedOperationFault
+        operation.traits = {}
+      end)
+      service.add_operation(:delete_qev2_idc_application, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.redshift#DeleteQev2IdcApplication"
+        operation.name = "DeleteQev2IdcApplication"
+        operation.input = DeleteQev2IdcApplicationMessage
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << DependentServiceAccessDeniedFault
+        operation.errors << DependentServiceUnavailableFault
+        operation.errors << Qev2IdcApplicationNotExistsFault
         operation.errors << UnsupportedOperationFault
         operation.traits = {}
       end)
@@ -3850,6 +3999,18 @@ module Aws::Redshift
         operation.errors << UnsupportedOperationFault
         operation.traits = {}
       end)
+      service.add_operation(:describe_qev2_idc_applications, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.redshift#DescribeQev2IdcApplications"
+        operation.name = "DescribeQev2IdcApplications"
+        operation.input = DescribeQev2IdcApplicationsMessage
+        operation.output = DescribeQev2IdcApplicationsResult
+        operation.errors << DependentServiceAccessDeniedFault
+        operation.errors << DependentServiceUnavailableFault
+        operation.errors << Qev2IdcApplicationNotExistsFault
+        operation.errors << UnsupportedOperationFault
+        operation.traits = {}
+        operation[:paginator] = Paginators::DescribeQev2IdcApplications.new
+      end)
       service.add_operation(:describe_redshift_idc_applications, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.redshift#DescribeRedshiftIdcApplications"
         operation.name = "DescribeRedshiftIdcApplications"
@@ -4058,6 +4219,17 @@ module Aws::Redshift
         operation.input = GetClusterCredentialsWithIAMMessage
         operation.output = GetClusterCredentialsWithIAMOutput
         operation.errors << ClusterNotFoundFault
+        operation.errors << UnsupportedOperationFault
+        operation.traits = {}
+      end)
+      service.add_operation(:get_identity_center_auth_token, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.redshift#GetIdentityCenterAuthToken"
+        operation.name = "GetIdentityCenterAuthToken"
+        operation.input = GetIdentityCenterAuthTokenRequest
+        operation.output = GetIdentityCenterAuthTokenResponse
+        operation.errors << ClusterNotFoundFault
+        operation.errors << InvalidClusterStateFault
+        operation.errors << RedshiftInvalidParameterFault
         operation.errors << UnsupportedOperationFault
         operation.traits = {}
       end)
@@ -4283,6 +4455,31 @@ module Aws::Redshift
         operation.errors << UnsupportedOperationFault
         operation.traits = {}
       end)
+      service.add_operation(:modify_lakehouse_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.redshift#ModifyLakehouseConfiguration"
+        operation.name = "ModifyLakehouseConfiguration"
+        operation.input = ModifyLakehouseConfigurationMessage
+        operation.output = ModifyLakehouseConfigurationOutput
+        operation.errors << ClusterNotFoundFault
+        operation.errors << DependentServiceAccessDeniedFault
+        operation.errors << DependentServiceUnavailableFault
+        operation.errors << InvalidClusterStateFault
+        operation.errors << RedshiftIdcApplicationNotExistsFault
+        operation.errors << UnauthorizedOperation
+        operation.errors << UnsupportedOperationFault
+        operation.traits = {}
+      end)
+      service.add_operation(:modify_qev2_idc_application, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.redshift#ModifyQev2IdcApplication"
+        operation.name = "ModifyQev2IdcApplication"
+        operation.input = ModifyQev2IdcApplicationMessage
+        operation.output = ModifyQev2IdcApplicationResult
+        operation.errors << DependentServiceAccessDeniedFault
+        operation.errors << DependentServiceUnavailableFault
+        operation.errors << Qev2IdcApplicationNotExistsFault
+        operation.errors << UnsupportedOperationFault
+        operation.traits = {}
+      end)
       service.add_operation(:modify_redshift_idc_application, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.redshift#ModifyRedshiftIdcApplication"
         operation.name = "ModifyRedshiftIdcApplication"
@@ -4442,6 +4639,7 @@ module Aws::Redshift
         operation.errors << ClusterSecurityGroupNotFoundFault
         operation.errors << ClusterSnapshotNotFoundFault
         operation.errors << ClusterSubnetGroupNotFoundFault
+        operation.errors << DependentServiceAccessDeniedFault
         operation.errors << DependentServiceRequestThrottlingFault
         operation.errors << DependentServiceUnavailableFault
         operation.errors << HsmClientCertificateNotFoundFault
@@ -4460,6 +4658,7 @@ module Aws::Redshift
         operation.errors << LimitExceededFault
         operation.errors << NumberOfNodesPerClusterLimitExceededFault
         operation.errors << NumberOfNodesQuotaExceededFault
+        operation.errors << RedshiftIdcApplicationNotExistsFault
         operation.errors << ReservedNodeAlreadyExistsFault
         operation.errors << ReservedNodeAlreadyMigratedFault
         operation.errors << ReservedNodeNotFoundFault

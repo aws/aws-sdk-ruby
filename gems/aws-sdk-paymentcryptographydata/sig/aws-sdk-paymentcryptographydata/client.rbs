@@ -144,6 +144,70 @@ module Aws::PaymentCryptographyData
       }
     ) -> _EncryptDataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EncryptDataResponse
 
+    interface _GenerateAs2805KekValidationResponse
+      include Smithy::Client::_Response[Types::GenerateAs2805KekValidationOutput]
+      def key_arn: () -> String?
+      def key_check_value: () -> String?
+      def random_key_send: () -> String?
+      def random_key_receive: () -> String?
+    end
+    def generate_as2805_kek_validation: (
+      ?key_identifier: String,
+      ?kek_validation_type: {
+        kek_validation_request: {
+          derive_key_algorithm: String,
+          random_key_max_length: String
+        },
+        kek_validation_response: {
+          random_key_send: String
+        }
+      },
+      ?random_key_send_variant_mask: String
+    ) -> _GenerateAs2805KekValidationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GenerateAs2805KekValidationResponse
+
+    interface _GenerateAuthRequestCryptogramResponse
+      include Smithy::Client::_Response[Types::GenerateAuthRequestCryptogramOutput]
+      def key_arn: () -> String?
+      def key_check_value: () -> String?
+      def auth_request_cryptogram: () -> String?
+    end
+    def generate_auth_request_cryptogram: (
+      ?key_identifier: String,
+      ?transaction_data: String,
+      ?major_key_derivation_mode: String,
+      ?session_key_derivation_attributes: {
+        emv_common: {
+          primary_account_number: String,
+          pan_sequence_number: String,
+          application_transaction_counter: String
+        },
+        mastercard: {
+          primary_account_number: untyped,
+          pan_sequence_number: untyped,
+          application_transaction_counter: untyped,
+          unpredictable_number: String
+        },
+        emv2000: {
+          primary_account_number: untyped,
+          pan_sequence_number: untyped,
+          application_transaction_counter: untyped
+        },
+        amex: {
+          primary_account_number: untyped,
+          pan_sequence_number: untyped
+        },
+        visa: {
+          primary_account_number: untyped,
+          pan_sequence_number: untyped
+        },
+        union_pay: {
+          primary_account_number: untyped,
+          pan_sequence_number: untyped,
+          application_transaction_counter: untyped
+        }
+      }
+    ) -> _GenerateAuthRequestCryptogramResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GenerateAuthRequestCryptogramResponse
+
     interface _GenerateCardValidationDataResponse
       include Smithy::Client::_Response[Types::GenerateCardValidationDataOutput]
       def key_arn: () -> String?
@@ -362,6 +426,9 @@ module Aws::PaymentCryptographyData
           initialization_vector: String,
           padding_type: String
         },
+        asymmetric: {
+          padding_type: untyped
+        },
         dukpt: {
           key_serial_number: String,
           mode: String,
@@ -375,6 +442,9 @@ module Aws::PaymentCryptographyData
           mode: String,
           initialization_vector: String,
           padding_type: String
+        },
+        asymmetric: {
+          padding_type: untyped
         },
         dukpt: {
           key_serial_number: String,
@@ -457,7 +527,10 @@ module Aws::PaymentCryptographyData
         iso_format1: {
         },
         iso_format3: untyped,
-        iso_format4: untyped
+        iso_format4: untyped,
+        as2805_format0: {
+          primary_account_number: untyped
+        }
       },
       ?outgoing_translation_attributes: {
         iso_format0: {
@@ -466,7 +539,10 @@ module Aws::PaymentCryptographyData
         iso_format1: {
         },
         iso_format3: untyped,
-        iso_format4: untyped
+        iso_format4: untyped,
+        as2805_format0: {
+          primary_account_number: untyped
+        }
       },
       ?encrypted_pin_block: String,
       ?incoming_dukpt_attributes: {
@@ -506,6 +582,10 @@ module Aws::PaymentCryptographyData
           }
         },
         key_check_value_algorithm: String
+      },
+      ?incoming_as2805_attributes: {
+        system_trace_audit_number: String,
+        transaction_amount: String
       }
     ) -> _TranslatePinDataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TranslatePinDataResponse
 
@@ -544,6 +624,11 @@ module Aws::PaymentCryptographyData
         visa: {
           primary_account_number: untyped,
           pan_sequence_number: untyped
+        },
+        union_pay: {
+          primary_account_number: untyped,
+          pan_sequence_number: untyped,
+          application_transaction_counter: untyped
         }
       },
       ?auth_response_attributes: {

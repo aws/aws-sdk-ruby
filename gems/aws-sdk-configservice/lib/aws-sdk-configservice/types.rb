@@ -66,7 +66,7 @@ module Aws::ConfigService
     # <p>Provides aggregate compliance of the conformance pack. Indicates whether a conformance pack is compliant based on the name of the conformance pack, account ID, and region.</p>
     #          <p>A conformance pack is compliant if all of the rules in a conformance packs are compliant. It is noncompliant if any of the rules are not compliant.
     # 			The compliance status of a conformance pack is INSUFFICIENT_DATA only if all rules within a conformance pack cannot be evaluated due to insufficient data.
-    # 			If some of the rules in a conformance pack are compliant but the compliance status of other rules in that same conformance pack is INSUFFICIENT_DATA, the conformance pack shows 
+    # 			If some of the rules in a conformance pack are compliant but the compliance status of other rules in that same conformance pack is INSUFFICIENT_DATA, the conformance pack shows
     # 			compliant.</p>
     # @!attribute conformance_pack_name
     #   <p>The name of the conformance pack.</p>
@@ -456,6 +456,22 @@ module Aws::ConfigService
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The configuration details for connecting to Microsoft Azure.</p>
+    # @!attribute tenant_identifier
+    #   <p>The Azure tenant identifier.</p>
+    #   @return [String]
+    # @!attribute client_identifier
+    #   <p>The Azure client identifier.</p>
+    #   @return [String]
+    class AzureConnectorConfiguration < Struct.new(
+      nil,
+      :tenant_identifier,
+      :client_identifier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The detailed configurations of a specified resource.</p>
     # @!attribute version
     #   <p>The version number of the resource configuration.</p>
@@ -613,7 +629,7 @@ module Aws::ConfigService
     #   			current response. The unprocessesResourceKeys value is in the same
     #   			form as ResourceKeys, so the value can be directly provided to a
     #   			subsequent BatchGetResourceConfig operation.
-    #   			
+    #
     #   			If there are no unprocessed resource keys, the response contains an
     #   			empty unprocessedResourceKeys list. </p>
     #   @return [Array<Types::ResourceKey>]
@@ -817,7 +833,7 @@ module Aws::ConfigService
     #          <p>Config Custom Rules are rules that you create from scratch. There are two ways to create Config custom rules: with Lambda functions
     # 				(<a href="https://docs.aws.amazon.com/config/latest/developerguide/gettingstarted-concepts.html#gettingstarted-concepts-function"> Lambda Developer Guide</a>) and with Guard (<a href="https://github.com/aws-cloudformation/cloudformation-guard">Guard GitHub
     # 						Repository</a>), a policy-as-code language.
-    # 				
+    #
     # 				Config custom rules created with Lambda
     # 				are called <i>Config Custom Lambda Rules</i> and Config custom rules created with
     # 				Guard are called <i>Config Custom Policy Rules</i>.</p>
@@ -913,6 +929,9 @@ module Aws::ConfigService
     # @!attribute evaluation_modes
     #   <p>The modes the Config rule can be evaluated in. The valid values are distinct objects. By default, the value is Detective evaluation mode only.</p>
     #   @return [Array<Types::EvaluationModeConfiguration>]
+    # @!attribute rule_evaluation_visibility
+    #   <p>Indicates whether you can get <a>Evaluation</a>s for the Config rule. You can get <a>Evaluation</a>s for the Amazon Web Services Config rule if this value is <code>EXTERNAL</code>. You cannot get <a>Evaluation</a>s for the Amazon Web Services Config rule if this value is <code>INTERNAL</code>.</p>
+    #   @return [String]
     class ConfigRule < Struct.new(
       nil,
       :config_rule_name,
@@ -926,6 +945,7 @@ module Aws::ConfigService
       :config_rule_state,
       :created_by,
       :evaluation_modes,
+      :rule_evaluation_visibility,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1292,7 +1312,7 @@ module Aws::ConfigService
     #   			initiated by the events recorded in the CloudTrail log. For more
     #   			information about CloudTrail, see <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/what_is_cloud_trail_top_level.html">What Is CloudTrail</a>.</p>
     #            <p>An empty field indicates that the current configuration was not
-    #   			initiated by any event. As of Version 1.3, the relatedEvents field is empty. 
+    #   			initiated by any event. As of Version 1.3, the relatedEvents field is empty.
     #   			You can access the <a href="https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_LookupEvents.html">LookupEvents API</a> in the <i>CloudTrail API Reference</i> to retrieve the events for the resource.</p>
     #   @return [Array<String>]
     # @!attribute relationships
@@ -1391,7 +1411,7 @@ module Aws::ConfigService
     #               <p>
     #                  <b>Keep Minimum Permisions When Reusing an IAM role</b>
     #               </p>
-    #               <p>If you use an Amazon Web Services service that uses Config, such as Security Hub or
+    #               <p>If you use an Amazon Web Services service that uses Config, such as Security Hub CSPM or
     #   				Control Tower, and an IAM role has already been created, make sure that the
     #   				IAM role that you use when setting up Config keeps the same minimum
     #   				permissions as the pre-existing IAM role. You must do this to ensure that the
@@ -1425,7 +1445,7 @@ module Aws::ConfigService
     #   @return [Types::RecordingGroup]
     # @!attribute recording_mode
     #   <p>Specifies the default recording frequency for the configuration recorder.
-    #   			
+    #
     #   			Config supports <i>Continuous recording</i> and <i>Daily recording</i>.</p>
     #            <ul>
     #               <li>
@@ -1451,6 +1471,12 @@ module Aws::ConfigService
     # @!attribute service_principal
     #   <p>For service-linked configuration recorders, specifies the linked Amazon Web Services service for the configuration recorder.</p>
     #   @return [String]
+    # @!attribute connector_arn
+    #   <p>The Amazon Resource Name (ARN) of the connector that specifies the connection between a third-party cloud service provider and Config.</p>
+    #   @return [String]
+    # @!attribute scope_configuration
+    #   <p>Specifies the scope of resources to record from the third-party cloud service provider connected through the connector.</p>
+    #   @return [Types::ScopeConfiguration]
     class ConfigurationRecorder < Struct.new(
       nil,
       :arn,
@@ -1460,6 +1486,8 @@ module Aws::ConfigService
       :recording_mode,
       :recording_scope,
       :service_principal,
+      :connector_arn,
+      :scope_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1540,7 +1568,7 @@ module Aws::ConfigService
       end
     end
 
-    # <p>A summary of a configuration recorder, including the <code>arn</code>, <code>name</code>, <code>servicePrincipal</code>, and <code>recordingScope</code>.</p>
+    # <p>A summary of a configuration recorder, including the <code>arn</code>, <code>name</code>, <code>servicePrincipal</code>, <code>recordingScope</code>, and <code>provider</code>.</p>
     # @!attribute arn
     #   <p>The Amazon Resource Name (ARN) of the configuration recorder.</p>
     #   @return [String]
@@ -1553,19 +1581,28 @@ module Aws::ConfigService
     # @!attribute recording_scope
     #   <p>Indicates whether the <a href="https://docs.aws.amazon.com/config/latest/APIReference/API_ConfigurationItem.html">ConfigurationItems</a> in scope for the configuration recorder are recorded for free (<code>INTERNAL</code>) or if you are charged a service fee for recording (<code>PAID</code>).</p>
     #   @return [String]
+    # @!attribute provider
+    #   <p>For service-linked configuration recorders that record resources from a third-party cloud service provider, indicates the cloud service provider. Currently, <code>AZURE</code> is supported.</p>
+    #   @return [String]
     class ConfigurationRecorderSummary < Struct.new(
       nil,
       :arn,
       :name,
       :service_principal,
       :recording_scope,
+      :provider,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     # <p>For <a href="https://docs.aws.amazon.com/config/latest/APIReference/API_PutServiceLinkedConfigurationRecorder.html">PutServiceLinkedConfigurationRecorder</a>, you cannot create a service-linked recorder because a service-linked recorder already exists for the specified service.</p>
+    #          <p>For <a href="https://docs.aws.amazon.com/config/latest/APIReference/API_PutThirdPartyServiceLinkedConfigurationRecorder.html">PutThirdPartyServiceLinkedConfigurationRecorder</a>, you cannot create a service-linked recorder because the specified service principal does not support multiple configuration recorders and one already exists.</p>
+    #          <p>For <a href="https://docs.aws.amazon.com/config/latest/APIReference/API_PutThirdPartyServiceLinkedConfigurationRecorder.html">PutThirdPartyServiceLinkedConfigurationRecorder</a>, another in-progress operation is currently referencing the same connector or service principal. Please try again later.</p>
+    #          <p>For <a href="https://docs.aws.amazon.com/config/latest/APIReference/API_PutConnector.html">PutConnector</a>, you cannot create a connector because a connector already exists for the specified connector configuration.</p>
     #          <p>For <a href="https://docs.aws.amazon.com/config/latest/APIReference/API_DeleteServiceLinkedConfigurationRecorder.html">DeleteServiceLinkedConfigurationRecorder</a>, you cannot delete the service-linked recorder because it is currently in use by the linked Amazon Web Services service.</p>
+    #          <p>For <a href="https://docs.aws.amazon.com/config/latest/APIReference/API_DeleteServiceLinkedConfigurationRecorder.html">DeleteServiceLinkedConfigurationRecorder</a>, another in-progress operation is currently referencing the same connector. Please try again later.</p>
+    #          <p>For <a href="https://docs.aws.amazon.com/config/latest/APIReference/API_DeleteConnector.html">DeleteConnector</a>, another in-progress operation is currently referencing the connector. Please try again later.</p>
     #          <p>For <a href="https://docs.aws.amazon.com/config/latest/APIReference/API_DeleteDeliveryChannel.html">DeleteDeliveryChannel</a>, you cannot delete the specified delivery channel because the customer managed configuration recorder is running. Use the <a href="https://docs.aws.amazon.com/config/latest/APIReference/API_StopConfigurationRecorder.html">StopConfigurationRecorder</a> operation to stop the customer managed configuration
     # 			recorder.</p>
     #          <p>For <a href="https://docs.aws.amazon.com/config/latest/APIReference/API_AssociateResourceTypes.html">AssociateResourceTypes</a> and <a href="https://docs.aws.amazon.com/config/latest/APIReference/API_DisassociateResourceTypes.html">DisassociateResourceTypes</a>, one of the following errors:</p>
@@ -1762,7 +1799,7 @@ module Aws::ConfigService
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Input parameters in the form of key-value pairs for the conformance pack, both of which you define. 
+    # <p>Input parameters in the form of key-value pairs for the conformance pack, both of which you define.
     # 			Keys can have a maximum character length of 255 characters, and values can have a maximum length of 4096 characters.</p>
     # @!attribute parameter_name
     #   <p>One part of a key-value pair.</p>
@@ -1870,8 +1907,88 @@ module Aws::ConfigService
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The details of the connector, including the connector configuration and connector ARN.</p>
+    # @!attribute name
+    #   <p>The name of the connector.</p>
+    #   @return [String]
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the connector.</p>
+    #   @return [String]
+    # @!attribute connector_configuration
+    #   <p>The provider-specific configuration for connecting to the third-party cloud service provider.</p>
+    #   @return [Types::ConnectorConfiguration]
+    # @!attribute created_time
+    #   <p>The date and time that the connector was created.</p>
+    #   @return [Time]
+    class Connector < Struct.new(
+      nil,
+      :name,
+      :arn,
+      :connector_configuration,
+      :created_time,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The provider-specific configuration for connecting to the third-party cloud service provider. You must specify exactly one provider configuration.</p>
+    # @!attribute azure
+    #   <p>The configuration for an Azure connector.</p>
+    #   @return [Types::AzureConnectorConfiguration]
+    class ConnectorConfiguration < Struct.new(
+      nil,
+      :azure,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Filters connectors based on the connector provider.</p>
+    # @!attribute filter_name
+    #   <p>The name of the filter. Currently, only <code>provider</code> is supported.</p>
+    #   @return [String]
+    # @!attribute filter_values
+    #   <p>The value of the filter. For <code>provider</code>, valid values include: <code>AZURE</code>.</p>
+    #   @return [Array<String>]
+    class ConnectorFilter < Struct.new(
+      nil,
+      :filter_name,
+      :filter_values,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A summary of a connector.</p>
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the connector.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the connector.</p>
+    #   @return [String]
+    # @!attribute provider
+    #   <p>The third-party cloud service provider. Currently, <code>AZURE</code> is supported.</p>
+    #   @return [String]
+    # @!attribute tenant_identifier
+    #   <p>The Azure tenant identifier for the connector.</p>
+    #   @return [String]
+    # @!attribute created_time
+    #   <p>The date and time that the connector was created.</p>
+    #   @return [Time]
+    class ConnectorSummary < Struct.new(
+      nil,
+      :arn,
+      :name,
+      :provider,
+      :tenant_identifier,
+      :created_time,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Provides the runtime system, policy definition, and whether debug logging enabled. You can
-    # 			specify the following CustomPolicyDetails parameter values 
+    # 			specify the following CustomPolicyDetails parameter values
     # 			only
     # 			for Config Custom Policy rules.</p>
     # @!attribute policy_runtime
@@ -1959,6 +2076,17 @@ module Aws::ConfigService
     class DeleteConformancePackRequest < Struct.new(
       nil,
       :conformance_pack_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the connector that you want to delete.</p>
+    #   @return [String]
+    class DeleteConnectorRequest < Struct.new(
+      nil,
+      :arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2113,11 +2241,15 @@ module Aws::ConfigService
     end
 
     # @!attribute service_principal
-    #   <p>The service principal of the Amazon Web Services service for the service-linked configuration recorder that you want to delete.</p>
+    #   <p>The service principal of the Amazon Web Services service for the service-linked configuration recorder that you want to delete. This field is only supported for Amazon Web Services service principals. For third-party service-linked configuration recorders, use <code>Arn</code> instead.</p>
+    #   @return [String]
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the service-linked configuration recorder that you want to delete. For third-party service-linked configuration recorders, you must use <code>Arn</code>. You must specify exactly one of <code>Arn</code> or <code>ServicePrincipal</code>.</p>
     #   @return [String]
     class DeleteServiceLinkedConfigurationRecorderRequest < Struct.new(
       nil,
       :service_principal,
+      :arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2532,9 +2664,13 @@ module Aws::ConfigService
     # @!attribute evaluation_mode
     #   <p>The mode of an evaluation. The valid values are Detective or Proactive.</p>
     #   @return [String]
+    # @!attribute rule_evaluation_visibility
+    #   <p>Filters the results by <code>RuleEvaluationVisibility</code>.</p>
+    #   @return [String]
     class DescribeConfigRulesFilters < Struct.new(
       nil,
       :evaluation_mode,
+      :rule_evaluation_visibility,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2546,22 +2682,22 @@ module Aws::ConfigService
     #   			If you do not specify any names, Config returns details for all
     #   			your rules.</p>
     #   @return [Array<String>]
-    # @!attribute next_token
-    #   <p>The <code>nextToken</code> string returned on a previous page
-    #   			that you use to get the next page of results in a paginated
-    #   			response.</p>
-    #   @return [String]
     # @!attribute filters
     #   <p>Returns a list of Detective or Proactive Config rules. By default, this API returns an unfiltered list. For more information on Detective or Proactive Config rules,
     #   			see <a href="https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config-rules.html">
     #                  <b>Evaluation Mode</b>
     #               </a> in the <i>Config Developer Guide</i>.</p>
     #   @return [Types::DescribeConfigRulesFilters]
+    # @!attribute next_token
+    #   <p>The <code>nextToken</code> string returned on a previous page
+    #   			that you use to get the next page of results in a paginated
+    #   			response.</p>
+    #   @return [String]
     class DescribeConfigRulesRequest < Struct.new(
       nil,
       :config_rule_names,
-      :next_token,
       :filters,
+      :next_token,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2690,7 +2826,7 @@ module Aws::ConfigService
     #            </note>
     #   @return [Array<String>]
     # @!attribute service_principal
-    #   <p>For service-linked configuration recorders, you can use the service principal of the linked Amazon Web Services service to specify the configuration recorder.</p>
+    #   <p>For service-linked configuration recorders, you can use the service principal of the linked Amazon Web Services service to specify the configuration recorder. This field is only supported for Amazon Web Services service principals. For third-party service-linked configuration recorders, use <code>Arn</code> instead.</p>
     #   @return [String]
     # @!attribute arn
     #   <p>The Amazon Resource Name (ARN) of the configuration recorder that you want to specify.</p>
@@ -2727,7 +2863,7 @@ module Aws::ConfigService
     #            </note>
     #   @return [Array<String>]
     # @!attribute service_principal
-    #   <p>For service-linked configuration recorders, you can use the service principal of the linked Amazon Web Services service to specify the configuration recorder.</p>
+    #   <p>For service-linked configuration recorders, you can use the service principal of the linked Amazon Web Services service to specify the configuration recorder. This field is only supported for Amazon Web Services service principals. For third-party service-linked configuration recorders, use <code>Arn</code> instead.</p>
     #   @return [String]
     # @!attribute arn
     #   <p>The Amazon Resource Name (ARN) of the configuration recorder that you want to specify.</p>
@@ -2987,11 +3123,11 @@ module Aws::ConfigService
     end
 
     # @!attribute organization_conformance_pack_names
-    #   <p>The names of organization conformance packs for which you want status details. 
+    #   <p>The names of organization conformance packs for which you want status details.
     #   			If you do not specify any names, Config returns details for all your organization conformance packs. </p>
     #   @return [Array<String>]
     # @!attribute limit
-    #   <p>The maximum number of OrganizationConformancePackStatuses returned on each page. 
+    #   <p>The maximum number of OrganizationConformancePackStatuses returned on each page.
     #   			If you do no specify a number, Config uses the default. The default is 100. </p>
     #   @return [Integer]
     # @!attribute next_token
@@ -3306,7 +3442,7 @@ module Aws::ConfigService
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Use EvaluationContext to group independently initiated proactive resource evaluations. For example, CFN Stack. 
+    # <p>Use EvaluationContext to group independently initiated proactive resource evaluations. For example, CFN Stack.
     # 			If you want to check just a resource definition, you do not need to provide evaluation context.</p>
     # @!attribute evaluation_context_identifier
     #   <p>A unique EvaluationContextIdentifier ID for an EvaluationContext.</p>
@@ -4042,6 +4178,28 @@ module Aws::ConfigService
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the connector.</p>
+    #   @return [String]
+    class GetConnectorRequest < Struct.new(
+      nil,
+      :arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute connector
+    #   <p>The details of the specified connector.</p>
+    #   @return [Types::Connector]
+    class GetConnectorResponse < Struct.new(
+      nil,
+      :connector,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute config_rule_name
     #   <p>The name of your Config Custom Policy rule.</p>
     #   @return [String]
@@ -4196,7 +4354,7 @@ module Aws::ConfigService
     #   <p>An <code>OrganizationResourceDetailedStatusFilters</code> object.</p>
     #   @return [Types::OrganizationResourceDetailedStatusFilters]
     # @!attribute limit
-    #   <p>The maximum number of <code>OrganizationConformancePackDetailedStatuses</code> returned on each page. 
+    #   <p>The maximum number of <code>OrganizationConformancePackDetailedStatuses</code> returned on each page.
     #   			If you do not specify a number, Config uses the default. The default is 100. </p>
     #   @return [Integer]
     # @!attribute next_token
@@ -4454,6 +4612,9 @@ module Aws::ConfigService
     #             </li>
     #             <li>
     #                <p>For <a href="https://docs.aws.amazon.com/config/latest/APIReference/API_PutServiceLinkedConfigurationRecorder.html">PutServiceLinkedConfigurationRecorder</a>, a service-linked configuration recorder cannot be created because you do not have the following permissions: IAM <code>CreateServiceLinkedRole</code>.</p>
+    #             </li>
+    #             <li>
+    #                <p>For <a href="https://docs.aws.amazon.com/config/latest/APIReference/API_PutConnector.html">PutConnector</a>, a connector cannot be created because you do not have the following permissions: IAM <code>CreateServiceLinkedRole</code>.</p>
     #             </li>
     #          </ul>
     # @!attribute message
@@ -4803,6 +4964,40 @@ module Aws::ConfigService
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute max_results
+    #   <p>The maximum number of results to include in the response.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The <code>NextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.</p>
+    #   @return [String]
+    # @!attribute filters
+    #   <p>Filters the results based on a list of <code>ConnectorFilter</code> objects that you specify.</p>
+    #   @return [Array<Types::ConnectorFilter>]
+    class ListConnectorsRequest < Struct.new(
+      nil,
+      :max_results,
+      :next_token,
+      :filters,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute connector_summaries
+    #   <p>A list of <code>ConnectorSummary</code> objects.</p>
+    #   @return [Array<Types::ConnectorSummary>]
+    # @!attribute next_token
+    #   <p>The <code>NextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.</p>
+    #   @return [String]
+    class ListConnectorsResponse < Struct.new(
+      nil,
+      :connector_summaries,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p></p>
     # @!attribute resource_type
     #   <p>The type of resources that you want Config to list in the
@@ -4867,7 +5062,7 @@ module Aws::ConfigService
     #   <p>Returns a <code>ResourceEvaluationFilters</code> object.</p>
     #   @return [Types::ResourceEvaluationFilters]
     # @!attribute limit
-    #   <p>The maximum number of evaluations returned on each page. The default is 10. 
+    #   <p>The maximum number of evaluations returned on each page. The default is 10.
     #   			You cannot specify a number greater than 100. If you specify 0, Config uses the default.</p>
     #   @return [Integer]
     # @!attribute next_token
@@ -4917,8 +5112,8 @@ module Aws::ConfigService
     #   <p>A list of <code>StoredQueryMetadata</code> objects.</p>
     #   @return [Array<Types::StoredQueryMetadata>]
     # @!attribute next_token
-    #   <p>If the previous paginated request didn't return all of the remaining results, the response object's <code>NextToken</code> parameter value is set to a token. 
-    #   			To retrieve the next set of results, call this operation again and assign that token to the request object's <code>NextToken</code> parameter. 
+    #   <p>If the previous paginated request didn't return all of the remaining results, the response object's <code>NextToken</code> parameter value is set to a token.
+    #   			To retrieve the next set of results, call this operation again and assign that token to the request object's <code>NextToken</code> parameter.
     #   			If there are no remaining results, the previous response object's <code>NextToken</code> parameter is set to <code>null</code>. </p>
     #   @return [String]
     class ListStoredQueriesResponse < Struct.new(
@@ -4971,6 +5166,11 @@ module Aws::ConfigService
     #               <li>
     #                  <p>
     #                     <code>StoredQuery</code>
+    #                  </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>Connector</code>
     #                  </p>
     #               </li>
     #            </ul>
@@ -5061,6 +5261,18 @@ module Aws::ConfigService
       include ::Smithy::Schema::Structure
     end
 
+    # <p>You have reached the limit of the number of connectors in your account.</p>
+    # @!attribute message
+    #   <p>Error executing the command</p>
+    #   @return [String]
+    class MaxNumberOfConnectorsExceededException < Struct.new(
+      nil,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>You have reached the limit of the number of delivery channels
     # 			you can create.</p>
     # @!attribute message
@@ -5123,9 +5335,9 @@ module Aws::ConfigService
     #   @return [String]
     # @!attribute member_account_rule_status
     #   <p>Indicates deployment status for Config rule in the member account.
-    #   			When management account calls <code>PutOrganizationConfigRule</code> action for the first time, Config rule status is created in the member account. 
-    #   			When management account calls <code>PutOrganizationConfigRule</code> action for the second time, Config rule status is updated in the member account.   
-    #   			Config rule status is deleted when the management account deletes <code>OrganizationConfigRule</code> and disables service access for <code>config-multiaccountsetup.amazonaws.com</code>. 
+    #   			When management account calls <code>PutOrganizationConfigRule</code> action for the first time, Config rule status is created in the member account.
+    #   			When management account calls <code>PutOrganizationConfigRule</code> action for the second time, Config rule status is updated in the member account.
+    #   			Config rule status is deleted when the management account deletes <code>OrganizationConfigRule</code> and disables service access for <code>config-multiaccountsetup.amazonaws.com</code>.
     #   		</p>
     #            <p> Config sets the state of the rule to:</p>
     #            <ul>
@@ -5392,15 +5604,15 @@ module Aws::ConfigService
     #                <p>No permission to call <code>EnableAWSServiceAccess</code> API</p>
     #             </li>
     #             <li>
-    #                <p>The configuration aggregator cannot be updated because your Amazon Web Services Organization management account or the delegated administrator role changed. 
+    #                <p>The configuration aggregator cannot be updated because your Amazon Web Services Organization management account or the delegated administrator role changed.
     # 				Delete this aggregator and create a new one with the current Amazon Web Services Organization.</p>
     #             </li>
     #             <li>
-    #                <p>The configuration aggregator is associated with a previous Amazon Web Services Organization and Config cannot aggregate data with current Amazon Web Services Organization. 
+    #                <p>The configuration aggregator is associated with a previous Amazon Web Services Organization and Config cannot aggregate data with current Amazon Web Services Organization.
     # 				Delete this aggregator and create a new one with the current Amazon Web Services Organization.</p>
     #             </li>
     #             <li>
-    #                <p>You are not a registered delegated administrator for Config with permissions to call <code>ListDelegatedAdministrators</code> API. 
+    #                <p>You are not a registered delegated administrator for Config with permissions to call <code>ListDelegatedAdministrators</code> API.
     # 			Ensure that the management account registers delagated administrator for Config service principal name before the delegated administrator creates an aggregator.</p>
     #             </li>
     #          </ul>
@@ -5500,9 +5712,9 @@ module Aws::ConfigService
     #   <p>The name that you assign to organization Config rule.</p>
     #   @return [String]
     # @!attribute organization_rule_status
-    #   <p>Indicates deployment status of an organization Config rule. 
-    #   			When management account calls PutOrganizationConfigRule action for the first time, Config rule status is created in all the member accounts. 
-    #   			When management account calls PutOrganizationConfigRule action for the second time, Config rule status is updated in all the member accounts. Additionally, Config rule status is updated when one or more member accounts join or leave an organization.   
+    #   <p>Indicates deployment status of an organization Config rule.
+    #   			When management account calls PutOrganizationConfigRule action for the first time, Config rule status is created in all the member accounts.
+    #   			When management account calls PutOrganizationConfigRule action for the second time, Config rule status is updated in all the member accounts. Additionally, Config rule status is updated when one or more member accounts join or leave an organization.
     #   			Config rule status is deleted when the management account deletes OrganizationConfigRule in all the member accounts and disables service access for <code>config-multiaccountsetup.amazonaws.com</code>.</p>
     #            <p>Config sets the state of the rule to:</p>
     #            <ul>
@@ -5607,8 +5819,8 @@ module Aws::ConfigService
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Organization conformance pack creation or deletion status in each member account. 
-    # 			This includes the name of the conformance pack, the status, error code and error message 
+    # <p>Organization conformance pack creation or deletion status in each member account.
+    # 			This includes the name of the conformance pack, the status, error code and error message
     # 			when the conformance pack creation or deletion failed. </p>
     # @!attribute account_id
     #   <p>The 12-digit account ID of a member account.</p>
@@ -5618,9 +5830,9 @@ module Aws::ConfigService
     #   @return [String]
     # @!attribute status
     #   <p>Indicates deployment status for conformance pack in a member account.
-    #   			When management account calls <code>PutOrganizationConformancePack</code> action for the first time, conformance pack status is created in the member account. 
-    #   			When management account calls <code>PutOrganizationConformancePack</code> action for the second time, conformance pack status is updated in the member account.   
-    #   			Conformance pack status is deleted when the management account deletes <code>OrganizationConformancePack</code> and disables service access for <code>config-multiaccountsetup.amazonaws.com</code>. 
+    #   			When management account calls <code>PutOrganizationConformancePack</code> action for the first time, conformance pack status is created in the member account.
+    #   			When management account calls <code>PutOrganizationConformancePack</code> action for the second time, conformance pack status is updated in the member account.
+    #   			Conformance pack status is deleted when the management account deletes <code>OrganizationConformancePack</code> and disables service access for <code>config-multiaccountsetup.amazonaws.com</code>.
     #   		</p>
     #            <p> Config sets the state of the conformance pack to:</p>
     #            <ul>
@@ -5663,11 +5875,11 @@ module Aws::ConfigService
     #            </ul>
     #   @return [String]
     # @!attribute error_code
-    #   <p>An error code that is returned when conformance pack creation or 
+    #   <p>An error code that is returned when conformance pack creation or
     #   			deletion failed in the member account. </p>
     #   @return [String]
     # @!attribute error_message
-    #   <p>An error message indicating that conformance pack account creation or deletion 
+    #   <p>An error message indicating that conformance pack account creation or deletion
     #   			has failed due to an error in the member account. </p>
     #   @return [String]
     # @!attribute last_update_time
@@ -5691,15 +5903,15 @@ module Aws::ConfigService
     #   <p>The name that you assign to organization conformance pack.</p>
     #   @return [String]
     # @!attribute status
-    #   <p>Indicates deployment status of an organization conformance pack. 
-    #   			When management account calls PutOrganizationConformancePack for the first time, 
-    #   			conformance pack status is created in all the member accounts. 
-    #   			When management account calls PutOrganizationConformancePack for the second time, 
-    #   			conformance pack status is updated in all the member accounts. 
-    #   			Additionally, conformance pack status is updated when one or more member accounts join or leave an 
-    #   			organization.   
-    #   			Conformance pack status is deleted when the management account deletes 
-    #   			OrganizationConformancePack in all the member accounts and disables service 
+    #   <p>Indicates deployment status of an organization conformance pack.
+    #   			When management account calls PutOrganizationConformancePack for the first time,
+    #   			conformance pack status is created in all the member accounts.
+    #   			When management account calls PutOrganizationConformancePack for the second time,
+    #   			conformance pack status is updated in all the member accounts.
+    #   			Additionally, conformance pack status is updated when one or more member accounts join or leave an
+    #   			organization.
+    #   			Conformance pack status is deleted when the management account deletes
+    #   			OrganizationConformancePack in all the member accounts and disables service
     #   			access for <code>config-multiaccountsetup.amazonaws.com</code>.</p>
     #            <p>Config sets the state of the conformance pack to:</p>
     #            <ul>
@@ -5864,7 +6076,7 @@ module Aws::ConfigService
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>OversizedConfigurationItemChangeNotification</code> - Triggers an evaluation when Config delivers an oversized configuration item. 
+    #                     <code>OversizedConfigurationItemChangeNotification</code> - Triggers an evaluation when Config delivers an oversized configuration item.
     #   				Config may generate this notification type when a resource changes and the notification exceeds the maximum size allowed by Amazon SNS.</p>
     #               </li>
     #            </ul>
@@ -5913,8 +6125,8 @@ module Aws::ConfigService
       include ::Smithy::Schema::Structure
     end
 
-    # <p>An object that specifies organization custom rule metadata such as resource type, resource ID of Amazon Web Services resource, Lambda function ARN, 
-    # 			and organization trigger types that trigger Config to evaluate your Amazon Web Services resources against a rule. 
+    # <p>An object that specifies organization custom rule metadata such as resource type, resource ID of Amazon Web Services resource, Lambda function ARN,
+    # 			and organization trigger types that trigger Config to evaluate your Amazon Web Services resources against a rule.
     # 			It also provides the frequency with which you want Config to run evaluations for the rule if the trigger type is periodic.</p>
     # @!attribute description
     #   <p>The description that you provide for your organization Config rule.</p>
@@ -5931,7 +6143,7 @@ module Aws::ConfigService
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>OversizedConfigurationItemChangeNotification</code> - Triggers an evaluation when Config delivers an oversized configuration item. 
+    #                     <code>OversizedConfigurationItemChangeNotification</code> - Triggers an evaluation when Config delivers an oversized configuration item.
     #   			         	Config may generate this notification type when a resource changes and the notification exceeds the maximum size allowed by Amazon SNS.</p>
     #               </li>
     #               <li>
@@ -5944,10 +6156,10 @@ module Aws::ConfigService
     #   <p>A string, in JSON format, that is passed to your organization Config rule Lambda function.</p>
     #   @return [String]
     # @!attribute maximum_execution_frequency
-    #   <p>The maximum frequency with which Config runs evaluations for a rule. 
+    #   <p>The maximum frequency with which Config runs evaluations for a rule.
     #   			Your custom rule is triggered when Config delivers the configuration snapshot. For more information, see <a>ConfigSnapshotDeliveryProperties</a>.</p>
     #            <note>
-    #               <p>By default, rules with a periodic trigger are evaluated every 24 hours. To change the frequency, specify a valid 
+    #               <p>By default, rules with a periodic trigger are evaluated every 24 hours. To change the frequency, specify a valid
     #   			value for the <code>MaximumExecutionFrequency</code> parameter.</p>
     #            </note>
     #   @return [String]
@@ -5958,11 +6170,11 @@ module Aws::ConfigService
     #   <p>The ID of the Amazon Web Services resource that was evaluated.</p>
     #   @return [String]
     # @!attribute tag_key_scope
-    #   <p>One part of a key-value pair that make up a tag. 
+    #   <p>One part of a key-value pair that make up a tag.
     #   			A key is a general label that acts like a category for more specific tag values. </p>
     #   @return [String]
     # @!attribute tag_value_scope
-    #   <p>The optional part of a key-value pair that make up a tag. 
+    #   <p>The optional part of a key-value pair that make up a tag.
     #   			A value acts as a descriptor within a tag category (key). </p>
     #   @return [String]
     class OrganizationCustomRuleMetadata < Struct.new(
@@ -5981,7 +6193,7 @@ module Aws::ConfigService
       include ::Smithy::Schema::Structure
     end
 
-    # <p>An object that specifies organization managed rule metadata such as resource type and ID of Amazon Web Services resource along with the rule identifier. 
+    # <p>An object that specifies organization managed rule metadata such as resource type and ID of Amazon Web Services resource along with the rule identifier.
     # 			It also provides the frequency with which you want Config to run evaluations for the rule if the trigger type is periodic.</p>
     # @!attribute description
     #   <p>The description that you provide for your organization Config rule.</p>
@@ -5997,7 +6209,7 @@ module Aws::ConfigService
     # @!attribute maximum_execution_frequency
     #   <p>The maximum frequency with which Config runs evaluations for a rule. This is for an Config managed rule that is triggered at a periodic frequency.</p>
     #            <note>
-    #               <p>By default, rules with a periodic trigger are evaluated every 24 hours. To change the frequency, specify a valid 
+    #               <p>By default, rules with a periodic trigger are evaluated every 24 hours. To change the frequency, specify a valid
     #   			value for the <code>MaximumExecutionFrequency</code> parameter.</p>
     #            </note>
     #   @return [String]
@@ -6008,11 +6220,11 @@ module Aws::ConfigService
     #   <p>The ID of the Amazon Web Services resource that was evaluated.</p>
     #   @return [String]
     # @!attribute tag_key_scope
-    #   <p>One part of a key-value pair that make up a tag. 
+    #   <p>One part of a key-value pair that make up a tag.
     #   			A key is a general label that acts like a category for more specific tag values. </p>
     #   @return [String]
     # @!attribute tag_value_scope
-    #   <p>The optional part of a key-value pair that make up a tag. 
+    #   <p>The optional part of a key-value pair that make up a tag.
     #   			A value acts as a descriptor within a tag category (key).</p>
     #   @return [String]
     class OrganizationManagedRuleMetadata < Struct.new(
@@ -6036,9 +6248,9 @@ module Aws::ConfigService
     #   @return [String]
     # @!attribute status
     #   <p>Indicates deployment status for conformance pack in a member account.
-    #   			When management account calls <code>PutOrganizationConformancePack</code> action for the first time, conformance pack status is created in the member account. 
-    #   			When management account calls <code>PutOrganizationConformancePack</code> action for the second time, conformance pack status is updated in the member account.   
-    #   			Conformance pack status is deleted when the management account deletes <code>OrganizationConformancePack</code> and disables service access for <code>config-multiaccountsetup.amazonaws.com</code>. 
+    #   			When management account calls <code>PutOrganizationConformancePack</code> action for the first time, conformance pack status is created in the member account.
+    #   			When management account calls <code>PutOrganizationConformancePack</code> action for the second time, conformance pack status is updated in the member account.
+    #   			Conformance pack status is deleted when the management account deletes <code>OrganizationConformancePack</code> and disables service access for <code>config-multiaccountsetup.amazonaws.com</code>.
     #   		</p>
     #            <p> Config sets the state of the conformance pack to:</p>
     #            <ul>
@@ -6141,7 +6353,7 @@ module Aws::ConfigService
 
     # @!attribute aggregation_authorization
     #   <p>Returns an AggregationAuthorization object.
-    #   			
+    #
     #   		</p>
     #   @return [Types::AggregationAuthorization]
     class PutAggregationAuthorizationResponse < Struct.new(
@@ -6172,7 +6384,7 @@ module Aws::ConfigService
     #   @return [String]
     # @!attribute account_aggregation_sources
     #   <p>A list of AccountAggregationSource object.
-    #   			
+    #
     #   		</p>
     #   @return [Array<Types::AccountAggregationSource>]
     # @!attribute organization_aggregation_source
@@ -6258,6 +6470,9 @@ module Aws::ConfigService
     # @!attribute template_ssm_document_details
     #   <p>An object of type <code>TemplateSSMDocumentDetails</code>, which contains the name or the Amazon Resource Name (ARN) of the Amazon Web Services Systems Manager document (SSM document) and the version of the SSM document that is used to create a conformance pack.</p>
     #   @return [Types::TemplateSSMDocumentDetails]
+    # @!attribute tags
+    #   <p>The tags for the conformance pack. Each tag consists of a key and an optional value, both of which you define.</p>
+    #   @return [Array<Types::Tag>]
     class PutConformancePackRequest < Struct.new(
       nil,
       :conformance_pack_name,
@@ -6267,6 +6482,7 @@ module Aws::ConfigService
       :delivery_s3_key_prefix,
       :conformance_pack_input_parameters,
       :template_ssm_document_details,
+      :tags,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6278,6 +6494,32 @@ module Aws::ConfigService
     class PutConformancePackResponse < Struct.new(
       nil,
       :conformance_pack_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute connector_configuration
+    #   <p>The provider-specific configuration for connecting to the third-party cloud service provider.</p>
+    #   @return [Types::ConnectorConfiguration]
+    # @!attribute tags
+    #   <p>The tags for the connector. Each tag consists of a key and an optional value, both of which you define.</p>
+    #   @return [Array<Types::Tag>]
+    class PutConnectorRequest < Struct.new(
+      nil,
+      :connector_configuration,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the connector.</p>
+    #   @return [String]
+    class PutConnectorResponse < Struct.new(
+      nil,
+      :arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6386,6 +6628,9 @@ module Aws::ConfigService
     #   			logging enabled, and other custom rule metadata, such as resource type, resource ID of
     #   			Amazon Web Services resource, and organization trigger types that initiate Config to evaluate Amazon Web Services resources against a rule.</p>
     #   @return [Types::OrganizationCustomPolicyRuleMetadata]
+    # @!attribute tags
+    #   <p>The tags for the organization Config rule. Each tag consists of a key and an optional value, both of which you define.</p>
+    #   @return [Array<Types::Tag>]
     class PutOrganizationConfigRuleRequest < Struct.new(
       nil,
       :organization_config_rule_name,
@@ -6393,6 +6638,7 @@ module Aws::ConfigService
       :organization_custom_rule_metadata,
       :excluded_accounts,
       :organization_custom_policy_rule_metadata,
+      :tags,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6442,6 +6688,9 @@ module Aws::ConfigService
     # @!attribute excluded_accounts
     #   <p>A list of Amazon Web Services accounts to be excluded from an organization conformance pack while deploying a conformance pack.</p>
     #   @return [Array<String>]
+    # @!attribute tags
+    #   <p>The tags for the organization conformance pack. Each tag consists of a key and an optional value, both of which you define.</p>
+    #   @return [Array<Types::Tag>]
     class PutOrganizationConformancePackRequest < Struct.new(
       nil,
       :organization_conformance_pack_name,
@@ -6451,6 +6700,7 @@ module Aws::ConfigService
       :delivery_s3_key_prefix,
       :conformance_pack_input_parameters,
       :excluded_accounts,
+      :tags,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6623,10 +6873,10 @@ module Aws::ConfigService
     end
 
     # @!attribute stored_query
-    #   <p>A list of <code>StoredQuery</code> objects. 
+    #   <p>A list of <code>StoredQuery</code> objects.
     #   			The mandatory fields are <code>QueryName</code> and <code>Expression</code>.</p>
     #            <note>
-    #               <p>When you are creating a query, you must provide a query name and an expression. 
+    #               <p>When you are creating a query, you must provide a query name and an expression.
     #   			When you are updating a query, you must provide a query name but updating the description is optional.</p>
     #            </note>
     #   @return [Types::StoredQuery]
@@ -6643,12 +6893,50 @@ module Aws::ConfigService
     end
 
     # @!attribute query_arn
-    #   <p>Amazon Resource Name (ARN) of the query. 
+    #   <p>Amazon Resource Name (ARN) of the query.
     #   			For example, arn:partition:service:region:account-id:resource-type/resource-name/resource-id.</p>
     #   @return [String]
     class PutStoredQueryResponse < Struct.new(
       nil,
       :query_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute service_principal
+    #   <p>The service principal of the Amazon Web Services service for the service-linked configuration recorder that you want to create.</p>
+    #   @return [String]
+    # @!attribute connector_arn
+    #   <p>The Amazon Resource Name (ARN) of the connector that specifies the connection between the third-party cloud service provider and Config. The specified connector must exist.</p>
+    #   @return [String]
+    # @!attribute scope_configuration
+    #   <p>Specifies the scope of resources to record from the third-party cloud service provider.</p>
+    #   @return [Types::ScopeConfiguration]
+    # @!attribute tags
+    #   <p>The tags for a service-linked configuration recorder. Each tag consists of a key and an optional value, both of which you define.</p>
+    #   @return [Array<Types::Tag>]
+    class PutThirdPartyServiceLinkedConfigurationRecorderRequest < Struct.new(
+      nil,
+      :service_principal,
+      :connector_arn,
+      :scope_configuration,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the specified configuration recorder.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the specified configuration recorder.</p>
+    #   @return [String]
+    class PutThirdPartyServiceLinkedConfigurationRecorderResponse < Struct.new(
+      nil,
+      :arn,
+      :name,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6865,7 +7153,7 @@ module Aws::ConfigService
     end
 
     # <p>Specifies the default recording frequency that Config uses to record configuration changes.
-    # 			
+    #
     # 			Config supports <i>Continuous recording</i> and <i>Daily recording</i>.</p>
     #          <ul>
     #             <li>
@@ -7096,7 +7384,7 @@ module Aws::ConfigService
     # @!attribute target_version
     #   <p>Version of the target. For example, version of the SSM document.</p>
     #            <note>
-    #               <p>If you make backward incompatible changes to the SSM document, 
+    #               <p>If you make backward incompatible changes to the SSM document,
     #   			you must call PutRemediationConfiguration API again to ensure the remediations can run.</p>
     #            </note>
     #   @return [String]
@@ -7114,8 +7402,8 @@ module Aws::ConfigService
     #   @return [Types::ExecutionControls]
     # @!attribute maximum_automatic_attempts
     #   <p>The maximum number of failed attempts for auto-remediation. If you do not select a number, the default is 5.</p>
-    #            <p>For example, if you specify MaximumAutomaticAttempts as 5 with RetryAttemptSeconds as 50 seconds, 
-    #   			
+    #            <p>For example, if you specify MaximumAutomaticAttempts as 5 with RetryAttemptSeconds as 50 seconds,
+    #
     #   			Config will put a RemediationException on your behalf for the failing resource after the 5th failed attempt within 50 seconds.</p>
     #   @return [Integer]
     # @!attribute retry_attempt_seconds
@@ -7123,7 +7411,7 @@ module Aws::ConfigService
     #   			If <code>MaximumAutomaticAttempts</code> remediation attempts have been made under <code>RetryAttemptSeconds</code>, a remediation exception will be added to the resource.
     #   			If you do not select a number, the default is 60 seconds.
     #   		</p>
-    #            <p>For example, if you specify <code>RetryAttemptSeconds</code> as 50 seconds and <code>MaximumAutomaticAttempts</code> as 5, 
+    #            <p>For example, if you specify <code>RetryAttemptSeconds</code> as 50 seconds and <code>MaximumAutomaticAttempts</code> as 5,
     #   			Config will run auto-remediations 5 times within 50 seconds before adding a remediation exception to the resource.</p>
     #   @return [Integer]
     # @!attribute arn
@@ -7600,15 +7888,51 @@ module Aws::ConfigService
     #   			specify one resource type for
     #   			<code>ComplianceResourceTypes</code>.</p>
     #   @return [String]
+    # @!attribute service_principals
+    #   <p>The service principals of the Amazon Web Services services for the rule.</p>
+    #            <note>
+    #               <p>The field is populated only if the service-linked rule is created by a service. The field is empty if you create your own rule.</p>
+    #            </note>
+    #   @return [Array<String>]
     class Scope < Struct.new(
       nil,
       :compliance_resource_types,
       :tag_key,
       :tag_value,
       :compliance_resource_id,
+      :service_principals,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+    end
+
+    # <p>Specifies the scope of resources to record from a third-party cloud service provider.</p>
+    # @!attribute scope_type
+    #   <p>The type of scope for the third-party cloud resources. Valid values include <code>tenant</code> and <code>subscription</code>.</p>
+    #   @return [String]
+    # @!attribute scope_values
+    #   <p>The list of specific scope values for the third-party cloud resources. For example, a list of Azure subscriptions or management groups.</p>
+    #   @return [Array<String>]
+    # @!attribute all_regions
+    #   <p>Specifies whether to record resources from all supported regions for the third-party cloud service provider.</p>
+    #   @return [Boolean]
+    # @!attribute included_regions
+    #   <p>The list of regions from the third-party cloud service provider to include when recording resources. Used when <code>allRegions</code> is set to <code>false</code>.</p>
+    #   @return [Array<String>]
+    class ScopeConfiguration < Struct.new(
+      nil,
+      :scope_type,
+      :scope_values,
+      :all_regions,
+      :included_regions,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:all_regions] = false unless options.key?(:all_regions)
+        super
+      end
     end
 
     # @!attribute expression
@@ -7811,7 +8135,7 @@ module Aws::ConfigService
     #   @return [Integer]
     # @!attribute error_percentage
     #   <p>The percentage of errors that are allowed before SSM stops running automations on non-compliant resources for that specific rule.
-    #   			You can specify a percentage of errors, for example 10%. If you do not specifiy a percentage, the default is 50%. 
+    #   			You can specify a percentage of errors, for example 10%. If you do not specifiy a percentage, the default is 50%.
     #   			For example, if you set the ErrorPercentage to 40% for 10 non-compliant resources, then SSM stops running the automations when the fifth error is received. </p>
     #   @return [Integer]
     class SsmControls < Struct.new(
@@ -7903,7 +8227,7 @@ module Aws::ConfigService
     #   <p>The timeout for an evaluation. The default is 900 seconds. You cannot specify a number greater than 3600. If you specify 0, Config uses the default.</p>
     #   @return [Integer]
     # @!attribute client_token
-    #   <p>A client token is a unique, case-sensitive string of up to 64 ASCII characters. 
+    #   <p>A client token is a unique, case-sensitive string of up to 64 ASCII characters.
     #   			To make an idempotent API request using one of these actions, specify a client token in the request.</p>
     #            <note>
     #               <p>Avoid reusing the same client token for other API requests. If you retry
@@ -7956,9 +8280,9 @@ module Aws::ConfigService
     #   @return [String]
     # @!attribute member_account_rule_status
     #   <p>Indicates deployment status for Config rule in the member account.
-    #   			When management account calls <code>PutOrganizationConfigRule</code> action for the first time, Config rule status is created in the member account. 
-    #   			When management account calls <code>PutOrganizationConfigRule</code> action for the second time, Config rule status is updated in the member account.   
-    #   			Config rule status is deleted when the management account deletes <code>OrganizationConfigRule</code> and disables service access for <code>config-multiaccountsetup.amazonaws.com</code>. 
+    #   			When management account calls <code>PutOrganizationConfigRule</code> action for the first time, Config rule status is created in the member account.
+    #   			When management account calls <code>PutOrganizationConfigRule</code> action for the second time, Config rule status is updated in the member account.
+    #   			Config rule status is deleted when the management account deletes <code>OrganizationConfigRule</code> and disables service access for <code>config-multiaccountsetup.amazonaws.com</code>.
     #   			</p>
     #            <p>Config sets the state of the rule to:</p>
     #            <ul>
@@ -8080,8 +8404,8 @@ module Aws::ConfigService
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The tags for the resource. The metadata that you apply to a resource to help you categorize and organize them. 
-    # 			Each tag consists of a key and an optional value, both of which you define. 
+    # <p>The tags for the resource. The metadata that you apply to a resource to help you categorize and organize them.
+    # 			Each tag consists of a key and an optional value, both of which you define.
     # 			Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.</p>
     # @!attribute key
     #   <p>One part of a key-value pair that make up a tag. A key is a general label that acts like a category for more specific tag values.</p>
@@ -8141,6 +8465,11 @@ module Aws::ConfigService
     #                     <code>StoredQuery</code>
     #                  </p>
     #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>Connector</code>
+    #                  </p>
+    #               </li>
     #            </ul>
     #   @return [String]
     # @!attribute tags
@@ -8155,7 +8484,7 @@ module Aws::ConfigService
       include ::Smithy::Schema::Structure
     end
 
-    # <p>This API allows you to create a conformance pack template with an Amazon Web Services Systems Manager document (SSM document). 
+    # <p>This API allows you to create a conformance pack template with an Amazon Web Services Systems Manager document (SSM document).
     # 			To deploy a conformance pack using an SSM document, first create an SSM document with conformance pack content, and then provide the <code>DocumentName</code> in the <a href="https://docs.aws.amazon.com/config/latest/APIReference/API_PutConformancePack.html">PutConformancePack API</a>. You can also provide the <code>DocumentVersion</code>.</p>
     #          <p>The <code>TemplateSSMDocumentDetails</code> object contains the name of the SSM document and the version of the SSM document.</p>
     # @!attribute document_name
@@ -8193,7 +8522,7 @@ module Aws::ConfigService
       include ::Smithy::Schema::Structure
     end
 
-    # <p>You have reached the limit of the number of tags you can use. 
+    # <p>You have reached the limit of the number of tags you can use.
     # 			For more information, see <a href="https://docs.aws.amazon.com/config/latest/developerguide/configlimits.html">
     #                <b>Service Limits</b>
     #             </a> in the <i>Config Developer Guide</i>.</p>
@@ -8271,6 +8600,11 @@ module Aws::ConfigService
     #                     <code>StoredQuery</code>
     #                  </p>
     #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>Connector</code>
+    #                  </p>
+    #               </li>
     #            </ul>
     #   @return [String]
     # @!attribute tag_keys
@@ -8317,6 +8651,15 @@ module Aws::ConfigService
     #             </li>
     #             <li>
     #                <p>For service-linked configuration recorders, the configuration recorder does not record one or more of the specified resource types.</p>
+    #             </li>
+    #          </ul>
+    #          <p>For <a href="https://docs.aws.amazon.com/config/latest/APIReference/API_DeleteServiceLinkedConfigurationRecorder.html">DeleteServiceLinkedConfigurationRecorder</a>, one of the following errors:</p>
+    #          <ul>
+    #             <li>
+    #                <p>You have provided both <code>Arn</code> and <code>ServicePrincipal</code>. Only one of <code>Arn</code> or <code>ServicePrincipal</code> can be specified.</p>
+    #             </li>
+    #             <li>
+    #                <p>You have provided a service principal for service-linked configuration recorder that is not valid.</p>
     #             </li>
     #          </ul>
     # @!attribute message

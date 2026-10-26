@@ -144,18 +144,18 @@ module Aws::ApiGatewayV2
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -542,9 +542,9 @@ module Aws::ApiGatewayV2
     #   <p>Specifies the format of the payload sent to an integration. Required for HTTP APIs. Supported values for Lambda proxy integrations are 1.0 and 2.0. For all other integrations, 1.0 is the only supported value. To learn more, see <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-lambda.html">Working with AWS Lambda proxy integrations for HTTP APIs</a>.</p>
     # @option params [Hash<String, String>] :request_parameters
     #   <p>For WebSocket APIs, a key-value map specifying request parameters that are passed from the method request to the backend. The key is an integration request parameter name and the associated value is a method request parameter value or static value that must be enclosed within single quotes and pre-encoded as required by the backend. The method request parameter value must match the pattern of method.request.<replaceable>{location}</replaceable>.<replaceable>{name}</replaceable>
-    #                  , where 
+    #                  , where
     #                     <replaceable>{location}</replaceable>
-    #                   is querystring, path, or header; and 
+    #                   is querystring, path, or header; and
     #                     <replaceable>{name}</replaceable>
     #                   must be a valid and unique method request parameter name.</p> <p>For HTTP API integrations with a specified integrationSubtype, request parameters are a key-value map specifying parameters that are passed to AWS_PROXY integrations. You can provide static values, or map request data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services.html">Working with AWS service integrations for HTTP APIs</a>.</p> <p>For HTTP API integrations without a specified integrationSubtype request parameters are a key-value map specifying how to transform HTTP requests before sending them to the backend. The key should follow the pattern &lt;action&gt;:&lt;header|querystring|path&gt;.&lt;location&gt; where action can be append, overwrite or remove. For values, you can provide static values, or map request data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-parameter-mapping.html">Transforming API requests and responses</a>.</p>
     # @option params [Hash<String, String>] :request_templates
@@ -716,6 +716,265 @@ module Aws::ApiGatewayV2
     # @return [Types::CreateModelResponse]
     def create_model(params = {}, options = {})
       request = build_request(:create_model, params)
+      request.send_request(options)
+    end
+
+    # <p>Creates a portal.</p>
+    # @param [Hash, Types::CreatePortalRequest] params
+    # @option params [Types::Authorization] :authorization
+    #   <p>The authentication configuration for the portal.</p>
+    # @option params [Types::EndpointConfigurationRequest] :endpoint_configuration
+    #   <p>The domain configuration for the portal. Use a default domain provided by API Gateway or provide a fully-qualified domain name that you own.</p>
+    # @option params [Array<String>] :included_portal_product_arns
+    #   <p>The ARNs of the portal products included in the portal.</p>
+    # @option params [String] :logo_uri
+    #   <p>The URI for the portal logo image that is displayed in the portal header.</p>
+    # @option params [Types::PortalContent] :portal_content
+    #   <p>The content of the portal.</p>
+    # @option params [String] :rum_app_monitor_name
+    #   <p>The name of the Amazon CloudWatch RUM app monitor for the portal.</p>
+    # @option params [Hash<String, String>] :tags
+    #   <p>The collection of tags. Each tag element is associated with a given resource.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     authorization: { # required
+    #       cognito_config: {
+    #         app_client_id: "__stringMin1Max256", # required
+    #         user_pool_arn: "__stringMin20Max2048", # required
+    #         user_pool_domain: "__stringMin20Max2048", # required
+    #       },
+    #       none: {
+    #       }
+    #     },
+    #     endpoint_configuration: { # required
+    #       acm_managed: {
+    #         certificate_arn: "__stringMin10Max2048", # required
+    #         domain_name: "__stringMin3Max256", # required
+    #       },
+    #       none: {
+    #       }
+    #     },
+    #     included_portal_product_arns: ["__stringMin20Max2048"],
+    #     logo_uri: "__stringMin0Max1092",
+    #     portal_content: { # required
+    #       description: "__stringMin0Max1024",
+    #       display_name: "__stringMin3Max255", # required
+    #       theme: { # required
+    #         custom_colors: { # required
+    #           accent_color: "__stringMin1Max16", # required
+    #           background_color: "__stringMin1Max16", # required
+    #           error_validation_color: "__stringMin1Max16", # required
+    #           header_color: "__stringMin1Max16", # required
+    #           navigation_color: "__stringMin1Max16", # required
+    #           text_color: "__stringMin1Max16", # required
+    #         },
+    #         logo_last_uploaded: Time.now
+    #       }
+    #     },
+    #     rum_app_monitor_name: "__stringMin0Max255",
+    #     tags: {
+    #       "__string" => "StringWithLengthBetween1And1600"
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.create_portal(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     authorization: {
+    #       cognito_config: {
+    #         app_client_id: "__stringMin1Max256", # required
+    #         user_pool_arn: "__stringMin20Max2048", # required
+    #         user_pool_domain: "__stringMin20Max2048", # required
+    #       },
+    #       none: {
+    #       }
+    #     },
+    #     endpoint_configuration: {
+    #       certificate_arn: "__stringMin10Max2048",
+    #       domain_name: "__stringMin3Max256",
+    #       portal_default_domain_name: "__stringMin3Max256", # required
+    #       portal_domain_hosted_zone_id: "__stringMin1Max64", # required
+    #     },
+    #     included_portal_product_arns: ["__stringMin20Max2048"],
+    #     last_modified: Time.now,
+    #     last_published: Time.now,
+    #     last_published_description: "__stringMin0Max1024",
+    #     portal_arn: "__stringMin20Max2048",
+    #     portal_content: {
+    #       description: "__stringMin0Max1024",
+    #       display_name: "__stringMin3Max255", # required
+    #       theme: { # required
+    #         custom_colors: { # required
+    #           accent_color: "__stringMin1Max16", # required
+    #           background_color: "__stringMin1Max16", # required
+    #           error_validation_color: "__stringMin1Max16", # required
+    #           header_color: "__stringMin1Max16", # required
+    #           navigation_color: "__stringMin1Max16", # required
+    #           text_color: "__stringMin1Max16", # required
+    #         },
+    #         logo_last_uploaded: Time.now
+    #       }
+    #     },
+    #     portal_id: "__stringMin10Max30PatternAZ09",
+    #     publish_status: "PUBLISHED" # One of: ["PUBLISHED", "PUBLISH_IN_PROGRESS", "PUBLISH_FAILED", "DISABLE_IN_PROGRESS", "DISABLE_FAILED", "DISABLED"],
+    #     rum_app_monitor_name: "__stringMin0Max255",
+    #     status_exception: {
+    #       exception: "__stringMin1Max256",
+    #       message: "__stringMin1Max2048"
+    #     },
+    #     tags: {
+    #       "__string" => "StringWithLengthBetween1And1600"
+    #     }
+    #   }
+    # @return [Types::CreatePortalResponse]
+    def create_portal(params = {}, options = {})
+      request = build_request(:create_portal, params)
+      request.send_request(options)
+    end
+
+    # <p>Creates a new portal product.</p>
+    # @param [Hash, Types::CreatePortalProductRequest] params
+    # @option params [String] :description
+    #   <p>A description of the portal product.</p>
+    # @option params [String] :display_name
+    #   <p>The name of the portal product as it appears in a published portal.</p>
+    # @option params [Hash<String, String>] :tags
+    #   <p>The collection of tags. Each tag element is associated with a given resource.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     description: "__stringMin0Max1024",
+    #     display_name: "__stringMin1Max255", # required
+    #     tags: {
+    #       "__string" => "StringWithLengthBetween1And1600"
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.create_portal_product(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     description: "__stringMin0Max1024",
+    #     display_name: "__stringMin1Max255",
+    #     display_order: {
+    #       contents: [
+    #         {
+    #           product_rest_endpoint_page_arns: ["__stringMin20Max2048"], # required
+    #           section_name: "__string", # required
+    #         }
+    #       ],
+    #       overview_page_arn: "__stringMin20Max2048",
+    #       product_page_arns: ["__stringMin20Max2048"]
+    #     },
+    #     last_modified: Time.now,
+    #     portal_product_arn: "__stringMin20Max2048",
+    #     portal_product_id: "__stringMin10Max30PatternAZ09",
+    #     tags: {
+    #       "__string" => "StringWithLengthBetween1And1600"
+    #     }
+    #   }
+    # @return [Types::CreatePortalProductResponse]
+    def create_portal_product(params = {}, options = {})
+      request = build_request(:create_portal_product, params)
+      request.send_request(options)
+    end
+
+    # <p>Creates a new product page for a portal product.</p>
+    # @param [Hash, Types::CreateProductPageRequest] params
+    # @option params [Types::DisplayContent] :display_content
+    #   <p>The content of the product page.</p>
+    # @option params [String] :portal_product_id
+    #   <p>The portal product identifier.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     display_content: { # required
+    #       body: "__stringMin1Max32768", # required
+    #       title: "__stringMin1Max255", # required
+    #     },
+    #     portal_product_id: "__string", # required
+    #   }
+    #   options = {}
+    #   response = client.create_product_page(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     display_content: {
+    #       body: "__stringMin1Max32768", # required
+    #       title: "__stringMin1Max255", # required
+    #     },
+    #     last_modified: Time.now,
+    #     product_page_arn: "__stringMin20Max2048",
+    #     product_page_id: "__stringMin10Max30PatternAZ09"
+    #   }
+    # @return [Types::CreateProductPageResponse]
+    def create_product_page(params = {}, options = {})
+      request = build_request(:create_product_page, params)
+      request.send_request(options)
+    end
+
+    # <p>Creates a product REST endpoint page for a portal product.</p>
+    # @param [Hash, Types::CreateProductRestEndpointPageRequest] params
+    # @option params [Types::EndpointDisplayContent] :display_content
+    #   <p>The content of the product REST endpoint page.</p>
+    # @option params [String] :portal_product_id
+    #   <p>The portal product identifier.</p>
+    # @option params [Types::RestEndpointIdentifier] :rest_endpoint_identifier
+    #   <p>The REST endpoint identifier.</p>
+    # @option params [String] :try_it_state
+    #   <p>The try it state of the product REST endpoint page.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     display_content: {
+    #       none: {
+    #       },
+    #       overrides: {
+    #         body: "__stringMin1Max32768",
+    #         endpoint: "__stringMin1Max1024",
+    #         operation_name: "__stringMin1Max255"
+    #       }
+    #     },
+    #     portal_product_id: "__string", # required
+    #     rest_endpoint_identifier: { # required
+    #       identifier_parts: {
+    #         method: "__stringMin1Max20", # required
+    #         path: "__stringMin1Max4096", # required
+    #         rest_api_id: "__stringMin1Max50", # required
+    #         stage: "__stringMin1Max128", # required
+    #       }
+    #     },
+    #     try_it_state: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #   }
+    #   options = {}
+    #   response = client.create_product_rest_endpoint_page(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     display_content: {
+    #       body: "__stringMin1Max32768",
+    #       endpoint: "__stringMin1Max1024", # required
+    #       operation_name: "__stringMin1Max255"
+    #     },
+    #     last_modified: Time.now,
+    #     product_rest_endpoint_page_arn: "__stringMin20Max2048",
+    #     product_rest_endpoint_page_id: "__stringMin10Max30PatternAZ09",
+    #     rest_endpoint_identifier: {
+    #       identifier_parts: {
+    #         method: "__stringMin1Max20", # required
+    #         path: "__stringMin1Max4096", # required
+    #         rest_api_id: "__stringMin1Max50", # required
+    #         stage: "__stringMin1Max128", # required
+    #       }
+    #     },
+    #     status: "AVAILABLE" # One of: ["AVAILABLE", "IN_PROGRESS", "FAILED"],
+    #     status_exception: {
+    #       exception: "__stringMin1Max256",
+    #       message: "__stringMin1Max2048"
+    #     },
+    #     try_it_state: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #   }
+    # @return [Types::CreateProductRestEndpointPageResponse]
+    def create_product_rest_endpoint_page(params = {}, options = {})
+      request = build_request(:create_product_rest_endpoint_page, params)
       request.send_request(options)
     end
 
@@ -1292,6 +1551,107 @@ module Aws::ApiGatewayV2
       request.send_request(options)
     end
 
+    # <p>Deletes a portal.</p>
+    # @param [Hash, Types::DeletePortalRequest] params
+    # @option params [String] :portal_id
+    #   <p>The portal identifier.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     portal_id: "__string", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_portal(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Smithy::Schema::EmptyStructure]
+    def delete_portal(params = {}, options = {})
+      request = build_request(:delete_portal, params)
+      request.send_request(options)
+    end
+
+    # <p>Deletes a portal product.</p>
+    # @param [Hash, Types::DeletePortalProductRequest] params
+    # @option params [String] :portal_product_id
+    #   <p>The portal product identifier.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     portal_product_id: "__string", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_portal_product(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Smithy::Schema::EmptyStructure]
+    def delete_portal_product(params = {}, options = {})
+      request = build_request(:delete_portal_product, params)
+      request.send_request(options)
+    end
+
+    # <p>Deletes the sharing policy for a portal product.</p>
+    # @param [Hash, Types::DeletePortalProductSharingPolicyRequest] params
+    # @option params [String] :portal_product_id
+    #   <p>The portal product identifier.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     portal_product_id: "__string", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_portal_product_sharing_policy(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Smithy::Schema::EmptyStructure]
+    def delete_portal_product_sharing_policy(params = {}, options = {})
+      request = build_request(:delete_portal_product_sharing_policy, params)
+      request.send_request(options)
+    end
+
+    # <p>Deletes a product page of a portal product.</p>
+    # @param [Hash, Types::DeleteProductPageRequest] params
+    # @option params [String] :portal_product_id
+    #   <p>The portal product identifier.</p>
+    # @option params [String] :product_page_id
+    #   <p>The portal product identifier.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     portal_product_id: "__string", # required
+    #     product_page_id: "__string", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_product_page(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Smithy::Schema::EmptyStructure]
+    def delete_product_page(params = {}, options = {})
+      request = build_request(:delete_product_page, params)
+      request.send_request(options)
+    end
+
+    # <p>Deletes a product REST endpoint page.</p>
+    # @param [Hash, Types::DeleteProductRestEndpointPageRequest] params
+    # @option params [String] :portal_product_id
+    #   <p>The portal product identifier.</p>
+    # @option params [String] :product_rest_endpoint_page_id
+    #   <p>The product REST endpoint identifier.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     portal_product_id: "__string", # required
+    #     product_rest_endpoint_page_id: "__string", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_product_rest_endpoint_page(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Smithy::Schema::EmptyStructure]
+    def delete_product_rest_endpoint_page(params = {}, options = {})
+      request = build_request(:delete_product_rest_endpoint_page, params)
+      request.send_request(options)
+    end
+
     # <p>Deletes a Route.</p>
     # @param [Hash, Types::DeleteRouteRequest] params
     # @option params [String] :api_id
@@ -1452,6 +1812,25 @@ module Aws::ApiGatewayV2
     # @return [Types::DeleteVpcLinkResponse]
     def delete_vpc_link(params = {}, options = {})
       request = build_request(:delete_vpc_link, params)
+      request.send_request(options)
+    end
+
+    # <p>Deletes the publication of a portal portal.</p>
+    # @param [Hash, Types::DisablePortalRequest] params
+    # @option params [String] :portal_id
+    #   <p>The portal identifier.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     portal_id: "__string", # required
+    #   }
+    #   options = {}
+    #   response = client.disable_portal(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Smithy::Schema::EmptyStructure]
+    def disable_portal(params = {}, options = {})
+      request = build_request(:disable_portal, params)
       request.send_request(options)
     end
 
@@ -2184,6 +2563,227 @@ module Aws::ApiGatewayV2
       request.send_request(options)
     end
 
+    # <p>Gets a portal.</p>
+    # @param [Hash, Types::GetPortalRequest] params
+    # @option params [String] :portal_id
+    #   <p>The portal identifier.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     portal_id: "__string", # required
+    #   }
+    #   options = {}
+    #   response = client.get_portal(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     authorization: {
+    #       cognito_config: {
+    #         app_client_id: "__stringMin1Max256", # required
+    #         user_pool_arn: "__stringMin20Max2048", # required
+    #         user_pool_domain: "__stringMin20Max2048", # required
+    #       },
+    #       none: {
+    #       }
+    #     },
+    #     endpoint_configuration: {
+    #       certificate_arn: "__stringMin10Max2048",
+    #       domain_name: "__stringMin3Max256",
+    #       portal_default_domain_name: "__stringMin3Max256", # required
+    #       portal_domain_hosted_zone_id: "__stringMin1Max64", # required
+    #     },
+    #     included_portal_product_arns: ["__stringMin20Max2048"],
+    #     last_modified: Time.now,
+    #     last_published: Time.now,
+    #     last_published_description: "__stringMin0Max1024",
+    #     portal_arn: "__stringMin20Max2048",
+    #     portal_content: {
+    #       description: "__stringMin0Max1024",
+    #       display_name: "__stringMin3Max255", # required
+    #       theme: { # required
+    #         custom_colors: { # required
+    #           accent_color: "__stringMin1Max16", # required
+    #           background_color: "__stringMin1Max16", # required
+    #           error_validation_color: "__stringMin1Max16", # required
+    #           header_color: "__stringMin1Max16", # required
+    #           navigation_color: "__stringMin1Max16", # required
+    #           text_color: "__stringMin1Max16", # required
+    #         },
+    #         logo_last_uploaded: Time.now
+    #       }
+    #     },
+    #     portal_id: "__stringMin10Max30PatternAZ09",
+    #     preview: {
+    #       preview_status: "PREVIEW_IN_PROGRESS" # One of: ["PREVIEW_IN_PROGRESS", "PREVIEW_FAILED", "PREVIEW_READY"], # required
+    #       preview_url: "__string",
+    #       status_exception: {
+    #         exception: "__stringMin1Max256",
+    #         message: "__stringMin1Max2048"
+    #       }
+    #     },
+    #     publish_status: "PUBLISHED" # One of: ["PUBLISHED", "PUBLISH_IN_PROGRESS", "PUBLISH_FAILED", "DISABLE_IN_PROGRESS", "DISABLE_FAILED", "DISABLED"],
+    #     rum_app_monitor_name: "__stringMin0Max255",
+    #     status_exception: {
+    #       exception: "__stringMin1Max256",
+    #       message: "__stringMin1Max2048"
+    #     },
+    #     tags: {
+    #       "__string" => "StringWithLengthBetween1And1600"
+    #     }
+    #   }
+    # @return [Types::GetPortalResponse]
+    def get_portal(params = {}, options = {})
+      request = build_request(:get_portal, params)
+      request.send_request(options)
+    end
+
+    # <p>Gets a portal product.</p>
+    # @param [Hash, Types::GetPortalProductRequest] params
+    # @option params [String] :portal_product_id
+    #   <p>The portal product identifier.</p>
+    # @option params [String] :resource_owner_account_id
+    #   <p>The account ID of the resource owner of the portal product.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     portal_product_id: "__string", # required
+    #     resource_owner_account_id: "__string"
+    #   }
+    #   options = {}
+    #   response = client.get_portal_product(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     description: "__stringMin0Max1024",
+    #     display_name: "__stringMin1Max255",
+    #     display_order: {
+    #       contents: [
+    #         {
+    #           product_rest_endpoint_page_arns: ["__stringMin20Max2048"], # required
+    #           section_name: "__string", # required
+    #         }
+    #       ],
+    #       overview_page_arn: "__stringMin20Max2048",
+    #       product_page_arns: ["__stringMin20Max2048"]
+    #     },
+    #     last_modified: Time.now,
+    #     portal_product_arn: "__stringMin20Max2048",
+    #     portal_product_id: "__stringMin10Max30PatternAZ09",
+    #     tags: {
+    #       "__string" => "StringWithLengthBetween1And1600"
+    #     }
+    #   }
+    # @return [Types::GetPortalProductResponse]
+    def get_portal_product(params = {}, options = {})
+      request = build_request(:get_portal_product, params)
+      request.send_request(options)
+    end
+
+    # <p>Gets the sharing policy for a portal product.</p>
+    # @param [Hash, Types::GetPortalProductSharingPolicyRequest] params
+    # @option params [String] :portal_product_id
+    #   <p>The portal product identifier.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     portal_product_id: "__string", # required
+    #   }
+    #   options = {}
+    #   response = client.get_portal_product_sharing_policy(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     policy_document: "__stringMin1Max307200",
+    #     portal_product_id: "__stringMin10Max30PatternAZ09"
+    #   }
+    # @return [Types::GetPortalProductSharingPolicyResponse]
+    def get_portal_product_sharing_policy(params = {}, options = {})
+      request = build_request(:get_portal_product_sharing_policy, params)
+      request.send_request(options)
+    end
+
+    # <p>Gets a product page of a portal product.</p>
+    # @param [Hash, Types::GetProductPageRequest] params
+    # @option params [String] :portal_product_id
+    #   <p>The portal product identifier.</p>
+    # @option params [String] :product_page_id
+    #   <p>The portal product identifier.</p>
+    # @option params [String] :resource_owner_account_id
+    #   <p>The account ID of the resource owner of the portal product.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     portal_product_id: "__string", # required
+    #     product_page_id: "__string", # required
+    #     resource_owner_account_id: "__string"
+    #   }
+    #   options = {}
+    #   response = client.get_product_page(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     display_content: {
+    #       body: "__stringMin1Max32768", # required
+    #       title: "__stringMin1Max255", # required
+    #     },
+    #     last_modified: Time.now,
+    #     product_page_arn: "__stringMin20Max2048",
+    #     product_page_id: "__stringMin10Max30PatternAZ09"
+    #   }
+    # @return [Types::GetProductPageResponse]
+    def get_product_page(params = {}, options = {})
+      request = build_request(:get_product_page, params)
+      request.send_request(options)
+    end
+
+    # <p>Gets a product REST endpoint page.</p>
+    # @param [Hash, Types::GetProductRestEndpointPageRequest] params
+    # @option params [String] :include_raw_display_content
+    #   <p>The query parameter to include raw display content.</p>
+    # @option params [String] :portal_product_id
+    #   <p>The portal product identifier.</p>
+    # @option params [String] :product_rest_endpoint_page_id
+    #   <p>The product REST endpoint identifier.</p>
+    # @option params [String] :resource_owner_account_id
+    #   <p>The account ID of the resource owner of the portal product.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     include_raw_display_content: "__string",
+    #     portal_product_id: "__string", # required
+    #     product_rest_endpoint_page_id: "__string", # required
+    #     resource_owner_account_id: "__string"
+    #   }
+    #   options = {}
+    #   response = client.get_product_rest_endpoint_page(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     display_content: {
+    #       body: "__stringMin1Max32768",
+    #       endpoint: "__stringMin1Max1024", # required
+    #       operation_name: "__stringMin1Max255"
+    #     },
+    #     last_modified: Time.now,
+    #     product_rest_endpoint_page_arn: "__stringMin20Max2048",
+    #     product_rest_endpoint_page_id: "__stringMin10Max30PatternAZ09",
+    #     raw_display_content: "__string",
+    #     rest_endpoint_identifier: {
+    #       identifier_parts: {
+    #         method: "__stringMin1Max20", # required
+    #         path: "__stringMin1Max4096", # required
+    #         rest_api_id: "__stringMin1Max50", # required
+    #         stage: "__stringMin1Max128", # required
+    #       }
+    #     },
+    #     status: "AVAILABLE" # One of: ["AVAILABLE", "IN_PROGRESS", "FAILED"],
+    #     status_exception: {
+    #       exception: "__stringMin1Max256",
+    #       message: "__stringMin1Max2048"
+    #     },
+    #     try_it_state: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #   }
+    # @return [Types::GetProductRestEndpointPageResponse]
+    def get_product_rest_endpoint_page(params = {}, options = {})
+      request = build_request(:get_product_rest_endpoint_page, params)
+      request.send_request(options)
+    end
+
     # <p>Gets a Route.</p>
     # @param [Hash, Types::GetRouteRequest] params
     # @option params [String] :api_id
@@ -2680,6 +3280,217 @@ module Aws::ApiGatewayV2
       request.send_request(options)
     end
 
+    # <p>Lists portal products.</p>
+    # @param [Hash, Types::ListPortalProductsRequest] params
+    # @option params [String] :max_results
+    #   <p>The maximum number of elements to be returned for this resource.</p>
+    # @option params [String] :next_token
+    #   <p>The next page of elements from this collection. Not valid for the last element of the collection.</p>
+    # @option params [String] :resource_owner
+    #   <p>The resource owner of the portal product.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     max_results: "__string",
+    #     next_token: "__string",
+    #     resource_owner: "__string"
+    #   }
+    #   options = {}
+    #   response = client.list_portal_products(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     items: [
+    #       {
+    #         description: "__stringMin0Max1024", # required
+    #         display_name: "__stringMin1Max255", # required
+    #         last_modified: Time.now, # required
+    #         portal_product_arn: "__stringMin20Max2048", # required
+    #         portal_product_id: "__stringMin10Max30PatternAZ09", # required
+    #         tags: {
+    #           "__string" => "StringWithLengthBetween1And1600"
+    #         }
+    #       }
+    #     ],
+    #     next_token: "__stringMin1Max2048"
+    #   }
+    # @return [Types::ListPortalProductsResponse]
+    def list_portal_products(params = {}, options = {})
+      request = build_request(:list_portal_products, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists portals.</p>
+    # @param [Hash, Types::ListPortalsRequest] params
+    # @option params [String] :max_results
+    #   <p>The maximum number of elements to be returned for this resource.</p>
+    # @option params [String] :next_token
+    #   <p>The next page of elements from this collection. Not valid for the last element of the collection.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     max_results: "__string",
+    #     next_token: "__string"
+    #   }
+    #   options = {}
+    #   response = client.list_portals(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     items: [
+    #       {
+    #         authorization: { # required
+    #           cognito_config: {
+    #             app_client_id: "__stringMin1Max256", # required
+    #             user_pool_arn: "__stringMin20Max2048", # required
+    #             user_pool_domain: "__stringMin20Max2048", # required
+    #           },
+    #           none: {
+    #           }
+    #         },
+    #         endpoint_configuration: { # required
+    #           certificate_arn: "__stringMin10Max2048",
+    #           domain_name: "__stringMin3Max256",
+    #           portal_default_domain_name: "__stringMin3Max256", # required
+    #           portal_domain_hosted_zone_id: "__stringMin1Max64", # required
+    #         },
+    #         included_portal_product_arns: ["__stringMin20Max2048"], # required
+    #         last_modified: Time.now, # required
+    #         last_published: Time.now,
+    #         last_published_description: "__stringMin0Max1024",
+    #         portal_arn: "__stringMin20Max2048", # required
+    #         portal_content: { # required
+    #           description: "__stringMin0Max1024",
+    #           display_name: "__stringMin3Max255", # required
+    #           theme: { # required
+    #             custom_colors: { # required
+    #               accent_color: "__stringMin1Max16", # required
+    #               background_color: "__stringMin1Max16", # required
+    #               error_validation_color: "__stringMin1Max16", # required
+    #               header_color: "__stringMin1Max16", # required
+    #               navigation_color: "__stringMin1Max16", # required
+    #               text_color: "__stringMin1Max16", # required
+    #             },
+    #             logo_last_uploaded: Time.now
+    #           }
+    #         },
+    #         portal_id: "__stringMin10Max30PatternAZ09", # required
+    #         preview: {
+    #           preview_status: "PREVIEW_IN_PROGRESS" # One of: ["PREVIEW_IN_PROGRESS", "PREVIEW_FAILED", "PREVIEW_READY"], # required
+    #           preview_url: "__string",
+    #           status_exception: {
+    #             exception: "__stringMin1Max256",
+    #             message: "__stringMin1Max2048"
+    #           }
+    #         },
+    #         publish_status: "PUBLISHED" # One of: ["PUBLISHED", "PUBLISH_IN_PROGRESS", "PUBLISH_FAILED", "DISABLE_IN_PROGRESS", "DISABLE_FAILED", "DISABLED"],
+    #         rum_app_monitor_name: "__stringMin0Max255",
+    #         status_exception: {
+    #           exception: "__stringMin1Max256",
+    #           message: "__stringMin1Max2048"
+    #         },
+    #         tags: {
+    #           "__string" => "StringWithLengthBetween1And1600"
+    #         }
+    #       }
+    #     ],
+    #     next_token: "__stringMin1Max2048"
+    #   }
+    # @return [Types::ListPortalsResponse]
+    def list_portals(params = {}, options = {})
+      request = build_request(:list_portals, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists the product pages for a portal product.</p>
+    # @param [Hash, Types::ListProductPagesRequest] params
+    # @option params [String] :max_results
+    #   <p>The maximum number of elements to be returned for this resource.</p>
+    # @option params [String] :next_token
+    #   <p>The next page of elements from this collection. Not valid for the last element of the collection.</p>
+    # @option params [String] :portal_product_id
+    #   <p>The portal product identifier.</p>
+    # @option params [String] :resource_owner_account_id
+    #   <p>The account ID of the resource owner of the portal product.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     max_results: "__string",
+    #     next_token: "__string",
+    #     portal_product_id: "__string", # required
+    #     resource_owner_account_id: "__string"
+    #   }
+    #   options = {}
+    #   response = client.list_product_pages(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     items: [
+    #       {
+    #         last_modified: Time.now, # required
+    #         page_title: "__stringMin1Max255", # required
+    #         product_page_arn: "__stringMin20Max2048", # required
+    #         product_page_id: "__stringMin10Max30PatternAZ09", # required
+    #       }
+    #     ],
+    #     next_token: "__stringMin1Max2048"
+    #   }
+    # @return [Types::ListProductPagesResponse]
+    def list_product_pages(params = {}, options = {})
+      request = build_request(:list_product_pages, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists the product REST endpoint pages of a portal product.</p>
+    # @param [Hash, Types::ListProductRestEndpointPagesRequest] params
+    # @option params [String] :max_results
+    #   <p>The maximum number of elements to be returned for this resource.</p>
+    # @option params [String] :next_token
+    #   <p>The next page of elements from this collection. Not valid for the last element of the collection.</p>
+    # @option params [String] :portal_product_id
+    #   <p>The portal product identifier.</p>
+    # @option params [String] :resource_owner_account_id
+    #   <p>The account ID of the resource owner of the portal product.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     max_results: "__string",
+    #     next_token: "__string",
+    #     portal_product_id: "__string", # required
+    #     resource_owner_account_id: "__string"
+    #   }
+    #   options = {}
+    #   response = client.list_product_rest_endpoint_pages(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     items: [
+    #       {
+    #         endpoint: "__stringMin1Max1024", # required
+    #         last_modified: Time.now, # required
+    #         operation_name: "__stringMin1Max255",
+    #         product_rest_endpoint_page_arn: "__stringMin20Max2048", # required
+    #         product_rest_endpoint_page_id: "__stringMin10Max30PatternAZ09", # required
+    #         rest_endpoint_identifier: { # required
+    #           identifier_parts: {
+    #             method: "__stringMin1Max20", # required
+    #             path: "__stringMin1Max4096", # required
+    #             rest_api_id: "__stringMin1Max50", # required
+    #             stage: "__stringMin1Max128", # required
+    #           }
+    #         },
+    #         status: "AVAILABLE" # One of: ["AVAILABLE", "IN_PROGRESS", "FAILED"], # required
+    #         status_exception: {
+    #           exception: "__stringMin1Max256",
+    #           message: "__stringMin1Max2048"
+    #         },
+    #         try_it_state: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
+    #       }
+    #     ],
+    #     next_token: "__string"
+    #   }
+    # @return [Types::ListProductRestEndpointPagesResponse]
+    def list_product_rest_endpoint_pages(params = {}, options = {})
+      request = build_request(:list_product_rest_endpoint_pages, params)
+      request.send_request(options)
+    end
+
     # <p>Lists routing rules.</p>
     # @param [Hash, Types::ListRoutingRulesRequest] params
     # @option params [String] :domain_name
@@ -2738,6 +3549,69 @@ module Aws::ApiGatewayV2
     # @return [Types::ListRoutingRulesResponse]
     def list_routing_rules(params = {}, options = {})
       request = build_request(:list_routing_rules, params)
+      request.send_request(options)
+    end
+
+    # <p>Creates a portal preview.</p>
+    # @param [Hash, Types::PreviewPortalRequest] params
+    # @option params [String] :portal_id
+    #   <p>The portal identifier.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     portal_id: "__string", # required
+    #   }
+    #   options = {}
+    #   response = client.preview_portal(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::PreviewPortalResponse]
+    def preview_portal(params = {}, options = {})
+      request = build_request(:preview_portal, params)
+      request.send_request(options)
+    end
+
+    # <p>Publishes a portal.</p>
+    # @param [Hash, Types::PublishPortalRequest] params
+    # @option params [String] :description
+    #   <p>The description of the portal. When the portal is published, this description becomes the last published description.</p>
+    # @option params [String] :portal_id
+    #   <p>The portal identifier.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     description: "__stringMin0Max1024",
+    #     portal_id: "__string", # required
+    #   }
+    #   options = {}
+    #   response = client.publish_portal(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::PublishPortalResponse]
+    def publish_portal(params = {}, options = {})
+      request = build_request(:publish_portal, params)
+      request.send_request(options)
+    end
+
+    # <p>Updates the sharing policy for a portal product.</p>
+    # @param [Hash, Types::PutPortalProductSharingPolicyRequest] params
+    # @option params [String] :policy_document
+    #   <p>The product sharing policy.</p>
+    # @option params [String] :portal_product_id
+    #   <p>The portal product identifier.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     policy_document: "__stringMin1Max307200", # required
+    #     portal_product_id: "__string", # required
+    #   }
+    #   options = {}
+    #   response = client.put_portal_product_sharing_policy(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::PutPortalProductSharingPolicyResponse]
+    def put_portal_product_sharing_policy(params = {}, options = {})
+      request = build_request(:put_portal_product_sharing_policy, params)
       request.send_request(options)
     end
 
@@ -3279,9 +4153,9 @@ module Aws::ApiGatewayV2
     #   <p>Specifies the format of the payload sent to an integration. Required for HTTP APIs. Supported values for Lambda proxy integrations are 1.0 and 2.0. For all other integrations, 1.0 is the only supported value. To learn more, see <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-lambda.html">Working with AWS Lambda proxy integrations for HTTP APIs</a>.</p>
     # @option params [Hash<String, String>] :request_parameters
     #   <p>For WebSocket APIs, a key-value map specifying request parameters that are passed from the method request to the backend. The key is an integration request parameter name and the associated value is a method request parameter value or static value that must be enclosed within single quotes and pre-encoded as required by the backend. The method request parameter value must match the pattern of method.request.<replaceable>{location}</replaceable>.<replaceable>{name}</replaceable>
-    #             , where 
+    #             , where
     #               <replaceable>{location}</replaceable>
-    #              is querystring, path, or header; and 
+    #              is querystring, path, or header; and
     #               <replaceable>{name}</replaceable>
     #              must be a valid and unique method request parameter name.</p> <p>For HTTP API integrations with a specified integrationSubtype, request parameters are a key-value map specifying parameters that are passed to AWS_PROXY integrations. You can provide static values, or map request data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services.html">Working with AWS service integrations for HTTP APIs</a>.</p> <p>For HTTP API integrations, without a specified integrationSubtype request parameters are a key-value map specifying how to transform HTTP requests before sending them to the backend. The key should follow the pattern &lt;action&gt;:&lt;header|querystring|path&gt;.&lt;location&gt; where action can be append, overwrite or remove. For values, you can provide static values, or map request data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-parameter-mapping.html">Transforming API requests and responses</a>.</p>
     # @option params [Hash<String, String>] :request_templates
@@ -3384,9 +4258,9 @@ module Aws::ApiGatewayV2
     #   <p>A key-value map specifying response parameters that are passed to the method response from the backend. The key is a method response header parameter name and the mapped value is an integration response header value, a static value enclosed within a pair of single quotes, or a JSON expression from the integration response body. The mapping key must match the pattern of method.response.header.<replaceable>{name}</replaceable>
     #                  , where name is a valid and unique header name. The mapped non-static value must match the pattern of integration.response.header.<replaceable>{name}</replaceable>
     #                   or integration.response.body.<replaceable>{JSON-expression}</replaceable>
-    #                  , where 
+    #                  , where
     #                     <replaceable>{name}</replaceable>
-    #                   is a valid and unique response header name and 
+    #                   is a valid and unique response header name and
     #                     <replaceable>{JSON-expression}</replaceable>
     #                   is a valid JSON expression without the $ prefix.</p>
     # @option params [Hash<String, String>] :response_templates
@@ -3467,6 +4341,277 @@ module Aws::ApiGatewayV2
     # @return [Types::UpdateModelResponse]
     def update_model(params = {}, options = {})
       request = build_request(:update_model, params)
+      request.send_request(options)
+    end
+
+    # <p>Updates a portal.</p>
+    # @param [Hash, Types::UpdatePortalRequest] params
+    # @option params [Types::Authorization] :authorization
+    #   <p>The authorization of the portal.</p>
+    # @option params [Types::EndpointConfigurationRequest] :endpoint_configuration
+    #   <p>Represents an endpoint configuration.</p>
+    # @option params [Array<String>] :included_portal_product_arns
+    #   <p>The ARNs of the portal products included in the portal.</p>
+    # @option params [String] :logo_uri
+    #   <p>The logo URI.</p>
+    # @option params [Types::PortalContent] :portal_content
+    #   <p>Contains the content that is visible to portal consumers including the themes, display names, and description.</p>
+    # @option params [String] :portal_id
+    #   <p>The portal identifier.</p>
+    # @option params [String] :rum_app_monitor_name
+    #   <p>The CloudWatch RUM app monitor name.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     authorization: {
+    #       cognito_config: {
+    #         app_client_id: "__stringMin1Max256", # required
+    #         user_pool_arn: "__stringMin20Max2048", # required
+    #         user_pool_domain: "__stringMin20Max2048", # required
+    #       },
+    #       none: {
+    #       }
+    #     },
+    #     endpoint_configuration: {
+    #       acm_managed: {
+    #         certificate_arn: "__stringMin10Max2048", # required
+    #         domain_name: "__stringMin3Max256", # required
+    #       },
+    #       none: {
+    #       }
+    #     },
+    #     included_portal_product_arns: ["__stringMin20Max2048"],
+    #     logo_uri: "__stringMin0Max1092",
+    #     portal_content: {
+    #       description: "__stringMin0Max1024",
+    #       display_name: "__stringMin3Max255", # required
+    #       theme: { # required
+    #         custom_colors: { # required
+    #           accent_color: "__stringMin1Max16", # required
+    #           background_color: "__stringMin1Max16", # required
+    #           error_validation_color: "__stringMin1Max16", # required
+    #           header_color: "__stringMin1Max16", # required
+    #           navigation_color: "__stringMin1Max16", # required
+    #           text_color: "__stringMin1Max16", # required
+    #         },
+    #         logo_last_uploaded: Time.now
+    #       }
+    #     },
+    #     portal_id: "__string", # required
+    #     rum_app_monitor_name: "__stringMin0Max255"
+    #   }
+    #   options = {}
+    #   response = client.update_portal(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     authorization: {
+    #       cognito_config: {
+    #         app_client_id: "__stringMin1Max256", # required
+    #         user_pool_arn: "__stringMin20Max2048", # required
+    #         user_pool_domain: "__stringMin20Max2048", # required
+    #       },
+    #       none: {
+    #       }
+    #     },
+    #     endpoint_configuration: {
+    #       certificate_arn: "__stringMin10Max2048",
+    #       domain_name: "__stringMin3Max256",
+    #       portal_default_domain_name: "__stringMin3Max256", # required
+    #       portal_domain_hosted_zone_id: "__stringMin1Max64", # required
+    #     },
+    #     included_portal_product_arns: ["__stringMin20Max2048"],
+    #     last_modified: Time.now,
+    #     last_published: Time.now,
+    #     last_published_description: "__stringMin0Max1024",
+    #     portal_arn: "__stringMin20Max2048",
+    #     portal_content: {
+    #       description: "__stringMin0Max1024",
+    #       display_name: "__stringMin3Max255", # required
+    #       theme: { # required
+    #         custom_colors: { # required
+    #           accent_color: "__stringMin1Max16", # required
+    #           background_color: "__stringMin1Max16", # required
+    #           error_validation_color: "__stringMin1Max16", # required
+    #           header_color: "__stringMin1Max16", # required
+    #           navigation_color: "__stringMin1Max16", # required
+    #           text_color: "__stringMin1Max16", # required
+    #         },
+    #         logo_last_uploaded: Time.now
+    #       }
+    #     },
+    #     portal_id: "__stringMin10Max30PatternAZ09",
+    #     preview: {
+    #       preview_status: "PREVIEW_IN_PROGRESS" # One of: ["PREVIEW_IN_PROGRESS", "PREVIEW_FAILED", "PREVIEW_READY"], # required
+    #       preview_url: "__string",
+    #       status_exception: {
+    #         exception: "__stringMin1Max256",
+    #         message: "__stringMin1Max2048"
+    #       }
+    #     },
+    #     publish_status: "PUBLISHED" # One of: ["PUBLISHED", "PUBLISH_IN_PROGRESS", "PUBLISH_FAILED", "DISABLE_IN_PROGRESS", "DISABLE_FAILED", "DISABLED"],
+    #     rum_app_monitor_name: "__stringMin0Max255",
+    #     status_exception: {
+    #       exception: "__stringMin1Max256",
+    #       message: "__stringMin1Max2048"
+    #     },
+    #     tags: {
+    #       "__string" => "StringWithLengthBetween1And1600"
+    #     }
+    #   }
+    # @return [Types::UpdatePortalResponse]
+    def update_portal(params = {}, options = {})
+      request = build_request(:update_portal, params)
+      request.send_request(options)
+    end
+
+    # <p>Updates the portal product.</p>
+    # @param [Hash, Types::UpdatePortalProductRequest] params
+    # @option params [String] :description
+    #   <p>The description.</p>
+    # @option params [String] :display_name
+    #   <p>The displayName.</p>
+    # @option params [Types::DisplayOrder] :display_order
+    #   <p>The display order.</p>
+    # @option params [String] :portal_product_id
+    #   <p>The portal product identifier.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     description: "__stringMin0Max1024",
+    #     display_name: "__stringMin1Max255",
+    #     display_order: {
+    #       contents: [
+    #         {
+    #           product_rest_endpoint_page_arns: ["__stringMin20Max2048"], # required
+    #           section_name: "__string", # required
+    #         }
+    #       ],
+    #       overview_page_arn: "__stringMin20Max2048",
+    #       product_page_arns: ["__stringMin20Max2048"]
+    #     },
+    #     portal_product_id: "__string", # required
+    #   }
+    #   options = {}
+    #   response = client.update_portal_product(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     description: "__stringMin0Max1024",
+    #     display_name: "__stringMin1Max255",
+    #     display_order: {
+    #       contents: [
+    #         {
+    #           product_rest_endpoint_page_arns: ["__stringMin20Max2048"], # required
+    #           section_name: "__string", # required
+    #         }
+    #       ],
+    #       overview_page_arn: "__stringMin20Max2048",
+    #       product_page_arns: ["__stringMin20Max2048"]
+    #     },
+    #     last_modified: Time.now,
+    #     portal_product_arn: "__stringMin20Max2048",
+    #     portal_product_id: "__stringMin10Max30PatternAZ09",
+    #     tags: {
+    #       "__string" => "StringWithLengthBetween1And1600"
+    #     }
+    #   }
+    # @return [Types::UpdatePortalProductResponse]
+    def update_portal_product(params = {}, options = {})
+      request = build_request(:update_portal_product, params)
+      request.send_request(options)
+    end
+
+    # <p>Updates a product page of a portal product.</p>
+    # @param [Hash, Types::UpdateProductPageRequest] params
+    # @option params [Types::DisplayContent] :display_content
+    #   <p>The content of the product page.</p>
+    # @option params [String] :portal_product_id
+    #   <p>The portal product identifier.</p>
+    # @option params [String] :product_page_id
+    #   <p>The portal product identifier.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     display_content: {
+    #       body: "__stringMin1Max32768", # required
+    #       title: "__stringMin1Max255", # required
+    #     },
+    #     portal_product_id: "__string", # required
+    #     product_page_id: "__string", # required
+    #   }
+    #   options = {}
+    #   response = client.update_product_page(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     display_content: {
+    #       body: "__stringMin1Max32768", # required
+    #       title: "__stringMin1Max255", # required
+    #     },
+    #     last_modified: Time.now,
+    #     product_page_arn: "__stringMin20Max2048",
+    #     product_page_id: "__stringMin10Max30PatternAZ09"
+    #   }
+    # @return [Types::UpdateProductPageResponse]
+    def update_product_page(params = {}, options = {})
+      request = build_request(:update_product_page, params)
+      request.send_request(options)
+    end
+
+    # <p>Updates a product REST endpoint page.</p>
+    # @param [Hash, Types::UpdateProductRestEndpointPageRequest] params
+    # @option params [Types::EndpointDisplayContent] :display_content
+    #   <p>The display content.</p>
+    # @option params [String] :portal_product_id
+    #   <p>The portal product identifier.</p>
+    # @option params [String] :product_rest_endpoint_page_id
+    #   <p>The product REST endpoint identifier.</p>
+    # @option params [String] :try_it_state
+    #   <p>The try it state of a product REST endpoint page.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     display_content: {
+    #       none: {
+    #       },
+    #       overrides: {
+    #         body: "__stringMin1Max32768",
+    #         endpoint: "__stringMin1Max1024",
+    #         operation_name: "__stringMin1Max255"
+    #       }
+    #     },
+    #     portal_product_id: "__string", # required
+    #     product_rest_endpoint_page_id: "__string", # required
+    #     try_it_state: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #   }
+    #   options = {}
+    #   response = client.update_product_rest_endpoint_page(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     display_content: {
+    #       body: "__stringMin1Max32768",
+    #       endpoint: "__stringMin1Max1024", # required
+    #       operation_name: "__stringMin1Max255"
+    #     },
+    #     last_modified: Time.now,
+    #     product_rest_endpoint_page_arn: "__stringMin20Max2048",
+    #     product_rest_endpoint_page_id: "__stringMin10Max30PatternAZ09",
+    #     rest_endpoint_identifier: {
+    #       identifier_parts: {
+    #         method: "__stringMin1Max20", # required
+    #         path: "__stringMin1Max4096", # required
+    #         rest_api_id: "__stringMin1Max50", # required
+    #         stage: "__stringMin1Max128", # required
+    #       }
+    #     },
+    #     status: "AVAILABLE" # One of: ["AVAILABLE", "IN_PROGRESS", "FAILED"],
+    #     status_exception: {
+    #       exception: "__stringMin1Max256",
+    #       message: "__stringMin1Max2048"
+    #     },
+    #     try_it_state: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #   }
+    # @return [Types::UpdateProductRestEndpointPageResponse]
+    def update_product_rest_endpoint_page(params = {}, options = {})
+      request = build_request(:update_product_rest_endpoint_page, params)
       request.send_request(options)
     end
 

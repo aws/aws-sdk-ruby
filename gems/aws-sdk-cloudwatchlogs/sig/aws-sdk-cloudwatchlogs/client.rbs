@@ -53,12 +53,36 @@ module Aws::CloudWatchLogs
       ?resource_identifier: String
     ) -> _AssociateKmsKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateKmsKeyResponse
 
+    interface _AssociateSourceToS3TableIntegrationResponse
+      include Smithy::Client::_Response[Types::AssociateSourceToS3TableIntegrationResponse]
+      def identifier: () -> String?
+    end
+    def associate_source_to_s3_table_integration: (
+      ?integration_arn: String,
+      ?data_source: {
+        name: String,
+        type: String
+      }
+    ) -> _AssociateSourceToS3TableIntegrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateSourceToS3TableIntegrationResponse
+
     interface _CancelExportTaskResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
     end
     def cancel_export_task: (
       ?task_id: String
     ) -> _CancelExportTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelExportTaskResponse
+
+    interface _CancelImportTaskResponse
+      include Smithy::Client::_Response[Types::CancelImportTaskResponse]
+      def import_id: () -> String?
+      def import_statistics: () -> Types::ImportStatistics?
+      def import_status: () -> String?
+      def creation_time: () -> Integer?
+      def last_updated_time: () -> Integer?
+    end
+    def cancel_import_task: (
+      ?import_id: String
+    ) -> _CancelImportTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelImportTaskResponse
 
     interface _CreateDeliveryResponse
       include Smithy::Client::_Response[Types::CreateDeliveryResponse]
@@ -90,6 +114,21 @@ module Aws::CloudWatchLogs
       ?destination_prefix: String
     ) -> _CreateExportTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateExportTaskResponse
 
+    interface _CreateImportTaskResponse
+      include Smithy::Client::_Response[Types::CreateImportTaskResponse]
+      def import_id: () -> String?
+      def import_destination_arn: () -> String?
+      def creation_time: () -> Integer?
+    end
+    def create_import_task: (
+      ?import_source_arn: String,
+      ?import_role_arn: String,
+      ?import_filter: {
+        start_event_time: Integer,
+        end_event_time: untyped
+      }
+    ) -> _CreateImportTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateImportTaskResponse
+
     interface _CreateLogAnomalyDetectorResponse
       include Smithy::Client::_Response[Types::CreateLogAnomalyDetectorResponse]
       def anomaly_detector_arn: () -> String?
@@ -111,7 +150,8 @@ module Aws::CloudWatchLogs
       ?log_group_name: String,
       ?kms_key_id: String,
       ?tags: Hash[String, String],
-      ?log_group_class: String
+      ?log_group_class: String,
+      ?deletion_protection_enabled: bool
     ) -> _CreateLogGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLogGroupResponse
 
     interface _CreateLogStreamResponse
@@ -121,6 +161,57 @@ module Aws::CloudWatchLogs
       ?log_group_name: String,
       ?log_stream_name: String
     ) -> _CreateLogStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLogStreamResponse
+
+    interface _CreateLookupTableResponse
+      include Smithy::Client::_Response[Types::CreateLookupTableResponse]
+      def lookup_table_arn: () -> String?
+      def created_at: () -> Integer?
+    end
+    def create_lookup_table: (
+      ?lookup_table_name: String,
+      ?description: String,
+      ?table_body: String,
+      ?query_id: String,
+      ?kms_key_id: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateLookupTableResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLookupTableResponse
+
+    interface _CreateScheduledQueryResponse
+      include Smithy::Client::_Response[Types::CreateScheduledQueryResponse]
+      def scheduled_query_arn: () -> String?
+      def state: () -> String?
+    end
+    def create_scheduled_query: (
+      ?name: String,
+      ?description: String,
+      ?query_language: String,
+      ?query_string: String,
+      ?log_group_identifiers: Array[String],
+      ?schedule_expression: String,
+      ?timezone: String,
+      ?start_time_offset: Integer,
+      ?end_time_offset: Integer,
+      ?destination_configuration: {
+        s3_configuration: {
+          destination_identifier: String,
+          role_arn: String,
+          owner_account_id: String,
+          kms_key_id: String
+        },
+        lookup_table_configuration: {
+          table_name: String,
+          role_arn: untyped,
+          description: String,
+          kms_key_id: untyped,
+          tags: Hash[String, String]
+        }
+      },
+      ?schedule_start_time: Integer,
+      ?schedule_end_time: Integer,
+      ?execution_role_arn: String,
+      ?state: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateScheduledQueryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateScheduledQueryResponse
 
     interface _DeleteAccountPolicyResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
@@ -209,6 +300,13 @@ module Aws::CloudWatchLogs
       ?log_stream_name: String
     ) -> _DeleteLogStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteLogStreamResponse
 
+    interface _DeleteLookupTableResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_lookup_table: (
+      ?lookup_table_arn: String
+    ) -> _DeleteLookupTableResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteLookupTableResponse
+
     interface _DeleteMetricFilterResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
     end
@@ -241,6 +339,13 @@ module Aws::CloudWatchLogs
       ?log_group_name: String
     ) -> _DeleteRetentionPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRetentionPolicyResponse
 
+    interface _DeleteScheduledQueryResponse
+      include Smithy::Client::_Response[Types::DeleteScheduledQueryResponse]
+    end
+    def delete_scheduled_query: (
+      ?identifier: String
+    ) -> _DeleteScheduledQueryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteScheduledQueryResponse
+
     interface _DeleteSubscriptionFilterResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
     end
@@ -248,6 +353,14 @@ module Aws::CloudWatchLogs
       ?log_group_name: String,
       ?filter_name: String
     ) -> _DeleteSubscriptionFilterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSubscriptionFilterResponse
+
+    interface _DeleteSyslogConfigurationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_syslog_configuration: (
+      ?log_group_identifier: String,
+      ?vpc_endpoint_id: String
+    ) -> _DeleteSyslogConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSyslogConfigurationResponse
 
     interface _DeleteTransformerResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
@@ -342,8 +455,36 @@ module Aws::CloudWatchLogs
     end
     def describe_field_indexes: (
       ?log_group_identifiers: Array[String],
+      ?index_categories: Array[String],
       ?next_token: String
     ) -> _DescribeFieldIndexesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeFieldIndexesResponse
+
+    interface _DescribeImportTaskBatchesResponse
+      include Smithy::Client::_Response[Types::DescribeImportTaskBatchesResponse]
+      def import_source_arn: () -> String?
+      def import_id: () -> String?
+      def import_batches: () -> Array[Types::ImportBatch]?
+      def next_token: () -> String?
+    end
+    def describe_import_task_batches: (
+      ?import_id: String,
+      ?batch_import_status: Array[String],
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _DescribeImportTaskBatchesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeImportTaskBatchesResponse
+
+    interface _DescribeImportTasksResponse
+      include Smithy::Client::_Response[Types::DescribeImportTasksResponse]
+      def imports: () -> Array[Types::Import]?
+      def next_token: () -> String?
+    end
+    def describe_import_tasks: (
+      ?import_id: String,
+      ?import_status: String,
+      ?import_source_arn: String,
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _DescribeImportTasksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeImportTasksResponse
 
     interface _DescribeIndexPoliciesResponse
       include Smithy::Client::_Response[Types::DescribeIndexPoliciesResponse]
@@ -385,6 +526,17 @@ module Aws::CloudWatchLogs
       ?next_token: String,
       ?limit: Integer
     ) -> _DescribeLogStreamsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeLogStreamsResponse
+
+    interface _DescribeLookupTablesResponse
+      include Smithy::Client::_Response[Types::DescribeLookupTablesResponse]
+      def lookup_tables: () -> Array[Types::LookupTable]?
+      def next_token: () -> String?
+    end
+    def describe_lookup_tables: (
+      ?lookup_table_name_prefix: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeLookupTablesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeLookupTablesResponse
 
     interface _DescribeMetricFiltersResponse
       include Smithy::Client::_Response[Types::DescribeMetricFiltersResponse]
@@ -457,6 +609,14 @@ module Aws::CloudWatchLogs
       ?resource_identifier: String
     ) -> _DisassociateKmsKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateKmsKeyResponse
 
+    interface _DisassociateSourceFromS3TableIntegrationResponse
+      include Smithy::Client::_Response[Types::DisassociateSourceFromS3TableIntegrationResponse]
+      def identifier: () -> String?
+    end
+    def disassociate_source_from_s3_table_integration: (
+      ?identifier: String
+    ) -> _DisassociateSourceFromS3TableIntegrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateSourceFromS3TableIntegrationResponse
+
     interface _FilterLogEventsResponse
       include Smithy::Client::_Response[Types::FilterLogEventsResponse]
       def events: () -> Array[Types::FilteredLogEvent]?
@@ -473,6 +633,7 @@ module Aws::CloudWatchLogs
       ?filter_pattern: String,
       ?next_token: String,
       ?limit: Integer,
+      ?start_from_head: bool,
       ?interleaved: bool,
       ?unmask: bool
     ) -> _FilterLogEventsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _FilterLogEventsResponse
@@ -564,6 +725,15 @@ module Aws::CloudWatchLogs
       ?unmask: bool
     ) -> _GetLogEventsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLogEventsResponse
 
+    interface _GetLogFieldsResponse
+      include Smithy::Client::_Response[Types::GetLogFieldsResponse]
+      def log_fields: () -> Array[Types::LogFieldsListItem]?
+    end
+    def get_log_fields: (
+      ?data_source_name: String,
+      ?data_source_type: String
+    ) -> _GetLogFieldsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLogFieldsResponse
+
     interface _GetLogGroupFieldsResponse
       include Smithy::Client::_Response[Types::GetLogGroupFieldsResponse]
       def log_group_fields: () -> Array[Types::LogGroupField]?
@@ -592,6 +762,20 @@ module Aws::CloudWatchLogs
       ?unmask: bool
     ) -> _GetLogRecordResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLogRecordResponse
 
+    interface _GetLookupTableResponse
+      include Smithy::Client::_Response[Types::GetLookupTableResponse]
+      def lookup_table_arn: () -> String?
+      def lookup_table_name: () -> String?
+      def description: () -> String?
+      def table_body: () -> String?
+      def size_bytes: () -> Integer?
+      def last_updated_time: () -> Integer?
+      def kms_key_id: () -> String?
+    end
+    def get_lookup_table: (
+      ?lookup_table_arn: String
+    ) -> _GetLookupTableResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLookupTableResponse
+
     interface _GetQueryResultsResponse
       include Smithy::Client::_Response[Types::GetQueryResultsResponse]
       def query_language: () -> String?
@@ -599,10 +783,63 @@ module Aws::CloudWatchLogs
       def statistics: () -> Types::QueryStatistics?
       def status: () -> String?
       def encryption_key: () -> String?
+      def next_token: () -> String?
     end
     def get_query_results: (
-      ?query_id: String
+      ?query_id: String,
+      ?next_token: String,
+      ?max_items: Integer
     ) -> _GetQueryResultsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetQueryResultsResponse
+
+    interface _GetScheduledQueryResponse
+      include Smithy::Client::_Response[Types::GetScheduledQueryResponse]
+      def scheduled_query_arn: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def query_language: () -> String?
+      def query_string: () -> String?
+      def log_group_identifiers: () -> Array[String]?
+      def schedule_expression: () -> String?
+      def timezone: () -> String?
+      def start_time_offset: () -> Integer?
+      def end_time_offset: () -> Integer?
+      def destination_configuration: () -> Types::DestinationConfiguration?
+      def state: () -> String?
+      def schedule_type: () -> String?
+      def last_triggered_time: () -> Integer?
+      def last_execution_status: () -> String?
+      def schedule_start_time: () -> Integer?
+      def schedule_end_time: () -> Integer?
+      def execution_role_arn: () -> String?
+      def creation_time: () -> Integer?
+      def last_updated_time: () -> Integer?
+    end
+    def get_scheduled_query: (
+      ?identifier: String
+    ) -> _GetScheduledQueryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetScheduledQueryResponse
+
+    interface _GetScheduledQueryHistoryResponse
+      include Smithy::Client::_Response[Types::GetScheduledQueryHistoryResponse]
+      def name: () -> String?
+      def scheduled_query_arn: () -> String?
+      def trigger_history: () -> Array[Types::TriggerHistoryRecord]?
+      def next_token: () -> String?
+    end
+    def get_scheduled_query_history: (
+      ?identifier: String,
+      ?start_time: Integer,
+      ?end_time: Integer,
+      ?execution_statuses: Array[String],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetScheduledQueryHistoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetScheduledQueryHistoryResponse
+
+    interface _GetStorageTierPolicyResponse
+      include Smithy::Client::_Response[Types::GetStorageTierPolicyResponse]
+      def storage_tier: () -> String?
+      def last_updated_time: () -> Integer?
+    end
+    def get_storage_tier_policy: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetStorageTierPolicyResponse
 
     interface _GetTransformerResponse
       include Smithy::Client::_Response[Types::GetTransformerResponse]
@@ -614,6 +851,27 @@ module Aws::CloudWatchLogs
     def get_transformer: (
       ?log_group_identifier: String
     ) -> _GetTransformerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTransformerResponse
+
+    interface _ListAggregateLogGroupSummariesResponse
+      include Smithy::Client::_Response[Types::ListAggregateLogGroupSummariesResponse]
+      def aggregate_log_group_summaries: () -> Array[Types::AggregateLogGroupSummary]?
+      def next_token: () -> String?
+    end
+    def list_aggregate_log_group_summaries: (
+      ?account_identifiers: Array[String],
+      ?include_linked_accounts: bool,
+      ?log_group_class: String,
+      ?log_group_name_pattern: String,
+      ?data_sources: Array[
+        {
+          name: String,
+          type: String
+        }
+      ],
+      ?group_by: String,
+      ?next_token: String,
+      ?limit: Integer
+    ) -> _ListAggregateLogGroupSummariesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAggregateLogGroupSummariesResponse
 
     interface _ListAnomaliesResponse
       include Smithy::Client::_Response[Types::ListAnomaliesResponse]
@@ -659,7 +917,20 @@ module Aws::CloudWatchLogs
       ?include_linked_accounts: bool,
       ?account_identifiers: Array[String],
       ?next_token: String,
-      ?limit: Integer
+      ?limit: Integer,
+      ?data_sources: Array[
+        {
+          name: String,
+          type: String
+        }
+      ],
+      ?field_index_names: Array[String],
+      ?log_group_tags: Array[
+        {
+          key: String,
+          values: Array[String]
+        }
+      ]
     ) -> _ListLogGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListLogGroupsResponse
 
     interface _ListLogGroupsForQueryResponse
@@ -672,6 +943,41 @@ module Aws::CloudWatchLogs
       ?next_token: String,
       ?max_results: Integer
     ) -> _ListLogGroupsForQueryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListLogGroupsForQueryResponse
+
+    interface _ListScheduledQueriesResponse
+      include Smithy::Client::_Response[Types::ListScheduledQueriesResponse]
+      def next_token: () -> String?
+      def scheduled_queries: () -> Array[Types::ScheduledQuerySummary]?
+    end
+    def list_scheduled_queries: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?state: String,
+      ?schedule_type: String
+    ) -> _ListScheduledQueriesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListScheduledQueriesResponse
+
+    interface _ListSourcesForS3TableIntegrationResponse
+      include Smithy::Client::_Response[Types::ListSourcesForS3TableIntegrationResponse]
+      def sources: () -> Array[Types::S3TableIntegrationSource]?
+      def next_token: () -> String?
+    end
+    def list_sources_for_s3_table_integration: (
+      ?integration_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListSourcesForS3TableIntegrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSourcesForS3TableIntegrationResponse
+
+    interface _ListSyslogConfigurationsResponse
+      include Smithy::Client::_Response[Types::ListSyslogConfigurationsResponse]
+      def syslog_configurations: () -> Array[Types::SyslogConfiguration]?
+      def next_token: () -> String?
+    end
+    def list_syslog_configurations: (
+      ?log_group_identifier: String,
+      ?vpc_endpoint_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListSyslogConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSyslogConfigurationsResponse
 
     interface _ListTagsForResourceResponse
       include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
@@ -701,6 +1007,14 @@ module Aws::CloudWatchLogs
       ?selection_criteria: String
     ) -> _PutAccountPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutAccountPolicyResponse
 
+    interface _PutBearerTokenAuthenticationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_bearer_token_authentication: (
+      ?log_group_identifier: String,
+      ?bearer_token_authentication_enabled: bool
+    ) -> _PutBearerTokenAuthenticationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutBearerTokenAuthenticationResponse
+
     interface _PutDataProtectionPolicyResponse
       include Smithy::Client::_Response[Types::PutDataProtectionPolicyResponse]
       def log_group_identifier: () -> String?
@@ -723,6 +1037,7 @@ module Aws::CloudWatchLogs
         destination_resource_arn: String
       },
       ?delivery_destination_type: String,
+      ?role_arn: String,
       ?tags: Hash[String, String]
     ) -> _PutDeliveryDestinationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutDeliveryDestinationResponse
 
@@ -743,7 +1058,8 @@ module Aws::CloudWatchLogs
       ?name: String,
       ?resource_arn: String,
       ?log_type: String,
-      ?tags: Hash[String, String]
+      ?tags: Hash[String, String],
+      ?delivery_source_configuration: Hash[String, String]
     ) -> _PutDeliverySourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutDeliverySourceResponse
 
     interface _PutDestinationResponse
@@ -816,6 +1132,14 @@ module Aws::CloudWatchLogs
       }
     ) -> _PutLogEventsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutLogEventsResponse
 
+    interface _PutLogGroupDeletionProtectionResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_log_group_deletion_protection: (
+      ?log_group_identifier: String,
+      ?deletion_protection_enabled: bool
+    ) -> _PutLogGroupDeletionProtectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutLogGroupDeletionProtectionResponse
+
     interface _PutMetricFilterResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
     end
@@ -848,7 +1172,14 @@ module Aws::CloudWatchLogs
       ?query_definition_id: String,
       ?log_group_names: Array[String],
       ?query_string: String,
-      ?client_token: String
+      ?client_token: String,
+      ?parameters: Array[
+        {
+          name: String,
+          default_value: String,
+          description: String
+        }
+      ]
     ) -> _PutQueryDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutQueryDefinitionResponse
 
     interface _PutResourcePolicyResponse
@@ -871,6 +1202,15 @@ module Aws::CloudWatchLogs
       ?retention_in_days: Integer
     ) -> _PutRetentionPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutRetentionPolicyResponse
 
+    interface _PutStorageTierPolicyResponse
+      include Smithy::Client::_Response[Types::PutStorageTierPolicyResponse]
+      def storage_tier: () -> String?
+      def last_updated_time: () -> Integer?
+    end
+    def put_storage_tier_policy: (
+      ?storage_tier: String
+    ) -> _PutStorageTierPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutStorageTierPolicyResponse
+
     interface _PutSubscriptionFilterResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
     end
@@ -885,6 +1225,14 @@ module Aws::CloudWatchLogs
       ?field_selection_criteria: String,
       ?emit_system_fields: Array[String]
     ) -> _PutSubscriptionFilterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutSubscriptionFilterResponse
+
+    interface _PutSyslogConfigurationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_syslog_configuration: (
+      ?log_group_identifier: String,
+      ?vpc_endpoint_id: String
+    ) -> _PutSyslogConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutSyslogConfigurationResponse
 
     interface _PutTransformerResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
@@ -915,7 +1263,8 @@ module Aws::CloudWatchLogs
             quote_character: String,
             delimiter: String,
             columns: Array[String],
-            source: untyped
+            source: untyped,
+            destination: String
           },
           date_time_converter: {
             source: untyped,
@@ -958,7 +1307,7 @@ module Aws::CloudWatchLogs
           },
           parse_json: {
             source: untyped,
-            destination: String
+            destination: untyped
           },
           parse_key_value: {
             source: untyped,
@@ -975,7 +1324,8 @@ module Aws::CloudWatchLogs
           parse_to_ocsf: {
             source: untyped,
             event_source: String,
-            ocsf_version: String
+            ocsf_version: String,
+            mapping_version: String
           },
           parse_postgres: {
             source: untyped
@@ -1118,7 +1468,8 @@ module Aws::CloudWatchLogs
             quote_character: String,
             delimiter: String,
             columns: Array[String],
-            source: untyped
+            source: untyped,
+            destination: String
           },
           date_time_converter: {
             source: untyped,
@@ -1161,7 +1512,7 @@ module Aws::CloudWatchLogs
           },
           parse_json: {
             source: untyped,
-            destination: String
+            destination: untyped
           },
           parse_key_value: {
             source: untyped,
@@ -1178,7 +1529,8 @@ module Aws::CloudWatchLogs
           parse_to_ocsf: {
             source: untyped,
             event_source: String,
-            ocsf_version: String
+            ocsf_version: String,
+            mapping_version: String
           },
           parse_postgres: {
             source: untyped
@@ -1288,5 +1640,72 @@ module Aws::CloudWatchLogs
       ?anomaly_visibility_time: Integer,
       ?enabled: bool
     ) -> _UpdateLogAnomalyDetectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateLogAnomalyDetectorResponse
+
+    interface _UpdateLookupTableResponse
+      include Smithy::Client::_Response[Types::UpdateLookupTableResponse]
+      def lookup_table_arn: () -> String?
+      def last_updated_time: () -> Integer?
+    end
+    def update_lookup_table: (
+      ?lookup_table_arn: String,
+      ?description: String,
+      ?table_body: String,
+      ?query_id: String,
+      ?kms_key_id: String
+    ) -> _UpdateLookupTableResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateLookupTableResponse
+
+    interface _UpdateScheduledQueryResponse
+      include Smithy::Client::_Response[Types::UpdateScheduledQueryResponse]
+      def scheduled_query_arn: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def query_language: () -> String?
+      def query_string: () -> String?
+      def log_group_identifiers: () -> Array[String]?
+      def schedule_expression: () -> String?
+      def timezone: () -> String?
+      def start_time_offset: () -> Integer?
+      def end_time_offset: () -> Integer?
+      def destination_configuration: () -> Types::DestinationConfiguration?
+      def state: () -> String?
+      def schedule_type: () -> String?
+      def last_triggered_time: () -> Integer?
+      def last_execution_status: () -> String?
+      def schedule_start_time: () -> Integer?
+      def schedule_end_time: () -> Integer?
+      def execution_role_arn: () -> String?
+      def creation_time: () -> Integer?
+      def last_updated_time: () -> Integer?
+    end
+    def update_scheduled_query: (
+      ?identifier: String,
+      ?description: String,
+      ?query_language: String,
+      ?query_string: String,
+      ?log_group_identifiers: Array[String],
+      ?schedule_expression: String,
+      ?timezone: String,
+      ?start_time_offset: Integer,
+      ?end_time_offset: Integer,
+      ?destination_configuration: {
+        s3_configuration: {
+          destination_identifier: String,
+          role_arn: String,
+          owner_account_id: String,
+          kms_key_id: String
+        },
+        lookup_table_configuration: {
+          table_name: String,
+          role_arn: untyped,
+          description: String,
+          kms_key_id: untyped,
+          tags: Hash[String, String]
+        }
+      },
+      ?schedule_start_time: Integer,
+      ?schedule_end_time: Integer,
+      ?execution_role_arn: String,
+      ?state: String
+    ) -> _UpdateScheduledQueryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateScheduledQueryResponse
   end
 end

@@ -1,6 +1,28 @@
 module Aws::MarketplaceCatalog
   module Types
 
+    class AMISecurityFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delivery_option_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delivery_option_id: String?
+    end
+
+    class AMISecuritySummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delivery_option_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delivery_option_id: String?
+    end
+
     class AccessDeniedException
       include Smithy::Schema::Structure
 
@@ -126,6 +148,62 @@ module Aws::MarketplaceCatalog
       Public: String
       Restricted: String
       Draft: String
+    end
+
+    module AssessmentResult
+      PASS: String
+      FAIL: String
+    end
+
+    class AssessmentSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assessment_arn: String,
+        ?assessment_id: String,
+        ?framework_id: String,
+        ?assessment_target_summary: Types::AssessmentTargetSummary,
+        ?framework_summary: Types::FrameworkSummary,
+        ?assessment_result: String,
+        ?created_at: String,
+        ?expires_at: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assessment_arn: String?
+      attr_accessor assessment_id: String?
+      attr_accessor framework_id: String?
+      attr_accessor assessment_target_summary: Types::AssessmentTargetSummary?
+      attr_accessor framework_summary: Types::FrameworkSummary?
+      attr_accessor assessment_result: String?
+      attr_accessor created_at: String?
+      attr_accessor expires_at: String?
+    end
+
+    class AssessmentTargetFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entity_id: String,
+        ?change_set_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entity_id: String?
+      attr_accessor change_set_id: String?
+    end
+
+    class AssessmentTargetSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entity_id: String,
+        ?change_set_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entity_id: String?
+      attr_accessor change_set_id: String?
     end
 
     class BatchDescribeEntitiesRequest
@@ -336,6 +414,7 @@ module Aws::MarketplaceCatalog
       LastModifiedDate: String
       ProductTitle: String
       Visibility: String
+      CompatibleAWSServices: String
     end
 
     class ContainerProductSummary
@@ -380,6 +459,65 @@ module Aws::MarketplaceCatalog
       Public: String
       Restricted: String
       Draft: String
+    end
+
+    class ContainerSecurityFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delivery_option_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delivery_option_id: String?
+    end
+
+    class ContainerSecuritySummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delivery_option_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delivery_option_id: String?
+    end
+
+    class ControlAssessment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?control_id: String,
+        ?control_assessment_result: String,
+        ?errors: Array[Types::ControlError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor control_id: String?
+      attr_accessor control_assessment_result: String?
+      attr_accessor errors: Array[Types::ControlError]?
+    end
+
+    module ControlAssessmentResult
+      PASS: String
+      FAIL: String
+      NOT_EXECUTED: String
+      EXEMPTION_PASS: String
+    end
+
+    class ControlError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+        ?scope: Array[Types::ErrorScope],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+      attr_accessor scope: Array[Types::ErrorScope]?
     end
 
     class DataProductEntityIdFilter
@@ -517,6 +655,52 @@ module Aws::MarketplaceCatalog
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+    end
+
+    class DescribeAssessmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?assessment_identifier: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor assessment_identifier: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeAssessmentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assessment_arn: String,
+        ?assessment_id: String,
+        ?framework_id: String,
+        ?assessment_target_summary: Types::AssessmentTargetSummary,
+        ?framework_summary: Types::FrameworkSummary,
+        ?assessment_result: String,
+        ?created_at: String,
+        ?expires_at: String,
+        ?control_assessments: Array[Types::ControlAssessment],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assessment_arn: String?
+      attr_accessor assessment_id: String?
+      attr_accessor framework_id: String?
+      attr_accessor assessment_target_summary: Types::AssessmentTargetSummary?
+      attr_accessor framework_summary: Types::FrameworkSummary?
+      attr_accessor assessment_result: String?
+      attr_accessor created_at: String?
+      attr_accessor expires_at: String?
+      attr_accessor control_assessments: Array[Types::ControlAssessment]?
+      attr_accessor next_token: String?
     end
 
     class DescribeChangeSetRequest
@@ -657,6 +841,7 @@ module Aws::MarketplaceCatalog
         ?offer_summary: Types::OfferSummary,
         ?resale_authorization_summary: Types::ResaleAuthorizationSummary,
         ?machine_learning_product_summary: Types::MachineLearningProductSummary,
+        ?offer_set_summary: Types::OfferSetSummary,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -673,6 +858,7 @@ module Aws::MarketplaceCatalog
       attr_accessor offer_summary: Types::OfferSummary?
       attr_accessor resale_authorization_summary: Types::ResaleAuthorizationSummary?
       attr_accessor machine_learning_product_summary: Types::MachineLearningProductSummary?
+      attr_accessor offer_set_summary: Types::OfferSetSummary?
     end
 
     class EntityTypeFilters
@@ -686,6 +872,7 @@ module Aws::MarketplaceCatalog
         ?container_product_filters: Types::ContainerProductFilters,
         ?resale_authorization_filters: Types::ResaleAuthorizationFilters,
         ?machine_learning_product_filters: Types::MachineLearningProductFilters,
+        ?offer_set_filters: Types::OfferSetFilters,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -696,6 +883,7 @@ module Aws::MarketplaceCatalog
       attr_accessor container_product_filters: Types::ContainerProductFilters?
       attr_accessor resale_authorization_filters: Types::ResaleAuthorizationFilters?
       attr_accessor machine_learning_product_filters: Types::MachineLearningProductFilters?
+      attr_accessor offer_set_filters: Types::OfferSetFilters?
 
       class DataProductFilters < EntityTypeFilters
       end
@@ -710,6 +898,8 @@ module Aws::MarketplaceCatalog
       class ResaleAuthorizationFilters < EntityTypeFilters
       end
       class MachineLearningProductFilters < EntityTypeFilters
+      end
+      class OfferSetFilters < EntityTypeFilters
       end
       class Unknown < EntityTypeFilters
       end
@@ -726,6 +916,7 @@ module Aws::MarketplaceCatalog
         ?container_product_sort: Types::ContainerProductSort,
         ?resale_authorization_sort: Types::ResaleAuthorizationSort,
         ?machine_learning_product_sort: Types::MachineLearningProductSort,
+        ?offer_set_sort: Types::OfferSetSort,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -736,6 +927,7 @@ module Aws::MarketplaceCatalog
       attr_accessor container_product_sort: Types::ContainerProductSort?
       attr_accessor resale_authorization_sort: Types::ResaleAuthorizationSort?
       attr_accessor machine_learning_product_sort: Types::MachineLearningProductSort?
+      attr_accessor offer_set_sort: Types::OfferSetSort?
 
       class DataProductSort < EntityTypeSort
       end
@@ -750,6 +942,8 @@ module Aws::MarketplaceCatalog
       class ResaleAuthorizationSort < EntityTypeSort
       end
       class MachineLearningProductSort < EntityTypeSort
+      end
+      class OfferSetSort < EntityTypeSort
       end
       class Unknown < EntityTypeSort
       end
@@ -768,6 +962,19 @@ module Aws::MarketplaceCatalog
       attr_accessor error_message: String?
     end
 
+    class ErrorScope
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: String?
+    end
+
     module FailureCode
       ClientError: String
       ServerFault: String
@@ -784,6 +991,46 @@ module Aws::MarketplaceCatalog
 
       attr_accessor name: String?
       attr_accessor value_list: Array[String]?
+    end
+
+    class FrameworkFilters
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?ami_security_filters: Types::AMISecurityFilters,
+        ?container_security_filters: Types::ContainerSecurityFilters,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ami_security_filters: Types::AMISecurityFilters?
+      attr_accessor container_security_filters: Types::ContainerSecurityFilters?
+
+      class AMISecurityFilters < FrameworkFilters
+      end
+      class ContainerSecurityFilters < FrameworkFilters
+      end
+      class Unknown < FrameworkFilters
+      end
+    end
+
+    class FrameworkSummary
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?ami_security_summary: Types::AMISecuritySummary,
+        ?container_security_summary: Types::ContainerSecuritySummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ami_security_summary: Types::AMISecuritySummary?
+      attr_accessor container_security_summary: Types::ContainerSecuritySummary?
+
+      class AMISecuritySummary < FrameworkSummary
+      end
+      class ContainerSecuritySummary < FrameworkSummary
+      end
+      class Unknown < FrameworkSummary
+      end
     end
 
     class GetResourcePolicyRequest
@@ -822,6 +1069,40 @@ module Aws::MarketplaceCatalog
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    class ListAssessmentsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?framework_id: String,
+        ?assessment_target_filter: Types::AssessmentTargetFilter,
+        ?framework_filters: Types::FrameworkFilters,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor framework_id: String?
+      attr_accessor assessment_target_filter: Types::AssessmentTargetFilter?
+      attr_accessor framework_filters: Types::FrameworkFilters?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListAssessmentsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assessment_summary_list: Array[Types::AssessmentSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assessment_summary_list: Array[Types::AssessmentSummary]?
+      attr_accessor next_token: String?
     end
 
     class ListChangeSetsRequest
@@ -1071,6 +1352,22 @@ module Aws::MarketplaceCatalog
       attr_accessor wild_card_value: String?
     end
 
+    class OfferCreatedBySourceFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value_list: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value_list: Array[String]?
+    end
+
+    module OfferCreatedBySourceString
+      Seller: String
+      AwsMarketplace: String
+    end
+
     class OfferEntityIdFilter
       include Smithy::Schema::Structure
 
@@ -1096,6 +1393,10 @@ module Aws::MarketplaceCatalog
         ?state: Types::OfferStateFilter,
         ?targeting: Types::OfferTargetingFilter,
         ?last_modified_date: Types::OfferLastModifiedDateFilter,
+        ?offer_set_id: Types::OfferSetIdFilter,
+        ?target_agreement_id: Types::OfferTargetAgreementIdFilter,
+        ?target_agreement_intent: Types::OfferTargetAgreementIntentFilter,
+        ?created_by_source: Types::OfferCreatedBySourceFilter,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1109,6 +1410,10 @@ module Aws::MarketplaceCatalog
       attr_accessor state: Types::OfferStateFilter?
       attr_accessor targeting: Types::OfferTargetingFilter?
       attr_accessor last_modified_date: Types::OfferLastModifiedDateFilter?
+      attr_accessor offer_set_id: Types::OfferSetIdFilter?
+      attr_accessor target_agreement_id: Types::OfferTargetAgreementIdFilter?
+      attr_accessor target_agreement_intent: Types::OfferTargetAgreementIntentFilter?
+      attr_accessor created_by_source: Types::OfferCreatedBySourceFilter?
     end
 
     class OfferLastModifiedDateFilter
@@ -1194,6 +1499,189 @@ module Aws::MarketplaceCatalog
       attr_accessor value_list: Array[String]?
     end
 
+    class OfferSetAssociatedOfferIdsFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value_list: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value_list: Array[String]?
+    end
+
+    class OfferSetEntityIdFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value_list: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value_list: Array[String]?
+    end
+
+    class OfferSetFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entity_id: Types::OfferSetEntityIdFilter,
+        ?name: Types::OfferSetNameFilter,
+        ?state: Types::OfferSetStateFilter,
+        ?release_date: Types::OfferSetReleaseDateFilter,
+        ?associated_offer_ids: Types::OfferSetAssociatedOfferIdsFilter,
+        ?solution_id: Types::OfferSetSolutionIdFilter,
+        ?last_modified_date: Types::OfferSetLastModifiedDateFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entity_id: Types::OfferSetEntityIdFilter?
+      attr_accessor name: Types::OfferSetNameFilter?
+      attr_accessor state: Types::OfferSetStateFilter?
+      attr_accessor release_date: Types::OfferSetReleaseDateFilter?
+      attr_accessor associated_offer_ids: Types::OfferSetAssociatedOfferIdsFilter?
+      attr_accessor solution_id: Types::OfferSetSolutionIdFilter?
+      attr_accessor last_modified_date: Types::OfferSetLastModifiedDateFilter?
+    end
+
+    class OfferSetIdFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value_list: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value_list: Array[String]?
+    end
+
+    class OfferSetLastModifiedDateFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?date_range: Types::OfferSetLastModifiedDateFilterDateRange,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor date_range: Types::OfferSetLastModifiedDateFilterDateRange?
+    end
+
+    class OfferSetLastModifiedDateFilterDateRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?after_value: String,
+        ?before_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor after_value: String?
+      attr_accessor before_value: String?
+    end
+
+    class OfferSetNameFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value_list: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value_list: Array[String]?
+    end
+
+    class OfferSetReleaseDateFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?date_range: Types::OfferSetReleaseDateFilterDateRange,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor date_range: Types::OfferSetReleaseDateFilterDateRange?
+    end
+
+    class OfferSetReleaseDateFilterDateRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?after_value: String,
+        ?before_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor after_value: String?
+      attr_accessor before_value: String?
+    end
+
+    class OfferSetSolutionIdFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value_list: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value_list: Array[String]?
+    end
+
+    class OfferSetSort
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sort_by: String,
+        ?sort_order: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sort_by: String?
+      attr_accessor sort_order: String?
+    end
+
+    module OfferSetSortBy
+      Name: String
+      State: String
+      ReleaseDate: String
+      SolutionId: String
+      EntityId: String
+      LastModifiedDate: String
+    end
+
+    class OfferSetStateFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value_list: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value_list: Array[String]?
+    end
+
+    module OfferSetStateString
+      Draft: String
+      Released: String
+    end
+
+    class OfferSetSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?state: String,
+        ?release_date: String,
+        ?associated_offer_ids: Array[String],
+        ?solution_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor state: String?
+      attr_accessor release_date: String?
+      attr_accessor associated_offer_ids: Array[String]?
+      attr_accessor solution_id: String?
+    end
+
     class OfferSort
       include Smithy::Schema::Structure
 
@@ -1218,6 +1706,10 @@ module Aws::MarketplaceCatalog
       State: String
       Targeting: String
       LastModifiedDate: String
+      OfferSetId: String
+      TargetAgreementId: String
+      TargetAgreementIntent: String
+      CreatedBySource: String
     end
 
     class OfferStateFilter
@@ -1248,6 +1740,10 @@ module Aws::MarketplaceCatalog
         ?buyer_accounts: Array[String],
         ?state: String,
         ?targeting: Array[String],
+        ?offer_set_id: String,
+        ?target_agreement_id: String,
+        ?target_agreement_intent: String,
+        ?created_by_source: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1259,6 +1755,36 @@ module Aws::MarketplaceCatalog
       attr_accessor buyer_accounts: Array[String]?
       attr_accessor state: String?
       attr_accessor targeting: Array[String]?
+      attr_accessor offer_set_id: String?
+      attr_accessor target_agreement_id: String?
+      attr_accessor target_agreement_intent: String?
+      attr_accessor created_by_source: String?
+    end
+
+    class OfferTargetAgreementIdFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value_list: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value_list: Array[String]?
+    end
+
+    class OfferTargetAgreementIntentFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value_list: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value_list: Array[String]?
+    end
+
+    module OfferTargetAgreementIntentString
+      Renew: String
     end
 
     class OfferTargetingFilter
@@ -1386,6 +1912,9 @@ module Aws::MarketplaceCatalog
         ?status: Types::ResaleAuthorizationStatusFilter,
         ?offer_extended_status: Types::ResaleAuthorizationOfferExtendedStatusFilter,
         ?last_modified_date: Types::ResaleAuthorizationLastModifiedDateFilter,
+        ?reseller_role: Types::ResaleAuthorizationResellerRoleFilter,
+        ?source_authorization: Types::ResaleAuthorizationSourceAuthorizationFilter,
+        ?issuer_account_id: Types::ResaleAuthorizationIssuerAccountIdFilter,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1402,6 +1931,20 @@ module Aws::MarketplaceCatalog
       attr_accessor status: Types::ResaleAuthorizationStatusFilter?
       attr_accessor offer_extended_status: Types::ResaleAuthorizationOfferExtendedStatusFilter?
       attr_accessor last_modified_date: Types::ResaleAuthorizationLastModifiedDateFilter?
+      attr_accessor reseller_role: Types::ResaleAuthorizationResellerRoleFilter?
+      attr_accessor source_authorization: Types::ResaleAuthorizationSourceAuthorizationFilter?
+      attr_accessor issuer_account_id: Types::ResaleAuthorizationIssuerAccountIdFilter?
+    end
+
+    class ResaleAuthorizationIssuerAccountIdFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value_list: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value_list: Array[String]?
     end
 
     class ResaleAuthorizationLastModifiedDateFilter
@@ -1530,6 +2073,22 @@ module Aws::MarketplaceCatalog
       attr_accessor wild_card_value: String?
     end
 
+    class ResaleAuthorizationResellerRoleFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value_list: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value_list: Array[String]?
+    end
+
+    module ResaleAuthorizationResellerRoleString
+      ChannelPartner: String
+      Distributor: String
+    end
+
     class ResaleAuthorizationSort
       include Smithy::Schema::Structure
 
@@ -1557,6 +2116,20 @@ module Aws::MarketplaceCatalog
       CreatedDate: String
       AvailabilityEndDate: String
       LastModifiedDate: String
+      ResellerRole: String
+      SourceAuthorization: String
+      IssuerAccountId: String
+    end
+
+    class ResaleAuthorizationSourceAuthorizationFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value_list: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value_list: Array[String]?
     end
 
     class ResaleAuthorizationStatusFilter
@@ -1591,6 +2164,9 @@ module Aws::MarketplaceCatalog
         ?offer_extended_status: String,
         ?created_date: String,
         ?availability_end_date: String,
+        ?reseller_role: String,
+        ?source_authorization: String,
+        ?issuer_account_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1605,6 +2181,9 @@ module Aws::MarketplaceCatalog
       attr_accessor offer_extended_status: String?
       attr_accessor created_date: String?
       attr_accessor availability_end_date: String?
+      attr_accessor reseller_role: String?
+      attr_accessor source_authorization: String?
+      attr_accessor issuer_account_id: String?
     end
 
     class ResourceInUseException
@@ -1710,6 +2289,7 @@ module Aws::MarketplaceCatalog
       ProductTitle: String
       Visibility: String
       LastModifiedDate: String
+      DeliveryOptionTypes: String
     end
 
     class SaaSProductSummary
@@ -1892,10 +2472,40 @@ module Aws::MarketplaceCatalog
 
       def initialize: (
         ?message: String,
+        ?validation_exception_field_list: Array[Types::ValidationExceptionField],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+      attr_accessor validation_exception_field_list: Array[Types::ValidationExceptionField]?
+    end
+
+    class ValidationExceptionField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reason: String,
+        ?entity_type: String,
+        ?entity_id: String,
+        ?change_type: String,
+        ?field: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reason: String?
+      attr_accessor entity_type: String?
+      attr_accessor entity_id: String?
+      attr_accessor change_type: String?
+      attr_accessor field: String?
+      attr_accessor message: String?
+    end
+
+    module ValidationExceptionReason
+      UNKNOWN_OPERATION: String
+      CANNOT_PARSE: String
+      FIELD_VALIDATION_FAILED: String
+      OTHER: String
     end
   end
 end

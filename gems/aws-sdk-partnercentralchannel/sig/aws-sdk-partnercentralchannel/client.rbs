@@ -1,0 +1,336 @@
+module Aws::PartnerCentralChannel
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?account_id_endpoint_mode: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
+      ?connect_timeout: Numeric,
+      ?convert_params: bool,
+      ?credentials_provider: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::PartnerCentralChannel::EndpointProvider,
+      ?http_proxy: URI::HTTP | String,
+      ?http_wire_trace: bool,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?max_attempts: Integer,
+      ?profile: String,
+      ?protocol: Symbol | Object,
+      ?raise_response_errors: bool,
+      ?read_timeout: Numeric,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_mode: String,
+      ?retry_strategy: Object,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?ssl_ca_bundle: String,
+      ?ssl_ca_directory: String,
+      ?ssl_ca_store: OpenSSL::X509::Store,
+      ?ssl_verify_peer: bool,
+      ?stub_responses: bool,
+      ?transport: Smithy::Client::NetHTTP::Transport,
+      ?use_dualstack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AcceptChannelHandshakeResponse
+      include Smithy::Client::_Response[Types::AcceptChannelHandshakeResponse]
+      def channel_handshake_detail: () -> Types::AcceptChannelHandshakeDetail?
+    end
+    def accept_channel_handshake: (
+      ?catalog: String,
+      ?identifier: String
+    ) -> _AcceptChannelHandshakeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AcceptChannelHandshakeResponse
+
+    interface _CancelChannelHandshakeResponse
+      include Smithy::Client::_Response[Types::CancelChannelHandshakeResponse]
+      def channel_handshake_detail: () -> Types::CancelChannelHandshakeDetail?
+    end
+    def cancel_channel_handshake: (
+      ?catalog: String,
+      ?identifier: String
+    ) -> _CancelChannelHandshakeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelChannelHandshakeResponse
+
+    interface _CreateChannelHandshakeResponse
+      include Smithy::Client::_Response[Types::CreateChannelHandshakeResponse]
+      def channel_handshake_detail: () -> Types::CreateChannelHandshakeDetail?
+    end
+    def create_channel_handshake: (
+      ?handshake_type: String,
+      ?catalog: String,
+      ?associated_resource_identifier: String,
+      ?payload: {
+        start_service_period_payload: {
+          program_management_account_identifier: String,
+          note: String,
+          service_period_type: String,
+          minimum_notice_days: String,
+          end_date: Time
+        },
+        revoke_service_period_payload: {
+          program_management_account_identifier: untyped,
+          note: untyped
+        }
+      },
+      ?client_token: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateChannelHandshakeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateChannelHandshakeResponse
+
+    interface _CreateProgramManagementAccountResponse
+      include Smithy::Client::_Response[Types::CreateProgramManagementAccountResponse]
+      def program_management_account_detail: () -> Types::CreateProgramManagementAccountDetail?
+    end
+    def create_program_management_account: (
+      ?catalog: String,
+      ?program: String,
+      ?display_name: String,
+      ?account_id: String,
+      ?client_token: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateProgramManagementAccountResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateProgramManagementAccountResponse
+
+    interface _CreateRelationshipResponse
+      include Smithy::Client::_Response[Types::CreateRelationshipResponse]
+      def relationship_detail: () -> Types::CreateRelationshipDetail?
+    end
+    def create_relationship: (
+      ?catalog: String,
+      ?association_type: String,
+      ?program_management_account_identifier: String,
+      ?associated_account_id: String,
+      ?display_name: String,
+      ?resale_account_model: String,
+      ?sector: String,
+      ?client_token: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?requested_support_plan: {
+        resold_enterprise: {
+          coverage: String,
+          tam_location: String,
+          charge_account_id: String
+        },
+        partner_led_support: {
+          coverage: untyped,
+          provider: String,
+          tam_location: untyped
+        },
+        resold_unified_operations: {
+          coverage: untyped,
+          tam_location: untyped,
+          charge_account_id: untyped
+        }
+      }
+    ) -> _CreateRelationshipResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRelationshipResponse
+
+    interface _DeleteProgramManagementAccountResponse
+      include Smithy::Client::_Response[Types::DeleteProgramManagementAccountResponse]
+    end
+    def delete_program_management_account: (
+      ?catalog: String,
+      ?identifier: String,
+      ?client_token: String
+    ) -> _DeleteProgramManagementAccountResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteProgramManagementAccountResponse
+
+    interface _DeleteRelationshipResponse
+      include Smithy::Client::_Response[Types::DeleteRelationshipResponse]
+    end
+    def delete_relationship: (
+      ?catalog: String,
+      ?identifier: String,
+      ?program_management_account_identifier: String,
+      ?client_token: String
+    ) -> _DeleteRelationshipResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRelationshipResponse
+
+    interface _GetRelationshipResponse
+      include Smithy::Client::_Response[Types::GetRelationshipResponse]
+      def relationship_detail: () -> Types::RelationshipDetail?
+    end
+    def get_relationship: (
+      ?catalog: String,
+      ?program_management_account_identifier: String,
+      ?identifier: String
+    ) -> _GetRelationshipResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRelationshipResponse
+
+    interface _ListChannelHandshakesResponse
+      include Smithy::Client::_Response[Types::ListChannelHandshakesResponse]
+      def items: () -> Array[Types::ChannelHandshakeSummary]?
+      def next_token: () -> String?
+    end
+    def list_channel_handshakes: (
+      ?handshake_type: String,
+      ?catalog: String,
+      ?participant_type: String,
+      ?max_results: Integer,
+      ?statuses: Array[String],
+      ?associated_resource_identifiers: Array[String],
+      ?handshake_type_filters: {
+        start_service_period_type_filters: {
+          service_period_types: Array[String]
+        },
+        revoke_service_period_type_filters: {
+          service_period_types: untyped
+        },
+        program_management_account_type_filters: {
+          programs: Array[String]
+        }
+      },
+      ?handshake_type_sort: {
+        start_service_period_type_sort: {
+          sort_order: String,
+          sort_by: String
+        },
+        revoke_service_period_type_sort: {
+          sort_order: untyped,
+          sort_by: String
+        },
+        program_management_account_type_sort: {
+          sort_order: untyped,
+          sort_by: String
+        }
+      },
+      ?next_token: String
+    ) -> _ListChannelHandshakesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListChannelHandshakesResponse
+
+    interface _ListProgramManagementAccountsResponse
+      include Smithy::Client::_Response[Types::ListProgramManagementAccountsResponse]
+      def items: () -> Array[Types::ProgramManagementAccountSummary]?
+      def next_token: () -> String?
+    end
+    def list_program_management_accounts: (
+      ?catalog: String,
+      ?max_results: Integer,
+      ?display_names: Array[String],
+      ?programs: Array[String],
+      ?account_ids: Array[String],
+      ?statuses: Array[String],
+      ?sort: {
+        sort_order: String,
+        sort_by: String
+      },
+      ?next_token: String
+    ) -> _ListProgramManagementAccountsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListProgramManagementAccountsResponse
+
+    interface _ListRelationshipsResponse
+      include Smithy::Client::_Response[Types::ListRelationshipsResponse]
+      def items: () -> Array[Types::RelationshipSummary]?
+      def next_token: () -> String?
+    end
+    def list_relationships: (
+      ?catalog: String,
+      ?max_results: Integer,
+      ?associated_account_ids: Array[String],
+      ?association_types: Array[String],
+      ?display_names: Array[String],
+      ?program_management_account_identifiers: Array[String],
+      ?sort: {
+        sort_order: String,
+        sort_by: String
+      },
+      ?next_token: String
+    ) -> _ListRelationshipsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRelationshipsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _RejectChannelHandshakeResponse
+      include Smithy::Client::_Response[Types::RejectChannelHandshakeResponse]
+      def channel_handshake_detail: () -> Types::RejectChannelHandshakeDetail?
+    end
+    def reject_channel_handshake: (
+      ?catalog: String,
+      ?identifier: String
+    ) -> _RejectChannelHandshakeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RejectChannelHandshakeResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateProgramManagementAccountResponse
+      include Smithy::Client::_Response[Types::UpdateProgramManagementAccountResponse]
+      def program_management_account_detail: () -> Types::UpdateProgramManagementAccountDetail?
+    end
+    def update_program_management_account: (
+      ?catalog: String,
+      ?identifier: String,
+      ?revision: String,
+      ?display_name: String
+    ) -> _UpdateProgramManagementAccountResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateProgramManagementAccountResponse
+
+    interface _UpdateRelationshipResponse
+      include Smithy::Client::_Response[Types::UpdateRelationshipResponse]
+      def relationship_detail: () -> Types::UpdateRelationshipDetail?
+    end
+    def update_relationship: (
+      ?catalog: String,
+      ?identifier: String,
+      ?program_management_account_identifier: String,
+      ?revision: String,
+      ?display_name: String,
+      ?requested_support_plan: {
+        resold_enterprise: {
+          coverage: String,
+          tam_location: String,
+          charge_account_id: String
+        },
+        partner_led_support: {
+          coverage: untyped,
+          provider: String,
+          tam_location: untyped
+        },
+        resold_unified_operations: {
+          coverage: untyped,
+          tam_location: untyped,
+          charge_account_id: untyped
+        }
+      }
+    ) -> _UpdateRelationshipResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRelationshipResponse
+  end
+end

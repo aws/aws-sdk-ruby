@@ -19,6 +19,7 @@ module Aws::Route53Domains
     CheckDomainTransferabilityResponse: StructureShape
     City: StringShape
     Consent: StructureShape
+    ConsentPrice: FloatShape
     ContactDetail: StructureShape
     ContactName: StringShape
     ContactNumber: StringShape
@@ -75,6 +76,8 @@ module Aws::Route53Domains
     GetContactReachabilityStatusResponse: StructureShape
     GetDomainDetailRequest: StructureShape
     GetDomainDetailResponse: StructureShape
+    GetDomainPricesRequest: StructureShape
+    GetDomainPricesResponse: StructureShape
     GetDomainSuggestionsRequest: StructureShape
     GetDomainSuggestionsResponse: StructureShape
     GetOperationDetailRequest: StructureShape
@@ -115,6 +118,7 @@ module Aws::Route53Domains
     PageMaxItems: IntegerShape
     Password: StringShape
     Price: FloatShape
+    PriceType: EnumShape
     PriceWithCurrency: StructureShape
     PushDomainRequest: StructureShape
     ReachabilityStatus: EnumShape
@@ -140,6 +144,7 @@ module Aws::Route53Domains
     State: StringShape
     StatusFlag: EnumShape
     String: StringShape
+    TLDInMaintenance: StructureShape
     TLDRulesViolation: StructureShape
     Tag: StructureShape
     TagKey: StringShape

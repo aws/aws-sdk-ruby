@@ -29,7 +29,7 @@ module BuildTools
               'target' => 'com.amazonaws.rds#String',
               'traits' => {
                 'smithy.api#documentation' =>
-                  '<p>The source region of the snapshot. This is only needed when the shapshot ' \
+                  '<p>The source region of the snapshot. This is only needed when the snapshot ' \
                   'is encrypted and in a different region.</p>'
               }
             }

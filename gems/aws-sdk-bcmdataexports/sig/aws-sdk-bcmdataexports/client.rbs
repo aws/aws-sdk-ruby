@@ -62,6 +62,7 @@ module Aws::BCMDataExports
         destination_configurations: {
           s3_destination: {
             s3_bucket: untyped,
+            s3_bucket_owner: String,
             s3_prefix: untyped,
             s3_region: untyped,
             s3_output_configurations: {
@@ -206,6 +207,7 @@ module Aws::BCMDataExports
         destination_configurations: {
           s3_destination: {
             s3_bucket: untyped,
+            s3_bucket_owner: String,
             s3_prefix: untyped,
             s3_region: untyped,
             s3_output_configurations: {

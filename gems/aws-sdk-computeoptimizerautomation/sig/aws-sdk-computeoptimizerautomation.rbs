@@ -1,0 +1,5 @@
+  module Aws
+    module ComputeOptimizerAutomation
+      VERSION: String
+    end
+  end

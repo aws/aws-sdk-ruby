@@ -19,13 +19,15 @@ module Aws::GeoRoutes
     CountryCode3: StringShape
     CountryCodeList: ListShape
     CurrencyCode: StringShape
-    DayOfWeek: StringShape
+    DayOfWeek: EnumShape
     DimensionCentimeters: IntegerShape
     DistanceMeters: IntegerShape
     DistanceThresholdList: ListShape
     DurationSeconds: IntegerShape
-    GeometryFormat: StringShape
+    EnergyKilowattHours: FloatShape
+    GeometryFormat: EnumShape
     Heading: FloatShape
+    HexColor: StringShape
     IndexList: ListShape
     InternalServerException: StructureShape
     Isoline: StructureShape
@@ -42,13 +44,13 @@ module Aws::GeoRoutes
     IsolineConnectionGeometry: StructureShape
     IsolineConnectionList: ListShape
     IsolineDestinationOptions: StructureShape
-    IsolineEngineType: StringShape
+    IsolineEngineType: EnumShape
     IsolineGranularityOptions: StructureShape
-    IsolineHazardousCargoType: StringShape
+    IsolineHazardousCargoType: EnumShape
     IsolineHazardousCargoTypeList: ListShape
     IsolineList: ListShape
     IsolineMatchingOptions: StructureShape
-    IsolineOptimizationObjective: StringShape
+    IsolineOptimizationObjective: EnumShape
     IsolineOriginOptions: StructureShape
     IsolineScooterOptions: StructureShape
     IsolineShapeGeometry: StructureShape
@@ -57,12 +59,12 @@ module Aws::GeoRoutes
     IsolineThresholds: StructureShape
     IsolineTrafficOptions: StructureShape
     IsolineTrailerOptions: StructureShape
-    IsolineTravelMode: StringShape
+    IsolineTravelMode: EnumShape
     IsolineTravelModeOptions: StructureShape
     IsolineTruckOptions: StructureShape
-    IsolineTruckType: StringShape
+    IsolineTruckType: EnumShape
     IsolineVehicleLicensePlate: StructureShape
-    IsolineZoneCategory: StringShape
+    IsolineZoneCategory: EnumShape
     LanguageTag: StringShape
     LanguageTagList: ListShape
     LineString: ListShape
@@ -70,8 +72,8 @@ module Aws::GeoRoutes
     LinearRings: ListShape
     LocalizedString: StructureShape
     LocalizedStringList: ListShape
-    MatchingStrategy: StringShape
-    MeasurementSystem: StringShape
+    MatchingStrategy: EnumShape
+    MeasurementSystem: EnumShape
     OptimizeWaypointsRequest: StructureShape
     OptimizeWaypointsResponse: StructureShape
     Polyline: StringShape
@@ -80,10 +82,11 @@ module Aws::GeoRoutes
     PolylineRingList: ListShape
     Position: ListShape
     Position23: ListShape
-    RoadSnapHazardousCargoType: StringShape
+    PowerKilowatts: FloatShape
+    RoadSnapHazardousCargoType: EnumShape
     RoadSnapHazardousCargoTypeList: ListShape
     RoadSnapNotice: StructureShape
-    RoadSnapNoticeCode: StringShape
+    RoadSnapNoticeCode: EnumShape
     RoadSnapNoticeList: ListShape
     RoadSnapSnappedGeometry: StructureShape
     RoadSnapSnappedTracePoint: StructureShape
@@ -92,12 +95,20 @@ module Aws::GeoRoutes
     RoadSnapTracePointIndexList: ListShape
     RoadSnapTracePointList: ListShape
     RoadSnapTrailerOptions: StructureShape
-    RoadSnapTravelMode: StringShape
+    RoadSnapTravelMode: EnumShape
     RoadSnapTravelModeOptions: StructureShape
     RoadSnapTruckOptions: StructureShape
     RoundaboutAngle: FloatShape
     Route: StructureShape
+    RouteAccessPointDetails: StructureShape
+    RouteAccessibilityAttribute: EnumShape
+    RouteAccessibilityAttributeList: ListShape
+    RouteAccessibilityAvailability: EnumShape
+    RouteAccessibilityAvailabilityDetails: StructureShape
     RouteAllowOptions: StructureShape
+    RouteAttribution: StructureShape
+    RouteAttributionList: ListShape
+    RouteAttributionType: EnumShape
     RouteAvoidanceArea: StructureShape
     RouteAvoidanceAreaGeometry: StructureShape
     RouteAvoidanceAreaGeometryList: ListShape
@@ -106,29 +117,30 @@ module Aws::GeoRoutes
     RouteAvoidanceZoneCategory: StructureShape
     RouteAvoidanceZoneCategoryList: ListShape
     RouteCarOptions: StructureShape
+    RouteChargeStepDetails: StructureShape
     RouteContinueHighwayStepDetails: StructureShape
     RouteContinueStepDetails: StructureShape
     RouteDestinationOptions: StructureShape
-    RouteDirection: StringShape
+    RouteDirection: EnumShape
     RouteDriverOptions: StructureShape
     RouteDriverScheduleInterval: StructureShape
     RouteDriverScheduleIntervalList: ListShape
     RouteEmissionType: StructureShape
-    RouteEngineType: StringShape
+    RouteEngineType: EnumShape
     RouteEnterHighwayStepDetails: StructureShape
     RouteExclusionOptions: StructureShape
     RouteExitStepDetails: StructureShape
     RouteFerryAfterTravelStep: StructureShape
     RouteFerryAfterTravelStepList: ListShape
-    RouteFerryAfterTravelStepType: StringShape
+    RouteFerryAfterTravelStepType: EnumShape
     RouteFerryArrival: StructureShape
     RouteFerryBeforeTravelStep: StructureShape
     RouteFerryBeforeTravelStepList: ListShape
-    RouteFerryBeforeTravelStepType: StringShape
+    RouteFerryBeforeTravelStepType: EnumShape
     RouteFerryDeparture: StructureShape
     RouteFerryLegDetails: StructureShape
     RouteFerryNotice: StructureShape
-    RouteFerryNoticeCode: StringShape
+    RouteFerryNoticeCode: EnumShape
     RouteFerryNoticeList: ListShape
     RouteFerryOverviewSummary: StructureShape
     RouteFerryPlace: StructureShape
@@ -138,17 +150,25 @@ module Aws::GeoRoutes
     RouteFerryTravelOnlySummary: StructureShape
     RouteFerryTravelStep: StructureShape
     RouteFerryTravelStepList: ListShape
-    RouteFerryTravelStepType: StringShape
-    RouteHazardousCargoType: StringShape
+    RouteFerryTravelStepType: EnumShape
+    RouteHazardousCargoType: EnumShape
     RouteHazardousCargoTypeList: ListShape
+    RouteIntermodalEnabledLegs: EnumShape
+    RouteIntermodalEnabledLegsList: ListShape
+    RouteIntermodalOptions: StructureShape
+    RouteIntermodalPedestrianOptions: StructureShape
+    RouteIntermodalRentalOptions: StructureShape
+    RouteIntermodalTaxiOptions: StructureShape
+    RouteIntermodalTransitOptions: StructureShape
+    RouteIntermodalVehicleOptions: StructureShape
     RouteKeepStepDetails: StructureShape
     RouteLeg: StructureShape
-    RouteLegAdditionalFeature: StringShape
+    RouteLegAdditionalFeature: EnumShape
     RouteLegAdditionalFeatureList: ListShape
     RouteLegGeometry: StructureShape
     RouteLegList: ListShape
-    RouteLegTravelMode: StringShape
-    RouteLegType: StringShape
+    RouteLegTravelMode: EnumShape
+    RouteLegType: EnumShape
     RouteList: ListShape
     RouteMajorRoadLabel: StructureShape
     RouteMajorRoadLabelList: ListShape
@@ -169,9 +189,9 @@ module Aws::GeoRoutes
     RouteMatrixDestinationList: ListShape
     RouteMatrixDestinationOptions: StructureShape
     RouteMatrixEntry: StructureShape
-    RouteMatrixErrorCode: StringShape
+    RouteMatrixErrorCode: EnumShape
     RouteMatrixExclusionOptions: StructureShape
-    RouteMatrixHazardousCargoType: StringShape
+    RouteMatrixHazardousCargoType: EnumShape
     RouteMatrixHazardousCargoTypeList: ListShape
     RouteMatrixMatchingOptions: StructureShape
     RouteMatrixOrigin: StructureShape
@@ -182,76 +202,126 @@ module Aws::GeoRoutes
     RouteMatrixSideOfStreetOptions: StructureShape
     RouteMatrixTrafficOptions: StructureShape
     RouteMatrixTrailerOptions: StructureShape
-    RouteMatrixTravelMode: StringShape
+    RouteMatrixTravelMode: EnumShape
     RouteMatrixTravelModeOptions: StructureShape
     RouteMatrixTruckOptions: StructureShape
-    RouteMatrixTruckType: StringShape
+    RouteMatrixTruckType: EnumShape
     RouteMatrixVehicleLicensePlate: StructureShape
-    RouteMatrixZoneCategory: StringShape
+    RouteMatrixZoneCategory: EnumShape
     RouteNoticeDetailRange: StructureShape
-    RouteNoticeImpact: StringShape
+    RouteNoticeImpact: EnumShape
     RouteNumber: StructureShape
     RouteNumberList: ListShape
     RouteOriginOptions: StructureShape
     RoutePassThroughPlace: StructureShape
     RoutePassThroughWaypoint: StructureShape
     RoutePassThroughWaypointList: ListShape
+    RoutePedestrianAfterTravelStep: StructureShape
+    RoutePedestrianAfterTravelStepList: ListShape
+    RoutePedestrianAfterTravelStepType: EnumShape
     RoutePedestrianArrival: StructureShape
     RoutePedestrianDeparture: StructureShape
     RoutePedestrianLegDetails: StructureShape
     RoutePedestrianNotice: StructureShape
-    RoutePedestrianNoticeCode: StringShape
+    RoutePedestrianNoticeCode: EnumShape
     RoutePedestrianNoticeList: ListShape
     RoutePedestrianOptions: StructureShape
     RoutePedestrianOverviewSummary: StructureShape
     RoutePedestrianPlace: StructureShape
+    RoutePedestrianPlaceType: EnumShape
     RoutePedestrianSpan: StructureShape
     RoutePedestrianSpanList: ListShape
     RoutePedestrianSummary: StructureShape
     RoutePedestrianTravelOnlySummary: StructureShape
     RoutePedestrianTravelStep: StructureShape
     RoutePedestrianTravelStepList: ListShape
-    RoutePedestrianTravelStepType: StringShape
+    RoutePedestrianTravelStepType: EnumShape
     RouteRampStepDetails: StructureShape
+    RouteRentalAfterTravelStep: StructureShape
+    RouteRentalAfterTravelStepList: ListShape
+    RouteRentalAfterTravelStepType: EnumShape
+    RouteRentalAgency: StructureShape
+    RouteRentalArrival: StructureShape
+    RouteRentalBeforeTravelStep: StructureShape
+    RouteRentalBeforeTravelStepList: ListShape
+    RouteRentalBeforeTravelStepType: EnumShape
+    RouteRentalDeparture: StructureShape
+    RouteRentalLegDetails: StructureShape
+    RouteRentalMode: EnumShape
+    RouteRentalModeList: ListShape
+    RouteRentalOverviewSummary: StructureShape
+    RouteRentalPlace: StructureShape
+    RouteRentalPlaceType: EnumShape
+    RouteRentalSummary: StructureShape
+    RouteRentalTransportModeDetails: StructureShape
+    RouteRentalTravelOnlySummary: StructureShape
+    RouteRentalTravelStep: StructureShape
+    RouteRentalTravelStepList: ListShape
+    RouteRentalTravelStepType: EnumShape
     RouteResponseNotice: StructureShape
-    RouteResponseNoticeCode: StringShape
+    RouteResponseNoticeCode: EnumShape
     RouteResponseNoticeList: ListShape
     RouteRoad: StructureShape
-    RouteRoadType: StringShape
+    RouteRoadType: EnumShape
     RouteRoundaboutEnterStepDetails: StructureShape
     RouteRoundaboutExitStepDetails: StructureShape
     RouteRoundaboutPassStepDetails: StructureShape
     RouteScooterOptions: StructureShape
-    RouteSideOfStreet: StringShape
+    RouteSideOfStreet: EnumShape
     RouteSideOfStreetOptions: StructureShape
     RouteSignpost: StructureShape
     RouteSignpostLabel: StructureShape
     RouteSignpostLabelList: ListShape
-    RouteSpanAdditionalFeature: StringShape
+    RouteSpanAdditionalFeature: EnumShape
     RouteSpanAdditionalFeatureList: ListShape
-    RouteSpanCarAccessAttribute: StringShape
+    RouteSpanCarAccessAttribute: EnumShape
     RouteSpanCarAccessAttributeList: ListShape
     RouteSpanDynamicSpeedDetails: StructureShape
-    RouteSpanGateAttribute: StringShape
-    RouteSpanPedestrianAccessAttribute: StringShape
+    RouteSpanGateAttribute: EnumShape
+    RouteSpanPedestrianAccessAttribute: EnumShape
     RouteSpanPedestrianAccessAttributeList: ListShape
-    RouteSpanRailwayCrossingAttribute: StringShape
-    RouteSpanRoadAttribute: StringShape
+    RouteSpanRailwayCrossingAttribute: EnumShape
+    RouteSpanRoadAttribute: EnumShape
     RouteSpanRoadAttributeList: ListShape
-    RouteSpanScooterAccessAttribute: StringShape
+    RouteSpanScooterAccessAttribute: EnumShape
     RouteSpanScooterAccessAttributeList: ListShape
     RouteSpanSpeedLimitDetails: StructureShape
-    RouteSpanTruckAccessAttribute: StringShape
+    RouteSpanTruckAccessAttribute: EnumShape
     RouteSpanTruckAccessAttributeList: ListShape
-    RouteSteeringDirection: StringShape
+    RouteStationDetails: StructureShape
+    RouteSteeringDirection: EnumShape
     RouteSummary: StructureShape
+    RouteTaxiAfterTravelStep: StructureShape
+    RouteTaxiAfterTravelStepList: ListShape
+    RouteTaxiAfterTravelStepType: EnumShape
+    RouteTaxiAgency: StructureShape
+    RouteTaxiArrival: StructureShape
+    RouteTaxiBeforeTravelStep: StructureShape
+    RouteTaxiBeforeTravelStepList: ListShape
+    RouteTaxiBeforeTravelStepType: EnumShape
+    RouteTaxiDeparture: StructureShape
+    RouteTaxiLegDetails: StructureShape
+    RouteTaxiMode: EnumShape
+    RouteTaxiModeList: ListShape
+    RouteTaxiNotice: StructureShape
+    RouteTaxiNoticeCode: EnumShape
+    RouteTaxiNoticeList: ListShape
+    RouteTaxiOverviewSummary: StructureShape
+    RouteTaxiPlace: StructureShape
+    RouteTaxiPlaceType: EnumShape
+    RouteTaxiSummary: StructureShape
+    RouteTaxiTransportModeDetails: StructureShape
+    RouteTaxiTravelOnlySummary: StructureShape
+    RouteTaxiTravelStep: StructureShape
+    RouteTaxiTravelStepList: ListShape
+    RouteTaxiTravelStepType: EnumShape
     RouteToll: StructureShape
     RouteTollList: ListShape
     RouteTollOptions: StructureShape
     RouteTollPass: StructureShape
     RouteTollPassValidityPeriod: StructureShape
-    RouteTollPassValidityPeriodType: StringShape
-    RouteTollPaymentMethod: StringShape
+    RouteTollPassValidityPeriodType: EnumShape
+    RouteTollPaymentMethod: EnumShape
     RouteTollPaymentMethodList: ListShape
     RouteTollPaymentSite: StructureShape
     RouteTollPaymentSiteList: ListShape
@@ -263,55 +333,103 @@ module Aws::GeoRoutes
     RouteTollSummary: StructureShape
     RouteTollSystem: StructureShape
     RouteTollSystemList: ListShape
-    RouteTollVehicleCategory: StringShape
+    RouteTollVehicleCategory: EnumShape
     RouteTrafficOptions: StructureShape
     RouteTrailerOptions: StructureShape
+    RouteTransitAfterTravelStep: StructureShape
+    RouteTransitAfterTravelStepList: ListShape
+    RouteTransitAfterTravelStepType: EnumShape
+    RouteTransitAgency: StructureShape
+    RouteTransitArrival: StructureShape
+    RouteTransitBeforeTravelStep: StructureShape
+    RouteTransitBeforeTravelStepList: ListShape
+    RouteTransitBeforeTravelStepType: EnumShape
+    RouteTransitDeparture: StructureShape
+    RouteTransitIncident: StructureShape
+    RouteTransitIncidentEffect: EnumShape
+    RouteTransitIncidentList: ListShape
+    RouteTransitIncidentType: EnumShape
+    RouteTransitIntermediateStop: StructureShape
+    RouteTransitIntermediateStopAttribute: EnumShape
+    RouteTransitIntermediateStopAttributeList: ListShape
+    RouteTransitIntermediateStopList: ListShape
+    RouteTransitLegDetails: StructureShape
+    RouteTransitMode: EnumShape
+    RouteTransitModeList: ListShape
+    RouteTransitNextDeparture: StructureShape
+    RouteTransitNextDepartureList: ListShape
+    RouteTransitNotice: StructureShape
+    RouteTransitNoticeCode: EnumShape
+    RouteTransitNoticeList: ListShape
+    RouteTransitOptions: StructureShape
+    RouteTransitOverviewSummary: StructureShape
+    RouteTransitPedestrianOptions: StructureShape
+    RouteTransitPlace: StructureShape
+    RouteTransitPlaceType: EnumShape
+    RouteTransitSpan: StructureShape
+    RouteTransitSpanList: ListShape
+    RouteTransitSummary: StructureShape
+    RouteTransitTransportModeDetails: StructureShape
+    RouteTransitTravelOnlySummary: StructureShape
+    RouteTransitTravelStep: StructureShape
+    RouteTransitTravelStepList: ListShape
+    RouteTransitTravelStepType: EnumShape
+    RouteTransitTripStatus: EnumShape
     RouteTransponder: StructureShape
     RouteTransponderList: ListShape
-    RouteTravelMode: StringShape
+    RouteTravelMode: EnumShape
     RouteTravelModeOptions: StructureShape
-    RouteTravelStepType: StringShape
+    RouteTravelStepType: EnumShape
     RouteTruckOptions: StructureShape
-    RouteTruckType: StringShape
-    RouteTurnIntensity: StringShape
+    RouteTruckType: EnumShape
+    RouteTurnIntensity: EnumShape
     RouteTurnStepDetails: StructureShape
     RouteUTurnStepDetails: StructureShape
+    RouteVehicleAfterTravelStep: StructureShape
+    RouteVehicleAfterTravelStepList: ListShape
+    RouteVehicleAfterTravelStepType: EnumShape
     RouteVehicleArrival: StructureShape
     RouteVehicleDeparture: StructureShape
     RouteVehicleIncident: StructureShape
     RouteVehicleIncidentList: ListShape
-    RouteVehicleIncidentSeverity: StringShape
-    RouteVehicleIncidentType: StringShape
+    RouteVehicleIncidentSeverity: EnumShape
+    RouteVehicleIncidentType: EnumShape
     RouteVehicleLegDetails: StructureShape
     RouteVehicleLicensePlate: StructureShape
+    RouteVehicleMode: EnumShape
+    RouteVehicleModeList: ListShape
     RouteVehicleNotice: StructureShape
-    RouteVehicleNoticeCode: StringShape
+    RouteVehicleNoticeCode: EnumShape
     RouteVehicleNoticeDetail: StructureShape
     RouteVehicleNoticeDetailList: ListShape
     RouteVehicleNoticeList: ListShape
     RouteVehicleOverviewSummary: StructureShape
     RouteVehiclePlace: StructureShape
+    RouteVehiclePlaceType: EnumShape
     RouteVehicleSpan: StructureShape
     RouteVehicleSpanList: ListShape
     RouteVehicleSummary: StructureShape
     RouteVehicleTravelOnlySummary: StructureShape
     RouteVehicleTravelStep: StructureShape
     RouteVehicleTravelStepList: ListShape
-    RouteVehicleTravelStepType: StringShape
+    RouteVehicleTravelStepType: EnumShape
     RouteViolatedConstraints: StructureShape
     RouteWaypoint: StructureShape
     RouteWaypointList: ListShape
+    RouteWebLink: StructureShape
+    RouteWebLinkDeviceType: EnumShape
+    RouteWebLinkList: ListShape
     RouteWeightConstraint: StructureShape
-    RouteWeightConstraintType: StringShape
+    RouteWeightConstraintType: EnumShape
     RouteZone: StructureShape
-    RouteZoneCategory: StringShape
+    RouteZoneCategory: EnumShape
     RouteZoneList: ListShape
-    RoutingObjective: StringShape
+    RoutingObjective: EnumShape
     SensitiveBoolean: BooleanShape
     SensitiveDouble: FloatShape
     SensitiveInteger: IntegerShape
     SensitiveString: StringShape
-    SideOfStreetMatchingStrategy: StringShape
+    SideOfStreetMatchingStrategy: EnumShape
     SnapToRoadsRequest: StructureShape
     SnapToRoadsResponse: StructureShape
     SpeedKilometersPerHour: FloatShape
@@ -319,7 +437,7 @@ module Aws::GeoRoutes
     TimeOfDay: StringShape
     TimeThresholdList: ListShape
     TimestampWithTimezoneOffset: StringShape
-    TrafficUsage: StringShape
+    TrafficUsage: EnumShape
     TruckRoadType: StringShape
     TruckRoadTypeList: ListShape
     TunnelRestrictionCode: StringShape
@@ -327,7 +445,7 @@ module Aws::GeoRoutes
     ValidationException: StructureShape
     ValidationExceptionField: StructureShape
     ValidationExceptionFieldList: ListShape
-    ValidationExceptionReason: StringShape
+    ValidationExceptionReason: EnumShape
     WaypointId: StringShape
     WaypointIndex: IntegerShape
     WaypointOptimizationAccessHours: StructureShape
@@ -336,18 +454,19 @@ module Aws::GeoRoutes
     WaypointOptimizationAvoidanceAreaGeometry: StructureShape
     WaypointOptimizationAvoidanceAreaList: ListShape
     WaypointOptimizationAvoidanceOptions: StructureShape
-    WaypointOptimizationClusteringAlgorithm: StringShape
+    WaypointOptimizationClusteringAlgorithm: EnumShape
     WaypointOptimizationClusteringOptions: StructureShape
     WaypointOptimizationConnection: StructureShape
     WaypointOptimizationConnectionList: ListShape
-    WaypointOptimizationConstraint: StringShape
+    WaypointOptimizationConstraint: EnumShape
     WaypointOptimizationDestinationOptions: StructureShape
     WaypointOptimizationDriverOptions: StructureShape
+    WaypointOptimizationDrivingDistance: IntegerShape
     WaypointOptimizationDrivingDistanceOptions: StructureShape
     WaypointOptimizationExclusionOptions: StructureShape
     WaypointOptimizationFailedConstraint: StructureShape
     WaypointOptimizationFailedConstraintList: ListShape
-    WaypointOptimizationHazardousCargoType: StringShape
+    WaypointOptimizationHazardousCargoType: EnumShape
     WaypointOptimizationHazardousCargoTypeList: ListShape
     WaypointOptimizationImpedingWaypoint: StructureShape
     WaypointOptimizationImpedingWaypointList: ListShape
@@ -358,16 +477,16 @@ module Aws::GeoRoutes
     WaypointOptimizationRestCycleDurations: StructureShape
     WaypointOptimizationRestCycles: StructureShape
     WaypointOptimizationRestProfile: StructureShape
-    WaypointOptimizationSequencingObjective: StringShape
-    WaypointOptimizationServiceTimeTreatment: StringShape
+    WaypointOptimizationSequencingObjective: EnumShape
+    WaypointOptimizationServiceTimeTreatment: EnumShape
     WaypointOptimizationSideOfStreetOptions: StructureShape
     WaypointOptimizationTimeBreakdown: StructureShape
     WaypointOptimizationTrafficOptions: StructureShape
     WaypointOptimizationTrailerOptions: StructureShape
-    WaypointOptimizationTravelMode: StringShape
+    WaypointOptimizationTravelMode: EnumShape
     WaypointOptimizationTravelModeOptions: StructureShape
     WaypointOptimizationTruckOptions: StructureShape
-    WaypointOptimizationTruckType: StringShape
+    WaypointOptimizationTruckType: EnumShape
     WaypointOptimizationWaypoint: StructureShape
     WaypointOptimizationWaypointList: ListShape
     WeightKilograms: IntegerShape

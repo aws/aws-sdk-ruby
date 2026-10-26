@@ -9,6 +9,7 @@ module Aws::DynamoDB
       ?account_id_endpoint_mode: String,
       ?resource_arn: String,
       ?resource_arn_list: Array[String],
+      ?is_search_operation: bool,
     ) -> void | (?Hash[Symbol, untyped]) -> void
 
     attr_accessor region: String?
@@ -19,5 +20,6 @@ module Aws::DynamoDB
     attr_accessor account_id_endpoint_mode: String?
     attr_accessor resource_arn: String?
     attr_accessor resource_arn_list: Array[String]?
+    attr_accessor is_search_operation: bool?
   end
 end

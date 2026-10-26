@@ -11,6 +11,7 @@ module Aws::DataExchange
     ApiDescription: StringShape
     ApiGatewayApiAsset: StructureShape
     Arn: StringShape
+    AssetConfiguration: StructureShape
     AssetDestinationEntry: StructureShape
     AssetDetails: StructureShape
     AssetEntry: StructureShape
@@ -141,6 +142,7 @@ module Aws::DataExchange
     ListOfS3DataAccesses: ListShape
     ListOfSchemaChangeDetails: ListShape
     ListOfTableTagPolicyLFPermissions: ListShape
+    ListOfTag: ListShape
     ListOfString: ListShape
     ListReceivedDataGrantsRequest: StructureShape
     ListReceivedDataGrantsResponse: StructureShape
@@ -193,6 +195,7 @@ module Aws::DataExchange
     TableLFTagPolicy: StructureShape
     TableLFTagPolicyAndPermissions: StructureShape
     TableTagPolicyLFPermission: StringShape
+    Tag: StructureShape
     TagResourceInput: StructureShape
     ThrottlingException: StructureShape
     Timestamp: TimestampShape

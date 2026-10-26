@@ -44,6 +44,57 @@ module Aws::BedrockAgentCoreControl
       ?validate_params: bool,
     ) -> void | (?Hash[Symbol, untyped]) -> void
 
+    interface _AddDatasetExamplesResponse
+      include Smithy::Client::_Response[Types::AddDatasetExamplesResponse]
+      def dataset_arn: () -> String?
+      def dataset_id: () -> String?
+      def status: () -> String?
+      def added_count: () -> Integer?
+      def updated_at: () -> Time?
+      def example_ids: () -> Array[String]?
+    end
+    def add_dataset_examples: (
+      ?dataset_id: String,
+      ?client_token: String,
+      ?source: {
+        inline_examples: {
+          examples: Array[Smithy::Schema::document]
+        },
+        s3_source: {
+          s3_uri: String
+        }
+      }
+    ) -> _AddDatasetExamplesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddDatasetExamplesResponse
+
+    interface _BatchPutGatewayRateLimitsResponse
+      include Smithy::Client::_Response[Types::BatchPutGatewayRateLimitsResponse]
+      def rate_limits: () -> Array[Types::GatewayRateLimitDetail]?
+    end
+    def batch_put_gateway_rate_limits: (
+      ?gateway_identifier: String,
+      ?client_token: String,
+      ?rate_limits: Array[
+        {
+          rate_limit_id: String,
+          description: String,
+          dimension_keys: Array[String],
+          entries: Array[
+            {
+              dimensions: Hash[String, String],
+              requests: Array[
+                {
+                  rate: Float,
+                  period: String
+                }
+              ],
+              tokens: untyped,
+              connections: untyped
+            }
+          ]
+        }
+      ]
+    ) -> _BatchPutGatewayRateLimitsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchPutGatewayRateLimitsResponse
+
     interface _CreateAgentRuntimeResponse
       include Smithy::Client::_Response[Types::CreateAgentRuntimeResponse]
       def agent_runtime_arn: () -> String?
@@ -55,10 +106,20 @@ module Aws::BedrockAgentCoreControl
     end
     def create_agent_runtime: (
       ?agent_runtime_name: String,
-      ?description: String,
       ?agent_runtime_artifact: {
         container_configuration: {
           container_uri: String
+        },
+        code_configuration: {
+          code: {
+            s3: {
+              bucket: String,
+              prefix: untyped,
+              version_id: untyped
+            }
+          },
+          runtime: String,
+          entry_point: Array[String]
         }
       },
       ?role_arn: String,
@@ -66,25 +127,96 @@ module Aws::BedrockAgentCoreControl
         network_mode: String,
         network_mode_config: {
           security_groups: Array[String],
-          subnets: Array[String]
+          subnets: Array[String],
+          require_service_s3_endpoint: bool
         }
       },
-      ?protocol_configuration: {
-        server_protocol: String
-      },
       ?client_token: String,
-      ?environment_variables: Hash[String, String],
+      ?description: String,
       ?authorizer_configuration: {
         custom_jwt_authorizer: {
           discovery_url: String,
           allowed_audience: Array[String],
-          allowed_clients: Array[String]
+          allowed_clients: Array[String],
+          allowed_scopes: Array[String],
+          advertised_scope_mapping: Hash[String, String],
+          custom_claims: Array[
+            {
+              inbound_token_claim_name: String,
+              inbound_token_claim_value_type: String,
+              authorizing_claim_match_value: {
+                claim_match_value: {
+                  match_value_string: String,
+                  match_value_string_list: Array[String]
+                },
+                claim_match_operator: String
+              }
+            }
+          ],
+          private_endpoint: {
+            self_managed_lattice_resource: {
+              resource_configuration_identifier: String
+            },
+            managed_vpc_resource: {
+              vpc_identifier: String,
+              subnet_ids: Array[String],
+              endpoint_ip_address_type: String,
+              security_group_ids: Array[String],
+              tags: Hash[String, String],
+              routing_domain: String
+            }
+          },
+          private_endpoint_overrides: Array[
+            {
+              domain: String,
+              private_endpoint: untyped
+            }
+          ],
+          allowed_workload_configuration: {
+            hosting_environments: Array[
+              {
+                arn: String
+              }
+            ],
+            workload_identities: Array[String]
+          }
         }
       },
       ?request_header_configuration: {
         request_header_allowlist: Array[String]
       },
-      ?tags: Hash[String, String]
+      ?protocol_configuration: {
+        server_protocol: String
+      },
+      ?lifecycle_configuration: {
+        idle_runtime_session_timeout: Integer,
+        max_lifetime: untyped
+      },
+      ?environment_variables: Hash[String, String],
+      ?filesystem_configurations: Array[
+        {
+          session_storage: {
+            mount_path: String
+          },
+          s3_files_access_point: {
+            access_point_arn: String,
+            mount_path: untyped
+          },
+          efs_access_point: {
+            access_point_arn: String,
+            mount_path: untyped
+          },
+          capacity_provider_volume: {
+            volume_name: String,
+            mount_path: untyped
+          }
+        }
+      ],
+      ?capacity_provider_configuration: {
+        capacity_provider_arn: String
+      },
+      ?tags: Hash[String, String],
+      ?platform_version: String
     ) -> _CreateAgentRuntimeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAgentRuntimeResponse
 
     interface _CreateAgentRuntimeEndpointResponse
@@ -92,6 +224,8 @@ module Aws::BedrockAgentCoreControl
       def target_version: () -> String?
       def agent_runtime_endpoint_arn: () -> String?
       def agent_runtime_arn: () -> String?
+      def agent_runtime_id: () -> String?
+      def endpoint_name: () -> String?
       def status: () -> String?
       def created_at: () -> Time?
     end
@@ -107,12 +241,20 @@ module Aws::BedrockAgentCoreControl
     interface _CreateApiKeyCredentialProviderResponse
       include Smithy::Client::_Response[Types::CreateApiKeyCredentialProviderResponse]
       def api_key_secret_arn: () -> Types::Secret?
+      def api_key_secret_json_key: () -> String?
+      def api_key_secret_source: () -> String?
       def name: () -> String?
       def credential_provider_arn: () -> String?
     end
     def create_api_key_credential_provider: (
       ?name: String,
-      ?api_key: String
+      ?api_key: String,
+      ?api_key_secret_config: {
+        secret_id: String,
+        json_key: String
+      },
+      ?api_key_secret_source: String,
+      ?tags: Hash[String, String]
     ) -> _CreateApiKeyCredentialProviderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateApiKeyCredentialProviderResponse
 
     interface _CreateBrowserResponse
@@ -130,19 +272,165 @@ module Aws::BedrockAgentCoreControl
         network_mode: String,
         vpc_config: {
           security_groups: Array[String],
-          subnets: Array[String]
+          subnets: Array[String],
+          require_service_s3_endpoint: bool
         }
       },
       ?recording: {
         enabled: bool,
         s3_location: {
           bucket: String,
-          prefix: untyped
+          prefix: untyped,
+          version_id: untyped
         }
       },
+      ?browser_signing: {
+        enabled: bool
+      },
+      ?enterprise_policies: Array[
+        {
+          location: {
+            s3: {
+              bucket: String,
+              prefix: untyped,
+              version_id: untyped
+            }
+          },
+          type: String
+        }
+      ],
+      ?certificates: Array[
+        {
+          location: {
+            secrets_manager: {
+              secret_arn: String
+            }
+          }
+        }
+      ],
+      ?filesystem_configurations: Array[
+        {
+          s3_files_configuration: {
+            access_point_arn: String,
+            mount_path: String,
+            file_system_arn: String
+          },
+          efs_configuration: {
+            access_point_arn: String,
+            mount_path: untyped,
+            file_system_arn: String
+          }
+        }
+      ],
       ?client_token: String,
       ?tags: Hash[String, String]
     ) -> _CreateBrowserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateBrowserResponse
+
+    interface _CreateBrowserProfileResponse
+      include Smithy::Client::_Response[Types::CreateBrowserProfileResponse]
+      def profile_id: () -> String?
+      def profile_arn: () -> String?
+      def created_at: () -> Time?
+      def status: () -> String?
+    end
+    def create_browser_profile: (
+      ?name: String,
+      ?description: String,
+      ?client_token: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateBrowserProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateBrowserProfileResponse
+
+    interface _CreateCapacityProviderResponse
+      include Smithy::Client::_Response[Types::CreateCapacityProviderOutput]
+      def capacity_provider_id: () -> String?
+      def capacity_provider_arn: () -> String?
+      def name: () -> String?
+      def status: () -> String?
+    end
+    def create_capacity_provider: (
+      ?name: String,
+      ?description: String,
+      ?permissions_configuration: {
+        capacity_provider_operator_role_arn: String
+      },
+      ?client_token: String,
+      ?tags: Hash[String, String],
+      ?compute_configuration: {
+        ec2_configuration: {
+          launch_template_source: {
+            launch_parameters: {
+              operating_system: String,
+              instance_requirements: {
+                allowed_instance_types: Array[String]
+              },
+              ephemeral_volumes: Array[
+                {
+                  device_name: String,
+                  virtual_name: String,
+                  ebs: {
+                    volume_type: String,
+                    iops: Integer,
+                    throughput: Integer,
+                    encrypted: bool,
+                    kms_key_id: String,
+                    snapshot_id: String,
+                    volume_size: Integer,
+                    volume_initialization_rate: Integer,
+                    ebs_card_index: Integer
+                  }
+                }
+              ],
+              monitoring: String,
+              license_specifications: Array[
+                {
+                  license_configuration_arn: String
+                }
+              ],
+              capacity_reservation_specification: {
+                capacity_reservation_preference: String,
+                capacity_reservation_target: {
+                  capacity_reservation_id: String,
+                  capacity_reservation_resource_group_arn: String
+                }
+              },
+              ssh_key_name: String,
+              instance_profile_arn: String,
+              propagated_tags: Hash[String, String]
+            }
+          },
+          vpc_configuration: {
+            subnets: Array[String],
+            security_groups: Array[String]
+          },
+          volumes: Array[
+            {
+              ebs_configuration: {
+                name: String,
+                size_gi_b: untyped,
+                volume_type: untyped,
+                iops: untyped,
+                throughput: untyped,
+                encrypted: untyped,
+                kms_key_id: untyped,
+                snapshot_id: untyped
+              }
+            }
+          ],
+          lifecycle_configuration: {
+            idle_instance_timeout: Integer,
+            max_lifetime: untyped
+          },
+          root_volume: {
+            volume_type: untyped,
+            iops: untyped,
+            throughput: untyped,
+            encrypted: untyped,
+            kms_key_id: untyped,
+            free_space_gi_b: untyped
+          }
+        }
+      }
+    ) -> _CreateCapacityProviderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCapacityProviderResponse
 
     interface _CreateCodeInterpreterResponse
       include Smithy::Client::_Response[Types::CreateCodeInterpreterResponse]
@@ -159,12 +447,199 @@ module Aws::BedrockAgentCoreControl
         network_mode: String,
         vpc_config: {
           security_groups: Array[String],
-          subnets: Array[String]
+          subnets: Array[String],
+          require_service_s3_endpoint: bool
         }
       },
+      ?certificates: Array[
+        {
+          location: {
+            secrets_manager: {
+              secret_arn: String
+            }
+          }
+        }
+      ],
+      ?filesystem_configurations: Array[
+        {
+          s3_files_configuration: {
+            access_point_arn: String,
+            mount_path: String,
+            file_system_arn: String
+          },
+          efs_configuration: {
+            access_point_arn: String,
+            mount_path: untyped,
+            file_system_arn: String
+          }
+        }
+      ],
       ?client_token: String,
       ?tags: Hash[String, String]
     ) -> _CreateCodeInterpreterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCodeInterpreterResponse
+
+    interface _CreateConfigurationBundleResponse
+      include Smithy::Client::_Response[Types::CreateConfigurationBundleResponse]
+      def bundle_arn: () -> String?
+      def bundle_id: () -> String?
+      def version_id: () -> String?
+      def created_at: () -> Time?
+    end
+    def create_configuration_bundle: (
+      ?client_token: String,
+      ?bundle_name: String,
+      ?description: String,
+      ?components: Hash[String,
+        {
+          configuration: Smithy::Schema::document
+        }
+      ],
+      ?branch_name: String,
+      ?commit_message: String,
+      ?created_by: {
+        name: String,
+        arn: untyped
+      },
+      ?kms_key_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateConfigurationBundleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateConfigurationBundleResponse
+
+    interface _CreateConsentPortalResponse
+      include Smithy::Client::_Response[Types::CreateConsentPortalResponse]
+      def sources: () -> Array[Types::ConsentPortalSource]?
+      def consent_portal_arn: () -> String?
+      def consent_portal_id: () -> String?
+      def created_at: () -> Time?
+      def description: () -> String?
+      def execution_role_arn: () -> String?
+      def idp_config: () -> Types::ConsentPortalIdpConfig?
+      def name: () -> String?
+      def portal_url: () -> String?
+      def status: () -> String?
+      def status_reason: () -> String?
+      def updated_at: () -> Time?
+    end
+    def create_consent_portal: (
+      ?execution_role_arn: String,
+      ?idp_config: {
+        credential_provider_arn: String,
+        scopes: Array[String],
+        audience: String
+      },
+      ?name: String,
+      ?sources: Array[
+        {
+          identifier: String,
+          type: String
+        }
+      ],
+      ?description: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateConsentPortalResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateConsentPortalResponse
+
+    interface _CreateDatasetResponse
+      include Smithy::Client::_Response[Types::CreateDatasetResponse]
+      def dataset_arn: () -> String?
+      def dataset_id: () -> String?
+      def status: () -> String?
+      def created_at: () -> Time?
+    end
+    def create_dataset: (
+      ?client_token: String,
+      ?dataset_name: String,
+      ?description: String,
+      ?source: {
+        inline_examples: {
+          examples: Array[Smithy::Schema::document]
+        },
+        s3_source: {
+          s3_uri: String
+        }
+      },
+      ?schema_type: String,
+      ?kms_key_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateDatasetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDatasetResponse
+
+    interface _CreateDatasetVersionResponse
+      include Smithy::Client::_Response[Types::CreateDatasetVersionResponse]
+      def dataset_arn: () -> String?
+      def dataset_id: () -> String?
+      def status: () -> String?
+      def dataset_version: () -> String?
+      def created_at: () -> Time?
+    end
+    def create_dataset_version: (
+      ?dataset_id: String,
+      ?client_token: String
+    ) -> _CreateDatasetVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDatasetVersionResponse
+
+    interface _CreateEvaluatorResponse
+      include Smithy::Client::_Response[Types::CreateEvaluatorResponse]
+      def evaluator_arn: () -> String?
+      def evaluator_id: () -> String?
+      def created_at: () -> Time?
+      def status: () -> String?
+    end
+    def create_evaluator: (
+      ?client_token: String,
+      ?evaluator_name: String,
+      ?description: String,
+      ?evaluator_config: {
+        llm_as_a_judge: {
+          instructions: String,
+          rating_scale: {
+            numerical: Array[
+              {
+                definition: String,
+                value: Float,
+                label: untyped
+              }
+            ],
+            categorical: Array[
+              {
+                definition: untyped,
+                label: untyped
+              }
+            ]
+          },
+          model_config: {
+            bedrock_evaluator_model_config: {
+              model_id: String,
+              inference_config: {
+                max_tokens: Integer,
+                temperature: Float,
+                top_p: untyped,
+                stop_sequences: Array[String]
+              },
+              additional_model_request_fields: Smithy::Schema::document
+            },
+            responses_evaluator_model_config: {
+              model_id: untyped,
+              max_output_tokens: untyped,
+              temperature: untyped,
+              top_p: untyped,
+              reasoning: {
+                effort: untyped
+              }
+            }
+          }
+        },
+        code_based: {
+          lambda_config: {
+            lambda_arn: String,
+            lambda_timeout_in_seconds: untyped
+          }
+        },
+        derived: {
+          base_evaluator_id: String,
+          model_config: untyped
+        }
+      },
+      ?level: String,
+      ?kms_key_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateEvaluatorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateEvaluatorResponse
 
     interface _CreateGatewayResponse
       include Smithy::Client::_Response[Types::CreateGatewayResponse]
@@ -183,8 +658,13 @@ module Aws::BedrockAgentCoreControl
       def authorizer_type: () -> String?
       def authorizer_configuration: () -> Types::AuthorizerConfiguration?
       def kms_key_arn: () -> String?
+      def custom_transform_configuration: () -> Types::CustomTransformConfiguration?
+      def interceptor_configurations: () -> Array[Types::GatewayInterceptorConfiguration]?
+      def policy_engine_configuration: () -> Types::GatewayPolicyEngineConfiguration?
       def workload_identity_details: () -> Types::WorkloadIdentityDetails?
       def exception_level: () -> String?
+      def web_acl_arn: () -> String?
+      def waf_configuration: () -> Types::WafConfiguration?
     end
     def create_gateway: (
       ?name: String,
@@ -196,7 +676,14 @@ module Aws::BedrockAgentCoreControl
         mcp: {
           supported_versions: Array[String],
           instructions: String,
-          search_type: String
+          search_type: String,
+          session_configuration: {
+            session_timeout_in_seconds: Integer
+          },
+          streaming_configuration: {
+            enable_response_streaming: bool
+          },
+          disable_mcp_list_tools_pagination: untyped
         }
       },
       ?authorizer_type: String,
@@ -204,13 +691,187 @@ module Aws::BedrockAgentCoreControl
         custom_jwt_authorizer: {
           discovery_url: String,
           allowed_audience: Array[String],
-          allowed_clients: Array[String]
+          allowed_clients: Array[String],
+          allowed_scopes: Array[String],
+          advertised_scope_mapping: Hash[String, String],
+          custom_claims: Array[
+            {
+              inbound_token_claim_name: String,
+              inbound_token_claim_value_type: String,
+              authorizing_claim_match_value: {
+                claim_match_value: {
+                  match_value_string: String,
+                  match_value_string_list: Array[String]
+                },
+                claim_match_operator: String
+              }
+            }
+          ],
+          private_endpoint: {
+            self_managed_lattice_resource: {
+              resource_configuration_identifier: String
+            },
+            managed_vpc_resource: {
+              vpc_identifier: String,
+              subnet_ids: Array[String],
+              endpoint_ip_address_type: String,
+              security_group_ids: Array[String],
+              tags: Hash[String, String],
+              routing_domain: String
+            }
+          },
+          private_endpoint_overrides: Array[
+            {
+              domain: String,
+              private_endpoint: untyped
+            }
+          ],
+          allowed_workload_configuration: {
+            hosting_environments: Array[
+              {
+                arn: String
+              }
+            ],
+            workload_identities: Array[String]
+          }
         }
       },
       ?kms_key_arn: String,
+      ?interceptor_configurations: Array[
+        {
+          interceptor: {
+            lambda: {
+              arn: String
+            }
+          },
+          interception_points: Array[String],
+          input_configuration: {
+            pass_request_headers: bool,
+            payload_filter: {
+              exclude: Array[
+                {
+                  field: String
+                }
+              ]
+            }
+          }
+        }
+      ],
+      ?policy_engine_configuration: {
+        arn: String,
+        mode: String
+      },
       ?exception_level: String,
       ?tags: Hash[String, String]
     ) -> _CreateGatewayResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateGatewayResponse
+
+    interface _CreateGatewayRateLimitResponse
+      include Smithy::Client::_Response[Types::CreateGatewayRateLimitResponse]
+      def rate_limit_id: () -> String?
+      def gateway_identifier: () -> String?
+      def description: () -> String?
+      def dimension_keys: () -> Array[String]?
+      def entries: () -> Array[Types::LimitEntry]?
+      def status: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+    end
+    def create_gateway_rate_limit: (
+      ?gateway_identifier: String,
+      ?client_token: String,
+      ?rate_limit_id: String,
+      ?description: String,
+      ?dimension_keys: Array[String],
+      ?entries: Array[
+        {
+          dimensions: Hash[String, String],
+          requests: Array[
+            {
+              rate: Float,
+              period: String
+            }
+          ],
+          tokens: untyped,
+          connections: untyped
+        }
+      ]
+    ) -> _CreateGatewayRateLimitResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateGatewayRateLimitResponse
+
+    interface _CreateGatewayRuleResponse
+      include Smithy::Client::_Response[Types::CreateGatewayRuleResponse]
+      def rule_id: () -> String?
+      def gateway_arn: () -> String?
+      def priority: () -> Integer?
+      def conditions: () -> Array[Types::Condition]?
+      def actions: () -> Array[Types::Action]?
+      def description: () -> String?
+      def created_at: () -> Time?
+      def status: () -> String?
+      def system: () -> Types::SystemManagedBlock?
+    end
+    def create_gateway_rule: (
+      ?gateway_identifier: String,
+      ?client_token: String,
+      ?priority: Integer,
+      ?conditions: Array[
+        {
+          match_principals: {
+            any_of: Array[
+              {
+                iam_principal: {
+                  arn: String,
+                  operator: String
+                }
+              }
+            ]
+          },
+          match_paths: {
+            any_of: Array[String]
+          }
+        }
+      ],
+      ?actions: Array[
+        {
+          configuration_bundle: {
+            static_override: {
+              bundle_arn: String,
+              bundle_version: String
+            },
+            weighted_override: {
+              traffic_split: Array[
+                {
+                  name: untyped,
+                  weight: Integer,
+                  configuration_bundle: {
+                    bundle_arn: untyped,
+                    bundle_version: untyped
+                  },
+                  description: untyped,
+                  metadata: Hash[String, String]
+                }
+              ]
+            }
+          },
+          route_to_target: {
+            static_route: {
+              target_name: String
+            },
+            weighted_route: {
+              traffic_split: Array[
+                {
+                  name: untyped,
+                  weight: untyped,
+                  target_name: untyped,
+                  description: untyped,
+                  metadata: untyped
+                }
+              ]
+            }
+          }
+        }
+      ],
+      ?description: String
+    ) -> _CreateGatewayRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateGatewayRuleResponse
 
     interface _CreateGatewayTargetResponse
       include Smithy::Client::_Response[Types::CreateGatewayTargetResponse]
@@ -224,6 +885,13 @@ module Aws::BedrockAgentCoreControl
       def description: () -> String?
       def target_configuration: () -> Types::TargetConfiguration?
       def credential_provider_configurations: () -> Array[Types::CredentialProviderConfiguration]?
+      def last_synchronized_at: () -> Time?
+      def metadata_configuration: () -> Types::MetadataConfiguration?
+      def private_endpoint: () -> Types::PrivateEndpoint?
+      def private_endpoint_managed_resources: () -> Array[Types::ManagedResourceDetails]?
+      def authorization_data: () -> Types::AuthorizationData?
+      def protocol_type: () -> String?
+      def certificate_configurations: () -> Array[Types::CertificateConfiguration]?
     end
     def create_gateway_target: (
       ?gateway_identifier: String,
@@ -267,6 +935,110 @@ module Aws::BedrockAgentCoreControl
                 }
               ]
             }
+          },
+          mcp_server: {
+            endpoint: untyped,
+            mcp_tool_schema: {
+              s3: untyped,
+              inline_payload: untyped
+            },
+            listing_mode: String,
+            resource_priority: Integer
+          },
+          api_gateway: {
+            rest_api_id: untyped,
+            stage: untyped,
+            api_gateway_tool_configuration: {
+              tool_overrides: Array[
+                {
+                  name: untyped,
+                  description: untyped,
+                  path: untyped,
+                  method: String
+                }
+              ],
+              tool_filters: Array[
+                {
+                  filter_path: untyped,
+                  methods: Array[String]
+                }
+              ]
+            }
+          },
+          connector: {
+            source: {
+              connector_id: String,
+              version: String
+            },
+            enabled: Array[String],
+            configurations: Array[
+              {
+                name: untyped,
+                description: untyped,
+                parameter_values: Smithy::Schema::document,
+                parameter_overrides: Array[
+                  {
+                    path: untyped,
+                    description: untyped,
+                    visible: bool
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        http: {
+          agentcore_runtime: {
+            arn: String,
+            qualifier: String,
+            schema: {
+              source: untyped
+            }
+          },
+          passthrough: {
+            endpoint: String,
+            protocol_type: String,
+            schema: untyped,
+            stickiness_configuration: {
+              identifier: untyped,
+              timeout: Integer,
+              composite_identifier: Array[String]
+            },
+            static_query_parameters: Hash[String, String],
+            static_query_parameter_conflict_resolution: String
+          },
+          connector: {
+            source: {
+              connector_id: untyped
+            },
+            parameters: Hash[String, String]
+          }
+        },
+        inference: {
+          connector: {
+            source: {
+              connector_id: String
+            }
+          },
+          provider: {
+            endpoint: untyped,
+            model_mapping: {
+              provider_prefix: {
+                strip: untyped,
+                separator: untyped
+              }
+            },
+            operations: Array[
+              {
+                path: String,
+                provider_path: untyped,
+                models: Array[
+                  {
+                    model: String
+                  }
+                ]
+              }
+            ]
           }
         }
       },
@@ -277,18 +1049,337 @@ module Aws::BedrockAgentCoreControl
             oauth_credential_provider: {
               provider_arn: String,
               scopes: Array[String],
-              custom_parameters: Hash[String, String]
+              custom_parameters: Hash[String, String],
+              grant_type: String,
+              default_return_url: String
             },
             api_key_credential_provider: {
               provider_arn: String,
               credential_parameter_name: String,
               credential_prefix: String,
               credential_location: String
+            },
+            iam_credential_provider: {
+              service: String,
+              region: untyped
             }
+          }
+        }
+      ],
+      ?metadata_configuration: {
+        allowed_request_headers: Array[String],
+        allowed_query_parameters: Array[String],
+        allowed_response_headers: Array[String]
+      },
+      ?private_endpoint: {
+        self_managed_lattice_resource: {
+          resource_configuration_identifier: String
+        },
+        managed_vpc_resource: {
+          vpc_identifier: String,
+          subnet_ids: Array[String],
+          endpoint_ip_address_type: String,
+          security_group_ids: Array[String],
+          tags: Hash[String, String],
+          routing_domain: String
+        }
+      },
+      ?certificate_configurations: Array[
+        {
+          s3: {
+            uri: String,
+            bucket_owner_account_id: String
+          },
+          secrets_manager: {
+            secret_arn: String
           }
         }
       ]
     ) -> _CreateGatewayTargetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateGatewayTargetResponse
+
+    interface _CreateHarnessResponse
+      include Smithy::Client::_Response[Types::CreateHarnessResponse]
+      def harness: () -> Types::Harness?
+    end
+    def create_harness: (
+      ?harness_name: String,
+      ?client_token: String,
+      ?execution_role_arn: String,
+      ?environment: {
+        agent_core_runtime_environment: {
+          lifecycle_configuration: {
+            idle_runtime_session_timeout: Integer,
+            max_lifetime: untyped
+          },
+          network_configuration: {
+            network_mode: String,
+            network_mode_config: {
+              security_groups: Array[String],
+              subnets: Array[String],
+              require_service_s3_endpoint: bool
+            }
+          },
+          filesystem_configurations: Array[
+            {
+              session_storage: {
+                mount_path: String
+              },
+              s3_files_access_point: {
+                access_point_arn: String,
+                mount_path: untyped
+              },
+              efs_access_point: {
+                access_point_arn: String,
+                mount_path: untyped
+              },
+              capacity_provider_volume: {
+                volume_name: String,
+                mount_path: untyped
+              }
+            }
+          ]
+        }
+      },
+      ?environment_artifact: {
+        container_configuration: {
+          container_uri: String
+        }
+      },
+      ?environment_variables: Hash[String, String],
+      ?authorizer_configuration: {
+        custom_jwt_authorizer: {
+          discovery_url: String,
+          allowed_audience: Array[String],
+          allowed_clients: Array[String],
+          allowed_scopes: Array[String],
+          advertised_scope_mapping: Hash[String, String],
+          custom_claims: Array[
+            {
+              inbound_token_claim_name: String,
+              inbound_token_claim_value_type: String,
+              authorizing_claim_match_value: {
+                claim_match_value: {
+                  match_value_string: String,
+                  match_value_string_list: Array[String]
+                },
+                claim_match_operator: String
+              }
+            }
+          ],
+          private_endpoint: {
+            self_managed_lattice_resource: {
+              resource_configuration_identifier: String
+            },
+            managed_vpc_resource: {
+              vpc_identifier: String,
+              subnet_ids: Array[String],
+              endpoint_ip_address_type: String,
+              security_group_ids: Array[String],
+              tags: Hash[String, String],
+              routing_domain: String
+            }
+          },
+          private_endpoint_overrides: Array[
+            {
+              domain: String,
+              private_endpoint: untyped
+            }
+          ],
+          allowed_workload_configuration: {
+            hosting_environments: Array[
+              {
+                arn: String
+              }
+            ],
+            workload_identities: Array[String]
+          }
+        }
+      },
+      ?model: {
+        bedrock_model_config: {
+          model_id: String,
+          max_tokens: Integer,
+          temperature: Float,
+          top_p: Float,
+          api_format: String,
+          additional_params: Smithy::Schema::document
+        },
+        open_ai_model_config: {
+          model_id: untyped,
+          api_key_arn: String,
+          api_base: String,
+          max_tokens: untyped,
+          temperature: untyped,
+          top_p: untyped,
+          api_format: String,
+          additional_params: untyped
+        },
+        gemini_model_config: {
+          model_id: untyped,
+          api_key_arn: untyped,
+          max_tokens: untyped,
+          temperature: untyped,
+          top_p: untyped,
+          top_k: Integer,
+          additional_params: untyped
+        },
+        lite_llm_model_config: {
+          model_id: untyped,
+          api_key_arn: untyped,
+          api_base: String,
+          max_tokens: untyped,
+          temperature: untyped,
+          top_p: untyped,
+          additional_params: untyped
+        }
+      },
+      ?system_prompt: Array[
+        {
+          text: String
+        }
+      ],
+      ?tools: Array[
+        {
+          type: String,
+          name: String,
+          config: {
+            remote_mcp: {
+              url: String,
+              headers: Hash[String, String]
+            },
+            agent_core_browser: {
+              browser_arn: String
+            },
+            agent_core_gateway: {
+              gateway_arn: String,
+              outbound_auth: {
+                aws_iam: {
+                },
+                none: untyped,
+                oauth: {
+                  provider_arn: String,
+                  scopes: Array[String],
+                  custom_parameters: Hash[String, String],
+                  grant_type: String,
+                  default_return_url: String
+                }
+              }
+            },
+            inline_function: {
+              description: String,
+              input_schema: Smithy::Schema::document
+            },
+            agent_core_code_interpreter: {
+              code_interpreter_arn: String
+            }
+          }
+        }
+      ],
+      ?skills: Array[
+        {
+          path: String,
+          s3: {
+            uri: String
+          },
+          git: {
+            url: String,
+            path: String,
+            auth: {
+              credential_arn: String,
+              username: untyped
+            }
+          },
+          aws_skills: {
+            paths: Array[String]
+          }
+        }
+      ],
+      ?allowed_tools: Array[String],
+      ?memory: {
+        agent_core_memory_configuration: {
+          arn: String,
+          actor_id: String,
+          messages_count: Integer,
+          retrieval_config: Hash[String,
+            {
+              top_k: untyped,
+              relevance_score: Float,
+              strategy_id: untyped
+            }
+          ]
+        },
+        managed_memory_configuration: {
+          arn: untyped,
+          strategies: Array[String],
+          event_expiry_duration: untyped,
+          encryption_key_arn: String
+        },
+        disabled: {
+        }
+      },
+      ?truncation: {
+        strategy: String,
+        config: {
+          sliding_window: {
+            messages_count: Integer
+          },
+          summarization: {
+            summary_ratio: Float,
+            preserve_recent_messages: untyped,
+            summarization_system_prompt: String
+          }
+        }
+      },
+      ?hooks: Array[
+        {
+          before_invocation: {
+            name: String,
+            target: {
+              lambda: {
+                arn: String,
+                timeout_seconds: Integer,
+                failure_mode: String
+              },
+              sns: {
+                arn: String
+              },
+              event_bridge: {
+                arn: String
+              }
+            }
+          },
+          after_invocation: {
+            name: untyped,
+            target: untyped
+          },
+          before_tool_call: {
+            name: untyped,
+            target: untyped
+          },
+          after_tool_call: {
+            name: untyped,
+            target: untyped
+          }
+        }
+      ],
+      ?max_iterations: Integer,
+      ?max_tokens: Integer,
+      ?timeout_seconds: Integer,
+      ?tags: Hash[String, String]
+    ) -> _CreateHarnessResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateHarnessResponse
+
+    interface _CreateHarnessEndpointResponse
+      include Smithy::Client::_Response[Types::CreateHarnessEndpointResponse]
+      def endpoint: () -> Types::HarnessEndpoint?
+    end
+    def create_harness_endpoint: (
+      ?harness_id: String,
+      ?endpoint_name: String,
+      ?target_version: String,
+      ?description: String,
+      ?client_token: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateHarnessEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateHarnessEndpointResponse
 
     interface _CreateMemoryResponse
       include Smithy::Client::_Response[Types::CreateMemoryOutput]
@@ -306,22 +1397,62 @@ module Aws::BedrockAgentCoreControl
           semantic_memory_strategy: {
             name: String,
             description: String,
-            namespaces: Array[String]
+            namespaces: Array[String],
+            namespace_templates: untyped,
+            memory_record_schema: {
+              metadata_schema: Array[
+                {
+                  key: String,
+                  type: String,
+                  extraction_type: String,
+                  extraction_config: {
+                    llm_extraction_config: {
+                      llm_extraction_instruction: String,
+                      definition: String,
+                      validation: {
+                        string_validation: {
+                          allowed_values: Array[String]
+                        },
+                        string_list_validation: {
+                          allowed_values: Array[String],
+                          max_items: Integer
+                        },
+                        number_validation: {
+                          min_value: Float,
+                          max_value: untyped
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
+            },
+            record_expiry_specification: {
+              record_expiry_duration_days: Integer,
+              action: String
+            }
           },
           summary_memory_strategy: {
             name: untyped,
             description: untyped,
-            namespaces: untyped
+            namespaces: untyped,
+            namespace_templates: untyped,
+            memory_record_schema: untyped,
+            record_expiry_specification: untyped
           },
           user_preference_memory_strategy: {
             name: untyped,
             description: untyped,
-            namespaces: untyped
+            namespaces: untyped,
+            namespace_templates: untyped,
+            memory_record_schema: untyped,
+            record_expiry_specification: untyped
           },
           custom_memory_strategy: {
             name: untyped,
             description: untyped,
             namespaces: untyped,
+            namespace_templates: untyped,
             configuration: {
               semantic_override: {
                 extraction: {
@@ -348,18 +1479,106 @@ module Aws::BedrockAgentCoreControl
                   append_to_prompt: untyped,
                   model_id: untyped
                 }
+              },
+              episodic_override: {
+                extraction: {
+                  append_to_prompt: untyped,
+                  model_id: untyped
+                },
+                consolidation: {
+                  append_to_prompt: untyped,
+                  model_id: untyped
+                },
+                reflection: {
+                  append_to_prompt: untyped,
+                  model_id: untyped,
+                  namespaces: untyped,
+                  namespace_templates: untyped,
+                  memory_record_schema: untyped
+                }
+              },
+              self_managed_configuration: {
+                trigger_conditions: Array[
+                  {
+                    message_based_trigger: {
+                      message_count: untyped
+                    },
+                    token_based_trigger: {
+                      token_count: untyped
+                    },
+                    time_based_trigger: {
+                      idle_session_timeout: untyped
+                    }
+                  }
+                ],
+                invocation_configuration: {
+                  topic_arn: String,
+                  payload_delivery_bucket_name: untyped
+                },
+                historical_context_window_size: untyped
               }
-            }
+            },
+            memory_record_schema: untyped,
+            record_expiry_specification: untyped
+          },
+          episodic_memory_strategy: {
+            name: untyped,
+            description: untyped,
+            namespaces: untyped,
+            namespace_templates: untyped,
+            reflection_configuration: {
+              namespaces: untyped,
+              namespace_templates: untyped,
+              memory_record_schema: untyped
+            },
+            memory_record_schema: untyped,
+            record_expiry_specification: untyped
           }
         }
-      ]
+      ],
+      ?indexed_keys: Array[
+        {
+          key: String,
+          type: String
+        }
+      ],
+      ?namespace_keys: Array[
+        {
+          key: String,
+          validation: {
+            allowed_values: Array[String],
+            regex_pattern: String
+          }
+        }
+      ],
+      ?stream_delivery_resources: {
+        resources: Array[
+          {
+            kinesis: {
+              data_stream_arn: String,
+              content_configurations: Array[
+                {
+                  type: String,
+                  level: String
+                }
+              ]
+            }
+          }
+        ]
+      },
+      ?tags: Hash[String, String]
     ) -> _CreateMemoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateMemoryResponse
 
     interface _CreateOauth2CredentialProviderResponse
       include Smithy::Client::_Response[Types::CreateOauth2CredentialProviderResponse]
       def client_secret_arn: () -> Types::Secret?
+      def client_secret_json_key: () -> String?
+      def client_secret_source: () -> String?
       def name: () -> String?
       def credential_provider_arn: () -> String?
+      def callback_url: () -> String?
+      def oauth2_provider_config_output: () -> Types::Oauth2ProviderConfigOutput?
+      def status: () -> String?
     end
     def create_oauth2_credential_provider: (
       ?name: String,
@@ -372,34 +1591,499 @@ module Aws::BedrockAgentCoreControl
               issuer: String,
               authorization_endpoint: String,
               token_endpoint: String,
-              response_types: Array[String]
+              response_types: Array[String],
+              token_endpoint_auth_methods: Array[String]
             }
           },
           client_id: String,
-          client_secret: String
+          client_secret: String,
+          client_secret_config: {
+            secret_id: String,
+            json_key: String
+          },
+          client_secret_source: String,
+          on_behalf_of_token_exchange_config: {
+            grant_type: String,
+            token_exchange_grant_type_config: {
+              actor_token_content: String,
+              actor_token_scopes: Array[String]
+            }
+          },
+          client_authentication_method: String,
+          private_key_jwt_config: {
+            private_key_source: {
+              kms_key_source: {
+                kms_key_arn: String
+              }
+            },
+            signing_algorithm: String,
+            additional_header_claims: Hash[String, String],
+            additional_payload_claims: untyped
+          },
+          private_endpoint: {
+            self_managed_lattice_resource: {
+              resource_configuration_identifier: String
+            },
+            managed_vpc_resource: {
+              vpc_identifier: String,
+              subnet_ids: Array[String],
+              endpoint_ip_address_type: String,
+              security_group_ids: Array[String],
+              tags: Hash[String, String],
+              routing_domain: String
+            }
+          },
+          private_endpoint_overrides: Array[
+            {
+              domain: String,
+              private_endpoint: untyped
+            }
+          ]
         },
         google_oauth2_provider_config: {
-          client_id: untyped,
-          client_secret: untyped
+          client_id: String,
+          client_secret: untyped,
+          client_secret_config: untyped,
+          client_secret_source: untyped
         },
         github_oauth2_provider_config: {
           client_id: untyped,
-          client_secret: untyped
+          client_secret: untyped,
+          client_secret_config: untyped,
+          client_secret_source: untyped
         },
         slack_oauth2_provider_config: {
           client_id: untyped,
-          client_secret: untyped
+          client_secret: untyped,
+          client_secret_config: untyped,
+          client_secret_source: untyped
         },
         salesforce_oauth2_provider_config: {
           client_id: untyped,
-          client_secret: untyped
+          client_secret: untyped,
+          client_secret_config: untyped,
+          client_secret_source: untyped
         },
         microsoft_oauth2_provider_config: {
           client_id: untyped,
-          client_secret: untyped
+          client_secret: untyped,
+          client_secret_config: untyped,
+          client_secret_source: untyped,
+          tenant_id: String
+        },
+        atlassian_oauth2_provider_config: {
+          client_id: untyped,
+          client_secret: untyped,
+          client_secret_config: untyped,
+          client_secret_source: untyped
+        },
+        linkedin_oauth2_provider_config: {
+          client_id: untyped,
+          client_secret: untyped,
+          client_secret_config: untyped,
+          client_secret_source: untyped
+        },
+        included_oauth2_provider_config: {
+          client_id: untyped,
+          client_secret: untyped,
+          client_secret_config: untyped,
+          client_secret_source: untyped,
+          issuer: untyped,
+          authorization_endpoint: untyped,
+          token_endpoint: untyped
         }
-      }
+      },
+      ?tags: Hash[String, String]
     ) -> _CreateOauth2CredentialProviderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateOauth2CredentialProviderResponse
+
+    interface _CreateOnlineEvaluationConfigResponse
+      include Smithy::Client::_Response[Types::CreateOnlineEvaluationConfigResponse]
+      def online_evaluation_config_arn: () -> String?
+      def online_evaluation_config_id: () -> String?
+      def created_at: () -> Time?
+      def output_config: () -> Types::OutputConfig?
+      def status: () -> String?
+      def execution_status: () -> String?
+      def failure_reason: () -> String?
+    end
+    def create_online_evaluation_config: (
+      ?client_token: String,
+      ?online_evaluation_config_name: String,
+      ?description: String,
+      ?rule: {
+        sampling_config: {
+          sampling_percentage: Float
+        },
+        filters: Array[
+          {
+            key: String,
+            operator: String,
+            value: {
+              string_value: untyped,
+              double_value: Float,
+              boolean_value: bool
+            }
+          }
+        ],
+        session_config: {
+          session_timeout_minutes: Integer
+        }
+      },
+      ?data_source_config: {
+        cloud_watch_logs: {
+          log_group_names: Array[String],
+          log_group_name_prefixes: Array[String],
+          service_names: Array[String]
+        }
+      },
+      ?evaluators: Array[
+        {
+          evaluator_id: String
+        }
+      ],
+      ?insights: Array[
+        {
+          insight_id: String
+        }
+      ],
+      ?clustering_config: {
+        frequencies: Array[String]
+      },
+      ?output_config: {
+        cloud_watch_config: {
+          log_group_name: String,
+          metrics_namespace: String,
+          result_destination: String
+        }
+      },
+      ?evaluation_execution_role_arn: String,
+      ?enable_on_create: bool,
+      ?tags: Hash[String, String]
+    ) -> _CreateOnlineEvaluationConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateOnlineEvaluationConfigResponse
+
+    interface _CreatePaymentConnectorResponse
+      include Smithy::Client::_Response[Types::CreatePaymentConnectorResponse]
+      def payment_connector_id: () -> String?
+      def payment_manager_id: () -> String?
+      def name: () -> String?
+      def type: () -> String?
+      def credential_provider_configurations: () -> Array[Types::CredentialsProviderConfiguration]?
+      def created_at: () -> Time?
+      def status: () -> String?
+      def authorization_url: () -> String?
+    end
+    def create_payment_connector: (
+      ?payment_manager_id: String,
+      ?name: String,
+      ?description: String,
+      ?type: String,
+      ?credential_provider_configurations: Array[
+        {
+          coinbase_cdp: {
+            credential_provider_arn: String
+          },
+          stripe_privy: untyped
+        }
+      ],
+      ?provision_mode: String,
+      ?client_token: String
+    ) -> _CreatePaymentConnectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePaymentConnectorResponse
+
+    interface _CreatePaymentCredentialProviderResponse
+      include Smithy::Client::_Response[Types::CreatePaymentCredentialProviderResponse]
+      def name: () -> String?
+      def credential_provider_vendor: () -> String?
+      def credential_provider_arn: () -> String?
+      def provider_configuration_output: () -> Types::PaymentProviderConfigurationOutput?
+    end
+    def create_payment_credential_provider: (
+      ?name: String,
+      ?credential_provider_vendor: String,
+      ?provider_configuration_input: {
+        coinbase_cdp_configuration: {
+          api_key_id: String,
+          api_key_secret: String,
+          api_key_secret_source: String,
+          api_key_secret_config: {
+            secret_id: String,
+            json_key: String
+          },
+          wallet_secret: String,
+          wallet_secret_source: untyped,
+          wallet_secret_config: untyped
+        },
+        stripe_privy_configuration: {
+          app_id: String,
+          app_secret: String,
+          app_secret_source: untyped,
+          app_secret_config: untyped,
+          authorization_private_key: String,
+          authorization_private_key_source: untyped,
+          authorization_private_key_config: untyped,
+          authorization_id: String
+        }
+      },
+      ?tags: Hash[String, String]
+    ) -> _CreatePaymentCredentialProviderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePaymentCredentialProviderResponse
+
+    interface _CreatePaymentManagerResponse
+      include Smithy::Client::_Response[Types::CreatePaymentManagerResponse]
+      def payment_manager_arn: () -> String?
+      def payment_manager_id: () -> String?
+      def name: () -> String?
+      def authorizer_type: () -> String?
+      def authorizer_configuration: () -> Types::AuthorizerConfiguration?
+      def role_arn: () -> String?
+      def workload_identity_details: () -> Types::WorkloadIdentityDetails?
+      def created_at: () -> Time?
+      def status: () -> String?
+      def tags: () -> Hash[String, String]?
+      def kms_key_arn: () -> String?
+    end
+    def create_payment_manager: (
+      ?name: String,
+      ?description: String,
+      ?authorizer_type: String,
+      ?authorizer_configuration: {
+        custom_jwt_authorizer: {
+          discovery_url: String,
+          allowed_audience: Array[String],
+          allowed_clients: Array[String],
+          allowed_scopes: Array[String],
+          advertised_scope_mapping: Hash[String, String],
+          custom_claims: Array[
+            {
+              inbound_token_claim_name: String,
+              inbound_token_claim_value_type: String,
+              authorizing_claim_match_value: {
+                claim_match_value: {
+                  match_value_string: String,
+                  match_value_string_list: Array[String]
+                },
+                claim_match_operator: String
+              }
+            }
+          ],
+          private_endpoint: {
+            self_managed_lattice_resource: {
+              resource_configuration_identifier: String
+            },
+            managed_vpc_resource: {
+              vpc_identifier: String,
+              subnet_ids: Array[String],
+              endpoint_ip_address_type: String,
+              security_group_ids: Array[String],
+              tags: Hash[String, String],
+              routing_domain: String
+            }
+          },
+          private_endpoint_overrides: Array[
+            {
+              domain: String,
+              private_endpoint: untyped
+            }
+          ],
+          allowed_workload_configuration: {
+            hosting_environments: Array[
+              {
+                arn: String
+              }
+            ],
+            workload_identities: Array[String]
+          }
+        }
+      },
+      ?role_arn: String,
+      ?client_token: String,
+      ?tags: Hash[String, String],
+      ?kms_key_arn: String
+    ) -> _CreatePaymentManagerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePaymentManagerResponse
+
+    interface _CreatePolicyResponse
+      include Smithy::Client::_Response[Types::CreatePolicyResponse]
+      def policy_id: () -> String?
+      def name: () -> String?
+      def policy_engine_id: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def policy_arn: () -> String?
+      def status: () -> String?
+      def enforcement_mode: () -> String?
+      def definition: () -> Types::PolicyDefinition?
+      def description: () -> String?
+      def status_reasons: () -> Array[String]?
+    end
+    def create_policy: (
+      ?name: String,
+      ?definition: {
+        cedar: {
+          statement: String
+        },
+        policy_generation: {
+          policy_generation_id: String,
+          policy_generation_asset_id: untyped
+        },
+        policy: {
+          statement: untyped
+        }
+      },
+      ?description: String,
+      ?validation_mode: String,
+      ?enforcement_mode: String,
+      ?policy_engine_id: String,
+      ?client_token: String
+    ) -> _CreatePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePolicyResponse
+
+    interface _CreatePolicyEngineResponse
+      include Smithy::Client::_Response[Types::CreatePolicyEngineResponse]
+      def policy_engine_id: () -> String?
+      def name: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def policy_engine_arn: () -> String?
+      def status: () -> String?
+      def encryption_key_arn: () -> String?
+      def description: () -> String?
+      def status_reasons: () -> Array[String]?
+    end
+    def create_policy_engine: (
+      ?name: String,
+      ?description: String,
+      ?client_token: String,
+      ?encryption_key_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _CreatePolicyEngineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePolicyEngineResponse
+
+    interface _CreateRegistryResponse
+      include Smithy::Client::_Response[Types::CreateRegistryResponse]
+      def registry_arn: () -> String?
+    end
+    def create_registry: (
+      ?name: String,
+      ?description: String,
+      ?authorizer_type: String,
+      ?authorizer_configuration: {
+        custom_jwt_authorizer: {
+          discovery_url: String,
+          allowed_audience: Array[String],
+          allowed_clients: Array[String],
+          allowed_scopes: Array[String],
+          advertised_scope_mapping: Hash[String, String],
+          custom_claims: Array[
+            {
+              inbound_token_claim_name: String,
+              inbound_token_claim_value_type: String,
+              authorizing_claim_match_value: {
+                claim_match_value: {
+                  match_value_string: String,
+                  match_value_string_list: Array[String]
+                },
+                claim_match_operator: String
+              }
+            }
+          ],
+          private_endpoint: {
+            self_managed_lattice_resource: {
+              resource_configuration_identifier: String
+            },
+            managed_vpc_resource: {
+              vpc_identifier: String,
+              subnet_ids: Array[String],
+              endpoint_ip_address_type: String,
+              security_group_ids: Array[String],
+              tags: Hash[String, String],
+              routing_domain: String
+            }
+          },
+          private_endpoint_overrides: Array[
+            {
+              domain: String,
+              private_endpoint: untyped
+            }
+          ],
+          allowed_workload_configuration: {
+            hosting_environments: Array[
+              {
+                arn: String
+              }
+            ],
+            workload_identities: Array[String]
+          }
+        }
+      },
+      ?client_token: String,
+      ?approval_configuration: {
+        auto_approval: bool
+      }
+    ) -> _CreateRegistryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRegistryResponse
+
+    interface _CreateRegistryRecordResponse
+      include Smithy::Client::_Response[Types::CreateRegistryRecordResponse]
+      def record_arn: () -> String?
+      def status: () -> String?
+    end
+    def create_registry_record: (
+      ?registry_id: String,
+      ?name: String,
+      ?description: String,
+      ?descriptor_type: String,
+      ?descriptors: {
+        mcp: {
+          server: {
+            schema_version: String,
+            inline_content: String
+          },
+          tools: {
+            protocol_version: untyped,
+            inline_content: untyped
+          }
+        },
+        a2a: {
+          agent_card: {
+            schema_version: untyped,
+            inline_content: untyped
+          }
+        },
+        custom: {
+          inline_content: untyped
+        },
+        agent_skills: {
+          skill_md: {
+            inline_content: untyped
+          },
+          skill_definition: {
+            schema_version: untyped,
+            inline_content: untyped
+          }
+        }
+      },
+      ?record_version: String,
+      ?synchronization_type: String,
+      ?synchronization_configuration: {
+        from_url: {
+          url: String,
+          credential_provider_configurations: Array[
+            {
+              credential_provider_type: String,
+              credential_provider: {
+                oauth_credential_provider: {
+                  provider_arn: String,
+                  grant_type: String,
+                  scopes: Array[String],
+                  custom_parameters: Hash[String, String]
+                },
+                iam_credential_provider: {
+                  role_arn: String,
+                  service: String,
+                  region: String
+                }
+              }
+            }
+          ]
+        }
+      },
+      ?client_token: String
+    ) -> _CreateRegistryRecordResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRegistryRecordResponse
 
     interface _CreateWorkloadIdentityResponse
       include Smithy::Client::_Response[Types::CreateWorkloadIdentityResponse]
@@ -409,20 +2093,27 @@ module Aws::BedrockAgentCoreControl
     end
     def create_workload_identity: (
       ?name: String,
-      ?allowed_resource_oauth2_return_urls: Array[String]
+      ?allowed_resource_oauth2_return_urls: Array[String],
+      ?tags: Hash[String, String]
     ) -> _CreateWorkloadIdentityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWorkloadIdentityResponse
 
     interface _DeleteAgentRuntimeResponse
       include Smithy::Client::_Response[Types::DeleteAgentRuntimeResponse]
       def status: () -> String?
+      def agent_runtime_id: () -> String?
+      def agent_runtime_version: () -> String?
     end
     def delete_agent_runtime: (
-      ?agent_runtime_id: String
+      ?agent_runtime_id: String,
+      ?agent_runtime_version: String,
+      ?client_token: String
     ) -> _DeleteAgentRuntimeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAgentRuntimeResponse
 
     interface _DeleteAgentRuntimeEndpointResponse
       include Smithy::Client::_Response[Types::DeleteAgentRuntimeEndpointResponse]
       def status: () -> String?
+      def agent_runtime_id: () -> String?
+      def endpoint_name: () -> String?
     end
     def delete_agent_runtime_endpoint: (
       ?agent_runtime_id: String,
@@ -448,6 +2139,29 @@ module Aws::BedrockAgentCoreControl
       ?client_token: String
     ) -> _DeleteBrowserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBrowserResponse
 
+    interface _DeleteBrowserProfileResponse
+      include Smithy::Client::_Response[Types::DeleteBrowserProfileResponse]
+      def profile_id: () -> String?
+      def profile_arn: () -> String?
+      def status: () -> String?
+      def last_updated_at: () -> Time?
+      def last_saved_at: () -> Time?
+    end
+    def delete_browser_profile: (
+      ?profile_id: String,
+      ?client_token: String
+    ) -> _DeleteBrowserProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBrowserProfileResponse
+
+    interface _DeleteCapacityProviderResponse
+      include Smithy::Client::_Response[Types::DeleteCapacityProviderOutput]
+      def capacity_provider_id: () -> String?
+      def status: () -> String?
+    end
+    def delete_capacity_provider: (
+      ?capacity_provider_id: String,
+      ?client_token: String
+    ) -> _DeleteCapacityProviderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCapacityProviderResponse
+
     interface _DeleteCodeInterpreterResponse
       include Smithy::Client::_Response[Types::DeleteCodeInterpreterResponse]
       def code_interpreter_id: () -> String?
@@ -459,6 +2173,60 @@ module Aws::BedrockAgentCoreControl
       ?client_token: String
     ) -> _DeleteCodeInterpreterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCodeInterpreterResponse
 
+    interface _DeleteConfigurationBundleResponse
+      include Smithy::Client::_Response[Types::DeleteConfigurationBundleResponse]
+      def bundle_arn: () -> String?
+      def bundle_id: () -> String?
+      def status: () -> String?
+    end
+    def delete_configuration_bundle: (
+      ?bundle_id: String
+    ) -> _DeleteConfigurationBundleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteConfigurationBundleResponse
+
+    interface _DeleteConsentPortalResponse
+      include Smithy::Client::_Response[Types::DeleteConsentPortalResponse]
+    end
+    def delete_consent_portal: (
+      ?consent_portal_identifier: String
+    ) -> _DeleteConsentPortalResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteConsentPortalResponse
+
+    interface _DeleteDatasetResponse
+      include Smithy::Client::_Response[Types::DeleteDatasetResponse]
+      def dataset_arn: () -> String?
+      def dataset_id: () -> String?
+      def status: () -> String?
+      def dataset_version: () -> String?
+      def updated_at: () -> Time?
+    end
+    def delete_dataset: (
+      ?dataset_id: String,
+      ?dataset_version: String
+    ) -> _DeleteDatasetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDatasetResponse
+
+    interface _DeleteDatasetExamplesResponse
+      include Smithy::Client::_Response[Types::DeleteDatasetExamplesResponse]
+      def dataset_arn: () -> String?
+      def dataset_id: () -> String?
+      def status: () -> String?
+      def deleted_count: () -> Integer?
+      def updated_at: () -> Time?
+    end
+    def delete_dataset_examples: (
+      ?dataset_id: String,
+      ?client_token: String,
+      ?example_ids: Array[String]
+    ) -> _DeleteDatasetExamplesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDatasetExamplesResponse
+
+    interface _DeleteEvaluatorResponse
+      include Smithy::Client::_Response[Types::DeleteEvaluatorResponse]
+      def evaluator_arn: () -> String?
+      def evaluator_id: () -> String?
+      def status: () -> String?
+    end
+    def delete_evaluator: (
+      ?evaluator_id: String
+    ) -> _DeleteEvaluatorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEvaluatorResponse
+
     interface _DeleteGatewayResponse
       include Smithy::Client::_Response[Types::DeleteGatewayResponse]
       def gateway_id: () -> String?
@@ -468,6 +2236,26 @@ module Aws::BedrockAgentCoreControl
     def delete_gateway: (
       ?gateway_identifier: String
     ) -> _DeleteGatewayResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteGatewayResponse
+
+    interface _DeleteGatewayRateLimitResponse
+      include Smithy::Client::_Response[Types::DeleteGatewayRateLimitResponse]
+      def rate_limit_id: () -> String?
+      def status: () -> String?
+    end
+    def delete_gateway_rate_limit: (
+      ?gateway_identifier: String,
+      ?rate_limit_id: String
+    ) -> _DeleteGatewayRateLimitResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteGatewayRateLimitResponse
+
+    interface _DeleteGatewayRuleResponse
+      include Smithy::Client::_Response[Types::DeleteGatewayRuleResponse]
+      def rule_id: () -> String?
+      def status: () -> String?
+    end
+    def delete_gateway_rule: (
+      ?gateway_identifier: String,
+      ?rule_id: String
+    ) -> _DeleteGatewayRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteGatewayRuleResponse
 
     interface _DeleteGatewayTargetResponse
       include Smithy::Client::_Response[Types::DeleteGatewayTargetResponse]
@@ -480,6 +2268,26 @@ module Aws::BedrockAgentCoreControl
       ?gateway_identifier: String,
       ?target_id: String
     ) -> _DeleteGatewayTargetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteGatewayTargetResponse
+
+    interface _DeleteHarnessResponse
+      include Smithy::Client::_Response[Types::DeleteHarnessResponse]
+      def harness: () -> Types::Harness?
+    end
+    def delete_harness: (
+      ?harness_id: String,
+      ?client_token: String,
+      ?delete_managed_memory: bool
+    ) -> _DeleteHarnessResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteHarnessResponse
+
+    interface _DeleteHarnessEndpointResponse
+      include Smithy::Client::_Response[Types::DeleteHarnessEndpointResponse]
+      def endpoint: () -> Types::HarnessEndpoint?
+    end
+    def delete_harness_endpoint: (
+      ?harness_id: String,
+      ?endpoint_name: String,
+      ?client_token: String
+    ) -> _DeleteHarnessEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteHarnessEndpointResponse
 
     interface _DeleteMemoryResponse
       include Smithy::Client::_Response[Types::DeleteMemoryOutput]
@@ -498,6 +2306,102 @@ module Aws::BedrockAgentCoreControl
       ?name: String
     ) -> _DeleteOauth2CredentialProviderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteOauth2CredentialProviderResponse
 
+    interface _DeleteOnlineEvaluationConfigResponse
+      include Smithy::Client::_Response[Types::DeleteOnlineEvaluationConfigResponse]
+      def online_evaluation_config_arn: () -> String?
+      def online_evaluation_config_id: () -> String?
+      def status: () -> String?
+    end
+    def delete_online_evaluation_config: (
+      ?online_evaluation_config_id: String
+    ) -> _DeleteOnlineEvaluationConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteOnlineEvaluationConfigResponse
+
+    interface _DeletePaymentConnectorResponse
+      include Smithy::Client::_Response[Types::DeletePaymentConnectorResponse]
+      def status: () -> String?
+      def payment_connector_id: () -> String?
+    end
+    def delete_payment_connector: (
+      ?payment_manager_id: String,
+      ?payment_connector_id: String,
+      ?client_token: String
+    ) -> _DeletePaymentConnectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePaymentConnectorResponse
+
+    interface _DeletePaymentCredentialProviderResponse
+      include Smithy::Client::_Response[Types::DeletePaymentCredentialProviderResponse]
+    end
+    def delete_payment_credential_provider: (
+      ?name: String
+    ) -> _DeletePaymentCredentialProviderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePaymentCredentialProviderResponse
+
+    interface _DeletePaymentManagerResponse
+      include Smithy::Client::_Response[Types::DeletePaymentManagerResponse]
+      def status: () -> String?
+      def payment_manager_id: () -> String?
+    end
+    def delete_payment_manager: (
+      ?payment_manager_id: String,
+      ?client_token: String
+    ) -> _DeletePaymentManagerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePaymentManagerResponse
+
+    interface _DeletePolicyResponse
+      include Smithy::Client::_Response[Types::DeletePolicyResponse]
+      def policy_id: () -> String?
+      def name: () -> String?
+      def policy_engine_id: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def policy_arn: () -> String?
+      def status: () -> String?
+      def enforcement_mode: () -> String?
+      def definition: () -> Types::PolicyDefinition?
+      def description: () -> String?
+      def status_reasons: () -> Array[String]?
+    end
+    def delete_policy: (
+      ?policy_engine_id: String,
+      ?policy_id: String
+    ) -> _DeletePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePolicyResponse
+
+    interface _DeletePolicyEngineResponse
+      include Smithy::Client::_Response[Types::DeletePolicyEngineResponse]
+      def policy_engine_id: () -> String?
+      def name: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def policy_engine_arn: () -> String?
+      def status: () -> String?
+      def encryption_key_arn: () -> String?
+      def description: () -> String?
+      def status_reasons: () -> Array[String]?
+    end
+    def delete_policy_engine: (
+      ?policy_engine_id: String
+    ) -> _DeletePolicyEngineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePolicyEngineResponse
+
+    interface _DeleteRegistryResponse
+      include Smithy::Client::_Response[Types::DeleteRegistryResponse]
+      def status: () -> String?
+    end
+    def delete_registry: (
+      ?registry_id: String
+    ) -> _DeleteRegistryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRegistryResponse
+
+    interface _DeleteRegistryRecordResponse
+      include Smithy::Client::_Response[Types::DeleteRegistryRecordResponse]
+    end
+    def delete_registry_record: (
+      ?registry_id: String,
+      ?record_id: String
+    ) -> _DeleteRegistryRecordResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRegistryRecordResponse
+
+    interface _DeleteResourcePolicyResponse
+      include Smithy::Client::_Response[Types::DeleteResourcePolicyResponse]
+    end
+    def delete_resource_policy: (
+      ?resource_arn: String
+    ) -> _DeleteResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteResourcePolicyResponse
+
     interface _DeleteWorkloadIdentityResponse
       include Smithy::Client::_Response[Types::DeleteWorkloadIdentityResponse]
     end
@@ -508,21 +2412,27 @@ module Aws::BedrockAgentCoreControl
     interface _GetAgentRuntimeResponse
       include Smithy::Client::_Response[Types::GetAgentRuntimeResponse]
       def agent_runtime_arn: () -> String?
-      def workload_identity_details: () -> Types::WorkloadIdentityDetails?
       def agent_runtime_name: () -> String?
-      def description: () -> String?
       def agent_runtime_id: () -> String?
       def agent_runtime_version: () -> String?
       def created_at: () -> Time?
       def last_updated_at: () -> Time?
       def role_arn: () -> String?
-      def agent_runtime_artifact: () -> Types::AgentRuntimeArtifact?
       def network_configuration: () -> Types::NetworkConfiguration?
+      def status: () -> String?
+      def lifecycle_configuration: () -> Types::LifecycleConfiguration?
+      def failure_reason: () -> String?
+      def description: () -> String?
+      def workload_identity_details: () -> Types::WorkloadIdentityDetails?
+      def agent_runtime_artifact: () -> Types::AgentRuntimeArtifact?
       def protocol_configuration: () -> Types::ProtocolConfiguration?
       def environment_variables: () -> Hash[String, String]?
       def authorizer_configuration: () -> Types::AuthorizerConfiguration?
       def request_header_configuration: () -> Types::RequestHeaderConfiguration?
-      def status: () -> String?
+      def metadata_configuration: () -> Types::RuntimeMetadataConfiguration?
+      def filesystem_configurations: () -> Array[Types::FilesystemConfiguration]?
+      def capacity_provider_configuration: () -> Types::CapacityProviderConfiguration?
+      def platform_version: () -> String?
     end
     def get_agent_runtime: (
       ?agent_runtime_id: String,
@@ -551,6 +2461,8 @@ module Aws::BedrockAgentCoreControl
     interface _GetApiKeyCredentialProviderResponse
       include Smithy::Client::_Response[Types::GetApiKeyCredentialProviderResponse]
       def api_key_secret_arn: () -> Types::Secret?
+      def api_key_secret_json_key: () -> String?
+      def api_key_secret_source: () -> String?
       def name: () -> String?
       def credential_provider_arn: () -> String?
       def created_time: () -> Time?
@@ -569,6 +2481,10 @@ module Aws::BedrockAgentCoreControl
       def execution_role_arn: () -> String?
       def network_configuration: () -> Types::BrowserNetworkConfiguration?
       def recording: () -> Types::RecordingConfig?
+      def browser_signing: () -> Types::BrowserSigningConfigOutput?
+      def enterprise_policies: () -> Array[Types::BrowserEnterprisePolicy]?
+      def certificates: () -> Array[Types::Certificate]?
+      def filesystem_configurations: () -> Array[Types::ToolsFileSystemConfiguration]?
       def status: () -> String?
       def failure_reason: () -> String?
       def created_at: () -> Time?
@@ -577,6 +2493,41 @@ module Aws::BedrockAgentCoreControl
     def get_browser: (
       ?browser_id: String
     ) -> _GetBrowserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBrowserResponse
+
+    interface _GetBrowserProfileResponse
+      include Smithy::Client::_Response[Types::GetBrowserProfileResponse]
+      def profile_id: () -> String?
+      def profile_arn: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def status: () -> String?
+      def created_at: () -> Time?
+      def last_updated_at: () -> Time?
+      def last_saved_at: () -> Time?
+      def last_saved_browser_session_id: () -> String?
+      def last_saved_browser_id: () -> String?
+    end
+    def get_browser_profile: (
+      ?profile_id: String
+    ) -> _GetBrowserProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBrowserProfileResponse
+
+    interface _GetCapacityProviderResponse
+      include Smithy::Client::_Response[Types::GetCapacityProviderOutput]
+      def capacity_provider_id: () -> String?
+      def capacity_provider_arn: () -> String?
+      def name: () -> String?
+      def status: () -> String?
+      def description: () -> String?
+      def status_code: () -> String?
+      def status_reason: () -> String?
+      def permissions_configuration: () -> Types::PermissionsConfiguration?
+      def compute_configuration: () -> Types::ComputeConfiguration?
+      def created_at: () -> Time?
+      def last_updated_at: () -> Time?
+    end
+    def get_capacity_provider: (
+      ?capacity_provider_id: String
+    ) -> _GetCapacityProviderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCapacityProviderResponse
 
     interface _GetCodeInterpreterResponse
       include Smithy::Client::_Response[Types::GetCodeInterpreterResponse]
@@ -587,6 +2538,8 @@ module Aws::BedrockAgentCoreControl
       def execution_role_arn: () -> String?
       def network_configuration: () -> Types::CodeInterpreterNetworkConfiguration?
       def status: () -> String?
+      def certificates: () -> Array[Types::Certificate]?
+      def filesystem_configurations: () -> Array[Types::ToolsFileSystemConfiguration]?
       def failure_reason: () -> String?
       def created_at: () -> Time?
       def last_updated_at: () -> Time?
@@ -594,6 +2547,106 @@ module Aws::BedrockAgentCoreControl
     def get_code_interpreter: (
       ?code_interpreter_id: String
     ) -> _GetCodeInterpreterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCodeInterpreterResponse
+
+    interface _GetConfigurationBundleResponse
+      include Smithy::Client::_Response[Types::GetConfigurationBundleResponse]
+      def bundle_arn: () -> String?
+      def bundle_id: () -> String?
+      def bundle_name: () -> String?
+      def description: () -> String?
+      def version_id: () -> String?
+      def components: () -> Hash[String, Types::ComponentConfiguration]?
+      def lineage_metadata: () -> Types::VersionLineageMetadata?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def kms_key_arn: () -> String?
+    end
+    def get_configuration_bundle: (
+      ?bundle_id: String,
+      ?branch_name: String
+    ) -> _GetConfigurationBundleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetConfigurationBundleResponse
+
+    interface _GetConfigurationBundleVersionResponse
+      include Smithy::Client::_Response[Types::GetConfigurationBundleVersionResponse]
+      def bundle_arn: () -> String?
+      def bundle_id: () -> String?
+      def bundle_name: () -> String?
+      def description: () -> String?
+      def version_id: () -> String?
+      def components: () -> Hash[String, Types::ComponentConfiguration]?
+      def lineage_metadata: () -> Types::VersionLineageMetadata?
+      def created_at: () -> Time?
+      def version_created_at: () -> Time?
+      def kms_key_arn: () -> String?
+    end
+    def get_configuration_bundle_version: (
+      ?bundle_id: String,
+      ?version_id: String
+    ) -> _GetConfigurationBundleVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetConfigurationBundleVersionResponse
+
+    interface _GetConsentPortalResponse
+      include Smithy::Client::_Response[Types::GetConsentPortalResponse]
+      def sources: () -> Array[Types::ConsentPortalSource]?
+      def consent_portal_arn: () -> String?
+      def consent_portal_id: () -> String?
+      def created_at: () -> Time?
+      def description: () -> String?
+      def execution_role_arn: () -> String?
+      def idp_config: () -> Types::ConsentPortalIdpConfig?
+      def name: () -> String?
+      def portal_url: () -> String?
+      def status: () -> String?
+      def status_reason: () -> String?
+      def updated_at: () -> Time?
+    end
+    def get_consent_portal: (
+      ?consent_portal_identifier: String
+    ) -> _GetConsentPortalResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetConsentPortalResponse
+
+    interface _GetDatasetResponse
+      include Smithy::Client::_Response[Types::GetDatasetResponse]
+      def dataset_arn: () -> String?
+      def dataset_id: () -> String?
+      def dataset_version: () -> String?
+      def dataset_name: () -> String?
+      def description: () -> String?
+      def status: () -> String?
+      def draft_status: () -> String?
+      def failure_reason: () -> String?
+      def schema_type: () -> String?
+      def kms_key_arn: () -> String?
+      def example_count: () -> Integer?
+      def download_url: () -> String?
+      def download_url_expires_at: () -> Time?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_dataset: (
+      ?dataset_id: String,
+      ?dataset_version: String
+    ) -> _GetDatasetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDatasetResponse
+
+    interface _GetEvaluatorResponse
+      include Smithy::Client::_Response[Types::GetEvaluatorResponse]
+      def evaluator_arn: () -> String?
+      def evaluator_id: () -> String?
+      def evaluator_name: () -> String?
+      def description: () -> String?
+      def evaluator_config: () -> Types::EvaluatorConfig?
+      def evaluator_type: () -> String?
+      def provider: () -> String?
+      def level: () -> String?
+      def status: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def locked_for_modification: () -> bool?
+      def kms_key_arn: () -> String?
+    end
+    def get_evaluator: (
+      ?evaluator_id: String,
+      ?included_data: String
+    ) -> _GetEvaluatorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEvaluatorResponse
 
     interface _GetGatewayResponse
       include Smithy::Client::_Response[Types::GetGatewayResponse]
@@ -612,12 +2665,51 @@ module Aws::BedrockAgentCoreControl
       def authorizer_type: () -> String?
       def authorizer_configuration: () -> Types::AuthorizerConfiguration?
       def kms_key_arn: () -> String?
+      def custom_transform_configuration: () -> Types::CustomTransformConfiguration?
+      def interceptor_configurations: () -> Array[Types::GatewayInterceptorConfiguration]?
+      def policy_engine_configuration: () -> Types::GatewayPolicyEngineConfiguration?
       def workload_identity_details: () -> Types::WorkloadIdentityDetails?
       def exception_level: () -> String?
+      def web_acl_arn: () -> String?
+      def waf_configuration: () -> Types::WafConfiguration?
     end
     def get_gateway: (
       ?gateway_identifier: String
     ) -> _GetGatewayResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetGatewayResponse
+
+    interface _GetGatewayRateLimitResponse
+      include Smithy::Client::_Response[Types::GetGatewayRateLimitResponse]
+      def rate_limit_id: () -> String?
+      def gateway_identifier: () -> String?
+      def description: () -> String?
+      def dimension_keys: () -> Array[String]?
+      def entries: () -> Array[Types::LimitEntry]?
+      def status: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+    end
+    def get_gateway_rate_limit: (
+      ?gateway_identifier: String,
+      ?rate_limit_id: String
+    ) -> _GetGatewayRateLimitResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetGatewayRateLimitResponse
+
+    interface _GetGatewayRuleResponse
+      include Smithy::Client::_Response[Types::GetGatewayRuleResponse]
+      def rule_id: () -> String?
+      def gateway_arn: () -> String?
+      def priority: () -> Integer?
+      def conditions: () -> Array[Types::Condition]?
+      def actions: () -> Array[Types::Action]?
+      def description: () -> String?
+      def created_at: () -> Time?
+      def status: () -> String?
+      def system: () -> Types::SystemManagedBlock?
+      def updated_at: () -> Time?
+    end
+    def get_gateway_rule: (
+      ?gateway_identifier: String,
+      ?rule_id: String
+    ) -> _GetGatewayRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetGatewayRuleResponse
 
     interface _GetGatewayTargetResponse
       include Smithy::Client::_Response[Types::GetGatewayTargetResponse]
@@ -631,33 +2723,288 @@ module Aws::BedrockAgentCoreControl
       def description: () -> String?
       def target_configuration: () -> Types::TargetConfiguration?
       def credential_provider_configurations: () -> Array[Types::CredentialProviderConfiguration]?
+      def last_synchronized_at: () -> Time?
+      def metadata_configuration: () -> Types::MetadataConfiguration?
+      def private_endpoint: () -> Types::PrivateEndpoint?
+      def private_endpoint_managed_resources: () -> Array[Types::ManagedResourceDetails]?
+      def authorization_data: () -> Types::AuthorizationData?
+      def protocol_type: () -> String?
+      def certificate_configurations: () -> Array[Types::CertificateConfiguration]?
     end
     def get_gateway_target: (
       ?gateway_identifier: String,
       ?target_id: String
     ) -> _GetGatewayTargetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetGatewayTargetResponse
 
+    interface _GetHarnessResponse
+      include Smithy::Client::_Response[Types::GetHarnessResponse]
+      def harness: () -> Types::Harness?
+    end
+    def get_harness: (
+      ?harness_id: String,
+      ?harness_version: String
+    ) -> _GetHarnessResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetHarnessResponse
+
+    interface _GetHarnessEndpointResponse
+      include Smithy::Client::_Response[Types::GetHarnessEndpointResponse]
+      def endpoint: () -> Types::HarnessEndpoint?
+    end
+    def get_harness_endpoint: (
+      ?harness_id: String,
+      ?endpoint_name: String
+    ) -> _GetHarnessEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetHarnessEndpointResponse
+
     interface _GetMemoryResponse
       include Smithy::Client::_Response[Types::GetMemoryOutput]
       def memory: () -> Types::Memory?
     end
     def get_memory: (
-      ?memory_id: String
+      ?memory_id: String,
+      ?view: String
     ) -> _GetMemoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMemoryResponse
 
     interface _GetOauth2CredentialProviderResponse
       include Smithy::Client::_Response[Types::GetOauth2CredentialProviderResponse]
       def client_secret_arn: () -> Types::Secret?
+      def client_secret_json_key: () -> String?
+      def client_secret_source: () -> String?
       def name: () -> String?
       def credential_provider_arn: () -> String?
       def credential_provider_vendor: () -> String?
+      def callback_url: () -> String?
       def oauth2_provider_config_output: () -> Types::Oauth2ProviderConfigOutput?
       def created_time: () -> Time?
       def last_updated_time: () -> Time?
+      def status: () -> String?
+      def failure_reason: () -> String?
     end
     def get_oauth2_credential_provider: (
       ?name: String
     ) -> _GetOauth2CredentialProviderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetOauth2CredentialProviderResponse
+
+    interface _GetOnlineEvaluationConfigResponse
+      include Smithy::Client::_Response[Types::GetOnlineEvaluationConfigResponse]
+      def online_evaluation_config_arn: () -> String?
+      def online_evaluation_config_id: () -> String?
+      def online_evaluation_config_name: () -> String?
+      def description: () -> String?
+      def rule: () -> Types::Rule?
+      def data_source_config: () -> Types::DataSourceConfig?
+      def evaluators: () -> Array[Types::EvaluatorReference]?
+      def insights: () -> Array[Types::Insight]?
+      def clustering_config: () -> Types::ClusteringConfig?
+      def output_config: () -> Types::OutputConfig?
+      def evaluation_execution_role_arn: () -> String?
+      def status: () -> String?
+      def execution_status: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def failure_reason: () -> String?
+    end
+    def get_online_evaluation_config: (
+      ?online_evaluation_config_id: String
+    ) -> _GetOnlineEvaluationConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetOnlineEvaluationConfigResponse
+
+    interface _GetPaymentConnectorResponse
+      include Smithy::Client::_Response[Types::GetPaymentConnectorResponse]
+      def payment_connector_id: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def type: () -> String?
+      def provision_mode: () -> String?
+      def credential_provider_configurations: () -> Array[Types::CredentialsProviderConfiguration]?
+      def created_at: () -> Time?
+      def last_updated_at: () -> Time?
+      def status: () -> String?
+      def authorization_url: () -> String?
+      def credentials_updated_at: () -> Time?
+    end
+    def get_payment_connector: (
+      ?payment_manager_id: String,
+      ?payment_connector_id: String
+    ) -> _GetPaymentConnectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPaymentConnectorResponse
+
+    interface _GetPaymentCredentialProviderResponse
+      include Smithy::Client::_Response[Types::GetPaymentCredentialProviderResponse]
+      def name: () -> String?
+      def credential_provider_arn: () -> String?
+      def credential_provider_vendor: () -> String?
+      def provider_configuration_output: () -> Types::PaymentProviderConfigurationOutput?
+      def created_time: () -> Time?
+      def last_updated_time: () -> Time?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_payment_credential_provider: (
+      ?name: String
+    ) -> _GetPaymentCredentialProviderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPaymentCredentialProviderResponse
+
+    interface _GetPaymentManagerResponse
+      include Smithy::Client::_Response[Types::GetPaymentManagerResponse]
+      def payment_manager_arn: () -> String?
+      def payment_manager_id: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def authorizer_type: () -> String?
+      def authorizer_configuration: () -> Types::AuthorizerConfiguration?
+      def role_arn: () -> String?
+      def workload_identity_details: () -> Types::WorkloadIdentityDetails?
+      def created_at: () -> Time?
+      def last_updated_at: () -> Time?
+      def status: () -> String?
+      def tags: () -> Hash[String, String]?
+      def kms_key_arn: () -> String?
+    end
+    def get_payment_manager: (
+      ?payment_manager_id: String
+    ) -> _GetPaymentManagerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPaymentManagerResponse
+
+    interface _GetPolicyResponse
+      include Smithy::Client::_Response[Types::GetPolicyResponse]
+      def policy_id: () -> String?
+      def name: () -> String?
+      def policy_engine_id: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def policy_arn: () -> String?
+      def status: () -> String?
+      def enforcement_mode: () -> String?
+      def definition: () -> Types::PolicyDefinition?
+      def description: () -> String?
+      def status_reasons: () -> Array[String]?
+    end
+    def get_policy: (
+      ?policy_engine_id: String,
+      ?policy_id: String
+    ) -> _GetPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPolicyResponse
+
+    interface _GetPolicyEngineResponse
+      include Smithy::Client::_Response[Types::GetPolicyEngineResponse]
+      def policy_engine_id: () -> String?
+      def name: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def policy_engine_arn: () -> String?
+      def status: () -> String?
+      def encryption_key_arn: () -> String?
+      def description: () -> String?
+      def status_reasons: () -> Array[String]?
+    end
+    def get_policy_engine: (
+      ?policy_engine_id: String
+    ) -> _GetPolicyEngineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPolicyEngineResponse
+
+    interface _GetPolicyEngineSummaryResponse
+      include Smithy::Client::_Response[Types::GetPolicyEngineSummaryResponse]
+      def policy_engine_id: () -> String?
+      def name: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def policy_engine_arn: () -> String?
+      def status: () -> String?
+      def encryption_key_arn: () -> String?
+    end
+    def get_policy_engine_summary: (
+      ?policy_engine_id: String
+    ) -> _GetPolicyEngineSummaryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPolicyEngineSummaryResponse
+
+    interface _GetPolicyGenerationResponse
+      include Smithy::Client::_Response[Types::GetPolicyGenerationResponse]
+      def policy_engine_id: () -> String?
+      def policy_generation_id: () -> String?
+      def name: () -> String?
+      def policy_generation_arn: () -> String?
+      def resource: () -> Types::Resource?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def status: () -> String?
+      def findings: () -> String?
+      def status_reasons: () -> Array[String]?
+    end
+    def get_policy_generation: (
+      ?policy_generation_id: String,
+      ?policy_engine_id: String
+    ) -> _GetPolicyGenerationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPolicyGenerationResponse
+
+    interface _GetPolicyGenerationSummaryResponse
+      include Smithy::Client::_Response[Types::GetPolicyGenerationSummaryResponse]
+      def policy_engine_id: () -> String?
+      def policy_generation_id: () -> String?
+      def name: () -> String?
+      def policy_generation_arn: () -> String?
+      def resource: () -> Types::Resource?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def status: () -> String?
+      def findings: () -> String?
+    end
+    def get_policy_generation_summary: (
+      ?policy_generation_id: String,
+      ?policy_engine_id: String
+    ) -> _GetPolicyGenerationSummaryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPolicyGenerationSummaryResponse
+
+    interface _GetPolicySummaryResponse
+      include Smithy::Client::_Response[Types::GetPolicySummaryResponse]
+      def policy_id: () -> String?
+      def name: () -> String?
+      def policy_engine_id: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def policy_arn: () -> String?
+      def status: () -> String?
+      def enforcement_mode: () -> String?
+    end
+    def get_policy_summary: (
+      ?policy_engine_id: String,
+      ?policy_id: String
+    ) -> _GetPolicySummaryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPolicySummaryResponse
+
+    interface _GetRegistryResponse
+      include Smithy::Client::_Response[Types::GetRegistryResponse]
+      def name: () -> String?
+      def description: () -> String?
+      def registry_id: () -> String?
+      def registry_arn: () -> String?
+      def authorizer_type: () -> String?
+      def authorizer_configuration: () -> Types::AuthorizerConfiguration?
+      def approval_configuration: () -> Types::ApprovalConfiguration?
+      def status: () -> String?
+      def status_reason: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+    end
+    def get_registry: (
+      ?registry_id: String
+    ) -> _GetRegistryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRegistryResponse
+
+    interface _GetRegistryRecordResponse
+      include Smithy::Client::_Response[Types::GetRegistryRecordResponse]
+      def registry_arn: () -> String?
+      def record_arn: () -> String?
+      def record_id: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def descriptor_type: () -> String?
+      def descriptors: () -> Types::Descriptors?
+      def record_version: () -> String?
+      def status: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def status_reason: () -> String?
+      def synchronization_type: () -> String?
+      def synchronization_configuration: () -> Types::SynchronizationConfiguration?
+    end
+    def get_registry_record: (
+      ?registry_id: String,
+      ?record_id: String
+    ) -> _GetRegistryRecordResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRegistryRecordResponse
+
+    interface _GetResourcePolicyResponse
+      include Smithy::Client::_Response[Types::GetResourcePolicyResponse]
+      def policy: () -> String?
+    end
+    def get_resource_policy: (
+      ?resource_arn: String
+    ) -> _GetResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResourcePolicyResponse
 
     interface _GetTokenVaultResponse
       include Smithy::Client::_Response[Types::GetTokenVaultResponse]
@@ -703,6 +3050,17 @@ module Aws::BedrockAgentCoreControl
       ?next_token: String
     ) -> _ListAgentRuntimeVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAgentRuntimeVersionsResponse
 
+    interface _ListAgentRuntimeVersionsByCapacityProviderResponse
+      include Smithy::Client::_Response[Types::ListAgentRuntimeVersionsByCapacityProviderOutput]
+      def agent_runtimes: () -> Array[Types::AgentRuntimeVersionSummary]?
+      def next_token: () -> String?
+    end
+    def list_agent_runtime_versions_by_capacity_provider: (
+      ?capacity_provider_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAgentRuntimeVersionsByCapacityProviderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAgentRuntimeVersionsByCapacityProviderResponse
+
     interface _ListAgentRuntimesResponse
       include Smithy::Client::_Response[Types::ListAgentRuntimesResponse]
       def agent_runtimes: () -> Array[Types::AgentRuntime]?
@@ -723,6 +3081,17 @@ module Aws::BedrockAgentCoreControl
       ?max_results: Integer
     ) -> _ListApiKeyCredentialProvidersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListApiKeyCredentialProvidersResponse
 
+    interface _ListBrowserProfilesResponse
+      include Smithy::Client::_Response[Types::ListBrowserProfilesResponse]
+      def profile_summaries: () -> Array[Types::BrowserProfileSummary]?
+      def next_token: () -> String?
+    end
+    def list_browser_profiles: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?name: String
+    ) -> _ListBrowserProfilesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBrowserProfilesResponse
+
     interface _ListBrowsersResponse
       include Smithy::Client::_Response[Types::ListBrowsersResponse]
       def browser_summaries: () -> Array[Types::BrowserSummary]?
@@ -734,6 +3103,16 @@ module Aws::BedrockAgentCoreControl
       ?type: String
     ) -> _ListBrowsersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBrowsersResponse
 
+    interface _ListCapacityProvidersResponse
+      include Smithy::Client::_Response[Types::ListCapacityProvidersOutput]
+      def capacity_providers: () -> Array[Types::CapacityProviderSummary]?
+      def next_token: () -> String?
+    end
+    def list_capacity_providers: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListCapacityProvidersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCapacityProvidersResponse
+
     interface _ListCodeInterpretersResponse
       include Smithy::Client::_Response[Types::ListCodeInterpretersResponse]
       def code_interpreter_summaries: () -> Array[Types::CodeInterpreterSummary]?
@@ -744,6 +3123,110 @@ module Aws::BedrockAgentCoreControl
       ?next_token: String,
       ?type: String
     ) -> _ListCodeInterpretersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCodeInterpretersResponse
+
+    interface _ListConfigurationBundleVersionsResponse
+      include Smithy::Client::_Response[Types::ListConfigurationBundleVersionsResponse]
+      def versions: () -> Array[Types::ConfigurationBundleVersionSummary]?
+      def next_token: () -> String?
+    end
+    def list_configuration_bundle_versions: (
+      ?bundle_id: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?filter: {
+        branch_name: String,
+        created_by_name: String,
+        latest_per_branch: bool
+      }
+    ) -> _ListConfigurationBundleVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListConfigurationBundleVersionsResponse
+
+    interface _ListConfigurationBundlesResponse
+      include Smithy::Client::_Response[Types::ListConfigurationBundlesResponse]
+      def bundles: () -> Array[Types::ConfigurationBundleSummary]?
+      def next_token: () -> String?
+    end
+    def list_configuration_bundles: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListConfigurationBundlesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListConfigurationBundlesResponse
+
+    interface _ListConsentPortalsResponse
+      include Smithy::Client::_Response[Types::ListConsentPortalsResponse]
+      def consent_portals: () -> Array[Types::ConsentPortalSummary]?
+      def next_token: () -> String?
+    end
+    def list_consent_portals: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListConsentPortalsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListConsentPortalsResponse
+
+    interface _ListDatasetExamplesResponse
+      include Smithy::Client::_Response[Types::ListDatasetExamplesResponse]
+      def dataset_arn: () -> String?
+      def dataset_id: () -> String?
+      def dataset_version: () -> String?
+      def examples: () -> Array[Smithy::Schema::document]?
+      def next_token: () -> String?
+    end
+    def list_dataset_examples: (
+      ?dataset_id: String,
+      ?dataset_version: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListDatasetExamplesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDatasetExamplesResponse
+
+    interface _ListDatasetVersionsResponse
+      include Smithy::Client::_Response[Types::ListDatasetVersionsResponse]
+      def versions: () -> Array[Types::DatasetVersionSummary]?
+      def next_token: () -> String?
+    end
+    def list_dataset_versions: (
+      ?dataset_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDatasetVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDatasetVersionsResponse
+
+    interface _ListDatasetsResponse
+      include Smithy::Client::_Response[Types::ListDatasetsResponse]
+      def datasets: () -> Array[Types::DatasetSummary]?
+      def next_token: () -> String?
+    end
+    def list_datasets: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDatasetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDatasetsResponse
+
+    interface _ListEvaluatorsResponse
+      include Smithy::Client::_Response[Types::ListEvaluatorsResponse]
+      def evaluators: () -> Array[Types::EvaluatorSummary]?
+      def next_token: () -> String?
+    end
+    def list_evaluators: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListEvaluatorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEvaluatorsResponse
+
+    interface _ListGatewayRateLimitsResponse
+      include Smithy::Client::_Response[Types::ListGatewayRateLimitsResponse]
+      def rate_limits: () -> Array[Types::GatewayRateLimitDetail]?
+      def next_token: () -> String?
+    end
+    def list_gateway_rate_limits: (
+      ?gateway_identifier: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListGatewayRateLimitsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListGatewayRateLimitsResponse
+
+    interface _ListGatewayRulesResponse
+      include Smithy::Client::_Response[Types::ListGatewayRulesResponse]
+      def gateway_rules: () -> Array[Types::GatewayRuleDetail]?
+      def next_token: () -> String?
+    end
+    def list_gateway_rules: (
+      ?gateway_identifier: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListGatewayRulesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListGatewayRulesResponse
 
     interface _ListGatewayTargetsResponse
       include Smithy::Client::_Response[Types::ListGatewayTargetsResponse]
@@ -766,6 +3249,38 @@ module Aws::BedrockAgentCoreControl
       ?next_token: String
     ) -> _ListGatewaysResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListGatewaysResponse
 
+    interface _ListHarnessEndpointsResponse
+      include Smithy::Client::_Response[Types::ListHarnessEndpointsResponse]
+      def endpoints: () -> Array[Types::HarnessEndpoint]?
+      def next_token: () -> String?
+    end
+    def list_harness_endpoints: (
+      ?harness_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListHarnessEndpointsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListHarnessEndpointsResponse
+
+    interface _ListHarnessVersionsResponse
+      include Smithy::Client::_Response[Types::ListHarnessVersionsResponse]
+      def harness_versions: () -> Array[Types::HarnessVersionSummary]?
+      def next_token: () -> String?
+    end
+    def list_harness_versions: (
+      ?harness_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListHarnessVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListHarnessVersionsResponse
+
+    interface _ListHarnessesResponse
+      include Smithy::Client::_Response[Types::ListHarnessesResponse]
+      def harnesses: () -> Array[Types::HarnessSummary]?
+      def next_token: () -> String?
+    end
+    def list_harnesses: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListHarnessesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListHarnessesResponse
+
     interface _ListMemoriesResponse
       include Smithy::Client::_Response[Types::ListMemoriesOutput]
       def memories: () -> Array[Types::MemorySummary]?
@@ -786,6 +3301,151 @@ module Aws::BedrockAgentCoreControl
       ?max_results: Integer
     ) -> _ListOauth2CredentialProvidersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListOauth2CredentialProvidersResponse
 
+    interface _ListOnlineEvaluationConfigsResponse
+      include Smithy::Client::_Response[Types::ListOnlineEvaluationConfigsResponse]
+      def online_evaluation_configs: () -> Array[Types::OnlineEvaluationConfigSummary]?
+      def next_token: () -> String?
+    end
+    def list_online_evaluation_configs: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListOnlineEvaluationConfigsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListOnlineEvaluationConfigsResponse
+
+    interface _ListPaymentConnectorsResponse
+      include Smithy::Client::_Response[Types::ListPaymentConnectorsResponse]
+      def payment_connectors: () -> Array[Types::PaymentConnectorSummary]?
+      def next_token: () -> String?
+    end
+    def list_payment_connectors: (
+      ?payment_manager_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListPaymentConnectorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPaymentConnectorsResponse
+
+    interface _ListPaymentCredentialProvidersResponse
+      include Smithy::Client::_Response[Types::ListPaymentCredentialProvidersResponse]
+      def credential_providers: () -> Array[Types::PaymentCredentialProviderItem]?
+      def next_token: () -> String?
+    end
+    def list_payment_credential_providers: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListPaymentCredentialProvidersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPaymentCredentialProvidersResponse
+
+    interface _ListPaymentManagersResponse
+      include Smithy::Client::_Response[Types::ListPaymentManagersResponse]
+      def payment_managers: () -> Array[Types::PaymentManagerSummary]?
+      def next_token: () -> String?
+    end
+    def list_payment_managers: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListPaymentManagersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPaymentManagersResponse
+
+    interface _ListPoliciesResponse
+      include Smithy::Client::_Response[Types::ListPoliciesResponse]
+      def policies: () -> Array[Types::Policy]?
+      def next_token: () -> String?
+    end
+    def list_policies: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?policy_engine_id: String,
+      ?target_resource_scope: String
+    ) -> _ListPoliciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPoliciesResponse
+
+    interface _ListPolicyEngineSummariesResponse
+      include Smithy::Client::_Response[Types::ListPolicyEngineSummariesResponse]
+      def policy_engines: () -> Array[Types::PolicyEngineSummary]?
+      def next_token: () -> String?
+    end
+    def list_policy_engine_summaries: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListPolicyEngineSummariesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPolicyEngineSummariesResponse
+
+    interface _ListPolicyEnginesResponse
+      include Smithy::Client::_Response[Types::ListPolicyEnginesResponse]
+      def policy_engines: () -> Array[Types::PolicyEngine]?
+      def next_token: () -> String?
+    end
+    def list_policy_engines: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListPolicyEnginesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPolicyEnginesResponse
+
+    interface _ListPolicyGenerationAssetsResponse
+      include Smithy::Client::_Response[Types::ListPolicyGenerationAssetsResponse]
+      def policy_generation_assets: () -> Array[Types::PolicyGenerationAsset]?
+      def next_token: () -> String?
+    end
+    def list_policy_generation_assets: (
+      ?policy_generation_id: String,
+      ?policy_engine_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListPolicyGenerationAssetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPolicyGenerationAssetsResponse
+
+    interface _ListPolicyGenerationSummariesResponse
+      include Smithy::Client::_Response[Types::ListPolicyGenerationSummariesResponse]
+      def policy_generations: () -> Array[Types::PolicyGenerationSummary]?
+      def next_token: () -> String?
+    end
+    def list_policy_generation_summaries: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?policy_engine_id: String
+    ) -> _ListPolicyGenerationSummariesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPolicyGenerationSummariesResponse
+
+    interface _ListPolicyGenerationsResponse
+      include Smithy::Client::_Response[Types::ListPolicyGenerationsResponse]
+      def policy_generations: () -> Array[Types::PolicyGeneration]?
+      def next_token: () -> String?
+    end
+    def list_policy_generations: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?policy_engine_id: String
+    ) -> _ListPolicyGenerationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPolicyGenerationsResponse
+
+    interface _ListPolicySummariesResponse
+      include Smithy::Client::_Response[Types::ListPolicySummariesResponse]
+      def policies: () -> Array[Types::PolicySummary]?
+      def next_token: () -> String?
+    end
+    def list_policy_summaries: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?policy_engine_id: String,
+      ?target_resource_scope: String
+    ) -> _ListPolicySummariesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPolicySummariesResponse
+
+    interface _ListRegistriesResponse
+      include Smithy::Client::_Response[Types::ListRegistriesResponse]
+      def registries: () -> Array[Types::RegistrySummary]?
+      def next_token: () -> String?
+    end
+    def list_registries: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?status: String,
+      ?authorizer_type: String
+    ) -> _ListRegistriesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRegistriesResponse
+
+    interface _ListRegistryRecordsResponse
+      include Smithy::Client::_Response[Types::ListRegistryRecordsResponse]
+      def registry_records: () -> Array[Types::RegistryRecordSummary]?
+      def next_token: () -> String?
+    end
+    def list_registry_records: (
+      ?registry_id: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?name: String,
+      ?status: String,
+      ?descriptor_type: String
+    ) -> _ListRegistryRecordsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRegistryRecordsResponse
+
     interface _ListTagsForResourceResponse
       include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
       def tags: () -> Hash[String, String]?
@@ -804,6 +3464,33 @@ module Aws::BedrockAgentCoreControl
       ?max_results: Integer
     ) -> _ListWorkloadIdentitiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListWorkloadIdentitiesResponse
 
+    interface _PutResourcePolicyResponse
+      include Smithy::Client::_Response[Types::PutResourcePolicyResponse]
+      def policy: () -> String?
+    end
+    def put_resource_policy: (
+      ?resource_arn: String,
+      ?policy: String
+    ) -> _PutResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutResourcePolicyResponse
+
+    interface _RotatePaymentConnectorCredentialsResponse
+      include Smithy::Client::_Response[Types::RotatePaymentConnectorCredentialsResponse]
+      def payment_connector_id: () -> String?
+      def payment_manager_id: () -> String?
+      def last_updated_at: () -> Time?
+      def status: () -> String?
+    end
+    def rotate_payment_connector_credentials: (
+      ?payment_manager_id: String,
+      ?payment_connector_id: String,
+      ?credentials_to_rotate: {
+        coinbase_cdp: {
+          secrets: Array[String]
+        }
+      },
+      ?client_token: String
+    ) -> _RotatePaymentConnectorCredentialsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RotatePaymentConnectorCredentialsResponse
+
     interface _SetTokenVaultCMKResponse
       include Smithy::Client::_Response[Types::SetTokenVaultCMKResponse]
       def token_vault_id: () -> String?
@@ -817,6 +3504,53 @@ module Aws::BedrockAgentCoreControl
         kms_key_arn: String
       }
     ) -> _SetTokenVaultCMKResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SetTokenVaultCMKResponse
+
+    interface _StartPolicyGenerationResponse
+      include Smithy::Client::_Response[Types::StartPolicyGenerationResponse]
+      def policy_engine_id: () -> String?
+      def policy_generation_id: () -> String?
+      def name: () -> String?
+      def policy_generation_arn: () -> String?
+      def resource: () -> Types::Resource?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def status: () -> String?
+      def findings: () -> String?
+      def status_reasons: () -> Array[String]?
+    end
+    def start_policy_generation: (
+      ?policy_engine_id: String,
+      ?resource: {
+        arn: String
+      },
+      ?content: {
+        raw_text: String
+      },
+      ?name: String,
+      ?client_token: String
+    ) -> _StartPolicyGenerationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartPolicyGenerationResponse
+
+    interface _SubmitRegistryRecordForApprovalResponse
+      include Smithy::Client::_Response[Types::SubmitRegistryRecordForApprovalResponse]
+      def registry_arn: () -> String?
+      def record_arn: () -> String?
+      def record_id: () -> String?
+      def status: () -> String?
+      def updated_at: () -> Time?
+    end
+    def submit_registry_record_for_approval: (
+      ?registry_id: String,
+      ?record_id: String
+    ) -> _SubmitRegistryRecordForApprovalResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SubmitRegistryRecordForApprovalResponse
+
+    interface _SynchronizeGatewayTargetsResponse
+      include Smithy::Client::_Response[Types::SynchronizeGatewayTargetsResponse]
+      def targets: () -> Array[Types::GatewayTarget]?
+    end
+    def synchronize_gateway_targets: (
+      ?gateway_identifier: String,
+      ?target_id_list: Array[String]
+    ) -> _SynchronizeGatewayTargetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SynchronizeGatewayTargetsResponse
 
     interface _TagResourceResponse
       include Smithy::Client::_Response[Types::TagResourceResponse]
@@ -846,10 +3580,20 @@ module Aws::BedrockAgentCoreControl
     end
     def update_agent_runtime: (
       ?agent_runtime_id: String,
-      ?description: String,
       ?agent_runtime_artifact: {
         container_configuration: {
           container_uri: String
+        },
+        code_configuration: {
+          code: {
+            s3: {
+              bucket: String,
+              prefix: untyped,
+              version_id: untyped
+            }
+          },
+          runtime: String,
+          entry_point: Array[String]
         }
       },
       ?role_arn: String,
@@ -857,24 +3601,98 @@ module Aws::BedrockAgentCoreControl
         network_mode: String,
         network_mode_config: {
           security_groups: Array[String],
-          subnets: Array[String]
+          subnets: Array[String],
+          require_service_s3_endpoint: bool
         }
       },
-      ?protocol_configuration: {
-        server_protocol: String
-      },
-      ?client_token: String,
-      ?environment_variables: Hash[String, String],
+      ?description: String,
       ?authorizer_configuration: {
         custom_jwt_authorizer: {
           discovery_url: String,
           allowed_audience: Array[String],
-          allowed_clients: Array[String]
+          allowed_clients: Array[String],
+          allowed_scopes: Array[String],
+          advertised_scope_mapping: Hash[String, String],
+          custom_claims: Array[
+            {
+              inbound_token_claim_name: String,
+              inbound_token_claim_value_type: String,
+              authorizing_claim_match_value: {
+                claim_match_value: {
+                  match_value_string: String,
+                  match_value_string_list: Array[String]
+                },
+                claim_match_operator: String
+              }
+            }
+          ],
+          private_endpoint: {
+            self_managed_lattice_resource: {
+              resource_configuration_identifier: String
+            },
+            managed_vpc_resource: {
+              vpc_identifier: String,
+              subnet_ids: Array[String],
+              endpoint_ip_address_type: String,
+              security_group_ids: Array[String],
+              tags: Hash[String, String],
+              routing_domain: String
+            }
+          },
+          private_endpoint_overrides: Array[
+            {
+              domain: String,
+              private_endpoint: untyped
+            }
+          ],
+          allowed_workload_configuration: {
+            hosting_environments: Array[
+              {
+                arn: String
+              }
+            ],
+            workload_identities: Array[String]
+          }
         }
       },
       ?request_header_configuration: {
         request_header_allowlist: Array[String]
-      }
+      },
+      ?protocol_configuration: {
+        server_protocol: String
+      },
+      ?lifecycle_configuration: {
+        idle_runtime_session_timeout: Integer,
+        max_lifetime: untyped
+      },
+      ?metadata_configuration: {
+        require_mmdsv2: bool
+      },
+      ?environment_variables: Hash[String, String],
+      ?filesystem_configurations: Array[
+        {
+          session_storage: {
+            mount_path: String
+          },
+          s3_files_access_point: {
+            access_point_arn: String,
+            mount_path: untyped
+          },
+          efs_access_point: {
+            access_point_arn: String,
+            mount_path: untyped
+          },
+          capacity_provider_volume: {
+            volume_name: String,
+            mount_path: untyped
+          }
+        }
+      ],
+      ?capacity_provider_configuration: {
+        capacity_provider_arn: String
+      },
+      ?platform_version: String,
+      ?client_token: String
     ) -> _UpdateAgentRuntimeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAgentRuntimeResponse
 
     interface _UpdateAgentRuntimeEndpointResponse
@@ -898,6 +3716,8 @@ module Aws::BedrockAgentCoreControl
     interface _UpdateApiKeyCredentialProviderResponse
       include Smithy::Client::_Response[Types::UpdateApiKeyCredentialProviderResponse]
       def api_key_secret_arn: () -> Types::Secret?
+      def api_key_secret_json_key: () -> String?
+      def api_key_secret_source: () -> String?
       def name: () -> String?
       def credential_provider_arn: () -> String?
       def created_time: () -> Time?
@@ -905,8 +3725,175 @@ module Aws::BedrockAgentCoreControl
     end
     def update_api_key_credential_provider: (
       ?name: String,
-      ?api_key: String
+      ?api_key: String,
+      ?api_key_secret_config: {
+        secret_id: String,
+        json_key: String
+      },
+      ?api_key_secret_source: String
     ) -> _UpdateApiKeyCredentialProviderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateApiKeyCredentialProviderResponse
+
+    interface _UpdateCapacityProviderResponse
+      include Smithy::Client::_Response[Types::UpdateCapacityProviderOutput]
+      def capacity_provider_id: () -> String?
+      def capacity_provider_arn: () -> String?
+      def name: () -> String?
+      def status: () -> String?
+      def created_at: () -> Time?
+      def last_updated_at: () -> Time?
+    end
+    def update_capacity_provider: (
+      ?capacity_provider_id: String,
+      ?description: {
+        optional_value: String
+      },
+      ?client_token: String
+    ) -> _UpdateCapacityProviderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCapacityProviderResponse
+
+    interface _UpdateConfigurationBundleResponse
+      include Smithy::Client::_Response[Types::UpdateConfigurationBundleResponse]
+      def bundle_arn: () -> String?
+      def bundle_id: () -> String?
+      def version_id: () -> String?
+      def updated_at: () -> Time?
+    end
+    def update_configuration_bundle: (
+      ?client_token: String,
+      ?bundle_id: String,
+      ?bundle_name: String,
+      ?description: String,
+      ?components: Hash[String,
+        {
+          configuration: Smithy::Schema::document
+        }
+      ],
+      ?parent_version_ids: Array[String],
+      ?branch_name: String,
+      ?commit_message: String,
+      ?created_by: {
+        name: String,
+        arn: untyped
+      },
+      ?kms_key_arn: String
+    ) -> _UpdateConfigurationBundleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateConfigurationBundleResponse
+
+    interface _UpdateConsentPortalResponse
+      include Smithy::Client::_Response[Types::UpdateConsentPortalResponse]
+      def sources: () -> Array[Types::ConsentPortalSource]?
+      def consent_portal_arn: () -> String?
+      def consent_portal_id: () -> String?
+      def created_at: () -> Time?
+      def description: () -> String?
+      def execution_role_arn: () -> String?
+      def idp_config: () -> Types::ConsentPortalIdpConfig?
+      def name: () -> String?
+      def portal_url: () -> String?
+      def status: () -> String?
+      def status_reason: () -> String?
+      def updated_at: () -> Time?
+    end
+    def update_consent_portal: (
+      ?consent_portal_identifier: String,
+      ?execution_role_arn: String,
+      ?idp_config: {
+        credential_provider_arn: String,
+        scopes: Array[String],
+        audience: String
+      },
+      ?description: String
+    ) -> _UpdateConsentPortalResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateConsentPortalResponse
+
+    interface _UpdateDatasetResponse
+      include Smithy::Client::_Response[Types::UpdateDatasetResponse]
+      def dataset_arn: () -> String?
+      def dataset_id: () -> String?
+      def updated_at: () -> Time?
+    end
+    def update_dataset: (
+      ?dataset_id: String,
+      ?client_token: String,
+      ?description: String
+    ) -> _UpdateDatasetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDatasetResponse
+
+    interface _UpdateDatasetExamplesResponse
+      include Smithy::Client::_Response[Types::UpdateDatasetExamplesResponse]
+      def dataset_arn: () -> String?
+      def dataset_id: () -> String?
+      def status: () -> String?
+      def updated_count: () -> Integer?
+      def updated_at: () -> Time?
+    end
+    def update_dataset_examples: (
+      ?dataset_id: String,
+      ?client_token: String,
+      ?examples: Array[Smithy::Schema::document]
+    ) -> _UpdateDatasetExamplesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDatasetExamplesResponse
+
+    interface _UpdateEvaluatorResponse
+      include Smithy::Client::_Response[Types::UpdateEvaluatorResponse]
+      def evaluator_arn: () -> String?
+      def evaluator_id: () -> String?
+      def updated_at: () -> Time?
+      def status: () -> String?
+    end
+    def update_evaluator: (
+      ?client_token: String,
+      ?evaluator_id: String,
+      ?description: String,
+      ?evaluator_config: {
+        llm_as_a_judge: {
+          instructions: String,
+          rating_scale: {
+            numerical: Array[
+              {
+                definition: String,
+                value: Float,
+                label: untyped
+              }
+            ],
+            categorical: Array[
+              {
+                definition: untyped,
+                label: untyped
+              }
+            ]
+          },
+          model_config: {
+            bedrock_evaluator_model_config: {
+              model_id: String,
+              inference_config: {
+                max_tokens: Integer,
+                temperature: Float,
+                top_p: untyped,
+                stop_sequences: Array[String]
+              },
+              additional_model_request_fields: Smithy::Schema::document
+            },
+            responses_evaluator_model_config: {
+              model_id: untyped,
+              max_output_tokens: untyped,
+              temperature: untyped,
+              top_p: untyped,
+              reasoning: {
+                effort: untyped
+              }
+            }
+          }
+        },
+        code_based: {
+          lambda_config: {
+            lambda_arn: String,
+            lambda_timeout_in_seconds: untyped
+          }
+        },
+        derived: {
+          base_evaluator_id: String,
+          model_config: untyped
+        }
+      },
+      ?level: String,
+      ?kms_key_arn: String
+    ) -> _UpdateEvaluatorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateEvaluatorResponse
 
     interface _UpdateGatewayResponse
       include Smithy::Client::_Response[Types::UpdateGatewayResponse]
@@ -925,8 +3912,13 @@ module Aws::BedrockAgentCoreControl
       def authorizer_type: () -> String?
       def authorizer_configuration: () -> Types::AuthorizerConfiguration?
       def kms_key_arn: () -> String?
+      def custom_transform_configuration: () -> Types::CustomTransformConfiguration?
+      def interceptor_configurations: () -> Array[Types::GatewayInterceptorConfiguration]?
+      def policy_engine_configuration: () -> Types::GatewayPolicyEngineConfiguration?
       def workload_identity_details: () -> Types::WorkloadIdentityDetails?
       def exception_level: () -> String?
+      def web_acl_arn: () -> String?
+      def waf_configuration: () -> Types::WafConfiguration?
     end
     def update_gateway: (
       ?gateway_identifier: String,
@@ -938,7 +3930,14 @@ module Aws::BedrockAgentCoreControl
         mcp: {
           supported_versions: Array[String],
           instructions: String,
-          search_type: String
+          search_type: String,
+          session_configuration: {
+            session_timeout_in_seconds: Integer
+          },
+          streaming_configuration: {
+            enable_response_streaming: bool
+          },
+          disable_mcp_list_tools_pagination: untyped
         }
       },
       ?authorizer_type: String,
@@ -946,12 +3945,193 @@ module Aws::BedrockAgentCoreControl
         custom_jwt_authorizer: {
           discovery_url: String,
           allowed_audience: Array[String],
-          allowed_clients: Array[String]
+          allowed_clients: Array[String],
+          allowed_scopes: Array[String],
+          advertised_scope_mapping: Hash[String, String],
+          custom_claims: Array[
+            {
+              inbound_token_claim_name: String,
+              inbound_token_claim_value_type: String,
+              authorizing_claim_match_value: {
+                claim_match_value: {
+                  match_value_string: String,
+                  match_value_string_list: Array[String]
+                },
+                claim_match_operator: String
+              }
+            }
+          ],
+          private_endpoint: {
+            self_managed_lattice_resource: {
+              resource_configuration_identifier: String
+            },
+            managed_vpc_resource: {
+              vpc_identifier: String,
+              subnet_ids: Array[String],
+              endpoint_ip_address_type: String,
+              security_group_ids: Array[String],
+              tags: Hash[String, String],
+              routing_domain: String
+            }
+          },
+          private_endpoint_overrides: Array[
+            {
+              domain: String,
+              private_endpoint: untyped
+            }
+          ],
+          allowed_workload_configuration: {
+            hosting_environments: Array[
+              {
+                arn: String
+              }
+            ],
+            workload_identities: Array[String]
+          }
         }
       },
       ?kms_key_arn: String,
-      ?exception_level: String
+      ?custom_transform_configuration: {
+        lambda: {
+          arn: String
+        }
+      },
+      ?interceptor_configurations: Array[
+        {
+          interceptor: {
+            lambda: {
+              arn: String
+            }
+          },
+          interception_points: Array[String],
+          input_configuration: {
+            pass_request_headers: bool,
+            payload_filter: {
+              exclude: Array[
+                {
+                  field: String
+                }
+              ]
+            }
+          }
+        }
+      ],
+      ?policy_engine_configuration: {
+        arn: String,
+        mode: String
+      },
+      ?exception_level: String,
+      ?waf_configuration: {
+        failure_mode: String
+      }
     ) -> _UpdateGatewayResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateGatewayResponse
+
+    interface _UpdateGatewayRateLimitResponse
+      include Smithy::Client::_Response[Types::UpdateGatewayRateLimitResponse]
+      def rate_limit_id: () -> String?
+      def gateway_identifier: () -> String?
+      def description: () -> String?
+      def dimension_keys: () -> Array[String]?
+      def entries: () -> Array[Types::LimitEntry]?
+      def status: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+    end
+    def update_gateway_rate_limit: (
+      ?gateway_identifier: String,
+      ?rate_limit_id: String,
+      ?description: String,
+      ?entries: Array[
+        {
+          dimensions: Hash[String, String],
+          requests: Array[
+            {
+              rate: Float,
+              period: String
+            }
+          ],
+          tokens: untyped,
+          connections: untyped
+        }
+      ]
+    ) -> _UpdateGatewayRateLimitResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateGatewayRateLimitResponse
+
+    interface _UpdateGatewayRuleResponse
+      include Smithy::Client::_Response[Types::UpdateGatewayRuleResponse]
+      def rule_id: () -> String?
+      def gateway_arn: () -> String?
+      def priority: () -> Integer?
+      def conditions: () -> Array[Types::Condition]?
+      def actions: () -> Array[Types::Action]?
+      def description: () -> String?
+      def created_at: () -> Time?
+      def status: () -> String?
+      def system: () -> Types::SystemManagedBlock?
+      def updated_at: () -> Time?
+    end
+    def update_gateway_rule: (
+      ?gateway_identifier: String,
+      ?rule_id: String,
+      ?priority: Integer,
+      ?conditions: Array[
+        {
+          match_principals: {
+            any_of: Array[
+              {
+                iam_principal: {
+                  arn: String,
+                  operator: String
+                }
+              }
+            ]
+          },
+          match_paths: {
+            any_of: Array[String]
+          }
+        }
+      ],
+      ?actions: Array[
+        {
+          configuration_bundle: {
+            static_override: {
+              bundle_arn: String,
+              bundle_version: String
+            },
+            weighted_override: {
+              traffic_split: Array[
+                {
+                  name: untyped,
+                  weight: Integer,
+                  configuration_bundle: {
+                    bundle_arn: untyped,
+                    bundle_version: untyped
+                  },
+                  description: untyped,
+                  metadata: Hash[String, String]
+                }
+              ]
+            }
+          },
+          route_to_target: {
+            static_route: {
+              target_name: String
+            },
+            weighted_route: {
+              traffic_split: Array[
+                {
+                  name: untyped,
+                  weight: untyped,
+                  target_name: untyped,
+                  description: untyped,
+                  metadata: untyped
+                }
+              ]
+            }
+          }
+        }
+      ],
+      ?description: String
+    ) -> _UpdateGatewayRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateGatewayRuleResponse
 
     interface _UpdateGatewayTargetResponse
       include Smithy::Client::_Response[Types::UpdateGatewayTargetResponse]
@@ -965,6 +4145,13 @@ module Aws::BedrockAgentCoreControl
       def description: () -> String?
       def target_configuration: () -> Types::TargetConfiguration?
       def credential_provider_configurations: () -> Array[Types::CredentialProviderConfiguration]?
+      def last_synchronized_at: () -> Time?
+      def metadata_configuration: () -> Types::MetadataConfiguration?
+      def private_endpoint: () -> Types::PrivateEndpoint?
+      def private_endpoint_managed_resources: () -> Array[Types::ManagedResourceDetails]?
+      def authorization_data: () -> Types::AuthorizationData?
+      def protocol_type: () -> String?
+      def certificate_configurations: () -> Array[Types::CertificateConfiguration]?
     end
     def update_gateway_target: (
       ?gateway_identifier: String,
@@ -1008,6 +4195,110 @@ module Aws::BedrockAgentCoreControl
                 }
               ]
             }
+          },
+          mcp_server: {
+            endpoint: untyped,
+            mcp_tool_schema: {
+              s3: untyped,
+              inline_payload: untyped
+            },
+            listing_mode: String,
+            resource_priority: Integer
+          },
+          api_gateway: {
+            rest_api_id: untyped,
+            stage: untyped,
+            api_gateway_tool_configuration: {
+              tool_overrides: Array[
+                {
+                  name: untyped,
+                  description: untyped,
+                  path: untyped,
+                  method: String
+                }
+              ],
+              tool_filters: Array[
+                {
+                  filter_path: untyped,
+                  methods: Array[String]
+                }
+              ]
+            }
+          },
+          connector: {
+            source: {
+              connector_id: String,
+              version: String
+            },
+            enabled: Array[String],
+            configurations: Array[
+              {
+                name: untyped,
+                description: untyped,
+                parameter_values: Smithy::Schema::document,
+                parameter_overrides: Array[
+                  {
+                    path: untyped,
+                    description: untyped,
+                    visible: bool
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        http: {
+          agentcore_runtime: {
+            arn: String,
+            qualifier: String,
+            schema: {
+              source: untyped
+            }
+          },
+          passthrough: {
+            endpoint: String,
+            protocol_type: String,
+            schema: untyped,
+            stickiness_configuration: {
+              identifier: untyped,
+              timeout: Integer,
+              composite_identifier: Array[String]
+            },
+            static_query_parameters: Hash[String, String],
+            static_query_parameter_conflict_resolution: String
+          },
+          connector: {
+            source: {
+              connector_id: untyped
+            },
+            parameters: Hash[String, String]
+          }
+        },
+        inference: {
+          connector: {
+            source: {
+              connector_id: String
+            }
+          },
+          provider: {
+            endpoint: untyped,
+            model_mapping: {
+              provider_prefix: {
+                strip: untyped,
+                separator: untyped
+              }
+            },
+            operations: Array[
+              {
+                path: String,
+                provider_path: untyped,
+                models: Array[
+                  {
+                    model: String
+                  }
+                ]
+              }
+            ]
           }
         }
       },
@@ -1018,18 +4309,341 @@ module Aws::BedrockAgentCoreControl
             oauth_credential_provider: {
               provider_arn: String,
               scopes: Array[String],
-              custom_parameters: Hash[String, String]
+              custom_parameters: Hash[String, String],
+              grant_type: String,
+              default_return_url: String
             },
             api_key_credential_provider: {
               provider_arn: String,
               credential_parameter_name: String,
               credential_prefix: String,
               credential_location: String
+            },
+            iam_credential_provider: {
+              service: String,
+              region: untyped
             }
+          }
+        }
+      ],
+      ?metadata_configuration: {
+        allowed_request_headers: Array[String],
+        allowed_query_parameters: Array[String],
+        allowed_response_headers: Array[String]
+      },
+      ?private_endpoint: {
+        self_managed_lattice_resource: {
+          resource_configuration_identifier: String
+        },
+        managed_vpc_resource: {
+          vpc_identifier: String,
+          subnet_ids: Array[String],
+          endpoint_ip_address_type: String,
+          security_group_ids: Array[String],
+          tags: Hash[String, String],
+          routing_domain: String
+        }
+      },
+      ?certificate_configurations: Array[
+        {
+          s3: {
+            uri: String,
+            bucket_owner_account_id: String
+          },
+          secrets_manager: {
+            secret_arn: String
           }
         }
       ]
     ) -> _UpdateGatewayTargetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateGatewayTargetResponse
+
+    interface _UpdateHarnessResponse
+      include Smithy::Client::_Response[Types::UpdateHarnessResponse]
+      def harness: () -> Types::Harness?
+    end
+    def update_harness: (
+      ?harness_id: String,
+      ?client_token: String,
+      ?execution_role_arn: String,
+      ?environment: {
+        agent_core_runtime_environment: {
+          lifecycle_configuration: {
+            idle_runtime_session_timeout: Integer,
+            max_lifetime: untyped
+          },
+          network_configuration: {
+            network_mode: String,
+            network_mode_config: {
+              security_groups: Array[String],
+              subnets: Array[String],
+              require_service_s3_endpoint: bool
+            }
+          },
+          filesystem_configurations: Array[
+            {
+              session_storage: {
+                mount_path: String
+              },
+              s3_files_access_point: {
+                access_point_arn: String,
+                mount_path: untyped
+              },
+              efs_access_point: {
+                access_point_arn: String,
+                mount_path: untyped
+              },
+              capacity_provider_volume: {
+                volume_name: String,
+                mount_path: untyped
+              }
+            }
+          ]
+        }
+      },
+      ?environment_artifact: {
+        optional_value: {
+          container_configuration: {
+            container_uri: String
+          }
+        }
+      },
+      ?environment_variables: Hash[String, String],
+      ?authorizer_configuration: {
+        optional_value: {
+          custom_jwt_authorizer: {
+            discovery_url: String,
+            allowed_audience: Array[String],
+            allowed_clients: Array[String],
+            allowed_scopes: Array[String],
+            advertised_scope_mapping: Hash[String, String],
+            custom_claims: Array[
+              {
+                inbound_token_claim_name: String,
+                inbound_token_claim_value_type: String,
+                authorizing_claim_match_value: {
+                  claim_match_value: {
+                    match_value_string: String,
+                    match_value_string_list: Array[String]
+                  },
+                  claim_match_operator: String
+                }
+              }
+            ],
+            private_endpoint: {
+              self_managed_lattice_resource: {
+                resource_configuration_identifier: String
+              },
+              managed_vpc_resource: {
+                vpc_identifier: String,
+                subnet_ids: Array[String],
+                endpoint_ip_address_type: String,
+                security_group_ids: Array[String],
+                tags: Hash[String, String],
+                routing_domain: String
+              }
+            },
+            private_endpoint_overrides: Array[
+              {
+                domain: String,
+                private_endpoint: untyped
+              }
+            ],
+            allowed_workload_configuration: {
+              hosting_environments: Array[
+                {
+                  arn: String
+                }
+              ],
+              workload_identities: Array[String]
+            }
+          }
+        }
+      },
+      ?model: {
+        bedrock_model_config: {
+          model_id: String,
+          max_tokens: Integer,
+          temperature: Float,
+          top_p: Float,
+          api_format: String,
+          additional_params: Smithy::Schema::document
+        },
+        open_ai_model_config: {
+          model_id: untyped,
+          api_key_arn: String,
+          api_base: String,
+          max_tokens: untyped,
+          temperature: untyped,
+          top_p: untyped,
+          api_format: String,
+          additional_params: untyped
+        },
+        gemini_model_config: {
+          model_id: untyped,
+          api_key_arn: untyped,
+          max_tokens: untyped,
+          temperature: untyped,
+          top_p: untyped,
+          top_k: Integer,
+          additional_params: untyped
+        },
+        lite_llm_model_config: {
+          model_id: untyped,
+          api_key_arn: untyped,
+          api_base: String,
+          max_tokens: untyped,
+          temperature: untyped,
+          top_p: untyped,
+          additional_params: untyped
+        }
+      },
+      ?system_prompt: Array[
+        {
+          text: String
+        }
+      ],
+      ?tools: Array[
+        {
+          type: String,
+          name: String,
+          config: {
+            remote_mcp: {
+              url: String,
+              headers: Hash[String, String]
+            },
+            agent_core_browser: {
+              browser_arn: String
+            },
+            agent_core_gateway: {
+              gateway_arn: String,
+              outbound_auth: {
+                aws_iam: {
+                },
+                none: untyped,
+                oauth: {
+                  provider_arn: String,
+                  scopes: Array[String],
+                  custom_parameters: Hash[String, String],
+                  grant_type: String,
+                  default_return_url: String
+                }
+              }
+            },
+            inline_function: {
+              description: String,
+              input_schema: Smithy::Schema::document
+            },
+            agent_core_code_interpreter: {
+              code_interpreter_arn: String
+            }
+          }
+        }
+      ],
+      ?skills: Array[
+        {
+          path: String,
+          s3: {
+            uri: String
+          },
+          git: {
+            url: String,
+            path: String,
+            auth: {
+              credential_arn: String,
+              username: untyped
+            }
+          },
+          aws_skills: {
+            paths: Array[String]
+          }
+        }
+      ],
+      ?allowed_tools: Array[String],
+      ?memory: {
+        optional_value: {
+          agent_core_memory_configuration: {
+            arn: String,
+            actor_id: String,
+            messages_count: Integer,
+            retrieval_config: Hash[String,
+              {
+                top_k: untyped,
+                relevance_score: Float,
+                strategy_id: untyped
+              }
+            ]
+          },
+          managed_memory_configuration: {
+            arn: untyped,
+            strategies: Array[String],
+            event_expiry_duration: untyped,
+            encryption_key_arn: String
+          },
+          disabled: {
+          }
+        }
+      },
+      ?truncation: {
+        strategy: String,
+        config: {
+          sliding_window: {
+            messages_count: Integer
+          },
+          summarization: {
+            summary_ratio: Float,
+            preserve_recent_messages: untyped,
+            summarization_system_prompt: String
+          }
+        }
+      },
+      ?hooks: Array[
+        {
+          before_invocation: {
+            name: String,
+            target: {
+              lambda: {
+                arn: String,
+                timeout_seconds: Integer,
+                failure_mode: String
+              },
+              sns: {
+                arn: String
+              },
+              event_bridge: {
+                arn: String
+              }
+            }
+          },
+          after_invocation: {
+            name: untyped,
+            target: untyped
+          },
+          before_tool_call: {
+            name: untyped,
+            target: untyped
+          },
+          after_tool_call: {
+            name: untyped,
+            target: untyped
+          }
+        }
+      ],
+      ?max_iterations: Integer,
+      ?max_tokens: Integer,
+      ?timeout_seconds: Integer
+    ) -> _UpdateHarnessResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateHarnessResponse
+
+    interface _UpdateHarnessEndpointResponse
+      include Smithy::Client::_Response[Types::UpdateHarnessEndpointResponse]
+      def endpoint: () -> Types::HarnessEndpoint?
+    end
+    def update_harness_endpoint: (
+      ?harness_id: String,
+      ?endpoint_name: String,
+      ?target_version: String,
+      ?description: String,
+      ?client_token: String
+    ) -> _UpdateHarnessEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateHarnessEndpointResponse
 
     interface _UpdateMemoryResponse
       include Smithy::Client::_Response[Types::UpdateMemoryOutput]
@@ -1047,22 +4661,62 @@ module Aws::BedrockAgentCoreControl
             semantic_memory_strategy: {
               name: String,
               description: String,
-              namespaces: Array[String]
+              namespaces: Array[String],
+              namespace_templates: untyped,
+              memory_record_schema: {
+                metadata_schema: Array[
+                  {
+                    key: String,
+                    type: String,
+                    extraction_type: String,
+                    extraction_config: {
+                      llm_extraction_config: {
+                        llm_extraction_instruction: String,
+                        definition: String,
+                        validation: {
+                          string_validation: {
+                            allowed_values: Array[String]
+                          },
+                          string_list_validation: {
+                            allowed_values: Array[String],
+                            max_items: Integer
+                          },
+                          number_validation: {
+                            min_value: Float,
+                            max_value: untyped
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              record_expiry_specification: {
+                record_expiry_duration_days: Integer,
+                action: String
+              }
             },
             summary_memory_strategy: {
               name: untyped,
               description: untyped,
-              namespaces: untyped
+              namespaces: untyped,
+              namespace_templates: untyped,
+              memory_record_schema: untyped,
+              record_expiry_specification: untyped
             },
             user_preference_memory_strategy: {
               name: untyped,
               description: untyped,
-              namespaces: untyped
+              namespaces: untyped,
+              namespace_templates: untyped,
+              memory_record_schema: untyped,
+              record_expiry_specification: untyped
             },
             custom_memory_strategy: {
               name: untyped,
               description: untyped,
               namespaces: untyped,
+              namespace_templates: untyped,
               configuration: {
                 semantic_override: {
                   extraction: {
@@ -1089,8 +4743,60 @@ module Aws::BedrockAgentCoreControl
                     append_to_prompt: untyped,
                     model_id: untyped
                   }
+                },
+                episodic_override: {
+                  extraction: {
+                    append_to_prompt: untyped,
+                    model_id: untyped
+                  },
+                  consolidation: {
+                    append_to_prompt: untyped,
+                    model_id: untyped
+                  },
+                  reflection: {
+                    append_to_prompt: untyped,
+                    model_id: untyped,
+                    namespaces: untyped,
+                    namespace_templates: untyped,
+                    memory_record_schema: untyped
+                  }
+                },
+                self_managed_configuration: {
+                  trigger_conditions: Array[
+                    {
+                      message_based_trigger: {
+                        message_count: untyped
+                      },
+                      token_based_trigger: {
+                        token_count: untyped
+                      },
+                      time_based_trigger: {
+                        idle_session_timeout: untyped
+                      }
+                    }
+                  ],
+                  invocation_configuration: {
+                    topic_arn: String,
+                    payload_delivery_bucket_name: untyped
+                  },
+                  historical_context_window_size: untyped
                 }
-              }
+              },
+              memory_record_schema: untyped,
+              record_expiry_specification: untyped
+            },
+            episodic_memory_strategy: {
+              name: untyped,
+              description: untyped,
+              namespaces: untyped,
+              namespace_templates: untyped,
+              reflection_configuration: {
+                namespaces: untyped,
+                namespace_templates: untyped,
+                memory_record_schema: untyped
+              },
+              memory_record_schema: untyped,
+              record_expiry_specification: untyped
             }
           }
         ],
@@ -1099,26 +4805,75 @@ module Aws::BedrockAgentCoreControl
             memory_strategy_id: untyped,
             description: untyped,
             namespaces: untyped,
+            namespace_templates: untyped,
             configuration: {
               extraction: {
                 custom_extraction_configuration: {
                   semantic_extraction_override: untyped,
-                  user_preference_extraction_override: untyped
+                  user_preference_extraction_override: untyped,
+                  episodic_extraction_override: untyped
                 }
               },
               consolidation: {
                 custom_consolidation_configuration: {
                   semantic_consolidation_override: untyped,
                   summary_consolidation_override: untyped,
-                  user_preference_consolidation_override: untyped
+                  user_preference_consolidation_override: untyped,
+                  episodic_consolidation_override: untyped
                 }
+              },
+              reflection: {
+                episodic_reflection_configuration: untyped,
+                custom_reflection_configuration: {
+                  episodic_reflection_override: untyped
+                }
+              },
+              self_managed_configuration: {
+                trigger_conditions: untyped,
+                invocation_configuration: {
+                  topic_arn: untyped,
+                  payload_delivery_bucket_name: untyped
+                },
+                historical_context_window_size: untyped
               }
-            }
+            },
+            memory_record_schema: untyped,
+            record_expiry_specification: untyped
           }
         ],
         delete_memory_strategies: Array[
           {
             memory_strategy_id: untyped
+          }
+        ]
+      },
+      ?add_indexed_keys: Array[
+        {
+          key: String,
+          type: String
+        }
+      ],
+      ?namespace_keys: Array[
+        {
+          key: String,
+          validation: {
+            allowed_values: Array[String],
+            regex_pattern: String
+          }
+        }
+      ],
+      ?stream_delivery_resources: {
+        resources: Array[
+          {
+            kinesis: {
+              data_stream_arn: String,
+              content_configurations: Array[
+                {
+                  type: String,
+                  level: String
+                }
+              ]
+            }
           }
         ]
       }
@@ -1127,12 +4882,16 @@ module Aws::BedrockAgentCoreControl
     interface _UpdateOauth2CredentialProviderResponse
       include Smithy::Client::_Response[Types::UpdateOauth2CredentialProviderResponse]
       def client_secret_arn: () -> Types::Secret?
+      def client_secret_json_key: () -> String?
+      def client_secret_source: () -> String?
       def name: () -> String?
       def credential_provider_vendor: () -> String?
       def credential_provider_arn: () -> String?
+      def callback_url: () -> String?
       def oauth2_provider_config_output: () -> Types::Oauth2ProviderConfigOutput?
       def created_time: () -> Time?
       def last_updated_time: () -> Time?
+      def status: () -> String?
     end
     def update_oauth2_credential_provider: (
       ?name: String,
@@ -1145,34 +4904,561 @@ module Aws::BedrockAgentCoreControl
               issuer: String,
               authorization_endpoint: String,
               token_endpoint: String,
-              response_types: Array[String]
+              response_types: Array[String],
+              token_endpoint_auth_methods: Array[String]
             }
           },
           client_id: String,
-          client_secret: String
+          client_secret: String,
+          client_secret_config: {
+            secret_id: String,
+            json_key: String
+          },
+          client_secret_source: String,
+          on_behalf_of_token_exchange_config: {
+            grant_type: String,
+            token_exchange_grant_type_config: {
+              actor_token_content: String,
+              actor_token_scopes: Array[String]
+            }
+          },
+          client_authentication_method: String,
+          private_key_jwt_config: {
+            private_key_source: {
+              kms_key_source: {
+                kms_key_arn: String
+              }
+            },
+            signing_algorithm: String,
+            additional_header_claims: Hash[String, String],
+            additional_payload_claims: untyped
+          },
+          private_endpoint: {
+            self_managed_lattice_resource: {
+              resource_configuration_identifier: String
+            },
+            managed_vpc_resource: {
+              vpc_identifier: String,
+              subnet_ids: Array[String],
+              endpoint_ip_address_type: String,
+              security_group_ids: Array[String],
+              tags: Hash[String, String],
+              routing_domain: String
+            }
+          },
+          private_endpoint_overrides: Array[
+            {
+              domain: String,
+              private_endpoint: untyped
+            }
+          ]
         },
         google_oauth2_provider_config: {
-          client_id: untyped,
-          client_secret: untyped
+          client_id: String,
+          client_secret: untyped,
+          client_secret_config: untyped,
+          client_secret_source: untyped
         },
         github_oauth2_provider_config: {
           client_id: untyped,
-          client_secret: untyped
+          client_secret: untyped,
+          client_secret_config: untyped,
+          client_secret_source: untyped
         },
         slack_oauth2_provider_config: {
           client_id: untyped,
-          client_secret: untyped
+          client_secret: untyped,
+          client_secret_config: untyped,
+          client_secret_source: untyped
         },
         salesforce_oauth2_provider_config: {
           client_id: untyped,
-          client_secret: untyped
+          client_secret: untyped,
+          client_secret_config: untyped,
+          client_secret_source: untyped
         },
         microsoft_oauth2_provider_config: {
           client_id: untyped,
-          client_secret: untyped
+          client_secret: untyped,
+          client_secret_config: untyped,
+          client_secret_source: untyped,
+          tenant_id: String
+        },
+        atlassian_oauth2_provider_config: {
+          client_id: untyped,
+          client_secret: untyped,
+          client_secret_config: untyped,
+          client_secret_source: untyped
+        },
+        linkedin_oauth2_provider_config: {
+          client_id: untyped,
+          client_secret: untyped,
+          client_secret_config: untyped,
+          client_secret_source: untyped
+        },
+        included_oauth2_provider_config: {
+          client_id: untyped,
+          client_secret: untyped,
+          client_secret_config: untyped,
+          client_secret_source: untyped,
+          issuer: untyped,
+          authorization_endpoint: untyped,
+          token_endpoint: untyped
         }
       }
     ) -> _UpdateOauth2CredentialProviderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateOauth2CredentialProviderResponse
+
+    interface _UpdateOnlineEvaluationConfigResponse
+      include Smithy::Client::_Response[Types::UpdateOnlineEvaluationConfigResponse]
+      def online_evaluation_config_arn: () -> String?
+      def online_evaluation_config_id: () -> String?
+      def updated_at: () -> Time?
+      def status: () -> String?
+      def execution_status: () -> String?
+      def failure_reason: () -> String?
+    end
+    def update_online_evaluation_config: (
+      ?client_token: String,
+      ?online_evaluation_config_id: String,
+      ?description: String,
+      ?rule: {
+        sampling_config: {
+          sampling_percentage: Float
+        },
+        filters: Array[
+          {
+            key: String,
+            operator: String,
+            value: {
+              string_value: untyped,
+              double_value: Float,
+              boolean_value: bool
+            }
+          }
+        ],
+        session_config: {
+          session_timeout_minutes: Integer
+        }
+      },
+      ?data_source_config: {
+        cloud_watch_logs: {
+          log_group_names: Array[String],
+          log_group_name_prefixes: Array[String],
+          service_names: Array[String]
+        }
+      },
+      ?evaluators: Array[
+        {
+          evaluator_id: String
+        }
+      ],
+      ?insights: Array[
+        {
+          insight_id: String
+        }
+      ],
+      ?clustering_config: {
+        frequencies: Array[String]
+      },
+      ?output_config: {
+        cloud_watch_config: {
+          log_group_name: String,
+          metrics_namespace: String,
+          result_destination: String
+        }
+      },
+      ?evaluation_execution_role_arn: String,
+      ?execution_status: String
+    ) -> _UpdateOnlineEvaluationConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateOnlineEvaluationConfigResponse
+
+    interface _UpdatePaymentConnectorResponse
+      include Smithy::Client::_Response[Types::UpdatePaymentConnectorResponse]
+      def payment_connector_id: () -> String?
+      def payment_manager_id: () -> String?
+      def name: () -> String?
+      def type: () -> String?
+      def credential_provider_configurations: () -> Array[Types::CredentialsProviderConfiguration]?
+      def last_updated_at: () -> Time?
+      def status: () -> String?
+      def authorization_url: () -> String?
+    end
+    def update_payment_connector: (
+      ?payment_manager_id: String,
+      ?payment_connector_id: String,
+      ?description: String,
+      ?type: String,
+      ?credential_provider_configurations: Array[
+        {
+          coinbase_cdp: {
+            credential_provider_arn: String
+          },
+          stripe_privy: untyped
+        }
+      ],
+      ?client_token: String
+    ) -> _UpdatePaymentConnectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePaymentConnectorResponse
+
+    interface _UpdatePaymentCredentialProviderResponse
+      include Smithy::Client::_Response[Types::UpdatePaymentCredentialProviderResponse]
+      def name: () -> String?
+      def credential_provider_vendor: () -> String?
+      def credential_provider_arn: () -> String?
+      def provider_configuration_output: () -> Types::PaymentProviderConfigurationOutput?
+      def created_time: () -> Time?
+      def last_updated_time: () -> Time?
+    end
+    def update_payment_credential_provider: (
+      ?name: String,
+      ?credential_provider_vendor: String,
+      ?provider_configuration_input: {
+        coinbase_cdp_configuration: {
+          api_key_id: String,
+          api_key_secret: String,
+          api_key_secret_source: String,
+          api_key_secret_config: {
+            secret_id: String,
+            json_key: String
+          },
+          wallet_secret: String,
+          wallet_secret_source: untyped,
+          wallet_secret_config: untyped
+        },
+        stripe_privy_configuration: {
+          app_id: String,
+          app_secret: String,
+          app_secret_source: untyped,
+          app_secret_config: untyped,
+          authorization_private_key: String,
+          authorization_private_key_source: untyped,
+          authorization_private_key_config: untyped,
+          authorization_id: String
+        }
+      }
+    ) -> _UpdatePaymentCredentialProviderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePaymentCredentialProviderResponse
+
+    interface _UpdatePaymentManagerResponse
+      include Smithy::Client::_Response[Types::UpdatePaymentManagerResponse]
+      def payment_manager_arn: () -> String?
+      def payment_manager_id: () -> String?
+      def name: () -> String?
+      def authorizer_type: () -> String?
+      def role_arn: () -> String?
+      def workload_identity_details: () -> Types::WorkloadIdentityDetails?
+      def last_updated_at: () -> Time?
+      def status: () -> String?
+      def kms_key_arn: () -> String?
+    end
+    def update_payment_manager: (
+      ?payment_manager_id: String,
+      ?description: String,
+      ?authorizer_type: String,
+      ?authorizer_configuration: {
+        custom_jwt_authorizer: {
+          discovery_url: String,
+          allowed_audience: Array[String],
+          allowed_clients: Array[String],
+          allowed_scopes: Array[String],
+          advertised_scope_mapping: Hash[String, String],
+          custom_claims: Array[
+            {
+              inbound_token_claim_name: String,
+              inbound_token_claim_value_type: String,
+              authorizing_claim_match_value: {
+                claim_match_value: {
+                  match_value_string: String,
+                  match_value_string_list: Array[String]
+                },
+                claim_match_operator: String
+              }
+            }
+          ],
+          private_endpoint: {
+            self_managed_lattice_resource: {
+              resource_configuration_identifier: String
+            },
+            managed_vpc_resource: {
+              vpc_identifier: String,
+              subnet_ids: Array[String],
+              endpoint_ip_address_type: String,
+              security_group_ids: Array[String],
+              tags: Hash[String, String],
+              routing_domain: String
+            }
+          },
+          private_endpoint_overrides: Array[
+            {
+              domain: String,
+              private_endpoint: untyped
+            }
+          ],
+          allowed_workload_configuration: {
+            hosting_environments: Array[
+              {
+                arn: String
+              }
+            ],
+            workload_identities: Array[String]
+          }
+        }
+      },
+      ?role_arn: String,
+      ?client_token: String,
+      ?kms_key_arn: String
+    ) -> _UpdatePaymentManagerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePaymentManagerResponse
+
+    interface _UpdatePolicyResponse
+      include Smithy::Client::_Response[Types::UpdatePolicyResponse]
+      def policy_id: () -> String?
+      def name: () -> String?
+      def policy_engine_id: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def policy_arn: () -> String?
+      def status: () -> String?
+      def enforcement_mode: () -> String?
+      def definition: () -> Types::PolicyDefinition?
+      def description: () -> String?
+      def status_reasons: () -> Array[String]?
+    end
+    def update_policy: (
+      ?policy_engine_id: String,
+      ?policy_id: String,
+      ?description: {
+        optional_value: String
+      },
+      ?definition: {
+        cedar: {
+          statement: String
+        },
+        policy_generation: {
+          policy_generation_id: String,
+          policy_generation_asset_id: untyped
+        },
+        policy: {
+          statement: untyped
+        }
+      },
+      ?validation_mode: String,
+      ?enforcement_mode: String
+    ) -> _UpdatePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePolicyResponse
+
+    interface _UpdatePolicyEngineResponse
+      include Smithy::Client::_Response[Types::UpdatePolicyEngineResponse]
+      def policy_engine_id: () -> String?
+      def name: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def policy_engine_arn: () -> String?
+      def status: () -> String?
+      def encryption_key_arn: () -> String?
+      def description: () -> String?
+      def status_reasons: () -> Array[String]?
+    end
+    def update_policy_engine: (
+      ?policy_engine_id: String,
+      ?description: {
+        optional_value: String
+      }
+    ) -> _UpdatePolicyEngineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePolicyEngineResponse
+
+    interface _UpdateRegistryResponse
+      include Smithy::Client::_Response[Types::UpdateRegistryResponse]
+      def name: () -> String?
+      def description: () -> String?
+      def registry_id: () -> String?
+      def registry_arn: () -> String?
+      def authorizer_type: () -> String?
+      def authorizer_configuration: () -> Types::AuthorizerConfiguration?
+      def approval_configuration: () -> Types::ApprovalConfiguration?
+      def status: () -> String?
+      def status_reason: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+    end
+    def update_registry: (
+      ?registry_id: String,
+      ?name: String,
+      ?description: {
+        optional_value: String
+      },
+      ?authorizer_configuration: {
+        optional_value: {
+          custom_jwt_authorizer: {
+            discovery_url: String,
+            allowed_audience: Array[String],
+            allowed_clients: Array[String],
+            allowed_scopes: Array[String],
+            advertised_scope_mapping: Hash[String, String],
+            custom_claims: Array[
+              {
+                inbound_token_claim_name: String,
+                inbound_token_claim_value_type: String,
+                authorizing_claim_match_value: {
+                  claim_match_value: {
+                    match_value_string: String,
+                    match_value_string_list: Array[String]
+                  },
+                  claim_match_operator: String
+                }
+              }
+            ],
+            private_endpoint: {
+              self_managed_lattice_resource: {
+                resource_configuration_identifier: String
+              },
+              managed_vpc_resource: {
+                vpc_identifier: String,
+                subnet_ids: Array[String],
+                endpoint_ip_address_type: String,
+                security_group_ids: Array[String],
+                tags: Hash[String, String],
+                routing_domain: String
+              }
+            },
+            private_endpoint_overrides: Array[
+              {
+                domain: String,
+                private_endpoint: untyped
+              }
+            ],
+            allowed_workload_configuration: {
+              hosting_environments: Array[
+                {
+                  arn: String
+                }
+              ],
+              workload_identities: Array[String]
+            }
+          }
+        }
+      },
+      ?approval_configuration: {
+        optional_value: {
+          auto_approval: bool
+        }
+      }
+    ) -> _UpdateRegistryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRegistryResponse
+
+    interface _UpdateRegistryRecordResponse
+      include Smithy::Client::_Response[Types::UpdateRegistryRecordResponse]
+      def registry_arn: () -> String?
+      def record_arn: () -> String?
+      def record_id: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def descriptor_type: () -> String?
+      def descriptors: () -> Types::Descriptors?
+      def record_version: () -> String?
+      def status: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def status_reason: () -> String?
+      def synchronization_type: () -> String?
+      def synchronization_configuration: () -> Types::SynchronizationConfiguration?
+    end
+    def update_registry_record: (
+      ?registry_id: String,
+      ?record_id: String,
+      ?name: String,
+      ?description: {
+        optional_value: String
+      },
+      ?descriptor_type: String,
+      ?descriptors: {
+        optional_value: {
+          mcp: {
+            optional_value: {
+              server: {
+                optional_value: {
+                  schema_version: String,
+                  inline_content: String
+                }
+              },
+              tools: {
+                optional_value: {
+                  protocol_version: untyped,
+                  inline_content: untyped
+                }
+              }
+            }
+          },
+          a2a: {
+            optional_value: {
+              agent_card: {
+                schema_version: untyped,
+                inline_content: untyped
+              }
+            }
+          },
+          custom: {
+            optional_value: {
+              inline_content: untyped
+            }
+          },
+          agent_skills: {
+            optional_value: {
+              skill_md: {
+                optional_value: {
+                  inline_content: untyped
+                }
+              },
+              skill_definition: {
+                optional_value: {
+                  schema_version: untyped,
+                  inline_content: untyped
+                }
+              }
+            }
+          }
+        }
+      },
+      ?record_version: String,
+      ?synchronization_type: {
+        optional_value: String
+      },
+      ?synchronization_configuration: {
+        optional_value: {
+          from_url: {
+            url: String,
+            credential_provider_configurations: Array[
+              {
+                credential_provider_type: String,
+                credential_provider: {
+                  oauth_credential_provider: {
+                    provider_arn: String,
+                    grant_type: String,
+                    scopes: Array[String],
+                    custom_parameters: Hash[String, String]
+                  },
+                  iam_credential_provider: {
+                    role_arn: String,
+                    service: String,
+                    region: String
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      ?trigger_synchronization: bool
+    ) -> _UpdateRegistryRecordResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRegistryRecordResponse
+
+    interface _UpdateRegistryRecordStatusResponse
+      include Smithy::Client::_Response[Types::UpdateRegistryRecordStatusResponse]
+      def registry_arn: () -> String?
+      def record_arn: () -> String?
+      def record_id: () -> String?
+      def status: () -> String?
+      def status_reason: () -> String?
+      def updated_at: () -> Time?
+    end
+    def update_registry_record_status: (
+      ?registry_id: String,
+      ?record_id: String,
+      ?status: String,
+      ?status_reason: String
+    ) -> _UpdateRegistryRecordStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRegistryRecordStatusResponse
 
     interface _UpdateWorkloadIdentityResponse
       include Smithy::Client::_Response[Types::UpdateWorkloadIdentityResponse]

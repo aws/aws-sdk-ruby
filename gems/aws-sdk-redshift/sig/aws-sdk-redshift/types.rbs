@@ -109,6 +109,11 @@ module Aws::Redshift
       attr_accessor partner_name: String?
     end
 
+    module ApplicationType
+      NONE: String
+      LAKEHOUSE: String
+    end
+
     class AquaConfiguration
       include Smithy::Schema::Structure
 
@@ -658,6 +663,10 @@ module Aws::Redshift
         ?ip_address_type: String,
         ?multi_az: String,
         ?multi_az_secondary: Types::SecondaryClusterInfo,
+        ?lakehouse_registration_status: String,
+        ?catalog_arn: String,
+        ?extra_compute_for_automatic_optimization: String,
+        ?logging_publish_status: Types::LoggingPublishStatus,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -721,6 +730,10 @@ module Aws::Redshift
       attr_accessor ip_address_type: String?
       attr_accessor multi_az: String?
       attr_accessor multi_az_secondary: Types::SecondaryClusterInfo?
+      attr_accessor lakehouse_registration_status: String?
+      attr_accessor catalog_arn: String?
+      attr_accessor extra_compute_for_automatic_optimization: String?
+      attr_accessor logging_publish_status: Types::LoggingPublishStatus?
     end
 
     class ClusterAlreadyExistsFault
@@ -1191,6 +1204,17 @@ module Aws::Redshift
       attr_accessor message: String?
     end
 
+    class Connect
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authorization: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authorization: String?
+    end
+
     class CopyClusterSnapshotMessage
       include Smithy::Schema::Structure
 
@@ -1299,6 +1323,8 @@ module Aws::Redshift
         ?ip_address_type: String,
         ?multi_az: bool,
         ?redshift_idc_application_arn: String,
+        ?catalog_name: String,
+        ?extra_compute_for_automatic_optimization: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1341,6 +1367,8 @@ module Aws::Redshift
       attr_accessor ip_address_type: String?
       attr_accessor multi_az: bool?
       attr_accessor redshift_idc_application_arn: String?
+      attr_accessor catalog_name: String?
+      attr_accessor extra_compute_for_automatic_optimization: bool?
     end
 
     class CreateClusterParameterGroupMessage
@@ -1692,6 +1720,34 @@ module Aws::Redshift
       attr_accessor tags: Array[Types::Tag]?
     end
 
+    class CreateQev2IdcApplicationMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?idc_instance_arn: String,
+        ?qev2_idc_application_name: String,
+        ?idc_display_name: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor idc_instance_arn: String?
+      attr_accessor qev2_idc_application_name: String?
+      attr_accessor idc_display_name: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateQev2IdcApplicationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?qev2_idc_application: Types::Qev2IdcApplication,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor qev2_idc_application: Types::Qev2IdcApplication?
+    end
+
     class CreateRedshiftIdcApplicationMessage
       include Smithy::Schema::Structure
 
@@ -1703,6 +1759,7 @@ module Aws::Redshift
         ?iam_role_arn: String,
         ?authorized_token_issuer_list: Array[Types::AuthorizedTokenIssuer],
         ?service_integrations: Array[Types::ServiceIntegrationsUnion],
+        ?application_type: String,
         ?tags: Array[Types::Tag],
         ?sso_tag_keys: Array[String],
       ) -> void
@@ -1715,6 +1772,7 @@ module Aws::Redshift
       attr_accessor iam_role_arn: String?
       attr_accessor authorized_token_issuer_list: Array[Types::AuthorizedTokenIssuer]?
       attr_accessor service_integrations: Array[Types::ServiceIntegrationsUnion]?
+      attr_accessor application_type: String?
       attr_accessor tags: Array[Types::Tag]?
       attr_accessor sso_tag_keys: Array[String]?
     end
@@ -2392,6 +2450,17 @@ module Aws::Redshift
 
       attr_accessor database_name: String?
       attr_accessor partner_name: String?
+    end
+
+    class DeleteQev2IdcApplicationMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?qev2_idc_application_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor qev2_idc_application_arn: String?
     end
 
     class DeleteRedshiftIdcApplicationMessage
@@ -3127,6 +3196,7 @@ module Aws::Redshift
         ?last_failure_message: String,
         ?log_destination_type: String,
         ?log_exports: Array[String],
+        ?s3_tables: Types::S3TablePublishStatus,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3138,6 +3208,7 @@ module Aws::Redshift
       attr_accessor last_failure_message: String?
       attr_accessor log_destination_type: String?
       attr_accessor log_exports: Array[String]?
+      attr_accessor s3_tables: Types::S3TablePublishStatus?
     end
 
     class DescribeNodeConfigurationOptionsMessage
@@ -3208,6 +3279,34 @@ module Aws::Redshift
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor partner_integration_info_list: Array[Types::PartnerIntegrationInfo]?
+    end
+
+    class DescribeQev2IdcApplicationsMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?qev2_idc_application_arn: String,
+        ?max_records: Integer,
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor qev2_idc_application_arn: String?
+      attr_accessor max_records: Integer?
+      attr_accessor marker: String?
+    end
+
+    class DescribeQev2IdcApplicationsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?qev2_idc_applications: Array[Types::Qev2IdcApplication],
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor qev2_idc_applications: Array[Types::Qev2IdcApplication]?
+      attr_accessor marker: String?
     end
 
     class DescribeRedshiftIdcApplicationsMessage
@@ -3507,10 +3606,14 @@ module Aws::Redshift
 
       def initialize: (
         ?cluster_identifier: String,
+        ?log_destination_type: String,
+        ?log_exports: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor cluster_identifier: String?
+      attr_accessor log_destination_type: String?
+      attr_accessor log_exports: Array[String]?
     end
 
     class DisableLoggingOutput
@@ -3525,6 +3628,7 @@ module Aws::Redshift
         ?last_failure_message: String,
         ?log_destination_type: String,
         ?log_exports: Array[String],
+        ?s3_tables: Types::S3TablePublishStatus,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3536,6 +3640,7 @@ module Aws::Redshift
       attr_accessor last_failure_message: String?
       attr_accessor log_destination_type: String?
       attr_accessor log_exports: Array[String]?
+      attr_accessor s3_tables: Types::S3TablePublishStatus?
     end
 
     class DisableSnapshotCopyMessage
@@ -3637,6 +3742,8 @@ module Aws::Redshift
         ?s3_key_prefix: String,
         ?log_destination_type: String,
         ?log_exports: Array[String],
+        ?s3_table_kms_key_id: String,
+        ?s3_table_granularity: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3645,6 +3752,8 @@ module Aws::Redshift
       attr_accessor s3_key_prefix: String?
       attr_accessor log_destination_type: String?
       attr_accessor log_exports: Array[String]?
+      attr_accessor s3_table_kms_key_id: String?
+      attr_accessor s3_table_granularity: String?
     end
 
     class EnableLoggingOutput
@@ -3659,6 +3768,7 @@ module Aws::Redshift
         ?last_failure_message: String,
         ?log_destination_type: String,
         ?log_exports: Array[String],
+        ?s3_tables: Types::S3TablePublishStatus,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3670,6 +3780,7 @@ module Aws::Redshift
       attr_accessor last_failure_message: String?
       attr_accessor log_destination_type: String?
       attr_accessor log_exports: Array[String]?
+      attr_accessor s3_tables: Types::S3TablePublishStatus?
     end
 
     class EnableSnapshotCopyMessage
@@ -4074,6 +4185,30 @@ module Aws::Redshift
       attr_accessor db_password: String?
       attr_accessor expiration: Time?
       attr_accessor next_refresh_time: Time?
+    end
+
+    class GetIdentityCenterAuthTokenRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_ids: Array[String]?
+    end
+
+    class GetIdentityCenterAuthTokenResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?token: String,
+        ?expiration_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor token: String?
+      attr_accessor expiration_time: Time?
     end
 
     class GetReservedNodeExchangeConfigurationOptionsInputMessage
@@ -4911,6 +5046,16 @@ module Aws::Redshift
       end
     end
 
+    module LakehouseIdcRegistration
+      ASSOCIATE: String
+      DISASSOCIATE: String
+    end
+
+    module LakehouseRegistration
+      REGISTER: String
+      DEREGISTER: String
+    end
+
     class LimitExceededFault
       include Smithy::Schema::Structure
 
@@ -4955,6 +5100,18 @@ module Aws::Redshift
     module LogDestinationType
       S3: String
       CLOUDWATCH: String
+      S3TABLE: String
+    end
+
+    class LoggingPublishStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_tables: Types::S3TablePublishStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_tables: Types::S3TablePublishStatus?
     end
 
     class MaintenanceTrack
@@ -5144,6 +5301,7 @@ module Aws::Redshift
         ?master_password_secret_kms_key_id: String,
         ?ip_address_type: String,
         ?multi_az: bool,
+        ?extra_compute_for_automatic_optimization: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -5176,6 +5334,7 @@ module Aws::Redshift
       attr_accessor master_password_secret_kms_key_id: String?
       attr_accessor ip_address_type: String?
       attr_accessor multi_az: bool?
+      attr_accessor extra_compute_for_automatic_optimization: bool?
     end
 
     class ModifyClusterParameterGroupMessage
@@ -5434,6 +5593,68 @@ module Aws::Redshift
       attr_accessor kms_key_id: String?
       attr_accessor additional_encryption_context: Hash[String, String]?
       attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class ModifyLakehouseConfigurationMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_identifier: String,
+        ?lakehouse_registration: String,
+        ?catalog_name: String,
+        ?lakehouse_idc_registration: String,
+        ?lakehouse_idc_application_arn: String,
+        ?dry_run: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_identifier: String?
+      attr_accessor lakehouse_registration: String?
+      attr_accessor catalog_name: String?
+      attr_accessor lakehouse_idc_registration: String?
+      attr_accessor lakehouse_idc_application_arn: String?
+      attr_accessor dry_run: bool?
+    end
+
+    class ModifyLakehouseConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_identifier: String,
+        ?lakehouse_idc_application_arn: String,
+        ?lakehouse_registration_status: String,
+        ?catalog_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_identifier: String?
+      attr_accessor lakehouse_idc_application_arn: String?
+      attr_accessor lakehouse_registration_status: String?
+      attr_accessor catalog_arn: String?
+    end
+
+    class ModifyQev2IdcApplicationMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?qev2_idc_application_arn: String,
+        ?idc_display_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor qev2_idc_application_arn: String?
+      attr_accessor idc_display_name: String?
+    end
+
+    class ModifyQev2IdcApplicationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?qev2_idc_application: Types::Qev2IdcApplication,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor qev2_idc_application: Types::Qev2IdcApplication?
     end
 
     class ModifyRedshiftIdcApplicationMessage
@@ -5974,6 +6195,51 @@ module Aws::Redshift
       attr_accessor resource_policy: Types::ResourcePolicy?
     end
 
+    class Qev2IdcApplication
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?idc_instance_arn: String,
+        ?qev2_idc_application_name: String,
+        ?qev2_idc_application_arn: String,
+        ?idc_managed_application_arn: String,
+        ?idc_onboard_status: String,
+        ?idc_display_name: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor idc_instance_arn: String?
+      attr_accessor qev2_idc_application_name: String?
+      attr_accessor qev2_idc_application_arn: String?
+      attr_accessor idc_managed_application_arn: String?
+      attr_accessor idc_onboard_status: String?
+      attr_accessor idc_display_name: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class Qev2IdcApplicationAlreadyExistsFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Qev2IdcApplicationNotExistsFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
     class ReadWriteAccess
       include Smithy::Schema::Structure
 
@@ -6089,6 +6355,7 @@ module Aws::Redshift
         ?idc_onboard_status: String,
         ?authorized_token_issuer_list: Array[Types::AuthorizedTokenIssuer],
         ?service_integrations: Array[Types::ServiceIntegrationsUnion],
+        ?application_type: String,
         ?tags: Array[Types::Tag],
         ?sso_tag_keys: Array[String],
       ) -> void
@@ -6104,6 +6371,7 @@ module Aws::Redshift
       attr_accessor idc_onboard_status: String?
       attr_accessor authorized_token_issuer_list: Array[Types::AuthorizedTokenIssuer]?
       attr_accessor service_integrations: Array[Types::ServiceIntegrationsUnion]?
+      attr_accessor application_type: String?
       attr_accessor tags: Array[Types::Tag]?
       attr_accessor sso_tag_keys: Array[String]?
     end
@@ -6139,6 +6407,33 @@ module Aws::Redshift
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    class RedshiftInvalidParameterFault
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class RedshiftScopeUnion
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?connect: Types::Connect,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connect: Types::Connect?
+
+      class Connect < RedshiftScopeUnion
+      end
+      class Unknown < RedshiftScopeUnion
+      end
     end
 
     class ReferenceLink
@@ -6599,6 +6894,8 @@ module Aws::Redshift
         ?master_password_secret_kms_key_id: String,
         ?ip_address_type: String,
         ?multi_az: bool,
+        ?catalog_name: String,
+        ?redshift_idc_application_arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -6639,6 +6936,8 @@ module Aws::Redshift
       attr_accessor master_password_secret_kms_key_id: String?
       attr_accessor ip_address_type: String?
       attr_accessor multi_az: bool?
+      attr_accessor catalog_name: String?
+      attr_accessor redshift_idc_application_arn: String?
     end
 
     class RestoreFromClusterSnapshotResult
@@ -6897,6 +7196,25 @@ module Aws::Redshift
       end
     end
 
+    class S3TablePublishStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_tables: Array[String],
+        ?s3_table_namespace: String,
+        ?s3_table_granularity: String,
+        ?enabled_all: bool,
+        ?last_ingestion_times: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_tables: Array[String]?
+      attr_accessor s3_table_namespace: String?
+      attr_accessor s3_table_granularity: String?
+      attr_accessor enabled_all: bool?
+      attr_accessor last_ingestion_times: Hash[String, String]?
+    end
+
     class SNSInvalidTopicFault
       include Smithy::Schema::Structure
 
@@ -7112,15 +7430,19 @@ module Aws::Redshift
       def initialize: (
         ?lake_formation: Array[Types::LakeFormationScopeUnion],
         ?s3_access_grants: Array[Types::S3AccessGrantsScopeUnion],
+        ?redshift: Array[Types::RedshiftScopeUnion],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor lake_formation: Array[Types::LakeFormationScopeUnion]?
       attr_accessor s3_access_grants: Array[Types::S3AccessGrantsScopeUnion]?
+      attr_accessor redshift: Array[Types::RedshiftScopeUnion]?
 
       class LakeFormation < ServiceIntegrationsUnion
       end
       class S3AccessGrants < ServiceIntegrationsUnion
+      end
+      class Redshift < ServiceIntegrationsUnion
       end
       class Unknown < ServiceIntegrationsUnion
       end
@@ -7841,6 +8163,7 @@ module Aws::Redshift
       SPECTRUM: String
       CONCURRENCY_SCALING: String
       CROSS_REGION_DATASHARING: String
+      EXTRA_COMPUTE_FOR_AUTOMATIC_OPTIMIZATION: String
     end
 
     module UsageLimitLimitType

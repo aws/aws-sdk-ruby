@@ -3,6 +3,7 @@ module Aws::Identitystore
     include Smithy::Schema::Shapes
 
     AccessDeniedException: StructureShape
+    AccessDeniedExceptionReason: EnumShape
     Address: StructureShape
     Addresses: ListShape
     AlternateIdentifier: UnionShape
@@ -10,41 +11,48 @@ module Aws::Identitystore
     AttributeOperations: ListShape
     AttributePath: StringShape
     AttributeValue: DocumentShape
+    BooleanType: BooleanShape
     ConflictException: StructureShape
-    ConflictExceptionReason: StringShape
-    CreateGroupInput: StructureShape
-    CreateGroupMembershipInput: StructureShape
-    CreateGroupMembershipOutput: StructureShape
-    CreateGroupOutput: StructureShape
-    CreateUserInput: StructureShape
-    CreateUserOutput: StructureShape
-    DeleteGroupInput: StructureShape
-    DeleteGroupMembershipInput: StructureShape
-    DeleteGroupMembershipOutput: StructureShape
-    DeleteGroupOutput: StructureShape
-    DeleteUserInput: StructureShape
-    DeleteUserOutput: StructureShape
-    DescribeGroupInput: StructureShape
-    DescribeGroupMembershipInput: StructureShape
-    DescribeGroupMembershipOutput: StructureShape
-    DescribeGroupOutput: StructureShape
-    DescribeUserInput: StructureShape
-    DescribeUserOutput: StructureShape
+    ConflictExceptionReason: EnumShape
+    CreateGroupMembershipRequest: StructureShape
+    CreateGroupMembershipResponse: StructureShape
+    CreateGroupRequest: StructureShape
+    CreateGroupResponse: StructureShape
+    CreateUserRequest: StructureShape
+    CreateUserResponse: StructureShape
+    DateType: TimestampShape
+    DeleteGroupMembershipRequest: StructureShape
+    DeleteGroupMembershipResponse: StructureShape
+    DeleteGroupRequest: StructureShape
+    DeleteGroupResponse: StructureShape
+    DeleteUserRequest: StructureShape
+    DeleteUserResponse: StructureShape
+    DescribeGroupMembershipRequest: StructureShape
+    DescribeGroupMembershipResponse: StructureShape
+    DescribeGroupRequest: StructureShape
+    DescribeGroupResponse: StructureShape
+    DescribeIdentityStoreRequest: StructureShape
+    DescribeIdentityStoreResponse: StructureShape
+    DescribeUserRequest: StructureShape
+    DescribeUserResponse: StructureShape
     Email: StructureShape
     Emails: ListShape
     ExceptionMessage: StringShape
+    ExtensionName: StringShape
+    ExtensionNames: ListShape
+    Extensions: MapShape
     ExternalId: StructureShape
     ExternalIdIdentifier: StringShape
     ExternalIdIssuer: StringShape
     ExternalIds: ListShape
     Filter: StructureShape
     Filters: ListShape
-    GetGroupIdInput: StructureShape
-    GetGroupIdOutput: StructureShape
-    GetGroupMembershipIdInput: StructureShape
-    GetGroupMembershipIdOutput: StructureShape
-    GetUserIdInput: StructureShape
-    GetUserIdOutput: StructureShape
+    GetGroupIdRequest: StructureShape
+    GetGroupIdResponse: StructureShape
+    GetGroupMembershipIdRequest: StructureShape
+    GetGroupMembershipIdResponse: StructureShape
+    GetUserIdRequest: StructureShape
+    GetUserIdResponse: StructureShape
     Group: StructureShape
     GroupDisplayName: StringShape
     GroupIds: ListShape
@@ -53,42 +61,65 @@ module Aws::Identitystore
     GroupMembershipExistenceResults: ListShape
     GroupMemberships: ListShape
     Groups: ListShape
+    IdentityStore: StructureShape
+    IdentityStoreArn: StringShape
     IdentityStoreId: StringShape
+    IdentityStores: ListShape
     InternalServerException: StructureShape
-    IsMemberInGroupsInput: StructureShape
-    IsMemberInGroupsOutput: StructureShape
-    ListGroupMembershipsForMemberInput: StructureShape
-    ListGroupMembershipsForMemberOutput: StructureShape
-    ListGroupMembershipsInput: StructureShape
-    ListGroupMembershipsOutput: StructureShape
-    ListGroupsInput: StructureShape
-    ListGroupsOutput: StructureShape
-    ListUsersInput: StructureShape
-    ListUsersOutput: StructureShape
+    IpCidrList: ListShape
+    IpCidrType: StringShape
+    IsMemberInGroupsRequest: StructureShape
+    IsMemberInGroupsResponse: StructureShape
+    ListGroupMembershipsForMemberRequest: StructureShape
+    ListGroupMembershipsForMemberResponse: StructureShape
+    ListGroupMembershipsRequest: StructureShape
+    ListGroupMembershipsResponse: StructureShape
+    ListGroupsRequest: StructureShape
+    ListGroupsResponse: StructureShape
+    ListIdentityStoresRequest: StructureShape
+    ListIdentityStoresResponse: StructureShape
+    ListUsersRequest: StructureShape
+    ListUsersResponse: StructureShape
     MaxResults: IntegerShape
     MemberId: UnionShape
     Name: StructureShape
+    NetworkConfiguration: StructureShape
+    NetworkConfigurationDetails: StructureShape
     NextToken: StringShape
     PhoneNumber: StructureShape
     PhoneNumbers: ListShape
+    Photo: StructureShape
+    Photos: ListShape
     RequestId: StringShape
+    ResourceArn: StringShape
     ResourceId: StringShape
     ResourceNotFoundException: StructureShape
-    ResourceType: StringShape
+    ResourceNotFoundExceptionReason: EnumShape
+    ResourceRevision: StringShape
+    ResourceType: EnumShape
     RetryAfterSeconds: IntegerShape
-    SensitiveBooleanType: BooleanShape
+    Role: StructureShape
+    Roles: ListShape
     SensitiveStringType: StringShape
     ServiceQuotaExceededException: StructureShape
+    StringType: StringShape
     ThrottlingException: StructureShape
+    ThrottlingExceptionReason: EnumShape
     UniqueAttribute: StructureShape
-    UpdateGroupInput: StructureShape
-    UpdateGroupOutput: StructureShape
-    UpdateUserInput: StructureShape
-    UpdateUserOutput: StructureShape
+    UpdateGroupRequest: StructureShape
+    UpdateGroupResponse: StructureShape
+    UpdateIdentityStoreRequest: StructureShape
+    UpdateIdentityStoreResponse: StructureShape
+    UpdateUserRequest: StructureShape
+    UpdateUserResponse: StructureShape
     User: StructureShape
     UserName: StringShape
+    UserStatus: EnumShape
     Users: ListShape
     ValidationException: StructureShape
+    ValidationExceptionReason: EnumShape
+    VpcIdList: ListShape
+    VpcIdType: StringShape
 
     AWSIdentityStore: ServiceShape
   end

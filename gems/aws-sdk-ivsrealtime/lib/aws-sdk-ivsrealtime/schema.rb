@@ -66,7 +66,8 @@ module Aws::IVSRealTime
     Event = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ivsrealtime#Event", name: "Event")
     EventErrorCode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ivsrealtime#EventErrorCode", name: "EventErrorCode")
     EventList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ivsrealtime#EventList", name: "EventList")
-    EventName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ivsrealtime#EventName", name: "EventName", traits: {"smithy.api#enum" => [{"value" => "JOINED", "name" => "JOINED"}, {"value" => "LEFT", "name" => "LEFT"}, {"value" => "PUBLISH_STARTED", "name" => "PUBLISH_STARTED"}, {"value" => "PUBLISH_STOPPED", "name" => "PUBLISH_STOPPED"}, {"value" => "SUBSCRIBE_STARTED", "name" => "SUBSCRIBE_STARTED"}, {"value" => "SUBSCRIBE_STOPPED", "name" => "SUBSCRIBE_STOPPED"}, {"value" => "PUBLISH_ERROR", "name" => "PUBLISH_ERROR"}, {"value" => "SUBSCRIBE_ERROR", "name" => "SUBSCRIBE_ERROR"}, {"value" => "JOIN_ERROR", "name" => "JOIN_ERROR"}, {"value" => "REPLICATION_STARTED", "name" => "REPLICATION_STARTED"}, {"value" => "REPLICATION_STOPPED", "name" => "REPLICATION_STOPPED"}]})
+    EventName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ivsrealtime#EventName", name: "EventName", traits: {"smithy.api#enum" => [{"value" => "JOINED", "name" => "JOINED"}, {"value" => "LEFT", "name" => "LEFT"}, {"value" => "PUBLISH_STARTED", "name" => "PUBLISH_STARTED"}, {"value" => "PUBLISH_STOPPED", "name" => "PUBLISH_STOPPED"}, {"value" => "SUBSCRIBE_STARTED", "name" => "SUBSCRIBE_STARTED"}, {"value" => "SUBSCRIBE_STOPPED", "name" => "SUBSCRIBE_STOPPED"}, {"value" => "PUBLISH_ERROR", "name" => "PUBLISH_ERROR"}, {"value" => "SUBSCRIBE_ERROR", "name" => "SUBSCRIBE_ERROR"}, {"value" => "JOIN_ERROR", "name" => "JOIN_ERROR"}, {"value" => "REPLICATION_STARTED", "name" => "REPLICATION_STARTED"}, {"value" => "REPLICATION_STOPPED", "name" => "REPLICATION_STOPPED"}, {"value" => "TOKEN_EXCHANGED", "name" => "TOKEN_EXCHANGED"}]})
+    ExchangedParticipantToken = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ivsrealtime#ExchangedParticipantToken", name: "ExchangedParticipantToken")
     Framerate = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.ivsrealtime#Framerate", name: "Framerate", traits: {"smithy.api#range" => {"min" => 1, "max" => 60}})
     GetCompositionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ivsrealtime#GetCompositionRequest", name: "GetCompositionRequest")
     GetCompositionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ivsrealtime#GetCompositionResponse", name: "GetCompositionResponse")
@@ -137,7 +138,7 @@ module Aws::IVSRealTime
     Participant = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ivsrealtime#Participant", name: "Participant")
     ParticipantAttributes = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.ivsrealtime#ParticipantAttributes", name: "ParticipantAttributes")
     ParticipantClientAttribute = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ivsrealtime#ParticipantClientAttribute", name: "ParticipantClientAttribute", traits: {"smithy.api#length" => {"min" => 0, "max" => 128}, "smithy.api#pattern" => "^[a-zA-Z0-9-_.,:;\\s]*$"})
-    ParticipantId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ivsrealtime#ParticipantId", name: "ParticipantId", traits: {"smithy.api#length" => {"min" => 0, "max" => 64}, "smithy.api#pattern" => "^[a-zA-Z0-9-]*$"})
+    ParticipantId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ivsrealtime#ParticipantId", name: "ParticipantId", traits: {"smithy.api#length" => {"min" => 0, "max" => 64}, "smithy.api#pattern" => "^[a-zA-Z0-9-_]*$"})
     ParticipantList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ivsrealtime#ParticipantList", name: "ParticipantList")
     ParticipantProtocol = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ivsrealtime#ParticipantProtocol", name: "ParticipantProtocol")
     ParticipantRecordingFilterByRecordingState = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ivsrealtime#ParticipantRecordingFilterByRecordingState", name: "ParticipantRecordingFilterByRecordingState", traits: {"smithy.api#enum" => [{"value" => "STARTING", "name" => "STARTING"}, {"value" => "ACTIVE", "name" => "ACTIVE"}, {"value" => "STOPPING", "name" => "STOPPING"}, {"value" => "STOPPED", "name" => "STOPPED"}, {"value" => "FAILED", "name" => "FAILED"}]})
@@ -181,10 +182,13 @@ module Aws::IVSRealTime
     PublicKeyName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ivsrealtime#PublicKeyName", name: "PublicKeyName", traits: {"smithy.api#length" => {"min" => 0, "max" => 128}, "smithy.api#pattern" => "^[a-zA-Z0-9-_]*$"})
     PublicKeySummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ivsrealtime#PublicKeySummary", name: "PublicKeySummary")
     Published = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.ivsrealtime#Published", name: "Published", traits: {"smithy.api#default" => false})
-    ReconnectWindowSeconds = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.ivsrealtime#ReconnectWindowSeconds", name: "ReconnectWindowSeconds", traits: {"smithy.api#range" => {"min" => 0, "max" => 60}})
+    ReconnectWindowSeconds = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.ivsrealtime#ReconnectWindowSeconds", name: "ReconnectWindowSeconds", traits: {"smithy.api#range" => {"min" => 0, "max" => 300}})
     RecordParticipantReplicas = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.ivsrealtime#RecordParticipantReplicas", name: "RecordParticipantReplicas", traits: {"smithy.api#default" => false})
     RecordingConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ivsrealtime#RecordingConfiguration", name: "RecordingConfiguration")
     RecordingConfigurationFormat = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ivsrealtime#RecordingConfigurationFormat", name: "RecordingConfigurationFormat", traits: {"smithy.api#enum" => [{"value" => "HLS", "name" => "HLS"}]})
+    RedundantIngest = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.ivsrealtime#RedundantIngest", name: "RedundantIngest", traits: {"smithy.api#default" => false})
+    RedundantIngestCredential = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ivsrealtime#RedundantIngestCredential", name: "RedundantIngestCredential")
+    RedundantIngestCredentials = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ivsrealtime#RedundantIngestCredentials", name: "RedundantIngestCredentials")
     Replica = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.ivsrealtime#Replica", name: "Replica", traits: {"smithy.api#default" => false})
     ReplicationState = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ivsrealtime#ReplicationState", name: "ReplicationState", traits: {"smithy.api#enum" => [{"value" => "ACTIVE", "name" => "ACTIVE"}, {"value" => "STOPPED", "name" => "STOPPED"}]})
     ReplicationType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ivsrealtime#ReplicationType", name: "ReplicationType", traits: {"smithy.api#enum" => [{"value" => "SOURCE", "name" => "SOURCE"}, {"value" => "REPLICA", "name" => "REPLICA"}, {"value" => "NONE", "name" => "NONE"}]})
@@ -312,8 +316,16 @@ module Aws::IVSRealTime
     CreateIngestConfigurationRequest.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: ParticipantAttributes, name: "attributes"))
     CreateIngestConfigurationRequest.add_member(:ingest_protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: IngestProtocol, name: "ingestProtocol", traits: {"smithy.api#required" => {}}))
     CreateIngestConfigurationRequest.add_member(:insecure_ingest, ::Smithy::Schema::Shapes::MemberShape.new(target: InsecureIngest, name: "insecureIngest", traits: {"smithy.api#default" => false}))
+    CreateIngestConfigurationRequest.add_member(:redundant_ingest, ::Smithy::Schema::Shapes::MemberShape.new(target: RedundantIngest, name: "redundantIngest", traits: {"smithy.api#default" => false}))
     CreateIngestConfigurationRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags"))
     CreateIngestConfigurationRequest.type = Types::CreateIngestConfigurationRequest
+    CreateIngestConfigurationResponse.add_member(:access_control_allow_origin, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "accessControlAllowOrigin", traits: {"smithy.api#httpHeader" => "Access-Control-Allow-Origin"}))
+    CreateIngestConfigurationResponse.add_member(:access_control_expose_headers, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "accessControlExposeHeaders", traits: {"smithy.api#httpHeader" => "Access-Control-Expose-Headers"}))
+    CreateIngestConfigurationResponse.add_member(:cache_control, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cacheControl", traits: {"smithy.api#httpHeader" => "Cache-Control"}))
+    CreateIngestConfigurationResponse.add_member(:content_security_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "contentSecurityPolicy", traits: {"smithy.api#httpHeader" => "Content-Security-Policy"}))
+    CreateIngestConfigurationResponse.add_member(:strict_transport_security, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "strictTransportSecurity", traits: {"smithy.api#httpHeader" => "Strict-Transport-Security"}))
+    CreateIngestConfigurationResponse.add_member(:x_content_type_options, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "xContentTypeOptions", traits: {"smithy.api#httpHeader" => "X-Content-Type-Options"}))
+    CreateIngestConfigurationResponse.add_member(:x_frame_options, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "xFrameOptions", traits: {"smithy.api#httpHeader" => "X-Frame-Options"}))
     CreateIngestConfigurationResponse.add_member(:ingest_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: IngestConfiguration, name: "ingestConfiguration"))
     CreateIngestConfigurationResponse.type = Types::CreateIngestConfigurationResponse
     CreateParticipantTokenInput.add_member(:stage_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StageArn, name: "stageArn", traits: {"smithy.api#required" => {}}))
@@ -399,6 +411,8 @@ module Aws::IVSRealTime
     Event.add_member(:destination_stage_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StageArn, name: "destinationStageArn"))
     Event.add_member(:destination_session_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StageSessionId, name: "destinationSessionId"))
     Event.add_member(:replica, ::Smithy::Schema::Shapes::MemberShape.new(target: Replica, name: "replica", traits: {"smithy.api#default" => false}))
+    Event.add_member(:previous_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ExchangedParticipantToken, name: "previousToken"))
+    Event.add_member(:new_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ExchangedParticipantToken, name: "newToken"))
     Event.type = Types::Event
     EventErrorCode.add_member(:insufficient_capabilities, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INSUFFICIENT_CAPABILITIES", traits: {"smithy.api#enumValue" => "INSUFFICIENT_CAPABILITIES"}))
     EventErrorCode.add_member(:quota_exceeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "QUOTA_EXCEEDED", traits: {"smithy.api#enumValue" => "QUOTA_EXCEEDED"}))
@@ -415,6 +429,11 @@ module Aws::IVSRealTime
     EventErrorCode.add_member(:invalid_input, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INVALID_INPUT", traits: {"smithy.api#enumValue" => "INVALID_INPUT"}))
     EventErrorCode.add_member(:internal_server_exception, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTERNAL_SERVER_EXCEPTION", traits: {"smithy.api#enumValue" => "INTERNAL_SERVER_EXCEPTION"}))
     EventList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Event, name: "member"))
+    ExchangedParticipantToken.add_member(:capabilities, ::Smithy::Schema::Shapes::MemberShape.new(target: ParticipantTokenCapabilities, name: "capabilities"))
+    ExchangedParticipantToken.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: ParticipantTokenAttributes, name: "attributes"))
+    ExchangedParticipantToken.add_member(:user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ParticipantTokenUserId, name: "userId"))
+    ExchangedParticipantToken.add_member(:expiration_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ParticipantTokenExpirationTime, name: "expirationTime"))
+    ExchangedParticipantToken.type = Types::ExchangedParticipantToken
     GetCompositionRequest.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CompositionArn, name: "arn", traits: {"smithy.api#required" => {}}))
     GetCompositionRequest.type = Types::GetCompositionRequest
     GetCompositionResponse.add_member(:composition, ::Smithy::Schema::Shapes::MemberShape.new(target: Composition, name: "composition"))
@@ -471,6 +490,8 @@ module Aws::IVSRealTime
     IngestConfiguration.add_member(:participant_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ParticipantId, name: "participantId", traits: {"smithy.api#required" => {}}))
     IngestConfiguration.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: IngestConfigurationState, name: "state", traits: {"smithy.api#required" => {}}))
     IngestConfiguration.add_member(:user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserId, name: "userId"))
+    IngestConfiguration.add_member(:redundant_ingest, ::Smithy::Schema::Shapes::MemberShape.new(target: RedundantIngest, name: "redundantIngest", traits: {"smithy.api#default" => false}))
+    IngestConfiguration.add_member(:redundant_ingest_credentials, ::Smithy::Schema::Shapes::MemberShape.new(target: RedundantIngestCredentials, name: "redundantIngestCredentials"))
     IngestConfiguration.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: ParticipantAttributes, name: "attributes"))
     IngestConfiguration.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags"))
     IngestConfiguration.type = Types::IngestConfiguration
@@ -482,6 +503,7 @@ module Aws::IVSRealTime
     IngestConfigurationSummary.add_member(:participant_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ParticipantId, name: "participantId", traits: {"smithy.api#required" => {}}))
     IngestConfigurationSummary.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: IngestConfigurationState, name: "state", traits: {"smithy.api#required" => {}}))
     IngestConfigurationSummary.add_member(:user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserId, name: "userId"))
+    IngestConfigurationSummary.add_member(:redundant_ingest, ::Smithy::Schema::Shapes::MemberShape.new(target: RedundantIngest, name: "redundantIngest", traits: {"smithy.api#default" => false}))
     IngestConfigurationSummary.type = Types::IngestConfigurationSummary
     IngestProtocol.add_member(:rtmp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RTMP", traits: {"smithy.api#enumValue" => "RTMP"}))
     IngestProtocol.add_member(:rtmps, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RTMPS", traits: {"smithy.api#enumValue" => "RTMPS"}))
@@ -598,6 +620,8 @@ module Aws::IVSRealTime
     Participant.add_member(:replication_state, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationState, name: "replicationState"))
     Participant.add_member(:source_stage_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StageArn, name: "sourceStageArn"))
     Participant.add_member(:source_session_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StageSessionId, name: "sourceSessionId"))
+    Participant.add_member(:redundant_ingest, ::Smithy::Schema::Shapes::MemberShape.new(target: RedundantIngest, name: "redundantIngest", traits: {"smithy.api#default" => false}))
+    Participant.add_member(:ingest_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IngestConfigurationArn, name: "ingestConfigurationArn"))
     Participant.type = Types::Participant
     ParticipantAttributes.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
     ParticipantAttributes.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
@@ -630,6 +654,8 @@ module Aws::IVSRealTime
     ParticipantSummary.add_member(:replication_state, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationState, name: "replicationState"))
     ParticipantSummary.add_member(:source_stage_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StageArn, name: "sourceStageArn"))
     ParticipantSummary.add_member(:source_session_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StageSessionId, name: "sourceSessionId"))
+    ParticipantSummary.add_member(:redundant_ingest, ::Smithy::Schema::Shapes::MemberShape.new(target: RedundantIngest, name: "redundantIngest", traits: {"smithy.api#default" => false}))
+    ParticipantSummary.add_member(:ingest_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IngestConfigurationArn, name: "ingestConfigurationArn"))
     ParticipantSummary.type = Types::ParticipantSummary
     ParticipantThumbnailConfiguration.add_member(:target_interval_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ThumbnailIntervalSeconds, name: "targetIntervalSeconds"))
     ParticipantThumbnailConfiguration.add_member(:storage, ::Smithy::Schema::Shapes::MemberShape.new(target: ThumbnailStorageTypeList, name: "storage"))
@@ -695,6 +721,10 @@ module Aws::IVSRealTime
     RecordingConfiguration.add_member(:hls_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: CompositionRecordingHlsConfiguration, name: "hlsConfiguration"))
     RecordingConfiguration.add_member(:format, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordingConfigurationFormat, name: "format"))
     RecordingConfiguration.type = Types::RecordingConfiguration
+    RedundantIngestCredential.add_member(:participant_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ParticipantId, name: "participantId"))
+    RedundantIngestCredential.add_member(:stream_key, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamKey, name: "streamKey"))
+    RedundantIngestCredential.type = Types::RedundantIngestCredential
+    RedundantIngestCredentials.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RedundantIngestCredential, name: "member"))
     ResourceNotFoundException.add_member(:access_control_allow_origin, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "accessControlAllowOrigin", traits: {"smithy.api#httpHeader" => "Access-Control-Allow-Origin"}))
     ResourceNotFoundException.add_member(:access_control_expose_headers, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "accessControlExposeHeaders", traits: {"smithy.api#httpHeader" => "Access-Control-Expose-Headers"}))
     ResourceNotFoundException.add_member(:cache_control, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cacheControl", traits: {"smithy.api#httpHeader" => "Cache-Control"}))
@@ -817,7 +847,15 @@ module Aws::IVSRealTime
     UntagResourceOutput.type = Types::UntagResourceOutput
     UpdateIngestConfigurationRequest.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IngestConfigurationArn, name: "arn", traits: {"smithy.api#required" => {}}))
     UpdateIngestConfigurationRequest.add_member(:stage_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IngestConfigurationStageArn, name: "stageArn"))
+    UpdateIngestConfigurationRequest.add_member(:redundant_ingest, ::Smithy::Schema::Shapes::MemberShape.new(target: RedundantIngest, name: "redundantIngest", traits: {"smithy.api#default" => false}))
     UpdateIngestConfigurationRequest.type = Types::UpdateIngestConfigurationRequest
+    UpdateIngestConfigurationResponse.add_member(:access_control_allow_origin, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "accessControlAllowOrigin", traits: {"smithy.api#httpHeader" => "Access-Control-Allow-Origin"}))
+    UpdateIngestConfigurationResponse.add_member(:access_control_expose_headers, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "accessControlExposeHeaders", traits: {"smithy.api#httpHeader" => "Access-Control-Expose-Headers"}))
+    UpdateIngestConfigurationResponse.add_member(:cache_control, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cacheControl", traits: {"smithy.api#httpHeader" => "Cache-Control"}))
+    UpdateIngestConfigurationResponse.add_member(:content_security_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "contentSecurityPolicy", traits: {"smithy.api#httpHeader" => "Content-Security-Policy"}))
+    UpdateIngestConfigurationResponse.add_member(:strict_transport_security, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "strictTransportSecurity", traits: {"smithy.api#httpHeader" => "Strict-Transport-Security"}))
+    UpdateIngestConfigurationResponse.add_member(:x_content_type_options, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "xContentTypeOptions", traits: {"smithy.api#httpHeader" => "X-Content-Type-Options"}))
+    UpdateIngestConfigurationResponse.add_member(:x_frame_options, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "xFrameOptions", traits: {"smithy.api#httpHeader" => "X-Frame-Options"}))
     UpdateIngestConfigurationResponse.add_member(:ingest_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: IngestConfiguration, name: "ingestConfiguration"))
     UpdateIngestConfigurationResponse.type = Types::UpdateIngestConfigurationResponse
     UpdateStageInput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StageArn, name: "arn", traits: {"smithy.api#required" => {}}))
@@ -853,7 +891,7 @@ module Aws::IVSRealTime
       service.id = "com.amazonaws.ivsrealtime#AmazonInteractiveVideoServiceRealTime"
       service.name = "AmazonInteractiveVideoServiceRealTime"
       service.version = "2020-07-14"
-      service.traits = {"aws.api#service" => {"sdkId" => "IVS RealTime", "arnNamespace" => "ivs", "cloudFormationName" => "IVS", "cloudTrailEventSource" => "ivs.amazonaws.com", "endpointPrefix" => "ivsrealtime"}, "aws.auth#sigv4" => {"name" => "ivs"}, "aws.protocols#restJson1" => {}, "smithy.api#cors" => {"additionalAllowedHeaders" => ["Content-Type", "X-Api-Key", "X-Amz-Content-Sha256", "X-Amz-User-Agent", "amz-sdk-invocation-id", "amz-sdk-request"], "additionalExposedHeaders" => ["x-amzn-errortype", "x-amzn-requestid", "x-amzn-errormessage", "x-amzn-trace-id", "x-amzn-requestid", "x-amz-apigw-id", "date"]}, "smithy.api#title" => "Amazon Interactive Video Service RealTime"}
+      service.traits = {"aws.api#service" => {"sdkId" => "IVS RealTime", "arnNamespace" => "ivs", "cloudFormationName" => "IVS", "cloudTrailEventSource" => "ivs.amazonaws.com", "endpointPrefix" => "ivsrealtime"}, "aws.auth#sigv4" => {"name" => "ivs"}, "aws.protocols#restJson1" => {}, "smithy.api#cors" => {"additionalAllowedHeaders" => ["Content-Type", "X-Api-Key", "X-Amz-Content-Sha256", "X-Amz-User-Agent", "amz-sdk-invocation-id", "amz-sdk-request"], "additionalExposedHeaders" => ["x-amzn-errortype", "x-amzn-requestid", "x-amzn-errormessage", "x-amzn-trace-id", "x-amzn-requestid", "x-amz-apigw-id", "date"]}, "smithy.api#title" => "Amazon Interactive Video Service RealTime", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://ivsrealtime-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://ivsrealtime-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://ivsrealtime.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://ivsrealtime.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
       service.add_operation(:create_encoder_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ivsrealtime#CreateEncoderConfiguration"
         operation.name = "CreateEncoderConfiguration"

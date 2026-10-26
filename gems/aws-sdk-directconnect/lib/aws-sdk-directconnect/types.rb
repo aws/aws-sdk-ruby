@@ -149,9 +149,27 @@ module Aws::DirectConnect
     # @!attribute mac_sec_keys
     #   <p>The MAC Security (MACsec) security keys associated with the connection.</p>
     #   @return [Array<Types::MacSecKey>]
+    # @!attribute rate_limiter_status
+    #   <p>The rate limiter status for the connection, including how many rate limiters are in use and the maximum allowed.</p>
+    #   @return [Types::RateLimiterStatus]
     # @!attribute partner_interconnect_mac_sec_capable
     #   <p>Indicates whether the interconnect hosting this connection supports MAC Security (MACsec).</p>
     #   @return [Boolean]
+    # @!attribute prefix_pool_size_ipv4
+    #   <p>The total number of inbound IPv4 route prefixes you can allocate across the virtual interfaces on the connection. Not applicable to hosted connections or interconnects.</p>
+    #   @return [Integer]
+    # @!attribute prefix_pool_size_ipv6
+    #   <p>The total number of inbound IPv6 route prefixes you can allocate across the virtual interfaces on the connection. Not applicable to hosted connections or interconnects.</p>
+    #   @return [Integer]
+    # @!attribute prefix_pool_unallocated_count_ipv4
+    #   <p>The number of inbound IPv4 route prefixes in the connection prefix pool not yet allocated to a virtual interface. Not applicable to hosted connections or interconnects.</p>
+    #   @return [Integer]
+    # @!attribute prefix_pool_unallocated_count_ipv6
+    #   <p>The number of inbound IPv6 route prefixes in the connection prefix pool not yet allocated to a virtual interface. Not applicable to hosted connections or interconnects.</p>
+    #   @return [Integer]
+    # @!attribute billing_mode
+    #   <p>The billing mode of the connection.</p>
+    #   @return [String]
     class AllocateConnectionOnInterconnectOutput < Struct.new(
       nil,
       :owner_account,
@@ -176,7 +194,13 @@ module Aws::DirectConnect
       :port_encryption_status,
       :encryption_mode,
       :mac_sec_keys,
+      :rate_limiter_status,
       :partner_interconnect_mac_sec_capable,
+      :prefix_pool_size_ipv4,
+      :prefix_pool_size_ipv6,
+      :prefix_pool_unallocated_count_ipv4,
+      :prefix_pool_unallocated_count_ipv6,
+      :billing_mode,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -325,9 +349,27 @@ module Aws::DirectConnect
     # @!attribute mac_sec_keys
     #   <p>The MAC Security (MACsec) security keys associated with the connection.</p>
     #   @return [Array<Types::MacSecKey>]
+    # @!attribute rate_limiter_status
+    #   <p>The rate limiter status for the connection, including how many rate limiters are in use and the maximum allowed.</p>
+    #   @return [Types::RateLimiterStatus]
     # @!attribute partner_interconnect_mac_sec_capable
     #   <p>Indicates whether the interconnect hosting this connection supports MAC Security (MACsec).</p>
     #   @return [Boolean]
+    # @!attribute prefix_pool_size_ipv4
+    #   <p>The total number of inbound IPv4 route prefixes you can allocate across the virtual interfaces on the connection. Not applicable to hosted connections or interconnects.</p>
+    #   @return [Integer]
+    # @!attribute prefix_pool_size_ipv6
+    #   <p>The total number of inbound IPv6 route prefixes you can allocate across the virtual interfaces on the connection. Not applicable to hosted connections or interconnects.</p>
+    #   @return [Integer]
+    # @!attribute prefix_pool_unallocated_count_ipv4
+    #   <p>The number of inbound IPv4 route prefixes in the connection prefix pool not yet allocated to a virtual interface. Not applicable to hosted connections or interconnects.</p>
+    #   @return [Integer]
+    # @!attribute prefix_pool_unallocated_count_ipv6
+    #   <p>The number of inbound IPv6 route prefixes in the connection prefix pool not yet allocated to a virtual interface. Not applicable to hosted connections or interconnects.</p>
+    #   @return [Integer]
+    # @!attribute billing_mode
+    #   <p>The billing mode of the connection.</p>
+    #   @return [String]
     class AllocateHostedConnectionOutput < Struct.new(
       nil,
       :owner_account,
@@ -352,7 +394,13 @@ module Aws::DirectConnect
       :port_encryption_status,
       :encryption_mode,
       :mac_sec_keys,
+      :rate_limiter_status,
       :partner_interconnect_mac_sec_capable,
+      :prefix_pool_size_ipv4,
+      :prefix_pool_size_ipv6,
+      :prefix_pool_unallocated_count_ipv4,
+      :prefix_pool_unallocated_count_ipv6,
+      :billing_mode,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -421,37 +469,51 @@ module Aws::DirectConnect
     #   @return [Integer]
     # @!attribute asn
     #   <p>The autonomous system number (ASN). The valid range is from 1 to 2147483646 for Border Gateway Protocol (BGP) configuration. If you provide a number greater than the maximum, an error is returned. Use <code>asnLong</code> instead.</p>
-    #            <note>
-    #               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
-    #               <ul>
-    #                  <li>
-    #                     <p>The <code>asnLong</code> attribute accepts both ASN and long ASN
-    #                               ranges.</p>
-    #                  </li>
-    #                  <li>
-    #                     <p>If you provide a value in the same API call for both <code>asn</code>
+    #            <ul>
+    #               <li>
+    #                  <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
+    #               </li>
+    #               <li>
+    #                  <p>If you provide a value in the same API call for both <code>asn</code>
     #                               and <code>asnLong</code>, the API will only accept the value for
-    #                                   <code>asnLong</code>.</p>
-    #                  </li>
-    #               </ul>
-    #            </note>
+    #                                   <code>asnLong</code>.
+    #                 </p>
+    #               </li>
+    #               <li>
+    #                  <p>If you enter a 4-byte ASN for the <code>asn</code> parameter, the API returns an error.
+    #                 </p>
+    #               </li>
+    #               <li>
+    #                  <p>If you are using a 2-byte ASN, the API response will include the
+    #   2-byte value for both the <code>asn</code> and <code>asnLong</code> fields.</p>
+    #               </li>
+    #            </ul>
     #   @return [Integer]
     # @!attribute asn_long
     #   <p>The long ASN for the virtual interface. The valid range is from 1 to 4294967294 for BGP configuration.</p>
-    #            <note>
-    #               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
-    #               <ul>
-    #                  <li>
-    #                     <p>The <code>asnLong</code> attribute accepts both ASN and long ASN
-    #                               ranges.</p>
-    #                  </li>
-    #                  <li>
-    #                     <p>If you provide a value in the same API call for both <code>asn</code>
+    #            <p>Note the following limitations when using <code>asnLong</code>:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>asnLong</code> accepts any valid ASN value, regardless if it's 2-byte or 4-byte.
+    #                 </p>
+    #               </li>
+    #               <li>
+    #                  <p>When using a 4-byte <code>asnLong</code>, the API response returns <code>0</code> for the legacy <code>asn</code> attribute since 4-byte ASN values exceed the maximum supported value of 2,147,483,647.</p>
+    #               </li>
+    #               <li>
+    #                  <p>If you are using a 2-byte ASN, the API response will include the
+    #   2-byte value for both the <code>asn</code> and <code>asnLong</code> fields.</p>
+    #               </li>
+    #               <li>
+    #                  <p>If you provide a value in the same API call for both <code>asn</code>
     #                               and <code>asnLong</code>, the API will only accept the value for
     #                                   <code>asnLong</code>.</p>
-    #                  </li>
-    #               </ul>
-    #            </note>
+    #               </li>
+    #            </ul>
     #   @return [Integer]
     # @!attribute amazon_side_asn
     #   <p>The autonomous system number (AS) for the Amazon side of the connection.</p>
@@ -550,6 +612,15 @@ module Aws::DirectConnect
     # @!attribute site_link_enabled
     #   <p>Indicates whether SiteLink is enabled.</p>
     #   @return [Boolean]
+    # @!attribute prefix_pool_allocated_count_ipv4
+    #   <p>The number of inbound IPv4 route prefixes allocated to the virtual interface. Not applicable to public virtual interfaces.</p>
+    #   @return [Integer]
+    # @!attribute prefix_pool_allocated_count_ipv6
+    #   <p>The number of inbound IPv6 route prefixes allocated to the virtual interface. Not applicable to public virtual interfaces.</p>
+    #   @return [Integer]
+    # @!attribute rate_limit
+    #   <p>The rate limit (bandwidth allocation) applied to the virtual interface. The value must be one of the supported bandwidth values and cannot exceed the bandwidth of the parent connection or LAG. Supported values: <code>50Mbps</code>, <code>100Mbps</code>, <code>200Mbps</code>, <code>300Mbps</code>, <code>400Mbps</code>, <code>500Mbps</code>, <code>600Mbps</code>, <code>700Mbps</code>, <code>800Mbps</code>, <code>900Mbps</code>, <code>1Gbps</code>, <code>1.2Gbps</code>, <code>1.5Gbps</code>, <code>1.8Gbps</code>, <code>2Gbps</code>, <code>2.1Gbps</code>, <code>2.4Gbps</code>, <code>2.7Gbps</code>, <code>3Gbps</code>, <code>3.2Gbps</code>, <code>3.6Gbps</code>, <code>4Gbps</code>, <code>5Gbps</code>, <code>6Gbps</code>, <code>7Gbps</code>, <code>8Gbps</code>, <code>9Gbps</code>, <code>10Gbps</code>, <code>12Gbps</code>, <code>15Gbps</code>, <code>18Gbps</code>, <code>20Gbps</code>, <code>21Gbps</code>, <code>24Gbps</code>, <code>27Gbps</code>, <code>30Gbps</code>, <code>32Gbps</code>, <code>36Gbps</code>, <code>40Gbps</code>, <code>50Gbps</code>, <code>60Gbps</code>, <code>70Gbps</code>, <code>80Gbps</code>, <code>100Gbps</code>, <code>120Gbps</code>, <code>150Gbps</code>, <code>180Gbps</code>, <code>200Gbps</code>, <code>210Gbps</code>, <code>240Gbps</code>, <code>270Gbps</code>, <code>300Gbps</code>, <code>320Gbps</code>, <code>360Gbps</code>, <code>400Gbps</code>, <code>450Gbps</code>, <code>480Gbps</code>, <code>500Gbps</code>, <code>540Gbps</code>, <code>600Gbps</code>, <code>700Gbps</code>, <code>800Gbps</code>, <code>900Gbps</code>, <code>1Tbps</code>, <code>1.1Tbps</code>, <code>1.2Tbps</code>, <code>1.3Tbps</code>, <code>1.4Tbps</code>, <code>1.5Tbps</code>, <code>1.6Tbps</code>.</p>
+    #   @return [String]
     class AllocatePrivateVirtualInterfaceOutput < Struct.new(
       nil,
       :owner_account,
@@ -579,6 +650,9 @@ module Aws::DirectConnect
       :aws_logical_device_id,
       :tags,
       :site_link_enabled,
+      :prefix_pool_allocated_count_ipv4,
+      :prefix_pool_allocated_count_ipv6,
+      :rate_limit,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -633,37 +707,51 @@ module Aws::DirectConnect
     #   @return [Integer]
     # @!attribute asn
     #   <p>The autonomous system number (ASN). The valid range is from 1 to 2147483646 for Border Gateway Protocol (BGP) configuration. If you provide a number greater than the maximum, an error is returned. Use <code>asnLong</code> instead.</p>
-    #            <note>
-    #               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
-    #               <ul>
-    #                  <li>
-    #                     <p>The <code>asnLong</code> attribute accepts both ASN and long ASN
-    #                               ranges.</p>
-    #                  </li>
-    #                  <li>
-    #                     <p>If you provide a value in the same API call for both <code>asn</code>
+    #            <ul>
+    #               <li>
+    #                  <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
+    #               </li>
+    #               <li>
+    #                  <p>If you provide a value in the same API call for both <code>asn</code>
     #                               and <code>asnLong</code>, the API will only accept the value for
-    #                                   <code>asnLong</code>.</p>
-    #                  </li>
-    #               </ul>
-    #            </note>
+    #                                   <code>asnLong</code>.
+    #                 </p>
+    #               </li>
+    #               <li>
+    #                  <p>If you enter a 4-byte ASN for the <code>asn</code> parameter, the API returns an error.
+    #                 </p>
+    #               </li>
+    #               <li>
+    #                  <p>If you are using a 2-byte ASN, the API response will include the
+    #   2-byte value for both the <code>asn</code> and <code>asnLong</code> fields.</p>
+    #               </li>
+    #            </ul>
     #   @return [Integer]
     # @!attribute asn_long
     #   <p>The long ASN for the virtual interface. The valid range is from 1 to 4294967294 for BGP configuration.</p>
-    #            <note>
-    #               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
-    #               <ul>
-    #                  <li>
-    #                     <p>The <code>asnLong</code> attribute accepts both ASN and long ASN
-    #                               ranges.</p>
-    #                  </li>
-    #                  <li>
-    #                     <p>If you provide a value in the same API call for both <code>asn</code>
+    #            <p>Note the following limitations when using <code>asnLong</code>:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>asnLong</code> accepts any valid ASN value, regardless if it's 2-byte or 4-byte.
+    #                 </p>
+    #               </li>
+    #               <li>
+    #                  <p>When using a 4-byte <code>asnLong</code>, the API response returns <code>0</code> for the legacy <code>asn</code> attribute since 4-byte ASN values exceed the maximum supported value of 2,147,483,647.</p>
+    #               </li>
+    #               <li>
+    #                  <p>If you are using a 2-byte ASN, the API response will include the
+    #   2-byte value for both the <code>asn</code> and <code>asnLong</code> fields.</p>
+    #               </li>
+    #               <li>
+    #                  <p>If you provide a value in the same API call for both <code>asn</code>
     #                               and <code>asnLong</code>, the API will only accept the value for
     #                                   <code>asnLong</code>.</p>
-    #                  </li>
-    #               </ul>
-    #            </note>
+    #               </li>
+    #            </ul>
     #   @return [Integer]
     # @!attribute amazon_side_asn
     #   <p>The autonomous system number (AS) for the Amazon side of the connection.</p>
@@ -762,6 +850,15 @@ module Aws::DirectConnect
     # @!attribute site_link_enabled
     #   <p>Indicates whether SiteLink is enabled.</p>
     #   @return [Boolean]
+    # @!attribute prefix_pool_allocated_count_ipv4
+    #   <p>The number of inbound IPv4 route prefixes allocated to the virtual interface. Not applicable to public virtual interfaces.</p>
+    #   @return [Integer]
+    # @!attribute prefix_pool_allocated_count_ipv6
+    #   <p>The number of inbound IPv6 route prefixes allocated to the virtual interface. Not applicable to public virtual interfaces.</p>
+    #   @return [Integer]
+    # @!attribute rate_limit
+    #   <p>The rate limit (bandwidth allocation) applied to the virtual interface. The value must be one of the supported bandwidth values and cannot exceed the bandwidth of the parent connection or LAG. Supported values: <code>50Mbps</code>, <code>100Mbps</code>, <code>200Mbps</code>, <code>300Mbps</code>, <code>400Mbps</code>, <code>500Mbps</code>, <code>600Mbps</code>, <code>700Mbps</code>, <code>800Mbps</code>, <code>900Mbps</code>, <code>1Gbps</code>, <code>1.2Gbps</code>, <code>1.5Gbps</code>, <code>1.8Gbps</code>, <code>2Gbps</code>, <code>2.1Gbps</code>, <code>2.4Gbps</code>, <code>2.7Gbps</code>, <code>3Gbps</code>, <code>3.2Gbps</code>, <code>3.6Gbps</code>, <code>4Gbps</code>, <code>5Gbps</code>, <code>6Gbps</code>, <code>7Gbps</code>, <code>8Gbps</code>, <code>9Gbps</code>, <code>10Gbps</code>, <code>12Gbps</code>, <code>15Gbps</code>, <code>18Gbps</code>, <code>20Gbps</code>, <code>21Gbps</code>, <code>24Gbps</code>, <code>27Gbps</code>, <code>30Gbps</code>, <code>32Gbps</code>, <code>36Gbps</code>, <code>40Gbps</code>, <code>50Gbps</code>, <code>60Gbps</code>, <code>70Gbps</code>, <code>80Gbps</code>, <code>100Gbps</code>, <code>120Gbps</code>, <code>150Gbps</code>, <code>180Gbps</code>, <code>200Gbps</code>, <code>210Gbps</code>, <code>240Gbps</code>, <code>270Gbps</code>, <code>300Gbps</code>, <code>320Gbps</code>, <code>360Gbps</code>, <code>400Gbps</code>, <code>450Gbps</code>, <code>480Gbps</code>, <code>500Gbps</code>, <code>540Gbps</code>, <code>600Gbps</code>, <code>700Gbps</code>, <code>800Gbps</code>, <code>900Gbps</code>, <code>1Tbps</code>, <code>1.1Tbps</code>, <code>1.2Tbps</code>, <code>1.3Tbps</code>, <code>1.4Tbps</code>, <code>1.5Tbps</code>, <code>1.6Tbps</code>.</p>
+    #   @return [String]
     class AllocatePublicVirtualInterfaceOutput < Struct.new(
       nil,
       :owner_account,
@@ -791,6 +888,9 @@ module Aws::DirectConnect
       :aws_logical_device_id,
       :tags,
       :site_link_enabled,
+      :prefix_pool_allocated_count_ipv4,
+      :prefix_pool_allocated_count_ipv6,
+      :rate_limit,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -851,6 +951,23 @@ module Aws::DirectConnect
       include ::Smithy::Schema::Structure
     end
 
+    # <p>A segment of an autonomous system (AS) path.</p>
+    # @!attribute path_type
+    #   <p>The type of the AS path segment.</p>
+    #            <p>The valid values are <code>seq</code> (an ordered <code>AS_SEQUENCE</code>) and <code>set</code> (an unordered <code>AS_SET</code>).</p>
+    #   @return [String]
+    # @!attribute path
+    #   <p>The autonomous system (AS) numbers in the segment.</p>
+    #   @return [Array<Integer>]
+    class AsPathSegment < Struct.new(
+      nil,
+      :path_type,
+      :path,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Information about an Direct Connect connection.</p>
     # @!attribute owner_account
     #   <p>The ID of the Amazon Web Services account that owns the connection.</p>
@@ -959,9 +1076,27 @@ module Aws::DirectConnect
     # @!attribute mac_sec_keys
     #   <p>The MAC Security (MACsec) security keys associated with the connection.</p>
     #   @return [Array<Types::MacSecKey>]
+    # @!attribute rate_limiter_status
+    #   <p>The rate limiter status for the connection, including how many rate limiters are in use and the maximum allowed.</p>
+    #   @return [Types::RateLimiterStatus]
     # @!attribute partner_interconnect_mac_sec_capable
     #   <p>Indicates whether the interconnect hosting this connection supports MAC Security (MACsec).</p>
     #   @return [Boolean]
+    # @!attribute prefix_pool_size_ipv4
+    #   <p>The total number of inbound IPv4 route prefixes you can allocate across the virtual interfaces on the connection. Not applicable to hosted connections or interconnects.</p>
+    #   @return [Integer]
+    # @!attribute prefix_pool_size_ipv6
+    #   <p>The total number of inbound IPv6 route prefixes you can allocate across the virtual interfaces on the connection. Not applicable to hosted connections or interconnects.</p>
+    #   @return [Integer]
+    # @!attribute prefix_pool_unallocated_count_ipv4
+    #   <p>The number of inbound IPv4 route prefixes in the connection prefix pool not yet allocated to a virtual interface. Not applicable to hosted connections or interconnects.</p>
+    #   @return [Integer]
+    # @!attribute prefix_pool_unallocated_count_ipv6
+    #   <p>The number of inbound IPv6 route prefixes in the connection prefix pool not yet allocated to a virtual interface. Not applicable to hosted connections or interconnects.</p>
+    #   @return [Integer]
+    # @!attribute billing_mode
+    #   <p>The billing mode of the connection.</p>
+    #   @return [String]
     class AssociateConnectionWithLagOutput < Struct.new(
       nil,
       :owner_account,
@@ -986,7 +1121,13 @@ module Aws::DirectConnect
       :port_encryption_status,
       :encryption_mode,
       :mac_sec_keys,
+      :rate_limiter_status,
       :partner_interconnect_mac_sec_capable,
+      :prefix_pool_size_ipv4,
+      :prefix_pool_size_ipv6,
+      :prefix_pool_unallocated_count_ipv4,
+      :prefix_pool_unallocated_count_ipv6,
+      :billing_mode,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1012,6 +1153,37 @@ module Aws::DirectConnect
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute connection_identifiers
+    #   <p>The IDs or ARNs of the connections to associate with the resiliency group.</p>
+    #   @return [Array<String>]
+    # @!attribute resiliency_group_id
+    #   <p>The ID of the resiliency group.</p>
+    #   @return [String]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
+    #         request.</p>
+    #   @return [String]
+    class AssociateConnectionsToResiliencyGroupRequest < Struct.new(
+      nil,
+      :connection_identifiers,
+      :resiliency_group_id,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute resiliency_group_associations
+    #   <p>The connection associations for the resiliency group.</p>
+    #   @return [Array<Types::ResiliencyGroupAssociation>]
+    class AssociateConnectionsToResiliencyGroupResult < Struct.new(
+      nil,
+      :resiliency_group_associations,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Information about an Direct Connect connection.</p>
     # @!attribute owner_account
     #   <p>The ID of the Amazon Web Services account that owns the connection.</p>
@@ -1120,9 +1292,27 @@ module Aws::DirectConnect
     # @!attribute mac_sec_keys
     #   <p>The MAC Security (MACsec) security keys associated with the connection.</p>
     #   @return [Array<Types::MacSecKey>]
+    # @!attribute rate_limiter_status
+    #   <p>The rate limiter status for the connection, including how many rate limiters are in use and the maximum allowed.</p>
+    #   @return [Types::RateLimiterStatus]
     # @!attribute partner_interconnect_mac_sec_capable
     #   <p>Indicates whether the interconnect hosting this connection supports MAC Security (MACsec).</p>
     #   @return [Boolean]
+    # @!attribute prefix_pool_size_ipv4
+    #   <p>The total number of inbound IPv4 route prefixes you can allocate across the virtual interfaces on the connection. Not applicable to hosted connections or interconnects.</p>
+    #   @return [Integer]
+    # @!attribute prefix_pool_size_ipv6
+    #   <p>The total number of inbound IPv6 route prefixes you can allocate across the virtual interfaces on the connection. Not applicable to hosted connections or interconnects.</p>
+    #   @return [Integer]
+    # @!attribute prefix_pool_unallocated_count_ipv4
+    #   <p>The number of inbound IPv4 route prefixes in the connection prefix pool not yet allocated to a virtual interface. Not applicable to hosted connections or interconnects.</p>
+    #   @return [Integer]
+    # @!attribute prefix_pool_unallocated_count_ipv6
+    #   <p>The number of inbound IPv6 route prefixes in the connection prefix pool not yet allocated to a virtual interface. Not applicable to hosted connections or interconnects.</p>
+    #   @return [Integer]
+    # @!attribute billing_mode
+    #   <p>The billing mode of the connection.</p>
+    #   @return [String]
     class AssociateHostedConnectionOutput < Struct.new(
       nil,
       :owner_account,
@@ -1147,7 +1337,13 @@ module Aws::DirectConnect
       :port_encryption_status,
       :encryption_mode,
       :mac_sec_keys,
+      :rate_limiter_status,
       :partner_interconnect_mac_sec_capable,
+      :prefix_pool_size_ipv4,
+      :prefix_pool_size_ipv6,
+      :prefix_pool_unallocated_count_ipv4,
+      :prefix_pool_unallocated_count_ipv6,
+      :billing_mode,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1244,37 +1440,51 @@ module Aws::DirectConnect
     #   @return [Integer]
     # @!attribute asn
     #   <p>The autonomous system number (ASN). The valid range is from 1 to 2147483646 for Border Gateway Protocol (BGP) configuration. If you provide a number greater than the maximum, an error is returned. Use <code>asnLong</code> instead.</p>
-    #            <note>
-    #               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
-    #               <ul>
-    #                  <li>
-    #                     <p>The <code>asnLong</code> attribute accepts both ASN and long ASN
-    #                               ranges.</p>
-    #                  </li>
-    #                  <li>
-    #                     <p>If you provide a value in the same API call for both <code>asn</code>
+    #            <ul>
+    #               <li>
+    #                  <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
+    #               </li>
+    #               <li>
+    #                  <p>If you provide a value in the same API call for both <code>asn</code>
     #                               and <code>asnLong</code>, the API will only accept the value for
-    #                                   <code>asnLong</code>.</p>
-    #                  </li>
-    #               </ul>
-    #            </note>
+    #                                   <code>asnLong</code>.
+    #                 </p>
+    #               </li>
+    #               <li>
+    #                  <p>If you enter a 4-byte ASN for the <code>asn</code> parameter, the API returns an error.
+    #                 </p>
+    #               </li>
+    #               <li>
+    #                  <p>If you are using a 2-byte ASN, the API response will include the
+    #   2-byte value for both the <code>asn</code> and <code>asnLong</code> fields.</p>
+    #               </li>
+    #            </ul>
     #   @return [Integer]
     # @!attribute asn_long
     #   <p>The long ASN for the virtual interface. The valid range is from 1 to 4294967294 for BGP configuration.</p>
-    #            <note>
-    #               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
-    #               <ul>
-    #                  <li>
-    #                     <p>The <code>asnLong</code> attribute accepts both ASN and long ASN
-    #                               ranges.</p>
-    #                  </li>
-    #                  <li>
-    #                     <p>If you provide a value in the same API call for both <code>asn</code>
+    #            <p>Note the following limitations when using <code>asnLong</code>:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>asnLong</code> accepts any valid ASN value, regardless if it's 2-byte or 4-byte.
+    #                 </p>
+    #               </li>
+    #               <li>
+    #                  <p>When using a 4-byte <code>asnLong</code>, the API response returns <code>0</code> for the legacy <code>asn</code> attribute since 4-byte ASN values exceed the maximum supported value of 2,147,483,647.</p>
+    #               </li>
+    #               <li>
+    #                  <p>If you are using a 2-byte ASN, the API response will include the
+    #   2-byte value for both the <code>asn</code> and <code>asnLong</code> fields.</p>
+    #               </li>
+    #               <li>
+    #                  <p>If you provide a value in the same API call for both <code>asn</code>
     #                               and <code>asnLong</code>, the API will only accept the value for
     #                                   <code>asnLong</code>.</p>
-    #                  </li>
-    #               </ul>
-    #            </note>
+    #               </li>
+    #            </ul>
     #   @return [Integer]
     # @!attribute amazon_side_asn
     #   <p>The autonomous system number (AS) for the Amazon side of the connection.</p>
@@ -1373,6 +1583,15 @@ module Aws::DirectConnect
     # @!attribute site_link_enabled
     #   <p>Indicates whether SiteLink is enabled.</p>
     #   @return [Boolean]
+    # @!attribute prefix_pool_allocated_count_ipv4
+    #   <p>The number of inbound IPv4 route prefixes allocated to the virtual interface. Not applicable to public virtual interfaces.</p>
+    #   @return [Integer]
+    # @!attribute prefix_pool_allocated_count_ipv6
+    #   <p>The number of inbound IPv6 route prefixes allocated to the virtual interface. Not applicable to public virtual interfaces.</p>
+    #   @return [Integer]
+    # @!attribute rate_limit
+    #   <p>The rate limit (bandwidth allocation) applied to the virtual interface. The value must be one of the supported bandwidth values and cannot exceed the bandwidth of the parent connection or LAG. Supported values: <code>50Mbps</code>, <code>100Mbps</code>, <code>200Mbps</code>, <code>300Mbps</code>, <code>400Mbps</code>, <code>500Mbps</code>, <code>600Mbps</code>, <code>700Mbps</code>, <code>800Mbps</code>, <code>900Mbps</code>, <code>1Gbps</code>, <code>1.2Gbps</code>, <code>1.5Gbps</code>, <code>1.8Gbps</code>, <code>2Gbps</code>, <code>2.1Gbps</code>, <code>2.4Gbps</code>, <code>2.7Gbps</code>, <code>3Gbps</code>, <code>3.2Gbps</code>, <code>3.6Gbps</code>, <code>4Gbps</code>, <code>5Gbps</code>, <code>6Gbps</code>, <code>7Gbps</code>, <code>8Gbps</code>, <code>9Gbps</code>, <code>10Gbps</code>, <code>12Gbps</code>, <code>15Gbps</code>, <code>18Gbps</code>, <code>20Gbps</code>, <code>21Gbps</code>, <code>24Gbps</code>, <code>27Gbps</code>, <code>30Gbps</code>, <code>32Gbps</code>, <code>36Gbps</code>, <code>40Gbps</code>, <code>50Gbps</code>, <code>60Gbps</code>, <code>70Gbps</code>, <code>80Gbps</code>, <code>100Gbps</code>, <code>120Gbps</code>, <code>150Gbps</code>, <code>180Gbps</code>, <code>200Gbps</code>, <code>210Gbps</code>, <code>240Gbps</code>, <code>270Gbps</code>, <code>300Gbps</code>, <code>320Gbps</code>, <code>360Gbps</code>, <code>400Gbps</code>, <code>450Gbps</code>, <code>480Gbps</code>, <code>500Gbps</code>, <code>540Gbps</code>, <code>600Gbps</code>, <code>700Gbps</code>, <code>800Gbps</code>, <code>900Gbps</code>, <code>1Tbps</code>, <code>1.1Tbps</code>, <code>1.2Tbps</code>, <code>1.3Tbps</code>, <code>1.4Tbps</code>, <code>1.5Tbps</code>, <code>1.6Tbps</code>.</p>
+    #   @return [String]
     class AssociateVirtualInterfaceOutput < Struct.new(
       nil,
       :owner_account,
@@ -1402,6 +1621,9 @@ module Aws::DirectConnect
       :aws_logical_device_id,
       :tags,
       :site_link_enabled,
+      :prefix_pool_allocated_count_ipv4,
+      :prefix_pool_allocated_count_ipv6,
+      :rate_limit,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1472,43 +1694,77 @@ module Aws::DirectConnect
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Information about a billing mode available at an Direct Connect location.</p>
+    # @!attribute billing_mode
+    #   <p>The billing mode.</p>
+    #   @return [String]
+    # @!attribute available_port_speeds
+    #   <p>The port speeds available for the billing mode.</p>
+    #   @return [Array<String>]
+    # @!attribute included_regions
+    #   <p>The Amazon Web Services Regions included with the billing mode.</p>
+    #   @return [Array<String>]
+    class AvailableBillingMode < Struct.new(
+      nil,
+      :billing_mode,
+      :available_port_speeds,
+      :included_regions,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Information about a BGP peer.</p>
     # @!attribute bgp_peer_id
     #   <p>The ID of the BGP peer.</p>
     #   @return [String]
     # @!attribute asn
     #   <p>The autonomous system number (ASN). The valid range is from 1 to 2147483646 for Border Gateway Protocol (BGP) configuration. If you provide a number greater than the maximum, an error is returned. Use <code>asnLong</code> instead.</p>
-    #            <note>
-    #               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
-    #               <ul>
-    #                  <li>
-    #                     <p>The <code>asnLong</code> attribute accepts both ASN and long ASN
-    #                               ranges.</p>
-    #                  </li>
-    #                  <li>
-    #                     <p>If you provide a value in the same API call for both <code>asn</code>
+    #            <ul>
+    #               <li>
+    #                  <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
+    #               </li>
+    #               <li>
+    #                  <p>If you provide a value in the same API call for both <code>asn</code>
     #                               and <code>asnLong</code>, the API will only accept the value for
-    #                                   <code>asnLong</code>.</p>
-    #                  </li>
-    #               </ul>
-    #            </note>
+    #                                   <code>asnLong</code>.
+    #                 </p>
+    #               </li>
+    #               <li>
+    #                  <p>If you enter a 4-byte ASN for the <code>asn</code> parameter, the API returns an error.
+    #                 </p>
+    #               </li>
+    #               <li>
+    #                  <p>If you are using a 2-byte ASN, the API response will include the
+    #   2-byte value for both the <code>asn</code> and <code>asnLong</code> fields.</p>
+    #               </li>
+    #            </ul>
     #   @return [Integer]
     # @!attribute asn_long
     #   <p>The long ASN for the BGP peer. The valid range is from 1 to 4294967294 for BGP configuration. </p>
-    #            <note>
-    #               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
-    #               <ul>
-    #                  <li>
-    #                     <p>The <code>asnLong</code> attribute accepts both ASN and long ASN
-    #                               ranges.</p>
-    #                  </li>
-    #                  <li>
-    #                     <p>If you provide a value in the same API call for both <code>asn</code>
+    #            <p>Note the following limitations when using <code>asnLong</code>:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>asnLong</code> accepts any valid ASN value, regardless if it's 2-byte or 4-byte.
+    #                 </p>
+    #               </li>
+    #               <li>
+    #                  <p>When using a 4-byte <code>asnLong</code>, the API response returns <code>0</code> for the legacy <code>asn</code> attribute since 4-byte ASN values exceed the maximum supported value of 2,147,483,647.</p>
+    #               </li>
+    #               <li>
+    #                  <p>If you are using a 2-byte ASN, the API response will include the
+    #   2-byte value for both the <code>asn</code> and <code>asnLong</code> fields.</p>
+    #               </li>
+    #               <li>
+    #                  <p>If you provide a value in the same API call for both <code>asn</code>
     #                               and <code>asnLong</code>, the API will only accept the value for
     #                                   <code>asnLong</code>.</p>
-    #                  </li>
-    #               </ul>
-    #            </note>
+    #               </li>
+    #            </ul>
     #   @return [Integer]
     # @!attribute auth_key
     #   <p>The authentication key for BGP configuration. This string has a minimum length of 6 characters and and a maximun lenth of 80 characters.</p>
@@ -1552,7 +1808,7 @@ module Aws::DirectConnect
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>up</code>: The BGP peer is established. This state does not indicate the 
+    #                     <code>up</code>: The BGP peer is established. This state does not indicate the
     #           state of the routing function. Ensure that you are receiving routes over the BGP session.</p>
     #               </li>
     #               <li>
@@ -1657,9 +1913,9 @@ module Aws::DirectConnect
 
     # @!attribute agreement_name
     #   <p>
-    #   
+    #
     #         The name of the customer agreement.
-    #   
+    #
     #       </p>
     #   @return [String]
     class ConfirmCustomerAgreementRequest < Struct.new(
@@ -1995,9 +2251,27 @@ module Aws::DirectConnect
     # @!attribute mac_sec_keys
     #   <p>The MAC Security (MACsec) security keys associated with the connection.</p>
     #   @return [Array<Types::MacSecKey>]
+    # @!attribute rate_limiter_status
+    #   <p>The rate limiter status for the connection, including how many rate limiters are in use and the maximum allowed.</p>
+    #   @return [Types::RateLimiterStatus]
     # @!attribute partner_interconnect_mac_sec_capable
     #   <p>Indicates whether the interconnect hosting this connection supports MAC Security (MACsec).</p>
     #   @return [Boolean]
+    # @!attribute prefix_pool_size_ipv4
+    #   <p>The total number of inbound IPv4 route prefixes you can allocate across the virtual interfaces on the connection. Not applicable to hosted connections or interconnects.</p>
+    #   @return [Integer]
+    # @!attribute prefix_pool_size_ipv6
+    #   <p>The total number of inbound IPv6 route prefixes you can allocate across the virtual interfaces on the connection. Not applicable to hosted connections or interconnects.</p>
+    #   @return [Integer]
+    # @!attribute prefix_pool_unallocated_count_ipv4
+    #   <p>The number of inbound IPv4 route prefixes in the connection prefix pool not yet allocated to a virtual interface. Not applicable to hosted connections or interconnects.</p>
+    #   @return [Integer]
+    # @!attribute prefix_pool_unallocated_count_ipv6
+    #   <p>The number of inbound IPv6 route prefixes in the connection prefix pool not yet allocated to a virtual interface. Not applicable to hosted connections or interconnects.</p>
+    #   @return [Integer]
+    # @!attribute billing_mode
+    #   <p>The billing mode of the connection.</p>
+    #   @return [String]
     class Connection < Struct.new(
       nil,
       :owner_account,
@@ -2022,7 +2296,13 @@ module Aws::DirectConnect
       :port_encryption_status,
       :encryption_mode,
       :mac_sec_keys,
+      :rate_limiter_status,
       :partner_interconnect_mac_sec_capable,
+      :prefix_pool_size_ipv4,
+      :prefix_pool_size_ipv6,
+      :prefix_pool_unallocated_count_ipv4,
+      :prefix_pool_unallocated_count_ipv6,
+      :billing_mode,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2167,9 +2447,27 @@ module Aws::DirectConnect
     # @!attribute mac_sec_keys
     #   <p>The MAC Security (MACsec) security keys associated with the connection.</p>
     #   @return [Array<Types::MacSecKey>]
+    # @!attribute rate_limiter_status
+    #   <p>The rate limiter status for the connection, including how many rate limiters are in use and the maximum allowed.</p>
+    #   @return [Types::RateLimiterStatus]
     # @!attribute partner_interconnect_mac_sec_capable
     #   <p>Indicates whether the interconnect hosting this connection supports MAC Security (MACsec).</p>
     #   @return [Boolean]
+    # @!attribute prefix_pool_size_ipv4
+    #   <p>The total number of inbound IPv4 route prefixes you can allocate across the virtual interfaces on the connection. Not applicable to hosted connections or interconnects.</p>
+    #   @return [Integer]
+    # @!attribute prefix_pool_size_ipv6
+    #   <p>The total number of inbound IPv6 route prefixes you can allocate across the virtual interfaces on the connection. Not applicable to hosted connections or interconnects.</p>
+    #   @return [Integer]
+    # @!attribute prefix_pool_unallocated_count_ipv4
+    #   <p>The number of inbound IPv4 route prefixes in the connection prefix pool not yet allocated to a virtual interface. Not applicable to hosted connections or interconnects.</p>
+    #   @return [Integer]
+    # @!attribute prefix_pool_unallocated_count_ipv6
+    #   <p>The number of inbound IPv6 route prefixes in the connection prefix pool not yet allocated to a virtual interface. Not applicable to hosted connections or interconnects.</p>
+    #   @return [Integer]
+    # @!attribute billing_mode
+    #   <p>The billing mode of the connection.</p>
+    #   @return [String]
     class CreateConnectionOutput < Struct.new(
       nil,
       :owner_account,
@@ -2194,7 +2492,13 @@ module Aws::DirectConnect
       :port_encryption_status,
       :encryption_mode,
       :mac_sec_keys,
+      :rate_limiter_status,
       :partner_interconnect_mac_sec_capable,
+      :prefix_pool_size_ipv4,
+      :prefix_pool_size_ipv6,
+      :prefix_pool_unallocated_count_ipv4,
+      :prefix_pool_unallocated_count_ipv6,
+      :billing_mode,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2227,6 +2531,9 @@ module Aws::DirectConnect
     #   <p>Indicates whether you want the connection to support MAC Security (MACsec).</p>
     #            <p>MAC Security (MACsec) is unavailable on hosted connections. For information about MAC Security (MACsec) prerequisites, see  <a href="https://docs.aws.amazon.com/directconnect/latest/UserGuide/MACSec.html">MAC Security in Direct Connect</a> in the <i>Direct Connect User Guide</i>.</p>
     #   @return [Boolean]
+    # @!attribute billing_mode
+    #   <p>The billing mode for the connection.</p>
+    #   @return [String]
     class CreateConnectionRequest < Struct.new(
       nil,
       :location,
@@ -2236,6 +2543,7 @@ module Aws::DirectConnect
       :tags,
       :provider_name,
       :request_mac_sec,
+      :billing_mode,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2600,6 +2908,24 @@ module Aws::DirectConnect
     # @!attribute mac_sec_keys
     #   <p>The MAC Security (MACsec) security keys associated with the LAG.</p>
     #   @return [Array<Types::MacSecKey>]
+    # @!attribute prefix_pool_size_ipv4
+    #   <p>The total number of inbound IPv4 route prefixes you can allocate across the virtual interfaces on the LAG. Not applicable to LAGs that are interconnects and support hosted connections.</p>
+    #   @return [Integer]
+    # @!attribute prefix_pool_size_ipv6
+    #   <p>The total number of inbound IPv6 route prefixes you can allocate across the virtual interfaces on the LAG. Not applicable to LAGs that are interconnects and support hosted connections.</p>
+    #   @return [Integer]
+    # @!attribute prefix_pool_unallocated_count_ipv4
+    #   <p>The number of inbound IPv4 route prefixes in the LAG prefix pool not yet allocated to a virtual interface. Not applicable to LAGs that are interconnects and support hosted connections.</p>
+    #   @return [Integer]
+    # @!attribute prefix_pool_unallocated_count_ipv6
+    #   <p>The number of inbound IPv6 route prefixes in the LAG prefix pool not yet allocated to a virtual interface. Not applicable to LAGs that are interconnects and support hosted connections.</p>
+    #   @return [Integer]
+    # @!attribute rate_limiter_status
+    #   <p>The rate limiter status for the LAG, including how many rate limiters are in use and the maximum allowed.</p>
+    #   @return [Types::RateLimiterStatus]
+    # @!attribute billing_mode
+    #   <p>The billing mode of the LAG.</p>
+    #   @return [String]
     class CreateLagOutput < Struct.new(
       nil,
       :connections_bandwidth,
@@ -2623,6 +2949,12 @@ module Aws::DirectConnect
       :mac_sec_capable,
       :encryption_mode,
       :mac_sec_keys,
+      :prefix_pool_size_ipv4,
+      :prefix_pool_size_ipv6,
+      :prefix_pool_unallocated_count_ipv4,
+      :prefix_pool_unallocated_count_ipv6,
+      :rate_limiter_status,
+      :billing_mode,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2668,6 +3000,9 @@ module Aws::DirectConnect
     #               <p>All connections in the LAG must be capable of  supporting MAC Security (MACsec). For information about MAC Security (MACsec) prerequisties, see  <a href="https://docs.aws.amazon.com/directconnect/latest/UserGuide/direct-connect-mac-sec-getting-started.html#mac-sec-prerequisites">MACsec prerequisties</a> in the <i>Direct Connect User Guide</i>.</p>
     #            </note>
     #   @return [Boolean]
+    # @!attribute billing_mode
+    #   <p>The billing mode for the LAG.</p>
+    #   @return [String]
     class CreateLagRequest < Struct.new(
       nil,
       :number_of_connections,
@@ -2679,6 +3014,7 @@ module Aws::DirectConnect
       :child_connection_tags,
       :provider_name,
       :request_mac_sec,
+      :billing_mode,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2708,37 +3044,51 @@ module Aws::DirectConnect
     #   @return [Integer]
     # @!attribute asn
     #   <p>The autonomous system number (ASN). The valid range is from 1 to 2147483646 for Border Gateway Protocol (BGP) configuration. If you provide a number greater than the maximum, an error is returned. Use <code>asnLong</code> instead.</p>
-    #            <note>
-    #               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
-    #               <ul>
-    #                  <li>
-    #                     <p>The <code>asnLong</code> attribute accepts both ASN and long ASN
-    #                               ranges.</p>
-    #                  </li>
-    #                  <li>
-    #                     <p>If you provide a value in the same API call for both <code>asn</code>
+    #            <ul>
+    #               <li>
+    #                  <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
+    #               </li>
+    #               <li>
+    #                  <p>If you provide a value in the same API call for both <code>asn</code>
     #                               and <code>asnLong</code>, the API will only accept the value for
-    #                                   <code>asnLong</code>.</p>
-    #                  </li>
-    #               </ul>
-    #            </note>
+    #                                   <code>asnLong</code>.
+    #                 </p>
+    #               </li>
+    #               <li>
+    #                  <p>If you enter a 4-byte ASN for the <code>asn</code> parameter, the API returns an error.
+    #                 </p>
+    #               </li>
+    #               <li>
+    #                  <p>If you are using a 2-byte ASN, the API response will include the
+    #   2-byte value for both the <code>asn</code> and <code>asnLong</code> fields.</p>
+    #               </li>
+    #            </ul>
     #   @return [Integer]
     # @!attribute asn_long
     #   <p>The long ASN for the virtual interface. The valid range is from 1 to 4294967294 for BGP configuration.</p>
-    #            <note>
-    #               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
-    #               <ul>
-    #                  <li>
-    #                     <p>The <code>asnLong</code> attribute accepts both ASN and long ASN
-    #                               ranges.</p>
-    #                  </li>
-    #                  <li>
-    #                     <p>If you provide a value in the same API call for both <code>asn</code>
+    #            <p>Note the following limitations when using <code>asnLong</code>:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>asnLong</code> accepts any valid ASN value, regardless if it's 2-byte or 4-byte.
+    #                 </p>
+    #               </li>
+    #               <li>
+    #                  <p>When using a 4-byte <code>asnLong</code>, the API response returns <code>0</code> for the legacy <code>asn</code> attribute since 4-byte ASN values exceed the maximum supported value of 2,147,483,647.</p>
+    #               </li>
+    #               <li>
+    #                  <p>If you are using a 2-byte ASN, the API response will include the
+    #   2-byte value for both the <code>asn</code> and <code>asnLong</code> fields.</p>
+    #               </li>
+    #               <li>
+    #                  <p>If you provide a value in the same API call for both <code>asn</code>
     #                               and <code>asnLong</code>, the API will only accept the value for
     #                                   <code>asnLong</code>.</p>
-    #                  </li>
-    #               </ul>
-    #            </note>
+    #               </li>
+    #            </ul>
     #   @return [Integer]
     # @!attribute amazon_side_asn
     #   <p>The autonomous system number (AS) for the Amazon side of the connection.</p>
@@ -2837,6 +3187,15 @@ module Aws::DirectConnect
     # @!attribute site_link_enabled
     #   <p>Indicates whether SiteLink is enabled.</p>
     #   @return [Boolean]
+    # @!attribute prefix_pool_allocated_count_ipv4
+    #   <p>The number of inbound IPv4 route prefixes allocated to the virtual interface. Not applicable to public virtual interfaces.</p>
+    #   @return [Integer]
+    # @!attribute prefix_pool_allocated_count_ipv6
+    #   <p>The number of inbound IPv6 route prefixes allocated to the virtual interface. Not applicable to public virtual interfaces.</p>
+    #   @return [Integer]
+    # @!attribute rate_limit
+    #   <p>The rate limit (bandwidth allocation) applied to the virtual interface. The value must be one of the supported bandwidth values and cannot exceed the bandwidth of the parent connection or LAG. Supported values: <code>50Mbps</code>, <code>100Mbps</code>, <code>200Mbps</code>, <code>300Mbps</code>, <code>400Mbps</code>, <code>500Mbps</code>, <code>600Mbps</code>, <code>700Mbps</code>, <code>800Mbps</code>, <code>900Mbps</code>, <code>1Gbps</code>, <code>1.2Gbps</code>, <code>1.5Gbps</code>, <code>1.8Gbps</code>, <code>2Gbps</code>, <code>2.1Gbps</code>, <code>2.4Gbps</code>, <code>2.7Gbps</code>, <code>3Gbps</code>, <code>3.2Gbps</code>, <code>3.6Gbps</code>, <code>4Gbps</code>, <code>5Gbps</code>, <code>6Gbps</code>, <code>7Gbps</code>, <code>8Gbps</code>, <code>9Gbps</code>, <code>10Gbps</code>, <code>12Gbps</code>, <code>15Gbps</code>, <code>18Gbps</code>, <code>20Gbps</code>, <code>21Gbps</code>, <code>24Gbps</code>, <code>27Gbps</code>, <code>30Gbps</code>, <code>32Gbps</code>, <code>36Gbps</code>, <code>40Gbps</code>, <code>50Gbps</code>, <code>60Gbps</code>, <code>70Gbps</code>, <code>80Gbps</code>, <code>100Gbps</code>, <code>120Gbps</code>, <code>150Gbps</code>, <code>180Gbps</code>, <code>200Gbps</code>, <code>210Gbps</code>, <code>240Gbps</code>, <code>270Gbps</code>, <code>300Gbps</code>, <code>320Gbps</code>, <code>360Gbps</code>, <code>400Gbps</code>, <code>450Gbps</code>, <code>480Gbps</code>, <code>500Gbps</code>, <code>540Gbps</code>, <code>600Gbps</code>, <code>700Gbps</code>, <code>800Gbps</code>, <code>900Gbps</code>, <code>1Tbps</code>, <code>1.1Tbps</code>, <code>1.2Tbps</code>, <code>1.3Tbps</code>, <code>1.4Tbps</code>, <code>1.5Tbps</code>, <code>1.6Tbps</code>.</p>
+    #   @return [String]
     class CreatePrivateVirtualInterfaceOutput < Struct.new(
       nil,
       :owner_account,
@@ -2866,6 +3225,9 @@ module Aws::DirectConnect
       :aws_logical_device_id,
       :tags,
       :site_link_enabled,
+      :prefix_pool_allocated_count_ipv4,
+      :prefix_pool_allocated_count_ipv6,
+      :rate_limit,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2916,37 +3278,51 @@ module Aws::DirectConnect
     #   @return [Integer]
     # @!attribute asn
     #   <p>The autonomous system number (ASN). The valid range is from 1 to 2147483646 for Border Gateway Protocol (BGP) configuration. If you provide a number greater than the maximum, an error is returned. Use <code>asnLong</code> instead.</p>
-    #            <note>
-    #               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
-    #               <ul>
-    #                  <li>
-    #                     <p>The <code>asnLong</code> attribute accepts both ASN and long ASN
-    #                               ranges.</p>
-    #                  </li>
-    #                  <li>
-    #                     <p>If you provide a value in the same API call for both <code>asn</code>
+    #            <ul>
+    #               <li>
+    #                  <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
+    #               </li>
+    #               <li>
+    #                  <p>If you provide a value in the same API call for both <code>asn</code>
     #                               and <code>asnLong</code>, the API will only accept the value for
-    #                                   <code>asnLong</code>.</p>
-    #                  </li>
-    #               </ul>
-    #            </note>
+    #                                   <code>asnLong</code>.
+    #                 </p>
+    #               </li>
+    #               <li>
+    #                  <p>If you enter a 4-byte ASN for the <code>asn</code> parameter, the API returns an error.
+    #                 </p>
+    #               </li>
+    #               <li>
+    #                  <p>If you are using a 2-byte ASN, the API response will include the
+    #   2-byte value for both the <code>asn</code> and <code>asnLong</code> fields.</p>
+    #               </li>
+    #            </ul>
     #   @return [Integer]
     # @!attribute asn_long
     #   <p>The long ASN for the virtual interface. The valid range is from 1 to 4294967294 for BGP configuration.</p>
-    #            <note>
-    #               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
-    #               <ul>
-    #                  <li>
-    #                     <p>The <code>asnLong</code> attribute accepts both ASN and long ASN
-    #                               ranges.</p>
-    #                  </li>
-    #                  <li>
-    #                     <p>If you provide a value in the same API call for both <code>asn</code>
+    #            <p>Note the following limitations when using <code>asnLong</code>:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>asnLong</code> accepts any valid ASN value, regardless if it's 2-byte or 4-byte.
+    #                 </p>
+    #               </li>
+    #               <li>
+    #                  <p>When using a 4-byte <code>asnLong</code>, the API response returns <code>0</code> for the legacy <code>asn</code> attribute since 4-byte ASN values exceed the maximum supported value of 2,147,483,647.</p>
+    #               </li>
+    #               <li>
+    #                  <p>If you are using a 2-byte ASN, the API response will include the
+    #   2-byte value for both the <code>asn</code> and <code>asnLong</code> fields.</p>
+    #               </li>
+    #               <li>
+    #                  <p>If you provide a value in the same API call for both <code>asn</code>
     #                               and <code>asnLong</code>, the API will only accept the value for
     #                                   <code>asnLong</code>.</p>
-    #                  </li>
-    #               </ul>
-    #            </note>
+    #               </li>
+    #            </ul>
     #   @return [Integer]
     # @!attribute amazon_side_asn
     #   <p>The autonomous system number (AS) for the Amazon side of the connection.</p>
@@ -3045,6 +3421,15 @@ module Aws::DirectConnect
     # @!attribute site_link_enabled
     #   <p>Indicates whether SiteLink is enabled.</p>
     #   @return [Boolean]
+    # @!attribute prefix_pool_allocated_count_ipv4
+    #   <p>The number of inbound IPv4 route prefixes allocated to the virtual interface. Not applicable to public virtual interfaces.</p>
+    #   @return [Integer]
+    # @!attribute prefix_pool_allocated_count_ipv6
+    #   <p>The number of inbound IPv6 route prefixes allocated to the virtual interface. Not applicable to public virtual interfaces.</p>
+    #   @return [Integer]
+    # @!attribute rate_limit
+    #   <p>The rate limit (bandwidth allocation) applied to the virtual interface. The value must be one of the supported bandwidth values and cannot exceed the bandwidth of the parent connection or LAG. Supported values: <code>50Mbps</code>, <code>100Mbps</code>, <code>200Mbps</code>, <code>300Mbps</code>, <code>400Mbps</code>, <code>500Mbps</code>, <code>600Mbps</code>, <code>700Mbps</code>, <code>800Mbps</code>, <code>900Mbps</code>, <code>1Gbps</code>, <code>1.2Gbps</code>, <code>1.5Gbps</code>, <code>1.8Gbps</code>, <code>2Gbps</code>, <code>2.1Gbps</code>, <code>2.4Gbps</code>, <code>2.7Gbps</code>, <code>3Gbps</code>, <code>3.2Gbps</code>, <code>3.6Gbps</code>, <code>4Gbps</code>, <code>5Gbps</code>, <code>6Gbps</code>, <code>7Gbps</code>, <code>8Gbps</code>, <code>9Gbps</code>, <code>10Gbps</code>, <code>12Gbps</code>, <code>15Gbps</code>, <code>18Gbps</code>, <code>20Gbps</code>, <code>21Gbps</code>, <code>24Gbps</code>, <code>27Gbps</code>, <code>30Gbps</code>, <code>32Gbps</code>, <code>36Gbps</code>, <code>40Gbps</code>, <code>50Gbps</code>, <code>60Gbps</code>, <code>70Gbps</code>, <code>80Gbps</code>, <code>100Gbps</code>, <code>120Gbps</code>, <code>150Gbps</code>, <code>180Gbps</code>, <code>200Gbps</code>, <code>210Gbps</code>, <code>240Gbps</code>, <code>270Gbps</code>, <code>300Gbps</code>, <code>320Gbps</code>, <code>360Gbps</code>, <code>400Gbps</code>, <code>450Gbps</code>, <code>480Gbps</code>, <code>500Gbps</code>, <code>540Gbps</code>, <code>600Gbps</code>, <code>700Gbps</code>, <code>800Gbps</code>, <code>900Gbps</code>, <code>1Tbps</code>, <code>1.1Tbps</code>, <code>1.2Tbps</code>, <code>1.3Tbps</code>, <code>1.4Tbps</code>, <code>1.5Tbps</code>, <code>1.6Tbps</code>.</p>
+    #   @return [String]
     class CreatePublicVirtualInterfaceOutput < Struct.new(
       nil,
       :owner_account,
@@ -3074,6 +3459,9 @@ module Aws::DirectConnect
       :aws_logical_device_id,
       :tags,
       :site_link_enabled,
+      :prefix_pool_allocated_count_ipv4,
+      :prefix_pool_allocated_count_ipv6,
+      :rate_limit,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3095,6 +3483,43 @@ module Aws::DirectConnect
       nil,
       :connection_id,
       :new_public_virtual_interface,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute resiliency_group_name
+    #   <p>The name of the resiliency group.</p>
+    #   @return [String]
+    # @!attribute intended_resiliency_model
+    #   <p>The resiliency model that the resiliency group is intended to meet. The valid values are
+    #         <code>maximum-resiliency</code>, <code>high-resiliency</code>, and
+    #         <code>basic-resiliency</code>.</p>
+    #   @return [String]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
+    #         request.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>The tags to associate with the resiliency group.</p>
+    #   @return [Array<Types::Tag>]
+    class CreateResiliencyGroupRequest < Struct.new(
+      nil,
+      :resiliency_group_name,
+      :intended_resiliency_model,
+      :client_token,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute resiliency_group
+    #   <p>Information about the resiliency group.</p>
+    #   @return [Types::ResiliencyGroup]
+    class CreateResiliencyGroupResult < Struct.new(
+      nil,
+      :resiliency_group,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3148,37 +3573,51 @@ module Aws::DirectConnect
     #   @return [String]
     # @!attribute asn
     #   <p>The autonomous system number (ASN). The valid range is from 1 to 2147483646 for Border Gateway Protocol (BGP) configuration. If you provide a number greater than the maximum, an error is returned. Use <code>asnLong</code> instead.</p>
-    #            <note>
-    #               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
-    #               <ul>
-    #                  <li>
-    #                     <p>The <code>asnLong</code> attribute accepts both ASN and long ASN
-    #                               ranges.</p>
-    #                  </li>
-    #                  <li>
-    #                     <p>If you provide a value in the same API call for both <code>asn</code>
+    #            <ul>
+    #               <li>
+    #                  <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
+    #               </li>
+    #               <li>
+    #                  <p>If you provide a value in the same API call for both <code>asn</code>
     #                               and <code>asnLong</code>, the API will only accept the value for
-    #                                   <code>asnLong</code>.</p>
-    #                  </li>
-    #               </ul>
-    #            </note>
+    #                                   <code>asnLong</code>.
+    #                 </p>
+    #               </li>
+    #               <li>
+    #                  <p>If you enter a 4-byte ASN for the <code>asn</code> parameter, the API returns an error.
+    #                 </p>
+    #               </li>
+    #               <li>
+    #                  <p>If you are using a 2-byte ASN, the API response will include the
+    #   2-byte value for both the <code>asn</code> and <code>asnLong</code> fields.</p>
+    #               </li>
+    #            </ul>
     #   @return [Integer]
     # @!attribute asn_long
     #   <p>The long ASN for the BGP peer to be deleted from a Direct Connect virtual interface. The valid range is from 1 to 4294967294 for BGP configuration. </p>
-    #            <note>
-    #               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
-    #               <ul>
-    #                  <li>
-    #                     <p>The <code>asnLong</code> attribute accepts both ASN and long ASN
-    #                               ranges.</p>
-    #                  </li>
-    #                  <li>
-    #                     <p>If you provide a value in the same API call for both <code>asn</code>
+    #            <p>Note the following limitations when using <code>asnLong</code>:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>asnLong</code> accepts any valid ASN value, regardless if it's 2-byte or 4-byte.
+    #                 </p>
+    #               </li>
+    #               <li>
+    #                  <p>When using a 4-byte <code>asnLong</code>, the API response returns <code>0</code> for the legacy <code>asn</code> attribute since 4-byte ASN values exceed the maximum supported value of 2,147,483,647.</p>
+    #               </li>
+    #               <li>
+    #                  <p>If you are using a 2-byte ASN, the API response will include the
+    #   2-byte value for both the <code>asn</code> and <code>asnLong</code> fields.</p>
+    #               </li>
+    #               <li>
+    #                  <p>If you provide a value in the same API call for both <code>asn</code>
     #                               and <code>asnLong</code>, the API will only accept the value for
     #                                   <code>asnLong</code>.</p>
-    #                  </li>
-    #               </ul>
-    #            </note>
+    #               </li>
+    #            </ul>
     #   @return [Integer]
     # @!attribute customer_address
     #   <p>The IP address assigned to the customer interface.</p>
@@ -3317,9 +3756,27 @@ module Aws::DirectConnect
     # @!attribute mac_sec_keys
     #   <p>The MAC Security (MACsec) security keys associated with the connection.</p>
     #   @return [Array<Types::MacSecKey>]
+    # @!attribute rate_limiter_status
+    #   <p>The rate limiter status for the connection, including how many rate limiters are in use and the maximum allowed.</p>
+    #   @return [Types::RateLimiterStatus]
     # @!attribute partner_interconnect_mac_sec_capable
     #   <p>Indicates whether the interconnect hosting this connection supports MAC Security (MACsec).</p>
     #   @return [Boolean]
+    # @!attribute prefix_pool_size_ipv4
+    #   <p>The total number of inbound IPv4 route prefixes you can allocate across the virtual interfaces on the connection. Not applicable to hosted connections or interconnects.</p>
+    #   @return [Integer]
+    # @!attribute prefix_pool_size_ipv6
+    #   <p>The total number of inbound IPv6 route prefixes you can allocate across the virtual interfaces on the connection. Not applicable to hosted connections or interconnects.</p>
+    #   @return [Integer]
+    # @!attribute prefix_pool_unallocated_count_ipv4
+    #   <p>The number of inbound IPv4 route prefixes in the connection prefix pool not yet allocated to a virtual interface. Not applicable to hosted connections or interconnects.</p>
+    #   @return [Integer]
+    # @!attribute prefix_pool_unallocated_count_ipv6
+    #   <p>The number of inbound IPv6 route prefixes in the connection prefix pool not yet allocated to a virtual interface. Not applicable to hosted connections or interconnects.</p>
+    #   @return [Integer]
+    # @!attribute billing_mode
+    #   <p>The billing mode of the connection.</p>
+    #   @return [String]
     class DeleteConnectionOutput < Struct.new(
       nil,
       :owner_account,
@@ -3344,7 +3801,13 @@ module Aws::DirectConnect
       :port_encryption_status,
       :encryption_mode,
       :mac_sec_keys,
+      :rate_limiter_status,
       :partner_interconnect_mac_sec_capable,
+      :prefix_pool_size_ipv4,
+      :prefix_pool_size_ipv6,
+      :prefix_pool_unallocated_count_ipv4,
+      :prefix_pool_unallocated_count_ipv6,
+      :billing_mode,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3593,6 +4056,24 @@ module Aws::DirectConnect
     # @!attribute mac_sec_keys
     #   <p>The MAC Security (MACsec) security keys associated with the LAG.</p>
     #   @return [Array<Types::MacSecKey>]
+    # @!attribute prefix_pool_size_ipv4
+    #   <p>The total number of inbound IPv4 route prefixes you can allocate across the virtual interfaces on the LAG. Not applicable to LAGs that are interconnects and support hosted connections.</p>
+    #   @return [Integer]
+    # @!attribute prefix_pool_size_ipv6
+    #   <p>The total number of inbound IPv6 route prefixes you can allocate across the virtual interfaces on the LAG. Not applicable to LAGs that are interconnects and support hosted connections.</p>
+    #   @return [Integer]
+    # @!attribute prefix_pool_unallocated_count_ipv4
+    #   <p>The number of inbound IPv4 route prefixes in the LAG prefix pool not yet allocated to a virtual interface. Not applicable to LAGs that are interconnects and support hosted connections.</p>
+    #   @return [Integer]
+    # @!attribute prefix_pool_unallocated_count_ipv6
+    #   <p>The number of inbound IPv6 route prefixes in the LAG prefix pool not yet allocated to a virtual interface. Not applicable to LAGs that are interconnects and support hosted connections.</p>
+    #   @return [Integer]
+    # @!attribute rate_limiter_status
+    #   <p>The rate limiter status for the LAG, including how many rate limiters are in use and the maximum allowed.</p>
+    #   @return [Types::RateLimiterStatus]
+    # @!attribute billing_mode
+    #   <p>The billing mode of the LAG.</p>
+    #   @return [String]
     class DeleteLagOutput < Struct.new(
       nil,
       :connections_bandwidth,
@@ -3616,6 +4097,12 @@ module Aws::DirectConnect
       :mac_sec_capable,
       :encryption_mode,
       :mac_sec_keys,
+      :prefix_pool_size_ipv4,
+      :prefix_pool_size_ipv6,
+      :prefix_pool_unallocated_count_ipv4,
+      :prefix_pool_unallocated_count_ipv6,
+      :rate_limiter_status,
+      :billing_mode,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3634,6 +4121,28 @@ module Aws::DirectConnect
     class DeleteLagRequest < Struct.new(
       nil,
       :lag_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute resiliency_group_id
+    #   <p>The ID of the resiliency group.</p>
+    #   @return [String]
+    class DeleteResiliencyGroupRequest < Struct.new(
+      nil,
+      :resiliency_group_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute resiliency_group
+    #   <p>Information about the resiliency group.</p>
+    #   @return [Types::ResiliencyGroup]
+    class DeleteResiliencyGroupResult < Struct.new(
+      nil,
+      :resiliency_group,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3707,7 +4216,7 @@ module Aws::DirectConnect
     #   <p>The ID of the connection.</p>
     #   @return [String]
     # @!attribute provider_name
-    #   <p>The name of the APN partner or service provider who establishes connectivity on your behalf. If you specify this parameter, 
+    #   <p>The name of the APN partner or service provider who establishes connectivity on your behalf. If you specify this parameter,
     #         the LOA-CFA lists the provider name alongside your company name as the requester of the cross connect.</p>
     #   @return [String]
     # @!attribute loa_content_type
@@ -4156,7 +4665,7 @@ module Aws::DirectConnect
     #   <p>The ID of a connection, LAG, or interconnect.</p>
     #   @return [String]
     # @!attribute provider_name
-    #   <p>The name of the service provider who establishes connectivity on your behalf. If you specify this parameter, the 
+    #   <p>The name of the service provider who establishes connectivity on your behalf. If you specify this parameter, the
     #         LOA-CFA lists the provider name alongside your company name as the requester of the cross connect.</p>
     #   @return [String]
     # @!attribute loa_content_type
@@ -4344,6 +4853,9 @@ module Aws::DirectConnect
     # @!attribute state_change_error
     #   <p>The error message if the state of an object failed to advance.</p>
     #   @return [String]
+    # @!attribute total_prefix_pool_allocations
+    #   <p>The total number of inbound route prefixes allocated to the attachments on the Direct Connect gateway. The count combines the IPv4 and IPv6 address families.</p>
+    #   @return [Integer]
     # @!attribute tags
     #   <p>Information about a tag.</p>
     #   @return [Array<Types::Tag>]
@@ -4355,6 +4867,7 @@ module Aws::DirectConnect
       :owner_account,
       :direct_connect_gateway_state,
       :state_change_error,
+      :total_prefix_pool_allocations,
       :tags,
       keyword_init: true
     )
@@ -4659,9 +5172,27 @@ module Aws::DirectConnect
     # @!attribute mac_sec_keys
     #   <p>The MAC Security (MACsec) security keys associated with the connection.</p>
     #   @return [Array<Types::MacSecKey>]
+    # @!attribute rate_limiter_status
+    #   <p>The rate limiter status for the connection, including how many rate limiters are in use and the maximum allowed.</p>
+    #   @return [Types::RateLimiterStatus]
     # @!attribute partner_interconnect_mac_sec_capable
     #   <p>Indicates whether the interconnect hosting this connection supports MAC Security (MACsec).</p>
     #   @return [Boolean]
+    # @!attribute prefix_pool_size_ipv4
+    #   <p>The total number of inbound IPv4 route prefixes you can allocate across the virtual interfaces on the connection. Not applicable to hosted connections or interconnects.</p>
+    #   @return [Integer]
+    # @!attribute prefix_pool_size_ipv6
+    #   <p>The total number of inbound IPv6 route prefixes you can allocate across the virtual interfaces on the connection. Not applicable to hosted connections or interconnects.</p>
+    #   @return [Integer]
+    # @!attribute prefix_pool_unallocated_count_ipv4
+    #   <p>The number of inbound IPv4 route prefixes in the connection prefix pool not yet allocated to a virtual interface. Not applicable to hosted connections or interconnects.</p>
+    #   @return [Integer]
+    # @!attribute prefix_pool_unallocated_count_ipv6
+    #   <p>The number of inbound IPv6 route prefixes in the connection prefix pool not yet allocated to a virtual interface. Not applicable to hosted connections or interconnects.</p>
+    #   @return [Integer]
+    # @!attribute billing_mode
+    #   <p>The billing mode of the connection.</p>
+    #   @return [String]
     class DisassociateConnectionFromLagOutput < Struct.new(
       nil,
       :owner_account,
@@ -4686,7 +5217,13 @@ module Aws::DirectConnect
       :port_encryption_status,
       :encryption_mode,
       :mac_sec_keys,
+      :rate_limiter_status,
       :partner_interconnect_mac_sec_capable,
+      :prefix_pool_size_ipv4,
+      :prefix_pool_size_ipv6,
+      :prefix_pool_unallocated_count_ipv4,
+      :prefix_pool_unallocated_count_ipv6,
+      :billing_mode,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4707,6 +5244,37 @@ module Aws::DirectConnect
       nil,
       :connection_id,
       :lag_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute connection_identifiers
+    #   <p>The IDs or ARNs of the connections to disassociate from the resiliency group.</p>
+    #   @return [Array<String>]
+    # @!attribute resiliency_group_id
+    #   <p>The ID of the resiliency group.</p>
+    #   @return [String]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
+    #         request.</p>
+    #   @return [String]
+    class DisassociateConnectionsFromResiliencyGroupRequest < Struct.new(
+      nil,
+      :connection_identifiers,
+      :resiliency_group_id,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute resiliency_group_associations
+    #   <p>The connection associations for the resiliency group.</p>
+    #   @return [Array<Types::ResiliencyGroupAssociation>]
+    class DisassociateConnectionsFromResiliencyGroupResult < Struct.new(
+      nil,
+      :resiliency_group_associations,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4750,6 +5318,28 @@ module Aws::DirectConnect
     class DuplicateTagKeysException < Struct.new(
       nil,
       :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute resiliency_group_id
+    #   <p>The ID of the resiliency group.</p>
+    #   @return [String]
+    class GetResiliencyGroupRequest < Struct.new(
+      nil,
+      :resiliency_group_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute resiliency_group
+    #   <p>Information about the resiliency group.</p>
+    #   @return [Types::ResiliencyGroup]
+    class GetResiliencyGroupResult < Struct.new(
+      nil,
+      :resiliency_group,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4973,6 +5563,24 @@ module Aws::DirectConnect
     # @!attribute mac_sec_keys
     #   <p>The MAC Security (MACsec) security keys associated with the LAG.</p>
     #   @return [Array<Types::MacSecKey>]
+    # @!attribute prefix_pool_size_ipv4
+    #   <p>The total number of inbound IPv4 route prefixes you can allocate across the virtual interfaces on the LAG. Not applicable to LAGs that are interconnects and support hosted connections.</p>
+    #   @return [Integer]
+    # @!attribute prefix_pool_size_ipv6
+    #   <p>The total number of inbound IPv6 route prefixes you can allocate across the virtual interfaces on the LAG. Not applicable to LAGs that are interconnects and support hosted connections.</p>
+    #   @return [Integer]
+    # @!attribute prefix_pool_unallocated_count_ipv4
+    #   <p>The number of inbound IPv4 route prefixes in the LAG prefix pool not yet allocated to a virtual interface. Not applicable to LAGs that are interconnects and support hosted connections.</p>
+    #   @return [Integer]
+    # @!attribute prefix_pool_unallocated_count_ipv6
+    #   <p>The number of inbound IPv6 route prefixes in the LAG prefix pool not yet allocated to a virtual interface. Not applicable to LAGs that are interconnects and support hosted connections.</p>
+    #   @return [Integer]
+    # @!attribute rate_limiter_status
+    #   <p>The rate limiter status for the LAG, including how many rate limiters are in use and the maximum allowed.</p>
+    #   @return [Types::RateLimiterStatus]
+    # @!attribute billing_mode
+    #   <p>The billing mode of the LAG.</p>
+    #   @return [String]
     class Lag < Struct.new(
       nil,
       :connections_bandwidth,
@@ -4996,6 +5604,12 @@ module Aws::DirectConnect
       :mac_sec_capable,
       :encryption_mode,
       :mac_sec_keys,
+      :prefix_pool_size_ipv4,
+      :prefix_pool_size_ipv6,
+      :prefix_pool_unallocated_count_ipv4,
+      :prefix_pool_unallocated_count_ipv6,
+      :rate_limiter_status,
+      :billing_mode,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5006,6 +5620,132 @@ module Aws::DirectConnect
         options[:allows_hosted_connections] = false unless options.key?(:allows_hosted_connections)
         super
       end
+    end
+
+    # <p>The rate limiter limit has been exceeded for the connection. You cannot add more rate limiters to virtual interfaces on this connection.</p>
+    # @!attribute message
+    #   @return [String]
+    class LimitExceededException < Struct.new(
+      nil,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute resiliency_group_id
+    #   <p>The ID of the resiliency group.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return with a single call.
+    #   	To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>
+    #            <p>If <code>MaxResults</code> is given a value larger than 100, only 100 results are
+    #         returned.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The token for the next page of results.</p>
+    #   @return [String]
+    class ListResiliencyGroupAssociationsRequest < Struct.new(
+      nil,
+      :resiliency_group_id,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute items
+    #   <p>The connection associations for the resiliency group.</p>
+    #   @return [Array<Types::ResiliencyGroupAssociation>]
+    # @!attribute next_token
+    #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
+    #   @return [String]
+    class ListResiliencyGroupAssociationsResult < Struct.new(
+      nil,
+      :items,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute max_results
+    #   <p>The maximum number of results to return with a single call.
+    #   	To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>
+    #            <p>If <code>MaxResults</code> is given a value larger than 100, only 100 results are
+    #         returned.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The token for the next page of results.</p>
+    #   @return [String]
+    class ListResiliencyGroupsRequest < Struct.new(
+      nil,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute items
+    #   <p>Summary information about the resiliency groups.</p>
+    #   @return [Array<Types::ResiliencyGroupSummary>]
+    # @!attribute next_token
+    #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
+    #   @return [String]
+    class ListResiliencyGroupsResult < Struct.new(
+      nil,
+      :items,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute virtual_interface_id
+    #   <p>The ID of the virtual interface.</p>
+    #   @return [String]
+    # @!attribute filters
+    #   <p>The filters to apply to the routes returned.</p>
+    #   @return [Types::RouteFilters]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return with a single call.
+    #   	To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>
+    #            <p>If <code>MaxResults</code> is given a value larger than 100, only 100 results are
+    #         returned.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The token for the next page of results.</p>
+    #   @return [String]
+    class ListVirtualInterfaceRoutesRequest < Struct.new(
+      nil,
+      :virtual_interface_id,
+      :filters,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute virtual_interface_id
+    #   <p>The ID of the virtual interface.</p>
+    #   @return [String]
+    # @!attribute routes
+    #   <p>The routes for the virtual interface.</p>
+    #   @return [Array<Types::Route>]
+    # @!attribute next_token
+    #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
+    #   @return [String]
+    class ListVirtualInterfaceRoutesResponse < Struct.new(
+      nil,
+      :virtual_interface_id,
+      :routes,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_id
@@ -5092,6 +5832,10 @@ module Aws::DirectConnect
     # @!attribute available_mac_sec_port_speeds
     #   <p>The available MAC Security (MACsec) port speeds for the location.</p>
     #   @return [Array<String>]
+    # @!attribute available_billing_modes
+    #   <p>The billing modes available at the location, including the port speeds and
+    #         Amazon Web Services Regions supported by each mode.</p>
+    #   @return [Array<Types::AvailableBillingMode>]
     class Location < Struct.new(
       nil,
       :location_code,
@@ -5100,6 +5844,7 @@ module Aws::DirectConnect
       :available_port_speeds,
       :available_providers,
       :available_mac_sec_port_speeds,
+      :available_billing_modes,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5194,38 +5939,52 @@ module Aws::DirectConnect
     #   @return [Integer]
     # @!attribute asn
     #   <p>The autonomous system number (ASN). The valid range is from 1 to 2147483646 for Border Gateway Protocol (BGP) configuration. If you provide a number greater than the maximum, an error is returned. Use <code>asnLong</code> instead.</p>
-    #            <note>
-    #               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
-    #               <ul>
-    #                  <li>
-    #                     <p>The <code>asnLong</code> attribute accepts both ASN and long ASN
-    #                               ranges.</p>
-    #                  </li>
-    #                  <li>
-    #                     <p>If you provide a value in the same API call for both <code>asn</code>
+    #            <ul>
+    #               <li>
+    #                  <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
+    #               </li>
+    #               <li>
+    #                  <p>If you provide a value in the same API call for both <code>asn</code>
     #                               and <code>asnLong</code>, the API will only accept the value for
-    #                                   <code>asnLong</code>.</p>
-    #                  </li>
-    #               </ul>
-    #            </note>
+    #                                   <code>asnLong</code>.
+    #                 </p>
+    #               </li>
+    #               <li>
+    #                  <p>If you enter a 4-byte ASN for the <code>asn</code> parameter, the API returns an error.
+    #                 </p>
+    #               </li>
+    #               <li>
+    #                  <p>If you are using a 2-byte ASN, the API response will include the
+    #   2-byte value for both the <code>asn</code> and <code>asnLong</code> fields.</p>
+    #               </li>
+    #            </ul>
     #            <p>The valid values are 1-2147483646.</p>
     #   @return [Integer]
     # @!attribute asn_long
     #   <p>The long ASN for a new private virtual interface. The valid range is from 1 to 4294967294 for BGP configuration.</p>
-    #            <note>
-    #               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
-    #               <ul>
-    #                  <li>
-    #                     <p>The <code>asnLong</code> attribute accepts both ASN and long ASN
-    #                               ranges.</p>
-    #                  </li>
-    #                  <li>
-    #                     <p>If you provide a value in the same API call for both <code>asn</code>
+    #            <p>Note the following limitations when using <code>asnLong</code>:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>asnLong</code> accepts any valid ASN value, regardless if it's 2-byte or 4-byte.
+    #                 </p>
+    #               </li>
+    #               <li>
+    #                  <p>When using a 4-byte <code>asnLong</code>, the API response returns <code>0</code> for the legacy <code>asn</code> attribute since 4-byte ASN values exceed the maximum supported value of 2,147,483,647.</p>
+    #               </li>
+    #               <li>
+    #                  <p>If you are using a 2-byte ASN, the API response will include the
+    #   2-byte value for both the <code>asn</code> and <code>asnLong</code> fields.</p>
+    #               </li>
+    #               <li>
+    #                  <p>If you provide a value in the same API call for both <code>asn</code>
     #                               and <code>asnLong</code>, the API will only accept the value for
     #                                   <code>asnLong</code>.</p>
-    #                  </li>
-    #               </ul>
-    #            </note>
+    #               </li>
+    #            </ul>
     #   @return [Integer]
     # @!attribute mtu
     #   <p>The maximum transmission unit (MTU), in bytes. The supported values are 1500 and 8500. The default value is 1500.</p>
@@ -5254,6 +6013,15 @@ module Aws::DirectConnect
     # @!attribute enable_site_link
     #   <p>Indicates whether to enable or disable SiteLink.</p>
     #   @return [Boolean]
+    # @!attribute prefix_pool_allocated_count_ipv4
+    #   <p>The number of inbound IPv4 route prefixes to allocate to the virtual interface.</p>
+    #   @return [Integer]
+    # @!attribute prefix_pool_allocated_count_ipv6
+    #   <p>The number of inbound IPv6 route prefixes to allocate to the virtual interface.</p>
+    #   @return [Integer]
+    # @!attribute rate_limit
+    #   <p>The rate limit (bandwidth allocation) to apply to the virtual interface. The rate limit restricts the maximum bandwidth that the virtual interface can use on the parent connection.</p>
+    #   @return [String]
     class NewPrivateVirtualInterface < Struct.new(
       nil,
       :virtual_interface_name,
@@ -5269,6 +6037,9 @@ module Aws::DirectConnect
       :direct_connect_gateway_id,
       :tags,
       :enable_site_link,
+      :prefix_pool_allocated_count_ipv4,
+      :prefix_pool_allocated_count_ipv6,
+      :rate_limit,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5289,38 +6060,52 @@ module Aws::DirectConnect
     #   @return [Integer]
     # @!attribute asn
     #   <p>The autonomous system number (ASN). The valid range is from 1 to 2147483646 for Border Gateway Protocol (BGP) configuration. If you provide a number greater than the maximum, an error is returned. Use <code>asnLong</code> instead.</p>
-    #            <note>
-    #               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
-    #               <ul>
-    #                  <li>
-    #                     <p>The <code>asnLong</code> attribute accepts both ASN and long ASN
-    #                               ranges.</p>
-    #                  </li>
-    #                  <li>
-    #                     <p>If you provide a value in the same API call for both <code>asn</code>
+    #            <ul>
+    #               <li>
+    #                  <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
+    #               </li>
+    #               <li>
+    #                  <p>If you provide a value in the same API call for both <code>asn</code>
     #                               and <code>asnLong</code>, the API will only accept the value for
-    #                                   <code>asnLong</code>.</p>
-    #                  </li>
-    #               </ul>
-    #            </note>
+    #                                   <code>asnLong</code>.
+    #                 </p>
+    #               </li>
+    #               <li>
+    #                  <p>If you enter a 4-byte ASN for the <code>asn</code> parameter, the API returns an error.
+    #                 </p>
+    #               </li>
+    #               <li>
+    #                  <p>If you are using a 2-byte ASN, the API response will include the
+    #   2-byte value for both the <code>asn</code> and <code>asnLong</code> fields.</p>
+    #               </li>
+    #            </ul>
     #            <p>The valid values are 1-2147483646.</p>
     #   @return [Integer]
     # @!attribute asn_long
     #   <p>The ASN when allocating a new private virtual interface. The valid range is from 1 to 4294967294 for BGP configuration.</p>
-    #            <note>
-    #               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
-    #               <ul>
-    #                  <li>
-    #                     <p>The <code>asnLong</code> attribute accepts both ASN and long ASN
-    #                               ranges.</p>
-    #                  </li>
-    #                  <li>
-    #                     <p>If you provide a value in the same API call for both <code>asn</code>
+    #            <p>Note the following limitations when using <code>asnLong</code>:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>asnLong</code> accepts any valid ASN value, regardless if it's 2-byte or 4-byte.
+    #                 </p>
+    #               </li>
+    #               <li>
+    #                  <p>When using a 4-byte <code>asnLong</code>, the API response returns <code>0</code> for the legacy <code>asn</code> attribute since 4-byte ASN values exceed the maximum supported value of 2,147,483,647.</p>
+    #               </li>
+    #               <li>
+    #                  <p>If you are using a 2-byte ASN, the API response will include the
+    #   2-byte value for both the <code>asn</code> and <code>asnLong</code> fields.</p>
+    #               </li>
+    #               <li>
+    #                  <p>If you provide a value in the same API call for both <code>asn</code>
     #                               and <code>asnLong</code>, the API will only accept the value for
     #                                   <code>asnLong</code>.</p>
-    #                  </li>
-    #               </ul>
-    #            </note>
+    #               </li>
+    #            </ul>
     #   @return [Integer]
     # @!attribute mtu
     #   <p>The maximum transmission unit (MTU), in bytes. The supported values are 1500 and 8500. The default value is 1500.</p>
@@ -5340,6 +6125,9 @@ module Aws::DirectConnect
     # @!attribute tags
     #   <p>The tags associated with the private virtual interface.</p>
     #   @return [Array<Types::Tag>]
+    # @!attribute rate_limit
+    #   <p>The rate limit (bandwidth allocation) to apply to the virtual interface. The rate limit restricts the maximum bandwidth that the virtual interface can use on the parent connection.</p>
+    #   @return [String]
     class NewPrivateVirtualInterfaceAllocation < Struct.new(
       nil,
       :virtual_interface_name,
@@ -5352,6 +6140,7 @@ module Aws::DirectConnect
       :address_family,
       :customer_address,
       :tags,
+      :rate_limit,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5372,37 +6161,51 @@ module Aws::DirectConnect
     #   @return [Integer]
     # @!attribute asn
     #   <p>The autonomous system number (ASN). The valid range is from 1 to 2147483646 for Border Gateway Protocol (BGP) configuration. If you provide a number greater than the maximum, an error is returned. Use <code>asnLong</code> instead.</p>
-    #            <note>
-    #               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
-    #               <ul>
-    #                  <li>
-    #                     <p>The <code>asnLong</code> attribute accepts both ASN and long ASN
-    #                               ranges.</p>
-    #                  </li>
-    #                  <li>
-    #                     <p>If you provide a value in the same API call for both <code>asn</code>
+    #            <ul>
+    #               <li>
+    #                  <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
+    #               </li>
+    #               <li>
+    #                  <p>If you provide a value in the same API call for both <code>asn</code>
     #                               and <code>asnLong</code>, the API will only accept the value for
-    #                                   <code>asnLong</code>.</p>
-    #                  </li>
-    #               </ul>
-    #            </note>
+    #                                   <code>asnLong</code>.
+    #                 </p>
+    #               </li>
+    #               <li>
+    #                  <p>If you enter a 4-byte ASN for the <code>asn</code> parameter, the API returns an error.
+    #                 </p>
+    #               </li>
+    #               <li>
+    #                  <p>If you are using a 2-byte ASN, the API response will include the
+    #   2-byte value for both the <code>asn</code> and <code>asnLong</code> fields.</p>
+    #               </li>
+    #            </ul>
     #   @return [Integer]
     # @!attribute asn_long
     #   <p>The long ASN for a new public virtual interface. The valid range is from 1 to 4294967294 for BGP configuration.</p>
-    #            <note>
-    #               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
-    #               <ul>
-    #                  <li>
-    #                     <p>The <code>asnLong</code> attribute accepts both ASN and long ASN
-    #                               ranges.</p>
-    #                  </li>
-    #                  <li>
-    #                     <p>If you provide a value in the same API call for both <code>asn</code>
+    #            <p>Note the following limitations when using <code>asnLong</code>:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>asnLong</code> accepts any valid ASN value, regardless if it's 2-byte or 4-byte.
+    #                 </p>
+    #               </li>
+    #               <li>
+    #                  <p>When using a 4-byte <code>asnLong</code>, the API response returns <code>0</code> for the legacy <code>asn</code> attribute since 4-byte ASN values exceed the maximum supported value of 2,147,483,647.</p>
+    #               </li>
+    #               <li>
+    #                  <p>If you are using a 2-byte ASN, the API response will include the
+    #   2-byte value for both the <code>asn</code> and <code>asnLong</code> fields.</p>
+    #               </li>
+    #               <li>
+    #                  <p>If you provide a value in the same API call for both <code>asn</code>
     #                               and <code>asnLong</code>, the API will only accept the value for
     #                                   <code>asnLong</code>.</p>
-    #                  </li>
-    #               </ul>
-    #            </note>
+    #               </li>
+    #            </ul>
     #   @return [Integer]
     # @!attribute auth_key
     #   <p>The authentication key for BGP configuration. This string has a minimum length of 6 characters and and a maximun lenth of 80 characters.</p>
@@ -5422,6 +6225,9 @@ module Aws::DirectConnect
     # @!attribute tags
     #   <p>The tags associated with the public virtual interface.</p>
     #   @return [Array<Types::Tag>]
+    # @!attribute rate_limit
+    #   <p>The rate limit (bandwidth allocation) to apply to the virtual interface. The rate limit restricts the maximum bandwidth that the virtual interface can use on the parent connection.</p>
+    #   @return [String]
     class NewPublicVirtualInterface < Struct.new(
       nil,
       :virtual_interface_name,
@@ -5434,6 +6240,7 @@ module Aws::DirectConnect
       :address_family,
       :route_filter_prefixes,
       :tags,
+      :rate_limit,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5454,38 +6261,52 @@ module Aws::DirectConnect
     #   @return [Integer]
     # @!attribute asn
     #   <p>The autonomous system number (ASN). The valid range is from 1 to 2147483646 for Border Gateway Protocol (BGP) configuration. If you provide a number greater than the maximum, an error is returned. Use <code>asnLong</code> instead.</p>
-    #            <note>
-    #               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
-    #               <ul>
-    #                  <li>
-    #                     <p>The <code>asnLong</code> attribute accepts both ASN and long ASN
-    #                               ranges.</p>
-    #                  </li>
-    #                  <li>
-    #                     <p>If you provide a value in the same API call for both <code>asn</code>
+    #            <ul>
+    #               <li>
+    #                  <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
+    #               </li>
+    #               <li>
+    #                  <p>If you provide a value in the same API call for both <code>asn</code>
     #                               and <code>asnLong</code>, the API will only accept the value for
-    #                                   <code>asnLong</code>.</p>
-    #                  </li>
-    #               </ul>
-    #            </note>
+    #                                   <code>asnLong</code>.
+    #                 </p>
+    #               </li>
+    #               <li>
+    #                  <p>If you enter a 4-byte ASN for the <code>asn</code> parameter, the API returns an error.
+    #                 </p>
+    #               </li>
+    #               <li>
+    #                  <p>If you are using a 2-byte ASN, the API response will include the
+    #   2-byte value for both the <code>asn</code> and <code>asnLong</code> fields.</p>
+    #               </li>
+    #            </ul>
     #            <p>The valid values are 1-2147483646.</p>
     #   @return [Integer]
     # @!attribute asn_long
     #   <p>The ASN when allocating a new public virtual interface. The valid range is from 1 to 4294967294 for BGP configuration.</p>
-    #            <note>
-    #               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
-    #               <ul>
-    #                  <li>
-    #                     <p>The <code>asnLong</code> attribute accepts both ASN and long ASN
-    #                               ranges.</p>
-    #                  </li>
-    #                  <li>
-    #                     <p>If you provide a value in the same API call for both <code>asn</code>
+    #            <p>Note the following limitations when using <code>asnLong</code>:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>asnLong</code> accepts any valid ASN value, regardless if it's 2-byte or 4-byte.
+    #                 </p>
+    #               </li>
+    #               <li>
+    #                  <p>When using a 4-byte <code>asnLong</code>, the API response returns <code>0</code> for the legacy <code>asn</code> attribute since 4-byte ASN values exceed the maximum supported value of 2,147,483,647.</p>
+    #               </li>
+    #               <li>
+    #                  <p>If you are using a 2-byte ASN, the API response will include the
+    #   2-byte value for both the <code>asn</code> and <code>asnLong</code> fields.</p>
+    #               </li>
+    #               <li>
+    #                  <p>If you provide a value in the same API call for both <code>asn</code>
     #                               and <code>asnLong</code>, the API will only accept the value for
     #                                   <code>asnLong</code>.</p>
-    #                  </li>
-    #               </ul>
-    #            </note>
+    #               </li>
+    #            </ul>
     #   @return [Integer]
     # @!attribute auth_key
     #   <p>The authentication key for BGP configuration. This string has a minimum length of 6 characters and and a maximun lenth of 80 characters.</p>
@@ -5505,6 +6326,9 @@ module Aws::DirectConnect
     # @!attribute tags
     #   <p>The tags associated with the public virtual interface.</p>
     #   @return [Array<Types::Tag>]
+    # @!attribute rate_limit
+    #   <p>The rate limit (bandwidth allocation) to apply to the virtual interface. The rate limit restricts the maximum bandwidth that the virtual interface can use on the parent connection.</p>
+    #   @return [String]
     class NewPublicVirtualInterfaceAllocation < Struct.new(
       nil,
       :virtual_interface_name,
@@ -5517,6 +6341,7 @@ module Aws::DirectConnect
       :address_family,
       :route_filter_prefixes,
       :tags,
+      :rate_limit,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5537,37 +6362,51 @@ module Aws::DirectConnect
     #   @return [Integer]
     # @!attribute asn
     #   <p>The autonomous system number (ASN). The valid range is from 1 to 2147483646 for Border Gateway Protocol (BGP) configuration. If you provide a number greater than the maximum, an error is returned. Use <code>asnLong</code> instead.</p>
-    #            <note>
-    #               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
-    #               <ul>
-    #                  <li>
-    #                     <p>The <code>asnLong</code> attribute accepts both ASN and long ASN
-    #                               ranges.</p>
-    #                  </li>
-    #                  <li>
-    #                     <p>If you provide a value in the same API call for both <code>asn</code>
+    #            <ul>
+    #               <li>
+    #                  <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
+    #               </li>
+    #               <li>
+    #                  <p>If you provide a value in the same API call for both <code>asn</code>
     #                               and <code>asnLong</code>, the API will only accept the value for
-    #                                   <code>asnLong</code>.</p>
-    #                  </li>
-    #               </ul>
-    #            </note>
+    #                                   <code>asnLong</code>.
+    #                 </p>
+    #               </li>
+    #               <li>
+    #                  <p>If you enter a 4-byte ASN for the <code>asn</code> parameter, the API returns an error.
+    #                 </p>
+    #               </li>
+    #               <li>
+    #                  <p>If you are using a 2-byte ASN, the API response will include the
+    #   2-byte value for both the <code>asn</code> and <code>asnLong</code> fields.</p>
+    #               </li>
+    #            </ul>
     #   @return [Integer]
     # @!attribute asn_long
     #   <p>The long ASN for a new transit virtual interface.The valid range is from 1 to 4294967294 for BGP configuration.</p>
-    #            <note>
-    #               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
-    #               <ul>
-    #                  <li>
-    #                     <p>The <code>asnLong</code> attribute accepts both ASN and long ASN
-    #                               ranges.</p>
-    #                  </li>
-    #                  <li>
-    #                     <p>If you provide a value in the same API call for both <code>asn</code>
+    #            <p>Note the following limitations when using <code>asnLong</code>:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>asnLong</code> accepts any valid ASN value, regardless if it's 2-byte or 4-byte.
+    #                 </p>
+    #               </li>
+    #               <li>
+    #                  <p>When using a 4-byte <code>asnLong</code>, the API response returns <code>0</code> for the legacy <code>asn</code> attribute since 4-byte ASN values exceed the maximum supported value of 2,147,483,647.</p>
+    #               </li>
+    #               <li>
+    #                  <p>If you are using a 2-byte ASN, the API response will include the
+    #   2-byte value for both the <code>asn</code> and <code>asnLong</code> fields.</p>
+    #               </li>
+    #               <li>
+    #                  <p>If you provide a value in the same API call for both <code>asn</code>
     #                               and <code>asnLong</code>, the API will only accept the value for
     #                                   <code>asnLong</code>.</p>
-    #                  </li>
-    #               </ul>
-    #            </note>
+    #               </li>
+    #            </ul>
     #   @return [Integer]
     # @!attribute mtu
     #   <p>The maximum transmission unit (MTU), in bytes. The supported values are 1500 and 8500. The default value is 1500.</p>
@@ -5593,6 +6432,15 @@ module Aws::DirectConnect
     # @!attribute enable_site_link
     #   <p>Indicates whether to enable or disable SiteLink.</p>
     #   @return [Boolean]
+    # @!attribute prefix_pool_allocated_count_ipv4
+    #   <p>The number of inbound IPv4 route prefixes to allocate to the virtual interface.</p>
+    #   @return [Integer]
+    # @!attribute prefix_pool_allocated_count_ipv6
+    #   <p>The number of inbound IPv6 route prefixes to allocate to the virtual interface.</p>
+    #   @return [Integer]
+    # @!attribute rate_limit
+    #   <p>The rate limit (bandwidth allocation) to apply to the virtual interface. The rate limit restricts the maximum bandwidth that the virtual interface can use on the parent connection.</p>
+    #   @return [String]
     class NewTransitVirtualInterface < Struct.new(
       nil,
       :virtual_interface_name,
@@ -5607,6 +6455,9 @@ module Aws::DirectConnect
       :direct_connect_gateway_id,
       :tags,
       :enable_site_link,
+      :prefix_pool_allocated_count_ipv4,
+      :prefix_pool_allocated_count_ipv6,
+      :rate_limit,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5627,38 +6478,52 @@ module Aws::DirectConnect
     #   @return [Integer]
     # @!attribute asn
     #   <p>The autonomous system number (ASN). The valid range is from 1 to 2147483646 for Border Gateway Protocol (BGP) configuration. If you provide a number greater than the maximum, an error is returned. Use <code>asnLong</code> instead.</p>
-    #            <note>
-    #               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
-    #               <ul>
-    #                  <li>
-    #                     <p>The <code>asnLong</code> attribute accepts both ASN and long ASN
-    #                               ranges.</p>
-    #                  </li>
-    #                  <li>
-    #                     <p>If you provide a value in the same API call for both <code>asn</code>
+    #            <ul>
+    #               <li>
+    #                  <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
+    #               </li>
+    #               <li>
+    #                  <p>If you provide a value in the same API call for both <code>asn</code>
     #                               and <code>asnLong</code>, the API will only accept the value for
-    #                                   <code>asnLong</code>.</p>
-    #                  </li>
-    #               </ul>
-    #            </note>
+    #                                   <code>asnLong</code>.
+    #                 </p>
+    #               </li>
+    #               <li>
+    #                  <p>If you enter a 4-byte ASN for the <code>asn</code> parameter, the API returns an error.
+    #                 </p>
+    #               </li>
+    #               <li>
+    #                  <p>If you are using a 2-byte ASN, the API response will include the
+    #   2-byte value for both the <code>asn</code> and <code>asnLong</code> fields.</p>
+    #               </li>
+    #            </ul>
     #            <p>The valid values are 1-2147483646.</p>
     #   @return [Integer]
     # @!attribute asn_long
     #   <p>The ASN when allocating a new transit virtual interface. The valid range is from 1 to 4294967294 for BGP configuration.</p>
-    #            <note>
-    #               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
-    #               <ul>
-    #                  <li>
-    #                     <p>The <code>asnLong</code> attribute accepts both ASN and long ASN
-    #                               ranges.</p>
-    #                  </li>
-    #                  <li>
-    #                     <p>If you provide a value in the same API call for both <code>asn</code>
+    #            <p>Note the following limitations when using <code>asnLong</code>:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>asnLong</code> accepts any valid ASN value, regardless if it's 2-byte or 4-byte.
+    #                 </p>
+    #               </li>
+    #               <li>
+    #                  <p>When using a 4-byte <code>asnLong</code>, the API response returns <code>0</code> for the legacy <code>asn</code> attribute since 4-byte ASN values exceed the maximum supported value of 2,147,483,647.</p>
+    #               </li>
+    #               <li>
+    #                  <p>If you are using a 2-byte ASN, the API response will include the
+    #   2-byte value for both the <code>asn</code> and <code>asnLong</code> fields.</p>
+    #               </li>
+    #               <li>
+    #                  <p>If you provide a value in the same API call for both <code>asn</code>
     #                               and <code>asnLong</code>, the API will only accept the value for
     #                                   <code>asnLong</code>.</p>
-    #                  </li>
-    #               </ul>
-    #            </note>
+    #               </li>
+    #            </ul>
     #   @return [Integer]
     # @!attribute mtu
     #   <p>The maximum transmission unit (MTU), in bytes. The supported values are 1500 and 8500. The default value is 1500 </p>
@@ -5678,6 +6543,9 @@ module Aws::DirectConnect
     # @!attribute tags
     #   <p>The tags associated with the transitive virtual interface.</p>
     #   @return [Array<Types::Tag>]
+    # @!attribute rate_limit
+    #   <p>The rate limit (bandwidth allocation) to apply to the virtual interface. The rate limit restricts the maximum bandwidth that the virtual interface can use on the parent connection.</p>
+    #   @return [String]
     class NewTransitVirtualInterfaceAllocation < Struct.new(
       nil,
       :virtual_interface_name,
@@ -5690,6 +6558,7 @@ module Aws::DirectConnect
       :customer_address,
       :address_family,
       :tags,
+      :rate_limit,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5699,6 +6568,127 @@ module Aws::DirectConnect
         options[:asn] = 0 unless options.key?(:asn)
         super
       end
+    end
+
+    # <p>Contains information about the rate limiter status for a connection, including the maximum number of rate limiters allowed, the number currently in use, and the remaining capacity.</p>
+    # @!attribute max_allowed
+    #   <p>The maximum number of rate limiters allowed on the connection.</p>
+    #   @return [Integer]
+    # @!attribute in_use
+    #   <p>The number of rate limiters currently in use on the connection.</p>
+    #   @return [Integer]
+    # @!attribute remaining
+    #   <p>The number of rate limiters remaining (available) on the connection.</p>
+    #   @return [Integer]
+    # @!attribute total_bandwidth
+    #   <p>The total bandwidth allocated across all rate limiters on the connection.</p>
+    #   @return [String]
+    class RateLimiterStatus < Struct.new(
+      nil,
+      :max_allowed,
+      :in_use,
+      :remaining,
+      :total_bandwidth,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:max_allowed] = 0 unless options.key?(:max_allowed)
+        options[:in_use] = 0 unless options.key?(:in_use)
+        options[:remaining] = 0 unless options.key?(:remaining)
+        super
+      end
+    end
+
+    # <p>Information about a resiliency group.</p>
+    # @!attribute resiliency_group_id
+    #   <p>The ID of the resiliency group.</p>
+    #   @return [String]
+    # @!attribute resiliency_group_arn
+    #   <p>The Amazon Resource Name (ARN) of the resiliency group.</p>
+    #   @return [String]
+    # @!attribute resiliency_group_name
+    #   <p>The name of the resiliency group.</p>
+    #   @return [String]
+    # @!attribute resiliency_group_type
+    #   <p>The type of the resiliency group. The valid value is <code>Managed</code>.</p>
+    #   @return [String]
+    # @!attribute owner_account
+    #   <p>The ID of the Amazon Web Services account that owns the resiliency group.</p>
+    #   @return [String]
+    # @!attribute state
+    #   <p>The state of the resiliency group. The valid values are <code>pending</code>,
+    #         <code>available</code>, <code>deleting</code>, and <code>deleted</code>.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>The tags associated with the resiliency group.</p>
+    #   @return [Array<Types::Tag>]
+    class ResiliencyGroup < Struct.new(
+      nil,
+      :resiliency_group_id,
+      :resiliency_group_arn,
+      :resiliency_group_name,
+      :resiliency_group_type,
+      :owner_account,
+      :state,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Information about an association between a connection and a resiliency group.</p>
+    # @!attribute resiliency_group_id
+    #   <p>The ID of the resiliency group.</p>
+    #   @return [String]
+    # @!attribute connection_arn
+    #   <p>The Amazon Resource Name (ARN) of the associated connection.</p>
+    #   @return [String]
+    # @!attribute state
+    #   <p>The state of the association. The valid values are <code>associating</code>,
+    #         <code>associated</code>, <code>disassociating</code>, and <code>disassociated</code>.</p>
+    #   @return [String]
+    class ResiliencyGroupAssociation < Struct.new(
+      nil,
+      :resiliency_group_id,
+      :connection_arn,
+      :state,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Summary information about a resiliency group.</p>
+    # @!attribute resiliency_group_id
+    #   <p>The ID of the resiliency group.</p>
+    #   @return [String]
+    # @!attribute resiliency_group_arn
+    #   <p>The Amazon Resource Name (ARN) of the resiliency group.</p>
+    #   @return [String]
+    # @!attribute resiliency_group_name
+    #   <p>The name of the resiliency group.</p>
+    #   @return [String]
+    # @!attribute resiliency_group_type
+    #   <p>The type of the resiliency group. The valid value is <code>Managed</code>.</p>
+    #   @return [String]
+    # @!attribute owner_account
+    #   <p>The ID of the Amazon Web Services account that owns the resiliency group.</p>
+    #   @return [String]
+    # @!attribute state
+    #   <p>The state of the resiliency group.</p>
+    #   @return [String]
+    class ResiliencyGroupSummary < Struct.new(
+      nil,
+      :resiliency_group_id,
+      :resiliency_group_arn,
+      :resiliency_group_name,
+      :resiliency_group_type,
+      :owner_account,
+      :state,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a tag associated with an Direct Connect resource.</p>
@@ -5717,7 +6707,46 @@ module Aws::DirectConnect
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Information about a route filter prefix that a customer can advertise through Border Gateway Protocol (BGP) 
+    # <p>Information about a route for a virtual interface.</p>
+    # @!attribute cidr
+    #   <p>The CIDR (prefix) of the route.</p>
+    #   @return [String]
+    # @!attribute route_direction
+    #   <p>The direction of the route.</p>
+    #            <p>The valid values are <code>accepted</code> (received from the customer network) and <code>advertised</code> (advertised to the customer network).</p>
+    #   @return [String]
+    # @!attribute address_family
+    #   <p>The address family of the route.</p>
+    #            <p>The valid values are <code>ipv4</code> and <code>ipv6</code>.</p>
+    #   @return [String]
+    # @!attribute as_path
+    #   <p>The autonomous system (AS) path of the route.</p>
+    #   @return [Array<Types::AsPathSegment>]
+    # @!attribute communities
+    #   <p>The BGP communities associated with the route.</p>
+    #   @return [Array<String>]
+    # @!attribute aws_logical_device_id
+    #   <p>The Direct Connect endpoint that terminates the logical connection. This device might be
+    #         different than the device that terminates the physical connection.</p>
+    #   @return [String]
+    # @!attribute route_installed_at
+    #   <p>The time when the route was installed. The value is displayed in UTC format.</p>
+    #   @return [Time]
+    class Route < Struct.new(
+      nil,
+      :cidr,
+      :route_direction,
+      :address_family,
+      :as_path,
+      :communities,
+      :aws_logical_device_id,
+      :route_installed_at,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Information about a route filter prefix that a customer can advertise through Border Gateway Protocol (BGP)
     #         over a public virtual interface.</p>
     # @!attribute cidr
     #   <p>The CIDR block for the advertised route. Separate multiple routes using commas. An IPv6 CIDR must use /64 or shorter.</p>
@@ -5725,6 +6754,36 @@ module Aws::DirectConnect
     class RouteFilterPrefix < Struct.new(
       nil,
       :cidr,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The filters used to limit the routes returned by <a>ListVirtualInterfaceRoutes</a>.</p>
+    # @!attribute route_direction
+    #   <p>The direction of the routes to return.</p>
+    #            <p>The valid values are <code>accepted</code> (routes received from the customer network) and <code>advertised</code> (routes advertised to the customer network).</p>
+    #   @return [String]
+    # @!attribute address_family
+    #   <p>The address family of the routes to return.</p>
+    #            <p>The valid values are <code>ipv4</code> and <code>ipv6</code>.</p>
+    #   @return [String]
+    # @!attribute cidrs
+    #   <p>The CIDRs (prefixes) used to filter the routes. You can specify up to 10 CIDRs.</p>
+    #   @return [Array<String>]
+    # @!attribute as_path
+    #   <p>The autonomous system (AS) numbers used to filter the routes by their AS path.</p>
+    #   @return [Array<Integer>]
+    # @!attribute communities
+    #   <p>The BGP communities used to filter the routes.</p>
+    #   @return [Array<String>]
+    class RouteFilters < Struct.new(
+      nil,
+      :route_direction,
+      :address_family,
+      :cidrs,
+      :as_path,
+      :communities,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5995,9 +7054,27 @@ module Aws::DirectConnect
     # @!attribute mac_sec_keys
     #   <p>The MAC Security (MACsec) security keys associated with the connection.</p>
     #   @return [Array<Types::MacSecKey>]
+    # @!attribute rate_limiter_status
+    #   <p>The rate limiter status for the connection, including how many rate limiters are in use and the maximum allowed.</p>
+    #   @return [Types::RateLimiterStatus]
     # @!attribute partner_interconnect_mac_sec_capable
     #   <p>Indicates whether the interconnect hosting this connection supports MAC Security (MACsec).</p>
     #   @return [Boolean]
+    # @!attribute prefix_pool_size_ipv4
+    #   <p>The total number of inbound IPv4 route prefixes you can allocate across the virtual interfaces on the connection. Not applicable to hosted connections or interconnects.</p>
+    #   @return [Integer]
+    # @!attribute prefix_pool_size_ipv6
+    #   <p>The total number of inbound IPv6 route prefixes you can allocate across the virtual interfaces on the connection. Not applicable to hosted connections or interconnects.</p>
+    #   @return [Integer]
+    # @!attribute prefix_pool_unallocated_count_ipv4
+    #   <p>The number of inbound IPv4 route prefixes in the connection prefix pool not yet allocated to a virtual interface. Not applicable to hosted connections or interconnects.</p>
+    #   @return [Integer]
+    # @!attribute prefix_pool_unallocated_count_ipv6
+    #   <p>The number of inbound IPv6 route prefixes in the connection prefix pool not yet allocated to a virtual interface. Not applicable to hosted connections or interconnects.</p>
+    #   @return [Integer]
+    # @!attribute billing_mode
+    #   <p>The billing mode of the connection.</p>
+    #   @return [String]
     class UpdateConnectionOutput < Struct.new(
       nil,
       :owner_account,
@@ -6022,7 +7099,13 @@ module Aws::DirectConnect
       :port_encryption_status,
       :encryption_mode,
       :mac_sec_keys,
+      :rate_limiter_status,
       :partner_interconnect_mac_sec_capable,
+      :prefix_pool_size_ipv4,
+      :prefix_pool_size_ipv6,
+      :prefix_pool_unallocated_count_ipv4,
+      :prefix_pool_unallocated_count_ipv6,
+      :billing_mode,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6049,6 +7132,39 @@ module Aws::DirectConnect
       :connection_id,
       :connection_name,
       :encryption_mode,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute connection_ids
+    #   <p>The IDs of the connections to update. You can specify from 1 to 200 connections.</p>
+    #   @return [Array<String>]
+    # @!attribute billing_mode
+    #   <p>The billing mode to apply to the specified connections. The valid values are
+    #         <code>PayAsYouGo</code>, <code>FlatRateTier1</code>, <code>FlatRateTier2</code>,
+    #         <code>FlatRateTier3</code>, <code>FlatRateTier4</code>, and
+    #         <code>FlatRateTier5</code>.</p>
+    #   @return [String]
+    class UpdateConnectionsBillingModeRequest < Struct.new(
+      nil,
+      :connection_ids,
+      :billing_mode,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute billing_mode
+    #   <p>The billing mode applied to the connections.</p>
+    #   @return [String]
+    # @!attribute connections
+    #   <p>The connections with the updated billing mode.</p>
+    #   @return [Array<Types::Connection>]
+    class UpdateConnectionsBillingModeResponse < Struct.new(
+      nil,
+      :billing_mode,
+      :connections,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6210,6 +7326,24 @@ module Aws::DirectConnect
     # @!attribute mac_sec_keys
     #   <p>The MAC Security (MACsec) security keys associated with the LAG.</p>
     #   @return [Array<Types::MacSecKey>]
+    # @!attribute prefix_pool_size_ipv4
+    #   <p>The total number of inbound IPv4 route prefixes you can allocate across the virtual interfaces on the LAG. Not applicable to LAGs that are interconnects and support hosted connections.</p>
+    #   @return [Integer]
+    # @!attribute prefix_pool_size_ipv6
+    #   <p>The total number of inbound IPv6 route prefixes you can allocate across the virtual interfaces on the LAG. Not applicable to LAGs that are interconnects and support hosted connections.</p>
+    #   @return [Integer]
+    # @!attribute prefix_pool_unallocated_count_ipv4
+    #   <p>The number of inbound IPv4 route prefixes in the LAG prefix pool not yet allocated to a virtual interface. Not applicable to LAGs that are interconnects and support hosted connections.</p>
+    #   @return [Integer]
+    # @!attribute prefix_pool_unallocated_count_ipv6
+    #   <p>The number of inbound IPv6 route prefixes in the LAG prefix pool not yet allocated to a virtual interface. Not applicable to LAGs that are interconnects and support hosted connections.</p>
+    #   @return [Integer]
+    # @!attribute rate_limiter_status
+    #   <p>The rate limiter status for the LAG, including how many rate limiters are in use and the maximum allowed.</p>
+    #   @return [Types::RateLimiterStatus]
+    # @!attribute billing_mode
+    #   <p>The billing mode of the LAG.</p>
+    #   @return [String]
     class UpdateLagOutput < Struct.new(
       nil,
       :connections_bandwidth,
@@ -6233,6 +7367,12 @@ module Aws::DirectConnect
       :mac_sec_capable,
       :encryption_mode,
       :mac_sec_keys,
+      :prefix_pool_size_ipv4,
+      :prefix_pool_size_ipv6,
+      :prefix_pool_unallocated_count_ipv4,
+      :prefix_pool_unallocated_count_ipv6,
+      :rate_limiter_status,
+      :billing_mode,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6269,6 +7409,37 @@ module Aws::DirectConnect
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute resiliency_group_id
+    #   <p>The ID of the resiliency group.</p>
+    #   @return [String]
+    # @!attribute resiliency_group_name
+    #   <p>The new name of the resiliency group.</p>
+    #   @return [String]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
+    #         request.</p>
+    #   @return [String]
+    class UpdateResiliencyGroupRequest < Struct.new(
+      nil,
+      :resiliency_group_id,
+      :resiliency_group_name,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute resiliency_group
+    #   <p>Information about the resiliency group.</p>
+    #   @return [Types::ResiliencyGroup]
+    class UpdateResiliencyGroupResult < Struct.new(
+      nil,
+      :resiliency_group,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Information about a virtual interface.</p>
     # @!attribute owner_account
     #   <p>The ID of the Amazon Web Services account that owns the virtual interface.</p>
@@ -6293,37 +7464,51 @@ module Aws::DirectConnect
     #   @return [Integer]
     # @!attribute asn
     #   <p>The autonomous system number (ASN). The valid range is from 1 to 2147483646 for Border Gateway Protocol (BGP) configuration. If you provide a number greater than the maximum, an error is returned. Use <code>asnLong</code> instead.</p>
-    #            <note>
-    #               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
-    #               <ul>
-    #                  <li>
-    #                     <p>The <code>asnLong</code> attribute accepts both ASN and long ASN
-    #                               ranges.</p>
-    #                  </li>
-    #                  <li>
-    #                     <p>If you provide a value in the same API call for both <code>asn</code>
+    #            <ul>
+    #               <li>
+    #                  <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
+    #               </li>
+    #               <li>
+    #                  <p>If you provide a value in the same API call for both <code>asn</code>
     #                               and <code>asnLong</code>, the API will only accept the value for
-    #                                   <code>asnLong</code>.</p>
-    #                  </li>
-    #               </ul>
-    #            </note>
+    #                                   <code>asnLong</code>.
+    #                 </p>
+    #               </li>
+    #               <li>
+    #                  <p>If you enter a 4-byte ASN for the <code>asn</code> parameter, the API returns an error.
+    #                 </p>
+    #               </li>
+    #               <li>
+    #                  <p>If you are using a 2-byte ASN, the API response will include the
+    #   2-byte value for both the <code>asn</code> and <code>asnLong</code> fields.</p>
+    #               </li>
+    #            </ul>
     #   @return [Integer]
     # @!attribute asn_long
     #   <p>The long ASN for the virtual interface. The valid range is from 1 to 4294967294 for BGP configuration.</p>
-    #            <note>
-    #               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
-    #               <ul>
-    #                  <li>
-    #                     <p>The <code>asnLong</code> attribute accepts both ASN and long ASN
-    #                               ranges.</p>
-    #                  </li>
-    #                  <li>
-    #                     <p>If you provide a value in the same API call for both <code>asn</code>
+    #            <p>Note the following limitations when using <code>asnLong</code>:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>asnLong</code> accepts any valid ASN value, regardless if it's 2-byte or 4-byte.
+    #                 </p>
+    #               </li>
+    #               <li>
+    #                  <p>When using a 4-byte <code>asnLong</code>, the API response returns <code>0</code> for the legacy <code>asn</code> attribute since 4-byte ASN values exceed the maximum supported value of 2,147,483,647.</p>
+    #               </li>
+    #               <li>
+    #                  <p>If you are using a 2-byte ASN, the API response will include the
+    #   2-byte value for both the <code>asn</code> and <code>asnLong</code> fields.</p>
+    #               </li>
+    #               <li>
+    #                  <p>If you provide a value in the same API call for both <code>asn</code>
     #                               and <code>asnLong</code>, the API will only accept the value for
     #                                   <code>asnLong</code>.</p>
-    #                  </li>
-    #               </ul>
-    #            </note>
+    #               </li>
+    #            </ul>
     #   @return [Integer]
     # @!attribute amazon_side_asn
     #   <p>The autonomous system number (AS) for the Amazon side of the connection.</p>
@@ -6422,6 +7607,15 @@ module Aws::DirectConnect
     # @!attribute site_link_enabled
     #   <p>Indicates whether SiteLink is enabled.</p>
     #   @return [Boolean]
+    # @!attribute prefix_pool_allocated_count_ipv4
+    #   <p>The number of inbound IPv4 route prefixes allocated to the virtual interface. Not applicable to public virtual interfaces.</p>
+    #   @return [Integer]
+    # @!attribute prefix_pool_allocated_count_ipv6
+    #   <p>The number of inbound IPv6 route prefixes allocated to the virtual interface. Not applicable to public virtual interfaces.</p>
+    #   @return [Integer]
+    # @!attribute rate_limit
+    #   <p>The rate limit (bandwidth allocation) applied to the virtual interface. The value must be one of the supported bandwidth values and cannot exceed the bandwidth of the parent connection or LAG. Supported values: <code>50Mbps</code>, <code>100Mbps</code>, <code>200Mbps</code>, <code>300Mbps</code>, <code>400Mbps</code>, <code>500Mbps</code>, <code>600Mbps</code>, <code>700Mbps</code>, <code>800Mbps</code>, <code>900Mbps</code>, <code>1Gbps</code>, <code>1.2Gbps</code>, <code>1.5Gbps</code>, <code>1.8Gbps</code>, <code>2Gbps</code>, <code>2.1Gbps</code>, <code>2.4Gbps</code>, <code>2.7Gbps</code>, <code>3Gbps</code>, <code>3.2Gbps</code>, <code>3.6Gbps</code>, <code>4Gbps</code>, <code>5Gbps</code>, <code>6Gbps</code>, <code>7Gbps</code>, <code>8Gbps</code>, <code>9Gbps</code>, <code>10Gbps</code>, <code>12Gbps</code>, <code>15Gbps</code>, <code>18Gbps</code>, <code>20Gbps</code>, <code>21Gbps</code>, <code>24Gbps</code>, <code>27Gbps</code>, <code>30Gbps</code>, <code>32Gbps</code>, <code>36Gbps</code>, <code>40Gbps</code>, <code>50Gbps</code>, <code>60Gbps</code>, <code>70Gbps</code>, <code>80Gbps</code>, <code>100Gbps</code>, <code>120Gbps</code>, <code>150Gbps</code>, <code>180Gbps</code>, <code>200Gbps</code>, <code>210Gbps</code>, <code>240Gbps</code>, <code>270Gbps</code>, <code>300Gbps</code>, <code>320Gbps</code>, <code>360Gbps</code>, <code>400Gbps</code>, <code>450Gbps</code>, <code>480Gbps</code>, <code>500Gbps</code>, <code>540Gbps</code>, <code>600Gbps</code>, <code>700Gbps</code>, <code>800Gbps</code>, <code>900Gbps</code>, <code>1Tbps</code>, <code>1.1Tbps</code>, <code>1.2Tbps</code>, <code>1.3Tbps</code>, <code>1.4Tbps</code>, <code>1.5Tbps</code>, <code>1.6Tbps</code>.</p>
+    #   @return [String]
     class UpdateVirtualInterfaceAttributesOutput < Struct.new(
       nil,
       :owner_account,
@@ -6451,6 +7645,9 @@ module Aws::DirectConnect
       :aws_logical_device_id,
       :tags,
       :site_link_enabled,
+      :prefix_pool_allocated_count_ipv4,
+      :prefix_pool_allocated_count_ipv6,
+      :rate_limit,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6474,12 +7671,24 @@ module Aws::DirectConnect
     # @!attribute virtual_interface_name
     #   <p>The name of the virtual private interface.</p>
     #   @return [String]
+    # @!attribute prefix_pool_allocated_count_ipv4
+    #   <p>The number of inbound IPv4 route prefixes to allocate to the virtual interface. Not applicable to public virtual interfaces.</p>
+    #   @return [Integer]
+    # @!attribute prefix_pool_allocated_count_ipv6
+    #   <p>The number of inbound IPv6 route prefixes to allocate to the virtual interface. Not applicable to public virtual interfaces.</p>
+    #   @return [Integer]
+    # @!attribute rate_limit
+    #   <p>The rate limit (bandwidth allocation) to apply to the virtual interface. Use this to update the bandwidth allocation on an existing virtual interface.</p>
+    #   @return [String]
     class UpdateVirtualInterfaceAttributesRequest < Struct.new(
       nil,
       :virtual_interface_id,
       :mtu,
       :enable_site_link,
       :virtual_interface_name,
+      :prefix_pool_allocated_count_ipv4,
+      :prefix_pool_allocated_count_ipv6,
+      :rate_limit,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6543,37 +7752,51 @@ module Aws::DirectConnect
     #   @return [Integer]
     # @!attribute asn
     #   <p>The autonomous system number (ASN). The valid range is from 1 to 2147483646 for Border Gateway Protocol (BGP) configuration. If you provide a number greater than the maximum, an error is returned. Use <code>asnLong</code> instead.</p>
-    #            <note>
-    #               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
-    #               <ul>
-    #                  <li>
-    #                     <p>The <code>asnLong</code> attribute accepts both ASN and long ASN
-    #                               ranges.</p>
-    #                  </li>
-    #                  <li>
-    #                     <p>If you provide a value in the same API call for both <code>asn</code>
+    #            <ul>
+    #               <li>
+    #                  <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
+    #               </li>
+    #               <li>
+    #                  <p>If you provide a value in the same API call for both <code>asn</code>
     #                               and <code>asnLong</code>, the API will only accept the value for
-    #                                   <code>asnLong</code>.</p>
-    #                  </li>
-    #               </ul>
-    #            </note>
+    #                                   <code>asnLong</code>.
+    #                 </p>
+    #               </li>
+    #               <li>
+    #                  <p>If you enter a 4-byte ASN for the <code>asn</code> parameter, the API returns an error.
+    #                 </p>
+    #               </li>
+    #               <li>
+    #                  <p>If you are using a 2-byte ASN, the API response will include the
+    #   2-byte value for both the <code>asn</code> and <code>asnLong</code> fields.</p>
+    #               </li>
+    #            </ul>
     #   @return [Integer]
     # @!attribute asn_long
     #   <p>The long ASN for the virtual interface. The valid range is from 1 to 4294967294 for BGP configuration.</p>
-    #            <note>
-    #               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
-    #               <ul>
-    #                  <li>
-    #                     <p>The <code>asnLong</code> attribute accepts both ASN and long ASN
-    #                               ranges.</p>
-    #                  </li>
-    #                  <li>
-    #                     <p>If you provide a value in the same API call for both <code>asn</code>
+    #            <p>Note the following limitations when using <code>asnLong</code>:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>asnLong</code> accepts any valid ASN value, regardless if it's 2-byte or 4-byte.
+    #                 </p>
+    #               </li>
+    #               <li>
+    #                  <p>When using a 4-byte <code>asnLong</code>, the API response returns <code>0</code> for the legacy <code>asn</code> attribute since 4-byte ASN values exceed the maximum supported value of 2,147,483,647.</p>
+    #               </li>
+    #               <li>
+    #                  <p>If you are using a 2-byte ASN, the API response will include the
+    #   2-byte value for both the <code>asn</code> and <code>asnLong</code> fields.</p>
+    #               </li>
+    #               <li>
+    #                  <p>If you provide a value in the same API call for both <code>asn</code>
     #                               and <code>asnLong</code>, the API will only accept the value for
     #                                   <code>asnLong</code>.</p>
-    #                  </li>
-    #               </ul>
-    #            </note>
+    #               </li>
+    #            </ul>
     #   @return [Integer]
     # @!attribute amazon_side_asn
     #   <p>The autonomous system number (AS) for the Amazon side of the connection.</p>
@@ -6672,6 +7895,15 @@ module Aws::DirectConnect
     # @!attribute site_link_enabled
     #   <p>Indicates whether SiteLink is enabled.</p>
     #   @return [Boolean]
+    # @!attribute prefix_pool_allocated_count_ipv4
+    #   <p>The number of inbound IPv4 route prefixes allocated to the virtual interface. Not applicable to public virtual interfaces.</p>
+    #   @return [Integer]
+    # @!attribute prefix_pool_allocated_count_ipv6
+    #   <p>The number of inbound IPv6 route prefixes allocated to the virtual interface. Not applicable to public virtual interfaces.</p>
+    #   @return [Integer]
+    # @!attribute rate_limit
+    #   <p>The rate limit (bandwidth allocation) applied to the virtual interface. The value must be one of the supported bandwidth values and cannot exceed the bandwidth of the parent connection or LAG. Supported values: <code>50Mbps</code>, <code>100Mbps</code>, <code>200Mbps</code>, <code>300Mbps</code>, <code>400Mbps</code>, <code>500Mbps</code>, <code>600Mbps</code>, <code>700Mbps</code>, <code>800Mbps</code>, <code>900Mbps</code>, <code>1Gbps</code>, <code>1.2Gbps</code>, <code>1.5Gbps</code>, <code>1.8Gbps</code>, <code>2Gbps</code>, <code>2.1Gbps</code>, <code>2.4Gbps</code>, <code>2.7Gbps</code>, <code>3Gbps</code>, <code>3.2Gbps</code>, <code>3.6Gbps</code>, <code>4Gbps</code>, <code>5Gbps</code>, <code>6Gbps</code>, <code>7Gbps</code>, <code>8Gbps</code>, <code>9Gbps</code>, <code>10Gbps</code>, <code>12Gbps</code>, <code>15Gbps</code>, <code>18Gbps</code>, <code>20Gbps</code>, <code>21Gbps</code>, <code>24Gbps</code>, <code>27Gbps</code>, <code>30Gbps</code>, <code>32Gbps</code>, <code>36Gbps</code>, <code>40Gbps</code>, <code>50Gbps</code>, <code>60Gbps</code>, <code>70Gbps</code>, <code>80Gbps</code>, <code>100Gbps</code>, <code>120Gbps</code>, <code>150Gbps</code>, <code>180Gbps</code>, <code>200Gbps</code>, <code>210Gbps</code>, <code>240Gbps</code>, <code>270Gbps</code>, <code>300Gbps</code>, <code>320Gbps</code>, <code>360Gbps</code>, <code>400Gbps</code>, <code>450Gbps</code>, <code>480Gbps</code>, <code>500Gbps</code>, <code>540Gbps</code>, <code>600Gbps</code>, <code>700Gbps</code>, <code>800Gbps</code>, <code>900Gbps</code>, <code>1Tbps</code>, <code>1.1Tbps</code>, <code>1.2Tbps</code>, <code>1.3Tbps</code>, <code>1.4Tbps</code>, <code>1.5Tbps</code>, <code>1.6Tbps</code>.</p>
+    #   @return [String]
     class VirtualInterface < Struct.new(
       nil,
       :owner_account,
@@ -6701,6 +7933,9 @@ module Aws::DirectConnect
       :aws_logical_device_id,
       :tags,
       :site_link_enabled,
+      :prefix_pool_allocated_count_ipv4,
+      :prefix_pool_allocated_count_ipv6,
+      :rate_limit,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

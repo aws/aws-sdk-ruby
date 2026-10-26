@@ -11,9 +11,7 @@ Object.const_set('Aws', Module.new) unless Object.const_defined?('Aws')
 Aws.const_set('HealthLake', Module.new) unless Aws.const_defined?('HealthLake')
 
 # @title Amazon HealthLake
-# <p>This is the <i>AWS HealthLake API Reference</i>. For an introduction to
-#          the service, see <a href="https://docs.aws.amazon.com/healthlake/latest/devguide/what-is.html">What is AWS HealthLake?</a> in the <i>AWS HealthLake Developer
-#             Guide</i>.</p>
+# <p>This is the <i>HealthLake API Reference</i>. For an introduction to the service, see <a href="https://docs.aws.amazon.com/healthlake/latest/devguide/what-is.html">What is HealthLake?</a> in the <i>HealthLake Developer Guide</i>.</p>
 module Aws::HealthLake
   VERSION = '2.0.0.pre0'
 end

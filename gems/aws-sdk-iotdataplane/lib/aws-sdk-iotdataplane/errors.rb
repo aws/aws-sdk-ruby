@@ -24,6 +24,7 @@ module Aws::IoTDataPlane
   #
   # * {ConflictException}
   # * {ForbiddenException}
+  # * {GatewayTimeoutException}
   # * {InternalFailureException}
   # * {InvalidRequestException}
   # * {MethodNotAllowedException}
@@ -61,6 +62,20 @@ module Aws::IoTDataPlane
         super
       end
 
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>The delivery confirmation was not received from the client within the specified timeout period.</p>
+    class GatewayTimeoutException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::IoTDataPlane::Types::GatewayTimeoutException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      # <p>The message for the exception.</p>
       def message
         @data[:message]
       end
